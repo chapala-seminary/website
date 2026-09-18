@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Evangelism — Unit 1: Biblical Foundation (Bilingual)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .clear-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.clear-btn { background: #a0512a; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.attribution { font-size: 0.95rem; color: #6b5840; font-style: italic; margin-bottom: 16px; }
+blockquote { margin: 14px 0; padding: 10px 14px; border-left: 4px solid #5b3a1f; background: #f4ede2; font-style: italic; }
+.track-banner { background: #5b3a1f; color: white; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-weight: bold; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+.kw-answer:disabled { background: #f5f0e8; cursor: not-allowed; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.small:disabled { background: #aaa; cursor: not-allowed; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.lockout-banner { background: #f8d7da; color: #721c24; padding: 12px 16px; border-radius: 12px; margin-bottom: 15px; font-weight: bold; border: 1px solid #f5c6cb; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en div.lang-en { display: block; }
+body.lang-es div.lang-es { display: block; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+@media print {
+  .toggle-btn, .clear-btn, .nav-bar, .registration-panel, button, .question input[type="radio"], textarea, .lockout-banner { display: none !important; }
+  body { background: white; }
+  .card { box-shadow: none; border: none; }
+}
+.model-answer-box { margin-top: 12px; padding: 12px 14px; background: #fbf3d9; border: 1px solid #e4c95b; border-left: 5px solid #c9a227; border-radius: 8px; color: #4a3c10; font-size: 0.95em; line-height: 1.5; }
+.model-answer-box strong { color: #7a5c00; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn" disabled>← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span></button>
+        <button class="nav-btn" id="nextUnitBtn"><span class="lang-en">Next</span><span class="lang-es">Siguiente</span> →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+<button class="clear-btn" id="clearDataBtn">🗑 <span class="lang-en">Clear Saved Data</span><span class="lang-es">Borrar Datos Guardados</span></button>
+
+<div class="card">
+    <h1>
+        <span class="lang-en">📖 Evangelism — Unit 1: Biblical Foundation of Evangelism</span>
+        <span class="lang-es">📖 Evangelismo — Unidad 1: Fundamento Bíblico del Evangelismo</span>
+    </h1>
+    <p class="attribution">
+        <span class="lang-en">Chapala Theological Seminary · Dr. Wayne Cook, Author and Professor · Dr. Ted Rogers, Seminary Director</span>
+        <span class="lang-es">Seminario Teológico de Chapala · Dr. Wayne Cook, Autor y Profesor · Dr. Ted Rogers, Director del Seminario</span>
+    </p>
+    <div id="trackBanner" class="track-banner" style="display:none;"></div>
+</div>
+
+<div class="registration-panel">
+    <h3><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h3>
+    <div class="reg-row">
+        <div class="reg-group"><label><span class="lang-en">Full Name</span><span class="lang-es">Nombre completo</span></label><input type="text" id="studentName" placeholder="e.g., John Wesley" aria-label="e.g., John Wesley"></div>
+        <div class="reg-group"><label><span class="lang-en">Email</span><span class="lang-es">Correo electrónico</span></label><input type="email" id="studentEmail" placeholder="student@example.com" aria-label="student@example.com"></div>
+        <div class="reg-group"><label><span class="lang-en">Country</span><span class="lang-es">País</span></label><input type="text" id="studentCountry" placeholder="Your country" aria-label="Your country"></div>
+        <div class="reg-group"><label><span class="lang-en">Program</span><span class="lang-es">Programa</span></label><select id="studentProgram" aria-label="studentProgram">
+            <option value="Certificate of Ministry">Certificate of Ministry</option>
+            <option value="Associate of Divinity">Associate of Divinity</option>
+            <!-- CTS audit 2026-05-23: added Th.M. track. Prior block had only Certificate + M.Div. -->
+            <option value="Master of Theology">Master of Theology (Th.M.)</option>
+            <option value="Master of Divinity">Master of Divinity (M.Div.)</option>
+        </select></div>
+    </div>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>Evangelism is not a modern invention, nor is it a program developed by the church to increase attendance or influence. It is rooted in the very nature and purpose of God as revealed in Scripture. From Genesis to Revelation, God is revealed as One who seeks, calls, redeems, and restores. Evangelism, therefore, is not merely an activity of the church—it is participation in the work of God Himself.</p>
+        <p>To understand evangelism rightly, we must begin not with methods or techniques, but with Scripture. Programs come and go; cultural strategies shift; but the biblical foundation of evangelism remains unchanged. Real evangelism is something that is <em>caught</em> more than <em>taught</em>. It is a passion rather than a program. And, as George Sweazy observed, a church always tends to drift away from evangelism, never toward it. The cure for that drift is not better technique but a deeper anchor in the Word of God. Only when evangelism is grounded in Scripture will it remain faithful, effective, and spiritually sound.</p>
+
+        <h3>I. Evangelism in the Heart of God</h3>
+        <p>The origin of evangelism is found in God. It is God who takes the initiative in salvation. After the fall of man in Genesis 3, it is not Adam who seeks God, but God who calls out:</p>
+        <blockquote>"Then the Lord God called to Adam and said to him, 'Where are you?'" (Genesis 3:9, NKJV)</blockquote>
+        <p>The first recorded question in human history is a question of seeking love. Before any human voice cries out for redemption, the divine voice is already searching the garden. This pattern continues throughout Scripture. God seeks Abraham in Ur. God seeks Moses at the burning bush. God seeks David among the sheep. God seeks Isaiah in the temple. Jesus Himself declared:</p>
+        <blockquote>"for the Son of Man has come to seek and to save that which was lost." (Luke 19:10, NKJV)</blockquote>
+        <p>Evangelism, then, is not primarily about man reaching up to God, but about God reaching down to man. When believers evangelize, they are joining in a work that God has already initiated. The believer does not generate spiritual interest; God prepares the heart. The believer does not invent the message; God revealed it. The believer does not save the soul; God redeems it. The evangelist is a participant, not the originator.</p>
+
+        <h3>II. Evangelism in the Old Testament</h3>
+        <p>In <em>Thus It Is Written</em>, Henry Goerner traces what he calls God's plan to win the entire human family. The original purpose was breathtaking in scope: the whole human race was to come to God. But the race grew worse and worse. The wickedness of mankind brought the flood, sparing only Noah. After the flood, the same pattern reasserted itself; the people disobeyed God and tried to build a tower up to heaven, and God confused their language and scattered them across the earth.</p>
+        <p>When the call of all men did not succeed, God adopted another approach. He would begin with one man, Abraham, and through him reach the world:</p>
+        <blockquote>"...and in you all the families of the earth shall be blessed." (Genesis 12:3, NKJV)</blockquote>
+        <p>Abraham's descendants, the Hebrew people, were chosen to tell others about God. They were called to be</p>
+        <blockquote>"a kingdom of priests and a holy nation." (Exodus 19:6, NKJV)</blockquote>
+        <p>The tragedy of Israel is that they thought they were chosen for privilege rather than for service. Like a golden thread running through the Old Testament is God's desire to bring salvation to the whole world. It is the dominant idea from Genesis to Malachi. Paul would later say that the Hebrews were entrusted with the very words of God—yet they failed to perform the function for which they were chosen. The book of Jonah remains the Old Testament's clearest portrait of a reluctant missionary, and of a God whose mercy reaches beyond the borders of His chosen people. Rahab the Canaanite, Ruth the Moabite, and Naaman the Syrian all enter the redemptive narrative as evidence that God's heart never beat for one nation alone.</p>
+
+        <h3>III. Evangelism in the Ministry of Christ</h3>
+        <p>When Israel refused her calling, God did not abandon His purpose. He accomplished through His Son what He could not accomplish through unfaithful men. Yet even at the beginning of His ministry, Jesus preached to the Jews exclusively, giving them one last opportunity to fulfill their calling. They refused. To them He said:</p>
+        <blockquote>"Therefore I say to you, the kingdom of God will be taken from you and given to a nation bearing the fruits of it." (Matthew 21:43, NKJV)</blockquote>
+        <p>The disciples became the first of a new chosen people, the inheritors of the promise. To them Jesus said:</p>
+        <blockquote>"Peace to you! As the Father has sent Me, I also send you." (John 20:21, NKJV)</blockquote>
+        <p>In <em>The Master Plan of Evangelism</em>, Robert Coleman draws several principles from Jesus' approach. Five of them frame this unit. First, men were His method. Jesus did not institute a program; He called unlearned men to be fishers of other men, concentrating most of His time on the twelve, and especially the inner three. Second, He stayed with them. As time grew short, He spent more time with them, not less. Third, He required obedience. The crowds enjoyed the feeding and healing, but fell away as the cost became clear. Fourth, He gave Himself away—from footwashing to the cross. Fifth, He showed them how to live; He prayed, He quoted Scripture, and He took witnessing opportunities until His followers had a burning desire to imitate Him. The same Christ who taught crowds also paused for Nicodemus by night (John 3), the woman at the well (John 4), Zacchaeus the tax collector (Luke 19), and the rich young ruler (Matthew 19).</p>
+
+        <h3>IV. The Great Commission</h3>
+        <p>After His resurrection, Jesus gave a clear command to His followers:</p>
+        <blockquote>"Go therefore and make disciples of all the nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all things that I have commanded you." (Matthew 28:19–20, NKJV)</blockquote>
+        <p>And again:</p>
+        <blockquote>"Go into all the world and preach the gospel to every creature." (Mark 16:15, NKJV)</blockquote>
+        <p>This is not a suggestion, but a command. Evangelism is not optional for the believer. It is part of obedience to Christ. The commission contains four actions: going, making disciples, baptizing, and teaching. Going requires movement. Making disciples requires patience. Baptizing requires public identification with Christ and His church. Teaching requires content. The goal is not merely decisions, but transformed lives that follow Christ. Paul declared that the church is now the New Israel and the children of the promise (Romans 9:8). But any church that fails to tell others about God is breaking the terms of the contract and has no right to call itself a church.</p>
+        <p>Joseph Aldrich, in <em>Lifestyle Evangelism</em>, retells a fictional conversation between Jesus and the angel Gabriel after the ascension. Gabriel asks, "What plan have You made to let everyone know about Your love?" Jesus replies, "I've asked Peter, James, John, and a few friends to tell others. Those who are told will tell others, and My story will spread to the farthest reaches of the globe." Gabriel, knowing what poor stuff men are made of, presses, "But what if they grow weary? What if those who come after them forget? Haven't You made any other plans?" And Jesus answers, "I haven't made any other plans. I'm counting on them."</p>
+
+        <h3>V. The Role of the Holy Spirit</h3>
+        <p>Evangelism is not carried out in human strength alone. Jesus told His disciples:</p>
+        <blockquote>"But you shall receive power when the Holy Spirit has come upon you; and you shall be witnesses to Me in Jerusalem, and in all Judea and Samaria, and to the end of the earth." (Acts 1:8, NKJV)</blockquote>
+        <p>The Holy Spirit empowers, guides, and convicts. Without Him, evangelism becomes mere human effort. With Him, it becomes a work of divine power. The Spirit works in ways the evangelist cannot see or control. He prepares hearts long before the believer arrives. He brings conviction when the believer has run out of words. He draws individuals to Christ when every visible reason for response has failed. The believer's responsibility is to be faithful; the Spirit's role is to bring life. Where this distinction is lost, evangelism either becomes manipulative—pressing for results the human heart cannot produce—or it becomes timid, doubting that any word could matter. The biblical posture is neither. It is confident dependence: the believer speaks because Christ has commanded, and trusts because the Spirit is at work.</p>
+
+        <h3>VI. Faithfulness Over Results</h3>
+        <p>One of the greatest misunderstandings in evangelism is that success is measured by visible results. Scripture teaches otherwise:</p>
+        <blockquote>"I planted, Apollos watered, but God gave the increase." (1 Corinthians 3:6, NKJV)</blockquote>
+        <p>The responsibility of the believer is not to produce conversion, but to faithfully communicate the gospel. Results belong to God. This perspective removes pressure and restores proportion. Research suggests the average person hears the gospel more than seven times before responding, and that the great majority of conversions take place not at events but in one-on-one settings. The faithful word spoken over coffee may be the seventh seed, the one God uses for the harvest. Paul could plant. Apollos could water. Neither could command growth. The evangelist is protected by this truth from two equal and opposite errors. Pride says, "I won them." Despair says, "I cannot reach them." Both are answered by the same verse. The first hand plants; the second waters; but only God gives the increase.</p>
+
+        <h3>VII. Illustration and Application</h3>
+        <p>Brad Johnson, in <em>The Unchurched Today: What Will It Take to Reach Them?</em>, tells of a state fishing champion who was asked how he won so consistently. The champion answered: "I go to the lake weeks before a tournament. I go in the morning, at noon, and at night. I check wind speed, water and air temperatures, and the feeding patterns of the fish. Then, when the day of the tournament arrives, I simply check my notes and go fishing where the fish are."</p>
+        <p>Christ called His disciples to be fishers of men. The illustration is not accidental. The serious fisher of men, like the champion, observes, prepares, and studies the conditions before he casts the net. Where are the unchurched in this city? What burdens are they carrying? What questions are they asking? What seasons of life make them most receptive? The New Testament shows at least three patterns: personal evangelism, the "go and tell" of the early house-to-house witness; mass evangelism, the "come and see" of Pentecost, of Wesley, Whitefield, and Finney; and lifestyle evangelism, the "go and live" that Aldrich describes—a transformed life that provokes the question, "How can I get what you have?"</p>
+        <p>For application, three commitments follow from this unit. First, anchor evangelism in Scripture, not technique. Second, depend on the Holy Spirit, not personality. Third, measure obedience, not outcomes. Real evangelism is caught more than taught—and it is caught from believers who have been gripped first by the God who seeks the lost.</p>
+
+        <h3>Conclusion</h3>
+        <p>Evangelism begins with God, is revealed in Scripture, modeled by Christ, commanded to believers, and empowered by the Holy Spirit. It is not a human invention, nor is it dependent upon technique. It is participation in the redemptive work of God. To engage in evangelism is to step into what God is already doing—to faithfully proclaim truth, trusting Him to bring the result. The disciples were the first to hear the words, "I'm counting on you." The same words echo to every believer today.</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>El evangelismo no es un invento moderno, ni es un programa desarrollado por la iglesia para aumentar la asistencia o la influencia. Está arraigado en la naturaleza y el propósito de Dios revelados en las Escrituras. Desde Génesis hasta Apocalipsis, Dios se revela como Aquel que busca, llama, redime y restaura. Por lo tanto, el evangelismo no es meramente una actividad de la iglesia, sino una participación en la obra de Dios mismo.</p>
+        <p>Para entender correctamente el evangelismo, debemos comenzar no con métodos o técnicas, sino con las Escrituras. Los programas vienen y van; las estrategias culturales cambian; pero el fundamento bíblico del evangelismo permanece inmutable. El verdadero evangelismo es algo que se <em>capta</em> más que se <em>enseña</em>. Es una pasión más que un programa. Y, como observó George Sweazy, una iglesia siempre tiende a alejarse del evangelismo, nunca hacia él. El remedio para esa deriva no es una mejor técnica, sino un anclaje más profundo en la Palabra de Dios. Solo cuando el evangelismo se basa en las Escrituras se mantendrá fiel, efectivo y espiritualmente sólido.</p>
+
+        <h3>I. El Evangelismo en el Corazón de Dios</h3>
+        <p>El origen del evangelismo se encuentra en Dios. Es Dios quien toma la iniciativa en la salvación. Después de la caída del hombre en Génesis 3, no es Adán quien busca a Dios, sino Dios quien llama:</p>
+        <blockquote>"Mas Jehová Dios llamó al hombre, y le dijo: ¿Dónde estás tú?" (Génesis 3:9, RVG)</blockquote>
+        <p>La primera pregunta registrada en la historia humana es una pregunta de amor que busca. Antes de que cualquier voz humana clame por redención, la voz divina ya está buscando en el huerto. Este patrón continúa a lo largo de las Escrituras. Dios busca a Abraham en Ur. Dios busca a Moisés en la zarza ardiente. Dios busca a David entre las ovejas. Dios busca a Isaías en el templo. Jesús mismo declaró:</p>
+        <blockquote>"Porque el Hijo del Hombre vino a buscar y a salvar lo que se había perdido." (Lucas 19:10, RVG)</blockquote>
+        <p>El evangelismo, entonces, no trata principalmente del hombre que alcanza a Dios, sino de Dios que se acerca al hombre. Cuando los creyentes evangelizan, se unen a una obra que Dios ya ha iniciado. El creyente no genera el interés espiritual; Dios prepara el corazón. El creyente no inventa el mensaje; Dios lo reveló. El creyente no salva el alma; Dios la redime. El evangelista es un participante, no el originador.</p>
+
+        <h3>II. El Evangelismo en el Antiguo Testamento</h3>
+        <p>En <em>Así está Escrito</em>, Henry Goerner traza lo que él llama el plan de Dios de ganar a toda la familia humana. El propósito original era de alcance impresionante: toda la raza humana debía venir a Dios. Pero la raza se hizo cada vez peor. La maldad de la humanidad trajo el diluvio, salvándose solo Noé. Después del diluvio, el mismo patrón se reafirmó; las personas desobedecieron a Dios e intentaron construir una torre hasta el cielo, y Dios confundió su lenguaje y los dispersó por la tierra.</p>
+        <p>Cuando el llamado a todos los hombres no tuvo éxito, Dios adoptó otro enfoque. Comenzaría con un hombre, Abraham, y a través de él alcanzaría al mundo:</p>
+        <blockquote>"...y serán benditas en ti todas las familias de la tierra." (Génesis 12:3, RVG)</blockquote>
+        <p>Los descendientes de Abraham, el pueblo hebreo, fueron escogidos para hablar a otros acerca de Dios. Fueron llamados a ser</p>
+        <blockquote>"un reino de sacerdotes, y gente santa." (Éxodo 19:6, RVG)</blockquote>
+        <p>La tragedia de Israel es que pensaron que fueron escogidos para privilegio en lugar de para servicio. Como un hilo de oro que recorre el Antiguo Testamento está el deseo de Dios de llevar la salvación a todo el mundo. Es la idea dominante desde Génesis hasta Malaquías. Pablo diría más tarde que los hebreos fueron confiados con las mismas palabras de Dios, pero fallaron en cumplir la función para la cual fueron escogidos. El libro de Jonás sigue siendo el retrato más claro del Antiguo Testamento de un misionero renuente, y de un Dios cuya misericordia alcanza más allá de las fronteras de su pueblo escogido. Rahab la cananea, Rut la moabita y Naamán el sirio entran en la narrativa redentora como evidencia de que el corazón de Dios nunca latió por una sola nación.</p>
+
+        <h3>III. El Evangelismo en el Ministerio de Cristo</h3>
+        <p>Cuando Israel rechazó su llamado, Dios no abandonó su propósito. Logró a través de su Hijo lo que no pudo lograr a través de hombres infieles. Sin embargo, incluso al comienzo de su ministerio, Jesús predicó solo a los judíos, dándoles una última oportunidad de cumplir su llamado. Ellos rechazaron. A ellos les dijo:</p>
+        <blockquote>"Por tanto os digo, que el reino de Dios será quitado de vosotros, y será dado a gente que produzca los frutos de él." (Mateo 21:43, RVG)</blockquote>
+        <p>Los discípulos se convirtieron en los primeros de un nuevo pueblo escogido, los herederos de la promesa. A ellos Jesús dijo:</p>
+        <blockquote>"Paz a vosotros. Como me envió el Padre, así también yo os envío." (Juan 20:21, RVG)</blockquote>
+        <p>En <em>El Plan Maestro de Evangelismo</em>, Robert Coleman extrae varios principios del enfoque de Jesús. Cinco de ellos enmarcan esta unidad. Primero, los hombres fueron su método. Jesús no instituyó un programa; llamó a hombres sin instrucción para ser pescadores de otros hombres, concentrando la mayor parte de su tiempo en los doce, y especialmente en los tres del círculo íntimo. Segundo, permaneció con ellos. A medida que el tiempo se acortaba, pasaba más tiempo con ellos, no menos. Tercero, requirió obediencia. Las multitudes disfrutaban de la alimentación y la sanidad, pero se alejaron cuando el costo se hizo claro. Cuarto, se entregó a sí mismo, desde el lavamiento de pies hasta la cruz. Quinto, les mostró cómo vivir; oró, citó las Escrituras y aprovechó las oportunidades de testificar hasta que sus seguidores tuvieron un ardiente deseo de imitarle. El mismo Cristo que enseñó a multitudes también se detuvo por Nicodemo de noche (Juan 3), la mujer junto al pozo (Juan 4), Zaqueo el publicano (Lucas 19), y el joven rico (Mateo 19).</p>
+
+        <h3>IV. La Gran Comisión</h3>
+        <p>Después de su resurrección, Jesús dio un mandamiento claro a sus seguidores:</p>
+        <blockquote>"Por tanto, id, y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo; enseñándoles que guarden todas las cosas que os he mandado." (Mateo 28:19–20, RVG)</blockquote>
+        <p>Y otra vez:</p>
+        <blockquote>"Id por todo el mundo y predicad el evangelio a toda criatura." (Marcos 16:15, RVG)</blockquote>
+        <p>Esto no es una sugerencia, sino un mandato. El evangelismo no es opcional para el creyente. Es parte de la obediencia a Cristo. La comisión contiene cuatro acciones: ir, hacer discípulos, bautizar y enseñar. Ir requiere movimiento. Hacer discípulos requiere paciencia. Bautizar requiere identificación pública con Cristo y su iglesia. Enseñar requiere contenido. El objetivo no son meras decisiones, sino vidas transformadas que siguen a Cristo. Pablo declaró que la iglesia es ahora el Nuevo Israel y los hijos de la promesa (Romanos 9:8). Pero cualquier iglesia que falle en hablar a otros acerca de Dios está rompiendo los términos del contrato y no tiene derecho a llamarse iglesia.</p>
+        <p>Joseph Aldrich, en <em>Evangelismo como Estilo de Vida</em>, recuenta una conversación ficticia entre Jesús y el ángel Gabriel después de la ascensión. Gabriel pregunta: "¿Qué plan has hecho para que todos sepan de tu amor?" Jesús responde: "Le he pedido a Pedro, Jacobo, Juan y algunos amigos que lo digan a otros. Aquellos a quienes se les diga lo dirán a otros, y mi historia se extenderá hasta los confines más lejanos del globo." Gabriel, sabiendo de qué pobre material están hechos los hombres, insiste: "¿Pero qué si se cansan? ¿Qué si los que vienen después de ellos olvidan? ¿No has hecho otros planes?" Y Jesús responde: "No he hecho otros planes. Cuento con ellos."</p>
+
+        <h3>V. El Papel del Espíritu Santo</h3>
+        <p>El evangelismo no se lleva a cabo solo con la fuerza humana. Jesús dijo a sus discípulos:</p>
+        <blockquote>"Pero recibiréis poder, cuando haya venido sobre vosotros el Espíritu Santo, y me seréis testigos en Jerusalén, en toda Judea, en Samaria, y hasta lo último de la tierra." (Hechos 1:8, RVG)</blockquote>
+        <p>El Espíritu Santo capacita, guía y convence. Sin Él, el evangelismo se convierte en mero esfuerzo humano. Con Él, se convierte en una obra de poder divino. El Espíritu obra de maneras que el evangelista no puede ver ni controlar. Prepara los corazones mucho antes de que llegue el creyente. Trae convicción cuando al creyente se le han acabado las palabras. Atrae a las personas a Cristo cuando toda razón visible para una respuesta ha fallado. La responsabilidad del creyente es ser fiel; el papel del Espíritu es dar vida. Donde se pierde esta distinción, el evangelismo se vuelve manipulador, presionando por resultados que el corazón humano no puede producir, o se vuelve tímido, dudando de que cualquier palabra pueda importar. La postura bíblica no es ninguna de las dos. Es dependencia confiada: el creyente habla porque Cristo lo ha mandado, y confía porque el Espíritu está obrando.</p>
+
+        <h3>VI. Fidelidad por Encima de los Resultados</h3>
+        <p>Uno de los mayores malentendidos en el evangelismo es que el éxito se mide por los resultados visibles. Las Escrituras enseñan lo contrario:</p>
+        <blockquote>"Yo planté, Apolos regó; pero el crecimiento lo ha dado Dios." (1 Corintios 3:6, RVG)</blockquote>
+        <p>La responsabilidad del creyente no es producir conversión, sino comunicar fielmente el evangelio. Los resultados pertenecen a Dios. Esta perspectiva elimina la presión y restaura la proporción. La investigación sugiere que la persona promedio oye el evangelio más de siete veces antes de responder, y que la gran mayoría de las conversiones ocurren no en eventos sino en encuentros personales, uno a uno. La palabra fiel hablada sobre una taza de café puede ser la séptima semilla, la que Dios usa para la cosecha. Pablo podía plantar. Apolos podía regar. Ninguno podía ordenar el crecimiento. Esta verdad protege al evangelista de dos errores iguales y opuestos. El orgullo dice: "Yo los gané." La desesperación dice: "No puedo alcanzarlos." Ambos son respondidos por el mismo versículo. La primera mano planta; la segunda riega; pero solo Dios da el crecimiento.</p>
+
+        <h3>VII. Ilustración y Aplicación</h3>
+        <p>Brad Johnson, en <em>Los No-Iglesiados de Hoy: ¿Qué Se Necesitará para Alcanzarlos?</em>, cuenta de un campeón estatal de pesca a quien le preguntaron cómo ganaba con tanta consistencia. El campeón respondió: "Voy al lago semanas antes de un torneo. Voy por la mañana, al mediodía y por la noche. Verifico la velocidad del viento, las temperaturas del agua y del aire, y los patrones de alimentación de los peces. Luego, cuando llega el día del torneo, simplemente reviso mis notas y voy a pescar donde están los peces."</p>
+        <p>Cristo llamó a sus discípulos a ser pescadores de hombres. La ilustración no es accidental. El pescador serio de hombres, como el campeón, observa, se prepara y estudia las condiciones antes de echar la red. ¿Dónde están los no-iglesiados en esta ciudad? ¿Qué cargas llevan? ¿Qué preguntas hacen? ¿Qué temporadas de la vida los hacen más receptivos? El Nuevo Testamento muestra al menos tres patrones: el evangelismo personal, el "ir y decir" del testimonio temprano de casa en casa; el evangelismo masivo, el "venid y ved" de Pentecostés, de Wesley, Whitefield y Finney; y el evangelismo como estilo de vida, el "ir y vivir" que describe Aldrich, una vida transformada que provoca la pregunta: "¿Cómo puedo obtener lo que usted tiene?"</p>
+        <p>Para la aplicación, tres compromisos se desprenden de esta unidad. Primero, ancle usted el evangelismo en las Escrituras, no en la técnica. Segundo, dependa del Espíritu Santo, no de la personalidad. Tercero, mida la obediencia, no los resultados. El verdadero evangelismo se capta más que se enseña, y se capta de creyentes que primero han sido aferrados por el Dios que busca al perdido.</p>
+
+        <h3>Conclusión</h3>
+        <p>El evangelismo comienza con Dios, se revela en las Escrituras, es modelado por Cristo, ordenado a los creyentes y potenciado por el Espíritu Santo. No es una invención humana ni depende de la técnica. Es participación en la obra redentora de Dios. Participar en el evangelismo es entrar en lo que Dios ya está haciendo: proclamar fielmente la verdad, confiando en que Él traerá el resultado. Los discípulos fueron los primeros en oír las palabras: "Cuento con ustedes." Las mismas palabras resuenan hoy a cada creyente.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 1 — 30 Preguntas</span></h2>
+    <p>
+        <span class="lang-en"><strong>Certificate track:</strong> Section A (multiple choice) required at 90%. Section B (short answer) optional.</span>
+        <span class="lang-es"><strong>Pista de Certificado:</strong> Sección A (opción múltiple) obligatoria al 90%. Sección B (respuesta corta) opcional.</span>
+    </p>
+    <p>
+        <span class="lang-en"><strong>M.Div./Th.M. track:</strong> Both sections required at 90% each, independently.</span>
+        <span class="lang-es"><strong>Pista de M.Div./Th.M.:</strong> Ambas secciones obligatorias al 90% cada una, independientemente.</span>
+    </p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="clearExamDataBtn" class="small" style="background:#a0512a;">🗑 <span class="lang-en">Clear My Answers</span><span class="lang-es">Borrar Mis Respuestas</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;" aria-live="polite"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ======================== CONFIG ========================
+const UNIT_NUM = 1;
+const TOTAL_UNITS = 13; /* CTS Q24 audit 2026-05-28: normalized to 13. */
+const PASS_THRESHOLD = 0.90;
+const NS = 'cts_ev_';
+const UNIT_KEY = NS + 'unit' + UNIT_NUM;
+const PROGRESS_KEY = NS + 'progress';
+const PASSED_KEY = NS + 'unit' + UNIT_NUM + '_passed';
+const MC_PASSED_KEY = NS + 'u' + UNIT_NUM + '_mc_passed';
+const LOCKOUT_KEY = NS + 'unit' + UNIT_NUM + '_sa_lockout';
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch(e) { progress = {}; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(NS + 'unit' + i + '_passed') === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSEvangelismUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('prevUnitBtn').disabled = true;
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (localStorage.getItem(PASSED_KEY) === 'true') location.href = "CTSEvangelismUnit2.html";
+    else alert(currentLang === 'es' ? "Por favor apruebe la Unidad 1 primero." : "Please pass Unit 1 first.");
+};
+updateProgressGrid();
+
+// ======================== REGISTRATION ========================
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+function loadReg() {
+    let saved = localStorage.getItem('cts_student');
+    if (saved) {
+        try {
+            student = JSON.parse(saved);
+            document.getElementById('studentName').value = student.name || '';
+            document.getElementById('studentEmail').value = student.email || '';
+            document.getElementById('studentCountry').value = student.country || '';
+            document.getElementById('studentProgram').value = student.program || 'Certificate of Ministry';
+        } catch(e) {}
+    }
+}
+function saveReg() {
+    student.name = document.getElementById('studentName').value.trim();
+    student.email = document.getElementById('studentEmail').value.trim();
+    student.country = document.getElementById('studentCountry').value.trim();
+    student.program = document.getElementById('studentProgram').value;
+    if (student.name && student.email) {
+        localStorage.setItem('cts_student', JSON.stringify(student));
+        /* CTS audit 2026-05-23: 3-track mapping. Prior rule was: cts_track = program==='Master of Divinity' ? 'mdiv' : 'cert' */
+        localStorage.setItem('cts_track', student.program === 'Master of Divinity' ? 'mdiv' : (student.program === 'Master of Theology' ? 'thm' : 'cert'));
+    }
+    applyTrackBanner();
+}
+function applyTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    const track = localStorage.getItem('cts_track') || 'cert';
+    banner.style.display = 'block';
+    /* CTS audit 2026-05-23: added Th.M. banner branch; both Masters tracks require both sections. */
+    if (track === 'thm') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Theology — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Teología — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else if (track === 'mdiv') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Divinity — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Divinidad — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else {
+        banner.innerHTML = '<span class="lang-en">Track: Certificate — Section A required (90%). Section B optional.</span><span class="lang-es">Pista: Certificado — Sección A obligatoria (90%). Sección B opcional.</span>';
+    }
+}
+document.getElementById('studentName').addEventListener('change', saveReg);
+document.getElementById('studentEmail').addEventListener('change', saveReg);
+document.getElementById('studentCountry').addEventListener('change', saveReg);
+document.getElementById('studentProgram').addEventListener('change', () => { saveReg(); renderQuestions(); });
+loadReg();
+applyTrackBanner();
+
+// ======================== QUESTIONS — MC distribution A=B=C=D=5 ========================
+const mcQuestions = [
+    { textEn: "1. Evangelism begins with:", textEs: "1. El evangelismo comienza con:", optionsEn: ["God's initiative", "Human strategy", "Cultural need", "Church growth plans"], optionsEs: ["La iniciativa de Dios", "Estrategia humana", "Necesidad cultural", "Planes de crecimiento de la iglesia"], correct: 0, explanationEn: "Evangelism begins with God's initiative, not human plans. Scripture consistently shows God as the One who acts first.", explanationEs: "El evangelismo comienza con la iniciativa de Dios, no con planes humanos. Las Escrituras muestran consistentemente a Dios como el que actúa primero." },
+    { textEn: "2. Genesis 3:9 shows that after the fall:", textEs: "2. Génesis 3:9 muestra que después de la caída:", optionsEn: ["Adam sought God first", "God called out to Adam", "No one sought anyone", "Eve led the search"], optionsEs: ["Adán buscó a Dios primero", "Dios llamó a Adán", "Nadie buscó a nadie", "Eva lideró la búsqueda"], correct: 1, explanationEn: "God called out to Adam, showing that He takes the initiative in seeking sinners.", explanationEs: "Dios llamó a Adán, mostrando que Él toma la iniciativa en buscar a los pecadores." },
+    { textEn: "3. Luke 19:10 teaches that Jesus came to:", textEs: "3. Lucas 19:10 enseña que Jesús vino a:", optionsEn: ["Judge politics", "Build institutions", "Seek and save the lost", "Teach morals only"], optionsEs: ["Juzgar la política", "Construir instituciones", "Buscar y salvar lo perdido", "Enseñar solo moral"], correct: 2, explanationEn: "Jesus declared He came to seek and to save that which was lost.", explanationEs: "Jesús declaró que vino a buscar y salvar lo que se había perdido." },
+    { textEn: "4. In the Old Testament, Israel was meant to be:", textEs: "4. En el Antiguo Testamento, Israel debía ser:", optionsEn: ["A hidden nation only", "A light to the nations", "A political empire", "A private religion"], optionsEs: ["Solo una nación escondida", "Una luz para las naciones", "Un imperio político", "Una religión privada"], correct: 1, explanationEn: "Israel was called to be a light to the nations (Isaiah 49:6) and a kingdom of priests (Exodus 19:6).", explanationEs: "Israel fue llamado a ser una luz para las naciones (Isaías 49:6) y un reino de sacerdotes (Éxodo 19:6)." },
+    { textEn: "5. Psalm 96:3 calls believers to:", textEs: "5. Salmo 96:3 llama a los creyentes a:", optionsEn: ["Hide God's glory", "Debate endlessly", "Serve in silence only", "Declare His glory among the nations"], optionsEs: ["Esconder la gloria de Dios", "Debatir sin fin", "Servir solo en silencio", "Declarar su gloria entre las naciones"], correct: 3, explanationEn: "The psalm commands declaring God's glory among the heathen and His wonders among all people.", explanationEs: "El salmo ordena declarar la gloria de Dios entre los paganos y sus maravillas entre todos los pueblos." },
+    { textEn: "6. Matthew 4:19 connects following Christ with:", textEs: "6. Mateo 4:19 conecta el seguir a Cristo con:", optionsEn: ["Avoiding people", "Political activism", "Religious isolation", "Becoming fishers of men"], optionsEs: ["Evitar a la gente", "Activismo político", "Aislamiento religioso", "Llegar a ser pescadores de hombres"], correct: 3, explanationEn: "Jesus said He would make them fishers of men—following Christ and reaching others are inseparable.", explanationEs: "Jesús dijo que los haría pescadores de hombres—seguir a Cristo y alcanzar a otros son inseparables." },
+    { textEn: "7. The Great Commission in Matthew 28 includes:", textEs: "7. La Gran Comisión en Mateo 28 incluye:", optionsEn: ["Going, making disciples, baptizing, and teaching", "Only baptizing", "Only preaching to believers", "Only building churches"], optionsEs: ["Ir, hacer discípulos, bautizar y enseñar", "Solo bautizar", "Solo predicar a creyentes", "Solo construir iglesias"], correct: 0, explanationEn: "The commission includes four actions: going, making disciples, baptizing, and teaching.", explanationEs: "La comisión incluye cuatro acciones: ir, hacer discípulos, bautizar y enseñar." },
+    { textEn: "8. Acts 1:8 teaches that believers receive power from:", textEs: "8. Hechos 1:8 enseña que los creyentes reciben poder de:", optionsEn: ["Training alone", "The Holy Spirit", "Tradition", "Natural personality"], optionsEs: ["Solo el entrenamiento", "El Espíritu Santo", "Tradición", "Personalidad natural"], correct: 1, explanationEn: "Power for witness comes from the Holy Spirit, not human ability.", explanationEs: "El poder para el testimonio viene del Espíritu Santo, no de la habilidad humana." },
+    { textEn: "9. According to 1 Corinthians 3:6, the increase comes from:", textEs: "9. Según 1 Corintios 3:6, el crecimiento viene de:", optionsEn: ["The evangelist", "The church program", "God", "Technique"], optionsEs: ["El evangelista", "El programa de la iglesia", "Dios", "Técnica"], correct: 2, explanationEn: "Paul plants, Apollos waters, but God gives the increase. Results belong to God.", explanationEs: "Pablo planta, Apolos riega, pero Dios da el crecimiento. Los resultados pertenecen a Dios." },
+    { textEn: "10. Biblical evangelism is best described as:", textEs: "10. El evangelismo bíblico se describe mejor como:", optionsEn: ["A human invention", "An optional ministry for a few", "A method for getting decisions", "Participation in God's redemptive work"], optionsEs: ["Invención humana", "Un ministerio opcional para unos pocos", "Un método para obtener decisiones", "Participación en la obra redentora de Dios"], correct: 3, explanationEn: "Evangelism is participation in what God is already doing, not a human program.", explanationEs: "El evangelismo es participación en lo que Dios ya está haciendo, no un programa humano." },
+    { textEn: "11. Henry Goerner's Thus It Is Written describes God's original plan as:", textEs: "11. El libro 'Así está Escrito' de Henry Goerner describe el plan original de Dios como:", optionsEn: ["Winning the entire human family", "Saving only the Jews", "Building the temple", "Ending all war"], optionsEs: ["Ganar a toda la familia humana", "Salvar solo a los judíos", "Construir el templo", "Terminar toda guerra"], correct: 0, explanationEn: "Goerner traces God's purpose to win the entire human family from Genesis forward.", explanationEs: "Goerner traza el propósito de Dios de ganar a toda la familia humana desde Génesis." },
+    { textEn: "12. In Genesis 12:3, God promised that in Abraham would be blessed:", textEs: "12. En Génesis 12:3, Dios prometió que en Abraham serían benditas:", optionsEn: ["Only his direct heirs", "Only the Hebrew tribes", "All families of the earth", "The Egyptians alone"], optionsEs: ["Solo sus herederos directos", "Solo las tribus hebreas", "Todas las familias de la tierra", "Solo los egipcios"], correct: 2, explanationEn: "All families of the earth were to be blessed in Abraham—the global scope is clear.", explanationEs: "Todas las familias de la tierra serían benditas en Abraham—el alcance global es claro." },
+    { textEn: "13. Exodus 19:6 calls Israel to be:", textEs: "13. Éxodo 19:6 llama a Israel a ser:", optionsEn: ["A kingdom of priests and a holy nation", "A merchant nation", "A military empire", "A secret society"], optionsEs: ["Un reino de sacerdotes y una nación santa", "Una nación mercante", "Un imperio militar", "Una sociedad secreta"], correct: 0, explanationEn: "Israel was called to be a kingdom of priests—chosen for service, not privilege.", explanationEs: "Israel fue llamado a ser un reino de sacerdotes—escogido para servicio, no privilegio." },
+    { textEn: "14. In Matthew 21:43, Jesus said the kingdom of God would be:", textEs: "14. En Mateo 21:43, Jesús dijo que el reino de Dios sería:", optionsEn: ["Restored to Israel forever", "Taken from Israel and given to a nation bearing its fruits", "Withdrawn from the earth", "Limited to the Pharisees"], optionsEs: ["Restaurado a Israel para siempre", "Quitado de Israel y dado a una nación que produce sus frutos", "Retirado de la tierra", "Limitado a los fariseos"], correct: 1, explanationEn: "The kingdom was taken from Israel and given to a nation (the church) that produces its fruit.", explanationEs: "El reino fue quitado de Israel y dado a una nación (la iglesia) que produce su fruto." },
+    { textEn: "15. According to Coleman's Master Plan, Jesus' primary method was:", textEs: "15. Según el Plan Maestro de Coleman, el método principal de Jesús fue:", optionsEn: ["Building large crowds", "Men—concentrating on the twelve", "Writing books", "Political alliance"], optionsEs: ["Construir grandes multitudes", "Hombres—concentrándose en los doce", "Escribir libros", "Alianza política"], correct: 1, explanationEn: "Men were His method—Jesus poured His life into a small group who would carry the gospel.", explanationEs: "Los hombres fueron su método—Jesús invirtió su vida en un pequeño grupo que llevaría el evangelio." },
+    { textEn: "16. In Joseph Aldrich's fictional Gabriel dialogue, Jesus says:", textEs: "16. En el diálogo ficticio de José Aldrich con Gabriel, Jesús dice:", optionsEn: ["I have a backup plan in the angels", "The Father will send another", "Only Peter matters", "I'm counting on them"], optionsEs: ["Tengo un plan de respaldo en los ángeles", "El Padre enviará a otro", "Solo Pedro importa", "Cuento con ellos"], correct: 3, explanationEn: "Jesus says, 'I haven't made any other plans. I'm counting on them.'", explanationEs: "Jesús dice: 'No he hecho otros planes. Cuento con ellos.'" },
+    { textEn: "17. The New Testament shows three patterns of evangelism: personal, mass, and:", textEs: "17. El Nuevo Testamento muestra tres patrones de evangelismo: personal, masivo y:", optionsEn: ["Political", "Liturgical", "Academic", "Lifestyle"], optionsEs: ["Político", "Litúrgico", "Académico", "Estilo de vida"], correct: 3, explanationEn: "The third pattern is lifestyle evangelism—'go and live.'", explanationEs: "El tercer patrón es el evangelismo como estilo de vida—'ir y vivir'." },
+    { textEn: "18. What illustration frames the believer's role in this unit?", textEs: "18. ¿Qué ilustración enmarca el papel del creyente en esta unidad?", optionsEn: ["A fisherman", "A shepherd", "A builder", "A soldier"], optionsEs: ["Un pescador", "Un pastor", "Un constructor", "Un soldado"], correct: 0, explanationEn: "The fisherman illustration from Matthew 4:19 and Brad Johnson's fishing champion.", explanationEs: "La ilustración del pescador de Mateo 4:19 y el campeón de pesca de Brad Johnson." },
+    { textEn: "19. Evangelism is described in the conclusion as participation in:", textEs: "19. El evangelismo se describe en la conclusión como participación en:", optionsEn: ["Church marketing", "Religious debate", "The redemptive work of God", "Human innovation"], optionsEs: ["Marketing de la iglesia", "Debate religioso", "La obra redentora de Dios", "Innovación humana"], correct: 2, explanationEn: "Evangelism is participation in God's redemptive work, not human marketing or debate.", explanationEs: "El evangelismo es participación en la obra redentora de Dios, no marketing o debate humano." },
+    { textEn: "20. What must evangelism be grounded in to remain faithful and spiritually sound?", textEs: "20. ¿En qué debe basarse el evangelismo para permanecer fiel y espiritualmente sólido?", optionsEn: ["Methods", "Culture", "The Word of God", "Tradition"], optionsEs: ["Métodos", "Cultura", "La Palabra de Dios", "Tradición"], correct: 2, explanationEn: "Only when evangelism is grounded in the Word of God will it remain faithful.", explanationEs: "Solo cuando el evangelismo se basa en la Palabra de Dios se mantendrá fiel." }
+];
+
+const kwQuestions = [
+    { textEn: "21. According to the unit, evangelism is rooted in the very nature and purpose of God. Explain why evangelism must therefore be understood as participation in God's work rather than as a human program.", textEs: "21. Según la unidad, el evangelismo está arraigado en la naturaleza y el propósito de Dios. Explique por qué el evangelismo debe entenderse como participación en la obra de Dios y no como un programa humano.", kw_en: ["god", "particip", "work", "divine", "redempt", "join", "initiat", "purpos"], kw_es: ["dios", "particip", "obra", "divin", "redent", "unir", "iniciat", "propósit"], modelEn: "Evangelism is rooted in the very nature and purpose of God. Because God himself takes the initiative to redeem, evangelism is not a human program but participation in His divine redemptive work; we join what He is already doing.", modelEs: "El evangelismo está arraigado en la naturaleza y el propósito de Dios. Porque Dios mismo toma la iniciativa de redimir, el evangelismo no es un programa humano sino participación en su obra redentora divina; nos unimos a lo que Él ya está haciendo.", authorDraft: true },
+    { textEn: "22. Genesis 3:9 records that after the fall, God called out, 'Where are you?' Explain how this single verse establishes the divine pattern of seeking initiative that runs through all of Scripture.", textEs: "22. Génesis 3:9 registra que después de la caída, Dios llamó: '¿Dónde estás tú?' Explique cómo este solo versículo establece el patrón divino de iniciativa de búsqueda que recorre toda la Escritura.", kw_en: ["god", "initiat", "seek", "call", "first", "fall", "adam", "sinner"], kw_es: ["dios", "iniciat", "busc", "llam", "primer", "caíd", "adán", "pecador"], modelEn: "After the fall, God called out 'Where are you?' He sought Adam first. This shows the divine pattern of seeking initiative: throughout Scripture God takes the first step toward the sinner rather than waiting to be found.", modelEs: "Después de la caída, Dios llamó: '¿Dónde estás tú?' Buscó a Adán primero. Esto muestra el patrón divino de iniciativa de búsqueda: a lo largo de la Escritura Dios da el primer paso hacia el pecador en lugar de esperar a ser hallado.", authorDraft: true },
+    { textEn: "23. Summarize Henry Goerner's framework in Thus It Is Written. How does the sequence from the Flood, to Babel, to Abraham, to Israel, to the church show that God's redemptive purpose was global from the beginning?", textEs: "23. Resuma el marco de Henry Goerner en 'Así está Escrito'. ¿Cómo muestra la secuencia del Diluvio, Babel, Abraham, Israel y la iglesia que el propósito redentor de Dios era global desde el principio?", kw_en: ["goerner", "global", "world", "abraham", "famil", "nation", "redempt", "begin"], kw_es: ["goerner", "global", "mund", "abraham", "famil", "nacion", "redent", "principi"], modelEn: "Goerner traces the sequence from the Flood to Babel to Abraham to Israel to the church, showing God's redemptive purpose was global from the beginning. In Abraham all families of the earth would be blessed; the scope was the whole world, every nation.", modelEs: "Goerner traza la secuencia del Diluvio a Babel, a Abraham, a Israel y a la iglesia, mostrando que el propósito redentor de Dios fue global desde el principio. En Abraham serían benditas todas las familias de la tierra; el alcance era el mundo entero, cada nación.", authorDraft: true },
+    { textEn: "24. The Great Commission contains four actions. List them and explain why evangelism is not complete with only one.", textEs: "24. La Gran Comisión contiene cuatro acciones. Enumérelas y explique por qué el evangelismo no está completo con solo una.", kw_en: ["go", "discipl", "baptiz", "teach", "commission", "four", "complet", "obey"], kw_es: ["ir", "discípul", "bautiz", "enseñ", "comisión", "cuatro", "complet", "obed"], modelEn: "The Great Commission has four actions: go, make disciples, baptize, and teach them to obey. Evangelism is not complete with only one. Making a convert without baptizing and teaching leaves the commission unfinished.", modelEs: "La Gran Comisión tiene cuatro acciones: ir, hacer discípulos, bautizar y enseñar a obedecer. El evangelismo no se completa con solo una. Hacer un converso sin bautizar y enseñar deja la comisión inconclusa.", authorDraft: true },
+    { textEn: "25. Acts 1:8 connects the Holy Spirit with witness. Explain why evangelism without dependence upon the Holy Spirit becomes 'mere human effort,' and what posture replaces both manipulation and timidity.", textEs: "25. Hechos 1:8 conecta el Espíritu Santo con el testimonio. Explique por qué el evangelismo sin dependencia del Espíritu Santo se convierte en 'mero esfuerzo humano', y qué postura reemplaza tanto la manipulación como la timidez.", kw_en: ["spirit", "power", "witness", "depend", "human", "wait", "bold", "enabl"], kw_es: ["espíritu", "poder", "testig", "depend", "human", "esper", "valien", "capacit"], modelEn: "Acts 1:8 ties witness to the Holy Spirit's power. Without dependence on the Spirit, evangelism becomes mere human effort. The posture that replaces both manipulation and timidity is bold, Spirit-enabled witness: waiting on God's power rather than trusting our own.", modelEs: "Hechos 1:8 une el testimonio al poder del Espíritu Santo. Sin dependencia del Espíritu, el evangelismo se vuelve mero esfuerzo humano. La postura que reemplaza tanto la manipulación como la timidez es un testimonio valiente y capacitado por el Espíritu: esperar en el poder de Dios en vez de confiar en el nuestro.", authorDraft: true },
+    { textEn: "26. Paul wrote, 'I planted, Apollos watered, but God gave the increase.' How does this verse protect the evangelist from both pride and discouragement?", textEs: "26. Pablo escribió: 'Yo planté, Apolos regó; pero el crecimiento lo ha dado Dios.' ¿Cómo protege este versículo al evangelista tanto del orgullo como del desánimo?", kw_en: ["plant", "water", "increase", "god", "result", "pride", "discourag", "faith"], kw_es: ["plant", "reg", "crecimi", "dios", "result", "orgull", "desánim", "fiel"], modelEn: "Paul planted, Apollos watered, but God gave the increase. This guards the evangelist from pride, because the results are God's, not ours; and from discouragement, because our task is faithful planting and watering, not producing the growth.", modelEs: "Pablo plantó, Apolos regó, pero Dios dio el crecimiento. Esto guarda al evangelista del orgullo, porque los resultados son de Dios y no nuestros; y del desánimo, porque nuestra tarea es plantar y regar fielmente, no producir el crecimiento.", authorDraft: true },
+    { textEn: "27. Robert Coleman drew principles from Jesus' approach to evangelism. Choose two of the five principles described in this unit and explain how they apply to evangelism today.", textEs: "27. Robert Coleman extrajo principios del enfoque de Jesús hacia el evangelismo. Elija dos de los cinco principios descritos en esta unidad y explique cómo se aplican al evangelismo hoy.", kw_en: ["coleman", "method", "obedien", "men", "discipl", "time", "associ", "reproduc"], kw_es: ["coleman", "método", "obedien", "hombr", "discípul", "tiemp", "asocia", "reproduc"], modelEn: "Coleman drew principles from Jesus' method. Two examples: selection and association, Jesus concentrated on a few men and gave them His time; and reproduction, He expected those disciples to reproduce by obedience, multiplying His work rather than gathering crowds.", modelEs: "Coleman extrajo principios del método de Jesús. Dos ejemplos: selección y asociación, Jesús se concentró en unos pocos hombres y les dio su tiempo; y reproducción, esperaba que esos discípulos se reprodujeran por obediencia, multiplicando su obra en vez de juntar multitudes.", authorDraft: true },
+    { textEn: "28. Jesus engaged personally with Nicodemus, the Samaritan woman, Zacchaeus, and the rich young ruler. What does this pattern teach us about the scope of evangelism beyond the pulpit?", textEs: "28. Jesús se relacionó personalmente con Nicodemo, la mujer samaritana, Zaqueo y el joven rico. ¿Qué nos enseña este patrón sobre el alcance del evangelismo más allá del púlpito?", kw_en: ["personal", "individ", "convers", "nicodem", "samarit", "zacch", "scope", "beyond"], kw_es: ["personal", "individ", "conversa", "nicodem", "samarit", "zaqu", "alcanc", "allá"], modelEn: "Jesus dealt personally with Nicodemus, the Samaritan woman, Zacchaeus, and the rich young ruler. The pattern teaches that evangelism reaches beyond the pulpit to individual conversation. Its scope is personal, one soul at a time, not only public preaching.", modelEs: "Jesús trató personalmente con Nicodemo, la mujer samaritana, Zaqueo y el joven rico. El patrón enseña que el evangelismo alcanza más allá del púlpito hasta la conversación individual. Su alcance es personal, un alma a la vez, no solo la predicación pública.", authorDraft: true },
+    { textEn: "29. The unit states that evangelism is 'not optional for the believer.' Defend this claim from both the Great Commission and Matthew 21:43.", textEs: "29. La unidad afirma que el evangelismo 'no es opcional para el creyente.' Defienda esta afirmación tanto desde la Gran Comisión como desde Mateo 21:43.", kw_en: ["command", "obey", "kingdom", "option", "commission", "fruit", "believ", "matthew"], kw_es: ["mandami", "obed", "reino", "opcion", "comisión", "frut", "crey", "mateo"], modelEn: "Evangelism is not optional. The Great Commission is a command every believer must obey. And Matthew 21:43 warns the kingdom is taken from those who fail to produce its fruit; faithfulness in evangelism is part of bearing that fruit.", modelEs: "El evangelismo no es opcional. La Gran Comisión es un mandamiento que todo creyente debe obedecer. Y Mateo 21:43 advierte que el reino es quitado de quienes no producen su fruto; la fidelidad en el evangelismo es parte de llevar ese fruto.", authorDraft: true },
+    { textEn: "30. Synthesize the seven sections of this unit into one paragraph showing how the biblical foundation of evangelism begins with God, is revealed in Scripture, modeled by Christ, commanded to believers, and empowered by the Holy Spirit.", textEs: "30. Sintetice las siete secciones de esta unidad en un párrafo que muestre cómo el fundamento bíblico del evangelismo comienza con Dios, se revela en las Escrituras, es modelado por Cristo, ordenado a los creyentes y potenciado por el Espíritu Santo.", kw_en: ["god", "scriptur", "christ", "spirit", "command", "believ", "reveal", "foundat"], kw_es: ["dios", "escritur", "cristo", "espíritu", "mandami", "crey", "revel", "fundament"], modelEn: "The biblical foundation of evangelism begins with God, who initiates redemption; is revealed throughout Scripture; is modeled by Christ in His seeking and His method; is commanded to every believer; and is empowered by the Holy Spirit. These rest on one foundation.", modelEs: "El fundamento bíblico del evangelismo comienza con Dios, quien inicia la redención; se revela en toda la Escritura; es modelado por Cristo en su búsqueda y su método; es mandado a cada creyente; y es potenciado por el Espíritu Santo. Todo descansa sobre un fundamento.", authorDraft: true }
+];
+
+// ======================== STATE ========================
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+let unitPassed = localStorage.getItem(PASSED_KEY) === 'true';
+let mcPassed = localStorage.getItem(MC_PASSED_KEY) === 'true';
+
+function kwHit(answer, kw) {
+    if (!answer) return false;
+    var a = answer.toLowerCase();
+    var k = kw.toLowerCase();
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    var re = (k.length <= 4)
+        ? new RegExp("(^|[^\\p{L}])" + esc + "($|[^\\p{L}])", "u")
+        : new RegExp("(^|[^\\p{L}])" + esc, "u");
+    return re.test(a);
+}
+function essayPartialMatch(answer, keywords) {
+    if (!answer || answer.trim().length < 100) return false;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched >= 3;
+}
+function kwHitCount(answer, keywords) {
+    if (!answer) return 0;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched;
+}
+
+function saveUnitState() {
+    localStorage.setItem(UNIT_KEY + '_mc', JSON.stringify(mcAnswers));
+    localStorage.setItem(UNIT_KEY + '_kw', JSON.stringify(kwAnswers));
+}
+function loadSavedAnswers() {
+    const savedMC = localStorage.getItem(UNIT_KEY + '_mc');
+    if (savedMC) { try { let p = JSON.parse(savedMC); if (Array.isArray(p) && p.length === 20) mcAnswers = p; } catch(e) {} }
+    const savedKW = localStorage.getItem(UNIT_KEY + '_kw');
+    if (savedKW) { try { let p = JSON.parse(savedKW); if (Array.isArray(p) && p.length === 10) kwAnswers = p; } catch(e) {} }
+}
+
+function clearAllLocal() {
+    if (confirm(currentLang === 'es' ? '⚠️ Esto borrará todas sus respuestas, estado de bloqueo y progreso de esta unidad. ¿Está seguro?' : '⚠️ This will erase all your answers, lockout status, and progress for this unit. Are you sure?')) {
+        localStorage.removeItem(UNIT_KEY + '_mc');
+        localStorage.removeItem(UNIT_KEY + '_kw');
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(PASSED_KEY);
+        localStorage.removeItem(MC_PASSED_KEY);
+        lockUntil = 0;
+        unitPassed = false;
+        mcPassed = false;
+        progress['unit' + UNIT_NUM] = false;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+        updateProgressGrid();
+    }
+}
+
+function clearExamAnswersOnly() {
+    if (confirm(currentLang === 'es' ? '⚠️ ¿Borrar todas sus respuestas para esta unidad? (El estado de aprobación de la unidad permanecerá si ya aprobó.)' : '⚠️ Clear all your answers for this unit? (Unit pass status will remain if already passed.)')) {
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        saveUnitState();
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+    }
+}
+
+function setSAOnlyLockout(disable) {
+    // After MC passes, SA section can lock independently for 15 min on SA failure
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    const allTextareas = container.querySelectorAll('.kw-answer');
+    const allCheckBtns = container.querySelectorAll('button.small');
+    allTextareas.forEach(ta => ta.disabled = disable);
+    allCheckBtns.forEach(btn => {
+        if (btn.id !== 'submitExamBtn' && btn.id !== 'clearExamDataBtn' && btn.id !== 'clearDataBtn') btn.disabled = disable;
+    });
+}
+
+let lockoutInterval = null;
+function startLockoutTimer() {
+    if (lockoutInterval) clearInterval(lockoutInterval);
+    if (lockUntil > Date.now()) {
+        let banner = document.getElementById('lockoutBanner');
+        if (!banner) {
+            banner = document.createElement('div');
+            banner.id = 'lockoutBanner';
+            banner.className = 'lockout-banner';
+            const examResult = document.getElementById('examResult');
+            examResult.parentNode.insertBefore(banner, examResult);
+        }
+        setSAOnlyLockout(true);
+        const tick = () => {
+            if (lockUntil <= Date.now() || unitPassed) {
+                clearInterval(lockoutInterval);
+                setSAOnlyLockout(false);
+                if (banner) banner.remove();
+                return;
+            }
+            const rem = lockUntil - Date.now();
+            const mins = Math.floor(rem / 60000);
+            const secs = Math.floor((rem % 60000) / 1000);
+            banner.innerText = (currentLang === 'en'
+                ? `⏰ Section B locked for ${mins}:${secs.toString().padStart(2,'0')} (15-min retake lockout after failed submission)`
+                : `⏰ Sección B bloqueada por ${mins}:${secs.toString().padStart(2,'0')} (bloqueo de 15 min tras envío fallido)`);
+        };
+        tick();
+        lockoutInterval = setInterval(tick, 1000);
+    } else {
+        setSAOnlyLockout(false);
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+    }
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Section A — Multiple Choice (Questions 1–20)' : 'Sección A — Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const mcReveal = mcRevealed || mcPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMDiv ? 'Section B — Short Answer (Questions 21–30) — Masters Track (M.Div./Th.M.)' : 'Section B — Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMDiv ? 'Sección B — Respuesta Corta (Preguntas 21–30) — Pista de Maestría (M.Div./Th.M.)' : 'Sección B — Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here (minimum 20 characters)...' : 'Escriba su respuesta aquí (mínimo 20 caracteres)...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.disabled = (lockUntil > Date.now() || unitPassed);
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            if (lockUntil > Date.now() || unitPassed) return;
+            // Use language-matched keywords per permanent SA split-keyword rule
+            const answer = textarea.value.trim().toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? q.kw_es : q.kw_en;
+            if (answer.length < 100) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else {
+                var hc = kwHitCount(answer, keywords);
+                var passed = hc >= 3;
+                if (passed) {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('✓ Correct! (' + hc + ' key concepts found) Your answer includes the key ideas.') : ('✓ ¡Correcto! (' + hc + ' conceptos clave encontrados) Su respuesta incluye las ideas clave.');
+                    feedbackDiv.className = 'feedback-text correct';
+                    kwAnswers[idx] = textarea.value;
+                    saveUnitState();
+                } else {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('Not yet — ' + hc + ' of 3 needed key concepts found. Compare your answer with the model below, then revise.') : ('Todavía no — ' + hc + ' de 3 conceptos clave necesarios encontrados. Compare su respuesta con el modelo de abajo y revise.');
+                    feedbackDiv.className = 'feedback-text incorrect';
+                }
+                // Gold model-answer reveal box — shown after every check, pass or fail (Q24 standard rule 4)
+                var modelBox = div.querySelector('.model-answer-box');
+                if (!modelBox) {
+                    modelBox = document.createElement('div');
+                    modelBox.className = 'model-answer-box';
+                    div.appendChild(modelBox);
+                }
+                var label = currentLang === 'en' ? 'Model answer — study this' : 'Respuesta modelo — estudie esto';
+                var modelText = currentLang === 'en' ? q.modelEn : q.modelEs;
+                var draftFlag = q.authorDraft ? '<!--AUTHOR_DRAFT: model answer not yet voiced by author-->' : '';
+                modelBox.innerHTML = draftFlag + '<strong>' + label + '</strong><br>' + modelText;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(feedbackDiv);
+        container.appendChild(div);
+        textarea.addEventListener('input', (e) => { if (!(lockUntil > Date.now() || unitPassed)) { kwAnswers[idx] = e.target.value; saveUnitState(); } });
+    });
+    startLockoutTimer();
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? "<span style='color:green'>✓ ¡Unidad ya aprobada! Puede continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! You may proceed.</span>";
+        return;
+    }
+    if (Date.now() < lockUntil) {
+        let wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? `<span style='color:red'>⏰ Bloqueado ${wait} minutos más.</span>`
+            : `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    saveReg();
+    if (!student.name || !student.email) { alert(currentLang === 'es' ? "Por favor complete su registro primero." : "Please fill in your registration first."); return; }
+
+    let correctMC = 0;
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    const mcPercent = correctMC / 20;
+    if (!unitPassed) { mcRevealed = true; renderQuestions(); }
+
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    let saCorrect = 0;
+    if (isMDiv) {
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || '').toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+            if (essayPartialMatch(ans, keywords)) saCorrect++;
+        }
+    }
+    const saPercent = saCorrect / 10;
+
+    // Standing spec: M.Div requires MC≥90% AND SA≥90% independently. Cert requires MC≥90% only.
+    const mcPass = mcPercent >= PASS_THRESHOLD;
+    const saPass = saPercent >= PASS_THRESHOLD;
+    const overallPass = isMDiv ? (mcPass && saPass) : mcPass;
+
+    if (mcPass) {
+        mcPassed = true;
+        localStorage.setItem(MC_PASSED_KEY, 'true');
+    }
+
+    if (overallPass) {
+        unitPassed = true;
+        progress['unit' + UNIT_NUM] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(PASSED_KEY, 'true');
+        const msg = isMDiv
+            ? (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unidad 1 completada. Puede continuar a la Unidad 2.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unit 1 completed. You may proceed to Unit 2.</span>`)
+            : (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unidad 1 completada. Puede continuar a la Unidad 2.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unit 1 completed. You may proceed to Unit 2.</span>`);
+        document.getElementById('examResult').innerHTML = msg;
+        updateProgressGrid();
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+        if (lockoutInterval) clearInterval(lockoutInterval);
+    } else {
+        // Determine which section failed
+        if (isMDiv && mcPass && !saPass) {
+            // MC passed, SA failed → SA-only 15-min lockout
+            lockUntil = Date.now() + 15 * 60 * 1000;
+            localStorage.setItem(LOCKOUT_KEY, lockUntil);
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ Sección A APROBADA (${Math.round(mcPercent*100)}%). Sección B no aprobada (${Math.round(saPercent*100)}% &lt; 90%). Sección B bloqueada 15 minutos.</span>`
+                : `<span style='color:red'>❌ Section A PASSED (${Math.round(mcPercent*100)}%). Section B not yet passing (${Math.round(saPercent*100)}% &lt; 90%). Section B locked for 15 minutes.</span>`;
+            startLockoutTimer();
+            renderQuestions();
+        } else {
+            // MC failed
+            const overallShown = isMDiv ? Math.min(mcPercent, saPercent) : mcPercent;
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ NO APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. Se requiere 90% en cada sección requerida. Revise sus respuestas e inténtelo de nuevo.</span>`
+                : `<span style='color:red'>❌ NOT PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. 90% required on each required section. Review your answers and try again.</span>`;
+        }
+    }
+}
+
+// ======================== EVENT LISTENERS ========================
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('clearExamDataBtn').addEventListener('click', clearExamAnswersOnly);
+document.getElementById('clearDataBtn').addEventListener('click', clearAllLocal);
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') {
+        currentLang = 'es';
+        document.body.className = 'lang-es';
+        document.documentElement.lang = 'es';
+        this.textContent = 'English';
+    } else {
+        currentLang = 'en';
+        document.body.className = 'lang-en';
+        document.documentElement.lang = 'en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+// ======================== INIT ========================
+loadSavedAnswers();
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = currentLang === 'es'
+        ? "<span style='color:green'>✅ Unidad 1 ya aprobada.</span>"
+        : "<span style='color:green'>✅ Unit 1 already passed.</span>";
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEvangelismReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

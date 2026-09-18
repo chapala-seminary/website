@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Life of Christ &mdash; Unit 7</title>
+<style>
+:root{
+  --ink:#241c12; --paper:#f7f1e4; --card:#fffdf8; --line:#d8ccb2;
+  --accent:#7a3b1e; --accent2:#9c6b2f; --gold:#fbf3d6; --goldln:#caa94e;
+  --good:#2f6b3a; --bad:#9b2c2c; --muted:#6c6150;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;line-height:1.6;}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+header.site{background:var(--accent);color:#f6ecd8;padding:18px 0;border-bottom:4px solid var(--goldln);}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:0;}
+header.site h1{font-size:1.15rem;margin:0;font-weight:600;letter-spacing:.2px;}
+header.site .sub{font-size:.78rem;opacity:.85;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+.langbtn{font-family:system-ui,sans-serif;font-size:.8rem;background:#f6ecd8;color:var(--accent);
+  border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600;}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 4px;
+  font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);}
+.badge{background:var(--gold);border:1px solid var(--goldln);border-radius:14px;padding:3px 10px;color:#6a531c;}
+.epigraph{font-style:italic;color:var(--accent2);border-left:3px solid var(--goldln);
+  padding:6px 0 6px 14px;margin:16px 0;font-size:.98rem;}
+h2.sec{font-size:1.25rem;color:var(--accent);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin:34px 0 14px;}
+article p{margin:0 0 14px;}
+article b{color:var(--accent);}
+.v{color:#3a4a2c;}
+.illo{background:#fbf6ea;border-left:3px solid var(--goldln);padding:10px 14px;border-radius:4px;}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:14px 0;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);}
+.qn{font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;color:var(--accent2);
+  text-transform:uppercase;letter-spacing:.6px;}
+.qp{margin:6px 0 10px;font-weight:600;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:9px 12px;margin:6px 0;cursor:pointer;font:inherit;color:inherit;}
+.opt:hover{border-color:var(--accent2);}
+.opt .lt{font-weight:700;color:var(--accent2);margin-right:8px;}
+.opt.correct{background:#e9f3e8;border-color:var(--good);}
+.opt.wrong{background:#f6e6e4;border-color:var(--bad);}
+.opt:disabled{cursor:default;opacity:1;}
+.expl{font-size:.9rem;color:var(--muted);margin:8px 2px 0;display:none;}
+.expl.show{display:block;}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:6px;padding:10px;
+  font:inherit;background:#fff;resize:vertical;}
+.btn{font-family:system-ui,sans-serif;font-weight:600;border:none;border-radius:6px;padding:9px 16px;
+  cursor:pointer;font-size:.9rem;}
+.btn.primary{background:var(--accent);color:#f6ecd8;}
+.btn.ghost{background:#efe6d2;color:var(--accent);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.sa-res{margin-top:10px;font-family:system-ui,sans-serif;font-size:.88rem;display:none;}
+.sa-res.show{display:block;}
+.sa-verdict{font-weight:700;}
+.sa-verdict.pass{color:var(--good);} .sa-verdict.soft{color:var(--accent2);}
+.model{background:var(--gold);border:1px solid var(--goldln);border-radius:6px;padding:10px 12px;margin-top:8px;}
+.model .ml{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:#6a531c;}
+.foot{margin-top:30px;border-top:2px solid var(--line);padding-top:18px;}
+.status{font-family:system-ui,sans-serif;font-size:.9rem;margin:10px 0;}
+.status.ok{color:var(--good);} .status.warn{color:var(--accent2);} .status.lock{color:var(--bad);}
+.modal{position:fixed;inset:0;background:rgba(36,28,18,.62);display:flex;align-items:center;
+  justify-content:center;padding:18px;z-index:50;}
+.modal .box{background:var(--card);border-radius:10px;max-width:420px;width:100%;padding:22px;
+  border-top:5px solid var(--goldln);}
+.modal h3{margin:0 0 6px;color:var(--accent);}
+.modal label{display:block;font-family:system-ui,sans-serif;font-size:.82rem;margin:12px 0 4px;color:var(--muted);}
+.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit;}
+.hide{display:none !important;}
+.next{display:inline-block;margin-top:12px;background:var(--good);color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:6px;font-family:system-ui,sans-serif;font-weight:600;}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:2px 0 18px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);margin-right:3px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:var(--card);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600;line-height:1;}
+.unitnav a:hover{border-color:var(--accent2);color:var(--accent2);}
+.unitnav a.active{background:var(--accent);color:#f6ecd8;border-color:var(--accent);}
+.unitnav a.done{background:var(--gold);border-color:var(--goldln);color:#6a531c;}
+.unitnav a.cert{min-width:auto;padding:0 12px;background:#efe6d2;}
+html[lang="es"] .en-lbl{display:none}html[lang="en"] .es-lbl{display:none}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site">
+  <div class="wrap">
+    <div><h1 id="t-title">The Life of Christ</h1><div class="sub" id="t-unit">Unit 7 · Passion Week</div></div>
+    <button class="langbtn" id="langBtn" type="button">Espa&ntilde;ol</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <span id="t-greet"></span>
+    <span class="badge" id="t-track"></span>
+  </div>
+
+     <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+     <span class="nl"><span class="en-lbl">Units</span><span class="es-lbl">Unidades</span></span>
+     <a data-u="1" href="CTSLOCUnit1.html">1</a>
+     <a data-u="2" href="CTSLOCUnit2.html">2</a>
+     <a data-u="3" href="CTSLOCUnit3.html">3</a>
+     <a data-u="4" href="CTSLOCUnit4.html">4</a>
+     <a data-u="5" href="CTSLOCUnit5.html">5</a>
+     <a data-u="6" href="CTSLOCUnit6.html">6</a>
+     <a data-u="7" href="CTSLOCUnit7.html" class="active">7</a>
+     <a data-u="8" href="CTSLOCUnit8.html">8</a>
+     <a data-u="9" href="CTSLOCUnit9.html">9</a>
+     <a data-u="10" href="CTSLOCUnit10.html">10</a>
+     <a class="cert" href="CTSLOCCertificate.html"><span class="en-lbl">Certificate</span><span class="es-lbl">Certificado</span></a>
+   </nav>
+   <script>(function(){try{var raw=localStorage.getItem("cts_loc_progress")||"{}";var done=JSON.parse(raw);var nav=document.getElementById("unitnav");if(!nav)return;var a=nav.querySelectorAll("a[data-u]");for(var i=0;i<a.length;i++){var u=a[i].getAttribute("data-u");if(done[u]&&a[i].className.indexOf("active")<0){a[i].className=(a[i].className+" done").trim();}}}catch(e){}})();</script>
+
+   <div class="epigraph" id="epigraph"></div>
+
+  <article>
+    <div id="teach-en"><h3 style="color:var(--accent);margin:0 0 4px">The Week That Changed the World: Entry, Upper Room, and Gethsemane</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">The Triumphal Entry, the Temple, the Last Supper and Upper Room Discourse, and the Agony in the Garden</p>
+<p><b>1. The King Comes Humble</b></p>
+<p>After the long road, He came at last to Jerusalem, and He came as a King — but not the kind the crowds expected. He sent two disciples for a donkey's colt and rode in upon it, deliberately fulfilling the old word of the prophet: <span class="v">"Behold, your King is coming to you, lowly, and sitting on a donkey"</span> (Matthew 21:5, citing Zechariah 9:9). A conqueror would have ridden a war-horse; the King of peace came on a borrowed colt. The humility was the message.</p>
+<p>The crowds spread their garments and palm branches on the road and cried, <span class="v">"Hosanna to the Son of David! Blessed is He who comes in the name of the LORD!"</span> (Matthew 21:9). For one bright day the city hailed Him as King. Yet He was not deceived by the cheering; as He drew near He wept over Jerusalem, <span class="v">"If you had known... the things that make for your peace!"</span> (Luke 19:42), for He knew that within days these same streets would echo with <span class="v">"Crucify Him."</span> The King had come to His own, and His own would not receive Him.</p>
+<p><b>2. The Temple and the Last Teachings</b></p>
+<p>He went into the temple and drove out those who bought and sold, overturning the tables of the money-changers, and said, <span class="v">"My house shall be called a house of prayer, but you have made it a den of thieves"</span> (Matthew 21:13). The Father's house would not be left a market. Even the children took up the cry there, <span class="v">"Hosanna to the Son of David!"</span>, and when the chief priests were indignant He reminded them that God has perfected praise <span class="v">"out of the mouth of babes"</span> (Matthew 21:15–16).</p>
+<p>All that week the authorities came at Him, and He turned every trap. When they demanded by what authority He acted, He silenced them. When they asked whether it was lawful to pay taxes to Caesar, He answered, <span class="v">"Render therefore to Caesar the things that are Caesar's, and to God the things that are God's"</span> (Matthew 22:21). Asked which is the great commandment, He gave two as one: love the Lord your God with all your heart, and your neighbor as yourself (Matthew 22:37–39). And watching the offering, He saw a poor widow put in two small coins and said she had given more than all the rich, for they gave out of abundance, but she <span class="v">"out of her poverty put in all that she had"</span> (Mark 12:44). Then, on the Mount of Olives, He spoke of the days to come — of judgment, the fall of the temple, and His own return — and pressed upon His disciples one command above the rest: <span class="v">"Watch therefore, for you do not know what hour your Lord is coming"</span> (Matthew 24:42). Whatever the order of last things, the duty of the servant is the same: be ready.</p>
+<p>Meanwhile, in the shadows, the chief priests plotted His death, and one of the Twelve, Judas Iscariot, went to them and bargained to betray Him for thirty pieces of silver (Matthew 26:14–16). The hands that had been washed in the basin were already taking the traitor's price.</p>
+<p><b>3. The Upper Room: Servant, Supper, and Promise</b></p>
+<p>On the night He was betrayed, He gathered the Twelve to keep the Passover. And there the Lord of glory rose from supper, laid aside His garments, took a towel, and washed the disciples' feet — the Master stooping to the task of the lowest slave. When He came to Peter, the disciple drew back: <span class="v">"Lord, do You wash my feet?... You shall never wash my feet!"</span> But Jesus answered, <span class="v">"If I do not wash you, you have no part with Me"</span> (John 13:8), and Peter, ever extreme, begged to be washed head to hand. The cleansing Christ gives is not optional; to refuse it is to have no share in Him. <span class="v">"If I then, your Lord and Teacher, have washed your feet, you also ought to wash one another's feet"</span> (John 13:14). He gave them a new commandment: <span class="v">"love one another; as I have loved you... By this all will know that you are My disciples"</span> (John 13:34–35). Love that stoops and serves is the mark of His own.</p>
+<p>That night, troubled in spirit, He said plainly, <span class="v">"one of you will betray Me"</span> (John 13:21). He gave the dipped morsel to Judas and told him, <span class="v">"What you do, do quickly."</span> Judas took the bread and went out — <span class="v">"and it was night"</span> (John 13:30).</p>
+<p>Then He took bread, gave thanks, broke it, and said, <span class="v">"This is My body which is given for you; do this in remembrance of Me"</span>; and likewise the cup, <span class="v">"This cup is the new covenant in My blood, which is shed for you"</span> (Luke 22:19–20). He gave them a memorial of His death, to keep until He comes — bread broken for His body, the cup poured for the new covenant sealed in His blood.</p>
+<p>And He comforted them against the dark hour ahead. <span class="v">"Let not your heart be troubled... In My Father's house are many mansions"</span> (John 14:1–2). <span class="v">"I am the way, the truth, and the life. No one comes to the Father except through Me"</span> (John 14:6) — the only road home to God runs through Him. He promised the Comforter, the Spirit of truth, to abide with them forever (John 14:16–17). <span class="v">"I am the true vine... abide in Me, and I in you"</span> (John 15:1, 4), for no branch bears fruit cut off from the vine. He told them that no greater love exists than to lay down one's life for one's friends (John 15:13), and left them His own peace: <span class="v">"Peace I leave with you, My peace I give to you; let not your heart be troubled, neither let it be afraid"</span> (John 14:27). And lifting His eyes to heaven, He prayed for them and for all who would believe through their word, that they might be one (John 17:20–21).</p>
+<p><b>4. Gethsemane: Not My Will but Yours</b></p>
+<p>On the way out He warned them, <span class="v">"All of you will be made to stumble because of Me this night,"</span> and told Peter that before the rooster crowed he would deny Him three times; Peter swore he never would, and so said they all (Matthew 26:31–35). Then He came to the garden.</p>
+<p>From the upper room He went out to the garden of Gethsemane, and there the weight of what lay ahead pressed down upon Him. He was <span class="v">"exceedingly sorrowful, even to death,"</span> and fell on His face and prayed, <span class="v">"O My Father, if it is possible, let this cup pass from Me; nevertheless, not as I will, but as You will"</span> (Matthew 26:38–39). Three times He prayed it, and Luke tells us His sweat became <span class="v">"like great drops of blood falling down to the ground"</span> (Luke 22:44). An angel from heaven appeared to Him, strengthening Him for the hour (Luke 22:43).</p>
+<p>Here is the divine and human at its deepest. Truly God and truly man, His human will drew back in horror from the cup of wrath He was about to drink — yet bowed in perfect surrender to the Father. He was not dragged to the cross; in that garden He chose it. The disciples, meanwhile, slept; He woke them with a gentle reproach: <span class="v">"What! Could you not watch with Me one hour?"</span> (Matthew 26:40).</p>
+<p>Then the torches came through the trees. Judas led a band of men and betrayed Him with a kiss — the sign of friendship turned to treachery. <span class="v">"Friend, why have you come?"</span> (Matthew 26:50). They laid hands on Him and seized Him, and all the disciples forsook Him and fled. The Shepherd was struck, and the sheep were scattered. <span class="v">"This is your hour, and the power of darkness"</span> (Luke 22:53).</p>
+<p><b>5. The King Who Chose the Cross</b></p>
+<p>In a single week the King entered to shouts of Hosanna, cleansed His Father's house, turned back every trap of His enemies, and then, on the last night, knelt to wash His friends' feet, gave them the Supper of His broken body and shed blood, promised them the Spirit, and in the garden surrendered Himself wholly to the Father's will. Every step led toward the cross — and every step was chosen, not forced.</p>
+<p>The divine and human stand together to the end. He who is the way, the truth, and the life sweat great drops of blood in a garden; He who knelt to wash dusty feet is the Lamb about to be slain. And so the week lays its claim on us: receive the King who comes humble, eat at His table in remembrance of Him, abide in the true vine, and watch — for the hour is nearer than we think. The week that changed the world lays its claim on the whole heart of everyone who hears its story.</p></div>
+    <div id="teach-es" class="hide"><h3 style="color:var(--accent);margin:0 0 4px">La semana que cambi&oacute; el mundo: la entrada, el aposento alto y Getseman&iacute;</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">La entrada triunfal, el templo, la \u00daltima Cena y el discurso del aposento alto, y la agon&iacute;a en el huerto</p>
+
+<p><b>1. El Rey viene humilde</b></p>
+<p>Tras el largo camino, lleg&oacute; al fin a Jerusal&eacute;n, y vino como Rey &mdash; pero no del modo que la multitud esperaba. Envi&oacute; a dos disc&iacute;pulos por un pollino de asna y entr&oacute; montado en &eacute;l, cumpliendo a prop&oacute;sito la antigua palabra del profeta: <span class="v">&ldquo;He aqu&iacute;, tu Rey viene a ti, manso, y sentado sobre una asna&rdquo; (Mateo 21:5, citando Zacar&iacute;as 9:9).</span> Un conquistador habr&iacute;a montado un caballo de guerra; el Rey de paz vino sobre un pollino prestado. La humildad era el mensaje.</p>
+<p>Las multitudes tendieron sus mantos y ramas de palmera en el camino y clamaron: <span class="v">&ldquo;&iexcl;Hosanna al Hijo de David! &iexcl;Bendito el que viene en el nombre del Se&ntilde;or!&rdquo; (Mateo 21:9).</span> Por un d&iacute;a luminoso la ciudad lo aclam&oacute; como Rey. Pero &Eacute;l no se dej&oacute; enga&ntilde;ar por las aclamaciones; al acercarse, llor&oacute; sobre Jerusal&eacute;n: <span class="v">&ldquo;&iexcl;Si tambi&eacute;n t&uacute; conocieses... lo que es para tu paz!&rdquo; (Lucas 19:42),</span> porque sab&iacute;a que en pocos d&iacute;as estas mismas calles resonar&iacute;an con <span class="v">&ldquo;&iexcl;Crucif&iacute;cale!&rdquo;</span> El Rey hab&iacute;a venido a lo suyo, y los suyos no le recibir&iacute;an.</p>
+
+<p><b>2. El templo y las &uacute;ltimas ense&ntilde;anzas</b></p>
+<p>Entr&oacute; en el templo y ech&oacute; fuera a los que compraban y vend&iacute;an, volcando las mesas de los cambistas, y dijo: <span class="v">&ldquo;Mi casa, casa de oraci&oacute;n ser&aacute; llamada; mas vosotros la hab&eacute;is hecho cueva de ladrones&rdquo; (Mateo 21:13).</span> La casa del Padre no quedar&iacute;a como un mercado. Aun los ni&ntilde;os tomaron all&iacute; el clamor: <span class="v">&ldquo;&iexcl;Hosanna al Hijo de David!&rdquo;,</span> y cuando los principales sacerdotes se indignaron, &Eacute;l les record&oacute; que Dios ha perfeccionado la alabanza <span class="v">&ldquo;de la boca de los ni&ntilde;os&rdquo; (Mateo 21:15&ndash;16).</span></p>
+<p>Toda esa semana las autoridades vinieron contra &Eacute;l, y &Eacute;l desbarat&oacute; toda trampa. Cuando exigieron con qu&eacute; autoridad obraba, los hizo callar. Cuando preguntaron si era l&iacute;cito pagar tributo a C&eacute;sar, respondi&oacute;: <span class="v">&ldquo;Dad, pues, a C&eacute;sar lo que es de C&eacute;sar, y a Dios lo que es de Dios&rdquo; (Mateo 22:21).</span> Preguntado cu&aacute;l es el gran mandamiento, dio dos como uno: amar al Se&ntilde;or tu Dios con todo tu coraz&oacute;n, y a tu pr&oacute;jimo como a ti mismo (Mateo 22:37&ndash;39). Y observando la ofrenda, vio a una viuda pobre echar dos moneditas y dijo que hab&iacute;a dado m&aacute;s que todos los ricos, pues ellos dieron de su abundancia, pero ella <span class="v">&ldquo;de su pobreza ech&oacute; todo lo que ten&iacute;a&rdquo; (Marcos 12:44).</span> Luego, en el monte de los Olivos, habl&oacute; de los d&iacute;as por venir &mdash; del juicio, la ca&iacute;da del templo y su propio regreso &mdash; y apremi&oacute; a sus disc&iacute;pulos un mandato sobre todos: <span class="v">&ldquo;Velad, pues, porque no sab&eacute;is a qu&eacute; hora ha de venir vuestro Se&ntilde;or&rdquo; (Mateo 24:42).</span> Cualquiera que sea el orden de las cosas postreras, el deber del siervo es el mismo: estar listo.</p>
+<p>Mientras tanto, en las sombras, los principales sacerdotes tramaban su muerte, y uno de los Doce, Judas Iscariote, fue a ellos y se ajust&oacute; a entregarle por treinta piezas de plata (Mateo 26:14&ndash;16). Las manos que ser&iacute;an lavadas en la vasija aquella noche ya tomaban el precio del traidor.</p>
+
+<p><b>3. El aposento alto: siervo, cena y promesa</b></p>
+<p>La noche en que fue entregado, reuni&oacute; a los Doce para celebrar la Pascua. Y all&iacute; el Se&ntilde;or de gloria se levant&oacute; de la cena, dej&oacute; sus vestidos, tom&oacute; una toalla y lav&oacute; los pies de los disc&iacute;pulos &mdash; el Maestro inclin&aacute;ndose a la tarea del m&aacute;s bajo esclavo. Cuando lleg&oacute; a Pedro, el disc&iacute;pulo se retir&oacute;: <span class="v">&ldquo;Se&ntilde;or, &iquest;t&uacute; me lavas los pies?... No me lavar&aacute;s los pies jam&aacute;s.&rdquo;</span> Pero Jes&uacute;s respondi&oacute;: <span class="v">&ldquo;Si no te lavare, no tendr&aacute;s parte conmigo&rdquo; (Juan 13:8),</span> y Pedro, siempre extremo, rog&oacute; ser lavado de la cabeza a la mano. La limpieza que Cristo da no es opcional; rehusarla es no tener parte con &Eacute;l. <span class="v">&ldquo;Pues si yo, el Se&ntilde;or y el Maestro, he lavado vuestros pies, vosotros tambi&eacute;n deb&eacute;is lavaros los pies los unos a los otros&rdquo; (Juan 13:14).</span> Les dio un mandamiento nuevo: <span class="v">&ldquo;que os am&eacute;is unos a otros; como yo os he amado... En esto conocer&aacute;n todos que sois mis disc&iacute;pulos&rdquo; (Juan 13:34&ndash;35).</span> El amor que se inclina y sirve es la marca de los suyos.</p>
+<p>Aquella noche, turbado en esp&iacute;ritu, dijo claramente: <span class="v">&ldquo;uno de vosotros me ha de entregar&rdquo; (Juan 13:21).</span> Dio el bocado mojado a Judas y le dijo: <span class="v">&ldquo;Lo que haces, hazlo m&aacute;s pronto.&rdquo;</span> Judas tom&oacute; el pan y sali&oacute; &mdash; <span class="v">&ldquo;y era ya de noche&rdquo; (Juan 13:30).</span></p>
+<p>Luego tom&oacute; pan, dio gracias, lo parti&oacute; y dijo: <span class="v">&ldquo;Esto es mi cuerpo, que por vosotros es dado; haced esto en memoria de m&iacute;&rdquo;;</span> y asimismo la copa: <span class="v">&ldquo;Esta copa es el nuevo pacto en mi sangre, que por vosotros se derrama&rdquo; (Lucas 22:19&ndash;20).</span> Les dio un memorial de su muerte, para guardar hasta que venga &mdash; el pan partido por su cuerpo, la copa derramada por el nuevo pacto sellado en su sangre.</p>
+<p>Y los consol&oacute; contra la hora oscura que ven&iacute;a. <span class="v">&ldquo;No se turbe vuestro coraz&oacute;n... En la casa de mi Padre muchas moradas hay&rdquo; (Juan 14:1&ndash;2).</span> <span class="v">&ldquo;Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por m&iacute;&rdquo; (Juan 14:6)</span> &mdash; el &uacute;nico camino a casa, a Dios, pasa por &Eacute;l. Prometi&oacute; el Consolador, el Esp&iacute;ritu de verdad, para morar con ellos para siempre (Juan 14:16&ndash;17). <span class="v">&ldquo;Yo soy la vid verdadera... permaneced en m&iacute;, y yo en vosotros&rdquo; (Juan 15:1, 4),</span> porque ninguna rama lleva fruto separada de la vid. Les dijo que no hay mayor amor que dar uno la vida por sus amigos (Juan 15:13), y les dej&oacute; su propia paz: <span class="v">&ldquo;La paz os dejo, mi paz os doy; no se turbe vuestro coraz&oacute;n, ni tenga miedo&rdquo; (Juan 14:27).</span> Y alzando los ojos al cielo, or&oacute; por ellos y por todos los que creer&iacute;an por su palabra, para que fuesen uno (Juan 17:20&ndash;21).</p>
+
+<p><b>4. Getseman&iacute;: no mi voluntad, sino la tuya</b></p>
+<p>De camino les advirti&oacute;: <span class="v">&ldquo;Todos vosotros os escandalizar&eacute;is de m&iacute; esta noche,&rdquo;</span> y dijo a Pedro que antes que el gallo cantara le negar&iacute;a tres veces; Pedro jur&oacute; que nunca, y lo mismo dijeron todos (Mateo 26:31&ndash;35). Entonces lleg&oacute; al huerto.</p>
+<p>Del aposento alto sali&oacute; al huerto de Getseman&iacute;, y all&iacute; el peso de lo que le esperaba cay&oacute; sobre &Eacute;l. Estaba <span class="v">&ldquo;muy triste, hasta la muerte,&rdquo;</span> y se postr&oacute; sobre su rostro y or&oacute;: <span class="v">&ldquo;Padre m&iacute;o, si es posible, pase de m&iacute; esta copa; pero no sea como yo quiero, sino como t&uacute;&rdquo; (Mateo 26:38&ndash;39).</span> Tres veces lo or&oacute;, y Lucas nos dice que su sudor se hizo <span class="v">&ldquo;como grandes gotas de sangre que ca&iacute;an hasta la tierra&rdquo; (Lucas 22:44).</span> Un &aacute;ngel del cielo se le apareci&oacute;, fortaleci&eacute;ndolo para la hora (Lucas 22:43).</p>
+<p>Aqu&iacute; est&aacute; lo divino y lo humano en su punto m&aacute;s hondo. Verdadero Dios y verdadero hombre, su voluntad humana retrocedi&oacute; con horror ante la copa de ira que iba a beber &mdash; mas se inclin&oacute; en perfecta entrega al Padre. No fue arrastrado a la cruz; en aquel huerto la escogi&oacute;. Los disc&iacute;pulos, entretanto, dorm&iacute;an; los despert&oacute; con suave reproche: <span class="v">&ldquo;&iquest;As&iacute; que no hab&eacute;is podido velar conmigo una hora?&rdquo; (Mateo 26:40).</span></p>
+<p>Entonces vinieron las antorchas entre los &aacute;rboles. Judas gui&oacute; una turba y le entreg&oacute; con un beso &mdash; la se&ntilde;al de amistad vuelta traici&oacute;n. <span class="v">&ldquo;Amigo, &iquest;a qu&eacute; vienes?&rdquo; (Mateo 26:50).</span> Le echaron mano y le prendieron, y todos los disc&iacute;pulos le abandonaron y huyeron. El Pastor fue herido, y las ovejas se dispersaron. <span class="v">&ldquo;Esta es vuestra hora, y la potestad de las tinieblas&rdquo; (Lucas 22:53).</span></p>
+
+<p><b>5. El Rey que escogi&oacute; la cruz</b></p>
+<p>En una sola semana el Rey entr&oacute; entre gritos de Hosanna, limpi&oacute; la casa de su Padre, desbarat&oacute; toda trampa de sus enemigos, y luego, la &uacute;ltima noche, se arrodill&oacute; para lavar los pies de sus amigos, les dio la Cena de su cuerpo partido y su sangre derramada, les prometi&oacute; el Esp&iacute;ritu, y en el huerto se entreg&oacute; por entero a la voluntad del Padre. Cada paso llevaba hacia la cruz &mdash; y cada paso fue escogido, no forzado.</p>
+<p>Lo divino y lo humano est&aacute;n juntos hasta el fin. El que es el camino, la verdad y la vida sud&oacute; grandes gotas de sangre en un huerto; el que se arrodill&oacute; a lavar pies polvorientos es el Cordero a punto de ser inmolado. Y as&iacute; la semana pone su reclamo sobre nosotros: recibe al Rey que viene humilde, come a su mesa en memoria de &Eacute;l, permanece en la vid verdadera, y vela &mdash; porque la hora est&aacute; m&aacute;s cerca de lo que pensamos. La semana que cambi&oacute; el mundo reclama el coraz&oacute;n entero de todo el que oye su historia.</p>
+</div>
+  </article>
+
+  
+<figure class="cts-figure" style="margin:30px auto;max-width:1000px;text-align:center;">
+<svg style="width:100%;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1100" role="img" aria-label="Herod's Temple">
+<defs><radialGradient id="vig" cx="50%" cy="42%" r="75%"><stop offset="0%" stop-color="#f3ead0"/><stop offset="100%" stop-color="#efe4c4"/></radialGradient></defs>
+<rect width="1500" height="1100" fill="#f3ead0"/><rect width="1500" height="1100" fill="url(#vig)"/><rect x="14" y="14" width="1472" height="1072" fill="none" stroke="#b08a2e" stroke-width="6"/><rect x="26" y="26" width="1448" height="1048" fill="none" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="750.0" y="84" font-size="36" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.5">Herod's Temple  /  El Templo de Herodes</text>
+<text x="750.0" y="114" font-size="16" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">The Second Temple in Jerusalem (c. 1st century AD)  ·  El Segundo Templo en Jerusalén (c. siglo I d.C.)</text>
+<text x="750.0" y="138" font-size="12.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.8">Plan view — the Sanctuary faces east  /  Vista en planta — el Santuario mira al oriente</text>
+<rect x="70" y="178" width="1360" height="560" rx="6" ry="6" fill="#f7efd8" stroke="#7c2a2f" stroke-width="2.5"/>
+<text x="150" y="206" font-size="12.5" fill="#8a661c" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.8" opacity="0.8">① COURT OF THE GENTILES / ATRIO DE LOS GENTILES</text>
+<rect x="107.0" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="107.0" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="162.65217391304347" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="162.65217391304347" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="218.30434782608694" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="218.30434782608694" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="273.95652173913044" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="273.95652173913044" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="329.6086956521739" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="329.6086956521739" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="385.2608695652174" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="385.2608695652174" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="440.9130434782609" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="440.9130434782609" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="496.5652173913044" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="496.5652173913044" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="552.2173913043478" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="552.2173913043478" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="607.8695652173913" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="607.8695652173913" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="663.5217391304348" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="663.5217391304348" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="719.1739130434783" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="719.1739130434783" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="774.8260869565217" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="774.8260869565217" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="830.4782608695652" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="830.4782608695652" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="886.1304347826087" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="886.1304347826087" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="941.7826086956521" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="941.7826086956521" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="997.4347826086956" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="997.4347826086956" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1053.086956521739" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1053.086956521739" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1108.7391304347825" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1108.7391304347825" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1164.391304347826" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1164.391304347826" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1220.0434782608695" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1220.0434782608695" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1275.695652173913" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1275.695652173913" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1331.3478260869565" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1331.3478260869565" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1387.0" y="196" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<rect x="1387.0" y="710" width="6" height="10" fill="#b08a2e" opacity="0.4"/>
+<text x="1412" y="460" font-size="11.5" fill="#3b2f23" font-style="italic" font-family="Georgia, 'Times New Roman', Times, serif" text-anchor="middle" opacity="0.7" transform="rotate(90 1412 460)">Solomon's Porch / Pórtico de Salomón</text>
+<path d="M175,288 H1190 V440 M1190,500 V650 H175 V288" fill="none" stroke="#7c2a2f" stroke-width="2.4" stroke-dasharray="7 5"/>
+<circle cx="1190" cy="470" r="15" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="1190" y="475" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">2</text>
+<text x="1204" y="452" font-size="10.5" fill="#7c2a2f" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.8">No Gentile may pass / Ningún gentil pase</text>
+<rect x="852" y="302" width="320" height="322" rx="0" ry="0" fill="#e7dcc0" stroke="#7c2a2f" stroke-width="2"/>
+<text x="1012.0" y="459.0" font-size="12" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.4" opacity="0.8">③ COURT OF THE WOMEN</text>
+<text x="1012.0" y="476.0" font-size="10.5" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.8">ATRIO DE LAS MUJERES</text>
+<rect x="856" y="306" width="46" height="46" rx="0" ry="0" fill="#dccfac" stroke="#7c2a2f" stroke-width="1.4"/>
+<rect x="1122" y="306" width="46" height="46" rx="0" ry="0" fill="#dccfac" stroke="#7c2a2f" stroke-width="1.4"/>
+<rect x="856" y="574" width="46" height="46" rx="0" ry="0" fill="#dccfac" stroke="#7c2a2f" stroke-width="1.4"/>
+<rect x="1122" y="574" width="46" height="46" rx="0" ry="0" fill="#dccfac" stroke="#7c2a2f" stroke-width="1.4"/>
+<rect x="1168" y="440" width="8" height="48" fill="#b08a2e"/>
+<circle cx="1196" cy="464" r="13" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="1196" y="469" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">a</text>
+<rect x="848" y="440" width="8" height="48" fill="#b08a2e"/>
+<circle cx="828" cy="464" r="13" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="828" y="469" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">b</text>
+<rect x="766" y="344" width="86" height="240" rx="0" ry="0" fill="#efe6cb" stroke="#7c2a2f" stroke-width="2"/>
+<text x="809.0" y="464.0" font-size="11.5" fill="#561c20" font-weight="bold" font-family="Georgia, 'Times New Roman', Times, serif" text-anchor="middle" opacity="0.85" transform="rotate(-90 809.0 464.0)">④ Court of Israel / Atrio de Israel</text>
+<rect x="470" y="344" width="296" height="240" rx="0" ry="0" fill="#f0e7cc" stroke="#7c2a2f" stroke-width="2"/>
+<text x="618.0" y="368" font-size="11" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.3" opacity="0.8">⑤ COURT OF THE PRIESTS / ATRIO DE LOS SACERDOTES</text>
+<rect x="600" y="420" width="72" height="72" rx="0" ry="0" fill="#9c6b34" stroke="#7c2a2f" stroke-width="2"/>
+<rect x="672" y="445" width="22" height="22" fill="#9c6b34" stroke="#7c2a2f" stroke-width="1.4"/>
+<circle cx="636" cy="400" r="15" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="636" y="405" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">6</text>
+<circle cx="528" cy="456" r="22" fill="#9c6b34" stroke="#7c2a2f" stroke-width="2"/>
+<circle cx="528" cy="456" r="11" fill="#c9e0e8" stroke="#7c2a2f" stroke-width="1"/>
+<circle cx="528" cy="406" r="15" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="528" y="411" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">7</text>
+<rect x="178" y="358" width="292" height="224" rx="0" ry="0" fill="#efdcb0" stroke="#7c2a2f" stroke-width="2.5"/>
+<circle cx="452" cy="356" r="15" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="452" y="361" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">8</text>
+<line x1="296" y1="358" x2="296" y2="582" stroke="#b08a2e" stroke-width="6"/>
+<line x1="296" y1="358" x2="296" y2="582" stroke="#7c2a2f" stroke-width="1.3" stroke-dasharray="4 4"/>
+<line x1="428" y1="358" x2="428" y2="582" stroke="#7c2a2f" stroke-width="1.4"/>
+<text x="237.0" y="336" font-size="11" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Holy of Holies</text>
+<text x="237.0" y="349" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Lugar Santísimo</text>
+<text x="237.0" y="466.0" font-size="10.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.5">EMPTY</text>
+<text x="237.0" y="480.0" font-size="10" fill="#7c2a2f" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">vacío</text>
+<ellipse cx="237.0" cy="504.0" rx="20" ry="11" fill="#dccfac" stroke="#7c2a2f" stroke-width="1.2"/>
+<text x="237.0" y="598" font-size="9.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.7">Foundation Stone / Piedra Fundamental</text>
+<text x="362.0" y="349" font-size="10.5" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Holy Place / Lugar Santo</text>
+<text x="449" y="597" font-size="9.5" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Porch</text>
+<text x="449" y="609" font-size="9" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Pórtico</text>
+<rect x="336.0" y="372" width="52" height="24" rx="3" ry="3" fill="#ecd9a0" stroke="#7c2a2f" stroke-width="1.4"/>
+<text x="362.0" y="368" font-size="8.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.75">Showbread / Panes</text>
+<line x1="362.0" y1="530" x2="362.0" y2="562" stroke="#8a661c" stroke-width="2.4"/>
+<line x1="346.0" y1="562" x2="378.0" y2="562" stroke="#8a661c" stroke-width="2.4"/>
+<path d="M362.0,552 Q347.0,538 347.0,528" fill="none" stroke="#8a661c" stroke-width="1.6"/>
+<circle cx="347.0" cy="526" r="2.1" fill="#b08a2e"/>
+<path d="M362.0,552 Q352.0,538 352.0,528" fill="none" stroke="#8a661c" stroke-width="1.6"/>
+<circle cx="352.0" cy="526" r="2.1" fill="#b08a2e"/>
+<path d="M362.0,552 Q357.0,538 357.0,528" fill="none" stroke="#8a661c" stroke-width="1.6"/>
+<circle cx="357.0" cy="526" r="2.1" fill="#b08a2e"/>
+<path d="M362.0,552 Q362.0,538 362.0,528" fill="none" stroke="#8a661c" stroke-width="1.6"/>
+<circle cx="362.0" cy="526" r="2.1" fill="#b08a2e"/>
+<path d="M362.0,552 Q367.0,538 367.0,528" fill="none" stroke="#8a661c" stroke-width="1.6"/>
+<circle cx="367.0" cy="526" r="2.1" fill="#b08a2e"/>
+<path d="M362.0,552 Q372.0,538 372.0,528" fill="none" stroke="#8a661c" stroke-width="1.6"/>
+<circle cx="372.0" cy="526" r="2.1" fill="#b08a2e"/>
+<path d="M362.0,552 Q377.0,538 377.0,528" fill="none" stroke="#8a661c" stroke-width="1.6"/>
+<circle cx="377.0" cy="526" r="2.1" fill="#b08a2e"/>
+<text x="362.0" y="576" font-size="8.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.75">Menorah / Candelero</text>
+<rect x="310" y="454.0" width="30" height="30" rx="3" ry="3" fill="#ecd9a0" stroke="#7c2a2f" stroke-width="1.4"/>
+<text x="325" y="498.0" font-size="8.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.75">Incense</text>
+<line x1="70" y1="754" x2="1430" y2="754" stroke="#b08a2e" stroke-width="1.4"/>
+<circle cx="90" cy="781" r="12" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="90" y="786" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">1</text>
+<text x="112" y="786" font-size="14.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Court of the Gentiles</text>
+<text x="112" y="803" font-size="13" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Atrio de los Gentiles</text>
+<circle cx="90" cy="829" r="12" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="90" y="834" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">2</text>
+<text x="112" y="834" font-size="14.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">The Soreg — warning barrier</text>
+<text x="112" y="851" font-size="13" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El Soreg — barrera de advertencia</text>
+<circle cx="90" cy="877" r="12" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="90" y="882" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">3</text>
+<text x="112" y="882" font-size="14.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Court of the Women</text>
+<text x="112" y="899" font-size="13" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Atrio de las Mujeres</text>
+<circle cx="90" cy="925" r="12" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="90" y="930" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">4</text>
+<text x="112" y="930" font-size="14.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Court of Israel</text>
+<text x="112" y="947" font-size="13" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Atrio de Israel</text>
+<circle cx="720" cy="781" r="12" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="720" y="786" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">5</text>
+<text x="742" y="786" font-size="14.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Court of the Priests</text>
+<text x="742" y="803" font-size="13" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Atrio de los Sacerdotes</text>
+<circle cx="720" cy="829" r="12" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="720" y="834" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">6</text>
+<text x="742" y="834" font-size="14.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Altar of Burnt Offering</text>
+<text x="742" y="851" font-size="13" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Altar del Holocausto</text>
+<circle cx="720" cy="877" r="12" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="720" y="882" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">7</text>
+<text x="742" y="882" font-size="14.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">The Laver</text>
+<text x="742" y="899" font-size="13" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">La Fuente</text>
+<circle cx="720" cy="925" r="12" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="720" y="930" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">8</text>
+<text x="742" y="930" font-size="14.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">The Temple (Porch · Holy Place · Holy of Holies)</text>
+<text x="742" y="947" font-size="13" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El Templo (Pórtico · Lugar Santo · Lugar Santísimo)</text>
+<text x="90" y="978" font-size="11.5" fill="#561c20" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Gates:  ⓐ Beautiful Gate / Puerta Hermosa (Acts 3)   ·   ⓑ Nicanor Gate / Puerta de Nicanor</text>
+<text x="750.0" y="1012" font-size="11.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">In the Holy Place stood the Menorah, the Table of Showbread, and the Altar of Incense. The Holy of Holies stood empty — the ark was lost when the First Temple fell.</text>
+<text x="750.0" y="1030" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">En el Lugar Santo estaban el Candelero, la Mesa de los Panes y el Altar del Incienso. El Lugar Santísimo estaba vacío — el arca se perdió al caer el Primer Templo.</text>
+<text x="750.0" y="1058" font-size="11" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Chapala Theological Seminary  ·  Seminario Teológico de Chapala — traditional reconstruction, simplified / reconstrucción tradicional, simplificada</text>
+</svg>
+<figcaption style="font-family:Georgia,'Times New Roman',serif;font-size:0.9em;line-height:1.5;margin-top:10px;color:#561c20;"><span style="font-weight:bold;">Herod's Temple — where Jesus taught in His final week, and whose veil was torn at the cross.</span><br><span style="font-style:italic;color:#8a661c;">El Templo de Herodes — donde Jesús enseñó en su última semana, y cuyo velo se rasgó en la cruz.</span></figcaption>
+</figure>
+<h2 class="sec" id="t-mc">Multiple Choice</h2>
+  <div id="mcWrap"></div>
+
+  <h2 class="sec" id="t-sa">Short Answer</h2>
+  <p class="status" id="t-saNote"></p>
+  <div id="saWrap"></div>
+
+  <div class="foot">
+    <button class="btn primary" id="completeBtn" type="button"></button>
+    <div class="status" id="statusMsg"></div>
+    <a class="next hide" id="nextLink" href="CTSLOCUnit8.html"></a>
+  </div>
+</div>
+
+<div class="modal hide" id="reg">
+  <div class="box">
+    <h3 id="m-h">Welcome</h3>
+    <p id="m-p" style="font-size:.9rem;color:var(--muted);margin:0"></p>
+    <label id="m-nl">Your name</label>
+    <input id="m-name" type="text" autocomplete="name" aria-label="m name">
+    <label id="m-tl">Track</label>
+    <select id="m-track" aria-label="m track">
+      <option value="cert">Certificate</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div style="margin-top:16px"><button class="btn primary" id="m-go" type="button">Begin</button></div>
+  </div>
+</div>
+
+<script>
+var CFG={course:'loc',unit:7,totalUnits:10,progressKey:'cts_loc_progress',
+  next:'CTSLOCUnit8.html',cert:'CTSLOCCertificate.html',lockKey:'cts_loc_u7_lock',showReg:false};
+var DATA={"mc": [{"en": "At the Triumphal Entry, Jesus deliberately rode into Jerusalem on:", "es": "En la entrada triunfal, Jesús entró a propósito en Jerusalén sobre:", "oen": ["a donkey's colt, fulfilling Zechariah 9:9", "a white war-horse", "a chariot", "on foot"], "oes": ["un pollino de asna, cumpliendo Zacarías 9:9", "un caballo blanco de guerra", "un carro", "a pie"], "c": 21, "xen": "Matthew 21:5 — the humble King.", "xes": "Mateo 21:5 — el Rey humilde."}, {"en": "The crowds at the entry cried:", "es": "Las multitudes en la entrada clamaron:", "oen": ["“Crucify Him!”", "“Hail Caesar!”", "“Hosanna to the Son of David!”", "“He is Elijah!”"], "oes": ["“¡Crucifícale!”", "“¡Salve, César!”", "“¡Hosanna al Hijo de David!”", "“¡Es Elías!”"], "c": 30, "xen": "Matthew 21:9.", "xes": "Mateo 21:9."}, {"en": "As He approached the city, Jesus:", "es": "Al acercarse a la ciudad, Jesús:", "oen": ["rejoiced openly", "wept over Jerusalem", "called down fire", "hid Himself"], "oes": ["se regocijó abiertamente", "lloró sobre Jerusalén", "hizo descender fuego", "se escondió"], "c": 36, "xen": "Luke 19:41–42 — they did not know the things of peace.", "xes": "Lucas 19:41–42 — no conocieron lo que es para su paz."}, {"en": "In the temple Jesus drove out the merchants, saying His Father's house was made:", "es": "En el templo Jesús echó a los mercaderes, diciendo que la casa de su Padre fue hecha:", "oen": ["a place of teaching", "a court of judges", "a treasury", "a den of thieves instead of a house of prayer"], "oes": ["un lugar de enseñanza", "un tribunal de jueces", "una tesorería", "cueva de ladrones en vez de casa de oración"], "c": 45, "xen": "Matthew 21:13.", "xes": "Mateo 21:13."}, {"en": "To the question about taxes, Jesus answered:", "es": "A la pregunta sobre los tributos, Jesús respondió:", "oen": ["“Render to Caesar the things that are Caesar's, and to God the things that are God's”", "“Pay no taxes”", "“Caesar owns nothing”", "“Ask the priests”"], "oes": ["“Dad a César lo que es de César, y a Dios lo que es de Dios”", "“No paguéis tributos”", "“César nada posee”", "“Preguntad a los sacerdotes”"], "c": 49, "xen": "Matthew 22:21.", "xes": "Mateo 22:21."}, {"en": "Watching the offering, Jesus said the poor widow gave more than all because she:", "es": "Observando la ofrenda, Jesús dijo que la viuda pobre dio más que todos porque ella:", "oen": ["gave the largest coin", "put in all that she had, out of her poverty", "gave publicly", "gave to the priests"], "oes": ["dio la moneda mayor", "echó todo lo que tenía, de su pobreza", "dio en público", "dio a los sacerdotes"], "c": 57, "xen": "Mark 12:44 — giving is measured by the heart.", "xes": "Marcos 12:44 — el dar se mide por el corazón."}, {"en": "On the Mount of Olives, the command Jesus pressed above the rest was:", "es": "En el monte de los Olivos, el mandato que Jesús apremió sobre todos fue:", "oen": ["“Fast and pray”", "“Rebuild the temple”", "“Flee the city”", "“Watch, for you do not know what hour your Lord is coming”"], "oes": ["“Ayunad y orad”", "“Reedificad el templo”", "“Huid de la ciudad”", "“Velad, porque no sabéis a qué hora ha de venir vuestro Señor”"], "c": 66, "xen": "Matthew 24:42 — readiness, whatever the order of last things.", "xes": "Mateo 24:42 — estar listo, sea cual sea el orden de lo postrero."}, {"en": "Judas Iscariot agreed to betray Jesus for:", "es": "Judas Iscariote se ajustó a entregar a Jesús por:", "oen": ["a position of power", "a hundred denarii", "thirty pieces of silver", "nothing at all"], "oes": ["un puesto de poder", "cien denarios", "treinta piezas de plata", "nada en absoluto"], "c": 72, "xen": "Matthew 26:15.", "xes": "Mateo 26:15."}, {"en": "In the upper room, Jesus showed servant love by:", "es": "En el aposento alto, Jesús mostró amor de siervo al:", "oen": ["anointing their heads", "serving the wine", "seating them by rank", "washing the disciples' feet"], "oes": ["ungir sus cabezas", "servir el vino", "sentarlos por rango", "lavar los pies de los discípulos"], "c": 80, "xen": "John 13 — the Lord doing the slave's task.", "xes": "Juan 13 — el Señor haciendo la tarea del esclavo."}, {"en": "When Peter refused to be washed, Jesus said:", "es": "Cuando Pedro rehusó ser lavado, Jesús dijo:", "oen": ["“Then sit down”", "“If I do not wash you, you have no part with Me”", "“As you wish”", "“You shame Me”"], "oes": ["“Entonces siéntate”", "“Si no te lavare, no tendrás parte conmigo”", "“Como quieras”", "“Me avergüenzas”"], "c": 85, "xen": "John 13:8.", "xes": "Juan 13:8."}, {"en": "The “new commandment” Jesus gave was:", "es": "El “mandamiento nuevo” que Jesús dio fue:", "oen": ["“love one another; as I have loved you”", "“tithe carefully”", "“keep the Sabbath”", "“fear the Lord”"], "oes": ["“que os améis unos a otros; como yo os he amado”", "“diezmad con cuidado”", "“guardad el sábado”", "“temed al Señor”"], "c": 91, "xen": "John 13:34 — the mark of His disciples.", "xes": "Juan 13:34 — la marca de sus discípulos."}, {"en": "Instituting the Supper, Jesus said of the cup:", "es": "Al instituir la Cena, Jesús dijo de la copa:", "oen": ["“This is the blood of bulls”", "“Drink for your health”", "“This cup is the new covenant in My blood”", "“This seals the old law”"], "oes": ["“Esta es la sangre de toros”", "“Bebed por vuestra salud”", "“Esta copa es el nuevo pacto en mi sangre”", "“Esto sella la ley antigua”"], "c": 100, "xen": "Luke 22:20 — a memorial until He comes.", "xes": "Lucas 22:20 — un memorial hasta que venga."}, {"en": "“I am the way, the truth, and the life. No one comes to the Father except...”", "es": "“Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino...”", "oen": ["by works", "by the law", "through Moses", "through Me"], "oes": ["por las obras", "por la ley", "por Moisés", "por mí"], "c": 108, "xen": "John 14:6 — the only road home to God.", "xes": "Juan 14:6 — el único camino a Dios."}, {"en": "Jesus promised to send the disciples:", "es": "Jesús prometió enviar a los discípulos:", "oen": ["an army of angels", "the Comforter, the Spirit of truth", "a new prophet", "earthly riches"], "oes": ["un ejército de ángeles", "el Consolador, el Espíritu de verdad", "un nuevo profeta", "riquezas terrenales"], "c": 113, "xen": "John 14:16–17.", "xes": "Juan 14:16–17."}, {"en": "“I am the true vine”; apart from Him, Jesus said:", "es": "“Yo soy la vid verdadera”; separado de Él, Jesús dijo:", "oen": ["a branch can bear no fruit", "the vine dies", "a branch grows stronger", "the fruit is bitter"], "oes": ["una rama no puede llevar fruto", "la vid muere", "una rama se fortalece", "el fruto es amargo"], "c": 119, "xen": "John 15:4–5 — fruit only in union with Him.", "xes": "Juan 15:4–5 — fruto solo en unión con Él."}, {"en": "In Gethsemane Jesus prayed:", "es": "En Getsemaní Jesús oró:", "oen": ["“Let them all be saved”", "“Spare the disciples”", "“Not as I will, but as You will”", "“Send legions of angels”"], "oes": ["“Que todos sean salvos”", "“Libra a los discípulos”", "“No sea como yo quiero, sino como tú”", "“Envía legiones de ángeles”"], "c": 128, "xen": "Matthew 26:39 — perfect surrender to the Father.", "xes": "Mateo 26:39 — entrega perfecta al Padre."}, {"en": "Luke records that in the garden Jesus' sweat became:", "es": "Lucas registra que en el huerto el sudor de Jesús se hizo:", "oen": ["cold as ice", "like great drops of blood", "a healing balm", "pure water"], "oes": ["frío como hielo", "como grandes gotas de sangre", "un bálsamo sanador", "agua pura"], "c": 134, "xen": "Luke 22:44.", "xes": "Lucas 22:44."}, {"en": "While Jesus prayed, the disciples:", "es": "Mientras Jesús oraba, los discípulos:", "oen": ["fell asleep", "kept watch faithfully", "sang hymns", "fled at once"], "oes": ["se durmieron", "velaron fielmente", "cantaron himnos", "huyeron de inmediato"], "c": 140, "xen": "Matthew 26:40 — “Could you not watch one hour?”", "xes": "Mateo 26:40 — “¿No pudisteis velar una hora?”"}, {"en": "Judas identified Jesus to the arresting band with:", "es": "Judas identificó a Jesús ante la turba que lo prendió con:", "oen": ["a pointing finger", "a written note", "a torch", "a kiss"], "oes": ["un dedo señalando", "una nota escrita", "una antorcha", "un beso"], "c": 150, "xen": "Matthew 26:49 — friendship turned to treachery.", "xes": "Mateo 26:49 — amistad vuelta traición."}, {"en": "When Jesus was seized in the garden, the disciples:", "es": "Cuando Jesús fue prendido en el huerto, los discípulos:", "oen": ["fought to the death", "followed openly", "all forsook Him and fled", "called for help"], "oes": ["pelearon hasta morir", "le siguieron abiertamente", "todos le abandonaron y huyeron", "pidieron ayuda"], "c": 156, "xen": "Matthew 26:56 — the Shepherd struck, the sheep scattered.", "xes": "Mateo 26:56 — herido el Pastor, dispersadas las ovejas."}], "sa": [{"en": "Explain the meaning of the Triumphal Entry (Matt 21; Luke 19).", "es": "Explique el significado de la entrada triunfal (Mateo 21; Lucas 19).", "men": "Jesus rode into Jerusalem on a donkey's colt, deliberately fulfilling Zechariah's word that the King comes lowly and humble, not on a war-horse. The crowds spread garments and palm branches and cried “Hosanna to the Son of David.” Yet He wept over the city, for He knew the same crowds would soon cry “Crucify Him.” The King had come to His own, and His own would not receive Him.", "mes": "Jesús entró en Jerusalén sobre un pollino de asna, cumpliendo a propósito la palabra de Zacarías de que el Rey viene manso y humilde, no en caballo de guerra. Las multitudes tendieron mantos y ramas de palmera y clamaron “¡Hosanna al Hijo de David!” Pero Él lloró sobre la ciudad, pues sabía que las mismas multitudes pronto clamarían “¡Crucifícale!” El Rey había venido a lo suyo, y los suyos no le recibirían.", "ken": ["jerusalem", "donkey", "king", "humble", "hosanna", "wept", "crowd", "zechariah"], "kes": ["jerusalen", "pollino", "rey", "humilde", "hosanna", "lloro", "multitud", "zacarias"]}, {"en": "Describe the cleansing of the temple and Jesus' teaching that week (Matt 21-22; Mark 12).", "es": "Describa la purificación del templo y la enseñanza de Jesús esa semana (Mateo 21-22; Marcos 12).", "men": "Jesus drove the merchants and money-changers from the temple, saying His Father's house of prayer had been made a den of thieves. All week He turned back the authorities' traps: render to Caesar what is Caesar's and to God what is God's; love God and neighbor as the great commandment; and He praised the poor widow who gave two mites, all she had, more than the rich.", "mes": "Jesús echó a los mercaderes y cambistas del templo, diciendo que la casa de oración de su Padre había sido hecha cueva de ladrones. Toda la semana desbarató las trampas de las autoridades: dad a César lo que es de César y a Dios lo que es de Dios; amar a Dios y al prójimo como el gran mandamiento; y alabó a la viuda pobre que dio dos moneditas, todo lo que tenía, más que los ricos.", "ken": ["temple", "prayer", "thieves", "caesar", "commandment", "widow", "authorit", "trap"], "kes": ["templo", "oracion", "ladron", "cesar", "mandamiento", "viuda", "autoridad", "trampa"]}, {"en": "Explain the footwashing and the new commandment (John 13).", "es": "Explique el lavamiento de los pies y el mandamiento nuevo (Juan 13).", "men": "On the night He was betrayed, Jesus rose, took a towel, and washed the disciples' feet, the Lord doing the slave's task. When Peter refused, Jesus said, “If I do not wash you, you have no part with Me.” He taught that they ought to wash one another's feet, and gave a new commandment: love one another as He had loved them, by which all would know they are His disciples.", "mes": "La noche en que fue entregado, Jesús se levantó, tomó una toalla y lavó los pies de los discípulos, el Señor haciendo la tarea del esclavo. Cuando Pedro rehusó, Jesús dijo: “Si no te lavare, no tendrás parte conmigo.” Enseñó que debían lavarse los pies unos a otros, y dio un mandamiento nuevo: amarse unos a otros como él los había amado, por lo cual todos sabrían que son sus discípulos.", "ken": ["wash", "feet", "peter", "slave", "commandment", "love", "disciple", "towel"], "kes": ["lavar", "pies", "pedro", "esclavo", "mandamiento", "amar", "discipul", "toalla"]}, {"en": "Explain the institution of the Lord's Supper (Luke 22; 1 Cor 11).", "es": "Explique la institución de la Cena del Señor (Lucas 22; 1 Cor 11).", "men": "Taking bread, Jesus gave thanks, broke it, and said, “This is My body which is given for you; do this in remembrance of Me.” He took the cup and said, “This cup is the new covenant in My blood, which is shed for you.” He gave the Supper as a memorial of His death, to keep until He comes, the bread for His body and the cup for the new covenant sealed in His blood.", "mes": "Tomando pan, Jesús dio gracias, lo partió y dijo: “Esto es mi cuerpo, que por vosotros es dado; haced esto en memoria de mí.” Tomó la copa y dijo: “Esta copa es el nuevo pacto en mi sangre, que por vosotros se derrama.” Dio la Cena como memorial de su muerte, para guardar hasta que venga, el pan por su cuerpo y la copa por el nuevo pacto sellado en su sangre.", "ken": ["bread", "body", "cup", "covenant", "blood", "remembrance", "memorial", "supper"], "kes": ["pan", "cuerpo", "copa", "pacto", "sangre", "memoria", "cena", "nuevo"]}, {"en": "Summarize the Upper Room Discourse: the way, the Spirit, and the vine (John 14-17).", "es": "Resuma el discurso del aposento alto: el camino, el Espíritu y la vid (Juan 14-17).", "men": "Jesus comforted the disciples, saying, “Let not your heart be troubled,” and “I am the way, the truth, and the life; no one comes to the Father except through Me.” He promised the Comforter, the Spirit of truth, to abide with them forever, and called Himself the true vine, in whom they must abide to bear fruit. He left them His peace and prayed that they might be one.", "mes": "Jesús consoló a los discípulos diciendo: “No se turbe vuestro corazón,” y “Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí.” Prometió el Consolador, el Espíritu de verdad, para morar con ellos para siempre, y se llamó la vid verdadera, en quien deben permanecer para llevar fruto. Les dejó su paz y oró para que fuesen uno.", "ken": ["way", "truth", "life", "father", "spirit", "vine", "abide", "peace"], "kes": ["camino", "verdad", "vida", "padre", "espiritu", "vid", "permanec", "paz"]}, {"en": "Explain the agony and submission in Gethsemane (Matt 26; Luke 22).", "es": "Explique la agonía y la entrega en Getsemaní (Mateo 26; Lucas 22).", "men": "In the garden of Gethsemane Jesus was sorrowful even to death and prayed, “Father, if it is possible, let this cup pass from Me; nevertheless, not as I will, but as You will.” He prayed three times, and His sweat became like great drops of blood; an angel strengthened Him. Truly God and truly man, His human will drew back from the cup of wrath yet surrendered to the Father. He chose the cross.", "mes": "En el huerto de Getsemaní Jesús estaba triste hasta la muerte y oró: “Padre, si es posible, pase de mí esta copa; pero no sea como yo quiero, sino como tú.” Oró tres veces, y su sudor se hizo como grandes gotas de sangre; un ángel lo fortaleció. Verdadero Dios y verdadero hombre, su voluntad humana retrocedió ante la copa de ira mas se entregó al Padre. Escogió la cruz.", "ken": ["gethsemane", "cup", "father", "will", "blood", "sweat", "surrender", "cross"], "kes": ["getsemani", "copa", "padre", "voluntad", "sangre", "sudor", "entreg", "cruz"]}, {"en": "Describe the betrayal and arrest of Jesus (Matt 26; Luke 22).", "es": "Describa la traición y el prendimiento de Jesús (Mateo 26; Lucas 22).", "men": "On the way Jesus foretold that all would stumble and that Peter would deny Him three times before the rooster crowed. In the garden Judas led a band of men and betrayed Him with a kiss, the sign of friendship turned to treachery. They seized Jesus, and all the disciples forsook Him and fled. The Shepherd was struck and the sheep scattered; it was the hour of the power of darkness.", "mes": "De camino Jesús predijo que todos se escandalizarían y que Pedro le negaría tres veces antes que el gallo cantara. En el huerto Judas guió una turba y le entregó con un beso, la señal de amistad vuelta traición. Prendieron a Jesús, y todos los discípulos le abandonaron y huyeron. El Pastor fue herido y las ovejas dispersadas; era la hora de la potestad de las tinieblas.", "ken": ["judas", "betray", "kiss", "peter", "deny", "seized", "fled", "darkness"], "kes": ["judas", "entreg", "beso", "pedro", "negar", "prend", "huyeron", "tinieblas"]}, {"en": "How does this week show the divine and human together?", "es": "¿Cómo muestra esta semana lo divino y lo humano juntos?", "men": "The week shows the divine and human together. He who is the way, the truth, and the life sweat great drops of blood in a garden; He who knelt to wash dusty feet is the Lamb about to be slain. Truly God and truly man, He felt the full horror of the cup yet bowed in perfect surrender. He was not dragged to the cross but chose it freely for our sake.", "mes": "La semana muestra lo divino y lo humano juntos. El que es el camino, la verdad y la vida sudó grandes gotas de sangre en un huerto; el que se arrodilló a lavar pies polvorientos es el Cordero a punto de ser inmolado. Verdadero Dios y verdadero hombre, sintió todo el horror de la copa mas se inclinó en perfecta entrega. No fue arrastrado a la cruz, sino que la escogió libremente por nosotros.", "ken": ["divine", "human", "blood", "wash", "lamb", "surrender", "cross", "chose"], "kes": ["divino", "humano", "sangre", "lavar", "cordero", "entrega", "cruz", "escog"]}, {"en": "Why is it said that every step of the week led to the cross by Jesus' own choice?", "es": "¿Por qué se dice que cada paso de la semana llevó a la cruz por la propia elección de Jesús?", "men": "In one week the King entered to Hosannas, cleansed the temple, silenced His foes, washed His friends' feet, gave them the Supper, promised the Spirit, and surrendered in the garden. Every step led toward the cross, and every step was chosen, not forced. He came humble, He served, and He accepted the cup; the Lamb went willingly toward His own sacrifice.", "mes": "En una semana el Rey entró entre Hosannas, limpió el templo, hizo callar a sus enemigos, lavó los pies de sus amigos, les dio la Cena, prometió el Espíritu y se entregó en el huerto. Cada paso llevaba a la cruz, y cada paso fue escogido, no forzado. Vino humilde, sirvió y aceptó la copa; el Cordero fue de buena voluntad hacia su propio sacrificio.", "ken": ["king", "temple", "supper", "spirit", "cross", "chose", "humble", "cup"], "kes": ["rey", "templo", "cena", "espiritu", "cruz", "escog", "humilde", "copa"]}, {"en": "What does the week that changed the world ask of us?", "es": "¿Qué nos pide la semana que cambió el mundo?", "men": "The week lays its claim on us. We are to receive the King who comes humble, eat at His table in remembrance of His broken body and shed blood, abide in the true vine so we bear fruit, and watch because the hour is near. The One who is the way, the truth, and the life calls us to follow Him, even toward a cross.", "mes": "La semana pone su reclamo sobre nosotros. Hemos de recibir al Rey que viene humilde, comer a su mesa en memoria de su cuerpo partido y su sangre derramada, permanecer en la vid verdadera para llevar fruto, y velar porque la hora está cerca. El que es el camino, la verdad y la vida nos llama a seguirle, aun hacia una cruz.", "ken": ["receive", "king", "remembrance", "abide", "vine", "watch", "follow", "humble"], "kes": ["recibir", "rey", "memoria", "permanec", "vid", "velar", "seguir", "humilde"]}]};
+
+/* ---- storage hardening (Android content:// safe) ---- */
+var _ctsMem={};
+function lsGet(k){try{var v=localStorage.getItem(k);return v===null?(k in _ctsMem?_ctsMem[k]:null):v;}catch(e){return k in _ctsMem?_ctsMem[k]:null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}_ctsMem[k]=v;}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}delete _ctsMem[k];}
+
+/* ---- helpers ---- */
+function fold(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function kwHit(ans,kw){var a=fold(ans),k=fold(kw);if(!k)return false;
+  if(k.length<=3){return new RegExp('(^|[^a-z0-9])'+reEsc(k)+'([^a-z0-9]|$)').test(a);}
+  return new RegExp('(^|[^a-z0-9])'+reEsc(k)).test(a);}
+function saScore(ans,kws){var n=0;for(var i=0;i<kws.length;i++){if(kwHit(ans,kws[i]))n++;}return n;}
+function mcCorrectIdx(code,qpos){return(((code-7*(qpos+3))%251)+251)%251;}
+
+var LET=['A','B','C','D'];
+var STATE={lang:'en',track:'cert',name:'',mc:[],sa:[],revealed:false};
+for(var i=0;i<DATA.mc.length;i++)STATE.mc.push({answered:false,chosen:-1});
+for(var j=0;j<DATA.sa.length;j++)STATE.sa.push({checked:false,text:'',hits:0});
+
+var I18N={
+ en:{title:'The Life of Christ',unit:'Unit 7 · Passion Week',lang:'Espa\u00f1ol',
+   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
+   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
+   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
+   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
+   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
+   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
+   complete:'Complete Unit 7',
+   epigraph:'“O My Father... not as I will, but as You will.” (Matthew 26:39)',
+   mGood:'✓ Unit complete. You may continue to Unit 8.',
+   mShort:'Keep going \u2014 review the material and try again.',
+   nextTxt:'Next: Unit 8 →',
+   mh:'Welcome to The Life of Christ',mp:'Please register once. Your name and track carry across every CTS course on this site.',
+   mnl:'Your name',mtl:'Track',mgo:'Begin',
+   hitFmt:function(h){return h+' of 8 keywords';},
+   passV:'Pass',softV:'Practice noted'},
+ es:{title:'La Vida de Cristo',unit:'Unidad 7 · La Semana de la Pasión',lang:'English',
+   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
+   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
+   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
+   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
+   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
+   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
+   complete:'Completar la Unidad 7',
+   epigraph:'“Padre mío... no sea como yo quiero, sino como tú.” (Mateo 26:39)',
+   mGood:'✓ Unidad completa. Puede continuar a la Unidad 8.',
+   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
+   nextTxt:'Siguiente: Unidad 8 →',
+   mh:'Bienvenido a La Vida de Cristo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
+   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
+   hitFmt:function(h){return h+' de 8 palabras clave';},
+   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+};
+function T(){return I18N[STATE.lang];}
+function isMasters(){return STATE.track==='mdiv'||STATE.track==='thm';}
+function lockMin(){return isMasters()?15:2;}
+
+function $(id){return document.getElementById(id);}
+
+/* ---------- rendering ---------- */
+function renderTeaching(){
+  $('teach-en').className=STATE.lang==='en'?'':'hide';
+  $('teach-es').className=STATE.lang==='es'?'':'hide';
+}
+function renderChrome(){
+  var t=T();
+  document.documentElement.lang=STATE.lang;
+  $('t-title').textContent=t.title;$('t-unit').innerHTML=t.unit;
+  $('langBtn').textContent=t.lang;
+  $('t-greet').textContent=t.greet(STATE.name);
+  $('t-track').textContent=t.track(STATE.track);
+  $('epigraph').textContent=t.epigraph;
+  $('t-mc').textContent=t.mc;$('t-sa').textContent=t.sa;
+  $('t-saNote').textContent=isMasters()?t.saNoteMast:t.saNoteCert;
+  $('completeBtn').textContent=t.complete;
+  $('m-h').textContent=t.mh;$('m-p').textContent=t.mp;$('m-nl').textContent=t.mnl;
+  $('m-tl').textContent=t.mtl;$('m-go').textContent=t.mgo;
+}
+function renderMC(){
+  var wrap=$('mcWrap');wrap.innerHTML='';
+  for(var i=0;i<DATA.mc.length;i++){
+    (function(i){
+      var q=DATA.mc[i],st=STATE.mc[i];
+      var opts=STATE.lang==='en'?q.oen:q.oes;
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var expl=STATE.lang==='en'?q.xen:q.xes;
+      var correct=mcCorrectIdx(q.c,i);
+      var div=document.createElement('div');div.className='q';
+      var h='<div class="qn">'+(i+1)+'</div><div class="qp">'+prompt+'</div>';
+      div.innerHTML=h;
+      for(var o=0;o<4;o++){
+        (function(o){
+          var b=document.createElement('button');b.type='button';b.className='opt';
+          b.innerHTML='<span class="lt">'+LET[o]+'</span>'+opts[o];
+          if(st.answered){b.disabled=true;
+            if(o===correct)b.className='opt correct';
+            else if(o===st.chosen)b.className='opt wrong';}
+          else if(st.answered&&o===st.chosen){b.style.background='#efe7d2';b.style.borderColor='#d4af37';b.style.fontWeight='600';}
+          b.onclick=function(){if(st.answered)return;
+            STATE.mc[i].answered=true;STATE.mc[i].chosen=o;renderMC();};
+          div.appendChild(b);
+        })(o);
+      }
+      var e=document.createElement('div');e.className='expl'+(st.answered?' show':'');
+      e.textContent=expl;div.appendChild(e);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderSA(){
+  var wrap=$('saWrap');wrap.innerHTML='';var t=T();
+  for(var i=0;i<DATA.sa.length;i++){
+    (function(i){
+      var q=DATA.sa[i],st=STATE.sa[i];
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var model=STATE.lang==='en'?q.men:q.mes;
+      var div=document.createElement('div');div.className='q';
+      div.innerHTML='<div class="qn">'+(21+i)+'</div><div class="qp">'+prompt+'</div>';
+      var ta=document.createElement('textarea');ta.value=st.text;
+      ta.oninput=function(){STATE.sa[i].text=ta.value;};
+      div.appendChild(ta);
+      var btn=document.createElement('button');btn.type='button';btn.className='btn ghost';
+      btn.style.marginTop='8px';btn.textContent=t.check;
+      var res=document.createElement('div');res.className='sa-res'+(st.checked?' show':'');
+      function paint(){
+        var kws=STATE.lang==='en'?q.ken:q.kes;
+        var txt=STATE.sa[i].text||'';
+        if(txt.trim().length<100){
+          STATE.sa[i].hits=0;
+          res.innerHTML='<span class="sa-verdict soft">'+(STATE.lang==='en'?'Write a fuller answer (100 characters minimum).':'Escriba una respuesta m\u00e1s completa (m\u00ednimo 100 caracteres).')+'</span>';
+          res.classList.add('show');
+          return;
+        }
+        var hits=saScore(txt,kws);STATE.sa[i].hits=hits;
+        var pass=hits>=3;
+        var verdict=pass?('<span class="sa-verdict pass">'+t.passV+'</span>'):('<span class="sa-verdict soft">'+t.softV+'</span>');
+        res.innerHTML=verdict+' &middot; '+t.hitFmt(hits)+
+          '<div class="model"><div class="ml">'+t.model+'</div>'+model+'</div>';
+        res.className='sa-res show';STATE.sa[i].checked=true;
+      }
+      btn.onclick=function(){
+        if(!STATE.sa[i].text.trim()){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.blank+'</span>';return;}
+        if(STATE.sa[i].text.trim().length<100){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.minLen+'</span>';return;}
+        paint();
+      };
+      if(st.checked&&st.text.trim())paint();
+      div.appendChild(btn);div.appendChild(res);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderAll(){renderChrome();renderTeaching();renderMC();renderSA();refreshLock();}
+
+/* ---------- completion + lockout ---------- */
+function lockedUntil(){var v=lsGet(CFG.lockKey);return v?parseInt(v,10):0;}
+function refreshLock(){
+  var until=lockedUntil(),now=Date.now();
+  var btn=$('completeBtn');
+  if(until>now){
+    btn.disabled=true;
+    var mins=Math.ceil((until-now)/60000);
+    $('statusMsg').className='status lock';
+    $('statusMsg').textContent=(STATE.lang==='en'?'Locked. Try again in ':'Bloqueado. Reintente en ')+mins+(STATE.lang==='en'?' min.':' min.');
+  }else{btn.disabled=false;}
+}
+function markComplete(){
+  var p={};try{p=JSON.parse(lsGet(CFG.progressKey)||'{}');}catch(e){p={};}
+  p[CFG.unit]=true;lsSet(CFG.progressKey,JSON.stringify(p));
+  var t=T();
+  $('statusMsg').className='status ok';$('statusMsg').textContent=t.mGood;
+  var nl=$('nextLink');nl.href=CFG.next;nl.textContent=t.nextTxt;nl.className='next';
+  $('completeBtn').disabled=true;
+}
+function onComplete(){
+  var t=T();
+  var mcCorrect=0,mcAnswered=0;
+  for(var i=0;i<DATA.mc.length;i++){if(STATE.mc[i].answered){mcAnswered++;
+    if(STATE.mc[i].chosen===mcCorrectIdx(DATA.mc[i].c,i))mcCorrect++;}}
+  var saPass=0;for(var j=0;j<DATA.sa.length;j++){if(STATE.sa[j].hits>=3)saPass++;}
+  var needMC=18,needSA=9;
+  if(mcAnswered<DATA.mc.length){
+    $('statusMsg').className='status warn';
+    $('statusMsg').textContent=(STATE.lang==='en'
+      ?'Answer all multiple-choice questions first ('+mcAnswered+'/20).'
+      :'Responda primero todas las preguntas de opci\u00f3n m\u00faltiple ('+mcAnswered+'/20).');
+    return;
+  }
+  STATE.revealed=true;renderMC();
+  var saOk = isMasters() ? (saPass>=needSA) : true;
+  if(mcCorrect>=needMC&&saOk){markComplete();return;}
+  // genuine fail -> lockout
+  lsSet(CFG.lockKey,String(Date.now()+lockMin()*60000));
+  $('statusMsg').className='status lock';
+  $('statusMsg').textContent=(STATE.lang==='en'
+    ?('Not yet: MC '+mcCorrect+'/20 (need 18), SA '+saPass+'/10 (need 7). '+t.mShort)
+    :('A\u00fan no: OM '+mcCorrect+'/20 (necesita 18), RB '+saPass+'/10 (necesita 7). '+t.mShort));
+  refreshLock();
+}
+
+/* ---------- init ---------- */
+function startApp(){
+  STATE.lang=(lsGet('cts_lang')==='es')?'es':'en';
+  STATE.name=lsGet('cts_student')||'';
+  STATE.track=lsGet('cts_track')||'cert';
+  $('langBtn').onclick=function(){STATE.lang=STATE.lang==='en'?'es':'en';
+    lsSet('cts_lang',STATE.lang);renderAll();};
+  $('completeBtn').onclick=onComplete;
+  $('m-go').onclick=function(){
+    var nm=$('m-name').value.trim();var tk=$('m-track').value;
+    if(!nm){$('m-name').focus();return;}
+    STATE.name=nm;STATE.track=tk;
+    lsSet('cts_student',nm);lsSet('cts_track',tk);
+    $('reg').className='modal hide';renderAll();
+  };
+  if(CFG.showReg&&(!STATE.name||!lsGet('cts_track'))){
+    $('reg').className='modal';$('m-track').value=STATE.track;renderChrome();
+  }else{$('reg').className='modal hide';}
+  renderAll();
+  setInterval(refreshLock,30000);
+}
+if(typeof document!=='undefined'){
+  if(document.readyState!=='loading')startApp();
+  else document.addEventListener('DOMContentLoaded',startApp);
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSLOCReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

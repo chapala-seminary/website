@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Apologetics — Unit 4</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 5 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Apologetics — Unit 4: The Problem of Evil and Suffering</span><span class="lang-es">📖 Apologética — Unidad 4: El Problema del Mal y el Sufrimiento</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Surely He has borne our griefs and carried our sorrows." — Isaiah 53:4</span><span class="lang-es">"Ciertamente llevó él nuestras enfermedades, y sufrió nuestros dolores." — Isaías 53:4 (RVG)</span></p>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Isaiah 53:4</strong></p><div class="scripture">"Surely He has borne our griefs and carried our sorrows; yet we esteemed Him stricken, smitten by God, and afflicted." — Isaiah 53:4</div>
+
+<h3>The Hardest Question</h3>
+<p>We come now to the heaviest objection any believer will ever face, and I will not pretend it is light. If God is all-powerful, He could stop evil. If God is all-good, He would want to. Yet evil remains — the cruelty of men, the dying of children, the earthquake that swallows a village in the night. The skeptic lays it down like a trump card: either your God cannot stop suffering, and He is not almighty, or He will not, and He is not good. Do not wave this away. Do not answer a grieving mother with a syllogism. The honest apologist feels the weight of this question, because it is the question of every man who has ever stood beside a grave. We will not pretend to solve the whole mystery in one unit. But we will show that the Christian faith, of all the faiths on earth, has the deepest answer — and that the answer is not finally an argument but a Person.</p>
+
+<h3>The Boomerang</h3>
+<p>Begin with something the skeptic rarely notices. When he calls the cancer and the cruelty <em>evil</em>, he has reached, without meaning to, for a standard of good — and where did that standard come from? You cannot call a line crooked unless you have some idea of a straight line. You cannot rage against injustice unless somewhere within you there lives a sense of true justice that the world has violated. Some atheist philosophers have tried to defend objective morality without appealing to God, arguing that moral facts are simply brute features of reality, the way mathematical facts are. That is a real position, not a fantasy, and the honest apologist should not pretend otherwise. But the Christian can still press a fair question: on a purely naturalistic picture, where the universe is ultimately just matter in motion, it is not obvious why moral obligation should exist at all, or why anyone would be bound by it rather than merely preferring it. Theism offers a more natural grounding — a good and personal God whose character is the standard, and whose authority explains why the standard binds us. The very force of the atheist's objection depends on treating some moral law as real, the law we discussed in Unit 2, and the apologist can press him to say where, on his own worldview, that law's reality and authority actually come from. So the problem of evil, pressed hard enough, does not abolish God; it opens the deeper question of what could ground the standard being used to judge Him.</p>
+
+<h3>Evil Is Not a Thing</h3>
+<p>Now let us be precise about what evil is, for here many stumble. Evil is not a substance God created, as though He stocked the world with a dark material called wickedness. Evil is a <em>privation</em> — the twisting, the spoiling, the absence of a good that ought to be there. Darkness is not a thing; it is the absence of light. Cold is not a thing; it is the absence of heat. Rust is not a thing God made; it is the corruption of good iron. In the same way, cruelty is love gone wrong, lust is desire gone wrong, pride is a good self-regard swollen into a tumor. God made a world and called it good, and every evil in it is that good bent, broken, or robbed. This matters, because it means God is not the author of evil. He is the author of a good that creatures have spoiled.</p>
+
+<h3>The Price of Love</h3>
+<p>But why would God permit the spoiling at all? Here is the costliest truth in the unit. God could have made a race of puppets who never sinned, who moved only as He pulled the strings, who never once chose against Him. But a puppet cannot love. Love that is forced is not love at all. The husband who programs his wife to say "I love you" has gained a recording, not a bride; the words are worthless precisely because she could not have said otherwise. If God wanted creatures who could truly love Him — and He did — then He had to make them free, and freedom that cannot choose against the good is not freedom; it is a leash. (This is what philosophers call libertarian freedom, and most versions of this free-will defense rely on it; other serious Christian thinkers, particularly in the Reformed tradition, have proposed different accounts of freedom and responded to the problem of evil in other ways. But the reasoning here is the one this unit follows, and it is the reasoning most believers reach for instinctively.) So God took the great risk of liberty. He opened the door to love, and through the same open door walked sin. The possibility of the cruelest evil and the possibility of the truest love came into the world hand in hand, for they are the same possibility: the freedom of a creature who can say yes only because he could have said no.</p>
+
+<h3>The Shadows in the Painting</h3>
+<div class="illustration"><strong>💡 Consider a painting.</strong> Stand before a great canvas and you will find that the master did not flood it all with light. There are shadows in it, dark passages, places where the paint is almost black. Take a brush and try to "fix" the painting by washing all the shadows out into bright color, and you will not improve it; you will destroy it. The depth, the drama, the very glory of the light is known only against the dark. I do not say this to make suffering pretty — God forbid that we should ever stand before someone's grief and call it a brushstroke. I say it only to answer the demand that a good world must be a world with no shadow in it. A world with no possibility of sorrow would be a world with no possibility of love, courage, mercy, or sacrifice — a flat and tintless thing, not a masterpiece.</div>
+<p>And yet, having said that, I must be honest with you, for the illustration goes only so far.</p>
+
+<h3>But What of the Innocent?</h3>
+<p>Free will explains the evil that men choose. But what of the suffering no one chose — the child with cancer, the village under the wave, the baby who never drew a guilty breath? Here I will not hand you a tidy answer, and you must beware of anyone who does. We live in a world that is not only free but fallen, where the whole creation groans, and some of its groaning we cannot trace to any cause we can name. There are sufferings before which the wisest believer can only fall silent. I would rather leave you with an honest ache than a dishonest answer. Job demanded that God explain Himself, and God never did explain; instead, God gave Job something better than an explanation. He gave Job Himself. And that points us to the one answer that goes all the way down.</p>
+
+<!-- SERMON_ARCHIVE_ENRICHMENT_START APOL4 EN -->
+<h3>When No Rescue Comes</h3>
+<p>Habakkuk gives the problem of suffering a pastoral form. The prophet prayed while violence and injustice continued around him and asked the question believers still ask: how long can we call for help when God seems silent? An older sermon by Dr. Cook uses the picture of survivors on a raft who were unexpectedly given food and rescued. We rejoice when the “seagull comes” &mdash; when the sick recover, the marriage is restored, the prodigal returns, or the crisis breaks. But faith is tested most severely when no rescue appears. Habakkuk's answer is not that suffering is unreal or that faithful people will always receive the outcome they request. God tells the prophet that He is at work in ways Habakkuk cannot yet understand, and the prophet learns to live by faith before he can see the whole explanation.</p>
+<p>This keeps Christian apologetics from giving glib answers to pain. The cross has already settled the question of whether God loves us, and the resurrection has displayed His power. What remains unanswered in a particular tragedy may still remain unanswered for a time. Biblical faith can therefore say both, “I do not understand,” and, “Yet I will trust Him.” That is not the absence of reason; it is trust resting on what God has already revealed when circumstances provide no immediate explanation.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END APOL4 EN -->
+
+<h3>The Crucified God</h3>
+<p>Here is what no other religion on earth can say. Our God did not stay above the suffering, safe and serene on a far throne, watching our tears through glass. He came down into it. He took on flesh that could be torn. He stood at the tomb of His friend and, though He knew He would raise him in moments, He wept. And at the last He stretched out His hands and let the nails go through them, and cried out in a darkness that swallowed the noon sun, "My God, my God, why have You forsaken Me?" — so that no sufferer could ever again say that God does not understand. As a man He was hungry, but as God He fed the thousands. As a man He grew weary, but as God He stilled the storm. As a man He bled and died, but as God He carried in His own body the griefs and sorrows of the world, as Isaiah foretold. The cross does not explain every pain. But it tells the sufferer the one thing he most needs to know: that he does not suffer alone, that God Himself has been here, in the dark, with the nails, and that the scars are still in His hands.</p>
+
+<h3>Meant for Evil, Meant for Good</h3>
+<p>One thing more. The God who entered our suffering is also able to weave it, without ever being its author, into a good we could not have imagined. Joseph, sold by his brothers into slavery and left to rot in a foreign prison, came at last to the men who had wronged him and said, "You meant evil against me; but God meant it for good" (Genesis 50:20). Notice he did not say the evil was good — it was real evil, and his brothers truly meant it. But God, the master weaver, took the dark thread the brothers spun in malice and worked it into a tapestry that saved a nation. This is the promise Paul makes to every believer: "All things work together for good to those who love God" (Romans 8:28). Not that all things are good, but that all things are woven for good by hands wise enough and strong enough to redeem even the worst.</p>
+
+<h3>What We Carry to the Suffering</h3>
+<p>So we hold the mystery humbly, but we hold the cross firmly. When we go to a man in his sorrow, we do not bring him a clever theory of evil; we bring him a wounded Savior who has been where he is. We move, as the skeptic never expects us to, from defense to invitation: the very evil he hurls at God is the proof that he longs for a justice this world cannot give — and that longing, like every other, has its answer in the God who bore our griefs. Do not be afraid of this question. Feel its weight, refuse the tidy lie, and then point, as you always must, to the hands with the scars in them.</p>
+<div class="scripture">"He was despised and rejected by men, a Man of sorrows and acquainted with grief." — Isaiah 53:3</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Isaías 53:4</strong></p><div class="scripture">"Ciertamente llevó él nuestras enfermedades, y sufrió nuestros dolores; y nosotros le tuvimos por azotado, por herido de Dios y abatido." — Isaías 53:4 (RVG)</div>
+
+<h3>La Pregunta Más Difícil</h3>
+<p>Llegamos ahora a la objeción más pesada que cualquier creyente jamás enfrentará, y no fingiré que es ligera. Si Dios es todopoderoso, podría detener el mal. Si Dios es todo bondad, querría hacerlo. Sin embargo el mal permanece — la crueldad de los hombres, la muerte de los niños, el terremoto que se traga una aldea en la noche. El escéptico lo pone sobre la mesa como una carta de triunfo: o su Dios no puede detener el sufrimiento, y no es todopoderoso, o no quiere, y no es bueno. No descarte esto. No responda a una madre afligida con un silogismo. El apologista honesto siente el peso de esta pregunta, porque es la pregunta de todo hombre que alguna vez ha estado junto a una tumba. No fingiremos resolver todo el misterio en una sola unidad. Pero mostraremos que la fe cristiana, de todas las fes de la tierra, tiene la respuesta más profunda — y que la respuesta no es finalmente un argumento sino una Persona.</p>
+
+<h3>El Bumerán</h3>
+<p>Comience con algo que el escéptico rara vez nota. Cuando llama <em>mal</em> al cáncer y a la crueldad, ha echado mano, sin querer, de una norma del bien — ¿y de dónde vino esa norma? No se puede llamar torcida a una línea a menos que se tenga alguna idea de una línea recta. No se puede clamar contra la injusticia a menos que en algún lugar dentro de uno viva un sentido de la justicia verdadera que el mundo ha violado. Algunos filósofos ateos han intentado defender la moralidad objetiva sin apelar a Dios, argumentando que los hechos morales son simplemente rasgos brutos de la realidad, de la misma manera que lo son los hechos matemáticos. Esa es una posición real, no una fantasía, y el apologista honesto no debería fingir lo contrario. Pero el cristiano todavía puede plantear una pregunta justa: en un cuadro puramente naturalista, donde el universo es en última instancia solo materia en movimiento, no es obvio por qué la obligación moral debería existir en absoluto, o por qué alguien estaría atado a ella en vez de simplemente preferirla. El teísmo ofrece un fundamento más natural — un Dios bueno y personal cuyo carácter es la norma, y cuya autoridad explica por qué esa norma nos obliga. La fuerza misma de la objeción del ateo depende de tratar alguna ley moral como real, la ley que discutimos en la Unidad 2, y el apologista puede presionarlo a decir de dónde, en su propia cosmovisión, vienen realmente la realidad y la autoridad de esa ley. Así que el problema del mal, presionado lo bastante fuerte, no abole a Dios; abre la pregunta más profunda de qué podría fundamentar la norma que se usa para juzgarlo.</p>
+
+<h3>El Mal No Es una Cosa</h3>
+<p>Ahora seamos precisos sobre lo que es el mal, pues aquí muchos tropiezan. El mal no es una sustancia que Dios creó, como si hubiera surtido el mundo con un material oscuro llamado maldad. El mal es una <em>privación</em> — la torcedura, el estropeo, la ausencia de un bien que debería estar allí. La oscuridad no es una cosa; es la ausencia de luz. El frío no es una cosa; es la ausencia de calor. El óxido no es una cosa que Dios hizo; es la corrupción del buen hierro. De la misma manera, la crueldad es el amor torcido, la lujuria es el deseo torcido, el orgullo es una buena estima propia hinchada hasta volverse un tumor. Dios hizo un mundo y lo llamó bueno, y todo mal en él es ese bien doblado, roto o robado. Esto importa, porque significa que Dios no es el autor del mal. Es el autor de un bien que las criaturas han estropeado.</p>
+
+<h3>El Precio del Amor</h3>
+<p>Pero ¿por qué permitiría Dios el estropeo en absoluto? Aquí está la verdad más costosa de la unidad. Dios pudo haber hecho una raza de marionetas que nunca pecaran, que se movieran solo cuando Él jalara los hilos, que ni una sola vez escogieran contra Él. Pero una marioneta no puede amar. El amor forzado no es amor en absoluto. El esposo que programa a su esposa para decir "te amo" ha ganado una grabación, no una novia; las palabras no valen nada precisamente porque ella no pudo haber dicho otra cosa. Si Dios quería criaturas que pudieran amarlo de veras — y así fue — entonces tuvo que hacerlas libres, y una libertad que no puede escoger contra el bien no es libertad; es una correa. (Esto es lo que los filósofos llaman libertad libertaria, y la mayoría de las versiones de esta defensa del libre albedrío se apoyan en ella; otros pensadores cristianos serios, particularmente en la tradición reformada, han propuesto otras maneras de entender la libertad y han respondido al problema del mal de otras formas. Pero el razonamiento aquí es el que sigue esta unidad, y es el razonamiento al que la mayoría de los creyentes recurre instintivamente.) Así que Dios tomó el gran riesgo de la libertad. Abrió la puerta al amor, y por esa misma puerta abierta entró el pecado. La posibilidad del mal más cruel y la posibilidad del amor más verdadero entraron al mundo de la mano, porque son la misma posibilidad: la libertad de una criatura que puede decir sí solo porque pudo haber dicho no.</p>
+
+<h3>Las Sombras en la Pintura</h3>
+<div class="illustration"><strong>💡 Considere una pintura.</strong> Párese ante un gran lienzo y hallará que el maestro no lo inundó todo de luz. Hay sombras en él, pasajes oscuros, lugares donde la pintura es casi negra. Tome un pincel e intente "arreglar" la pintura lavando todas las sombras en color brillante, y no la mejorará; la destruirá. La profundidad, el drama, la gloria misma de la luz se conoce solo contra lo oscuro. No digo esto para hacer bonito el sufrimiento — Dios no permita que jamás nos paremos ante el dolor de alguien y lo llamemos una pincelada. Lo digo solo para responder a la exigencia de que un mundo bueno deba ser un mundo sin ninguna sombra. Un mundo sin posibilidad de dolor sería un mundo sin posibilidad de amor, valor, misericordia o sacrificio — una cosa plana y sin matiz, no una obra maestra.</div>
+<p>Y sin embargo, habiendo dicho esto, debo ser honesto con usted, pues la ilustración solo llega hasta cierto punto.</p>
+
+<h3>¿Pero Qué del Inocente?</h3>
+<p>El libre albedrío explica el mal que los hombres escogen. ¿Pero qué del sufrimiento que nadie escogió — el niño con cáncer, la aldea bajo la ola, el bebé que nunca tomó un aliento culpable? Aquí no le entregaré una respuesta pulcra, y debe desconfiar de cualquiera que lo haga. Vivimos en un mundo que no solo es libre sino caído, donde toda la creación gime, y parte de ese gemido no podemos rastrearlo a ninguna causa que sepamos nombrar. Hay sufrimientos ante los cuales el creyente más sabio solo puede callar. Preferiría dejarle un dolor honesto que una respuesta deshonesta. Job exigió que Dios se explicara, y Dios nunca se explicó; en cambio, Dios le dio a Job algo mejor que una explicación. Se dio a sí mismo a Job. Y eso nos señala la única respuesta que llega hasta el fondo.</p>
+
+<!-- SERMON_ARCHIVE_ENRICHMENT_START APOL4 ES -->
+<h3>Cuando No Llega el Rescate</h3>
+<p>Habacuc da al problema del sufrimiento una forma pastoral. El profeta oró mientras la violencia y la injusticia continuaban a su alrededor, e hizo la pregunta que los creyentes todavía hacen: ¿hasta cuándo podemos pedir ayuda cuando Dios parece guardar silencio? Un sermón anterior del Dr. Cook usa la imagen de sobrevivientes en una balsa que inesperadamente recibieron alimento y luego fueron rescatados. Nos regocijamos cuando “llega la gaviota” &mdash; cuando el enfermo sana, el matrimonio se restaura, el pródigo vuelve o la crisis termina. Pero la fe es probada con mayor severidad cuando no aparece el rescate. La respuesta de Habacuc no es que el sufrimiento sea irreal ni que los fieles siempre recibirán el resultado que piden. Dios le dice al profeta que está obrando de maneras que Habacuc todavía no puede entender, y el profeta aprende a vivir por fe antes de poder ver toda la explicación.</p>
+<p>Esto evita que la apologética cristiana dé respuestas superficiales al dolor. La cruz ya ha resuelto la pregunta de si Dios nos ama, y la resurrección ha manifestado su poder. Lo que permanece sin respuesta en una tragedia particular puede seguir sin respuesta por un tiempo. Por eso la fe bíblica puede decir a la vez: “No entiendo”, y: “Sin embargo confiaré en Él”. Eso no es ausencia de razón; es confianza apoyada en lo que Dios ya ha revelado cuando las circunstancias no ofrecen una explicación inmediata.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END APOL4 ES -->
+
+<h3>El Dios Crucificado</h3>
+<p>Aquí está lo que ninguna otra religión en la tierra puede decir. Nuestro Dios no se quedó por encima del sufrimiento, seguro y sereno en un trono lejano, mirando nuestras lágrimas a través de un vidrio. Bajó hasta él. Tomó carne que podía ser desgarrada. Se paró ante la tumba de su amigo y, aunque sabía que lo levantaría en momentos, lloró. Y al fin extendió sus manos y dejó que los clavos las traspasaran, y clamó en una oscuridad que se tragó el sol del mediodía: "Dios mío, Dios mío, ¿por qué me has desamparado?" — para que ningún doliente pudiera jamás volver a decir que Dios no entiende. Como hombre tuvo hambre, pero como Dios alimentó a los miles. Como hombre se cansó, pero como Dios calmó la tormenta. Como hombre sangró y murió, pero como Dios llevó en su propio cuerpo las enfermedades y los dolores del mundo, como Isaías predijo. La cruz no explica cada dolor. Pero le dice al doliente lo único que más necesita saber: que no sufre solo, que Dios mismo ha estado aquí, en la oscuridad, con los clavos, y que las cicatrices están todavía en sus manos.</p>
+
+<h3>Pensado para Mal, Encaminado a Bien</h3>
+<p>Una cosa más. El Dios que entró en nuestro sufrimiento es también capaz de tejerlo, sin ser jamás su autor, hacia un bien que no habríamos podido imaginar. José, vendido por sus hermanos a la esclavitud y dejado a pudrirse en una prisión extranjera, llegó al fin a los hombres que lo habían agraviado y dijo: "Vosotros pensasteis mal contra mí, mas Dios lo encaminó a bien" (Génesis 50:20). Note que no dijo que el mal fuera bueno — era mal real, y sus hermanos de veras lo pensaron. Pero Dios, el tejedor maestro, tomó el hilo oscuro que los hermanos hilaron con malicia y lo trabajó en un tapiz que salvó a una nación. Esta es la promesa que Pablo hace a todo creyente: "Todas las cosas ayudan a bien a los que aman a Dios" (Romanos 8:28). No que todas las cosas sean buenas, sino que todas las cosas son tejidas para bien por manos lo bastante sabias y fuertes para redimir aun lo peor.</p>
+
+<h3>Lo que Llevamos al que Sufre</h3>
+<p>Así que sostenemos el misterio con humildad, pero sostenemos la cruz con firmeza. Cuando vamos a un hombre en su dolor, no le llevamos una teoría ingeniosa del mal; le llevamos un Salvador herido que ha estado donde él está. Pasamos, como el escéptico nunca espera que lo hagamos, de la defensa a la invitación: el mal mismo que arroja contra Dios es la prueba de que anhela una justicia que este mundo no puede dar — y ese anhelo, como todo otro, tiene su respuesta en el Dios que llevó nuestros dolores. No tema esta pregunta. Sienta su peso, rechace la mentira pulcra, y luego señale, como siempre debe, las manos con las cicatrices en ellas.</p>
+<div class="scripture">"Despreciado y desechado entre los hombres, varón de dolores, experimentado en quebranto." — Isaías 53:3 (RVG)</div>
+</div>
+</div>
+
+
+<div class="card">
+    <h2><span class="lang-en">Unit 4 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 4 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Apologetics — Unit 4 (The Problem of Evil and Suffering)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 4;
+const COURSE = 'apol';
+const NEXT_UNIT_URL = 'CTSApolUnit5.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - The Reason for the Hope",
+    "Unit 2 - The Design of the Heavens",
+    "Unit 3 - Revelation and the Witness Within",
+    "Unit 4 - The Problem of Evil and Suffering",
+    "Unit 5 - The Reliability of Scripture",
+    "Unit 6 - The Person and Claims of Christ",
+    "Unit 7 - The Resurrection and the Changed Skeptics",
+    "Unit 8 - Science, Chance, and the Limits of Naturalism",
+    "Unit 9 - Other Religions and Worldviews",
+    "Unit 10 - Apologetics in Practice"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSApolUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        var _rc = document.getElementById('regCard'); if (_rc) _rc.style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+// (registration handled on Unit 1 only)
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [
+    { textEn: "1. The problem of evil, as the skeptic states it, claims that God cannot be both:", textEs: "1. El problema del mal, como lo plantea el escéptico, afirma que Dios no puede ser a la vez:",
+      optionsEn: ["All-powerful and all-good while evil exists", "Old and wise", "Near and far", "Just and patient"],
+      optionsEs: ["Todopoderoso y todo bondad mientras el mal existe", "Viejo y sabio", "Cercano y lejano", "Justo y paciente"], explanationEn: "The objection: an all-good, all-powerful God would stop evil, yet evil remains.", explanationEs: "La objeción: un Dios todo bueno y todopoderoso detendría el mal, y sin embargo el mal permanece.", correct: 0 },
+    { textEn: "2. The unit says that to call something truly 'evil,' a person must borrow:", textEs: "2. La unidad dice que para llamar a algo verdaderamente 'mal', una persona debe tomar prestada:",
+      optionsEn: ["A dictionary", "A scientific instrument", "A standard of good that points to a Lawgiver", "A church tradition"],
+      optionsEs: ["Un diccionario", "Un instrumento científico", "Una norma del bien que apunta a un Legislador", "Una tradición de iglesia"], explanationEn: "The unit argues the objection presupposes a real moral law, and that theism offers the more natural grounding for that law and its Lawgiver.", explanationEs: "La unidad argumenta que la objeción presupone una ley moral real, y que el teísmo ofrece el fundamento más natural para esa ley y su Legislador.", correct: 2 },
+    { textEn: "3. The 'crooked line' illustration teaches that:", textEs: "3. La ilustración de la 'línea torcida' enseña que:",
+      optionsEn: ["Lines are unimportant", "You cannot call a line crooked without an idea of a straight line", "Everything is relative", "Geometry proves God"],
+      optionsEs: ["Las líneas no importan", "No se puede llamar torcida a una línea sin la idea de una línea recta", "Todo es relativo", "La geometría prueba a Dios"], explanationEn: "Calling evil 'crooked' assumes a straight standard of good that must come from God.", explanationEs: "Llamar 'torcido' al mal supone una norma recta del bien que debe venir de Dios.", correct: 1 },
+    { textEn: "4. According to the unit, evil is best understood as:", textEs: "4. Según la unidad, el mal se entiende mejor como:",
+      optionsEn: ["A substance God created", "An equal force to good", "Something eternal", "A privation — the twisting or absence of a good"],
+      optionsEs: ["Una sustancia que Dios creó", "Una fuerza igual al bien", "Algo eterno", "Una privación — la torcedura o ausencia de un bien"], explanationEn: "Evil is not a thing God made; it is good corrupted, as rust corrupts iron.", explanationEs: "El mal no es una cosa que Dios hizo; es el bien corrompido, como el óxido corrompe el hierro.", correct: 3 },
+    { textEn: "5. Which illustration does the unit use for evil as privation?", textEs: "5. ¿Qué ilustración usa la unidad para el mal como privación?",
+      optionsEn: ["A loud noise", "A heavy stone", "Darkness is the absence of light", "A deep ocean"],
+      optionsEs: ["Un ruido fuerte", "Una piedra pesada", "La oscuridad es la ausencia de luz", "Un océano profundo"], explanationEn: "As darkness is absence of light and cold absence of heat, evil is the absence of a good.", explanationEs: "Como la oscuridad es ausencia de luz y el frío ausencia de calor, el mal es la ausencia de un bien.", correct: 2 },
+    { textEn: "6. Why, according to the unit, did God make creatures free rather than as puppets?", textEs: "6. Según la unidad, ¿por qué hizo Dios a las criaturas libres en lugar de marionetas?",
+      optionsEn: ["Because a puppet cannot love", "To watch them fail", "Because He was lonely", "By accident"],
+      optionsEs: ["Porque una marioneta no puede amar", "Para verlas fallar", "Porque estaba solo", "Por accidente"], explanationEn: "Love must be free; forced love is no love, so God risked freedom.", explanationEs: "El amor debe ser libre; el amor forzado no es amor, así que Dios arriesgó la libertad.", correct: 0 },
+    { textEn: "7. The unit says that forced love, like a programmed 'I love you,' is:", textEs: "7. La unidad dice que el amor forzado, como un 'te amo' programado, es:",
+      optionsEn: ["Better than free love", "Required by God", "The goal of marriage", "Worthless, because it could not be otherwise"],
+      optionsEs: ["Mejor que el amor libre", "Requerido por Dios", "La meta del matrimonio", "Sin valor, porque no pudo ser de otra manera"], explanationEn: "A recording is not a bride; love is worth something only when it could have said no.", explanationEs: "Una grabación no es una novia; el amor vale algo solo cuando pudo haber dicho no.", correct: 3 },
+    { textEn: "8. The unit says moral evil and the possibility of true love came into the world:", textEs: "8. La unidad dice que el mal moral y la posibilidad del amor verdadero entraron al mundo:",
+      optionsEn: ["At different times", "Hand in hand, as the same possibility of freedom", "Without any reason", "From two different gods"],
+      optionsEs: ["En tiempos diferentes", "De la mano, como la misma posibilidad de la libertad", "Sin razón alguna", "De dos dioses diferentes"], explanationEn: "Freedom to say yes requires the freedom to say no; love and the possibility of evil share one door.", explanationEs: "La libertad de decir sí requiere la libertad de decir no; el amor y la posibilidad del mal comparten una puerta.", correct: 1 },
+    { textEn: "9. In the painting illustration, washing all the shadows out of a canvas would:", textEs: "9. En la ilustración de la pintura, lavar todas las sombras de un lienzo:",
+      optionsEn: ["Make it more valuable", "Make it a masterpiece", "Destroy it, not improve it", "Have no effect"],
+      optionsEs: ["La haría más valiosa", "La haría una obra maestra", "La destruiría, no la mejoraría", "No tendría efecto"], explanationEn: "Depth and glory are known against the dark; a world with no shadow would be flat and tintless.", explanationEs: "La profundidad y la gloria se conocen contra lo oscuro; un mundo sin sombra sería plano y sin matiz.", correct: 2 },
+    { textEn: "10. How does the unit treat the suffering of the innocent (the child's cancer, the earthquake)?", textEs: "10. ¿Cómo trata la unidad el sufrimiento del inocente (el cáncer del niño, el terremoto)?",
+      optionsEn: ["It gives a complete, tidy answer", "It honestly refuses a tidy answer and leaves an ache", "It blames the victim", "It denies such suffering exists"],
+      optionsEs: ["Da una respuesta completa y pulcra", "Honestamente rechaza una respuesta pulcra y deja un dolor", "Culpa a la víctima", "Niega que tal sufrimiento exista"], explanationEn: "Free will explains chosen evil; the unit refuses a glib answer for the rest and warns against anyone who offers one.", explanationEs: "El libre albedrío explica el mal escogido; la unidad rechaza una respuesta fácil para el resto y advierte contra quien la ofrezca.", correct: 1 },
+    { textEn: "11. When Job demanded that God explain Himself, God answered by giving Job:", textEs: "11. Cuando Job exigió que Dios se explicara, Dios respondió dándole a Job:",
+      optionsEn: ["Himself, rather than an explanation", "A list of reasons", "A long argument", "A new fortune first"],
+      optionsEs: ["Se dio a sí mismo, en lugar de una explicación", "Una lista de razones", "Un largo argumento", "Primero una nueva fortuna"], explanationEn: "God never explained; He gave Job something better — His own presence.", explanationEs: "Dios nunca explicó; le dio a Job algo mejor — su propia presencia.", correct: 0 },
+    { textEn: "12. The unit says the one answer no other religion can give is:", textEs: "12. La unidad dice que la única respuesta que ninguna otra religión puede dar es:",
+      optionsEn: ["That suffering is an illusion", "That suffering is deserved", "That suffering will be forgotten", "A God who came down into the suffering Himself"],
+      optionsEs: ["Que el sufrimiento es una ilusión", "Que el sufrimiento es merecido", "Que el sufrimiento será olvidado", "Un Dios que bajó al sufrimiento Él mismo"], explanationEn: "Christianity's God did not watch from a far throne; He entered the suffering on the cross.", explanationEs: "El Dios del cristianismo no miró desde un trono lejano; entró en el sufrimiento en la cruz.", correct: 3 },
+    { textEn: "13. At the tomb of His friend Lazarus, Jesus — though He would raise him — first:", textEs: "13. Ante la tumba de su amigo Lázaro, Jesús — aunque lo levantaría — primero:",
+      optionsEn: ["Left", "Laughed", "Wept", "Scolded the crowd"],
+      optionsEs: ["Se fue", "Rió", "Lloró", "Reprendió a la multitud"], explanationEn: "Jesus wept, showing that God enters our grief rather than standing above it.", explanationEs: "Jesús lloró, mostrando que Dios entra en nuestro dolor en lugar de quedarse por encima de él.", correct: 2 },
+    { textEn: "14. The 'as a man / as God' lines in the unit are meant to show that Christ:", textEs: "14. Las líneas 'como hombre / como Dios' en la unidad muestran que Cristo:",
+      optionsEn: ["Shared our human suffering yet remained fully God", "Was only a man", "Never truly suffered", "Was two persons"],
+      optionsEs: ["Compartió nuestro sufrimiento humano y siguió siendo plenamente Dios", "Era solo un hombre", "Nunca sufrió de veras", "Era dos personas"], explanationEn: "As a man He bled and died; as God He bore the world's sorrows.", explanationEs: "Como hombre sangró y murió; como Dios llevó los dolores del mundo.", correct: 0 },
+    { textEn: "15. In Genesis 50:20, Joseph told the brothers who had wronged him:", textEs: "15. En Génesis 50:20, José dijo a los hermanos que lo habían agraviado:",
+      optionsEn: ["The evil was really good", "You meant evil against me, but God meant it for good", "He would take revenge", "He had forgotten it"],
+      optionsEs: ["El mal era realmente bueno", "Vosotros pensasteis mal contra mí, mas Dios lo encaminó a bien", "Se vengaría", "Lo había olvidado"], explanationEn: "Joseph did not call the evil good; he said God wove the real evil into good.", explanationEs: "José no llamó bueno al mal; dijo que Dios tejió el mal real para bien.", correct: 1 },
+    { textEn: "16. Romans 8:28 promises that all things:", textEs: "16. Romanos 8:28 promete que todas las cosas:",
+      optionsEn: ["Are good in themselves", "Happen by chance", "Will be explained now", "Work together for good to those who love God"],
+      optionsEs: ["Son buenas en sí mismas", "Suceden por azar", "Serán explicadas ahora", "Ayudan a bien a los que aman a Dios"], explanationEn: "Not that all things are good, but that all are woven for good by God.", explanationEs: "No que todas las cosas sean buenas, sino que todas son tejidas para bien por Dios.", correct: 3 },
+    { textEn: "17. The unit warns the apologist NOT to answer a grieving person with:", textEs: "17. La unidad advierte al apologista que NO responda a una persona afligida con:",
+      optionsEn: ["A listening ear", "A syllogism or tidy theory", "Genuine presence", "Honest tears"],
+      optionsEs: ["Un oído atento", "Un silogismo o teoría pulcra", "Presencia genuina", "Lágrimas honestas"], explanationEn: "We bring a wounded Savior, not a clever theory, to someone in sorrow.", explanationEs: "Llevamos un Salvador herido, no una teoría ingeniosa, a alguien en dolor.", correct: 1 },
+    { textEn: "18. The 'boomerang' move turns the objection from evil into:", textEs: "18. El movimiento del 'bumerán' convierte la objeción del mal en:",
+      optionsEn: ["A reason to despair", "Proof there is no God", "Evidence that the longing for justice has its answer in God", "A scientific question"],
+      optionsEs: ["Una razón para desesperar", "Prueba de que no hay Dios", "Evidencia de que el anhelo de justicia tiene su respuesta en Dios", "Una cuestión científica"], explanationEn: "The cry against injustice reveals a longing for true justice, which points back to God.", explanationEs: "El clamor contra la injusticia revela un anhelo de justicia verdadera, que apunta de vuelta a Dios.", correct: 2 },
+    { textEn: "19. The unit says God is NOT the author of evil because:", textEs: "19. La unidad dice que Dios NO es el autor del mal porque:",
+      optionsEn: ["He made a good world that creatures have spoiled", "God is unaware of it", "Evil does not exist", "Evil made itself"],
+      optionsEs: ["Hizo un mundo bueno que las criaturas han estropeado", "Dios no se da cuenta de él", "El mal no existe", "El mal se hizo a sí mismo"], explanationEn: "God authored a good now corrupted; evil is the spoiling of His good work.", explanationEs: "Dios fue autor de un bien ahora corrompido; el mal es el estropeo de su buena obra.", correct: 0 },
+    { textEn: "20. On the cross, Jesus cried out in the darkness:", textEs: "20. En la cruz, Jesús clamó en la oscuridad:",
+      optionsEn: ["Nothing at all", "That He was comfortable", "A word of complaint about the soldiers", "My God, my God, why have You forsaken Me?"],
+      optionsEs: ["Nada en absoluto", "Que estaba cómodo", "Una queja sobre los soldados", "Dios mío, Dios mío, ¿por qué me has desamparado?"], explanationEn: "Christ entered even the experience of God-forsakenness, so no sufferer is alone.", explanationEs: "Cristo entró aun en la experiencia del desamparo de Dios, para que ningún doliente esté solo.", correct: 3 }
+];
+
+const kwQuestions = [
+    { textEn: "21. State the problem of evil and explain why the unit calls it the hardest question and refuses to wave it away.",
+      textEs: "21. Exponga el problema del mal y explique por qué la unidad lo llama la pregunta más difícil y se niega a descartarlo.",
+      kw_en: ["evil", "suffer", "powerful", "good", "object", "honest", "arrow", "person"],
+      kw_es: ["mal", "sufri", "poderoso", "bueno", "objeci", "honest", "flecha", "persona"],
+      modelEn: "The problem of evil is the heaviest objection a believer faces. It claims that if God were all-powerful He could stop evil, and if He were all-good He would want to, yet evil and suffering remain, from human cruelty to dying children. The unit treats this honestly and refuses to wave it away or answer a grieving person with a syllogism, because it is the strongest arrow in the skeptic's quiver and the question of everyone who has stood beside a grave. It does not pretend to solve the whole mystery, but it insists the Christian faith has the deepest answer of all, and that the final answer is not an argument but a Person, the God who entered our suffering.",
+      modelEs: "El problema del mal es la objeción más pesada que un creyente enfrenta. Afirma que si Dios fuera todopoderoso podría detener el mal, y si fuera todo bueno querría hacerlo, y sin embargo el mal y el sufrimiento permanecen, desde la crueldad humana hasta los niños que mueren. La unidad trata esto con honestidad y se niega a descartarlo o a responder a una persona afligida con un silogismo, porque es la flecha más fuerte de la aljaba del escéptico y la pregunta de todo el que ha estado junto a una tumba. No pretende resolver todo el misterio, pero insiste en que la fe cristiana tiene la respuesta más profunda de todas, y que la respuesta final no es un argumento sino una Persona, el Dios que entró en nuestro sufrimiento." },
+
+    { textEn: "22. Explain the 'boomerang' — how the objection from evil actually presupposes God.",
+      textEs: "22. Explique el 'bumerán' — cómo la objeción del mal en realidad presupone a Dios.",
+      kw_en: ["standard", "good", "evil", "crooked", "straight", "moral", "lawgiver", "presuppos"],
+      kw_es: ["norma", "bien", "mal", "torcid", "recta", "moral", "legislador", "presupone"],
+      modelEn: "The boomerang is the point that when a skeptic calls something evil, he is borrowing a standard of good without realizing it. You cannot call a line crooked unless you already have an idea of a straight line, and you cannot rage at injustice unless a sense of true justice lives in you. Some atheist philosophers try to ground that standard without God, treating moral facts as brute features of reality; that is a real position worth taking seriously. But the Christian apologist can still press why moral obligation should exist and bind us at all on a purely naturalistic picture, and can argue that theism offers a more natural grounding — a good, personal God whose character is the standard and whose authority explains the obligation. So the objection depends on treating some moral law as real, the law discussed earlier, and the apologist can press the skeptic to say where, on his own view, that law's reality and authority come from. Pressed hard enough, the problem of evil does not abolish God; it opens the question of what could actually ground the standard being used to judge Him.",
+      modelEs: "El bumerán es el punto de que cuando un escéptico llama mal a algo, está tomando prestada una norma del bien sin darse cuenta. No se puede llamar torcida a una línea a menos que ya se tenga la idea de una línea recta, y no se puede clamar contra la injusticia a menos que un sentido de la justicia verdadera viva en uno. Algunos filósofos ateos intentan fundamentar esa norma sin Dios, tratando los hechos morales como rasgos brutos de la realidad; esa es una posición real que merece tomarse en serio. Pero el apologista cristiano todavía puede preguntar por qué la obligación moral debería existir y obligarnos en absoluto en un cuadro puramente naturalista, y puede argumentar que el teísmo ofrece un fundamento más natural — un Dios bueno y personal cuyo carácter es la norma y cuya autoridad explica la obligación. Así que la objeción depende de tratar alguna ley moral como real, la ley discutida antes, y el apologista puede presionar al escéptico a decir de dónde, en su propia perspectiva, vienen la realidad y la autoridad de esa ley. Presionado lo bastante, el problema del mal no abole a Dios; abre la pregunta de qué podría realmente fundamentar la norma que se usa para juzgarlo." },
+
+    { textEn: "23. Explain the privation view that evil is not a thing God created.",
+      textEs: "23. Explique la idea de la privación de que el mal no es una cosa que Dios creó.",
+      kw_en: ["privation", "thing", "absence", "good", "darkness", "light", "corrupt", "author"],
+      kw_es: ["privación", "cosa", "ausencia", "bien", "oscuridad", "luz", "corrupci", "autor"],
+      modelEn: "The unit explains that evil is not a thing God created, as if He stocked the world with a dark substance called wickedness. Evil is a privation, the twisting, spoiling, or absence of a good that ought to be there. Darkness is not a thing but the absence of light; cold is the absence of heat; rust is the corruption of good iron. In the same way cruelty is love gone wrong and pride is good self-regard swollen into a tumor. God made a world and called it good, and every evil is that good bent, broken, or robbed. This matters because it means God is not the author of evil but the author of a good that creatures have spoiled.",
+      modelEs: "La unidad explica que el mal no es una cosa que Dios creó, como si hubiera surtido el mundo con una sustancia oscura llamada maldad. El mal es una privación, la torcedura, el estropeo o la ausencia de un bien que debería estar allí. La oscuridad no es una cosa sino la ausencia de luz; el frío es la ausencia de calor; el óxido es la corrupción del buen hierro. De la misma manera la crueldad es el amor torcido y el orgullo es la buena estima propia hinchada en un tumor. Dios hizo un mundo y lo llamó bueno, y todo mal es ese bien doblado, roto o robado. Esto importa porque significa que Dios no es el autor del mal sino el autor de un bien que las criaturas han estropeado." },
+
+    { textEn: "24. Explain the free-will answer: why God made creatures free rather than as puppets.",
+      textEs: "24. Explique la respuesta del libre albedrío: por qué Dios hizo a las criaturas libres en lugar de marionetas.",
+      kw_en: ["love", "free", "puppet", "choose", "forced", "freedom", "risk", "sin"],
+      kw_es: ["amor", "amar", "marioneta", "escoger", "forzado", "libertad", "riesgo", "pecado"],
+      modelEn: "The unit's free-will answer is that God permitted the possibility of evil for the sake of love. God could have made puppets who never sinned, who moved only as He pulled the strings, but a puppet cannot love, because love that is forced is no love at all. A husband who programs his wife to say I love you has a recording, not a bride. If God wanted creatures who could truly love Him, He had to make them free, and freedom that cannot choose against the good is not freedom but a leash. So God took the risk of liberty; He opened the door to love, and through the same door walked sin. The possibility of the worst evil and the truest love are one and the same possibility of freedom.",
+      modelEs: "La respuesta del libre albedrío de la unidad es que Dios permitió la posibilidad del mal por amor. Dios pudo haber hecho marionetas que nunca pecaran, que se movieran solo cuando Él jalara los hilos, pero una marioneta no puede amar, porque el amor forzado no es amor en absoluto. Un esposo que programa a su esposa para decir te amo tiene una grabación, no una novia. Si Dios quería criaturas que pudieran amarlo de veras, tuvo que hacerlas libres, y una libertad que no puede escoger contra el bien no es libertad sino una correa. Así que Dios tomó el riesgo de la libertad; abrió la puerta al amor, y por la misma puerta entró el pecado. La posibilidad del peor mal y del amor más verdadero son una y la misma posibilidad de libertad." },
+
+    { textEn: "25. Explain the painting-and-shadows illustration and the limit the unit places on it.",
+      textEs: "25. Explique la ilustración de la pintura y las sombras y el límite que la unidad le pone.",
+      kw_en: ["painting", "shadow", "light", "dark", "destroy", "depth", "glory", "suffer"],
+      kw_es: ["pintura", "sombra", "luz", "oscur", "destru", "profundidad", "gloria", "sufri"],
+      modelEn: "The unit uses the picture of a painting in which the master did not flood everything with light but left shadows, dark passages, places almost black. If you tried to fix the painting by washing all the shadows out, you would destroy it, not improve it, because the depth and the very glory of the light are known only against the dark. The point answers the demand that a good world must have no shadow at all; a world with no possibility of sorrow would also have no possibility of love, courage, mercy, or sacrifice. But the unit is careful to add that the illustration only goes so far. It must never be used to stand over someone's real suffering and call their grief a mere brushstroke.",
+      modelEs: "La unidad usa la imagen de una pintura en la que el maestro no inundó todo de luz sino que dejó sombras, pasajes oscuros, lugares casi negros. Si intentara arreglar la pintura lavando todas las sombras, la destruiría, no la mejoraría, porque la profundidad y la gloria misma de la luz se conocen solo contra lo oscuro. El punto responde a la exigencia de que un mundo bueno no deba tener ninguna sombra; un mundo sin posibilidad de dolor tampoco tendría posibilidad de amor, valor, misericordia o sacrificio. Pero la unidad tiene cuidado de añadir que la ilustración solo llega hasta cierto punto. Nunca debe usarse para pararse sobre el sufrimiento real de alguien y llamar su dolor una simple pincelada." },
+
+    { textEn: "26. Why does the unit refuse to give a tidy answer to the suffering of the innocent?",
+      textEs: "26. ¿Por qué se niega la unidad a dar una respuesta pulcra al sufrimiento del inocente?",
+      kw_en: ["innocent", "suffer", "tidy", "fallen", "groan", "silent", "job", "mystery"],
+      kw_es: ["inocente", "sufri", "pulcra", "caído", "gime", "callar", "job", "misterio"],
+      modelEn: "The unit insists that free will explains the evil men choose, but not the suffering of the innocent that no one chose, like a child's cancer or a village under a wave. Here it refuses to hand over a tidy answer and warns against anyone who does. We live in a world that is not only free but fallen, where the whole creation groans, and some of that groaning cannot be traced to any cause we can name. There are sufferings before which the wisest believer can only fall silent. The unit would rather leave an honest ache than a dishonest answer. It recalls that Job demanded an explanation and God never gave one; instead God gave Job Himself, which points to the deepest answer, the mystery met not by a theory but by God's own presence.",
+      modelEs: "La unidad insiste en que el libre albedrío explica el mal que los hombres escogen, pero no el sufrimiento del inocente que nadie escogió, como el cáncer de un niño o una aldea bajo una ola. Aquí se niega a entregar una respuesta pulcra y advierte contra cualquiera que lo haga. Vivimos en un mundo que no solo es libre sino caído, donde toda la creación gime, y parte de ese gemido no se puede rastrear a ninguna causa que sepamos nombrar. Hay sufrimientos ante los cuales el creyente más sabio solo puede callar. La unidad preferiría dejar un dolor honesto que una respuesta deshonesta. Recuerda que Job exigió una explicación y Dios nunca la dio; en cambio Dios se dio a sí mismo a Job, lo cual apunta a la respuesta más profunda, el misterio enfrentado no por una teoría sino por la presencia misma de Dios." },
+
+    { textEn: "27. Explain 'the crucified God' as the unit's central answer to suffering.",
+      textEs: "27. Explique 'el Dios crucificado' como la respuesta central de la unidad al sufrimiento.",
+      kw_en: ["cross", "suffer", "flesh", "nail", "wept", "forsaken", "alone", "scar"],
+      kw_es: ["cruz", "sufri", "carne", "clavo", "lloró", "desamparado", "solo", "cicatriz"],
+      modelEn: "The unit's central answer is the crucified God, something no other religion can claim. Our God did not stay above the suffering on a far throne but came down into it. He took on flesh that could be torn, He stood at His friend's tomb and wept, and at the last He let the nails go through His hands and cried out, My God, my God, why have You forsaken Me, so that no sufferer could ever again say God does not understand. As a man He bled and died, but as God He carried the world's griefs and sorrows in His own body. The cross does not explain every pain, but it tells the sufferer that he does not suffer alone, that God has been in the dark with the nails, and that the scars are still in His hands.",
+      modelEs: "La respuesta central de la unidad es el Dios crucificado, algo que ninguna otra religión puede afirmar. Nuestro Dios no se quedó por encima del sufrimiento en un trono lejano sino que bajó hasta él. Tomó carne que podía ser desgarrada, se paró ante la tumba de su amigo y lloró, y al fin dejó que los clavos traspasaran sus manos y clamó, Dios mío, Dios mío, por qué me has desamparado, para que ningún doliente pudiera volver a decir que Dios no entiende. Como hombre sangró y murió, pero como Dios llevó las enfermedades y los dolores del mundo en su propio cuerpo. La cruz no explica cada dolor, pero le dice al doliente que no sufre solo, que Dios ha estado en la oscuridad con los clavos, y que las cicatrices están todavía en sus manos." },
+
+    { textEn: "28. What is unique about Christianity's answer to suffering compared to other religions?",
+      textEs: "28. ¿Qué es lo único de la respuesta del cristianismo al sufrimiento comparado con otras religiones?",
+      kw_en: ["religion", "unique", "suffer", "god", "enter", "cross", "distant", "understand"],
+      kw_es: ["religión", "único", "sufri", "dios", "entró", "cruz", "distante", "entiende"],
+      modelEn: "What is unique about Christianity's answer, the unit says, is that its God did not remain distant from suffering but entered it Himself. Other religions may offer a god who watches human pain from a far throne, serene and untouched, or who calls suffering an illusion, but only the Christian God came down and took on flesh and suffered on a cross. Because Jesus wept at a grave and bled under the nails and tasted even forsakenness, no sufferer can say that God does not understand. The Christian answer is not a better theory of pain but a God who has shared it. This is why, when we go to the hurting, we point not to an idea but to a Savior who has been where they are.",
+      modelEs: "Lo único de la respuesta del cristianismo, dice la unidad, es que su Dios no permaneció distante del sufrimiento sino que entró en él Él mismo. Otras religiones pueden ofrecer un dios que mira el dolor humano desde un trono lejano, sereno e intocado, o que llama al sufrimiento una ilusión, pero solo el Dios cristiano bajó y tomó carne y sufrió en una cruz. Porque Jesús lloró ante una tumba y sangró bajo los clavos y probó aun el desamparo, ningún doliente puede decir que Dios no entiende. La respuesta cristiana no es una mejor teoría del dolor sino un Dios que lo ha compartido. Por eso, cuando vamos a los que sufren, señalamos no una idea sino un Salvador que ha estado donde ellos están." },
+
+    { textEn: "29. Explain Joseph (Genesis 50:20) and Romans 8:28 — how God weaves evil into good without being its author.",
+      textEs: "29. Explique a José (Génesis 50:20) y Romanos 8:28 — cómo Dios teje el mal para bien sin ser su autor.",
+      kw_en: ["joseph", "evil", "good", "weave", "author", "romans", "brother", "redeem"],
+      kw_es: ["josé", "mal", "bien", "tapiz", "autor", "romanos", "hermano", "redimir"],
+      modelEn: "The unit points to Joseph, who was sold by his brothers into slavery and left in a foreign prison, yet later told them, you meant evil against me, but God meant it for good, from Genesis 50:20. Joseph did not call the evil good; it was real evil and his brothers truly meant it. But God, the master weaver, took the dark thread spun in malice and worked it into a tapestry that saved a nation. So God can weave even evil into good without ever being its author. This is the promise of Romans 8:28, that all things work together for good to those who love God, not that all things are good, but that all are woven for good by hands wise and strong enough to redeem even the worst.",
+      modelEs: "La unidad señala a José, que fue vendido por sus hermanos a la esclavitud y dejado en una prisión extranjera, y sin embargo más tarde les dijo, vosotros pensasteis mal contra mí, mas Dios lo encaminó a bien, de Génesis 50:20. José no llamó bueno al mal; era mal real y sus hermanos de veras lo pensaron. Pero Dios, el tejedor maestro, tomó el hilo oscuro hilado con malicia y lo trabajó en un tapiz que salvó a una nación. Así que Dios puede tejer aun el mal para bien sin ser jamás su autor. Esta es la promesa de Romanos 8:28, que todas las cosas ayudan a bien a los que aman a Dios, no que todas las cosas sean buenas, sino que todas son tejidas para bien por manos lo bastante sabias y fuertes para redimir aun lo peor." },
+
+    { textEn: "30. How should an apologist bring this teaching to a person who is suffering?",
+      textEs: "30. ¿Cómo debe un apologista llevar esta enseñanza a una persona que está sufriendo?",
+      kw_en: ["suffer", "theory", "wounded", "savior", "presence", "cross", "scar", "invitation"],
+      kw_es: ["sufri", "teoría", "herido", "salvador", "presencia", "cruz", "cicatriz", "invitación"],
+      modelEn: "The unit says that to a person in sorrow we do not bring a clever theory of evil but a wounded Savior who has been where he is. We hold the mystery humbly and the cross firmly, offering our presence rather than a tidy argument. We also move, as the skeptic never expects, from defense to invitation, for the very evil he hurls at God reveals a longing for a justice this world cannot give, and that longing has its answer in the God who bore our griefs. So the apologist should feel the weight of the question, refuse the tidy lie, and then point to the hands with the scars in them, the crucified Savior who suffered with us and for us.",
+      modelEs: "La unidad dice que a una persona en dolor no le llevamos una teoría ingeniosa del mal sino un Salvador herido que ha estado donde ella está. Sostenemos el misterio con humildad y la cruz con firmeza, ofreciendo nuestra presencia en lugar de un argumento pulcro. También pasamos, como el escéptico nunca espera, de la defensa a la invitación, pues el mal mismo que arroja contra Dios revela un anhelo de una justicia que este mundo no puede dar, y ese anhelo tiene su respuesta en el Dios que llevó nuestros dolores. Así que el apologista debe sentir el peso de la pregunta, rechazar la mentira pulcra, y luego señalar las manos con las cicatrices en ellas, el Salvador crucificado que sufrió con nosotros y por nosotros." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 5 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 5 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSApolReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

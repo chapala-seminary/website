@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS The Gospel of John &mdash; Unit 11: The Spirit and the High-Priestly Prayer</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form label { font-weight:bold; font-size:0.9rem; display:block; margin-top:8px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 12 &rarr;</span><span class="lang-es">Unidad 12 &rarr;</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">&#128214; The Gospel of John &mdash; Unit 11: The Spirit and the High-Priestly Prayer</span><span class="lang-es">&#128214; El Evangelio de Juan &mdash; Unidad 11: El Esp&iacute;ritu y la Oraci&oacute;n Sumosacerdotal</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"I will pray the Father, and He will give you another Helper, that He may abide with you forever." &mdash; John 14:16 (NKJV)</span><span class="lang-es">&#9889; "Y yo rogar&eacute; al Padre, y os dar&aacute; otro Consolador, para que est&eacute; con vosotros para siempre." &mdash; Juan 14:16 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard" style="display:none;">
+    <h3><span class="lang-en">Register to Begin</span><span class="lang-es">Reg&iacute;strese para comenzar</span></h3>
+    <p style="font-size:0.9rem;"><span class="lang-en">Your name and track are saved on this device and carry across every unit and every CTS course.</span><span class="lang-es">Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS.</span></p>
+    <label class="lang-en">Full name</label><label class="lang-es">Nombre completo</label>
+    <input type="text" id="regName" placeholder="..." aria-label="...">
+    <label class="lang-en">Email</label><label class="lang-es">Correo electr&oacute;nico</label>
+    <input type="email" id="regEmail" placeholder="..." aria-label="...">
+    <label class="lang-en">Track</label><label class="lang-es">Trayecto</label>
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate / Certificado</option>
+        <option value="mdiv">M.Div.</option>
+        <option value="thm">Th.M.</option>
+    </select>
+    <button id="regBtn" class="nav-btn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top:8px;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h3>Introduction &mdash; "I Will Not Leave You Orphans"</h3>
+<p>Still in the upper room, on the night before the cross, Jesus kept speaking to His troubled friends. He had told them He was going away, and their hearts were breaking; they did not understand, and grief filled the room. But His leaving would not be abandonment. <em>"I will not leave you orphans,"</em> He promised (John 14:18), and He gave them two great gifts to prove it. The first was a Person to come and dwell with them &mdash; the Helper, the Holy Spirit. The second was a prayer, His own prayer lifting them up to the Father, the great prayer of John 17 that we call the High-Priestly Prayer. The Spirit would be God <em>with</em> them and <em>in</em> them; the prayer would hold them before the throne. Together they answer the fear of every disciple who has ever felt the Lord seem far away: you are not alone, and you are not forgotten.</p>
+
+<h3>I. "It Is to Your Advantage That I Go Away"</h3>
+<p>The disciples could not see how His leaving could be anything but loss. Yet Jesus said something astonishing: <em>"It is to your advantage that I go away; for if I do not go away, the Helper will not come to you; but if I depart, I will send Him to you"</em> (John 16:7). While He walked the earth, Jesus could be in only one place at a time; by the Spirit, He would be with every believer everywhere, always. So their sorrow had a purpose they could not yet see. He compared it to a woman in labor, whose anguish is real but turns to joy when the child is born: "You will weep and mourn... you will grieve, but your grief will turn to joy" (John 16:20&ndash;22). This is the deep pattern of the life of faith &mdash; that we are often asked to trust the Father in the dark, before we are shown the reason.</p>
+<div class="illustration"><strong>Trusting a plan we cannot yet see.</strong> Dr. Cook has often said that after half a century of ministry he still finds much of God's working past his understanding &mdash; why God allows the wars and famines, why bad things befall good people. He has known deep loss in his own family, watching loved ones taken by a cruel disease while he himself was spared, with no answer he could give. And yet his settled confidence is this: God has a plan, and even what we cannot understand in this world we will understand in the world to come. He tells, too, of a time early in ministry when he felt sure God meant him for a large church, while a tiny, poor congregation in a cold and distant place kept calling. Reluctantly he followed what he could not explain &mdash; and it was there that God blessed the work, provided for his family, and opened the door that eventually made him a seminary professor. Looking back, the confusing road was the right one. So the Spirit comes to be our Helper precisely when the way is unclear.</div>
+
+<h3>II. The Helper, the Spirit of Truth</h3>
+<p>The name Jesus gives the Spirit is rich: the <em>Paraclete</em> &mdash; the Helper, the Comforter, the Advocate, literally "one called alongside" to stand with us. And He is given not for a visit but forever: <em>"I will pray the Father, and He will give you another Helper, that He may abide with you forever &mdash; the Spirit of truth... He dwells with you and will be in you"</em> (John 14:16&ndash;17). Notice that "another" Helper &mdash; another of the same kind as Jesus Himself, God come close. Jesus tells us what the Spirit does. He <strong>teaches</strong>: "He will teach you all things, and bring to your remembrance all things that I said to you" (14:26). He <strong>testifies</strong> of Christ: "He will testify of Me" (15:26). He <strong>convicts</strong>: He will "convict the world of sin, and of righteousness, and of judgment" (16:8), awakening the conscience that is dead to God. And He <strong>guides</strong>: "He will guide you into all truth... He will glorify Me" (16:13&ndash;14).</p>
+<p>That last point is the key to knowing the Spirit's true work. The Spirit does not advertise Himself; He glorifies Christ. So a life truly filled with the Spirit will not draw attention to itself or to spectacular signs &mdash; it will point to Jesus. And this same Helper is our strength when the world turns hostile. Jesus warned that the world would hate His own as it hated Him; but the Spirit, the Advocate, empowers ordinary believers to bear bold witness even under persecution, so that the church has often grown fastest exactly where it has suffered most. The Comforter is no luxury for calm days; He is the courage of the martyr and the steady voice in the storm.</p>
+<div class="pull-quote">Jesus does not merely send help; He sends a Helper &mdash; a Person, God Himself, to dwell within the very people He has saved.</div>
+<p>This is the wonder the disciples could not yet grasp that night: the same God who had walked beside them on the roads of Galilee would now live within them. The Helper is not a force or a feeling but a divine Person who knows us, loves us, and never leaves. He prays in us when we do not know how to pray, He steadies us when our own strength fails, and He keeps quietly turning our eyes back to Christ. What Jesus had been to them on the outside, the Spirit would now be to every believer from the inside.</p>
+
+<h3>III. Sorrow Turned to Joy, and a Plan Revealed Day by Day</h3>
+<p>The disciples kept asking one another what Jesus meant by "a little while." We do the same. We want God to lay out the whole plan at once, plainly, the way a machine spits out an instant answer to a typed question. But God rarely answers that way. He revealed even to the disciples only what they could bear, a partial light for the next step, because He is not training slaves who obey blind orders but sons and daughters who are to grow into the very mind of Christ. <em>"I have yet many things to say to you, but you cannot bear them now"</em> (John 16:12). We learn more by seeking His will over time than we ever would from an instant reply; the seeking itself shapes us. And through all of it the promise holds: the grief will turn to joy that no one can take away, and "whatever you ask the Father in My name He will give you" (16:23). The God who works in us "both to will and to do for His good pleasure" (Philippians 2:13) unfolds His purpose patiently, day by day.</p>
+
+<h3>IV. The High-Priestly Prayer (John 17)</h3>
+<p>Then Jesus lifted His eyes to heaven and prayed &mdash; and we are allowed to listen. John 17 is rightly called the High-Priestly Prayer, for here the great High Priest intercedes for His people on the eve of His sacrifice. <strong>First He prays for Himself</strong>: "Father, the hour has come. Glorify Your Son, that Your Son also may glorify You" (17:1), and He defines for us the very heart of salvation: <em>"This is eternal life, that they may know You, the only true God, and Jesus Christ whom You have sent"</em> (17:3). Eternal life is not first a place or a length of days; it is to know God. <strong>Then He prays for His disciples</strong>: not that the Father would take them out of the world, but keep them from the evil one, and <em>"sanctify them by Your truth. Your word is truth"</em> (17:17). He commits the frightened eleven to the Father's keeping.</p>
+<p><strong>And then He prays for us.</strong> "I do not pray for these alone, but also for those who will believe in Me through their word" (John 17:20). Every believer who has ever come to Christ through the apostles' testimony was named in that prayer on that night. And what He asks for us is oneness: <em>"that they all may be one, as You, Father, are in Me, and I in You; that they also may be one in Us, that the world may believe that You sent Me"</em> (17:21). The unity He prays for is not a forced uniformity or a mere organization; it is a shared life that mirrors the very oneness of the Father and the Son, and its purpose is evangelistic &mdash; so that the watching world will believe. He ends by reaching beyond this life altogether: "Father, I desire that they also whom You gave Me may be with Me where I am, that they may behold My glory" (17:24).</p>
+<p>So put the two gifts together. Jesus did not leave His own as orphans. He sent the Helper to be with us and in us, teaching, convicting, comforting, and glorifying Christ through us; and He Himself, our great High Priest, prays for us still before the Father's throne. Whatever your confusion, whatever your sorrow, whatever the hostility of the world, the Comforter is beside you and the Son is interceding for you. You are not alone, and you are not forgotten.</p>
+
+</div>
+<div class="lang-es">
+
+<h3>Introducci&oacute;n &mdash; "No os dejar&eacute; hu&eacute;rfanos"</h3>
+<p>A&uacute;n en el aposento alto, la noche antes de la cruz, Jes&uacute;s segu&iacute;a hablando a sus amigos turbados. Les hab&iacute;a dicho que se iba, y sus corazones se romp&iacute;an; no entend&iacute;an, y el dolor llenaba el cuarto. Pero su partida no ser&iacute;a abandono. &#9889; <em>"No os dejar&eacute; hu&eacute;rfanos,"</em> prometi&oacute; (Juan 14:18), y les dio dos grandes regalos para probarlo. El primero fue una Persona que vendr&iacute;a a morar con ellos &mdash; el Consolador, el Esp&iacute;ritu Santo. El segundo fue una oraci&oacute;n, su propia oraci&oacute;n levant&aacute;ndolos al Padre, la gran oraci&oacute;n de Juan 17 que llamamos la Oraci&oacute;n Sumosacerdotal. El Esp&iacute;ritu ser&iacute;a Dios <em>con</em> ellos y <em>en</em> ellos; la oraci&oacute;n los sostendr&iacute;a ante el trono. Juntos responden al temor de todo disc&iacute;pulo que alguna vez ha sentido al Se&ntilde;or lejano: no est&aacute;s solo, y no est&aacute;s olvidado.</p>
+
+<h3>I. "Os conviene que yo me vaya"</h3>
+<p>Los disc&iacute;pulos no pod&iacute;an ver c&oacute;mo su partida pudiera ser otra cosa que p&eacute;rdida. Sin embargo, Jes&uacute;s dijo algo asombroso: &#9889; <em>"os conviene que yo me vaya; porque si no me fuese, el Consolador no vendr&iacute;a a vosotros; mas si me fuere, os lo enviar&eacute;"</em> (Juan 16:7). Mientras andaba en la tierra, Jes&uacute;s pod&iacute;a estar en un solo lugar a la vez; por el Esp&iacute;ritu, estar&iacute;a con cada creyente en todas partes, siempre. As&iacute; que su tristeza ten&iacute;a un prop&oacute;sito que a&uacute;n no pod&iacute;an ver. La compar&oacute; a una mujer de parto, cuya angustia es real pero se convierte en gozo cuando nace el ni&ntilde;o: "Llorar&eacute;is y lamentar&eacute;is... estar&eacute;is tristes, pero vuestra tristeza se convertir&aacute; en gozo" (Juan 16:20&ndash;22). Este es el patr&oacute;n hondo de la vida de fe &mdash; que a menudo se nos pide confiar en el Padre en la oscuridad, antes de que se nos muestre la raz&oacute;n.</p>
+<div class="illustration"><strong>Confiar en un plan que a&uacute;n no vemos.</strong> El Dr. Cook ha dicho a menudo que tras medio siglo de ministerio a&uacute;n halla mucho del obrar de Dios m&aacute;s all&aacute; de su entendimiento &mdash; por qu&eacute; Dios permite las guerras y las hambrunas, por qu&eacute; les sobrevienen males a los buenos. Ha conocido p&eacute;rdidas hondas en su propia familia, viendo a seres queridos llevados por una enfermedad cruel mientras &eacute;l mismo fue librado, sin respuesta que pudiera dar. Y sin embargo su confianza firme es esta: Dios tiene un plan, y aun lo que no podemos entender en este mundo lo entenderemos en el mundo venidero. Cuenta tambi&eacute;n de un tiempo temprano en el ministerio cuando se sent&iacute;a seguro de que Dios lo destinaba a una iglesia grande, mientras una congregaci&oacute;n diminuta y pobre en un lugar fr&iacute;o y lejano segu&iacute;a llam&aacute;ndolo. De mala gana sigui&oacute; lo que no pod&iacute;a explicar &mdash; y fue all&iacute; donde Dios bendijo la obra, provey&oacute; para su familia, y abri&oacute; la puerta que con el tiempo lo hizo profesor de seminario. Mirando atr&aacute;s, el camino confuso era el correcto. As&iacute; que el Esp&iacute;ritu viene a ser nuestro Ayudador justo cuando el camino no est&aacute; claro.</div>
+
+<h3>II. El Consolador, el Esp&iacute;ritu de verdad</h3>
+<p>El nombre que Jes&uacute;s da al Esp&iacute;ritu es rico: el <em>Paracleto</em> &mdash; el Consolador, el Ayudador, el Abogado, literalmente "uno llamado al lado" para estar con nosotros. Y es dado no para una visita sino para siempre: &#9889; <em>"Y yo rogar&eacute; al Padre, y os dar&aacute; otro Consolador, para que est&eacute; con vosotros para siempre; el Esp&iacute;ritu de verdad... mora con vosotros, y estar&aacute; en vosotros"</em> (Juan 14:16&ndash;17). Note "otro" Consolador &mdash; otro de la misma clase que Jes&uacute;s mismo, Dios acercado. Jes&uacute;s nos dice lo que el Esp&iacute;ritu hace. <strong>Ense&ntilde;a</strong>: "&eacute;l os ense&ntilde;ar&aacute; todas las cosas, y os recordar&aacute; todo lo que os he dicho" (14:26). <strong>Da testimonio</strong> de Cristo: "&eacute;l dar&aacute; testimonio de m&iacute;" (15:26). <strong>Convence</strong>: "convencer&aacute; al mundo de pecado, de justicia y de juicio" (16:8), despertando la conciencia que est&aacute; muerta a Dios. Y <strong>gu&iacute;a</strong>: "&eacute;l os guiar&aacute; a toda verdad... &eacute;l me glorificar&aacute;" (16:13&ndash;14).</p>
+<p>Ese &uacute;ltimo punto es la clave para conocer la verdadera obra del Esp&iacute;ritu. El Esp&iacute;ritu no se anuncia a s&iacute; mismo; glorifica a Cristo. As&iacute; que una vida de veras llena del Esp&iacute;ritu no llamar&aacute; la atenci&oacute;n sobre s&iacute; misma ni sobre se&ntilde;ales espectaculares &mdash; se&ntilde;alar&aacute; a Jes&uacute;s. Y este mismo Consolador es nuestra fuerza cuando el mundo se vuelve hostil. Jes&uacute;s advirti&oacute; que el mundo odiar&iacute;a a los suyos como le odi&oacute; a &eacute;l; pero el Esp&iacute;ritu, el Abogado, da poder a creyentes comunes para dar testimonio con denuedo aun bajo persecuci&oacute;n, de modo que la iglesia a menudo ha crecido m&aacute;s r&aacute;pido justo donde m&aacute;s ha sufrido. El Consolador no es un lujo para los d&iacute;as tranquilos; es el valor del m&aacute;rtir y la voz firme en la tormenta.</p>
+<div class="pull-quote">Jes&uacute;s no env&iacute;a meramente ayuda; env&iacute;a un Ayudador &mdash; una Persona, Dios mismo, para morar dentro del pueblo mismo que ha salvado.</div>
+<p>Esta es la maravilla que los disc&iacute;pulos a&uacute;n no pod&iacute;an captar aquella noche: el mismo Dios que hab&iacute;a caminado junto a ellos por los caminos de Galilea ahora vivir&iacute;a dentro de ellos. El Consolador no es una fuerza ni un sentimiento sino una Persona divina que nos conoce, nos ama, y nunca nos deja. Ora en nosotros cuando no sabemos c&oacute;mo orar, nos sostiene cuando nuestras propias fuerzas fallan, y sigue volviendo calladamente nuestros ojos a Cristo. Lo que Jes&uacute;s hab&iacute;a sido para ellos por fuera, el Esp&iacute;ritu lo ser&iacute;a ahora para cada creyente desde dentro.</p>
+
+<h3>III. La tristeza convertida en gozo, y un plan revelado d&iacute;a a d&iacute;a</h3>
+<p>Los disc&iacute;pulos segu&iacute;an pregunt&aacute;ndose qu&eacute; quer&iacute;a decir Jes&uacute;s con "un poco." Nosotros hacemos lo mismo. Queremos que Dios despliegue todo el plan de una vez, claramente, como una m&aacute;quina que arroja una respuesta instant&aacute;nea a una pregunta escrita. Pero Dios rara vez responde as&iacute;. Aun a los disc&iacute;pulos les revel&oacute; solo lo que pod&iacute;an soportar, una luz parcial para el siguiente paso, porque no est&aacute; formando esclavos que obedecen &oacute;rdenes ciegas sino hijos e hijas que han de crecer hasta la mente misma de Cristo. &#9889; <em>"A&uacute;n tengo muchas cosas que deciros, pero ahora no las pod&eacute;is sobrellevar"</em> (Juan 16:12). Aprendemos m&aacute;s buscando su voluntad con el tiempo que lo que jam&aacute;s aprender&iacute;amos de una respuesta instant&aacute;nea; el buscar mismo nos forma. Y a trav&eacute;s de todo, la promesa se sostiene: la tristeza se convertir&aacute; en gozo que nadie podr&aacute; quitar, y "todo cuanto pidiereis al Padre en mi nombre, os lo dar&aacute;" (16:23). El Dios que obra en nosotros "as&iacute; el querer como el hacer, por su buena voluntad" (Filipenses 2:13) despliega su prop&oacute;sito con paciencia, d&iacute;a tras d&iacute;a.</p>
+
+<h3>IV. La Oraci&oacute;n Sumosacerdotal (Juan 17)</h3>
+<p>Entonces Jes&uacute;s alz&oacute; los ojos al cielo y or&oacute; &mdash; y se nos permite escuchar. Juan 17 se llama con raz&oacute;n la Oraci&oacute;n Sumosacerdotal, pues aqu&iacute; el gran Sumo Sacerdote intercede por su pueblo en v&iacute;speras de su sacrificio. <strong>Primero ora por s&iacute; mismo</strong>: "Padre, la hora ha llegado; glorifica a tu Hijo, para que tu Hijo tambi&eacute;n te glorifique a ti" (17:1), y nos define el coraz&oacute;n mismo de la salvaci&oacute;n: &#9889; <em>"Y esta es la vida eterna: que te conozcan a ti, el &uacute;nico Dios verdadero, y a Jesucristo, a quien has enviado"</em> (17:3). La vida eterna no es primero un lugar ni una cantidad de d&iacute;as; es conocer a Dios. <strong>Luego ora por sus disc&iacute;pulos</strong>: no que el Padre los quite del mundo, sino que los guarde del maligno, y &#9889; <em>"Santif&iacute;calos en tu verdad; tu palabra es verdad"</em> (17:17). Encomienda a los once atemorizados al cuidado del Padre.</p>
+<p><strong>Y entonces ora por nosotros.</strong> "Mas no ruego solamente por &eacute;stos, sino tambi&eacute;n por los que han de creer en m&iacute; por la palabra de ellos" (Juan 17:20). Todo creyente que alguna vez ha venido a Cristo por el testimonio de los ap&oacute;stoles fue nombrado en aquella oraci&oacute;n aquella noche. Y lo que pide por nosotros es unidad: &#9889; <em>"para que todos sean uno; como t&uacute;, oh Padre, en m&iacute;, y yo en ti, que tambi&eacute;n ellos sean uno en nosotros; para que el mundo crea que t&uacute; me enviaste"</em> (17:21). La unidad que pide no es una uniformidad forzada ni una mera organizaci&oacute;n; es una vida compartida que refleja la oneidad misma del Padre y el Hijo, y su prop&oacute;sito es evangel&iacute;stico &mdash; para que el mundo que observa crea. Termina alcanzando m&aacute;s all&aacute; de esta vida: "Padre, aquellos que me has dado, quiero que donde yo estoy, tambi&eacute;n ellos est&eacute;n conmigo, para que vean mi gloria" (17:24).</p>
+<p>As&iacute; que una los dos regalos. Jes&uacute;s no dej&oacute; a los suyos hu&eacute;rfanos. Envi&oacute; al Consolador para estar con nosotros y en nosotros, ense&ntilde;ando, convenciendo, consolando, y glorificando a Cristo por medio de nosotros; y &eacute;l mismo, nuestro gran Sumo Sacerdote, ora por nosotros a&uacute;n ante el trono del Padre. Cualquiera que sea su confusi&oacute;n, cualquiera que sea su tristeza, cualquiera que sea la hostilidad del mundo, el Consolador est&aacute; a su lado y el Hijo intercede por usted. No est&aacute; solo, y no est&aacute; olvidado.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 11 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 11 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La secci&oacute;n de respuesta corta es pr&aacute;ctica para el Certificado y no cuenta en su contra.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 11;
+const COURSE = 'john';
+const NEXT_UNIT_URL = 'CTSJohnUnit12.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Word Made Flesh", "Unit 2 - You Must Be Born Again", "Unit 3 - Living Water", "Unit 4 - The Bread of Life", "Unit 5 - The Light of the World", "Unit 6 - The Witnesses to Christ", "Unit 7 - The Door and the Good Shepherd", "Unit 8 - The Resurrection and the Life", "Unit 9 - The Hour of Glory", "Unit 10 - The Way, the Truth, and the Life", "Unit 11 - The Spirit and the High-Priestly Prayer", "Unit 12 - It Is Finished"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSJohnUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    } else {
+        document.getElementById('studentGreeting').innerHTML = '<a href="CTSJohnUnit1.html" style="color:#8a1f1f;">Please register on Unit 1 / Reg&iacute;strese en la Unidad 1</a>';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields. / Por favor complete todos los campos.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered! / \u00a1Registrado!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "As Jesus prepares to leave, the disciples are:", "textEs": "Mientras Jesús se prepara para partir, los discípulos están:", "optionsEn": ["angry at Rome", "confused and grieving, not understanding \"a little while\"", "rejoicing greatly", "fast asleep"], "optionsEs": ["enojados con Roma", "confundidos y afligidos, sin entender \"un poco\"", "muy gozosos", "profundamente dormidos"], "explanationEn": "His talk of leaving filled the room with grief and confusion, and into that He gives His comfort.", "explanationEs": "Su hablar de partir llenó el cuarto de dolor y confusión, y en eso da su consuelo.", "correct": 1}, {"textEn": "Jesus said it was actually to their advantage that He go away because:", "textEs": "Jesús dijo que en realidad les convenía que él se fuera porque:", "optionsEn": ["if He did not go, the Helper (the Spirit) would not come", "the crowds were too large", "they needed rest", "the feast had ended"], "optionsEs": ["si no se iba, el Consolador (el Espíritu) no vendría", "las multitudes eran muy grandes", "necesitaban descanso", "la fiesta había terminado"], "explanationEn": "John 16:7 — by the Spirit He would be with every believer everywhere, always.", "explanationEs": "Juan 16:7 — por el Espíritu estaría con cada creyente en todas partes, siempre.", "correct": 0}, {"textEn": "The name Jesus gives the Spirit — Paraclete — means:", "textEs": "El nombre que Jesús da al Espíritu — Paracleto — significa:", "optionsEn": ["teacher only", "judge", "Helper / Comforter / Advocate, one called alongside", "accuser"], "optionsEs": ["solo maestro", "juez", "Consolador / Ayudador / Abogado, uno llamado al lado", "acusador"], "explanationEn": "The Spirit is one called alongside us to stand with us forever.", "explanationEs": "El Espíritu es uno llamado a nuestro lado para estar con nosotros para siempre.", "correct": 2}, {"textEn": "Of the Helper Jesus said He would:", "textEs": "Del Consolador Jesús dijo que él:", "optionsEn": ["come only briefly", "abide with them forever and be in them", "visit occasionally", "stay outside"], "optionsEs": ["vendría solo brevemente", "moraría con ellos para siempre y estaría en ellos", "visitaría de vez en cuando", "se quedaría afuera"], "explanationEn": "John 14:16-17 — \"another\" Helper, of the same kind as Jesus, God come close, forever.", "explanationEs": "Juan 14:16-17 — \"otro\" Consolador, de la misma clase que Jesús, Dios acercado, para siempre.", "correct": 1}, {"textEn": "The Spirit, Jesus said, would teach them all things and:", "textEs": "El Espíritu, dijo Jesús, les enseñaría todas las cosas y:", "optionsEn": ["bring to their remembrance all that Jesus had said", "speak brand-new doctrines", "replace Jesus' words", "remain silent"], "optionsEs": ["les recordaría todo lo que Jesús había dicho", "hablaría doctrinas totalmente nuevas", "reemplazaría las palabras de Jesús", "permanecería en silencio"], "explanationEn": "John 14:26 — the Spirit secures the apostles' true memory of Christ's teaching.", "explanationEs": "Juan 14:26 — el Espíritu asegura la memoria fiel de la enseñanza de Cristo en los apóstoles.", "correct": 0}, {"textEn": "The Spirit of truth, Jesus said, would:", "textEs": "El Espíritu de verdad, dijo Jesús:", "optionsEn": ["condemn the church", "testify of Himself", "glorify the disciples", "testify of Christ and glorify Christ"], "optionsEs": ["condenar a la iglesia", "dar testimonio de sí mismo", "glorificar a los discípulos", "dar testimonio de Cristo y glorificar a Cristo"], "explanationEn": "John 15:26; 16:14 — the Spirit does not advertise Himself; He points to Jesus.", "explanationEs": "Juan 15:26; 16:14 — el Espíritu no se anuncia a sí mismo; señala a Jesús.", "correct": 3}, {"textEn": "Jesus said the Spirit would convict the world concerning:", "textEs": "Jesús dijo que el Espíritu convencería al mundo de:", "optionsEn": ["sin, righteousness, and judgment", "law and custom", "wealth and poverty", "food and feasts"], "optionsEs": ["pecado, justicia y juicio", "ley y costumbre", "riqueza y pobreza", "comida y fiestas"], "explanationEn": "John 16:8 — the Spirit awakens the conscience that is dead to God.", "explanationEs": "Juan 16:8 — el Espíritu despierta la conciencia que está muerta a Dios.", "correct": 0}, {"textEn": "\"He will guide you into all ___\" (16:13):", "textEs": "\"Él os guiará a toda ___\" (16:13):", "optionsEn": ["power", "wealth", "comfort", "truth"], "optionsEs": ["poder", "riqueza", "consuelo", "verdad"], "explanationEn": "The Spirit of truth leads believers into the truth of Christ.", "explanationEs": "El Espíritu de verdad guía a los creyentes a la verdad de Cristo.", "correct": 3}, {"textEn": "Because the Spirit glorifies Christ and not Himself, a Spirit-filled life will:", "textEs": "Porque el Espíritu glorifica a Cristo y no a sí mismo, una vida llena del Espíritu:", "optionsEn": ["seek fame", "point to Jesus", "draw attention to itself", "fall silent about Christ"], "optionsEs": ["buscará fama", "señalará a Jesús", "llamará la atención sobre sí misma", "callará acerca de Cristo"], "explanationEn": "The true mark of the Spirit's fullness is not spectacle but a life that exalts Jesus.", "explanationEs": "La verdadera marca de la plenitud del Espíritu no es el espectáculo sino una vida que exalta a Jesús.", "correct": 1}, {"textEn": "Jesus compared the disciples' coming sorrow to:", "textEs": "Jesús comparó la tristeza venidera de los discípulos con:", "optionsEn": ["a storm at sea", "a long winter", "a woman in labor, whose pain turns to joy when the child is born", "a lost coin"], "optionsEs": ["una tormenta en el mar", "un largo invierno", "una mujer de parto, cuyo dolor se vuelve gozo cuando nace el niño", "una moneda perdida"], "explanationEn": "John 16:21 — real anguish, but it gives way to joy at the birth.", "explanationEs": "Juan 16:21 — angustia real, pero da paso al gozo en el nacimiento.", "correct": 2}, {"textEn": "Of their grief Jesus promised:", "textEs": "De su dolor Jesús prometió:", "optionsEn": ["it would last forever", "they would never smile again", "their sorrow would turn to joy that no one could take away", "they would forget Him"], "optionsEs": ["duraría para siempre", "nunca volverían a sonreír", "su tristeza se convertiría en gozo que nadie podría quitar", "lo olvidarían"], "explanationEn": "John 16:22 — a joy rooted in His resurrection and presence, beyond the world's reach.", "explanationEs": "Juan 16:22 — un gozo arraigado en su resurrección y presencia, fuera del alcance del mundo.", "correct": 2}, {"textEn": "Cook illustrates that God reveals His plan:", "textEs": "Cook ilustra que Dios revela su plan:", "optionsEn": ["only to scholars", "never at all", "instantly, like a chatbot", "not all at once, but day by day, as we seek His will and gain the mind of Christ"], "optionsEs": ["solo a los eruditos", "nunca", "al instante, como un chatbot", "no de una vez, sino día a día, al buscar su voluntad y ganar la mente de Cristo"], "explanationEn": "God trains sons and daughters, not slaves; the seeking itself shapes us.", "explanationEs": "Dios forma hijos e hijas, no esclavos; el buscar mismo nos forma.", "correct": 3}, {"textEn": "Cook, reflecting on deep losses in his own family, concludes that:", "textEs": "Cook, reflexionando sobre pérdidas hondas en su propia familia, concluye que:", "optionsEn": ["faith requires no trust", "suffering is meaningless", "God has a plan he may not understand now but will understand in the world to come", "God is distant"], "optionsEs": ["la fe no requiere confianza", "el sufrimiento no tiene sentido", "Dios tiene un plan que tal vez no entienda ahora pero entenderá en el mundo venidero", "Dios está distante"], "explanationEn": "He trusts the Father's plan in the dark, exactly where the Spirit comes as Helper.", "explanationEs": "Confía en el plan del Padre en la oscuridad, justo donde el Espíritu viene como Ayudador.", "correct": 2}, {"textEn": "In John 17, often called the High-Priestly Prayer, Jesus prays first:", "textEs": "En Juan 17, llamada a menudo la Oración Sumosacerdotal, Jesús ora primero:", "optionsEn": ["for Himself — that the Father would glorify the Son, that the Son may glorify the Father", "for the weather", "for wealth", "for the Romans"], "optionsEs": ["por sí mismo — que el Padre glorifique al Hijo, para que el Hijo glorifique al Padre", "por el clima", "por riquezas", "por los romanos"], "explanationEn": "John 17:1 — \"Father, the hour has come. Glorify Your Son.\"", "explanationEs": "Juan 17:1 — \"Padre, la hora ha llegado; glorifica a tu Hijo.\"", "correct": 0}, {"textEn": "Jesus defines eternal life (17:3) as:", "textEs": "Jesús define la vida eterna (17:3) como:", "optionsEn": ["long years", "to know the only true God and Jesus Christ whom He sent", "earthly success", "perfect health"], "optionsEs": ["muchos años", "conocer al único Dios verdadero y a Jesucristo a quien envió", "éxito terrenal", "salud perfecta"], "explanationEn": "Eternal life is not first a place or a length of days; it is to know God.", "explanationEs": "La vida eterna no es primero un lugar ni una cantidad de días; es conocer a Dios.", "correct": 1}, {"textEn": "For His disciples Jesus prayed that the Father would:", "textEs": "Por sus discípulos Jesús oró que el Padre:", "optionsEn": ["make them famous", "give them riches", "remove them from earth at once", "keep them from the evil one and sanctify them in the truth, God's word"], "optionsEs": ["los hiciera famosos", "les diera riquezas", "los quitara de la tierra de inmediato", "los guardara del maligno y los santificara en la verdad, la palabra de Dios"], "explanationEn": "John 17:15-17 — not out of the world, but kept and sanctified in the truth.", "explanationEs": "Juan 17:15-17 — no fuera del mundo, sino guardados y santificados en la verdad.", "correct": 3}, {"textEn": "Jesus prayed not only for the disciples present but also:", "textEs": "Jesús oró no solo por los discípulos presentes sino también:", "optionsEn": ["only for Israel", "for all who would believe in Him through their word — including us", "for no one else", "for the Pharisees alone"], "optionsEs": ["solo por Israel", "por todos los que creerían en él por la palabra de ellos — incluyéndonos", "por nadie más", "solo por los fariseos"], "explanationEn": "John 17:20 — every later believer was named in that prayer that night.", "explanationEs": "Juan 17:20 — todo creyente posterior fue nombrado en aquella oración esa noche.", "correct": 1}, {"textEn": "The great request of John 17:21 is that all believers may be:", "textEs": "La gran petición de Juan 17:21 es que todos los creyentes sean:", "optionsEn": ["separated from each other", "wealthy", "one, as the Father and the Son are one, so that the world may believe", "silent"], "optionsEs": ["separados unos de otros", "ricos", "uno, como el Padre y el Hijo son uno, para que el mundo crea", "silenciosos"], "explanationEn": "A shared life mirroring the oneness of Father and Son, with an evangelistic purpose.", "explanationEs": "Una vida compartida que refleja la oneidad del Padre y el Hijo, con propósito evangelístico.", "correct": 2}, {"textEn": "The unity Jesus prays for reflects:", "textEs": "La unidad por la que Jesús ora refleja:", "optionsEn": ["a business merger", "mere uniformity of opinion", "political agreement", "the oneness of the Father and the Son, meant so the world may believe"], "optionsEs": ["una fusión comercial", "mera uniformidad de opinión", "un acuerdo político", "la oneidad del Padre y el Hijo, para que el mundo crea"], "explanationEn": "It is not forced sameness but a shared life that points the world to Christ.", "explanationEs": "No es igualdad forzada sino una vida compartida que señala al mundo a Cristo.", "correct": 3}, {"textEn": "Cook's comfort is that Jesus has not left us orphans, for He:", "textEs": "El consuelo de Cook es que Jesús no nos ha dejado huérfanos, pues él:", "optionsEn": ["sent the Helper to be with and in us, and He Himself prays for us before the Father", "gave only rules", "left only a book", "abandoned the church"], "optionsEs": ["envió al Consolador para estar con y en nosotros, y él mismo ora por nosotros ante el Padre", "dio solo reglas", "dejó solo un libro", "abandonó a la iglesia"], "explanationEn": "The Spirit beside and within, and the Son interceding — we are not alone or forgotten.", "explanationEs": "El Espíritu al lado y dentro, y el Hijo intercediendo — no estamos solos ni olvidados.", "correct": 0}];
+const kwQuestions = [
+{"textEn":"Explain why Jesus said it was to the disciples' advantage that He go away (John 16:7).","textEs":"Explique por qu\u00e9 Jes\u00fas dijo que les conven\u00eda a los disc\u00edpulos que \u00e9l se fuera (Juan 16:7).","kw_en":["advantage","away","helper","spirit","come","send","leave","better"],"kw_es":["conviene","va","consolador","espiritu","viene","envia","deja","mejor"],"modelEn":"The disciples could see only loss in His leaving, but Jesus said it was to their advantage that He go away, for if He did not go, the Helper would not come, but if He departed He would send the Spirit to them. While He walked the earth He could be in only one place at a time; by the Spirit He would be with every believer everywhere and always. So His departure was actually better for them, because it opened the way for the Comforter to come and dwell in them, making His presence closer than ever before.","modelEs":"Los disc\u00edpulos solo ve\u00edan p\u00e9rdida en su partida, pero Jes\u00fas dijo que les conven\u00eda que se fuera, porque si no se iba, el Consolador no vendr\u00eda, mas si se iba les enviar\u00eda el Esp\u00edritu. Mientras andaba en la tierra pod\u00eda estar en un solo lugar a la vez; por el Esp\u00edritu estar\u00eda con cada creyente en todas partes y siempre. As\u00ed que su partida era en realidad mejor para ellos, porque abri\u00f3 el camino para que el Consolador viniera y morara en ellos, haciendo su presencia m\u00e1s cercana que nunca."},
+{"textEn":"Explain the name and work of the Helper, the Spirit of truth (John 14:16-17, 26).","textEs":"Explique el nombre y la obra del Consolador, el Esp\u00edritu de verdad (Juan 14:16-17, 26).","kw_en":["helper","comforter","spirit","truth","teach","abide","forever","remember"],"kw_es":["consolador","espiritu","verdad","ensena","mora","siempre","recuerda","ayuda"],"modelEn":"Jesus called the Spirit another Helper or Comforter, the Spirit of truth, given to abide with the disciples forever and to be in them, not merely with them. The word means one called alongside to help. He teaches: He would teach them all things and bring to their remembrance all that Jesus had said, securing the apostles' faithful memory of His teaching. He is another of the same kind as Jesus, God come close. So the Helper is the abiding presence of God in the believer, teaching, reminding, and leading us in the truth of Christ.","modelEs":"Jes\u00fas llam\u00f3 al Esp\u00edritu otro Consolador o Ayudador, el Esp\u00edritu de verdad, dado para morar con los disc\u00edpulos para siempre y estar en ellos, no solo con ellos. La palabra significa uno llamado al lado para ayudar. Ense\u00f1a: les ense\u00f1ar\u00eda todas las cosas y les recordar\u00eda todo lo que Jes\u00fas hab\u00eda dicho, asegurando la memoria fiel de su ense\u00f1anza en los ap\u00f3stoles. Es otro de la misma clase que Jes\u00fas, Dios acercado. As\u00ed que el Consolador es la presencia permanente de Dios en el creyente, ense\u00f1ando, recordando y guiando en la verdad de Cristo."},
+{"textEn":"Explain how the Spirit testifies of Christ and convicts the world (John 15:26; 16:8-11).","textEs":"Explique c\u00f3mo el Esp\u00edritu da testimonio de Cristo y convence al mundo (Juan 15:26; 16:8-11).","kw_en":["spirit","testify","christ","convict","world","sin","glorify","witness"],"kw_es":["espiritu","testimonio","cristo","convence","mundo","pecado","glorifica","testigo"],"modelEn":"Jesus said the Spirit of truth would testify of Him, bearing witness to Christ rather than to Himself. He also said the Spirit would convict the world of sin, of righteousness, and of judgment, awakening the conscience that is dead to God so that people see their need of Christ. The Spirit glorifies Jesus, not Himself. So His work is to point the world to Christ, both by convicting sinners of their sin and by testifying to who Jesus is, so that they may believe and be saved.","modelEs":"Jes\u00fas dijo que el Esp\u00edritu de verdad dar\u00eda testimonio de \u00e9l, testificando de Cristo en vez de s\u00ed mismo. Tambi\u00e9n dijo que el Esp\u00edritu convencer\u00eda al mundo de pecado, de justicia y de juicio, despertando la conciencia que est\u00e1 muerta a Dios para que la gente vea su necesidad de Cristo. El Esp\u00edritu glorifica a Jes\u00fas, no a s\u00ed mismo. As\u00ed que su obra es se\u00f1alar al mundo a Cristo, tanto convenciendo a los pecadores de su pecado como dando testimonio de qui\u00e9n es Jes\u00fas, para que crean y sean salvos."},
+{"textEn":"Explain that the Spirit glorifies Christ, and what that means for the believer (John 16:13-14).","textEs":"Explique que el Esp\u00edritu glorifica a Cristo, y qu\u00e9 significa eso para el creyente (Juan 16:13-14).","kw_en":["spirit","glorify","christ","truth","guide","point","himself","jesus"],"kw_es":["espiritu","glorifica","cristo","verdad","guia","apunta","mismo","jesus"],"modelEn":"Jesus said the Spirit would guide them into all truth and would glorify Him, for the Spirit does not speak of Himself but takes what is Christ's and shows it to us. This means the Spirit does not advertise Himself or draw attention to spectacular signs; He points to Jesus. So a life truly filled with the Spirit will not exalt itself but will exalt Christ. The mark of the Spirit's work in a believer is not self-display but a heart and life that glorify Jesus and are guided by His truth.","modelEs":"Jes\u00fas dijo que el Esp\u00edritu los guiar\u00eda a toda verdad y lo glorificar\u00eda a \u00e9l, pues el Esp\u00edritu no habla de s\u00ed mismo sino que toma lo que es de Cristo y nos lo muestra. Esto significa que el Esp\u00edritu no se anuncia a s\u00ed mismo ni llama la atenci\u00f3n sobre se\u00f1ales espectaculares; se\u00f1ala a Jes\u00fas. As\u00ed que una vida de veras llena del Esp\u00edritu no se exaltar\u00e1 a s\u00ed misma sino que exaltar\u00e1 a Cristo. La marca de la obra del Esp\u00edritu en un creyente no es el exhibirse sino un coraz\u00f3n y una vida que glorifican a Jes\u00fas y son guiados por su verdad."},
+{"textEn":"Explain Jesus' promise that their sorrow will turn to joy (John 16:20-22).","textEs":"Explique la promesa de Jes\u00fas de que su tristeza se convertir\u00e1 en gozo (Juan 16:20-22).","kw_en":["sorrow","joy","grief","turn","woman","birth","take","return"],"kw_es":["tristeza","gozo","dolor","convierte","mujer","parto","quita","vuelve"],"modelEn":"Jesus told the disciples they would weep and mourn while the world rejoiced, but their grief would turn to joy. He compared it to a woman in labor, whose pain is real but is forgotten in the joy when her child is born. So their coming sorrow at His death had a purpose and an end. He promised, I will see you again and you will rejoice, and no one will take your joy from you. The joy is rooted in His resurrection and abiding presence, a joy the world can neither give nor take away.","modelEs":"Jes\u00fas dijo a los disc\u00edpulos que llorar\u00edan y se lamentar\u00edan mientras el mundo se gozaba, pero su dolor se convertir\u00eda en gozo. Lo compar\u00f3 con una mujer de parto, cuyo dolor es real pero se olvida en el gozo cuando nace su ni\u00f1o. As\u00ed que su tristeza venidera por su muerte ten\u00eda prop\u00f3sito y fin. Prometi\u00f3: os volver\u00e9 a ver y se gozar\u00e1 vuestro coraz\u00f3n, y nadie os quitar\u00e1 vuestro gozo. El gozo se arraiga en su resurrecci\u00f3n y presencia permanente, un gozo que el mundo no puede dar ni quitar."},
+{"textEn":"Explain how God reveals His plan day by day, not all at once (John 16:25-31).","textEs":"Explique c\u00f3mo Dios revela su plan d\u00eda a d\u00eda, no todo de una vez (Juan 16:25-31).","kw_en":["plan","reveal","day","seek","will","god","trust","understand"],"kw_es":["plan","revela","dia","busca","voluntad","dios","confia","entiende"],"modelEn":"We want God to reveal His whole plan at once and plainly, like a machine giving an instant answer, but He rarely works that way. Even the disciples were given only what they could bear, a partial light for the next step. God does this because He is not training slaves who obey blind orders but sons and daughters who are to grow into the mind of Christ. We learn more by seeking His will over time than from an instant reply, for the seeking itself shapes us. So we must trust the Father day by day, even when we do not yet understand the whole plan.","modelEs":"Queremos que Dios revele todo su plan de una vez y claramente, como una m\u00e1quina que da una respuesta instant\u00e1nea, pero rara vez obra as\u00ed. Aun a los disc\u00edpulos se les dio solo lo que pod\u00edan soportar, una luz parcial para el siguiente paso. Dios hace esto porque no forma esclavos que obedecen \u00f3rdenes ciegas sino hijos e hijas que han de crecer hasta la mente de Cristo. Aprendemos m\u00e1s buscando su voluntad con el tiempo que de una respuesta instant\u00e1nea, pues el buscar mismo nos forma. As\u00ed que debemos confiar en el Padre d\u00eda a d\u00eda, aunque no entendamos todav\u00eda todo el plan."},
+{"textEn":"Explain how John 17 shows Jesus as our great High Priest praying.","textEs":"Explique c\u00f3mo Juan 17 muestra a Jes\u00fas como nuestro gran Sumo Sacerdote orando.","kw_en":["pray","high","priest","jesus","father","intercede","glorify","disciple"],"kw_es":["ora","sumo","sacerdote","jesus","padre","intercede","glorifica","discipulo"],"modelEn":"John 17 is called the High-Priestly Prayer because in it the great High Priest intercedes for His people on the eve of His sacrifice. Jesus lifts His eyes to heaven and prays first for Himself, asking the Father to glorify the Son that the Son may glorify the Father. Then He prays for His disciples, committing the frightened eleven to the Father's keeping and asking that they be sanctified in the truth. As our High Priest He stands between His people and the Father, and He still intercedes for us before the throne today.","modelEs":"Juan 17 se llama la Oraci\u00f3n Sumosacerdotal porque en ella el gran Sumo Sacerdote intercede por su pueblo en v\u00edsperas de su sacrificio. Jes\u00fas alza los ojos al cielo y ora primero por s\u00ed mismo, pidiendo al Padre que glorifique al Hijo para que el Hijo glorifique al Padre. Luego ora por sus disc\u00edpulos, encomendando a los once atemorizados al cuidado del Padre y pidiendo que sean santificados en la verdad. Como nuestro Sumo Sacerdote se pone entre su pueblo y el Padre, y a\u00fan intercede por nosotros ante el trono hoy."},
+{"textEn":"Explain Jesus' definition of eternal life and His prayer to sanctify the disciples (John 17:3, 17).","textEs":"Explique la definici\u00f3n de Jes\u00fas de la vida eterna y su oraci\u00f3n para santificar a los disc\u00edpulos (Juan 17:3, 17).","kw_en":["eternal","life","know","god","sanctify","truth","word","keep"],"kw_es":["eterna","vida","conoce","dios","santifica","verdad","palabra","guarda"],"modelEn":"Jesus defined eternal life as this: that they may know the only true God, and Jesus Christ whom He sent. Eternal life is not first a place or a length of days but a personal knowing of God. For His disciples He prayed not that the Father would take them out of the world but that He would keep them from the evil one and sanctify them by the truth, adding that God's word is truth. So eternal life is to know God, and the way His people are kept and made holy in a hostile world is by the truth of His word, into which the Spirit guides them.","modelEs":"Jes\u00fas defini\u00f3 la vida eterna as\u00ed: que conozcan al \u00fanico Dios verdadero, y a Jesucristo a quien envi\u00f3. La vida eterna no es primero un lugar ni una cantidad de d\u00edas sino un conocer personal a Dios. Por sus disc\u00edpulos or\u00f3 no que el Padre los quitara del mundo sino que los guardara del maligno y los santificara en la verdad, a\u00f1adiendo que la palabra de Dios es verdad. As\u00ed que la vida eterna es conocer a Dios, y el modo en que su pueblo es guardado y hecho santo en un mundo hostil es por la verdad de su palabra, a la cual el Esp\u00edritu lo gu\u00eda."},
+{"textEn":"Explain that Jesus prayed for all who would believe, and the request for unity (John 17:20-23).","textEs":"Explique que Jes\u00fas or\u00f3 por todos los que creer\u00edan, y la petici\u00f3n de unidad (Juan 17:20-23).","kw_en":["pray","believe","word","one","unity","father","world","us"],"kw_es":["ora","cree","palabra","uno","unidad","padre","mundo","nosotros"],"modelEn":"Jesus said He did not pray only for the disciples present but also for all who would believe in Him through their word, so every later believer, including us, was named in that prayer that night. His great request was that they all may be one, as the Father is in the Son and the Son in the Father, that they also may be one in Them. This unity is not forced uniformity but a shared life that mirrors the oneness of the Father and the Son, and its purpose is that the world may believe that the Father sent Jesus.","modelEs":"Jes\u00fas dijo que no oraba solo por los disc\u00edpulos presentes sino tambi\u00e9n por todos los que creer\u00edan en \u00e9l por la palabra de ellos, as\u00ed que todo creyente posterior, incluy\u00e9ndonos, fue nombrado en aquella oraci\u00f3n esa noche. Su gran petici\u00f3n fue que todos sean uno, como el Padre en el Hijo y el Hijo en el Padre, que tambi\u00e9n ellos sean uno en ellos. Esta unidad no es uniformidad forzada sino una vida compartida que refleja la oneidad del Padre y el Hijo, y su prop\u00f3sito es que el mundo crea que el Padre envi\u00f3 a Jes\u00fas."},
+{"textEn":"How do the Spirit and the High-Priestly Prayer together show that Jesus did not leave us as orphans?","textEs":"\u00bfC\u00f3mo muestran juntos el Esp\u00edritu y la Oraci\u00f3n Sumosacerdotal que Jes\u00fas no nos dej\u00f3 hu\u00e9rfanos?","kw_en":["spirit","pray","comfort","orphan","help","intercede","father","with"],"kw_es":["espiritu","ora","consuela","huerfano","ayuda","intercede","padre","con"],"modelEn":"Jesus promised, I will not leave you orphans, and He proved it with two gifts. First He sent the Helper, the Spirit, to be with us and in us, teaching, convicting, comforting, and glorifying Christ through us. Second, as our great High Priest He prayed for us in John 17 and still intercedes for us before the Father. So whatever our confusion, sorrow, or the hostility of the world, the Comforter is beside us and the Son is praying for us. Together the Spirit and the prayer assure every believer that we are not alone and not forgotten.","modelEs":"Jes\u00fas prometi\u00f3: no os dejar\u00e9 hu\u00e9rfanos, y lo prob\u00f3 con dos regalos. Primero envi\u00f3 al Consolador, el Esp\u00edritu, para estar con nosotros y en nosotros, ense\u00f1ando, convenciendo, consolando, y glorificando a Cristo por medio de nosotros. Segundo, como nuestro gran Sumo Sacerdote or\u00f3 por nosotros en Juan 17 y a\u00fan intercede por nosotros ante el Padre. As\u00ed que cualquiera que sea nuestra confusi\u00f3n, tristeza, u hostilidad del mundo, el Consolador est\u00e1 a nuestro lado y el Hijo ora por nosotros. Juntos el Esp\u00edritu y la oraci\u00f3n aseguran a cada creyente que no estamos solos ni olvidados, con la ayuda del Padre."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 12 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 12 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s).</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (mcQuestions.length + idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register on Unit 1 first.' : 'Por favor reg\u00edstrese en la Unidad 1 primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y reintente la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSJohnReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

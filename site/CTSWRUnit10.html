@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS World Religions — Unit 10: Christian Apologetics in Interfaith Conversation</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #f8f4e8; border: 1px solid #e8d9b8; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 10px; margin: 6px 0 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; }
+.reg-form label { font-weight: bold; display: block; margin-top: 10px; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-form { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 11 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">🌍 World Religions — Unit 10: Christian Apologetics in Interfaith Conversation</span><span class="lang-es">🌍 Religiones del Mundo — Unidad 10: Apologética Cristiana en la Conversación Interreligiosa</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"But sanctify the Lord God in your hearts, and always be ready to give a defense to everyone who asks you a reason for the hope that is in you, with meekness and fear." — 1 Peter 3:15 (NKJV)</span><span class="lang-es">"Sino santificad al Señor Dios en vuestros corazones, y estad siempre preparados para presentar defensa con mansedumbre y reverencia ante todo el que os demande razón de la esperanza que hay en vosotros." — 1 Pedro 3:15 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="registrationCard">
+    <h2><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit. Your registration is saved on this device and used across all CTS courses.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full Name</span><span class="lang-es">Nombre Completo</span></label>
+    <input type="text" id="regName" placeholder="" />
+    <label><span class="lang-en">Email</span><span class="lang-es">Correo Electrónico</span></label>
+    <input type="email" id="regEmail" placeholder="" />
+    <label><span class="lang-en">Country</span><span class="lang-es">País</span></label>
+    <input type="text" id="regCountry" placeholder="" />
+    <label><span class="lang-en">Program Track</span><span class="lang-es">Programa</span></label>
+    <input type="hidden" id="regTrack" value="certificate" />
+    <div id="trackButtons" style="display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;">
+        <button type="button" class="track-opt" data-track="certificate"><span class="lang-en">Certificate of Ministry</span><span class="lang-es">Certificado de Ministerio</span></button>
+        <button type="button" class="track-opt" data-track="mdiv"><span class="lang-en">Master of Divinity (M.Div.)</span><span class="lang-es">Maestría en Divinidad (M.Div.)</span></button>
+        <button type="button" class="track-opt" data-track="thm"><span class="lang-en">Master of Theology (Th.M.)</span><span class="lang-es">Maestría en Teología (Th.M.)</span></button>
+    </div>
+    <button class="small" id="saveRegBtn" style="margin-top: 10px;"><span class="lang-en">Save Registration</span><span class="lang-es">Guardar Registro</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>Nine units into this course, you have accumulated a great deal of factual knowledge about eight distinct religious traditions and three modern movements, along with a comparative framework for understanding where each stands in relation to the biblical picture. This unit asks a different question: now that you know these things, how do you actually use them in conversation? Knowledge without method easily becomes either paralysis, a pastor so aware of complexity he never speaks, or clumsiness, a pastor who knows facts but deploys them in ways that wound rather than persuade. This unit exists to supply that method, under the historic Christian discipline called apologetics.</p>
+
+        <p>The word itself comes from the Greek <em>apologia</em>, meaning a reasoned defense, the term used for a formal legal defense in a Greek or Roman court — the same word Paul uses of his own ministry in Philippians 1:7 and that Peter uses in this unit's opening verse, instructing every believer, not merely trained theologians, to "always be ready to give a defense to everyone who asks you a reason for the hope that is in you" (1 Peter 3:15). Notice what the verse does not say: it does not say "always be ready to win an argument," and it attaches a crucial qualifier most Christians engaged in apologetics forget — this defense is to be offered "with meekness and fear," gentleness and reverent humility, not the aggressive point-scoring the word "apologetics" unfortunately suggests to modern ears unfamiliar with its actual meaning.</p>
+
+        <h2>I. What Apologetics Is and Is Not</h2>
+        <p>Apologetics, properly understood, is defense, not attack. It answers the question "why should I believe this?" rather than primarily existing to prove that every other position is foolish or dishonest. This distinction matters enormously for a pastor who has just completed nine units surveying other religions, because the temptation after gaining real knowledge of Islam, Hinduism, or Mormonism is to treat that knowledge as ammunition for winning arguments rather than as understanding that serves genuine persuasion. Scripture consistently commends the second posture and warns against the first: "the servant of the Lord must not quarrel but be gentle to all, able to teach, patient, in humility correcting those who are in opposition, if God perhaps will grant them repentance, so that they may know the truth" (2 Timothy 2:24-26) — language that assumes conversion is God's work accomplished through patient teaching, not the pastor's own achievement through superior debate technique.</p>
+
+        <p>This does not mean apologetics avoids hard truths or blunts genuine disagreement into vague niceness. Every unit in this course has named real, sharp differences between biblical Christianity and the traditions studied — Islam's denial of the crucifixion, Buddhism's denial of a permanent self, Jehovah's Witnesses' denial of Christ's deity. Apologetics gives a pastor the tools to explain and defend these differences clearly and honestly. What it forbids is doing so with contempt, exaggeration, or a spirit that treats the person across the table as an opponent to be defeated rather than a soul, made in God's image, whom the pastor genuinely hopes to see come to Christ.</p>
+
+        <p>It is worth distinguishing apologetics carefully from its frequent counterfeit, polemics — the practice of attacking another position primarily to score points or to reassure believers already convinced, with little genuine hope or expectation that the person being argued against is actually listening or might actually be persuaded. Polemics has its limited, proper place, particularly in guarding a congregation from doctrinal error already circulating within it, but it is not the method this unit commends for interfaith conversation. A pastor speaking with an actual Muslim, Buddhist, or Mormon neighbor is not primarily defending his congregation from that neighbor's ideas; he is, in that moment, hoping and praying for that neighbor's own conversion, and the tone, pace, and posture of a defense aimed at winning a soul differs substantially from the tone of a defense aimed merely at refuting an error for an audience already on the pastor's side.</p>
+
+        <h2>II. The Evidential Foundation: Why Christian Claims Rest on Verifiable History</h2>
+        <p>One feature distinguishes the central Christian truth claim from the central claims of nearly every tradition this course has studied: its dependence on a specific, publicly verifiable historical event rather than a private revelation accessible only to the founder, or a subjective mystical or philosophical insight available only through disciplined inward practice. Muhammad's revelations, examined in Unit 3, came to him alone in a cave; the golden plates Joseph Smith translated, examined in Unit 8, were seen, by his own account, by a small circle of witnesses and then removed from further examination; the enlightenment Siddhartha Gautama experienced beneath the Bodhi Tree, examined in Unit 5, was an inward event no one else could verify or repeat on his behalf.</p>
+
+        <p>The resurrection of Jesus Christ, by contrast, is presented in the New Testament as a public event with named witnesses, multiple independent testimonies, and claims that could, in principle, have been falsified by producing a body — precisely the kind of claim historians can actually investigate using the ordinary tools of historical inquiry rather than taking on faith alone. Paul makes this evidential structure explicit: "if Christ is not risen, your faith is futile" (1 Corinthians 15:17), and he lists specific, still-living witnesses his original readers could have questioned themselves: "He was seen by Cephas, then by the twelve. After that He was seen by over five hundred brethren at once, of whom the greater part remain to the present, but some have fallen asleep" (1 Corinthians 15:5-6). This is not the language of private mystical experience; it is the language of a man inviting his readers to go check the evidence themselves. A pastor engaging any tradition studied in this course can rightly point out that Christianity alone stakes its entire claim on a historical event open, in principle, to the same kind of investigation any other disputed historical event receives — and that this event has withstood two thousand years of exactly that scrutiny.</p>
+
+        <p>This distinctive feature does not mean other traditions offer no evidence whatsoever for their claims, and a pastor should resist overstating the contrast. Islam, for instance, appeals to the historical preservation of the Qur'an's text and to the character and biography of Muhammad as recorded in early sources; Mormonism appeals to the testimony of witnesses to the golden plates, even though those plates themselves were removed from ongoing examination. What genuinely distinguishes the resurrection claim is not that Christianity uniquely offers evidence while others offer none, but that the resurrection specifically invites the kind of ongoing, independent, falsifiable historical investigation few other founding religious claims invite in quite the same way — a public event, in a known place, at a known time, witnessed by named individuals still available for questioning at the time the claim was first written down and circulated.</p>
+
+        <h2>III. Answering Common Objections Across Traditions</h2>
+        <p>Certain objections recur across nearly every conversation a pastor will have with adherents of the traditions this course has studied, and a prepared pastor benefits from having thought through responses in advance rather than improvising under pressure. The most common objection, some version of "aren't all religions basically the same, just different paths up the same mountain," was directly addressed by this course's Unit 9 comparative work: the traditions studied disagree, not merely in surface ritual, but on the most fundamental questions of what is real, what the human problem actually is, and what ultimate destiny awaits a human life — differences too deep to be reconciled by calling them all "the same mountain." A closely related objection, "how can you claim your religion is the only true one," deserves a response distinguishing between arrogance and simple logical consistency: every religious claim this course has studied, including religious pluralism itself, makes exclusive truth claims of some kind, since even "all paths lead to God" excludes the possibility that some paths do not — the real question is never whether to make truth claims, since every position does, but which truth claims actually correspond to reality.</p>
+
+        <p>A third recurring objection concerns the reliability of the biblical text itself, often raised most sharply by Muslim neighbors, examined in Unit 3, who hold that the Bible has been corrupted from its original form. Here a pastor benefits from concrete evidence rather than mere assertion: the New Testament is supported by a manuscript tradition — over five thousand Greek manuscripts, along with tens of thousands more in other ancient languages — vastly exceeding the manuscript evidence for any other ancient historical document, with the earliest fragments dating within decades of the original composition rather than centuries, as is typical for other classical texts accepted as historically reliable without serious dispute. A fourth common objection, the problem of evil and suffering — why would a good, powerful God permit the suffering every tradition this course has studied takes seriously in its own way — deserves honest engagement rather than a formulaic answer; Scripture itself does not offer a single tidy resolution but points toward God's own entrance into human suffering at the cross as the deepest possible answer, a God who does not merely explain suffering from a safe distance but bears it Himself.</p>
+
+        <h2>IV. Apologetic Method: Several Legitimate Approaches</h2>
+        <p>Christian apologists across church history have developed several distinct methods, and this unit surveys them fairly rather than insisting on only one as correct, since faithful, Bible-believing Christians have used each with genuine effectiveness. The <em>evidential</em> approach, illustrated in Unit II above regarding the resurrection, argues from historical facts and evidence toward the truth of Christian claims, appealing to a shared standard of historical investigation both believer and skeptic can, in principle, evaluate together. The <em>presuppositional</em> approach argues instead that every worldview, including secular skepticism itself, rests on foundational assumptions that cannot themselves be proven by neutral evidence, and that only the Christian worldview can actually account for the very possibility of logic, morality, and meaningful truth claims that both believer and unbeliever rely on in every argument they make — exposing the borrowed capital every honest skeptic draws on from a worldview he explicitly denies. The <em>cumulative case</em> approach, increasingly common among contemporary apologists, combines multiple independent lines of evidence — philosophical arguments for God's existence, historical evidence for the resurrection, the internal coherence and transformative power of the biblical message itself — arguing that their combined weight, rather than any single knockdown proof, provides sufficient rational grounds for faith.</p>
+
+        <p>A pastor need not choose permanently among these approaches; different conversations, and different people, respond better to different methods. A neighbor trained in Islamic apologetics, who already expects debate over historical evidence and textual reliability, may respond well to the evidential approach this unit has emphasized. A neighbor steeped in Buddhist or Hindu philosophical categories, more attuned to questions of ultimate meaning and coherence than to historical-critical method, may respond better to presuppositional or cumulative-case reasoning that engages the deeper philosophical structure of his worldview. Wisdom, not rigid method, determines which tool serves a particular conversation best.</p>
+
+        <p>The classical theistic arguments, developed and refined across church history, supply much of the raw material a cumulative case draws on, and a pastor benefits from holding several in ready reserve rather than mastering none. The cosmological argument reasons from cause: everything that exists has a cause, so the universe itself must ultimately trace back to an uncaused First Cause, much as a falling line of dominoes traces back to the first hand that pushed one. The teleological argument reasons from design: the extraordinary fine-tuning visible in the human body and in the precise conditions that make life on Earth possible points toward a Designer rather than blind chance. The moral argument reasons from conscience: nearly every culture studied in this course agrees that certain things, cruelty to the innocent chief among them, are simply wrong, and a universal moral law of that kind points toward a moral Lawgiver rather than mere social convention. None of these arguments alone compels faith the way the resurrection's historical evidence does, but together, and alongside personal experience of answered prayer and a transformed life, they form exactly the kind of cumulative case this unit has described — each strand modest alone, the whole rope strong enough to bear real weight.</p>
+
+        <h2>V. From Argument to Relationship: Apologetics as Pre-Evangelism</h2>
+        <p>This unit closes where Unit 1 began: with Paul at the Areopagus, whose method combined careful evidential reasoning — quoting the Athenians' own poets, reasoning from the created order they already half-perceived — with patient relational presence, having walked the city and observed its people before he ever spoke a word. Apologetics, rightly practiced, functions as pre-evangelism: it clears away intellectual obstacles, answers honest objections, and demonstrates that Christian faith is not intellectually embarrassing or historically baseless, but it does not, by itself, regenerate a single human heart. That work belongs to the Holy Spirit alone, working through the proclaimed gospel (Romans 10:17; John 16:8), which is why 2 Timothy 2:24-26's instruction to teach with patience and humility concludes not with the pastor's own triumph but with the hope that "God perhaps will grant them repentance" — a outcome the pastor serves and prays toward, but does not himself produce.</p>
+
+        <p>A pastor who has completed this unit, and the nine before it, now carries real, substantive knowledge of eight major world religions and three significant modern movements, a comparative framework for understanding how each relates to the biblical gospel, and a set of tested apologetic methods for engaging honest objections with both rigor and gentleness. What remains, and what the final two units of this course will address, is applying all of this specifically to the traditions your own ministry context in Cuba and Mexico is most likely to actually encounter, and drawing the whole course together into a coherent theology of how the Christian church should relate to the religious world God has placed around it.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>Nueve unidades adentro en este curso, usted ha acumulado una gran cantidad de conocimiento factual acerca de ocho tradiciones religiosas distintas y tres movimientos modernos, junto con un marco comparativo para entender dónde se encuentra cada una en relación con el cuadro bíblico. Esta unidad hace una pregunta diferente: ahora que sabe estas cosas, ¿cómo las usa realmente en una conversación? El conocimiento sin método fácilmente se convierte ya sea en parálisis, un pastor tan consciente de la complejidad que nunca habla, o en torpeza, un pastor que conoce hechos pero los despliega de maneras que hieren en lugar de persuadir. Esta unidad existe para suministrar ese método, bajo la disciplina cristiana histórica llamada apologética.</p>
+
+        <p>La palabra misma viene del griego <em>apologia</em>, que significa una defensa razonada, el término usado para una defensa legal formal en una corte griega o romana — la misma palabra que Pablo usa de su propio ministerio en Filipenses 1:7 y que Pedro usa en el versículo inicial de esta unidad, instruyendo a todo creyente, no meramente a teólogos entrenados, a estar "siempre preparados para presentar defensa con mansedumbre y reverencia ante todo el que os demande razón de la esperanza que hay en vosotros" (1 Pedro 3:15). Note lo que el versículo no dice: no dice "estad siempre preparados para ganar un argumento," y adjunta un calificador crucial que la mayoría de los cristianos involucrados en la apologética olvidan — esta defensa debe ofrecerse "con mansedumbre y reverencia," gentileza y humildad reverente, no la agresiva anotación de puntos que la palabra "apologética" desafortunadamente sugiere a oídos modernos no familiarizados con su significado real.</p>
+
+        <h2>I. Lo que la apologética es y no es</h2>
+        <p>La apologética, entendida correctamente, es defensa, no ataque. Responde a la pregunta "¿por qué debería creer esto?" en lugar de existir principalmente para probar que toda otra posición es tonta o deshonesta. Esta distinción importa enormemente para un pastor que acaba de completar nueve unidades estudiando otras religiones, porque la tentación después de obtener conocimiento real del islam, el hinduismo, o el mormonismo es tratar ese conocimiento como munición para ganar argumentos en lugar de como entendimiento que sirve a la persuasión genuina. La Escritura consistentemente recomienda la segunda postura y advierte contra la primera: "el siervo del Señor no debe ser contencioso, sino amable para con todos, apto para enseñar, sufrido; que con mansedumbre corrija a los que se oponen, si quizá Dios les conceda que se arrepientan para conocer la verdad" (2 Timoteo 2:24-26) — lenguaje que asume que la conversión es la obra de Dios lograda a través de la enseñanza paciente, no el logro propio del pastor a través de una técnica de debate superior.</p>
+
+        <p>Esto no significa que la apologética evite verdades difíciles o suavice el desacuerdo genuino hasta convertirlo en vaga amabilidad. Cada unidad de este curso ha nombrado diferencias reales y agudas entre el cristianismo bíblico y las tradiciones estudiadas — la negación islámica de la crucifixión, la negación budista de un yo permanente, la negación de los Testigos de Jehová de la deidad de Cristo. La apologética le da a un pastor las herramientas para explicar y defender estas diferencias con claridad y honestidad. Lo que prohíbe es hacerlo con desprecio, exageración, o un espíritu que trata a la persona al otro lado de la mesa como un oponente por derrotar en lugar de un alma, hecha a imagen de Dios, a quien el pastor genuinamente espera ver venir a Cristo.</p>
+
+        <p>Vale la pena distinguir cuidadosamente la apologética de su falsificación frecuente, la polémica — la práctica de atacar otra posición principalmente para anotar puntos o para tranquilizar a creyentes ya convencidos, con poca esperanza o expectativa genuina de que la persona contra quien se argumenta realmente esté escuchando o pueda realmente ser persuadida. La polémica tiene su lugar limitado y apropiado, particularmente en proteger a una congregación del error doctrinal que ya circula dentro de ella, pero no es el método que esta unidad recomienda para la conversación interreligiosa. Un pastor que habla con un vecino musulmán, budista, o mormón real no está principalmente defendiendo a su congregación de las ideas de ese vecino; está, en ese momento, esperando y orando por la propia conversión de ese vecino, y el tono, ritmo, y postura de una defensa dirigida a ganar un alma difiere sustancialmente del tono de una defensa dirigida meramente a refutar un error para una audiencia ya del lado del pastor.</p>
+
+        <h2>II. El fundamento evidencial: Por qué las afirmaciones cristianas descansan en historia verificable</h2>
+        <p>Una característica distingue la afirmación de verdad cristiana central de las afirmaciones centrales de casi cualquier tradición que este curso ha estudiado: su dependencia de un evento histórico específico y públicamente verificable en lugar de una revelación privada accesible solo al fundador, o una intuición mística o filosófica subjetiva disponible solo a través de práctica interior disciplinada. Las revelaciones de Mahoma, examinadas en la Unidad 3, le llegaron solo a él en una cueva; las planchas de oro que José Smith tradujo, examinadas en la Unidad 8, fueron vistas, según su propio relato, por un pequeño círculo de testigos y luego removidas de un examen posterior; la iluminación que Siddhartha Gautama experimentó bajo el Árbol Bodhi, examinada en la Unidad 5, fue un evento interior que nadie más podía verificar o repetir en su nombre.</p>
+
+        <p>La resurrección de Jesucristo, por el contrario, se presenta en el Nuevo Testamento como un evento público con testigos nombrados, múltiples testimonios independientes, y afirmaciones que podrían, en principio, haber sido refutadas produciendo un cuerpo — precisamente el tipo de afirmación que los historiadores realmente pueden investigar usando las herramientas ordinarias de la investigación histórica en lugar de tomarla solo por fe. Pablo hace explícita esta estructura evidencial: "y si Cristo no resucitó, vuestra fe es vana" (1 Corintios 15:17), y enumera testigos específicos y todavía vivos que sus lectores originales podrían haber cuestionado ellos mismos: "y que apareció a Cefas, y después a los doce. Después apareció a más de quinientos hermanos a la vez, de los cuales viven aún los más, aunque algunos ya duermen" (1 Corintios 15:5-6). Este no es el lenguaje de la experiencia mística privada; es el lenguaje de un hombre invitando a sus lectores a ir a verificar la evidencia ellos mismos. Un pastor que se relaciona con cualquier tradición estudiada en este curso puede señalar correctamente que el cristianismo es único al apostar toda su afirmación en un evento histórico abierto, en principio, al mismo tipo de investigación que recibe cualquier otro evento histórico disputado — y que este evento ha resistido dos mil años de exactamente ese escrutinio.</p>
+
+        <p>Esta característica distintiva no significa que otras tradiciones no ofrezcan ninguna evidencia en absoluto para sus afirmaciones, y un pastor debe resistir exagerar el contraste. El islam, por ejemplo, apela a la preservación histórica del texto del Corán y al carácter y biografía de Mahoma registrados en fuentes tempranas; el mormonismo apela al testimonio de testigos de las planchas de oro, aunque esas planchas mismas fueron removidas de un examen continuo. Lo que verdaderamente distingue la afirmación de la resurrección no es que el cristianismo ofrezca únicamente evidencia mientras otros no ofrecen ninguna, sino que la resurrección específicamente invita el tipo de investigación histórica continua, independiente, y refutable que pocas otras afirmaciones religiosas fundacionales invitan de la misma manera — un evento público, en un lugar conocido, en un tiempo conocido, atestiguado por individuos nombrados todavía disponibles para ser cuestionados en el tiempo en que la afirmación fue escrita y circulada por primera vez.</p>
+
+        <h2>III. Respondiendo a objeciones comunes a través de las tradiciones</h2>
+        <p>Ciertas objeciones se repiten a través de casi toda conversación que un pastor tendrá con adherentes de las tradiciones que este curso ha estudiado, y un pastor preparado se beneficia de haber pensado respuestas de antemano en lugar de improvisar bajo presión. La objeción más común, alguna versión de "¿no son todas las religiones básicamente lo mismo, solo diferentes caminos hacia la misma montaña?," fue abordada directamente por el trabajo comparativo de la Unidad 9 de este curso: las tradiciones estudiadas discrepan, no meramente en ritual superficial, sino en las preguntas más fundamentales de qué es real, cuál es realmente el problema humano, y qué destino último espera a una vida humana — diferencias demasiado profundas para ser reconciliadas llamándolas todas "la misma montaña." Una objeción estrechamente relacionada, "¿cómo puede afirmar que su religión es la única verdadera?," merece una respuesta que distinga entre arrogancia y simple consistencia lógica: toda afirmación religiosa que este curso ha estudiado, incluyendo el pluralismo religioso mismo, hace afirmaciones de verdad exclusivas de algún tipo, ya que incluso "todos los caminos llevan a Dios" excluye la posibilidad de que algunos caminos no lo hagan — la pregunta real nunca es si hacer afirmaciones de verdad, ya que toda postura lo hace, sino cuáles afirmaciones de verdad realmente corresponden a la realidad.</p>
+
+        <p>Una tercera objeción recurrente concierne la fiabilidad del texto bíblico mismo, a menudo planteada más agudamente por vecinos musulmanes, examinados en la Unidad 3, que sostienen que la Biblia ha sido corrompida de su forma original. Aquí un pastor se beneficia de evidencia concreta en lugar de mera afirmación: el Nuevo Testamento está respaldado por una tradición manuscrita — más de cinco mil manuscritos griegos, junto con decenas de miles más en otros idiomas antiguos — superando ampliamente la evidencia manuscrita de cualquier otro documento histórico antiguo, con los fragmentos más tempranos fechados dentro de décadas de la composición original en lugar de siglos, como es típico para otros textos clásicos aceptados como históricamente fiables sin disputa seria. Una cuarta objeción común, el problema del mal y el sufrimiento — por qué un Dios bueno y poderoso permitiría el sufrimiento que cada tradición que este curso ha estudiado toma en serio a su propia manera — merece un compromiso honesto en lugar de una respuesta formulaica; la Escritura misma no ofrece una sola resolución ordenada sino que señala hacia la propia entrada de Dios en el sufrimiento humano en la cruz como la respuesta más profunda posible, un Dios que no meramente explica el sufrimiento desde una distancia segura sino que lo lleva Él mismo.</p>
+
+        <h2>IV. Método apologético: Varios enfoques legítimos</h2>
+        <p>Los apologistas cristianos a través de la historia de la iglesia han desarrollado varios métodos distintos, y esta unidad los estudia con justicia en lugar de insistir en solo uno como correcto, ya que cristianos fieles y creyentes en la Biblia han usado cada uno con eficacia genuina. El enfoque <em>evidencial</em>, ilustrado en la Unidad II arriba respecto a la resurrección, argumenta desde hechos y evidencia históricos hacia la verdad de las afirmaciones cristianas, apelando a un estándar compartido de investigación histórica que tanto el creyente como el escéptico pueden, en principio, evaluar juntos. El enfoque <em>presuposicional</em> argumenta en cambio que toda cosmovisión, incluyendo el escepticismo secular mismo, descansa en suposiciones fundacionales que no pueden ser probadas por evidencia neutral, y que solo la cosmovisión cristiana puede realmente dar cuenta de la posibilidad misma de la lógica, la moralidad, y las afirmaciones de verdad significativas de las que dependen tanto el creyente como el incrédulo en cada argumento que hacen — exponiendo el capital prestado del que todo escéptico honesto se nutre de una cosmovisión que explícitamente niega. El enfoque de <em>caso acumulativo</em>, cada vez más común entre los apologistas contemporáneos, combina múltiples líneas independientes de evidencia — argumentos filosóficos para la existencia de Dios, evidencia histórica para la resurrección, la coherencia interna y el poder transformador del mensaje bíblico mismo — argumentando que su peso combinado, en lugar de cualquier prueba única y decisiva, provee fundamento racional suficiente para la fe.</p>
+
+        <p>Un pastor no necesita elegir permanentemente entre estos enfoques; diferentes conversaciones, y diferentes personas, responden mejor a diferentes métodos. Un vecino entrenado en apologética islámica, que ya espera debate sobre evidencia histórica y fiabilidad textual, puede responder bien al enfoque evidencial que esta unidad ha enfatizado. Un vecino imbuido de categorías filosóficas budistas o hindúes, más sintonizado con preguntas de significado último y coherencia que con el método histórico-crítico, puede responder mejor al razonamiento presuposicional o de caso acumulativo que se relaciona con la estructura filosófica más profunda de su cosmovisión. La sabiduría, no el método rígido, determina qué herramienta sirve mejor a una conversación particular.</p>
+
+        <p>Los argumentos teístas clásicos, desarrollados y refinados a través de la historia de la iglesia, suministran gran parte de la materia prima de la cual se nutre un caso acumulativo, y un pastor se beneficia de tener varios en reserva lista en lugar de dominar ninguno. El argumento cosmológico razona desde la causa: todo lo que existe tiene una causa, así que el universo mismo debe finalmente remontarse a una Primera Causa incausada, tal como una fila de fichas de dominó que caen se remonta a la primera mano que empujó una. El argumento teleológico razona desde el diseño: el extraordinario ajuste fino visible en el cuerpo humano y en las condiciones precisas que hacen posible la vida en la Tierra apunta hacia un Diseñador en lugar del azar ciego. El argumento moral razona desde la conciencia: casi toda cultura estudiada en este curso concuerda en que ciertas cosas, la crueldad hacia el inocente entre las principales, son simplemente malas, y una ley moral universal de ese tipo apunta hacia un Legislador moral en lugar de mera convención social. Ninguno de estos argumentos por sí solo obliga a la fe de la manera en que lo hace la evidencia histórica de la resurrección, pero juntos, y junto a la experiencia personal de oraciones respondidas y una vida transformada, forman exactamente el tipo de caso acumulativo que esta unidad ha descrito — cada hebra modesta por sí sola, la cuerda entera lo bastante fuerte para soportar peso real.</p>
+
+        <h2>V. Del argumento a la relación: La apologética como pre-evangelismo</h2>
+
+        <h2>V. Del argumento a la relación: La apologética como pre-evangelismo</h2>
+        <p>Esta unidad cierra donde comenzó la Unidad 1: con Pablo en el Areópago, cuyo método combinó razonamiento evidencial cuidadoso — citando a los propios poetas de los atenienses, razonando desde el orden creado que ya percibían a medias — con presencia relacional paciente, habiendo caminado la ciudad y observado a su gente antes de decir una sola palabra. La apologética, practicada correctamente, funciona como pre-evangelismo: despeja obstáculos intelectuales, responde objeciones honestas, y demuestra que la fe cristiana no es intelectualmente vergonzosa o históricamente infundada, pero no, por sí misma, regenera un solo corazón humano. Esa obra pertenece solo al Espíritu Santo, obrando a través del evangelio proclamado (Romanos 10:17; Juan 16:8), que es por qué la instrucción de 2 Timoteo 2:24-26 de enseñar con paciencia y humildad concluye no con el propio triunfo del pastor sino con la esperanza de que "quizá Dios les conceda que se arrepientan" — un resultado al cual el pastor sirve y por el cual ora, pero que él mismo no produce.</p>
+
+        <p>Un pastor que ha completado esta unidad, y las nueve anteriores, ahora lleva conocimiento real y sustancial de ocho religiones principales del mundo y tres movimientos modernos significativos, un marco comparativo para entender cómo se relaciona cada uno con el evangelio bíblico, y un conjunto de métodos apologéticos probados para relacionarse con objeciones honestas con rigor y gentileza a la vez. Lo que queda, y lo que las últimas dos unidades de este curso abordarán, es aplicar todo esto específicamente a las tradiciones que el propio contexto de ministerio de usted en Cuba y México tiene más probabilidad de encontrar realmente, y reunir todo el curso en una teología coherente de cómo la iglesia cristiana debe relacionarse con el mundo religioso que Dios ha puesto a su alrededor.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 10;
+let progress = JSON.parse(localStorage.getItem('cts_wr_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSWRUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit10) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSWRUnit9.html"; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSWRUnit11.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        const trackLabel = student.track === 'mdiv' ? 'M.Div.' : (student.track === 'thm' ? 'Th.M.' : 'Certificate');
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name} <span style="font-weight:normal;font-size:0.85rem;">(${trackLabel})</span> &nbsp;<a href="#" id="changeTrackLink" style="font-size:0.8rem;color:#5b3a1f;">Change track</a>`;
+        document.getElementById('registrationCard').style.display = 'none';
+        const link = document.getElementById('changeTrackLink');
+        if (link) link.onclick = function(e) {
+            e.preventDefault();
+            const card = document.getElementById('registrationCard');
+            card.style.display = 'block';
+            if (student.name) document.getElementById('regName').value = student.name;
+            if (student.email) document.getElementById('regEmail').value = student.email;
+            if (student.country) document.getElementById('regCountry').value = student.country;
+            if (student.track && typeof setTrack === 'function') setTrack(student.track);
+            card.scrollIntoView({ behavior: 'smooth' });
+        };
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<span style="color:#5b3a1f;">⚠️ Please register</span>`;
+    }
+}
+displayStudentGreeting();
+
+
+function setTrack(t) {
+    document.getElementById('regTrack').value = t;
+    document.querySelectorAll('.track-opt').forEach(b => { b.classList.toggle('selected', b.getAttribute('data-track') === t); });
+}
+document.querySelectorAll('.track-opt').forEach(b => { b.onclick = function() { setTrack(this.getAttribute('data-track')); }; });
+setTrack('certificate');
+document.getElementById('saveRegBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const country = document.getElementById('regCountry').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = `<span style="color:red;">⚠️ Name and email are required.</span>`;
+        return;
+    }
+    localStorage.setItem('cts_student', JSON.stringify({ name, email, country, track }));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = `<span style="color:green;">✓ Saved! Welcome, ${name}.</span>`;
+    setTimeout(() => { displayStudentGreeting(); }, 1000);
+    renderQuestions();
+};
+
+// Q3 reshuffled (Psalm 23 author) to move David from C to B for 5/5/5/5 balance.
+const mcQuestions = [
+  {
+    "textEn": "1. The Greek word apologia, from which 'apologetics' derives, means:",
+    "textEs": "1. La palabra griega apologia, de la cual deriva 'apologética,' significa:",
+    "optionsEn": [
+      "A reasoned defense, as in a formal legal defense",
+      "An apology for wrongdoing",
+      "An attack on opposing views",
+      "A private meditation practice"
+    ],
+    "optionsEs": [
+      "Una defensa razonada, como en una defensa legal formal",
+      "Una disculpa por una falta",
+      "Un ataque a opiniones opuestas",
+      "Una práctica de meditación privada"
+    ],
+    "c": 21,
+    "explEn": "Apologia is the Greek term for a reasoned defense, used for a formal legal defense in a Greek or Roman court.",
+    "explEs": "Apologia es el término griego para una defensa razonada, usado para una defensa legal formal en una corte griega o romana."
+  },
+  {
+    "textEn": "2. According to 1 Peter 3:15, cited in this unit, a defense of the Christian hope should be offered:",
+    "textEs": "2. Según 1 Pedro 3:15, citado en esta unidad, una defensa de la esperanza cristiana debe ofrecerse:",
+    "optionsEn": [
+      "Aggressively, to win every argument",
+      "With meekness and fear",
+      "Only by trained theologians",
+      "Never, since defense is unnecessary"
+    ],
+    "optionsEs": [
+      "Agresivamente, para ganar todo argumento",
+      "Con mansedumbre y reverencia",
+      "Solo por teólogos entrenados",
+      "Nunca, ya que la defensa es innecesaria"
+    ],
+    "c": 29,
+    "explEn": "1 Peter 3:15 instructs believers to give a defense 'with meekness and fear,' gentleness and reverent humility.",
+    "explEs": "1 Pedro 3:15 instruye a los creyentes a presentar defensa 'con mansedumbre y reverencia,' gentileza y humildad reverente."
+  },
+  {
+    "textEn": "3. According to this unit, apologetics is properly understood as:",
+    "textEs": "3. Según esta unidad, la apologética se entiende correctamente como:",
+    "optionsEn": [
+      "Attack, proving every other position foolish",
+      "A purely academic exercise with no practical use",
+      "Defense, not attack, answering why one should believe",
+      "A method reserved only for debates with atheists"
+    ],
+    "optionsEs": [
+      "Ataque, probando que toda otra posición es tonta",
+      "Un ejercicio puramente académico sin uso práctico",
+      "Defensa, no ataque, respondiendo por qué se debería creer",
+      "Un método reservado solo para debates con ateos"
+    ],
+    "c": 37,
+    "explEn": "Apologetics, properly understood, is defense, not attack, answering the question 'why should I believe this?'",
+    "explEs": "La apologética, entendida correctamente, es defensa, no ataque, respondiendo a la pregunta '¿por qué debería creer esto?'"
+  },
+  {
+    "textEn": "4. According to 2 Timothy 2:24-26, cited in this unit, correcting those in opposition should be done:",
+    "textEs": "4. Según 2 Timoteo 2:24-26, citado en esta unidad, corregir a los que se oponen debe hacerse:",
+    "optionsEn": [
+      "Quarrelsomely and harshly",
+      "Only in public debates",
+      "By avoiding all correction entirely",
+      "With patience and humility, hoping God grants repentance"
+    ],
+    "optionsEs": [
+      "De manera contenciosa y dura",
+      "Solo en debates públicos",
+      "Evitando toda corrección por completo",
+      "Con paciencia y humildad, esperando que Dios conceda arrepentimiento"
+    ],
+    "c": 45,
+    "explEn": "2 Timothy 2:24-26 instructs gentle, patient, humble correction, hoping God will grant repentance — conversion as God's work, not the pastor's achievement.",
+    "explEs": "2 Timoteo 2:24-26 instruye una corrección gentil, paciente, y humilde, esperando que Dios conceda arrepentimiento — la conversión como obra de Dios, no logro del pastor."
+  },
+  {
+    "textEn": "5. This unit distinguishes apologetics from its frequent counterfeit, called:",
+    "textEs": "5. Esta unidad distingue la apologética de su falsificación frecuente, llamada:",
+    "optionsEn": [
+      "Polemics, attacking primarily to score points",
+      "Evangelism",
+      "Missiology",
+      "Hermeneutics"
+    ],
+    "optionsEs": [
+      "Polémica, atacar principalmente para anotar puntos",
+      "Evangelismo",
+      "Misiología",
+      "Hermenéutica"
+    ],
+    "c": 49,
+    "explEn": "Polemics is the practice of attacking another position primarily to score points, with little genuine hope the other person is listening or might be persuaded.",
+    "explEs": "La polémica es la práctica de atacar otra posición principalmente para anotar puntos, con poca esperanza genuina de que la otra persona esté escuchando o pueda ser persuadida."
+  },
+  {
+    "textEn": "6. According to this unit, what distinguishes the Christian resurrection claim from Muhammad's revelations and Siddhartha's enlightenment?",
+    "textEs": "6. Según esta unidad, ¿qué distingue la afirmación cristiana de la resurrección de las revelaciones de Mahoma y la iluminación de Siddhartha?",
+    "optionsEn": [
+      "The resurrection has no witnesses at all",
+      "The resurrection was a public event with named witnesses, open to investigation",
+      "Muhammad's revelations were also public events",
+      "There is no meaningful difference between them"
+    ],
+    "optionsEs": [
+      "La resurrección no tiene testigos en absoluto",
+      "La resurrección fue un evento público con testigos nombrados, abierto a investigación",
+      "Las revelaciones de Mahoma también fueron eventos públicos",
+      "No hay diferencia significativa entre ellos"
+    ],
+    "c": 57,
+    "explEn": "Unlike private revelations or inward enlightenment experiences, the resurrection is presented as a public event with named witnesses open to historical investigation.",
+    "explEs": "A diferencia de las revelaciones privadas o experiencias interiores de iluminación, la resurrección se presenta como un evento público con testigos nombrados abierto a investigación histórica."
+  },
+  {
+    "textEn": "7. According to 1 Corinthians 15:5-6, cited in this unit, Paul lists witnesses to the resurrection including over how many brethren at once?",
+    "textEs": "7. Según 1 Corintios 15:5-6, citado en esta unidad, Pablo enumera testigos de la resurrección incluyendo a más de cuántos hermanos a la vez?",
+    "optionsEn": [
+      "Twelve",
+      "Fifty",
+      "Five hundred",
+      "One thousand"
+    ],
+    "optionsEs": [
+      "Doce",
+      "Cincuenta",
+      "Quinientos",
+      "Mil"
+    ],
+    "c": 65,
+    "explEn": "Paul writes that Christ was seen by over five hundred brethren at once, most of whom were still alive and could be questioned by his original readers.",
+    "explEs": "Pablo escribe que Cristo apareció a más de quinientos hermanos a la vez, la mayoría de los cuales todavía vivían y podían ser cuestionados por sus lectores originales."
+  },
+  {
+    "textEn": "8. According to this unit, a pastor should resist overstating the evidential contrast because:",
+    "textEs": "8. Según esta unidad, un pastor debe resistir exagerar el contraste evidencial porque:",
+    "optionsEn": [
+      "Other traditions offer no evidence whatsoever for their claims",
+      "The resurrection has weaker evidence than other claims",
+      "Evidence is irrelevant to apologetics entirely",
+      "Islam and Mormonism also appeal to certain forms of evidence, even if different in kind"
+    ],
+    "optionsEs": [
+      "Otras tradiciones no ofrecen ninguna evidencia en absoluto para sus afirmaciones",
+      "La resurrección tiene evidencia más débil que otras afirmaciones",
+      "La evidencia es completamente irrelevante para la apologética",
+      "El islam y el mormonismo también apelan a ciertas formas de evidencia, aunque diferentes en tipo"
+    ],
+    "c": 73,
+    "explEn": "Islam appeals to textual preservation and Muhammad's biography; Mormonism appeals to witness testimony of the golden plates — a pastor should not claim other traditions offer no evidence at all.",
+    "explEs": "El islam apela a la preservación textual y a la biografía de Mahoma; el mormonismo apela al testimonio de testigos de las planchas de oro — un pastor no debe afirmar que otras tradiciones no ofrecen ninguna evidencia."
+  },
+  {
+    "textEn": "9. According to this unit, the objection 'aren't all religions basically the same' was already addressed by which prior unit's work?",
+    "textEs": "9. Según esta unidad, la objeción '¿no son todas las religiones básicamente lo mismo?' ya fue abordada por el trabajo de qué unidad anterior?",
+    "optionsEn": [
+      "Unit 9, the comparative theology unit",
+      "Unit 3, Islam",
+      "Unit 6, Chinese Religions",
+      "Unit 2, Judaism"
+    ],
+    "optionsEs": [
+      "Unidad 9, la unidad de teología comparada",
+      "Unidad 3, el islam",
+      "Unidad 6, las religiones chinas",
+      "Unidad 2, el judaísmo"
+    ],
+    "c": 77,
+    "explEn": "Unit 9's comparative work showed the traditions studied disagree on the most fundamental questions, differences too deep to be reconciled by calling them all 'the same mountain.'",
+    "explEs": "El trabajo comparativo de la Unidad 9 mostró que las tradiciones estudiadas discrepan en las preguntas más fundamentales, diferencias demasiado profundas para reconciliarse llamándolas todas 'la misma montaña.'"
+  },
+  {
+    "textEn": "10. According to this unit, why does even 'all paths lead to God' make an exclusive truth claim?",
+    "textEs": "10. Según esta unidad, ¿por qué incluso 'todos los caminos llevan a Dios' hace una afirmación de verdad exclusiva?",
+    "optionsEn": [
+      "It does not make any truth claim at all",
+      "It excludes the possibility that some paths do not lead to God",
+      "It is identical to every other religious claim",
+      "It was never actually stated by anyone"
+    ],
+    "optionsEs": [
+      "No hace ninguna afirmación de verdad en absoluto",
+      "Excluye la posibilidad de que algunos caminos no lleven a Dios",
+      "Es idéntica a toda otra afirmación religiosa",
+      "Nunca fue realmente declarada por nadie"
+    ],
+    "c": 85,
+    "explEn": "Even pluralism's claim that all paths lead to God excludes the possibility some paths do not, meaning every position makes exclusive truth claims of some kind.",
+    "explEs": "Incluso la afirmación del pluralismo de que todos los caminos llevan a Dios excluye la posibilidad de que algunos caminos no lo hagan, lo que significa que toda postura hace afirmaciones de verdad exclusivas de algún tipo."
+  },
+  {
+    "textEn": "11. According to this unit, the New Testament manuscript tradition includes over how many Greek manuscripts?",
+    "textEs": "11. Según esta unidad, la tradición manuscrita del Nuevo Testamento incluye a más de cuántos manuscritos griegos?",
+    "optionsEn": [
+      "Fifty",
+      "Five hundred",
+      "Five thousand",
+      "Only one surviving copy"
+    ],
+    "optionsEs": [
+      "Cincuenta",
+      "Quinientos",
+      "Cinco mil",
+      "Solo una copia sobreviviente"
+    ],
+    "c": 93,
+    "explEn": "The New Testament is supported by over five thousand Greek manuscripts, vastly exceeding the manuscript evidence for any other ancient historical document.",
+    "explEs": "El Nuevo Testamento está respaldado por más de cinco mil manuscritos griegos, superando ampliamente la evidencia manuscrita de cualquier otro documento histórico antiguo."
+  },
+  {
+    "textEn": "12. Regarding the problem of evil, this unit says Scripture points toward:",
+    "textEs": "12. Respecto al problema del mal, esta unidad dice que la Escritura señala hacia:",
+    "optionsEn": [
+      "A single tidy formulaic resolution",
+      "Denial that suffering exists at all",
+      "Blaming the sufferer exclusively",
+      "God's own entrance into human suffering at the cross"
+    ],
+    "optionsEs": [
+      "Una sola resolución ordenada y formulaica",
+      "La negación de que el sufrimiento exista en absoluto",
+      "Culpar exclusivamente al que sufre",
+      "La propia entrada de Dios en el sufrimiento humano en la cruz"
+    ],
+    "c": 101,
+    "explEn": "Scripture points toward God's own entrance into human suffering at the cross as the deepest possible answer, a God who bears suffering Himself rather than merely explaining it.",
+    "explEs": "La Escritura señala hacia la propia entrada de Dios en el sufrimiento humano en la cruz como la respuesta más profunda posible, un Dios que lleva el sufrimiento Él mismo en lugar de meramente explicarlo."
+  },
+  {
+    "textEn": "13. The evidential apologetic approach argues from:",
+    "textEs": "13. El enfoque apologético evidencial argumenta desde:",
+    "optionsEn": [
+      "Historical facts and evidence toward the truth of Christian claims",
+      "Foundational assumptions no one can prove",
+      "Personal feelings alone",
+      "Rejecting all forms of evidence"
+    ],
+    "optionsEs": [
+      "Hechos y evidencia históricos hacia la verdad de las afirmaciones cristianas",
+      "Suposiciones fundacionales que nadie puede probar",
+      "Sentimientos personales solamente",
+      "Rechazar toda forma de evidencia"
+    ],
+    "c": 105,
+    "explEn": "The evidential approach argues from historical facts and evidence toward the truth of Christian claims, appealing to a shared standard of investigation.",
+    "explEs": "El enfoque evidencial argumenta desde hechos y evidencia históricos hacia la verdad de las afirmaciones cristianas, apelando a un estándar compartido de investigación."
+  },
+  {
+    "textEn": "14. The presuppositional apologetic approach argues that:",
+    "textEs": "14. El enfoque apologético presuposicional argumenta que:",
+    "optionsEn": [
+      "No worldview rests on any assumptions",
+      "Only the Christian worldview can account for logic, morality, and meaningful truth claims",
+      "Historical evidence is irrelevant entirely",
+      "Secular skepticism requires no foundational assumptions"
+    ],
+    "optionsEs": [
+      "Ninguna cosmovisión descansa en ninguna suposición",
+      "Solo la cosmovisión cristiana puede dar cuenta de la lógica, la moralidad, y las afirmaciones de verdad significativas",
+      "La evidencia histórica es completamente irrelevante",
+      "El escepticismo secular no requiere suposiciones fundacionales"
+    ],
+    "c": 113,
+    "explEn": "The presuppositional approach argues every worldview rests on foundational assumptions, and only the Christian worldview can actually account for logic, morality, and meaningful truth claims.",
+    "explEs": "El enfoque presuposicional argumenta que toda cosmovisión descansa en suposiciones fundacionales, y solo la cosmovisión cristiana puede realmente dar cuenta de la lógica, la moralidad, y las afirmaciones de verdad significativas."
+  },
+  {
+    "textEn": "15. The cumulative case apologetic approach combines:",
+    "textEs": "15. El enfoque apologético de caso acumulativo combina:",
+    "optionsEn": [
+      "A single knockdown proof only",
+      "No evidence of any kind",
+      "Multiple independent lines of evidence whose combined weight supports faith",
+      "Only philosophical arguments, excluding history entirely"
+    ],
+    "optionsEs": [
+      "Una sola prueba decisiva solamente",
+      "Ninguna evidencia de ningún tipo",
+      "Múltiples líneas independientes de evidencia cuyo peso combinado apoya la fe",
+      "Solo argumentos filosóficos, excluyendo la historia por completo"
+    ],
+    "c": 121,
+    "explEn": "The cumulative case approach combines multiple independent lines of evidence — philosophical, historical, and the coherence of the biblical message — arguing their combined weight supports faith.",
+    "explEs": "El enfoque de caso acumulativo combina múltiples líneas independientes de evidencia — filosóficas, históricas, y la coherencia del mensaje bíblico — argumentando que su peso combinado apoya la fe."
+  },
+  {
+    "textEn": "16. According to this unit, a neighbor steeped in Buddhist or Hindu philosophical categories may respond better to which apologetic approach?",
+    "textEs": "16. Según esta unidad, ¿a qué enfoque apologético puede responder mejor un vecino imbuido de categorías filosóficas budistas o hindúes?",
+    "optionsEn": [
+      "Purely evidential, historical-critical method only",
+      "No apologetic approach will ever be useful",
+      "Only polemics will be effective",
+      "Presuppositional or cumulative-case reasoning engaging deeper philosophical structure"
+    ],
+    "optionsEs": [
+      "Puramente evidencial, solo método histórico-crítico",
+      "Ningún enfoque apologético será jamás útil",
+      "Solo la polémica será eficaz",
+      "Razonamiento presuposicional o de caso acumulativo que se relaciona con la estructura filosófica más profunda"
+    ],
+    "c": 129,
+    "explEn": "A neighbor attuned to questions of ultimate meaning and coherence may respond better to presuppositional or cumulative-case reasoning than historical-critical method alone.",
+    "explEs": "Un vecino sintonizado con preguntas de significado último y coherencia puede responder mejor al razonamiento presuposicional o de caso acumulativo que solo al método histórico-crítico."
+  },
+  {
+    "textEn": "17. According to this unit, apologetics functions as:",
+    "textEs": "17. Según esta unidad, la apologética funciona como:",
+    "optionsEn": [
+      "Pre-evangelism, clearing intellectual obstacles but not itself regenerating a heart",
+      "A complete substitute for evangelism",
+      "An unnecessary academic exercise",
+      "The only method the Holy Spirit ever uses"
+    ],
+    "optionsEs": [
+      "Pre-evangelismo, despejando obstáculos intelectuales pero sin regenerar por sí misma un corazón",
+      "Un sustituto completo del evangelismo",
+      "Un ejercicio académico innecesario",
+      "El único método que el Espíritu Santo jamás usa"
+    ],
+    "c": 133,
+    "explEn": "Apologetics functions as pre-evangelism, clearing intellectual obstacles and answering objections, but regeneration belongs to the Holy Spirit alone.",
+    "explEs": "La apologética funciona como pre-evangelismo, despejando obstáculos intelectuales y respondiendo objeciones, pero la regeneración pertenece solo al Espíritu Santo."
+  },
+  {
+    "textEn": "18. According to Romans 10:17 and John 16:8, cited in this unit, the work of regeneration belongs to:",
+    "textEs": "18. Según Romanos 10:17 y Juan 16:8, citados en esta unidad, la obra de la regeneración pertenece a:",
+    "optionsEn": [
+      "The pastor's superior debate technique",
+      "The Holy Spirit alone, working through the proclaimed gospel",
+      "The adherent's own philosophical reasoning",
+      "No one; regeneration does not actually occur"
+    ],
+    "optionsEs": [
+      "La técnica de debate superior del pastor",
+      "Solo el Espíritu Santo, obrando a través del evangelio proclamado",
+      "El propio razonamiento filosófico del adherente",
+      "Nadie; la regeneración en realidad no ocurre"
+    ],
+    "c": 141,
+    "explEn": "Regeneration belongs to the Holy Spirit alone, working through the proclaimed gospel, not the pastor's own achievement through debate.",
+    "explEs": "La regeneración pertenece solo al Espíritu Santo, obrando a través del evangelio proclamado, no al propio logro del pastor a través del debate."
+  },
+  {
+    "textEn": "19. According to this unit, Paul's method at the Areopagus, recalled from Unit 1, combined careful evidential reasoning with:",
+    "textEs": "19. Según esta unidad, el método de Pablo en el Areópago, recordado de la Unidad 1, combinó razonamiento evidencial cuidadoso con:",
+    "optionsEn": [
+      "Immediate confrontation with no observation first",
+      "Complete avoidance of any evidence",
+      "Patient relational presence, having observed the city and its people first",
+      "Ignoring the Athenians' own culture entirely"
+    ],
+    "optionsEs": [
+      "Confrontación inmediata sin observación primero",
+      "Evitar por completo cualquier evidencia",
+      "Presencia relacional paciente, habiendo observado primero la ciudad y su gente",
+      "Ignorar por completo la propia cultura de los atenienses"
+    ],
+    "c": 149,
+    "explEn": "Paul's method combined careful evidential reasoning, quoting Athenian poets, with patient relational presence, having walked the city and observed its people before speaking.",
+    "explEs": "El método de Pablo combinó razonamiento evidencial cuidadoso, citando a poetas atenienses, con presencia relacional paciente, habiendo caminado la ciudad y observado a su gente antes de hablar."
+  },
+  {
+    "textEn": "20. According to this unit's conclusion, what will the final two units of this course address?",
+    "textEs": "20. Según la conclusión de esta unidad, ¿qué abordarán las últimas dos unidades de este curso?",
+    "optionsEn": [
+      "A return to studying ancient Greek philosophy",
+      "A repeat of Units 1 through 9",
+      "An unrelated course on church administration",
+      "Applying course content to traditions the student's ministry context is likely to encounter, and a capstone theology of religions"
+    ],
+    "optionsEs": [
+      "Un regreso al estudio de la filosofía griega antigua",
+      "Una repetición de las Unidades 1 a 9",
+      "Un curso no relacionado sobre administración eclesiástica",
+      "Aplicar el contenido del curso a las tradiciones que el contexto de ministerio del estudiante probablemente encontrará, y una teología culminante de las religiones"
+    ],
+    "c": 157,
+    "explEn": "The remaining units will apply course content specifically to traditions the student's ministry context is likely to encounter and draw the course together into a coherent theology of religions.",
+    "explEs": "Las unidades restantes aplicarán el contenido del curso específicamente a las tradiciones que el contexto de ministerio del estudiante probablemente encontrará y reunirán el curso en una teología coherente de las religiones."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Define apologia and explain, using 1 Peter 3:15, why apologetics is fundamentally defense rather than attack.",
+    "textEs": "21. Defina apologia y explique, usando 1 Pedro 3:15, por qué la apologética es fundamentalmente defensa en lugar de ataque.",
+    "kw_en": ["apologia", "reasoned defense", "legal", "meekness", "fear", "hope", "defense not attack", "gentleness"],
+    "kw_es": ["apologia", "defensa razonada", "legal", "mansedumbre", "reverencia", "esperanza", "defensa no ataque", "gentileza"],
+    "modelEn": "Apologia is the Greek term for a reasoned defense, used originally for a formal legal defense in a Greek or Roman court. 1 Peter 3:15 instructs every believer to always be ready to give a defense for the hope within them, but with meekness and fear, gentleness and reverent humility. This shows apologetics is fundamentally defense, answering why one should believe, rather than attack aimed at proving others foolish.",
+    "modelEs": "Apologia es el término griego para una defensa razonada, usado originalmente para una defensa legal formal en una corte griega o romana. 1 Pedro 3:15 instruye a todo creyente a estar siempre preparado para presentar defensa de la esperanza que hay en ellos, pero con mansedumbre y reverencia, gentileza y humildad reverente. Esto muestra que la apologética es fundamentalmente defensa, respondiendo por qué se debería creer, en lugar de ataque dirigido a probar que otros son tontos."
+  },
+  {
+    "textEn": "22. Distinguish apologetics from polemics as this unit describes them, and explain why a pastor speaking with an actual neighbor should favor the former.",
+    "textEs": "22. Distinga la apologética de la polémica según las describe esta unidad, y explique por qué un pastor que habla con un vecino real debe favorecer la primera.",
+    "kw_en": ["polemics", "score points", "audience", "convert", "tone", "genuine hope", "soul", "conversion"],
+    "kw_es": ["polémica", "anotar puntos", "audiencia", "convert", "tono", "esperanza genuina", "alma", "conversión"],
+    "modelEn": "Polemics attacks another position primarily to score points or reassure an audience already convinced, with little genuine hope the opponent is listening. Apologetics, by contrast, is aimed at actual persuasion. A pastor speaking with a real neighbor is hoping and praying for that person's conversion, so the tone and posture of genuine apologetics, aimed at winning a soul, differs substantially from polemics aimed merely at refuting error for a friendly audience.",
+    "modelEs": "La polémica ataca otra posición principalmente para anotar puntos o tranquilizar a una audiencia ya convencida, con poca esperanza genuina de que el oponente esté escuchando. La apologética, por el contrario, está dirigida a la persuasión real. Un pastor que habla con un vecino real está esperando y orando por la conversión de esa persona, así que el tono y la postura de la apologética genuina, dirigida a ganar un alma, difiere sustancialmente de la polémica dirigida meramente a refutar el error para una audiencia amigable."
+  },
+  {
+    "textEn": "23. Explain why this unit says the resurrection of Jesus Christ is evidentially distinct from Muhammad's revelations and Joseph Smith's golden plates.",
+    "textEs": "23. Explique por qué dice esta unidad que la resurrección de Jesucristo es evidencialmente distinta de las revelaciones de Mahoma y las planchas de oro de José Smith.",
+    "kw_en": ["public event", "named witnesses", "falsified", "produce a body", "private", "cave", "removed", "verify"],
+    "kw_es": ["evento público", "testigos nombrados", "refutad", "producir un cuerpo", "privad", "cueva", "removid", "verificar"],
+    "modelEn": "Muhammad's revelations came to him alone in a cave, and Smith's golden plates were seen by a small circle and then removed from further examination. The resurrection, by contrast, is presented as a public event with named witnesses and claims that could, in principle, have been falsified by producing a body, making it the kind of claim historians can actually investigate rather than take on faith alone.",
+    "modelEs": "Las revelaciones de Mahoma le llegaron solo a él en una cueva, y las planchas de oro de Smith fueron vistas por un pequeño círculo y luego removidas de un examen posterior. La resurrección, por el contrario, se presenta como un evento público con testigos nombrados y afirmaciones que podrían, en principio, haber sido refutadas produciendo un cuerpo, haciéndola el tipo de afirmación que los historiadores realmente pueden investigar en lugar de tomarla solo por fe."
+  },
+  {
+    "textEn": "24. Using 1 Corinthians 15:5-6, explain how Paul's language functions as an invitation to historical investigation rather than a claim of private mystical experience.",
+    "textEs": "24. Usando 1 Corintios 15:5-6, explique cómo funciona el lenguaje de Pablo como una invitación a la investigación histórica en lugar de una afirmación de experiencia mística privada.",
+    "kw_en": ["cephas", "twelve", "five hundred", "remain to present", "check", "themselves", "still living", "invitation"],
+    "kw_es": ["cefas", "doce", "quinientos", "viven aún", "verificar", "ellos mismos", "todavía vivos", "invitación"],
+    "modelEn": "Paul lists specific witnesses — Cephas, the twelve, and over five hundred brethren at once, most of whom were still alive — inviting his original readers to question these still-living witnesses themselves. This is not the language of private mystical experience but of a man pointing to publicly available, checkable evidence.",
+    "modelEs": "Pablo enumera testigos específicos — Cefas, los doce, y más de quinientos hermanos a la vez, la mayoría de los cuales todavía vivían — invitando a sus lectores originales a cuestionar ellos mismos a estos testigos todavía vivos. Este no es el lenguaje de la experiencia mística privada sino de un hombre señalando evidencia públicamente disponible y verificable."
+  },
+  {
+    "textEn": "25. According to this unit, why should a pastor resist overstating the evidential contrast between Christianity and other traditions like Islam and Mormonism?",
+    "textEs": "25. Según esta unidad, ¿por qué debe un pastor resistir exagerar el contraste evidencial entre el cristianismo y otras tradiciones como el islam y el mormonismo?",
+    "kw_en": ["overstate", "some evidence", "textual preservation", "witnesses", "different in kind", "invites investigation", "distinct", "fair"],
+    "kw_es": ["exagerar", "alguna evidencia", "preservación textual", "testigos", "diferente en tipo", "invita investigación", "distint", "justicia"],
+    "modelEn": "Islam appeals to the historical preservation of the Qur'an's text and Muhammad's biography, and Mormonism appeals to witness testimony of the golden plates, so a pastor should not claim other traditions offer no evidence whatsoever. What genuinely distinguishes the resurrection is that it specifically invites ongoing, independent, falsifiable historical investigation in a way few other founding claims do, not that Christianity alone has evidence.",
+    "modelEs": "El islam apela a la preservación histórica del texto del Corán y a la biografía de Mahoma, y el mormonismo apela al testimonio de testigos de las planchas de oro, así que un pastor no debe afirmar que otras tradiciones no ofrecen ninguna evidencia en absoluto. Lo que verdaderamente distingue a la resurrección es que específicamente invita a una investigación histórica continua, independiente, y refutable de una manera que pocas otras afirmaciones fundacionales hacen, no que el cristianismo sea el único con evidencia."
+  },
+  {
+    "textEn": "26. Explain this unit's response to the objection 'aren't all religions basically the same,' referencing Unit 9's work.",
+    "textEs": "26. Explique la respuesta de esta unidad a la objeción '¿no son todas las religiones básicamente lo mismo?,' haciendo referencia al trabajo de la Unidad 9.",
+    "kw_en": ["same mountain", "fundamental questions", "real", "human problem", "destiny", "too deep", "reconciled", "disagree"],
+    "kw_es": ["misma montaña", "preguntas fundamentales", "real", "problema humano", "destino", "demasiado profund", "reconcili", "discrep"],
+    "modelEn": "This unit responds by pointing to Unit 9's comparative work: the traditions studied disagree not merely on surface ritual but on the most fundamental questions of what is real, what the human problem actually is, and what ultimate destiny awaits a life — differences too deep to be reconciled by calling them all 'the same mountain.'",
+    "modelEs": "Esta unidad responde señalando al trabajo comparativo de la Unidad 9: las tradiciones estudiadas discrepan no meramente en ritual superficial sino en las preguntas más fundamentales de qué es real, cuál es realmente el problema humano, y qué destino último espera a una vida — diferencias demasiado profundas para reconciliarse llamándolas todas 'la misma montaña.'"
+  },
+  {
+    "textEn": "27. Compare the evidential, presuppositional, and cumulative case apologetic approaches, and explain why this unit surveys them fairly rather than insisting on one.",
+    "textEs": "27. Compare los enfoques apologéticos evidencial, presuposicional, y de caso acumulativo, y explique por qué esta unidad los estudia con justicia en lugar de insistir en uno solo.",
+    "kw_en": ["evidential", "presuppositional", "cumulative case", "worldview", "borrowed capital", "combined weight", "faithful", "effective"],
+    "kw_es": ["evidencial", "presuposicional", "caso acumulativo", "cosmovisión", "capital prestado", "peso combinado", "fiel", "eficaz"],
+    "modelEn": "The evidential approach argues from historical facts toward Christian truth; the presuppositional approach argues only Christianity can account for logic, morality, and meaningful truth claims; the cumulative case approach combines multiple lines of evidence, arguing their combined weight supports faith. This unit surveys them fairly because faithful, Bible-believing Christians have used each with genuine effectiveness in different contexts.",
+    "modelEs": "El enfoque evidencial argumenta desde hechos históricos hacia la verdad cristiana; el enfoque presuposicional argumenta que solo el cristianismo puede dar cuenta de la lógica, la moralidad, y las afirmaciones de verdad significativas; el enfoque de caso acumulativo combina múltiples líneas de evidencia, argumentando que su peso combinado apoya la fe. Esta unidad los estudia con justicia porque cristianos fieles y creyentes en la Biblia han usado cada uno con eficacia genuina en diferentes contextos."
+  },
+  {
+    "textEn": "28. Explain what this unit means by calling apologetics 'pre-evangelism,' and why this matters for how a pastor understands his own role.",
+    "textEs": "28. Explique qué quiere decir esta unidad al llamar a la apologética 'pre-evangelismo,' y por qué esto importa para cómo un pastor entiende su propio papel.",
+    "kw_en": ["pre-evangelism", "clears obstacles", "regenerate", "holy spirit", "romans 10:17", "john 16:8", "serves", "produce"],
+    "kw_es": ["pre-evangelismo", "despeja obstáculos", "regener", "espíritu santo", "romanos 10:17", "juan 16:8", "sirve", "produc"],
+    "modelEn": "Apologetics functions as pre-evangelism: it clears intellectual obstacles and answers honest objections but does not itself regenerate a human heart. Romans 10:17 and John 16:8 show that work belongs to the Holy Spirit alone, working through the proclaimed gospel. This matters because it means the pastor serves and prays toward conversion rather than producing it himself through superior argument.",
+    "modelEs": "La apologética funciona como pre-evangelismo: despeja obstáculos intelectuales y responde objeciones honestas pero no regenera por sí misma un corazón humano. Romanos 10:17 y Juan 16:8 muestran que esa obra pertenece solo al Espíritu Santo, obrando a través del evangelio proclamado. Esto importa porque significa que el pastor sirve y ora hacia la conversión en lugar de producirla él mismo a través de un argumento superior."
+  },
+  {
+    "textEn": "29. Using 2 Timothy 2:24-26, explain what outcome this unit says a pastor's teaching should aim toward, and how this differs from 'winning' in a debate sense.",
+    "textEs": "29. Usando 2 Timoteo 2:24-26, explique hacia qué resultado dice esta unidad que debe apuntar la enseñanza de un pastor, y en qué difiere esto de 'ganar' en un sentido de debate.",
+    "kw_en": ["gentle", "patient", "humility", "grant repentance", "know the truth", "perhaps", "outcome", "not achievement"],
+    "kw_es": ["amable", "sufrido", "humildad", "conceda arrepentimiento", "conocer la verdad", "quizá", "resultado", "no logro"],
+    "modelEn": "2 Timothy 2:24-26 instructs gentle, patient, humble correction so that God 'perhaps' will grant repentance, so people may know the truth. This differs from winning a debate because the outcome the pastor aims toward, repentance and knowledge of truth, is God's gift to grant, not a victory the pastor himself achieves through argument.",
+    "modelEs": "2 Timoteo 2:24-26 instruye una corrección amable, paciente, y humilde para que Dios 'quizá' conceda arrepentimiento, para que la gente pueda conocer la verdad. Esto difiere de ganar un debate porque el resultado hacia el cual apunta el pastor, el arrepentimiento y el conocimiento de la verdad, es un regalo de Dios por conceder, no una victoria que el pastor mismo logra a través del argumento."
+  },
+  {
+    "textEn": "30. Synthesize this unit: how does Paul's method at the Areopagus, recalled from Unit 1, model the balance this entire unit commends between evidential rigor and relational patience?",
+    "textEs": "30. Sintetice esta unidad: ¿cómo modela el método de Pablo en el Areópago, recordado de la Unidad 1, el equilibrio que recomienda toda esta unidad entre el rigor evidencial y la paciencia relacional?",
+    "kw_en": ["areopagus", "poets", "walked", "observed", "before speaking", "combined", "evidential", "relational"],
+    "kw_es": ["areópago", "poetas", "camin", "observ", "antes de hablar", "combin", "evidencial", "relacional"],
+    "modelEn": "Paul combined careful evidential reasoning, quoting the Athenians' own poets and reasoning from the created order, with patient relational presence, having walked the city and observed its people before speaking a word. This models the balance this unit commends: apologetics that is rigorous in its use of evidence and argument, yet unhurried and relational in its posture, treating the listener as a person to be won rather than an opponent to be defeated.",
+    "modelEs": "Pablo combinó razonamiento evidencial cuidadoso, citando a los propios poetas de los atenienses y razonando desde el orden creado, con presencia relacional paciente, habiendo caminado la ciudad y observado a su gente antes de decir una palabra. Esto modela el equilibrio que recomienda esta unidad: una apologética que es rigurosa en su uso de evidencia y argumento, pero paciente y relacional en su postura, tratando al oyente como una persona por ganar en lugar de un oponente por derrotar."
+  }
+];
+
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit10 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_wr_u10_mc_passed';
+const SA_LOCK_KEY = 'cts_wr_u10_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_wr_u10_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function kwHit(ans, kw) {
+  kw = (kw||'').toLowerCase(); if (!kw) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (kw.length <= 4) ? '(?:^|[^'+WC+'])'+esc+'(?!['+WC+'])' : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); } catch(e) { return ans.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read the student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(ans, kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 11 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first." : "Por favor regístrese primero.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'certificate';
+    let total, score, required, mcGatePass, saGatePass, correctKW = 0;
+    const mcPct2 = correctMC;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW; required = null;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit10 = true;
+                localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_wr_u10_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit10 = true;
+        localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_wr_u10_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_wr_u10_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        renderQuestions();
+    };
+});
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 10 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+</body>
+</html>

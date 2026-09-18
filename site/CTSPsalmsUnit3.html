@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Psalms — Unit 3: Psalm 24, The King of Glory</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 4 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 The Book of Psalms — Unit 3: Psalm 24, The King of Glory</span><span class="lang-es">📖 El Libro de los Salmos — Unidad 3: Salmo 24, El Rey de Gloria</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"The earth is the Lord's, and all its fullness, the world and those who dwell therein." — Psalm 24:1 (NKJV)</span><span class="lang-es">"De Jehová es la tierra y su plenitud; el mundo, y los que en él habitan." — Salmo 24:1 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to The Book of Psalms. Please register before beginning Unit 3.</span><span class="lang-es">Bienvenido a El Libro de los Salmos. Por favor regístrese antes de comenzar la Unidad 3.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+            <h3>1. David Brings the Ark to Jerusalem</h3>
+            <p>The story behind this psalm is given to us in 2 Samuel chapter 6 &mdash; the story of King David bringing the Ark of the Covenant up to the city of Jerusalem. Ever since Moses, the ark had represented the presence of God in the midst of His people. During the wars with the Philistines it had been captured, then returned, and for some twenty years it had been kept in the house of a man named Abinadab. Now David had been made king over all Israel, had captured the Jebusite town we call Jerusalem, and wanted his new capital to be not only the political center of the kingdom but its worship center as well. So he set out to bring the ark home.</p>
+            <p>The story is one of trial and error. The first attempt failed. The ark was being hauled on an ox cart when the oxen stumbled, and a man named Uzzah reached out to steady it and died on the spot. David was both angry and afraid, and the mission stopped right there; the ark was taken to the house of Obed-Edom, where the LORD blessed him for three months. The second attempt succeeded. This time David and the whole house of Israel brought the ark up with shouts and trumpets, and David, wearing a linen ephod, danced before the LORD with all his might. For this occasion David wrote a hymn to be sung as the ark came up &mdash; Psalm 24.</p>
+
+            <h3>2. The One Great Question</h3>
+            <div class="scripture">
+                <strong>Psalm 24:1 (NKJV):</strong> "The earth is the LORD's, and all its fullness, the world and those who dwell therein. For He has founded it upon the seas, and established it upon the waters."
+            </div>
+            <p>Within these short ten verses there are two important questions, and the most important of them is this one, asked twice: <em>"Who is this King of glory?"</em> The psalm answers it three ways &mdash; He is the Owner of the earth, He is the Judge who decides who may stand in His holy place, and He is "the LORD strong and mighty." David answers his own question by showing us the King's World, the King's Worship, and the King's Welcome. If we will follow him through all three, we will learn how to welcome our King.</p>
+
+            <h3>3. The King's World</h3>
+            <p>The first answer is that this King owns everything. <em>"The earth is the LORD's, and all its fullness."</em> God is not some good-luck charm we carry in our pocket to ward off trouble and guarantee success. He is the Owner of all things and all people. He created the earth, gathered the seas, formed the dry land, and as its Creator He knows what blessings He wants to give and how and when He wants to give them. Sometimes people get the idea that mankind has been handed the earth to do with as we please. But we are not the owners of the earth; we are only the tenant farmers, caring for the land for the Owner. Whatever we do, we are like servants who are accountable to the Master for how we treat His property. Joseph was a steward of Potiphar's house, and he was faithful in it.</p>
+            <p>Jesus told of an owner who planted a vineyard, built a wall and a watchtower to guard it, and dug a winepress, then rented it out to tenant farmers (Matthew 21:33). Bill Carlson wrote a whole book, <em>The Sharecropper</em>, on this idea. A sharecropper is a tenant who works land he does not own; the landowner buys the seed, the tools, the stock, and the worker gets a share of the crop. We are like that before God. He owns everything and cares for us. As Paul says in 1 Timothy 6:7, "we brought nothing into the world, and it is certain we can carry nothing out." When we need anything, we simply turn to God, who was here long before we came and will be here long after we are gone.</p>
+
+            <h3>4. Stealing What Belongs to God</h3>
+            <p>Our number-one responsibility as His tenant farmers is to tell other people about the Lord. But there is a sober warning attached to forgetting whose world this is. Do you remember the story of Achan? When the walls of Jericho came tumbling down, Achan saw in the ruins a beautiful robe from Babylon, two hundred shekels of silver, and a wedge of gold, and he coveted them, took them, and hid them in the ground under his tent (Joshua 7). Israel then lost the next battle, because someone had taken what belonged to God. The Lord told Joshua that Israel had sinned, and the guilty party was found out, tribe by tribe and family by family, until Achan was taken. He confessed, and he and his household were stoned to death.</p>
+            <p>Why such a harsh penalty? Because the things Achan took belonged to God. He had stolen from God Himself. If the world is the Lord's, then to grasp it for ourselves as though we were the owners is no small thing. And the lesson runs the other way too: <em>if the world is the Lord's, then He is worthy of our worship.</em> That brings us to the second answer.</p>
+
+            <h3>5. The King's Worship</h3>
+            <div class="scripture">
+                <strong>Psalm 24:3-5 (NKJV):</strong> "Who may ascend into the hill of the LORD? Or who may stand in His holy place? He who has clean hands and a pure heart, who has not lifted up his soul to an idol, nor sworn deceitfully. He shall receive blessing from the LORD."
+            </div>
+            <p>God is holy, and He expects us to approach Him in holiness. David had apparently prepared the Levites for the task of carrying the ark, but he had learned during that first, failed attempt that holiness could not be taken lightly &mdash; that was part of the explanation for Uzzah's death. Clean hands and a pure heart are the password at the door. When the wise men saw His star in the east, they came to worship Him. When a woman who had lived a sinful life learned that Jesus was eating at the Pharisee's house, she came with an alabaster jar of perfume, stood behind Him weeping, wet His feet with her tears, wiped them with her hair, and poured the perfume on Him. That woman came to worship Jesus. Worship is the response of a clean heart to a holy King.</p>
+
+            <h3>6. The King's Worship: Revival in the Hebrides</h3>
+            <p>In the Hebrides Islands of Scotland, two elderly sisters, one eighty-four and the other eighty-two, had sought the face of God for revival for many years. Faith had reached a low point in their country. They claimed God's promise, "I will pour water on the thirsty land, and streams on the dry ground" (Isaiah 44:3), and convinced their pastor that the people should ask God to quicken their hearts. He and a handful of men gathered in a barn to pray, three nights a week, month after month, with no results. Then one night a young deacon rose from his knees and read Psalm 24: "Who may ascend the hill of the LORD? &hellip; He who has clean hands and a pure heart." He said, "Brethren, we have been praying for months for revival, but I would like to ask: <em>are our hearts clean? Is the heart pure?</em>" In response they fell on their faces in confession and rededication and began to pray even more earnestly. By five o'clock that morning revival had come; the barn was filled with the glory of God, and the power that was let loose shook the whole community. The Lord brought to them the very man He was going to use &mdash; the Rev. Duncan Campbell. Within weeks the whole island was filled with a God-consciousness; churches overflowed; people who could not sleep came to church in the middle of the night to get right with God. In that Scottish community, not a home was left without someone coming to Christ.</p>
+
+            <h3>7. The King's Welcome</h3>
+            <div class="scripture">
+                <strong>Psalm 24:7-8 (NKJV):</strong> "Lift up your heads, O you gates! And be lifted up, you everlasting doors! And the King of glory shall come in. Who is this King of glory? The LORD strong and mighty, the LORD mighty in battle."
+            </div>
+            <p>At the end of the psalm, God is described as the King of glory, "the LORD strong and mighty." Inside the Ark of the Covenant were kept the Ten Commandments &mdash; all of which God's people had broken. But over those tablets of stone God had placed a cover, called the Mercy Seat. Every year, on the Great Day of Atonement, the High Priest would sacrifice a goat and sprinkle its blood upon that Mercy Seat. By means of that blood, the people's sins were hidden from God's eyes; the Lord did not see the broken commandments. Imagine what it meant to have that same ark go ahead of them into every battle &mdash; the Lord of free and faithful grace, who did not count their sins against them, marching on their side. God's great glory was best seen in the way He used His might on behalf of sinners. As David led the ark into Jerusalem, he wanted the city's gates opened as high and wide as they could possibly go, to take in every bit of God's glory.</p>
+
+            <h3>8. No Room for the King</h3>
+            <p>The tragedy is that this glorious King is so often turned away. There was no room for Jesus at His birth. The Bethlehem innkeeper was not hostile and not opposed; his inn was simply crowded and his mind preoccupied. That is the answer millions give today. Their response to Christ is not atheism and not defiance; it is preoccupation &mdash; the feeling of being able to get on reasonably well without Him, every room in the heart already taken up by other crowding interests. There was no room for Jesus by His family or His nation either; He said, "Foxes have holes and birds of the air have nests, but the Son of Man has nowhere to lay His head" (Matthew 8:20). One place always welcomed Him &mdash; the home in Bethany where Mary, Martha, and Lazarus lived.</p>
+            <div class="illustration">
+                <strong>"It's Dark and Cold":</strong> A proud young woman lay dying. She had made room in her life for pleasure, fun, and sin, but no room for Jesus. As the shadows deepened she called to her father, "Papa, won't you go with me? It's so dark and cold." Her father replied, "Daughter, I can't go with you." Again she moaned, "It's dark and cold." Those were her last words. It will be dark and cold if we come to the end of this life without Christ. We may want the cards, the dance, and the world while we live; but we will want Christ at the last. <em>(William Moses Tidwell, Effective Illustrations)</em>
+            </div>
+            <p>So David's psalm urges all of us: welcome your King. Seek His blessing and see His glory. Lift up the gates of your heart as high and wide as they will go, and let the King of glory come in.</p>
+</div>
+
+<div class="lang-es">
+            <h3>1. David lleva el Arca a Jerusal&eacute;n</h3>
+            <p>La historia detr&aacute;s de este salmo se nos da en 2 Samuel cap&iacute;tulo 6 &mdash; la historia del rey David llevando el Arca del Pacto a la ciudad de Jerusal&eacute;n. Desde Mois&eacute;s, el arca hab&iacute;a representado la presencia de Dios en medio de Su pueblo. Durante las guerras con los filisteos hab&iacute;a sido capturada, luego devuelta, y por unos veinte a&ntilde;os hab&iacute;a estado en la casa de un hombre llamado Abinadab. Ahora David hab&iacute;a sido hecho rey sobre todo Israel, hab&iacute;a tomado la ciudad jebusea que llamamos Jerusal&eacute;n, y quer&iacute;a que su nueva capital fuera no solo el centro pol&iacute;tico del reino sino tambi&eacute;n su centro de adoraci&oacute;n. As&iacute; que se propuso llevar el arca a casa.</p>
+            <p>La historia es de ensayo y error. El primer intento fracas&oacute;. El arca era llevada en una carreta de bueyes cuando los bueyes tropezaron, y un hombre llamado Uza extendi&oacute; la mano para sostenerla y muri&oacute; en el acto. David qued&oacute; enojado y temeroso, y la misi&oacute;n se detuvo all&iacute; mismo; el arca fue llevada a la casa de Obed-Edom, donde Jehov&aacute; lo bendijo por tres meses. El segundo intento tuvo &eacute;xito. Esta vez David y toda la casa de Israel subieron el arca con gritos y trompetas, y David, vestido de un efod de lino, danz&oacute; delante de Jehov&aacute; con todas sus fuerzas. Para esta ocasi&oacute;n David escribi&oacute; un himno para cantarse mientras sub&iacute;a el arca &mdash; el Salmo 24.</p>
+
+            <h3>2. La Gran Pregunta</h3>
+            <div class="scripture">
+                <strong>Salmo 24:1 (RVG):</strong> "De Jehov&aacute; es la tierra y su plenitud; el mundo, y los que en &eacute;l habitan. Porque &eacute;l la fund&oacute; sobre los mares, y la afirm&oacute; sobre los r&iacute;os."
+            </div>
+            <p>Dentro de estos breves diez vers&iacute;culos hay dos preguntas importantes, y la m&aacute;s importante es esta, hecha dos veces: <em>"&iquest;Qui&eacute;n es este Rey de gloria?"</em> El salmo la responde de tres maneras &mdash; &Eacute;l es el Due&ntilde;o de la tierra, &Eacute;l es el Juez que decide qui&eacute;n puede estar en Su lugar santo, y &Eacute;l es "Jehov&aacute; fuerte y valiente." David responde su propia pregunta mostr&aacute;ndonos el Mundo del Rey, la Adoraci&oacute;n del Rey, y la Bienvenida del Rey. Si lo seguimos por las tres, aprenderemos c&oacute;mo dar la bienvenida a nuestro Rey.</p>
+
+            <h3>3. El Mundo del Rey</h3>
+            <p>La primera respuesta es que este Rey posee todo. <em>"De Jehov&aacute; es la tierra y su plenitud."</em> Dios no es un amuleto de buena suerte que llevamos en el bolsillo para ahuyentar los problemas y garantizar el &eacute;xito. &Eacute;l es el Due&ntilde;o de todas las cosas y de todas las personas. Cre&oacute; la tierra, reuni&oacute; los mares, form&oacute; la tierra seca, y como su Creador sabe qu&eacute; bendiciones quiere dar y c&oacute;mo y cu&aacute;ndo quiere darlas. A veces la gente cree que a la humanidad se le ha entregado la tierra para hacer con ella lo que quiera. Pero no somos los due&ntilde;os de la tierra; somos solo los labradores arrendatarios, cuidando la tierra para el Due&ntilde;o. Hagamos lo que hagamos, somos como siervos que rinden cuentas al Amo por c&oacute;mo tratamos Su propiedad. Jos&eacute; fue mayordomo de la casa de Potifar, y fue fiel en ello.</p>
+            <p>Jes&uacute;s habl&oacute; de un due&ntilde;o que plant&oacute; una vi&ntilde;a, edific&oacute; una cerca y una torre para guardarla, y cav&oacute; un lagar, y luego la arrend&oacute; a labradores (Mateo 21:33). Bill Carlson escribi&oacute; todo un libro, <em>The Sharecropper</em> (El Aparcero), sobre esta idea. Un aparcero es un arrendatario que trabaja una tierra que no posee; el due&ntilde;o compra la semilla, las herramientas, el ganado, y el trabajador recibe una parte de la cosecha. As&iacute; somos nosotros delante de Dios. &Eacute;l posee todo y cuida de nosotros. Como dice Pablo en 1 Timoteo 6:7: "nada hemos tra&iacute;do a este mundo, y sin duda nada podremos sacar." Cuando necesitamos algo, simplemente acudimos a Dios, que estaba aqu&iacute; mucho antes de que lleg&aacute;ramos y estar&aacute; aqu&iacute; mucho despu&eacute;s de que nos vayamos.</p>
+
+            <h3>4. Robar lo que Pertenece a Dios</h3>
+            <p>Nuestra responsabilidad n&uacute;mero uno como Sus labradores arrendatarios es hablar a otros del Se&ntilde;or. Pero hay una solemne advertencia ligada a olvidar de qui&eacute;n es este mundo. &iquest;Recuerda la historia de Ac&aacute;n? Cuando los muros de Jeric&oacute; se derrumbaron, Ac&aacute;n vio en las ruinas un hermoso manto de Babilonia, doscientos siclos de plata y una barra de oro, y los codici&oacute;, los tom&oacute; y los escondi&oacute; en la tierra debajo de su tienda (Josu&eacute; 7). Israel perdi&oacute; entonces la siguiente batalla, porque alguien hab&iacute;a tomado lo que pertenec&iacute;a a Dios. El Se&ntilde;or dijo a Josu&eacute; que Israel hab&iacute;a pecado, y el culpable fue descubierto, tribu por tribu y familia por familia, hasta que Ac&aacute;n fue se&ntilde;alado. Confes&oacute;, y &eacute;l y su casa fueron apedreados hasta morir.</p>
+            <p>&iquest;Por qu&eacute; un castigo tan severo? Porque lo que Ac&aacute;n tom&oacute; pertenec&iacute;a a Dios. Hab&iacute;a robado a Dios mismo. Si el mundo es del Se&ntilde;or, entonces aferrarlo para nosotros como si fu&eacute;ramos los due&ntilde;os no es cosa peque&ntilde;a. Y la lecci&oacute;n corre tambi&eacute;n al rev&eacute;s: <em>si el mundo es del Se&ntilde;or, entonces &Eacute;l es digno de nuestra adoraci&oacute;n.</em> Eso nos lleva a la segunda respuesta.</p>
+
+            <h3>5. La Adoraci&oacute;n del Rey</h3>
+            <div class="scripture">
+                <strong>Salmo 24:3-5 (RVG):</strong> "&iquest;Qui&eacute;n subir&aacute; al monte de Jehov&aacute;? &iquest;Y qui&eacute;n estar&aacute; en su lugar santo? El limpio de manos y puro de coraz&oacute;n; el que no ha elevado su alma a la vanidad, ni jurado con enga&ntilde;o. Recibir&aacute; bendici&oacute;n de Jehov&aacute;."
+            </div>
+            <p>Dios es santo, y espera que nos acerquemos a &Eacute;l en santidad. David aparentemente hab&iacute;a preparado a los levitas para la tarea de cargar el arca, pero hab&iacute;a aprendido durante aquel primer intento fallido que la santidad no pod&iacute;a tomarse a la ligera &mdash; esa fue parte de la explicaci&oacute;n de la muerte de Uza. Manos limpias y coraz&oacute;n puro son la contrase&ntilde;a en la puerta. Cuando los magos vieron Su estrella en el oriente, vinieron a adorarle. Cuando una mujer que hab&iacute;a llevado una vida pecaminosa supo que Jes&uacute;s com&iacute;a en casa del fariseo, vino con un frasco de alabastro de perfume, se par&oacute; detr&aacute;s de &Eacute;l llorando, moj&oacute; Sus pies con sus l&aacute;grimas, los enjug&oacute; con sus cabellos, y derram&oacute; el perfume sobre &Eacute;l. Esa mujer vino a adorar a Jes&uacute;s. La adoraci&oacute;n es la respuesta de un coraz&oacute;n limpio a un Rey santo.</p>
+
+            <h3>6. La Adoraci&oacute;n del Rey: Avivamiento en las H&eacute;bridas</h3>
+            <p>En las Islas H&eacute;bridas de Escocia, dos hermanas ancianas, una de ochenta y cuatro y la otra de ochenta y dos a&ntilde;os, hab&iacute;an buscado el rostro de Dios por avivamiento durante muchos a&ntilde;os. La fe hab&iacute;a llegado a un punto bajo en su pa&iacute;s. Reclamaron la promesa de Dios: "Yo derramar&eacute; aguas sobre el sequedal, y r&iacute;os sobre la tierra &aacute;rida" (Isa&iacute;as 44:3), y convencieron a su pastor de que el pueblo deb&iacute;a pedir a Dios que avivara sus corazones. &Eacute;l y un pu&ntilde;ado de hombres se reunieron en un granero a orar, tres noches por semana, mes tras mes, sin resultados. Entonces una noche un joven di&aacute;cono se levant&oacute; de sus rodillas y ley&oacute; el Salmo 24: "&iquest;Qui&eacute;n subir&aacute; al monte de Jehov&aacute;? &hellip; El limpio de manos y puro de coraz&oacute;n." Dijo: "Hermanos, hemos orado por meses por avivamiento, pero quisiera preguntar: <em>&iquest;est&aacute;n limpios nuestros corazones? &iquest;Es puro el coraz&oacute;n?</em>" En respuesta cayeron sobre sus rostros en confesi&oacute;n y rededicaci&oacute;n y comenzaron a orar a&uacute;n m&aacute;s fervientemente. Para las cinco de la ma&ntilde;ana el avivamiento hab&iacute;a llegado; el granero se llen&oacute; de la gloria de Dios, y el poder que se solt&oacute; sacudi&oacute; a toda la comunidad. El Se&ntilde;or les trajo al mismo hombre que iba a usar &mdash; el Rev. Duncan Campbell. En semanas toda la isla se llen&oacute; de una conciencia de Dios; las iglesias se desbordaban; gente que no pod&iacute;a dormir ven&iacute;a a la iglesia en mitad de la noche para reconciliarse con Dios. En aquella comunidad escocesa, no qued&oacute; un hogar sin que alguien viniera a Cristo.</p>
+
+            <h3>7. La Bienvenida del Rey</h3>
+            <div class="scripture">
+                <strong>Salmo 24:7-8 (RVG):</strong> "Alzad, oh puertas, vuestras cabezas, y alzaos vosotras, puertas eternas, y entrar&aacute; el Rey de gloria. &iquest;Qui&eacute;n es este Rey de gloria? Jehov&aacute; el fuerte y valiente, Jehov&aacute; el poderoso en batalla."
+            </div>
+            <p>Al final del salmo, Dios es descrito como el Rey de gloria, "Jehov&aacute; el fuerte y valiente." Dentro del Arca del Pacto se guardaban los Diez Mandamientos &mdash; todos los cuales el pueblo de Dios hab&iacute;a quebrantado. Pero sobre aquellas tablas de piedra Dios hab&iacute;a puesto una cubierta, llamada el Propiciatorio. Cada a&ntilde;o, en el gran D&iacute;a de la Expiaci&oacute;n, el sumo sacerdote sacrificaba un macho cabr&iacute;o y rociaba su sangre sobre aquel Propiciatorio. Por medio de esa sangre, los pecados del pueblo quedaban ocultos de los ojos de Dios; el Se&ntilde;or no ve&iacute;a los mandamientos quebrantados. Imagine lo que significaba que esa misma arca fuera delante de ellos a cada batalla &mdash; el Se&ntilde;or de la gracia libre y fiel, que no les tomaba en cuenta sus pecados, marchando a su lado. La gran gloria de Dios se ve&iacute;a mejor en la manera en que usaba Su poder a favor de los pecadores. Mientras David llevaba el arca a Jerusal&eacute;n, quer&iacute;a que las puertas de la ciudad se abrieran tan altas y anchas como fuera posible, para recibir toda la gloria de Dios.</p>
+
+            <h3>8. No Hubo Lugar para el Rey</h3>
+            <p>La tragedia es que a este Rey glorioso tan a menudo se le rechaza. No hubo lugar para Jes&uacute;s en Su nacimiento. El mesonero de Bel&eacute;n no fue hostil ni se opuso; su mes&oacute;n simplemente estaba lleno y su mente preocupada. Esa es la respuesta que millones dan hoy. Su respuesta a Cristo no es ateísmo ni desaf&iacute;o; es preocupaci&oacute;n &mdash; la sensaci&oacute;n de poder arregl&aacute;rselas razonablemente bien sin &Eacute;l, con cada cuarto del coraz&oacute;n ya ocupado por otros intereses que lo abarrotan. Tampoco hubo lugar para Jes&uacute;s por parte de Su familia o Su naci&oacute;n; &Eacute;l dijo: "Las zorras tienen guaridas, y las aves del cielo nidos; mas el Hijo del Hombre no tiene d&oacute;nde recostar su cabeza" (Mateo 8:20). Un lugar siempre lo recibi&oacute; &mdash; el hogar en Betania donde viv&iacute;an Mar&iacute;a, Marta y L&aacute;zaro.</p>
+            <div class="illustration">
+                <strong>"Est&aacute; Oscuro y Fr&iacute;o":</strong> Una joven orgullosa yac&iacute;a moribunda. Hab&iacute;a hecho lugar en su vida para el placer, la diversi&oacute;n y el pecado, pero ning&uacute;n lugar para Jes&uacute;s. Al caer las sombras llam&oacute; a su padre: "Pap&aacute;, &iquest;no ir&aacute;s conmigo? Est&aacute; tan oscuro y fr&iacute;o." Su padre respondi&oacute;: "Hija, no puedo ir contigo." De nuevo gimi&oacute;: "Est&aacute; oscuro y fr&iacute;o." Esas fueron sus &uacute;ltimas palabras. Estar&aacute; oscuro y fr&iacute;o si llegamos al final de esta vida sin Cristo. Podemos querer las cartas, el baile y el mundo mientras vivimos; pero querremos a Cristo al final. <em>(William Moses Tidwell, Effective Illustrations)</em>
+            </div>
+            <p>As&iacute; que el salmo de David nos exhorta a todos: dad la bienvenida a vuestro Rey. Buscad Su bendici&oacute;n y ved Su gloria. Alzad las puertas de vuestro coraz&oacute;n tan altas y anchas como puedan abrirse, y dejad entrar al Rey de gloria.</p>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 3 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 3 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Psalms — Unit 3 (Josh engine, Psalm 24)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 3;
+const COURSE = 'psalms';
+const NEXT_UNIT_URL = 'CTSPsalmsUnit4.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Psalm 1 - The Two Ways",
+    "Psalm 23 - The Shepherd",
+    "Psalm 24 - The King of Glory",
+    "Psalm 51 - The Penitential Psalm",
+    "Psalm 119 - The Word of God",
+    "Psalm 22 - The Forsaken / Messianic Psalm",
+    "Psalm 56 - When I Am Afraid",
+    "Psalm 28 - When God Is Silent",
+    "Psalm 103 - Count Your Blessings",
+    "Psalm 55 - Casting Your Burden",
+    "The Psalms in Ministry I - Capstone",
+    "The Psalms in Ministry II - Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPsalmsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// MC answer key: A=B=C=D=5; all 20 verified against Psalm 24
+const mcQuestions = [
+    { textEn: "1. In what book and chapter is the story behind Psalm 24 — David bringing the Ark to Jerusalem — recorded?", textEs: "1. ¿En qué libro y capítulo se registra la historia detrás del Salmo 24, David llevando el Arca a Jerusalén?",
+      optionsEn: ["2 Samuel 6", "1 Kings 8", "Exodus 25", "Joshua 6"],
+      optionsEs: ["2 Samuel 6", "1 Reyes 8", "Éxodo 25", "Josué 6"], explanationEn: "The story behind Psalm 24 is in 2 Samuel 6 — David bringing the Ark of God up to Jerusalem.", explanationEs: "La historia tras el Salmo 24 está en 2 Samuel 6 — David subiendo el Arca de Dios a Jerusalén.", correct: 0 },
+    { textEn: "2. What had the Ark of the Covenant represented to Israel ever since Moses?", textEs: "2. ¿Qué había representado el Arca del Pacto para Israel desde Moisés?",
+      optionsEn: ["The wealth of the kingdom", "The presence of God in the midst of His people", "A trophy of war over the Philistines", "The authority of the king"],
+      optionsEs: ["La riqueza del reino", "La presencia de Dios en medio de Su pueblo", "Un trofeo de guerra sobre los filisteos", "La autoridad del rey"], explanationEn: "Ever since Moses, the Ark represented the very presence of God dwelling in the midst of His people.", explanationEs: "Desde Moisés, el Arca representaba la presencia misma de Dios morando en medio de Su pueblo.", correct: 1 },
+    { textEn: "3. Why did the first attempt to bring the Ark to Jerusalem fail?", textEs: "3. ¿Por qué fracasó el primer intento de llevar el Arca a Jerusalén?",
+      optionsEn: ["Uzzah reached out to steady the ark and died", "A storm destroyed the cart", "The Philistines attacked the procession", "David lost his way to the city"],
+      optionsEs: ["Uza extendió la mano para sostener el arca y murió", "Una tormenta destruyó la carreta", "Los filisteos atacaron la procesión", "David perdió el camino a la ciudad"], explanationEn: "The first attempt failed when Uzzah reached out to steady the Ark and died — holiness cannot be handled carelessly.", explanationEs: "El primer intento fracasó cuando Uza extendió la mano para sostener el Arca y murió — la santidad no se maneja a la ligera.", correct: 0 },
+    { textEn: "4. Where was the Ark kept for three months after the first attempt failed?", textEs: "4. ¿Dónde se guardó el Arca durante tres meses después de que el primer intento fracasó?",
+      optionsEn: ["In the tabernacle at Shiloh", "Back among the Philistines", "In David's own palace", "In the house of Obed-Edom, who was blessed"],
+      optionsEs: ["En el tabernáculo de Silo", "De vuelta entre los filisteos", "En el palacio del propio David", "En la casa de Obed-Edom, quien fue bendecido"], explanationEn: "For three months the Ark stayed in the house of Obed-Edom, who was blessed because God's presence dwelt with him.", explanationEs: "Por tres meses el Arca quedó en casa de Obed-edom, quien fue bendecido porque la presencia de Dios moró con él.", correct: 3 },
+    { textEn: "5. What is the most important question of the psalm, asked twice in its ten verses?", textEs: "5. ¿Cuál es la pregunta más importante del salmo, hecha dos veces en sus diez versículos?",
+      optionsEn: ["How long, O Lord?", "Who is this King of glory?", "Why do the nations rage?", "What is man, that You are mindful of him?"],
+      optionsEs: ["¿Hasta cuándo, oh Señor?", "¿Quién es este Rey de gloria?", "¿Por qué se amotinan las naciones?", "¿Qué es el hombre, para que de él te acuerdes?"], explanationEn: "The psalm's great question, asked twice, is the one that matters most: 'Who is this King of glory?'", explanationEs: "La gran pregunta del salmo, hecha dos veces, es la que más importa: '¿Quién es este Rey de gloria?'", correct: 1 },
+    { textEn: "6. According to the lesson, the question \"Who is this King of glory?\" is answered in three ways. Which set is correct?", textEs: "6. Según la lección, la pregunta \"¿Quién es este Rey de gloria?\" se responde de tres maneras. ¿Cuál conjunto es correcto?",
+      optionsEn: ["Creator, Redeemer, and Friend", "Owner of the earth, Judge of His holy place, and the LORD strong and mighty", "Father, Son, and Spirit", "Prophet, Priest, and King"],
+      optionsEs: ["Creador, Redentor y Amigo", "Dueño de la tierra, Juez de Su lugar santo, y Jehová fuerte y valiente", "Padre, Hijo y Espíritu", "Profeta, Sacerdote y Rey"], explanationEn: "The King of glory is answered three ways: Owner of the earth, Judge of His holy place, and the LORD strong and mighty.", explanationEs: "El Rey de gloria se responde de tres maneras: Dueño de la tierra, Juez de Su lugar santo, y Jehová fuerte y valiente.", correct: 1 },
+    { textEn: "7. What does \"The earth is the LORD's, and all its fullness\" teach about God?", textEs: "7. ¿Qué enseña \"De Jehová es la tierra y su plenitud\" acerca de Dios?",
+      optionsEn: ["That God is a good-luck charm to ward off trouble", "That nature itself is divine", "That He is the Owner and Creator of all things and all people", "That the earth governs itself"],
+      optionsEs: ["Que Dios es un amuleto para ahuyentar problemas", "Que la naturaleza misma es divina", "Que Él es el Dueño y Creador de todas las cosas y todas las personas", "Que la tierra se gobierna sola"], explanationEn: "'The earth is the LORD's' means God is Owner and Creator of all things and all people — nothing is outside His claim.", explanationEs: "'De Jehová es la tierra' significa que Dios es Dueño y Creador de todo y de todos — nada está fuera de Su dominio.", correct: 2 },
+    { textEn: "8. According to the lesson, what is mankind's true relationship to the earth?", textEs: "8. Según la lección, ¿cuál es la verdadera relación de la humanidad con la tierra?",
+      optionsEn: ["We are the rightful owners of the earth", "We may do with it whatever pleases us", "The earth belongs to no one", "We are tenant farmers and stewards, accountable to the Owner"],
+      optionsEs: ["Somos los dueños legítimos de la tierra", "Podemos hacer con ella lo que nos plazca", "La tierra no pertenece a nadie", "Somos labradores arrendatarios y mayordomos, responsables ante el Dueño"], explanationEn: "If the earth is the Lord's, we are tenant farmers and stewards, accountable to the Owner for what we hold.", explanationEs: "Si la tierra es de Jehová, somos arrendatarios y mayordomos, responsables ante el Dueño por lo que tenemos.", correct: 3 },
+    { textEn: "9. Which Old Testament figure does the lesson cite as a faithful steward of another man's house?", textEs: "9. ¿A qué figura del Antiguo Testamento cita la lección como mayordomo fiel de la casa de otro hombre?",
+      optionsEn: ["Joseph, steward of Potiphar's house", "Daniel in Babylon", "Nehemiah the cupbearer", "Elisha the prophet"],
+      optionsEs: ["José, mayordomo de la casa de Potifar", "Daniel en Babilonia", "Nehemías el copero", "Eliseo el profeta"], explanationEn: "Joseph, set over Potiphar's house, is the picture of a faithful steward managing what belongs to another.", explanationEs: "José, puesto sobre la casa de Potifar, es el retrato de un mayordomo fiel que administra lo que pertenece a otro.", correct: 0 },
+    { textEn: "10. The image of a sharecropper, cited in the lesson, illustrates what about our relationship to God?", textEs: "10. La imagen de un aparcero, citada en la lección, ilustra ¿qué acerca de nuestra relación con Dios?",
+      optionsEn: ["That we own nothing and owe God nothing", "That the earth belongs to no one", "That we are stewards working land that belongs to God, accountable to Him", "That wealth is a sign of God's favor"],
+      optionsEs: ["Que no poseemos nada y no le debemos nada a Dios", "Que la tierra no pertenece a nadie", "Que somos mayordomos que trabajan una tierra que es de Dios, y le rendimos cuentas", "Que la riqueza es señal del favor de Dios"], explanationEn: "The sharecropper image teaches that we work land that belongs to God and remain accountable to Him for it.", explanationEs: "La imagen del aparcero enseña que trabajamos una tierra que es de Dios y le rendimos cuentas por ella.", correct: 2 },
+    { textEn: "11. What does 1 Timothy 6:7, quoted in the lesson, say about our possessions?", textEs: "11. ¿Qué dice 1 Timoteo 6:7, citado en la lección, sobre nuestras posesiones?",
+      optionsEn: ["The laborer is worthy of his wages", "Money is the root of all evil", "We brought nothing into the world, and can carry nothing out", "Sell all you have and give to the poor"],
+      optionsEs: ["El obrero es digno de su salario", "El dinero es la raíz de todos los males", "Nada trajimos a este mundo, y nada podremos sacar", "Vende todo lo que tienes y dalo a los pobres"], explanationEn: "1 Timothy 6:7 reminds us we brought nothing into the world and can carry nothing out — we are stewards, not owners.", explanationEs: "1 Timoteo 6:7 nos recuerda que nada trajimos al mundo y nada podemos sacar — somos mayordomos, no dueños.", correct: 2 },
+    { textEn: "12. In the story of Achan (Joshua 7), what was the root of his sin and Israel's defeat?", textEs: "12. En la historia de Acán (Josué 7), ¿cuál fue la raíz de su pecado y de la derrota de Israel?",
+      optionsEn: ["He worshiped a foreign idol", "He refused to fight at Jericho", "He lied to Joshua about a vision", "He took and hid what belonged to God"],
+      optionsEs: ["Adoró a un ídolo extranjero", "Se negó a pelear en Jericó", "Mintió a Josué sobre una visión", "Tomó y escondió lo que pertenecía a Dios"], explanationEn: "Achan's sin and Israel's defeat came from taking and hiding what belonged to God — robbing the rightful Owner.", explanationEs: "El pecado de Acán y la derrota de Israel vinieron de tomar y esconder lo que era de Dios — robar al legítimo Dueño.", correct: 3 },
+    { textEn: "13. What is the central thesis connecting the King's World to worship?", textEs: "13. ¿Cuál es la tesis central que conecta el Mundo del Rey con la adoración?",
+      optionsEn: ["If we work hard, God owes us blessing", "Worship is optional for the busy", "If the world is the Lord's, then He is worthy of our worship", "The earth worships God on our behalf"],
+      optionsEs: ["Si trabajamos duro, Dios nos debe bendición", "La adoración es opcional para los ocupados", "Si el mundo es del Señor, entonces Él es digno de nuestra adoración", "La tierra adora a Dios en nuestro lugar"], explanationEn: "The thesis is simple: if the whole world is the Lord's, then He is worthy of our worship.", explanationEs: "La tesis es sencilla: si todo el mundo es de Jehová, entonces &Eacute;l es digno de nuestra adoración.", correct: 2 },
+    { textEn: "14. According to Psalm 24:3-5, who may ascend the hill of the LORD and stand in His holy place?", textEs: "14. Según el Salmo 24:3-5, ¿quién subirá al monte de Jehová y estará en Su lugar santo?",
+      optionsEn: ["He who has clean hands and a pure heart", "He who brings the largest offering", "He who is born into the priestly line", "He who has never been to battle"],
+      optionsEs: ["El limpio de manos y puro de corazón", "El que trae la ofrenda más grande", "El que nace en el linaje sacerdotal", "El que nunca ha ido a la batalla"], explanationEn: "Psalm 24 says only the one with clean hands and a pure heart may ascend God's hill and stand in His holy place.", explanationEs: "El Salmo 24 dice que solo el de manos limpias y corazón puro puede subir al monte de Dios y estar en Su lugar santo.", correct: 0 },
+    { textEn: "15. What had David learned from Uzzah's death that applied to the King's Worship?", textEs: "15. ¿Qué había aprendido David de la muerte de Uza que se aplicaba a la Adoración del Rey?",
+      optionsEn: ["That oxen are unreliable", "That holiness cannot be taken lightly when approaching God", "That he should never dance before the LORD", "That the ark should stay in Abinadab's house"],
+      optionsEs: ["Que los bueyes no son confiables", "Que la santidad no puede tomarse a la ligera al acercarse a Dios", "Que nunca debía danzar delante de Jehová", "Que el arca debía quedarse en casa de Abinadab"], explanationEn: "Uzzah's death taught David that holiness cannot be taken lightly when we approach a holy God.", explanationEs: "La muerte de Uza enseñó a David que la santidad no puede tomarse a la ligera al acercarnos a un Dios santo.", correct: 1 },
+    { textEn: "16. In the lesson, which two examples are given of those who came to worship Jesus?", textEs: "16. En la lección, ¿qué dos ejemplos se dan de quienes vinieron a adorar a Jesús?",
+      optionsEn: ["Peter and John", "The rich young ruler and Nicodemus", "The wise men, and the sinful woman with the alabaster jar", "Zacchaeus and Bartimaeus"],
+      optionsEs: ["Pedro y Juan", "El joven rico y Nicodemo", "Los magos, y la mujer pecadora con el frasco de alabastro", "Zaqueo y Bartimeo"], explanationEn: "The wise men and the sinful woman with the alabaster jar both show true worship: giving Christ our best and our all.", explanationEs: "Los magos y la mujer pecadora del frasco de alabastro muestran la verdadera adoración: dar a Cristo lo mejor y todo.", correct: 2 },
+    { textEn: "17. In the Hebrides Revival of 1949, what question from Psalm 24 broke the long barn prayer-vigil open?", textEs: "17. En el Avivamiento de las Hébridas de 1949, ¿qué pregunta del Salmo 24 abrió la larga vigilia de oración en el granero?",
+      optionsEn: ["How long, O Lord, will You forget us?", "Where is the God of Elijah?", "Will You not revive us again?", "Are our hearts clean? Is the heart pure?"],
+      optionsEs: ["¿Hasta cuándo, oh Señor, nos olvidarás?", "¿Dónde está el Dios de Elías?", "¿No volverás a darnos vida?", "¿Están limpios nuestros corazones? ¿Es puro el corazón?"], explanationEn: "In the Hebrides Revival the breakthrough came with Psalm 24's question: are our hearts clean, is the heart pure?", explanationEs: "En el Avivamiento de las Hébridas el cambio llegó con la pregunta del Salmo 24: ¿están limpios nuestros corazones, es puro el corazón?", correct: 3 },
+    { textEn: "18. The account of the Hebrides Revival of 1949 is used to illustrate what truth from Psalm 24?", textEs: "18. El relato del Avivamiento de las Hébridas de 1949 se usa para ilustrar ¿qué verdad del Salmo 24?",
+      optionsEn: ["That revival is mainly about large crowds", "That God draws near and sends revival when His people seek clean hands and a pure heart", "That only famous preachers can bring revival", "That worship requires a special building"],
+      optionsEs: ["Que el avivamiento se trata principalmente de grandes multitudes", "Que Dios se acerca y envía avivamiento cuando Su pueblo busca manos limpias y un corazón puro", "Que solo predicadores famosos pueden traer avivamiento", "Que la adoración requiere un edificio especial"], explanationEn: "The Hebrides account shows God draws near and sends revival when His people seek clean hands and a pure heart.", explanationEs: "El relato de las Hébridas muestra que Dios se acerca y envía avivamiento cuando Su pueblo busca manos limpias y corazón puro.", correct: 1 },
+    { textEn: "19. What covered the broken Ten Commandments inside the Ark, and how were the people's sins hidden from God's eyes?", textEs: "19. ¿Qué cubría los Diez Mandamientos quebrantados dentro del Arca, y cómo se ocultaban los pecados del pueblo de los ojos de Dios?",
+      optionsEn: ["A golden lid called the Mercy Seat, by blood sprinkled on the Day of Atonement", "A linen cloth, by the prayers of the priest", "A layer of incense, by daily offerings", "A scroll of the law, by the king's decree"],
+      optionsEs: ["Una cubierta de oro llamada el Propiciatorio, por sangre rociada en el Día de la Expiación", "Un paño de lino, por las oraciones del sacerdote", "Una capa de incienso, por ofrendas diarias", "Un rollo de la ley, por decreto del rey"], explanationEn: "The Mercy Seat covered the broken law inside the Ark; blood sprinkled there on the Day of Atonement hid the people's sins.", explanationEs: "El Propiciatorio cubría la ley quebrantada dentro del Arca; la sangre rociada allí en el Día de la Expiación escondía los pecados del pueblo.", correct: 0 },
+    { textEn: "20. In the \"no room for Jesus\" section, what does the Bethlehem innkeeper picture about how millions respond to Christ today?", textEs: "20. En la sección \"no hubo lugar para Jesús,\" ¿qué representa el mesonero de Belén sobre cómo millones responden a Cristo hoy?",
+      optionsEn: ["Open hostility and hatred toward Christ", "Honest doubt about His existence", "Careful study before deciding", "Preoccupation — getting on without Him, the heart already crowded"],
+      optionsEs: ["Hostilidad abierta y odio hacia Cristo", "Duda honesta sobre Su existencia", "Estudio cuidadoso antes de decidir", "Preocupación — arreglárselas sin Él, con el corazón ya abarrotado"], explanationEn: "The Bethlehem innkeeper pictures how millions respond to Christ today: too preoccupied, the heart already crowded, no room for the King.", explanationEs: "El mesonero de Belén representa cómo millones responden hoy a Cristo: demasiado ocupados, el corazón ya lleno, sin lugar para el Rey.", correct: 3 },
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "21. Explain the historical event behind Psalm 24: why did the first attempt to bring the Ark to Jerusalem fail, and what does that failure teach about approaching God?",
+      textEs: "21. Explique el evento histórico tras el Salmo 24: ¿por qué fracasó el primer intento de llevar el Arca a Jerusalén, y qué enseña ese fracaso sobre acercarse a Dios?",
+      kw_en: ["David", "ark", "Jerusalem", "Uzzah", "ox cart", "died", "Obed-Edom", "holiness"],
+      kw_es: ["David", "arca", "Jerusalén", "Uza", "carreta", "murió", "Obed-edom", "santidad"],
+      modelEn: "The story behind Psalm 24 is David bringing the Ark of God up to Jerusalem in 2 Samuel 6. The first attempt failed because the Ark was carried on a new ox cart rather than as God had commanded; when the cart shook and Uzzah reached out to steady the Ark, he died. The Ark then stayed three months in the house of Obed-Edom, who was blessed, before David brought it up properly the second time. The lesson is that holiness cannot be handled carelessly; we must approach a holy God on His terms, with reverence, not on our own convenient ideas.",
+      modelEs: "La historia tras el Salmo 24 es David subiendo el Arca de Dios a Jerusalén en 2 Samuel 6. El primer intento fracasó porque el Arca fue llevada en una carreta nueva en vez de como Dios había mandado; cuando la carreta se sacudió y Uza extendió la mano para sostener el Arca, murió. El Arca quedó luego tres meses en casa de Obed-edom, quien fue bendecido, antes de que David la subiera correctamente la segunda vez. La lección es que la santidad no se maneja con descuido; debemos acercarnos a un Dios santo en Sus términos, con reverencia, no según nuestras ideas convenientes." },
+    { textEn: "22. What is the most important question of Psalm 24, and what are the three answers the psalm gives to it?",
+      textEs: "22. ¿Cuál es la pregunta más importante del Salmo 24, y cuáles son las tres respuestas que el salmo le da?",
+      kw_en: ["who is this King of glory", "owner", "judge", "holy place", "LORD strong and mighty", "earth", "battle", "three"],
+      kw_es: ["quién es este Rey de gloria", "dueño", "juez", "lugar santo", "Jehová fuerte y valiente", "tierra", "batalla", "tres"],
+      modelEn: "The most important question of Psalm 24 is asked twice: \"Who is this King of glory?\" The psalm answers it three ways. First, He is the Owner of the earth and all its fullness, the Creator of all things and all people. Second, He is the Judge of His holy place, the One worthy to stand in His own sanctuary. Third, He is \"the LORD strong and mighty, the LORD mighty in battle,\" the victorious King. Together these answers show that the One who comes to us is the sovereign Owner, holy Judge, and conquering King of all.",
+      modelEs: "La pregunta más importante del Salmo 24 se hace dos veces: \"¿Quién es este Rey de gloria?\" El salmo la responde de tres maneras. Primero, &Eacute;l es el Dueño de la tierra y su plenitud, el Creador de todas las cosas y de todas las personas. Segundo, es el Juez de Su lugar santo, el digno de estar en Su propio santuario. Tercero, es \"Jehová el fuerte y valiente, Jehová el poderoso en batalla,\" el Rey victorioso. Juntas estas respuestas muestran que Aquel que viene a nosotros es el Dueño soberano, el Juez santo, y el Rey conquistador de todo." },
+    { textEn: "23. Explain \"the King's World\" (Psalm 24:1). What does it mean that the earth is the Lord's, and how does that define our role?",
+      textEs: "23. Explique \"el Mundo del Rey\" (Salmo 24:1). ¿Qué significa que la tierra es del Señor, y cómo define eso nuestro papel?",
+      kw_en: ["earth is the Lord's", "owner", "creator", "tenant", "steward", "accountable", "not owners", "care"],
+      kw_es: ["la tierra es del Señor", "dueño", "creador", "arrendatario", "mayordomo", "responsable", "no dueños", "cuidar"],
+      modelEn: "\"The earth is the LORD's, and all its fullness\" (Psalm 24:1) means that God is the Owner and Creator of everything and everyone; nothing lies outside His rightful claim. This defines our role precisely: we are not owners but tenants and stewards, entrusted with what belongs to Him and accountable to Him for how we use it. Our money, our time, our abilities, even our very lives, are held in trust from the true Owner. To live rightly is to remember that we manage God's property, and one day we will give an account of our stewardship.",
+      modelEs: "\"De Jehová es la tierra y su plenitud\" (Salmo 24:1) significa que Dios es el Dueño y Creador de todo y de todos; nada queda fuera de Su legítimo dominio. Esto define nuestro papel con precisión: no somos dueños sino arrendatarios y mayordomos, encargados de lo que le pertenece y responsables ante &Eacute;l por cómo lo usamos. Nuestro dinero, nuestro tiempo, nuestras capacidades, aun nuestra vida misma, se tienen en confianza del verdadero Dueño. Vivir rectamente es recordar que administramos la propiedad de Dios, y un día daremos cuenta de nuestra mayordomía." },
+    { textEn: "24. Use the parable of the vineyard (Matthew 21:33) and Bill Carlson's \"The Sharecropper\" to explain our stewardship before God.",
+      textEs: "24. Use la parábola de la viña (Mateo 21:33) y \"The Sharecropper\" de Bill Carlson para explicar nuestra mayordomía delante de Dios.",
+      kw_en: ["vineyard", "owner", "tenant", "sharecropper", "Carlson", "share", "crop", "accountable"],
+      kw_es: ["viña", "dueño", "arrendatario", "aparcero", "Carlson", "parte", "cosecha", "responsable"],
+      modelEn: "Both the parable of the vineyard in Matthew 21 and Bill Carlson's picture of the sharecropper teach the same truth about our standing before God. In the parable, an owner plants a vineyard and lets it out to tenants who must render him his share of the fruit; they are workers on land that is not theirs. A sharecropper likewise farms another man's field and owes the owner an account of the harvest. So we work and live on what belongs to God, enjoying its use but never its ownership, and we remain accountable to Him for the fruit of our lives.",
+      modelEs: "Tanto la parábola de la viña en Mateo 21 como la imagen del aparcero de Bill Carlson enseñan la misma verdad sobre nuestra posición ante Dios. En la parábola, un dueño planta una viña y la arrienda a labradores que deben darle su parte del fruto; son obreros en tierra que no es suya. Un aparcero igualmente cultiva el campo de otro y le debe al dueño cuentas de la cosecha. Así trabajamos y vivimos en lo que pertenece a Dios, disfrutando su uso pero nunca su propiedad, y seguimos siendo responsables ante &Eacute;l por el fruto de nuestra vida." },
+    { textEn: "25. What does the sin of Achan (Joshua 7) teach about taking what belongs to God, and how does it connect to Psalm 24's claim that the earth is the Lord's?",
+      textEs: "25. ¿Qué enseña el pecado de Acán (Josué 7) sobre tomar lo que pertenece a Dios, y cómo se conecta con la afirmación del Salmo 24 de que la tierra es de Jehová?",
+      kw_en: ["Achan", "Jericho", "hid", "silver", "gold", "defeat", "belonged to God", "stewards"],
+      kw_es: ["Acán", "Jericó", "escondió", "plata", "oro", "derrota", "pertenecía a Dios", "mayordomos"],
+      modelEn: "At Jericho God commanded that everything be devoted to Him, but Achan secretly took a beautiful robe, silver, and gold, and hid them in his tent. Because of that hidden sin, Israel was defeated at Ai until the sin was uncovered and judged. The story teaches the seriousness of taking for ourselves what belongs to God, the very opposite of the stewardship Psalm 24 calls for. If the whole earth is the Lord's, then robbing Him, whether of devoted things, of our tithe, or of the honor due Him, is a grave matter, and hidden sin has consequences beyond ourselves.",
+      modelEs: "En Jericó Dios mandó que todo le fuera consagrado, pero Acán tomó en secreto un manto hermoso, plata y oro, y los escondió en su tienda. Por ese pecado escondido, Israel fue derrotado en Hai hasta que el pecado fue descubierto y juzgado. La historia enseña la seriedad de tomar para nosotros lo que pertenece a Dios, lo opuesto mismo de la mayordomía que el Salmo 24 pide. Si toda la tierra es de Jehová, entonces robarle, sea de cosas consagradas, de nuestro diezmo, o de la honra que se le debe, es asunto grave, y el pecado escondido tiene consecuencias más allá de nosotros mismos." },
+    { textEn: "26. Explain \"the King's Worship\" (Psalm 24:3-5). What does God require of those who would ascend His hill, and why?",
+      textEs: "26. Explique \"la Adoración del Rey\" (Salmo 24:3-5). ¿Qué requiere Dios de quienes subirían a Su monte, y por qué?",
+      kw_en: ["clean hands", "pure heart", "holy", "holiness", "ascend", "worship", "Uzzah", "approach"],
+      kw_es: ["manos limpias", "puro de corazón", "santo", "santidad", "subir", "adoración", "Uza", "acercarse"],
+      modelEn: "\"The King's Worship\" in Psalm 24:3-5 asks who may ascend the hill of the LORD and stand in His holy place, and answers: \"He who has clean hands and a pure heart.\" God requires not outward ritual but inward purity, clean conduct and a heart that is not given to idols or falsehood. The reason is the holiness of God Himself; as Uzzah's death showed, the holy God cannot be approached carelessly. We cannot worship acceptably while clinging to sin. This drives us at last to Christ, the only One with truly clean hands and a pure heart, in whom we may draw near.",
+      modelEs: "\"La Adoración del Rey\" en el Salmo 24:3-5 pregunta quién puede subir al monte de Jehová y estar en Su lugar santo, y responde: \"El limpio de manos y puro de corazón.\" Dios requiere no ritual externo sino pureza interna, conducta limpia y un corazón no entregado a ídolos ni a la falsedad. La razón es la santidad de Dios mismo; como mostró la muerte de Uza, al Dios santo no se le acerca con descuido. No podemos adorar de manera aceptable mientras nos aferramos al pecado. Esto al fin nos lleva a Cristo, el único con manos verdaderamente limpias y corazón puro, en quien podemos acercarnos." },
+    { textEn: "27. The Hebrides Revival of 1949 is tied to Psalm 24. What does that account teach about the connection between clean hands, a pure heart, and God drawing near?",
+      textEs: "27. El Avivamiento de las Hébridas de 1949 está ligado al Salmo 24. ¿Qué enseña ese relato sobre la conexión entre las manos limpias, un corazón puro, y el acercarse de Dios?",
+      kw_en: ["Hebrides", "pray", "clean hands", "pure heart", "revival", "sought", "presence", "holiness"],
+      kw_es: ["Hébridas", "orar", "manos limpias", "corazón puro", "avivamiento", "buscaron", "presencia", "santidad"],
+      modelEn: "In the Hebrides Revival of 1949, believers gave themselves to prayer, and the turning point came when the words of Psalm 24 cut through: are our hands clean, is our heart pure? When the people stopped seeking revival as an experience and instead sought clean hands and a pure heart before God, His presence came down in power. The account teaches that God draws near to a people who deal honestly with their sin and long for holiness. Revival is not worked up by technique; it comes when hearts are cleansed and God Himself is sought above all.",
+      modelEs: "En el Avivamiento de las Hébridas de 1949, los creyentes se dieron a la oración, y el punto decisivo llegó cuando las palabras del Salmo 24 penetraron: ¿están limpias nuestras manos, es puro nuestro corazón? Cuando el pueblo dejó de buscar el avivamiento como una experiencia y en cambio buscó manos limpias y corazón puro ante Dios, Su presencia descendió con poder. El relato enseña que Dios se acerca a un pueblo que trata con honestidad su pecado y anhela la santidad. El avivamiento no se produce por técnica; viene cuando los corazones son limpiados y se busca a Dios mismo sobre todo." },
+    { textEn: "28. Explain \"the King's Welcome\" (Psalm 24:7-10). What was the Mercy Seat, and how did it reveal God's glory toward sinners?",
+      textEs: "28. Explique \"la Bienvenida del Rey\" (Salmo 24:7-10). ¿Qué era el Propiciatorio, y cómo revelaba la gloria de Dios hacia los pecadores?",
+      kw_en: ["mercy seat", "ark", "commandments", "blood", "atonement", "sins hidden", "grace", "glory"],
+      kw_es: ["propiciatorio", "arca", "mandamientos", "sangre", "expiación", "pecados ocultos", "gracia", "gloria"],
+      modelEn: "\"The King's Welcome\" in Psalm 24:7-10 calls the gates to lift up so the King of glory may come in. Inside the Ark lay the broken tablets of the law, but over them was a golden lid called the Mercy Seat, and on the Day of Atonement blood was sprinkled there. The blood came between God's eyes and the broken commandments, so that the people's sins were covered. In this the glory of God shines toward sinners: He is holy and His law is broken, yet through the blood He makes a way to receive us. It points forward to Christ, whose blood is our mercy seat.",
+      modelEs: "\"La Bienvenida del Rey\" en el Salmo 24:7-10 llama a las puertas a alzarse para que el Rey de gloria entre. Dentro del Arca estaban las tablas quebrantadas de la ley, pero sobre ellas había una tapa de oro llamada el Propiciatorio, y en el Día de la Expiación se rociaba sangre allí. La sangre se interponía entre los ojos de Dios y los mandamientos quebrantados, de modo que los pecados del pueblo quedaban cubiertos. En esto la gloria de Dios resplandece hacia los pecadores: &Eacute;l es santo y Su ley está quebrantada, y sin embargo por la sangre abre un camino para recibirnos. Señala a Cristo, cuya sangre es nuestro propiciatorio." },
+    { textEn: "29. Using the Bethlehem innkeeper, explain why so many give \"no room\" to Jesus today, and what kind of response it is.",
+      textEs: "29. Usando al mesonero de Belén, explique por qué tantos no dan \"lugar\" a Jesús hoy, y qué clase de respuesta es.",
+      kw_en: ["innkeeper", "no room", "crowded", "preoccupied", "not hostile", "not defiance", "without Christ", "heart"],
+      kw_es: ["mesonero", "no hubo lugar", "lleno", "preocupado", "no hostil", "no desafío", "sin Cristo", "corazón"],
+      modelEn: "The Bethlehem innkeeper had no room for Mary and Joseph, and the lesson uses him to picture how millions respond to Jesus today. Notice the innkeeper was not hostile; he did not drive them away in anger or defiance. He was simply preoccupied, his inn already crowded and his attention full, so there was no room. That is how most people refuse Christ, not by open rebellion but by a heart already crowded with other things, getting on with life without Him. The danger is not always hatred of Christ; often it is a busy heart that never makes room for the King.",
+      modelEs: "El mesonero de Belén no tuvo lugar para María y José, y la lección lo usa para representar cómo millones responden hoy a Jesús. Note que el mesonero no fue hostil; no los echó con ira ni con desafío. Simplemente estaba preocupado, su mesón ya lleno y su atención ocupada, así que no había lugar. Así es como la mayoría rechaza a Cristo, no por rebeldía abierta sino por un corazón ya lleno de otras cosas, siguiendo con la vida sin &Eacute;l. El peligro no siempre es el odio a Cristo; a menudo es un corazón ocupado que nunca hace lugar para el Rey." },
+    { textEn: "30. What warning about welcoming the King does the lesson draw from the dying young woman who said \"it's dark and cold\"?",
+      textEs: "30. ¿Qué advertencia sobre recibir al Rey saca la lección de la joven moribunda que dijo \"está oscuro y frío\"?",
+      kw_en: ["dying", "no room", "without Christ", "dark and cold", "too late", "welcome", "King", "warning"],
+      kw_es: ["moribunda", "sin lugar", "sin Cristo", "oscuro y frío", "demasiado tarde", "recibir", "Rey", "advertencia"],
+      modelEn: "The lesson tells of a dying young woman who, having lived without Christ, said at the end, \"it's dark and cold,\" with no welcome waiting for her. It is a solemn warning that giving \"no room\" to the King is not harmless neglect but has eternal weight. The time to welcome Christ is now, while the heart is still tender and the door of life still open; to put it off until the end may be to find the door has closed. The lesson urges us not to be like the innkeeper or the young woman, but to throw open the gates and let the King of glory come in.",
+      modelEs: "La lección habla de una joven moribunda que, habiendo vivido sin Cristo, dijo al final: \"está oscuro y frío,\" sin bienvenida esperándola. Es una advertencia solemne de que dar \"ningún lugar\" al Rey no es un descuido inofensivo sino que tiene peso eterno. El momento de recibir a Cristo es ahora, mientras el corazón aún está tierno y la puerta de la vida aún abierta; posponerlo hasta el final puede ser hallar que la puerta se ha cerrado. La lección nos insta a no ser como el mesonero ni como la joven, sino a abrir de par en par las puertas y dejar entrar al Rey de gloria." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 4 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 4 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPsalmsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

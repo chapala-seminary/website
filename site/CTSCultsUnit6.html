@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Cults & World Religions — Unit 6</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 7 →</span><span class="lang-es">Unidad 7 →</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Cults &amp; World Religions — Unit 6: Progressive Revelation — Islam and Bahá'í</span><span class="lang-es">📖 Las Sectas y las Religiones del Mundo — Unidad 6: Revelación Progresiva — El Islam y la Fe Bahá'í</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed." — Galatians 1:8 (NKJV)</span><span class="lang-es">"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema." — Gálatas 1:8 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Cults &amp; World Religions. Please register before beginning Unit 6.</span><span class="lang-es">Bienvenido a Las Sectas y las Religiones del Mundo. Por favor regístrese antes de comenzar la Unidad 6.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Anchor: Hebrews 1:1-3; Jude 3; John 14:6; Galatians 1:8 (NKJV)</strong></p>
+<div class="scripture">"God, who at various times and in various ways spoke in time past to the fathers by the prophets, has in these last days spoken to us by His Son." &mdash; Hebrews 1:1-2 (NKJV)</div>
+
+<h3>A Word Before We Begin</h3>
+<p>Islam and the Bahá'í Faith both claim to honor Jesus &mdash; and both are built on a claim the Bible flatly denies: that God kept sending prophets after Christ, so that Muhammad, and then Bahá'u'lláh, supersede Him. That single claim is the hinge of this unit, and it cannot bear the weight. Islam gives the world a Qur'an that overrides the Gospel, a Jesus who is only a prophet and did not die on the cross, and a salvation earned by submission and works. The Bahá'í Faith folds Jesus into a chain of "Manifestations" and then hands the present age to a newer one. Both honor Christ with the lips and then set Him aside for a later voice. We will state each faith fairly, in its own terms, and then test it by the Word of God &mdash; for the very fact that they revere Jesus is the door through which we walk to show them who He truly is.</p>
+
+<h3>The Claim They Share: A Newer Prophet</h3>
+<p>Islam and the Bahá'í Faith differ in many ways, but at the root they share one striking idea, and it is the idea we must test: that God keeps sending a newer messenger, and that the latest one supersedes those before him. For Islam, God sent a line of prophets &mdash; among them Abraham, Moses, and Jesus &mdash; and last of all Muhammad, the "Seal of the Prophets," whose revelation is final and corrects what came before. For the Bahá'í Faith, God has sent a succession of "Manifestations" &mdash; Abraham, Moses, Krishna, Buddha, Zoroaster, Jesus, Muhammad, and finally Bahá'u'lláh &mdash; each for his own age, each advancing religion, with Bahá'u'lláh the newest and the one for today. In both, Jesus is honored &mdash; and then left behind, surpassed by a later voice. Everything, then, turns on a single question: is Christ one prophet in a continuing series, or is He God's final and complete Word?</p>
+
+<h3>Islam: What Muslims Teach, in Their Own Terms</h3>
+<p>Muslims confess one God, Allah, and hold His oneness (tawhid) so strictly that to associate any partner with God is, for them, the gravest of sins. On this ground they reject the Trinity and the deity of Christ, and their scripture says of God that "He begets not, nor is He begotten." They honor Jesus &mdash; Isa &mdash; highly: born of the virgin Mary, a great prophet, the Messiah, a worker of miracles, a word from God. But He is, to them, only a created human prophet, not the Son of God and not to be worshiped. They believe the Qur'an is the final, perfect word of God, given to Muhammad through the angel Gabriel, and that it supersedes the earlier Scriptures &mdash; the Law and the Gospel &mdash; which they hold to have been corrupted over time. Strikingly, they deny that Jesus was crucified, teaching instead that it only appeared so and that God took Him up to Himself. Salvation is by submission to God and by the works of faith &mdash; the confession, prayer, almsgiving, fasting, and pilgrimage known as the Five Pillars &mdash; with one's deeds weighed at the Day of Judgment, and no certainty of the outcome.</p>
+
+<h3>Bahá'í: What Bahá'ís Teach, in Their Own Terms</h3>
+<p>The Bahá'í Faith arose in nineteenth-century Persia through Bahá'u'lláh, following his forerunner the Báb. It teaches three great unities: the oneness of God, the oneness of religion, and the oneness of humanity. Its central idea is "progressive revelation": God, unknowable in Himself, sends a line of Manifestations who each bring truth suited to their age, so that the world's religions are, at heart, one unfolding faith. Jesus, in this scheme, is one Manifestation among many &mdash; genuinely from God, but for His time &mdash; now fulfilled and superseded by Bahá'u'lláh, the Manifestation for the present age, whose writings stand as the newest scripture. Much in the Bahá'í message is winsome: world peace, the harmony of science and religion, the equality of men and women, and the end of prejudice. Salvation, for the Bahá'í, is to know and love God, to recognize His Manifestation for today, and to live by His teachings. Here again Jesus is honored &mdash; and then set aside for a newer voice.</p>
+
+<h3>Testing the Root (1): A Different Christ</h3>
+<p>We test both faiths at the point we have learned to test first: the person of Christ. Islam says plainly that Jesus is not the Son of God; the Bahá'í Faith says He is one Manifestation now surpassed by another. Both, in the end, deny that Jesus is the eternal God the Son &mdash; and Scripture will not allow that denial. "In the beginning was the Word... and the Word was God" (John 1:1); "in Him dwells all the fullness of the Godhead bodily" (Colossians 2:9); and Jesus Himself said, "I am the way, the truth, and the life. No one comes to the Father except through Me" (John 14:6) &mdash; not one way among many, but the only way. To the claim that God has no son, John answers, "Whoever denies the Son does not have the Father either" (1 John 2:23). And there is a second failure, sharpest in Islam: the denial of the cross. But the death of Christ is not an embarrassment to be explained away; it is the heart of the gospel. "Christ died for our sins according to the Scriptures, and... He rose again the third day" (1 Corinthians 15:3-4), and "without shedding of blood there is no remission" (Hebrews 9:22). A Christ who did not die for sinners is a Christ who cannot save them.</p>
+
+<h3>Testing the Root (2): The Finality of the Son</h3>
+<p>Now we come to the claim they share, and to the Scripture that answers it. Both faiths say that God kept sending prophets and that a later one &mdash; Muhammad, or Bahá'u'lláh &mdash; supersedes Jesus. But the letter to the Hebrews declares the very opposite: "God, who at various times and in various ways spoke in time past to the fathers by the prophets, has in these last days spoken to us by His Son... who being the brightness of His glory and the express image of His person" (Hebrews 1:1-3). The prophets came first and in many pieces; but the final word is not another prophet &mdash; it is the Son, who is God Himself. After God has spoken by His own Son, there is no greater messenger to come, for none is greater than God. This is why Jude commands us to "contend earnestly for the faith which was once for all delivered to the saints" (Jude 3): the gospel is given once for all, not revised by each new age. A later voice that changes it, even one claiming an angel's authority &mdash; and Muhammad claimed just that &mdash; falls under Paul's warning: "even if... an angel from heaven, preach any other gospel to you... let him be accursed" (Galatians 1:8). Christ is not a link in a chain of prophets. He is the last Word, because He is the eternal Son.</p>
+
+<h3>Why This Is "Another Gospel"</h3>
+<p>Put the pieces together and the verdict is the same for both. Each gives us another Jesus &mdash; a prophet or a manifestation rather than the incarnate Son. Each sets a later book above the Scriptures &mdash; the Qur'an, or the writings of Bahá'u'lláh. And each offers a salvation of submission and good works rather than the free grace of God in the crucified and risen Christ. The reverence of the one and the gentleness of the other are real, and we honor what is good in them; but neither reverence nor gentleness can change the root. A message that surpasses the Son, denies His cross, and adds a newer prophet is, in the words of Paul, "a different gospel, which is not another" (Galatians 1:6-7). We say this not with harshness, but with sorrow and with hope.</p>
+
+<h3>The Sword and the Cross</h3>
+<p>There is one contrast we dare not pass over, for it reaches to the character of the men at the head of these faiths. Muhammad was not only a preacher but a general and a statesman; he led armies, fought battles, and by the sword as well as by the word his religion was established and spread. Muslims regard this as just and can recount his acts of mercy, and we need not paint him a monster to make the point &mdash; for the point is simply the contrast. When men came to arrest Jesus and Peter drew a sword to defend Him, Jesus said, "Put your sword in its place, for all who take the sword will perish by the sword" (Matthew 26:52), and He healed the very ear His disciple had cut off. He told Pilate, "My kingdom is not of this world. If My kingdom were of this world, My servants would fight" (John 18:36). Christ conquered no city and struck down no enemy; He conquered by being struck down. He did not take life to spread His kingdom &mdash; He laid down His own. Many a movement has been advanced by the sword; only one Founder in all the earth defeated evil by dying for His enemies, and then rose from the dead.</p>
+
+<h3>A Man Who Made the Crossing</h3>
+<p>Such crossings really happen, and they cost dearly. Nabeel Qureshi was a devout Ahmadi Muslim who loved his faith and his family, until a friendship with a Christian named David Wood drew him into a long and painful examination of the evidence. He did not leave Islam in a rush of feeling; he spent years weighing the historical case for the resurrection of Jesus, and wrestling with the deepest difference between the two faiths &mdash; that Islam leaves the weight of a man's sin upon his own deeds and repentance, while the gospel declares that God did not lower the standard of His justice to excuse us, but satisfied it Himself in the death of His Son. When at last he was persuaded that the resurrection was a fact of history and the cross the only answer to his guilt, he followed the truth where it led, and it cost him the nearness of the family he loved. He often said that no one endures such a loss for a mere path or philosophy, but only for something as real and necessary as life itself. His life is a picture of what we are asking of others, and of the One who is worth the asking.</p>
+
+<h3>A Redemptive Aim</h3>
+<p>And here is our hope. Both the Muslim and the Bahá'í already hold Jesus in honor &mdash; and that is a beginning we can build upon. Our message to them is not that they must think less of Jesus, but far more: the One they revere as a prophet is greater than they have been told. He is not a voice awaiting a successor, but the eternal Son, God's final and complete Word; He did not merely appear to die, but truly gave His life for sinners and rose again; and He is not one way among many, but the only way to the Father. We do not come to win an argument, but to introduce a Person &mdash; the real Christ &mdash; to those who already admire His shadow. We treat each Muslim and each Bahá'í with the honor due a neighbor, with patience, with prayer, and with an open Bible, longing for them to meet the Lord who is Himself the last and greatest word from God.</p>
+<div class="scripture">"Jesus said to him, 'I am the way, the truth, and the life. No one comes to the Father except through Me.'" &mdash; John 14:6 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto base: Hebreos 1:1-3; Judas 3; Juan 14:6; Gálatas 1:8 (RVG)</strong></p>
+<div class="scripture">"Dios, habiendo hablado muchas veces y de muchas maneras en otro tiempo a los padres por los profetas, en estos postreros días nos ha hablado por su Hijo." &mdash; Hebreos 1:1-2 (RVG)</div>
+
+<h3>Una Palabra Antes de Comenzar</h3>
+<p>El islam y la fe bahá'í ambos dicen honrar a Jesús &mdash; y ambos están edificados sobre una afirmación que la Biblia niega rotundamente: que Dios siguió enviando profetas después de Cristo, de modo que Mahoma, y luego Bahá'u'lláh, lo superan. Esa sola afirmación es el eje de esta unidad, y no puede sostener el peso. El islam da al mundo un Corán que anula el Evangelio, un Jesús que es solo un profeta y no murió en la cruz, y una salvación ganada por sumisión y obras. La fe bahá'í pliega a Jesús en una cadena de "Manifestaciones" y luego entrega la edad presente a una más nueva. Ambos honran a Cristo con los labios y luego lo apartan por una voz posterior. Expondremos cada fe justamente, en sus propios términos, y luego la probaremos por la Palabra de Dios &mdash; pues el hecho mismo de que reverencian a Jesús es la puerta por la cual caminamos para mostrarles quién es Él en verdad.</p>
+
+<h3>La Afirmación Que Comparten: Un Profeta Más Nuevo</h3>
+<p>El islam y la fe bahá'í difieren de muchas maneras, pero en la raíz comparten una idea llamativa, y es la idea que debemos probar: que Dios sigue enviando un mensajero más nuevo, y que el más reciente supera a los que vinieron antes. Para el islam, Dios envió una línea de profetas &mdash; entre ellos Abraham, Moisés y Jesús &mdash; y por último a Mahoma, el "Sello de los Profetas", cuya revelación es final y corrige lo que vino antes. Para la fe bahá'í, Dios ha enviado una sucesión de "Manifestaciones" &mdash; Abraham, Moisés, Krishna, Buda, Zoroastro, Jesús, Mahoma, y finalmente Bahá'u'lláh &mdash; cada uno para su propia edad, cada uno haciendo avanzar la religión, siendo Bahá'u'lláh el más nuevo y el que es para hoy. En ambas, Jesús es honrado &mdash; y luego dejado atrás, superado por una voz posterior. Todo, entonces, gira en torno a una sola pregunta: ¿es Cristo un profeta en una serie continua, o es la Palabra final y completa de Dios?</p>
+
+<h3>El Islam: Lo Que Enseñan los Musulmanes, en Sus Propios Términos</h3>
+<p>Los musulmanes confiesan un solo Dios, Alá, y sostienen su unicidad (tawhid) tan estrictamente que asociar cualquier socio con Dios es, para ellos, el más grave de los pecados. Sobre esta base rechazan la Trinidad y la deidad de Cristo, y su escritura dice de Dios que "no engendra, ni es engendrado". Honran mucho a Jesús &mdash; Isa &mdash;: nacido de la virgen María, un gran profeta, el Mesías, un obrador de milagros, una palabra de Dios. Pero Él es, para ellos, solo un profeta humano creado, no el Hijo de Dios y no para ser adorado. Creen que el Corán es la palabra final y perfecta de Dios, dada a Mahoma por medio del ángel Gabriel, y que supera a las Escrituras anteriores &mdash; la Ley y el Evangelio &mdash; que sostienen haber sido corrompidas con el tiempo. Sorprendentemente, niegan que Jesús fuera crucificado, enseñando en cambio que solo lo pareció y que Dios lo tomó consigo. La salvación es por sumisión a Dios y por las obras de la fe &mdash; la confesión, la oración, la limosna, el ayuno, y la peregrinación conocidas como los Cinco Pilares &mdash; con las obras de cada uno pesadas en el Día del Juicio, y sin certeza del resultado.</p>
+
+<h3>La Fe Bahá'í: Lo Que Enseñan los Bahá'ís, en Sus Propios Términos</h3>
+<p>La fe bahá'í surgió en la Persia del siglo diecinueve por medio de Bahá'u'lláh, siguiendo a su precursor el Báb. Enseña tres grandes unidades: la unidad de Dios, la unidad de la religión, y la unidad de la humanidad. Su idea central es la "revelación progresiva": Dios, incognoscible en sí mismo, envía una línea de Manifestaciones que cada una trae verdad adecuada a su edad, de modo que las religiones del mundo son, en el fondo, una sola fe que se despliega. Jesús, en este esquema, es una Manifestación entre muchas &mdash; genuinamente de Dios, pero para su tiempo &mdash; ahora cumplida y superada por Bahá'u'lláh, la Manifestación para la edad presente, cuyos escritos son la escritura más nueva. Mucho en el mensaje bahá'í es atractivo: la paz mundial, la armonía de la ciencia y la religión, la igualdad de hombres y mujeres, y el fin del prejuicio. La salvación, para el bahá'í, es conocer y amar a Dios, reconocer a su Manifestación para hoy, y vivir según sus enseñanzas. Aquí de nuevo Jesús es honrado &mdash; y luego apartado por una voz más nueva.</p>
+
+<h3>Probando la Raíz (1): Un Cristo Diferente</h3>
+<p>Probamos ambas fes en el punto que hemos aprendido a probar primero: la persona de Cristo. El islam dice claramente que Jesús no es el Hijo de Dios; la fe bahá'í dice que es una Manifestación ahora superada por otra. Ambas, al final, niegan que Jesús sea el eterno Dios el Hijo &mdash; y la Escritura no permite esa negación. "En el principio era el Verbo... y el Verbo era Dios" (Juan 1:1); "en él habita corporalmente toda la plenitud de la Deidad" (Colosenses 2:9); y Jesús mismo dijo: "Yo soy el camino, la verdad, y la vida; nadie viene al Padre, sino por mí" (Juan 14:6) &mdash; no un camino entre muchos, sino el único camino. A la afirmación de que Dios no tiene hijo, Juan responde: "Cualquiera que niega al Hijo, tampoco tiene al Padre" (1 Juan 2:23). Y hay un segundo fallo, más agudo en el islam: la negación de la cruz. Pero la muerte de Cristo no es una vergüenza que explicar, sino el corazón del evangelio. "Cristo murió por nuestros pecados, conforme a las Escrituras; y... resucitó al tercer día" (1 Corintios 15:3-4), y "sin derramamiento de sangre no hay remisión" (Hebreos 9:22). Un Cristo que no murió por los pecadores es un Cristo que no puede salvarlos.</p>
+
+<h3>Probando la Raíz (2): La Finalidad del Hijo</h3>
+<p>Ahora llegamos a la afirmación que comparten, y a la Escritura que la responde. Ambas fes dicen que Dios siguió enviando profetas y que uno posterior &mdash; Mahoma, o Bahá'u'lláh &mdash; supera a Jesús. Pero la carta a los Hebreos declara justamente lo contrario: "Dios, habiendo hablado muchas veces y de muchas maneras en otro tiempo a los padres por los profetas, en estos postreros días nos ha hablado por su Hijo... el cual, siendo el resplandor de su gloria, y la imagen misma de su sustancia" (Hebreos 1:1-3). Los profetas vinieron primero y en muchas partes; pero la palabra final no es otro profeta &mdash; es el Hijo, que es Dios mismo. Después que Dios ha hablado por su propio Hijo, no hay mensajero mayor por venir, pues ninguno es mayor que Dios. Por eso Judas nos manda "contender ardientemente por la fe que ha sido una vez dada a los santos" (Judas 3): el evangelio se da una vez para siempre, no se revisa con cada nueva edad. Una voz posterior que lo cambia, aun una que reclama la autoridad de un ángel &mdash; y Mahoma reclamó justamente eso &mdash; cae bajo la advertencia de Pablo: "si... un ángel del cielo os predicare otro evangelio... sea anatema" (Gálatas 1:8). Cristo no es un eslabón en una cadena de profetas. Es la última Palabra, porque es el eterno Hijo.</p>
+
+<h3>Por Qué Esto Es "Otro Evangelio"</h3>
+<p>Juntemos las piezas y el veredicto es el mismo para ambas. Cada una nos da otro Jesús &mdash; un profeta o una manifestación en lugar del Hijo encarnado. Cada una coloca un libro posterior por encima de las Escrituras &mdash; el Corán, o los escritos de Bahá'u'lláh. Y cada una ofrece una salvación de sumisión y buenas obras en lugar de la gracia gratuita de Dios en el Cristo crucificado y resucitado. La reverencia de la una y la mansedumbre de la otra son reales, y honramos lo que es bueno en ellas; pero ni la reverencia ni la mansedumbre pueden cambiar la raíz. Un mensaje que supera al Hijo, niega su cruz, y añade un profeta más nuevo es, en palabras de Pablo, "otro evangelio; no que haya otro" (Gálatas 1:6-7). Decimos esto no con dureza, sino con tristeza y con esperanza.</p>
+
+<h3>La Espada y la Cruz</h3>
+<p>Hay un contraste que no nos atrevemos a pasar por alto, pues alcanza el carácter de los hombres a la cabeza de estas fes. Mahoma no fue solo un predicador sino un general y un estadista; dirigió ejércitos, peleó batallas, y por la espada tanto como por la palabra su religión fue establecida y difundida. Los musulmanes consideran esto justo y pueden relatar sus actos de misericordia, y no necesitamos pintarlo como un monstruo para hacer el punto &mdash; pues el punto es simplemente el contraste. Cuando vinieron hombres a arrestar a Jesús y Pedro sacó una espada para defenderlo, Jesús dijo: "Vuelve tu espada a su lugar; porque todos los que tomaren espada, a espada perecerán" (Mateo 26:52), y sanó la oreja misma que su discípulo había cortado. Dijo a Pilato: "Mi reino no es de este mundo; si mi reino fuera de este mundo, mis servidores pelearían" (Juan 18:36). Cristo no conquistó ninguna ciudad ni derribó a ningún enemigo; conquistó siendo derribado. No quitó la vida para difundir su reino &mdash; entregó la suya. Muchos movimientos han sido avanzados por la espada; solo un Fundador en toda la tierra venció el mal muriendo por sus enemigos, y luego resucitó de los muertos.</p>
+
+<h3>Un Hombre Que Hizo el Cruce</h3>
+<p>Tales cruces de veras suceden, y cuestan caro. Nabeel Qureshi era un musulmán ahmadí devoto que amaba su fe y su familia, hasta que una amistad con un cristiano llamado David Wood lo llevó a un largo y doloroso examen de la evidencia. No dejó el islam en un arrebato de emoción; pasó años sopesando el caso histórico de la resurrección de Jesús, y luchando con la diferencia más profunda entre las dos fes &mdash; que el islam deja el peso del pecado de un hombre sobre sus propias obras y arrepentimiento, mientras que el evangelio declara que Dios no bajó el estándar de su justicia para excusarnos, sino que la satisfizo Él mismo en la muerte de su Hijo. Cuando al fin quedó persuadido de que la resurrección era un hecho de la historia y la cruz la única respuesta a su culpa, siguió la verdad adonde lo llevó, y le costó la cercanía de la familia que amaba. A menudo decía que nadie soporta tal pérdida por un mero camino o filosofía, sino solo por algo tan real y necesario como la vida misma. Su vida es un cuadro de lo que pedimos a otros, y de Aquel que vale la pena pedirlo.</p>
+
+<h3>Un Fin Redentor</h3>
+<p>Y aquí está nuestra esperanza. Tanto el musulmán como el bahá'í ya tienen a Jesús en honor &mdash; y ese es un comienzo sobre el cual podemos edificar. Nuestro mensaje para ellos no es que deban pensar menos de Jesús, sino mucho más: Aquel a quien reverencian como profeta es mayor de lo que se les ha dicho. No es una voz que espera un sucesor, sino el eterno Hijo, la Palabra final y completa de Dios; no solo pareció morir, sino que verdaderamente dio su vida por los pecadores y resucitó; y no es un camino entre muchos, sino el único camino al Padre. No venimos a ganar una discusión, sino a presentar a una Persona &mdash; el Cristo real &mdash; a quienes ya admiran su sombra. Tratamos a cada musulmán y a cada bahá'í con el honor debido a un prójimo, con paciencia, con oración, y con la Biblia abierta, anhelando que conozcan al Señor que es Él mismo la última y más grande palabra de Dios.</p>
+<div class="scripture">"Jesús le dijo: Yo soy el camino, la verdad, y la vida; nadie viene al Padre, sino por mí." &mdash; Juan 14:6 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 6 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Cults & World Religions — Unit 6 (Progressive Revelation: Islam and Baha'i)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 6;
+const COURSE = 'cults';
+const NEXT_UNIT_URL = 'CTSCultsUnit7.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - What Is a Cult? The Biblical Test", "Unit 2 - The Trinity and the Deity of Christ", "Unit 3 - Jehovah's Witnesses", "Unit 4 - The Latter-day Saints", "Unit 5 - The Prosperity Gospel", "Unit 6 - Progressive Revelation: Islam and Baha'i", "Unit 7 - Eastern Religions: Hinduism and Buddhism", "Unit 8 - Roman Catholicism", "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism", "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCultsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. The single claim Islam and the Bahá'í Faith share, which this unit tests, is that:", "textEs": "1. La única afirmación que el islam y la fe bahá'í comparten, y que esta unidad prueba, es que:", "optionsEn": ["There is no God at all", "Jesus never lived", "All religions are simply false", "God keeps sending a newer messenger who supersedes those before him"], "optionsEs": ["No hay Dios en absoluto", "Jesús nunca vivió", "Todas las religiones son simplemente falsas", "Dios sigue enviando un mensajero más nuevo que supera a los anteriores"], "explanationEn": "Both hold that God keeps sending a newer messenger who surpasses the ones before — the claim this unit tests.", "explanationEs": "Ambas sostienen que Dios sigue enviando un mensajero más nuevo que supera a los anteriores — la afirmación que esta unidad prueba.", "correct": 3}, {"textEn": "2. In Islam, the last and greatest prophet, the 'Seal of the Prophets,' is:", "textEs": "2. En el islam, el último y más grande profeta, el 'Sello de los Profetas', es:", "optionsEn": ["Muhammad", "Abraham", "Moses", "Jesus"], "optionsEs": ["Mahoma", "Abraham", "Moisés", "Jesús"], "explanationEn": "Islam names Muhammad the Seal of the Prophets, whose revelation is final.", "explanationEs": "El islam nombra a Mahoma el Sello de los Profetas, cuya revelación es final.", "correct": 0}, {"textEn": "3. Muslims hold the oneness of God (tawhid) so strictly that they regard as the gravest sin:", "textEs": "3. Los musulmanes sostienen la unicidad de Dios (tawhid) tan estrictamente que consideran como el pecado más grave:", "optionsEn": ["Fasting", "Praying five times a day", "Giving to the poor", "Associating any partner with God"], "optionsEs": ["El ayuno", "Orar cinco veces al día", "Dar a los pobres", "Asociar cualquier socio con Dios"], "explanationEn": "To associate a partner with God is, in Islam, the gravest sin — which is why they reject the deity of Christ.", "explanationEs": "Asociar un socio con Dios es, en el islam, el pecado más grave — por eso rechazan la deidad de Cristo.", "correct": 3}, {"textEn": "4. Concerning Jesus, Islam teaches that He is:", "textEs": "4. Acerca de Jesús, el islam enseña que Él es:", "optionsEn": ["A revered but created human prophet, not divine", "The eternal Son of God", "God come in the flesh", "One of three gods"], "optionsEs": ["Un profeta humano creado y reverenciado, pero no divino", "El eterno Hijo de Dios", "Dios venido en carne", "Uno de tres dioses"], "explanationEn": "Islam honors Jesus as a prophet and Messiah, but denies that He is the Son of God or divine.", "explanationEs": "El islam honra a Jesús como profeta y Mesías, pero niega que sea el Hijo de Dios o divino.", "correct": 0}, {"textEn": "5. Concerning the crucifixion, the Qur'an (as commonly understood) teaches that Jesus:", "textEs": "5. Acerca de la crucifixión, el Corán (según se entiende comúnmente) enseña que Jesús:", "optionsEn": ["Died and rose again", "Was never in Jerusalem", "Died of old age", "Was not truly crucified; it only appeared so"], "optionsEs": ["Murió y resucitó", "Nunca estuvo en Jerusalén", "Murió de vejez", "No fue verdaderamente crucificado; solo lo pareció"], "explanationEn": "Islam commonly denies the crucifixion, teaching it only appeared so and that God took Jesus up.", "explanationEs": "El islam comúnmente niega la crucifixión, enseñando que solo lo pareció y que Dios tomó a Jesús consigo.", "correct": 3}, {"textEn": "6. Muslims believe the Qur'an:", "textEs": "6. Los musulmanes creen que el Corán:", "optionsEn": ["Is the final word of God that supersedes the earlier (corrupted) Scriptures", "Agrees fully with the Bible as it stands", "Is one holy book among equals", "Was written by Jesus"], "optionsEs": ["Es la palabra final de Dios que supera a las Escrituras anteriores (corrompidas)", "Concuerda plenamente con la Biblia tal como está", "Es un libro santo entre iguales", "Fue escrito por Jesús"], "explanationEn": "Islam holds the Qur'an to be God's final word, superseding the Law and Gospel it regards as corrupted.", "explanationEs": "El islam sostiene que el Corán es la palabra final de Dios, superando la Ley y el Evangelio que considera corrompidos.", "correct": 0}, {"textEn": "7. The Bahá'í Faith arose in the nineteenth century in Persia through:", "textEs": "7. La fe bahá'í surgió en el siglo diecinueve en Persia por medio de:", "optionsEn": ["Muhammad", "Joseph Smith", "Krishna", "The Báb and then Bahá'u'lláh"], "optionsEs": ["Mahoma", "José Smith", "Krishna", "El Báb y luego Bahá'u'lláh"], "explanationEn": "Bahá'u'lláh, following his forerunner the Báb, founded the Bahá'í Faith in nineteenth-century Persia.", "explanationEs": "Bahá'u'lláh, siguiendo a su precursor el Báb, fundó la fe bahá'í en la Persia del siglo diecinueve.", "correct": 3}, {"textEn": "8. The central Bahá'í idea of 'progressive revelation' teaches that:", "textEs": "8. La idea central bahá'í de la 'revelación progresiva' enseña que:", "optionsEn": ["The Bible is God's final word", "There is no God", "Only Jesus reveals God", "God sends a succession of 'Manifestations,' each for his own age"], "optionsEs": ["La Biblia es la palabra final de Dios", "No hay Dios", "Solo Jesús revela a Dios", "Dios envía una sucesión de 'Manifestaciones', cada una para su propia edad"], "explanationEn": "Progressive revelation holds that God sends a line of Manifestations, each suited to a particular age.", "explanationEs": "La revelación progresiva sostiene que Dios envía una línea de Manifestaciones, cada una adecuada a una edad particular.", "correct": 3}, {"textEn": "9. In the Bahá'í scheme, Jesus is:", "textEs": "9. En el esquema bahá'í, Jesús es:", "optionsEn": ["One Manifestation now superseded by Bahá'u'lláh", "The only Savior", "Never mentioned", "A merely legendary figure"], "optionsEs": ["Una Manifestación ahora superada por Bahá'u'lláh", "El único Salvador", "Nunca mencionado", "Una figura meramente legendaria"], "explanationEn": "Bahá'í honors Jesus as one Manifestation, now fulfilled and surpassed by Bahá'u'lláh.", "explanationEs": "El bahaísmo honra a Jesús como una Manifestación, ahora cumplida y superada por Bahá'u'lláh.", "correct": 0}, {"textEn": "10. Both faiths honor Jesus, yet both ultimately:", "textEs": "10. Ambas fes honran a Jesús, pero ambas al final:", "optionsEn": ["Worship Him as God", "Leave Him behind, surpassed by a later voice", "Reject Him entirely", "Call Him the final prophet"], "optionsEs": ["Lo adoran como Dios", "Lo dejan atrás, superado por una voz posterior", "Lo rechazan por completo", "Lo llaman el profeta final"], "explanationEn": "In both, Jesus is honored and then surpassed by a later messenger — the shared move this unit tests.", "explanationEs": "En ambas, Jesús es honrado y luego superado por un mensajero posterior — el movimiento compartido que esta unidad prueba.", "correct": 1}, {"textEn": "11. The first root-test asks about the person of Christ; on this both Islam and Bahá'í:", "textEs": "11. La primera prueba de la raíz pregunta acerca de la persona de Cristo; en esto tanto el islam como el bahaísmo:", "optionsEn": ["Confess His full deity", "Deny that He is the eternal God the Son", "Agree with the Trinity", "Say He never existed"], "optionsEs": ["Confiesan su plena deidad", "Niegan que Él sea el eterno Dios el Hijo", "Concuerdan con la Trinidad", "Dicen que nunca existió"], "explanationEn": "Both deny the deity of Christ — Islam outright, Bahá'í by making Him one Manifestation among many.", "explanationEs": "Ambas niegan la deidad de Cristo — el islam abiertamente, el bahaísmo al hacerlo una Manifestación entre muchas.", "correct": 1}, {"textEn": "12. Jesus said in John 14:6, 'I am the way, the truth, and the life. No one comes to the Father':", "textEs": "12. Jesús dijo en Juan 14:6: 'Yo soy el camino, la verdad, y la vida; nadie viene al Padre':", "optionsEn": ["through many prophets", "by good works", "except through Me", "after Muhammad"], "optionsEs": ["por medio de muchos profetas", "por buenas obras", "sino por mí", "después de Mahoma"], "explanationEn": "Christ is the only way to the Father — not one path among many.", "explanationEs": "Cristo es el único camino al Padre — no un sendero entre muchos.", "correct": 2}, {"textEn": "13. To the claim that 'God has no son,' 1 John 2:23 answers:", "textEs": "13. A la afirmación de que 'Dios no tiene hijo', 1 Juan 2:23 responde:", "optionsEn": ["That claim is correct", "'Whoever denies the Son does not have the Father either'", "The Son is an angel", "Sons are unimportant"], "optionsEs": ["Esa afirmación es correcta", "'Cualquiera que niega al Hijo, tampoco tiene al Padre'", "El Hijo es un ángel", "Los hijos no importan"], "explanationEn": "To deny the Son is to lose the Father also — the two cannot be separated.", "explanationEs": "Negar al Hijo es perder también al Padre — los dos no pueden separarse.", "correct": 1}, {"textEn": "14. The denial of the cross strikes at the gospel because, per 1 Corinthians 15:3-4 and Hebrews 9:22:", "textEs": "14. La negación de la cruz hiere el evangelio porque, según 1 Corintios 15:3-4 y Hebreos 9:22:", "optionsEn": ["The cross was only symbolic", "Christ's death and shed blood are essential — without them there is no remission", "Jesus only fainted on the cross", "The resurrection did not happen"], "optionsEs": ["La cruz fue solo simbólica", "La muerte y la sangre derramada de Cristo son esenciales — sin ellas no hay remisión", "Jesús solo se desmayó en la cruz", "La resurrección no ocurrió"], "explanationEn": "Without Christ's death and shed blood there is no remission of sins; the cross is the heart of the gospel.", "explanationEs": "Sin la muerte y la sangre derramada de Cristo no hay remisión de pecados; la cruz es el corazón del evangelio.", "correct": 1}, {"textEn": "15. Hebrews 1:1-3 teaches that, whereas God once spoke by the prophets, in these last days He has spoken to us by:", "textEs": "15. Hebreos 1:1-3 enseña que, mientras que Dios habló antes por los profetas, en estos postreros días nos ha hablado por:", "optionsEn": ["another, greater prophet", "an angel from heaven", "His Son, who is the express image of His person", "a newly given book"], "optionsEs": ["otro profeta mayor", "un ángel del cielo", "su Hijo, que es la imagen misma de su sustancia", "un libro recién dado"], "explanationEn": "God's final speech is not another prophet but His Son, the express image of His person.", "explanationEs": "El habla final de Dios no es otro profeta sino su Hijo, la imagen misma de su sustancia.", "correct": 2}, {"textEn": "16. The point of Hebrews 1 against the shared claim is that:", "textEs": "16. El punto de Hebreos 1 contra la afirmación compartida es que:", "optionsEn": ["more prophets are always coming", "the Son is God's final word, for none is greater than God Himself", "Jesus was only the first prophet", "revelation never ends"], "optionsEs": ["siempre vienen más profetas", "el Hijo es la palabra final de Dios, pues ninguno es mayor que Dios mismo", "Jesús fue solo el primer profeta", "la revelación nunca termina"], "explanationEn": "Because the Son is God Himself, no greater messenger can follow — He is the final word.", "explanationEs": "Porque el Hijo es Dios mismo, ningún mensajero mayor puede seguir — Él es la palabra final.", "correct": 1}, {"textEn": "17. Jude 3 calls us to contend for 'the faith which was once for all delivered,' meaning the gospel:", "textEs": "17. Judas 3 nos llama a contender por 'la fe que ha sido una vez dada', lo que significa que el evangelio:", "optionsEn": ["changes with each age", "is revised by new prophets", "is fixed, not superseded by later voices", "was lost long ago"], "optionsEs": ["cambia con cada edad", "es revisado por nuevos profetas", "es fijo, no superado por voces posteriores", "se perdió hace mucho"], "explanationEn": "The faith was delivered once for all; later voices do not revise or supersede it.", "explanationEs": "La fe fue dada una vez para siempre; las voces posteriores no la revisan ni la superan.", "correct": 2}, {"textEn": "18. That Muhammad claimed to receive the Qur'an from an angel gives special force to which warning?", "textEs": "18. Que Mahoma afirmara recibir el Corán de un ángel da fuerza especial a ¿cuál advertencia?", "optionsEn": ["Galatians 1:8 — even an angel preaching another gospel is accursed", "A blessing pronounced on angels", "A command to fast in Ramadan", "None at all"], "optionsEs": ["Gálatas 1:8 — aun un ángel que predique otro evangelio sea anatema", "Una bendición pronunciada sobre los ángeles", "Un mandato de ayunar en Ramadán", "Ninguna"], "explanationEn": "Galatians 1:8 warns that even an angel preaching another gospel is accursed — pointed here.", "explanationEs": "Gálatas 1:8 advierte que aun un ángel que predique otro evangelio sea anatema — muy al caso aquí.", "correct": 0}, {"textEn": "19. Both faiths are 'another gospel' because each gives another Jesus, sets a later book above Scripture, and offers salvation by:", "textEs": "19. Ambas fes son 'otro evangelio' porque cada una da otro Jesús, coloca un libro posterior por encima de la Escritura, y ofrece salvación por:", "optionsEn": ["grace alone", "faith alone in Christ", "submission and works rather than free grace in the crucified and risen Christ", "nothing at all"], "optionsEs": ["gracia sola", "la fe sola en Cristo", "sumisión y obras en lugar de la gracia gratuita en el Cristo crucificado y resucitado", "nada en absoluto"], "explanationEn": "Another Jesus, an added authority, and salvation by works instead of grace — a different gospel.", "explanationEs": "Otro Jesús, una autoridad añadida, y salvación por obras en lugar de gracia — otro evangelio.", "correct": 2}, {"textEn": "20. Our redemptive aim toward Muslims and Bahá'ís is to show them that the Jesus they revere is:", "textEs": "20. Nuestro fin redentor hacia los musulmanes y los bahá'ís es mostrarles que el Jesús que reverencian es:", "optionsEn": ["less than they had thought", "merely a prophet after all", "the eternal Son, God's final and complete Word, the only way to the Father", "unimportant"], "optionsEs": ["menos de lo que habían pensado", "meramente un profeta después de todo", "el eterno Hijo, la Palabra final y completa de Dios, el único camino al Padre", "sin importancia"], "explanationEn": "We show them the One they revere is far greater — the eternal Son and only way to the Father.", "explanationEs": "Les mostramos que Aquel a quien reverencian es mucho mayor — el eterno Hijo y único camino al Padre.", "correct": 2}];
+
+const kwQuestions = [{"textEn": "21. State the single claim that Islam and the Bahá'í Faith share, and explain why this unit tests it.", "textEs": "21. Exponga la única afirmación que el islam y la fe bahá'í comparten, y explique por qué esta unidad la prueba.", "kw_en": ["newer", "prophet", "supersede", "muhammad", "manifestation", "christ", "final", "claim"], "kw_es": ["nuevo", "profeta", "supera", "mahoma", "manifestaci", "cristo", "postrer", "afirma"], "modelEn": "Islam and the Bahá'í Faith share the claim that God keeps sending a newer messenger who supersedes those before him. In Islam, Muhammad is the last and greatest prophet, the Seal of the Prophets, whose revelation is final. In the Bahá'í Faith, a succession of Manifestations culminates for now in Bahá'u'lláh, the newest. In both, Jesus is honored and then surpassed by a later voice. This unit tests that claim because everything turns on one question: is Christ one prophet in a continuing series, or is He God's final and complete Word? If the Son is God's last word, then no newer prophet or manifestation can supersede Him.", "modelEs": "El islam y la fe bahá'í comparten la afirmación de que Dios sigue enviando un mensajero más nuevo que supera a los anteriores. En el islam, Mahoma es el último y más grande profeta, el Sello de los Profetas, cuya revelación es final. En la fe bahá'í, una sucesión de Manifestaciones culmina por ahora en Bahá'u'lláh, el más nuevo. En ambas, Jesús es honrado y luego superado por una voz posterior. Esta unidad prueba esa afirmación porque todo gira en torno a una pregunta: ¿es Cristo un profeta en una serie continua, o es la Palabra final y completa de Dios? Si el Hijo es la palabra postrera de Dios, entonces ningún profeta o manifestación más nuevo puede superarlo."}, {"textEn": "22. Fairly summarize what Muslims teach about Jesus, the Qur'an, and how a person is saved.", "textEs": "22. Resuma justamente lo que los musulmanes enseñan acerca de Jesús, el Corán, y cómo es salva una persona.", "kw_en": ["jesus", "prophet", "son", "crucified", "quran", "supersede", "submission", "works"], "kw_es": ["profeta", "hijo", "cristo", "pilares", "supera", "sumisi", "obras", "cruz"], "modelEn": "Muslims honor Jesus as a great prophet, the Messiah, born of a virgin and a worker of miracles, but they deny that He is the Son of God or divine, and they deny that He was truly crucified, teaching that it only appeared so. They believe the Qur'an is the final, perfect word of God, given to Muhammad, which supersedes the earlier Scriptures they regard as corrupted. Salvation is by submission to God and by the works of faith, especially the Five Pillars, with a person's deeds weighed at the Day of Judgment and no certainty of the outcome. In short, they revere Jesus as a prophet while denying His deity, His cross, and salvation by grace.", "modelEs": "Los musulmanes honran a Jesús como un gran profeta, el Mesías, nacido de una virgen y obrador de milagros, pero niegan que sea el Hijo de Dios o divino, y niegan que fuera verdaderamente crucificado, enseñando que solo lo pareció. Creen que el Corán es la palabra final y perfecta de Dios, dada a Mahoma, que supera a las Escrituras anteriores que consideran corrompidas. La salvación es por sumisión a Dios y por las obras de la fe, especialmente los Cinco Pilares, con las obras de una persona pesadas en el Día del Juicio y sin certeza del resultado. En resumen, reverencian a Jesús como profeta mientras niegan su deidad, su cruz, y la salvación por gracia."}, {"textEn": "23. Fairly summarize what Bahá'ís teach about progressive revelation, the Manifestations, and Jesus.", "textEs": "23. Resuma justamente lo que los bahá'ís enseñan acerca de la revelación progresiva, las Manifestaciones, y Jesús.", "kw_en": ["progressive", "revelation", "manifestation", "christ", "bahaullah", "supersede", "age", "unity"], "kw_es": ["progresiva", "revelaci", "manifestaci", "cristo", "supera", "edad", "unidad", "religiones"], "modelEn": "Bahá'ís teach progressive revelation: that God, unknowable in Himself, sends a succession of Manifestations, each bringing truth suited to his own age, so that the world's religions are at heart one unfolding faith. These Manifestations include Abraham, Moses, Krishna, Buddha, Zoroaster, Jesus, Muhammad, and finally Bahá'u'lláh, the one for today. Jesus, in this scheme, is one Manifestation among many, genuinely from God but for His time, now fulfilled and superseded by Bahá'u'lláh, whose writings are the newest scripture. They emphasize the unity of God, of religion, and of humanity, along with world peace and the harmony of science and religion. Here again Jesus is honored, and then set aside for a newer voice.", "modelEs": "Los bahá'ís enseñan la revelación progresiva: que Dios, incognoscible en sí mismo, envía una sucesión de Manifestaciones, cada una trayendo verdad adecuada a su propia edad, de modo que las religiones del mundo son en el fondo una sola fe que se despliega. Estas Manifestaciones incluyen a Abraham, Moisés, Krishna, Buda, Zoroastro, Jesús, Mahoma, y finalmente Bahá'u'lláh, el que es para hoy. Jesús, en este esquema, es una Manifestación entre muchas, genuinamente de Dios pero para su tiempo, ahora cumplida y superada por Bahá'u'lláh, cuyos escritos son la escritura más nueva. Enfatizan la unidad de Dios, de la religión, y de la humanidad, junto con la paz mundial y la armonía de la ciencia y la religión. Aquí de nuevo Jesús es honrado, y luego apartado por una voz más nueva."}, {"textEn": "24. From Scripture, show that Jesus is the eternal God the Son, not merely a prophet or one manifestation among many.", "textEs": "24. Desde la Escritura, muestre que Jesús es el eterno Dios el Hijo, no meramente un profeta ni una manifestación entre muchas.", "kw_en": ["god", "son", "word", "deity", "fullness", "way", "eternal", "christ"], "kw_es": ["dios", "hijo", "verbo", "deidad", "plenitud", "camino", "eterno", "cristo"], "modelEn": "Scripture teaches that Jesus is the eternal God the Son, not merely a prophet. John says the Word was God, and that in Christ dwells all the fullness of the Godhead bodily, so He is not one manifestation among many but God Himself. He is eternal, for before Abraham was, He said, I AM. And He is not one way among many: He said, I am the way, the truth, and the life; no one comes to the Father except through Me. To make Jesus a mere prophet, or one Manifestation now superseded, is to deny what Scripture plainly says about His deity. The Son shares the very being of God, and therefore cannot be surpassed by any later messenger.", "modelEs": "La Escritura enseña que Jesús es el eterno Dios el Hijo, no meramente un profeta. Juan dice que el Verbo era Dios, y que en Cristo habita corporalmente toda la plenitud de la Deidad, así que no es una manifestación entre muchas sino Dios mismo. Es eterno, pues antes que Abraham fuese, Él dijo: yo soy. Y no es un camino entre muchos: dijo, yo soy el camino, la verdad, y la vida; nadie viene al Padre, sino por mí. Hacer a Jesús un mero profeta, o una Manifestación ahora superada, es negar lo que la Escritura dice claramente acerca de su deidad. El Hijo comparte el ser mismo de Dios, y por tanto no puede ser superado por ningún mensajero posterior."}, {"textEn": "25. Explain why the denial of the cross (in Islam) strikes at the very heart of the gospel.", "textEs": "25. Explique por qué la negación de la cruz (en el islam) hiere el corazón mismo del evangelio.", "kw_en": ["cross", "death", "crucified", "blood", "remission", "gospel", "sin", "risen"], "kw_es": ["cruz", "muerte", "sangre", "remisi", "evangelio", "pecado", "resucit", "salva"], "modelEn": "The denial of the cross strikes at the very heart of the gospel because the death of Christ is not an accident to be explained away but the ground of our salvation. Paul says that Christ died for our sins according to the Scriptures and rose again the third day, and this is the gospel itself. Hebrews says that without the shedding of blood there is no remission of sin, so if Jesus did not die, there is no sacrifice and no forgiveness. Islam teaches that Jesus was not truly crucified but only appeared to be, and God took Him up. But a Christ who did not die for sinners is a Christ who cannot save them. Take away the cross and the risen Christ, and nothing remains by which sin can be remitted.", "modelEs": "La negación de la cruz hiere el corazón mismo del evangelio porque la muerte de Cristo no es un accidente que explicar sino el fundamento de nuestra salvación. Pablo dice que Cristo murió por nuestros pecados conforme a las Escrituras y resucitó al tercer día, y esto es el evangelio mismo. Hebreos dice que sin derramamiento de sangre no hay remisión del pecado, así que si Jesús no murió, no hay sacrificio ni perdón. El islam enseña que Jesús no fue verdaderamente crucificado sino que solo lo pareció, y Dios lo tomó consigo. Pero un Cristo que no murió por los pecadores es un Cristo que no puede salvarlos. Quite la cruz y el Cristo resucitado, y no queda nada por lo cual el pecado pueda ser remitido."}, {"textEn": "26. Using Hebrews 1:1-3, explain why Christ is God's final word and not one prophet in a continuing series.", "textEs": "26. Usando Hebreos 1:1-3, explique por qué Cristo es la palabra final de Dios y no un profeta en una serie continua.", "kw_en": ["hebrews", "prophet", "son", "final", "god", "image", "last", "spoken"], "kw_es": ["hebreos", "profeta", "hijo", "final", "dios", "imagen", "postrer", "hablado"], "modelEn": "Hebrews teaches that in time past God spoke to the fathers by the prophets in many pieces and in various ways, but in these last days He has spoken to us by His Son, who is the brightness of His glory and the express image of His person. The prophets came first and partially; but the final word is not another prophet, it is the Son, who is God Himself. This is why Christ cannot be one messenger in a continuing series: after God has spoken by His own Son, there is no greater messenger to come, for none is greater than God. So the claim that a later prophet supersedes Jesus fails, because the Son is the last and highest word, being the very image of God.", "modelEs": "Hebreos enseña que en otro tiempo Dios habló a los padres por los profetas en muchas partes y de muchas maneras, pero en estos postreros días nos ha hablado por su Hijo, que es el resplandor de su gloria y la imagen misma de su sustancia. Los profetas vinieron primero y en parte; pero la palabra final no es otro profeta, es el Hijo, que es Dios mismo. Por eso Cristo no puede ser un mensajero en una serie continua: después que Dios ha hablado por su propio Hijo, no hay mensajero mayor por venir, pues ninguno es mayor que Dios. Así que la afirmación de que un profeta posterior supera a Jesús falla, porque el Hijo es la palabra postrera y más alta, siendo la imagen misma de Dios."}, {"textEn": "27. Using Jude 3 and Galatians 1:8, explain why a later prophet who changes the gospel is under God's warning, and note the force of 'even an angel.'", "textEs": "27. Usando Judas 3 y Gálatas 1:8, explique por qué un profeta posterior que cambia el evangelio está bajo la advertencia de Dios, y note la fuerza de 'aun un ángel'.", "kw_en": ["jude", "faith", "delivered", "gospel", "angel", "accursed", "another", "change"], "kw_es": ["fe", "dada", "evangelio", "anatema", "otro", "cambia", "profeta", "santos"], "modelEn": "Jude commands us to contend earnestly for the faith which was once for all delivered to the saints. The word once for all means the gospel is fixed and complete, not revised by each new age or superseded by a later prophet. So when Islam or the Bahá'í Faith brings a newer messenger who changes the gospel of Christ, it falls under Paul's warning in Galatians: even if an angel from heaven preaches another gospel, let him be accursed. The force of even an angel is sharp here, because Muhammad claimed to receive the Qur'an from the angel Gabriel. Yet no angel, and no later prophet, however sincere, may set aside the once-delivered gospel. To change it is to fall under this solemn warning.", "modelEs": "Judas nos manda contender ardientemente por la fe que ha sido una vez dada a los santos. La palabra una vez significa que el evangelio es fijo y completo, no revisado con cada nueva edad ni superado por un profeta posterior. Así que cuando el islam o la fe bahá'í trae un mensajero más nuevo que cambia el evangelio de Cristo, cae bajo la advertencia de Pablo en Gálatas: si un ángel del cielo predica otro evangelio, sea anatema. La fuerza de aun un ángel es aguda aquí, porque Mahoma afirmó recibir el Corán del ángel Gabriel. Sin embargo, ningún ángel, y ningún profeta posterior, por sincero que sea, puede desechar el evangelio una vez dado. Cambiarlo es caer bajo esta advertencia solemne."}, {"textEn": "28. Explain why, despite honoring Jesus, both Islam and the Bahá'í Faith teach 'another gospel.'", "textEs": "28. Explique por qué, a pesar de honrar a Jesús, tanto el islam como la fe bahá'í enseñan 'otro evangelio'.", "kw_en": ["another", "gospel", "christ", "authority", "scripture", "works", "grace", "root"], "kw_es": ["otro", "evangelio", "cristo", "autoridad", "escritura", "obras", "gracia", "fundamento"], "modelEn": "Despite honoring Jesus, both faiths teach another gospel because each changes the root at the points that matter most. Each gives us another Christ: a prophet or a manifestation rather than the eternal incarnate Son. Each sets a later authority above the Scriptures: the Qur'an, or the writings of Bahá'u'lláh. And each offers salvation by submission and works rather than the free grace of God in the crucified and risen Christ. The reverence of the Muslim and the gentleness of the Bahá'í are real, but neither can change the root. A message that surpasses the Son, denies or ignores His cross, and adds a newer prophet is, in Paul's words, a different gospel, which is not really another but a departure from the true one.", "modelEs": "A pesar de honrar a Jesús, ambas fes enseñan otro evangelio porque cada una cambia el fundamento en los puntos que más importan. Cada una nos da otro Cristo: un profeta o una manifestación en lugar del eterno Hijo encarnado. Cada una coloca una autoridad posterior por encima de las Escrituras: el Corán, o los escritos de Bahá'u'lláh. Y cada una ofrece salvación por sumisión y obras en lugar de la gracia gratuita de Dios en el Cristo crucificado y resucitado. La reverencia del musulmán y la mansedumbre del bahá'í son reales, pero ninguna puede cambiar el fundamento. Un mensaje que supera al Hijo, niega o ignora su cruz, y añade un profeta más nuevo es, en palabras de Pablo, otro evangelio, que no es realmente otro sino una desviación del verdadero."}, {"textEn": "29. Describe the redemptive aim toward a Muslim or a Bahá'í, and how their existing honor for Jesus becomes a door.", "textEs": "29. Describa el fin redentor hacia un musulmán o un bahá'í, y cómo su honor existente por Jesús se vuelve una puerta.", "kw_en": ["honor", "jesus", "door", "son", "greater", "love", "christ", "truth"], "kw_es": ["honra", "cristo", "puerta", "hijo", "mayor", "amor", "verdad", "respeto"], "modelEn": "The redemptive aim is not to make a Muslim or a Bahá'í think less of Jesus, but far more. Because they already honor Jesus, that honor becomes a door: we can start where they already stand and lead them further. Our message is that the One they revere as a prophet is greater than they have been told. He is not a voice awaiting a successor but the eternal Son, God's final word; He did not merely appear to die but truly gave His life and rose again; and He is not one way among many but the only way to the Father. We come not to win an argument but to introduce a Person, the real Christ, in love and with respect. We treat each one as a neighbor, with patience, prayer, and an open Bible, longing for them to see the truth about the Lord they already admire.", "modelEs": "El fin redentor no es hacer que un musulmán o un bahá'í piense menos de Jesús, sino mucho más. Porque ya honran a Jesús, ese honor se vuelve una puerta: podemos comenzar donde ya están y llevarlos más allá. Nuestro mensaje es que Aquel a quien reverencian como profeta es mayor de lo que se les ha dicho. No es una voz que espera un sucesor sino el eterno Hijo, la palabra final de Dios; no solo pareció morir sino que verdaderamente dio su vida y resucitó; y no es un camino entre muchos sino el único camino al Padre. Venimos no a ganar una discusión sino a presentar a una Persona, el Cristo real, en amor y con respeto. Tratamos a cada uno como un prójimo, con paciencia, oración, y la Biblia abierta, anhelando que vean la verdad acerca del Señor que ya admiran."}, {"textEn": "30. Summarize Unit 6: the shared claim, the two roots tested, the verdict, and the redemptive aim.", "textEs": "30. Resuma la Unidad 6: la afirmación compartida, las dos raíces probadas, el veredicto, y el fin redentor.", "kw_en": ["prophet", "christ", "final", "cross", "gospel", "supersede", "redemptive", "son"], "kw_es": ["profeta", "cristo", "final", "cruz", "evangelio", "supera", "redentor", "hijo"], "modelEn": "Unit 6 tests the claim that Islam and the Bahá'í Faith share: that God keeps sending a newer prophet who supersedes Jesus, whether Muhammad or Bahá'u'lláh. We test this at two roots. First, the person of Christ: both deny that He is the eternal Son, and Islam denies His cross, but Scripture shows His full deity and that His death and resurrection are the heart of the gospel. Second, the finality of the Son: Hebrews teaches that God's last word is not another prophet but His Son, and Jude that the faith was delivered once for all, so a later voice that changes the gospel is under Galatians' warning. The verdict is that both, for all their honor of Jesus, teach another gospel. Yet the aim is redemptive: because they already revere Jesus, we point them to the greater truth, that He is the eternal Son and the only way to the Father.", "modelEs": "La Unidad 6 prueba la afirmación que el islam y la fe bahá'í comparten: que Dios sigue enviando un profeta más nuevo que supera a Jesús, sea Mahoma o Bahá'u'lláh. Probamos esto en dos raíces. Primera, la persona de Cristo: ambas niegan que sea el eterno Hijo, y el islam niega su cruz, pero la Escritura muestra su plena deidad y que su muerte y resurrección son el corazón del evangelio. Segunda, la finalidad del Hijo: Hebreos enseña que la palabra postrera de Dios no es otro profeta sino su Hijo, y Judas que la fe fue dada una vez para siempre, así que una voz posterior que cambia el evangelio está bajo la advertencia de Gálatas. El veredicto es que ambas, a pesar de todo su honor por Jesús, enseñan otro evangelio. Sin embargo, el fin es redentor: porque ya reverencian a Jesús, los señalamos a la verdad mayor, que Él es el eterno Hijo y el único camino al Padre."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en el botón de arriba para continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click the button above to continue.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '\u2713 Correct! ' : '\u2713 \u00a1Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `\u2717 Incorrect. Correct answer: ${correctLetter}. ` : `\u2717 Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a few sentences (about 100 characters)), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos unas cuantas oraciones (unos 100 caracteres)), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            renderQuestions();
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        renderQuestions();
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCultsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

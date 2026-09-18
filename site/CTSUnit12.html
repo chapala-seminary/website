@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Old Testament Survey — Unit 12: The Minor Prophets</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+p { margin-bottom: 12px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.toggle-btn, .nav-btn, .action-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.action-btn.reset { background: #8a5a2f; }
+.action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 0; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.track-banner { background: #fffaf0; border-left: 4px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin-bottom: 15px; font-size: 0.95rem; }
+.option.locked { cursor: default; }
+.option.locked:hover { background: #fcfbf8; }
+.option.locked.correct:hover { background: #e8f5ea; }
+.option.locked.wrong:hover { background: #fae8e8; }
+.exam-result { margin-top: 15px; padding: 12px 18px; border-radius: 12px; font-size: 1.05rem; }
+.exam-result.pass { background: #e8f5ea; color: #1f6b3b; border: 1px solid #b9dfc2; }
+.exam-result.fail { background: #fae8e8; color: #8a1f1f; border: 1px solid #efc2c2; }
+.exam-result.locked { background: #fff4d6; color: #6b4f1f; border: 1px solid #e8d28a; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en .block-en { display: block; }
+body.lang-en .block-es { display: none; }
+body.lang-es .block-en { display: none; }
+body.lang-es .block-es { display: block; }
+@media print {
+    body { background: white; font-size: 12pt; padding: 0; }
+    .nav-bar, .toggle-btn, .action-btn, button.small, .registration-panel { display: none !important; }
+    .card { box-shadow: none; border: none; padding: 10pt 0; margin-bottom: 8pt; page-break-inside: avoid; }
+    .question { page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .option.correct { background: white; border: 1px solid #888; }
+    .option.wrong { background: white; border: 1px solid #888; }
+}
+.reg-readout { font-size: 0.95rem; }
+.reg-readout-grid { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.reg-readout-grid > div { min-width: 180px; }
+.reg-readout-note { margin-top: 8px; font-size: 0.82rem; color: #6b6256; }
+.reg-readout.missing { color: #8a1f1f; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Old Testament Survey — Unit 12: The Minor Prophets</span><span class="lang-es">📖 Estudio del Antiguo Testamento — Unidad 12: Los Profetas Menores</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="registration-panel" id="regPanel">
+    <h3><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h3>
+    <div id="regReadout" class="reg-readout"></div>
+    <!-- Hidden fields preserve the IDs used by grading/loadReg; registration is edited on Unit 1. -->
+    <input type="hidden" id="studentName">
+    <input type="hidden" id="studentEmail">
+    <input type="hidden" id="studentCountry">
+    <input type="hidden" id="studentProgram">
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="block-en">
+        <h2>I. Twelve Men, Twelve Hilltops, One Sunrise</h2>
+        <p>The last twelve books of the Old Testament are bound together in our Bibles by something more than convenience. They are sometimes called <em>The Twelve</em>, sometimes <em>The Minor Prophets</em>, but never because they are minor in importance. The word "minor" describes only the length of their writings compared to the giants Isaiah, Jeremiah, and Ezekiel. In fact, what these twelve men say in their few short chapters has set the agenda for prophets and reformers ever since.</p>
+
+        <p>The Minor Prophets are like twelve men standing on twelve different hilltops over four hundred years, each one watching for the sunrise. Some of them faced north toward the apostate northern kingdom; others faced south toward Judah; some looked across the Jordan at the foreign nations; one looked east into Nineveh; one looked over a smoking pile of stones that used to be the temple; one looked into the future and saw a baby in Bethlehem. Their hilltops are different. Their accents are different. Their tempers are different. But they are all watching for the same sunrise — the coming of the Messiah, the Sun of Righteousness who will rise with healing in His wings (Malachi 4:2). When you read these twelve books in a row, you can almost see the eastern sky beginning to glow.</p>
+
+        <p>Their central message is the message of the covenant: <em>Return.</em> God's people had repeatedly broken faith — with idolatry, with social injustice, with empty worship, with intermarriage. The prophets call them back, warn them of judgment if they will not come, and promise that on the other side of the discipline a glorious restoration is coming. Christ is the answer to every problem the Twelve raise.</p>
+
+        <h2>II. The Pre-Exilic Voices to the Northern Kingdom</h2>
+
+        <h3>A. Hosea — The Bridegroom Who Will Not Let Go (c. 755–715 BC)</h3>
+        <p>Hosea is the saddest love story in the Bible. God commands the prophet to marry a woman named Gomer. Whether the Hebrew text means she was already unfaithful when they married, or became unfaithful only afterward, is genuinely debated among Hebrew scholars — but faithless she was, throughout their life together. She bears three children, the second two probably not Hosea's, and the names God gives them are unbearable: <em>Jezreel</em> (God will scatter), <em>Lo-Ruhamah</em> (Not Pitied), <em>Lo-Ammi</em> (Not My People). Eventually Gomer leaves the home altogether and goes back to her old life, sliding from prostitution into slavery. And then God tells Hosea to do the unthinkable: <em>"Then the LORD said to me, 'Go again, love a woman who is loved by a lover and is committing adultery, just like the love of the LORD for the children of Israel'"</em> (Hosea 3:1). Hosea finds her on a slave block, naked, broken, and cheap — fifteen shekels of silver and a homer and a half of barley, less than half the going price of a slave. He pays it. He brings her home. And the whole book of Hosea is the running commentary on what that act means: <em>this is exactly what God is doing for an unfaithful Israel, and this is exactly what Christ would one day do for His unfaithful Bride at the Cross.</em></p>
+
+        <p>The longing of God's heart trembles in Hosea's pages. <em>"How can I give you up, Ephraim? How can I hand you over, Israel?… My heart churns within Me; My sympathy is stirred"</em> (Hosea 11:8). And the climactic promise comes in chapter 14: <em>"I will heal their backsliding, I will love them freely"</em> (Hosea 14:4). No conditions. No bargaining. Just love that will not let go.</p>
+
+        <p>When the Berlin Wall fell in 1989, Erich Honecker, the Communist premier of East Germany, was suddenly thrown out of his palace, stripped of office, and abandoned by every former friend. His wife Margot, who had headed the Ministry of Education, had eight times denied admission to the eight children of Pastor Uwe Holmer because their father preached Christ. Now the Honeckers were homeless. No one would take them in. Then a letter came from Pastor Holmer: <em>"Come and live with us in the parsonage."</em> The man who had been refused on behalf of his children opened his own front door to the woman who had refused them. He fed them. He prayed at his table while they bowed their heads. That was Hosea bringing Gomer home from the slave block. That was Christ paying for the church. That was the gospel before the gospel was written down.</p>
+
+        <p>And in the middle of all this, Hosea drops one of the most piercing single verses in the Old Testament: <em>"For I desire mercy and not sacrifice, and the knowledge of God more than burnt offerings"</em> (Hosea 6:6). Jesus quotes that verse twice in Matthew (9:13; 12:7). It is what God always wanted. It is what we have always failed to give. A four-year-old little girl was once heard talking to her two dolls. She had one tucked under each arm and was hugging them tightly. With a wistful look she said up to her mother, "Mama, I love them and love them and love them — but they never love me back." That is Hosea 6:6. That is the heartbreak of the Old Testament. And Christ on the Cross is finally, fully, the love that loves us back.</p>
+
+        <h3>B. Amos — Let Justice Roll Down (c. 760–750 BC)</h3>
+        <p>Amos was not a professional prophet. He was a shepherd from the southern village of Tekoa and a tender of sycomore figs, conscripted by God and sent north to preach to the wealthy elite of Israel during a time of unprecedented prosperity under Jeroboam II. His great burden was social justice. The rich were trampling the poor in the dust of the earth, the courts were corrupt, and the temples were busy with offerings while widows starved at the gates. Amos thunders, <em>"But let justice run down like water, and righteousness like a mighty stream"</em> (Amos 5:24). Empty religion that does not produce justice in the streets is, to God, a stink in His nostrils. The book ends with a brief but radiant promise of restoration: in that day God will raise up the fallen tabernacle of David — the line that will produce the Messiah — and the nations will be called by His name.</p>
+
+        <h3>C. Jonah — God's Heart for the Nations (c. 8th century BC)</h3>
+        <p>Jonah is the only prophet who tries to outrun his calling. Sent east to preach to the cruel Assyrian capital of Nineveh, he bolts west to Tarshish, and the great fish God prepares to bring him back is one of the most famous lessons in providence ever recorded. But Jonah's real problem is not the storm or the fish. It is his heart. He does not want to preach to Nineveh because he is afraid that God will forgive them, and he is right to be afraid. They repent at his eight-word sermon — <em>"Yet forty days, and Nineveh shall be overthrown!"</em> (Jonah 3:4) — and God spares the city. Jonah sulks under a withering vine while God explains, in the last sentence of the book, that He pities even the people Jonah does not want pitied. Jonah is a missionary book, a warning against tribal religion, and one of the clearest pictures in the Old Testament of the Father's heart for every nation under heaven. Jesus Himself made Jonah a sign of His own resurrection: as Jonah was three days in the belly of the fish, so the Son of Man would be three days in the heart of the earth (Matthew 12:40).</p>
+
+        <h2>III. The Pre-Exilic Voices to Judah</h2>
+
+        <h3>A. Joel — The Day of the Lord and the Spirit Poured Out</h3>
+        <p>Joel takes a horrifying locust plague that has stripped the fields of Judah and uses it as a picture of the great and terrible Day of the Lord. He calls the nation to fast, to weep, to rend their hearts and not their garments. And then he lifts the curtain on a future hope so sweeping that we still live inside its fulfillment: <em>"And it shall come to pass afterward that I will pour out My Spirit on all flesh; your sons and your daughters shall prophesy, your old men shall dream dreams, your young men shall see visions"</em> (Joel 2:28). When the rushing wind filled the upper room on the Day of Pentecost, Peter stood up and said, <em>"But this is what was spoken by the prophet Joel"</em> (Acts 2:16). The pouring out of the Spirit on every kind of believer — male and female, young and old, slave and free — is the ongoing fulfillment of Joel's word.</p>
+
+        <h3>B. Obadiah — The Brother Who Refused to Be a Brother</h3>
+        <p>The shortest book in the Old Testament, twenty-one verses, is a denunciation of Edom. Edom is descended from Esau; Israel from Jacob. They were brothers. But when Babylon ransacked Jerusalem, the Edomites stood on the hilltops and cheered, then ran down to loot the corpses. Obadiah pronounces judgment on brothers who chose contempt over kinship. The book ends with seven of the most stirring words in the Old Testament: <em>"Then the kingdom shall be the LORD's"</em> (Obadiah 21).</p>
+
+        <h3>C. Micah — Justice, Mercy, and a Ruler from Bethlehem (c. 735–700 BC)</h3>
+        <p>Micah preached at the same time as Isaiah, in the southern kingdom, and the two of them are sometimes called the urban and rural voices of one great message. Micah's two unforgettable verses bracket the whole Old Testament's ethical and messianic teaching. The first is the great summary of personal religion: <em>"He has shown you, O man, what is good; and what does the LORD require of you but to do justly, to love mercy, and to walk humbly with your God?"</em> (Micah 6:8). Three things — and all of them in the heart, not the hands. The second is one of the most precise messianic prophecies in the Bible: <em>"But you, Bethlehem Ephrathah, though you are little among the thousands of Judah, yet out of you shall come forth to Me the One to be Ruler in Israel, whose goings forth are from of old, from everlasting"</em> (Micah 5:2). Seven hundred years before Christmas, Micah named the village. When the Magi came to Herod's court asking where the king of the Jews was to be born, the chief priests opened their scrolls and read them this verse. Bethlehem.</p>
+
+        <h3>D. Nahum — The Other Side of Jonah (c. 663–612 BC)</h3>
+        <p>About a hundred and fifty years after Jonah's mission, the great-grandchildren of the Ninevites who repented had returned to wickedness on a scale that staggered the ancient world. Nahum announces the fall of Nineveh. It is a book of comfort for Judah and a book of judgment against Assyria. The two short books — Jonah and Nahum — are designed to be read together: God's mercy reaches every nation that will repent, and God's judgment reaches every nation that will not. In 612 BC the city of Nineveh was so thoroughly destroyed that for over two thousand years scholars debated whether it had ever existed. Then in the nineteenth century the ruins were uncovered, and Nahum's prophecy was vindicated stone by stone.</p>
+
+        <h3>E. Habakkuk — The Just Shall Live by Faith (c. 605–597 BC)</h3>
+        <p>Habakkuk is the most personal of the Twelve. He does not begin by preaching to the people; he begins by complaining to God. <em>"O LORD, how long shall I cry, and You will not hear?"</em> (Habakkuk 1:2). The wickedness of Judah is unbearable, and God seems silent. Then God answers — and the answer almost makes Habakkuk wish he had never asked. God is going to discipline Judah by means of the Babylonians, a crueler nation than Judah herself. How can a holy God use an unholy instrument? Habakkuk climbs into his watchtower in chapter 2 and waits. And the answer comes in two clauses that together became the keystone of the Reformation: <em>"Behold the proud, his soul is not upright in him; but the just shall live by his faith"</em> (Habakkuk 2:4).</p>
+
+        <p>Three times in the New Testament that single line is quoted — Romans 1:17, Galatians 3:11, and Hebrews 10:38 — and on it Paul builds the doctrine of justification by faith alone. Sixteen centuries later the same verse, lifted out of Paul's argument, would ignite the Protestant Reformation. The whole Reformation, in one sense, was the recovery of one sentence by one prophet: <em>the just shall live by his faith.</em> Habakkuk closes his short book with one of the most beautiful affirmations of trust in all of Scripture: <em>"Though the fig tree may not blossom, nor fruit be on the vines… yet I will rejoice in the LORD, I will joy in the God of my salvation"</em> (Habakkuk 3:17–18). Faith does not require the harvest in order to praise the Harvester.</p>
+
+        <h3>F. Zephaniah — The Day of the Lord and the Singing God (c. 640–609 BC)</h3>
+        <p>Zephaniah, a great-great-grandson of King Hezekiah, preached during the reign of Josiah and announced the imminent Day of the Lord — a day of wrath, darkness, and trumpet blast. But the book turns at the end to one of the tenderest pictures of God anywhere in the Old Testament: <em>"The LORD your God in your midst, the Mighty One, will save; He will rejoice over you with gladness, He will quiet you with His love, He will rejoice over you with singing"</em> (Zephaniah 3:17). The God who comes in judgment is the God who sings over His people. He is not a stoic; He is a Father. The same lips that pronounce woe over the wicked break into song over the redeemed.</p>
+
+        <h2>IV. The Post-Exilic Voices</h2>
+
+        <h3>A. Haggai — Build the House (c. 520 BC)</h3>
+        <p>Sixteen years after the first wave of exiles returned from Babylon, the foundations of the second temple were still sitting where they had been laid, half-finished, weeds growing through the cracks. The people were busy paneling their own houses. Haggai's whole ministry takes place in four months of one year, and his message is one short, blistering question: <em>"Is it time for you yourselves to dwell in your paneled houses, and this temple to lie in ruins?"</em> (Haggai 1:4). Then comes the great promise that lifts the whole second-temple period: <em>"The glory of this latter temple shall be greater than the former"</em> (Haggai 2:9). The second temple was architecturally inferior to Solomon's. Yet five centuries later, a young carpenter from Nazareth would walk through its courts as a child and teach in its porches as a man. The greater glory was not gold leaf or cedar paneling. It was Christ.</p>
+
+        <h3>B. Zechariah — The King on the Donkey, the Pierced One, the Branch</h3>
+        <p>Zechariah is Haggai's contemporary, but where Haggai is a builder Zechariah is a seer. The first six chapters contain eight night visions — horsemen, horns, a measuring line, a lampstand, a flying scroll, a woman in a basket, four chariots — all designed to encourage the rebuilders. Then the second half of the book becomes one of the most messianic in the Old Testament. The Branch is coming (3:8; 6:12). The King is coming on a donkey: <em>"Rejoice greatly, O daughter of Zion! Shout, O daughter of Jerusalem! Behold, your King is coming to you; He is just and having salvation, lowly and riding on a donkey, a colt, the foal of a donkey"</em> (Zechariah 9:9). This is the verse Matthew quotes on Palm Sunday. The good Shepherd is coming, and He will be valued at thirty pieces of silver thrown to the potter (Zechariah 11:12–13). The pierced One is coming: <em>"Then they will look on Me whom they pierced"</em> (Zechariah 12:10), the verse John applies to the spear-thrust on Calvary (John 19:37). Five centuries before the cross, Zechariah saw the price, the wound, and the crown.</p>
+
+        <h4 style="color:#5b3a1f;margin:15px 0 8px;">The Scarlet Thread Reaches Stations Eleven and Twelve</h4>
+        <p>Now mark where we are in the long story this whole course has been telling. The Scarlet Thread began in Eden with God killing an animal to clothe Adam and Eve. It ran through Abel's lamb, Noah's altar, the ram on Moriah, the Passover blood, the goats of Yom Kippur, the bronze serpent in the wilderness, Rahab's scarlet cord, the rivers of blood in Solomon's temple, and the Suffering Servant of Isaiah 53. <strong>Zechariah 12:10 is the eleventh station of the thread — the place where the Servant of Isaiah is finally given a wound and a watching people.</strong> Look at the verb: <em>they shall look on Me whom they pierced.</em> The pronoun is <em>Me.</em> The speaker is the Lord Himself. The Lord pierced. The God of Israel hanging on a Roman cross. John saw it and quoted it. So did the angel on Patmos: <em>"Behold, He is coming with clouds, and every eye will see Him, even they who pierced Him"</em> (Revelation 1:7).</p>
+
+        <p>And then, one verse later, Zechariah opens the <strong>twelfth station</strong>. The piercing was not for nothing. Out of the wound a river is going to start: <em>"In that day a fountain shall be opened for the house of David and for the inhabitants of Jerusalem, for sin and for uncleanness"</em> (Zechariah 13:1). The scarlet color of Isaiah 1:18 will not stay scarlet. The wound of Zechariah 12 will become the cleansing of Zechariah 13. The blood of the Lamb is a fountain, and the fountain is open. Whoever will may come and wash. The hymn writer caught it exactly four hundred years ago: <em>"There is a fountain filled with blood drawn from Immanuel's veins; and sinners plunged beneath that flood lose all their guilty stains."</em> Two stations in two verses. The thread is one verse away from its final tying-off in the New Testament. Watch for it in Unit 13. There the Lamb will appear at last on the bank of the Jordan, and a man named John will lift his hand and point.</p>
+
+        <h3>C. Malachi — Think Upon His Name (c. 450–430 BC)</h3>
+        <p>Malachi is the last word. His name means <em>my messenger</em>. He preaches roughly a hundred years after the first return, in Nehemiah's later years, to a community that has rebuilt the temple, rebuilt the walls, and lost the plot. Their priests are corrupt. Their offerings are leftovers. Their tithes are missing. Their marriages are broken. Their worship is bored. And eight times in the book, when God lays a charge against them, they answer Him with the same flippant little syllable: <em>"How? In what way? When?"</em></p>
+
+        <p>Listen to the opening exchange. <em>"I have loved you, says the LORD. Yet you say, 'In what way have You loved us?'"</em> (Malachi 1:2). The miracle is never that God passes over the unfaithful. The miracle is that God ever loves the faithful — that He loves you and me at all. Read your own life in the light of that exchange and the wonder doubles.</p>
+
+        <p>Then comes their bored worship. <em>"Oh, what a weariness!"</em> they say of God's services, sniffing at His altar (Malachi 1:13). One morning a long-time Bible teacher was driving in heavy Los Angeles rush-hour traffic and looked over at the faces of the commuters in the cars beside him — every face dull, dreading the day, going through the motions. He turned to his daughter and said, "Look at them. They are bored to death. The worst thing in the world is to spend your life doing what you hate to do." Then he added, "And going to church is exactly that boring to a great many people." Whenever the heart is gone, the form becomes a weariness — as true today as in 450 BC.</p>
+
+        <p>Then comes the famous tithe passage. <em>"Will a man rob God? Yet you have robbed Me! But you say, 'In what way have we robbed You?' In tithes and offerings"</em> (Malachi 3:8). A small church in a missionary country once had its books in such disarray that the deacons, in desperation, asked a Chinese grocer with a head for figures to take over the accounts. He agreed, on one condition: no one would ask for a report until the next Annual General Meeting. The next year the report came in. The five-thousand-dollar building loan was paid off. Two thousand dollars had gone to missions. A balance of $1,253 sat in the bank. The congregation was stunned. <em>"How did you do it?"</em> someone asked. The grocer answered, <em>"You all buy groceries from me, yes? And you all want credit, yes? And I give you credit, yes? And I send you a bill at the end of every month, yes? And you can't read my handwriting, yes? And I add ten percent to every bill, yes? And you've all paid every bill, yes? Well — all of you have been tithing for a year. Praise the Lord, yes!"</em> God's principle is older than Malachi: <em>"Bring all the tithes into the storehouse… and try Me now in this… if I will not open for you the windows of heaven and pour out for you such blessing that there will not be room enough to receive it"</em> (Malachi 3:10).</p>
+
+        <p>And then comes one of the great anchors of the Bible. <em>"For I am the LORD, I do not change"</em> (Malachi 3:6). Voltaire said the name of Christ would be forgotten within a hundred years; Voltaire is dead, and the very house in which he wrote that line was for many years a Bible warehouse. Tom Paine wrote <em>The Age of Reason</em> against Christ; Paine died a drunkard, and Christ marches on. Charles Bradlaugh of England spent a fortune to destroy faith; he was buried without a song or prayer, and Christ marches on. Robert Ingersoll thundered against the gospel from American platforms; the world has nearly forgotten his name, and Christ marches on. <em>I do not change.</em> Empires fall, philosophies fade, Bible-burners burn out. He stands.</p>
+
+        <p>The book closes around the figure of three messengers. The first is Levi, the faithful priest who teaches the law (Malachi 2:7). The second is the forerunner: <em>"Behold, I send My messenger, and he will prepare the way before Me"</em> (Malachi 3:1a) — fulfilled four hundred years later in John the Baptist. The third is the Lord Himself: <em>"and the Lord, whom you seek, will suddenly come to His temple, even the Messenger of the covenant"</em> (Malachi 3:1b) — the New Covenant which Jesus would inaugurate over a cup of wine at a Passover table. The very last word of the Old Testament is the word <em>curse</em> (Malachi 4:6). The very last words of the New Testament are <em>"the grace of our Lord Jesus Christ be with you all. Amen"</em> (Revelation 22:21). What comes between those two words is the entire gospel.</p>
+
+        <h2>V. Twelve Lanterns, One Star</h2>
+        <p>Look at the Twelve as a single picture: twelve men with twelve lanterns, walking down twelve different roads, all converging on one star over Bethlehem. Hosea brings the love. Joel brings the Spirit. Amos brings the justice. Obadiah brings the kingdom. Jonah brings the nations. Micah brings the village. Nahum brings the warning. Habakkuk brings the faith. Zephaniah brings the song. Haggai brings the temple. Zechariah brings the King on the donkey. And Malachi, the last lantern of the night, brings the sunrise. <em>"But to you who fear My name the Sun of Righteousness shall arise with healing in His wings"</em> (Malachi 4:2).</p>
+
+        <p>Then the lights of the Old Testament go out and the heavens are silent for four hundred years. Generations are born and die. Empires rise and fall. The lamps in the temple flicker but no prophet speaks. And then, on a hillside outside a small village in Judah, an old priest named Zechariah is told he is going to have a son who will go before the Lord <em>"in the spirit and power of Elijah"</em> (Luke 1:17). Malachi's last paragraph has come true. The Sun is rising. The Twelve have all been right. And the Lord whom His people sought has come, suddenly, to His temple, with healing in His wings — for you, and for me, and for the whole tired world.</p>
+
+        <p>And the Scarlet Thread, after twelve long stations from Eden to a Persian-era fountain, is one verse away from its final tying-off. Twelve stations. Twelve lanterns. One Lamb still to be named. The thirteenth and last station of the thread is waiting on the bank of a river called Jordan — and the next unit will take us there.</p>
+    </div>
+
+    <div class="block-es">
+        <h2>I. Doce hombres, doce colinas, un amanecer</h2>
+        <p>Los últimos doce libros del Antiguo Testamento están unidos en nuestras Biblias por algo más que la conveniencia. A veces se les llama <em>Los Doce</em>, a veces <em>los Profetas Menores</em>, pero nunca porque sean menores en importancia. La palabra "menor" describe únicamente la extensión de sus escritos en comparación con los gigantes Isaías, Jeremías y Ezequiel. De hecho, lo que estos doce hombres dicen en sus pocos capítulos cortos ha marcado la agenda de profetas y reformadores desde entonces.</p>
+
+        <p>Los Profetas Menores son como doce hombres parados en doce colinas distintas a lo largo de cuatrocientos años, cada uno esperando el amanecer. Algunos miran al norte, hacia el reino apóstata; otros al sur, hacia Judá; algunos al otro lado del Jordán, hacia las naciones extranjeras; uno mira al oriente, hacia Nínive; uno mira sobre un montón de piedras humeantes que solían ser el templo; uno mira al futuro y ve a un niño en Belén. Sus colinas son distintas. Sus acentos son distintos. Sus temperamentos son distintos. Pero todos esperan el mismo amanecer: la venida del Mesías, el Sol de Justicia que se levantará trayendo salvación en sus alas (Malaquías 4:2). Cuando se leen estos doce libros uno tras otro, casi se ve el cielo oriental empezando a iluminarse.</p>
+
+        <p>Su mensaje central es el del pacto: <em>Vuelvan.</em> El pueblo de Dios había roto el pacto repetidamente — con idolatría, injusticia social, culto vacío, matrimonios mixtos. Los profetas los llaman de regreso, advierten del juicio si no vuelven y prometen que al otro lado de la disciplina viene una gloriosa restauración. Cristo es la respuesta a cada problema que plantean Los Doce.</p>
+
+        <h2>II. Las voces preexílicas al Reino del Norte</h2>
+
+        <h3>A. Oseas — El Esposo que no soltará (c. 755–715 a.C.)</h3>
+        <p>Oseas es la historia de amor más triste de la Biblia. Dios manda al profeta a casarse con una mujer llamada Gomer. Si el texto hebreo significa que ella ya era infiel al casarse, o que se volvió infiel después, es genuinamente debatido entre los hebraístas — pero infiel fue, a lo largo de toda su vida juntos. Ella tiene tres hijos, los dos últimos probablemente no de Oseas, y los nombres que Dios les pone son insoportables: <em>Jezreel</em> (Dios esparcirá), <em>Lo-Ruhama</em> (No compadecida), <em>Lo-Ammi</em> (No mi pueblo). Eventualmente Gomer abandona el hogar y vuelve a su antigua vida, deslizándose de la prostitución a la esclavitud. Y entonces Dios le ordena a Oseas algo impensable: <em>"Vé y ama a una mujer amada de su compañero, aunque adúltera, como el amor de Jehová para con los hijos de Israel"</em> (Oseas 3:1). Oseas la halla en un mercado de esclavos, desnuda, quebrantada y barata: quince siclos de plata y un homer y medio de cebada, menos de la mitad del precio normal de un esclavo. La paga. La trae a casa. Y todo el libro de Oseas es el comentario corrido de lo que ese acto significa: <em>esto es exactamente lo que Dios está haciendo con un Israel infiel, y exactamente lo que Cristo haría un día con Su Esposa infiel en la Cruz.</em></p>
+
+        <p>El anhelo del corazón de Dios tiembla en las páginas de Oseas. <em>"¿Cómo te dejaré, oh Efraín? ¿Cómo te entregaré, oh Israel?… Mi corazón se conmueve dentro de mí, se inflama toda mi compasión"</em> (Oseas 11:8). Y la promesa culminante llega en el capítulo 14: <em>"Yo sanaré su rebelión, los amaré de pura gracia"</em> (Oseas 14:4). Sin condiciones. Sin negociación. Solo amor que no suelta.</p>
+
+        <p>Cuando cayó el Muro de Berlín en 1989, Erich Honecker, el premier comunista de Alemania Oriental, fue de pronto echado de su palacio, despojado del cargo y abandonado por todos sus antiguos amigos. Su esposa Margot, que había encabezado el Ministerio de Educación, había rechazado ocho veces la admisión universitaria de los ocho hijos del pastor Uwe Holmer porque su padre predicaba a Cristo. Ahora los Honecker estaban sin techo. Nadie quería recibirlos. Entonces llegó una carta del pastor Holmer: <em>"Vengan a vivir con nosotros en la casa pastoral."</em> El hombre al que le habían negado por sus hijos abrió su propia puerta a la mujer que se los había negado. Los alimentó. Oró en su mesa mientras ellos inclinaban la cabeza. Eso fue Oseas trayendo a Gomer del mercado de esclavos. Eso fue Cristo pagando por la iglesia. Eso fue el evangelio antes de que el evangelio se escribiera.</p>
+
+        <p>Y en medio de todo esto, Oseas suelta uno de los versículos más penetrantes del Antiguo Testamento: <em>"Misericordia quiero, y no sacrificio, y conocimiento de Dios más que holocaustos"</em> (Oseas 6:6). Jesús cita ese versículo dos veces en Mateo (9:13; 12:7). Es lo que Dios siempre quiso. Es lo que siempre fallamos en darle. Una niñita de cuatro años fue oída una vez hablando con sus dos muñecas. Tenía una bajo cada brazo y las apretaba con fuerza. Con mirada nostálgica miró hacia su madre y le dijo: "Mami, yo las amo y las amo y las amo, pero ellas nunca me aman a mí". Eso es Oseas 6:6. Esa es la angustia del Antiguo Testamento. Y Cristo en la Cruz es por fin, plenamente, el amor que sí nos ama de regreso.</p>
+
+        <h3>B. Amós — Corra el juicio como las aguas (c. 760–750 a.C.)</h3>
+        <p>Amós no era profeta de profesión. Era un pastor del pueblo sureño de Tecoa y cuidador de higos silvestres, reclutado por Dios y enviado al norte a predicar a la élite acomodada de Israel durante una época de prosperidad sin precedentes bajo Jeroboam II. Su gran carga era la justicia social. Los ricos pisoteaban a los pobres en el polvo de la tierra, los tribunales eran corruptos y los templos estaban llenos de ofrendas mientras las viudas pasaban hambre a las puertas. Amós truena: <em>"Corra el juicio como las aguas, y la justicia como impetuoso arroyo"</em> (Amós 5:24). La religión vacía que no produce justicia en la calle es, para Dios, hedor en Sus narices. El libro termina con una breve pero radiante promesa de restauración: en aquel día Dios levantará el tabernáculo caído de David — la línea que producirá al Mesías — y las naciones serán llamadas por Su nombre.</p>
+
+        <h3>C. Jonás — El corazón de Dios por las naciones (c. siglo VIII a.C.)</h3>
+        <p>Jonás es el único profeta que intenta huir de su llamado. Enviado al oriente a predicar a la cruel capital asiria de Nínive, escapa al occidente hacia Tarsis, y el gran pez que Dios prepara para devolverlo es una de las lecciones más célebres de providencia jamás registradas. Pero el verdadero problema de Jonás no es la tormenta ni el pez. Es su corazón. No quiere predicar a Nínive porque tiene miedo de que Dios los perdone, y tiene razón en temerlo. Ellos se arrepienten ante su sermón de ocho palabras — <em>"de aquí a cuarenta días Nínive será destruida"</em> (Jonás 3:4) — y Dios perdona la ciudad. Jonás se enfurruña bajo una calabacera marchita mientras Dios le explica, en la última frase del libro, que Él se compadece incluso de las personas que Jonás no quiere ver compadecidas. Jonás es un libro misionero, una advertencia contra la religión tribal, y uno de los retratos más claros del Antiguo Testamento del corazón del Padre por toda nación bajo el cielo. El propio Jesús hizo de Jonás señal de Su resurrección: como Jonás estuvo tres días en el vientre del pez, así el Hijo del Hombre estaría tres días en el corazón de la tierra (Mateo 12:40).</p>
+
+        <h2>III. Las voces preexílicas a Judá</h2>
+
+        <h3>A. Joel — El Día del Señor y el Espíritu derramado</h3>
+        <p>Joel toma una espantosa plaga de langostas que ha desnudado los campos de Judá y la usa como cuadro del grande y terrible Día del Señor. Llama a la nación a ayunar, a llorar, a rasgar sus corazones y no sus vestidos. Y luego levanta el telón sobre una esperanza tan vasta que aún vivimos dentro de su cumplimiento: <em>"Y será que después de esto, derramaré mi Espíritu sobre toda carne, y profetizarán vuestros hijos y vuestras hijas; vuestros viejos soñarán sueños, y vuestros jóvenes verán visiones"</em> (Joel 2:28). Cuando el viento recio llenó el aposento alto el Día de Pentecostés, Pedro se puso en pie y dijo: <em>"Mas esto es lo dicho por el profeta Joel"</em> (Hechos 2:16). El derramamiento del Espíritu sobre toda clase de creyente — varón y mujer, joven y anciano, esclavo y libre — es el cumplimiento continuo de la palabra de Joel.</p>
+
+        <h3>B. Abdías — El hermano que rehusó ser hermano</h3>
+        <p>El libro más corto del Antiguo Testamento, veintiún versículos, es una denuncia contra Edom. Edom desciende de Esaú; Israel de Jacob. Eran hermanos. Pero cuando Babilonia saqueó Jerusalén, los edomitas se pararon en las colinas y aplaudieron, luego bajaron corriendo a saquear los cadáveres. Abdías pronuncia juicio sobre hermanos que prefirieron el desprecio al parentesco. El libro termina con siete de las palabras más conmovedoras del Antiguo Testamento: <em>"Y el reino será de Jehová"</em> (Abdías 21).</p>
+
+        <h3>C. Miqueas — Justicia, misericordia y un Gobernante de Belén (c. 735–700 a.C.)</h3>
+        <p>Miqueas predicó al mismo tiempo que Isaías, en el reino del sur, y a los dos a veces se les llama las voces urbana y rural de un mismo gran mensaje. Los dos versículos inolvidables de Miqueas enmarcan toda la enseñanza ética y mesiánica del Antiguo Testamento. El primero es el gran resumen de la religión personal: <em>"Oh hombre, él te ha declarado lo que sea bueno, y qué pida Jehová de ti: solamente hacer juicio, y amar misericordia, y humillarte para andar con tu Dios"</em> (Miqueas 6:8). Tres cosas — y todas ellas en el corazón, no en las manos. El segundo es una de las profecías mesiánicas más precisas de la Biblia: <em>"Mas tú, Belén Efrata, pequeña para ser en los millares de Judá, de ti me saldrá el que será Señor en Israel; y sus salidas son desde el principio, desde los días del siglo"</em> (Miqueas 5:2). Setecientos años antes de la Navidad, Miqueas nombró la aldea. Cuando los magos llegaron a la corte de Herodes preguntando dónde había de nacer el rey de los judíos, los principales sacerdotes abrieron sus rollos y les leyeron este versículo. Belén.</p>
+
+        <h3>D. Nahúm — El otro lado de Jonás (c. 663–612 a.C.)</h3>
+        <p>Unos ciento cincuenta años después de la misión de Jonás, los biznietos de los ninivitas que se arrepintieron habían vuelto a la maldad a una escala que asombraba al mundo antiguo. Nahúm anuncia la caída de Nínive. Es libro de consuelo para Judá y libro de juicio contra Asiria. Los dos libros breves — Jonás y Nahúm — están diseñados para leerse juntos: la misericordia de Dios alcanza a toda nación que se arrepienta, y el juicio de Dios alcanza a toda nación que no lo haga. En 612 a.C. la ciudad de Nínive fue tan completamente destruida que durante más de dos mil años los eruditos debatieron si alguna vez había existido. Luego, en el siglo XIX, las ruinas fueron descubiertas, y la profecía de Nahúm fue confirmada piedra por piedra.</p>
+
+        <h3>E. Habacuc — El justo por su fe vivirá (c. 605–597 a.C.)</h3>
+        <p>Habacuc es el más personal de Los Doce. No empieza predicando al pueblo; empieza quejándose con Dios. <em>"¿Hasta cuándo, oh Jehová, clamaré, y no oirás?"</em> (Habacuc 1:2). La maldad de Judá es insoportable, y Dios parece callado. Entonces Dios responde — y la respuesta casi le hace desear no haber preguntado. Dios va a disciplinar a Judá por medio de los babilonios, una nación más cruel que la propia Judá. ¿Cómo puede un Dios santo usar instrumento impuro? Habacuc sube a su atalaya en el capítulo 2 y espera. Y la respuesta llega en dos cláusulas que juntas se volvieron clave de la Reforma: <em>"He aquí, aquel cuya alma no es derecha en él, se enorgullece; mas el justo por su fe vivirá"</em> (Habacuc 2:4).</p>
+
+        <p>Tres veces se cita en el Nuevo Testamento esa única línea — Romanos 1:17, Gálatas 3:11 y Hebreos 10:38 — y sobre ella construye Pablo la doctrina de la justificación solo por la fe. Dieciséis siglos después el mismo versículo, sacado del argumento de Pablo, encendería la Reforma Protestante. Toda la Reforma, en cierto sentido, fue la recuperación de una sola oración de un solo profeta: <em>el justo por su fe vivirá.</em> Habacuc cierra su breve libro con una de las afirmaciones de confianza más bellas de toda la Escritura: <em>"Aunque la higuera no florezca, ni en las vides haya frutos… con todo, yo me alegraré en Jehová, y me gozaré en el Dios de mi salvación"</em> (Habacuc 3:17–18). La fe no necesita la cosecha para alabar al Dueño de la cosecha.</p>
+
+        <h3>F. Sofonías — El Día del Señor y el Dios que canta (c. 640–609 a.C.)</h3>
+        <p>Sofonías, tataranieto del rey Ezequías, predicó durante el reinado de Josías y anunció el inminente Día del Señor — día de ira, oscuridad y trompeta. Pero el libro gira al final hacia uno de los retratos más tiernos de Dios en todo el Antiguo Testamento: <em>"Jehová en medio de ti, poderoso, él salvará; gozaráse sobre ti con alegría, callará de amor, se regocijará sobre ti con cantar"</em> (Sofonías 3:17). El Dios que viene en juicio es el Dios que canta sobre Su pueblo. No es estoico; es Padre. Los mismos labios que pronuncian ay sobre los impíos rompen en canción sobre los redimidos.</p>
+
+        <h2>IV. Las voces post-exílicas</h2>
+
+        <h3>A. Hageo — Edifica la casa (c. 520 a.C.)</h3>
+        <p>Dieciséis años después de la primera oleada de exiliados que regresaron de Babilonia, los cimientos del segundo templo todavía estaban donde habían sido puestos, a medio terminar, con malezas creciendo entre las grietas. La gente estaba ocupada artesonando sus propias casas. Todo el ministerio de Hageo ocurre en cuatro meses de un año, y su mensaje es una pregunta corta y abrasadora: <em>"¿Es para vosotros tiempo, para vosotros, de morar en vuestras casas artesonadas, y esta casa está desierta?"</em> (Hageo 1:4). Luego viene la gran promesa que sostiene todo el período del segundo templo: <em>"La gloria de aquesta casa postrera será mayor que la de la primera"</em> (Hageo 2:9). El segundo templo era arquitectónicamente inferior al de Salomón. Sin embargo, cinco siglos después, un joven carpintero de Nazaret caminaría por sus atrios cuando niño y enseñaría en sus pórticos cuando hombre. La gloria mayor no era el oro ni el cedro. Era Cristo.</p>
+
+        <h3>B. Zacarías — El Rey en el asno, el Traspasado, el Renuevo</h3>
+        <p>Zacarías es contemporáneo de Hageo, pero donde Hageo es constructor Zacarías es vidente. Los primeros seis capítulos contienen ocho visiones nocturnas — jinetes, cuernos, un cordel de medir, un candelero, un rollo volante, una mujer en una efa, cuatro carros — todas diseñadas para alentar a los que reconstruyen. Luego la segunda mitad del libro se vuelve una de las más mesiánicas del Antiguo Testamento. El Renuevo viene (3:8; 6:12). El Rey viene en un asno: <em>"Alégrate mucho, hija de Sion… he aquí, tu Rey vendrá a ti, justo y salvador, humilde, y cabalgando sobre un asno"</em> (Zacarías 9:9). Ese es el versículo que Mateo cita en el Domingo de Ramos. El buen Pastor viene, y será valuado en treinta piezas de plata arrojadas al alfarero (Zacarías 11:12–13). El Traspasado viene: <em>"Mirarán a mí, a quien traspasaron"</em> (Zacarías 12:10), versículo que Juan aplica a la lanzada del Calvario (Juan 19:37). Cinco siglos antes de la cruz, Zacarías vio el precio, la herida y la corona.</p>
+
+        <h4 style="color:#5b3a1f;margin:15px 0 8px;">El Hilo Escarlata llega a las estaciones once y doce</h4>
+        <p>Ahora marque dónde estamos en la larga historia que todo este curso ha estado contando. El Hilo Escarlata comenzó en el Edén cuando Dios mató un animal para vestir a Adán y Eva. Corrió por el cordero de Abel, el altar de Noé, el carnero en Moriah, la sangre de la Pascua, los chivos del Yom Kippur, la serpiente de bronce en el desierto, el cordón de grana de Rahab, los ríos de sangre del templo de Salomón, y el Siervo Sufriente de Isaías 53. <strong>Zacarías 12:10 es la undécima estación del hilo — el lugar donde al Siervo de Isaías al fin le es dada una herida y un pueblo que la contempla.</strong> Mire el verbo: <em>mirarán a mí, a quien traspasaron.</em> El pronombre es <em>Mí.</em> Quien habla es el Señor mismo. El Señor traspasado. El Dios de Israel colgado en una cruz romana. Juan lo vio y lo citó. También el ángel en Patmos: <em>"He aquí que viene con las nubes, y todo ojo le verá, y los que le traspasaron"</em> (Apocalipsis 1:7).</p>
+
+        <p>Y entonces, un versículo después, Zacarías abre la <strong>duodécima estación</strong>. El traspasamiento no fue en vano. De la herida va a brotar un río: <em>"En aquel tiempo habrá manantial abierto para la casa de David y para los moradores de Jerusalén, para el pecado y la inmundicia"</em> (Zacarías 13:1). El color escarlata de Isaías 1:18 no se quedará escarlata. La herida de Zacarías 12 se volverá la limpieza de Zacarías 13. La sangre del Cordero es un manantial, y el manantial está abierto. Cualquiera que quiera puede venir y lavarse. Un himnista lo captó exactamente hace cuatrocientos años: <em>"Hay una fuente llena de sangre tomada de las venas de Emanuel; y los pecadores sumergidos en ese flujo pierden toda culpable mancha."</em> Dos estaciones en dos versículos. Al hilo le queda un solo versículo para atarse en el Nuevo Testamento. Estén pendientes en la Unidad 13. Allí el Cordero aparecerá por fin en la orilla del Jordán, y un hombre llamado Juan alzará la mano y señalará.</p>
+
+        <h3>C. Malaquías — Pensad en su nombre (c. 450–430 a.C.)</h3>
+        <p>Malaquías es la última palabra. Su nombre significa <em>mi mensajero</em>. Predica unos cien años después del primer regreso, en los años tardíos de Nehemías, a una comunidad que ha reedificado el templo, reedificado los muros, y perdido el rumbo. Sus sacerdotes son corruptos. Sus ofrendas son sobras. Sus diezmos faltan. Sus matrimonios están rotos. Su culto está aburrido. Y ocho veces en el libro, cuando Dios les hace un cargo, le contestan con la misma sílaba frívola: <em>"¿Cómo? ¿En qué? ¿Cuándo?"</em></p>
+
+        <p>Escuche el intercambio de apertura. <em>"Yo os he amado, dice Jehová. Y dijisteis: ¿En qué nos has amado?"</em> (Malaquías 1:2). El milagro nunca es que Dios pase por alto al infiel. El milagro es que Dios alguna vez ame al fiel — que lo ame a usted y a mí en absoluto. Lea su propia vida a la luz de ese intercambio y el asombro se duplica.</p>
+
+        <p>Luego viene el culto aburrido. <em>"¡Oh qué trabajo!"</em>, dicen del servicio de Dios, oliendo Su altar con desdén (Malaquías 1:13). Una mañana un veterano maestro de Biblia conducía en el tráfico pesado de Los Ángeles y miró las caras de los conductores en los autos vecinos — cada rostro apagado, temiendo el día, cumpliendo los gestos. Se volvió a su hija y le dijo: "Mira a esa gente. Están aburridos hasta el alma. Lo peor del mundo es pasar la vida haciendo lo que detestas." Luego añadió: "E ir a la iglesia es exactamente así de aburrido para mucha gente." Cuando el corazón se va, la forma se vuelve fastidio. Malaquías dijo que era así en 450 a.C. No es distinto en 2026.</p>
+
+        <p>Luego viene el famoso pasaje del diezmo. <em>"¿Robará el hombre a Dios? Pues vosotros me habéis robado. Y dijisteis: ¿En qué te hemos robado? Los diezmos y las primicias"</em> (Malaquías 3:8). Una pequeña iglesia en un país misionero tenía sus libros tan desordenados que los diáconos, desesperados, le pidieron a un tendero chino con cabeza para los números que se hiciera cargo de las cuentas. Aceptó, con una condición: nadie pediría informe hasta la próxima Asamblea Anual. Al año siguiente llegó el informe. La hipoteca de cinco mil dólares estaba pagada. Dos mil habían ido a misiones. Un saldo de $1,253 reposaba en el banco. La congregación quedó atónita. <em>"¿Cómo lo logró?"</em>, preguntó alguien. El tendero respondió: <em>"Todos ustedes compran abarrotes en mi tienda, ¿sí? Y todos quieren crédito, ¿sí? Y yo les doy crédito, ¿sí? Y a fin de mes les mando la cuenta, ¿sí? Y no pueden leer mi letra, ¿sí? Y yo agrego diez por ciento a cada cuenta, ¿sí? Y todos han pagado cada cuenta, ¿sí? Bueno, todos ustedes han estado diezmando por un año. ¡Alabado sea el Señor, sí!"</em> El principio de Dios es más antiguo que Malaquías: <em>"Traed todos los diezmos al alfolí… y probadme ahora en esto… si no os abriré las ventanas de los cielos, y derramaré sobre vosotros bendición hasta que sobreabunde"</em> (Malaquías 3:10).</p>
+
+        <p>Y entonces viene una de las grandes anclas de la Biblia. <em>"Porque yo Jehová, no me mudo"</em> (Malaquías 3:6). Voltaire dijo que el nombre de Cristo sería olvidado en cien años; Voltaire está muerto, y la mismísima casa donde escribió esa línea fue durante años un depósito de Biblias. Tom Paine escribió <em>La Edad de la Razón</em> contra Cristo; Paine murió ebrio, y Cristo sigue marchando. Charles Bradlaugh de Inglaterra gastó una fortuna en destruir la fe; fue enterrado sin canto ni oración, y Cristo sigue marchando. Robert Ingersoll truenó contra el evangelio en plataformas norteamericanas; el mundo casi ha olvidado su nombre, y Cristo sigue marchando. <em>Yo no me mudo.</em> Caen los imperios, se desvanecen las filosofías, los quemadores de Biblias se queman ellos mismos. Él permanece.</p>
+
+        <p>El libro cierra alrededor de la figura de tres mensajeros. El primero es Leví, el sacerdote fiel que enseña la ley (Malaquías 2:7). El segundo es el precursor: <em>"He aquí, yo envío mi mensajero, el cual preparará el camino delante de mí"</em> (Malaquías 3:1a) — cumplido cuatrocientos años después en Juan el Bautista. El tercero es el Señor mismo: <em>"y vendrá súbitamente a su templo el Señor a quien vosotros buscáis, y el ángel del pacto"</em> (Malaquías 3:1b) — el Nuevo Pacto que Jesús inauguraría sobre una copa de vino en una mesa de Pascua. La última palabra del Antiguo Testamento es la palabra <em>maldición</em> (Malaquías 4:6). Las últimas palabras del Nuevo Testamento son <em>"la gracia de nuestro Señor Jesucristo sea con todos vosotros. Amén"</em> (Apocalipsis 22:21). Lo que está entre esas dos palabras es el evangelio entero.</p>
+
+        <h2>V. Doce linternas, una estrella</h2>
+        <p>Vea a Los Doce como una sola pintura: doce hombres con doce linternas, caminando por doce caminos distintos, todos convergiendo en una estrella sobre Belén. Oseas trae el amor. Joel trae el Espíritu. Amós trae la justicia. Abdías trae el reino. Jonás trae las naciones. Miqueas trae la aldea. Nahúm trae la advertencia. Habacuc trae la fe. Sofonías trae la canción. Hageo trae el templo. Zacarías trae al Rey en el asno. Y Malaquías, la última linterna de la noche, trae el amanecer. <em>"Mas a vosotros los que teméis mi nombre, nacerá el Sol de justicia, y en sus alas traerá salud"</em> (Malaquías 4:2).</p>
+
+        <p>Entonces se apagan las luces del Antiguo Testamento y los cielos quedan en silencio durante cuatrocientos años. Generaciones nacen y mueren. Imperios se levantan y caen. Las lámparas en el templo titilan pero no habla profeta. Y entonces, en una colina a las afueras de una pequeña aldea de Judea, a un viejo sacerdote llamado Zacarías se le dice que va a tener un hijo que irá delante del Señor <em>"con el espíritu y virtud de Elías"</em> (Lucas 1:17). El último párrafo de Malaquías se ha cumplido. El Sol está saliendo. Los Doce siempre tuvieron razón. Y el Señor a quien Su pueblo buscaba ha venido, súbitamente, a Su templo, con salud en Sus alas — para usted, y para mí, y para todo el mundo cansado.</p>
+
+        <p>Y el Hilo Escarlata, después de doce largas estaciones desde el Edén hasta una fuente de la era persa, está a un solo versículo de su atadura final. Doce estaciones. Doce linternas. Un Cordero aún por nombrar. La estación decimotercera y última del hilo espera en la orilla de un río llamado Jordán — y la próxima unidad nos llevará allí.</p>
+    </div>
+</div>
+
+<!-- TRACK BANNER + EXAM -->
+<div class="card">
+    <h2><span class="lang-en">Unit 12 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 12 — 30 Preguntas</span></h2>
+    <div class="track-banner" id="trackBanner"></div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button class="action-btn" id="submitExamBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="action-btn reset" id="resetExamBtn"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+    </div>
+    <div id="examResult" class="exam-result" style="display:none;"></div>
+</div>
+
+</div>
+
+<script>
+const COURSE_KEY = 'cts_ots_progress';
+const STUDENT_KEY = 'cts_student';
+const UNIT_NUM = 12;
+const TOTAL_UNITS = 13;
+const NEXT_UNIT_HREF = 'CTSUnit13.html';
+const PREV_UNIT_HREF = 'CTSUnit11.html';
+const UNIT_PASSED_KEY = 'cts_ots_unit12_passed';
+const UNIT_STATE_KEY = 'cts_ots_unit12_state';
+const LOCKOUT_KEY = 'cts_ots_unit12_lockout';
+const PASS_THRESHOLD_MC = 18;
+const PASS_THRESHOLD_SA = 9;
+const LOCKOUT_MS = 15 * 60 * 1000; // legacy ceiling (Masters); see lockMinutes()
+// Track-aware review wait: gentle 2-min pause for lay/Certificate, full 15 min for Masters.
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+function lockoutMs() { return lockMinutes() * 60 * 1000; }
+const REDIRECT_MS = 3000;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_ots_unit12_mc_passed';
+const SA_LOCK_KEY = 'cts_ots_unit12_sa_lockout';
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = new Array(20).fill(false);
+let unitPassed = localStorage.getItem(UNIT_PASSED_KEY) === 'true';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10)
+        : parseInt(localStorage.getItem(LOCKOUT_KEY) || '0', 10);
+}
+let lockUntil = activeLockUntil();
+let progress = JSON.parse(localStorage.getItem(COURSE_KEY) || '{}');
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+
+function getTrack() { if (student.program === 'Master of Divinity') return 'mdiv';
+    if (student.program === 'Master of Theology') return 'thm';
+    return 'cert'; }
+function isMDiv() { return getTrack() === 'mdiv'; }
+function isMastersLevel() { const t = getTrack(); return t === 'mdiv' || t === 'thm'; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(`cts_ots_unit${i}_passed`) === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+const nextBtn = document.getElementById('nextUnitBtn');
+if (nextBtn) nextBtn.onclick = () => {
+    if (unitPassed) location.href = NEXT_UNIT_HREF;
+    else alert(currentLang === 'en' ? 'Please pass Unit 12 first.' : 'Por favor apruebe la Unidad 12 primero.');
+};
+const prevBtn = document.getElementById('prevUnitBtn');
+if (prevBtn) prevBtn.onclick = () => { location.href = PREV_UNIT_HREF; };
+
+function loadReg() {
+    let saved = localStorage.getItem(STUDENT_KEY);
+    if (saved) {
+        student = JSON.parse(saved);
+        const n=document.getElementById('studentName'); if(n) n.value = student.name || '';
+        const e=document.getElementById('studentEmail'); if(e) e.value = student.email || '';
+        const c=document.getElementById('studentCountry'); if(c) c.value = student.country || '';
+        const p=document.getElementById('studentProgram'); if(p) p.value = student.program || 'Certificate of Ministry';
+    }
+}
+function saveReg() {
+    const n=document.getElementById('studentName'); if(n) student.name = n.value.trim();
+    const e=document.getElementById('studentEmail'); if(e) student.email = e.value.trim();
+    const c=document.getElementById('studentCountry'); if(c) student.country = c.value.trim();
+    const p=document.getElementById('studentProgram'); if(p) student.program = p.value;
+    if (student.name && student.email) localStorage.setItem(STUDENT_KEY, JSON.stringify(student));
+}
+['studentName','studentEmail','studentCountry'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.addEventListener('change', saveReg);
+});
+const progSel = document.getElementById('studentProgram');
+if (progSel) progSel.addEventListener('change', () => { saveReg(); renderTrackBanner(); renderQuestions(); });
+
+function renderTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    if (!banner) return;
+    if (isMastersLevel()) {
+        banner.innerHTML = currentLang === 'en'
+            ? ('<strong>' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ' Track:</strong> Answer all 30 questions. To pass you need <strong>18/20</strong> multiple choice <em>and</em> <strong>9/10</strong> short answer, judged independently. Short answers may be written in English or Spanish.')
+            : ('<strong>Pista ' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ':</strong> Responda las 30 preguntas. Para aprobar necesita <strong>18/20</strong> en opción múltiple <em>y</em> <strong>9/10</strong> en respuesta corta, evaluadas independientemente. Las respuestas cortas pueden escribirse en inglés o español.');
+    } else {
+        banner.innerHTML = currentLang === 'en'
+            ? '<strong>Certificate Track:</strong> Answer questions 1–20 (multiple choice). To pass you need <strong>18/20</strong> (90%). Short-answer questions are optional practice and not graded.'
+            : '<strong>Pista Certificado:</strong> Responda las preguntas 1–20 (opción múltiple). Para aprobar necesita <strong>18/20</strong> (90%). Las preguntas de respuesta corta son práctica opcional y no se califican.';
+    }
+}
+
+function saveState() {
+    localStorage.setItem(UNIT_STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers, mcRevealed }));
+}
+function loadState() {
+    const raw = localStorage.getItem(UNIT_STATE_KEY);
+    if (!raw) return;
+    try {
+        const s = JSON.parse(raw);
+        if (Array.isArray(s.mcAnswers)) mcAnswers = s.mcAnswers;
+        if (Array.isArray(s.kwAnswers)) kwAnswers = s.kwAnswers;
+        if (Array.isArray(s.mcRevealed)) mcRevealed = s.mcRevealed;
+    } catch (e) {}
+}
+
+const mcQuestions = [
+    { id:1, en:"1. The image for the Twelve Minor Prophets is:", es:"1. La imagen para los Doce Profetas Menores es:",
+      optionsEn:["Twelve men on twelve hilltops, all watching for the same sunrise","Twelve trumpets sounding the same note","Twelve candlesticks in one temple","Twelve gates of Jerusalem"],
+      optionsEs:["Doce hombres en doce colinas, todos vigilando el mismo amanecer","Doce trompetas tocando una misma nota","Doce candeleros en un templo","Doce puertas de Jerusalén"], correct:"A",
+      fcEn:"Correct. Different hilltops, different accents, different tempers — all watching for the Sun of Righteousness.",
+      fcEs:"Correcto. Colinas diferentes, acentos diferentes, temperamentos diferentes — todos vigilando al Sol de justicia.",
+      fiEn:"The Twelve are like twelve men on twelve hilltops over 400 years, all watching for the coming Messiah.",
+      fiEs:"Los Doce son como doce hombres en doce colinas durante 400 años, todos vigilando al Mesías venidero." },
+    { id:2, en:"2. Hosea's marriage to Gomer is best understood as:", es:"2. El matrimonio de Oseas con Gomer se entiende mejor como:",
+      optionsEn:["A living parable of God's covenant love for unfaithful Israel","A failed prophetic experiment","A warning against bad marriages","A symbol of the temple's decline"],
+      optionsEs:["Una parábola viva del amor pactal de Dios por un Israel infiel","Un experimento profético fallido","Una advertencia contra los malos matrimonios","Un símbolo del declive del templo"], correct:"A",
+      fcEn:"Correct. Hosea buying Gomer back at the slave block for fifteen shekels is exactly what God is doing for an unfaithful Israel and what Christ would do for an unfaithful Bride at the Cross.",
+      fcEs:"Correcto. Oseas comprando a Gomer en el mercado de esclavos por quince siclos es exactamente lo que Dios hace por un Israel infiel y lo que Cristo haría por una Esposa infiel en la Cruz.",
+      fiEn:"Hosea's whole book is the running commentary on what his redemption of Gomer means about God's love for His people.",
+      fiEs:"Todo el libro de Oseas es el comentario corrido de lo que su redención de Gomer significa sobre el amor de Dios por Su pueblo." },
+    { id:3, en:"3. Hosea bought Gomer back from the slave block for:", es:"3. Oseas compró de vuelta a Gomer del mercado de esclavos por:",
+      optionsEn:["Fifteen shekels and a homer and a half of barley","Thirty pieces of silver","A flock of sheep","Six talents of gold"],
+      optionsEs:["Quince siclos y un homer y medio de cebada","Treinta piezas de plata","Un rebaño de ovejas","Seis talentos de oro"], correct:"A",
+      fcEn:"Correct. Less than half the normal price of a slave (Exodus 21:32). Sin had taken its toll on her market value — and God paid it anyway.",
+      fcEs:"Correcto. Menos de la mitad del precio normal de un esclavo (Éxodo 21:32). El pecado le había rebajado el valor — y Dios pagó de todos modos.",
+      fiEn:"Hosea 3:2 — fifteen shekels plus a homer-and-a-half of barley. A discounted price for a damaged life. The gospel in a price tag.",
+      fiEs:"Oseas 3:2 — quince siclos más un homer y medio de cebada. Precio rebajado para una vida dañada. El evangelio en una etiqueta de precio." },
+    { id:4, en:"4. Amos preached that empty religion which does not produce justice is:", es:"4. Amós predicó que la religión vacía que no produce justicia es:",
+      optionsEn:["An offering acceptable to God","A regrettable habit","A neutral matter","A stink in God's nostrils"],
+      optionsEs:["Una ofrenda aceptable a Dios","Un hábito lamentable","Un asunto neutral","Hedor en la nariz de Dios"], correct:"D",
+      fcEn:"Correct. <em>Let justice run down like water, and righteousness like a mighty stream</em> (Amos 5:24). Worship without justice is fraud.",
+      fcEs:"Correcto. <em>Corra el juicio como las aguas, y la justicia como impetuoso arroyo</em> (Amós 5:24). La adoración sin justicia es fraude.",
+      fiEn:"Amos was a shepherd-prophet sent north to a wealthy elite. His burden was social justice and authentic worship.",
+      fiEs:"Amós era pastor-profeta enviado al norte a una élite rica. Su carga era la justicia social y la adoración auténtica." },
+    { id:5, en:"5. Jonah's central problem was:", es:"5. El problema central de Jonás era:",
+      optionsEn:["The storm","The fish","His heart — he did not want Nineveh forgiven","Nineveh's language"],
+      optionsEs:["La tormenta","El pez","Su corazón — no quería que Nínive fuera perdonada","El idioma de Nínive"], correct:"C",
+      fcEn:"Correct. Jonah is a missionary book and a warning against tribal religion. God's mercy reaches every nation that will repent.",
+      fcEs:"Correcto. Jonás es un libro misionero y advertencia contra la religión tribal. La misericordia de Dios alcanza a toda nación que se arrepienta.",
+      fiEn:"Jonah's real problem was not the storm or the fish but his unwillingness to see God's mercy extended to his enemies.",
+      fiEs:"El problema real de Jonás no era la tormenta ni el pez sino su negativa a ver la misericordia de Dios extendida a sus enemigos." },
+    { id:6, en:"6. Joel's prophecy of the Spirit poured out 'on all flesh' was fulfilled at:", es:"6. La profecía de Joel del Espíritu derramado 'sobre toda carne' se cumplió en:",
+      optionsEn:["Mount Sinai","The Babylonian exile's end","Babylon's fall","Pentecost (Acts 2)"],
+      optionsEs:["El Monte Sinaí","El fin del exilio babilónico","La caída de Babilonia","Pentecostés (Hechos 2)"], correct:"D",
+      fcEn:"Correct. Peter stood up at Pentecost and said, <em>'This is what was spoken by the prophet Joel'</em> (Acts 2:16). Sons and daughters, old and young — every kind of believer.",
+      fcEs:"Correcto. Pedro se levantó en Pentecostés y dijo: <em>'Esto es lo dicho por el profeta Joel'</em> (Hechos 2:16). Hijos e hijas, viejos y jóvenes — toda clase de creyente.",
+      fiEn:"Joel 2:28–29 → Acts 2:16–21 — the ongoing fulfillment of Joel's prophecy in the church age.",
+      fiEs:"Joel 2:28–29 → Hechos 2:16–21 — el cumplimiento continuo de la profecía de Joel en la era de la iglesia." },
+    { id:7, en:"7. Micah 5:2 prophesies that the Messiah will be born in:", es:"7. Miqueas 5:2 profetiza que el Mesías nacerá en:",
+      optionsEn:["Jerusalem","Nazareth","Bethlehem Ephrathah","Hebron"],
+      optionsEs:["Jerusalén","Nazaret","Belén Efrata","Hebrón"], correct:"C",
+      fcEn:"Correct. Seven hundred years before Christmas, Micah named the village. When the Magi came to Herod, the priests opened their scrolls and read this verse.",
+      fcEs:"Correcto. Setecientos años antes de la Navidad, Miqueas nombró la aldea. Cuando los magos llegaron a Herodes, los sacerdotes abrieron sus rollos y leyeron este versículo.",
+      fiEn:"Micah 5:2 — one of the most precise messianic prophecies in the Bible, fulfilled in Christ's birth in Bethlehem.",
+      fiEs:"Miqueas 5:2 — una de las profecías mesiánicas más precisas de la Biblia, cumplida en el nacimiento de Cristo en Belén." },
+    { id:8, en:"8. Micah 6:8 summarizes what God requires in three things:", es:"8. Miqueas 6:8 resume lo que Dios requiere en tres cosas:",
+      optionsEn:["Sacrifice, prayer, study","Believe, obey, witness","Tithe, fast, pray","Do justly, love mercy, walk humbly with God"],
+      optionsEs:["Sacrificio, oración, estudio","Creer, obedecer, testificar","Diezmar, ayunar, orar","Hacer justicia, amar misericordia, andar humildemente con Dios"], correct:"D",
+      fcEn:"Correct. Three things — and all of them in the heart, not the hands. The great summary of personal religion.",
+      fcEs:"Correcto. Tres cosas — y todas en el corazón, no en las manos. El gran resumen de la religión personal.",
+      fiEn:"Micah 6:8 — the most concise summary of the prophets' ethical demand: justice, mercy, humility before God.",
+      fiEs:"Miqueas 6:8 — el resumen más conciso de la demanda ética de los profetas: justicia, misericordia, humildad ante Dios." },
+    { id:9, en:"9. Habakkuk 2:4 — 'The just shall live by his faith' — is quoted in the New Testament:", es:"9. Habacuc 2:4 — 'El justo por su fe vivirá' — se cita en el Nuevo Testamento:",
+      optionsEn:["Once","Twice","Three times (Romans, Galatians, Hebrews)","Seven times"],
+      optionsEs:["Una vez","Dos veces","Tres veces (Romanos, Gálatas, Hebreos)","Siete veces"], correct:"C",
+      fcEn:"Correct. Romans 1:17, Galatians 3:11, Hebrews 10:38. The whole Reformation was the recovery of one sentence by one prophet.",
+      fcEs:"Correcto. Romanos 1:17, Gálatas 3:11, Hebreos 10:38. Toda la Reforma fue la recuperación de una sola oración de un solo profeta.",
+      fiEn:"Habakkuk 2:4 is the foundation verse for justification by faith alone — the keystone of Paul's gospel and the Reformation's recovery.",
+      fiEs:"Habacuc 2:4 es el versículo fundamento de la justificación solo por fe — clave del evangelio de Pablo y de la recuperación de la Reforma." },
+    { id:10, en:"10. Zephaniah 3:17 portrays God as One who:", es:"10. Sofonías 3:17 retrata a Dios como Aquel que:",
+      optionsEn:["Watches in silent disapproval","Hides His face permanently","Counts every offense","Rejoices over His people with singing"],
+      optionsEs:["Vigila en desaprobación silenciosa","Esconde Su rostro permanentemente","Cuenta cada ofensa","Se regocija sobre Su pueblo con cantar"], correct:"D",
+      fcEn:"Correct. The God who comes in judgment is the God who sings over His people. The same lips that pronounce woe break into song over the redeemed.",
+      fcEs:"Correcto. El Dios que viene en juicio es el Dios que canta sobre Su pueblo. Los mismos labios que pronuncian ay rompen en canción sobre los redimidos.",
+      fiEn:"Zephaniah 3:17 — one of the tenderest pictures of God in the Old Testament: He quiets us with His love and rejoices over us with singing.",
+      fiEs:"Sofonías 3:17 — uno de los retratos más tiernos de Dios en el AT: nos aquieta con Su amor y se regocija sobre nosotros con cantar." },
+    { id:11, en:"11. Haggai's central message to the returned exiles was:", es:"11. El mensaje central de Hageo a los exiliados retornados fue:",
+      optionsEn:["Rebuild the temple — finish God's house","Rebuild Jerusalem's walls","Restart the sacrifices","Renew the Sabbath"],
+      optionsEs:["Reedificar el templo — terminar la casa de Dios","Reconstruir los muros de Jerusalén","Reiniciar los sacrificios","Renovar el día de reposo"], correct:"A",
+      fcEn:"Correct. <em>Is it time for you yourselves to dwell in your paneled houses, and this temple to lie in ruins?</em> (Haggai 1:4). And the greater glory would be Christ.",
+      fcEs:"Correcto. <em>¿Es para vosotros tiempo de habitar en vuestras casas artesonadas, y esta casa está desierta?</em> (Hageo 1:4). Y la gloria mayor sería Cristo.",
+      fiEn:"Haggai's four-month ministry centered on getting the second temple finished. Christ would later walk in its courts as the greater glory.",
+      fiEs:"El ministerio de cuatro meses de Hageo se centró en terminar el segundo templo. Cristo caminaría luego por sus atrios como la mayor gloria." },
+    { id:12, en:"12. Zechariah 9:9 prophesies the Messiah coming to Jerusalem:", es:"12. Zacarías 9:9 profetiza al Mesías viniendo a Jerusalén:",
+      optionsEn:["On a war horse","Walking on water","In a chariot of fire","Lowly, riding on a donkey"],
+      optionsEs:["En un caballo de guerra","Caminando sobre el agua","En un carro de fuego","Humilde, cabalgando sobre un asno"], correct:"D",
+      fcEn:"Correct. This is the verse Matthew quotes on Palm Sunday. Five centuries before the cross, Zechariah saw the King on the colt.",
+      fcEs:"Correcto. Este es el versículo que Mateo cita en el Domingo de Ramos. Cinco siglos antes de la cruz, Zacarías vio al Rey sobre el pollino.",
+      fiEn:"Zechariah 9:9 → Matthew 21:5 — Palm Sunday's anchor verse, written five centuries early.",
+      fiEs:"Zacarías 9:9 → Mateo 21:5 — el versículo ancla del Domingo de Ramos, escrito cinco siglos antes." },
+    { id:13, en:"13. Within the Scarlet Thread of redemption, Zechariah 12:10 ('they shall look on Me whom they pierced') marks:", es:"13. Dentro del Hilo Escarlata de la redención, Zacarías 12:10 ('mirarán a mí, a quien traspasaron') marca:",
+      optionsEn:["The first station of the thread","The eleventh station — the wound that the prior ten stations were pointing to","An unrelated prophecy","Only a poetic image"],
+      optionsEs:["La primera estación del hilo","La estación undécima — la herida a la cual apuntaban las diez estaciones anteriores","Una profecía no relacionada","Solo una imagen poética"], correct:"B",
+      fcEn:"Correct. Eden, Abel, Noah, Moriah, Passover, Yom Kippur, the bronze serpent, Rahab's cord, Solomon's temple, Isaiah 53 — and now the wound itself, named.",
+      fcEs:"Correcto. Edén, Abel, Noé, Moriah, Pascua, Yom Kippur, la serpiente de bronce, el cordón de Rahab, el templo de Salomón, Isaías 53 — y ahora la herida misma, nombrada.",
+      fiEn:"Zechariah 12:10 is the 11th station of the Scarlet Thread, where the Lord Himself is the pierced One the prior stations have been pointing to.",
+      fiEs:"Zacarías 12:10 es la 11ª estación del Hilo Escarlata, donde el Señor mismo es el Traspasado al cual apuntaban las estaciones anteriores." },
+    { id:14, en:"14. Zechariah 13:1 — 'a fountain shall be opened… for sin and for uncleanness' — marks the Scarlet Thread's:", es:"14. Zacarías 13:1 — 'habrá manantial abierto… para el pecado y la inmundicia' — marca la estación del Hilo Escarlata:",
+      optionsEn:["End","First wash","Twelfth station — the cleansing flow from the pierced One","Tenth station"],
+      optionsEs:["Fin","Primera lavadura","Duodécima estación — el flujo limpiador del Traspasado","Décima estación"], correct:"C",
+      fcEn:"Correct. The wound of chapter 12 becomes the fountain of chapter 13. Scarlet sin turned white by blood from Immanuel's veins.",
+      fcEs:"Correcto. La herida del capítulo 12 se vuelve manantial en el capítulo 13. Pecado escarlata vuelto blanco por sangre de las venas de Emanuel.",
+      fiEn:"Zechariah 13:1 is the 12th station — the cleansing fountain that flows from the wound named in 12:10.",
+      fiEs:"Zacarías 13:1 es la 12ª estación — el manantial limpiador que fluye de la herida nombrada en 12:10." },
+    { id:15, en:"15. Malachi's name means:", es:"15. El nombre Malaquías significa:",
+      optionsEn:["My messenger","My prince","My salvation","My beloved"],
+      optionsEs:["Mi mensajero","Mi príncipe","Mi salvación","Mi amado"], correct:"A",
+      fcEn:"Correct. He preaches roughly a hundred years after the first return, the last messenger before the four-hundred-year silence.",
+      fcEs:"Correcto. Predica cerca de cien años después del primer retorno, el último mensajero antes del silencio de cuatrocientos años.",
+      fiEn:"Malachi means 'my messenger' — fitting for the last prophet before the long silence that ends with John the Baptist.",
+      fiEs:"Malaquías significa 'mi mensajero' — apropiado para el último profeta antes del largo silencio que termina con Juan el Bautista." },
+    { id:16, en:"16. Malachi 3:6 anchors hope on the truth that:", es:"16. Malaquías 3:6 ancla la esperanza en la verdad de que:",
+      optionsEn:["The temple is rebuilt","I am the LORD, I do not change","Israel will never sin again","Babylon will not rise again"],
+      optionsEs:["El templo es reedificado","Yo Jehová no me mudo","Israel nunca volverá a pecar","Babilonia no volverá a levantarse"], correct:"B",
+      fcEn:"Correct. Empires fall, philosophies fade, Bible-burners burn out. He stands.",
+      fcEs:"Correcto. Caen imperios, se desvanecen filosofías, se consumen los quemadores de Biblias. Él permanece.",
+      fiEn:"Malachi 3:6 — God's unchangeableness is the anchor for the survival of His unfaithful people.",
+      fiEs:"Malaquías 3:6 — la inmutabilidad de Dios es el ancla para la supervivencia de Su pueblo infiel." },
+    { id:17, en:"17. Malachi 4:2 calls the coming Messiah:", es:"17. Malaquías 4:2 llama al Mesías venidero:",
+      optionsEn:["The Star of Jacob","The Sun of Righteousness with healing in His wings","The Rock of Ages","The Lion of Judah"],
+      optionsEs:["La Estrella de Jacob","El Sol de justicia con salud en Sus alas","La Roca de los Siglos","El León de Judá"], correct:"B",
+      fcEn:"Correct. The last lantern of the Twelve brings the sunrise. The eastern sky is already glowing.",
+      fcEs:"Correcto. La última linterna de Los Doce trae el amanecer. El cielo del oriente ya brilla.",
+      fiEn:"Malachi 4:2 — the closing image of the OT prophets: a sunrise that will heal everything it touches.",
+      fiEs:"Malaquías 4:2 — la imagen final de los profetas del AT: un amanecer que sanará todo lo que toque." },
+    { id:18, en:"18. The last word of the Old Testament (Malachi 4:6) is:", es:"18. La última palabra del Antiguo Testamento (Malaquías 4:6) es:",
+      optionsEn:["Hope","Curse","Joy","Faith"],
+      optionsEs:["Esperanza","Maldición","Gozo","Fe"], correct:"B",
+      fcEn:"Correct. The OT ends with the word <em>curse</em>; the NT ends with <em>grace</em>. What stands between them is the entire gospel.",
+      fcEs:"Correcto. El AT termina con la palabra <em>maldición</em>; el NT termina con <em>gracia</em>. Lo que está entre ellos es todo el evangelio.",
+      fiEn:"The last word of the OT (Mal 4:6) is 'curse'; the last words of the NT (Rev 22:21) are 'the grace of our Lord Jesus Christ.'",
+      fiEs:"La última palabra del AT (Mal 4:6) es 'maldición'; las últimas palabras del NT (Apoc 22:21) son 'la gracia de nuestro Señor Jesucristo.'" },
+    { id:19, en:"19. The 'Twelve Lanterns, One Star' image teaches that the Minor Prophets:", es:"19. La imagen de 'Doce linternas, una estrella' enseña que los Profetas Menores:",
+      optionsEn:["Contradict each other","All converge on one star over Bethlehem","Should be read separately","Are minor in importance"],
+      optionsEs:["Se contradicen entre sí","Todos convergen en una estrella sobre Belén","Deben leerse por separado","Son menores en importancia"], correct:"B",
+      fcEn:"Correct. Hosea brings the love, Joel the Spirit, Amos the justice, and so on — twelve lanterns all converging on one Christ.",
+      fcEs:"Correcto. Oseas trae el amor, Joel el Espíritu, Amós la justicia, y así — doce linternas todas convergiendo en un solo Cristo.",
+      fiEn:"Each of the Twelve contributes a distinct ray to the one Messianic light — all converging on Bethlehem.",
+      fiEs:"Cada uno de Los Doce contribuye un rayo distinto a la única luz mesiánica — todos convergiendo en Belén." },
+    { id:20, en:"20. After Malachi, the heavens were silent for:", es:"20. Después de Malaquías, los cielos quedaron en silencio durante:",
+      optionsEn:["Forty years","One hundred years","Four hundred years","One thousand years"],
+      optionsEs:["Cuarenta años","Cien años","Cuatrocientos años","Mil años"], correct:"C",
+      fcEn:"Correct. Four hundred years of silence — broken by an old priest named Zechariah being told he would have a son who would go before the Lord.",
+      fcEs:"Correcto. Cuatrocientos años de silencio — roto por un viejo sacerdote llamado Zacarías al que se le dijo que tendría un hijo que iría delante del Señor.",
+      fiEn:"The intertestamental silence between Malachi and the announcement to Zechariah (father of John the Baptist) is approximately 400 years.",
+      fiEs:"El silencio intertestamentario entre Malaquías y el anuncio a Zacarías (padre de Juan el Bautista) es aproximadamente 400 años." }
+];
+
+const kwQuestions = [
+    { id:21, en:"21. Explain how Hosea's marriage to Gomer pictures God's relationship with unfaithful Israel — and Christ's love for the Church.",
+      es:"21. Explique cómo el matrimonio de Oseas con Gomer retrata la relación de Dios con un Israel infiel — y el amor de Cristo por la Iglesia.",
+      kw_en:[["hosea"], ["gomer"], ["unfaithful", "adulterous", "prostitute", "harlot", "wayward"], ["slave", "slave block", "slavery", "bought back", "redeemed"], ["fifteen", "fifteen shekels", "price", "paid the price"], ["redemption", "redeem", "bought her back", "brought home"], ["christ", "cross", "christ and his bride", "love that won't let go"]],
+      kw_es:[["oseas"], ["gomer"], ["infiel", "adúltera", "prostituta", "ramera", "descarriada"], ["esclava", "mercado de esclavos", "esclavitud", "comprada", "redimida"], ["quince", "quince siclos", "precio", "pagó el precio"], ["redención", "redimir", "la compró", "traída a casa"], ["cristo", "cruz", "cristo y su esposa", "amor que no suelta"]],
+      modelEn:"Hosea is the saddest love story in the Bible. God commanded the prophet to marry Gomer. Whether she was already unfaithful at marriage or became unfaithful afterward is debated among Hebrew scholars, but faithless she was, bearing children with terrible names like Lo-Ammi ('Not My People'). When Gomer eventually slid from prostitution into slavery, God told Hosea to do the unthinkable: go again and love her. Hosea found her on a slave block, naked and cheap, and paid the price to buy her back and bring her home. The whole book is the commentary on that act: this is exactly what God does for unfaithful Israel, and exactly what Christ would do for His unfaithful Bride at the Cross. It pictures love that will not let go, promising, 'I will heal their backsliding, I will love them freely.'",
+      modelEs:"Oseas es la historia de amor más triste de la Biblia. Dios mandó al profeta casarse con Gomer. Si ya era infiel al casarse o se volvió infiel después es debatido entre los hebraístas, pero infiel fue, dando a luz hijos con nombres terribles como Lo-ammi ('No Pueblo Mío'). Cuando Gomer finalmente cayó de la prostitución a la esclavitud, Dios le dijo a Oseas que hiciera lo impensable: ir de nuevo y amarla. Oseas la halló en un mercado de esclavos, desnuda y barata, y pagó el precio para comprarla y traerla a casa. Todo el libro es el comentario de ese acto: esto es exactamente lo que Dios hace por el Israel infiel, y exactamente lo que Cristo haría por Su Esposa infiel en la Cruz. Retrata un amor que no suelta, prometiendo: 'Yo sanaré su rebelión, los amaré de pura gracia.'" },
+    { id:22, en:"22. Trace how Hosea 6:6 ('I desire mercy, not sacrifice') runs through the prophets and into Jesus's own teaching.",
+      es:"22. Trace cómo Hosea 6:6 ('misericordia quiero, y no sacrificio') recorre los profetas y entra en la enseñanza de Jesús.",
+      kw_en:[["mercy", "i desire mercy", "mercy not sacrifice", "love"], ["sacrifice", "not sacrifice", "burnt offerings", "ritual"], ["knowledge", "knowledge of god", "know god"], ["heart", "heart religion", "inward", "from the heart"], ["jesus", "christ"], ["matthew", "quoted in matthew", "matthew 9", "matthew 12"]],
+      kw_es:[["misericordia", "misericordia quiero", "misericordia no sacrificio", "amor"], ["sacrificio", "no sacrificio", "holocaustos", "ritual"], ["conocimiento", "conocimiento de dios", "conocer a dios"], ["corazón", "religión del corazón", "interior", "del corazón"], ["jesús", "cristo"], ["mateo", "citado en mateo", "mateo 9", "mateo 12"]],
+      modelEn:"Hosea 6:6 declares, 'For I desire mercy and not sacrifice, and the knowledge of God more than burnt offerings.' This single piercing verse runs through the prophets and into the Gospels: it is what God always wanted and what His people always failed to give — heart-religion over mere ritual. Empty sacrifice without mercy and the knowledge of God is worthless to Him. Jesus Himself quotes this verse twice in Matthew (9:13; 12:7), rebuking those who kept the forms of religion while neglecting compassion. The verse shows that God has always sought love and mercy from the heart rather than outward offerings, and Christ on the Cross is finally the full expression of the mercy God desired all along.",
+      modelEs:"Oseas 6:6 declara: 'Porque misericordia quiero, y no sacrificio, y conocimiento de Dios más que holocaustos.' Este único versículo penetrante recorre los profetas y llega a los Evangelios: es lo que Dios siempre quiso y lo que Su pueblo siempre dejó de dar — la religión del corazón por encima del mero ritual. El sacrificio vacío sin misericordia y conocimiento de Dios no le sirve de nada. Jesús mismo cita este versículo dos veces en Mateo (9:13; 12:7), reprendiendo a los que guardaban las formas de la religión mientras descuidaban la compasión. El versículo muestra que Dios siempre ha buscado amor y misericordia del corazón en vez de ofrendas externas, y Cristo en la Cruz es por fin la plena expresión de la misericordia que Dios deseó todo el tiempo." },
+    { id:23, en:"23. Describe the three pre-exilic prophets to Judah's contributions: Micah's three demands (6:8), Habakkuk's faith verse (2:4), and Zephaniah's singing God (3:17).",
+      es:"23. Describa las contribuciones de los tres profetas preexílicos a Judá: las tres demandas de Miqueas (6:8), el versículo de fe de Habacuc (2:4), y el Dios que canta de Sofonías (3:17).",
+      kw_en:[["justice", "do justly", "do justice", "justly"], ["mercy", "love mercy", "kindness"], ["humbly", "walk humbly", "humble", "micah 6:8"], ["faith", "just shall live by faith", "habakkuk", "justification"], ["singing", "rejoice over you with singing", "god sings", "song"], ["rejoice", "joy", "rejoice in the lord", "gladness"]],
+      kw_es:[["justicia", "hacer justicia", "justamente"], ["misericordia", "amar misericordia", "bondad"], ["humilde", "humillarte", "humildemente", "miqueas 6:8"], ["fe", "el justo por su fe vivirá", "habacuc", "justificación"], ["cántico", "se gozará sobre ti con cántico", "dios canta", "canción"], ["regocijar", "gozo", "gozarse en el señor", "alegría"]],
+      modelEn:"Among the pre-exilic prophets to Judah, Micah gives the great summary of personal religion in Micah 6:8: 'what does the LORD require of you but to do justly, to love mercy, and to walk humbly with your God?' — three demands, all of them seated in the heart rather than the hands. Habakkuk contributes the keystone of justification, 'the just shall live by his faith' (2:4), quoted three times in the New Testament and the spark of the Reformation; and he ends by rejoicing in the God of his salvation even though the fig tree does not blossom. Zephaniah contributes the picture of the singing God who, in the midst of His people, 'will rejoice over you with singing' (3:17) — the God who comes in judgment yet sings over the redeemed.",
+      modelEs:"Entre los profetas pre-exílicos a Judá, Miqueas da el gran resumen de la religión personal en Miqueas 6:8: '¿qué pide el SEÑOR de ti, sino hacer justicia, amar misericordia, y humillarte ante tu Dios?' — tres demandas, todas asentadas en el corazón más que en las manos. Habacuc aporta la piedra angular de la justificación, 'el justo por su fe vivirá' (2:4), citada tres veces en el Nuevo Testamento y la chispa de la Reforma; y termina regocijándose en el Dios de su salvación aunque la higuera no florezca. Sofonías aporta la imagen del Dios que canta, quien, en medio de Su pueblo, 'se gozará sobre ti con cántico' (3:17) — el Dios que viene en juicio pero canta sobre los redimidos." },
+    { id:24, en:"24. Explain Jonah as a missionary book and a warning against tribal religion.",
+      es:"24. Explique Jonás como un libro misionero y advertencia contra la religión tribal.",
+      kw_en:[["nineveh", "assyrian capital", "assyria"], ["mercy", "forgive", "god's compassion", "pity"], ["nations", "gentiles", "every nation", "father's heart"], ["repent", "repented", "turned"], ["tribal", "tribal religion", "warning against tribalism", "narrow"], ["missionary", "missionary book", "sent to preach", "reluctant prophet"]],
+      kw_es:[["nínive", "nineve", "capital asiria", "asiria"], ["misericordia", "perdonar", "compasión de dios", "compadecer"], ["naciones", "gentiles", "toda nación", "corazón del padre"], ["arrepentir", "se arrepintieron", "volvieron"], ["tribal", "religión tribal", "advertencia contra el tribalismo", "estrecha"], ["misionero", "libro misionero", "enviado a predicar", "profeta renuente"]],
+      modelEn:"Jonah is a missionary book and a warning against tribal religion. God sent Jonah east to preach to Nineveh, the cruel Assyrian capital, but he fled west to Tarshish, and the great fish brought him back. Jonah's real problem was not the storm or the fish but his heart: he did not want to preach to Nineveh because he feared God would forgive them — and he was right. They repented at his short sermon, and God spared the city. Jonah then sulked while God explained that He pities even people Jonah did not want pitied. The book is one of the clearest Old Testament pictures of the Father's heart for every nation, rebuking the tribal attitude that wants God's mercy only for one's own people. Jesus made Jonah a sign of His own resurrection.",
+      modelEs:"Jonás es un libro misionero y una advertencia contra la religión tribal. Dios envió a Jonás al este a predicar a Nínive, la cruel capital asiria, pero él huyó al oeste hacia Tarsis, y el gran pez lo trajo de vuelta. El verdadero problema de Jonás no era la tormenta ni el pez sino su corazón: no quería predicar a Nínive porque temía que Dios los perdonara — y tenía razón. Se arrepintieron ante su breve sermón, y Dios perdonó la ciudad. Jonás entonces se enojó mientras Dios explicaba que Él se compadece aun de gente que Jonás no quería que fuera compadecida. El libro es una de las imágenes más claras del Antiguo Testamento del corazón del Padre por cada nación, reprendiendo la actitud tribal que quiere la misericordia de Dios solo para los suyos. Jesús hizo de Jonás una señal de Su propia resurrección." },
+    { id:25, en:"25. Describe Zechariah's progressive vision of the coming Messiah: the King, the pierced One, the fountain.",
+      es:"25. Describa la visión progresiva de Zacarías del Mesías venidero: el Rey, el Traspasado, el manantial.",
+      kw_en:[["king", "king on a donkey", "your king comes"], ["donkey", "colt", "riding on a donkey", "palm sunday"], ["pierced", "look on me whom they pierced", "piercing"], ["fountain", "fountain opened", "cleansing fountain"], ["branch", "the branch", "righteous branch"], ["shepherd", "good shepherd", "valued at silver"], ["silver", "thirty pieces", "thirty pieces of silver", "potter"]],
+      kw_es:[["rey", "rey sobre un asno", "tu rey viene"], ["asno", "pollino", "cabalgando sobre un asno", "domingo de ramos"], ["traspasado", "mirarán a quien traspasaron", "traspaso"], ["fuente", "fuente abierta", "fuente de limpieza"], ["renuevo", "el renuevo", "renuevo justo"], ["pastor", "buen pastor", "valorado en plata"], ["plata", "treinta piezas", "treinta piezas de plata", "alfarero"]],
+      modelEn:"Zechariah's second half is among the most messianic in the Old Testament, giving a progressive vision of the coming Messiah. He is the Branch who is coming (3:8; 6:12). He is the King coming on a donkey: 'Behold, your King is coming to you... lowly and riding on a donkey' (9:9), the verse Matthew quotes on Palm Sunday. He is the good Shepherd valued at thirty pieces of silver thrown to the potter (11:12-13). And He is the pierced One: 'they will look on Me whom they pierced' (12:10), which John applies to the spear-thrust at Calvary. Then a fountain is opened for sin and uncleanness (13:1). Five centuries before the cross, Zechariah saw the King, the price, the wound, and the cleansing fountain.",
+      modelEs:"La segunda mitad de Zacarías está entre las más mesiánicas del Antiguo Testamento, dando una visión progresiva del Mesías venidero. Él es el Renuevo que viene (3:8; 6:12). Es el Rey que viene sobre un asno: 'He aquí tu Rey vendrá a ti... humilde, y cabalgando sobre un asno' (9:9), el versículo que Mateo cita el Domingo de Ramos. Es el buen Pastor valorado en treinta piezas de plata arrojadas al alfarero (11:12-13). Y es el Traspasado: 'mirarán a mí, a quien traspasaron' (12:10), que Juan aplica a la lanzada en el Calvario. Luego se abre una fuente para el pecado y la inmundicia (13:1). Cinco siglos antes de la cruz, Zacarías vio al Rey, el precio, la herida y la fuente de limpieza." },
+    { id:26, en:"26. Explain how Zechariah 12:10 and Zechariah 13:1 mark the eleventh and twelfth stations of the Scarlet Thread.",
+      es:"26. Explique cómo Zacarías 12:10 y Zacarías 13:1 marcan las estaciones once y doce del Hilo Escarlata.",
+      kw_en:[["pierced", "whom they pierced", "look on me", "piercing"], ["fountain", "fountain opened", "fountain for sin", "cleansing"], ["sin", "for sin"], ["uncleanness", "impurity", "cleansing"], ["cleansing", "washed", "made clean", "cleanse"], ["blood", "blood of the lamb", "fountain of blood"], ["eleventh", "eleventh station", "11th station"], ["twelfth", "twelfth station", "12th station"]],
+      kw_es:[["traspasado", "a quien traspasaron", "mirarán a mí", "traspaso"], ["fuente", "fuente abierta", "manantial", "fuente para el pecado", "limpieza"], ["pecado", "para el pecado"], ["inmundicia", "impureza", "limpieza"], ["limpieza", "lavado", "limpio", "limpiar"], ["sangre", "sangre del cordero", "fuente de sangre"], ["undécima", "undécima estación", "estación once"], ["duodécima", "duodécima estación", "estación doce"]],
+      modelEn:"Zechariah 12:10 marks the eleventh station of the Scarlet Thread: 'they will look on Me whom they pierced.' The pronoun is 'Me' and the speaker is the Lord Himself — the God of Israel pierced, hanging on a Roman cross. John saw it fulfilled at Calvary and quoted it, as did the angel in Revelation. Then Zechariah 13:1 opens the twelfth station: the piercing was not for nothing, for 'in that day a fountain shall be opened for the house of David... for sin and for uncleanness.' The wound of chapter 12 becomes the cleansing of chapter 13. The blood of the Lamb is a fountain, and the fountain is open so that whoever will may come and wash — the scarlet of sin made white at last.",
+      modelEs:"Zacarías 12:10 marca la undécima estación del Hilo Escarlata: 'mirarán a mí, a quien traspasaron.' El pronombre es 'mí' y el que habla es el Señor mismo — el Dios de Israel traspasado, colgado en una cruz romana. Juan lo vio cumplido en el Calvario y lo citó, igual que el ángel en Apocalipsis. Luego Zacarías 13:1 abre la duodécima estación: el traspaso no fue en vano, pues 'en aquel tiempo habrá un manantial abierto para la casa de David... para la limpieza del pecado y de la inmundicia.' La herida del capítulo 12 se vuelve la limpieza del capítulo 13. La sangre del Cordero es una fuente, y la fuente está abierta para que todo el que quiera venga y se lave — la grana del pecado hecha blanca por fin." },
+    { id:27, en:"27. Describe Malachi's diagnosis of the post-exilic community and explain why God says 'I do not change' (Malachi 3:6).",
+      es:"27. Describa el diagnóstico de Malaquías de la comunidad post-exílica y explique por qué Dios dice 'yo no me mudo' (Malaquías 3:6).",
+      kw_en:[["priests", "corrupt priests", "priesthood"], ["tithes", "robbing god", "offerings", "tithe"], ["worship", "bored worship", "weariness", "empty worship"], ["bored", "boring", "weariness", "going through motions"], ["change", "i do not change", "i am the lord", "unchanging", "does not change"], ["faithful", "faithfulness", "covenant love", "god's faithfulness"]],
+      kw_es:[["sacerdotes", "sacerdotes corruptos", "sacerdocio"], ["diezmos", "robar a dios", "ofrendas", "diezmo"], ["adoración", "adoración aburrida", "fastidio", "adoración vacía"], ["aburrido", "aburrida", "fastidio", "de rutina"], ["cambio", "no cambio", "yo el señor", "inmutable", "no cambia"], ["fiel", "fidelidad", "amor de pacto", "fidelidad de dios"]],
+      modelEn:"Malachi, the last word of the Old Testament, diagnoses a post-exilic community that had rebuilt the temple and walls but lost the plot. Their priests were corrupt, their offerings were leftovers, their tithes were missing, their marriages were broken, and their worship was bored — they sniffed at God's altar and called His services a weariness. Eight times when God laid a charge against them, they answered with a flippant 'How? In what way?' Against this, God says 'I am the LORD, I do not change' (Malachi 3:6) — and that unchanging faithfulness is the ground of hope. Empires fall and Bible-burners burn out, but He stands. Because God does not change, His covenant love and His promises remain sure even for an unfaithful people.",
+      modelEs:"Malaquías, la última palabra del Antiguo Testamento, diagnostica una comunidad post-exílica que había reedificado el templo y los muros pero había perdido el rumbo. Sus sacerdotes eran corruptos, sus ofrendas eran sobras, sus diezmos faltaban, sus matrimonios estaban rotos, y su adoración estaba aburrida — despreciaban el altar de Dios y llamaban Sus servicios un fastidio. Ocho veces, cuando Dios les presentaba un cargo, respondían con un frívolo '¿Cómo? ¿En qué?' Frente a esto, Dios dice 'Yo el SEÑOR no cambio' (Malaquías 3:6) — y esa fidelidad inmutable es el fundamento de la esperanza. Los imperios caen y los quemadores de Biblias se consumen, pero Él permanece. Porque Dios no cambia, Su amor de pacto y Sus promesas permanecen seguros aun para un pueblo infiel." },
+    { id:28, en:"28. Explain the three messengers of Malachi 2:7, 3:1a, and 3:1b — and how they trace from Levi to John the Baptist to Christ.",
+      es:"28. Explique los tres mensajeros de Malaquías 2:7, 3:1a y 3:1b — y cómo trazan de Leví a Juan el Bautista a Cristo.",
+      kw_en:[["levi", "faithful priest", "priest who teaches"], ["forerunner", "prepare the way", "my messenger", "messenger before me"], ["john", "john the baptist"], ["baptist", "john the baptist"], ["messenger", "three messengers", "messenger of the covenant"], ["covenant", "new covenant", "messenger of the covenant"], ["christ", "the lord", "lord comes to his temple", "messiah"]],
+      kw_es:[["leví", "levi", "sacerdote fiel", "sacerdote que enseña"], ["precursor", "preparar el camino", "mi mensajero", "mensajero delante de mí"], ["juan", "juan el bautista"], ["bautista", "juan el bautista"], ["mensajero", "tres mensajeros", "ángel del pacto", "mensajero del pacto"], ["pacto", "nuevo pacto", "mensajero del pacto"], ["cristo", "el señor", "el señor viene a su templo", "mesías"]],
+      modelEn:"Malachi closes around three messengers who trace from the past into the future. The first is Levi, the faithful priest whose lips should guard knowledge and teach the law (Malachi 2:7) — the ideal priest of the past. The second is the forerunner: 'Behold, I send My messenger, and he will prepare the way before Me' (3:1a) — fulfilled four hundred years later in John the Baptist, who came in the spirit and power of Elijah to prepare the Lord's way. The third is the Lord Himself: 'the Lord, whom you seek, will suddenly come to His temple, even the Messenger of the covenant' (3:1b) — Christ, who would inaugurate the New Covenant. So the three messengers move from the faithful priest, to the forerunner John, to the coming Christ, the Messenger of the covenant.",
+      modelEs:"Malaquías cierra en torno a tres mensajeros que van del pasado al futuro. El primero es Leví, el sacerdote fiel cuyos labios deben guardar el conocimiento y enseñar la ley (Malaquías 2:7) — el sacerdote ideal del pasado. El segundo es el precursor: 'He aquí, yo envío mi mensajero, el cual preparará el camino delante de mí' (3:1a) — cumplido cuatrocientos años después en Juan el Bautista, que vino con el espíritu y poder de Elías a preparar el camino del Señor. El tercero es el Señor mismo: 'vendrá súbitamente a su templo el Señor a quien buscáis, el ángel del pacto' (3:1b) — Cristo, que inauguraría el Nuevo Pacto. Así los tres mensajeros van del sacerdote fiel, al precursor Juan, al Cristo venidero, el Mensajero del pacto." },
+    { id:29, en:"29. Synthesize the Twelve Minor Prophets using the 'Twelve Lanterns, One Star' image. What does each contribute, and where do they converge?",
+      es:"29. Sintetice los Doce Profetas Menores usando la imagen 'Doce linternas, una estrella.' ¿Qué aporta cada uno, y dónde convergen?",
+      kw_en:[["lanterns", "twelve lanterns", "twelve men", "twelve lights"], ["star", "one star", "star over bethlehem"], ["bethlehem", "manger", "one star"], ["christ", "messiah", "sun of righteousness"], ["love", "hosea's love"], ["justice", "amos's justice"], ["spirit", "joel's spirit"], ["fountain", "zechariah's fountain", "king on the donkey"]],
+      kw_es:[["linternas", "doce linternas", "doce hombres", "doce luces"], ["estrella", "una estrella", "estrella sobre belén"], ["belén", "pesebre", "una estrella"], ["cristo", "mesías", "sol de justicia"], ["amor", "el amor de oseas"], ["justicia", "la justicia de amós"], ["espíritu", "el espíritu de joel"], ["fuente", "la fuente de zacarías", "rey sobre el asno"]],
+      modelEn:"The 'Twelve Lanterns, One Star' image pictures the Minor Prophets as twelve men with twelve lanterns walking down twelve different roads, all converging on one star over Bethlehem. Each carries something to the manger: Hosea brings the love, Joel the Spirit, Amos the justice, Obadiah the kingdom, Jonah the nations, Micah the village, Nahum the warning, Habakkuk the faith, Zephaniah the song, Haggai the temple, Zechariah the King on the donkey, and Malachi the sunrise — the Sun of Righteousness rising with healing in His wings. Though their hilltops, accents, and tempers differ, all twelve are watching for the same sunrise, the coming of the Messiah. Together they show that the whole varied witness of the Twelve points to one Christ.",
+      modelEs:"La imagen de 'Doce Linternas, Una Estrella' retrata a los Profetas Menores como doce hombres con doce linternas caminando por doce caminos distintos, todos convergiendo en una estrella sobre Belén. Cada uno lleva algo al pesebre: Oseas trae el amor, Joel el Espíritu, Amós la justicia, Abdías el reino, Jonás las naciones, Miqueas la aldea, Nahúm la advertencia, Habacuc la fe, Sofonías el cántico, Hageo el templo, Zacarías el Rey sobre el asno, y Malaquías el amanecer — el Sol de Justicia que se levanta con salvación en Sus alas. Aunque sus colinas, acentos y temperamentos difieren, los doce vigilan el mismo amanecer, la venida del Mesías. Juntos muestran que todo el variado testimonio de los Doce apunta a un solo Cristo." },
+    { id:30, en:"30. Explain the meaning of the four-hundred-year silence between Malachi and the announcement to old Zechariah (Luke 1:17). What does this teach about God's patience and timing?",
+      es:"30. Explique el significado del silencio de cuatrocientos años entre Malaquías y el anuncio al viejo Zacarías (Lucas 1:17). ¿Qué enseña sobre la paciencia y el momento oportuno de Dios?",
+      kw_en:[["four hundred", "four hundred years", "400 years"], ["silence", "silent", "heaven silent", "no prophet"], ["malachi", "last word", "end of old testament"], ["john", "john the baptist"], ["baptist", "john the baptist", "forerunner"], ["zechariah", "old priest", "priest zechariah"], ["sunrise", "sun of righteousness", "healing in his wings", "dawn"], ["fullness", "messiah comes", "the night ends", "sun rising"]],
+      kw_es:[["cuatrocientos", "cuatrocientos años", "400 años"], ["silencio", "silencioso", "cielo en silencio", "ningún profeta"], ["malaquías", "malaquias", "última palabra", "fin del antiguo testamento"], ["juan", "juan el bautista"], ["bautista", "juan el bautista", "precursor"], ["zacarías", "zacarias", "viejo sacerdote", "sacerdote zacarías"], ["amanecer", "sol de justicia", "salvación en sus alas", "alba"], ["plenitud", "viene el mesías", "la noche termina", "sol que se levanta"]],
+      modelEn:"The four-hundred-year silence is the gap between Malachi, the last word of the Old Testament, and the announcement of John the Baptist. Malachi's final paragraph promised that before the great Day, God would send His messenger, the forerunner in the spirit of Elijah, and that the Sun of Righteousness would rise with healing in His wings. Then the lights of the Old Testament go out and heaven is silent for four hundred years — generations born and dying, empires rising and falling, no prophet speaking. The silence finally breaks when an old priest named Zechariah is told he will have a son who will go before the Lord in the spirit and power of Elijah. The sunrise Malachi promised has come; the long night ends as the forerunner is announced and the Messiah draws near.",
+      modelEs:"El silencio de cuatrocientos años es el intervalo entre Malaquías, la última palabra del Antiguo Testamento, y el anuncio de Juan el Bautista. El párrafo final de Malaquías prometió que antes del gran Día, Dios enviaría a Su mensajero, el precursor en el espíritu de Elías, y que el Sol de Justicia se levantaría con salvación en Sus alas. Entonces las luces del Antiguo Testamento se apagan y el cielo queda en silencio por cuatrocientos años — generaciones que nacen y mueren, imperios que se levantan y caen, ningún profeta hablando. El silencio finalmente se rompe cuando a un viejo sacerdote llamado Zacarías se le dice que tendrá un hijo que irá delante del Señor con el espíritu y poder de Elías. El amanecer que Malaquías prometió ha llegado; la larga noche termina al anunciarse el precursor y acercarse el Mesías." }
+];
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed[idx]) {
+                btn.classList.add('locked');
+                if (letter === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2'; btn.style.borderColor = '#d4af37'; btn.style.fontWeight = '600';
+            }
+            btn.onclick = function() {
+                if (mcRevealed[idx] || unitPassed) return;
+                mcAnswers[idx] = letter;
+                mcRevealed[idx] = true;
+                saveState();
+                renderQuestions();
+            };
+            div.appendChild(btn);
+        });
+
+        if (mcRevealed[idx]) renderMCFeedback(div, q, idx, true);
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMastersLevel() ? ('Short Answer (Questions 21–30) — ' + (getTrack()==='thm' ? 'Master of Theology' : 'Master of Divinity') + ' (graded, 9/10 to pass)') : 'Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMastersLevel() ? ('Respuesta Corta (Preguntas 21–30) — ' + (getTrack()==='thm' ? 'Maestría en Teología' : 'Maestría en Divinidad') + ' (calificado, 9/10 para aprobar)') : 'Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here...' : 'Escriba su respuesta aquí...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.addEventListener('input', (e) => { kwAnswers[idx] = e.target.value; saveState(); });
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+
+        checkBtn.onclick = function() {
+            const result = gradeSA(q, textarea.value);
+            if (result.tooShort) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a sentence).' : 'Escriba una respuesta más completa (al menos una oración).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else if (result.pass) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? '✓ Your answer includes the key concepts.' : '✓ Su respuesta incluye los conceptos clave.';
+                feedbackDiv.className = 'feedback-text correct';
+            } else {
+                feedbackDiv.innerHTML = currentLang === 'en' ? `✗ Try to include more of: ${result.missing.join(', ')}.` : `✗ Intente incluir más de: ${result.missing.join(', ')}.`;
+                feedbackDiv.className = 'feedback-text incorrect';
+            }
+        };
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.cssText = 'display:none;margin-top:10px;padding:12px 14px;border-left:4px solid #c9a961;background:#fdf9ed;border-radius:3px;font-size:.92rem;line-height:1.5;';
+        const modelBtn = document.createElement('button');
+        modelBtn.className = 'small';
+        modelBtn.style.marginLeft = '6px';
+        modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+        modelBtn.onclick = function() {
+            if ((textarea.value || '').trim().length < 100) {
+                feedbackDiv.className = 'feedback-text incorrect';
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a sentence) — then you can compare it with the model.' : 'Escriba primero su propia respuesta (al menos una oración) — luego podrá compararla con el modelo.';
+                return;
+            }
+            if (modelBox.style.display === 'none') {
+                modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estúdiela:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+                modelBox.style.display = 'block';
+                modelBtn.textContent = currentLang === 'en' ? 'Hide model answer' : 'Ocultar respuesta modelo';
+            } else {
+                modelBox.style.display = 'none';
+                modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(modelBtn);
+        div.appendChild(feedbackDiv);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+    });
+}
+
+function renderMCFeedback(div, q, idx, skipRedraw) {
+    if (!skipRedraw) {
+        const buttons = div.querySelectorAll('.option');
+        buttons.forEach(btn => {
+            const letter = btn.textContent.charAt(0);
+            btn.classList.add('locked');
+            btn.classList.remove('correct', 'wrong');
+            if (letter === q.correct) btn.classList.add('correct');
+            else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+        });
+    }
+    let existing = div.querySelector('.feedback-text');
+    if (existing) existing.remove();
+    const fb = document.createElement('div');
+    const correct = (mcAnswers[idx] === q.correct);
+    fb.className = 'feedback-text ' + (correct ? 'correct' : 'incorrect');
+    if (correct) {
+        fb.innerHTML = '✓ ' + (currentLang === 'en' ? q.fcEn : q.fcEs);
+    } else {
+        const correctLetter = q.correct;
+        fb.innerHTML = (currentLang === 'en' ? `✗ Correct answer: ${correctLetter}. ` : `✗ Respuesta correcta: ${correctLetter}. `) + (currentLang === 'en' ? q.fiEn : q.fiEs);
+    }
+    div.appendChild(fb);
+}
+
+function gradeSA(q, answer) {
+    const text = (answer || '').toLowerCase().trim();
+    if (text.length < 100) return { tooShort: true, pass: false, missing: [] };
+    const isEs = document.body.classList.contains('lang-es');
+    const groups = isEs ? q.kw_es : q.kw_en;
+    const missing = [];
+    let matched = 0;
+    groups.forEach(group => {
+        const hit = group.some(term => text.includes(term.toLowerCase()));
+        if (hit) matched++;
+        else missing.push(group[0]);
+    });
+    const need = Math.max(2, Math.ceil(groups.length * 0.4));
+    return { tooShort: false, pass: matched >= need, missing };
+}
+
+function submitExam() {
+    saveReg();
+    if (!student.name || !student.email) {
+        alert(currentLang === 'en' ? 'Please fill in your registration first.' : 'Por favor complete su registro primero.');
+        return;
+    }
+    if (unitPassed) {
+        showResult('pass', currentLang === 'en' ? '✅ Unit 12 already passed. You may proceed.' : '✅ Unidad 12 ya aprobada. Puede continuar.');
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        showResult('locked', currentLang === 'en' ? `⏰ Locked for ${wait} more minute(s).` : `⏰ Bloqueado por ${wait} minuto(s) más.`);
+        return;
+    }
+
+    for (let i = 0; i < mcRevealed.length; i++) mcRevealed[i] = true;
+    renderQuestions();
+    let mcCorrect = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === mcQuestions[i].correct) mcCorrect++;
+    }
+
+    let saCorrect = 0;
+    if (isMastersLevel()) {
+        for (let i = 0; i < 10; i++) {
+            const r = gradeSA(kwQuestions[i], kwAnswers[i]);
+            if (!r.tooShort && r.pass) saCorrect++;
+        }
+    }
+    const mcOk = mcCorrect >= PASS_THRESHOLD_MC;
+    const saOk = saCorrect >= PASS_THRESHOLD_SA;
+
+    function passUnit(detail) {
+        unitPassed = true;
+        localStorage.setItem(UNIT_PASSED_KEY, 'true');
+        progress[`unit${UNIT_NUM}`] = true;
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(SA_LOCK_KEY);
+        const msg = currentLang === 'en'
+            ? `✅ PASSED. ${detail}. Unit 12 complete! Your answers are marked below. Review them, then continue when ready.`
+            : `✅ APROBADO. ${detail}. ¡Unidad 12 completa! Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.`;
+        showResult('pass', msg);
+        updateProgressGrid();
+    }
+
+    if (!isMastersLevel()) {
+        const detail = currentLang === 'en' ? `MC: ${mcCorrect}/20 (need 18)` : `OM: ${mcCorrect}/20 (necesita 18)`;
+        if (mcOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+                : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        const detail = currentLang === 'en'
+            ? `MC: ✓ banked · SA: ${saCorrect}/10 (need 9)`
+            : `OM: ✓ en banco · RC: ${saCorrect}/10 (necesita 9)`;
+        if (saOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Your multiple-choice pass is safe. ${detail}. Review the lesson and try the short-answer section again in ${lockMinutes()} minute(s).`
+                : `Su aprobación de opción múltiple está a salvo. ${detail}. Repase la lección y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    const detail = currentLang === 'en'
+        ? `MC: ${mcCorrect}/20 (need 18) · SA: ${saCorrect}/10 (need 9)`
+        : `OM: ${mcCorrect}/20 (necesita 18) · RC: ${saCorrect}/10 (necesita 9)`;
+    if (mcOk && saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit(detail);
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `MC ${mcCorrect}/20 ✓ passed and banked. SA ${saCorrect}/10 (need 9). When you try again in ${lockMinutes()} minute(s), you'll only need to resubmit the short answers — MC stays passed.`
+            : `OM ${mcCorrect}/20 ✓ aprobado y guardado. RC ${saCorrect}/10 (necesita 9). Al reintentar en ${lockMinutes()} minuto(s), solo necesitará reenviar las respuestas cortas — el OM permanece aprobado.`;
+        showResult('fail', msg);
+        startLockTimer();
+    } else {
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+            : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+        showResult('fail', msg);
+        startLockTimer();
+    }
+}
+
+function showResult(cls, html) {
+    const r = document.getElementById('examResult');
+    r.style.display = 'block';
+    r.className = 'exam-result ' + cls;
+    r.innerHTML = html;
+}
+
+function startLockTimer() {
+    const r = document.getElementById('examResult');
+    const interval = setInterval(() => {
+        const remaining = lockUntil - Date.now();
+        if (remaining <= 0) { clearInterval(interval); r.innerHTML += currentLang === 'en' ? '<br><em>Lockout ended. You may retry.</em>' : '<br><em>Bloqueo terminado. Puede reintentar.</em>'; return; }
+        const m = Math.floor(remaining / 60000);
+        const s = Math.floor((remaining % 60000) / 1000);
+        const note = currentLang === 'en' ? `<br>⏱️ Locked: ${m}:${String(s).padStart(2,'0')}` : `<br>⏱️ Bloqueado: ${m}:${String(s).padStart(2,'0')}`;
+        const base = r.innerHTML.split('<br>⏱️')[0];
+        r.innerHTML = base + note;
+    }, 1000);
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? 'Reset this unit? All your answers and pass status for Unit 12 will be cleared. (Your name, email, and other units are not affected.)'
+        : '¿Reiniciar esta unidad? Todas sus respuestas y el estado de aprobación para la Unidad 12 se borrarán. (Su nombre, correo y otras unidades no se afectan.)';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcRevealed = new Array(20).fill(false);
+    unitPassed = false;
+    mcPreviouslyPassed = false;
+    lockUntil = 0;
+    localStorage.removeItem(UNIT_STATE_KEY);
+    localStorage.removeItem(UNIT_PASSED_KEY);
+    localStorage.removeItem(LOCKOUT_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    if (progress[`unit${UNIT_NUM}`]) {
+        delete progress[`unit${UNIT_NUM}`];
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+    }
+    document.getElementById('examResult').style.display = 'none';
+    renderQuestions();
+    updateProgressGrid();
+}
+
+const langBtn = document.getElementById('langToggleBtn');
+if (langBtn) langBtn.onclick = function() {
+    if (currentLang === 'en') { currentLang = 'es'; document.body.className = 'lang-es'; this.textContent = 'English'; }
+    else { currentLang = 'en'; document.body.className = 'lang-en'; this.textContent = 'Español'; }
+    renderTrackBanner(); renderReadout(); renderQuestions();
+};
+
+// ========== REGISTRATION READOUT (read-only on Units 2-13) ==========
+function renderReadout() {
+    const el = document.getElementById('regReadout');
+    if (!el) return;
+    const saved = localStorage.getItem(STUDENT_KEY);
+    const en = (currentLang !== 'es');
+    if (!saved) {
+        el.innerHTML = en
+            ? 'No registration found. Please <a href="CTSUnit1.html">register on Unit 1</a> before taking this exam.'
+            : 'No se encontr\u00f3 registro. Por favor <a href="CTSUnit1.html">reg\u00edstrese en la Unidad 1</a> antes de tomar este examen.';
+        el.className = 'reg-readout missing';
+        return;
+    }
+    const st = JSON.parse(saved);
+    const progLabel = st.program || 'Certificate of Ministry';
+    const lblName = en ? 'Name' : 'Nombre';
+    const lblEmail = en ? 'Email' : 'Correo';
+    const lblCountry = en ? 'Country' : 'Pa\u00eds';
+    const lblProg = en ? 'Program' : 'Programa';
+    const note = en
+        ? 'Registered on Unit 1. To change your details, return to Unit 1.'
+        : 'Registrado en la Unidad 1. Para cambiar sus datos, vuelva a la Unidad 1.';
+    el.innerHTML =
+        '<div class="reg-readout-grid">' +
+        '<div><strong>' + lblName + ':</strong> ' + (st.name||'') + '</div>' +
+        '<div><strong>' + lblEmail + ':</strong> ' + (st.email||'') + '</div>' +
+        '<div><strong>' + lblCountry + ':</strong> ' + (st.country||'') + '</div>' +
+        '<div><strong>' + lblProg + ':</strong> ' + progLabel + '</div>' +
+        '</div><div class="reg-readout-note">' + note + '</div>';
+    el.className = 'reg-readout';
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+loadReg();
+renderReadout();
+loadState();
+updateProgressGrid();
+renderTrackBanner();
+renderQuestions();
+if (unitPassed) showResult('pass', currentLang === 'en' ? '✅ Unit 12 already passed.' : '✅ Unidad 12 ya aprobada.');
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSOTSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

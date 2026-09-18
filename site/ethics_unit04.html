@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pastoral &amp; Christian Ethics — Unit 4: Family Responsibilities &amp; Personal Integrity</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.pending-es { background: #fff4f4; border: 1px dashed #c98a8a; padding: 12px 18px; margin: 14px 0; border-radius: 6px; color: #8a1f1f; font-style: italic; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; } body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; } body.lang-es .lang-es { display: inline; }
+@media print { .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small, #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+ body { background: #fff; padding: 10px; font-size: 12pt; } .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; } h1, h2, h3 { color: #000; } .pull-quote { background: #fff; border-left: 2px solid #888; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 5 &#8594;</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">&#128214; Pastoral &amp; Christian Ethics &mdash; Unit 4: Family Responsibilities &amp; Personal Integrity</span><span class="lang-es">&#128214; &Eacute;tica Pastoral y Cristiana &mdash; Unidad 4: Responsabilidades Familiares e Integridad Personal</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"If a man does not know how to rule his own house, how will he take care of the church of God?" &mdash; 1 Timothy 3:5 (NKJV)</span><span class="lang-es">&laquo;porque el que no sabe gobernar su propia casa, &iquest;c&oacute;mo cuidar&aacute; de la iglesia de Dios?&raquo; &mdash; 1 Timoteo 3:5 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">&#128221; Course Registration</span><span class="lang-es">&#128221; Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Pastoral &amp; Christian Ethics. Please register before beginning Unit 4.</span><span class="lang-es">Bienvenido a &Eacute;tica Pastoral y Cristiana. Por favor reg&iacute;strese antes de comenzar la Unidad 4.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+
+<div class="card">
+<div class="lang-en">
+<h3>Section 4.1 &mdash; The Home as the First Proof of Ministry</h3>
+    <p>We ended the last unit with a promise to take up the pastor's family, and we do so now because Scripture itself places the home at the very center of a man's fitness for the office. It is easy to imagine that a pastor's home is the private backdrop to his public work &mdash; the place he retreats to after the real ministry is done. The Bible turns that picture exactly around. The home is not the backdrop to the ministry; it is the first proving ground of it.</p>
+    <p>Paul makes the logic inescapable. Among the qualifications for an overseer, he writes that a man must be <em class="ref">"one who rules his own house well, having his children in submission with all reverence"</em> &mdash; and then he presses the reason home with a question that has no comfortable answer: <em class="ref">"for if a man does not know how to rule his own house, how will he take care of the church of God?"</em> (1 Timothy 3:4&ndash;5). Read that as the argument it is. The household is the smaller trust by which God tests a man's fitness for the larger one. A man who cannot shepherd the few souls placed under his own roof, who cannot lead with love and patience the wife and children who know him best, has given no evidence that he can shepherd the many. The church is, in a real sense, simply the household of God writ large, and the qualifying test runs from the small house to the great one.</p>
+    <p>This means that the order of a pastor's priorities is settled before he ever sets it himself. His walk with God comes first, as we saw in Unit 3; his family comes next; and the church, for all its weight, comes after the family it must never be allowed to consume. The home is also a witness, and not only a test. The watching world and the watching congregation read a pastor's doctrine of grace, of patience, of love, far more clearly in how he treats his wife at the end of a hard week than in his most polished sermon on the subject. What he is at home is what he actually believes. The rest is theory.</p>
+<h3>Section 4.2 &mdash; The Husband&rsquo;s Loving Leadership and the Father&rsquo;s Charge</h3>
+    <p>Scripture assigns the husband a position of leadership in the home, and we will not apologize for teaching it, because God's Word teaches it. But everything turns on how that leadership is defined, and here the Bible's definition is so far from the world's caricature that the two can scarcely be spoken of in the same breath. The world hears "headship" and imagines domination, the strong imposing his will on the weak. Paul hears it and points to a cross. <em class="ref">"Husbands, love your wives, just as Christ also loved the church and gave Himself for her"</em> (Ephesians 5:25). There is the pattern, and it is devastating to every form of petty male tyranny. The head of the home is to lead the way Christ led &mdash; by laying himself down, by serving, by spending himself for the good of the one entrusted to him, even unto death. A husband's authority is real, but it is the authority of the one who washes feet. The man who uses headship as a license for selfishness has not understood the first thing about it; he has inverted it.</p>
+    <p>The same self-giving love reaches down to the children. <em class="ref">"And you, fathers, do not provoke your children to wrath, but bring them up in the training and admonition of the Lord"</em> (Ephesians 6:4). Notice that the charge cuts in two directions at once. There is a positive duty &mdash; to bring them up, to train, to instruct, to point them again and again to the Lord. And there is a sharp negative warning &mdash; do not provoke them, do not exasperate them with harshness, inconsistency, or a standard you demand of them but never of yourself. A great many children raised in the manse have been driven not toward Christ but away from Him, not by the gospel their father preached but by the bitterness their father bred at home. Parenting in a pastor's house must hold these together: a discipline that is firm but never cruel, and a tenderness that is warm but never indulgent, all of it aimed at the heart and not merely the behavior.</p>
+<h3>Section 4.3 &mdash; Purity, Singleness, and the Question of Divorce and Remarriage</h3>
+    <p>Sexual purity is required of every servant of God, the married no less than the single, and we will treat its hardest modern pressures in a later unit. Here we lay the foundation. The married man guards his purity by cherishing his own wife and by fleeing, as Joseph fled, every situation that would compromise him. The single man &mdash; and let us say plainly that singleness is no second-class calling; our Lord Himself was single, and the apostle Paul commended it as a gift &mdash; guards his purity by chastity and by the same fleeing. The standard is one heart, kept clean before God, whatever a man's marital state.</p>
+    <p>This brings us to marriage's permanence, and to one of the most pastorally difficult questions a minister will ever face. Scripture holds an exceedingly high view of the marriage covenant. It is not a contract to be dissolved when it ceases to please, but a covenant joined by God: <em class="ref">"Therefore what God has joined together, let not man separate"</em> (Matthew 19:6). The biblical default, the thing we must teach and model, is permanence. Within that high view, the New Testament names certain grounds on which a marriage may be biblically dissolved &mdash; our Lord's words concerning sexual immorality (Matthew 19:9), and Paul's concerning desertion by an unbelieving spouse (1 Corinthians 7:15). I will tell you honestly that faithful, conservative, Bible-believing men have differed over exactly how far these exceptions extend and whether they permit remarriage, and a wise pastor holds his convictions here firmly while granting that godly brothers land in somewhat different places. What no faithful pastor may do is either to cheapen the covenant by treating divorce as easy, or to crush the wounded by treating the divorced as though they were beyond the reach of grace. The same gospel that upholds the permanence of marriage also binds up those whose marriages have broken, and the pastor must be a faithful guardian of the first without ever becoming a hard man toward the second.</p>
+<h3>Section 4.4 &mdash; Protecting the Family from the Pressures of Ministry</h3>
+    <p>There is a peculiar set of pressures that falls on a pastor's family and on no other, and the man who does not see them coming will let them do their quiet damage unopposed. The first is the fishbowl. The pastor's wife and children live their lives under a scrutiny no one elected them to bear, watched and judged by a congregation that often expects of them a perfection it does not expect of itself. A wise pastor shields his family from that glare, refuses to make his children into sermon illustrations, and never lets the church's expectations be laid as a yoke on shoulders too small to carry them.</p>
+    <p>The second and graver pressure is subtler, and I have watched it destroy more ministers' homes than any scandal. It is the slow theft of the man from his own family by the very work he loves. The ministry is endless; there is always one more visit, one more meeting, one more soul in need, and a conscientious pastor can always find holy-sounding reasons to give the church the time and the best energies that belonged to his wife and children. The church becomes, in effect, a mistress &mdash; not of the body, but of the heart and the hours &mdash; and the family is left with a husband and father who is present in the house but absent from the home. Do not do this. Guard your days. Defend the evening, the table, the Sabbath rest, the ordinary unhurried time in which a marriage and a family are actually built. Learn to say no to good things in order to protect the best things.</p>
+    <p>For let us be perfectly clear about what is at stake. It will profit a man nothing to gain the whole church and lose his own children. The man who builds a thriving ministry on the rubble of his neglected family has not succeeded; he has committed a tragedy with a respectable face. The faithful pastor finishes his course, as we said, having kept the faith &mdash; and he keeps it first of all in the small, holy congregation that bears his own name. Tend that flock well, and you will be the better shepherd of the larger one. Neglect it, and no measure of public success will ever make up the loss.</p>
+    <div class="illustration"><strong>Cross-Reference &middot; Systematic Theology</strong>The doctrine of marriage as a covenant reflecting Christ and the church, and the biblical theology of the family, are developed in the Systematic Theology course (Unit 5, The Doctrine of Man).</div>
+</div>
+<div class="lang-es">
+
+<h3>Secci&oacute;n 4.1 &mdash; El hogar como la primera prueba del ministerio</h3>
+    <p>Terminamos la unidad anterior con la promesa de tratar la familia del pastor, y lo hacemos ahora porque la Escritura misma coloca el hogar en el centro mismo de la idoneidad de un hombre para el oficio. Es f&aacute;cil imaginar que el hogar de un pastor es el tel&oacute;n de fondo privado de su obra p&uacute;blica &mdash; el lugar al que se retira despu&eacute;s de que el ministerio real ha terminado. La Biblia da vuelta exactamente a ese cuadro. El hogar no es el tel&oacute;n de fondo del ministerio; es el primer campo de prueba de &eacute;l.</p>
+    <p>Pablo hace ineludible la l&oacute;gica. Entre los requisitos de un obispo, escribe que un hombre debe ser <em class="ref">&laquo;que gobierne bien su casa, que tenga sus hijos en sujeci&oacute;n con toda honestidad&raquo;</em> &mdash; y luego clava la raz&oacute;n con una pregunta que no tiene respuesta c&oacute;moda: <em class="ref">&laquo;porque el que no sabe gobernar su propia casa, &iquest;c&oacute;mo cuidar&aacute; de la iglesia de Dios?&raquo;</em> (1 Timoteo 3:4&ndash;5). L&eacute;alo como el argumento que es. El hogar es la confianza menor por la cual Dios prueba la idoneidad de un hombre para la mayor. Un hombre que no puede pastorear las pocas almas puestas bajo su propio techo, que no puede dirigir con amor y paciencia a la esposa y los hijos que mejor lo conocen, no ha dado evidencia alguna de que pueda pastorear a los muchos. La iglesia es, en un sentido real, sencillamente la casa de Dios en grande, y la prueba que califica corre de la casa peque&ntilde;a a la grande.</p>
+    <p>Esto significa que el orden de las prioridades de un pastor queda establecido antes de que &eacute;l mismo lo fije. Su andar con Dios viene primero, como vimos en la Unidad 3; su familia viene despu&eacute;s; y la iglesia, con todo su peso, viene despu&eacute;s de la familia que nunca debe permit&iacute;rsele consumir. El hogar es tambi&eacute;n un testimonio, y no solo una prueba. El mundo que observa y la congregaci&oacute;n que observa leen la doctrina de la gracia, de la paciencia, del amor de un pastor mucho m&aacute;s claramente en c&oacute;mo trata a su esposa al final de una semana dura que en su serm&oacute;n m&aacute;s pulido sobre el tema. Lo que &eacute;l es en casa es lo que en realidad cree. Lo dem&aacute;s es teor&iacute;a.</p>
+<h3>Secci&oacute;n 4.2 &mdash; El liderazgo amoroso del esposo y el encargo del padre</h3>
+    <p>La Escritura asigna al esposo una posici&oacute;n de liderazgo en el hogar, y no nos disculparemos por ense&ntilde;arlo, porque la Palabra de Dios lo ense&ntilde;a. Pero todo depende de c&oacute;mo se defina ese liderazgo, y aqu&iacute; la definici&oacute;n de la Biblia est&aacute; tan lejos de la caricatura del mundo que las dos apenas pueden mencionarse en el mismo aliento. El mundo oye &laquo;cabeza&raquo; e imagina dominaci&oacute;n, el fuerte imponiendo su voluntad sobre el d&eacute;bil. Pablo lo oye y se&ntilde;ala una cruz. <em class="ref">&laquo;Maridos, amad a vuestras mujeres, as&iacute; como Cristo am&oacute; a la iglesia, y se entreg&oacute; a s&iacute; mismo por ella&raquo;</em> (Efesios 5:25). Ah&iacute; est&aacute; el patr&oacute;n, y es demoledor para toda forma de mezquina tiran&iacute;a masculina. La cabeza del hogar ha de dirigir del modo en que Cristo dirigi&oacute; &mdash; entreg&aacute;ndose a s&iacute; mismo, sirviendo, gast&aacute;ndose por el bien de aquella que le fue confiada, aun hasta la muerte. La autoridad de un esposo es real, pero es la autoridad del que lava los pies. El hombre que usa la jefatura como licencia para el ego&iacute;smo no ha entendido lo primero acerca de ella; la ha invertido.</p>
+    <p>El mismo amor que se entrega alcanza a los hijos. <em class="ref">&laquo;Y vosotros, padres, no provoqu&eacute;is a ira a vuestros hijos, sino criadlos en disciplina y amonestaci&oacute;n del Se&ntilde;or&raquo;</em> (Efesios 6:4). Note que el encargo corta en dos direcciones a la vez. Hay un deber positivo &mdash; criarlos, instruirlos, ense&ntilde;arlos, se&ntilde;alarlos una y otra vez al Se&ntilde;or. Y hay una aguda advertencia negativa &mdash; no los provoqu&eacute;is, no los exasper&eacute;is con dureza, inconsistencia, o una norma que les exig&iacute;s pero nunca a vosotros mismos. Much&iacute;simos hijos criados en la casa pastoral han sido empujados no hacia Cristo sino lejos de &Eacute;l, no por el evangelio que su padre predicaba sino por la amargura que su padre cri&oacute; en casa. La crianza en la casa de un pastor debe sostener ambas cosas juntas: una disciplina firme pero nunca cruel, y una ternura c&aacute;lida pero nunca indulgente, todo ello dirigido al coraz&oacute;n y no meramente a la conducta.</p>
+<h3>Secci&oacute;n 4.3 &mdash; Pureza, solter&iacute;a, y la cuesti&oacute;n del divorcio y el nuevo matrimonio</h3>
+    <p>La pureza sexual se exige de todo siervo de Dios, del casado no menos que del soltero, y trataremos sus presiones modernas m&aacute;s duras en una unidad posterior. Aqu&iacute; ponemos el fundamento. El hombre casado guarda su pureza apreciando a su propia esposa y huyendo, como huy&oacute; Jos&eacute;, de toda situaci&oacute;n que lo comprometa. El hombre soltero &mdash; y digamos con claridad que la solter&iacute;a no es un llamamiento de segunda clase; nuestro Se&ntilde;or mismo fue soltero, y el ap&oacute;stol Pablo la encomi&oacute; como un don &mdash; guarda su pureza por la castidad y por el mismo huir. La norma es un solo coraz&oacute;n, mantenido limpio delante de Dios, sea cual sea el estado civil de un hombre.</p>
+    <p>Esto nos lleva a la permanencia del matrimonio, y a una de las preguntas pastoralmente m&aacute;s dif&iacute;ciles que un ministro jam&aacute;s enfrentar&aacute;. La Escritura sostiene una visi&oacute;n sumamente alta del pacto matrimonial. No es un contrato para disolverse cuando deja de agradar, sino un pacto unido por Dios: <em class="ref">&laquo;Por tanto, lo que Dios junt&oacute;, no lo separe el hombre&raquo;</em> (Mateo 19:6). El valor b&iacute;blico por defecto, lo que debemos ense&ntilde;ar y modelar, es la permanencia. Dentro de esa alta visi&oacute;n, el Nuevo Testamento nombra ciertos fundamentos sobre los cuales un matrimonio puede ser b&iacute;blicamente disuelto &mdash; las palabras de nuestro Se&ntilde;or acerca de la inmoralidad sexual (Mateo 19:9), y las de Pablo acerca del abandono por un c&oacute;nyuge incr&eacute;dulo (1 Corintios 7:15). Le dir&eacute; honestamente que hombres fieles, conservadores y creyentes en la Biblia han diferido sobre cu&aacute;n lejos se extienden exactamente estas excepciones y si permiten un nuevo matrimonio, y un pastor sabio sostiene aqu&iacute; sus convicciones con firmeza mientras concede que hermanos piadosos llegan a lugares algo distintos. Lo que ning&uacute;n pastor fiel puede hacer es, o bien abaratar el pacto tratando el divorcio como f&aacute;cil, o bien aplastar a los heridos tratando a los divorciados como si estuvieran fuera del alcance de la gracia. El mismo evangelio que sostiene la permanencia del matrimonio tambi&eacute;n venda a aquellos cuyos matrimonios se han roto, y el pastor debe ser un guardi&aacute;n fiel de lo primero sin volverse jam&aacute;s un hombre duro hacia lo segundo.</p>
+<h3>Secci&oacute;n 4.4 &mdash; Proteger a la familia de las presiones del ministerio</h3>
+    <p>Hay un conjunto peculiar de presiones que cae sobre la familia de un pastor y sobre ninguna otra, y el hombre que no las ve venir las dejar&aacute; hacer su silencioso da&ntilde;o sin oposici&oacute;n. La primera es la pecera. La esposa y los hijos del pastor viven sus vidas bajo un escrutinio que nadie los eligi&oacute; para soportar, observados y juzgados por una congregaci&oacute;n que a menudo espera de ellos una perfecci&oacute;n que no espera de s&iacute; misma. Un pastor sabio protege a su familia de ese resplandor, reh&uacute;sa convertir a sus hijos en ilustraciones de serm&oacute;n, y nunca deja que las expectativas de la iglesia se pongan como un yugo sobre hombros demasiado peque&ntilde;os para cargarlas.</p>
+    <p>La segunda y m&aacute;s grave presi&oacute;n es m&aacute;s sutil, y la he visto destruir m&aacute;s hogares de ministros que cualquier esc&aacute;ndalo. Es el lento robo del hombre a su propia familia por la obra misma que ama. El ministerio es interminable; siempre hay una visita m&aacute;s, una reuni&oacute;n m&aacute;s, un alma m&aacute;s en necesidad, y un pastor concienzudo siempre puede hallar razones de aire santo para dar a la iglesia el tiempo y las mejores energ&iacute;as que pertenec&iacute;an a su esposa y sus hijos. La iglesia se vuelve, en efecto, una amante &mdash; no del cuerpo, sino del coraz&oacute;n y de las horas &mdash; y la familia queda con un esposo y padre que est&aacute; presente en la casa pero ausente del hogar. No haga esto. Guarde sus d&iacute;as. Defienda la noche, la mesa, el descanso del s&aacute;bado, el tiempo ordinario y sin prisa en el que un matrimonio y una familia se edifican de verdad. Aprenda a decir no a cosas buenas para proteger las mejores.</p>
+    <p>Pues seamos perfectamente claros sobre lo que est&aacute; en juego. De nada le aprovechar&aacute; a un hombre ganar toda la iglesia y perder a sus propios hijos. El hombre que edifica un ministerio floreciente sobre los escombros de su familia descuidada no ha tenido &eacute;xito; ha cometido una tragedia con rostro respetable. El pastor fiel acaba su carrera, como dijimos, habiendo guardado la fe &mdash; y la guarda ante todo en la peque&ntilde;a y santa congregaci&oacute;n que lleva su propio nombre. Cuide bien esa grey, y ser&aacute; el mejor pastor de la mayor. Desc&uacute;dela, y ninguna medida de &eacute;xito p&uacute;blico jam&aacute;s compensar&aacute; la p&eacute;rdida.</p>
+    <div class="illustration"><strong>Referencia cruzada &middot; Teolog&iacute;a Sistem&aacute;tica</strong>La doctrina del matrimonio como un pacto que refleja a Cristo y la iglesia, y la teolog&iacute;a b&iacute;blica de la familia, se desarrollan en el curso de Teolog&iacute;a Sistem&aacute;tica (Unidad 5, La Doctrina del Hombre).</div>
+
+</div>
+</div>
+
+
+<div class="card">
+    <h2><span class="lang-en">Unit 4 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 4 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lecci&oacute;n y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ============================================================
+// CTS Pastoral & Christian Ethics — Unit 4 — ST/DP house engine
+// English complete; Spanish draft filled (lang-es / textEs / kw_es / modelEs).
+// Spanish + RVG citations are a Gate-1 draft pending native review.
+// Navigation uses the deployed Ethics filename scheme: ethics_unit0N.html
+// (two-digit, zero-padded), matching the other nine units.
+// ============================================================
+
+const UNIT = 4;
+const COURSE = 'ethics';
+const NEXT_UNIT_URL = 'ethics_unit05.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - Introduction to Christian Ethics",
+    "Unit 2 - Biblical and Theological Foundations",
+    "Unit 3 - Pastoral Vocation: Calling and Character",
+    "Unit 4 - Family Responsibilities and Personal Integrity",
+    "Unit 5 - Professional Ethics and Boundaries",
+    "Unit 6 - Ethics in Preaching, Leadership, and Speech",
+    "Unit 7 - Sanctity of Life and Bioethics",
+    "Unit 8 - Sexual Ethics, Purity, and Gender",
+    "Unit 9 - Money, Stewardship, and the Poor",
+    "Unit 10 - Judgment, Restoration, and Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="ethics_unit${String(i).padStart(2,'0')}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+// MC answer key audited. Spanish: Gate-1 draft.
+const mcQuestions = [
+    { textEn: "1. Contrary to the common assumption, the unit argues that a pastor\u2019s home is:", textEs: "1. Contrario a la suposici\u00f3n com\u00fan, la unidad sostiene que el hogar de un pastor es:",
+      optionsEn: ["the first proving ground of his ministry", "the private backdrop to real ministry", "irrelevant to his fitness for office", "a distraction from his calling"], optionsEs: ["el primer campo de prueba de su ministerio", "el tel\u00f3n de fondo privado del ministerio real", "irrelevante para su idoneidad para el oficio", "una distracci\u00f3n de su llamamiento"],
+      explanationEn: "A pastor's home is the first proving ground of his ministry, not a private backdrop to it.", explanationEs: "El hogar de un pastor es el primer campo de prueba de su ministerio, no un tel\u00f3n de fondo privado de \u00e9l.", correct: 0 },
+    { textEn: "2. 1 Timothy 3:4\u20135 presses its point with the question: if a man cannot rule his own house, how will he:", textEs: "2. 1 Timoteo 3:4\u20135 clava su punto con la pregunta: si un hombre no puede gobernar su propia casa, \u00bfc\u00f3mo:",
+      optionsEn: ["preach effectively", "support his family", "earn respect", "take care of the church of God"], optionsEs: ["predicar\u00e1 con eficacia", "sostendr\u00e1 a su familia", "ganar\u00e1 respeto", "cuidar\u00e1 de la iglesia de Dios"],
+      explanationEn: "1 Timothy 3:5 reasons that a man who cannot rule his own house cannot take care of the church of God.", explanationEs: "1 Timoteo 3:5 razona que un hombre que no puede gobernar su propia casa no puede cuidar de la iglesia de Dios.", correct: 3 },
+    { textEn: "3. The household is described as the smaller trust by which God tests a man\u2019s fitness for:", textEs: "3. El hogar se describe como la confianza menor por la cual Dios prueba la idoneidad de un hombre para:",
+      optionsEn: ["public speaking", "the larger trust of the church", "financial stewardship", "academic ministry"], optionsEs: ["hablar en p\u00fablico", "la confianza mayor de la iglesia", "la mayordom\u00eda financiera", "el ministerio acad\u00e9mico"],
+      explanationEn: "The household is the smaller trust by which God tests a man's fitness for the larger trust of the church.", explanationEs: "El hogar es la confianza menor por la cual Dios prueba la idoneidad de un hombre para la confianza mayor de la iglesia.", correct: 1 },
+    { textEn: "4. The settled order of a pastor\u2019s priorities is his walk with God, then his family, then:", textEs: "4. El orden establecido de las prioridades de un pastor es su andar con Dios, luego su familia, luego:",
+      optionsEn: ["the church, which must never consume the family", "his reputation", "his denomination", "his finances"], optionsEs: ["la iglesia, que nunca debe consumir a la familia", "su reputaci\u00f3n", "su denominaci\u00f3n", "sus finanzas"],
+      explanationEn: "The settled order is God first, then family, then the church\u2014which must never consume the family.", explanationEs: "El orden establecido es Dios primero, luego la familia, luego la iglesia \u2014 que nunca debe consumir a la familia.", correct: 0 },
+    { textEn: "5. The unit says a pastor\u2019s real doctrine of grace is read most clearly in:", textEs: "5. La unidad dice que la verdadera doctrina de la gracia de un pastor se lee m\u00e1s claramente en:",
+      optionsEn: ["his published writings", "how he treats his wife after a hard week", "his Sunday sermons", "his seminary transcript"], optionsEs: ["sus escritos publicados", "c\u00f3mo trata a su esposa despu\u00e9s de una semana dura", "sus sermones dominicales", "su expediente del seminario"],
+      explanationEn: "A pastor's real doctrine of grace is read most clearly in how he treats his wife after a hard week.", explanationEs: "La verdadera doctrina de la gracia de un pastor se lee m\u00e1s claramente en c\u00f3mo trata a su esposa despu\u00e9s de una semana dura.", correct: 1 },
+    { textEn: "6. When the world hears \u201cheadship,\u201d it imagines domination; when Paul speaks of it, he points to:", textEs: "6. Cuando el mundo oye \u00abjefatura\u00bb imagina dominaci\u00f3n; cuando Pablo habla de ella, se\u00f1ala:",
+      optionsEn: ["a throne", "a courtroom", "a cross", "a marketplace"], optionsEs: ["un trono", "un tribunal", "una cruz", "un mercado"],
+      explanationEn: "When Paul speaks of headship he points not to a throne but to a cross.", explanationEs: "Cuando Pablo habla de la jefatura se\u00f1ala no un trono sino una cruz.", correct: 2 },
+    { textEn: "7. Ephesians 5:25 commands husbands to love their wives just as Christ loved the church and:", textEs: "7. Efesios 5:25 manda a los maridos amar a sus esposas as\u00ed como Cristo am\u00f3 a la iglesia y:",
+      optionsEn: ["taught her the law", "ruled over her", "commanded her obedience", "gave Himself for her"], optionsEs: ["le ense\u00f1\u00f3 la ley", "se\u00f1ore\u00f3 sobre ella", "mand\u00f3 su obediencia", "se entreg\u00f3 a s\u00ed mismo por ella"],
+      explanationEn: "Ephesians 5:25 commands husbands to love their wives as Christ loved the church and gave Himself for her.", explanationEs: "Efesios 5:25 manda a los maridos amar a sus esposas como Cristo am\u00f3 a la iglesia y se entreg\u00f3 a s\u00ed mismo por ella.", correct: 3 },
+    { textEn: "8. A husband\u2019s authority, the unit says, is real but is the authority of the one who:", textEs: "8. La autoridad de un esposo, dice la unidad, es real pero es la autoridad del que:",
+      optionsEn: ["washes feet", "sits in judgment", "issues commands", "demands honor"], optionsEs: ["lava los pies", "se sienta a juzgar", "emite mandatos", "exige honra"],
+      explanationEn: "A husband's authority is real but is the authority of the one who washes feet.", explanationEs: "La autoridad de un esposo es real pero es la autoridad del que lava los pies.", correct: 0 },
+    { textEn: "9. Ephesians 6:4 charges fathers not to:", textEs: "9. Efesios 6:4 encarga a los padres no:",
+      optionsEn: ["instruct their children", "provoke their children to wrath", "discipline their children", "correct their children"], optionsEs: ["instruir a sus hijos", "provocar a ira a sus hijos", "disciplinar a sus hijos", "corregir a sus hijos"],
+      explanationEn: "Ephesians 6:4 charges fathers not to provoke their children to wrath.", explanationEs: "Efesios 6:4 encarga a los padres no provocar a ira a sus hijos.", correct: 1 },
+    { textEn: "10. The positive duty in Ephesians 6:4 is to bring children up in the training and admonition of:", textEs: "10. El deber positivo en Efesios 6:4 es criar a los hijos en la disciplina y amonestaci\u00f3n de:",
+      optionsEn: ["the church", "the elders", "the Lord", "the fathers"], optionsEs: ["la iglesia", "los ancianos", "el Se\u00f1or", "los padres"],
+      explanationEn: "Fathers are to bring children up in the training and admonition of the Lord.", explanationEs: "Los padres han de criar a los hijos en la disciplina y amonestaci\u00f3n del Se\u00f1or.", correct: 2 },
+    { textEn: "11. Sexual purity, the unit insists, is required of:", textEs: "11. La pureza sexual, insiste la unidad, se exige de:",
+      optionsEn: ["the married no less than the single", "only married ministers", "only single ministers", "only those in pastoral office"], optionsEs: ["el casado no menos que el soltero", "solo los ministros casados", "solo los ministros solteros", "solo los que ocupan el oficio pastoral"],
+      explanationEn: "Sexual purity is required of the married no less than the single.", explanationEs: "La pureza sexual se exige del casado no menos que del soltero.", correct: 0 },
+    { textEn: "12. The unit describes marriage not as a contract to be dissolved at will but as:", textEs: "12. La unidad describe el matrimonio no como un contrato para disolverse a voluntad sino como:",
+      optionsEn: ["a covenant joined by God", "a civil arrangement", "a private agreement", "a cultural tradition"], optionsEs: ["un pacto unido por Dios", "un arreglo civil", "un acuerdo privado", "una tradici\u00f3n cultural"],
+      explanationEn: "Marriage is not a contract to be dissolved at will but a covenant joined by God.", explanationEs: "El matrimonio no es un contrato para disolverse a voluntad sino un pacto unido por Dios.", correct: 0 },
+    { textEn: "13. \u201cWhat God has joined together, let not man separate\u201d establishes the biblical default of:", textEs: "13. \u00abLo que Dios junt\u00f3, no lo separe el hombre\u00bb establece el valor b\u00edblico por defecto de:",
+      optionsEn: ["mutual consent", "easy dissolution", "negotiated terms", "permanence"], optionsEs: ["el consentimiento mutuo", "la disoluci\u00f3n f\u00e1cil", "los t\u00e9rminos negociados", "la permanencia"],
+      explanationEn: "'What God has joined together, let not man separate' sets the biblical default of permanence.", explanationEs: "\u00abLo que Dios junt\u00f3, no lo separe el hombre\u00bb fija el valor b\u00edblico por defecto de la permanencia.", correct: 3 },
+    { textEn: "14. The New Testament grounds the unit names for biblical dissolution include sexual immorality and:", textEs: "14. Los fundamentos del Nuevo Testamento que la unidad nombra para la disoluci\u00f3n b\u00edblica incluyen la inmoralidad sexual y:",
+      optionsEn: ["financial hardship", "desertion by an unbelieving spouse", "incompatibility", "prolonged illness"], optionsEs: ["la penuria econ\u00f3mica", "el abandono por un c\u00f3nyuge incr\u00e9dulo", "la incompatibilidad", "la enfermedad prolongada"],
+      explanationEn: "The dissolution grounds the unit names are sexual immorality and desertion by an unbelieving spouse.", explanationEs: "Los fundamentos de disoluci\u00f3n que la unidad nombra son la inmoralidad sexual y el abandono por un c\u00f3nyuge incr\u00e9dulo.", correct: 1 },
+    { textEn: "15. A faithful pastor must avoid two errors: cheapening the covenant, and:", textEs: "15. Un pastor fiel debe evitar dos errores: abaratar el pacto, y:",
+      optionsEn: ["crushing the divorced as beyond grace", "teaching marriage\u2019s permanence", "commending singleness", "upholding sexual purity"], optionsEs: ["aplastar a los divorciados como fuera de la gracia", "ense\u00f1ar la permanencia del matrimonio", "encomiar la solter\u00eda", "sostener la pureza sexual"],
+      explanationEn: "The pastor must avoid both cheapening the covenant and crushing the divorced as beyond grace.", explanationEs: "El pastor debe evitar tanto abaratar el pacto como aplastar a los divorciados como fuera de la gracia.", correct: 0 },
+    { textEn: "16. The unit identifies the first peculiar pressure on a pastor\u2019s family as:", textEs: "16. La unidad identifica la primera presi\u00f3n peculiar sobre la familia de un pastor como:",
+      optionsEn: ["financial strain", "relocation", "the fishbowl of constant scrutiny", "theological disagreement"], optionsEs: ["la tensi\u00f3n financiera", "el traslado", "la pecera del escrutinio constante", "el desacuerdo teol\u00f3gico"],
+      explanationEn: "The first peculiar pressure on a pastor's family is the fishbowl of constant scrutiny.", explanationEs: "La primera presi\u00f3n peculiar sobre la familia de un pastor es la pecera del escrutinio constante.", correct: 2 },
+    { textEn: "17. The graver, subtler pressure the unit warns of is:", textEs: "17. La presi\u00f3n m\u00e1s grave y sutil que la unidad advierte es:",
+      optionsEn: ["public criticism", "doctrinal compromise", "the slow theft of the man from his family by the work he loves", "financial temptation"], optionsEs: ["la cr\u00edtica p\u00fablica", "el compromiso doctrinal", "el lento robo del hombre a su familia por la obra que ama", "la tentaci\u00f3n financiera"],
+      explanationEn: "The subtler, graver pressure is the slow theft of the man from his family by the work he loves.", explanationEs: "La presi\u00f3n m\u00e1s sutil y grave es el lento robo del hombre a su familia por la obra que ama.", correct: 2 },
+    { textEn: "18. To protect the family, the pastor is urged to guard his days and learn to:", textEs: "18. Para proteger a la familia, se exhorta al pastor a guardar sus d\u00edas y aprender a:",
+      optionsEn: ["delegate all preaching", "say no to good things to protect the best things", "reduce his study", "avoid all meetings"], optionsEs: ["delegar toda la predicaci\u00f3n", "decir no a cosas buenas para proteger las mejores", "reducir su estudio", "evitar todas las reuniones"],
+      explanationEn: "To protect his family the pastor must learn to say no to good things to protect the best things.", explanationEs: "Para proteger a su familia el pastor debe aprender a decir no a cosas buenas para proteger las mejores.", correct: 1 },
+    { textEn: "19. The unit warns that it will profit a man nothing to gain the whole church and:", textEs: "19. La unidad advierte que de nada le aprovechar\u00e1 a un hombre ganar toda la iglesia y:",
+      optionsEn: ["lose his own children", "weaken his preaching", "forfeit his salary", "exhaust his energy"], optionsEs: ["perder a sus propios hijos", "debilitar su predicaci\u00f3n", "perder su salario", "agotar su energ\u00eda"],
+      explanationEn: "It profits a man nothing to gain the whole church and lose his own children.", explanationEs: "De nada le aprovecha a un hombre ganar toda la iglesia y perder a sus propios hijos.", correct: 0 },
+    { textEn: "20. The unit\u2019s closing logic is that tending one\u2019s own family well makes a man:", textEs: "20. La l\u00f3gica final de la unidad es que cuidar bien la propia familia hace a un hombre:",
+      optionsEn: ["a less available pastor", "the better shepherd of the larger flock", "a distracted minister", "an inferior teacher"], optionsEs: ["un pastor menos disponible", "el mejor pastor de la grey mayor", "un ministro distra\u00eddo", "un maestro inferior"],
+      explanationEn: "Tending one's own family well makes a man the better shepherd of the larger flock.", explanationEs: "Cuidar bien la propia familia hace a un hombre el mejor pastor de la grey mayor.", correct: 1 },
+];
+
+// Short-answer (21-30). English complete; Spanish: Gate-1 draft (kw_es + modelEs filled).
+const kwQuestions = [
+    { textEn: "21. Why does the unit call the pastor's home the first proving ground of his ministry, using 1 Timothy 3?", textEs: "21. \u00bfPor qu\u00e9 llama la unidad al hogar del pastor el primer campo de prueba de su ministerio, usando 1 Timoteo 3?",
+      kw_en: ["home", "proving", "rule", "house", "church", "trust", "smaller", "fitness"], kw_es: ["hogar", "prueba", "gobernar", "casa", "iglesia", "confianza", "menor", "idoneidad"],
+      modelEn: "1 Timothy 3:4-5 asks that if a man cannot rule his own house, how will he take care of the church of God. The home is not the private backdrop to real ministry but its first proving ground. The household is the smaller trust by which God tests a man's fitness for the larger trust of the church, which is simply the household of God writ large. A man's life at home is therefore the first evidence of his fitness for office.", modelEs: "1 Timoteo 3:4-5 pregunta que si un hombre no puede gobernar su propia casa, c\u00f3mo cuidar\u00e1 de la iglesia de Dios. El hogar no es el tel\u00f3n de fondo privado del ministerio real sino su primer campo de prueba. El hogar es la confianza menor por la cual Dios prueba la idoneidad de un hombre para la confianza mayor de la iglesia, que es sencillamente la casa de Dios en grande. La vida de un hombre en casa es por tanto la primera evidencia de su idoneidad para el oficio." },
+    { textEn: "22. State the settled order of a pastor's priorities and why the church must never consume the family.", textEs: "22. Exponga el orden establecido de las prioridades de un pastor y por qu\u00e9 la iglesia nunca debe consumir a la familia.",
+      kw_en: ["order", "God", "family", "church", "consume", "grace", "wife", "witness"], kw_es: ["orden", "familia", "iglesia", "consumir", "gracia", "esposa", "testimonio", "contradiccion"],
+      modelEn: "The settled order is a pastor's walk with God first, then his family, then the church\u2014and the church must never be allowed to consume the family. A man's real doctrine of grace is read most clearly not in his sermons but in how he treats his wife after a hard week. The family is both a test of fitness and a witness to what he truly believes. Reverse the order and the ministry is built on a contradiction.", modelEs: "El orden establecido es el andar de un pastor con Dios primero, luego su familia, luego la iglesia \u2014 y a la iglesia nunca debe permit\u00edrsele consumir a la familia. La verdadera doctrina de la gracia de un hombre se lee m\u00e1s claramente no en sus sermones sino en c\u00f3mo trata a su esposa despu\u00e9s de una semana dura. La familia es a la vez una prueba de idoneidad y un testimonio de lo que de veras cree. Invierta el orden y el ministerio se edifica sobre una contradicci\u00f3n." },
+    { textEn: "23. How does the unit redefine 'headship,' and what does Ephesians 5:25 require of husbands?", textEs: "23. \u00bfC\u00f3mo redefine la unidad la \u00abjefatura\u00bb, y qu\u00e9 exige Efesios 5:25 de los maridos?",
+      kw_en: ["headship", "domination", "cross", "christ", "gave", "love", "serve", "washes"], kw_es: ["jefatura", "dominacion", "cruz", "cristo", "entrego", "amor", "lava", "autoridad"],
+      modelEn: "When the world hears 'headship' it imagines domination, but when Paul speaks of it he points not to a throne but to a cross. Ephesians 5:25 commands husbands to love their wives just as Christ loved the church and gave Himself for her. A husband's authority is real but is the authority of the one who washes feet, exercised in self-giving love rather than command. Headship is cruciform, not domineering.", modelEs: "Cuando el mundo oye \u00abjefatura\u00bb imagina dominaci\u00f3n, pero cuando Pablo habla de ella se\u00f1ala no un trono sino una cruz. Efesios 5:25 manda a los maridos amar a sus esposas as\u00ed como Cristo am\u00f3 a la iglesia y se entreg\u00f3 a s\u00ed mismo por ella. La autoridad de un esposo es real pero es la autoridad del que lava los pies, ejercida en amor que se entrega y no en mando. La jefatura tiene forma de cruz, no de dominaci\u00f3n." },
+    { textEn: "24. What does Ephesians 6:4 charge fathers to do and not do, and what warning does the unit add?", textEs: "24. \u00bfQu\u00e9 encarga Efesios 6:4 a los padres hacer y no hacer, y qu\u00e9 advertencia a\u00f1ade la unidad?",
+      kw_en: ["provoke", "wrath", "training", "admonition", "lord", "bitterness", "manse", "nurture"], kw_es: ["provocar", "ira", "disciplina", "amonestacion", "amargura", "crianza", "hijos", "hogar"],
+      modelEn: "Ephesians 6:4 charges fathers not to provoke their children to wrath, and positively to bring them up in the training and admonition of the Lord. The unit warns soberly that many children of the manse were driven from Christ not by the father's preaching but by the bitterness bred at home. The father's task is both restraint and nurture, and the atmosphere of the home preaches more loudly than the pulpit.", modelEs: "Efesios 6:4 encarga a los padres no provocar a ira a sus hijos, y positivamente criarlos en la disciplina y amonestaci\u00f3n del Se\u00f1or. La unidad advierte con sobriedad que muchos hijos de la casa pastoral fueron empujados lejos de Cristo no por la predicaci\u00f3n del padre sino por la amargura criada en casa. La tarea del padre es a la vez freno y crianza, y la atm\u00f3sfera del hogar predica m\u00e1s fuerte que el p\u00falpito." },
+    { textEn: "25. Summarize the unit's teaching on the permanence of marriage and the pastor's two opposite errors.", textEs: "25. Resuma la ense\u00f1anza de la unidad sobre la permanencia del matrimonio y los dos errores opuestos del pastor.",
+      kw_en: ["covenant", "permanence", "joined", "separate", "immorality", "desertion", "cheapen", "crush"], kw_es: ["matrimonio", "pacto", "permanencia", "separe", "inmoralidad", "abandono", "abaratar", "aplastar"],
+      modelEn: "Marriage is not a contract to be dissolved at will but a covenant joined by God; 'what God has joined together, let not man separate' sets the biblical default of permanence. The New Testament names sexual immorality and desertion by an unbelieving spouse among the grounds discussed, and faithful conservative men have differed over how far the exceptions extend. The pastor must avoid two opposite errors: cheapening the covenant on one hand, and crushing the divorced as beyond grace on the other.", modelEs: "El matrimonio no es un contrato para disolverse a voluntad sino un pacto unido por Dios; \u00ablo que Dios junt\u00f3, no lo separe el hombre\u00bb fija el valor b\u00edblico por defecto de la permanencia. El Nuevo Testamento nombra la inmoralidad sexual y el abandono por un c\u00f3nyuge incr\u00e9dulo entre los fundamentos tratados, y hombres fieles y conservadores han diferido sobre cu\u00e1n lejos se extienden las excepciones. El pastor debe evitar dos errores opuestos: abaratar el pacto por un lado, y aplastar a los divorciados como fuera de la gracia por el otro." },
+    { textEn: "26. Why is singleness no second-class calling, and of whom is purity required?", textEs: "26. \u00bfPor qu\u00e9 la solter\u00eda no es un llamamiento de segunda clase, y de qui\u00e9n se exige la pureza?",
+      kw_en: ["singleness", "second-class", "calling", "purity", "married", "single", "flee", "Joseph"], kw_es: ["solteria", "clase", "pureza", "casado", "soltero", "huyendo", "jose", "universal"],
+      modelEn: "The unit states plainly that singleness is no second-class calling. Sexual purity is required of the married no less than the single. The married man guards his purity by cherishing his wife and fleeing temptation as Joseph fled, and the single man by the same vigilance. Purity is a universal call, not a burden laid only on one station of life.", modelEs: "La unidad afirma con claridad que la solter\u00eda no es un llamamiento de segunda clase. La pureza sexual se exige del casado no menos que del soltero. El hombre casado guarda su pureza apreciando a su esposa y huyendo de la tentaci\u00f3n como huy\u00f3 Jos\u00e9, y el soltero por la misma vigilancia. La pureza es un llamado universal, no una carga puesta solo sobre un estado de la vida." },
+    { textEn: "27. Describe the two peculiar pressures the unit warns press on a pastor's family.", textEs: "27. Describa las dos presiones peculiares que la unidad advierte que pesan sobre la familia de un pastor.",
+      kw_en: ["fishbowl", "scrutiny", "illustration", "slow", "theft", "work", "mistress", "hours"], kw_es: ["pecera", "escrutinio", "ilustraciones", "robo", "obra", "amante", "horas", "resistidas"],
+      modelEn: "The first pressure is the fishbowl of constant scrutiny; a wise pastor shields his family from the glare, refusing for instance to make his children into sermon illustrations. The graver, subtler pressure is the slow theft of the man from his family by the very work he loves, until the all-consuming church becomes a mistress of the heart and the hours. Both must be named and actively resisted.", modelEs: "La primera presi\u00f3n es la pecera del escrutinio constante; un pastor sabio protege a su familia del resplandor, rehusando por ejemplo convertir a sus hijos en ilustraciones de serm\u00f3n. La m\u00e1s grave y sutil es el lento robo del hombre a su familia por la obra misma que ama, hasta que la iglesia que todo lo consume se vuelve una amante del coraz\u00f3n y de las horas. Ambas deben ser nombradas y resistidas activamente." },
+    { textEn: "28. Explain the warning that a thriving ministry can be 'a tragedy with a respectable face.'", textEs: "28. Explique la advertencia de que un ministerio floreciente puede ser \u00abuna tragedia con rostro respetable\u00bb.",
+      kw_en: ["gain", "church", "lose", "children", "tragedy", "respectable", "no", "best"], kw_es: ["ganar", "iglesia", "perder", "hijos", "tragedia", "respetable", "guardar", "mejores"],
+      modelEn: "It will profit a man nothing to gain the whole church and lose his own children. A thriving ministry built on a neglected family is a tragedy with a respectable face\u2014admired publicly while quietly ruinous at home. To prevent it the pastor must guard his days and learn to say no to good things in order to protect the best things. The applause of the larger flock is no compensation for the small congregation that bears his own name.", modelEs: "De nada le aprovechar\u00e1 a un hombre ganar toda la iglesia y perder a sus propios hijos. Un ministerio floreciente edificado sobre una familia descuidada es una tragedia con rostro respetable \u2014 admirado en p\u00fablico mientras es silenciosamente ruinoso en casa. Para impedirlo el pastor debe guardar sus d\u00edas y aprender a decir no a cosas buenas para proteger las mejores. El aplauso de la grey mayor no compensa la peque\u00f1a congregaci\u00f3n que lleva su propio nombre." },
+    { textEn: "29. How does tending one's own family well relate to shepherding the larger flock?", textEs: "29. \u00bfC\u00f3mo se relaciona cuidar bien la propia familia con pastorear la grey mayor?",
+      kw_en: ["family", "first", "faith", "shepherd", "larger", "flock", "better", "witness"], kw_es: ["familia", "fe", "pastor", "grey", "mejor", "hogar", "prueba", "testimonio"],
+      modelEn: "The faithful pastor keeps the faith first of all in the small congregation that bears his own name. Far from competing with his ministry, tending his own family well makes him the better shepherd of the larger flock, because the home is where his character is proved and displayed. The pastor's family is both a test of his fitness and a witness to what he truly believes.", modelEs: "El pastor fiel guarda la fe ante todo en la peque\u00f1a congregaci\u00f3n que lleva su propio nombre. Lejos de competir con su ministerio, cuidar bien su propia familia lo hace el mejor pastor de la grey mayor, porque el hogar es donde su car\u00e1cter se prueba y se exhibe. La familia del pastor es a la vez una prueba de su idoneidad y un testimonio de lo que de veras cree." },
+    { textEn: "30. Why is the pastor's family both a test of fitness and a witness to his belief?", textEs: "30. \u00bfPor qu\u00e9 es la familia del pastor a la vez una prueba de idoneidad y un testimonio de su creencia?",
+      kw_en: ["test", "fitness", "witness", "believe", "grace", "home", "prove", "watch"], kw_es: ["prueba", "idoneidad", "testimonio", "convicciones", "gracia", "hogar", "observa", "predica"],
+      modelEn: "The family is a test of fitness because the smaller trust of the household reveals whether a man can be entrusted with the larger trust of the church. It is a witness because a man's real convictions about grace, love, and authority are displayed at home more honestly than anywhere else. What a congregation watches a pastor be at home shapes them more than his finest sermon. So the home both qualifies the man and preaches his true belief.", modelEs: "La familia es una prueba de idoneidad porque la confianza menor del hogar revela si un hombre puede ser confiado con la confianza mayor de la iglesia. Es un testimonio porque las verdaderas convicciones de un hombre acerca de la gracia, el amor y la autoridad se exhiben en casa m\u00e1s honestamente que en cualquier otro lugar. Lo que una congregaci\u00f3n observa que un pastor es en casa la moldea m\u00e1s que su mejor serm\u00f3n. As\u00ed el hogar a la vez califica al hombre y predica su verdadera creencia." },
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 5 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 5 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y vuelva a intentar la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEthicsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

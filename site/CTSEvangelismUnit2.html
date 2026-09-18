@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Evangelism — Unit 2: The Nature of Evangelism (Bilingual)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .clear-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.clear-btn { background: #a0512a; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.attribution { font-size: 0.95rem; color: #6b5840; font-style: italic; margin-bottom: 16px; }
+blockquote { margin: 14px 0; padding: 10px 14px; border-left: 4px solid #5b3a1f; background: #f4ede2; font-style: italic; }
+.track-banner { background: #5b3a1f; color: white; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-weight: bold; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+.kw-answer:disabled { background: #f5f0e8; cursor: not-allowed; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.small:disabled { background: #aaa; cursor: not-allowed; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.lockout-banner { background: #f8d7da; color: #721c24; padding: 12px 16px; border-radius: 12px; margin-bottom: 15px; font-weight: bold; border: 1px solid #f5c6cb; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en div.lang-en { display: block; }
+body.lang-es div.lang-es { display: block; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+@media print {
+  .toggle-btn, .clear-btn, .nav-bar, .registration-panel, button, .question input[type="radio"], textarea, .lockout-banner { display: none !important; }
+  body { background: white; }
+  .card { box-shadow: none; border: none; }
+}
+.model-answer-box { margin-top: 12px; padding: 12px 14px; background: #fbf3d9; border: 1px solid #e4c95b; border-left: 5px solid #c9a227; border-radius: 8px; color: #4a3c10; font-size: 0.95em; line-height: 1.5; }
+.model-answer-box strong { color: #7a5c00; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span></button>
+        <button class="nav-btn" id="nextUnitBtn"><span class="lang-en">Next</span><span class="lang-es">Siguiente</span> →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+<button class="clear-btn" id="clearDataBtn">🗑 <span class="lang-en">Clear Saved Data</span><span class="lang-es">Borrar Datos Guardados</span></button>
+
+<div class="card">
+    <h1>
+        <span class="lang-en">📖 Evangelism — Unit 2: The Nature of Evangelism</span>
+        <span class="lang-es">📖 Evangelismo — Unidad 2: La Naturaleza del Evangelismo</span>
+    </h1>
+    <p class="attribution">
+        <span class="lang-en">Chapala Theological Seminary · Dr. Wayne Cook, Author and Professor · Dr. Ted Rogers, Seminary Director</span>
+        <span class="lang-es">Seminario Teológico de Chapala · Dr. Wayne Cook, Autor y Profesor · Dr. Ted Rogers, Director del Seminario</span>
+    </p>
+    <div id="trackBanner" class="track-banner" style="display:none;"></div>
+</div>
+
+<!-- CTS audit 2026-05-23: registration panel removed. Registration happens once on Unit 1.
+     Later units read the saved student/track from localStorage (cts_student / cts_track).
+     If none is saved, the student silently defaults to the Certificate track (per Wayne). -->
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation: Why Definitions Matter</h2>
+        <p>Having established the biblical foundation of evangelism in Unit 1, this unit turns to a question that often troubles sincere believers: <em>What exactly is evangelism?</em> Many Christians are active, passionate, and love the Lord, yet they struggle to share their faith because they have never been taught a clear definition. They may share a personal story or invite someone to church—both good things—but neither is the same as evangelism. Until the believer can name what evangelism is, he cannot do it well, nor can he know when he has finished.</p>
+        <p>Real evangelism is something that is caught more than taught. It is a passion rather than a program. But a passion without a definition drifts; a program without a definition becomes activity for its own sake. This unit therefore lays down six word-pictures from the New Testament family of <em>evangel</em>, anchors evangelism in three classic definitions, and distinguishes it from manipulation, mere social action, and silent witness. When the foundation is biblical, the practice becomes both bold and humble.</p>
+
+        <h3>I. The Family of "Evangel": Six Definitions</h3>
+        <p>Behind the New Testament stands one Greek root—<em>euangelion</em>, "good news." From this single root six related terms grow, and a careful evangelist will hold each one distinct.</p>
+        <p><strong>Evangel.</strong> The evangel is the good news itself. It is not about death, hell, or sin in the first instance—those may be avenues to the good news, but the evangel proper is glad tidings: that Christ has died for sinners and risen again.</p>
+        <blockquote>"For I delivered to you first of all that which I also received: that Christ died for our sins according to the Scriptures, and that He was buried, and that He rose again the third day according to the Scriptures" (1 Corinthians 15:3–4, NKJV)</blockquote>
+        <p><strong>Evangelism.</strong> Evangelism is the act of presenting the good news with the intent that people receive it. <strong>Evangelist.</strong> The evangelist is one who carries the good news. In one sense, every pastor is an evangelist, and the work may be done either publicly or personally. <strong>Evangelistic.</strong> Something is evangelistic when it is characterized by the urgent, active presentation of the good news. <strong>Evangelical.</strong> An evangelical is one who emphasizes the <em>reception</em> of the good news—one who endorses the work of evangelism. It is possible, the wise teacher observes, to be evangelical without being evangelistic. <strong>Evangelistic preaching.</strong> Faris Whitesell defined it: "Evangelistic preaching is preaching at its best. It is preaching adapted to the highest ends of the gospel—turning men from sin and darkness to salvation and light. Evangelistic preaching is preaching with a mission—an immediate and all-important mission—winning a verdict in favor of the Lord Jesus Christ."</p>
+
+        <h3>II. Three Classic Definitions</h3>
+        <p>Three definitions, set side by side, give the working frame for this course. The first comes from the Archbishop's Committee on Evangelism (1918):</p>
+        <blockquote>"To evangelize is so to present Jesus Christ in the power of the Holy Spirit that men shall come to put their trust in God through Him, to accept Him as their Savior, and to serve Him as their King in the fellowship of the Church."</blockquote>
+        <p>Notice the careful balance: presenting Christ, in the Spirit's power, with the threefold goal of trust, acceptance, and service—within the church. The second comes from V. L. Stanfield: "Evangelistic preaching is the proclamation of the good news concerning the redemptive acts of God in Christ, by one who experientially knows Jesus Christ, in order to lead others to receive Jesus Christ as their Savior and their Lord." The third comes from D. T. Niles, and is the simplest of all: <em>"Evangelism is one beggar telling another beggar where to get food."</em> Niles' image is unforgettable. The evangelist is not a wealthy benefactor distributing favors; he is a hungry man who has found the bread, turning to another hungry man and pointing the way. This guards the witness from condescension and the gospel from being mistaken for moral superiority.</p>
+
+        <h3>III. The Seven Propositions</h3>
+        <p>From years of pastoral ministry, seven propositions about evangelism deserve every student's reflection:</p>
+        <p>First, real evangelism is something that is caught more than taught. Second, real evangelism is a passion rather than a program. Third, as George Sweazy observed, a church always tends to drift away from evangelism, never toward it. Fourth, of every hundred conversions, only about fifteen take place at an event such as an evangelistic service or a crusade. Fifth, the average person hears the gospel about seven times before responding to Christ. Sixth, roughly eighty-five percent of converts have heard the gospel in a one-on-one setting. Seventh, a large portion of those who claim the name of Christ have become quietly ashamed of the gospel itself.</p>
+        <p>These seven shape the rest of the course. They say to the student: do not despise the small conversation; do not measure the work by the crowd; do not be content with one telling; and do not lose the courage to name Christ where He has been forgotten.</p>
+
+        <h3>IV. Three New Testament Types</h3>
+        <p>The New Testament shows at least three patterns of evangelism. The first is <em>personal evangelism</em>—the "go and tell" of the early house-to-house witness (Acts 5:42; 20:20). Done by both lay people and the pastor, it has been largely restored to the church only in the last few generations.</p>
+        <p>The second is <em>mass evangelism</em>—the "come and see" of Pentecost and of the Whitefield-Wesley-Finney tradition. Whitefield was reported by contemporaries to have been heard clearly by crowds as large as thirty thousand; Wesley preached an estimated forty thousand sermons over his lifetime, learning his open-air method from Whitefield. The problem in the present age is not the method but the audience: fewer people today are willing to come.</p>
+        <p>The third is <em>lifestyle evangelism</em>—the "go and live" approach Joseph Aldrich described. It is the rank-and-file Christian witnessing every day in natural relationships. A transformed life provokes the question, "How can I get what you have?"—and the believer answers with the gospel. None of the three replaces the others; the wise church practices all three.</p>
+
+        <h3>V. Evangelism Is Proclamation, Not Manipulation</h3>
+        <p>This distinction is critical. Some evangelistic methods press for a decision through emotional music, guilt, fear, or false promises of health and wealth. Such approaches are not evangelism; they are manipulation. Paul rejected these techniques:</p>
+        <blockquote>"And my speech and my preaching were not with persuasive words of human wisdom, but in demonstration of the Spirit and of power." (1 Corinthians 2:4, NKJV)</blockquote>
+        <p>He did not rely on clever methods but on the Spirit. The difference is trust: one trusts in technique, the other in God. A manipulative evangelist may produce a response, but the response is to pressure, not to Christ. A faithful evangelist presents truth clearly and allows the Spirit of God to do His work. When manipulation is used, the gospel itself is distorted—the good news becomes a sales pitch. Faithful witnesses therefore reject any method that pressures, deceives, or coerces.</p>
+
+        <h3>VI. Clarity Is Not Optional</h3>
+        <p>A vague message produces vague understanding. If a hearer does not understand who God is (holy, just, loving), what sin is (rebellion against a holy God), what Christ has done (died as a substitute and rose again), and what response is required (repentance and faith), then that hearer cannot be saved. Salvation is not a feeling; it is a response to truth understood. Therefore, when sharing the gospel, the believer should not assume prior knowledge. Christian jargon such as "born again" or "saved by grace" must be explained. Jesus Himself took time to explain the Scriptures to the Emmaus disciples (Luke 24:27). He did not rush. Neither should the modern evangelist. Clarity is an act of love and obedience.</p>
+
+        <h3>VII. Faithfulness, Not Results</h3>
+        <p>One of the greatest misunderstandings in evangelism is that success is measured by visible results. Paul wrote:</p>
+        <blockquote>"I planted, Apollos watered, but God gave the increase." (1 Corinthians 3:6, NKJV)</blockquote>
+        <p>Paul planted, Apollos watered—both were faithful. But the growth came from God. This is liberating. Many believers are paralyzed by the fear of failure: "What if I share and no one gets saved?" The seven propositions answer that fear. If the average person hears the gospel seven times before responding, the believer who shares once may be planting the seventh seed, the seed God will use—or he may be planting the first, which another will water and another harvest. None of the three has failed.</p>
+
+        <h3>VIII. The Danger of Redefining Evangelism</h3>
+        <p>In contemporary contexts, evangelism is often redefined to mean almost any good activity. Some say feeding the hungry is evangelism. Others say social justice is evangelism. Still others say a friendly presence is evangelism. These are good things, but they are not the gospel. Evangelism is the <em>communication of the gospel</em>. One can feed a thousand people and never mention why Christ died. One can fight for justice and never speak of the cross. One can be the kindest person in the neighborhood and never explain that "all have sinned" and that "Christ died for our sins." If the message is removed, evangelism itself is removed. Acts of mercy are vital, but they must be accompanied by the spoken truth. The greatest act of love is to tell a sinner how to be reconciled to God.</p>
+
+        <h3>Conclusion: A Working Definition</h3>
+        <p>Bringing the threads together, this course adopts a working definition: <strong>Evangelism is the clear and faithful communication of the gospel, in the power of the Holy Spirit, with the intent that the hearer understand, believe, and follow Christ in the fellowship of the church.</strong> The definition unites Niles' simplicity, the Archbishop's Committee's balance, and Stanfield's precision. It rules out manipulation. It rules out silent presence as a sufficient substitute. It rules out redefinition as social action alone. And it places the work where Scripture places it: in the proclamation of one beggar to another, who together bow before the King.</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación: Por Qué Importan las Definiciones</h2>
+        <p>Habiendo establecido el fundamento bíblico del evangelismo en la Unidad 1, esta unidad aborda una pregunta que a menudo preocupa a los creyentes sinceros: <em>¿Qué es exactamente el evangelismo?</em> Muchos cristianos son activos, apasionados y aman al Señor, pero luchan por compartir su fe porque nunca se les ha enseñado una definición clara. Pueden compartir una historia personal o invitar a alguien a la iglesia—ambas cosas buenas—pero ninguna es lo mismo que el evangelismo. Hasta que el creyente pueda nombrar qué es el evangelismo, no podrá hacerlo bien, ni sabrá cuándo ha terminado.</p>
+        <p>El verdadero evangelismo es algo que se capta más que se enseña. Es una pasión más que un programa. Pero una pasión sin definición se desvía; un programa sin definición se convierte en actividad por sí misma. Por lo tanto, esta unidad presenta seis imágenes verbales de la familia neotestamentaria del <em>evangelio</em>, ancla el evangelismo en tres definiciones clásicas, y lo distingue de la manipulación, la mera acción social y el testimonio silencioso. Cuando el fundamento es bíblico, la práctica se vuelve a la vez audaz y humilde.</p>
+
+        <h3>I. La Familia del "Evangelio": Seis Definiciones</h3>
+        <p>Detrás del Nuevo Testamento se encuentra una raíz griega—<em>euangelion</em>, "buenas nuevas." De esta sola raíz crecen seis términos relacionados, y el evangelista cuidadoso mantendrá cada uno distinto.</p>
+        <p><strong>Evangelio.</strong> El evangelio es la buena noticia misma. No trata principalmente de la muerte, el infierno o el pecado—esos pueden ser caminos hacia las buenas nuevas, pero el evangelio propio es buenas nuevas: que Cristo murió por los pecadores y resucitó.</p>
+        <blockquote>"Porque primeramente os he enseñado lo que asimismo recibí: Que Cristo murió por nuestros pecados, conforme a las Escrituras; y que fue sepultado, y que resucitó al tercer día, conforme a las Escrituras." (1 Corintios 15:3–4, RVG)</blockquote>
+        <p><strong>Evangelismo.</strong> El evangelismo es el acto de presentar las buenas nuevas con la intención de que la gente las reciba. <strong>Evangelista.</strong> El evangelista es quien lleva las buenas nuevas. En cierto sentido, todo pastor es un evangelista, y la obra puede hacerse pública o personalmente. <strong>Evangelístico.</strong> Algo es evangelístico cuando se caracteriza por la presentación urgente y activa de las buenas nuevas. <strong>Evangélico.</strong> Un evangélico es quien enfatiza la <em>recepción</em> de las buenas nuevas—quien apoya la obra del evangelismo. Es posible, observa el maestro sabio, ser evangélico sin ser evangelístico. <strong>Predicación evangelística.</strong> Faris Whitesell la definió: "La predicación evangelística es la predicación en su mejor expresión. Es la predicación adaptada a los fines más altos del evangelio—convertir a los hombres del pecado y las tinieblas a la salvación y la luz. La predicación evangelística es predicación con una misión—una misión inmediata y de suma importancia—ganar un veredicto a favor del Señor Jesucristo."</p>
+
+        <h3>II. Tres Definiciones Clásicas</h3>
+        <p>Tres definiciones, puestas lado a lado, dan el marco de trabajo para este curso. La primera viene del Comité del Arzobispo sobre Evangelismo (1918):</p>
+        <blockquote>"Evangelizar es presentar a Jesucristo en el poder del Espíritu Santo de tal manera que los hombres lleguen a poner su confianza en Dios a través de Él, a aceptarle como su Salvador, y a servirle como su Rey en la comunión de la Iglesia."</blockquote>
+        <p>Note usted el equilibrio cuidadoso: presentar a Cristo, en el poder del Espíritu, con el triple objetivo de confianza, aceptación y servicio—dentro de la iglesia. La segunda viene de V. L. Stanfield: "La predicación evangelística es la proclamación de las buenas nuevas concernientes a los actos redentores de Dios en Cristo, por alguien que conoce experimentalmente a Jesucristo, para llevar a otros a recibir a Jesucristo como su Salvador y su Señor." La tercera viene de D. T. Niles, y es la más simple de todas: <em>"El evangelismo es un mendigo diciéndole a otro mendigo dónde conseguir comida."</em> La imagen de Niles es inolvidable. El evangelista no es un benefactor rico distribuyendo favores; es un hombre hambriento que ha encontrado el pan, volviéndose a otro hombre hambriento y señalando el camino. Esto protege al testigo de la condescendencia y al evangelio de ser confundido con superioridad moral.</p>
+
+        <h3>III. Las Siete Proposiciones</h3>
+        <p>De años de ministerio pastoral, siete proposiciones sobre el evangelismo merecen la reflexión de cada estudiante:</p>
+        <p>Primera, el verdadero evangelismo es algo que se capta más que se enseña. Segunda, el verdadero evangelismo es una pasión más que un programa. Tercera, como observó George Sweazy, una iglesia siempre tiende a alejarse del evangelismo, nunca hacia él. Cuarta, de cada cien conversiones, solo unas quince tienen lugar en un evento como un servicio evangelístico o una cruzada. Quinta, la persona promedio oye el evangelio unas siete veces antes de responder a Cristo. Sexta, aproximadamente el ochenta y cinco por ciento de los convertidos han oído el evangelio en un encuentro personal, uno a uno. Séptima, una gran parte de los que claman el nombre de Cristo se han avergonzado silenciosamente del evangelio mismo.</p>
+        <p>Estas siete dan forma al resto del curso. Le dicen al estudiante: no desprecie la conversación pequeña; no mida la obra por la multitud; no se contente con un solo decir; y no pierda el valor para nombrar a Cristo donde Él ha sido olvidado.</p>
+
+        <h3>IV. Tres Tipos del Nuevo Testamento</h3>
+        <p>El Nuevo Testamento muestra al menos tres patrones de evangelismo. El primero es el <em>evangelismo personal</em>—el "ir y decir" del temprano testimonio de casa en casa (Hechos 5:42; 20:20). Realizado tanto por laicos como por el pastor, ha sido restaurado a la iglesia en gran medida solo en las últimas generaciones.</p>
+        <p>El segundo es el <em>evangelismo masivo</em>—el "venid y ved" de Pentecostés y de la tradición Whitefield-Wesley-Finney. Según reportes de sus contemporáneos, Whitefield podía ser oído claramente por multitudes de hasta treinta mil; Wesley predicó un estimado de cuarenta mil sermones en su vida, aprendiendo su método al aire libre de Whitefield. El problema en la época presente no es el método sino la audiencia: menos personas hoy están dispuestas a venir.</p>
+        <p>El tercero es el <em>evangelismo como estilo de vida</em>—el enfoque del "ir y vivir" que describió Joseph Aldrich. Es el cristiano común testificando todos los días en relaciones naturales. Una vida transformada provoca la pregunta: "¿Cómo puedo obtener lo que usted tiene?"—y el creyente responde con el evangelio. Ninguno de los tres reemplaza a los otros; la iglesia sabia practica los tres.</p>
+
+        <h3>V. El Evangelismo Es Proclamación, no Manipulación</h3>
+        <p>Esta distinción es crítica. Algunos métodos evangelísticos presionan por una decisión mediante música emotiva, culpa, miedo o falsas promesas de salud y riqueza. Tales enfoques no son evangelismo; son manipulación. Pablo rechazó estas técnicas:</p>
+        <blockquote>"Y ni mi palabra ni mi predicación fue con palabras persuasivas de humana sabiduría, sino con demostración del Espíritu y de poder." (1 Corintios 2:4, RVG)</blockquote>
+        <p>No confiaba en métodos ingeniosos sino en el Espíritu. La diferencia es la confianza: uno confía en la técnica, el otro en Dios. Un evangelista manipulador puede producir una respuesta, pero la respuesta es a la presión, no a Cristo. Un evangelista fiel presenta la verdad claramente y permite que el Espíritu de Dios haga su obra. Cuando se usa la manipulación, el evangelio mismo se distorsiona—las buenas nuevas se convierten en un discurso de ventas. Los testigos fieles, por lo tanto, rechazan cualquier método que presione, engañe o coaccione.</p>
+
+        <h3>VI. La Claridad No Es Opcional</h3>
+        <p>Un mensaje vago produce un entendimiento vago. Si un oyente no entiende quién es Dios (santo, justo, amoroso), qué es el pecado (rebelión contra un Dios santo), lo que Cristo ha hecho (murió como sustituto y resucitó), y qué respuesta se requiere (arrepentimiento y fe), entonces esa persona no puede ser salva. La salvación no es un sentimiento; es una respuesta a la verdad entendida. Por lo tanto, al compartir el evangelio, el creyente no debe asumir conocimiento previo. La jerga cristiana como "nacido de nuevo" o "salvo por gracia" debe ser explicada. Jesús mismo se tomó tiempo para explicar las Escrituras a los discípulos de Emaús (Lucas 24:27). No se apresuró. Tampoco debe hacerlo el evangelista moderno. La claridad es un acto de amor y obediencia.</p>
+
+        <h3>VII. Fidelidad, No Resultados</h3>
+        <p>Uno de los mayores malentendidos en el evangelismo es que el éxito se mide por los resultados visibles. Pablo escribió:</p>
+        <blockquote>"Yo planté, Apolos regó; pero el crecimiento lo ha dado Dios." (1 Corintios 3:6, RVG)</blockquote>
+        <p>Pablo plantó, Apolos regó—ambos fueron fieles. Pero el crecimiento vino de Dios. Esto es liberador. Muchos creyentes están paralizados por el miedo al fracaso: "¿Y si comparto y nadie se salva?" Las siete proposiciones responden ese miedo. Si la persona promedio oye el evangelio siete veces antes de responder, el creyente que comparte una vez puede estar plantando la séptima semilla, la semilla que Dios usará—o puede estar plantando la primera, que otro regará y otro cosechará. Ninguno de los tres ha fallado.</p>
+
+        <h3>VIII. El Peligro de Redefinir el Evangelismo</h3>
+        <p>En contextos contemporáneos, el evangelismo a menudo se redefine para significar casi cualquier actividad buena. Algunos dicen que alimentar al hambriento es evangelismo. Otros dicen que la justicia social es evangelismo. Otros dicen que una presencia amistosa es evangelismo. Estas son cosas buenas, pero no son el evangelio. El evangelismo es la <em>comunicación del evangelio</em>. Se puede alimentar a mil personas y nunca mencionar por qué Cristo murió. Se puede luchar por la justicia y nunca hablar de la cruz. Se puede ser la persona más amable del vecindario y nunca explicar que "todos han pecado" y que "Cristo murió por nuestros pecados." Si se elimina el mensaje, se elimina el evangelismo mismo. Las obras de misericordia son vitales, pero deben ir acompañadas de la verdad hablada. El mayor acto de amor es decirle a un pecador cómo ser reconciliado con Dios.</p>
+
+        <h3>Conclusión: Una Definición de Trabajo</h3>
+        <p>Uniendo los hilos, este curso adopta una definición de trabajo: <strong>El evangelismo es la comunicación clara y fiel del evangelio, en el poder del Espíritu Santo, con la intención de que el oyente entienda, crea y siga a Cristo en la comunión de la iglesia.</strong> La definición une la simplicidad de Niles, el equilibrio del Comité del Arzobispo y la precisión de Stanfield. Excluye la manipulación. Excluye la presencia silenciosa como sustituto suficiente. Excluye la redefinición como sola acción social. Y coloca la obra donde las Escrituras la colocan: en la proclamación de un mendigo a otro, que juntos se inclinan ante el Rey.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 2 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 2 — 30 Preguntas</span></h2>
+    <p>
+        <span class="lang-en"><strong>Certificate track:</strong> Section A (multiple choice) required at 90%. Section B (short answer) optional.</span>
+        <span class="lang-es"><strong>Pista de Certificado:</strong> Sección A (opción múltiple) obligatoria al 90%. Sección B (respuesta corta) opcional.</span>
+    </p>
+    <p>
+        <span class="lang-en"><strong>M.Div./Th.M. track:</strong> Both sections required at 90% each, independently.</span>
+        <span class="lang-es"><strong>Pista de M.Div./Th.M.:</strong> Ambas secciones obligatorias al 90% cada una, independientemente.</span>
+    </p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="clearExamDataBtn" class="small" style="background:#a0512a;">🗑 <span class="lang-en">Clear My Answers</span><span class="lang-es">Borrar Mis Respuestas</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;" aria-live="polite"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ======================== CONFIG ========================
+const UNIT_NUM = 2;
+const TOTAL_UNITS = 13; /* CTS Q24 audit 2026-05-28: normalized to 13. */
+const PASS_THRESHOLD = 0.90;
+const NS = 'cts_ev_';
+const UNIT_KEY = NS + 'unit' + UNIT_NUM;
+const PROGRESS_KEY = NS + 'progress';
+const PASSED_KEY = NS + 'unit' + UNIT_NUM + '_passed';
+const MC_PASSED_KEY = NS + 'u' + UNIT_NUM + '_mc_passed';
+const LOCKOUT_KEY = NS + 'unit' + UNIT_NUM + '_sa_lockout';
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch(e) { progress = {}; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(NS + 'unit' + i + '_passed') === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSEvangelismUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSEvangelismUnit1.html"; };
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (localStorage.getItem(PASSED_KEY) === 'true') location.href = "CTSEvangelismUnit3.html";
+    else alert(currentLang === 'es' ? "Por favor apruebe la Unidad 2 primero." : "Please pass Unit 2 first.");
+};
+updateProgressGrid();
+
+// ======================== REGISTRATION ========================
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+/* CTS audit 2026-05-23: registration is collected only on Unit 1. This unit reads the saved
+   student from localStorage. If nothing is saved, default silently to the Certificate track. */
+function loadReg() {
+    let saved = localStorage.getItem('cts_student');
+    if (saved) {
+        try { student = JSON.parse(saved); } catch(e) { student = { name: '', email: '', country: '', program: 'Certificate of Ministry' }; }
+    }
+    if (!student || !student.program) { student = student || {}; student.program = 'Certificate of Ministry'; }
+    /* Keep cts_track in sync from the saved program (defaults to cert when absent). */
+    if (!localStorage.getItem('cts_track')) {
+        localStorage.setItem('cts_track', student.program === 'Master of Divinity' ? 'mdiv' : (student.program === 'Master of Theology' ? 'thm' : 'cert'));
+    }
+    applyTrackBanner();
+}
+function applyTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    const track = localStorage.getItem('cts_track') || 'cert';
+    banner.style.display = 'block';
+    /* CTS audit 2026-05-23: added Th.M. banner branch; both Masters tracks require both sections. */
+    if (track === 'thm') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Theology — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Teología — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else if (track === 'mdiv') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Divinity — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Divinidad — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else {
+        banner.innerHTML = '<span class="lang-en">Track: Certificate — Section A required (90%). Section B optional.</span><span class="lang-es">Pista: Certificado — Sección A obligatoria (90%). Sección B opcional.</span>';
+    }
+}
+/* CTS audit 2026-05-23: registration listeners removed (no reg form on this unit). */
+loadReg();
+applyTrackBanner();
+
+// ======================== QUESTIONS — MC distribution A=B=C=D=5 ========================
+const mcQuestions = [
+    { textEn: "1. The Greek root behind the New Testament word for the gospel is:", textEs: "1. La raíz griega detrás de la palabra del Nuevo Testamento para el evangelio es:", optionsEn: ["kerygma", "didache", "logos", "euangelion"], optionsEs: ["kerygma", "didache", "logos", "euangelion"], correct: 3, explanationEn: "Euangelion means 'good news' and is the root of evangel, evangelism, evangelist, evangelistic, and evangelical.", explanationEs: "Euangelion significa 'buenas nuevas' y es la raíz de evangelio, evangelismo, evangelista, evangelístico y evangélico." },
+    { textEn: "2. The 'evangel' itself, properly understood, is:", textEs: "2. El 'evangelio' mismo, propiamente entendido, es:", optionsEn: ["The good news that Christ died and rose", "A message about hell", "A method of preaching", "A church program"], optionsEs: ["Las buenas nuevas de que Cristo murió y resucitó", "Un mensaje sobre el infierno", "Un método de predicación", "Un programa de iglesia"], correct: 0, explanationEn: "The evangel is the good news that Christ died for sinners and rose again.", explanationEs: "El evangelio son las buenas nuevas de que Cristo murió por los pecadores y resucitó." },
+    { textEn: "3. According to this unit, one can be evangelical without being:", textEs: "3. Según esta unidad, uno puede ser evangélico sin ser:", optionsEn: ["Evangelistic", "Saved", "Reverent", "Honest"], optionsEs: ["Evangelístico", "Salvo", "Respetuoso", "Honesto"], correct: 0, explanationEn: "An evangelical endorses the gospel; an evangelistic person actively presents it. They are not the same.", explanationEs: "Un evangélico respalda el evangelio; una persona evangelística lo presenta activamente. No son lo mismo." },
+    { textEn: "4. The Archbishop's Committee (1918) defined evangelism as presenting Christ in the power of:", textEs: "4. El Comité del Arzobispo (1918) definió el evangelismo como presentar a Cristo en el poder de:", optionsEn: ["The preacher's personality", "Music and atmosphere", "The Holy Spirit", "Cultural relevance"], optionsEs: ["La personalidad del predicador", "Música y ambiente", "El Espíritu Santo", "Relevancia cultural"], correct: 2, explanationEn: "The 1918 definition names the Holy Spirit as the power.", explanationEs: "La definición de 1918 nombra al Espíritu Santo como el poder." },
+    { textEn: "5. The Archbishop's Committee definition has a threefold goal: that men trust, accept, and:", textEs: "5. La definición del Comité del Arzobispo tiene un triple objetivo: que los hombres confíen, acepten y:", optionsEn: ["Memorize doctrine", "Vote for the right party", "Tithe regularly", "Serve Him in the fellowship of the church"], optionsEs: ["Memoricen doctrina", "Voten por el partido correcto", "Diezmen regularmente", "Le sirvan en la comunión de la iglesia"], correct: 3, explanationEn: "The third element is service to Christ within His church.", explanationEs: "El tercer elemento es el servicio a Cristo dentro de Su iglesia." },
+    { textEn: "6. D. T. Niles defined evangelism as:", textEs: "6. D. T. Niles definió el evangelismo como:", optionsEn: ["One beggar telling another where to get food", "A well-funded crusade", "The work of trained professionals", "An emotional appeal"], optionsEs: ["Un mendigo diciéndole a otro dónde conseguir comida", "Una cruzada bien financiada", "El trabajo de profesionales capacitados", "Un llamado emocional"], correct: 0, explanationEn: "Niles' famous image is the beggar-to-beggar metaphor.", explanationEs: "La famosa imagen de Niles es la metáfora de mendigo a mendigo." },
+    { textEn: "7. Faris Whitesell described evangelistic preaching as preaching with the aim of:", textEs: "7. Faris Whitesell describió la predicación evangelística como predicación con el objetivo de:", optionsEn: ["Entertainment", "Cultural commentary", "Winning a verdict for Christ", "Academic discussion"], optionsEs: ["Entretenimiento", "Comentario cultural", "Ganar un veredicto para Cristo", "Discusión académica"], correct: 2, explanationEn: "Whitesell emphasized winning a verdict in favor of the Lord Jesus Christ.", explanationEs: "Whitesell enfatizó ganar un veredicto a favor del Señor Jesucristo." },
+    { textEn: "8. George Sweazy observed that a church tends to:", textEs: "8. George Sweazy observó que una iglesia tiende a:", optionsEn: ["Naturally grow in evangelism", "Drift away from evangelism, never toward it", "Stay constant in evangelism", "Evangelize only in revivals"], optionsEs: ["Crecer naturalmente en evangelismo", "Alejarse del evangelismo, nunca hacia él", "Mantenerse constante en evangelismo", "Evangelizar solo en avivamientos"], correct: 1, explanationEn: "Sweazy noted the constant drift away from evangelism.", explanationEs: "Sweazy notó la deriva constante lejos del evangelismo." },
+    { textEn: "9. According to the seven propositions, the average person hears the gospel about how many times before responding?", textEs: "9. Según las siete proposiciones, ¿cuántas veces oye el evangelio la persona promedio antes de responder?", optionsEn: ["Once", "About 7 times", "About 20 times", "About 50 times"], optionsEs: ["Una vez", "Unas 7 veces", "Unas 20 veces", "Unas 50 veces"], correct: 1, explanationEn: "Research suggests about seven hearings.", explanationEs: "La investigación sugiere unas siete audiciones." },
+    { textEn: "10. About what percentage of conversions take place in a one-on-one setting?", textEs: "10. ¿Aproximadamente qué porcentaje de conversiones ocurren en un entorno personal, uno a uno?", optionsEn: ["About 15%", "About 50%", "About 85%", "About 99%"], optionsEs: ["Un 15%", "Un 50%", "Un 85%", "Un 99%"], correct: 2, explanationEn: "Approximately 85% of converts have heard the gospel one-on-one.", explanationEs: "Aproximadamente el 85% de los convertidos han oído el evangelio uno a uno." },
+    { textEn: "11. What percentage of conversions take place at an event such as a crusade?", textEs: "11. ¿Qué porcentaje de conversiones ocurren en un evento como una cruzada?", optionsEn: ["About 15%", "About 50%", "About 75%", "About 90%"], optionsEs: ["Un 15%", "Un 50%", "Un 75%", "Un 90%"], correct: 0, explanationEn: "Only about 15% of conversions happen at evangelistic events.", explanationEs: "Solo alrededor del 15% de las conversiones ocurren en eventos evangelísticos." },
+    { textEn: "12. The 'go and tell' New Testament pattern is called:", textEs: "12. El patrón del Nuevo Testamento 'ir y decir' se llama:", optionsEn: ["Mass evangelism", "Lifestyle evangelism", "Liturgical evangelism", "Personal evangelism"], optionsEs: ["Evangelismo masivo", "Evangelismo como estilo de vida", "Evangelismo litúrgico", "Evangelismo personal"], correct: 3, explanationEn: "'Go and tell' describes personal evangelism.", explanationEs: "'Ir y decir' describe el evangelismo personal." },
+    { textEn: "13. The 'come and see' pattern, associated with Whitefield, Wesley, and Finney, is:", textEs: "13. El patrón 'venid y ved', asociado con Whitefield, Wesley y Finney, es:", optionsEn: ["Personal evangelism", "Mass evangelism", "Lifestyle evangelism", "Catechetical evangelism"], optionsEs: ["Evangelismo personal", "Evangelismo masivo", "Evangelismo como estilo de vida", "Evangelismo catequético"], correct: 1, explanationEn: "'Come and see' describes mass evangelism.", explanationEs: "'Venid y ved' describe el evangelismo masivo." },
+    { textEn: "14. Joseph Aldrich's 'go and live' approach is called:", textEs: "14. El enfoque 'ir y vivir' de Joseph Aldrich se llama:", optionsEn: ["Personal evangelism", "Mass evangelism", "Lifestyle evangelism", "Confrontational evangelism"], optionsEs: ["Evangelismo personal", "Evangelismo masivo", "Evangelismo como estilo de vida", "Evangelismo confrontacional"], correct: 2, explanationEn: "Aldrich's term is lifestyle evangelism.", explanationEs: "El término de Aldrich es evangelismo como estilo de vida." },
+    { textEn: "15. 1 Corinthians 2:4 warns that Paul did not use:", textEs: "15. 1 Corintios 2:4 advierte que Pablo no usó:", optionsEn: ["Scripture", "Persuasive words of human wisdom", "Prayer", "The Holy Spirit"], optionsEs: ["Escritura", "Palabras persuasivas de humana sabiduría", "Oración", "El Espíritu Santo"], correct: 1, explanationEn: "Paul rejected persuasive words of human wisdom, depending instead on the Spirit.", explanationEs: "Pablo rechazó las palabras persuasivas de humana sabiduría, dependiendo en cambio del Espíritu." },
+    { textEn: "16. According to this unit, clarity in evangelism requires the hearer to understand four things: who God is, what sin is, what Christ has done, and:", textEs: "16. Según esta unidad, la claridad en el evangelismo requiere que el oyente entienda cuatro cosas: quién es Dios, qué es el pecado, lo que Cristo ha hecho, y:", optionsEn: ["What response is required", "The history of the church", "The doctrine of the Trinity in detail", "Hebrew grammar"], optionsEs: ["Qué respuesta se requiere", "La historia de la iglesia", "La doctrina de la Trinidad en detalle", "Gramática hebrea"], correct: 0, explanationEn: "The fourth element is the required response: repentance and faith.", explanationEs: "El cuarto elemento es la respuesta requerida: arrepentimiento y fe." },
+    { textEn: "17. Salvation, according to this unit, is:", textEs: "17. La salvación, según esta unidad, es:", optionsEn: ["A feeling", "Automatic for the morally sincere", "Decided by emotion alone", "A response to truth understood"], optionsEs: ["Un sentimiento", "Automática para los moralmente sinceros", "Decidida solo por la emoción", "Una respuesta a la verdad entendida"], correct: 3, explanationEn: "Salvation is a response to truth understood, not a mere feeling.", explanationEs: "La salvación es una respuesta a la verdad entendida, no un mero sentimiento." },
+    { textEn: "18. Jesus took time on the road to Emmaus to:", textEs: "18. Jesús se tomó tiempo en el camino a Emaús para:", optionsEn: ["Rebuke the disciples", "Explain the Scriptures", "Multiply bread", "Heal a blind man"], optionsEs: ["Reprender a los discípulos", "Explicar las Escrituras", "Multiplicar el pan", "Sanar a un ciego"], correct: 1, explanationEn: "In Luke 24:27 Jesus expounded the Scriptures.", explanationEs: "En Lucas 24:27 Jesús expuso las Escrituras." },
+    { textEn: "19. The unit's working definition of evangelism includes communication of the gospel in the power of the Holy Spirit with the intent that the hearer:", textEs: "19. La definición de trabajo de esta unidad del evangelismo incluye la comunicación del evangelio en el poder del Espíritu Santo con la intención de que el oyente:", optionsEn: ["Attend a meeting", "Make a financial pledge", "Agree intellectually", "Understand, believe, and follow Christ in the fellowship of the church"], optionsEs: ["Asista a una reunión", "Haga una promesa financiera", "Esté de acuerdo intelectualmente", "Comprenda, crea y siga a Cristo en la comunión de la iglesia"], correct: 3, explanationEn: "The hearer is to understand, believe, and follow Christ within the church.", explanationEs: "El oyente debe comprender, creer y seguir a Cristo dentro de la iglesia." },
+    { textEn: "20. To redefine evangelism as social action alone:", textEs: "20. Redefinir el evangelismo como mera acción social:", optionsEn: ["Strengthens the gospel", "Is required by Scripture", "Removes evangelism itself", "Makes the gospel clearer"], optionsEs: ["Fortalecería el evangelio", "Es requerido por las Escrituras", "Elimina el evangelismo mismo", "Haría el evangelio más claro"], correct: 2, explanationEn: "If the message is removed, evangelism itself is removed.", explanationEs: "Si se elimina el mensaje, se elimina el evangelismo mismo." }
+];
+
+const kwQuestions = [
+    { textEn: "21. Define the six terms in the evangel family (evangel, evangelism, evangelist, evangelistic, evangelical, evangelistic preaching) in your own words. Why does the unit insist that one can be evangelical without being evangelistic?", textEs: "21. Defina los seis términos de la familia del evangelio (evangelio, evangelismo, evangelista, evangelístico, evangélico, predicación evangelística) en sus propias palabras. ¿Por qué la unidad insiste en que uno puede ser evangélico sin ser evangelístico?", kw_en: ["evangel", "gospel", "news", "witness", "share", "term", "preach", "without"], kw_es: ["evangel", "buenas", "nuevas", "testimon", "comparti", "términ", "termin", "predic"], modelEn: "The evangel family shares one root: the evangel is the good news itself; evangelism is the act of sharing it; an evangelist is the one who shares; evangelistic describes that activity; evangelical names sound gospel doctrine; and evangelistic preaching proclaims the good news for a verdict. One can be evangelical, holding right doctrine, without being evangelistic, actually sharing it — which is why the unit insists the two are not the same.", modelEs: "La familia del evangelio comparte una raíz: el evangelio es la buena nueva misma; el evangelismo es el acto de compartirla; el evangelista es quien la comparte; evangelístico describe esa actividad; evangélico nombra la doctrina sana del evangelio; y la predicación evangelística proclama la buena nueva buscando un veredicto. Uno puede ser evangélico, sostener la doctrina correcta, sin ser evangelístico, sin compartirla de hecho — por eso la unidad insiste en que no son lo mismo.", authorDraft: true },
+    { textEn: "22. State the Archbishop's Committee (1918) definition of evangelism in your own words. Identify the three elements of its goal (trust, accept, serve) and explain why the phrase 'in the fellowship of the Church' matters.", textEs: "22. Exprese la definición de evangelismo del Comité del Arzobispo (1918) en sus propias palabras. Identifique los tres elementos de su objetivo (confiar, aceptar, servir) y explique por qué la frase 'en la comunión de la Iglesia' es importante.", kw_en: ["trust", "accept", "serve", "fellowship", "church", "commit", "goal", "definit"], kw_es: ["confi", "acept", "servir", "sirv", "comunión", "comunion", "iglesia", "compromet"], modelEn: "The Archbishop's Committee defined evangelism as so presenting Christ that people come to put their trust in God through Him, to accept Him as Savior, and to serve Him as King in the fellowship of the Church. Its goal has three elements: trust, accept, and serve. The phrase 'in the fellowship of the Church' matters because conversion is not private; the new believer is brought into the community of God's people, not left alone.", modelEs: "El Comité del Arzobispo definió el evangelismo como presentar a Cristo de tal manera que las personas lleguen a poner su confianza en Dios por medio de Él, a aceptarlo como Salvador y a servirle como Rey en la comunión de la Iglesia. Su objetivo tiene tres elementos: confiar, aceptar y servir. La frase 'en la comunión de la Iglesia' importa porque la conversión no es privada; el nuevo creyente es llevado a la comunidad del pueblo de Dios, no dejado solo.", authorDraft: true },
+    { textEn: "23. Explain D. T. Niles' definition: 'Evangelism is one beggar telling another beggar where to get food.' What does this image protect the evangelist from, and what does it protect the gospel from?", textEs: "23. Explique la definición de D. T. Niles: 'El evangelismo es un mendigo diciéndole a otro mendigo dónde conseguir comida.' ¿De qué protege esta imagen al evangelista, y de qué protege al evangelio?", kw_en: ["beggar", "food", "humility", "equal", "gift", "grace", "pride", "protect"], kw_es: ["mendig", "comida", "aliment", "humild", "igual", "regal", "gracia", "orgull"], modelEn: "Niles said evangelism is one beggar telling another beggar where to find food. The image protects the evangelist from pride, because a beggar has nothing of his own to boast in; he simply received bread by grace. And it protects the gospel from becoming a human achievement, because the food is a gift, freely given, that the beggar merely points others toward.", modelEs: "Niles dijo que el evangelismo es un mendigo diciéndole a otro mendigo dónde encontrar comida. La imagen protege al evangelista del orgullo, porque un mendigo no tiene nada propio de qué jactarse; simplemente recibió pan por gracia. Y protege al evangelio de volverse un logro humano, porque la comida es un regalo, dado gratuitamente, que el mendigo solo señala a otros.", authorDraft: true },
+    { textEn: "24. List at least four of the seven propositions about evangelism from this unit, and explain why each shapes the work of the witness today.", textEs: "24. Enumere al menos cuatro de las siete proposiciones sobre el evangelismo de esta unidad, y explique por qué cada una da forma a la obra del testigo hoy.", kw_en: ["proposit", "witness", "gospel", "work", "spirit", "believ", "scriptur", "shape"], kw_es: ["proposici", "posici", "testig", "evangel", "obra", "espíritu", "espiritu", "crey"], modelEn: "Among the seven propositions: evangelism is rooted in God's own initiative; it centers on the gospel of Christ, not on the messenger; it depends on the Holy Spirit and not human skill; it is the responsibility of every believer; and it must be governed by Scripture. Each shapes the witness today by keeping the work God-centered, gospel-centered, and Spirit-dependent rather than a human program.", modelEs: "Entre las siete proposiciones: el evangelismo está arraigado en la iniciativa de Dios; se centra en el evangelio de Cristo, no en el mensajero; depende del Espíritu Santo y no de la habilidad humana; es responsabilidad de cada creyente; y debe ser gobernado por la Escritura. Cada una moldea al testigo hoy manteniendo la obra centrada en Dios, en el evangelio y dependiente del Espíritu en vez de un programa humano.", authorDraft: true },
+    { textEn: "25. Distinguish the three New Testament types of evangelism (personal, mass, lifestyle). Why does the unit insist that none replaces the others?", textEs: "25. Distinga los tres tipos del Nuevo Testamento de evangelismo (personal, masivo, estilo de vida). ¿Por qué la unidad insiste en que ninguno reemplaza a los otros?", kw_en: ["personal", "mass", "life", "three", "replace", "public", "each", "need"], kw_es: ["personal", "masiv", "estilo", "vida", "reemplaz", "públic", "public", "cada"], modelEn: "The New Testament shows three types: personal evangelism, one-on-one as Jesus did with the woman at the well; mass evangelism, public proclamation as at Pentecost; and lifestyle evangelism, the transformed life that provokes questions. None replaces the others because each reaches people the others cannot; together they form the full pattern of how the gospel spreads.", modelEs: "El Nuevo Testamento muestra tres tipos: el evangelismo personal, uno a uno como Jesús con la mujer junto al pozo; el evangelismo masivo, proclamación pública como en Pentecostés; y el evangelismo como estilo de vida, la vida transformada que provoca preguntas. Ninguno reemplaza a los otros porque cada uno alcanza a personas que los demás no pueden; juntos forman el patrón completo de cómo se difunde el evangelio.", authorDraft: true },
+    { textEn: "26. Paul wrote that his preaching was 'not with persuasive words of human wisdom' (1 Corinthians 2:4, NKJV). Distinguish biblical persuasion from manipulation, and explain why manipulation distorts the gospel itself.", textEs: "26. Pablo escribió que su predicación no fue 'con palabras persuasivas de humana sabiduría' (1 Corintios 2:4, RVG). Distinga la persuasión bíblica de la manipulación, y explique por qué la manipulación distorsiona el evangelio mismo.", kw_en: ["persuasion", "manipulat", "spirit", "gospel", "free", "pressure", "distort", "human"], kw_es: ["persuasi", "manipul", "espíritu", "espiritu", "evangel", "libre", "presión", "presion"], modelEn: "Biblical persuasion appeals to the mind and conscience with truth, leaving the response free and trusting the Spirit to convict. Manipulation uses pressure, fear, or emotional trickery to force a decision. Manipulation distorts the gospel itself because the gospel is good news to be freely believed; coercing a response produces a false convert and misrepresents a God who invites rather than compels.", modelEs: "La persuasión bíblica apela a la mente y la conciencia con la verdad, dejando libre la respuesta y confiando en que el Espíritu convenza. La manipulación usa presión, miedo o engaño emocional para forzar una decisión. La manipulación distorsiona el evangelio mismo porque el evangelio es buena nueva que se cree libremente; forzar una respuesta produce un falso converso y tergiversa a un Dios que invita en vez de obligar.", authorDraft: true },
+    { textEn: "27. The unit lists four elements that must be made clear in evangelism (who God is, what sin is, what Christ has done, what response is required). State all four and explain why a vague gospel produces a vague response.", textEs: "27. La unidad enumera cuatro elementos que deben aclararse en el evangelismo (quién es Dios, qué es el pecado, lo que Cristo ha hecho, qué respuesta se requiere). Enuncie los cuatro y explique por qué un evangelio vago produce una respuesta vaga.", kw_en: ["god", "sin", "christ", "response", "clear", "vague", "requir", "four"], kw_es: ["dios", "pecad", "cristo", "respuesta", "clar", "vag", "requier", "cuatro"], modelEn: "The four elements that must be made clear are who God is, what sin is, what Christ has done, and what response is required. A vague gospel produces a vague response because a hearer cannot trust what he does not understand; if God's holiness, his own sin, Christ's cross, and the call to repent and believe are blurred, any 'decision' rests on confusion rather than truth.", modelEs: "Los cuatro elementos que deben aclararse son quién es Dios, qué es el pecado, lo que Cristo ha hecho y qué respuesta se requiere. Un evangelio vago produce una respuesta vaga porque el oyente no puede confiar en lo que no entiende; si la santidad de Dios, su propio pecado, la cruz de Cristo y el llamado a arrepentirse y creer se difuminan, cualquier 'decisión' descansa en la confusión en vez de la verdad.", authorDraft: true },
+    { textEn: "28. If approximately 85% of conversions happen one-on-one and the average person hears the gospel about seven times before responding, what practical implications follow for the believer's daily witness?", textEs: "28. Si aproximadamente el 85% de las conversiones ocurren uno a uno y la persona promedio oye el evangelio unas siete veces antes de responder, ¿qué implicaciones prácticas se derivan para el testimonio diario del creyente?", kw_en: ["one-on-one", "personal", "seven", "faithful", "daily", "relationship", "time", "witness"], kw_es: ["uno", "personal", "siete", "fiel", "diari", "relaci", "tiemp", "testimon"], modelEn: "If most conversions happen one-on-one and people hear the gospel about seven times before responding, then the believer's daily, personal witness matters more than occasional events. It means being faithful in ordinary relationships, expecting to be one of several voices over time rather than the single decisive one, and not growing discouraged when a first conversation bears no visible fruit.", modelEs: "Si la mayoría de las conversiones ocurren uno a uno y las personas oyen el evangelio unas siete veces antes de responder, entonces el testimonio diario y personal del creyente importa más que los eventos ocasionales. Significa ser fiel en las relaciones ordinarias, esperar ser una de varias voces con el tiempo en vez de la única decisiva, y no desanimarse cuando una primera conversación no da fruto visible.", authorDraft: true },
+    { textEn: "29. The unit warns against three common redefinitions of evangelism (feeding the hungry, social justice, friendly presence) as substitutes for the gospel itself. Why are these good things dangerous when allowed to replace evangelism?", textEs: "29. La unidad advierte contra tres redefiniciones comunes del evangelismo (alimentar al hambriento, justicia social, presencia amistosa) como sustitutos del evangelio mismo. ¿Por qué estas cosas buenas son peligrosas cuando se les permite reemplazar al evangelismo?", kw_en: ["replace", "gospel", "social", "presence", "substitut", "good", "danger", "message"], kw_es: ["reemplaz", "sustitu", "evangel", "social", "presencia", "buen", "peligr", "mensaj"], modelEn: "Feeding the hungry, pursuing social justice, and being a friendly presence are good things, but they are dangerous when allowed to replace evangelism because they can quiet the conscience into thinking the gospel has been shared when no one has heard the message of Christ. Good deeds may open a door, but they cannot save; only the proclaimed gospel does. When the good replaces the essential, people are served in body but lost in soul.", modelEs: "Alimentar al hambriento, buscar la justicia social y ser una presencia amistosa son cosas buenas, pero son peligrosas cuando se les permite reemplazar el evangelismo porque pueden acallar la conciencia haciéndola pensar que se ha compartido el evangelio cuando nadie ha oído el mensaje de Cristo. Las buenas obras pueden abrir una puerta, pero no pueden salvar; solo el evangelio proclamado lo hace. Cuando lo bueno reemplaza lo esencial, se sirve a las personas en el cuerpo pero se pierden en el alma.", authorDraft: true },
+    { textEn: "30. State the unit's working definition of evangelism and explain how it unites Niles' simplicity, the Archbishop's Committee's balance, and Stanfield's precision while ruling out manipulation and redefinition.", textEs: "30. Exprese la definición de trabajo de esta unidad del evangelismo y explique cómo une la simplicidad de Niles, el equilibrio del Comité del Arzobispo y la precisión de Stanfield, excluyendo la manipulación y la redefinición.", kw_en: ["definit", "gospel", "balance", "manipulat", "redefin", "trust", "fellowship", "clear"], kw_es: ["definici", "evangel", "equilibri", "balance", "manipul", "redefin", "confi", "comunión"], modelEn: "The unit's working definition is that evangelism is sharing the good news of Christ so that people come to trust, accept, and serve Him within the fellowship of the Church. It unites Niles' simplicity (one beggar telling another), the Archbishop's Committee's balance (trust, accept, serve in the Church), and Stanfield's precision (a clear gospel content), while ruling out manipulation, which forces response, and redefinition, which substitutes good deeds for the message.", modelEs: "La definición de trabajo de la unidad es que el evangelismo es compartir la buena nueva de Cristo para que las personas lleguen a confiar, aceptar y servirle dentro de la comunión de la Iglesia. Une la simplicidad de Niles (un mendigo diciéndole a otro), el equilibrio del Comité del Arzobispo (confiar, aceptar, servir en la Iglesia) y la precisión de Stanfield (un contenido claro del evangelio), excluyendo la manipulación, que fuerza la respuesta, y la redefinición, que sustituye el mensaje por buenas obras.", authorDraft: true }
+];
+
+// ======================== STATE ========================
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+let unitPassed = localStorage.getItem(PASSED_KEY) === 'true';
+let mcPassed = localStorage.getItem(MC_PASSED_KEY) === 'true';
+
+function kwHit(answer, kw) {
+    if (!answer) return false;
+    var a = answer.toLowerCase();
+    var k = kw.toLowerCase();
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    var re = (k.length <= 4)
+        ? new RegExp("(^|[^\\p{L}])" + esc + "($|[^\\p{L}])", "u")
+        : new RegExp("(^|[^\\p{L}])" + esc, "u");
+    return re.test(a);
+}
+function essayPartialMatch(answer, keywords) {
+    if (!answer || answer.trim().length < 100) return false;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched >= 3;
+}
+function kwHitCount(answer, keywords) {
+    if (!answer) return 0;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched;
+}
+
+function saveUnitState() {
+    localStorage.setItem(UNIT_KEY + '_mc', JSON.stringify(mcAnswers));
+    localStorage.setItem(UNIT_KEY + '_kw', JSON.stringify(kwAnswers));
+}
+function loadSavedAnswers() {
+    const savedMC = localStorage.getItem(UNIT_KEY + '_mc');
+    if (savedMC) { try { let p = JSON.parse(savedMC); if (Array.isArray(p) && p.length === 20) mcAnswers = p; } catch(e) {} }
+    const savedKW = localStorage.getItem(UNIT_KEY + '_kw');
+    if (savedKW) { try { let p = JSON.parse(savedKW); if (Array.isArray(p) && p.length === 10) kwAnswers = p; } catch(e) {} }
+}
+
+function clearAllLocal() {
+    if (confirm(currentLang === 'es' ? '⚠️ Esto borrará todas sus respuestas, estado de bloqueo y progreso de esta unidad. ¿Está seguro?' : '⚠️ This will erase all your answers, lockout status, and progress for this unit. Are you sure?')) {
+        localStorage.removeItem(UNIT_KEY + '_mc');
+        localStorage.removeItem(UNIT_KEY + '_kw');
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(PASSED_KEY);
+        localStorage.removeItem(MC_PASSED_KEY);
+        lockUntil = 0;
+        unitPassed = false;
+        mcPassed = false;
+        progress['unit' + UNIT_NUM] = false;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+        updateProgressGrid();
+    }
+}
+
+function clearExamAnswersOnly() {
+    if (confirm(currentLang === 'es' ? '⚠️ ¿Borrar todas sus respuestas para esta unidad? (El estado de aprobación de la unidad permanecerá si ya aprobó.)' : '⚠️ Clear all your answers for this unit? (Unit pass status will remain if already passed.)')) {
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        saveUnitState();
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+    }
+}
+
+function setSAOnlyLockout(disable) {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    const allTextareas = container.querySelectorAll('.kw-answer');
+    const allCheckBtns = container.querySelectorAll('button.small');
+    allTextareas.forEach(ta => ta.disabled = disable);
+    allCheckBtns.forEach(btn => {
+        if (btn.id !== 'submitExamBtn' && btn.id !== 'clearExamDataBtn' && btn.id !== 'clearDataBtn') btn.disabled = disable;
+    });
+}
+
+let lockoutInterval = null;
+function startLockoutTimer() {
+    if (lockoutInterval) clearInterval(lockoutInterval);
+    if (lockUntil > Date.now()) {
+        let banner = document.getElementById('lockoutBanner');
+        if (!banner) {
+            banner = document.createElement('div');
+            banner.id = 'lockoutBanner';
+            banner.className = 'lockout-banner';
+            const examResult = document.getElementById('examResult');
+            examResult.parentNode.insertBefore(banner, examResult);
+        }
+        setSAOnlyLockout(true);
+        const tick = () => {
+            if (lockUntil <= Date.now() || unitPassed) {
+                clearInterval(lockoutInterval);
+                setSAOnlyLockout(false);
+                if (banner) banner.remove();
+                return;
+            }
+            const rem = lockUntil - Date.now();
+            const mins = Math.floor(rem / 60000);
+            const secs = Math.floor((rem % 60000) / 1000);
+            banner.innerText = (currentLang === 'en'
+                ? `⏰ Section B locked for ${mins}:${secs.toString().padStart(2,'0')} (15-min retake lockout after failed submission)`
+                : `⏰ Sección B bloqueada por ${mins}:${secs.toString().padStart(2,'0')} (bloqueo de 15 min tras envío fallido)`);
+        };
+        tick();
+        lockoutInterval = setInterval(tick, 1000);
+    } else {
+        setSAOnlyLockout(false);
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+    }
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Section A — Multiple Choice (Questions 1–20)' : 'Sección A — Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const mcReveal = mcRevealed || mcPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMDiv ? 'Section B — Short Answer (Questions 21–30) — Masters Track (M.Div./Th.M.)' : 'Section B — Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMDiv ? 'Sección B — Respuesta Corta (Preguntas 21–30) — Pista de Maestría (M.Div./Th.M.)' : 'Sección B — Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here (minimum 20 characters)...' : 'Escriba su respuesta aquí (mínimo 20 caracteres)...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.disabled = (lockUntil > Date.now() || unitPassed);
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            if (lockUntil > Date.now() || unitPassed) return;
+            const answer = textarea.value.trim().toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? q.kw_es : q.kw_en;
+            if (answer.length < 100) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else {
+                var hc = kwHitCount(answer, keywords);
+                var passed = hc >= 3;
+                if (passed) {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('✓ Correct! (' + hc + ' key concepts found) Your answer includes the key ideas.') : ('✓ ¡Correcto! (' + hc + ' conceptos clave encontrados) Su respuesta incluye las ideas clave.');
+                    feedbackDiv.className = 'feedback-text correct';
+                    kwAnswers[idx] = textarea.value;
+                    saveUnitState();
+                } else {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('Not yet — ' + hc + ' of 3 needed key concepts found. Compare your answer with the model below, then revise.') : ('Todavía no — ' + hc + ' de 3 conceptos clave necesarios encontrados. Compare su respuesta con el modelo de abajo y revise.');
+                    feedbackDiv.className = 'feedback-text incorrect';
+                }
+                // Gold model-answer reveal box — shown after every check, pass or fail (Q24 standard rule 4)
+                var modelBox = div.querySelector('.model-answer-box');
+                if (!modelBox) {
+                    modelBox = document.createElement('div');
+                    modelBox.className = 'model-answer-box';
+                    div.appendChild(modelBox);
+                }
+                var label = currentLang === 'en' ? 'Model answer — study this' : 'Respuesta modelo — estudie esto';
+                var modelText = currentLang === 'en' ? q.modelEn : q.modelEs;
+                var draftFlag = q.authorDraft ? '<!--AUTHOR_DRAFT: model answer not yet voiced by author-->' : '';
+                modelBox.innerHTML = draftFlag + '<strong>' + label + '</strong><br>' + modelText;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(feedbackDiv);
+        container.appendChild(div);
+        textarea.addEventListener('input', (e) => { if (!(lockUntil > Date.now() || unitPassed)) { kwAnswers[idx] = e.target.value; saveUnitState(); } });
+    });
+    startLockoutTimer();
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? "<span style='color:green'>✓ ¡Unidad ya aprobada! Puede continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! You may proceed.</span>";
+        return;
+    }
+    if (Date.now() < lockUntil) {
+        let wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? `<span style='color:red'>⏰ Bloqueado ${wait} minutos más.</span>`
+            : `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    /* CTS audit 2026-05-23: no reg form here; student/track already loaded from localStorage (defaults to Certificate). */
+
+    let correctMC = 0;
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    const mcPercent = correctMC / 20;
+    if (!unitPassed) { mcRevealed = true; renderQuestions(); }
+
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    let saCorrect = 0;
+    if (isMDiv) {
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || '').toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+            if (essayPartialMatch(ans, keywords)) saCorrect++;
+        }
+    }
+    const saPercent = saCorrect / 10;
+
+    const mcPass = mcPercent >= PASS_THRESHOLD;
+    const saPass = saPercent >= PASS_THRESHOLD;
+    const overallPass = isMDiv ? (mcPass && saPass) : mcPass;
+
+    if (mcPass) {
+        mcPassed = true;
+        localStorage.setItem(MC_PASSED_KEY, 'true');
+    }
+
+    if (overallPass) {
+        unitPassed = true;
+        progress['unit' + UNIT_NUM] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(PASSED_KEY, 'true');
+        const msg = isMDiv
+            ? (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unidad 2 completada. Puede continuar a la Unidad 3.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unit 2 completed. You may proceed to Unit 3.</span>`)
+            : (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unidad 2 completada. Puede continuar a la Unidad 3.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unit 2 completed. You may proceed to Unit 3.</span>`);
+        document.getElementById('examResult').innerHTML = msg;
+        updateProgressGrid();
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+        if (lockoutInterval) clearInterval(lockoutInterval);
+    } else {
+        if (isMDiv && mcPass && !saPass) {
+            lockUntil = Date.now() + 15 * 60 * 1000;
+            localStorage.setItem(LOCKOUT_KEY, lockUntil);
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ Sección A APROBADA (${Math.round(mcPercent*100)}%). Sección B no aprobada (${Math.round(saPercent*100)}% &lt; 90%). Sección B bloqueada 15 minutos.</span>`
+                : `<span style='color:red'>❌ Section A PASSED (${Math.round(mcPercent*100)}%). Section B not yet passing (${Math.round(saPercent*100)}% &lt; 90%). Section B locked for 15 minutes.</span>`;
+            startLockoutTimer();
+            renderQuestions();
+        } else {
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ NO APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. Se requiere 90% en cada sección requerida. Revise sus respuestas e inténtelo de nuevo.</span>`
+                : `<span style='color:red'>❌ NOT PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. 90% required on each required section. Review your answers and try again.</span>`;
+        }
+    }
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('clearExamDataBtn').addEventListener('click', clearExamAnswersOnly);
+document.getElementById('clearDataBtn').addEventListener('click', clearAllLocal);
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') {
+        currentLang = 'es';
+        document.body.className = 'lang-es';
+        document.documentElement.lang = 'es';
+        this.textContent = 'English';
+    } else {
+        currentLang = 'en';
+        document.body.className = 'lang-en';
+        document.documentElement.lang = 'en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+loadSavedAnswers();
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = currentLang === 'es'
+        ? "<span style='color:green'>✅ Unidad 2 ya aprobada.</span>"
+        : "<span style='color:green'>✅ Unit 2 already passed.</span>";
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEvangelismReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruth and Esther — Unit 9</title>
+<style>
+  :root { --maroon:#7B2E2E; --gold:#C8A24B; --ink:#1d1d1d; --soft:#f5f2ec; --line:#ddd6c8; }
+  * { box-sizing:border-box; }
+  body { font-family:Georgia,'Times New Roman',serif; color:var(--ink); margin:0; background:#fbf9f4; line-height:1.6; }
+  body[data-lang="en"] .es { display:none; }
+  body[data-lang="es"] .en { display:none; }
+  header { background:var(--maroon); color:#fff; padding:24px 22px; }
+  header h1 { margin:0 0 6px; font-size:1.45rem; }
+  header .sub { font-style:italic; opacity:.92; }
+  header .credit { margin-top:10px; font-size:.78rem; opacity:.85; font-family:Arial,sans-serif; }
+  .langbar { background:#5e2222; padding:8px 22px; }
+  .langbar button { background:transparent; border:1px solid #fff; color:#fff; padding:5px 14px; margin-right:6px; border-radius:5px; cursor:pointer; font-family:Arial,sans-serif; font-size:.85rem; }
+  .langbar button.active { background:#fff; color:var(--maroon); font-weight:bold; }
+  .wrap { max-width:860px; margin:0 auto; padding:22px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:22px; margin:18px 0; }
+  h2 { color:var(--maroon); border-bottom:2px solid var(--gold); padding-bottom:6px; }
+  .track-bar { background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:14px 18px; margin:18px 0; font-family:Arial,sans-serif; }
+  .track-bar label { font-weight:bold; margin-right:10px; }
+  select, button { font-size:1rem; padding:8px 12px; border-radius:6px; border:1px solid #bbb; }
+  button { cursor:pointer; background:var(--maroon); color:#fff; border:none; font-family:Arial,sans-serif; }
+  button:disabled { background:#bbb; cursor:not-allowed; }
+  button.secondary { background:#fff; color:var(--maroon); border:1px solid var(--maroon); }
+  .teaching p { margin:0 0 14px; }
+  .q { border-top:1px solid var(--line); padding:18px 0; }
+  .q:first-child { border-top:none; }
+  .q .stem { font-weight:bold; margin-bottom:10px; }
+  .opt { display:block; margin:7px 0; padding:9px 12px; border:1px solid var(--line); border-radius:6px; cursor:pointer; background:#fff; font-family:Arial,sans-serif; }
+  .opt:hover { background:var(--soft); }
+  .opt.sel { border-color:var(--maroon); background:#f3e7e7; }
+  .opt.correct { border-color:#2e7d32; background:#e6f3e7; }
+  .opt.wrong { border-color:#b00020; background:#f7e6e9; }
+  .fb { font-family:Arial,sans-serif; font-size:.9rem; margin-top:8px; padding:8px 10px; border-radius:6px; display:none; }
+  .fb.ok { background:#e6f3e7; color:#1b5e20; display:block; }
+  .fb.no { background:#f7e6e9; color:#8e0018; display:block; }
+  textarea { width:100%; min-height:84px; font-family:Arial,sans-serif; font-size:.95rem; padding:10px; border:1px solid #bbb; border-radius:6px; resize:vertical; }
+  .model { display:none; margin-top:10px; border-left:4px solid var(--gold); background:#fdf8ec; padding:10px 14px; font-family:Arial,sans-serif; font-size:.92rem; }
+  .model.show { display:block; }
+  .model b { color:var(--maroon); }
+  .flag { color:#b00020; font-family:Arial,sans-serif; font-size:.8rem; }
+  .practice-tag { font-family:Arial,sans-serif; font-size:.78rem; color:#555; font-style:italic; }
+  .result { font-family:Arial,sans-serif; font-size:1.02rem; padding:14px; border-radius:8px; margin-top:14px; }
+  .result.pass { background:#e6f3e7; color:#1b5e20; }
+  .result.fail { background:#f7e6e9; color:#8e0018; }
+  .navrow { display:flex; justify-content:space-between; align-items:center; margin:24px 0; font-family:Arial,sans-serif; }
+  .note { font-family:Arial,sans-serif; font-size:.82rem; color:#666; }
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 6px;font-family:Georgia,serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--maroon);margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid var(--line);color:var(--maroon);text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:var(--maroon);}
+.unitnav a.active{background:var(--maroon);color:#fff;border-color:var(--maroon);}
+</style>
+</head>
+<body data-lang="en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header>
+  <h1>Ruth and Esther &mdash; <span class="en">Unit 9</span><span class="es">Unidad 9</span></h1>
+  <div class="sub"><span class="en">Class 9 — Deliverance, Conquest &amp; Purim (Esther 8–10)</span><span class="es">Clase 9 — Liberación, Conquista y Purim (Ester 8–10)</span></div>
+  <div class="credit">Glenda Rogers &middot; Chapala Theological Seminary &middot; Dr. Ted Rogers, Director</div>
+</header>
+<div class="langbar">
+  <button id="btnEn" class="active" onclick="setLang('en')">English</button>
+  <button id="btnEs" onclick="setLang('es')">Espa&ntilde;ol</button>
+</div>
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSREUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSREUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSREUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSREUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSREUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSREUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSREUnit7.html" title="Unit 7 · Unidad 7">7</a><a href="CTSREUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSREUnit9.html" title="Unit 9 · Unidad 9" class="active">9</a></nav><script>(function(){try{var p=JSON.parse(localStorage.getItem('cts_re_progress')||'{}');document.querySelectorAll('.cts-unitnav a').forEach(function(a,i){if(p['unit'+(i+1)])a.classList.add('completed');});}catch(e){}})();</script>
+  <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+    <span class="nl"><span class="en">Units</span><span class="es">Unidades</span></span>
+    <a href="CTSREUnit1.html">1</a>
+    <a href="CTSREUnit2.html">2</a>
+    <a href="CTSREUnit3.html">3</a>
+    <a href="CTSREUnit4.html">4</a>
+    <a href="CTSREUnit5.html">5</a>
+    <a href="CTSREUnit6.html">6</a>
+    <a href="CTSREUnit7.html">7</a>
+    <a href="CTSREUnit8.html">8</a>
+    <a href="CTSREUnit9.html" class="active">9</a>
+  </nav>
+
+
+  <div id="greet" class="note" style="margin:8px 0 0;"></div>
+
+
+  <div class="track-bar">
+    <label for="track"><span class="en">Track:</span><span class="es">Programa:</span></label>
+    <select id="track" onchange="setTrack()">
+      <option value="cert">Certificate / Certificado</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div class="note" id="trackNote" style="margin-top:8px;"></div>
+  </div>
+
+  <div class="card teaching">
+    <h2><span class="en">The Class</span><span class="es">La Clase</span></h2>
+    <p class="note">
+      <span class="en">Passage: Esther 8:1–10:3 &middot; Taught by Glenda Rogers. This preserves her teaching and class discussion.</span>
+      <span class="es">Pasaje: Ester 8:1–10:3 &middot; Ense&ntilde;ado por Glenda Rogers. Conserva su ense&ntilde;anza y la discusi&oacute;n de clase.</span>
+    </p>
+    <div class="en"><p>Esther 8–10 — Deliverance, Conquest, and Purim</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Observations</strong></p>
+    <p>God&#x27;s vengeance is perfect. Haman is hanged on the gallows he built for Mordecai; Mordecai assumes Haman&#x27;s place in royalty, even using the king&#x27;s signet ring to sign a new decree; Mordecai gains all of Haman&#x27;s estate; and the Jews annihilate those who wished to kill them, including Haman&#x27;s ten sons. All the evil Haman planned comes back on him and his supporters.</p>
+    <p>Notice Esther&#x27;s address to the king on behalf of her people — she gives him deference, falling at his feet and weeping. Mordecai refused to bow to Haman, so they had no problem honoring those they felt deserved it.</p>
+    <p>She says, &#x27;If it pleases the king, and if I have found favor before him, and the matter seems proper to the king, and I am pleasing in his sight.&#x27; These phrases show her wisdom and her standing with her husband the king.</p>
+    <p>8:11: the king granted the Jews the right to assemble and defend their lives, to destroy any force that might attack them, including that force&#x27;s own children and women, and to plunder. The decree mirrors, almost word for word, the earlier decree against the Jews (3:13) — the sword Haman forged for the Jews is turned back on those who would wield it against them. It is a hard mercy to read, and honest interpreters have wrestled with it; the text does not soften it, and neither should we. Note the Jews were given permission to plunder — we&#x27;ll return to that.</p>
+    <p>As throughout the story, events come in pairs: for a second time Mordecai is arrayed as royalty, but now it becomes permanent.</p>
+    <p>8:17: &#x27;There was gladness and joy for the Jews, a feast and a holiday. And many among the peoples of the land became Jews, for the dread of the Jews had fallen on them.&#x27; The &#x27;dread&#x27; is really fear of the Jewish God who saves His people. They became proselytes hoping to gain that same protection.</p>
+    <p>Even the princes, satraps, and governors doing the king&#x27;s business assisted the Jews.</p>
+    <p>The dread of Mordecai: everyone in power now understands Mordecai the Jew is second only to the king.</p>
+    <p>In Susa they kill 500 men, including Haman&#x27;s sons — but they do not plunder. They only rid themselves of those who would kill them.</p>
+    <p>9:13: Esther asks that the next day also be granted and that Haman&#x27;s sons be hanged on the gallows — either another plot was uncovered or the work was unfinished; the hanged bodies stood as a warning. The next day they killed 300 more in the city, still without plundering.</p>
+    <p>In the provinces the Jews killed 75,000 — evidence of widespread anti-Semitism — but again they did not plunder.</p>
+    <p>The Jews celebrated on the 14th and 15th depending on where they lived, feasting, sending portions of food to one another, and giving gifts to the poor.</p>
+    <p>Mordecai and Esther wrote to establish the holiday, called the command of Esther; it became a custom for them and their descendants and all allied with them — the Feast of Purim.</p>
+    <p>Pur became a symbol of God using circumstances to deliver His own — hence the disciples casting lots to replace Judas.</p>
+    <p>Xerxes was an orthodox Zoroastrian — monotheistic with a dualistic good/evil system, a precursor to later religious intolerance. He destroyed Babylon&#x27;s idol Bel Marduk, the god for which Mordecai is named. So for Esther to plead for her people twice was a huge risk.</p>
+    <p>But Xerxes clearly loved Esther and would do anything for her. Mordecai and Esther elevated the status of being Jewish, because all had seen God&#x27;s providence and salvation for the Jews.</p>
+    <p>Why would anyone still carry out the first decree after receiving the second? That is strong anti-Semitism indeed.</p>
+    <p>Tom Constable notes: the absence of explicit reference to God helping His people does not deny His help; it reflects the attitude of Jews who ignored God&#x27;s commands through Isaiah and Jeremiah to return to the land. They had pushed God aside, as Mordecai and Esther had to some extent — yet God remained faithful to His promises despite His people&#x27;s unfaithfulness.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Interpretations</strong></p>
+    <p>Seldom do we get to see God&#x27;s vengeance when we feel wronged. Usually life is more fluid, sticky, and ambiguous than a good story — especially for Christians, who are constantly self-examining and seeking the Spirit&#x27;s guidance. Here the villain is readily exposed, right and wrong are mostly clear, and we see God&#x27;s retribution on those who would harm His chosen people.</p>
+    <p>One of the most encouraging thoughts is that our salvation depends not on us but on a loving God who desires to save His children regardless of how badly we fail.</p>
+    <p>That &#x27;many became Jews&#x27; raises how we share the gospel today. We rarely see a complete reversal of evil, but there are everyday miracles. God reveals Himself today by our reflecting the light of Christ — loving others and proclaiming truth in kindness, gentleness, and love; entering the dark places of pain, poverty, injustice, sickness, and sin not to condemn but to share Christ&#x27;s love; a community defined by self-sacrificial love.</p>
+    <p>Remain upright in conduct — don&#x27;t take the spoils. In everything we either glorify Christ or blaspheme His name; act accordingly with love.</p>
+    <p>Let us not push God aside in our lives but keep Him our focus, and not quench the Holy Spirit within us.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Applications</strong></p>
+    <p>Are we truly a reflection of God&#x27;s light? His love for people was beautiful and ever-present, but so was His truth — He always spoke the truth in love, and many turned away. We should expect no different. People will know we are Christians by our love, but love alone is not the whole of it.</p>
+    <p>Am I prepared to share my testimony of what Christ has done in my life?</p></div>
+    <div class="es"><p>Ester 8–10 — Liberación, conquista y Purim</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Observaciones</strong></p>
+<p>La venganza de Dios es perfecta. Amán es colgado en la horca que construyó para Mardoqueo; Mardoqueo asume el lugar de Amán en la realeza, usando incluso el anillo del rey para firmar un nuevo decreto; Mardoqueo recibe toda la hacienda de Amán; y los judíos aniquilan a quienes querían matarlos, incluidos los diez hijos de Amán. Todo el mal que Amán planeó recae sobre él y sus partidarios.</p>
+<p>Note el modo en que Ester se dirige al rey a favor de su pueblo: le muestra deferencia, cayendo a sus pies y llorando. Mardoqueo se negó a inclinarse ante Amán, así que no tenían reparo en honrar a quienes sentían que lo merecían.</p>
+<p>Ella dice: “Si place al rey, y si he hallado gracia delante de él, y si la cosa es recta delante del rey, y si yo soy agradable a sus ojos.” Estas frases muestran su sabiduría y su posición ante su esposo el rey.</p>
+<p>8:11: el rey concedió a los judíos el derecho de reunirse y defender sus vidas, de destruir toda fuerza que pudiera atacarlos, incluidos los propios niños y mujeres de esa fuerza, y de tomar botín. El decreto refleja, casi palabra por palabra, el decreto anterior contra los judíos (3:13) — la espada que Amán forjó para los judíos se vuelve contra quienes la esgrimirían contra ellos. Es un pasaje duro de leer, y intérpretes honestos lo han enfrentado con seriedad; el texto no lo suaviza, y nosotros tampoco debemos hacerlo. Note que a los judíos se les dio permiso de tomar botín; volveremos a eso.</p>
+<p>Como a lo largo de toda la historia, los acontecimientos vienen en pares: por segunda vez Mardoqueo es ataviado como realeza, pero ahora se vuelve permanente.</p>
+<p>8:17: “Los judíos tuvieron alegría y gozo, banquete y día de placer. Y muchos de entre los pueblos de la tierra se hacían judíos, porque el temor de los judíos había caído sobre ellos.” El “temor” es en realidad temor del Dios judío que salva a Su pueblo. Se hacían prosélitos esperando obtener esa misma protección.</p>
+<p>Incluso los príncipes, sátrapas y gobernadores que hacían los negocios del rey asistían a los judíos.</p>
+<p>El temor de Mardoqueo: todos los que estaban en el poder ahora entienden que Mardoqueo el judío es segundo solo después del rey.</p>
+<p>En Susa matan a 500 hombres, incluidos los hijos de Amán, pero no toman botín. Solo se libran de quienes querían matarlos.</p>
+<p>9:13: Ester pide que también se conceda el día siguiente y que los hijos de Amán sean colgados en la horca; o bien se descubrió otro complot, o la obra estaba inconclusa; los cuerpos colgados servían de advertencia. Al día siguiente mataron a 300 más en la ciudad, todavía sin tomar botín.</p>
+<p>En las provincias los judíos mataron a 75,000, evidencia de un antisemitismo generalizado, pero de nuevo no tomaron botín.</p>
+<p>Los judíos celebraron el día 14 y el 15, según donde vivían, festejando, enviándose porciones de comida unos a otros y dando regalos a los pobres.</p>
+<p>Mardoqueo y Ester escribieron para establecer la festividad, llamada el mandato de Ester; se volvió costumbre para ellos y sus descendientes y todos los aliados con ellos: la Fiesta de Purim.</p>
+<p>Pur se volvió símbolo de Dios usando las circunstancias para librar a los suyos; de ahí que los discípulos echaran suertes para reemplazar a Judas.</p>
+<p>Jerjes era un zoroástrico ortodoxo —monoteísta con un sistema dualista de bien y mal, precursor de una posterior intolerancia religiosa—. Destruyó el ídolo de Babilonia, Bel Marduc, el dios por el cual Mardoqueo lleva su nombre. Así que para Ester interceder por su pueblo dos veces fue un riesgo enorme.</p>
+<p>Pero Jerjes claramente amaba a Ester y haría cualquier cosa por ella. Mardoqueo y Ester elevaron el estatus de ser judío, porque todos habían visto la providencia y la salvación de Dios para los judíos.</p>
+<p>¿Por qué llevaría alguien a cabo el primer decreto tras recibir el segundo? Eso sí es un antisemitismo fuerte.</p>
+<p>Tom Constable observa: la ausencia de referencia explícita a Dios ayudando a Su pueblo no niega Su ayuda; refleja la actitud de los judíos que ignoraron los mandatos de Dios por medio de Isaías y Jeremías de volver a la tierra. Habían apartado a Dios, como Mardoqueo y Ester en cierta medida, y sin embargo Dios permaneció fiel a Sus promesas a pesar de la infidelidad de Su pueblo.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Interpretaciones</strong></p>
+<p>Rara vez llegamos a ver la venganza de Dios cuando nos sentimos agraviados. Por lo general la vida es más fluida, enredada y ambigua que una buena historia, especialmente para los cristianos, que constantemente se autoexaminan y buscan la guía del Espíritu. Aquí el villano queda fácilmente expuesto, lo correcto y lo incorrecto están en su mayoría claros, y vemos la retribución de Dios sobre quienes querían dañar a Su pueblo escogido.</p>
+<p>Uno de los pensamientos más alentadores es que nuestra salvación no depende de nosotros, sino de un Dios amoroso que desea salvar a Sus hijos sin importar cuán gravemente fallemos.</p>
+<p>Que “muchos se hicieran judíos” plantea cómo compartimos el evangelio hoy. Rara vez vemos una reversión completa del mal, pero hay milagros cotidianos. Dios se revela hoy mediante nuestro reflejar la luz de Cristo: amando a otros y proclamando la verdad con bondad, mansedumbre y amor; entrando en los lugares oscuros de dolor, pobreza, injusticia, enfermedad y pecado no para condenar, sino para compartir el amor de Cristo; una comunidad definida por el amor que se sacrifica a sí mismo.</p>
+<p>Permanezcamos rectos en la conducta: no tomemos el botín. En todo, o glorificamos a Cristo o blasfemamos Su nombre; obremos en consecuencia, con amor.</p>
+<p>No apartemos a Dios de nuestra vida, sino mantengámoslo como nuestro enfoque, y no apaguemos al Espíritu Santo en nosotros.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Aplicaciones</strong></p>
+<p>¿Somos verdaderamente un reflejo de la luz de Dios? Su amor por las personas era hermoso y siempre presente, pero también lo era Su verdad: siempre habló la verdad en amor, y muchos se apartaron. No deberíamos esperar nada distinto. La gente sabrá que somos cristianos por nuestro amor, pero el amor por sí solo no es la totalidad.</p>
+<p>¿Estoy preparado para compartir mi testimonio de lo que Cristo ha hecho en mi vida?</p></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="en">Part I &middot; Multiple Choice</span><span class="es">Parte I &middot; Opci&oacute;n M&uacute;ltiple</span> <span class="note">(20 &middot; 90%)</span></h2>
+    <div id="mc"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="en">Part II &middot; Short Answer</span><span class="es">Parte II &middot; Respuesta Breve</span> <span class="note">(10 &middot; 3/8)</span></h2>
+    <p class="practice-tag" id="saMode"></p>
+    <div id="sa"></div>
+  </div>
+
+  <div class="card">
+    <button onclick="grade()"><span class="en">Submit Unit 9</span><span class="es">Enviar Unidad 9</span></button>
+    <div id="result"></div>
+  </div>
+
+  <div class="navrow">
+    <span class="note">CTSRE &middot; <span class="en">Unit 9</span><span class="es">Unidad 9</span></span>
+    <button id="nextBtn" class="secondary" disabled onclick="goNext()"><span class="en">Continue &rarr;</span><span class="es">Continuar &rarr;</span></button>
+  </div>
+</div>
+<script>
+var _ctsMem={};
+function lsGet(k){ try{var v=localStorage.getItem(k);return v===null?(_ctsMem[k]!==undefined?_ctsMem[k]:null):v;}catch(e){return _ctsMem[k]!==undefined?_ctsMem[k]:null;} }
+function lsSet(k,v){ try{localStorage.setItem(k,v);}catch(e){} _ctsMem[k]=v; }
+function lsDel(k){ try{localStorage.removeItem(k);}catch(e){} delete _ctsMem[k]; }
+
+var UNIT=9, NEXT_URL="CTSRECertificate.html", MC=[{"stemEn": "After Haman's death, Mordecai is given:", "stemEs": "Tras la muerte de Amán, a Mardoqueo se le da:", "optionsEn": ["a province to rule", "the king's signet ring and Haman's estate", "exile to Jerusalem", "command of the army"], "optionsEs": ["una provincia para gobernar", "el anillo de sello del rey y la hacienda de Amán", "exilio a Jerusalén", "el mando del ejército"], "answer": "B", "whyEn": "He receives the signet ring and Haman's whole estate.", "whyEs": "Recibe el anillo de sello y toda la hacienda de Amán."}, {"stemEn": "Glenda calls the reversal of Haman's evil onto himself an example of:", "stemEs": "Glenda llama al giro del mal de Amán sobre sí mismo un ejemplo de:", "optionsEn": ["blind luck", "royal mercy", "God's perfect vengeance / justice", "human cleverness"], "optionsEs": ["suerte ciega", "misericordia real", "la venganza / justicia perfecta de Dios", "astucia humana"], "answer": "C", "whyEn": "The evil he planned recoils on him — God's justice.", "whyEs": "El mal que ideó recae sobre él — justicia de Dios."}, {"stemEn": "Approaching the king again, Esther shows deference by:", "stemEs": "Al acercarse de nuevo al rey, Ester muestra deferencia al:", "optionsEn": ["sending a letter", "bowing to Haman", "staying silent", "falling at his feet and weeping"], "optionsEs": ["enviar una carta", "inclinarse ante Amán", "quedarse callada", "caer a sus pies y llorar"], "answer": "D", "whyEn": "She falls at his feet weeping — honoring whom she should.", "whyEs": "Cae a sus pies llorando — honra a quien debe."}, {"stemEn": "In the new decree, the phrase authorizing the Jews to destroy an attacking force \u2018including children and women\u2019 refers to:", "stemEs": "En el nuevo decreto, la frase que autoriza a los judíos a destruir a una fuerza atacante \u2018incluidos niños y mujeres\u2019 se refiere a:", "optionsEn": ["the attacking force's own children and women, mirroring Haman's original decree", "the king's household", "Haman's sons only", "the Jewish children and women from the first edict"], "optionsEs": ["los propios niños y mujeres de la fuerza atacante, reflejando el decreto original de Amán", "la casa del rey", "solo los hijos de Amán", "los niños y mujeres judíos del primer edicto"], "answer": "A", "whyEn": "The decree grants the Jews the same terms Haman's decree had granted their enemies (3:13) \u2014 authority to destroy an attacking force including its own women and children. It is a sobering mirror-image reversal, not a protection clause for Jewish families.", "whyEs": "El decreto concede a los judíos los mismos términos que el decreto de Amán había concedido a sus enemigos (3:13) \u2014 autoridad para destruir a una fuerza atacante incluidos sus propios niños y mujeres. Es un reflejo inverso, no una cláusula de protección para las familias judías."}, {"stemEn": "A striking, repeated feature Glenda notes is that the Jews:", "stemEs": "Un rasgo notable y repetido que nota Glenda es que los judíos:", "optionsEn": ["enslaved captives", "burned the cities", "did NOT take the plunder, though permitted", "fled the empire"], "optionsEs": ["esclavizaron cautivos", "quemaron las ciudades", "NO tomaron el botín, aunque se les permitió", "huyeron del imperio"], "answer": "C", "whyEn": "Though allowed to plunder, they refused it — three times noted.", "whyEs": "Aunque permitido, rehusaron el botín — notado tres veces."}, {"stemEn": "Esther 8:17 says many people of the land 'became Jews' because:", "stemEs": "Ester 8:17 dice que muchos del pueblo 'se hicieron judíos' porque:", "optionsEn": ["they were forced", "the dread of the Jews (really their God) had fallen on them", "they wanted wealth", "the king commanded it"], "optionsEs": ["fueron forzados", "el temor de los judíos (en realidad de su Dios) cayó sobre ellos", "querían riqueza", "el rey lo ordenó"], "answer": "B", "whyEn": "Dread of the Jews' God drew them to become proselytes.", "whyEs": "El temor del Dios de los judíos los hizo prosélitos."}, {"stemEn": "In Susa the Jews killed 500 men plus Haman's sons; notably they:", "stemEs": "En Susa los judíos mataron 500 hombres más los hijos de Amán; notablemente:", "optionsEn": ["did not plunder", "spared the guilty", "burned the palace", "took the gold"], "optionsEs": ["no saquearon", "perdonaron a los culpables", "quemaron el palacio", "tomaron el oro"], "answer": "A", "whyEn": "They only removed those who would kill them — no plunder.", "whyEs": "Solo quitaron a quienes los matarían — sin botín."}, {"stemEn": "Why were Haman's already-dead sons hanged on the gallows?", "stemEs": "¿Por qué fueron colgados en la horca los hijos ya muertos de Amán?", "optionsEn": ["to please Esther", "for burial rites", "to claim the estate", "as a strong public warning against attacking the Jews"], "optionsEs": ["para agradar a Ester", "por ritos fúnebres", "para reclamar la hacienda", "como fuerte advertencia pública contra atacar a los judíos"], "answer": "D", "whyEn": "Their hung bodies warned any who would attack the Jews.", "whyEs": "Sus cuerpos colgados advertían a posibles atacantes."}, {"stemEn": "In the provinces the Jews killed how many of their enemies?", "stemEs": "En las provincias, ¿a cuántos enemigos mataron los judíos?", "optionsEn": ["ten thousand", "five hundred", "seventy-five thousand", "one hundred"], "optionsEs": ["diez mil", "quinientos", "setenta y cinco mil", "cien"], "answer": "C", "whyEn": "75,000 — showing the scale of those identified as enemies of the Jews in the narrative.", "whyEs": "75,000 — mostrando la magnitud de quienes fueron identificados como enemigos de los judíos en el relato."}, {"stemEn": "The two days of celebration were marked by feasting and:", "stemEs": "Los dos días de celebración se marcaron con banquetes y:", "optionsEn": ["military parades", "royal taxes", "temple sacrifice", "sending food to one another and gifts to the poor"], "optionsEs": ["desfiles militares", "impuestos reales", "sacrificio en el templo", "enviarse comida unos a otros y dar regalos a los pobres"], "answer": "D", "whyEn": "Feasting, sharing food, and gifts to the poor.", "whyEs": "Banquetes, compartir comida y regalos a los pobres."}, {"stemEn": "The festival Mordecai and Esther established is called:", "stemEs": "La fiesta que establecieron Mardoqueo y Ester se llama:", "optionsEn": ["the Feast of Purim", "Hanukkah", "Passover", "the Day of Atonement"], "optionsEs": ["la Fiesta de Purim", "Hanuká", "la Pascua", "el Día de la Expiación"], "answer": "A", "whyEn": "Purim, named from 'pur' (the lot).", "whyEs": "Purim, del nombre 'pur' (la suerte)."}, {"stemEn": "The name 'Purim' derives from 'pur,' which became a symbol of:", "stemEs": "El nombre 'Purim' viene de 'pur,' que se volvió símbolo de:", "optionsEn": ["royal power", "God using circumstances to deliver His own", "human wisdom", "military might"], "optionsEs": ["poder real", "Dios usando circunstancias para librar a los suyos", "sabiduría humana", "fuerza militar"], "answer": "B", "whyEn": "Pur — lot — became a symbol of God's delivering providence.", "whyEs": "Pur — suerte — símbolo de la providencia que libra."}, {"stemEn": "Glenda notes the disciples later cast lots (pur-like) to:", "stemEs": "Glenda nota que los discípulos luego echaron suertes (como pur) para:", "optionsEn": ["build the temple", "divide the land", "pick a king", "choose a replacement for Judas"], "optionsEs": ["edificar el templo", "dividir la tierra", "elegir un rey", "escoger un reemplazo para Judas"], "answer": "D", "whyEn": "They cast lots to replace Judas, trusting God's choice.", "whyEs": "Echaron suertes para reemplazar a Judas, confiando en Dios."}, {"stemEn": "King Xerxes' religion is identified by Glenda as:", "stemEs": "La religión del rey Jerjes la identifica Glenda como:", "optionsEn": ["Judaism", "Greek polytheism", "Zoroastrianism", "emperor worship"], "optionsEs": ["el judaísmo", "el politeísmo griego", "el zoroastrismo", "el culto al emperador"], "answer": "C", "whyEn": "Ancient Persian religion is debated by scholars, but Xerxes is widely thought to have been Zoroastrian.", "whyEs": "La religión persa antigua es debatida por los eruditos, pero se cree ampliamente que Jerjes era zoroastriano."}, {"stemEn": "Ironically, Xerxes had destroyed Babylon's idol Bel Marduk — the god for whom:", "stemEs": "Irónicamente, Jerjes había destruido el ídolo babilónico Bel Marduk — el dios por quien:", "optionsEn": ["Esther was named", "Mordecai was named", "Haman was named", "Vashti was named"], "optionsEs": ["Ester fue nombrada", "Mardoqueo fue nombrado", "Amán fue nombrado", "Vasti fue nombrada"], "answer": "B", "whyEn": "Mordecai's name derives from Marduk; ancient sources describe Xerxes acting against the Marduk cult, though details are debated — a quiet irony.", "whyEs": "El nombre de Mardoqueo viene de Marduk; fuentes antiguas describen a Jerjes actuando contra el culto de Marduk, aunque los detalles son debatidos — ironía sutil."}, {"stemEn": "Esther pleading for her people twice was a huge risk especially because the king:", "stemEs": "Que Ester suplicara dos veces por su pueblo fue gran riesgo sobre todo porque el rey:", "optionsEn": ["was religiously intolerant (Zoroastrian)", "was a Jew", "had no power", "hated Esther"], "optionsEs": ["era religiosamente intolerante (zoroastriano)", "era judío", "no tenía poder", "odiaba a Ester"], "answer": "A", "whyEn": "His religious intolerance made her double plea risky.", "whyEs": "Su intolerancia religiosa hizo arriesgada su doble súplica."}, {"stemEn": "By the end, the 'dread of Mordecai' means everyone in power understands he is:", "stemEs": "Al final, el 'temor de Mardoqueo' significa que todos en el poder entienden que él es:", "optionsEn": ["a foreign spy", "second only to the king", "a temporary favorite", "equal to Haman"], "optionsEs": ["un espía extranjero", "el segundo después del rey", "un favorito temporal", "igual a Amán"], "answer": "B", "whyEn": "Mordecai is now second only to the king.", "whyEs": "Mardoqueo es ahora el segundo después del rey."}, {"stemEn": "Tom Constable explains the absence of explicit reference to God's help reflects:", "stemEs": "Tom Constable explica que la ausencia de referencia explícita a la ayuda de Dios refleja:", "optionsEn": ["that God was absent", "Persian censorship", "a copying error", "the Jews having pushed God aside by not returning to the land"], "optionsEs": ["que Dios estaba ausente", "censura persa", "un error de copia", "que los judíos habían apartado a Dios al no volver a la tierra"], "answer": "D", "whyEn": "It mirrors Jews who'd sidelined God, who stayed faithful anyway.", "whyEs": "Refleja a judíos que apartaron a Dios; Él fue fiel igual."}, {"stemEn": "Glenda's conclusion is that our salvation ultimately depends on:", "stemEs": "La conclusión de Glenda es que nuestra salvación depende en última instancia de:", "optionsEn": ["a loving God who saves regardless of how we fail", "perfect obedience", "our own merit", "royal favor"], "optionsEs": ["un Dios amoroso que salva sin importar cómo fallemos", "obediencia perfecta", "nuestro propio mérito", "favor real"], "answer": "A", "whyEn": "God saves out of love, despite our failures.", "whyEs": "Dios salva por amor, a pesar de nuestras fallas."}, {"stemEn": "Glenda's closing application is that we are to be a community defined by:", "stemEs": "La aplicación final de Glenda es que seamos una comunidad definida por:", "optionsEn": ["strict separation", "political power", "self-sacrificial love that speaks truth in love", "ritual purity"], "optionsEs": ["separación estricta", "poder político", "amor abnegado que dice la verdad en amor", "pureza ritual"], "answer": "C", "whyEn": "Self-sacrificial love, truth spoken in love.", "whyEs": "Amor abnegado, la verdad dicha en amor."}], SA=[{"promptEn": "How is God's perfect justice displayed in the reversal of Haman's plans?", "promptEs": "¿Cómo se muestra la justicia perfecta de Dios en el giro de los planes de Amán?", "modelEn": "Haman is hanged on the gallows he built for Mordecai; Mordecai takes Haman's royal place, signet ring, and estate; and the Jews defeat those who sought their destruction, including Haman's ten sons. All the evil Haman devised recoils on him — God's perfect vengeance.", "modelEs": "Amán es colgado en la horca que hizo para Mardoqueo; Mardoqueo toma su lugar real, su anillo de sello y su hacienda; y los judíos vencen a quienes buscaban destruirlos, incluidos los diez hijos de Amán. Todo el mal que ideó recae sobre él — la venganza perfecta de Dios.", "keywords": {"en": ["haman", "gallows", "mordecai", "estate", "reversal", "evil", "vengeance", "justice"], "es": ["amán", "horca", "mardoqueo", "hacienda", "giro", "mal", "venganza", "justicia"]}}, {"promptEn": "Why does Glenda emphasize that the Jews did not take the plunder?", "promptEs": "¿Por qué enfatiza Glenda que los judíos no tomaron el botín?", "modelEn": "Though the decree permitted plundering, three times the text notes they did not. They only removed those who would kill them, keeping their conduct upright — a reminder that in all we do we either glorify Christ or blaspheme His name.", "modelEs": "Aunque el decreto permitía saquear, tres veces el texto nota que no lo hicieron. Solo quitaron a quienes los matarían, manteniendo una conducta recta — recordatorio de que en todo glorificamos a Cristo o blasfemamos su nombre.", "keywords": {"en": ["plunder", "permit", "not", "upright", "conduct", "kill", "glorify", "christ"], "es": ["botín", "permit", "no", "recta", "conducta", "matar", "glorific", "cristo"]}}, {"promptEn": "What is the significance of many people 'becoming Jews' (Esther 8:17)?", "promptEs": "¿Qué significa que muchos 'se hicieran judíos' (Ester 8:17)?", "modelEn": "The dread that fell on the peoples was really fear of the Jews' God, who always saves His people. They became proselytes hoping for that same protection — a picture of how witness can draw others to God.", "modelEs": "El temor que cayó sobre los pueblos era en realidad temor del Dios de los judíos, que siempre salva a su pueblo. Se hicieron prosélitos esperando esa misma protección — figura de cómo el testimonio atrae a otros a Dios.", "keywords": {"en": ["dread", "fear", "god", "proselyte", "protect", "gentile", "became", "witness"], "es": ["temor", "miedo", "dios", "prosélito", "proteg", "gentil", "hicieron", "testimonio"]}}, {"promptEn": "Describe the establishment and meaning of the Feast of Purim.", "promptEs": "Describa el establecimiento y el significado de la Fiesta de Purim.", "modelEn": "Mordecai and Esther wrote to fix the 14th and 15th as days of feasting, sending food to one another, and giving gifts to the poor. Called the command of Esther, it became Purim — named from 'pur,' the lot — a lasting symbol of God using circumstances to deliver His own.", "modelEs": "Mardoqueo y Ester escribieron para fijar el 14 y el 15 como días de banquete, de enviarse comida y de dar regalos a los pobres. Llamada el mandato de Ester, se volvió Purim — del nombre 'pur,' la suerte — símbolo perdurable de Dios usando circunstancias para librar a los suyos.", "keywords": {"en": ["purim", "pur", "feast", "food", "poor", "esther", "deliver", "lot"], "es": ["purim", "pur", "banquete", "comida", "pobres", "ester", "librar", "suerte"]}}, {"promptEn": "What irony does Glenda note about Xerxes' religion and Mordecai's name?", "promptEs": "¿Qué ironía nota Glenda sobre la religión de Jerjes y el nombre de Mardoqueo?", "modelEn": "Xerxes is widely thought to have been an intolerant orthodox Zoroastrian, and ancient sources describe him acting against Babylon's cult of Bel Marduk, though the precise details are debated — the very god for whom Mordecai was named. That intolerance made Esther's twofold plea for her people an especially grave risk.", "modelEs": "Se cree ampliamente que Jerjes era un zoroastriano ortodoxo e intolerante, y fuentes antiguas describen sus acciones contra el culto babilónico de Bel Marduk, aunque los detalles precisos son debatidos — el mismo dios por quien Mardoqueo fue nombrado. Esa intolerancia hizo de la doble súplica de Ester por su pueblo un riesgo especialmente grave.", "keywords": {"en": ["xerxes", "zoroastrian", "intoleran", "marduk", "mordecai", "name", "esther", "risk"], "es": ["jerjes", "zoroastri", "intoleran", "marduk", "mardoqueo", "nombre", "ester", "riesgo"]}}, {"promptEn": "How does Tom Constable explain God's apparent absence in the book?", "promptEs": "¿Cómo explica Tom Constable la aparente ausencia de Dios en el libro?", "modelEn": "Constable says the lack of explicit reference to God's help does not deny it; it reflects the attitude of Jews who ignored God's commands through Isaiah and Jeremiah to return to the land, having pushed God aside — yet God stayed faithful to His promises despite their unfaithfulness.", "modelEs": "Constable dice que la falta de referencia explícita a la ayuda de Dios no la niega; refleja la actitud de judíos que ignoraron los mandatos de Dios por Isaías y Jeremías de volver a la tierra, habiendo apartado a Dios — pero Dios fue fiel a sus promesas a pesar de su infidelidad.", "keywords": {"en": ["constable", "absence", "help", "ignore", "isaiah", "jeremiah", "aside", "faithful"], "es": ["constable", "ausencia", "ayuda", "ignor", "isaías", "jeremías", "apart", "fiel"]}}, {"promptEn": "What does the conquest reveal about the depth of anti-Semitism in the empire?", "promptEs": "¿Qué revela la conquista sobre la profundidad del antisemitismo en el imperio?", "modelEn": "That 75,000 enemies in the provinces still moved to attack even after the second decree shows the scale of those identified as enemies of the Jews in the narrative — people pressing on with the first decree's murderous intent despite the reversal; describing this fully with the modern term anti-Semitism requires some care, since the text frames it in terms of political enmity following the first decree.", "modelEs": "Que 75,000 enemigos en las provincias aún se movieran a atacar aun tras el segundo decreto muestra la magnitud de quienes fueron identificados como enemigos de los judíos en el relato — gente persistiendo en la intención asesina del primer decreto pese al cambio; describir esto plenamente con el término moderno antisemitismo requiere cierta cautela, ya que el texto lo enmarca en términos de enemistad política surgida del primer decreto.", "keywords": {"en": ["75000", "enemy", "attack", "second", "decree", "anti", "widespread", "entrench"], "es": ["75000", "enemigo", "atacar", "segundo", "decreto", "antisemit", "extendido", "arraig"]}}, {"promptEn": "How does Glenda apply 'many became Jews' to our witness today?", "promptEs": "¿Cómo aplica Glenda 'muchos se hicieron judíos' a nuestro testimonio hoy?", "modelEn": "We rarely see a dramatic reversal of evil today, but God reveals Himself as we reflect Christ's light — loving others and proclaiming truth in kindness and gentleness, entering the dark places of pain and injustice not to condemn but to share His love as a self-sacrificial community.", "modelEs": "Rara vez vemos hoy un giro dramático del mal, pero Dios se revela cuando reflejamos la luz de Cristo — amando a otros y proclamando la verdad con bondad y mansedumbre, entrando en los lugares oscuros de dolor e injusticia no para condenar sino para compartir su amor como comunidad abnegada.", "keywords": {"en": ["reflect", "light", "christ", "love", "truth", "dark", "condemn", "community"], "es": ["reflej", "luz", "cristo", "amor", "verdad", "oscuro", "condenar", "comunidad"]}}, {"promptEn": "What lesson about God's salvation does Glenda draw from the book's conclusion?", "promptEs": "¿Qué lección sobre la salvación de Dios saca Glenda de la conclusión del libro?", "modelEn": "Our salvation depends not on us but on a loving God who desires to save His children regardless of how badly they fail — just as He saved a disobedient, God-sidelining people through Esther and Mordecai by His faithful providence.", "modelEs": "Nuestra salvación no depende de nosotros sino de un Dios amoroso que desea salvar a sus hijos sin importar cuán mal fallen — así como salvó a un pueblo desobediente que lo había apartado, por medio de Ester y Mardoqueo y su providencia fiel.", "keywords": {"en": ["salvation", "depend", "loving", "god", "save", "fail", "providence", "faithful"], "es": ["salvación", "depend", "amoroso", "dios", "salvar", "fall", "providencia", "fiel"]}}, {"promptEn": "Summarize Glenda's final challenge about reflecting God's light and truth.", "promptEs": "Resuma el desafío final de Glenda sobre reflejar la luz y la verdad de Dios.", "modelEn": "We are to reflect God's light by both love and truth, as Christ always spoke truth in love though many turned away. People should know us by our love, but love alone is not enough; we must also be prepared to share our testimony of what Christ has done in us.", "modelEs": "Debemos reflejar la luz de Dios con amor y verdad, como Cristo siempre dijo la verdad en amor aunque muchos se apartaron. La gente debe conocernos por nuestro amor, pero el amor solo no basta; debemos estar listos para compartir nuestro testimonio de lo que Cristo ha hecho en nosotros.", "keywords": {"en": ["reflect", "light", "love", "truth", "christ", "testimony", "prepared", "know"], "es": ["reflej", "luz", "amor", "verdad", "cristo", "testimonio", "listo", "conoc"]}}];
+
+function getTrack(){ return lsGet('cts_track')||'cert'; }
+function isMastersLevel(){ var t=getTrack(); return t==='mdiv'||t==='thm'; }
+function lockMinutes(){ return isMastersLevel()?15:2; }
+
+function setLang(l){
+  document.body.setAttribute('data-lang',l); lsSet('cts_lang',l);
+  document.getElementById('btnEn').classList.toggle('active',l==='en');
+  document.getElementById('btnEs').classList.toggle('active',l==='es');
+}
+function saveReg(){
+  var nm=document.getElementById('regName').value.trim();
+  if(!nm) return;
+  lsSet('cts_student',nm);
+  document.getElementById('regOk').textContent=(document.body.getAttribute('data-lang')==='es'?'  Guardado: ':'  Saved: ')+nm;
+  renderGreet();
+}
+function renderGreet(){
+  var nm=lsGet('cts_student'); var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('greet').textContent = nm ? (es?('Estudiante: '+nm):('Student: '+nm)) : '';
+}
+function setTrack(){ lsSet('cts_track',document.getElementById('track').value); renderTrackNote(); renderSAmode(); }
+function renderTrackNote(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('trackNote').textContent = isMastersLevel()
+    ? (es?'Programa de maestría: la sección de respuesta breve CUENTA para aprobar.':'Masters track: the short-answer section COUNTS toward passing.')
+    : (es?'Certificado: la respuesta breve es práctica y no decide su aprobación.':'Certificate: short answer is practice and does not gate your pass.');
+}
+function renderSAmode(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('saMode').textContent = isMastersLevel()
+    ? (es?'Cuenta para su calificación (maestría).':'Counts toward your grade (masters).')
+    : (es?'Práctica: estudíela, pero no afecta su aprobación (certificado).':'Practice: study it, but it does not affect your pass (certificate).');
+}
+function kwHit(kw,text){
+  kw=kw.toLowerCase().trim(); text=(text||'').toLowerCase();
+  var e=kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var re=(kw.length<=3)?new RegExp('\\b'+e+'\\b'):new RegExp('\\b'+e);
+  return re.test(text);
+}
+function saHits(kws,ans){ var h=0; for(var i=0;i<kws.length;i++){ if(kwHit(kws[i],ans))h++; } return h; }
+
+function renderMC(){
+  var c=document.getElementById('mc'); c.innerHTML='';
+  MC.forEach(function(q,qi){
+    var d=document.createElement('div'); d.className='q';
+    var stem=document.createElement('div'); stem.className='stem';
+    stem.innerHTML='<span class="en">'+(qi+1)+'. '+q.stemEn+'</span><span class="es">'+(qi+1)+'. '+q.stemEs+'</span>';
+    d.appendChild(stem);
+    ['A','B','C','D'].forEach(function(L,oi){
+      var o=document.createElement('div'); o.className='opt'; o.id='mc'+qi+L;
+      o.innerHTML='<span class="en">'+L+'. '+q.optionsEn[oi]+'</span><span class="es">'+L+'. '+q.optionsEs[oi]+'</span>';
+      o.addEventListener('click',function(){ pickMC(qi,L); });
+      d.appendChild(o);
+    });
+    var bw=document.createElement('div'); bw.style.marginTop='8px';
+    var b=document.createElement('button'); b.className='secondary';
+    b.innerHTML='<span class="en">Check</span><span class="es">Revisar</span>';
+    b.addEventListener('click',function(){ checkMC(qi); });
+    bw.appendChild(b); d.appendChild(bw);
+    var fb=document.createElement('div'); fb.className='fb'; fb.id='mcfb'+qi; d.appendChild(fb);
+    c.appendChild(d);
+  });
+}
+var mcPick={};
+function pickMC(qi,L){ mcPick[qi]=L; ['A','B','C','D'].forEach(function(X){document.getElementById('mc'+qi+X).classList.remove('sel');}); document.getElementById('mc'+qi+L).classList.add('sel'); }
+function markMC(qi){
+  var q=MC[qi], pick=mcPick[qi];
+  ['A','B','C','D'].forEach(function(X){document.getElementById('mc'+qi+X).classList.remove('correct','wrong');});
+  if(pick===q.answer){ document.getElementById('mc'+qi+pick).classList.add('correct'); }
+  else { if(pick) document.getElementById('mc'+qi+pick).classList.add('wrong'); document.getElementById('mc'+qi+q.answer).classList.add('correct'); }
+  var fb=document.getElementById('mcfb'+qi); fb.className='fb '+(pick===q.answer?'ok':'no');
+  fb.innerHTML='<span class="en">'+(pick===q.answer?'Correct. ':'Answer: '+q.answer+'. ')+q.whyEn+'</span><span class="es">'+(pick===q.answer?'Correcto. ':'Respuesta: '+q.answer+'. ')+q.whyEs+'</span>';
+}
+function checkMC(qi){
+  var es=document.body.getAttribute('data-lang')==='es';
+  if(!mcPick[qi]){ var fb=document.getElementById('mcfb'+qi); fb.className='fb no'; fb.textContent=es?'Elija una opción primero.':'Pick an option first.'; return; }
+  markMC(qi);
+}
+
+function renderSA(){
+  var c=document.getElementById('sa'); c.innerHTML='';
+  SA.forEach(function(q,qi){
+    var d=document.createElement('div'); d.className='q';
+    var stem=document.createElement('div'); stem.className='stem';
+    stem.innerHTML='<span class="en">'+(MC.length+qi+1)+'. '+q.promptEn+'</span><span class="es">'+(MC.length+qi+1)+'. '+q.promptEs+'</span>';
+    d.appendChild(stem);
+    var ta=document.createElement('textarea'); ta.id='sa'+qi; ta.placeholder='...'; d.appendChild(ta);
+    var bw=document.createElement('div'); bw.style.marginTop='8px';
+    var b=document.createElement('button'); b.className='secondary';
+    b.innerHTML='<span class="en">Check Answer</span><span class="es">Revisar</span>';
+    b.addEventListener('click',function(){ checkSA(qi); });
+    bw.appendChild(b); d.appendChild(bw);
+    var fb=document.createElement('div'); fb.className='fb'; fb.id='safb'+qi; d.appendChild(fb);
+    var mo=document.createElement('div'); mo.className='model'; mo.id='samodel'+qi;
+    mo.innerHTML='<b><span class="en">Model answer — study this:</span><span class="es">Respuesta modelo &#9873; &mdash; est&uacute;diela:</span></b><br><span class="en">'+q.modelEn+'</span><span class="es">'+q.modelEs+'</span>';
+    d.appendChild(mo);
+    c.appendChild(d);
+  });
+}
+function checkSA(qi){
+  var ans=document.getElementById('sa'+qi).value.trim();
+  var fb=document.getElementById('safb'+qi); var es=document.body.getAttribute('data-lang')==='es';
+  if(!ans){ fb.className='fb no'; fb.textContent=es?'Escriba una respuesta antes de revisar.':'Please write an answer before checking.'; return; }
+  if(ans.length<100){ fb.className='fb no'; fb.textContent=es?'Escriba una respuesta más completa (mínimo 100 caracteres).':'Write a fuller answer (100 characters minimum).'; return; }
+  var q=SA[qi]; var hits=Math.max(saHits(q.keywords.en,ans),saHits(q.keywords.es,ans));
+  if(hits>=3){ fb.className='fb ok'; fb.textContent=(es?'Aprobado — ':'Pass — ')+hits+(es?' de 8 conceptos.':' of 8 key concepts.'); }
+  else { fb.className='fb no'; fb.textContent=(es?'Aún no — ':'Not yet — ')+hits+(es?' de 8 (necesita 3).':' of 8 (need 3).'); }
+  if(hits>=3) document.getElementById('samodel'+qi).classList.add('show');
+}
+
+function isLocked(){
+  var until=parseInt(lsGet('cts_re_u'+UNIT+'_lockout')||'0',10);
+  return until>Date.now()? until : 0;
+}
+function grade(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  var until=isLocked();
+  if(until){ var mins=Math.ceil((until-Date.now())/60000);
+    var r0=document.getElementById('result'); r0.className='result fail';
+    r0.textContent=(es?'Bloqueado. Intente de nuevo en ':'Locked out. Try again in ')+mins+(es?' min.':' min.'); return; }
+  var mcCorrect=0;
+  MC.forEach(function(q,qi){ markMC(qi); if(mcPick[qi]===q.answer) mcCorrect++; });
+  var saPass=0;
+  SA.forEach(function(q,qi){
+    var ans=document.getElementById('sa'+qi).value.trim(); var fb=document.getElementById('safb'+qi);
+    if(!ans){ fb.className='fb no'; fb.textContent=es?'Sin respuesta.':'No answer given.'; }
+    else if(ans.length<100){ fb.className='fb no'; fb.textContent=es?'Respuesta demasiado breve (mínimo 100 caracteres).':'Answer too short (100 characters minimum).'; }
+    else { var hits=Math.max(saHits(q.keywords.en,ans),saHits(q.keywords.es,ans));
+      if(hits>=3){ saPass++; fb.className='fb ok'; fb.textContent=(es?'Aprobado — ':'Pass — ')+hits+'/8.'; }
+      else { fb.className='fb no'; fb.textContent=(es?'Debajo — ':'Below — ')+hits+'/8.'; } }
+    document.getElementById('samodel'+qi).classList.add('show');
+  });
+  var mcPct=Math.round(mcCorrect/MC.length*100), mcOk=mcPct>=90;
+  var masters=isMastersLevel(), saOk=saPass>=9;
+  var pass = masters ? (mcOk&&saOk) : mcOk;
+  var r=document.getElementById('result');
+  if(pass){
+    r.className='result pass';
+    var saLine = masters ? ((es?' Respuesta breve: ':' Short answer: ')+saPass+'/'+SA.length+'.') : (es?' (Respuesta breve: práctica.)':' (Short answer: practice.)');
+    r.innerHTML='<b>'+(es?('Unidad '+UNIT+' aprobada.'):('Unit '+UNIT+' passed.'))+'</b> '+(es?'Opción múltiple: ':'Multiple choice: ')+mcCorrect+'/'+MC.length+' ('+mcPct+'%).'+saLine;
+    lsSet('re_unit'+UNIT+'_passed','1');
+    lsSet('cts_re_progress',String(Math.max(UNIT,parseInt(lsGet('cts_re_progress')||'0',10))));
+    lsDel('cts_re_u'+UNIT+'_lockout');
+    document.getElementById('nextBtn').disabled=false;
+  } else {
+    r.className='result fail';
+    var why=[]; if(!mcOk) why.push((es?'opción múltiple ':'multiple choice ')+mcPct+'% ('+(es?'necesita 90%':'need 90%')+')');
+    if(masters&&!saOk) why.push((es?'respuesta breve ':'short answer ')+saPass+'/'+SA.length);
+    var lk=lockMinutes(); lsSet('cts_re_u'+UNIT+'_lockout',String(Date.now()+lk*60000));
+    r.innerHTML='<b>'+(es?'Aún no aprobada.':'Not yet passed.')+'</b> '+why.join('; ')+'. '+(es?('Espere '+lk+' min y reintente.'):('Wait '+lk+' min and retry.'));
+    document.getElementById('nextBtn').disabled=true;
+  }
+  r.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function goNext(){ if(NEXT_URL) window.location.href=NEXT_URL; }
+
+(function(){
+  setLang(lsGet('cts_lang')||'en');
+  var t=getTrack(); document.getElementById('track').value=t;
+  renderGreet(); renderTrackNote(); renderSAmode(); renderMC(); renderSA();
+  var rn=document.getElementById('regName'); if(rn&&lsGet('cts_student')) rn.value=lsGet('cts_student');
+  if(lsGet('re_unit'+UNIT+'_passed')==='1') document.getElementById('nextBtn').disabled=false;
+})();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSREReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

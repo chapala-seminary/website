@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Romans | Unit 2: The Verdict — All Have Sinned</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', Times, serif; line-height: 1.6; background: #f9f7f3; color: #1a2a1f; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+.course-header { background: #5a1e1e; color: white; padding: 1.5rem 2rem; text-align: center; }
+.course-header h1 { font-size: 2rem; letter-spacing: 2px; margin-bottom: 0.25rem; }
+.course-header h2 { font-size: 1.2rem; font-weight: normal; opacity: 0.9; }
+.author-line { font-size: 0.95rem; color: #d4a64a; font-style: italic; margin-top: 0.35rem; letter-spacing: 0.5px; }
+.unit-badge { display: inline-block; background: #d4a64a; color: #5a1e1e; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-top: 0.5rem; }
+.controls-bar { background: #ede4d8; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #cbc3ae; }
+.lang-buttons { display: flex; gap: 10px; }
+.lang-btn { background: white; border: 1px solid #5a1e1e; padding: 0.4rem 1rem; cursor: pointer; font-weight: bold; transition: 0.2s; border-radius: 4px; }
+.lang-btn.active { background: #5a1e1e; color: white; }
+.track-indicator { background: #5a1e1e; color: #d4a64a; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+body.lang-en .lang-es { display: none; }
+body.lang-en .lang-both { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-both { display: none; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 900px) {
+    body.lang-both .lesson-grid { grid-template-columns: 1fr; }
+    body.lang-both .lang-es { border-top: 2px dashed #cbc3ae; padding-top: 1rem; margin-top: 1rem; }
+}
+.registration-section { background: #fef7e0; border-bottom: 3px solid #d4a64a; padding: 2rem; }
+.registration-section h3 { color: #5a1e1e; margin-bottom: 1rem; text-align: center; }
+.registration-form { max-width: 500px; margin: 0 auto; }
+.registration-form label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+.registration-form input[type="text"] { width: 100%; padding: 0.6rem; margin-bottom: 1rem; border: 1px solid #cbc3ae; border-radius: 4px; font-size: 1rem; font-family: inherit; }
+.registration-form .track-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+.registration-form .track-options label { font-weight: normal; cursor: pointer; padding: 0.5rem; border: 1px solid #cbc3ae; border-radius: 4px; background: white; }
+.registration-form .track-options input { margin-right: 0.5rem; }
+.registration-form button { background: #5a1e1e; color: white; border: none; padding: 0.75rem 2rem; font-size: 1rem; cursor: pointer; border-radius: 4px; width: 100%; }
+.registration-form button:hover { background: #401414; }
+.lesson-section { padding: 2rem; }
+.lesson-section h3 { color: #5a1e1e; border-left: 4px solid #d4a64a; padding-left: 1rem; margin: 1.5rem 0 1rem 0; }
+.lesson-section h3:first-of-type { margin-top: 0; }
+.lesson-section p { margin-bottom: 1rem; }
+.scripture { background: #f0ede5; padding: 1rem 1.5rem; border-left: 4px solid #d4a64a; font-style: italic; margin: 1rem 0; font-family: 'Courier New', monospace; }
+.illustration { background: #e8f0e5; padding: 1rem 1.5rem; border-radius: 8px; margin: 1rem 0; }
+.exam-section { background: #fefaf0; border-top: 3px solid #5a1e1e; padding: 2rem; page-break-before: always; }
+.exam-header { text-align: center; margin-bottom: 2rem; }
+.question-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; page-break-inside: avoid; }
+.question-text { font-weight: bold; margin-bottom: 0.75rem; }
+.options { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+.options label { display: block; margin: 0.4rem 0; cursor: pointer; }
+.feedback { margin-top: 0.75rem; padding: 0.5rem; border-radius: 4px; font-size: 0.9rem; }
+.feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+.modelbox { margin-top: 0.6rem; padding: 0.6rem 0.75rem; background: #fff8e1; color: #5d4a00; border-left: 4px solid #d4af37; border-radius: 4px; }
+
+.essay-question textarea { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+.action-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+.action-buttons button { background: #5a1e1e; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+.action-buttons button:hover { background: #401414; }
+.action-buttons button.reset-btn { background: #8b6b3d; }
+.lockout-timer { text-align: center; padding: 1rem; background: #f8d7da; color: #721c24; margin: 1rem; border-radius: 8px; font-weight: bold; }
+.nav-links { display: flex; justify-content: space-between; padding: 1rem 2rem; background: #ede4d8; }
+.nav-links a { color: #5a1e1e; text-decoration: none; font-weight: bold; }
+.exam-locked { background: #fff3cd; color: #856404; padding: 2rem; text-align: center; border-radius: 8px; font-weight: bold; }
+@media print {
+    .controls-bar, .action-buttons, .nav-links, .lockout-timer, .registration-section { display: none !important; }
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; margin: 0; }
+    .course-header { background: #5a1e1e; color: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .question-card { border: 1px solid #ccc; page-break-inside: avoid; }
+    .exam-section { page-break-before: always; }
+    .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.lang-both .lesson-grid { display: block; }
+}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 2px;font-family:'Georgia',serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#5a1e1e;margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid #cdbf9d;color:#5a1e1e;text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:#5a1e1e;}
+.unitnav a.active{background:#5a1e1e;color:#fff;border-color:#5a1e1e;}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+    <div class="course-header">
+        <h1>ΡΩΜΑΙΟΥΣ</h1>
+        <h2><span class="lang-en">The Book of Romans</span><span class="lang-es">El Libro de Romanos</span></h2>
+        <div class="author-line"><span class="lang-en">by Dr. Wayne Cook &amp; Dr. Ted Rogers</span><span class="lang-es">por el Dr. Wayne Cook y el Dr. Ted Rogers</span></div>
+        <div class="unit-badge"><span class="lang-en">Unit 2 · The Verdict — All Have Sinned</span><span class="lang-es">Unidad 2 · El Veredicto — Todos Han Pecado</span></div>
+    </div>
+
+    <div class="controls-bar">
+        <div class="lang-buttons">
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="es">Español</button>
+            <button class="lang-btn" data-lang="both">Both</button>
+        </div>
+        <div class="track-indicator" id="trackIndicator">Loading...</div>
+    </div>
+
+    <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+      <span class="nl"><span class="lang-en">Units</span><span class="lang-es">Unidades</span></span>
+      <a href="CTSRomansUnit1.html">1</a>
+      <a href="CTSRomansUnit2.html" class="active">2</a>
+      <a href="CTSRomansUnit3.html">3</a>
+      <a href="CTSRomansUnit4.html">4</a>
+      <a href="CTSRomansUnit5.html">5</a>
+      <a href="CTSRomansUnit6.html">6</a>
+      <a href="CTSRomansUnit7.html">7</a>
+      <a href="CTSRomansUnit8.html">8</a>
+      <a href="CTSRomansUnit9.html">9</a>
+      <a href="CTSRomansUnit10.html">10</a>
+    </nav>
+
+    <div class="registration-section" id="registrationSection" style="display:none;">
+        <h3><span class="lang-en">Register for CTS Romans</span><span class="lang-es">Regístrate en CTS Romanos</span></h3>
+        <div class="registration-form">
+            <p style="margin-bottom: 1rem;"><span class="lang-en">Welcome. Before beginning Unit 1, please enter your name (as you would like it to appear on your certificate) and select your study track.</span><span class="lang-es">Bienvenido. Antes de comenzar la Unidad 1, ingrese su nombre (como desea que aparezca en su certificado) y seleccione su vía de estudio.</span></p>
+            <label for="regName"><span class="lang-en">Full Name:</span><span class="lang-es">Nombre Completo:</span></label>
+            <input type="text" id="regName" placeholder="Jane Doe / María García">
+            <label><span class="lang-en">Study Track:</span><span class="lang-es">Vía de Estudio:</span></label>
+            <div class="track-options">
+                <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en"><strong>Certificate</strong> — 20 multiple choice per unit, 18/20 to pass</span><span class="lang-es"><strong>Certificado</strong> — 20 opción múltiple por unidad, 18/20 para aprobar</span></label>
+                <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en"><strong>Th.M.</strong> — 20 MC + 10 short answer, both 90%</span><span class="lang-es"><strong>Th.M.</strong> — 20 OM + 10 respuesta corta, ambos 90%</span></label>
+                <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en"><strong>M.Div.</strong> — 20 MC + 10 short answer, both 90% (advanced)</span><span class="lang-es"><strong>M.Div.</strong> — 20 OM + 10 respuesta corta, ambos 90% (avanzado)</span></label>
+            </div>
+            <button id="regSubmit"><span class="lang-en">Begin Course</span><span class="lang-es">Comenzar Curso</span></button>
+        </div>
+    </div>
+
+    <div class="lesson-section">
+        <div class="lesson-grid">
+            <div class="lang-en">
+                <h3>1. The Bad News Before the Good News</h3>
+                <p>Paul could have started with the cross. He could have opened the body of his letter at Romans 3:21 — "but now apart from the law the righteousness of God has been revealed." That is the great hinge of the book, the place where the gospel breaks through. Instead, Paul spends nearly three full chapters demolishing every escape route a sinner might take before he announces the rescue.</p>
+
+                <p>This is not unusual for Paul. It is essential. A doctor who hands out medicine without first explaining the disease is not doing the patient a favor; he is selling the patient on something the patient does not think he needs. The hospital chaplain who tells a dying man "Jesus loves you" without ever telling him he is dying has skipped the most important sentence. The Bible's good news is not vague comfort. It is specific rescue from a specific disaster. So before Paul shows us the way out, he closes every other door and locks it.</p>
+
+                <div class="scripture">
+                    <strong>Romans 3:9-10 (NKJV):</strong> "We have previously charged both Jews and Greeks that they are all under sin. As it is written: 'There is none righteous, no, not one.'"
+                </div>
+
+                <p>This section — Romans 1:18 through 3:20 — is heavy. Some honest readers will say it reads like an accusation against them personally. Good. That is exactly the reaction Paul intends. By the end of chapter 3, every mouth will be stopped. Every defense will fall. And only then will Paul roll back the stone and announce the resurrection of righteousness — by faith, apart from the law, for everyone who believes.</p>
+
+                <h3>2. The Three Steps Down (1:18-23)</h3>
+                <p>Paul lays out three reasons why God is entirely just in His judgment of human beings. They are not three separate categories of sinners. They are three steps that every fallen human being takes, every day, in the slow downward spiral away from the light.</p>
+
+                <p>First, <strong>humanity suppresses the truth in wickedness.</strong> It is not that the truth is hidden. It is that we hold it down. We push against it. We bury it under noise, distraction, and rationalization. Paul says the wrath of God is revealed "against all the godlessness and wickedness of people, who suppress the truth by their wickedness." Notice the order — wickedness drives the suppression, not the other way around. We do not first fail to find God and then accidentally drift into sin. We sin, and then we work very hard to keep ourselves from finding God.</p>
+
+                <p>Second, <strong>humanity ignores God's revelation in creation.</strong> Paul argues that what may be known about God is plain to them, because God has made it plain to them. The invisible qualities of God — His eternal power and divine nature — have been clearly seen since the creation of the world, in the things that have been made, so that people are without excuse. This is what theologians call <em>general revelation</em> or natural revelation. Every sunrise preaches a sermon. Every star is a syllable. The created order is not silent about its Creator. Four things characterize it: it is clear, universally understood, has been going out since creation, and reveals real truth about God (though not all of it). The cosmos itself testifies, and humanity covers its ears.</p>
+
+                <p>Third, <strong>humanity exchanges the glory of God for images.</strong> Paul writes that "they claimed to be wise, they became fools, and exchanged the glory of the immortal God for images made to look like a mortal human being and birds and animals and reptiles." Idolatry is not a primitive impulse we have outgrown; it is the universal human reflex. When we will not have God as God, we must have a substitute. The ancient world carved idols of stone and wood. The modern world carves them of careers, romance, money, ideology, and self-image. The material has changed; the impulse has not.</p>
+
+                <h3>3. God Gave Them Over: The Triple Surrender (1:24-32)</h3>
+                <p>Three times in this passage Paul writes the chilling phrase, "God gave them over." It is one of the most sobering descriptions of divine judgment in the New Testament. God's wrath is not always thunder and fire. Sometimes God's wrath is the absence of resistance. He simply lets us have what we keep demanding.</p>
+
+                <div class="scripture">
+                    <strong>Romans 1:24, 26, 28 (NKJV):</strong> "Therefore God also gave them up to uncleanness... For this reason God gave them up to vile passions... God gave them over to a debased mind."
+                </div>
+
+                <p>The pattern descends. First, God gives humanity over to "the sinful desires of their hearts to sexual impurity for the degrading of their bodies." Second, God gives them over to "shameful lusts" — Paul names specifically the disordering of natural sexual function. Third, God gives them over to "a debased mind" — a thinking apparatus so warped that it can no longer distinguish good from evil and approves of those who do what ought not to be done.</p>
+
+                <p>Here Paul lists the fruit of the debased mind: "every kind of wickedness, evil, greed and depravity. They are full of envy, murder, strife, deceit and malice. They are gossips, slanderers, God-haters, insolent, arrogant and boastful; they invent ways of doing evil; they disobey their parents." Pause and read that list again. Murder. Gossip. Arrogance. Disobedience to parents. Paul ranks them together — flat. He does not give us a hierarchy of "not so bad" sins versus "really really nasty" ones. The whole list is named "wickedness." This is the New Testament's death-blow to every comfortable comparison we make between ourselves and people we judge worse.</p>
+
+                <h3>4. The Moral Person Is Just as Guilty (2:1-16)</h3>
+                <p>At this point Paul anticipates a comfortable reader nodding along, thinking, "Yes, those people are terrible. Thank God I'm not like them." So Paul turns. "Therefore you have no excuse, O man, every one of you who judges. For in passing judgment on another you condemn yourself, because you, the judge, practice the very same things." Paul's argument is devastating. The moment you judge, you prove you know the standard. The moment you fail to keep the standard yourself, you stand condemned by your own verdict.</p>
+
+                <p>In this section Paul lays down four principles of God's judgment that close every loophole. First, God's judgment is <strong>according to truth</strong> (2:2) — not appearance, not reputation, not comparative virtue. Second, God's judgment shows <strong>no partiality</strong> (2:11) — Jew and Gentile, rich and poor, religious and irreligious face the same standard. Third, God's judgment is <strong>according to works</strong> (2:6) — what we actually do, not what we tell ourselves we would do. Fourth, God's judgment reaches <strong>secret things</strong> (2:16) — God will judge what no human court can reach, the secrets of every heart through Christ Jesus.</p>
+
+                <p>The conscience itself becomes a witness. Paul notes that even Gentiles, who do not have the Mosaic Law, "show the work of the law written in their hearts, their conscience also bearing witness." Conscience is not infallible, but it is universal. Every culture has some sense of right and wrong. That moral sense is itself part of the indictment — because every culture, including those without the Bible, fails the standard its own conscience confesses.</p>
+
+                <div class="illustration">
+                    <strong>Pastoral Reflection:</strong> Sitting in a church no more makes one a Christian than sitting in a garage would make one a car. The form does not produce the substance. Paul is about to dismantle the idea that any external religious identification — Jewish circumcision, Christian baptism, denominational membership — can substitute for the righteousness God actually requires.
+                </div>
+
+                <h3>5. The Religious Person Is Just as Guilty (2:17-29)</h3>
+                <p>Paul now turns specifically to the Jewish reader, but the principle applies to every religious tradition. "Behold, you are called a Jew, and rest on the law, and make your boast in God, and know His will." Paul piles up the credentials. Then he asks the killing question: "You, therefore, who teach another, do you not teach yourself? You who preach that a man should not steal, do you steal? You who say, 'Do not commit adultery,' do you commit adultery?" The credentials do not save. Possession of the law without obedience to the law actually deepens guilt rather than reducing it.</p>
+
+                <p>Paul ends the section with a thunderclap: "He is not a Jew who is one outwardly, nor is circumcision that which is outward in the flesh; but he is a Jew who is one inwardly; and circumcision is that of the heart, in the Spirit, not in the letter." Circumcision was the covenant sign — the deepest mark of Jewish identity. Paul says the outward mark counts for nothing without the inward reality. Heart-circumcision is what God has always required. Outward religion without inward transformation is exactly what Jesus called the Pharisees out for. The same warning applies to every Christian generation since.</p>
+
+                <h3>6. The Verdict: All Under Sin (3:1-20)</h3>
+                <p>In chapter 3 Paul fields a series of objections an honest opponent might raise — does Jewish privilege count for nothing? Does God's faithfulness fail because of our unfaithfulness? Can we sin so that grace may abound? He answers them all rapidly: God remains faithful even when we are faithless; let God be true and every man a liar; and absolutely not, we may not sin to magnify grace.</p>
+
+                <p>Then Paul drives the closing nail. He strings together a catena of Old Testament quotations — from Psalms, Proverbs, and Isaiah — to establish the universal verdict.</p>
+
+                <div class="scripture">
+                    <strong>Romans 3:10-12 (NKJV):</strong> "There is none righteous, no, not one; there is none who understands; there is none who seeks after God. They have all turned aside; they have together become unprofitable; there is none who does good, no, not one."
+                </div>
+
+                <p>The accumulating quotations function like the sounds of a courtroom: gavel after gavel falling. Their throat an open tomb. The poison of asps under their lips. Mouths full of cursing and bitterness. Destruction and misery in their ways. The way of peace not known. No fear of God before their eyes. And then Paul delivers the closing argument: "Now we know that whatever the law says, it says to those who are under the law, that every mouth may be stopped, and all the world may become guilty before God."</p>
+
+                <p>Every mouth stopped. No defense remaining. The whole human race standing silent in the courtroom of God. That is where Paul has been driving for sixty-six verses. Romans 3:20 lands the verdict and explains the function of the law itself: "Therefore by the deeds of the law no flesh will be justified in His sight, for by the law is the knowledge of sin."</p>
+
+                <p>The law was never given to save anyone. The law was given to expose the disease that requires salvation. James 2:10 puts it bluntly — "whoever shall keep the whole law, and yet offend in one point, he is guilty of all." Jesus raised the bar even higher in the Sermon on the Mount — "Be perfect, therefore, as your heavenly Father is perfect." The Bible's standard is not relative goodness. It is absolute righteousness. And by that standard, every human being on the planet has fallen short. Romans 3:23 will state it explicitly two paragraphs later: "for all have sinned and fall short of the glory of God."</p>
+
+                <p>Paul has now closed every door, locked every window, and stopped every mouth. He has done it on purpose. Because only when every other rescue has failed are we ready to look in the direction Paul has been pointing all along. Romans 3:21 — "But now…" — begins the next unit.</p>
+            </div>
+
+            <div class="lang-es">
+                <h3>1. Las Malas Noticias Antes de las Buenas Noticias</h3>
+                <p>Pablo podría haber empezado con la cruz. Podría haber abierto el cuerpo de su carta en Romanos 3:21 — "pero ahora, aparte de la ley, se ha manifestado la justicia de Dios." Esa es la gran bisagra del libro, el lugar donde el evangelio rompe a través. En cambio, Pablo pasa casi tres capítulos enteros demoliendo cada ruta de escape que un pecador podría tomar antes de anunciar el rescate.</p>
+
+                <p>Esto no es inusual en Pablo. Es esencial. Un médico que reparte medicina sin antes explicar la enfermedad no le hace ningún favor al paciente; le está vendiendo algo que el paciente no cree necesitar. El capellán del hospital que le dice a un moribundo "Jesús te ama" sin nunca decirle que se está muriendo se ha saltado la oración más importante. Las buenas noticias de la Biblia no son consuelo vago. Son rescate específico de un desastre específico. Así que antes de mostrarnos la salida, Pablo cierra cada otra puerta y le pone llave.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 3:9-10 (RVG):</strong> "Ya hemos acusado a judíos y a gentiles, que todos están bajo pecado. Como está escrito: No hay justo, ni aun uno."
+                </div>
+
+                <p>Esta sección — Romanos 1:18 hasta 3:20 — es pesada. Algunos lectores honestos dirán que se lee como una acusación contra ellos personalmente. Bien. Esa es exactamente la reacción que Pablo busca. Al final del capítulo 3, toda boca quedará tapada. Toda defensa caerá. Y solo entonces Pablo retirará la piedra y anunciará la resurrección de la justicia — por fe, aparte de la ley, para todo aquel que cree.</p>
+
+                <h3>2. Los Tres Pasos Hacia Abajo (1:18-23)</h3>
+                <p>Pablo expone tres razones por las que Dios es completamente justo en Su juicio sobre los seres humanos. No son tres categorías separadas de pecadores. Son tres pasos que cada ser humano caído da, todos los días, en la lenta espiral descendente lejos de la luz.</p>
+
+                <p>Primero, <strong>la humanidad suprime la verdad en la maldad.</strong> No es que la verdad esté escondida. Es que la sostenemos hacia abajo. Empujamos contra ella. La enterramos bajo ruido, distracción y racionalización. Pablo dice que la ira de Dios se revela "contra toda impiedad e injusticia de los hombres, que detienen con injusticia la verdad." Note el orden — la maldad impulsa la supresión, no al revés. No es que primero fallemos en encontrar a Dios y luego accidentalmente derivemos hacia el pecado. Pecamos, y luego trabajamos muy duro para impedirnos a nosotros mismos encontrar a Dios.</p>
+
+                <p>Segundo, <strong>la humanidad ignora la revelación de Dios en la creación.</strong> Pablo argumenta que lo que se puede conocer acerca de Dios les es manifiesto, porque Dios se lo manifestó. Las cualidades invisibles de Dios — Su eterno poder y Su deidad — han sido claramente vistas desde la creación del mundo, en las cosas hechas, de modo que no tienen excusa. Esto es lo que los teólogos llaman <em>revelación general</em> o revelación natural. Cada amanecer predica un sermón. Cada estrella es una sílaba. El orden creado no es silencioso acerca de su Creador. Cuatro cosas lo caracterizan: es clara, universalmente entendida, ha estado emitiendo desde la creación, y revela verdad real sobre Dios (aunque no toda). El cosmos mismo testifica, y la humanidad se tapa los oídos.</p>
+
+                <p>Tercero, <strong>la humanidad cambia la gloria de Dios por imágenes.</strong> Pablo escribe que "profesando ser sabios, se hicieron necios, y cambiaron la gloria del Dios incorruptible en semejanza de imagen de hombre corruptible, de aves, de cuadrúpedos, y de reptiles." La idolatría no es un impulso primitivo que hemos superado; es el reflejo humano universal. Cuando no queremos tener a Dios como Dios, debemos tener un sustituto. El mundo antiguo tallaba ídolos de piedra y madera. El mundo moderno los talla de carreras, romance, dinero, ideología e imagen propia. El material ha cambiado; el impulso no.</p>
+
+                <h3>3. Dios los Entregó: La Triple Rendición (1:24-32)</h3>
+                <p>Tres veces en este pasaje Pablo escribe la frase escalofriante: "Dios los entregó." Es una de las descripciones más sobrias del juicio divino en el Nuevo Testamento. La ira de Dios no siempre es trueno y fuego. A veces la ira de Dios es la ausencia de resistencia. Simplemente nos deja tener lo que seguimos exigiendo.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 1:24, 26, 28 (RVG):</strong> "Por lo cual también Dios los entregó a la inmundicia... Por esto Dios los entregó a pasiones vergonzosas... Dios los entregó a una mente depravada."
+                </div>
+
+                <p>El patrón desciende. Primero, Dios entrega a la humanidad a "los deseos pecaminosos de sus corazones a la inmundicia sexual para deshonrar sus cuerpos." Segundo, los entrega a "pasiones vergonzosas" — Pablo nombra específicamente el desorden de la función sexual natural. Tercero, los entrega a "una mente depravada" — un aparato de pensamiento tan torcido que ya no puede distinguir el bien del mal y aprueba a aquellos que hacen lo que no debe hacerse.</p>
+
+                <p>Aquí Pablo enumera el fruto de la mente depravada: "toda clase de maldad, fornicación, perversidad, avaricia, malicia; llenos de envidia, homicidios, contiendas, engaños, malignidades; murmuradores, detractores, aborrecedores de Dios, injuriosos, soberbios, altivos, inventores de males, desobedientes a los padres." Detente y lee esa lista de nuevo. Homicidio. Murmuración. Soberbia. Desobediencia a los padres. Pablo los clasifica juntos — al mismo nivel. No nos da una jerarquía de pecados "no tan malos" versus "realmente muy desagradables." Toda la lista se llama "maldad." Este es el golpe mortal del Nuevo Testamento a toda comparación cómoda que hacemos entre nosotros y personas que juzgamos peores.</p>
+
+                <h3>4. La Persona Moral Es Igualmente Culpable (2:1-16)</h3>
+                <p>En este punto Pablo anticipa a un lector cómodo asintiendo, pensando: "Sí, esa gente es terrible. Gracias a Dios que no soy como ellos." Así que Pablo gira. "Por lo cual eres inexcusable, oh hombre, quienquiera que seas tú que juzgas; porque en lo que juzgas a otro, te condenas a ti mismo; porque tú que juzgas haces lo mismo." El argumento de Pablo es devastador. En el momento en que juzgas, demuestras que conoces el estándar. En el momento en que tú mismo fallas en cumplir el estándar, quedas condenado por tu propio veredicto.</p>
+
+                <p>En esta sección Pablo establece cuatro principios del juicio de Dios que cierran cada laguna. Primero, el juicio de Dios es <strong>según verdad</strong> (2:2) — no apariencia, no reputación, no virtud comparativa. Segundo, el juicio de Dios no muestra <strong>acepción de personas</strong> (2:11) — judío y gentil, rico y pobre, religioso e irreligioso enfrentan el mismo estándar. Tercero, el juicio de Dios es <strong>según las obras</strong> (2:6) — lo que realmente hacemos, no lo que nos decimos a nosotros mismos que haríamos. Cuarto, el juicio de Dios alcanza <strong>las cosas secretas</strong> (2:16) — Dios juzgará lo que ninguna corte humana puede alcanzar, los secretos de cada corazón por Jesucristo.</p>
+
+                <p>La conciencia misma se vuelve testigo. Pablo señala que aun los gentiles, que no tienen la ley mosaica, "muestran la obra de la ley escrita en sus corazones, dando testimonio su conciencia." La conciencia no es infalible, pero es universal. Cada cultura tiene algún sentido del bien y del mal. Ese sentido moral es en sí mismo parte de la acusación — porque cada cultura, incluyendo las que no tienen la Biblia, falla en cumplir el estándar que su propia conciencia confiesa.</p>
+
+                <div class="illustration">
+                    <strong>Reflexión Pastoral:</strong> Sentarse en una iglesia no hace a uno cristiano, así como sentarse en una cochera no haría a uno un automóvil. La forma no produce la sustancia. Pablo está a punto de desmontar la idea de que cualquier identificación religiosa externa — circuncisión judía, bautismo cristiano, membresía denominacional — pueda sustituir la justicia que Dios realmente requiere.
+                </div>
+
+                <h3>5. La Persona Religiosa Es Igualmente Culpable (2:17-29)</h3>
+                <p>Pablo ahora se dirige específicamente al lector judío, pero el principio aplica a toda tradición religiosa. "He aquí, tú te llamas judío, y te apoyas en la ley, y te glorías en Dios, y sabes su voluntad." Pablo apila las credenciales. Luego hace la pregunta letal: "Tú, pues, que enseñas a otro, ¿no te enseñas a ti mismo? Tú que predicas que no se debe hurtar, ¿hurtas? Tú que dices que no se debe adulterar, ¿adulteras?" Las credenciales no salvan. La posesión de la ley sin obediencia a la ley en realidad profundiza la culpa en lugar de reducirla.</p>
+
+                <p>Pablo termina la sección con un trueno: "Pues no es judío el que lo es exteriormente, ni es la circuncisión la que se hace exteriormente en la carne; sino que es judío el que lo es en lo interior; y la circuncisión es la del corazón, en espíritu, no en letra." La circuncisión era la señal del pacto — la marca más profunda de la identidad judía. Pablo dice que la marca externa no cuenta para nada sin la realidad interna. La circuncisión del corazón es lo que Dios siempre ha requerido. La religión externa sin transformación interna es exactamente lo que Jesús denunció en los fariseos. La misma advertencia aplica a cada generación cristiana desde entonces.</p>
+
+                <h3>6. El Veredicto: Todos Bajo Pecado (3:1-20)</h3>
+                <p>En el capítulo 3 Pablo responde a una serie de objeciones que un oponente honesto podría plantear — ¿no cuenta para nada el privilegio judío? ¿Falla la fidelidad de Dios a causa de nuestra infidelidad? ¿Podemos pecar para que la gracia abunde? Las responde todas rápidamente: Dios permanece fiel aun cuando somos infieles; sea Dios veraz y todo hombre mentiroso; y en absoluto, no podemos pecar para magnificar la gracia.</p>
+
+                <p>Luego Pablo clava el clavo final. Encadena una catena de citas del Antiguo Testamento — de Salmos, Proverbios e Isaías — para establecer el veredicto universal.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 3:10-12 (RVG):</strong> "No hay justo, ni aun uno; no hay quien entienda, no hay quien busque a Dios. Todos se desviaron, a una se hicieron inútiles; no hay quien haga lo bueno, no hay ni siquiera uno."
+                </div>
+
+                <p>Las citas acumulativas funcionan como los sonidos de un tribunal: martillazo tras martillazo cayendo. Su garganta como sepulcro abierto. Veneno de áspides bajo sus labios. Bocas llenas de maldición y de amargura. Destrucción y miseria en sus caminos. El camino de paz no conocido. No hay temor de Dios delante de sus ojos. Y luego Pablo pronuncia el argumento final: "Pero sabemos que todo lo que la ley dice, lo dice a los que están bajo la ley, para que toda boca se tape, y todo el mundo quede bajo juicio ante Dios."</p>
+
+                <p>Toda boca tapada. Sin defensa restante. Toda la raza humana en silencio en el tribunal de Dios. Allí es donde Pablo ha estado conduciendo durante sesenta y seis versículos. Romanos 3:20 entrega el veredicto y explica la función de la ley misma: "Por las obras de la ley ningún ser humano será justificado delante de él; pues por medio de la ley es el conocimiento del pecado."</p>
+
+                <p>La ley nunca fue dada para salvar a nadie. La ley fue dada para exponer la enfermedad que requiere salvación. Santiago 2:10 lo dice sin rodeos — "cualquiera que guardare toda la ley, pero ofendiere en un punto, se hace culpable de todos." Jesús levantó el listón aún más alto en el Sermón del Monte — "Sed, pues, vosotros perfectos, como vuestro Padre que está en los cielos es perfecto." El estándar de la Biblia no es bondad relativa. Es justicia absoluta. Y según ese estándar, cada ser humano en el planeta ha quedado corto. Romanos 3:23 lo declarará explícitamente dos párrafos después: "por cuanto todos pecaron, y están destituidos de la gloria de Dios."</p>
+
+                <p>Pablo ahora ha cerrado cada puerta, ha trabado cada ventana, y ha tapado cada boca. Lo ha hecho a propósito. Porque solo cuando todo otro rescate ha fallado estamos listos para mirar en la dirección que Pablo ha estado señalando todo el tiempo. Romanos 3:21 — "Pero ahora…" — comienza la siguiente unidad.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="exam-section" id="examSection">
+        <div class="exam-header">
+            <h2><span class="lang-en">Unit 2 Examination — Romans 1:18-3:20</span><span class="lang-es">Examen de la Unidad 2 — Romanos 1:18-3:20</span></h2>
+            <p><span class="lang-en">20 multiple choice questions + 10 short answer questions (essays required for Th.M. and M.Div. only)</span><span class="lang-es">20 preguntas de opción múltiple + 10 preguntas de respuesta corta (requeridas solo para Th.M. y M.Div.)</span></p>
+        </div>
+        <div id="mcQuestions"></div>
+        <div id="saQuestions"></div>
+        <div class="action-buttons">
+            <button id="submitBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Entregar Examen</span></button>
+            <button id="resetBtn" class="reset-btn"><span class="lang-en">Reset Exam</span><span class="lang-es">Reiniciar Examen</span></button>
+        </div>
+        <div id="lockoutTimer" class="lockout-timer" style="display:none;"></div>
+    </div>
+
+    <div class="nav-links">
+        <a href="CTSRomansUnit1.html"><span class="lang-en">← Previous Unit</span><span class="lang-es">← Unidad Anterior</span></a>
+        <a href="CTSRomansUnit3.html"><span class="lang-en">Next Unit →</span><span class="lang-es">Unidad Siguiente →</span></a>
+    </div>
+</div>
+
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+// ============================================================
+// PER-UNIT CONSTANTS
+// ============================================================
+const UNIT = 2;
+const COURSE_PREFIX = "romans";
+const NEXT_URL = "CTSRomansUnit3.html";
+const PREV_URL = "CTSRomansUnit1.html";
+const IS_LAST_UNIT = false;
+const SHOW_REGISTRATION_CARD = false;
+const CERT_URL = "CTSRomansCertificate.html";
+
+// ============================================================
+// MULTIPLE CHOICE QUESTIONS (20) — Distribution A=5, B=5, C=5, D=5
+// ============================================================
+const mcQuestions = [{"text": "1. According to Romans 1:18, what is revealed from heaven?", "options": ["B. The wrath of God against all ungodliness and unrighteousness", "A. The mercy of God", "D. The judgment seat of Christ", "C. The kingdom of God"], "correct": 0, "correctFeedback": "Correct. Romans 1:18 — 'For the wrath of God is revealed from heaven against all ungodliness and unrighteousness of men, who suppress the truth in unrighteousness.'", "incorrectFeedback": "Romans 1:18 declares God's wrath revealed against all ungodliness and unrighteousness of those who suppress the truth.", "textEs": "1. Según Romanos 1:18, ¿qué se revela desde el cielo?", "optionsEs": ["B. La ira de Dios contra toda impiedad e injusticia", "A. La misericordia de Dios", "D. El tribunal de Cristo", "C. El reino de Dios"], "correctFeedbackEs": "Correcto. Romanos 1:18 — 'Porque la ira de Dios se revela desde el cielo contra toda impiedad e injusticia de los hombres, que detienen la verdad con injusticia.'", "incorrectFeedbackEs": "Romanos 1:18 declara que la ira de Dios se revela contra toda impiedad e injusticia de los que detienen la verdad."}, {"text": "2. What is the first reason Paul gives for God's just condemnation of humanity (Rom 1:18)?", "options": ["D. Humanity worships angels", "C. Humanity rejects the Old Testament", "A. Humanity suppresses the truth in wickedness", "B. Humanity disobeys the Ten Commandments"], "correct": 2, "correctFeedback": "Correct. Humanity holds down — suppresses — the truth it already knows. Wickedness drives the suppression.", "incorrectFeedback": "Paul says humanity actively suppresses the truth. We do not first fail to find God; we sin, and then work to keep ourselves from finding Him.", "textEs": "2. ¿Cuál es la primera razón que da Pablo para la justa condenación de la humanidad (Ro 1:18)?", "optionsEs": ["D. La humanidad adora a los ángeles", "C. La humanidad rechaza el Antiguo Testamento", "A. La humanidad detiene la verdad con injusticia", "B. La humanidad desobedece los Diez Mandamientos"], "correctFeedbackEs": "Correcto. La humanidad detiene — reprime — la verdad que ya conoce. La maldad impulsa esa represión.", "incorrectFeedbackEs": "Pablo dice que la humanidad reprime activamente la verdad. No es que primero no hallemos a Dios; pecamos, y luego trabajamos para no hallarlo."}, {"text": "3. According to Romans 1:20, what does natural revelation make known about God?", "options": ["A. His covenant with Israel", "D. The Ten Commandments", "B. His plan of salvation through Christ", "C. His eternal power and divine nature"], "correct": 3, "correctFeedback": "Correct. 'His eternal power and Godhead are clearly seen, being understood by the things that are made.'", "incorrectFeedback": "Natural revelation reveals God's eternal power and divine nature (Godhead), seen in creation. It does not reveal the gospel — that requires special revelation.", "textEs": "3. Según Romanos 1:20, ¿qué da a conocer la revelación natural acerca de Dios?", "optionsEs": ["A. Su pacto con Israel", "D. Los Diez Mandamientos", "B. Su plan de salvación por medio de Cristo", "C. Su eterno poder y su naturaleza divina"], "correctFeedbackEs": "Correcto. 'Su eterno poder y Deidad se ven claramente, siendo entendidos por las cosas que son hechas.'", "incorrectFeedbackEs": "La revelación natural da a conocer el eterno poder y la naturaleza divina (Deidad) de Dios, vistos en la creación. No revela el evangelio — eso requiere revelación especial."}, {"text": "4. Romans 1:21 says they 'knew God' but did not glorify Him as God, nor were they ___.", "options": ["B. circumcised", "A. baptized", "C. obedient", "D. thankful"], "correct": 3, "correctFeedback": "Correct. 'They glorified Him not as God, neither were thankful.' Ingratitude is at the root of idolatry.", "incorrectFeedback": "Romans 1:21 — 'neither were thankful.' Ingratitude marks the unconverted heart and feeds idolatry.", "textEs": "4. Romanos 1:21 dice que 'conocieron a Dios' pero no le glorificaron como a Dios, ni le fueron ___.", "optionsEs": ["B. circuncidados", "A. bautizados", "C. obedientes", "D. agradecidos"], "correctFeedbackEs": "Correcto. 'No le glorificaron como a Dios, ni le dieron gracias.' La ingratitud está en la raíz de la idolatría.", "incorrectFeedbackEs": "Romanos 1:21 — 'ni le dieron gracias.' La ingratitud marca el corazón no convertido y alimenta la idolatría."}, {"text": "5. How many times does the phrase 'God gave them over' appear in Romans 1:24-32?", "options": ["C. Five times", "A. Three times", "D. Once", "B. Two times"], "correct": 1, "correctFeedback": "Correct. Three times (vv. 24, 26, 28) — sexual impurity, vile passions, debased mind.", "incorrectFeedback": "Three times — verses 24, 26, and 28. A triple surrender of judgment by abandonment.", "textEs": "5. ¿Cuántas veces aparece la frase 'Dios los entregó' en Romanos 1:24-32?", "optionsEs": ["C. Cinco veces", "A. Tres veces", "D. Una vez", "B. Dos veces"], "correctFeedbackEs": "Correcto. Tres veces (vv. 24, 26, 28) — inmundicia sexual, pasiones vergonzosas, mente reprobada.", "incorrectFeedbackEs": "Tres veces — versículos 24, 26 y 28. Una triple entrega como juicio por abandono."}, {"text": "6. What does Paul mean by 'God gave them over'?", "options": ["B. God's judgment by removing restraint and letting them have what they kept demanding", "A. God created them this way", "C. God ceased loving them", "D. God formally cursed them"], "correct": 0, "correctFeedback": "Correct. It is judicial abandonment — God's wrath as the absence of resistance. He lets them have what they keep demanding.", "incorrectFeedback": "'Gave them over' is judicial abandonment. Sometimes God's wrath is not thunder but the removal of restraint — He simply lets us have what we keep demanding.", "textEs": "6. ¿Qué quiere decir Pablo con 'Dios los entregó'?", "optionsEs": ["B. El juicio de Dios al quitar el freno y dejarlos tener lo que seguían exigiendo", "A. Dios los creó así", "C. Dios dejó de amarlos", "D. Dios los maldijo formalmente"], "correctFeedbackEs": "Correcto. Es abandono judicial — la ira de Dios como la ausencia de resistencia. Los deja tener lo que siguen exigiendo.", "incorrectFeedbackEs": "'Los entregó' es abandono judicial. A veces la ira de Dios no es trueno, sino el quitar el freno — simplemente nos deja tener lo que seguimos exigiendo."}, {"text": "7. How does Romans 2 begin Paul's argument?", "options": ["B. By summarizing the law", "A. By praising the moral person", "C. By turning the indictment back on the moral person who judges others", "D. By introducing the Gentiles"], "correct": 2, "correctFeedback": "Correct. Paul turns: 'You have no excuse, O man, every one of you who judges. For in passing judgment on another you condemn yourself.'", "incorrectFeedback": "Paul turns on the comfortable reader who has been agreeing with the indictment. The moment you judge, you prove you know the standard — and fail it yourself.", "textEs": "7. ¿Cómo comienza Pablo su argumento en Romanos 2?", "optionsEs": ["B. Resumiendo la ley", "A. Alabando a la persona moral", "C. Volviendo la acusación contra la persona moral que juzga a otros", "D. Introduciendo a los gentiles"], "correctFeedbackEs": "Correcto. Pablo vuelve la acusación: 'Eres inexcusable, oh hombre, quienquiera que seas tú que juzgas; porque en lo que juzgas a otro, te condenas a ti mismo.'", "incorrectFeedbackEs": "Pablo se vuelve contra el lector cómodo que ha estado de acuerdo con la acusación. En el momento en que juzgas, demuestras que conoces la norma — y tú mismo fallas en ella."}, {"text": "8. According to Romans 2:11, what does God show with respect to persons?", "options": ["B. Special grace to the morally upright", "D. No partiality", "A. Special favor to the religious", "C. Preference for the wise"], "correct": 1, "correctFeedback": "Correct. 'For there is no partiality with God.' Jew or Gentile, religious or irreligious — the same standard.", "incorrectFeedback": "Romans 2:11 — 'there is no partiality with God.' Every person stands before God on the same standard.", "textEs": "8. Según Romanos 2:11, ¿qué muestra Dios respecto a las personas?", "optionsEs": ["B. Gracia especial a los moralmente rectos", "D. Ninguna acepción de personas", "A. Favor especial a los religiosos", "C. Preferencia por los sabios"], "correctFeedbackEs": "Correcto. 'Porque no hay acepción de personas para con Dios.' Judío o gentil, religioso o irreligioso — la misma norma.", "incorrectFeedbackEs": "Romanos 2:11 — 'no hay acepción de personas para con Dios.' Toda persona está delante de Dios bajo la misma norma."}, {"text": "9. In Romans 2:14-15, where does Paul say God's moral law is written for the Gentiles?", "options": ["C. In their civil laws", "B. In Greek philosophy", "A. On their hearts, with conscience as witness", "D. In their religious traditions"], "correct": 2, "correctFeedback": "Correct. 'They show the work of the law written in their hearts, their conscience also bearing witness.'", "incorrectFeedback": "Paul says the work of the law is written on Gentile hearts, with conscience as the witness. Moral knowledge is universal, even apart from the Mosaic Law.", "textEs": "9. En Romanos 2:14-15, ¿dónde dice Pablo que está escrita la ley moral de Dios para los gentiles?", "optionsEs": ["C. En sus leyes civiles", "B. En la filosofía griega", "A. En sus corazones, con la conciencia como testigo", "D. En sus tradiciones religiosas"], "correctFeedbackEs": "Correcto. 'Mostrando la obra de la ley escrita en sus corazones, dando testimonio su conciencia.'", "incorrectFeedbackEs": "Pablo dice que la obra de la ley está escrita en los corazones de los gentiles, con la conciencia como testigo. El conocimiento moral es universal, aun aparte de la ley mosaica."}, {"text": "10. According to Romans 2:29, what is the true circumcision?", "options": ["A. The outward physical sign in the flesh", "B. The inward circumcision of the heart by the Spirit", "C. Baptism", "D. Membership in the synagogue"], "correct": 1, "correctFeedback": "Correct. 'Circumcision is that of the heart, in the Spirit, not in the letter.' Outward sign without inward reality counts for nothing.", "incorrectFeedback": "Romans 2:29 — true circumcision is of the heart, in the Spirit, not the letter. God has always required inward transformation, not external religion.", "textEs": "10. Según Romanos 2:29, ¿cuál es la verdadera circuncisión?", "optionsEs": ["A. La señal externa y física en la carne", "B. La circuncisión interna del corazón por el Espíritu", "C. El bautismo", "D. La membresía en la sinagoga"], "correctFeedbackEs": "Correcto. 'La circuncisión es la del corazón, en espíritu, no en letra.' La señal externa sin la realidad interna no cuenta para nada.", "incorrectFeedbackEs": "Romanos 2:29 — la verdadera circuncisión es la del corazón, en espíritu, no en letra. Dios siempre ha requerido transformación interna, no religión externa."}, {"text": "11. In Romans 3:1, what rhetorical objection does Paul anticipate?", "options": ["C. What advantage has the Jew, if circumcision profits nothing?", "A. Why did God allow sin?", "B. Why does God judge anyone?", "D. What does the law require?"], "correct": 0, "correctFeedback": "Correct. Paul anticipates the objection that he has erased Jewish privilege entirely. He answers it carefully in chapter 3.", "incorrectFeedback": "Romans 3:1 — 'What advantage then hath the Jew? or what profit is there of circumcision?' Paul will answer that there is much advantage, but it does not exempt anyone from sin.", "textEs": "11. En Romanos 3:1, ¿qué objeción retórica anticipa Pablo?", "optionsEs": ["C. ¿Qué ventaja tiene el judío, si la circuncisión no aprovecha nada?", "A. ¿Por qué permitió Dios el pecado?", "B. ¿Por qué juzga Dios a alguien?", "D. ¿Qué requiere la ley?"], "correctFeedbackEs": "Correcto. Pablo anticipa la objeción de que ha borrado por completo el privilegio judío. La responde con cuidado en el capítulo 3.", "incorrectFeedbackEs": "Romanos 3:1 — '¿Qué ventaja tiene, pues, el judío? ¿o de qué aprovecha la circuncisión?' Pablo responderá que hay mucha ventaja, pero que no exime a nadie del pecado."}, {"text": "12. Romans 3:10-18 is a catena of quotations primarily drawn from where?", "options": ["B. The Pentateuch alone", "D. The Old Testament (Psalms, Proverbs, Isaiah)", "A. The Apocrypha", "C. The Sermon on the Mount"], "correct": 1, "correctFeedback": "Correct. Paul strings together passages from Psalms, Proverbs, and Isaiah to establish the universal verdict.", "incorrectFeedback": "Paul draws from Old Testament Psalms (chiefly 14, 53, 5, 140, 10, 36), Proverbs, and Isaiah, building a courtroom catena of universal guilt.", "textEs": "12. Romanos 3:10-18 es una cadena de citas tomadas principalmente ¿de dónde?", "optionsEs": ["B. Solo el Pentateuco", "D. El Antiguo Testamento (Salmos, Proverbios, Isaías)", "A. Los libros apócrifos", "C. El Sermón del Monte"], "correctFeedbackEs": "Correcto. Pablo enlaza pasajes de los Salmos, Proverbios e Isaías para establecer el veredicto universal.", "incorrectFeedbackEs": "Pablo toma de los Salmos del Antiguo Testamento (principalmente 14, 53, 5, 140, 10, 36), Proverbios e Isaías, construyendo una cadena judicial de culpa universal."}, {"text": "13. Which verse declares, 'For all have sinned and fall short of the glory of God'?", "options": ["A. Romans 3:23", "D. Romans 8:1", "B. Romans 5:8", "C. Romans 6:23"], "correct": 0, "correctFeedback": "Correct. Romans 3:23 — the universal verdict. 'All have sinned and fall short of the glory of God.'", "incorrectFeedback": "Romans 3:23 — the most concise statement of universal sinfulness in the New Testament.", "textEs": "13. ¿Cuál versículo declara: 'Por cuanto todos pecaron, y están destituidos de la gloria de Dios'?", "optionsEs": ["A. Romanos 3:23", "D. Romanos 8:1", "B. Romanos 5:8", "C. Romanos 6:23"], "correctFeedbackEs": "Correcto. Romanos 3:23 — el veredicto universal. 'Todos pecaron, y están destituidos de la gloria de Dios.'", "incorrectFeedbackEs": "Romanos 3:23 — la declaración más concisa de la pecaminosidad universal en el Nuevo Testamento."}, {"text": "14. According to Romans 3:20, what is the primary function of the law?", "options": ["A. To save those who keep it", "D. To establish a priesthood", "C. To replace faith", "B. To bring the knowledge of sin"], "correct": 3, "correctFeedback": "Correct. 'By the law is the knowledge of sin.' The law diagnoses the disease; it does not cure it.", "incorrectFeedback": "Romans 3:20 — 'by the law is the knowledge of sin.' The law was never given to save; it exposes the disease that requires salvation.", "textEs": "14. Según Romanos 3:20, ¿cuál es la función principal de la ley?", "optionsEs": ["A. Salvar a los que la guardan", "D. Establecer un sacerdocio", "C. Reemplazar la fe", "B. Dar el conocimiento del pecado"], "correctFeedbackEs": "Correcto. 'Por la ley es el conocimiento del pecado.' La ley diagnostica la enfermedad; no la cura.", "incorrectFeedbackEs": "Romanos 3:20 — 'por la ley es el conocimiento del pecado.' La ley nunca fue dada para salvar; expone la enfermedad que requiere salvación."}, {"text": "15. Romans 1:20 says humanity is 'without excuse.' What does this phrase emphasize?", "options": ["C. That natural revelation is sufficient to leave humanity inexcusable for rejecting God", "A. That salvation has never been offered to anyone", "D. That only Christians are accountable", "B. That God has not revealed Himself"], "correct": 0, "correctFeedback": "Correct. 'Without excuse' (anapologetos) means natural revelation is enough to remove every defense for rejecting the Creator.", "incorrectFeedback": "'Without excuse' means humanity has no defense before God. Natural revelation makes God's existence and power undeniable — rejection is willful.", "textEs": "15. Romanos 1:20 dice que la humanidad es 'inexcusable.' ¿Qué recalca esta frase?", "optionsEs": ["C. Que la revelación natural basta para dejar a la humanidad sin excusa por rechazar a Dios", "A. Que la salvación nunca le ha sido ofrecida a nadie", "D. Que solo los cristianos son responsables", "B. Que Dios no se ha revelado"], "correctFeedbackEs": "Correcto. 'Inexcusable' (anapologetos) significa que la revelación natural basta para quitar toda defensa por rechazar al Creador.", "incorrectFeedbackEs": "'Inexcusable' significa que la humanidad no tiene defensa delante de Dios. La revelación natural hace innegables la existencia y el poder de Dios — el rechazo es deliberado."}, {"text": "16. According to Romans 2:6, God will render to each person according to what?", "options": ["B. Their religious affiliation", "C. Their wealth", "D. Their deeds", "A. Their nationality"], "correct": 2, "correctFeedback": "Correct. 'Who will render to each one according to his deeds.' God's judgment is according to what we actually do, not what we tell ourselves.", "incorrectFeedback": "Romans 2:6 — 'who will render to each one according to his deeds.' God judges by actual conduct, not by claim or comparison.", "textEs": "16. Según Romanos 2:6, Dios pagará a cada persona conforme ¿a qué?", "optionsEs": ["B. Su afiliación religiosa", "C. Su riqueza", "D. Sus obras", "A. Su nacionalidad"], "correctFeedbackEs": "Correcto. 'El cual pagará a cada uno conforme a sus obras.' El juicio de Dios es conforme a lo que de veras hacemos, no a lo que nos decimos a nosotros mismos.", "incorrectFeedbackEs": "Romanos 2:6 — 'el cual pagará a cada uno conforme a sus obras.' Dios juzga por la conducta real, no por la pretensión ni la comparación."}, {"text": "17. Why does Paul specifically critique Jewish presumption in Romans 2:17-29?", "options": ["C. Because the law was abolished", "A. Because possessing the law without obeying it deepens guilt rather than reducing it", "D. Because Gentiles were already saved", "B. Because the Jews had rejected Moses"], "correct": 1, "correctFeedback": "Correct. Possessing the law without obeying it does not exempt; it actually deepens guilt. The same warning applies to anyone with religious credentials.", "incorrectFeedback": "Paul's point: possessing the law and boasting in it while breaking it actually compounds guilt. External religion without obedience deepens the indictment.", "textEs": "17. ¿Por qué critica Pablo específicamente la presunción judía en Romanos 2:17-29?", "optionsEs": ["C. Porque la ley fue abolida", "A. Porque poseer la ley sin obedecerla aumenta la culpa en vez de reducirla", "D. Porque los gentiles ya estaban salvos", "B. Porque los judíos habían rechazado a Moisés"], "correctFeedbackEs": "Correcto. Poseer la ley sin obedecerla no exime; en realidad aumenta la culpa. La misma advertencia aplica a cualquiera con credenciales religiosas.", "incorrectFeedbackEs": "El punto de Pablo: poseer la ley y jactarse de ella mientras se quebranta en realidad agrava la culpa. La religión externa sin obediencia profundiza la acusación."}, {"text": "18. James 2:10 reinforces Paul's argument that:", "options": ["C. Faith and works are unrelated", "A. The law has been replaced", "D. Only the Ten Commandments matter", "B. Whoever keeps the whole law but stumbles in one point is guilty of all"], "correct": 3, "correctFeedback": "Correct. 'Whoever shall keep the whole law, and yet offend in one point, he is guilty of all.' One failure means total guilt.", "incorrectFeedback": "James 2:10 — one point of failure means guilt of all. The Bible's standard is absolute, not relative. This reinforces Paul's verdict in Romans 3.", "textEs": "18. Santiago 2:10 refuerza el argumento de Pablo de que:", "optionsEs": ["C. La fe y las obras no tienen relación", "A. La ley ha sido reemplazada", "D. Solo importan los Diez Mandamientos", "B. Cualquiera que guarda toda la ley pero ofende en un punto se hace culpable de todos"], "correctFeedbackEs": "Correcto. 'Cualquiera que guardare toda la ley, pero ofendiere en un punto, se hace culpable de todos.' Una sola falta significa culpa total.", "incorrectFeedbackEs": "Santiago 2:10 — una sola falta significa culpa de todos. La norma de la Biblia es absoluta, no relativa. Esto refuerza el veredicto de Pablo en Romanos 3."}, {"text": "19. According to Romans 1:32, those who not only practice evil but also approve of others who do it deserve what?", "options": ["B. Correction", "A. Discipline", "C. Death", "D. Restitution"], "correct": 2, "correctFeedback": "Correct. 'Who knowing the judgment of God, that those who practice such things are deserving of death.' Approval of evil compounds guilt.", "incorrectFeedback": "Romans 1:32 — they are 'worthy of death' and add to their guilt by approving the same in others. The depraved mind celebrates what it should grieve.", "textEs": "19. Según Romanos 1:32, los que no solo practican el mal sino que también aprueban a otros que lo hacen, ¿qué merecen?", "optionsEs": ["B. Corrección", "A. Disciplina", "C. Muerte", "D. Restitución"], "correctFeedbackEs": "Correcto. 'Que habiendo conocido el juicio de Dios, que los que practican tales cosas son dignos de muerte.' Aprobar el mal agrava la culpa.", "incorrectFeedbackEs": "Romanos 1:32 — son 'dignos de muerte' y añaden a su culpa al aprobar lo mismo en otros. La mente depravada celebra lo que debería lamentar."}, {"text": "20. What is the overall verdict of Romans 1:18-3:20?", "options": ["B. Only Jews stand condemned", "A. Only Gentiles stand condemned", "C. Only the irreligious stand condemned", "D. Every mouth is stopped; all the world is guilty before God"], "correct": 3, "correctFeedback": "Correct. Romans 3:19-20 — 'that every mouth may be stopped, and all the world may become guilty before God.' Universal indictment.", "incorrectFeedback": "Romans 3:19 — every mouth is stopped and the whole world is guilty before God. The entire human race stands silent in His courtroom. That is the foundation for the gospel that follows.", "textEs": "20. ¿Cuál es el veredicto general de Romanos 1:18-3:20?", "optionsEs": ["B. Solo los judíos están condenados", "A. Solo los gentiles están condenados", "C. Solo los irreligiosos están condenados", "D. Toda boca se cierra; todo el mundo es culpable delante de Dios"], "correctFeedbackEs": "Correcto. Romanos 3:19-20 — 'para que toda boca se cierre, y todo el mundo quede bajo el juicio de Dios.' Acusación universal.", "incorrectFeedbackEs": "Romanos 3:19 — toda boca se cierra y todo el mundo queda culpable delante de Dios. Toda la raza humana queda en silencio en su tribunal. Ese es el fundamento del evangelio que sigue."}];
+
+// ============================================================
+// SHORT ANSWER QUESTIONS (10) — split kw_en / kw_es
+// ============================================================
+const saQuestions = [
+    { id: "sa_u2_1", textEn: "Summarize Paul's overall argument in Romans 1:18-3:20.", textEs: "Resuma el argumento general de Pablo en Romanos 1:18-3:20.", kw_en: ["wrath", "suppress", "Gentil", "Jew", "moral", "relig", "univ", "sin"], kw_es: ["ira", "suprim", "gentil", "judí", "moral", "relig", "univers", "pecado"], explanationEn: "Paul builds a sustained indictment proving every person — irreligious Gentile, moral judge, and religious Jew — stands guilty before God. The law brings knowledge of sin but cannot save. Every mouth is stopped; the whole world is guilty before God.", explanationEs: "Pablo construye una acusación sostenida que demuestra que toda persona — gentil irreligioso, juez moral y judío religioso — está culpable ante Dios. La ley trae conocimiento del pecado pero no puede salvar. Toda boca queda tapada; el mundo entero queda culpable ante Dios." },
+    { id: "sa_u2_2", textEn: "What are the three reasons Paul gives for God's just wrath against humanity in Romans 1:18-23?", textEs: "¿Cuáles son las tres razones que da Pablo para la justa ira de Dios contra la humanidad en Romanos 1:18-23?", kw_en: ["suppress", "reveal", "exchang", "glory", "idol", "wicked", "excuse", "divine"], kw_es: ["suprim", "revel", "cambi", "gloria", "idol", "mald", "excusa", "deidad"], explanationEn: "First, humanity suppresses the truth in wickedness. Second, humanity ignores God's revelation in creation (His eternal power and divine nature are clearly seen, leaving people without excuse). Third, humanity exchanges the glory of God for idols.", explanationEs: "Primero, la humanidad suprime la verdad con maldad. Segundo, la humanidad ignora la revelación de Dios en la creación (Su eterno poder y deidad son claramente vistos, dejando a las personas sin excusa). Tercero, la humanidad cambia la gloria de Dios por ídolos." },
+    { id: "sa_u2_3", textEn: "Describe the 'God gave them over' sequence in Romans 1:24-32 and what it teaches about divine judgment.", textEs: "Describa la secuencia 'Dios los entregó' en Romanos 1:24-32 y lo que enseña sobre el juicio divino.", kw_en: ["gave", "impur", "passion", "debas", "mind", "abandon", "restrain", "wrath"], kw_es: ["entreg", "inmund", "pasion", "deprav", "mente", "abandon", "restric", "ira"], explanationEn: "Three times Paul writes 'God gave them over' — to sexual impurity, vile passions, and a debased mind. This is judicial abandonment: God's wrath as the removal of restraint. Sometimes God's wrath is not thunder but simply letting humanity have what it keeps demanding.", explanationEs: "Tres veces Pablo escribe 'Dios los entregó' — a la inmundicia sexual, pasiones vergonzosas y mente depravada. Esto es abandono judicial: la ira de Dios como la remoción de la restricción. A veces la ira de Dios no es trueno sino simplemente dejar a la humanidad tener lo que sigue exigiendo." },
+    { id: "sa_u2_4", textEn: "How does Paul critique the moral person in Romans 2:1-16 who judges others?", textEs: "¿Cómo critica Pablo a la persona moral en Romanos 2:1-16 que juzga a otros?", kw_en: ["excuse", "condemn", "judg", "truth", "partial", "works", "conscien", "secret"], kw_es: ["excusa", "conden", "juicio", "verdad", "acepci", "obras", "concien", "secret"], explanationEn: "Paul turns the indictment on the comfortable judge: by judging, you prove you know the standard; by failing it yourself, you stand condemned. God's judgment is according to truth, shows no partiality, judges according to works, and reaches secret things. Conscience itself testifies — even Gentiles have the work of the law written on their hearts.", explanationEs: "Pablo gira la acusación hacia el juez cómodo: al juzgar, demuestras que conoces el estándar; al fallarlo tú mismo, quedas condenado. El juicio de Dios es según verdad, no muestra acepción, juzga según las obras, y alcanza las cosas secretas. La conciencia misma testifica — aun los gentiles tienen la obra de la ley escrita en sus corazones." },
+    { id: "sa_u2_5", textEn: "How does Paul critique Jewish presumption in Romans 2:17-29?", textEs: "¿Cómo critica Pablo la presunción judía en Romanos 2:17-29?", kw_en: ["Jew", "law", "boast", "teach", "obedien", "guilt", "circumcis", "heart"], kw_es: ["judí", "ley", "gloría", "enseñ", "obedien", "culpa", "circuncis", "corazón"], explanationEn: "Paul lists the Jewish credentials — called a Jew, resting on the law, boasting in God, teaching others — then asks the killing question: do you keep what you teach? Possessing the law without obeying it deepens guilt rather than reducing it. True circumcision is of the heart, in the Spirit, not the letter.", explanationEs: "Pablo enumera las credenciales judías — llamado judío, apoyado en la ley, glorificado en Dios, enseñando a otros — y luego hace la pregunta letal: ¿guardas lo que enseñas? Poseer la ley sin obedecerla profundiza la culpa en lugar de reducirla. La verdadera circuncisión es del corazón, en espíritu, no en letra." },
+    { id: "sa_u2_6", textEn: "What does Paul mean by 'circumcision of the heart' in Romans 2:29?", textEs: "¿Qué quiere decir Pablo con 'circuncisión del corazón' en Romanos 2:29?", kw_en: ["inward", "Spirit", "letter", "covenant", "extern", "true", "heart", "transform"], kw_es: ["interior", "espíritu", "letra", "pacto", "extern", "verdader", "corazón", "transform"], explanationEn: "True circumcision is inward, of the heart, by the Spirit and not the letter. The outward physical sign of the covenant counts for nothing without the inward reality of transformation. External religion without heart change is exactly what Jesus condemned in the Pharisees. The same warning applies to every form of nominal Christianity.", explanationEs: "La verdadera circuncisión es interior, del corazón, por el Espíritu y no la letra. La señal física externa del pacto no cuenta para nada sin la realidad interna de la transformación. La religión externa sin cambio de corazón es exactamente lo que Jesús condenó en los fariseos. La misma advertencia aplica a toda forma de cristianismo nominal." },
+    { id: "sa_u2_7", textEn: "Explain the universal verdict Paul reaches in Romans 3:9-20.", textEs: "Explique el veredicto universal al que Pablo llega en Romanos 3:9-20.", kw_en: ["sin", "righteous", "seek", "turned", "mouth", "guilt", "catena", "justif"], kw_es: ["pecado", "justo", "busc", "desvi", "boca", "culpab", "catena", "justif"], explanationEn: "Paul strings together Old Testament quotations — none is righteous, none seeks God, all have turned aside — to establish that the whole human race stands silent and guilty in God's courtroom. Every mouth is stopped. By the deeds of the law no flesh will be justified in His sight.", explanationEs: "Pablo encadena citas del Antiguo Testamento — no hay justo, nadie busca a Dios, todos se desviaron — para establecer que toda la raza humana queda silenciosa y culpable en el tribunal de Dios. Toda boca queda tapada. Por las obras de la ley ningún ser humano será justificado delante de Él." },
+    { id: "sa_u2_8", textEn: "According to Romans 3:20, what is the purpose of the law? Why was it given?", textEs: "Según Romanos 3:20, ¿cuál es el propósito de la ley? ¿Por qué fue dada?", kw_en: ["knowledg", "sin", "save", "diagnos", "prepar", "gospel", "ready", "law"], kw_es: ["conocim", "pecado", "salv", "diagnos", "prepar", "evangel", "list", "ley"], explanationEn: "By the law is the knowledge of sin. The law was never given to save anyone; it was given to expose the disease that requires salvation. The law diagnoses but does not cure. It functions as the schoolmaster that drives sinners to Christ for the cure the law cannot provide.", explanationEs: "Por la ley es el conocimiento del pecado. La ley nunca fue dada para salvar a nadie; fue dada para exponer la enfermedad que requiere salvación. La ley diagnostica pero no cura. Funciona como el ayo que lleva a los pecadores a Cristo en busca de la cura que la ley no puede proveer." },
+    { id: "sa_u2_9", textEn: "Why does Paul spend nearly three chapters on the bad news of sin before announcing the good news?", textEs: "¿Por qué pasa Pablo casi tres capítulos en las malas noticias del pecado antes de anunciar las buenas noticias?", kw_en: ["doctor", "diagnos", "rescu", "escap", "mouth", "honest", "prepar", "bad"], kw_es: ["médico", "diagnos", "rescat", "escap", "boca", "honest", "prepar", "mala"], explanationEn: "A doctor must diagnose the disease before prescribing the cure. The Bible's good news is not vague comfort but specific rescue from a specific disaster. Paul closes every escape route so that when he announces the gospel at 3:21 — 'But now…' — every mouth is stopped and the heart is ready to receive the rescue.", explanationEs: "Un médico debe diagnosticar la enfermedad antes de recetar la cura. Las buenas noticias de la Biblia no son consuelo vago sino rescate específico de un desastre específico. Pablo cierra cada ruta de escape para que cuando anuncie el evangelio en 3:21 — 'Pero ahora…' — toda boca esté tapada y el corazón esté listo para recibir el rescate." },
+    { id: "sa_u2_10", textEn: "How do James 2:10 and Matthew 5:48 reinforce Paul's argument that no one can be justified by law-keeping?", textEs: "¿Cómo refuerzan Santiago 2:10 y Mateo 5:48 el argumento de Pablo de que nadie puede ser justificado por guardar la ley?", kw_en: ["one", "guilty", "perfect", "absolut", "righteous", "relative", "fall", "standard"], kw_es: ["uno", "culpab", "perfect", "absolut", "justicia", "relativ", "corto", "estándar"], explanationEn: "James 2:10 — one point of failure means guilt of all. Matthew 5:48 — be perfect as the Father is perfect. The Bible's standard is not comparative goodness but absolute righteousness equal to God's own. By that standard every human falls short (Rom 3:23). No one can be justified by law-keeping because no one can keep it.", explanationEs: "Santiago 2:10 — un punto de fallo significa culpa de todo. Mateo 5:48 — sed perfectos como el Padre es perfecto. El estándar de la Biblia no es bondad comparativa sino justicia absoluta igual a la propia de Dios. Según ese estándar todo humano queda corto (Rom 3:23). Nadie puede ser justificado por guardar la ley porque nadie puede guardarla." }
+];
+
+// ============================================================
+// GLOBAL STATE
+// ============================================================
+let studentTrack = "cert";
+let studentName = "";
+let lockoutEnd = null;
+let examPassed = false;
+const PASS_MC = 18;
+const PASS_SA = 9;
+
+function getStorageKey(key) { return `cts_${COURSE_PREFIX}_${key}`; }
+
+function loadState() {
+    const student = lsGet("cts_student");
+    if (student) {
+        try {
+            const s = JSON.parse(student);
+            studentName = s.name || "";
+            studentTrack = s.track || "cert";
+        } catch(e) {}
+    }
+    const trackOverride = lsGet("cts_track");
+    if (trackOverride && ["cert","thm","mdiv"].includes(trackOverride)) studentTrack = trackOverride;
+
+    const lock = lsGet(getStorageKey(`unit${UNIT}_lockout`));
+    if (lock && parseInt(lock) > Date.now()) lockoutEnd = parseInt(lock);
+
+    const passedFlag = lsGet(getStorageKey(`unit${UNIT}_passed`));
+    if (passedFlag === "true") examPassed = true;
+
+    const lang = lsGet(getStorageKey(`unit${UNIT}_lang`)) || "en";
+    document.body.className = `lang-${lang}`;
+
+    updateTrackDisplay();
+    handleRegistrationCard();
+}
+
+function handleRegistrationCard() {
+    const regSection = document.getElementById("registrationSection");
+    if (SHOW_REGISTRATION_CARD && !lsGet("cts_student")) {
+        regSection.style.display = "block";
+    } else {
+        regSection.style.display = "none";
+    }
+}
+
+function updateTrackDisplay() {
+    const trackMap = { cert: "Certificate", thm: "Th.M.", mdiv: "M.Div." };
+    document.getElementById("trackIndicator").innerHTML = `<span class="lang-en">Track: ${trackMap[studentTrack]}</span><span class="lang-es">Vía: ${trackMap[studentTrack]}</span>`;
+}
+
+function saveLanguage(lang) {
+    lsSet(getStorageKey(`unit${UNIT}_lang`), lang);
+    document.body.className = `lang-${lang}`;
+}
+
+function submitRegistration() {
+    const name = document.getElementById("regName").value.trim();
+    const trackEl = document.querySelector('input[name="regTrack"]:checked');
+    if (!name) {
+        const isEs = document.body.className.includes("lang-es");
+        alert(isEs ? "Por favor ingrese su nombre." : "Please enter your name.");
+        return;
+    }
+    const track = trackEl ? trackEl.value : "cert";
+    lsSet("cts_student", JSON.stringify({ name, track }));
+    lsSet("cts_track", track);
+    studentName = name;
+    studentTrack = track;
+    updateTrackDisplay();
+    document.getElementById("registrationSection").style.display = "none";
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const mcContainer = document.getElementById("mcQuestions");
+    mcContainer.innerHTML = "";
+    mcQuestions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.text}</span><span class="lang-es">${q.textEs}</span></div>
+            <div class="options" id="mc-${idx}-opts">
+                ${q.options.map((opt, optIdx) => `<label><input type="radio" name="mc${idx}" value="${optIdx}"> <span class="lang-en">${opt}</span><span class="lang-es">${q.optionsEs[optIdx]}</span></label>`).join('')}
+            </div>
+            <div class="feedback" id="mc-${idx}-fb"></div>
+        `;
+        mcContainer.appendChild(card);
+    });
+
+    const saContainer = document.getElementById("saQuestions");
+    saContainer.innerHTML = "";
+    saQuestions.forEach((q, idx) => {
+        const isCert = studentTrack === "cert";
+        const card = document.createElement("div");
+        card.className = "question-card essay-question";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${mcQuestions.length + idx + 1}. ${q.textEn}</span><span class="lang-es">${mcQuestions.length + idx + 1}. ${q.textEs}</span></div>
+            <textarea rows="3" id="sa-${idx}" placeholder='${isCert ? "Optional for Certificate track / Opcional para Certificado" : "Type your answer here... / Escriba su respuesta aquí..."}' ></textarea>
+            <button type="button" class="check-kw-btn" data-sa="${idx}"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>
+            <div class="feedback" id="sa-${idx}-fb"></div>
+        `;
+        saContainer.appendChild(card);
+    });
+
+    attachAutoScore();
+    attachSAAutoSave();
+    restoreAnswers();
+}
+
+function attachAutoScore() {
+    mcQuestions.forEach((q, idx) => {
+        const radios = document.querySelectorAll(`input[name="mc${idx}"]`);
+        radios.forEach(r => {
+            r.addEventListener("change", () => {
+                const selected = document.querySelector(`input[name="mc${idx}"]:checked`);
+                const fbDiv = document.getElementById(`mc-${idx}-fb`);
+                if (selected) {
+                    lsSet(getStorageKey(`unit${UNIT}_mc${idx}`), selected.value);
+                    const isCorr = parseInt(selected.value) === q.correct;
+                    if (fbDiv) {
+                        fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+                        fbDiv.innerHTML = isCorr ? q.correctFeedback : q.incorrectFeedback;
+                    }
+                    document.querySelectorAll(`input[name="mc${idx}"]`).forEach(x => { x.disabled = true; });
+                }
+            });
+        });
+    });
+}
+
+function attachSAAutoSave() {
+    saQuestions.forEach((q, idx) => {
+        const ta = document.getElementById(`sa-${idx}`);
+        if (ta) {
+            ta.addEventListener("input", () => {
+                lsSet(getStorageKey(`unit${UNIT}_sa${idx}`), ta.value);
+            });
+        }
+    });
+    document.querySelectorAll(".check-kw-btn").forEach(function(btn){
+        btn.addEventListener("click", function(){ checkSA(parseInt(btn.getAttribute("data-sa"), 10)); });
+    });
+}
+
+function restoreAnswers() {
+    mcQuestions.forEach((q, idx) => {
+        const saved = lsGet(getStorageKey(`unit${UNIT}_mc${idx}`));
+        if (saved !== null) {
+            const radio = document.querySelector(`input[name="mc${idx}"][value="${saved}"]`);
+            if (radio) {
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change'));
+            }
+        }
+    });
+    saQuestions.forEach((q, idx) => {
+        const saved = lsGet(getStorageKey(`unit${UNIT}_sa${idx}`));
+        if (saved !== null) {
+            const ta = document.getElementById(`sa-${idx}`);
+            if (ta) ta.value = saved;
+        }
+    });
+}
+
+
+// --- Q24 smart keyword matcher (word-boundary regex). Added by fairness pass. ---
+function kwHit(answer, kw) {
+    if (!kw) return false;
+    var a = (answer || "").toLowerCase();
+    var k = kw.toLowerCase().trim();
+    if (!k) return false;
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    // unicode-aware-ish boundary: not preceded/followed by a letter or digit
+    var L = "0-9a-zA-Záéíóúüñ";
+    var re;
+    if (k.length <= 4) {
+        re = new RegExp("(?:^|[^" + L + "])" + esc + "(?![" + L + "])");
+    } else {
+        re = new RegExp("(?:^|[^" + L + "])" + esc);
+    }
+    return re.test(a);
+}
+
+
+function checkSA(idx) {
+    var ta = document.getElementById("sa-" + idx);
+    var fbDiv = document.getElementById("sa-" + idx + "-fb");
+    if (!ta || !fbDiv) return;
+    var lang = document.body.className.replace("lang-", "");
+    var isEs = lang === "es";
+    var answer = (ta.value || "").trim();
+    if (!answer) {
+        fbDiv.className = "feedback";
+        fbDiv.innerHTML = isEs ? "Escriba su respuesta primero, luego verifique." : "Write your answer first, then check.";
+        return;
+    }
+    var keywords = isEs ? saQuestions[idx].kw_es : saQuestions[idx].kw_en;
+    if (lang === "both") keywords = [].concat(saQuestions[idx].kw_en, saQuestions[idx].kw_es);
+    var hits = keywords.filter(function(kw){ return kwHit(answer, kw); }).length;
+    var passed = hits >= 3 && answer.length >= 100;
+    fbDiv.className = "feedback " + (passed ? "correct" : "incorrect");
+    var _model = isEs ? saQuestions[idx].explanationEs : saQuestions[idx].explanationEn;
+    var _hdr = isEs ? "Respuesta modelo — estúdiela" : "Model answer — study this";
+    var _verdict = passed
+        ? (isEs ? "Suficiente." : "Sufficient.")
+        : (isEs ? ("Insuficiente — necesita ≥3 palabras clave y ≥100 caracteres. (" + hits + "/3)") : ("Insufficient — need ≥3 keywords and ≥100 chars. (" + hits + "/3)"));
+    fbDiv.innerHTML = "<div>" + _verdict + "</div><div class=\"modelbox\"><strong>" + _hdr + ":</strong><br>" + _model + "</div>";
+}
+
+function gradeExam() {
+    if (lockoutEnd && lockoutEnd > Date.now()) {
+        const min = Math.ceil((lockoutEnd - Date.now()) / 60000);
+        alert(`Lockout active. Please wait ${min} minutes. / Bloqueo activo. Espere ${min} minutos.`);
+        return false;
+    }
+
+    let mcCorrect = 0;
+    for (let i = 0; i < mcQuestions.length; i++) {
+        const selected = document.querySelector(`input[name="mc${i}"]:checked`);
+        const fbDiv = document.getElementById(`mc-${i}-fb`);
+        if (selected) {
+            const isCorr = parseInt(selected.value) === mcQuestions[i].correct;
+            if (isCorr) mcCorrect++;
+            fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+            fbDiv.innerHTML = isCorr ? ('<span class="lang-en">'+mcQuestions[i].correctFeedback+'</span><span class="lang-es">'+mcQuestions[i].correctFeedbackEs+'</span>') : ('<span class="lang-en">'+mcQuestions[i].incorrectFeedback+'</span><span class="lang-es">'+mcQuestions[i].incorrectFeedbackEs+'</span>');
+        } else {
+            fbDiv.className = "feedback incorrect";
+            fbDiv.innerHTML = "No answer selected. / No seleccionó respuesta.";
+        }
+    }
+
+    let saPass = true;
+    let saCorrectCount = 0;
+    if (studentTrack !== "cert") {
+        for (let i = 0; i < saQuestions.length; i++) {
+            const answer = document.getElementById(`sa-${i}`).value.trim();
+            const lang = document.body.className.replace("lang-", "");
+            let keywords = lang === "es" ? saQuestions[i].kw_es : saQuestions[i].kw_en;
+            if (lang === "both") keywords = [...saQuestions[i].kw_en, ...saQuestions[i].kw_es];
+            const hits = keywords.filter(kw => kwHit(answer, kw)).length;
+            const passed = hits >= 3 && answer.length >= 100;
+            if (passed) saCorrectCount++;
+            const fbDiv = document.getElementById(`sa-${i}-fb`);
+            fbDiv.className = `feedback ${passed ? "correct" : "incorrect"}`;
+            const _model = (lang === "es" ? saQuestions[i].explanationEs : saQuestions[i].explanationEn);
+            const _hdr = (lang === "es" ? "Respuesta modelo — estúdiela" : "Model answer — study this");
+            const _verdict = passed ? (lang === "es" ? "Suficiente." : "Sufficient.") : (lang === "es" ? "Insuficiente — necesita ≥3 palabras clave y ≥100 caracteres." : "Insufficient — need ≥3 keywords and ≥100 chars.");
+            fbDiv.innerHTML = `<div>${_verdict}</div><div class="modelbox"><strong>${_hdr}:</strong><br>${_model}</div>`;
+        }
+        saPass = saCorrectCount >= PASS_SA;
+    }
+
+    const mcPass = mcCorrect >= PASS_MC;
+    const overallPass = studentTrack === "cert" ? mcPass : (mcPass && saPass);
+
+    if (overallPass) {
+        lsSet(getStorageKey(`unit${UNIT}_passed`), "true");
+        examPassed = true;
+        const msg = document.body.className.includes("lang-es") ? `¡Aprobado! Redirigiendo a la siguiente unidad...` : `Passed! Redirecting to the next unit...`;
+        alert(msg);
+    } else {
+        const lockoutTime = Date.now() + 15 * 60 * 1000;
+        lsSet(getStorageKey(`unit${UNIT}_lockout`), lockoutTime);
+        lockoutEnd = lockoutTime;
+        showLockoutTimer();
+        const failMsg = document.body.className.includes("lang-es") ? `No aprobado. Bloqueo de 15 minutos iniciado. (OM: ${mcCorrect}/20${studentTrack !== "cert" ? `, RC: ${saCorrectCount}/10` : ""})` : `Failed. 15-minute lockout started. (MC: ${mcCorrect}/20${studentTrack !== "cert" ? `, SA: ${saCorrectCount}/10` : ""})`;
+        alert(failMsg);
+    }
+    return overallPass;
+}
+
+function showLockoutTimer() {
+    const timerDiv = document.getElementById("lockoutTimer");
+    if (!lockoutEnd || lockoutEnd <= Date.now()) { timerDiv.style.display = "none"; return; }
+    timerDiv.style.display = "block";
+    const update = () => {
+        const remaining = Math.max(0, Math.ceil((lockoutEnd - Date.now()) / 1000));
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        timerDiv.innerHTML = `<span class="lang-en">Lockout: ${minutes}:${seconds.toString().padStart(2,'0')} remaining</span><span class="lang-es">Bloqueo: ${minutes}:${seconds.toString().padStart(2,'0')} restantes</span>`;
+        if (remaining <= 0) { timerDiv.style.display = "none"; lockoutEnd = null; }
+        else setTimeout(update, 1000);
+    };
+    update();
+}
+
+function resetExam() {
+    const isEs = document.body.className.includes("lang-es");
+    const msg = isEs ? "¿Reiniciar todas las respuestas? Esto no se puede deshacer." : "Reset all answers? This cannot be undone.";
+    if (confirm(msg)) {
+        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        document.querySelectorAll('textarea').forEach(t => t.value = "");
+        document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+        mcQuestions.forEach((q, idx) => lsDel(getStorageKey(`unit${UNIT}_mc${idx}`)));
+        saQuestions.forEach((q, idx) => lsDel(getStorageKey(`unit${UNIT}_sa${idx}`)));
+    }
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => saveLanguage(btn.dataset.lang));
+});
+document.getElementById("submitBtn").addEventListener("click", gradeExam);
+document.getElementById("resetBtn").addEventListener("click", resetExam);
+document.getElementById("regSubmit").addEventListener("click", submitRegistration);
+
+loadState();
+renderQuestions();
+if (lockoutEnd) showLockoutTimer();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSRomansReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

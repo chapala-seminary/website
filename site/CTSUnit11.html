@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Old Testament Survey — Unit 11: The Major Prophets – Part 3 (Ezekiel & Daniel)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .action-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.action-btn.reset { background: #8a5a2f; }
+.action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+p { margin-bottom: 12px; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 0; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.track-banner { background: #fffaf0; border-left: 4px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin-bottom: 15px; font-size: 0.95rem; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.locked { cursor: default; }
+.option.locked:hover { background: #fcfbf8; }
+.option.locked.correct:hover { background: #e8f5ea; }
+.option.locked.wrong:hover { background: #fae8e8; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.exam-result { margin-top: 15px; padding: 12px 18px; border-radius: 12px; font-size: 1.05rem; }
+.exam-result.pass { background: #e8f5ea; color: #1f6b3b; border: 1px solid #b9dfc2; }
+.exam-result.fail { background: #fae8e8; color: #8a1f1f; border: 1px solid #efc2c2; }
+.exam-result.locked { background: #fff4d6; color: #6b4f1f; border: 1px solid #e8d28a; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en .block-en { display: block; }
+body.lang-en .block-es { display: none; }
+body.lang-es .block-en { display: none; }
+body.lang-es .block-es { display: block; }
+@media print {
+    body { background: white; font-size: 12pt; padding: 0; }
+    .nav-bar, .toggle-btn, .action-btn, button.small, .registration-panel { display: none !important; }
+    .card { box-shadow: none; border: none; padding: 10pt 0; margin-bottom: 8pt; page-break-inside: avoid; }
+    .question { page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .option.correct { background: white; border: 1px solid #888; }
+    .option.wrong { background: white; border: 1px solid #888; }
+}
+.reg-readout { font-size: 0.95rem; }
+.reg-readout-grid { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.reg-readout-grid > div { min-width: 180px; }
+.reg-readout-note { margin-top: 8px; font-size: 0.82rem; color: #6b6256; }
+.reg-readout.missing { color: #8a1f1f; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Old Testament Survey — Unit 11: The Major Prophets – Part 3 (Ezekiel & Daniel)</span><span class="lang-es">📖 Estudio del Antiguo Testamento — Unidad 11: Los Profetas Mayores – Parte 3 (Ezequiel y Daniel)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="registration-panel" id="regPanel">
+    <h3><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h3>
+    <div id="regReadout" class="reg-readout"></div>
+    <!-- Hidden fields preserve the IDs used by grading/loadReg; registration is edited on Unit 1. -->
+    <input type="hidden" id="studentName">
+    <input type="hidden" id="studentEmail">
+    <input type="hidden" id="studentCountry">
+    <input type="hidden" id="studentProgram">
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="block-en">
+        <h2>I. Two Voices in One Captivity</h2>
+        <p>Picture two young men standing on the road out of Jerusalem in the early sixth century BC, watching their world come apart. The Babylonian armies have come, the temple of Solomon has been emptied, and they are roped together with thousands of others on the long march east to a country whose language they do not speak. Their names are Ezekiel and Daniel. Neither will ever see Jerusalem again. And yet from inside that exile God will raise up two of the greatest prophetic voices in the Old Testament, speaking on parallel tracks to the same heartbroken nation.</p>
+
+        <p>Ezekiel was a priest, taken in the second deportation in 597 BC, settled with the exiles by the Chebar canal, and called to prophesy from there to a people whose temple was about to fall. Daniel, a young nobleman, was taken in the first deportation in 605 BC, conscripted into the king's palace school, and called to live out his faith inside the very court of the empire that had destroyed his country. Ezekiel's audience was the captives in the camps. Daniel's audience was the kings on the throne. Together their two books answer the question every exile asks sooner or later: <em>Is God still in charge?</em></p>
+
+        <p>Ezekiel is rightly <em>the prophet of God's glory</em>. From his opening vision of the divine chariot in chapter 1 to his closing vision of the new city named "The Lord Is There," Ezekiel cannot stop talking about glory — glory that comes, glory that warns, glory that withdraws, glory that returns. And Daniel, on the other side of Babylon, cannot stop talking about kingdoms — kingdoms that rise, kingdoms that fall, and one Kingdom that lasts forever. The two books are bookends propping up the same grand truth: God reigns, even when His people are in chains.</p>
+
+        <h2>II. Ezekiel: The Prophet of the Glory</h2>
+
+        <h3>A. The Vision That Changed Everything (chapter 1)</h3>
+        <p>Ezekiel's call vision is one of the most extraordinary scenes in all Scripture. By the river Chebar, far from the temple where he had expected to serve as a priest, the heavens open and Ezekiel sees a great storm rolling in out of the north. Inside the storm is a chariot — four living creatures (later identified as cherubim), each with four faces, propelled by wheels within wheels, <em>"and their rims were full of eyes all around"</em> (Ezekiel 1:18). Above the wheels is an expanse like crystal; above the expanse is a sapphire throne; and on the throne is a likeness with the appearance of a man (Ezekiel 1:26). Ezekiel sees the rainbow, and falls on his face.</p>
+
+        <p>The exiles thought their God had been left behind in Jerusalem. Babylon had its own gods; surely Yahweh was tied to the temple seven hundred miles to the west. But this God moves. His throne has wheels. He has come to Babylon. He has come to find Ezekiel. And He is about to say something every exile, every refugee, every prisoner of conscience in every century needs to hear: <em>I am still here.</em> Wherever the people of God are scattered, the chariot of God is over them.</p>
+
+        <h3>B. The Glory Departs (chapters 8–11)</h3>
+        <p>In one of the saddest passages in the Old Testament, Ezekiel is taken in vision back to the temple in Jerusalem. There he sees, behind closed doors, what is really going on: idols set up in the very courts, women weeping for the false god Tammuz, twenty-five elders bowing east to worship the sun. The temple has become a brothel for foreign gods, and the Lord will not stay. Step by step, the glory of the Lord rises from above the cherubim, pauses at the threshold, lifts to the east gate, and at last departs over the Mount of Olives (Ezekiel 11:23). The temple has been abandoned by its God before Nebuchadnezzar ever lays a hand on it. When God leaves, He leaves quietly — but He leaves.</p>
+
+        <h3>C. The New Heart and the Dry Bones (chapters 36–37)</h3>
+        <p>And yet Ezekiel is not finally a prophet of departure but of return. In the very middle of the book the tone shifts, and the most beautiful promises in the Old Testament come pouring out. <em>"I will give you a new heart and put a new spirit within you; I will take the heart of stone out of your flesh and give you a heart of flesh"</em> (Ezekiel 36:26). The captivity will not produce reformed Israelites. It will produce regenerated Israelites — people whose hearts have been replaced. This is the New Covenant promise of Jeremiah 31, restated; and the New Testament tells us it was fulfilled at Pentecost when the Spirit came to live inside the people of God. If you are a Christian tonight, the heart beating inside your chest is the heart Ezekiel saw from a hillside in Babylon two and a half millennia ago.</p>
+
+        <p>Then comes the vision of the dry bones (chapter 37). Ezekiel is set down in a valley full of skeletons — ancient, sun-bleached, scattered, hopeless. <em>"Son of man, can these bones live?"</em> The prophet, wisely, will not commit himself: <em>"O Lord God, you know."</em> Then the Lord commands him to prophesy to the bones, and as he does there is a rattling, the bones come together, the sinews and flesh appear, and finally the breath of God blows over the valley and an exceedingly great army stands on its feet. On its first level the vision means this: the nation Israel, dead and scattered in exile, will live again. And deeper still: in every age there are valleys full of dry bones — dead churches, dead nations, dead families, dead lives — and the Word of God preached in the power of the Spirit of God can still bring them up.</p>
+
+        <h3>D. The Glory Returns (chapters 40–48)</h3>
+        <p>The book closes with an elaborate vision of a new temple. The dimensions are precise, the courts are clean, and most importantly, the glory of the Lord — the same glory that withdrew in chapter 11 — comes back from the east and fills the house (Ezekiel 43:4). A river flows from beneath the threshold, deepens as it goes, and brings life to everything it touches. And the city has a new name, the most wonderful name in the whole Old Testament: <em>Yahweh Shammah</em>, <em>"The Lord Is There"</em> (Ezekiel 48:35). Whatever the temple's literal future, the point is unmistakable. The Lord who left will return. And the city of God will at last be defined not by its walls or its location but by the simple, eternal fact that He is there.</p>
+
+        <h2>III. Daniel: Faithful in a Far Country</h2>
+        <p>Daniel was about seventeen when they came for him. A teenager from a noble Jewish family, he was hauled off to the schools of Babylon to be re-educated for the king's service. They changed his food, they changed his name, they changed his curriculum, and they did everything in their power to change his soul. They failed. The first six chapters of Daniel are six tests of a young man's faith inside a hostile culture, and they remain — almost three thousand years later — the most useful chapters in the Bible for any believer who has to work in an office, study at a university, or live in a neighborhood where the name of God is rarely heard except as a curse.</p>
+
+        <h3>A. The Test of Obedience (Daniel 1)</h3>
+        <p>The first test was a dinner table. The king had ordered the Jewish boys fed from his own kitchen — meats sacrificed to idols, wine poured to false gods, food forbidden by the law of Moses. The pressure was enormous: when in Babylon, do as the Babylonians do; you are a long way from home; nobody will know. <em>"But Daniel purposed in his heart that he would not defile himself"</em> (Daniel 1:8). It was not a thunderous public stand. It was a quiet decision in the heart of a teenage boy. And God honored it. After ten days the four Hebrew young men looked healthier than the boys living on royal food, and at graduation they tested ten times wiser than every astrologer in the empire. That is the way faithfulness almost always begins. Not on a battlefield. At a meal.</p>
+
+        <h3>B. The Test of Trust (Daniel 2)</h3>
+        <p>Then Nebuchadnezzar had a dream he could not remember and demanded that his wise men tell him both the dream and its meaning, on pain of death. The astrologers were finished. Daniel asked his three friends to pray, and that night God gave him the dream. It was a great image: head of gold, chest of silver, belly of bronze, legs of iron, feet of mingled iron and clay — and a stone, cut without hands, struck the image, broke it to powder, and grew into a mountain that filled the whole earth. The four metals, Daniel told the king, were four world empires: Babylon, Medo-Persia, Greece, Rome. The stone was the Kingdom of God. Charlemagne, Napoleon, Hitler, Mussolini, and a dozen lesser men have tried to put the Roman Empire back together, and none of them has succeeded. The stone has come — Christ, <em>"cut without human hands"</em> — and the mountain He is building will not stop growing until it fills the earth.</p>
+
+        <h3>C. The Test of Fear (Daniel 3)</h3>
+        <p>Then came the golden image and the fiery furnace. Shadrach, Meshach, and Abednego were given a simple choice: bow or burn. They answered, <em>"Our God whom we serve is able to deliver us from the burning fiery furnace, and He will deliver us from your hand, O king. But if not, let it be known to you, O king, that we do not serve your gods, nor will we worship the gold image which you have set up"</em> (Daniel 3:17–18). <em>If not.</em> Two of the smallest words in the Bible and two of the strongest. Faith does not need a guarantee of rescue in this life; it needs only the certainty of God in the next. The three were thrown in. The furnace killed the soldiers who threw them. And when Nebuchadnezzar looked into the flames he saw four men walking, and the fourth <em>"is like the Son of God"</em> (Daniel 3:25).</p>
+
+        <p>During the Second World War, in a Formosan mountain village, a Japanese officer announced that within three days every villager must come to the police station and renounce Christ or be tied with stones and thrown from the high bridge into the river below. The village Christians met at midnight. Some said they would have to give it up; the policeman would surely kill them. Then a young boy stood up and reminded them of Jesus' words about not fearing those who can only kill the body. Every hand in the room was raised: they would die. The next day the policeman, while wading in the river, slipped on a rock, broke his leg, and drowned. While the village was praying, the messenger ran in. The man who was to kill them was already dead. <em>If not.</em> God is still able. And when He is not pleased to deliver, He gives grace to die well — which is, in the end, the very same thing.</p>
+
+        <h3>D. The Test of Pride (Daniel 4)</h3>
+        <p>Daniel chapter 4 is the only chapter in the Bible written by a Gentile king. Nebuchadnezzar gives his own testimony. He had walked one evening on the roof of his palace, looked out over the hanging gardens of Babylon, and said in his heart, <em>"Is not this great Babylon, that I have built for a royal dwelling by my mighty power and for the honor of my majesty?"</em> (Daniel 4:30). At that moment heaven answered. The great king's mind broke. For seven seasons he lived in a field eating grass like an ox, his hair growing like eagles' feathers, his nails like birds' claws. Only when he lifted his eyes to heaven and acknowledged that the Most High rules in the kingdoms of men was his sanity restored.</p>
+
+        <p>Pride walks beside almost all of us, looking constantly for an opening to distort our estimate of ourselves. Don Shula, the legendary coach of the Miami Dolphins, once took his family on vacation to a small town in Maine and ducked in out of the rain to a half-empty movie theater. As he walked in, the few people already seated turned around and began to clap. Shula leaned over to his wife and said, "Imagine — a thousand miles from home and they still recognize me." When he sat down, one of the men came over with his hand out. Shula said, "I can't believe you know who I am." The man smiled. "I don't know you from Adam. The owner just told us they wouldn't show the movie unless ten tickets were sold. Your family makes ten." Pride is always doing that. Nebuchadnezzar lifted his eyes from his city and forgot his Maker. So can you and I, in a much smaller theater, with much less reason. The Most High rules.</p>
+
+        <h3>E. The Test of Judgment (Daniel 5)</h3>
+        <p>Years pass. Belshazzar, Nebuchadnezzar's grandson, is throwing a drunken banquet for a thousand of his lords on the very night the Persian armies are diverting the Euphrates and slipping under the wall. He calls for the gold cups taken from the temple in Jerusalem and toasts the gods of Babylon out of the holy vessels. At that moment fingers of a man's hand appear and write on the plaster of the wall: <em>MENE, MENE, TEKEL, UPHARSIN.</em> No one can read it but the old prophet, now in his eighties, summoned out of forgotten retirement. <em>"You have been weighed in the balances and found wanting"</em> (Daniel 5:27). That night the king was slain. Babylon fell.</p>
+
+        <p>The Bible says God still uses scales. <em>"For all have sinned and fall short of the glory of God"</em> (Romans 3:23). Our righteousness, as Isaiah said, is filthy rags; we do not weigh sixteen ounces to the pound. Belshazzar's tragedy was not that he failed the test — every one of us fails the test — but that he was offered no second weighing. The cross of Christ is God's gracious provision of another set of scales. There our weight is reckoned in His perfect righteousness, and the verdict for everyone who trusts in Him is the opposite of Belshazzar's: <em>found in Him, not having my own righteousness</em> (Philippians 3:9).</p>
+
+        <h3>F. The Test of Worship (Daniel 6)</h3>
+        <p>Daniel is now an old man, well into his eighties, prime minister under Darius the Mede. His enemies, unable to find any fault in him, set a trap that exploits the one thing they know he will never give up: his prayer life. They get the king to sign a thirty-day decree forbidding prayer to anyone but Darius himself, on pain of the lions. Daniel goes home, opens his window toward Jerusalem, and prays as he has always prayed, three times a day. The lions get him. God shuts their mouths.</p>
+
+        <p>A young woman named Karen Watson left a comfortable job in the United States to work as a missionary in Iraq. Before she left, she sealed a letter and gave it to her pastors with the instruction, "Open in the event of my death." On March 15, 2004, she was killed by gunmen on a road outside Mosul. The letter, opened that night, contained these lines: <em>"When God calls there are no regrets… I wasn't called to a place; I was called to Him. To obey was my objective, to suffer was expected, His glory my reward."</em> Daniel could have written that letter. Karen Watson, two and a half millennia later and half a world away, did write it. The lions never get the last word.</p>
+
+        <h2>IV. The Apocalyptic Visions and the Son of Man</h2>
+        <p>The second half of Daniel's book turns from biography to prophecy. In chapter 7, the same four empires appear again, but this time as four wild beasts rising from a stormy sea. Then the scene shifts to heaven. <em>"I watched till thrones were put in place, and the Ancient of Days was seated; His garment was white as snow, and the hair of His head was like pure wool. His throne was a fiery flame, its wheels a burning fire"</em> (Daniel 7:9). The Ancient of Days is God Himself; the white garment, His holiness; the burning throne, His judgment. And then a second figure approaches. <em>"I was watching in the night visions, and behold, One like the Son of Man, coming with the clouds of heaven! He came to the Ancient of Days, and they brought Him near before Him. Then to Him was given dominion and glory and a kingdom, that all peoples, nations, and languages should serve Him. His dominion is an everlasting dominion, which shall not pass away, and His kingdom the one which shall not be destroyed"</em> (Daniel 7:13–14).</p>
+
+        <p>Six hundred years later, in front of the Sanhedrin, on the night before His crucifixion, Jesus of Nazareth was put under oath and asked whether He was the Christ, the Son of the Blessed. He answered with two clauses, the second of them taken straight out of Daniel 7: <em>"I am. And you will see the Son of Man sitting at the right hand of the Power, and coming with the clouds of heaven"</em> (Mark 14:62). The high priest tore his robes. He understood exactly the claim being made. Jesus was telling them, in the language of Daniel's vision, that He was the eternal King receiving the everlasting Kingdom. The cross, three hours later, was not the end of that claim but the beginning of its fulfillment.</p>
+
+        <p>Daniel 9 contains another remarkable prophecy: the seventy weeks. Daniel is reading Jeremiah, calculating that the seventy years of exile are nearly up, and praying for his people, when the angel Gabriel arrives with a longer timeline. From the decree to rebuild Jerusalem until the Anointed One is "cut off" will be sixty-nine weeks of years (Daniel 9:25–26). Take a calculator and start at the decree of Artaxerxes in 445 BC; the math lands at exactly the right week of the right year for the cross. Daniel was given, six centuries in advance, the date of Calvary. The God who walks His people through history is the God who walks the calendar of redemption.</p>
+
+        <h2>V. The Bowling Ball on the Boxcar — and Christ in Both Books</h2>
+        <p>Imagine a man on a freight train rolling forward at twenty miles an hour. He sets a bowling ball on the floor of the boxcar and rolls it gently from the front of the car toward the back. From his point of view, the ball moves at twenty miles an hour from front to back. From the point of view of a man standing beside the tracks, the train is moving forward at twenty and the ball is moving backward at twenty: the ball is standing perfectly still. Now imagine an astronaut watching from orbit. The earth itself is spinning at a thousand miles an hour, and from where he sits the ball is hurtling around the planet at a thousand miles an hour, train or no train.</p>
+
+        <p>That is exactly the message of Daniel's book, and of Ezekiel's. When you and I look at our own lives, all we can see is the bowling ball rolling backward — illness, exile, lions, furnaces, fired pastors, broken marriages, captive nations. But step out of the boxcar and stand by the tracks, and you discover that what looks like loss is actually being carried forward. Step further still, into orbit, and you see a vast plan moving at a speed our perspective could never measure. The whole point of these two books is to lift the people of God out of the boxcar long enough to see that God is in charge of the train. Ezekiel sees the chariot. Daniel sees the throne. Both see the Son of Man. Both leave us with the same news: God reigns over our captivities.</p>
+
+        <p>Christ stands on every page. In Ezekiel He is the <strong>Good Shepherd</strong> who searches out His scattered sheep (Ezekiel 34:11–16); the <strong>Cleansing Fountain</strong> who sprinkles clean water on us and gives a new heart (36:25–26); the <strong>Breath in the Bones</strong> who raises a dead nation to life (37:9–10); the <strong>Glory that Returns</strong> to fill the new house (43:4); and <strong>Yahweh Shammah</strong>, the Presence whose name is the city's name (48:35). In Daniel He is the <strong>Stone Cut Without Hands</strong> that breaks every empire (2:34); the <strong>Fourth Man</strong> in the furnace (3:25); the <strong>Son of Man</strong> who receives an everlasting Kingdom (7:13–14); and the <strong>Anointed One</strong> who is cut off — not for Himself, but for many (9:26).</p>
+
+        <p>Two captives, in two different parts of Babylon, holding one Bible against the empires of the world, and trusting one Lord. From the camp by the Chebar canal Ezekiel sees the chariot of glory move. From the palace of Nebuchadnezzar Daniel watches kingdoms come and go. Both end in the same place: a Son of Man receiving an everlasting Kingdom, a city whose name is <em>The Lord Is There</em>. He is the Lord who reigns over chariots and thrones, lions and furnaces, dry bones and the river of life. The same Lord, still, today.</p>
+    </div>
+
+    <div class="block-es">
+        <h2>I. Dos voces en un mismo cautiverio</h2>
+        <p>Imagine a dos jóvenes parados en el camino fuera de Jerusalén a principios del siglo VI a.C., viendo cómo se desmorona su mundo. Han llegado los ejércitos babilónicos, el templo de Salomón ha sido vaciado, y ellos van atados con miles de otros en la larga marcha hacia el oriente, a un país cuyo idioma no hablan. Sus nombres son Ezequiel y Daniel. Ninguno de los dos volverá a ver Jerusalén. Y, sin embargo, desde dentro de aquel exilio Dios levantará dos de las voces proféticas más grandes del Antiguo Testamento, hablando en pistas paralelas a la misma nación quebrantada.</p>
+
+        <p>Ezequiel era sacerdote, llevado en la segunda deportación en 597 a.C., establecido con los exiliados junto al canal del Quebar y llamado a profetizar desde allí a un pueblo cuyo templo estaba a punto de caer. Daniel, joven noble, fue llevado en la primera deportación en 605 a.C., reclutado para la escuela del palacio del rey y llamado a vivir su fe dentro de la corte misma del imperio que había destruido a su país. La audiencia de Ezequiel eran los cautivos en los campamentos. La de Daniel, los reyes en el trono. Juntos sus libros responden la pregunta que todo exiliado se hace tarde o temprano: <em>¿Sigue Dios al mando?</em></p>
+
+        <p>Ezequiel es con razón <em>el profeta de la gloria de Dios</em>. Desde su visión inicial del carro divino en el capítulo 1 hasta su visión final de la nueva ciudad llamada <em>"Jehová está allí"</em>, Ezequiel no deja de hablar de gloria — gloria que viene, gloria que advierte, gloria que se retira, gloria que vuelve. Y Daniel, al otro lado de Babilonia, no deja de hablar de reinos — reinos que se levantan, reinos que caen, y un Reino que dura para siempre. Los dos libros son sostenes que apuntalan la misma gran verdad: Dios reina, aun cuando Su pueblo está en cadenas.</p>
+
+        <h2>II. Ezequiel: el profeta de la gloria</h2>
+
+        <h3>A. La visión que lo cambió todo (capítulo 1)</h3>
+        <p>La visión del llamado de Ezequiel es una de las escenas más extraordinarias de toda la Escritura. Junto al río Quebar, lejos del templo donde había esperado servir como sacerdote, se abren los cielos y Ezequiel ve una gran tormenta que viene del norte. Dentro de la tormenta hay un carro: cuatro seres vivientes (más tarde identificados como querubines), cada uno con cuatro caras, propulsados por ruedas dentro de ruedas, <em>"y sus aros estaban llenos de ojos alrededor"</em> (Ezequiel 1:18). Sobre las ruedas hay una expansión como cristal; sobre la expansión, un trono de zafiro; y en el trono, una semejanza <em>"como apariencia de hombre"</em> (Ezequiel 1:26). Ezequiel ve el arco iris, y cae sobre su rostro.</p>
+
+        <p>Los exiliados pensaban que su Dios había quedado atrás en Jerusalén. Babilonia tenía sus propios dioses; seguramente Jehová estaba atado al templo a más de mil kilómetros al oeste. Pero este Dios se mueve. Su trono tiene ruedas. Ha venido a Babilonia. Ha venido a buscar a Ezequiel. Y está a punto de decir lo que cada exiliado, cada refugiado, cada preso de conciencia en cada siglo necesita oír: <em>Yo sigo aquí.</em> Dondequiera que esté disperso el pueblo de Dios, el carro de Dios está sobre ellos.</p>
+
+        <h3>B. La gloria se retira (capítulos 8–11)</h3>
+        <p>En uno de los pasajes más tristes del Antiguo Testamento, Ezequiel es llevado en visión al templo de Jerusalén. Allí ve, tras puertas cerradas, lo que en realidad pasa: ídolos puestos en los mismos atrios, mujeres llorando por el falso dios Tamuz, veinticinco ancianos inclinados al oriente para adorar al sol. El templo se ha convertido en un burdel para dioses extranjeros, y el Señor no se quedará. Paso a paso, la gloria del Señor se levanta de sobre los querubines, se detiene en el umbral, sube a la puerta oriental, y al fin se va sobre el Monte de los Olivos (Ezequiel 11:23). El templo ha sido abandonado por su Dios antes de que Nabucodonosor le ponga una mano encima. Cuando Dios se va, se va en silencio, pero se va.</p>
+
+        <h3>C. El corazón nuevo y los huesos secos (capítulos 36–37)</h3>
+        <p>Y, sin embargo, Ezequiel no es al final un profeta de partida sino de retorno. En medio del libro el tono cambia, y brotan las promesas más hermosas del Antiguo Testamento. <em>"Os daré corazón nuevo, y pondré espíritu nuevo dentro de vosotros; y quitaré de vuestra carne el corazón de piedra, y os daré un corazón de carne"</em> (Ezequiel 36:26). El cautiverio no producirá israelitas reformados. Producirá israelitas regenerados — gente cuyo corazón ha sido reemplazado. Es la promesa del Nuevo Pacto de Jeremías 31, repetida; y el Nuevo Testamento nos dice que se cumplió en Pentecostés cuando vino el Espíritu a vivir dentro del pueblo de Dios. Si usted es cristiano esta noche, el corazón que late en su pecho es el corazón que vio Ezequiel desde una colina de Babilonia hace dos milenios y medio.</p>
+
+        <p>Luego viene la visión de los huesos secos (capítulo 37). A Ezequiel lo ponen en un valle lleno de esqueletos: antiguos, blanqueados por el sol, dispersos, sin esperanza. <em>"Hijo de hombre, ¿vivirán estos huesos?"</em> El profeta, sabiamente, no se compromete: <em>"Señor Jehová, tú lo sabes."</em> Entonces el Señor le ordena profetizar a los huesos, y mientras lo hace hay un estruendo, los huesos se juntan, aparecen los tendones y la carne, y al fin el aliento de Dios sopla sobre el valle y un ejército enorme se pone de pie. En su primer nivel la visión significa esto: la nación de Israel, muerta y dispersa en el exilio, vivirá otra vez. Y más hondo todavía: en cada época hay valles llenos de huesos secos — iglesias muertas, naciones muertas, familias muertas, vidas muertas — y la Palabra de Dios predicada en el poder del Espíritu de Dios todavía puede levantarlos.</p>
+
+        <h3>D. La gloria regresa (capítulos 40–48)</h3>
+        <p>El libro cierra con una visión elaborada de un nuevo templo. Las dimensiones son precisas, los atrios están limpios y, lo más importante, la gloria del Señor — la misma gloria que se retiró en el capítulo 11 — vuelve del oriente y llena la casa (Ezequiel 43:4). Un río fluye desde debajo del umbral, se hace más profundo a medida que avanza, y trae vida a todo lo que toca. Y la ciudad tiene un nombre nuevo, el más maravilloso de todo el Antiguo Testamento: <em>Yahveh Shammah</em>, <em>"Jehová está allí"</em> (Ezequiel 48:35). Sea cual sea el futuro literal del templo, el punto es inconfundible. El Señor que se fue volverá. Y la ciudad de Dios al fin será definida no por sus muros ni su ubicación, sino por el simple hecho eterno de que Él está allí.</p>
+
+        <h2>III. Daniel: fiel en una tierra extraña</h2>
+        <p>Daniel tenía unos diecisiete años cuando vinieron por él. Adolescente de familia judía noble, fue llevado a las escuelas de Babilonia para ser reeducado para el servicio del rey. Le cambiaron la comida, le cambiaron el nombre, le cambiaron el plan de estudios, y hicieron todo lo posible por cambiarle el alma. Fracasaron. Los primeros seis capítulos de Daniel son seis pruebas de la fe de un joven dentro de una cultura hostil, y siguen siendo — casi tres milenios después — los capítulos más útiles de la Biblia para cualquier creyente que tenga que trabajar en una oficina, estudiar en una universidad, o vivir en un barrio donde el nombre de Dios rara vez se oye salvo como maldición.</p>
+
+        <h3>A. La prueba de la obediencia (Daniel 1)</h3>
+        <p>La primera prueba fue una mesa. El rey había ordenado que los muchachos judíos comieran de su propia cocina — carnes sacrificadas a ídolos, vino derramado a dioses falsos, comida prohibida por la ley de Moisés. La presión era enorme: cuando en Babilonia, haz lo que los babilonios; estás lejos de casa; nadie se enterará. <em>"Y Daniel propuso en su corazón no contaminarse"</em> (Daniel 1:8). No fue una postura pública atronadora. Fue una decisión callada en el corazón de un adolescente. Y Dios la honró. A los diez días los cuatro jóvenes hebreos se veían más sanos que los jóvenes que comían comida real, y al graduarse resultaron diez veces más sabios que todo astrólogo del imperio. Así es como casi siempre comienza la fidelidad. No en un campo de batalla. En una comida.</p>
+
+        <h3>B. La prueba de la confianza (Daniel 2)</h3>
+        <p>Luego Nabucodonosor tuvo un sueño que no podía recordar y exigió que sus sabios le dijeran tanto el sueño como su significado, bajo pena de muerte. Los astrólogos estaban acabados. Daniel pidió a sus tres amigos que oraran, y esa noche Dios le dio el sueño. Era una gran imagen: cabeza de oro, pecho de plata, vientre de bronce, piernas de hierro, pies de hierro mezclado con barro — y una piedra, cortada sin manos, golpeó la imagen, la deshizo en polvo y creció hasta ser un monte que llenó toda la tierra. Los cuatro metales, le dijo Daniel al rey, eran cuatro imperios mundiales: Babilonia, Medo-Persia, Grecia, Roma. La piedra era el Reino de Dios. Carlomagno, Napoleón, Hitler, Mussolini y una docena de hombres menores han intentado volver a armar el Imperio Romano, y ninguno lo ha logrado. La piedra ha venido — Cristo, <em>"cortado sin manos humanas"</em> — y el monte que está edificando no dejará de crecer hasta que llene la tierra.</p>
+
+        <h3>C. La prueba del temor (Daniel 3)</h3>
+        <p>Luego vino la imagen de oro y el horno de fuego ardiente. Sadrac, Mesac y Abed-nego recibieron una sencilla opción: doblar la rodilla o arder. Respondieron: <em>"He aquí, nuestro Dios a quien servimos puede librarnos del horno de fuego ardiente; y de tu mano, oh rey, nos librará. Y si no, sepas, oh rey, que no serviremos a tus dioses, ni tampoco adoraremos la estatua que has levantado"</em> (Daniel 3:17–18). <em>Y si no.</em> Dos de las palabras más pequeñas de la Biblia y dos de las más fuertes. La fe no necesita garantía de rescate en esta vida; solo necesita la certeza de Dios en la próxima. Los tres fueron arrojados. El horno mató a los soldados que los arrojaron. Y cuando Nabucodonosor miró al fuego vio a cuatro hombres caminando, y el cuarto era <em>"semejante a hijo de los dioses"</em> (Daniel 3:25).</p>
+
+        <p>Durante la Segunda Guerra Mundial, en una aldea de la montaña de Formosa, un oficial japonés anunció que dentro de tres días cada habitante debía presentarse en la estación de policía y renunciar a Cristo o ser atado con piedras y arrojado desde el alto puente al río de abajo. Los cristianos del pueblo se reunieron a medianoche. Algunos dijeron que tendrían que ceder; el policía seguramente los mataría. Entonces un muchacho se puso de pie y les recordó las palabras de Jesús sobre no temer a los que solo pueden matar el cuerpo. Cada mano en la sala se alzó: morirían. Al día siguiente el policía, mientras cruzaba el río a pie, resbaló sobre una piedra, se rompió la pierna y se ahogó. Mientras la aldea oraba, el mensajero entró corriendo. El hombre que iba a matarlos ya estaba muerto. <em>Y si no.</em> Dios sigue siendo poderoso. Y cuando no le place librar, da gracia para morir bien — que es, al final, lo mismo.</p>
+
+        <h3>D. La prueba del orgullo (Daniel 4)</h3>
+        <p>Daniel 4 es el único capítulo de la Biblia escrito por un rey gentil. Nabucodonosor da su propio testimonio. Había caminado una tarde sobre el techo de su palacio, había contemplado los jardines colgantes de Babilonia, y había dicho en su corazón: <em>"¿No es ésta la gran Babilonia que yo edifiqué para casa real con la fuerza de mi poder, y para gloria de mi majestad?"</em> (Daniel 4:30). En ese momento el cielo respondió. La mente del gran rey se quebró. Durante siete tiempos vivió en un campo comiendo hierba como buey, su cabello creciendo como plumas de águilas, sus uñas como garras de aves. Solo cuando alzó los ojos al cielo y reconoció que el Altísimo gobierna en los reinos de los hombres le fue restaurada la cordura.</p>
+
+        <p>El orgullo camina junto a casi todos nosotros, buscando constantemente una abertura para distorsionar nuestra estimación de nosotros mismos. Don Shula, el legendario entrenador de los Miami Dolphins, llevó una vez a su familia de vacaciones a un pueblo pequeño en Maine y se metió, huyendo de la lluvia, a un cine medio vacío. Al entrar, las pocas personas ya sentadas se volvieron y empezaron a aplaudir. Shula se inclinó hacia su esposa y dijo: "Imagínate — a mil quinientos kilómetros de casa y aún me reconocen." Cuando se sentó, uno de los hombres se acercó con la mano extendida. Shula dijo: "No puedo creer que sepa quién soy." El hombre sonrió. "No lo conozco para nada. El dueño nos acaba de decir que no pondrían la película a menos que se vendieran diez entradas. Su familia hace diez." El orgullo siempre hace eso. Nabucodonosor levantó los ojos de su ciudad y olvidó a su Hacedor. Usted y yo podemos hacer lo mismo, en un teatro mucho más pequeño, con mucho menos motivo. El Altísimo gobierna.</p>
+
+        <h3>E. La prueba del juicio (Daniel 5)</h3>
+        <p>Pasan los años. Belsasar, nieto de Nabucodonosor, ofrece un banquete ebrio a mil de sus señores la misma noche en que los ejércitos persas están desviando el Éufrates y deslizándose bajo el muro. Manda traer las copas de oro tomadas del templo de Jerusalén y brinda por los dioses de Babilonia con los vasos sagrados. En ese momento aparecen dedos de mano de hombre y escriben sobre el yeso de la pared: <em>MENE, MENE, TEKEL, UFARSIN.</em> Nadie puede leerlo sino el viejo profeta, ya en sus ochenta, llamado del retiro olvidado. <em>"Pesado has sido en balanza, y fuiste hallado falto"</em> (Daniel 5:27). Esa noche el rey fue muerto. Babilonia cayó.</p>
+
+        <p>La Biblia dice que Dios todavía usa balanzas. <em>"Por cuanto todos pecaron, y están destituidos de la gloria de Dios"</em> (Romanos 3:23). Nuestra justicia, dijo Isaías, es como trapos de inmundicia; no pesamos dieciséis onzas por libra. La tragedia de Belsasar no fue que falló la prueba — todos fallamos la prueba — sino que no le ofrecieron una segunda pesada. La cruz de Cristo es la provisión graciosa de Dios de otra balanza. Allí nuestro peso se calcula en Su justicia perfecta, y el veredicto para todo el que confía en Él es lo opuesto al de Belsasar: <em>hallado en él, no teniendo mi justicia</em> (Filipenses 3:9).</p>
+
+        <h3>F. La prueba de la adoración (Daniel 6)</h3>
+        <p>Daniel ya es un anciano, bien entrado en sus ochenta años, primer ministro bajo Darío de Media. Sus enemigos, incapaces de hallar falta en él, tienden una trampa que aprovecha lo único que saben que jamás abandonará: su vida de oración. Logran que el rey firme un decreto de treinta días que prohíbe orar a nadie sino a Darío mismo, bajo pena de los leones. Daniel se va a casa, abre su ventana hacia Jerusalén y ora como siempre ha orado, tres veces al día. Los leones lo agarran. Dios les cierra la boca.</p>
+
+        <p>Una joven llamada Karen Watson dejó un trabajo cómodo en Estados Unidos para ir como misionera a Irak. Antes de irse, selló una carta y la dio a sus pastores con la instrucción: <em>"Abrir en caso de muerte"</em>. El 15 de marzo de 2004 fue asesinada por hombres armados en una carretera fuera de Mosul. La carta, abierta esa noche, contenía estas líneas: <em>"Cuando Dios llama no hay arrepentimientos… No fui llamada a un lugar; fui llamada a Él. Obedecer era mi objetivo, sufrir era esperado, Su gloria mi recompensa."</em> Daniel pudo haber escrito esa carta. Karen Watson, dos milenios y medio después y al otro lado del mundo, sí la escribió. Los leones nunca tienen la última palabra.</p>
+
+        <h2>IV. Las visiones apocalípticas y el Hijo del Hombre</h2>
+        <p>La segunda mitad de Daniel pasa de la biografía a la profecía. En el capítulo 7 los mismos cuatro imperios reaparecen, pero ahora como cuatro bestias salvajes que suben de un mar tormentoso. Luego la escena cambia al cielo. <em>"Estuve mirando hasta que fueron puestos tronos, y se sentó un Anciano de días, cuyo vestido era blanco como la nieve, y el pelo de su cabeza como lana limpia; su trono llama de fuego, y las ruedas del mismo, fuego ardiente"</em> (Daniel 7:9). El Anciano de días es Dios mismo; el vestido blanco, Su santidad; el trono ardiente, Su juicio. Y entonces se acerca una segunda figura. <em>"Miraba yo en la visión de la noche, y he aquí con las nubes del cielo venía uno como un hijo de hombre, que vino hasta el Anciano de días, y le hicieron acercarse delante de él. Y le fue dado dominio, gloria y reino, para que todos los pueblos, naciones y lenguas le sirvieran; su dominio es dominio eterno, que nunca pasará, y su reino uno que no será destruido"</em> (Daniel 7:13–14).</p>
+
+        <p>Seiscientos años después, ante el Sanedrín, la noche antes de Su crucifixión, Jesús de Nazaret fue puesto bajo juramento y se le preguntó si era el Cristo, el Hijo del Bendito. Respondió con dos cláusulas, la segunda tomada directamente de Daniel 7: <em>"Yo soy; y veréis al Hijo del Hombre sentado a la diestra de la potencia de Dios, y viniendo en las nubes del cielo"</em> (Marcos 14:62). El sumo sacerdote rasgó sus ropas. Entendió exactamente la afirmación. Jesús les estaba diciendo, en el lenguaje de la visión de Daniel, que era el Rey eterno recibiendo el Reino eterno. La cruz, tres horas después, no fue el final de esa afirmación sino el comienzo de su cumplimiento.</p>
+
+        <p>Daniel 9 contiene otra profecía notable: las setenta semanas. Daniel está leyendo a Jeremías, calculando que los setenta años de exilio están casi por cumplirse, y orando por su pueblo, cuando llega el ángel Gabriel con un cronograma más largo. Desde el decreto para reconstruir Jerusalén hasta que el Ungido sea <em>"quitado"</em> pasarán sesenta y nueve semanas de años (Daniel 9:25–26). Tome una calculadora y comience en el decreto de Artajerjes en 445 a.C.; las cuentas caen exactamente en la semana correcta del año correcto para la cruz. A Daniel le fue dada, seis siglos antes, la fecha del Calvario. El Dios que conduce a Su pueblo a través de la historia es el Dios que conduce el calendario de la redención.</p>
+
+        <h2>V. La bola de boliche en el vagón — y Cristo en ambos libros</h2>
+        <p>Imagine a un hombre en un tren de carga rodando hacia adelante a treinta kilómetros por hora. Pone una bola de boliche en el piso del vagón y la rueda suavemente del frente hacia la parte trasera. Desde su perspectiva, la bola se mueve a treinta kilómetros por hora del frente al fondo. Desde la perspectiva de un hombre parado junto a las vías, el tren va hacia adelante a treinta y la bola hacia atrás a treinta: la bola está perfectamente quieta. Ahora imagine a un astronauta mirándolo desde la órbita. La tierra misma gira a más de mil kilómetros por hora, y desde donde él se sienta la bola va dando la vuelta al planeta a mil kilómetros por hora, tren o no tren.</p>
+
+        <p>Ese es exactamente el mensaje del libro de Daniel, y del de Ezequiel. Cuando usted y yo miramos nuestras propias vidas, todo lo que vemos es la bola de boliche rodando hacia atrás: enfermedad, exilio, leones, hornos, pastores despedidos, matrimonios rotos, naciones cautivas. Pero salga del vagón y párese junto a las vías, y descubrirá que lo que parece pérdida en realidad va siendo llevado hacia adelante. Suba más alto, hasta la órbita, y verá un plan vasto moviéndose a una velocidad que nuestra perspectiva nunca podría medir. Todo el sentido de estos dos libros es sacar al pueblo de Dios del vagón el tiempo suficiente para que vea que Dios maneja el tren. Ezequiel ve el carro. Daniel ve el trono. Ambos ven al Hijo del Hombre. Ambos nos dejan con la misma noticia: Dios reina sobre nuestros cautiverios.</p>
+
+        <p>Cristo está en cada página. En Ezequiel es el <strong>Buen Pastor</strong> que busca a Sus ovejas dispersas (Ezequiel 34:11–16); la <strong>Fuente de Limpieza</strong> que rocía agua limpia y da un corazón nuevo (36:25–26); el <strong>Aliento en los Huesos</strong> que levanta a una nación muerta a la vida (37:9–10); la <strong>Gloria que Regresa</strong> a llenar la nueva casa (43:4); y <strong>Yahveh Shammah</strong>, la Presencia cuyo nombre es el nombre de la ciudad (48:35). En Daniel es la <strong>Piedra Cortada Sin Manos</strong> que rompe todo imperio (2:34); el <strong>Cuarto Hombre</strong> en el horno (3:25); el <strong>Hijo del Hombre</strong> que recibe un Reino eterno (7:13–14); y el <strong>Ungido</strong> que es quitado, no por sí mismo, sino por muchos (9:26).</p>
+
+        <p>Dos cautivos, en dos partes diferentes de Babilonia, sosteniendo una sola Biblia contra los imperios del mundo, y confiando en un solo Señor. Desde el campamento junto al canal del Quebar Ezequiel ve moverse el carro de la gloria. Desde el palacio de Nabucodonosor Daniel mira los reinos venir y pasar. Ambos terminan en el mismo lugar: un Hijo del Hombre recibiendo un Reino eterno, una ciudad cuyo nombre es <em>Jehová está allí</em>. Él es el Señor que reina sobre carros y tronos, leones y hornos, huesos secos y el río de la vida. El mismo Señor, todavía, hoy.</p>
+    </div>
+</div>
+
+<!-- TRACK BANNER + EXAM -->
+<div class="card">
+    <h2><span class="lang-en">Unit 11 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 11 — 30 Preguntas</span></h2>
+    <div class="track-banner" id="trackBanner"></div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button class="action-btn" id="submitExamBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="action-btn reset" id="resetExamBtn"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+    </div>
+    <div id="examResult" class="exam-result" style="display:none;"></div>
+</div>
+
+</div>
+
+<script>
+const COURSE_KEY = 'cts_ots_progress';
+const STUDENT_KEY = 'cts_student';
+const UNIT_NUM = 11;
+const TOTAL_UNITS = 13;
+const NEXT_UNIT_HREF = 'CTSUnit12.html';
+const PREV_UNIT_HREF = 'CTSUnit10.html';
+const UNIT_PASSED_KEY = 'cts_ots_unit11_passed';
+const UNIT_STATE_KEY = 'cts_ots_unit11_state';
+const LOCKOUT_KEY = 'cts_ots_unit11_lockout';
+const PASS_THRESHOLD_MC = 18;
+const PASS_THRESHOLD_SA = 9;
+const LOCKOUT_MS = 15 * 60 * 1000; // legacy ceiling (Masters); see lockMinutes()
+// Track-aware review wait: gentle 2-min pause for lay/Certificate, full 15 min for Masters.
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+function lockoutMs() { return lockMinutes() * 60 * 1000; }
+const REDIRECT_MS = 3000;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_ots_unit11_mc_passed';
+const SA_LOCK_KEY = 'cts_ots_unit11_sa_lockout';
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = new Array(20).fill(false);
+let unitPassed = localStorage.getItem(UNIT_PASSED_KEY) === 'true';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10)
+        : parseInt(localStorage.getItem(LOCKOUT_KEY) || '0', 10);
+}
+let lockUntil = activeLockUntil();
+let progress = JSON.parse(localStorage.getItem(COURSE_KEY) || '{}');
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+
+function getTrack() { if (student.program === 'Master of Divinity') return 'mdiv';
+    if (student.program === 'Master of Theology') return 'thm';
+    return 'cert'; }
+function isMDiv() { return getTrack() === 'mdiv'; }
+function isMastersLevel() { const t = getTrack(); return t === 'mdiv' || t === 'thm'; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(`cts_ots_unit${i}_passed`) === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (unitPassed) location.href = NEXT_UNIT_HREF;
+    else alert(currentLang === 'en' ? 'Please pass Unit 11 first.' : 'Por favor apruebe la Unidad 11 primero.');
+};
+document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_UNIT_HREF; };
+
+function loadReg() {
+    let saved = localStorage.getItem(STUDENT_KEY);
+    if (saved) {
+        student = JSON.parse(saved);
+        document.getElementById('studentName').value = student.name || '';
+        document.getElementById('studentEmail').value = student.email || '';
+        document.getElementById('studentCountry').value = student.country || '';
+        document.getElementById('studentProgram').value = student.program || 'Certificate of Ministry';
+    }
+}
+function saveReg() {
+    student.name = document.getElementById('studentName').value.trim();
+    student.email = document.getElementById('studentEmail').value.trim();
+    student.country = document.getElementById('studentCountry').value.trim();
+    student.program = document.getElementById('studentProgram').value;
+    if (student.name && student.email) localStorage.setItem(STUDENT_KEY, JSON.stringify(student));
+}
+['studentName','studentEmail','studentCountry'].forEach(id => {
+    document.getElementById(id).addEventListener('change', saveReg);
+});
+document.getElementById('studentProgram').addEventListener('change', () => {
+    saveReg(); renderTrackBanner(); renderQuestions();
+});
+
+function renderTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    if (!banner) return;
+    if (isMastersLevel()) {
+        banner.innerHTML = currentLang === 'en'
+            ? ('<strong>' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ' Track:</strong> Answer all 30 questions. To pass you need <strong>18/20</strong> multiple choice <em>and</em> <strong>9/10</strong> short answer, judged independently. Short answers may be written in English or Spanish.')
+            : ('<strong>Pista ' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ':</strong> Responda las 30 preguntas. Para aprobar necesita <strong>18/20</strong> en opción múltiple <em>y</em> <strong>9/10</strong> en respuesta corta, evaluadas independientemente. Las respuestas cortas pueden escribirse en inglés o español.');
+    } else {
+        banner.innerHTML = currentLang === 'en'
+            ? '<strong>Certificate Track:</strong> Answer questions 1–20 (multiple choice). To pass you need <strong>18/20</strong> (90%). Short-answer questions are optional practice and not graded.'
+            : '<strong>Pista Certificado:</strong> Responda las preguntas 1–20 (opción múltiple). Para aprobar necesita <strong>18/20</strong> (90%). Las preguntas de respuesta corta son práctica opcional y no se califican.';
+    }
+}
+
+function saveState() {
+    localStorage.setItem(UNIT_STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers, mcRevealed }));
+}
+function loadState() {
+    const raw = localStorage.getItem(UNIT_STATE_KEY);
+    if (!raw) return;
+    try {
+        const s = JSON.parse(raw);
+        if (Array.isArray(s.mcAnswers)) mcAnswers = s.mcAnswers;
+        if (Array.isArray(s.kwAnswers)) kwAnswers = s.kwAnswers;
+        if (Array.isArray(s.mcRevealed)) mcRevealed = s.mcRevealed;
+    } catch (e) {}
+}
+
+const mcQuestions = [
+    { id:1, en:"1. Ezekiel and Daniel ministered during which historical event?", es:"1. Ezequiel y Daniel ministraron durante qué evento histórico?",
+      optionsEn:["The Babylonian captivity","The wilderness wanderings","The reign of David","The Maccabean revolt"],
+      optionsEs:["El cautiverio babilónico","Las peregrinaciones en el desierto","El reinado de David","La revuelta de los Macabeos"], correct:"A",
+      fcEn:"Correct. Two voices in one captivity — speaking on parallel tracks to the same heartbroken nation.",
+      fcEs:"Correcto. Dos voces en un mismo cautiverio — hablando en pistas paralelas a la misma nación quebrantada.",
+      fiEn:"Both prophets ministered during the Babylonian captivity (6th century BC), Ezekiel among the captives, Daniel in the king's court.",
+      fiEs:"Ambos profetas ministraron durante el cautiverio babilónico (siglo VI a.C.), Ezequiel entre los cautivos, Daniel en la corte del rey." },
+    { id:2, en:"2. Ezekiel's audience was primarily:", es:"2. La audiencia de Ezequiel era principalmente:",
+      optionsEn:["The kings on the throne","The captives in the camps","The temple priests","Foreign nations"],
+      optionsEs:["Los reyes en el trono","Los cautivos en los campamentos","Los sacerdotes del templo","Las naciones extranjeras"], correct:"B",
+      fcEn:"Correct. Daniel's audience was the kings. Ezekiel's was the camps. Same nation, different platforms.",
+      fcEs:"Correcto. La audiencia de Daniel eran los reyes. La de Ezequiel los campamentos. Misma nación, diferentes plataformas.",
+      fiEn:"Ezekiel was settled with the exiles by the Chebar canal and preached to them; Daniel served inside the royal palace.",
+      fiEs:"Ezequiel fue establecido con los exiliados junto al canal del Quebar y les predicaba; Daniel servía dentro del palacio real." },
+    { id:3, en:"3. The title for Ezekiel is:", es:"3. El título dado a Ezequiel es:",
+      optionsEn:["The fire prophet","The weeping prophet","The prophet of God's glory","The prophet of judgment"],
+      optionsEs:["El profeta del fuego","El profeta llorón","El profeta de la gloria de Dios","El profeta del juicio"], correct:"C",
+      fcEn:"Correct. From the chariot of glory in chapter 1 to the city of glory in chapter 48, Ezekiel cannot stop talking about glory.",
+      fcEs:"Correcto. Desde el carro de gloria en el capítulo 1 hasta la ciudad de gloria en el capítulo 48, Ezequiel no deja de hablar de gloria.",
+      fiEn:"Ezekiel is <em>the prophet of God's glory</em> — glory that comes, warns, withdraws, and returns.",
+      fiEs:"Ezequiel es <em>el profeta de la gloria de Dios</em> — gloria que viene, advierte, se retira y vuelve." },
+    { id:4, en:"4. Ezekiel's opening vision (chapter 1) shows God as:", es:"4. La visión inicial de Ezequiel (capítulo 1) muestra a Dios como:",
+      optionsEn:["A still small voice","A consuming fire","A throne on wheels — the chariot of glory","A burning bush"],
+      optionsEs:["Un silbo apacible","Un fuego consumidor","Un trono sobre ruedas — el carro de la gloria","Una zarza ardiente"], correct:"C",
+      fcEn:"Correct. The exiles thought God was left behind in Jerusalem. The throne has wheels. God has come to Babylon.",
+      fcEs:"Correcto. Los exiliados pensaban que Dios había quedado en Jerusalén. El trono tiene ruedas. Dios ha venido a Babilonia.",
+      fiEn:"Ezekiel 1 — cherubim, wheels within wheels, sapphire throne, a likeness like a man. God's mobility shocks the exiles.",
+      fiEs:"Ezequiel 1 — querubines, ruedas dentro de ruedas, trono de zafiro, semejanza como de hombre. La movilidad de Dios sorprende a los exiliados." },
+    { id:5, en:"5. In Ezekiel chapters 8–11, the glory of the Lord:", es:"5. En Ezequiel capítulos 8–11, la gloria del Señor:",
+      optionsEn:["Departs from the temple over the Mount of Olives","Fills the temple permanently","Strikes the priests dead","Becomes a pillar of cloud"],
+      optionsEs:["Se retira del templo sobre el Monte de los Olivos","Llena el templo permanentemente","Hiere a los sacerdotes de muerte","Se vuelve columna de nube"], correct:"A",
+      fcEn:"Correct. The temple was abandoned by its God before Nebuchadnezzar ever lays a hand on it. When God leaves, He leaves quietly — but He leaves.",
+      fcEs:"Correcto. El templo fue abandonado por su Dios antes de que Nabucodonosor le ponga una mano encima. Cuando Dios se va, se va en silencio — pero se va.",
+      fiEn:"Ezekiel 11:23 — the glory rises step by step from the cherubim to the threshold to the east gate, then over the Mount of Olives.",
+      fiEs:"Ezequiel 11:23 — la gloria sube paso a paso de los querubines al umbral, a la puerta oriental, luego sobre el Monte de los Olivos." },
+    { id:6, en:"6. Ezekiel 36:26 promises that God will give His people:", es:"6. Ezequiel 36:26 promete que Dios dará a Su pueblo:",
+      optionsEn:["A new heart and a new spirit","A new temple","A new king","A new land"],
+      optionsEs:["Un corazón nuevo y un espíritu nuevo","Un templo nuevo","Un rey nuevo","Una tierra nueva"], correct:"A",
+      fcEn:"Correct. Not reformed Israelites — regenerated Israelites. The New Covenant of Jeremiah 31 restated, fulfilled at Pentecost.",
+      fcEs:"Correcto. No israelitas reformados — israelitas regenerados. El Nuevo Pacto de Jeremías 31 repetido, cumplido en Pentecostés.",
+      fiEn:"Ezekiel 36:26 promises regeneration: heart of stone replaced with heart of flesh by the Spirit of God.",
+      fiEs:"Ezequiel 36:26 promete regeneración: corazón de piedra reemplazado por corazón de carne por el Espíritu de Dios." },
+    { id:7, en:"7. The valley of dry bones (Ezekiel 37) teaches that:", es:"7. El valle de los huesos secos (Ezequiel 37) enseña que:",
+      optionsEn:["Israel is permanently dead","Bones cannot live without water","The Word of God preached in the Spirit's power can raise the dead","Only the priests can revive the nation"],
+      optionsEs:["Israel está muerta para siempre","Los huesos no pueden vivir sin agua","La Palabra de Dios predicada en el poder del Espíritu puede levantar a los muertos","Solo los sacerdotes pueden revivir la nación"], correct:"C",
+      fcEn:"Correct. Dead churches, dead nations, dead families, dead lives — the Word in the Spirit's power can still bring them up.",
+      fcEs:"Correcto. Iglesias muertas, naciones muertas, familias muertas, vidas muertas — la Palabra en el poder del Espíritu todavía puede levantarlas.",
+      fiEn:"Ezekiel 37 — prophesy to the bones, then prophesy to the breath. Word and Spirit together raise the dead.",
+      fiEs:"Ezequiel 37 — profetiza a los huesos, luego profetiza al aliento. Palabra y Espíritu juntos levantan a los muertos." },
+    { id:8, en:"8. The closing name of Ezekiel's restored city is:", es:"8. El nombre final de la ciudad restaurada de Ezequiel es:",
+      optionsEn:["New Jerusalem","Yahweh Shammah — The Lord Is There","City of Peace","Mount Zion"],
+      optionsEs:["Nueva Jerusalén","Yahveh Shammah — Jehová está allí","Ciudad de Paz","Monte Sión"], correct:"B",
+      fcEn:"Correct. The city of God will at last be defined not by its walls or location but by the simple, eternal fact that He is there.",
+      fcEs:"Correcto. La ciudad de Dios al fin será definida no por sus muros ni ubicación sino por el simple hecho eterno de que Él está allí.",
+      fiEn:"Ezekiel 48:35 — the new city's name is <em>Yahweh Shammah</em>, 'The Lord Is There.' The deepest hope of every exile.",
+      fiEs:"Ezequiel 48:35 — el nombre de la nueva ciudad es <em>Yahveh Shammah</em>, 'Jehová está allí.' La esperanza más profunda de todo exiliado." },
+    { id:9, en:"9. Daniel's first test (Daniel 1) was a test of:", es:"9. La primera prueba de Daniel (Daniel 1) fue una prueba de:",
+      optionsEn:["Obedience at the king's table","Courage in battle","Patience in waiting","Skill in dreams"],
+      optionsEs:["Obediencia en la mesa del rey","Valentía en la batalla","Paciencia en la espera","Habilidad en los sueños"], correct:"A",
+      fcEn:"Correct. Faithfulness almost always begins not on a battlefield but at a meal. A quiet decision in a teenage heart.",
+      fcEs:"Correcto. La fidelidad casi siempre comienza no en un campo de batalla sino en una comida. Una decisión callada en el corazón de un adolescente.",
+      fiEn:"Daniel 1:8 — 'Daniel purposed in his heart that he would not defile himself' — a quiet decision over forbidden food.",
+      fiEs:"Daniel 1:8 — 'Daniel propuso en su corazón no contaminarse' — una decisión callada sobre comida prohibida." },
+    { id:10, en:"10. The four metals of Nebuchadnezzar's dream image (Daniel 2) represent:", es:"10. Los cuatro metales de la imagen del sueño de Nabucodonosor (Daniel 2) representan:",
+      optionsEn:["Four ages of mankind","Babylon, Medo-Persia, Greece, Rome","Four sons of David","The four corners of the earth"],
+      optionsEs:["Cuatro edades de la humanidad","Babilonia, Medo-Persia, Grecia, Roma","Cuatro hijos de David","Los cuatro confines de la tierra"], correct:"B",
+      fcEn:"Correct. The stone cut without hands — Christ — broke the image, and the mountain He is building will not stop growing until it fills the earth.",
+      fcEs:"Correcto. La piedra cortada sin manos — Cristo — rompió la imagen, y el monte que Él edifica no dejará de crecer hasta llenar la tierra.",
+      fiEn:"Daniel 2 — gold (Babylon), silver (Medo-Persia), bronze (Greece), iron (Rome). The stone (Christ's Kingdom) breaks them all.",
+      fiEs:"Daniel 2 — oro (Babilonia), plata (Medo-Persia), bronce (Grecia), hierro (Roma). La piedra (el Reino de Cristo) los rompe a todos." },
+    { id:11, en:"11. The 'if not' confession of Shadrach, Meshach, and Abednego (Daniel 3:17–18) teaches that:", es:"11. La confesión 'y si no' de Sadrac, Mesac y Abed-nego (Daniel 3:17–18) enseña que:",
+      optionsEn:["God always rescues His servants","Faith requires guarantees","Faith does not need rescue to remain faith","Boldness is its own reward"],
+      optionsEs:["Dios siempre rescata a Sus siervos","La fe requiere garantías","La fe no necesita rescate para seguir siendo fe","La valentía es su propia recompensa"], correct:"C",
+      fcEn:"Correct. Faith does not need a guarantee of rescue in this life; it needs only the certainty of God in the next.",
+      fcEs:"Correcto. La fe no necesita garantía de rescate en esta vida; solo necesita la certeza de Dios en la próxima.",
+      fiEn:"Two of the smallest words in the Bible and two of the strongest: <em>if not</em>. Faithfulness without conditions.",
+      fiEs:"Dos de las palabras más pequeñas de la Biblia y dos de las más fuertes: <em>y si no</em>. Fidelidad sin condiciones." },
+    { id:12, en:"12. The fourth man in the fiery furnace (Daniel 3:25) was described as:", es:"12. El cuarto hombre en el horno de fuego (Daniel 3:25) fue descrito como:",
+      optionsEn:["An angel","Like the Son of God","A flame","A vision"],
+      optionsEs:["Un ángel","Semejante a hijo de los dioses","Una llama","Una visión"], correct:"B",
+      fcEn:"Correct. The fourth man — a Christophany, a preincarnate appearance of the Lord with His suffering people.",
+      fcEs:"Correcto. El cuarto hombre — una cristofanía, una aparición pre-encarnada del Señor con Su pueblo sufriente.",
+      fiEn:"Daniel 3:25 — Nebuchadnezzar saw four men walking, the fourth 'like the Son of God.' Christ in the fire.",
+      fiEs:"Daniel 3:25 — Nabucodonosor vio cuatro hombres caminando, el cuarto 'semejante a hijo de los dioses.' Cristo en el fuego." },
+    { id:13, en:"13. Daniel 4 is unique in the Bible because:", es:"13. Daniel 4 es único en la Biblia porque:",
+      optionsEn:["It is the only chapter written by a Gentile king","It contains no prophecy","It is in Hebrew","It mentions no king's name"],
+      optionsEs:["Es el único capítulo escrito por un rey gentil","No contiene profecía","Está en hebreo","No menciona ningún nombre de rey"], correct:"A",
+      fcEn:"Correct. Nebuchadnezzar gives his own testimony — and the lesson is that the Most High rules in the kingdoms of men.",
+      fcEs:"Correcto. Nabucodonosor da su propio testimonio — y la lección es que el Altísimo gobierna en los reinos de los hombres.",
+      fiEn:"Daniel 4 is Nebuchadnezzar's first-person royal proclamation of his humbling and restoration.",
+      fiEs:"Daniel 4 es la proclamación real en primera persona de Nabucodonosor sobre su humillación y restauración." },
+    { id:14, en:"14. The writing on Belshazzar's wall (Daniel 5:27) read:", es:"14. La escritura en la pared de Belsasar (Daniel 5:27) decía:",
+      optionsEn:["You have repented","You have been forgiven","You have triumphed","You have been weighed in the balances and found wanting"],
+      optionsEs:["Te has arrepentido","Has sido perdonado","Has triunfado","Pesado has sido en balanza, y fuiste hallado falto"], correct:"D",
+      fcEn:"Correct. Belshazzar was offered no second weighing. The cross of Christ is God's gracious provision of another set of scales.",
+      fcEs:"Correcto. A Belsasar no le ofrecieron una segunda pesada. La cruz de Cristo es la provisión graciosa de Dios de otra balanza.",
+      fiEn:"MENE, MENE, TEKEL, UPHARSIN — numbered, weighed, divided. That night Babylon fell.",
+      fiEs:"MENE, MENE, TEKEL, UFARSIN — numerado, pesado, dividido. Esa noche Babilonia cayó." },
+    { id:15, en:"15. Daniel's response to Darius's prayer-prohibiting decree (Daniel 6) was to:", es:"15. La respuesta de Daniel al decreto de Darío que prohibía la oración (Daniel 6) fue:",
+      optionsEn:["Flee from the city","Pray secretly in his cellar","Pray openly toward Jerusalem as he always had","Submit a written petition to the king"],
+      optionsEs:["Huir de la ciudad","Orar en secreto en su sótano","Orar abiertamente hacia Jerusalén como siempre lo había hecho","Presentar una petición escrita al rey"], correct:"C",
+      fcEn:"Correct. He opened the window, knelt as always, three times a day. Worship is the one thing a faithful believer never modifies.",
+      fcEs:"Correcto. Abrió la ventana, se arrodilló como siempre, tres veces al día. La adoración es lo único que un creyente fiel nunca modifica.",
+      fiEn:"Daniel 6:10 — Daniel kept his prayer window open and his prayer schedule unchanged. The lions never had the last word.",
+      fiEs:"Daniel 6:10 — Daniel mantuvo su ventana de oración abierta y su horario de oración sin cambios. Los leones nunca tuvieron la última palabra." },
+    { id:16, en:"16. In Daniel 7, the 'Son of Man' is given:", es:"16. En Daniel 7, al 'Hijo del Hombre' le es dado:",
+      optionsEn:["A temporary throne","A divided kingdom","A martyr's crown only","An everlasting Kingdom that will not pass away"],
+      optionsEs:["Un trono temporal","Un reino dividido","Solo una corona de mártir","Un Reino eterno que no pasará"], correct:"D",
+      fcEn:"Correct. Daniel 7:13–14 — quoted by Jesus before the Sanhedrin. He claimed the eternal Kingdom in front of the men who tried to kill Him.",
+      fcEs:"Correcto. Daniel 7:13–14 — citado por Jesús ante el Sanedrín. Reclamó el Reino eterno ante los hombres que trataban de matarlo.",
+      fiEn:"Daniel 7:13–14 — the Son of Man receives dominion, glory, and an everlasting Kingdom from the Ancient of Days.",
+      fiEs:"Daniel 7:13–14 — el Hijo del Hombre recibe dominio, gloria y un Reino eterno del Anciano de días." },
+    { id:17, en:"17. Jesus quoted Daniel 7 before the Sanhedrin to claim:", es:"17. Jesús citó Daniel 7 ante el Sanedrín para reclamar:",
+      optionsEn:["His role as a prophet","His Aaronic priesthood","His Davidic descent","His title as the Son of Man receiving the everlasting Kingdom"],
+      optionsEs:["Su papel como profeta","Su sacerdocio aarónico","Su descendencia davídica","Su título como el Hijo del Hombre que recibe el Reino eterno"], correct:"D",
+      fcEn:"Correct. Mark 14:62 — 'You will see the Son of Man coming with the clouds of heaven.' The high priest understood and tore his robes.",
+      fcEs:"Correcto. Marcos 14:62 — 'Veréis al Hijo del Hombre viniendo en las nubes del cielo.' El sumo sacerdote entendió y rasgó sus ropas.",
+      fiEn:"Mark 14:62 — Jesus used Daniel 7's exact language to identify Himself as the eternal King receiving the everlasting Kingdom.",
+      fiEs:"Marcos 14:62 — Jesús usó el lenguaje exacto de Daniel 7 para identificarse como el Rey eterno recibiendo el Reino eterno." },
+    { id:18, en:"18. Daniel 9's prophecy of the 'seventy weeks' (9:25–26) lands at:", es:"18. La profecía de Daniel 9 sobre las 'setenta semanas' (9:25–26) cae en:",
+      optionsEn:["The fall of Jerusalem","The return from exile","The Maccabean revolt","The week of Christ's crucifixion"],
+      optionsEs:["La caída de Jerusalén","El regreso del exilio","La revuelta de los Macabeos","La semana de la crucifixión de Cristo"], correct:"D",
+      fcEn:"Correct. Daniel was given the date of Calvary six centuries in advance. The God who walks His people through history walks the calendar of redemption.",
+      fcEs:"Correcto. A Daniel le fue dada la fecha del Calvario seis siglos antes. El Dios que conduce a Su pueblo por la historia conduce el calendario de la redención.",
+      fiEn:"Counted from the decree of Artaxerxes (445 BC), 69 weeks of years lands on the very week of Christ's passion.",
+      fiEs:"Contado desde el decreto de Artajerjes (445 a.C.), 69 semanas de años caen exactamente en la semana de la pasión de Cristo." },
+    { id:19, en:"19. The 'bowling ball on the boxcar' illustration teaches that:", es:"19. La ilustración de 'la bola de boliche en el vagón' enseña que:",
+      optionsEn:["History is meaningless","Tribulation cancels purpose","Christians should withdraw from history","God's plan is moving forward at speeds our perspective can't measure"],
+      optionsEs:["La historia carece de sentido","La tribulación cancela el propósito","Los cristianos deben retirarse de la historia","El plan de Dios se mueve hacia adelante a velocidades que nuestra perspectiva no puede medir"], correct:"D",
+      fcEn:"Correct. From inside the boxcar all you see is the ball rolling backward. Step out and you see God in charge of the train.",
+      fcEs:"Correcto. Desde dentro del vagón solo ve la bola rodando hacia atrás. Salga y verá a Dios manejando el tren.",
+      fiEn:"Daniel and Ezekiel both lift the people of God out of the boxcar long enough to see that God is in charge of the train.",
+      fiEs:"Daniel y Ezequiel ambos sacan al pueblo de Dios del vagón el tiempo suficiente para ver que Dios maneja el tren." },
+    { id:20, en:"20. The central message of both Ezekiel and Daniel is:", es:"20. El mensaje central tanto de Ezequiel como de Daniel es:",
+      optionsEn:["Exile is meaningless","God reigns even when His people are in chains","Babylon will be rebuilt","The temple is no longer needed"],
+      optionsEs:["El exilio carece de sentido","Dios reina aun cuando Su pueblo está en cadenas","Babilonia será reconstruida","El templo ya no es necesario"], correct:"B",
+      fcEn:"Correct. Ezekiel sees the chariot. Daniel sees the throne. Both see the Son of Man. Both say: God reigns over our captivities.",
+      fcEs:"Correcto. Ezequiel ve el carro. Daniel ve el trono. Ambos ven al Hijo del Hombre. Ambos dicen: Dios reina sobre nuestros cautiverios.",
+      fiEn:"The two books are bookends propping up one truth: God reigns over chariots and thrones, lions and furnaces, dry bones and the river of life.",
+      fiEs:"Los dos libros son sostenes que apuntalan una verdad: Dios reina sobre carros y tronos, leones y hornos, huesos secos y el río de la vida." }
+];
+
+const kwQuestions = [
+    { id:21, en:"21. Compare Ezekiel's audience and Daniel's audience, and explain how their two ministries complement each other.",
+      es:"21. Compare la audiencia de Ezequiel y la de Daniel, y explique cómo se complementan sus dos ministerios.",
+      kw_en:[["ezekiel"], ["captives", "camps", "exiles", "by the chebar", "second deportation"], ["camps", "captives in the camps", "exile community"], ["daniel"], ["kings", "throne", "palace", "court", "first deportation"], ["throne", "kings on the throne", "royal court"], ["captivity", "exile", "babylon", "in chains"]],
+      kw_es:[["ezequiel"], ["cautivos", "campamentos", "exiliados", "junto al quebar", "segunda deportación"], ["campamentos", "cautivos en los campamentos", "comunidad del exilio"], ["daniel"], ["reyes", "trono", "palacio", "corte", "primera deportación"], ["trono", "reyes en el trono", "corte real"], ["cautiverio", "exilio", "babilonia", "en cadenas"]],
+      modelEn:"Ezekiel and Daniel ministered on parallel tracks to the same heartbroken exiled nation, but to different audiences. Ezekiel was a priest taken in the second deportation in 597 B.C., settled with the exiles by the Chebar canal, and his audience was the captives in the camps. Daniel was a young nobleman taken in the first deportation in 605 B.C., conscripted into the palace school, and his audience was the kings on the throne. Ezekiel is the prophet of God's glory; Daniel is the prophet of the kingdoms that rise and fall. Together their books are bookends propping up one truth, answering the question every exile asks: God reigns, even when His people are in chains.",
+      modelEs:"Ezequiel y Daniel ministraron en vías paralelas a la misma nación exiliada y desconsolada, pero a audiencias distintas. Ezequiel era un sacerdote llevado en la segunda deportación en el 597 a.C., establecido con los exiliados junto al canal de Quebar, y su audiencia eran los cautivos en los campamentos. Daniel era un joven noble llevado en la primera deportación en el 605 a.C., reclutado en la escuela del palacio, y su audiencia eran los reyes en el trono. Ezequiel es el profeta de la gloria de Dios; Daniel es el profeta de los reinos que se levantan y caen. Juntos sus libros son sujetalibros que sostienen una verdad, respondiendo la pregunta que todo exiliado hace: Dios reina, aun cuando Su pueblo está en cadenas." },
+    { id:22, en:"22. Describe Ezekiel's call vision (chapter 1) and explain what it taught the exiles about God.",
+      es:"22. Describa la visión del llamado de Ezequiel (capítulo 1) y explique qué les enseñó a los exiliados acerca de Dios.",
+      kw_en:[["chariot", "divine chariot", "throne with wheels"], ["wheels", "wheels within wheels", "wheels full of eyes"], ["cherubim", "living creatures", "four creatures", "four faces"], ["throne", "sapphire throne", "likeness of a man"], ["glory", "glory of god", "divine glory"], ["mobile", "god moves", "throne has wheels", "god is not tied"], ["babylon", "came to babylon", "with the exiles", "still here"]],
+      kw_es:[["carro", "carro divino", "trono con ruedas"], ["ruedas", "ruedas dentro de ruedas", "ruedas llenas de ojos"], ["querubines", "seres vivientes", "cuatro seres", "cuatro caras"], ["trono", "trono de zafiro", "semejanza de hombre"], ["gloria", "gloria de dios", "gloria divina"], ["móvil", "dios se mueve", "el trono tiene ruedas", "dios no está atado"], ["babilonia", "vino a babilonia", "con los exiliados", "sigue aquí"]],
+      modelEn:"Ezekiel's call vision in chapter 1 is one of the most extraordinary scenes in Scripture. By the river Chebar, far from the temple, the heavens opened and Ezekiel saw a great storm out of the north containing a chariot — four living creatures, later identified as cherubim, propelled by wheels within wheels whose rims were full of eyes, with a sapphire throne above and a likeness like a man upon it. The point for the exiles was decisive: they thought their God had been left behind in Jerusalem, tied to the temple, but this God moves — His throne has wheels. He had come all the way to Babylon to find Ezekiel. Wherever the people of God are scattered, the chariot of God is over them; He is still there.",
+      modelEs:"La visión del llamado de Ezequiel en el capítulo 1 es una de las escenas más extraordinarias de la Escritura. Junto al río Quebar, lejos del templo, los cielos se abrieron y Ezequiel vio una gran tormenta del norte que contenía un carro — cuatro seres vivientes, luego identificados como querubines, impulsados por ruedas dentro de ruedas cuyos aros estaban llenos de ojos, con un trono de zafiro arriba y una semejanza como de hombre sobre él. El punto para los exiliados fue decisivo: pensaban que su Dios había quedado atrás en Jerusalén, atado al templo, pero este Dios se mueve — Su trono tiene ruedas. Había venido hasta Babilonia para hallar a Ezequiel. Dondequiera que el pueblo de Dios esté esparcido, el carro de Dios está sobre ellos; Él sigue estando ahí." },
+    { id:23, en:"23. Trace the departure and return of the glory in Ezekiel (chapters 8–11 and 40–48). Why does this pattern matter?",
+      es:"23. Trace la partida y el regreso de la gloria en Ezequiel (capítulos 8–11 y 40–48). ¿Por qué importa este patrón?",
+      kw_en:[["glory", "glory of the lord", "divine glory"], ["departs", "leaves", "withdraws", "rises up", "abandoned"], ["temple", "jerusalem temple", "the house"], ["mount of olives", "east gate", "over the mountain"], ["returns", "comes back", "glory returns", "fills the house"], ["yahweh shammah", "the lord is there", "new name"]],
+      kw_es:[["gloria", "gloria del señor", "gloria divina"], ["parte", "se va", "se retira", "se eleva", "abandona"], ["templo", "templo de jerusalén", "la casa"], ["monte de los olivos", "puerta oriental", "sobre el monte"], ["regresa", "vuelve", "la gloria regresa", "llena la casa"], ["yahweh shammah", "el señor está allí", "nuevo nombre"]],
+      modelEn:"In chapters 8-11 Ezekiel is taken in vision back to the Jerusalem temple and shown the idolatry hidden in its courts — idols set up, women weeping for Tammuz, elders bowing to the sun. Because of this, the glory of the Lord departs step by step: it rises from above the cherubim, pauses at the threshold, lifts to the east gate, and finally departs over the Mount of Olives. The temple was abandoned by its God before Nebuchadnezzar ever touched it. But Ezekiel is not finally a prophet of departure: in chapters 40-48 the same glory returns from the east and fills a new house, and the city receives the name Yahweh Shammah, 'The Lord Is There.' The Lord who left will return, and His presence will define the city forever.",
+      modelEs:"En los capítulos 8-11 Ezequiel es llevado en visión de vuelta al templo de Jerusalén y se le muestra la idolatría escondida en sus atrios — ídolos colocados, mujeres llorando por Tamuz, ancianos inclinándose al sol. Por esto, la gloria del Señor parte paso a paso: se eleva de sobre los querubines, se detiene en el umbral, se alza a la puerta oriental, y finalmente parte por encima del Monte de los Olivos. El templo fue abandonado por su Dios antes de que Nabucodonosor lo tocara. Pero Ezequiel no es finalmente un profeta de partida: en los capítulos 40-48 la misma gloria regresa del oriente y llena una nueva casa, y la ciudad recibe el nombre Yahweh Shammah, 'El Señor está allí.' El Señor que se fue regresará, y Su presencia definirá la ciudad para siempre." },
+    { id:24, en:"24. Unpack Ezekiel 36:26 (new heart) and Ezekiel 37 (dry bones) and explain how they are fulfilled in Christ and the gospel.",
+      es:"24. Desarrolle Ezequiel 36:26 (corazón nuevo) y Ezequiel 37 (huesos secos) y explique cómo se cumplen en Cristo y el evangelio.",
+      kw_en:[["new heart", "heart of flesh", "give you a new heart"], ["spirit", "new spirit", "put my spirit"], ["stone", "heart of stone", "take out the stone"], ["flesh", "heart of flesh"], ["dry bones", "valley of bones", "skeletons", "bones"], ["breath", "wind", "breath of god", "life into bones"], ["regeneration", "pentecost", "new covenant", "spirit came", "new birth"]],
+      kw_es:[["corazón nuevo", "corazón de carne", "os daré corazón nuevo"], ["espíritu", "espíritu nuevo", "pondré mi espíritu"], ["piedra", "corazón de piedra", "quitar la piedra"], ["carne", "corazón de carne"], ["huesos secos", "valle de huesos", "esqueletos", "huesos"], ["aliento", "viento", "aliento de dios", "vida a los huesos"], ["regeneración", "pentecostés", "nuevo pacto", "vino el espíritu", "nuevo nacimiento"]],
+      modelEn:"Ezekiel 36:26 promises, 'I will give you a new heart and put a new spirit within you; I will take the heart of stone out of your flesh and give you a heart of flesh.' The captivity would not produce merely reformed Israelites but regenerated ones — people whose hearts were replaced. Ezekiel 37 then shows the vision of the dry bones: a valley of scattered skeletons that, as Ezekiel prophesies, come together, gain flesh, and stand up as a great army when the breath of God blows over them. On its first level it means dead, scattered Israel will live again. Both are fulfilled in the New Covenant, realized at Pentecost when the Spirit came to live inside God's people, giving the new heart and breathing life into the dead.",
+      modelEs:"Ezequiel 36:26 promete: 'Os daré corazón nuevo, y pondré espíritu nuevo dentro de vosotros; quitaré de vuestra carne el corazón de piedra, y os daré un corazón de carne.' El cautiverio no produciría meramente israelitas reformados sino regenerados — personas cuyos corazones fueron reemplazados. Ezequiel 37 entonces muestra la visión de los huesos secos: un valle de esqueletos esparcidos que, mientras Ezequiel profetiza, se juntan, cobran carne, y se ponen en pie como un gran ejército cuando el aliento de Dios sopla sobre ellos. En su primer nivel significa que el Israel muerto y esparcido vivirá de nuevo. Ambos se cumplen en el Nuevo Pacto, realizado en Pentecostés cuando el Espíritu vino a morar dentro del pueblo de Dios, dando el corazón nuevo e insuflando vida en los muertos." },
+    { id:25, en:"25. Describe the six tests of Daniel 1–6 and explain what each teaches the modern believer.",
+      es:"25. Describa las seis pruebas de Daniel 1–6 y explique lo que cada una enseña al creyente moderno.",
+      kw_en:[["obedience", "purposed in his heart", "would not defile", "test of obedience", "diet"], ["trust", "prayed", "dream revealed", "test of trust"], ["fear", "furnace", "if not", "test of fear", "fiery furnace"], ["pride", "nebuchadnezzar humbled", "grass like an ox", "test of pride"], ["judgment", "weighed", "found wanting", "belshazzar", "test of judgment", "handwriting"], ["worship", "prayer", "lions", "daniel prayed", "test of worship"]],
+      kw_es:[["obediencia", "propuso en su corazón", "no contaminarse", "prueba de obediencia", "comida"], ["confianza", "oraron", "sueño revelado", "prueba de confianza"], ["temor", "horno", "si no", "prueba de temor", "horno de fuego"], ["orgullo", "nabucodonosor humillado", "hierba como buey", "prueba de orgullo"], ["juicio", "pesado", "hallado falto", "belsasar", "prueba de juicio", "escritura en la pared"], ["adoración", "oración", "leones", "daniel oró", "prueba de adoración"]],
+      modelEn:"The first six chapters of Daniel are six tests of faith inside a hostile culture. The test of obedience (chapter 1): Daniel purposed in his heart not to defile himself with the king's food, a quiet decision God honored. The test of trust (chapter 2): facing death, Daniel and his friends prayed and God revealed Nebuchadnezzar's dream. The test of fear (chapter 3): the three friends faced the furnace with 'if not' faith. The test of pride (chapter 4): Nebuchadnezzar was humbled until he acknowledged the Most High rules. The test of judgment (chapter 5): Belshazzar was weighed and found wanting. The test of worship (chapter 6): Daniel kept praying and was delivered from the lions. Each teaches the modern believer to remain faithful to God under cultural pressure.",
+      modelEs:"Los primeros seis capítulos de Daniel son seis pruebas de fe dentro de una cultura hostil. La prueba de obediencia (capítulo 1): Daniel propuso en su corazón no contaminarse con la comida del rey, una decisión callada que Dios honró. La prueba de confianza (capítulo 2): ante la muerte, Daniel y sus amigos oraron y Dios reveló el sueño de Nabucodonosor. La prueba de temor (capítulo 3): los tres amigos enfrentaron el horno con fe de 'si no.' La prueba de orgullo (capítulo 4): Nabucodonosor fue humillado hasta reconocer que el Altísimo gobierna. La prueba de juicio (capítulo 5): Belsasar fue pesado y hallado falto. La prueba de adoración (capítulo 6): Daniel siguió orando y fue librado de los leones. Cada una enseña al creyente moderno a permanecer fiel a Dios bajo la presión cultural." },
+    { id:26, en:"26. Explain the 'if not' confession of Daniel 3:17–18 and its significance for Christian faith.",
+      es:"26. Explique la confesión 'y si no' de Daniel 3:17–18 y su importancia para la fe cristiana.",
+      kw_en:[["if not", "but if not"], ["deliver", "able to deliver", "rescue us"], ["faith", "faithfulness", "trust"], ["rescue", "deliverance", "save"], ["certainty", "no guarantee", "does not need guarantee", "certainty of god"], ["god", "our god", "whom we serve"]],
+      kw_es:[["si no", "y si no"], ["librar", "puede librarnos", "rescatarnos"], ["fe", "fidelidad", "confianza"], ["rescate", "liberación", "salvar"], ["certeza", "sin garantía", "no necesita garantía", "certeza de dios"], ["dios", "nuestro dios", "a quien servimos"]],
+      modelEn:"The 'if not' confession comes in Daniel 3:17-18, when Shadrach, Meshach, and Abednego faced the fiery furnace. They said, 'Our God whom we serve is able to deliver us... and He will deliver us from your hand, O king. But if not, let it be known to you that we do not serve your gods, nor will we worship the gold image.' Those two small words — 'if not' — are among the strongest in the Bible. Their significance for Christian faith is that faith does not need a guarantee of rescue in this life; it needs only the certainty of God in the next. They trusted God's power to deliver but did not condition their obedience on it. When God is pleased to deliver, He delivers; when He is not, He gives grace to die well.",
+      modelEs:"La confesión de 'si no' viene en Daniel 3:17-18, cuando Sadrac, Mesac y Abed-nego enfrentaron el horno de fuego. Dijeron: 'Nuestro Dios a quien servimos puede librarnos... y de tu mano nos librará, oh rey. Y si no, sepas, oh rey, que no serviremos a tus dioses, ni tampoco adoraremos la imagen de oro.' Esas dos pequeñas palabras — 'si no' — están entre las más fuertes de la Biblia. Su significado para la fe cristiana es que la fe no necesita una garantía de rescate en esta vida; solo necesita la certeza de Dios en la próxima. Confiaron en el poder de Dios para librarlos pero no condicionaron su obediencia a ello. Cuando a Dios le place librar, libra; cuando no, da gracia para morir bien." },
+    { id:27, en:"27. Describe Nebuchadnezzar's dream of the great image (Daniel 2) and the meaning of the stone cut without hands.",
+      es:"27. Describa el sueño de Nabucodonosor de la gran imagen (Daniel 2) y el significado de la piedra cortada sin manos.",
+      kw_en:[["gold", "head of gold", "golden head"], ["silver", "chest of silver", "breast of silver"], ["bronze", "belly of bronze", "brass"], ["iron", "legs of iron", "iron and clay"], ["babylon"], ["persia", "medo-persia", "medes"], ["greece"], ["rome", "roman empire"], ["stone", "cut without hands", "stone struck"], ["kingdom", "kingdom of god", "mountain", "everlasting kingdom", "christ"]],
+      kw_es:[["oro", "cabeza de oro", "cabeza dorada"], ["plata", "pecho de plata"], ["bronce", "vientre de bronce", "latón"], ["hierro", "piernas de hierro", "hierro y barro"], ["babilonia"], ["persia", "medo-persia", "medos"], ["grecia"], ["roma", "imperio romano"], ["piedra", "cortada sin manos", "la piedra golpeó"], ["reino", "reino de dios", "monte", "reino eterno", "cristo"]],
+      modelEn:"Nebuchadnezzar's dream in Daniel 2 was a great image with a head of gold, chest of silver, belly of bronze, legs of iron, and feet of mingled iron and clay. Daniel revealed that the four metals were four successive world empires: Babylon (the gold head), Medo-Persia (silver), Greece (bronze), and Rome (iron). Then a stone cut without human hands struck the image, broke it to powder, and grew into a mountain that filled the whole earth. The stone is the Kingdom of God — Christ, cut without human hands. Many have tried to restore the Roman Empire and failed; but the stone has come, and the mountain Christ is building will not stop growing until it fills the earth, an everlasting kingdom that breaks all the others.",
+      modelEs:"El sueño de Nabucodonosor en Daniel 2 fue una gran imagen con cabeza de oro, pecho de plata, vientre de bronce, piernas de hierro, y pies de hierro y barro mezclados. Daniel reveló que los cuatro metales eran cuatro imperios mundiales sucesivos: Babilonia (la cabeza de oro), Medo-Persia (plata), Grecia (bronce), y Roma (hierro). Entonces una piedra cortada sin mano humana golpeó la imagen, la desmenuzó, y creció hasta ser un monte que llenó toda la tierra. La piedra es el Reino de Dios — Cristo, cortado sin mano humana. Muchos han intentado restaurar el Imperio Romano y han fracasado; pero la piedra ha venido, y el monte que Cristo edifica no dejará de crecer hasta llenar la tierra, un reino eterno que quebranta a todos los demás." },
+    { id:28, en:"28. Explain how Daniel 7 ('Son of Man') is fulfilled in Jesus's claim before the Sanhedrin (Mark 14:62).",
+      es:"28. Explique cómo Daniel 7 ('Hijo del Hombre') se cumple en la afirmación de Jesús ante el Sanedrín (Marcos 14:62).",
+      kw_en:[["son of man", "one like the son of man"], ["ancient of days", "god seated", "white garment"], ["everlasting", "never pass away", "eternal dominion", "forever"], ["kingdom", "dominion", "glory", "everlasting kingdom"], ["sanhedrin", "high priest", "before the council", "under oath"], ["jesus", "christ", "i am"], ["clouds", "clouds of heaven", "coming with clouds"]],
+      kw_es:[["hijo del hombre", "uno como el hijo del hombre"], ["anciano de días", "dios sentado", "vestido blanco"], ["eterno", "jamás pasará", "dominio eterno", "para siempre"], ["reino", "dominio", "gloria", "reino eterno"], ["sanedrín", "sumo sacerdote", "ante el concilio", "bajo juramento"], ["jesús", "cristo", "yo soy"], ["nubes", "nubes del cielo", "viniendo en las nubes"]],
+      modelEn:"In Daniel 7 the prophet sees thrones set in place and the Ancient of Days seated, His garment white as snow — God Himself in holiness and judgment. Then One like the Son of Man comes with the clouds of heaven to the Ancient of Days and is given dominion, glory, and an everlasting kingdom that shall never pass away. Six hundred years later, before the Sanhedrin on the night before His crucifixion, Jesus was put under oath and asked if He was the Christ. He answered, 'I am. And you will see the Son of Man sitting at the right hand of the Power, and coming with the clouds of heaven' — quoting Daniel 7 directly. The high priest tore his robes because he understood the claim: Jesus was declaring Himself the eternal King receiving the everlasting Kingdom.",
+      modelEs:"En Daniel 7 el profeta ve tronos puestos y al Anciano de Días sentado, Su vestido blanco como la nieve — Dios mismo en santidad y juicio. Entonces Uno como el Hijo del Hombre viene con las nubes del cielo al Anciano de Días y se le da dominio, gloria, y un reino eterno que jamás pasará. Seiscientos años después, ante el Sanedrín la noche antes de Su crucifixión, Jesús fue puesto bajo juramento y se le preguntó si era el Cristo. Respondió: 'Yo soy. Y veréis al Hijo del Hombre sentado a la diestra del poder de Dios, y viniendo en las nubes del cielo' — citando Daniel 7 directamente. El sumo sacerdote rasgó sus vestiduras porque entendió la afirmación: Jesús se declaraba el Rey eterno que recibe el Reino eterno." },
+    { id:29, en:"29. Explain Daniel 9's prophecy of the seventy weeks and its arrival at the cross.",
+      es:"29. Explique la profecía de las setenta semanas de Daniel 9 y su llegada a la cruz.",
+      kw_en:[["seventy weeks", "70 weeks", "weeks of years"], ["decree", "decree to rebuild", "artaxerxes", "445"], ["anointed", "anointed one", "messiah", "christ"], ["cut off", "cut off not for himself", "killed"], ["calvary", "cross", "arrives at the cross", "date of calvary"], ["sixty-nine", "sixty-nine weeks", "69 weeks"]],
+      kw_es:[["setenta semanas", "70 semanas", "semanas de años"], ["decreto", "decreto de reedificar", "artajerjes", "445"], ["ungido", "el ungido", "mesías", "cristo"], ["cortado", "cortado no por sí mismo", "muerto"], ["calvario", "cruz", "llega a la cruz", "fecha del calvario"], ["sesenta y nueve", "sesenta y nueve semanas", "69 semanas"]],
+      modelEn:"Daniel 9's prophecy of the seventy weeks came as Daniel was reading Jeremiah, realizing the seventy years of exile were nearly up, and praying for his people. The angel Gabriel arrived with a longer timeline: from the decree to rebuild Jerusalem until the Anointed One is 'cut off' would be sixty-nine weeks of years. Starting from the decree of Artaxerxes in 445 B.C., the math lands at exactly the right week of the right year for the cross. So Daniel was given, six centuries in advance, the very timing of Calvary — the Anointed One cut off, not for Himself, but for many. The God who walks His people through history is also the God who keeps the calendar of redemption with perfect precision.",
+      modelEs:"La profecía de las setenta semanas de Daniel 9 vino mientras Daniel leía a Jeremías, dándose cuenta de que los setenta años de exilio estaban casi por cumplirse, y oraba por su pueblo. El ángel Gabriel llegó con una línea de tiempo más larga: desde el decreto de reedificar Jerusalén hasta que el Ungido sea 'cortado' habría sesenta y nueve semanas de años. Comenzando desde el decreto de Artajerjes en el 445 a.C., el cálculo cae exactamente en la semana correcta del año correcto para la cruz. Así que a Daniel se le dio, seis siglos por adelantado, el momento mismo del Calvario — el Ungido cortado, no por sí mismo, sino por muchos. El Dios que lleva a Su pueblo por la historia es también el Dios que guarda el calendario de la redención con perfecta precisión." },
+    { id:30, en:"30. Synthesize the message of Ezekiel and Daniel using the bowling-ball-on-the-boxcar illustration. What do both books say about God's reign over captivity?",
+      es:"30. Sintetice el mensaje de Ezequiel y Daniel usando la ilustración de la bola de boliche en el vagón. ¿Qué dicen ambos libros sobre el reinado de Dios en el cautiverio?",
+      kw_en:[["bowling ball", "ball", "ball on the boxcar"], ["boxcar", "train", "freight car"], ["perspective", "point of view", "step out", "from orbit"], ["god", "the lord", "god in charge"], ["reigns", "god reigns", "in control", "sovereign"], ["captivity", "exile", "loss carried forward", "our captivities"], ["chariot", "ezekiel's chariot", "glory"], ["throne", "daniel's throne", "son of man", "kingdom"]],
+      kw_es:[["bola de boliche", "bola", "bola sobre el vagón"], ["vagón", "tren", "vagón de carga"], ["perspectiva", "punto de vista", "da un paso afuera", "desde la órbita"], ["dios", "el señor", "dios al mando"], ["reina", "dios reina", "en control", "soberano"], ["cautiverio", "exilio", "pérdida llevada adelante", "nuestros cautiverios"], ["carro", "carro de ezequiel", "gloria"], ["trono", "trono de daniel", "hijo del hombre", "reino"]],
+      modelEn:"The bowling-ball-on-the-boxcar illustration synthesizes Ezekiel and Daniel. A man rolls a bowling ball from the front of a moving boxcar toward the back: from inside, it rolls backward; but to someone beside the tracks the train carries it forward, and from orbit it hurtles around a spinning earth. When we look at our own lives — exile, lions, furnaces, ruined nations — all we see is the ball rolling backward, loss. But step out and gain God's perspective and you discover that what looks like loss is being carried forward in a vast plan. That is the message of both books: God reigns over our captivities. Ezekiel sees the chariot of glory, Daniel sees the throne and kingdoms; both end with the Son of Man receiving an everlasting Kingdom and a city named 'The Lord Is There.'",
+      modelEs:"La ilustración de la bola de boliche sobre el vagón sintetiza a Ezequiel y Daniel. Un hombre rueda una bola de boliche del frente de un vagón en movimiento hacia atrás: desde adentro, rueda hacia atrás; pero para alguien junto a las vías el tren la lleva hacia adelante, y desde la órbita se precipita alrededor de una tierra que gira. Cuando miramos nuestras propias vidas — exilio, leones, hornos, naciones arruinadas — todo lo que vemos es la bola rodando hacia atrás, pérdida. Pero da un paso afuera y obtén la perspectiva de Dios y descubrirás que lo que parece pérdida está siendo llevado hacia adelante en un vasto plan. Ese es el mensaje de ambos libros: Dios reina sobre nuestros cautiverios. Ezequiel ve el carro de gloria, Daniel ve el trono y los reinos; ambos terminan con el Hijo del Hombre recibiendo un Reino eterno y una ciudad llamada 'El Señor está allí.'" }
+];
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed[idx]) {
+                btn.classList.add('locked');
+                if (letter === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2'; btn.style.borderColor = '#d4af37'; btn.style.fontWeight = '600';
+            }
+            btn.onclick = function() {
+                if (mcRevealed[idx] || unitPassed) return;
+                mcAnswers[idx] = letter;
+                mcRevealed[idx] = true;
+                saveState();
+                renderQuestions();
+            };
+            div.appendChild(btn);
+        });
+
+        if (mcRevealed[idx]) renderMCFeedback(div, q, idx, true);
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMastersLevel() ? ('Short Answer (Questions 21–30) — ' + (getTrack()==='thm' ? 'Master of Theology' : 'Master of Divinity') + ' (graded, 9/10 to pass)') : 'Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMastersLevel() ? ('Respuesta Corta (Preguntas 21–30) — ' + (getTrack()==='thm' ? 'Maestría en Teología' : 'Maestría en Divinidad') + ' (calificado, 9/10 para aprobar)') : 'Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here...' : 'Escriba su respuesta aquí...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.addEventListener('input', (e) => { kwAnswers[idx] = e.target.value; saveState(); });
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+
+        checkBtn.onclick = function() {
+            const result = gradeSA(q, textarea.value);
+            if (result.tooShort) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a sentence).' : 'Escriba una respuesta más completa (al menos una oración).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else if (result.pass) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? '✓ Your answer includes the key concepts.' : '✓ Su respuesta incluye los conceptos clave.';
+                feedbackDiv.className = 'feedback-text correct';
+            } else {
+                feedbackDiv.innerHTML = currentLang === 'en' ? `✗ Try to include more of: ${result.missing.join(', ')}.` : `✗ Intente incluir más de: ${result.missing.join(', ')}.`;
+                feedbackDiv.className = 'feedback-text incorrect';
+            }
+        };
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.cssText = 'display:none;margin-top:10px;padding:12px 14px;border-left:4px solid #c9a961;background:#fdf9ed;border-radius:3px;font-size:.92rem;line-height:1.5;';
+        const modelBtn = document.createElement('button');
+        modelBtn.className = 'small';
+        modelBtn.style.marginLeft = '6px';
+        modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+        modelBtn.onclick = function() {
+            if ((textarea.value || '').trim().length < 100) {
+                feedbackDiv.className = 'feedback-text incorrect';
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a sentence) — then you can compare it with the model.' : 'Escriba primero su propia respuesta (al menos una oración) — luego podrá compararla con el modelo.';
+                return;
+            }
+            if (modelBox.style.display === 'none') {
+                modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estúdiela:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+                modelBox.style.display = 'block';
+                modelBtn.textContent = currentLang === 'en' ? 'Hide model answer' : 'Ocultar respuesta modelo';
+            } else {
+                modelBox.style.display = 'none';
+                modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(modelBtn);
+        div.appendChild(feedbackDiv);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+    });
+}
+
+function renderMCFeedback(div, q, idx, skipRedraw) {
+    if (!skipRedraw) {
+        const buttons = div.querySelectorAll('.option');
+        buttons.forEach(btn => {
+            const letter = btn.textContent.charAt(0);
+            btn.classList.add('locked');
+            btn.classList.remove('correct', 'wrong');
+            if (letter === q.correct) btn.classList.add('correct');
+            else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+        });
+    }
+    let existing = div.querySelector('.feedback-text');
+    if (existing) existing.remove();
+    const fb = document.createElement('div');
+    const correct = (mcAnswers[idx] === q.correct);
+    fb.className = 'feedback-text ' + (correct ? 'correct' : 'incorrect');
+    if (correct) {
+        fb.innerHTML = '✓ ' + (currentLang === 'en' ? q.fcEn : q.fcEs);
+    } else {
+        const correctLetter = q.correct;
+        fb.innerHTML = (currentLang === 'en' ? `✗ Correct answer: ${correctLetter}. ` : `✗ Respuesta correcta: ${correctLetter}. `) + (currentLang === 'en' ? q.fiEn : q.fiEs);
+    }
+    div.appendChild(fb);
+}
+
+function gradeSA(q, answer) {
+    const text = (answer || '').toLowerCase().trim();
+    if (text.length < 100) return { tooShort: true, pass: false, missing: [] };
+    const isEs = document.body.classList.contains('lang-es');
+    const groups = isEs ? q.kw_es : q.kw_en;
+    const missing = [];
+    let matched = 0;
+    groups.forEach(group => {
+        const hit = group.some(term => text.includes(term.toLowerCase()));
+        if (hit) matched++;
+        else missing.push(group[0]);
+    });
+    const need = Math.max(2, Math.ceil(groups.length * 0.4));
+    return { tooShort: false, pass: matched >= need, missing };
+}
+
+function submitExam() {
+    saveReg();
+    if (!student.name || !student.email) {
+        alert(currentLang === 'en' ? 'Please fill in your registration first.' : 'Por favor complete su registro primero.');
+        return;
+    }
+    if (unitPassed) {
+        showResult('pass', currentLang === 'en' ? '✅ Unit 11 already passed. You may proceed.' : '✅ Unidad 11 ya aprobada. Puede continuar.');
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        showResult('locked', currentLang === 'en' ? `⏰ Locked for ${wait} more minute(s).` : `⏰ Bloqueado por ${wait} minuto(s) más.`);
+        return;
+    }
+
+    for (let i = 0; i < mcRevealed.length; i++) mcRevealed[i] = true;
+    renderQuestions();
+    let mcCorrect = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === mcQuestions[i].correct) mcCorrect++;
+    }
+
+    let saCorrect = 0;
+    if (isMastersLevel()) {
+        for (let i = 0; i < 10; i++) {
+            const r = gradeSA(kwQuestions[i], kwAnswers[i]);
+            if (!r.tooShort && r.pass) saCorrect++;
+        }
+    }
+    const mcOk = mcCorrect >= PASS_THRESHOLD_MC;
+    const saOk = saCorrect >= PASS_THRESHOLD_SA;
+
+    function passUnit(detail) {
+        unitPassed = true;
+        localStorage.setItem(UNIT_PASSED_KEY, 'true');
+        progress[`unit${UNIT_NUM}`] = true;
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(SA_LOCK_KEY);
+        const msg = currentLang === 'en'
+            ? `✅ PASSED. ${detail}. Unit 11 complete! Your answers are marked below. Review them, then continue when ready.`
+            : `✅ APROBADO. ${detail}. ¡Unidad 11 completa! Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.`;
+        showResult('pass', msg);
+        updateProgressGrid();
+    }
+
+    if (!isMastersLevel()) {
+        const detail = currentLang === 'en' ? `MC: ${mcCorrect}/20 (need 18)` : `OM: ${mcCorrect}/20 (necesita 18)`;
+        if (mcOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+                : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        const detail = currentLang === 'en'
+            ? `MC: ✓ banked · SA: ${saCorrect}/10 (need 9)`
+            : `OM: ✓ en banco · RC: ${saCorrect}/10 (necesita 9)`;
+        if (saOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Your multiple-choice pass is safe. ${detail}. Review the lesson and try the short-answer section again in ${lockMinutes()} minute(s).`
+                : `Su aprobación de opción múltiple está a salvo. ${detail}. Repase la lección y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    const detail = currentLang === 'en'
+        ? `MC: ${mcCorrect}/20 (need 18) · SA: ${saCorrect}/10 (need 9)`
+        : `OM: ${mcCorrect}/20 (necesita 18) · RC: ${saCorrect}/10 (necesita 9)`;
+    if (mcOk && saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit(detail);
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `MC ${mcCorrect}/20 ✓ passed and banked. SA ${saCorrect}/10 (need 9). When you try again in ${lockMinutes()} minute(s), you'll only need to resubmit the short answers — MC stays passed.`
+            : `OM ${mcCorrect}/20 ✓ aprobado y guardado. RC ${saCorrect}/10 (necesita 9). Al reintentar en ${lockMinutes()} minuto(s), solo necesitará reenviar las respuestas cortas — el OM permanece aprobado.`;
+        showResult('fail', msg);
+        startLockTimer();
+    } else {
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+            : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+        showResult('fail', msg);
+        startLockTimer();
+    }
+}
+
+function showResult(cls, html) {
+    const r = document.getElementById('examResult');
+    r.style.display = 'block';
+    r.className = 'exam-result ' + cls;
+    r.innerHTML = html;
+}
+
+function startLockTimer() {
+    const r = document.getElementById('examResult');
+    const interval = setInterval(() => {
+        const remaining = lockUntil - Date.now();
+        if (remaining <= 0) { clearInterval(interval); r.innerHTML += currentLang === 'en' ? '<br><em>Lockout ended. You may retry.</em>' : '<br><em>Bloqueo terminado. Puede reintentar.</em>'; return; }
+        const m = Math.floor(remaining / 60000);
+        const s = Math.floor((remaining % 60000) / 1000);
+        const note = currentLang === 'en' ? `<br>⏱️ Locked: ${m}:${String(s).padStart(2,'0')}` : `<br>⏱️ Bloqueado: ${m}:${String(s).padStart(2,'0')}`;
+        const base = r.innerHTML.split('<br>⏱️')[0];
+        r.innerHTML = base + note;
+    }, 1000);
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? 'Reset this unit? All your answers and pass status for Unit 11 will be cleared. (Your name, email, and other units are not affected.)'
+        : '¿Reiniciar esta unidad? Todas sus respuestas y el estado de aprobación para la Unidad 11 se borrarán. (Su nombre, correo y otras unidades no se afectan.)';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcRevealed = new Array(20).fill(false);
+    unitPassed = false;
+    mcPreviouslyPassed = false;
+    lockUntil = 0;
+    localStorage.removeItem(UNIT_STATE_KEY);
+    localStorage.removeItem(UNIT_PASSED_KEY);
+    localStorage.removeItem(LOCKOUT_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    if (progress[`unit${UNIT_NUM}`]) {
+        delete progress[`unit${UNIT_NUM}`];
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+    }
+    document.getElementById('examResult').style.display = 'none';
+    renderQuestions();
+    updateProgressGrid();
+}
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') { currentLang = 'es'; document.body.className = 'lang-es'; this.textContent = 'English'; }
+    else { currentLang = 'en'; document.body.className = 'lang-en'; this.textContent = 'Español'; }
+    renderTrackBanner(); renderReadout(); renderQuestions();
+};
+
+// ========== REGISTRATION READOUT (read-only on Units 2-13) ==========
+function renderReadout() {
+    const el = document.getElementById('regReadout');
+    if (!el) return;
+    const saved = localStorage.getItem(STUDENT_KEY);
+    const en = (currentLang !== 'es');
+    if (!saved) {
+        el.innerHTML = en
+            ? 'No registration found. Please <a href="CTSUnit1.html">register on Unit 1</a> before taking this exam.'
+            : 'No se encontr\u00f3 registro. Por favor <a href="CTSUnit1.html">reg\u00edstrese en la Unidad 1</a> antes de tomar este examen.';
+        el.className = 'reg-readout missing';
+        return;
+    }
+    const st = JSON.parse(saved);
+    const progLabel = st.program || 'Certificate of Ministry';
+    const lblName = en ? 'Name' : 'Nombre';
+    const lblEmail = en ? 'Email' : 'Correo';
+    const lblCountry = en ? 'Country' : 'Pa\u00eds';
+    const lblProg = en ? 'Program' : 'Programa';
+    const note = en
+        ? 'Registered on Unit 1. To change your details, return to Unit 1.'
+        : 'Registrado en la Unidad 1. Para cambiar sus datos, vuelva a la Unidad 1.';
+    el.innerHTML =
+        '<div class="reg-readout-grid">' +
+        '<div><strong>' + lblName + ':</strong> ' + (st.name||'') + '</div>' +
+        '<div><strong>' + lblEmail + ':</strong> ' + (st.email||'') + '</div>' +
+        '<div><strong>' + lblCountry + ':</strong> ' + (st.country||'') + '</div>' +
+        '<div><strong>' + lblProg + ':</strong> ' + progLabel + '</div>' +
+        '</div><div class="reg-readout-note">' + note + '</div>';
+    el.className = 'reg-readout';
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+loadReg();
+renderReadout();
+loadState();
+updateProgressGrid();
+renderTrackBanner();
+renderQuestions();
+if (unitPassed) showResult('pass', currentLang === 'en' ? '✅ Unit 11 already passed.' : '✅ Unidad 11 ya aprobada.');
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSOTSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

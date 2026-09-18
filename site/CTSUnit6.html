@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Old Testament Survey — Unit 6: Exile and Return (Ezra, Nehemiah, Esther)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .action-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.action-btn.reset { background: #8a5a2f; }
+.action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+p { margin-bottom: 12px; }
+ul { margin: 8px 0 14px 22px; }
+li { margin-bottom: 6px; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 0; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.track-banner { background: #fffaf0; border-left: 4px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin-bottom: 15px; font-size: 0.95rem; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.locked { cursor: default; }
+.option.locked:hover { background: #fcfbf8; }
+.option.locked.correct:hover { background: #e8f5ea; }
+.option.locked.wrong:hover { background: #fae8e8; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.exam-result { margin-top: 15px; padding: 12px 18px; border-radius: 12px; font-size: 1.05rem; }
+.exam-result.pass { background: #e8f5ea; color: #1f6b3b; border: 1px solid #b9dfc2; }
+.exam-result.fail { background: #fae8e8; color: #8a1f1f; border: 1px solid #efc2c2; }
+.exam-result.locked { background: #fff4d6; color: #6b4f1f; border: 1px solid #e8d28a; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en .block-en { display: block; }
+body.lang-en .block-es { display: none; }
+body.lang-es .block-en { display: none; }
+body.lang-es .block-es { display: block; }
+@media print {
+    body { background: white; font-size: 12pt; padding: 0; }
+    .nav-bar, .toggle-btn, .action-btn, button.small, .registration-panel { display: none !important; }
+    .card { box-shadow: none; border: none; padding: 10pt 0; margin-bottom: 8pt; page-break-inside: avoid; }
+    .question { page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .option.correct { background: white; border: 1px solid #888; }
+    .option.wrong { background: white; border: 1px solid #888; }
+}
+.reg-readout { font-size: 0.95rem; }
+.reg-readout-grid { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.reg-readout-grid > div { min-width: 180px; }
+.reg-readout-note { margin-top: 8px; font-size: 0.82rem; color: #6b6256; }
+.reg-readout.missing { color: #8a1f1f; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Old Testament Survey — Unit 6: Exile and Return (Ezra, Nehemiah, Esther)</span><span class="lang-es">📖 Estudio del Antiguo Testamento — Unidad 6: Exilio y Retorno (Esdras, Nehemías, Ester)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="registration-panel" id="regPanel">
+    <h3><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h3>
+    <div id="regReadout" class="reg-readout"></div>
+    <!-- Hidden fields preserve the IDs used by grading/loadReg; registration is edited on Unit 1. -->
+    <input type="hidden" id="studentName">
+    <input type="hidden" id="studentEmail">
+    <input type="hidden" id="studentCountry">
+    <input type="hidden" id="studentProgram">
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="block-en">
+        <p style="font-style: italic; color: #5b3a1f; border-left: 4px solid #f4c542; padding-left: 15px; margin-bottom: 20px;">"Whoever is among you of His people — let him go up." That's how the Hebrew Bible ends. The next four hundred years were a long going-up. Three books, three leaders, one God who keeps every word He ever spoke — even in the chapters where He never speaks His own name.</p>
+
+        <p>Ezra. Nehemiah. Esther. Three books, three different angles on the same story. Ezra rebuilds the temple and the people. Nehemiah rebuilds the wall and the people. Esther doesn't rebuild anything — she keeps the people from being erased so there will <em>be</em> a people to rebuild <em>with</em>. Together they cover roughly 538 BC down to 425 BC — a hundred and thirteen years of God walking His exiles home and then keeping them home. <em>Vamos por partes.</em></p>
+
+        <h2>I. Cyrus and the Decree — God Names a King a Hundred and Fifty Years Early</h2>
+        <p style="font-style: italic; color: #5b3a1f;">Ezra 1–2</p>
+
+        <p>In 538 BC, a Persian king who never read the Hebrew Bible turned the last page of the Hebrew Bible into the first page of a new chapter. <em>"Thus says Cyrus king of Persia: All the kingdoms of the earth the LORD God of heaven has given me. And He has commanded me to build Him a house at Jerusalem… Whoever is among you of all His people, may his God be with him, and let him go up"</em> (Ezra 1:2–3). One hundred and fifty years before Cyrus was born, Isaiah named him. By name. <em>"Who says of Cyrus, 'He is My shepherd, and he shall perform all My pleasure'"</em> (Isaiah 44:28).</p>
+
+        <p>That should stop you. Isaiah wrote that two centuries before there was a Persian Empire. Cyrus's parents hadn't met yet. The God who knows the end from the beginning had already filed the paperwork on the man who would sign the release order. There are people walking around right now whose names God has already spoken into your story. The mentor you haven't met. The pastor whose sermon will rescue you in some future year. The friend at your funeral. God knows them by name. He hasn't told you yet because part of trust is not knowing yet.</p>
+
+        <p>About fifty thousand exiles signed up to go home. That's a small percentage of the Jewish population in Babylon — most stayed. Babylon was comfortable; Jerusalem was rubble. It is always easier to stay where God has put you on hold than to move where He's calling you forward. The faithful remnant is almost never the comfortable majority. Zerubbabel — a descendant of David — leads them out. The kingdom that looked dead at Gilboa and again at the burning of Jerusalem is walking again. Bethlehem is still five hundred years out. But the line is moving.</p>
+
+        <h2>II. The Temple Rebuilt — When the Young Shouted and the Old Wept</h2>
+        <p style="font-style: italic; color: #5b3a1f;">Ezra 3–6</p>
+
+        <p>They get home and the first thing they build is an altar. Worship before walls. Then they lay the temple foundation, and Ezra 3:12–13 records the strangest dedication in the Bible: the young men shouted for joy, and the old men — the ones who remembered Solomon's temple — wept so loudly nobody could tell the shouting from the weeping. This new temple was smaller. Less gold. No ark of the covenant — that was lost in 586 BC and never recovered. The young looked at what was being built. The old looked at what had been lost.</p>
+
+        <p>If you have ever been in church on a Sunday when the people next to you were celebrating something you were grieving — or grieving something you were celebrating — you have been in Ezra 3. Both responses were honest. Both were heard. God doesn't ask you to choose between gratitude for what He's doing and grief for what was lost. Bring both into the sanctuary.</p>
+
+        <p>And mark this — the day they finished that altar, the Scarlet Thread came back out of the wings. The blood that had flowed through Solomon's courts for almost four hundred years had stopped at the burning of the temple in 586. From Cyrus's decree forward it would flow again, every morning and every evening, on a smaller altar in a humbler court. The thread had never been cut. God had only set it down briefly while He carried His people through Babylon. He picked it back up the day the altar smoked again.</p>
+
+        <p>Then the work stalls. Sixteen years. Local opposition, fatigue, "we'll get to it next year" — the four most spiritually expensive words in any language. God sends Haggai and Zechariah. Haggai's word is about as gentle as a slap: <em>"Is it time for you yourselves to dwell in your paneled houses, and this temple to lie in ruins?"</em> (Haggai 1:4). Translation: you've been remodeling your living room while God's house has weeds growing through the foundation. Zechariah encourages with the line every weary servant has to memorize: <em>"Not by might nor by power, but by My Spirit, says the LORD of hosts"</em> (Zechariah 4:6). And then the magnificent line about Zerubbabel's smaller house: <em>"the glory of this latter temple shall be greater than the former"</em> (Haggai 2:9).</p>
+
+        <p>Greater? It's smaller, plainer, ark-less. How is it greater?</p>
+
+        <p>Because one day a carpenter from Nazareth would walk into it.</p>
+
+        <p>Don't despise the day of small things. The "smaller" thing in your hands right now may be the very thing Christ shows up in. Your unimpressive Bible study with three faithful people. Your ordinary obedience nobody is applauding. The temple Zerubbabel built was, by every visible measure, a downgrade. By the only measure that matters — Whose feet would walk it — it was the greatest sanctuary in human history. The temple is finished in 516 BC. Seventy years almost to the day after it burned. God keeps His seventies (Jeremiah 25:11–12).</p>
+
+        <h2>III. Ezra and Nehemiah — King and Priest, Wall and Word</h2>
+        <p style="font-style: italic; color: #5b3a1f;">Ezra 7–10, Nehemiah 1–13</p>
+
+        <p>Notice something easy to miss. Zerubbabel was descended from David — the kingly line. Ezra was descended from Aaron — the priestly line. The restoration of God's people needs both. The king to rebuild. The priest to cleanse. Walls without Word leave a fortress around an empty heart. Word without walls leaves a Bible study that won't survive the next siege. God always sends both.</p>
+
+        <p>Ezra arrives in 458 BC — about sixty years after the temple is done. He is "a skilled scribe in the Law of Moses" (Ezra 7:6), and what made him a skilled scribe is the verse three lines later: <em>"Ezra had prepared his heart to seek the law of the LORD, and to do it, and to teach in Israel"</em> (Ezra 7:10). Three verbs in order, and the order matters. <em>Seek. Do. Teach.</em> Most of us are willing to seek. A surprising number are even willing to teach. The middle verb is the one that gets skipped. There are Bible students by the thousand. There are Bible doers by the tens. Ezra was a doer.</p>
+
+        <p>He arrives to find the people who have the temple don't have the Word. They've intermarried with surrounding pagan nations — including the priests and Levites, the very people supposed to guard the line. Ezra tears his clothes, sits in the dust, and prays one of the great corporate confessions of Scripture (Ezra 9). The reform is painful. The community separates from foreign wives. It's brutal and it's necessary, because the previous time Israel let pagan marriage go unchecked, they ended up in Babylon. You don't fix the second exile by repeating the cause of the first.</p>
+
+        <p>Then comes Nehemiah, thirteen years later — 445 BC. He's the cupbearer to King Artaxerxes in the Persian capital. His brother brings news from Jerusalem: the wall is broken down, the gates burned, the people in great affliction. Nehemiah weeps, fasts, prays — and then prays for <em>four months</em> before he says one word to the king (compare Nehemiah 1:1 and 2:1). Four months of "Lord, I'm Yours, but I want to ask the king when You say I can ask the king."</p>
+
+        <p>Most of us, when we want something, ask the visible authority before we ask the invisible One. Nehemiah inverted that. By the time he opened his mouth to Artaxerxes, the conversation had already been settled in heaven; Artaxerxes was just signing the release. If your boldness with men is greater than your boldness with God, you have the spiritual order of operations backwards.</p>
+
+        <p>Nehemiah goes. Inspects the walls at night. Rallies the people. Fifty-two days later the wall is up (Nehemiah 6:15) — despite Sanballat, Tobiah, and Geshem. Three enemies, three tactics. Sanballat mocks: "What are these feeble Jews doing?" Tobiah infiltrates with insider connections, marriage alliances, and quiet sabotage. Geshem joins the conspiracy and tries to lure Nehemiah into a trap, then hires a false prophet to discredit him. Every leader who has ever tried to do anything for God has met some combination of those three. The mocker. The infiltrator. The hired prophet. Nehemiah's reply is the one-line manual for ministry under fire: <em>"I am doing a great work, so that I cannot come down. Why should the work cease while I leave it and go down to you?"</em> (Nehemiah 6:3). Stay on the wall.</p>
+
+        <p>Then Ezra and Nehemiah do what every revival in Scripture eventually does: they read the Word. Public, slow, with explanation. Nehemiah 8:8 is, incidentally, the first job description of expository preaching in the Bible — they read distinctly, gave the sense, and helped them understand the reading. The people weep when they hear it. And the leaders lift them up: <em>"Do not sorrow, for the joy of the LORD is your strength"</em> (Nehemiah 8:10). They celebrate the Feast of Tabernacles for the first time properly since Joshua. They renew the covenant in writing, and the leaders sign the document with their own names. Wall and Word together — and you cannot have one without the other for long. Nehemiah built both.</p>
+
+        <h2>IV. Esther — The God Whose Name Is Never Mentioned, Whose Hand Is on Every Page</h2>
+        <p style="font-style: italic; color: #5b3a1f;">Esther 1–10</p>
+
+        <p>The book of Esther is famous for the wrong reason — for what it does not say. The name of God appears zero times in 167 verses. Yet His fingerprints are on every page. You don't need His name printed when His handwriting is everywhere.</p>
+
+        <p>Esther is a Jewish orphan in Persia (around 480 BC, in the gap between Zerubbabel's return and Ezra's). Vashti gets deposed; Esther is crowned. Her cousin Mordecai overhears an assassination plot, reports it, and — for narrative reasons that look like coincidence — gets no reward yet. Haman the Agagite (note the family name — the same Amalekites Saul refused to wipe out in 1 Samuel 15 are now back, four hundred years later, trying to wipe out the Jews; obedience deferred is judgment delayed) rises in the court and is enraged when Mordecai will not bow. He casts lots — <em>pur</em> — to determine the day of Jewish destruction. The lot falls eleven months out, giving Esther time she didn't know she needed.</p>
+
+        <p>Mordecai's line to Esther is the most famous in the book and one of the most quietly devastating in Scripture: <em>"Yet who knows whether you have come to the kingdom for such a time as this?"</em> (Esther 4:14). Notice he doesn't say <em>you definitely have.</em> He says <em>who knows.</em> Because the calling on your life is rarely confirmed by certainty before you obey it. Faith walks toward the throne room before the scepter has been extended. Esther fasts three days, walks unsummoned into the throne room (capital offense), and the king holds out the scepter.</p>
+
+        <p>Then comes the night the king cannot sleep. He calls for the records. They open to the place where Mordecai saved his life and was never honored. The next morning Haman walks in to ask for Mordecai's hanging and ends up parading Mordecai through the streets in the king's robe. By that night Haman is on the gallows he built for Mordecai. The Jews defend themselves on the appointed day and prevail. The festival of Purim is established and is still celebrated. The lot Haman cast against God's people becomes the festival celebrating their preservation.</p>
+
+        <p>Coincidence? Vashti's perfectly timed defiance. Mordecai's overheard plot. The lot cast eleven months out. The king's insomnia on the right night. The scroll opening to the right page. Haman walking in at the wrong moment. The robe. The gallows. Every chapter is what readers later called the <em>lower story</em>. Every chapter has a hidden <em>upper story</em>. We see the lower; God writes the upper.</p>
+
+        <h3>A Silent God</h3>
+        <p>People sometimes complain that the God of Esther never says anything. He spoke audibly from a bush to Moses and to a boy in a tabernacle named Samuel; He even spoke through a donkey to Balaam. Why such long silences with the rest of us? Four short answers from this book.</p>
+
+        <p><em>First, silence requires faith, not sight.</em> The risen Christ said to Thomas, <em>"Blessed are those who have not seen and yet have believed"</em> (John 20:29). A God who answered every question audibly would form a different kind of disciple than the kind He is actually forming. <em>Second, silence forces the struggle that grows the soul.</em> A faith that has never had to wrestle is a faith that has never grown beyond shoe size. <em>Third, silence produces maturity.</em> We have five outer senses; the believer is meant to develop a sixth — the eyes of the heart (Ephesians 1:18) — and that sixth sense is not exercised when the first five are doing all the work. <em>Fourth, silence does not mean absence.</em> Providence is the name of the silence. Hebrews 1:3 says Christ <em>upholds all things by the word of His power</em>. The Lord whose name is not printed in Esther is the Lord whose handwriting fills every paragraph. And He is the Lord of your unread chapter too. The week you can't see Him moving — He's moving. The years that look like coincidence — they're not. He doesn't always sign His name on the page. But every sentence is His.</p>
+
+        <h2>Christ in Ezra — Esther</h2>
+        <p>Three convictions to take with you and never put down.</p>
+
+        <p><strong>First — Christ is the True Temple, and the True Wall.</strong> Zerubbabel built the picture; Christ built the substance. Haggai 2:9 promised the latter glory would surpass the former. It did, the day Mary's Son walked through the doors. And Christ is also Nehemiah's wall finally finished — only this time built of living stones, with gates that never close (1 Peter 2:5; Revelation 21).</p>
+
+        <p><strong>Second — Christ is the Word made Flesh of Ezra 7:10.</strong> Ezra <em>sought</em> the Law, <em>did</em> the Law, and <em>taught</em> the Law. Christ is the Law in person — the One who <em>was</em> in the beginning what Ezra spent his life trying to copy out. <em>"In the beginning was the Word, and the Word was with God, and the Word was God"</em> (John 1:1). Ezra was a great scribe. Christ is the Author.</p>
+
+        <p><strong>Third — Christ is the Providence we couldn't see.</strong> The hidden God of Esther stepped out of the wings on a hill outside Jerusalem and let Himself be seen. The Cross looked, on Friday, like the worst coincidence in human history — like Haman had won. By Sunday it was clear that the worst day in human history was the day God's hidden hand finally opened. <em>Whoever is among you of His people — let him go up.</em> The exile is over. The way home is open. The Cyrus decree of the Old Testament has become the gospel call of the New: come up.</p>
+    </div>
+
+    <div class="block-es">
+        <p style="font-style: italic; color: #5b3a1f; border-left: 4px solid #f4c542; padding-left: 15px; margin-bottom: 20px;">"Quien haya entre vosotros de Su pueblo — suba." Así termina la Biblia hebrea. Los siguientes cuatrocientos años fueron un largo subir. Tres libros, tres líderes, un Dios que cumple cada palabra que jamás pronunció — incluso en los capítulos donde Él nunca pronuncia Su propio nombre.</p>
+
+        <p>Esdras. Nehemías. Ester. Tres libros, tres ángulos diferentes de la misma historia. Esdras reconstruye el templo y al pueblo. Nehemías reconstruye el muro y al pueblo. Ester no reconstruye nada — impide que el pueblo sea borrado para que <em>haya</em> un pueblo con el cual reconstruir. Juntos cubren aproximadamente del 538 a.C. al 425 a.C. — ciento trece años de Dios caminando con Sus exiliados a casa y luego manteniéndolos allí. <em>Vamos por partes.</em></p>
+
+        <h2>I. Ciro y el decreto — Dios nombra a un rey ciento cincuenta años antes</h2>
+        <p style="font-style: italic; color: #5b3a1f;">Esdras 1–2</p>
+
+        <p>En el año 538 a.C., un rey persa que jamás había leído la Biblia hebrea convirtió la última página de la Biblia hebrea en la primera página de un nuevo capítulo. <em>"Así dice Ciro rey de Persia: Jehová el Dios de los cielos me ha dado todos los reinos de la tierra; y Él me ha mandado que le edifique casa en Jerusalén… Quien haya entre vosotros de todo Su pueblo, sea Jehová su Dios con él, y suba"</em> (Esdras 1:2–3). Ciento cincuenta años antes de que Ciro naciera, Isaías lo llamó. Por su nombre. <em>"Que dice de Ciro: Es mi pastor, y cumplirá todo lo que yo quiero"</em> (Isaías 44:28).</p>
+
+        <p>Eso debería detenerle. Isaías escribió eso dos siglos antes de que existiera el Imperio Persa. Los padres de Ciro aún no se conocían. El Dios que conoce el fin desde el principio ya había firmado los papeles del hombre que firmaría la orden de liberación. Hay personas caminando ahora mismo cuyos nombres Dios ya ha hablado en su historia. El mentor que aún no ha conocido. El pastor cuyo sermón le rescatará en algún año futuro. El amigo en su funeral. Dios los conoce por nombre. No se lo ha dicho aún porque parte de la confianza es no saber aún.</p>
+
+        <p>Unos cincuenta mil exiliados se inscribieron para regresar a casa. Eso es un pequeño porcentaje de la población judía en Babilonia — la mayoría se quedó. Babilonia era cómoda; Jerusalén era escombros. Siempre es más fácil quedarse donde Dios lo ha puesto en pausa que moverse hacia donde Él lo está llamando hacia adelante. El remanente fiel casi nunca es la mayoría cómoda. Zorobabel — descendiente de David — los dirige hacia afuera. El reino que parecía muerto en Gilboa y otra vez en el incendio de Jerusalén está caminando de nuevo. Belén está aún a quinientos años de distancia. Pero la línea se está moviendo.</p>
+
+        <h2>II. El templo reconstruido — cuando los jóvenes gritaron y los ancianos lloraron</h2>
+        <p style="font-style: italic; color: #5b3a1f;">Esdras 3–6</p>
+
+        <p>Llegan a casa y lo primero que construyen es un altar. Adoración antes que muros. Luego ponen los cimientos del templo, y Esdras 3:12–13 registra la dedicación más extraña de la Biblia: los jóvenes gritaban de gozo, y los ancianos — los que recordaban el templo de Salomón — lloraban tan fuerte que nadie podía distinguir el grito del llanto. Este nuevo templo era más pequeño. Menos oro. Sin arca del pacto — eso se perdió en el 586 a.C. y nunca se recuperó. Los jóvenes miraban lo que se estaba construyendo. Los ancianos miraban lo que se había perdido.</p>
+
+        <p>Si alguna vez ha estado en la iglesia un domingo cuando los que estaban a su lado celebraban algo que usted lloraba — o lloraban algo que usted celebraba — ha estado en Esdras 3. Ambas respuestas eran honestas. Ambas fueron oídas. Dios no le pide que escoja entre la gratitud por lo que Él está haciendo y el dolor por lo que se perdió. Traiga ambas al santuario.</p>
+
+        <p>Y note esto — el día en que terminaron ese altar, el Hilo Escarlata volvió a salir del telón. La sangre que había fluido por los atrios de Salomón durante casi cuatrocientos años se había detenido en el incendio del templo en el 586. Desde el decreto de Ciro en adelante fluiría de nuevo, cada mañana y cada tarde, sobre un altar más pequeño en un atrio más humilde. El hilo nunca había sido cortado. Dios solo lo había dejado brevemente mientras llevaba a Su pueblo por Babilonia. Lo recogió el día en que el altar volvió a humear.</p>
+
+        <p>Luego la obra se detiene. Dieciséis años. Oposición local, fatiga, "lo haremos el próximo año" — las cuatro palabras espiritualmente más caras en cualquier idioma. Dios envía a Hageo y Zacarías. La palabra de Hageo es tan suave como una bofetada: <em>"¿Es para vosotros tiempo, para vosotros, de morar en vuestras casas artesonadas, y esta casa está desierta?"</em> (Hageo 1:4). Traducción: ustedes han estado remodelando su sala mientras la casa de Dios tiene maleza creciendo por los cimientos. Zacarías anima con la línea que cada siervo cansado debe memorizar: <em>"No con ejército, ni con fuerza, sino con mi Espíritu, ha dicho Jehová de los ejércitos"</em> (Zacarías 4:6). Y luego la magnífica línea sobre la casa más pequeña de Zorobabel: <em>"La gloria postrera de esta casa será mayor que la primera"</em> (Hageo 2:9).</p>
+
+        <p>¿Mayor? Es más pequeña, más sencilla, sin arca. ¿Cómo es mayor?</p>
+
+        <p>Porque un día un carpintero de Nazaret atravesaría sus puertas.</p>
+
+        <p>No menosprecie el día de las pequeñeces. La cosa "más pequeña" en sus manos ahora mismo puede ser precisamente aquella en la que Cristo aparezca. Su modesto estudio bíblico con tres personas fieles. Su obediencia ordinaria que nadie aplaude. El templo que Zorobabel construyó era, por toda medida visible, un retroceso. Por la única medida que importa — los pies de Quién caminarían por él — fue el santuario más grande de la historia humana. El templo se completa en el 516 a.C. Setenta años casi al día después de que ardiera. Dios cumple Sus setentas (Jeremías 25:11–12).</p>
+
+        <h2>III. Esdras y Nehemías — rey y sacerdote, muro y Palabra</h2>
+        <p style="font-style: italic; color: #5b3a1f;">Esdras 7–10, Nehemías 1–13</p>
+
+        <p>Note algo fácil de pasar por alto. Zorobabel descendía de David — la línea real. Esdras descendía de Aarón — la línea sacerdotal. La restauración del pueblo de Dios necesita ambas. El rey para reconstruir. El sacerdote para limpiar. Muros sin Palabra dejan una fortaleza alrededor de un corazón vacío. Palabra sin muros deja un estudio bíblico que no sobrevivirá al próximo asedio. Dios siempre envía a ambos.</p>
+
+        <p>Esdras llega en el 458 a.C. — unos sesenta años después de terminado el templo. Es "escriba diligente en la ley de Moisés" (Esdras 7:6), y lo que lo hace un escriba diligente es el versículo tres líneas después: <em>"Esdras había preparado su corazón para inquirir la ley de Jehová y para cumplirla, y para enseñar en Israel"</em> (Esdras 7:10). Tres verbos en orden, y el orden importa. <em>Inquirir. Cumplir. Enseñar.</em> La mayoría de nosotros estamos dispuestos a inquirir. Un número sorprendente está dispuesto incluso a enseñar. El verbo del medio es el que se salta. Hay estudiantes de la Biblia por miles. Hay hacedores de la Biblia por decenas. Esdras era un hacedor.</p>
+
+        <p>Llega para encontrar que el pueblo que tiene el templo no tiene la Palabra. Se han casado con naciones paganas vecinas — incluyendo los sacerdotes y levitas, las mismas personas que debían guardar la línea. Esdras rasga sus vestiduras, se sienta en el polvo, y ora una de las grandes confesiones corporativas de la Escritura (Esdras 9). La reforma es dolorosa. La comunidad se separa de las esposas extranjeras. Es brutal y es necesaria, porque la vez anterior que Israel dejó el matrimonio pagano sin control, terminaron en Babilonia. No se arregla el segundo exilio repitiendo la causa del primero.</p>
+
+        <p>Luego viene Nehemías, trece años después — 445 a.C. Es el copero del rey Artajerjes en la capital persa. Su hermano trae noticias de Jerusalén: el muro está derribado, las puertas quemadas, el pueblo en gran aflicción. Nehemías llora, ayuna, ora — y luego ora durante <em>cuatro meses</em> antes de decir una palabra al rey (compare Nehemías 1:1 con 2:1). Cuatro meses de "Señor, soy Tuyo, pero quiero pedir al rey cuando Tú me digas que pida al rey."</p>
+
+        <p>La mayoría de nosotros, cuando queremos algo, le pedimos a la autoridad visible antes de pedirle a la invisible. Nehemías invirtió eso. Para cuando abrió la boca ante Artajerjes, la conversación ya había sido resuelta en el cielo; Artajerjes solo estaba firmando la liberación. Si su valentía con los hombres es mayor que su valentía con Dios, tiene el orden espiritual de las operaciones al revés.</p>
+
+        <p>Nehemías va. Inspecciona los muros de noche. Reúne al pueblo. Cincuenta y dos días después el muro está terminado (Nehemías 6:15) — a pesar de Sanbalat, Tobías y Gesem. Tres enemigos, tres tácticas. Sanbalat se burla: "¿Qué hacen estos débiles judíos?" Tobías se infiltra con conexiones internas, alianzas matrimoniales y sabotaje silencioso. Gesem se une a la conspiración y trata de atraer a Nehemías a una trampa, luego contrata a un falso profeta para desacreditarlo. Cada líder que alguna vez ha tratado de hacer algo para Dios se ha encontrado con alguna combinación de esos tres. El burlador. El infiltrador. El profeta a sueldo. La respuesta de Nehemías es el manual de una sola línea para el ministerio bajo fuego: <em>"Yo hago una grande obra, y no puedo bajar; ¿por qué cesará la obra, dejándola yo para ir a vosotros?"</em> (Nehemías 6:3). Quédese en el muro.</p>
+
+        <p>Luego Esdras y Nehemías hacen lo que cada avivamiento en la Escritura hace eventualmente: leen la Palabra. Pública, lenta, con explicación. Nehemías 8:8 es, dicho sea de paso, la primera descripción del trabajo de la predicación expositiva en la Biblia — leyeron claramente, dieron el sentido, y ayudaron a entender la lectura. El pueblo llora cuando la oye. Y los líderes los levantan: <em>"No os entristezcáis, porque el gozo de Jehová es vuestra fuerza"</em> (Nehemías 8:10). Celebran la Fiesta de los Tabernáculos por primera vez correctamente desde Josué. Renuevan el pacto por escrito, y los líderes firman el documento con sus propios nombres. Muro y Palabra juntos — y no se puede tener uno sin el otro por mucho tiempo. Nehemías construyó ambos.</p>
+
+        <h2>IV. Ester — el Dios cuyo nombre nunca se menciona, cuya mano está en cada página</h2>
+        <p style="font-style: italic; color: #5b3a1f;">Ester 1–10</p>
+
+        <p>El libro de Ester es famoso por la razón equivocada — por lo que no dice. El nombre de Dios aparece cero veces en 167 versículos. Sin embargo Sus huellas están en cada página. No se necesita Su nombre impreso cuando Su caligrafía está por todas partes.</p>
+
+        <p>Ester es una huérfana judía en Persia (alrededor del 480 a.C., en el intervalo entre el regreso de Zorobabel y el de Esdras). Vasti es depuesta; Ester es coronada. Su primo Mardoqueo escucha un complot de asesinato, lo reporta, y — por razones narrativas que parecen coincidencia — no recibe recompensa todavía. Amán el agagueo (observe el apellido — los mismos amalecitas que Saúl se negó a destruir en 1 Samuel 15 ahora están de vuelta, cuatrocientos años después, tratando de destruir a los judíos; obediencia diferida es juicio retrasado) sube en la corte y se enfurece cuando Mardoqueo no se inclina. Echa suertes — <em>pur</em> — para determinar el día de la destrucción judía. La suerte cae once meses después, dándole a Ester el tiempo que no sabía que necesitaba.</p>
+
+        <p>La línea de Mardoqueo a Ester es la más famosa del libro y una de las más silenciosamente devastadoras de la Escritura: <em>"¿Y quién sabe si para esta hora has llegado al reino?"</em> (Ester 4:14). Note que no dice <em>definitivamente has llegado.</em> Dice <em>quién sabe.</em> Porque el llamado en su vida raramente se confirma con certeza antes de que usted obedezca. La fe camina hacia la sala del trono antes de que el cetro haya sido extendido. Ester ayuna tres días, entra sin ser llamada en la sala del trono (delito capital), y el rey extiende el cetro.</p>
+
+        <p>Luego viene la noche en que el rey no puede dormir. Pide los registros. Se abren en el lugar donde Mardoqueo había salvado su vida y nunca había sido honrado. A la mañana siguiente Amán entra para pedir la horca de Mardoqueo y termina paseando a Mardoqueo por las calles con la túnica del rey. Esa misma noche Amán está en la horca que construyó para Mardoqueo. Los judíos se defienden el día señalado y prevalecen. La fiesta de Purim se establece y todavía se celebra. La suerte que Amán echó contra el pueblo de Dios se convierte en la fiesta que celebra su preservación.</p>
+
+        <p>¿Coincidencia? La perfectamente sincronizada desafiante de Vasti. El complot que Mardoqueo escucha. La suerte echada a once meses. El insomnio del rey la noche correcta. El rollo abriéndose en la página correcta. Amán entrando en el momento equivocado. La túnica. La horca. Cada capítulo es lo que los lectores luego llamaron la <em>historia inferior</em>. Cada capítulo tiene una <em>historia superior</em> oculta. Nosotros vemos la inferior; Dios escribe la superior.</p>
+
+        <h3>Un Dios silencioso</h3>
+        <p>La gente a veces se queja de que el Dios de Ester nunca dice nada. Habló audiblemente desde una zarza a Moisés y a un niño en un tabernáculo llamado Samuel; incluso habló a través de un asno a Balaam. ¿Por qué silencios tan largos con el resto de nosotros? Cuatro respuestas breves de este libro.</p>
+
+        <p><em>Primero, el silencio requiere fe, no vista.</em> El Cristo resucitado le dijo a Tomás: <em>"Bienaventurados los que no vieron, y creyeron"</em> (Juan 20:29). Un Dios que respondiera cada pregunta audiblemente formaría un tipo de discípulo diferente del tipo que Él está realmente formando. <em>Segundo, el silencio fuerza la lucha que hace crecer el alma.</em> Una fe que nunca ha tenido que luchar es una fe que nunca ha crecido más allá del número de calzado. <em>Tercero, el silencio produce madurez.</em> Tenemos cinco sentidos externos; el creyente está destinado a desarrollar un sexto — los ojos del corazón (Efesios 1:18) — y ese sexto sentido no se ejercita cuando los primeros cinco están haciendo todo el trabajo. <em>Cuarto, el silencio no significa ausencia.</em> La providencia es el nombre del silencio. Hebreos 1:3 dice que Cristo <em>sustenta todas las cosas con la palabra de Su poder</em>. El Señor cuyo nombre no está impreso en Ester es el Señor cuya caligrafía llena cada párrafo. Y Él es el Señor de su capítulo no leído también. La semana en que no puede verlo moverse — Él se está moviendo. Los años que parecen coincidencia — no lo son. Él no siempre firma con Su nombre la página. Pero cada oración es Suya.</p>
+
+        <h2>Cristo en Esdras — Ester</h2>
+        <p>Tres convicciones para llevar y nunca soltar.</p>
+
+        <p><strong>Primera — Cristo es el Templo verdadero, y el Muro verdadero.</strong> Zorobabel construyó el cuadro; Cristo construyó la sustancia. Hageo 2:9 prometió que la gloria postrera sobrepasaría a la primera. Lo hizo, el día en que el Hijo de María atravesó las puertas. Y Cristo es también el muro de Nehemías finalmente terminado — solo que esta vez construido de piedras vivas, con puertas que nunca se cierran (1 Pedro 2:5; Apocalipsis 21).</p>
+
+        <p><strong>Segunda — Cristo es la Palabra hecha carne de Esdras 7:10.</strong> Esdras <em>inquirió</em> la Ley, <em>cumplió</em> la Ley, y <em>enseñó</em> la Ley. Cristo es la Ley en persona — Aquel que <em>era</em> en el principio lo que Esdras pasó su vida tratando de copiar. <em>"En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios"</em> (Juan 1:1). Esdras era un gran escriba. Cristo es el Autor.</p>
+
+        <p><strong>Tercera — Cristo es la Providencia que no podíamos ver.</strong> El Dios oculto de Ester salió del telón en una colina afuera de Jerusalén y se dejó ver. La Cruz parecía, el viernes, la peor coincidencia en la historia humana — como si Amán hubiera ganado. Para el domingo estaba claro que el peor día en la historia humana fue el día en que la mano oculta de Dios finalmente se abrió. <em>Quien haya entre vosotros de Su pueblo — suba.</em> El exilio terminó. El camino a casa está abierto. El decreto de Ciro del Antiguo Testamento se ha convertido en el llamado evangélico del Nuevo: suba.</p>
+    </div>
+</div>
+
+<!-- TRACK BANNER + EXAM -->
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 6 — 30 Preguntas</span></h2>
+    <div class="track-banner" id="trackBanner"></div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button class="action-btn" id="submitExamBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="action-btn reset" id="resetExamBtn"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+    </div>
+    <div id="examResult" class="exam-result" style="display:none;"></div>
+</div>
+
+</div>
+
+<script>
+const COURSE_KEY = 'cts_ots_progress';
+const STUDENT_KEY = 'cts_student';
+const UNIT_NUM = 6;
+const TOTAL_UNITS = 13;
+const NEXT_UNIT_HREF = 'CTSUnit7.html';
+const PREV_UNIT_HREF = 'CTSUnit5.html';
+const UNIT_PASSED_KEY = 'cts_ots_unit6_passed';
+const UNIT_STATE_KEY = 'cts_ots_unit6_state';
+const LOCKOUT_KEY = 'cts_ots_unit6_lockout';
+const PASS_THRESHOLD_MC = 18;
+const PASS_THRESHOLD_SA = 9;
+const LOCKOUT_MS = 15 * 60 * 1000; // legacy ceiling (Masters); see lockMinutes()
+// Track-aware review wait: gentle 2-min pause for lay/Certificate, full 15 min for Masters.
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+function lockoutMs() { return lockMinutes() * 60 * 1000; }
+const REDIRECT_MS = 3000;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_ots_unit6_mc_passed';
+const SA_LOCK_KEY = 'cts_ots_unit6_sa_lockout';
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = new Array(20).fill(false);
+let unitPassed = localStorage.getItem(UNIT_PASSED_KEY) === 'true';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10)
+        : parseInt(localStorage.getItem(LOCKOUT_KEY) || '0', 10);
+}
+let lockUntil = activeLockUntil();
+let progress = JSON.parse(localStorage.getItem(COURSE_KEY) || '{}');
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+
+function getTrack() { if (student.program === 'Master of Divinity') return 'mdiv';
+    if (student.program === 'Master of Theology') return 'thm';
+    return 'cert'; }
+function isMDiv() { return getTrack() === 'mdiv'; }
+function isMastersLevel() { const t = getTrack(); return t === 'mdiv' || t === 'thm'; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(`cts_ots_unit${i}_passed`) === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (unitPassed) location.href = NEXT_UNIT_HREF;
+    else alert(currentLang === 'en' ? 'Please pass Unit 6 first.' : 'Por favor apruebe la Unidad 6 primero.');
+};
+document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_UNIT_HREF; };
+
+function loadReg() {
+    let saved = localStorage.getItem(STUDENT_KEY);
+    if (saved) {
+        student = JSON.parse(saved);
+        document.getElementById('studentName').value = student.name || '';
+        document.getElementById('studentEmail').value = student.email || '';
+        document.getElementById('studentCountry').value = student.country || '';
+        document.getElementById('studentProgram').value = student.program || 'Certificate of Ministry';
+    }
+}
+function saveReg() {
+    student.name = document.getElementById('studentName').value.trim();
+    student.email = document.getElementById('studentEmail').value.trim();
+    student.country = document.getElementById('studentCountry').value.trim();
+    student.program = document.getElementById('studentProgram').value;
+    if (student.name && student.email) localStorage.setItem(STUDENT_KEY, JSON.stringify(student));
+}
+['studentName','studentEmail','studentCountry'].forEach(id => {
+    document.getElementById(id).addEventListener('change', saveReg);
+});
+document.getElementById('studentProgram').addEventListener('change', () => {
+    saveReg(); renderTrackBanner(); renderQuestions();
+});
+
+function renderTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    if (!banner) return;
+    if (isMastersLevel()) {
+        banner.innerHTML = currentLang === 'en'
+            ? ('<strong>' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ' Track:</strong> Answer all 30 questions. To pass you need <strong>18/20</strong> multiple choice <em>and</em> <strong>9/10</strong> short answer, judged independently. Short answers may be written in English or Spanish.')
+            : ('<strong>Pista ' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ':</strong> Responda las 30 preguntas. Para aprobar necesita <strong>18/20</strong> en opción múltiple <em>y</em> <strong>9/10</strong> en respuesta corta, evaluadas independientemente. Las respuestas cortas pueden escribirse en inglés o español.');
+    } else {
+        banner.innerHTML = currentLang === 'en'
+            ? '<strong>Certificate Track:</strong> Answer questions 1–20 (multiple choice). To pass you need <strong>18/20</strong> (90%). Short-answer questions are optional practice and not graded.'
+            : '<strong>Pista Certificado:</strong> Responda las preguntas 1–20 (opción múltiple). Para aprobar necesita <strong>18/20</strong> (90%). Las preguntas de respuesta corta son práctica opcional y no se califican.';
+    }
+}
+
+function saveState() {
+    localStorage.setItem(UNIT_STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers, mcRevealed }));
+}
+function loadState() {
+    const raw = localStorage.getItem(UNIT_STATE_KEY);
+    if (!raw) return;
+    try {
+        const s = JSON.parse(raw);
+        if (Array.isArray(s.mcAnswers)) mcAnswers = s.mcAnswers;
+        if (Array.isArray(s.kwAnswers)) kwAnswers = s.kwAnswers;
+        if (Array.isArray(s.mcRevealed)) mcRevealed = s.mcRevealed;
+    } catch (e) {}
+}
+
+const mcQuestions = [
+    { id:1, en:"1. The king of Persia who issued the decree allowing the Jews to return from exile was:", es:"1. El rey de Persia que emitió el decreto permitiendo a los judíos regresar del exilio fue:",
+      optionsEn:["Artaxerxes","Xerxes","Cyrus","Darius"],
+      optionsEs:["Artajerjes","Jerjes","Ciro","Darío"], correct:"C",
+      fcEn:"Correct. Cyrus, 538 BC. Isaiah named him by name 150 years before he was born (Isaiah 44:28).",
+      fcEs:"Correcto. Ciro, 538 a.C. Isaías lo nombró por su nombre 150 años antes de que naciera (Isaías 44:28).",
+      fiEn:"Cyrus the Persian issued the decree in 538 BC — exactly fulfilling Isaiah 44:28 written 150 years earlier.",
+      fiEs:"Ciro el persa emitió el decreto en el 538 a.C. — cumpliendo exactamente Isaías 44:28 escrito 150 años antes." },
+    { id:2, en:"2. The first group of returning exiles was led by:", es:"2. El primer grupo de exiliados que regresaron fue liderado por:",
+      optionsEn:["Ezra","Nehemiah","Zerubbabel","Mordecai"],
+      optionsEs:["Esdras","Nehemías","Zorobabel","Mardoqueo"], correct:"C",
+      fcEn:"Correct. Zerubbabel — descended from David — led the first return. The kingly line was moving again toward Bethlehem.",
+      fcEs:"Correcto. Zorobabel — descendiente de David — lideró el primer retorno. La línea real estaba moviéndose de nuevo hacia Belén.",
+      fiEn:"Zerubbabel, a descendant of David, led the first return of about 50,000 exiles in 538 BC.",
+      fiEs:"Zorobabel, descendiente de David, lideró el primer retorno de unos 50,000 exiliados en el 538 a.C." },
+    { id:3, en:"3. The temple was completed in 516 BC during the reign of which Persian king?", es:"3. El templo se completó en 516 a.C. durante el reinado de qué rey persa?",
+      optionsEn:["Cyrus","Artaxerxes I","Xerxes","Darius I"],
+      optionsEs:["Ciro","Artajerjes I","Jerjes","Darío I"], correct:"D",
+      fcEn:"Correct. Darius I confirmed Cyrus's original decree and the temple was finished — seventy years almost to the day after it burned. God keeps His seventies.",
+      fcEs:"Correcto. Darío I confirmó el decreto original de Ciro y el templo fue terminado — setenta años casi al día después de que ardiera. Dios cumple Sus setentas.",
+      fiEn:"Darius I reigned 522–486 BC. He confirmed Cyrus's decree, and the temple was completed in 516 BC.",
+      fiEs:"Darío I reinó 522–486 a.C. Confirmó el decreto de Ciro, y el templo se completó en el 516 a.C." },
+    { id:4, en:"4. The prophets who encouraged the rebuilding of the temple were:", es:"4. Los profetas que animaron la reconstrucción del templo fueron:",
+      optionsEn:["Isaiah and Jeremiah","Ezekiel and Daniel","Malachi and Joel","Haggai and Zechariah"],
+      optionsEs:["Isaías y Jeremías","Ezequiel y Daniel","Malaquías y Joel","Hageo y Zacarías"], correct:"D",
+      fcEn:"Correct. Haggai with his slap — 'Is it time for you to dwell in your paneled houses?' — and Zechariah with his promise — 'not by might nor by power, but by My Spirit.'",
+      fcEs:"Correcto. Hageo con su bofetada — '¿Es para vosotros tiempo de morar en vuestras casas artesonadas?' — y Zacarías con su promesa — 'no con ejército, ni con fuerza, sino con mi Espíritu.'",
+      fiEn:"Haggai (1:4) and Zechariah (4:6) preached during the 16-year stall and got the work moving again.",
+      fiEs:"Hageo (1:4) y Zacarías (4:6) predicaron durante el estancamiento de 16 años y reanudaron la obra." },
+    { id:5, en:"5. Ezra was a:", es:"5. Esdras era:",
+      optionsEn:["Priest and scribe","Cupbearer to the king","Governor of Judah","Prophet"],
+      optionsEs:["Sacerdote y escriba","Copero del rey","Gobernador de Judá","Profeta"], correct:"A",
+      fcEn:"Correct. Ezra — Aaron's line — restored the Word. Zerubbabel — David's line — restored the temple. Restoration always needs both: king and priest.",
+      fcEs:"Correcto. Esdras — la línea de Aarón — restauró la Palabra. Zorobabel — la línea de David — restauró el templo. La restauración siempre necesita ambas: rey y sacerdote.",
+      fiEn:"Ezra was a priest (descended from Aaron) and a 'skilled scribe in the Law of Moses' (Ezra 7:6).",
+      fiEs:"Esdras era sacerdote (descendiente de Aarón) y 'escriba diligente en la ley de Moisés' (Esdras 7:6)." },
+    { id:6, en:"6. Ezra discovered that the people had sinned by:", es:"6. Esdras descubrió que el pueblo había pecado al:",
+      optionsEn:["Neglecting the temple","Intermarrying with pagan nations","Worshipping idols in the temple","Rebuilding the walls improperly"],
+      optionsEs:["Desatender el templo","Casarse con naciones paganas","Adorar ídolos en el templo","Reconstruir los muros incorrectamente"], correct:"B",
+      fcEn:"Correct. The same sin that put them in Babylon. You don't fix the second exile by repeating the cause of the first.",
+      fcEs:"Correcto. El mismo pecado que los puso en Babilonia. No se arregla el segundo exilio repitiendo la causa del primero.",
+      fiEn:"Even the priests and Levites had intermarried with pagan nations (Ezra 9). Ezra tore his clothes and led a national confession.",
+      fiEs:"Incluso los sacerdotes y levitas se habían casado con naciones paganas (Esdras 9). Esdras rasgó sus vestiduras y guió una confesión nacional." },
+    { id:7, en:"7. Nehemiah served as cupbearer to King:", es:"7. Nehemías sirvió como copero del rey:",
+      optionsEn:["Cyrus","Darius","Xerxes","Artaxerxes"],
+      optionsEs:["Ciro","Darío","Jerjes","Artajerjes"], correct:"D",
+      fcEn:"Correct. Artaxerxes I, in 445 BC. Nehemiah prayed four months before he asked Artaxerxes one word.",
+      fcEs:"Correcto. Artajerjes I, en el 445 a.C. Nehemías oró cuatro meses antes de decirle una palabra a Artajerjes.",
+      fiEn:"Nehemiah was cupbearer to Artaxerxes I — a position of great trust and access in the Persian court.",
+      fiEs:"Nehemías era copero de Artajerjes I — un puesto de gran confianza y acceso en la corte persa." },
+    { id:8, en:"8. The walls of Jerusalem were rebuilt in:", es:"8. Los muros de Jerusalén fueron reconstruidos en:",
+      optionsEn:["52 days","100 days","1 year","3 years"],
+      optionsEs:["52 días","100 días","1 año","3 años"], correct:"A",
+      fcEn:"Correct. Fifty-two days (Nehemiah 6:15). 'I am doing a great work, so that I cannot come down.' Stay on the wall.",
+      fcEs:"Correcto. Cincuenta y dos días (Nehemías 6:15). 'Yo hago una grande obra, y no puedo bajar.' Quédese en el muro.",
+      fiEn:"Nehemiah 6:15 — the wall was finished in 52 days despite Sanballat, Tobiah, and Geshem's opposition.",
+      fiEs:"Nehemías 6:15 — el muro se terminó en 52 días a pesar de la oposición de Sanbalat, Tobías y Gesem." },
+    { id:9, en:"9. Nehemiah's primary enemies were:", es:"9. Los principales enemigos de Nehemías eran:",
+      optionsEn:["Samaritans and Edomites","Sanballat, Tobiah, and Geshem","Philistines and Moabites","Egyptians and Assyrians"],
+      optionsEs:["Samaritanos y edomitas","Sanbalat, Tobías y Gesem","Filisteos y moabitas","Egipcios y asirios"], correct:"B",
+      fcEn:"Correct. Three tactics: the mocker (Sanballat), the infiltrator (Tobiah), and the hired prophet (Geshem). Every leader meets some combination of those three.",
+      fcEs:"Correcto. Tres tácticas: el burlador (Sanbalat), el infiltrador (Tobías), y el profeta a sueldo (Gesem). Cada líder se encuentra con alguna combinación de los tres.",
+      fiEn:"Sanballat the mocker, Tobiah the infiltrator, and Geshem the conspirator — three enemies, three tactics in Nehemiah 4–6.",
+      fiEs:"Sanbalat el burlador, Tobías el infiltrador, y Gesem el conspirador — tres enemigos, tres tácticas en Nehemías 4–6." },
+    { id:10, en:"10. The book of Esther does not mention the name of:", es:"10. El libro de Ester no menciona el nombre de:",
+      optionsEn:["Mordecai","Haman","God","Ahasuerus"],
+      optionsEs:["Mardoqueo","Amán","Dios","Asuero"], correct:"C",
+      fcEn:"Correct. Zero mentions of God's name in 167 verses. You don't need His name printed when His handwriting is everywhere.",
+      fcEs:"Correcto. Cero menciones del nombre de Dios en 167 versículos. No se necesita Su nombre impreso cuando Su caligrafía está por todas partes.",
+      fiEn:"God's name appears zero times in the book of Esther — yet His providence is on every page.",
+      fiEs:"El nombre de Dios aparece cero veces en el libro de Ester — sin embargo Su providencia está en cada página." },
+    { id:11, en:"11. Haman cast lots (pur) to determine:", es:"11. Amán echó suertes (pur) para determinar:",
+      optionsEn:["The new queen","The building of the wall","The rebuilding of the temple","The day to destroy the Jews"],
+      optionsEs:["La nueva reina","La construcción del muro","La reconstrucción del templo","El día para destruir a los judíos"], correct:"D",
+      fcEn:"Correct. The lot fell eleven months out — giving Esther time she didn't know she needed. God overrules even Haman's lots.",
+      fcEs:"Correcto. La suerte cayó once meses después — dándole a Ester el tiempo que no sabía que necesitaba. Dios anula incluso las suertes de Amán.",
+      fiEn:"Haman cast 'pur' (lots) to choose the day for Jewish destruction. The Feast of Purim takes its name from his lots.",
+      fiEs:"Amán echó 'pur' (suertes) para escoger el día de la destrucción judía. La Fiesta de Purim toma su nombre de sus suertes." },
+    { id:12, en:"12. Esther risked her life by:", es:"12. Ester arriesgó su vida al:",
+      optionsEn:["Going to the king without being summoned","Refusing to marry the king","Helping rebuild the temple","Confronting the Persian army"],
+      optionsEs:["Ir ante el rey sin ser llamada","Negarse a casarse con el rey","Ayudar a reconstruir el templo","Confrontar al ejército persa"], correct:"A",
+      fcEn:"Correct. A capital offense in the Persian court. Faith walks toward the throne room before the scepter has been extended.",
+      fcEs:"Correcto. Un delito capital en la corte persa. La fe camina hacia la sala del trono antes de que el cetro haya sido extendido.",
+      fiEn:"Esther 4:11–16 — going unsummoned into the king's presence was a capital offense unless he extended the scepter.",
+      fiEs:"Ester 4:11–16 — entrar sin ser llamada a la presencia del rey era un delito capital a menos que él extendiera el cetro." },
+    { id:13, en:"13. The Jewish feast of Purim commemorates:", es:"13. La fiesta judía de Purim conmemora:",
+      optionsEn:["The rebuilding of the temple","The deliverance from Haman's plot","The giving of the Law","The crossing of the Red Sea"],
+      optionsEs:["La reconstrucción del templo","La liberación del complot de Amán","La entrega de la Ley","El cruce del Mar Rojo"], correct:"B",
+      fcEn:"Correct. The lot Haman cast against God's people became the festival celebrating their preservation. Nothing thwarts God's will.",
+      fcEs:"Correcto. La suerte que Amán echó contra el pueblo de Dios se convirtió en la fiesta que celebra su preservación. Nada frustra la voluntad de Dios.",
+      fiEn:"Purim, established in Esther 9, is still celebrated by Jews worldwide every spring.",
+      fiEs:"Purim, establecida en Ester 9, todavía se celebra entre los judíos de todo el mundo cada primavera." },
+    { id:14, en:"14. The phrase 'for such a time as this' (Esther 4:14) is spoken by:", es:"14. La frase 'para esta hora' (Ester 4:14) es dicha por:",
+      optionsEn:["Esther","Haman","Mordecai","The king"],
+      optionsEs:["Ester","Amán","Mardoqueo","El rey"], correct:"C",
+      fcEn:"Correct. Mordecai to Esther. And note: he doesn't say 'you definitely have' — he says 'who knows.' Faith obeys before certainty arrives.",
+      fcEs:"Correcto. Mardoqueo a Ester. Y note: no dice 'definitivamente has llegado' — dice 'quién sabe.' La fe obedece antes de que llegue la certeza.",
+      fiEn:"Mordecai speaks the famous line to Esther in Esther 4:14 — urging her to risk her life for her people.",
+      fiEs:"Mardoqueo dice la famosa línea a Ester en Ester 4:14 — instándola a arriesgar su vida por su pueblo." },
+    { id:15, en:"15. The second return of exiles, led by Ezra, occurred around:", es:"15. El segundo regreso de los exiliados, liderado por Esdras, ocurrió alrededor de:",
+      optionsEn:["538 BC","516 BC","458 BC","445 BC"],
+      optionsEs:["538 a.C.","516 a.C.","458 a.C.","445 a.C."], correct:"C",
+      fcEn:"Correct. 458 BC — about 60 years after the temple was finished. Ezra found that the people who had the temple didn't have the Word.",
+      fcEs:"Correcto. 458 a.C. — unos 60 años después de terminado el templo. Esdras encontró que el pueblo que tenía el templo no tenía la Palabra.",
+      fiEn:"Ezra led the second return in 458 BC during the reign of Artaxerxes I.",
+      fiEs:"Esdras lideró el segundo retorno en el 458 a.C. durante el reinado de Artajerjes I." },
+    { id:16, en:"16. Nehemiah returned to Jerusalem around:", es:"16. Nehemías regresó a Jerusalén alrededor de:",
+      optionsEn:["538 BC","516 BC","458 BC","445 BC"],
+      optionsEs:["538 a.C.","516 a.C.","458 a.C.","445 a.C."], correct:"D",
+      fcEn:"Correct. 445 BC, thirteen years after Ezra. Nehemiah prayed for four months before he opened his mouth to the king.",
+      fcEs:"Correcto. 445 a.C., trece años después de Esdras. Nehemías oró cuatro meses antes de abrir la boca al rey.",
+      fiEn:"Nehemiah returned in 445 BC during the reign of Artaxerxes I to rebuild the walls.",
+      fiEs:"Nehemías regresó en el 445 a.C. durante el reinado de Artajerjes I para reconstruir los muros." },
+    { id:17, en:"17. The primary purpose of Ezra's reforms was to:", es:"17. El propósito principal de las reformas de Esdras era:",
+      optionsEn:["Rebuild the walls","Restore the purity of the covenant community","Attack neighboring nations","Build a new temple"],
+      optionsEs:["Reconstruir los muros","Restaurar la pureza de la comunidad del pacto","Atacar a las naciones vecinas","Construir un nuevo templo"], correct:"B",
+      fcEn:"Correct. Ezra 7:10 — he 'sought, did, and taught' the Law. Restoration without the Word is reconstruction with empty hearts.",
+      fcEs:"Correcto. Esdras 7:10 — 'inquirió, cumplió y enseñó' la Ley. La restauración sin la Palabra es reconstrucción con corazones vacíos.",
+      fiEn:"Ezra's reforms (Ezra 9–10, Nehemiah 8) confronted intermarriage and restored covenant faithfulness through reading the Law.",
+      fiEs:"Las reformas de Esdras (Esdras 9–10, Nehemías 8) confrontaron los matrimonios mixtos y restauraron la fidelidad pactal mediante la lectura de la Ley." },
+    { id:18, en:"18. Haman was hanged on the gallows he had built for:", es:"18. Amán fue ahorcado en la horca que había construido para:",
+      optionsEn:["Mordecai","Esther","The king","The Jews"],
+      optionsEs:["Mardoqueo","Ester","El rey","Los judíos"], correct:"A",
+      fcEn:"Correct. The gallows Haman built for Mordecai became Haman's own. Nothing can thwart God's will.",
+      fcEs:"Correcto. La horca que Amán construyó para Mardoqueo se volvió la suya. Nada puede frustrar la voluntad de Dios.",
+      fiEn:"In Esther 7, the king ordered Haman hanged on the very gallows Haman had built for Mordecai.",
+      fiEs:"En Ester 7, el rey ordenó que Amán fuera ahorcado en la misma horca que Amán había construido para Mardoqueo." },
+    { id:19, en:"19. The rebuilding of the walls was important because it:", es:"19. La reconstrucción de los muros era importante porque:",
+      optionsEn:["Provided military protection and restored Jerusalem's identity","Increased tax revenue","Allowed the temple to be rebuilt","Strengthened trade routes"],
+      optionsEs:["Proporcionaba protección militar y restauraba la identidad de Jerusalén","Aumentaba los ingresos fiscales","Permitía la reconstrucción del templo","Fortalecía las rutas comerciales"], correct:"A",
+      fcEn:"Correct. A wall without the Word is a fortress around an empty heart, but a Word without a wall is a Bible study that won't survive the next siege. Nehemiah built both.",
+      fcEs:"Correcto. Un muro sin la Palabra es una fortaleza alrededor de un corazón vacío, pero una Palabra sin muro es un estudio bíblico que no sobrevivirá al próximo asedio. Nehemías construyó ambos.",
+      fiEn:"The walls gave Jerusalem military protection, restored its civic identity, and made covenant community possible.",
+      fiEs:"Los muros le dieron a Jerusalén protección militar, restauraron su identidad cívica, e hicieron posible la comunidad del pacto." },
+    { id:20, en:"20. The overall message of Ezra, Nehemiah, and Esther is:", es:"20. El mensaje general de Esdras, Nehemías y Ester es:",
+      optionsEn:["God punishes without mercy","God is faithful to His covenant and preserves His people","Only the strong survive","The Law is irrelevant"],
+      optionsEs:["Dios castiga sin misericordia","Dios es fiel a Su pacto y preserva a Su pueblo","Solo los fuertes sobreviven","La Ley es irrelevante"], correct:"B",
+      fcEn:"Correct. God walked His exiles home and kept them home — even in the chapters where He never speaks His own name. The Cyrus decree has become the gospel call: come up.",
+      fcEs:"Correcto. Dios caminó con Sus exiliados a casa y los mantuvo allí — incluso en los capítulos donde nunca pronuncia Su propio nombre. El decreto de Ciro se ha convertido en el llamado evangélico: suba.",
+      fiEn:"All three books together demonstrate God's covenant faithfulness in preserving His people during and after the exile.",
+      fiEs:"Los tres libros juntos demuestran la fidelidad pactal de Dios en preservar a Su pueblo durante y después del exilio." }
+];
+
+const kwQuestions = [
+    { id:21, en:"21. Explain the significance of Cyrus's decree (Ezra 1) and how it fulfills Isaiah 44:28.",
+      es:"21. Explique el significado del decreto de Ciro (Esdras 1) y cómo cumple Isaías 44:28.",
+      kw_en:[["cyrus", "cyrus king of persia", "persian king"], ["decree", "proclamation", "release order", "edict"], ["isaiah", "isaiah 44", "named by isaiah", "prophecy of isaiah"], ["fulfill", "fulfillment", "fulfilled", "came to pass", "exactly as prophesied"], ["return", "go up", "go home", "rebuild jerusalem"]],
+      kw_es:[["ciro", "ciro rey de persia", "rey persa"], ["decreto", "proclamación", "orden de liberación", "edicto"], ["isaías", "isaías 44", "nombrado por isaías", "profecía de isaías"], ["cumplir", "cumplimiento", "cumplió", "se cumplió", "tal como profetizado"], ["regreso", "subir", "volver a casa", "reedificar jerusalén"]],
+      modelEn:"In 538 B.C. Cyrus, king of Persia, issued a decree releasing God's people to go up to Jerusalem and rebuild His house. The significance is staggering, because Isaiah 44:28 had named Cyrus by name about a hundred and fifty years before he was born — long before the Persian Empire even existed. The God who knows the end from the beginning had already filed the paperwork on the man who would sign the release order. Cyrus's decree fulfilled that prophecy exactly, showing God's sovereign control over kings and history, and it became the line on which the return from exile began.",
+      modelEs:"En el 538 a.C. Ciro, rey de Persia, emitió un decreto liberando al pueblo de Dios para subir a Jerusalén y reedificar Su casa. Lo significativo es asombroso, porque Isaías 44:28 había nombrado a Ciro por su nombre unos ciento cincuenta años antes de que naciera — mucho antes de que existiera el Imperio Persa. El Dios que conoce el fin desde el principio ya había preparado los papeles del hombre que firmaría la orden de liberación. El decreto de Ciro cumplió esa profecía exactamente, mostrando el control soberano de Dios sobre reyes e historia, y fue la línea sobre la cual comenzó el regreso del exilio." },
+    { id:22, en:"22. Describe the rebuilding of the temple. Why did the old men weep while the young men shouted (Ezra 3)?",
+      es:"22. Describa la reconstrucción del templo. ¿Por qué lloraban los ancianos mientras gritaban los jóvenes (Esdras 3)?",
+      kw_en:[["temple", "second temple", "new temple"], ["altar", "worship before walls"], ["foundation", "laid the foundation"], ["wept", "weeping", "wept aloud", "old men wept"], ["shouted", "shouts of joy", "young men shouted"], ["solomon", "solomon's temple", "former temple", "what was lost"]],
+      kw_es:[["templo", "segundo templo", "nuevo templo"], ["altar", "adoración antes de los muros"], ["fundamento", "pusieron el fundamento", "cimiento"], ["lloraron", "llanto", "lloraban fuerte", "ancianos lloraban"], ["gritaron", "gritos de gozo", "jóvenes gritaban"], ["salomón", "templo de salomón", "templo anterior", "lo que se perdió"]],
+      modelEn:"When the returned exiles laid the foundation of the new temple (Ezra 3), the young men shouted for joy while the old men, who remembered Solomon's temple, wept so loudly that no one could tell the shouting from the weeping. The old men wept because this new temple was smaller, had less gold, and had no ark of the covenant, which was lost in 586 B.C. and never recovered — they looked at what had been lost. The young looked at what was being built. Both responses were honest and both were heard. God does not ask us to choose between gratitude for what He is doing and grief for what was lost.",
+      modelEs:"Cuando los exiliados que regresaron pusieron el fundamento del nuevo templo (Esdras 3), los jóvenes gritaban de gozo mientras los ancianos, que recordaban el templo de Salomón, lloraban tan fuerte que nadie podía distinguir el grito del llanto. Los ancianos lloraban porque este nuevo templo era más pequeño, tenía menos oro, y no tenía el arca del pacto, que se perdió en el 586 a.C. y nunca se recuperó — miraban lo que se había perdido. Los jóvenes miraban lo que se estaba edificando. Ambas respuestas fueron sinceras y ambas fueron oídas. Dios no nos pide escoger entre la gratitud por lo que hace y el dolor por lo que se perdió." },
+    { id:23, en:"23. Explain how Zerubbabel (Davidic line) and Ezra (Aaronic line) together picture the king-and-priest pattern of restoration.",
+      es:"23. Explique cómo Zorobabel (línea davídica) y Esdras (línea aarónica) juntos figuran el patrón rey-y-sacerdote de la restauración.",
+      kw_en:[["zerubbabel"], ["king", "kingly line", "davidic line", "line of david", "royal"], ["ezra"], ["priest", "priestly line", "aaronic line", "line of aaron"], ["restoration", "restore", "rebuilt", "cleanse"], ["both", "two lines", "king and priest", "united in christ"]],
+      kw_es:[["zorobabel"], ["rey", "linaje real", "linaje davídico", "linaje de david", "real"], ["esdras"], ["sacerdote", "linaje sacerdotal", "linaje aarónico", "linaje de aarón"], ["restauración", "restaurar", "reedificó", "limpiar"], ["ambos", "dos linajes", "rey y sacerdote", "unidos en cristo"]],
+      modelEn:"The restoration of God's people needed two leaders representing two lines. Zerubbabel was a descendant of David, the kingly line, and he led the people out and rebuilt the temple. Ezra was a descendant of Aaron, the priestly line, and he came to cleanse and teach the people the Word. Together they picture the kingly and priestly offices that are united perfectly in Christ. The king rebuilds; the priest cleanses. Walls without the Word leave a fortress around an empty heart, and the Word without walls leaves a faith that cannot survive a siege. God always sends both, and both offices find their fulfillment in Jesus, our King and our Priest.",
+      modelEs:"La restauración del pueblo de Dios necesitaba dos líderes que representaban dos linajes. Zorobabel era descendiente de David, el linaje real, y guió al pueblo de regreso y reedificó el templo. Esdras era descendiente de Aarón, el linaje sacerdotal, y vino a limpiar y enseñar al pueblo la Palabra. Juntos retratan los oficios real y sacerdotal que se unen perfectamente en Cristo. El rey reedifica; el sacerdote limpia. Muros sin la Palabra dejan una fortaleza alrededor de un corazón vacío, y la Palabra sin muros deja una fe que no sobrevive un asedio. Dios siempre envía ambos, y ambos oficios hallan su cumplimiento en Jesús, nuestro Rey y nuestro Sacerdote." },
+    { id:24, en:"24. How did Nehemiah combine practical leadership (the wall) with spiritual renewal (the Word)?",
+      es:"24. ¿Cómo combinó Nehemías el liderazgo práctico (el muro) con la renovación espiritual (la Palabra)?",
+      kw_en:[["nehemiah"], ["wall", "rebuilt the wall", "fifty-two days", "city wall"], ["word", "read the law", "scripture", "ezra read"], ["prayer", "prayed", "fasted", "four months of prayer"], ["covenant", "renewed the covenant", "covenant renewal"]],
+      kw_es:[["nehemías", "nehemias"], ["muro", "reedificó el muro", "cincuenta y dos días", "muralla"], ["palabra", "leyó la ley", "escritura", "esdras leyó"], ["oración", "oró", "ayunó", "cuatro meses de oración"], ["pacto", "renovó el pacto", "renovación del pacto"]],
+      modelEn:"Nehemiah combined practical leadership with spiritual renewal. As cupbearer to King Artaxerxes, he heard the wall of Jerusalem was broken down, and he wept, fasted, and prayed for about four months before he ever spoke to the king — settling the matter with God before asking the visible authority. He then rebuilt the wall in just fifty-two days despite fierce opposition. But the work was not only stone: alongside the wall came the Word, as Ezra read the Law publicly with explanation and the people renewed the covenant in writing. Nehemiah built both wall and Word together, because a fortress without the Word guards an empty heart.",
+      modelEs:"Nehemías combinó el liderazgo práctico con la renovación espiritual. Como copero del rey Artajerjes, oyó que el muro de Jerusalén estaba derribado, y lloró, ayunó y oró por unos cuatro meses antes de hablar con el rey — resolviendo el asunto con Dios antes de pedirle a la autoridad visible. Luego reedificó el muro en solo cincuenta y dos días a pesar de fuerte oposición. Pero la obra no fue solo piedra: junto al muro vino la Palabra, cuando Esdras leyó la Ley públicamente con explicación y el pueblo renovó el pacto por escrito. Nehemías edificó muro y Palabra juntos, porque una fortaleza sin la Palabra guarda un corazón vacío." },
+    { id:25, en:"25. Identify Nehemiah's three enemies (Sanballat, Tobiah, Geshem) and their tactics.",
+      es:"25. Identifique los tres enemigos de Nehemías (Sanbalat, Tobías, Gesem) y sus tácticas.",
+      kw_en:[["sanballat"], ["tobiah"], ["geshem"], ["mockery", "mocked", "sneered", "ridicule"], ["infiltration", "infiltrate", "insider", "alliances", "sabotage"], ["conspiracy", "trap", "false prophet", "plot", "discredit"]],
+      kw_es:[["sanbalat"], ["tobías", "tobias"], ["gesem"], ["burla", "se burló", "mofa", "ridiculizar"], ["infiltración", "infiltrar", "desde dentro", "alianzas", "sabotaje"], ["conspiración", "trampa", "falso profeta", "complot", "desacreditar"]],
+      modelEn:"Nehemiah faced three enemies, each with a distinct tactic. Sanballat used mockery, sneering, 'What are these feeble Jews doing?' to discourage the builders. Tobiah used infiltration, exploiting insider connections and marriage alliances to undermine the work quietly from within. Geshem joined the conspiracy, trying to lure Nehemiah into a trap and hiring a false prophet to discredit him. Every leader who tries to do God's work meets some combination of the mocker, the infiltrator, and the conspirator. Nehemiah's reply is the manual for ministry under fire: 'I am doing a great work, so that I cannot come down' — stay on the wall.",
+      modelEs:"Nehemías enfrentó tres enemigos, cada uno con una táctica distinta. Sanbalat usó la burla, mofándose: '¿Qué hacen estos débiles judíos?' para desanimar a los constructores. Tobías usó la infiltración, aprovechando conexiones internas y alianzas matrimoniales para socavar la obra calladamente desde dentro. Gesem se unió a la conspiración, tratando de atraer a Nehemías a una trampa y contratando a un falso profeta para desacreditarlo. Todo líder que intenta hacer la obra de Dios encuentra alguna combinación del burlador, el infiltrador y el conspirador. La respuesta de Nehemías es el manual para el ministerio bajo fuego: 'Yo hago una gran obra, y no puedo ir' — quédate en el muro." },
+    { id:26, en:"26. Why is the book of Esther a demonstration of God's providence even though God is not named?",
+      es:"26. ¿Por qué es el libro de Ester una demostración de la providencia de Dios aunque Dios no sea nombrado?",
+      kw_en:[["esther"], ["providence", "god's hand", "sovereign", "upper story", "hidden hand"], ["hidden", "name not mentioned", "god's name absent", "never named"], ["coincidence", "seeming coincidence", "chain of events", "no accident"], ["upper story", "lower story", "god writes", "behind the scenes"]],
+      kw_es:[["ester"], ["providencia", "la mano de dios", "soberano", "historia superior", "mano oculta"], ["oculto", "nombre no mencionado", "nombre de dios ausente", "nunca nombrado"], ["coincidencia", "aparente coincidencia", "cadena de eventos", "no es accidente"], ["historia superior", "historia inferior", "dios escribe", "tras bambalinas"]],
+      modelEn:"The book of Esther demonstrates God's providence even though His name appears zero times in its 167 verses. His name is never printed, yet His fingerprints are on every page. A whole chain of seeming coincidences works together to save the Jews: Vashti's perfectly timed defiance, Mordecai's overheard plot, the lot cast eleven months out giving Esther time, the king's insomnia on exactly the right night, the scroll opening to the right page, and Haman walking in at the wrong moment. Readers call this the lower story we see and the upper story God writes. Providence is the name of the silence: the God whose name is not printed is the One whose hidden hand fills every paragraph.",
+      modelEs:"El libro de Ester demuestra la providencia de Dios aunque Su nombre aparece cero veces en sus 167 versículos. Su nombre nunca se imprime, y sin embargo Sus huellas están en cada página. Toda una cadena de aparentes coincidencias obra junta para salvar a los judíos: la desobediencia de Vasti perfectamente sincronizada, el complot que Mardoqueo escuchó, la suerte echada once meses antes dando tiempo a Ester, el insomnio del rey exactamente la noche correcta, el rollo abriéndose en la página correcta, y Amán entrando en el momento equivocado. Los lectores llaman a esto la historia inferior que vemos y la historia superior que Dios escribe. La providencia es el nombre del silencio: el Dios cuyo nombre no se imprime es Aquel cuya mano oculta llena cada párrafo." },
+    { id:27, en:"27. Explain the origin and meaning of the Feast of Purim.",
+      es:"27. Explique el origen y significado de la Fiesta de Purim.",
+      kw_en:[["purim"], ["lots", "pur", "cast lots", "the lot"], ["haman", "agagite"], ["deliverance", "delivered", "preserved", "saved", "prevailed"], ["mordecai"]],
+      kw_es:[["purim"], ["suertes", "pur", "echó suertes", "la suerte"], ["amán", "aman", "agagueo"], ["liberación", "librados", "preservados", "salvados", "prevalecieron"], ["mardoqueo"]],
+      modelEn:"The Feast of Purim originated in the events of Esther. Haman the Agagite, enraged that Mordecai would not bow, cast lots — pur in Persian — to determine the day appointed for the destruction of all the Jews. But God overturned the plot: Haman was hanged on the gallows he built for Mordecai, and on the appointed day the Jews defended themselves and prevailed, through the courage of Esther and Mordecai. Purim is named after those lots, and it commemorates the deliverance of the Jewish people from extermination. The very lot Haman cast against God's people became the festival celebrating their preservation.",
+      modelEs:"La Fiesta de Purim se originó en los eventos de Ester. Amán el agagueo, enfurecido porque Mardoqueo no se inclinaba, echó suertes — pur en persa — para determinar el día señalado para la destrucción de todos los judíos. Pero Dios volcó el complot: Amán fue colgado en la horca que construyó para Mardoqueo, y en el día señalado los judíos se defendieron y prevalecieron, por el valor de Ester y Mardoqueo. Purim lleva el nombre de esas suertes, y conmemora la liberación del pueblo judío del exterminio. La misma suerte que Amán echó contra el pueblo de Dios se convirtió en la fiesta que celebra su preservación." },
+    { id:28, en:"28. What does Ezra 7:10 teach about the order of seeking, doing, and teaching the Word?",
+      es:"28. ¿Qué enseña Esdras 7:10 sobre el orden de inquirir, cumplir y enseñar la Palabra?",
+      kw_en:[["ezra", "ezra 7:10"], ["seek", "sought", "prepared his heart to seek"], ["do", "doer", "did it", "obey", "practice"], ["teach", "teaching", "teach israel"], ["heart", "prepared his heart", "set his heart"], ["law", "word", "torah", "scripture"]],
+      kw_es:[["esdras", "esdras 7:10"], ["buscar", "inquirir", "preparó su corazón para inquirir"], ["hacer", "hacedor", "cumplir", "obedecer", "practicar"], ["enseñar", "enseñanza", "enseñar en israel"], ["corazón", "preparó su corazón", "dispuso su corazón"], ["ley", "palabra", "torá", "escritura"]],
+      modelEn:"Ezra 7:10 teaches the right order of three verbs: Ezra had prepared his heart to seek the law of the LORD, and to do it, and to teach it in Israel. Seek, do, teach — and the order matters. Most people are willing to seek, and a surprising number are even willing to teach, but the middle verb is the one most often skipped. There are Bible students by the thousand and Bible doers by the tens. Ezra was a doer first: he did what he had sought before he tried to teach it to others. The verse warns against trying to teach the Word without first obeying it in one's own life.",
+      modelEs:"Esdras 7:10 enseña el orden correcto de tres verbos: Esdras había preparado su corazón para inquirir la ley del SEÑOR, y para cumplirla, y para enseñarla en Israel. Buscar, hacer, enseñar — y el orden importa. La mayoría está dispuesta a buscar, y un número sorprendente incluso a enseñar, pero el verbo del medio es el que más a menudo se omite. Hay estudiantes de la Biblia por miles y hacedores de la Biblia por decenas. Esdras fue primero un hacedor: cumplió lo que había buscado antes de intentar enseñarlo a otros. El versículo advierte contra intentar enseñar la Palabra sin primero obedecerla en la propia vida." },
+    { id:29, en:"29. List and briefly explain the four reasons God's 'silence' (as in Esther) does not mean His absence.",
+      es:"29. Enumere y explique brevemente las cuatro razones por las que el 'silencio' de Dios (como en Ester) no significa Su ausencia.",
+      kw_en:[["faith", "faith not sight", "believe without seeing"], ["struggle", "wrestle", "wrestling grows", "grows the soul"], ["maturity", "mature", "eyes of the heart", "sixth sense", "grow"], ["providence", "god upholds", "hidden hand", "not absent"], ["silence", "silent", "god's silence", "does not speak"]],
+      kw_es:[["fe", "fe no vista", "creer sin ver"], ["lucha", "luchar", "la lucha hace crecer", "hace crecer el alma"], ["madurez", "madurar", "ojos del corazón", "sexto sentido", "crecer"], ["providencia", "dios sostiene", "mano oculta", "no ausente"], ["silencio", "silencioso", "silencio de dios", "no habla"]],
+      modelEn:"The book of Esther shows that God's 'silence' does not mean His absence, and four reasons explain why God often works silently. First, silence requires faith rather than sight — Jesus blessed those who have not seen and yet believe. Second, silence forces the struggle that grows the soul; a faith that never wrestles never matures. Third, silence produces maturity, developing the eyes of the heart, a sixth sense not exercised when the outer senses do all the work. Fourth, silence does not mean absence: providence is the name of the silence, for Christ upholds all things by the word of His power even when His name is never printed on the page.",
+      modelEs:"El libro de Ester muestra que el 'silencio' de Dios no significa Su ausencia, y cuatro razones explican por qué Dios a menudo obra en silencio. Primera, el silencio requiere fe en vez de vista — Jesús bendijo a los que no han visto y sin embargo creen. Segunda, el silencio fuerza la lucha que hace crecer el alma; una fe que nunca lucha nunca madura. Tercera, el silencio produce madurez, desarrollando los ojos del corazón, un sexto sentido que no se ejercita cuando los sentidos externos hacen todo el trabajo. Cuarta, el silencio no significa ausencia: la providencia es el nombre del silencio, pues Cristo sostiene todas las cosas con la palabra de Su poder aun cuando Su nombre nunca se imprime en la página." },
+    { id:30, en:"30. Synthesize the message of Ezra, Nehemiah, and Esther into a paragraph about God's faithfulness during and after the exile.",
+      es:"30. Sintetice el mensaje de Esdras, Nehemías y Ester en un párrafo sobre la fidelidad de Dios durante y después del exilio.",
+      kw_en:[["exile", "captivity", "babylon"], ["return", "go up", "came home", "restoration"], ["preservation", "preserved", "kept safe", "not erased"], ["providence", "god's hand", "hidden hand", "sovereign"], ["faithfulness", "faithful", "kept his word", "keeps promises"], ["remnant", "faithful few", "the people preserved"]],
+      kw_es:[["exilio", "cautiverio", "babilonia"], ["regreso", "subir", "volvieron a casa", "restauración"], ["preservación", "preservados", "guardados", "no borrados"], ["providencia", "la mano de dios", "mano oculta", "soberano"], ["fidelidad", "fiel", "cumplió su palabra", "cumple promesas"], ["remanente", "fieles", "el pueblo preservado"]],
+      modelEn:"Ezra, Nehemiah, and Esther together display God's faithfulness through exile and return. Ezra rebuilds the temple and the people; Nehemiah rebuilds the wall and the people; Esther keeps the people from being erased so there would be a people to rebuild with. Across these books God brings His exiles home and then keeps them home, fulfilling His word — even keeping His seventies, as the temple was finished seventy years almost to the day after it burned. Through Cyrus's decree, the rebuilt temple, the restored wall, and the hidden providence that preserved the Jews, God shows He keeps every promise and faithfully preserves a remnant for the coming of the Messiah.",
+      modelEs:"Esdras, Nehemías y Ester juntos muestran la fidelidad de Dios a través del exilio y el regreso. Esdras reedifica el templo y al pueblo; Nehemías reedifica el muro y al pueblo; Ester impide que el pueblo sea borrado para que hubiera un pueblo con el cual reedificar. A lo largo de estos libros Dios trae a sus exiliados a casa y luego los mantiene en casa, cumpliendo Su palabra — incluso cumpliendo Sus setentas, pues el templo se terminó setenta años casi al día después de que ardiera. Por el decreto de Ciro, el templo reedificado, el muro restaurado, y la providencia oculta que preservó a los judíos, Dios muestra que cumple cada promesa y preserva fielmente un remanente para la venida del Mesías." }
+];
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed[idx]) {
+                btn.classList.add('locked');
+                if (letter === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2'; btn.style.borderColor = '#d4af37'; btn.style.fontWeight = '600';
+            }
+            btn.onclick = function() {
+                if (mcRevealed[idx] || unitPassed) return;
+                mcAnswers[idx] = letter;
+                mcRevealed[idx] = true;
+                saveState();
+                renderQuestions();
+            };
+            div.appendChild(btn);
+        });
+
+        if (mcRevealed[idx]) renderMCFeedback(div, q, idx, true);
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMastersLevel() ? ('Short Answer (Questions 21–30) — ' + (getTrack()==='thm' ? 'Master of Theology' : 'Master of Divinity') + ' (graded, 9/10 to pass)') : 'Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMastersLevel() ? ('Respuesta Corta (Preguntas 21–30) — ' + (getTrack()==='thm' ? 'Maestría en Teología' : 'Maestría en Divinidad') + ' (calificado, 9/10 para aprobar)') : 'Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here...' : 'Escriba su respuesta aquí...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.addEventListener('input', (e) => { kwAnswers[idx] = e.target.value; saveState(); });
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+
+        checkBtn.onclick = function() {
+            const result = gradeSA(q, textarea.value);
+            if (result.tooShort) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a sentence).' : 'Escriba una respuesta más completa (al menos una oración).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else if (result.pass) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? '✓ Your answer includes the key concepts.' : '✓ Su respuesta incluye los conceptos clave.';
+                feedbackDiv.className = 'feedback-text correct';
+            } else {
+                feedbackDiv.innerHTML = currentLang === 'en' ? `✗ Try to include more of: ${result.missing.join(', ')}.` : `✗ Intente incluir más de: ${result.missing.join(', ')}.`;
+                feedbackDiv.className = 'feedback-text incorrect';
+            }
+        };
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.cssText = 'display:none;margin-top:10px;padding:12px 14px;border-left:4px solid #c9a961;background:#fdf9ed;border-radius:3px;font-size:.92rem;line-height:1.5;';
+        const modelBtn = document.createElement('button');
+        modelBtn.className = 'small';
+        modelBtn.style.marginLeft = '6px';
+        modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+        modelBtn.onclick = function() {
+            if ((textarea.value || '').trim().length < 100) {
+                feedbackDiv.className = 'feedback-text incorrect';
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a sentence) — then you can compare it with the model.' : 'Escriba primero su propia respuesta (al menos una oración) — luego podrá compararla con el modelo.';
+                return;
+            }
+            if (modelBox.style.display === 'none') {
+                modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estúdiela:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+                modelBox.style.display = 'block';
+                modelBtn.textContent = currentLang === 'en' ? 'Hide model answer' : 'Ocultar respuesta modelo';
+            } else {
+                modelBox.style.display = 'none';
+                modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(modelBtn);
+        div.appendChild(feedbackDiv);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+    });
+}
+
+function renderMCFeedback(div, q, idx, skipRedraw) {
+    if (!skipRedraw) {
+        const buttons = div.querySelectorAll('.option');
+        buttons.forEach(btn => {
+            const letter = btn.textContent.charAt(0);
+            btn.classList.add('locked');
+            btn.classList.remove('correct', 'wrong');
+            if (letter === q.correct) btn.classList.add('correct');
+            else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+        });
+    }
+    let existing = div.querySelector('.feedback-text');
+    if (existing) existing.remove();
+    const fb = document.createElement('div');
+    const correct = (mcAnswers[idx] === q.correct);
+    fb.className = 'feedback-text ' + (correct ? 'correct' : 'incorrect');
+    if (correct) {
+        fb.innerHTML = '✓ ' + (currentLang === 'en' ? q.fcEn : q.fcEs);
+    } else {
+        const correctLetter = q.correct;
+        fb.innerHTML = (currentLang === 'en' ? `✗ Correct answer: ${correctLetter}. ` : `✗ Respuesta correcta: ${correctLetter}. `) + (currentLang === 'en' ? q.fiEn : q.fiEs);
+    }
+    div.appendChild(fb);
+}
+
+function gradeSA(q, answer) {
+    const text = (answer || '').toLowerCase().trim();
+    if (text.length < 100) return { tooShort: true, pass: false, missing: [] };
+    const isEs = document.body.classList.contains('lang-es');
+    const groups = isEs ? q.kw_es : q.kw_en;
+    const missing = [];
+    let matched = 0;
+    groups.forEach(group => {
+        const hit = group.some(term => text.includes(term.toLowerCase()));
+        if (hit) matched++;
+        else missing.push(group[0]);
+    });
+    const need = Math.max(2, Math.ceil(groups.length * 0.4));
+    return { tooShort: false, pass: matched >= need, missing };
+}
+
+function submitExam() {
+    saveReg();
+    if (!student.name || !student.email) {
+        alert(currentLang === 'en' ? 'Please fill in your registration first.' : 'Por favor complete su registro primero.');
+        return;
+    }
+    if (unitPassed) {
+        showResult('pass', currentLang === 'en' ? '✅ Unit 6 already passed. You may proceed.' : '✅ Unidad 6 ya aprobada. Puede continuar.');
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        showResult('locked', currentLang === 'en' ? `⏰ Locked for ${wait} more minute(s).` : `⏰ Bloqueado por ${wait} minuto(s) más.`);
+        return;
+    }
+
+    for (let i = 0; i < mcRevealed.length; i++) mcRevealed[i] = true;
+    renderQuestions();
+    let mcCorrect = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === mcQuestions[i].correct) mcCorrect++;
+    }
+
+    let saCorrect = 0;
+    if (isMastersLevel()) {
+        for (let i = 0; i < 10; i++) {
+            const r = gradeSA(kwQuestions[i], kwAnswers[i]);
+            if (!r.tooShort && r.pass) saCorrect++;
+        }
+    }
+    const mcOk = mcCorrect >= PASS_THRESHOLD_MC;
+    const saOk = saCorrect >= PASS_THRESHOLD_SA;
+
+    function passUnit(detail) {
+        unitPassed = true;
+        localStorage.setItem(UNIT_PASSED_KEY, 'true');
+        progress[`unit${UNIT_NUM}`] = true;
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(SA_LOCK_KEY);
+        const msg = currentLang === 'en'
+            ? `✅ PASSED. ${detail}. Unit 6 complete! Your answers are marked below. Review them, then continue when ready.`
+            : `✅ APROBADO. ${detail}. ¡Unidad 6 completa! Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.`;
+        showResult('pass', msg);
+        updateProgressGrid();
+    }
+
+    if (!isMastersLevel()) {
+        const detail = currentLang === 'en' ? `MC: ${mcCorrect}/20 (need 18)` : `OM: ${mcCorrect}/20 (necesita 18)`;
+        if (mcOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+                : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        const detail = currentLang === 'en'
+            ? `MC: ✓ banked · SA: ${saCorrect}/10 (need 9)`
+            : `OM: ✓ en banco · RC: ${saCorrect}/10 (necesita 9)`;
+        if (saOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Your multiple-choice pass is safe. ${detail}. Review the lesson and try the short-answer section again in ${lockMinutes()} minute(s).`
+                : `Su aprobación de opción múltiple está a salvo. ${detail}. Repase la lección y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    const detail = currentLang === 'en'
+        ? `MC: ${mcCorrect}/20 (need 18) · SA: ${saCorrect}/10 (need 9)`
+        : `OM: ${mcCorrect}/20 (necesita 18) · RC: ${saCorrect}/10 (necesita 9)`;
+    if (mcOk && saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit(detail);
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `MC ${mcCorrect}/20 ✓ passed and banked. SA ${saCorrect}/10 (need 9). When you try again in ${lockMinutes()} minute(s), you'll only need to resubmit the short answers — MC stays passed.`
+            : `OM ${mcCorrect}/20 ✓ aprobado y guardado. RC ${saCorrect}/10 (necesita 9). Al reintentar en ${lockMinutes()} minuto(s), solo necesitará reenviar las respuestas cortas — el OM permanece aprobado.`;
+        showResult('fail', msg);
+        startLockTimer();
+    } else {
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+            : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+        showResult('fail', msg);
+        startLockTimer();
+    }
+}
+
+function showResult(cls, html) {
+    const r = document.getElementById('examResult');
+    r.style.display = 'block';
+    r.className = 'exam-result ' + cls;
+    r.innerHTML = html;
+}
+
+function startLockTimer() {
+    const r = document.getElementById('examResult');
+    const interval = setInterval(() => {
+        const remaining = lockUntil - Date.now();
+        if (remaining <= 0) { clearInterval(interval); r.innerHTML += currentLang === 'en' ? '<br><em>Lockout ended. You may retry.</em>' : '<br><em>Bloqueo terminado. Puede reintentar.</em>'; return; }
+        const m = Math.floor(remaining / 60000);
+        const s = Math.floor((remaining % 60000) / 1000);
+        const note = currentLang === 'en' ? `<br>⏱️ Locked: ${m}:${String(s).padStart(2,'0')}` : `<br>⏱️ Bloqueado: ${m}:${String(s).padStart(2,'0')}`;
+        const base = r.innerHTML.split('<br>⏱️')[0];
+        r.innerHTML = base + note;
+    }, 1000);
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? 'Reset this unit? All your answers and pass status for Unit 6 will be cleared. (Your name, email, and other units are not affected.)'
+        : '¿Reiniciar esta unidad? Todas sus respuestas y el estado de aprobación para la Unidad 6 se borrarán. (Su nombre, correo y otras unidades no se afectan.)';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcRevealed = new Array(20).fill(false);
+    unitPassed = false;
+    mcPreviouslyPassed = false;
+    lockUntil = 0;
+    localStorage.removeItem(UNIT_STATE_KEY);
+    localStorage.removeItem(UNIT_PASSED_KEY);
+    localStorage.removeItem(LOCKOUT_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    if (progress[`unit${UNIT_NUM}`]) {
+        delete progress[`unit${UNIT_NUM}`];
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+    }
+    document.getElementById('examResult').style.display = 'none';
+    renderQuestions();
+    updateProgressGrid();
+}
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') { currentLang = 'es'; document.body.className = 'lang-es'; this.textContent = 'English'; }
+    else { currentLang = 'en'; document.body.className = 'lang-en'; this.textContent = 'Español'; }
+    renderTrackBanner(); renderReadout(); renderQuestions();
+};
+
+// ========== REGISTRATION READOUT (read-only on Units 2-13) ==========
+function renderReadout() {
+    const el = document.getElementById('regReadout');
+    if (!el) return;
+    const saved = localStorage.getItem(STUDENT_KEY);
+    const en = (currentLang !== 'es');
+    if (!saved) {
+        el.innerHTML = en
+            ? 'No registration found. Please <a href="CTSUnit1.html">register on Unit 1</a> before taking this exam.'
+            : 'No se encontr\u00f3 registro. Por favor <a href="CTSUnit1.html">reg\u00edstrese en la Unidad 1</a> antes de tomar este examen.';
+        el.className = 'reg-readout missing';
+        return;
+    }
+    const st = JSON.parse(saved);
+    const progLabel = st.program || 'Certificate of Ministry';
+    const lblName = en ? 'Name' : 'Nombre';
+    const lblEmail = en ? 'Email' : 'Correo';
+    const lblCountry = en ? 'Country' : 'Pa\u00eds';
+    const lblProg = en ? 'Program' : 'Programa';
+    const note = en
+        ? 'Registered on Unit 1. To change your details, return to Unit 1.'
+        : 'Registrado en la Unidad 1. Para cambiar sus datos, vuelva a la Unidad 1.';
+    el.innerHTML =
+        '<div class="reg-readout-grid">' +
+        '<div><strong>' + lblName + ':</strong> ' + (st.name||'') + '</div>' +
+        '<div><strong>' + lblEmail + ':</strong> ' + (st.email||'') + '</div>' +
+        '<div><strong>' + lblCountry + ':</strong> ' + (st.country||'') + '</div>' +
+        '<div><strong>' + lblProg + ':</strong> ' + progLabel + '</div>' +
+        '</div><div class="reg-readout-note">' + note + '</div>';
+    el.className = 'reg-readout';
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+loadReg();
+renderReadout();
+loadState();
+updateProgressGrid();
+renderTrackBanner();
+renderQuestions();
+if (unitPassed) showResult('pass', currentLang === 'en' ? '✅ Unit 6 already passed.' : '✅ Unidad 6 ya aprobada.');
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSOTSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

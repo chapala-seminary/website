@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CTS Pentecostalism — Supplemental Reading Room</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root{
+    --primary:#1f3352;
+    --primary-deep:#152442;
+    --gold:#c9a227;
+    --gold-deep:#98771d;
+    --paper:#eef1f4;
+    --card:#fffefb;
+    --border:#cdd6e2;
+    --ink:#1c2530;
+    --ink-soft:#4e5b6b;
+  }
+
+  body{
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 17px;
+    padding: 20px;
+  }
+  .container{ max-width: 900px; margin: 0 auto; }
+
+  /* ---------- language toggle mechanics (house pattern) ---------- */
+  body.lang-en .lang-es{ display:none; }
+  body.lang-en .lang-en{ display:inline; }
+  body.lang-es .lang-en{ display:none; }
+  body.lang-es .lang-es{ display:inline; }
+  .lang-en.block, .lang-es.block{ display:none; }
+  body.lang-en .lang-en.block{ display:block; }
+  body.lang-es .lang-es.block{ display:block; }
+  body.lang-both .lang-es.block{ display:block; }
+  body.lang-both .lang-en.block{ display:block; }
+  body.lang-both .lang-es:not(.block){ display:inline; }
+  body.lang-both .lang-en:not(.block){ display:inline; }
+  body.lang-both .lang-es.block{ opacity:.9; border-top:1px dashed var(--border); margin-top:8px; padding-top:8px; }
+
+  /* ---------- builder note (delete before publishing) ---------- */
+  .builder{
+    border:2px dashed #b23a3a; background:#fdf4f4; color:#5a2020;
+    border-radius:12px; padding:16px 18px; margin-bottom:26px; font-size:.92rem; line-height:1.5;
+  }
+  .builder strong{ display:block; margin-bottom:6px; color:#8f2a2a; letter-spacing:.02em; text-transform:uppercase; font-size:.78rem; }
+  .builder ol{ margin:6px 0 0 18px; } .builder li{ margin:4px 0; }
+
+  /* ---------- toggle bar ---------- */
+  .bar{
+    background:#d6dee9; border-radius:40px; padding:10px 14px;
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-bottom:26px;
+  }
+  .bar span.bar-label{ color:var(--ink-soft); font-size:.85rem; margin-right:4px; }
+  .toggle-btn{
+    background:var(--card); color:var(--primary); border:1px solid var(--border);
+    border-radius:30px; padding:7px 18px; cursor:pointer; font-family:inherit; font-size:.92rem;
+  }
+  .toggle-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary); }
+
+  /* ---------- masthead ---------- */
+  .mast{ text-align:center; padding:14px 0 6px; }
+  .mast .eyebrow{
+    letter-spacing:.3em; text-transform:uppercase; font-size:.72rem; color:var(--gold-deep); margin-bottom:12px;
+  }
+  .mast h1{ color:var(--primary); font-size:2.05rem; line-height:1.2; font-weight:normal; }
+  .mast .rule{ width:88px; height:2px; background:var(--gold); margin:18px auto 14px; }
+  .mast .sub{ color:var(--ink-soft); font-style:italic; font-size:1.02rem; }
+
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .card h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:12px;
+  }
+  .card p{ margin:9px 0; }
+  .card p.lead{ margin-top:2px; }
+
+  .honors{ border-left:none; border-top:4px solid var(--gold); }
+  .honors h2{ border-left:none; padding-left:0; }
+  .pill-note{ display:inline-block; background:#e5ebf2; border:1px solid var(--border); border-radius:20px; padding:3px 12px; font-size:.82rem; color:var(--primary); margin-top:4px; }
+
+  /* ---------- reading entries ---------- */
+  .shelf-head{ margin:34px 0 6px; text-align:center; }
+  .shelf-head h2{
+    color:var(--primary); font-weight:normal; font-size:1.4rem; border:none; padding:0; display:inline-block;
+  }
+  .shelf-head .rule{ width:60px; height:2px; background:var(--gold); margin:12px auto 0; }
+  .counter{
+    position:sticky; top:8px; z-index:5;
+    background:var(--primary); color:#fff; border-radius:30px;
+    padding:8px 18px; text-align:center; font-size:.95rem; margin:16px auto 6px; max-width:280px;
+    box-shadow:0 3px 10px rgba(0,0,0,.14);
+  }
+  .counter b{ color:var(--gold); }
+
+  .entry{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:20px 22px; margin:16px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+    transition:box-shadow .18s ease, border-color .18s ease;
+  }
+  .entry:hover{ box-shadow:0 7px 20px rgba(31,51,82,.14); }
+  .entry.chosen{ border-color:var(--primary); box-shadow:0 0 0 2px var(--primary) inset, 0 7px 20px rgba(31,51,82,.16); }
+  .entry .locus{
+    letter-spacing:.16em; text-transform:uppercase; font-size:.68rem; color:var(--gold-deep); margin-bottom:8px;
+  }
+  .entry .title{ font-size:1.14rem; color:var(--primary); margin-bottom:2px; }
+  .entry .title .num{
+    display:inline-block; min-width:1.7em; color:var(--gold-deep); font-style:italic;
+  }
+  .entry .byline{ color:var(--ink-soft); font-style:italic; font-size:.92rem; margin-bottom:10px; padding-left:1.7em; }
+  .entry .caption{ font-size:.98rem; }
+  .entry .foot{
+    display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center; justify-content:space-between;
+    margin-top:14px; padding-top:12px; border-top:1px solid var(--border);
+  }
+  .read-link{
+    color:var(--primary); text-decoration:none; font-size:.95rem; border-bottom:1.5px solid var(--gold); padding-bottom:1px;
+  }
+  .read-link:hover{ color:var(--gold-deep); }
+  .read-links{ display:flex; flex-wrap:wrap; gap:6px 16px; align-items:center; }
+  .read-link.mod{ border-bottom-color:var(--primary); }
+  .pick{ display:inline-flex; align-items:center; gap:9px; cursor:pointer; font-size:.92rem; color:var(--ink); user-select:none; }
+  .pick input{ width:19px; height:19px; accent-color:var(--primary); cursor:pointer; }
+  .pick.disabled{ opacity:.4; cursor:not-allowed; }
+
+  /* ---------- millennial views panel (unused in this course; retained for template parity) ---------- */
+  .millennial{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .millennial > h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:10px;
+  }
+  .millennial .intro{ margin:8px 0 6px; }
+  .mv-grid{ margin-top:14px; }
+  .entry.mv{ box-shadow:none; border:none; border-top:1px solid var(--border); border-radius:0; margin:0; padding:18px 0; }
+  .entry.mv:first-of-type{ border-top:none; padding-top:4px; }
+  .entry.mv:hover{ box-shadow:none; }
+  .entry.mv.chosen{ box-shadow:none; border-top:1px solid var(--border); background:#e5ebf2; border-radius:8px; padding:14px 12px; }
+  .entry.mv:first-of-type.chosen{ border-top:none; }
+  .view-badge{
+    display:inline-block; background:var(--gold); color:var(--primary-deep);
+    font-size:.72rem; font-weight:bold; letter-spacing:.11em; text-transform:uppercase;
+    padding:5px 14px; border-radius:20px; margin-bottom:10px;
+  }
+
+  .limit-note{ text-align:center; color:var(--gold-deep); font-size:.9rem; min-height:1.2em; margin:4px 0 0; }
+
+  /* ---------- attestation ---------- */
+  .attest label.field{ display:block; margin:14px 0 6px; font-size:.9rem; color:var(--ink-soft); }
+  .attest input[type=text]{
+    width:100%; font-family:inherit; font-size:1rem; padding:11px 14px;
+    border:1px solid var(--border); border-radius:10px; background:#fffef9; color:var(--ink);
+  }
+  .attest .oath{
+    display:flex; gap:11px; align-items:flex-start; margin:16px 0; font-size:.96rem; background:#e5ebf2;
+    border:1px solid var(--border); border-radius:10px; padding:12px 14px;
+  }
+  .attest .oath input{ width:20px; height:20px; margin-top:2px; accent-color:var(--primary); flex-shrink:0; }
+  .btn{
+    background:var(--primary); color:#fff; border:none; border-radius:30px;
+    padding:11px 26px; cursor:pointer; font-family:inherit; font-size:1rem; margin-top:6px;
+  }
+  .btn:hover{ background:var(--primary-deep); }
+  .btn.ghost{ background:transparent; color:var(--primary); border:1px solid var(--primary); }
+  .msg{ color:var(--gold-deep); font-size:.92rem; margin-top:12px; min-height:1.2em; }
+
+  .record{ display:none; }
+  .record.show{ display:block; }
+  .record .seal-line{ width:70px; height:2px; background:var(--gold); margin:6px 0 16px; }
+  .record h3{ color:var(--primary); font-weight:normal; font-size:1.3rem; margin-bottom:4px; }
+  .record .named{ font-size:1.5rem; color:var(--primary); border-bottom:1px solid var(--gold-deep); display:inline-block; padding:0 10px 4px; margin:6px 0 12px; }
+  .record ul{ margin:12px 0 12px 20px; } .record li{ margin:5px 0; }
+  .record .stamp{ font-style:italic; color:var(--ink-soft); font-size:.92rem; }
+
+  .footnote{ text-align:center; color:var(--ink-soft); font-size:.82rem; margin:30px 0 6px; }
+
+  a:focus-visible, input:focus-visible, button:focus-visible, label:focus-within{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+
+  @media (max-width:520px){
+    body{ font-size:16px; padding:14px; }
+    .mast h1{ font-size:1.7rem; }
+    .entry .foot{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  /* ---------- print: show only the record ---------- */
+  @media print{
+    body{ background:#fff; }
+    .builder, .bar, .no-print, .entry, .counter, .attest .oath, .attest input, .attest label.field, .attest .btn, .msg, .limit-note{ display:none !important; }
+    .card.attest{ border:none; box-shadow:none; }
+    .record{ display:block !important; }
+  }
+
+.assignment{margin:14px 0 4px;padding:12px 14px;border-left:4px solid #8f6c2f;background:rgba(143,108,47,.08);border-radius:4px}.assignment p{margin:0;line-height:1.55}.assignment .length{white-space:nowrap;font-style:italic}.source-note{font-size:.82rem;opacity:.82;margin-top:6px}.source-note strong{font-weight:700}
+</style>
+
+<style id="dg-inline-styles">
+.digest-inline{margin:12px 0 6px;border:1px solid var(--border,#e2d6c9);border-radius:9px;background:#fff;overflow:hidden}
+.digest-inline>summary{cursor:pointer;list-style:none;padding:11px 13px;font-family:Arial,Helvetica,sans-serif;font-weight:700;color:var(--primary,#33608f);display:flex;align-items:center;gap:9px}
+.digest-inline>summary::-webkit-details-marker{display:none}
+.digest-inline>summary::after{content:"\25B8";margin-left:auto;color:var(--gold-deep,#8a5a3c)}
+.digest-inline[open]>summary::after{content:"\25BE"}
+.dg-badge{flex:none;background:var(--primary,#33608f);color:#fff;font:800 .6rem/1 Arial,sans-serif;letter-spacing:.11em;padding:5px 8px;border-radius:5px}
+.dg-note-line{font-family:Arial,sans-serif;font-size:.82rem;color:var(--ink-soft,#6b5b4d);padding:0 15px 8px}
+.dg-scroll{padding:2px 15px 16px;border-top:1px solid var(--border,#eee)}
+.dg-block{max-width:none;margin:0}
+.dg-block .dg-doc{border-bottom:1.5px solid var(--border,#e2d6c9);padding-bottom:10px;margin:10px 0 12px}
+.dg-block h1{font-size:1.25rem;line-height:1.25;margin:.1rem 0 .4rem;color:var(--primary,#33608f)}
+.dg-block .dg-sub{color:var(--ink-soft,#6b5b4d);font-style:italic;margin:0 0 .5rem;font-size:.95rem}
+.dg-block .dg-src{font-size:.8rem;color:var(--ink-soft,#6b5b4d);margin:.2rem 0}
+.dg-block .dg-chips{margin:.5rem 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.35rem}
+.dg-block .dg-chips li{font:700 .66rem/1 Arial,sans-serif;background:var(--card,#eef2f6);color:var(--primary,#33608f);border:1px solid var(--border,#d5d5d5);border-radius:999px;padding:3px 8px}
+.dg-block .dg-note{background:var(--card,#eef2f6);border-left:3px solid var(--gold-deep,#8a5a3c);padding:.7rem .9rem;margin:1rem 0;font-size:.92rem;line-height:1.5}
+.dg-block h2{font-size:1.05rem;margin:1.3rem 0 .4rem;padding-top:.35rem;border-top:1px solid var(--border,#ece2d6);color:var(--primary,#33608f)}
+.dg-block h2 .dg-n{color:var(--gold-deep,#8a5a3c);font-weight:400;margin-right:.35rem}
+.dg-block p{margin:0 0 .8rem;font-size:.97rem;line-height:1.6}
+.dg-block blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--border,#e2d6c9);font-style:italic;color:#444}
+.dg-block .dg-reflect{background:var(--card,#eef2f6);padding:.7rem .9rem;border-radius:6px;margin:1rem 0}
+.dg-block footer{margin-top:1.4rem;padding-top:.8rem;border-top:1.5px solid var(--border,#e2d6c9);font-size:.8rem;color:var(--ink-soft,#6b5b4d);line-height:1.5}
+</style>
+</head>
+<body class="lang-en">
+<div class="container">
+<!-- ============ LANGUAGE TOGGLE ============ -->
+<div class="bar no-print">
+<span class="bar-label lang-en">Language:</span>
+<span class="bar-label lang-es">Idioma:</span>
+<button class="toggle-btn active" data-lang="en" onclick="setLang('en')">English</button>
+<button class="toggle-btn" data-lang="es" onclick="setLang('es')">Español</button>
+<button class="toggle-btn" data-lang="both" onclick="setLang('both')">Both / Ambos</button>
+</div>
+<!-- ===== HONORS PROMPT (added by retrofit) ===== -->
+<div class="bar no-print" style="background:#f6f0e2;border:1px solid #e3d6bd;">
+<span class="lang-en">✦ Pursuing a degree <b>With Honors</b>? Complete this class's reading below, then track your progress:</span>
+<span class="lang-es">✦ ¿Cursando un título <b>Con Honores</b>? Complete la lectura de esta clase abajo, luego siga su progreso:</span>
+<a class="toggle-btn" href="cts-honors.html" style="text-decoration:none;"><span class="lang-en">Honors page ↗</span><span class="lang-es">Página de Honores ↗</span></a>
+</div>
+<!-- ============ MASTHEAD ============ -->
+<div class="mast">
+<div class="eyebrow">Chapala Theological Seminary · Pentecostalism</div>
+<h1>
+<span class="lang-en">Supplemental Reading Room</span>
+<span class="lang-es">Sala de Lecturas Complementarias</span>
+</h1>
+<div class="rule"></div>
+<div class="sub">
+<span class="lang-en">The Spirit, His gifts, and the movement — choose any three</span>
+<span class="lang-es">El Espíritu, sus dones, y el movimiento — elija tres cualesquiera</span>
+</div>
+</div>
+<!-- ============ FRAMING ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">How to read this shelf</span>
+<span class="lang-es">Cómo leer este estante</span>
+</h2>
+<p class="lead lang-en block">This course studies the Pentecostal and charismatic movement — its beliefs, its history, its gifts, and its distortions, all weighed fairly by Scripture and kept centered on Christ. These five readings are bilingual Chapala Theological Seminary digests that carry the study deeper, each drawn from the great public-domain writers on the Holy Spirit and the movement.</p>
+<p class="lang-en block">They range widely, on purpose: R.A. Torrey on the person and work of the Spirit, Alexander Maclaren on the day of Pentecost, Frank Bartleman&rsquo;s firsthand account of the Azusa Street revival, Jonathan Edwards on discerning a true work of the Spirit, and A.J. Gordon and B.B. Warfield on whether the miraculous gifts continue &mdash; the last setting the two cases fairly side by side. Each is a CTS-authored digest anchored in these classics, not a reproduction; the works themselves are freely available in the public domain.</p>
+<p class="lang-en block" style="font-size:.86rem;color:var(--ink-soft)">Scripture quotations follow the New King James Version (English) and the Reina-Valera G&oacute;mez (Spanish).</p>
+<p class="lead lang-es block">Este curso estudia el movimiento pentecostal y carism&aacute;tico &mdash; sus creencias, su historia, sus dones y sus distorsiones, todo sopesado con justicia por la Escritura y centrado en Cristo. Estas cinco lecturas son res&uacute;menes biling&uuml;es del Seminario Teol&oacute;gico de Chapala que llevan el estudio m&aacute;s a fondo, cada uno tomado de los grandes escritores de dominio p&uacute;blico sobre el Esp&iacute;ritu Santo y el movimiento.</p>
+<p class="lang-es block">Abarcan mucho, a prop&oacute;sito: R.A. Torrey sobre la persona y la obra del Esp&iacute;ritu, Alexander Maclaren sobre el d&iacute;a de Pentecost&eacute;s, el relato de primera mano de Frank Bartleman sobre el avivamiento de la Calle Azusa, Jonathan Edwards sobre discernir una verdadera obra del Esp&iacute;ritu, y A.J. Gordon y B.B. Warfield sobre si los dones milagrosos contin&uacute;an &mdash; el &uacute;ltimo poniendo los dos casos con justicia lado a lado. Cada uno es un resumen escrito por el STC y anclado en estos cl&aacute;sicos, no una reproducci&oacute;n; las obras mismas est&aacute;n libremente disponibles en el dominio p&uacute;blico.</p>
+<p class="lang-es block" style="font-size:.86rem;color:var(--ink-soft)">Las citas b&iacute;blicas siguen la New King James Version (ingl&eacute;s) y la Reina-Valera G&oacute;mez (espa&ntilde;ol).</p>
+</div>
+<!-- ============ HONORS ============ -->
+<div class="card honors">
+<h2>
+<span class="lang-en">With Honors — an invitation, not a requirement</span>
+<span class="lang-es">Con Honores — una invitación, no un requisito</span>
+</h2>
+<p class="lang-en block">Your degree is complete without these readings. Every CTS degree — the Certificate, the Associate of Divinity, the Th.M., and the M.Div. — is earned in full through the course units themselves, and no student is ever penalized for being unable to reach this material.</p>
+<p class="lang-en block">These supplemental readings are the path to one added distinction — your degree awarded <em>with honors</em>. Each class whose reading you complete counts toward it: twelve classes for the Certificate or the Th.M., twenty-five for the Associate, and thirty for the M.Div. Choose any three of the readings below, read them in full, and record your reading on your honor — then track your progress on the Honors page.</p>
+<p class="lang-es block">Su título está completo sin estas lecturas. Todo título de CTS — el Certificado, el Asociado en Divinidad, la Maestría en Teología, y la Maestría en Divinidad — se obtiene por completo mediante las unidades del curso mismo, y ningún estudiante es penalizado por no poder acceder a este material.</p>
+<p class="lang-es block">Estas lecturas complementarias son el camino hacia una distinción adicional — su título otorgado <em>con honores</em>. Cada clase cuya lectura complete cuenta para ella: doce clases para el Certificado o la Maestría en Teología, veinticinco para el Asociado o la Maestría en Divinidad. Elija tres cualesquiera de las lecturas de abajo, léalas por completo, y registre su lectura bajo su honor — luego siga su progreso en la página de Honores.</p>
+<span class="pill-note lang-en">No constant internet required — see below</span>
+<span class="pill-note lang-es">No se requiere internet constante — vea abajo</span>
+</div>
+<!-- ============ ACCESS / OFFLINE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading offline</span>
+<span class="lang-es">Leer sin conexión</span>
+</h2>
+<p class="lang-en block">Every one of these five readings is a Chapala Theological Seminary bilingual digest, written by CTS and included in your course download — so all of them open directly on your device, in English or Spanish, with no internet connection at all. Each digest takes up one of the great questions of apologetics and rests on the classic public-domain defenders of the faith, but the digests themselves are CTS-authored teaching, not reproductions, and those classic works are freely available online for any who wish to read them in full.</p>
+<p class="lang-es block">Cada una de estas cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala, escrito por el STC e incluido en la descarga de su curso — de modo que todas se abren directamente en su dispositivo, en inglés o español, sin conexión alguna. Cada resumen toma una de las grandes preguntas de la apologética y se apoya en los defensores clásicos de dominio público de la fe, pero los resúmenes mismos son enseñanza de autoría del STC, no reproducciones, y esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</p>
+</div>
+<!-- ============ TRANSLATE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading in another language</span>
+<span class="lang-es">Leer en otro idioma</span>
+</h2>
+<p class="lang-en block">Most of these works are in English. If you would rather read in Spanish or another language, the Chrome browser can translate a whole page for you. On a computer, right-click anywhere on the opened reading and choose “Translate to…”. On an Android phone or tablet, tap the three-dot menu and choose “Translate”. On an iPhone or iPad, tap the translate icon in the address bar — or open the page in the Chrome app if you don't see it. Machine translation is not perfect, but it is enough to follow the argument.</p>
+<p class="lang-es block">La mayoría de estas obras están en inglés. Si prefiere leer en español u otro idioma, el navegador Chrome puede traducir una página entera por usted. En una computadora, haga clic derecho en cualquier parte de la lectura abierta y elija “Traducir a…”. En un teléfono o tableta Android, toque el menú de tres puntos y elija “Traducir”. En un iPhone o iPad, toque el ícono de traducción en la barra de direcciones — o abra la página en la aplicación Chrome si no lo ve. La traducción automática no es perfecta, pero basta para seguir el argumento.</p>
+</div>
+<!-- ============ THE SHELF ============ -->
+<div class="shelf-head">
+<h2>
+<span class="lang-en">The Five Readings</span>
+<span class="lang-es">Las Cinco Lecturas</span>
+</h2>
+<div class="rule"></div>
+</div>
+<div class="counter no-print">
+<span class="lang-en">Chosen: <b id="cnt-en">0</b> of 3</span>
+<span class="lang-es">Elegidas: <b id="cnt-es">0</b> de 3</span>
+</div>
+<p class="limit-note no-print" id="limitNote"></p>
+<!-- 1 -->
+<article class="entry" data-id="1" data-title-en="The Person and Work of the Holy Spirit &mdash; CTS digest" data-title-es="La Persona y la Obra del Espíritu Santo &mdash; resumen del STC">
+<div class="locus"><span class="lang-en">Who the Spirit is and what He does &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Quién es el Espíritu y lo que hace &middot; un resumen bilingüe del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">1.</span><span class="lang-en">The Person and Work of the Holy Spirit</span><span class="lang-es">La Persona y la Obra del Espíritu Santo</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The Spirit's full deity and personhood; His work in creation, upon Christ, and in the believer — conviction, new birth, indwelling, assurance, sanctifying fruit, and the gifts. Anchored in R.A. Torrey's classic study of the Spirit.</p>
+<p class="caption lang-es block">La plena deidad y personalidad del Espíritu; su obra en la creación, sobre Cristo, y en el creyente — convicción, nuevo nacimiento, morada, seguridad, fruto santificador, y los dones. Anclada en el estudio clásico de R.A. Torrey sobre el Espíritu.</p>
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll">
+<div class="lang-en block dg-block">
+    <header class="dg-doc">
+      <h1>The Person and Work of the Holy Spirit</h1>
+      <p class="dg-sub">A Chapala Theological Seminary reading — who the Holy Spirit is, and what He does, anchored in R. A. Torrey</p>
+      <p class="dg-src">A CTS-authored study anchored in R. A. Torrey's public-domain <em>The Person and Work of the Holy Spirit</em> (1910), and in Scripture.</p>
+      <ul class="dg-chips">
+        <li>Doctrine: The Holy Spirit</li>
+        <li>Person &amp; Deity</li>
+        <li>Anchored in Torrey</li>
+        <li>Reading 1 of 5</li>
+      </ul>
+    </header>
+
+    <div class="dg-note">
+      <b>A word before you read.</b> This reading introduces the person and work of the Holy Spirit — who He is, and what He does. It follows the path traced by R. A. Torrey in his well-known study of the Spirit, a work now freely available in the public domain, and above all it follows the Scriptures themselves. There is a reason to begin here. The movement this course studies takes its very name from its emphasis on the Spirit — His baptism, His gifts, His power. And every question that lies ahead, about tongues and healing and the gifts, rests on some understanding of the Spirit Himself. Get Him wrong, and much else will go wrong with Him. So before we ask what the Spirit does among us, we ask who He is; and we shall find, at every turn, that He points us to Christ.
+    </div>
+
+    <h2><span class="dg-n">1.</span>The Spirit Is a Person</h2>
+    <p>The first thing to settle about the Holy Spirit is that He is a Person. This is easy to lose. We speak of the Spirit as an influence, a power, an atmosphere — an "it" to be used — and in doing so we quietly turn a Person into a thing. But Scripture will not allow it. The Spirit does what only a person can do: He teaches and brings to remembrance; He speaks, and forbids, and sends out workers; He searches the deep things of God; He wills, distributing gifts to each one as He chooses. And He can be treated as only a person can be treated: He can be grieved, He can be lied to, He can be resisted and even blasphemed. The Lord Jesus called Him "another Comforter" — another of the same kind as Himself, not another force but another Friend and Helper to take His place among the disciples. Why does this matter so much? Because our whole relationship to Him depends upon it. We do not use the Spirit as we would use electricity or steam; we yield to Him, we obey Him, we grieve Him or please Him, we walk with Him as with a Person. And the great question is never how much of the Spirit we have, as though He came in measurable amounts, but how much of us the Spirit has.</p>
+
+    <h2><span class="dg-n">2.</span>The Spirit Is God</h2>
+    <p>The second truth is that this Person is fully God — the third Person of the one true God, together with the Father and the Son. Scripture gives Him the names of God, the attributes of God, and the works of God. When Ananias lied about his gift, Peter told him he had lied "not to men but to God" — and the One he had lied to was the Holy Spirit. He is eternal, present everywhere, and He shares in the works that God alone can do: He moved over the waters at creation, He gives life, He inspired the Scriptures, He raised the Lord Jesus from the dead. When Christ gave the church its baptismal command, He joined the Spirit with the Father and the Son under a single divine name. The Spirit is therefore not a lesser or created being, not merely God's power reaching us from a distance, but God Himself, present and personal, to be worshiped and obeyed as God. To think rightly of the Spirit is to bow before Him, not to reach for Him as for a tool.</p>
+
+    <h2><span class="dg-n">3.</span>The Spirit and the Lord Jesus Christ</h2>
+    <p>The Spirit and the Son work in the closest possible harmony, and this stands at the heart of everything. The Spirit was upon Christ at every point of His earthly life: at His conception, at His baptism when the Spirit descended upon Him, throughout a ministry carried out in the power of the Spirit, and even in His offering of Himself to God. And the risen, exalted Christ, in turn, poured out the Spirit upon His church. But the most important thing is what Jesus Himself said the Spirit came to do. The Spirit does not advertise Himself or draw attention to His own gifts; He comes to point to the Son. "He will glorify Me," Jesus said, "for He will take of what is Mine and declare it to you." "He will testify of Me." This gives us the surest test of any work that claims to be the Spirit's, then or now: does it exalt Jesus Christ and lead people to Him? Where the Spirit is truly at work, Christ is magnified. And the Spirit never leads against the written Word He Himself inspired; the Spirit and the Scriptures always agree, for they are of one God.</p>
+
+    <h2><span class="dg-n">4.</span>The Spirit's Work in the Believer</h2>
+    <p>We come now to what the Spirit does in those who trust Christ. His work begins before conversion, for He convicts the world of sin, of righteousness, and of judgment, awakening the careless conscience. It is by the Spirit that a person is born again; no one enters the kingdom of God who is not born of the Spirit. And every true believer, without exception, has the Spirit — "if anyone does not have the Spirit of Christ, he is not His." This indwelling belongs to all who are Christ's, from the moment of faith, and not to an advanced few. Having come to dwell in the believer as in a temple, the Spirit does a many-sided work. He bears witness with our spirit that we are children of God, giving assurance. He sanctifies us, producing His fruit — love, joy, peace, patience, and the rest — the quiet growth of Christ's own character within us. He teaches and guides us into truth. He helps us in our weakness and intercedes for us when we do not know how to pray. And He seals us for the day of redemption, the guarantee of an inheritance kept for us. The whole Christian life, from the new birth to the final glory, is lived in the power of the indwelling Spirit.</p> <p>By that same Spirit we are given access to the Father, and made to know ourselves His children. He is the Spirit of adoption, by whom we cry, "Abba, Father," and He is the down payment, the guarantee of our inheritance until we take full possession of it. So the Spirit is not only the One who begins the Christian life but the One who carries it and secures it, all the way home. Torrey loved to press this comfort upon anxious believers: the Christian is not left to struggle on alone, at the mercy of his own weakness, but is indwelt, taught, guided, and kept by a divine Person who will not fail him. What He begins, He will surely complete; and the assurance of our salvation rests not on the strength of our feelings but on the faithful presence of the Spirit whom God has given us. This does not make us passive; it makes us confident. Knowing that the Spirit dwells in us, we set ourselves to walk with Him — grieving Him in nothing, obeying Him in all things, and drawing daily on the life He supplies.</p>
+
+    <h2><span class="dg-n">5.</span>Power for Service</h2>
+    <p>Torrey laid a particular stress on one further work of the Spirit: His power for service. Beyond regenerating and indwelling the believer, the Spirit comes upon His servants to fit them for witness and work — the enduement of power that turned fearful disciples into bold witnesses at Pentecost. Torrey urged every believer to seek this fullness of the Spirit, without which, he held, our labor for God is weak and our witness barren. Whether this power-for-service is best described as a distinct "baptism in the Spirit" following conversion, or as repeated fillings of the one Spirit already given, is a question Christians have answered differently, and one this seminary weighs carefully in its own unit. But the practical point stands, however it is framed: we are not meant to serve God in our own strength. The same Spirit who raised Christ and filled the first church is given to empower our witness still. And so we are commanded to be filled with the Spirit — an ongoing command, not a once-for-all event — to walk in the Spirit, and to keep in step with Him, that His power might rest upon all we do.</p>
+
+    <h2><span class="dg-n">6.</span>The Gifts, and the Fitting Response</h2>
+    <p>The Spirit who indwells and empowers His people also equips them, distributing gifts — abilities for the building up of the body of Christ — to each one as He wills. Which gifts there are, and whether all of them continue today, are questions taken up elsewhere in this course; here it is enough to see that the gifts are His to give, bestowed freely and sovereignly, for the common good and the glory of God, and never earned as a badge of superior holiness. And this points us to a distinction worth keeping: the gifts of the Spirit are not the same as the fruit of the Spirit. A believer may have striking gifts and little fruit, or humble gifts and abundant fruit — and it is the fruit, not the gift, that reveals a life truly filled with the Spirit. The right response to all of this is not to grasp after experiences or manifestations, but to yield: to surrender more of ourselves to the Person who is God, to seek His fullness for holiness first and for service too, and to let Him do what He always does — turn our eyes to the Son.</p>
+
+    <h2><span class="dg-n">7.</span>Knowing the Spirit Better</h2>
+    <p>How, then, shall we come to know this Spirit better, and to live in His fullness? Torrey's counsel was simple and searching. First, we must recognize the Spirit for who He is — a divine Person, dwelling within us — and treat Him accordingly, in reverence and dependence rather than neglect. Second, we must yield fully to His control, holding nothing back, for the Spirit fills the surrendered heart. Third, we must ask; the Father gives the Holy Spirit to those who ask Him, and the promise still stands. Fourth, we must feed on the Word the Spirit inspired, for He works through the Scriptures and never apart from them; a Christian who neglects the Bible cannot expect the Spirit's power. And fifth, we must obey, walking in the light we already have, for the Spirit is given to those who obey God. There is no secret technique here, no formula to master — only a Person to be honored, trusted, asked, fed upon in His Word, and obeyed. Those who so walk with Him find, as the first disciples found, that He is faithful: He gives assurance, forms the character of Christ, guides the perplexed, strengthens the weak, and pours out power for the work He gives us to do.</p>
+
+    <div class="dg-reflect">
+      <b>For reflection.</b> Do you think of the Holy Spirit as a Person to be honored and obeyed, or as a power to be used? Can you say, from Scripture, that He dwells in you? Is your Christian life marked by His fruit — the growing likeness of Christ — and not merely by feelings or gifts? And are you seeking His fullness, not for display, but for a holy life and a faithful witness? The same Spirit who filled the first disciples is given to every believer still. Do not grieve Him; yield to Him; and ask the Father, who gives the Holy Spirit to those who ask.
+    </div>
+
+    <footer class="dg-doc">
+      <p><b>Source.</b> A Chapala Theological Seminary reading on the person and work of the Holy Spirit, anchored in R. A. Torrey's classic public-domain study <em>The Person and Work of the Holy Spirit</em> (1910), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic work itself is freely available in the public domain.</p>
+    </footer>
+  </div>
+<div class="lang-es block dg-block">
+    <header class="dg-doc">
+      <h1>La Persona y la Obra del Espíritu Santo</h1>
+      <p class="dg-sub">Una lectura del Seminario Teológico de Chapala — quién es el Espíritu Santo, y lo que hace, anclada en R. A. Torrey</p>
+      <p class="dg-src">Un estudio escrito por el STC anclado en <em>La Persona y la Obra del Espíritu Santo</em> (1910) de R. A. Torrey, de dominio público, y en la Escritura.</p>
+      <ul class="dg-chips">
+        <li>Doctrina: El Espíritu Santo</li>
+        <li>Persona y Deidad</li>
+        <li>Anclada en Torrey</li>
+        <li>Lectura 1 de 5</li>
+      </ul>
+    </header>
+
+    <div class="dg-note">
+      <b>Una palabra antes de leer.</b> Esta lectura introduce la persona y la obra del Espíritu Santo — quién es Él, y lo que hace. Sigue el camino trazado por R. A. Torrey en su conocido estudio sobre el Espíritu, una obra ahora libremente disponible en el dominio público, y sobre todo sigue las Escrituras mismas. Hay una razón para comenzar aquí. El movimiento que estudia este curso toma su nombre mismo de su énfasis en el Espíritu — su bautismo, sus dones, su poder. Y toda pregunta que está por delante, sobre las lenguas y la sanidad y los dones, descansa sobre alguna comprensión del Espíritu mismo. Equivóquese en cuanto a Él, y mucho más se equivocará con Él. Así que antes de preguntar qué hace el Espíritu entre nosotros, preguntamos quién es; y hallaremos, en cada paso, que Él nos señala a Cristo.
+    </div>
+
+    <h2><span class="dg-n">1.</span>El Espíritu es una Persona</h2>
+    <p>Lo primero que hay que establecer acerca del Espíritu Santo es que es una Persona. Esto es fácil de perder. Hablamos del Espíritu como una influencia, un poder, una atmósfera — una "cosa" que se usa — y al hacerlo convertimos calladamente a una Persona en un objeto. Pero la Escritura no lo permite. El Espíritu hace lo que solo una persona puede hacer: enseña y trae a la memoria; habla, y prohíbe, y envía obreros; escudriña lo profundo de Dios; quiere, repartiendo dones a cada uno como Él escoge. Y se le puede tratar solo como a una persona se le puede tratar: puede ser contristado, se le puede mentir, se le puede resistir y aun blasfemar. El Señor Jesús lo llamó "otro Consolador" — otro de la misma clase que Él mismo, no otra fuerza sino otro Amigo y Ayudador para tomar su lugar entre los discípulos. ¿Por qué importa tanto esto? Porque toda nuestra relación con Él depende de ello. No usamos al Espíritu como usaríamos la electricidad o el vapor; nos rendimos a Él, le obedecemos, le contristamos o le agradamos, andamos con Él como con una Persona. Y la gran pregunta nunca es cuánto del Espíritu tenemos, como si viniera en cantidades medibles, sino cuánto de nosotros tiene el Espíritu.</p>
+
+    <h2><span class="dg-n">2.</span>El Espíritu es Dios</h2>
+    <p>La segunda verdad es que esta Persona es plenamente Dios — la tercera Persona del único Dios verdadero, junto con el Padre y el Hijo. La Escritura le da los nombres de Dios, los atributos de Dios, y las obras de Dios. Cuando Ananías mintió acerca de su ofrenda, Pedro le dijo que había mentido "no a los hombres, sino a Dios" — y Aquel a quien había mentido era el Espíritu Santo. Es eterno, presente en todas partes, y participa en las obras que solo Dios puede hacer: se movió sobre las aguas en la creación, da vida, inspiró las Escrituras, resucitó al Señor Jesús de los muertos. Cuando Cristo dio a la iglesia su mandato bautismal, unió al Espíritu con el Padre y el Hijo bajo un solo nombre divino. Por tanto, el Espíritu no es un ser menor ni creado, no es meramente el poder de Dios que nos alcanza desde lejos, sino Dios mismo, presente y personal, para ser adorado y obedecido como Dios. Pensar rectamente del Espíritu es inclinarse ante Él, no alcanzarlo como a una herramienta.</p>
+
+    <h2><span class="dg-n">3.</span>El Espíritu y el Señor Jesucristo</h2>
+    <p>El Espíritu y el Hijo obran en la más estrecha armonía posible, y esto está en el corazón de todo. El Espíritu estuvo sobre Cristo en cada punto de su vida terrenal: en su concepción, en su bautismo cuando el Espíritu descendió sobre Él, a lo largo de un ministerio llevado a cabo en el poder del Espíritu, y aun en su ofrecimiento de sí mismo a Dios. Y el Cristo resucitado y exaltado, a su vez, derramó el Espíritu sobre su iglesia. Pero lo más importante es lo que Jesús mismo dijo que el Espíritu vino a hacer. El Espíritu no se anuncia a sí mismo ni llama la atención sobre sus propios dones; viene a señalar al Hijo. "Él me glorificará," dijo Jesús, "porque tomará de lo mío, y os lo hará saber." "Él dará testimonio de mí." Esto nos da la prueba más segura de cualquier obra que dice ser del Espíritu, entonces o ahora: ¿exalta a Jesucristo y lleva a las personas a Él? Donde el Espíritu verdaderamente obra, Cristo es magnificado. Y el Espíritu nunca guía en contra de la Palabra escrita que Él mismo inspiró; el Espíritu y las Escrituras siempre concuerdan, pues son de un mismo Dios.</p>
+
+    <h2><span class="dg-n">4.</span>La obra del Espíritu en el creyente</h2>
+    <p>Llegamos ahora a lo que el Espíritu hace en los que confían en Cristo. Su obra comienza antes de la conversión, pues convence al mundo de pecado, de justicia y de juicio, despertando la conciencia descuidada. Es por el Espíritu que una persona nace de nuevo; nadie entra en el reino de Dios que no nazca del Espíritu. Y todo verdadero creyente, sin excepción, tiene el Espíritu — "si alguno no tiene el Espíritu de Cristo, el tal no es de él." Esta morada pertenece a todos los que son de Cristo, desde el momento de la fe, y no a unos pocos avanzados. Habiendo venido a morar en el creyente como en un templo, el Espíritu hace una obra de muchos lados. Da testimonio a nuestro espíritu de que somos hijos de Dios, dando seguridad. Nos santifica, produciendo su fruto — amor, gozo, paz, paciencia, y lo demás — el crecimiento callado del carácter mismo de Cristo dentro de nosotros. Nos enseña y nos guía a la verdad. Nos ayuda en nuestra debilidad e intercede por nosotros cuando no sabemos cómo orar. Y nos sella para el día de la redención, la garantía de una herencia guardada para nosotros. Toda la vida cristiana, desde el nuevo nacimiento hasta la gloria final, se vive en el poder del Espíritu que mora en nosotros.</p> <p>Por ese mismo Espíritu se nos da acceso al Padre, y llegamos a conocernos como sus hijos. Es el Espíritu de adopción, por quien clamamos: "Abba, Padre," y es el anticipo, la garantía de nuestra herencia hasta que tomemos plena posesión de ella. Así que el Espíritu no es solo Aquel que comienza la vida cristiana, sino Aquel que la lleva y la asegura, todo el camino a casa. A Torrey le encantaba insistir en este consuelo a los creyentes angustiados: el cristiano no queda abandonado a luchar solo, a merced de su propia debilidad, sino que es habitado, enseñado, guiado y guardado por una Persona divina que no le fallará. Lo que Él comienza, seguramente lo completará; y la seguridad de nuestra salvación descansa no en la fuerza de nuestros sentimientos, sino en la presencia fiel del Espíritu que Dios nos ha dado. Esto no nos hace pasivos; nos hace confiados. Sabiendo que el Espíritu mora en nosotros, nos disponemos a andar con Él — no contristándolo en nada, obedeciéndolo en todo, y recurriendo cada día a la vida que Él suministra.</p>
+
+    <h2><span class="dg-n">5.</span>Poder para el servicio</h2>
+    <p>Torrey puso un énfasis particular en una obra más del Espíritu: su poder para el servicio. Más allá de regenerar y morar en el creyente, el Espíritu viene sobre sus siervos para capacitarlos para el testimonio y la obra — la investidura de poder que convirtió a discípulos temerosos en testigos audaces en Pentecostés. Torrey instó a todo creyente a buscar esta plenitud del Espíritu, sin la cual, sostenía, nuestra labor para Dios es débil y nuestro testimonio estéril. Si este poder-para-el-servicio se describe mejor como un "bautismo en el Espíritu" distinto que sigue a la conversión, o como llenados repetidos del único Espíritu ya dado, es una pregunta que los cristianos han respondido de manera diferente, y una que este seminario sopesa con cuidado en su propia unidad. Pero el punto práctico se mantiene, comoquiera que se formule: no estamos destinados a servir a Dios en nuestra propia fuerza. El mismo Espíritu que resucitó a Cristo y llenó a la primera iglesia es dado para empoderar nuestro testimonio todavía. Y por eso se nos manda ser llenos del Espíritu — un mandato continuo, no un evento de una sola vez — andar en el Espíritu, y mantenernos a su paso, para que su poder repose sobre todo lo que hacemos.</p>
+
+    <h2><span class="dg-n">6.</span>Los dones, y la respuesta apropiada</h2>
+    <p>El Espíritu que mora en su pueblo y lo empodera también lo equipa, repartiendo dones — capacidades para la edificación del cuerpo de Cristo — a cada uno como Él quiere. Cuáles dones hay, y si todos ellos continúan hoy, son preguntas que se tratan en otra parte de este curso; aquí basta con ver que los dones son suyos para darlos, otorgados libre y soberanamente, para el bien común y la gloria de Dios, y nunca ganados como una insignia de santidad superior. Y esto nos señala una distinción que vale la pena guardar: los dones del Espíritu no son lo mismo que el fruto del Espíritu. Un creyente puede tener dones llamativos y poco fruto, o dones humildes y fruto abundante — y es el fruto, no el don, lo que revela una vida verdaderamente llena del Espíritu. La respuesta apropiada a todo esto no es aferrarse a experiencias o manifestaciones, sino rendirse: entregar más de nosotros mismos a la Persona que es Dios, buscar su plenitud para la santidad primero y para el servicio también, y dejarle hacer lo que Él siempre hace — volver nuestros ojos al Hijo.</p>
+
+    <h2><span class="dg-n">7.</span>Conocer mejor al Espíritu</h2>
+    <p>¿Cómo, entonces, llegaremos a conocer mejor a este Espíritu, y a vivir en su plenitud? El consejo de Torrey era sencillo y penetrante. Primero, debemos reconocer al Espíritu por quien es — una Persona divina, morando dentro de nosotros — y tratarlo en consecuencia, con reverencia y dependencia en vez de descuido. Segundo, debemos rendirnos plenamente a su control, sin retener nada, pues el Espíritu llena el corazón rendido. Tercero, debemos pedir; el Padre da el Espíritu Santo a los que se lo piden, y la promesa aún se mantiene. Cuarto, debemos alimentarnos de la Palabra que el Espíritu inspiró, pues Él obra por medio de las Escrituras y nunca aparte de ellas; un cristiano que descuida la Biblia no puede esperar el poder del Espíritu. Y quinto, debemos obedecer, andando en la luz que ya tenemos, pues el Espíritu es dado a los que obedecen a Dios. No hay aquí ninguna técnica secreta, ninguna fórmula que dominar — solo una Persona para honrar, confiar, pedir, alimentarse de ella en su Palabra, y obedecer. Los que así andan con Él hallan, como hallaron los primeros discípulos, que es fiel: da seguridad, forma el carácter de Cristo, guía a los perplejos, fortalece a los débiles, y derrama poder para la obra que nos da que hacer.</p>
+
+    <div class="dg-reflect">
+      <b>Para reflexionar.</b> ¿Piensa en el Espíritu Santo como una Persona para honrar y obedecer, o como un poder para usar? ¿Puede decir, desde la Escritura, que Él mora en usted? ¿Está su vida cristiana marcada por su fruto — la creciente semejanza a Cristo — y no meramente por sentimientos o dones? ¿Y está buscando su plenitud, no para exhibición, sino para una vida santa y un testimonio fiel? El mismo Espíritu que llenó a los primeros discípulos es dado a todo creyente todavía. No lo contriste; ríndase a Él; y pida al Padre, que da el Espíritu Santo a los que se lo piden.
+    </div>
+
+    <footer class="dg-doc">
+      <p><b>Fuente.</b> Una lectura del Seminario Teológico de Chapala sobre la persona y la obra del Espíritu Santo, anclada en el estudio clásico de dominio público de R. A. Torrey <em>La Persona y la Obra del Espíritu Santo</em> (1910), y en la Escritura. Esta es enseñanza escrita por el STC, no una reproducción; la obra clásica misma está libremente disponible en el dominio público.</p>
+    </footer>
+  </div>
+</div></details>
+<div class="foot">
+<label class="pick"><input data-pick="1" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 2 -->
+<article class="entry" data-id="2" data-title-en="The Coming of the Spirit at Pentecost &mdash; CTS digest" data-title-es="La Venida del Espíritu en Pentecostés &mdash; resumen del STC">
+<div class="locus"><span class="lang-en">Acts 2 — the day the church was born &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Hechos 2 — el día en que nació la iglesia &middot; un resumen bilingüe del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">2.</span><span class="lang-en">The Coming of the Spirit at Pentecost</span><span class="lang-es">La Venida del Espíritu en Pentecostés</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The outpouring of the Spirit, the tongues as known human languages (Babel reversed), and Peter's Christ-centered sermon that brought three thousand to faith. Anchored in Alexander Maclaren's expositions of Acts.</p>
+<p class="caption lang-es block">El derramamiento del Espíritu, las lenguas como idiomas humanos conocidos (Babel revertido), y el sermón de Pedro centrado en Cristo que llevó a tres mil a la fe. Anclada en las exposiciones de Alexander Maclaren sobre Hechos.</p>
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll">
+<div class="lang-en block dg-block">
+    <header class="dg-doc">
+      <h1>The Coming of the Spirit at Pentecost</h1>
+      <p class="dg-sub">A Chapala Theological Seminary reading — Acts 2, the day the church was born, anchored in Alexander Maclaren</p>
+      <p class="dg-src">A CTS-authored reading of Acts 2, anchored in Alexander Maclaren's public-domain <em>Expositions of Holy Scripture</em>, and in Scripture.</p>
+      <ul class="dg-chips">
+        <li>Book Study: Acts</li>
+        <li>Pentecost</li>
+        <li>Anchored in Maclaren</li>
+        <li>Reading 2 of 5</li>
+      </ul>
+    </header>
+
+    <div class="dg-note">
+      <b>A word before you read.</b> This reading walks through the day of Pentecost as Luke tells it in Acts 2 — the coming of the Holy Spirit, the birth of the church, and the first preaching of the gospel. It follows the expositions of Alexander Maclaren, the great Scottish preacher whose careful, warm-hearted studies of Scripture are now freely available in the public domain, and above all it follows the text itself. Here is where the church began — not with a plan or an organization, but with the promised Spirit poured out and Christ proclaimed to the nations. And here, in the very tongues of Pentecost, we meet a question this course cares about greatly: what were they, and what do they teach us?
+    </div>
+
+    <h2><span class="dg-n">1.</span>The Promise and the Waiting</h2>
+    <p>Before He ascended, the Lord Jesus told His disciples to wait. They were not to rush out and begin the work, however eager they were; they were to tarry in Jerusalem until they were clothed with power from on high. "You shall receive power," He said, "when the Holy Spirit has come upon you." And so, for some ten days, about a hundred and twenty of them waited together, and they filled the waiting with prayer. Maclaren notes the fitness of this: the church's very first act was not activity but dependence, not organizing but praying. The power they needed could not be manufactured; it could only be received. There is a lesson here that the church has often forgotten — that the work of God is done in the strength of God, and that the strength of God is given to those who wait upon Him. The disciples did not know the day or the hour; they knew only the promise, and they held to it in prayer until it came. Every genuine work of God since has begun in that same posture: empty hands lifted up, waiting to be filled. We are not more capable than they were, nor less dependent; and if the church today would see God work, she must still begin where they began — on her knees, empty and expectant, waiting for the promise of the Father to be poured out afresh.</p>
+
+    <h2><span class="dg-n">2.</span>The Day: Wind and Fire</h2>
+    <p>When the day of Pentecost had fully come, and they were all together in one place, it came. Suddenly there was a sound from heaven like a rushing mighty wind, and it filled the whole house where they were sitting. Divided tongues, as of fire, appeared and rested on each one of them. And they were all filled with the Holy Spirit. The two signs are full of meaning. Wind, throughout Scripture, is a figure of the Spirit of God — unseen, sovereign, life-giving; indeed the same word serves for wind, for breath, and for Spirit. And fire is the ancient sign of God's holy presence, as at the burning bush and upon Sinai. Together they announced, to any who had eyes to see, that God had come down to dwell among His people in a new and nearer way — no longer in a tabernacle of cloth or a temple of stone, but in a people, in living men and women. The timing was fitting too: Pentecost was a harvest feast, fifty days after the Passover at which the Lord had died and risen; and now, at the next great feast, He sent His Spirit to begin the great harvest of souls.</p>
+
+    <h2><span class="dg-n">3.</span>Known Languages, Not Confusion</h2>
+    <p>The first effect of the Spirit's coming was speech — but speech of a particular kind. The believers "began to speak with other tongues, as the Spirit gave them utterance." And these tongues were not unintelligible sounds; they were real, identifiable human languages. Jerusalem was full of devout pilgrims from every nation, and when the sound drew them together, each one heard the believers speaking in his own native language. Luke even lists the nations — Parthians, Medes, Elamites, and a dozen more — and records the crowd's astonishment: "we hear them speaking in our own tongues the wonderful works of God." The whole marvel was precisely that these Galileans, who had never learned these languages, were plainly understood. Here is a beautiful reversal. At Babel, long before, God had scattered proud humanity by confusing its one language into many. At Pentecost He begins to gather the nations back to Himself — not by erasing their languages, but by speaking His good news in all of them. The gospel is for every tongue under heaven, and on the church's first day that truth was written across the sky. Whether the tongues Paul later describes in Corinth are of the same kind or another is a separate question, taken up elsewhere in this course; here we simply let Acts say what it plainly says.</p>
+
+    <h2><span class="dg-n">4.</span>Peter's Sermon: Christ Proclaimed</h2>
+    <p>When some in the crowd mocked, saying the believers were drunk, Peter stood up with the eleven to explain. This, he said, was no drunkenness, but the fulfillment of what the prophet Joel had foretold — the last-days outpouring of God's Spirit upon all flesh. But Maclaren draws our attention to where Peter goes from there. He does not linger over the wind, the fire, or the tongues; he does not make the wonders themselves the message. He preaches Christ. He tells them of Jesus of Nazareth, attested by God with mighty works, delivered up according to God's set purpose and crucified by wicked hands — and then raised from the dead, for death could not hold Him, and now exalted to the right hand of God, from where He has poured out this very Spirit they see and hear. Peter drives the whole matter to a single point: "God has made this Jesus, whom you crucified, both Lord and Christ." The Spirit had come, and His first work through the church was to lift up the crucified and risen Savior before the eyes of the crowd. Pentecost was not, in the end, about the phenomena; it was about the Son whom the Spirit had come to glorify.</p>
+
+    <h2><span class="dg-n">5.</span>The Response: Three Thousand Souls</h2>
+    <p>The effect of the sermon was not applause but conviction. The word cut the hearers to the heart, and they cried out, "Men and brethren, what shall we do?" Peter's answer is the gospel's own answer: "Repent, and let every one of you be baptized in the name of Jesus Christ for the remission of sins; and you shall receive the gift of the Holy Spirit." Turn from your sin, trust the crucified and risen Lord, be baptized in His name, and receive forgiveness and the Spirit — here, in the first Christian sermon, is the message the church has carried ever since. And the response was astonishing: "those who gladly received his word were baptized; and that day about three thousand souls were added to them." In a single day the little company of believers had become a great multitude. This is the shape of the Spirit's work: He came, and the result was bold witness to Christ and the salvation of the lost. The mark of His presence was not spectacle for its own sake, but a gospel preached and sinners brought home to God. That is still the truest evidence that the Spirit is among us.</p>
+
+    <h2><span class="dg-n">6.</span>The Church That Was Born</h2>
+    <p>Luke leaves us a lovely portrait of the newborn church's earliest life together. "They continued steadfastly in the apostles' doctrine and fellowship, in the breaking of bread, and in prayers." They shared what they had with any who were in need; they worshiped together with glad and sincere hearts; they enjoyed the goodwill of the people around them — "and the Lord added to the church daily those who were being saved." Here is the Spirit-filled church in miniature, and a pattern for every age. Notice the four marks Maclaren points to: a people devoted to the teaching of God's Word, to real fellowship with one another, to worship and the Lord's Table, and to prayer — and among them, open-handed love and a steady stream of new converts. This is what the Spirit produces when He is truly at work: not merely excitement, but a devoted, worshiping, loving, growing people. The wind and fire of that first morning settled down into the ordinary, faithful, glad life of a church — and that ordinary life was itself the continuing miracle of Pentecost. We should not despise it. A quiet church full of the Word, of prayer, and of love is a greater wonder than any noise.</p>
+
+    <h2><span class="dg-n">7.</span>What Pentecost Means for Us</h2>
+    <p>What did that day accomplish, and what does it mean for us who read of it so long after? First, the church was born — the new-covenant people of God, indwelt by the Spirit, in whom the ancient promises were fulfilled that God would put His Spirit within His people and write His law on their hearts. Second, the worldwide mission of the gospel began; the gathering of the nations to hear God's works in their own tongues, and the three thousand saved that first day, were the firstfruits of a harvest that would reach, as Jesus had said, to the ends of the earth. And third, the age of the Spirit was opened — the age in which the whole church still lives. The same Spirit who came that morning indwells every believer in Christ today; the same gospel that Peter preached is still the power of God for salvation; and the same mission still presses outward to the nations. Pentecost is not merely a past marvel to admire, but the doorway into the age we inhabit. When we gather, pray, preach, and are filled for service, we are living out what began on that day.</p>
+
+    <h2><span class="dg-n">8.</span>Christ at the Center</h2>
+    <p>Through it all, Pentecost points beyond itself to Christ. The Spirit was not given until Jesus was glorified; He came because the Son had finished His work and been exalted to the Father's right hand. And the Spirit's first act through the newborn church was to preach that same Son and to gather people to Him. This gives us the enduring measure of any work that claims to be the Spirit's, then or now: does it exalt Jesus Christ and lead people to Him? Pentecost did. The wind, the fire, and the tongues all served that one end — the proclamation of a crucified and risen Savior, and the turning of sinners to God. Where the Spirit is truly at work, Christ is magnified and His people multiplied. That is what we saw on the day the church was born; and it is what we may still ask God to do among us — not chiefly a repetition of the signs, but the same Spirit lifting up the same Savior, and the same salvation flowing out to the lost.</p>
+
+    <div class="dg-reflect">
+      <b>For reflection.</b> Do you begin the work of God as the first disciples did — in waiting and prayer — or do you rush ahead in your own strength? Does Peter's gospel — the crucified and risen Christ, repentance, forgiveness, the Spirit — still grip your heart? And is your own church life marked by the four things Luke names: the Word, fellowship, the breaking of bread, and prayer? Ask the Lord who poured out His Spirit at Pentecost to fill His church again with that same devotion, and to keep Christ at its center.
+    </div>
+
+    <footer class="dg-doc">
+      <p><b>Source.</b> A Chapala Theological Seminary reading of Acts 2, anchored in Alexander Maclaren's classic public-domain <em>Expositions of Holy Scripture</em> and in Scripture. This is CTS-authored teaching, not a reproduction; the classic expositions are freely available in the public domain.</p>
+    </footer>
+  </div>
+<div class="lang-es block dg-block">
+    <header class="dg-doc">
+      <h1>La Venida del Espíritu en Pentecostés</h1>
+      <p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Hechos 2, el día en que nació la iglesia, anclada en Alexander Maclaren</p>
+      <p class="dg-src">Una lectura de Hechos 2 escrita por el STC, anclada en las <em>Exposiciones de la Sagrada Escritura</em> de Alexander Maclaren, de dominio público, y en la Escritura.</p>
+      <ul class="dg-chips">
+        <li>Estudio: Hechos</li>
+        <li>Pentecostés</li>
+        <li>Anclada en Maclaren</li>
+        <li>Lectura 2 de 5</li>
+      </ul>
+    </header>
+
+    <div class="dg-note">
+      <b>Una palabra antes de leer.</b> Esta lectura recorre el día de Pentecostés tal como Lucas lo cuenta en Hechos 2 — la venida del Espíritu Santo, el nacimiento de la iglesia, y la primera predicación del evangelio. Sigue las exposiciones de Alexander Maclaren, el gran predicador escocés cuyos cuidadosos y cálidos estudios de la Escritura están ahora libremente disponibles en el dominio público, y sobre todo sigue el texto mismo. Aquí es donde comenzó la iglesia — no con un plan ni una organización, sino con el Espíritu prometido derramado y Cristo proclamado a las naciones. Y aquí, en las lenguas mismas de Pentecostés, encontramos una pregunta que a este curso le importa mucho: ¿qué eran, y qué nos enseñan?
+    </div>
+
+    <h2><span class="dg-n">1.</span>La promesa y la espera</h2>
+    <p>Antes de ascender, el Señor Jesús dijo a sus discípulos que esperaran. No debían salir corriendo a comenzar la obra, por ansiosos que estuvieran; debían quedarse en Jerusalén hasta ser investidos de poder desde lo alto. "Recibiréis poder," dijo, "cuando haya venido sobre vosotros el Espíritu Santo." Y así, por unos diez días, unos ciento veinte de ellos esperaron juntos, y llenaron la espera con oración. Maclaren nota lo apropiado de esto: el primer acto mismo de la iglesia no fue actividad sino dependencia, no organizar sino orar. El poder que necesitaban no podía fabricarse; solo podía recibirse. Hay aquí una lección que la iglesia a menudo ha olvidado — que la obra de Dios se hace en la fuerza de Dios, y que la fuerza de Dios se da a los que esperan en Él. Los discípulos no sabían el día ni la hora; sabían solo la promesa, y se aferraron a ella en oración hasta que vino. Toda obra genuina de Dios desde entonces ha comenzado en esa misma postura: manos vacías levantadas, esperando ser llenadas.</p>
+
+    <h2><span class="dg-n">2.</span>El día: viento y fuego</h2>
+    <p>Cuando llegó cumplidamente el día de Pentecostés, y estaban todos juntos en un mismo lugar, vino. De repente hubo un estruendo del cielo como de un viento recio que soplaba, y llenó toda la casa donde estaban sentados. Y aparecieron lenguas repartidas, como de fuego, asentándose sobre cada uno de ellos. Y fueron todos llenos del Espíritu Santo. Las dos señales están llenas de significado. El viento, a lo largo de la Escritura, es figura del Espíritu de Dios — invisible, soberano, dador de vida; en efecto, la misma palabra sirve para viento, para aliento, y para Espíritu. Y el fuego es la antigua señal de la santa presencia de Dios, como en la zarza ardiente y en el Sinaí. Juntos anunciaban, a cualquiera que tuviera ojos para ver, que Dios había descendido a morar entre su pueblo de una manera nueva y más cercana — ya no en un tabernáculo de tela ni en un templo de piedra, sino en un pueblo, en hombres y mujeres vivos. El momento también fue apropiado: Pentecostés era una fiesta de cosecha, cincuenta días después de la Pascua en que el Señor había muerto y resucitado; y ahora, en la siguiente gran fiesta, envió su Espíritu para comenzar la gran cosecha de almas.</p>
+
+    <h2><span class="dg-n">3.</span>Idiomas conocidos, no confusión</h2>
+    <p>El primer efecto de la venida del Espíritu fue el habla — pero un habla de una clase particular. Los creyentes "comenzaron a hablar en otras lenguas, según el Espíritu les daba que hablasen." Y estas lenguas no eran sonidos ininteligibles; eran idiomas humanos reales e identificables. Jerusalén estaba llena de peregrinos devotos de todas las naciones, y cuando el estruendo los reunió, cada uno oyó a los creyentes hablar en su propia lengua natal. Lucas incluso enumera las naciones — partos, medos, elamitas, y una docena más — y registra el asombro de la multitud: "les oímos hablar en nuestras lenguas las maravillas de Dios." Toda la maravilla fue precisamente que estos galileos, que nunca habían aprendido estos idiomas, eran entendidos con claridad. Aquí hay una hermosa reversión. En Babel, mucho antes, Dios había esparcido a la humanidad soberbia confundiendo su único idioma en muchos. En Pentecostés comienza a reunir a las naciones de vuelta a sí mismo — no borrando sus idiomas, sino hablando sus buenas nuevas en todos ellos. El evangelio es para toda lengua bajo el cielo, y en el primer día de la iglesia esa verdad quedó escrita en el cielo. Si las lenguas que Pablo describe después en Corinto son de la misma clase o de otra es una pregunta aparte, tratada en otra parte de este curso; aquí simplemente dejamos que Hechos diga lo que claramente dice.</p>
+
+    <h2><span class="dg-n">4.</span>El sermón de Pedro: Cristo proclamado</h2>
+    <p>Cuando algunos en la multitud se burlaron, diciendo que los creyentes estaban ebrios, Pedro se puso de pie con los once para explicar. Esto, dijo, no era embriaguez, sino el cumplimiento de lo que el profeta Joel había predicho — el derramamiento del Espíritu de Dios de los postreros días sobre toda carne. Pero Maclaren dirige nuestra atención a adónde va Pedro desde allí. No se detiene en el viento, el fuego, ni las lenguas; no hace de los prodigios mismos el mensaje. Predica a Cristo. Les habla de Jesús de Nazaret, aprobado por Dios con obras poderosas, entregado según el determinado propósito de Dios y crucificado por manos de inicuos — y luego resucitado de los muertos, porque la muerte no podía retenerlo, y ahora exaltado a la diestra de Dios, desde donde ha derramado este mismo Espíritu que ellos ven y oyen. Pedro lleva todo el asunto a un solo punto: "Dios le ha hecho Señor y Cristo a este Jesús a quien vosotros crucificasteis." El Espíritu había venido, y su primera obra por medio de la iglesia fue levantar al Salvador crucificado y resucitado ante los ojos de la multitud. Pentecostés no era, al fin, acerca de los fenómenos; era acerca del Hijo a quien el Espíritu había venido a glorificar.</p>
+
+    <h2><span class="dg-n">5.</span>La respuesta: tres mil almas</h2>
+    <p>El efecto del sermón no fue aplauso, sino convicción. La palabra compungió de corazón a los oyentes, y clamaron: "Varones hermanos, ¿qué haremos?" La respuesta de Pedro es la respuesta propia del evangelio: "Arrepentíos, y bautícese cada uno de vosotros en el nombre de Jesucristo para perdón de los pecados; y recibiréis el don del Espíritu Santo." Apartaos de vuestro pecado, confiad en el Señor crucificado y resucitado, sed bautizados en su nombre, y recibid el perdón y el Espíritu — aquí, en el primer sermón cristiano, está el mensaje que la iglesia ha llevado desde entonces. Y la respuesta fue asombrosa: "los que recibieron con gusto su palabra fueron bautizados; y se añadieron aquel día como tres mil almas." En un solo día la pequeña compañía de creyentes se había vuelto una gran multitud. Esta es la forma de la obra del Espíritu: vino, y el resultado fue un testimonio audaz de Cristo y la salvación de los perdidos. La señal de su presencia no fue el espectáculo por sí mismo, sino un evangelio predicado y pecadores traídos a casa a Dios. Esa sigue siendo la evidencia más verdadera de que el Espíritu está entre nosotros.</p>
+
+    <h2><span class="dg-n">6.</span>La iglesia que nació</h2>
+    <p>Lucas nos deja un hermoso retrato de la vida más temprana de la iglesia recién nacida. "Y perseveraban en la doctrina de los apóstoles, y en la comunión, y en el partimiento del pan, y en las oraciones." Compartían lo que tenían con cualquiera que estuviera necesitado; adoraban juntos con corazones alegres y sinceros; gozaban de la buena voluntad de la gente a su alrededor — "y el Señor añadía cada día a la iglesia los que habían de ser salvos." Aquí está la iglesia llena del Espíritu en miniatura, y un patrón para toda época. Note las cuatro marcas que Maclaren señala: un pueblo dedicado a la enseñanza de la Palabra de Dios, a la comunión real unos con otros, a la adoración y la Mesa del Señor, y a la oración — y entre ellos, amor de mano abierta y una corriente constante de nuevos convertidos. Esto es lo que el Espíritu produce cuando verdaderamente obra: no meramente entusiasmo, sino un pueblo dedicado, adorador, amoroso y creciente. El viento y el fuego de aquella primera mañana se asentaron en la vida ordinaria, fiel y alegre de una iglesia — y esa vida ordinaria era en sí misma el milagro continuo de Pentecostés. No debemos despreciarla. Una iglesia tranquila llena de la Palabra, de oración, y de amor es una maravilla mayor que cualquier ruido.</p>
+
+    <h2><span class="dg-n">7.</span>Lo que Pentecostés significa para nosotros</h2>
+    <p>¿Qué logró aquel día, y qué significa para nosotros que leemos de ello tanto tiempo después? Primero, la iglesia nació — el pueblo del nuevo pacto de Dios, habitado por el Espíritu, en quien se cumplieron las antiguas promesas de que Dios pondría su Espíritu dentro de su pueblo y escribiría su ley en sus corazones. Segundo, comenzó la misión mundial del evangelio; la reunión de las naciones para oír las obras de Dios en sus propias lenguas, y los tres mil salvos aquel primer día, fueron las primicias de una cosecha que llegaría, como Jesús había dicho, hasta lo último de la tierra. Y tercero, se abrió la era del Espíritu — la era en la que toda la iglesia todavía vive. El mismo Espíritu que vino aquella mañana mora en todo creyente en Cristo hoy; el mismo evangelio que Pedro predicó sigue siendo el poder de Dios para salvación; y la misma misión todavía se extiende hacia las naciones. Pentecostés no es meramente una maravilla pasada que admirar, sino la puerta a la era que habitamos. Cuando nos reunimos, oramos, predicamos y somos llenos para el servicio, estamos viviendo lo que comenzó en aquel día.</p>
+
+    <h2><span class="dg-n">8.</span>Cristo en el centro</h2>
+    <p>A través de todo ello, Pentecostés señala más allá de sí mismo a Cristo. El Espíritu no fue dado hasta que Jesús fue glorificado; vino porque el Hijo había terminado su obra y había sido exaltado a la diestra del Padre. Y el primer acto del Espíritu por medio de la iglesia recién nacida fue predicar a ese mismo Hijo y reunir a las personas a Él. Esto nos da la medida perdurable de cualquier obra que dice ser del Espíritu, entonces o ahora: ¿exalta a Jesucristo y lleva a las personas a Él? Pentecostés lo hizo. El viento, el fuego, y las lenguas todos sirvieron a ese único fin — la proclamación de un Salvador crucificado y resucitado, y el volver de los pecadores a Dios. Donde el Espíritu verdaderamente obra, Cristo es magnificado y su pueblo multiplicado. Eso es lo que vimos en el día en que la iglesia nació; y es lo que aún podemos pedir a Dios que haga entre nosotros — no principalmente una repetición de las señales, sino el mismo Espíritu levantando al mismo Salvador, y la misma salvación fluyendo a los perdidos.</p>
+
+    <div class="dg-reflect">
+      <b>Para reflexionar.</b> ¿Comienza la obra de Dios como lo hicieron los primeros discípulos — en espera y oración — o se adelanta en su propia fuerza? ¿Todavía cautiva su corazón el evangelio de Pedro — el Cristo crucificado y resucitado, el arrepentimiento, el perdón, el Espíritu? ¿Y está su propia vida de iglesia marcada por las cuatro cosas que Lucas nombra: la Palabra, la comunión, el partimiento del pan, y la oración? Pida al Señor que derramó su Espíritu en Pentecostés que llene de nuevo a su iglesia con esa misma devoción, y que mantenga a Cristo en su centro.
+    </div>
+
+    <footer class="dg-doc">
+      <p><b>Fuente.</b> Una lectura del Seminario Teológico de Chapala de Hechos 2, anclada en las clásicas <em>Exposiciones de la Sagrada Escritura</em> de Alexander Maclaren, de dominio público, y en la Escritura. Esta es enseñanza escrita por el STC, no una reproducción; las exposiciones clásicas están libremente disponibles en el dominio público.</p>
+    </footer>
+  </div>
+</div></details>
+<div class="foot">
+<label class="pick"><input data-pick="2" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 3 -->
+<article class="entry" data-id="3" data-title-en="How Pentecost Came to Los Angeles — Azusa Street &mdash; CTS digest" data-title-es="Cómo Vino Pentecostés a Los Ángeles — la Calle Azusa &mdash; resumen del STC">
+<div class="locus"><span class="lang-en">A firsthand account of the movement's birth, 1906 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Un relato de primera mano del nacimiento del movimiento, 1906 &middot; un resumen bilingüe del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">3.</span><span class="lang-en">How Pentecost Came to Los Angeles — Azusa Street</span><span class="lang-es">Cómo Vino Pentecostés a Los Ángeles — la Calle Azusa</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The Azusa Street revival as an eyewitness told it — the hunger for God, the humble beginnings, the interracial fellowship, and both the earnestness and the excesses. A primary source for the movement's history. From Frank Bartleman's account.</p>
+<p class="caption lang-es block">El avivamiento de la Calle Azusa tal como lo contó un testigo — el hambre de Dios, los humildes comienzos, la comunión interracial, y tanto la seriedad como los excesos. Una fuente primaria para la historia del movimiento. Del relato de Frank Bartleman.</p>
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll">
+<div class="lang-en block dg-block">
+    <header class="dg-doc">
+      <h1>How Pentecost Came to Los Angeles — Azusa Street</h1>
+      <p class="dg-sub">A Chapala Theological Seminary reading — a firsthand account of the revival of 1906, anchored in Frank Bartleman</p>
+      <p class="dg-src">A CTS-authored account of the Azusa Street revival, anchored in Frank Bartleman's public-domain eyewitness narrative (1925), and in the historical record.</p>
+      <ul class="dg-chips">
+        <li>History</li>
+        <li>Azusa Street 1906</li>
+        <li>A firsthand account</li>
+        <li>Reading 3 of 5</li>
+      </ul>
+    </header>
+
+    <div class="dg-note">
+      <b>A word before you read.</b> This reading tells the story of the Azusa Street revival of 1906 in Los Angeles — often regarded as the birthplace of the modern Pentecostal movement — largely as one who was there told it. Frank Bartleman, a preacher and writer who took part in those days and kept careful notes, later published a firsthand account, now freely available in the public domain. His narrative is precious as history, and it is honest: it records both the deep hunger for God that marked the revival and the confusion and excess that crept in alongside it. We read it here not to endorse every claim or practice, but to understand, fairly and charitably, how the movement this course studies began.
+    </div>
+
+    <h2><span class="dg-n">1.</span>The Hunger Before the Fire</h2>
+    <p>Bartleman's account makes one thing plain: the fire fell where hunger had long prepared the ground. For months before anything visible happened, believers in Los Angeles were pleading with God for revival. Word of the great awakening in Wales, only a year or two before, had stirred many hearts, and a longing spread that God would do the same in America. Bartleman himself carried a heavy burden of prayer through that season; he wrote and distributed tracts, visited churches, and called any who would listen to seek the Lord with their whole hearts. He believed, and often said, that revival is born in travailing prayer before it is ever seen in public. There was nothing showy in this preparation — only ordinary people, in small rooms, crying out to God over a long stretch of time. And that, Bartleman insisted, was the true seedbed of all that followed. Whatever else may be said of Azusa Street, it did not begin with a program or a personality; it began with hunger, and with a prayer that would not let God go. This is worth pausing on, for it is the pattern of nearly every genuine awakening the church has known.</p>
+
+    <h2><span class="dg-n">2.</span>Humble Beginnings</h2>
+    <p>When the outpouring came, it came first in a private home. Small prayer meetings had been gathering, and in April of 1906, at a house on Bonnie Brae Street, the sense of God's presence became so strong that the meetings overflowed the little house; people gathered on the porch and out in the street. Soon a larger place was needed, and the company found an old, plain building at 312 Azusa Street — a former church that had since been used as a stable and a warehouse, with bare rafters, sawdust on the floor, and rough planks laid across nail kegs for seats. It was about as humble a place as could be imagined, and Bartleman saw the fittingness of it. God had not chosen a grand cathedral or a famous pulpit, but a bare room in an unremarkable part of the city. The leader of the meetings was William Seymour, a humble, soft-spoken preacher, a son of former slaves, blind in one eye, who would often sit behind a stack of wooden crates with his head bowed in prayer. There was no advertising, no eloquence, no display. And yet, Bartleman records, people felt they had walked straight into the presence of God.</p>
+
+    <h2><span class="dg-n">3.</span>What the Meetings Were Like</h2>
+    <p>The meetings themselves were unlike ordinary church services. There was no fixed program, no announced order, often no sermon in the usual sense. People came and waited on God — singing, praying, weeping, confessing sin, sometimes for hours together. Bartleman describes a pervading sense of awe, as though the room were filled with something holy and weighty that hushed the proud and broke the hard. Seymour led with a remarkably light hand, unwilling to organize or control what he believed to be the work of the Spirit; he would encourage the seekers, pray, and wait. Many spoke of being deeply convicted of sin, of being reconciled to God and to one another, of a joy and a love they had never known before. And there were the phenomena for which Azusa became famous: people speaking in tongues, others prophesying, others overcome under a sense of God's power. Bartleman, a careful and sometimes critical observer, was moved by the reality of God he sensed among them, even as he watched with a discerning eye. Whatever one concludes about the particular manifestations, the hunger for God and the seriousness about sin and holiness in those early meetings are beyond dispute.</p>
+
+    <h2><span class="dg-n">4.</span>The Color Line Washed Away</h2>
+    <p>One feature of Azusa Street struck observers then and still strikes us now. In an America deeply and legally divided by race, the Azusa meetings brought together people of every color and every class as equals before God. Black and white, rich and poor, immigrant and native-born, educated and unlettered — they knelt at the same altar, prayed together, and embraced one another as brothers and sisters. Bartleman captured it in a line that has echoed ever since: "The color line was washed away in the blood." For 1906 this was extraordinary, even scandalous to some. Under the leadership of a black preacher, in a poor part of the city, a fellowship formed that quietly defied the divisions of its age. It did not last unbroken; the pressures of the surrounding society reasserted themselves in time, and the movement later divided along some of the very lines it had briefly transcended. But for a season, something of the reconciling power of the gospel was visibly displayed for all to see, and it remains one of the most moving features of the whole story — a reminder of what the Spirit can do when He is given room.</p>
+
+    <h2><span class="dg-n">5.</span>The News Spreads</h2>
+    <p>Word of what was happening at Azusa Street traveled fast — carried by letters, by visitors, and by the little papers the mission printed and mailed out across the country and beyond. Curious and hungry believers came from across Los Angeles, then from across the nation, and before long from across the world. Many who came were skeptical; some went away unconvinced; but many others were caught up in the same hunger and carried the fire home with them. Missionaries and preachers who visited Azusa took what they had experienced back to their own cities and nations, and new centers of the movement sprang up in Europe, in Latin America, in Africa, and in Asia within a remarkably short time. Bartleman himself traveled and wrote, helping to spread the news. From this one humble mission, in the space of only a few years, a movement went out that would in time touch the whole earth and number, a century later, in the hundreds of millions. Whatever we make of it, the historical fact is plain: a great deal of what became worldwide Pentecostalism can be traced back, along many streams, to that plain building on Azusa Street.</p>
+
+    <h2><span class="dg-n">6.</span>Earnestness and Excess</h2>
+    <p>Bartleman's account is valuable precisely because it is honest, and it does not hide the shadows. Alongside the genuine hunger for God, he saw confusion, immaturity, and the flesh creeping in. Where there was little order and much emotion, error and fanaticism found room to grow; some sought experiences for their own sake, some fell into strange excesses, and some claimed for the Spirit what plainly did not come from Him. Bartleman warned of these dangers again and again. He grieved when the pure seeking after God was mingled with self-display, or when what he called "wildfire" — uncontrolled, fleshly excitement — was mistaken for the true fire of the Spirit. He knew that a real work of God can be spoiled by human pride and folly, and he called for humility, for testing, and for keeping the eyes fixed on Christ rather than on manifestations. This candor is a gift to us. It reminds us that a single movement may contain both the genuine and the false, and that our task is neither to embrace everything nor to reject everything, but to test all things by Scripture and hold fast what is good. Bartleman&rsquo;s own life shows how hard, and how necessary, that balance is: he neither fled the revival because of its excesses nor closed his eyes to them because of its blessings, but stayed near, prayed, warned, and gave thanks. That is very much the posture this course commends toward the whole movement that Azusa began — near enough to learn from what was real, honest enough to name what was not.</p>
+
+    <h2><span class="dg-n">7.</span>Keeping Christ at the Center</h2>
+    <p>For all the phenomena that made Azusa famous, Bartleman himself was clear about what mattered most: not tongues, not signs, but Christ. He believed the whole point of any true outpouring of the Spirit was to exalt the Savior and to make people holy, and he feared any drift toward making the gifts, rather than the Giver, the center of attention. This is exactly the concern that the whole of Scripture presses upon us. The Spirit was given to glorify the Son; where He is truly at work, Christ is lifted up and sinners are drawn to Him. Bartleman longed for a revival that would humble the proud, save the lost, reconcile the divided, and send holy witnesses out into the world — and he judged the meetings by that standard, rejoicing where he saw it and grieving where he did not. It is a good standard for us as well, whenever we consider any claimed move of God: does it make much of Jesus Christ, and does it make people more like Him? Where it does, we may thank God; where it does not, no amount of excitement can make up the lack.</p>
+
+    <h2><span class="dg-n">8.</span>What We May Learn</h2>
+    <p>What, then, may we take from this story? First, that God draws near to the humble and the hungry; the fire fell not on the grand and the self-sufficient, but on ordinary people who sought Him in prayer, in a bare room with sawdust on the floor. Second, that a real work of God and human excess can stand side by side, so that we must neither despise the genuine because of the false nor excuse the false because of the genuine, but weigh all things by the Word. Third, that the gospel has power to break down the walls that divide people, as it did, for a season, at Azusa Street. And fourth, that in all of it Christ must be kept at the center; the surest mark of the Spirit's presence is not the extraordinary, but the exalting of the Savior and the making of holy men and women. We approach the whole movement that flowed from those days, and the brethren in it, not as enemies to be refuted but as family to be understood — honest about what was mixed, thankful for what was real, and always looking to Christ.</p>
+
+    <div class="dg-reflect">
+      <b>For reflection.</b> Azusa Street began in prayer and hunger for God — is that where you seek Him? When you hear reports of revival or unusual works, do you weigh them by Scripture, holding fast the good and refusing the false, rather than swallowing everything or dismissing everything? And can you hold, as Bartleman tried to, both a warm heart toward a real work of God and a discerning mind that keeps Christ at the center? Ask God for that rare and needed combination of hunger and discernment.
+    </div>
+
+    <footer class="dg-doc">
+      <p><b>Source.</b> A Chapala Theological Seminary account of the Azusa Street revival of 1906, anchored in Frank Bartleman's public-domain eyewitness narrative <em>How Pentecost Came to Los Angeles</em> (1925) and in the historical record. This is CTS-authored teaching, not a reproduction; Bartleman's account is freely available in the public domain.</p>
+    </footer>
+  </div>
+<div class="lang-es block dg-block">
+    <header class="dg-doc">
+      <h1>Cómo Vino Pentecostés a Los Ángeles — la Calle Azusa</h1>
+      <p class="dg-sub">Una lectura del Seminario Teológico de Chapala — un relato de primera mano del avivamiento de 1906, anclada en Frank Bartleman</p>
+      <p class="dg-src">Un relato del avivamiento de la Calle Azusa escrito por el STC, anclado en la narración de testigo ocular de Frank Bartleman (1925), de dominio público, y en el registro histórico.</p>
+      <ul class="dg-chips">
+        <li>Historia</li>
+        <li>Calle Azusa 1906</li>
+        <li>Un relato ocular</li>
+        <li>Lectura 3 de 5</li>
+      </ul>
+    </header>
+
+    <div class="dg-note">
+      <b>Una palabra antes de leer.</b> Esta lectura cuenta la historia del avivamiento de la Calle Azusa de 1906 en Los Ángeles — a menudo considerado la cuna del movimiento pentecostal moderno — en gran parte como lo contó uno que estuvo allí. Frank Bartleman, un predicador y escritor que participó en aquellos días y llevó notas cuidadosas, publicó después un relato de primera mano, ahora libremente disponible en el dominio público. Su narración es preciosa como historia, y es honesta: registra tanto el profundo hambre de Dios que marcó el avivamiento como la confusión y el exceso que se colaron junto a él. La leemos aquí no para respaldar cada afirmación o práctica, sino para entender, con justicia y caridad, cómo comenzó el movimiento que estudia este curso.
+    </div>
+
+    <h2><span class="dg-n">1.</span>El hambre antes del fuego</h2>
+    <p>El relato de Bartleman deja algo en claro: el fuego cayó donde el hambre había preparado largamente el terreno. Durante meses antes de que sucediera nada visible, los creyentes en Los Ángeles rogaban a Dios por avivamiento. La noticia del gran despertar en Gales, solo un año o dos antes, había conmovido muchos corazones, y se extendió un anhelo de que Dios hiciera lo mismo en América. Bartleman mismo llevó una pesada carga de oración durante aquella temporada; escribía y distribuía tratados, visitaba iglesias, y llamaba a cualquiera que escuchara a buscar al Señor con todo el corazón. Creía, y a menudo decía, que el avivamiento nace en la oración que agoniza antes de verse jamás en público. No había nada llamativo en esta preparación — solo gente ordinaria, en cuartos pequeños, clamando a Dios durante un largo tramo de tiempo. Y eso, insistía Bartleman, era el verdadero semillero de todo lo que siguió. Sea lo que sea que se diga de la Calle Azusa, no comenzó con un programa ni una personalidad; comenzó con hambre, y con una oración que no soltaba a Dios. Vale la pena detenerse en esto, pues es el patrón de casi todo despertar genuino que la iglesia ha conocido.</p>
+
+    <h2><span class="dg-n">2.</span>Humildes comienzos</h2>
+    <p>Cuando vino el derramamiento, vino primero en una casa particular. Pequeñas reuniones de oración se habían estado juntando, y en abril de 1906, en una casa de la calle Bonnie Brae, el sentir de la presencia de Dios se hizo tan fuerte que las reuniones desbordaron la casita; la gente se juntaba en el porche y afuera en la calle. Pronto se necesitó un lugar más grande, y la compañía encontró un edificio viejo y sencillo en el 312 de la calle Azusa — una antigua iglesia que desde entonces se había usado como establo y bodega, con vigas descubiertas, aserrín en el piso, y toscas tablas puestas sobre barriles de clavos como asientos. Era un lugar tan humilde como pueda imaginarse, y Bartleman vio lo apropiado de ello. Dios no había escogido una gran catedral ni un púlpito famoso, sino un cuarto desnudo en una parte poco notable de la ciudad. El líder de las reuniones era William Seymour, un predicador humilde y de habla suave, hijo de antiguos esclavos, ciego de un ojo, que a menudo se sentaba detrás de una pila de cajones de madera con la cabeza inclinada en oración. No había publicidad, ni elocuencia, ni exhibición. Y sin embargo, registra Bartleman, la gente sentía que había entrado directamente en la presencia de Dios.</p>
+
+    <h2><span class="dg-n">3.</span>Cómo eran las reuniones</h2>
+    <p>Las reuniones mismas no se parecían a los cultos ordinarios de iglesia. No había programa fijo, ni orden anunciado, a menudo ningún sermón en el sentido usual. La gente venía y esperaba en Dios — cantando, orando, llorando, confesando pecado, a veces por horas enteras. Bartleman describe un penetrante sentir de reverencia, como si el cuarto estuviera lleno de algo santo y pesado que acallaba al soberbio y quebrantaba al duro. Seymour dirigía con mano notablemente ligera, sin querer organizar ni controlar lo que creía ser la obra del Espíritu; alentaba a los buscadores, oraba, y esperaba. Muchos hablaban de ser profundamente convencidos de pecado, de ser reconciliados con Dios y unos con otros, de un gozo y un amor que nunca antes habían conocido. Y estaban los fenómenos por los que Azusa se hizo famosa: gente hablando en lenguas, otros profetizando, otros vencidos bajo un sentir del poder de Dios. Bartleman, un observador cuidadoso y a veces crítico, fue conmovido por la realidad de Dios que percibía entre ellos, aun mientras observaba con ojo discerniente. Comoquiera que uno concluya sobre las manifestaciones particulares, el hambre de Dios y la seriedad acerca del pecado y la santidad en aquellas primeras reuniones están fuera de disputa.</p>
+
+    <h2><span class="dg-n">4.</span>La línea de color lavada</h2>
+    <p>Un rasgo de la Calle Azusa impactó a los observadores entonces y todavía nos impacta ahora. En una América profunda y legalmente dividida por la raza, las reuniones de Azusa juntaron a personas de todo color y toda clase como iguales ante Dios. Negros y blancos, ricos y pobres, inmigrantes y nativos, educados y sin letras — se arrodillaban ante el mismo altar, oraban juntos, y se abrazaban unos a otros como hermanos y hermanas. Bartleman lo captó en una frase que ha resonado desde entonces: "La línea de color fue lavada en la sangre." Para 1906 esto era extraordinario, aun escandaloso para algunos. Bajo el liderazgo de un predicador negro, en una parte pobre de la ciudad, se formó una comunión que calladamente desafiaba las divisiones de su época. No duró intacta; las presiones de la sociedad circundante se reafirmaron con el tiempo, y el movimiento después se dividió por algunas de las mismas líneas que brevemente había trascendido. Pero por una temporada, algo del poder reconciliador del evangelio quedó visiblemente exhibido para que todos lo vieran, y sigue siendo uno de los rasgos más conmovedores de toda la historia — un recordatorio de lo que el Espíritu puede hacer cuando se le da lugar.</p>
+
+    <h2><span class="dg-n">5.</span>La noticia se extiende</h2>
+    <p>La noticia de lo que sucedía en la Calle Azusa viajó rápido — llevada por cartas, por visitantes, y por los pequeños periódicos que la misión imprimía y enviaba por todo el país y más allá. Creyentes curiosos y hambrientos vinieron de todo Los Ángeles, luego de toda la nación, y en poco tiempo de todo el mundo. Muchos de los que vinieron eran escépticos; algunos se fueron sin convencerse; pero muchos otros fueron cautivados por el mismo hambre y llevaron el fuego a casa consigo. Los misioneros y predicadores que visitaron Azusa llevaron lo que habían experimentado de vuelta a sus propias ciudades y naciones, y nuevos centros del movimiento surgieron en Europa, en América Latina, en África, y en Asia en un tiempo notablemente corto. Bartleman mismo viajó y escribió, ayudando a difundir la noticia. Desde esta única y humilde misión, en el espacio de solo unos pocos años, salió un movimiento que con el tiempo tocaría toda la tierra y contaría, un siglo después, en los cientos de millones. Comoquiera que lo interpretemos, el hecho histórico es claro: gran parte de lo que llegó a ser el pentecostalismo mundial puede rastrearse, por muchas corrientes, hasta aquel edificio sencillo de la Calle Azusa.</p>
+
+    <h2><span class="dg-n">6.</span>Seriedad y exceso</h2>
+    <p>El relato de Bartleman es valioso precisamente porque es honesto, y no oculta las sombras. Junto al hambre genuina de Dios, vio confusión, inmadurez, y la carne colándose. Donde había poco orden y mucha emoción, el error y el fanatismo hallaron lugar para crecer; algunos buscaban experiencias por sí mismas, algunos cayeron en extraños excesos, y algunos atribuían al Espíritu lo que claramente no venía de Él. Bartleman advirtió de estos peligros una y otra vez. Se afligía cuando la pura búsqueda de Dios se mezclaba con la autoexhibición, o cuando lo que él llamaba "fuego salvaje" — excitación carnal e incontrolada — se confundía con el verdadero fuego del Espíritu. Sabía que una obra real de Dios puede ser echada a perder por el orgullo y la necedad humanos, y llamaba a la humildad, a la prueba, y a mantener los ojos fijos en Cristo en vez de en las manifestaciones. Esta franqueza es un regalo para nosotros. Nos recuerda que un solo movimiento puede contener tanto lo genuino como lo falso, y que nuestra tarea no es ni abrazar todo ni rechazar todo, sino probar todas las cosas por la Escritura y retener lo bueno.</p>
+
+    <h2><span class="dg-n">7.</span>Mantener a Cristo en el centro</h2>
+    <p>A pesar de todos los fenómenos que hicieron famosa a Azusa, Bartleman mismo tenía claro lo que más importaba: no las lenguas, no las señales, sino Cristo. Creía que todo el punto de cualquier verdadero derramamiento del Espíritu era exaltar al Salvador y hacer santa a la gente, y temía cualquier deriva hacia hacer de los dones, en vez del Dador, el centro de atención. Esta es exactamente la preocupación que toda la Escritura nos apremia. El Espíritu fue dado para glorificar al Hijo; donde Él verdaderamente obra, Cristo es levantado y los pecadores son atraídos a Él. Bartleman anhelaba un avivamiento que humillara al soberbio, salvara al perdido, reconciliara al dividido, y enviara testigos santos al mundo — y juzgaba las reuniones por ese criterio, gozándose donde lo veía y afligiéndose donde no. Es un buen criterio también para nosotros, siempre que consideremos cualquier obra reclamada de Dios: ¿hace mucho de Jesucristo, y hace a la gente más semejante a Él? Donde lo hace, podemos dar gracias a Dios; donde no, ninguna cantidad de excitación puede suplir la falta.</p>
+
+    <h2><span class="dg-n">8.</span>Lo que podemos aprender</h2>
+    <p>¿Qué, entonces, podemos tomar de esta historia? Primero, que Dios se acerca al humilde y al hambriento; el fuego cayó no sobre el grande y el autosuficiente, sino sobre gente ordinaria que lo buscó en oración, en un cuarto desnudo con aserrín en el piso. Segundo, que una obra real de Dios y el exceso humano pueden estar lado a lado, de modo que no debemos ni despreciar lo genuino a causa de lo falso ni excusar lo falso a causa de lo genuino, sino sopesar todas las cosas por la Palabra. Tercero, que el evangelio tiene poder para derribar los muros que dividen a las personas, como lo hizo, por una temporada, en la Calle Azusa. Y cuarto, que en todo ello Cristo debe mantenerse en el centro; la señal más segura de la presencia del Espíritu no es lo extraordinario, sino el exaltar al Salvador y el hacer hombres y mujeres santos. Nos acercamos a todo el movimiento que fluyó de aquellos días, y a los hermanos en él, no como enemigos para ser refutados, sino como familia para ser entendida — honestos sobre lo que fue mezclado, agradecidos por lo que fue real, y siempre mirando a Cristo.</p>
+
+    <div class="dg-reflect">
+      <b>Para reflexionar.</b> La Calle Azusa comenzó en oración y hambre de Dios — ¿es allí donde usted lo busca? Cuando oye reportes de avivamiento u obras inusuales, ¿los sopesa por la Escritura, reteniendo lo bueno y rehusando lo falso, en vez de tragarse todo o descartarlo todo? ¿Y puede sostener, como Bartleman intentó, tanto un corazón cálido hacia una obra real de Dios como una mente discerniente que mantiene a Cristo en el centro? Pida a Dios esa rara y necesaria combinación de hambre y discernimiento.
+    </div>
+
+    <footer class="dg-doc">
+      <p><b>Fuente.</b> Un relato del Seminario Teológico de Chapala del avivamiento de la Calle Azusa de 1906, anclado en la narración de testigo ocular de dominio público de Frank Bartleman <em>How Pentecost Came to Los Angeles</em> (1925) y en el registro histórico. Esta es enseñanza escrita por el STC, no una reproducción; el relato de Bartleman está libremente disponible en el dominio público.</p>
+    </footer>
+  </div>
+</div></details>
+<div class="foot">
+<label class="pick"><input data-pick="3" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 4 -->
+<article class="entry" data-id="4" data-title-en="Discerning a True Work of the Spirit &mdash; CTS digest" data-title-es="Discernir una Verdadera Obra del Espíritu &mdash; resumen del STC">
+<div class="locus"><span class="lang-en">Testing spiritual phenomena by Scripture &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Probar los fenómenos espirituales por la Escritura &middot; un resumen bilingüe del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">4.</span><span class="lang-en">Discerning a True Work of the Spirit</span><span class="lang-es">Discernir una Verdadera Obra del Espíritu</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">Jonathan Edwards's distinguishing marks: what does and does not prove a work is of God — exalting Christ, opposing sin, honoring Scripture and truth, and the fruit of love — the tools to weigh any claimed move of the Spirit. Anchored in Edwards's Distinguishing Marks.</p>
+<p class="caption lang-es block">Las señales distintivas de Jonathan Edwards: qué prueba y qué no prueba que una obra es de Dios — exaltar a Cristo, oponerse al pecado, honrar la Escritura y la verdad, y el fruto del amor — las herramientas para sopesar cualquier obra reclamada del Espíritu. Anclada en las Señales Distintivas de Edwards.</p>
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll">
+<div class="lang-en block dg-block">
+    <header class="dg-doc">
+      <h1>Discerning a True Work of the Spirit</h1>
+      <p class="dg-sub">A Chapala Theological Seminary reading — testing spiritual phenomena by Scripture, anchored in Jonathan Edwards</p>
+      <p class="dg-src">A CTS-authored reading anchored in Jonathan Edwards's public-domain <em>The Distinguishing Marks of a Work of the Spirit of God</em> (1741), and in Scripture.</p>
+      <ul class="dg-chips">
+        <li>Discernment</li>
+        <li>1 John 4:1</li>
+        <li>Anchored in Edwards</li>
+        <li>Reading 4 of 5</li>
+      </ul>
+    </header>
+
+    <div class="dg-note">
+      <b>A word before you read.</b> How can we tell whether a striking spiritual movement is truly the work of God's Spirit, or the work of mere human excitement, or even of a deceiving spirit? This is one of the most important and most practical questions a Christian can ask, and the apostle John commands us to face it: "Do not believe every spirit, but test the spirits, whether they are of God." No one has answered the question more wisely than Jonathan Edwards, the American pastor who lived through the great revival of the 1740s and watched it closely — its genuine power and its real excesses alike. His book on the distinguishing marks of a work of the Spirit, now freely available in the public domain, remains a gift to the whole church. This reading follows his counsel, and, above all, follows the Scripture he drew it from.
+    </div>
+
+    <h2><span class="dg-n">1.</span>The Need to Test the Spirits</h2>
+    <p>Edwards begins where Scripture begins — with the sober fact that not everything which claims to be from God is from God. "Beloved, do not believe every spirit," John writes, "but test the spirits, whether they are of God; because many false prophets have gone out into the world." There are counterfeits, and there is deception, and a wise Christian is neither gullible nor cynical, but discerning. Yet Edwards is equally concerned with the opposite error. In a time of real revival, some were so alarmed by the excesses that accompanied it that they were ready to condemn the whole work as delusion. Edwards saw the danger on both sides: to embrace everything uncritically, calling every stir of feeling the Spirit of God; and to reject everything suspiciously, quenching a true work because of the human weakness mixed with it. The task, then, is discernment — to distinguish the genuine from the false, the wheat from the chaff, by a right standard. And the right standard, Edwards insists, is not our own impressions or preferences or fears, but the Word of God, and especially the sure marks that the apostle John lays down in his fourth chapter.</p>
+
+    <h2><span class="dg-n">2.</span>What Does Not Prove It Either Way</h2>
+    <p>Edwards's first great service is to clear away the false tests — the things people seize upon, on both sides, that in fact prove nothing either way. That a work is carried on in an unusual manner does not prove it is not of God, for God is not bound to work only as He has worked before. That it produces strong effects on people's bodies — tears, trembling, crying out, loss of strength — proves nothing, for such effects may attend deep conviction or deep joy, and may also be merely natural or worked up; they settle nothing by themselves. That it causes a great stir, or much talk, or commotion in a community, proves nothing. That it stirs powerful emotions, or fills the imagination with vivid impressions, proves nothing; feelings and mental pictures are not the test. And — this is important — even that some who are caught up in it fall into errors, or into delusion, or into scandalous sin, does not prove that the whole work is not of God, for the devil will always try to spoil a true revival by mixing in his counterfeits, and human weakness will always mar what is good. None of these things, Edwards says, is a mark either way. We must look deeper, and we must look where Scripture tells us to look.</p>
+
+    <h2><span class="dg-n">3.</span>The First Sure Mark: Esteem for Christ</h2>
+    <p>Having cleared away the false tests, Edwards turns to the sure ones — and he takes them straight from the fourth chapter of First John. The first is this: a work that raises people's esteem for Jesus, confirming that He is the Son of God and the Savior of men, is the work of the Spirit of God. "By this you know the Spirit of God," John writes; "every spirit that confesses that Jesus Christ has come in the flesh is of God." The Holy Spirit was given to glorify Christ, and so wherever He is truly at work, Christ is exalted — men and women are drawn to love Him, to trust Him, to honor Him as divine and to rest upon Him as Savior. A deceiving spirit will never do this; the enemy has no interest in magnifying the Son of God. So this is the first thing to look for in any claimed work of the Spirit: does it lift up Jesus Christ? Does it make Him more precious, more trusted, more adored? Where it does, we have strong evidence of God's hand; where the attention is drawn away from Christ to something else — to experiences, to a leader, to signs for their own sake — we have reason for grave concern.</p>
+
+    <h2><span class="dg-n">4.</span>The Second Mark: War on Sin and Satan</h2>
+    <p>The second sure mark is that a true work of the Spirit operates against the interests of Satan's kingdom, which is a kingdom of sin. When a movement leads people to turn from sin, to forsake worldly lusts and vanities, to grow serious about holiness and righteousness, it bears the fingerprints of the Spirit of God — for Satan would never lend his power to the pulling down of his own kingdom. Edwards is pointed here: a spirit that makes people less attached to the world and its pleasures, more careful of sin, more earnest about eternity, is not the spirit of the world or of the devil. This is a searching test, and a very practical one. Excitement is cheap, and can be produced by many causes; but a real hatred of sin, a real turning from it, a real pursuit of a holy life — these are the marks of a work that comes from God. So we ask of any claimed move of the Spirit: are people becoming more holy, or merely more excited? Is sin being put to death, or are feelings only being stirred up? The Spirit of God is the Spirit of holiness, and He always wars against sin.</p>
+
+    <h2><span class="dg-n">5.</span>The Third and Fourth Marks: Scripture and Truth</h2>
+    <p>The third sure mark is that a true work of the Spirit leads people to a greater regard for the Holy Scriptures, establishing them more in their truth and divinity. The Spirit inspired the Scriptures, and He never leads against them; where He works, He gives His people a deeper love for the Word, a greater confidence in it, a greater hunger to read and to obey it. A spirit that leads people away from the Bible, or above it, or against it — that treats new impressions and private revelations as if they outranked the written Word — is not the Spirit of God. And the fourth mark is closely joined to it: the Spirit of God is a Spirit of truth, and a false spirit is a spirit of error. A true work leads people into truth, giving them a right understanding of their own condition, of God, and of the way of salvation. So we test any claimed work by asking: does it drive people to the Scriptures, or away from them? Does it deepen their grasp of the truth, or fill them with error and confusion? The Spirit and the Word are always in perfect agreement, for they are of one God.</p>
+
+    <h2><span class="dg-n">6.</span>The Fifth Mark: Love to God and Man</h2>
+    <p>The last and greatest of the sure marks is love. If a spirit operates as a spirit of love to God and man, Edwards says, it is surely the Spirit of God. This is the crowning evidence, for "love is of God," and "God is love," and the Spirit's own fruit is love before all else. A true work of the Spirit kindles a deeper love for God — a delight in Him, a longing after Him — and a deeper love for others, drawing believers together in humility, kindness, and forgiveness, softening hard hearts and healing broken relationships. Edwards is careful here, for the devil can counterfeit a kind of natural affection or mere party spirit; the love that marks the Spirit's work is the love that Scripture describes — humble, self-giving, patient, forgiving, reaching even to enemies. Where a movement produces this kind of love, we have the surest sign of all that God is in it. Where instead it produces pride, division, contempt, and bitterness, whatever else may be said of it, the Spirit of the God who is love is not its author. Love is the great test, because love is the very character of God Himself.</p>
+
+    <h2><span class="dg-n">7.</span>Applying the Marks</h2>
+    <p>With these marks in hand, Edwards gives us a tool of great value for our own day, and for the movement this course studies. When we meet a claimed work of the Spirit — a revival, an unusual manifestation, a whole movement — we are not to judge it by its outward strangeness, nor by the emotions it stirs, nor by the errors of some who are caught up in it, for none of these settles the question. Nor are we to accept it simply because it is exciting or popular. We are to apply the sure marks: Does it exalt Jesus Christ? Does it lead people away from sin and the world toward holiness? Does it deepen their love for the Scriptures and their grasp of the truth? And does it produce real love to God and to one another? Where these marks are present, we may thank God and not be afraid, even if there is human weakness mixed in; where they are absent, no amount of wonder or fervor can make the work genuine. This is the balance the church has so often missed — neither quenching the Spirit nor being deceived, but testing all things, and holding fast what is good.</p>
+
+    <h2><span class="dg-n">8.</span>A Word of Caution and Comfort</h2>
+    <p>Edwards adds a caution that we do well to hear. In a true work of God there will almost always be some mixture of human infirmity, imprudence, and even sin, because the work is carried on in weak and sinful people; and we must not stumble at this, nor let the enemy use the failings of some to make us reject the whole. At the same time, we must not defend or excuse what is wrong simply because it appears alongside what is right; error and excess should be gently corrected, not celebrated. The comfort is that God is patient with His people, and able to carry on His work through them despite their weakness, refining it as He goes. So we come to the whole subject — and to the movement this course studies — with both discernment and charity: quick to honor whatever truly exalts Christ, turns people from sin, magnifies the Word, and produces love; honest about whatever does not; and always, in all our testing, keeping our own eyes fixed on the Savior whom the Spirit was given to glorify.</p>
+
+    <div class="dg-reflect">
+      <b>For reflection.</b> When you hear of a revival or an unusual spiritual work, how do you judge it — by its strangeness, its excitement, or the errors of some; or by whether it exalts Christ, turns people from sin, magnifies Scripture, and produces love? Are you in more danger of the one error, embracing everything uncritically, or the other, rejecting everything suspiciously? Ask God for the discernment Edwards sought — to test the spirits by His Word, and to hold fast what is good.
+    </div>
+
+    <footer class="dg-doc">
+      <p><b>Source.</b> A Chapala Theological Seminary reading on discerning a true work of the Spirit, anchored in Jonathan Edwards's public-domain <em>The Distinguishing Marks of a Work of the Spirit of God</em> (1741) and in Scripture. This is CTS-authored teaching, not a reproduction; Edwards's work is freely available in the public domain.</p>
+    </footer>
+  </div>
+<div class="lang-es block dg-block">
+    <header class="dg-doc">
+      <h1>Discernir una Verdadera Obra del Espíritu</h1>
+      <p class="dg-sub">Una lectura del Seminario Teológico de Chapala — probar los fenómenos espirituales por la Escritura, anclada en Jonathan Edwards</p>
+      <p class="dg-src">Una lectura escrita por el STC, anclada en <em>Las Señales Distintivas de una Obra del Espíritu de Dios</em> (1741) de Jonathan Edwards, de dominio público, y en la Escritura.</p>
+      <ul class="dg-chips">
+        <li>Discernimiento</li>
+        <li>1 Juan 4:1</li>
+        <li>Anclada en Edwards</li>
+        <li>Lectura 4 de 5</li>
+      </ul>
+    </header>
+
+    <div class="dg-note">
+      <b>Una palabra antes de leer.</b> ¿Cómo podemos saber si un movimiento espiritual impresionante es verdaderamente la obra del Espíritu de Dios, o la obra de la mera excitación humana, o aun de un espíritu engañador? Esta es una de las preguntas más importantes y prácticas que un cristiano puede hacer, y el apóstol Juan nos manda enfrentarla: "No creáis a todo espíritu, sino probad los espíritus si son de Dios." Nadie ha respondido la pregunta con más sabiduría que Jonathan Edwards, el pastor estadounidense que vivió el gran avivamiento de la década de 1740 y lo observó de cerca — tanto su poder genuino como sus verdaderos excesos. Su libro sobre las señales distintivas de una obra del Espíritu, ahora libremente disponible en el dominio público, sigue siendo un regalo para toda la iglesia. Esta lectura sigue su consejo, y, sobre todo, sigue la Escritura de la que lo sacó.
+    </div>
+
+    <h2><span class="dg-n">1.</span>La necesidad de probar los espíritus</h2>
+    <p>Edwards comienza donde comienza la Escritura — con el hecho sobrio de que no todo lo que dice ser de Dios es de Dios. "Amados, no creáis a todo espíritu," escribe Juan, "sino probad los espíritus si son de Dios; porque muchos falsos profetas han salido por el mundo." Hay falsificaciones, y hay engaño, y un cristiano sabio no es ni crédulo ni cínico, sino discerniente. Sin embargo, a Edwards le preocupa igualmente el error opuesto. En un tiempo de verdadero avivamiento, algunos estaban tan alarmados por los excesos que lo acompañaban que estaban listos para condenar toda la obra como engaño. Edwards vio el peligro de ambos lados: abrazar todo sin crítica, llamando a cada movimiento del sentimiento el Espíritu de Dios; y rechazar todo con sospecha, apagando una obra verdadera a causa de la debilidad humana mezclada en ella. La tarea, entonces, es el discernimiento — distinguir lo genuino de lo falso, el trigo de la paja, por un criterio correcto. Y el criterio correcto, insiste Edwards, no son nuestras propias impresiones, preferencias o temores, sino la Palabra de Dios, y especialmente las señales seguras que el apóstol Juan expone en su cuarto capítulo.</p>
+
+    <h2><span class="dg-n">2.</span>Lo que no lo prueba de ninguna manera</h2>
+    <p>El primer gran servicio de Edwards es despejar las pruebas falsas — las cosas que la gente toma, de ambos lados, que en realidad no prueban nada de ninguna manera. Que una obra se lleve a cabo de una manera inusual no prueba que no sea de Dios, pues Dios no está obligado a obrar solo como ha obrado antes. Que produzca fuertes efectos en los cuerpos de las personas — lágrimas, temblor, clamor, pérdida de fuerzas — no prueba nada, pues tales efectos pueden acompañar una profunda convicción o un profundo gozo, y también pueden ser meramente naturales o producidos; no resuelven nada por sí mismos. Que cause un gran revuelo, o mucha habladuría, o conmoción en una comunidad, no prueba nada. Que agite emociones poderosas, o llene la imaginación con impresiones vívidas, no prueba nada; los sentimientos y las imágenes mentales no son la prueba. Y — esto es importante — aun que algunos de los que son arrastrados por ella caigan en errores, o en engaño, o en pecado escandaloso, no prueba que toda la obra no sea de Dios, pues el diablo siempre intentará echar a perder un verdadero avivamiento mezclando sus falsificaciones, y la debilidad humana siempre marchitará lo que es bueno. Ninguna de estas cosas, dice Edwards, es una señal de ninguna manera. Debemos mirar más profundo, y debemos mirar donde la Escritura nos dice que miremos.</p>
+
+    <h2><span class="dg-n">3.</span>La primera señal segura: estima por Cristo</h2>
+    <p>Habiendo despejado las pruebas falsas, Edwards se vuelve a las seguras — y las toma directamente del cuarto capítulo de Primera de Juan. La primera es esta: una obra que eleva la estima de la gente por Jesús, confirmando que Él es el Hijo de Dios y el Salvador de los hombres, es la obra del Espíritu de Dios. "En esto conoced el Espíritu de Dios," escribe Juan; "todo espíritu que confiesa que Jesucristo ha venido en carne, es de Dios." El Espíritu Santo fue dado para glorificar a Cristo, y por eso dondequiera que Él verdaderamente obra, Cristo es exaltado — hombres y mujeres son atraídos a amarlo, a confiar en Él, a honrarlo como divino y a descansar en Él como Salvador. Un espíritu engañador nunca hará esto; el enemigo no tiene interés en magnificar al Hijo de Dios. Así que esto es lo primero que hay que buscar en cualquier obra reclamada del Espíritu: ¿levanta a Jesucristo? ¿Lo hace más precioso, más confiado, más adorado? Donde lo hace, tenemos fuerte evidencia de la mano de Dios; donde la atención es apartada de Cristo hacia otra cosa — hacia experiencias, hacia un líder, hacia señales por sí mismas — tenemos razón para grave preocupación.</p>
+
+    <h2><span class="dg-n">4.</span>La segunda señal: guerra contra el pecado y Satanás</h2>
+    <p>La segunda señal segura es que una verdadera obra del Espíritu opera contra los intereses del reino de Satanás, que es un reino de pecado. Cuando un movimiento lleva a la gente a apartarse del pecado, a abandonar las concupiscencias y vanidades mundanas, a ponerse seria acerca de la santidad y la justicia, lleva las huellas del Espíritu de Dios — pues Satanás nunca prestaría su poder para derribar su propio reino. Edwards es directo aquí: un espíritu que hace a la gente menos apegada al mundo y sus placeres, más cuidadosa del pecado, más seria acerca de la eternidad, no es el espíritu del mundo ni del diablo. Esta es una prueba penetrante, y muy práctica. La excitación es barata, y puede producirse por muchas causas; pero un verdadero odio al pecado, un verdadero apartarse de él, una verdadera búsqueda de una vida santa — estas son las señales de una obra que viene de Dios. Así que preguntamos de cualquier obra reclamada del Espíritu: ¿se está volviendo la gente más santa, o meramente más excitada? ¿Se está dando muerte al pecado, o solo se están agitando los sentimientos? El Espíritu de Dios es el Espíritu de santidad, y siempre guerrea contra el pecado.</p>
+
+    <h2><span class="dg-n">5.</span>La tercera y cuarta señales: la Escritura y la verdad</h2>
+    <p>La tercera señal segura es que una verdadera obra del Espíritu lleva a la gente a un mayor aprecio por las Santas Escrituras, estableciéndola más en su verdad y divinidad. El Espíritu inspiró las Escrituras, y nunca guía en contra de ellas; donde Él obra, da a su pueblo un amor más profundo por la Palabra, una mayor confianza en ella, un mayor hambre de leerla y obedecerla. Un espíritu que aleja a la gente de la Biblia, o por encima de ella, o en contra de ella — que trata las nuevas impresiones y revelaciones privadas como si superaran la Palabra escrita — no es el Espíritu de Dios. Y la cuarta señal está estrechamente unida a ella: el Espíritu de Dios es un Espíritu de verdad, y un espíritu falso es un espíritu de error. Una obra verdadera lleva a la gente a la verdad, dándole un recto entendimiento de su propia condición, de Dios, y del camino de salvación. Así que probamos cualquier obra reclamada preguntando: ¿lleva a la gente a las Escrituras, o la aleja de ellas? ¿Profundiza su comprensión de la verdad, o la llena de error y confusión? El Espíritu y la Palabra están siempre en perfecto acuerdo, pues son de un mismo Dios.</p>
+
+    <h2><span class="dg-n">6.</span>La quinta señal: amor a Dios y al prójimo</h2>
+    <p>La última y más grande de las señales seguras es el amor. Si un espíritu opera como un espíritu de amor a Dios y al prójimo, dice Edwards, es seguramente el Espíritu de Dios. Esta es la evidencia culminante, pues "el amor es de Dios," y "Dios es amor," y el fruto propio del Espíritu es el amor ante todo. Una verdadera obra del Espíritu enciende un amor más profundo por Dios — un deleite en Él, un anhelo tras Él — y un amor más profundo por los demás, atrayendo a los creyentes en humildad, bondad, y perdón, ablandando corazones duros y sanando relaciones rotas. Edwards es cuidadoso aquí, pues el diablo puede falsificar una especie de afecto natural o mero espíritu de partido; el amor que marca la obra del Espíritu es el amor que la Escritura describe — humilde, entregado, paciente, perdonador, alcanzando aun a los enemigos. Donde un movimiento produce esta clase de amor, tenemos la señal más segura de todas de que Dios está en él. Donde en cambio produce orgullo, división, desprecio, y amargura, comoquiera que se hable de él, el Espíritu del Dios que es amor no es su autor. El amor es la gran prueba, porque el amor es el carácter mismo de Dios.</p>
+
+    <h2><span class="dg-n">7.</span>Aplicar las señales</h2>
+    <p>Con estas señales en mano, Edwards nos da una herramienta de gran valor para nuestro propio día, y para el movimiento que estudia este curso. Cuando encontramos una obra reclamada del Espíritu — un avivamiento, una manifestación inusual, todo un movimiento — no debemos juzgarla por su rareza externa, ni por las emociones que agita, ni por los errores de algunos que son arrastrados por ella, pues ninguna de estas cosas resuelve la pregunta. Ni debemos aceptarla simplemente porque es emocionante o popular. Debemos aplicar las señales seguras: ¿exalta a Jesucristo? ¿Aleja a la gente del pecado y del mundo hacia la santidad? ¿Profundiza su amor por las Escrituras y su comprensión de la verdad? ¿Y produce amor real a Dios y unos a otros? Donde estas señales están presentes, podemos dar gracias a Dios y no temer, aun si hay debilidad humana mezclada; donde están ausentes, ninguna cantidad de prodigio o fervor puede hacer genuina la obra. Este es el equilibrio que la iglesia tan a menudo ha perdido — ni apagar el Espíritu ni ser engañados, sino probar todas las cosas, y retener lo bueno.</p>
+
+    <h2><span class="dg-n">8.</span>Una palabra de cautela y consuelo</h2>
+    <p>Edwards añade una cautela que haremos bien en escuchar. En una verdadera obra de Dios casi siempre habrá alguna mezcla de flaqueza humana, imprudencia, y aun pecado, porque la obra se lleva a cabo en gente débil y pecadora; y no debemos tropezar en esto, ni dejar que el enemigo use las faltas de algunos para hacernos rechazar el todo. Al mismo tiempo, no debemos defender ni excusar lo que está mal simplemente porque aparece junto a lo que está bien; el error y el exceso deben corregirse con suavidad, no celebrarse. El consuelo es que Dios es paciente con su pueblo, y capaz de llevar a cabo su obra por medio de ellos a pesar de su debilidad, refinándola a medida que avanza. Así que venimos a todo el tema — y al movimiento que estudia este curso — con discernimiento y caridad a la vez: prontos a honrar todo lo que verdaderamente exalta a Cristo, aparta a la gente del pecado, magnifica la Palabra, y produce amor; honestos sobre todo lo que no; y siempre, en toda nuestra prueba, manteniendo nuestros propios ojos fijos en el Salvador a quien el Espíritu fue dado para glorificar.</p>
+
+    <div class="dg-reflect">
+      <b>Para reflexionar.</b> Cuando oye de un avivamiento o una obra espiritual inusual, ¿cómo la juzga — por su rareza, su emoción, o los errores de algunos; o por si exalta a Cristo, aparta a la gente del pecado, magnifica la Escritura, y produce amor? ¿Está en mayor peligro de un error, abrazar todo sin crítica, o del otro, rechazar todo con sospecha? Pida a Dios el discernimiento que Edwards buscó — probar los espíritus por su Palabra, y retener lo bueno.
+    </div>
+
+    <footer class="dg-doc">
+      <p><b>Fuente.</b> Una lectura del Seminario Teológico de Chapala sobre discernir una verdadera obra del Espíritu, anclada en la obra de dominio público de Jonathan Edwards <em>The Distinguishing Marks of a Work of the Spirit of God</em> (1741) y en la Escritura. Esta es enseñanza escrita por el STC, no una reproducción; la obra de Edwards está libremente disponible en el dominio público.</p>
+    </footer>
+  </div>
+</div></details>
+<div class="foot">
+<label class="pick"><input data-pick="4" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 5 -->
+<article class="entry" data-id="5" data-title-en="Do the Miraculous Gifts Continue? &mdash; CTS digest" data-title-es="¿Continúan los Dones Milagrosos? &mdash; resumen del STC">
+<div class="locus"><span class="lang-en">The two cases, set fairly side by side &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Los dos casos, puestos con justicia lado a lado &middot; un resumen bilingüe del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">5.</span><span class="lang-en">Do the Miraculous Gifts Continue?</span><span class="lang-es">¿Continúan los Dones Milagrosos?</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The continuationist case (that the sign-gifts continue) and the cessationist case (that they ceased with the apostles) presented fairly side by side, for the reader to weigh by Scripture. Anchored in A.J. Gordon and B.B. Warfield.</p>
+<p class="caption lang-es block">El caso continuista (que los dones de señal continúan) y el caso cesacionista (que cesaron con los apóstoles) presentados con justicia lado a lado, para que el lector los sopese por la Escritura. Anclada en A.J. Gordon y B.B. Warfield.</p>
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll">
+<div class="lang-en block dg-block">
+    <header class="dg-doc">
+      <h1>Do the Miraculous Gifts Continue?</h1>
+      <p class="dg-sub">A Chapala Theological Seminary reading — the two cases set fairly side by side, anchored in Gordon and Warfield</p>
+      <p class="dg-src">A CTS-authored reading anchored in the public-domain works of A. J. Gordon (<em>The Ministry of the Spirit</em>, 1894) and B. B. Warfield (<em>Counterfeit Miracles</em>, 1918), and in Scripture.</p>
+      <ul class="dg-chips">
+        <li>The Gifts Today</li>
+        <li>Continue or Cease?</li>
+        <li>Both Cases Fairly</li>
+        <li>Reading 5 of 5</li>
+      </ul>
+    </header>
+
+    <div class="dg-note">
+      <b>A word before you read.</b> Do the miraculous "sign-gifts" of the New Testament — tongues, prophecy, healing, miracles — continue in the church today, or did they cease when the age of the apostles closed? On this, godly, Bible-loving Christians have long disagreed, and this course does not settle the question for you. Instead, as it does with the millennium, it sets out both cases at their strongest and leaves you to weigh them before God. We take our two guides from the public domain: A. J. Gordon, whose warm study of the Spirit makes the case that the gifts continue, and B. B. Warfield, the great scholar whose careful work makes the case that they ceased. Read both fairly. And keep in mind throughout a distinction this course returns to again and again: whether a gift is real is one question; whether it is required of every believer is quite another.
+    </div>
+
+    <h2><span class="dg-n">1.</span>The Question, Carefully Stated</h2>
+    <p>First we must be clear about what is, and is not, in dispute. No one on either side doubts that the Holy Spirit is God, that He is fully at work in the church today, or that He still gives many gifts — teaching, service, mercy, leadership, and the rest. The question is narrower: it concerns the miraculous, revelatory sign-gifts that appear in the New Testament — speaking in tongues, prophecy, the working of miracles, and gifts of healing. Did these continue past the apostolic age, to be sought and exercised in every generation? Or were they given for a particular time and purpose, and then withdrawn? This is the point at issue. And before we hear the two cases, one more thing must be said, for it prevents endless confusion: the question of whether a gift is real is different from the question of whether it is required. A person may hold that the gift of tongues is entirely genuine and still deny that every believer must speak in tongues; the two convictions belong to two different questions. We keep them apart throughout, and you will find that much of the apparent conflict grows smaller when we do.</p>
+
+    <h2><span class="dg-n">2.</span>The Case That the Gifts Have Ceased</h2>
+    <p>Warfield makes the case for cessation with great care, and it runs like this. The miraculous gifts, he argues, were not given for their own sake, nor as the normal equipment of every Christian in every age, but as credentials — a divine authentication of the apostles and of the new revelation they were bringing. Miracles clustered around the founding of the church and the giving of Scripture, as they had clustered around Moses and the prophets and around Christ Himself; they were the seal of God upon His messengers. Once the foundation was laid — once the apostles had finished their work and the New Testament was complete — the credentials had served their purpose, and they were withdrawn. Warfield points to the actual course of church history, arguing that the sign-gifts visibly declined and disappeared as the apostolic age passed, and he is cautious about the many later claims to miracles, testing them and finding much that will not stand. On this view, we honor the gifts as real in their time, but we do not expect them as abiding offices now; the Spirit works today chiefly through the completed Word He inspired, and through the ordinary graces He still supplies in abundance.</p>
+
+    <h2><span class="dg-n">3.</span>The Case That the Gifts Continue</h2>
+    <p>Gordon makes the opposite case, and it too deserves a fair hearing. Scripture, he observes, nowhere plainly states that the miraculous gifts would cease before the return of Christ; the passages that promise the Spirit and His gifts to the church seem to hold for the whole age, not merely for one generation. The gifts are given, Paul says, for the building up of the body of Christ until it reaches maturity — a work not yet finished. If the Spirit is given to the whole church throughout the age, Gordon reasons, why should we assume that some of His gifts were quietly retired? He points to accounts of healing and unusual works of the Spirit scattered through the centuries, and to the plain expectation of the New Testament that the Spirit's power would attend the church's mission to the end. On this view, we should be open to the Spirit's gifts today, seeking them humbly and testing them by Scripture, neither demanding them nor forbidding them, but expecting that the God who worked then may work still. Gordon writes not as a fanatic but as a sober pastor, longing for the church to know the Spirit's fullness and power.</p>
+
+    <h2><span class="dg-n">4.</span>The Text at the Center: 1 Corinthians 13</h2>
+    <p>Much of the debate gathers around one passage, and it is worth setting it plainly before us. Paul writes that love never fails, "but whether there are prophecies, they will fail; whether there are tongues, they will cease; whether there is knowledge, it will vanish away. For we know in part and we prophesy in part. But when that which is perfect has come, then that which is in part will be done away." The whole question turns on what "that which is perfect" means. Those who hold that the gifts have ceased often understand "the perfect" as the completed Scripture, or as the maturing of the church — something that arrived, they argue, when the foundational age closed, so that the partial gifts of prophecy and tongues then passed away. Those who hold that the gifts continue understand "the perfect" as the return of Christ and the face-to-face knowledge of the age to come — for Paul goes on at once to say, "now we see in a mirror, dimly, but then face to face." On that reading, the gifts continue until Christ comes. The course sets both readings before you and presses neither; here, as elsewhere, thoughtful believers differ, and the honest reader will feel the weight on both sides.</p>
+
+    <h2><span class="dg-n">5.</span>How Much the Two Sides Share</h2>
+    <p>It is easy, in the heat of disagreement, to miss how much the two sides hold in common — and the common ground is large. Both Warfield and Gordon confess that the Holy Spirit is God and is mightily at work in the church today. Both prize the Scriptures as the inspired and final Word, and refuse to set any experience above them. Both insist that whatever claims to be from the Spirit must be tested, and both reject fanaticism, disorder, and the parading of the flesh as though it were the power of God. Both long above all for Christ to be exalted and for sinners to be saved. Neither is a fanatic; neither is a scoffer. Their disagreement, real as it is, lies within a shared love for God, His Word, and His Son — and that is worth remembering. It means the question of the gifts, while important, is not a question that need turn brothers into enemies. Two men who agree on so much, and differ on this, can still kneel together at the same cross and serve the same Lord. That kneeling together, more than any settled verdict on the gifts, is itself a mark of the Spirit of love who binds them in one body — and it is a mark the watching world can see.</p>
+
+    <h2><span class="dg-n">6.</span>Two Questions, Kept Apart</h2>
+    <p>Here the distinction we noted at the start does much of its work. A great deal of the heat around this subject comes from running together two questions that are really separate. The first is whether a gift is real — whether the Spirit still gives it. The second is whether a particular gift or experience is required of every believer. These are not the same. Even a convinced continuationist need not hold that every Christian must speak in tongues, or that anyone who has not is a lesser believer; Paul himself asks, "Do all speak with tongues?" — plainly expecting the answer no. And a convinced cessationist need not deny that God still heals in answer to prayer, or works wonderfully in His providence; he denies only that the sign-gifts continue as abiding offices in the church. When the two questions are separated, much of the apparent conflict grows smaller, and both sides can be heard more fairly. Whatever you conclude about whether the gifts continue, do not let anyone burden your conscience by making a particular experience the measure of a true or a full Christian; Scripture nowhere does so.</p>
+
+    <h2><span class="dg-n">7.</span>Weighing It by Scripture</h2>
+    <p>How, then, should you come to your own settled conviction? Not by temperament, nor by the tradition you happened to inherit, nor by the excesses or the coldness of others, but by patient attention to the Scriptures. Read what the New Testament actually says about the gifts, their purpose, and their duration. Weigh the cessationist's argument that they were credentials of the founding age, and ask whether Scripture says so plainly or leaves it to inference. Weigh the continuationist's argument that the gifts are promised to the whole age, and ask the same. Consider First Corinthians 13 and what "the perfect" most naturally means in its own setting. And bring to it a humble and teachable spirit, remembering that men more learned and more godly than ourselves have read these same texts and reached different conclusions. This is not a matter on which Scripture shouts; it is one on which it may be heard to speak more softly, and on which we must listen with care. Come, then, as the Bereans came — receiving the word readily, and searching the Scriptures to see whether these things are so.</p>
+
+    <h2><span class="dg-n">8.</span>Holding It with Charity, Christ at the Center</h2>
+    <p>Whatever you conclude, hold it with charity, and keep Christ at the center. This is one of those questions on which faithful, Bible-loving Christians have long differed and will likely differ until the Lord returns; it is not one on which we should break fellowship, or treat those who disagree as enemies of the truth. If you come to believe the gifts have ceased, do not despise brothers who earnestly seek them; if you come to believe they continue, do not look down on brothers who do not. In either case, remember that the gifts were never the point. The Spirit was given to glorify Christ, and the surest evidence of His presence is not any gift, but a Savior exalted and a people made holy and loving. So weigh the question honestly, hold your conclusion humbly, extend charity freely, and keep your eyes, in all of it, on the Lord Jesus — who is greater than every gift, and whom the Spirit delights to make known.</p>
+
+    <div class="dg-reflect">
+      <b>For reflection.</b> On the question of the gifts, which case do you find more persuasive from Scripture — and can you state the other side fairly, as its best defenders would? Are you holding your view humbly, weighing it by the Word rather than by temperament or tradition? And whatever you conclude, are you keeping the two questions apart — the reality of a gift, and its being required of all — and holding your conviction with charity toward those who differ? Above all, is Christ, and not any gift, at the center of your hope?
+    </div>
+
+    <footer class="dg-doc">
+      <p><b>Source.</b> A Chapala Theological Seminary reading presenting both sides of whether the miraculous gifts continue, anchored in the public-domain works of A. J. Gordon (<em>The Ministry of the Spirit</em>, 1894) and B. B. Warfield (<em>Counterfeit Miracles</em>, 1918), and in Scripture. This is CTS-authored teaching, not a reproduction; both works are freely available in the public domain.</p>
+    </footer>
+  </div>
+<div class="lang-es block dg-block">
+    <header class="dg-doc">
+      <h1>¿Continúan los Dones Milagrosos?</h1>
+      <p class="dg-sub">Una lectura del Seminario Teológico de Chapala — los dos casos puestos con justicia lado a lado, anclada en Gordon y Warfield</p>
+      <p class="dg-src">Una lectura escrita por el STC, anclada en las obras de dominio público de A. J. Gordon (<em>The Ministry of the Spirit</em>, 1894) y B. B. Warfield (<em>Counterfeit Miracles</em>, 1918), y en la Escritura.</p>
+      <ul class="dg-chips">
+        <li>Los Dones Hoy</li>
+        <li>¿Continúan o Cesan?</li>
+        <li>Ambos Casos con Justicia</li>
+        <li>Lectura 5 de 5</li>
+      </ul>
+    </header>
+
+    <div class="dg-note">
+      <b>Una palabra antes de leer.</b> ¿Continúan los "dones de señal" milagrosos del Nuevo Testamento — lenguas, profecía, sanidad, milagros — en la iglesia hoy, o cesaron cuando cerró la era de los apóstoles? En esto, cristianos piadosos que aman la Biblia han discrepado por mucho tiempo, y este curso no resuelve la pregunta por usted. En cambio, como lo hace con el milenio, expone ambos casos en su forma más fuerte y le deja sopesarlos ante Dios. Tomamos nuestros dos guías del dominio público: A. J. Gordon, cuyo cálido estudio del Espíritu hace el caso de que los dones continúan, y B. B. Warfield, el gran erudito cuya cuidadosa obra hace el caso de que cesaron. Lea ambos con justicia. Y tenga presente en todo momento una distinción a la que este curso vuelve una y otra vez: si un don es real es una pregunta; si se requiere de todo creyente es otra muy distinta.
+    </div>
+
+    <h2><span class="dg-n">1.</span>La pregunta, planteada con cuidado</h2>
+    <p>Primero debemos tener claro qué está, y qué no está, en disputa. Nadie de ninguno de los dos lados duda de que el Espíritu Santo es Dios, de que está plenamente obrando en la iglesia hoy, o de que todavía da muchos dones — enseñanza, servicio, misericordia, liderazgo, y lo demás. La pregunta es más estrecha: concierne a los dones de señal milagrosos y reveladores que aparecen en el Nuevo Testamento — el hablar en lenguas, la profecía, el hacer milagros, y los dones de sanidad. ¿Continuaron estos más allá de la era apostólica, para ser buscados y ejercidos en cada generación? ¿O fueron dados para un tiempo y propósito particulares, y luego retirados? Este es el punto en cuestión. Y antes de oír los dos casos, una cosa más debe decirse, pues previene una confusión sin fin: la pregunta de si un don es real es diferente de la pregunta de si se requiere. Una persona puede sostener que el don de lenguas es enteramente genuino y aun negar que todo creyente deba hablar en lenguas; las dos convicciones pertenecen a dos preguntas diferentes. Las mantenemos separadas en todo momento, y usted hallará que gran parte del aparente conflicto se hace más pequeño cuando lo hacemos.</p>
+
+    <h2><span class="dg-n">2.</span>El caso de que los dones han cesado</h2>
+    <p>Warfield hace el caso de la cesación con gran cuidado, y va así. Los dones milagrosos, argumenta, no fueron dados por sí mismos, ni como el equipo normal de todo cristiano en toda época, sino como credenciales — una autenticación divina de los apóstoles y de la nueva revelación que traían. Los milagros se agruparon en torno a la fundación de la iglesia y la entrega de la Escritura, como se habían agrupado en torno a Moisés y los profetas y en torno a Cristo mismo; eran el sello de Dios sobre sus mensajeros. Una vez puesto el fundamento — una vez que los apóstoles terminaron su obra y el Nuevo Testamento quedó completo — las credenciales habían servido su propósito, y fueron retiradas. Warfield señala el curso real de la historia de la iglesia, argumentando que los dones de señal declinaron visiblemente y desaparecieron a medida que pasó la era apostólica, y es cauteloso acerca de las muchas afirmaciones posteriores de milagros, probándolas y hallando mucho que no se sostiene. En esta visión, honramos los dones como reales en su tiempo, pero no los esperamos como oficios permanentes ahora; el Espíritu obra hoy principalmente por medio de la Palabra completa que inspiró, y por las gracias ordinarias que todavía suministra en abundancia.</p>
+
+    <h2><span class="dg-n">3.</span>El caso de que los dones continúan</h2>
+    <p>Gordon hace el caso opuesto, y también merece una audiencia justa. La Escritura, observa, en ninguna parte declara claramente que los dones milagrosos cesarían antes del regreso de Cristo; los pasajes que prometen el Espíritu y sus dones a la iglesia parecen valer para toda la era, no meramente para una generación. Los dones son dados, dice Pablo, para la edificación del cuerpo de Cristo hasta que llegue a la madurez — una obra aún no terminada. Si el Espíritu es dado a toda la iglesia a lo largo de la era, razona Gordon, ¿por qué habríamos de suponer que algunos de sus dones fueron calladamente jubilados? Señala relatos de sanidad y obras inusuales del Espíritu esparcidos a través de los siglos, y la clara expectativa del Nuevo Testamento de que el poder del Espíritu acompañaría la misión de la iglesia hasta el fin. En esta visión, deberíamos estar abiertos a los dones del Espíritu hoy, buscándolos humildemente y probándolos por la Escritura, ni exigiéndolos ni prohibiéndolos, sino esperando que el Dios que obró entonces pueda obrar todavía. Gordon escribe no como un fanático, sino como un pastor sobrio, anhelando que la iglesia conozca la plenitud y el poder del Espíritu.</p>
+
+    <h2><span class="dg-n">4.</span>El texto en el centro: 1 Corintios 13</h2>
+    <p>Gran parte del debate se reúne en torno a un pasaje, y vale la pena ponerlo claramente ante nosotros. Pablo escribe que el amor nunca deja de ser, "pero las profecías se acabarán, y cesarán las lenguas, y la ciencia acabará. Porque en parte conocemos, y en parte profetizamos; mas cuando venga lo que es perfecto, entonces lo que es en parte se acabará." Toda la pregunta gira sobre lo que significa "lo que es perfecto." Los que sostienen que los dones han cesado a menudo entienden "lo perfecto" como la Escritura completa, o como la madurez de la iglesia — algo que llegó, argumentan, cuando cerró la era fundacional, de modo que los dones parciales de profecía y lenguas entonces pasaron. Los que sostienen que los dones continúan entienden "lo perfecto" como el regreso de Cristo y el conocimiento cara a cara de la era venidera — pues Pablo pasa enseguida a decir, "ahora vemos por espejo, oscuramente; mas entonces veremos cara a cara." En esa lectura, los dones continúan hasta que Cristo venga. El curso pone ambas lecturas ante usted y no presiona ninguna; aquí, como en otras partes, los creyentes reflexivos difieren, y el lector honesto sentirá el peso de ambos lados.</p>
+
+    <h2><span class="dg-n">5.</span>Cuánto comparten los dos lados</h2>
+    <p>Es fácil, en el calor del desacuerdo, pasar por alto cuánto sostienen en común los dos lados — y el terreno común es amplio. Tanto Warfield como Gordon confiesan que el Espíritu Santo es Dios y está poderosamente obrando en la iglesia hoy. Ambos aprecian las Escrituras como la Palabra inspirada y final, y rehúsan poner cualquier experiencia por encima de ellas. Ambos insisten en que todo lo que dice ser del Espíritu debe probarse, y ambos rechazan el fanatismo, el desorden, y el desfile de la carne como si fuera el poder de Dios. Ambos anhelan sobre todo que Cristo sea exaltado y que los pecadores sean salvos. Ninguno es un fanático; ninguno es un burlador. Su desacuerdo, real como es, yace dentro de un amor compartido por Dios, su Palabra, y su Hijo — y eso vale la pena recordar. Significa que la pregunta de los dones, aunque importante, no es una pregunta que deba convertir a hermanos en enemigos. Dos hombres que concuerdan en tanto, y difieren en esto, pueden aun arrodillarse juntos ante la misma cruz y servir al mismo Señor.</p>
+
+    <h2><span class="dg-n">6.</span>Dos preguntas, mantenidas aparte</h2>
+    <p>Aquí la distinción que notamos al comienzo hace gran parte de su trabajo. Gran parte del calor en torno a este tema viene de mezclar dos preguntas que son en realidad separadas. La primera es si un don es real — si el Espíritu todavía lo da. La segunda es si un don o experiencia particular se requiere de todo creyente. Estas no son la misma. Aun un continuista convencido no necesita sostener que todo cristiano deba hablar en lenguas, o que quien no lo haya hecho sea un creyente menor; el mismo Pablo pregunta: "¿Hablan todos lenguas?" — esperando claramente la respuesta no. Y un cesacionista convencido no necesita negar que Dios todavía sana en respuesta a la oración, o que obra maravillosamente en su providencia; niega solo que los dones de señal continúen como oficios permanentes en la iglesia. Cuando las dos preguntas se separan, gran parte del aparente conflicto se hace más pequeño, y ambos lados pueden oírse con más justicia. Comoquiera que usted concluya sobre si los dones continúan, no deje que nadie cargue su conciencia haciendo de una experiencia particular la medida de un cristiano verdadero o pleno; la Escritura en ninguna parte lo hace.</p>
+
+    <h2><span class="dg-n">7.</span>Sopesarlo por la Escritura</h2>
+    <p>¿Cómo, entonces, debería llegar a su propia convicción firme? No por temperamento, ni por la tradición que le tocó heredar, ni por los excesos o la frialdad de otros, sino por la atención paciente a las Escrituras. Lea lo que el Nuevo Testamento realmente dice acerca de los dones, su propósito, y su duración. Sopese el argumento del cesacionista de que eran credenciales de la era fundacional, y pregunte si la Escritura lo dice claramente o lo deja a la inferencia. Sopese el argumento del continuista de que los dones son prometidos a toda la era, y pregunte lo mismo. Considere Primera de Corintios 13 y lo que "lo perfecto" significa más naturalmente en su propio contexto. Y tráigale un espíritu humilde y enseñable, recordando que hombres más doctos y más piadosos que nosotros han leído estos mismos textos y llegado a conclusiones diferentes. Este no es un asunto sobre el cual la Escritura grita; es uno sobre el cual puede oírse hablar más suavemente, y sobre el cual debemos escuchar con cuidado. Venga, entonces, como vinieron los bereanos — recibiendo la palabra prontamente, y escudriñando las Escrituras para ver si estas cosas son así.</p>
+
+    <h2><span class="dg-n">8.</span>Sostenerlo con caridad, Cristo en el centro</h2>
+    <p>Comoquiera que concluya, sosténgalo con caridad, y mantenga a Cristo en el centro. Esta es una de esas preguntas sobre las cuales cristianos fieles que aman la Biblia han diferido por mucho tiempo y probablemente diferirán hasta que el Señor regrese; no es una sobre la cual debamos romper la comunión, o tratar a los que discrepan como enemigos de la verdad. Si llega a creer que los dones han cesado, no desprecie a los hermanos que los buscan con seriedad; si llega a creer que continúan, no menosprecie a los hermanos que no. En cualquier caso, recuerde que los dones nunca fueron el punto. El Espíritu fue dado para glorificar a Cristo, y la evidencia más segura de su presencia no es ningún don, sino un Salvador exaltado y un pueblo hecho santo y amoroso. Así que sopese la pregunta con honestidad, sostenga su conclusión con humildad, extienda caridad libremente, y mantenga sus ojos, en todo ello, en el Señor Jesús — que es mayor que todo don, y a quien el Espíritu se deleita en dar a conocer.</p>
+
+    <div class="dg-reflect">
+      <b>Para reflexionar.</b> Sobre la pregunta de los dones, ¿cuál caso halla más persuasivo desde la Escritura — y puede exponer el otro lado con justicia, como lo harían sus mejores defensores? ¿Sostiene su punto de vista con humildad, sopesándolo por la Palabra en vez de por temperamento o tradición? Y comoquiera que concluya, ¿mantiene las dos preguntas aparte — la realidad de un don, y su ser requerido de todos — y sostiene su convicción con caridad hacia los que difieren? Sobre todo, ¿está Cristo, y no ningún don, en el centro de su esperanza?
+    </div>
+
+    <footer class="dg-doc">
+      <p><b>Fuente.</b> Una lectura del Seminario Teológico de Chapala que presenta ambos lados de si los dones milagrosos continúan, anclada en las obras de dominio público de A. J. Gordon (<em>The Ministry of the Spirit</em>, 1894) y B. B. Warfield (<em>Counterfeit Miracles</em>, 1918), y en la Escritura. Esta es enseñanza escrita por el STC, no una reproducción; ambas obras están libremente disponibles en el dominio público.</p>
+    </footer>
+  </div>
+</div></details>
+<div class="foot">
+<label class="pick"><input data-pick="5" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+
+<!-- ============ ATTESTATION ============ -->
+<div class="card attest">
+<h2>
+<span class="lang-en">Record your reading</span>
+<span class="lang-es">Registre su lectura</span>
+</h2>
+<p class="lang-en block">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor.</p>
+<p class="lang-es block">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor.</p>
+<label class="field" for="stName"><span class="lang-en">Your name</span><span class="lang-es">Su nombre</span></label>
+<input autocomplete="name" id="stName" type="text"/>
+<div class="oath">
+<input id="oath" type="checkbox"/>
+<label for="oath"><span class="lang-en">On my honor, I have read in full the three excerpts or adaptations I selected above.</span><span class="lang-es">Bajo mi honor, he leído por completo los tres extractos o adaptaciones que seleccioné arriba.</span></label>
+</div>
+<button class="btn" onclick="recordReading()"><span class="lang-en">Record my reading</span><span class="lang-es">Registrar mi lectura</span></button>
+<p class="msg" id="attMsg"></p>
+<p class="msg no-print" id="honorsDone" style="display:none;color:#2f6b3a;"><span class="lang-en">✓ Recorded — this class counts toward your With Honors progress. <a href="cts-honors.html" style="color:#2f6b3a;">View progress ↗</a></span><span class="lang-es">✓ Registrado — esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html" style="color:#2f6b3a;">Ver progreso ↗</a></span></p>
+<!-- confirmation record -->
+<div class="record" id="record">
+<div class="seal-line"></div>
+<h3><span class="lang-en">Honors Reading — recorded</span><span class="lang-es">Lectura con Honores — registrada</span></h3>
+<div class="named" id="recName"></div>
+<p class="lang-en block">affirmed on <span id="recDateEn"></span> to have read, in full:</p>
+<p class="lang-es block">afirmó el <span id="recDateEs"></span> haber leído, por completo:</p>
+<ul id="recList"></ul>
+<p class="stamp"><span class="lang-en">Chapala Theological Seminary · Pentecostalism · present or print this page as your honors reading record.</span><span class="lang-es">Seminario Teológico de Chapala · Pentecostalismo · presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p style="margin-top:14px;">
+<button class="btn ghost no-print" onclick="window.print()"><span class="lang-en">Print this record</span><span class="lang-es">Imprimir este registro</span></button>
+<button class="btn ghost no-print" onclick="resetReading()"><span class="lang-en">Start over</span><span class="lang-es">Empezar de nuevo</span></button>
+</p>
+</div>
+</div>
+<p class="footnote">
+<span class="lang-en">Chapala Theological Seminary · Seminario Teológico de Chapala · free bilingual self-study</span>
+<span class="lang-es">Seminario Teológico de Chapala · Chapala Theological Seminary · estudio propio bilingüe gratuito</span>
+</p>
+</div>
+<script>
+  var MAX = 3;
+  var HONORS_CODE="Pentecostal"; var HONORS_COURSE="Pentecostalism";
+
+  function setLang(l){
+    document.body.className = 'lang-' + l;
+    document.querySelectorAll('.toggle-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+  }
+
+  function chosenBoxes(){
+    return Array.prototype.slice.call(document.querySelectorAll('input[data-pick]:checked'));
+  }
+
+  function refresh(){
+    var boxes = document.querySelectorAll('input[data-pick]');
+    var chosen = chosenBoxes();
+    var n = chosen.length;
+    document.getElementById('cnt-en').textContent = n;
+    document.getElementById('cnt-es').textContent = n;
+
+    var full = (n >= MAX);
+    boxes.forEach(function(b){
+      var lab = b.closest('.pick');
+      var art = b.closest('.entry');
+      if(!b.checked && full){
+        b.disabled = true; lab.classList.add('disabled');
+      } else {
+        b.disabled = false; lab.classList.remove('disabled');
+      }
+      if(art) art.classList.toggle('chosen', b.checked);
+    });
+
+    var note = document.getElementById('limitNote');
+    if(full){
+      note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+    } else {
+      note.textContent = "";
+    }
+  }
+
+  document.querySelectorAll('input[data-pick]').forEach(function(b){
+    b.addEventListener('change', refresh);
+  });
+
+  function recordReading(){
+    var chosen = chosenBoxes();
+    var name = document.getElementById('stName').value.trim();
+    var oath = document.getElementById('oath').checked;
+    var msg = document.getElementById('attMsg');
+
+    if(chosen.length !== MAX){
+      msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+      return;
+    }
+    if(!name){
+      msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+      return;
+    }
+    if(!oath){
+      msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+      return;
+    }
+    msg.textContent = "";
+
+    var now = new Date();
+    var en = now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+    var es = now.toLocaleDateString('es-MX', {year:'numeric', month:'long', day:'numeric'});
+    document.getElementById('recName').textContent = name;
+    document.getElementById('recDateEn').textContent = en;
+    document.getElementById('recDateEs').textContent = es;
+
+    var ul = document.getElementById('recList');
+    ul.innerHTML = "";
+    chosen.forEach(function(b){
+      var art = b.closest('.entry');
+      var li = document.createElement('li');
+      li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+      ul.appendChild(li);
+    });
+
+    try {
+      var _works=[];
+      chosen.forEach(function(b){ var a=b.closest('.entry'); if(a) _works.push(a.getAttribute('data-title-en')); });
+      localStorage.setItem('cts_honors_name_v1', name);
+      localStorage.setItem('cts_honors_v1:'+HONORS_CODE, JSON.stringify({name:name,date:en,course:HONORS_COURSE,works:_works}));
+      var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block';
+    } catch(e){}
+    document.getElementById('record').classList.add('show');
+    document.getElementById('record').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function resetReading(){
+    document.querySelectorAll('input[data-pick]').forEach(function(b){ b.checked = false; });
+    document.getElementById('stName').value = "";
+    document.getElementById('oath').checked = false;
+    document.getElementById('record').classList.remove('show');
+    document.getElementById('attMsg').textContent = "";
+    refresh();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  refresh();
+  try {
+    if(localStorage.getItem('cts_honors_v1:'+HONORS_CODE)){ var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block'; }
+    var _nm=localStorage.getItem('cts_honors_name_v1'); var _f=document.getElementById('stName'); if(_nm && _f && !_f.value){ _f.value=_nm; }
+  } catch(e){}
+</script>
+
+<!-- CTS-FURTHER-STUDY -->
+<style>
+.fs-wrap{max-width:900px;margin:38px auto 10px;padding:0 18px;font-family:Georgia,serif;color:#1f2a37;line-height:1.55;box-sizing:border-box}
+.fs-wrap *{box-sizing:border-box}
+.fs-head{border-top:6px solid #33608f;background:#eaf1f8;border:1px solid #dbe6f0;border-radius:12px;padding:18px 20px}
+.fs-eyebrow{font:700 .72rem/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#33608f}
+.fs-head h2{font-size:1.5rem;margin:.3rem 0 .1rem}
+.fs-es{color:#48586a;font-style:italic}
+.fs-tag{margin:.5rem 0 0;font-family:Arial,sans-serif;font-size:.9rem;color:#5b6b7b}
+.fs-online{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid #33608f;border-left:6px solid #33608f;border-radius:10px;padding:11px 14px;margin:13px 0 18px}
+.fs-online .fs-badge{flex:none;font:800 .66rem/1 Arial,sans-serif;letter-spacing:.1em;color:#fff;background:#33608f;padding:6px 9px;border-radius:6px;margin-top:2px}
+.fs-online p{margin:0;font-size:.9rem}
+.fs-grid{display:grid;gap:14px}
+.fs-card{background:#fff;border:1px solid #dbe6f0;border-radius:11px;padding:16px 17px;box-shadow:0 2px 8px #0b214a0a}
+.fs-kind{font:700 .7rem/1 Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#264a6e}
+.fs-card h3{margin:.3rem 0 .15rem;font-size:1.12rem}
+.fs-meta{font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b;margin:0 0 .5rem}
+.fs-langs span{font:700 .64rem/1 Arial,sans-serif;background:#eaf1f8;color:#264a6e;border:1px solid #cadcee;border-radius:999px;padding:3px 7px;margin-left:5px}
+.fs-card p{margin:.35rem 0 .5rem}
+.fs-note{background:#fbf3e6;border-left:4px solid #8a5a1c;border-radius:0 6px 6px 0;padding:9px 12px;margin:.5rem 0;font-size:.85rem}
+.fs-note b{color:#8a5a1c}
+.fs-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:9px}
+.fs-btn{display:inline-block;text-decoration:none;background:#33608f;color:#fff;font:700 .85rem Arial,sans-serif;padding:8px 12px;border-radius:7px}
+.fs-btn.fs-alt{background:#fff;color:#264a6e;border:1.5px solid #33608f}
+.fs-pick{border:2px dashed #b7c7d8;background:#fbfdff;color:#5b6b7b}
+.fs-pick h3{color:#5b6b7b}
+.fs-foot{margin-top:16px;font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b}
+@media(max-width:600px){.fs-head h2{font-size:1.3rem}}
+</style>
+<section class="fs-wrap" id="further-study">
+<div class="fs-head">
+  <div class="fs-eyebrow">Chapala Theological Seminary &middot; Further Study</div>
+  <h2>Further Study &mdash; Online</h2>
+  <div class="fs-es" style="font-size:1.05rem">Estudio Adicional &mdash; En Línea</div>
+  <p class="fs-tag">Optional resources for students with internet access &mdash; Pentecostalism<br>
+  <span class="fs-es">Recursos opcionales para estudiantes con acceso a internet &mdash; Pentecostalismo</span></p>
+</div>
+<div class="fs-online"><span class="fs-badge">ONLINE</span>
+  <p><strong>Requires an internet connection.</strong> These resources are hosted on the web and do not open offline. They supplement the course; they do not replace its units or exams.<br>
+  <span class="fs-es"><strong>Requiere una conexión a internet.</strong> Estos recursos están alojados en la web y no se abren sin conexión. Complementan el curso; no sustituyen sus unidades ni exámenes.</span></p>
+</div>
+<div class="fs-grid">
+<article class="fs-card">
+  <div class="fs-kind">Free animated Bible videos / Videos bíblicos animados gratuitos</div>
+  <h3>BibleProject &mdash; Proyecto Biblia</h3>
+  <p class="fs-meta">Video <span class="fs-langs"><span>English</span><span>Español</span></span></p>
+  <p>Short, well-crafted animated videos. In the video library, explore the videos on <strong>the overarching story and message of the Bible</strong>. Non-partisan and freely available.<br>
+  <span class="fs-es">Videos animados breves y bien hechos. En la biblioteca de videos, explore los videos sobre <strong>la historia y el mensaje central de la Biblia</strong>. No partidista y de acceso gratuito.</span></p>
+  <div class="fs-links">
+    <a class="fs-btn" target="_blank" rel="noopener" href="https://bibleproject.com">Open (English) &#8599;</a>
+    <a class="fs-btn fs-alt" target="_blank" rel="noopener" href="https://proyectobiblia.com">Abrir (Español) &#8599;</a>
+  </div>
+</article>
+<article class="fs-card fs-pick">
+  <div class="fs-kind">Instructor's vetted pick / Selección aprobada por el instructor</div>
+  <h3>[ Your chosen video goes here ]</h3>
+  <p>A place for a specific video the instructor has watched and approved for this course.<br>
+  <span class="fs-es">Un espacio para un video específico que el instructor haya visto y aprobado para este curso.</span></p>
+</article>
+</div>
+<div class="fs-foot">These optional supplements link to third-party websites that Chapala Theological Seminary does not control; weigh their content against Scripture and this course.<br>
+<span class="fs-es">Estos complementos opcionales enlazan a sitios web de terceros que el Seminario Teológico de Chapala no controla; pese su contenido a la luz de la Escritura y de este curso.</span></div>
+</section>
+<!-- /CTS-FURTHER-STUDY -->
+
+</body>
+</html>

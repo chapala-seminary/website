@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Hermeneutics — Unit 3: Exegesis, Eisegesis, and the First Principle</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Georgia,"Times New Roman",serif;line-height:1.65;color:#222;background:#f6f3ec;padding-bottom:3rem}
+  body.lang-en .lang-es,body.lang-es .lang-en{display:none}
+  .container{max-width:780px;margin:0 auto;padding:1.25rem}
+  header{background:#3d2b1f;color:#f6f3ec;padding:1rem 1.25rem;position:sticky;top:0;z-index:10;border-bottom:3px solid #b08240}
+  header .hwrap{max-width:780px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;justify-content:space-between}
+  header h1{font-size:1.05rem;margin:0;font-weight:600;letter-spacing:.02em}
+  header .toggle{background:#b08240;color:#3d2b1f;border:none;padding:.4rem .8rem;border-radius:4px;font-weight:700;cursor:pointer;font-family:inherit;font-size:.85rem}
+  header .toggle:hover{background:#c79352}
+  .progress-grid{display:flex;flex-wrap:wrap;gap:.3rem;margin:.75rem auto 0;max-width:780px}
+  .pill{width:2.2rem;height:2.2rem;border-radius:50%;background:#5a4332;color:#f6f3ec;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;border:2px solid transparent}
+  .pill.done{background:#6b8e4e;border-color:#9bc176}
+  .pill.current{border-color:#b08240;background:#b08240;color:#3d2b1f}
+  h1.unit-title{font-size:1.7rem;color:#3d2b1f;margin:1.5rem 0 .25rem;line-height:1.2}
+  h2.unit-sub{font-size:1.1rem;color:#7a5a3a;margin:0 0 1.5rem;font-style:italic;font-weight:normal}
+  h3{font-size:1.2rem;color:#3d2b1f;margin-top:2rem;border-bottom:1px solid #d4c5a8;padding-bottom:.3rem}
+  p{margin:.85rem 0}
+  .scripture{background:#fff7e8;border-left:4px solid #b08240;padding:.75rem 1rem;margin:1rem 0;font-style:italic}
+  .card{background:#fff;border:1px solid #d4c5a8;border-radius:8px;padding:1.25rem;margin:1.5rem 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .card h3{margin-top:0;border:none;color:#3d2b1f}
+  label{display:block;margin:.5rem 0 .2rem;font-weight:600;color:#3d2b1f}
+  input[type=text],input[type=email],textarea,select{width:100%;padding:.55rem;border:1px solid #c4b598;border-radius:4px;font-family:inherit;font-size:1rem;background:#fff}
+  textarea{min-height:5rem;resize:vertical}
+  .btn{background:#3d2b1f;color:#f6f3ec;border:none;padding:.65rem 1.2rem;border-radius:4px;cursor:pointer;font-family:inherit;font-size:1rem;font-weight:600;margin:.3rem .3rem .3rem 0}
+  .btn:hover{background:#5a4332}
+  .btn.primary{background:#b08240;color:#3d2b1f}
+  .btn.primary:hover{background:#c79352}
+  .btn.danger{background:#8b3a2c;color:#fff}
+  .btn.danger:hover{background:#a54838}
+  .btn:disabled{background:#999;cursor:not-allowed}
+  .track-buttons{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+  .track-buttons .btn{flex:1;min-width:140px}
+  .track-buttons .btn.selected{outline:3px solid #6b8e4e}
+  .question{margin:1.25rem 0;padding:1rem;background:#fff;border:1px solid #d4c5a8;border-radius:6px}
+  .question p.qtext{font-weight:600;margin-top:0}
+  .option{display:block;margin:.35rem 0;padding:.5rem .75rem;background:#f6f3ec;border:1px solid #d4c5a8;border-radius:4px;cursor:pointer}
+  .option:hover{background:#ede6d2}
+  .option input{margin-right:.5rem}
+  .option.correct-answer{background:#dcebc4;border-color:#6b8e4e}
+  .option.wrong-answer{background:#f4d4cc;border-color:#8b3a2c}
+  .feedback{margin-top:.6rem;padding:.6rem .8rem;border-radius:4px;font-size:.95rem}
+  .feedback.correct{background:#dcebc4;border-left:4px solid #6b8e4e}
+  .feedback.incorrect{background:#f4d4cc;border-left:4px solid #8b3a2c}
+  .sa-feedback{margin-top:.4rem;font-size:.9rem;font-style:italic;color:#5a4332}
+  .sa-model{margin-top:.6rem;padding:.8rem 1rem;background:#fdf6e3;border:1px solid #e6cf7a;border-left:5px solid #f4c542;border-radius:6px;font-size:.95rem;color:#3a3026}
+  .sa-model-label{font-weight:700;color:#8a6d1f;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.5px;font-size:.78rem}
+  .sa-feedback.pass{color:#3a5a25}
+  .sa-feedback.fail{color:#7a2618}
+  .results{background:#fff;border:2px solid #b08240;border-radius:8px;padding:1.25rem;margin:1.5rem 0}
+  .results.pass{border-color:#6b8e4e;background:#f0f7e3}
+  .results.fail{border-color:#8b3a2c;background:#fbeae5}
+  .results h2{margin-top:0}
+  .lockout{background:#fbeae5;border:2px solid #8b3a2c;border-radius:8px;padding:1.25rem;margin:1.5rem 0;text-align:center}
+  .lockout .timer{font-size:1.4rem;font-weight:700;color:#8b3a2c;margin:.5rem 0}
+  .hidden{display:none !important}
+  footer{text-align:center;padding:2rem 1rem 1rem;font-size:.85rem;color:#7a5a3a}
+  @media print{
+    body{background:#fff;color:#000}
+    header,.toggle,.progress-grid,.btn,#exam-section,#results-block,#lockout-block,#registration-card,#track-card,footer{display:none !important}
+    .container{max-width:none;padding:0}
+    body.lang-en .lang-es,body.lang-es .lang-en{display:none}
+    h1.unit-title,h3{color:#000;page-break-after:avoid}
+    .scripture{border-left:2px solid #000;background:none}
+  }
+    .sa-check-btn{margin:.4rem 0;padding:.4rem .9rem;font-size:.9rem}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+
+<header>
+  <div class="hwrap">
+    <h1>
+      <span class="lang-en">CTS Hermeneutics &middot; Unit 3</span>
+      <span class="lang-es">Hermenéutica CTS &middot; Unidad 3</span>
+    </h1>
+    <button class="toggle" onclick="toggleLang()">
+      <span class="lang-en">Español</span>
+      <span class="lang-es">English</span>
+    </button>
+  </div>
+  <div class="progress-grid" id="progress-grid"></div>
+</header>
+
+<div class="container">
+
+  <h1 class="unit-title">
+    <span class="lang-en">Unit 3: Exegesis, Eisegesis, and the First Principle</span>
+    <span class="lang-es">Unidad 3: Exégesis, eiségesis, y el primer principio</span>
+  </h1>
+  <h2 class="unit-sub">
+    <span class="lang-en">Dr. Wayne Cook &middot; Chapala Theological Seminary</span>
+    <span class="lang-es">Dr. Wayne Cook &middot; Seminario Teológico de Chapala</span>
+  </h2>
+  <!-- ============================================================ -->
+  <!-- TRACK SELECTION                                              -->
+  <!-- ============================================================ -->
+  <section class="card" id="track-card">
+    <h3>
+      <span class="lang-en">Choose your track</span>
+      <span class="lang-es">Escoja su modalidad</span>
+    </h3>
+    <p>
+      <span class="lang-en"><strong>Certificate of Ministry:</strong> Twenty multiple-choice questions per unit. Pass at 18 of 20 (90&percnt;).</span>
+      <span class="lang-es"><strong>Certificado de Ministerio:</strong> Veinte preguntas de opción múltiple por unidad. Aprobación con 18 de 20 (90&percnt;).</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>Master of Divinity:</strong> Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice <em>and</em> 9 of 10 short-answer, scored independently.</span>
+      <span class="lang-es"><strong>Maestría en Divinidad:</strong> Las mismas veinte preguntas de opción múltiple, más diez preguntas de respuesta breve. Aprobación con 18 de 20 de opción múltiple <em>y</em> 9 de 10 de respuesta breve, evaluadas de forma independiente.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>Master of Theology:</strong> Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice <em>and</em> 9 of 10 short-answer, scored independently.</span>
+      <span class="lang-es"><strong>Maestría en Teología:</strong> Evaluada exactamente como la Maestría en Divinidad: las mismas veinte preguntas de opción múltiple más diez preguntas de respuesta breve, aprobando con 18 de 20 de opción múltiple <em>y</em> 9 de 10 de respuesta breve, evaluadas de forma independiente.</span>
+    </p>
+    <div class="track-buttons">
+      <button class="btn" id="track-cert-btn" onclick="setTrack('cert')">
+        <span class="lang-en">Certificate</span>
+        <span class="lang-es">Certificado</span>
+      </button>
+      <button class="btn" id="track-mdiv-btn" onclick="setTrack('mdiv')">
+        <span class="lang-en">M.Div</span>
+        <span class="lang-es">Maestría</span>
+      </button>
+      <button class="btn" id="track-thm-btn" onclick="setTrack('thm')">
+        <span class="lang-en">Th.M</span>
+        <span class="lang-es">Maestría en Teología</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TEACHING CONTENT                                             -->
+  <!-- ============================================================ -->
+  <article class="teaching">
+
+    <h3>
+      <span class="lang-en">1. The First Principle</span>
+      <span class="lang-es">1. El primer principio</span>
+    </h3>
+    <p>
+      <span class="lang-en">Of the seven principles we will study in this course, this is the first &mdash; and if a pastor masters only one, let it be this one. <em>Draw the meaning out of the text before you carry it into the pulpit.</em> The Greek term is <strong>exegesis</strong>: literally, <em>leading out</em>. The opposite is <strong>eisegesis</strong>: <em>leading in</em>, reading our own ideas into the page. Every other principle in this course rests on this one. If we get this wrong, no other discipline will save us. If we get it right, we have a foundation that holds.</span>
+      <span class="lang-es">De los siete principios que estudiaremos en este curso, éste es el primero &mdash; y si un pastor domina solo uno, que sea éste. <em>Saque el significado del texto antes de llevarlo al púlpito.</em> El término griego es <strong>exégesis</strong>: literalmente, <em>sacar fuera</em>. Lo opuesto es <strong>eiségesis</strong>: <em>meter dentro</em>, leer nuestras propias ideas en la página. Cualquier otro principio de este curso descansa sobre éste. Si lo erramos, ninguna otra disciplina nos salvará. Si lo acertamos, tenemos un fundamento que sostiene.</span>
+    </p>
+    <p>
+      <span class="lang-en">The danger is not abstract. Every cult that has ever appeared used the Bible. Every prosperity-gospel teacher quotes chapter and verse. Every modernist who denies the miracles opens the same book at the same passages. The error is not in the text. The error is in the direction of the flow. Are we letting the Word fill us with God&rsquo;s meaning, or are we filling it with ours?</span>
+      <span class="lang-es">El peligro no es abstracto. Cada secta que ha aparecido ha usado la Biblia. Cada predicador del evangelio de la prosperidad cita capítulo y versículo. Cada modernista que niega los milagros abre el mismo libro en los mismos pasajes. El error no está en el texto. El error está en la dirección del flujo. &iquest;Estamos dejando que la Palabra nos llene del significado de Dios, o la estamos llenando del nuestro?</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">2. Two Greek Words, One Pastor&rsquo;s Choice</span>
+      <span class="lang-es">2. Dos palabras griegas, una decisión pastoral</span>
+    </h3>
+    <p>
+      <span class="lang-en"><em>Exegesis</em> comes from a Greek verb that means <em>to draw out, to lead forth</em>. The exegete asks one question and one question only: <em>What did the author intend his original readers to understand?</em> Paul wrote to Timothy. Peter wrote to scattered believers in Asia Minor. Moses wrote to the children of Israel coming out of Egypt. Before we can apply the words to a small church in Mexico in our day, we must hear what those original ears were hearing.</span>
+      <span class="lang-es"><em>Exégesis</em> viene de un verbo griego que significa <em>sacar fuera, llevar hacia afuera</em>. El exégeta hace una sola pregunta: <em>&iquest;qué quería el autor que sus lectores originales entendieran?</em> Pablo le escribió a Timoteo. Pedro escribió a creyentes dispersos en Asia Menor. Moisés escribió a los hijos de Israel que salían de Egipto. Antes de que podamos aplicar las palabras a una iglesia pequeña en México en nuestros días, debemos oír lo que aquellos oídos originales estaban oyendo.</span>
+    </p>
+    <p>
+      <span class="lang-en"><em>Eisegesis</em> comes from the same root with a different prefix. <em>Eis</em> means <em>into</em>. Instead of leading meaning out, the eisegete pushes meaning in. He comes to the text already knowing what he wants it to say. He reads his politics, his bitterness, his theological hobby, or his Sunday sermon idea into the page, and then he marvels at how clearly the Bible agrees with him. The text becomes a mirror reflecting the pastor instead of a window revealing God.</span>
+      <span class="lang-es"><em>Eiségesis</em> viene de la misma raíz con un prefijo diferente. <em>Eis</em> significa <em>dentro</em>. En lugar de sacar el significado, el eiségeta empuja el significado adentro. Viene al texto sabiendo ya lo que quiere que diga. Lee su política, su amargura, su afición teológica, o su idea sermónica del domingo en la página, y luego se maravilla de cuán claramente la Biblia está de acuerdo con él. El texto se convierte en un espejo que refleja al pastor en lugar de una ventana que revela a Dios.</span>
+    </p>
+    <p>
+      <span class="lang-en">Every pastor does one or the other every Monday morning. The choice is not between exegesis and nothing. It is between exegesis and eisegesis. Refuse to choose, and you choose eisegesis by default.</span>
+      <span class="lang-es">Cada pastor hace uno o el otro cada lunes por la mañana. La elección no es entre la exégesis y nada. Es entre la exégesis y la eiségesis. Niéguese a escoger, y escoge la eiségesis por defecto.</span>
+    </p>
+    <p>
+      <span class="lang-en">One clarification belongs here so this controlling question is not misapplied later in the course. Scripture has a human author and, Christians confess, a divine Author standing behind him — and canonical significance can sometimes reach further than everything the human writer was consciously aware of. Hosea did not know he was writing a sentence Matthew would apply to the infant Christ; the Passover lamb's original audience did not know they were watching a shadow of the cross. This is not license for the pastor to invent connections the text does not warrant. It is the recognition that Scripture, read across the whole canon and under the Spirit's guidance, can rightly disclose more than any one human author consciously intended — while never contradicting what he did intend. The controlling question for exegesis remains what it always was: what did the author intend his original readers to understand? Any further, canonical significance must be traced through legitimate prophecy or typology that the rest of Scripture itself warrants, not asserted by the interpreter's own ingenuity.</span>
+      <span class="lang-es">Aquí corresponde una aclaración para que esta pregunta rectora no se aplique mal más adelante en el curso. La Escritura tiene un autor humano y, los cristianos confiesan, un Autor divino detrás de él — y el significado canónico a veces puede alcanzar más de todo lo que el escritor humano conscientemente sabía. Oseas no sabía que estaba escribiendo una frase que Mateo aplicaría al Cristo niño; la audiencia original del cordero pascual no sabía que estaba viendo una sombra de la cruz. Esto no es licencia para que el pastor invente conexiones que el texto no respalda. Es el reconocimiento de que la Escritura, leída a través de todo el canon y bajo la guía del Espíritu, puede legítimamente revelar más de lo que cualquier autor humano conscientemente pretendió — sin contradecir jamás lo que sí pretendió. La pregunta rectora de la exégesis sigue siendo la que siempre fue: &iquest;qué quería el autor que sus lectores originales entendieran? Cualquier significado canónico adicional debe rastrearse a través de profecía o tipología legítima que la Escritura misma respalde, no afirmarse por el ingenio del intérprete.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">3. They Gave the Sense</span>
+      <span class="lang-es">3. Y daban a entender el sentido</span>
+    </h3>
+    <p>
+      <span class="lang-en">The clearest Old Testament picture of exegesis is in Nehemiah 8. The people had returned from Babylon. Ezra brought out the scroll of the Law of Moses. The Levites stood with him. And the verse that defines our calling says:</span>
+      <span class="lang-es">El cuadro más claro de exégesis en el Antiguo Testamento está en Nehemías 8. El pueblo había regresado de Babilonia. Esdras sacó el rollo de la Ley de Moisés. Los levitas se pararon con él. Y el versículo que define nuestro llamado dice:</span>
+    </p>
+    <div class="scripture">
+      <span class="lang-en">&ldquo;So they read distinctly from the book, in the Law of God; and they gave the sense, and helped them to understand the reading.&rdquo; (Nehemiah 8:8, NKJV)</span>
+      <span class="lang-es">&laquo;Y leían en el libro de la ley de Dios claramente, y daban a entender el sentido, de modo que entendiesen la lectura.&raquo; (Nehemías 8:8, RVG)</span>
+    </div>
+    <p>
+      <span class="lang-en">Read distinctly. Give the sense. Help them understand. That is the pastor&rsquo;s job description. The Levites did not push their own ideas into the text. They drew the text&rsquo;s own ideas out and handed them to a listening people. By the end of that day the people wept, because for the first time in their lives they had heard what God had actually said.</span>
+      <span class="lang-es">Leer claramente. Dar a entender el sentido. Ayudar a comprender. Ésa es la descripción del oficio pastoral. Los levitas no empujaron sus propias ideas dentro del texto. Sacaron las ideas del texto y se las entregaron a un pueblo que escuchaba. Al final de aquel día el pueblo lloró, porque por primera vez en sus vidas habían oído lo que Dios había dicho realmente.</span>
+    </p>
+    <p>
+      <span class="lang-en">Pair this with Ezra 7:10 from our first unit &mdash; <em>Ezra had prepared his heart to study the Law of the LORD, and to do it, and to teach</em> &mdash; and we have a complete portrait. Heart preparation, careful study, personal obedience, then teaching that gives the sense. That is the pastor&rsquo;s week.</span>
+      <span class="lang-es">Una esta verdad con Esdras 7:10 de nuestra primera unidad &mdash; <em>Esdras había preparado su corazón para inquirir la ley de Jehová, y para cumplirla, y para enseñar</em> &mdash; y tenemos un retrato completo. Preparación del corazón, estudio cuidadoso, obediencia personal, y luego enseñanza que da a entender el sentido. Ésa es la semana del pastor.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">4. Eisegesis Weaponized &mdash; Satan in the Wilderness</span>
+      <span class="lang-es">4. La eiségesis convertida en arma &mdash; Satanás en el desierto</span>
+    </h3>
+    <p>
+      <span class="lang-en">If you want to see eisegesis in its most dangerous form, watch the devil in the wilderness. Satan does not deny the Bible. He <em>quotes</em> it. In the second temptation he takes Jesus to the pinnacle of the temple and says, <em>Throw Yourself down. For it is written, &ldquo;He shall give His angels charge over you,&rdquo; and &ldquo;In their hands they shall bear you up.&rdquo;</em> Satan is quoting Psalm 91 word for word. The verses are real. The words are real. The application is satanic.</span>
+      <span class="lang-es">Si quiere ver la eiségesis en su forma más peligrosa, mire al diablo en el desierto. Satanás no niega la Biblia. La <em>cita</em>. En la segunda tentación lleva a Jesús al pináculo del templo y dice: <em>échate abajo, porque escrito está: A sus ángeles mandará acerca de ti, y en las manos te sostendrán.</em> Satanás está citando el Salmo 91 palabra por palabra. Los versículos son reales. Las palabras son reales. La aplicación es satánica.</span>
+    </p>
+    <p>
+      <span class="lang-en">Psalm 91 was given to comfort God&rsquo;s child when he walks in obedience along the path God has marked out. It promises protection in the line of duty. Satan rips the verse from its context and uses it to justify a stunt that would force God&rsquo;s hand. He reads his own meaning into the page. That is eisegesis &mdash; weaponized by the prince of darkness himself.</span>
+      <span class="lang-es">El Salmo 91 fue dado para consolar al hijo de Dios cuando camina en obediencia por la senda que Dios ha trazado. Promete protección en el cumplimiento del deber. Satanás arranca el versículo de su contexto y lo usa para justificar una acrobacia que forzaría la mano de Dios. Lee su propio significado dentro de la página. Eso es eiségesis &mdash; convertida en arma por el príncipe de las tinieblas mismo.</span>
+    </p>
+    <p>
+      <span class="lang-en">Jesus does not argue with the Psalm. He brings another passage that holds the first one in place: <em>It is written again, &ldquo;You shall not tempt the LORD your God&rdquo;</em> (Deut 6:16). The right answer to a misused verse is never to throw out the Bible. The right answer is more Bible, more context, more careful exegesis. <em>Scripture interprets Scripture.</em></span>
+      <span class="lang-es">Jesús no discute con el Salmo. Trae otro pasaje que sostiene al primero en su lugar: <em>Escrito está también: No tentarás al Señor tu Dios</em> (Deut 6:16). La respuesta correcta a un versículo mal usado nunca es desechar la Biblia. La respuesta correcta es más Biblia, más contexto, más exégesis cuidadosa. <em>La Escritura interpreta la Escritura.</em></span>
+    </p>
+
+    <h3>
+      <span class="lang-en">5. Three Eisegeses You Will Meet in Your Church</span>
+      <span class="lang-es">5. Tres eiségesis que encontrará en su iglesia</span>
+    </h3>
+    <p>
+      <span class="lang-en">Satan&rsquo;s three temptations are still his three favorite errors. The pastor will meet all three in his congregation, and he must be ready.</span>
+      <span class="lang-es">Las tres tentaciones de Satanás siguen siendo sus tres errores favoritos. El pastor encontrará las tres en su congregación, y debe estar preparado.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>The bread eisegesis &mdash; Scripture for the body.</strong> Satan said, <em>Turn these stones into bread.</em> The verse twisted: any text that promises blessing pulled out of context to guarantee health, wealth, and an easier life. Jeremiah 29:11 hauled into every funeral. Mark 11:24 (&ldquo;whatever things you ask&rdquo;) turned into a vending machine. Three John 2 (&ldquo;prosper as your soul prospers&rdquo;) made into a doctrine of riches. Jesus answered, <em>Man shall not live by bread alone, but by every word that proceeds from the mouth of God.</em> The Bible was never given to fatten the flesh. It was given to feed the spirit.</span>
+      <span class="lang-es"><strong>La eiségesis del pan &mdash; la Escritura para el cuerpo.</strong> Satanás dijo: <em>Convierte estas piedras en pan.</em> El versículo torcido: cualquier texto que prometa bendición sacado de contexto para garantizar salud, riqueza, y una vida más fácil. Jeremías 29:11 arrastrado a cada funeral. Marcos 11:24 (&laquo;todo lo que pidiereis&raquo;) convertido en una máquina expendedora. Tercera de Juan 2 (&laquo;que prosperes&raquo;) hecho doctrina de riquezas. Jesús respondió: <em>No solo de pan vivirá el hombre, sino de toda palabra que sale de la boca de Dios.</em> La Biblia nunca fue dada para engordar la carne. Fue dada para alimentar al espíritu.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>The temple eisegesis &mdash; Scripture to force God&rsquo;s hand.</strong> Satan said, <em>Throw Yourself down; the Bible says He will catch You.</em> The verse twisted: a promise of God&rsquo;s protection wrenched away from its condition of obedience. The Christian who runs into debt and then claims Philippians 4:19 (&ldquo;my God shall supply all your need&rdquo;). The marriage destroyed by adultery, then patched with Romans 8:28 (&ldquo;all things work together for good&rdquo;) as if obedience were optional. Jesus answered, <em>You shall not tempt the LORD your God.</em> The promises of God assume the path of God.</span>
+      <span class="lang-es"><strong>La eiségesis del templo &mdash; la Escritura para forzar la mano de Dios.</strong> Satanás dijo: <em>échate abajo; la Biblia dice que Él te sostendrá.</em> El versículo torcido: una promesa de protección de Dios arrancada de su condición de obediencia. El cristiano que se endeuda y luego reclama Filipenses 4:19 (&laquo;mi Dios suplirá todo lo que os falta&raquo;). El matrimonio destruido por el adulterio, y luego remendado con Romanos 8:28 (&laquo;a los que aman a Dios, todas las cosas les ayudan a bien&raquo;) como si la obediencia fuera opcional. Jesús respondió: <em>No tentarás al Señor tu Dios.</em> Las promesas de Dios suponen el camino de Dios.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>The kingdoms eisegesis &mdash; Scripture to gain power apart from God&rsquo;s way.</strong> Satan said, <em>All these things will I give You, if You fall down and worship me.</em> The verse twisted: any text that talks about authority, dominion, or victory pressed into the service of personal ambition. The pastor who quotes Genesis 1:28 (&ldquo;subdue the earth&rdquo;) to justify building an empire. The leader who quotes Matthew 16:19 (&ldquo;the keys of the kingdom&rdquo;) to claim power over other people&rsquo;s lives. Jesus answered, <em>You shall worship the LORD your God, and Him only shall you serve.</em> A short-cut to glory always runs past the cross.</span>
+      <span class="lang-es"><strong>La eiségesis de los reinos &mdash; la Escritura para ganar poder fuera del camino de Dios.</strong> Satanás dijo: <em>Todo esto te daré, si postrado me adorares.</em> El versículo torcido: cualquier texto que hable de autoridad, dominio, o victoria, forzado al servicio de la ambición personal. El pastor que cita Génesis 1:28 (&laquo;sojuzgad la tierra&raquo;) para justificar la construcción de un imperio. El líder que cita Mateo 16:19 (&laquo;las llaves del reino&raquo;) para reclamar poder sobre las vidas de otros. Jesús respondió: <em>Al Señor tu Dios adorarás, y a Él solo servirás.</em> Un atajo a la gloria siempre pasa por encima de la cruz.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">6. The Faust Bargain</span>
+      <span class="lang-es">6. El pacto de Fausto</span>
+    </h3>
+    <p>
+      <span class="lang-en">There is a German legend, from the early sixteenth century, of a learned man named Dr. Johann Faust. He wanted supernatural powers. He signed a contract in his own blood: Satan&rsquo;s servant would serve him for twenty-four years, and at the end Satan would own his soul. For twenty-four years Faust enjoyed everything he had asked for. Then an earthquake shook his house, and the devil took his soul away.</span>
+      <span class="lang-es">Hay una leyenda alemana, del siglo dieciséis temprano, de un hombre erudito llamado Dr. Johann Faust. Quería poderes sobrenaturales. Firmó un contrato con su propia sangre: el siervo de Satanás le serviría por veinticuatro años, y al final Satanás se quedaría con su alma. Durante veinticuatro años Faust disfrutó todo lo que había pedido. Luego un terremoto sacudió su casa, y el diablo se llevó su alma.</span>
+    </p>
+    <p>
+      <span class="lang-en">Eisegesis is a Faust bargain. The pastor or teacher who twists Scripture to get what he wants for his ministry &mdash; bigger crowds, easier sermons, a doctrine that pleases his donors, an interpretation that flatters his pride &mdash; signs a contract whose final clause is paid in souls. Maybe his own. Often other people&rsquo;s. Jesus said it plainly: <em>What shall it profit a man if he gains the whole world and loses his own soul?</em></span>
+      <span class="lang-es">La eiségesis es un pacto de Fausto. El pastor o maestro que tuerce la Escritura para obtener lo que quiere para su ministerio &mdash; multitudes más grandes, sermones más fáciles, una doctrina que agrade a sus donantes, una interpretación que halague su orgullo &mdash; firma un contrato cuya cláusula final se paga con almas. Quizás la suya. A menudo las de otros. Jesús lo dijo claramente: <em>&iquest;qué aprovechará al hombre si ganare todo el mundo, y perdiere su alma?</em></span>
+    </p>
+
+    <h3>
+      <span class="lang-en">7. Exegesis Done Right &mdash; Jesus in the Desert</span>
+      <span class="lang-es">7. La exégesis bien hecha &mdash; Jesús en el desierto</span>
+    </h3>
+    <p>
+      <span class="lang-en">Now turn the picture around. Watch the Lord do exegesis. Every one of His three answers is a quotation from Deuteronomy &mdash; the book Moses wrote to Israel on the edge of the Promised Land. Each quotation is exactly to the point. Each holds its original meaning. Each refuses to be twisted.</span>
+      <span class="lang-es">Ahora dé vuelta al cuadro. Mire al Señor hacer exégesis. Cada una de Sus tres respuestas es una cita de Deuteronomio &mdash; el libro que Moisés escribió a Israel al borde de la Tierra Prometida. Cada cita es exactamente al punto. Cada una sostiene su significado original. Cada una se niega a ser torcida.</span>
+    </p>
+    <p>
+      <span class="lang-en">To the bread temptation: <em>Man shall not live by bread alone, but by every word that proceeds from the mouth of God</em> (Deut 8:3). Moses had said it to Israel in the wilderness, where God taught them by hunger that He alone sustains. Jesus, in His own wilderness, applies it exactly the same way. The original context fits the new situation perfectly &mdash; because Jesus did not pull the verse out of its setting.</span>
+      <span class="lang-es">A la tentación del pan: <em>No solo de pan vivirá el hombre, sino de toda palabra que sale de la boca de Dios</em> (Deut 8:3). Moisés se lo había dicho a Israel en el desierto, donde Dios les enseñó por el hambre que solo Él sostiene. Jesús, en Su propio desierto, lo aplica exactamente de la misma manera. El contexto original encaja perfectamente con la nueva situación &mdash; porque Jesús no sacó el versículo de su entorno.</span>
+    </p>
+    <p>
+      <span class="lang-en">To the temple temptation: <em>You shall not tempt the LORD your God</em> (Deut 6:16). Moses had said it about Massah, where Israel had tested God by demanding water. Jesus uses it against another testing of God. Same principle, same application.</span>
+      <span class="lang-es">A la tentación del templo: <em>No tentarás al Señor tu Dios</em> (Deut 6:16). Moisés lo había dicho acerca de Masah, donde Israel había tentado a Dios exigiendo agua. Jesús lo usa contra otra tentación de Dios. El mismo principio, la misma aplicación.</span>
+    </p>
+    <p>
+      <span class="lang-en">To the kingdoms temptation: <em>You shall worship the LORD your God, and Him only shall you serve</em> (Deut 6:13). Moses had said it as Israel was about to enter a land full of pagan gods. Jesus uses it against the original tempter behind every false god. Same principle, same application.</span>
+      <span class="lang-es">A la tentación de los reinos: <em>Al Señor tu Dios adorarás, y a Él solo servirás</em> (Deut 6:13). Moisés lo había dicho cuando Israel estaba a punto de entrar en una tierra llena de dioses paganos. Jesús lo usa contra el tentador original detrás de cada dios falso. El mismo principio, la misma aplicación.</span>
+    </p>
+    <p>
+      <span class="lang-en">Three quotations. Three contexts honored. Three eisegeses crushed. That is the model. If the Son of God answered the devil with careful, contextual, exegetical Scripture, no pastor can claim to be too busy for the same discipline.</span>
+      <span class="lang-es">Tres citas. Tres contextos honrados. Tres eiségesis aplastadas. Ése es el modelo. Si el Hijo de Dios respondió al diablo con Escritura cuidadosa, contextual, y exegética, ningún pastor puede pretender estar demasiado ocupado para la misma disciplina.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">8. The Pastor Who Will Not Choose</span>
+      <span class="lang-es">8. El pastor que no quiere elegir</span>
+    </h3>
+    <p>
+      <span class="lang-en">During the campaigns of Alexander the Great, a deserter was brought before the general. Alexander looked at him sternly. &ldquo;What is your name?&rdquo; The soldier stammered, &ldquo;Alexander, sir.&rdquo; The general was furious. &ldquo;Soldier, what is your name?&rdquo; Again the man whispered, &ldquo;Alexander.&rdquo; A third time. A third &ldquo;Alexander.&rdquo; The general grabbed him by the cloak and said, &ldquo;Soldier &mdash; either change your name or change your ways.&rdquo;</span>
+      <span class="lang-es">Durante las campañas de Alejandro Magno, un desertor fue llevado ante el general. Alejandro lo miró severamente. &mdash;&iquest;Cuál es tu nombre? El soldado tartamudeó: &mdash;Alejandro, señor. El general se enfureció. &mdash;Soldado, &iquest;cuál es tu nombre? De nuevo el hombre susurró: &mdash;Alejandro. Una tercera vez. Un tercer &laquo;Alejandro&raquo;. El general lo agarró por la capa y dijo: &mdash;Soldado, o cambias tu nombre o cambias tu conducta.</span>
+    </p>
+    <p>
+      <span class="lang-en">A pastor who calls himself a Bible teacher must either teach the Bible &mdash; or change his name. The man who carries the title <em>minister of the Word</em> and then twists the Word for his own ends bears a name that does not match his ways. Exegesis is the discipline that brings the two together. Either the title fits, or the title must go.</span>
+      <span class="lang-es">Un pastor que se llama a sí mismo maestro de la Biblia debe o enseñar la Biblia &mdash; o cambiar su nombre. El hombre que lleva el título de <em>ministro de la Palabra</em> y luego tuerce la Palabra para sus propios fines lleva un nombre que no coincide con su conducta. La exégesis es la disciplina que los une. O el título queda, o el título tiene que irse.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">9. Practical Steps to Honest Exegesis</span>
+      <span class="lang-es">9. Pasos prácticos para una exégesis honesta</span>
+    </h3>
+    <p>
+      <span class="lang-en">Before Sunday comes, walk through the text in this order. <em>Pray first</em> &mdash; James 1:5, ask for wisdom. <em>Read the passage in full</em>, then read the chapter, then the book; never preach a verse you have not first heard inside its paragraph. <em>Ask the basic questions</em>: who wrote this, to whom, why, in what circumstances. <em>Watch for words that repeat</em> &mdash; they usually carry the author&rsquo;s point. <em>Compare with parallel passages</em> &mdash; let Scripture interpret Scripture. <em>Then</em>, last of all, ask how the meaning the author intended for his readers speaks to the people who will sit in front of you Sunday.</span>
+      <span class="lang-es">Antes de que llegue el domingo, recorra el texto en este orden. <em>Ore primero</em> &mdash; Santiago 1:5, pida sabiduría. <em>Lea todo el pasaje</em>, luego el capítulo, luego el libro; nunca predique un versículo que no haya oído primero dentro de su párrafo. <em>Haga las preguntas básicas</em>: quién escribió esto, a quién, por qué, en qué circunstancias. <em>Observe las palabras que se repiten</em> &mdash; generalmente cargan el punto del autor. <em>Compare con pasajes paralelos</em> &mdash; deje que la Escritura interprete a la Escritura. <em>Luego</em>, al final, pregunte cómo el significado que el autor pretendía para sus lectores habla al pueblo que se sentará delante de usted el domingo.</span>
+    </p>
+    <p>
+      <span class="lang-en">When you violate this order &mdash; when application crowds in before exegesis is done &mdash; you will preach yourself instead of the text. Your hearers will receive the Word of Wayne, not the Word of God. After enough Sundays the church will be shaped to your size, not the Bible&rsquo;s. That is not pastoring. That is replacing.</span>
+      <span class="lang-es">Cuando viola este orden &mdash; cuando la aplicación se cuela antes de que la exégesis esté hecha &mdash; usted predicará a usted mismo en lugar del texto. Sus oyentes recibirán la Palabra de Wayne, no la Palabra de Dios. Después de suficientes domingos la iglesia será moldeada a su tamaño, no al tamaño de la Biblia. Eso no es pastorear. Eso es reemplazar.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">10. The Word Wins</span>
+      <span class="lang-es">10. La Palabra vence</span>
+    </h3>
+    <p>
+      <span class="lang-en">Jesus walked out of the wilderness in the power of the Spirit, and Satan left Him for a season. Three eisegeses had been defeated by three honest exegeses. The Word had won. It always wins when it is rightly handled, because it carries the authority of the One who breathed it out.</span>
+      <span class="lang-es">Jesús salió del desierto en el poder del Espíritu, y Satanás lo dejó por un tiempo. Tres eiségesis habían sido derrotadas por tres exégesis honestas. La Palabra había vencido. Siempre vence cuando se maneja rectamente, porque carga la autoridad de Aquel que la exhaló.</span>
+    </p>
+    <p>
+      <span class="lang-en">Pastor, before Sunday comes, prepare your heart, open the Book, and ask only one question: <em>What did the author mean to say?</em> Stay there until you hear it. Then carry that meaning, and no other, to your people. The Spirit who breathed out the Word will breathe life through it again. That is how a small congregation in a small town becomes a place where God is heard.</span>
+      <span class="lang-es">Pastor, antes de que llegue el domingo, prepare su corazón, abra el Libro, y haga solo una pregunta: <em>&iquest;qué quiso decir el autor?</em> Permanezca allí hasta oírlo. Luego lleve ese significado, y ningún otro, a su pueblo. El Espíritu que exhaló la Palabra soplará vida a través de ella otra vez. Así es como una congregación pequeña en un pueblo pequeño se vuelve un lugar donde Dios es oído.</span>
+    </p>
+
+  </article>
+
+  <!-- ============================================================ -->
+  <!-- EXAM                                                         -->
+  <!-- ============================================================ -->
+  <section id="lockout-block" class="lockout hidden">
+    <h2>
+      <span class="lang-en">Exam Locked</span>
+      <span class="lang-es">Examen bloqueado</span>
+    </h2>
+    <p>
+      <span class="lang-en">You did not reach the passing score. Please review the unit and try again after the lockout period.</span>
+      <span class="lang-es">No alcanzó la nota mínima. Repase la unidad y vuelva a intentarlo después del período de bloqueo.</span>
+    </p>
+    <div class="timer" id="lockout-timer"></div>
+    <p id="lockout-scope" style="font-style:italic"></p>
+  </section>
+
+  <section id="exam-section" class="card">
+    <h2 id="exam-title">
+      <span class="lang-en">Examination &mdash; Unit 1</span>
+      <span class="lang-es">Examen &mdash; Unidad 1</span>
+    </h2>
+    <p id="exam-track-note" style="font-style:italic;color:#7a5a3a"></p>
+
+    <div id="mc-container">
+      <h3>
+        <span class="lang-en">Multiple-Choice (20 questions, 18 to pass)</span>
+        <span class="lang-es">Opción múltiple (20 preguntas, 18 para aprobar)</span>
+      </h3>
+      <div id="mc-questions"></div>
+    </div>
+
+    <div id="sa-container">
+      <h3>
+        <span class="lang-en">Short-Answer (10 questions)</span>
+        <span class="lang-es">Respuesta breve (10 preguntas)</span>
+      </h3>
+      <p id="sa-note" style="font-weight:600"></p>
+      <p style="font-style:italic;color:#7a5a3a">
+        <span class="lang-en">Type your answer in the language you are studying in. Each answer must be at least a few sentences (about 100 characters) and contain the key concepts from the lesson.</span>
+        <span class="lang-es">Escriba su respuesta en el idioma en que está estudiando. Cada respuesta debe tener al menos unas cuantas oraciones (unos 100 caracteres) y contener los conceptos clave de la lección.</span>
+      </p>
+      <div id="sa-questions"></div>
+    </div>
+
+    <button class="btn primary" onclick="submitExam()" id="submit-btn">
+      <span class="lang-en">Submit Exam</span>
+      <span class="lang-es">Enviar examen</span>
+    </button>
+    <button class="btn danger" onclick="resetExam()">
+      <span class="lang-en">Reset</span>
+      <span class="lang-es">Reiniciar</span>
+    </button>
+  </section>
+
+  <section id="results-block" class="hidden"></section>
+
+</div>
+
+<footer>
+  <span class="lang-en">Chapala Theological Seminary &middot; CTS Hermeneutics &middot; &copy; Dr. Wayne Cook</span>
+  <span class="lang-es">Seminario Teológico de Chapala &middot; Hermenéutica CTS &middot; &copy; Dr. Wayne Cook</span>
+</footer>
+
+<script>
+  // ============================================================
+  // PER-UNIT CONFIG (the only block that changes between units)
+  // ============================================================
+  const UNIT = 3;
+  const NEXT_UNIT_URL = "CTSHermeneuticsUnit4.html";
+  const PREV_UNIT_URL = "CTSHermeneuticsUnit2.html";
+  const TOTAL_UNITS = 11;
+  const IS_FINAL_UNIT = false;
+  const FINAL_REDIRECT_URL = "CTSHermeneuticsCertificate.html";
+  const SHOW_REGISTRATION = false;
+
+  // ============================================================
+  // ENGINE CONSTANTS (carried unchanged across units)
+  // ============================================================
+  const COURSE_CODE = "herm";
+  const PROGRESS_KEY = "cts_herm_progress";
+  const STUDENT_KEY = "cts_student";
+  const TRACK_KEY = "cts_track";
+  const UNIT_KEY = "cts_herm_u" + UNIT + "_passed";
+  const MC_KEY = "cts_herm_u" + UNIT + "_mc_passed";
+  const SA_KEY = "cts_herm_u" + UNIT + "_sa_passed";
+  const STATE_KEY = "cts_herm_u" + UNIT + "_state";
+  const LOCKOUT_KEY = "cts_herm_u" + UNIT + "_lockout";
+  const LOCKOUT_SCOPE_KEY = "cts_herm_u" + UNIT + "_lockout_scope";
+  const MC_PASS = 18;
+  const SA_PASS = 9;
+  const LOCKOUT_MS = 15 * 60 * 1000;
+  const REDIRECT_MS = 3000;
+
+  // ============================================================
+  // MULTIPLE-CHOICE QUESTIONS (exactly 20; A=5, B=5, C=5, D=5)
+  // ============================================================
+  const mcQuestions = [
+    {
+      textEn: "1. The Greek word \"exegesis\" literally means:",
+      textEs: "1. La palabra griega «exégesis» significa literalmente:",
+      optionsEn: ["A. To translate into modern language","B. To memorize verbatim","C. To preach with persuasion","D. To leading out — drawing the meaning out of the text"],
+      optionsEs: ["A. Traducir al lenguaje moderno","B. Memorizar al pie de la letra","C. Predicar con persuasión","D. Sacar fuera — extraer el significado del texto"],
+      correct: "D",
+      correctFeedbackEn: "Correct. Exegesis comes from a Greek verb meaning to draw out or lead forth. The exegete leads meaning OUT of the text. Eisegesis (eis = into) pushes meaning IN. The difference is the direction of flow.",
+      correctFeedbackEs: "Correcto. Exégesis viene de un verbo griego que significa sacar fuera o llevar hacia afuera. El exégeta saca el significado del texto. La eiségesis (eis = dentro) empuja el significado adentro. La diferencia es la dirección del flujo.",
+      incorrectFeedbackEn: "Exegesis is not about translation, memorization, or rhetoric. The Greek root means \"to lead out\" — drawing the meaning the author intended out of the text into the open.",
+      incorrectFeedbackEs: "La exégesis no se trata de traducción, memorización, ni retórica. La raíz griega significa «sacar fuera» — extraer el significado que el autor pretendía y llevarlo a la luz."
+    },
+    {
+      textEn: "2. The opposite of exegesis is:",
+      textEs: "2. Lo opuesto a la exégesis es:",
+      optionsEn: ["A. Theology","B. Application","C. Eisegesis — reading our own meaning INTO the text","D. Memorization"],
+      optionsEs: ["A. La teología","B. La aplicación","C. La eiségesis — leer nuestro propio significado DENTRO del texto","D. La memorización"],
+      correct: "C",
+      correctFeedbackEn: "Correct. Eisegesis (from eis = into) is the opposite error. The eisegete comes to the text knowing what he wants it to say and pushes his meaning in. He marvels at how the Bible agrees with him because he never let it disagree.",
+      correctFeedbackEs: "Correcto. La eiségesis (de eis = dentro) es el error opuesto. El eiségeta viene al texto sabiendo lo que quiere que diga y empuja su significado dentro. Se maravilla de cuán de acuerdo está la Biblia con él porque nunca le permitió estar en desacuerdo.",
+      incorrectFeedbackEn: "Theology, application, and memorization can all flow from sound exegesis. The opposite of exegesis is its mirror-image error: EISEGESIS, pushing meaning into the text instead of drawing it out.",
+      incorrectFeedbackEs: "La teología, la aplicación, y la memorización pueden surgir de la exégesis sólida. Lo opuesto a la exégesis es su error en espejo: la EISÉGESIS, empujar el significado dentro del texto en lugar de sacarlo."
+    },
+    {
+      textEn: "3. According to the lesson, the one question every exegete must ask is:",
+      textEs: "3. Según la lección, la única pregunta que todo exégeta debe hacer es:",
+      optionsEn: ["A. How does this verse make me feel?","B. What is the most popular interpretation today?","C. How does this support my next sermon?","D. What did the author intend his ORIGINAL readers to understand?"],
+      optionsEs: ["A. ¿Cómo me hace sentir este versículo?","B. ¿Cuál es la interpretación más popular hoy?","C. ¿Cómo apoya esto mi próximo sermón?","D. ¿Qué quería el autor que sus lectores ORIGINALES entendieran?"],
+      correct: "D",
+      correctFeedbackEn: "Correct. Paul wrote to Timothy. Peter wrote to scattered believers in Asia Minor. Moses wrote to Israel coming out of Egypt. Before we apply the words to our church, we must hear what those original ears were hearing.",
+      correctFeedbackEs: "Correcto. Pablo le escribió a Timoteo. Pedro escribió a creyentes dispersos en Asia Menor. Moisés escribió a Israel saliendo de Egipto. Antes de aplicar las palabras a nuestra iglesia, debemos oír lo que aquellos oídos originales estaban oyendo.",
+      incorrectFeedbackEn: "Feelings, popularity, and sermon needs all push the pastor toward eisegesis. The one exegetical question is about authorial intent for the original audience — only then can faithful application follow.",
+      incorrectFeedbackEs: "Los sentimientos, la popularidad, y las necesidades del sermón empujan al pastor hacia la eiségesis. La única pregunta exegética es sobre la intención del autor para la audiencia original — solo entonces puede seguir una aplicación fiel."
+    },
+    {
+      textEn: "4. The clearest Old Testament picture of exegesis in this lesson is taken from:",
+      textEs: "4. El cuadro más claro de exégesis en el Antiguo Testamento en esta lección es tomado de:",
+      optionsEn: ["A. Numbers 22 — Balaam's prophecies","B. Joshua 1 — meditate on the Law day and night","C. Genesis 1 — God said","D. Nehemiah 8 — Ezra and the Levites \"gave the sense\""],
+      optionsEs: ["A. Números 22 — las profecías de Balaam","B. Josué 1 — meditar en la Ley de día y de noche","C. Génesis 1 — Dios dijo","D. Nehemías 8 — Esdras y los levitas «daban a entender el sentido»"],
+      correct: "D",
+      correctFeedbackEn: "Correct. Nehemiah 8:8 says they read distinctly, gave the sense, and helped them understand. That is the pastor's job description: read the text plainly, draw out its meaning, help the people grasp it.",
+      correctFeedbackEs: "Correcto. Nehemías 8:8 dice que leían claramente, daban a entender el sentido, y ayudaban a comprender. Ésa es la descripción del oficio pastoral: leer el texto claramente, sacar su significado, ayudar al pueblo a comprenderlo.",
+      incorrectFeedbackEn: "Other OT passages teach the value of Scripture, but the clearest WORKED EXAMPLE of exegesis is Nehemiah 8: Ezra and the Levites read the Law and \"gave the sense.\" That is what a faithful pastor does on Sunday.",
+      incorrectFeedbackEs: "Otros pasajes del AT enseñan el valor de la Escritura, pero el EJEMPLO PRÁCTICO más claro de exégesis es Nehemías 8: Esdras y los levitas leyeron la Ley y «daban a entender el sentido». Eso es lo que un pastor fiel hace el domingo."
+    },
+    {
+      textEn: "5. In the wilderness, Satan's most striking strategy was to:",
+      textEs: "5. En el desierto, la estrategia más impactante de Satanás fue:",
+      optionsEn: ["A. Deny that the Bible was authoritative","B. Quote Scripture itself, but out of context","C. Offer Jesus a non-biblical religion","D. Argue with Jesus about Hebrew vocabulary"],
+      optionsEs: ["A. Negar que la Biblia tuviera autoridad","B. Citar la Escritura misma, pero fuera de contexto","C. Ofrecer a Jesús una religión no bíblica","D. Discutir con Jesús sobre vocabulario hebreo"],
+      correct: "B",
+      correctFeedbackEn: "Correct. Satan does not deny the Bible — he quotes it. At the temple he cites Psalm 91 word for word, but ripped from its context. The verses are real; the application is satanic. Eisegesis weaponized.",
+      correctFeedbackEs: "Correcto. Satanás no niega la Biblia — la cita. En el templo cita el Salmo 91 palabra por palabra, pero arrancado de su contexto. Los versículos son reales; la aplicación es satánica. Eiségesis convertida en arma.",
+      incorrectFeedbackEn: "Satan did not deny the Bible, offer a different religion, or argue about Hebrew. He did something far more dangerous — he QUOTED Scripture out of context. This is why exegesis matters: error often comes wearing Bible clothes.",
+      incorrectFeedbackEs: "Satanás no negó la Biblia, ni ofreció otra religión, ni discutió hebreo. Hizo algo mucho más peligroso: CITÓ la Escritura fuera de contexto. Por eso importa la exégesis: el error a menudo viene vestido de Biblia."
+    },
+    {
+      textEn: "6. Which passage did Satan quote at Jesus' second temptation?",
+      textEs: "6. ¿Qué pasaje citó Satanás en la segunda tentación de Jesús?",
+      optionsEn: ["A. Genesis 3 — the serpent's promise to Eve","B. Isaiah 53 — the suffering servant","C. Psalm 91 — \"He shall give His angels charge over you\"","D. Proverbs 3 — \"Trust in the LORD with all your heart\""],
+      optionsEs: ["A. Génesis 3 — la promesa de la serpiente a Eva","B. Isaías 53 — el siervo sufriente","C. Salmo 91 — «A sus ángeles mandará acerca de ti»","D. Proverbios 3 — «Confía en Jehová de todo tu corazón»"],
+      correct: "C",
+      correctFeedbackEn: "Correct. Satan quoted Psalm 91:11-12 verbatim — \"He shall give His angels charge over you, and in their hands they shall bear you up.\" The Psalm promises protection on the path of obedience, not on a stunt that tests God.",
+      correctFeedbackEs: "Correcto. Satanás citó el Salmo 91:11-12 al pie de la letra — «A sus ángeles mandará acerca de ti, y en las manos te sostendrán». El Salmo promete protección en el camino de la obediencia, no en una acrobacia que tiente a Dios.",
+      incorrectFeedbackEn: "Satan's quotation at the temple was Psalm 91:11-12. He used a beautiful promise of protection — given for the path of obedience — and twisted it to justify a leap that would test God. Classic eisegesis.",
+      incorrectFeedbackEs: "La cita de Satanás en el templo fue el Salmo 91:11-12. Usó una hermosa promesa de protección — dada para el camino de la obediencia — y la torció para justificar un salto que tentaría a Dios. Eiségesis clásica."
+    },
+    {
+      textEn: "7. Jesus answered each temptation with a quotation from which book?",
+      textEs: "7. Jesús respondió a cada tentación con una cita de cuál libro:",
+      optionsEn: ["A. Deuteronomy","B. Psalms","C. Isaiah","D. Genesis"],
+      optionsEs: ["A. Deuteronomio","B. Salmos","C. Isaías","D. Génesis"],
+      correct: "A",
+      correctFeedbackEn: "Correct. All three of Jesus' answers come from Deuteronomy — the book Moses wrote to Israel on the edge of the Promised Land. Each quotation is exegetically tight: same principle, same application, contexts honored.",
+      correctFeedbackEs: "Correcto. Las tres respuestas de Jesús vienen de Deuteronomio — el libro que Moisés escribió a Israel al borde de la Tierra Prometida. Cada cita es exegéticamente firme: mismo principio, misma aplicación, contextos honrados.",
+      incorrectFeedbackEn: "All three of Jesus' wilderness answers come from a single book: DEUTERONOMY. He quoted 8:3, 6:16, and 6:13 — each one keeping the original meaning intact. That is the model of contextual exegesis.",
+      incorrectFeedbackEs: "Las tres respuestas de Jesús en el desierto vienen de un solo libro: DEUTERONOMIO. Citó 8:3, 6:16, y 6:13 — cada uno conservando el significado original intacto. Ése es el modelo de la exégesis contextual."
+    },
+    {
+      textEn: "8. The \"bread eisegesis\" in this lesson refers to:",
+      textEs: "8. La «eiségesis del pan» en esta lección se refiere a:",
+      optionsEn: ["A. Pulling verses out of context to guarantee physical blessing and prosperity","B. Eating before Bible study","C. Ignoring passages about food in the Old Testament","D. Using bread illustrations in sermons"],
+      optionsEs: ["A. Sacar versículos de contexto para garantizar bendición física y prosperidad","B. Comer antes del estudio bíblico","C. Ignorar pasajes sobre comida en el Antiguo Testamento","D. Usar ilustraciones de pan en los sermones"],
+      correct: "A",
+      correctFeedbackEn: "Correct. Satan's first temptation — turn stones to bread — becomes any misuse of Scripture that bends a promise toward physical comfort. Jeremiah 29:11 at every funeral. Mark 11:24 as a vending machine. The Bible was given to feed the spirit, not fatten the flesh.",
+      correctFeedbackEs: "Correcto. La primera tentación de Satanás — convertir piedras en pan — se vuelve cualquier mal uso de la Escritura que doble una promesa hacia el confort físico. Jeremías 29:11 en cada funeral. Marcos 11:24 como máquina expendedora. La Biblia fue dada para alimentar al espíritu, no para engordar la carne.",
+      incorrectFeedbackEn: "The \"bread eisegesis\" is not about timing of meals, ignoring food passages, or sermon illustrations. It is the error of taking promises of God and bending them toward physical appetite — the prosperity-gospel error.",
+      incorrectFeedbackEs: "La «eiségesis del pan» no se trata del horario de las comidas, ni de ignorar pasajes sobre comida, ni de ilustraciones sermónicas. Es el error de tomar las promesas de Dios y doblarlas hacia el apetito físico — el error del evangelio de la prosperidad."
+    },
+    {
+      textEn: "9. The \"temple eisegesis\" in this lesson refers to:",
+      textEs: "9. La «eiségesis del templo» en esta lección se refiere a:",
+      optionsEn: ["A. Worshipping in the wrong building","B. Wrenching God's protection promises away from their condition of obedience","C. Being too reverent in church","D. Quoting Old Testament temple verses too often"],
+      optionsEs: ["A. Adorar en el edificio equivocado","B. Arrancar las promesas de protección de Dios de su condición de obediencia","C. Ser demasiado reverente en la iglesia","D. Citar con demasiada frecuencia versículos del templo del Antiguo Testamento"],
+      correct: "B",
+      correctFeedbackEn: "Correct. Satan twisted Psalm 91 — \"He will catch you\" — apart from its assumption of obedient walking with God. The temple eisegesis claims God's promises while ignoring God's path. Philippians 4:19 after running into debt; Romans 8:28 after adultery.",
+      correctFeedbackEs: "Correcto. Satanás torció el Salmo 91 — «Él te sostendrá» — aparte de su suposición de caminar obediente con Dios. La eiségesis del templo reclama las promesas de Dios mientras ignora el camino de Dios. Filipenses 4:19 después de endeudarse; Romanos 8:28 después del adulterio.",
+      incorrectFeedbackEn: "The temple eisegesis is not about buildings, reverence, or verse frequency. It is the error of claiming God's protection promises while breaking the obedience that those promises presuppose. The promises of God assume the path of God.",
+      incorrectFeedbackEs: "La eiségesis del templo no se trata de edificios, reverencia, ni frecuencia de versículos. Es el error de reclamar las promesas de protección de Dios mientras se rompe la obediencia que esas promesas presuponen. Las promesas de Dios suponen el camino de Dios."
+    },
+    {
+      textEn: "10. The \"kingdoms eisegesis\" in this lesson refers to:",
+      textEs: "10. La «eiségesis de los reinos» en esta lección se refiere a:",
+      optionsEn: ["A. Misreading prophecies about end-time kingdoms","B. Confusing the Old Testament kings","C. Pressing Scripture into service for personal ambition and power","D. Disagreeing about post-tribulation theology"],
+      optionsEs: ["A. Malinterpretar profecías sobre reinos del fin","B. Confundir a los reyes del Antiguo Testamento","C. Forzar la Escritura al servicio de la ambición personal y el poder","D. Estar en desacuerdo sobre la teología post-tribulación"],
+      correct: "C",
+      correctFeedbackEn: "Correct. Satan offered all the kingdoms of the world for a single act of worship — a shortcut to glory bypassing the cross. The kingdoms eisegesis is the same shortcut for pastors: Genesis 1:28 to justify empire-building, Matthew 16:19 to claim power over others.",
+      correctFeedbackEs: "Correcto. Satanás ofreció todos los reinos del mundo por un solo acto de adoración — un atajo a la gloria evitando la cruz. La eiségesis de los reinos es el mismo atajo para los pastores: Génesis 1:28 para justificar la construcción de imperios, Mateo 16:19 para reclamar poder sobre otros.",
+      incorrectFeedbackEn: "The kingdoms eisegesis is not about prophecy or end-times debates. It is the use of Scripture to gain power, control, or empire apart from God's appointed way. A short-cut to glory always runs past the cross — Satan's offer in the wilderness.",
+      incorrectFeedbackEs: "La eiségesis de los reinos no se trata de profecía o debates sobre el fin de los tiempos. Es el uso de la Escritura para ganar poder, control, o imperio fuera del camino designado por Dios. Un atajo a la gloria siempre pasa por encima de la cruz — la oferta de Satanás en el desierto."
+    },
+    {
+      textEn: "11. According to the lesson, the right answer to a misused Bible verse is:",
+      textEs: "11. Según la lección, la respuesta correcta a un versículo bíblico mal usado es:",
+      optionsEn: ["A. Throw out the Bible","B. Avoid that verse for a year","C. Use less Scripture in the future","D. More Bible, more context, more careful exegesis"],
+      optionsEs: ["A. Desechar la Biblia","B. Evitar ese versículo durante un año","C. Usar menos Escritura en el futuro","D. Más Biblia, más contexto, más exégesis cuidadosa"],
+      correct: "D",
+      correctFeedbackEn: "Correct. Jesus did not throw out Psalm 91 when Satan misused it. He brought another passage — Deuteronomy 6:16 — that held the first one in place. The cure for bad exegesis is not less Bible; it is more Bible, more carefully read.",
+      correctFeedbackEs: "Correcto. Jesús no desechó el Salmo 91 cuando Satanás lo malusó. Trajo otro pasaje — Deuteronomio 6:16 — que sostuvo al primero en su lugar. La cura para la mala exégesis no es menos Biblia; es más Biblia, leída con más cuidado.",
+      incorrectFeedbackEn: "Throwing out the Bible, avoiding verses, or using less Scripture all surrender ground to the eisegete. The proper response is MORE Bible, MORE context, MORE careful exegesis — exactly what Jesus modeled in the wilderness.",
+      incorrectFeedbackEs: "Desechar la Biblia, evitar versículos, o usar menos Escritura ceden terreno al eiségeta. La respuesta apropiada es MÁS Biblia, MÁS contexto, MÁS exégesis cuidadosa — exactamente lo que Jesús modeló en el desierto."
+    },
+    {
+      textEn: "12. The Faust legend illustrates which principle for the pastor?",
+      textEs: "12. La leyenda de Fausto ilustra qué principio para el pastor:",
+      optionsEn: ["A. The Reformation began in Germany","B. Twisting Scripture for personal gain is a soul-costing bargain","C. Theological education must be earned slowly","D. Earthquakes are usually divine judgment"],
+      optionsEs: ["A. La Reforma comenzó en Alemania","B. Torcer la Escritura por ganancia personal es un pacto que cuesta el alma","C. La educación teológica debe ganarse lentamente","D. Los terremotos suelen ser juicio divino"],
+      correct: "B",
+      correctFeedbackEn: "Correct. Faust signed in blood for 24 years of pleasure; at the end he lost his soul. The pastor who twists Scripture for crowds, donors, or pride signs the same contract. \"What shall it profit a man if he gains the whole world and loses his own soul?\"",
+      correctFeedbackEs: "Correcto. Fausto firmó en sangre por 24 años de placer; al final perdió su alma. El pastor que tuerce la Escritura por multitudes, donantes, u orgullo firma el mismo contrato. «¿Qué aprovechará al hombre si ganare todo el mundo, y perdiere su alma?»",
+      incorrectFeedbackEn: "The Faust illustration is not about Reformation history, slow education, or earthquakes. It is the picture of a soul-costing bargain: the pastor who twists Scripture for gain may enjoy the deal for a season, but the final clause is paid in souls.",
+      incorrectFeedbackEs: "La ilustración de Fausto no se trata de la historia de la Reforma, la educación lenta, ni los terremotos. Es el cuadro de un pacto que cuesta el alma: el pastor que tuerce la Escritura por ganancia puede disfrutar el trato por un tiempo, pero la cláusula final se paga con almas."
+    },
+    {
+      textEn: "13. Jesus' answer to the bread temptation came from Deuteronomy 8:3 and made what point?",
+      textEs: "13. La respuesta de Jesús a la tentación del pan vino de Deuteronomio 8:3 e hizo cuál punto:",
+      optionsEn: ["A. The Sabbath was made for man, not man for the Sabbath","B. Man shall not live by bread alone, but by every word from God's mouth","C. Trust the Lord with all your heart","D. Love your neighbor as yourself"],
+      optionsEs: ["A. El sábado fue hecho para el hombre, no el hombre para el sábado","B. No solo de pan vivirá el hombre, sino de toda palabra de la boca de Dios","C. Confía en Jehová de todo tu corazón","D. Ama a tu prójimo como a ti mismo"],
+      correct: "B",
+      correctFeedbackEn: "Correct. Moses said it to Israel in the wilderness, where God taught them by hunger that He sustains. Jesus, in His own wilderness, applies it the SAME way. The original context fits perfectly because Jesus did not pull the verse from its setting.",
+      correctFeedbackEs: "Correcto. Moisés se lo dijo a Israel en el desierto, donde Dios les enseñó por el hambre que Él sostiene. Jesús, en Su propio desierto, lo aplica de la MISMA manera. El contexto original encaja perfectamente porque Jesús no sacó el versículo de su entorno.",
+      incorrectFeedbackEn: "Jesus' answer to the bread temptation was from Deuteronomy 8:3: \"Man shall not live by bread alone, but by every word that proceeds from the mouth of God.\" Same wilderness setting in Moses' day, same principle applied directly.",
+      incorrectFeedbackEs: "La respuesta de Jesús a la tentación del pan fue de Deuteronomio 8:3: «No solo de pan vivirá el hombre, sino de toda palabra que sale de la boca de Dios». El mismo escenario del desierto en los días de Moisés, el mismo principio aplicado directamente."
+    },
+    {
+      textEn: "14. The lesson summarizes practical exegesis as a sequence. Which step comes FIRST?",
+      textEs: "14. La lección resume la exégesis práctica como una secuencia. ¿Qué paso viene PRIMERO?",
+      optionsEn: ["A. Look up commentaries","B. Write the sermon outline","C. Pray for wisdom (James 1:5)","D. Find an illustration"],
+      optionsEs: ["A. Consultar comentarios","B. Escribir el bosquejo del sermón","C. Orar por sabiduría (Santiago 1:5)","D. Buscar una ilustración"],
+      correct: "C",
+      correctFeedbackEn: "Correct. Pray first. James 1:5 — ask for wisdom. Without prayer, exegesis degrades into mere technique, and the pastor's blind spots will show up on Sunday. Prayer first; then read, observe, compare, apply.",
+      correctFeedbackEs: "Correcto. Ore primero. Santiago 1:5 — pida sabiduría. Sin oración, la exégesis se degrada a mera técnica, y los puntos ciegos del pastor aparecerán el domingo. Primero la oración; luego leer, observar, comparar, aplicar.",
+      incorrectFeedbackEn: "Commentaries, outlines, and illustrations all come AFTER the foundational step: prayer for wisdom (James 1:5). A pastor who skips prayer can produce a clever sermon, but not necessarily a true one.",
+      incorrectFeedbackEs: "Los comentarios, los bosquejos, y las ilustraciones vienen DESPUÉS del paso fundamental: la oración por sabiduría (Santiago 1:5). Un pastor que se salta la oración puede producir un sermón ingenioso, pero no necesariamente uno verdadero."
+    },
+    {
+      textEn: "15. The lesson warns that violating the proper order — letting application crowd in before exegesis is done — produces:",
+      textEs: "15. La lección advierte que violar el orden adecuado — dejar que la aplicación se cuele antes de que la exégesis esté hecha — produce:",
+      optionsEn: ["A. The pastor preaching himself instead of the text","B. Sermons that are too long","C. Church members who fall asleep","D. Better attendance numbers"],
+      optionsEs: ["A. El pastor predicándose a sí mismo en lugar del texto","B. Sermones que son demasiado largos","C. Miembros de la iglesia que se duermen","D. Mejores números de asistencia"],
+      correct: "A",
+      correctFeedbackEn: "Correct. When application crowds in early, the pastor preaches himself. After enough Sundays the church is shaped to his size, not the Bible's. That is replacing, not pastoring.",
+      correctFeedbackEs: "Correcto. Cuando la aplicación se cuela temprano, el pastor se predica a sí mismo. Después de suficientes domingos, la iglesia es moldeada a su tamaño, no al tamaño de la Biblia. Eso es reemplazar, no pastorear.",
+      incorrectFeedbackEn: "Sermon length, sleeping listeners, and attendance numbers are surface issues. The deeper danger of skipping exegesis is that the pastor ends up preaching HIMSELF — and the church takes his shape instead of Scripture's.",
+      incorrectFeedbackEs: "La duración del sermón, los oyentes dormidos, y los números de asistencia son asuntos de superficie. El peligro más profundo de saltarse la exégesis es que el pastor termina predicándose a sí MISMO — y la iglesia toma su forma en lugar de la de la Escritura."
+    },
+    {
+      textEn: "16. The Alexander-and-the-deserter story is used in the lesson to illustrate:",
+      textEs: "16. La historia de Alejandro y el desertor se usa en la lección para ilustrar:",
+      optionsEn: ["A. The value of military discipline","B. The greatness of ancient empires","C. A pastor's title must match his ways — \"either change your name or change your ways\"","D. Heroic individual courage"],
+      optionsEs: ["A. El valor de la disciplina militar","B. La grandeza de los antiguos imperios","C. El título del pastor debe coincidir con su conducta — «o cambias tu nombre o cambias tu conducta»","D. El valor individual heroico"],
+      correct: "C",
+      correctFeedbackEn: "Correct. Three times the cowardly soldier said his name was \"Alexander.\" The general replied: \"Either change your name or change your ways.\" A pastor who calls himself a minister of the Word and then twists the Word bears a name his life denies.",
+      correctFeedbackEs: "Correcto. Tres veces el soldado cobarde dijo que su nombre era «Alejandro». El general respondió: «O cambias tu nombre o cambias tu conducta». Un pastor que se llama a sí mismo ministro de la Palabra y luego tuerce la Palabra lleva un nombre que su vida niega.",
+      incorrectFeedbackEn: "The Alexander story is not about military discipline or empire or heroism. The point is the mismatch between name and conduct — a warning to every man called \"minister of the Word\" who handles the Word carelessly.",
+      incorrectFeedbackEs: "La historia de Alejandro no se trata de disciplina militar, ni imperio, ni heroísmo. El punto es la falta de coincidencia entre el nombre y la conducta — una advertencia a todo hombre llamado «ministro de la Palabra» que maneja la Palabra descuidadamente."
+    },
+    {
+      textEn: "17. According to the lesson, the doctrine that allows one passage to interpret another is called:",
+      textEs: "17. Según la lección, la doctrina que permite que un pasaje interprete a otro se llama:",
+      optionsEn: ["A. Sola Scriptura","B. Scripture interprets Scripture","C. The analogy of being","D. Verbal plenary inspiration"],
+      optionsEs: ["A. Sola Scriptura","B. La Escritura interpreta la Escritura","C. La analogía del ser","D. La inspiración verbal plenaria"],
+      correct: "B",
+      correctFeedbackEn: "Correct. When Satan misused Psalm 91, Jesus answered with Deuteronomy 6:16. Scripture interprets Scripture: clear passages illuminate difficult ones; the whole Bible holds each verse in its proper place. This principle will get its own unit later.",
+      correctFeedbackEs: "Correcto. Cuando Satanás malusó el Salmo 91, Jesús respondió con Deuteronomio 6:16. La Escritura interpreta la Escritura: los pasajes claros iluminan los difíciles; toda la Biblia sostiene cada versículo en su lugar apropiado. Este principio tendrá su propia unidad más adelante.",
+      incorrectFeedbackEn: "Sola Scriptura is the doctrine of Scripture's authority. Verbal plenary inspiration is about how Scripture was given. The analogy of being is a Roman Catholic concept. The principle that lets one passage interpret another is SCRIPTURE INTERPRETS SCRIPTURE.",
+      incorrectFeedbackEs: "Sola Scriptura es la doctrina de la autoridad de la Escritura. La inspiración verbal plenaria se trata de cómo fue dada la Escritura. La analogía del ser es un concepto católico romano. El principio que permite que un pasaje interprete a otro es LA ESCRITURA INTERPRETA LA ESCRITURA."
+    },
+    {
+      textEn: "18. The lesson says that every cult, prosperity teacher, and modernist denial has one thing in common:",
+      textEs: "18. La lección dice que cada secta, predicador de prosperidad, y negación modernista tiene una cosa en común:",
+      optionsEn: ["A. They all use the Bible — the error is in the direction of the flow, not the text","B. They all reject the Bible entirely","C. They all originated in America","D. They all use only the New Testament"],
+      optionsEs: ["A. Todos usan la Biblia — el error está en la dirección del flujo, no en el texto","B. Todos rechazan la Biblia por completo","C. Todos se originaron en América","D. Todos usan solo el Nuevo Testamento"],
+      correct: "A",
+      correctFeedbackEn: "Correct. Every cult, prosperity teacher, and modernist quotes chapter and verse. The error is not in the text — it is in the direction of the flow. Are we letting the Word fill us, or filling it with us? That is the question of exegesis.",
+      correctFeedbackEs: "Correcto. Cada secta, predicador de prosperidad, y modernista cita capítulo y versículo. El error no está en el texto — está en la dirección del flujo. ¿Estamos dejando que la Palabra nos llene, o la llenamos con nosotros? Ésa es la pregunta de la exégesis.",
+      incorrectFeedbackEn: "Cults and prosperity teachers do not reject the Bible, they have not all come from one country, and many use the whole Bible. What they share is the eisegetical move: pushing their meaning into the text instead of drawing the text's meaning out.",
+      incorrectFeedbackEs: "Las sectas y los predicadores de prosperidad no rechazan la Biblia, no han venido todos de un país, y muchos usan la Biblia entera. Lo que comparten es el movimiento eisegético: empujar su significado dentro del texto en lugar de sacar el significado del texto."
+    },
+    {
+      textEn: "19. The lesson says that the choice every pastor faces every Monday morning is:",
+      textEs: "19. La lección dice que la elección que cada pastor enfrenta cada lunes por la mañana es:",
+      optionsEn: ["A. To preach or to skip the week","B. Hebrew or Greek","C. Topical or expository","D. Exegesis or eisegesis — refusing to choose means choosing eisegesis by default"],
+      optionsEs: ["A. Predicar o saltarse la semana","B. Hebreo o griego","C. Temático o expositivo","D. Exégesis o eiségesis — negarse a elegir significa elegir la eiségesis por defecto"],
+      correct: "D",
+      correctFeedbackEn: "Correct. The choice is not between exegesis and nothing. It is between exegesis and eisegesis. Refuse the discipline of careful study, and the pastor will read his own meaning into the page by default. There is no neutral.",
+      correctFeedbackEs: "Correcto. La elección no es entre la exégesis y nada. Es entre la exégesis y la eiségesis. Niéguese a la disciplina del estudio cuidadoso, y el pastor leerá su propio significado dentro de la página por defecto. No hay neutralidad.",
+      incorrectFeedbackEn: "Skipping a week, language choice, and sermon style are secondary. The fundamental Monday-morning choice is between EXEGESIS (drawing meaning out of the text) and EISEGESIS (reading meaning in). And inaction defaults to eisegesis.",
+      incorrectFeedbackEs: "Saltarse una semana, la elección de idioma, y el estilo del sermón son secundarios. La decisión fundamental del lunes por la mañana es entre EXÉGESIS (sacar el significado del texto) y EISÉGESIS (leer significado dentro). Y la inacción se inclina por defecto hacia la eiségesis."
+    },
+    {
+      textEn: "20. The lesson's closing charge to the pastor is:",
+      textEs: "20. El encargo de cierre de la lección al pastor es:",
+      optionsEn: ["A. Stay with the text until you hear what the author meant, then carry that meaning and no other","B. Memorize the entire Bible","C. Avoid all commentaries","D. Always preach the same passage twice"],
+      optionsEs: ["A. Permanezca con el texto hasta oír lo que el autor quiso decir, luego lleve ese significado y ningún otro","B. Memorice la Biblia entera","C. Evite todos los comentarios","D. Predique siempre el mismo pasaje dos veces"],
+      correct: "A",
+      correctFeedbackEn: "Correct. Stay there until you hear it. Then carry that meaning — and no other — to your people. The Spirit who breathed out the Word will breathe life through it again when it is rightly handled.",
+      correctFeedbackEs: "Correcto. Permanezca allí hasta oírlo. Luego lleve ese significado — y ningún otro — a su pueblo. El Espíritu que exhaló la Palabra soplará vida a través de ella otra vez cuando se maneje rectamente.",
+      incorrectFeedbackEn: "Memorization is good, commentaries are useful, repetition is fine — but the closing charge is more basic: STAY with the text until you hear the author's meaning, then deliver THAT meaning, and no other. Faithfulness in interpretation begins and ends there.",
+      incorrectFeedbackEs: "La memorización es buena, los comentarios son útiles, la repetición está bien — pero el encargo de cierre es más básico: PERMANEZCA con el texto hasta oír el significado del autor, luego entregue ESE significado, y ningún otro. La fidelidad en la interpretación comienza y termina allí."
+    }
+  ];
+
+  // ============================================================
+  // SHORT-ANSWER QUESTIONS (10; split kw_en / kw_es)
+  // ============================================================
+  const kwQuestions = [
+    {
+      textEn: "21. Define exegesis and eisegesis, and explain why every pastor faces this choice every Monday morning.",
+      textEs: "21. Defina exégesis y eiségesis, y explique por qué cada pastor enfrenta esta elección cada lunes por la mañana.",
+      kw_en: ["exegesis", "eisegesis", "meaning", "draw", "read", "Monday", "choice", "author"],
+      kw_es: ["exéges", "eiséges", "significado", "sacar", "leer", "lunes", "elección", "autor"],
+      modelEn: "Exegesis means drawing the meaning out of the text — letting the author's intent govern. Eisegesis means reading your own meaning into the text. Every pastor faces this choice every Monday morning as he prepares; and if he refuses to choose exegesis, he chooses eisegesis by default.",
+      modelEs: "La exégesis significa sacar el significado del texto — dejar que gobierne la intención del autor. La eiségesis significa leer tu propio significado dentro del texto. Cada pastor enfrenta esta elección cada lunes por la mañana; y si se niega a escoger la exégesis, escoge la eiségesis por defecto."
+    },
+    {
+      textEn: "22. Explain Nehemiah 8:8 (\"they gave the sense\") and describe how it serves as a portrait of the pastor's job description.",
+      textEs: "22. Explique Nehemías 8:8 («daban a entender el sentido») y describa cómo sirve de retrato de la descripción del oficio pastoral.",
+      kw_en: ["Nehemiah", "Ezra", "read", "sense", "understand", "Levites", "distinct", "explain"],
+      kw_es: ["Nehem", "Esdras", "leer", "sentido", "entender", "levitas", "claro", "explicar"],
+      modelEn: "In Nehemiah 8:8 Ezra and the Levites read distinctly from the Law of God and gave the sense, helping the people understand. That is the pastor's job description: not merely to read the words aloud but to explain their sense so the hearers truly understand what God has said.",
+      modelEs: "En Nehemías 8:8 Esdras y los levitas leyeron claramente de la Ley de Dios y dieron el sentido, ayudando al pueblo a entender. Esa es la descripción del oficio pastoral: no solo leer las palabras en voz alta sino explicar su sentido para que los oyentes entiendan de veras lo que Dios ha dicho."
+    },
+    {
+      textEn: "23. In Matthew 4, Satan quotes Psalm 91 at Jesus. Explain how this is an example of eisegesis weaponized, and how Jesus responds.",
+      textEs: "23. En Mateo 4, Satanás cita el Salmo 91 a Jesús. Explique cómo es un ejemplo de eiségesis convertida en arma, y cómo responde Jesús.",
+      kw_en: ["Satan", "Psalm", "temple", "context", "Deuteronomy", "tempt", "Scripture", "quote"],
+      kw_es: ["Satanás", "Salmo", "templo", "contexto", "Deuteronomio", "tentar", "Escritura", "arma"],
+      modelEn: "At the temple Satan quoted Psalm 91 to Jesus, ripping the promise of angelic protection out of its context to tempt Him to jump. This is eisegesis weaponized — using a true verse with a false meaning. Jesus answered with Scripture rightly used, quoting Deuteronomy in its true context: 'You shall not tempt the Lord your God.'",
+      modelEs: "En el templo Satanás citó el Salmo 91 a Jesús, arrancando la promesa de protección angélica de su contexto para tentarlo a saltar. Esto es eiségesis convertida en arma — usar un versículo verdadero con un significado falso. Jesús respondió con la Escritura bien usada, citando Deuteronomio en su verdadero contexto: «No tentarás al Señor tu Dios.»"
+    },
+    {
+      textEn: "24. The lesson identifies three eisegeses corresponding to Satan's three temptations. Name and briefly describe each (bread / temple / kingdoms).",
+      textEs: "24. La lección identifica tres eiségesis correspondientes a las tres tentaciones de Satanás. Nombre y describa brevemente cada una (pan / templo / reinos).",
+      kw_en: ["bread", "temple", "kingdoms", "prosperity", "presumption", "power", "ambition", "temptation"],
+      kw_es: ["pan", "templo", "reinos", "prosperidad", "presunción", "poder", "ambición", "tentación"],
+      modelEn: "The three eisegeses match Satan's three temptations. The bread eisegesis turns spiritual promises into material prosperity. The temple eisegesis is presumption — forcing God to act by misusing a promise. The kingdoms eisegesis grasps for power and ambition through a shortcut Christ refused. Each twists a text to serve a fleshly want.",
+      modelEs: "Las tres eiségesis corresponden a las tres tentaciones de Satanás. La eiségesis del pan convierte las promesas espirituales en prosperidad material. La eiségesis del templo es presunción — forzar a Dios a actuar abusando de una promesa. La eiségesis de los reinos busca poder y ambición por un atajo que Cristo rechazó. Cada una tuerce un texto para servir un deseo carnal."
+    },
+    {
+      textEn: "25. Explain the \"bread eisegesis\" with at least one example of a Bible verse commonly misused this way and why the misuse fails.",
+      textEs: "25. Explique la «eiségesis del pan» con al menos un ejemplo de un versículo bíblico comúnmente mal usado de esta manera y por qué el mal uso falla.",
+      kw_en: ["bread", "physical", "spiritual", "context", "promise", "material", "Jeremiah", "prosper"],
+      kw_es: ["pan", "físico", "espiritual", "contexto", "promesa", "material", "Jeremías", "prosper"],
+      modelEn: "The bread eisegesis reads physical, material bread where God meant spiritual provision. A verse like Jeremiah 29:11 gets twisted into a promise of wealth, but in context it spoke to exiles facing seventy years of hardship. The misuse fails because it ignores the context and confuses spiritual promise with material guarantee.",
+      modelEs: "La eiségesis del pan lee pan físico y material donde Dios quiso decir provisión espiritual. Un versículo como Jeremías 29:11 se tuerce en promesa de riqueza, pero en su contexto habló a exiliados que enfrentaban setenta años de dificultad. El mal uso falla porque ignora el contexto y confunde la promesa espiritual con la garantía material."
+    },
+    {
+      textEn: "26. Jesus answered each of Satan's three temptations with a quotation from Deuteronomy. Identify each Deuteronomy passage and what makes Jesus' use of it a model of contextual exegesis.",
+      textEs: "26. Jesús respondió a cada una de las tres tentaciones de Satanás con una cita de Deuteronomio. Identifique cada pasaje de Deuteronomio y lo que hace que el uso por Jesús sea un modelo de exégesis contextual.",
+      kw_en: ["Deuteronomy", "Moses", "wilderness", "context", "original", "Israel", "quote", "twist"],
+      kw_es: ["Deuteronomio", "Moisés", "desierto", "contexto", "original", "Israel", "cita", "torcer"],
+      modelEn: "Jesus answered each temptation with a quotation from Deuteronomy, the book Moses gave Israel in the wilderness. 'Man shall not live by bread alone,' 'You shall not tempt the Lord,' and 'You shall worship the Lord only.' Each quotation keeps its original meaning in context and refuses to be twisted — the model of contextual exegesis.",
+      modelEs: "Jesús respondió a cada tentación con una cita de Deuteronomio, el libro que Moisés dio a Israel en el desierto. «No solo de pan vivirá el hombre», «No tentarás al Señor», y «Al Señor adorarás solo a Él». Cada cita conserva su significado original en contexto y se niega a ser torcida — el modelo de la exégesis contextual."
+    },
+    {
+      textEn: "27. Tell the Faust legend in your own words and explain how it illustrates the cost of twisting Scripture for personal gain.",
+      textEs: "27. Cuente la leyenda de Fausto con sus propias palabras y explique cómo ilustra el costo de torcer la Escritura por ganancia personal.",
+      kw_en: ["Faust", "contract", "soul", "Satan", "gain", "twist", "blood", "bargain"],
+      kw_es: ["Fausto", "contrato", "alma", "Satanás", "ganancia", "torcer", "sangre", "pacto"],
+      modelEn: "Dr. Johann Faust signed a contract in his own blood: Satan would serve him twenty-four years, and then own his soul. He got everything he wanted, and in the end the devil took his soul. Eisegesis is a Faust bargain — the pastor who twists Scripture for gain, bigger crowds or flattering doctrine, signs a contract whose final clause is paid in souls.",
+      modelEs: "El Dr. Johann Fausto firmó un contrato con su propia sangre: Satanás le serviría veinticuatro años, y luego sería dueño de su alma. Obtuvo todo lo que quería, y al final el diablo se llevó su alma. La eiségesis es un pacto de Fausto — el pastor que tuerce la Escritura por ganancia, multitudes más grandes o doctrina que halaga, firma un contrato cuya cláusula final se paga en almas."
+    },
+    {
+      textEn: "28. Tell the Alexander-the-Great-and-the-deserter story and explain its application to the pastor who calls himself a minister of the Word.",
+      textEs: "28. Cuente la historia de Alejandro Magno y el desertor y explique su aplicación al pastor que se llama a sí mismo ministro de la Palabra.",
+      kw_en: ["Alexander", "deserter", "name", "change", "ways", "minister", "Word", "soldier"],
+      kw_es: ["Alejandro", "desertor", "nombre", "cambi", "conducta", "ministro", "Palabra", "soldado"],
+      modelEn: "A deserter brought before Alexander the Great shared the general's name. Alexander told him, 'Either change your name or change your ways.' The pastor who calls himself a minister of the Word bears a great name. He must live up to it — handle the Word faithfully — or stop claiming the name; he cannot keep the name while deserting the calling.",
+      modelEs: "Un desertor llevado ante Alejandro Magno compartía el nombre del general. Alejandro le dijo: «O cambias tu nombre o cambias tu conducta.» El pastor que se llama a sí mismo ministro de la Palabra lleva un gran nombre. Debe estar a la altura — manejar la Palabra con fidelidad — o dejar de reclamar el nombre; no puede conservar el nombre mientras deserta del llamado."
+    },
+    {
+      textEn: "29. List the practical exegetical steps the lesson recommends for the pastor's Monday morning, in their proper order.",
+      textEs: "29. Enumere los pasos exegéticos prácticos que la lección recomienda para el lunes por la mañana del pastor, en su orden adecuado.",
+      kw_en: ["pray", "read", "passage", "context", "question", "compare", "apply", "Monday"],
+      kw_es: ["orar", "leer", "pasaje", "contexto", "pregunta", "comparar", "aplicar", "lunes"],
+      modelEn: "The lesson recommends a Monday order: first pray over the passage, then read it carefully, study its context, ask honest questions of the text, compare it with other Scripture, and only then apply it. The steps move from prayer and reading to context and questions before any application is drawn.",
+      modelEs: "La lección recomienda un orden para el lunes: primero orar sobre el pasaje, luego leerlo con cuidado, estudiar su contexto, hacer preguntas honestas al texto, compararlo con otra Escritura, y solo entonces aplicarlo. Los pasos van de la oración y la lectura al contexto y las preguntas antes de sacar cualquier aplicación."
+    },
+    {
+      textEn: "30. Why does the lesson call exegesis \"the first principle\" of hermeneutics, and what happens to a pastor's ministry if this principle is ignored?",
+      textEs: "30. ¿Por qué llama la lección a la exégesis «el primer principio» de la hermenéutica, y qué le pasa al ministerio del pastor si este principio es ignorado?",
+      kw_en: ["first", "principle", "foundation", "preach", "himself", "replace", "shape", "meaning"],
+      kw_es: ["primer", "principio", "fundament", "predic", "mismo", "reemplaz", "moldea", "significado"],
+      modelEn: "Exegesis is called the first principle because it is the foundation every other principle rests on. If the pastor ignores it, he ends up preaching himself instead of the text — replacing God's meaning with his own and shaping Scripture to fit his agenda. Without exegesis the whole ministry drifts into eisegesis.",
+      modelEs: "La exégesis se llama el primer principio porque es el fundamento sobre el cual descansan los demás principios. Si el pastor lo ignora, termina predicándose a sí mismo en lugar del texto — reemplazando el significado de Dios con el suyo y moldeando la Escritura a su agenda. Sin exégesis, todo el ministerio se desliza hacia la eiségesis."
+    }
+  ];
+
+  // ============================================================
+  // ENGINE
+  // ============================================================
+  function getCurrentLang(){ return document.body.classList.contains("lang-es") ? "es" : "en"; }
+
+  function toggleLang(){
+    if (document.body.classList.contains("lang-en")){
+      document.body.classList.remove("lang-en");
+      document.body.classList.add("lang-es");
+    } else {
+      document.body.classList.remove("lang-es");
+      document.body.classList.add("lang-en");
+    }
+  }
+
+  // ---------- Registration ----------
+  function loadRegistration(){
+    if (!SHOW_REGISTRATION){
+      const card = document.getElementById("registration-card");
+      if (card) card.classList.add("hidden");
+      return;
+    }
+    const raw = localStorage.getItem(STUDENT_KEY);
+    if (raw){
+      try {
+        const s = JSON.parse(raw);
+        document.getElementById("reg-name").value = s.name || "";
+        document.getElementById("reg-email").value = s.email || "";
+        document.getElementById("reg-church").value = s.church || "";
+        document.getElementById("reg-status").textContent = (getCurrentLang()==="es")
+          ? "Registrado como: " + (s.name || "(sin nombre)")
+          : "Registered as: " + (s.name || "(no name)");
+      } catch(e){}
+    }
+  }
+  function saveRegistration(){
+    const name = document.getElementById("reg-name").value.trim();
+    const email = document.getElementById("reg-email").value.trim();
+    const church = document.getElementById("reg-church").value.trim();
+    if (!name){
+      document.getElementById("reg-status").style.color = "#8b3a2c";
+      document.getElementById("reg-status").textContent = (getCurrentLang()==="es")
+        ? "Por favor escriba su nombre completo."
+        : "Please enter your full name.";
+      return;
+    }
+    localStorage.setItem(STUDENT_KEY, JSON.stringify({name:name,email:email,church:church}));
+    document.getElementById("reg-status").style.color = "#3a5a25";
+    document.getElementById("reg-status").textContent = (getCurrentLang()==="es")
+      ? "Guardado. Bienvenido, " + name + "."
+      : "Saved. Welcome, " + name + ".";
+  }
+
+  // ---------- Track ----------
+  function loadTrack(){
+    const t = localStorage.getItem(TRACK_KEY) || "";
+    if (t) setTrack(t,true);
+    updateSANote();
+    updateTrackNote();
+  }
+  function isMastersLevel(){
+    var t = localStorage.getItem(TRACK_KEY);
+    return t === "mdiv" || t === "thm";
+  }
+  function setTrack(t,silent){
+    localStorage.setItem(TRACK_KEY,t);
+    document.getElementById("track-cert-btn").classList.toggle("selected", t==="cert");
+    document.getElementById("track-mdiv-btn").classList.toggle("selected", t==="mdiv");
+    document.getElementById("track-thm-btn").classList.toggle("selected", t==="thm");
+    // Short answer is available to ALL students; only scored for masters (see submitExam).
+    document.getElementById("sa-container").classList.remove("hidden");
+    updateSANote();
+    updateTrackNote();
+  }
+  function updateSANote(){
+    const t = localStorage.getItem(TRACK_KEY) || "";
+    const note = document.getElementById("sa-note");
+    if (!note) return;
+    if (t==="mdiv" || t==="thm"){
+      note.style.color = "#3a5a25";
+      note.innerHTML = '<span class="lang-en">Counted toward your result: 9 of 10 required to pass.</span><span class="lang-es">Cuenta para su resultado: se requieren 9 de 10 para aprobar.</span>';
+    } else {
+      note.style.color = "#7a5a3a";
+      note.innerHTML = '<span class="lang-en">Open to all students. For Certificate students this section is for practice and is not counted toward your result.</span><span class="lang-es">Disponible para todos los estudiantes. Para estudiantes de Certificado esta sección es de práctica y no cuenta para su resultado.</span>';
+    }
+  }
+
+  function updateTrackNote(){
+    const t = localStorage.getItem(TRACK_KEY) || "";
+    const note = document.getElementById("exam-track-note");
+    if (!t){
+      note.innerHTML = '<span class="lang-en">Choose a track above to begin the exam.</span><span class="lang-es">Escoja una modalidad arriba para comenzar el examen.</span>';
+    } else if (t==="cert"){
+      note.innerHTML = '<span class="lang-en">Certificate track: 20 multiple-choice questions. Pass at 18 of 20.</span><span class="lang-es">Modalidad Certificado: 20 preguntas de opción múltiple. Aprobación con 18 de 20.</span>';
+    } else if (t==="thm"){
+      note.innerHTML = '<span class="lang-en">Th.M track: 20 multiple-choice (18 to pass) AND 10 short-answer (9 to pass), independently scored.</span><span class="lang-es">Modalidad Maestría en Teología: 20 de opción múltiple (18 para aprobar) Y 10 de respuesta breve (9 para aprobar), evaluadas de forma independiente.</span>';
+    } else {
+      note.innerHTML = '<span class="lang-en">M.Div track: 20 multiple-choice (18 to pass) AND 10 short-answer (9 to pass), independently scored.</span><span class="lang-es">Modalidad Maestría: 20 de opción múltiple (18 para aprobar) Y 10 de respuesta breve (9 para aprobar), evaluadas de forma independiente.</span>';
+    }
+  }
+
+  // ---------- Lockout ----------
+  function checkLockout(){
+    const lockedUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)||"0",10);
+    const scope = localStorage.getItem(LOCKOUT_SCOPE_KEY) || "full";
+    const now = Date.now();
+    if (lockedUntil > now){
+      const exam = document.getElementById("exam-section");
+      const lock = document.getElementById("lockout-block");
+      // If lockout is SA-only and MC is banked, hide only SA. Else hide whole exam.
+      if (scope === "sa"){
+        document.getElementById("mc-container").classList.add("hidden");
+        document.getElementById("sa-container").classList.add("hidden");
+        document.getElementById("submit-btn").classList.add("hidden");
+      } else {
+        exam.classList.add("hidden");
+      }
+      lock.classList.remove("hidden");
+      document.getElementById("lockout-scope").innerHTML = (scope==="sa")
+        ? '<span class="lang-en">Multiple-choice score has been banked. Short-answer retake available after lockout.</span><span class="lang-es">El puntaje de opción múltiple está guardado. El reintento de respuesta breve estará disponible después del bloqueo.</span>'
+        : '<span class="lang-en">Both sections must be retaken.</span><span class="lang-es">Ambas secciones deben volver a tomarse.</span>';
+      runLockoutTimer(lockedUntil);
+      return true;
+    } else if (lockedUntil > 0){
+      // Lockout expired — clear
+      localStorage.removeItem(LOCKOUT_KEY);
+      localStorage.removeItem(LOCKOUT_SCOPE_KEY);
+    }
+    return false;
+  }
+  function runLockoutTimer(until){
+    const el = document.getElementById("lockout-timer");
+    function tick(){
+      const remain = until - Date.now();
+      if (remain <= 0){ location.reload(); return; }
+      const m = Math.floor(remain/60000);
+      const s = Math.floor((remain%60000)/1000);
+      el.textContent = m + ":" + (s<10?"0":"") + s;
+      setTimeout(tick,1000);
+    }
+    tick();
+  }
+
+  // ---------- Render questions ----------
+  function renderMCQuestions(){
+    const c = document.getElementById("mc-questions");
+    c.innerHTML = "";
+    mcQuestions.forEach((q,i)=>{
+      const div = document.createElement("div");
+      div.className = "question";
+      div.id = "mc-q-" + i;
+      let html = '<p class="qtext"><span class="lang-en">'+q.textEn+'</span><span class="lang-es">'+q.textEs+'</span></p>';
+      const letters = ["A","B","C","D"];
+      letters.forEach((L,idx)=>{
+        const id = "mc-"+i+"-"+L;
+        html += '<label class="option" id="opt-'+i+'-'+L+'">'
+          + '<input type="radio" name="mc-'+i+'" value="'+L+'" onchange="onMCChange('+i+',\''+L+'\')">'
+          + '<span class="lang-en">'+q.optionsEn[idx]+'</span>'
+          + '<span class="lang-es">'+q.optionsEs[idx]+'</span>'
+          + '</label>';
+      });
+      html += '<div class="feedback hidden" id="fb-'+i+'"></div>';
+      div.innerHTML = html;
+      c.appendChild(div);
+    });
+  }
+  function renderSAQuestions(){
+    const c = document.getElementById("sa-questions");
+    c.innerHTML = "";
+    kwQuestions.forEach((q,i)=>{
+      const div = document.createElement("div");
+      div.className = "question";
+      div.id = "sa-q-" + i;
+      div.innerHTML = '<p class="qtext"><span class="lang-en">'+q.textEn+'</span><span class="lang-es">'+q.textEs+'</span></p>'
+        + '<textarea id="sa-'+i+'" oninput="onSAInput('+i+')" placeholder="" aria-label="sa"></textarea>'
+        + '<button type="button" class="btn sa-check-btn" onclick="checkSA('+i+')">'
+        + '<span class="lang-en">Check answer</span><span class="lang-es">Verificar respuesta</span></button>'
+        + '<div class="sa-feedback" id="sa-fb-'+i+'"></div>'
+        + '<div class="sa-model hidden" id="sa-model-'+i+'"></div>';
+      c.appendChild(div);
+    });
+  }
+
+  // ---------- Save / restore state ----------
+  function saveState(){
+    const state = {mc:{}, sa:{}};
+    mcQuestions.forEach((q,i)=>{
+      const sel = document.querySelector('input[name="mc-'+i+'"]:checked');
+      if (sel) state.mc[i] = sel.value;
+    });
+    kwQuestions.forEach((q,i)=>{
+      const el = document.getElementById("sa-"+i);
+      if (el && el.value) state.sa[i] = el.value;
+    });
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
+  }
+  function restoreState(){
+    const raw = localStorage.getItem(STATE_KEY);
+    if (!raw) return;
+    try {
+      const state = JSON.parse(raw);
+      Object.keys(state.mc||{}).forEach(i=>{
+        const v = state.mc[i];
+        const radio = document.querySelector('input[name="mc-'+i+'"][value="'+v+'"]');
+        if (radio){ radio.checked = true; }
+      });
+      Object.keys(state.sa||{}).forEach(i=>{
+        const el = document.getElementById("sa-"+i);
+        if (el){ el.value = state.sa[i]; renderSAFeedback(parseInt(i,10)); }
+      });
+    } catch(e){}
+  }
+
+  // ---------- MC / SA change handlers ----------
+  function onMCChange(i, value){
+    saveState();
+    renderMCFeedback(i, value);
+    var rs = document.getElementsByName("mc-"+i);
+    for (var ri=0; ri<rs.length; ri++) rs[ri].disabled = true;
+  }
+  function renderMCFeedback(i,value){
+    const q = mcQuestions[i];
+    const fb = document.getElementById("fb-"+i);
+    const isCorrect = (value === q.correct);
+    // Clear previous highlights
+    ["A","B","C","D"].forEach(L=>{
+      const opt = document.getElementById("opt-"+i+"-"+L);
+      opt.classList.remove("correct-answer","wrong-answer");
+    });
+    if (isCorrect){
+      document.getElementById("opt-"+i+"-"+value).classList.add("correct-answer");
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en">'+q.correctFeedbackEn+'</span><span class="lang-es">'+q.correctFeedbackEs+'</span>';
+    } else {
+      document.getElementById("opt-"+i+"-"+value).classList.add("wrong-answer");
+      document.getElementById("opt-"+i+"-"+q.correct).classList.add("correct-answer");
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en">'+q.incorrectFeedbackEn+'</span><span class="lang-es">'+q.incorrectFeedbackEs+'</span>';
+    }
+    fb.classList.remove("hidden");
+  }
+  function onSAInput(i){
+    saveState();
+    renderSAFeedback(i);
+  }
+  // Smart keyword matcher: short keywords (<=4 chars) match as whole words;
+  // longer keywords match as a left-anchored prefix (catches inflections).
+  function kwHit(text, kw){
+    text = (text||"").toLowerCase();
+    kw = (kw||"").toLowerCase();
+    const esc = kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const re = (kw.length <= 4) ? new RegExp("\\b"+esc+"\\b") : new RegExp("\\b"+esc);
+    return re.test(text);
+  }
+  function gradeSA(i){
+    const q = kwQuestions[i];
+    const el = document.getElementById("sa-"+i);
+    const text = (el ? el.value : "").toLowerCase();
+    if (text.length < 100) return false;
+    const kws = (getCurrentLang()==="es") ? q.kw_es : q.kw_en;
+    let hits = 0;
+    kws.forEach(k=>{ if (kwHit(text, k)) hits++; });
+    return hits >= 3;
+  }
+  // Reveal the gold model-answer box under every short-answer question after submit.
+  function revealModel(i){
+    const q = kwQuestions[i];
+    const box = document.getElementById("sa-model-"+i);
+    if (!box) return;
+    box.innerHTML =
+      '<div class="sa-model-label"><span class="lang-en">Correct answer</span><span class="lang-es">Respuesta correcta</span></div>'
+      + '<span class="lang-en">'+q.modelEn+'</span><span class="lang-es">'+q.modelEs+'</span>';
+    box.classList.remove("hidden");
+  }
+
+  function checkSA(i){
+    renderSAFeedback(i);
+    const el = document.getElementById("sa-"+i);
+    const text = (el ? el.value : "").toLowerCase();
+    if (text.length >= 100) revealModel(i);
+  }
+
+  function revealModels(){
+    kwQuestions.forEach((q,i)=>{ revealModel(i); });
+  }
+
+  function renderSAFeedback(i){
+    const fb = document.getElementById("sa-fb-"+i);
+    if (!fb) return;
+    const el = document.getElementById("sa-"+i);
+    const text = el ? el.value : "";
+    if (text.length === 0){
+      fb.className = "sa-feedback fail";
+      fb.innerHTML = '<span class="lang-en">✗ No answer yet. Type your answer, then check it against the correct answer below.</span><span class="lang-es">✗ Aún no hay respuesta. Escriba su respuesta y compárela con la respuesta correcta abajo.</span>';
+      return;
+    }
+    if (text.length < 100){
+      fb.className = "sa-feedback fail";
+      fb.innerHTML = '<span class="lang-en">✗ Incorrect — answer too short (at least a few sentences (about 100 characters)). Compare with the correct answer below.</span><span class="lang-es">✗ Incorrecto: la respuesta es demasiado corta (al menos unas cuantas oraciones (unos 100 caracteres)). Compare con la respuesta correcta abajo.</span>';
+      return;
+    }
+    if (gradeSA(i)){
+      fb.className = "sa-feedback pass";
+      fb.innerHTML = '<span class="lang-en">✓ Correct — your answer includes the key concepts. Compare it with the correct answer below.</span><span class="lang-es">✓ Correcto: su respuesta incluye los conceptos clave. Compárela con la respuesta correcta abajo.</span>';
+    } else {
+      fb.className = "sa-feedback fail";
+      fb.innerHTML = '<span class="lang-en">✗ Not yet — your answer is missing key concepts from the lesson. Study the correct answer below.</span><span class="lang-es">✗ Todavía no: a su respuesta le faltan conceptos clave de la lección. Estudie la respuesta correcta abajo.</span>';
+    }
+  }
+
+  // ---------- Submit ----------
+  function submitExam(){
+    const track = localStorage.getItem(TRACK_KEY);
+    if (!track){
+      alert(getCurrentLang()==="es" ? "Por favor escoja una modalidad antes de enviar." : "Please choose a track before submitting.");
+      return;
+    }
+    const student = localStorage.getItem(STUDENT_KEY);
+    if (SHOW_REGISTRATION && !student){
+      alert(getCurrentLang()==="es" ? "Por favor complete el registro antes de enviar." : "Please complete registration before submitting.");
+      return;
+    }
+
+    // Score MC
+    let mcScore = 0;
+    mcQuestions.forEach((q,i)=>{
+      const sel = document.querySelector('input[name="mc-'+i+'"]:checked');
+      if (sel){
+        renderMCFeedback(i, sel.value);
+        if (sel.value === q.correct) mcScore++;
+      } else {
+        // Mark unanswered as wrong by showing correct answer
+        const fb = document.getElementById("fb-"+i);
+        ["A","B","C","D"].forEach(L=>{
+          const opt = document.getElementById("opt-"+i+"-"+L);
+          opt.classList.remove("correct-answer","wrong-answer");
+        });
+        document.getElementById("opt-"+i+"-"+q.correct).classList.add("correct-answer");
+        fb.className = "feedback incorrect";
+        fb.innerHTML = '<span class="lang-en">No answer given. '+q.incorrectFeedbackEn+'</span><span class="lang-es">No se dio respuesta. '+q.incorrectFeedbackEs+'</span>';
+        fb.classList.remove("hidden");
+      }
+    });
+    const mcBanked = localStorage.getItem(MC_KEY) === "true";
+    const mcPassed = mcBanked || (mcScore >= MC_PASS);
+
+    let saScore = 0;
+    if (isMastersLevel()){
+      kwQuestions.forEach((q,i)=>{
+        renderSAFeedback(i);
+        if (gradeSA(i)) saScore++;
+      });
+      revealModels();
+    }
+    const saPassed = isMastersLevel() ? (saScore >= SA_PASS) : true;
+
+    // Persist MC pass (banking)
+    if (mcPassed){
+      localStorage.setItem(MC_KEY,"true");
+    }
+    if (isMastersLevel() && saPassed){
+      localStorage.setItem(SA_KEY,"true");
+    }
+
+    const fullPassed = mcPassed && saPassed;
+    if (fullPassed){
+      localStorage.setItem(UNIT_KEY,"true");
+      // Update progress JSON
+      let progress = {};
+      try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)||"{}"); } catch(e){}
+      progress["unit"+UNIT] = true;
+      localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    } else {
+      // Determine lockout scope
+      if (!mcPassed){
+        localStorage.setItem(LOCKOUT_KEY, String(Date.now() + LOCKOUT_MS));
+        localStorage.setItem(LOCKOUT_SCOPE_KEY, "full");
+      } else if (isMastersLevel() && !saPassed){
+        localStorage.setItem(LOCKOUT_KEY, String(Date.now() + LOCKOUT_MS));
+        localStorage.setItem(LOCKOUT_SCOPE_KEY, "sa");
+      }
+    }
+
+    showResults(track, mcScore, mcPassed, saScore, saPassed, fullPassed);
+  }
+
+  function showResults(track, mcScore, mcPassed, saScore, saPassed, fullPassed){
+    const block = document.getElementById("results-block");
+    block.classList.remove("hidden");
+    block.className = "results " + (fullPassed ? "pass" : "fail");
+    let html = '<h2><span class="lang-en">Results</span><span class="lang-es">Resultados</span></h2>';
+    html += '<p><strong><span class="lang-en">Multiple-Choice:</span><span class="lang-es">Opción múltiple:</span></strong> '+mcScore+' / 20 — '
+      + (mcPassed
+          ? '<span class="lang-en" style="color:#3a5a25;font-weight:600">PASS</span><span class="lang-es" style="color:#3a5a25;font-weight:600">APROBADO</span>'
+          : '<span class="lang-en" style="color:#7a2618;font-weight:600">FAIL</span><span class="lang-es" style="color:#7a2618;font-weight:600">REPROBADO</span>')
+      + '</p>';
+    if (isMastersLevel()){
+      html += '<p><strong><span class="lang-en">Short-Answer:</span><span class="lang-es">Respuesta breve:</span></strong> '+saScore+' / 10 — '
+        + (saPassed
+            ? '<span class="lang-en" style="color:#3a5a25;font-weight:600">PASS</span><span class="lang-es" style="color:#3a5a25;font-weight:600">APROBADO</span>'
+            : '<span class="lang-en" style="color:#7a2618;font-weight:600">FAIL</span><span class="lang-es" style="color:#7a2618;font-weight:600">REPROBADO</span>')
+        + '</p>';
+    }
+    if (fullPassed){
+      const nextUrl = IS_FINAL_UNIT ? FINAL_REDIRECT_URL : NEXT_UNIT_URL;
+      const label = IS_FINAL_UNIT
+        ? '<span class="lang-en">View Certificate \u2192</span><span class="lang-es">Ver Certificado \u2192</span>'
+        : '<span class="lang-en">Continue to Unit '+(UNIT+1)+' \u2192</span><span class="lang-es">Continuar a la Unidad '+(UNIT+1)+' \u2192</span>';
+      const note = '<span class="lang-en">Passed. Study the model answers above before you continue.</span><span class="lang-es">Aprobado. Estudie las respuestas modelo de arriba antes de continuar.</span>';
+      html += '<p style="font-weight:600">'+note+'</p>'
+            + '<p><a class="btn" href="'+nextUrl+'">'+label+'</a></p>';
+    } else {
+      const scope = localStorage.getItem(LOCKOUT_SCOPE_KEY);
+      const lockMsg = (scope==="sa")
+        ? '<span class="lang-en">Multiple-choice has been banked. Review the lesson and retake the short-answer section after the 15-minute lockout.</span><span class="lang-es">La sección de opción múltiple ha sido guardada. Repase la lección y vuelva a tomar la sección de respuesta breve después del bloqueo de 15 minutos.</span>'
+        : '<span class="lang-en">Review the lesson and retake the exam after the 15-minute lockout.</span><span class="lang-es">Repase la lección y vuelva a tomar el examen después del bloqueo de 15 minutos.</span>';
+      const study = '<span class="lang-en"> Study the model answers above while you wait.</span><span class="lang-es"> Estudie las respuestas modelo de arriba mientras espera.</span>';
+      html += '<p style="font-weight:600">'+lockMsg+study+'</p>';
+      // No auto-reload: keep the model answers visible. The lockout is enforced on the next submit.
+    }
+    block.innerHTML = html;
+    block.scrollIntoView({behavior:"smooth"});
+  }
+
+  function resetExam(){
+    const msg = (getCurrentLang()==="es")
+      ? "¿Está seguro de que desea reiniciar? Esto borrará todas sus respuestas en esta unidad."
+      : "Are you sure you want to reset? This will clear all your answers in this unit.";
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    // Do NOT clear MC banking, lockout, or progress on reset — that is a separate action.
+    location.reload();
+  }
+
+  // ---------- Progress grid ----------
+  function renderProgressGrid(){
+    const grid = document.getElementById("progress-grid");
+    let progress = {};
+    try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)||"{}"); } catch(e){}
+    for (let u=1; u<=TOTAL_UNITS; u++){
+      const pill = document.createElement("div");
+      pill.className = "pill";
+      if (progress["unit"+u]) pill.classList.add("done");
+      if (u === UNIT) pill.classList.add("current");
+      pill.textContent = "U"+u;
+      grid.appendChild(pill);
+    }
+  }
+
+  // ---------- Init ----------
+  document.addEventListener("DOMContentLoaded", function(){
+    renderProgressGrid();
+    loadRegistration();
+    loadTrack();
+    renderMCQuestions();
+    renderSAQuestions();
+    if (!checkLockout()){
+      restoreState();
+    }
+  });
+</script>
+
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSHermeneuticsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Joshua Intensive — Unit 10: "Choose This Day"</title>
+<style>
+:root{--green-dark:#2f4f2f;--green-mid:#3f6b3f;--green-light:#ecf2ec;--gold:#d4af37;--gold-soft:#efe2b3;--ink:#1f2a1f;--rule:#b9c9b9;--warn:#b03a2e;--white:#fff}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:var(--green-light);line-height:1.6;font-size:16px}
+body.lang-en .es-only{display:none}body.lang-es .en-only{display:none}
+header.site{background:var(--green-dark);color:var(--white);padding:18px 24px;border-bottom:4px solid var(--gold)}
+header.site .crest{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:4px}
+header.site h1{margin:0;font-size:1.45rem;font-weight:700}
+header.site .credits{font-size:.9rem;color:var(--gold-soft);margin-top:6px}
+.toolbar{background:var(--white);border-bottom:1px solid var(--rule);padding:10px 24px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.toolbar .lang-toggle button{background:var(--green-light);border:1px solid var(--green-mid);color:var(--green-dark);padding:6px 12px;font-family:inherit;cursor:pointer;border-radius:3px;font-size:.85rem;margin-right:4px}
+.toolbar .lang-toggle button.active{background:var(--green-dark);color:var(--white)}
+.toolbar .greeting{color:var(--green-dark);font-style:italic;font-size:.95rem}
+.reg-warn{background:#fff3cd;border-left:5px solid var(--gold);padding:12px 18px;margin:0;font-size:.92rem;color:#6b5800}
+.reg-warn.hidden{display:none}
+.progress-grid{background:var(--white);padding:16px 24px;border-bottom:1px solid var(--rule)}
+.progress-grid h3{margin:0 0 10px;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--green-dark)}
+.progress-grid .units{display:flex;gap:6px;flex-wrap:wrap}
+.progress-grid .unit-pill{padding:6px 10px;border:1px solid var(--rule);border-radius:3px;font-size:.78rem;background:var(--green-light);color:var(--green-dark);min-width:60px;text-align:center}
+.progress-grid .unit-pill.done{background:var(--green-dark);color:var(--white);border-color:var(--green-dark)}
+.progress-grid .unit-pill.current{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700}
+main{max-width:920px;margin:0 auto;padding:24px}
+.unit-title{text-align:center;margin:8px 0 24px}
+.unit-title .label{font-size:.85rem;letter-spacing:.12em;color:var(--green-mid);text-transform:uppercase}
+.unit-title h2{font-size:1.9rem;margin:6px 0 4px;color:var(--green-dark)}
+.unit-title .subtitle{color:var(--green-mid);font-style:italic;font-size:1.05rem}
+.unit-title .scripture{margin-top:14px;padding:12px 18px;background:var(--white);border-left:4px solid var(--gold);font-size:.96rem}
+section.lesson{background:var(--white);padding:22px 26px;margin:22px 0;border-radius:4px;border-top:3px solid var(--green-dark);box-shadow:0 1px 3px rgba(0,0,0,.06)}
+section.lesson h3{color:var(--green-dark);font-size:1.3rem;margin:0 0 4px}
+section.lesson h4{color:var(--green-mid);font-size:1.08rem;margin:18px 0 6px;border-bottom:1px dotted var(--rule);padding-bottom:3px}
+section.lesson p{margin:0 0 12px}
+section.lesson blockquote{margin:12px 0;padding:10px 16px;background:var(--green-light);border-left:4px solid var(--green-mid);font-style:italic;color:var(--green-dark)}
+section.lesson .anchor{display:block;text-align:center;margin:14px auto;padding:10px 14px;background:var(--gold-soft);border:1px solid var(--gold);color:#5a4a10;font-weight:700;font-style:italic;max-width:600px}
+.exam{background:var(--white);padding:22px 26px;margin:30px 0 22px;border-radius:4px;border-top:3px solid var(--gold)}
+.exam h3{color:var(--green-dark);margin-top:0}
+.exam .question{padding:12px 0;border-bottom:1px dashed var(--rule)}
+.exam .question p.q{margin:0 0 8px;font-weight:600}
+.exam .options label{display:block;padding:4px 0 4px 18px;cursor:pointer}
+.exam textarea{width:100%;min-height:60px;font-family:inherit;padding:8px;border:1px solid var(--rule);border-radius:3px;resize:vertical}
+.exam-controls{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+button.submit-exam{background:var(--green-dark);color:var(--white);border:none;padding:12px 22px;font-size:1rem;font-family:inherit;cursor:pointer;border-radius:3px}
+button.submit-exam:disabled{background:#888;cursor:not-allowed}
+#result{font-weight:700;font-size:1.05rem;padding:10px 14px;border-radius:3px}
+#result.pass{background:#d6e9d6;color:var(--green-dark);border:1px solid var(--green-mid)}
+#result.fail{background:#f8d7da;color:var(--warn);border:1px solid var(--warn)}
+footer.unit-nav{max-width:920px;margin:0 auto;padding:18px 24px 40px;display:flex;justify-content:space-between;gap:12px}
+footer.unit-nav button{background:var(--green-dark);color:var(--white);border:none;padding:12px 18px;font-family:inherit;cursor:pointer;border-radius:3px;font-size:.95rem}
+footer.unit-nav button:disabled{background:#999;cursor:not-allowed}
+@media (max-width:640px){main{padding:14px}section.lesson{padding:16px 18px}.exam{padding:16px 18px}header.site h1{font-size:1.2rem}}
+
+@media print{
+.lang-toggle,.toolbar,.nav,.progress-grid,.exam-controls,.reg-warn,.unit-pill{display:none !important}
+.options label{display:block}
+body{background:white;padding:10px;font-size:12pt}
+.card{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}
+.question{page-break-inside:avoid}
+}
+</style></head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site"><div class="crest">Chapala Theological Seminary &middot; Seminario Teológico de Chapala</div><h1 class="en-only">Joshua Intensive &mdash; Unit 10: "Choose This Day" (Capstone)</h1><h1 class="es-only">Intensivo de Josué &mdash; Unidad 10: «Escoged hoy» (Capstone)</h1><div class="credits">Professor: Dr. Wayne Cook &nbsp;|&nbsp; Director: Dr. Ted Rogers</div></header>
+<div class="toolbar"><div class="lang-toggle" role="group" aria-label="Language"><button data-lang="en" class="active">English</button><button data-lang="es">Español</button><button data-lang="both">Both / Ambos</button></div><div class="greeting" id="greeting"></div></div>
+<div class="reg-warn hidden" id="reg-warn"><span class="en-only"><strong>Heads up:</strong> No registration found. Your progress will save in this browser, but ask the registrar to enroll you formally before exam day.</span><span class="es-only"><strong>Aviso:</strong> No se encontró registro. Tu progreso se guardará en este navegador, pero pide al registrador inscribirte formalmente antes del día del examen.</span></div>
+<div class="progress-grid"><h3 class="en-only">Course Progress &mdash; 10 Units</h3><h3 class="es-only">Progreso del Curso &mdash; 10 Unidades</h3><div class="units" id="progress-units"></div></div>
+<main>
+<div class="unit-title"><div class="label en-only">Unit 10 &middot; Joshua 23&ndash;24 &middot; Capstone</div><div class="label es-only">Unidad 10 &middot; Josué 23&ndash;24 &middot; Capstone</div><h2 class="en-only">"Choose This Day Whom Ye Will Serve"</h2><h2 class="es-only">«Escogeos hoy a quién sirváis»</h2><div class="subtitle en-only">"As for me and my house, we will serve the LORD."</div><div class="subtitle es-only">«Yo y mi casa serviremos a Jehová».</div><div class="scripture"><div class="en-only"><strong>Course Scripture:</strong> "By faith the walls of Jericho fell down after they were encircled for seven days." &mdash; Hebrews 11:30 (NKJV)</div><div class="es-only"><strong>Escritura del Curso:</strong> «Por la fe cayeron los muros de Jericó después de rodearlos siete días.» &mdash; Hebreos 11:30 (RVG)</div></div></div>
+
+<section class="lesson"><h3 class="en-only">Orientation: An Old Man Stands Up</h3><h3 class="es-only">Orientación: Un anciano se levanta</h3>
+<div class="en-only">
+<p>Joshua 23 begins where every long obedience eventually ends. <em>"And it came to pass a long time after that the LORD had given rest unto Israel from all their enemies round about, that Joshua waxed old and stricken in age"</em> (Joshua 23:1). The chapter goes on a verse later to record the simple sentence that has been hovering over the book for some time now: he was <em>"ready to go the way of all the earth"</em> (23:14). The general who marched all night to Gibeon, who stood under the unmoving sun, who cut down the Anakim, who allotted the land to twelve tribes &mdash; that Joshua is now an old man saying his last words to a people he has carried for forty-five years.</p>
+<span class="anchor">As for me and my house, we will serve the LORD.</span>
+<p>The whole book of Joshua has been pointing here. Wayne lays out the structure of the farewell in four lines that mirror Moses' three-fold farewell in Deuteronomy. Joshua bids farewell to the eastern tribes in chapter 22 (we walked that scene in Unit 9 with the altar of witness, <em>Ed</em>). He bids farewell to the leaders &mdash; the elders, judges, and officers &mdash; in chapter 23. He bids farewell to all the people at Shechem in chapter 24. The purpose of all three speeches is the same: <em>to get the people to resolve to serve God.</em> Joshua issues the challenge in 24:15 &mdash; <em>"Choose you this day whom you will serve&hellip; but as for me and my house, we will serve the LORD."</em></p>
+<p>This unit serves as the capstone of the Joshua Intensive. We have walked from the Jordan crossing in Unit 1 through Jericho in Unit 4, Achan in Unit 5, the Gibeonite deception and Long Day in Unit 6, the northern conquest in Unit 7, the inheritance allotment in Unit 8, and the cities of refuge in Unit 9. Now Joshua's life closes, the book closes, and a question is placed in the hand of every reader. <em>Whom will you serve?</em></p>
+<p>Section I sits with Joshua 23 and the farewell to the leaders &mdash; the warning he leaves them about the foreign gods still in the corners of the land. Section II opens Joshua 24 at Shechem, where Joshua rehearses the whole story of God's faithfulness from Abraham to the present day. Section III stands at verse 15 itself: <em>"Choose you this day."</em> Section IV listens to Wayne's centerpiece illustration: the old Prussian general Von Zealand and the king who finally fell silent. Section V returns to the seven faith-motifs Wayne pulls out of the entire book of Joshua &mdash; faith in God's promises, faith taking possession, faith waiting, faith worshiping, faith meeting God face to face, faith hindered by sin, faith hindered by lack of prayer &mdash; and uses them as the doctrinal summary of the course. Section VI closes the book with the burial of Joshua and the long-deferred burial of the bones of Joseph at Shechem (Joshua 24:32). The Closing prays the same prayer Joshua prays over the assembly and over the believer: <em>as for me and my house.</em></p>
+</div>
+<div class="es-only">
+<p>Josué 23 comienza donde toda larga obediencia eventualmente termina. <em>«Aconteció, muchos días después que Jehová diera reposo a Israel de todos sus enemigos alrededor, que Josué, siendo ya viejo y avanzado en años&hellip;»</em> (Josué 23:1). El capítulo continúa un versículo después para registrar la frase simple que ha estado flotando sobre el libro: estaba <em>«próximo a ir por el camino de toda la tierra»</em> (23:14). El general que marchó toda la noche hasta Gabaón, que se paró bajo el sol inmóvil, que cortó a los Anaceos, que repartió la tierra a doce tribus &mdash; ese Josué es ahora un anciano diciendo sus últimas palabras a un pueblo que ha cargado por cuarenta y cinco años.</p>
+<span class="anchor">Yo y mi casa serviremos a Jehová.</span>
+<p>Todo el libro de Josué ha estado apuntando aquí. Wayne expone la estructura del adiós en cuatro líneas que reflejan el adiós triple de Moisés en Deuteronomio. Josué se despide de las tribus orientales en el capítulo 22 (caminamos esa escena en la Unidad 9 con el altar del testimonio, <em>Ed</em>). Se despide de los líderes &mdash; los ancianos, jueces, y oficiales &mdash; en el capítulo 23. Se despide de todo el pueblo en Siquem en el capítulo 24. El propósito de los tres discursos es el mismo: <em>llevar al pueblo a resolver servir a Dios.</em> Josué emite el desafío en 24:15 &mdash; <em>«Escogeos hoy a quién sirváis&hellip; pero yo y mi casa serviremos a Jehová»</em>.</p>
+<p>Esta unidad sirve como el capstone del Intensivo de Josué. Hemos caminado desde el cruce del Jordán en la Unidad 1 a través de Jericó en la Unidad 4, Acán en la Unidad 5, el engaño gabaonita y el Día Largo en la Unidad 6, la conquista del norte en la Unidad 7, el reparto de la heredad en la Unidad 8, y las ciudades de refugio en la Unidad 9. Ahora la vida de Josué cierra, el libro cierra, y una pregunta es puesta en la mano de cada lector. <em>¿A quién servirás?</em></p>
+<p>La Sección I se sienta con Josué 23 y el adiós a los líderes &mdash; la advertencia que les deja sobre los dioses extranjeros todavía en los rincones de la tierra. La Sección II abre Josué 24 en Siquem, donde Josué repasa toda la historia de la fidelidad de Dios desde Abraham hasta el día presente. La Sección III se detiene en el versículo 15 mismo: <em>«Escogeos hoy»</em>. La Sección IV escucha la ilustración central de Wayne: el viejo general prusiano Von Zealand y el rey que finalmente se quedó callado. La Sección V regresa a los siete motivos de fe que Wayne saca del libro entero de Josué &mdash; fe en las promesas de Dios, fe tomando posesión, fe esperando, fe adorando, fe encontrándose con Dios cara a cara, fe estorbada por el pecado, fe estorbada por la falta de oración &mdash; y los usa como el resumen doctrinal del curso. La Sección VI cierra el libro con el entierro de Josué y el entierro largamente diferido de los huesos de José en Siquem (Josué 24:32). El Cierre ora la misma oración que Josué ora sobre la asamblea y sobre el creyente: <em>yo y mi casa.</em></p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">I. Joshua 23 &mdash; Farewell to the Leaders</h3><h3 class="es-only">I. Josué 23 &mdash; Adiós a los líderes</h3>
+<div class="en-only">
+<p>Joshua's first formal farewell speech is to the elders, the heads of the tribes, the judges, and the officers (Joshua 23:2). He speaks to leadership before he speaks to the assembly because leadership is what determines whether the assembly will hold. The chapter has the rhythm of a man who knows what is true and is leaving while he is still able to say it cleanly.</p>
+<p>He opens with a fact. <em>"Ye have seen all that the LORD your God hath done unto all these nations because of you; for the LORD your God is he that hath fought for you"</em> (23:3). The verb runs through the whole chapter: <em>the LORD has fought.</em> The same verb that closed the southern campaign in Joshua 10:42 closes the leader's farewell here. Joshua's whole life has had one explanation, and the explanation is not Joshua. It is the LORD who fought.</p>
+<p>Then he moves to a warning. There are still nations in the corners of the land &mdash; <em>"the rest of the nations that remain among you"</em> (23:4, 7, 12). The Philistines on the coast. The Geshurites in the south. Sidonian fishing villages in the far north. The campaign cleared the heartland; the corners are still under occupation. Joshua warns the leaders that those remaining nations are not just political problems. They are spiritual ones. <em>"Make no mention of the name of their gods, nor cause to swear by them, neither serve them, nor bow yourselves unto them"</em> (23:7). The temptation will not be a Canaanite army with chariots; the temptation will be a Canaanite altar with smoke rising over it. Joshua has watched the previous generation fall to that exact temptation at Baal-peor in Numbers 25, and he is determined that the new generation will not.</p>
+<p>Then he ends with a promise that runs both directions. If the leaders cleave to the LORD, <em>"one man of you shall chase a thousand: for the LORD your God, he it is that fighteth for you"</em> (23:10). But if they intermarry with the remaining nations and join their gods, <em>"the LORD your God will no more drive out any of these nations from before you; but they shall be snares and traps unto you, and scourges in your sides, and thorns in your eyes, until ye perish from off this good land"</em> (23:13). The same God who gave the land can take it back. The covenant cuts both ways.</p>
+<p>The chapter is a leader's chapter. Wayne notes the principle: a leader's last words tell you what the leader actually believed. Joshua's last words to leadership are not strategy. They are not military advice. They are not even encouragement in the soft sense. They are a warning that the next battle is for hearts and altars, and the only weapon for that battle is unmixed loyalty to the LORD. The book of Judges, opening on the very next page, is going to read like a study in what happens when the next generation of leaders does not heed Joshua's warning. The corners of the land become snares. The thorns reach the eye. The book reads itself in retrospect across two generations.</p>
+</div>
+<div class="es-only">
+<p>El primer discurso formal de despedida de Josué es para los ancianos, los jefes de las tribus, los jueces, y los oficiales (Josué 23:2). Habla al liderazgo antes de hablar a la asamblea porque el liderazgo es lo que determina si la asamblea se sostendrá. El capítulo tiene el ritmo de un hombre que sabe lo que es verdadero y se está yendo mientras todavía puede decirlo limpiamente.</p>
+<p>Abre con un hecho. <em>«Vosotros habéis visto todo lo que Jehová vuestro Dios ha hecho con todas estas naciones por vuestra causa; porque Jehová vuestro Dios es quien ha peleado por vosotros»</em> (23:3). El verbo corre por todo el capítulo: <em>Jehová ha peleado.</em> El mismo verbo que cerró la campaña del sur en Josué 10:42 cierra el adiós del líder aquí. Toda la vida de Josué ha tenido una explicación, y la explicación no es Josué. Es Jehová quien peleó.</p>
+<p>Luego pasa a una advertencia. Todavía hay naciones en los rincones de la tierra &mdash; <em>«estas naciones que han quedado entre vosotros»</em> (23:4, 7, 12). Los filisteos en la costa. Los gesureos en el sur. Aldeas pesqueras sidonias en el extremo norte. La campaña limpió el corazón del país; los rincones todavía están ocupados. Josué advierte a los líderes que esas naciones que quedan no son sólo problemas políticos. Son espirituales. <em>«Para que no os mezcléis con estas naciones que han quedado con vosotros, ni hagáis mención del nombre de sus dioses, ni juréis por ellos, ni los sirváis, ni os inclinéis a ellos»</em> (23:7). La tentación no será un ejército cananeo con carros; la tentación será un altar cananeo con humo subiendo sobre él. Josué ha visto a la generación previa caer en esa tentación exacta en Baal-peor en Números 25, y está determinado a que la nueva generación no lo hará.</p>
+<p>Luego termina con una promesa que corre en ambas direcciones. Si los líderes se aferran al SEÑOR, <em>«un varón de vosotros perseguirá a mil; porque Jehová vuestro Dios es quien pelea por vosotros»</em> (23:10). Pero si se unen en matrimonio con las naciones restantes y se juntan a sus dioses, <em>«Jehová vuestro Dios no echará más a estas naciones de delante de vosotros, sino que os serán por lazo, por tropiezo, por azote para vuestros costados y por espinas para vuestros ojos, hasta que perezcáis de esta buena tierra»</em> (23:13). El mismo Dios que dio la tierra puede tomarla de vuelta. El pacto corta en ambas direcciones.</p>
+<p>El capítulo es un capítulo de líder. Wayne nota el principio: las últimas palabras de un líder te dicen lo que el líder realmente creía. Las últimas palabras de Josué al liderazgo no son estrategia. No son consejo militar. No son ni siquiera estímulo en el sentido suave. Son una advertencia de que la próxima batalla es por los corazones y los altares, y la única arma para esa batalla es la lealtad sin mezcla a Jehová. El libro de los Jueces, abriendo en la siguiente página, va a leer como un estudio de lo que pasa cuando la siguiente generación de líderes no atiende la advertencia de Josué. Los rincones de la tierra se vuelven lazos. Las espinas alcanzan el ojo. El libro se lee a sí mismo en retrospectiva a través de dos generaciones.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">II. Joshua 24 at Shechem &mdash; Rehearsing God's Story</h3><h3 class="es-only">II. Josué 24 en Siquem &mdash; Repasando la historia de Dios</h3>
+<div class="en-only">
+<p>Joshua's final farewell happens at Shechem. The location is theologically loud. Shechem is where Abraham first received the promise of the land in Genesis 12:6&ndash;7. Shechem is where Jacob buried his foreign gods under the oak in Genesis 35:4. Shechem is where the bones of Joseph were waiting in the ground &mdash; bones Israel had carried out of Egypt four hundred years earlier on the strength of an oath (Genesis 50:25). Joshua picks Shechem on purpose. He wants the assembly standing on covenant soil when he asks them the covenant question.</p>
+<p>And before he asks the question, he tells the story. Joshua 24:2&ndash;13 is one of the great extended speeches in the Old Testament &mdash; the LORD speaking through Joshua, summarizing the entire history from Abraham to the present in a dozen verses. Notice how He begins. <em>"Your fathers dwelt on the other side of the flood in old time, even Terah, the father of Abraham, and the father of Nachor: and they served other gods"</em> (24:2). The LORD's first sentence about the patriarchs is that they were idolaters. Abraham did not pick the LORD; the LORD picked Abraham out of an idolater's house. Israel cannot stand at Shechem and look back on a heritage of pure faith. They look back on grace.</p>
+<p>The story goes on. <em>I took your father Abraham&hellip; I gave him Isaac&hellip; I gave Jacob and Esau&hellip; I sent Moses also and Aaron&hellip; I plagued Egypt&hellip; I brought you out&hellip; I have given you a land&hellip;</em> Verses 2 through 13 are a string of first-person verbs from God. Israel did not earn one of them. The whole national biography is on the credit side of God's ledger. By the time the speech reaches verse 13, the listener has heard the LORD say <em>I</em> nearly twenty times in a single recital.</p>
+<p>And then verse 14: <em>"Now therefore."</em> Two words on which the entire weight of the chapter pivots. The history of grace requires a response, and the response Joshua names is exact. <em>"Now therefore fear the LORD, and serve him in sincerity and in truth: and put away the gods which your fathers served on the other side of the flood, and in Egypt; and serve ye the LORD"</em> (24:14). The same gods Terah served, the same gods Egypt served, are still in some Israelite household somewhere in the camp. Joshua does not name names. He simply says: <em>put them away.</em> Whatever is in your bag from Mesopotamia or in your trunk from Egypt, put it away. Serve the LORD.</p>
+<p>The speech is a model for any believer's reckoning at the end of any season of obedience. Rehearse the story God has actually written. Recognize that every chapter on the credit side belongs to Him. Then, on that basis, put away the gods you have been carrying alongside Him. Sincerity is not enough; sincerity has to come with a clean shelf.</p>
+</div>
+<div class="es-only">
+<p>El último adiós de Josué ocurre en Siquem. La ubicación es teológicamente fuerte. Siquem es donde Abraham recibió por primera vez la promesa de la tierra en Génesis 12:6&ndash;7. Siquem es donde Jacob sepultó sus dioses extranjeros bajo la encina en Génesis 35:4. Siquem es donde los huesos de José esperaban en la tierra &mdash; huesos que Israel había cargado fuera de Egipto cuatrocientos años antes con la fuerza de un juramento (Génesis 50:25). Josué escoge Siquem a propósito. Quiere que la asamblea esté parada en suelo del pacto cuando les haga la pregunta del pacto.</p>
+<p>Y antes de hacer la pregunta, cuenta la historia. Josué 24:2&ndash;13 es uno de los grandes discursos extendidos del Antiguo Testamento &mdash; el SEÑOR hablando por medio de Josué, resumiendo toda la historia desde Abraham hasta el presente en una docena de versículos. Nota cómo comienza. <em>«Vuestros padres habitaron antiguamente al otro lado del río, esto es, Taré, padre de Abraham y de Nacor; y servían a dioses extraños»</em> (24:2). La primera frase del SEÑOR sobre los patriarcas es que eran idólatras. Abraham no escogió al SEÑOR; el SEÑOR escogió a Abraham de una casa idólatra. Israel no puede pararse en Siquem y mirar hacia atrás a una herencia de fe pura. Miran hacia atrás a la gracia.</p>
+<p>La historia continúa. <em>Tomé a vuestro padre Abraham&hellip; Le di a Isaac&hellip; Di a Jacob y a Esaú&hellip; Envié también a Moisés y a Aarón&hellip; Herí a Egipto&hellip; Os saqué&hellip; Os he dado una tierra&hellip;</em> Los versículos 2 al 13 son una hilera de verbos en primera persona de Dios. Israel no se ganó ninguno de ellos. Toda la biografía nacional está del lado del haber del libro mayor de Dios. Para cuando el discurso llega al versículo 13, el oyente ha oído al SEÑOR decir <em>Yo</em> casi veinte veces en una sola recitación.</p>
+<p>Y luego el versículo 14: <em>«Ahora, pues»</em>. Dos palabras sobre las cuales el peso entero del capítulo gira. La historia de la gracia exige una respuesta, y la respuesta que Josué nombra es exacta. <em>«Ahora, pues, temed a Jehová, y servidle con integridad y en verdad; y quitad de entre vosotros los dioses a los cuales sirvieron vuestros padres al otro lado del río, y en Egipto; y servid a Jehová»</em> (24:14). Los mismos dioses que sirvió Taré, los mismos dioses que sirvió Egipto, están todavía en algún hogar israelita en algún lugar del campamento. Josué no nombra nombres. Simplemente dice: <em>quítenlos.</em> Lo que sea que esté en tu bolsa de Mesopotamia o en tu baúl de Egipto, quítalo. Sirve al SEÑOR.</p>
+<p>El discurso es un modelo para el ajuste de cuentas de cualquier creyente al final de cualquier temporada de obediencia. Repasa la historia que Dios realmente ha escrito. Reconoce que cada capítulo del lado del haber le pertenece a Él. Luego, sobre esa base, quita los dioses que has estado cargando junto a Él. La sinceridad no es suficiente; la sinceridad tiene que venir con un estante limpio.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">III. "Choose You This Day" (Joshua 24:15)</h3><h3 class="es-only">III. «Escogeos hoy» (Josué 24:15)</h3>
+<div class="en-only">
+<p>Then comes the verse the whole book has been moving toward. <em>"And if it seem evil unto you to serve the LORD, choose you this day whom ye will serve; whether the gods which your fathers served that were on the other side of the flood, or the gods of the Amorites, in whose land ye dwell: but as for me and my house, we will serve the LORD"</em> (Joshua 24:15).</p>
+<p>Wayne pulls out several details about this verse that deserve close reading.</p>
+<h4>1. The Choice Is Daily</h4>
+<p>The Hebrew underneath <em>"this day"</em> is emphatic. Joshua does not give Israel weeks to consider. He does not call for a national synod. He does not appoint a study commission. He says, <em>this day &mdash; today.</em> The choice belongs to the present. Tomorrow's choice will not save you from this morning's drift. The faith that runs the long campaign is not a single ancient decision held in storage; it is a daily decision made fresh on the morning of each new battle. Wayne notes that in his own pastoral experience this is the difference between believers who continue to grow and believers who plateau. The growing believer treats Joshua 24:15 as a verse for Tuesday, not just a verse for the conversion testimony.</p>
+<h4>2. The Choice Is Honest</h4>
+<p>Joshua names the live alternatives without softening them. The gods of Mesopotamia. The gods of Egypt. The gods of the Amorites. Joshua does not pretend the alternatives have been retired. He says, plainly, that there are real options on the table and that Israel can pick any of them if it chooses. This is one of the marks of honest preaching. The preacher who minimizes the alternatives flatters the audience; the preacher who names them honestly forces a real decision. Joshua takes the harder road. He hands Israel the menu in full.</p>
+<h4>3. The Choice Is Exemplary</h4>
+<p>The most quoted half of the verse comes last. <em>"But as for me and my house, we will serve the LORD."</em> Joshua does not require the assembly to choose what he himself has not already chosen. He does not stand on neutral ground and ask the people to declare a position. He stands on his position and asks the people to join him. Leaders who ask their people to choose what they themselves have not chosen are charlatans. Joshua is the opposite. He has chosen, and his house with him, and from inside his already-made choice he calls the assembly to make the same choice.</p>
+<h4>4. The Choice Is Family-Wide</h4>
+<p>And it is <em>"me and my house."</em> The unit of choice is not the individual conscience alone; it is the household. Joshua does not say that he has chosen and his children may pick on their own when they grow up. He says that he and his house, as a single covenanting unit, will serve the LORD. That sentence has put more children in church on Sunday morning than any program in church history. Wayne emphasizes the principle for parents and grandparents reading this lesson: <em>your house</em> is part of <em>your choice.</em> You may not be able to choose for them what they will eventually decide for themselves, but you can absolutely choose what your house stands for while it is your house. Joshua did. His house knew it. The assembly heard it.</p>
+<h4>5. The Choice Is Rejectable</h4>
+<p>And finally, Joshua's verse contains the unsettling phrase <em>"if it seem evil unto you to serve the LORD."</em> He acknowledges the possibility of rejection. He does not pretend the LORD's claim is so obviously good that no one could refuse it. He grants the assembly the dignity of refusal. That is a remarkably high view of human responsibility. The LORD does not want forced lovers. He wants chosen ones. The choice has to be real or it is not a choice. Joshua frames it that way and lets the assembly answer.</p>
+<p>Verses 16 through 18 record their answer. <em>"God forbid that we should forsake the LORD&hellip; we also will serve the LORD; for he is our God."</em> The assembly responds. Joshua presses them again, even harder, in 24:19&ndash;20, warning that the LORD is a holy God and a jealous God who will not forgive their transgressions if they turn from Him. They reaffirm. He sets up a stone under the oak at Shechem as a witness, and the chapter ends with the people sent away to their inheritance.</p>
+</div>
+<div class="es-only">
+<p>Luego viene el versículo hacia el cual todo el libro ha estado moviéndose. <em>«Y si mal os parece servir a Jehová, escogeos hoy a quién sirváis; si a los dioses a quienes sirvieron vuestros padres, cuando estuvieron al otro lado del río, o a los dioses de los amorreos en cuya tierra habitáis; pero yo y mi casa serviremos a Jehová»</em> (Josué 24:15).</p>
+<p>Wayne saca varios detalles sobre este versículo que merecen lectura cuidadosa.</p>
+<h4>1. La elección es diaria</h4>
+<p>El hebreo debajo de <em>«hoy»</em> es enfático. Josué no le da a Israel semanas para considerar. No convoca un sínodo nacional. No designa una comisión de estudio. Dice: <em>hoy &mdash; este día.</em> La elección pertenece al presente. La elección de mañana no te salvará de la deriva de esta mañana. La fe que corre la larga campaña no es una sola decisión antigua guardada en almacenamiento; es una decisión diaria hecha fresca en la mañana de cada nueva batalla. Wayne nota que en su propia experiencia pastoral esta es la diferencia entre los creyentes que siguen creciendo y los creyentes que se estancan. El creyente que crece trata Josué 24:15 como un versículo para el martes, no sólo como un versículo para el testimonio de conversión.</p>
+<h4>2. La elección es honesta</h4>
+<p>Josué nombra las alternativas vivas sin suavizarlas. Los dioses de Mesopotamia. Los dioses de Egipto. Los dioses de los amorreos. Josué no pretende que las alternativas hayan sido retiradas. Dice, llanamente, que hay opciones reales sobre la mesa y que Israel puede escoger cualquiera de ellas si elige. Esta es una de las marcas de la predicación honesta. El predicador que minimiza las alternativas adula a la audiencia; el predicador que las nombra honestamente fuerza una decisión real. Josué toma el camino más duro. Le entrega a Israel el menú completo.</p>
+<h4>3. La elección es ejemplar</h4>
+<p>La mitad más citada del versículo viene al último. <em>«Pero yo y mi casa serviremos a Jehová»</em>. Josué no le exige a la asamblea que escoja lo que él mismo no ha escogido ya. No se para sobre terreno neutral y le pide al pueblo que declare una posición. Se para sobre su posición y le pide al pueblo que se le una. Los líderes que le piden a su pueblo que escoja lo que ellos mismos no han escogido son charlatanes. Josué es lo opuesto. Ha escogido, y su casa con él, y desde adentro de su elección ya hecha llama a la asamblea a hacer la misma elección.</p>
+<h4>4. La elección es para toda la familia</h4>
+<p>Y es <em>«yo y mi casa»</em>. La unidad de elección no es la conciencia individual sola; es el hogar. Josué no dice que él ha escogido y sus hijos pueden escoger por su cuenta cuando crezcan. Dice que él y su casa, como una sola unidad de pacto, servirán al SEÑOR. Esa frase ha puesto más niños en la iglesia el domingo por la mañana que cualquier programa en la historia de la iglesia. Wayne enfatiza el principio para los padres y abuelos que leen esta lección: <em>tu casa</em> es parte de <em>tu elección.</em> Puede que no puedas escoger por ellos lo que eventualmente decidirán por sí mismos, pero absolutamente puedes escoger lo que tu casa representa mientras es tu casa. Josué lo hizo. Su casa lo supo. La asamblea lo oyó.</p>
+<h4>5. La elección es rechazable</h4>
+<p>Y finalmente, el versículo de Josué contiene la frase inquietante <em>«si mal os parece servir a Jehová»</em>. Reconoce la posibilidad del rechazo. No pretende que la pretensión del SEÑOR sea tan obviamente buena que nadie pudiera rehusarla. Concede a la asamblea la dignidad del rechazo. Esa es una visión notablemente alta de la responsabilidad humana. El SEÑOR no quiere amantes forzados. Quiere elegidos. La elección tiene que ser real o no es una elección. Josué la enmarca de esa manera y deja que la asamblea responda.</p>
+<p>Los versículos 16 al 18 registran su respuesta. <em>«Lejos sea de nosotros que dejemos a Jehová&hellip; nosotros, pues, también serviremos a Jehová, porque él es nuestro Dios»</em>. La asamblea responde. Josué los presiona de nuevo, aun más duro, en 24:19&ndash;20, advirtiendo que el SEÑOR es un Dios santo y celoso que no perdonará sus rebeliones si se apartan de Él. Reafirman. Levanta una piedra debajo de la encina en Siquem como testigo, y el capítulo termina con el pueblo enviado a su heredad.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">IV. Von Zealand &mdash; "Sire, I Beg Your Pardon"</h3><h3 class="es-only">IV. Von Zealand &mdash; «Sire, le pido perdón»</h3>
+<div class="en-only">
+<p>Wayne's centerpiece illustration for Joshua 24:15 reaches into eighteenth-century Prussia. Frederick the Great's greatest general was a man named Von Zealand. Von Zealand was a Christian. The king was a scoffer. One day the king was making coarse jokes about the Saviour, and the whole place was ringing with the guffaws of laughter from the courtiers and parasites who surrounded him. It was too much for old Von Zealand &mdash; the general who had won the most numerous and the greatest battles for Prussia, who had almost put the crown on the king's brow. The old general, with his German militariness, stood up, and amid the hush of the flatterers, shaking his gray old head solemnly, he said:</p>
+<blockquote>"Sire, you know I have not feared death; you know I have fought for you in thirty-eight battles, and thirty-eight battles I have won; but, sire, my hairs are gray, I am an old man, and I shall soon have to go into the presence of a greater than thee &mdash; the mighty God, who saved me from my sin, the Lord Jesus Christ, whom you are blaspheming against. Sire, I cannot stand to hear my Saviour spoken of as thou hast spoken of him. I salute thee, sire, as an old man, who loves the Saviour, on the edge of eternity."</blockquote>
+<p>And he sat down. Frederick the Great, with a trembling voice, said, <em>"General Von Zealand, I beg your pardon. I beg your pardon."</em> The company dispersed in silence. The king reflected that night, as he never had done before, on the One greater than the great Frederick of Prussia, whom his general reverenced even above his visible sovereign (J. Robertson).</p>
+<p>That is Joshua 24:15 in eighteenth-century uniform. Von Zealand chose his sovereign at the beginning of his Christian life, but he was still choosing his sovereign at the edge of eternity, in front of an earthly king he had served thirty-eight times in battle. <em>As for me and my house, we will serve the LORD.</em> The application Wayne is fond of pressing here is plain: <em>"Stand up for Christ. Be noble in it. You never gain anything by sneaking. Stand up for Jesus. Testify as this man did, and the power of the living Son of God your Saviour will be upon you in your home, in your heart, in the market, in your soul, and in all eternity."</em></p>
+<p>The Von Zealand moment is also a leadership moment. He was the most decorated soldier in the room. He had everything to lose. He had served the king longer than anyone present. And in front of all of them he stood up and said, plainly, that there was a greater Sovereign whose pardon he would soon stand under, and that the king's mockery of that Sovereign was something he could not in conscience hear and stay silent. The king did not punish him. The king begged his pardon. Wayne notes that this is what often happens when a believer chooses honesty in a moment that costs something. The room expects retaliation. What comes instead is, sometimes, an apology &mdash; and almost always, a hush of conscience that lasts for years.</p>
+<p>Joshua at Shechem and Von Zealand in Frederick's hall are doing the same thing across thirty-three centuries. Each of them stands up. Each of them names the alternatives honestly. Each of them takes a position and invites the assembly to take it with him. Each of them is an old man near the end of his service to a visible sovereign, ready to go into the presence of a greater. <em>As for me and my house.</em></p>
+</div>
+<div class="es-only">
+<p>La ilustración central de Wayne para Josué 24:15 alcanza hasta la Prusia del siglo XVIII. El más grande general de Federico el Grande era un hombre llamado Von Zealand. Von Zealand era cristiano. El rey era un burlador. Un día el rey estaba haciendo bromas groseras sobre el Salvador, y todo el lugar resonaba con las carcajadas de los cortesanos y parásitos que lo rodeaban. Fue demasiado para el viejo Von Zealand &mdash; el general que había ganado las más numerosas y las mayores batallas para Prusia, que casi había puesto la corona en la frente del rey. El viejo general, con su militariness alemana, se levantó, y en medio del silencio de los aduladores, sacudiendo solemnemente su vieja cabeza gris, dijo:</p>
+<blockquote>«Sire, usted sabe que no he temido la muerte; usted sabe que he peleado por usted en treinta y ocho batallas, y treinta y ocho batallas he ganado; pero, sire, mis cabellos están grises, soy un anciano, y pronto tendré que ir a la presencia de uno más grande que usted &mdash; el Dios poderoso, que me salvó de mi pecado, el Señor Jesucristo, contra quien usted está blasfemando. Sire, no puedo soportar oír hablar de mi Salvador como usted ha hablado de Él. Lo saludo, sire, como un anciano que ama al Salvador, al borde de la eternidad».</blockquote>
+<p>Y se sentó. Federico el Grande, con voz temblorosa, dijo: <em>«General Von Zealand, le pido perdón. Le pido perdón»</em>. La compañía se dispersó en silencio. El rey reflexionó esa noche, como nunca antes lo había hecho, sobre Aquel más grande que el gran Federico de Prusia, a quien su general reverenciaba aun por encima de su soberano visible (J. Robertson).</p>
+<p>Eso es Josué 24:15 en uniforme del siglo XVIII. Von Zealand escogió su soberano al principio de su vida cristiana, pero todavía estaba escogiendo su soberano al borde de la eternidad, delante de un rey terrenal a quien había servido treinta y ocho veces en batalla. <em>Yo y mi casa serviremos a Jehová.</em> La aplicación que Wayne disfruta apretar aquí es llana: <em>«Levántate por Cristo. Sé noble en ello. Nunca ganas nada escabulléndote. Levántate por Jesús. Testifica como este hombre lo hizo, y el poder del Hijo viviente de Dios tu Salvador estará sobre ti en tu casa, en tu corazón, en el mercado, en tu alma, y en toda eternidad»</em>.</p>
+<p>El momento de Von Zealand es también un momento de liderazgo. Era el soldado más condecorado del cuarto. Tenía todo que perder. Había servido al rey más tiempo que cualquier presente. Y delante de todos ellos se levantó y dijo, llanamente, que había un Soberano mayor bajo cuyo perdón pronto estaría, y que la burla del rey de ese Soberano era algo que no podía en conciencia oír y permanecer en silencio. El rey no lo castigó. El rey le pidió perdón. Wayne nota que esto es lo que a menudo pasa cuando un creyente elige la honestidad en un momento que cuesta algo. El cuarto espera represalia. Lo que viene en cambio es, a veces, una disculpa &mdash; y casi siempre, un silencio de la conciencia que dura años.</p>
+<p>Josué en Siquem y Von Zealand en el salón de Federico están haciendo lo mismo a través de treinta y tres siglos. Cada uno de ellos se levanta. Cada uno de ellos nombra las alternativas honestamente. Cada uno de ellos toma una posición e invita a la asamblea a tomarla con él. Cada uno de ellos es un anciano cerca del fin de su servicio a un soberano visible, listo a ir a la presencia de uno mayor. <em>Yo y mi casa.</em></p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">V. Seven Faith Motifs &mdash; The Doctrinal Summary of Joshua</h3><h3 class="es-only">V. Siete motivos de fe &mdash; El resumen doctrinal de Josué</h3>
+<div class="en-only">
+<p>Wayne pulls a final teaching pattern out of the entire book of Joshua &mdash; seven faith-motifs that thread the ten units we have walked together. They are worth gathering at the capstone because they form a doctrinal summary of the course.</p>
+<h4>1. Faith Believes God Keeps His Promises</h4>
+<p>Wayne mentions Herbert Lockyer's classic devotional <em>All the Promises of the Bible</em>, and notes that the book of Joshua is the on-the-ground proof that the promises Lockyer catalogues actually paid out. God had promised the patriarchs a land. The promise looked impossible for centuries. Israel went to Egypt and was in slavery for four hundred years. But finally God gave them the land that had been promised. Joshua 21:45 is the receipt: <em>"There failed not ought of any good thing which the LORD had spoken." </em> Faith starts here, with the conviction that the God who said it will do it.</p>
+<h4>2. Faith Requires Taking Possession</h4>
+<p>God hands the deed; the believer walks the land. Even in Joshua there had to be a first man to step into the water. There had to be twelve men to circle Jericho carrying the ark, even when they could see no results. Wayne points back to the two and a half tribes who decided to stay on the wrong side of the Jordan. They were shepherds and liked the grassy plains. But as a result they missed many of God's blessings, and were the first to be defeated later when invasions came.</p>
+<p>General Booth, founder of the Salvation Army, used to tell the story of a starving man who received a check from a friend promising to pay him a certain amount of money. He held it up and danced around the room in his glee. His wife looked at him and said, <em>"Poor man, I was afraid this would be too much for him. He has suffered until he is unsettled mentally."</em> The husband replied, <em>"Wife, I am going to have it framed and hang it up. I will have it set to music and we will sing it every day."</em> Booth observed that he could have it framed, and could have it set to music and sing it every day of his life, hour after hour until he died, and it would not do him any good if he did not take the check and demand payment. <em>"It is thus we treat God's promises. They are valueless without we present them to Him and believe them"</em> (J. Wilbur Chapman, <em>Present Day Parables</em>). Joshua 1:3 is a check the LORD wrote: <em>"Every place that the sole of your foot shall tread upon, that have I given unto you."</em> Israel cashed it for seven years across two campaigns. The believer cashes it daily.</p>
+<h4>3. Faith Means Waiting on God</h4>
+<p>When the people of Israel got to the Jordan River they had to wait three days. The officers passed through the camp on the third day and gave the order. The waiting was not wasted; it was preparation. Jesus told the disciples at the Ascension to wait for the power on high. Pentecost did not come on the day the disciples wished it would; it came on the day God appointed. Faith waits with confidence, not with anxiety.</p>
+<h4>4. Faith Means Worshiping God</h4>
+<p>Before moving against Jericho, all the men were circumcised at Gilgal. During that recovery they were vulnerable to attack. Twelve stones of memory were set up at Gilgal as well &mdash; markers of the river crossing. Worship comes before warfare in the book of Joshua. The believer who tries the warfare without the worship will run out of strength before the battle is over.</p>
+<h4>5. Faith Means Meeting God Face to Face</h4>
+<p>When Joshua was walking around Jericho he saw a man in front of him with a sword drawn. He called out, <em>"Are you friend or foe?"</em> The figure said, <em>"No. But I am the commander of the army of the LORD."</em> Joshua fell on his face and asked, <em>"What do you want me to do?"</em> The Captain said, <em>"Take off your shoes, for you are standing on holy ground"</em> (Joshua 5:13&ndash;15). Before any great work can be done for God, the worker must first meet God face to face. Joshua's sandals come off. The campaign begins on holy ground.</p>
+<h4>6. Faith Is Hindered by Sin (Achan)</h4>
+<p>The Achan story in Joshua 7 is the photo-negative of the Jericho story in Joshua 6. Same army. Same general. Same God. Different week. The difference is that one man's hidden sin had broken the covenant covering. Faith fails not because God's promises fail but because hidden sin in the camp breaks the channel through which the promises run. The remedy is the one we walked in Unit 5: ring the bell. Open the hand. The Valley of Achor becomes a door of hope only when the cloak and silver and wedge of gold come out from under the floor of the tent.</p>
+<h4>7. Faith Is Hindered by Lack of Prayer (Gibeon)</h4>
+<p>And the seventh motif is the Gibeonite chapter. Joshua had a divinely-given mechanism for asking the LORD &mdash; the Urim and Thummim in the high priest's breastpiece &mdash; and he did not use it. The lie was deceptive, but the failure was Joshua's. Faith that does not ask is faith running blind. The cure for the next moldy-bread incident is the one James spelled out: <em>"If any of you lacks wisdom, let him ask of God"</em> (James 1:5). Pray first.</p>
+<p>Take those seven motifs together and you have the doctrinal trellis of the entire Joshua Intensive. Promises trusted. Possession taken. Patient waiting. Worship offered. The Captain met. Sin removed. Prayer made. The believer who lives by all seven walks the same campaign Joshua walked, and gets to the same chapter where Joshua got to: <em>I am ready to go the way of all the earth, and as for me and my house, we will serve the LORD.</em></p>
+</div>
+<div class="es-only">
+<p>Wayne saca un último patrón de enseñanza del libro entero de Josué &mdash; siete motivos de fe que enhebran las diez unidades que hemos caminado juntos. Vale la pena reunirlos en el capstone porque forman un resumen doctrinal del curso.</p>
+<h4>1. La fe cree que Dios cumple Sus promesas</h4>
+<p>Wayne menciona el clásico devocional de Herbert Lockyer <em>Todas las promesas de la Biblia</em>, y nota que el libro de Josué es la prueba en el terreno de que las promesas que Lockyer cataloga realmente se cumplieron. Dios había prometido a los patriarcas una tierra. La promesa pareció imposible por siglos. Israel fue a Egipto y estuvo en esclavitud por cuatrocientos años. Pero finalmente Dios les dio la tierra que había sido prometida. Josué 21:45 es el recibo: <em>«No faltó palabra de todas las buenas promesas que Jehová había hecho»</em>. La fe comienza aquí, con la convicción de que el Dios que lo dijo lo hará.</p>
+<h4>2. La fe requiere tomar posesión</h4>
+<p>Dios entrega la escritura; el creyente camina la tierra. Aun en Josué tuvo que haber un primer hombre que pisara el agua. Tuvo que haber doce hombres para rodear Jericó cargando el arca, aun cuando no podían ver resultados. Wayne apunta hacia atrás a las dos tribus y media que decidieron quedarse al lado equivocado del Jordán. Eran pastores y les gustaban las llanuras de pasto. Pero como resultado se perdieron muchas de las bendiciones de Dios, y fueron los primeros en ser derrotados más tarde cuando vinieron las invasiones.</p>
+<p>El General Booth, fundador del Ejército de Salvación, solía contar la historia de un hombre que se moría de hambre y que recibió un cheque de un amigo prometiendo pagarle cierta cantidad de dinero. Lo levantó y bailó alrededor del cuarto en su júbilo. Su esposa lo miró y dijo: <em>«Pobre hombre, temía que esto fuera demasiado para él. Ha sufrido hasta quedar mentalmente trastornado»</em>. El esposo respondió: <em>«Esposa, lo voy a enmarcar y colgar. Voy a ponerle música y lo cantaremos cada día»</em>. Booth observó que podría enmarcarlo, y podría ponerle música y cantarlo cada día de su vida, hora tras hora hasta morir, y no le serviría de nada si no tomaba el cheque y demandaba el pago. <em>«Así tratamos las promesas de Dios. No tienen valor a menos que las presentemos a Él y las creamos»</em> (J. Wilbur Chapman, <em>Parábolas del día presente</em>). Josué 1:3 es un cheque que el SEÑOR escribió: <em>«Yo os he entregado todo lugar que pisare la planta de vuestro pie»</em>. Israel lo cobró por siete años a través de dos campañas. El creyente lo cobra diariamente.</p>
+<h4>3. La fe significa esperar en Dios</h4>
+<p>Cuando el pueblo de Israel llegó al río Jordán tuvo que esperar tres días. Los oficiales pasaron por el campamento al tercer día y dieron la orden. La espera no fue desperdiciada; fue preparación. Jesús les dijo a los discípulos en la Ascensión que esperaran el poder de lo alto. Pentecostés no vino en el día en que los discípulos deseaban; vino en el día que Dios señaló. La fe espera con confianza, no con ansiedad.</p>
+<h4>4. La fe significa adorar a Dios</h4>
+<p>Antes de moverse contra Jericó, todos los hombres fueron circuncidados en Gilgal. Durante esa recuperación eran vulnerables al ataque. Doce piedras de memoria fueron levantadas también en Gilgal &mdash; marcadores del cruce del río. La adoración viene antes que la guerra en el libro de Josué. El creyente que intenta la guerra sin la adoración se quedará sin fuerzas antes de que termine la batalla.</p>
+<h4>5. La fe significa encontrarse con Dios cara a cara</h4>
+<p>Cuando Josué caminaba alrededor de Jericó vio un hombre delante de él con una espada desenvainada. Llamó: <em>«¿Eres amigo o enemigo?»</em> La figura dijo: <em>«No. Mas como Príncipe del ejército de Jehová he venido ahora»</em>. Josué cayó sobre su rostro y preguntó: <em>«¿Qué dice mi Señor a su siervo?»</em> El Capitán dijo: <em>«Quita el calzado de tus pies, porque el lugar donde estás es santo»</em> (Josué 5:13&ndash;15). Antes de que se pueda hacer cualquier gran obra para Dios, el obrero primero debe encontrarse con Dios cara a cara. Las sandalias de Josué se quitan. La campaña comienza en tierra santa.</p>
+<h4>6. La fe es estorbada por el pecado (Acán)</h4>
+<p>La historia de Acán en Josué 7 es el negativo fotográfico de la historia de Jericó en Josué 6. Mismo ejército. Mismo general. Mismo Dios. Distinta semana. La diferencia es que el pecado oculto de un hombre había roto la cobertura del pacto. La fe falla no porque las promesas de Dios fallen sino porque el pecado oculto en el campamento rompe el canal por el cual las promesas corren. El remedio es el que caminamos en la Unidad 5: toca la campana. Abre la mano. El Valle de Acor se vuelve una puerta de esperanza sólo cuando el manto y la plata y la cuña de oro salen de debajo del piso de la tienda.</p>
+<h4>7. La fe es estorbada por la falta de oración (Gabaón)</h4>
+<p>Y el séptimo motivo es el capítulo gabaonita. Josué tenía un mecanismo divinamente dado para preguntar al SEÑOR &mdash; el Urim y Tumim en el pectoral del sumo sacerdote &mdash; y no lo usó. La mentira fue engañosa, pero la falla fue de Josué. La fe que no pregunta es fe corriendo a ciegas. La cura para el próximo incidente del pan mohoso es la que Santiago deletreó: <em>«Si alguno de vosotros tiene falta de sabiduría, pídala a Dios»</em> (Santiago 1:5). Ora primero.</p>
+<p>Toma esos siete motivos juntos y tienes el enrejado doctrinal del Intensivo de Josué entero. Promesas creídas. Posesión tomada. Espera paciente. Adoración ofrecida. El Capitán encontrado. El pecado removido. La oración hecha. El creyente que vive por los siete camina la misma campaña que Josué caminó, y llega al mismo capítulo al que Josué llegó: <em>estoy próximo a ir por el camino de toda la tierra, y yo y mi casa serviremos a Jehová.</em></p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">VI. Joseph's Bones &amp; Joshua's Tomb (Joshua 24:29&ndash;33)</h3><h3 class="es-only">VI. Los huesos de José y la tumba de Josué (Josué 24:29&ndash;33)</h3>
+<div class="en-only">
+<p>The book of Joshua does not end with the choosing speech. It ends with three burials. Joshua dies at one hundred and ten years old and is buried in his own inheritance at Timnath-serah in the hill country of Ephraim (24:29&ndash;30). Eleazar the priest, son of Aaron, dies and is buried in Gibeah, the city given to his son Phinehas in Ephraim (24:33). And in between those two graves is one of the most theologically beautiful sentences in the entire Old Testament:</p>
+<blockquote>"And the bones of Joseph, which the children of Israel brought up out of Egypt, buried they in Shechem, in a parcel of ground which Jacob bought of the sons of Hamor the father of Shechem for an hundred pieces of silver: and it became the inheritance of the children of Joseph." (Joshua 24:32)</blockquote>
+<p>Read what just happened. Joseph died in Egypt in Genesis 50, and on his deathbed he made his brothers swear that when God brought Israel out of Egypt, they would carry his bones up with them to the Promised Land (Genesis 50:25). Israel carried those bones for four hundred years. They carried them through forty years of wilderness wandering. They carried them across the Jordan River. They carried them through Jericho and Ai and the Long Day at Gibeon and the cutting down of the Anakim. They carried them through the seven years of conquest and through the seven years of allotment. And now, finally, at the end of the book of Joshua, those bones are laid in the ground at Shechem &mdash; the very place Jacob, Joseph's father, had bought from the sons of Hamor for a hundred pieces of silver four hundred years earlier.</p>
+<p>Wayne calls verse 32 the place where the wonderful influence of Joshua becomes most visible. The bones did not bury themselves. The carrying did not happen by accident. From the day Israel left Egypt to the day Joshua died, someone always knew where Joseph's coffin was, and someone always made sure it kept moving north. Joshua, in his last days as leader, made sure the four-hundred-year-old promise to a dying patriarch finally received its closing chapter. He buried Joseph's bones in Joseph's father's land, in Joseph's own tribal inheritance, on the very spot where the LORD had first promised the land to Abraham six centuries earlier. The book closes the longest oath in the Old Testament.</p>
+<p>The takeaway for the believer is gentle but firm. God keeps oaths across centuries. The believer's family may not see in this lifetime the full inheritance God has promised. The grandchild may carry the bones one more leg of the journey. But God remembers. He remembered Joseph's coffin for four hundred years. He will remember any oath His people have entered with Him for any number of generations. <em>"There failed not ought of any good thing which the LORD had spoken."</em></p>
+<p>And so the book ends. Joshua dies. Eleazar dies. Joseph's bones come home. The land rests. The next page is the book of Judges, and it will be a darker book, because the next generation will not entirely heed Joshua's warning. But this book closes on a clean note: a life that wholly followed the LORD, a people who chose Him at Shechem, a coffin that finally reached its grave, and a phrase in capital letters across the whole arc of the Old Testament: <em>God keeps His word.</em></p>
+</div>
+<div class="es-only">
+<p>El libro de Josué no termina con el discurso de la elección. Termina con tres entierros. Josué muere a los ciento diez años de edad y es sepultado en su propia heredad en Timnat-sera en la serranía de Efraín (24:29&ndash;30). Eleazar el sacerdote, hijo de Aarón, muere y es sepultado en Gabaa, la ciudad dada a su hijo Finees en Efraín (24:33). Y entre esas dos tumbas está una de las frases más teológicamente hermosas de todo el Antiguo Testamento:</p>
+<blockquote>«Y enterraron en Siquem los huesos de José, que los hijos de Israel habían traído de Egipto, en la parte del campo que Jacob compró de los hijos de Hamor padre de Siquem, por cien piezas de plata; y fue posesión de los hijos de José». (Josué 24:32)</blockquote>
+<p>Lee lo que acaba de pasar. José murió en Egipto en Génesis 50, y en su lecho de muerte hizo que sus hermanos juraran que cuando Dios sacara a Israel de Egipto, llevarían sus huesos con ellos a la Tierra Prometida (Génesis 50:25). Israel cargó esos huesos por cuatrocientos años. Los cargaron a través de cuarenta años de vagar por el desierto. Los cargaron a través del río Jordán. Los cargaron a través de Jericó y Hai y el Día Largo en Gabaón y el corte de los Anaceos. Los cargaron a través de los siete años de conquista y a través de los siete años de reparto. Y ahora, finalmente, al final del libro de Josué, esos huesos son puestos en la tierra en Siquem &mdash; el mismo lugar que Jacob, padre de José, había comprado de los hijos de Hamor por cien piezas de plata cuatrocientos años antes.</p>
+<p>Wayne llama al versículo 32 el lugar donde la maravillosa influencia de Josué se vuelve más visible. Los huesos no se enterraron solos. El cargar no sucedió por accidente. Desde el día que Israel salió de Egipto hasta el día que Josué murió, alguien siempre supo dónde estaba el ataúd de José, y alguien siempre se aseguró de que siguiera moviéndose al norte. Josué, en sus últimos días como líder, se aseguró de que la promesa de cuatrocientos años a un patriarca moribundo finalmente recibiera su capítulo de cierre. Sepultó los huesos de José en la tierra del padre de José, en la heredad tribal misma de José, en el mismo lugar donde el SEÑOR había prometido por primera vez la tierra a Abraham seis siglos antes. El libro cierra el juramento más largo del Antiguo Testamento.</p>
+<p>La enseñanza para el creyente es suave pero firme. Dios cumple juramentos a través de siglos. La familia del creyente puede no ver en esta vida la heredad completa que Dios ha prometido. El nieto puede cargar los huesos un tramo más del viaje. Pero Dios recuerda. Recordó el ataúd de José por cuatrocientos años. Recordará cualquier juramento que Su pueblo haya entrado con Él por cualquier número de generaciones. <em>«No faltó palabra de todas las buenas promesas que Jehová había hecho»</em>.</p>
+<p>Y así termina el libro. Josué muere. Eleazar muere. Los huesos de José vuelven a casa. La tierra descansa. La siguiente página es el libro de los Jueces, y será un libro más oscuro, porque la próxima generación no atenderá enteramente la advertencia de Josué. Pero este libro cierra en una nota limpia: una vida que cumplió siguiendo a Jehová, un pueblo que lo escogió en Siquem, un ataúd que finalmente alcanzó su tumba, y una frase en letras mayúsculas a través de todo el arco del Antiguo Testamento: <em>Dios cumple Su palabra.</em></p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">Closing: As for Me and My House</h3><h3 class="es-only">Cierre: Yo y mi casa</h3>
+<div class="en-only">
+<p>The Joshua Intensive ends where every believer's reading of the Bible eventually has to end &mdash; with a question. Joshua puts it at Shechem under the oak tree. The Holy Spirit puts it now in the hand of the reader closing this last unit. <em>Choose you this day whom ye will serve.</em></p>
+<p>The seven faith motifs lay out the daily shape of the choosing. Believe the promise. Take the possession. Wait when waiting is required. Worship before warfare. Meet the Captain face to face. Deal with hidden sin. Pray first. Joshua walked all seven and finished his life with one sentence over it: <em>he wholly followed the LORD God of Israel.</em> Caleb walked all seven and got Hebron at eighty-five. Von Zealand walked all seven and stopped a king's mockery in mid-laugh. The London waif and the Gibeonite manslayer walked through the same gate &mdash; <em>in His name</em> &mdash; and were welcomed.</p>
+<p>The same gate stands open for the reader of this lesson. The Captain has already drawn His sword. The High Priest has already died and risen. The bones of Joseph are already buried in the inheritance. The Long Day has already shown that the heavens move when prayer is offered. There is nothing left for the believer to do except step forward, take the deed, walk the field, and from inside an already-made choice say, <em>"As for me and my house, we will serve the LORD."</em></p>
+<p>Wesley's hymn was the closing of Unit 9. The closing of Unit 10 is shorter. It is the verse Joshua himself made the closing of his life. Forty-five years after he came back from Kadesh-barnea with Caleb and a minority report, twenty-five years after he led twelve tribes across the Jordan, seven years after the conquest ended and the land rested from war &mdash; on the day he stood under the oak at Shechem and called the assembly to choose &mdash; Joshua said the only thing a man at the end of his service is qualified to say:</p>
+<blockquote>"As for me and my house, we will serve the LORD."</blockquote>
+<p>God grant the same to every believer who has walked these ten units. By His grace, may the same epitaph be ready when our last day comes. <em>He wholly followed the LORD.</em> Amen.</p>
+</div>
+<div class="es-only">
+<p>El Intensivo de Josué termina donde la lectura de la Biblia de cada creyente eventualmente tiene que terminar &mdash; con una pregunta. Josué la pone en Siquem bajo la encina. El Espíritu Santo la pone ahora en la mano del lector cerrando esta última unidad. <em>Escogeos hoy a quién sirváis.</em></p>
+<p>Los siete motivos de fe trazan la forma diaria de la elección. Cree la promesa. Toma la posesión. Espera cuando se requiere esperar. Adora antes de la guerra. Encuéntrate con el Capitán cara a cara. Trata con el pecado oculto. Ora primero. Josué caminó los siete y terminó su vida con una sola sentencia sobre ella: <em>cumplió siguiendo a Jehová Dios de Israel.</em> Caleb caminó los siete y consiguió Hebrón a los ochenta y cinco. Von Zealand caminó los siete y detuvo la burla de un rey en plena risa. El niño londinense y el matador gabaonita caminaron por la misma puerta &mdash; <em>en Su nombre</em> &mdash; y fueron recibidos.</p>
+<p>La misma puerta está abierta para el lector de esta lección. El Capitán ya ha desenvainado Su espada. El Sumo Sacerdote ya ha muerto y resucitado. Los huesos de José ya están sepultados en la heredad. El Día Largo ya ha mostrado que los cielos se mueven cuando se ofrece oración. No queda nada para que el creyente haga sino dar un paso al frente, tomar la escritura, caminar el campo, y desde adentro de una elección ya hecha decir: <em>«Yo y mi casa serviremos a Jehová»</em>.</p>
+<p>El himno de Wesley fue el cierre de la Unidad 9. El cierre de la Unidad 10 es más corto. Es el versículo que Josué mismo hizo el cierre de su vida. Cuarenta y cinco años después de que regresó de Cades-barnea con Caleb y un reporte minoritario, veinticinco años después de que dirigió a doce tribus a través del Jordán, siete años después de que la conquista terminó y la tierra descansó de la guerra &mdash; en el día en que se paró bajo la encina en Siquem y llamó a la asamblea a escoger &mdash; Josué dijo la única cosa que un hombre al fin de su servicio está calificado para decir:</p>
+<blockquote>«Yo y mi casa serviremos a Jehová».</blockquote>
+<p>Dios conceda lo mismo a cada creyente que ha caminado estas diez unidades. Por Su gracia, que el mismo epitafio esté listo cuando llegue nuestro último día. <em>Cumplió siguiendo a Jehová.</em> Amén.</p>
+</div></section>
+
+<section class="exam"><h3 class="en-only">Unit 10 Examination &mdash; 30 Questions (Capstone)</h3><h3 class="es-only">Examen de la Unidad 10 &mdash; 30 Preguntas (Capstone)</h3>
+<p class="en-only"><em>20 multiple-choice + 10 short-answer (keyword). 90% required to pass. Failing the multiple-choice (1–20) locks the exam for 2 minutes; failing the master's-level short answer (21–30) locks it for 15 minutes. After passing, the certificate page will unlock.</em></p>
+<p class="es-only"><em>20 de opción múltiple + 10 de respuesta corta. 90% para aprobar. Reprobar la opción múltiple (1–20) bloquea el examen por 2 minutos; reprobar la respuesta corta de nivel de maestría (21–30) lo bloquea por 15 minutos. Después de aprobar, se desbloqueará la página del certificado.</em></p>
+<div id="mc-questions"></div><div id="kw-questions"></div>
+<div class="exam-controls"><button class="submit-exam" id="submit-btn" type="button">Submit Exam / Enviar Examen</button> <button class="submit-exam" id="reset-btn" type="button" style="background:#8a1f1f;margin-left:8px">Reset / Reiniciar</button><div id="result" style="margin-top:10px;font-weight:bold"></div><div id="mc-banked-notice" style="margin-top:8px;font-size:.9rem;color:#1f6b3b;display:none"></div></div>
+</section>
+</main>
+<footer class="unit-nav"><button id="prev-unit-btn" type="button">&larr; Unit 9 / Unidad 9</button><button id="next-unit-btn" type="button" disabled>Certificate / Certificado &rarr;</button></footer>
+<script>
+// CTS Joshua — Unit 10 CAPSTONE: Choose This Day (Joshua 23-24). Retrofit 2026-05-16.
+// MC L3 audit (Wayne-approved 12 swaps): MC2,4,6,7,9,10,13,14,15,17,18,19.
+// Final unit — redirect target is Certificate, not next unit.
+(function(){
+'use strict';
+
+const UNIT = 10;
+const COURSE = 'josh';
+const NEXT_UNIT_URL = (function(){try{var s=JSON.parse(localStorage.getItem('cts_student')||'null');var t=s&&s.track;if(t==='mdiv')return 'CTSJoshMDivCertificate.html';if(t==='thm')return 'CTSJoshThMCertificate.html';}catch(e){}return 'CTSJoshCertificate.html';})();
+const PREV_UNIT_URL = 'CTSJoshUnit9.html';
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+const langButtons=document.querySelectorAll('.lang-toggle button');
+langButtons.forEach(btn=>{btn.addEventListener('click',()=>{const lang=btn.getAttribute('data-lang');document.body.classList.remove('lang-en','lang-es','lang-both');document.body.classList.add('lang-'+lang);langButtons.forEach(b=>b.classList.toggle('active',b===btn));renderBankedNotice();});});
+
+let student=null;try{student=JSON.parse(localStorage.getItem('cts_student')||'null');}catch(e){student=null;}
+const greetingEl=document.getElementById('greeting');const regWarn=document.getElementById('reg-warn');
+if(student&&student.name){const isEs=document.body.classList.contains('lang-es');greetingEl.textContent=(isEs?'Bienvenido, ':'Welcome, ')+student.name;if(regWarn)regWarn.classList.add('hidden');}else{greetingEl.textContent='';if(regWarn)regWarn.classList.remove('hidden');}
+
+let progress={};try{progress=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'{}');}catch(e){progress={};}
+let unitPassed = !!progress['unit'+UNIT];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const grid=document.getElementById('progress-units');
+for(let n=1;n<=10;n++){const pill=document.createElement('div');pill.className='unit-pill';pill.textContent='U'+n;if(progress['unit'+n])pill.classList.add('done');if(n===UNIT)pill.classList.add('current');if(n>UNIT&&!progress['unit'+(n-1)])pill.classList.add('locked');grid.appendChild(pill);}
+
+const MC=[
+{q_en:"What is the chronological setting of Joshua 23?",q_es:"¿Cuál es el escenario cronológico de Josué 23?",options:{A:{en:"A long time after the LORD had given rest to Israel; Joshua was old and ready to die",es:"Mucho tiempo después de que Jehová diera reposo; Josué era viejo y próximo a morir"},B:{en:"During the conquest of Hazor",es:"Durante la conquista de Hazor"},C:{en:"Before the Jordan crossing",es:"Antes del cruce del Jordán"},D:{en:"At Caleb's request for Hebron",es:"A petición de Caleb por Hebrón"}}},
+{q_en:"Wayne identifies three farewells of Joshua. What is their structure?",q_es:"Wayne identifica tres adioses de Josué. ¿Cuál es su estructura?",options:{A:{en:"Priests, Levites, and warriors only",es:"Sólo sacerdotes, levitas y guerreros"},B:{en:"One speech to all twelve tribes",es:"Un solo discurso a las doce tribus"},C:{en:"Eastern tribes (ch. 22); leaders (ch. 23); all the people at Shechem (ch. 24)",es:"Tribus orientales (cap. 22); líderes (cap. 23); todo el pueblo en Siquem (cap. 24)"},D:{en:"To the Anakim survivors only",es:"Sólo a los sobrevivientes Anaceos"}}},
+{q_en:"Where did Joshua deliver his final farewell to all the people?",q_es:"¿Dónde dio Josué su adiós final a todo el pueblo?",options:{A:{en:"Gilgal",es:"Gilgal"},B:{en:"Hebron",es:"Hebrón"},C:{en:"Shiloh",es:"Silo"},D:{en:"Shechem",es:"Siquem"}}},
+{q_en:"What is theologically significant about Shechem as the location of Joshua's final speech?",q_es:"¿Qué es teológicamente significativo de Siquem como ubicación del último discurso?",options:{A:{en:"It was Egypt's stronghold",es:"Era la fortaleza de Egipto"},B:{en:"Abraham received the first promise of the land there; Jacob buried foreign gods there; Joseph's bones lay in the ground there",es:"Abraham recibió allí la primera promesa de la tierra; Jacob enterró allí dioses extranjeros; los huesos de José yacían allí"},C:{en:"It was Joshua's birthplace",es:"Era el lugar de nacimiento de Josué"},D:{en:"It was a Levitical city",es:"Era una ciudad levítica"}}},
+{q_en:"How does the LORD begin His historical recital in Joshua 24:2?",q_es:"¿Cómo comienza el SEÑOR Su recital histórico en Josué 24:2?",options:{A:{en:"\"Behold the children of Abraham&hellip;\"",es:"«He aquí los hijos de Abraham&hellip;»"},B:{en:"\"From the days of Adam&hellip;\"",es:"«Desde los días de Adán&hellip;»"},C:{en:"\"You alone have I chosen\"",es:"«Sólo a ti he escogido»"},D:{en:"\"Your fathers dwelt on the other side of the flood&hellip; and they served other gods\"",es:"«Vuestros padres habitaron antiguamente al otro lado del río&hellip; y servían a dioses extraños»"}}},
+{q_en:"What two-word transition opens Joshua 24:14?",q_es:"¿Qué transición de dos palabras abre Josué 24:14?",options:{A:{en:"\"Behold then\"",es:"«He aquí pues»"},B:{en:"\"Now therefore\"",es:"«Ahora, pues»"},C:{en:"\"Hear ye\"",es:"«Oíd»"},D:{en:"\"And finally\"",es:"«Y finalmente»"}}},
+{q_en:"What is the famous challenge Joshua issues in 24:15?",q_es:"¿Cuál es el famoso desafío que Josué emite en 24:15?",options:{A:{en:"\"Cross over the Jordan again\"",es:"«Cruzad de nuevo el Jordán»"},B:{en:"\"Build me an altar at Shiloh\"",es:"«Edifícame un altar en Silo»"},C:{en:"\"Forsake the Anakim\"",es:"«Olvidad a los Anaceos»"},D:{en:"\"Choose you this day whom ye will serve&hellip; but as for me and my house, we will serve the LORD\"",es:"«Escogeos hoy a quién sirváis&hellip; pero yo y mi casa serviremos a Jehová»"}}},
+{q_en:"Wayne lists five qualities of Joshua's challenge in 24:15. Which is NOT one of them?",q_es:"Wayne enumera cinco cualidades del desafío. ¿Cuál NO es una de ellas?",options:{A:{en:"It can be deferred to the next generation",es:"Puede ser diferida a la siguiente generación"},B:{en:"It is daily",es:"Es diaria"},C:{en:"It is honest about live alternatives",es:"Es honesta sobre alternativas vivas"},D:{en:"It is exemplary &mdash; Joshua chose first",es:"Es ejemplar &mdash; Josué escogió primero"}}},
+{q_en:"Who was Von Zealand?",q_es:"¿Quién era Von Zealand?",options:{A:{en:"A Dutch reformer",es:"Un reformador holandés"},B:{en:"Frederick the Great's greatest general, who rebuked the king for blaspheming Christ",es:"El más grande general de Federico el Grande, que reprendió al rey por blasfemar a Cristo"},C:{en:"A British missionary to India",es:"Un misionero británico a la India"},D:{en:"A Confederate chaplain",es:"Un capellán confederado"}}},
+{q_en:"How many battles had Von Zealand won for Prussia, by his own count?",q_es:"¿Cuántas batallas había ganado Von Zealand para Prusia, según su propia cuenta?",options:{A:{en:"Thirty-eight",es:"Treinta y ocho"},B:{en:"Twelve",es:"Doce"},C:{en:"Twenty-four",es:"Veinticuatro"},D:{en:"One hundred",es:"Cien"}}},
+{q_en:"What did Frederick the Great say after Von Zealand's stand?",q_es:"¿Qué dijo Federico el Grande después de la postura de Von Zealand?",options:{A:{en:"\"Have him removed\"",es:"«Que se lo lleven»"},B:{en:"He laughed louder",es:"Se rió más fuerte"},C:{en:"He demoted the general",es:"Degradó al general"},D:{en:"\"General Von Zealand, I beg your pardon. I beg your pardon\"",es:"«General Von Zealand, le pido perdón. Le pido perdón»"}}},
+{q_en:"In Wayne's seven faith-motifs from Joshua, what is the first?",q_es:"En los siete motivos de fe de Wayne, ¿cuál es el primero?",options:{A:{en:"Faith believes God keeps His promises",es:"La fe cree que Dios cumple Sus promesas"},B:{en:"Faith fights wars",es:"La fe pelea guerras"},C:{en:"Faith builds altars",es:"La fe edifica altares"},D:{en:"Faith memorizes scripture",es:"La fe memoriza la Escritura"}}},
+{q_en:"What devotional book does Wayne mention as a catalog of God's promises?",q_es:"¿Qué libro devocional menciona Wayne como catálogo de las promesas de Dios?",options:{A:{en:"Herbert Lockyer, \"All the Promises of the Bible\"",es:"Herbert Lockyer, «Todas las promesas de la Biblia»"},B:{en:"Foxe's Book of Martyrs",es:"Libro de los Mártires de Foxe"},C:{en:"Matthew Henry, \"Commentary on the Whole Bible\"",es:"Matthew Henry, «Comentario de toda la Biblia»"},D:{en:"Oswald Chambers, \"My Utmost\"",es:"Oswald Chambers, «En pos de lo Supremo»"}}},
+{q_en:"In Booth's framed-check parable, what was the man's mistake?",q_es:"En la parábola del cheque enmarcado de Booth, ¿cuál fue el error del hombre?",options:{A:{en:"He spent the money too quickly",es:"Gastó el dinero demasiado rápido"},B:{en:"He framed and admired the check but never cashed it",es:"Enmarcó y admiró el cheque pero nunca lo cobró"},C:{en:"He forgot where he put it",es:"Olvidó dónde lo puso"},D:{en:"He gave the check away",es:"Regaló el cheque"}}},
+{q_en:"Which two-and-a-half tribes does Wayne note as missing many blessings by staying east of the Jordan?",q_es:"¿Cuáles dos tribus y media nota Wayne que perdieron bendiciones al quedarse al oriente?",options:{A:{en:"Ephraim and the half-tribe of Manasseh",es:"Efraín y la media tribu de Manasés"},B:{en:"Levi, Asher, and Naphtali",es:"Leví, Aser y Neftalí"},C:{en:"Judah, Benjamin, and Simeon",es:"Judá, Benjamín y Simeón"},D:{en:"Reuben, Gad, and the half-tribe of Manasseh",es:"Rubén, Gad y la media tribu de Manasés"}}},
+{q_en:"Whose bones were buried in Shechem at the close of the book of Joshua (24:32)?",q_es:"¿Los huesos de quién fueron sepultados en Siquem al cierre del libro (24:32)?",options:{A:{en:"Joseph's",es:"De José"},B:{en:"Moses'",es:"De Moisés"},C:{en:"Eleazar's",es:"De Eleazar"},D:{en:"Aaron's",es:"De Aarón"}}},
+{q_en:"How long had Israel been carrying Joseph's bones before they were buried at Shechem?",q_es:"¿Cuánto tiempo había estado Israel cargando los huesos de José antes de ser sepultados?",options:{A:{en:"About four hundred years (since Genesis 50)",es:"Aproximadamente cuatrocientos años (desde Génesis 50)"},B:{en:"Forty years",es:"Cuarenta años"},C:{en:"Forty days",es:"Cuarenta días"},D:{en:"One year",es:"Un año"}}},
+{q_en:"How old was Joshua when he died (24:29)?",q_es:"¿Cuántos años tenía Josué al morir (24:29)?",options:{A:{en:"Seventy",es:"Setenta"},B:{en:"Eighty-five",es:"Ochenta y cinco"},C:{en:"One hundred and ten",es:"Ciento diez"},D:{en:"Ninety-nine",es:"Noventa y nueve"}}},
+{q_en:"Where was Joshua buried?",q_es:"¿Dónde fue sepultado Josué?",options:{A:{en:"Gilgal",es:"Gilgal"},B:{en:"Hebron",es:"Hebrón"},C:{en:"Shechem",es:"Siquem"},D:{en:"In his own inheritance, Timnath-serah in mount Ephraim",es:"En su propia heredad, Timnat-sera en el monte de Efraín"}}},
+{q_en:"What single verdict captures both Caleb's life and Joshua's life across the book?",q_es:"¿Qué veredicto único captura tanto la vida de Caleb como la de Josué en el libro?",options:{A:{en:"\"He was a mighty warrior\"",es:"«Era un poderoso guerrero»"},B:{en:"\"He wholly followed the LORD God of Israel\"",es:"«Cumplió siguiendo a Jehová Dios de Israel»"},C:{en:"\"He led the conquest faithfully\"",es:"«Lideró fielmente la conquista»"},D:{en:"\"He prayed without ceasing\"",es:"«Oraba sin cesar»"}}}
+];
+const KEY=['A','C','D','B','D','B','D','A','B','A','D','C','A','B','D','A','A','C','D','B'];
+
+const KW=[
+{q_en:"State Wayne's three-fold farewell structure of Joshua's last speeches.",q_es:"Enuncia la estructura triple de los adioses de Josué.",
+ kw_en:['three','farewell','leader','people','shechem','serve','eastern','speech'], kw_es:['tres','desped','líder','pueblo','siquem','servir','oriental','discurso'],
+ modelEn:"Wayne lays out Joshua's farewell in a threefold structure that mirrors Moses' threefold farewell in Deuteronomy. First, Joshua bids farewell to the eastern tribes in chapter 22, the altar of witness. Second, he bids farewell to the leaders, the elders, judges, and officers, in chapter 23. Third, he bids farewell to all the people at Shechem in chapter 24. The purpose of all three speeches is the same: to bring the people to resolve to serve the LORD, climaxing in the challenge, choose you this day whom you will serve.", modelEs:"Wayne expone la despedida de Josué en una estructura triple que refleja la despedida triple de Moisés en Deuteronomio. Primero, Josué se despide de las tribus orientales en el capítulo 22, el altar del testimonio. Segundo, se despide de los líderes, los ancianos, jueces y oficiales, en el capítulo 23. Tercero, se despide de todo el pueblo en Siquem en el capítulo 24. El propósito de los tres discursos es el mismo: llevar al pueblo a resolver servir a Jehová, culminando en el desafío, escogeos hoy a quién serviréis."},
+{q_en:"Explain the significance of Shechem as the location for Joshua's final speech.",q_es:"Explica el significado de Siquem como ubicación del último discurso.",
+ kw_en:['shechem','abraham','covenant','history','faithfulness','choose','joseph','renew'], kw_es:['siquem','abraham','pacto','histor','fidel','escog','josé','renov'],
+ modelEn:"Shechem was the fitting place for Joshua's final speech because it was saturated with covenant history. It was where Abraham first received God's promise of the land, where Jacob buried his foreign gods, and where Joshua had earlier renewed the covenant at Ebal and Gerizim. At Shechem Joshua rehearses the whole story of God's faithfulness from Abraham to the present day, then calls the people to choose whom they will serve. Fittingly, Joseph's bones are buried at Shechem too; the place of covenant memory becomes the place of covenant decision.", modelEs:"Siquem era el lugar idóneo para el discurso final de Josué porque estaba saturado de historia del pacto. Fue donde Abraham recibió primero la promesa de la tierra, donde Jacob enterró sus dioses ajenos, y donde Josué antes había renovado el pacto en Ebal y Gerizim. En Siquem Josué repasa toda la historia de la fidelidad de Dios desde Abraham hasta el día presente, luego llama al pueblo a escoger a quién servirán. Apropiadamente, los huesos de José están sepultados en Siquem también; el lugar de la memoria del pacto se vuelve el lugar de la decisión del pacto."},
+{q_en:"Describe Joshua's challenge in 24:15 and the five qualities Wayne identifies.",q_es:"Describe el desafío de Josué y las cinco cualidades que Wayne identifica.",
+ kw_en:['choose','daily','honest','exemplary','family','reject','serve','house'], kw_es:['escog','diari','honest','ejemplar','familia','rechaz','servir','casa'],
+ modelEn:"Joshua's challenge in 24:15 is, Choose you this day whom you will serve, but as for me and my house, we will serve the LORD. Wayne identifies five qualities of this choice. First, it is daily, since this day is emphatic, a decision made fresh each morning. Second, it is honest, for Joshua names the real alternatives, the gods of Mesopotamia, Egypt, and the Amorites, without softening them. Third, it is exemplary, for Joshua has already chosen and calls the people to join him. Fourth, it is family-wide, me and my house, the household as one unit. Fifth, it is rejectable, if it seem evil unto you, granting the dignity of refusal.", modelEs:"El desafío de Josué en 24:15 es: Escogeos hoy a quién serviréis, pero yo y mi casa serviremos a Jehová. Wayne identifica cinco cualidades de esta elección. Primera, es diaria, pues hoy es enfático, una decisión tomada fresca cada mañana. Segunda, es honesta, pues Josué nombra las alternativas reales, los dioses de Mesopotamia, Egipto y los amorreos, sin suavizarlas. Tercera, es ejemplar, pues Josué ya ha escogido y llama al pueblo a unírsele. Cuarta, es familiar, yo y mi casa, el hogar como una unidad. Quinta, es rechazable, si os parece mal, concediendo la dignidad del rechazo."},
+{q_en:"Tell the Von Zealand story and what it teaches about standing up for Christ.",q_es:"Cuenta la historia de Von Zealand y lo que enseña.",
+ kw_en:['zealand','frederick','general','blasphem','savio','pardon','silent','stand'], kw_es:['zealand','federico','general','blasfem','salvador','perdón','callad','defender'],
+ modelEn:"Wayne's centerpiece illustration reaches into eighteenth-century Prussia. Frederick the Great's greatest general was Von Zealand, a Christian. One day the king was making coarse jokes about the Saviour while his courtiers roared with laughter. It was too much for old Von Zealand. He rose and said he would soon stand before a greater than the king, the mighty God, the Lord Jesus Christ, whom the king was blaspheming, and that he could not bear to hear his Saviour spoken of so. He saluted the king as an old man on the edge of eternity and sat down. Frederick, with a trembling voice, fell silent and said, General Von Zealand, I beg your pardon. The lesson: stand up for Christ.", modelEs:"La ilustración central de Wayne llega a la Prusia del siglo dieciocho. El mayor general de Federico el Grande era Von Zealand, un cristiano. Un día el rey hacía bromas groseras sobre el Salvador mientras sus cortesanos reían a carcajadas. Fue demasiado para el viejo Von Zealand. Se levantó y dijo que pronto estaría ante uno mayor que el rey, el Dios poderoso, el Señor Jesucristo, a quien el rey estaba blasfemando, y que no podía soportar oír hablar así de su Salvador. Saludó al rey como un anciano al borde de la eternidad y se sentó. Federico, con voz temblorosa, se quedó callado y dijo: General Von Zealand, le pido perdón. La lección: hay que defender a Cristo."},
+{q_en:"Identify Wayne's seven faith-motifs from the book of Joshua.",q_es:"Identifica los siete motivos de fe de Wayne.",
+ kw_en:['seven','faith','promise','possession','wait','worship','sin','prayer'], kw_es:['siete','fe','promesa','posesi','esper','adora','pecado','oración'],
+ modelEn:"Wayne pulls seven faith-motifs out of the entire book of Joshua. First, faith in God's promises, trusting the I have given. Second, faith taking possession, going in to occupy what is promised. Third, faith waiting, the long obedience of made war a long time. Fourth, faith worshiping, falling before the Captain on holy ground. Fifth, faith meeting God face to face. Sixth, faith hindered by sin, Achan in the tent. Seventh, faith hindered by lack of prayer, Ai attacked without asking God. Together the seven trace the whole life of faith across the book.", modelEs:"Wayne saca siete motivos de fe del libro entero de Josué. Primero, la fe en las promesas de Dios, confiar en el Yo he entregado. Segundo, la fe tomando posesión, entrar a ocupar lo prometido. Tercero, la fe esperando, la larga obediencia de hizo guerra mucho tiempo. Cuarto, la fe adorando, caer ante el Capitán en tierra santa. Quinto, la fe encontrándose con Dios cara a cara. Sexto, la fe estorbada por el pecado, Acán en la tienda. Séptimo, la fe estorbada por la falta de oración, Hai atacada sin preguntar a Dios. Juntos los siete trazan toda la vida de fe a través del libro."},
+{q_en:"Tell the General Booth framed-check parable and its application.",q_es:"Cuenta la parábola del cheque enmarcado de Booth.",
+ kw_en:['booth','check','frame','promise','cash','starving','music','claim'], kw_es:['booth','cheque','enmarcar','promesa','cobrar','hambr','música','reclamar'],
+ modelEn:"General Booth of the Salvation Army told of a starving man who received a check from a friend promising to pay him a sum of money. Overjoyed, he danced about; then he said he would have the check framed, hung on the wall, and set to music to sing every day. Booth observed that he could frame it and sing it forever, but it would do him no good until he took it and cashed it. So with God's promises: many believers admire and frame the promise without ever claiming it. A promise must be cashed, not just hung on the wall.", modelEs:"El General Booth del Ejército de Salvación contó de un hombre hambriento que recibió un cheque de un amigo prometiéndole pagarle una suma de dinero. Lleno de gozo, bailó; luego dijo que enmarcaría el cheque, lo colgaría en la pared y lo pondría en música para cantarlo cada día. Booth observó que podía enmarcarlo y cantarlo para siempre, pero no le serviría de nada hasta que lo tomara y lo cobrara. Así con las promesas de Dios: muchos creyentes admiran y enmarcan la promesa sin nunca reclamarla. Una promesa debe cobrarse, no solo colgarse en la pared."},
+{q_en:"Explain why the two-and-a-half eastern tribes missed many of God's blessings.",q_es:"Explica por qué las dos tribus y media perdieron bendiciones.",
+ kw_en:['eastern','tribe','jordan','bless','miss','shepherd','plain','defeat'], kw_es:['oriental','tribu','jordán','bendic','perdi','pastor','llano','derrot'],
+ modelEn:"The two-and-a-half eastern tribes, Reuben, Gad, and half-Manasseh, chose to settle on the wrong side of the Jordan. They were shepherds who liked the grassy plains east of the river, so they asked for that land rather than crossing fully into the inheritance. As a result they missed many of God's blessings in the heartland, were cut off from the central place of worship, and were the first tribes to be defeated and carried away when later invasions came. Choosing the comfortable plains over the full inheritance cost them dearly.", modelEs:"Las dos tribus y media orientales, Rubén, Gad y media Manasés, escogieron asentarse en el lado equivocado del Jordán. Eran pastores a quienes gustaban los llanos de pasto al oriente del río, así que pidieron esa tierra en vez de cruzar plenamente a la heredad. Como resultado perdieron muchas de las bendiciones de Dios en el corazón de la tierra, quedaron lejos del lugar central de adoración, y fueron las primeras tribus en ser derrotadas y llevadas cautivas cuando vinieron invasiones posteriores. Escoger los cómodos llanos sobre la heredad plena les costó caro."},
+{q_en:"Describe what happened to Joseph's bones and why their burial closes the book.",q_es:"Describe lo que pasó con los huesos de José y por qué su entierro cierra el libro.",
+ kw_en:['joseph','bones','egypt','shechem','buried','promise','jacob','inheritance'], kw_es:['josé','hueso','egipto','siquem','sepult','promesa','jacob','heredad'],
+ modelEn:"Joseph's bones close the book. Dying in Egypt in Genesis 50, Joseph made Israel swear to carry his bones up when God brought them to the promised land. For four hundred years the embalmed coffin waited; Israel carried it through the Exodus and the wilderness and the conquest. Now, in Joshua 24:32, the bones of Joseph are buried at Shechem, in the parcel of ground Jacob had bought, and it became the inheritance of Joseph's children. A promise made on a deathbed centuries earlier is kept to the letter; the book closes on God's faithfulness to His word.", modelEs:"Los huesos de José cierran el libro. Al morir en Egipto en Génesis 50, José hizo jurar a Israel que llevaría sus huesos cuando Dios los trajera a la tierra prometida. Por cuatrocientos años esperó el ataúd embalsamado; Israel lo cargó por el Éxodo, el desierto y la conquista. Ahora, en Josué 24:32, los huesos de José son sepultados en Siquem, en la parcela que Jacob había comprado, y se volvió la heredad de los hijos de José. Una promesa hecha en un lecho de muerte siglos antes se cumple al pie de la letra; el libro cierra sobre la fidelidad de Dios a Su palabra."},
+{q_en:"Summarize Joshua's life-verdict and how it should apply to the believer.",q_es:"Resume el veredicto de la vida de Josué y cómo aplica al creyente.",
+ kw_en:['serve','lord','house','verdict','faithful','fought','choose','believe'], kw_es:['servir','jehová','casa','veredicto','fiel','pelea','escog','creyente'],
+ modelEn:"Joshua's life-verdict is summed up in his own words: as for me and my house, we will serve the LORD. The whole book testifies that the LORD fought for him; his life had one explanation, and it was not Joshua but the faithful God who kept every promise. The verdict on Joshua is that he served the LORD wholly to the end and led his house to do the same. The application to the believer is direct: like Joshua, each one must choose this day to serve the LORD, and lead his own house in faithful service, trusting the God who fights for His people.", modelEs:"El veredicto de la vida de Josué se resume en sus propias palabras: yo y mi casa serviremos a Jehová. Todo el libro testifica que Jehová peleó por él; su vida tuvo una sola explicación, y no fue Josué sino el Dios fiel que cumplió toda promesa. El veredicto sobre Josué es que sirvió a Jehová por completo hasta el fin y guió a su casa a hacer lo mismo. La aplicación al creyente es directa: como Josué, cada uno debe escoger hoy servir a Jehová, y guiar su propia casa en servicio fiel, confiando en el Dios que pelea por Su pueblo."},
+{q_en:"Explain how the Joshua Intensive's seven faith-motifs form a doctrinal summary of the course.",q_es:"Explica cómo los siete motivos de fe forman un resumen doctrinal.",
+ kw_en:['seven','faith','motif','doctrin','summary','course','promise','possession'], kw_es:['siete','fe','motivo','doctrin','resum','curso','promesa','posesi'],
+ modelEn:"The seven faith-motifs Wayne draws from Joshua serve as the doctrinal summary of the whole Intensive. Faith in God's promises is justification by trusting the I have given; faith taking possession is sanctification, walking in what is already ours; faith waiting is endurance; faith worshiping is the priority of God's presence; faith meeting God face to face is consecration; faith hindered by sin and faith hindered by lack of prayer are the two great obstacles. Together the seven motifs summarize the doctrine the course has taught, from the Jordan crossing to Joshua's farewell.", modelEs:"Los siete motivos de fe que Wayne saca de Josué sirven como el resumen doctrinal de todo el Intensivo. La fe en las promesas de Dios es la justificación por confiar en el Yo he entregado; la fe tomando posesión es la santificación, andar en lo que ya es nuestro; la fe esperando es perseverancia; la fe adorando es la prioridad de la presencia de Dios; la fe encontrándose con Dios cara a cara es consagración; la fe estorbada por el pecado y por la falta de oración son los dos grandes obstáculos. Juntos los siete motivos resumen la doctrina que el curso ha enseñado, del cruce del Jordán al adiós de Josué."}
+];
+
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill('');
+try{const st=JSON.parse(localStorage.getItem(STATE_KEY)||'{}');if(Array.isArray(st.mcAnswers)&&st.mcAnswers.length===20)mcAnswers=st.mcAnswers;if(Array.isArray(st.kwAnswers)&&st.kwAnswers.length===10)kwAnswers=st.kwAnswers;}catch(e){}
+function saveState(){try{localStorage.setItem(STATE_KEY,JSON.stringify({mcAnswers,kwAnswers}));}catch(e){}}
+
+const mcc=document.getElementById('mc-questions');
+function renderMC(){
+  mcc.innerHTML='';
+  MC.forEach((q,idx)=>{
+    const n=idx+1;
+    const div=document.createElement('div');
+    div.className='question';
+    const fb='<div class="mc-fb" id="mcfb'+n+'" style="margin-top:6px;font-size:.9rem"></div>';
+    let h='<p class="q"><strong>'+n+'.</strong> <span class="en-only">'+q.q_en+'</span><span class="es-only">'+q.q_es+'</span></p><div class="options">';
+    ['A','B','C','D'].forEach(L=>{
+      const o=q.options[L];
+      const checked = (mcAnswers[idx]===L) ? ' checked' : '';
+      const disabled = mcPreviouslyPassed ? ' disabled' : '';
+      h+='<label><input type="radio" name="mc'+n+'" value="'+L+'"'+checked+disabled+'> <strong>'+L+'.</strong> <span class="en-only">'+o.en+'</span><span class="es-only">'+o.es+'</span></label>';
+    });
+    h+='</div>'+fb;
+    div.innerHTML=h;
+    mcc.appendChild(div);
+    if(mcAnswers[idx]) showMCFeedback(idx, mcAnswers[idx]);
+    div.querySelectorAll('input[type=radio]').forEach(r=>{
+      r.addEventListener('change',()=>{
+        if(mcPreviouslyPassed) return;
+        mcAnswers[idx]=r.value;
+        saveState();
+        showMCFeedback(idx, r.value);
+      });
+    });
+  });
+}
+function showMCFeedback(idx, picked){
+  const fb=document.getElementById('mcfb'+(idx+1));
+  if(!fb) return;
+  const correct = KEY[idx];
+  if(picked === correct){
+    fb.style.color = '#1f6b3b';
+    fb.innerHTML = '<span class="en-only">✓ Correct!</span><span class="es-only">✓ ¡Correcto!</span>';
+  } else {
+    fb.style.color = '#8a1f1f';
+    fb.innerHTML = '<span class="en-only">✗ Incorrect. Correct: '+correct+'.</span><span class="es-only">✗ Incorrecto. Correcta: '+correct+'.</span>';
+  }
+}
+
+const kwc=document.getElementById('kw-questions');
+function renderKW(){
+  kwc.innerHTML='';
+  KW.forEach((q,idx)=>{
+    const n=21+idx;
+    const div=document.createElement('div');
+    div.className='question';
+    div.innerHTML='<p class="q"><strong>'+n+'.</strong> <span class="en-only">'+q.q_en+'</span><span class="es-only">'+q.q_es+'</span></p><textarea id="kw'+(idx+1)+'" rows="3" placeholder="Your answer / Tu respuesta..." aria-label="Your answer / Tu respuesta..."></textarea>'+'<div class="js-model-box" style="display:none;margin-top:10px;padding:10px 12px;background:#fbf3d5;border:1px solid #d4af37;border-radius:8px;"><strong><span class="en-only">Model answer — study this</span><span class="es-only">Respuesta modelo — estúdiela</span></strong><br><span class="en-only">'+q.modelEn+'</span><span class="es-only">'+q.modelEs+'</span></div>' ;
+    kwc.appendChild(div);
+    const ta = div.querySelector('textarea');
+    ta.value = kwAnswers[idx] || '';
+    ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+  });
+}
+
+renderMC();
+renderKW();
+
+const submitBtn=document.getElementById('submit-btn');
+const resetBtn=document.getElementById('reset-btn');
+const resultEl=document.getElementById('result');
+const bankedEl=document.getElementById('mc-banked-notice');
+const nextBtn=document.getElementById('next-unit-btn');
+const prevBtn=document.getElementById('prev-unit-btn');
+if(progress['unit'+UNIT])nextBtn.disabled=false;
+
+function renderBankedNotice(){
+  const isEs=document.body.classList.contains('lang-es');
+  if(mcPreviouslyPassed && !unitPassed){
+    bankedEl.style.display='block';
+    bankedEl.innerHTML = isEs
+      ? '✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10).'
+      : '✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).';
+  } else {
+    bankedEl.style.display='none';
+  }
+}
+
+function checkLockouts(){
+  const isEs=document.body.classList.contains('lang-es');
+  const now=Date.now();
+  const fullLock=parseInt(localStorage.getItem(FULL_LOCK_KEY)||'0',10);
+  const saLock=parseInt(localStorage.getItem(SA_LOCK_KEY)||'0',10);
+  if(unitPassed){
+    submitBtn.disabled=true;
+    resultEl.style.color='#1f6b3b';
+    resultEl.textContent = isEs ? '✓ Unidad aprobada. Haga clic en Certificado.' : '✓ Unit passed. Click Certificate.';
+    renderBankedNotice();
+    return true;
+  }
+  if(now<fullLock){
+    const m=Math.ceil((fullLock-now)/60000);
+    submitBtn.disabled=true;
+    resultEl.style.color='#8a1f1f';
+    resultEl.textContent = isEs ? '⏰ Bloqueado. Espera '+m+' min.' : '⏰ Locked. Wait '+m+' min.';
+    renderBankedNotice();
+    setTimeout(checkLockouts,30000);
+    return false;
+  }
+  if(mcPreviouslyPassed && now<saLock){
+    const m=Math.ceil((saLock-now)/60000);
+    submitBtn.disabled=true;
+    resultEl.style.color='#8a1f1f';
+    resultEl.textContent = isEs ? '⏰ MC ✓ aprobado. Sección SA bloqueada. Espera '+m+' min.' : '⏰ MC ✓ passed. SA section locked. Wait '+m+' min.';
+    renderBankedNotice();
+    setTimeout(checkLockouts,30000);
+    return false;
+  }
+  submitBtn.disabled=false;
+  resultEl.textContent='';
+  renderBankedNotice();
+  return true;
+}
+
+function gradeMC(){let c=0;for(let i=0;i<20;i++){if(mcAnswers[i]===KEY[i])c++;}return c;}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA(){
+  const isEs=document.body.classList.contains('lang-es');
+  let c=0;
+  for(let i=0;i<10;i++){
+    const ans=(kwAnswers[i]||'').toLowerCase();
+    if(ans.length < 60) continue;
+    const kws = isEs ? KW[i].kw_es : KW[i].kw_en;
+    let hits=0;
+    kws.forEach(k=>{ if(kwHit(ans,k)) hits++; });
+    if(hits >= 2) c++;
+  }
+  return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both graded on MC AND SA. Route grading through this.
+function isMastersLevel(track){ return track === 'mdiv' || track === 'thm'; }
+
+function passUnit(message){
+  progress['unit'+UNIT]=true;
+  localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
+  unitPassed=true;
+  resultEl.style.color='#1f6b3b';
+  resultEl.textContent=message;
+  nextBtn.disabled=false;
+  const pills=grid.querySelectorAll('.unit-pill');
+  if(pills[UNIT-1]){pills[UNIT-1].classList.add('done');pills[UNIT-1].classList.remove('current');}
+}
+
+submitBtn.addEventListener('click',()=>{
+  if(!checkLockouts()) return;
+  if(unitPassed) return;
+  if(!student || !student.name){
+    alert(document.body.classList.contains('lang-es') ? 'Por favor regístrese primero en la Unidad 1.' : 'Please register on Unit 1 first.');
+    return;
+  }
+  const isEs=document.body.classList.contains('lang-es');
+  const track=(student && student.track) || 'certificate';
+  document.querySelectorAll('.js-model-box').forEach(function(e){ e.style.display='block'; });
+  const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+  const mcOk = mcScore >= 18;
+
+  if(!isMastersLevel(track)){ // certificate / non-Masters: MC only
+    if(mcOk){
+      localStorage.setItem(MC_PASS_KEY,'true');
+      mcPreviouslyPassed=true;
+      passUnit(isEs ? '✓ ¡APROBADO! '+mcScore+'/20. Curso completo. Abriendo Certificado en 3 segundos…' : '✓ PASSED! '+mcScore+'/20. Course complete. Opening Certificate in 3 seconds…');
+    } else {
+      localStorage.setItem(FULL_LOCK_KEY, String(Date.now()+2*60*1000));
+      resultEl.style.color='#8a1f1f';
+      resultEl.textContent = isEs ? '✗ Reprobado: '+mcScore+'/20 (se requiere 18). Bloqueado 2 minutos.' : '✗ Failed: '+mcScore+'/20 (need 18). Locked 2 minutes.';
+      checkLockouts();
+    }
+    return;
+  }
+
+  const saScore = gradeSA();
+  const saOk = saScore >= 9;
+
+  if(mcPreviouslyPassed){
+    if(saOk){
+      passUnit(isEs ? '✓ ¡APROBADO! MC ✓ banco + SA '+saScore+'/10. Curso completo. Abriendo Certificado en 3 segundos…' : '✓ PASSED! MC ✓ banked + SA '+saScore+'/10. Course complete. Opening Certificate in 3 seconds…');
+    } else {
+      localStorage.setItem(SA_LOCK_KEY, String(Date.now()+15*60*1000));
+      resultEl.style.color='#8a1f1f';
+      resultEl.textContent = isEs ? '✗ MC ✓ permanece aprobado. SA reprobada: '+saScore+'/10 (se requiere 9). Sección SA bloqueada 15 min.' : '✗ MC ✓ stays passed. SA failed: '+saScore+'/10 (need 9). SA section locked 15 min.';
+      checkLockouts();
+    }
+    return;
+  }
+
+  if(mcOk && saOk){
+    localStorage.setItem(MC_PASS_KEY,'true');
+    mcPreviouslyPassed=true;
+    passUnit(isEs ? '✓ ¡APROBADO! MC '+mcScore+'/20 + SA '+saScore+'/10. Curso completo. Abriendo Certificado en 3 segundos…' : '✓ PASSED! MC '+mcScore+'/20 + SA '+saScore+'/10. Course complete. Opening Certificate in 3 seconds…');
+  } else if(mcOk && !saOk){
+    localStorage.setItem(MC_PASS_KEY,'true');
+    mcPreviouslyPassed=true;
+    localStorage.setItem(SA_LOCK_KEY, String(Date.now()+15*60*1000));
+    renderMC();
+    resultEl.style.color='#8a1f1f';
+    resultEl.textContent = isEs ? 'MC '+mcScore+'/20 ✓ aprobado y guardado. SA '+saScore+'/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.' : 'MC '+mcScore+'/20 ✓ passed and banked. SA '+saScore+'/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.';
+    checkLockouts();
+  } else {
+    localStorage.setItem(FULL_LOCK_KEY, String(Date.now()+2*60*1000));
+    resultEl.style.color='#8a1f1f';
+    resultEl.textContent = isEs ? '✗ Reprobado: MC '+mcScore+'/20 + SA '+saScore+'/10 (se requiere 18 y 9). Unidad bloqueada 2 minutos.' : '✗ Failed: MC '+mcScore+'/20 + SA '+saScore+'/10 (need 18 and 9). Unit locked 2 minutes.';
+    checkLockouts();
+  }
+});
+
+resetBtn.addEventListener('click',()=>{
+  const isEs=document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+    : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+  if(!confirm(msg)) return;
+  localStorage.removeItem(STATE_KEY);
+  localStorage.removeItem(MC_PASS_KEY);
+  localStorage.removeItem(SA_LOCK_KEY);
+  localStorage.removeItem(FULL_LOCK_KEY);
+  delete progress['unit'+UNIT];
+  localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
+  location.reload();
+});
+
+prevBtn.addEventListener('click',()=>{window.location.href=PREV_UNIT_URL;});
+nextBtn.addEventListener('click',()=>{if(!nextBtn.disabled)window.location.href=NEXT_UNIT_URL;});
+
+checkLockouts();
+})();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSJoshReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body></html>

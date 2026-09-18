@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Cults & World Religions — Unit 3</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 4 →</span><span class="lang-es">Unidad 4 →</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Cults &amp; World Religions — Unit 3: Jehovah's Witnesses</span><span class="lang-es">📖 Las Sectas y las Religiones del Mundo — Unidad 3: Los Testigos de Jehová</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed." — Galatians 1:8 (NKJV)</span><span class="lang-es">"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema." — Gálatas 1:8 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Cults &amp; World Religions. Please register before beginning Unit 3.</span><span class="lang-es">Bienvenido a Las Sectas y las Religiones del Mundo. Por favor regístrese antes de comenzar la Unidad 3.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Anchor: Galatians 1:6-9 — with Galatians 1:8; 2:16, 21; 5:4 (NKJV)</strong></p>
+<div class="scripture">"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed." &mdash; Galatians 1:8 (NKJV)</div>
+
+<h3>A Word Before We Begin</h3>
+<p>Jehovah's Witnesses come to the door with a Bible in hand and the name of Jehovah on their lips, and they preach another Jesus and another gospel. That is the finding of this unit, and we will prove it from their own publications and from Scripture. The Watch Tower gives the world a Christ who is not God but a created being &mdash; the archangel Michael, in their teaching &mdash; and a salvation earned by works and by loyalty to the organization rather than received freely by grace. These are not errors at the margins; they cut the root. We test their teaching, as always, by the Word of God, and where it departs from the gospel we say so plainly. We speak the truth in love (Ephesians 4:15), for the most loving thing we can tell anyone is the truth about Christ &mdash; but love does not soften the truth to spare the error.</p>
+
+<h3>Who Are Jehovah's Witnesses?</h3>
+<p>Jehovah's Witnesses are members of an organization known as the Watch Tower Bible and Tract Society, which arose in the United States in the late nineteenth century and is directed today by a Governing Body. They use their own Bible, the New World Translation, insist on the use of God's name "Jehovah," and are widely known for their door-to-door ministry. They number several million worldwide and are diligent students of their literature. Much in their conduct is admirable. Our concern is not with their diligence but with what they actually teach about God, about Christ, and about salvation.</p>
+
+<h3>What They Teach, in Their Own Terms</h3>
+<p>Concerning God, Jehovah's Witnesses reject the doctrine of the Trinity. They hold that only the Father, Jehovah, is Almighty God, and that the Holy Spirit is not a person but God's active force.</p>
+<p>Concerning Jesus, they teach that He is God's first and greatest creation. Before His earthly life He existed as Michael the archangel, and He returned to that identity afterward. He is, in their words, "a god" &mdash; mighty, but not Almighty God, and not eternal. He laid down His perfect human life as a ransom, and was raised, they say, not in His fleshly body but as a spirit.</p>
+<p>Concerning salvation, they teach that it is a gift of God's undeserved kindness, received through faith in Christ's ransom. But that faith, they say, must be shown by repentance, by baptism as one of Jehovah's Witnesses, by righteous conduct, by zealous preaching from door to door, and by loyal association with God's organization, which they call "the faithful and discreet slave." A Witness is taught that he cannot be certain of his salvation in this life.</p>
+<p>Concerning the future, they teach two hopes: a "little flock" of 144,000 anointed ones will reign with Christ in heaven, while the "great crowd" of all other faithful will live forever on a restored paradise earth. They teach that the wicked are not tormented forever but simply cease to exist, that the dead are unconscious, and that Christ began to rule invisibly in the year 1914, so that the battle of Armageddon is near.</p>
+<p>We have stated these things as fairly as we can, in the terms the Witnesses themselves use. Now we must test them by Scripture.</p>
+
+<h3>Testing the Root (1): A Different Christ</h3>
+<p>In Unit 1 we learned that the gospel is a tree, and that at its root is Christ alone. Everything depends, then, on who that Christ is. If the root is not the true and eternal Son of God, it is a different root, and a different root makes a different tree. Here the teaching of the Witnesses fails at the very point where it matters most. Scripture does not present Jesus as a created angel but as God Himself. John writes, "In the beginning was the Word, and the Word was with God, and the Word was God" (John 1:1) &mdash; not "a god," as the New World Translation renders it, for the rest of John's Gospel will not allow it. Jesus said, "Before Abraham was, I AM" (John 8:58), taking to Himself the very name of God. Paul declares that "by Him all things were created" and that "He is before all things" (Colossians 1:16-17): the One who created all things cannot Himself be a creature. "In Him dwells all the fullness of the Godhead bodily" (Colossians 2:9). Far from being the archangel Michael, the Son is worshiped by the angels: "Let all the angels of God worship Him" (Hebrews 1:6); and of the Son the Father says, "Your throne, O God, is forever and ever" (Hebrews 1:8). When Thomas saw the risen Lord &mdash; risen, the Lord insisted, in a body of "flesh and bones," not as a mere spirit (Luke 24:39) &mdash; he fell down and said, "My Lord and my God!" (John 20:28), and Jesus received the worship. The Christ of the Witnesses is not the Christ of the Scriptures.</p>
+
+<h3>Testing the Root (2): A Different Gospel of Salvation</h3>
+<p>The second failure lies at the very heart of Galatians. The Witnesses add to Christ a long list of works as the condition of salvation &mdash; baptism into their organization, a record of righteous conduct, hours of preaching, and unbroken loyalty to the Watch Tower &mdash; and they deny that anyone can be sure of being saved. But this is exactly the error Paul fought in Galatia. "A man is not justified by the works of the law but by faith in Jesus Christ" (Galatians 2:16). "I do not set aside the grace of God; for if righteousness comes through the law, then Christ died in vain" (Galatians 2:21). To those who would be justified by their own performance Paul says these sobering words: "You have become estranged from Christ, you who attempt to be justified by law; you have fallen from grace" (Galatians 5:4). Salvation is "by grace... through faith... not of works, lest anyone should boast" (Ephesians 2:8-9); it is "not by works of righteousness which we have done, but according to His mercy" (Titus 3:5). And it is sure: the one who believes "has passed from death into life" (John 5:24), and these things are written "that you may know that you have eternal life" (1 John 5:13). Nor is salvation channeled through any organization, "for there is one God and one Mediator between God and men, the Man Christ Jesus" (1 Timothy 2:5). To make salvation rest on works and on an organization, and to strip away all assurance, is to change the root.</p>
+
+<h3>Why This Is "Another Gospel"</h3>
+<p>Put these two failures together and the verdict is unavoidable. A message that gives us a created Christ and a salvation earned by works is not a slightly different version of the same gospel; it is, in Paul's words, "a different gospel, which is not another" (Galatians 1:6-7). Paul's warning could not be more solemn, and it lands here with peculiar force: "even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed" (Galatians 1:8). The Witnesses make Christ Himself an angel; but Paul says that no angel, not even the highest, and no human teacher, however sincere, may set aside the gospel of the true and eternal Son. The issue is not zeal, sincerity, or morality, in all of which the Witnesses may excel many Christians. The issue is whether Jesus is God and whether sinners are saved by grace. On both counts, this is another gospel, and to pervert the gospel at the root is no small thing.</p>
+
+<h3>When Prophecy Fails</h3>
+<p>There is one more test that Scripture presses upon any body claiming to speak for God, and the Watch Tower organization has failed it in the plainest way. Moses gave the rule: "when a prophet speaks in the name of the LORD, if the thing does not happen or come to pass, that is the thing which the LORD has not spoken; the prophet has spoken it presumptuously" (Deuteronomy 18:22). A prediction made in God's name that does not come true did not come from God. Yet through its official publications the organization has repeatedly announced dates for the end of the present order, and each has passed away. Its literature pointed to 1914 as the year the present world would end in Armageddon; when that did not occur, the date was kept but redefined as the beginning of Christ's invisible heavenly reign. The 1920 booklet <em>Millions Now Living Will Never Die</em> taught that 1925 would bring the resurrection of Abraham, Isaac, and Jacob to life on earth; it did not. In the 1960s the book <em>Life Everlasting&mdash;in Freedom of the Sons of God</em> pointed to 1975 as the likely close of six thousand years of human history and the dawn of the Millennium, and many members sold homes and businesses in expectation; that year too came and went, and the organization afterward acknowledged the disappointment it had raised. This is no small thing. The Governing Body claims to be God's one channel of truth on earth, "the faithful and discreet slave" through whom He feeds His people; but a channel that has spoken in God's name what God did not bring to pass has, by Scripture's own measure, spoken presumptuously. When the voice claiming to be God's fails God's own test, the soul that has trusted it must look elsewhere &mdash; to the sure word of Scripture, and to the Christ it reveals.</p>
+
+<h3>The Question of Fellowship</h3>
+<p>This brings us to a hard but necessary conclusion. Because Jehovah's Witnesses confess a different Christ and a different gospel, we cannot recognize their teaching as the Christian faith, nor join with it in the fellowship and work of the gospel. This is not personal hostility, and it is not permission to be unkind. We honor them as neighbors, we are courteous and gracious, and we gladly do them good. But love does not pretend. Scripture will not let us treat the denial of Christ's deity and of salvation by grace as merely another Christian tradition: "Whoever transgresses and does not abide in the doctrine of Christ does not have God... If anyone comes to you and does not bring this doctrine, do not receive him into your house nor greet him" (2 John 9-10) &mdash; that is, do not welcome him as a fellow worker or lend approval to his message. We are not to be "unequally yoked together with unbelievers," for there is no true spiritual partnership between light and darkness (2 Corinthians 6:14). So we do not share in their worship or their mission, because it rests upon another foundation. We may sit at their door and reason with them from the Scriptures; we may not stand beside them as fellow heralds of the same gospel.</p>
+
+<h3>A Redemptive Aim</h3>
+<p>Yet all of this is for a redemptive end. We do not draw these lines to shut people out, but because we long for Jehovah's Witnesses to come in &mdash; to the true Christ. Our message to them is good news: the real Jesus is far greater than they have been taught. He is not an angel but the eternal Son, God in the flesh, who does not merely offer a ransom on condition of our works, but gives full, free, and certain salvation to everyone who trusts in Him. Many Witnesses already love the Scriptures and reverence the name of God; we pray that God will open their eyes to see, in those same Scriptures, the Christ who is "Lord and God," and to rest at last in His finished work. We treat each one as a person Christ died to save &mdash; with patience, with prayer, and with an open Bible.</p>
+<div class="scripture">"And Thomas answered and said to Him, 'My Lord and my God!'" &mdash; John 20:28 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto base: Gálatas 1:6-9 — con Gálatas 1:8; 2:16, 21; 5:4 (RVG)</strong></p>
+<div class="scripture">"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema." &mdash; Gálatas 1:8 (RVG)</div>
+
+<h3>Una Palabra Antes de Comenzar</h3>
+<p>Los Testigos de Jehová vienen a la puerta con una Biblia en la mano y el nombre de Jehová en los labios, y predican otro Jesús y otro evangelio. Esa es la conclusión de esta unidad, y la probaremos desde sus propias publicaciones y desde la Escritura. La Watch Tower da al mundo un Cristo que no es Dios sino un ser creado &mdash; el arcángel Miguel, según su enseñanza &mdash; y una salvación ganada por obras y por lealtad a la organización en lugar de recibida gratuitamente por gracia. Estos no son errores al margen; cortan la raíz. Probamos su enseñanza, como siempre, por la Palabra de Dios, y donde se aparta del evangelio lo decimos con claridad. Hablamos la verdad en amor (Efesios 4:15), pues lo más bondadoso que podemos decir a cualquiera es la verdad acerca de Cristo &mdash; pero el amor no suaviza la verdad para perdonar el error.</p>
+
+<h3>¿Quiénes Son los Testigos de Jehová?</h3>
+<p>Los Testigos de Jehová son miembros de una organización conocida como la Sociedad Watch Tower de Biblias y Tratados, que surgió en los Estados Unidos a finales del siglo diecinueve y es dirigida hoy por un Cuerpo Gobernante. Usan su propia Biblia, la Traducción del Nuevo Mundo, insisten en el uso del nombre de Dios "Jehová", y son ampliamente conocidos por su ministerio de casa en casa. Suman varios millones en todo el mundo y son estudiantes diligentes de su literatura. Mucho en su conducta es admirable. Nuestra preocupación no es con su diligencia sino con lo que en realidad enseñan acerca de Dios, de Cristo y de la salvación.</p>
+
+<h3>Lo Que Enseñan, en Sus Propios Términos</h3>
+<p>En cuanto a Dios, los Testigos de Jehová rechazan la doctrina de la Trinidad. Sostienen que solo el Padre, Jehová, es el Dios Todopoderoso, y que el Espíritu Santo no es una persona sino la fuerza activa de Dios.</p>
+<p>En cuanto a Jesús, enseñan que es la primera y más grande creación de Dios. Antes de su vida terrenal existió como Miguel el arcángel, y volvió a esa identidad después. Es, en sus palabras, "un dios" &mdash; poderoso, pero no el Dios Todopoderoso, y no eterno. Entregó su vida humana perfecta como rescate, y fue resucitado, según dicen, no en su cuerpo de carne sino como espíritu.</p>
+<p>En cuanto a la salvación, enseñan que es un don de la bondad inmerecida de Dios, recibido mediante la fe en el rescate de Cristo. Pero esa fe, dicen, debe mostrarse por el arrepentimiento, por el bautismo como uno de los Testigos de Jehová, por la conducta recta, por la predicación celosa de casa en casa, y por la asociación leal con la organización de Dios, a la cual llaman "el esclavo fiel y discreto." A un Testigo se le enseña que no puede tener certeza de su salvación en esta vida.</p>
+<p>En cuanto al futuro, enseñan dos esperanzas: un "rebaño pequeño" de 144,000 ungidos reinará con Cristo en el cielo, mientras que la "gran muchedumbre" de todos los demás fieles vivirá para siempre en una tierra paradisíaca restaurada. Enseñan que los impíos no son atormentados para siempre sino que simplemente dejan de existir, que los muertos están inconscientes, y que Cristo comenzó a reinar invisiblemente en el año 1914, de modo que la batalla de Armagedón está cerca.</p>
+<p>Hemos expuesto estas cosas tan justamente como podemos, en los términos que los mismos Testigos usan. Ahora debemos probarlas por la Escritura.</p>
+
+<h3>Probando la Raíz (1): Un Cristo Diferente</h3>
+<p>En la Unidad 1 aprendimos que el evangelio es un árbol, y que en su raíz está Cristo solo. Todo depende, entonces, de quién sea ese Cristo. Si la raíz no es el verdadero y eterno Hijo de Dios, es una raíz diferente, y una raíz diferente hace un árbol diferente. Aquí la enseñanza de los Testigos falla justo en el punto donde más importa. La Escritura no presenta a Jesús como un ángel creado sino como Dios mismo. Juan escribe: "En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios" (Juan 1:1) &mdash; no "un dios", como lo vierte la Traducción del Nuevo Mundo, pues el resto del Evangelio de Juan no lo permite. Jesús dijo: "Antes que Abraham fuese, yo soy" (Juan 8:58), tomando para sí el nombre mismo de Dios. Pablo declara que "por él fueron creadas todas las cosas" y que "él es antes de todas las cosas" (Colosenses 1:16-17): el que creó todas las cosas no puede ser él mismo una criatura. "En él habita corporalmente toda la plenitud de la Deidad" (Colosenses 2:9). Lejos de ser el arcángel Miguel, el Hijo es adorado por los ángeles: "Y adórenle todos los ángeles de Dios" (Hebreos 1:6); y del Hijo dice el Padre: "Tu trono, oh Dios, por el siglo del siglo" (Hebreos 1:8). Cuando Tomás vio al Señor resucitado &mdash; resucitado, insistió el Señor, en un cuerpo de "carne y huesos", no como un mero espíritu (Lucas 24:39) &mdash; cayó y dijo: "¡Señor mío, y Dios mío!" (Juan 20:28), y Jesús recibió la adoración. El Cristo de los Testigos no es el Cristo de las Escrituras.</p>
+
+<h3>Probando la Raíz (2): Un Evangelio de Salvación Diferente</h3>
+<p>El segundo fallo está en el corazón mismo de Gálatas. Los Testigos añaden a Cristo una larga lista de obras como condición de la salvación &mdash; el bautismo en su organización, un historial de conducta recta, horas de predicación, y lealtad inquebrantable a la Watch Tower &mdash; y niegan que alguien pueda estar seguro de ser salvo. Pero este es justamente el error que Pablo combatió en Galacia. "El hombre no es justificado por las obras de la ley, sino por la fe de Jesucristo" (Gálatas 2:16). "No desecho la gracia de Dios; pues si por la ley fuese la justicia, entonces por demás murió Cristo" (Gálatas 2:21). A los que quisieran ser justificados por su propio desempeño Pablo dice estas palabras solemnes: "Cristo se ha hecho de ningún efecto para vosotros los que por la ley os justificáis; de la gracia habéis caído" (Gálatas 5:4). La salvación es "por gracia... por medio de la fe... no por obras, para que nadie se gloríe" (Efesios 2:8-9); es "no por obras de justicia que nosotros hubiéramos hecho, sino por su misericordia" (Tito 3:5). Y es segura: el que cree "ha pasado de muerte a vida" (Juan 5:24), y estas cosas están escritas "para que sepáis que tenéis vida eterna" (1 Juan 5:13). Ni se canaliza la salvación por medio de organización alguna, "porque hay un solo Dios, y un solo mediador entre Dios y los hombres, Jesucristo hombre" (1 Timoteo 2:5). Hacer que la salvación descanse sobre obras y sobre una organización, y arrancar toda seguridad, es cambiar la raíz.</p>
+
+<h3>Por Qué Esto Es "Otro Evangelio"</h3>
+<p>Juntemos estos dos fallos y el veredicto es ineludible. Un mensaje que nos da un Cristo creado y una salvación ganada por obras no es una versión ligeramente distinta del mismo evangelio; es, en palabras de Pablo, "otro evangelio; no que haya otro" (Gálatas 1:6-7). La advertencia de Pablo no podría ser más solemne, y aquí cae con fuerza peculiar: "si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema" (Gálatas 1:8). Los Testigos hacen del mismo Cristo un ángel; pero Pablo dice que ningún ángel, ni aun el más alto, y ningún maestro humano, por sincero que sea, puede desechar el evangelio del verdadero y eterno Hijo. La cuestión no es el celo, la sinceridad ni la moralidad, en todo lo cual los Testigos pueden superar a muchos cristianos. La cuestión es si Jesús es Dios y si los pecadores son salvos por gracia. En ambos puntos, este es otro evangelio, y pervertir el evangelio en la raíz no es cosa pequeña.</p>
+
+<h3>Cuando la Profecía Falla</h3>
+<p>Hay una prueba más que la Escritura impone a todo cuerpo que dice hablar por Dios, y la organización Watch Tower la ha reprobado de la manera más clara. Moisés dio la regla: "cuando el profeta hablare en nombre de Jehová, y no fuere la tal cosa, ni viniere, es palabra que Jehová no ha hablado; con presunción la habló el tal profeta" (Deuteronomio 18:22). Una predicción hecha en el nombre de Dios que no se cumple no vino de Dios. Sin embargo, por medio de sus publicaciones oficiales la organización ha anunciado repetidamente fechas para el fin del orden presente, y cada una ha pasado. Su literatura señaló 1914 como el año en que el mundo presente terminaría en Armagedón; cuando eso no ocurrió, la fecha se mantuvo pero se redefinió como el comienzo del reinado celestial invisible de Cristo. El folleto de 1920 <em>Millones que Ahora Viven no Morirán Jamás</em> enseñó que 1925 traería la resurrección de Abraham, Isaac y Jacob a la vida en la tierra; no sucedió. En la década de 1960, el libro <em>Vida Eterna&mdash;en Libertad de los Hijos de Dios</em> señaló 1975 como el probable fin de seis mil años de historia humana y el amanecer del Milenio, y muchos miembros vendieron casas y negocios en expectativa; ese año también llegó y pasó, y la organización después reconoció la desilusión que había provocado. Esto no es cosa pequeña. El Cuerpo Gobernante afirma ser el único canal de verdad de Dios en la tierra, "el esclavo fiel y discreto" por medio del cual Él alimenta a su pueblo; pero un canal que ha hablado en el nombre de Dios lo que Dios no cumplió ha hablado, por la medida de la Escritura misma, con presunción. Cuando la voz que dice ser de Dios reprueba la prueba de Dios mismo, el alma que ha confiado en ella debe mirar a otra parte &mdash; a la palabra segura de la Escritura, y al Cristo que revela.</p>
+
+<h3>La Cuestión de la Comunión</h3>
+<p>Esto nos lleva a una conclusión difícil pero necesaria. Porque los Testigos de Jehová confiesan un Cristo diferente y un evangelio diferente, no podemos reconocer su enseñanza como la fe cristiana, ni unirnos con ella en la comunión y la obra del evangelio. Esto no es hostilidad personal, y no es permiso para ser descorteses. Los honramos como prójimos, somos corteses y amables, y con gusto les hacemos bien. Pero el amor no finge. La Escritura no nos deja tratar la negación de la deidad de Cristo y de la salvación por gracia como si fuera meramente otra tradición cristiana: "Cualquiera que se rebela, y no persevera en la doctrina de Cristo, no tiene a Dios... Si alguno viene a vosotros, y no trae esta doctrina, no lo recibáis en casa, ni le digáis: ¡Bienvenido!" (2 Juan 9-10) &mdash; es decir, no lo recibáis como colaborador ni deis aprobación a su mensaje. No hemos de unirnos "en yugo desigual con los incrédulos", pues no hay verdadero compañerismo entre la luz y las tinieblas (2 Corintios 6:14). Así que no participamos de su culto ni de su misión, porque descansa sobre otro fundamento. Podemos sentarnos a su puerta y razonar con ellos desde las Escrituras; no podemos estar a su lado como heraldos del mismo evangelio.</p>
+
+<h3>Un Fin Redentor</h3>
+<p>Sin embargo, todo esto es para un fin redentor. No trazamos estas líneas para dejar a la gente afuera, sino porque anhelamos que los Testigos de Jehová entren &mdash; al verdadero Cristo. Nuestro mensaje para ellos es buenas nuevas: el Jesús real es mucho más grande de lo que se les ha enseñado. No es un ángel sino el eterno Hijo, Dios en la carne, que no solo ofrece un rescate a condición de nuestras obras, sino que da salvación plena, gratuita y segura a todo el que confía en Él. Muchos Testigos ya aman las Escrituras y reverencian el nombre de Dios; oramos que Dios abra sus ojos para ver, en esas mismas Escrituras, al Cristo que es "Señor y Dios", y para descansar al fin en su obra consumada. Tratamos a cada uno como una persona por quien Cristo murió para salvar &mdash; con paciencia, con oración, y con la Biblia abierta.</p>
+<div class="scripture">"Entonces Tomás respondió, y le dijo: ¡Señor mío, y Dios mío!" &mdash; Juan 20:28 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 3 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 3 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Cults & World Religions — Unit 3 (Jehovah's Witnesses)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 3;
+const COURSE = 'cults';
+const NEXT_UNIT_URL = 'CTSCultsUnit4.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - What Is a Cult? The Biblical Test", "Unit 2 - The Trinity and the Deity of Christ", "Unit 3 - Jehovah's Witnesses", "Unit 4 - The Latter-day Saints", "Unit 5 - The Prosperity Gospel", "Unit 6 - Progressive Revelation: Islam and Baha'i", "Unit 7 - Eastern Religions: Hinduism and Buddhism", "Unit 8 - Roman Catholicism", "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism", "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCultsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. Jehovah's Witnesses teach that, before His earthly life, Jesus existed as:", "textEs": "1. Los Testigos de Jehová enseñan que, antes de su vida terrenal, Jesús existió como:", "optionsEn": ["A human prophet", "The second Person of the Trinity", "An idea in God's mind only", "Michael the archangel, God's first creation"], "optionsEs": ["Un profeta humano", "La segunda Persona de la Trinidad", "Solo una idea en la mente de Dios", "Miguel el arcángel, la primera creación de Dios"], "explanationEn": "They identify the pre-existent Jesus with Michael, a created being.", "explanationEs": "Identifican al Jesús preexistente con Miguel, un ser creado.", "correct": 3}, {"textEn": "2. Concerning the Trinity, Jehovah's Witnesses:", "textEs": "2. En cuanto a la Trinidad, los Testigos de Jehová:", "optionsEn": ["Affirm it fully", "Say it is a mystery they accept", "Reject it; only the Father (Jehovah) is Almighty God", "Teach four persons in God"], "optionsEs": ["La afirman plenamente", "Dicen que es un misterio que aceptan", "La rechazan; solo el Padre (Jehová) es el Dios Todopoderoso", "Enseñan cuatro personas en Dios"], "explanationEn": "They deny the Trinity and hold that only the Father is Almighty God.", "explanationEs": "Niegan la Trinidad y sostienen que solo el Padre es el Dios Todopoderoso.", "correct": 2}, {"textEn": "3. Jehovah's Witnesses teach that the Holy Spirit is:", "textEs": "3. Los Testigos de Jehová enseñan que el Espíritu Santo es:", "optionsEn": ["The Father under another name", "God's active force, not a person", "A fourth divine person", "An angel"], "optionsEs": ["El Padre con otro nombre", "La fuerza activa de Dios, no una persona", "Una cuarta persona divina", "Un ángel"], "explanationEn": "They regard the Spirit as an impersonal active force.", "explanationEs": "Consideran al Espíritu como una fuerza activa impersonal.", "correct": 1}, {"textEn": "4. The New World Translation renders the end of John 1:1 as 'the Word was ___.'", "textEs": "4. La Traducción del Nuevo Mundo vierte el final de Juan 1:1 como 'el Verbo era ___.'", "optionsEn": ["a god", "with God", "the Father", "God"], "optionsEs": ["un dios", "con Dios", "el Padre", "Dios"], "explanationEn": "Their translation reads 'a god,' lowering Christ to a created being.", "explanationEs": "Su traducción dice 'un dios', rebajando a Cristo a un ser creado.", "correct": 0}, {"textEn": "5. Jehovah's Witnesses teach that Jesus was raised from the dead:", "textEs": "5. Los Testigos de Jehová enseñan que Jesús fue resucitado de los muertos:", "optionsEn": ["In the same body, glorified", "As a spirit, not in His fleshly body", "Only symbolically", "As the Father"], "optionsEs": ["En el mismo cuerpo, glorificado", "Como espíritu, no en su cuerpo de carne", "Solo simbólicamente", "Como el Padre"], "explanationEn": "They deny the bodily resurrection, saying He rose as a spirit.", "explanationEs": "Niegan la resurrección corporal, diciendo que resucitó como espíritu.", "correct": 1}, {"textEn": "6. For salvation, besides faith in the ransom, Jehovah's Witnesses require:", "textEs": "6. Para la salvación, además de la fe en el rescate, los Testigos de Jehová requieren:", "optionsEn": ["Baptism as a Witness, righteous conduct, preaching, and loyalty to the organization", "Nothing more", "A single prayer only", "Monthly giving only"], "optionsEs": ["Bautismo como Testigo, conducta recta, predicación, y lealtad a la organización", "Nada más", "Solo una oración", "Solo una ofrenda mensual"], "explanationEn": "They add works and organizational loyalty as conditions of salvation.", "explanationEs": "Añaden obras y lealtad a la organización como condiciones de la salvación.", "correct": 0}, {"textEn": "7. Regarding assurance of salvation, a Jehovah's Witness is taught that he:", "textEs": "7. En cuanto a la seguridad de la salvación, a un Testigo de Jehová se le enseña que:", "optionsEn": ["Is eternally secure once baptized", "Was saved before birth", "Will certainly reign in heaven", "Cannot be certain of salvation in this life"], "optionsEs": ["Está eternamente seguro una vez bautizado", "Fue salvo antes de nacer", "Ciertamente reinará en el cielo", "No puede tener certeza de la salvación en esta vida"], "explanationEn": "They deny present assurance; salvation rests on continued performance.", "explanationEs": "Niegan la seguridad presente; la salvación depende del desempeño continuo.", "correct": 3}, {"textEn": "8. Jehovah's Witnesses teach two hopes: 144,000 reign in heaven, and the 'great crowd':", "textEs": "8. Los Testigos enseñan dos esperanzas: 144,000 reinan en el cielo, y la 'gran muchedumbre':", "optionsEn": ["are annihilated", "reign as angels", "live forever on a paradise earth", "sleep forever"], "optionsEs": ["son aniquilados", "reinan como ángeles", "viven para siempre en una tierra paradisíaca", "duermen para siempre"], "explanationEn": "Only 144,000 go to heaven; the rest hope for an earthly paradise.", "explanationEs": "Solo 144,000 van al cielo; los demás esperan un paraíso terrenal.", "correct": 2}, {"textEn": "9. Scripture's test for a true prophet (Deuteronomy 18:22) is that:", "textEs": "9. La prueba de la Escritura para un verdadero profeta (Deuteronomio 18:22) es que:", "optionsEn": ["A true prophet may fail as often as he likes", "When what he foretells in the LORD's name does not come to pass, the LORD has not spoken it", "Predictions made in God's name do not matter", "Only signs and wonders count"], "optionsEs": ["Un verdadero profeta puede fallar cuantas veces quiera", "Cuando lo que predice en el nombre de Jehová no se cumple, Jehová no lo ha hablado", "Las predicciones hechas en el nombre de Dios no importan", "Solo cuentan las señales y prodigios"], "explanationEn": "Deuteronomy 18:22 — a prediction made in the LORD's name that fails did not come from the LORD.", "explanationEs": "Deuteronomio 18:22 — una predicción hecha en el nombre de Jehová que falla no vino de Jehová.", "correct": 1}, {"textEn": "10. The Watch Tower organization, which claims to be God's sole channel ('the faithful and discreet slave'), set end-dates such as 1925 and 1975 that:", "textEs": "10. La organización Watch Tower, que afirma ser el único canal de Dios ('el esclavo fiel y discreto'), fijó fechas del fin como 1925 y 1975 que:", "optionsEn": ["did not come to pass, failing Scripture's own test of a prophet", "all came true exactly as predicted", "were spoken by Christ Himself", "have nothing to do with its authority"], "optionsEs": ["no se cumplieron, reprobando la prueba de la Escritura sobre un profeta", "todas se cumplieron exactamente como se predijo", "fueron habladas por Cristo mismo", "no tienen nada que ver con su autoridad"], "explanationEn": "The predicted dates passed unfulfilled; by Deuteronomy 18's test, speaking in God's name what does not occur is presumption — which bears on the claim to be God's channel.", "explanationEs": "Las fechas predichas pasaron sin cumplirse; por la prueba de Deuteronomio 18, hablar en el nombre de Dios lo que no ocurre es presunción — lo cual afecta la afirmación de ser el canal de Dios.", "correct": 0}, {"textEn": "11. The 'root-test' from Unit 1 asks first whether a gospel keeps at its root:", "textEs": "11. La 'prueba de la raíz' de la Unidad 1 pregunta primero si un evangelio conserva en su raíz:", "optionsEn": ["the same holidays", "the same hymns", "a similar name", "the true Christ — God the Son"], "optionsEs": ["las mismas fiestas", "los mismos himnos", "un nombre parecido", "al verdadero Cristo — Dios el Hijo"], "explanationEn": "The gospel stands or falls on who Christ is at the root.", "explanationEs": "El evangelio se sostiene o cae según quién es Cristo en la raíz.", "correct": 3}, {"textEn": "12. Rightly translated, John 1:1 teaches that the Word:", "textEs": "12. Bien traducido, Juan 1:1 enseña que el Verbo:", "optionsEn": ["was an angel", "was a god", "was God", "was created"], "optionsEs": ["era un ángel", "era un dios", "era Dios", "fue creado"], "explanationEn": "'The Word was God' — full deity, not 'a god.'", "explanationEs": "'El Verbo era Dios' — plena deidad, no 'un dios.'", "correct": 2}, {"textEn": "13. In Colossians 1:16-17, all things were created:", "textEs": "13. En Colosenses 1:16-17, todas las cosas fueron creadas:", "optionsEn": ["over long ages", "by an angel", "by the Spirit alone", "by Him and for Him — so He is not a creature"], "optionsEs": ["a lo largo de eras", "por un ángel", "solo por el Espíritu", "por Él y para Él — así que no es una criatura"], "explanationEn": "The Creator of all things cannot Himself be created.", "explanationEs": "El Creador de todas las cosas no puede ser él mismo creado.", "correct": 3}, {"textEn": "14. Hebrews 1:6 says that all God's angels are to ___ the Son.", "textEs": "14. Hebreos 1:6 dice que todos los ángeles de Dios han de ___ al Hijo.", "optionsEn": ["obey", "worship", "announce", "fear"], "optionsEs": ["obedecer", "adorar", "anunciar", "temer"], "explanationEn": "Angels worship the Son, so He cannot be a fellow angel.", "explanationEs": "Los ángeles adoran al Hijo, así que no puede ser un ángel como ellos.", "correct": 1}, {"textEn": "15. When Thomas saw the risen Jesus, he said (John 20:28):", "textEs": "15. Cuando Tomás vio a Jesús resucitado, dijo (Juan 20:28):", "optionsEn": ["'My Lord and my God!'", "'Michael, our prince'", "'A teacher come from God'", "'A spirit only'"], "optionsEs": ["'¡Señor mío, y Dios mío!'", "'Miguel, nuestro príncipe'", "'Un maestro venido de Dios'", "'Solo un espíritu'"], "explanationEn": "Thomas confessed Jesus as God, and Jesus accepted it.", "explanationEs": "Tomás confesó a Jesús como Dios, y Jesús lo aceptó.", "correct": 0}, {"textEn": "16. Galatians 2:21 says that if righteousness comes through the law, then:", "textEs": "16. Gálatas 2:21 dice que si la justicia viene por la ley, entonces:", "optionsEn": ["the law is honored", "grace is increased", "Christ died in vain", "we are stronger"], "optionsEs": ["la ley es honrada", "la gracia aumenta", "Cristo murió en vano", "somos más fuertes"], "explanationEn": "Adding works to the root empties the cross of its meaning.", "explanationEs": "Añadir obras a la raíz vacía la cruz de su sentido.", "correct": 2}, {"textEn": "17. Galatians 5:4 warns that those who seek to be justified by law have:", "textEs": "17. Gálatas 5:4 advierte que los que buscan ser justificados por la ley han:", "optionsEn": ["earned reward", "grown in faith", "pleased God", "fallen from grace"], "optionsEs": ["ganado recompensa", "crecido en fe", "agradado a Dios", "caído de la gracia"], "explanationEn": "Seeking justification by works estranges a person from Christ.", "explanationEs": "Buscar la justificación por obras aparta a la persona de Cristo.", "correct": 3}, {"textEn": "18. According to 1 Timothy 2:5, the one Mediator between God and men is:", "textEs": "18. Según 1 Timoteo 2:5, el único mediador entre Dios y los hombres es:", "optionsEn": ["an organization", "the Man Christ Jesus", "the Governing Body", "the archangel"], "optionsEs": ["una organización", "Jesucristo hombre", "el Cuerpo Gobernante", "el arcángel"], "explanationEn": "Salvation is mediated by Christ alone, not by any organization.", "explanationEs": "La salvación es mediada por Cristo solo, no por organización alguna.", "correct": 1}, {"textEn": "19. Because they confess a different Christ and gospel, the unit concludes we:", "textEs": "19. Porque confiesan un Cristo y evangelio diferentes, la unidad concluye que:", "optionsEn": ["cannot share gospel fellowship with their teaching", "should ignore the differences", "should join their worship", "must condemn them personally"], "optionsEs": ["no podemos tener comunión del evangelio con su enseñanza", "debemos ignorar las diferencias", "debemos unirnos a su culto", "debemos condenarlos personalmente"], "explanationEn": "We cannot treat a different gospel as the same faith, yet we are never cruel.", "explanationEs": "No podemos tratar otro evangelio como la misma fe, pero nunca somos crueles.", "correct": 0}, {"textEn": "20. The unit's attitude toward Jehovah's Witnesses as people is:", "textEs": "20. La actitud de la unidad hacia los Testigos de Jehová como personas es:", "optionsEn": ["contempt", "avoidance", "redemptive love that points them to the true Christ", "indifference"], "optionsEs": ["desprecio", "evitación", "amor redentor que los señala al verdadero Cristo", "indiferencia"], "explanationEn": "We love them, treat them kindly, and long for them to know Christ.", "explanationEs": "Los amamos, los tratamos con bondad, y anhelamos que conozcan a Cristo.", "correct": 2}];
+
+const kwQuestions = [{"textEn": "21. Fairly summarize what Jehovah's Witnesses teach about who Jesus is.", "textEs": "21. Resuma justamente lo que los Testigos de Jehová enseñan acerca de quién es Jesús.", "kw_en": ["michael", "archangel", "created", "jehovah", "first", "spirit", "ransom", "god"], "kw_es": ["miguel", "arcángel", "creado", "jehová", "primer", "espíritu", "rescate", "dios"], "modelEn": "Jehovah's Witnesses teach that Jesus is the first and greatest creation of Jehovah, a created being and not the eternal God. Before his earthly life he existed as Michael the archangel, and they say he returned to that identity afterward. They call him a god, mighty but not Almighty God. They teach that he gave his perfect human life as a ransom for sin, and that he was raised not in his fleshly body but as a spirit. So in their view Jesus is the created archangel Michael become man, distinct from and lesser than the Father, who alone is the true God.", "modelEs": "Los Testigos de Jehová enseñan que Jesús es la primera y más grande creación de Jehová, un ser creado y no el Dios eterno. Antes de su vida terrenal existió como Miguel el arcángel, y dicen que volvió a esa identidad después. Lo llaman un dios, poderoso pero no el Dios Todopoderoso. Enseñan que dio su vida humana perfecta como rescate por el pecado, y que fue resucitado no en su cuerpo de carne sino como espíritu. Así que para ellos Jesús es el arcángel Miguel creado hecho hombre, distinto del Padre y menor que él, quien es el único Dios verdadero."}, {"textEn": "22. Fairly summarize what Jehovah's Witnesses teach about how a person is saved.", "textEs": "22. Resuma justamente lo que los Testigos de Jehová enseñan acerca de cómo es salva una persona.", "kw_en": ["faith", "works", "baptism", "organization", "preach", "loyal", "assurance", "ransom"], "kw_es": ["fe", "obras", "bautismo", "organización", "predica", "lealtad", "seguridad", "rescate"], "modelEn": "Jehovah's Witnesses teach that salvation is a gift of God's undeserved kindness, received through faith in the ransom of Christ. But they say this faith must be proven by works: repentance, baptism as one of Jehovah's Witnesses, righteous conduct, zealous preaching from door to door, and loyal association with God's organization, which they call the faithful and discreet slave. Because salvation rests in part on this ongoing performance and loyalty, a Witness is taught that he cannot have assurance of salvation in this life. In short, they add works and organizational loyalty to faith as conditions of being saved.", "modelEs": "Los Testigos de Jehová enseñan que la salvación es un don de la bondad inmerecida de Dios, recibido mediante la fe en el rescate de Cristo. Pero dicen que esta fe debe probarse por obras: arrepentimiento, bautismo como uno de los Testigos de Jehová, conducta recta, predicación celosa de casa en casa, y asociación leal con la organización de Dios, a la que llaman el esclavo fiel y discreto. Porque la salvación descansa en parte sobre este desempeño y lealtad continuos, a un Testigo se le enseña que no puede tener seguridad de la salvación en esta vida. En resumen, añaden obras y lealtad a la organización a la fe como condiciones de ser salvo."}, {"textEn": "23. State the root-test from Unit 1 and explain how it applies to the Witnesses' view of Christ.", "textEs": "23. Exponga la prueba de la raíz de la Unidad 1 y explique cómo se aplica a la visión que los Testigos tienen de Cristo.", "kw_en": ["root", "christ", "true", "different", "deity", "created", "gospel", "tree"], "kw_es": ["raíz", "cristo", "verdadero", "diferente", "deidad", "creado", "evangelio", "árbol"], "modelEn": "The root-test asks whether a gospel keeps the true Christ, God the Son, at its root, since the whole tree of faith depends on who Christ is. Applied to the Witnesses, the test exposes a fatal problem with the root. They teach a created Christ, the archangel Michael, denying his full deity. But if the Christ at the root is a creature rather than the true and eternal God, then it is a different root, and a different root makes a different tree. So the very first question of the root-test, whether the deity of Christ is confessed, is answered wrongly. A gospel built on a created christ is therefore a different gospel, not the same tree with minor differences.", "modelEs": "La prueba de la raíz pregunta si un evangelio conserva al verdadero Cristo, Dios el Hijo, en su raíz, pues todo el árbol de la fe depende de quién es Cristo. Aplicada a los Testigos, la prueba expone un problema fatal con la raíz. Enseñan un Cristo creado, el arcángel Miguel, negando su plena deidad. Pero si el Cristo en la raíz es una criatura y no el verdadero y eterno Dios, entonces es una raíz diferente, y una raíz diferente hace un árbol diferente. Así que la primera pregunta de la prueba de la raíz, si se confiesa la deidad de Cristo, queda mal respondida. Un evangelio edificado sobre un cristo creado es por tanto un evangelio diferente, no el mismo árbol con diferencias menores."}, {"textEn": "24. From Scripture, show that Christ is not a created angel but the eternal God.", "textEs": "24. Desde la Escritura, muestre que Cristo no es un ángel creado sino el Dios eterno.", "kw_en": ["god", "creator", "worship", "eternal", "angel", "fullness", "thomas", "christ"], "kw_es": ["dios", "creador", "adora", "eterno", "ángel", "plenitud", "tomás", "cristo"], "modelEn": "Scripture teaches that Christ is the eternal God, not a created angel. John says the Word was God, and that before Abraham was, Christ said I AM, taking God's own name. Paul says that by Christ all things were created and that he is before all things, so the Creator of all cannot himself be a creature. In him dwells all the fullness of the Godhead bodily. Far from being an angel, the Son is worshiped by the angels, and the Father calls the Son God, saying your throne, O God, is forever. When Thomas saw the risen Christ he said, My Lord and my God, and Jesus received the worship. All of this shows the deity and eternity of Christ.", "modelEs": "La Escritura enseña que Cristo es el Dios eterno, no un ángel creado. Juan dice que el Verbo era Dios, y que antes que Abraham fuese, Cristo dijo yo soy, tomando el nombre mismo de Dios. Pablo dice que por Cristo fueron creadas todas las cosas y que él es antes de todas las cosas, así que el Creador de todo no puede ser él mismo una criatura. En él habita corporalmente toda la plenitud de la Deidad. Lejos de ser un ángel, el Hijo es adorado por los ángeles, y el Padre llama Dios al Hijo, diciendo tu trono, oh Dios, es para siempre. Cuando Tomás vio a Cristo resucitado dijo, Señor mío y Dios mío, y Jesús recibió la adoración. Todo esto muestra la deidad y eternidad de Cristo."}, {"textEn": "25. From Scripture, show that salvation is by grace through faith and is assured, not earned by works.", "textEs": "25. Desde la Escritura, muestre que la salvación es por gracia mediante la fe y es segura, no ganada por obras.", "kw_en": ["grace", "faith", "works", "gift", "assurance", "eternal", "christ", "saved"], "kw_es": ["gracia", "fe", "obras", "don", "seguridad", "eterna", "cristo", "salvos"], "modelEn": "Scripture teaches that we are saved by grace through faith, and that this salvation is a free gift, not earned by works. Paul says we are saved by grace through faith, and that not of ourselves; it is the gift of God, not of works, lest anyone should boast. He says God saved us not by works of righteousness which we have done, but according to his mercy. And Scripture gives believers a real basis for assurance: the one who hears Christ and believes has passed from death into life, and John wrote so that those who believe may know they have eternal life. To add works or organizational loyalty as a basis of justification is to turn from reliance on grace toward reliance on law; righteousness comes through Christ and not through law.", "modelEs": "La Escritura enseña que somos salvos por gracia mediante la fe, y que esta salvación es un don gratuito, no ganado por obras. Pablo dice que somos salvos por gracia por medio de la fe, y esto no de nosotros; es don de Dios, no por obras, para que nadie se gloríe. Dice que Dios nos salvó no por obras de justicia que hubiéramos hecho, sino por su misericordia. Y la Escritura da a los creyentes una base real para la seguridad: el que oye a Cristo y cree ha pasado de muerte a vida, y Juan escribió para que los que creen sepan que tienen vida eterna. Añadir obras o lealtad a una organización como base de la justificación es apartarse de la dependencia de la gracia hacia la dependencia de la ley; la justicia viene por Cristo y no por la ley."}, {"textEn": "26. Explain why the Witnesses' message is 'another gospel' under Galatians 1:6-9, and the force of 'even an angel.'", "textEs": "26. Explique por qué el mensaje de los Testigos es 'otro evangelio' según Gálatas 1:6-9, y la fuerza de 'aun un ángel.'", "kw_en": ["gospel", "another", "angel", "accursed", "root", "christ", "grace", "pervert"], "kw_es": ["evangelio", "otro", "ángel", "anatema", "raíz", "cristo", "gracia", "pervertir"], "modelEn": "The Witnesses' message is another gospel because it changes the root at the two points that matter most: it gives a created Christ instead of the eternal God, and a salvation earned by works instead of received by grace. Paul says such a thing is a different gospel, which is not really another, but a perversion of the gospel of Christ. His warning is severe: even if an angel from heaven preaches another gospel, let him be accursed. This lands with special force here, because the Witnesses make Christ himself an angel; yet no angel and no human teacher may set aside the true gospel. To pervert the root, whether the person of Christ or the grace of salvation, is to fall under this solemn warning.", "modelEs": "El mensaje de los Testigos es otro evangelio porque cambia la raíz en los dos puntos que más importan: da un Cristo creado en lugar del Dios eterno, y una salvación ganada por obras en lugar de recibida por gracia. Pablo dice que tal cosa es otro evangelio, que no es realmente otro, sino una perversión del evangelio de Cristo. Su advertencia es severa: si aun un ángel del cielo predica otro evangelio, sea anatema. Esto cae con fuerza especial aquí, porque los Testigos hacen del mismo Cristo un ángel; pero ningún ángel y ningún maestro humano puede desechar el verdadero evangelio. Pervertir la raíz, sea la persona de Cristo o la gracia de la salvación, es caer bajo esta advertencia solemne."}, {"textEn": "27. Explain the unit's conclusion about fellowship, and how to hold it with charity (2 John 9-11).", "textEs": "27. Explique la conclusión de la unidad sobre la comunión, y cómo sostenerla con caridad (2 Juan 9-11).", "kw_en": ["fellowship", "doctrine", "christ", "love", "person", "endorse", "gospel", "greet"], "kw_es": ["comunión", "doctrina", "cristo", "amar", "persona", "aprobar", "evangelio", "recib"], "modelEn": "The unit concludes that because Jehovah's Witnesses confess a different Christ and gospel, we cannot recognize their teaching as the Christian faith or join with it in gospel fellowship. John says that whoever does not abide in the doctrine of Christ does not have God, and that we should not receive such a one or greet him as a fellow worker, that is, not endorse his message. Yet this must be held with charity. We are to love each person, treat them with kindness and courtesy, and gladly do them good. We refuse fellowship with the false teaching, not friendship with the people. We may reason with them from Scripture; we simply may not stand beside them as heralds of the same gospel or lend approval to a message that denies Christ.", "modelEs": "La unidad concluye que porque los Testigos de Jehová confiesan un Cristo y evangelio diferentes, no podemos reconocer su enseñanza como la fe cristiana ni unirnos con ella en la comunión del evangelio. Juan dice que el que no persevera en la doctrina de Cristo no tiene a Dios, y que no debemos recibir a tal persona ni saludarla como colaborador, es decir, no aprobar su mensaje. Sin embargo, esto debe sostenerse con caridad. Hemos de amar a cada persona, tratarla con bondad y cortesía, y con gusto hacerle bien. Rechazamos la comunión con la enseñanza falsa, no la amistad con las personas. Podemos razonar con ellos desde la Escritura; simplemente no podemos estar a su lado como heraldos del mismo evangelio ni dar aprobación a un mensaje que niega a Cristo."}, {"textEn": "28. Explain the difference between loving Jehovah's Witnesses as people and accepting their teaching.", "textEs": "28. Explique la diferencia entre amar a los Testigos de Jehová como personas y aceptar su enseñanza.", "kw_en": ["love", "person", "teaching", "truth", "respect", "doctrine", "christ", "witness"], "kw_es": ["amar", "persona", "enseñanza", "verdad", "respeto", "doctrina", "cristo", "testigo"], "modelEn": "To love Jehovah's Witnesses as people and to accept their teaching are two very different things, and we must do the first without doing the second. We are to love each Witness as a person made in God's image and as one for whom Christ died, treating them with respect, courtesy, and genuine kindness. But love does not mean approving their doctrine. Their teaching denies the deity of Christ and salvation by grace, and to call that the truth would be to lie to them. So we hold both together: warm love and respect for the person, and honest disagreement with the teaching. In fact, real love compels us to tell them the truth about Christ rather than to flatter a false gospel.", "modelEs": "Amar a los Testigos de Jehová como personas y aceptar su enseñanza son dos cosas muy diferentes, y debemos hacer lo primero sin hacer lo segundo. Hemos de amar a cada Testigo como una persona hecha a imagen de Dios y como alguien por quien Cristo murió, tratándolo con respeto, cortesía y bondad genuina. Pero amar no significa aprobar su doctrina. Su enseñanza niega la deidad de Cristo y la salvación por gracia, y llamar a eso la verdad sería mentirles. Así que sostenemos ambas cosas juntas: amor cálido y respeto por la persona, y desacuerdo honesto con la enseñanza. De hecho, el amor verdadero nos obliga a decirles la verdad acerca de Cristo en lugar de halagar un evangelio falso."}, {"textEn": "29. State the Bible's test for a true prophet (Deuteronomy 18:21-22), and explain how the Watch Tower's failed end-time predictions bear on its claim to be God's channel of truth.", "textEs": "29. Exponga la prueba de la Biblia para un verdadero profeta (Deuteronomio 18:21-22), y explique cómo las predicciones fallidas del fin de la Watch Tower afectan su afirmación de ser el canal de verdad de Dios.", "kw_en": ["deuteronomy", "prophet", "pass", "name", "1925", "1975", "predict", "channel"], "kw_es": ["deuteronomio", "profeta", "cumpl", "nombre", "1925", "1975", "predic", "canal"], "modelEn": "Deuteronomy 18:21-22 gives the test: when a prophet speaks in the LORD's name and the thing does not happen or come to pass, that is a word the LORD has not spoken, and the prophet has spoken it presumptuously. A prediction made in God's name that fails did not come from God. The Watch Tower organization, through its own publications, repeatedly predicted the end for set dates — 1925 in Millions Now Living Will Never Die, and 1975 in its 1960s literature — and each passed unfulfilled. This bears directly on its central claim to be God's sole channel of truth, the faithful and discreet slave. A channel that has spoken in God's name what God did not bring to pass has, by Scripture's own measure, spoken presumptuously, and cannot be trusted as the voice of God. The soul that leaned on that authority should turn instead to the sure word of Scripture and to the Christ it reveals.", "modelEs": "Deuteronomio 18:21-22 da la prueba: cuando un profeta habla en el nombre de Jehová y la cosa no sucede ni se cumple, es palabra que Jehová no ha hablado, y el profeta la habló con presunción. Una predicción hecha en el nombre de Dios que falla no vino de Dios. La organización Watch Tower, por medio de sus propias publicaciones, predijo repetidamente el fin para fechas fijas — 1925 en Millones que Ahora Viven no Morirán Jamás, y 1975 en su literatura de los años sesenta — y cada una pasó sin cumplirse. Esto afecta directamente su afirmación central de ser el único canal de verdad de Dios, el esclavo fiel y discreto. Un canal que ha hablado en el nombre de Dios lo que Dios no cumplió ha hablado, por la medida de la Escritura misma, con presunción, y no puede ser confiado como la voz de Dios. El alma que se apoyó en esa autoridad debe volverse más bien a la palabra segura de la Escritura y al Cristo que revela."}, {"textEn": "30. Summarize Unit 3: the Witnesses' gospel tested by the root, the verdict, and the redemptive aim.", "textEs": "30. Resuma la Unidad 3: el evangelio de los Testigos probado por la raíz, el veredicto, y el fin redentor.", "kw_en": ["root", "christ", "grace", "gospel", "fellowship", "redemptive", "true", "faith"], "kw_es": ["raíz", "cristo", "gracia", "evangelio", "comunión", "redentor", "verdadero", "fe"], "modelEn": "Unit 3 tests the gospel of Jehovah's Witnesses by the root and reaches a clear verdict. At the root they place a created Christ, the archangel Michael, denying his full deity, and they add works and organizational loyalty to grace, denying assurance. Because they change the root in both the person of Christ and the way of salvation, theirs is another gospel under Paul's warning, and we cannot share gospel fellowship with their teaching. Yet the aim is redemptive, not hostile. We love the Witnesses as people, treat them with kindness, and long for them to come to the true Christ, who is God the Son and who gives full and free salvation by grace through faith. We hold to the true gospel firmly and reach out to them in love.", "modelEs": "La Unidad 3 prueba el evangelio de los Testigos de Jehová por la raíz y llega a un veredicto claro. En la raíz ponen un Cristo creado, el arcángel Miguel, negando su plena deidad, y añaden obras y lealtad a la organización a la gracia, negando la seguridad. Porque cambian la raíz tanto en la persona de Cristo como en el camino de la salvación, el suyo es otro evangelio bajo la advertencia de Pablo, y no podemos tener comunión del evangelio con su enseñanza. Sin embargo, el fin es redentor, no hostil. Amamos a los Testigos como personas, los tratamos con bondad, y anhelamos que vengan al verdadero Cristo, que es Dios el Hijo y que da salvación plena y gratuita por gracia mediante la fe. Sostenemos firmemente el verdadero evangelio y nos acercamos a ellos en amor."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en el botón de arriba para continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click the button above to continue.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '\u2713 Correct! ' : '\u2713 \u00a1Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `\u2717 Incorrect. Correct answer: ${correctLetter}. ` : `\u2717 Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a few sentences (about 100 characters)), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos unas cuantas oraciones (unos 100 caracteres)), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            renderQuestions();
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        renderQuestions();
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCultsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

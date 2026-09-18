@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS New Testament Survey — Unit 11: General Epistles: Faith Tested in Life</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+.track-bar { background: #f6f1e8; border: 1px solid #d7cec1; border-radius: 12px; padding: 12px 16px; margin: 15px 0; }
+.track-bar label { margin-right: 18px; cursor: pointer; font-size: 0.95rem; }
+.track-bar input[type=radio] { margin-right: 6px; vertical-align: middle; }
+.reset-btn { background: #8a5a3a; color: white; border: none; border-radius: 30px; padding: 8px 18px; cursor: pointer; font-family: inherit; margin-left: 10px; font-size: 0.9rem; }
+.reset-btn:hover { background: #6e4528; }
+.redirect-notice { background: #e8f5ea; border: 1px solid #b9dfc2; color: #1f6b3b; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-weight: bold; }
+@media print {
+  @page { margin: 0.5in; }
+  body { background: white; color: black; font-size: 12pt; padding: 0; }
+  .nav-bar, .toggle-btn, #submitExamBtn, .reset-btn, #examResult, .track-bar, button.small { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; padding: 12px; margin-bottom: 12px; }
+  .question { page-break-inside: avoid; }
+  h1, h2, h3 { color: black; page-break-after: avoid; }
+  .option { background: white; border-color: #999; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" >← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 New Testament Survey — Unit 11: General Epistles: Faith Tested in Life</span><span class="lang-es">📖 Estudio del Nuevo Testamento — Unidad 11: Las Epístolas Generales: Fe Probada en la Vida</span></h1>
+    <p><span class="lang-en"><strong>Course Author:</strong> Dr. Wayne Cook | <strong>Seminary Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Autor del Curso:</strong> Dr. Wayne Cook | <strong>Director del Seminario:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic;"></p>
+</div>
+
+<div class="card" id="teachingContent">
+<div class="lang-en">
+        <h2>I. The Other Letters</h2>
+        <p>Here is an arresting fact about the New Testament. After Matthew, Mark, Luke, John, and Acts, the next twenty-one books are all letters. Of those twenty-one, the apostle Paul wrote thirteen. <em>The other eight</em> were written by men who, with one exception, walked with Jesus on the dusty roads of Galilee before Paul ever heard the name of Christ. These are the General Epistles — Hebrews, James, 1 and 2 Peter, 1, 2, and 3 John, and Jude. They are called <em>general</em> because most of them are not addressed to a single congregation but to scattered believers across the Roman Empire. They are the church's family letters from her oldest brothers in the faith.</p>
+
+        <p>Something gives these eight letters a particular flavor that the Pauline letters do not have. Paul's letters mostly start with doctrine and end with duty. The General Epistles flip the emphasis. They begin with daily life, the trial in front of you this morning, the brother in front of you in the pew, the false teacher in front of you on the platform, the suffering in front of you in the world — and they argue from the life back to the doctrine. Paul writes from the study. The General Epistle writers write from the marketplace. Paul writes about salvation. The General Epistle writers write about <em>how the saved live.</em> The two halves complete each other. Paul gives you the theology. James, Peter, John, and Jude give you the test. Faith without the test is just sentiment. The test without the faith is just exhaustion. The General Epistles are where the two meet.</p>
+
+        <h2>II. Hebrews — The Supremacy of Christ</h2>
+        <p>Hebrews stands alone among the General Epistles. It is the longest. It is the most theological. And it is the most mysterious — no one has ever known for certain who wrote it. Authorship guesses across two thousand years have included Paul, Apollos, Barnabas, Priscilla, Luke, and Clement of Rome. The book itself does not say. What it does say, with hammering force from the first verse to the last, is that <em>Jesus Christ is supreme.</em> Supreme over the prophets. Supreme over the angels. Supreme over Moses. Supreme over the Levitical priesthood. Supreme over the sacrifices of bulls and goats. Supreme over the old covenant entirely. Henrietta Mears used to say that if you put a single English word on the cover of Hebrews, the word should be <em>better.</em> Christ is <em>better.</em> The word appears thirteen times across the letter, and it is the spine of every argument.</p>
+
+        <p>Hebrews can be organized around the three offices of the Messiah that the Old Testament had always assigned to the Anointed One. <strong>Prophet.</strong> <strong>Priest.</strong> <strong>King.</strong> Each office in the Old Testament was filled by a man. None of those men ever held more than one office at a time. King Saul tried to be a priest, and God removed him. King Uzziah tried to enter the temple, and God struck him with leprosy. The three offices were kept separate by divine command. But in Christ Jesus, all three meet in one person. And Hebrews unfolds each office in turn.</p>
+
+        <p><strong>As Prophet (Hebrews 1).</strong> <em>"God, who at various times and in various ways spoke in time past to the fathers by the prophets, has in these last days spoken to us by His Son"</em> (Hebrews 1:1–2). The prophets brought a partial word; the Son is the complete Word. Moses got a glimpse from the back side of the mountain; the Son <em>is</em> the radiance of God's glory and the exact representation of His being. Isaiah saw the Lord high and lifted up; the Son sits enthroned at the right hand of the Majesty in heaven. Every prophet who ever stood between God and Israel was a flickering candle pointing to the rising of the Sun.</p>
+
+        <p><strong>As Priest (Hebrews 4–10).</strong> The high priest of Israel could go into the Holy of Holies once a year, with the blood of an animal, for himself first and then for the people. Christ Jesus is a better priest. He went in once for all. He went in with His own blood. He went in not into a tabernacle made with hands but into heaven itself. He sympathizes with our weakness because He has been tempted in every way as we are, yet without sin. He is a priest forever, after the order of Melchizedek — the only Old Testament figure who was both king and priest at once, the foreshadow of the Christ to come.</p>
+
+        <p>And the priesthood of Christ is connected to sacrifice. There is a peculiar grave in Arizona behind which lies a tragic story. Years ago, a tribe of Native Americans gathered for a great council. They felt the weight of their sin and believed that blood must be shed for forgiveness. They could not bring themselves to sacrifice their own children, but they decided to sacrifice four orphans from the tribe — the only ones with no parents to plead for them. The orphans were killed and buried in a single grave. The tribe believed that the death of those four little ones had bought their forgiveness. They had read in the dust of human conscience the same line that the book of Hebrews would later write in ink: <em>"Without the shedding of blood there is no forgiveness"</em> (Hebrews 9:22). What they did not know was that the blood of God's own Lamb had already been shed on a Roman cross, and that no orphan needed to die in any village ever again. The whole point of Hebrews is that the cross of Christ closes the door on every other altar.</p>
+
+        <p><strong>As King (Hebrews 7, 12).</strong> Melchizedek's name in Hebrew means <em>king of righteousness</em>. He was king of Salem, which means <em>peace</em> — so he was also king of peace. King of righteousness and king of peace, both at once. That is the pattern Christ fulfills. Every other king in human history failed somewhere. David was a man after God's own heart and also a great sinner. Solomon began his rule asking God for wisdom and ended his life as a wise fool with seven hundred wives. Pharaoh, Alexander the Great, Julius Caesar, Charlemagne, Napoleon — kingdoms rise and crumble. Hebrews tells the persecuted Hebrew Christians that <em>"we are receiving a kingdom which cannot be shaken"</em> (Hebrews 12:28). The shaking will come. The kingdoms of this world will shake until they fall. The one kingdom left standing will be His.</p>
+
+        <h2>III. The Hall of Faith</h2>
+        <p>Hebrews 11 is called the <em>Hall of Faith</em> — the gallery in which the writer of Hebrews hangs portrait after portrait of Old Testament believers and tells you what they had in common. <em>"Now faith is the substance of things hoped for, the evidence of things not seen"</em> (Hebrews 11:1). The chapter is a procession. By faith Abel. By faith Enoch. By faith Noah. By faith Abraham. By faith Sarah. By faith Isaac, Jacob, Joseph, Moses. By faith Rahab. By faith Gideon, Barak, Samson, Jephthah, David, Samuel, and the prophets. Some of them conquered kingdoms. Some of them were sawn in two. Some of them stopped the mouths of lions. Some of them wandered in deserts and mountains, in caves and dens of the earth — destitute, afflicted, tormented. Faith does not guarantee that the lion's mouth will close. Some of the heroes were thrown to the lions. Faith guarantees that whatever happens, God is faithful, and the believer's life is hidden in Christ.</p>
+
+        <p>And the chapter does not end at chapter 11. The argument runs straight into chapter 12. <em>"Therefore we also, since we are surrounded by so great a cloud of witnesses, let us lay aside every weight, and the sin which so easily ensnares us, and let us run with endurance the race that is set before us, looking unto Jesus, the author and finisher of our faith"</em> (Hebrews 12:1–2). The Hall of Faith is the bleachers. The believer is on the track. The witnesses in the bleachers are the ones who have already run the race and finished it well. They are not watching to judge. They are watching to cheer. And the believer on the track is running toward only one face — <em>"looking unto Jesus."</em></p>
+
+        <h2>IV. James — Faith Tested in Life</h2>
+        <p>James was the half-brother of the Lord Jesus. He had grown up in the same house, at the same table, under the same Galilean roof. He did not believe in his elder brother during the years of His public ministry (John 7:5). It took the resurrection — when the risen Christ appeared specifically to James (1 Corinthians 15:7) — to convince him. After that conversion, James became the leading pastor of the Jerusalem church for the next thirty years, presiding over the Jerusalem Council of Acts 15. He was martyred in AD 62, thrown from the pinnacle of the temple by his enemies and beaten to death because he refused to deny that his elder brother was the Christ. The man who wrote the letter of James knew exactly what testing was.</p>
+
+        <p>His letter is the most Jewish book in the New Testament. It reads almost like a New Testament book of Proverbs. It organizes around five trials of the believer's life that James names in his five chapters. <strong>Chapter 1 — the trial of suffering.</strong> <strong>Chapter 2 — the trial of partiality.</strong> <strong>Chapter 3 — the trial of the tongue.</strong> <strong>Chapter 4 — the trial of worldliness.</strong> <strong>Chapter 5 — the trial of impatience.</strong> Each trial is a different way the world tests whether the believer's faith is real.</p>
+
+        <p>The opening verse of the letter is one of the most counterintuitive sentences in the Bible. <em>"My brethren, count it all joy when you fall into various trials, knowing that the testing of your faith produces patience"</em> (James 1:2–3). <em>Count it all joy.</em> Not endure it. Not survive it. Not get through it. Count it <em>all joy</em>, because the trial is producing something in you that nothing else can produce. James tells the believer that there are three varieties of trials in the Christian life. <strong>First, reap-what-you-sow trials</strong> — the consequences of our own bad choices (Galatians 6:7). <strong>Second, spiritual trials</strong> — the fiery testing that comes simply because we belong to Christ (1 Peter 4:12). <strong>Third, mysterious trials</strong> — the trials that have no explanation we can name, the kind Job suffered. All three produce patience if we let them. All three produce bitterness if we don't.</p>
+
+        <p>The Steinway piano company has built its instruments the same way for nearly two hundred years. Eighteen layers of maple are bent around an iron press to form the rim of the grand. Five coats of lacquer are applied and hand-rubbed by craftsmen until the surface glows. And then the finished piano is taken to a room in the factory called the <em>Pounder Room.</em> There, a mechanical hammer strikes each key ten thousand times in succession. Twelve thousand parts, two hundred craftsmen, and ten thousand poundings — that is what makes a Steinway. The trial of the keys does not break the piano; it certifies the piano. James writes to the suffering believer the same thing the factory writes on the side of every Steinway grand: <em>this pounding is making something beautiful out of you.</em></p>
+
+        <p>Down the coast of California, at Pebble Beach, the Pacific Ocean has been hurling waves against the cliffs for tens of thousands of years. The constant pounding tosses the stones together and grinds them against the cliffs, and the result is the polished, rounded, gleaming pebbles that tourists pick up and carry home. Just down the shore there is a sheltered cove that the waves cannot reach. The stones in the cove have been protected from the pounding all their lives. And they are rough and unwanted, never picked up by anyone. The believer who has been pounded by the trials is the believer the Lord picks up. The believer who has avoided every storm is the believer who never shines.</p>
+
+        <h2>V. James — The Working Faith</h2>
+        <p>The most controversial chapter in the letter is James 2 — the famous passage that sounds at first like it contradicts Paul. <em>"What does it profit, my brethren, if someone says he has faith but does not have works? Can faith save him?... Faith by itself, if it does not have works, is dead"</em> (James 2:14, 17). For five hundred years, theologians have wrestled with how James 2 fits with Paul's Ephesians 2:8–9 (<em>"by grace you have been saved through faith… not of works"</em>). The question settles in one sentence: <em>Paul says we are not saved by works; James says we are not saved by a faith that does not work.</em> Same gospel. Two angles. The faith that saves is never alone — it always brings the works with it, the way the rising sun is never separated from the heat that rises with it.</p>
+
+        <p>There was once a man in a small American village who sold firewood to his neighbors and consistently cheated them — always cutting the four-foot logs a few inches short. One day the rumor went around that the woodchopper had been converted at a revival meeting. Nobody in the village believed it. They all said he was beyond reach. Then one of the men quietly slipped out of the grocery store while the conversation was going on, walked over to the woodchopper's lot, and measured the wood the man had just cut. He came running back into the store and burst through the door shouting, <em>"It's so! He has been!"</em> The men said, <em>"How do you know?"</em> And he said, <em>"Because the wood he cut yesterday is a full four feet long."</em> That is James 2. The proof of the conversion was not the testimony at the revival. The proof was the length of the logs the next morning. <em>Faith without works is dead.</em></p>
+
+        <p>James 3 turns to the trial of the tongue, and he is merciless. The tongue is a fire. The tongue is a world of iniquity. The tongue is set on fire by hell. The tongue is a small rudder that turns a great ship. The tongue is a tiny spark that burns down a forest. Out of the same mouth come blessing and cursing — <em>"My brethren, these things ought not to be so"</em> (James 3:10). James does not believe there is any spiritual achievement in a Christian who cannot bridle his speech. <em>"If anyone among you thinks he is religious, and does not bridle his tongue but deceives his own heart, this one's religion is useless"</em> (James 1:26). The tongue is the truest revealer of the heart, because what is in the heart in abundance always overflows out of the mouth without permission.</p>
+
+        <h2>VI. 1 Peter — Living Stones, Living Hope</h2>
+        <p>The apostle Peter wrote his first letter from Rome, which he calls <em>"Babylon"</em> (1 Peter 5:13) — the code name the early church used for the city of the Caesars. He wrote it during the great persecution that broke out under Nero in the mid-60s, when Christians were being arrested, burned alive in Nero's gardens, and torn apart by wild beasts in the arena. Peter's whole letter is a pastoral arm thrown around scattered believers across Asia Minor who are reading by candlelight wondering whether they will be the next ones rounded up. The key word of 1 Peter is <em>suffering.</em> The word appears more often in 1 Peter than in any other New Testament book per chapter.</p>
+
+        <p>Three images dominate the letter. <strong>The new birth into a living hope (1 Peter 1:3–9)</strong> — the believer has been begotten again to an inheritance that is incorruptible, undefiled, and does not fade away, reserved in heaven. <strong>The royal priesthood and the holy nation (1 Peter 2:5–9)</strong> — the church is now what Israel was meant to be, a kingdom of priests offering spiritual sacrifices through Christ Jesus the chief cornerstone. <strong>The fiery trial (1 Peter 4:12–13)</strong> — <em>"Beloved, do not think it strange concerning the fiery trial which is to try you, as though some strange thing happened to you; but rejoice to the extent that you partake of Christ's sufferings."</em> Peter writes to a church on fire from the outside, and he tells them to expect it, to rejoice in it, and to know that the glory will exceed the suffering.</p>
+
+        <p>Consider the central image of 1 Peter 2 — <em>living stones.</em> Peter, who had been renamed by Jesus from Simon to Cephas, the rock, now writes that every believer is a rock too. The church is not a building of dead stones cut once and stacked. The church is a building of <em>living</em> stones, each one fitted into the wall by the Master Mason, growing into a holy temple in the Lord. <em>"You also, as living stones, are being built up a spiritual house, a holy priesthood"</em> (1 Peter 2:5). The fiery trial of chapter 4 is not an attack on the building. The fiery trial is the kiln in which the living stones are baked hard.</p>
+
+        <h2>VII. 2 Peter — Last Days and False Teachers</h2>
+        <p>2 Peter is the second of the two letters and was written a year or two after the first, very near the end of Peter's life. The apostle knows he will be martyred soon. He tells the church, <em>"I know that shortly I must put off my tent, just as our Lord Jesus Christ showed me"</em> (2 Peter 1:14) — a reference to Jesus' prophecy in John 21 that Peter would be crucified. Like Paul writing 2 Timothy from the dungeon, Peter writes 2 Peter from the shadow of the executioner.</p>
+
+        <p>The letter has three chapters and one theme per chapter. <strong>Chapter 1 — knowing Christ.</strong> The believer is to add to faith virtue, knowledge, self-control, perseverance, godliness, brotherly kindness, and love (2 Peter 1:5–7). <strong>Chapter 2 — false teachers.</strong> Peter warns that wolves are coming into the flock who will twist the faith for gain. <strong>Chapter 3 — the Day of the Lord.</strong> Scoffers will mock the second coming, but the Lord <em>"is not slack concerning His promise, as some count slackness, but is longsuffering toward us, not willing that any should perish but that all should come to repentance"</em> (2 Peter 3:9). The Day of the Lord will come as a thief, the heavens will pass away with a great noise, the elements will melt with fervent heat, and the earth and its works will be burned up. New heavens and a new earth are coming, in which righteousness dwells. The believer's job in the meanwhile is to grow in the grace and the knowledge of our Lord and Savior Jesus Christ — the last sentence Peter ever wrote before his execution.</p>
+
+        <h2>VIII. 1 John — The Tests of Eternal Life</h2>
+        <p>The apostle John wrote his three letters near the end of the first century, after he had outlived every other apostle, from his old age in the city of Ephesus where tradition says he died at last quietly in his bed, the only apostle to do so. By then, false teachers — the early Gnostics — were beginning to teach that Christ had not really come in the flesh, that matter was evil, that secret knowledge was the way to salvation. John writes his first letter to draw a hard line. <em>"That which was from the beginning, which we have heard, which we have seen with our eyes, which we have looked upon, and our hands have handled"</em> (1 John 1:1) — these are the first words of the letter, and John piles up the verbs of physical sense on purpose. The Word became flesh. The flesh was real. The hands of the apostles touched Him.</p>
+
+        <p>1 John is built around three tests by which a person can know whether his profession of Christianity is real. <strong>The doctrinal test</strong> — does he confess that Jesus Christ has come in the flesh (1 John 4:2)? <strong>The moral test</strong> — does he walk in the light and not in the darkness (1 John 1:7)? <strong>The relational test</strong> — does he love the brethren (1 John 3:14)? The three tests run through the letter like three colored threads. They are not three separate doctrines. They are three angles on the one life of Christ in the believer. And the purpose of the letter is named in 1 John 5:13: <em>"These things I have written to you who believe in the name of the Son of God, that you may know that you have eternal life."</em> John writes so the believer will <em>know</em> — not hope, not guess, not feel, but <em>know</em> — that he has eternal life.</p>
+
+        <h2>IX. 2 John, 3 John, and Jude</h2>
+        <p>2 John is the shortest book in the New Testament — only thirteen verses long. It is addressed to <em>"the elect lady and her children,"</em> probably a particular Christian woman and her family, possibly a coded reference to a particular local church. Its theme is the connection between truth and love. The believer is to walk in love, but love is never to compromise truth. False teachers were going door to door in the first century, and 2 John tells the lady not to receive them into her home, because hospitality to a false teacher gives the false teacher a base of operation.</p>
+
+        <p>3 John is fourteen verses long, the second-shortest book in the Bible. It is addressed to a believer named Gaius and contrasts him with a man named Diotrephes <em>"who loves to have the preeminence"</em> (3 John 9). Diotrephes is the New Testament's portrait of the church bully — the man who has to be in charge of everything, who blocks the apostles, who threatens to excommunicate any member who disagrees with him. Gaius is the opposite — a faithful, hospitable, generous believer who welcomes traveling missionaries and supports them on their way. Every local church in every century has both kinds of men in her, and the job of the older members is to encourage the Gaius and gently bring the Diotrephes to repentance.</p>
+
+        <p>Jude was another half-brother of the Lord Jesus and the brother of James. His twenty-five-verse letter is the great earnestly-contend letter of the New Testament. <em>"Beloved, while I was very diligent to write to you concerning our common salvation, I found it necessary to write to you exhorting you to contend earnestly for the faith which was once for all delivered to the saints"</em> (Jude 3). Jude had wanted to write a peaceful letter about the joy of salvation. Apostasy was creeping into the church so fast that he could not. He had to put the salvation letter aside and write the warning letter instead. Jude piles up Old Testament examples of judgment — the unbelieving Israelites in the wilderness, the fallen angels, Sodom and Gomorrah, Cain, Balaam, Korah — and uses them to warn that God has not changed His mind about apostasy. The same God who judged the past will judge the present.</p>
+
+        <p>But Jude does not end in judgment. He ends in doxology. <em>"Now to Him who is able to keep you from stumbling, and to present you faultless before the presence of His glory with exceeding joy, to God our Savior, who alone is wise, be glory and majesty, dominion and power, both now and forever. Amen"</em> (Jude 24–25). That is the perfect last sentence before the book of Revelation. Faith has been tested in this unit on every front — by suffering, by partiality, by the tongue, by worldliness, by impatience, by fiery trial, by false teachers, by the love of the world, by the bully in the church, by apostasy itself. And the closing word of the General Epistles is that the Lord is <em>able.</em> Able to keep you from stumbling. Able to present you faultless. Able to bring you home with exceeding joy.</p>
+
+        <p>Press on, my friend, into the last two units with the same Lord who is better than the prophets, better than the angels, better than the priesthood, better than every other king who has ever risen and fallen. Press on with the same Lord whose blood closed the Arizona grave and every other altar. Press on with the same faith that does the work, the same tongue that blesses, the same hope that lives, the same Spirit that tests by fire and builds living stones. The General Epistles have been the church's family letters for two thousand years. Read them out loud the way they were read in the first century, by candlelight, with the wind moving outside the door. And then turn the page. There is one more letter coming — a long one, full of trumpets and seals and a great white throne. Amen.</p>
+    </div>
+<div class="lang-es">
+        <h2>I. Las otras cartas</h2>
+        <p>He aquí un hecho impresionante sobre el Nuevo Testamento. Después de Mateo, Marcos, Lucas, Juan y Hechos, los siguientes veintiún libros son todos cartas. De esas veintiuna, el apóstol Pablo escribió trece. <em>Las otras ocho</em> fueron escritas por hombres que, con una excepción, caminaron con Jesús por los caminos polvorientos de Galilea antes de que Pablo jamás oyera el nombre de Cristo. Estas son las Epístolas Generales — Hebreos, Santiago, 1 y 2 Pedro, 1, 2, y 3 Juan, y Judas. Se llaman <em>generales</em> porque la mayoría no están dirigidas a una sola congregación sino a creyentes esparcidos por todo el Imperio Romano. Son las cartas familiares de la iglesia, de parte de sus hermanos mayores en la fe.</p>
+
+        <p>Algo le da a estas ocho cartas un sabor particular que las cartas paulinas no tienen. Las cartas de Pablo en su mayoría empiezan con doctrina y terminan con deber. Las Epístolas Generales invierten el énfasis. Comienzan con la vida diaria, la prueba que tienes delante esta mañana, el hermano que tienes delante en la banca, el falso maestro que tienes delante en el púlpito, el sufrimiento que tienes delante en el mundo — y discuten desde la vida de regreso a la doctrina. Pablo escribe desde el estudio. Los escritores de las Epístolas Generales escriben desde el mercado. Pablo escribe sobre la salvación. Los escritores de las Epístolas Generales escriben sobre <em>cómo viven los salvos.</em> Las dos mitades se completan una a otra. Pablo te da la teología. Santiago, Pedro, Juan y Judas te dan la prueba. La fe sin la prueba es solo sentimentalismo. La prueba sin la fe es solo agotamiento. Las Epístolas Generales son donde las dos se encuentran.</p>
+
+        <h2>II. Hebreos — La Supremacía de Cristo</h2>
+        <p>Hebreos se distingue entre las Epístolas Generales. Es la más larga. Es la más teológica. Y es la más misteriosa — nadie ha sabido con certeza quién la escribió. Las conjeturas sobre la autoría a lo largo de dos mil años han incluido a Pablo, Apolos, Bernabé, Priscila, Lucas y Clemente de Roma. El libro mismo no lo dice. Lo que sí dice, con fuerza martilleante desde el primer versículo hasta el último, es que <em>Jesucristo es supremo.</em> Supremo sobre los profetas. Supremo sobre los ángeles. Supremo sobre Moisés. Supremo sobre el sacerdocio levítico. Supremo sobre los sacrificios de toros y cabras. Supremo sobre el viejo pacto en su totalidad. Henrietta Mears solía decir que si pones una sola palabra en la portada de Hebreos, la palabra debería ser <em>mejor.</em> Cristo es <em>mejor.</em> La palabra aparece trece veces a lo largo de la carta, y es la columna vertebral de cada argumento.</p>
+
+        <p>Hebreos se puede organizar en torno a los tres oficios del Mesías que el Antiguo Testamento siempre había asignado al Ungido. <strong>Profeta.</strong> <strong>Sacerdote.</strong> <strong>Rey.</strong> Cada oficio en el Antiguo Testamento era ocupado por un hombre. Ninguno de esos hombres jamás tuvo más de un oficio a la vez. El rey Saúl trató de ser sacerdote, y Dios lo quitó. El rey Uzías trató de entrar al templo, y Dios lo hirió con lepra. Los tres oficios se mantenían separados por mandato divino. Pero en Cristo Jesús, los tres se encuentran en una sola persona. Y Hebreos despliega cada oficio por turno.</p>
+
+        <p><strong>Como Profeta (Hebreos 1).</strong> <em>"Dios, habiendo hablado muchas veces y en muchas maneras en otro tiempo á los padres por los profetas, en estos postreros días nos ha hablado por el Hijo"</em> (Hebreos 1:1–2). Los profetas trajeron una palabra parcial; el Hijo es la Palabra completa. Moisés vio un vistazo desde la parte trasera de la montaña; el Hijo <em>es</em> el resplandor de la gloria de Dios y la imagen misma de su sustancia. Isaías vio al Señor alto y sublime; el Hijo se sienta entronizado a la diestra de la Majestad en las alturas. Cada profeta que jamás estuvo entre Dios e Israel era una vela parpadeante apuntando hacia la salida del Sol.</p>
+
+        <p><strong>Como Sacerdote (Hebreos 4–10).</strong> El sumo sacerdote de Israel podía entrar en el Lugar Santísimo una vez al año, con la sangre de un animal, primero por sí mismo y luego por el pueblo. Cristo Jesús es un mejor sacerdote. Entró una vez para siempre. Entró con Su propia sangre. Entró no en un tabernáculo hecho con manos sino en el cielo mismo. Se compadece de nuestra debilidad porque ha sido tentado en todo según nuestra semejanza, pero sin pecado. Es sacerdote para siempre, según el orden de Melquisedec — la única figura del Antiguo Testamento que fue a la vez rey y sacerdote, la sombra del Cristo que vendría.</p>
+
+        <p>Y el sacerdocio de Cristo está conectado al sacrificio. Hay una tumba peculiar en Arizona detrás de la cual yace una historia trágica. Hace años, una tribu de indígenas americanos se reunió para un gran consejo. Sentían el peso de su pecado y creían que se debía derramar sangre para el perdón. No podían sacrificar a sus propios hijos, pero decidieron sacrificar a cuatro huérfanos de la tribu — los únicos sin padres que pudieran rogar por ellos. Los huérfanos fueron muertos y enterrados en una sola tumba. La tribu creyó que la muerte de esos cuatro pequeños había comprado su perdón. Habían leído en el polvo de la conciencia humana la misma línea que el libro de Hebreos escribiría más tarde con tinta: <em>"Sin derramamiento de sangre, no se hace remisión"</em> (Hebreos 9:22). Lo que no sabían era que la sangre del propio Cordero de Dios ya había sido derramada en una cruz romana, y que ningún huérfano necesitaba morir en ningún pueblo jamás de nuevo. Todo el punto de Hebreos es que la cruz de Cristo cierra la puerta sobre todo otro altar.</p>
+
+        <p><strong>Como Rey (Hebreos 7, 12).</strong> El nombre de Melquisedec en hebreo significa <em>rey de justicia</em>. Era rey de Salem, lo cual significa <em>paz</em> — así que también era rey de paz. Rey de justicia y rey de paz, ambos a la vez. Ese es el patrón que Cristo cumple. Todo otro rey en la historia humana falló en algún lugar. David fue un hombre conforme al corazón de Dios y también un gran pecador. Salomón comenzó su reinado pidiendo sabiduría a Dios y terminó su vida como un sabio necio con setecientas esposas. Faraón, Alejandro Magno, Julio César, Carlomagno, Napoleón — los reinos se levantan y se desmoronan. Hebreos le dice a los cristianos hebreos perseguidos que <em>"recibiendo el reino inmóvil"</em> (Hebreos 12:28). La sacudida vendrá. Los reinos de este mundo se sacudirán hasta caer. El único reino que queda en pie será el Suyo.</p>
+
+        <h2>III. El Salón de la Fe</h2>
+        <p>Hebreos 11 es llamado el <em>Salón de la Fe</em> — la galería en la cual el escritor de Hebreos cuelga retrato tras retrato de creyentes del Antiguo Testamento y te dice lo que tenían en común. <em>"Es, pues, la fe la sustancia de las cosas que se esperan, la demostración de las cosas que no se ven"</em> (Hebreos 11:1). El capítulo es una procesión. Por la fe Abel. Por la fe Enoc. Por la fe Noé. Por la fe Abraham. Por la fe Sara. Por la fe Isaac, Jacob, José, Moisés. Por la fe Rahab. Por la fe Gedeón, Barac, Sansón, Jefté, David, Samuel y los profetas. Algunos de ellos conquistaron reinos. Algunos de ellos fueron aserrados en dos. Algunos de ellos cerraron las bocas de leones. Algunos de ellos vagaron por desiertos y montañas, en cuevas y cavernas de la tierra — pobres, afligidos, atormentados. La fe no garantiza que la boca del león se cierre. Algunos de los héroes fueron arrojados a los leones. La fe garantiza que pase lo que pase, Dios es fiel, y la vida del creyente está escondida en Cristo.</p>
+
+        <p>Y el capítulo no termina en el capítulo 11. El argumento corre directamente al capítulo 12. <em>"Por tanto nosotros también, teniendo en derredor nuestro una tan grande nube de testigos, dejando todo el peso del pecado que nos rodea, corramos con paciencia la carrera que nos es propuesta, puestos los ojos en el autor y consumador de la fe, en Jesús"</em> (Hebreos 12:1–2). El Salón de la Fe son las gradas. El creyente está en la pista. Los testigos en las gradas son los que ya han corrido la carrera y la han terminado bien. No están mirando para juzgar. Están mirando para animar. Y el creyente en la pista está corriendo hacia un solo rostro — <em>"puestos los ojos en Jesús."</em></p>
+
+        <h2>IV. Santiago — Fe Probada en la Vida</h2>
+        <p>Santiago era el medio hermano del Señor Jesús. Había crecido en la misma casa, en la misma mesa, bajo el mismo techo galileo. No creyó en su hermano mayor durante los años de Su ministerio público (Juan 7:5). Hizo falta la resurrección — cuando el Cristo resucitado se le apareció específicamente a Santiago (1 Corintios 15:7) — para convencerlo. Después de esa conversión, Santiago se convirtió en el pastor principal de la iglesia de Jerusalén durante los siguientes treinta años, presidiendo el Concilio de Jerusalén de Hechos 15. Fue martirizado en el año 62, arrojado desde el pináculo del templo por sus enemigos y golpeado a muerte porque se negó a negar que su hermano mayor era el Cristo. El hombre que escribió la carta de Santiago sabía exactamente lo que era la prueba.</p>
+
+        <p>Su carta es el libro más judío del Nuevo Testamento. Lee casi como un libro de Proverbios del Nuevo Testamento. Se organiza en torno a cinco pruebas de la vida del creyente que Santiago nombra en sus cinco capítulos. <strong>Capítulo 1 — la prueba del sufrimiento.</strong> <strong>Capítulo 2 — la prueba de la parcialidad.</strong> <strong>Capítulo 3 — la prueba de la lengua.</strong> <strong>Capítulo 4 — la prueba de la mundanalidad.</strong> <strong>Capítulo 5 — la prueba de la impaciencia.</strong> Cada prueba es una manera diferente en que el mundo prueba si la fe del creyente es real.</p>
+
+        <p>El versículo de apertura de la carta es una de las oraciones más contraintuitivas de la Biblia. <em>"Hermanos míos, tened por sumo gozo cuando cayereis en diversas tentaciones; Sabiendo que la prueba de vuestra fe obra paciencia"</em> (Santiago 1:2–3). <em>Tened por sumo gozo.</em> No soportarlo. No sobrevivirlo. No pasarlo. Tenedlo por <em>sumo gozo</em>, porque la prueba está produciendo algo en ti que nada más puede producir. Santiago le dice al creyente que hay tres variedades de pruebas en la vida cristiana. <strong>Primera, pruebas de cosechar-lo-que-sembramos</strong> — las consecuencias de nuestras propias malas decisiones (Gálatas 6:7). <strong>Segunda, pruebas espirituales</strong> — la prueba de fuego que viene simplemente porque pertenecemos a Cristo (1 Pedro 4:12). <strong>Tercera, pruebas misteriosas</strong> — las pruebas que no tienen explicación que podamos nombrar, el tipo que Job sufrió. Las tres producen paciencia si las dejamos. Las tres producen amargura si no lo hacemos.</p>
+
+        <p>La compañía de pianos Steinway ha construido sus instrumentos de la misma manera por casi doscientos años. Dieciocho capas de arce son curvadas alrededor de una prensa de hierro para formar el borde del piano de cola. Cinco capas de laca se aplican y se frotan a mano por los artesanos hasta que la superficie brilla. Y luego el piano terminado es llevado a una sala en la fábrica llamada el <em>Cuarto del Martilleador.</em> Allí, un martillo mecánico golpea cada tecla diez mil veces seguidas. Doce mil partes, doscientos artesanos y diez mil golpes — eso es lo que hace un Steinway. La prueba de las teclas no rompe el piano; certifica el piano. Santiago le escribe al creyente sufriente la misma cosa que la fábrica escribe en el costado de cada gran Steinway: <em>este golpeo está haciendo algo hermoso de ti.</em></p>
+
+        <p>En la costa de California, en Pebble Beach, el Océano Pacífico ha estado arrojando olas contra los acantilados durante decenas de miles de años. El golpeo constante lanza las piedras juntas y las muele contra los acantilados, y el resultado son los guijarros pulidos, redondos y brillantes que los turistas recogen y llevan a casa. Justo más adelante en la costa hay una caleta resguardada que las olas no pueden alcanzar. Las piedras en la caleta han sido protegidas del golpeo toda su vida. Y son ásperas y no deseadas, nunca recogidas por nadie. El creyente que ha sido golpeado por las pruebas es el creyente que el Señor recoge. El creyente que ha evitado toda tormenta es el creyente que nunca brilla.</p>
+
+        <h2>V. Santiago — La Fe que Obra</h2>
+        <p>El capítulo más controvertido de la carta es Santiago 2 — el famoso pasaje que suena al principio como si contradijera a Pablo. <em>"Hermanos míos, ¿qué aprovechará si alguno dice que tiene fe, y no tiene obras? ¿Podrá la fe salvarle?... Así también la fe, si no tuviere obras, es muerta en sí misma"</em> (Santiago 2:14, 17). Durante quinientos años, los teólogos han luchado con cómo Santiago 2 encaja con Efesios 2:8–9 de Pablo (<em>"por gracia sois salvos por la fe… no por obras"</em>). La cuestión se resuelve en una oración: <em>Pablo dice que no somos salvos por las obras; Santiago dice que no somos salvos por una fe que no obra.</em> Mismo evangelio. Dos ángulos. La fe que salva nunca está sola — siempre trae las obras consigo, de la misma manera que el sol naciente nunca se separa del calor que sube con él.</p>
+
+        <p>Había una vez un hombre en un pequeño pueblo americano que vendía leña a sus vecinos y consistentemente los engañaba — siempre cortando los troncos de cuatro pies unas pulgadas más cortos. Un día corrió el rumor de que el leñador había sido convertido en una reunión de avivamiento. Nadie en el pueblo lo creía. Todos decían que estaba más allá de todo alcance. Entonces uno de los hombres se deslizó silenciosamente fuera de la tienda mientras la conversación continuaba, caminó hasta el lote del leñador y midió la madera que el hombre acababa de cortar. Volvió corriendo a la tienda y entró por la puerta gritando: <em>"¡Es verdad! ¡Lo ha sido!"</em> Los hombres dijeron: <em>"¿Cómo lo sabes?"</em> Y él dijo: <em>"Porque la madera que cortó ayer mide exactamente cuatro pies."</em> Eso es Santiago 2. La prueba de la conversión no fue el testimonio en el avivamiento. La prueba fue la longitud de los troncos a la mañana siguiente. <em>La fe sin obras es muerta.</em></p>
+
+        <p>Santiago 3 se vuelve a la prueba de la lengua, y es despiadado. La lengua es un fuego. La lengua es un mundo de maldad. La lengua es encendida del infierno. La lengua es un pequeño timón que dirige un gran barco. La lengua es una pequeña chispa que quema un bosque. De la misma boca salen bendición y maldición — <em>"Hermanos míos, esto no debe ser así"</em> (Santiago 3:10). Santiago no cree que haya logro espiritual alguno en un cristiano que no puede dominar su discurso. <em>"Si alguno piensa ser religioso entre vosotros, y no refrena su lengua, sino engañando su corazón, la religión del tal es vana"</em> (Santiago 1:26). La lengua es la reveladora más verdadera del corazón, porque lo que está en el corazón en abundancia siempre rebosa fuera de la boca sin permiso.</p>
+
+        <h2>VI. 1 Pedro — Piedras Vivas, Esperanza Viva</h2>
+        <p>El apóstol Pedro escribió su primera carta desde Roma, a la que llama <em>"Babilonia"</em> (1 Pedro 5:13) — el nombre en clave que la iglesia primitiva usaba para la ciudad de los Césares. La escribió durante la gran persecución que estalló bajo Nerón a mediados de los años 60, cuando los cristianos estaban siendo arrestados, quemados vivos en los jardines de Nerón y desgarrados por bestias salvajes en la arena. Toda la carta de Pedro es un brazo pastoral echado alrededor de creyentes esparcidos por toda Asia Menor que leen a la luz de las velas preguntándose si serán los próximos en ser arrestados. La palabra clave de 1 Pedro es <em>sufrimiento.</em> La palabra aparece con más frecuencia en 1 Pedro que en cualquier otro libro del Nuevo Testamento por capítulo.</p>
+
+        <p>Tres imágenes dominan la carta. <strong>El nuevo nacimiento a una esperanza viva (1 Pedro 1:3–9)</strong> — el creyente ha sido engendrado de nuevo a una herencia incorruptible, sin contaminación y que no puede marchitarse, reservada en los cielos. <strong>El real sacerdocio y la nación santa (1 Pedro 2:5–9)</strong> — la iglesia es ahora lo que Israel debía haber sido, un reino de sacerdotes ofreciendo sacrificios espirituales a través de Cristo Jesús la principal piedra del ángulo. <strong>La prueba de fuego (1 Pedro 4:12–13)</strong> — <em>"Carísimos, no os maravilléis cuando sois examinados por fuego, lo cual se hace para vuestra prueba, como si alguna cosa peregrina os aconteciese; Antes bien gozaos en que sois participantes de las aflicciones de Cristo."</em> Pedro escribe a una iglesia en fuego desde afuera, y les dice que lo esperen, que se regocijen en ello, y que sepan que la gloria excederá al sufrimiento.</p>
+
+        <p>Considere la imagen central de 1 Pedro 2 — <em>piedras vivas.</em> Pedro, que había sido renombrado por Jesús de Simón a Cefas, la roca, ahora escribe que cada creyente es una roca también. La iglesia no es un edificio de piedras muertas cortadas una vez y apiladas. La iglesia es un edificio de piedras <em>vivas</em>, cada una ajustada en la pared por el Maestro Albañil, creciendo en un templo santo en el Señor. <em>"Vosotros también, como piedras vivas, sed edificados una casa espiritual, y un sacerdocio santo"</em> (1 Pedro 2:5). La prueba de fuego del capítulo 4 no es un ataque al edificio. La prueba de fuego es el horno en el cual las piedras vivas son endurecidas.</p>
+
+        <h2>VII. 2 Pedro — Últimos Días y Falsos Maestros</h2>
+        <p>2 Pedro es la segunda de las dos cartas y fue escrita un año o dos después de la primera, muy cerca del fin de la vida de Pedro. El apóstol sabe que será martirizado pronto. Le dice a la iglesia: <em>"Sabiendo que brevemente tengo de dejar mi tabernáculo, como nuestro Señor Jesucristo me ha declarado"</em> (2 Pedro 1:14) — una referencia a la profecía de Jesús en Juan 21 de que Pedro sería crucificado. Como Pablo escribiendo 2 Timoteo desde el calabozo, Pedro escribe 2 Pedro desde la sombra del verdugo.</p>
+
+        <p>La carta tiene tres capítulos y un tema por capítulo. <strong>Capítulo 1 — conocer a Cristo.</strong> El creyente ha de añadir a la fe virtud, conocimiento, dominio propio, perseverancia, piedad, afecto fraternal y amor (2 Pedro 1:5–7). <strong>Capítulo 2 — falsos maestros.</strong> Pedro advierte que vienen lobos al rebaño que torcerán la fe por ganancia. <strong>Capítulo 3 — el Día del Señor.</strong> Los burladores se burlarán de la segunda venida, pero el Señor <em>"no tarda su promesa, como algunos la tienen por tardanza; sino que es paciente para con nosotros, no queriendo que ninguno perezca, sino que todos procedan al arrepentimiento"</em> (2 Pedro 3:9). El Día del Señor vendrá como ladrón, los cielos pasarán con grande estruendo, los elementos se desharán ardiendo, y la tierra y las obras que en ella están serán quemadas. Vienen nuevos cielos y nueva tierra, en los cuales mora la justicia. El trabajo del creyente mientras tanto es crecer en la gracia y en el conocimiento de nuestro Señor y Salvador Jesucristo — la última oración que Pedro jamás escribió antes de su ejecución.</p>
+
+        <h2>VIII. 1 Juan — Las Pruebas de la Vida Eterna</h2>
+        <p>El apóstol Juan escribió sus tres cartas cerca del final del primer siglo, después de que había sobrevivido a todos los demás apóstoles, desde su vejez en la ciudad de Éfeso donde la tradición dice que murió al fin tranquilamente en su cama, el único apóstol que lo hizo. Para entonces, falsos maestros — los primeros gnósticos — estaban comenzando a enseñar que Cristo no había venido realmente en la carne, que la materia era mala, que el conocimiento secreto era el camino a la salvación. Juan escribe su primera carta para trazar una línea dura. <em>"Lo que era desde el principio, lo que hemos oído, lo que hemos visto con nuestros ojos, lo que hemos mirado, y palparon nuestras manos"</em> (1 Juan 1:1) — estas son las primeras palabras de la carta, y Juan amontona los verbos del sentido físico a propósito. La Palabra se hizo carne. La carne era real. Las manos de los apóstoles Lo tocaron.</p>
+
+        <p>1 Juan se construye en torno a tres pruebas por las cuales una persona puede saber si su profesión de cristianismo es real. <strong>La prueba doctrinal</strong> — ¿confiesa que Jesucristo ha venido en carne (1 Juan 4:2)? <strong>La prueba moral</strong> — ¿anda en la luz y no en las tinieblas (1 Juan 1:7)? <strong>La prueba relacional</strong> — ¿ama a los hermanos (1 Juan 3:14)? Las tres pruebas corren por la carta como tres hilos de colores. No son tres doctrinas separadas. Son tres ángulos de la una vida de Cristo en el creyente. Y el propósito de la carta se nombra en 1 Juan 5:13: <em>"Estas cosas he escrito á vosotros que creéis en el nombre del Hijo de Dios, para que sepáis que tenéis vida eterna."</em> Juan escribe para que el creyente <em>sepa</em> — no espere, no adivine, no sienta, sino <em>sepa</em> — que tiene vida eterna.</p>
+
+        <h2>IX. 2 Juan, 3 Juan, y Judas</h2>
+        <p>2 Juan es el libro más corto del Nuevo Testamento — solo trece versículos de largo. Está dirigido a <em>"la señora elegida y á sus hijos,"</em> probablemente una mujer cristiana particular y su familia, posiblemente una referencia codificada a una iglesia local particular. Su tema es la conexión entre verdad y amor. El creyente ha de andar en amor, pero el amor nunca ha de comprometer la verdad. Falsos maestros andaban de puerta en puerta en el primer siglo, y 2 Juan le dice a la señora que no los reciba en su casa, porque la hospitalidad a un falso maestro le da al falso maestro una base de operación.</p>
+
+        <p>3 Juan tiene catorce versículos, el segundo libro más corto de la Biblia. Está dirigido a un creyente llamado Gayo y lo contrasta con un hombre llamado Diótrefes <em>"al cual le gusta tener el primado entre ellos"</em> (3 Juan 9). Diótrefes es el retrato del Nuevo Testamento del bravucón de la iglesia — el hombre que tiene que estar a cargo de todo, que bloquea a los apóstoles, que amenaza con excomulgar a cualquier miembro que no esté de acuerdo con él. Gayo es lo opuesto — un creyente fiel, hospitalario, generoso que recibe a los misioneros viajeros y los apoya en su camino. Cada iglesia local en cada siglo tiene ambos tipos de hombres en ella, y el trabajo de los miembros mayores es animar al Gayo y traer suavemente al Diótrefes al arrepentimiento.</p>
+
+        <p>Judas era otro medio hermano del Señor Jesús y el hermano de Santiago. Su carta de veinticinco versículos es la gran carta de contender-fervientemente del Nuevo Testamento. <em>"Amados, por la gran solicitud que tenía de escribiros de la común salud, me ha sido necesario escribiros amonestándoos que contendáis eficazmente por la fe que ha sido una vez dada á los santos"</em> (Judas 3). Judas había querido escribir una carta pacífica sobre el gozo de la salvación. La apostasía se estaba colando en la iglesia tan rápido que no pudo. Tuvo que dejar a un lado la carta de salvación y escribir la carta de advertencia en su lugar. Judas amontona ejemplos del Antiguo Testamento de juicio — los israelitas incrédulos en el desierto, los ángeles caídos, Sodoma y Gomorra, Caín, Balaam, Coré — y los usa para advertir que Dios no ha cambiado de opinión sobre la apostasía. El mismo Dios que juzgó el pasado juzgará el presente.</p>
+
+        <p>Pero Judas no termina en juicio. Termina en doxología. <em>"A aquel, pues, que es poderoso para guardaros sin caída, y presentaros delante de su gloria irreprensibles, con grande alegría, Al Dios solo sabio, nuestro Salvador, sea gloria y magnificencia, imperio y potencia, ahora y en todos los siglos. Amén"</em> (Judas 24–25). Esa es la oración final perfecta antes del libro del Apocalipsis. La fe ha sido probada en esta unidad en cada frente — por sufrimiento, por parcialidad, por la lengua, por mundanalidad, por impaciencia, por prueba de fuego, por falsos maestros, por el amor del mundo, por el bravucón en la iglesia, por la apostasía misma. Y la palabra final de las Epístolas Generales es que el Señor es <em>poderoso.</em> Poderoso para guardarte de caída. Poderoso para presentarte irreprensible. Poderoso para traerte a casa con gran alegría.</p>
+
+        <p>Avance, amigo mío, hacia las últimas dos unidades con el mismo Señor que es mejor que los profetas, mejor que los ángeles, mejor que el sacerdocio, mejor que cualquier otro rey que jamás se haya levantado y caído. Avance con el mismo Señor cuya sangre cerró la tumba de Arizona y todo otro altar. Avance con la misma fe que hace la obra, la misma lengua que bendice, la misma esperanza que vive, el mismo Espíritu que prueba por fuego y construye piedras vivas. Las Epístolas Generales han sido las cartas familiares de la iglesia por dos mil años. Léalas en voz alta de la manera en que fueron leídas en el primer siglo, a la luz de las velas, con el viento moviéndose afuera de la puerta. Y luego pase la página. Viene una carta más — una larga, llena de trompetas y sellos y un gran trono blanco. Amén.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 11 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 11 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer questions 1–20 (multiple choice). You must achieve 90% (18/20) on the multiple-choice section to pass. <strong>M.Div. / Th.M. students:</strong> Answer all 30 questions. You must achieve 90% on both sections independently — 18/20 multiple choice AND 9/10 short answer. Click an answer for immediate feedback. <strong>Once all 12 units are passed, you will be redirected to your certificate.</strong></span><span class="lang-es"><strong>Estudiantes de certificado:</strong> Respondan las preguntas 1–20 (opción múltiple). Debe alcanzar el 90% (18/20) en la sección de opción múltiple para aprobar. <strong>Estudiantes de M.Div. / Th.M.:</strong> Respondan las 30 preguntas. Debe alcanzar el 90% en ambas secciones de manera independiente — 18/20 opción múltiple Y 9/10 respuesta corta. Haga clic en una respuesta para retroalimentación inmediata. <strong>Una vez aprobadas las 12 unidades, será redirigido a su certificado.</strong></span></p>
+    <div class="track-bar">
+        <strong><span class="lang-en">Your Track:</span><span class="lang-es">Su Modalidad:</span></strong>
+        <span style="margin-left:14px;">
+            <label><input type="radio" name="ctsTrack" value="cert"><span class="lang-en">Certificate (MC only)</span><span class="lang-es">Certificado (solo opción múltiple)</span></label>
+            <label><input type="radio" name="ctsTrack" value="mdiv"><span class="lang-en">Master of Divinity (MC + SA)</span><span class="lang-es">Maestría en Divinidad (MC + RC)</span></label>
+            <label><input type="radio" name="ctsTrack" value="thm"><span class="lang-en">Master of Theology (Th.M.) Track</span><span class="lang-es">Maestría en Teología (Th.M.)</span></label>
+        </span>
+    </div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar Aprobación</span></button>
+        <button id="resetExamBtn" class="reset-btn"><span class="lang-en">↺ Reset Exam</span><span class="lang-es">↺ Restablecer Examen</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ===== PER-UNIT CONFIG =====
+const UNIT = 11;
+const TOTAL_UNITS = 12;
+const NEXT_URL = 'CTSNTUnit12.html';
+const PREV_URL = 'CTSNTUnit10.html';
+const PASS_THRESHOLD = 0.90;
+
+let progress = JSON.parse(localStorage.getItem('cts_nt_progress')) || {};
+let currentTrack = localStorage.getItem('cts_track') || 'cert';
+
+function isMastersLevel() { return currentTrack === 'mdiv' || currentTrack === 'thm'; }
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === UNIT) cls += ' active';
+        grid.innerHTML += `<a href="CTSNTUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+if (PREV_URL) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_URL; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="#" onclick="promptName(); return false;" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+    }
+}
+function promptName() {
+    const name = prompt("Welcome to CTS New Testament Survey! Please enter your full name as you'd like it to appear on your certificate:");
+    if (name && name.trim().length > 1) {
+        localStorage.setItem('cts_student', JSON.stringify({name: name.trim()}));
+        displayStudentGreeting();
+    }
+}
+displayStudentGreeting();
+
+const mcQuestions = [
+    { textEn: "1. The 'General Epistles' refers to how many letters in the New Testament?", textEs: "1. Las 'Epístolas Generales' se refieren a cuántas cartas del Nuevo Testamento?",
+      optionsEn: ["Six", "Ten", "Eight", "Thirteen"],
+      optionsEs: ["Seis", "Diez", "Ocho", "Trece"],
+      explanationEn: "The General Epistles are eight letters — Hebrews, James, 1–2 Peter, 1–3 John, and Jude — beyond Paul's thirteen.", explanationEs: "Las epístolas generales son ocho cartas — Hebreos, Santiago, 1–2 Pedro, 1–3 Juan y Judas — además de las trece de Pablo.", correct: 2 },
+    { textEn: "2. The General Epistles include all of the following EXCEPT:", textEs: "2. Las Epístolas Generales incluyen todos los siguientes EXCEPTO:",
+      optionsEn: ["Hebrews", "James", "1 Peter", "Philemon"],
+      optionsEs: ["Hebreos", "Santiago", "1 Pedro", "Filemón"],
+      explanationEn: "The General Epistles are written by men other than Paul, so any Pauline letter is the exception in such a list.", explanationEs: "Las epístolas generales fueron escritas por hombres que no eran Pablo, así que cualquier carta paulina es la excepción en tal lista.", correct: 3 },
+    { textEn: "3. The author of Hebrews is:", textEs: "3. El autor de Hebreos es:",
+      optionsEn: ["Unknown / never identified with certainty", "Definitely Paul", "Definitely Apollos", "Definitely Barnabas"],
+      optionsEs: ["Desconocido / nunca identificado con certeza", "Definitivamente Pablo", "Definitivamente Apolos", "Definitivamente Bernabé"],
+      explanationEn: "The General Epistles begin with daily life and argue back to doctrine, where Paul begins with doctrine and ends with duty.", explanationEs: "Las epístolas generales comienzan con la vida diaria y razonan de vuelta a la doctrina, donde Pablo comienza con doctrina y termina con deber.", correct: 0 },
+    { textEn: "4. The English word that appears thirteen times in Hebrews as the spine of its argument is:", textEs: "4. La palabra inglesa que aparece trece veces en Hebreos como la columna vertebral de su argumento es:",
+      optionsEn: ["Greater", "Higher", "Better", "Stronger"],
+      optionsEs: ["Mayor", "Más alto", "Mejor", "Más fuerte"],
+      explanationEn: "No one knows for certain who wrote Hebrews; guesses include Paul, Apollos, Barnabas, Priscilla, Luke, and Clement.", explanationEs: "Nadie sabe con certeza quién escribió Hebreos; las conjeturas incluyen a Pablo, Apolos, Bernabé, Priscila, Lucas y Clemente.", correct: 2 },
+    { textEn: "5. The three offices that meet in Christ alone according to Hebrews are:", textEs: "5. Los tres oficios que se encuentran solo en Cristo según Hebreos son:",
+      optionsEn: ["Father, Son, Holy Spirit", "Prophet, Priest, King", "Apostle, Pastor, Teacher", "Lord, Savior, Friend"],
+      optionsEs: ["Padre, Hijo, Espíritu Santo", "Profeta, Sacerdote, Rey", "Apóstol, Pastor, Maestro", "Señor, Salvador, Amigo"],
+      explanationEn: "The key word of Hebrews is 'better,' appearing thirteen times: Christ is better than the prophets, angels, Moses, and the old covenant.", explanationEs: "La palabra clave de Hebreos es 'mejor', que aparece trece veces: Cristo es mejor que los profetas, los ángeles, Moisés y el antiguo pacto.", correct: 1 },
+    { textEn: "6. The mysterious Old Testament figure who was both king and priest at once (and is the foreshadow of Christ in Hebrews 7) was:", textEs: "6. La misteriosa figura del Antiguo Testamento que era a la vez rey y sacerdote (y es la sombra de Cristo en Hebreos 7) fue:",
+      optionsEn: ["Aaron", "Samuel", "Joshua", "Melchizedek"],
+      optionsEs: ["Aarón", "Samuel", "Josué", "Melquisedec"],
+      explanationEn: "Hebrews shows Christ holding all three Messianic offices at once — Prophet, Priest, and King — which no Old Testament man did.", explanationEs: "Hebreos muestra a Cristo ocupando los tres oficios mesiánicos a la vez — Profeta, Sacerdote y Rey — lo que ningún hombre del Antiguo Testamento hizo.", correct: 3 },
+    { textEn: "7. Hebrews 11 is famously called:", textEs: "7. Hebreos 11 es famosamente llamado:",
+      optionsEn: ["The Hall of Faith", "The Great Cloud", "The Witness Wall", "The Prophets' Procession"],
+      optionsEs: ["El Salón de la Fe", "La Gran Nube", "El Muro de Testigos", "La Procesión de los Profetas"],
+      explanationEn: "Christ is a priest forever after the order of Melchizedek, the only Old Testament figure who was both king and priest at once.", explanationEs: "Cristo es sacerdote para siempre según el orden de Melquisedec, la única figura del Antiguo Testamento que fue rey y sacerdote a la vez.", correct: 0 },
+    { textEn: "8. The author of the letter of James was:", textEs: "8. El autor de la carta de Santiago era:",
+      optionsEn: ["The apostle James, son of Zebedee", "James, the half-brother of Jesus", "James, son of Alphaeus", "James the Less"],
+      optionsEs: ["El apóstol Santiago, hijo de Zebedeo", "Santiago, el medio hermano de Jesús", "Santiago, hijo de Alfeo", "Santiago el Menor"],
+      explanationEn: "Hebrews 9:22 says without the shedding of blood there is no forgiveness, and Christ entered once for all with His own blood.", explanationEs: "Hebreos 9:22 dice que sin derramamiento de sangre no hay perdón, y Cristo entró una vez para siempre con Su propia sangre.", correct: 1 },
+    { textEn: "9. The five trials of the believer organized chapter-by-chapter in James are:", textEs: "9. Las cinco pruebas del creyente organizadas capítulo por capítulo en Santiago son:",
+      optionsEn: ["Suffering, partiality, the tongue, worldliness, impatience", "Doubt, pride, lust, greed, anger", "Fear, anxiety, sorrow, weakness, ignorance", "Idolatry, blasphemy, theft, adultery, murder"],
+      optionsEs: ["Sufrimiento, parcialidad, lengua, mundanalidad, impaciencia", "Duda, orgullo, lujuria, codicia, ira", "Miedo, ansiedad, tristeza, debilidad, ignorancia", "Idolatría, blasfemia, robo, adulterio, asesinato"],
+      explanationEn: "Hebrews 11 is the Hall of Faith; 11:1 defines faith as the substance of things hoped for, the evidence of things not seen.", explanationEs: "Hebreos 11 es la Galería de la Fe; 11:1 define la fe como la sustancia de lo que se espera, la demostración de lo que no se ve.", correct: 0 },
+    { textEn: "10. The three varieties of trials James identifies are:", textEs: "10. Las tres variedades de pruebas que Santiago identifica son:",
+      optionsEn: ["Health, finances, relationships", "Past, present, future", "Internal, external, eternal", "Reap-what-you-sow, spiritual, mysterious"],
+      optionsEs: ["Salud, finanzas, relaciones", "Pasado, presente, futuro", "Interno, externo, eterno", "Cosechar-lo-sembrado, espirituales, misteriosas"],
+      explanationEn: "Hebrews 12:1–2 turns the Hall of Faith into bleachers: surrounded by witnesses, the believer runs the race looking unto Jesus.", explanationEs: "Hebreos 12:1–2 convierte la Galería de la Fe en gradas: rodeado de testigos, el creyente corre la carrera puestos los ojos en Jesús.", correct: 3 },
+    { textEn: "11. The Steinway piano illustration teaches that:", textEs: "11. La ilustración del piano Steinway enseña que:",
+      optionsEn: ["Music is a spiritual gift", "The pounding of trials certifies, not breaks, the believer", "Worship requires excellence", "The believer should be tuned daily"],
+      optionsEs: ["La música es un don espiritual", "El golpeo de las pruebas certifica, no rompe, al creyente", "La adoración requiere excelencia", "El creyente debe ser afinado diariamente"],
+      explanationEn: "James 1:2–3 says count it all joy when you fall into trials, for the testing of your faith produces patience.", explanationEs: "Santiago 1:2–3 dice tened por sumo gozo cuando caigáis en pruebas, porque la prueba de vuestra fe produce paciencia.", correct: 1 },
+    { textEn: "12. The Pebble Beach illustration contrasts:", textEs: "12. La ilustración de Pebble Beach contrasta:",
+      optionsEn: ["Sand vs. rock", "Old vs. new shores", "Pounded stones (polished) with sheltered stones (rough and unwanted)", "California vs. Atlantic coasts"],
+      optionsEs: ["Arena vs. roca", "Costas viejas vs. nuevas", "Piedras golpeadas (pulidas) con piedras protegidas (ásperas y no deseadas)", "Costas de California vs. Atlántica"],
+      explanationEn: "James organizes around five trials — suffering, partiality, the tongue, worldliness, and impatience — one per chapter.", explanationEs: "Santiago se organiza en torno a cinco pruebas — sufrimiento, parcialidad, la lengua, la mundanalidad y la impaciencia — una por capítulo.", correct: 2 },
+    { textEn: "13. The famous resolution of the James-Paul tension on faith and works is:", textEs: "13. La famosa resolución de la tensión Santiago-Pablo sobre la fe y las obras es:",
+      optionsEn: ["Paul says we are not saved by works; James says we are not saved by a faith that does not work", "Paul wrote first; James corrected him later", "They are addressing two different audiences", "They are talking about two different gospels"],
+      optionsEs: ["Pablo dice que no somos salvos por obras; Santiago dice que no somos salvos por una fe que no obra", "Pablo escribió primero; Santiago lo corrigió después", "Están dirigiéndose a dos audiencias diferentes", "Están hablando de dos evangelios diferentes"],
+      explanationEn: "James 2 says faith without works is dead; Paul says we are not saved by works, James that we are not saved by a faith that does not work.", explanationEs: "Santiago 2 dice que la fe sin obras está muerta; Pablo dice que no somos salvos por obras, Santiago que no somos salvos por una fe que no obra.", correct: 0 },
+    { textEn: "14. The mean woodchopper story ('It's so! He has been!') illustrates:", textEs: "14. La historia del leñador mentiroso ('¡Es verdad! ¡Lo ha sido!') ilustra:",
+      optionsEn: ["Forgiveness", "Family ties", "That works are the proof of true conversion", "Persistence in business"],
+      optionsEs: ["El perdón", "Los lazos familiares", "Que las obras son la prueba de la verdadera conversión", "La persistencia en los negocios"],
+      explanationEn: "James 3 calls the tongue a fire and a small rudder that turns a great ship; an unbridled tongue makes religion useless.", explanationEs: "Santiago 3 llama a la lengua un fuego y un pequeño timón que gobierna una gran nave; una lengua sin freno hace vana la religión.", correct: 2 },
+    { textEn: "15. The apostle Peter wrote his first letter from the city he called:", textEs: "15. El apóstol Pedro escribió su primera carta desde la ciudad que él llamó:",
+      optionsEn: ["Antioch", "Babylon (code for Rome)", "Ephesus", "Jerusalem"],
+      optionsEs: ["Antioquía", "Babilonia (código para Roma)", "Éfeso", "Jerusalén"],
+      explanationEn: "First Peter, whose key word is suffering, was written from Rome (called Babylon) during Nero's persecution.", explanationEs: "Primera de Pedro, cuya palabra clave es sufrimiento, fue escrita desde Roma (llamada Babilonia) durante la persecución de Nerón.", correct: 1 },
+    { textEn: "16. The central image of 1 Peter 2 for the church is:", textEs: "16. La imagen central de 1 Pedro 2 para la iglesia es:",
+      optionsEn: ["The vine and branches", "Wheat and tares", "The body of Christ", "Living stones / royal priesthood"],
+      optionsEs: ["La vid y los pámpanos", "Trigo y cizaña", "El cuerpo de Cristo", "Piedras vivas / real sacerdocio"],
+      explanationEn: "First Peter 2 calls believers living stones built into a spiritual house, a royal priesthood and holy nation.", explanationEs: "Primera de Pedro 2 llama a los creyentes piedras vivas edificadas en casa espiritual, un real sacerdocio y nación santa.", correct: 3 },
+    { textEn: "17. 2 Peter chapter 3 promises that the Lord delays His coming because:", textEs: "17. 2 Pedro capítulo 3 promete que el Señor retrasa Su venida porque:",
+      optionsEn: ["He is forgetful of His promise", "He is longsuffering, not willing that any should perish", "Time is different for God", "The church must finish her work first"],
+      optionsEs: ["Se olvida de Su promesa", "Es paciente, no queriendo que ninguno perezca", "El tiempo es diferente para Dios", "La iglesia debe terminar su obra primero"],
+      explanationEn: "First Peter 4 says do not think the fiery trial strange but rejoice to share Christ's sufferings.", explanationEs: "Primera de Pedro 4 dice no penséis extraña la prueba de fuego sino gozaos de participar de los padecimientos de Cristo.", correct: 1 },
+    { textEn: "18. The three tests of eternal life in 1 John are:", textEs: "18. Las tres pruebas de vida eterna en 1 Juan son:",
+      optionsEn: ["Prayer, fasting, giving", "Repentance, faith, baptism", "Word, sacrament, service", "Doctrinal, moral, relational"],
+      optionsEs: ["Oración, ayuno, dádiva", "Arrepentimiento, fe, bautismo", "Palabra, sacramento, servicio", "Doctrinal, moral, relacional"],
+      explanationEn: "Second Peter, written near Peter's death, warns of false teachers and answers scoffers about the delayed Day of the Lord.", explanationEs: "Segunda de Pedro, escrita cerca de la muerte de Pedro, advierte de falsos maestros y responde a los burladores sobre el Día del Señor demorado.", correct: 3 },
+    { textEn: "19. The shortest book in the New Testament (only thirteen verses) is:", textEs: "19. El libro más corto del Nuevo Testamento (solo trece versículos) es:",
+      optionsEn: ["2 John", "3 John", "Philemon", "Jude"],
+      optionsEs: ["2 Juan", "3 Juan", "Filemón", "Judas"],
+      explanationEn: "First John gives three tests of eternal life — doctrinal, moral, and relational — so the believer may know he has eternal life.", explanationEs: "Primera de Juan da tres pruebas de la vida eterna — doctrinal, moral y relacional — para que el creyente sepa que tiene vida eterna.", correct: 0 },
+    { textEn: "20. The 'church bully' contrasted with hospitable Gaius in 3 John is named:", textEs: "20. El 'bravucón de la iglesia' contrastado con el hospitalario Gayo en 3 Juan es llamado:",
+      optionsEn: ["Demas", "Hymenaeus", "Diotrephes", "Alexander"],
+      optionsEs: ["Demas", "Himeneo", "Diótrefes", "Alejandro"],
+      explanationEn: "Jude urges believers to contend earnestly for the faith and ends in a doxology to the God who is able to keep them from stumbling.", explanationEs: "Judas insta a los creyentes a contender ardientemente por la fe y termina en una doxología al Dios que puede guardarlos de caer.", correct: 2 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Discuss what makes the General Epistles distinctive in tone and approach compared to the Pauline letters.", textEs: "21. Discuta lo que hace distintivas a las Epístolas Generales en tono y enfoque comparadas con las cartas paulinas.",
+      kw_en: ["paul", "general", "daily life", "doctrine", "test", "scattered"], kw_es: ["pablo", "general", "vida diaria", "doctrina", "prueba", "dispersos"],
+      modelEn: "The General Epistles differ from Paul in tone and approach. Paul mostly begins with doctrine and ends with duty, writing from the study; the general letters begin with daily life — the trial, the brother, the false teacher in front of you — and argue back to doctrine. Addressed largely to scattered believers rather than one congregation, they give the test of a living faith where Paul gives the theology, and the two halves complete each other.", modelEs: "Las epístolas generales difieren de Pablo en tono y enfoque. Pablo casi siempre comienza con doctrina y termina con deber, escribiendo desde el estudio; las cartas generales comienzan con la vida diaria — la prueba, el hermano, el falso maestro frente a uno — y razonan de vuelta a la doctrina. Dirigidas en gran parte a creyentes esparcidos en vez de a una congregación, dan la prueba de una fe viva donde Pablo da la teología, y las dos mitades se completan." },
+    { textEn: "22. Trace the three offices of Christ (Prophet, Priest, King) in Hebrews, with key verses for each office.", textEs: "22. Trace los tres oficios de Cristo (Profeta, Sacerdote, Rey) en Hebreos, con versículos clave para cada oficio.",
+      kw_en: ["prophet", "priest", "king", "melchizedek", "hebrews 1", "supremacy"], kw_es: ["profeta", "sacerdote", "rey", "melquisedec", "hebreos 1", "supremacia"],
+      modelEn: "Hebrews shows Christ holding all three Messianic offices that Old Testament men held only one at a time. As Prophet in Hebrews 1, the Son is the complete and final Word where the prophets gave only a partial one. As Priest, He entered once for all with His own blood, a priest forever after the order of Melchizedek. As King, He fulfills Melchizedek as king of righteousness and peace, receiving a kingdom that cannot be shaken. The whole letter proclaims His supremacy.", modelEs: "Hebreos muestra a Cristo ocupando los tres oficios mesiánicos que los hombres del Antiguo Testamento ocupaban solo uno a la vez. Como Profeta en Hebreos 1, el Hijo es la Palabra completa y final donde los profetas dieron solo una parcial. Como Sacerdote, entró una vez para siempre con Su propia sangre, sacerdote para siempre según el orden de Melquisedec. Como Rey, cumple a Melquisedec como rey de justicia y de paz, recibiendo un reino que no puede ser sacudido. Toda la carta proclama Su supremacía." },
+    { textEn: "23. Discuss the Hall of Faith (Hebrews 11) and its connection to Hebrews 12:1-2. What does the cloud of witnesses represent?", textEs: "23. Discuta el Salón de la Fe (Hebreos 11) y su conexión con Hebreos 12:1-2. ¿Qué representa la nube de testigos?",
+      kw_en: ["faith", "witnesses", "race", "looking", "jesus", "endurance"], kw_es: ["fe", "testigos", "carrera", "mirando", "jesus", "perseverancia"],
+      modelEn: "Hebrews 11, the Hall of Faith, hangs portrait after portrait of believers who lived by faith, the substance of things hoped for. The chapter runs straight into Hebrews 12:1–2: surrounded by so great a cloud of witnesses, the believer lays aside every weight and runs with endurance the race set before him, looking unto Jesus, the author and finisher of faith. The witnesses are the bleachers; the believer is on the track, eyes on one face.", modelEs: "Hebreos 11, la Galería de la Fe, cuelga retrato tras retrato de creyentes que vivieron por fe, la sustancia de lo que se espera. El capítulo corre directo a Hebreos 12:1–2: rodeado de tan gran nube de testigos, el creyente despoja todo peso y corre con paciencia la carrera puesta delante, puestos los ojos en Jesús, el autor y consumador de la fe. Los testigos son las gradas; el creyente está en la pista, los ojos en un solo rostro." },
+    { textEn: "24. Explain James 1:2-3 ('count it all joy when you fall into various trials'). What three varieties of trials does James identify?", textEs: "24. Explique Santiago 1:2-3 ('tened por sumo gozo cuando cayereis en diversas tentaciones'). ¿Qué tres variedades de pruebas identifica Santiago?",
+      kw_en: ["trials", "joy", "patience", "reap", "spiritual", "mysterious"], kw_es: ["pruebas", "gozo", "paciencia", "cosechar", "espiritual", "misterioso"],
+      modelEn: "James 1:2–3 tells the believer to count it all joy in trials because the testing of faith produces patience. James names three kinds of trials: reap-what-you-sow trials from our own choices, spiritual trials that come simply because we belong to Christ, and mysterious trials with no nameable cause, like Job's. All three produce patience if we let them and bitterness if we do not, so the trial itself is doing a work nothing else can do.", modelEs: "Santiago 1:2–3 dice al creyente que tenga por sumo gozo las pruebas porque la prueba de la fe produce paciencia. Santiago nombra tres clases de pruebas: las de cosechar lo sembrado por nuestras propias decisiones, las pruebas espirituales que vienen simplemente por pertenecer a Cristo, y las pruebas misteriosas sin causa que podamos nombrar, como las de Job. Las tres producen paciencia si lo permitimos y amargura si no, así que la prueba misma hace una obra que nada más puede hacer." },
+    { textEn: "25. Apply the Steinway piano (Pounder Room) illustration to the believer's testing in the Christian life.", textEs: "25. Aplique la ilustración del piano Steinway (Sala del Martilleo) a la prueba del creyente en la vida cristiana.",
+      kw_en: ["steinway", "pounding", "trial", "certify", "beautiful", "endurance"], kw_es: ["steinway", "golpear", "prueba", "certificar", "hermoso", "perseverancia"],
+      modelEn: "The Steinway piano is finished in a Pounder Room, where a hammer strikes each key ten thousand times. The pounding does not break the piano; it certifies it. So the believer's trials, endured, do not destroy faith but prove and refine it. The same pounding that would seem to ruin the instrument is what makes it beautiful, and endurance under testing makes something of the believer that ease never could.", modelEs: "El piano Steinway se termina en una Sala de Golpeo, donde un martillo golpea cada tecla diez mil veces. El golpeo no rompe el piano; lo certifica. Así las pruebas del creyente, soportadas, no destruyen la fe sino que la comprueban y refinan. El mismo golpeo que parecería arruinar el instrumento es lo que lo hace hermoso, y la paciencia bajo la prueba hace del creyente algo que la comodidad nunca podría." },
+    { textEn: "26. Resolve the apparent contradiction between James 2:17 ('faith without works is dead') and Paul's Ephesians 2:8-9 ('not by works').", textEs: "26. Resuelva la aparente contradicción entre Santiago 2:17 ('la fe sin obras es muerta') y Efesios 2:8-9 de Pablo ('no por obras').",
+      kw_en: ["faith", "works", "saved", "dead", "alone", "evidence"], kw_es: ["fe", "obras", "salvado", "muerta", "sola", "evidencia"],
+      modelEn: "James 2 says faith without works is dead, which only seems to contradict Paul. Paul says we are not saved by works; James says we are not saved by a faith that does not work. It is the same gospel from two angles: the faith that saves is never alone but always brings works as its evidence, the way the rising sun is never separated from its heat. Works do not earn salvation; they prove it is real.", modelEs: "Santiago 2 dice que la fe sin obras está muerta, lo que solo parece contradecir a Pablo. Pablo dice que no somos salvos por obras; Santiago dice que no somos salvos por una fe que no obra. Es el mismo evangelio desde dos ángulos: la fe que salva nunca está sola sino que siempre trae obras como su evidencia, como el sol naciente nunca se separa de su calor. Las obras no ganan la salvación; prueban que es real." },
+    { textEn: "27. Discuss the three dominant images of 1 Peter: living hope, living stones, and the fiery trial. How do they encourage suffering believers?", textEs: "27. Discuta las tres imágenes dominantes de 1 Pedro: esperanza viva, piedras vivas y prueba de fuego. ¿Cómo animan a los creyentes que sufren?",
+      kw_en: ["living hope", "living stones", "fiery trial", "suffering", "priesthood", "inheritance"], kw_es: ["esperanza viva", "piedras vivas", "prueba de fuego", "sufrimiento", "sacerdocio", "herencia"],
+      modelEn: "First Peter, a letter steeped in suffering, is dominated by three images. The new birth into a living hope gives the believer an inheritance reserved in heaven that does not fade. The living stones are believers built into a spiritual house, a royal priesthood offering spiritual sacrifices. And the fiery trial is not to be thought strange but rejoiced in, as the kiln that bakes the living stones hard, for the coming glory will exceed the present suffering.", modelEs: "Primera de Pedro, una carta empapada de sufrimiento, está dominada por tres imágenes. El nuevo nacimiento a una esperanza viva da al creyente una herencia reservada en el cielo que no se marchita. Las piedras vivas son los creyentes edificados en casa espiritual, un real sacerdocio que ofrece sacrificios espirituales. Y la prueba de fuego no ha de tenerse por extraña sino por motivo de gozo, como el horno que cuece duras las piedras vivas, pues la gloria venidera superará el sufrimiento presente." },
+    { textEn: "28. Explain the three tests of eternal life in 1 John (doctrinal, moral, relational). Why does John write the letter (1 John 5:13)?", textEs: "28. Explique las tres pruebas de la vida eterna en 1 Juan (doctrinal, moral, relacional). ¿Por qué escribe Juan la carta (1 Juan 5:13)?",
+      kw_en: ["doctrinal", "moral", "relational", "know", "eternal life", "flesh"], kw_es: ["doctrinal", "moral", "relacional", "conocer", "vida eterna", "carne"],
+      modelEn: "First John gives three tests by which a person may know his faith is real. The doctrinal test asks whether he confesses that Jesus Christ has come in the flesh. The moral test asks whether he walks in the light rather than darkness. The relational test asks whether he loves the brethren. They are three angles on the one life of Christ in the believer, written so that the believer may know he has eternal life.", modelEs: "Primera de Juan da tres pruebas por las cuales una persona puede saber que su fe es real. La prueba doctrinal pregunta si confiesa que Jesucristo ha venido en carne. La prueba moral pregunta si anda en la luz en vez de en tinieblas. La prueba relacional pregunta si ama a los hermanos. Son tres ángulos de la única vida de Cristo en el creyente, escritas para que el creyente sepa que tiene vida eterna." },
+    { textEn: "29. Contrast Gaius and Diotrephes in 3 John. What does this contrast teach about church leadership?", textEs: "29. Contraste a Gayo y Diótrefes en 3 Juan. ¿Qué enseña este contraste sobre el liderazgo de la iglesia?",
+      kw_en: ["gaius", "diotrephes", "hospitality", "preeminence", "bully", "faithful"], kw_es: ["gayo", "diotrefes", "hospitalidad", "preeminencia", "maton", "fiel"],
+      modelEn: "Third John contrasts two men. Gaius is a faithful, generous believer who shows hospitality to traveling missionaries and supports them on their way. Diotrephes loves to have the preeminence, the church bully who must run everything, blocks the apostles, and threatens those who disagree. Every church has both kinds, and the lesson is to encourage the faithful Gaius while gently bringing the domineering Diotrephes to repentance.", modelEs: "Tercera de Juan contrasta dos hombres. Gayo es un creyente fiel y generoso que muestra hospitalidad a los misioneros viajeros y los sostiene en su camino. Diótrefes ama tener la preeminencia, el tirano de la iglesia que debe gobernarlo todo, bloquea a los apóstoles y amenaza a los que disienten. Toda iglesia tiene ambos tipos, y la lección es animar al fiel Gayo mientras se lleva con suavidad al dominante Diótrefes al arrepentimiento." },
+    { textEn: "30. Synthesize: Why does Jude end his warning letter with doxology (Jude 24-25)? How does this transition into Revelation?", textEs: "30. Sintetice: ¿Por qué termina Judas su carta de advertencia con doxología (Judas 24-25)? ¿Cómo transiciona esto al Apocalipsis?",
+      kw_en: ["jude", "contend", "doxology", "able", "keep", "faultless"], kw_es: ["judas", "contender", "doxologia", "poderoso", "guardar", "sin caida"],
+      modelEn: "Jude meant to write about salvation but found he had to urge believers instead to contend earnestly for the faith once delivered, because apostasy was creeping in. Yet he does not end in judgment but in doxology, praising the God who is able to keep them from stumbling and to present them faultless before His glory with exceeding joy. After faith has been tested on every front, the closing word is that the Lord is able.", modelEs: "Judas pensaba escribir sobre la salvación pero halló que debía más bien instar a los creyentes a contender ardientemente por la fe una vez dada, porque la apostasía se infiltraba. Sin embargo no termina en juicio sino en doxología, alabando al Dios que puede guardarlos de caer y presentarlos sin mancha delante de Su gloria con gran alegría. Después de que la fe ha sido probada en todo frente, la palabra final es que el Señor es poderoso." }
+];
+
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = `cts_nt_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY = `cts_nt_u${UNIT}_sa_lockout`;
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0')
+        : parseInt(localStorage.getItem(`cts_nt_u${UNIT}_lockout`) || '0');
+}
+let lockUntil = activeLockUntil();
+let unitPassed = progress[`unit${UNIT}`] || false;
+
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function isEs() { return document.body.classList.contains('lang-es'); }
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer as left-boundary prefix.
+// Pass standard is >=3 hits (NOT all keywords).
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function kwHitCount(normAns, keys) { return keys.filter(function(k){ return kwHit(normAns, k); }).length; }
+
+function checkAllUnitsPassed() {
+    for (let i = 1; i <= TOTAL_UNITS; i++) { if (!progress[`unit${i}`]) return false; }
+    return true;
+}
+
+function syncTrackUI() {
+    document.querySelectorAll('input[name="ctsTrack"]').forEach(r => { r.checked = (r.value === currentTrack); });
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = isEs() ? 'Opción Múltiple (Preguntas 1–20)' : 'Multiple Choice (Questions 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (!isEs()) ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (!isEs()) ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (!isEs()) ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((!isEs()) ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = isEs() ? 'Respuesta Corta (Preguntas 21–30) — Pista Maestría en Divinidad' : 'Short Answer (Questions 21–30) — Master of Divinity Track';
+    container.appendChild(kwTitle);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = isEs() ? q.textEs : q.textEn;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = isEs() ? 'Escriba su respuesta aquí...' : 'Type your answer here...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = isEs() ? 'Verificar Respuesta' : 'Check Answer';
+        const fb = document.createElement('div');
+        fb.className = 'feedback-text';
+        fb.style.marginTop = '8px';
+        const model = document.createElement('div');
+        model.className = 'model-answer';
+        model.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ansRaw = ta.value.trim();
+            const ans = normalize(ansRaw);
+            const keys = isEs() ? q.kw_es : q.kw_en;
+            const hits = kwHitCount(ans, keys);
+            if (ansRaw.length < 100) {
+                fb.innerHTML = isEs() ? 'Escriba una respuesta más completa (al menos una oración).' : 'Please write a more complete answer (at least a sentence).';
+                fb.className = 'feedback-text incorrect';
+            } else if (hits >= 3) {
+                fb.innerHTML = isEs() ? `✓ ¡Bien! Su respuesta toca ${hits} conceptos clave.` : `✓ Good! Your answer touches ${hits} key concepts.`;
+                fb.className = 'feedback-text correct';
+                kwAnswers[idx] = ansRaw;
+            } else {
+                fb.innerHTML = isEs() ? `Va bien — toca ${hits}. Apunte a al menos 3 conceptos clave; revise la lección y vuelva a intentarlo.` : `Good start — you touched ${hits}. Aim for at least 3 key concepts; review the lesson and try again.`;
+                fb.className = 'feedback-text incorrect';
+            }
+            const mk = isEs() ? q.modelEs : q.modelEn;
+            if (mk) {
+                model.innerHTML = (isEs() ? '<strong>Respuesta modelo — estúdiela:</strong> ' : '<strong>Model answer — study this:</strong> ') + mk;
+                model.style.display = 'block';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(model);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+}
+
+function triggerRedirect() {
+    const target = checkAllUnitsPassed() ? 'CTSNTCertificate.html' : NEXT_URL;
+    const result = document.getElementById('examResult');
+    let seconds = 3;
+    function tick() {
+        const msg = isEs()
+            ? `Redirigiendo a la siguiente unidad en ${seconds}...`
+            : `Redirecting to the next unit in ${seconds}...`;
+        result.innerHTML = `<div class='redirect-notice'>✅ ${isEs() ? '¡APROBADO!' : 'PASSED!'} ${msg}</div>`;
+        if (seconds <= 0) { location.href = target; return; }
+        seconds--;
+        setTimeout(tick, 1000);
+    }
+    tick();
+}
+
+function submitExam() {
+    const result = document.getElementById('examResult');
+    if (unitPassed) {
+        result.innerHTML = `<span style='color:green'>${isEs() ? '✅ Unidad ya aprobada.' : '✅ Unit already passed!'}</span>`;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        result.innerHTML = `<span style='color:red'>${isEs() ? `⏰ Bloqueado por ${wait} minutos más.` : `⏰ Locked for ${wait} more minutes.`}</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) { promptName(); return; }
+
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    let advCorrect = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = normalize(kwAnswers[i] || '');
+        const keys = isEs() ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        if (kwHitCount(ans, keys) >= 3 && ans.length >= 100) advCorrect++;
+    }
+
+    const mcPct = correctMC / 20;
+    const saPct = advCorrect / 10;
+    const mcPass = mcPct >= PASS_THRESHOLD;
+    const saPass = saPct >= PASS_THRESHOLD;
+
+    function passUnit() {
+        unitPassed = true;
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem('cts_nt_progress', JSON.stringify(progress));
+        localStorage.setItem(`nt_unit${UNIT}_passed`, 'true');
+        localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+        localStorage.removeItem(SA_LOCK_KEY);
+        updateProgressGrid();
+        triggerRedirect();
+    }
+
+    if (!isMastersLevel()) {
+        if (mcPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Necesita 18/20 para Certificado.`
+                : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Need 18/20 for Certificate.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        if (saPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ✓ ya guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+                : `MC: ✓ already banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Su opción múltiple está a salvo. Puede reintentar la sección de respuesta corta en ${mins} min.` : `Your multiple-choice pass is safe. You can retry the short-answer section in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPass && saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit();
+    } else if (mcPass && !saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ aprobado y guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ passed and banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Al reintentar en ${mins} min, solo necesitará la sección de respuesta corta — el OM permanece aprobado.` : `When you retry in ${mins} min, you'll only need the short-answer section — MC stays passed.`}</span>`;
+    } else {
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 18/20 Y 9/10 para M.Div.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 18/20 AND 9/10 for M.Div.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+    }
+}
+
+function resetExam() {
+    const msg = isEs()
+        ? '¿Restablecer el examen? Esto borrará sus respuestas en pantalla y eliminará el bloqueo de 15 minutos. Las unidades ya aprobadas no se afectan.'
+        : 'Reset the exam? This will clear your on-screen answers and remove the 15-minute lockout. Already-passed units are not affected.';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill('');
+    lockUntil = 0;
+    mcPreviouslyPassed = false;
+    localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+document.querySelectorAll('input[name="ctsTrack"]').forEach(r => {
+    r.addEventListener('change', e => {
+        currentTrack = e.target.value;
+        localStorage.setItem('cts_track', currentTrack);
+    });
+});
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.className = 'lang-es';
+        this.textContent = 'English';
+    } else {
+        document.body.className = 'lang-en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+syncTrackUI();
+renderQuestions();
+if (unitPassed) document.getElementById('examResult').innerHTML = `<span style='color:green'>${isEs() ? `✅ Unidad ${UNIT} ya aprobada.` : `✅ Unit ${UNIT} already passed.`}</span>`;
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSNTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

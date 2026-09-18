@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Characters II — Unit 9</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 10 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Bible Characters II — Unit 9: Lazarus — The Dead Man Jesus Called Back to Life</span><span class="lang-es">📖 Personajes de la Biblia II — Unidad 9: Lázaro — El Muerto a Quien Jesús Llamó de Nuevo a la Vida</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"I am the resurrection and the life. He who believes in Me, though he may die, he shall live." — John 11:25 (NKJV)</span><span class="lang-es">«Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá.» — Juan 11:25 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>There is a man in the Gospels who died, was buried, lay four days in the tomb — and then walked out alive at the sound of a single voice. His name was Lazarus, and his story is the clearest demonstration before the cross of who Jesus is: the One who said, "I am the resurrection and the life." In raising Lazarus, the Lord of life turned the tragedy of death into the triumph of resurrection.</p><p><strong>Subject:</strong> Lazarus — the dead man Jesus called back to life, by the One who is "the resurrection and the life."</p><p><strong>Proposition:</strong> The Lord of life delays for His glory, enters our grief, and conquers the grave.</p><p>Lazarus lived in Bethany with his sisters, Martha and Mary, a family that loved the Lord and whom the Lord loved. When Lazarus fell sick, the sisters sent word to Jesus with a message full of quiet faith: "Lord, behold, he whom You love is sick" (John 11:3). We will follow three movements: the tragedy, the trial, and the triumph of death.</p><h2>I. The Tragedy of Death</h2><p>The message came back at last in three plain and crushing words: "Lazarus is dead" (John 11:14). Death is almost always terrible. It is terrible when a small child dies, the bud cut off before it can bloom. It is terrible when an unbeliever dies with no hope at all, slipping into eternity without Christ. It is terrible when a lingering illness slowly takes a friend from us, day by day. I have stood beside many a casket in my years of ministry, and I can tell you that the hardest funerals I ever preached were the ones for people who had no hope. I have known crushing losses of my own. I remember a dear friend in South Dakota, a man who had been baptized and belonged to the Lord, who died slowly of a disease of the blood; I watched death do its bitter work, and I felt the full weight of what the Bible calls the last enemy. Death is real, and it is no small thing.</p><h2>II. The Trial of Death</h2><p>When Jesus heard that Lazarus was sick, He did something no one expected. He stayed where He was two more days. The Lord who could have healed Lazarus with a word, or even from a distance, deliberately delayed until Lazarus had died. This is the trial of death: the agony of waiting when God seems slow and silent, when heaven appears to do nothing while our hearts break. Mary and Martha must have watched the road for Him, hour after hour, and He did not come. But His delay was not neglect. He had already said, "This sickness is not unto death, but for the glory of God, that the Son of God may be glorified through it" (John 11:4). What looked like indifference was love working toward a far greater glory than a simple healing could ever have shown. When God seems slow, He is not absent and He is not idle; He is preparing a deeper display of His power and His goodness than we could have asked for.</p><p>Indeed, Jesus said plainly, "I am glad for your sakes that I was not there, that you may believe" (John 11:15). The delay was a gift wrapped in grief, meant to deepen their faith. And when He finally resolved to go to Judea, where enemies had lately sought to stone Him, it was Thomas who said to the others, "Let us also go, that we may die with Him" (John 11:16) — loyal even when he could not understand what the Lord was doing.</p><h2>III. The Triumph of Death</h2><p>At last Jesus came, and Martha met Him with both her grief and her faith. To her the Lord spoke the words that have been read at the graveside of believers ever since:</p><div class="scripture">I am the resurrection and the life. He who believes in Me, though he may die, he shall live. And whoever lives and believes in Me shall never die. (John 11:25-26, NKJV)</div><p>When the Lord asked her if she believed this, Martha gave one of the great confessions of the Gospels: "Yes, Lord, I believe that You are the Christ, the Son of God, who is to come into the world" (John 11:27). Grief had not destroyed her faith; it had driven her deeper into it.</p><p>Then came one of the most tender moments in all of Scripture. When Jesus saw Mary weeping, and the others weeping with her, He groaned in His spirit and was troubled, and the shortest verse in the Bible records it simply: "Jesus wept" (John 11:35). He knew He was about to raise Lazarus, and still He wept. This is the heart of our Lord: He does not stand far off from our sorrow but enters fully into it, weeping with those who weep even as He holds the power of resurrection in His hands.</p><p>Then He went to the tomb, told them to take away the stone, lifted up His eyes, and cried with a loud voice:</p><div class="scripture">Lazarus, come forth! (John 11:43, NKJV)</div><p>And the dead man came out, still bound in his grave-clothes. The Lord who had shown His power over men, over the wind and the waves, over disease and demons, now crowned it all with power over the grave itself. Someone once observed that it was a mercy He called Lazarus by name, for had He simply cried "Come forth!" every dead person in history might have risen at His word. Such is His authority over death.</p><p>Notice how Jesus speaks of death. Earlier He had told the disciples, "Our friend Lazarus sleeps, but I go that I may wake him up" (John 11:11). To the Lord of life, the death of a believer is no more final than sleep. It is like a child who falls asleep on the couch in the evening and wakes the next morning in his own bed — and he is not afraid, because he knows his father carried him there in the night. So it is for the Christian: we close our eyes in this world and open them in the Father's house, carried home by the One who loves us. And then notice the task the Lord gives to the living. He says of the risen Lazarus, "Loose him, and let him go" (John 11:44). There is grief work to be done even after resurrection joy has come; the grieving are gently led back to life, to unwrap the grave-clothes and re-engage the living world.</p><p>There was a man, a member of Dr. Mike McGough's church, who planned his own funeral down to the last detail. At his request, when he lay in the casket, an open Bible was placed over his heart, his lifeless finger resting on the words of John 3:16: "For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life." Even in death he was still preaching the only hope that conquers the grave.</p><p>There is one more thing we must not miss. When Lazarus came out of the tomb, many who saw it believed; but others ran to the Pharisees, and from that day the rulers plotted to put Jesus to death (John 11:45-53). The raising of Lazarus set in motion the very events that led to the cross. In a real sense, giving life to Lazarus cost the Lord His own life — a foreshadowing of the truth that our life is purchased by His death.</p><p>This is the great message of Lazarus, and it is the hope on which everything rests. Christ has power over the grave, and the One who is able to conquer death is able to remove all our fear. Without the resurrection, life has no lasting meaning and death has the final word. But because of Christ, the tomb is no longer a wall; it has become a doorway. Lazarus would die again one day, but he was a sign pointing to a greater resurrection that never reverses, secured by the empty tomb of Christ Himself. So when you stand at the graveside of one who belonged to the Lord, remember the voice that called Lazarus out of the dark, and remember that the same voice will one day call all His own. For He is the resurrection and the life, and whoever believes in Him shall never die.</p><p>So we do not grieve as those who have no hope. We weep, for death is real and loss is bitter; but we weep as people who have heard a voice louder than the grave, and who know that the One who wept at the tomb of His friend will one day wipe away every tear from our own eyes. That is the hope of Lazarus, and it is the hope of everyone who belongs to Christ: the grave is not a destination but a door, and beyond it stands the Lord of life.</p></div>
+<div class="lang-es"><p>Hay un hombre en los Evangelios que murió, fue sepultado, yació cuatro días en la tumba —y luego salió vivo al sonido de una sola voz—. Su nombre era Lázaro, y su historia es la demostración más clara antes de la cruz de quién es Jesús: Aquél que dijo: «Yo soy la resurrección y la vida». Al resucitar a Lázaro, el Señor de la vida convirtió la tragedia de la muerte en el triunfo de la resurrección.</p><p><strong>Tema:</strong> Lázaro — el muerto a quien Jesús llamó de nuevo a la vida, por Aquél que es «la resurrección y la vida».</p><p><strong>Proposición:</strong> El Señor de la vida demora para su gloria, entra en nuestro dolor, y vence la tumba.</p><p>Lázaro vivía en Betania con sus hermanas, Marta y María, una familia que amaba al Señor y a quienes el Señor amaba. Cuando Lázaro enfermó, las hermanas enviaron aviso a Jesús con un mensaje lleno de callada fe: «Señor, he aquí el que amas está enfermo» (Juan 11:3). Seguiremos tres movimientos: la tragedia, la prueba, y el triunfo de la muerte.</p><h2>I. La Tragedia de la Muerte</h2><p>El mensaje regresó al fin en tres palabras sencillas y aplastantes: «Lázaro ha muerto» (Juan 11:14). La muerte es casi siempre terrible. Es terrible cuando muere un niño pequeño, el capullo cortado antes de poder florecer. Es terrible cuando un incrédulo muere sin ninguna esperanza, deslizándose a la eternidad sin Cristo. Es terrible cuando una enfermedad prolongada nos quita lentamente a un amigo, día tras día. He estado junto a muchos ataúdes en mis años de ministerio, y puedo decirles que los funerales más difíciles que jamás prediqué fueron los de personas que no tenían esperanza. He conocido pérdidas aplastantes propias. Recuerdo a un querido amigo en Dakota del Sur, un hombre que había sido bautizado y pertenecía al Señor, que murió lentamente de una enfermedad de la sangre; vi a la muerte hacer su amarga obra, y sentí todo el peso de lo que la Biblia llama el postrer enemigo. La muerte es real, y no es cosa pequeña.</p><h2>II. La Prueba de la Muerte</h2><p>Cuando Jesús oyó que Lázaro estaba enfermo, hizo algo que nadie esperaba. Se quedó donde estaba dos días más. El Señor que pudo haber sanado a Lázaro con una palabra, o aun a la distancia, deliberadamente demoró hasta que Lázaro hubo muerto. Esta es la prueba de la muerte: la agonía de esperar cuando Dios parece lento y silencioso, cuando el cielo parece no hacer nada mientras nuestro corazón se rompe. María y Marta deben haber vigilado el camino esperándolo, hora tras hora, y Él no vino. Pero su demora no era descuido. Ya había dicho: «Esta enfermedad no es para muerte, sino para la gloria de Dios, para que el Hijo de Dios sea glorificado por ella» (Juan 11:4). Lo que parecía indiferencia era amor obrando hacia una gloria mucho mayor que la que una simple sanidad jamás podría haber mostrado. Cuando Dios parece lento, no está ausente ni está ocioso; está preparando una manifestación más profunda de su poder y su bondad de la que pudiéramos haber pedido.</p><p>En efecto, Jesús dijo claramente: «Me alegro por vosotros, de no haber estado allí, para que creáis» (Juan 11:15). La demora era un regalo envuelto en dolor, destinado a profundizar su fe. Y cuando al fin resolvió ir a Judea, donde sus enemigos habían procurado apedrearlo poco antes, fue Tomás quien dijo a los demás: «Vamos también nosotros, para que muramos con él» (Juan 11:16) — leal aun cuando no podía entender lo que el Señor hacía.</p><h2>III. El Triunfo de la Muerte</h2><p>Al fin Jesús vino, y Marta salió a su encuentro con su dolor y con su fe. A ella el Señor habló las palabras que se han leído junto a la tumba de los creyentes desde entonces:</p><div class="scripture">Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá. Y todo aquel que vive y cree en mí, no morirá eternamente. (Juan 11:25-26, RVG)</div><p>Cuando el Señor le preguntó si creía esto, Marta dio una de las grandes confesiones de los Evangelios: «Sí, Señor; yo creo que tú eres el Cristo, el Hijo de Dios, que había de venir al mundo» (Juan 11:27). El dolor no había destruido su fe; la había llevado más hondo en ella.</p><p>Entonces vino uno de los momentos más tiernos de toda la Escritura. Cuando Jesús vio a María llorando, y a los demás llorando con ella, se conmovió en espíritu y se turbó, y el versículo más corto de la Biblia lo registra sencillamente: «Jesús lloró» (Juan 11:35). Sabía que estaba a punto de resucitar a Lázaro, y aun así lloró. Este es el corazón de nuestro Señor: no se mantiene lejos de nuestra tristeza sino que entra plenamente en ella, llorando con los que lloran aun cuando sostiene el poder de la resurrección en sus manos.</p><p>Entonces fue a la tumba, les dijo que quitaran la piedra, alzó los ojos, y clamó a gran voz:</p><div class="scripture">¡Lázaro, ven fuera! (Juan 11:43, RVG)</div><p>Y el muerto salió, aún atado con sus vendas. El Señor que había mostrado su poder sobre los hombres, sobre el viento y las olas, sobre la enfermedad y los demonios, ahora lo coronaba todo con poder sobre la tumba misma. Alguien una vez observó que fue una misericordia que lo llamara por nombre, porque si simplemente hubiera clamado «¡Venid fuera!» todo muerto de la historia pudiera haber resucitado a su palabra. Tal es su autoridad sobre la muerte.</p><p>Note cómo habla Jesús de la muerte. Antes había dicho a los discípulos: «Nuestro amigo Lázaro duerme; mas voy a despertarle» (Juan 11:11). Para el Señor de la vida, la muerte de un creyente no es más definitiva que el sueño. Es como un niño que se queda dormido en el sofá por la tarde y despierta a la mañana siguiente en su propia cama —y no tiene miedo, porque sabe que su padre lo llevó allí en la noche—. Así es para el cristiano: cerramos los ojos en este mundo y los abrimos en la casa del Padre, llevados a casa por Aquél que nos ama. Y note la tarea que el Señor da a los vivos. Dice del resucitado Lázaro: «Desatadle, y dejadle ir» (Juan 11:44). Hay trabajo de duelo que hacer aun después de que ha llegado el gozo de la resurrección; a los que lloran se les conduce con ternura de regreso a la vida, a quitar las vendas y a reincorporarse al mundo de los vivos.</p><p>Hubo un hombre, miembro de la iglesia del Dr. Mike McGough, que planeó su propio funeral hasta el último detalle. A petición suya, cuando yacía en el ataúd, se colocó una Biblia abierta sobre su corazón, con su dedo sin vida descansando sobre las palabras de Juan 3:16: «Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna». Aun en la muerte seguía predicando la única esperanza que vence la tumba.</p><p>Hay una cosa más que no debemos pasar por alto. Cuando Lázaro salió de la tumba, muchos de los que lo vieron creyeron; pero otros corrieron a los fariseos, y desde aquel día los gobernantes tramaron dar muerte a Jesús (Juan 11:45-53). La resurrección de Lázaro puso en marcha los mismos sucesos que condujeron a la cruz. En un sentido real, dar vida a Lázaro le costó al Señor su propia vida — un anticipo de la verdad de que nuestra vida es comprada por su muerte.</p><p>Este es el gran mensaje de Lázaro, y es la esperanza sobre la que todo descansa. Cristo tiene poder sobre la tumba, y Aquél que es capaz de vencer la muerte es capaz de quitar todo nuestro temor. Sin la resurrección, la vida no tiene sentido duradero y la muerte tiene la última palabra. Pero por causa de Cristo, la tumba ya no es un muro; se ha vuelto una puerta. Lázaro moriría de nuevo un día, pero era una señal que apuntaba a una resurrección mayor que nunca se revierte, asegurada por la tumba vacía de Cristo mismo. Así que cuando estés junto a la tumba de alguien que perteneció al Señor, recuerda la voz que llamó a Lázaro fuera de la oscuridad, y recuerda que la misma voz un día llamará a todos los suyos. Porque Él es la resurrección y la vida, y todo aquel que cree en Él no morirá jamás.</p><p>Así que no nos entristecemos como los que no tienen esperanza. Lloramos, porque la muerte es real y la pérdida es amarga; pero lloramos como personas que han oído una voz más fuerte que la tumba, y que saben que Aquél que lloró ante la tumba de su amigo un día enjugará toda lágrima de nuestros propios ojos. Esa es la esperanza de Lázaro, y es la esperanza de todo el que pertenece a Cristo: la tumba no es un destino sino una puerta, y más allá de ella está el Señor de la vida.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 9 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 9 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 9;
+const COURSE = 'CTSBC2';
+const FILE_PREFIX = 'CTSBibleCharacters2';
+const NEXT_UNIT_URL = 'CTSBibleCharacters2Unit10.html';
+const totalUnits = 11;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - Jonah — The Prophet Who Ran from God", "Unit 2 - Hosea — The Prophet Who Loved an Unfaithful Wife", "Unit 3 - Jeremiah — The Weeping Prophet Who Stayed Faithful", "Unit 4 - Esther — For Such a Time as This: The Hidden Providence of God", "Unit 5 - Ezra — A Fresh New Start, the Scribe Who Restored God’s Word", "Unit 6 - John the Baptist — The Forerunner Who Doubted in the Dark", "Unit 7 - Peter — From Fisherman to the Rock Who Feeds the Sheep", "Unit 8 - Thomas — The Doubter Who Made the Great Confession", "Unit 9 - Lazarus — The Dead Man Jesus Called Back to Life", "Unit 10 - Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ", "Unit 11 - Paul — From Persecutor to Apostle of Grace"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [{"textEn":"1. Who was Lazarus?","textEs":"1. ¿Quién era Lázaro?","optionsEn":["A Roman soldier", "One of the twelve apostles", "A prophet of Israel", "A man Jesus loved, brother of Martha and Mary of Bethany, whom Jesus raised from the dead"],"optionsEs":["Un soldado romano", "Uno de los doce apóstoles", "Un profeta de Israel", "Un hombre a quien Jesús amaba, hermano de Marta y María de Betania, a quien Jesús resucitó"],"explanationEn":"His raising is the clearest sign before the cross of who Jesus is.","explanationEs":"Su resurrección es la señal más clara antes de la cruz de quién es Jesús.","correct":3},{"textEn":"2. What message did the sisters send to Jesus?","textEs":"2. ¿Qué mensaje enviaron las hermanas a Jesús?","optionsEn":["\"Come at once or we will leave\"", "\"Lord, behold, he whom You love is sick\"", "\"Do not come\"", "\"Lazarus has betrayed You\""],"optionsEs":["«Ven de inmediato o nos iremos»", "«Señor, he aquí el que amas está enfermo»", "«No vengas»", "«Lázaro te ha traicionado»"],"explanationEn":"Their message was full of quiet faith.","explanationEs":"Su mensaje estaba lleno de callada fe.","correct":1},{"textEn":"3. What are the three movements of the lesson?","textEs":"3. ¿Cuáles son los tres movimientos de la lección?","optionsEn":["The Tragedy, the Trial, and the Triumph of death", "Faith, hope, and love", "Past, present, and future", "Sin, law, and grace"],"optionsEs":["La Tragedia, la Prueba, y el Triunfo de la muerte", "Fe, esperanza, y amor", "Pasado, presente, y futuro", "Pecado, ley, y gracia"],"explanationEn":"The story moves from death's tragedy to its triumph in Christ.","explanationEs":"La historia pasa de la tragedia de la muerte a su triunfo en Cristo.","correct":0},{"textEn":"4. Why is death described as a tragedy?","textEs":"4. ¿Por qué se describe la muerte como una tragedia?","optionsEn":["Because it never happens", "Because it is always painless", "Because it is terrible — a child cut off, an unbeliever with no hope, a friend slowly taken", "Because it is a small thing"],"optionsEs":["Porque nunca sucede", "Porque siempre es sin dolor", "Porque es terrible — un niño cortado, un incrédulo sin esperanza, un amigo lentamente llevado", "Porque es cosa pequeña"],"explanationEn":"The Bible calls death the last enemy; it is no small thing.","explanationEs":"La Biblia llama a la muerte el postrer enemigo; no es cosa pequeña.","correct":2},{"textEn":"5. What were the hardest funerals to preach?","textEs":"5. ¿Cuáles fueron los funerales más difíciles de predicar?","optionsEn":["The funerals for people who had no hope", "Funerals for the wealthy", "Short funerals", "Funerals in winter"],"optionsEs":["Los funerales de personas que no tenían esperanza", "Funerales para los ricos", "Funerales cortos", "Funerales en invierno"],"explanationEn":"Death without Christ leaves no comfort at the graveside.","explanationEs":"La muerte sin Cristo no deja consuelo junto a la tumba.","correct":0},{"textEn":"6. What did Jesus do when He heard Lazarus was sick?","textEs":"6. ¿Qué hizo Jesús cuando oyó que Lázaro estaba enfermo?","optionsEn":["He came immediately", "He sent another", "He did the unexpected — He delayed, staying where He was two more days", "He refused to help"],"optionsEs":["Vino de inmediato", "Envió a otro", "Hizo lo inesperado — demoró, quedándose donde estaba dos días más", "Se negó a ayudar"],"explanationEn":"He deliberately waited until Lazarus had died.","explanationEs":"Deliberadamente esperó hasta que Lázaro hubo muerto.","correct":2},{"textEn":"7. Why did Jesus delay?","textEs":"7. ¿Por qué demoró Jesús?","optionsEn":["Because He did not care", "Not from neglect, but for the glory of God — a far greater glory than a simple healing (John 11:4)", "Because He was afraid", "Because He was powerless"],"optionsEs":["Porque no le importaba", "No por descuido, sino para la gloria de Dios — una gloria mucho mayor que una simple sanidad (Juan 11:4)", "Porque tenía miedo", "Porque no tenía poder"],"explanationEn":"What looked like indifference was love working toward greater glory.","explanationEs":"Lo que parecía indiferencia era amor obrando hacia una gloria mayor.","correct":1},{"textEn":"8. What is \"the trial of death\"?","textEs":"8. ¿Qué es «la prueba de la muerte»?","optionsEn":["A courtroom", "A medical test", "A punishment for sin", "The agony of waiting when God seems slow and silent"],"optionsEs":["Un tribunal", "Un examen médico", "Un castigo por el pecado", "La agonía de esperar cuando Dios parece lento y silencioso"],"explanationEn":"When heaven seems to do nothing while our hearts break.","explanationEs":"Cuando el cielo parece no hacer nada mientras nuestro corazón se rompe.","correct":3},{"textEn":"9. What great claim did Jesus make to Martha?","textEs":"9. ¿Qué gran declaración hizo Jesús a Marta?","optionsEn":["\"I am a great teacher\"", "\"I am the resurrection and the life\"", "\"I am only a prophet\"", "\"Death is the end\""],"optionsEs":["«Soy un gran maestro»", "«Yo soy la resurrección y la vida»", "«Soy solo un profeta»", "«La muerte es el fin»"],"explanationEn":"These words have been read at the graveside of believers ever since.","explanationEs":"Estas palabras se han leído junto a la tumba de los creyentes desde entonces.","correct":1},{"textEn":"10. What did Jesus promise the believer?","textEs":"10. ¿Qué prometió Jesús al creyente?","optionsEn":["That he will never be sad", "That he will never be sick", "\"Though he may die, he shall live... and shall never die\"", "That he will be wealthy"],"optionsEs":["Que nunca estará triste", "Que nunca estará enfermo", "«Aunque esté muerto, vivirá... y no morirá eternamente»", "Que será rico"],"explanationEn":"Faith in Christ turns death into a doorway, not an end.","explanationEs":"La fe en Cristo convierte la muerte en una puerta, no en un fin.","correct":2},{"textEn":"11. What did Jesus cry at the tomb?","textEs":"11. ¿Qué clamó Jesús ante la tumba?","optionsEn":["\"Be still\"", "\"Sleep on\"", "\"It is finished\"", "\"Lazarus, come forth!\""],"optionsEs":["«Calla»", "«Sigue durmiendo»", "«Consumado es»", "«¡Lázaro, ven fuera!»"],"explanationEn":"And the dead man came out, still bound in his grave-clothes.","explanationEs":"Y el muerto salió, aún atado con sus vendas.","correct":3},{"textEn":"12. What did this miracle crown?","textEs":"12. ¿Qué coronó este milagro?","optionsEn":["His power over men, the waves, and demons — now crowned by power over the grave", "His weakness", "His failures", "His silence"],"optionsEs":["Su poder sobre los hombres, las olas, y los demonios — ahora coronado por poder sobre la tumba", "Su debilidad", "Sus fracasos", "Su silencio"],"explanationEn":"Now He showed His authority over death itself.","explanationEs":"Ahora mostró su autoridad sobre la muerte misma.","correct":0},{"textEn":"13. Why did Jesus call Lazarus by name?","textEs":"13. ¿Por qué llamó Jesús a Lázaro por nombre?","optionsEn":["Because He had forgotten him", "Because, it was said, had He simply cried \"Come forth!\" every dead person in history might have risen", "Because Lazarus was deaf", "For no reason"],"optionsEs":["Porque lo había olvidado", "Porque, se dijo, si simplemente hubiera clamado «¡Venid fuera!» todo muerto de la historia pudiera haber resucitado", "Porque Lázaro era sordo", "Sin razón alguna"],"explanationEn":"Such is His authority over death.","explanationEs":"Tal es su autoridad sobre la muerte.","correct":1},{"textEn":"14. How does Jesus picture the death of a believer?","textEs":"14. ¿Cómo describe Jesús la muerte de un creyente?","optionsEn":["As the end", "As defeat", "As sleep — \"Our friend Lazarus sleeps, but I go that I may wake him\"", "As darkness forever"],"optionsEs":["Como el fin", "Como derrota", "Como sueño — «Nuestro amigo Lázaro duerme; mas voy a despertarle»", "Como oscuridad para siempre"],"explanationEn":"To the Lord of life, a believer's death is no more final than sleep.","explanationEs":"Para el Señor de la vida, la muerte de un creyente no es más definitiva que el sueño.","correct":2},{"textEn":"15. What does the child-asleep illustration teach?","textEs":"15. ¿Qué enseña la ilustración del niño dormido?","optionsEn":["The Christian closes his eyes in this world and wakes in the Father's house, carried home by the One who loves him", "That children should not sleep on couches", "That death is to be feared", "That we wake in the same place"],"optionsEs":["El cristiano cierra los ojos en este mundo y despierta en la casa del Padre, llevado a casa por Aquél que lo ama", "Que los niños no deben dormir en sofás", "Que la muerte debe temerse", "Que despertamos en el mismo lugar"],"explanationEn":"Like a child who wakes in his own bed, carried there by his father.","explanationEs":"Como un niño que despierta en su propia cama, llevado allí por su padre.","correct":0},{"textEn":"16. What task did Jesus give regarding the risen Lazarus?","textEs":"16. ¿Qué tarea dio Jesús respecto al resucitado Lázaro?","optionsEn":["\"Leave him bound\"", "\"Send him away\"", "\"Let him sleep again\"", "\"Loose him, and let him go\" — the grieving are led back to life"],"optionsEs":["«Déjenlo atado»", "«Envíenlo lejos»", "«Déjenlo dormir otra vez»", "«Desatadle, y dejadle ir» — a los que lloran se les conduce de regreso a la vida"],"explanationEn":"There is grief work to be done even after resurrection joy.","explanationEs":"Hay trabajo de duelo que hacer aun después del gozo de la resurrección.","correct":3},{"textEn":"17. What did the man who planned his funeral request?","textEs":"17. ¿Qué pidió el hombre que planeó su propio funeral?","optionsEn":["A silent service", "No Scripture at all", "An open Bible laid over his heart, his finger pointing to John 3:16", "That no one attend"],"optionsEs":["Un servicio en silencio", "Ninguna Escritura", "Una Biblia abierta sobre su corazón, con su dedo señalando Juan 3:16", "Que nadie asistiera"],"explanationEn":"Even in death he was still preaching the only hope that conquers the grave.","explanationEs":"Aun en la muerte seguía predicando la única esperanza que vence la tumba.","correct":2},{"textEn":"18. What does John 3:16 declare?","textEs":"18. ¿Qué declara Juan 3:16?","optionsEn":["That few are loved", "That God so loved the world He gave His only Son, that whoever believes should not perish but have everlasting life", "That God is distant", "That the world is condemned"],"optionsEs":["Que pocos son amados", "Que de tal manera amó Dios al mundo que dio a su Hijo unigénito, para que todo aquel que cree no se pierda mas tenga vida eterna", "Que Dios está distante", "Que el mundo está condenado"],"explanationEn":"This is the only hope that conquers the grave.","explanationEs":"Esta es la única esperanza que vence la tumba.","correct":1},{"textEn":"19. What does Christ's power over the grave do for us?","textEs":"19. ¿Qué hace por nosotros el poder de Cristo sobre la tumba?","optionsEn":["The One able to conquer death is able to remove all our fear", "It leaves us in fear", "It changes nothing", "It applies only to Lazarus"],"optionsEs":["Aquél que es capaz de vencer la muerte es capaz de quitar todo nuestro temor", "Nos deja en temor", "No cambia nada", "Aplica solo a Lázaro"],"explanationEn":"The same voice that called Lazarus will one day call all His own.","explanationEs":"La misma voz que llamó a Lázaro un día llamará a todos los suyos.","correct":0},{"textEn":"20. What is the capstone truth of Lazarus's story?","textEs":"20. ¿Cuál es la verdad culminante de la historia de Lázaro?","optionsEn":["Death has the final word", "The tomb is a wall forever", "Resurrection is impossible", "Without the resurrection life has no meaning; because of Christ the tomb has become a doorway"],"optionsEs":["La muerte tiene la última palabra", "La tumba es un muro para siempre", "La resurrección es imposible", "Sin la resurrección la vida no tiene sentido; por causa de Cristo la tumba se ha vuelto una puerta"],"explanationEn":"He is the resurrection and the life, and whoever believes in Him shall never die.","explanationEs":"Él es la resurrección y la vida, y todo aquel que cree en Él no morirá jamás.","correct":3}];
+const kwQuestions = [{"textEn":"21. Who was Lazarus, and what message did the sisters send?","textEs":"21. ¿Quién era Lázaro, y qué mensaje enviaron las hermanas?","kw_en":["lazarus","bethany","martha","mary","loved","sick","message","raised"],"kw_es":["lazaro","betania","marta","maria","amaba","enfermo","mensaje","resucit"],"modelEn":"Lazarus lived in Bethany with his sisters, Martha and Mary, a family that loved the Lord and whom the Lord loved. When Lazarus fell sick, the sisters sent word to Jesus with a message full of quiet faith: \"Lord, behold, he whom You love is sick.\" His raising would become the clearest demonstration before the cross of who Jesus is — the One who said, \"I am the resurrection and the life.\"","modelEs":"Lázaro vivía en Betania con sus hermanas, Marta y María, una familia que amaba al Señor y a quienes el Señor amaba. Cuando Lázaro enfermó, las hermanas enviaron aviso a Jesús con un mensaje lleno de callada fe: \"Señor, he aquí el que amas está enfermo\". Su resurrección llegaría a ser la demostración más clara antes de la cruz de quién es Jesús — Aquél que dijo: \"Yo soy la resurrección y la vida\"."},{"textEn":"22. Why is death a tragedy?","textEs":"22. ¿Por qué es la muerte una tragedia?","kw_en":["tragedy","terrible","child","hope","unbeliever","illness","funeral","enemy"],"kw_es":["tragedia","terrible","nino","esperanza","incredulo","enfermedad","funeral","enemigo"],"modelEn":"Death is almost always terrible. It is terrible when a small child dies, the bud cut off before it can bloom; terrible when an unbeliever dies with no hope at all, slipping into eternity without Christ; terrible when a lingering illness slowly takes a friend. The hardest funerals to preach are those for people who had no hope. Death is real, the last enemy, and it is no small thing.","modelEs":"La muerte es casi siempre terrible. Es terrible cuando muere un niño pequeño, el capullo cortado antes de florecer; terrible cuando un incrédulo muere sin ninguna esperanza, deslizándose a la eternidad sin Cristo; terrible cuando una enfermedad prolongada se lleva lentamente a un amigo. Los funerales más difíciles de predicar son los de personas que no tenían esperanza. La muerte es real, el postrer enemigo, y no es cosa pequeña."},{"textEn":"23. What did Jesus do when told Lazarus was sick, and why?","textEs":"23. ¿Qué hizo Jesús cuando le dijeron que Lázaro estaba enfermo, y por qué?","kw_en":["delayed","two","days","unexpected","glory","neglect","god","greater"],"kw_es":["demoro","dos","dias","inesperado","gloria","descuido","dios","mayor"],"modelEn":"When Jesus heard that Lazarus was sick, He did the unexpected: He stayed where He was two more days, deliberately delaying until Lazarus had died. But His delay was not neglect. He had already said, \"This sickness is not unto death, but for the glory of God.\" What looked like indifference was love working toward a far greater glory than a simple healing could ever have shown.","modelEs":"Cuando Jesús oyó que Lázaro estaba enfermo, hizo lo inesperado: se quedó donde estaba dos días más, demorando deliberadamente hasta que Lázaro hubo muerto. Pero su demora no era descuido. Ya había dicho: \"Esta enfermedad no es para muerte, sino para la gloria de Dios\". Lo que parecía indiferencia era amor obrando hacia una gloria mucho mayor que la que una simple sanidad jamás podría haber mostrado."},{"textEn":"24. What is the trial of death?","textEs":"24. ¿Qué es la prueba de la muerte?","kw_en":["trial","waiting","slow","silent","delay","neglect","glory","faith"],"kw_es":["prueba","esperar","lento","silencioso","demora","descuido","gloria","fe"],"modelEn":"The trial of death is the agony of waiting when God seems slow and silent, when heaven appears to do nothing while our hearts break. Mary and Martha watched the road for Jesus hour after hour, and He did not come. But His delay was not neglect; when God seems slow, He is not absent and not idle, but preparing a deeper display of His power and goodness than we could have asked for. It is a trial that calls for faith.","modelEs":"La prueba de la muerte es la agonía de esperar cuando Dios parece lento y silencioso, cuando el cielo parece no hacer nada mientras nuestro corazón se rompe. María y Marta vigilaron el camino esperando a Jesús hora tras hora, y Él no vino. Pero su demora no era descuido; cuando Dios parece lento, no está ausente ni ocioso, sino preparando una manifestación más profunda de su poder y bondad de la que pudiéramos haber pedido. Es una prueba que exige fe."},{"textEn":"25. What great claim and promise did Jesus make?","textEs":"25. ¿Qué gran declaración y promesa hizo Jesús?","kw_en":["resurrection","life","believes","die","live","never","martha","claim"],"kw_es":["resurreccion","vida","cree","muerto","vivira","eternamente","marta","declar"],"modelEn":"To Martha the Lord spoke the words read at the graveside of believers ever since: \"I am the resurrection and the life. He who believes in Me, though he may die, he shall live. And whoever lives and believes in Me shall never die.\" This is the great claim of His deity and the great promise to all who trust Him: for the believer, physical death is not the end but a passage into unending life.","modelEs":"A Marta el Señor habló las palabras que se han leído junto a la tumba de los creyentes desde entonces: \"Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá. Y todo aquel que vive y cree en mí, no morirá eternamente\". Esta es la gran declaración de su deidad y la gran promesa a todos los que confían en Él: para el creyente, la muerte física no es el fin sino un paso a la vida sin fin."},{"textEn":"26. Describe the triumph at the tomb.","textEs":"26. Describe el triunfo ante la tumba.","kw_en":["come","forth","name","grave","power","dead","loud","authority"],"kw_es":["ven","fuera","nombre","tumba","poder","muerto","voz","autoridad"],"modelEn":"Jesus went to the tomb, told them to take away the stone, and cried with a loud voice, \"Lazarus, come forth!\" And the dead man came out, still bound in his grave-clothes. The Lord who had shown His power over men, the wind and waves, disease and demons, now crowned it all with power over the grave itself. It was said to be a mercy He called Lazarus by name, for had He simply cried \"Come forth!\" every dead person might have risen. Such is His authority over death.","modelEs":"Jesús fue a la tumba, les dijo que quitaran la piedra, y clamó a gran voz: \"¡Lázaro, ven fuera!\". Y el muerto salió, aún atado con sus vendas. El Señor que había mostrado su poder sobre los hombres, el viento y las olas, la enfermedad y los demonios, ahora lo coronaba todo con poder sobre la tumba misma. Se dijo que fue una misericordia que lo llamara por nombre, porque si simplemente hubiera clamado \"¡Venid fuera!\" todo muerto pudiera haber resucitado. Tal es su autoridad sobre la muerte."},{"textEn":"27. How does Jesus picture death, and what does the child illustration teach?","textEs":"27. ¿Cómo describe Jesús la muerte, y qué enseña la ilustración del niño?","kw_en":["sleep","wake","child","couch","bed","father","carried","fear"],"kw_es":["sueno","despert","nino","sofa","cama","padre","llevo","temor"],"modelEn":"Jesus pictures the death of a believer as sleep: \"Our friend Lazarus sleeps, but I go that I may wake him up.\" To the Lord of life, it is no more final than sleep. It is like a child who falls asleep on the couch in the evening and wakes the next morning in his own bed — and he is not afraid, because he knows his father carried him there in the night. So the Christian closes his eyes in this world and opens them in the Father's house, carried home by the One who loves him.","modelEs":"Jesús describe la muerte de un creyente como sueño: \"Nuestro amigo Lázaro duerme; mas voy a despertarle\". Para el Señor de la vida, no es más definitiva que el sueño. Es como un niño que se queda dormido en el sofá por la tarde y despierta a la mañana siguiente en su propia cama — y no tiene miedo, porque sabe que su padre lo llevó allí en la noche. Así el cristiano cierra los ojos en este mundo y los abre en la casa del Padre, llevado a casa por Aquél que lo ama."},{"textEn":"28. What task did Jesus give the living, and what does the funeral man show?","textEs":"28. ¿Qué tarea dio Jesús a los vivos, y qué muestra el hombre del funeral?","kw_en":["loose","let","go","grief","bible","finger","john","hope"],"kw_es":["desatad","dejad","ir","duelo","biblia","dedo","juan","esperanza"],"modelEn":"Of the risen Lazarus Jesus said, \"Loose him, and let him go.\" There is grief work to be done even after resurrection joy; the grieving are gently led back to life, to unwrap the grave-clothes and re-engage the living world. A man in Dr. Mike McGough's church planned his funeral so that an open Bible lay over his heart, his finger pointing to John 3:16 — so that even in death he was still preaching the only hope that conquers the grave.","modelEs":"Del resucitado Lázaro Jesús dijo: \"Desatadle, y dejadle ir\". Hay trabajo de duelo que hacer aun después del gozo de la resurrección; a los que lloran se les conduce con ternura de regreso a la vida, a quitar las vendas y reincorporarse al mundo de los vivos. Un hombre en la iglesia del Dr. Mike McGough planeó su funeral de modo que una Biblia abierta yaciera sobre su corazón, con su dedo señalando Juan 3:16 — de modo que aun en la muerte seguía predicando la única esperanza que vence la tumba."},{"textEn":"29. What does Christ's power over the grave do for us?","textEs":"29. ¿Qué hace por nosotros el poder de Cristo sobre la tumba?","kw_en":["power","grave","conquer","death","remove","fear","able","christ"],"kw_es":["poder","tumba","vencer","muerte","quitar","temor","capaz","cristo"],"modelEn":"Christ has power over the grave, and the One who is able to conquer death is able to remove all our fear. When we stand at the graveside of one who belonged to the Lord, we can remember the voice that called Lazarus out of the dark, and remember that the same voice will one day call all His own. Because He lives and reigns over death, the believer need not be afraid to die.","modelEs":"Cristo tiene poder sobre la tumba, y Aquél que es capaz de vencer la muerte es capaz de quitar todo nuestro temor. Cuando estamos junto a la tumba de alguien que perteneció al Señor, podemos recordar la voz que llamó a Lázaro fuera de la oscuridad, y recordar que la misma voz un día llamará a todos los suyos. Porque Él vive y reina sobre la muerte, el creyente no necesita temer morir."},{"textEn":"30. State the capstone theme of Lazarus's story.","textEs":"30. Expresa el tema culminante de la historia de Lázaro.","kw_en":["resurrection","meaning","tomb","doorway","fear","christ","believe","never"],"kw_es":["resurreccion","sentido","tumba","puerta","temor","cristo","cree","jamas"],"modelEn":"Without the resurrection, life has no lasting meaning and death has the final word. But because of Christ, the tomb is no longer a wall; it has become a doorway. Lazarus would die again one day, yet he was a sign pointing to a greater resurrection that never reverses, secured by the empty tomb of Christ Himself. He is the resurrection and the life, and whoever believes in Him shall never die.","modelEs":"Sin la resurrección, la vida no tiene sentido duradero y la muerte tiene la última palabra. Pero por causa de Cristo, la tumba ya no es un muro; se ha vuelto una puerta. Lázaro moriría de nuevo un día, pero era una señal que apuntaba a una resurrección mayor que nunca se revierte, asegurada por la tumba vacía de Cristo mismo. Él es la resurrección y la vida, y todo aquel que cree en Él no morirá jamás."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleCharacters2Readings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

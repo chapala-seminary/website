@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Evangelism — Unit 7: Personal Evangelism (Bilingual)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .clear-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.clear-btn { background: #a0512a; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.attribution { font-size: 0.95rem; color: #6b5840; font-style: italic; margin-bottom: 16px; }
+blockquote { margin: 14px 0; padding: 10px 14px; border-left: 4px solid #5b3a1f; background: #f4ede2; font-style: italic; }
+.track-banner { background: #5b3a1f; color: white; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-weight: bold; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+.kw-answer:disabled { background: #f5f0e8; cursor: not-allowed; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; margin-top: 5px; }
+button.small:disabled { background: #aaa; cursor: not-allowed; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.lockout-banner { background: #f8d7da; color: #721c24; padding: 12px 16px; border-radius: 12px; margin-bottom: 15px; font-weight: bold; border: 1px solid #f5c6cb; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en div.lang-en { display: block; }
+body.lang-es div.lang-es { display: block; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.scale-box { background: #fdfaf3; border: 1px solid #d7cec1; border-radius: 10px; padding: 14px 18px; margin: 14px 0; }
+.scale-box h4 { color: #5b3a1f; margin-top: 0; }
+.scale-box ol { margin-left: 1.4rem; }
+.scale-box ol li { margin-bottom: 6px; }
+@media print {
+  .toggle-btn, .clear-btn, .nav-bar, .registration-panel, button, .question input[type="radio"], textarea, .lockout-banner { display: none !important; }
+  body { background: white; }
+  .card { box-shadow: none; border: none; }
+}
+.model-answer-box { margin-top: 12px; padding: 12px 14px; background: #fbf3d9; border: 1px solid #e4c95b; border-left: 5px solid #c9a227; border-radius: 8px; color: #4a3c10; font-size: 0.95em; line-height: 1.5; }
+.model-answer-box strong { color: #7a5c00; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span></button>
+        <button class="nav-btn" id="nextUnitBtn"><span class="lang-en">Next</span><span class="lang-es">Siguiente</span> →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+<button class="clear-btn" id="clearDataBtn">🗑 <span class="lang-en">Clear Saved Data</span><span class="lang-es">Borrar Datos Guardados</span></button>
+
+<div class="card">
+    <h1>
+        <span class="lang-en">📖 Evangelism — Unit 7: Personal Evangelism</span>
+        <span class="lang-es">📖 Evangelismo — Unidad 7: Evangelismo Personal</span>
+    </h1>
+    <p class="attribution">
+        <span class="lang-en">Chapala Theological Seminary · Dr. Wayne Cook, Author and Professor · Dr. Ted Rogers, Seminary Director</span>
+        <span class="lang-es">Seminario Teológico de Chapala · Dr. Wayne Cook, Autor y Profesor · Dr. Ted Rogers, Director del Seminario</span>
+    </p>
+    <div id="trackBanner" class="track-banner" style="display:none;"></div>
+</div>
+
+<!-- CTS audit 2026-05-23: registration panel removed. Registration happens once on Unit 1.
+     Later units read the saved student/track from localStorage (cts_student / cts_track).
+     If none is saved, the student silently defaults to the Certificate track (per Wayne). -->
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation: The Most Basic Form of Gospel Proclamation</h2>
+        <p>While evangelism may take place in many settings — public preaching, crusades, broadcast — the most common and often most effective form is personal evangelism. This is the one-on-one communication of the gospel within the context of everyday life. It is not an event but a lifestyle. It occurs in conversations, relationships, and ordinary moments. It allows for deeper understanding, personal engagement, and meaningful response.</p>
+        <p>Every believer can engage in personal evangelism. The shy can listen and ask questions. The outgoing can initiate conversations. The intellectual can answer objections. The compassionate can serve and then speak. This unit covers Jesus' example, a tool for reading where a person actually stands, and the practical principles of listening, questioning, boldness, sensitivity, readiness, and dependence on the Spirit.</p>
+
+        <h3>I. The Example of Christ</h3>
+        <p>Jesus often engaged individuals personally. In John 4, He spoke with the Samaritan woman — a person of different ethnicity, gender, and moral reputation. The conversation began naturally: "Jesus said to her, 'Give Me a drink'" (John 4:7, NKJV). From that simple request He moved to spiritual truth, exposed her need, and revealed Himself as the Messiah. In John 3, He spoke with Nicodemus, a Pharisee and ruler of the Jews. Here the approach was different — more direct, more theological — but the goal was the same: to lead him to new birth. Different people, different approaches, same truth.</p>
+        <p>Notice what Jesus did not do. He did not wait for people to come to a synagogue service. He went to them — at a well, in a house, on a road. He did not deliver a one-size-fits-all sermon; He read the person and adjusted His approach. Personal evangelism follows that pattern. It goes where people are, listens to where they are, and speaks accordingly.</p>
+
+        <h3>II. Reading the Person: Robinson's Five Levels of Response</h3>
+        <p>Not every conversation begins from the same starting point. Darrell Robinson of the Home Mission Board identified five levels of response to the gospel. The wise personal evangelist learns to identify which level the hearer occupies and adjusts his approach accordingly.</p>
+
+        <div class="scale-box">
+        <h4>Robinson's Five Levels</h4>
+        <ol>
+        <li><strong>Ignorant.</strong> They know nothing about the gospel. They must be <em>taught</em>. Begin with God, sin, Christ, response. Do not assume vocabulary.</li>
+        <li><strong>Indifferent.</strong> They have heard the gospel story but are apathetic toward it. They must be <em>stirred</em> to make a response — through questions, urgency, or a confronting illustration.</li>
+        <li><strong>Hostile.</strong> They have heard and rejected the gospel and are antagonistic. They must be met with <em>love and listening</em>. Robinson counsels: rather than reacting in anger, be a good listener. Among Muslim communities in Togo, missionaries have used Old Testament storying — premature introduction of Christ gets the missionary thrown out of the village; patient storying opens hearts over time.</li>
+        <li><strong>Interested.</strong> They have heard about the gospel and want to know more. They must be <em>cultivated</em> — given time, answers, and follow-up — until they are ready.</li>
+        <li><strong>Ready.</strong> They have heard the gospel and want to accept Christ immediately. The evangelist's job here is simple: <em>lead them</em> in prayer to repent of sin, ask forgiveness, and invite Christ as Lord and Savior.</li>
+        </ol>
+        </div>
+
+        <p>A mistake common to new evangelists is treating every conversation as if the person were at level five. Some are. Most are not. A hostile hearer pressed for immediate decision becomes more hostile. An ignorant hearer asked to "pray the prayer" prays words he does not understand. The Spirit gives discernment about which level the person occupies and how to proceed.</p>
+
+        <h3>III. The Importance of Listening</h3>
+        <p>Effective personal evangelism begins with listening. James instructs, "let every man be swift to hear, slow to speak" (James 1:19, NKJV). Listening serves several purposes. It helps identify the person's level on Robinson's scale. It reveals misconceptions that need to be addressed. It builds trust — people are more likely to listen to someone who has first listened to them.</p>
+        <p>Listening also models humility. The evangelist is not a lecturer delivering a monologue; he is a fellow human being engaging a conversation. He may learn that the person has been hurt by a church, confused by a cult, or has simply never heard the gospel clearly explained. That knowledge shapes how he presents the truth.</p>
+
+        <h3>IV. Asking Diagnostic Questions</h3>
+        <p>Questions often open the door to deeper conversation. Jesus asked, "But who do you say that I am?" (Matthew 16:15, NKJV) — forcing His disciples to move from hearsay to personal conviction. In personal evangelism, diagnostic questions are especially valuable. The two CWT questions are the classic example: <em>"Have you come to the place in your life where you know for certain that you have eternal life?"</em> and <em>"If you were to stand before God and He asked, 'Why should I let you into my heaven?' what would you say?"</em></p>
+        <p>These two questions reveal where the person actually trusts for salvation — works, religion, sincerity, or Christ alone. A person who answers, "I've tried to live a good life," has just told the evangelist that he is trusting in works. The conversation can now move where it needs to go. Good questions also create curiosity. When a person cannot answer a question, he may become open to hearing the answer.</p>
+
+        <h3>V. Boldness and Sensitivity</h3>
+        <p>Personal evangelism requires both boldness and sensitivity. Boldness means speaking truth without apology — Paul asked the Ephesians to pray "that I may open my mouth boldly to make known the mystery of the gospel" (Ephesians 6:19, NKJV). Sensitivity means delivering that truth with grace — "Let your speech always be with grace, seasoned with salt" (Colossians 4:6, NKJV).</p>
+        <p>Boldness without wisdom is harsh and drives people away. Sensitivity without boldness is silent and fails to confront sin or call for decision. The biblical balance is found in genuine love. When love governs the conversation, boldness is not rudeness and sensitivity is not cowardice. The goal is "speaking the truth in love" (Ephesians 4:15, NKJV).</p>
+
+        <h3>VI. Recognizing Open Doors: When People Are Most Receptive</h3>
+        <p>Opportunities for personal evangelism arise in daily life, but they are not uniformly distributed. People are most receptive to the gospel during seasons of change. Three categories deserve special attention.</p>
+        <p><strong>Transitions.</strong> Immigrants, the newly married, the newly retired, new parents, the newly bereaved — anyone whose life has just been reshuffled. Among Canadian immigrants, revival breaks out repeatedly. The greatest Southern Baptist growth has been among ethnic communities precisely because transition opens the heart.</p>
+        <p><strong>Crisis.</strong> Those facing death, divorce, illness, or disaster. Following a flood in Brazil, missionaries gave relief and used the opportunity to plant several churches. Crisis dismantles the illusion of self-sufficiency that closes hearts in easier seasons.</p>
+        <p><strong>The downcast and the poor.</strong> Jesus usually went to the poor first and found them most receptive. The rich often think they have no need for God; the poor know they have many needs. The personal evangelist who looks for the burdened, the lonely, and the materially needy will find doors already open. Paul wrote, "Walk in wisdom toward those who are outside, redeeming the time" (Colossians 4:5, NKJV). The receptive seasons are short; the wise believer redeems them.</p>
+
+        <h3>VII. Dependence on the Holy Spirit</h3>
+        <p>Personal evangelism is not a matter of human persuasion. Jesus promised, "And when He has come, He will convict the world of sin, and of righteousness, and of judgment" (John 16:8, NKJV). Conviction is the work of the Spirit. The believer's role is to speak; the Spirit's role is to convince. This dependence liberates the evangelist from the burden of producing a response. He can speak freely, pray silently, and trust the Spirit to apply the Word.</p>
+        <p>Before a conversation, pray for guidance and boldness. During the conversation, listen to the Spirit's leading — perhaps to say more, perhaps to stop, perhaps to ask a different question. After the conversation, pray for the seed to take root. Dependence is not passivity; it is active reliance.</p>
+
+        <h3>VIII. Avoiding Artificial Evangelism</h3>
+        <p>One danger in personal evangelism is artificiality — forcing the conversation, following a script so rigidly that the person feels like a project rather than a person. Paul commanded, "speaking the truth in love" (Ephesians 4:15, NKJV). Love does not manipulate. It respects the other person's dignity and timing. Artificial evangelism often produces shallow responses — a person may give the "right" answers just to end an uncomfortable conversation. Genuine personal evangelism is natural, though not necessarily comfortable. It is honest, not slick. The believer should be himself — not a polished salesman, but a fellow sinner saved by grace. When he shares what God has done for him, with humility and authenticity, the conversation becomes a meeting of souls, not a performance.</p>
+
+        <h3>Conclusion: A Lifestyle of Faithful Witness</h3>
+        <p>Personal evangelism is the most basic and natural form of gospel proclamation. It requires clarity, listening, discernment of where the hearer stands, boldness, sensitivity, alertness to receptive seasons, and dependence on the Spirit. It is not reserved for experts; it is the privilege of every believer. The Great Commission is fulfilled one conversation at a time — over coffee, on a walk, in a waiting room, across a dinner table. The believer who prays, prepares, and steps out in faith will find that God opens doors and provides words. The results belong to Him; the faithfulness belongs to us.</p>
+        <p><em>Prayer: Lord, teach us to speak of You naturally, clearly, and lovingly. Give us ears to listen and hearts to discern. Help us recognize whether the person before us is ignorant, indifferent, hostile, interested, or ready, and to respond rightly to each. Lead us to the transitioned, the crisis-stricken, the poor, and the open. Remove the fear of man and replace it with the fear of God. In Jesus' name, Amen.</em></p>
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación: La Forma Más Básica de Proclamación del Evangelio</h2>
+        <p>Si bien el evangelismo puede tener lugar en muchos entornos — predicación pública, cruzadas, transmisión — la forma más común y a menudo más eficaz es el evangelismo personal. Esta es la comunicación uno a uno del evangelio dentro del contexto de la vida cotidiana. No es un evento sino un estilo de vida. Ocurre en conversaciones, relaciones y momentos ordinarios. Permite una comprensión más profunda, un compromiso personal y una respuesta significativa.</p>
+        <p>Todo creyente puede participar en el evangelismo personal. El tímido puede escuchar y hacer preguntas. El extrovertido puede iniciar conversaciones. El intelectual puede responder a las objeciones. El compasivo puede servir y luego hablar. Esta unidad cubre el ejemplo de Jesús, una herramienta para discernir dónde está realmente una persona, y los principios prácticos de escuchar, preguntar, valentía, sensibilidad, prontitud y dependencia del Espíritu Santo.</p>
+
+        <h3>I. El Ejemplo de Cristo</h3>
+        <p>Jesús a menudo se relacionaba con personas individualmente. En Juan 4, habló con la mujer samaritana — una persona de etnia, género y reputación moral diferentes. La conversación comenzó naturalmente: "Jesús le dijo: Dame de beber" (Juan 4:7, RVG). A partir de esa simple solicitud, pasó a la verdad espiritual, expuso su necesidad y se reveló como el Mesías. En Juan 3, habló con Nicodemo, un fariseo y principal de los judíos. Aquí el enfoque fue diferente — más directo, más teológico — pero el objetivo era el mismo: llevarlo al nuevo nacimiento. Diferentes personas, diferentes enfoques, la misma verdad.</p>
+        <p>Note lo que Jesús no hizo. No esperó a que las personas vinieran a un culto en la sinagoga. Fue a ellas — a un pozo, a una casa, a un camino. No predicó un sermón uniforme; leyó a la persona y ajustó Su enfoque. El evangelismo personal sigue ese patrón. Va donde las personas están, escucha dónde están y habla en consecuencia.</p>
+
+        <h3>II. Leer a la Persona: Los Cinco Niveles de Respuesta de Robinson</h3>
+        <p>No toda conversación comienza desde el mismo punto de partida. Darrell Robinson, de la Junta de Misiones Domésticas, identificó cinco niveles de respuesta al evangelio. El evangelista personal sabio aprende a identificar el nivel en el que se encuentra el oyente y ajusta su enfoque en consecuencia.</p>
+
+        <div class="scale-box">
+        <h4>Los Cinco Niveles de Robinson</h4>
+        <ol>
+        <li><strong>Ignorantes.</strong> No saben nada sobre el evangelio. Deben ser <em>enseñados</em>. Comience con Dios, el pecado, Cristo, la respuesta. No asuma vocabulario.</li>
+        <li><strong>Indiferentes.</strong> Han oído la historia del evangelio pero son apáticos hacia ella. Deben ser <em>provocados</em> a una respuesta — mediante preguntas, urgencia o una ilustración confrontante.</li>
+        <li><strong>Hostiles.</strong> Han oído y rechazado el evangelio y son antagonistas. Deben ser recibidos con <em>amor y escucha</em>. Robinson aconseja: en lugar de reaccionar con ira, sea un buen oyente. Entre las comunidades musulmanas de Togo, los misioneros han usado la narración del Antiguo Testamento — la introducción prematura de Cristo hace que el misionero sea expulsado del pueblo; la narración paciente abre corazones con el tiempo.</li>
+        <li><strong>Interesados.</strong> Han oído sobre el evangelio y quieren saber más. Deben ser <em>cultivados</em> — dándoles tiempo, respuestas y seguimiento — hasta que estén listos.</li>
+        <li><strong>Listos.</strong> Han oído el evangelio y quieren aceptar a Cristo inmediatamente. El trabajo del evangelista aquí es sencillo: <em>guiarlos</em> en oración para arrepentirse del pecado, pedir perdón e invitar a Cristo como Señor y Salvador.</li>
+        </ol>
+        </div>
+
+        <p>Un error común entre los evangelistas nuevos es tratar cada conversación como si la persona estuviera en el nivel cinco. Algunas están. La mayoría no. Un oyente hostil presionado a una decisión inmediata se vuelve más hostil. Un oyente ignorante invitado a "hacer la oración" reza palabras que no entiende. El Espíritu Santo da discernimiento sobre el nivel en el que está la persona y cómo proceder.</p>
+
+        <h3>III. La Importancia de Escuchar</h3>
+        <p>El evangelismo personal eficaz comienza con escuchar. Santiago instruye: "Todo hombre sea pronto para oír, tardo para hablar" (Santiago 1:19, RVG). Escuchar sirve para varios propósitos. Ayuda a identificar el nivel de la persona en la escala de Robinson. Revela conceptos erróneos que deben abordarse. Genera confianza — es más probable que las personas escuchen a alguien que primero las ha escuchado.</p>
+        <p>Escuchar también modela humildad. El evangelista no es un conferenciante dando un monólogo; es un ser humano comprometido en una conversación. Puede aprender que la persona ha sido herida por una iglesia, confundida por una secta, o simplemente nunca ha oído el evangelio explicado con claridad. Ese conocimiento moldea cómo presenta la verdad.</p>
+
+        <h3>IV. Hacer Preguntas de Diagnóstico</h3>
+        <p>Las preguntas a menudo abren la puerta a una conversación más profunda. Jesús preguntó: "¿Y vosotros, quién decís que soy yo?" (Mateo 16:15, RVG) — obligando a Sus discípulos a pasar de los rumores a la convicción personal. En el evangelismo personal, las preguntas de diagnóstico son especialmente valiosas. Las dos preguntas del CWT son el ejemplo clásico: <em>"¿Ha llegado al punto en su vida en que sabe con certeza que tiene vida eterna?"</em> y <em>"Si estuviera de pie ante Dios y Él le preguntara: '¿Por qué debería dejarte entrar en mi cielo?' ¿qué le respondería?"</em></p>
+        <p>Estas dos preguntas revelan dónde la persona realmente confía para su salvación — obras, religión, sinceridad o Cristo solo. Una persona que responde: "He tratado de vivir una buena vida", acaba de decirle al evangelista que confía en las obras. La conversación ahora puede ir hacia donde necesita ir. Las buenas preguntas también generan curiosidad. Cuando una persona no puede responder a una pregunta, puede abrirse a oír la respuesta.</p>
+
+        <h3>V. Valentía y Sensibilidad</h3>
+        <p>El evangelismo personal requiere tanto valentía como sensibilidad. Valentía significa hablar la verdad sin disculpa — Pablo pidió a los efesios que oraran "para que al abrir mi boca me sea dada palabra para dar a conocer con denuedo el misterio del evangelio" (Efesios 6:19, RVG). Sensibilidad significa entregar esa verdad con gracia — "Sea vuestra palabra siempre con gracia, sazonada con sal" (Colosenses 4:6, RVG).</p>
+        <p>La valentía sin sabiduría es áspera y aleja a las personas. La sensibilidad sin valentía es silenciosa y no confronta el pecado ni llama a la decisión. El equilibrio bíblico se encuentra en el amor genuino. Cuando el amor gobierna la conversación, la valentía no es grosería y la sensibilidad no es cobardía. La meta es "siguiendo la verdad en amor" (Efesios 4:15, RVG).</p>
+
+        <h3>VI. Reconocer Puertas Abiertas: Cuándo las Personas Son Más Receptivas</h3>
+        <p>Las oportunidades para el evangelismo personal surgen en la vida diaria, pero no están distribuidas uniformemente. Las personas son más receptivas al evangelio durante temporadas de cambio. Tres categorías merecen atención especial.</p>
+        <p><strong>Transiciones.</strong> Los inmigrantes, los recién casados, los recién jubilados, los nuevos padres, los recién enviudados — cualquiera cuya vida acaba de ser reordenada. Entre los inmigrantes canadienses, el avivamiento estalla repetidamente. El mayor crecimiento bautista del sur ha sido entre comunidades étnicas precisamente porque la transición abre el corazón.</p>
+        <p><strong>Crisis.</strong> Los que enfrentan muerte, divorcio, enfermedad o desastre. Después de una inundación en Brasil, los misioneros dieron auxilio y usaron la oportunidad para plantar varias iglesias. La crisis desmantela la ilusión de autosuficiencia que cierra los corazones en temporadas más fáciles.</p>
+        <p><strong>Los abatidos y los pobres.</strong> Jesús generalmente iba primero a los pobres y los encontraba más receptivos. Los ricos a menudo piensan que no tienen necesidad de Dios; los pobres saben que tienen muchas necesidades. El evangelista personal que busca al cargado, al solitario y al materialmente necesitado encontrará puertas ya abiertas. Pablo escribió: "Andad sabiamente para con los de afuera, aprovechando bien el tiempo" (Colosenses 4:5, RVG). Las temporadas receptivas son cortas; el creyente sabio las redime.</p>
+
+        <h3>VII. Dependencia del Espíritu Santo</h3>
+        <p>El evangelismo personal no es una cuestión de persuasión humana. Jesús prometió: "Cuando él venga, convencerá al mundo de pecado, de justicia y de juicio" (Juan 16:8, RVG). La convicción es obra del Espíritu Santo. El papel del creyente es hablar; el papel del Espíritu es convencer. Esta dependencia libera al evangelista de la carga de producir una respuesta. Puede hablar libremente, orar silenciosamente y confiar en que el Espíritu aplique la Palabra.</p>
+        <p>Antes de una conversación, ore por dirección y valentía. Durante la conversación, escuche la dirección del Espíritu Santo — quizás para decir más, quizás para detenerse, quizás para hacer una pregunta diferente. Después de la conversación, ore para que la semilla eche raíces. La dependencia no es pasividad; es confianza activa.</p>
+
+        <h3>VIII. Evitar el Evangelismo Artificial</h3>
+        <p>Un peligro en el evangelismo personal es la artificialidad — forzar la conversación, seguir un guion tan rígidamente que la persona se sienta como un proyecto en lugar de una persona. Pablo ordenó: "Siguiendo la verdad en amor" (Efesios 4:15, RVG). El amor no manipula. Respeta la dignidad y el tiempo de la otra persona. El evangelismo artificial a menudo produce respuestas superficiales — una persona puede dar las respuestas "correctas" solo para terminar una conversación incómoda. El evangelismo personal genuino es natural, aunque no necesariamente cómodo. Es honesto, no pulido. El creyente debe ser él mismo — no un vendedor refinado, sino un compañero pecador salvado por gracia. Cuando comparte lo que Dios ha hecho por él, con humildad y autenticidad, la conversación se convierte en un encuentro de almas, no en una actuación.</p>
+
+        <h3>Conclusión: Un Estilo de Vida de Testimonio Fiel</h3>
+        <p>El evangelismo personal es la forma más básica y natural de proclamación del evangelio. Requiere claridad, escucha, discernimiento de dónde está el oyente, valentía, sensibilidad, atención a las temporadas receptivas y dependencia del Espíritu Santo. No está reservado para expertos; es el privilegio de cada creyente. La Gran Comisión se cumple una conversación a la vez — sobre café, en una caminata, en una sala de espera, en una mesa de cena. El creyente que ora, se prepara y da un paso de fe encontrará que Dios abre puertas y provee palabras. Los resultados pertenecen a Él; la fidelidad pertenece a nosotros.</p>
+        <p><em>Oración: Señor, enséñanos a hablar de Ti de manera natural, clara y amorosa. Danos oídos para escuchar y corazones para discernir. Ayúdanos a reconocer si la persona ante nosotros es ignorante, indiferente, hostil, interesada o lista, y a responder correctamente a cada una. Llévanos a los que pasan transiciones, a los azotados por la crisis, a los pobres y a los abiertos. Quita el temor del hombre y reemplázalo con el temor de Dios. En el nombre de Jesús, Amén.</em></p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 7 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 7 — 30 Preguntas</span></h2>
+    <p>
+        <span class="lang-en"><strong>Certificate track:</strong> Section A (multiple choice) required at 90%. Section B (short answer) optional.</span>
+        <span class="lang-es"><strong>Pista de Certificado:</strong> Sección A (opción múltiple) obligatoria al 90%. Sección B (respuesta corta) opcional.</span>
+    </p>
+    <p>
+        <span class="lang-en"><strong>M.Div./Th.M. track:</strong> Both sections required at 90% each, independently.</span>
+        <span class="lang-es"><strong>Pista de M.Div./Th.M.:</strong> Ambas secciones obligatorias al 90% cada una, independientemente.</span>
+    </p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="clearExamDataBtn" class="small" style="background:#a0512a;">🗑 <span class="lang-en">Clear My Answers</span><span class="lang-es">Borrar Mis Respuestas</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;" aria-live="polite"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ======================== CONFIG ========================
+const UNIT_NUM = 7;
+/* CTS audit 2026-05-23: course confirmed at 13 units (Units 9-13 authored). Prior rule was: const TOTAL_UNITS = 12; */
+        const TOTAL_UNITS = 13;
+const PASS_THRESHOLD = 0.90;
+const NS = 'cts_ev_';
+const UNIT_KEY = NS + 'unit' + UNIT_NUM;
+const PROGRESS_KEY = NS + 'progress';
+const PASSED_KEY = NS + 'unit' + UNIT_NUM + '_passed';
+const MC_PASSED_KEY = NS + 'u' + UNIT_NUM + '_mc_passed';
+const LOCKOUT_KEY = NS + 'unit' + UNIT_NUM + '_sa_lockout';
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch(e) { progress = {}; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(NS + 'unit' + i + '_passed') === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSEvangelismUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSEvangelismUnit6.html"; };
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (localStorage.getItem(PASSED_KEY) === 'true') location.href = "CTSEvangelismUnit8.html";
+    else alert(currentLang === 'es' ? "Por favor apruebe la Unidad 7 primero." : "Please pass Unit 7 first.");
+};
+updateProgressGrid();
+
+// ======================== REGISTRATION ========================
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+/* CTS audit 2026-05-23: registration is collected only on Unit 1. This unit reads the saved
+   student from localStorage. If nothing is saved, default silently to the Certificate track. */
+function loadReg() {
+    let saved = localStorage.getItem('cts_student');
+    if (saved) {
+        try { student = JSON.parse(saved); } catch(e) { student = { name: '', email: '', country: '', program: 'Certificate of Ministry' }; }
+    }
+    if (!student || !student.program) { student = student || {}; student.program = 'Certificate of Ministry'; }
+    /* Keep cts_track in sync from the saved program (defaults to cert when absent). */
+    if (!localStorage.getItem('cts_track')) {
+        localStorage.setItem('cts_track', student.program === 'Master of Divinity' ? 'mdiv' : (student.program === 'Master of Theology' ? 'thm' : 'cert'));
+    }
+    applyTrackBanner();
+}
+function applyTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    const track = localStorage.getItem('cts_track') || 'cert';
+    banner.style.display = 'block';
+    /* CTS audit 2026-05-23: added Th.M. banner branch; both Masters tracks require both sections. */
+    if (track === 'thm') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Theology — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Teología — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else if (track === 'mdiv') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Divinity — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Divinidad — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else {
+        banner.innerHTML = '<span class="lang-en">Track: Certificate — Section A required (90%). Section B optional.</span><span class="lang-es">Pista: Certificado — Sección A obligatoria (90%). Sección B opcional.</span>';
+    }
+}
+/* CTS audit 2026-05-23: registration listeners removed (no reg form on this unit). */
+loadReg();
+applyTrackBanner();
+
+// ======================== QUESTIONS — MC distribution already A=B=C=D=5 ========================
+const mcQuestions = [
+    { textEn: "1. Personal evangelism is best defined as:", textEs: "1. El evangelismo personal se define mejor como:", optionsEn: ["Public preaching to crowds", "Mass crusade events", "One-on-one communication of the gospel", "Religious programming"], optionsEs: ["Predicación pública a multitudes", "Eventos de cruzada masiva", "Comunicación uno a uno del evangelio", "Programación religiosa"], correct: 2, explanationEn: "Personal evangelism is the one-on-one communication of the gospel within everyday life.", explanationEs: "El evangelismo personal es la comunicación uno a uno del evangelio dentro de la vida cotidiana." },
+    { textEn: "2. Jesus' encounter with the Samaritan woman (John 4) begins with:", textEs: "2. El encuentro de Jesús con la mujer samaritana (Juan 4) comienza con:", optionsEn: ["A theological lecture", "A simple request for water", "A rebuke for her sin", "A scripture quotation"], optionsEs: ["Una conferencia teológica", "Una simple solicitud de agua", "Una reprensión por su pecado", "Una cita de las Escrituras"], correct: 1, explanationEn: "'Jesus said to her, Give Me a drink' — a natural opening that led into spiritual truth.", explanationEs: "'Jesús le dijo: Dame de beber' — una apertura natural que llevó a la verdad espiritual." },
+    { textEn: "3. Jesus' approach with Nicodemus (John 3) differs from His approach with the Samaritan woman by being:", textEs: "3. El enfoque de Jesús con Nicodemo (Juan 3) difiere de Su enfoque con la mujer samaritana por ser:", optionsEn: ["More indirect and gentle", "Identical in every way", "Less interested in the person", "More direct and theological"], optionsEs: ["Más indirecto y gentil", "Idéntico en todos los sentidos", "Menos interesado en la persona", "Más directo y teológico"], correct: 3, explanationEn: "With Nicodemus the approach was more direct and theological — different person, different approach, same truth.", explanationEs: "Con Nicodemo el enfoque fue más directo y teológico — persona diferente, enfoque diferente, misma verdad." },
+    { textEn: "4. Robinson's Five Levels of Response begin with which level?", textEs: "4. Los Cinco Niveles de Respuesta de Robinson comienzan con ¿qué nivel?", optionsEn: ["Ignorant", "Indifferent", "Interested", "Ready"], optionsEs: ["Ignorante", "Indiferente", "Interesado", "Listo"], correct: 0, explanationEn: "Level 1 is Ignorant — they know nothing about the gospel and must be taught.", explanationEs: "El Nivel 1 es Ignorante — no saben nada sobre el evangelio y deben ser enseñados." },
+    { textEn: "5. Robinson's third level of response is:", textEs: "5. El tercer nivel de respuesta de Robinson es:", optionsEn: ["Indifferent", "Hostile", "Interested", "Ready"], optionsEs: ["Indiferente", "Hostil", "Interesado", "Listo"], correct: 1, explanationEn: "Level 3 is Hostile — they have heard and rejected the gospel and are antagonistic.", explanationEs: "El Nivel 3 es Hostil — han oído y rechazado el evangelio y son antagonistas." },
+    { textEn: "6. Robinson's fifth level of response is:", textEs: "6. El quinto nivel de respuesta de Robinson es:", optionsEn: ["Hostile", "Indifferent", "Ready", "Ignorant"], optionsEs: ["Hostil", "Indiferente", "Listo", "Ignorante"], correct: 2, explanationEn: "Level 5 is Ready — they want to accept Christ immediately and should be led in prayer.", explanationEs: "El Nivel 5 es Listo — quieren aceptar a Cristo inmediatamente y deben ser guiados en oración." },
+    { textEn: "7. According to Robinson, the appropriate response to a hostile hearer is:", textEs: "7. Según Robinson, la respuesta apropiada a un oyente hostil es:", optionsEn: ["Argue back", "Walk away", "Force a decision", "Listen in love"], optionsEs: ["Discutir", "Alejarse", "Forzar una decisión", "Escuchar con amor"], correct: 3, explanationEn: "Robinson counsels: rather than reacting in anger, be a good listener. The Togo storying example illustrates this.", explanationEs: "Robinson aconseja: en lugar de reaccionar con ira, sea un buen oyente. El ejemplo de la narración en Togo ilustra esto." },
+    { textEn: "8. James 1:19 instructs believers to be:", textEs: "8. Santiago 1:19 instruye a los creyentes a ser:", optionsEn: ["Swift to hear, slow to speak", "Quick to argue", "Quick to judge", "Silent always"], optionsEs: ["Prontos para oír, tardos para hablar", "Rápidos para discutir", "Rápidos para juzgar", "Siempre silenciosos"], correct: 0, explanationEn: "'let every man be swift to hear, slow to speak.'", explanationEs: "'Todo hombre sea pronto para oír, tardo para hablar.'" },
+    { textEn: "9. Listening in personal evangelism primarily helps the evangelist:", textEs: "9. Escuchar en el evangelismo personal ayuda principalmente al evangelista a:", optionsEn: ["Win the argument", "Understand the person's background and beliefs", "Avoid the conversation", "Sound impressive"], optionsEs: ["Ganar el argumento", "Entender los antecedentes y creencias de la persona", "Evitar la conversación", "Sonar impresionante"], correct: 1, explanationEn: "Listening helps identify level, background, beliefs, and misconceptions — and builds trust.", explanationEs: "Escuchar ayuda a identificar el nivel, antecedentes, creencias y conceptos erróneos — y genera confianza." },
+    { textEn: "10. The CWT diagnostic questions are designed to reveal:", textEs: "10. Las preguntas de diagnóstico del CWT están diseñadas para revelar:", optionsEn: ["The person's income", "The person's church history", "Where the person actually trusts for salvation", "The person's political views"], optionsEs: ["Los ingresos de la persona", "La historia eclesiástica de la persona", "Dónde la persona realmente confía para la salvación", "Las opiniones políticas de la persona"], correct: 2, explanationEn: "The two questions surface whether the person trusts in works, religion, sincerity, or Christ alone.", explanationEs: "Las dos preguntas revelan si la persona confía en obras, religión, sinceridad o solo en Cristo." },
+    { textEn: "11. The balance between boldness and sensitivity is found in:", textEs: "11. El equilibrio entre valentía y sensibilidad se encuentra en:", optionsEn: ["Compromise of the truth", "Avoidance of difficult subjects", "Silence in most situations", "Speaking the truth in love"], optionsEs: ["Compromiso de la verdad", "Evitación de temas difíciles", "Silencio en la mayoría de las situaciones", "Hablar la verdad en amor"], correct: 3, explanationEn: "Ephesians 4:15 — 'speaking the truth in love' — holds both together.", explanationEs: "Efesios 4:15 — 'siguiendo la verdad en amor' — mantiene ambos juntos." },
+    { textEn: "12. People are MOST receptive to the gospel during seasons of:", textEs: "12. Las personas son MÁS receptivas al evangelio durante temporadas de:", optionsEn: ["Transitions and crisis", "Prosperity and comfort", "Career success", "Cultural celebration"], optionsEs: ["Transiciones y crisis", "Prosperidad y comodidad", "Éxito profesional", "Celebración cultural"], correct: 0, explanationEn: "Transitions, crises, and seasons of hardship open hearts that prosperity often closes.", explanationEs: "Las transiciones, crisis y temporadas de dificultad abren corazones que la prosperidad a menudo cierra." },
+    { textEn: "13. Jesus, in His earthly ministry, went FIRST to which group?", textEs: "13. Jesús, en Su ministerio terrenal, fue PRIMERO a ¿qué grupo?", optionsEn: ["The Pharisees", "The poor", "The Romans", "The priests"], optionsEs: ["Los fariseos", "Los pobres", "Los romanos", "Los sacerdotes"], correct: 1, explanationEn: "Jesus usually went to the poor first and found them most receptive.", explanationEs: "Jesús generalmente iba primero a los pobres y los encontraba más receptivos." },
+    { textEn: "14. According to John 16:8, conviction of sin is the work of:", textEs: "14. Según Juan 16:8, la convicción del pecado es obra de:", optionsEn: ["The evangelist", "The hearer himself", "The Holy Spirit", "The church"], optionsEs: ["El evangelista", "El oyente mismo", "El Espíritu Santo", "La iglesia"], correct: 2, explanationEn: "'When He has come, He will convict the world of sin, and of righteousness, and of judgment.'", explanationEs: "'Cuando él venga, convencerá al mundo de pecado, de justicia y de juicio.'" },
+    { textEn: "15. The evangelist's role in a personal conversation is to:", textEs: "15. El papel del evangelista en una conversación personal es:", optionsEn: ["Produce conviction by argument", "Manipulate the response", "Wait silently", "Speak the truth while the Spirit convicts"], optionsEs: ["Producir convicción por argumento", "Manipular la respuesta", "Esperar silenciosamente", "Hablar la verdad mientras el Espíritu convence"], correct: 3, explanationEn: "The evangelist speaks truth; conviction is the Spirit's work, not the evangelist's.", explanationEs: "El evangelista habla la verdad; la convicción es obra del Espíritu, no del evangelista." },
+    { textEn: "16. Artificial evangelism is characterized by:", textEs: "16. El evangelismo artificial se caracteriza por:", optionsEn: ["Treating people as projects rather than persons", "Genuine listening", "Patient cultivation", "Spirit-led adaptation"], optionsEs: ["Tratar a las personas como proyectos en lugar de personas", "Escucha genuina", "Cultivo paciente", "Adaptación guiada por el Espíritu"], correct: 0, explanationEn: "Artificial evangelism follows the script so rigidly that the person becomes a project rather than a person made in God's image.", explanationEs: "El evangelismo artificial sigue el guion tan rígidamente que la persona se convierte en un proyecto en lugar de una persona hecha a imagen de Dios." },
+    { textEn: "17. After her encounter with Jesus, the Samaritan woman went back to her town and:", textEs: "17. Después de su encuentro con Jesús, la mujer samaritana regresó a su ciudad y:", optionsEn: ["Kept silent", "Invited others to 'come and see'", "Joined a religious sect", "Wrote a book"], optionsEs: ["Permaneció en silencio", "Invitó a otros a 'venir y ver'", "Se unió a una secta religiosa", "Escribió un libro"], correct: 1, explanationEn: "John 4:29 — 'Come, see a Man who told me all things that I ever did.' She invited.", explanationEs: "Juan 4:29 — 'Venid, ved a un hombre que me ha dicho todo cuanto he hecho.' Ella invitó." },
+    { textEn: "18. The biblical model for personal evangelism is conversation that is:", textEs: "18. El modelo bíblico para el evangelismo personal es una conversación que es:", optionsEn: ["Mechanical and scripted", "Aggressive and confrontational", "Natural and personal", "Anonymous and detached"], optionsEs: ["Mecánica y con guion", "Agresiva y confrontacional", "Natural y personal", "Anónima y distante"], correct: 2, explanationEn: "Jesus modeled natural, personal conversation — meeting each individual where he or she was.", explanationEs: "Jesús modeló una conversación natural y personal — encontrando a cada individuo donde estaba." },
+    { textEn: "19. A common mistake in personal evangelism is treating every conversation as if the hearer were at Robinson's level:", textEs: "19. Un error común en el evangelismo personal es tratar cada conversación como si el oyente estuviera en el nivel de Robinson:", optionsEn: ["One (Ignorant)", "Two (Indifferent)", "Three (Hostile)", "Five (Ready)"], optionsEs: ["Uno (Ignorante)", "Dos (Indiferente)", "Tres (Hostil)", "Cinco (Listo)"], correct: 3, explanationEn: "Pressing a hostile or ignorant hearer for immediate decision (as if they were Ready) backfires.", explanationEs: "Presionar a un oyente hostil o ignorante a una decisión inmediata (como si estuviera Listo) resulta contraproducente." },
+    { textEn: "20. The overarching teaching of Unit 7 is that personal evangelism is:", textEs: "20. La enseñanza general de la Unidad 7 es que el evangelismo personal es:", optionsEn: ["A lifestyle of faithful witness, not an event", "Reserved for trained experts", "An optional ministry", "A program of the church"], optionsEs: ["Un estilo de vida de testimonio fiel, no un evento", "Reservado para expertos entrenados", "Un ministerio opcional", "Un programa de la iglesia"], correct: 0, explanationEn: "Personal evangelism is a lifestyle of faithful witness — every believer's privilege and responsibility.", explanationEs: "El evangelismo personal es un estilo de vida de testimonio fiel — privilegio y responsabilidad de todo creyente." }
+];
+
+const kwQuestions = [
+    { textEn: "21. Define personal evangelism in your own words and explain why it is called 'the most basic form of gospel proclamation.'", textEs: "21. Defina el evangelismo personal en sus propias palabras y explique por qué se llama 'la forma más básica de proclamación del evangelio'.", kw_en: ["personal", "basic", "proclaim", "individ", "convers", "one", "gospel", "direct"], kw_es: ["personal", "básic", "basic", "proclam", "individ", "conversa", "uno", "evangel"], modelEn: "Personal evangelism is sharing the gospel directly with an individual in conversation, one person at a time. It is called the most basic form of gospel proclamation because it requires no platform, program, or special gift — only a believer and a person who needs Christ. It is how most people actually come to faith, and it is the form available to every Christian in everyday relationships.", modelEs: "El evangelismo personal es compartir el evangelio directamente con un individuo en conversación, una persona a la vez. Se llama la forma más básica de proclamación del evangelio porque no requiere plataforma, programa ni don especial — solo un creyente y una persona que necesita a Cristo. Es como la mayoría de las personas realmente llegan a la fe, y es la forma disponible para todo cristiano en las relaciones cotidianas.", authorDraft: true },
+    { textEn: "22. Identify three principles from Jesus' conversation with the Samaritan woman (John 4) that still guide personal evangelism today.", textEs: "22. Identifique tres principios de la conversación de Jesús con la mujer samaritana (Juan 4) que aún guían el evangelismo personal hoy.", kw_en: ["samarit", "listen", "natural", "need", "jesus", "question", "well", "engage"], kw_es: ["samarit", "escuch", "natural", "necesidad", "jesús", "jesus", "pregunta", "pozo"], modelEn: "Jesus' conversation with the Samaritan woman (John 4) shows enduring principles. He began with a natural point of contact — asking for water — meeting her in an ordinary moment. He listened and engaged her real situation rather than reciting a formula. And he moved from the physical to the spiritual, awakening her sense of need before offering living water. These still guide personal evangelism: start naturally, listen, and lead toward the gospel.", modelEs: "La conversación de Jesús con la mujer samaritana (Juan 4) muestra principios duraderos. Comenzó con un punto de contacto natural — pidiendo agua — encontrándola en un momento ordinario. Escuchó y se involucró con su situación real en vez de recitar una fórmula. Y pasó de lo físico a lo espiritual, despertando su sentido de necesidad antes de ofrecer agua viva. Estos aún guían el evangelismo personal: empezar naturalmente, escuchar y dirigir hacia el evangelio.", authorDraft: true },
+    { textEn: "23. Name Robinson's five levels of response to the gospel and describe how the evangelist's approach should differ at each level.", textEs: "23. Nombre los cinco niveles de respuesta al evangelio de Robinson y describa cómo debe diferir el enfoque del evangelista en cada nivel.", kw_en: ["robinson", "level", "response", "ignorant", "hostile", "interest", "ready", "approach"], kw_es: ["robinson", "nivel", "respuesta", "ignor", "hostil", "interes", "list", "enfoqu"], modelEn: "Robinson's five levels of response are the ignorant, who lack knowledge; the indifferent, who do not care; the hostile, who resist; the interested, who are open; and the ready, who are prepared to respond. The evangelist's approach differs at each: the ignorant need patient teaching, the indifferent need awakening, the hostile need gentleness and prayer, the interested need clear explanation, and the ready need a clear call to commitment.", modelEs: "Los cinco niveles de respuesta de Robinson son el ignorante, que carece de conocimiento; el indiferente, que no le importa; el hostil, que resiste; el interesado, que está abierto; y el listo, que está preparado para responder. El enfoque del evangelista difiere en cada uno: el ignorante necesita enseñanza paciente, el indiferente necesita ser despertado, el hostil necesita gentileza y oración, el interesado necesita explicación clara, y el listo necesita un llamado claro al compromiso.", authorDraft: true },
+    { textEn: "24. Discuss the role of listening (James 1:19) in personal evangelism. Why is listening not optional?", textEs: "24. Discuta el papel de escuchar (Santiago 1:19) en el evangelismo personal. ¿Por qué escuchar no es opcional?", kw_en: ["listen", "understand", "james", "trust", "option", "quick", "hear", "respect"], kw_es: ["escuch", "entend", "comprend", "santiag", "confi", "opcion", "rápid", "rapid"], modelEn: "James 1:19 says to be swift to hear and slow to speak, and listening is not optional in personal evangelism. Listening lets the witness understand where the person actually is — his questions, objections, and real needs — rather than answering questions no one asked. It builds trust and shows respect, opening the heart to the message. A witness who only talks treats the person as a target; one who listens treats him as a soul.", modelEs: "Santiago 1:19 dice ser prontos para oír y tardos para hablar, y escuchar no es opcional en el evangelismo personal. Escuchar permite al testigo entender dónde está realmente la persona — sus preguntas, objeciones y necesidades reales — en vez de responder preguntas que nadie hizo. Construye confianza y muestra respeto, abriendo el corazón al mensaje. Un testigo que solo habla trata a la persona como un blanco; uno que escucha la trata como un alma.", authorDraft: true },
+    { textEn: "25. Explain the function of CWT's two diagnostic questions in a personal evangelistic conversation.", textEs: "25. Explique la función de las dos preguntas de diagnóstico del CWT en una conversación evangelística personal.", kw_en: ["diagnostic", "question", "heaven", "trust", "open", "reveal", "hope", "conversation"], kw_es: ["diagnóstic", "diagnostic", "pregunta", "cielo", "confi", "abrir", "revel", "esperanza"], modelEn: "CWT's two diagnostic questions — whether someone is certain he would go to heaven, and what he would say if God asked why He should let him in — function in a personal conversation by gently revealing where the person is resting his hope. The first surfaces his level of assurance; the second exposes whether he trusts his own works or Christ. They open the door to the gospel without argument, letting the person's own answer show his need.", modelEs: "Las dos preguntas de diagnóstico del CWT — si alguien está seguro de que iría al cielo, y qué diría si Dios le preguntara por qué debería dejarlo entrar — funcionan en una conversación personal revelando con gentileza dónde descansa la persona su esperanza. La primera saca a la luz su nivel de seguridad; la segunda expone si confía en sus propias obras o en Cristo. Abren la puerta al evangelio sin discusión, dejando que la propia respuesta de la persona muestre su necesidad.", authorDraft: true },
+    { textEn: "26. Describe when people are most receptive to the gospel, using Wayne's three categories: transitions, crisis, and the poor or downcast. Give an example for each.", textEs: "26. Describa cuándo las personas son más receptivas al evangelio, usando las tres categorías de Wayne: transiciones, crisis, y los pobres o abatidos. Dé un ejemplo para cada una.", kw_en: ["transition", "crisis", "poor", "receptive", "ready", "downcast", "open", "example"], kw_es: ["transici", "crisis", "pobre", "receptiv", "list", "abatid", "abiert", "ejempl"], modelEn: "Wayne names three times people are most receptive. Transitions — moves, new jobs, marriage, a new baby — unsettle routine and open people, for example a family that just relocated and is seeking community. Crisis — illness, loss, divorce — strips away self-sufficiency, for example someone facing a frightening diagnosis. And the poor or downcast — those humbled by hardship — are often more open than the comfortable, for example a person who has just lost work. In each, ordinary security has loosened, making the heart more ready for the gospel.", modelEs: "Wayne nombra tres momentos en que las personas son más receptivas. Las transiciones — mudanzas, nuevos trabajos, matrimonio, un bebé — alteran la rutina y abren a las personas, por ejemplo una familia que acaba de mudarse y busca comunidad. La crisis — enfermedad, pérdida, divorcio — despoja la autosuficiencia, por ejemplo alguien que enfrenta un diagnóstico aterrador. Y los pobres o abatidos — humillados por la dificultad — suelen estar más abiertos que los cómodos, por ejemplo una persona que acaba de perder su empleo. En cada caso la seguridad ordinaria se ha aflojado, haciendo el corazón más listo para el evangelio.", authorDraft: true },
+    { textEn: "27. Distinguish between boldness without sensitivity and sensitivity without boldness. How does Ephesians 4:15 hold them together?", textEs: "27. Distinga entre valentía sin sensibilidad y sensibilidad sin valentía. ¿Cómo los une Efesios 4:15?", kw_en: ["bold", "sensitiv", "truth", "love", "ephesian", "togeth", "balance", "speak"], kw_es: ["valent", "valien", "sensib", "verdad", "amor", "efesios", "junt", "equilibri"], modelEn: "Boldness without sensitivity speaks the truth but wounds, driving people away; sensitivity without boldness is kind but never says the hard thing, so the person is never confronted with his need. Ephesians 4:15 holds them together by calling us to speak the truth in love. Truth keeps love from becoming cowardly silence; love keeps truth from becoming a weapon. The faithful witness is both bold and tender at once.", modelEs: "La valentía sin sensibilidad dice la verdad pero hiere, alejando a las personas; la sensibilidad sin valentía es amable pero nunca dice lo difícil, así que la persona nunca es confrontada con su necesidad. Efesios 4:15 las une llamándonos a hablar la verdad en amor. La verdad evita que el amor se vuelva silencio cobarde; el amor evita que la verdad se vuelva un arma. El testigo fiel es a la vez valiente y tierno.", authorDraft: true },
+    { textEn: "28. Explain why the personal evangelist must depend on the Holy Spirit for conviction (John 16:8). Distinguish the evangelist's role from the Spirit's.", textEs: "28. Explique por qué el evangelista personal debe depender del Espíritu Santo para la convicción (Juan 16:8). Distinga el papel del evangelista del del Espíritu.", kw_en: ["spirit", "convict", "john", "role", "convince", "speak", "depend", "not"], kw_es: ["espíritu", "espiritu", "convenc", "juan", "papel", "persuad", "habl", "depend"], modelEn: "The personal evangelist must depend on the Holy Spirit for conviction because John 16:8 says it is the Spirit who convicts the world of sin, righteousness, and judgment. The evangelist's role is to speak the truth clearly and lovingly; the Spirit's role is to convince the heart. This distinction frees the witness: he is not responsible to argue someone into belief, only to present Christ faithfully and trust the Spirit to do the inward work he cannot.", modelEs: "El evangelista personal debe depender del Espíritu Santo para la convicción porque Juan 16:8 dice que es el Espíritu quien convence al mundo de pecado, justicia y juicio. El papel del evangelista es hablar la verdad con claridad y amor; el papel del Espíritu es convencer el corazón. Esta distinción libera al testigo: no es responsable de argumentar a alguien hasta la fe, solo de presentar a Cristo fielmente y confiar en que el Espíritu haga la obra interna que él no puede.", authorDraft: true },
+    { textEn: "29. Define artificial evangelism and describe how it fails. Use Ephesians 4:15 to identify the genuine alternative.", textEs: "29. Defina el evangelismo artificial y describa cómo falla. Use Efesios 4:15 para identificar la alternativa genuina.", kw_en: ["artificial", "manipulat", "natural", "love", "ephesian", "genuine", "fail", "forced"], kw_es: ["artificial", "manipul", "natural", "amor", "efesios", "genuin", "fall", "forz"], modelEn: "Artificial evangelism is forced, formulaic, or insincere — treating people as projects and reciting lines without genuine care. It fails because people sense the manipulation and the lack of love, and it misrepresents a gospel that is itself an expression of love. Ephesians 4:15 identifies the genuine alternative: speaking the truth in love. Real evangelism flows from authentic concern for the person, naturally and lovingly, not from a sales technique.", modelEs: "El evangelismo artificial es forzado, formulaico o insincero — tratando a las personas como proyectos y recitando frases sin cuidado genuino. Falla porque las personas perciben la manipulación y la falta de amor, y tergiversa un evangelio que es en sí mismo una expresión de amor. Efesios 4:15 identifica la alternativa genuina: hablar la verdad en amor. El evangelismo real fluye del interés auténtico por la persona, natural y amorosamente, no de una técnica de ventas.", authorDraft: true },
+    { textEn: "30. Synthesize the unit: describe the natural flow of a personal evangelistic conversation from initial connection, through assessment and listening, to a clear call for response.", textEs: "30. Sintetice la unidad: describa el flujo natural de una conversación evangelística personal desde la conexión inicial, pasando por la evaluación y la escucha, hasta un llamado claro a la respuesta.", kw_en: ["connect", "listen", "assess", "gospel", "invit", "flow", "natural", "response"], kw_es: ["conexión", "conexion", "escuch", "evalu", "evangel", "invit", "fluj", "natural"], modelEn: "A personal evangelistic conversation flows naturally. It begins with connection — meeting the person in a real, natural point of contact and building trust. It moves through assessment and listening — discerning where he is and hearing his real questions and needs. Then it presents the gospel clearly, fitted to the person. And it ends with a clear call for response — inviting him to repent and trust Christ. Each stage depends on the Spirit and unfolds as a genuine conversation, not a script.", modelEs: "Una conversación evangelística personal fluye naturalmente. Comienza con la conexión — encontrar a la persona en un punto de contacto real y natural y construir confianza. Avanza por la evaluación y la escucha — discernir dónde está y oír sus preguntas y necesidades reales. Luego presenta el evangelio con claridad, ajustado a la persona. Y termina con un llamado claro a la respuesta — invitándola a arrepentirse y confiar en Cristo. Cada etapa depende del Espíritu y se desarrolla como una conversación genuina, no un guion.", authorDraft: true }
+];
+
+// ======================== STATE ========================
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+let unitPassed = localStorage.getItem(PASSED_KEY) === 'true';
+let mcPassed = localStorage.getItem(MC_PASSED_KEY) === 'true';
+
+function kwHit(answer, kw) {
+    if (!answer) return false;
+    var a = answer.toLowerCase();
+    var k = kw.toLowerCase();
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    var re = (k.length <= 4)
+        ? new RegExp("(^|[^\\p{L}])" + esc + "($|[^\\p{L}])", "u")
+        : new RegExp("(^|[^\\p{L}])" + esc, "u");
+    return re.test(a);
+}
+function essayPartialMatch(answer, keywords) {
+    if (!answer || answer.trim().length < 100) return false;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched >= 3;
+}
+function kwHitCount(answer, keywords) {
+    if (!answer) return 0;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched;
+}
+
+function saveUnitState() {
+    localStorage.setItem(UNIT_KEY + '_mc', JSON.stringify(mcAnswers));
+    localStorage.setItem(UNIT_KEY + '_kw', JSON.stringify(kwAnswers));
+}
+function loadSavedAnswers() {
+    const savedMC = localStorage.getItem(UNIT_KEY + '_mc');
+    if (savedMC) { try { let p = JSON.parse(savedMC); if (Array.isArray(p) && p.length === 20) mcAnswers = p; } catch(e) {} }
+    const savedKW = localStorage.getItem(UNIT_KEY + '_kw');
+    if (savedKW) { try { let p = JSON.parse(savedKW); if (Array.isArray(p) && p.length === 10) kwAnswers = p; } catch(e) {} }
+}
+
+function clearAllLocal() {
+    if (confirm(currentLang === 'es' ? '⚠️ Esto borrará todas sus respuestas, estado de bloqueo y progreso de esta unidad. ¿Está seguro?' : '⚠️ This will erase all your answers, lockout status, and progress for this unit. Are you sure?')) {
+        localStorage.removeItem(UNIT_KEY + '_mc');
+        localStorage.removeItem(UNIT_KEY + '_kw');
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(PASSED_KEY);
+        localStorage.removeItem(MC_PASSED_KEY);
+        lockUntil = 0;
+        unitPassed = false;
+        mcPassed = false;
+        progress['unit' + UNIT_NUM] = false;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+        updateProgressGrid();
+    }
+}
+
+function clearExamAnswersOnly() {
+    if (confirm(currentLang === 'es' ? '⚠️ ¿Borrar todas sus respuestas para esta unidad? (El estado de aprobación de la unidad permanecerá si ya aprobó.)' : '⚠️ Clear all your answers for this unit? (Unit pass status will remain if already passed.)')) {
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        saveUnitState();
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+    }
+}
+
+function setSAOnlyLockout(disable) {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    const allTextareas = container.querySelectorAll('.kw-answer');
+    const allCheckBtns = container.querySelectorAll('button.small');
+    allTextareas.forEach(ta => ta.disabled = disable);
+    allCheckBtns.forEach(btn => {
+        if (btn.id !== 'submitExamBtn' && btn.id !== 'clearExamDataBtn' && btn.id !== 'clearDataBtn') btn.disabled = disable;
+    });
+}
+
+let lockoutInterval = null;
+function startLockoutTimer() {
+    if (lockoutInterval) clearInterval(lockoutInterval);
+    if (lockUntil > Date.now()) {
+        let banner = document.getElementById('lockoutBanner');
+        if (!banner) {
+            banner = document.createElement('div');
+            banner.id = 'lockoutBanner';
+            banner.className = 'lockout-banner';
+            const examResult = document.getElementById('examResult');
+            examResult.parentNode.insertBefore(banner, examResult);
+        }
+        setSAOnlyLockout(true);
+        const tick = () => {
+            if (lockUntil <= Date.now() || unitPassed) {
+                clearInterval(lockoutInterval);
+                setSAOnlyLockout(false);
+                if (banner) banner.remove();
+                return;
+            }
+            const rem = lockUntil - Date.now();
+            const mins = Math.floor(rem / 60000);
+            const secs = Math.floor((rem % 60000) / 1000);
+            banner.innerText = (currentLang === 'en'
+                ? `⏰ Section B locked for ${mins}:${secs.toString().padStart(2,'0')} (15-min retake lockout after failed submission)`
+                : `⏰ Sección B bloqueada por ${mins}:${secs.toString().padStart(2,'0')} (bloqueo de 15 min tras envío fallido)`);
+        };
+        tick();
+        lockoutInterval = setInterval(tick, 1000);
+    } else {
+        setSAOnlyLockout(false);
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+    }
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Section A — Multiple Choice (Questions 1–20)' : 'Sección A — Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const mcReveal = mcRevealed || mcPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMDiv ? 'Section B — Short Answer (Questions 21–30) — Masters Track (M.Div./Th.M.)' : 'Section B — Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMDiv ? 'Sección B — Respuesta Corta (Preguntas 21–30) — Pista de Maestría (M.Div./Th.M.)' : 'Sección B — Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here (minimum 20 characters)...' : 'Escriba su respuesta aquí (mínimo 20 caracteres)...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.disabled = (lockUntil > Date.now() || unitPassed);
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            if (lockUntil > Date.now() || unitPassed) return;
+            const answer = textarea.value.trim().toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? q.kw_es : q.kw_en;
+            if (answer.length < 100) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else {
+                var hc = kwHitCount(answer, keywords);
+                var passed = hc >= 3;
+                if (passed) {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('✓ Correct! (' + hc + ' key concepts found) Your answer includes the key ideas.') : ('✓ ¡Correcto! (' + hc + ' conceptos clave encontrados) Su respuesta incluye las ideas clave.');
+                    feedbackDiv.className = 'feedback-text correct';
+                    kwAnswers[idx] = textarea.value;
+                    saveUnitState();
+                } else {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('Not yet — ' + hc + ' of 3 needed key concepts found. Compare your answer with the model below, then revise.') : ('Todavía no — ' + hc + ' de 3 conceptos clave necesarios encontrados. Compare su respuesta con el modelo de abajo y revise.');
+                    feedbackDiv.className = 'feedback-text incorrect';
+                }
+                // Gold model-answer reveal box — shown after every check, pass or fail (Q24 standard rule 4)
+                var modelBox = div.querySelector('.model-answer-box');
+                if (!modelBox) {
+                    modelBox = document.createElement('div');
+                    modelBox.className = 'model-answer-box';
+                    div.appendChild(modelBox);
+                }
+                var label = currentLang === 'en' ? 'Model answer — study this' : 'Respuesta modelo — estudie esto';
+                var modelText = currentLang === 'en' ? q.modelEn : q.modelEs;
+                var draftFlag = q.authorDraft ? '<!--AUTHOR_DRAFT: model answer not yet voiced by author-->' : '';
+                modelBox.innerHTML = draftFlag + '<strong>' + label + '</strong><br>' + modelText;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(feedbackDiv);
+        container.appendChild(div);
+        textarea.addEventListener('input', (e) => { if (!(lockUntil > Date.now() || unitPassed)) { kwAnswers[idx] = e.target.value; saveUnitState(); } });
+    });
+    startLockoutTimer();
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? "<span style='color:green'>✓ ¡Unidad ya aprobada! Puede continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! You may proceed.</span>";
+        return;
+    }
+    if (Date.now() < lockUntil) {
+        let wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? `<span style='color:red'>⏰ Bloqueado ${wait} minutos más.</span>`
+            : `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    /* CTS audit 2026-05-23: no reg form here; student/track already loaded from localStorage (defaults to Certificate). */
+
+    let correctMC = 0;
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    const mcPercent = correctMC / 20;
+    if (!unitPassed) { mcRevealed = true; renderQuestions(); }
+
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    let saCorrect = 0;
+    if (isMDiv) {
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || '').toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+            if (essayPartialMatch(ans, keywords)) saCorrect++;
+        }
+    }
+    const saPercent = saCorrect / 10;
+
+    const mcPass = mcPercent >= PASS_THRESHOLD;
+    const saPass = saPercent >= PASS_THRESHOLD;
+    const overallPass = isMDiv ? (mcPass && saPass) : mcPass;
+
+    if (mcPass) {
+        mcPassed = true;
+        localStorage.setItem(MC_PASSED_KEY, 'true');
+    }
+
+    if (overallPass) {
+        unitPassed = true;
+        progress['unit' + UNIT_NUM] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(PASSED_KEY, 'true');
+        const msg = isMDiv
+            ? (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unidad 7 completada. Puede continuar a la Unidad 8.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unit 7 completed. You may proceed to Unit 8.</span>`)
+            : (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unidad 7 completada. Puede continuar a la Unidad 8.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unit 7 completed. You may proceed to Unit 8.</span>`);
+        document.getElementById('examResult').innerHTML = msg;
+        updateProgressGrid();
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+        if (lockoutInterval) clearInterval(lockoutInterval);
+    } else {
+        if (isMDiv && mcPass && !saPass) {
+            lockUntil = Date.now() + 15 * 60 * 1000;
+            localStorage.setItem(LOCKOUT_KEY, lockUntil);
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ Sección A APROBADA (${Math.round(mcPercent*100)}%). Sección B no aprobada (${Math.round(saPercent*100)}% &lt; 90%). Sección B bloqueada 15 minutos.</span>`
+                : `<span style='color:red'>❌ Section A PASSED (${Math.round(mcPercent*100)}%). Section B not yet passing (${Math.round(saPercent*100)}% &lt; 90%). Section B locked for 15 minutes.</span>`;
+            startLockoutTimer();
+            renderQuestions();
+        } else {
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ NO APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. Se requiere 90% en cada sección requerida. Revise sus respuestas e inténtelo de nuevo.</span>`
+                : `<span style='color:red'>❌ NOT PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. 90% required on each required section. Review your answers and try again.</span>`;
+        }
+    }
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('clearExamDataBtn').addEventListener('click', clearExamAnswersOnly);
+document.getElementById('clearDataBtn').addEventListener('click', clearAllLocal);
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') {
+        currentLang = 'es';
+        document.body.className = 'lang-es';
+        document.documentElement.lang = 'es';
+        this.textContent = 'English';
+    } else {
+        currentLang = 'en';
+        document.body.className = 'lang-en';
+        document.documentElement.lang = 'en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+loadSavedAnswers();
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = currentLang === 'es'
+        ? "<span style='color:green'>✅ Unidad 7 ya aprobada.</span>"
+        : "<span style='color:green'>✅ Unit 7 already passed.</span>";
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEvangelismReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

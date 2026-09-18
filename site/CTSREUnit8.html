@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruth and Esther — Unit 8</title>
+<style>
+  :root { --maroon:#7B2E2E; --gold:#C8A24B; --ink:#1d1d1d; --soft:#f5f2ec; --line:#ddd6c8; }
+  * { box-sizing:border-box; }
+  body { font-family:Georgia,'Times New Roman',serif; color:var(--ink); margin:0; background:#fbf9f4; line-height:1.6; }
+  body[data-lang="en"] .es { display:none; }
+  body[data-lang="es"] .en { display:none; }
+  header { background:var(--maroon); color:#fff; padding:24px 22px; }
+  header h1 { margin:0 0 6px; font-size:1.45rem; }
+  header .sub { font-style:italic; opacity:.92; }
+  header .credit { margin-top:10px; font-size:.78rem; opacity:.85; font-family:Arial,sans-serif; }
+  .langbar { background:#5e2222; padding:8px 22px; }
+  .langbar button { background:transparent; border:1px solid #fff; color:#fff; padding:5px 14px; margin-right:6px; border-radius:5px; cursor:pointer; font-family:Arial,sans-serif; font-size:.85rem; }
+  .langbar button.active { background:#fff; color:var(--maroon); font-weight:bold; }
+  .wrap { max-width:860px; margin:0 auto; padding:22px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:22px; margin:18px 0; }
+  h2 { color:var(--maroon); border-bottom:2px solid var(--gold); padding-bottom:6px; }
+  .track-bar { background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:14px 18px; margin:18px 0; font-family:Arial,sans-serif; }
+  .track-bar label { font-weight:bold; margin-right:10px; }
+  select, button { font-size:1rem; padding:8px 12px; border-radius:6px; border:1px solid #bbb; }
+  button { cursor:pointer; background:var(--maroon); color:#fff; border:none; font-family:Arial,sans-serif; }
+  button:disabled { background:#bbb; cursor:not-allowed; }
+  button.secondary { background:#fff; color:var(--maroon); border:1px solid var(--maroon); }
+  .teaching p { margin:0 0 14px; }
+  .q { border-top:1px solid var(--line); padding:18px 0; }
+  .q:first-child { border-top:none; }
+  .q .stem { font-weight:bold; margin-bottom:10px; }
+  .opt { display:block; margin:7px 0; padding:9px 12px; border:1px solid var(--line); border-radius:6px; cursor:pointer; background:#fff; font-family:Arial,sans-serif; }
+  .opt:hover { background:var(--soft); }
+  .opt.sel { border-color:var(--maroon); background:#f3e7e7; }
+  .opt.correct { border-color:#2e7d32; background:#e6f3e7; }
+  .opt.wrong { border-color:#b00020; background:#f7e6e9; }
+  .fb { font-family:Arial,sans-serif; font-size:.9rem; margin-top:8px; padding:8px 10px; border-radius:6px; display:none; }
+  .fb.ok { background:#e6f3e7; color:#1b5e20; display:block; }
+  .fb.no { background:#f7e6e9; color:#8e0018; display:block; }
+  textarea { width:100%; min-height:84px; font-family:Arial,sans-serif; font-size:.95rem; padding:10px; border:1px solid #bbb; border-radius:6px; resize:vertical; }
+  .model { display:none; margin-top:10px; border-left:4px solid var(--gold); background:#fdf8ec; padding:10px 14px; font-family:Arial,sans-serif; font-size:.92rem; }
+  .model.show { display:block; }
+  .model b { color:var(--maroon); }
+  .flag { color:#b00020; font-family:Arial,sans-serif; font-size:.8rem; }
+  .practice-tag { font-family:Arial,sans-serif; font-size:.78rem; color:#555; font-style:italic; }
+  .result { font-family:Arial,sans-serif; font-size:1.02rem; padding:14px; border-radius:8px; margin-top:14px; }
+  .result.pass { background:#e6f3e7; color:#1b5e20; }
+  .result.fail { background:#f7e6e9; color:#8e0018; }
+  .navrow { display:flex; justify-content:space-between; align-items:center; margin:24px 0; font-family:Arial,sans-serif; }
+  .note { font-family:Arial,sans-serif; font-size:.82rem; color:#666; }
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 6px;font-family:Georgia,serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--maroon);margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid var(--line);color:var(--maroon);text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:var(--maroon);}
+.unitnav a.active{background:var(--maroon);color:#fff;border-color:var(--maroon);}
+</style>
+</head>
+<body data-lang="en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header>
+  <h1>Ruth and Esther &mdash; <span class="en">Unit 8</span><span class="es">Unidad 8</span></h1>
+  <div class="sub"><span class="en">Class 8 — Esther&#x27;s Intervention (Esther 4:4–7:10)</span><span class="es">Clase 8 — La Intervención de Ester (Ester 4:4–7:10)</span></div>
+  <div class="credit">Glenda Rogers &middot; Chapala Theological Seminary &middot; Dr. Ted Rogers, Director</div>
+</header>
+<div class="langbar">
+  <button id="btnEn" class="active" onclick="setLang('en')">English</button>
+  <button id="btnEs" onclick="setLang('es')">Espa&ntilde;ol</button>
+</div>
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSREUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSREUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSREUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSREUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSREUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSREUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSREUnit7.html" title="Unit 7 · Unidad 7">7</a><a href="CTSREUnit8.html" title="Unit 8 · Unidad 8" class="active">8</a><a href="CTSREUnit9.html" title="Unit 9 · Unidad 9">9</a></nav><script>(function(){try{var p=JSON.parse(localStorage.getItem('cts_re_progress')||'{}');document.querySelectorAll('.cts-unitnav a').forEach(function(a,i){if(p['unit'+(i+1)])a.classList.add('completed');});}catch(e){}})();</script>
+  <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+    <span class="nl"><span class="en">Units</span><span class="es">Unidades</span></span>
+    <a href="CTSREUnit1.html">1</a>
+    <a href="CTSREUnit2.html">2</a>
+    <a href="CTSREUnit3.html">3</a>
+    <a href="CTSREUnit4.html">4</a>
+    <a href="CTSREUnit5.html">5</a>
+    <a href="CTSREUnit6.html">6</a>
+    <a href="CTSREUnit7.html">7</a>
+    <a href="CTSREUnit8.html" class="active">8</a>
+    <a href="CTSREUnit9.html">9</a>
+  </nav>
+
+
+  <div id="greet" class="note" style="margin:8px 0 0;"></div>
+
+
+  <div class="track-bar">
+    <label for="track"><span class="en">Track:</span><span class="es">Programa:</span></label>
+    <select id="track" onchange="setTrack()">
+      <option value="cert">Certificate / Certificado</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div class="note" id="trackNote" style="margin-top:8px;"></div>
+  </div>
+
+  <div class="card teaching">
+    <h2><span class="en">The Class</span><span class="es">La Clase</span></h2>
+    <p class="note">
+      <span class="en">Passage: Esther 4:4–7:10 &middot; Taught by Glenda Rogers. This preserves her teaching and class discussion.</span>
+      <span class="es">Pasaje: Ester 4:4–7:10 &middot; Ense&ntilde;ado por Glenda Rogers. Conserva su ense&ntilde;anza y la discusi&oacute;n de clase.</span>
+    </p>
+    <div class="en"><p style="margin-top:18px"><strong style="color:#7B2E2E">Esther&#x27;s Intervention — Esther 4:4–7:10</strong></p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Observations</strong></p>
+    <p>At the start, Esther knew nothing of the edict or why Mordecai would be mourning — she was an isolated person, cut off from the real world.</p>
+    <p>Her maids and eunuchs told her of Mordecai&#x27;s distress, showing how much they cared for their queen. They had to learn of the edict from Mordecai, and when they learned of her heritage they stood united with her and did everything they could to help.</p>
+    <p>When Esther learns the reason for Mordecai&#x27;s mourning she writhes in agony — the Hebrew word for the pain and labor of childbirth. This is the point at which the woman of action and strength is born in Esther; an internal struggle births the woman of destiny to which she has been called.</p>
+    <p>When Mordecai discloses what has happened, he even names the exact bribe Haman offered the king — which the king refused and which was not in the edict. How did Mordecai know? Friends in high places. He asks Esther to go plead before the king for her people.</p>
+    <p>She is reluctant at first. The king has not called for her in 30 days, and to go unsummoned likely means death. The king was always surrounded by warriors with axes; how lonely must that court life have been — enough to help make a mad king.</p>
+    <p>Verses 13–14 are the key verses of the whole book. Regardless of the apostasy they live in, Mordecai expresses faith that the God of the Jews will not abandon His chosen people. Though God is not named, He is implied. Mordecai&#x27;s confidence in deliverance points back to God&#x27;s covenant — His promise to Abraham, Isaac, and Jacob (Genesis 17:7; Exodus 6:7): you shall be my people and I shall be your God.</p>
+    <p>&#x27;For if you remain silent at this time, relief and deliverance will arise for the Jews from another place, and you and your father&#x27;s house will perish.&#x27; This echoes Ruth: the kinsman who would not take responsibility would be forgotten, his name blotted out. Esther and her father&#x27;s house would be remembered no more, though God would raise up another to save the Jews.</p>
+    <p>Mordecai points to God&#x27;s providence: perhaps God placed her in royalty for just such a time as this.</p>
+    <p>In 4:15–5:2 we see the new Esther — strong and confident — being born. She steps out in faith knowing it may cost her life, offering herself as a kind of kinsman-redeemer by putting her life on the line to save her people, answering the call not of her king but of her God. She calls Mordecai and all the Jews to fast three days, she and her maids doing the same, and then she will go to the king though she may perish for seeking audience unsummoned.</p>
+    <p>On fasting: many note there is no mention of prayer or God. But fasting was commanded by God for only one day a year, the Day of Atonement (Leviticus 16:29–31), where they were to humble themselves and afflict their souls — understood by the Jews to mean fasting — chastening their souls, reflecting on sin, and atoning, abstaining from food to grasp their proper place before God. Moses, David, Elijah, Daniel, Anna, Jesus, and Paul all fasted, seeking God&#x27;s favor, so prayer would naturally have accompanied it. The silence about God and prayer has been explained various ways by scholars, but the author of Esther is unknown, and the reason for this stylistic choice remains a matter of conjecture rather than settled fact.</p>
+    <p>After three days of chastening her soul and seeking God&#x27;s favor, Esther stands before the king. Her heart is humbled before God; she is as close to His will as she can be — yet surely she still trembled. Bravery is not the absence of fear but acting in spite of it. She offers herself to possible death to save her people. Who else humbled himself to the point of death, enduring humiliation on behalf of others (Philippians 2:5–8)? The three days of afflicting one&#x27;s soul point to Christ, our great Kinsman-Redeemer — a nugget of the Old pointing to Christ.</p>
+    <p>Esther is greeted warmly by the mad king, setting off a chain of events showing she is exactly where she should be, in the hands of God, being used to save her people. The king offers her anything she requests.</p>
+    <p>Esther invites Haman and the king to a first banquet, but withholds her request and instead invites them to a second — setting off a sequence common in appearance but miraculous in light of God&#x27;s providence: Haman runs into Mordecai on the way home and seethes; at home he brags of his riches, honors, and sons yet is inconsolable over Mordecai the Jew; his wife and friends tell him to build a gallows and he likes the idea; that night the king has insomnia; he orders the Chronicles read; the servants happen to read the very passage of Mordecai uncovering the assassination plot; the king learns nothing was done to honor Mordecai — at the exact moment Haman arrives to ask to hang him.</p>
+    <p>As one commentator put it: when Satan put it into Haman&#x27;s heart to murder Mordecai, God put it into the king&#x27;s heart to honor Mordecai. What a dance between Satan and God — with the assurance that God always wins.</p>
+    <p>Haman&#x27;s ego becomes his downfall. Asked, without a name, how to honor a man, Haman assumes it is himself and pulls out all the stops: a king&#x27;s horse, a royal robe, a crown for the horse, a parade — in effect, to be treated like king for a day.</p>
+    <p>Imagine the lump in his throat when the king says, &#x27;Do this for Mordecai the Jew sitting in the king&#x27;s gate.&#x27; Note the king knew Mordecai was Jewish, yet there is no sign he ever asked who the people in the edict were — he had given Haman carte blanche. It had only been three days since the edict; he likely thought it targeted a gang of thugs, per Haman&#x27;s description.</p>
+    <p>Haman must disgrace himself by parading Mordecai in honor, then runs home with his head covered in shame.</p>
+    <p>His friends and wife, who had suggested the gallows, now say he is doomed: he has set his hand against the Jews and will fall. It is his pagan friends who say no one can stand against God&#x27;s chosen people and live.</p>
+    <p>While those words still hang in the air, the eunuchs arrive to escort him to the second banquet — another anvil about to fall.</p>
+    <p>At the banquet Haman hears Esther plead for her life and her people: &#x27;We have been sold to be destroyed, killed, and annihilated.&#x27; Each word must have pounded in his ears.</p>
+    <p>The king storms to the garden in fury — perhaps realizing his own edict will take his beloved Esther. He returns to find Haman fallen on the couch at the queen&#x27;s feet: &#x27;Will he even assault the queen while I am in the house?&#x27; To be within a foot of the king&#x27;s harem meant instant death; Haman has sealed his fate.</p>
+    <p>The servants cover Haman&#x27;s head — he is not even worthy to look upon the king. Harbonah the eunuch, who once summoned Vashti, becomes Esther&#x27;s champion, telling the king of the gallows Haman built for Mordecai; the king orders Haman hanged on it.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Interpretations</strong></p>
+    <p>Pride goes before the fall (Matthew 16:26): what good is it to gain the whole world yet forfeit your soul?</p>
+    <p>God honors the humble (James 4:10): humble yourselves before the Lord and He will lift you up.</p>
+    <p>It is always best to answer God&#x27;s call even if it may cost your life (Matthew 16:25): whoever would save his life will lose it, but whoever loses it for Christ will find it.</p>
+    <p>It is best to remember who we are in light of who God is — a right estimation of ourselves. Like a bridled war horse (the Greek picture of meekness, Matthew 5:5), fasting and affliction of soul remind us that apart from Christ&#x27;s work we are nothing; humbled before God, we are right where He can use us, for in our weakness He is strong.</p>
+    <p>Esther approached the throne trembling but with a proper understanding of herself before God. We may draw near the throne of grace with confidence (Hebrews 4:16), clothed in Christ&#x27;s righteousness and helped by the interceding Spirit.</p>
+    <p>Patience is a virtue. Esther waited for the right moment at the second banquet, letting God orchestrate events in her favor and her people&#x27;s.</p>
+    <p>Seek wise counsel, not the counsel of fools. Haman&#x27;s wife flips from urging the gallows to predicting his doom.</p>
+    <p>Look for the miracles even in small things — sleeplessness, dull reading, an overlooked honor.</p>
+    <p>Vengeance belongs to God. Hatred of any kind — racism, anti-Semitism, making any image-bearer your enemy — is no way to live; God desires all to be saved.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Applications</strong></p>
+    <p>Fasting with prayer — when should we do it? Is it common enough in our lives when we seek answers from God?</p>
+    <p>Is there someone I need to forgive?</p>
+    <p>Are we looking for miracles even in the smallest things?</p>
+    <p>Do we have people in our lives with whom we can seek godly counsel?</p>
+    <p>Do we wait patiently and expectantly for guidance from God?</p></div>
+    <div class="es"><p style="margin-top:18px"><strong style="color:#7B2E2E">La intervención de Ester — Ester 4:4–7:10</strong></p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Observaciones</strong></p>
+<p>Al principio, Ester no sabía nada del edicto ni por qué Mardoqueo estaría de luto; era una persona aislada, apartada del mundo real.</p>
+<p>Sus criadas y eunucos le contaron de la aflicción de Mardoqueo, mostrando cuánto querían a su reina. Tuvieron que enterarse del edicto por Mardoqueo, y cuando supieron de su origen se mantuvieron unidos a ella e hicieron todo lo que pudieron por ayudar.</p>
+<p>Cuando Ester se entera de la razón del luto de Mardoqueo, se retuerce en agonía: la palabra hebrea para el dolor y el trabajo del parto. Este es el punto en que nace en Ester la mujer de acción y de fuerza; una lucha interna da a luz a la mujer de destino a la que ha sido llamada.</p>
+<p>Cuando Mardoqueo revela lo que ha sucedido, incluso nombra el soborno exacto que Amán ofreció al rey, el cual el rey rehusó y que no estaba en el edicto. ¿Cómo lo sabía Mardoqueo? Amigos en las altas esferas. Le pide a Ester que vaya a interceder ante el rey por su pueblo.</p>
+<p>Ella es reacia al principio. El rey no la ha llamado en 30 días, e ir sin ser convocada probablemente significa la muerte. El rey estaba siempre rodeado de guerreros con hachas; cuán solitaria debió ser esa vida de la corte, suficiente para ayudar a formar a un rey loco.</p>
+<p>Los versículos 13–14 son los versículos clave de todo el libro. A pesar de la apostasía en que viven, Mardoqueo expresa fe en que el Dios de los judíos no abandonará a Su pueblo escogido. Aunque Dios no es nombrado, está implícito. La confianza de Mardoqueo en la liberación apunta de regreso al pacto de Dios: Su promesa a Abraham, Isaac y Jacob (Génesis 17:7; Éxodo 6:7): vosotros seréis mi pueblo y yo seré vuestro Dios.</p>
+<p>“Porque si callas absolutamente en este tiempo, respiro y liberación vendrá de alguna otra parte para los judíos; mas tú y la casa de tu padre pereceréis.” Esto hace eco de Rut: el pariente que no asumía la responsabilidad sería olvidado, su nombre raído. Ester y la casa de su padre no serían recordadas más, aunque Dios levantaría a otro para salvar a los judíos.</p>
+<p>Mardoqueo señala la providencia de Dios: quizás Dios la colocó en la realeza para un tiempo como este.</p>
+<p>En 4:15–5:2 vemos nacer a la nueva Ester, fuerte y segura. Da un paso de fe sabiendo que puede costarle la vida, ofreciéndose a sí misma como una especie de pariente redentor al poner su vida en juego para salvar a su pueblo, respondiendo al llamado no de su rey, sino de su Dios. Convoca a Mardoqueo y a todos los judíos a ayunar tres días, haciendo ella y sus criadas lo mismo, y luego irá ante el rey aunque pueda perecer por buscar audiencia sin ser convocada.</p>
+<p>Sobre el ayuno: muchos notan que no se menciona la oración ni a Dios. Pero el ayuno fue ordenado por Dios solo un día al año, el Día de la Expiación (Levítico 16:29–31), donde debían humillarse y afligir sus almas —entendido por los judíos como ayunar—, disciplinando sus almas, reflexionando sobre el pecado y expiando, absteniéndose de alimento para captar su lugar correcto ante Dios. Moisés, David, Elías, Daniel, Ana, Jesús y Pablo ayunaron, buscando el favor de Dios, así que la oración naturalmente lo habría acompañado. El silencio sobre Dios y la oración ha sido explicado de varias maneras por los eruditos, pero el autor de Ester es desconocido, y la razón de esta elección estilística sigue siendo materia de conjetura, no un hecho establecido.</p>
+<p>Tras tres días de disciplinar su alma y buscar el favor de Dios, Ester se presenta ante el rey. Su corazón está humillado ante Dios; está tan cerca de Su voluntad como puede estar, y sin embargo seguramente aún temblaba. La valentía no es la ausencia de temor, sino actuar a pesar de él. Se ofrece a una posible muerte para salvar a su pueblo. ¿Quién más se humilló hasta la muerte, soportando humillación a favor de otros (Filipenses 2:5–8)? Los tres días de afligir el alma apuntan a Cristo, nuestro gran Pariente Redentor: una pepita del Antiguo que apunta a Cristo.</p>
+<p>Ester es recibida calurosamente por el rey loco, desencadenando una cadena de acontecimientos que muestra que está exactamente donde debe estar, en las manos de Dios, siendo usada para salvar a su pueblo. El rey le ofrece cualquier cosa que pida.</p>
+<p>Ester invita a Amán y al rey a un primer banquete, pero retiene su petición y en cambio los invita a un segundo, desencadenando una secuencia común en apariencia pero milagrosa a la luz de la providencia de Dios: Amán se topa con Mardoqueo de camino a casa y arde de rabia; en casa se jacta de sus riquezas, honores e hijos, y sin embargo está inconsolable por Mardoqueo el judío; su esposa y amigos le dicen que construya una horca y la idea le agrada; esa noche el rey tiene insomnio; ordena que se lean las Crónicas; los siervos dan la casualidad de leer el pasaje mismo de Mardoqueo descubriendo el complot de asesinato; el rey se entera de que nada se hizo para honrar a Mardoqueo, en el momento exacto en que Amán llega a pedir colgarlo.</p>
+<p>Como lo expresó un comentarista: cuando Satanás puso en el corazón de Amán matar a Mardoqueo, Dios puso en el corazón del rey honrar a Mardoqueo. Qué danza entre Satanás y Dios, con la seguridad de que Dios siempre vence.</p>
+<p>El ego de Amán se vuelve su perdición. Al preguntársele, sin un nombre, cómo honrar a un hombre, Amán supone que es él mismo y se luce al máximo: un caballo del rey, un manto real, una corona para el caballo, un desfile; en efecto, ser tratado como rey por un día.</p>
+<p>Imagine el nudo en su garganta cuando el rey dice: “Haz esto por Mardoqueo el judío que se sienta a la puerta del rey.” Note que el rey sabía que Mardoqueo era judío, y sin embargo no hay señal de que jamás preguntara quiénes eran las personas del edicto; le había dado a Amán carta blanca. Solo habían pasado tres días desde el edicto; probablemente pensaba que apuntaba a una banda de matones, según la descripción de Amán.</p>
+<p>Amán debe deshonrarse desfilando a Mardoqueo en honor, y luego corre a casa con la cabeza cubierta de vergüenza.</p>
+<p>Sus amigos y su esposa, que habían sugerido la horca, ahora dicen que está condenado: ha puesto su mano contra los judíos y caerá. Son sus amigos paganos quienes dicen que nadie puede levantarse contra el pueblo escogido de Dios y vivir.</p>
+<p>Mientras esas palabras aún flotan en el aire, los eunucos llegan a escoltarlo al segundo banquete: otro yunque a punto de caer.</p>
+<p>En el banquete Amán oye a Ester suplicar por su vida y por su pueblo: “Hemos sido vendidos, yo y mi pueblo, para ser destruidos, para ser muertos y exterminados.” Cada palabra debió retumbar en sus oídos.</p>
+<p>El rey se precipita al jardín, furioso, quizás dándose cuenta de que su propio edicto se llevará a su amada Ester. Regresa para encontrar a Amán caído sobre el diván a los pies de la reina: “¿Aun para forzar la reina, estando conmigo en casa?” Estar a un palmo del harén del rey significaba la muerte instantánea; Amán ha sellado su suerte.</p>
+<p>Los siervos cubren la cabeza de Amán: ni siquiera es digno de mirar al rey. Harbona el eunuco, que una vez convocó a Vasti, se vuelve el campeón de Ester, contándole al rey de la horca que Amán construyó para Mardoqueo; el rey ordena que Amán sea colgado en ella.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Interpretaciones</strong></p>
+<p>La soberbia precede a la caída (Mateo 16:26): ¿de qué aprovecha ganar el mundo entero y perder tu alma?</p>
+<p>Dios honra al humilde (Santiago 4:10): humillaos delante del Señor, y él os exaltará.</p>
+<p>Siempre es mejor responder al llamado de Dios aunque pueda costar la vida (Mateo 16:25): el que quisiere salvar su vida, la perderá; mas el que la perdiere por causa de Cristo, la hallará.</p>
+<p>Es mejor recordar quiénes somos a la luz de quién es Dios: una justa estimación de nosotros mismos. Como un caballo de guerra enfrenado (la imagen griega de la mansedumbre, Mateo 5:5), el ayuno y la aflicción del alma nos recuerdan que aparte de la obra de Cristo no somos nada; humillados ante Dios, estamos justo donde Él puede usarnos, porque en nuestra debilidad Él es fuerte.</p>
+<p>Ester se acercó al trono temblando, pero con un entendimiento correcto de sí misma ante Dios. Nosotros podemos acercarnos confiadamente al trono de la gracia (Hebreos 4:16), vestidos de la justicia de Cristo y ayudados por el Espíritu que intercede.</p>
+<p>La paciencia es una virtud. Ester esperó el momento oportuno en el segundo banquete, dejando que Dios orquestara los acontecimientos a su favor y al de su pueblo.</p>
+<p>Busca el consejo sabio, no el consejo de necios. La esposa de Amán pasa de instar a la horca a predecir su perdición.</p>
+<p>Busca los milagros aun en las cosas pequeñas: el insomnio, una lectura tediosa, un honor pasado por alto.</p>
+<p>La venganza pertenece a Dios. El odio de cualquier clase —racismo, antisemitismo, hacer enemigo a cualquier portador de la imagen de Dios— no es manera de vivir; Dios desea que todos sean salvos.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Aplicaciones</strong></p>
+<p>El ayuno con oración: ¿cuándo deberíamos hacerlo? ¿Es bastante común en nuestra vida cuando buscamos respuestas de Dios?</p>
+<p>¿Hay alguien a quien necesito perdonar?</p>
+<p>¿Buscamos milagros aun en las cosas más pequeñas?</p>
+<p>¿Tenemos en nuestra vida personas con quienes buscar consejo piadoso?</p>
+<p>¿Esperamos paciente y expectantemente la guía de Dios?</p></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="en">Part I &middot; Multiple Choice</span><span class="es">Parte I &middot; Opci&oacute;n M&uacute;ltiple</span> <span class="note">(20 &middot; 90%)</span></h2>
+    <div id="mc"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="en">Part II &middot; Short Answer</span><span class="es">Parte II &middot; Respuesta Breve</span> <span class="note">(10 &middot; 3/8)</span></h2>
+    <p class="practice-tag" id="saMode"></p>
+    <div id="sa"></div>
+  </div>
+
+  <div class="card">
+    <button onclick="grade()"><span class="en">Submit Unit 8</span><span class="es">Enviar Unidad 8</span></button>
+    <div id="result"></div>
+  </div>
+
+  <div class="navrow">
+    <span class="note">CTSRE &middot; <span class="en">Unit 8</span><span class="es">Unidad 8</span></span>
+    <button id="nextBtn" class="secondary" disabled onclick="goNext()"><span class="en">Continue &rarr;</span><span class="es">Continuar &rarr;</span></button>
+  </div>
+</div>
+<script>
+var _ctsMem={};
+function lsGet(k){ try{var v=localStorage.getItem(k);return v===null?(_ctsMem[k]!==undefined?_ctsMem[k]:null):v;}catch(e){return _ctsMem[k]!==undefined?_ctsMem[k]:null;} }
+function lsSet(k,v){ try{localStorage.setItem(k,v);}catch(e){} _ctsMem[k]=v; }
+function lsDel(k){ try{localStorage.removeItem(k);}catch(e){} delete _ctsMem[k]; }
+
+var UNIT=8, NEXT_URL="CTSREUnit9.html", MC=[{"stemEn": "When the chapter opens, Esther's situation in the palace is that she:", "stemEs": "Al abrir el capítulo, la situación de Ester en el palacio es que ella:", "optionsEn": ["knew nothing of the edict — isolated and cut off", "had already planned a rescue", "was in hiding", "had fled Susa"], "optionsEs": ["no sabía nada del edicto — aislada y apartada", "ya había planeado un rescate", "estaba escondida", "había huido de Susa"], "answer": "A", "whyEn": "She was isolated, unaware of the edict until told.", "whyEs": "Estaba aislada, sin saber del edicto hasta que le avisaron."}, {"stemEn": "When Esther learns why Mordecai mourns, she 'writhes in agony' — a Hebrew word for:", "stemEs": "Cuando Ester sabe por qué Mardoqueo se lamenta, 'se retuerce de angustia' — palabra hebrea para:", "optionsEn": ["physical illness", "royal anger", "the pain and labor of childbirth", "mourning a death"], "optionsEs": ["enfermedad física", "ira real", "el dolor y la labor del parto", "duelo por un muerto"], "answer": "C", "whyEn": "The word evokes childbirth — a woman of destiny being born.", "whyEs": "La palabra evoca el parto — nace la mujer de destino."}, {"stemEn": "How does Mordecai know the exact bribe Haman offered the king?", "stemEs": "¿Cómo sabe Mardoqueo el soborno exacto que Amán ofreció al rey?", "optionsEn": ["he overheard the banquet", "Esther told him", "Haman boasted to him", "he evidently had friends/contacts in high places"], "optionsEs": ["lo oyó en el banquete", "Ester se lo dijo", "Amán se lo jactó", "evidentemente tenía amigos/contactos en altos cargos"], "answer": "D", "whyEn": "His detailed knowledge implies high-level contacts.", "whyEs": "Su conocimiento detallado implica contactos de alto nivel."}, {"stemEn": "Esther is reluctant to approach the king because:", "stemEs": "Ester duda en acercarse al rey porque:", "optionsEn": ["she disliked him", "going unsummoned risked death, and he hadn't called her in 30 days", "Mordecai forbade it", "she feared Haman"], "optionsEs": ["le desagradaba", "ir sin ser llamada arriesgaba la muerte, y no la llamaba en 30 días", "Mardoqueo se lo prohibía", "temía a Amán"], "answer": "B", "whyEn": "Unsummoned approach meant death; 30 days uncalled.", "whyEs": "Acercarse sin llamado era muerte; 30 días sin ser llamada."}, {"stemEn": "Esther 4:13-14 are the key verses because Mordecai expresses faith that:", "stemEs": "Ester 4:13-14 son los versos clave porque Mardoqueo expresa la fe de que:", "optionsEn": ["God will not abandon His covenant people; deliverance will arise", "the king will relent", "Haman will repent", "the army will refuse"], "optionsEs": ["Dios no abandonará a su pueblo del pacto; vendrá la liberación", "el rey cederá", "Amán se arrepentirá", "el ejército se negará"], "answer": "A", "whyEn": "He trusts God's covenant promise of deliverance.", "whyEs": "Confía en la promesa del pacto de liberación."}, {"stemEn": "Mordecai's covenant confidence points back to God's promise to:", "stemEs": "La confianza de pacto de Mardoqueo remite a la promesa de Dios a:", "optionsEn": ["Moses and Aaron", "Abraham, Isaac, and Jacob", "David and Solomon", "Adam and Eve"], "optionsEs": ["Moisés y Aarón", "Abraham, Isaac y Jacob", "David y Salomón", "Adán y Eva"], "answer": "B", "whyEn": "'You shall be my people' — the patriarchal covenant.", "whyEs": "'Seréis mi pueblo' — el pacto patriarcal."}, {"stemEn": "Mordecai's warning that Esther's house would 'perish / be forgotten' echoes which earlier book?", "stemEs": "La advertencia de que la casa de Ester 'perecería / sería olvidada' hace eco de cuál libro anterior?", "optionsEn": ["Genesis", "Exodus", "Judges", "Ruth — the kinsman who refused was blotted from memory"], "optionsEs": ["Génesis", "Éxodo", "Jueces", "Rut — el pariente que rehusó fue borrado de la memoria"], "answer": "D", "whyEn": "Like Ruth's refusing kinsman, forgotten forever.", "whyEs": "Como el pariente que rehusó en Rut, olvidado para siempre."}, {"stemEn": "Glenda says Esther offers herself as a kind of kinsman-redeemer by:", "stemEs": "Glenda dice que Ester se ofrece como una especie de pariente redentor al:", "optionsEn": ["paying a ransom", "buying back land", "risking her life to save her people, answering God's call", "marrying a relative"], "optionsEs": ["pagar un rescate", "recomprar tierra", "arriesgar su vida para salvar a su pueblo, respondiendo al llamado de Dios", "casarse con un pariente"], "answer": "C", "whyEn": "She lays down her life for her people — redeemer-like.", "whyEs": "Entrega su vida por su pueblo — como redentora."}, {"stemEn": "Esther calls for a fast of:", "stemEs": "Ester convoca un ayuno de:", "optionsEn": ["forty days", "one day", "seven days", "three days"], "optionsEs": ["cuarenta días", "un día", "siete días", "tres días"], "answer": "D", "whyEn": "A three-day fast, she and her maids included.", "whyEs": "Un ayuno de tres días, ella y sus criadas incluidas."}, {"stemEn": "God commanded fasting for only one day a year, namely:", "stemEs": "Dios mandó ayunar solo un día al año, a saber:", "optionsEn": ["Passover", "Pentecost", "the Day of Atonement", "the Sabbath"], "optionsEs": ["la Pascua", "Pentecostés", "el Día de la Expiación", "el sábado"], "answer": "C", "whyEn": "Leviticus 16 — afflicting the soul on Atonement.", "whyEs": "Levítico 16 — afligir el alma en la Expiación."}, {"stemEn": "To 'afflict one's soul' (Leviticus 16) was understood by the Jews to mean:", "stemEs": "'Afligir el alma' (Levítico 16) era entendido por los judíos como:", "optionsEn": ["to fast", "to sacrifice", "to tithe", "to travel"], "optionsEs": ["ayunar", "sacrificar", "diezmar", "viajar"], "answer": "A", "whyEn": "Afflicting the soul meant fasting.", "whyEs": "Afligir el alma significaba ayunar."}, {"stemEn": "Glenda links the three-day fast and self-humbling to:", "stemEs": "Glenda relaciona el ayuno de tres días y la humillación con:", "optionsEn": ["the Exodus", "Christ's humiliation and death (Philippians 2:5-8)", "the fall of Babylon", "the flood"], "optionsEs": ["el Éxodo", "la humillación y muerte de Cristo (Filipenses 2:5-8)", "la caída de Babilonia", "el diluvio"], "answer": "B", "whyEn": "The three days point to Christ, our Kinsman-Redeemer.", "whyEs": "Los tres días apuntan a Cristo, nuestro Redentor."}, {"stemEn": "Esther's bravery is best described as:", "stemEs": "La valentía de Ester se describe mejor como:", "optionsEn": ["trusting the king", "never feeling afraid", "reckless boldness", "acting in spite of fear, not the absence of fear"], "optionsEs": ["confiar en el rey", "nunca sentir miedo", "audacia temeraria", "actuar a pesar del miedo, no la ausencia de miedo"], "answer": "D", "whyEn": "Bravery is acting despite real fear.", "whyEs": "La valentía es actuar a pesar del miedo real."}, {"stemEn": "Why does Esther invite the king and Haman to a SECOND banquet?", "stemEs": "¿Por qué invita Ester al rey y a Amán a un SEGUNDO banquete?", "optionsEn": ["she forgot her request", "Haman demanded it", "she patiently waits for God's timing before her request", "the king ordered it"], "optionsEs": ["olvidó su petición", "Amán lo exigió", "espera con paciencia el tiempo de Dios antes de su petición", "el rey lo ordenó"], "answer": "C", "whyEn": "She waits for the right, God-ordained moment.", "whyEs": "Espera el momento justo, ordenado por Dios."}, {"stemEn": "Which 'coincidence' sets up Haman's fall the night before the second banquet?", "stemEs": "¿Cuál 'coincidencia' prepara la caída de Amán la noche antes del segundo banquete?", "optionsEn": ["a prophet warns him", "the sleepless king has the Chronicles read — Mordecai's deed", "Esther confesses", "Haman gets sick"], "optionsEs": ["un profeta le avisa", "el rey insomne manda leer las Crónicas — el acto de Mardoqueo", "Ester confiesa", "Amán enferma"], "answer": "B", "whyEn": "Insomnia + the Chronicles surface Mordecai's unrewarded deed.", "whyEs": "Insomnio + las Crónicas sacan el acto sin recompensa."}, {"stemEn": "When asked how to honor 'a man,' Haman assumes it is himself because of his:", "stemEs": "Cuando se le pregunta cómo honrar a 'un hombre,' Amán asume que es él por su:", "optionsEn": ["pride / ego", "humility", "loyalty", "wisdom"], "optionsEs": ["orgullo / ego", "humildad", "lealtad", "sabiduría"], "answer": "A", "whyEn": "His ego assumes the honor is for him — his downfall.", "whyEs": "Su ego asume que la honra es para él — su ruína."}, {"stemEn": "Haman is forced to honor whom — a 'gut kick' to him?", "stemEs": "¿A quién se ve forzado Amán a honrar — un golpe al estómago para él?", "optionsEn": ["himself", "the king's brother", "a foreign prince", "Mordecai the Jew"], "optionsEs": ["sí mismo", "el hermano del rey", "un príncipe extranjero", "Mardoqueo el judío"], "answer": "D", "whyEn": "He must parade Mordecai in honor — humiliating.", "whyEs": "Debe pasear a Mardoqueo en honor — humillante."}, {"stemEn": "Who finally tell Haman he is doomed for opposing the Jews?", "stemEs": "¿Quiénes finalmente dicen a Amán que está perdido por oponerse a los judíos?", "optionsEn": ["his own pagan wife and friends", "the king", "Mordecai", "the eunuchs"], "optionsEs": ["su propia esposa pagana y sus amigos", "el rey", "Mardoqueo", "los eunucos"], "answer": "A", "whyEn": "His pagan circle says none stands against God's people.", "whyEs": "Su círculo pagano dice que nadie vence al pueblo de Dios."}, {"stemEn": "Haman seals his own fate when the returning king finds him:", "stemEs": "Amán sella su destino cuando el rey, al volver, lo encuentra:", "optionsEn": ["stealing gold", "fleeing the palace", "fallen on the couch at the queen's feet", "drawing a sword"], "optionsEs": ["robando oro", "huyendo del palacio", "caído en el diván a los pies de la reina", "sacando una espada"], "answer": "C", "whyEn": "Within a foot of the queen meant instant death.", "whyEs": "Estar a un pie de la reina era muerte instantánea."}, {"stemEn": "On whose suggestion, and on what, is Haman executed?", "stemEs": "¿Por sugerencia de quién, y en qué, es ejecutado Amán?", "optionsEn": ["the king's guard — by sword", "Harbonah the eunuch — on the gallows Haman built for Mordecai", "the army — in prison", "Esther — by poison"], "optionsEs": ["la guardia — por espada", "Harbona el eunuco — en la horca que Amán hizo para Mardoqueo", "el ejército — en prisión", "Ester — por veneno"], "answer": "B", "whyEn": "Harbonah names the gallows; Haman dies on his own device.", "whyEs": "Harbona nombra la horca; Amán muere en su propio invento."}], SA=[{"promptEn": "Describe Esther's transformation when she learns of the edict.", "promptEs": "Describa la transformación de Ester al enterarse del edicto.", "modelEn": "At first isolated and unaware, Esther 'writhes in agony' — the Hebrew word for childbirth — as the woman of action and destiny is born in her. She moves from reluctance to stepping out in faith, ready to risk death to save her people.", "modelEs": "Al principio aislada e ignorante, Ester 'se retuerce de angustia' — la palabra hebrea del parto — al nacer en ella la mujer de acción y destino. Pasa de la reticencia a actuar por fe, lista para arriesgar la muerte y salvar a su pueblo.", "keywords": {"en": ["isolat", "writhe", "childbirth", "destiny", "action", "faith", "risk", "born"], "es": ["aislad", "retuerce", "parto", "destino", "acción", "fe", "arriesg", "nace"]}}, {"promptEn": "Explain why Esther 4:13-14 are the key verses of the book.", "promptEs": "Explique por qué Ester 4:13-14 son los versos clave del libro.", "modelEn": "Mordecai expresses faith that God will not abandon His covenant people — deliverance will arise even if from elsewhere — and that Esther may have reached royalty 'for such a time as this.' Though God is unnamed, His covenant with Abraham, Isaac, and Jacob is implied.", "modelEs": "Mardoqueo expresa la fe de que Dios no abandonará a su pueblo del pacto — vendrá liberación aunque sea de otra parte — y que Ester quizá llegó a la realeza 'para un tiempo como este.' Aunque Dios no es nombrado, se implica su pacto con Abraham, Isaac y Jacob.", "keywords": {"en": ["mordecai", "covenant", "abandon", "deliver", "such", "time", "abraham", "faith"], "es": ["mardoqueo", "pacto", "abandon", "libera", "tiempo", "como", "abraham", "fe"]}}, {"promptEn": "How does Esther act as a kind of kinsman-redeemer, echoing the Book of Ruth?", "promptEs": "¿Cómo actúa Ester como una especie de pariente redentor, en eco del libro de Rut?", "modelEn": "Esther offers her own life to save her people, answering the call of God rather than her king. Mordecai's warning that her father's house would otherwise be forgotten echoes Ruth, where the kinsman who refused his duty was blotted from memory.", "modelEs": "Ester ofrece su propia vida para salvar a su pueblo, respondiendo al llamado de Dios más que a su rey. La advertencia de Mardoqueo de que su casa sería olvidada hace eco de Rut, donde el pariente que rehusó su deber fue borrado de la memoria.", "keywords": {"en": ["redeemer", "life", "save", "call", "ruth", "refuse", "forgot", "people"], "es": ["redentor", "vida", "salvar", "llamado", "rut", "rehus", "olvid", "pueblo"]}}, {"promptEn": "What does Glenda teach about fasting from the three-day fast?", "promptEs": "¿Qué enseña Glenda sobre el ayuno a partir del ayuno de tres días?", "modelEn": "God commanded fasting only once a year, on the Day of Atonement, where 'afflicting one's soul' meant fasting to reflect on sin and grasp one's place before God. Saints like Moses, David, and Daniel fasted while seeking God, so prayer would naturally accompany it.", "modelEs": "Dios mandó ayunar solo una vez al año, en el Día de la Expiación, donde 'afligir el alma' significaba ayunar para reflexionar sobre el pecado y entender el lugar de uno ante Dios. Santos como Moisés, David y Daniel ayunaron buscando a Dios, por lo que la oración acompañaría el ayuno.", "keywords": {"en": ["fast", "atonement", "afflict", "soul", "sin", "moses", "daniel", "pray"], "es": ["ayun", "expiación", "afligir", "alma", "pecado", "moisés", "daniel", "oración"]}}, {"promptEn": "How do the three days of fasting point to Christ?", "promptEs": "¿Cómo apuntan los tres días de ayuno a Cristo?", "modelEn": "Esther humbled herself and risked death over three days to save her people; Philippians 2:5-8 shows Christ humbling Himself to death for others. The three days of afflicting the soul foreshadow Christ, our great Kinsman-Redeemer — the Old pointing to the New.", "modelEs": "Ester se humilló y arriesgó la muerte durante tres días para salvar a su pueblo; Filipenses 2:5-8 muestra a Cristo humillándose hasta la muerte por otros. Los tres días de afligir el alma prefiguran a Cristo, nuestro gran Pariente Redentor — lo Antiguo apuntando a lo Nuevo.", "keywords": {"en": ["three", "humble", "death", "christ", "philippians", "redeemer", "foreshadow", "save"], "es": ["tres", "humill", "muerte", "cristo", "filipenses", "redentor", "prefigur", "salvar"]}}, {"promptEn": "Trace the chain of 'coincidences' that brings about Haman's downfall.", "promptEs": "Trace la cadena de 'coincidencias' que provoca la caída de Amán.", "modelEn": "Haman meets Mordecai and seethes; builds a gallows; that night the sleepless king has the Chronicles read; the servants read of Mordecai's unrewarded deed; the king resolves to honor him exactly as Haman arrives to ask to hang him. To God's people these are providence, not chance.", "modelEs": "Amán se topa con Mardoqueo y se enfurece; construye una horca; esa noche el rey insomne manda leer las Crónicas; los siervos leen del acto sin recompensa de Mardoqueo; el rey decide honrarlo justo cuando Amán llega a pedir colgarlo. Para el pueblo de Dios esto es providencia, no azar.", "keywords": {"en": ["seethe", "gallows", "sleepless", "chronicle", "honor", "arrive", "providence", "chance"], "es": ["enfurec", "horca", "insomne", "crónica", "honrar", "llega", "providencia", "azar"]}}, {"promptEn": "How does Haman's pride bring about his humiliation?", "promptEs": "¿Cómo provoca el orgullo de Amán su humillación?", "modelEn": "Asked how to honor a man, Haman's ego assumes it is himself and he describes royal treatment — only to be ordered to parade Mordecai the Jew in that honor. He goes home with his head covered in shame; pride goes before the fall.", "modelEs": "Preguntado cómo honrar a un hombre, el ego de Amán asume que es él y describe un trato real — solo para que le ordenen pasear a Mardoqueo el judío en esa honra. Vuelve a casa con la cabeza cubierta de vergüenza; el orgullo precede a la caída.", "keywords": {"en": ["pride", "ego", "honor", "mordecai", "parade", "shame", "cover", "fall"], "es": ["orgullo", "ego", "honra", "mardoqueo", "pasear", "vergüenza", "cubr", "caída"]}}, {"promptEn": "How does Haman seal his own fate at the second banquet?", "promptEs": "¿Cómo sella Amán su propio destino en el segundo banquete?", "modelEn": "Esther exposes him as the enemy who plotted her people's destruction; the enraged king storms out, and returns to find Haman fallen at the queen's feet pleading. Being within a foot of the king's harem meant instant death, and Haman is condemned.", "modelEs": "Ester lo expone como el enemigo que tramó la destrucción de su pueblo; el rey furioso sale, y regresa para hallar a Amán caído a los pies de la reina suplicando. Estar a un pie del harén del rey era muerte instantánea, y Amán es condenado.", "keywords": {"en": ["esther", "expose", "enemy", "enraged", "fallen", "queen", "harem", "death"], "es": ["ester", "expone", "enemigo", "furioso", "caído", "reina", "harén", "muerte"]}}, {"promptEn": "What is the significance of Haman dying on the gallows he built for Mordecai?", "promptEs": "¿Qué significa que Amán muera en la horca que construyó para Mardoqueo?", "modelEn": "Harbonah the eunuch points out the gallows, and the king orders Haman hanged on it. The evil he devised falls back on himself — a striking irony showing God's perfect justice and providence over the whole affair.", "modelEs": "Harbona el eunuco señala la horca, y el rey ordena colgar a Amán en ella. El mal que ideó recae sobre él mismo — una ironía notable que muestra la justicia perfecta y la providencia de Dios sobre todo el asunto.", "keywords": {"en": ["harbonah", "gallows", "hang", "evil", "irony", "justice", "providence", "mordecai"], "es": ["harbona", "horca", "colg", "mal", "ironía", "justicia", "providencia", "mardoqueo"]}}, {"promptEn": "What does Esther's approach to the king teach about coming before God (Hebrews 4:16)?", "promptEs": "¿Qué enseña el acercamiento de Ester al rey sobre venir ante Dios (Hebreos 4:16)?", "modelEn": "Esther approached trembling yet with a right sense of herself before God, humbled by fasting. We may draw near the throne of grace with even greater confidence, clothed in Christ's righteousness and helped by the interceding Spirit — patient for God's timing as she was.", "modelEs": "Ester se acercó temblando pero con un sentido correcto de sí misma ante Dios, humillada por el ayuno. Nosotros podemos acercarnos al trono de la gracia con aún mayor confianza, revestidos de la justicia de Cristo y ayudados por el Espíritu intercesor — pacientes ante el tiempo de Dios como ella.", "keywords": {"en": ["approach", "tremble", "humble", "throne", "grace", "confidence", "christ", "patient"], "es": ["acerc", "tembl", "humill", "trono", "gracia", "confianza", "cristo", "paciente"]}}];
+
+function getTrack(){ return lsGet('cts_track')||'cert'; }
+function isMastersLevel(){ var t=getTrack(); return t==='mdiv'||t==='thm'; }
+function lockMinutes(){ return isMastersLevel()?15:2; }
+
+function setLang(l){
+  document.body.setAttribute('data-lang',l); lsSet('cts_lang',l);
+  document.getElementById('btnEn').classList.toggle('active',l==='en');
+  document.getElementById('btnEs').classList.toggle('active',l==='es');
+}
+function saveReg(){
+  var nm=document.getElementById('regName').value.trim();
+  if(!nm) return;
+  lsSet('cts_student',nm);
+  document.getElementById('regOk').textContent=(document.body.getAttribute('data-lang')==='es'?'  Guardado: ':'  Saved: ')+nm;
+  renderGreet();
+}
+function renderGreet(){
+  var nm=lsGet('cts_student'); var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('greet').textContent = nm ? (es?('Estudiante: '+nm):('Student: '+nm)) : '';
+}
+function setTrack(){ lsSet('cts_track',document.getElementById('track').value); renderTrackNote(); renderSAmode(); }
+function renderTrackNote(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('trackNote').textContent = isMastersLevel()
+    ? (es?'Programa de maestría: la sección de respuesta breve CUENTA para aprobar.':'Masters track: the short-answer section COUNTS toward passing.')
+    : (es?'Certificado: la respuesta breve es práctica y no decide su aprobación.':'Certificate: short answer is practice and does not gate your pass.');
+}
+function renderSAmode(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('saMode').textContent = isMastersLevel()
+    ? (es?'Cuenta para su calificación (maestría).':'Counts toward your grade (masters).')
+    : (es?'Práctica: estudíela, pero no afecta su aprobación (certificado).':'Practice: study it, but it does not affect your pass (certificate).');
+}
+function kwHit(kw,text){
+  kw=kw.toLowerCase().trim(); text=(text||'').toLowerCase();
+  var e=kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var re=(kw.length<=3)?new RegExp('\\b'+e+'\\b'):new RegExp('\\b'+e);
+  return re.test(text);
+}
+function saHits(kws,ans){ var h=0; for(var i=0;i<kws.length;i++){ if(kwHit(kws[i],ans))h++; } return h; }
+
+function renderMC(){
+  var c=document.getElementById('mc'); c.innerHTML='';
+  MC.forEach(function(q,qi){
+    var d=document.createElement('div'); d.className='q';
+    var stem=document.createElement('div'); stem.className='stem';
+    stem.innerHTML='<span class="en">'+(qi+1)+'. '+q.stemEn+'</span><span class="es">'+(qi+1)+'. '+q.stemEs+'</span>';
+    d.appendChild(stem);
+    ['A','B','C','D'].forEach(function(L,oi){
+      var o=document.createElement('div'); o.className='opt'; o.id='mc'+qi+L;
+      o.innerHTML='<span class="en">'+L+'. '+q.optionsEn[oi]+'</span><span class="es">'+L+'. '+q.optionsEs[oi]+'</span>';
+      o.addEventListener('click',function(){ pickMC(qi,L); });
+      d.appendChild(o);
+    });
+    var bw=document.createElement('div'); bw.style.marginTop='8px';
+    var b=document.createElement('button'); b.className='secondary';
+    b.innerHTML='<span class="en">Check</span><span class="es">Revisar</span>';
+    b.addEventListener('click',function(){ checkMC(qi); });
+    bw.appendChild(b); d.appendChild(bw);
+    var fb=document.createElement('div'); fb.className='fb'; fb.id='mcfb'+qi; d.appendChild(fb);
+    c.appendChild(d);
+  });
+}
+var mcPick={};
+function pickMC(qi,L){ mcPick[qi]=L; ['A','B','C','D'].forEach(function(X){document.getElementById('mc'+qi+X).classList.remove('sel');}); document.getElementById('mc'+qi+L).classList.add('sel'); }
+function markMC(qi){
+  var q=MC[qi], pick=mcPick[qi];
+  ['A','B','C','D'].forEach(function(X){document.getElementById('mc'+qi+X).classList.remove('correct','wrong');});
+  if(pick===q.answer){ document.getElementById('mc'+qi+pick).classList.add('correct'); }
+  else { if(pick) document.getElementById('mc'+qi+pick).classList.add('wrong'); document.getElementById('mc'+qi+q.answer).classList.add('correct'); }
+  var fb=document.getElementById('mcfb'+qi); fb.className='fb '+(pick===q.answer?'ok':'no');
+  fb.innerHTML='<span class="en">'+(pick===q.answer?'Correct. ':'Answer: '+q.answer+'. ')+q.whyEn+'</span><span class="es">'+(pick===q.answer?'Correcto. ':'Respuesta: '+q.answer+'. ')+q.whyEs+'</span>';
+}
+function checkMC(qi){
+  var es=document.body.getAttribute('data-lang')==='es';
+  if(!mcPick[qi]){ var fb=document.getElementById('mcfb'+qi); fb.className='fb no'; fb.textContent=es?'Elija una opción primero.':'Pick an option first.'; return; }
+  markMC(qi);
+}
+
+function renderSA(){
+  var c=document.getElementById('sa'); c.innerHTML='';
+  SA.forEach(function(q,qi){
+    var d=document.createElement('div'); d.className='q';
+    var stem=document.createElement('div'); stem.className='stem';
+    stem.innerHTML='<span class="en">'+(MC.length+qi+1)+'. '+q.promptEn+'</span><span class="es">'+(MC.length+qi+1)+'. '+q.promptEs+'</span>';
+    d.appendChild(stem);
+    var ta=document.createElement('textarea'); ta.id='sa'+qi; ta.placeholder='...'; d.appendChild(ta);
+    var bw=document.createElement('div'); bw.style.marginTop='8px';
+    var b=document.createElement('button'); b.className='secondary';
+    b.innerHTML='<span class="en">Check Answer</span><span class="es">Revisar</span>';
+    b.addEventListener('click',function(){ checkSA(qi); });
+    bw.appendChild(b); d.appendChild(bw);
+    var fb=document.createElement('div'); fb.className='fb'; fb.id='safb'+qi; d.appendChild(fb);
+    var mo=document.createElement('div'); mo.className='model'; mo.id='samodel'+qi;
+    mo.innerHTML='<b><span class="en">Model answer — study this:</span><span class="es">Respuesta modelo &#9873; &mdash; est&uacute;diela:</span></b><br><span class="en">'+q.modelEn+'</span><span class="es">'+q.modelEs+'</span>';
+    d.appendChild(mo);
+    c.appendChild(d);
+  });
+}
+function checkSA(qi){
+  var ans=document.getElementById('sa'+qi).value.trim();
+  var fb=document.getElementById('safb'+qi); var es=document.body.getAttribute('data-lang')==='es';
+  if(!ans){ fb.className='fb no'; fb.textContent=es?'Escriba una respuesta antes de revisar.':'Please write an answer before checking.'; return; }
+  if(ans.length<100){ fb.className='fb no'; fb.textContent=es?'Escriba una respuesta más completa (mínimo 100 caracteres).':'Write a fuller answer (100 characters minimum).'; return; }
+  var q=SA[qi]; var hits=Math.max(saHits(q.keywords.en,ans),saHits(q.keywords.es,ans));
+  if(hits>=3){ fb.className='fb ok'; fb.textContent=(es?'Aprobado — ':'Pass — ')+hits+(es?' de 8 conceptos.':' of 8 key concepts.'); }
+  else { fb.className='fb no'; fb.textContent=(es?'Aún no — ':'Not yet — ')+hits+(es?' de 8 (necesita 3).':' of 8 (need 3).'); }
+  if(hits>=3) document.getElementById('samodel'+qi).classList.add('show');
+}
+
+function isLocked(){
+  var until=parseInt(lsGet('cts_re_u'+UNIT+'_lockout')||'0',10);
+  return until>Date.now()? until : 0;
+}
+function grade(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  var until=isLocked();
+  if(until){ var mins=Math.ceil((until-Date.now())/60000);
+    var r0=document.getElementById('result'); r0.className='result fail';
+    r0.textContent=(es?'Bloqueado. Intente de nuevo en ':'Locked out. Try again in ')+mins+(es?' min.':' min.'); return; }
+  var mcCorrect=0;
+  MC.forEach(function(q,qi){ markMC(qi); if(mcPick[qi]===q.answer) mcCorrect++; });
+  var saPass=0;
+  SA.forEach(function(q,qi){
+    var ans=document.getElementById('sa'+qi).value.trim(); var fb=document.getElementById('safb'+qi);
+    if(!ans){ fb.className='fb no'; fb.textContent=es?'Sin respuesta.':'No answer given.'; }
+    else if(ans.length<100){ fb.className='fb no'; fb.textContent=es?'Respuesta demasiado breve (mínimo 100 caracteres).':'Answer too short (100 characters minimum).'; }
+    else { var hits=Math.max(saHits(q.keywords.en,ans),saHits(q.keywords.es,ans));
+      if(hits>=3){ saPass++; fb.className='fb ok'; fb.textContent=(es?'Aprobado — ':'Pass — ')+hits+'/8.'; }
+      else { fb.className='fb no'; fb.textContent=(es?'Debajo — ':'Below — ')+hits+'/8.'; } }
+    document.getElementById('samodel'+qi).classList.add('show');
+  });
+  var mcPct=Math.round(mcCorrect/MC.length*100), mcOk=mcPct>=90;
+  var masters=isMastersLevel(), saOk=saPass>=9;
+  var pass = masters ? (mcOk&&saOk) : mcOk;
+  var r=document.getElementById('result');
+  if(pass){
+    r.className='result pass';
+    var saLine = masters ? ((es?' Respuesta breve: ':' Short answer: ')+saPass+'/'+SA.length+'.') : (es?' (Respuesta breve: práctica.)':' (Short answer: practice.)');
+    r.innerHTML='<b>'+(es?('Unidad '+UNIT+' aprobada.'):('Unit '+UNIT+' passed.'))+'</b> '+(es?'Opción múltiple: ':'Multiple choice: ')+mcCorrect+'/'+MC.length+' ('+mcPct+'%).'+saLine;
+    lsSet('re_unit'+UNIT+'_passed','1');
+    lsSet('cts_re_progress',String(Math.max(UNIT,parseInt(lsGet('cts_re_progress')||'0',10))));
+    lsDel('cts_re_u'+UNIT+'_lockout');
+    document.getElementById('nextBtn').disabled=false;
+  } else {
+    r.className='result fail';
+    var why=[]; if(!mcOk) why.push((es?'opción múltiple ':'multiple choice ')+mcPct+'% ('+(es?'necesita 90%':'need 90%')+')');
+    if(masters&&!saOk) why.push((es?'respuesta breve ':'short answer ')+saPass+'/'+SA.length);
+    var lk=lockMinutes(); lsSet('cts_re_u'+UNIT+'_lockout',String(Date.now()+lk*60000));
+    r.innerHTML='<b>'+(es?'Aún no aprobada.':'Not yet passed.')+'</b> '+why.join('; ')+'. '+(es?('Espere '+lk+' min y reintente.'):('Wait '+lk+' min and retry.'));
+    document.getElementById('nextBtn').disabled=true;
+  }
+  r.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function goNext(){ if(NEXT_URL) window.location.href=NEXT_URL; }
+
+(function(){
+  setLang(lsGet('cts_lang')||'en');
+  var t=getTrack(); document.getElementById('track').value=t;
+  renderGreet(); renderTrackNote(); renderSAmode(); renderMC(); renderSA();
+  var rn=document.getElementById('regName'); if(rn&&lsGet('cts_student')) rn.value=lsGet('cts_student');
+  if(lsGet('re_unit'+UNIT+'_passed')==='1') document.getElementById('nextBtn').disabled=false;
+})();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSREReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

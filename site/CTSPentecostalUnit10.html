@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Unit 10 — Prophecy, Tongues, and Revelation Today / Profecía, lenguas y revelación hoy</title>
+<style>
+  :root{
+    --ink:#22303b; --ink-soft:#465562; --paper:#f5f3ec; --surface:#ffffff;
+    --brass:#b08324; --brass-soft:#e8dcc0; --rule:#ddd6c6;
+    --good:#2f6f4f; --good-bg:#e8f1eb; --bad:#9b3d3d; --bad-bg:#f3e6e4;
+    --gold-box:#fbf3dd; --gold-border:#d9b45b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    font-size:18px; line-height:1.72;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 80px;}
+  .topbar{
+    position:sticky; top:0; z-index:20; background:var(--ink); color:#f5f3ec;
+    display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center; justify-content:space-between;
+    padding:10px 20px; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  .topbar .brand{font-weight:600; font-size:15px; letter-spacing:.02em;}
+  .topbar .brand small{opacity:.7; font-weight:400;}
+  .switches{display:flex; gap:16px; align-items:center; flex-wrap:wrap;}
+  .switch{display:flex; align-items:center; gap:4px;}
+  .switch span.lbl{font-size:11px; text-transform:uppercase; letter-spacing:.08em; opacity:.65;}
+  .switch button{
+    font:inherit; font-size:13px; cursor:pointer; border:1px solid #45596a; background:transparent;
+    color:#dfe6ec; padding:5px 11px; border-radius:999px; line-height:1;
+  }
+  .switch button[aria-pressed="true"]{background:var(--brass); border-color:var(--brass); color:#241a05; font-weight:600;}
+  .switch button:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+  header.unit{padding:38px 0 6px; border-bottom:1px solid var(--rule);}
+  .eyebrow{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  h1{font-family:Georgia,serif; font-size:2rem; line-height:1.18; margin:.35rem 0 .1rem; font-weight:700;}
+  .course-tag{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft);}
+  .banner{margin:26px 0 8px; padding:20px 22px; background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--brass); border-radius:4px;}
+  .banner .verse{font-size:1.12rem; font-style:italic; line-height:1.6;}
+  .banner .ref{display:block; margin-top:8px; font-family:system-ui,sans-serif; font-style:normal; font-size:13px; letter-spacing:.05em; color:var(--brass); font-weight:600;}
+  h2{font-family:Georgia,serif; font-size:1.42rem; margin:2.2em 0 .5em; line-height:1.25; padding-bottom:.18em; border-bottom:2px solid var(--brass-soft);}
+  h3{font-family:Georgia,serif; font-size:1.14rem; margin:1.6em 0 .3em; color:var(--ink);}
+  p{margin:0 0 1.05em;}
+  .lead{font-size:1.06rem;}
+  blockquote.scripture{margin:1.2em 0; padding:2px 0 2px 20px; border-left:3px solid var(--gold-border); font-style:italic; color:#3a4650;}
+  blockquote.scripture .ref{display:block; font-style:normal; font-family:system-ui,sans-serif; font-size:12.5px; letter-spacing:.04em; color:var(--brass); font-weight:600; margin-top:5px;}
+  .objectives{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 22px 6px; margin:24px 0;}
+  .objectives h2{margin:0 0 .4em; border:0; font-size:1.15rem;}
+  .objectives ol{margin:0 0 12px; padding-left:1.25em;}
+  .objectives li{margin:0 0 .55em;}
+  /* comparative VIEWS block (reusable multi-view template) */
+  .views{margin:24px 0; display:grid; gap:14px;}
+  .view{background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--accent,#888); border-radius:6px; padding:16px 20px;}
+  .view.v1{--accent:#3f6d7a;} .view.v2{--accent:#9a7b2e;} .view.v3{--accent:#5f7052;} .view.v4{--accent:#7a5566;}
+  .vhead{font-family:Georgia,serif; font-weight:700; font-size:1.1rem; margin-bottom:.55em; line-height:1.3;}
+  .vtag{display:inline-block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:#fff; background:var(--accent,#888); padding:3px 8px; border-radius:999px; vertical-align:middle; margin-right:8px; font-weight:700;}
+  .view p{font-size:.97rem; margin:0 0 .5em;} .view p:last-child{margin-bottom:0;}
+  .view p b{color:var(--ink);}
+  /* two-questions split (signature) */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:0; margin:26px 0; border:1px solid var(--rule); border-radius:6px; overflow:hidden;}
+  .split .col{padding:20px 22px; background:var(--surface);}
+  .split .col:first-child{border-right:3px solid var(--brass);}
+  .split .col h4{margin:0 0 .5em; font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .split .col .verdict{font-family:Georgia,serif; font-size:1.12rem; font-weight:700; margin:0 0 .4em; line-height:1.3;}
+  .split .col p{font-size:.96rem; margin:0;}
+  .split .col.affirm .verdict{color:var(--good);}
+  .split .col.decline .verdict{color:var(--ink);}
+  @media(max-width:560px){ .split{grid-template-columns:1fr;} .split .col:first-child{border-right:0; border-bottom:3px solid var(--brass);} }
+  .callout{background:#fdfcf8; border:1px solid var(--rule); border-left:4px solid var(--ink-soft); border-radius:4px; padding:14px 18px; margin:22px 0; font-size:.98rem;}
+  ul.q-list{padding-left:1.2em;} ul.q-list li{margin:0 0 .6em;}
+  section.assess{margin-top:16px;}
+  .qcard{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 20px; margin:16px 0;}
+  .qnum{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .qstem{font-weight:600; margin:.3em 0 .8em;}
+  .opt{display:block; margin:0 0 .5em; padding:10px 12px; border:1px solid var(--rule); border-radius:5px; cursor:pointer; font-size:.98rem; transition:background .12s,border-color .12s;}
+  .opt:hover{background:#faf7ef;}
+  .opt input{margin-right:9px;}
+  .opt.correct{background:var(--good-bg); border-color:var(--good);}
+  .opt.wrong{background:var(--bad-bg); border-color:var(--bad);}
+  .btn{font-family:system-ui,sans-serif; font-size:14px; font-weight:600; cursor:pointer; border:0; background:var(--ink); color:#fff; padding:9px 18px; border-radius:5px;}
+  .btn:hover{background:#334452;} .btn:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--ink);}
+  .fb{margin-top:12px; font-size:.95rem; padding:10px 12px; border-radius:5px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:var(--good-bg); color:#1f5138; border:1px solid #bcd8c8;}
+  .fb.no{background:var(--bad-bg); color:#7a2f2f; border:1px solid #e0c4c0;}
+  .scorebar{font-family:system-ui,sans-serif; font-size:14px; background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:12px 16px; margin:14px 0; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;}
+  .scorebar strong{color:var(--brass); font-size:16px;}
+  textarea{width:100%; min-height:118px; font-family:inherit; font-size:1rem; padding:12px; border:1px solid var(--rule); border-radius:5px; resize:vertical; background:#fffef9;}
+  textarea:focus-visible{outline:2px solid var(--brass); outline-offset:1px;}
+  .hitline{font-family:system-ui,sans-serif; font-size:13px; margin:10px 0; display:none;}
+  .hitline.show{display:block;}
+  .hitline b{color:var(--brass);}
+  .model{display:none; margin-top:12px; background:var(--gold-box); border:1px solid var(--gold-border); border-radius:5px; padding:14px 16px; font-size:.97rem;}
+  .model.show{display:block;}
+  .model .mh{font-family:system-ui,sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8a6d1f; font-weight:700; margin-bottom:6px;}
+  .track-note{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft); background:#fdfcf8; border:1px dashed var(--rule); border-radius:5px; padding:10px 14px; margin:10px 0;}
+  #masters-block{display:none;}
+  html.track-masters #masters-block{display:block;}
+  html.track-cert #cert-only-note{display:block;}
+  #cert-only-note{display:none;}
+  footer{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-family:system-ui,sans-serif; font-size:12.5px; color:var(--ink-soft);}
+  .pane.es{display:none;} .seg.es{display:none;}
+  html.lang-es .pane.en{display:none;} html.lang-es .seg.en{display:none;}
+  html.lang-es .pane.es{display:block;} html.lang-es .seg.es{display:inline;}
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">Chapala Theological Seminary <small>&middot; Seminario Teológico de Chapala</small></div>
+  <div class="switches">
+    <div class="switch" role="group" aria-label="Language / Idioma">
+      <span class="lbl">Lang</span>
+      <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+      <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+    </div>
+    <div class="switch" role="group" aria-label="Track / Programa">
+      <span class="lbl seg en">Track</span><span class="lbl seg es">Programa</span>
+      <button id="btn-cert" aria-pressed="true" onclick="setTrack('cert')"><span class="seg en">Certificate</span><span class="seg es">Certificado</span></button>
+      <button id="btn-mast" aria-pressed="false" onclick="setTrack('masters')"><span class="seg en">Master's</span><span class="seg es">Maestría</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSPentecostalUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSPentecostalUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSPentecostalUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSPentecostalUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSPentecostalUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSPentecostalUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSPentecostalUnit7.html" title="Unit 7 · Unidad 7">7</a><a href="CTSPentecostalUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSPentecostalUnit9.html" title="Unit 9 · Unidad 9">9</a><a href="CTSPentecostalUnit10.html" title="Unit 10 · Unidad 10" class="active">10</a><a href="CTSPentecostalUnit11.html" title="Unit 11 · Unidad 11">11</a><a href="CTSPentecostalUnit12.html" title="Unit 12 · Unidad 12">12</a></nav><script>(function(){try{var p=JSON.parse(localStorage.getItem('cts_pentecostal_progress')||'{}');document.querySelectorAll('.cts-unitnav a').forEach(function(a,i){if(p['unit'+(i+1)])a.classList.add('completed');});}catch(e){}})();</script>
+
+  <header class="unit">
+    <div class="pane en">
+      <div class="eyebrow">Pentecostalism &amp; the Charismatic Movement · Unit 10</div>
+      <h1>Prophecy, Tongues, and Revelation Today</h1>
+      <div class="course-tag">A Biblical Study · New King James Version</div>
+    </div>
+    <div class="pane es">
+      <div class="eyebrow">El pentecostalismo y el movimiento carismático · Unidad 10</div>
+      <h1>Profecía, lenguas y revelación hoy</h1>
+      <div class="course-tag">Un estudio bíblico · Reina-Valera Gómez</div>
+    </div>
+  </header>
+
+  <div class="banner">
+    <div class="pane en"><span class="verse">"Do not despise prophecies. Test all things; hold fast what is good."<span class="ref">1 Thessalonians 5:20–21 (NKJV)</span></span></div>
+    <div class="pane es"><span class="verse">"No menospreciéis las profecías. Examinadlo todo; retened lo bueno."<span class="ref">1 Tesalonicenses 5:20–21 (RVG)</span></span></div>
+  </div>
+
+  <div class="objectives">
+    <div class="pane en">
+      <h2>Learning Objectives</h2>
+      <ol>
+        <li>Distinguish the two questions this unit treats: whether the revelatory gifts continue, and how any continuing prophecy relates to the closed canon.</li>
+        <li>State the cessationist position and its main scriptural supports at their strongest.</li>
+        <li>State the continuationist position and its main scriptural supports at their strongest.</li>
+        <li>Explain how a continuing gift of prophecy can be affirmed without adding to or competing with Scripture.</li>
+        <li>Apply the biblical command to test all claimed prophecy by the Word, holding fast only what is good.</li>
+      </ol>
+    </div>
+    <div class="pane es">
+      <h2>Objetivos de aprendizaje</h2>
+      <ol>
+        <li>Distinguir las dos preguntas que trata esta unidad: si los dones revelatorios continúan, y cómo se relaciona cualquier profecía que continúe con el canon cerrado.</li>
+        <li>Exponer la postura cesacionista y sus principales apoyos bíblicos en su forma más fuerte.</li>
+        <li>Exponer la postura continuista y sus principales apoyos bíblicos en su forma más fuerte.</li>
+        <li>Explicar cómo se puede afirmar un don de profecía que continúa sin añadir a la Escritura ni competir con ella.</li>
+        <li>Aplicar el mandato bíblico de examinar toda profecía reclamada por la Palabra, reteniendo solo lo bueno.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!--WC:EN:START-->
+  <div class="pane en">
+
+    <h2>The Question Before Us</h2>
+    <p class="lead">Do the gifts of prophecy, tongues, and words of knowledge continue in the church today, or did they cease when the age of the apostles closed? This is one of the sharpest questions surrounding the movement we have been studying, and honest, Bible-loving Christians have answered it in two very different ways. This unit sets both answers before you fairly, as we did with the millennium and with the meaning of "the perfect" in an earlier unit — not to hand you a verdict, but to help you weigh the Scriptures for yourself.</p>
+    <p>Two questions must be kept apart, or the whole discussion falls into confusion. The first is whether the revelatory gifts continue at all. The second is a different question that arises only if they do: how any prophecy given today relates to the Bible — the completed, closed collection of Scripture. Much of the fear and heat around this subject comes from running these two questions together, as though believing the gifts continue must mean adding to the Word of God. It does not, as we shall see. Let us take the questions one at a time.</p>
+
+    <h2>What Both Sides Agree Upon</h2>
+    <p>Before the disagreement, it is worth resting on the wide ground both sides share, for it is wider than the quarrels suggest. Both cessationists and responsible continuationists confess that the canon of Scripture is closed. The sixty-six books are complete; no one is writing a sixty-seventh; nothing said in a meeting today stands beside Isaiah or Romans as the Word of God. Scripture is the final and sufficient authority:</p>
+    <blockquote class="scripture">"All Scripture is given by inspiration of God… that the man of God may be complete, thoroughly equipped for every good work."<span class="ref">2 Timothy 3:16–17 (NKJV)</span></blockquote>
+    <p>Both sides also agree that the Spirit is at work in the church now — in conviction, conversion, sanctification, and the ordinary graces of Christian life — and that whatever gifts God gives are meant to build up the body and glorify Christ, never to exalt an individual. So the argument is not over whether the Spirit works today, nor over whether the Bible is finished. It is a narrower argument about one class of gifts. Keeping that in view will spare us from treating brothers and sisters as enemies over a question the whole church has long debated in good faith.</p>
+
+    <h2>The Cessationist Position</h2>
+    <p>The cessationist holds that the revelatory and miraculous sign-gifts — prophecy, tongues, healings, words of knowledge — had a particular purpose in the founding era of the church, and passed away once that purpose was fulfilled. The case runs like this. The church was built "on the foundation of the apostles and prophets"; a foundation is laid once, not repeatedly, and the gifts that accompanied the apostles' ministry belonged to that founding work.</p>
+    <blockquote class="scripture">"…having been built on the foundation of the apostles and prophets, Jesus Christ Himself being the chief cornerstone."<span class="ref">Ephesians 2:20 (NKJV)</span></blockquote>
+    <p>These gifts, the cessationist argues, served to authenticate the apostles and their message before the New Testament was written and gathered. The writer to the Hebrews speaks of the great salvation confirmed to us by those who heard the Lord, "God also bearing witness both with signs and wonders, with various miracles, and gifts of the Holy Spirit" (Heb 2:3–4). Once that testimony was confirmed and the Scriptures completed, the scaffolding could come down. On this reading, "when that which is perfect has come" (1 Cor 13:10) points to the finished revelation and the maturity it brings — the view we met earlier as Reading A — and the sufficiency of the completed Scripture means the church no longer needs new revelatory gifts. At its strongest, the position is a high view of Scripture's finality: God has spoken fully in His Son and in the Word, and we are to look there, not for fresh voices.</p>
+    <p>The cessationist often adds a further observation drawn from the shape of Scripture itself: the great clusters of miracles and prophecy did not fall evenly across the ages but gathered at the hinges of redemptive history — around Moses and the giving of the Law, around Elijah and Elisha as they contended for the covenant, and around Christ and His apostles as the gospel broke into the world — and grew sparse in the long stretches between. On this reading the outpouring that accompanied the church's birth belongs to such a hinge. The apostolic office, moreover, had no successors; it closed with the men who had seen the risen Lord and were commissioned by Him, and the sign-gifts bound up with that founding office closed along with it. What remains for every later generation is the completed Scripture those apostles and prophets left behind, which is enough.</p>
+
+    <h2>The Continuationist Position</h2>
+    <p>The continuationist holds that the gifts described in the New Testament remain available to the church until the Lord returns, and answers the cessationist point by point. Scripture, he observes, nowhere plainly states that the revelatory gifts would cease before the second coming. Paul's instructions to the Corinthians are given without any hint of an expiration date:</p>
+    <blockquote class="scripture">"Pursue love, and desire spiritual gifts, but especially that you may prophesy."<span class="ref">1 Corinthians 14:1 (NKJV)</span></blockquote>
+    <p>He presses the point with a further text. Writing to these same Corinthians, Paul says they “come short in no gift, eagerly waiting for the revealing of our Lord Jesus Christ” (1 Cor 1:7) — binding the church's possession of the gifts to the whole stretch of waiting that ends only at Christ's appearing, not at the close of the first century. And he lays down a challenge: let the cessationist produce the verse that plainly announces the gifts' withdrawal, for the continuationist searches and finds none. Where Scripture has not spoken, he argues, we are not free to forbid what it elsewhere commands. On this account the gifts are not a temporary scaffolding taken down once the building rose, but part of the ordinary furniture of the church, given and withheld as the Spirit wills, until the Lord returns.</p>
+    <p>And plainly, "do not forbid to speak with tongues" (14:39). The continuationist reads "when that which is perfect has come" as the return of Christ — Reading B from the earlier unit — since the "face to face" seeing and full knowing of the next verse (13:12) belong to glory, not to the closing of a book; and if the gifts last until then, they last now. He points to Peter at Pentecost citing Joel: "in the last days," God says, "I will pour out of My Spirit… your sons and your daughters shall prophesy" (Acts 2:17–18) — and "the last days" name the whole span between Christ's first and second comings, our age included. And he notes that Paul grounds the gifts in the Spirit's ongoing choice: "the same Spirit works all these things, distributing to each one individually as He wills" (1 Cor 12:11). At its strongest, the position is a plain reading of commands that were never revoked and a refusal to forbid what the apostle told the church not to forbid.</p>
+
+    <h2>Prophecy and the Closed Canon</h2>
+    <p>Here we reach the question that troubles many, and it deserves a careful answer: if prophecy continues, does that not threaten the Bible? The answer, on any responsible continuationist account, is no — and the reason is a distinction that must be grasped. The prophecy that became Scripture, given through apostles and prophets, carried the full authority of God and is now closed; nothing is added to it. Any prophecy in a congregation today is of a different and lesser kind: not new Scripture, carrying no canonical authority, and always to be tested.</p>
+    <p>The Scriptures themselves guard their own finality. Jude writes of "the faith which was once for all delivered to the saints" (Jude 3) — once for all, not added to in each generation — and the Revelation closes with a solemn warning against adding to the words of the book (Rev 22:18–19). So the canon is shut. Even the believer who expects the gift of prophecy to continue does not expect it to rival, correct, or extend the Bible; he expects, at most, a fallible word of encouragement or warning that must itself be weighed by Scripture and may well be mistaken. Hold this distinction firmly and the fear dissolves: to affirm a continuing gift is not to reopen the Word of God.</p>
+    <p>The New Testament itself shows prophecy of this lesser kind at work. A prophet named Agabus foretold a coming famine (Acts 11:28), and later, taking Paul's belt and binding his own hands and feet, warned of the apostle's arrest at Jerusalem (Acts 21:10–11). This was genuine prophecy, yet it was never gathered into Scripture; and in the second instance the disciples drew from Agabus's word a conclusion Paul himself did not accept, pleading with him not to go up — so that even a true prophet's message had to be weighed, and its application could be mistaken by those who heard it. Here, within the pages of the Bible, stands prophecy that is real and useful and still to be tested: not a rival to Scripture but a servant beneath it. This, says the continuationist, is exactly the kind of gift he expects to continue — edifying, fallible, and always subordinate to the written Word.</p>
+
+    <h2>Test All Things</h2>
+    <p>Whatever a believer concludes about continuation, Scripture presses one duty on everyone, and it is the great practical safeguard: everything claiming to be from the Spirit must be tested by the Word. Paul commands neither a reckless acceptance nor a scornful dismissal, but a weighing:</p>
+    <blockquote class="scripture">"Do not despise prophecies. Test all things; hold fast what is good."<span class="ref">1 Thessalonians 5:20–21 (NKJV)</span></blockquote>
+    <p>He gives the church a rule for its meetings: "Let two or three prophets speak, and let the others judge" (1 Cor 14:29). John adds, "do not believe every spirit, but test the spirits, whether they are of God" (1 John 4:1). The measure in every case is Scripture, which stands over all claimed words and cannot be overturned by any of them. A prophecy that contradicts the Bible is false, whatever power seems to attend it; a prophecy that agrees with the Bible tells us nothing the Bible did not already say with more authority. This testing protects the church from both errors that surround the gifts — the credulity that swallows every claim, and the coldness that quenches the Spirit's genuine work.</p>
+    <p>This testing is no New Testament novelty; it reaches back into the Law. Israel was given a twofold measure: a prophet's word must come to pass (Deut 18:22), and even a sign or wonder that does come to pass must never draw the people after other gods (Deut 13:1–3). Truth and fulfillment together formed the test, and the second guarded against the first being abused by a lying wonder. The church inherits the same double safeguard: no claimed word, however striking or however moving, may be received if it leads away from the God and the gospel already made known in Scripture.</p>
+
+    <h2>A Word on Tongues Today</h2>
+    <p>The same discipline applies to tongues. Whether or not the gift continues — the very question we have been weighing — the New Testament's rules do not change: in the gathered church tongues are to be interpreted, exercised in order, and never made a badge that divides the "haves" from the "have-nots" (1 Cor 14). And the two questions we separated in an earlier unit stay separate here: whether the gift is real is one matter; whether speaking in tongues is required as the proof of the Spirit's baptism is another, and to that second question the answer given throughout this course is no. Let those who exercise any gift do so under love and in submission to the Word, and let no one despise a brother for having, or for lacking, a particular gift.</p>
+
+    <h2>Holding the Question with Humility</h2>
+    <p>On the central question — do the revelatory gifts continue? — this course renders no verdict, because faithful Christians who honor the same Bible have long stood on both sides, and each can point to Scripture for its case. What the course does insist upon is the ground that is not open to negotiation: the canon is closed, Scripture is sufficient and final, everything must be tested by it, and Christ is the center. The Lord Jesus said the Spirit came to glorify Him (John 16:14), and that remains the aim of every true gift and the test of every claim. So weigh the Scriptures, come to your conviction, and hold it with humility — receiving as brothers those who have weighed the same texts and landed elsewhere.</p>
+
+    <h3>Looking Ahead</h3>
+    <p>In the next unit we turn to a painful subject that must be faced honestly: the prosperity gospel and other excesses that have grown up alongside the movement. We will ask what Scripture says about wealth, faith, and suffering, and how to reject a distortion without condemning the many faithful believers it has wounded.</p>
+
+  </div>
+  <!--WC:EN:END-->
+
+  <!--WC:ES:START-->
+  <div class="pane es">
+
+    <h2>La pregunta ante nosotros</h2>
+    <p class="lead">¿Continúan hoy en la iglesia los dones de profecía, lenguas y palabras de conocimiento, o cesaron cuando se cerró la era de los apóstoles? Esta es una de las preguntas más agudas en torno al movimiento que hemos estudiado, y cristianos sinceros que aman la Biblia la han respondido de dos maneras muy distintas. Esta unidad pone ambas respuestas ante usted con justicia, como lo hicimos con el milenio y con el sentido de "lo perfecto" en una unidad anterior — no para entregarle un veredicto, sino para ayudarle a sopesar las Escrituras por usted mismo.</p>
+    <p>Dos preguntas deben mantenerse separadas, o toda la discusión cae en confusión. La primera es si los dones revelatorios continúan en absoluto. La segunda es una pregunta distinta que surge solo si continúan: cómo se relaciona cualquier profecía dada hoy con la Biblia — la colección completa y cerrada de la Escritura. Gran parte del temor y el calor en torno a este tema viene de mezclar estas dos preguntas, como si creer que los dones continúan tuviera que significar añadir a la Palabra de Dios. No es así, como veremos. Tomemos las preguntas una a la vez.</p>
+
+    <h2>En qué concuerdan ambos lados</h2>
+    <p>Antes del desacuerdo, vale la pena descansar en el amplio terreno que ambos lados comparten, pues es más amplio de lo que sugieren las disputas. Tanto cesacionistas como continuistas responsables confiesan que el canon de la Escritura está cerrado. Los sesenta y seis libros están completos; nadie escribe un libro sesenta y siete; nada dicho en una reunión hoy se coloca junto a Isaías o Romanos como la Palabra de Dios. La Escritura es la autoridad final y suficiente:</p>
+    <blockquote class="scripture">"Toda la Escritura es dada por inspiración de Dios… a fin de que el hombre de Dios sea perfecto, enteramente preparado para toda buena obra."<span class="ref">2 Timoteo 3:16–17 (RVG)</span></blockquote>
+    <p>Ambos lados también concuerdan en que el Espíritu obra hoy en la iglesia — en la convicción, la conversión, la santificación y las gracias ordinarias de la vida cristiana — y en que cualquier don que Dios dé está destinado a edificar el cuerpo y glorificar a Cristo, nunca a exaltar a un individuo. Así que la discusión no es sobre si el Espíritu obra hoy, ni sobre si la Biblia está terminada. Es una discusión más estrecha sobre una clase de dones. Tener esto presente nos librará de tratar como enemigos a hermanos y hermanas por una pregunta que toda la iglesia ha debatido por mucho tiempo de buena fe.</p>
+
+    <h2>La postura cesacionista</h2>
+    <p>El cesacionista sostiene que los dones de señal revelatorios y milagrosos — profecía, lenguas, sanidades, palabras de conocimiento — tuvieron un propósito particular en la era fundacional de la iglesia, y pasaron una vez cumplido ese propósito. El argumento corre así. La iglesia fue edificada "sobre el fundamento de los apóstoles y profetas"; un fundamento se pone una vez, no repetidamente, y los dones que acompañaron el ministerio de los apóstoles pertenecían a esa obra fundacional.</p>
+    <blockquote class="scripture">"…edificados sobre el fundamento de los apóstoles y profetas, siendo la principal piedra del ángulo Jesucristo mismo."<span class="ref">Efesios 2:20 (RVG)</span></blockquote>
+    <p>Estos dones, argumenta el cesacionista, sirvieron para autenticar a los apóstoles y su mensaje antes de que el Nuevo Testamento se escribiera y reuniera. El escritor a los Hebreos habla de la gran salvación confirmada por los que oyeron al Señor, "testificando Dios juntamente con ellos, con señales y prodigios y diversos milagros, y repartimientos del Espíritu Santo" (Heb 2:3–4). Una vez confirmado ese testimonio y completadas las Escrituras, el andamio pudo retirarse. En esta lectura, "cuando venga lo que es perfecto" (1 Cor 13:10) apunta a la revelación terminada y a la madurez que trae — la postura que vimos antes como Lectura A — y la suficiencia de la Escritura completa significa que la iglesia ya no necesita nuevos dones revelatorios. En su forma más fuerte, la postura es una alta estima de la finalidad de la Escritura: Dios ha hablado plenamente en su Hijo y en la Palabra, y hemos de mirar allí, no a voces nuevas.</p>
+    <p>El cesacionista suele añadir una observación más, tomada de la forma misma de la Escritura: los grandes conjuntos de milagros y profecía no cayeron de manera uniforme a lo largo de las edades, sino que se agruparon en las bisagras de la historia redentora — en torno a Moisés y la entrega de la Ley, en torno a Elías y Eliseo mientras contendían por el pacto, y en torno a Cristo y sus apóstoles cuando el evangelio irrumpió en el mundo — y escasearon en los largos trechos intermedios. En esta lectura, el derramamiento que acompañó el nacimiento de la iglesia pertenece a una de esas bisagras. Además, el oficio apostólico no tuvo sucesores; se cerró con los hombres que habían visto al Señor resucitado y fueron comisionados por Él, y los dones de señal ligados a ese oficio fundacional se cerraron con él. Lo que queda para cada generación posterior es la Escritura completa que aquellos apóstoles y profetas dejaron, la cual basta.</p>
+
+    <h2>La postura continuista</h2>
+    <p>El continuista sostiene que los dones descritos en el Nuevo Testamento permanecen disponibles para la iglesia hasta que el Señor regrese, y responde al cesacionista punto por punto. La Escritura, observa, en ninguna parte declara claramente que los dones revelatorios cesarían antes de la segunda venida. Las instrucciones de Pablo a los corintios se dan sin insinuar fecha de vencimiento:</p>
+    <blockquote class="scripture">"Seguid la caridad; y procurad los dones espirituales, pero sobre todo que profeticéis."<span class="ref">1 Corintios 14:1 (RVG)</span></blockquote>
+    <p>Refuerza el punto con otro texto. Escribiendo a estos mismos corintios, Pablo dice que “nada os falta en ningún don, esperando la manifestación de nuestro Señor Jesucristo” (1 Cor 1:7) — ligando la posesión de los dones en la iglesia a todo el trecho de espera que termina solo en la aparición de Cristo, no al cierre del primer siglo. Y plantea un reto: que el cesacionista presente el versículo que anuncie claramente la retirada de los dones, pues el continuista busca y no lo halla. Donde la Escritura no ha hablado, argumenta, no somos libres de prohibir lo que ella en otro lugar manda. En esta explicación los dones no son un andamio temporal retirado una vez levantado el edificio, sino parte del mobiliario ordinario de la iglesia, dados y retenidos como el Espíritu quiere, hasta que el Señor regrese.</p>
+    <p>Y con claridad, "no impidáis el hablar lenguas" (14:39). El continuista lee "cuando venga lo que es perfecto" como el regreso de Cristo — la Lectura B de la unidad anterior — pues el ver "cara a cara" y el conocer plenamente del versículo siguiente (13:12) pertenecen a la gloria, no al cierre de un libro; y si los dones duran hasta entonces, duran ahora. Señala a Pedro en Pentecostés citando a Joel: "en los postreros días," dice Dios, "derramaré de mi Espíritu… vuestros hijos y vuestras hijas profetizarán" (Hch 2:17–18) — y "los postreros días" nombran todo el lapso entre la primera y la segunda venida de Cristo, incluida nuestra era. Y nota que Pablo funda los dones en la elección continua del Espíritu: "todas estas cosas las hace uno y el mismo Espíritu, repartiendo a cada uno en particular como él quiere" (1 Cor 12:11). En su forma más fuerte, la postura es una lectura llana de mandatos que nunca fueron revocados y una negativa a prohibir lo que el apóstol dijo a la iglesia que no prohibiera.</p>
+
+    <h2>La profecía y el canon cerrado</h2>
+    <p>Aquí llegamos a la pregunta que inquieta a muchos, y merece una respuesta cuidadosa: si la profecía continúa, ¿no amenaza eso a la Biblia? La respuesta, en toda explicación continuista responsable, es no — y la razón es una distinción que hay que captar. La profecía que llegó a ser Escritura, dada por medio de apóstoles y profetas, llevaba la plena autoridad de Dios y está ahora cerrada; no se le añade nada. Cualquier profecía en una congregación hoy es de una clase distinta y menor: no es nueva Escritura, no tiene autoridad canónica, y siempre ha de ser examinada.</p>
+    <p>Las Escrituras mismas guardan su propia finalidad. Judas escribe de "la fe que ha sido una vez dada a los santos" (Judas 3) — una vez, no aumentada en cada generación — y el Apocalipsis cierra con una solemne advertencia contra añadir a las palabras del libro (Ap 22:18–19). Así que el canon está cerrado. Aun el creyente que espera que el don de profecía continúe no espera que rivalice con la Biblia, la corrija ni la extienda; espera, a lo sumo, una palabra falible de aliento o advertencia que debe ella misma sopesarse por la Escritura y bien puede estar equivocada. Sostenga esta distinción con firmeza y el temor se disuelve: afirmar un don que continúa no es reabrir la Palabra de Dios.</p>
+    <p>El Nuevo Testamento mismo muestra profecía de esta clase menor en acción. Un profeta llamado Agabo predijo un hambre venidera (Hch 11:28), y más tarde, tomando el cinto de Pablo y atándose las manos y los pies, advirtió del arresto del apóstol en Jerusalén (Hch 21:10–11). Era profecía genuina, y sin embargo nunca fue reunida en la Escritura; y en el segundo caso los discípulos sacaron de la palabra de Agabo una conclusión que Pablo mismo no aceptó, rogándole que no subiera — de modo que aun el mensaje de un profeta verdadero debía sopesarse, y su aplicación podía ser equivocada por quienes lo oían. Aquí, dentro de las páginas de la Biblia, está una profecía real y útil y aún por examinar: no una rival de la Escritura, sino una sierva bajo ella. Esta, dice el continuista, es exactamente la clase de don que espera que continúe — edificante, falible, y siempre subordinada a la Palabra escrita.</p>
+
+    <h2>Examinadlo todo</h2>
+    <p>Cualquiera que sea la conclusión de un creyente sobre la continuación, la Escritura impone un deber a todos, y es la gran salvaguarda práctica: todo lo que dice ser del Espíritu debe examinarse por la Palabra. Pablo manda ni una aceptación temeraria ni un desdén burlón, sino un sopesar:</p>
+    <blockquote class="scripture">"No menospreciéis las profecías. Examinadlo todo; retened lo bueno."<span class="ref">1 Tesalonicenses 5:20–21 (RVG)</span></blockquote>
+    <p>Da a la iglesia una regla para sus reuniones: "Los profetas hablen dos o tres, y los demás juzguen" (1 Cor 14:29). Juan añade: "no creáis a todo espíritu, sino probad los espíritus si son de Dios" (1 Jn 4:1). La medida en todo caso es la Escritura, que está sobre toda palabra reclamada y no puede ser derribada por ninguna de ellas. Una profecía que contradice la Biblia es falsa, por mucho poder que parezca acompañarla; una profecía que concuerda con la Biblia no nos dice nada que la Biblia no dijera ya con más autoridad. Este examen protege a la iglesia de ambos errores que rodean los dones — la credulidad que se traga toda afirmación, y la frialdad que apaga la obra genuina del Espíritu.</p>
+    <p>Este examen no es novedad del Nuevo Testamento; se remonta a la Ley. A Israel se le dio una medida doble: la palabra de un profeta debía cumplirse (Dt 18:22), y aun una señal o prodigio que sí se cumpliera nunca debía arrastrar al pueblo tras otros dioses (Dt 13:1–3). La verdad y el cumplimiento juntos formaban la prueba, y el segundo guardaba contra que el primero fuese abusado por un prodigio mentiroso. La iglesia hereda la misma doble salvaguarda: ninguna palabra reclamada, por impactante o conmovedora que sea, puede recibirse si aleja del Dios y del evangelio ya dados a conocer en la Escritura.</p>
+
+    <h2>Una palabra sobre las lenguas hoy</h2>
+    <p>La misma disciplina se aplica a las lenguas. Continúe o no el don — la pregunta misma que hemos sopesado — las reglas del Nuevo Testamento no cambian: en la iglesia reunida las lenguas han de interpretarse, ejercerse en orden, y nunca hacerse una insignia que divida a los que "tienen" de los que "no tienen" (1 Cor 14). Y las dos preguntas que separamos en una unidad anterior siguen separadas aquí: si el don es real es un asunto; si el hablar en lenguas se requiere como la prueba del bautismo del Espíritu es otro, y a esa segunda pregunta la respuesta dada a lo largo de este curso es no. Que quienes ejercen cualquier don lo hagan bajo el amor y en sujeción a la Palabra, y que nadie desprecie a un hermano por tener, o por carecer de, un don en particular.</p>
+
+    <h2>Sosteniendo la pregunta con humildad</h2>
+    <p>Sobre la pregunta central — ¿continúan los dones revelatorios? — este curso no da veredicto, porque cristianos fieles que honran la misma Biblia han estado por mucho tiempo en ambos lados, y cada uno puede señalar la Escritura para su caso. Lo que el curso sí insiste es el terreno que no está en negociación: el canon está cerrado, la Escritura es suficiente y final, todo debe examinarse por ella, y Cristo es el centro. El Señor Jesús dijo que el Espíritu vino a glorificarlo a Él (Juan 16:14), y eso sigue siendo el fin de todo don verdadero y la prueba de toda afirmación. Así que sopese las Escrituras, llegue a su convicción, y sosténgala con humildad — recibiendo como hermanos a quienes han sopesado los mismos textos y se han situado en otro lugar.</p>
+
+    <h3>Mirando adelante</h3>
+    <p>En la próxima unidad pasamos a un tema doloroso que debe enfrentarse con honestidad: el evangelio de la prosperidad y otros excesos que han crecido junto al movimiento. Preguntaremos qué dice la Escritura sobre la riqueza, la fe y el sufrimiento, y cómo rechazar una distorsión sin condenar a los muchos creyentes fieles a quienes ha herido.</p>
+
+  </div>
+  <!--WC:ES:END-->
+
+  <!-- DISCUSSION -->
+  <div class="pane en">
+    <h2>Discussion Questions</h2>
+    <ul class="q-list">
+      <li>Why does keeping the "do the gifts continue?" question separate from the "how does prophecy relate to the canon?" question calm much of the fear around this subject?</li>
+      <li>Read 1 Corinthians 14:1 and 14:39 alongside Ephesians 2:20. How does each position account for both texts?</li>
+      <li>What does it look like, in a real church meeting, to "test all things" without either despising prophecy or swallowing every claim?</li>
+      <li>How would you explain to a worried believer that affirming a continuing gift does not add to or threaten the Bible?</li>
+    </ul>
+    <h3>Ministry Application</h3>
+    <p>Think of a setting where someone claimed a word from God. Write two sentences describing how you would weigh that claim by Scripture, and one sentence you could say to honor the person while keeping the Bible as the final authority.</p>
+  </div>
+  <div class="pane es">
+    <h2>Preguntas para discusión</h2>
+    <ul class="q-list">
+      <li>¿Por qué mantener separada la pregunta "¿continúan los dones?" de la pregunta "¿cómo se relaciona la profecía con el canon?" calma gran parte del temor en torno a este tema?</li>
+      <li>Lea 1 Corintios 14:1 y 14:39 junto con Efesios 2:20. ¿Cómo explica cada postura ambos textos?</li>
+      <li>¿Cómo se ve, en una reunión real de la iglesia, "examinarlo todo" sin despreciar la profecía ni tragarse toda afirmación?</li>
+      <li>¿Cómo explicaría a un creyente preocupado que afirmar un don que continúa no añade a la Biblia ni la amenaza?</li>
+    </ul>
+    <h3>Aplicación ministerial</h3>
+    <p>Piense en una situación donde alguien afirmó una palabra de Dios. Escriba dos frases que describan cómo sopesaría esa afirmación por la Escritura, y una frase que pudiera decir para honrar a la persona manteniendo la Biblia como la autoridad final.</p>
+  </div>
+
+  <!-- ASSESSMENT -->
+  <section class="assess">
+    <div class="pane en"><h2>Self-Check &mdash; Multiple Choice</h2><p style="font-size:.97rem;color:var(--ink-soft);">Choose the best answer, then press <em>Check</em>. Feedback and a short explanation appear for each question.</p></div>
+    <div class="pane es"><h2>Autoevaluación &mdash; Opción múltiple</h2><p style="font-size:.97rem;color:var(--ink-soft);">Elija la mejor respuesta y presione <em>Comprobar</em>. Para cada pregunta aparecen la respuesta y una breve explicación.</p></div>
+
+    <div id="mcq"></div>
+
+    <div class="scorebar">
+      <span><span class="seg en">Score:</span><span class="seg es">Puntuación:</span> <strong id="score">0 / 7</strong></span>
+      <button class="btn ghost" onclick="resetMcq()"><span class="seg en">Reset answers</span><span class="seg es">Reiniciar respuestas</span></button>
+    </div>
+  </section>
+
+  <div id="cert-only-note" class="track-note">
+    <span class="seg en">You are on the <strong>Certificate</strong> track. The written short-answer section is required only for the Master's track — switch tracks at the top if you are completing written work.</span>
+    <span class="seg es">Usted está en el programa de <strong>Certificado</strong>. La sección escrita de respuesta corta se requiere sólo para el programa de Maestría; cambie de programa arriba si va a realizar el trabajo escrito.</span>
+  </div>
+
+  <div id="masters-block">
+    <section class="assess">
+      <div class="pane en"><h2>Written Work &mdash; Master's Track</h2><p style="font-size:.97rem;color:var(--ink-soft);">Answer in a few sentences of your own. Your response is checked for key concepts (any three of eight is a pass), then the model answer is revealed for comparison.</p></div>
+      <div class="pane es"><h2>Trabajo escrito &mdash; Programa de Maestría</h2><p style="font-size:.97rem;color:var(--ink-soft);">Responda con sus propias palabras en unas frases. Su respuesta se evalúa por conceptos clave (tres de ocho es aprobado); luego se revela la respuesta modelo para comparar.</p></div>
+      <div id="sa"></div>
+    </section>
+  </div>
+
+  <nav style="margin:1.7rem 0 .3rem;padding-top:1rem;border-top:1px solid #d9d2c2;">
+  <div class="pane en"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><a href="CTSPentecostalUnit9.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">&lsaquo; Previous</a><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Course Home</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Reading Room</a><a href="CTSPentecostalUnit11.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Next &rsaquo;</a></div></div>
+  <div class="pane es"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><a href="CTSPentecostalUnit9.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">&lsaquo; Anterior</a><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Inicio del curso</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Sala de Lecturas</a><a href="CTSPentecostalUnit11.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Siguiente &rsaquo;</a></div></div>
+</nav>
+
+<footer>
+    <div class="pane en">Chapala Theological Seminary &middot; Unit 10 of the course <em>Pentecostalism &amp; the Charismatic Movement</em>. Scripture in English from the New King James Version; Spanish from the Reina-Valera Gómez. This unit is designed for offline use — no internet connection is required.</div>
+    <div class="pane es">Seminario Teológico de Chapala &middot; Unidad 10 del curso <em>El pentecostalismo y el movimiento carismático</em>. Escrituras en inglés de la New King James Version; en español de la Reina-Valera Gómez. Esta unidad está diseñada para uso sin conexión: no se requiere internet.</div>
+  </footer>
+
+</div>
+
+<script>
+/* ---------- hardened storage (Android content:// fallback) ---------- */
+var _ctsMem = {};
+function lsGet(k){ try{ var v = window.localStorage.getItem(k); return v===null ? (k in _ctsMem ? _ctsMem[k] : null) : v; }catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try{ window.localStorage.setItem(k,v); }catch(e){ _ctsMem[k]=String(v); } _ctsMem[k]=String(v); }
+function lsDel(k){ try{ window.localStorage.removeItem(k); }catch(e){} delete _ctsMem[k]; }
+var SKEY = 'cts_u10_revelation';
+var saPassed = {};
+
+/* ---------- language + track ---------- */
+function setLang(l){
+  document.documentElement.classList.toggle('lang-es', l==='es');
+  document.documentElement.classList.toggle('lang-en', l==='en');
+  document.documentElement.setAttribute('lang', l);
+  document.getElementById('btn-en').setAttribute('aria-pressed', l==='en');
+  document.getElementById('btn-es').setAttribute('aria-pressed', l==='es');
+  lsSet(SKEY+'_lang', l);
+  renderMcqText(); renderSaText(); refreshScore();
+}
+function setTrack(t){
+  document.documentElement.classList.toggle('track-masters', t==='masters');
+  document.documentElement.classList.toggle('track-cert', t==='cert');
+  document.getElementById('btn-cert').setAttribute('aria-pressed', t==='cert');
+  document.getElementById('btn-mast').setAttribute('aria-pressed', t==='masters');
+  lsSet(SKEY+'_track', t);
+}
+
+/* ---------- MCQ data (correct positions varied: A,B,D,A,C,B,D) ---------- */
+var MCQ = [
+ { correct:1,
+   q:{en:"This unit keeps two questions distinct: whether the revelatory gifts continue today, and —",
+      es:"Esta unidad mantiene dos preguntas distintas: si los dones revelatorios continúan hoy, y —"},
+   opts:[
+     {en:"whether the Holy Spirit exists", es:"si el Espíritu Santo existe"},
+     {en:"how any continuing prophecy relates to the closed canon of Scripture", es:"cómo se relaciona cualquier profecía que continúe con el canon cerrado de la Escritura"},
+     {en:"whether Paul wrote 1 Corinthians", es:"si Pablo escribió 1 Corintios"},
+     {en:"whether tongues are known human languages", es:"si las lenguas son idiomas humanos conocidos"} ],
+   exp:{en:"The two questions — do the gifts continue, and how does any continuing prophecy relate to the closed canon — must be kept apart to avoid confusion.",
+        es:"Las dos preguntas — si los dones continúan, y cómo se relaciona cualquier profecía que continúe con el canon cerrado — deben mantenerse separadas para evitar confusión."} },
+ { correct:0,
+   q:{en:"Both cessationists and responsible continuationists agree that —",
+      es:"Tanto cesacionistas como continuistas responsables concuerdan en que —"},
+   opts:[
+     {en:"the canon of Scripture is closed and no one adds to the Bible", es:"el canon de la Escritura está cerrado y nadie añade a la Biblia"},
+     {en:"the sign-gifts are required for salvation", es:"los dones de señal se requieren para la salvación"},
+     {en:"prophecy today equals Scripture", es:"la profecía de hoy equivale a la Escritura"},
+     {en:"tongues must accompany conversion", es:"las lenguas deben acompañar la conversión"} ],
+   exp:{en:"Both sides confess a closed canon and the final, sufficient authority of Scripture; the debate is narrower.",
+        es:"Ambos lados confiesan un canon cerrado y la autoridad final y suficiente de la Escritura; el debate es más estrecho."} },
+ { correct:1,
+   q:{en:"The cessationist position holds that the revelatory gifts —",
+      es:"La postura cesacionista sostiene que los dones revelatorios —"},
+   opts:[
+     {en:"will continue until the end of the world no matter what", es:"continuarán hasta el fin del mundo pase lo que pase"},
+     {en:"served to found and authenticate the church and its Scriptures, and ceased once that foundation was complete", es:"sirvieron para fundar y autenticar la iglesia y sus Escrituras, y cesaron una vez completada esa fundación"},
+     {en:"were never real", es:"nunca fueron reales"},
+     {en:"are the same as the fruit of the Spirit", es:"son lo mismo que el fruto del Espíritu"} ],
+   exp:{en:"Cessationists tie the gifts to the founding era (Eph 2:20; Heb 2:3–4) and to the sufficiency of the completed Scripture.",
+        es:"Los cesacionistas ligan los dones a la era fundacional (Ef 2:20; Heb 2:3–4) y a la suficiencia de la Escritura completa."} },
+ { correct:2,
+   q:{en:"A central continuationist argument is that —",
+      es:"Un argumento continuista central es que —"},
+   opts:[
+     {en:"Scripture explicitly dates the end of the gifts to the first century", es:"la Escritura fecha explícitamente el fin de los dones en el primer siglo"},
+     {en:"the gifts are unimportant", es:"los dones no son importantes"},
+     {en:"Scripture nowhere says the gifts cease before Christ's return, and Paul says do not forbid and earnestly desire them", es:"la Escritura en ninguna parte dice que los dones cesan antes del regreso de Cristo, y Pablo dice no prohibir y desear con anhelo los dones"},
+     {en:"prophecy today outranks Scripture", es:"la profecía de hoy supera a la Escritura"} ],
+   exp:{en:"Continuationists note the commands were never revoked (1 Cor 14:1, 39) and read the perfect as Christ's return.",
+        es:"Los continuistas notan que los mandatos nunca fueron revocados (1 Cor 14:1, 39) y leen lo perfecto como el regreso de Cristo."} },
+ { correct:3,
+   q:{en:"On the continuationist view, prophecy given in a congregation today —",
+      es:"En la postura continuista, la profecía dada en una congregación hoy —"},
+   opts:[
+     {en:"is added to the Bible as new Scripture", es:"se añade a la Biblia como nueva Escritura"},
+     {en:"carries the same authority as the apostles' writings", es:"lleva la misma autoridad que los escritos de los apóstoles"},
+     {en:"replaces the need for Scripture", es:"reemplaza la necesidad de la Escritura"},
+     {en:"is not new Scripture, carries no canonical authority, and must be tested", es:"no es nueva Escritura, no tiene autoridad canónica, y debe ser examinada"} ],
+   exp:{en:"Even where the gift is affirmed, congregational prophecy is fallible, non-canonical, and subordinate to Scripture.",
+        es:"Aun donde se afirma el don, la profecía congregacional es falible, no canónica, y subordinada a la Escritura."} },
+ { correct:0,
+   q:{en:"Scripture's command for any claimed prophecy is —",
+      es:"El mandato de la Escritura para toda profecía reclamada es —"},
+   opts:[
+     {en:"test all things and hold fast what is good — weigh it, and keep only what is good (1 Thess 5:21)", es:"examinarlo todo y retener lo bueno — sopesarla, y retener solo lo bueno (1 Ts 5:21)"},
+     {en:"accept every prophecy without question", es:"aceptar toda profecía sin cuestionar"},
+     {en:"forbid all prophecy outright", es:"prohibir toda profecía por completo"},
+     {en:"ignore it entirely", es:"ignorarla por completo"} ],
+   exp:{en:"1 Thessalonians 5:20–21 forbids both scorn and credulity: do not despise prophecies, but test all things.",
+        es:"1 Tesalonicenses 5:20–21 prohíbe tanto el desdén como la credulidad: no menospreciéis las profecías, pero examinadlo todo."} },
+ { correct:2,
+   q:{en:"On whether the gifts continue, this unit —",
+      es:"Sobre si los dones continúan, esta unidad —"},
+   opts:[
+     {en:"declares cessationism the only faithful view", es:"declara el cesacionismo la única postura fiel"},
+     {en:"declares continuationism the only faithful view", es:"declara el continuismo la única postura fiel"},
+     {en:"presents both positions at their strongest and leaves the question open, while insisting the canon stays closed and all things be tested", es:"presenta ambas posturas en su forma más fuerte y deja la pregunta abierta, insistiendo en que el canon siga cerrado y todo sea examinado"},
+     {en:"says Scripture gives no guidance at all", es:"dice que la Escritura no da ninguna guía"} ],
+   exp:{en:"As with the millennium, both faithful positions are set out fairly and no verdict is imposed — but the canon stays closed and all is tested.",
+        es:"Como con el milenio, ambas posturas fieles se exponen con justicia y no se impone veredicto — pero el canon sigue cerrado y todo se examina."} }
+];
+
+var answered = {};
+
+function buildMcq(){
+  var host = document.getElementById('mcq'); host.innerHTML='';
+  MCQ.forEach(function(item, qi){
+    var card = document.createElement('div'); card.className='qcard'; card.id='q'+qi;
+    var num = document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Question '+(qi+1)+'</span><span class="seg es">Pregunta '+(qi+1)+'</span>';
+    var stem = document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    card.appendChild(num); card.appendChild(stem);
+    item.opts.forEach(function(o, oi){
+      var lab = document.createElement('label'); lab.className='opt'; lab.setAttribute('data-oi',oi);
+      var inp = document.createElement('input'); inp.type='radio'; inp.name='q'+qi; inp.value=oi;
+      inp.onchange=function(){ answered[qi]=oi; };
+      var txt = document.createElement('span'); txt.setAttribute('data-role','opttext');
+      lab.appendChild(inp); lab.appendChild(txt); card.appendChild(lab);
+    });
+    var btn = document.createElement('button'); btn.className='btn'; btn.setAttribute('data-role','checkbtn');
+    btn.onclick=function(){ checkOne(qi); };
+    var fb = document.createElement('div'); fb.className='fb'; fb.id='fb'+qi;
+    card.appendChild(btn); card.appendChild(fb);
+    host.appendChild(card);
+  });
+  renderMcqText();
+}
+function renderMcqText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  MCQ.forEach(function(item, qi){
+    var card = document.getElementById('q'+qi);
+    card.querySelector('[data-role="stem"]').textContent = item.q[l];
+    card.querySelectorAll('.opt').forEach(function(lab){
+      var oi = +lab.getAttribute('data-oi');
+      lab.querySelector('[data-role="opttext"]').textContent = item.opts[oi][l];
+    });
+    card.querySelector('[data-role="checkbtn"]').textContent = (l==='es'?'Comprobar':'Check');
+    if(card.getAttribute('data-checked')==='1'){ paintFeedback(qi, l); }
+  });
+}
+function checkOne(qi){
+  if(!(qi in answered)){
+    var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+    var fb = document.getElementById('fb'+qi); fb.className='fb no show';
+    fb.textContent = (l==='es'?'Elija una respuesta primero.':'Please choose an answer first.');
+    return;
+  }
+  document.getElementById('q'+qi).setAttribute('data-checked','1');
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  paintFeedback(qi, l); refreshScore(); saveState();
+}
+function paintFeedback(qi, l){
+  var item = MCQ[qi]; var card = document.getElementById('q'+qi); var chosen = answered[qi];
+  card.querySelectorAll('.opt').forEach(function(lab){
+    var oi = +lab.getAttribute('data-oi'); lab.classList.remove('correct','wrong');
+    if(oi===item.correct) lab.classList.add('correct');
+    else if(oi===chosen) lab.classList.add('wrong');
+    var r = lab.querySelector('input'); if(r) r.checked = (oi===chosen);
+  });
+  var fb = document.getElementById('fb'+qi); var ok = (chosen===item.correct);
+  fb.className = 'fb show ' + (ok?'ok':'no');
+  var head = ok ? (l==='es'?'Correcto. ':'Correct. ') : (l==='es'?'No exactamente. ':'Not quite. ');
+  fb.textContent = head + item.exp[l];
+}
+function refreshScore(){
+  var n=0; MCQ.forEach(function(item,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct) n++; });
+  document.getElementById('score').textContent = n + ' / ' + MCQ.length;
+  updatePentProgress();
+}
+function updatePentProgress(){
+  var mcAll = MCQ.every(function(item,qi){ return document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct; });
+  var track = lsGet(SKEY+'_track') || 'cert';
+  var saOk = true;
+  if(track === 'masters'){
+    saOk = SA.every(function(item, si){ return saPassed[si] === true; });
+  }
+  if(mcAll && saOk){
+    try{var _pp=JSON.parse(lsGet('cts_pentecostal_progress')||'{}');_pp['unit'+10]=true;lsSet('cts_pentecostal_progress',JSON.stringify(_pp));}catch(e){}
+  }
+}
+function resetMcq(){
+  answered = {};
+  MCQ.forEach(function(item,qi){
+    var card=document.getElementById('q'+qi); card.setAttribute('data-checked','0');
+    card.querySelectorAll('.opt').forEach(function(l){ l.classList.remove('correct','wrong'); var r=l.querySelector('input'); if(r) r.checked=false; });
+    var fb=document.getElementById('fb'+qi); fb.className='fb';
+  });
+  refreshScore(); lsDel(SKEY+'_mcq');
+}
+
+/* ---------- short answer (Q24 fairness: 8 single-concept keywords, 3 = pass, word-boundary matcher) ---------- */
+function normalize(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+}
+function kwHit(answer, kw){
+  var toks = normalize(answer).split(' ');
+  var k = normalize(kw);
+  for(var i=0;i<toks.length;i++){ if(toks[i]===k || toks[i].indexOf(k)===0) return true; }
+  return false;
+}
+function countHits(answer, kws){ var n=0; kws.forEach(function(k){ if(kwHit(answer,k)) n++; }); return n; }
+
+var SA = [
+ { kw:{ en:["continue","cease","prophecy","canon","closed","relate","distinct","scripture"],
+        es:["continuan","cesado","profecia","canon","cerrado","relaciona","distintas","escritura"] },
+   q:{en:"State the two distinct questions this unit keeps apart, and why keeping them apart matters.",
+      es:"Exponga las dos preguntas distintas que esta unidad mantiene separadas, y por qué importa mantenerlas separadas."},
+   model:{en:"The first question is whether the revelatory gifts — prophecy, tongues, words of knowledge — continue today or have ceased. The second is how any prophecy that continues relates to the closed canon of Scripture. Keeping them distinct matters because a person can believe the gifts continue while still holding that the canon is closed and Scripture is final; confusing the two makes people fear that continuing prophecy would add to the Bible, which no responsible view claims.",
+          es:"La primera pregunta es si los dones revelatorios — profecía, lenguas, palabras de conocimiento — continúan hoy o han cesado. La segunda es cómo se relaciona cualquier profecía que continúe con el canon cerrado de la Escritura. Mantenerlas distintas importa porque una persona puede creer que los dones continúan y a la vez sostener que el canon está cerrado y la Escritura es final; confundir las dos hace temer que la profecía continua añadiría a la Biblia, lo cual ninguna postura responsable afirma."} },
+ { kw:{ en:["cessationist","foundation","authenticate","continuationist","forbid","return","desire","ceased"],
+        es:["cesacionista","fundacion","autenticar","continuista","prohibir","regreso","desear","cesaron"] },
+   q:{en:"Summarize the cessationist and continuationist positions on whether the revelatory gifts continue, giving the main support for each.",
+      es:"Resuma las posturas cesacionista y continuista sobre si los dones revelatorios continúan, dando el apoyo principal de cada una."},
+   model:{en:"The cessationist position holds that the revelatory gifts served to found and authenticate the church and its Scriptures, so they ceased once that foundation was complete; it appeals to the foundational role of apostles and prophets and to the sufficiency of Scripture. The continuationist position holds that Scripture nowhere says the gifts cease before Christ's return, and that Paul commands the church not to forbid tongues and to desire prophecy; it appeals to those commands and to the Spirit still giving gifts as He wills.",
+          es:"La postura cesacionista sostiene que los dones revelatorios sirvieron para fundar y autenticar la iglesia y sus Escrituras, de modo que cesaron una vez completada esa fundación; apela al papel fundacional de apóstoles y profetas y a la suficiencia de la Escritura. La postura continuista sostiene que la Escritura en ninguna parte dice que los dones cesan antes del regreso de Cristo, y que Pablo manda a la iglesia no prohibir las lenguas y desear la profecía; apela a esos mandatos y a que el Espíritu sigue dando dones como Él quiere."} },
+ { kw:{ en:["canon","closed","scripture","authority","tested","fallible","subordinate","add"],
+        es:["canon","cerrado","escritura","autoridad","examinada","falible","subordinada","anade"] },
+   q:{en:"Explain how a continuing gift of prophecy can be affirmed without threatening the closed canon of Scripture.",
+      es:"Explique cómo se puede afirmar un don de profecía que continúa sin amenazar el canon cerrado de la Escritura."},
+   model:{en:"Even where prophecy is affirmed as continuing, it is not new Scripture and carries no canonical authority; the canon is closed and nothing is added to the Bible. Congregational prophecy is treated as fallible and subordinate to Scripture, to be tested and weighed by it, and held only where it proves good. In this way the gift can be affirmed while Scripture remains the final and sufficient authority.",
+          es:"Aun donde se afirma que la profecía continúa, no es nueva Escritura y no tiene autoridad canónica; el canon está cerrado y nada se añade a la Biblia. La profecía congregacional se trata como falible y subordinada a la Escritura, para ser examinada y sopesada por ella, y retenida solo donde resulte buena. De este modo el don puede afirmarse mientras la Escritura sigue siendo la autoridad final y suficiente."} }
+];
+
+function buildSa(){
+  var host=document.getElementById('sa'); host.innerHTML='';
+  SA.forEach(function(item, si){
+    var card=document.createElement('div'); card.className='qcard'; card.id='sa'+si;
+    var num=document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Written '+(si+1)+'</span><span class="seg es">Escrita '+(si+1)+'</span>';
+    var stem=document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    var ta=document.createElement('textarea'); ta.id='ta'+si; ta.setAttribute('aria-label','answer');
+    var btnrow=document.createElement('div'); btnrow.style.marginTop='10px'; btnrow.style.display='flex'; btnrow.style.gap='10px'; btnrow.style.flexWrap='wrap';
+    var chk=document.createElement('button'); chk.className='btn'; chk.setAttribute('data-role','chk'); chk.onclick=function(){ checkSa(si); };
+    var rev=document.createElement('button'); rev.className='btn ghost'; rev.setAttribute('data-role','rev'); rev.onclick=function(){ revealModel(si); };
+    btnrow.appendChild(chk); btnrow.appendChild(rev);
+    var hit=document.createElement('div'); hit.className='hitline'; hit.id='hit'+si;
+    var mod=document.createElement('div'); mod.className='model'; mod.id='mod'+si;
+    mod.innerHTML='<div class="mh" data-role="mh"></div><div data-role="mtext"></div>';
+    card.appendChild(num); card.appendChild(stem); card.appendChild(ta); card.appendChild(btnrow); card.appendChild(hit); card.appendChild(mod);
+    host.appendChild(card);
+  });
+  renderSaText();
+}
+function renderSaText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  SA.forEach(function(item, si){
+    var card=document.getElementById('sa'+si);
+    card.querySelector('[data-role="stem"]').textContent=item.q[l];
+    card.querySelector('[data-role="chk"]').textContent=(l==='es'?'Comprobar mi respuesta':'Check my answer');
+    card.querySelector('[data-role="rev"]').textContent=(l==='es'?'Ver respuesta modelo':'Reveal model answer');
+    card.querySelector('[data-role="mh"]').textContent=(l==='es'?'Respuesta modelo':'Model answer');
+    card.querySelector('[data-role="mtext"]').textContent=item.model[l];
+    if(card.getAttribute('data-checked')==='1') paintHits(si, l);
+  });
+}
+function checkSa(si){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  var ans = document.getElementById('ta'+si).value.trim();
+  if(ans.length < 100){
+    var hit=document.getElementById('hit'+si); hit.className='hitline show';
+    hit.innerHTML = (l==='es' ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.');
+    return;
+  }
+  document.getElementById('sa'+si).setAttribute('data-checked','1');
+  paintHits(si, l);
+  revealModel(si);
+  saPassed[si] = countHits(ans, SA[si].kw[l]) >= 3;
+  updatePentProgress();
+}
+function paintHits(si, l){
+  var item=SA[si]; var ans=document.getElementById('ta'+si).value;
+  var n=countHits(ans, item.kw[l]); var pass = n>=3;
+  var hit=document.getElementById('hit'+si); hit.className='hitline show';
+  if(l==='es'){
+    hit.innerHTML = 'Conceptos clave encontrados: <b>'+n+' de 8</b> &mdash; '+(pass?'aprobado (mínimo 3). Compare con la respuesta modelo abajo.':'aún no (se necesitan 3). Revise su respuesta y la modelo abajo.');
+  } else {
+    hit.innerHTML = 'Key concepts found: <b>'+n+' of 8</b> &mdash; '+(pass?'pass (minimum 3). Compare with the model answer below.':'not yet (3 needed). Review your answer and the model below.');
+  }
+}
+function revealModel(si){ document.getElementById('mod'+si).classList.add('show'); }
+
+/* ---------- persistence ---------- */
+function saveState(){
+  try{
+    var mcqState={}; MCQ.forEach(function(it,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1'){ mcqState[qi]=answered[qi]; } });
+    lsSet(SKEY+'_mcq', JSON.stringify(mcqState));
+  }catch(e){}
+}
+function restoreState(){
+  var l = lsGet(SKEY+'_lang'); if(l) setLang(l);
+  var t = lsGet(SKEY+'_track');
+  if(!t){
+    // No local choice yet on this page -- default from the site-wide track
+    // (set at the seminary's main registration) so a Masters-track student
+    // is graded at the correct rigor here without re-selecting it locally.
+    try{
+      var shared = JSON.parse(lsGet('cts_student') || 'null');
+      var sharedTrack = String(lsGet('cts_track') || (shared && (shared.track||shared.program)) || '').toLowerCase();
+      if(sharedTrack === 'mdiv' || sharedTrack === 'thm' || sharedTrack === 'mth' ||
+         /master of divinity|m\.div|master of theology|m\.th|th\.m/.test(sharedTrack)) t = 'masters';
+    }catch(e){}
+  }
+  setTrack(t||'cert');
+  try{
+    var raw = lsGet(SKEY+'_mcq');
+    if(raw){ var st=JSON.parse(raw); var lg=document.documentElement.classList.contains('lang-es')?'es':'en';
+      Object.keys(st).forEach(function(qi){ answered[qi]=st[qi]; document.getElementById('q'+qi).setAttribute('data-checked','1'); paintFeedback(+qi, lg); });
+      refreshScore();
+    }
+  }catch(e){}
+}
+
+/* ---------- init ---------- */
+buildMcq(); buildSa();
+restoreState();
+</script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPentecostalReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+</body>
+</html>

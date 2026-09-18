@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS The Gospel of John &mdash; Unit 3: Living Water</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form label { font-weight:bold; font-size:0.9rem; display:block; margin-top:8px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 4 &rarr;</span><span class="lang-es">Unidad 4 &rarr;</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">&#128214; The Gospel of John &mdash; Unit 3: Living Water</span><span class="lang-es">&#128214; El Evangelio de Juan &mdash; Unidad 3: Agua Viva</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"Whoever drinks of the water that I shall give him will never thirst. But the water that I shall give him will become in him a fountain of water springing up into everlasting life." &mdash; John 4:14 (NKJV)</span><span class="lang-es">&#9889; "Mas el que bebiere del agua que yo le dar&eacute;, no tendr&aacute; sed jam&aacute;s; sino que el agua que yo le dar&eacute; ser&aacute; en &eacute;l una fuente de agua que salte para vida eterna." &mdash; Juan 4:14 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard" style="display:none;">
+    <h3><span class="lang-en">Register to Begin</span><span class="lang-es">Reg&iacute;strese para comenzar</span></h3>
+    <p style="font-size:0.9rem;"><span class="lang-en">Your name and track are saved on this device and carry across every unit and every CTS course.</span><span class="lang-es">Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS.</span></p>
+    <label class="lang-en">Full name</label><label class="lang-es">Nombre completo</label>
+    <input type="text" id="regName" placeholder="..." aria-label="...">
+    <label class="lang-en">Email</label><label class="lang-es">Correo electr&oacute;nico</label>
+    <input type="email" id="regEmail" placeholder="..." aria-label="...">
+    <label class="lang-en">Track</label><label class="lang-es">Trayecto</label>
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate / Certificado</option>
+        <option value="mdiv">M.Div.</option>
+        <option value="thm">Th.M.</option>
+    </select>
+    <button id="regBtn" class="nav-btn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top:8px;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h3>Introduction &mdash; A Divine Partnership</h3>
+<p>Imagine a garden full of vibrant flowers, lush plants, and towering trees. God creates the life in the plants; He sends the sunshine and the rain. But the gardener must still nurture and trim and fertilize and weed, or the true beauty is never unveiled. Our lives are like that garden. Jesus offered the Samaritan woman living water &mdash; He offered her Himself &mdash; but the real beauty of her story was unveiled when she ran and shared the Christ she had only just met. Again and again Scripture shows this lovely symmetry: God provides salvation and the power of His Spirit, and then God works through us to finish His purpose. "It is God who works in you both to will and to do for His good pleasure" (Philippians 2:13). That is the Divine Partnership, and this chapter is its picture.</p>
+
+<h3>I. The Woman at the Well</h3>
+<p>Jesus, wearied from His journey, sat down by Jacob's well about the sixth hour while His disciples went into the town to buy food. A woman of Samaria came to draw water. Everything about that meeting was a wall a respectable rabbi would not climb. She was a Samaritan, a half-Jew &mdash; and the Jews and the Samaritans despised one another. She was a woman, and the teachers did not speak with women in public. And she was, by the town's reckoning, a great sinner; she would prove to have had five husbands, and the man she lived with then was not her husband. She was, as we would say, a hopeless case. Yet Jesus opened the conversation Himself: "Give Me a drink." The Maker of the spring asked a sinner for a cup of water, so that He might give her a fountain.</p>
+
+<h3>II. The Living Water</h3>
+<p><em>"If you knew the gift of God, and who it is who says to you, 'Give Me a drink,' you would have asked Him, and He would have given you living water"</em> (John 4:10). She heard only the well at her feet &mdash; You have nothing to draw with, and the well is deep. But Jesus was speaking of another water altogether. <em>"Whoever drinks of this water will thirst again, but whoever drinks of the water that I shall give him will never thirst. The water that I shall give him will become in him a fountain of water springing up into everlasting life"</em> (John 4:13&ndash;14). The world's water always runs out; you drink, and within hours you are thirsty again. The water Christ gives does not sit in a cistern to be rationed &mdash; it springs up, it overflows, it becomes a fountain inside the one who drinks.</p>
+<p>Some years ago I traveled in the Canadian province of Ontario and made sure to drive and see Niagara Falls, on the border of Canada and the United States &mdash; the grandest waterfall in all of North America, where millions of gallons pour over the edge every single minute and never, ever stop. That is a faint picture of the fullness Jesus offered that woman. He offered her Himself. Salvation, and a purpose for living, are found in Him alone, and they never run dry.</p>
+<div class="pull-quote">The world's water always runs out. The water Christ gives springs up &mdash; it overflows, it becomes a fountain inside the one who drinks.</div>
+<p>Every one of us was made with a thirst that no well of this world can fill. We carry our buckets to the cisterns of money, of pleasure, of approval, of one more relationship, and we drink, and for an hour we are satisfied &mdash; and then the old dryness creeps back, because those wells were never deep enough for a soul. The woman at Jacob's well had been to that kind of cistern five times over, and the man she lived with then was a sixth bucket let down into an empty well. Jesus did not scold her thirst; He offered to end it. And He offers the same to us. The ache you cannot quite name, the restlessness that no achievement finally quiets, is the soul's cry for the only water that satisfies. His invitation has not changed in two thousand years: drink of Me, and you will never thirst again.</p>
+
+<h3>III. In Spirit and in Truth</h3>
+<p>Then He touched the wound. "Go, call your husband, and come here." "I have no husband." "You have well said... for you have had five husbands, and the one whom you now have is not your husband." He did not shame her; He simply showed her that He already knew everything, and still was offering her the fountain. Seeing a prophet before her, she raised the old quarrel of worship: our fathers worshiped on this mountain, but you Jews say Jerusalem is the place. Jesus lifted the whole question to higher ground: <em>"God is Spirit, and those who worship Him must worship in spirit and truth"</em> (John 4:24). True worship is not finally a matter of the right mountain or the right building, but of the heart and the Spirit and the truth of God. And then, to this woman &mdash; a Samaritan, an outsider, a sinner &mdash; He said what He had said plainly to no one else: "I who speak to you am He." The first soul to hear Jesus openly name Himself the Messiah was a woman at a well at noon.</p>
+
+<h3>IV. The First Evangelist: Come and See</h3>
+<p>What she did next preaches its own sermon. <em>"The woman then left her waterpot, went her way into the city, and said to the men, 'Come, see a Man who told me all things that I ever did. Could this be the Christ?'"</em> (John 4:28&ndash;29). She left the very waterpot she had come for &mdash; the old thirst forgotten in the new fountain &mdash; and ran to the same townspeople who knew her reputation. She could not have walked anyone through a set of spiritual laws. But she could say two words: come, see. And they came. <em>"Many of the Samaritans of that city believed in Him because of the word of the woman"</em> (John 4:39), and then many more believed because they heard Him for themselves, and said, "Now we believe... and we know that this is indeed the Christ, the Savior of the world" (John 4:42).</p>
+<p>Mark the contrast John quietly draws. The disciples had gone into that same town &mdash; trained men, three years under the Lord Himself, the most qualified evangelists on earth &mdash; and they came back with bread and no converts; there is no sign they spoke to a soul. The first evangelist in Samaria was one grateful, excited sinner. The living water must have been sparkling water, for it came bubbling up out of her life.</p>
+
+<h3>V. The Fields Are White</h3>
+<p>When the disciples urged Him to eat, Jesus said, "My food is to do the will of Him who sent Me, and to finish His work" (John 4:34). Then He pointed to the Samaritans even then streaming out of the town toward Him: <em>"Lift up your eyes and look at the fields, for they are already white for harvest"</em> (John 4:35). One sows, another reaps, and "he who reaps receives wages... that both he who sows and he who reaps may rejoice together" (John 4:36). There is the Divine Partnership again: Jesus had sown in one woman by a well, and already a whole village was ripening. God gives the increase, but He is pleased to let us carry the seed and swing the sickle, and to share the joy of the harvest.</p>
+
+<h3>VI. Every Believer on the Team</h3>
+<p>People sometimes imagine there is only one kind of evangelist. There are many, and every believer belongs to the team. There is the <em>mass evangelist</em> &mdash; I once sat in a Billy Graham crusade and watched thousands stream forward. There is the <em>defender of the faith</em>, the apologist &mdash; men like Lee Strobel and Josh McDowell, or Nabeel Qureshi, who reasoned his way out of Islam into Christ and then spent his short life defending the faith. There is the <em>serving evangelist</em>, like Barnabas the son of encouragement, whose compassion gave weight to his words. There is the <em>tract evangelist</em>: I was told of a paralyzed man named J. D. Fore who could move almost nothing, yet stamped gospel tracts by gripping a rubber stamp in his teeth and, with his mother's help, mailed them to soldiers across the world &mdash; and his wall filled with letters from men saved through those tracts. There is the <em>timid or "come and see" evangelist</em>, like the little white-haired man on George Street in Sydney who asked passersby one quiet question &mdash; "If you died today, where would you be?" &mdash; and never knew, until late in life, how many he had sent to Christ. And there is the <em>invitational evangelist</em>, the Samaritan woman herself, who only said, "Come and see." You may never preach to thousands or argue a skeptic to his knees. But you can say, "Come and see." Have you drunk of the living water? Then leave the waterpot, and go.</p>
+
+</div>
+<div class="lang-es">
+
+<h3>Introducci&oacute;n &mdash; Una Asociaci&oacute;n Divina</h3>
+<p>Imagine un jard&iacute;n lleno de flores vibrantes, plantas exuberantes y &aacute;rboles imponentes. Dios crea la vida en las plantas; &eacute;l env&iacute;a el sol y la lluvia. Pero el jardinero a&uacute;n debe cuidar, podar, fertilizar y desmalezar, o la verdadera belleza jam&aacute;s se revela. Nuestras vidas son como ese jard&iacute;n. Jes&uacute;s ofreci&oacute; a la mujer samaritana agua viva &mdash; se ofreci&oacute; a s&iacute; mismo &mdash; pero la verdadera belleza de su historia se revel&oacute; cuando ella corri&oacute; y comparti&oacute; al Cristo que apenas acababa de conocer. Una y otra vez la Escritura muestra esta hermosa simetr&iacute;a: Dios provee la salvaci&oacute;n y el poder de su Esp&iacute;ritu, y luego Dios obra a trav&eacute;s de nosotros para cumplir su prop&oacute;sito. &#9889; "Porque Dios es el que en vosotros produce as&iacute; el querer como el hacer, por su buena voluntad" (Filipenses 2:13). Esa es la Asociaci&oacute;n Divina, y este cap&iacute;tulo es su cuadro.</p>
+
+<h3>I. La mujer junto al pozo</h3>
+<p>Jes&uacute;s, cansado del camino, se sent&oacute; junto al pozo de Jacob como a la hora sexta mientras sus disc&iacute;pulos iban al pueblo a comprar comida. Una mujer de Samaria vino a sacar agua. Todo en aquel encuentro era un muro que un rab&iacute; respetable no escalar&iacute;a. Ella era samaritana, mitad jud&iacute;a &mdash; y jud&iacute;os y samaritanos se despreciaban mutuamente. Era mujer, y los maestros no hablaban con mujeres en p&uacute;blico. Y era, seg&uacute;n el c&aacute;lculo del pueblo, una gran pecadora; resultar&iacute;a que hab&iacute;a tenido cinco maridos, y el hombre con quien viv&iacute;a entonces no era su marido. Era, como dir&iacute;amos, un caso perdido. Sin embargo, Jes&uacute;s mismo abri&oacute; la conversaci&oacute;n: "Dame de beber." El Hacedor del manantial pidi&oacute; a una pecadora una taza de agua, para poder darle una fuente.</p>
+
+<h3>II. El agua viva</h3>
+<p>&#9889; <em>"Si conocieras el don de Dios, y qui&eacute;n es el que te dice: Dame de beber; t&uacute; le pedir&iacute;as a &eacute;l, y &eacute;l te dar&iacute;a agua viva"</em> (Juan 4:10). Ella solo oy&oacute; el pozo a sus pies &mdash; no tienes con qu&eacute; sacarla, y el pozo es hondo. Pero Jes&uacute;s hablaba de otra agua del todo distinta. &#9889; <em>"Cualquiera que bebiere de esta agua, volver&aacute; a tener sed; mas el que bebiere del agua que yo le dar&eacute;, no tendr&aacute; sed jam&aacute;s; sino que el agua que yo le dar&eacute; ser&aacute; en &eacute;l una fuente de agua que salte para vida eterna"</em> (Juan 4:13&ndash;14). El agua del mundo siempre se acaba; usted bebe, y en pocas horas vuelve a tener sed. El agua que Cristo da no queda en una cisterna para racionarse &mdash; brota, se desborda, se vuelve una fuente dentro del que bebe.</p>
+<p>Hace algunos a&ntilde;os viaj&eacute; por la provincia canadiense de Ontario y me asegur&eacute; de ir a ver las Cataratas del Ni&aacute;gara, en la frontera de Canad&aacute; y los Estados Unidos &mdash; la cascada m&aacute;s grandiosa de toda Am&eacute;rica del Norte, donde millones de galones caen por el borde cada minuto y nunca, jam&aacute;s, se detienen. Ese es un d&eacute;bil cuadro de la plenitud que Jes&uacute;s ofreci&oacute; a aquella mujer. Le ofreci&oacute; a s&iacute; mismo. La salvaci&oacute;n, y un prop&oacute;sito para vivir, se hallan solo en &eacute;l, y nunca se secan.</p>
+<div class="pull-quote">El agua del mundo siempre se acaba. El agua que Cristo da brota &mdash; se desborda, se vuelve una fuente dentro del que bebe.</div>
+<p>Cada uno de nosotros fue hecho con una sed que ning&uacute;n pozo de este mundo puede llenar. Llevamos nuestros cubos a las cisternas del dinero, del placer, de la aprobaci&oacute;n, de una relaci&oacute;n m&aacute;s, y bebemos, y por una hora quedamos satisfechos &mdash; y luego la vieja sequedad regresa, porque aquellos pozos nunca fueron lo bastante hondos para un alma. La mujer junto al pozo de Jacob hab&iacute;a ido a esa clase de cisterna cinco veces, y el hombre con quien viv&iacute;a entonces era un sexto cubo bajado a un pozo vac&iacute;o. Jes&uacute;s no rega&ntilde;&oacute; su sed; le ofreci&oacute; ponerle fin. Y nos ofrece lo mismo. El anhelo que no logra nombrar, la inquietud que ning&uacute;n logro acalla del todo, es el clamor del alma por la &uacute;nica agua que satisface. Su invitaci&oacute;n no ha cambiado en dos mil a&ntilde;os: bebe de m&iacute;, y no tendr&aacute;s sed jam&aacute;s.</p>
+
+<h3>III. En esp&iacute;ritu y en verdad</h3>
+<p>Entonces toc&oacute; la herida. "Ve, llama a tu marido, y ven ac&aacute;." "No tengo marido." "Bien has dicho... porque cinco maridos has tenido, y el que ahora tienes no es tu marido." No la avergonz&oacute;; sencillamente le mostr&oacute; que ya lo sab&iacute;a todo, y que a&uacute;n le ofrec&iacute;a la fuente. Viendo a un profeta ante ella, ella levant&oacute; la vieja disputa del culto: nuestros padres adoraron en este monte, mas vosotros los jud&iacute;os dec&iacute;s que Jerusal&eacute;n es el lugar. Jes&uacute;s elev&oacute; toda la cuesti&oacute;n a un terreno m&aacute;s alto: &#9889; <em>"Dios es Esp&iacute;ritu; y los que le adoran, en esp&iacute;ritu y en verdad es necesario que adoren"</em> (Juan 4:24). La verdadera adoraci&oacute;n no es finalmente cuesti&oacute;n del monte correcto ni del edificio correcto, sino del coraz&oacute;n y del Esp&iacute;ritu y de la verdad de Dios. Y entonces, a esta mujer &mdash; samaritana, marginada, pecadora &mdash; le dijo lo que a nadie m&aacute;s hab&iacute;a dicho tan claramente: "Yo soy, el que habla contigo." La primera alma en o&iacute;r a Jes&uacute;s nombrarse abiertamente el Mes&iacute;as fue una mujer junto a un pozo al mediod&iacute;a.</p>
+
+<h3>IV. La primera evangelista: Ven y ve</h3>
+<p>Lo que hizo despu&eacute;s predica su propio serm&oacute;n. &#9889; <em>"Entonces la mujer dej&oacute; su c&aacute;ntaro, y fue a la ciudad, y dijo a los hombres: Venid, ved un hombre que me ha dicho todo cuanto he hecho. &iquest;No es &eacute;ste el Cristo?"</em> (Juan 4:28&ndash;29). Dej&oacute; el mismo c&aacute;ntaro por el que hab&iacute;a venido &mdash; la vieja sed olvidada en la nueva fuente &mdash; y corri&oacute; a los mismos del pueblo que conoc&iacute;an su reputaci&oacute;n. No habr&iacute;a podido guiar a nadie por un conjunto de leyes espirituales. Pero pod&iacute;a decir dos palabras: venid, ved. Y vinieron. &#9889; <em>"Y muchos de los samaritanos de aquella ciudad creyeron en &eacute;l por la palabra de la mujer"</em> (Juan 4:39), y luego muchos m&aacute;s creyeron porque le oyeron a &eacute;l mismo, y dec&iacute;an: "ya no creemos por tu dicho... y sabemos que verdaderamente &eacute;ste es el Cristo, el Salvador del mundo" (Juan 4:42).</p>
+<p>Note el contraste que Juan dibuja en silencio. Los disc&iacute;pulos hab&iacute;an ido a ese mismo pueblo &mdash; hombres entrenados, tres a&ntilde;os bajo el Se&ntilde;or mismo, los evangelistas m&aacute;s calificados de la tierra &mdash; y volvieron con pan y sin convertidos; no hay se&ntilde;al de que hablaran con un alma. La primera evangelista en Samaria fue una pecadora agradecida y emocionada. El agua viva debi&oacute; ser agua chispeante, pues brotaba burbujeando de su vida.</p>
+
+<h3>V. Los campos est&aacute;n blancos</h3>
+<p>Cuando los disc&iacute;pulos le rogaron que comiera, Jes&uacute;s dijo: "Mi comida es que haga la voluntad del que me envi&oacute;, y que acabe su obra" (Juan 4:34). Luego se&ntilde;al&oacute; a los samaritanos que ya entonces sal&iacute;an del pueblo hacia &eacute;l: &#9889; <em>"Alzad vuestros ojos y mirad las regiones, porque ya est&aacute;n blancas para la siega"</em> (Juan 4:35). Uno siembra, otro siega, y "el que siega recibe salario... para que el que siembra goce juntamente con el que siega" (Juan 4:36). Ah&iacute; est&aacute; otra vez la Asociaci&oacute;n Divina: Jes&uacute;s hab&iacute;a sembrado en una mujer junto a un pozo, y ya toda una aldea maduraba. Dios da el crecimiento, pero se complace en dejarnos llevar la semilla y empu&ntilde;ar la hoz, y compartir el gozo de la siega.</p>
+
+<h3>VI. Cada creyente en el equipo</h3>
+<p>A veces se imagina que hay un solo tipo de evangelista. Hay muchos, y cada creyente pertenece al equipo. Est&aacute; el <em>evangelista masivo</em> &mdash; una vez me sent&eacute; en una cruzada de Billy Graham y vi a miles pasar al frente. Est&aacute; el <em>defensor de la fe</em>, el apologista &mdash; hombres como Lee Strobel y Josh McDowell, o Nabeel Qureshi, que razon&oacute; su salida del islam hacia Cristo y luego pas&oacute; su corta vida defendiendo la fe. Est&aacute; el <em>evangelista del servicio</em>, como Bernab&eacute; el hijo de consolaci&oacute;n, cuya compasi&oacute;n daba peso a sus palabras. Est&aacute; el <em>evangelista de folletos</em>: me contaron de un hombre paral&iacute;tico llamado J. D. Fore que casi no pod&iacute;a mover nada, pero estampaba tratados del evangelio sujetando un sello de goma con los dientes y, con ayuda de su madre, los enviaba a soldados por todo el mundo &mdash; y su pared se llen&oacute; de cartas de hombres salvos por aquellos tratados. Est&aacute; el <em>evangelista t&iacute;mido o de "ven y ve"</em>, como el hombrecito de cabello blanco en George Street, en S&iacute;dney, que hac&iacute;a a los transe&uacute;ntes una pregunta callada &mdash; "Si murieras hoy, &iquest;d&oacute;nde estar&iacute;as?" &mdash; y nunca supo, hasta ya anciano, a cu&aacute;ntos hab&iacute;a enviado a Cristo. Y est&aacute; el <em>evangelista invitador</em>, la misma mujer samaritana, que solo dijo: "Venid y ved." Quiz&aacute; usted nunca predique a miles ni lleve a un esc&eacute;ptico de rodillas con argumentos. Pero puede decir: "Ven y ve." &iquest;Ha bebido del agua viva? Entonces deje el c&aacute;ntaro, y vaya.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 3 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 3 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La secci&oacute;n de respuesta corta es pr&aacute;ctica para el Certificado y no cuenta en su contra.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 3;
+const COURSE = 'john';
+const NEXT_UNIT_URL = 'CTSJohnUnit4.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Word Made Flesh", "Unit 2 - You Must Be Born Again", "Unit 3 - Living Water", "Unit 4 - The Bread of Life", "Unit 5 - The Light of the World", "Unit 6 - The Witnesses to Christ", "Unit 7 - The Door and the Good Shepherd", "Unit 8 - The Resurrection and the Life", "Unit 9 - The Hour of Glory", "Unit 10 - The Way, the Truth, and the Life", "Unit 11 - The Spirit and the High-Priestly Prayer", "Unit 12 - It Is Finished"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSJohnUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    } else {
+        document.getElementById('studentGreeting').innerHTML = '<a href="CTSJohnUnit1.html" style="color:#8a1f1f;">Please register on Unit 1 / Reg&iacute;strese en la Unidad 1</a>';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields. / Por favor complete todos los campos.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered! / \u00a1Registrado!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "Jesus, wearied from His journey, sat by the well while His disciples:", "textEs": "Jesús, cansado del camino, se sentó junto al pozo mientras sus discípulos:", "optionsEn": ["guarded the road", "returned to Galilee", "slept nearby", "went into the town to buy food"], "optionsEs": ["vigilaban el camino", "regresaban a Galilea", "dormían cerca", "iban al pueblo a comprar comida"], "explanationEn": "John 4:6–8 — Jesus rested at Jacob's well at about the sixth hour while the disciples went for food.", "explanationEs": "Juan 4:6–8 — Jesús descansó junto al pozo de Jacob a la hora sexta mientras los discípulos iban por comida.", "correct": 3}, {"textEn": "The woman who came to draw water was:", "textEs": "La mujer que vino a sacar agua era:", "optionsEn": ["a Samaritan, regarded as a half-Jew and an outsider", "a Roman official's wife", "a temple servant", "a Pharisee's daughter"], "optionsEs": ["una samaritana, vista como mitad judía y marginada", "esposa de un oficial romano", "una sierva del templo", "hija de un fariseo"], "explanationEn": "A Samaritan woman — Jews and Samaritans despised one another, making the meeting socially scandalous.", "explanationEs": "Una samaritana — judíos y samaritanos se despreciaban, lo que hacía el encuentro socialmente escandaloso.", "correct": 0}, {"textEn": "The social barriers Jesus crossed in speaking with her were:", "textEs": "Las barreras sociales que Jesús cruzó al hablar con ella fueron:", "optionsEn": ["race, gender, and her moral reputation", "age and education", "language and citizenship", "wealth and politics"], "optionsEs": ["raza, género y su reputación moral", "edad y educación", "idioma y ciudadanía", "riqueza y política"], "explanationEn": "She was a Samaritan (race), a woman (gender), and a known sinner (reputation) — walls a rabbi would not climb.", "explanationEs": "Era samaritana (raza), mujer (género) y pecadora conocida (reputación) — muros que un rabí no escalaría.", "correct": 0}, {"textEn": "\"If you knew the gift of God... you would have asked Him, and He would have given you ___\" (John 4:10).", "textEs": "\"Si conocieras el don de Dios... tú le pedirías, y él te daría ___\" (Juan 4:10).", "optionsEn": ["a deep well", "bread", "living water", "the law"], "optionsEs": ["un pozo profundo", "pan", "agua viva", "la ley"], "explanationEn": "Jesus offered living water — not the water in the well, but Himself and the life He gives.", "explanationEs": "Jesús ofreció agua viva — no el agua del pozo, sino a sí mismo y la vida que da.", "correct": 2}, {"textEn": "How does the water Jesus gives differ from well water (John 4:13–14)?", "textEs": "¿En qué difiere el agua que Jesús da del agua del pozo (Juan 4:13–14)?", "optionsEn": ["His must be drawn each morning", "His is colder and sweeter", "ordinary water leaves you thirsty again; His becomes a fountain springing up to everlasting life", "there is no real difference"], "optionsEs": ["la suya hay que sacarla cada mañana", "la suya es más fría y dulce", "el agua común deja con sed otra vez; la suya se vuelve fuente que salta para vida eterna", "no hay diferencia real"], "explanationEn": "The world's water runs out; the water Christ gives springs up and overflows, never running dry.", "explanationEs": "El agua del mundo se acaba; el agua que Cristo da brota y se desborda, sin secarse jamás.", "correct": 2}, {"textEn": "Cook's Niagara Falls illustration pictures:", "textEs": "La ilustración de las Cataratas del Niágara de Cook representa:", "optionsEn": ["the inexhaustible fullness of Christ, the Living Water", "the danger of the world", "the power of human effort", "the speed of judgment"], "optionsEs": ["la plenitud inagotable de Cristo, el Agua Viva", "el peligro del mundo", "el poder del esfuerzo humano", "la rapidez del juicio"], "explanationEn": "Millions of gallons pour over Niagara every minute and never stop — a faint picture of the fullness Jesus offers.", "explanationEs": "Millones de galones caen por el Niágara cada minuto y nunca paran — débil cuadro de la plenitud que Jesús ofrece.", "correct": 0}, {"textEn": "When Jesus said, \"Go, call your husband,\" He gently exposed:", "textEs": "Cuando Jesús dijo: \"Ve, llama a tu marido,\" expuso con ternura:", "optionsEn": ["a theft", "a debt she owed", "a broken vow to the temple", "her five husbands and the man who was not her husband"], "optionsEs": ["un robo", "una deuda que tenía", "un voto roto al templo", "sus cinco maridos y el hombre que no era su marido"], "explanationEn": "He showed He already knew everything about her — and still offered her the fountain.", "explanationEs": "Mostró que ya lo sabía todo de ella — y aún le ofrecía la fuente.", "correct": 3}, {"textEn": "To the woman's question about the right place to worship, Jesus taught that true worshipers worship:", "textEs": "A la pregunta de la mujer sobre el lugar correcto para adorar, Jesús enseñó que los verdaderos adoradores adoran:", "optionsEn": ["only in Jerusalem", "at the appointed feasts only", "only on Mount Gerizim", "in spirit and in truth"], "optionsEs": ["solo en Jerusalén", "solo en las fiestas señaladas", "solo en el monte Gerizim", "en espíritu y en verdad"], "explanationEn": "John 4:24 — worship is not finally about the right mountain or building but the heart, the Spirit, and the truth.", "explanationEs": "Juan 4:24 — la adoración no es al fin del monte o edificio correcto sino del corazón, el Espíritu y la verdad.", "correct": 3}, {"textEn": "\"God is ___, and those who worship Him must worship in spirit and truth\" (John 4:24).", "textEs": "\"Dios es ___, y los que le adoran, en espíritu y en verdad es necesario que adoren\" (Juan 4:24).", "optionsEn": ["only in the temple", "Spirit", "silent", "far off"], "optionsEs": ["solo en el templo", "Espíritu", "silencioso", "lejano"], "explanationEn": "Because God is Spirit, true worship rises from the heart in spirit and truth, not from a mere location.", "explanationEs": "Porque Dios es Espíritu, la verdadera adoración sube del corazón en espíritu y verdad, no de un mero lugar.", "correct": 1}, {"textEn": "To this Samaritan woman Jesus openly declared:", "textEs": "A esta mujer samaritana Jesús declaró abiertamente:", "optionsEn": ["that He would return later", "that she should find a priest", "that she must keep the law", "\"I who speak to you am He\" (the Messiah)"], "optionsEs": ["que volvería más tarde", "que buscara un sacerdote", "que debía guardar la ley", "\"Yo soy, el que habla contigo\" (el Mesías)"], "explanationEn": "The first soul to hear Jesus plainly name Himself Messiah was a Samaritan woman at a well at noon.", "explanationEs": "La primera alma en oír a Jesús nombrarse claramente Mesías fue una samaritana junto a un pozo al mediodía.", "correct": 3}, {"textEn": "After meeting Jesus, the woman left her ___ and ran into the town.", "textEs": "Tras conocer a Jesús, la mujer dejó su ___ y corrió al pueblo.", "optionsEn": ["veil", "waterpot", "sandals", "money"], "optionsEs": ["velo", "cántaro", "sandalias", "dinero"], "explanationEn": "She left the very waterpot she came for — the old thirst forgotten in the new fountain (John 4:28).", "explanationEs": "Dejó el mismo cántaro por el que vino — la vieja sed olvidada en la nueva fuente (Juan 4:28).", "correct": 1}, {"textEn": "Her invitation to the townspeople was:", "textEs": "Su invitación a los del pueblo fue:", "optionsEn": ["\"Keep away from him\"", "\"Wait for the priests\"", "\"Come, see a Man who told me all I ever did. Is this not the Christ?\"", "\"I have all the answers\""], "optionsEs": ["\"Aléjense de él\"", "\"Esperen a los sacerdotes\"", "\"Venid, ved un hombre que me dijo todo cuanto he hecho. ¿No es éste el Cristo?\"", "\"Yo tengo todas las respuestas\""], "explanationEn": "She could not give a polished presentation, but she could say two words: come, see (John 4:29).", "explanationEs": "No podía dar una presentación pulida, pero podía decir dos palabras: venid, ved (Juan 4:29).", "correct": 2}, {"textEn": "John quietly contrasts the woman with:", "textEs": "Juan contrasta en silencio a la mujer con:", "optionsEn": ["the disciples, who had been with Jesus yet told no one in the town", "her former husbands", "the Roman soldiers", "the Pharisees"], "optionsEs": ["los discípulos, que habían estado con Jesús y no dijeron nada en el pueblo", "sus antiguos maridos", "los soldados romanos", "los fariseos"], "explanationEn": "The most qualified evangelists came back with bread and no converts; a grateful sinner reached the town.", "explanationEs": "Los evangelistas más calificados volvieron con pan y sin convertidos; una pecadora agradecida alcanzó al pueblo.", "correct": 0}, {"textEn": "Many Samaritans first believed because of ___, then because of Jesus' own word (John 4:39–42).", "textEs": "Muchos samaritanos creyeron primero por ___, luego por la palabra de Jesús mismo (Juan 4:39–42).", "optionsEn": ["a miracle", "the woman's testimony", "the disciples' preaching", "a letter"], "optionsEs": ["un milagro", "el testimonio de la mujer", "la predicación de los discípulos", "una carta"], "explanationEn": "They believed because of her word, then heard Him for themselves — testimony opens the door to firsthand faith.", "explanationEs": "Creyeron por su palabra, luego le oyeron por sí mismos — el testimonio abre la puerta a la fe de primera mano.", "correct": 1}, {"textEn": "The townspeople finally confessed Jesus as:", "textEs": "Los del pueblo finalmente confesaron a Jesús como:", "optionsEn": ["the Christ, the Savior of the world", "a great teacher only", "a wise rabbi", "a prophet of Samaria"], "optionsEs": ["el Cristo, el Salvador del mundo", "solo un gran maestro", "un sabio rabí", "un profeta de Samaria"], "explanationEn": "John 4:42 — \"we know that this is indeed the Christ, the Savior of the world.\"", "explanationEs": "Juan 4:42 — \"sabemos que verdaderamente éste es el Cristo, el Salvador del mundo.\"", "correct": 0}, {"textEn": "\"Lift up your eyes and look at the fields, for they are already ___ for harvest\" (John 4:35).", "textEs": "\"Alzad vuestros ojos y mirad las regiones, porque ya están ___ para la siega\" (Juan 4:35).", "optionsEn": ["sown", "white", "barren", "resting"], "optionsEs": ["sembradas", "blancas", "estériles", "en reposo"], "explanationEn": "The Samaritans streaming out of the town were the ripe harvest before the disciples' eyes.", "explanationEs": "Los samaritanos que salían del pueblo eran la mies madura ante los ojos de los discípulos.", "correct": 1}, {"textEn": "\"My food,\" Jesus said, \"is to ___\" (John 4:34).", "textEs": "\"Mi comida,\" dijo Jesús, \"es ___\" (Juan 4:34).", "optionsEn": ["rest from My labors", "wait for Jerusalem", "gather the disciples", "do the will of Him who sent Me and finish His work"], "optionsEs": ["descansar de mis labores", "esperar a Jerusalén", "reunir a los discípulos", "hacer la voluntad del que me envió y acabar su obra"], "explanationEn": "His very nourishment was obedience to the Father and the finishing of His saving work.", "explanationEs": "Su mismo alimento era la obediencia al Padre y el acabar su obra salvadora.", "correct": 3}, {"textEn": "The \"Divine Partnership\" (Philippians 2:13) means:", "textEs": "La \"Asociación Divina\" (Filipenses 2:13) significa:", "optionsEn": ["salvation is shared between God and merit", "we save ourselves by effort", "God works salvation in us, and then works through us to reach others", "God leaves the work entirely to us"], "optionsEs": ["la salvación se reparte entre Dios y el mérito", "nos salvamos por esfuerzo", "Dios obra la salvación en nosotros, y luego obra a través de nosotros para alcanzar a otros", "Dios deja la obra enteramente a nosotros"], "explanationEn": "God provides salvation and the Spirit's power, then is pleased to work through us to finish His purpose.", "explanationEs": "Dios provee la salvación y el poder del Espíritu, luego se complace en obrar a través de nosotros para cumplir su propósito.", "correct": 2}, {"textEn": "Cook teaches that there is:", "textEs": "Cook enseña que hay:", "optionsEn": ["only one valid kind of evangelist", "many kinds of evangelist, and every believer is on the team", "evangelism only for the ordained", "no need for evangelists today"], "optionsEs": ["solo un tipo válido de evangelista", "muchos tipos de evangelista, y cada creyente está en el equipo", "evangelismo solo para los ordenados", "ya no hay necesidad de evangelistas hoy"], "explanationEn": "Mass, apologist, serving, tract, come-and-see, invitational — many kinds, and all believers belong.", "explanationEs": "Masivo, apologista, de servicio, de folletos, de ven-y-ve, invitador — muchos tipos, y todo creyente pertenece.", "correct": 1}, {"textEn": "The \"come and see\" or invitational evangelist is pictured by:", "textEs": "El evangelista de \"ven y ve\" o invitador está representado por:", "optionsEn": ["Billy Graham", "Barnabas", "the Samaritan woman, who simply invited others to see Jesus", "the apologists"], "optionsEs": ["Billy Graham", "Bernabé", "la mujer samaritana, que sencillamente invitó a otros a ver a Jesús", "los apologistas"], "explanationEn": "You may never preach to thousands or out-argue a skeptic, but you can say, \"Come and see.\"", "explanationEs": "Quizá nunca predique a miles ni venza a un escéptico, pero puede decir: \"Ven y ve.\"", "correct": 2}];
+const kwQuestions = [
+{"textEn":"Explain what Jesus meant by \"living water\" (John 4:10\u201314) and how it differs from well water.","textEs":"Explique qu\u00e9 quiso decir Jes\u00fas con \"agua viva\" (Juan 4:10\u201314) y c\u00f3mo difiere del agua del pozo.","kw_en":["water","living","thirst","fountain","eternal","well","gift","christ"],"kw_es":["agua","viva","sed","fuente","eterna","pozo","don","cristo"],"modelEn":"Living water is not the water in Jacob's well but Christ Himself and the life He gives. Ordinary well water leaves you thirsty again within hours, but Jesus said the water He gives becomes in a person a fountain of water springing up to everlasting life. It does not sit in a cistern to be rationed; it overflows and never runs dry. The gift of God is Christ, and whoever drinks of Him finds salvation and a purpose that the world's water can never supply.","modelEs":"El agua viva no es el agua del pozo de Jacob sino Cristo mismo y la vida que da. El agua com\u00fan del pozo deja con sed otra vez en pocas horas, pero Jes\u00fas dijo que el agua que \u00e9l da se vuelve en la persona una fuente de agua que salta para vida eterna. No queda en una cisterna para racionarse; se desborda y nunca se seca. El don de Dios es Cristo, y quien bebe de \u00e9l halla salvaci\u00f3n y un prop\u00f3sito que el agua del mundo jam\u00e1s puede dar."},
+{"textEn":"Describe the barriers Jesus crossed to reach the Samaritan woman, and what this shows.","textEs":"Describa las barreras que Jes\u00fas cruz\u00f3 para alcanzar a la mujer samaritana, y qu\u00e9 muestra esto.","kw_en":["samaritan","race","woman","sinner","barrier","cross","outcast","reach"],"kw_es":["samaritan","raza","mujer","pecador","barrera","cruz","marginad","alcanz"],"modelEn":"Jesus crossed three walls a respectable rabbi would not climb. She was a Samaritan, and Jews and Samaritans despised one another, so race was a barrier. She was a woman, and teachers did not speak with women in public, so gender was a barrier. And she was a known sinner with five former husbands, so her reputation was a barrier. That Jesus deliberately reached across all of these to this outcast shows that the living water is for the least likely, and no one is too far gone for Him to seek and save.","modelEs":"Jes\u00fas cruz\u00f3 tres muros que un rab\u00ed respetable no escalar\u00eda. Era samaritana, y jud\u00edos y samaritanos se despreciaban, as\u00ed que la raza era una barrera. Era mujer, y los maestros no hablaban con mujeres en p\u00fablico, as\u00ed que el g\u00e9nero era una barrera. Y era una pecadora conocida con cinco maridos, as\u00ed que su reputaci\u00f3n era una barrera. Que Jes\u00fas deliberadamente cruzara todas ellas hacia esta marginada muestra que el agua viva es para los menos probables, y que nadie est\u00e1 tan perdido que \u00e9l no lo busque y salve."},
+{"textEn":"Explain \"God is Spirit, and those who worship Him must worship in spirit and truth\" (John 4:23\u201324).","textEs":"Explique \"Dios es Esp\u00edritu, y los que le adoran, en esp\u00edritu y en verdad es necesario que adoren\" (Juan 4:23\u201324).","kw_en":["god","spirit","worship","truth","heart","place","father","true"],"kw_es":["dios","espiritu","adora","verdad","corazon","lugar","padre","verdader"],"modelEn":"When the woman asked whether the right place to worship was Mount Gerizim or Jerusalem, Jesus lifted the question higher. Because God is Spirit, true worship is not finally a matter of the correct mountain or building but of the heart, offered in spirit and in truth. To worship in spirit is to worship from the inner person moved by the Holy Spirit, and to worship in truth is to worship according to the truth God has revealed. The Father seeks such worshipers, so right worship is about a renewed heart, not merely a location.","modelEs":"Cuando la mujer pregunt\u00f3 si el lugar correcto para adorar era el monte Gerizim o Jerusal\u00e9n, Jes\u00fas elev\u00f3 la cuesti\u00f3n. Porque Dios es Esp\u00edritu, la verdadera adoraci\u00f3n no es al fin cuesti\u00f3n del monte o edificio correcto sino del coraz\u00f3n, ofrecida en esp\u00edritu y en verdad. Adorar en esp\u00edritu es adorar desde el hombre interior movido por el Esp\u00edritu Santo, y adorar en verdad es adorar conforme a la verdad que Dios ha revelado. El Padre busca tales adoradores, as\u00ed que la adoraci\u00f3n correcta es de un coraz\u00f3n renovado, no de un mero lugar."},
+{"textEn":"How did Jesus reveal Himself as Messiah here, and why is it striking that He did so to this woman?","textEs":"\u00bfC\u00f3mo se revel\u00f3 Jes\u00fas como Mes\u00edas aqu\u00ed, y por qu\u00e9 es notable que lo hiciera a esta mujer?","kw_en":["messiah","reveal","samaritan","woman","sinner","christ","declar","first"],"kw_es":["mesias","revel","samaritan","mujer","pecador","cristo","declar","primera"],"modelEn":"When the woman spoke of the coming Messiah, Jesus said plainly, I who speak to you am He. It is striking because the first soul to whom He openly declared His messiahship was not a ruler or a priest but a Samaritan woman, an outsider and a sinner, met at a well at noon. He revealed Himself most clearly to the least likely person, which shows the reach of His grace and overturns every expectation about who is worthy to receive the truth about Christ.","modelEs":"Cuando la mujer habl\u00f3 del Mes\u00edas que hab\u00eda de venir, Jes\u00fas dijo claramente: Yo soy, el que habla contigo. Es notable porque la primera alma a quien declar\u00f3 abiertamente su mesianismo no fue un principal ni un sacerdote sino una mujer samaritana, marginada y pecadora, hallada junto a un pozo al mediod\u00eda. Se revel\u00f3 con mayor claridad a la persona menos probable, lo cual muestra el alcance de su gracia y derriba toda expectativa sobre qui\u00e9n es digno de recibir la verdad acerca de Cristo."},
+{"textEn":"Describe how the Samaritan woman became the town's first evangelist (\"come and see\").","textEs":"Describa c\u00f3mo la mujer samaritana lleg\u00f3 a ser la primera evangelista del pueblo (\"ven y ve\").","kw_en":["woman","evangel","come","see","town","told","witness","water"],"kw_es":["mujer","evangel","ven","ve","pueblo","dijo","testimonio","cantaro"],"modelEn":"Once she was convinced Jesus was the Christ, the woman left her waterpot and ran into the town, telling the men, Come, see a Man who told me all I ever did; is this not the Christ? She could not have led anyone through a formal presentation, but she could give a simple invitation and her own witness. Many of the townspeople believed because of her word and then came to hear Jesus for themselves. She is the first evangelist in Samaria, an invitational evangelist whose changed life bubbled over like the living water.","modelEs":"Una vez convencida de que Jes\u00fas era el Cristo, la mujer dej\u00f3 su c\u00e1ntaro y corri\u00f3 al pueblo, diciendo a los hombres: Venid, ved un hombre que me dijo todo cuanto he hecho; \u00bfno es \u00e9ste el Cristo? No habr\u00eda podido guiar a nadie por una presentaci\u00f3n formal, pero pod\u00eda dar una invitaci\u00f3n sencilla y su propio testimonio. Muchos del pueblo creyeron por su palabra y luego vinieron a o\u00edr a Jes\u00fas por s\u00ed mismos. Es la primera evangelista en Samaria, una evangelista invitadora cuya vida cambiada se desbordaba como el agua viva."},
+{"textEn":"Explain the \"Divine Partnership\" taught from John 4:34\u201338 and Philippians 2:13.","textEs":"Explique la \"Asociaci\u00f3n Divina\" ense\u00f1ada de Juan 4:34\u201338 y Filipenses 2:13.","kw_en":["god","work","sower","reaper","harvest","through","purpose","partner"],"kw_es":["dios","obra","sembrador","segador","siega","traves","proposito","asociacion"],"modelEn":"The Divine Partnership means that God provides salvation and the power of His Spirit, and then is pleased to work through us to finish His purpose. Jesus said one sows and another reaps, and the sower and reaper rejoice together in the harvest. He had sown in one woman at a well, and already a whole village was ripening for the reaping. Philippians 2:13 says it is God who works in us both to will and to do, so the increase is God's, yet He lets us carry the seed and swing the sickle and share His joy.","modelEs":"La Asociaci\u00f3n Divina significa que Dios provee la salvaci\u00f3n y el poder de su Esp\u00edritu, y luego se complace en obrar a trav\u00e9s de nosotros para cumplir su prop\u00f3sito. Jes\u00fas dijo que uno siembra y otro siega, y el sembrador y el segador se gozan juntos en la siega. \u00c9l hab\u00eda sembrado en una mujer junto al pozo, y ya toda una aldea maduraba para la cosecha. Filipenses 2:13 dice que es Dios quien obra en nosotros as\u00ed el querer como el hacer, as\u00ed que el crecimiento es de Dios, pero \u00e9l nos deja llevar la semilla, empu\u00f1ar la hoz y compartir su gozo."},
+{"textEn":"Explain \"the fields are already white for harvest\" (John 4:35).","textEs":"Explique \"los campos ya est\u00e1n blancos para la siega\" (Juan 4:35).","kw_en":["field","white","harvest","ready","reap","soul","now","look"],"kw_es":["campo","blanc","siega","listo","segar","alma","ahora","mira"],"modelEn":"Jesus told the disciples to lift up their eyes and look, for the fields were already white for harvest. He was pointing to the Samaritans even then streaming out of the town toward Him, ripe souls ready to be gathered. The lesson is that the harvest is not in some distant future but now, all around us, and the laborer must open his eyes to see it. Where we might see only an unlikely town, Jesus saw a field ready to reap.","modelEs":"Jes\u00fas dijo a los disc\u00edpulos que alzaran los ojos y miraran, porque los campos ya estaban blancos para la siega. Se\u00f1alaba a los samaritanos que ya entonces sal\u00edan del pueblo hacia \u00e9l, almas maduras listas para ser recogidas. La lecci\u00f3n es que la cosecha no est\u00e1 en un futuro lejano sino ahora, alrededor de nosotros, y el obrero debe abrir los ojos para verla. Donde nosotros ver\u00edamos solo un pueblo improbable, Jes\u00fas vio un campo listo para segar."},
+{"textEn":"Why is the contrast between the woman and the silent disciples significant?","textEs":"\u00bfPor qu\u00e9 es significativo el contraste entre la mujer y los disc\u00edpulos callados?","kw_en":["disciple","woman","silent","evangel","told","sinner","zeal","qualif"],"kw_es":["discipul","mujer","callad","evangel","dijo","pecador","celo","calific"],"modelEn":"The disciples had gone into the very same town; they were trained men who had spent three years with the Lord and were the most qualified evangelists on earth, yet they came back with bread and there is no sign they told a single soul about Jesus. The woman, of the wrong race and the wrong reputation, immediately ran and told the town. The contrast shows that zeal born of gratitude can do more than training without it, and that God often uses the unlikely and the freshly saved while the qualified stay silent.","modelEs":"Los disc\u00edpulos hab\u00edan ido al mismo pueblo; eran hombres entrenados que hab\u00edan pasado tres a\u00f1os con el Se\u00f1or y eran los evangelistas m\u00e1s calificados de la tierra, pero volvieron con pan y no hay se\u00f1al de que le dijeran a un alma acerca de Jes\u00fas. La mujer, de la raza equivocada y la reputaci\u00f3n equivocada, enseguida corri\u00f3 y se lo dijo al pueblo. El contraste muestra que el celo nacido de la gratitud puede m\u00e1s que el entrenamiento sin \u00e9l, y que Dios a menudo usa a los improbables y a los reci\u00e9n salvos mientras los calificados callan."},
+{"textEn":"Describe the different kinds of evangelists and the truth they teach about the church.","textEs":"Describa los distintos tipos de evangelistas y la verdad que ense\u00f1an sobre la iglesia.","kw_en":["evangel","kind","mass","apolog","serv","tract","invit","believer"],"kw_es":["evangel","tipo","masiv","apolog","serv","folleto","invit","creyente"],"modelEn":"There is not one kind of evangelist but many, and every believer is on the team. There is the mass evangelist who preaches to thousands, the apologist or defender of the faith who answers the skeptic, the serving evangelist whose compassion gives weight to his words, the tract evangelist who hands out the gospel in print, the timid come-and-see evangelist who asks one quiet question, and the invitational evangelist like the Samaritan woman who simply says, come and see. The truth is that no one is excused; each believer has a part to play in reaching others for Christ.","modelEs":"No hay un solo tipo de evangelista sino muchos, y cada creyente est\u00e1 en el equipo. Est\u00e1 el evangelista masivo que predica a miles, el apologista o defensor de la fe que responde al esc\u00e9ptico, el evangelista de servicio cuya compasi\u00f3n da peso a sus palabras, el evangelista de folletos que reparte el evangelio impreso, el t\u00edmido evangelista de ven-y-ve que hace una pregunta callada, y el evangelista invitador como la mujer samaritana que solo dice: ven y ve. La verdad es que nadie queda excusado; cada creyente tiene una parte que cumplir en alcanzar a otros para Cristo."},
+{"textEn":"What does it mean that salvation and purpose are found only in Christ, the Living Water?","textEs":"\u00bfQu\u00e9 significa que la salvaci\u00f3n y el prop\u00f3sito se hallan solo en Cristo, el Agua Viva?","kw_en":["christ","water","salvation","purpose","only","thirst","satisf","life"],"kw_es":["cristo","agua","salvacion","proposito","solo","sed","satisf","vida"],"modelEn":"Jesus offered the woman not merely advice or religion but Himself, the Living Water, and said that whoever drinks of Him will never thirst again. This means that the deepest thirst of the human heart is satisfied only in Christ; the world's wells run dry, but He becomes a fountain springing up to eternal life. Salvation and a true purpose for living are found in Him alone, so the answer to our restlessness is not a better mountain, a better marriage, or a fuller cup, but the Savior who gives the water that overflows forever.","modelEs":"Jes\u00fas ofreci\u00f3 a la mujer no un mero consejo ni una religi\u00f3n sino a s\u00ed mismo, el Agua Viva, y dijo que quien bebe de \u00e9l no tendr\u00e1 sed jam\u00e1s. Esto significa que la sed m\u00e1s honda del coraz\u00f3n humano se satisface solo en Cristo; los pozos del mundo se secan, pero \u00e9l se vuelve una fuente que salta para vida eterna. La salvaci\u00f3n y un verdadero prop\u00f3sito para vivir se hallan solo en \u00e9l, as\u00ed que la respuesta a nuestra inquietud no es un mejor monte, un mejor matrimonio ni una copa m\u00e1s llena, sino el Salvador que da el agua que se desborda para siempre."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 4 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 4 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s).</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (mcQuestions.length + idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register on Unit 1 first.' : 'Por favor reg\u00edstrese en la Unidad 1 primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y reintente la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSJohnReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

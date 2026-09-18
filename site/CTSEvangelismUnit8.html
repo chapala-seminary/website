@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Evangelism — Unit 8: Evangelistic Preaching (Bilingual)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .clear-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.clear-btn { background: #a0512a; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.attribution { font-size: 0.95rem; color: #6b5840; font-style: italic; margin-bottom: 16px; }
+blockquote { margin: 14px 0; padding: 10px 14px; border-left: 4px solid #5b3a1f; background: #f4ede2; font-style: italic; }
+.track-banner { background: #5b3a1f; color: white; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-weight: bold; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+.kw-answer:disabled { background: #f5f0e8; cursor: not-allowed; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; margin-top: 5px; }
+button.small:disabled { background: #aaa; cursor: not-allowed; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.lockout-banner { background: #f8d7da; color: #721c24; padding: 12px 16px; border-radius: 12px; margin-bottom: 15px; font-weight: bold; border: 1px solid #f5c6cb; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en div.lang-en { display: block; }
+body.lang-es div.lang-es { display: block; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.scale-box { background: #fdfaf3; border: 1px solid #d7cec1; border-radius: 10px; padding: 14px 18px; margin: 14px 0; }
+.scale-box h4 { color: #5b3a1f; margin-top: 0; }
+.scale-box ol, .scale-box ul { margin-left: 1.4rem; }
+.scale-box ol li { margin-bottom: 6px; }
+@media print {
+  .toggle-btn, .clear-btn, .nav-bar, .registration-panel, button, .question input[type="radio"], textarea, .lockout-banner { display: none !important; }
+  body { background: white; }
+  .card { box-shadow: none; border: none; }
+}
+.model-answer-box { margin-top: 12px; padding: 12px 14px; background: #fbf3d9; border: 1px solid #e4c95b; border-left: 5px solid #c9a227; border-radius: 8px; color: #4a3c10; font-size: 0.95em; line-height: 1.5; }
+.model-answer-box strong { color: #7a5c00; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span></button>
+        <button class="nav-btn" id="nextUnitBtn"><span class="lang-en">Next</span><span class="lang-es">Siguiente</span> →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+<button class="clear-btn" id="clearDataBtn">🗑 <span class="lang-en">Clear Saved Data</span><span class="lang-es">Borrar Datos Guardados</span></button>
+
+<div class="card">
+    <h1>
+        <span class="lang-en">📖 Evangelism — Unit 8: Evangelistic Preaching</span>
+        <span class="lang-es">📖 Evangelismo — Unidad 8: Predicación Evangelística</span>
+    </h1>
+    <p class="attribution">
+        <span class="lang-en">Chapala Theological Seminary · Dr. Wayne Cook, Author and Professor · Dr. Ted Rogers, Seminary Director</span>
+        <span class="lang-es">Seminario Teológico de Chapala · Dr. Wayne Cook, Autor y Profesor · Dr. Ted Rogers, Director del Seminario</span>
+    </p>
+    <div id="trackBanner" class="track-banner" style="display:none;"></div>
+</div>
+
+<!-- CTS audit 2026-05-23: registration panel removed. Registration happens once on Unit 1.
+     Later units read the saved student/track from localStorage (cts_student / cts_track).
+     If none is saved, the student silently defaults to the Certificate track (per Wayne). -->
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation: Preaching at Its Best</h2>
+        <p>Personal evangelism is the most common form of gospel proclamation, but it is not the only form. From Peter at Pentecost to Whitefield in the fields and Spurgeon in the Tabernacle, God has used public proclamation to gather thousands. Faris Whitesell put it sharply: "Evangelistic preaching is preaching at its best. It is preaching adapted to the highest ends of the gospel — turning men from sin and darkness to salvation and light. Evangelistic preaching is preaching with a mission — an immediate and all-important mission — winning a verdict in favor of the Lord Jesus Christ." V. L. Stanfield offered the simpler definition: "the public proclamation of the gospel of Jesus Christ" with a view to gaining acceptance. Both definitions point to the same heart: a public, biblical, Spirit-empowered call to receive Christ.</p>
+        <p>This unit examines what evangelistic preaching is, the New Testament terms for proclamation, the two things every evangelistic sermon must do, the presuppositions that make such preaching possible, the necessity of clarity and scriptural authority, dependence on the Spirit, the invitation, and the herald image that anchors the preacher's identity.</p>
+
+        <h3>I. Six Definitions That Sharpen Our Vocabulary</h3>
+        <p>The English word "evangelism" carries a family of related terms. Distinguishing them prevents confusion.</p>
+        <ul>
+        <li><strong>Evangel</strong> — the "good news" itself. The message about what God has done in Christ.</li>
+        <li><strong>Evangelism</strong> — presenting that good news so that people receive it.</li>
+        <li><strong>Evangelist</strong> — one who carries the good news. Every pastor is in this sense an evangelist.</li>
+        <li><strong>Evangelistic</strong> — characterized by urgently propagating the good news.</li>
+        <li><strong>Evangelical</strong> — one who endorses the work and emphasizes the receiving of the good news.</li>
+        <li><strong>Evangelistic Preaching</strong> — public proclamation of the gospel with the aim of conversion.</li>
+        </ul>
+        <p>One distinction is especially worth weighing: <em>it is possible to be evangelical without being evangelistic.</em> A church can hold orthodox doctrine, sing the right hymns, and never call a sinner to repent. The label is correct; the labor is missing. Evangelistic preaching exists to close that gap.</p>
+
+        <h3>II. The New Testament Terms for Preaching</h3>
+        <p>Warren Wiersbe identifies several Greek words behind "preaching" in the New Testament. Each adds a dimension.</p>
+        <ul>
+        <li><strong>Euangelizomai</strong> — "to tell good news" (52 times). The fundamental verb of gospel proclamation.</li>
+        <li><strong>Kerussein</strong> — "to proclaim like a herald" (52 times). The related noun <em>keryx</em> (herald) and <em>kerygma</em> (proclamation) anchor the image.</li>
+        <li><strong>Marturein</strong> — "to bear witness." John uses this word almost exclusively. Preaching from the heart.</li>
+        <li><strong>Lalein</strong> — "to talk" (6 times). Suggests a certain naturalness; preaching is conversation projected.</li>
+        <li><strong>Didaskein</strong> — "to teach" (95 times). The pulpit is also a classroom.</li>
+        </ul>
+        <p>The image that dominates is the <em>keryx</em> — the herald. In the Greek and Roman world the herald was the official announcer for the state. He had to have a clear voice and reliable character. He did not invent the message; he proclaimed it. John the Baptist is the first New Testament herald, announcing the coming Messiah. Every evangelistic preacher follows in that line: he carries another's message.</p>
+
+        <h3>III. The Two Things Every Evangelistic Sermon Must Do</h3>
+        <p>Chevis Horne, in <em>Dynamic Preaching</em>, observes that evangelistic preaching is the preaching we must do first — if a man has a broken arm it must be set, and if he has a broken relationship with God it must be healed before anything else. Two things are essential.</p>
+        <p><strong>1. The good news is announced.</strong> Evangelism means good news. To a lost person, it says, "Here is light." To one in chains, "You can be free." To the hungry, "Here is bread." To the blind, "You can see." To the dying, "You can live." Frederick Buechner adds that before it is good news, the gospel is bad news — a man is a sinner; that is tragedy. Against the bad news dawns the morning: God loves us anyway. That is comedy. It is too good to be true. That is fairy tale. Every evangelistic sermon must travel that arc — tragedy, sought, found — just as the lost sheep, the lost coin, and the lost son travel it in Luke 15.</p>
+        <p><strong>2. Something is called for.</strong> Information is not enough. The sermon must call for repentance, faith, confession, and incorporation into the church. Peter at Pentecost closed his sermon with a direct command: "Repent, and let every one of you be baptized in the name of Jesus Christ" (Acts 2:38, NKJV). A sermon that announces the gospel but never asks for response has done half the work and left the soul at the threshold.</p>
+
+        <h3>IV. Nine Presuppositions That Make Evangelistic Preaching Possible</h3>
+        <p>Jay Brown distills the convictions on which evangelistic preaching rests. They are not optional theological flourishes; without them, the preacher will not preach evangelistically.</p>
+        <div class="scale-box">
+        <h4>Brown's Presuppositions</h4>
+        <ol>
+        <li>People without Christ are lost (John 3:18). They are without God and without hope.</li>
+        <li>Preaching is God's chief means for saving the lost (Romans 10:14).</li>
+        <li>The pulpit is the preacher's greatest opportunity to evangelize — more people are reached at once than in any other engagement.</li>
+        <li>Christ is God's only means of salvation (John 14:6). Not one among many.</li>
+        <li>The Holy Spirit can produce life-changing experiences in the act of preaching.</li>
+        <li>The gospel is still the power of God unto salvation (Romans 1:16).</li>
+        <li>The mission of the church demands evangelistic preaching. <em>Kerygma</em> more than <em>didache</em> distinguishes the Christian faith.</li>
+        <li>Evangelistic preaching strengthens every other ministry of the church — attendance, giving, and spiritual growth all rise when souls are being saved.</li>
+        <li>Someone must do the reaping (John 4:35–38; Matthew 9:37–38).</li>
+        </ol>
+        </div>
+        <p>G. Campbell Morgan stated the matter starkly: "No church ought to be allowed to exist that has not added to its membership by confession of faith. If a church is existing only by letters of transfer, it is time the doors were closed, and 'Ichabod, the glory of the Lord has departed' was inscribed across them." The presuppositions are not academic. They drive the preacher to the pulpit.</p>
+
+        <h3>V. The Centrality of the Gospel</h3>
+        <p>Evangelistic preaching keeps the cross at the center. Paul declared, "For I determined not to know anything among you except Jesus Christ and Him crucified" (1 Corinthians 2:2, NKJV). Other topics may be addressed, but the death and resurrection of Christ are the sun around which they orbit. The CWT framework remains useful even in the pulpit: God's purpose (eternal life), our need (sin), God's provision (Christ's substitutionary death and resurrection), and the required response (repentance and faith). Sermons that fill the time with stories, humor, or moral advice while avoiding the offense of the cross have not preached the gospel, no matter how engaging they may be. The gospel itself is the power of God unto salvation (Romans 1:16, NKJV).</p>
+
+        <h3>VI. Clarity and Scriptural Authority</h3>
+        <p>Public proclamation requires clear communication. Paul used a vivid analogy:</p>
+        <blockquote>"For if the trumpet makes an uncertain sound, who will prepare for battle?" (1 Corinthians 14:8, NKJV)</blockquote>
+        <p>An uncertain trumpet confuses the soldiers. A vague sermon hinders response. The hearer must understand the message in order to respond to it. Clarity means using plain language, explaining biblical terms (grace, repentance, faith), organizing the message in a logical flow (problem → solution → response), and summarizing key points. The preacher should ask himself, "If a person who has never read the Bible heard this sermon, would he understand the gospel?" If not, the sermon needs revision.</p>
+        <p>Clarity must be married to authority. Paul commanded Timothy, "Preach the word!" (2 Timothy 4:2, NKJV). The authority of the message does not come from the preacher's personality, education, or emotional intensity. It comes from the Word of God. The preacher is not a source of truth; he is a herald of truth already revealed. Therefore evangelistic preaching, however topical in form, must always be expository in foundation — explaining what the Bible actually says.</p>
+
+        <h3>VII. Dependence on the Holy Spirit</h3>
+        <p>As in all evangelism, preaching depends on the Spirit. Paul wrote, "And my speech and my preaching were not with persuasive words of human wisdom, but in demonstration of the Spirit and of power" (1 Corinthians 2:4, NKJV). The most carefully crafted sermon produces no spiritual fruit unless the Spirit applies it. The preacher must pray before, during, and after — relying on the Spirit for boldness, clarity, and the unseen work of conviction. He cannot manufacture conviction through emotional manipulation. Only the Spirit convicts.</p>
+        <p>Emotion may be present in evangelistic preaching, and it is not wrong — the gospel rightly moves the heart. But emotion must not replace truth. Responses based solely on emotion often lack lasting change. A person may weep at a moving story, walk an aisle, and yet not be born again. The preacher aims first at the mind — helping hearers understand the gospel — and lets the emotions follow from understanding.</p>
+
+        <h3>VIII. The Invitation: Drawing the Net</h3>
+        <p>Evangelistic preaching calls for response. The invitation is not an emotional appendix to the sermon; it is the sermon's purpose. Peter's Pentecost sermon ended with a command, not a suggestion. Whitefield, Moody, and Graham all gave clear, urgent invitations. The shape of the invitation may vary — a private prayer, a raised hand, walking forward, a follow-up conversation — but the call must be made. The preacher should explain clearly what repentance and faith look like, name the moment of decision, and give an opportunity to respond. He must do this without manipulation. Pressure produces false converts. The Spirit produces true ones. The preacher's job is to make the way clear and the call urgent, and then to trust God for the response.</p>
+
+        <h3>IX. The Herald: A Closing Image</h3>
+        <p>Imagine the <em>keryx</em> in the public square. He does not invent the news; he announces it. He does not negotiate the king's decree; he proclaims it. He does not apologize for the message; he delivers it with urgency. His voice must be clear, his words accurate, and his demeanor faithful. If he whispers, the village does not hear. If he adds his own opinions, he distorts the message. If he apologizes, he undermines the king's authority. The evangelistic preacher is a herald for the King of Kings. Paul put it directly: "For we do not preach ourselves, but Christ Jesus the Lord, and ourselves your bondservants for Jesus' sake" (2 Corinthians 4:5, NKJV).</p>
+
+        <h3>Conclusion: Faithful Proclamation, Divine Power</h3>
+        <p>Evangelistic preaching is a powerful means of proclaiming the gospel. When done faithfully, it communicates truth clearly and calls for response. Its effectiveness depends not on personality or method but on faithfulness to Scripture and dependence on God. The preacher must know the gospel, speak it clearly, rely on the Spirit, call for decision, and trust God for the increase. The pulpit is a sacred trust. Those who stand in it will give an account. Let them preach Christ crucified, risen, and coming again.</p>
+        <p><em>Prayer: Lord, raise up heralds who will proclaim Your gospel faithfully. Give them clarity of mind, boldness of spirit, and humility of heart. Protect them from eloquence without truth, emotion without substance, and pressure without love. May every sermon be an arrow aimed at the heart, guided by Your Spirit, and effective for Your glory. In Jesus' name, Amen.</em></p>
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación: La Predicación en Su Mejor Forma</h2>
+        <p>El evangelismo personal es la forma más común de proclamación del evangelio, pero no la única. Desde Pedro en Pentecostés hasta Whitefield en los campos y Spurgeon en el Tabernáculo, Dios ha usado la proclamación pública para reunir a miles. Faris Whitesell lo expresó con claridad: "La predicación evangelística es la predicación en su mejor forma. Es la predicación adaptada a los fines más altos del evangelio — apartando a los hombres del pecado y las tinieblas hacia la salvación y la luz. La predicación evangelística es la predicación con una misión — una misión inmediata y de suma importancia — ganar un veredicto a favor del Señor Jesucristo." V. L. Stanfield ofreció la definición más simple: "la proclamación pública del evangelio de Jesucristo" con miras a obtener aceptación. Ambas definiciones apuntan al mismo corazón: un llamado público, bíblico y empoderado por el Espíritu Santo a recibir a Cristo.</p>
+        <p>Esta unidad examina qué es la predicación evangelística, los términos del Nuevo Testamento para la proclamación, las dos cosas que toda predicación evangelística debe hacer, las presuposiciones que la hacen posible, la necesidad de claridad y autoridad escritural, la dependencia del Espíritu Santo, la invitación, y la imagen del heraldo que ancla la identidad del predicador.</p>
+
+        <h3>I. Seis Definiciones Que Afinan Nuestro Vocabulario</h3>
+        <p>La palabra "evangelismo" lleva una familia de términos relacionados. Distinguirlos previene la confusión.</p>
+        <ul>
+        <li><strong>Evangelio</strong> — las "buenas nuevas" mismas. El mensaje sobre lo que Dios ha hecho en Cristo.</li>
+        <li><strong>Evangelismo</strong> — presentar esas buenas nuevas para que las personas las reciban.</li>
+        <li><strong>Evangelista</strong> — uno que lleva las buenas nuevas. Todo pastor es en este sentido un evangelista.</li>
+        <li><strong>Evangelístico</strong> — caracterizado por propagar urgentemente las buenas nuevas.</li>
+        <li><strong>Evangélico</strong> — uno que respalda la obra y enfatiza recibir las buenas nuevas.</li>
+        <li><strong>Predicación Evangelística</strong> — proclamación pública del evangelio con el objetivo de la conversión.</li>
+        </ul>
+        <p>Una distinción merece especial atención: <em>es posible ser evangélico sin ser evangelístico.</em> Una iglesia puede sostener doctrina ortodoxa, cantar los himnos correctos, y nunca llamar a un pecador al arrepentimiento. La etiqueta es correcta; la labor falta. La predicación evangelística existe para cerrar esa brecha.</p>
+
+        <h3>II. Los Términos del Nuevo Testamento para la Predicación</h3>
+        <p>Warren Wiersbe identifica varias palabras griegas detrás de "predicación" en el Nuevo Testamento. Cada una añade una dimensión.</p>
+        <ul>
+        <li><strong>Euangelizomai</strong> — "anunciar buenas nuevas" (52 veces). El verbo fundamental de la proclamación del evangelio.</li>
+        <li><strong>Kerussein</strong> — "proclamar como un heraldo" (52 veces). El sustantivo relacionado <em>keryx</em> (heraldo) y <em>kerygma</em> (proclamación) anclan la imagen.</li>
+        <li><strong>Marturein</strong> — "dar testimonio." Juan usa esta palabra casi exclusivamente. Predicar desde el corazón.</li>
+        <li><strong>Lalein</strong> — "hablar" (6 veces). Sugiere cierta naturalidad; la predicación es conversación proyectada.</li>
+        <li><strong>Didaskein</strong> — "enseñar" (95 veces). El púlpito también es un aula.</li>
+        </ul>
+        <p>La imagen que domina es el <em>keryx</em> — el heraldo. En el mundo griego y romano, el heraldo era el anunciador oficial del estado. Debía tener una voz clara y un carácter confiable. No inventaba el mensaje; lo proclamaba. Juan el Bautista es el primer heraldo del Nuevo Testamento, anunciando al Mesías venidero. Todo predicador evangelístico sigue en esa línea: lleva el mensaje de otro.</p>
+
+        <h3>III. Las Dos Cosas Que Todo Sermón Evangelístico Debe Hacer</h3>
+        <p>Chevis Horne, en <em>Dynamic Preaching</em>, observa que la predicación evangelística es la predicación que debemos hacer primero — si un hombre tiene un brazo roto, debe ser entablillado, y si tiene una relación rota con Dios, debe ser sanada antes que nada. Dos cosas son esenciales.</p>
+        <p><strong>1. Se anuncian las buenas nuevas.</strong> Evangelismo significa buenas nuevas. A una persona perdida le dice: "Aquí hay luz." A uno encadenado: "Puedes ser libre." Al hambriento: "Aquí hay pan." Al ciego: "Puedes ver." Al moribundo: "Puedes vivir." Frederick Buechner añade que antes de ser buenas nuevas, el evangelio es malas nuevas — el hombre es pecador; eso es tragedia. Contra las malas nuevas amanece la mañana: Dios nos ama de todos modos. Eso es comedia. Es demasiado bueno para ser verdad. Eso es cuento de hadas. Todo sermón evangelístico debe recorrer ese arco — tragedia, búsqueda, hallazgo — tal como la oveja perdida, la moneda perdida y el hijo perdido lo recorren en Lucas 15.</p>
+        <p><strong>2. Se llama a algo.</strong> La información no es suficiente. El sermón debe llamar al arrepentimiento, la fe, la confesión y la incorporación a la iglesia. Pedro en Pentecostés cerró su sermón con un mandato directo: "Arrepentíos, y bautícese cada uno de vosotros en el nombre de Jesucristo" (Hechos 2:38, RVG). Un sermón que anuncia el evangelio pero nunca pide respuesta ha hecho la mitad de la obra y ha dejado al alma en el umbral.</p>
+
+        <h3>IV. Nueve Presuposiciones Que Hacen Posible la Predicación Evangelística</h3>
+        <p>Jay Brown destila las convicciones sobre las que descansa la predicación evangelística. No son adornos teológicos opcionales; sin ellas, el predicador no predicará evangelísticamente.</p>
+        <div class="scale-box">
+        <h4>Las Presuposiciones de Brown</h4>
+        <ol>
+        <li>Las personas sin Cristo están perdidas (Juan 3:18). Están sin Dios y sin esperanza.</li>
+        <li>La predicación es el medio principal de Dios para salvar al perdido (Romanos 10:14).</li>
+        <li>El púlpito es la mayor oportunidad del predicador para evangelizar — alcanza a más personas a la vez que en cualquier otro encuentro.</li>
+        <li>Cristo es el único medio de salvación de Dios (Juan 14:6). No uno entre muchos.</li>
+        <li>El Espíritu Santo puede producir experiencias transformadoras en el acto mismo de predicar.</li>
+        <li>El evangelio sigue siendo el poder de Dios para salvación (Romanos 1:16).</li>
+        <li>La misión de la iglesia exige predicación evangelística. El <em>kerygma</em> más que el <em>didache</em> distingue la fe cristiana.</li>
+        <li>La predicación evangelística fortalece todos los demás ministerios de la iglesia — asistencia, ofrendas y crecimiento espiritual aumentan cuando se salvan almas.</li>
+        <li>Alguien tiene que hacer la cosecha (Juan 4:35–38; Mateo 9:37–38).</li>
+        </ol>
+        </div>
+        <p>G. Campbell Morgan declaró el asunto con franqueza: "Ninguna iglesia debería permitirse existir que no haya añadido a su membresía por confesión de fe. Si una iglesia existe solo por cartas de traslado, es hora de que se cierren las puertas y se inscriba sobre ellas: 'Icabod, la gloria del Señor se ha apartado.'" Las presuposiciones no son académicas. Llevan al predicador al púlpito.</p>
+
+        <h3>V. La Centralidad del Evangelio</h3>
+        <p>La predicación evangelística mantiene la cruz en el centro. Pablo declaró: "Pues nada me propuse saber entre vosotros, sino a Jesucristo, y a éste crucificado" (1 Corintios 2:2, RVG). Pueden tratarse otros temas, pero la muerte y la resurrección de Cristo son el sol alrededor del cual giran los demás. El marco del CWT sigue siendo útil incluso en el púlpito: el propósito de Dios (vida eterna), nuestra necesidad (pecado), la provisión de Dios (muerte sustitutiva y resurrección de Cristo) y la respuesta requerida (arrepentimiento y fe). Los sermones que llenan el tiempo con historias, humor o consejo moral mientras evitan la ofensa de la cruz no han predicado el evangelio, por muy atractivos que sean. El evangelio mismo es el poder de Dios para salvación (Romanos 1:16, RVG).</p>
+
+        <h3>VI. Claridad y Autoridad Escritural</h3>
+        <p>La proclamación pública requiere comunicación clara. Pablo usó una analogía vívida:</p>
+        <blockquote>"Si la trompeta diere sonido incierto, ¿quién se preparará para la batalla?" (1 Corintios 14:8, RVG)</blockquote>
+        <p>Una trompeta incierta confunde a los soldados. Un sermón vago dificulta la respuesta. El oyente debe entender el mensaje para responder a él. La claridad implica usar lenguaje sencillo, explicar términos bíblicos (gracia, arrepentimiento, fe), organizar el mensaje en un flujo lógico (problema → solución → respuesta) y resumir los puntos clave. El predicador debe preguntarse: "Si una persona que nunca ha leído la Biblia escuchara este sermón, ¿entendería el evangelio?" Si no, el sermón necesita revisión.</p>
+        <p>La claridad debe casarse con la autoridad. Pablo ordenó a Timoteo: "Predica la palabra" (2 Timoteo 4:2, RVG). La autoridad del mensaje no proviene de la personalidad, la educación o la intensidad emocional del predicador. Proviene de la Palabra de Dios. El predicador no es una fuente de verdad; es un heraldo de la verdad ya revelada. Por tanto, la predicación evangelística, por más temática que sea en forma, debe ser siempre expositiva en su fundamento — explicando lo que la Biblia realmente dice.</p>
+
+        <h3>VII. Dependencia del Espíritu Santo</h3>
+        <p>Como en todo evangelismo, la predicación depende del Espíritu Santo. Pablo escribió: "Ni mi palabra ni mi predicación fue con palabras persuasivas de humana sabiduría, sino con demostración del Espíritu y de poder" (1 Corintios 2:4, RVG). El sermón más cuidadosamente preparado no produce fruto espiritual a menos que el Espíritu Santo lo aplique. El predicador debe orar antes, durante y después — confiando en el Espíritu Santo para la valentía, la claridad y la obra invisible de la convicción. No puede fabricar convicción mediante manipulación emocional. Solo el Espíritu Santo convence.</p>
+        <p>La emoción puede estar presente en la predicación evangelística, y no es incorrecta — el evangelio mueve correctamente el corazón. Pero la emoción no debe reemplazar la verdad. Las respuestas basadas únicamente en la emoción a menudo carecen de cambio duradero. Una persona puede llorar ante una historia conmovedora, caminar por un pasillo, y aún así no haber nacido de nuevo. El predicador apunta primero a la mente — ayudando a los oyentes a entender el evangelio — y deja que las emociones sigan al entendimiento.</p>
+
+        <h3>VIII. La Invitación: Recogiendo la Red</h3>
+        <p>La predicación evangelística llama a la respuesta. La invitación no es un apéndice emocional del sermón; es el propósito del sermón. El sermón de Pedro en Pentecostés terminó con un mandato, no una sugerencia. Whitefield, Moody y Graham dieron invitaciones claras y urgentes. La forma de la invitación puede variar — una oración privada, una mano levantada, caminar al frente, una conversación de seguimiento — pero el llamado debe hacerse. El predicador debe explicar claramente cómo se ve el arrepentimiento y la fe, nombrar el momento de decisión, y dar una oportunidad para responder. Debe hacerlo sin manipulación. La presión produce falsos conversos. El Espíritu Santo produce los verdaderos. El trabajo del predicador es hacer el camino claro y el llamado urgente, y luego confiar en Dios para la respuesta.</p>
+
+        <h3>IX. El Heraldo: Una Imagen Final</h3>
+        <p>Imagine al <em>keryx</em> en la plaza pública. No inventa las noticias; las anuncia. No negocia el decreto del rey; lo proclama. No se disculpa por el mensaje; lo entrega con urgencia. Su voz debe ser clara, sus palabras precisas y su actitud fiel. Si susurra, el pueblo no oye. Si añade sus propias opiniones, distorsiona el mensaje. Si se disculpa, socava la autoridad del rey. El predicador evangelístico es un heraldo del Rey de reyes. Pablo lo dijo directamente: "Porque no nos predicamos a nosotros mismos, sino a Jesucristo como Señor" (2 Corintios 4:5, RVG).</p>
+
+        <h3>Conclusión: Proclamación Fiel, Poder Divino</h3>
+        <p>La predicación evangelística es un medio poderoso de proclamar el evangelio. Cuando se hace fielmente, comunica la verdad con claridad y llama a la respuesta. Su eficacia no depende de la personalidad o el método, sino de la fidelidad a las Escrituras y la dependencia de Dios. El predicador debe conocer el evangelio, hablarlo con claridad, depender del Espíritu Santo, llamar a la decisión y confiar en Dios para el crecimiento. El púlpito es un encargo sagrado. Los que están de pie en él darán cuenta. Que prediquen a Cristo crucificado, resucitado y que vuelve.</p>
+        <p><em>Oración: Señor, levanta heraldos que proclamen Tu evangelio fielmente. Dales claridad de mente, valentía de espíritu y humildad de corazón. Protégelos de la elocuencia sin verdad, la emoción sin sustancia y la presión sin amor. Que cada sermón sea una flecha apuntada al corazón, guiada por Tu Espíritu, y eficaz para Tu gloria. En el nombre de Jesús, Amén.</em></p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 8 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 8 — 30 Preguntas</span></h2>
+    <p>
+        <span class="lang-en"><strong>Certificate track:</strong> Section A (multiple choice) required at 90%. Section B (short answer) optional.</span>
+        <span class="lang-es"><strong>Pista de Certificado:</strong> Sección A (opción múltiple) obligatoria al 90%. Sección B (respuesta corta) opcional.</span>
+    </p>
+    <p>
+        <span class="lang-en"><strong>M.Div./Th.M. track:</strong> Both sections required at 90% each, independently.</span>
+        <span class="lang-es"><strong>Pista de M.Div./Th.M.:</strong> Ambas secciones obligatorias al 90% cada una, independientemente.</span>
+    </p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="clearExamDataBtn" class="small" style="background:#a0512a;">🗑 <span class="lang-en">Clear My Answers</span><span class="lang-es">Borrar Mis Respuestas</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;" aria-live="polite"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ======================== CONFIG ========================
+const UNIT_NUM = 8;
+/* CTS audit 2026-05-23: course confirmed at 13 units (Units 9-13 authored). Prior rule was: const TOTAL_UNITS = 12; */
+        const TOTAL_UNITS = 13;
+const PASS_THRESHOLD = 0.90;
+const NS = 'cts_ev_';
+const UNIT_KEY = NS + 'unit' + UNIT_NUM;
+const PROGRESS_KEY = NS + 'progress';
+const PASSED_KEY = NS + 'unit' + UNIT_NUM + '_passed';
+const MC_PASSED_KEY = NS + 'u' + UNIT_NUM + '_mc_passed';
+const LOCKOUT_KEY = NS + 'unit' + UNIT_NUM + '_sa_lockout';
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch(e) { progress = {}; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(NS + 'unit' + i + '_passed') === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSEvangelismUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSEvangelismUnit7.html"; };
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (localStorage.getItem(PASSED_KEY) === 'true') location.href = "CTSEvangelismUnit9.html";
+    else alert(currentLang === 'es' ? "Por favor apruebe la Unidad 8 primero." : "Please pass Unit 8 first.");
+};
+updateProgressGrid();
+
+// ======================== REGISTRATION ========================
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+/* CTS audit 2026-05-23: registration is collected only on Unit 1. This unit reads the saved
+   student from localStorage. If nothing is saved, default silently to the Certificate track. */
+function loadReg() {
+    let saved = localStorage.getItem('cts_student');
+    if (saved) {
+        try { student = JSON.parse(saved); } catch(e) { student = { name: '', email: '', country: '', program: 'Certificate of Ministry' }; }
+    }
+    if (!student || !student.program) { student = student || {}; student.program = 'Certificate of Ministry'; }
+    /* Keep cts_track in sync from the saved program (defaults to cert when absent). */
+    if (!localStorage.getItem('cts_track')) {
+        localStorage.setItem('cts_track', student.program === 'Master of Divinity' ? 'mdiv' : (student.program === 'Master of Theology' ? 'thm' : 'cert'));
+    }
+    applyTrackBanner();
+}
+function applyTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    const track = localStorage.getItem('cts_track') || 'cert';
+    banner.style.display = 'block';
+    /* CTS audit 2026-05-23: added Th.M. banner branch; both Masters tracks require both sections. */
+    if (track === 'thm') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Theology — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Teología — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else if (track === 'mdiv') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Divinity — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Divinidad — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else {
+        banner.innerHTML = '<span class="lang-en">Track: Certificate — Section A required (90%). Section B optional.</span><span class="lang-es">Pista: Certificado — Sección A obligatoria (90%). Sección B opcional.</span>';
+    }
+}
+/* CTS audit 2026-05-23: registration listeners removed (no reg form on this unit). */
+loadReg();
+applyTrackBanner();
+
+// ======================== QUESTIONS — MC distribution already A=B=C=D=5 ========================
+const mcQuestions = [
+    { textEn: "1. Faris Whitesell described evangelistic preaching as:", textEs: "1. Faris Whitesell describió la predicación evangelística como:", optionsEn: ["A cultural conversation", "An optional ministry", "Preaching primarily for entertainment", "Preaching at its best — winning a verdict for Christ"], optionsEs: ["Una conversación cultural", "Un ministerio opcional", "Predicación principalmente para entretenimiento", "Predicación en su mejor forma — ganando un veredicto para Cristo"], correct: 3, explanationEn: "Whitesell: 'Evangelistic preaching is preaching at its best… winning a verdict in favor of the Lord Jesus Christ.'", explanationEs: "Whitesell: 'La predicación evangelística es la predicación en su mejor forma… ganando un veredicto a favor del Señor Jesucristo.'" },
+    { textEn: "2. V. L. Stanfield's simpler definition of evangelistic preaching is:", textEs: "2. La definición más simple de V. L. Stanfield de la predicación evangelística es:", optionsEn: ["Cultural commentary on faith", "Moral exhortation for church members", "The public proclamation of the gospel of Jesus Christ", "Topical speaking on current events"], optionsEs: ["Comentario cultural sobre la fe", "Exhortación moral para miembros de la iglesia", "La proclamación pública del evangelio de Jesucristo", "Hablar sobre temas de actualidad"], correct: 2, explanationEn: "Stanfield defined it as 'the public proclamation of the gospel of Jesus Christ' aimed at gaining acceptance.", explanationEs: "Stanfield la definió como 'la proclamación pública del evangelio de Jesucristo' con miras a obtener aceptación." },
+    { textEn: "3. The Greek word 'euangelizomai' means:", textEs: "3. La palabra griega 'euangelizomai' significa:", optionsEn: ["To tell good news", "To teach systematically", "To prophesy", "To bear witness"], optionsEs: ["Anunciar buenas nuevas", "Enseñar sistemáticamente", "Profetizar", "Dar testimonio"], correct: 0, explanationEn: "Euangelizomai means 'to tell good news' and occurs 52 times in the NT.", explanationEs: "Euangelizomai significa 'anunciar buenas nuevas' y aparece 52 veces en el NT." },
+    { textEn: "4. The Greek word 'kerussein' means:", textEs: "4. La palabra griega 'kerussein' significa:", optionsEn: ["To teach a class", "To proclaim like a herald", "To bear witness", "To talk casually"], optionsEs: ["Enseñar una clase", "Proclamar como un heraldo", "Dar testimonio", "Hablar casualmente"], correct: 1, explanationEn: "Kerussein means 'to proclaim like a herald' — the dominant image of NT preaching.", explanationEs: "Kerussein significa 'proclamar como un heraldo' — la imagen dominante de la predicación del NT." },
+    { textEn: "5. The herald (keryx) in the ancient world primarily carried:", textEs: "5. El heraldo (keryx) en el mundo antiguo llevaba principalmente:", optionsEn: ["The king's decree, not his own message", "Cultural commentary", "Personal opinion", "Entertainment for crowds"], optionsEs: ["El decreto del rey, no su propio mensaje", "Comentario cultural", "Opinión personal", "Entretenimiento para multitudes"], correct: 0, explanationEn: "The keryx announced the king's decree — he did not invent the message; he delivered it.", explanationEs: "El keryx anunciaba el decreto del rey — no inventaba el mensaje; lo entregaba." },
+    { textEn: "6. The unit identifies a danger that 'it is possible to be evangelical without being':", textEs: "6. La unidad identifica un peligro de que 'es posible ser evangélico sin ser':", optionsEn: ["Doctrinal", "Biblical", "Theological", "Evangelistic"], optionsEs: ["Doctrinal", "Bíblico", "Teológico", "Evangelístico"], correct: 3, explanationEn: "A church can hold orthodox doctrine yet never call sinners to repent — evangelical but not evangelistic.", explanationEs: "Una iglesia puede tener doctrina ortodoxa pero nunca llamar a los pecadores al arrepentimiento — evangélica pero no evangelística." },
+    { textEn: "7. According to Horne, the two essentials of every evangelistic sermon are:", textEs: "7. Según Horne, los dos elementos esenciales de todo sermón evangelístico son:", optionsEn: ["Music and lighting", "Humor and stories", "Announcing the good news and calling for response", "Length and volume"], optionsEs: ["Música e iluminación", "Humor e historias", "Anunciar las buenas nuevas y llamar a la respuesta", "Extensión y volumen"], correct: 2, explanationEn: "Horne: the good news must be announced and something must be called for (repentance, faith, confession).", explanationEs: "Horne: las buenas nuevas deben ser anunciadas y se debe llamar a algo (arrepentimiento, fe, confesión)." },
+    { textEn: "8. Brown's first presupposition for evangelistic preaching is:", textEs: "8. La primera presuposición de Brown para la predicación evangelística es:", optionsEn: ["Methods are crucial", "People without Christ are lost", "Tradition supports preaching", "Preachers must be charismatic"], optionsEs: ["Los métodos son cruciales", "Las personas sin Cristo están perdidas", "La tradición apoya la predicación", "Los predicadores deben ser carismáticos"], correct: 1, explanationEn: "Brown's first presupposition: 'People without Christ are lost' — without God and without hope (John 3:18).", explanationEs: "La primera presuposición de Brown: 'Las personas sin Cristo están perdidas' — sin Dios y sin esperanza (Juan 3:18)." },
+    { textEn: "9. According to Brown, preaching is God's chief means for:", textEs: "9. Según Brown, la predicación es el medio principal de Dios para:", optionsEn: ["Building community", "Entertaining the church", "Teaching ethics", "Saving the lost"], optionsEs: ["Construir comunidad", "Entretener a la iglesia", "Enseñar ética", "Salvar al perdido"], correct: 3, explanationEn: "Romans 10:14 — 'how shall they believe in Him of whom they have not heard? and how shall they hear without a preacher?'", explanationEs: "Romanos 10:14 — '¿cómo creerán en aquel de quien no han oído? ¿y cómo oirán sin haber quien les predique?'" },
+    { textEn: "10. The pulpit reaches:", textEs: "10. El púlpito alcanza:", optionsEn: ["Only believers", "More people at once than any other engagement", "Fewer people than personal conversation", "An equal number as a small group"], optionsEs: ["Solo creyentes", "Más personas a la vez que cualquier otro ministerio", "Menos personas que la conversación personal", "Un número igual que un grupo pequeño"], correct: 1, explanationEn: "The pulpit is the preacher's greatest evangelistic opportunity — more people are reached at once than elsewhere.", explanationEs: "El púlpito es la mayor oportunidad evangelística del predicador — alcanza a más personas a la vez que en cualquier otro lugar." },
+    { textEn: "11. According to Whitesell, the goal of evangelistic preaching is:", textEs: "11. Según Whitesell, el objetivo de la predicación evangelística es:", optionsEn: ["Building reputation", "Producing pleasant feelings", "Winning a verdict for Christ", "Teaching morality"], optionsEs: ["Construir reputación", "Producir sentimientos agradables", "Ganar un veredicto para Cristo", "Enseñar moralidad"], correct: 2, explanationEn: "Whitesell: the immediate, all-important mission is 'winning a verdict in favor of the Lord Jesus Christ.'", explanationEs: "Whitesell: la misión inmediata y de suma importancia es 'ganar un veredicto a favor del Señor Jesucristo.'" },
+    { textEn: "12. Paul's resolve in 1 Corinthians 2:2 was to know nothing among the Corinthians except:", textEs: "12. La resolución de Pablo en 1 Corintios 2:2 era no saber nada entre los corintios excepto:", optionsEn: ["Jesus Christ and Him crucified", "Philosophy", "Roman politics", "Apollos and Cephas"], optionsEs: ["Jesucristo y a Éste crucificado", "Filosofía", "Política romana", "Apolos y Cefas"], correct: 0, explanationEn: "'For I determined not to know anything among you except Jesus Christ and Him crucified.'", explanationEs: "'Pues nada me propuse saber entre vosotros, sino a Jesucristo, y a éste crucificado.'" },
+    { textEn: "13. Paul's trumpet illustration (1 Corinthians 14:8) teaches that preaching must be:", textEs: "13. La ilustración de Pablo de la trompeta (1 Corintios 14:8) enseña que la predicación debe ser:", optionsEn: ["Loud", "Clear", "Long", "Emotional"], optionsEs: ["Fuerte", "Clara", "Larga", "Emocional"], correct: 1, explanationEn: "An uncertain trumpet confuses the soldiers — preaching must be clear so the hearer can respond.", explanationEs: "Una trompeta incierta confunde a los soldados — la predicación debe ser clara para que el oyente pueda responder." },
+    { textEn: "14. Paul's charge to Timothy in 2 Timothy 4:2 was:", textEs: "14. La orden de Pablo a Timoteo en 2 Timoteo 4:2 era:", optionsEn: ["Be silent", "Pursue numbers", "Avoid controversy", "Preach the word"], optionsEs: ["Callar", "Buscar números", "Evitar controversia", "Predicar la palabra"], correct: 3, explanationEn: "'Preach the word! Be ready in season and out of season.'", explanationEs: "'Predica la palabra; persiste en ella, sea en tiempo o fuera de tiempo.'" },
+    { textEn: "15. Paul's preaching, according to 1 Corinthians 2:4, was in demonstration of:", textEs: "15. La predicación de Pablo, según 1 Corintios 2:4, fue en demostración de:", optionsEn: ["Rhetorical skill", "Cultural relevance", "The Spirit and of power", "Political wisdom"], optionsEs: ["Habilidad retórica", "Relevancia cultural", "El Espíritu y de poder", "Sabiduría política"], correct: 2, explanationEn: "Paul's preaching was 'in demonstration of the Spirit and of power' — not persuasive words of human wisdom.", explanationEs: "La predicación de Pablo fue 'con demostración del Espíritu y de poder' — no con palabras persuasivas de humana sabiduría." },
+    { textEn: "16. The danger of emotionalism in evangelistic preaching is:", textEs: "16. El peligro del emocionalismo en la predicación evangelística es:", optionsEn: ["It produces shallow responses that lack lasting change", "It always offends", "It cannot be used by God", "It produces nothing"], optionsEs: ["Produce respuestas superficiales que carecen de cambio duradero", "Siempre ofende", "No puede ser usado por Dios", "No produce nada"], correct: 0, explanationEn: "Emotion may attend the sermon but cannot replace truth — emotion-only responses often produce false converts.", explanationEs: "La emoción puede acompañar al sermón pero no puede reemplazar la verdad — las respuestas solo emocionales a menudo producen falsos conversos." },
+    { textEn: "17. The invitation in evangelistic preaching:", textEs: "17. La invitación en la predicación evangelística:", optionsEn: ["Is an optional emotional appendix", "Must include a clear call to respond", "Should be omitted to avoid pressure", "Must always involve walking forward"], optionsEs: ["Es un apéndice emocional opcional", "Debe incluir un llamado claro a responder", "Debe omitirse para evitar presión", "Siempre debe implicar caminar al frente"], correct: 1, explanationEn: "The invitation is the sermon's purpose — every evangelistic message must call clearly for response.", explanationEs: "La invitación es el propósito del sermón — todo mensaje evangelístico debe llamar claramente a la respuesta." },
+    { textEn: "18. The town crier (keryx) illustrates that the preacher:", textEs: "18. El pregonero (keryx) ilustra que el predicador:", optionsEn: ["Is a herald of another's message", "Composes the news", "Negotiates the message", "Apologizes for hard truths"], optionsEs: ["Es un heraldo del mensaje de otro", "Compone las noticias", "Negocia el mensaje", "Se disculpa por las verdades duras"], correct: 0, explanationEn: "The town crier announces what the king has decreed — like the preacher heralding what God has said.", explanationEs: "El pregonero anuncia lo que el rey ha decretado — como el predicador proclama lo que Dios ha dicho." },
+    { textEn: "19. The authority of evangelistic preaching comes from:", textEs: "19. La autoridad de la predicación evangelística proviene de:", optionsEn: ["The preacher's personality", "The preacher's experience", "The Word of God", "The audience's expectations"], optionsEs: ["La personalidad del predicador", "La experiencia del predicador", "La Palabra de Dios", "Las expectativas de la audiencia"], correct: 2, explanationEn: "Authority rests in Scripture — the preacher is a herald of truth already revealed, not its source.", explanationEs: "La autoridad reside en las Escrituras — el predicador es un heraldo de la verdad ya revelada, no su fuente." },
+    { textEn: "20. Evangelistic preaching is effective ultimately because:", textEs: "20. La predicación evangelística es efectiva en última instancia porque:", optionsEn: ["The preacher is gifted", "The audience is receptive", "Methods are sound", "The Spirit applies the Word"], optionsEs: ["El predicador es dotado", "La audiencia es receptiva", "Los métodos son sólidos", "El Espíritu aplica la Palabra"], correct: 3, explanationEn: "The Spirit's application of the Word produces genuine conversion — apart from Him, no method or person can save.", explanationEs: "La aplicación del Espíritu de la Palabra produce conversión genuina — aparte de Él, ningún método o persona puede salvar." }
+];
+
+const kwQuestions = [
+    { textEn: "21. State Faris Whitesell's definition of evangelistic preaching and explain why he calls it 'preaching at its best.'", textEs: "21. Exprese la definición de Faris Whitesell de la predicación evangelística y explique por qué él la llama 'la predicación en su mejor forma'.", kw_en: ["whitesell", "best", "preach", "verdict", "definit", "gospel", "aim", "decision"], kw_es: ["whitesell", "mejor", "predic", "veredict", "definici", "evangel", "decisión", "decision"], modelEn: "Faris Whitesell defined evangelistic preaching as preaching that aims to bring the hearer to a decision for Christ — proclamation directed toward a verdict. He calls it preaching at its best because it does what all preaching ultimately exists to do: it confronts the hearer with the gospel and calls for a response, refusing to leave him merely informed. Preaching reaches its highest purpose when it seeks the soul's surrender to Christ.", modelEs: "Faris Whitesell definió la predicación evangelística como la predicación que busca llevar al oyente a una decisión por Cristo — proclamación dirigida hacia un veredicto. La llama la predicación en su mejor forma porque hace lo que toda predicación finalmente existe para hacer: confronta al oyente con el evangelio y llama a una respuesta, negándose a dejarlo meramente informado. La predicación alcanza su propósito más alto cuando busca la entrega del alma a Cristo.", authorDraft: true },
+    { textEn: "22. Compare and contrast Whitesell's and Stanfield's definitions of evangelistic preaching. What does each emphasize?", textEs: "22. Compare y contraste las definiciones de Whitesell y Stanfield de la predicación evangelística. ¿Qué enfatiza cada una?", kw_en: ["whitesell", "stanfield", "verdict", "proclaim", "emphas", "content", "decision", "compar"], kw_es: ["whitesell", "stanfield", "veredict", "proclam", "énfasis", "enfasis", "conteni", "decisión"], modelEn: "Whitesell and Stanfield agree evangelistic preaching aims at a response but emphasize different things. Whitesell emphasizes the aim — preaching for a verdict, the decision the sermon seeks. Stanfield emphasizes the content and precision — what must be proclaimed for the preaching to be truly evangelistic, the clear gospel. Together they show evangelistic preaching needs both a clear gospel content and a deliberate call for decision.", modelEs: "Whitesell y Stanfield concuerdan en que la predicación evangelística busca una respuesta pero enfatizan cosas diferentes. Whitesell enfatiza el objetivo — predicar por un veredicto, la decisión que busca el sermón. Stanfield enfatiza el contenido y la precisión — lo que debe proclamarse para que la predicación sea verdaderamente evangelística, el evangelio claro. Juntos muestran que la predicación evangelística necesita tanto un contenido claro del evangelio como un llamado deliberado a la decisión.", authorDraft: true },
+    { textEn: "23. Explain the difference between being 'evangelical' and being 'evangelistic.' Why is it possible to be one without the other?", textEs: "23. Explique la diferencia entre ser 'evangélico' y ser 'evangelístico'. ¿Por qué es posible ser uno sin el otro?", kw_en: ["evangelical", "evangelistic", "doctrine", "proclaim", "without", "differ", "sound", "share"], kw_es: ["evangélic", "evangelic", "evangelístic", "evangelistic", "doctrina", "proclam", "sin", "comparti"], modelEn: "To be evangelical is to hold sound gospel doctrine — right belief about Christ and salvation. To be evangelistic is to actively proclaim that gospel to the lost. One can be evangelical without being evangelistic because a person or church may believe all the right things yet never share them. Correct doctrine that is never proclaimed saves no one; the evangelistic spirit turns sound belief into active witness.", modelEs: "Ser evangélico es sostener la doctrina sana del evangelio — creencia correcta acerca de Cristo y la salvación. Ser evangelístico es proclamar activamente ese evangelio a los perdidos. Uno puede ser evangélico sin ser evangelístico porque una persona o iglesia puede creer todas las cosas correctas pero nunca compartirlas. La doctrina correcta que nunca se proclama no salva a nadie; el espíritu evangelístico convierte la creencia sana en testimonio activo.", authorDraft: true },
+    { textEn: "24. Identify the Greek terms 'euangelizomai' and 'kerussein.' Explain what each adds to our understanding of evangelistic preaching, and describe the herald (keryx) image.", textEs: "24. Identifique los términos griegos 'euangelizomai' y 'kerussein'. Explique lo que cada uno añade a nuestra comprensión de la predicación evangelística, y describa la imagen del heraldo (keryx).", kw_en: ["euangel", "kerus", "herald", "message", "announce", "greek", "proclaim", "term"], kw_es: ["euangel", "kerus", "herald", "mensaj", "anunci", "grieg", "proclam", "términ"], modelEn: "The Greek euangelizomai means to announce good news, stressing the joyful content of the message; kerussein means to herald or proclaim as a public crier, stressing the authoritative act of proclamation. The herald (keryx) image is of a messenger who announces a king's decree — he does not invent the message but delivers it faithfully and boldly. Together the terms show evangelistic preaching is the faithful, public proclamation of good news that is not the preacher's own.", modelEs: "El griego euangelizomai significa anunciar buenas nuevas, destacando el contenido gozoso del mensaje; kerussein significa heraldar o proclamar como un pregonero público, destacando el acto autoritativo de la proclamación. La imagen del heraldo (keryx) es la de un mensajero que anuncia el decreto de un rey — no inventa el mensaje sino que lo entrega fielmente y con valentía. Juntos los términos muestran que la predicación evangelística es la proclamación fiel y pública de buenas nuevas que no son del predicador mismo.", authorDraft: true },
+    { textEn: "25. According to Chevis Horne, what are the two essential elements of every evangelistic sermon? Defend each as biblically required.", textEs: "25. Según Chevis Horne, ¿cuáles son los dos elementos esenciales de todo sermón evangelístico? Defienda cada uno como bíblicamente requerido.", kw_en: ["horne", "two", "essential", "announce", "call", "response", "sermon", "requir"], kw_es: ["horne", "dos", "esencial", "anunci", "llam", "respuesta", "sermón", "sermon"], modelEn: "According to Chevis Horne, every evangelistic sermon has two essential elements: an announcement of the good news of what God has done in Christ, and a call for response, inviting the hearer to act. Both are biblically required: the announcement is essential because there is no gospel without the message of Christ, and the call is essential because Scripture everywhere summons hearers to repent and believe. A sermon with only announcement informs; one with only a call manipulates. Both together preach the gospel rightly.", modelEs: "Según Chevis Horne, todo sermón evangelístico tiene dos elementos esenciales: un anuncio de las buenas nuevas de lo que Dios ha hecho en Cristo, y un llamado a responder, invitando al oyente a actuar. Ambos son bíblicamente requeridos: el anuncio es esencial porque no hay evangelio sin el mensaje de Cristo, y el llamado es esencial porque la Escritura por todas partes convoca a los oyentes a arrepentirse y creer. Un sermón con solo anuncio informa; uno con solo un llamado manipula. Ambos juntos predican el evangelio correctamente.", authorDraft: true },
+    { textEn: "26. Identify Jay Brown's first three presuppositions for evangelistic preaching and explain how each shapes the preacher's approach.", textEs: "26. Identifique las primeras tres presuposiciones de Jay Brown para la predicación evangelística y explique cómo cada una moldea el enfoque del predicador.", kw_en: ["brown", "presuppos", "lost", "preach", "pulpit", "shape", "approach", "three"], kw_es: ["brown", "presuposici", "presuposicion", "perdid", "predic", "púlpito", "pulpit", "enfoqu"], modelEn: "Jay Brown's first three presuppositions for evangelistic preaching are that there are lost people present who need to be saved, that the gospel must actually be preached from the pulpit and not assumed, and that the preacher expects and aims for a response. Each shapes the preacher's approach: believing the lost are present keeps the gospel central every Sunday; refusing to assume the gospel makes him state it plainly; and expecting response leads him to call for decision rather than merely teach.", modelEs: "Las primeras tres presuposiciones de Jay Brown para la predicación evangelística son que hay personas perdidas presentes que necesitan ser salvas, que el evangelio debe realmente predicarse desde el púlpito y no darse por supuesto, y que el predicador espera y busca una respuesta. Cada una moldea el enfoque del predicador: creer que los perdidos están presentes mantiene el evangelio central cada domingo; negarse a dar por supuesto el evangelio lo hace exponerlo claramente; y esperar respuesta lo lleva a llamar a la decisión en vez de solo enseñar.", authorDraft: true },
+    { textEn: "27. G. Campbell Morgan wrote that 'no church ought to be allowed to exist that has not added to its membership by confession of faith.' Discuss the implications of this statement for the pastor's preaching ministry.", textEs: "27. G. Campbell Morgan escribió que 'ninguna iglesia debería permitirse existir que no haya añadido a su membresía por confesión de fe'. Discuta las implicaciones de esta declaración para el ministerio de predicación del pastor.", kw_en: ["morgan", "confess", "faith", "church", "member", "preach", "implicat", "convert"], kw_es: ["morgan", "confesión", "confesion", "fe", "iglesia", "miembr", "predic", "implicaci"], modelEn: "G. Campbell Morgan said no church ought to exist that has not added to its membership by confession of faith. The implication for the pastor's preaching ministry is that his preaching must actually produce conversions, not merely instruct the already-converted. A church that never sees new believers come to faith and confess Christ has stopped being evangelistic. So the pastor must preach for decision, expecting his pulpit ministry to bear the fruit of genuine new converts joining the body.", modelEs: "G. Campbell Morgan dijo que ninguna iglesia debería existir que no haya añadido a su membresía por confesión de fe. La implicación para el ministerio de predicación del pastor es que su predicación debe realmente producir conversiones, no meramente instruir a los ya convertidos. Una iglesia que nunca ve nuevos creyentes llegar a la fe y confesar a Cristo ha dejado de ser evangelística. Así que el pastor debe predicar para la decisión, esperando que su ministerio en el púlpito dé el fruto de genuinos nuevos convertidos uniéndose al cuerpo.", authorDraft: true },
+    { textEn: "28. Explain why Paul's trumpet illustration (1 Corinthians 14:8) demands clarity in evangelistic preaching. What practical steps ensure that the hearer can understand the gospel?", textEs: "28. Explique por qué la ilustración de Pablo de la trompeta (1 Corintios 14:8) exige claridad en la predicación evangelística. ¿Qué pasos prácticos aseguran que el oyente pueda entender el evangelio?", kw_en: ["trumpet", "clear", "understand", "language", "corinth", "simple", "plain", "hearer"], kw_es: ["trompeta", "clar", "entend", "comprend", "lenguaj", "corint", "sencill", "simpl"], modelEn: "Paul's trumpet illustration in 1 Corinthians 14:8 says that if the trumpet gives an uncertain sound, no one prepares for battle — an unclear message produces no response. This demands clarity in evangelistic preaching: the hearer cannot respond to a gospel he does not understand. Practical steps that ensure clarity include using plain language rather than jargon, defining terms like sin and grace, illustrating concretely, and stating the gospel and the call simply enough that an outsider could grasp and act on it.", modelEs: "La ilustración de la trompeta de Pablo en 1 Corintios 14:8 dice que si la trompeta da un sonido incierto, nadie se prepara para la batalla — un mensaje poco claro no produce respuesta. Esto exige claridad en la predicación evangelística: el oyente no puede responder a un evangelio que no entiende. Pasos prácticos que aseguran la claridad incluyen usar lenguaje sencillo en vez de jerga, definir términos como pecado y gracia, ilustrar concretamente, y exponer el evangelio y el llamado con suficiente sencillez para que un de afuera pueda captarlo y actuar.", authorDraft: true },
+    { textEn: "29. Discuss the role of the Holy Spirit in evangelistic preaching (1 Corinthians 2:4). Distinguish the preacher's role from the Spirit's, and explain why this dependence guards against manipulation.", textEs: "29. Discuta el papel del Espíritu Santo en la predicación evangelística (1 Corintios 2:4). Distinga el papel del predicador del papel del Espíritu, y explique por qué esta dependencia protege contra la manipulación.", kw_en: ["spirit", "power", "preacher", "manipulat", "role", "depend", "convict", "guard"], kw_es: ["espíritu", "espiritu", "poder", "predicador", "manipul", "papel", "depend", "convenc"], modelEn: "1 Corinthians 2:4 shows Paul's preaching rested on the Spirit's power, not persuasive words. In evangelistic preaching the preacher's role is to proclaim the gospel clearly and faithfully; the Spirit's role is to convict and convert the heart. This dependence guards against manipulation because the preacher who trusts the Spirit has no need to engineer emotional pressure or manufacture decisions; he can preach the truth plainly and leave the results to God, who alone gives the new birth.", modelEs: "1 Corintios 2:4 muestra que la predicación de Pablo descansaba en el poder del Espíritu, no en palabras persuasivas. En la predicación evangelística el papel del predicador es proclamar el evangelio con claridad y fidelidad; el papel del Espíritu es convencer y convertir el corazón. Esta dependencia protege contra la manipulación porque el predicador que confía en el Espíritu no necesita fabricar presión emocional ni manufacturar decisiones; puede predicar la verdad llanamente y dejar los resultados a Dios, que solo Él da el nuevo nacimiento.", authorDraft: true },
+    { textEn: "30. Synthesize the unit: how do biblical content, presuppositions, clarity, Spirit-dependence, and the invitation come together to make evangelistic preaching faithful and effective?", textEs: "30. Sintetice la unidad: ¿cómo se combinan el contenido bíblico, las presuposiciones, la claridad, la dependencia del Espíritu y la invitación para hacer que la predicación evangelística sea fiel y eficaz?", kw_en: ["content", "presuppos", "clear", "spirit", "invit", "faithful", "effective", "togeth"], kw_es: ["conteni", "presuposici", "presuposicion", "clar", "espíritu", "espiritu", "invit", "fiel"], modelEn: "Faithful and effective evangelistic preaching combines several elements. Biblical content supplies the true gospel that must be proclaimed. Right presuppositions — that the lost are present and the gospel must be preached for a response — keep it evangelistic. Clarity ensures the hearer can understand. Spirit-dependence ensures it is God's power and not human pressure that converts. And the invitation calls the hearer to actually respond. Together, content, presuppositions, clarity, the Spirit, and the invitation make preaching both true to God and fruitful for souls.", modelEs: "La predicación evangelística fiel y eficaz combina varios elementos. El contenido bíblico suple el verdadero evangelio que debe proclamarse. Las presuposiciones correctas — que los perdidos están presentes y el evangelio debe predicarse para una respuesta — la mantienen evangelística. La claridad asegura que el oyente pueda entender. La dependencia del Espíritu asegura que sea el poder de Dios y no la presión humana lo que convierte. Y la invitación llama al oyente a responder de hecho. Juntos, el contenido, las presuposiciones, la claridad, el Espíritu y la invitación hacen que la predicación sea fiel a Dios y fructífera para las almas.", authorDraft: true }
+];
+
+// ======================== STATE ========================
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+let unitPassed = localStorage.getItem(PASSED_KEY) === 'true';
+let mcPassed = localStorage.getItem(MC_PASSED_KEY) === 'true';
+
+function kwHit(answer, kw) {
+    if (!answer) return false;
+    var a = answer.toLowerCase();
+    var k = kw.toLowerCase();
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    var re = (k.length <= 4)
+        ? new RegExp("(^|[^\\p{L}])" + esc + "($|[^\\p{L}])", "u")
+        : new RegExp("(^|[^\\p{L}])" + esc, "u");
+    return re.test(a);
+}
+function essayPartialMatch(answer, keywords) {
+    if (!answer || answer.trim().length < 100) return false;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched >= 3;
+}
+function kwHitCount(answer, keywords) {
+    if (!answer) return 0;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched;
+}
+
+function saveUnitState() {
+    localStorage.setItem(UNIT_KEY + '_mc', JSON.stringify(mcAnswers));
+    localStorage.setItem(UNIT_KEY + '_kw', JSON.stringify(kwAnswers));
+}
+function loadSavedAnswers() {
+    const savedMC = localStorage.getItem(UNIT_KEY + '_mc');
+    if (savedMC) { try { let p = JSON.parse(savedMC); if (Array.isArray(p) && p.length === 20) mcAnswers = p; } catch(e) {} }
+    const savedKW = localStorage.getItem(UNIT_KEY + '_kw');
+    if (savedKW) { try { let p = JSON.parse(savedKW); if (Array.isArray(p) && p.length === 10) kwAnswers = p; } catch(e) {} }
+}
+
+function clearAllLocal() {
+    if (confirm(currentLang === 'es' ? '⚠️ Esto borrará todas sus respuestas, estado de bloqueo y progreso de esta unidad. ¿Está seguro?' : '⚠️ This will erase all your answers, lockout status, and progress for this unit. Are you sure?')) {
+        localStorage.removeItem(UNIT_KEY + '_mc');
+        localStorage.removeItem(UNIT_KEY + '_kw');
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(PASSED_KEY);
+        localStorage.removeItem(MC_PASSED_KEY);
+        lockUntil = 0;
+        unitPassed = false;
+        mcPassed = false;
+        progress['unit' + UNIT_NUM] = false;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+        updateProgressGrid();
+    }
+}
+
+function clearExamAnswersOnly() {
+    if (confirm(currentLang === 'es' ? '⚠️ ¿Borrar todas sus respuestas para esta unidad? (El estado de aprobación de la unidad permanecerá si ya aprobó.)' : '⚠️ Clear all your answers for this unit? (Unit pass status will remain if already passed.)')) {
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        saveUnitState();
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+    }
+}
+
+function setSAOnlyLockout(disable) {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    const allTextareas = container.querySelectorAll('.kw-answer');
+    const allCheckBtns = container.querySelectorAll('button.small');
+    allTextareas.forEach(ta => ta.disabled = disable);
+    allCheckBtns.forEach(btn => {
+        if (btn.id !== 'submitExamBtn' && btn.id !== 'clearExamDataBtn' && btn.id !== 'clearDataBtn') btn.disabled = disable;
+    });
+}
+
+let lockoutInterval = null;
+function startLockoutTimer() {
+    if (lockoutInterval) clearInterval(lockoutInterval);
+    if (lockUntil > Date.now()) {
+        let banner = document.getElementById('lockoutBanner');
+        if (!banner) {
+            banner = document.createElement('div');
+            banner.id = 'lockoutBanner';
+            banner.className = 'lockout-banner';
+            const examResult = document.getElementById('examResult');
+            examResult.parentNode.insertBefore(banner, examResult);
+        }
+        setSAOnlyLockout(true);
+        const tick = () => {
+            if (lockUntil <= Date.now() || unitPassed) {
+                clearInterval(lockoutInterval);
+                setSAOnlyLockout(false);
+                if (banner) banner.remove();
+                return;
+            }
+            const rem = lockUntil - Date.now();
+            const mins = Math.floor(rem / 60000);
+            const secs = Math.floor((rem % 60000) / 1000);
+            banner.innerText = (currentLang === 'en'
+                ? `⏰ Section B locked for ${mins}:${secs.toString().padStart(2,'0')} (15-min retake lockout after failed submission)`
+                : `⏰ Sección B bloqueada por ${mins}:${secs.toString().padStart(2,'0')} (bloqueo de 15 min tras envío fallido)`);
+        };
+        tick();
+        lockoutInterval = setInterval(tick, 1000);
+    } else {
+        setSAOnlyLockout(false);
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+    }
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Section A — Multiple Choice (Questions 1–20)' : 'Sección A — Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const mcReveal = mcRevealed || mcPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMDiv ? 'Section B — Short Answer (Questions 21–30) — Masters Track (M.Div./Th.M.)' : 'Section B — Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMDiv ? 'Sección B — Respuesta Corta (Preguntas 21–30) — Pista de Maestría (M.Div./Th.M.)' : 'Sección B — Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here (minimum 20 characters)...' : 'Escriba su respuesta aquí (mínimo 20 caracteres)...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.disabled = (lockUntil > Date.now() || unitPassed);
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            if (lockUntil > Date.now() || unitPassed) return;
+            const answer = textarea.value.trim().toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? q.kw_es : q.kw_en;
+            if (answer.length < 100) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else {
+                var hc = kwHitCount(answer, keywords);
+                var passed = hc >= 3;
+                if (passed) {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('✓ Correct! (' + hc + ' key concepts found) Your answer includes the key ideas.') : ('✓ ¡Correcto! (' + hc + ' conceptos clave encontrados) Su respuesta incluye las ideas clave.');
+                    feedbackDiv.className = 'feedback-text correct';
+                    kwAnswers[idx] = textarea.value;
+                    saveUnitState();
+                } else {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('Not yet — ' + hc + ' of 3 needed key concepts found. Compare your answer with the model below, then revise.') : ('Todavía no — ' + hc + ' de 3 conceptos clave necesarios encontrados. Compare su respuesta con el modelo de abajo y revise.');
+                    feedbackDiv.className = 'feedback-text incorrect';
+                }
+                // Gold model-answer reveal box — shown after every check, pass or fail (Q24 standard rule 4)
+                var modelBox = div.querySelector('.model-answer-box');
+                if (!modelBox) {
+                    modelBox = document.createElement('div');
+                    modelBox.className = 'model-answer-box';
+                    div.appendChild(modelBox);
+                }
+                var label = currentLang === 'en' ? 'Model answer — study this' : 'Respuesta modelo — estudie esto';
+                var modelText = currentLang === 'en' ? q.modelEn : q.modelEs;
+                var draftFlag = q.authorDraft ? '<!--AUTHOR_DRAFT: model answer not yet voiced by author-->' : '';
+                modelBox.innerHTML = draftFlag + '<strong>' + label + '</strong><br>' + modelText;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(feedbackDiv);
+        container.appendChild(div);
+        textarea.addEventListener('input', (e) => { if (!(lockUntil > Date.now() || unitPassed)) { kwAnswers[idx] = e.target.value; saveUnitState(); } });
+    });
+    startLockoutTimer();
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? "<span style='color:green'>✓ ¡Unidad ya aprobada! Puede continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! You may proceed.</span>";
+        return;
+    }
+    if (Date.now() < lockUntil) {
+        let wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? `<span style='color:red'>⏰ Bloqueado ${wait} minutos más.</span>`
+            : `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    /* CTS audit 2026-05-23: no reg form here; student/track already loaded from localStorage (defaults to Certificate). */
+
+    let correctMC = 0;
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    const mcPercent = correctMC / 20;
+    if (!unitPassed) { mcRevealed = true; renderQuestions(); }
+
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    let saCorrect = 0;
+    if (isMDiv) {
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || '').toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+            if (essayPartialMatch(ans, keywords)) saCorrect++;
+        }
+    }
+    const saPercent = saCorrect / 10;
+
+    const mcPass = mcPercent >= PASS_THRESHOLD;
+    const saPass = saPercent >= PASS_THRESHOLD;
+    const overallPass = isMDiv ? (mcPass && saPass) : mcPass;
+
+    if (mcPass) {
+        mcPassed = true;
+        localStorage.setItem(MC_PASSED_KEY, 'true');
+    }
+
+    if (overallPass) {
+        unitPassed = true;
+        progress['unit' + UNIT_NUM] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(PASSED_KEY, 'true');
+        const msg = isMDiv
+            ? (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unidad 8 completada. Puede continuar a la Unidad 9.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unit 8 completed. You may proceed to Unit 9.</span>`)
+            : (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unidad 8 completada. Puede continuar a la Unidad 9.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unit 8 completed. You may proceed to Unit 9.</span>`);
+        document.getElementById('examResult').innerHTML = msg;
+        updateProgressGrid();
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+        if (lockoutInterval) clearInterval(lockoutInterval);
+    } else {
+        if (isMDiv && mcPass && !saPass) {
+            lockUntil = Date.now() + 15 * 60 * 1000;
+            localStorage.setItem(LOCKOUT_KEY, lockUntil);
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ Sección A APROBADA (${Math.round(mcPercent*100)}%). Sección B no aprobada (${Math.round(saPercent*100)}% &lt; 90%). Sección B bloqueada 15 minutos.</span>`
+                : `<span style='color:red'>❌ Section A PASSED (${Math.round(mcPercent*100)}%). Section B not yet passing (${Math.round(saPercent*100)}% &lt; 90%). Section B locked for 15 minutes.</span>`;
+            startLockoutTimer();
+            renderQuestions();
+        } else {
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ NO APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. Se requiere 90% en cada sección requerida. Revise sus respuestas e inténtelo de nuevo.</span>`
+                : `<span style='color:red'>❌ NOT PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. 90% required on each required section. Review your answers and try again.</span>`;
+        }
+    }
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('clearExamDataBtn').addEventListener('click', clearExamAnswersOnly);
+document.getElementById('clearDataBtn').addEventListener('click', clearAllLocal);
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') {
+        currentLang = 'es';
+        document.body.className = 'lang-es';
+        document.documentElement.lang = 'es';
+        this.textContent = 'English';
+    } else {
+        currentLang = 'en';
+        document.body.className = 'lang-en';
+        document.documentElement.lang = 'en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+loadSavedAnswers();
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = currentLang === 'es'
+        ? "<span style='color:green'>✅ Unidad 8 ya aprobada.</span>"
+        : "<span style='color:green'>✅ Unit 8 already passed.</span>";
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEvangelismReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

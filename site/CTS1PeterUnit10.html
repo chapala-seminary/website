@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS 1 Peter Intensive — Unit 10</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 11 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 1 Peter Intensive — Unit 10: Stewards of Grace</span><span class="lang-es">📖 1 Pedro Intensivo — Unidad 10: Administradores de la Gracia</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"As each one has received a gift, minister it to one another, as good stewards of the manifold grace of God." — 1 Peter 4:10 (NKJV)</span><span class="lang-es">"Cada uno según el don que ha recibido, minístrelo a los otros, como buenos administradores de la multiforme gracia de Dios." — 1 Pedro 4:10 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the 1 Peter Intensive. Please register before beginning Unit 10.</span><span class="lang-es">Bienvenido al Intensivo de 1 Pedro. Por favor regístrese antes de comenzar la Unidad 10.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: 1 Peter 4:1-11</strong></p>
+<div class="scripture">"As each one has received a gift, minister it to one another, as good stewards of the manifold grace of God." &mdash; 1 Peter 4:10 (NKJV)</div>
+
+<h3>Arm Yourself with the Mind of Christ</h3>
+<p>Peter has just set Christ before us as the One who suffered, died, and now reigns. Now he draws the practical lesson. "Therefore, since Christ suffered for us in the flesh, arm yourselves also with the same mind, for he who has suffered in the flesh has ceased from sin, that he no longer should live the rest of his time in the flesh for the lusts of men, but for the will of God" (1 Peter 4:1-2). The word <em>arm</em> is a soldier's word; the believer is to take up the same attitude Christ had as a weapon for the battle ahead. Christ was willing to suffer in the flesh rather than turn aside from the will of God, and the believer is to share that resolve. The one who has so suffered &mdash; who has died with Christ to the old way of living &mdash; has made a decisive break with sin. As a result, he will no longer spend the rest of his life chasing the lusts of men; he will spend it doing the will of God. The whole direction of life is turned around: from the appetites of the flesh to the will of the Father.</p>
+
+<h3>Done with the Old Life</h3>
+<p>Peter speaks plainly about the past these believers had left behind. "For we have spent enough of our past lifetime in doing the will of the Gentiles &mdash; when we walked in lewdness, lusts, drunkenness, revelries, drinking parties, and abominable idolatries" (1 Peter 4:3). The point is simple and bracing: <em>enough</em>. Whatever time was wasted in the old pagan ways, it was more than enough; there is no reason to give it another hour. But such a clean break does not go unnoticed. "In regard to these, they think it strange that you do not run with them in the same flood of dissipation, speaking evil of you" (1 Peter 4:4). The old companions are baffled and even offended that the believer no longer plunges with them into the same rushing stream of excess, and they repay his changed life with slander. Yet they are not the final judges. "They will give an account to Him who is ready to judge the living and the dead" (1 Peter 4:5). Everyone, slanderer and saint alike, must answer to God, who is ready to judge all. It is in this connection that Peter says the gospel was preached even to those who are now dead (1 Peter 4:6) &mdash; that is, to believers who heard the good news while they lived and have since died; though they were judged as all men are, dying in the flesh, they live according to God in the spirit. Death is not the end for those who have heard and believed.</p>
+
+<h3>The End Is Near: Sober and Watchful</h3>
+<div class="scripture">"But the end of all things is at hand; therefore be serious and watchful in your prayers." &mdash; 1 Peter 4:7 (NKJV)</div>
+<p>"But the end of all things is at hand; therefore be serious and watchful in your prayers" (1 Peter 4:7). A fair question arises here, for Peter, Paul, and John all spoke of the end as near, and that was many centuries ago. Were they mistaken? They were not, and two things must be remembered. First, nearness must be measured from God's perspective, not ours. Scripture reminds us that with the Lord a thousand years are as a day, and a day as a thousand years; so from God's vantage point only a short while has passed since Peter wrote. Second, there is a nearness that touches every person directly. Given the uncertainties of life, and knowing that on average we live only some seventy years, the end is truly near for every one of us &mdash; our own end may come at any moment. So the warning is not an error to be explained away but a truth to be felt. And the response Peter calls for is practical: be serious, sober-minded, and watchful in prayer. The shortness of the time should sharpen our prayers and steady our minds, not throw us into panic or idleness.</p>
+
+<h3>Above All, Fervent Love</h3>
+<p>From the call to prayer Peter moves to the supreme Christian duty. "And above all things have fervent love for one another, for 'love will cover a multitude of sins'" (1 Peter 4:8). Notice the priority: <em>above all things</em>. Of all the graces a believer may pursue, love for one another stands first. The word <em>fervent</em> pictures love stretched out to its full reach, love that keeps going when it would be easier to give up. And such love, Peter says, will cover a multitude of sins. This does not mean love ignores wrongdoing or calls evil good; it means that love readily forgives, overlooks small offenses, and refuses to broadcast or brood over the faults of others. In a suffering church, where believers are pressed close together and nerves can wear thin, this fervent, forgiving love is the very bond that holds the family of God together. Where love is fervent, a thousand small grievances are quietly covered and never allowed to divide.</p>
+
+<h3>Stewards of the Manifold Grace of God</h3>
+<p>Now Peter comes to the theme that gives this unit its name. "Be hospitable to one another without grumbling. As each one has received a gift, minister it to one another, as good stewards of the manifold grace of God" (1 Peter 4:9-10). First comes hospitality &mdash; an open home and an open heart &mdash; offered cheerfully, without grumbling about the cost or the trouble. Then comes the great principle: every believer has received a gift, and the important word is <strong>steward</strong>. A steward is a manager. The clearest picture is Joseph, who managed all of Potiphar's household; he owned nothing there, yet everything was entrusted to his care. That is precisely the Christian's position. Everything we are and everything we have is not our own to spend as we please but is entrusted to us to be used in the service of God. It has been observed that nearly half of the parables Jesus told touch on stewardship; again and again He taught that our talents, our time, and our treasures belong to God, and that we are only managers who must one day give account.</p>
+<p>A striking example is C. T. Studd, once the finest cricket player in all of England. When he became a Christian he gave himself to the mission field, and when a large inheritance came to him from his father, he gave it all away to the work of the gospel. Near the end of his life he was dismayed to discover that some money still remained in his hands, and he quickly passed it on to General Booth of the Salvation Army; he was determined not to leave this world holding any monetary wealth of his own. Few are called to do exactly as he did, but his spirit is the spirit of a true steward, who holds even great wealth with an open hand, counting it God's and not his own.</p>
+<p>It is worth pausing on the word <em>each</em>. Peter says that <em>each one</em> has received a gift; not a few gifted leaders only, but every single believer. There is no such thing as a Christian with nothing to contribute, and no such thing as a Christian who may sit idle while others serve. The grace of God is called <em>manifold</em>, that is, many-colored and varied, because God distributes a wonderful variety of gifts throughout His people, and each gift is needed. The quiet servant and the gifted teacher, the one who shows mercy and the one who gives, the encourager and the helper &mdash; all are stewards entrusted with a portion of God’s grace for the good of the whole body. To bury one’s gift, or to despise it as too small, is to fail as a steward; the Master gave it to be used.</p>
+<p>Peter then shows how this stewardship works in the body of Christ. "If anyone speaks, let him speak as the oracles of God. If anyone ministers, let him do it as with the ability which God supplies, that in all things God may be glorified through Jesus Christ, to whom belong the glory and the dominion forever and ever. Amen" (1 Peter 4:11). The believer who teaches or speaks is to handle his words as the very words of God, with reverence and care. The believer who serves in any practical way is to do it by the strength God supplies, not in his own power. And the goal of it all is not the servant's reputation but this: that in all things God may be glorified through Jesus Christ. Our gifts are entrusted grace, to be spent for others and for the glory of God.</p>
+<div class="scripture">"...that in all things God may be glorified through Jesus Christ, to whom belong the glory and the dominion forever and ever. Amen." &mdash; 1 Peter 4:11 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: 1 Pedro 4:1-11 (RVG)</strong></p>
+<div class="scripture">"Cada uno según el don que ha recibido, minístrelo a los otros, como buenos administradores de la multiforme gracia de Dios." &mdash; 1 Pedro 4:10 (RVG)</div>
+
+<h3>Armaos del Mismo Pensamiento de Cristo</h3>
+<p>Pedro acaba de poner a Cristo delante de nosotros como Aquel que padeció, murió y ahora reina. Ahora saca la lección práctica. "Pues que Cristo ha padecido por nosotros en la carne, vosotros también armaos del mismo pensamiento; que el que ha padecido en la carne, cesó de pecado; para que ya el tiempo que queda en la carne, viva, no a las concupiscencias de los hombres, sino a la voluntad de Dios" (1 Pedro 4:1-2). La palabra <em>armaos</em> es palabra de soldado; el creyente ha de tomar la misma actitud que tuvo Cristo como un arma para la batalla que viene. Cristo estuvo dispuesto a padecer en la carne antes que apartarse de la voluntad de Dios, y el creyente ha de compartir esa resolución. El que así ha padecido &mdash; el que ha muerto con Cristo al viejo modo de vivir &mdash; ha hecho una ruptura decisiva con el pecado. Por tanto, ya no gastará el resto de su vida persiguiendo las concupiscencias de los hombres; la gastará haciendo la voluntad de Dios. Toda la dirección de la vida queda vuelta del revés: de los apetitos de la carne a la voluntad del Padre.</p>
+
+<h3>Terminado con la Vida Vieja</h3>
+<p>Pedro habla claramente del pasado que estos creyentes habían dejado atrás. "Porque nos debe bastar que el tiempo pasado de nuestra vida hayamos hecho la voluntad de los gentiles, andando en lascivias, concupiscencias, embriagueces, glotonerías, orgías de beber, y abominables idolatrías" (1 Pedro 4:3). El punto es sencillo y firme: <em>basta</em>. Cualquier tiempo que se desperdició en las viejas costumbres paganas, fue más que suficiente; no hay razón para darle otra hora. Pero una ruptura tan limpia no pasa inadvertida. "Y esto parece extraño a los que os vituperan, que vosotros no corráis con ellos en el mismo desenfreno de disolución" (1 Pedro 4:4). Los viejos compañeros quedan perplejos y aun ofendidos de que el creyente ya no se lance con ellos al mismo torrente desbordado de exceso, y pagan su vida cambiada con calumnia. Mas ellos no son los jueces finales. "Los cuales darán cuenta al que está preparado para juzgar a los vivos y a los muertos" (1 Pedro 4:5). Todos, calumniador y santo por igual, han de responder a Dios, que está preparado para juzgar a todos. Es en este sentido que Pedro dice que el evangelio fue predicado aun a los que ahora están muertos (1 Pedro 4:6) &mdash; es decir, a los creyentes que oyeron las buenas nuevas mientras vivían y han muerto desde entonces; aunque fueron juzgados como todos los hombres, muriendo en la carne, viven según Dios en el espíritu. La muerte no es el fin para los que han oído y creído.</p>
+
+<h3>El Fin Está Cerca: Templados y Velando</h3>
+<div class="scripture">"Mas el fin de todas las cosas se acerca; sed pues templados, y velad en oración." &mdash; 1 Pedro 4:7 (RVG)</div>
+<p>"Mas el fin de todas las cosas se acerca; sed pues templados, y velad en oración" (1 Pedro 4:7). Surge aquí una pregunta justa, pues Pedro, Pablo y Juan hablaron todos del fin como cercano, y eso fue hace muchos siglos. ¿Se equivocaron? No se equivocaron, y dos cosas deben recordarse. Primero, la cercanía debe medirse desde la perspectiva de Dios, no la nuestra. La Escritura nos recuerda que para el Señor mil años son como un día, y un día como mil años; así que desde el punto de vista de Dios solo ha pasado un breve tiempo desde que Pedro escribió. Segundo, hay una cercanía que toca a cada persona directamente. Dadas las incertidumbres de la vida, y sabiendo que en promedio vivimos solo unos setenta años, el fin está verdaderamente cerca para cada uno de nosotros &mdash; nuestro propio fin puede llegar en cualquier momento. Así que la advertencia no es un error que explicar sino una verdad que sentir. Y la respuesta que Pedro pide es práctica: sed serios, de mente sobria, y velad en oración. La brevedad del tiempo debe agudizar nuestras oraciones y serenar nuestras mentes, no arrojarnos al pánico ni a la pereza.</p>
+
+<h3>Sobre Todo, Ferviente Amor</h3>
+<p>Del llamado a la oración Pedro pasa al deber cristiano supremo. "Y sobre todo, tened entre vosotros ferviente amor; porque el amor cubrirá multitud de pecados" (1 Pedro 4:8). Note la prioridad: <em>sobre todo</em>. De todas las gracias que un creyente pueda buscar, el amor de unos por otros está primero. La palabra <em>ferviente</em> retrata un amor extendido hasta su pleno alcance, un amor que sigue adelante cuando sería más fácil rendirse. Y tal amor, dice Pedro, cubrirá multitud de pecados. Esto no significa que el amor pase por alto el mal hacer ni llame bueno al mal; significa que el amor perdona prontamente, pasa por alto las pequeñas ofensas, y rehúsa pregonar o rumiar las faltas de los demás. En una iglesia que sufre, donde los creyentes están apretados unos contra otros y los nervios pueden gastarse, este amor ferviente y perdonador es el vínculo mismo que mantiene unida a la familia de Dios. Donde el amor es ferviente, mil pequeños agravios quedan calladamente cubiertos y nunca se les permite dividir.</p>
+
+<h3>Administradores de la Multiforme Gracia de Dios</h3>
+<p>Ahora Pedro llega al tema que da nombre a esta unidad. "Hospedaos los unos a los otros sin murmuraciones. Cada uno según el don que ha recibido, minístrelo a los otros, como buenos administradores de la multiforme gracia de Dios" (1 Pedro 4:9-10). Primero viene la hospitalidad &mdash; una casa abierta y un corazón abierto &mdash; ofrecida con alegría, sin murmurar por el costo o la molestia. Luego viene el gran principio: cada creyente ha recibido un don, y la palabra importante es <strong>administrador</strong>. Un administrador es un gerente. El retrato más claro es José, que administraba toda la casa de Potifar; nada le pertenecía allí, y sin embargo todo estaba confiado a su cuidado. Esa es precisamente la posición del cristiano. Todo lo que somos y todo lo que tenemos no es nuestro para gastarlo a nuestro gusto, sino que nos está confiado para usarlo en el servicio de Dios. Se ha observado que casi la mitad de las parábolas que Jesús contó tocan la administración; una y otra vez enseñó que nuestros talentos, nuestro tiempo y nuestros tesoros pertenecen a Dios, y que solo somos gerentes que un día darán cuenta.</p>
+<p>Un ejemplo notable es C. T. Studd, en otro tiempo el mejor jugador de críquet de toda Inglaterra. Cuando llegó a ser cristiano se entregó al campo misionero, y cuando le vino una gran herencia de su padre, la regáló toda a la obra del evangelio. Cerca del fin de su vida quedó consternado al descubrir que aún le quedaba algo de dinero en las manos, y rápidamente se lo pasó al general Booth del Ejército de Salvación; estaba resuelto a no dejar este mundo reteniendo riqueza monetaria propia. Pocos son llamados a hacer exactamente lo que él hizo, pero su espíritu es el espíritu de un verdadero administrador, que sostiene aun la gran riqueza con mano abierta, contándola de Dios y no suya.</p>
+<p>Vale la pena detenerse en la palabra <em>cada</em>. Pedro dice que <em>cada uno</em> ha recibido un don; no unos pocos líderes dotados solamente, sino cada creyente. No existe tal cosa como un cristiano que no tenga nada que aportar, ni tal cosa como un cristiano que pueda quedarse ocioso mientras otros sirven. La gracia de Dios se llama <em>multiforme</em>, es decir, de muchos colores y variada, porque Dios reparte una maravillosa variedad de dones por todo su pueblo, y cada don es necesario. El siervo callado y el maestro dotado, el que muestra misericordia y el que da, el que anima y el que ayuda &mdash; todos son administradores a quienes se ha confiado una porción de la gracia de Dios para el bien de todo el cuerpo. Enterrar el propio don, o despreciarlo por pequeño, es fallar como administrador; el Señor lo dio para que se usara.</p>
+<p>Pedro muestra entonces cómo obra esta administración en el cuerpo de Cristo. "Si alguno habla, hable conforme a los oráculos de Dios; si alguno ministra, ministre conforme al poder que Dios da; para que en todo sea Dios glorificado por Jesucristo, a quien es gloria e imperio por los siglos de los siglos. Amén" (1 Pedro 4:11). El creyente que enseña o habla ha de tratar sus palabras como las palabras mismas de Dios, con reverencia y cuidado. El creyente que sirve de cualquier manera práctica ha de hacerlo por la fuerza que Dios da, no en su propio poder. Y la meta de todo ello no es la reputación del siervo sino esta: que en todo sea Dios glorificado por Jesucristo. Nuestros dones son gracia confiada, para gastarse por los demás y para la gloria de Dios.</p>
+<div class="scripture">"...para que en todo sea Dios glorificado por Jesucristo, a quien es gloria e imperio por los siglos de los siglos. Amén." &mdash; 1 Pedro 4:11 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS 1 Peter Intensive — Unit 10 (Stewards of Grace, 1 Peter 4:1-11)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 10;
+const COURSE = '1pet';
+const NEXT_UNIT_URL = 'CTS1PeterUnit11.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Exile Salutation (1 Peter 1:1-2)", "Unit 2 - Living Hope and Refined Faith (1 Peter 1:3-12)", "Unit 3 - Be Holy; Redeemed by the Blood (1 Peter 1:13-25)", "Unit 4 - Living Stones and a Royal Priesthood (1 Peter 2:1-10)", "Unit 5 - Sojourner Conduct and Submission to Authority (1 Peter 2:11-17)", "Unit 6 - The Suffering Servant as Our Example (1 Peter 2:18-25)", "Unit 7 - Wives, Husbands, and the Gentle Spirit (1 Peter 3:1-7)", "Unit 8 - Suffering for Righteousness; Make Your Defense (1 Peter 3:8-17)", "Unit 9 - The Spirits in Prison and Baptism (1 Peter 3:18-22)", "Unit 10 - Done with Sin; Stewards of Grace (1 Peter 4:1-11)", "Unit 11 - The Fiery Trial (1 Peter 4:12-19)", "Unit 12 - Shepherds, Humility, and the Roaring Lion (1 Peter 5:1-14)"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTS1PeterUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. In verse 1, since Christ suffered in the flesh, believers are told to arm themselves with:", "textEs": "1. En el versículo 1, ya que Cristo padeció en la carne, a los creyentes se les dice que se armen con:", "optionsEn": ["The same mind (attitude) as Christ", "Weapons", "Silence", "Wealth"], "optionsEs": ["El mismo pensamiento (actitud) de Cristo", "Armas", "Silencio", "Riqueza"], "explanationEn": "Arm yourselves with the same mind that Christ had.", "explanationEs": "Armaos del mismo pensamiento que tuvo Cristo.", "correct": 0}, {"textEn": "2. Verse 1 says that he who has suffered in the flesh has:", "textEs": "2. El versículo 1 dice que el que ha padecido en la carne ha:", "optionsEn": ["Earned reward", "Gained power", "Lost hope", "Ceased from sin"], "optionsEs": ["Ganado recompensa", "Ganado poder", "Perdido la esperanza", "Cesado de pecado"], "explanationEn": "He who has suffered in the flesh has ceased from sin.", "explanationEs": "El que ha padecido en la carne cesó de pecado.", "correct": 3}, {"textEn": "3. According to verse 2, the believer is to live the rest of his life not for human lusts but for:", "textEs": "3. Según el versículo 2, el creyente ha de vivir el resto de su vida no para las concupiscencias humanas sino para:", "optionsEn": ["His own comfort", "Future wealth", "Public praise", "The will of God"], "optionsEs": ["Su propia comodidad", "La riqueza futura", "El elogio público", "La voluntad de Dios"], "explanationEn": "He lives for the will of God, not the lusts of men.", "explanationEs": "Vive para la voluntad de Dios, no las concupiscencias de los hombres.", "correct": 3}, {"textEn": "4. In verses 3-4, Peter says believers have already spent enough past time in:", "textEs": "4. En los versículos 3-4, Pedro dice que los creyentes ya han gastado suficiente tiempo pasado en:", "optionsEn": ["Study", "Prayer", "The old pagan ways of lewdness, drunkenness, and idolatry", "Worship"], "optionsEs": ["Estudio", "Oración", "Las viejas costumbres paganas de lascivia, embriaguez e idolatría", "Adoración"], "explanationEn": "Enough time was spent in the old pagan ways.", "explanationEs": "Bastante tiempo se gastó en las viejas costumbres paganas.", "correct": 2}, {"textEn": "5. According to verse 4, the believer's former companions react to his changed life by:", "textEs": "5. Según el versículo 4, los antiguos compañeros del creyente reaccionan a su vida cambiada:", "optionsEn": ["Praising him", "Thinking it strange and speaking evil of him", "Ignoring it", "Joining the church"], "optionsEs": ["Alabándolo", "Pensándolo extraño y vituperándolo", "Ignorándolo", "Uniéndose a la iglesia"], "explanationEn": "They think it strange and speak evil of him.", "explanationEs": "Lo piensan extraño y le vituperan.", "correct": 1}, {"textEn": "6. Verse 5 warns that these slanderers will give an account to:", "textEs": "6. El versículo 5 advierte que estos calumniadores darán cuenta a:", "optionsEn": ["Him who is ready to judge the living and the dead", "Their families", "No one", "The government"], "optionsEs": ["Aquel que está preparado para juzgar a los vivos y a los muertos", "Sus familias", "Nadie", "El gobierno"], "explanationEn": "They will answer to the Judge of the living and the dead.", "explanationEs": "Responderán al Juez de los vivos y los muertos.", "correct": 0}, {"textEn": "7. In verse 7, Peter declares that:", "textEs": "7. En el versículo 7, Pedro declara que:", "optionsEn": ["The world will last forever", "Judgment is canceled", "The end of all things is at hand", "Nothing will change"], "optionsEs": ["El mundo durará para siempre", "El juicio queda cancelado", "El fin de todas las cosas se acerca", "Nada cambiará"], "explanationEn": "The end of all things is at hand.", "explanationEs": "El fin de todas las cosas se acerca.", "correct": 2}, {"textEn": "8. The lesson explains that the nearness of the end in verse 7 must be seen:", "textEs": "8. La lección explica que la cercanía del fin en el versículo 7 debe verse:", "optionsEn": ["As a mistake", "As irrelevant", "From God's perspective, with whom a thousand years are as a day", "As mere symbolism"], "optionsEs": ["Como un error", "Como irrelevante", "Desde la perspectiva de Dios, para quien mil años son como un día", "Como mero simbolismo"], "explanationEn": "Nearness is measured from God's perspective.", "explanationEs": "La cercanía se mide desde la perspectiva de Dios.", "correct": 2}, {"textEn": "9. The lesson adds that, given life's uncertainty and our short span, the end is near in another sense:", "textEs": "9. La lección añade que, dada la incertidumbre de la vida y nuestro corto lapso, el fin está cerca en otro sentido:", "optionsEn": ["Only for the old", "The end is near for every one of us personally", "Only in the future", "Never for believers"], "optionsEs": ["Solo para los viejos", "El fin está cerca para cada uno de nosotros personalmente", "Solo en el futuro", "Nunca para los creyentes"], "explanationEn": "The end is near for every one of us personally.", "explanationEs": "El fin está cerca para cada uno de nosotros personalmente.", "correct": 1}, {"textEn": "10. Because the end is at hand, verse 7 calls believers to:", "textEs": "10. Porque el fin se acerca, el versículo 7 llama a los creyentes a:", "optionsEn": ["Hide", "Stop working", "Panic", "Be serious (sober) and watchful in prayer"], "optionsEs": ["Esconderse", "Dejar de trabajar", "Entrar en pánico", "Ser serios (templados) y velar en oración"], "explanationEn": "Be serious and watchful in your prayers.", "explanationEs": "Sed templados y velad en oración.", "correct": 3}, {"textEn": "11. In verse 8, what does Peter place 'above all things'?", "textEs": "11. En el versículo 8, ¿qué pone Pedro 'sobre todo'?", "optionsEn": ["Knowledge", "Fasting", "Fervent love for one another", "Wealth"], "optionsEs": ["Conocimiento", "Ayuno", "Ferviente amor de unos por otros", "Riqueza"], "explanationEn": "Above all, have fervent love for one another.", "explanationEs": "Sobre todo, tened ferviente amor de unos por otros.", "correct": 2}, {"textEn": "12. Verse 8 says that love will:", "textEs": "12. El versículo 8 dice que el amor:", "optionsEn": ["Fail", "Cover a multitude of sins", "Fade", "Be forgotten"], "optionsEs": ["Fallará", "Cubrirá multitud de pecados", "Se desvanecerá", "Será olvidado"], "explanationEn": "Love will cover a multitude of sins.", "explanationEs": "El amor cubrirá multitud de pecados.", "correct": 1}, {"textEn": "13. In verse 9, Peter commands believers to be hospitable to one another:", "textEs": "13. En el versículo 9, Pedro manda a los creyentes a hospedarse unos a otros:", "optionsEn": ["Reluctantly", "Only to the rich", "For payment", "Without grumbling"], "optionsEs": ["De mala gana", "Solo a los ricos", "Por pago", "Sin murmuraciones"], "explanationEn": "Be hospitable to one another without grumbling.", "explanationEs": "Hospedaos los unos a los otros sin murmuraciones.", "correct": 3}, {"textEn": "14. The key word in verse 10, the lesson explains, is 'steward,' which means:", "textEs": "14. La palabra clave en el versículo 10, explica la lección, es 'administrador,' que significa:", "optionsEn": ["A manager", "A servant with no trust", "A king", "An owner"], "optionsEs": ["Un gerente", "Un siervo sin encargo", "Un rey", "Un dueño"], "explanationEn": "A steward is a manager.", "explanationEs": "Un administrador es un gerente.", "correct": 0}, {"textEn": "15. The lesson gives the Old Testament example of a faithful steward in:", "textEs": "15. La lección da el ejemplo del Antiguo Testamento de un administrador fiel en:", "optionsEn": ["Joseph, manager of Potiphar's household", "Moses", "Abraham", "David"], "optionsEs": ["José, administrador de la casa de Potifar", "Moisés", "Abraham", "David"], "explanationEn": "Joseph managed Potiphar's household.", "explanationEs": "José administraba la casa de Potifar.", "correct": 0}, {"textEn": "16. The lesson teaches that our talents, time, and treasures:", "textEs": "16. La lección enseña que nuestros talentos, tiempo y tesoros:", "optionsEn": ["Belong to the state", "Are ours to keep", "Are unimportant", "Belong to God, and we are only managers"], "optionsEs": ["Pertenecen al estado", "Son nuestros para guardar", "No tienen importancia", "Pertenecen a Dios, y solo somos gerentes"], "explanationEn": "They belong to God; we are only managers.", "explanationEs": "Pertenecen a Dios; solo somos gerentes.", "correct": 3}, {"textEn": "17. The missionary C.T. Studd is given as an example of radical stewardship because he:", "textEs": "17. El misionero C.T. Studd se da como ejemplo de administración radical porque:", "optionsEn": ["Built a great fortune", "Refused to serve", "Gave away his inheritance, not wanting to leave the world with monetary wealth", "Hoarded his money"], "optionsEs": ["Acumuló una gran fortuna", "Se negó a servir", "Regáló su herencia, no queriendo dejar el mundo con riqueza monetaria", "Atesoró su dinero"], "explanationEn": "He gave away his inheritance for the gospel.", "explanationEs": "Regáló su herencia para el evangelio.", "correct": 2}, {"textEn": "18. According to verse 10, each believer has received a gift to be ministered as a good steward of:", "textEs": "18. Según el versículo 10, cada creyente ha recibido un don para ministrarlo como buen administrador de:", "optionsEn": ["The law", "The manifold (varied) grace of God", "His own wisdom", "His wealth"], "optionsEs": ["La ley", "La multiforme (variada) gracia de Dios", "Su propia sabiduría", "Su riqueza"], "explanationEn": "We are stewards of the manifold grace of God.", "explanationEs": "Somos administradores de la multiforme gracia de Dios.", "correct": 1}, {"textEn": "19. In verse 11, the one who speaks is to speak as:", "textEs": "19. En el versículo 11, el que habla ha de hablar como:", "optionsEn": ["A philosopher", "The oracles (very words) of God", "A politician", "An entertainer"], "optionsEs": ["Un filósofo", "Los oráculos (las palabras mismas) de Dios", "Un político", "Un animador"], "explanationEn": "Let him speak as the oracles of God.", "explanationEs": "Hable conforme a los oráculos de Dios.", "correct": 1}, {"textEn": "20. According to verse 11, the believer ministers by the strength God supplies, with the ultimate aim that:", "textEs": "20. Según el versículo 11, el creyente ministra por la fuerza que Dios da, con el fin último de que:", "optionsEn": ["In all things God may be glorified through Jesus Christ", "The church grow large", "He grow rich", "He be praised"], "optionsEs": ["En todo sea Dios glorificado por Jesucristo", "La iglesia crezca mucho", "Él se enriquezca", "Él sea alabado"], "explanationEn": "The aim is that God be glorified through Jesus Christ.", "explanationEs": "El fin es que Dios sea glorificado por Jesucristo.", "correct": 0}];
+
+const kwQuestions = [{"textEn": "21. Explain verses 1-2 — arming yourself with the mind of Christ and living for the will of God.", "textEs": "21. Explique los versículos 1-2 — armarse del pensamiento de Cristo y vivir para la voluntad de Dios.", "kw_en": ["christ", "suffer", "mind", "arm", "sin", "ceased", "will", "god"], "kw_es": ["cristo", "padec", "pensamiento", "arma", "pecado", "cesó", "voluntad", "dios"], "modelEn": "Since Christ suffered for us in the flesh, the believer is to arm himself with the same mind, taking up Christ's attitude as a weapon for the battle ahead. Christ was willing to suffer rather than turn from the will of God, and the believer is to share that resolve. The one who has so suffered, who has died with Christ to the old way of living, has ceased from sin, having made a decisive break with it. As a result, he no longer lives the rest of his time in the flesh for the lusts of men but for the will of God. The whole direction of his life is turned around, away from the appetites of the flesh and toward the will of the Father, so that suffering itself becomes a mark of being done with sin and given over to God.", "modelEs": "Ya que Cristo padeció por nosotros en la carne, el creyente ha de armarse del mismo pensamiento, tomando la actitud de Cristo como un arma para la batalla que viene. Cristo estuvo dispuesto a padecer antes que apartarse de la voluntad de Dios, y el creyente ha de compartir esa resolución. El que así ha padecido, el que ha muerto con Cristo al viejo modo de vivir, cesó de pecado, habiendo hecho una ruptura decisiva con él. Por tanto, ya no vive el resto de su tiempo en la carne para las concupiscencias de los hombres sino para la voluntad de Dios. Toda la dirección de su vida queda vuelta del revés, lejos de los apetitos de la carne y hacia la voluntad del Padre, de modo que el padecer mismo llega a ser señal de haber terminado con el pecado y de estar entregado a Dios."}, {"textEn": "22. Explain verses 3-4 — the break with the old life and the reaction of former companions.", "textEs": "22. Explique los versículos 3-4 — la ruptura con la vida vieja y la reacción de los antiguos compañeros.", "kw_en": ["enough", "past", "old", "life", "strange", "evil", "slander", "gentile"], "kw_es": ["bastar", "pasado", "vieja", "vida", "extraño", "mal", "calumni", "gentil"], "modelEn": "Peter says believers have spent enough of their past lifetime doing the will of the Gentiles, walking in lewdness, lusts, drunkenness, revelry, and idolatry; whatever time was wasted in the old pagan life, it was more than enough, and there is no reason to give it another hour. But so clean a break does not go unnoticed. The old companions think it strange that the believer no longer runs with them in the same flood of dissipation, and they repay his changed life by speaking evil of him and slandering him. Yet they are not the final judges, for they will give an account to Him who is ready to judge the living and the dead. The believer must let the break with the past stand firm, even when the old crowd is baffled and turns hostile.", "modelEs": "Pedro dice que a los creyentes les debe bastar el tiempo pasado de su vida en que hicieron la voluntad de los gentiles, andando en lascivias, concupiscencias, embriagueces, orgías e idolatría; cualquier tiempo que se desperdició en la vieja vida pagana, fue más que suficiente, y no hay razón para darle otra hora. Pero una ruptura tan limpia no pasa inadvertida. Los antiguos compañeros piensan extraño que el creyente ya no corra con ellos en el mismo torrente de disolución, y pagan su vida cambiada vituperándolo y calumniándolo. Mas ellos no son los jueces finales, pues darán cuenta a Aquel que está preparado para juzgar a los vivos y a los muertos. El creyente debe dejar que la ruptura con el pasado se mantenga firme, aun cuando la vieja gente quede perpleja y se vuelva hostil."}, {"textEn": "23. Explain verses 5-6 — accountability to the Judge of the living and the dead.", "textEs": "23. Explique los versículos 5-6 — la rendición de cuentas al Juez de los vivos y los muertos.", "kw_en": ["account", "judge", "living", "dead", "gospel", "preach", "god", "answer"], "kw_es": ["cuenta", "juzgar", "vivos", "muertos", "evangelio", "predic", "dios", "responder"], "modelEn": "Peter warns that those who slander the believers will give an account to Him who is ready to judge the living and the dead; no one escapes that reckoning, and God will set every wrong right. It is in this connection that Peter says the gospel was preached also to those who are now dead. This is best understood of believers who heard the good news while they were alive and have since died. Though they were judged as all men are judged, dying in the flesh, they live according to God in the spirit. So the death of believers is not defeat; having heard and believed the gospel, they pass through the common human judgment of death yet live on with God. The certainty of a final reckoning, and of life beyond death for the faithful, steadies the believer who is slandered now.", "modelEs": "Pedro advierte que los que calumnian a los creyentes darán cuenta a Aquel que está preparado para juzgar a los vivos y a los muertos; nadie escapa de esa rendición, y Dios enderezará todo agravio. Es en este sentido que Pedro dice que el evangelio fue predicado también a los que ahora están muertos. Esto se entiende mejor de los creyentes que oyeron las buenas nuevas mientras vivían y han muerto desde entonces. Aunque fueron juzgados como todos los hombres son juzgados, muriendo en la carne, viven según Dios en el espíritu. Así que la muerte de los creyentes no es derrota; habiendo oído y creído el evangelio, pasan por el juicio humano común de la muerte y sin embargo viven con Dios. La certeza de una rendición final, y de vida más allá de la muerte para los fieles, afirma al creyente que es calumniado ahora."}, {"textEn": "24. Explain Peter's treatment of verse 7 — in what sense is 'the end of all things at hand'?", "textEs": "24. Explique el tratamiento de Pedro del versículo 7 — ¿en qué sentido 'el fin de todas las cosas se acerca'?", "kw_en": ["end", "near", "perspective", "god", "thousand", "day", "life", "short"], "kw_es": ["fin", "cerca", "perspectiva", "dios", "mil", "día", "vida", "corta"], "modelEn": "A fair question arises, since Peter, Paul, and John all spoke of the end as near, and that was many centuries ago. Were they mistaken? They were not, and two things must be remembered. First, nearness must be measured from God's perspective, not ours; Scripture reminds us that with the Lord a thousand years are as a day and a day as a thousand years, so from God's vantage point only a short while has passed since Peter wrote. Second, there is a nearness that touches every person directly. Given the uncertainties of life, and knowing that on average we live only about seventy years, the end is truly near for every one of us, since our own end may come at any moment. So the nearness of the end is not an error to be explained away but a sober truth, and it calls the believer to be watchful and ready.", "modelEs": "Surge una pregunta justa, ya que Pedro, Pablo y Juan hablaron todos del fin como cercano, y eso fue hace muchos siglos. ¿Se equivocaron? No se equivocaron, y dos cosas deben recordarse. Primero, la cercanía debe medirse desde la perspectiva de Dios, no la nuestra; la Escritura nos recuerda que para el Señor mil años son como un día y un día como mil años, así que desde el punto de vista de Dios solo ha pasado un breve tiempo desde que Pedro escribió. Segundo, hay una cercanía que toca a cada persona directamente. Dadas las incertidumbres de la vida, y sabiendo que en promedio vivimos solo unos setenta años, el fin está verdaderamente cerca para cada uno de nosotros, pues nuestro propio fin puede llegar en cualquier momento. Así que la cercanía del fin no es un error que explicar sino una verdad sobria, y llama al creyente a velar y estar listo."}, {"textEn": "25. Explain verse 8 and the supremacy of love in the Christian life.", "textEs": "25. Explique el versículo 8 y la supremacía del amor en la vida cristiana.", "kw_en": ["above", "fervent", "love", "cover", "multitude", "sin", "one", "supreme"], "kw_es": ["sobre", "ferviente", "amor", "cubr", "multitud", "pecado", "unos", "suprem"], "modelEn": "Peter places fervent love for one another above all things; of all the graces a believer may pursue, love stands supreme and first. The word fervent pictures love stretched out to its full reach, love that keeps going when it would be easier to give up. Such love, Peter says, will cover a multitude of sins. This does not mean love ignores wrongdoing or calls evil good; it means love readily forgives, overlooks small offenses, and refuses to broadcast or brood over the faults of others. In a suffering church, where believers are pressed close together and nerves can wear thin, this fervent, forgiving love is the bond that holds the family of God together. Where love is fervent, a multitude of small grievances are quietly covered and never allowed to divide the people of God, so love is to be the believer's first and supreme pursuit.", "modelEs": "Pedro pone el ferviente amor de unos por otros sobre todas las cosas; de todas las gracias que un creyente pueda buscar, el amor está supremo y primero. La palabra ferviente retrata un amor extendido hasta su pleno alcance, un amor que sigue adelante cuando sería más fácil rendirse. Tal amor, dice Pedro, cubrirá multitud de pecados. Esto no significa que el amor pase por alto el mal hacer ni llame bueno al mal; significa que el amor perdona prontamente, pasa por alto las pequeñas ofensas, y rehúsa pregonar o rumiar las faltas de los demás. En una iglesia que sufre, donde los creyentes están apretados unos contra otros y los nervios pueden gastarse, este amor ferviente y perdonador es el vínculo que mantiene unida a la familia de Dios. Donde el amor es ferviente, multitud de pequeños agravios quedan calladamente cubiertos y nunca se les permite dividir al pueblo de Dios, así que el amor ha de ser la primera y suprema búsqueda del creyente."}, {"textEn": "26. Explain the meaning of 'steward' in verse 10, using the lesson's examples.", "textEs": "26. Explique el significado de 'administrador' en el versículo 10, usando los ejemplos de la lección.", "kw_en": ["steward", "manager", "joseph", "talent", "time", "treasure", "god", "belong"], "kw_es": ["administrador", "gerente", "josé", "talento", "tiempo", "tesoro", "dios", "pertenec"], "modelEn": "The key word in verse 10 is steward, which means a manager. The clearest picture is Joseph, who managed all of Potiphar's household; he owned nothing there, yet everything was entrusted to his care. That is precisely the Christian's position before God. Everything we are and everything we have is not our own to spend as we please but is entrusted to us to be used in the service of God. It has been observed that nearly half of the parables Jesus told touch on stewardship, for again and again He taught that our talents, our time, and our treasures all belong to God, and that we are only managers of what He has placed in our hands. As stewards, we will one day give account for how faithfully we have managed the Master's gifts, and so we are to use all that we have, not for ourselves, but for Him.", "modelEs": "La palabra clave en el versículo 10 es administrador, que significa un gerente. El retrato más claro es José, que administraba toda la casa de Potifar; nada le pertenecía allí, y sin embargo todo estaba confiado a su cuidado. Esa es precisamente la posición del cristiano delante de Dios. Todo lo que somos y todo lo que tenemos no es nuestro para gastarlo a nuestro gusto, sino que nos está confiado para usarlo en el servicio de Dios. Se ha observado que casi la mitad de las parábolas que Jesús contó tocan la administración, pues una y otra vez enseñó que nuestros talentos, nuestro tiempo y nuestros tesoros pertenecen todos a Dios, y que solo somos gerentes de lo que Él ha puesto en nuestras manos. Como administradores, un día daremos cuenta de cuán fielmente hemos manejado los dones del Señor, y por eso hemos de usar todo lo que tenemos, no para nosotros, sino para Él."}, {"textEn": "27. Explain the example of C.T. Studd and what it teaches about stewardship.", "textEs": "27. Explique el ejemplo de C.T. Studd y qué enseña sobre la administración.", "kw_en": ["studd", "missionary", "inheritance", "gave", "money", "steward", "wealth", "away"], "kw_es": ["studd", "misionero", "herencia", "dio", "dinero", "administr", "riqueza", "regal"], "modelEn": "C. T. Studd, once the finest cricket player in all of England, became a Christian and gave himself to the mission field. When a large inheritance came to him from his father, he gave it all away to the work of the gospel. Near the end of his life he was dismayed to discover that some money still remained in his hands, and he quickly passed it on to General Booth of the Salvation Army, determined not to leave this world holding any monetary wealth of his own. His example teaches radical stewardship. He treated his money as God's and not his own, and refused to cling to it for himself. Few are called to do exactly as he did, but his spirit is the spirit of a true steward, who holds even great wealth with an open hand, ready to spend it all in the service of God rather than hoard it.", "modelEs": "C. T. Studd, en otro tiempo el mejor jugador de críquet de toda Inglaterra, llegó a ser cristiano y se entregó al campo misionero. Cuando le vino una gran herencia de su padre, la regáló toda a la obra del evangelio. Cerca del fin de su vida quedó consternado al descubrir que aún le quedaba algo de dinero en las manos, y rápidamente se lo pasó al general Booth del Ejército de Salvación, resuelto a no dejar este mundo reteniendo riqueza monetaria propia. Su ejemplo enseña la administración radical. Trató su dinero como de Dios y no suyo, y se negó a aferrarse a él para sí mismo. Pocos son llamados a hacer exactamente lo que él hizo, pero su espíritu es el espíritu de un verdadero administrador, que sostiene aun la gran riqueza con mano abierta, listo para gastarla toda en el servicio de Dios en vez de atesorarla."}, {"textEn": "28. Explain verses 9-11 — how believers are to use their gifts as stewards of God's grace.", "textEs": "28. Explique los versículos 9-11 — cómo han de usar los creyentes sus dones como administradores de la gracia de Dios.", "kw_en": ["gift", "minister", "steward", "grace", "manifold", "serve", "strength", "god"], "kw_es": ["don", "ministr", "administr", "gracia", "multiforme", "servir", "poder", "dios"], "modelEn": "Peter says be hospitable to one another without grumbling, offering an open home and heart cheerfully. Then he gives the great principle: as each one has received a gift, he is to minister it to one another as a good steward of the manifold grace of God. Every believer has received some gift, and it is given not for himself but to serve others; he is to use it as a manager of God's varied grace. Peter then shows how this works in the body. The one who speaks is to speak as the very oracles of God, with reverence and care. The one who serves is to do it by the strength that God supplies, not in his own power. And the goal of it all is not the servant's reputation but that in all things God may be glorified through Jesus Christ. Our gifts are entrusted grace, to be spent for others and for the glory of God.", "modelEs": "Pedro dice hospedaos los unos a los otros sin murmuraciones, ofreciendo una casa y un corazón abiertos con alegría. Luego da el gran principio: como cada uno ha recibido un don, ha de ministrarlo a los otros como buen administrador de la multiforme gracia de Dios. Cada creyente ha recibido algún don, y le es dado no para sí mismo sino para servir a los demás; ha de usarlo como gerente de la variada gracia de Dios. Pedro muestra entonces cómo obra esto en el cuerpo. El que habla ha de hablar como los oráculos mismos de Dios, con reverencia y cuidado. El que sirve ha de hacerlo por la fuerza que Dios da, no en su propio poder. Y la meta de todo ello no es la reputación del siervo sino que en todo sea Dios glorificado por Jesucristo. Nuestros dones son gracia confiada, para gastarse por los demás y para la gloria de Dios."}, {"textEn": "29. How do verses 7-11 connect the nearness of the end with the believer's duties of prayer, love, and service?", "textEs": "29. ¿Cómo conectan los versículos 7-11 la cercanía del fin con los deberes del creyente de oración, amor y servicio?", "kw_en": ["end", "near", "prayer", "love", "serve", "steward", "sober", "glory"], "kw_es": ["fin", "cerca", "oración", "amor", "servir", "administr", "templad", "gloria"], "modelEn": "Because the end of all things is at hand, Peter draws out practical duties rather than idle speculation. First, the believer is to be serious, sober-minded, and watchful in prayer, living alertly because the time is short. Second, above all he is to keep fervent love for one another, the love that covers a multitude of sins. Third, he is to show hospitality without grumbling and to minister whatever gift he has received as a good steward of God's manifold grace, serving by the strength God supplies. So the nearness of the end is not an excuse for panic or laziness but a powerful motive for prayer, love, and faithful service. The shortness of the time sharpens the believer's devotion to God and to others, and the aim through it all is that in everything God may be glorified through Jesus Christ.", "modelEs": "Porque el fin de todas las cosas se acerca, Pedro saca deberes prácticos en vez de especulación ociosa. Primero, el creyente ha de ser serio, de mente sobria, y velar en oración, viviendo alerta porque el tiempo es corto. Segundo, sobre todo ha de guardar ferviente amor de unos por otros, el amor que cubre multitud de pecados. Tercero, ha de mostrar hospitalidad sin murmuraciones y ministrar cualquier don que haya recibido como buen administrador de la multiforme gracia de Dios, sirviendo por la fuerza que Dios da. Así que la cercanía del fin no es excusa para el pánico ni la pereza sino un poderoso motivo para la oración, el amor y el servicio fiel. La brevedad del tiempo agudiza la devoción del creyente a Dios y a los demás, y el fin en todo ello es que en todo sea Dios glorificado por Jesucristo."}, {"textEn": "30. Summarize the central message of Unit 10 (1 Peter 4:1-11).", "textEs": "30. Resuma el mensaje central de la Unidad 10 (1 Pedro 4:1-11).", "kw_en": ["mind", "christ", "end", "love", "steward", "gift", "grace", "glory"], "kw_es": ["pensamiento", "cristo", "fin", "amor", "administr", "don", "gracia", "gloria"], "modelEn": "Unit 10 teaches the believer how to live in the short time that remains. Since Christ suffered in the flesh, believers arm themselves with His mind and, having broken with sin, live the rest of their lives for the will of God rather than the old pagan ways, even when former companions slander them. Those slanderers will answer to the Judge of the living and the dead. Because the end of all things is at hand, near both from God's perspective and for each of us personally, believers are to be sober and watchful in prayer, and above all to keep fervent love, which covers a multitude of sins. And as each one has received a gift, he is to minister it as a good steward of the manifold grace of God, speaking as God's oracles and serving by God's strength, so that in all things God may be glorified through Jesus Christ.", "modelEs": "La Unidad 10 enseña al creyente cómo vivir en el corto tiempo que queda. Ya que Cristo padeció en la carne, los creyentes se arman de su pensamiento y, habiendo roto con el pecado, viven el resto de sus vidas para la voluntad de Dios en vez de las viejas costumbres paganas, aun cuando los antiguos compañeros los calumnien. Esos calumniadores responderán al Juez de los vivos y los muertos. Porque el fin de todas las cosas se acerca, cercano tanto desde la perspectiva de Dios como para cada uno de nosotros personalmente, los creyentes han de ser templados y velar en oración, y sobre todo guardar ferviente amor, que cubre multitud de pecados. Y como cada uno ha recibido un don, ha de ministrarlo como buen administrador de la multiforme gracia de Dios, hablando como los oráculos de Dios y sirviendo por la fuerza de Dios, para que en todo sea Dios glorificado por Jesucristo."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 11 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 11 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTS1PeterReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Worship — Unit 1: Foundations of Worship</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.sa-model { margin-top: 8px; padding: 10px 14px; background:#fff8e1; color:#5d4a00; border-left:4px solid #d4af37; border-radius:6px; font-size:0.92rem; line-height:1.45; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+/* === Retrofit additions === */
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-bottom: 2px dashed #d7cec1; padding-bottom: 18px; margin-bottom: 18px; }
+.lang-toggle-group { display: inline-flex; gap: 4px; margin-bottom: 15px; }
+.lang-toggle-group button { background: #f4c542; color: #5b3a1f; border: 1px solid #c9a032; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+.lang-toggle-group button.active { background: #5b3a1f; color: white; border-color: #5b3a1f; }
+.track-badge { display: inline-block; background: #f4c542; color: #5b3a1f; padding: 4px 12px; border-radius: 30px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 12px; vertical-align: middle; }
+.exam-status { padding: 12px 16px; margin: 14px 0; border-radius: 8px; font-size: 0.95rem; font-weight: 600; }
+.exam-status.mc-passed { background: #d6e2f0; color: #2c3e6b; border-left: 5px solid #3f5a8a; }
+.exam-status.locked { background: #fae5e3; color: #8a1f1f; border-left: 5px solid #b03a2e; }
+.exam-status.hidden { display: none; }
+.mc-section, .sa-section { margin-top: 20px; }
+.sa-section h3, .mc-section h3 { color: #5b3a1f; border-bottom: 2px solid #f4c542; padding-bottom: 4px; margin-bottom: 12px; font-size: 1.1rem; }
+.sa-badge { display: inline-block; background: #f4c542; color: #5b3a1f; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; margin-left: 8px; vertical-align: middle; }
+.sa-note { margin: 0 0 14px; padding: 10px 14px; background: #f6f1e8; border-left: 3px solid #c9a032; color: #22201d; font-size: 0.9rem; font-style: italic; border-radius: 6px; }
+.question.review-locked { opacity: 0.7; background: #fbfaf6; border-left: 3px solid #f4c542; }
+.question.review-locked .option { pointer-events: none; }
+.question.review-locked .kw-answer, .question.review-locked .check-kw-btn { pointer-events: none; }
+.btn-reset { background: #8a6a4a; color: white; border: none; border-radius: 30px; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 0.88rem; margin-left: 8px; }
+.btn-reset:hover { background: #6b5236; }
+.reg-modal { position: fixed; inset: 0; background: rgba(40, 30, 20, 0.65); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.reg-modal.hidden { display: none; }
+.reg-modal-inner { background: #fffdfa; max-width: 520px; width: 100%; border-radius: 16px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 1px solid #d7cec1; }
+.reg-modal-inner h2 { color: #5b3a1f; margin: 0 0 10px; font-size: 1.4rem; }
+.reg-modal-inner p { margin: 10px 0; font-size: 0.95rem; }
+.reg-modal-inner label { display: block; margin: 12px 0 4px; font-weight: 700; font-size: 0.92rem; }
+.reg-modal-inner input[type="text"], .reg-modal-inner input[type="email"] { width: 100%; padding: 9px 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; background: #fcfbf8; }
+.reg-modal-inner .track-options { display: flex; gap: 10px; margin-top: 6px; }
+.reg-modal-inner .track-options label { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 12px; border: 1px solid #d7cec1; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.92rem; background: #fcfbf8; }
+.reg-modal-inner .track-options input[type="radio"] { margin: 0; }
+.reg-modal-inner .track-options label:has(input:checked) { background: #f4c542; border-color: #c9a032; }
+.reg-modal-inner button { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 9px 22px; cursor: pointer; font-family: inherit; font-size: 1rem; margin-top: 18px; }
+.reg-warn { background: #faecd0; border: 1px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; color: #5b3a1f; }
+.reg-warn.hidden { display: none; }
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .nav-bar, .toggle-btn, .lang-toggle-group, .btn-reset, button.small, .check-kw-btn, .reg-modal, .reg-warn, #submitExamBtn, .exam-status, .sa-badge, .track-badge { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+  body.lang-en .lang-es, body.lang-es .lang-en { display: none; }
+  body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+}
+
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" disabled>← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" role="group" aria-label="Language">
+  <button data-lang="en" class="active">English</button>
+  <button data-lang="es">Español</button>
+  <button data-lang="both">Both / Ambos</button>
+</div>
+<span id="trackBadgeSlot"></span>
+
+<div id="regWarn" class="reg-warn hidden">
+  <span class="lang-en">⚠ Please register your name to receive credit for this unit. <button class="small" id="openRegBtn" type="button">Register</button></span>
+  <span class="lang-es">⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class="small" id="openRegBtn2" type="button">Registrar</button></span>
+</div>
+<div id="regModal" class="reg-modal hidden" role="dialog" aria-labelledby="regModalTitle">
+  <div class="reg-modal-inner">
+    <h2 id="regModalTitle"><span class="lang-en">Welcome to the Worship</span><span class="lang-es">Bienvenido al Adoración</span></h2>
+    <p><span class="lang-en">Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.</span><span class="lang-es">Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full name</span><span class="lang-es">Nombre completo</span></label>
+    <input type="text" id="regName" placeholder="" autocomplete="name" aria-label="regName">
+    <label><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span></label>
+    <input type="email" id="regEmail" placeholder="" autocomplete="email" aria-label="regEmail">
+    <label><span class="lang-en">Track</span><span class="lang-es">Vía</span></label>
+    <div class="track-options">
+      <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></label>
+      <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en">M.Div</span><span class="lang-es">M.Div</span></label>
+      <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en">Th.M.</span><span class="lang-es">Th.M.</span></label>
+    </div>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;">
+      <span class="lang-en"><strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.</span>
+      <span class="lang-es"><strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%.</span>
+    </p>
+    <button id="regSaveBtn" type="button"><span class="lang-en">Save and Continue</span><span class="lang-es">Guardar y Continuar</span></button>
+  </div>
+</div>
+<div class="card">
+    <h1><span class="lang-en">🎼 Worship — Unit 1: Foundations of Worship</span><span class="lang-es">🎼 Adoración — Unidad 1: Fundamentos de la Adoración</span></h1>
+    <p><span class="lang-en"><strong>Chapala Theological Seminary</strong>, a ministry of Common Ground Fellowship | <strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Seminario Teológico de Chapala</strong>, un ministerio de Common Ground Fellowship | <strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:10px; border-top:1px solid #e3d9c8; padding-top:10px;"><span class="lang-en">This course is drawn from the worship curriculum of Dr. Wayne Cook, who served eleven years as Professor of Pastoral Ministries and Preaching, together with the teaching of Andi Cook, who taught alongside him at the seminary. It reflects not only academic study but decades of pastoral and seminary experience.</span><span class="lang-es">Este curso proviene del currículo de adoración del Dr. Wayne Cook, quien sirvió once años como Profesor de Ministerios Pastorales y Predicación, junto con la enseñanza de Andi Cook, quien enseñó a su lado en el seminario. Refleja no solo el estudio académico sino décadas de experiencia pastoral y de seminario.</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>I. The Simplest Definition: God</h2>
+        <p>We begin a course on worship by asking the most basic question of all: what is worship? You would think the answer would be obvious, but it is not. People use the word for everything from a Sunday service to a concert to the way a man feels about his car. So before we can lead worship, plan worship, or evaluate worship, we have to define it. And we will find that the definition is layered — there is a theological definition, an etymological definition, the Hebrew and Greek words behind it, and the great contemporary definitions. Each layer adds something.</p>
+
+        <p>Start with the theological definition, which is the simplest of all. Martin Luther reportedly said that to have God is to worship Him. The simplest theological definition of worship is one word: <em>God</em>. The object of worship is God. Worship is our response to who God is, to what He has done, and to what He is doing. Notice that worship is a <em>response</em>. We do not initiate it. God reveals Himself, and worship is what happens when a human being responds rightly to that revelation. This is why Luther warned that to worship a God we have devised with our own heads is to worship a false god. If the God we are responding to is one we invented, our worship — however sincere, however emotional — is misdirected. It lands on an idol.</p>
+
+        <p>The God we worship has several characteristics, and each one shapes how we come to Him. He is <strong>personal</strong> — He is a He, not an it. He is not an abstraction or a force; we can have a relationship with Him. He is <strong>transcendent</strong> — He is above us, not merely equal to us, so we dare not be flippant or casual with Him. J. B. Phillips wrote a book called <em>Your God Is Too Small</em>, and that is exactly the danger. He is <strong>imminent</strong> — though He is above us, He is also near us; there is never a moment when He is not present, and that affects both our conduct and our prayer. He is <strong>trustworthy</strong> — our understanding of God may change as we grow, but God Himself does not change; Francis Schaeffer wrote <em>The God Who Is There</em>, and He fulfills His promises. And He is <strong>triune</strong> — we are not polytheists; we worship one God who exists eternally in three Persons, Father, Son, and Holy Spirit.</p>
+
+        <h2>II. Worth-ship: The Etymology</h2>
+        <p>The English word <em>worship</em> comes from the old English <em>worth-ship</em>. It means worthy of honor — to ascribe worth or value to something. This is one of the most revealing facts in the whole study, because it tells us that everyone worships something. To value something supremely, whether it is money or God, is to worship it. Whatever sits at the very top of your list of values is the thing you actually worship, no matter what you say with your mouth. That is why 1 John 5:21 ends that letter with the abrupt command, "keep yourselves from idols." God alone is worthy of worship. Anything else we put in that supreme place becomes an idol — and the human heart, as Calvin said, is a factory of them.</p>
+
+        <h2>III. The Hebrew Words</h2>
+        <p>The Old Testament gives us three important words. The first is <em>shachah</em>, which means to fall before the king — to bow down and kiss the ground or the hand of a superior. Exodus 4:31 shows it: when the people heard that the LORD was concerned about them and had seen their misery, "they bowed down and worshipped." The primary meaning is reverential awe, the bowing of oneself in the presence of deity or a great king, but it also carries the idea of obedient service. Notice the sequence in Exodus 4:31 — first they believed, and then they bowed. Belief produces the bow. Worship is the body and the will responding to what the heart has come to believe.</p>
+
+        <p>The second word is <em>kabod</em>, which is translated either as worship or as glory. It expresses the honor due to God. Isaiah 6:3 is the great example: the seraphim call to one another, "Holy, holy, holy is the LORD Almighty; the whole earth is full of his glory." The same Hebrew root carries both worship and glory because to give God glory <em>is</em> to worship Him. He is worthy of praise, honor, and obedient service, and <em>kabod</em> holds all of that together in one word. The third word is <em>aved</em>, which simply means service. Already in the Old Testament, worship and service are bound together; you cannot separate the bowing of the heart from the work of the hands.</p>
+
+        <h2>IV. The Greek Words</h2>
+        <p>The New Testament gives us two key words. The first is <em>proskuneo</em>, which means to prostrate oneself before another — the same picture as the Hebrew <em>shachah</em>. This is the word Jesus uses in John 4:24: "God is spirit, and his worshippers must worship in spirit and in truth." The second is <em>leiturgia</em>, which is translated as ministry, service, or worship. Our English word <em>liturgy</em> comes directly from it. <em>Leiturgia</em> too includes the concept of obedient service — it refers to the action of the people in the worship of the Lord, or to a ministry performed for the Lord. We see it in Luke 1:23 and in Acts 13:2, where "while they were worshipping the Lord and fasting," the Holy Spirit set apart Barnabas and Saul for missionary work. Worship as <em>leiturgia</em> is never merely private feeling; it spills out into obedient service and mission.</p>
+
+        <h2>V. Worship in Spirit and in Truth</h2>
+        <p>Jesus' words in John 4:24 — <em>worship in spirit and in truth</em> — give us the full shape of worship, and they deserve careful attention because they hold together two things that are forever drifting apart. The two are not in competition. They are the two halves of what it means to give God a whole human response.</p>
+
+        <p><strong>Truth</strong> engages the mind. Worship grounded in truth is worship grounded in Scripture, in sound doctrine, and in a right understanding of who God actually is. Without truth, worship becomes sentimental and empty — it may feel intense, but it is not directed at the God who has actually revealed Himself. We have already seen what happens when people worship a god they have devised in their own heads: they worship a false god, no matter how strong the feeling.</p>
+
+        <p><strong>Spirit</strong> engages the heart, the affections, and the will. Worship in spirit comes from the inner person, not merely from outward form. It is alive, not mechanical. Without spirit, worship becomes a dry intellectual exercise — it may be doctrinally precise, but it is not the loving response of a creature to the Creator.</p>
+
+        <p>We humans are not one-dimensional. God made us with minds <em>and</em> emotions, intellect <em>and</em> affections. So we give Him both. We give Him our minds in careful study and sound doctrine. We give Him our praise from the depths of the heart. A worship service that engages only the mind will eventually dry up; a service that engages only the emotions will eventually drift. A service that engages both — that is what John 4:24 is describing. We will return to this balance again and again throughout the course, because nearly every controversy in the history of worship is, at bottom, a failure to keep spirit and truth together.</p>
+
+        <!-- SERMON_ARCHIVE_ENRICHMENT_START WOR1 EN -->
+<h2>Worship Is Also an Action</h2>
+<p>Micah 6:8 guards us from defining worship only as what happens during a service. Israel knew how to bring sacrifices, offerings, incense, and solemn assemblies, yet the prophets repeatedly warned that religious acts become empty when the worshiper's life contradicts them. An older sermon by Dr. Cook summarizes the principle this way: we cannot divorce action from worship. Romans 12:1 makes the same movement when it calls believers to present their bodies as living sacrifices. Worship includes praise, prayer, Scripture, song, and the ordinances, but it also reaches into the rest of the week.</p>
+<p>Micah's three verbs make the point concrete: do justice, love mercy, and walk humbly with God. A worshiper who sings beautifully but treats people unjustly has misunderstood worship. A worshiper who knows the order of service but refuses mercy has separated the sanctuary from discipleship. And a worshiper who seeks attention has missed the humility of walking with God. Biblical worship therefore joins adoration and obedience. What happens before God on Sunday is meant to shape how God's people live before Him every day.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END WOR1 EN -->
+
+<h2>VI. The Contemporary Definitions</h2>
+        <p>Three modern writers have given us definitions worth memorizing. Franklin Segler said, "Christian worship is man's loving response in personal faith to God's personal revelation of Himself in Jesus Christ." Notice the three elements there: worship is a <em>response</em> (God acts first), it is in <em>personal faith</em> (not abstract belief), and it is to God's revelation <em>in Jesus Christ</em> (Christian worship is centered on Christ). V. L. Stanfield said that worship is giving your adoration, praise, money, and self to God, and then receiving what God gives to those who freely turn to Him — worship both gives and receives. And William Temple gave the most comprehensive definition of all: "To worship is to quicken the conscience by the holiness of God, to feed the mind with the truth of God, to purge the imagination by the beauty of God, to open the heart to the love of God, and to devote the will to the purpose of God." Temple's definition reaches every faculty of the human person — conscience, mind, imagination, heart, and will — and pairs each with an attribute of God. Nothing in us is meant to sit idle in worship.</p>
+
+        <p>Take all of these definitions together and a single pattern emerges. In every one of them, God takes the initiative and man responds. The response is driven by two things: who God is — His being — and what God has done — His work. Worship is not us reaching up to find a distant God. It is us responding, with everything we are, to the God who has already reached down to reveal Himself. Keep that one sentence and you have the heart of this entire course.</p>
+    </div>
+    <div class="lang-es">
+        <h2>I. La definición más sencilla: Dios</h2>
+        <p>Comenzamos un curso sobre la adoración haciendo la pregunta más básica de todas: ¿qué es la adoración? Uno pensaría que la respuesta sería obvia, pero no lo es. La gente usa la palabra para todo, desde un servicio dominical hasta un concierto o la manera en que un hombre siente por su auto. Así que antes de poder dirigir la adoración, planearla o evaluarla, tenemos que definirla. Y descubriremos que la definición tiene capas — hay una definición teológica, una etimológica, las palabras hebreas y griegas detrás de ella, y las grandes definiciones contemporáneas. Cada capa aporta algo.</p>
+
+        <p>Comencemos con la definición teológica, que es la más sencilla de todas. Se dice que Martín Lutero afirmó que tener a Dios es adorarle. La definición teológica más sencilla de la adoración es una sola palabra: <em>Dios</em>. El objeto de la adoración es Dios. La adoración es nuestra respuesta a quién es Dios, a lo que ha hecho, y a lo que está haciendo. Note que la adoración es una <em>respuesta</em>. No la iniciamos nosotros. Dios se revela, y la adoración es lo que sucede cuando un ser humano responde correctamente a esa revelación. Por eso Lutero advirtió que adorar a un Dios que hemos inventado con nuestras propias cabezas es adorar a un dios falso. Si el Dios al que respondemos es uno que inventamos, nuestra adoración — por sincera o emotiva que sea — está mal dirigida. Cae sobre un ídolo.</p>
+
+        <p>El Dios que adoramos tiene varias características, y cada una moldea cómo venimos a Él. Es <strong>personal</strong> — es Él, no ello. No es una abstracción ni una fuerza; podemos tener una relación con Él. Es <strong>trascendente</strong> — está por encima de nosotros, no meramente igual a nosotros, así que no nos atrevemos a ser frívolos o casuales con Él. J. B. Phillips escribió un libro llamado <em>Tu Dios es demasiado pequeño</em>, y ese es exactamente el peligro. Es <strong>inmanente</strong> — aunque está por encima de nosotros, también está cerca de nosotros; nunca hay un momento en que no esté presente, y eso afecta tanto nuestra conducta como nuestra oración. Es <strong>confiable</strong> — nuestra comprensión de Dios puede cambiar a medida que crecemos, pero Dios mismo no cambia; Francis Schaeffer escribió <em>El Dios que está allí</em>, y Él cumple sus promesas. Y es <strong>trino</strong> — no somos politeístas; adoramos a un solo Dios que existe eternamente en tres Personas, Padre, Hijo y Espíritu Santo.</p>
+
+        <h2>II. Worth-ship: la etimología</h2>
+        <p>La palabra inglesa <em>worship</em> viene del inglés antiguo <em>worth-ship</em>. Significa digno de honor — atribuir valor o dignidad a algo. Este es uno de los hechos más reveladores de todo el estudio, porque nos dice que todos adoran algo. Valorar algo supremamente, sea dinero o Dios, es adorarlo. Lo que esté en la cima misma de tu lista de valores es lo que en realidad adoras, sin importar lo que digas con la boca. Por eso 1 Juan 5:21 termina esa carta con el mandato abrupto: "guardaos de los ídolos." Solo Dios es digno de adoración. Cualquier otra cosa que pongamos en ese lugar supremo se convierte en ídolo — y el corazón humano, como dijo Calvino, es una fábrica de ellos.</p>
+
+        <h2>III. Las palabras hebreas</h2>
+        <p>El Antiguo Testamento nos da tres palabras importantes. La primera es <em>shachah</em>, que significa caerse ante el rey — postrarse y besar el suelo o la mano de un superior. Éxodo 4:31 lo muestra: cuando el pueblo oyó que el SEÑOR se había preocupado por ellos y había visto su aflicción, "se postraron y adoraron." El significado primario es asombro reverente, la postración de uno mismo en la presencia de la deidad o de un gran rey, pero también lleva la idea de servicio obediente. Note la secuencia en Éxodo 4:31 — primero creyeron, y luego se postraron. La fe produce la postración. La adoración es el cuerpo y la voluntad respondiendo a lo que el corazón ha llegado a creer.</p>
+
+        <p>La segunda palabra es <em>kabod</em>, que se traduce como adoración o como gloria. Expresa el honor debido a Dios. Isaías 6:3 es el gran ejemplo: los serafines se llaman unos a otros, "Santo, santo, santo es el SEÑOR Todopoderoso; toda la tierra está llena de su gloria." La misma raíz hebrea lleva tanto adoración como gloria porque dar gloria a Dios <em>es</em> adorarle. Él es digno de alabanza, honor y servicio obediente, y <em>kabod</em> sostiene todo eso junto en una sola palabra. La tercera palabra es <em>aved</em>, que simplemente significa servicio. Ya en el Antiguo Testamento, la adoración y el servicio están unidos; no se puede separar la postración del corazón del trabajo de las manos.</p>
+
+        <h2>IV. Las palabras griegas</h2>
+        <p>El Nuevo Testamento nos da dos palabras clave. La primera es <em>proskuneo</em>, que significa postrarse ante otro — la misma imagen que el hebreo <em>shachah</em>. Esta es la palabra que Jesús usa en Juan 4:24: "Dios es espíritu, y los que le adoran deben adorar en espíritu y en verdad." La segunda es <em>leiturgia</em>, que se traduce como ministerio, servicio o adoración. Nuestra palabra <em>liturgia</em> viene directamente de ella. <em>Leiturgia</em> también incluye el concepto de servicio obediente — se refiere a la acción del pueblo en la adoración del Señor, o a un ministerio realizado para el Señor. La vemos en Lucas 1:23 y en Hechos 13:2, donde "ministrando estos al Señor, y ayunando," el Espíritu Santo apartó a Bernabé y a Saulo para la obra misionera. La adoración como <em>leiturgia</em> nunca es mero sentimiento privado; se desborda en servicio obediente y misión.</p>
+
+        <h2>V. Adorar en espíritu y en verdad</h2>
+        <p>Las palabras de Jesús en Juan 4:24 — <em>adorar en espíritu y en verdad</em> — nos dan la forma completa de la adoración, y merecen atención cuidadosa porque sostienen juntas dos cosas que siempre tienden a separarse. Las dos no están en competencia. Son las dos mitades de lo que significa dar a Dios una respuesta humana completa.</p>
+
+        <p>La <strong>verdad</strong> involucra la mente. La adoración fundamentada en la verdad es adoración fundamentada en la Escritura, en la sana doctrina, y en una comprensión correcta de quién es Dios realmente. Sin verdad, la adoración se vuelve sentimental y vacía — puede sentirse intensa, pero no está dirigida al Dios que realmente se ha revelado. Ya hemos visto lo que sucede cuando la gente adora a un dios que ha inventado en su propia cabeza: adoran a un dios falso, por fuerte que sea el sentimiento.</p>
+
+        <p>El <strong>espíritu</strong> involucra el corazón, los afectos y la voluntad. La adoración en espíritu viene del hombre interior, no meramente de la forma externa. Está viva, no es mecánica. Sin espíritu, la adoración se vuelve un ejercicio intelectual seco — puede ser doctrinalmente precisa, pero no es la respuesta amorosa de la criatura al Creador.</p>
+
+        <p>Los seres humanos no somos unidimensionales. Dios nos hizo con mente <em>y</em> emociones, intelecto <em>y</em> afectos. Así que le damos ambos. Le damos nuestra mente en el estudio cuidadoso y la sana doctrina. Le damos nuestra alabanza desde lo profundo del corazón. Un servicio de adoración que involucra solo la mente eventualmente se secará; un servicio que involucra solo las emociones eventualmente se desviará. Un servicio que involucra ambos — eso es lo que describe Juan 4:24. Volveremos a este equilibrio una y otra vez a lo largo del curso, porque casi toda controversia en la historia de la adoración es, en el fondo, un fracaso en mantener juntos el espíritu y la verdad.</p>
+
+        <!-- SERMON_ARCHIVE_ENRICHMENT_START WOR1 ES -->
+<h2>La Adoración También Es una Acción</h2>
+<p>Miqueas 6:8 nos guarda de definir la adoración solamente como lo que sucede durante un culto. Israel sabía traer sacrificios, ofrendas, incienso y asambleas solemnes, pero los profetas advirtieron repetidamente que los actos religiosos se vuelven vacíos cuando la vida del adorador los contradice. Un sermón anterior del Dr. Cook resume el principio de esta manera: no podemos separar la acción de la adoración. Romanos 12:1 hace el mismo movimiento cuando llama a los creyentes a presentar sus cuerpos como sacrificio vivo. La adoración incluye alabanza, oración, Escritura, canto y las ordenanzas, pero también se extiende al resto de la semana.</p>
+<p>Los tres verbos de Miqueas hacen concreto el punto: hacer justicia, amar misericordia y caminar humildemente con Dios. Un adorador que canta hermosamente pero trata a otros injustamente no ha entendido la adoración. Un adorador que conoce el orden del culto pero rehúsa la misericordia ha separado el santuario del discipulado. Y un adorador que busca atención ha perdido la humildad de caminar con Dios. La adoración bíblica une, por tanto, la adoración y la obediencia. Lo que sucede delante de Dios el domingo debe moldear cómo vive su pueblo delante de Él cada día.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END WOR1 ES -->
+
+<h2>VI. Las definiciones contemporáneas</h2>
+        <p>Tres escritores modernos nos han dado definiciones que vale la pena memorizar. Franklin Segler dijo: "La adoración cristiana es la respuesta amorosa del hombre en fe personal a la revelación personal de Dios en Jesucristo." Note los tres elementos allí: la adoración es una <em>respuesta</em> (Dios actúa primero), es en <em>fe personal</em> (no creencia abstracta), y es a la revelación de Dios <em>en Jesucristo</em> (la adoración cristiana está centrada en Cristo). V. L. Stanfield dijo que la adoración es dar tu adoración, alabanza, dinero y a ti mismo a Dios, y luego recibir lo que Dios da a quienes libremente se vuelven a Él — la adoración tanto da como recibe. Y William Temple dio la definición más amplia de todas: "Adorar es avivar la conciencia con la santidad de Dios, alimentar la mente con la verdad de Dios, purificar la imaginación con la belleza de Dios, abrir el corazón al amor de Dios, y dedicar la voluntad al propósito de Dios." La definición de Temple alcanza cada facultad de la persona humana — conciencia, mente, imaginación, corazón y voluntad — y empareja cada una con un atributo de Dios. Nada en nosotros está destinado a quedarse inactivo en la adoración.</p>
+
+        <p>Tome todas estas definiciones en conjunto y surge un solo patrón. En cada una de ellas, Dios toma la iniciativa y el hombre responde. La respuesta es impulsada por dos cosas: quién es Dios — su ser — y lo que Dios ha hecho — su obra. La adoración no es nosotros alcanzando hacia arriba para encontrar a un Dios distante. Es nosotros respondiendo, con todo lo que somos, al Dios que ya se ha extendido hacia abajo para revelarse. Guarde esa sola frase y tiene el corazón de todo este curso.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 1 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></span><span class="lang-es"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></span></p>
+    <div class="exam-status hidden" id="examStatus"></div>
+<div class="mc-section" id="mcSection">
+  <h3><span class="lang-en">Multiple Choice &mdash; 20 Questions</span><span class="lang-es">Opción Múltiple &mdash; 20 Preguntas</span></h3>
+  <div id="mcContainer"></div>
+</div>
+<div class="sa-section" id="saSection">
+  <h3><span class="lang-en">Short Answer &mdash; 10 Questions <span class="sa-badge" id="saBadgeEn"></span></span><span class="lang-es">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="saBadgeEs"></span></span></h3>
+  <p class="sa-note"><span class="lang-en" id="saNoteEn"></span><span class="lang-es" id="saNoteEs"></span></p>
+  <div id="kwContainer"></div>
+</div>
+<div style="margin-top: 20px;">
+  <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+  <button id="resetExamBtn" class="btn-reset" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+  <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+</div>
+</div>
+
+<script>
+
+const TOTAL_UNITS = 11;
+const CURRENT_UNIT = 1;
+const NEXT_URL = 'CTSWorshipUnit2.html';
+
+// === MC + SA data (preserved verbatim from upstream) ===
+const mcQuestions = [
+    { textEn: "1. The simplest theological definition of worship, according to Luther, is:", textEs: "1. La definición teológica más sencilla de adoración, según Lutero, es:", optionsEn: ["Singing", "God", "Prayer", "Sacrifice"], optionsEs: ["El canto", "Dios", "La oración", "El sacrificio"], correct: 1 },
+    { textEn: "2. The object of worship is:", textEs: "2. El objeto de la adoración es:", optionsEn: ["The worshipper", "The church", "God", "The minister"], optionsEs: ["El adorador", "La iglesia", "Dios", "El ministro"], correct: 2 },
+    { textEn: "3. Which of the following is NOT one of the characteristics of God listed by Wayne in the definition of worship?", textEs: "3. ¿Cuál de los siguientes NO es una de las características de Dios que Wayne incluye en la definición de adoración?", optionsEn: ["Personal", "Transcendent", "Imminent", "Limited"], optionsEs: ["Personal", "Trascendente", "Inmanente", "Limitado"], correct: 3 },
+    { textEn: "4. The word 'worship' in old English derives from:", textEs: "4. La palabra 'worship' en inglés antiguo se deriva de:", optionsEn: ["Worth-ship — worthy of honor", "War-ship — defense of God", "Word-ship — speaking God's word", "Work-ship — labor for God"], optionsEs: ["Worth-ship — digno de honor", "War-ship — defensa de Dios", "Word-ship — declarar la palabra de Dios", "Work-ship — labor para Dios"], correct: 0 },
+    { textEn: "5. The Hebrew word shachah means:", textEs: "5. La palabra hebrea shachah significa:", optionsEn: ["To sing praise", "To fall before the king (bow down and kiss)", "To offer sacrifice", "To serve in the temple"], optionsEs: ["Cantar alabanza", "Caerse ante el rey (postrarse y besar)", "Ofrecer sacrificio", "Servir en el templo"], correct: 1 },
+    { textEn: "6. Exodus 4:31 illustrates shachah when the people:", textEs: "6. Éxodo 4:31 ilustra shachah cuando el pueblo:", optionsEn: ["Built an altar", "Sang a new song", "Bowed down and worshipped after hearing the Lord was concerned about them", "Brought offerings to Moses"], optionsEs: ["Edificó un altar", "Cantó un cántico nuevo", "Se postró y adoró al oír que el Señor se había preocupado por ellos", "Trajo ofrendas a Moisés"], correct: 2 },
+    { textEn: "7. The Hebrew word kabod is translated as either worship or:", textEs: "7. La palabra hebrea kabod se traduce como adoración o:", optionsEn: ["Glory", "Service", "Sacrifice", "Praise"], optionsEs: ["Gloria", "Servicio", "Sacrificio", "Alabanza"], correct: 0 },
+    { textEn: "8. The Hebrew word aved means:", textEs: "8. La palabra hebrea aved significa:", optionsEn: ["Bowing", "Glory", "Service", "Praise"], optionsEs: ["Postrarse", "Gloria", "Servicio", "Alabanza"], correct: 2 },
+    { textEn: "9. The Greek word for worship which means 'to fall down' or prostrate oneself before another is:", textEs: "9. La palabra griega para adoración que significa 'caerse' o postrarse ante otro es:", optionsEn: ["Leiturgia", "Latreia", "Proskuneo", "Doxa"], optionsEs: ["Leiturgia", "Latreia", "Proskuneo", "Doxa"], correct: 2 },
+    { textEn: "10. The Greek word leiturgia is translated as ministry, service, or worship and is the root of:", textEs: "10. La palabra griega leiturgia se traduce como ministerio, servicio o adoración y es la raíz de:", optionsEn: ["Liturgy", "Litany", "Liturgist", "Both A and C"], optionsEs: ["Liturgia", "Letanía", "Liturgista", "Tanto A como C"], correct: 3 },
+    { textEn: "11. According to John 4:24, God's worshippers must worship:", textEs: "11. Según Juan 4:24, los adoradores de Dios deben adorar:", optionsEn: ["In a holy place", "In their own language", "In spirit and in truth", "With instruments only"], optionsEs: ["En un lugar sagrado", "En su propio idioma", "En espíritu y en verdad", "Solo con instrumentos"], correct: 2 },
+    { textEn: "12. According to Franklin Segler, Christian worship is:", textEs: "12. Según Franklin Segler, la adoración cristiana es:", optionsEn: ["A liturgical performance", "Man's loving response in personal faith to God's personal revelation of himself in Jesus Christ", "An act of obedience to church law", "The execution of a sacrament"], optionsEs: ["Una representación litúrgica", "La respuesta amorosa del hombre en fe personal a la revelación personal de Dios en Jesucristo", "Un acto de obediencia a la ley eclesiástica", "La ejecución de un sacramento"], correct: 1 },
+    { textEn: "13. V. L. Stanfield's definition includes giving God your adoration, praise, money, and self — and then:", textEs: "13. La definición de V. L. Stanfield incluye dar a Dios adoración, alabanza, dinero y a uno mismo, y luego:", optionsEn: ["Receiving what God gives to those who freely turn to him", "Performing acts of service", "Reciting a creed", "Lighting a candle"], optionsEs: ["Recibir lo que Dios da a quienes libremente se vuelven a él", "Realizar actos de servicio", "Recitar un credo", "Encender una vela"], correct: 0 },
+    { textEn: "14. William Temple's classic definition of worship includes all of the following EXCEPT:", textEs: "14. La definición clásica de William Temple de la adoración incluye todos los siguientes EXCEPTO:", optionsEn: ["To quicken the conscience by the holiness of God", "To feed the mind with the truth of God", "To purge the imagination by the beauty of God", "To accumulate merit before God"], optionsEs: ["Avivar la conciencia con la santidad de Dios", "Alimentar la mente con la verdad de Dios", "Purificar la imaginación con la belleza de Dios", "Acumular mérito ante Dios"], correct: 3 },
+    { textEn: "15. J. B. Phillips authored a book Wayne cites with the title:", textEs: "15. J. B. Phillips escribió un libro que Wayne cita con el título:", optionsEn: ["The God Who Is There", "Your God is Too Small", "The Meaning of Worship", "Christian Worship in Transition"], optionsEs: ["El Dios que está allí", "Tu Dios es demasiado pequeño", "El significado de la adoración", "La adoración cristiana en transición"], correct: 1 },
+    { textEn: "16. Francis Schaeffer wrote a book Wayne cites titled:", textEs: "16. Francis Schaeffer escribió un libro que Wayne cita titulado:", optionsEn: ["The God Who Is There", "Your God is Too Small", "Knowing God", "The Holiness of God"], optionsEs: ["El Dios que está allí", "Tu Dios es demasiado pequeño", "Conociendo a Dios", "La santidad de Dios"], correct: 0 },
+    { textEn: "17. To worship a God we have devised with our own minds is to worship:", textEs: "17. Adorar a un Dios que hemos inventado con nuestras propias mentes es adorar:", optionsEn: ["The true God in a small way", "A false God", "A symbol of God", "A reformed God"], optionsEs: ["Al Dios verdadero de una manera pequeña", "A un dios falso", "Un símbolo de Dios", "Un Dios reformado"], correct: 1 },
+    { textEn: "18. 1 John 5:21 commands believers to:", textEs: "18. 1 Juan 5:21 manda a los creyentes:", optionsEn: ["Pray without ceasing", "Test the spirits", "Love one another", "Keep yourselves from idols"], optionsEs: ["Orar sin cesar", "Probar los espíritus", "Amarse unos a otros", "Guardarse de los ídolos"], correct: 3 },
+    { textEn: "19. The synthesis of the various definitions of worship is that:", textEs: "19. La síntesis de las diversas definiciones de adoración es que:", optionsEn: ["God takes the initiative and man responds because of who God is and what God has done", "Man initiates and God responds", "Both parties initiate equally", "Worship is purely a human invention"], optionsEs: ["Dios toma la iniciativa y el hombre responde por quién es Dios y lo que Dios ha hecho", "El hombre inicia y Dios responde", "Ambas partes inician por igual", "La adoración es puramente una invención humana"], correct: 0 },
+    { textEn: "20. Christian doctrine confesses that, although God is described in many ways, we worship:", textEs: "20. La doctrina cristiana confiesa que, aunque Dios se describe de muchas maneras, adoramos:", optionsEn: ["Many gods", "A philosophical concept", "An impersonal force", "One triune God"], optionsEs: ["Muchos dioses", "Un concepto filosófico", "Una fuerza impersonal", "Un Dios trino"], correct: 3 }
+];
+
+const kwQuestions = [
+    { textEn: "21. State the theological definition of worship in your own words. Why does Luther say that 'to have God is to worship Him,' and what happens when we worship a God we have invented ourselves?", textEs: "21. Exprese la definición teológica de la adoración en sus propias palabras. ¿Por qué dice Lutero que 'tener a Dios es adorarle', y qué sucede cuando adoramos a un Dios que hemos inventado nosotros mismos?", kwEn: ["god", "luther", "response", "false", "object", "reveal", "true", "have"], kwEs: ["dios", "lutero", "respuesta", "falso", "objeto", "revel", "verdad", "tener"],
+      modelEn: 'The theological definition of worship is simply God — worship is our response to who God is and what He has done. Luther said \'to have God is to worship Him\' because worship is not something we initiate but a response to a real God who has revealed Himself; if we worship a God we invented in our own heads rather than the true God, however sincere our feeling, our worship lands on an idol rather than the true God.',
+      modelEs: 'La definición teológica de la adoración es sencillamente Dios — la adoración es nuestra respuesta a quién es Dios y a lo que ha hecho. Lutero dijo que \'tener a Dios es adorarle\' porque la adoración no es algo que iniciamos sino una respuesta a un Dios real que se ha revelado; si adoramos a un Dios que inventamos en nuestra propia cabeza en lugar del Dios verdadero, por sincero que sea nuestro sentimiento, nuestra adoración recae sobre un ídolo en lugar del Dios verdadero.' },
+    { textEn: "22. Wayne lists five characteristics of the God we worship: personal, transcendent, imminent, trustworthy, and triune. Explain why each matters for genuine worship.", textEs: "22. Wayne enumera cinco características del Dios que adoramos: personal, trascendente, inmanente, confiable y trino. Explique por qué cada una importa para la adoración genuina.", kwEn: ["person", "transc", "immin", "trust", "triune", "near", "above", "relate"], kwEs: ["person", "trasc", "inman", "confi", "trino", "cerca", "sobre", "relac"],
+      modelEn: 'God is personal, so we relate to Him rather than an abstraction; transcendent, so we approach Him with reverence rather than flippancy; imminent, so His constant nearness shapes our conduct and prayer; trustworthy, so our worship rests on His unchanging faithfulness rather than shifting feelings; and triune, so our worship is directed to the one true God in three Persons rather than any lesser or invented deity. Each characteristic shapes how genuine worship approaches Him.',
+      modelEs: 'Dios es personal, así que nos relacionamos con Él en lugar de con una abstracción; trascendente, así que nos acercamos a Él con reverencia y no con ligereza; inmanente, así que su cercanía constante moldea nuestra conducta y oración; confiable, así que nuestra adoración descansa en su fidelidad inmutable y no en sentimientos cambiantes; y trino, así que nuestra adoración se dirige al único Dios verdadero en tres Personas y no a alguna deidad menor o inventada. Cada característica moldea cómo la adoración genuina se acerca a Él.' },
+    { textEn: "23. Discuss the etymology of the English word 'worship' from the Old English 'worth-ship.' What does this teach about how worship is connected to what we value most highly?", textEs: "23. Discuta la etimología de la palabra inglesa 'worship' del inglés antiguo 'worth-ship'. ¿Qué enseña esto sobre cómo la adoración está conectada con lo que más valoramos?", kwEn: ["worth", "value", "honor", "idol", "money", "high", "alone", "worthy"], kwEs: ["worth", "valor", "honra", "ídolo", "dinero", "alto", "solo", "digno"],
+      modelEn: 'The English word \'worship\' comes from the Old English \'worth-ship,\' meaning worthy of honor — to ascribe worth or value to something. This teaches that everyone worships something, since whatever sits at the very top of a person\'s values is what they actually worship regardless of what they claim with their mouth; this is why 1 John 5:21 commands believers to keep themselves from idols, since anything placed above God in supreme value becomes an idol.',
+      modelEs: 'La palabra inglesa \'worship\' viene del inglés antiguo \'worth-ship,\' que significa digno de honra — atribuir valor o mérito a algo. Esto enseña que todos adoran algo, ya que lo que está en la cima de los valores de una persona es lo que realmente adora sin importar lo que declare con la boca; por eso 1 Juan 5:21 manda a los creyentes guardarse de los ídolos, pues cualquier cosa colocada por encima de Dios en valor supremo se convierte en un ídolo.' },
+    { textEn: "24. Define the Hebrew word shachah and explain its dual meaning. Use Exodus 4:31 to illustrate the connection between belief and the bowing of worship.", textEs: "24. Defina la palabra hebrea shachah y explique su doble significado. Use Éxodo 4:31 para ilustrar la conexión entre la fe y la postración de la adoración.", kwEn: ["shachah", "bow", "fall", "king", "rever", "obey", "exodus", "believ"], kwEs: ["shachah", "postr", "caer", "rey", "rever", "obed", "éxodo", "cre"],
+      modelEn: 'Shachah means to fall before the king — to bow down and kiss the ground or hand of a superior, carrying both reverential awe and obedient service. Exodus 4:31 illustrates the connection to belief: when the people heard the Lord had seen their misery, they first believed, and then they bowed — belief produces the bow, showing that worship is the body and will responding to what the heart has come to believe.',
+      modelEs: 'Shachah significa postrarse ante el rey — inclinarse y besar el suelo o la mano de un superior, llevando tanto asombro reverente como servicio obediente. Éxodo 4:31 ilustra la conexión con la fe: cuando el pueblo oyó que el Señor había visto su afliccion, primero creyeron, y luego se inclinaron — la fe produce la postración, mostrando que la adoración es el cuerpo y la voluntad respondiendo a lo que el corazón ha llegado a creer.' },
+    { textEn: "25. Discuss the Hebrew word kabod, its translation, and how Isaiah 6:3 illustrates its meaning. Why are 'glory' and 'worship' translated from the same root?", textEs: "25. Discuta la palabra hebrea kabod, su traducción, y cómo Isaías 6:3 ilustra su significado. ¿Por qué 'gloria' y 'adoración' se traducen de la misma raíz?", kwEn: ["kabod", "glory", "honor", "isaiah", "holy", "worthy", "praise", "fill"], kwEs: ["kabod", "gloria", "honor", "isaías", "santo", "digno", "alab", "llen"],
+      modelEn: 'Kabod is translated either as worship or as glory, expressing the honor due to God. Isaiah 6:3 shows the seraphim calling \'Holy, holy, holy is the LORD Almighty; the whole earth is full of His glory\' — glory and worship share the same Hebrew root because to give God glory is to worship Him; He is worthy of praise, honor, and obedient service, and kabod holds all of that together in one word.',
+      modelEs: 'Kabod se traduce como adoración o como gloria, expresando la honra debida a Dios. Isaías 6:3 muestra a los serafines clamando \'Santo, santo, santo, Jehová de los ejércitos; toda la tierra está llena de su gloria\' — gloria y adoración comparten la misma raíz hebrea porque dar gloria a Dios es adorarlo; Él es digno de alabanza, honra y servicio obediente, y kabod reúne todo eso en una sola palabra.' },
+    { textEn: "26. Define proskuneo and discuss John 4:24 ('God is spirit, and his worshippers must worship in spirit and in truth'). What does it mean to worship in spirit and in truth?", textEs: "26. Defina proskuneo y discuta Juan 4:24 ('Dios es espíritu, y los que le adoran deben adorar en espíritu y en verdad'). ¿Qué significa adorar en espíritu y en verdad?", kwEn: ["proskuneo", "prostr", "spirit", "truth", "john", "real", "heart", "form"], kwEs: ["proskuneo", "postr", "espíritu", "verdad", "juan", "real", "corazón", "form"],
+      modelEn: 'Proskuneo means to prostrate oneself before another, the Greek equivalent of the Hebrew shachah. Jesus uses it in John 4:24, \'God is spirit, and His worshippers must worship in spirit and in truth\' — to worship in spirit and truth means engaging both the heart\'s living affection (spirit) and the mind\'s sound grounding in who God actually is (truth), giving God a real, whole human response rather than empty feeling or dry intellect alone.',
+      modelEs: 'Proskuneo significa postrarse ante otro, el equivalente griego del hebreo shachah. Jesús lo usa en Juan 4:24, \'Dios es Espíritu; y los que le adoran, en espíritu y en verdad es necesario que adoren\' — adorar en espíritu y verdad significa involucrar tanto el afecto vivo del corazón (espíritu) como el fundamento sólido de la mente en quién es Dios realmente (verdad), dándole a Dios una respuesta humana real y completa en lugar de solo sentimiento vacío o intelecto seco.' },
+    { textEn: "27. Define leiturgia and discuss its relationship to worship and service. How does Acts 13:2 ('while they were worshipping the Lord and fasting') illustrate worship as ministry?", textEs: "27. Defina leiturgia y discuta su relación con la adoración y el servicio. ¿Cómo ilustra Hechos 13:2 ('ministrando al Señor y ayunando') la adoración como ministerio?", kwEn: ["leitur", "service", "minis", "liturgy", "acts", "antio", "obedi", "fast"], kwEs: ["leitur", "servic", "minis", "liturgia", "hechos", "antio", "obed", "ayun"],
+      modelEn: 'Leiturgia is translated as ministry, service, or worship, and is the root of our English word \'liturgy.\' It refers to the action of the people in worship or a ministry performed for the Lord, meaning worship is never merely private feeling. Acts 13:2 illustrates this: \'while they were worshipping the Lord and fasting,\' the Holy Spirit set apart Barnabas and Saul for missionary work — worship spilled directly out into obedient, sent-out service.',
+      modelEs: 'Leiturgia se traduce como ministerio, servicio, o adoración, y es la raíz de nuestra palabra \'liturgia.\' Se refiere a la acción del pueblo en la adoración o a un ministerio realizado para el Señor, lo cual significa que la adoración nunca es meramente sentimiento privado. Hechos 13:2 ilustra esto: \'mientras ministraban al Señor, y ayunaban,\' el Espíritu Santo apartó a Bernabé y a Saulo para la obra misionera — la adoración se derramó directamente en servicio obediente y enviado.' },
+    { textEn: "28. Discuss Franklin Segler's definition: 'Christian worship is man's loving response in personal faith to God's personal revelation of himself in Jesus Christ.' What three elements does this definition emphasize?", textEs: "28. Discuta la definición de Franklin Segler: 'La adoración cristiana es la respuesta amorosa del hombre en fe personal a la revelación personal de Dios en Jesucristo.' ¿Qué tres elementos enfatiza esta definición?", kwEn: ["segler", "response", "faith", "reveal", "christ", "person", "love", "self"], kwEs: ["segler", "respuest", "fe", "revel", "cristo", "person", "amor", "mismo"],
+      modelEn: 'Segler\'s definition, \'Christian worship is man\'s loving response in personal faith to God\'s personal revelation of Himself in Jesus Christ,\' emphasizes three elements: worship is a response, meaning God acts first; it happens in personal faith, not abstract belief; and it is directed to God\'s revelation in Jesus Christ, meaning Christian worship is centered on Christ rather than a vague deity.',
+      modelEs: 'La definición de Segler, \'La adoración cristiana es la respuesta amorosa del hombre en fe personal a la revelación personal de Dios en Jesucristo,\' enfatiza tres elementos: la adoración es una respuesta, lo cual significa que Dios actúa primero; sucede en fe personal, no en creencia abstracta; y se dirige a la revelación de Dios en Jesucristo, lo cual significa que la adoración cristiana está centrada en Cristo y no en una deidad vaga.' },
+    { textEn: "29. William Temple defined worship as five parallel actions: to quicken the conscience by the holiness of God, to feed the mind with the truth of God, to purge the imagination by the beauty of God, to open the heart to the love of God, and to devote the will to the purpose of God. Discuss why this definition is so comprehensive.", textEs: "29. William Temple definió la adoración como cinco acciones paralelas: avivar la conciencia con la santidad de Dios, alimentar la mente con la verdad de Dios, purificar la imaginación con la belleza de Dios, abrir el corazón al amor de Dios, y dedicar la voluntad al propósito de Dios. Discuta por qué esta definición es tan amplia.", kwEn: ["temple", "conscien", "mind", "imagin", "heart", "will", "holy", "purp"], kwEs: ["temple", "concien", "mente", "imagin", "corazón", "volunt", "santid", "propós"],
+      modelEn: 'Temple\'s definition is so comprehensive because it reaches every faculty of the human person — conscience, mind, imagination, heart, and will — and pairs each one with an attribute of God: His holiness, truth, beauty, love, and purpose. Nothing in a worshipper is left idle; the whole person, not merely one part like feeling or intellect, is engaged and offered to God.',
+      modelEs: 'La definición de Temple es tan amplia porque alcanza cada facultad de la persona humana — conciencia, mente, imaginación, corazón y voluntad — y empareja cada una con un atributo de Dios: su santidad, verdad, belleza, amor y propósito. Nada en el adorador queda ocioso; toda la persona, no meramente una parte como el sentimiento o el intelecto, es involucrada y ofrecida a Dios.' },
+    { textEn: "30. Taking all of the definitions together, synthesize the nature of Christian worship. What does it mean that God takes the initiative and man responds, both because of who God is and because of what God has done?", textEs: "30. Tomando todas las definiciones en conjunto, sintetice la naturaleza de la adoración cristiana. ¿Qué significa que Dios toma la iniciativa y el hombre responde, tanto por quién es Dios como por lo que Dios ha hecho?", kwEn: ["initiat", "response", "being", "work", "god", "reveal", "man", "synth"], kwEs: ["inici", "respuest", "ser", "obra", "dios", "revel", "hombre", "sínte"],
+      modelEn: 'Taking all the definitions together, a single pattern emerges: God always takes the initiative, and man responds. That response is driven by both who God is (His being) and what God has done (His work). Worship is never us reaching up to find a distant God; it is us responding, with everything we are, to the God who has already reached down to reveal Himself.',
+      modelEs: 'Tomando todas las definiciones en conjunto, surge un solo patrón: Dios siempre toma la iniciativa, y el hombre responde. Esa respuesta es impulsada tanto por quién es Dios (su ser) como por lo que Dios ha hecho (su obra). La adoración nunca es nosotros extendiéndonos hacia arriba para encontrar a un Dios distante; es nosotros respondiendo, con todo lo que somos, al Dios que ya se ha extendido hacia abajo para revelarse.' }
+
+];
+
+// === Language toggle (3-button group) ===
+const langButtons = document.querySelectorAll('.lang-toggle-group button');
+function setLang(lang) {
+  document.body.classList.remove('lang-en','lang-es','lang-both');
+  document.body.classList.add('lang-' + lang);
+  langButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-lang') === lang));
+}
+langButtons.forEach(btn => btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang'))));
+
+// === Student + Track ===
+function readStudent() {
+  try { return JSON.parse(localStorage.getItem('cts_student') || 'null'); } catch(e) { return null; }
+}
+function readTrack() {
+  const t = localStorage.getItem('cts_track');
+  if (t === 'cert' || t === 'mdiv' || t === 'thm') return t;
+  const st = readStudent();
+  if (st && st.track) return st.track;
+  return 'cert';
+}
+function isMdiv() { const t = readTrack(); return t === 'mdiv' || t === 'thm'; }
+
+// === Greeting + track badge ===
+function applyStudentUI() {
+  const student = readStudent();
+  const isEs = document.body.classList.contains('lang-es');
+  const greetEl = document.getElementById('studentGreeting');
+  const warn = document.getElementById('regWarn');
+  const slot = document.getElementById('trackBadgeSlot');
+  if (student && student.name) {
+    greetEl.innerHTML = '👋 ' + student.name;
+    if (warn) warn.classList.add('hidden');
+    const track = readTrack();
+    const label = track === 'thm' ? 'Th.M.' : (track === 'mdiv' ? 'M.Div' : (isEs ? 'Certificado' : 'Certificate'));
+    if (slot) slot.innerHTML = '<span class="track-badge">' + label + '</span>';
+  } else {
+    greetEl.innerHTML = '<span style="color:#5b3a1f;">' + (isEs ? 'Bienvenido al Adoración' : 'Welcome to the Worship') + '</span>';
+    if (warn) warn.classList.remove('hidden');
+    if (slot) slot.innerHTML = '';
+  }
+}
+
+// === Registration modal (U1 only) ===
+
+function showRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.remove('hidden');
+}
+function hideRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.add('hidden');
+}
+const regModal = document.getElementById('regModal');
+const openBtn = document.getElementById('openRegBtn');
+const openBtn2 = document.getElementById('openRegBtn2');
+const saveBtn = document.getElementById('regSaveBtn');
+if (openBtn) openBtn.addEventListener('click', showRegModal);
+if (openBtn2) openBtn2.addEventListener('click', showRegModal);
+if (saveBtn) saveBtn.addEventListener('click', () => {
+  const name = (document.getElementById('regName').value || '').trim();
+  const email = (document.getElementById('regEmail').value || '').trim();
+  const track = (document.querySelector('input[name="regTrack"]:checked') || {}).value || 'cert';
+  const isEs = document.body.classList.contains('lang-es');
+  if (!name) {
+    alert(isEs ? 'Por favor ingrese su nombre completo.' : 'Please enter your full name.');
+    return;
+  }
+  const rec = { name: name, email: email, track: track };
+  try {
+    localStorage.setItem('cts_student', JSON.stringify(rec));
+    localStorage.setItem('cts_track', track);
+  } catch(e) {}
+  hideRegModal();
+  applyStudentUI();
+  applyExamState();
+});
+// Auto-open modal on U1 if no cts_student present
+if (CURRENT_UNIT === 1 && !readStudent()) {
+  showRegModal();
+}
+
+
+// === Progress grid ===
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem('cts_worship_progress')) || {}; } catch(e) { progress = {}; }
+function updateProgressGrid() {
+  const grid = document.getElementById('progressGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 1; i <= TOTAL_UNITS; i++) {
+    let cls = '';
+    if (progress['unit' + i]) cls = 'completed';
+    if (i === CURRENT_UNIT) cls += ' active';
+    grid.innerHTML += '<a href="CTSWorshipUnit' + i + '.html" class="' + cls + '">' + i + '</a>';
+  }
+}
+updateProgressGrid();
+document.getElementById('prevUnitBtn').onclick = () => {};
+document.getElementById('nextUnitBtn').onclick = () => { window.location.href = NEXT_URL; };
+
+// === Per-unit state keys ===
+const MC_PASSED_KEY = 'cts_worship_u' + CURRENT_UNIT + '_mc_passed';
+const SA_PASSED_KEY = 'cts_worship_u' + CURRENT_UNIT + '_sa_passed';
+const MC_SCORE_KEY = 'cts_worship_u' + CURRENT_UNIT + '_mc_score';
+const LOCK_MC_KEY = 'cts_worship_u' + CURRENT_UNIT + '_lockout';
+const LOCK_SA_KEY = 'cts_worship_u' + CURRENT_UNIT + '_sa_lockout';
+
+function mcPassed() { return localStorage.getItem(MC_PASSED_KEY) === '1'; }
+function saPassed() { return localStorage.getItem(SA_PASSED_KEY) === '1'; }
+function activeLock() {
+  const now = Date.now();
+  const mc = parseInt(localStorage.getItem(LOCK_MC_KEY) || '0', 10);
+  const sa = parseInt(localStorage.getItem(LOCK_SA_KEY) || '0', 10);
+  if (mcPassed()) { if (now < sa) return { until: sa, scope: 'sa' }; }
+  else { if (now < mc) return { until: mc, scope: 'mc' }; }
+  return null;
+}
+
+// === Render MC ===
+const mcContainer = document.getElementById('mcContainer');
+mcQuestions.forEach((q, idx) => {
+    /* CTS answer-shuffle (anti-gaming): randomize option order on each render */
+    (function(){var _o=q.optionsEn,_s=q.optionsEs,_n=_o.length,_p=[],_k,_i,_j,_t;for(_k=0;_k<_n;_k++){_p.push(_k);}for(_i=_n-1;_i>0;_i--){_j=Math.floor(Math.random()*(_i+1));_t=_p[_i];_p[_i]=_p[_j];_p[_j]=_t;}q.optionsEn=_p.map(function(x){return _o[x];});q.optionsEs=_p.map(function(x){return _s[x];});q.correct=_p.indexOf(q.correct);})();
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'mcq' + (idx + 1);
+  let h = '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>';
+  for (let i = 0; i < 4; i++) {
+    const letter = 'ABCD'[i];
+    h += '<button class="option" data-mc="' + idx + '" data-opt="' + i + '" type="button">' +
+         '<strong>' + letter + '.</strong> ' +
+         '<span class="lang-en">' + q.optionsEn[i] + '</span><span class="lang-es">' + q.optionsEs[i] + '</span>' +
+         '</button>';
+  }
+  mcContainer.appendChild(qDiv);
+  qDiv.innerHTML = h;
+  // Click handler on each option
+  qDiv.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (mcPassed()) return;
+      if (qDiv.dataset.answered !== undefined && qDiv.dataset.answered !== '') return;
+      const isEs = document.body.classList.contains('lang-es');
+      const chosen = parseInt(btn.getAttribute('data-opt'), 10);
+      const correct = q.correct;
+      qDiv.dataset.answered = String(chosen);
+      qDiv.querySelectorAll('.option').forEach(b => {
+        const oi = parseInt(b.getAttribute('data-opt'), 10);
+        b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+        if (oi === correct) b.classList.add('correct');
+        else if (oi === chosen) b.classList.add('wrong');
+      });
+      const oldfb = qDiv.querySelector('.feedback-text'); if (oldfb) oldfb.remove();
+      const fb = document.createElement('div');
+      if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+      else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+      qDiv.appendChild(fb);
+    });
+  });
+});
+
+// === Smart keyword matcher (word-boundary, like the other CTS courses) ===
+function kwHit(answer, kw){
+  if(!kw) return false;
+  var a=(answer||'').toLowerCase();
+  var k=String(kw).toLowerCase().trim();
+  if(!k) return false;
+  var esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var L='0-9a-zA-Z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1';
+  var re = k.length<=3 ? new RegExp('(?:^|[^'+L+'])'+esc+'(?!['+L+'])') : new RegExp('(?:^|[^'+L+'])'+esc);
+  return re.test(a);
+}
+function revealSAModel(idx){
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var box=document.getElementById('saModel'+idx);
+  if(!box) return;
+  var head=isEs?'Respuesta modelo \u2014 est\u00fadiela':'Model answer \u2014 study this';
+  box.innerHTML='<strong>'+head+':</strong><br>'+(isEs?(q.modelEs||''):(q.modelEn||''));
+  box.style.display='block';
+}
+
+// === Render SA ===
+const kwContainer = document.getElementById('kwContainer');
+kwQuestions.forEach((q, idx) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'saq' + (idx + 1);
+  qDiv.innerHTML =
+    '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>' +
+    '<textarea class="kw-answer" data-sa="' + idx + '" placeholder=""></textarea>' +
+    '<button class="small check-kw-btn" type="button"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>' +
+    '<div class="feedback-text" id="saFb' + idx + '" style="display:none"></div>' +
+    '<div class="sa-model" id="saModel' + idx + '" style="display:none"></div>';
+  kwContainer.appendChild(qDiv);
+  const btn = qDiv.querySelector('.check-kw-btn');
+  const ta = qDiv.querySelector('.kw-answer');
+  btn.addEventListener('click', () => {
+    const isEs = document.body.classList.contains('lang-es');
+    const fb = document.getElementById('saFb' + idx);
+    const ans = (ta.value || '').trim();
+    if(!ans){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba su respuesta primero, luego verifique.' : 'Write your answer first, then check.';
+      var mb=document.getElementById('saModel'+idx); if(mb) mb.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    if(ans.length < 100){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.';
+      var mb2=document.getElementById('saModel'+idx); if(mb2) mb2.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    const kws = isEs ? (q.kwEs || []) : (q.kwEn || []);
+    let hits = 0;
+    kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+    const ok = hits >= 3;
+    qDiv.dataset.answered = ok ? '1' : '0';
+    fb.className = 'feedback-text ' + (ok ? 'correct' : 'incorrect');
+    fb.style.display = 'block';
+    fb.textContent = ok
+      ? (isEs ? ('\u2713 Suficientes palabras clave (' + hits + ').') : ('\u2713 Sufficient keywords (' + hits + ').'))
+      : (isEs ? ('\u2717 A\u00fan no acreditada. Encontr\u00f3 ' + hits + ' de 3.') : ('\u2717 Not yet credited. Found ' + hits + ' of 3.'));
+    revealSAModel(idx);
+  });
+});
+
+// === UI state machine ===
+const mcSection = document.getElementById('mcSection');
+const saSection = document.getElementById('saSection');
+const statusEl = document.getElementById('examStatus');
+const submitBtn = document.getElementById('submitExamBtn');
+const resetBtn = document.getElementById('resetExamBtn');
+const resultEl = document.getElementById('examResult');
+
+function setStatus(cls, en, es) {
+  statusEl.className = 'exam-status ' + cls;
+  statusEl.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function clearStatus() { statusEl.className = 'exam-status hidden'; statusEl.innerHTML = ''; }
+function lockMcAsReview() {
+  document.querySelectorAll('#mcContainer .question').forEach(q => {
+    q.classList.add('review-locked');
+    q.querySelectorAll('.option').forEach(b => { b.disabled = true; });
+  });
+}
+
+function revealMC() {
+  const isEs = document.body.classList.contains('lang-es');
+  for (let i = 0; i < mcQuestions.length; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (!qd) continue;
+    const correct = mcQuestions[i].correct;
+    const chosen = (qd.dataset.answered !== undefined && qd.dataset.answered !== '') ? parseInt(qd.dataset.answered, 10) : -1;
+    qd.querySelectorAll('.option').forEach(b => {
+      const oi = parseInt(b.getAttribute('data-opt'), 10);
+      b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+      if (oi === correct) b.classList.add('correct');
+      else if (oi === chosen) b.classList.add('wrong');
+    });
+    let fb = qd.querySelector('.feedback-text');
+    if (!fb) { fb = document.createElement('div'); qd.appendChild(fb); }
+    if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+    else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+  }
+}
+
+
+function applyExamState() {
+  const isEs = document.body.classList.contains('lang-es');
+  // SA section is ALWAYS visible
+  saSection.style.display = '';
+  const badgeEn = document.getElementById('saBadgeEn');
+  const badgeEs = document.getElementById('saBadgeEs');
+  const noteEn = document.getElementById('saNoteEn');
+  const noteEs = document.getElementById('saNoteEs');
+  if (isMdiv()) {
+    badgeEn.textContent = 'Required for M.Div';
+    badgeEs.textContent = 'Requerido para M.Div';
+    noteEn.textContent = 'These 10 short-answer questions are required to complete Unit ' + CURRENT_UNIT + ' on the M.Div track. You must pass at 9 of 10.';
+    noteEs.textContent = 'Estas 10 preguntas de respuesta corta son requeridas para completar la Unidad ' + CURRENT_UNIT + ' en la vía M.Div. Debe aprobar con 9 de 10.';
+  } else {
+    badgeEn.textContent = 'Self-study — not graded for Certificate';
+    badgeEs.textContent = 'Auto-estudio — no cuenta para Certificado';
+    noteEn.textContent = 'These are the M.Div-level questions. Certificate students are welcome to attempt them for self-check; your answers will not affect your Unit ' + CURRENT_UNIT + ' pass status.';
+    noteEs.textContent = 'Estas son las preguntas de nivel M.Div. Los estudiantes de Certificado pueden intentarlas para auto-evaluarse; sus respuestas no afectarán el estado de aprobación de la Unidad ' + CURRENT_UNIT + '.';
+  }
+  const lock = activeLock();
+  if (lock) {
+    const minsLeft = Math.ceil((lock.until - Date.now()) / 60000);
+    submitBtn.disabled = true;
+    if (lock.scope === 'mc') {
+      setStatus('locked',
+        'Exam locked. Try again in ' + minsLeft + ' minute(s). The full exam will reset.',
+        'Examen bloqueado. Intente de nuevo en ' + minsLeft + ' minuto(s). El examen completo se reiniciará.');
+    } else {
+      setStatus('locked',
+        'Short-answer section locked. Try again in ' + minsLeft + ' minute(s). Multiple-choice pass is preserved.',
+        'Sección de respuesta corta bloqueada. Intente de nuevo en ' + minsLeft + ' minuto(s). Su aprobación de opción múltiple se conserva.');
+      lockMcAsReview();
+    }
+    setTimeout(applyExamState, 30000);
+    return;
+  }
+  submitBtn.disabled = false;
+  if (mcPassed()) {
+    lockMcAsReview();
+    if (isMdiv() && !saPassed()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed (saved). Complete the 10 short-answer questions to finish Unit ' + CURRENT_UNIT + '.',
+        'Opción múltiple aprobada (guardada). Complete las 10 preguntas de respuesta corta para terminar la Unidad ' + CURRENT_UNIT + '.');
+    } else if (!isMdiv()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed. Unit ' + CURRENT_UNIT + ' complete for Certificate track.',
+        'Opción múltiple aprobada. Unidad ' + CURRENT_UNIT + ' completa para la vía Certificado.');
+    } else {
+      clearStatus();
+    }
+  } else {
+    clearStatus();
+  }
+}
+
+submitBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const lock = activeLock();
+  if (lock) { applyExamState(); return; }
+
+  // Score MC
+  let mc = 0;
+  for (let i = 0; i < 20; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (qd && qd.dataset.answered !== undefined && parseInt(qd.dataset.answered, 10) === mcQuestions[i].correct) mc++;
+  }
+  if (mcPassed()) {
+    mc = parseInt(localStorage.getItem(MC_SCORE_KEY) || '18', 10);
+  }
+  const mcPass = mc >= 18;
+  revealMC();
+
+  // Score SA
+  let sa = 0;
+  for (let i = 0; i < 10; i++) {
+    const qd = document.getElementById('saq' + (i + 1));
+    if (qd && qd.dataset.answered === '1') sa++;
+  }
+  const saPass = sa >= 9;
+
+  if (!isMdiv()) {
+    // Certificate track — only MC matters
+    if (mcPass) {
+      localStorage.setItem(MC_PASSED_KEY, '1');
+      localStorage.setItem(MC_SCORE_KEY, String(mc));
+      progress['unit' + CURRENT_UNIT] = true;
+      localStorage.setItem('cts_worship_progress', JSON.stringify(progress));
+      resultEl.style.color = '#1f6b3b';
+      resultEl.textContent = (isEs
+        ? '¡Aprobado! OM ' + mc + '/20. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+        : 'Passed! MC ' + mc + '/20. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+    } else {
+      localStorage.setItem(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+    }
+    return;
+  }
+
+  // M.Div track
+  if (!mcPassed()) {
+    if (!mcPass) {
+      localStorage.setItem(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min. Examen completo se reiniciará.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min. Full exam will reset.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+      return;
+    }
+    localStorage.setItem(MC_PASSED_KEY, '1');
+    localStorage.setItem(MC_SCORE_KEY, String(mc));
+  }
+  if (saPass) {
+    localStorage.setItem(SA_PASSED_KEY, '1');
+    progress['unit' + CURRENT_UNIT] = true;
+    localStorage.setItem('cts_worship_progress', JSON.stringify(progress));
+    const finalMc = parseInt(localStorage.getItem(MC_SCORE_KEY) || '18', 10);
+    resultEl.style.color = '#1f6b3b';
+    resultEl.textContent = (isEs
+      ? '¡Aprobado! OM ' + finalMc + '/20, RC ' + sa + '/10. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+      : 'Passed! MC ' + finalMc + '/20, SA ' + sa + '/10. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+  } else {
+    localStorage.setItem(LOCK_SA_KEY, String(Date.now() + 15 * 60 * 1000));
+    resultEl.style.color = '#8a1f1f';
+    resultEl.textContent = (isEs
+      ? 'RC ' + sa + '/10. Necesita 9. Sección RC bloqueada 15 min. OM permanece aprobada.'
+      : 'SA ' + sa + '/10. Need 9. SA section locked 15 min. MC pass preserved.');
+    submitBtn.disabled = true;
+    setTimeout(applyExamState, 30000);
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar la Unidad ' + CURRENT_UNIT + '? Esto borrará sus respuestas y el estado de aprobación de OM/RC para esta unidad. (Esto no borra su registro.)'
+    : 'Reset Unit ' + CURRENT_UNIT + '? This will clear your answers and MC/SA pass state for this unit. (Does not clear your registration.)';
+  if (!window.confirm(msg)) return;
+  [MC_PASSED_KEY, SA_PASSED_KEY, LOCK_MC_KEY, LOCK_SA_KEY, MC_SCORE_KEY].forEach(k => localStorage.removeItem(k));
+  if (progress['unit' + CURRENT_UNIT]) {
+    delete progress['unit' + CURRENT_UNIT];
+    localStorage.setItem('cts_worship_progress', JSON.stringify(progress));
+  }
+  window.location.reload();
+});
+
+// Initial render
+applyStudentUI();
+langButtons.forEach(b => b.addEventListener('click', applyStudentUI));
+applyExamState();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSWorshipReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

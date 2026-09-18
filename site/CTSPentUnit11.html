@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pentateuch | Unit 11: Christ in the Pentateuch — Typology</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', Times, serif; line-height: 1.6; background: #f9f7f3; color: #1a2a1f; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+.course-header { background: #2c3e36; color: white; padding: 1.5rem 2rem; text-align: center; }
+.course-header h1 { font-size: 2rem; letter-spacing: 2px; margin-bottom: 0.25rem; }
+.course-header h2 { font-size: 1.2rem; font-weight: normal; opacity: 0.9; }
+.unit-badge { display: inline-block; background: #f4c542; color: #2c3e36; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-top: 0.5rem; }
+.course-author { font-size: 0.8rem; opacity: 0.85; margin-top: 0.4rem; font-style: italic; }
+.controls-bar { background: #e8e4d8; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #cbc3ae; }
+.lang-buttons { display: flex; gap: 10px; }
+.lang-btn { background: white; border: 1px solid #2c3e36; padding: 0.4rem 1rem; cursor: pointer; font-weight: bold; transition: 0.2s; border-radius: 4px; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-indicator { background: #2c3e36; color: #f4c542; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+body.lang-en .lang-es { display: none; }
+body.lang-en .lang-both { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-both { display: none; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 900px) {
+    body.lang-both .lesson-grid { grid-template-columns: 1fr; }
+    body.lang-both .lang-es { border-top: 2px dashed #cbc3ae; padding-top: 1rem; margin-top: 1rem; }
+}
+.lesson-section { padding: 2rem; }
+.lesson-section h3 { color: #2c3e36; border-left: 4px solid #f4c542; padding-left: 1rem; margin: 1.5rem 0 1rem 0; }
+.lesson-section h3:first-of-type { margin-top: 0; }
+.scripture { background: #f0ede5; padding: 1rem 1.5rem; border-left: 4px solid #f4c542; font-style: italic; margin: 1rem 0; font-family: 'Courier New', monospace; }
+.illustration { background: #e8f0e5; padding: 1rem 1.5rem; border-radius: 8px; margin: 1rem 0; }
+.exam-section { background: #fefaf0; border-top: 3px solid #2c3e36; padding: 2rem; page-break-before: always; }
+.exam-header { text-align: center; margin-bottom: 2rem; }
+.question-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; page-break-inside: avoid; }
+.question-text { font-weight: bold; margin-bottom: 0.75rem; }
+.options { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+.options label { display: block; margin: 0.4rem 0; cursor: pointer; }
+.feedback { margin-top: 0.75rem; padding: 0.5rem; border-radius: 4px; font-size: 0.9rem; }
+.feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+.model-answer { background: #fff8e1; border-left: 4px solid #f4c542; color: #4a3c10; padding: 0.6rem 0.8rem; margin-top: 0.6rem; border-radius: 4px; font-style: normal; }
+.essay-question textarea { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+.action-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+.action-buttons button { background: #2c3e36; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+.action-buttons button:hover { background: #1e2d26; }
+.action-buttons button.reset-btn { background: #8b6b3d; }
+.lockout-timer { text-align: center; padding: 1rem; background: #f8d7da; color: #721c24; margin: 1rem; border-radius: 8px; font-weight: bold; }
+.nav-links { display: flex; justify-content: space-between; padding: 1rem 2rem; background: #e8e4d8; }
+.nav-links a { color: #2c3e36; text-decoration: none; font-weight: bold; }
+@media print {
+    .controls-bar, .action-buttons, .nav-links, .lockout-timer { display: none !important; }
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; margin: 0; }
+    .course-header { background: #2c3e36; color: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .question-card { border: 1px solid #ccc; page-break-inside: avoid; }
+    .exam-section { page-break-before: always; }
+    .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.lang-both .lesson-grid { display: block; }
+}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 2px;font-family:'Georgia',serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#2c3e36;margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid #cdbf9d;color:#2c3e36;text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:#2c3e36;}
+.unitnav a.active{background:#2c3e36;color:#fff;border-color:#2c3e36;}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+    <div class="course-header">
+        <h1>Πεντάτευχος</h1>
+        <h2><span class="lang-en">The Pentateuch</span><span class="lang-es">El Pentateuco</span></h2>
+        <div class="course-author"><span class="lang-en">Dr. Ted Rogers · Seminary Director</span><span class="lang-es">Dr. Ted Rogers · Director del Seminario</span></div>
+        <div class="unit-badge"><span class="lang-en">Unit 11 · Christ in the Pentateuch — Typology</span><span class="lang-es">Unidad 11 · Cristo en el Pentateuco — Tipología</span></div>
+    </div>
+
+    <div class="controls-bar">
+        <div class="lang-buttons">
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="es">Español</button>
+            <button class="lang-btn" data-lang="both">Both</button>
+        </div>
+        <div class="track-indicator" id="trackIndicator">Loading...</div>
+    </div>
+
+    <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+      <span class="nl"><span class="lang-en">Units</span><span class="lang-es">Unidades</span></span>
+      <a href="CTSPentUnit1.html">1</a>
+      <a href="CTSPentUnit2.html">2</a>
+      <a href="CTSPentUnit3.html">3</a>
+      <a href="CTSPentUnit4.html">4</a>
+      <a href="CTSPentUnit5.html">5</a>
+      <a href="CTSPentUnit6.html">6</a>
+      <a href="CTSPentUnit7.html">7</a>
+      <a href="CTSPentUnit8.html">8</a>
+      <a href="CTSPentUnit9.html">9</a>
+      <a href="CTSPentUnit10.html">10</a>
+      <a href="CTSPentUnit11.html" class="active">11</a>
+      <a href="CTSPentUnit12.html">12</a>
+    </nav>
+
+    <div class="lesson-section">
+        <div class="lesson-grid">
+            <div class="lang-en">
+                <h3>1. What Is Typology?</h3>
+                <p>Typology is the study of how persons, events, and institutions in the Old Testament foreshadow and point forward to Jesus Christ. As Augustine said, "The New Testament is hidden in the Old, and the Old is revealed in the New." Jesus Himself taught typology: on the road to Emmaus, "beginning at Moses and all the Prophets, He expounded to them in all the Scriptures the things concerning Himself" (Luke 24:27). The writers of the New Testament consistently read the Pentateuch as a book that prefigures Christ. The Passover lamb, the bronze serpent, the rock that gave water, Melchizedek, the tabernacle, the sacrifices — all were "shadows of things to come, but the substance is of Christ" (Colossians 2:17). This unit will trace the major types of Christ in the first five books of the Bible. The goal is not allegorical imagination — where any detail can mean anything — but careful, textually grounded patterns that the New Testament authors themselves identified.</p>
+
+                <div class="scripture">
+                    <strong>Colossians 2:16-17 (NKJV):</strong> "So let no one judge you in food or in drink, or regarding a festival or a new moon or sabbaths, which are a shadow of things to come, but the substance is of Christ."
+                </div>
+
+                <h3>2. Adam: The First and the Last</h3>
+                <p>Paul explicitly identifies Adam as a "type" (Greek <em>typos</em>) of Christ in Romans 5:14: "Nevertheless death reigned from Adam to Moses, even over those who had not sinned according to the likeness of the transgression of Adam, who is a type of Him who was to come." The parallels: Adam brought sin and death to all humanity through one act of disobedience; Christ brought righteousness and life to all who believe through one act of obedience (Romans 5:18-19). Adam was the head of the old creation; Christ is the head of the new creation (1 Corinthians 15:45-47). Where Adam hid from God in shame, Christ walked openly to the cross. Where Adam blamed his wife, Christ loved His bride (the church) and gave Himself for her. For the pastor, this means that the story of Genesis 3 is not just ancient history — it is your story, and Christ's story. Every human being is born "in Adam." Only by being "in Christ" can we be made alive.</p>
+
+                <h3>3. Melchizedek: King of Righteousness and Peace</h3>
+                <p>Melchizedek appears suddenly in Genesis 14, then disappears. He is king of Salem (Jerusalem) and priest of God Most High. He brings bread and wine to Abraham after the battle, blesses him, and receives a tithe. His name means "King of Righteousness." Salem means "peace." So he is King of Righteousness and King of Peace. In Psalm 110, David prophesies that the Messiah would be "a priest forever according to the order of Melchizedek" — not according to the order of Aaron (who came later and died). The author of Hebrews (chapters 5-7) unpacks this: Jesus is a priest like Melchizedek — not based on genealogy, not limited by death, both king and priest. Unlike Levitical priests who offered sacrifices for their own sins first, Melchizedek has no recorded beginning or end — a fitting type of Christ's eternal priesthood. The bread and wine he brought also anticipate the Lord's Supper.</p>
+
+                <div class="illustration">
+                    <strong>Pastoral Application:</strong> When you serve communion, you are standing in a line that goes back to Melchizedek — a priest-king who served bread and wine to a weary warrior. Jesus, our great High Priest, still meets us at the table.
+                </div>
+
+                <h3>4. Isaac: The Beloved Son Offered</h3>
+                <p>Genesis 22 is one of the most powerful types of Christ in the Old Testament. Abraham is commanded to offer Isaac, "your son, your only son, whom you love." Isaac carries the wood for his own sacrifice up the mountain. He asks, "Where is the lamb?" Abraham replies, "God will provide for Himself the lamb." At the last moment, a ram is caught in the thicket, and Isaac is spared. Hebrews 11:19 tells us that Abraham believed God could raise Isaac from the dead. The parallels to Christ are striking: Jesus is the beloved Son of the Father (Matthew 3:17). He carried His cross (the wood) to Golgotha. He was sacrificed not as a ram caught in a thicket, but as the Lamb of God. And on the third day, He rose from the dead. The place where this happened, Mount Moriah (Genesis 22:2), is almost certainly the same hill where Solomon built the temple and where Jesus was crucified.</p>
+
+                <div class="scripture">
+                    <strong>John 1:29 (NKJV):</strong> "The next day John saw Jesus coming toward him, and said, 'Behold! The Lamb of God who takes away the sin of the world!'"
+                </div>
+
+                <h3>5. The Passover Lamb: Substitution and Salvation</h3>
+                <p>The Passover narrative in Exodus 12 is the central saving event of the Old Testament, and it is explicitly a type of Christ. A lamb without blemish was slaughtered. Its blood was applied to the doorposts. When the angel of death saw the blood, he "passed over" that house. Paul writes, "Christ, our Passover, was sacrificed for us" (1 Corinthians 5:7). John the Baptist calls Jesus "the Lamb of God who takes away the sin of the world" (John 1:29). Peter says we were redeemed "with the precious blood of Christ, as of a lamb without blemish and without spot" (1 Peter 1:19). The details matter: the lamb was to be eaten with unleavened bread (purity) and bitter herbs (the bitterness of sin). Nothing was to be broken (John 19:36). The blood was applied, not just shed. For the pastor, the Passover teaches that salvation is not by good works or religious effort — it is by the blood of the Lamb applied by faith. You are not saved because you are a good Israelite; you are saved because you are under the blood.</p>
+
+                <h3>6. The Rock That Followed: Christ Struck Once</h3>
+                <p>In Exodus 17, Moses struck the rock at Horeb, and water came out. In Numbers 20, God told Moses to speak to the rock, but in anger Moses struck it twice. The rock gave water both times, but Moses was judged. Paul reveals the mystery: "They drank of that spiritual Rock that followed them, and that Rock was Christ" (1 Corinthians 10:4). Why was Moses punished for striking the rock the second time? Because the rock was a type of Christ. Christ was struck once — at the cross. He does not need to be struck again. Hebrews 9:28 says, "Christ was offered once to bear the sins of many." When Moses struck the rock twice, he was misrepresenting the gospel — as if Christ needed to be crucified repeatedly. The water from the rock is the Holy Spirit, given to all who believe. For the pastor, this is a warning: do not preach a gospel that requires Jesus to suffer again. He died once for all. Preach the finished work.</p>
+
+                <h3>7. The Bronze Serpent: Lifted Up for Healing</h3>
+                <p>Numbers 21 records that when fiery serpents bit the people, God told Moses to make a bronze serpent and put it on a pole. Anyone who looked at it lived. Jesus explicitly connects this to His own crucifixion: "As Moses lifted up the serpent in the wilderness, even so must the Son of Man be lifted up, that whoever believes in Him should not perish but have eternal life" (John 3:14-15). The serpent is a strange symbol — it represents the curse (Genesis 3:14). Jesus became a curse for us (Galatians 3:13). The serpent on the pole was a curse turned into a cure. All the people had to do was look — not work, not strive, not make a pilgrimage — just look. That is the gospel. Faith is not a work; it is looking away from yourself to the One who was lifted up for you.</p>
+
+                <div class="scripture">
+                    <strong>Isaiah 45:22 (NKJV):</strong> "Look to Me, and be saved, all you ends of the earth! For I am God, and there is no other."
+                </div>
+
+                <h3>8. The Tabernacle: Shadows of Heavenly Realities</h3>
+                <p>The tabernacle, with its sacrifices, priesthood, and furniture, is a vast typological system pointing to Christ. The writer of Hebrews explains that the earthly tabernacle was "a copy and shadow of the heavenly" (Hebrews 8:5). The bronze altar (sacrifice) points to the cross. The laver (washing) points to baptism and cleansing. The lampstand points to Christ the light of the world. The table of showbread points to Christ the bread of life. The altar of incense points to Christ's intercession. The veil separating the Holy Place from the Holy of Holies points to the barrier of sin. When Jesus died, the veil was torn — direct access is now open. The Ark of the Covenant, containing the law, points to Christ who fulfilled the law. The mercy seat (where the blood was sprinkled) points to propitiation — Christ is the place where God's justice and mercy meet. For the pastor, the tabernacle is not an obsolete building plan. It is a gospel drama in three dimensions. Every time you preach the cross, you are standing at the bronze altar. Every time you pray, you are standing at the incense altar. Every time you lead worship, you are lighting the lampstand.</p>
+
+                <h3>9. The Prophet Like Moses</h3>
+                <p>Deuteronomy 18:15-19 promises a prophet like Moses. Moses was a deliverer, lawgiver, and mediator. Jesus is all of these, but infinitely greater. Moses spoke with God face to face (Exodus 33:11); Jesus is the Word made flesh (John 1:14). Moses saw God's back; Jesus is God. Moses led Israel out of Egypt; Jesus leads His people out of slavery to sin. Moses gave the law from Mount Sinai; Jesus gave the Sermon on the Mount. Moses interceded for Israel; Jesus lives to make intercession for us (Hebrews 7:25). Moses' face shone with reflected glory; Jesus is the radiance of God's glory (Hebrews 1:3). The people were afraid to hear God's voice directly; Jesus says, "My sheep hear My voice" (John 10:27). When Peter and Stephen quoted Deuteronomy 18 in the book of Acts, they were making a bold claim: Jesus is that Prophet. Reject Him, and you reject the One sent by God.</p>
+
+                <h3>10. The Sacrificial System: Once for All</h3>
+                <p>Leviticus lays out five main offerings: burnt, grain, peace, sin, and guilt. Each foreshadows a different aspect of Christ's work. The burnt offering (total consumption) points to Christ's total devotion to the Father and the complete satisfaction of His sacrifice. The grain offering (firstfruits) points to Christ's sinless humanity and His resurrection as the firstfruits. The peace offering (shared meal) points to the fellowship with God that Christ's sacrifice secures. The sin offering (blood for atonement) points to Christ bearing our sin. The guilt offering (restitution plus sacrifice) points to Christ making right what sin broke. But the climax is the Day of Atonement (Leviticus 16): two goats — one sacrificed (Christ dying in our place) and one scapegoat (Christ carrying our sins away). Hebrews 9-10 explains: if the blood of bulls and goats could take away sin, they would have stopped being offered. But they couldn't. Christ offered Himself once for all. The Old Testament sacrifices were not effective in themselves; they were effective by faith, looking forward to the cross. For the pastor, this means you never need to offer another sacrifice for sin. It is finished.</p>
+
+                <div class="illustration">
+                    <strong>Conclusion:</strong> The Pentateuch is not a collection of ancient Jewish laws and stories. It is a carefully crafted portrait of the Messiah. From the seed of the woman (Genesis 3:15) to the Passover lamb to the bronze serpent to the prophet like Moses — every page whispers His name. Jesus said, "If you believed Moses, you would believe Me; for he wrote about Me" (John 5:46). Preach the Pentateuch, and you will preach Christ.
+                </div>
+            </div>
+
+            <div class="lang-es">
+                <h3>1. ¿Qué es la Tipología?</h3>
+                <p>La tipología es el estudio de cómo las personas, eventos e instituciones del Antiguo Testamento presagian y apuntan a Jesucristo. Como dijo Agustín, "El Nuevo Testamento está escondido en el Antiguo, y el Antiguo es revelado en el Nuevo". Jesús mismo enseñó la tipología: en el camino a Emaús, "comenzando desde Moisés y siguiendo por todos los profetas, les declaraba en todas las Escrituras lo que de él decían" (Lucas 24:27). Los escritores del Nuevo Testamento leen consistentemente el Pentateuco como un libro que prefigura a Cristo. El cordero pascual, la serpiente de bronce, la roca que dio agua, Melquisedec, el tabernáculo, los sacrificios — todos eran "sombras de lo que ha de venir; pero el cuerpo es de Cristo" (Colosenses 2:17). Esta unidad trazará los principales tipos de Cristo en los primeros cinco libros de la Biblia. El objetivo no es la imaginación alegórica — donde cualquier detalle puede significar cualquier cosa — sino patrones cuidadosamente basados en el texto que los mismos autores del Nuevo Testamento identificaron.</p>
+
+                <div class="scripture">
+                    <strong>Colosenses 2:16-17 (RVG):</strong> "Por tanto, nadie os juzgue en comida o en bebida, o en cuanto a días de fiesta, o nueva luna, o días de reposo, todo lo cual es sombra de lo que ha de venir; pero el cuerpo es de Cristo."
+                </div>
+
+                <h3>2. Adán: El Primero y el Último</h3>
+                <p>Pablo identifica explícitamente a Adán como un "tipo" (griego <em>typos</em>) de Cristo en Romanos 5:14: "No obstante, reinó la muerte desde Adán hasta Moisés, aun en los que no pecaron a la manera de la transgresión de Adán, el cual es figura del que había de venir". Los paralelos: Adán trajo pecado y muerte a toda la humanidad mediante un acto de desobediencia; Cristo trajo justicia y vida a todos los que creen mediante un acto de obediencia (Romanos 5:18-19). Adán era la cabeza de la vieja creación; Cristo es la cabeza de la nueva creación (1 Corintios 15:45-47). Donde Adán se escondió de Dios con vergüenza, Cristo caminó abiertamente a la cruz. Donde Adán culpó a su esposa, Cristo amó a Su esposa (la iglesia) y se entregó a sí mismo por ella. Para el pastor, esto significa que la historia de Génesis 3 no es solo historia antigua — es tu historia, y la historia de Cristo. Cada ser humano nace "en Adán". Solo al estar "en Cristo" podemos ser vivificados.</p>
+
+                <h3>3. Melquisedec: Rey de Justicia y Paz</h3>
+                <p>Melquisedec aparece repentinamente en Génesis 14, luego desaparece. Es rey de Salem (Jerusalén) y sacerdote del Dios Altísimo. Trae pan y vino a Abraham después de la batalla, lo bendice y recibe el diezmo. Su nombre significa "Rey de Justicia". Salem significa "paz". Así que es Rey de Justicia y Rey de Paz. En el Salmo 110, David profetiza que el Mesías sería "sacerdote para siempre según el orden de Melquisedec" — no según el orden de Aarón (que vino después y murió). El autor de Hebreos (capítulos 5-7) desarrolla esto: Jesús es un sacerdote como Melquisedec — no basado en genealogía, no limitado por la muerte, tanto rey como sacerdote. A diferencia de los sacerdotes levitas que ofrecían sacrificios primero por sus propios pecados, Melquisedec no tiene principio ni fin registrados — un tipo apropiado del sacerdocio eterno de Cristo. El pan y el vino que trajo también anticipan la Cena del Señor.</p>
+
+                <div class="illustration">
+                    <strong>Aplicación Pastoral:</strong> Cuando sirves la comunión, estás parado en una línea que se remonta a Melquisedec — un rey-sacerdote que sirvió pan y vino a un guerrero cansado. Jesús, nuestro gran Sumo Sacerdote, aún nos encuentra en la mesa.
+                </div>
+
+                <h3>4. Isaac: El Hijo Amado Ofrecido</h3>
+                <p>Génesis 22 es uno de los tipos más poderosos de Cristo en el Antiguo Testamento. Abraham recibe la orden de ofrecer a Isaac, "tu hijo, tu único hijo, a quien amas". Isaac carga la leña para su propio sacrificio al monte. Pregunta: "¿Dónde está el cordero?" Abraham responde: "Dios proveerá para sí el cordero". En el último momento, un carnero es atrapado en un zarzal, e Isaac es perdonado. Hebreos 11:19 nos dice que Abraham creía que Dios podía resucitar a Isaac de entre los muertos. Los paralelos con Cristo son sorprendentes: Jesús es el Hijo amado del Padre (Mateo 3:17). Cargó su cruz (la leña) al Gólgota. Fue sacrificado no como un carnero atrapado en un zarzal, sino como el Cordero de Dios. Y al tercer día, resucitó de los muertos. El lugar donde esto sucedió, el Monte Moriah (Génesis 22:2), es casi con certeza la misma colina donde Salomón construyó el templo y donde Jesús fue crucificado.</p>
+
+                <div class="scripture">
+                    <strong>Juan 1:29 (RVG):</strong> "Al día siguiente vio Juan a Jesús que venía a él, y dijo: He aquí el Cordero de Dios, que quita el pecado del mundo."
+                </div>
+
+                <h3>5. El Cordero Pascual: Sustitución y Salvación</h3>
+                <p>La narrativa de la Pascua en Éxodo 12 es el evento salvador central del Antiguo Testamento, y es explícitamente un tipo de Cristo. Un cordero sin defecto era degollado. Su sangre se aplicaba a los postes de las puertas. Cuando el ángel de la muerte veía la sangre, "pasaba de largo" esa casa. Pablo escribe: "Cristo, nuestra pascua, fue sacrificado por nosotros" (1 Corintios 5:7). Juan el Bautista llama a Jesús "el Cordero de Dios que quita el pecado del mundo" (Juan 1:29). Pedro dice que fuimos redimidos "con la sangre preciosa de Cristo, como de un cordero sin mancha y sin contaminación" (1 Pedro 1:19). Los detalles importan: el cordero debía comerse con pan sin levadura (pureza) y hierbas amargas (la amargura del pecado). Nada debía quebrarse de él (Juan 19:36). La sangre se aplicaba, no solo se derramaba. Para el pastor, la Pascua enseña que la salvación no es por buenas obras o esfuerzo religioso — es por la sangre del Cordero aplicada por fe. No eres salvo porque eres buen israelita; eres salvo porque estás bajo la sangre.</p>
+
+                <h3>6. La Roca Que Seguía: Cristo Golpeado Una Vez</h3>
+                <p>En Éxodo 17, Moisés golpeó la roca en Horeb, y salió agua. En Números 20, Dios dijo a Moisés que hablara a la roca, pero con ira Moisés la golpeó dos veces. La roca dio agua ambas veces, pero Moisés fue juzgado. Pablo revela el misterio: "Bebían de la roca espiritual que los seguía, y la roca era Cristo" (1 Corintios 10:4). ¿Por qué fue castigado Moisés por golpear la roca la segunda vez? Porque la roca era un tipo de Cristo. Cristo fue golpeado una vez — en la cruz. No necesita ser golpeado otra vez. Hebreos 9:28 dice: "Cristo fue ofrecido una sola vez para llevar los pecados de muchos". Cuando Moisés golpeó la roca dos veces, estaba tergiversando el evangelio — como si Cristo necesitara ser crucificado repetidamente. El agua de la roca es el Espíritu Santo, dado a todos los que creen. Para el pastor, esto es una advertencia: no prediques un evangelio que requiera que Jesús sufra otra vez. Murió una vez para siempre. Predica la obra terminada.</p>
+
+                <h3>7. La Serpiente de Bronce: Levantada para Sanidad</h3>
+                <p>Números 21 registra que cuando las serpientes ardientes mordieron al pueblo, Dios dijo a Moisés que hiciera una serpiente de bronce y la pusiera sobre un asta. Cualquiera que la miraba vivía. Jesús conecta explícitamente esto con Su propia crucifixión: "Como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del Hombre sea levantado, para que todo aquel que en él cree no se pierda, sino que tenga vida eterna" (Juan 3:14-15). La serpiente es un símbolo extraño — representa la maldición (Génesis 3:14). Jesús se hizo maldición por nosotros (Gálatas 3:13). La serpiente en el asta era una maldición convertida en cura. Todo lo que el pueblo tenía que hacer era mirar — no trabajar, no esforzarse, no hacer una peregrinación — solo mirar. Ese es el evangelio. La fe no es una obra; es mirar lejos de ti mismo al Único que fue levantado por ti.</p>
+
+                <div class="scripture">
+                    <strong>Isaías 45:22 (RVG):</strong> "Mirad a mí, y sed salvos, todos los términos de la tierra, porque yo soy Dios, y no hay más."
+                </div>
+
+                <h3>8. El Tabernáculo: Sombras de Realidades Celestiales</h3>
+                <p>El tabernáculo, con sus sacrificios, sacerdocio y mobiliario, es un vasto sistema tipológico que apunta a Cristo. El escritor de Hebreos explica que el tabernáculo terrenal era "figura y sombra de las cosas celestiales" (Hebreos 8:5). El altar de bronce (sacrificio) apunta a la cruz. La fuente (lavamiento) apunta al bautismo y la purificación. El candelero apunta a Cristo, la luz del mundo. La mesa de los panes de la proposición apunta a Cristo, el pan de vida. El altar del incienso apunta a la intercesión de Cristo. El velo que separaba el Lugar Santo del Lugar Santísimo apunta a la barrera del pecado. Cuando Jesús murió, el velo se rasgó — el acceso directo está ahora abierto. El Arca del Pacto, que contenía la ley, apunta a Cristo que cumplió la ley. El propiciatorio (donde se rociaba la sangre) apunta a la propiciación — Cristo es el lugar donde la justicia y la misericordia de Dios se encuentran. Para el pastor, el tabernáculo no es un plano de construcción obsoleto. Es un drama del evangelio en tres dimensiones. Cada vez que predicas la cruz, estás en el altar de bronce. Cada vez que oras, estás en el altar del incienso. Cada vez que lideras la adoración, estás encendiendo el candelero.</p>
+
+                <h3>9. El Profeta Como Moisés</h3>
+                <p>Deuteronomio 18:15-19 promete un profeta como Moisés. Moisés era libertador, legislador y mediador. Jesús es todo esto, pero infinitamente mayor. Moisés hablaba con Dios cara a cara (Éxodo 33:11); Jesús es el Verbo hecho carne (Juan 1:14). Moisés vio la espalda de Dios; Jesús es Dios. Moisés guio a Israel fuera de Egipto; Jesús guía a Su pueblo fuera de la esclavitud del pecado. Moisés dio la ley desde el Monte Sinaí; Jesús dio el Sermón del Monte. Moisés intercedió por Israel; Jesús vive para interceder por nosotros (Hebreos 7:25). El rostro de Moisés resplandecía con gloria reflejada; Jesús es el resplandor de la gloria de Dios (Hebreos 1:3). El pueblo temía oír la voz de Dios directamente; Jesús dice: "Mis ovejas oyen mi voz" (Juan 10:27). Cuando Pedro y Esteban citaron Deuteronomio 18 en el libro de los Hechos, estaban haciendo una declaración audaz: Jesús es ese Profeta. Rechazarlo es rechazar al Enviado por Dios.</p>
+
+                <h3>10. El Sistema Sacrificial: Una Vez para Siempre</h3>
+                <p>Levítico presenta cinco ofrendas principales: holocausto, ofrenda de grano, ofrenda de paz, ofrenda por el pecado y ofrenda por la culpa. Cada una presagia un aspecto diferente de la obra de Cristo. El holocausto (consumición total) apunta a la devoción total de Cristo al Padre y la satisfacción completa de Su sacrificio. La ofrenda de grano (primicias) apunta a la humanidad sin pecado de Cristo y Su resurrección como primicias. La ofrenda de paz (comida compartida) apunta a la comunión con Dios que el sacrificio de Cristo asegura. La ofrenda por el pecado (sangre para expiación) apunta a Cristo llevando nuestro pecado. La ofrenda por la culpa (restitución más sacrificio) apunta a Cristo restaurando lo que el pecado rompió. Pero el clímax es el Día de la Expiación (Levítico 16): dos machos cabríos — uno sacrificado (Cristo muriendo en nuestro lugar) y uno chivo expiatorio (Cristo llevando nuestros pecados lejos). Hebreos 9-10 explica: si la sangre de toros y machos cabríos pudiera quitar el pecado, habrían dejado de ofrecerse. Pero no podían. Cristo se ofreció a sí mismo una vez para siempre. Los sacrificios del Antiguo Testamento no eran efectivos en sí mismos; eran efectivos por fe, esperando la cruz. Para el pastor, esto significa que nunca necesitas ofrecer otro sacrificio por el pecado. Consumado es.</p>
+
+                <div class="illustration">
+                    <strong>Conclusión:</strong> El Pentateuco no es una colección de leyes e historias judías antiguas. Es un retrato cuidadosamente elaborado del Mesías. Desde la simiente de la mujer (Génesis 3:15) hasta el cordero pascual, la serpiente de bronce y el profeta como Moisés — cada página susurra Su nombre. Jesús dijo: "Si creyerais a Moisés, me creeríais a mí, porque de mí escribió él" (Juan 5:46). Predica el Pentateuco, y predicarás a Cristo.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="exam-section" id="examSection">
+        <div class="exam-header">
+            <h2><span class="lang-en">Unit 11 Examination</span><span class="lang-es">Examen de la Unidad 11</span></h2>
+            <p><span class="lang-en">20 multiple choice questions + 10 short answer questions (essays required for Th.M. and M.Div. only)</span><span class="lang-es">20 preguntas de opción múltiple + 10 preguntas de desarrollo (requeridas solo para Th.M. y M.Div.)</span></p>
+        </div>
+        <div id="mcQuestions"></div>
+        <div id="saQuestions"></div>
+        <div class="action-buttons">
+            <button id="submitBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Entregar Examen</span></button>
+            <button id="resetBtn" class="reset-btn"><span class="lang-en">Reset Exam</span><span class="lang-es">Reiniciar Examen</span></button>
+        </div>
+        <div id="lockoutTimer" class="lockout-timer" style="display:none;"></div>
+    </div>
+
+    <div class="nav-links">
+        <a href="CTSPentUnit10.html"><span class="lang-en">← Previous Unit</span><span class="lang-es">← Unidad Anterior</span></a>
+        <a href="CTSPentUnit12.html" id="nextLink" style="display:none;"><span class="lang-en">Next Unit →</span><span class="lang-es">Siguiente Unidad →</span></a>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// PER-UNIT CONSTANTS
+// ============================================================
+const UNIT = 11;
+const COURSE_PREFIX = "pent";
+const NEXT_URL = "CTSPentUnit12.html";
+const PREV_URL = "CTSPentUnit10.html";
+const IS_LAST_UNIT = false;
+const SHOW_REGISTRATION_CARD = false;
+const CERT_URL = "CTSPentCertificate.html";
+
+// ============================================================
+// MULTIPLE CHOICE QUESTIONS (20) — Distribution: A=5, B=5, C=5, D=5
+// ============================================================
+const mcQuestions = [
+    { textEn: "1. What is typology?", textEs: "1. ¿Qué es la tipología?", optionsEn: ["A. A method of allegorical interpretation where any detail can mean anything", "B. The study of how persons, events, and institutions in the OT foreshadow Christ", "C. A form of biblical criticism", "D. The study of ancient Near Eastern myths"], optionsEs: ["A. Un método de interpretación alegórica donde cualquier detalle puede significar cualquier cosa", "B. El estudio de cómo personas, eventos e instituciones del AT prefiguran a Cristo", "C. Una forma de crítica bíblica", "D. El estudio de los mitos del antiguo Cercano Oriente"], correct: 1, correctFeedbackEn: "Correct! Typology is the study of OT patterns that prefigure and point to Jesus Christ.", correctFeedbackEs: "¡Correcto! La tipología es el estudio de los patrones del AT que prefiguran y señalan a Jesucristo.", incorrectFeedbackEn: "Typology is the study of how OT persons, events, and institutions foreshadow Christ — grounded in NT identification.", incorrectFeedbackEs: "La tipología es el estudio de cómo personas, eventos e instituciones del AT prefiguran a Cristo — fundamentada en la identificación del NT." },
+    { textEn: "2. Who did Jesus talk to on the road to Emmaus about how Moses and the Prophets spoke of Him?", textEs: "2. ¿Con quién habló Jesús en el camino a Emaús acerca de cómo Moisés y los Profetas hablaron de Él?", optionsEn: ["A. The Pharisees", "B. Peter and James", "C. Two disciples", "D. Pontius Pilate"], optionsEs: ["A. Los fariseos", "B. Pedro y Jacobo", "C. Dos discípulos", "D. Poncio Pilato"], correct: 2, correctFeedbackEn: "Yes. Luke 24:27 — 'beginning at Moses and all the Prophets, He expounded to them in all the Scriptures the things concerning Himself.'", correctFeedbackEs: "Sí. Lucas 24:27 — 'comenzando desde Moisés, y siguiendo por todos los profetas, les declaraba en todas las Escrituras lo que de él decían.'", incorrectFeedbackEn: "Luke 24:13-27 — Jesus explained from Moses and the Prophets how they pointed to Him.", incorrectFeedbackEs: "Lucas 24:13-27 — Jesús explicó desde Moisés y los Profetas cómo señalaban a Él." },
+    { textEn: "3. According to Romans 5:14, who is a 'type' (figure) of Christ?", textEs: "3. Según Romanos 5:14, ¿quién es 'figura' (tipo) de Cristo?", optionsEn: ["A. Abraham", "B. Moses", "C. David", "D. Adam"], optionsEs: ["A. Abraham", "B. Moisés", "C. David", "D. Adán"], correct: 3, correctFeedbackEn: "Yes. Adam is a type of Christ — one brought death, the other brings life.", correctFeedbackEs: "Sí. Adán es figura de Cristo — uno trajo muerte, el otro trae vida.", incorrectFeedbackEn: "Romans 5:14 — Adam is a type of Him who was to come.", incorrectFeedbackEs: "Romanos 5:14 — Adán es figura del que había de venir." },
+    { textEn: "4. What does the name 'Melchizedek' mean?", textEs: "4. ¿Qué significa el nombre 'Melquisedec'?", optionsEn: ["A. 'King of Righteousness'", "B. 'My father is peace'", "C. 'Priest of the Most High'", "D. 'King of Salem'"], optionsEs: ["A. 'Rey de Justicia'", "B. 'Mi padre es paz'", "C. 'Sacerdote del Altísimo'", "D. 'Rey de Salem'"], correct: 0, correctFeedbackEn: "Correct. Melchi = king; Zedek = righteousness. He is King of Righteousness.", correctFeedbackEs: "Correcto. Melqui = rey; Sedec = justicia. Es Rey de Justicia.", incorrectFeedbackEn: "Melchizedek means 'King of Righteousness' (Hebrews 7:2).", incorrectFeedbackEs: "Melquisedec significa 'Rey de Justicia' (Hebreos 7:2)." },
+    { textEn: "5. What did Melchizedek bring to Abraham in Genesis 14?", textEs: "5. ¿Qué llevó Melquisedec a Abraham en Génesis 14?", optionsEn: ["A. A lamb and a goat", "B. Water and salt", "C. Bread and wine", "D. A tithe"], optionsEs: ["A. Un cordero y un macho cabrío", "B. Agua y sal", "C. Pan y vino", "D. Un diezmo"], correct: 2, correctFeedbackEn: "Yes. Bread and wine — anticipating the Lord's Supper.", correctFeedbackEs: "Sí. Pan y vino — anticipando la Cena del Señor.", incorrectFeedbackEn: "Genesis 14:18 — he brought out bread and wine.", incorrectFeedbackEs: "Génesis 14:18 — sacó pan y vino." },
+    { textEn: "6. On which mountain was Isaac offered and Jesus later crucified?", textEs: "6. ¿Sobre cuál monte fue ofrecido Isaac y más tarde crucificado Jesús?", optionsEn: ["A. Mount Sinai", "B. Mount Moriah", "C. Mount Nebo", "D. Mount Gerizim"], optionsEs: ["A. El monte Sinaí", "B. El monte Moriah", "C. El monte Nebo", "D. El monte Gerizim"], correct: 1, correctFeedbackEn: "Correct. Moriah — the same mountain range where the temple and Golgotha stood.", correctFeedbackEs: "Correcto. Moriah — la misma cadena de montes donde estuvieron el templo y el Gólgota.", incorrectFeedbackEn: "Genesis 22:2 — the land of Moriah. The temple and Golgotha are on the same ridge.", incorrectFeedbackEs: "Génesis 22:2 — la tierra de Moriah. El templo y el Gólgota están en la misma cordillera." },
+    { textEn: "7. What did Isaac carry up the mountain for his own sacrifice?", textEs: "7. ¿Qué llevó Isaac monte arriba para su propio sacrificio?", optionsEn: ["A. The wood", "B. The fire", "C. The altar stones", "D. The knife"], optionsEs: ["A. La leña", "B. El fuego", "C. Las piedras del altar", "D. El cuchillo"], correct: 0, correctFeedbackEn: "Yes. Isaac carried the wood — a type of Christ carrying His cross.", correctFeedbackEs: "Sí. Isaac llevó la leña — un tipo de Cristo cargando Su cruz.", incorrectFeedbackEn: "Genesis 22:6 — Abraham laid the wood on Isaac.", incorrectFeedbackEs: "Génesis 22:6 — Abraham puso la leña sobre Isaac." },
+    { textEn: "8. What did Paul call Christ in 1 Corinthians 5:7?", textEs: "8. ¿Cómo llamó Pablo a Cristo en 1 Corintios 5:7?", optionsEn: ["A. 'The Good Shepherd'", "B. 'The Rock'", "C. 'The Firstborn'", "D. 'Our Passover'"], optionsEs: ["A. 'El Buen Pastor'", "B. 'La Roca'", "C. 'El Primogénito'", "D. 'Nuestra Pascua'"], correct: 3, correctFeedbackEn: "Yes. 'Christ, our Passover, was sacrificed for us.'", correctFeedbackEs: "Sí. 'Cristo, nuestra Pascua, fue sacrificado por nosotros.'", incorrectFeedbackEn: "1 Corinthians 5:7 — 'For indeed Christ, our Passover, was sacrificed for us.'", incorrectFeedbackEs: "1 Corintios 5:7 — 'Porque nuestra Pascua, que es Cristo, ya fue sacrificada por nosotros.'" },
+    { textEn: "9. What was required for the Passover lamb in Exodus 12?", textEs: "9. ¿Qué se requería para el cordero de la Pascua en Éxodo 12?", optionsEn: ["A. Female, any age, any condition", "B. Male, one year old, without blemish", "C. A goat, not a lamb", "D. Any animal from the flock"], optionsEs: ["A. Hembra, de cualquier edad, en cualquier condición", "B. Macho, de un año, sin defecto", "C. Un macho cabrío, no un cordero", "D. Cualquier animal del rebaño"], correct: 1, correctFeedbackEn: "Correct. A male without blemish — pointing to Christ's sinlessness.", correctFeedbackEs: "Correcto. Un macho sin defecto — señalando a la ausencia de pecado de Cristo.", incorrectFeedbackEn: "Exodus 12:5 — a male without blemish.", incorrectFeedbackEs: "Éxodo 12:5 — un macho sin defecto." },
+    { textEn: "10. According to 1 Peter 1:19, what is the blood of Christ compared to?", textEs: "10. Según 1 Pedro 1:19, ¿con qué se compara la sangre de Cristo?", optionsEn: ["A. The blood of bulls and goats", "B. The blood of Abel", "C. A lamb without blemish and without spot", "D. The blood of the covenant"], optionsEs: ["A. La sangre de toros y machos cabríos", "B. La sangre de Abel", "C. Un cordero sin mancha y sin contaminación", "D. La sangre del pacto"], correct: 2, correctFeedbackEn: "Yes. Christ is the spotless Lamb of God.", correctFeedbackEs: "Sí. Cristo es el Cordero de Dios sin mancha.", incorrectFeedbackEn: "1 Peter 1:19 — 'precious blood of Christ, as of a lamb without blemish and without spot.'", incorrectFeedbackEs: "1 Pedro 1:19 — 'la sangre preciosa de Cristo, como de un cordero sin mancha y sin contaminación.'" },
+    { textEn: "11. What did Paul say the spiritual Rock was (1 Corinthians 10:4)?", textEs: "11. ¿Qué dijo Pablo que era la Roca espiritual (1 Corintios 10:4)?", optionsEn: ["A. Moses", "B. The law", "C. The tabernacle", "D. Christ"], optionsEs: ["A. Moisés", "B. La ley", "C. El tabernáculo", "D. Cristo"], correct: 3, correctFeedbackEn: "Correct. 'That Rock was Christ.' The rock struck once gives water.", correctFeedbackEs: "Correcto. 'Y la Roca era Cristo.' La roca golpeada una vez da agua.", incorrectFeedbackEn: "1 Corinthians 10:4 — 'that Rock was Christ.'", incorrectFeedbackEs: "1 Corintios 10:4 — 'y la Roca era Cristo.'" },
+    { textEn: "12. Why was Moses punished for striking the rock the second time (Numbers 20)?", textEs: "12. ¿Por qué fue castigado Moisés por golpear la roca la segunda vez (Números 20)?", optionsEn: ["A. He struck it twice, misrepresenting that Christ is struck once for all", "B. He struck it in public", "C. He struck it without Aaron", "D. He struck it too hard"], optionsEs: ["A. La golpeó dos veces, tergiversando que Cristo es golpeado una sola vez para siempre", "B. La golpeó en público", "C. La golpeó sin Aarón", "D. La golpeó demasiado fuerte"], correct: 0, correctFeedbackEn: "Yes. The rock was a type of Christ — struck once. Striking again misrepresented the gospel.", correctFeedbackEs: "Sí. La roca era un tipo de Cristo — golpeada una vez. Golpearla otra vez tergiversó el evangelio.", incorrectFeedbackEn: "Because the rock typified Christ, who is crucified once. Moses' action suggested repeated sacrifice.", incorrectFeedbackEs: "Porque la roca tipificaba a Cristo, quien es crucificado una sola vez. La acción de Moisés sugería un sacrificio repetido." },
+    { textEn: "13. What did people have to do to be healed from the fiery serpent bites (Numbers 21)?", textEs: "13. ¿Qué tenía que hacer la gente para ser sanada de las mordeduras de las serpientes ardientes (Números 21)?", optionsEn: ["A. Make a pilgrimage to the tabernacle", "B. Offer a sacrifice", "C. Recite a prayer", "D. Look at the bronze serpent on a pole"], optionsEs: ["A. Hacer una peregrinación al tabernáculo", "B. Ofrecer un sacrificio", "C. Recitar una oración", "D. Mirar la serpiente de bronce sobre el asta"], correct: 3, correctFeedbackEn: "Yes. Just look — a type of faith.", correctFeedbackEs: "Sí. Solo mirar — un tipo de la fe.", incorrectFeedbackEn: "Numbers 21:8 — 'everyone who is bitten, when he looks at it, shall live.'", incorrectFeedbackEs: "Números 21:8 — 'cualquiera que fuere mordido y mirare a ella, vivirá.'" },
+    { textEn: "14. How did Jesus connect the bronze serpent to Himself in John 3?", textEs: "14. ¿Cómo conectó Jesús la serpiente de bronce consigo mismo en Juan 3?", optionsEn: ["A. 'I am the serpent'", "B. 'The serpent was a symbol of sin'", "C. 'As Moses lifted up the serpent, so must the Son of Man be lifted up'", "D. 'You must look to Moses'"], optionsEs: ["A. 'Yo soy la serpiente'", "B. 'La serpiente era símbolo del pecado'", "C. 'Como Moisés levantó la serpiente, así es necesario que el Hijo del Hombre sea levantado'", "D. 'Debéis mirar a Moisés'"], correct: 2, correctFeedbackEn: "Yes. Jesus explicitly used the bronze serpent as a type of His crucifixion.", correctFeedbackEs: "Sí. Jesús usó explícitamente la serpiente de bronce como un tipo de Su crucifixión.", incorrectFeedbackEn: "John 3:14-15 — 'As Moses lifted up the serpent... so must the Son of Man be lifted up.'", incorrectFeedbackEs: "Juan 3:14-15 — 'Como Moisés levantó la serpiente... así es necesario que el Hijo del Hombre sea levantado.'" },
+    { textEn: "15. What happened to the veil of the temple when Jesus died?", textEs: "15. ¿Qué le sucedió al velo del templo cuando Jesús murió?", optionsEn: ["A. It was torn in two from top to bottom", "B. It was removed", "C. It was embroidered with gold", "D. It was strengthened"], optionsEs: ["A. Se rasgó en dos, de arriba abajo", "B. Fue removido", "C. Fue bordado con oro", "D. Fue reforzado"], correct: 0, correctFeedbackEn: "Yes. The torn veil symbolizes direct access to God through Christ's sacrifice.", correctFeedbackEs: "Sí. El velo rasgado simboliza el acceso directo a Dios por medio del sacrificio de Cristo.", incorrectFeedbackEn: "Matthew 27:51 — the veil of the temple was torn in two from top to bottom.", incorrectFeedbackEs: "Mateo 27:51 — el velo del templo se rasgó en dos, de arriba abajo." },
+    { textEn: "16. What does the mercy seat (the cover of the Ark) represent?", textEs: "16. ¿Qué representa el propiciatorio (la cubierta del Arca)?", optionsEn: ["A. The throne of judgment", "B. Propitiation — where God's justice and mercy meet in Christ", "C. A place for offerings", "D. A footstool"], optionsEs: ["A. El trono del juicio", "B. Propiciación — donde la justicia y la misericordia de Dios se encuentran en Cristo", "C. Un lugar para ofrendas", "D. Un estrado"], correct: 1, correctFeedbackEn: "Yes. Christ is our propitiation (Romans 3:25).", correctFeedbackEs: "Sí. Cristo es nuestra propiciación (Romanos 3:25).", incorrectFeedbackEn: "The mercy seat (hilasterion) is where blood was sprinkled for atonement — a type of Christ.", incorrectFeedbackEs: "El propiciatorio (hilasterion) es donde se rociaba la sangre para la expiación — un tipo de Cristo." },
+    { textEn: "17. In Deuteronomy 18, what kind of prophet did God promise to raise up?", textEs: "17. En Deuteronomio 18, ¿qué clase de profeta prometió Dios levantar?", optionsEn: ["A. A prophet like Elijah", "B. A prophet like Samuel", "C. A prophet like Moses", "D. A prophet like Isaiah"], optionsEs: ["A. Un profeta como Elías", "B. Un profeta como Samuel", "C. Un profeta como Moisés", "D. Un profeta como Isaías"], correct: 2, correctFeedbackEn: "Yes. 'A Prophet like you' — fulfilled in Jesus (Acts 3:22-23).", correctFeedbackEs: "Sí. 'Un Profeta como tú' — cumplido en Jesús (Hechos 3:22-23).", incorrectFeedbackEn: "Deuteronomy 18:15 — 'The Lord your God will raise up for you a Prophet like me.'", incorrectFeedbackEs: "Deuteronomio 18:15 — 'Profeta de en medio de ti... como yo, te levantará Jehová tu Dios.'" },
+    { textEn: "18. According to Hebrews 9-10, why did Christ's sacrifice need to happen only once?", textEs: "18. Según Hebreos 9-10, ¿por qué el sacrificio de Cristo necesitó ocurrir solo una vez?", optionsEn: ["A. Because it was less effective than animal sacrifices", "B. Because animal sacrifices were never intended to take away sin permanently; Christ's did", "C. Because the temple was destroyed", "D. Because God changed His mind"], optionsEs: ["A. Porque era menos eficaz que los sacrificios de animales", "B. Porque los sacrificios de animales nunca fueron destinados a quitar el pecado permanentemente; el de Cristo sí", "C. Porque el templo fue destruido", "D. Porque Dios cambió de parecer"], correct: 1, correctFeedbackEn: "Correct. Christ's once-for-all sacrifice completely deals with sin — no repetition needed.", correctFeedbackEs: "Correcto. El sacrificio de Cristo, una vez para siempre, trata completamente con el pecado — no se necesita repetición.", incorrectFeedbackEn: "Hebrews 10:10 — 'we have been sanctified through the offering of the body of Jesus Christ once for all.'", incorrectFeedbackEs: "Hebreos 10:10 — 'somos santificados mediante la ofrenda del cuerpo de Jesucristo hecha una vez para siempre.'" },
+    { textEn: "19. What did the two goats on the Day of Atonement represent?", textEs: "19. ¿Qué representaban los dos machos cabríos en el Día de la Expiación?", optionsEn: ["A. One sacrificed (Christ dying in our place), one scapegoat (Christ carrying our sins away)", "B. The Old Covenant and the New Covenant", "C. The law and the prophets", "D. One for the Lord, one for Azazel"], optionsEs: ["A. Uno sacrificado (Cristo muriendo en nuestro lugar), uno expiatorio (Cristo llevándose nuestros pecados)", "B. El Antiguo Pacto y el Nuevo Pacto", "C. La ley y los profetas", "D. Uno para Jehová, uno para Azazel"], correct: 0, correctFeedbackEn: "Yes. Both aspects of Christ's atonement — death for sin and removal of guilt.", correctFeedbackEs: "Sí. Ambos aspectos de la expiación de Cristo — muerte por el pecado y remoción de la culpa.", incorrectFeedbackEn: "One sacrificed (penalty paid), one sent away (sins removed). Both point to Christ.", incorrectFeedbackEs: "Uno sacrificado (pena pagada), uno enviado lejos (pecados quitados). Ambos señalan a Cristo." },
+    { textEn: "20. What did Jesus say about Moses in John 5:46?", textEs: "20. ¿Qué dijo Jesús acerca de Moisés en Juan 5:46?", optionsEn: ["A. 'Moses was a great prophet'", "B. 'Moses gave you the law'", "C. 'Moses is your accuser'", "D. 'If you believed Moses, you would believe Me, for he wrote about Me'"], optionsEs: ["A. 'Moisés fue un gran profeta'", "B. 'Moisés os dio la ley'", "C. 'Moisés es vuestro acusador'", "D. 'Si creyeseis a Moisés, me creeríais a mí, porque de mí escribió él'"], correct: 3, correctFeedbackEn: "Yes. The Pentateuch is fundamentally about Christ.", correctFeedbackEs: "Sí. El Pentateuco trata fundamentalmente de Cristo.", incorrectFeedbackEn: "John 5:46 — 'For if you believed Moses, you would believe Me; for he wrote about Me.'", incorrectFeedbackEs: "Juan 5:46 — 'Porque si creyeseis a Moisés, me creeríais a mí, porque de mí escribió él.'" }
+];
+
+// ============================================================
+// SHORT ANSWER QUESTIONS (10) — split kw_en / kw_es
+// ============================================================
+const saQuestions = [
+    { id: "sa_u11_1", textEn: "Define typology and explain why it is not the same as allegory.", textEs: "Defina tipología y explique por qué no es lo mismo que alegoría.", kw_en: ["typolog", "study", "christ", "histori", "new", "testame", "identif", "substan"], kw_es: ["tipolog", "estudio", "cristo", "históri", "nuevo", "testame", "identif", "cuerpo"], explanationEn: "Typology is the study of OT persons, events, and institutions that prefigure Christ, grounded in NT identification. Allegory assigns arbitrary meanings; typology is textually grounded.", explanationEs: "La tipología es el estudio de personas, eventos e instituciones del AT que prefiguran a Cristo, basado en la identificación del NT. La alegoría asigna significados arbitrarios; la tipología está basada en el texto." },
+    { id: "sa_u11_2", textEn: "Explain how Adam is a type of Christ (Romans 5).", textEs: "Explique cómo Adán es un tipo de Cristo (Romanos 5).", kw_en: ["adam", "type", "disobed", "death", "christ", "obedien", "righteo", "one"], kw_es: ["adán", "tipo", "desobed", "muerte", "cristo", "obedien", "justici", "único"], explanationEn: "Adam's one act brought sin and death to all; Christ's one act brings righteousness and life to all who believe.", explanationEs: "El único acto de Adán trajo pecado y muerte a todos; el único acto de Cristo trae justicia y vida a todos los que creen." },
+    { id: "sa_u11_3", textEn: "What does Melchizedek's name and title reveal about his typological significance?", textEs: "¿Qué revelan el nombre y título de Melquisedec sobre su significado tipológico?", kw_en: ["melchiz", "king", "righteo", "salem", "peace", "priest", "most", "high"], kw_es: ["melquis", "rey", "justici", "salem", "paz", "sacerdo", "altísim", "pan"], explanationEn: "He is King of Righteousness and King of Peace (Salem), a priest who brings bread and wine — a clear type of Christ as our eternal High Priest.", explanationEs: "Es Rey de Justicia y Rey de Paz (Salem), un sacerdote que trae pan y vino — un tipo claro de Cristo como nuestro Sumo Sacerdote eterno." },
+    { id: "sa_u11_4", textEn: "List the parallels between Isaac's binding (Genesis 22) and Jesus' crucifixion.", textEs: "Enumere los paralelos entre la atadura de Isaac (Génesis 22) y la crucifixión de Jesús.", kw_en: ["beloved", "carried", "wood", "mount", "moriah", "ram", "substit", "resurrec"], kw_es: ["hijo", "amado", "único", "cargó", "leña", "monte", "moriah", "carnero"], explanationEn: "Both beloved sons; Isaac carried wood, Jesus carried cross; same mountain; ram substituted for Isaac, Jesus is the Lamb; Abraham believed in resurrection.", explanationEs: "Ambos hijos amados; Isaac cargó leña, Jesús cargó cruz; mismo monte; carnero sustituyó a Isaac, Jesús es el Cordero; Abraham creyó en resurrección." },
+    { id: "sa_u11_5", textEn: "Explain how the Passover lamb is a type of Christ, including specific details.", textEs: "Explique cómo el cordero pascual es un tipo de Cristo, incluyendo detalles específicos.", kw_en: ["without", "blemish", "slaught", "blood", "applied", "passed", "over", "bones"], kw_es: ["sin", "defecto", "degolla", "sangre", "aplicad", "pasó", "alto", "huesos"], explanationEn: "Unblemished lamb = sinless Christ. Blood applied to doorposts = faith in His blood. Death passed over = salvation. Bones not broken = fulfilled at cross. Christ is our Passover.", explanationEs: "Cordero sin defecto = Cristo sin pecado. Sangre aplicada a postes = fe en Su sangre. Muerte pasó por alto = salvación. Huesos no quebrados = cumplido en la cruz. Cristo es nuestra pascua." },
+    { id: "sa_u11_6", textEn: "Why was Moses punished for striking the rock twice, and what gospel truth does this illustrate?", textEs: "¿Por qué fue castigado Moisés por golpear la roca dos veces, y qué verdad del evangelio ilustra esto?", kw_en: ["rock", "christ", "struck", "once", "finishe", "work", "repetit", "hebrews"], kw_es: ["roca", "cristo", "golpead", "vez", "obra", "termina", "sin", "repetic"], explanationEn: "The rock typified Christ, who was struck once for sin. Striking twice implied repeated sacrifice, contradicting the once-for-all nature of the cross.", explanationEs: "La roca tipificaba a Cristo, que fue golpeado una vez por el pecado. Golpear dos veces implicaba sacrificio repetido, contradiciendo la naturaleza única de la cruz." },
+    { id: "sa_u11_7", textEn: "How does the bronze serpent point to the gospel (John 3:14-15)?", textEs: "¿Cómo apunta la serpiente de bronce al evangelio (Juan 3:14-15)?", kw_en: ["curse", "lifted", "pole", "look", "live", "jesus", "crucifi", "became"], kw_es: ["maldici", "levanta", "asta", "mirar", "vivir", "jesús", "crucifi", "hizo"], explanationEn: "The serpent represented the curse. Lifted up, it became the cure. Jesus became a curse for us on the cross. Looking in faith brings life — no works required.", explanationEs: "La serpiente representaba la maldición. Levantada, se convirtió en la cura. Jesús se hizo maldición por nosotros en la cruz. Mirar con fe trae vida — no se requieren obras." },
+    { id: "sa_u11_8", textEn: "Describe how the tabernacle's furniture points to Christ.", textEs: "Describa cómo el mobiliario del tabernáculo apunta a Cristo.", kw_en: ["bronze", "altar", "cross", "laver", "baptism", "lampsta", "light", "showbre"], kw_es: ["altar", "bronce", "cruz", "fuente", "bautism", "candele", "luz", "panes"], explanationEn: "Bronze altar = cross; laver = baptism/cleansing; lampstand = light of world; showbread = bread of life; incense = intercession; veil = torn for access; mercy seat = propitiation (Christ our atoning sacrifice).", explanationEs: "Altar de bronce = cruz; fuente = bautismo/purificación; candelero = luz del mundo; panes proposición = pan de vida; incienso = intercesión; velo = rasgado para acceso; propiciatorio = propiciación (Cristo nuestro sacrificio expiatorio)." },
+    { id: "sa_u11_9", textEn: "What did Moses promise in Deuteronomy 18, and how is it fulfilled in Jesus?", textEs: "¿Qué prometió Moisés en Deuteronomio 18, y cómo se cumple en Jesús?", kw_en: ["prophet", "like", "moses", "hear", "acts", "peter", "jesus", "words"], kw_es: ["profeta", "moisés", "oirle", "hechos", "pedro", "jesús", "palabra", "rechazo"], explanationEn: "God promised to raise up a prophet like Moses. Jesus is that Prophet — speaking God's words, performing signs, and anyone who does not hear Him will be cut off.", explanationEs: "Dios prometió levantar un profeta como Moisés. Jesús es ese Profeta — habla las palabras de Dios, hace señales, y cualquiera que no le oiga será cortado." },
+    { id: "sa_u11_10", textEn: "Why does the New Testament say the Old Testament sacrifices were 'shadows' (Colossians 2:17; Hebrews 10:1)?", textEs: "¿Por qué dice el Nuevo Testamento que los sacrificios del Antiguo Testamento eran 'sombras' (Colosenses 2:17; Hebreos 10:1)?", kw_en: ["shadows", "reality", "point", "christ", "could", "take", "away", "sin"], kw_es: ["sombras", "realida", "apuntan", "cristo", "podían", "quitar", "pecado", "vez"], explanationEn: "Sacrifices were shadows — outlines that pointed to the real sacrifice of Christ. They could not permanently remove sin; they were annual reminders. Christ's once-for-all sacrifice is the substance.", explanationEs: "Los sacrificios eran sombras — contornos que apuntaban al verdadero sacrificio de Cristo. No podían quitar el pecado permanentemente; eran recordatorios anuales. El sacrificio único de Cristo es la realidad." }
+];
+
+// ============================================================
+// GLOBAL STATE
+// ============================================================
+let studentTrack = "cert";
+let studentName = "";
+let lockoutEnd = null;
+let examPassed = false;
+const PASS_MC = 18;
+const PASS_SA = 9;
+
+function getStorageKey(key) { return `cts_${COURSE_PREFIX}_${key}`; }
+
+function loadState() {
+    const student = localStorage.getItem("cts_student");
+    if (student) {
+        try {
+            const s = JSON.parse(student);
+            studentName = s.name || "";
+            studentTrack = s.track || "cert";
+        } catch(e) {}
+    }
+    const trackOverride = localStorage.getItem("cts_track");
+    if (trackOverride && ["cert","thm","mdiv"].includes(trackOverride)) studentTrack = trackOverride;
+
+    const lock = localStorage.getItem(getStorageKey(`unit${UNIT}_lockout`));
+    if (lock && parseInt(lock) > Date.now()) lockoutEnd = parseInt(lock);
+
+    const passedFlag = localStorage.getItem(getStorageKey(`unit${UNIT}_passed`));
+    if (passedFlag === "true") examPassed = true;
+
+    const lang = localStorage.getItem(getStorageKey(`unit${UNIT}_lang`)) || "en";
+    document.body.className = `lang-${lang}`;
+
+    updateTrackDisplay();
+    if (examPassed && !IS_LAST_UNIT) { var nl = document.getElementById("nextLink"); nl.href = NEXT_URL; nl.style.display = "block"; }
+    else if (examPassed && IS_LAST_UNIT) window.location.href = CERT_URL;
+}
+
+function updateTrackDisplay() {
+    const trackMap = { cert: "Certificate", thm: "Th.M.", mdiv: "M.Div." };
+    document.getElementById("trackIndicator").innerHTML = `<span class="lang-en">Track: ${trackMap[studentTrack]}</span><span class="lang-es">Vía: ${trackMap[studentTrack]}</span>`;
+}
+
+function saveLanguage(lang) {
+    localStorage.setItem(getStorageKey(`unit${UNIT}_lang`), lang);
+    document.body.className = `lang-${lang}`;
+}
+
+function renderQuestions() {
+    const mcContainer = document.getElementById("mcQuestions");
+    mcContainer.innerHTML = "";
+    mcQuestions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.textEn}</span><span class="lang-es">${q.textEs}</span></div>
+            <div class="options" id="mc-${idx}-opts">
+                ${q.optionsEn.map((opt, optIdx) => `<label><input type="radio" name="mc${idx}" value="${optIdx}"><span class="lang-en"> ${q.optionsEn[optIdx]}</span><span class="lang-es"> ${q.optionsEs[optIdx]}</span></label>`).join('')}
+            </div>
+            <div class="feedback" id="mc-${idx}-fb"></div>
+        `;
+        mcContainer.appendChild(card);
+    });
+
+    const saContainer = document.getElementById("saQuestions");
+    saContainer.innerHTML = "";
+    saQuestions.forEach((q, idx) => {
+        const isCert = studentTrack === "cert";
+        const card = document.createElement("div");
+        card.className = "question-card essay-question";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.textEn}</span><span class="lang-es">${q.textEs}</span></div>
+            <textarea rows="3" id="sa-${idx}" placeholder='${isCert ? "Optional for Certificate track / Opcional para Certificado" : "Type your answer here... / Escriba su respuesta aquí..."}' ></textarea>
+            <div class="feedback" id="sa-${idx}-fb"></div>
+        `;
+        saContainer.appendChild(card);
+    });
+
+    attachAutoScore();
+    attachSAAutoSave();
+    restoreAnswers();
+}
+
+function attachAutoScore() {
+    mcQuestions.forEach((q, idx) => {
+        const radios = document.querySelectorAll(`input[name="mc${idx}"]`);
+        radios.forEach(r => {
+            r.addEventListener("change", () => {
+                const selected = document.querySelector(`input[name="mc${idx}"]:checked`);
+                const fbDiv = document.getElementById(`mc-${idx}-fb`);
+                if (selected) {
+                    localStorage.setItem(getStorageKey(`unit${UNIT}_mc${idx}`), selected.value);
+                    const isCorr = parseInt(selected.value) === q.correct;
+                    if (fbDiv) {
+                        fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+                        fbDiv.innerHTML = isCorr ? `<span class="lang-en">${q.correctFeedbackEn}</span><span class="lang-es">${q.correctFeedbackEs}</span>` : `<span class="lang-en">${q.incorrectFeedbackEn}</span><span class="lang-es">${q.incorrectFeedbackEs}</span>`;
+                    }
+                    document.querySelectorAll(`input[name="mc${idx}"]`).forEach(x => { x.disabled = true; });
+                }
+            });
+        });
+    });
+}
+
+function attachSAAutoSave() {
+    saQuestions.forEach((q, idx) => {
+        const ta = document.getElementById(`sa-${idx}`);
+        if (ta) {
+            ta.addEventListener("input", () => {
+                localStorage.setItem(getStorageKey(`unit${UNIT}_sa${idx}`), ta.value);
+            });
+        }
+    });
+}
+
+function restoreAnswers() {
+    mcQuestions.forEach((q, idx) => {
+        const saved = localStorage.getItem(getStorageKey(`unit${UNIT}_mc${idx}`));
+        if (saved !== null) {
+            const radio = document.querySelector(`input[name="mc${idx}"][value="${saved}"]`);
+            if (radio) {
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change'));
+            }
+        }
+    });
+    saQuestions.forEach((q, idx) => {
+        const saved = localStorage.getItem(getStorageKey(`unit${UNIT}_sa${idx}`));
+        if (saved !== null) {
+            const ta = document.getElementById(`sa-${idx}`);
+            if (ta) ta.value = saved;
+        }
+    });
+}
+
+// ============================================================
+// SMART KEYWORD MATCHER (word-boundary; Q24 fairness standard)
+//   keywords <=4 chars  -> whole-word match
+//   keywords  >4 chars  -> left-anchored prefix (catches inflections)
+//   Unicode-aware boundaries incl. Spanish accents
+// ============================================================
+function kwHit(answer, kw) {
+    const a = (answer || "").toLowerCase();
+    const k = (kw || "").toLowerCase().trim();
+    if (!k) return false;
+    const L = "a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1";
+    const esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const pat = k.length <= 4
+        ? new RegExp(`(^|[^${L}])${esc}([^${L}]|$)`, "i")
+        : new RegExp(`(^|[^${L}])${esc}`, "i");
+    return pat.test(a);
+}
+
+function gradeExam() {
+    if (lockoutEnd && lockoutEnd > Date.now()) {
+        const min = Math.ceil((lockoutEnd - Date.now()) / 60000);
+        alert(`Lockout active. Please wait ${min} minutes. / Bloqueo activo. Espere ${min} minutos.`);
+        return false;
+    }
+
+    let mcCorrect = 0;
+    for (let i = 0; i < mcQuestions.length; i++) {
+        const selected = document.querySelector(`input[name="mc${i}"]:checked`);
+        const fbDiv = document.getElementById(`mc-${i}-fb`);
+        if (selected) {
+            const isCorr = parseInt(selected.value) === mcQuestions[i].correct;
+            if (isCorr) mcCorrect++;
+            fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+            fbDiv.innerHTML = isCorr ? `<span class="lang-en">${mcQuestions[i].correctFeedbackEn}</span><span class="lang-es">${mcQuestions[i].correctFeedbackEs}</span>` : `<span class="lang-en">${mcQuestions[i].incorrectFeedbackEn}</span><span class="lang-es">${mcQuestions[i].incorrectFeedbackEs}</span>`;
+        } else {
+            fbDiv.className = "feedback incorrect";
+            fbDiv.innerHTML = "No answer selected. / No seleccionó respuesta.";
+        }
+    }
+
+    let saPass = true;
+    let saCorrectCount = 0;
+    if (studentTrack !== "cert") {
+        for (let i = 0; i < saQuestions.length; i++) {
+            const answer = document.getElementById(`sa-${i}`).value.trim();
+            const lang = document.body.className.replace("lang-", "");
+            let keywords = lang === "es" ? saQuestions[i].kw_es : saQuestions[i].kw_en;
+            if (lang === "both") keywords = [...saQuestions[i].kw_en, ...saQuestions[i].kw_es];
+            const hits = keywords.filter(kw => kwHit(answer, kw)).length;
+            const passed = hits >= 3 && answer.length >= 100;
+            if (passed) saCorrectCount++;
+            const fbDiv = document.getElementById(`sa-${i}-fb`);
+            const verdict = passed
+                ? `<span class="lang-en">✓ Passed — ${hits} key concepts recognized.</span><span class="lang-es">✓ Aprobado — ${hits} conceptos clave reconocidos.</span>`
+                : `<span class="lang-en">Not enough yet — ${hits} of 3 key concepts matched (answer must also be ≥100 characters). Compare your answer with the model below.</span><span class="lang-es">Aún insuficiente — ${hits} de 3 conceptos clave (la respuesta también debe tener ≥100 caracteres). Compare su respuesta con el modelo.</span>`;
+            const model = `<div class="model-answer"><strong><span class="lang-en">Model answer — study this:</span><span class="lang-es">Respuesta modelo — estúdiela:</span></strong> <span class="lang-en">${saQuestions[i].explanationEn}</span><span class="lang-es">${saQuestions[i].explanationEs}</span></div>`;
+            fbDiv.className = `feedback ${passed ? "correct" : "incorrect"}`;
+            fbDiv.innerHTML = (answer.length >= 100)
+                ? (verdict + model)
+                : `<span class="lang-en">Please write your own answer first \u2014 at least a few sentences (30+ characters) \u2014 then submit to compare it with the model answer.</span><span class="lang-es">Escriba primero su propia respuesta \u2014 al menos unas cuantas oraciones (30+ caracteres) \u2014 luego env\u00EDe para compararla con la respuesta modelo.</span>`;
+        }
+        saPass = saCorrectCount >= PASS_SA;
+    }
+
+    const mcPass = mcCorrect >= PASS_MC;
+    const overallPass = studentTrack === "cert" ? mcPass : (mcPass && saPass);
+
+    if (overallPass) {
+        localStorage.setItem(getStorageKey(`unit${UNIT}_passed`), "true");
+        examPassed = true;
+        const msg = document.body.className.includes("lang-es") ? `¡Aprobado! Sus respuestas están marcadas abajo. Repáselas, luego use el enlace para continuar.` : `Passed! Your answers are marked below. Review them, then use the link to continue.`;
+        alert(msg);
+        if (IS_LAST_UNIT) window.location.href = CERT_URL;
+        else { var nl = document.getElementById("nextLink"); nl.href = NEXT_URL; nl.style.display = "block"; }
+    } else {
+        const lockMinutes = (studentTrack === "cert") ? 2 : 15;
+        const lockoutTime = Date.now() + lockMinutes * 60 * 1000;
+        localStorage.setItem(getStorageKey(`unit${UNIT}_lockout`), lockoutTime);
+        lockoutEnd = lockoutTime;
+        showLockoutTimer();
+        const failMsg = document.body.className.includes("lang-es") ? `No aprobado. Bloqueo de ${lockMinutes} minutos iniciado. (MC: ${mcCorrect}/20${studentTrack !== "cert" ? `, SA: ${saCorrectCount}/10` : ""})` : `Failed. ${lockMinutes}-minute lockout started. (MC: ${mcCorrect}/20${studentTrack !== "cert" ? `, SA: ${saCorrectCount}/10` : ""})`;
+        alert(failMsg);
+    }
+    return overallPass;
+}
+
+function showLockoutTimer() {
+    const timerDiv = document.getElementById("lockoutTimer");
+    if (!lockoutEnd || lockoutEnd <= Date.now()) { timerDiv.style.display = "none"; return; }
+    timerDiv.style.display = "block";
+    const update = () => {
+        const remaining = Math.max(0, Math.ceil((lockoutEnd - Date.now()) / 1000));
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        timerDiv.innerHTML = `<span class="lang-en">Lockout: ${minutes}:${seconds.toString().padStart(2,'0')} remaining</span><span class="lang-es">Bloqueo: ${minutes}:${seconds.toString().padStart(2,'0')} restantes</span>`;
+        if (remaining <= 0) { timerDiv.style.display = "none"; lockoutEnd = null; }
+        else setTimeout(update, 1000);
+    };
+    update();
+}
+
+function resetExam() {
+    const isEs = document.body.className.includes("lang-es");
+    const msg = isEs ? "¿Reiniciar todas las respuestas? Esto no se puede deshacer." : "Reset all answers? This cannot be undone.";
+    if (confirm(msg)) {
+        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        document.querySelectorAll('textarea').forEach(t => t.value = "");
+        document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+        mcQuestions.forEach((q, idx) => localStorage.removeItem(getStorageKey(`unit${UNIT}_mc${idx}`)));
+        saQuestions.forEach((q, idx) => localStorage.removeItem(getStorageKey(`unit${UNIT}_sa${idx}`)));
+    }
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => saveLanguage(btn.dataset.lang));
+});
+document.getElementById("submitBtn").addEventListener("click", gradeExam);
+document.getElementById("resetBtn").addEventListener("click", resetExam);
+
+loadState();
+renderQuestions();
+if (lockoutEnd) showLockoutTimer();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPentReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

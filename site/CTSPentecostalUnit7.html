@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Unit 7 — The Charismatic Renewal and the Third Wave / La Renovación Carismática y la Tercera Ola</title>
+<style>
+  :root{
+    --ink:#22303b; --ink-soft:#465562; --paper:#f5f3ec; --surface:#ffffff;
+    --brass:#b08324; --brass-soft:#e8dcc0; --rule:#ddd6c6;
+    --good:#2f6f4f; --good-bg:#e8f1eb; --bad:#9b3d3d; --bad-bg:#f3e6e4;
+    --gold-box:#fbf3dd; --gold-border:#d9b45b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    font-size:18px; line-height:1.72;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 80px;}
+  .topbar{
+    position:sticky; top:0; z-index:20; background:var(--ink); color:#f5f3ec;
+    display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center; justify-content:space-between;
+    padding:10px 20px; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  .topbar .brand{font-weight:600; font-size:15px; letter-spacing:.02em;}
+  .topbar .brand small{opacity:.7; font-weight:400;}
+  .switches{display:flex; gap:16px; align-items:center; flex-wrap:wrap;}
+  .switch{display:flex; align-items:center; gap:4px;}
+  .switch span.lbl{font-size:11px; text-transform:uppercase; letter-spacing:.08em; opacity:.65;}
+  .switch button{
+    font:inherit; font-size:13px; cursor:pointer; border:1px solid #45596a; background:transparent;
+    color:#dfe6ec; padding:5px 11px; border-radius:999px; line-height:1;
+  }
+  .switch button[aria-pressed="true"]{background:var(--brass); border-color:var(--brass); color:#241a05; font-weight:600;}
+  .switch button:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+  header.unit{padding:38px 0 6px; border-bottom:1px solid var(--rule);}
+  .eyebrow{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  h1{font-family:Georgia,serif; font-size:2rem; line-height:1.18; margin:.35rem 0 .1rem; font-weight:700;}
+  .course-tag{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft);}
+  .banner{margin:26px 0 8px; padding:20px 22px; background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--brass); border-radius:4px;}
+  .banner .verse{font-size:1.12rem; font-style:italic; line-height:1.6;}
+  .banner .ref{display:block; margin-top:8px; font-family:system-ui,sans-serif; font-style:normal; font-size:13px; letter-spacing:.05em; color:var(--brass); font-weight:600;}
+  h2{font-family:Georgia,serif; font-size:1.42rem; margin:2.2em 0 .5em; line-height:1.25; padding-bottom:.18em; border-bottom:2px solid var(--brass-soft);}
+  h3{font-family:Georgia,serif; font-size:1.14rem; margin:1.6em 0 .3em; color:var(--ink);}
+  p{margin:0 0 1.05em;}
+  .lead{font-size:1.06rem;}
+  blockquote.scripture{margin:1.2em 0; padding:2px 0 2px 20px; border-left:3px solid var(--gold-border); font-style:italic; color:#3a4650;}
+  blockquote.scripture .ref{display:block; font-style:normal; font-family:system-ui,sans-serif; font-size:12.5px; letter-spacing:.04em; color:var(--brass); font-weight:600; margin-top:5px;}
+  .objectives{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 22px 6px; margin:24px 0;}
+  .objectives h2{margin:0 0 .4em; border:0; font-size:1.15rem;}
+  .objectives ol{margin:0 0 12px; padding-left:1.25em;}
+  .objectives li{margin:0 0 .55em;}
+  /* comparative VIEWS block (reusable multi-view template) */
+  .views{margin:24px 0; display:grid; gap:14px;}
+  .view{background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--accent,#888); border-radius:6px; padding:16px 20px;}
+  .view.v1{--accent:#3f6d7a;} .view.v2{--accent:#9a7b2e;} .view.v3{--accent:#5f7052;} .view.v4{--accent:#7a5566;}
+  .vhead{font-family:Georgia,serif; font-weight:700; font-size:1.1rem; margin-bottom:.55em; line-height:1.3;}
+  .vtag{display:inline-block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:#fff; background:var(--accent,#888); padding:3px 8px; border-radius:999px; vertical-align:middle; margin-right:8px; font-weight:700;}
+  .view p{font-size:.97rem; margin:0 0 .5em;} .view p:last-child{margin-bottom:0;}
+  .view p b{color:var(--ink);}
+  /* two-questions split (signature) */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:0; margin:26px 0; border:1px solid var(--rule); border-radius:6px; overflow:hidden;}
+  .split .col{padding:20px 22px; background:var(--surface);}
+  .split .col:first-child{border-right:3px solid var(--brass);}
+  .split .col h4{margin:0 0 .5em; font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .split .col .verdict{font-family:Georgia,serif; font-size:1.12rem; font-weight:700; margin:0 0 .4em; line-height:1.3;}
+  .split .col p{font-size:.96rem; margin:0;}
+  .split .col.affirm .verdict{color:var(--good);}
+  .split .col.decline .verdict{color:var(--ink);}
+  @media(max-width:560px){ .split{grid-template-columns:1fr;} .split .col:first-child{border-right:0; border-bottom:3px solid var(--brass);} }
+  .callout{background:#fdfcf8; border:1px solid var(--rule); border-left:4px solid var(--ink-soft); border-radius:4px; padding:14px 18px; margin:22px 0; font-size:.98rem;}
+  ul.q-list{padding-left:1.2em;} ul.q-list li{margin:0 0 .6em;}
+  section.assess{margin-top:16px;}
+  .qcard{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 20px; margin:16px 0;}
+  .qnum{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .qstem{font-weight:600; margin:.3em 0 .8em;}
+  .opt{display:block; margin:0 0 .5em; padding:10px 12px; border:1px solid var(--rule); border-radius:5px; cursor:pointer; font-size:.98rem; transition:background .12s,border-color .12s;}
+  .opt:hover{background:#faf7ef;}
+  .opt input{margin-right:9px;}
+  .opt.correct{background:var(--good-bg); border-color:var(--good);}
+  .opt.wrong{background:var(--bad-bg); border-color:var(--bad);}
+  .btn{font-family:system-ui,sans-serif; font-size:14px; font-weight:600; cursor:pointer; border:0; background:var(--ink); color:#fff; padding:9px 18px; border-radius:5px;}
+  .btn:hover{background:#334452;} .btn:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--ink);}
+  .fb{margin-top:12px; font-size:.95rem; padding:10px 12px; border-radius:5px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:var(--good-bg); color:#1f5138; border:1px solid #bcd8c8;}
+  .fb.no{background:var(--bad-bg); color:#7a2f2f; border:1px solid #e0c4c0;}
+  .scorebar{font-family:system-ui,sans-serif; font-size:14px; background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:12px 16px; margin:14px 0; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;}
+  .scorebar strong{color:var(--brass); font-size:16px;}
+  textarea{width:100%; min-height:118px; font-family:inherit; font-size:1rem; padding:12px; border:1px solid var(--rule); border-radius:5px; resize:vertical; background:#fffef9;}
+  textarea:focus-visible{outline:2px solid var(--brass); outline-offset:1px;}
+  .hitline{font-family:system-ui,sans-serif; font-size:13px; margin:10px 0; display:none;}
+  .hitline.show{display:block;}
+  .hitline b{color:var(--brass);}
+  .model{display:none; margin-top:12px; background:var(--gold-box); border:1px solid var(--gold-border); border-radius:5px; padding:14px 16px; font-size:.97rem;}
+  .model.show{display:block;}
+  .model .mh{font-family:system-ui,sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8a6d1f; font-weight:700; margin-bottom:6px;}
+  .track-note{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft); background:#fdfcf8; border:1px dashed var(--rule); border-radius:5px; padding:10px 14px; margin:10px 0;}
+  #masters-block{display:none;}
+  html.track-masters #masters-block{display:block;}
+  html.track-cert #cert-only-note{display:block;}
+  #cert-only-note{display:none;}
+  footer{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-family:system-ui,sans-serif; font-size:12.5px; color:var(--ink-soft);}
+  .pane.es{display:none;} .seg.es{display:none;}
+  html.lang-es .pane.en{display:none;} html.lang-es .seg.en{display:none;}
+  html.lang-es .pane.es{display:block;} html.lang-es .seg.es{display:inline;}
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">Chapala Theological Seminary <small>&middot; Seminario Teológico de Chapala</small></div>
+  <div class="switches">
+    <div class="switch" role="group" aria-label="Language / Idioma">
+      <span class="lbl">Lang</span>
+      <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+      <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+    </div>
+    <div class="switch" role="group" aria-label="Track / Programa">
+      <span class="lbl seg en">Track</span><span class="lbl seg es">Programa</span>
+      <button id="btn-cert" aria-pressed="true" onclick="setTrack('cert')"><span class="seg en">Certificate</span><span class="seg es">Certificado</span></button>
+      <button id="btn-mast" aria-pressed="false" onclick="setTrack('masters')"><span class="seg en">Master's</span><span class="seg es">Maestría</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSPentecostalUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSPentecostalUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSPentecostalUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSPentecostalUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSPentecostalUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSPentecostalUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSPentecostalUnit7.html" title="Unit 7 · Unidad 7" class="active">7</a><a href="CTSPentecostalUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSPentecostalUnit9.html" title="Unit 9 · Unidad 9">9</a><a href="CTSPentecostalUnit10.html" title="Unit 10 · Unidad 10">10</a><a href="CTSPentecostalUnit11.html" title="Unit 11 · Unidad 11">11</a><a href="CTSPentecostalUnit12.html" title="Unit 12 · Unidad 12">12</a></nav><script>(function(){try{var p=JSON.parse(localStorage.getItem('cts_pentecostal_progress')||'{}');document.querySelectorAll('.cts-unitnav a').forEach(function(a,i){if(p['unit'+(i+1)])a.classList.add('completed');});}catch(e){}})();</script>
+
+  <header class="unit">
+    <div class="pane en">
+      <div class="eyebrow">Pentecostalism &amp; the Charismatic Movement · Unit 7</div>
+      <h1>The Charismatic Renewal and the Third Wave</h1>
+      <div class="course-tag">A Biblical Study · New King James Version</div>
+    </div>
+    <div class="pane es">
+      <div class="eyebrow">El pentecostalismo y el movimiento carismático · Unidad 7</div>
+      <h1>La Renovación Carismática y la Tercera Ola</h1>
+      <div class="course-tag">Un estudio bíblico · Reina-Valera Gómez</div>
+    </div>
+  </header>
+
+  <div class="banner">
+    <div class="pane en"><span class="verse">"Oh, that all the LORD's people were prophets, that the LORD would put His Spirit upon them!"<span class="ref">Numbers 11:29 (NKJV)</span></span></div>
+    <div class="pane es"><span class="verse">"¡Ojalá todo el pueblo de Jehová fuese profeta, y que Jehová pusiera su Espíritu sobre ellos!"<span class="ref">Números 11:29 (RVG)</span></span></div>
+  </div>
+
+  <div class="objectives">
+    <div class="pane en">
+      <h2>Learning Objectives</h2>
+      <ol>
+        <li>Explain how the Charismatic Renewal differed from classical Pentecostalism by appearing within the historic denominations.</li>
+        <li>Identify the beginnings of the mainline renewal (Dennis Bennett, 1960) and the Catholic Charismatic Renewal (Duquesne, 1967).</li>
+        <li>Describe the Third Wave and its emphases, and how the three "waves" relate.</li>
+        <li>Recognize the shift of the movement's center of gravity to the Global South.</li>
+        <li>Treat the renewal — including its Catholic expression — fairly and non-denominationally, honoring the fruit while reserving doctrinal assessment for other units.</li>
+      </ol>
+    </div>
+    <div class="pane es">
+      <h2>Objetivos de aprendizaje</h2>
+      <ol>
+        <li>Explicar cómo la Renovación Carismática se diferenció del pentecostalismo clásico al aparecer dentro de las denominaciones históricas.</li>
+        <li>Identificar los comienzos de la renovación en las iglesias históricas (Dennis Bennett, 1960) y la Renovación Carismática Católica (Duquesne, 1967).</li>
+        <li>Describir la Tercera Ola y sus énfasis, y cómo se relacionan las tres "olas".</li>
+        <li>Reconocer el desplazamiento del centro de gravedad del movimiento hacia el Sur Global.</li>
+        <li>Tratar la renovación — incluida su expresión católica — con justicia y de manera no denominacional, honrando el fruto mientras se reserva la evaluación doctrinal para otras unidades.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!--WC:EN:START-->
+  <div class="pane en">
+
+    <h2>From a Movement to a Renewal</h2>
+    <p class="lead">The previous unit followed the birth of classical Pentecostalism, which in a single generation grew into its own new denominations across the world. But the story did not end there. In the second half of the twentieth century, the Pentecostal experience broke out of those denominations and began to appear in unexpected places — among Episcopalians and Lutherans, Presbyterians and Methodists, Baptists and Roman Catholics — and later among evangelicals who kept their own names and habits. Historians commonly describe this spread in terms of three successive "waves." This unit follows those waves into the churches of our own age.</p>
+    <p>As with the last unit, we tell this as history. We describe fairly what happened and how it was understood, giving thanks for what was good and being honest about what was troubled, while reserving the testing of doctrine for the units that take it up directly. The wide spread of an experience is one thing; whether any particular teaching is true is another, and we keep those questions apart throughout, as this course has done from the beginning.</p>
+
+    <h2>The Second Wave: Renewal in the Historic Churches</h2>
+    <p>Around the year 1960 something new began to happen. The gifts that had marked the Pentecostal denominations — tongues, prophecy, prayer for healing — started to appear among Christians in the old, established churches, believers who had no thought of leaving them. A common marker for the start of this second wave is that year, when Dennis Bennett, the rector of an Episcopal parish in Van Nuys, California, told his congregation that he had received the baptism in the Holy Spirit and had spoken in tongues. The announcement caused an immediate stir and drew national attention.</p>
+    <blockquote class="scripture">"For by one Spirit we were all baptized into one body—whether Jews or Greeks, whether slaves or free—and have all been made to drink into one Spirit."<span class="ref">1 Corinthians 12:13 (NKJV)</span></blockquote>
+    <p>The experience did not stay in one place. Through the 1960s, members of Lutheran, Presbyterian, Methodist, Anglican, Baptist, and other congregations reported that they too had received such a baptism and its gifts. Unlike the first wave, which had formed new Pentecostal bodies, these believers for the most part stayed within their own churches, hoping to renew them from within rather than to leave. This movement came to be called the Charismatic Renewal, or sometimes neo-Pentecostalism — the same experience, now flowing through the historic denominations.</p>
+    <p>The renewal spread not only through pulpits but through lay networks. The Full Gospel Business Men's Fellowship, founded among Pentecostal laymen, became an unexpected bridge, carrying the experience across denominational lines in hotel-ballroom meetings where Episcopalians and Baptists and Catholics might sit side by side. Its influence reached even into worship itself: much of the warmer, more intimate style of singing that later filled churches of many kinds can be traced in part to these renewal years, when a more personal manner of praise spread widely.</p>
+    <p>Alongside the renewal in the established churches ran the Jesus People movement of the late 1960s and early 1970s, a wave of conversions among the young and the counter-cultural, many of whom embraced the gifts and brought a fresh, informal style of worship into the churches they joined. The lines between these currents were never tidy; together they reshaped the sound and the feel of much Christian worship for a generation.</p>
+
+    <h2>The Catholic Charismatic Renewal</h2>
+    <p>In 1967 the renewal reached the Roman Catholic Church. It is usually traced to a retreat that February attended by students and faculty from Duquesne University in Pittsburgh — remembered as the "Duquesne Weekend" — where a number of those present described receiving a baptism in the Spirit. From there the experience spread with remarkable speed, first to Catholics at the University of Notre Dame and Michigan State, and then across the Catholic world, until it touched millions of Catholic believers on every continent.</p>
+    <p>This course is non-denominational, and it does not take up here the real and important doctrinal differences that distinguish Catholic and Protestant Christians; those questions belong to other studies, and we do not pretend they are small. What can be said, and said in charity, is this: in these years a great many Catholic believers were drawn to open their Bibles, to pray with new warmth, and to seek the Holy Spirit's help in following the Lord Jesus. For a people whose faith is dear to them and who make up so much of the church in Latin America and beyond, that renewed hunger for Scripture, prayer, and Christ is worth acknowledging with genuine gladness, whatever else remains to be discussed between the traditions.</p>
+    <p>The Catholic renewal grew into a lasting current within that church, gathering into prayer groups and covenant communities and eventually receiving cautious recognition from its leadership. By the close of the century it counted many millions of participants around the world, especially in Latin America, where charismatic prayer and worship became a familiar part of parish life for a great many faithful. However one judges the wider questions between the traditions, the sheer scale of this renewal among Catholic believers is part of the honest history of our age.</p>
+
+    <h2>The Third Wave: Signs and Wonders Among Evangelicals</h2>
+    <p>A further stage appeared in the 1980s, which C. Peter Wagner, a professor at Fuller Seminary, named the "Third Wave." By it he meant a growing number of evangelical Christians who came to practice the spiritual gifts — praying for the sick, seeking words of prophecy, pursuing what some called "power evangelism" — but who often did not take on the classical Pentecostal vocabulary. In particular, many of them did not speak of a separate baptism in the Spirit evidenced by tongues, but simply of every believer being open to the Spirit's working in ordinary Christian ministry.</p>
+    <p>The best-known expression of this third wave was the Vineyard movement, led by John Wimber, with its emphasis on healing prayer and the expectation that God still acts in power among ordinary people. Where the first wave had stressed a distinct Spirit-baptism marked by tongues, and the second had carried that experience into the historic churches, the third tended to set the vocabulary of "initial evidence" aside and to invite all Christians simply to seek and use the gifts.</p>
+    <p>The debate grew pointed enough to reach the seminaries. For a time a course on signs and wonders, taught at Fuller with Wimber's involvement, drew crowds of students and then enough controversy that it was set aside — a small sign of how sharply the wider evangelical world was divided over whether such practices belonged in the ordinary life of the church. That very debate is part of why this course keeps the historical question of how the movement spread apart from the biblical question of what ought to be believed and practiced.</p>
+
+    <h2>Three Waves, One Question Kept Apart</h2>
+    <p>It may help to hold the three waves together in a single view. The first was classical Pentecostalism, which formed its own denominations and emphasized tongues as the evidence of Spirit-baptism. The second was the Charismatic Renewal, which carried the gifts into the historic Protestant and Catholic churches, whose members largely stayed to renew them from within. The third was the movement Wagner named, in which evangelicals practiced the gifts without adopting the classical Pentecostal framework. These categories are genuinely useful, but they are not rigid; the streams overlap, and many Christians would be hard to sort neatly into one.</p>
+    <blockquote class="scripture">"There is one body and one Spirit, just as you were called in one hope of your calling; one Lord, one faith, one baptism."<span class="ref">Ephesians 4:4–5 (NKJV)</span></blockquote>
+    <p>One thing must be said plainly about all three. That an experience spread so widely, and drew in so many sincere believers across so much of the church, does not by itself prove that any particular doctrine attached to it is true. The growth of a movement is one question; the soundness of its teaching is another. This course honors the breadth of what happened and weighs the doctrine carefully in its own place, testing every claim by Scripture rather than by its popularity.</p>
+
+    <h2>The Center of Gravity Shifts</h2>
+    <p>By the end of the twentieth century, the movement in all its streams had become, above all, a phenomenon of the Global South. Its greatest growth was no longer in North America or Europe but in Africa, Latin America, and Asia, frequently in independent and indigenous churches, and frequently among the poor and the ordinary. The hundreds of millions counted in this broad family today — by careful estimate approaching six hundred and forty-four million — are the sum of all these waves and streams together: classical Pentecostals, charismatics within the historic churches, third-wave evangelicals, and vast independent movements that fit none of the older labels.</p>
+    <p>Much of this growth lay outside the older denominational maps altogether. Great independent and indigenous churches arose — African-initiated churches across that continent, huge Pentecostal congregations in Brazil and Chile, and some of the largest single congregations in the world in South Korea and elsewhere in Asia. Often led and filled by ordinary and poor believers, these churches carried the movement's emphases in their own cultural forms, and today they make up a large part of its hundreds of millions.</p>
+
+    <h2>Reading It Fairly</h2>
+    <p>An honest account will not hide the troubles that came with the renewal any more than with the first wave. Some denominations resisted it, and a few divided over it. Certain charismatic streams drifted toward the prosperity teaching and the other excesses examined in an earlier unit. The Third Wave's stress on signs and wonders provoked serious and searching debate, not least among evangelicals who feared that experience was being set above the Word. And like every movement of people, the renewal carried mixed motives and human failings alongside its zeal.</p>
+    <p>Yet much that was good came through these movements as well: a renewed love for Scripture and for prayer, a fresh boldness in evangelism, and a recovered sense that the living God is near and at work. We set the good and the ill side by side and judge, as always, by Scripture and by the faithful rather than by the failures or the worst examples. Where these movements drew people to Christ and His Word, we give thanks; where they let zeal outrun sound teaching, that teaching must be tested and, where it fails, declined.</p>
+    <p>One further note belongs to a fair telling. For all the division it sometimes caused, the renewal also brought together Christians who had long stood apart — Protestant and Catholic, of many labels — to pray and praise side by side, if only for a season and around a shared experience. Such gatherings did not erase the real differences of doctrine that remained; but they were, for many, a first taste of a wider Christian fellowship, and a reminder that the Spirit's people are not confined to any single fold.</p>
+
+    <h2>What the Story Teaches</h2>
+    <p>The spread of the renewal across nearly every tradition — Protestant, Catholic, evangelical, and independent — carries one clear lesson for us all. A longing for the living God, and a hunger for His Spirit, is found in many folds of His flock, in places we might not expect and among people quite unlike ourselves. That is cause for humility, and for charity toward believers whose worship differs from our own.</p>
+    <blockquote class="scripture">"He will glorify Me, for He will take of what is Mine and declare it to you."<span class="ref">John 16:14 (NKJV)</span></blockquote>
+    <p>And across all these movements the one test remains constant, the test the Lord Himself gave: whether the work exalts Jesus Christ and makes His people more like Him. Where the Spirit draws men and women to Scripture, to prayer, and to the Savior, we give thanks without reserve. Where zeal runs ahead of the Word, we call it gently back to the Word. The doctrinal questions we weigh in their own units; here it is enough to mark, with both gratitude and discernment, how widely in our own age the desire for God's Spirit has spread through His church.</p>
+
+    <h3>Looking Ahead</h3>
+    <p>In the next unit we turn from history to a subject that has always stood near the heart of this movement: healing, miracles, and spiritual warfare. We will ask what Scripture affirms about God's power to heal and to deliver, and how believers may seek it without falling into the distortions that so often crowd around it.</p>
+
+  </div>
+  <!--WC:EN:END-->
+
+  <!--WC:ES:START-->
+  <div class="pane es">
+
+    <h2>De un movimiento a una renovación</h2>
+    <p class="lead">La unidad anterior siguió el nacimiento del pentecostalismo clásico, que en una sola generación creció en sus propias nuevas denominaciones por todo el mundo. Pero la historia no terminó allí. En la segunda mitad del siglo veinte, la experiencia pentecostal se desbordó de aquellas denominaciones y comenzó a aparecer en lugares inesperados — entre episcopales y luteranos, presbiterianos y metodistas, bautistas y católicos romanos — y más tarde entre evangélicos que conservaron sus propios nombres y costumbres. Los historiadores suelen describir esta expansión en términos de tres "olas" sucesivas. Esta unidad sigue esas olas hasta las iglesias de nuestra propia época.</p>
+    <p>Como en la unidad anterior, contamos esto como historia. Describimos con justicia lo que sucedió y cómo se entendió, dando gracias por lo bueno y siendo honestos sobre lo que fue problemático, mientras reservamos el probar la doctrina para las unidades que la tratan directamente. La amplia extensión de una experiencia es una cosa; si alguna enseñanza particular es verdadera es otra, y mantenemos esas preguntas separadas a lo largo de todo, como este curso lo ha hecho desde el comienzo.</p>
+
+    <h2>La segunda ola: renovación en las iglesias históricas</h2>
+    <p>Alrededor del año 1960 algo nuevo empezó a suceder. Los dones que habían marcado a las denominaciones pentecostales — lenguas, profecía, oración por sanidad — comenzaron a aparecer entre cristianos de las iglesias antiguas y establecidas, creyentes que no pensaban en dejarlas. Un marcador común para el comienzo de esta segunda ola es aquel año, cuando Dennis Bennett, el rector de una parroquia episcopal en Van Nuys, California, dijo a su congregación que había recibido el bautismo en el Espíritu Santo y había hablado en lenguas. El anuncio causó revuelo inmediato y atrajo atención nacional.</p>
+    <blockquote class="scripture">"Porque por un solo Espíritu somos todos bautizados en un cuerpo, sean judíos o gentiles, sean siervos o libres; y todos hemos bebido de un mismo Espíritu."<span class="ref">1 Corintios 12:13 (RVG)</span></blockquote>
+    <p>La experiencia no se quedó en un solo lugar. A lo largo de los años sesenta, miembros de congregaciones luteranas, presbiterianas, metodistas, anglicanas, bautistas y otras reportaron que ellos también habían recibido tal bautismo y sus dones. A diferencia de la primera ola, que había formado nuevos cuerpos pentecostales, estos creyentes en su mayoría permanecieron dentro de sus propias iglesias, esperando renovarlas desde dentro en vez de dejarlas. Este movimiento llegó a llamarse la Renovación Carismática, o a veces neopentecostalismo — la misma experiencia, ahora fluyendo por las denominaciones históricas.</p>
+    <p>La renovación se extendió no solo por los púlpitos, sino por redes de laicos. La Fraternidad de Hombres de Negocios del Evangelio Completo, fundada entre laicos pentecostales, llegó a ser un puente inesperado, llevando la experiencia a través de las líneas denominacionales en reuniones de salón de hotel donde episcopales, bautistas y católicos podían sentarse lado a lado. Su influencia alcanzó incluso la adoración misma: gran parte del estilo de canto más cálido e íntimo que después llenó iglesias de muchas clases puede rastrearse en parte a estos años de renovación, cuando una manera más personal de alabanza se extendió ampliamente.</p>
+    <p>Junto a la renovación en las iglesias establecidas corría el movimiento de la Gente de Jesús de finales de los años sesenta y principios de los setenta, una ola de conversiones entre los jóvenes y los de la contracultura, muchos de los cuales abrazaron los dones y llevaron un estilo de adoración fresco e informal a las iglesias a las que se unieron. Las líneas entre estas corrientes nunca fueron nítidas; juntas rehicieron el sonido y el sentir de gran parte de la adoración cristiana por una generación.</p>
+
+    <h2>La Renovación Carismática Católica</h2>
+    <p>En 1967 la renovación llegó a la Iglesia Católica Romana. Se rastrea usualmente a un retiro aquel febrero al que asistieron estudiantes y profesores de la Universidad de Duquesne en Pittsburgh — recordado como el "Fin de Semana de Duquesne" — donde varios de los presentes describieron recibir un bautismo en el Espíritu. De allí la experiencia se extendió con notable rapidez, primero a católicos de la Universidad de Notre Dame y de Michigan State, y luego por todo el mundo católico, hasta tocar a millones de creyentes católicos en todos los continentes.</p>
+    <p>Este curso es no denominacional, y no trata aquí las diferencias doctrinales reales e importantes que distinguen a los cristianos católicos y protestantes; esas cuestiones pertenecen a otros estudios, y no pretendemos que sean pequeñas. Lo que puede decirse, y decirse en caridad, es esto: en estos años muchísimos creyentes católicos fueron atraídos a abrir sus Biblias, a orar con nueva calidez, y a buscar la ayuda del Espíritu Santo para seguir al Señor Jesús. Para un pueblo cuya fe les es querida y que compone tanto de la iglesia en América Latina y más allá, esa hambre renovada de la Escritura, la oración y Cristo es digna de reconocerse con verdadero gozo, cualquiera que sea lo demás que quede por discutirse entre las tradiciones.</p>
+    <p>La renovación católica creció hasta ser una corriente duradera dentro de aquella iglesia, reuniéndose en grupos de oración y comunidades de pacto y recibiendo con el tiempo un reconocimiento cauteloso de su liderazgo. Para el fin del siglo contaba con muchos millones de participantes por todo el mundo, especialmente en América Latina, donde la oración y la adoración carismáticas llegaron a ser parte familiar de la vida parroquial para muchísimos fieles. Cualquiera que sea el juicio sobre las cuestiones más amplias entre las tradiciones, la sola escala de esta renovación entre los creyentes católicos es parte de la historia honesta de nuestra época.</p>
+
+    <h2>La Tercera Ola: señales y prodigios entre evangélicos</h2>
+    <p>Una etapa más apareció en los años ochenta, que C. Peter Wagner, un profesor del Seminario Fuller, llamó la "Tercera Ola." Con ella se refería a un número creciente de cristianos evangélicos que llegaron a practicar los dones espirituales — orar por los enfermos, buscar palabras de profecía, procurar lo que algunos llamaban "evangelismo de poder" — pero que a menudo no adoptaban el vocabulario pentecostal clásico. En particular, muchos de ellos no hablaban de un bautismo separado en el Espíritu evidenciado por lenguas, sino simplemente de que todo creyente estuviera abierto a la obra del Espíritu en el ministerio cristiano ordinario.</p>
+    <p>La expresión más conocida de esta tercera ola fue el movimiento de la Viña, dirigido por John Wimber, con su énfasis en la oración por sanidad y la expectativa de que Dios todavía actúa con poder entre las personas comunes. Donde la primera ola había recalcado un bautismo distinto del Espíritu marcado por lenguas, y la segunda había llevado esa experiencia a las iglesias históricas, la tercera tendió a dejar de lado el vocabulario de la "evidencia inicial" e invitar a todos los cristianos simplemente a buscar y usar los dones.</p>
+    <p>El debate se volvió lo bastante agudo como para alcanzar los seminarios. Por un tiempo un curso sobre señales y prodigios, enseñado en Fuller con la participación de Wimber, atrajo multitudes de estudiantes y luego suficiente controversia como para que fuera dejado de lado — una pequeña señal de cuán agudamente el mundo evangélico más amplio estaba dividido sobre si tales prácticas pertenecían a la vida ordinaria de la iglesia. Ese mismo debate es parte de por qué este curso mantiene la pregunta histórica de cómo se extendió el movimiento separada de la pregunta bíblica de lo que debe creerse y practicarse.</p>
+
+    <h2>Tres olas, una pregunta mantenida aparte</h2>
+    <p>Puede ayudar sostener las tres olas juntas en una sola vista. La primera fue el pentecostalismo clásico, que formó sus propias denominaciones y recalcó las lenguas como la evidencia del bautismo del Espíritu. La segunda fue la Renovación Carismática, que llevó los dones a las iglesias históricas protestantes y católicas, cuyos miembros en gran parte permanecieron para renovarlas desde dentro. La tercera fue el movimiento que Wagner nombró, en el que los evangélicos practicaban los dones sin adoptar el marco pentecostal clásico. Estas categorías son genuinamente útiles, pero no son rígidas; las corrientes se traslapan, y a muchos cristianos sería difícil clasificarlos limpiamente en una sola.</p>
+    <blockquote class="scripture">"Un cuerpo, y un Espíritu, como sois también llamados a una misma esperanza de vuestro llamamiento; un Señor, una fe, un bautismo."<span class="ref">Efesios 4:4–5 (RVG)</span></blockquote>
+    <p>Una cosa debe decirse con claridad sobre las tres. Que una experiencia se extendiera tan ampliamente, y atrajera a tantos creyentes sinceros por tanto de la iglesia, no prueba por sí mismo que alguna doctrina particular unida a ella sea verdadera. El crecimiento de un movimiento es una pregunta; la solidez de su enseñanza es otra. Este curso honra la amplitud de lo que sucedió y sopesa la doctrina con cuidado en su propio lugar, probando toda afirmación por la Escritura en vez de por su popularidad.</p>
+
+    <h2>El centro de gravedad se desplaza</h2>
+    <p>Para el fin del siglo veinte, el movimiento en todas sus corrientes se había vuelto, sobre todo, un fenómeno del Sur Global. Su mayor crecimiento ya no estaba en Norteamérica ni en Europa, sino en África, América Latina y Asia, con frecuencia en iglesias independientes e indígenas, y con frecuencia entre los pobres y los comunes. Los cientos de millones contados en esta amplia familia hoy — por estimación cuidadosa cerca de seiscientos cuarenta y cuatro millones — son la suma de todas estas olas y corrientes juntas: pentecostales clásicos, carismáticos dentro de las iglesias históricas, evangélicos de la tercera ola, y vastos movimientos independientes que no encajan en ninguna de las etiquetas más antiguas.</p>
+    <p>Gran parte de este crecimiento quedó del todo fuera de los mapas denominacionales más antiguos. Surgieron grandes iglesias independientes e indígenas — iglesias iniciadas por africanos por todo aquel continente, enormes congregaciones pentecostales en Brasil y Chile, y algunas de las congregaciones individuales más grandes del mundo en Corea del Sur y en otras partes de Asia. A menudo dirigidas y llenas por creyentes comunes y pobres, estas iglesias llevaron los énfasis del movimiento en sus propias formas culturales, y hoy componen una gran parte de sus cientos de millones.</p>
+
+    <h2>Leyéndolo con justicia</h2>
+    <p>Un relato honesto no esconderá los problemas que vinieron con la renovación más de lo que lo hizo con la primera ola. Algunas denominaciones la resistieron, y unas pocas se dividieron por ella. Ciertas corrientes carismáticas derivaron hacia la enseñanza de la prosperidad y los otros excesos examinados en una unidad anterior. El énfasis de la Tercera Ola en las señales y los prodigios provocó un debate serio y escudriñador, no menos entre los evangélicos que temían que la experiencia se estuviera poniendo por encima de la Palabra. Y como todo movimiento de personas, la renovación llevó motivos mezclados y fallas humanas junto a su celo.</p>
+    <p>Sin embargo, mucho de lo bueno vino también por estos movimientos: un amor renovado por la Escritura y la oración, una osadía fresca en el evangelismo, y un sentido recobrado de que el Dios vivo está cerca y obrando. Ponemos lo bueno y lo malo lado a lado y juzgamos, como siempre, por la Escritura y por los fieles en vez de por los fracasos o los peores ejemplos. Donde estos movimientos atrajeron a las personas a Cristo y a su Palabra, damos gracias; donde dejaron que el celo corriera delante de la sana enseñanza, esa enseñanza debe probarse y, donde falla, declinarse.</p>
+    <p>Una nota más pertenece a un relato justo. Con toda la división que a veces causó, la renovación también reunió a cristianos que por mucho tiempo habían estado apartados — protestantes y católicos, de muchas etiquetas — para orar y alabar lado a lado, aunque solo por una temporada y en torno a una experiencia compartida. Tales reuniones no borraron las diferencias reales de doctrina que permanecían; pero fueron, para muchos, un primer sabor de una comunión cristiana más amplia, y un recordatorio de que el pueblo del Espíritu no está confinado a un solo redil.</p>
+
+    <h2>Lo que enseña la historia</h2>
+    <p>La extensión de la renovación por casi toda tradición — protestante, católica, evangélica e independiente — lleva una clara lección para todos nosotros. Un anhelo del Dios vivo, y un hambre de su Espíritu, se halla en muchos rediles de su rebaño, en lugares que quizá no esperaríamos y entre personas muy distintas de nosotros. Eso es causa de humildad, y de caridad hacia creyentes cuya adoración difiere de la nuestra.</p>
+    <blockquote class="scripture">"Él me glorificará; porque tomará de lo mío, y os lo hará saber."<span class="ref">Juan 16:14 (RVG)</span></blockquote>
+    <p>Y a través de todos estos movimientos la única prueba permanece constante, la prueba que el Señor mismo dio: si la obra exalta a Jesucristo y hace a su pueblo más semejante a Él. Donde el Espíritu atrae a hombres y mujeres a la Escritura, a la oración, y al Salvador, damos gracias sin reserva. Donde el celo corre delante de la Palabra, lo llamamos suavemente de vuelta a la Palabra. Las preguntas doctrinales las sopesamos en sus propias unidades; aquí basta con marcar, con gratitud y con discernimiento, cuán ampliamente en nuestra propia época el deseo del Espíritu de Dios se ha extendido por su iglesia.</p>
+
+    <h3>Mirando adelante</h3>
+    <p>En la próxima unidad pasamos de la historia a un tema que siempre ha estado cerca del corazón de este movimiento: la sanidad, los milagros y la guerra espiritual. Preguntaremos qué afirma la Escritura sobre el poder de Dios para sanar y para librar, y cómo los creyentes pueden buscarlo sin caer en las distorsiones que tan a menudo se agolpan a su alrededor.</p>
+
+  </div>
+  <!--WC:ES:END-->
+
+  <!-- DISCUSSION -->
+  <div class="pane en">
+    <h2>Discussion Questions</h2>
+    <ul class="q-list">
+      <li>Why did the charismatic renewal spread within the historic churches rather than forming new denominations, and what challenges might that have created?</li>
+      <li>How should a non-denominational seminary speak about the Catholic Charismatic Renewal for students in a largely Catholic region?</li>
+      <li>What distinguished the Third Wave from the first two, especially regarding tongues and the language of Spirit-baptism?</li>
+      <li>Why does the wide spread of an experience across the church not, by itself, settle whether its teaching is true?</li>
+    </ul>
+    <h3>Ministry Application</h3>
+    <p>Write two or three sentences you might use to help your congregation think charitably about believers in other traditions who have sought the Spirit's gifts, while still testing all things by Scripture.</p>
+  </div>
+  <div class="pane es">
+    <h2>Preguntas para discusión</h2>
+    <ul class="q-list">
+      <li>¿Por qué se extendió la renovación carismática dentro de las iglesias históricas en vez de formar nuevas denominaciones, y qué desafíos pudo haber creado eso?</li>
+      <li>¿Cómo debería un seminario no denominacional hablar de la Renovación Carismática Católica para estudiantes en una región mayormente católica?</li>
+      <li>¿Qué distinguió a la Tercera Ola de las dos primeras, especialmente respecto a las lenguas y el lenguaje del bautismo del Espíritu?</li>
+      <li>¿Por qué la amplia extensión de una experiencia por la iglesia no resuelve, por sí misma, si su enseñanza es verdadera?</li>
+    </ul>
+    <h3>Aplicación ministerial</h3>
+    <p>Escriba dos o tres frases que podría usar para ayudar a su congregación a pensar con caridad sobre creyentes de otras tradiciones que han buscado los dones del Espíritu, mientras aún prueba todas las cosas por la Escritura.</p>
+  </div>
+
+  <!-- ASSESSMENT -->
+  <section class="assess">
+    <div class="pane en"><h2>Self-Check &mdash; Multiple Choice</h2><p style="font-size:.97rem;color:var(--ink-soft);">Choose the best answer, then press <em>Check</em>. Feedback and a short explanation appear for each question.</p></div>
+    <div class="pane es"><h2>Autoevaluación &mdash; Opción múltiple</h2><p style="font-size:.97rem;color:var(--ink-soft);">Elija la mejor respuesta y presione <em>Comprobar</em>. Para cada pregunta aparecen la respuesta y una breve explicación.</p></div>
+
+    <div id="mcq"></div>
+
+    <div class="scorebar">
+      <span><span class="seg en">Score:</span><span class="seg es">Puntuación:</span> <strong id="score">0 / 7</strong></span>
+      <button class="btn ghost" onclick="resetMcq()"><span class="seg en">Reset answers</span><span class="seg es">Reiniciar respuestas</span></button>
+    </div>
+  </section>
+
+  <div id="cert-only-note" class="track-note">
+    <span class="seg en">You are on the <strong>Certificate</strong> track. The written short-answer section is required only for the Master's track — switch tracks at the top if you are completing written work.</span>
+    <span class="seg es">Usted está en el programa de <strong>Certificado</strong>. La sección escrita de respuesta corta se requiere sólo para el programa de Maestría; cambie de programa arriba si va a realizar el trabajo escrito.</span>
+  </div>
+
+  <div id="masters-block">
+    <section class="assess">
+      <div class="pane en"><h2>Written Work &mdash; Master's Track</h2><p style="font-size:.97rem;color:var(--ink-soft);">Answer in a few sentences of your own. Your response is checked for key concepts (any three of eight is a pass), then the model answer is revealed for comparison.</p></div>
+      <div class="pane es"><h2>Trabajo escrito &mdash; Programa de Maestría</h2><p style="font-size:.97rem;color:var(--ink-soft);">Responda con sus propias palabras en unas frases. Su respuesta se evalúa por conceptos clave (tres de ocho es aprobado); luego se revela la respuesta modelo para comparar.</p></div>
+      <div id="sa"></div>
+    </section>
+  </div>
+
+  <nav style="margin:1.7rem 0 .3rem;padding-top:1rem;border-top:1px solid #d9d2c2;">
+  <div class="pane en"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><a href="CTSPentecostalUnit6.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">&lsaquo; Previous</a><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Course Home</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Reading Room</a><a href="CTSPentecostalUnit8.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Next &rsaquo;</a></div></div>
+  <div class="pane es"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><a href="CTSPentecostalUnit6.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">&lsaquo; Anterior</a><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Inicio del curso</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Sala de Lecturas</a><a href="CTSPentecostalUnit8.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Siguiente &rsaquo;</a></div></div>
+</nav>
+
+<footer>
+    <div class="pane en">Chapala Theological Seminary &middot; Unit 7 of the course <em>Pentecostalism &amp; the Charismatic Movement</em>. Scripture in English from the New King James Version; Spanish from the Reina-Valera Gómez. This unit is designed for offline use — no internet connection is required.</div>
+    <div class="pane es">Seminario Teológico de Chapala &middot; Unidad 7 del curso <em>El pentecostalismo y el movimiento carismático</em>. Escrituras en inglés de la New King James Version; en español de la Reina-Valera Gómez. Esta unidad está diseñada para uso sin conexión: no se requiere internet.</div>
+  </footer>
+
+</div>
+
+<script>
+/* ---------- hardened storage (Android content:// fallback) ---------- */
+var _ctsMem = {};
+function lsGet(k){ try{ var v = window.localStorage.getItem(k); return v===null ? (k in _ctsMem ? _ctsMem[k] : null) : v; }catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try{ window.localStorage.setItem(k,v); }catch(e){ _ctsMem[k]=String(v); } _ctsMem[k]=String(v); }
+function lsDel(k){ try{ window.localStorage.removeItem(k); }catch(e){} delete _ctsMem[k]; }
+var SKEY = 'cts_u07_renewal';
+var saPassed = {};
+
+/* ---------- language + track ---------- */
+function setLang(l){
+  document.documentElement.classList.toggle('lang-es', l==='es');
+  document.documentElement.classList.toggle('lang-en', l==='en');
+  document.documentElement.setAttribute('lang', l);
+  document.getElementById('btn-en').setAttribute('aria-pressed', l==='en');
+  document.getElementById('btn-es').setAttribute('aria-pressed', l==='es');
+  lsSet(SKEY+'_lang', l);
+  renderMcqText(); renderSaText(); refreshScore();
+}
+function setTrack(t){
+  document.documentElement.classList.toggle('track-masters', t==='masters');
+  document.documentElement.classList.toggle('track-cert', t==='cert');
+  document.getElementById('btn-cert').setAttribute('aria-pressed', t==='cert');
+  document.getElementById('btn-mast').setAttribute('aria-pressed', t==='masters');
+  lsSet(SKEY+'_track', t);
+}
+
+/* ---------- MCQ data (correct positions varied: A,B,D,A,C,B,D) ---------- */
+var MCQ = [
+ { correct:0,
+   q:{en:"The Charismatic Renewal differed from classical Pentecostalism chiefly in that —",
+      es:"La Renovación Carismática se diferenció del pentecostalismo clásico principalmente en que —"},
+   opts:[
+     {en:"the gifts appeared within the historic denominations, whose members largely stayed to renew them from within", es:"los dones aparecieron dentro de las denominaciones históricas, cuyos miembros en gran parte permanecieron para renovarlas desde dentro"},
+     {en:"it rejected the Holy Spirit", es:"rechazó al Espíritu Santo"},
+     {en:"it began in the first century", es:"comenzó en el primer siglo"},
+     {en:"it required no faith in Christ", es:"no requería fe en Cristo"} ],
+   exp:{en:"The second wave carried the Pentecostal experience into Episcopal, Lutheran, Presbyterian, Catholic, and other churches rather than forming new denominations.",
+        es:"La segunda ola llevó la experiencia pentecostal a iglesias episcopales, luteranas, presbiterianas, católicas y otras, en vez de formar nuevas denominaciones."} },
+ { correct:3,
+   q:{en:"A common marker for the start of the mainline charismatic renewal (around 1960) was —",
+      es:"Un marcador común para el comienzo de la renovación carismática en las iglesias históricas (alrededor de 1960) fue —"},
+   opts:[
+     {en:"the Azusa Street revival", es:"el avivamiento de la Calle Azusa"},
+     {en:"the founding of the Assemblies of God", es:"la fundación de las Asambleas de Dios"},
+     {en:"the Duquesne Weekend", es:"el Fin de Semana de Duquesne"},
+     {en:"Dennis Bennett, an Episcopal rector, telling his congregation he had been baptized in the Spirit and spoken in tongues", es:"Dennis Bennett, un rector episcopal, diciendo a su congregación que había sido bautizado en el Espíritu y hablado en lenguas"} ],
+   exp:{en:"Bennett's 1960 announcement in California drew wide attention and is often taken as a starting point for the renewal in the historic Protestant churches.",
+        es:"El anuncio de Bennett en 1960 en California atrajo amplia atención y se toma a menudo como punto de partida para la renovación en las iglesias protestantes históricas."} },
+ { correct:1,
+   q:{en:"The Catholic Charismatic Renewal is usually dated to —",
+      es:"La Renovación Carismática Católica se fecha usualmente en —"},
+   opts:[
+     {en:"1901 in Topeka", es:"1901 en Topeka"},
+     {en:"1967, beginning with the Duquesne Weekend retreat, then spreading through the Catholic world", es:"1967, comenzando con el retiro del Fin de Semana de Duquesne, y extendiéndose luego por el mundo católico"},
+     {en:"the Reformation", es:"la Reforma"},
+     {en:"the year 2000", es:"el año 2000"} ],
+   exp:{en:"Beginning among Catholic students and faculty at Duquesne in 1967, it spread to Notre Dame and beyond; for many Catholics it brought fresh love for Scripture and prayer.",
+        es:"Comenzando entre estudiantes y profesores católicos en Duquesne en 1967, se extendió a Notre Dame y más allá; para muchos católicos trajo amor fresco por la Escritura y la oración."} },
+ { correct:2,
+   q:{en:"The “Third Wave,” a term coined by C. Peter Wagner, described —",
+      es:"La “Tercera Ola,” término acuñado por C. Peter Wagner, describía —"},
+   opts:[
+     {en:"the first Pentecostals at Azusa", es:"los primeros pentecostales en Azusa"},
+     {en:"the Catholic renewal only", es:"solo la renovación católica"},
+     {en:"evangelicals who practiced the gifts and signs-and-wonders but often did not adopt classical Pentecostal labels or require tongues as evidence", es:"evangélicos que practicaban los dones y las señales y prodigios, pero que a menudo no adoptaban las etiquetas pentecostales clásicas ni requerían las lenguas como evidencia"},
+     {en:"the rejection of all spiritual gifts", es:"el rechazo de todos los dones espirituales"} ],
+   exp:{en:"Associated with John Wimber and the Vineyard, the third wave emphasized ordinary believers open to the Spirit's gifts without the classical Pentecostal framework.",
+        es:"Asociada con John Wimber y la Viña, la tercera ola recalcó a los creyentes comunes abiertos a los dones del Espíritu sin el marco pentecostal clásico."} },
+ { correct:0,
+   q:{en:"The three “waves” are best understood as —",
+      es:"Las tres “olas” se entienden mejor como —"},
+   opts:[
+     {en:"useful but not rigid descriptions — classical Pentecostalism, renewal in the historic churches, and third-wave evangelicals — with much overlap", es:"descripciones útiles pero no rígidas — pentecostalismo clásico, renovación en las iglesias históricas, y evangélicos de la tercera ola — con mucho traslape"},
+     {en:"three separate religions", es:"tres religiones separadas"},
+     {en:"three denominations that no longer exist", es:"tres denominaciones que ya no existen"},
+     {en:"a strict timeline with no connection between them", es:"una línea de tiempo estricta sin conexión entre ellas"} ],
+   exp:{en:"The categories help describe how the experience spread, but they overlap; and the spread of an experience does not by itself settle whether a doctrine is true.",
+        es:"Las categorías ayudan a describir cómo se extendió la experiencia, pero se traslapan; y la extensión de una experiencia no resuelve por sí misma si una doctrina es verdadera."} },
+ { correct:1,
+   q:{en:"By the end of the twentieth century, the movement's greatest growth was —",
+      es:"Para el fin del siglo veinte, el mayor crecimiento del movimiento estaba —"},
+   opts:[
+     {en:"only in the United States", es:"solo en los Estados Unidos"},
+     {en:"in the Global South — Africa, Latin America, and Asia — often in independent churches and among the poor", es:"en el Sur Global — África, América Latina y Asia — a menudo en iglesias independientes y entre los pobres"},
+     {en:"entirely finished", es:"enteramente terminado"},
+     {en:"confined to Europe", es:"confinado a Europa"} ],
+   exp:{en:"The hundreds of millions counted today are the sum of all these streams together, with the center of gravity now in the Global South.",
+        es:"Los cientos de millones contados hoy son la suma de todas estas corrientes juntas, con el centro de gravedad ahora en el Sur Global."} },
+ { correct:3,
+   q:{en:"This unit treats the Catholic Charismatic Renewal —",
+      es:"Esta unidad trata la Renovación Carismática Católica —"},
+   opts:[
+     {en:"by condemning all Catholics", es:"condenando a todos los católicos"},
+     {en:"by endorsing every Catholic doctrine", es:"respaldando cada doctrina católica"},
+     {en:"by ignoring it entirely", es:"ignorándola por completo"},
+     {en:"respectfully and non-denominationally — noting the many Catholics drawn to Scripture, prayer, and love for Christ, while leaving doctrinal differences to other studies", es:"con respeto y de manera no denominacional — notando a los muchos católicos atraídos a la Escritura, la oración y el amor por Cristo, mientras deja las diferencias doctrinales a otros estudios"} ],
+   exp:{en:"The course is non-denominational; it acknowledges with charity the genuine hunger for God among Catholic believers without taking up doctrinal differences here.",
+        es:"El curso es no denominacional; reconoce con caridad el hambre genuina de Dios entre los creyentes católicos sin tratar aquí las diferencias doctrinales."} }
+];
+
+var answered = {};
+
+function buildMcq(){
+  var host = document.getElementById('mcq'); host.innerHTML='';
+  MCQ.forEach(function(item, qi){
+    var card = document.createElement('div'); card.className='qcard'; card.id='q'+qi;
+    var num = document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Question '+(qi+1)+'</span><span class="seg es">Pregunta '+(qi+1)+'</span>';
+    var stem = document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    card.appendChild(num); card.appendChild(stem);
+    item.opts.forEach(function(o, oi){
+      var lab = document.createElement('label'); lab.className='opt'; lab.setAttribute('data-oi',oi);
+      var inp = document.createElement('input'); inp.type='radio'; inp.name='q'+qi; inp.value=oi;
+      inp.onchange=function(){ answered[qi]=oi; };
+      var txt = document.createElement('span'); txt.setAttribute('data-role','opttext');
+      lab.appendChild(inp); lab.appendChild(txt); card.appendChild(lab);
+    });
+    var btn = document.createElement('button'); btn.className='btn'; btn.setAttribute('data-role','checkbtn');
+    btn.onclick=function(){ checkOne(qi); };
+    var fb = document.createElement('div'); fb.className='fb'; fb.id='fb'+qi;
+    card.appendChild(btn); card.appendChild(fb);
+    host.appendChild(card);
+  });
+  renderMcqText();
+}
+function renderMcqText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  MCQ.forEach(function(item, qi){
+    var card = document.getElementById('q'+qi);
+    card.querySelector('[data-role="stem"]').textContent = item.q[l];
+    card.querySelectorAll('.opt').forEach(function(lab){
+      var oi = +lab.getAttribute('data-oi');
+      lab.querySelector('[data-role="opttext"]').textContent = item.opts[oi][l];
+    });
+    card.querySelector('[data-role="checkbtn"]').textContent = (l==='es'?'Comprobar':'Check');
+    if(card.getAttribute('data-checked')==='1'){ paintFeedback(qi, l); }
+  });
+}
+function checkOne(qi){
+  if(!(qi in answered)){
+    var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+    var fb = document.getElementById('fb'+qi); fb.className='fb no show';
+    fb.textContent = (l==='es'?'Elija una respuesta primero.':'Please choose an answer first.');
+    return;
+  }
+  document.getElementById('q'+qi).setAttribute('data-checked','1');
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  paintFeedback(qi, l); refreshScore(); saveState();
+}
+function paintFeedback(qi, l){
+  var item = MCQ[qi]; var card = document.getElementById('q'+qi); var chosen = answered[qi];
+  card.querySelectorAll('.opt').forEach(function(lab){
+    var oi = +lab.getAttribute('data-oi'); lab.classList.remove('correct','wrong');
+    if(oi===item.correct) lab.classList.add('correct');
+    else if(oi===chosen) lab.classList.add('wrong');
+    var r = lab.querySelector('input'); if(r) r.checked = (oi===chosen);
+  });
+  var fb = document.getElementById('fb'+qi); var ok = (chosen===item.correct);
+  fb.className = 'fb show ' + (ok?'ok':'no');
+  var head = ok ? (l==='es'?'Correcto. ':'Correct. ') : (l==='es'?'No exactamente. ':'Not quite. ');
+  fb.textContent = head + item.exp[l];
+}
+function refreshScore(){
+  var n=0; MCQ.forEach(function(item,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct) n++; });
+  document.getElementById('score').textContent = n + ' / ' + MCQ.length;
+  updatePentProgress();
+}
+function updatePentProgress(){
+  var mcAll = MCQ.every(function(item,qi){ return document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct; });
+  var track = lsGet(SKEY+'_track') || 'cert';
+  var saOk = true;
+  if(track === 'masters'){
+    saOk = SA.every(function(item, si){ return saPassed[si] === true; });
+  }
+  if(mcAll && saOk){
+    try{var _pp=JSON.parse(lsGet('cts_pentecostal_progress')||'{}');_pp['unit'+7]=true;lsSet('cts_pentecostal_progress',JSON.stringify(_pp));}catch(e){}
+  }
+}
+function resetMcq(){
+  answered = {};
+  MCQ.forEach(function(item,qi){
+    var card=document.getElementById('q'+qi); card.setAttribute('data-checked','0');
+    card.querySelectorAll('.opt').forEach(function(l){ l.classList.remove('correct','wrong'); var r=l.querySelector('input'); if(r) r.checked=false; });
+    var fb=document.getElementById('fb'+qi); fb.className='fb';
+  });
+  refreshScore(); lsDel(SKEY+'_mcq');
+}
+
+/* ---------- short answer (Q24 fairness: 8 single-concept keywords, 3 = pass, word-boundary matcher) ---------- */
+function normalize(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+}
+function kwHit(answer, kw){
+  var toks = normalize(answer).split(' ');
+  var k = normalize(kw);
+  for(var i=0;i<toks.length;i++){ if(toks[i]===k || toks[i].indexOf(k)===0) return true; }
+  return false;
+}
+function countHits(answer, kws){ var n=0; kws.forEach(function(k){ if(kwHit(answer,k)) n++; }); return n; }
+
+var SA = [
+ { kw:{ en:["renewal","historic","denominations","within","bennett","stayed","gifts","tongues"],
+        es:["renovacion","historicas","denominaciones","dentro","bennett","permanecieron","dones","lenguas"] },
+   q:{en:"Describe the second wave (the Charismatic Renewal) and how it differed from the first wave.",
+      es:"Describa la segunda ola (la Renovación Carismática) y cómo se diferenció de la primera ola."},
+   model:{en:"The second wave, the Charismatic Renewal, began around 1960 when the gifts started to appear among Christians in the historic denominations. A common marker is Dennis Bennett, an Episcopal rector who told his congregation he had been baptized in the Spirit and spoken in tongues. Through the 1960s Lutherans, Presbyterians, Methodists, Anglicans, and others reported the same experience. It differed from the first wave in that these believers largely stayed within their existing churches, seeking to renew them from within rather than forming new Pentecostal denominations.",
+          es:"La segunda ola, la Renovación Carismática, comenzó alrededor de 1960 cuando los dones empezaron a aparecer entre cristianos de las denominaciones históricas. Un marcador común es Dennis Bennett, un rector episcopal que dijo a su congregación que había sido bautizado en el Espíritu y hablado en lenguas. A lo largo de los años sesenta, luteranos, presbiterianos, metodistas, anglicanos y otros reportaron la misma experiencia. Se diferenció de la primera ola en que estos creyentes en gran parte permanecieron dentro de sus iglesias existentes, buscando renovarlas desde dentro en vez de formar nuevas denominaciones pentecostales."} },
+ { kw:{ en:["catholic","duquesne","1967","scripture","prayer","charity","denominational","differences"],
+        es:["catolica","duquesne","1967","escritura","oracion","caridad","denominacional","diferencias"] },
+   q:{en:"Describe the Catholic Charismatic Renewal and how this course treats it.",
+      es:"Describa la Renovación Carismática Católica y cómo la trata este curso."},
+   model:{en:"The Catholic Charismatic Renewal is usually dated to 1967, beginning at a retreat of students and faculty from Duquesne University and spreading rapidly through the Catholic world. For many Catholics it brought a fresh hunger for Scripture, a warmth of personal prayer, and a living love for the Lord Jesus. This course is non-denominational and does not take up the real doctrinal differences between Catholic and Protestant Christians here; instead it notes in charity that a great many Catholics were drawn to read the Bible, to pray, and to seek the Spirit's help in following Christ, and that is worth acknowledging with gladness.",
+          es:"La Renovación Carismática Católica se fecha usualmente en 1967, comenzando en un retiro de estudiantes y profesores de la Universidad de Duquesne y extendiéndose rápidamente por el mundo católico. Para muchos católicos trajo un hambre fresca de la Escritura, una calidez de oración personal, y un amor vivo por el Señor Jesús. Este curso es no denominacional y no trata aquí las diferencias doctrinales reales entre cristianos católicos y protestantes; en cambio nota con caridad que muchísimos católicos fueron atraídos a leer la Biblia, a orar, y a buscar la ayuda del Espíritu para seguir a Cristo, y eso es digno de reconocerse con gozo."} },
+ { kw:{ en:["wagner","wimber","evangelicals","gifts","labels","spread","settle","elsewhere"],
+        es:["wagner","wimber","evangelicos","dones","etiquetas","extension","resuelve","otras"] },
+   q:{en:"What was the Third Wave, and why does the spread of the renewal across the church not by itself settle any doctrine?",
+      es:"¿Qué fue la Tercera Ola, y por qué la extensión de la renovación por la iglesia no resuelve por sí misma ninguna doctrina?"},
+   model:{en:"The Third Wave was a term coined by C. Peter Wagner in the 1980s for evangelicals — the Vineyard under John Wimber being the best-known — who came to practice the gifts and signs-and-wonders but often did not adopt classical Pentecostal labels or require tongues as evidence. Yet the wide spread of the renewal across the church does not by itself settle any doctrine, because the growth of a movement is one question and the soundness of its teaching is another. The course weighs the doctrine elsewhere, testing every claim by Scripture rather than by numbers or influence.",
+          es:"La Tercera Ola fue un término acuñado por C. Peter Wagner en los años ochenta para evangélicos — siendo la Viña bajo John Wimber el más conocido — que llegaron a practicar los dones y las señales y prodigios, pero que a menudo no adoptaron las etiquetas pentecostales clásicas ni requerían las lenguas como evidencia. Sin embargo, la amplia extensión de la renovación por la iglesia no resuelve por sí misma ninguna doctrina, porque el crecimiento de un movimiento es una pregunta y la solidez de su enseñanza es otra. El curso sopesa la doctrina en otras partes, probando toda afirmación por la Escritura en vez de por los números o la influencia."} }
+];
+
+function buildSa(){
+  var host=document.getElementById('sa'); host.innerHTML='';
+  SA.forEach(function(item, si){
+    var card=document.createElement('div'); card.className='qcard'; card.id='sa'+si;
+    var num=document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Written '+(si+1)+'</span><span class="seg es">Escrita '+(si+1)+'</span>';
+    var stem=document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    var ta=document.createElement('textarea'); ta.id='ta'+si; ta.setAttribute('aria-label','answer');
+    var btnrow=document.createElement('div'); btnrow.style.marginTop='10px'; btnrow.style.display='flex'; btnrow.style.gap='10px'; btnrow.style.flexWrap='wrap';
+    var chk=document.createElement('button'); chk.className='btn'; chk.setAttribute('data-role','chk'); chk.onclick=function(){ checkSa(si); };
+    var rev=document.createElement('button'); rev.className='btn ghost'; rev.setAttribute('data-role','rev'); rev.onclick=function(){ revealModel(si); };
+    btnrow.appendChild(chk); btnrow.appendChild(rev);
+    var hit=document.createElement('div'); hit.className='hitline'; hit.id='hit'+si;
+    var mod=document.createElement('div'); mod.className='model'; mod.id='mod'+si;
+    mod.innerHTML='<div class="mh" data-role="mh"></div><div data-role="mtext"></div>';
+    card.appendChild(num); card.appendChild(stem); card.appendChild(ta); card.appendChild(btnrow); card.appendChild(hit); card.appendChild(mod);
+    host.appendChild(card);
+  });
+  renderSaText();
+}
+function renderSaText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  SA.forEach(function(item, si){
+    var card=document.getElementById('sa'+si);
+    card.querySelector('[data-role="stem"]').textContent=item.q[l];
+    card.querySelector('[data-role="chk"]').textContent=(l==='es'?'Comprobar mi respuesta':'Check my answer');
+    card.querySelector('[data-role="rev"]').textContent=(l==='es'?'Ver respuesta modelo':'Reveal model answer');
+    card.querySelector('[data-role="mh"]').textContent=(l==='es'?'Respuesta modelo':'Model answer');
+    card.querySelector('[data-role="mtext"]').textContent=item.model[l];
+    if(card.getAttribute('data-checked')==='1') paintHits(si, l);
+  });
+}
+function checkSa(si){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  var ans = document.getElementById('ta'+si).value.trim();
+  if(ans.length < 100){
+    var hit=document.getElementById('hit'+si); hit.className='hitline show';
+    hit.innerHTML = (l==='es' ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.');
+    return;
+  }
+  document.getElementById('sa'+si).setAttribute('data-checked','1');
+  paintHits(si, l);
+  revealModel(si);
+  saPassed[si] = countHits(ans, SA[si].kw[l]) >= 3;
+  updatePentProgress();
+}
+function paintHits(si, l){
+  var item=SA[si]; var ans=document.getElementById('ta'+si).value;
+  var n=countHits(ans, item.kw[l]); var pass = n>=3;
+  var hit=document.getElementById('hit'+si); hit.className='hitline show';
+  if(l==='es'){
+    hit.innerHTML = 'Conceptos clave encontrados: <b>'+n+' de 8</b> &mdash; '+(pass?'aprobado (mínimo 3). Compare con la respuesta modelo abajo.':'aún no (se necesitan 3). Revise su respuesta y la modelo abajo.');
+  } else {
+    hit.innerHTML = 'Key concepts found: <b>'+n+' of 8</b> &mdash; '+(pass?'pass (minimum 3). Compare with the model answer below.':'not yet (3 needed). Review your answer and the model below.');
+  }
+}
+function revealModel(si){ document.getElementById('mod'+si).classList.add('show'); }
+
+/* ---------- persistence ---------- */
+function saveState(){
+  try{
+    var mcqState={}; MCQ.forEach(function(it,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1'){ mcqState[qi]=answered[qi]; } });
+    lsSet(SKEY+'_mcq', JSON.stringify(mcqState));
+  }catch(e){}
+}
+function restoreState(){
+  var l = lsGet(SKEY+'_lang'); if(l) setLang(l);
+  var t = lsGet(SKEY+'_track');
+  if(!t){
+    // No local choice yet on this page -- default from the site-wide track
+    // (set at the seminary's main registration) so a Masters-track student
+    // is graded at the correct rigor here without re-selecting it locally.
+    try{
+      var shared = JSON.parse(lsGet('cts_student') || 'null');
+      var sharedTrack = String(lsGet('cts_track') || (shared && (shared.track||shared.program)) || '').toLowerCase();
+      if(sharedTrack === 'mdiv' || sharedTrack === 'thm' || sharedTrack === 'mth' ||
+         /master of divinity|m\.div|master of theology|m\.th|th\.m/.test(sharedTrack)) t = 'masters';
+    }catch(e){}
+  }
+  setTrack(t||'cert');
+  try{
+    var raw = lsGet(SKEY+'_mcq');
+    if(raw){ var st=JSON.parse(raw); var lg=document.documentElement.classList.contains('lang-es')?'es':'en';
+      Object.keys(st).forEach(function(qi){ answered[qi]=st[qi]; document.getElementById('q'+qi).setAttribute('data-checked','1'); paintFeedback(+qi, lg); });
+      refreshScore();
+    }
+  }catch(e){}
+}
+
+/* ---------- init ---------- */
+buildMcq(); buildSa();
+restoreState();
+</script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPentecostalReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+</body>
+</html>

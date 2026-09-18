@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Church History — Unit 3: Heresies, Councils, and Imperial Christianity</title>
+<style>
+:root{--blue-dark:#2c3e6b;--blue-mid:#3f5a8a;--blue-light:#eef1f7;--gold:#c9a961;--gold-soft:#e8dcb8;--ink:#1f2433;--rule:#bcc5d4;--warn:#b03a2e;--white:#fff;--correct:#2d6e3e;--correct-bg:#e3f2e8;--incorrect:#b03a2e;--incorrect-bg:#fae5e3}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:var(--blue-light);line-height:1.6;font-size:16px}
+body.lang-en .es-only{display:none}body.lang-es .en-only{display:none}
+header.site{background:var(--blue-dark);color:var(--white);padding:18px 24px;border-bottom:4px solid var(--gold)}
+header.site .crest{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:4px}
+header.site h1{margin:0;font-size:1.45rem;font-weight:700}
+header.site .credits{font-size:.9rem;color:var(--gold-soft);margin-top:6px}
+.toolbar{background:var(--white);border-bottom:1px solid var(--rule);padding:10px 24px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.toolbar .lang-toggle button{background:var(--blue-light);border:1px solid var(--blue-mid);color:var(--blue-dark);padding:6px 12px;font-family:inherit;cursor:pointer;border-radius:3px;font-size:.85rem;margin-right:4px}
+.toolbar .lang-toggle button.active{background:var(--blue-dark);color:var(--white)}
+.toolbar .greeting{color:var(--blue-dark);font-style:italic;font-size:.95rem}
+.reg-warn{background:#fff3cd;border-left:5px solid var(--gold);padding:12px 18px;margin:0;font-size:.92rem;color:#6b5800}
+.reg-warn.hidden{display:none}
+.progress-grid{background:var(--white);padding:16px 24px;border-bottom:1px solid var(--rule)}
+.progress-grid h3{margin:0 0 10px;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--blue-dark)}
+.progress-grid .units{display:flex;gap:6px;flex-wrap:wrap}
+.progress-grid .unit-pill{padding:6px 10px;border:1px solid var(--rule);border-radius:3px;font-size:.78rem;background:var(--blue-light);color:var(--blue-dark);min-width:60px;text-align:center}
+.progress-grid .unit-pill.done{background:var(--blue-dark);color:var(--white);border-color:var(--blue-dark)}
+.progress-grid .unit-pill.current{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700}
+main{max-width:920px;margin:0 auto;padding:24px}
+.unit-title{text-align:center;margin:8px 0 24px}
+.unit-title .label{font-size:.85rem;letter-spacing:.12em;color:var(--blue-mid);text-transform:uppercase}
+.unit-title h2{font-size:1.9rem;margin:6px 0 4px;color:var(--blue-dark)}
+.unit-title .subtitle{color:var(--blue-mid);font-style:italic;font-size:1.05rem}
+.unit-title .scripture{margin-top:14px;padding:12px 18px;background:var(--white);border-left:4px solid var(--gold);font-size:.96rem}
+section.lesson{background:var(--white);padding:22px 26px;margin:22px 0;border-radius:4px;border-top:3px solid var(--blue-dark);box-shadow:0 1px 3px rgba(0,0,0,.06)}
+section.lesson.star{border-top:5px solid var(--gold);background:linear-gradient(180deg,#fffaf0 0%,var(--white) 60px)}
+section.lesson h3{color:var(--blue-dark);font-size:1.3rem;margin:0 0 4px}
+section.lesson.star h3::before{content:"\2605 ";color:var(--gold)}
+section.lesson h4{color:var(--blue-mid);font-size:1.08rem;margin:18px 0 6px;border-bottom:1px dotted var(--rule);padding-bottom:3px}
+section.lesson p{margin:0 0 12px}
+section.lesson .anchor{display:block;text-align:center;margin:14px auto;padding:10px 14px;background:var(--gold-soft);border:1px solid var(--gold);color:#5a4a10;font-weight:700;font-style:italic;max-width:600px}
+.exam{background:var(--white);padding:22px 26px;margin:30px 0 22px;border-radius:4px;border-top:3px solid var(--gold)}
+.exam h3{color:var(--blue-dark);margin-top:0}
+.exam .question{padding:12px 0;border-bottom:1px dashed var(--rule)}
+.exam .question p.q{margin:0 0 8px;font-weight:600}
+.exam .options label{display:block;padding:6px 8px 6px 18px;cursor:pointer;border-radius:3px;margin:2px 0}
+.exam .options label:hover{background:var(--blue-light)}
+.exam textarea{width:100%;min-height:60px;font-family:inherit;padding:8px;border:1px solid var(--rule);border-radius:3px;resize:vertical}
+.exam textarea:disabled{background:#f5f5f5;color:#555}
+.check-btn{margin-top:8px;background:var(--blue-mid);color:var(--white);border:none;padding:7px 16px;font-family:inherit;cursor:pointer;border-radius:3px;font-size:.9rem}
+.check-btn:disabled{background:#999;cursor:not-allowed}
+.qfb{margin-top:10px;padding:10px 14px;border-radius:3px;font-size:.93rem}
+.qfb.correct{background:var(--correct-bg);color:var(--correct);border-left:4px solid var(--correct)}
+.qfb.incorrect{background:var(--incorrect-bg);color:var(--incorrect);border-left:4px solid var(--incorrect)}
+.qfb .mark{font-weight:700;display:block;margin-bottom:4px;font-size:1rem}
+.qfb .corr{color:var(--ink);margin-top:4px}
+.qfb .why{margin-top:8px;padding-top:6px;border-top:1px dotted var(--rule);font-style:italic;color:var(--ink);display:block}
+.exam-controls{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+button.submit-exam{background:var(--blue-dark);color:var(--white);border:none;padding:12px 22px;font-size:1rem;font-family:inherit;cursor:pointer;border-radius:3px}
+button.submit-exam:disabled{background:#888;cursor:not-allowed}
+#result{font-weight:700;font-size:1.05rem;padding:10px 14px;border-radius:3px}
+#result.pass{background:#d6e2f0;color:var(--blue-dark);border:1px solid var(--blue-mid)}
+#result.fail{background:#f8d7da;color:var(--warn);border:1px solid var(--warn)}
+footer.unit-nav{max-width:920px;margin:0 auto;padding:18px 24px 40px;display:flex;justify-content:space-between;gap:12px}
+footer.unit-nav button{background:var(--blue-dark);color:var(--white);border:none;padding:12px 18px;font-family:inherit;cursor:pointer;border-radius:3px;font-size:.95rem}
+footer.unit-nav button:disabled{background:#999;cursor:not-allowed}
+@media (max-width:640px){main{padding:14px}section.lesson{padding:16px 18px}.exam{padding:16px 18px}header.site h1{font-size:1.2rem}}
+
+/* ===== Retrofit additions ===== */
+.reg-modal{position:fixed;inset:0;background:rgba(20,25,45,.65);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.reg-modal.hidden{display:none}
+.track-badge{background:var(--gold-soft);border:1px solid var(--gold);padding:4px 10px;border-radius:3px;font-size:.78rem;color:#5a4a10;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.exam-status{padding:12px 16px;margin:14px 0;border-radius:4px;font-size:.95rem;font-weight:600}
+.exam-status.mc-passed{background:#d6e2f0;color:var(--blue-dark);border-left:5px solid var(--blue-mid)}
+.exam-status.locked{background:#fae5e3;color:var(--warn);border-left:5px solid var(--warn)}
+.exam-status.hidden{display:none}
+.mc-section,.sa-section{margin-top:18px}
+.sa-section h4,.mc-section h4{color:var(--blue-dark);margin:0 0 10px;border-bottom:2px solid var(--gold);padding-bottom:4px;font-size:1.1rem}
+.exam-controls .btn-reset{background:#8a6a4a;color:var(--white);border:none;padding:10px 18px;font-family:inherit;font-size:.95rem;cursor:pointer;border-radius:3px}
+.exam-controls .btn-reset:hover{background:#6b5236}
+.question.review-locked{opacity:.7;background:#fbfaf6;border-left:3px solid var(--gold);padding-left:10px}
+.question.review-locked input,.question.review-locked textarea,.question.review-locked .check-btn{pointer-events:none}
+.sa-badge{display:inline-block;background:var(--gold-soft);border:1px solid var(--gold);color:#5a4a10;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:middle}
+.sa-note{margin:0 0 12px;padding:8px 12px;background:var(--blue-light);border-left:3px solid var(--blue-mid);color:var(--ink);font-size:.88rem;font-style:italic}
+@media print{
+  body{background:#fff;color:#000}
+  .toolbar,.reg-warn,.exam-controls,footer.unit-nav,.reg-modal,.check-btn,.exam-status,.btn-reset{display:none !important}
+  header.site,.progress-grid{background:#fff !important;color:#000 !important;border-color:#000 !important}
+  header.site h1,header.site .crest,header.site .credits{color:#000 !important}
+  section.lesson,.exam{border:1px solid #000;box-shadow:none;page-break-inside:avoid}
+  .question{page-break-inside:avoid;border-bottom:1px solid #ccc}
+  .qfb{border:1px solid #555}
+  body.lang-en .es-only,body.lang-es .en-only{display:none}
+}
+
+</style></head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site"><div class="crest">Chapala Theological Seminary &middot; Seminario Teológico de Chapala</div><h1 class="en-only">Church History &mdash; Unit 3: Heresies, Councils, and Imperial Christianity</h1><h1 class="es-only">Historia de la Iglesia &mdash; Unidad 3: Herejías, Concilios, y Cristianismo Imperial</h1><div class="credits">Dr. Wayne Cook &nbsp;|&nbsp; Director: Dr. Ted Rogers</div></header>
+<div class="toolbar"><div class="lang-toggle" role="group" aria-label="Language"><button data-lang="en" class="active">English</button><button data-lang="es">Español</button><button data-lang="both">Both / Ambos</button></div><div class="greeting" id="greeting"></div><div id="track-badge-wrap"></div></div>
+<div class="reg-warn hidden" id="reg-warn"><span class="en-only"><strong>Heads up:</strong> No registration found. Your progress will save in this browser, but ask the registrar to enroll you formally before exam day.</span><span class="es-only"><strong>Aviso:</strong> No se encontró registro. Tu progreso se guardará en este navegador, pero pide al registrador inscribirte formalmente antes del día del examen.</span></div>
+<div class="progress-grid"><h3 class="en-only">Course Progress &mdash; 10 Units</h3><h3 class="es-only">Progreso del Curso &mdash; 10 Unidades</h3><div class="units" id="progress-units"></div></div>
+<main>
+
+<div class="unit-title">
+<div class="label en-only">Unit 3 &middot; AD 313–451 &middot; The Second Great Century of Preaching</div>
+<div class="label es-only">Unidad 3 &middot; 313–451 d.C. &middot; El segundo gran siglo de la predicación</div>
+<h2 class="en-only">Heresies, Councils, and Imperial Christianity</h2>
+<h2 class="es-only">Herejías, Concilios, y Cristianismo Imperial</h2>
+<div class="subtitle en-only">"And the Word became flesh and dwelt among us."</div>
+<div class="subtitle es-only">«Y el Verbo fue hecho carne, y habitó entre nosotros».</div>
+<div class="scripture">
+<div class="en-only"><strong>Unit Scripture:</strong> "In the beginning was the Word, and the Word was with God, and the Word was God&hellip; And the Word became flesh and dwelt among us, and we beheld His glory." &mdash; John 1:1, 14 (NKJV)</div>
+<div class="es-only"><strong>Escritura de la Unidad:</strong> «En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios&hellip; Y el Verbo fue hecho carne, y habitó entre nosotros (y vimos su gloria)». &mdash; Juan 1:1, 14 (RVG)</div>
+</div>
+</div>
+
+<section class="lesson"><h3 class="en-only">Orientation: When the Persecutor Becomes the Patron</h3><h3 class="es-only">Orientación: Cuando el perseguidor se convierte en patrón</h3>
+<div class="en-only">
+<p>For three centuries the church had asked one question above all others: <em>how do we survive Rome?</em> Then almost overnight, between 312 and 313, that question vanished and was replaced by one almost no one had thought to prepare for: <em>how do we survive Rome's friendship?</em></p>
+<p>Constantine's victory at the Milvian Bridge in October 312 changed everything. The Edict of Milan in 313 granted Christians freedom of worship, restored confiscated property, and ended the era in which Christians could be subjected to periodic and sometimes empire-wide imperial persecution. Within a generation Christianity would be the favored religion of the empire. Bishops who had hidden in caves now sat in conference with the emperor. Buildings that had been illegal now rose as basilicas at imperial expense. The blood of the martyrs had become the seed of an established church.</p>
+<p>This was the right answer to a three-hundred-year prayer, and a problem the church had never had to solve. Unit 3 is the story of how the church wrestled the new questions through the fourth and early fifth centuries, defined her doctrine of God and Christ in the four great ecumenical councils, and produced &mdash; while she was at it &mdash; the second great century of preaching in her history.</p>
+<span class="anchor">"This is the faith of the universal Church which has been delivered from of old." &mdash; Athanasius</span>
+</div>
+<div class="es-only">
+<p>Por tres siglos la iglesia había hecho una pregunta por encima de todas las demás: <em>¿cómo sobrevivimos a Roma?</em> Entonces casi de la noche a la mañana, entre 312 y 313, esa pregunta desapareció y fue reemplazada por una para la que casi nadie se había preparado: <em>¿cómo sobrevivimos a la amistad de Roma?</em></p>
+<p>La victoria de Constantino en el Puente Milvio en octubre del 312 cambió todo. El Edicto de Milán en 313 otorgó a los cristianos la libertad de adorar, restauró la propiedad confiscada, y terminó la era en que los cristianos podían ser sometidos a persecución imperial periódica y a veces imperio-extensa. Dentro de una generación el cristianismo sería la religión favorecida del imperio. Obispos que se habían escondido en cuevas ahora se sentaban en conferencia con el emperador. Edificios que habían sido ilegales ahora se levantaban como basílicas a expensas imperiales. La sangre de los mártires se había convertido en la semilla de una iglesia establecida.</p>
+<p>Esta era la respuesta correcta a una oración de trescientos años, y un problema que la iglesia nunca había tenido que resolver. La Unidad 3 es la historia de cómo la iglesia luchó con las nuevas preguntas a través del cuarto y principios del quinto siglo, definió su doctrina de Dios y de Cristo en los cuatro grandes concilios ecuménicos, y produjo &mdash; mientras tanto &mdash; el segundo gran siglo de predicación en su historia.</p>
+<span class="anchor">«Esta es la fe de la Iglesia universal que ha sido entregada desde antaño». &mdash; Atanasio</span>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">I. Constantine, Edict of Milan, and the Donatist Problem</h3><h3 class="es-only">I. Constantino, el Edicto de Milán, y el problema donatista</h3>
+<div class="en-only">
+<p>Constantine was a soldier and politician, not a theologian. The night before the Milvian Bridge, according to his biographer Eusebius, he saw a sign in the sky &mdash; a cross of light with the words <em>"In this sign conquer."</em> He marked his soldiers' shields with the Christian Chi-Rho, won the battle, and attributed the victory to the Christian God. From that day forward Constantine considered himself a patron of the church, though he was not actually baptized until just before his death in 337.</p>
+<p>His policy was simple: support, protect, unify. He returned confiscated property, gave clergy tax exemptions, commissioned new church buildings, summoned bishops to imperial conferences. He expected the church to be one church, not feuding factions. The first major test came almost immediately, in North Africa, in the Donatist controversy.</p>
+<p>During Diocletian's persecution some North African bishops had handed over the Scriptures to be burned rather than face death. They were called <em>traditores</em> &mdash; "those who have handed over." After persecution ended, a man named Caecilian was consecrated bishop of Carthage by another bishop accused of having been a <em>traditor</em>. A rigorist faction refused to accept the consecration. They argued that any sacrament administered by a fallen bishop &mdash; baptism, ordination, communion &mdash; was invalid. They elected their own bishop, Donatus, and the Donatist church began.</p>
+<p>The mainstream church, defended most powerfully by Augustine a century later, took a different position: the validity of the sacrament depends on Christ, not on the worthiness of the minister. A baptism is a baptism even when performed by an unworthy bishop, because it is Christ who does the baptizing, not the bishop's hands. This principle &mdash; the sacrament is <em>ex opere operato</em>, "from the work performed," rather than dependent on the minister's holiness &mdash; would shape Western theology for the next thousand years. The Donatist controversy is a permanent warning against confusing the church's purity with the worthiness of her ministers.</p>
+</div>
+<div class="es-only">
+<p>Constantino era un soldado y político, no un teólogo. La noche antes del Puente Milvio, según su biógrafo Eusebio, vio una señal en el cielo &mdash; una cruz de luz con las palabras <em>«Con esta señal vencerás»</em>. Marcó los escudos de sus soldados con el Chi-Rho cristiano, ganó la batalla, y atribuyó la victoria al Dios cristiano. Desde ese día Constantino se consideró patrón de la iglesia, aunque no fue realmente bautizado hasta justo antes de su muerte en 337.</p>
+<p>Su política era simple: apoyar, proteger, unificar. Devolvió propiedades confiscadas, dio exenciones fiscales al clero, comisionó nuevos edificios eclesiales, convocó obispos a conferencias imperiales. Esperaba que la iglesia fuera una iglesia, no facciones en disputa. La primera prueba mayor vino casi inmediatamente, en África del Norte, en la controversia donatista.</p>
+<p>Durante la persecución de Diocleciano algunos obispos norteafricanos habían entregado las Escrituras para ser quemadas en lugar de enfrentar la muerte. Eran llamados <em>traditores</em> &mdash; «los que entregaron». Después que la persecución terminó, un hombre llamado Ceciliano fue consagrado obispo de Cartago por otro obispo acusado de haber sido <em>traditor</em>. Una facción rigorista rehusó aceptar la consagración. Argumentaban que cualquier sacramento administrado por un obispo caído &mdash; bautismo, ordenación, comunión &mdash; era inválido. Eligieron su propio obispo, Donato, y la iglesia donatista comenzó.</p>
+<p>La iglesia principal, defendida con mayor poder por Agustín un siglo después, tomó una posición diferente: la validez del sacramento depende de Cristo, no de la dignidad del ministro. Un bautismo es un bautismo aun cuando es realizado por un obispo indigno, porque es Cristo quien bautiza, no las manos del obispo. Este principio &mdash; el sacramento es <em>ex opere operato</em>, «por la obra realizada», en lugar de depender de la santidad del ministro &mdash; moldearía la teología occidental por los siguientes mil años. La controversia donatista es una advertencia permanente contra confundir la pureza de la iglesia con la dignidad de sus ministros.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">II. The Arian Crisis: Who Is Jesus Christ?</h3><h3 class="es-only">II. La crisis arriana: ¿Quién es Jesucristo?</h3>
+<div class="en-only">
+<p>The Donatist controversy was about the church. The Arian controversy was about Christ Himself, and it was the most serious theological crisis the church had ever faced. The Arian crisis nearly split the empire, occupied four ecumenical councils, and forced the church to put into precise language what it had always confessed: that Jesus Christ is fully and truly God.</p>
+<p>The trouble began around 318 in Alexandria. A presbyter named <strong>Arius</strong> was teaching publicly that the Son was not eternal. Arius reasoned: the Father is unbegotten, eternal, without beginning. The Son is <em>begotten</em> of the Father, which means the Son had a beginning. <em>"There was when He was not."</em> The Son is the highest of God's creatures, the first and most exalted of all created beings, but He is still a creature. He is not, properly speaking, God. He is not co-eternal with the Father.</p>
+<p>Arius's argument had a certain crispness. He was a popular preacher, a clever rhetorician, and he wrote his theology in catchy songs that spread through the docks of Alexandria. By the early 320s the controversy was disrupting the entire eastern church. Constantine was alarmed. He had supported Christianity in part to provide unity for his empire, and now Christians were dividing over a question he could not entirely follow. He decided to call a council. Every bishop in the empire would be invited, fed at imperial expense, and they would settle the question once and for all in the imperial city of Nicaea, in the summer of 325.</p>
+</div>
+<div class="es-only">
+<p>La controversia donatista era sobre la iglesia. La controversia arriana era sobre Cristo mismo, y fue la crisis teológica más seria que la iglesia había enfrentado jamás. La crisis arriana casi dividió el imperio, ocupó cuatro concilios ecuménicos, y forzó a la iglesia a poner en lenguaje preciso lo que siempre había confesado: que Jesucristo es plena y verdaderamente Dios.</p>
+<p>El problema comenzó alrededor del 318 en Alejandría. Un presbítero llamado <strong>Arrio</strong> estaba enseñando públicamente que el Hijo no era eterno. Arrio razonaba: el Padre es no engendrado, eterno, sin principio. El Hijo es <em>engendrado</em> del Padre, lo que significa que el Hijo tuvo un principio. <em>«Hubo cuando Él no era»</em>. El Hijo es la más alta de las criaturas de Dios, el primero y más exaltado de todos los seres creados, pero sigue siendo una criatura. Él no es, propiamente hablando, Dios. Él no es coeterno con el Padre.</p>
+<p>El argumento de Arrio tenía una cierta nitidez. Era un predicador popular, un retórico inteligente, y escribía su teología en canciones pegadizas que se extendían por los muelles de Alejandría. Para principios del 320 la controversia estaba interrumpiendo toda la iglesia oriental. Constantino estaba alarmado. Había apoyado el cristianismo en parte para proveer unidad a su imperio, y ahora los cristianos se dividían sobre una pregunta que él no podía seguir enteramente. Decidió convocar un concilio. Cada obispo en el imperio sería invitado, alimentado a expensas imperiales, y resolverían la pregunta de una vez por todas en la ciudad imperial de Nicea, en el verano del 325.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">III. Nicaea (325) and the Nicene Creed</h3><h3 class="es-only">III. Nicea (325) y el Credo de Nicea</h3>
+<div class="en-only">
+<p>About 318 bishops attended Nicaea &mdash; the number is traditional. Many bore the scars of Diocletian's persecution: missing eyes, severed limbs, ruined hands. They were not theological abstractions. They were men who had bled for the name of Jesus Christ. Now they were being asked to put into a single Greek word what that name meant. The word they chose was <em>homoousios</em> &mdash; <em>of the same substance</em>. The Son is not <em>like</em> the Father (<em>homoiousios</em>, with one extra letter). The Son is <em>of the same substance</em> as the Father &mdash; fully God, eternally God, equal to the Father in deity.</p>
+<p>The original Nicene Creed: <em>"We believe in one God, the Father Almighty&hellip; And in one Lord Jesus Christ, the only-begotten Son of God, begotten of the Father&hellip; God of God, Light of Light, true God of true God, begotten not made, of the same substance as the Father&hellip;"</em> Almost every clause was aimed at Arius. <em>Begotten not made</em> &mdash; against the Arian claim that the Son was created. <em>Of the same substance</em> &mdash; the homoousios. <em>True God of true God</em> &mdash; reversing Arius's claim that the Son was God only in a derivative sense. The creed concluded with anathemas: <em>"Those who say there was when He was not&hellip; the Catholic Church anathematizes."</em> Three hundred and sixteen bishops signed. Two refused and were exiled with Arius. Constantine considered the matter settled. It was not.</p>
+<p>The fifty years after Nicaea were chaos. Different emperors took different sides. Synods met in different cities and issued different creeds. Arian and semi-Arian formulas multiplied. Jerome later said, <em>"The whole world groaned and marveled to find itself Arian."</em> The Nicene confession nearly went under. It survived because of one man.</p>
+</div>
+<div class="es-only">
+<p>Alrededor de 318 obispos asistieron a Nicea &mdash; el número es tradicional. Muchos llevaban las cicatrices de la persecución de Diocleciano: ojos perdidos, miembros amputados, manos arruinadas. No eran abstracciones teológicas. Eran hombres que habían sangrado por el nombre de Jesucristo. Ahora se les pedía poner en una sola palabra griega lo que ese nombre significaba. La palabra que escogieron fue <em>homoousios</em> &mdash; <em>de la misma sustancia</em>. El Hijo no es <em>semejante</em> al Padre (<em>homoiousios</em>, con una letra extra). El Hijo es <em>de la misma sustancia</em> que el Padre &mdash; plenamente Dios, eternamente Dios, igual al Padre en deidad.</p>
+<p>El Credo de Nicea original: <em>«Creemos en un solo Dios, Padre Todopoderoso&hellip; Y en un solo Señor Jesucristo, Hijo unigénito de Dios, engendrado del Padre&hellip; Dios de Dios, Luz de Luz, Dios verdadero de Dios verdadero, engendrado no hecho, de la misma sustancia que el Padre&hellip;»</em> Casi cada cláusula apuntaba a Arrio. <em>Engendrado no hecho</em> &mdash; contra la afirmación arriana de que el Hijo fue creado. <em>De la misma sustancia</em> &mdash; el homoousios. <em>Dios verdadero de Dios verdadero</em> &mdash; revirtiendo la afirmación de Arrio de que el Hijo era Dios solo en un sentido derivado. El credo concluyó con anatemas: <em>«A los que dicen que hubo cuando Él no era&hellip; la Iglesia Católica anatematiza»</em>. Trescientos dieciséis obispos firmaron. Dos rehusaron y fueron exiliados con Arrio. Constantino consideró el asunto resuelto. No lo estaba.</p>
+<p>Los cincuenta años después de Nicea fueron caos. Diferentes emperadores tomaron diferentes lados. Sínodos se reunieron en diferentes ciudades y emitieron diferentes credos. Las fórmulas arrianas y semiarrianas se multiplicaron. Jerónimo después dijo: <em>«El mundo entero gimió y se asombró al descubrirse arriano»</em>. La confesión nicena casi se hundió. Sobrevivió a causa de un hombre.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">IV. Athanasius Contra Mundum</h3><h3 class="es-only">IV. Atanasio contra el mundo</h3>
+<div class="en-only">
+<p><strong>Athanasius</strong> was about thirty years old at Nicaea, a young deacon serving as secretary to his bishop Alexander. Three years later he became bishop of Alexandria himself. For the next forty-five years he defended the Nicene confession against successive Arian and semi-Arian emperors, was exiled five times to four different countries, returned five times, and outlived nearly every one of his enemies. The Latin phrase <em>Athanasius contra mundum</em> &mdash; "Athanasius against the world" &mdash; captures both his isolation and his stubbornness. When the empire was Arian, Athanasius was Nicene. When his fellow bishops compromised, Athanasius would not.</p>
+<p>His major works include <em>On the Incarnation</em>, written when he was barely in his twenties &mdash; one of the masterpieces of Christian theology, arguing that only a Christ who was fully God could save fully human beings, and only a Christ who was fully man could heal humanity. He wrote <em>Four Discourses Against the Arians</em>, the great anti-Arian polemic. And he gave the church a final gift in his Easter letter of 367: the first known list of the twenty-seven New Testament books we still receive as canonical, in the order we still use. Athanasius did not invent the canon &mdash; the church had been recognizing these books for centuries &mdash; but his Easter letter formally closed the canon question Marcion had raised two centuries earlier.</p>
+<p>Athanasius did not live to see his vindication. He died in 373. Eight years later, at the Council of Constantinople in 381, the Nicene confession was reaffirmed and expanded, and Arianism was finally crushed within the empire.</p>
+</div>
+<div class="es-only">
+<p><strong>Atanasio</strong> tenía alrededor de treinta años en Nicea, un joven diácono sirviendo como secretario de su obispo Alejandro. Tres años después se convirtió él mismo en obispo de Alejandría. Por los siguientes cuarenta y cinco años defendió la confesión nicena contra sucesivos emperadores arrianos y semiarrianos, fue exiliado cinco veces a cuatro países diferentes, regresó cinco veces, y sobrevivió a casi cada uno de sus enemigos. La frase latina <em>Athanasius contra mundum</em> &mdash; «Atanasio contra el mundo» &mdash; captura tanto su aislamiento como su tenacidad. Cuando el imperio era arriano, Atanasio era niceno. Cuando sus compañeros obispos comprometían, Atanasio no.</p>
+<p>Sus obras mayores incluyen <em>De la Encarnación</em>, escrita cuando apenas tenía veintitantos &mdash; una de las obras maestras de la teología cristiana, argumentando que solo un Cristo que era plenamente Dios podía salvar plenamente a seres humanos, y solo un Cristo que era plenamente hombre podía sanar la humanidad. Escribió <em>Cuatro Discursos contra los Arrianos</em>, la gran polémica antiarriana. Y le dio a la iglesia un regalo final en su carta pascual del 367: la primera lista conocida de los veintisiete libros del Nuevo Testamento que aún recibimos como canónicos, en el orden que aún usamos. Atanasio no inventó el canon &mdash; la iglesia había estado reconociendo estos libros por siglos &mdash; pero su carta pascual cerró formalmente la cuestión del canon que Marción había planteado dos siglos antes.</p>
+<p>Atanasio no vivió para ver su vindicación. Murió en 373. Ocho años después, en el Concilio de Constantinopla en 381, la confesión nicena fue reafirmada y expandida, y el arrianismo fue finalmente aplastado dentro del imperio.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">V. The Cappadocians and Constantinople (381)</h3><h3 class="es-only">V. Los Capadocios y Constantinopla (381)</h3>
+<div class="en-only">
+<p>Three friends from the Roman province of Cappadocia (modern central Turkey) finished what Athanasius had begun. They are called the <strong>Cappadocian Fathers</strong>. <strong>Basil the Great</strong> (c. 330&ndash;379) was bishop of Caesarea, wrote a monastic rule that still governs Eastern Orthodox monasticism, built hospitals and schools at Caesarea that pioneered organized Christian charity, and wrote a treatise <em>On the Holy Spirit</em> defending the Spirit's full deity. <strong>Gregory of Nazianzus</strong> (c. 329&ndash;389), Basil's lifelong friend, earned the title <em>the Theologian</em> &mdash; given by the Eastern church only to him, the apostle John, and Symeon the New Theologian. His Five <em>Theological Orations</em> are masterpieces of patristic preaching. <strong>Gregory of Nyssa</strong> (c. 335&ndash;395) was Basil's younger brother and a more philosophical mind &mdash; sometimes called the philosopher of the Cappadocians.</p>
+<p>The Cappadocians gave the church the formula that has held the doctrine of the Trinity steady for sixteen centuries: <em>one ousia (substance) in three hypostases (persons)</em>. One God in three Persons. Father, Son, and Holy Spirit, equal in essence, distinct in person. The Council of Constantinople in 381 took this formula, expanded the Nicene Creed to confess the full deity of the Spirit, and gave the church the creed she still recites every Lord's Day.</p>
+</div>
+<div class="es-only">
+<p>Tres amigos de la provincia romana de Capadocia (la moderna Turquía central) terminaron lo que Atanasio había comenzado. Se llaman los <strong>Padres Capadocios</strong>. <strong>Basilio el Grande</strong> (c. 330&ndash;379) fue obispo de Cesarea, escribió una regla monástica que aún gobierna el monaquismo ortodoxo oriental, construyó hospitales y escuelas en Cesarea que fueron pioneros en la caridad cristiana organizada, y escribió un tratado <em>Sobre el Espíritu Santo</em> defendiendo la plena deidad del Espíritu. <strong>Gregorio de Nacianzo</strong> (c. 329&ndash;389), amigo de toda la vida de Basilio, se ganó el título de <em>el Teólogo</em> &mdash; dado por la iglesia oriental solo a él, al apóstol Juan, y a Simeón el Nuevo Teólogo. Sus Cinco <em>Discursos Teológicos</em> son obras maestras de la predicación patrística. <strong>Gregorio de Nisa</strong> (c. 335&ndash;395) fue el hermano menor de Basilio y una mente más filosófica &mdash; a veces llamado el filósofo de los Capadocios.</p>
+<p>Los Capadocios le dieron a la iglesia la fórmula que ha sostenido firme la doctrina de la Trinidad por dieciséis siglos: <em>una ousia (sustancia) en tres hypostases (personas)</em>. Un solo Dios en tres Personas. Padre, Hijo, y Espíritu Santo, iguales en esencia, distintos en persona. El Concilio de Constantinopla en 381 tomó esta fórmula, expandió el Credo de Nicea para confesar la plena deidad del Espíritu, y le dio a la iglesia el credo que aún recita cada Día del Señor.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">VI. Ephesus (431) and Chalcedon (451)</h3><h3 class="es-only">VI. Éfeso (431) y Calcedonia (451)</h3>
+<div class="en-only">
+<p>The Trinity had been settled by 381. The doctrine of Christ's person had not. If the Son is fully God and fully man, how do those two natures relate in the one Person of Jesus? Two more councils answered.</p>
+<p>The <strong>Council of Ephesus in 431</strong>: Nestorius of Constantinople had been preaching that the divine Son and the human Jesus were so distinct that Mary should not be called <em>theotokos</em> (God-bearer). She was the mother of the man Jesus only, Nestorius said. Cyril of Alexandria and the council fiercely disagreed. The one who was born of Mary was the one Person, fully divine and fully human. To split him into two persons was to lose the Christ of the gospel. The council condemned Nestorianism and affirmed Mary as <em>theotokos</em> &mdash; not because Mary is divine, but because the One she carried truly was God incarnate.</p>
+<p>The <strong>Council of Chalcedon in 451</strong>, perhaps the most important Christological statement the church has ever produced, faced the opposite error: Monophysitism, which taught that Christ had only one nature, the divine swallowing the human. Chalcedon rejected this and gave the church its definitive Christological formula: Jesus Christ is <em>one Person in two natures</em>, fully God and fully man, the two natures united <em>without confusion, without change, without division, without separation</em>. The Chalcedonian Definition has been the standard of orthodox Christology ever since.</p>
+<p>By 451 the church had her doctrine of God (Father, Son, and Holy Spirit, one in essence, three in person) and her doctrine of Christ (one Person, fully God and fully man, two natures unconfused). The first four ecumenical councils &mdash; Nicaea 325, Constantinople 381, Ephesus 431, Chalcedon 451 &mdash; together produced the orthodox confession of the catholic faith.</p>
+</div>
+<div class="es-only">
+<p>La Trinidad había sido resuelta para 381. La doctrina de la persona de Cristo no. Si el Hijo es plenamente Dios y plenamente hombre, ¿cómo se relacionan esas dos naturalezas en la única Persona de Jesús? Dos concilios más respondieron.</p>
+<p>El <strong>Concilio de Éfeso en 431</strong>: Nestorio de Constantinopla había estado predicando que el Hijo divino y el Jesús humano eran tan distintos que María no debía ser llamada <em>theotokos</em> (portadora de Dios). Era la madre del hombre Jesús solamente, dijo Nestorio. Cirilo de Alejandría y el concilio estuvieron ferozmente en desacuerdo. Aquel que nació de María era la única Persona, plenamente divino y plenamente humano. Dividirlo en dos personas era perder al Cristo del evangelio. El concilio condenó el nestorianismo y afirmó a María como <em>theotokos</em> &mdash; no porque María sea divina, sino porque Aquel a quien llevó era verdaderamente Dios encarnado.</p>
+<p>El <strong>Concilio de Calcedonia en 451</strong>, quizás la declaración cristológica más importante que la iglesia ha producido jamás, enfrentó el error opuesto: el monofisismo, que enseñaba que Cristo tenía solo una naturaleza, la divina tragando a la humana. Calcedonia rechazó esto y le dio a la iglesia su fórmula cristológica definitiva: Jesucristo es <em>una Persona en dos naturalezas</em>, plenamente Dios y plenamente hombre, las dos naturalezas unidas <em>sin confusión, sin cambio, sin división, sin separación</em>. La Definición Calcedoniana ha sido el estándar de la cristología ortodoxa desde entonces.</p>
+<p>Para 451 la iglesia tenía su doctrina de Dios (Padre, Hijo, y Espíritu Santo, uno en esencia, tres en persona) y su doctrina de Cristo (una Persona, plenamente Dios y plenamente hombre, dos naturalezas no confundidas). Los primeros cuatro concilios ecuménicos &mdash; Nicea 325, Constantinopla 381, Éfeso 431, Calcedonia 451 &mdash; juntos produjeron la confesión ortodoxa de la fe católica.</p>
+</div></section>
+
+<section class="lesson star"><h3 class="en-only">VII. The Fourth Century: The Second Great Age of Preaching</h3><h3 class="es-only">VII. El cuarto siglo: La segunda gran era de la predicación</h3>
+<div class="en-only">
+<p>The fourth century is the second of the four great centuries of preaching, and it deserves a close look. Five reasons made it great. <em>First</em>, post-Constantine freedom let preachers speak in the open. <em>Second</em>, classical rhetorical training met biblical content &mdash; most fathers had been educated in Greek or Latin rhetoric before conversion. <em>Third</em>, theological controversies forced precision. When you are preaching against Arius, every word matters. <em>Fourth</em>, the cities were full of new converts who needed instruction. <em>Fifth</em>, Constantine's basilicas gave preachers what catacombs never had: large, acoustically generous public spaces with congregations of thousands.</p>
+<h4>John Chrysostom (c. 349&ndash;407) &mdash; "Golden Mouth"</h4>
+<p>If you remember only one fourth-century preacher, remember Chrysostom. The Greek nickname <em>Chrysostomos</em> (golden mouth) was given by his hearers, not by historians. Born in Antioch around 349, trained in classical rhetoric under the famous pagan teacher Libanius &mdash; who said on his deathbed that Chrysostom should have been his successor <em>"if the Christians had not stolen him"</em> &mdash; Chrysostom became a monk, ruined his stomach with desert austerities, returned to Antioch, was ordained a priest, and preached for twelve extraordinary years.</p>
+<p>His preaching method was expository: he preached straight through whole books of the Bible, sermon by sermon. We still possess hundreds of his homilies on Genesis, the Psalms, Matthew, John, Acts, and the entire Pauline corpus. He preached in plain Greek for ordinary people. He was unafraid to apply Scripture sharply to the moral life of his hearers, including the rich and the powerful. His most famous Antiochene sermons, the <em>Statues</em> homilies of 387, were preached during a tax revolt when citizens of Antioch had toppled imperial statues and feared the emperor's vengeance. Chrysostom preached daily through the crisis. The emperor pardoned the city.</p>
+<p>In 398 Chrysostom was effectively kidnapped from Antioch by imperial agents and consecrated bishop of Constantinople against his will. He immediately began reforming the clergy, attacking imperial luxury, and preaching against the morals of the court. The Empress Eudoxia became his enemy. He was exiled twice. He died on a forced march in 407, his last recorded words being, <em>"Glory to God for everything."</em> The man whose pulpit had once held the empire's capital died on a back road in obscurity. Three decades later his body was returned in honor to Constantinople. The pulpit had outlasted the throne.</p>
+<h4>Ambrose of Milan (c. 339&ndash;397)</h4>
+<p>In the West, the great preacher was <strong>Ambrose</strong>. A Roman governor and trained lawyer, he was acclaimed bishop of Milan by the people in 374 &mdash; while still unbaptized. Within a week he was baptized, ordained, and consecrated bishop. He spent the rest of his life trying to be worthy of an office he had never sought. When the Emperor Theodosius ordered the massacre of seven thousand citizens of Thessalonica in 390, Ambrose refused him communion until he did public penance. The emperor of the Roman Empire bowed to a bishop's pulpit. The picture is one of the great icons of fourth-century Christianity.</p>
+<p>Ambrose's preaching also did one more thing of permanent consequence. A young North African professor of rhetoric named Augustine, drifting through Milan in 384 looking for something he could not name, went to hear Ambrose preach &mdash; at first only to study the famous bishop's technique. He stayed because the words began to find him. The conversion of Augustine, which we will meet in Unit 4, started in the pews of a sermon by Ambrose.</p>
+<h4>The Cappadocians as preachers, and Augustine's preaching manual</h4>
+<p>Basil's <em>Hexaemeron</em> (sermons on the six days of creation) is one of the great expository works of the early church. Gregory of Nazianzus's Five Theological Orations are sermons preached against the resurgent Arians, and they are among the most theologically dense sermons ever delivered. Gregory of Nyssa's homilies on the Beatitudes and the Lord's Prayer remain in print today as devotional reading. The fourth century closes (just barely &mdash; finished in 426) with the first Christian preaching manual ever written: Augustine's <em>De Doctrina Christiana</em>, Book IV. The Christian preacher, Augustine wrote, has the same three goals as the classical orator &mdash; to teach, to delight, and to move &mdash; but his materials are not invented; they are the inspired Scripture. The preacher's job is to make the text clear, attractive, and life-changing. Augustine's manual passed to the medieval church and through it to the Reformation, and the basic outline of his approach is still recognizable in any honest preaching course taught today. The fourth century did not invent preaching &mdash; the first century did. But the fourth century perfected it, refined it, gave it categories and manuals, and produced a body of expository work that has fed every great preaching age since.</p>
+</div>
+<div class="es-only">
+<p>El cuarto siglo es el segundo de los cuatro grandes siglos de la predicación, y merece una mirada cercana. Cinco razones lo hicieron grande. <em>Primera</em>, la libertad post-Constantino dejó que los predicadores hablaran al aire libre. <em>Segunda</em>, el entrenamiento retórico clásico se encontró con el contenido bíblico &mdash; la mayoría de los padres habían sido educados en retórica griega o latina antes de la conversión. <em>Tercera</em>, las controversias teológicas forzaron la precisión. Cuando estás predicando contra Arrio, cada palabra importa. <em>Cuarta</em>, las ciudades estaban llenas de nuevos conversos que necesitaban instrucción. <em>Quinta</em>, las basílicas de Constantino dieron a los predicadores lo que las catacumbas nunca tuvieron: espacios públicos grandes y acústicamente generosos con congregaciones de miles.</p>
+<h4>Juan Crisóstomo (c. 349&ndash;407) &mdash; «Boca de Oro»</h4>
+<p>Si recuerda solo a un predicador del cuarto siglo, recuerde a Crisóstomo. El apodo griego <em>Chrysostomos</em> (boca de oro) le fue dado por sus oyentes, no por los historiadores. Nacido en Antioquía alrededor del 349, entrenado en retórica clásica bajo el famoso maestro pagano Libanio &mdash; quien dijo en su lecho de muerte que Crisóstomo debería haber sido su sucesor <em>«si los cristianos no me lo hubieran robado»</em> &mdash; Crisóstomo se hizo monje, arruinó su estómago con austeridades del desierto, regresó a Antioquía, fue ordenado sacerdote, y predicó durante doce años extraordinarios.</p>
+<p>Su método de predicación era expositivo: predicaba directamente a través de libros enteros de la Biblia, sermón por sermón. Aún poseemos cientos de sus homilías sobre Génesis, los Salmos, Mateo, Juan, Hechos, y el corpus paulino entero. Predicaba en griego sencillo para gente común. No tenía miedo de aplicar la Escritura agudamente a la vida moral de sus oyentes, incluyendo a los ricos y poderosos. Sus sermones antioquenos más famosos, las homilías de las <em>Estatuas</em> del 387, fueron predicados durante una revuelta fiscal cuando los ciudadanos de Antioquía habían derribado las estatuas imperiales y temían la venganza del emperador. Crisóstomo predicó diariamente a través de la crisis. El emperador perdonó a la ciudad.</p>
+<p>En 398 Crisóstomo fue efectivamente secuestrado de Antioquía por agentes imperiales y consagrado obispo de Constantinopla contra su voluntad. Inmediatamente comenzó a reformar el clero, a atacar el lujo imperial, y a predicar contra la moral de la corte. La Emperatriz Eudoxia se convirtió en su enemiga. Fue exiliado dos veces. Murió en una marcha forzada en 407, sus últimas palabras registradas siendo: <em>«Gloria a Dios por todo»</em>. El hombre cuyo púlpito había sostenido una vez la capital del imperio murió en un camino trasero en oscuridad. Tres décadas después su cuerpo fue regresado en honor a Constantinopla. El púlpito había sobrevivido al trono.</p>
+<h4>Ambrosio de Milán (c. 339&ndash;397)</h4>
+<p>En Occidente, el gran predicador fue <strong>Ambrosio</strong>. Un gobernador romano y abogado entrenado, fue aclamado obispo de Milán por el pueblo en 374 &mdash; mientras todavía no estaba bautizado. Dentro de una semana fue bautizado, ordenado, y consagrado obispo. Pasó el resto de su vida tratando de ser digno de un oficio que nunca había buscado. Cuando el Emperador Teodosio ordenó la masacre de siete mil ciudadanos de Tesalónica en 390, Ambrosio le rehusó la comunión hasta que hizo penitencia pública. El emperador del Imperio Romano se inclinó ante el púlpito de un obispo. La imagen es uno de los grandes íconos del cristianismo del cuarto siglo.</p>
+<p>La predicación de Ambrosio también hizo una cosa más de consecuencia permanente. Un joven profesor norteafricano de retórica llamado Agustín, vagando por Milán en 384 buscando algo que no podía nombrar, fue a oír a Ambrosio predicar &mdash; al principio solo para estudiar la técnica del famoso obispo. Se quedó porque las palabras comenzaron a encontrarlo. La conversión de Agustín, que conoceremos en la Unidad 4, comenzó en las bancas de un sermón de Ambrosio.</p>
+<h4>Los Capadocios como predicadores, y el manual de predicación de Agustín</h4>
+<p>El <em>Hexamerón</em> de Basilio (sermones sobre los seis días de la creación) es una de las grandes obras expositivas de la iglesia primitiva. Los Cinco Discursos Teológicos de Gregorio de Nacianzo son sermones predicados contra los arrianos resurgentes, y están entre los sermones más teológicamente densos jamás entregados. Las homilías de Gregorio de Nisa sobre las Bienaventuranzas y el Padre Nuestro permanecen en imprenta hoy como lectura devocional. El cuarto siglo cierra (apenas &mdash; terminado en 426) con el primer manual de predicación cristiano jamás escrito: <em>De Doctrina Christiana</em> de Agustín, Libro IV. El predicador cristiano, escribió Agustín, tiene las mismas tres metas que el orador clásico &mdash; enseñar, deleitar, y conmover &mdash; pero sus materiales no son inventados; son la Escritura inspirada. El trabajo del predicador es hacer el texto claro, atractivo, y transformador de vidas. El manual de Agustín pasó a la iglesia medieval y a través de ella a la Reforma, y el bosquejo básico de su enfoque es aún reconocible en cualquier curso honesto de predicación enseñado hoy. El cuarto siglo no inventó la predicación &mdash; el primer siglo lo hizo. Pero el cuarto siglo la perfeccionó, la refinó, le dio categorías y manuales, y produjo un cuerpo de obra expositiva que ha alimentado cada gran era de predicación desde entonces.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">Why This Matters for Ministry Today</h3><h3 class="es-only">Por qué esto importa para el ministerio hoy</h3>
+<div class="en-only">
+<p><strong>First, doctrine is not optional.</strong> Arius was not a bad man with bad theology. He was a popular preacher with a logical-sounding argument. The church survived him only because she had bishops who knew exactly which word, in which language, would hold the line.</p>
+<p><strong>Second, councils define what every pulpit must defend.</strong> When you preach Christ as fully God and fully man this Sunday, you are preaching Nicaea and Chalcedon. Honor the line. Stand on it.</p>
+<p><strong>Third, the validity of the gospel does not depend on the worthiness of the preacher.</strong> The Donatist controversy taught the church a hard lesson: the sacrament is from Christ, not from the minister. This protects every congregation from the moral collapse of any pastor and every preacher from the unbearable weight of being the source of his own message.</p>
+<p><strong>Fourth, the second great century of preaching was the century of expository preaching through whole books.</strong> Chrysostom did not bounce from topical sermon to topical sermon. He preached through Genesis, then through Matthew, then through the Pauline corpus. Whole books. Verse by verse. Sunday by Sunday. The book-by-book pattern Chrysostom modeled has been the bedrock of every great preaching ministry since.</p>
+</div>
+<div class="es-only">
+<p><strong>Primera, la doctrina no es opcional.</strong> Arrio no era un mal hombre con mala teología. Era un predicador popular con un argumento de sonido lógico. La iglesia lo sobrevivió solo porque tenía obispos que sabían exactamente qué palabra, en qué idioma, mantendría la línea.</p>
+<p><strong>Segunda, los concilios definen lo que cada púlpito debe defender.</strong> Cuando predique a Cristo como plenamente Dios y plenamente hombre este domingo, está predicando Nicea y Calcedonia. Honre la línea. Párese en ella.</p>
+<p><strong>Tercera, la validez del evangelio no depende de la dignidad del predicador.</strong> La controversia donatista le enseñó a la iglesia una lección dura: el sacramento es de Cristo, no del ministro. Esto protege a cada congregación del colapso moral de cualquier pastor y a cada predicador del peso insoportable de ser la fuente de su propio mensaje.</p>
+<p><strong>Cuarta, el segundo gran siglo de la predicación fue el siglo de la predicación expositiva a través de libros enteros.</strong> Crisóstomo no rebotaba de sermón temático a sermón temático. Predicaba a través de Génesis, luego a través de Mateo, luego a través del corpus paulino. Libros enteros. Versículo por versículo. Domingo tras domingo. El patrón libro-por-libro que Crisóstomo modeló ha sido el cimiento de cada gran ministerio de predicación desde entonces.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">Closing: The Empire Falls, the Church Endures</h3><h3 class="es-only">Cierre: El imperio cae, la iglesia perdura</h3>
+<div class="en-only">
+<p>By 451, when the bishops adjourned at Chalcedon, the Roman Empire that had once been Christianity's persecutor and was now her patron was beginning to crumble. The western half would not survive the fifth century. In 410, Visigoths under Alaric sacked Rome itself for the first time in eight hundred years. The shock was so great that Augustine of Hippo would spend the last decade of his life writing <em>The City of God</em> to explain what had happened.</p>
+<p>And the church would not die with the empire. The doctrines hammered out at Nicaea, Constantinople, Ephesus, and Chalcedon would carry the gospel intact through the centuries of barbarian darkness that came next. The expository preaching modeled by Chrysostom and Ambrose would become the heartbeat of monastic communities preserving the faith through the collapse. Pass this examination, and we will meet the most important figure of the next thousand years: <strong>Augustine of Hippo</strong>, the man who watched Rome fall and explained it in light of eternity. Unit 4 awaits.</p>
+</div>
+<div class="es-only">
+<p>Para 451, cuando los obispos se levantaron en Calcedonia, el Imperio Romano que una vez había sido perseguidor del cristianismo y ahora era su patrón comenzaba a desmoronarse. La mitad occidental no sobreviviría al quinto siglo. En 410, los visigodos bajo Alarico saquearon la propia Roma por primera vez en ochocientos años. El choque fue tan grande que Agustín de Hipona pasaría la última década de su vida escribiendo <em>La Ciudad de Dios</em> para explicar lo que había sucedido.</p>
+<p>Y la iglesia no moriría con el imperio. Las doctrinas forjadas en Nicea, Constantinopla, Éfeso, y Calcedonia llevarían el evangelio intacto a través de los siglos de oscuridad bárbara que vinieron a continuación. La predicación expositiva modelada por Crisóstomo y Ambrosio se convertiría en el latido de las comunidades monásticas preservando la fe a través del colapso. Apruebe este examen, y conoceremos a la figura más importante de los próximos mil años: <strong>Agustín de Hipona</strong>, el hombre que vio caer a Roma y la explicó a la luz de la eternidad. La Unidad 4 espera.</p>
+</div></section>
+
+<section class="exam"><h3 class="en-only">Unit 3 Examination &mdash; 30 Questions</h3><h3 class="es-only">Examen de la Unidad 3 &mdash; 30 Preguntas</h3>
+<p class="en-only"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></p>
+<p class="es-only"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% de forma independiente. Cada OM califica de inmediato al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></p>
+<div class="exam-status hidden" id="exam-status"></div>
+<div class="mc-section" id="mc-section">
+<h4 class="en-only">Multiple Choice &mdash; 20 Questions</h4><h4 class="es-only">Opción Múltiple &mdash; 20 Preguntas</h4>
+<div id="mc-questions"></div>
+</div>
+<div class="sa-section" id="sa-section">
+<h4 class="en-only">Short Answer &mdash; 10 Questions <span class="sa-badge" id="sa-badge"></span></h4><h4 class="es-only">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="sa-badge-es"></span></h4>
+<p class="sa-note en-only" id="sa-note-en"></p>
+<p class="sa-note es-only" id="sa-note-es"></p>
+<div id="kw-questions"></div>
+</div>
+<div class="exam-controls">
+<button class="submit-exam" id="submit-btn" type="button"><span class="en-only">Submit Exam</span><span class="es-only">Enviar Examen</span></button>
+<button class="btn-reset" id="reset-btn" type="button"><span class="en-only">Reset</span><span class="es-only">Reiniciar</span></button>
+<span id="result"></span>
+</div>
+</section>
+</main>
+<footer class="unit-nav"><button id="prev-unit-btn" type="button">&larr; Unit 2 / Unidad 2</button><button id="next-unit-btn" type="button" disabled>Unit 4 / Unidad 4 &rarr;</button></footer>
+<script>
+(function(){
+const langButtons=document.querySelectorAll('.lang-toggle button');
+function setLang(lang){
+  document.body.classList.remove('lang-en','lang-es','lang-both');
+  document.body.classList.add('lang-'+lang);
+  langButtons.forEach(b=>b.classList.toggle('active', b.getAttribute('data-lang')===lang));
+}
+langButtons.forEach(btn=>{btn.addEventListener('click',()=>setLang(btn.getAttribute('data-lang')));});
+
+// Student / track
+let student=null;
+try{student=JSON.parse(localStorage.getItem('cts_student')||'null');}catch(e){student=null;}
+const regWarn=document.getElementById('reg-warn');
+const greetingEl=document.getElementById('greeting');
+const trackBadgeWrap=document.getElementById('track-badge-wrap');
+
+function applyStudentUI(){
+  const isEs=document.body.classList.contains('lang-es');
+  if(student&&student.name){
+    greetingEl.textContent=(isEs?'Bienvenido, ':'Welcome, ')+student.name;
+    regWarn.classList.add('hidden');
+    const track=student.track||localStorage.getItem('cts_track')||'cert';
+    const label=track==='mdiv'?'M.Div':(track==='thm'?'Th.M.':(isEs?'Certificado':'Certificate'));
+    trackBadgeWrap.innerHTML='<span class="track-badge">'+label+'</span>';
+  } else {
+    greetingEl.textContent='';
+    regWarn.classList.remove('hidden');
+    trackBadgeWrap.innerHTML='';
+  }
+}
+applyStudentUI();
+langButtons.forEach(btn=>btn.addEventListener('click',applyStudentUI));
+
+// Progress grid
+let progress={};
+try{progress=JSON.parse(localStorage.getItem('cts_ch_progress')||'{}');}catch(e){progress={};}
+const grid=document.getElementById('progress-units');
+for(let n=1;n<=10;n++){
+  const pill=document.createElement('div');
+  pill.className='unit-pill';
+  pill.textContent='U'+n;
+  if(progress['unit'+n])pill.classList.add('done');
+  if(n===3)pill.classList.add('current');
+  grid.appendChild(pill);
+}
+
+// MC and KW data (preserved verbatim)
+const MC=[
+{q_en:"What was the Edict of Milan, and why was it important?",q_es:"¿Qué fue el Edicto de Milán, y por qué fue importante?",options:{A:{en:"It divided the Roman Empire into Eastern and Western halves",es:"Dividió el Imperio Romano en mitades oriental y occidental"},B:{en:"It officially separated Roman Catholicism and Eastern Orthodoxy",es:"Separó oficialmente al catolicismo romano y a la ortodoxia oriental"},C:{en:"It denied Christians the right to own Scriptures",es:"Negó a los cristianos el derecho de poseer Escrituras"},D:{en:"It granted Christians freedom of worship in 313 and ended the era of imperial persecution",es:"Otorgó a los cristianos libertad de culto en 313 y terminó la era de la persecución imperial"}},why_en:"The Edict of Milan (313), issued by Constantine and Licinius, granted freedom of worship and ended Roman persecution.",why_es:"El Edicto de Milán (313), de Constantino y Licinio, otorgó libertad de culto y terminó la persecución romana."},
+{q_en:"Who was the first Roman emperor to openly support Christianity?",q_es:"¿Quién fue el primer emperador romano en apoyar abiertamente el cristianismo?",options:{A:{en:"Diocletian",es:"Diocleciano"},B:{en:"Decius",es:"Decio"},C:{en:"Constantine",es:"Constantino"},D:{en:"Hadrian",es:"Adriano"}},why_en:"Constantine, after his vision and victory at the Milvian Bridge in 312, was the first emperor to openly support Christianity.",why_es:"Constantino, tras su visión y victoria en el Puente Milvio en 312, fue el primer emperador en apoyar abiertamente el cristianismo."},
+{q_en:"What was the Donatist controversy primarily about?",q_es:"¿Sobre qué trataba principalmente la controversia donatista?",options:{A:{en:"Whether Christ was fully God",es:"Si Cristo era plenamente Dios"},B:{en:"Whether sacraments administered by clergy who failed under persecution were valid",es:"Si los sacramentos administrados por clero que falló bajo persecución eran válidos"},C:{en:"Whether Gentiles could be baptized without circumcision",es:"Si los gentiles podían bautizarse sin circuncisión"},D:{en:"Whether Easter should be on a fixed date",es:"Si la Pascua debería ser en fecha fija"}},why_en:"Donatists held that sacraments by lapsed clergy (traditores) were invalid. The mainstream church taught the sacrament's validity depends on Christ, not the minister — ex opere operato.",why_es:"Los donatistas sostenían que los sacramentos por clero caído (traditores) eran inválidos. La iglesia principal enseñaba que la validez depende de Cristo, no del ministro — ex opere operato."},
+{q_en:"What did Arius teach that triggered the most serious theological crisis of the fourth century?",q_es:"¿Qué enseñó Arrio que desencadenó la crisis teológica más seria del cuarto siglo?",options:{A:{en:"That the physical world was created by an inferior deity",es:"Que el mundo físico fue creado por una deidad inferior"},B:{en:"That Christ had only one nature",es:"Que Cristo tenía solo una naturaleza"},C:{en:"That the Son was a created being, not co-eternal with the Father — 'there was when He was not'",es:"Que el Hijo era un ser creado, no coeterno con el Padre — «hubo cuando Él no era»"},D:{en:"That Mary should not be called the mother of God",es:"Que María no debía llamarse madre de Dios"}},why_en:"Arius taught the Son had a beginning and was not co-eternal with the Father. Nicaea condemned this with the word homoousios.",why_es:"Arrio enseñó que el Hijo tuvo principio y no era coeterno con el Padre. Nicea condenó esto con la palabra homoousios."},
+{q_en:"What Greek word did Nicaea use to define the Son's relationship to the Father?",q_es:"¿Qué palabra griega usó Nicea para definir la relación del Hijo con el Padre?",options:{A:{en:"Theotokos (God-bearer)",es:"Theotokos (portadora de Dios)"},B:{en:"Logos (Word)",es:"Logos (Verbo)"},C:{en:"Homoousios (of the same substance)",es:"Homoousios (de la misma sustancia)"},D:{en:"Hypostasis (person)",es:"Hypostasis (persona)"}},why_en:"Homoousios — 'of the same substance' — was Nicaea's central word. The Son is fully and equally God with the Father, not just similar (homoiousios).",why_es:"Homoousios — «de la misma sustancia» — fue la palabra central de Nicea. El Hijo es plena e igualmente Dios con el Padre, no solo semejante (homoiousios)."},
+{q_en:"In what year was the Council of Nicaea held?",q_es:"¿En qué año se celebró Nicea?",options:{A:{en:"AD 313",es:"313 d.C."},B:{en:"AD 451",es:"451 d.C."},C:{en:"AD 381",es:"381 d.C."},D:{en:"AD 325",es:"325 d.C."}},why_en:"The First Ecumenical Council met at Nicaea in 325, called by Constantine, with about 318 bishops.",why_es:"El Primer Concilio Ecuménico se reunió en Nicea en 325, convocado por Constantino, con unos 318 obispos."},
+{q_en:"Who defended Nicene orthodoxy and was exiled five times by Arian or semi-Arian emperors?",q_es:"¿Quién defendió la ortodoxia nicena y fue exiliado cinco veces?",options:{A:{en:"Athanasius of Alexandria",es:"Atanasio de Alejandría"},B:{en:"Ambrose of Milan",es:"Ambrosio de Milán"},C:{en:"John Chrysostom",es:"Juan Crisóstomo"},D:{en:"Basil the Great",es:"Basilio el Grande"}},why_en:"Athanasius — 'contra mundum' — defended Nicene faith for 45 years, was exiled five times to four countries, returned five times.",why_es:"Atanasio — «contra mundum» — defendió la fe nicena por 45 años, fue exiliado cinco veces a cuatro países, regresó cinco veces."},
+{q_en:"What did Athanasius give the church in his Easter letter of 367?",q_es:"¿Qué le dio Atanasio a la iglesia en su carta pascual del 367?",options:{A:{en:"The first known list of the 27 NT books we still use today",es:"La primera lista conocida de los 27 libros del NT que aún usamos hoy"},B:{en:"The Apostles' Creed",es:"El Credo de los Apóstoles"},C:{en:"The Latin Vulgate translation",es:"La traducción de la Vulgata Latina"},D:{en:"A complete liturgy for Easter",es:"Una liturgia completa para Pascua"}},why_en:"Athanasius's Easter letter of 367 listed the 27 NT books in the order we still use, formally closing the canon question.",why_es:"La carta pascual de Atanasio del 367 enumeró los 27 libros del NT en el orden que aún usamos, cerrando formalmente la cuestión del canon."},
+{q_en:"Who were the three Cappadocian Fathers?",q_es:"¿Quiénes fueron los tres Padres Capadocios?",options:{A:{en:"Irenaeus, Justin Martyr, Tertullian",es:"Ireneo, Justino Mártir, Tertuliano"},B:{en:"Basil the Great, Gregory of Nazianzus, Gregory of Nyssa",es:"Basilio el Grande, Gregorio de Nacianzo, Gregorio de Nisa"},C:{en:"Athanasius, Ambrose, Augustine",es:"Atanasio, Ambrosio, Agustín"},D:{en:"Clement, Ignatius, Polycarp",es:"Clemente, Ignacio, Policarpo"}},why_en:"Basil, Gregory of Nazianzus (the Theologian), and Gregory of Nyssa perfected the Trinity formula: one ousia in three hypostases.",why_es:"Basilio, Gregorio de Nacianzo (el Teólogo), y Gregorio de Nisa perfeccionaron la fórmula trinitaria: una ousia en tres hypostases."},
+{q_en:"What did the Council of Constantinople (381) accomplish?",q_es:"¿Qué logró el Concilio de Constantinopla (381)?",options:{A:{en:"It condemned Arius for the first time",es:"Condenó a Arrio por primera vez"},B:{en:"It defined Christ's two natures",es:"Definió las dos naturalezas de Cristo"},C:{en:"It condemned Nestorius",es:"Condenó a Nestorio"},D:{en:"It reaffirmed and expanded the Nicene Creed, especially on the Holy Spirit, finally crushing Arianism",es:"Reafirmó y expandió el Credo Niceno, especialmente sobre el Espíritu Santo, aplastando finalmente el arrianismo"}},why_en:"Constantinople (381) reaffirmed Nicaea, expanded the creed on the Holy Spirit, crushed Arianism. The Nicene Creed we recite today is the Constantinopolitan version.",why_es:"Constantinopla (381) reafirmó Nicea, expandió el credo sobre el Espíritu Santo, aplastó el arrianismo. El Credo Niceno que recitamos hoy es la versión constantinopolitana."},
+{q_en:"What did the Council of Ephesus (431) decide?",q_es:"¿Qué decidió el Concilio de Éfeso (431)?",options:{A:{en:"That Christ has only one nature",es:"Que Cristo tiene solo una naturaleza"},B:{en:"That Mary is rightly called theotokos and condemned Nestorianism",es:"Que María es correctamente llamada theotokos y condenó el nestorianismo"},C:{en:"That sacraments by lapsed clergy are valid",es:"Que los sacramentos por clero caído son válidos"},D:{en:"That the Son is of the same substance as the Father",es:"Que el Hijo es de la misma sustancia que el Padre"}},why_en:"Ephesus condemned Nestorius and affirmed Mary as theotokos because the One she bore was truly God incarnate — one Person, fully divine and fully human.",why_es:"Éfeso condenó a Nestorio y afirmó a María como theotokos porque Aquel a quien llevó era verdaderamente Dios encarnado — una Persona, plenamente divina y plenamente humana."},
+{q_en:"What did the Council of Chalcedon (451) define about Jesus Christ?",q_es:"¿Qué definió Calcedonia (451) sobre Jesucristo?",options:{A:{en:"One Person in two natures, fully God and fully man, united without confusion, change, division, or separation",es:"Una Persona en dos naturalezas, plenamente Dios y plenamente hombre, unidas sin confusión, cambio, división, o separación"},B:{en:"One divine nature only",es:"Solo una naturaleza divina"},C:{en:"Two persons in one nature",es:"Dos personas en una naturaleza"},D:{en:"He existed only in spirit",es:"Existió solo en espíritu"}},why_en:"Chalcedon rejected both Nestorianism (two persons) and Monophysitism (one nature) and gave the church its definitive Christological formula.",why_es:"Calcedonia rechazó tanto el nestorianismo (dos personas) como el monofisismo (una naturaleza) y dio la fórmula cristológica definitiva."},
+{q_en:"Why is the fourth century considered one of the great centuries of Christian preaching?",q_es:"¿Por qué se considera al cuarto siglo uno de los grandes siglos de la predicación?",options:{A:{en:"Because the empire forced everyone to become Christian",es:"Porque el imperio forzó a todos a hacerse cristianos"},B:{en:"Because Constantine himself preached often",es:"Porque Constantino mismo predicaba a menudo"},C:{en:"Post-Constantine freedom, classical rhetoric meeting biblical content, doctrinal controversies forcing precision, urban congregations needing instruction, and the basilicas providing public spaces",es:"Libertad post-Constantino, retórica clásica encontrándose con contenido bíblico, controversias doctrinales forzando precisión, congregaciones urbanas necesitando instrucción, y las basílicas proveyendo espacios públicos"},D:{en:"Because preaching was no longer required to be biblical",es:"Porque la predicación ya no requería ser bíblica"}},why_en:"Five factors converged: freedom, education, controversy, audience, architecture. The result was a Golden Age that produced Chrysostom, Ambrose, the Cappadocians, and Augustine.",why_es:"Convergieron cinco factores: libertad, educación, controversia, audiencia, arquitectura. El resultado fue una Edad de Oro que produjo a Crisóstomo, Ambrosio, los Capadocios, y Agustín."},
+{q_en:"Who was nicknamed 'Golden Mouth' (Chrysostomos) by his hearers?",q_es:"¿Quién fue apodado «Boca de Oro» (Chrysostomos) por sus oyentes?",options:{A:{en:"John of Antioch and Constantinople (c. 349-407)",es:"Juan de Antioquía y Constantinopla (c. 349-407)"},B:{en:"Ambrose of Milan",es:"Ambrosio de Milán"},C:{en:"Gregory of Nazianzus",es:"Gregorio de Nacianzo"},D:{en:"Athanasius of Alexandria",es:"Atanasio de Alejandría"}},why_en:"John Chrysostom — born in Antioch, kidnapped to be bishop of Constantinople, exiled twice, died in 407 saying 'Glory to God for everything.'",why_es:"Juan Crisóstomo — nacido en Antioquía, secuestrado para ser obispo de Constantinopla, exiliado dos veces, murió en 407 diciendo «Gloria a Dios por todo»."},
+{q_en:"What was distinctive about Chrysostom's preaching method?",q_es:"¿Qué fue distintivo del método de Crisóstomo?",options:{A:{en:"He preached topical sermons on cultural issues",es:"Predicaba sermones temáticos sobre asuntos culturales"},B:{en:"He preached expositorily, straight through whole books of the Bible, sermon by sermon",es:"Predicaba expositivamente, directamente a través de libros enteros de la Biblia, sermón por sermón"},C:{en:"He read sermons word-for-word from prepared texts",es:"Leía sermones palabra por palabra de textos preparados"},D:{en:"He delivered only short homilies under five minutes",es:"Solo entregaba homilías cortas de menos de cinco minutos"}},why_en:"Chrysostom's expository, book-by-book method left hundreds of homilies on Genesis, Psalms, Matthew, John, Acts, and the Pauline corpus — the bedrock pattern of every great preaching ministry since.",why_es:"El método expositivo libro-por-libro de Crisóstomo dejó cientos de homilías sobre Génesis, Salmos, Mateo, Juan, Hechos, y el corpus paulino — el patrón fundamental de cada gran ministerio de predicación desde entonces."},
+{q_en:"Which Western preacher's sermons were instrumental in the conversion of Augustine?",q_es:"¿Los sermones de qué predicador occidental fueron instrumentales en la conversión de Agustín?",options:{A:{en:"John Chrysostom",es:"Juan Crisóstomo"},B:{en:"Athanasius of Alexandria",es:"Atanasio de Alejandría"},C:{en:"Gregory of Nazianzus",es:"Gregorio de Nacianzo"},D:{en:"Ambrose of Milan",es:"Ambrosio de Milán"}},why_en:"Augustine went to Milan in 384 to study Ambrose's rhetorical technique. He stayed because the words began to find him. The conversion of Augustine started in the pews of a sermon by Ambrose.",why_es:"Agustín fue a Milán en 384 para estudiar la técnica retórica de Ambrosio. Se quedó porque las palabras comenzaron a encontrarlo. La conversión de Agustín comenzó en las bancas de un sermón de Ambrosio."},
+{q_en:"What did Ambrose famously demand of the Emperor Theodosius after the Thessalonica massacre of 390?",q_es:"¿Qué demandó famosamente Ambrosio del Emperador Teodosio después de la masacre de Tesalónica del 390?",options:{A:{en:"That he abdicate the throne",es:"Que abdicara el trono"},B:{en:"That he go on a pilgrimage to Jerusalem",es:"Que peregrinara a Jerusalén"},C:{en:"That he do public penance before being readmitted to communion",es:"Que hiciera penitencia pública antes de ser readmitido a la comunión"},D:{en:"That he resign his army commission",es:"Que renunciara a su comisión militar"}},why_en:"Ambrose refused Theodosius communion until he did public penance for the Thessalonica massacre. The emperor of Rome bowed to a bishop's pulpit — one of the great icons of fourth-century Christianity.",why_es:"Ambrosio rehusó la comunión a Teodosio hasta que hiciera penitencia pública por la masacre de Tesalónica. El emperador de Roma se inclinó ante el púlpito de un obispo — uno de los grandes íconos del cristianismo del cuarto siglo."},
+{q_en:"What is De Doctrina Christiana, Book IV?",q_es:"¿Qué es De Doctrina Christiana, Libro IV?",options:{A:{en:"Augustine's autobiography",es:"La autobiografía de Agustín"},B:{en:"The Latin translation of Athanasius's Easter letter",es:"La traducción latina de la carta pascual de Atanasio"},C:{en:"A treatise against the Donatists",es:"Un tratado contra los donatistas"},D:{en:"The first Christian preaching manual ever written",es:"El primer manual de predicación cristiano jamás escrito"}},why_en:"Augustine's De Doctrina Christiana Book IV (finished 426) is the first Christian preaching manual. The preacher's three goals — to teach, delight, and move — but his materials are the inspired Scripture, not invention.",why_es:"El Libro IV de De Doctrina Christiana de Agustín (terminado en 426) es el primer manual de predicación cristiano. Las tres metas del predicador — enseñar, deleitar, conmover — pero sus materiales son la Escritura inspirada, no invención."},
+{q_en:"What is the formula by which the Cappadocians defined the Trinity?",q_es:"¿Cuál es la fórmula con que los Capadocios definieron la Trinidad?",options:{A:{en:"Three substances in one person",es:"Tres sustancias en una persona"},B:{en:"One ousia (substance) in three hypostases (persons)",es:"Una ousia (sustancia) en tres hypostases (personas)"},C:{en:"One person with two natures",es:"Una persona con dos naturalezas"},D:{en:"Three gods in one purpose",es:"Tres dioses en un propósito"}},why_en:"The Cappadocian formula — one ousia in three hypostases — has held the doctrine of the Trinity steady for sixteen centuries. One God in three Persons, equal in essence, distinct in person.",why_es:"La fórmula capadocia — una ousia en tres hypostases — ha sostenido firme la doctrina de la Trinidad por dieciséis siglos. Un Dios en tres Personas, iguales en esencia, distintos en persona."},
+{q_en:"In what order did the four ecumenical councils of this period occur?",q_es:"¿En qué orden ocurrieron los cuatro concilios ecuménicos de este período?",options:{A:{en:"Nicaea (325), Constantinople (381), Ephesus (431), Chalcedon (451)",es:"Nicea (325), Constantinopla (381), Éfeso (431), Calcedonia (451)"},B:{en:"Constantinople (325), Nicaea (381), Chalcedon (431), Ephesus (451)",es:"Constantinopla (325), Nicea (381), Calcedonia (431), Éfeso (451)"},C:{en:"Ephesus (325), Chalcedon (381), Nicaea (431), Constantinople (451)",es:"Éfeso (325), Calcedonia (381), Nicea (431), Constantinopla (451)"},D:{en:"Chalcedon (325), Ephesus (381), Constantinople (431), Nicaea (451)",es:"Calcedonia (325), Éfeso (381), Constantinopla (431), Nicea (451)"}},why_en:"The four great ecumenical councils of this era: Nicaea 325 (homoousios, anti-Arian), Constantinople 381 (Trinity completed), Ephesus 431 (theotokos, anti-Nestorian), Chalcedon 451 (one Person two natures).",why_es:"Los cuatro grandes concilios ecuménicos de esta era: Nicea 325 (homoousios, antiarriano), Constantinopla 381 (Trinidad completada), Éfeso 431 (theotokos, antinestoriano), Calcedonia 451 (una Persona dos naturalezas)."}
+];
+const KEY=['D','C','B','C','C','D','A','A','B','D','B','A','C','A','B','D','C','D','B','A'];
+const KW=[
+{q_en:"Explain the significance of Constantine's victory at the Milvian Bridge and the Edict of Milan.",q_es:"Explica el significado de la victoria de Constantino en el Puente Milvio y el Edicto de Milán.",kw_en:['constantine','milvian','edict','milan','persecution','freedom'],kw_es:['constantino','milvio','edicto','milán','persecución','libertad'],sample_en:"Constantine won the Battle of the Milvian Bridge in October 312 after seeing a sign in the sky. He marked his soldiers' shields with the Christian Chi-Rho. He attributed the victory to the Christian God. The Edict of Milan in 313 granted Christians freedom of worship, restored confiscated property, and ended the era of periodic, sometimes empire-wide Roman persecution. Within a generation Christianity would be the favored religion of the empire.",sample_es:"Constantino ganó la Batalla del Puente Milvio en octubre del 312 tras ver una señal en el cielo. Marcó los escudos de sus soldados con el Chi-Rho cristiano. Atribuyó la victoria al Dios cristiano. El Edicto de Milán en 313 otorgó a los cristianos libertad de culto, restauró la propiedad confiscada, y terminó la era de la persecución romana periódica y a veces imperio-extensa. Dentro de una generación el cristianismo sería la religión favorecida del imperio."},
+{q_en:"Summarize the Donatist controversy and explain the principle the church established to resolve it.",q_es:"Resume la controversia donatista y explica el principio que la iglesia estableció para resolverla.",kw_en:['donatist','sacrament','traditores','minister','christ','ex opere operato'],kw_es:['donatista','sacramento','traditores','ministro','cristo','ex opere operato'],sample_en:"During Diocletian's persecution some bishops handed over the Scriptures (traditores). After persecution, Donatists rejected sacraments performed by such bishops as invalid. The mainstream church, defended by Augustine, taught that the validity of the sacrament depends on Christ, not on the worthiness of the minister — the principle of ex opere operato. A baptism is a baptism even when performed by an unworthy bishop, because Christ does the baptizing.",sample_es:"Durante la persecución de Diocleciano algunos obispos entregaron las Escrituras (traditores). Después de la persecución, los donatistas rechazaron como inválidos los sacramentos por tales obispos. La iglesia principal, defendida por Agustín, enseñó que la validez del sacramento depende de Cristo, no de la dignidad del ministro — el principio de ex opere operato. Un bautismo es un bautismo aun por un obispo indigno, porque Cristo bautiza."},
+{q_en:"Explain the Arian crisis and the homoousios resolution at Nicaea.",q_es:"Explica la crisis arriana y la resolución del homoousios en Nicea.",kw_en:['arius','son','created','nicaea','homoousios','substance'],kw_es:['arrio','hijo','creado','nicea','homoousios','sustancia'],sample_en:"Arius taught that the Son was a created being, not co-eternal with the Father — 'there was when He was not.' The Council of Nicaea in 325 condemned this with the word homoousios — of the same substance. The Son is fully and equally God with the Father, begotten not made, true God of true God. The Nicene Creed defined the Christian confession against the Arian denial.",sample_es:"Arrio enseñó que el Hijo era un ser creado, no coeterno con el Padre — «hubo cuando Él no era». El Concilio de Nicea en 325 condenó esto con la palabra homoousios — de la misma sustancia. El Hijo es plena e igualmente Dios con el Padre, engendrado no hecho, Dios verdadero de Dios verdadero. El Credo Niceno definió la confesión cristiana contra la negación arriana."},
+{q_en:"Name the three Cappadocian Fathers and the contribution each made.",q_es:"Nombra a los tres Padres Capadocios y la contribución de cada uno.",kw_en:['basil','gregory','nazianzus','nyssa','trinity','spirit'],kw_es:['basilio','gregorio','nacianzo','nisa','trinidad','espíritu'],sample_en:"Basil the Great (c. 330-379), bishop of Caesarea, wrote a monastic rule and treatise On the Holy Spirit, defended the Spirit's full deity. Gregory of Nazianzus (c. 329-389), 'the Theologian,' delivered the Five Theological Orations. Gregory of Nyssa (c. 335-395), Basil's brother, the philosopher of the Cappadocians. Together they gave the church the formula: one ousia in three hypostases.",sample_es:"Basilio el Grande (c. 330-379), obispo de Cesarea, escribió una regla monástica y el tratado Sobre el Espíritu Santo, defendió la plena deidad del Espíritu. Gregorio de Nacianzo (c. 329-389), «el Teólogo», entregó los Cinco Discursos Teológicos. Gregorio de Nisa (c. 335-395), hermano de Basilio, el filósofo de los Capadocios. Juntos dieron a la iglesia la fórmula: una ousia en tres hypostases."},
+{q_en:"Explain the Chalcedonian Definition (451) and what it settled about Christ.",q_es:"Explica la Definición Calcedoniana (451) y qué resolvió sobre Cristo.",kw_en:['chalcedon','one person','two natures','god','man','confusion'],kw_es:['calcedonia','una persona','dos naturalezas','dios','hombre','confusión'],sample_en:"Chalcedon defined Jesus Christ as one Person in two natures, fully God and fully man, the two natures united without confusion, without change, without division, without separation. This rejected Nestorianism (which split Christ into two persons) and Monophysitism (which fused the natures into one). It is the standard of orthodox Christology in the West ever since.",sample_es:"Calcedonia definió a Jesucristo como una Persona en dos naturalezas, plenamente Dios y plenamente hombre, las dos naturalezas unidas sin confusión, sin cambio, sin división, sin separación. Esto rechazó el nestorianismo (que dividió a Cristo en dos personas) y el monofisismo (que fusionó las naturalezas en una). Es el estándar de la cristología ortodoxa en Occidente desde entonces."},
+{q_en:"List the five reasons the fourth century produced great preaching.",q_es:"Enumera las cinco razones por las que el cuarto siglo produjo gran predicación.",kw_en:['freedom','rhetoric','controversy','converts','basilicas'],kw_es:['libertad','retórica','controversia','conversos','basílicas'],sample_en:"(1) Post-Constantine freedom let preachers speak in the open. (2) Classical rhetorical training met biblical content. (3) Theological controversies forced precision — when preaching against Arius every word matters. (4) Cities full of new converts needed instruction; catechetical preaching exploded. (5) Constantine's basilicas gave preachers large, acoustically generous public spaces with congregations of thousands.",sample_es:"(1) La libertad post-Constantino dejó a los predicadores hablar al aire libre. (2) El entrenamiento retórico clásico se encontró con el contenido bíblico. (3) Las controversias teológicas forzaron precisión — predicando contra Arrio cada palabra importa. (4) Las ciudades llenas de nuevos conversos necesitaban instrucción; la predicación catequética explotó. (5) Las basílicas de Constantino dieron a los predicadores espacios públicos grandes y acústicamente generosos con congregaciones de miles."},
+{q_en:"Tell the story of John Chrysostom and explain why he stands as the model fourth-century preacher.",q_es:"Cuenta la historia de Juan Crisóstomo y explica por qué es el predicador modelo del cuarto siglo.",kw_en:['chrysostom','antioch','constantinople','expository','exile','glory'],kw_es:['crisóstomo','antioquía','constantinopla','expositiva','exilio','gloria'],sample_en:"John Chrysostom ('Golden Mouth') was born in Antioch around 349, trained in classical rhetoric, became a monk, ruined his stomach with desert austerities, returned to Antioch and preached for twelve years. His method was expository — straight through whole books of the Bible, sermon by sermon. We have hundreds of his homilies on Genesis, Matthew, John, Acts, and the Pauline corpus. Made bishop of Constantinople in 398, he attacked imperial luxury and was exiled twice. He died on a forced march in 407 saying 'Glory to God for everything.' His book-by-book exposition has been the bedrock pattern of great preaching ever since.",sample_es:"Juan Crisóstomo («Boca de Oro») nació en Antioquía alrededor del 349, se entrenó en retórica clásica, se hizo monje, arruinó su estómago con austeridades del desierto, regresó a Antioquía y predicó por doce años. Su método era expositivo — directamente a través de libros enteros de la Biblia, sermón por sermón. Tenemos cientos de sus homilías sobre Génesis, Mateo, Juan, Hechos, y el corpus paulino. Hecho obispo de Constantinopla en 398, atacó el lujo imperial y fue exiliado dos veces. Murió en una marcha forzada en 407 diciendo «Gloria a Dios por todo». Su exposición libro-por-libro ha sido el patrón fundamental de la gran predicación desde entonces."},
+{q_en:"Describe Ambrose of Milan and his confrontation with the Emperor Theodosius.",q_es:"Describe a Ambrosio de Milán y su confrontación con el Emperador Teodosio.",kw_en:['ambrose','milan','theodosius','thessalonica','penance','communion'],kw_es:['ambrosio','milán','teodosio','tesalónica','penitencia','comunión'],sample_en:"Ambrose was a Roman governor and lawyer acclaimed bishop of Milan in 374 while still unbaptized — within a week he was baptized, ordained, and consecrated. When Theodosius ordered the massacre of seven thousand citizens of Thessalonica in 390, Ambrose refused him communion until he did public penance. The emperor of Rome bowed to a bishop's pulpit. Ambrose's preaching also drew young Augustine to Milan, where his words began the conversion that would change the history of theology.",sample_es:"Ambrosio era un gobernador romano y abogado aclamado obispo de Milán en 374 mientras aún no estaba bautizado — dentro de una semana fue bautizado, ordenado, y consagrado. Cuando Teodosio ordenó la masacre de siete mil ciudadanos de Tesalónica en 390, Ambrosio le rehusó la comunión hasta que hizo penitencia pública. El emperador de Roma se inclinó ante el púlpito de un obispo. La predicación de Ambrosio también atrajo al joven Agustín a Milán, donde sus palabras comenzaron la conversión que cambiaría la historia de la teología."},
+{q_en:"List the four ecumenical councils of this period in order, with the year and the central issue each settled.",q_es:"Enumera los cuatro concilios ecuménicos de este período en orden, con el año y la cuestión central que cada uno resolvió.",kw_en:['nicaea','constantinople','ephesus','chalcedon','homoousios','spirit','theotokos'],kw_es:['nicea','constantinopla','éfeso','calcedonia','homoousios','espíritu','theotokos'],sample_en:"(1) Nicaea 325 — homoousios, the Son of the same substance as the Father, against Arius. (2) Constantinople 381 — reaffirmed Nicaea, expanded the creed on the Holy Spirit, finally crushed Arianism. (3) Ephesus 431 — Mary as theotokos against Nestorius's splitting of Christ into two persons. (4) Chalcedon 451 — one Person in two natures, fully God and fully man, against Monophysitism.",sample_es:"(1) Nicea 325 — homoousios, el Hijo de la misma sustancia que el Padre, contra Arrio. (2) Constantinopla 381 — reafirmó Nicea, expandió el credo sobre el Espíritu Santo, aplastó finalmente el arrianismo. (3) Éfeso 431 — María como theotokos contra la división de Cristo en dos personas por Nestorio. (4) Calcedonia 451 — una Persona en dos naturalezas, plenamente Dios y plenamente hombre, contra el monofisismo."},
+{q_en:"Give four pastoral applications Wayne draws from the fourth and fifth centuries for ministry today.",q_es:"Da cuatro aplicaciones pastorales que Wayne saca del cuarto y quinto siglos para el ministerio hoy.",kw_en:['doctrine','councils','validity','minister','expository','book'],kw_es:['doctrina','concilios','validez','ministro','expositiva','libro'],sample_en:"(1) Doctrine is not optional — Arius was a popular preacher with logical-sounding error; the church survived because bishops knew which word held the line. (2) Councils define what every pulpit must defend — preaching Christ as fully God and fully man this Sunday is preaching Nicaea and Chalcedon. (3) The validity of the gospel does not depend on the worthiness of the preacher (Donatist lesson — sacrament from Christ, not minister). (4) Expository preaching through whole books, sermon by sermon, like Chrysostom modeled, has been the bedrock of every great preaching ministry since.",sample_es:"(1) La doctrina no es opcional — Arrio era un predicador popular con error de sonido lógico; la iglesia sobrevivió porque los obispos sabían qué palabra mantendría la línea. (2) Los concilios definen lo que cada púlpito debe defender — predicar a Cristo como plenamente Dios y plenamente hombre este domingo es predicar Nicea y Calcedonia. (3) La validez del evangelio no depende de la dignidad del predicador (lección donatista — sacramento de Cristo, no del ministro). (4) La predicación expositiva a través de libros enteros, sermón por sermón, como Crisóstomo modeló, ha sido el cimiento de cada gran ministerio de predicación desde entonces."}
+];
+
+function getTrack(){
+  const t=localStorage.getItem('cts_track');
+  if(t==='mdiv'||t==='cert'||t==='thm')return t;
+  if(student&&student.track)return student.track;
+  return 'cert';
+}
+function isMdiv(){return getTrack()==='mdiv';}
+function isThm(){return getTrack()==='thm';}
+// Both Masters tracks grade on the same standard (MC>=90% AND SA>=90%).
+function isMastersLevel(){const t=getTrack();return t==='mdiv'||t==='thm';}
+// ============= Track-aware lockout duration =============
+function lockMinutes(){return isMastersLevel()?15:2;}
+function lockMs(){return Date.now()+lockMinutes()*60*1000;}
+
+
+const MC_PASSED_KEY='cts_ch_u3_mc_passed';
+const SA_PASSED_KEY='cts_ch_u3_sa_passed';
+const LOCK_MC_KEY='cts_ch_u3_lockout';
+const LOCK_SA_KEY='cts_ch_u3_sa_lockout';
+const MC_SCORE_KEY='cts_ch_u3_mc_score';
+
+function mcPassed(){return localStorage.getItem(MC_PASSED_KEY)==='1';}
+function saPassed(){return localStorage.getItem(SA_PASSED_KEY)==='1';}
+function activeLock(){
+  const now=Date.now();
+  const mc=parseInt(localStorage.getItem(LOCK_MC_KEY)||'0',10);
+  const sa=parseInt(localStorage.getItem(LOCK_SA_KEY)||'0',10);
+  if(mcPassed()){if(now<sa)return {until:sa,scope:'sa'};}
+  else {if(now<mc)return {until:mc,scope:'mc'};}
+  return null;
+}
+
+// Render MC
+const mcc=document.getElementById('mc-questions');
+MC.forEach((q,idx)=>{
+  const n=idx+1;
+  const div=document.createElement('div');
+  div.className='question'; div.id='mcq'+n;
+  let h='<p class="q"><strong>'+n+'.</strong> <span class="en-only">'+q.q_en+'</span><span class="es-only">'+q.q_es+'</span></p><div class="options">';
+  ['A','B','C','D'].forEach(L=>{
+    const o=q.options[L];
+    h+='<label><input type="radio" name="mc'+n+'" value="'+L+'"> <strong>'+L+'.</strong> <span class="en-only">'+o.en+'</span><span class="es-only">'+o.es+'</span></label>';
+  });
+  h+='</div>';
+  div.innerHTML=h;
+  mcc.appendChild(div);
+  const radios=div.querySelectorAll('input[type="radio"]');
+  radios.forEach(r=>{r.addEventListener('change',()=>{
+    if(mcPassed())return;
+    radios.forEach(rr=>{rr.disabled=true;});
+    const userAns=r.value; const correct=KEY[idx]; const isCorrect=userAns===correct;
+    div.dataset.answered=userAns;
+    const isEs=document.body.classList.contains('lang-es');
+    const fb=document.createElement('div');
+    fb.className='qfb '+(isCorrect?'correct':'incorrect');
+    if(isCorrect){
+      fb.innerHTML='<span class="mark">'+(isEs?'✓ ¡Correcto!':'✓ Correct!')+'</span><span class="why">'+(isEs?MC[idx].why_es:MC[idx].why_en)+'</span>';
+    } else {
+      const corrText=MC[idx].options[correct][isEs?'es':'en'];
+      fb.innerHTML='<span class="mark">'+(isEs?'✗ Incorrecto':'✗ Incorrect')+'</span><div class="corr">'+(isEs?'Respuesta correcta: ':'Correct answer: ')+'<strong>'+correct+'.</strong> '+corrText+'</div><div class="why">'+(isEs?MC[idx].why_es:MC[idx].why_en)+'</div>';
+    }
+    div.appendChild(fb);
+  });});
+});
+
+// Render SA
+const kwc=document.getElementById('kw-questions');
+KW.forEach((q,idx)=>{
+  const n=21+idx;
+  const div=document.createElement('div');
+  div.className='question'; div.id='kwq'+(idx+1);
+  div.innerHTML='<p class="q"><strong>'+n+'.</strong> <span class="en-only">'+q.q_en+'</span><span class="es-only">'+q.q_es+'</span></p><textarea id="kw'+(idx+1)+'" rows="3" placeholder="Your answer / Tu respuesta..." aria-label="Your answer / Tu respuesta..."></textarea><button class="check-btn" type="button"><span class="en-only">Check Answer</span><span class="es-only">Verificar Respuesta</span></button>';
+  kwc.appendChild(div);
+  const checkBtn=div.querySelector('.check-btn');
+  const ta=div.querySelector('textarea');
+  checkBtn.addEventListener('click',()=>{
+    const isEs=document.body.classList.contains('lang-es');
+    const ans=(ta.value||'').toLowerCase();
+    const ks=isEs?(KW[idx].kw_es||[]):(KW[idx].kw_en||[]);
+    // ============= Keyword matcher (word-boundary aware) =============
+function kwHit(ans,kw){
+  if(!kw)return false;
+  // Escape regex specials in the keyword
+  const esc=kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  // <=4 chars: whole-word match; longer: prefix match (word start). Unicode-aware boundaries.
+  const pat = kw.length<=4
+    ? new RegExp('(^|[^\\p{L}\\p{N}])'+esc+'($|[^\\p{L}\\p{N}])','u')
+    : new RegExp('(^|[^\\p{L}\\p{N}])'+esc,'u');
+  return pat.test(ans);
+}
+let h=0;ks.forEach(k=>{if(kwHit(ans,k.toLowerCase()))h++;});
+    const isCorrect=h>=3;
+    ta.disabled=true;checkBtn.disabled=true;
+    div.dataset.answered=isCorrect?'1':'0';
+    const sample=isEs?KW[idx].sample_es:KW[idx].sample_en;
+    const fb=document.createElement('div');
+    fb.className='qfb '+(isCorrect?'correct':'incorrect');
+    if(isCorrect){
+      fb.innerHTML='<span class="mark">'+(isEs?'✓ ¡Suficientes palabras clave!':'✓ Sufficient keywords!')+'</span><div class="why">'+(isEs?'Respuesta de ejemplo: ':'Sample answer: ')+sample+'</div>';
+    } else {
+      fb.innerHTML='<span class="mark">'+(isEs?'✗ Faltan palabras clave (encontró ':'✗ Missing keywords (found ')+h+(isEs?' de 3 necesarias)':' of 3 needed)')+'</span><div class="why">'+(isEs?'Respuesta de ejemplo: ':'Sample answer: ')+sample+'</div>';
+    }
+    div.appendChild(fb);
+  });
+});
+
+const saSection=document.getElementById('sa-section');
+const mcSection=document.getElementById('mc-section');
+const statusEl=document.getElementById('exam-status');
+const submitBtn=document.getElementById('submit-btn');
+const resetBtn=document.getElementById('reset-btn');
+const resultEl=document.getElementById('result');
+const nextBtn=document.getElementById('next-unit-btn');
+
+function setStatus(cls,en,es){
+  statusEl.className='exam-status '+cls;
+  statusEl.innerHTML='<span class="en-only">'+en+'</span><span class="es-only">'+es+'</span>';
+}
+function clearStatus(){statusEl.className='exam-status hidden';statusEl.innerHTML='';}
+
+function lockMcAsReview(){
+  document.querySelectorAll('#mc-questions .question').forEach(q=>{
+    q.classList.add('review-locked');
+    q.querySelectorAll('input[type="radio"]').forEach(r=>r.disabled=true);
+  });
+}
+
+function applyExamState(){
+  const isEs=document.body.classList.contains('lang-es');
+  // SA section is ALWAYS visible; badge/note tell the student what's at stake
+  saSection.style.display='';
+  const badgeEn=document.getElementById('sa-badge');
+  const badgeEs=document.getElementById('sa-badge-es');
+  const noteEn=document.getElementById('sa-note-en');
+  const noteEs=document.getElementById('sa-note-es');
+  if(isMastersLevel()){
+    badgeEn.textContent='Required for '+(isThm()?'Th.M.':'M.Div');
+    badgeEs.textContent='Requerido para '+(isThm()?'Th.M.':'M.Div');
+    noteEn.textContent='These 10 short-answer questions are required to complete Unit 3 on the Masters track (M.Div or Th.M.). You must pass at 9 of 10.';
+    noteEs.textContent='Estas 10 preguntas de respuesta corta son requeridas para completar la Unidad 3 en la vía de Maestría (M.Div o Th.M.). Debe aprobar con 9 de 10.';
+  } else {
+    badgeEn.textContent='Self-study — not graded for Certificate';
+    badgeEs.textContent='Auto-estudio — no cuenta para Certificado';
+    noteEn.textContent='These are the M.Div-level questions. Certificate students are welcome to attempt them for self-check; your answers will not affect your Unit 3 pass status.';
+    noteEs.textContent='Estas son las preguntas de nivel M.Div. Los estudiantes de Certificado pueden intentarlas para auto-evaluarse; sus respuestas no afectarán el estado de aprobación de la Unidad 3.';
+  }
+  const lock=activeLock();
+  if(lock){
+    const minsLeft=Math.ceil((lock.until-Date.now())/60000);
+    submitBtn.disabled=true;
+    if(lock.scope==='mc'){
+      setStatus('locked',
+        'Exam locked. Try again in '+minsLeft+' minute(s). The full exam will reset.',
+        'Examen bloqueado. Intente de nuevo en '+minsLeft+' minuto(s). El examen completo se reiniciará.');
+    } else {
+      setStatus('locked',
+        'Short-answer section locked. Try again in '+minsLeft+' minute(s). Multiple-choice pass is preserved.',
+        'Sección de respuesta corta bloqueada. Intente de nuevo en '+minsLeft+' minuto(s). Su aprobación de opción múltiple se conserva.');
+      lockMcAsReview();
+    }
+    setTimeout(applyExamState,30000);
+    return;
+  }
+  submitBtn.disabled=false;
+  if(mcPassed()){
+    lockMcAsReview();
+    if(isMastersLevel()&&!saPassed()){
+      setStatus('mc-passed',
+        'Multiple-choice passed (saved). Complete the 10 short-answer questions to finish Unit 3.',
+        'Opción múltiple aprobada (guardada). Complete las 10 preguntas de respuesta corta para terminar la Unidad 3.');
+    } else if(!isMastersLevel()){
+      setStatus('mc-passed',
+        'Multiple-choice passed. Unit 3 complete for Certificate track.',
+        'Opción múltiple aprobada. Unidad 3 completa para la vía Certificado.');
+    } else {
+      clearStatus();
+    }
+  } else {
+    clearStatus();
+  }
+  if(progress.unit3)nextBtn.disabled=false;
+}
+
+submitBtn.addEventListener('click',()=>{
+  const isEs=document.body.classList.contains('lang-es');
+  const lock=activeLock();
+  if(lock){applyExamState();return;}
+
+  let mc=0;
+  for(let i=0;i<20;i++){
+    const qdiv=document.getElementById('mcq'+(i+1));
+    if(qdiv&&qdiv.dataset.answered===KEY[i])mc++;
+  }
+  if(mcPassed()){
+    mc=parseInt(localStorage.getItem(MC_SCORE_KEY)||'18',10);
+  }
+  const mcPass=mc>=18;
+
+  let sa=0;
+  for(let i=0;i<10;i++){
+    const qdiv=document.getElementById('kwq'+(i+1));
+    if(qdiv&&qdiv.dataset.answered==='1')sa++;
+  }
+  const saPass=sa>=9;
+
+  if(!isMastersLevel()){
+    if(mcPass){
+      localStorage.setItem(MC_PASSED_KEY,'1');
+      localStorage.setItem(MC_SCORE_KEY,String(mc));
+      progress.unit3=true;
+      localStorage.setItem('cts_ch_progress',JSON.stringify(progress));
+      resultEl.className='pass';
+      resultEl.textContent=(isEs?'¡Aprobado! OM '+mc+'/20. Unidad 3 completa. Redirigiendo...':'Passed! MC '+mc+'/20. Unit 3 complete. Redirecting...');
+      nextBtn.disabled=false;
+    } else {
+      localStorage.setItem(LOCK_MC_KEY,String(lockMs()));
+      resultEl.className='fail';
+      resultEl.textContent=(isEs?'Reprobado: OM '+mc+'/20. Necesita 18. Bloqueado 15 min.':'Failed: MC '+mc+'/20. Need 18. Locked 15 min.');
+      submitBtn.disabled=true;
+      setTimeout(applyExamState,30000);
+    }
+    return;
+  }
+
+  if(!mcPassed()){
+    if(!mcPass){
+      localStorage.setItem(LOCK_MC_KEY,String(lockMs()));
+      resultEl.className='fail';
+      resultEl.textContent=(isEs?'Reprobado: OM '+mc+'/20. Necesita 18. Bloqueado 15 min. Examen completo se reiniciará.':'Failed: MC '+mc+'/20. Need 18. Locked 15 min. Full exam will reset.');
+      submitBtn.disabled=true;
+      setTimeout(applyExamState,30000);
+      return;
+    }
+    localStorage.setItem(MC_PASSED_KEY,'1');
+    localStorage.setItem(MC_SCORE_KEY,String(mc));
+  }
+
+  if(saPass){
+    localStorage.setItem(SA_PASSED_KEY,'1');
+    progress.unit3=true;
+    localStorage.setItem('cts_ch_progress',JSON.stringify(progress));
+    resultEl.className='pass';
+    resultEl.textContent=(isEs?'¡Aprobado! OM '+(parseInt(localStorage.getItem(MC_SCORE_KEY)||'18',10))+'/20, RC '+sa+'/10. Unidad 3 completa. Redirigiendo...':'Passed! MC '+(parseInt(localStorage.getItem(MC_SCORE_KEY)||'18',10))+'/20, SA '+sa+'/10. Unit 3 complete. Redirecting...');
+    nextBtn.disabled=false;
+  } else {
+    localStorage.setItem(LOCK_SA_KEY,String(lockMs()));
+    resultEl.className='fail';
+    resultEl.textContent=(isEs?'RC '+sa+'/10. Necesita 9. Sección RC bloqueada 15 min. OM permanece aprobada.':'SA '+sa+'/10. Need 9. SA section locked 15 min. MC pass preserved.');
+    submitBtn.disabled=true;
+    setTimeout(applyExamState,30000);
+  }
+});
+
+resetBtn.addEventListener('click',()=>{
+  const isEs=document.body.classList.contains('lang-es');
+  const msg=isEs
+    ? '¿Reiniciar la Unidad 3? Esto borrará sus respuestas y el estado de aprobación de OM/RC para esta unidad. (Esto no borra su registro.)'
+    : 'Reset Unit 3? This will clear your answers and MC/SA pass state for this unit. (Does not clear your registration.)';
+  if(!window.confirm(msg))return;
+  [MC_PASSED_KEY,SA_PASSED_KEY,LOCK_MC_KEY,LOCK_SA_KEY,MC_SCORE_KEY].forEach(k=>localStorage.removeItem(k));
+  if(progress.unit3){delete progress.unit3;localStorage.setItem('cts_ch_progress',JSON.stringify(progress));}
+  window.location.reload();
+});
+
+nextBtn.addEventListener('click',()=>{if(!nextBtn.disabled)window.location.href='CTSCHUnit4.html';});
+
+applyExamState();
+})();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCHReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body></html>

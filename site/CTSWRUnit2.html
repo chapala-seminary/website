@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS World Religions — Unit 2: Judaism</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #f8f4e8; border: 1px solid #e8d9b8; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 10px; margin: 6px 0 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; }
+.reg-form label { font-weight: bold; display: block; margin-top: 10px; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-form { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 3 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">🌍 World Religions — Unit 2: Judaism</span><span class="lang-es">🌍 Religiones del Mundo — Unidad 2: El Judaísmo</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"For I could wish that I myself were accursed from Christ for my brethren, my countrymen according to the flesh, who are Israelites... salvation is of the Jews." — Romans 9:3–4; John 4:22 (NKJV)</span><span class="lang-es">"Porque desearía yo mismo ser maldición, separado de Cristo, por amor a mis hermanos, los que son mis parientes según la carne, que son israelitas... la salvación viene de los judíos." — Romanos 9:3–4; Juan 4:22 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="registrationCard">
+    <h2><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit. Your registration is saved on this device and used across all CTS courses.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full Name</span><span class="lang-es">Nombre Completo</span></label>
+    <input type="text" id="regName" placeholder="" />
+    <label><span class="lang-en">Email</span><span class="lang-es">Correo Electrónico</span></label>
+    <input type="email" id="regEmail" placeholder="" />
+    <label><span class="lang-en">Country</span><span class="lang-es">País</span></label>
+    <input type="text" id="regCountry" placeholder="" />
+    <label><span class="lang-en">Program Track</span><span class="lang-es">Programa</span></label>
+    <input type="hidden" id="regTrack" value="certificate" />
+    <div id="trackButtons" style="display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;">
+        <button type="button" class="track-opt" data-track="certificate"><span class="lang-en">Certificate of Ministry</span><span class="lang-es">Certificado de Ministerio</span></button>
+        <button type="button" class="track-opt" data-track="mdiv"><span class="lang-en">Master of Divinity (M.Div.)</span><span class="lang-es">Maestría en Divinidad (M.Div.)</span></button>
+        <button type="button" class="track-opt" data-track="thm"><span class="lang-en">Master of Theology (Th.M.)</span><span class="lang-es">Maestría en Teología (Th.M.)</span></button>
+    </div>
+    <button class="small" id="saveRegBtn" style="margin-top: 10px;"><span class="lang-en">Save Registration</span><span class="lang-es">Guardar Registro</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>We begin our survey of the world's religions with Judaism, and we begin here for a reason that has nothing to do with alphabetical order. Judaism is not simply one religion among many that a Christian happens to study. It is the soil Christianity grew out of. Jesus was a Jew. Every one of His first disciples was a Jew. The Hebrew Scriptures arose within Israel and Judah and the Jewish covenantal tradition, for a Jewish audience, in a Jewish context. Paul, writing to the Romans about his own kinsmen according to the flesh, listed with something close to awe everything that belonged to them: "the adoption, the glory, the covenants, the giving of the law, the service of God, and the promises; of whom are the fathers and from whom, according to the flesh, Christ came" (Romans 9:4–5). When Jesus told the Samaritan woman at the well that "salvation is of the Jews" (John 4:22), He was not being polite. He was stating a plain historical and theological fact that every Christian pastor needs to understand before he understands almost anything else about his own faith.</p>
+
+        <p>And yet Judaism today is not simply "the Old Testament without the New." It is a living, developing religious tradition that has continued for two thousand years since the destruction of the Jerusalem Temple in A.D. 70 — two thousand years during which it necessarily had to answer, without a Temple, without a priesthood, and without a sacrificial system, questions that the Torah itself had assumed would always be answered through that Temple, that priesthood, and that sacrificial system. Understanding how Judaism answered those questions, and where its answers diverge from what Christians believe those same questions require, is essential both for accurate scholarship and for faithful, respectful evangelism among Jewish people — a task the New Testament treats as far from finished (Romans 11:25–26).</p>
+
+        <h2>I. Israel's Election and the Shema</h2>
+        <p>At the center of Jewish identity, then and now, stands a single confession recited daily by observant Jews for over three thousand years: "Hear, O Israel: The LORD our God, the LORD is one!" (Deuteronomy 6:4). This declaration, known simply as the Shema after its opening Hebrew word, is not merely a statement of monotheism in the abstract philosophical sense. It is a covenantal claim: this God, and no other, is Israel's God, and Israel belongs to Him in a way no other nation does. The verses that follow the Shema — "you shall love the LORD your God with all your heart, with all your soul, and with all your strength... you shall teach them diligently to your children" (Deuteronomy 6:5–7) — bind that theological confession directly to daily life, to the household, and to the raising of the next generation. This is worth pausing over, because it explains something a Gentile Christian can easily miss: for a Jewish person, religious identity and ethnic identity are not two separate categories that happen to overlap. They are, in the traditional understanding, a single inheritance passed down through the covenant God made first with Abraham (Genesis 12:1–3; 17:1–14), then renewed and expanded through Isaac, Jacob, Moses, and David.</p>
+
+        <p>That covenant carries with it the doctrine theologians call Israel's election — the conviction, rooted throughout the Hebrew Scriptures, that God chose this particular people, not because of any merit in them, but according to His own sovereign purpose. "The LORD did not set His love on you nor choose you because you were more in number than any other people, for you were the least of all peoples; but because the LORD loves you" (Deuteronomy 7:7–8). This election was never intended by God to be an end in itself. From the beginning, the promise to Abraham included the whole world: "in you all the families of the earth shall be blessed" (Genesis 12:3). Israel was chosen not to be hoarded but to be a light — "I will also give You as a light to the Gentiles, that You should be My salvation to the ends of the earth" (Isaiah 49:6), a verse the New Testament explicitly applies to Christ (Acts 13:47), and rightly so, because Jesus is the fulfillment of exactly what Israel's calling always pointed toward.</p>
+
+        <h2>II. The Hebrew Scriptures and the Rise of Rabbinic Judaism</h2>
+        <p>Jewish tradition organizes what Christians call the Old Testament into three sections known collectively by the acronym <em>Tanakh</em>: the <em>Torah</em> (the five books of Moses), the <em>Nevi'im</em> or Prophets (including both the historical books like Joshua and Judges, which Jewish tradition calls the "Former Prophets," and the familiar prophetic books like Isaiah and Jeremiah, the "Latter Prophets"), and the <em>Ketuvim</em> or Writings (Psalms, Proverbs, Job, and the remaining books). This is the same collection of books Christians recognize as the Old Testament canon, though arranged in a different order, ending not with Malachi but with 2 Chronicles.</p>
+
+        <p>For most of Israel's history, the Temple in Jerusalem stood at the center of religious life. It was there that the sacrifices prescribed in Leviticus were offered, there that the high priest entered the Holy of Holies once a year on the Day of Atonement, there that pilgrims gathered for the great feasts. When the Roman general Titus destroyed that Temple in A.D. 70, crushing the Jewish revolt that had begun four years earlier, Judaism faced an unprecedented crisis. The entire sacrificial system commanded in the Torah for the atonement of sin had, quite suddenly, no physical location where it could be carried out. This was not a minor administrative inconvenience. It struck at the heart of how a Jewish person could be reconciled to God.</p>
+
+        <p>Out of this crisis rose what scholars call Rabbinic Judaism, shaped decisively by the Pharisaic tradition that had already existed alongside the Sadducees and other groups in Jesus' own day. The rabbis who survived the Temple's destruction, most famously gathered under the leadership of Yohanan ben Zakkai at the academy of Yavneh, began the long work of reconstructing Jewish religious life around three pillars that did not require a Temple: prayer, the study of Torah, and deeds of loving-kindness. Over the following centuries, the oral traditions and legal interpretations these rabbis developed were eventually written down as the <em>Mishnah</em> (compiled around A.D. 200) and then expanded with extensive commentary into the <em>Talmud</em> (completed in two versions, the Jerusalem Talmud and the much larger Babylonian Talmud, by roughly A.D. 500). For traditional Judaism ever since, the Talmud stands alongside the Tanakh as an essential, authoritative guide for interpreting and applying the written Torah to actual life — a body of interpretation many Christians have never even heard of, yet one that shapes the daily practice of most religious Jews far more directly than the Torah's bare text does on its own.</p>
+
+        <h2>III. Major Branches of Judaism Today</h2>
+        <p>Contemporary Judaism is not a single, uniform tradition, and a pastor who assumes every Jewish person he meets holds identical beliefs will quickly find himself mistaken. <em>Orthodox Judaism</em> holds that the Torah, both written and oral, was given by God to Moses at Sinai and remains fully binding today; Orthodox Jews maintain traditional practice regarding the Sabbath, dietary law (kashrut), and daily prayer with the greatest consistency. <em>Conservative Judaism</em>, which emerged in nineteenth-century Europe and grew large in America, affirms the authority of Jewish law but holds that it may develop and adapt over time in response to changing circumstances. <em>Reform Judaism</em>, the oldest of the modern movements, treats Jewish law as a valuable ethical and spiritual heritage rather than a binding legal code, emphasizing personal autonomy in religious practice and, historically, a strong emphasis on social justice as the heart of Jewish ethical teaching. <em>Reconstructionist Judaism</em>, a smaller and more recent movement, understands Judaism primarily as an evolving religious civilization rather than a revealed system of law. Beyond these organized movements, a very large number of Jewish people worldwide identify as secular or cultural Jews — connected to Jewish identity, history, and community, sometimes deeply so, without holding to traditional theological beliefs at all.</p>
+
+        <p>This diversity matters enormously for pastoral ministry. An Orthodox Jewish neighbor and a secular Jewish coworker may share almost nothing in common religiously beyond ancestry and a general sense of Jewish identity and history. A pastor who addresses either one as though he were addressing the other will very quickly lose credibility and, worse, will fail to actually communicate the gospel in terms that connect with what that particular person actually believes and cares about.</p>
+
+        <h2>IV. What Jews Believe: God, Torah, and the Messiah</h2>
+        <p>Judaism and Christianity share an enormous amount of common ground that a Christian pastor should never minimize: belief in one God, the Creator of heaven and earth; the authority of the Hebrew Scriptures as God's revealed word; a moral law rooted in that revelation; and the conviction that history is moving toward a divinely appointed goal. Where the traditions diverge most sharply is precisely where Christianity claims its central and non-negotiable truth: the identity of the Messiah.</p>
+
+        <p>Judaism has historically expected a Messiah — a specially anointed, human deliverer descended from David who would restore Israel, gather the exiles, rebuild the Temple, and usher in an age of universal peace and knowledge of God (drawing especially on passages like Isaiah 11:1–10 and Ezekiel 37:24–28). What traditional Judaism has not generally expected, and largely does not accept, is that this Messiah would be divine, that He would die an atoning death for sin, or that He would come twice — once in humility, suffering rejection, and again in glory and power. The very passages Christians read as clear prophecy of Jesus — Isaiah 53's suffering servant, Psalm 22's description of pierced hands and feet, Daniel 9's timeline for "Messiah the Prince" — have each generated centuries of Jewish interpretation identifying their subject as the nation of Israel itself, or a righteous sufferer of a different kind, rather than as a single individual who is both divine and human.</p>
+
+        <p>Equally significant is the question of atonement itself. Since the Temple's destruction eliminated the sacrificial system Leviticus describes as God's appointed means of atonement — "it is the blood that makes atonement for the soul" (Leviticus 17:11) — rabbinic Judaism developed alternative theological answers: prayer, repentance, and charitable deeds are now understood by most branches of Judaism to accomplish what sacrifice once did, particularly around the observance of Yom Kippur, the Day of Atonement. A Christian engaging thoughtfully with a Jewish friend will want to gently press exactly this point: the Torah itself insists that blood alone atones for sin, and no rabbinic tradition, however ancient or well-intentioned, can supply what the Torah says only blood can supply. This is precisely where the book of Hebrews addresses a Jewish-Christian audience directly, showing at length how Jesus fulfills, rather than abolishes, the entire sacrificial system Moses established (Hebrews 9:11–14, 10:1–14).</p>
+
+        <h2>V. Engaging Jewish Neighbors and Friends with the Gospel</h2>
+        <p>Paul's own heart toward his kinsmen should shape every Christian's posture here: "my heart's desire and prayer to God for Israel is that they may be saved" (Romans 10:1), a desire so strong that Paul says he could wish himself accursed and cut off from Christ for their sake (Romans 9:3). This is not the language of contempt, nor is it the language of indifference dressed up as tolerance. It is the language of urgent love for people who, Paul insists, remain "beloved for the sake of the fathers" even where they have not yet believed (Romans 11:28), and regarding whom Paul explicitly warns Gentile believers against arrogance: "do not boast against the branches... if God did not spare the natural branches, He may not spare you either" (Romans 11:18–21).</p>
+
+        <p>Practically, this means a pastor engaging a Jewish neighbor or friend should resist two equal and opposite errors. The first error is a kind of theological carelessness sometimes called supersessionism or replacement theology taken to its worst extreme — treating the Jewish people as though God's promises to them have simply expired and been transferred wholesale to the church, with nothing further owed to Israel as a people. Romans 11 will not permit that reading; Paul explicitly denies that God has cast away His people (Romans 11:1–2) and insists that "all Israel will be saved" in God's own appointed time (Romans 11:26). The second error, just as damaging, is a squeamishness about evangelism itself — the mistaken idea that, because of the special history and suffering of the Jewish people, Christians should simply leave Jewish people alone religiously, as though Jesus were somehow not necessary, or not intended, for Jewish salvation. Nothing in the New Testament supports this. Paul went to the synagogue first in city after city (Acts 13:5, 14, 46; 17:1–2), and the gospel he preached there was addressed to Jews as Jews, appealing directly to the Hebrew Scriptures they already held sacred.</p>
+
+        <p>In practice, this means a pastor should learn to speak with Jewish neighbors from within their own Scriptures rather than around them — pointing to Isaiah 53, to Daniel 9, to the Passover lamb of Exodus 12, to the blood-atonement theology of Leviticus 17, and showing how each finds its answer in Jesus of Nazareth. It means honoring, rather than dismissing, Jewish history, suffering, and the genuine devotion many Jewish people bring to God even without yet knowing Christ. And it means never forgetting Paul's own confession, that the gospel is "to the Jew first and also for the Greek" (Romans 1:16) — not a formula assigning Jewish people to a religious category safely outside the reach of the gospel, but a reminder of exactly where, historically and theologically, the good news of Jesus Christ first began.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>Comenzamos nuestro estudio de las religiones del mundo con el judaísmo, y comenzamos aquí por una razón que no tiene nada que ver con el orden alfabético. El judaísmo no es simplemente una religión más entre muchas que un cristiano estudia por casualidad. Es la tierra de la cual creció el cristianismo. Jesús era judío. Cada uno de Sus primeros discípulos era judío. Las Escrituras Hebreas surgieron dentro de Israel y Judá y la tradición del pacto judío, para una audiencia judía, en un contexto judío. Pablo, escribiendo a los romanos acerca de sus propios parientes según la carne, enumeró con algo cercano al asombro todo lo que les pertenecía: "la adopción, la gloria, los pactos, la promulgación de la ley, el servicio a Dios y las promesas; de quienes son los padres, y de los cuales, según la carne, vino Cristo" (Romanos 9:4–5). Cuando Jesús le dijo a la mujer samaritana en el pozo que "la salvación viene de los judíos" (Juan 4:22), no estaba siendo cortés. Estaba declarando un hecho histórico y teológico llano que todo pastor cristiano necesita entender antes de entender casi cualquier otra cosa acerca de su propia fe.</p>
+
+        <p>Y, sin embargo, el judaísmo de hoy no es simplemente "el Antiguo Testamento sin el Nuevo." Es una tradición religiosa viva y en desarrollo que ha continuado por dos mil años desde la destrucción del Templo de Jerusalén en el año 70 d.C. — dos mil años durante los cuales tuvo necesariamente que responder, sin Templo, sin sacerdocio y sin sistema de sacrificios, preguntas que la Torá misma había asumido que siempre se responderían por medio de ese Templo, ese sacerdocio y ese sistema de sacrificios. Entender cómo el judaísmo respondió a esas preguntas, y dónde sus respuestas divergen de lo que los cristianos creen que esas mismas preguntas requieren, es esencial tanto para una erudición precisa como para un evangelismo fiel y respetuoso entre el pueblo judío — una tarea que el Nuevo Testamento trata como lejos de estar terminada (Romanos 11:25–26).</p>
+
+        <h2>I. La elección de Israel y el Shemá</h2>
+        <p>En el centro de la identidad judía, entonces y ahora, se encuentra una sola confesión recitada diariamente por judíos observantes durante más de tres mil años: "Oye, Israel: el SEÑOR nuestro Dios, el SEÑOR uno es" (Deuteronomio 6:4). Esta declaración, conocida simplemente como el Shemá por su palabra hebrea inicial, no es meramente una declaración de monoteísmo en el sentido filosófico abstracto. Es una afirmación pactual: este Dios, y ningún otro, es el Dios de Israel, e Israel le pertenece de una manera en que ninguna otra nación le pertenece. Los versículos que siguen al Shemá — "amarás al SEÑOR tu Dios con todo tu corazón, con toda tu alma y con todas tus fuerzas... y las repetirás a tus hijos" (Deuteronomio 6:5–7) — atan esa confesión teológica directamente a la vida diaria, al hogar y a la crianza de la siguiente generación. Vale la pena detenerse en esto, porque explica algo que un cristiano gentil puede pasar por alto fácilmente: para una persona judía, la identidad religiosa y la identidad étnica no son dos categorías separadas que resultan coincidir. Son, en el entendimiento tradicional, una sola herencia transmitida a través del pacto que Dios hizo primero con Abraham (Génesis 12:1–3; 17:1–14), y luego renovó y amplió a través de Isaac, Jacob, Moisés y David.</p>
+
+        <p>Ese pacto conlleva la doctrina que los teólogos llaman la elección de Israel — la convicción, arraigada en toda la Escritura hebrea, de que Dios eligió a este pueblo en particular, no por ningún mérito en ellos, sino conforme a Su propio propósito soberano. "No por ser vosotros más que todos los pueblos os ha querido el SEÑOR y os ha escogido, pues vosotros erais el más pequeño de todos los pueblos; sino porque el SEÑOR os amó" (Deuteronomio 7:7–8). Esta elección nunca fue diseñada por Dios para ser un fin en sí misma. Desde el principio, la promesa a Abraham incluía al mundo entero: "en ti serán benditas todas las familias de la tierra" (Génesis 12:3). Israel fue elegido no para acaparar sino para ser una luz — "también te di como luz de las naciones, para que seas mi salvación hasta lo postrero de la tierra" (Isaías 49:6), un versículo que el Nuevo Testamento aplica explícitamente a Cristo (Hechos 13:47), y con razón, porque Jesús es el cumplimiento exacto de aquello hacia lo cual siempre apuntó el llamado de Israel.</p>
+
+        <h2>II. Las Escrituras hebreas y el surgimiento del judaísmo rabínico</h2>
+        <p>La tradición judía organiza lo que los cristianos llaman el Antiguo Testamento en tres secciones conocidas colectivamente por el acrónimo <em>Tanaj</em>: la <em>Torá</em> (los cinco libros de Moisés), los <em>Nevi'im</em> o Profetas (que incluyen tanto los libros históricos como Josué y Jueces, que la tradición judía llama los "Profetas Anteriores," como los familiares libros proféticos como Isaías y Jeremías, los "Profetas Posteriores"), y los <em>Ketuvim</em> o Escritos (Salmos, Proverbios, Job y los libros restantes). Esta es la misma colección de libros que los cristianos reconocen como el canon del Antiguo Testamento, aunque ordenada de manera diferente, terminando no con Malaquías sino con 2 Crónicas.</p>
+
+        <p>Durante la mayor parte de la historia de Israel, el Templo en Jerusalén estuvo en el centro de la vida religiosa. Fue allí donde se ofrecían los sacrificios prescritos en Levítico, allí donde el sumo sacerdote entraba al Lugar Santísimo una vez al año en el Día de la Expiación, allí donde los peregrinos se reunían para las grandes fiestas. Cuando el general romano Tito destruyó ese Templo en el año 70 d.C., aplastando la revuelta judía que había comenzado cuatro años antes, el judaísmo enfrentó una crisis sin precedentes. Todo el sistema de sacrificios ordenado en la Torá para la expiación del pecado no tenía, de repente, ningún lugar físico donde pudiera llevarse a cabo. Esto no fue un inconveniente administrativo menor. Golpeó el corazón mismo de cómo una persona judía podía ser reconciliada con Dios.</p>
+
+        <p>De esta crisis surgió lo que los eruditos llaman el judaísmo rabínico, moldeado decisivamente por la tradición farisea que ya existía junto a los saduceos y otros grupos en los propios días de Jesús. Los rabinos que sobrevivieron a la destrucción del Templo, reunidos más famosamente bajo el liderazgo de Yojanán ben Zakai en la academia de Yavne, comenzaron la larga tarea de reconstruir la vida religiosa judía en torno a tres pilares que no requerían un Templo: la oración, el estudio de la Torá y las obras de bondad amorosa. A lo largo de los siglos siguientes, las tradiciones orales e interpretaciones legales que estos rabinos desarrollaron fueron finalmente escritas como la <em>Mishná</em> (compilada alrededor del año 200 d.C.) y luego ampliadas con comentario extenso en el <em>Talmud</em> (completado en dos versiones, el Talmud de Jerusalén y el mucho más extenso Talmud de Babilonia, hacia el año 500 d.C.). Para el judaísmo tradicional desde entonces, el Talmud está junto al Tanaj como una guía esencial y autoritativa para interpretar y aplicar la Torá escrita a la vida real — un cuerpo de interpretación del cual muchos cristianos nunca han oído hablar, pero que da forma a la práctica diaria de la mayoría de los judíos religiosos mucho más directamente de lo que lo hace el texto desnudo de la Torá por sí solo.</p>
+
+        <h2>III. Las principales ramas del judaísmo hoy</h2>
+        <p>El judaísmo contemporáneo no es una tradición única y uniforme, y un pastor que asume que toda persona judía que conoce sostiene creencias idénticas pronto se encontrará equivocado. El <em>judaísmo ortodoxo</em> sostiene que la Torá, tanto escrita como oral, fue dada por Dios a Moisés en el Sinaí y sigue siendo plenamente vinculante hoy; los judíos ortodoxos mantienen la práctica tradicional respecto al sábado, la ley alimentaria (kashrut) y la oración diaria con la mayor consistencia. El <em>judaísmo conservador</em>, que surgió en la Europa del siglo diecinueve y creció considerablemente en Estados Unidos, afirma la autoridad de la ley judía pero sostiene que puede desarrollarse y adaptarse con el tiempo en respuesta a circunstancias cambiantes. El <em>judaísmo reformista</em>, el más antiguo de los movimientos modernos, trata la ley judía como una valiosa herencia ética y espiritual en lugar de un código legal vinculante, enfatizando la autonomía personal en la práctica religiosa y, históricamente, un fuerte énfasis en la justicia social como el corazón de la enseñanza ética judía. El <em>judaísmo reconstruccionista</em>, un movimiento más pequeño y reciente, entiende el judaísmo principalmente como una civilización religiosa en evolución en lugar de un sistema revelado de ley. Más allá de estos movimientos organizados, un número muy grande de personas judías en todo el mundo se identifican como judíos seculares o culturales — conectados a la identidad, la historia y la comunidad judías, a veces profundamente, sin sostener creencias teológicas tradicionales en absoluto.</p>
+
+        <p>Esta diversidad importa enormemente para el ministerio pastoral. Un vecino judío ortodoxo y un compañero de trabajo judío secular pueden compartir casi nada en común religiosamente más allá de la ascendencia y un sentido general de identidad e historia judías. Un pastor que se dirige a cualquiera de los dos como si estuviera dirigiéndose al otro perderá credibilidad muy rápidamente y, peor aún, fallará en comunicar realmente el evangelio en términos que conecten con lo que esa persona en particular realmente cree y le importa.</p>
+
+        <h2>IV. Lo que creen los judíos: Dios, la Torá y el Mesías</h2>
+        <p>El judaísmo y el cristianismo comparten una enorme cantidad de terreno común que un pastor cristiano nunca debe minimizar: la creencia en un solo Dios, el Creador de los cielos y la tierra; la autoridad de las Escrituras hebreas como la palabra revelada de Dios; una ley moral arraigada en esa revelación; y la convicción de que la historia se mueve hacia una meta divinamente señalada. Donde las tradiciones divergen más agudamente es precisamente donde el cristianismo reclama su verdad central y no negociable: la identidad del Mesías.</p>
+
+        <p>El judaísmo históricamente ha esperado un Mesías — un libertador humano especialmente ungido, descendiente de David, que restauraría a Israel, reuniría a los exiliados, reconstruiría el Templo y daría inicio a una era de paz universal y conocimiento de Dios (basándose especialmente en pasajes como Isaías 11:1–10 y Ezequiel 37:24–28). Lo que el judaísmo tradicional generalmente no ha esperado, y en gran medida no acepta, es que ese Mesías fuera divino, que muriera una muerte expiatoria por el pecado, o que viniera dos veces — una vez en humildad, sufriendo rechazo, y otra vez en gloria y poder. Los mismos pasajes que los cristianos leen como profecía clara de Jesús — el siervo sufriente de Isaías 53, la descripción de manos y pies horadados del Salmo 22, la línea de tiempo de Daniel 9 para "el Mesías Príncipe" — han generado cada uno siglos de interpretación judía que identifica a su sujeto como la nación de Israel misma, o como un justo que sufre de otro tipo, en lugar de un solo individuo que es a la vez divino y humano.</p>
+
+        <p>Igualmente significativa es la cuestión de la expiación misma. Dado que la destrucción del Templo eliminó el sistema de sacrificios que Levítico describe como el medio señalado por Dios para la expiación — "porque la vida de la carne en la sangre está, y yo os la he dado para hacer expiación sobre el altar por vuestras almas" (Levítico 17:11) — el judaísmo rabínico desarrolló respuestas teológicas alternativas: la oración, el arrepentimiento y las obras de caridad son ahora entendidos por la mayoría de las ramas del judaísmo como aquello que logra lo que antes lograba el sacrificio, particularmente en torno a la observancia de Iom Kipur, el Día de la Expiación. Un cristiano que se relaciona con reflexión con un amigo judío querrá presionar con delicadeza exactamente este punto: la Torá misma insiste en que solo la sangre expía el pecado, y ninguna tradición rabínica, por antigua o bien intencionada que sea, puede suministrar lo que la Torá dice que solo la sangre puede suministrar. Aquí es precisamente donde el libro de Hebreos se dirige a una audiencia judeocristiana directamente, mostrando extensamente cómo Jesús cumple, en lugar de abolir, todo el sistema de sacrificios que Moisés estableció (Hebreos 9:11–14, 10:1–14).</p>
+
+        <h2>V. Acercándose a vecinos y amigos judíos con el evangelio</h2>
+        <p>El propio corazón de Pablo hacia sus parientes debe dar forma a la postura de todo cristiano aquí: "el anhelo de mi corazón, y mi oración a Dios por Israel, es para salvación" (Romanos 10:1), un deseo tan fuerte que Pablo dice que podría desear él mismo ser maldición, separado de Cristo, por causa de ellos (Romanos 9:3). Este no es el lenguaje del desprecio, ni es el lenguaje de la indiferencia disfrazada de tolerancia. Es el lenguaje del amor urgente por personas que, insiste Pablo, siguen siendo "amados por causa de los padres" incluso donde todavía no han creído (Romanos 11:28), y respecto a quienes Pablo advierte explícitamente a los creyentes gentiles contra la arrogancia: "no te jactes contra las ramas... si Dios no perdonó a las ramas naturales, a ti tampoco te perdonará" (Romanos 11:18–21).</p>
+
+        <p>Prácticamente, esto significa que un pastor que se relaciona con un vecino o amigo judío debe resistir dos errores iguales y opuestos. El primer error es una especie de descuido teológico a veces llamado supersesionismo o teología del reemplazo llevada a su peor extremo — tratar al pueblo judío como si las promesas de Dios hacia ellos simplemente hubieran expirado y hubieran sido transferidas por completo a la iglesia, sin nada más que se le deba a Israel como pueblo. Romanos 11 no permite esa lectura; Pablo niega explícitamente que Dios haya desechado a Su pueblo (Romanos 11:1–2) e insiste en que "todo Israel será salvo" en el tiempo señalado por Dios mismo (Romanos 11:26). El segundo error, igualmente dañino, es un recelo hacia el evangelismo mismo — la idea equivocada de que, debido a la historia especial y el sufrimiento del pueblo judío, los cristianos simplemente deberían dejar en paz religiosamente a las personas judías, como si Jesús de alguna manera no fuera necesario, o no estuviera destinado, para la salvación judía. Nada en el Nuevo Testamento apoya esto. Pablo fue primero a la sinagoga en ciudad tras ciudad (Hechos 13:5, 14, 46; 17:1–2), y el evangelio que predicó allí estaba dirigido a los judíos como judíos, apelando directamente a las Escrituras hebreas que ya tenían por sagradas.</p>
+
+        <p>En la práctica, esto significa que un pastor debe aprender a hablar con vecinos judíos desde dentro de sus propias Escrituras en lugar de rodeándolas — señalando a Isaías 53, a Daniel 9, al cordero de la Pascua de Éxodo 12, a la teología de expiación por sangre de Levítico 17, y mostrando cómo cada uno encuentra su respuesta en Jesús de Nazaret. Significa honrar, en lugar de descartar, la historia judía, el sufrimiento judío y la devoción genuina que muchas personas judías traen a Dios incluso sin conocer todavía a Cristo. Y significa nunca olvidar la propia confesión de Pablo, de que el evangelio es "al judío primeramente, y también al griego" (Romanos 1:16) — no una fórmula que asigna a las personas judías a una categoría religiosa a salvo fuera del alcance del evangelio, sino un recordatorio de exactamente dónde, histórica y teológicamente, comenzaron primero las buenas nuevas de Jesucristo.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 2 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 2 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 2;
+let progress = JSON.parse(localStorage.getItem('cts_wr_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSWRUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit2) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSWRUnit1.html"; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSWRUnit3.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        const trackLabel = student.track === 'mdiv' ? 'M.Div.' : (student.track === 'thm' ? 'Th.M.' : 'Certificate');
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name} <span style="font-weight:normal;font-size:0.85rem;">(${trackLabel})</span> &nbsp;<a href="#" id="changeTrackLink" style="font-size:0.8rem;color:#5b3a1f;">Change track</a>`;
+        document.getElementById('registrationCard').style.display = 'none';
+        const link = document.getElementById('changeTrackLink');
+        if (link) link.onclick = function(e) {
+            e.preventDefault();
+            const card = document.getElementById('registrationCard');
+            card.style.display = 'block';
+            if (student.name) document.getElementById('regName').value = student.name;
+            if (student.email) document.getElementById('regEmail').value = student.email;
+            if (student.country) document.getElementById('regCountry').value = student.country;
+            if (student.track && typeof setTrack === 'function') setTrack(student.track);
+            card.scrollIntoView({ behavior: 'smooth' });
+        };
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<span style="color:#5b3a1f;">⚠️ Please register</span>`;
+    }
+}
+displayStudentGreeting();
+
+
+function setTrack(t) {
+    document.getElementById('regTrack').value = t;
+    document.querySelectorAll('.track-opt').forEach(b => { b.classList.toggle('selected', b.getAttribute('data-track') === t); });
+}
+document.querySelectorAll('.track-opt').forEach(b => { b.onclick = function() { setTrack(this.getAttribute('data-track')); }; });
+setTrack('certificate');
+document.getElementById('saveRegBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const country = document.getElementById('regCountry').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = `<span style="color:red;">⚠️ Name and email are required.</span>`;
+        return;
+    }
+    localStorage.setItem('cts_student', JSON.stringify({ name, email, country, track }));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = `<span style="color:green;">✓ Saved! Welcome, ${name}.</span>`;
+    setTimeout(() => { displayStudentGreeting(); }, 1000);
+    renderQuestions();
+};
+
+// Q3 reshuffled (Psalm 23 author) to move David from C to B for 5/5/5/5 balance.
+const mcQuestions = [
+  {
+    "textEn": "1. According to Romans 9:4-5, Paul says the adoption, the glory, the covenants, the giving of the law, and the promises belong to:",
+    "textEs": "1. Según Romanos 9:4-5, Pablo dice que la adopción, la gloria, los pactos, la promulgación de la ley y las promesas pertenecen a:",
+    "optionsEn": [
+      "His kinsmen the Israelites",
+      "The Roman church",
+      "The Corinthian believers",
+      "The Gentile nations generally"
+    ],
+    "optionsEs": [
+      "Sus parientes los israelitas",
+      "La iglesia romana",
+      "Los creyentes corintios",
+      "Las naciones gentiles en general"
+    ],
+    "c": 21,
+    "explEn": "Paul lists the adoption, glory, covenants, giving of the law, service of God, and promises as belonging to his kinsmen according to the flesh, the Israelites.",
+    "explEs": "Pablo enumera la adopción, la gloria, los pactos, la promulgación de la ley, el servicio a Dios y las promesas como pertenecientes a sus parientes según la carne, los israelitas."
+  },
+  {
+    "textEn": "2. In John 4:22, Jesus tells the Samaritan woman that:",
+    "textEs": "2. En Juan 4:22, Jesús le dice a la mujer samaritana que:",
+    "optionsEn": [
+      "Samaritans worship correctly",
+      "Salvation is of the Jews",
+      "The Temple no longer matters",
+      "All worship is equally valid"
+    ],
+    "optionsEs": [
+      "Los samaritanos adoran correctamente",
+      "La salvación viene de los judíos",
+      "El Templo ya no importa",
+      "Toda adoración es igualmente válida"
+    ],
+    "c": 29,
+    "explEn": "Jesus states plainly, 'salvation is of the Jews' (John 4:22), a historical and theological fact essential to understanding Christianity's roots.",
+    "explEs": "Jesús declara claramente: 'la salvación viene de los judíos' (Juan 4:22), un hecho histórico y teológico esencial para entender las raíces del cristianismo."
+  },
+  {
+    "textEn": "3. The Shema, recited daily by observant Jews, is found in:",
+    "textEs": "3. El Shemá, recitado diariamente por judíos observantes, se encuentra en:",
+    "optionsEn": [
+      "Genesis 1:1",
+      "Exodus 20:1",
+      "Deuteronomy 6:4",
+      "Isaiah 53:1"
+    ],
+    "optionsEs": [
+      "Génesis 1:1",
+      "Éxodo 20:1",
+      "Deuteronomio 6:4",
+      "Isaías 53:1"
+    ],
+    "c": 37,
+    "explEn": "The Shema begins in Deuteronomy 6:4: 'Hear, O Israel: The LORD our God, the LORD is one!'",
+    "explEs": "El Shemá comienza en Deuteronomio 6:4: 'Oye, Israel: el SEÑOR nuestro Dios, el SEÑOR uno es.'"
+  },
+  {
+    "textEn": "4. According to this unit, the Shema is best understood as:",
+    "textEs": "4. Según esta unidad, el Shemá se entiende mejor como:",
+    "optionsEn": [
+      "A vague philosophical statement",
+      "A minor prayer with little importance",
+      "A rule invented by the rabbis after A.D. 70",
+      "A covenantal claim binding Israel to its God"
+    ],
+    "optionsEs": [
+      "Una declaración filosófica vaga",
+      "Una oración menor de poca importancia",
+      "Una regla inventada por los rabinos después del año 70 d.C.",
+      "Una afirmación pactual que ata a Israel a su Dios"
+    ],
+    "c": 45,
+    "explEn": "The Shema is a covenantal claim: this God, and no other, is Israel's God, binding theological confession to daily life and the household.",
+    "explEs": "El Shemá es una afirmación pactual: este Dios, y ningún otro, es el Dios de Israel, atando la confesión teológica a la vida diaria y al hogar."
+  },
+  {
+    "textEn": "5. Deuteronomy 7:7-8 explains that God chose Israel because:",
+    "textEs": "5. Deuteronomio 7:7-8 explica que Dios eligió a Israel porque:",
+    "optionsEn": [
+      "The LORD loved them, not because of their number",
+      "Israel was the largest nation",
+      "Israel had earned it through obedience",
+      "No other nation existed yet"
+    ],
+    "optionsEs": [
+      "El SEÑOR los amó, no por su número",
+      "Israel era la nación más grande",
+      "Israel se lo había ganado por obediencia",
+      "Ninguna otra nación existía todavía"
+    ],
+    "c": 49,
+    "explEn": "Deuteronomy 7:7-8 says God did not choose Israel for their number, since they were the least of all peoples, but because the LORD loves them.",
+    "explEs": "Deuteronomio 7:7-8 dice que Dios no eligió a Israel por su número, ya que eran el más pequeño de los pueblos, sino porque el SEÑOR los amó."
+  },
+  {
+    "textEn": "6. According to Genesis 12:3, God's promise to Abraham was intended to bless:",
+    "textEs": "6. Según Génesis 12:3, la promesa de Dios a Abraham estaba destinada a bendecir:",
+    "optionsEn": [
+      "Only Abraham's immediate family",
+      "All the families of the earth",
+      "Only the twelve tribes of Israel",
+      "Only the priestly line"
+    ],
+    "optionsEs": [
+      "Solo a la familia inmediata de Abraham",
+      "A todas las familias de la tierra",
+      "Solo a las doce tribus de Israel",
+      "Solo a la línea sacerdotal"
+    ],
+    "c": 57,
+    "explEn": "Genesis 12:3 says 'in you all the families of the earth shall be blessed' — Israel's election was never meant to be hoarded but was meant to bless the whole world.",
+    "explEs": "Génesis 12:3 dice 'en ti serán benditas todas las familias de la tierra' — la elección de Israel nunca fue para acaparar sino para bendecir al mundo entero."
+  },
+  {
+    "textEn": "7. The three sections of the Tanakh are the Torah, the Nevi'im, and the:",
+    "textEs": "7. Las tres secciones del Tanaj son la Torá, los Nevi'im, y los:",
+    "optionsEn": [
+      "Mishnah",
+      "Talmud",
+      "Ketuvim (Writings)",
+      "Targum"
+    ],
+    "optionsEs": [
+      "Mishná",
+      "Talmud",
+      "Ketuvim (Escritos)",
+      "Tárgum"
+    ],
+    "c": 65,
+    "explEn": "The Tanakh consists of the Torah, the Nevi'im (Prophets), and the Ketuvim (Writings) — the same books Christians call the Old Testament, in a different order.",
+    "explEs": "El Tanaj consiste en la Torá, los Nevi'im (Profetas) y los Ketuvim (Escritos) — los mismos libros que los cristianos llaman el Antiguo Testamento, en otro orden."
+  },
+  {
+    "textEn": "8. The Jewish Tanakh, unlike the Christian Old Testament arrangement, ends with:",
+    "textEs": "8. El Tanaj judío, a diferencia del orden cristiano del Antiguo Testamento, termina con:",
+    "optionsEn": [
+      "Malachi",
+      "Daniel",
+      "Zechariah",
+      "2 Chronicles"
+    ],
+    "optionsEs": [
+      "Malaquías",
+      "Daniel",
+      "Zacarías",
+      "2 Crónicas"
+    ],
+    "c": 73,
+    "explEn": "The Tanakh contains the same canon as the Christian Old Testament but in a different order, ending with 2 Chronicles rather than Malachi.",
+    "explEs": "El Tanaj contiene el mismo canon que el Antiguo Testamento cristiano pero en un orden diferente, terminando con 2 Crónicas en lugar de Malaquías."
+  },
+  {
+    "textEn": "9. The Roman general who destroyed the Jerusalem Temple in A.D. 70 was:",
+    "textEs": "9. El general romano que destruyó el Templo de Jerusalén en el año 70 d.C. fue:",
+    "optionsEn": [
+      "Titus",
+      "Pompey",
+      "Herod",
+      "Nero"
+    ],
+    "optionsEs": [
+      "Tito",
+      "Pompeyo",
+      "Herodes",
+      "Nerón"
+    ],
+    "c": 77,
+    "explEn": "The Roman general Titus destroyed the Jerusalem Temple in A.D. 70, crushing the Jewish revolt that had begun four years earlier.",
+    "explEs": "El general romano Tito destruyó el Templo de Jerusalén en el año 70 d.C., aplastando la revuelta judía que había comenzado cuatro años antes."
+  },
+  {
+    "textEn": "10. The three pillars around which rabbis reconstructed Jewish religious life after A.D. 70 were prayer, deeds of loving-kindness, and:",
+    "textEs": "10. Los tres pilares en torno a los cuales los rabinos reconstruyeron la vida religiosa judía después del año 70 d.C. fueron la oración, las obras de bondad amorosa, y:",
+    "optionsEn": [
+      "Temple sacrifice",
+      "The study of Torah",
+      "Military resistance",
+      "Pilgrimage to Rome"
+    ],
+    "optionsEs": [
+      "El sacrificio en el Templo",
+      "El estudio de la Torá",
+      "La resistencia militar",
+      "La peregrinación a Roma"
+    ],
+    "c": 85,
+    "explEn": "The rabbis at Yavneh, led by Yohanan ben Zakkai, rebuilt Jewish religious life around prayer, the study of Torah, and deeds of loving-kindness.",
+    "explEs": "Los rabinos en Yavne, liderados por Yojanán ben Zakai, reconstruyeron la vida religiosa judía en torno a la oración, el estudio de la Torá y las obras de bondad amorosa."
+  },
+  {
+    "textEn": "11. The Talmud was completed in two versions, the Jerusalem Talmud and the much larger:",
+    "textEs": "11. El Talmud se completó en dos versiones, el Talmud de Jerusalén y el mucho más extenso:",
+    "optionsEn": [
+      "Egyptian Talmud",
+      "Roman Talmud",
+      "Babylonian Talmud",
+      "Alexandrian Talmud"
+    ],
+    "optionsEs": [
+      "Talmud de Egipto",
+      "Talmud de Roma",
+      "Talmud de Babilonia",
+      "Talmud de Alejandría"
+    ],
+    "c": 93,
+    "explEn": "The Talmud exists in two versions: the Jerusalem Talmud and the much larger Babylonian Talmud, completed by roughly A.D. 500.",
+    "explEs": "El Talmud existe en dos versiones: el Talmud de Jerusalén y el mucho más extenso Talmud de Babilonia, completado hacia el año 500 d.C."
+  },
+  {
+    "textEn": "12. Which branch of Judaism holds that the written and oral Torah were given by God at Sinai and remain fully binding today?",
+    "textEs": "12. ¿Qué rama del judaísmo sostiene que la Torá escrita y oral fueron dadas por Dios en el Sinaí y siguen siendo plenamente vinculantes hoy?",
+    "optionsEn": [
+      "Reform Judaism",
+      "Reconstructionist Judaism",
+      "Secular Judaism",
+      "Orthodox Judaism"
+    ],
+    "optionsEs": [
+      "Judaísmo reformista",
+      "Judaísmo reconstruccionista",
+      "Judaísmo secular",
+      "Judaísmo ortodoxo"
+    ],
+    "c": 101,
+    "explEn": "Orthodox Judaism holds that the Torah, both written and oral, was given by God to Moses at Sinai and remains fully binding today.",
+    "explEs": "El judaísmo ortodoxo sostiene que la Torá, tanto escrita como oral, fue dada por Dios a Moisés en el Sinaí y sigue siendo plenamente vinculante hoy."
+  },
+  {
+    "textEn": "13. Which branch of Judaism treats Jewish law as a valuable heritage rather than a binding legal code, emphasizing personal autonomy?",
+    "textEs": "13. ¿Qué rama del judaísmo trata la ley judía como una herencia valiosa en lugar de un código legal vinculante, enfatizando la autonomía personal?",
+    "optionsEn": [
+      "Reform Judaism",
+      "Orthodox Judaism",
+      "Conservative Judaism",
+      "Karaite Judaism"
+    ],
+    "optionsEs": [
+      "Judaísmo reformista",
+      "Judaísmo ortodoxo",
+      "Judaísmo conservador",
+      "Judaísmo caraíta"
+    ],
+    "c": 105,
+    "explEn": "Reform Judaism treats Jewish law as a valuable ethical and spiritual heritage rather than a binding legal code, emphasizing personal autonomy in religious practice.",
+    "explEs": "El judaísmo reformista trata la ley judía como una valiosa herencia ética y espiritual en lugar de un código legal vinculante, enfatizando la autonomía personal."
+  },
+  {
+    "textEn": "14. This unit warns pastors that an Orthodox Jewish neighbor and a secular Jewish coworker may share almost nothing religiously beyond:",
+    "textEs": "14. Esta unidad advierte a los pastores que un vecino judío ortodoxo y un compañero de trabajo judío secular pueden compartir casi nada religiosamente más allá de:",
+    "optionsEn": [
+      "Language",
+      "Ancestry and a general sense of Jewish identity",
+      "Political affiliation",
+      "Diet"
+    ],
+    "optionsEs": [
+      "El idioma",
+      "La ascendencia y un sentido general de identidad judía",
+      "La afiliación política",
+      "La dieta"
+    ],
+    "c": 113,
+    "explEn": "An Orthodox and a secular Jewish person may share almost nothing religiously beyond ancestry and a general sense of Jewish identity and history.",
+    "explEs": "Una persona judía ortodoxa y una secular pueden compartir casi nada religiosamente más allá de la ascendencia y un sentido general de identidad e historia judías."
+  },
+  {
+    "textEn": "15. Traditional Judaism has historically expected a Messiah who is:",
+    "textEs": "15. El judaísmo tradicional ha esperado históricamente un Mesías que es:",
+    "optionsEn": [
+      "A divine being who dies for sin",
+      "An angel sent to rule the nations",
+      "A human, Davidic deliverer who restores Israel",
+      "A symbol with no personal identity"
+    ],
+    "optionsEs": [
+      "Un ser divino que muere por el pecado",
+      "Un ángel enviado a gobernar las naciones",
+      "Un libertador humano davídico que restaura a Israel",
+      "Un símbolo sin identidad personal"
+    ],
+    "c": 121,
+    "explEn": "Judaism has historically expected a specially anointed, human deliverer descended from David who would restore Israel and usher in an age of peace.",
+    "explEs": "El judaísmo históricamente ha esperado un libertador humano especialmente ungido, descendiente de David, que restauraría a Israel y daría inicio a una era de paz."
+  },
+  {
+    "textEn": "16. According to this unit, traditional Jewish interpretation of Isaiah 53's suffering servant has often identified the subject as:",
+    "textEs": "16. Según esta unidad, la interpretación judía tradicional del siervo sufriente de Isaías 53 a menudo ha identificado al sujeto como:",
+    "optionsEn": [
+      "The Roman Empire",
+      "King David personally",
+      "An unnamed Gentile prophet",
+      "The nation of Israel itself"
+    ],
+    "optionsEs": [
+      "El Imperio Romano",
+      "El rey David personalmente",
+      "Un profeta gentil sin nombre",
+      "La nación de Israel misma"
+    ],
+    "c": 129,
+    "explEn": "Centuries of Jewish interpretation have often identified Isaiah 53's suffering servant as the nation of Israel itself, rather than a single divine-human individual.",
+    "explEs": "Siglos de interpretación judía a menudo han identificado al siervo sufriente de Isaías 53 como la nación de Israel misma, en lugar de un solo individuo divino-humano."
+  },
+  {
+    "textEn": "17. Leviticus 17:11 teaches that atonement is accomplished specifically through:",
+    "textEs": "17. Levítico 17:11 enseña que la expiación se logra específicamente por medio de:",
+    "optionsEn": [
+      "Blood",
+      "Fasting alone",
+      "Almsgiving alone",
+      "Pilgrimage to Jerusalem"
+    ],
+    "optionsEs": [
+      "La sangre",
+      "El ayuno solo",
+      "La limosna sola",
+      "La peregrinación a Jerusalén"
+    ],
+    "c": 133,
+    "explEn": "Leviticus 17:11 says 'it is the blood that makes atonement for the soul,' the Torah's own insistence that blood alone atones for sin.",
+    "explEs": "Levítico 17:11 dice 'porque la vida de la carne en la sangre está... para hacer expiación,' la propia insistencia de la Torá en que solo la sangre expía el pecado."
+  },
+  {
+    "textEn": "18. Since the destruction of the Temple, most branches of Judaism have understood prayer, repentance, and charitable deeds, especially around Yom Kippur, to:",
+    "textEs": "18. Desde la destrucción del Templo, la mayoría de las ramas del judaísmo han entendido que la oración, el arrepentimiento y las obras de caridad, especialmente en torno a Iom Kipur:",
+    "optionsEn": [
+      "Have replaced the need for any atonement",
+      "Accomplish what sacrifice once did",
+      "Are purely symbolic with no theological weight",
+      "Were rejected by all rabbis"
+    ],
+    "optionsEs": [
+      "Han eliminado la necesidad de cualquier expiación",
+      "Logran lo que antes lograba el sacrificio",
+      "Son puramente simbólicas sin peso teológico",
+      "Fueron rechazadas por todos los rabinos"
+    ],
+    "c": 141,
+    "explEn": "With the sacrificial system gone, most branches of Judaism came to understand prayer, repentance, and charitable deeds as accomplishing what sacrifice once did.",
+    "explEs": "Sin el sistema de sacrificios, la mayoría de las ramas del judaísmo llegaron a entender la oración, el arrepentimiento y las obras de caridad como logrando lo que antes lograba el sacrificio."
+  },
+  {
+    "textEn": "19. According to Romans 11:28-29, God regards Israel, even where they have not yet believed, as:",
+    "textEs": "19. Según Romanos 11:28-29, Dios considera a Israel, incluso donde todavía no han creído, como:",
+    "optionsEn": [
+      "Permanently rejected",
+      "Equal in status to the church only after conversion",
+      "Beloved for the sake of the fathers",
+      "Irrelevant to God's ongoing plan"
+    ],
+    "optionsEs": [
+      "Permanentemente rechazado",
+      "Iguales en estatus a la iglesia solo después de la conversión",
+      "Amados por causa de los padres",
+      "Irrelevantes para el plan continuo de Dios"
+    ],
+    "c": 149,
+    "explEn": "Romans 11:28 says Israel remains 'beloved for the sake of the fathers' even where they have not yet believed, and Paul insists God has not cast away His people.",
+    "explEs": "Romanos 11:28 dice que Israel sigue siendo 'amados por causa de los padres' incluso donde todavía no han creído, y Pablo insiste en que Dios no ha desechado a Su pueblo."
+  },
+  {
+    "textEn": "20. This unit teaches that Paul's pattern in Acts, going to the synagogue first in city after city, shows that the gospel is:",
+    "textEs": "20. Esta unidad enseña que el patrón de Pablo en Hechos, yendo primero a la sinagoga en ciudad tras ciudad, muestra que el evangelio es:",
+    "optionsEn": [
+      "Not intended for Jewish people",
+      "Only for Gentiles after A.D. 70",
+      "A private matter never to be preached publicly",
+      "To the Jew first and also for the Greek"
+    ],
+    "optionsEs": [
+      "No destinado a las personas judías",
+      "Solo para los gentiles después del año 70 d.C.",
+      "Un asunto privado que nunca debe predicarse públicamente",
+      "Al judío primeramente, y también al griego"
+    ],
+    "c": 157,
+    "explEn": "Paul's consistent pattern of going to the synagogue first reflects his own words that the gospel is 'to the Jew first and also for the Greek' (Romans 1:16).",
+    "explEs": "El patrón constante de Pablo de ir primero a la sinagoga refleja sus propias palabras de que el evangelio es 'al judío primeramente, y también al griego' (Romanos 1:16)."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Explain why this unit says Judaism is not simply one religion among many for a Christian to study, but 'the soil Christianity grew out of.'",
+    "textEs": "21. Explique por qué esta unidad dice que el judaísmo no es simplemente una religión más para que un cristiano estudie, sino 'la tierra de la cual creció el cristianismo.'",
+    "kw_en": ["jew", "disciple", "romans", "adoption", "covenant", "salvation", "christ", "flesh"],
+    "kw_es": ["judío", "discípulo", "romanos", "adopción", "pacto", "salvación", "cristo", "carne"],
+    "modelEn": "Jesus was a Jew, every one of His first disciples was a Jew, and every book of the Old Testament was written by and for a Jewish audience. Paul lists the adoption, the glory, the covenants, the giving of the law, and the promises as belonging to Israel, and notes that Christ came from them according to the flesh (Romans 9:4-5). Jesus Himself told the Samaritan woman that salvation is of the Jews (John 4:22). This means Christianity did not emerge alongside Judaism but out of it, so understanding Judaism is essential to understanding Christianity's own roots.",
+    "modelEs": "Jesús era judío, cada uno de Sus primeros discípulos era judío, y cada libro del Antiguo Testamento fue escrito por y para una audiencia judía. Pablo enumera la adopción, la gloria, los pactos, la promulgación de la ley y las promesas como pertenecientes a Israel, y señala que Cristo vino de ellos según la carne (Romanos 9:4-5). Jesús mismo le dijo a la mujer samaritana que la salvación viene de los judíos (Juan 4:22). Esto significa que el cristianismo no surgió junto al judaísmo sino de él, así que entender el judaísmo es esencial para entender las propias raíces del cristianismo."
+  },
+  {
+    "textEn": "22. What is the Shema, and why does this unit say Jewish religious identity and ethnic identity are not two separate categories?",
+    "textEs": "22. ¿Qué es el Shemá, y por qué dice esta unidad que la identidad religiosa judía y la identidad étnica no son dos categorías separadas?",
+    "kw_en": ["shema", "hear", "israel", "one", "covenant", "abraham", "inheritance", "deuteronomy"],
+    "kw_es": ["shemá", "oye", "israel", "uno", "pacto", "abraham", "herencia", "deuteronomio"],
+    "modelEn": "The Shema is the daily confession from Deuteronomy 6:4, 'Hear, O Israel: The LORD our God, the LORD is one,' bound directly to loving God and teaching the next generation. It is a covenantal claim, not just abstract monotheism: this God belongs to Israel in a unique way. Because this covenant traces back through Abraham, Isaac, Jacob, Moses, and David, Jewish religious identity and ethnic identity form a single inheritance rather than two separate things that happen to overlap.",
+    "modelEs": "El Shemá es la confesión diaria de Deuteronomio 6:4, 'Oye, Israel: el SEÑOR nuestro Dios, el SEÑOR uno es,' atada directamente a amar a Dios y enseñar a la siguiente generación. Es una afirmación pactual, no solo monoteísmo abstracto: este Dios pertenece a Israel de una manera única. Debido a que este pacto se remonta a través de Abraham, Isaac, Jacob, Moisés y David, la identidad religiosa judía y la identidad étnica forman una sola herencia en lugar de dos cosas separadas que coinciden."
+  },
+  {
+    "textEn": "23. According to this unit, Israel's election was never meant to be an end in itself. Support this claim using Genesis 12:3 and Isaiah 49:6.",
+    "textEs": "23. Según esta unidad, la elección de Israel nunca fue diseñada para ser un fin en sí misma. Sustente esta afirmación usando Génesis 12:3 e Isaías 49:6.",
+    "kw_en": ["bless", "families", "earth", "light", "gentiles", "election", "genesis", "isaiah"],
+    "kw_es": ["bendic", "familias", "tierra", "luz", "gentiles", "elección", "génesis", "isaías"],
+    "modelEn": "Genesis 12:3 says that through Abraham 'all the families of the earth shall be blessed,' showing that God's promise always included the whole world, not Israel alone. Isaiah 49:6 extends this further, calling Israel to be 'a light to the Gentiles,' a verse the New Testament applies to Christ in Acts 13:47. Together these passages show that Israel's election was intended to bless and reach the nations rather than to be hoarded as a private privilege.",
+    "modelEs": "Génesis 12:3 dice que a través de Abraham 'serán benditas todas las familias de la tierra,' mostrando que la promesa de Dios siempre incluyó al mundo entero, no solo a Israel. Isaías 49:6 extiende esto más, llamando a Israel a ser 'luz de las naciones,' un versículo que el Nuevo Testamento aplica a Cristo en Hechos 13:47. Juntos estos pasajes muestran que la elección de Israel fue diseñada para bendecir y alcanzar a las naciones en lugar de acapararse como un privilegio privado."
+  },
+  {
+    "textEn": "24. Describe the crisis the destruction of the Jerusalem Temple in A.D. 70 created for Jewish religious life, and how the rabbis responded.",
+    "textEs": "24. Describa la crisis que la destrucción del Templo de Jerusalén en el año 70 d.C. creó para la vida religiosa judía, y cómo respondieron los rabinos.",
+    "kw_en": ["temple", "sacrifice", "titus", "yavneh", "prayer", "torah", "reconstruct", "atonement"],
+    "kw_es": ["templo", "sacrificio", "tito", "yavne", "oración", "torá", "reconstru", "expiación"],
+    "modelEn": "When Titus destroyed the Jerusalem Temple in A.D. 70, the entire sacrificial system Leviticus commanded for atonement of sin suddenly had no location where it could be carried out, striking at the heart of how a Jewish person could be reconciled to God. Rabbis surviving the destruction, gathered at Yavneh under Yohanan ben Zakkai, reconstructed Jewish religious life around three pillars that did not require a Temple: prayer, the study of Torah, and deeds of loving-kindness, eventually recording their interpretations in the Mishnah and Talmud.",
+    "modelEs": "Cuando Tito destruyó el Templo de Jerusalén en el año 70 d.C., todo el sistema de sacrificios que Levítico ordenaba para la expiación del pecado de repente no tenía lugar donde llevarse a cabo, golpeando el corazón de cómo una persona judía podía reconciliarse con Dios. Los rabinos que sobrevivieron a la destrucción, reunidos en Yavne bajo Yojanán ben Zakai, reconstruyeron la vida religiosa judía en torno a tres pilares que no requerían un Templo: la oración, el estudio de la Torá y las obras de bondad amorosa, registrando eventualmente sus interpretaciones en la Mishná y el Talmud."
+  },
+  {
+    "textEn": "25. Compare Orthodox and Reform Judaism as described in this unit. Why does this diversity matter for pastoral ministry?",
+    "textEs": "25. Compare el judaísmo ortodoxo y el reformista según se describen en esta unidad. ¿Por qué importa esta diversidad para el ministerio pastoral?",
+    "kw_en": ["orthodox", "reform", "binding", "autonomy", "sinai", "heritage", "credibility", "neighbor"],
+    "kw_es": ["ortodox", "reformista", "vinculante", "autonomía", "sinaí", "herencia", "credibilidad", "vecino"],
+    "modelEn": "Orthodox Judaism holds that the written and oral Torah were given by God at Sinai and remain fully binding today, maintaining traditional practice around Sabbath, dietary law, and prayer. Reform Judaism treats Jewish law as a valuable heritage rather than a binding legal code, emphasizing personal autonomy and social justice. This diversity matters for ministry because a pastor who addresses an Orthodox Jewish neighbor as though addressing a Reform or secular Jewish person will quickly lose credibility and fail to communicate in terms that actually connect with what that person believes.",
+    "modelEs": "El judaísmo ortodoxo sostiene que la Torá escrita y oral fueron dadas por Dios en el Sinaí y siguen siendo plenamente vinculantes hoy, manteniendo la práctica tradicional del sábado, la ley alimentaria y la oración. El judaísmo reformista trata la ley judía como una herencia valiosa en lugar de un código legal vinculante, enfatizando la autonomía personal y la justicia social. Esta diversidad importa para el ministerio porque un pastor que se dirige a un vecino judío ortodoxo como si se dirigiera a una persona judía reformista o secular perderá credibilidad rápidamente y no logrará comunicarse en términos que realmente conecten con lo que esa persona cree."
+  },
+  {
+    "textEn": "26. What common ground does this unit say Judaism and Christianity share, and where do the two traditions diverge most sharply?",
+    "textEs": "26. ¿Qué terreno común dice esta unidad que comparten el judaísmo y el cristianismo, y dónde divergen más agudamente las dos tradiciones?",
+    "kw_en": ["one god", "creator", "hebrew", "scripture", "moral", "messiah", "diverge", "identity"],
+    "kw_es": ["un dios", "creador", "hebre", "escritura", "moral", "mesías", "diverg", "identidad"],
+    "modelEn": "Judaism and Christianity share belief in one God the Creator, the authority of the Hebrew Scriptures, a moral law rooted in that revelation, and the conviction that history moves toward a divinely appointed goal. The traditions diverge most sharply over the identity of the Messiah: Judaism expects a human, Davidic deliverer, while traditional Judaism has not generally accepted that the Messiah would be divine, die an atoning death, or come twice, which is precisely where Christianity claims its central truth.",
+    "modelEs": "El judaísmo y el cristianismo comparten la creencia en un solo Dios Creador, la autoridad de las Escrituras hebreas, una ley moral arraigada en esa revelación, y la convicción de que la historia se mueve hacia una meta divinamente señalada. Las tradiciones divergen más agudamente en la identidad del Mesías: el judaísmo espera un libertador humano davídico, mientras que el judaísmo tradicional generalmente no ha aceptado que el Mesías fuera divino, muriera una muerte expiatoria, o viniera dos veces, que es precisamente donde el cristianismo reclama su verdad central."
+  },
+  {
+    "textEn": "27. How does this unit explain the way rabbinic Judaism answered the loss of the Temple's atoning sacrifices, and how does Hebrews respond to that answer?",
+    "textEs": "27. ¿Cómo explica esta unidad la manera en que el judaísmo rabínico respondió a la pérdida de los sacrificios expiatorios del Templo, y cómo responde Hebreos a esa respuesta?",
+    "kw_en": ["blood", "leviticus", "repentance", "charity", "yom kippur", "hebrews", "fulfill", "atone"],
+    "kw_es": ["sangre", "levítico", "arrepentimiento", "caridad", "iom kipur", "hebreos", "cumpl", "expia"],
+    "modelEn": "Since Leviticus 17:11 insists that it is the blood that makes atonement, and the Temple's destruction removed the means of offering that blood, rabbinic Judaism developed prayer, repentance, and charitable deeds, especially around Yom Kippur, as accomplishing what sacrifice once did. The book of Hebrews responds by showing at length that Jesus fulfills, rather than abolishes, the sacrificial system Moses established, offering the very blood atonement the Torah requires and that rabbinic substitutes cannot ultimately supply.",
+    "modelEs": "Dado que Levítico 17:11 insiste en que es la sangre la que hace expiación, y la destrucción del Templo eliminó el medio para ofrecer esa sangre, el judaísmo rabínico desarrolló la oración, el arrepentimiento y las obras de caridad, especialmente en torno a Iom Kipur, como aquello que logra lo que antes lograba el sacrificio. El libro de Hebreos responde mostrando extensamente que Jesús cumple, en lugar de abolir, el sistema de sacrificios que Moisés estableció, ofreciendo la misma expiación por sangre que la Torá requiere y que los sustitutos rabínicos no pueden finalmente suministrar."
+  },
+  {
+    "textEn": "28. Using Romans 11, explain why this unit warns against both replacement theology and squeamishness about evangelizing Jewish people.",
+    "textEs": "28. Usando Romanos 11, explique por qué esta unidad advierte tanto contra la teología del reemplazo como contra el recelo hacia evangelizar a las personas judías.",
+    "kw_en": ["cast away", "branches", "boast", "all israel", "beloved", "synagogue", "arrogance", "romans"],
+    "kw_es": ["desech", "ramas", "jact", "todo israel", "amados", "sinagoga", "arrogancia", "romanos"],
+    "modelEn": "Romans 11 warns against two opposite errors. Paul denies that God has cast away His people (11:1-2) and insists all Israel will be saved (11:26), which rules out replacement theology's claim that promises to Israel simply expired. Paul also warns Gentile believers not to boast against the branches (11:18-21), but this is not a call to abandon evangelism; Paul went to the synagogue first in city after city, showing the gospel remains for Jews as Jews, addressed to them as still beloved for the sake of the fathers (11:28).",
+    "modelEs": "Romanos 11 advierte contra dos errores opuestos. Pablo niega que Dios haya desechado a Su pueblo (11:1-2) e insiste en que todo Israel será salvo (11:26), lo cual descarta la afirmación de la teología del reemplazo de que las promesas a Israel simplemente expiraron. Pablo también advierte a los creyentes gentiles que no se jacten contra las ramas (11:18-21), pero esto no es un llamado a abandonar el evangelismo; Pablo fue primero a la sinagoga en ciudad tras ciudad, mostrando que el evangelio sigue siendo para los judíos como judíos, dirigido a ellos como todavía amados por causa de los padres (11:28)."
+  },
+  {
+    "textEn": "29. According to this unit, how should a pastor practically engage a Jewish friend or neighbor with the gospel?",
+    "textEs": "29. Según esta unidad, ¿cómo debe un pastor acercarse prácticamente a un amigo o vecino judío con el evangelio?",
+    "kw_en": ["isaiah", "daniel", "passover", "leviticus", "scripture", "honor", "history", "nazareth"],
+    "kw_es": ["isaías", "daniel", "pascua", "levítico", "escritura", "honr", "historia", "nazaret"],
+    "modelEn": "This unit teaches that a pastor should speak with Jewish neighbors from within their own Scriptures rather than around them, pointing to Isaiah 53, Daniel 9, the Passover lamb of Exodus 12, and the blood-atonement theology of Leviticus 17, showing how each finds its answer in Jesus of Nazareth. It also means honoring rather than dismissing Jewish history and suffering, and the genuine devotion many Jewish people bring to God even without yet knowing Christ, following Paul's own pattern of engagement.",
+    "modelEs": "Esta unidad enseña que un pastor debe hablar con vecinos judíos desde dentro de sus propias Escrituras en lugar de rodearlas, señalando a Isaías 53, Daniel 9, el cordero de la Pascua de Éxodo 12, y la teología de expiación por sangre de Levítico 17, mostrando cómo cada uno encuentra su respuesta en Jesús de Nazaret. También significa honrar en lugar de descartar la historia y el sufrimiento judíos, y la devoción genuina que muchas personas judías traen a Dios incluso sin conocer todavía a Cristo, siguiendo el propio patrón de acercamiento de Pablo."
+  },
+  {
+    "textEn": "30. Synthesize this unit: why does understanding Judaism matter both for accurate scholarship and for faithful evangelism, according to Romans 11:25-26?",
+    "textEs": "30. Sintetice esta unidad: ¿por qué importa entender el judaísmo tanto para una erudición precisa como para un evangelismo fiel, según Romanos 11:25-26?",
+    "kw_en": ["mystery", "fullness", "gentiles", "unfinished", "scholarship", "evangelism", "root", "respect"],
+    "kw_es": ["misterio", "plenitud", "gentiles", "inconclus", "erudición", "evangelismo", "raíz", "respet"],
+    "modelEn": "Romans 11:25-26 speaks of a mystery: hardening has come upon part of Israel until the fullness of the Gentiles has come in, and so all Israel will be saved, treating God's dealings with the Jewish people as far from finished rather than a closed chapter. This unit synthesizes that understanding Judaism matters for scholarship because Christianity grew directly out of it, and matters for evangelism because Jewish people remain beloved for the sake of the fathers and are owed the same gospel Paul preached to them first, delivered with respect for their Scriptures, history, and ongoing role in God's unfinished plan.",
+    "modelEs": "Romanos 11:25-26 habla de un misterio: ha acontecido a Israel endurecimiento en parte, hasta que haya entrado la plenitud de los gentiles, y luego todo Israel será salvo, tratando el trato de Dios con el pueblo judío como lejos de estar terminado en lugar de un capítulo cerrado. Esta unidad sintetiza que entender el judaísmo importa para la erudición porque el cristianismo creció directamente de él, e importa para el evangelismo porque las personas judías siguen siendo amadas por causa de los padres y se les debe el mismo evangelio que Pablo les predicó primero, entregado con respeto por sus Escrituras, su historia y su papel continuo en el plan inconcluso de Dios."
+  }
+];
+
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit2 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_wr_u2_mc_passed';
+const SA_LOCK_KEY = 'cts_wr_u2_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_wr_u2_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function kwHit(ans, kw) {
+  kw = (kw||'').toLowerCase(); if (!kw) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (kw.length <= 4) ? '(?:^|[^'+WC+'])'+esc+'(?!['+WC+'])' : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); } catch(e) { return ans.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read the student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(ans, kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 3 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first." : "Por favor regístrese primero.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'certificate';
+    let total, score, required, mcGatePass, saGatePass, correctKW = 0;
+    const mcPct2 = correctMC;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW; required = null;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit2 = true;
+                localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_wr_u2_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit2 = true;
+        localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_wr_u2_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_wr_u2_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        renderQuestions();
+    };
+});
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 2 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSWRReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

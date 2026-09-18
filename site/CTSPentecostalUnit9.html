@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Unit 9 — Healing, Miracles, and Spiritual Warfare / La sanidad, los milagros y la guerra espiritual</title>
+<style>
+  :root{
+    --ink:#22303b; --ink-soft:#465562; --paper:#f5f3ec; --surface:#ffffff;
+    --brass:#b08324; --brass-soft:#e8dcc0; --rule:#ddd6c6;
+    --good:#2f6f4f; --good-bg:#e8f1eb; --bad:#9b3d3d; --bad-bg:#f3e6e4;
+    --gold-box:#fbf3dd; --gold-border:#d9b45b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    font-size:18px; line-height:1.72;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 80px;}
+  .topbar{
+    position:sticky; top:0; z-index:20; background:var(--ink); color:#f5f3ec;
+    display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center; justify-content:space-between;
+    padding:10px 20px; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  .topbar .brand{font-weight:600; font-size:15px; letter-spacing:.02em;}
+  .topbar .brand small{opacity:.7; font-weight:400;}
+  .switches{display:flex; gap:16px; align-items:center; flex-wrap:wrap;}
+  .switch{display:flex; align-items:center; gap:4px;}
+  .switch span.lbl{font-size:11px; text-transform:uppercase; letter-spacing:.08em; opacity:.65;}
+  .switch button{
+    font:inherit; font-size:13px; cursor:pointer; border:1px solid #45596a; background:transparent;
+    color:#dfe6ec; padding:5px 11px; border-radius:999px; line-height:1;
+  }
+  .switch button[aria-pressed="true"]{background:var(--brass); border-color:var(--brass); color:#241a05; font-weight:600;}
+  .switch button:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+  header.unit{padding:38px 0 6px; border-bottom:1px solid var(--rule);}
+  .eyebrow{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  h1{font-family:Georgia,serif; font-size:2rem; line-height:1.18; margin:.35rem 0 .1rem; font-weight:700;}
+  .course-tag{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft);}
+  .banner{margin:26px 0 8px; padding:20px 22px; background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--brass); border-radius:4px;}
+  .banner .verse{font-size:1.12rem; font-style:italic; line-height:1.6;}
+  .banner .ref{display:block; margin-top:8px; font-family:system-ui,sans-serif; font-style:normal; font-size:13px; letter-spacing:.05em; color:var(--brass); font-weight:600;}
+  h2{font-family:Georgia,serif; font-size:1.42rem; margin:2.2em 0 .5em; line-height:1.25; padding-bottom:.18em; border-bottom:2px solid var(--brass-soft);}
+  h3{font-family:Georgia,serif; font-size:1.14rem; margin:1.6em 0 .3em; color:var(--ink);}
+  p{margin:0 0 1.05em;}
+  .lead{font-size:1.06rem;}
+  blockquote.scripture{margin:1.2em 0; padding:2px 0 2px 20px; border-left:3px solid var(--gold-border); font-style:italic; color:#3a4650;}
+  blockquote.scripture .ref{display:block; font-style:normal; font-family:system-ui,sans-serif; font-size:12.5px; letter-spacing:.04em; color:var(--brass); font-weight:600; margin-top:5px;}
+  .objectives{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 22px 6px; margin:24px 0;}
+  .objectives h2{margin:0 0 .4em; border:0; font-size:1.15rem;}
+  .objectives ol{margin:0 0 12px; padding-left:1.25em;}
+  .objectives li{margin:0 0 .55em;}
+  /* comparative VIEWS block (reusable multi-view template) */
+  .views{margin:24px 0; display:grid; gap:14px;}
+  .view{background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--accent,#888); border-radius:6px; padding:16px 20px;}
+  .view.v1{--accent:#3f6d7a;} .view.v2{--accent:#9a7b2e;} .view.v3{--accent:#5f7052;} .view.v4{--accent:#7a5566;}
+  .vhead{font-family:Georgia,serif; font-weight:700; font-size:1.1rem; margin-bottom:.55em; line-height:1.3;}
+  .vtag{display:inline-block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:#fff; background:var(--accent,#888); padding:3px 8px; border-radius:999px; vertical-align:middle; margin-right:8px; font-weight:700;}
+  .view p{font-size:.97rem; margin:0 0 .5em;} .view p:last-child{margin-bottom:0;}
+  .view p b{color:var(--ink);}
+  /* two-questions split (signature) */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:0; margin:26px 0; border:1px solid var(--rule); border-radius:6px; overflow:hidden;}
+  .split .col{padding:20px 22px; background:var(--surface);}
+  .split .col:first-child{border-right:3px solid var(--brass);}
+  .split .col h4{margin:0 0 .5em; font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .split .col .verdict{font-family:Georgia,serif; font-size:1.12rem; font-weight:700; margin:0 0 .4em; line-height:1.3;}
+  .split .col p{font-size:.96rem; margin:0;}
+  .split .col.affirm .verdict{color:var(--good);}
+  .split .col.decline .verdict{color:var(--ink);}
+  @media(max-width:560px){ .split{grid-template-columns:1fr;} .split .col:first-child{border-right:0; border-bottom:3px solid var(--brass);} }
+  .callout{background:#fdfcf8; border:1px solid var(--rule); border-left:4px solid var(--ink-soft); border-radius:4px; padding:14px 18px; margin:22px 0; font-size:.98rem;}
+  ul.q-list{padding-left:1.2em;} ul.q-list li{margin:0 0 .6em;}
+  section.assess{margin-top:16px;}
+  .qcard{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 20px; margin:16px 0;}
+  .qnum{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .qstem{font-weight:600; margin:.3em 0 .8em;}
+  .opt{display:block; margin:0 0 .5em; padding:10px 12px; border:1px solid var(--rule); border-radius:5px; cursor:pointer; font-size:.98rem; transition:background .12s,border-color .12s;}
+  .opt:hover{background:#faf7ef;}
+  .opt input{margin-right:9px;}
+  .opt.correct{background:var(--good-bg); border-color:var(--good);}
+  .opt.wrong{background:var(--bad-bg); border-color:var(--bad);}
+  .btn{font-family:system-ui,sans-serif; font-size:14px; font-weight:600; cursor:pointer; border:0; background:var(--ink); color:#fff; padding:9px 18px; border-radius:5px;}
+  .btn:hover{background:#334452;} .btn:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--ink);}
+  .fb{margin-top:12px; font-size:.95rem; padding:10px 12px; border-radius:5px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:var(--good-bg); color:#1f5138; border:1px solid #bcd8c8;}
+  .fb.no{background:var(--bad-bg); color:#7a2f2f; border:1px solid #e0c4c0;}
+  .scorebar{font-family:system-ui,sans-serif; font-size:14px; background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:12px 16px; margin:14px 0; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;}
+  .scorebar strong{color:var(--brass); font-size:16px;}
+  textarea{width:100%; min-height:118px; font-family:inherit; font-size:1rem; padding:12px; border:1px solid var(--rule); border-radius:5px; resize:vertical; background:#fffef9;}
+  textarea:focus-visible{outline:2px solid var(--brass); outline-offset:1px;}
+  .hitline{font-family:system-ui,sans-serif; font-size:13px; margin:10px 0; display:none;}
+  .hitline.show{display:block;}
+  .hitline b{color:var(--brass);}
+  .model{display:none; margin-top:12px; background:var(--gold-box); border:1px solid var(--gold-border); border-radius:5px; padding:14px 16px; font-size:.97rem;}
+  .model.show{display:block;}
+  .model .mh{font-family:system-ui,sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8a6d1f; font-weight:700; margin-bottom:6px;}
+  .track-note{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft); background:#fdfcf8; border:1px dashed var(--rule); border-radius:5px; padding:10px 14px; margin:10px 0;}
+  #masters-block{display:none;}
+  html.track-masters #masters-block{display:block;}
+  html.track-cert #cert-only-note{display:block;}
+  #cert-only-note{display:none;}
+  footer{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-family:system-ui,sans-serif; font-size:12.5px; color:var(--ink-soft);}
+  .pane.es{display:none;} .seg.es{display:none;}
+  html.lang-es .pane.en{display:none;} html.lang-es .seg.en{display:none;}
+  html.lang-es .pane.es{display:block;} html.lang-es .seg.es{display:inline;}
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">Chapala Theological Seminary <small>&middot; Seminario Teológico de Chapala</small></div>
+  <div class="switches">
+    <div class="switch" role="group" aria-label="Language / Idioma">
+      <span class="lbl">Lang</span>
+      <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+      <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+    </div>
+    <div class="switch" role="group" aria-label="Track / Programa">
+      <span class="lbl seg en">Track</span><span class="lbl seg es">Programa</span>
+      <button id="btn-cert" aria-pressed="true" onclick="setTrack('cert')"><span class="seg en">Certificate</span><span class="seg es">Certificado</span></button>
+      <button id="btn-mast" aria-pressed="false" onclick="setTrack('masters')"><span class="seg en">Master's</span><span class="seg es">Maestría</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSPentecostalUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSPentecostalUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSPentecostalUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSPentecostalUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSPentecostalUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSPentecostalUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSPentecostalUnit7.html" title="Unit 7 · Unidad 7">7</a><a href="CTSPentecostalUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSPentecostalUnit9.html" title="Unit 9 · Unidad 9" class="active">9</a><a href="CTSPentecostalUnit10.html" title="Unit 10 · Unidad 10">10</a><a href="CTSPentecostalUnit11.html" title="Unit 11 · Unidad 11">11</a><a href="CTSPentecostalUnit12.html" title="Unit 12 · Unidad 12">12</a></nav><script>(function(){try{var p=JSON.parse(localStorage.getItem('cts_pentecostal_progress')||'{}');document.querySelectorAll('.cts-unitnav a').forEach(function(a,i){if(p['unit'+(i+1)])a.classList.add('completed');});}catch(e){}})();</script>
+
+  <header class="unit">
+    <div class="pane en">
+      <div class="eyebrow">Pentecostalism &amp; the Charismatic Movement · Unit 9</div>
+      <h1>Healing, Miracles, and Spiritual Warfare</h1>
+      <div class="course-tag">A Biblical Study · New King James Version</div>
+    </div>
+    <div class="pane es">
+      <div class="eyebrow">El pentecostalismo y el movimiento carismático · Unidad 9</div>
+      <h1>La sanidad, los milagros y la guerra espiritual</h1>
+      <div class="course-tag">Un estudio bíblico · Reina-Valera Gómez</div>
+    </div>
+  </header>
+
+  <div class="banner">
+    <div class="pane en"><span class="verse">"For I am the LORD who heals you."<span class="ref">Exodus 15:26 (NKJV)</span></span></div>
+    <div class="pane es"><span class="verse">"Porque yo soy Jehová tu Sanador."<span class="ref">Éxodo 15:26 (RVG)</span></span></div>
+  </div>
+
+  <div class="objectives">
+    <div class="pane en">
+      <h2>Learning Objectives</h2>
+      <ol>
+        <li>Affirm from Scripture that God heals and that the gift of healing is real, and that the church is to pray for the sick.</li>
+        <li>Reject the distortion that healing is guaranteed to every believer whose faith is strong enough, using the biblical examples of unhealed saints.</li>
+        <li>Locate present healing within the "now and not yet," with full healing belonging to the resurrection.</li>
+        <li>State the biblical view of spiritual warfare — its reality, its true armor, and the errors of both denial and obsession.</li>
+        <li>Care for the suffering with comfort rather than blame, keeping Christ the Healer at the center.</li>
+      </ol>
+    </div>
+    <div class="pane es">
+      <h2>Objetivos de aprendizaje</h2>
+      <ol>
+        <li>Afirmar desde la Escritura que Dios sana y que el don de sanidad es real, y que la iglesia ha de orar por los enfermos.</li>
+        <li>Rechazar la distorsión de que la sanidad está garantizada a todo creyente cuya fe sea suficientemente fuerte, usando los ejemplos bíblicos de santos no sanados.</li>
+        <li>Ubicar la sanidad presente dentro del "ya y todavía no," perteneciendo la sanidad plena a la resurrección.</li>
+        <li>Exponer la visión bíblica de la guerra espiritual — su realidad, su verdadera armadura, y los errores tanto de la negación como de la obsesión.</li>
+        <li>Cuidar al que sufre con consuelo en vez de culpa, manteniendo a Cristo el Sanador en el centro.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!--WC:EN:START-->
+  <div class="pane en">
+
+    <h2>Near the Heart of the Movement</h2>
+    <p class="lead">From the very beginning, healing and the miraculous have stood near the heart of the movement we are studying. The early Pentecostals prayed for the sick and testified of recoveries; the charismatic renewal carried that expectation into the historic churches; and across the Global South today, prayer for healing and a keen sense of the spiritual battle mark much of the movement's daily life. For many believers, especially where medicine is scarce, the conviction that God still heals and still delivers is not a doctrine debated at a distance but a hope they live by.</p>
+    <p>So we must ask plainly what the Scriptures teach. Does God heal today? Is the gift of healing real? Is every believer promised health if only he believes? What is the nature of the spiritual conflict, and how is it to be fought? As throughout this course, we will affirm what Scripture affirms, decline what it declines, and keep two questions apart — for whether God heals is one matter, and whether healing is guaranteed on demand is quite another. And we will hold the whole subject, as we must, in submission to the Word and with Christ at the center.</p>
+
+    <h2>God Heals</h2>
+    <p>Begin with the great and gladdening truth: God heals. From the earliest pages of Scripture He reveals Himself as the Healer of His people — "I am the LORD who heals you" (Ex 15:26) — and the Psalms bless Him as the One "who heals all your diseases" (Ps 103:3). Sickness entered the world with the Fall and is no part of God's original design; and again and again, in His mercy, He has driven it back.</p>
+    <p>In the Lord Jesus this healing mercy reached its fullness. He "went about all Galilee… healing all kinds of sickness and all kinds of disease among the people" (Matt 4:23), and Peter later summed up His ministry in a single sentence: He "went about doing good and healing all who were oppressed by the devil, for God was with Him" (Acts 10:38). The apostles, in His name, healed the lame and the sick after Him. To deny that God heals would be to close our eyes to the plain testimony of Scripture and to the compassion of Christ Himself.</p>
+
+    <h2>The Gift of Healing and the Church's Prayer</h2>
+    <p>Nor did this healing mercy cease to touch the church. Among the gifts the Spirit distributes, Paul names "gifts of healings" (1 Cor 12:9), and James gives the church a plain instruction for the sick among its members:</p>
+    <blockquote class="scripture">"Is anyone among you sick? Let him call for the elders of the church, and let them pray over him, anointing him with oil in the name of the Lord. And the prayer of faith will save the sick, and the Lord will raise him up."<span class="ref">James 5:14–15 (NKJV)</span></blockquote>
+    <p>So the people of God are not to meet sickness with a shrug, as though healing were beneath their prayers or beyond their God. They are to pray, and to pray in faith, calling on the Lord who heals and asking Him to raise up the sick. Whether the extraordinary sign-gifts of the apostolic age continue as they were then is a question this course weighs elsewhere; but that the church should pray earnestly for the sick, and look to God to act, is beyond dispute. Where He heals, we give Him thanks; and we ask boldly, as children of a Father who delights to give good gifts.</p>
+
+    <h2>But Not Healing on Demand</h2>
+    <p>Here, however, we must speak carefully, for a real truth has been twisted into a cruel error. Some teach that every believer will always be healed if only his faith is strong enough — that health is a guaranteed right of the gospel, and that if healing does not come, the fault lies in the sick person's unbelief. This the Scriptures will not allow. They set before us godly men who prayed and were not healed, and they never once trace it to a failure of faith.</p>
+    <p>Paul himself is the clearest case. Three times he begged the Lord to remove his "thorn in the flesh," and three times the answer was not the healing he sought but a greater grace:</p>
+    <blockquote class="scripture">"My grace is sufficient for you, for My strength is made perfect in weakness."<span class="ref">2 Corinthians 12:9 (NKJV)</span></blockquote>
+    <p>Nor was this the only such case in Paul's own circle. He "left Trophimus in Miletus sick" (2 Tim 4:20); he told Timothy to take a little wine for his stomach and his frequent infirmities (1 Tim 5:23), counsel he would never have given had he thought the illness a mark of unbelief; and when Epaphroditus was sick "almost unto death," Paul called his recovery the mercy of God, not the reward of a formula (Phil 2:27). Even the Lord Jesus, at the pool of Bethesda, healed one man out of a multitude of the sick who lay there. Healing, then, is God's to give as He wills, in mercy — never a wage the believer earns by the strength of his believing.</p>
+
+    <h2>The Now and the Not Yet</h2>
+    <p>Why, then, does God heal some and not others now? Scripture does not give us the whole answer, but it does give us the framework in which to rest. Full and final healing — the end of all sickness, sorrow, and death itself — belongs to the resurrection and the world to come, and is promised there without exception:</p>
+    <blockquote class="scripture">"And God will wipe away every tear from their eyes; there shall be no more death, nor sorrow, nor crying. There shall be no more pain, for the former things have passed away."<span class="ref">Revelation 21:4 (NKJV)</span></blockquote>
+    <p>Until that day, we live in the "not yet." We "groan within ourselves, eagerly waiting for… the redemption of our body" (Rom 8:23), and our present healings, real and gracious as they are, are foretastes of that final wholeness rather than its full arrival. God may heal now, and often does, as a mercy and a sign of what is to come; but He also has purposes that suffering can serve — the perfecting of His strength in our weakness, the deepening of our trust, and, as with the man born blind, the display of His own works (John 9:3). The believer who is not yet healed has not been failed by God; he is waiting, with all creation, for a healing that is sure.</p>
+
+    <h2>Miracles and the Sign-Seeking Heart</h2>
+    <p>What is true of healing is true of the miraculous more broadly. God is sovereign over His creation and is able to do wonders; nothing in Scripture shuts His hand. The signs and wonders of the apostolic age served to attest the gospel as it was first preached, God "bearing witness both with signs and wonders" (Heb 2:4). Whether such sign-gifts continue in the same manner today is the open question weighed in other units, and we do not settle it here; but that God still acts, still answers prayer, and can heal beyond human explanation, we gladly affirm.</p>
+    <p>Yet Scripture also warns against a certain hunger for the miraculous. "An evil and adulterous generation seeks after a sign," the Lord said (Matt 12:39), rebuking those who wanted wonders more than they wanted God. A heart set on signs can drift from the Giver to the gifts, prizing the spectacular over the Savior and measuring faith by marvels rather than by obedience and love. We are to seek God Himself, to trust Him whether or not He grants the wonder we ask, and to remember that the greatest miracle is not a healed body but a saved and changed soul.</p>
+
+    <h2>The Reality of Spiritual Warfare</h2>
+    <p>Alongside healing, the movement has always taken seriously the reality of spiritual warfare, and in this it is right, for Scripture is plain that the Christian life is a battle. There is a real enemy, the devil, and there are real spiritual powers of evil arrayed against the people of God:</p>
+    <blockquote class="scripture">"For we do not wrestle against flesh and blood, but against principalities, against powers, against the rulers of the darkness of this age, against spiritual hosts of wickedness in the heavenly places."<span class="ref">Ephesians 6:12 (NKJV)</span></blockquote>
+    <p>We do not fight, then, merely against human opponents or against our own weakness; behind these stands a spiritual adversary, cunning and malicious, who "walks about like a roaring lion, seeking whom he may devour" (1 Pet 5:8). To pretend otherwise, to treat the spiritual realm as a fable, is to be caught unaware in a war that is really being waged. The believer must be sober and watchful, and must not be ignorant of the enemy's devices.</p>
+
+    <h2>Warfare in Biblical Proportion</h2>
+    <p>But Scripture also keeps this warfare in careful proportion, and here the movement has sometimes stumbled. The armor God gives is not a set of techniques, formulas, or sensational rituals; it is truth, righteousness, the readiness of the gospel, faith, salvation, the Word of God, and prayer (Eph 6:14–18). Victory is not wrung from the enemy by the right words or the loudest voice; it is Christ's, who "disarmed principalities and powers" at the cross and made a public spectacle of them (Col 2:15). "Resist the devil," James writes, "and he will flee from you" (James 4:7), and John assures us, "He who is in you is greater than he who is in the world" (1 John 4:4).</p>
+    <p>So we avoid the two opposite errors. On one side is the denial that dismisses the demonic as unreal; on the other is the obsession that finds a demon behind every illness, every sin, and every misfortune, and that gives the devil more attention and more credit than Scripture ever does. To blame all our troubles on evil spirits is to excuse our own sin and to forget the ordinary weakness of the flesh and the pull of the world. The believer's confidence is not in his skill at spiritual combat but in his Lord; he keeps the enemy in view, but he keeps Christ at the center, and it is Christ, not the devil, who fills his thoughts and his praise.</p>
+
+    <h2>The Pastoral Wound</h2>
+    <p>As with the prosperity teaching, the errors around healing are not merely mistaken; they wound. Picture the believer, already bearing the weight of a long illness, who is told that his sickness lingers because his faith is too weak — or the grieving family informed that their loved one died for want of believing. To the pain of the body such teaching adds the pain of false guilt, and it slanders the God who is nearest to the broken.</p>
+    <p>The Scriptures speak a kinder and truer word. "The LORD is near to those who have a broken heart" (Ps 34:18). Paul's thorn remained, and God's grace was enough. A faithful shepherd will pray earnestly for the healing of his people, and will use every ordinary mercy of medicine and care without shame — for Luke, the beloved physician, was Paul's own companion, and wine was Timothy's prescribed remedy. But he will never lay upon the suffering the crushing burden of blame; he will comfort them with the presence of God and the sufficiency of His grace.</p>
+
+    <h2>Holding It Together: Christ the Healer</h2>
+    <p>How, then, shall we hold all this together? We pray boldly for the sick, expecting God to act, and we anoint and lay on hands as James directs. We use the ordinary means God has given, thanking Him for medicine and skill as His gifts. We submit our asking to His will, praying as the leper did, "Lord, if You are willing" (Matt 8:2), and as our Lord Himself did in the garden, "not My will, but Yours." We take the spiritual battle seriously, but in biblical proportion, resting in Christ's finished victory. And we comfort the afflicted rather than condemning them.</p>
+    <p>Through it all we remember that the Healer is the Savior, and that the aim of every healing and every deliverance is to glorify Him and to point beyond itself — to the greater healing of the soul from sin, and to the final healing of the resurrection, when He will wipe away every tear. He may heal the body now, in mercy; He will heal it fully then, in glory; and in life or in death, in sickness or in health, He Himself is the believer's hope.</p>
+
+    <h3>Looking Ahead</h3>
+    <p>In the next unit we take up the questions that have run beneath much of this study and press them directly: whether prophecy and tongues continue in the church today, and how any such gift relates to the closed and completed Scriptures. We will set out the strongest case on each side and, as ever, weigh it by the Word.</p>
+
+  </div>
+  <!--WC:EN:END-->
+
+  <!--WC:ES:START-->
+  <div class="pane es">
+
+    <h2>Cerca del corazón del movimiento</h2>
+    <p class="lead">Desde el mismo comienzo, la sanidad y lo milagroso han estado cerca del corazón del movimiento que estudiamos. Los primeros pentecostales oraban por los enfermos y testificaban de recuperaciones; la renovación carismática llevó esa expectativa a las iglesias históricas; y por todo el Sur Global hoy, la oración por sanidad y un agudo sentido de la batalla espiritual marcan gran parte de la vida diaria del movimiento. Para muchos creyentes, especialmente donde la medicina es escasa, la convicción de que Dios todavía sana y todavía libra no es una doctrina debatida a la distancia, sino una esperanza por la cual viven.</p>
+    <p>Así que debemos preguntar con claridad qué enseñan las Escrituras. ¿Sana Dios hoy? ¿Es real el don de sanidad? ¿Se promete salud a todo creyente con tal que crea? ¿Cuál es la naturaleza del conflicto espiritual, y cómo ha de librarse? Como a lo largo de este curso, afirmaremos lo que la Escritura afirma, declinaremos lo que ella declina, y mantendremos dos preguntas separadas — pues si Dios sana es un asunto, y si la sanidad está garantizada a demanda es otro muy distinto. Y sostendremos todo el tema, como debemos, en sujeción a la Palabra y con Cristo en el centro.</p>
+
+    <h2>Dios sana</h2>
+    <p>Comencemos con la gran y gozosa verdad: Dios sana. Desde las páginas más tempranas de la Escritura Él se revela como el Sanador de su pueblo — "Yo soy Jehová tu Sanador" (Éx 15:26) — y los Salmos lo bendicen como Aquel "que sana todas tus dolencias" (Sal 103:3). La enfermedad entró en el mundo con la Caída y no es parte del diseño original de Dios; y una y otra vez, en su misericordia, Él la ha hecho retroceder.</p>
+    <p>En el Señor Jesús esta misericordia sanadora alcanzó su plenitud. "Recorría Jesús toda Galilea… sanando toda enfermedad y toda dolencia en el pueblo" (Mt 4:23), y Pedro después resumió su ministerio en una sola frase: "anduvo haciendo el bien, y sanando a todos los oprimidos del diablo, porque Dios estaba con Él" (Hch 10:38). Los apóstoles, en su nombre, sanaron a los cojos y a los enfermos después de Él. Negar que Dios sana sería cerrar nuestros ojos al claro testimonio de la Escritura y a la compasión de Cristo mismo.</p>
+
+    <h2>El don de sanidad y la oración de la iglesia</h2>
+    <p>Ni cesó esta misericordia sanadora de tocar a la iglesia. Entre los dones que el Espíritu reparte, Pablo nombra "dones de sanidades" (1 Cor 12:9), y Santiago da a la iglesia una instrucción clara para los enfermos entre sus miembros:</p>
+    <blockquote class="scripture">"¿Está alguno enfermo entre vosotros? Llame a los ancianos de la iglesia, y oren por él, ungiéndole con aceite en el nombre del Señor. Y la oración de fe salvará al enfermo, y el Señor lo levantará."<span class="ref">Santiago 5:14–15 (RVG)</span></blockquote>
+    <p>Así que el pueblo de Dios no ha de encarar la enfermedad con un encogimiento de hombros, como si la sanidad estuviera por debajo de sus oraciones o más allá de su Dios. Han de orar, y orar en fe, invocando al Señor que sana y pidiéndole que levante al enfermo. Si los dones de señal extraordinarios de la era apostólica continúan como entonces es una pregunta que este curso sopesa en otras partes; pero que la iglesia deba orar con fervor por los enfermos, y mirar a Dios para que actúe, está fuera de disputa. Donde Él sana, le damos gracias; y pedimos con audacia, como hijos de un Padre que se deleita en dar buenas dádivas.</p>
+
+    <h2>Pero no sanidad a demanda</h2>
+    <p>Aquí, sin embargo, debemos hablar con cuidado, pues una verdad real ha sido torcida en un error cruel. Algunos enseñan que todo creyente siempre será sanado con tal que su fe sea suficientemente fuerte — que la salud es un derecho garantizado del evangelio, y que si la sanidad no llega, la culpa está en la incredulidad del enfermo. Esto la Escritura no lo permitirá. Nos pone delante a hombres piadosos que oraron y no fueron sanados, y ni una sola vez lo atribuye a una falta de fe.</p>
+    <p>Pablo mismo es el caso más claro. Tres veces rogó al Señor que le quitara su "aguijón en la carne," y tres veces la respuesta no fue la sanidad que buscaba, sino una gracia mayor:</p>
+    <blockquote class="scripture">"Bástate mi gracia; porque mi poder se perfecciona en la debilidad."<span class="ref">2 Corintios 12:9 (RVG)</span></blockquote>
+    <p>Ni fue este el único caso semejante en el propio círculo de Pablo. "A Trófimo dejé en Mileto enfermo" (2 Ti 4:20); dijo a Timoteo que tomara un poco de vino por su estómago y sus frecuentes enfermedades (1 Ti 5:23), consejo que nunca habría dado si hubiera pensado que la dolencia era una marca de incredulidad; y cuando Epafrodito estuvo enfermo "a punto de morir," Pablo llamó su recuperación la misericordia de Dios, no la recompensa de una fórmula (Flp 2:27). Aun el Señor Jesús, en el estanque de Betesda, sanó a un hombre de entre una multitud de enfermos que allí yacían. La sanidad, entonces, es de Dios para darla como Él quiere, en misericordia — nunca un salario que el creyente gana por la fuerza de su creer.</p>
+
+    <h2>El ya y el todavía no</h2>
+    <p>¿Por qué, entonces, sana Dios a algunos y no a otros ahora? La Escritura no nos da toda la respuesta, pero sí nos da el marco en el cual descansar. La sanidad plena y final — el fin de toda enfermedad, tristeza, y de la muerte misma — pertenece a la resurrección y al mundo venidero, y allí se promete sin excepción:</p>
+    <blockquote class="scripture">"Y Dios enjugará toda lágrima de los ojos de ellos; y ya no habrá muerte, ni habrá más llanto, ni clamor, ni dolor; porque las primeras cosas pasaron."<span class="ref">Apocalipsis 21:4 (RVG)</span></blockquote>
+    <p>Hasta aquel día, vivimos en el "todavía no." "Gemimos dentro de nosotros mismos, esperando… la redención de nuestro cuerpo" (Ro 8:23), y nuestras sanidades presentes, reales y llenas de gracia como son, son anticipos de aquella plenitud final más que su llegada completa. Dios puede sanar ahora, y a menudo lo hace, como una misericordia y una señal de lo que ha de venir; pero también tiene propósitos que el sufrimiento puede servir — el perfeccionar su fuerza en nuestra debilidad, el ahondar de nuestra confianza, y, como con el ciego de nacimiento, la manifestación de sus propias obras (Jn 9:3). El creyente que aún no ha sido sanado no ha sido fallado por Dios; espera, con toda la creación, una sanidad que es segura.</p>
+
+    <h2>Los milagros y el corazón que busca señales</h2>
+    <p>Lo que es cierto de la sanidad es cierto de lo milagroso más ampliamente. Dios es soberano sobre su creación y es capaz de hacer maravillas; nada en la Escritura cierra su mano. Las señales y los prodigios de la era apostólica sirvieron para atestiguar el evangelio tal como fue predicado por primera vez, "testificando Dios con señales y prodigios" (Heb 2:4). Si tales dones de señal continúan de la misma manera hoy es la pregunta abierta sopesada en otras unidades, y no la resolvemos aquí; pero que Dios todavía actúa, todavía responde la oración, y puede sanar más allá de la explicación humana, lo afirmamos con gozo.</p>
+    <p>Sin embargo, la Escritura también advierte contra cierta hambre de lo milagroso. "La generación mala y adúltera demanda señal," dijo el Señor (Mt 12:39), reprendiendo a los que querían maravillas más de lo que querían a Dios. Un corazón puesto en las señales puede derivar del Dador a los dones, prefiriendo lo espectacular al Salvador y midiendo la fe por prodigios en vez de por la obediencia y el amor. Hemos de buscar a Dios mismo, confiar en Él conceda o no la maravilla que pedimos, y recordar que el mayor milagro no es un cuerpo sanado, sino un alma salvada y transformada.</p>
+
+    <h2>La realidad de la guerra espiritual</h2>
+    <p>Junto a la sanidad, el movimiento siempre ha tomado en serio la realidad de la guerra espiritual, y en esto tiene razón, pues la Escritura es clara en que la vida cristiana es una batalla. Hay un enemigo real, el diablo, y hay poderes espirituales reales de maldad dispuestos contra el pueblo de Dios:</p>
+    <blockquote class="scripture">"Porque no tenemos lucha contra sangre y carne, sino contra principados, contra potestades, contra los gobernadores de las tinieblas de este mundo, contra huestes espirituales de maldad en las regiones celestes."<span class="ref">Efesios 6:12 (RVG)</span></blockquote>
+    <p>No luchamos, entonces, meramente contra oponentes humanos ni contra nuestra propia debilidad; detrás de estos está un adversario espiritual, astuto y malicioso, que "anda alrededor como león rugiente, buscando a quien devorar" (1 P 5:8). Fingir lo contrario, tratar el reino espiritual como una fábula, es ser tomado por sorpresa en una guerra que realmente se está librando. El creyente debe ser sobrio y velar, y no debe ignorar las maquinaciones del enemigo.</p>
+
+    <h2>La guerra en proporción bíblica</h2>
+    <p>Pero la Escritura también mantiene esta guerra en cuidadosa proporción, y aquí el movimiento a veces ha tropezado. La armadura que Dios da no es un conjunto de técnicas, fórmulas o rituales sensacionalistas; es la verdad, la justicia, la disposición del evangelio, la fe, la salvación, la Palabra de Dios y la oración (Ef 6:14–18). La victoria no se arranca del enemigo con las palabras correctas ni con la voz más fuerte; es de Cristo, quien "despojando a los principados y a las potestades" en la cruz los exhibió públicamente (Col 2:15). "Resistid al diablo," escribe Santiago, "y huirá de vosotros" (Stg 4:7), y Juan nos asegura: "mayor es el que está en vosotros, que el que está en el mundo" (1 Jn 4:4).</p>
+    <p>Así que evitamos los dos errores opuestos. De un lado está la negación que descarta lo demoníaco como irreal; del otro está la obsesión que halla un demonio detrás de cada enfermedad, cada pecado y cada desgracia, y que da al diablo más atención y más crédito de lo que la Escritura jamás le da. Culpar de todos nuestros males a los espíritus malignos es excusar nuestro propio pecado y olvidar la debilidad ordinaria de la carne y la atracción del mundo. La confianza del creyente no está en su destreza en el combate espiritual, sino en su Señor; mantiene al enemigo a la vista, pero mantiene a Cristo en el centro, y es Cristo, no el diablo, quien llena sus pensamientos y su alabanza.</p>
+
+    <h2>La herida pastoral</h2>
+    <p>Como con la enseñanza de la prosperidad, los errores en torno a la sanidad no son meramente equivocados; hieren. Imagine al creyente, ya cargando el peso de una larga enfermedad, a quien se le dice que su enfermedad persiste porque su fe es demasiado débil — o a la familia en duelo informada de que su ser querido murió por falta de creer. Al dolor del cuerpo tal enseñanza añade el dolor de la culpa falsa, y calumnia al Dios que está más cerca del quebrantado.</p>
+    <p>Las Escrituras hablan una palabra más bondadosa y más verdadera. "Cercano está Jehová a los quebrantados de corazón" (Sal 34:18). El aguijón de Pablo permaneció, y la gracia de Dios fue suficiente. Un pastor fiel orará con fervor por la sanidad de su gente, y usará toda misericordia ordinaria de la medicina y el cuidado sin vergüenza — pues Lucas, el médico amado, fue el propio compañero de Pablo, y el vino fue el remedio recetado de Timoteo. Pero nunca pondrá sobre el que sufre la carga aplastante de la culpa; los consolará con la presencia de Dios y la suficiencia de su gracia.</p>
+
+    <h2>Sosteniéndolo junto: Cristo el Sanador</h2>
+    <p>¿Cómo, entonces, sostendremos todo esto junto? Oramos con audacia por los enfermos, esperando que Dios actúe, y ungimos e imponemos las manos como Santiago manda. Usamos los medios ordinarios que Dios ha dado, dándole gracias por la medicina y la destreza como sus dones. Sometemos nuestro pedir a su voluntad, orando como el leproso lo hizo: "Señor, si quieres" (Mt 8:2), y como nuestro Señor mismo lo hizo en el huerto: "no se haga mi voluntad, sino la tuya." Tomamos en serio la batalla espiritual, pero en proporción bíblica, descansando en la victoria consumada de Cristo. Y consolamos al afligido en vez de condenarlo.</p>
+    <p>A través de todo ello recordamos que el Sanador es el Salvador, y que el fin de toda sanidad y toda liberación es glorificarlo a Él y señalar más allá de sí misma — a la sanidad mayor del alma del pecado, y a la sanidad final de la resurrección, cuando Él enjugará toda lágrima. Él puede sanar el cuerpo ahora, en misericordia; lo sanará plenamente entonces, en gloria; y en la vida o en la muerte, en la enfermedad o en la salud, Él mismo es la esperanza del creyente.</p>
+
+    <h3>Mirando adelante</h3>
+    <p>En la próxima unidad tomamos las preguntas que han corrido debajo de gran parte de este estudio y las planteamos directamente: si la profecía y las lenguas continúan en la iglesia hoy, y cómo se relaciona cualquier don semejante con las Escrituras cerradas y completadas. Expondremos el caso más fuerte de cada lado y, como siempre, lo sopesaremos por la Palabra.</p>
+
+  </div>
+  <!--WC:ES:END-->
+
+  <!-- DISCUSSION -->
+  <div class="pane en">
+    <h2>Discussion Questions</h2>
+    <ul class="q-list">
+      <li>How can a church pray boldly for healing while also submitting to God's will?</li>
+      <li>Why is it both untrue and cruel to tell a sick believer that his illness proves weak faith?</li>
+      <li>What examples from Scripture keep us from believing that healing is guaranteed on demand?</li>
+      <li>How do we take spiritual warfare seriously without falling into obsession with the demonic?</li>
+    </ul>
+    <h3>Ministry Application</h3>
+    <p>Write two or three sentences of comfort you might offer a believer who has prayed for healing and not received it, grounded in God's nearness and the sufficiency of His grace.</p>
+  </div>
+  <div class="pane es">
+    <h2>Preguntas para discusión</h2>
+    <ul class="q-list">
+      <li>¿Cómo puede una iglesia orar con audacia por sanidad y a la vez someterse a la voluntad de Dios?</li>
+      <li>¿Por qué es a la vez falso y cruel decirle a un creyente enfermo que su enfermedad prueba una fe débil?</li>
+      <li>¿Qué ejemplos de la Escritura nos guardan de creer que la sanidad está garantizada a demanda?</li>
+      <li>¿Cómo tomamos en serio la guerra espiritual sin caer en la obsesión con lo demoníaco?</li>
+    </ul>
+    <h3>Aplicación ministerial</h3>
+    <p>Escriba dos o tres frases de consuelo que podría ofrecer a un creyente que ha orado por sanidad y no la ha recibido, fundadas en la cercanía de Dios y la suficiencia de su gracia.</p>
+  </div>
+
+  <!-- ASSESSMENT -->
+  <section class="assess">
+    <div class="pane en"><h2>Self-Check &mdash; Multiple Choice</h2><p style="font-size:.97rem;color:var(--ink-soft);">Choose the best answer, then press <em>Check</em>. Feedback and a short explanation appear for each question.</p></div>
+    <div class="pane es"><h2>Autoevaluación &mdash; Opción múltiple</h2><p style="font-size:.97rem;color:var(--ink-soft);">Elija la mejor respuesta y presione <em>Comprobar</em>. Para cada pregunta aparecen la respuesta y una breve explicación.</p></div>
+
+    <div id="mcq"></div>
+
+    <div class="scorebar">
+      <span><span class="seg en">Score:</span><span class="seg es">Puntuación:</span> <strong id="score">0 / 7</strong></span>
+      <button class="btn ghost" onclick="resetMcq()"><span class="seg en">Reset answers</span><span class="seg es">Reiniciar respuestas</span></button>
+    </div>
+  </section>
+
+  <div id="cert-only-note" class="track-note">
+    <span class="seg en">You are on the <strong>Certificate</strong> track. The written short-answer section is required only for the Master's track — switch tracks at the top if you are completing written work.</span>
+    <span class="seg es">Usted está en el programa de <strong>Certificado</strong>. La sección escrita de respuesta corta se requiere sólo para el programa de Maestría; cambie de programa arriba si va a realizar el trabajo escrito.</span>
+  </div>
+
+  <div id="masters-block">
+    <section class="assess">
+      <div class="pane en"><h2>Written Work &mdash; Master's Track</h2><p style="font-size:.97rem;color:var(--ink-soft);">Answer in a few sentences of your own. Your response is checked for key concepts (any three of eight is a pass), then the model answer is revealed for comparison.</p></div>
+      <div class="pane es"><h2>Trabajo escrito &mdash; Programa de Maestría</h2><p style="font-size:.97rem;color:var(--ink-soft);">Responda con sus propias palabras en unas frases. Su respuesta se evalúa por conceptos clave (tres de ocho es aprobado); luego se revela la respuesta modelo para comparar.</p></div>
+      <div id="sa"></div>
+    </section>
+  </div>
+
+  <nav style="margin:1.7rem 0 .3rem;padding-top:1rem;border-top:1px solid #d9d2c2;">
+  <div class="pane en"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><a href="CTSPentecostalUnit8.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">&lsaquo; Previous</a><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Course Home</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Reading Room</a><a href="CTSPentecostalUnit10.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Next &rsaquo;</a></div></div>
+  <div class="pane es"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><a href="CTSPentecostalUnit8.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">&lsaquo; Anterior</a><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Inicio del curso</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Sala de Lecturas</a><a href="CTSPentecostalUnit10.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Siguiente &rsaquo;</a></div></div>
+</nav>
+
+<footer>
+    <div class="pane en">Chapala Theological Seminary &middot; Unit 9 of the course <em>Pentecostalism &amp; the Charismatic Movement</em>. Scripture in English from the New King James Version; Spanish from the Reina-Valera Gómez. This unit is designed for offline use — no internet connection is required.</div>
+    <div class="pane es">Seminario Teológico de Chapala &middot; Unidad 9 del curso <em>El pentecostalismo y el movimiento carismático</em>. Escrituras en inglés de la New King James Version; en español de la Reina-Valera Gómez. Esta unidad está diseñada para uso sin conexión: no se requiere internet.</div>
+  </footer>
+
+</div>
+
+<script>
+/* ---------- hardened storage (Android content:// fallback) ---------- */
+var _ctsMem = {};
+function lsGet(k){ try{ var v = window.localStorage.getItem(k); return v===null ? (k in _ctsMem ? _ctsMem[k] : null) : v; }catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try{ window.localStorage.setItem(k,v); }catch(e){ _ctsMem[k]=String(v); } _ctsMem[k]=String(v); }
+function lsDel(k){ try{ window.localStorage.removeItem(k); }catch(e){} delete _ctsMem[k]; }
+var SKEY = 'cts_u09_healing';
+var saPassed = {};
+
+/* ---------- language + track ---------- */
+function setLang(l){
+  document.documentElement.classList.toggle('lang-es', l==='es');
+  document.documentElement.classList.toggle('lang-en', l==='en');
+  document.documentElement.setAttribute('lang', l);
+  document.getElementById('btn-en').setAttribute('aria-pressed', l==='en');
+  document.getElementById('btn-es').setAttribute('aria-pressed', l==='es');
+  lsSet(SKEY+'_lang', l);
+  renderMcqText(); renderSaText(); refreshScore();
+}
+function setTrack(t){
+  document.documentElement.classList.toggle('track-masters', t==='masters');
+  document.documentElement.classList.toggle('track-cert', t==='cert');
+  document.getElementById('btn-cert').setAttribute('aria-pressed', t==='cert');
+  document.getElementById('btn-mast').setAttribute('aria-pressed', t==='masters');
+  lsSet(SKEY+'_track', t);
+}
+
+/* ---------- MCQ data (correct positions varied: A,B,D,A,C,B,D) ---------- */
+var MCQ = [
+ { correct:1,
+   q:{en:"On healing, Scripture teaches that God —",
+      es:"Sobre la sanidad, la Escritura enseña que Dios —"},
+   opts:[
+     {en:"never heals anyone today", es:"nunca sana a nadie hoy"},
+     {en:"is the LORD who heals, and the church is to pray for the sick, expecting Him to act", es:"es el Señor que sana, y la iglesia ha de orar por los enfermos, esperando que Él actúe"},
+     {en:"guarantees every believer perfect health", es:"garantiza salud perfecta a todo creyente"},
+     {en:"heals only apostles", es:"sana solo a los apóstoles"} ],
+   exp:{en:"Scripture affirms God as Healer (Ex 15:26; Ps 103:3) and commands the church to pray for the sick (James 5:14–15); the gift of healings is real.",
+        es:"La Escritura afirma a Dios como Sanador (Éx 15:26; Sal 103:3) y manda a la iglesia orar por los enfermos (Stg 5:14–15); el don de sanidades es real."} },
+ { correct:2,
+   q:{en:"James 5:14–15 directs that when a believer is sick —",
+      es:"Santiago 5:14–15 indica que cuando un creyente está enfermo —"},
+   opts:[
+     {en:"he should hide his illness", es:"debe esconder su enfermedad"},
+     {en:"he should demand healing as his right", es:"debe exigir la sanidad como su derecho"},
+     {en:"he should call for the elders to pray over him and anoint him with oil", es:"debe llamar a los ancianos para que oren por él y lo unjan con aceite"},
+     {en:"he should never see a physician", es:"nunca debe ver a un médico"} ],
+   exp:{en:"The church is to pray in faith for the sick; healing is sought from the Lord, who raises up as He wills.",
+        es:"La iglesia ha de orar en fe por los enfermos; la sanidad se busca del Señor, quien levanta como Él quiere."} },
+ { correct:0,
+   q:{en:"The distortion this unit rejects is the teaching that —",
+      es:"La distorsión que esta unidad rechaza es la enseñanza de que —"},
+   opts:[
+     {en:"every believer will always be healed if only his faith is strong enough, so that continued sickness proves unbelief", es:"todo creyente siempre será sanado con tal que su fe sea suficientemente fuerte, de modo que la enfermedad que continúa prueba incredulidad"},
+     {en:"God is able to heal", es:"Dios es capaz de sanar"},
+     {en:"the church should pray for the sick", es:"la iglesia debe orar por los enfermos"},
+     {en:"Christ had compassion on the suffering", es:"Cristo tuvo compasión de los que sufrían"} ],
+   exp:{en:"Scripture shows godly people who were not healed — Paul's thorn, Trophimus, Timothy, Epaphroditus — so healing is God's to give as He wills, never a wage owed to sufficient faith.",
+        es:"La Escritura muestra a personas piadosas que no fueron sanadas — el aguijón de Pablo, Trófimo, Timoteo, Epafrodito — así que la sanidad es de Dios para darla como Él quiere, nunca un salario debido a fe suficiente."} },
+ { correct:3,
+   q:{en:"That Paul's thorn was not removed, and that he left Trophimus sick, shows that —",
+      es:"Que el aguijón de Pablo no fue quitado, y que dejó a Trófimo enfermo, muestra que —"},
+   opts:[
+     {en:"Paul lacked faith", es:"a Pablo le faltaba fe"},
+     {en:"healing is always guaranteed", es:"la sanidad siempre está garantizada"},
+     {en:"sickness is always sin", es:"la enfermedad es siempre pecado"},
+     {en:"even the most faithful are not always healed, and healing is given according to God's will", es:"aun los más fieles no siempre son sanados, y la sanidad se da según la voluntad de Dios"} ],
+   exp:{en:"God's grace was sufficient for Paul; full and final healing belongs to the resurrection, while now God heals as He wills, in mercy.",
+        es:"La gracia de Dios le bastó a Pablo; la sanidad plena y final pertenece a la resurrección, mientras ahora Dios sana como Él quiere, en misericordia."} },
+ { correct:1,
+   q:{en:"On spiritual warfare, Scripture teaches that —",
+      es:"Sobre la guerra espiritual, la Escritura enseña que —"},
+   opts:[
+     {en:"there is no real spiritual enemy", es:"no hay un enemigo espiritual real"},
+     {en:"the battle is real, but the believer's armor is truth, righteousness, the gospel, faith, salvation, the Word, and prayer — not techniques or sensational rituals", es:"la batalla es real, pero la armadura del creyente es la verdad, la justicia, el evangelio, la fe, la salvación, la Palabra y la oración — no técnicas ni rituales sensacionalistas"},
+     {en:"every sin and illness should be blamed on a demon", es:"todo pecado y enfermedad debe atribuirse a un demonio"},
+     {en:"believers should fear the devil more than they trust Christ", es:"los creyentes deben temer al diablo más de lo que confían en Cristo"} ],
+   exp:{en:"Ephesians 6 describes a real conflict fought with biblical armor; Christ has disarmed the powers (Col 2:15), and the enemy flees when resisted (James 4:7).",
+        es:"Efesios 6 describe un conflicto real librado con la armadura bíblica; Cristo ha despojado a los poderes (Col 2:15), y el enemigo huye cuando se le resiste (Stg 4:7)."} },
+ { correct:3,
+   q:{en:"How should the church treat a believer who is not healed despite prayer?",
+      es:"¿Cómo debe la iglesia tratar a un creyente que no es sanado a pesar de la oración?"},
+   opts:[
+     {en:"tell him his faith was too weak", es:"decirle que su fe fue demasiado débil"},
+     {en:"conclude he has hidden sin", es:"concluir que tiene pecado oculto"},
+     {en:"stop praying for anyone", es:"dejar de orar por cualquiera"},
+     {en:"comfort him, assure him of God's nearness and sufficient grace, and never blame him for his suffering", es:"consolarlo, asegurarle la cercanía de Dios y su gracia suficiente, y nunca culparlo por su sufrimiento"} ],
+   exp:{en:"To blame the afflicted for their affliction adds cruelty to grief; God is near the brokenhearted, and His grace is sufficient even when the thorn remains.",
+        es:"Culpar al afligido por su aflicción añade crueldad al dolor; Dios está cerca del quebrantado, y su gracia es suficiente aun cuando el aguijón permanece."} },
+ { correct:2,
+   q:{en:"This unit's balanced position on healing and warfare is to —",
+      es:"La posición equilibrada de esta unidad sobre la sanidad y la guerra es —"},
+   opts:[
+     {en:"deny that God heals or that evil spirits exist", es:"negar que Dios sana o que existen espíritus malignos"},
+     {en:"guarantee healing and hunt demons behind every trouble", es:"garantizar la sanidad y cazar demonios detrás de cada problema"},
+     {en:"affirm that God heals and the battle is real, while rejecting guaranteed-healing and demon-obsession, and keeping Christ at the center", es:"afirmar que Dios sana y que la batalla es real, mientras rechaza la sanidad garantizada y la obsesión con los demonios, y mantiene a Cristo en el centro"},
+     {en:"ignore the subject entirely", es:"ignorar el tema por completo"} ],
+   exp:{en:"The unit holds both truths together: God heals and the spiritual battle is real, yet neither is a formula; the aim of every healing and victory is to glorify Christ.",
+        es:"La unidad sostiene ambas verdades juntas: Dios sana y la batalla espiritual es real, pero ninguna es una fórmula; el fin de toda sanidad y victoria es glorificar a Cristo."} }
+];
+
+var answered = {};
+
+function buildMcq(){
+  var host = document.getElementById('mcq'); host.innerHTML='';
+  MCQ.forEach(function(item, qi){
+    var card = document.createElement('div'); card.className='qcard'; card.id='q'+qi;
+    var num = document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Question '+(qi+1)+'</span><span class="seg es">Pregunta '+(qi+1)+'</span>';
+    var stem = document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    card.appendChild(num); card.appendChild(stem);
+    item.opts.forEach(function(o, oi){
+      var lab = document.createElement('label'); lab.className='opt'; lab.setAttribute('data-oi',oi);
+      var inp = document.createElement('input'); inp.type='radio'; inp.name='q'+qi; inp.value=oi;
+      inp.onchange=function(){ answered[qi]=oi; };
+      var txt = document.createElement('span'); txt.setAttribute('data-role','opttext');
+      lab.appendChild(inp); lab.appendChild(txt); card.appendChild(lab);
+    });
+    var btn = document.createElement('button'); btn.className='btn'; btn.setAttribute('data-role','checkbtn');
+    btn.onclick=function(){ checkOne(qi); };
+    var fb = document.createElement('div'); fb.className='fb'; fb.id='fb'+qi;
+    card.appendChild(btn); card.appendChild(fb);
+    host.appendChild(card);
+  });
+  renderMcqText();
+}
+function renderMcqText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  MCQ.forEach(function(item, qi){
+    var card = document.getElementById('q'+qi);
+    card.querySelector('[data-role="stem"]').textContent = item.q[l];
+    card.querySelectorAll('.opt').forEach(function(lab){
+      var oi = +lab.getAttribute('data-oi');
+      lab.querySelector('[data-role="opttext"]').textContent = item.opts[oi][l];
+    });
+    card.querySelector('[data-role="checkbtn"]').textContent = (l==='es'?'Comprobar':'Check');
+    if(card.getAttribute('data-checked')==='1'){ paintFeedback(qi, l); }
+  });
+}
+function checkOne(qi){
+  if(!(qi in answered)){
+    var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+    var fb = document.getElementById('fb'+qi); fb.className='fb no show';
+    fb.textContent = (l==='es'?'Elija una respuesta primero.':'Please choose an answer first.');
+    return;
+  }
+  document.getElementById('q'+qi).setAttribute('data-checked','1');
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  paintFeedback(qi, l); refreshScore(); saveState();
+}
+function paintFeedback(qi, l){
+  var item = MCQ[qi]; var card = document.getElementById('q'+qi); var chosen = answered[qi];
+  card.querySelectorAll('.opt').forEach(function(lab){
+    var oi = +lab.getAttribute('data-oi'); lab.classList.remove('correct','wrong');
+    if(oi===item.correct) lab.classList.add('correct');
+    else if(oi===chosen) lab.classList.add('wrong');
+    var r = lab.querySelector('input'); if(r) r.checked = (oi===chosen);
+  });
+  var fb = document.getElementById('fb'+qi); var ok = (chosen===item.correct);
+  fb.className = 'fb show ' + (ok?'ok':'no');
+  var head = ok ? (l==='es'?'Correcto. ':'Correct. ') : (l==='es'?'No exactamente. ':'Not quite. ');
+  fb.textContent = head + item.exp[l];
+}
+function refreshScore(){
+  var n=0; MCQ.forEach(function(item,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct) n++; });
+  document.getElementById('score').textContent = n + ' / ' + MCQ.length;
+  updatePentProgress();
+}
+function updatePentProgress(){
+  var mcAll = MCQ.every(function(item,qi){ return document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct; });
+  var track = lsGet(SKEY+'_track') || 'cert';
+  var saOk = true;
+  if(track === 'masters'){
+    saOk = SA.every(function(item, si){ return saPassed[si] === true; });
+  }
+  if(mcAll && saOk){
+    try{var _pp=JSON.parse(lsGet('cts_pentecostal_progress')||'{}');_pp['unit'+9]=true;lsSet('cts_pentecostal_progress',JSON.stringify(_pp));}catch(e){}
+  }
+}
+function resetMcq(){
+  answered = {};
+  MCQ.forEach(function(item,qi){
+    var card=document.getElementById('q'+qi); card.setAttribute('data-checked','0');
+    card.querySelectorAll('.opt').forEach(function(l){ l.classList.remove('correct','wrong'); var r=l.querySelector('input'); if(r) r.checked=false; });
+    var fb=document.getElementById('fb'+qi); fb.className='fb';
+  });
+  refreshScore(); lsDel(SKEY+'_mcq');
+}
+
+/* ---------- short answer (Q24 fairness: 8 single-concept keywords, 3 = pass, word-boundary matcher) ---------- */
+function normalize(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+}
+function kwHit(answer, kw){
+  var toks = normalize(answer).split(' ');
+  var k = normalize(kw);
+  for(var i=0;i<toks.length;i++){ if(toks[i]===k || toks[i].indexOf(k)===0) return true; }
+  return false;
+}
+function countHits(answer, kws){ var n=0; kws.forEach(function(k){ if(kwHit(answer,k)) n++; }); return n; }
+
+var SA = [
+ { kw:{ en:["heals","gift","pray","sick","guaranteed","faith","will","distortion"],
+        es:["sana","don","orar","enfermos","garantizada","fe","voluntad","distorsion"] },
+   q:{en:"State what this unit affirms about God's healing and what distortion it rejects.",
+      es:"Exponga lo que esta unidad afirma sobre la sanidad de Dios y qué distorsión rechaza."},
+   model:{en:"This unit affirms that God heals — He is the Lord who heals, the gift of healings is real, and the church is commanded to pray for the sick and anoint them, expecting the Lord to act. What it rejects is the distortion of guaranteed healing — the teaching that every believer will always be healed if only his faith is strong enough, so that continued sickness becomes proof of unbelief. Scripture shows godly people who were not healed, which teaches that healing is God's to give according to His will, in mercy, and is never a wage owed to sufficient faith.",
+          es:"Esta unidad afirma que Dios sana — Él es el Señor que sana, el don de sanidades es real, y a la iglesia se le manda orar por los enfermos y ungirlos, esperando que el Señor actúe. Lo que rechaza es la distorsión de la sanidad garantizada: la enseñanza de que todo creyente siempre será sanado con tal que su fe sea suficientemente fuerte, de modo que la enfermedad que continúa se vuelve prueba de incredulidad. La Escritura muestra a personas piadosas que no fueron sanadas, lo cual enseña que la sanidad es de Dios para darla según su voluntad, en misericordia, y nunca es un salario debido a fe suficiente."} },
+ { kw:{ en:["paul","thorn","trophimus","timothy","grace","resurrection","unbelief","will"],
+        es:["pablo","aguijon","trofimo","timoteo","gracia","resurreccion","incredulidad","voluntad"] },
+   q:{en:"Give three examples from Scripture of faithful people who were not healed, and explain what they teach.",
+      es:"Dé tres ejemplos de la Escritura de personas fieles que no fueron sanadas, y explique qué enseñan."},
+   model:{en:"Scripture gives several examples. Paul asked three times for his thorn in the flesh to be removed, but it was not; the answer was that God's grace was sufficient for him. Paul left Trophimus sick at Miletus, and he told Timothy to take a little wine for his frequent stomach ailments rather than rebuking him for unbelief. These teach that even the most faithful are not always healed now, that sickness is no proof of unbelief, and that full and final healing belongs to the resurrection, while now God heals as He wills according to His will.",
+          es:"La Escritura da varios ejemplos. Pablo pidió tres veces que le fuese quitado su aguijón en la carne, pero no lo fue; la respuesta fue que la gracia de Dios le bastaba. Pablo dejó a Trófimo enfermo en Mileto, y dijo a Timoteo que tomara un poco de vino para sus frecuentes males de estómago en vez de reprenderlo por incredulidad. Estos enseñan que aun los más fieles no siempre son sanados ahora, que la enfermedad no es prueba de incredulidad, y que la sanidad plena y final pertenece a la resurrección, mientras ahora Dios sana como Él quiere según su voluntad."} },
+ { kw:{ en:["battle","enemy","armor","truth","prayer","christ","demon","sober"],
+        es:["batalla","enemigo","armadura","verdad","oracion","cristo","demonio","sobrio"] },
+   q:{en:"Summarize the biblical view of spiritual warfare, including what to affirm and what to avoid.",
+      es:"Resuma la visión bíblica de la guerra espiritual, incluyendo qué afirmar y qué evitar."},
+   model:{en:"The biblical view affirms that spiritual warfare is real: there is a genuine enemy, the devil, and real forces of evil, and the Christian life is a battle. But the armor Scripture gives is truth, righteousness, the gospel, faith, salvation, the Word, and prayer — not techniques or sensational rituals. What we avoid is blaming every sin, illness, or misfortune on a demon, and a preoccupation with the demonic that eclipses Christ. Victory belongs to Christ, who disarmed the powers; the believer resists the enemy, stays sober and watchful, and keeps the Savior, not the devil, at the center.",
+          es:"La visión bíblica afirma que la guerra espiritual es real: hay un enemigo genuino, el diablo, y fuerzas reales de maldad, y la vida cristiana es una batalla. Pero la armadura que la Escritura da es la verdad, la justicia, el evangelio, la fe, la salvación, la Palabra y la oración — no técnicas ni rituales sensacionalistas. Lo que evitamos es culpar de todo pecado, enfermedad o desgracia a un demonio, y una preocupación con lo demoníaco que eclipsa a Cristo. La victoria pertenece a Cristo, que despojó a los principados; el creyente resiste al enemigo, se mantiene sobrio y vigilante, y mantiene al Salvador, no al diablo, en el centro."} }
+];
+
+function buildSa(){
+  var host=document.getElementById('sa'); host.innerHTML='';
+  SA.forEach(function(item, si){
+    var card=document.createElement('div'); card.className='qcard'; card.id='sa'+si;
+    var num=document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Written '+(si+1)+'</span><span class="seg es">Escrita '+(si+1)+'</span>';
+    var stem=document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    var ta=document.createElement('textarea'); ta.id='ta'+si; ta.setAttribute('aria-label','answer');
+    var btnrow=document.createElement('div'); btnrow.style.marginTop='10px'; btnrow.style.display='flex'; btnrow.style.gap='10px'; btnrow.style.flexWrap='wrap';
+    var chk=document.createElement('button'); chk.className='btn'; chk.setAttribute('data-role','chk'); chk.onclick=function(){ checkSa(si); };
+    var rev=document.createElement('button'); rev.className='btn ghost'; rev.setAttribute('data-role','rev'); rev.onclick=function(){ revealModel(si); };
+    btnrow.appendChild(chk); btnrow.appendChild(rev);
+    var hit=document.createElement('div'); hit.className='hitline'; hit.id='hit'+si;
+    var mod=document.createElement('div'); mod.className='model'; mod.id='mod'+si;
+    mod.innerHTML='<div class="mh" data-role="mh"></div><div data-role="mtext"></div>';
+    card.appendChild(num); card.appendChild(stem); card.appendChild(ta); card.appendChild(btnrow); card.appendChild(hit); card.appendChild(mod);
+    host.appendChild(card);
+  });
+  renderSaText();
+}
+function renderSaText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  SA.forEach(function(item, si){
+    var card=document.getElementById('sa'+si);
+    card.querySelector('[data-role="stem"]').textContent=item.q[l];
+    card.querySelector('[data-role="chk"]').textContent=(l==='es'?'Comprobar mi respuesta':'Check my answer');
+    card.querySelector('[data-role="rev"]').textContent=(l==='es'?'Ver respuesta modelo':'Reveal model answer');
+    card.querySelector('[data-role="mh"]').textContent=(l==='es'?'Respuesta modelo':'Model answer');
+    card.querySelector('[data-role="mtext"]').textContent=item.model[l];
+    if(card.getAttribute('data-checked')==='1') paintHits(si, l);
+  });
+}
+function checkSa(si){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  var ans = document.getElementById('ta'+si).value.trim();
+  if(ans.length < 100){
+    var hit=document.getElementById('hit'+si); hit.className='hitline show';
+    hit.innerHTML = (l==='es' ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.');
+    return;
+  }
+  document.getElementById('sa'+si).setAttribute('data-checked','1');
+  paintHits(si, l);
+  revealModel(si);
+  saPassed[si] = countHits(ans, SA[si].kw[l]) >= 3;
+  updatePentProgress();
+}
+function paintHits(si, l){
+  var item=SA[si]; var ans=document.getElementById('ta'+si).value;
+  var n=countHits(ans, item.kw[l]); var pass = n>=3;
+  var hit=document.getElementById('hit'+si); hit.className='hitline show';
+  if(l==='es'){
+    hit.innerHTML = 'Conceptos clave encontrados: <b>'+n+' de 8</b> &mdash; '+(pass?'aprobado (mínimo 3). Compare con la respuesta modelo abajo.':'aún no (se necesitan 3). Revise su respuesta y la modelo abajo.');
+  } else {
+    hit.innerHTML = 'Key concepts found: <b>'+n+' of 8</b> &mdash; '+(pass?'pass (minimum 3). Compare with the model answer below.':'not yet (3 needed). Review your answer and the model below.');
+  }
+}
+function revealModel(si){ document.getElementById('mod'+si).classList.add('show'); }
+
+/* ---------- persistence ---------- */
+function saveState(){
+  try{
+    var mcqState={}; MCQ.forEach(function(it,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1'){ mcqState[qi]=answered[qi]; } });
+    lsSet(SKEY+'_mcq', JSON.stringify(mcqState));
+  }catch(e){}
+}
+function restoreState(){
+  var l = lsGet(SKEY+'_lang'); if(l) setLang(l);
+  var t = lsGet(SKEY+'_track');
+  if(!t){
+    // No local choice yet on this page -- default from the site-wide track
+    // (set at the seminary's main registration) so a Masters-track student
+    // is graded at the correct rigor here without re-selecting it locally.
+    try{
+      var shared = JSON.parse(lsGet('cts_student') || 'null');
+      var sharedTrack = String(lsGet('cts_track') || (shared && (shared.track||shared.program)) || '').toLowerCase();
+      if(sharedTrack === 'mdiv' || sharedTrack === 'thm' || sharedTrack === 'mth' ||
+         /master of divinity|m\.div|master of theology|m\.th|th\.m/.test(sharedTrack)) t = 'masters';
+    }catch(e){}
+  }
+  setTrack(t||'cert');
+  try{
+    var raw = lsGet(SKEY+'_mcq');
+    if(raw){ var st=JSON.parse(raw); var lg=document.documentElement.classList.contains('lang-es')?'es':'en';
+      Object.keys(st).forEach(function(qi){ answered[qi]=st[qi]; document.getElementById('q'+qi).setAttribute('data-checked','1'); paintFeedback(+qi, lg); });
+      refreshScore();
+    }
+  }catch(e){}
+}
+
+/* ---------- init ---------- */
+buildMcq(); buildSa();
+restoreState();
+</script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPentecostalReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+</body>
+</html>

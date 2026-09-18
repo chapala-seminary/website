@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Radical Christianity — Unit 11: Be Kind</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffcf8; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d8cdd5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #4a1e3a; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e7dde3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d8cdd5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #4a1e3a; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #4a1e3a; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #4a1e3a; }
+.scripture { background: #f4ecf1; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #4a1e3a; }
+.illustration { background: #f7f0e6; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #4a1e3a; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d8cdd5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d8cdd5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fbf8f4; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1e9ee; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d8cdd5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #4a1e3a; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f3ecdf; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #f7eede; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #d8cdd5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f3ecdf; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #4a1e3a; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 12 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Radical Christianity: The Ten Commandments of Jesus — Unit 11: Be Kind</span><span class="lang-es">📖 Cristianismo Radical: Los Diez Mandamientos de Jesús — Unidad 11: Sed Bondadosos</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #4a1e3a;"><span class="lang-en">"But when He saw the multitudes, He was moved with compassion for them, because they were weary and scattered, like sheep having no shepherd." — Matthew 9:36 (NKJV)</span><span class="lang-es">"Y viendo las multitudes, tuvo compasión de ellas; porque estaban derramadas y esparcidas como ovejas que no tienen pastor." — Mateo 9:36 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Radical Christianity: The Ten Commandments of Jesus. Please register before beginning Unit 11.</span><span class="lang-es">Bienvenido a Cristianismo Radical: Los Diez Mandamientos de Jesús. Por favor regístrese antes de comenzar la Unidad 11.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+            <h3>1. Moved With Compassion</h3>
+            <div class="scripture">
+                <strong>Matthew 9:36 (NKJV):</strong> "But when He saw the multitudes, He was moved with compassion for them, because they were weary and scattered, like sheep having no shepherd."</div>
+            <p>Before Jesus ever commands us to be kind, the Gospels show us His own kindness in action. Again and again we read that "He had compassion on them." He saw the multitudes &mdash; not as a faceless crowd or a problem to be managed, but as weary, scattered people, like sheep without a shepherd &mdash; and something moved in Him. Kindness, in its deepest Christian sense, begins not with a duty we perform but with a heart that is genuinely moved by the condition of others.</p>
+            <p>This is important, because we often reduce kindness to mere politeness or good manners. But the kindness Jesus models and commands is far weightier than that. It is compassion: a heart that truly sees people in their need and is stirred to help them. The crowds were harassed and helpless, and Jesus did not look past them or grow annoyed at their demands; He was moved for them. To be kind, biblically, is to let our hearts be moved the way His was, and then to act on it.</p>
+
+            <h3>2. Compassion Means "I Feel You"</h3>
+            <p>The word the Gospels use for Jesus' compassion is a remarkably physical one. It does not describe a mild sympathy or a passing pity; it means to be moved viscerally, from the very core of one's being. When Jesus had compassion, He felt the pain of the people in His gut. Compassion of this kind is not a tidy emotion held at arm's length; it is being so moved by another's suffering that you feel it as if it were your own.</p>
+            <p>There is a beautiful picture of this in the Spanish phrase <em>lo siento</em>. We translate it "I am sorry," but the words literally mean something closer to "I feel it." To say <em>lo siento</em> to someone in pain is to say, in effect, "I feel it with you." In settings of deep suffering, people say much the same thing &mdash; "I feel you." That is exactly what Jesus was like. He felt their pain. And so His compassion was never abstract: when people were sick, He healed them; when they were hungry, He fed them, on one occasion more than five thousand; when they were trapped in sin, He forgave them. Compassion that truly feels will always move toward the one who hurts.</p>
+
+            <h3>3. The Kindness of God Toward Us</h3>
+            <div class="scripture">
+                <strong>Ephesians 4:32 (NKJV):</strong> "And be kind to one another, tenderhearted, forgiving one another, even as God in Christ forgave you."</div>
+            <p>We cannot understand the command to be kind until we see where Christian kindness comes from. Paul does not simply say "be kind"; he says "be kind to one another... even as God in Christ forgave you." Our kindness is meant to be a reflection and an overflow of the kindness God has already shown us. Scripture says it is the kindness of God that leads us to repentance &mdash; that we love because He first loved us, and we are kind because He was first kind to us.</p>
+            <p>This changes everything about how we approach the command. Kindness is not a debt we pay to earn God's favor, nor a strain we manufacture by gritted teeth. It is gratitude in action &mdash; the natural response of a heart that has been treated far more kindly than it deserved. When we remember how patient, how merciful, how tenderhearted God has been with us in Christ, kindness toward others stops feeling like a burden and starts feeling like the most reasonable thing in the world. We give what we have received.</p>
+
+            <h3>4. Compassion That Acts</h3>
+            <p>True compassion never stays a feeling; it always becomes a deed. We have already seen that when Jesus was moved with compassion, He did something about it &mdash; He healed, He fed, He forgave. Feeling sorry for people while doing nothing is not the kindness Scripture commends; it is sentiment, and sentiment costs nothing and helps no one. The kindness God calls for gets up off its chair.</p>
+            <div class="illustration"><strong>A plate and a Coke:</strong> Kindness like this is usually unspectacular and close to home. A young man named Caleb knew of a man around the corner who could not walk, so he carried a plate of food down to him &mdash; and then went back out and bought him a Coke as well. There is no grand program here, no fanfare; just a person who noticed a need nearby and met it, with a little extra thoughtfulness thrown in. Most of the kindness God asks of us looks exactly like that: seeing the person in front of us and doing the next concrete, helpful thing.</div>
+            <p>This is the genius of Christian kindness: it is available to everyone, all the time. We may not be able to feed five thousand, but we can carry a plate to a neighbor. We will not heal every sickness, but we can sit with someone who is sick. Compassion that acts does not wait for a great occasion; it takes the small occasion at hand and fills it with love.</p>
+
+            <h3>5. Kindness to the Overlooked</h3>
+            <div class="scripture">
+                <strong>James 1:27 (NKJV):</strong> "Pure and undefiled religion before God and the Father is this: to visit orphans and widows in their trouble, and to keep oneself unspotted from the world."</div>
+            <p>Scripture has a special concern for the people the world tends to overlook. From the days of Moses, the widow and the orphan were placed under God's particular protection and commended to the tender care of the righteous. James goes so far as to define pure religion not by ceremony or correct opinion but by this: looking after orphans and widows in their distress. The truest test of our kindness is how we treat those who can do nothing for us in return &mdash; the people with no power, no status, and nothing to offer.</p>
+            <p>Jesus extended that same concern to the stranger, the sick, and the prisoner. "I was a stranger and you did not take Me in... I was sick and in prison and you did not visit Me," He warned &mdash; teaching that compassion shown or withheld to "the least of these" is shown or withheld to Him. Kindness, then, is not to be reserved for our friends and equals, the people who can repay us. It is to flow especially toward the forgotten and the down-and-out, because that is exactly where the compassion of God flows.</p>
+
+            <h3>6. Kindness Is a Garment We Put On</h3>
+            <div class="scripture">
+                <strong>Colossians 3:12 (NKJV):</strong> "Therefore, as the elect of God, holy and beloved, put on tender mercies, kindness, humility, meekness, longsuffering."</div>
+            <p>Paul tells us to "put on" kindness, as one puts on a garment. The image is deliberate: kindness is something we choose to wear, intentionally, each day. This means we do not have to wait until we feel kind to act kindly. On the days when we are tired, irritable, or preoccupied, we can still deliberately clothe ourselves with kindness toward the people we meet &mdash; and very often the feeling follows the choice.</p>
+            <p>This protects us from a common excuse. We tell ourselves that we are simply "not a naturally kind person," as though kindness were a fixed personality trait we either possess or lack. But Paul addresses kindness as a decision, a garment available to every believer to put on. The grumpiest among us can still choose, in a given moment, to speak gently, to be patient, to do the helpful thing. Character is built precisely by choosing kindness before we feel it, until the wearing of it becomes second nature.</p>
+
+            <h3>7. Kindness Is Fruit, Not Willpower</h3>
+            <div class="scripture">
+                <strong>Galatians 5:22-23 (NKJV):</strong> "But the fruit of the Spirit is love, joy, peace, longsuffering, kindness, goodness, faithfulness, gentleness, self-control."</div>
+            <p>There is a deeper truth here that keeps the "put on kindness" command from becoming mere self-improvement. Paul lists kindness among the fruit of the Spirit &mdash; not the achievements of the flesh, but the fruit the Holy Spirit grows in a surrendered life. This means that genuine, lasting kindness is finally not something we manufacture by willpower at all; it is something God produces in us as we walk with Him.</p>
+            <p>Holding the two truths together keeps us balanced. On the one hand, we deliberately put on kindness, choosing it before we feel it. On the other hand, we depend on the Spirit to grow real kindness in us from the inside, knowing our own efforts will run dry. A branch does not strain to produce fruit; it simply stays connected to the vine, and the fruit comes. So with kindness: we keep choosing it, and we keep abiding in Christ, and the Spirit makes our chosen kindness into something genuine and deep, the very kindness of God flowing through us.</p>
+
+            <h3>8. Kindness as Witness</h3>
+            <p>A heart full of Christ's compassion becomes one of the most powerful testimonies in the world, especially in places of darkness. Kindness shines brightest against the blackest backgrounds, and the watching world cannot easily explain it away.</p>
+            <div class="illustration"><strong>Light in a Soviet prison:</strong> A man named Kozlov, once a criminal and later a church leader, wrote of life in a Soviet labor camp where prisoners often served sentences of twenty or twenty-five years. Amid the general despair &mdash; men cursing their fate, harming themselves, even taking their own lives &mdash; the Christians did not despair. Their pure and upright lives, their deep faith, and above all their gentleness toward others became, in his words, a shining example of real life for thousands. One could see Christ reflected in their faces. Their kindness in a place of cruelty preached more loudly than any sermon.</div>
+            <p>This is the radical reach of kindness: Jesus tells us that God Himself "is kind to the unthankful and evil," and calls us to be kind even to those who do not deserve it or return it. "Blessed are the merciful," He said, "for they shall obtain mercy." A kindness that extends only to the deserving is just ordinary fairness; the kindness of the kingdom reaches the ungrateful, the difficult, and the enemy &mdash; and in doing so it makes the invisible God strangely visible.</p>
+
+            <h3>9. Be Moved, and Move</h3>
+            <p>So we come back to where we began, to Jesus looking out over the weary crowds and being moved with compassion. That is the pattern for every kind heart: first to be genuinely moved &mdash; to let the suffering of others register in us, to feel it, to say with Christ "I feel you" &mdash; and then to move, to let that feeling become a deed. Compassion that is only felt and never acted on dies in the heart; compassion that acts without feeling becomes cold duty. Real kindness holds both together: a heart that is moved, and hands that move.</p>
+            <p>To be kind, then, is nothing less than to share the heart of Christ. We put on kindness deliberately as a garment, we depend on the Spirit to grow it as fruit, we aim it especially at the overlooked and the undeserving, and we let it become our witness to a watching world. The God who was kind to us when we were unthankful and evil is at work to make us kind like Himself &mdash; people who, seeing the multitudes, are moved with compassion, and then get up and help.</p>
+        </div>
+
+<div class="lang-es">
+            <h3>1. Movido a Compasión</h3>
+            <div class="scripture">
+                <strong>Mateo 9:36 (RVG):</strong> "Y viendo las multitudes, tuvo compasión de ellas; porque estaban derramadas y esparcidas como ovejas que no tienen pastor."</div>
+            <p>Antes de que Jesús nos mande siquiera ser bondadosos, los Evangelios nos muestran su propia bondad en acción. Una y otra vez leemos que "tuvo compasión de ellos." Vio las multitudes &mdash; no como una masa sin rostro ni un problema que administrar, sino como personas cansadas y esparcidas, como ovejas sin pastor &mdash; y algo se movió en Él. La bondad, en su sentido cristiano más hondo, comienza no con un deber que cumplimos sino con un corazón que de veras es movido por la condición de los demás.</p>
+            <p>Esto es importante, porque a menudo reducimos la bondad a mera cortesía o buenos modales. Pero la bondad que Jesús modela y manda es mucho más pesada que eso. Es compasión: un corazón que de veras ve a las personas en su necesidad y se conmueve para ayudarlas. Las multitudes estaban acosadas y desamparadas, y Jesús no las pasó por alto ni se irritó ante sus demandas; se conmovió por ellas. Ser bondadoso, bíblicamente, es dejar que nuestro corazón sea movido como lo fue el suyo, y luego actuar.</p>
+
+            <h3>2. La Compasión Significa "Te Siento"</h3>
+            <p>La palabra que los Evangelios usan para la compasión de Jesús es notablemente física. No describe una simpatía leve ni una lástima pasajera; significa ser movido visceralmente, desde el centro mismo del propio ser. Cuando Jesús tuvo compasión, sintió el dolor de la gente en sus entrañas. La compasión de esta clase no es una emoción ordenada que se sostiene a distancia; es ser tan movido por el sufrimiento de otro que lo sientes como si fuera tuyo.</p>
+            <p>Hay una hermosa imagen de esto en la frase "lo siento." La traducimos "estoy apenado," pero las palabras significan literalmente algo más cercano a "lo siento" en el sentido de sentirlo. Decir "lo siento" a alguien que sufre es decir, en efecto, "lo siento contigo." En lugares de hondo sufrimiento, la gente dice algo muy parecido &mdash; "te siento, hermano." Eso es exactamente como era Jesús. Sintió su dolor. Y por eso su compasión nunca fue abstracta: cuando las personas estaban enfermas, las sanó; cuando tenían hambre, las alimentó, en una ocasión a más de cinco mil; cuando estaban atrapadas en el pecado, las perdonó. La compasión que de veras siente siempre se moverá hacia el que sufre.</p>
+
+            <h3>3. La Bondad de Dios Hacia Nosotros</h3>
+            <div class="scripture">
+                <strong>Efesios 4:32 (RVG):</strong> "Antes sed los unos con los otros benignos, misericordiosos, perdonándoos unos a otros, como también Dios os perdonó a vosotros en Cristo."</div>
+            <p>No podemos entender el mandamiento de ser bondadosos hasta que veamos de dónde viene la bondad cristiana. Pablo no dice sencillamente "sed bondadosos"; dice "sed benignos unos con otros... como también Dios os perdonó en Cristo." Nuestra bondad ha de ser un reflejo y un desbordamiento de la bondad que Dios ya nos ha mostrado. La Escritura dice que es la bondad de Dios la que nos guía al arrepentimiento &mdash; que amamos porque Él nos amó primero, y somos bondadosos porque Él fue bondadoso con nosotros primero.</p>
+            <p>Esto cambia todo en cuanto a cómo abordamos el mandamiento. La bondad no es una deuda que pagamos para ganar el favor de Dios, ni una tensión que fabricamos con los dientes apretados. Es la gratitud en acción &mdash; la respuesta natural de un corazón que ha sido tratado mucho más bondadosamente de lo que merecía. Cuando recordamos cuán paciente, cuán misericordioso, cuán compasivo ha sido Dios con nosotros en Cristo, la bondad hacia los demás deja de sentirse como una carga y empieza a sentirse como lo más razonable del mundo. Damos lo que hemos recibido.</p>
+
+            <h3>4. La Compasión Que Actúa</h3>
+            <p>La compasión verdadera nunca se queda en sentimiento; siempre se vuelve obra. Ya hemos visto que cuando Jesús fue movido a compasión, hizo algo al respecto &mdash; sanó, alimentó, perdonó. Sentir lástima por las personas sin hacer nada no es la bondad que la Escritura elogia; es sentimentalismo, y el sentimentalismo no cuesta nada y a nadie ayuda. La bondad que Dios pide se levanta de su silla.</p>
+            <div class="illustration"><strong>Un plato y una Coca:</strong> La bondad como ésta suele ser poco espectacular y cercana a casa. Un joven llamado Caleb sabía de un hombre a la vuelta de la esquina que no podía caminar, así que le llevó un plato de comida &mdash; y luego salió y le compró también una Coca-Cola. No hay aquí ningún gran programa, ninguna fanfarria; solo una persona que notó una necesidad cercana y la suplió, con un poco de consideración extra de añadidura. La mayor parte de la bondad que Dios nos pide se ve exactamente así: ver a la persona frente a nosotros y hacer la siguiente cosa concreta y útil.</div>
+            <p>Ésta es la genialidad de la bondad cristiana: está al alcance de todos, todo el tiempo. Quizá no podamos alimentar a cinco mil, pero podemos llevar un plato a un vecino. No sanaremos toda enfermedad, pero podemos sentarnos con alguien que está enfermo. La compasión que actúa no espera una gran ocasión; toma la pequeña ocasión a la mano y la llena de amor.</p>
+
+            <h3>5. Bondad Hacia los Olvidados</h3>
+            <div class="scripture">
+                <strong>Santiago 1:27 (RVG):</strong> "La religión pura y sin mácula delante de Dios y Padre es ésta: Visitar los huérfanos y las viudas en sus tribulaciones, y guardarse sin mancha del mundo."</div>
+            <p>La Escritura tiene una preocupación especial por las personas que el mundo tiende a pasar por alto. Desde los días de Moisés, la viuda y el huérfano fueron puestos bajo la protección particular de Dios y encomendados al tierno cuidado de los justos. Santiago llega a definir la religión pura no por la ceremonia ni la opinión correcta sino por esto: cuidar de los huérfanos y las viudas en su aflicción. La prueba más cierta de nuestra bondad es cómo tratamos a quienes nada pueden hacer por nosotros a cambio &mdash; las personas sin poder, sin estatus, y sin nada que ofrecer.</p>
+            <p>Jesús extendió esa misma preocupación al extranjero, al enfermo, y al preso. "Fui extranjero, y no me recogisteis... enfermo, y en la cárcel, y no me visitasteis," advirtió &mdash; enseñando que la compasión mostrada o negada a "uno de estos más pequeños" es mostrada o negada a Él. La bondad, entonces, no ha de reservarse para nuestros amigos e iguales, las personas que pueden recompensarnos. Ha de fluir especialmente hacia el olvidado y el caído, porque ahí es exactamente donde fluye la compasión de Dios.</p>
+
+            <h3>6. La Bondad Es una Prenda Que Nos Ponemos</h3>
+            <div class="scripture">
+                <strong>Colosenses 3:12 (RVG):</strong> "Vestíos, pues, como escogidos de Dios, santos y amados, de entrañas de misericordia, de benignidad, de humildad, de mansedumbre, de paciencia."</div>
+            <p>Pablo nos dice que nos "vistamos" de benignidad, como uno se pone una prenda. La imagen es deliberada: la bondad es algo que elegimos vestir, intencionalmente, cada día. Esto significa que no tenemos que esperar a sentirnos bondadosos para actuar con bondad. En los días en que estamos cansados, irritables, o preocupados, todavía podemos deliberadamente revestirnos de bondad hacia las personas que encontramos &mdash; y muy a menudo el sentimiento sigue a la decisión.</p>
+            <p>Esto nos protege de una excusa común. Nos decimos que sencillamente "no somos una persona naturalmente bondadosa," como si la bondad fuera un rasgo de personalidad fijo que poseemos o nos falta. Pero Pablo trata la bondad como una decisión, una prenda al alcance de todo creyente para ponérsela. El más gruñón de nosotros todavía puede elegir, en un momento dado, hablar con suavidad, ser paciente, hacer la cosa útil. El carácter se forma precisamente al elegir la bondad antes de sentirla, hasta que el vestirla se vuelve segunda naturaleza.</p>
+
+            <h3>7. La Bondad Es Fruto, No Fuerza de Voluntad</h3>
+            <div class="scripture">
+                <strong>Gálatas 5:22-23 (RVG):</strong> "Mas el fruto del Espíritu es amor, gozo, paz, paciencia, benignidad, bondad, fe, mansedumbre, templanza."</div>
+            <p>Hay una verdad más honda aquí que impide que el mandamiento de "vestirse de bondad" se vuelva mera superación personal. Pablo enumera la bondad entre el fruto del Espíritu &mdash; no los logros de la carne, sino el fruto que el Espíritu Santo cultiva en una vida rendida. Esto significa que la bondad genuina y duradera no es al final algo que fabricamos por fuerza de voluntad en absoluto; es algo que Dios produce en nosotros al caminar con Él.</p>
+            <p>Sostener juntas las dos verdades nos mantiene equilibrados. Por un lado, deliberadamente nos vestimos de bondad, eligiéndola antes de sentirla. Por otro lado, dependemos del Espíritu para cultivar bondad real en nosotros desde adentro, sabiendo que nuestros propios esfuerzos se secarán. Una rama no se esfuerza por producir fruto; sencillamente permanece conectada a la vid, y el fruto viene. Así con la bondad: seguimos eligiéndola, y seguimos permaneciendo en Cristo, y el Espíritu hace de nuestra bondad elegida algo genuino y hondo, la bondad misma de Dios fluyendo a través de nosotros.</p>
+
+            <h3>8. La Bondad como Testimonio</h3>
+            <p>Un corazón lleno de la compasión de Cristo se vuelve uno de los testimonios más poderosos del mundo, especialmente en lugares de oscuridad. La bondad brilla más intensamente contra los fondos más negros, y el mundo que observa no puede fácilmente explicarla.</p>
+            <div class="illustration"><strong>Luz en una prisión soviética:</strong> Un hombre llamado Kozlov, una vez criminal y luego líder de iglesia, escribió de la vida en un campo de trabajo soviético donde los presos a menudo cumplían sentencias de veinte o veinticinco años. En medio de la desesperación general &mdash; hombres maldiciendo su suerte, haciéndose daño, hasta quitándose la vida &mdash; los cristianos no desesperaban. Sus vidas puras y rectas, su fe profunda, y sobre todo su gentileza hacia los demás se volvieron, en sus palabras, un ejemplo brillante de vida real para miles. Se podía ver a Cristo reflejado en sus rostros. Su bondad en un lugar de crueldad predicó más fuerte que cualquier sermón.</div>
+            <p>Éste es el alcance radical de la bondad: Jesús nos dice que Dios mismo "es benigno para con los ingratos y malos," y nos llama a ser bondadosos aun con quienes no lo merecen ni lo devuelven. "Bienaventurados los misericordiosos," dijo, "porque ellos alcanzarán misericordia." Una bondad que se extiende solo a los que la merecen es apenas justicia ordinaria; la bondad del reino alcanza al ingrato, al difícil, y al enemigo &mdash; y al hacerlo hace al Dios invisible extrañamente visible.</p>
+
+            <h3>9. Sé Movido, y Muévete</h3>
+            <p>Así que volvemos a donde comenzamos, a Jesús contemplando las multitudes cansadas y siendo movido a compasión. Ése es el patrón para todo corazón bondadoso: primero ser genuinamente movido &mdash; dejar que el sufrimiento de los demás registre en nosotros, sentirlo, decir con Cristo "te siento" &mdash; y luego moverse, dejar que ese sentimiento se vuelva obra. La compasión que solo se siente y nunca se actúa muere en el corazón; la compasión que actúa sin sentir se vuelve deber frío. La bondad verdadera sostiene ambas cosas juntas: un corazón que es movido, y manos que se mueven.</p>
+            <p>Ser bondadoso, entonces, no es nada menos que compartir el corazón de Cristo. Nos vestimos de bondad deliberadamente como una prenda, dependemos del Espíritu para cultivarla como fruto, la dirigimos especialmente al olvidado y al inmerecedor, y dejamos que se vuelva nuestro testimonio ante un mundo que observa. El Dios que fue bondadoso con nosotros cuando éramos ingratos y malos está obrando para hacernos bondadosos como Él mismo &mdash; personas que, viendo las multitudes, son movidas a compasión, y luego se levantan y ayudan.</p>
+        </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 11 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 11 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="mcBankedNotice" class="feedback-text correct" style="display:none;"></div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 15px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+    </div>
+    <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+
+</div>
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+// =====================================================================
+// CTS Radical Christianity — Unit 11 (Psalms engine; Be Kind)
+// cts_radical_ namespace; three-track grading (Cert / M.Div. / Th.M.);
+// MC-pass persists; SA-only lockout on partial fail; split kw_en/kw_es;
+// per-question model-answer reveal; Reset; 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 11;
+const COURSE = 'radical';
+const NEXT_UNIT_URL = 'CTSRadicalUnit12.html';
+const totalUnits = 13;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(lsGet('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - Foundation: Old Wineskins, New Wine",
+    "Unit 2 - What Jesus Did With the Law",
+    "Unit 3 - Love God",
+    "Unit 4 - Love Neighbor",
+    "Unit 5 - Be Holy",
+    "Unit 6 - Be Forgiving",
+    "Unit 7 - Be Humble",
+    "Unit 8 - Be Generous",
+    "Unit 9 - Trust God",
+    "Unit 10 - Be Prayerful",
+    "Unit 11 - Be Kind",
+    "Unit 12 - Be a Disciplemaker",
+    "Unit 13 - Capstone: Turning the World Upside Down"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSRadicalUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    lsSet('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+
+// MC answer key distribution audited: A=B=C=D=5 (cycle 0,1,2,3 x5)
+// MC + SA verified against Unit 11 (Be Kind)
+const mcQuestions = [
+    { textEn: "1. In Matthew 9:36, how did Jesus see the multitudes?", textEs: "1. En Mateo 9:36, ¿cómo vio Jesús a las multitudes?",
+      optionsEn: ["As an interruption", "As a problem to be managed", "As weary and scattered, like sheep without a shepherd — and was moved with compassion", "As an audience to impress"],
+      optionsEs: ["Como una interrupción", "Como un problema que administrar", "Como cansadas y esparcidas, como ovejas sin pastor — y fue movido a compasión", "Como una audiencia que impresionar"],
+      explanationEn: "Jesus saw the crowds not as a faceless mass but as weary, scattered people like sheep without a shepherd, and something moved in Him — compassion.", explanationEs: "Jesús vio a las multitudes no como una masa sin rostro sino como personas cansadas y esparcidas como ovejas sin pastor, y algo se movió en Él — la compasión.", correct: 2 },
+    { textEn: "2. According to the lesson, how is biblical kindness different from mere politeness?", textEs: "2. Según la lección, ¿cómo difiere la bondad bíblica de la mera cortesía?",
+      optionsEn: ["It is compassion — a heart that truly sees people's need and is stirred to help", "It is the same thing", "It is only good manners", "It requires formal training"],
+      optionsEs: ["Es compasión — un corazón que de veras ve la necesidad y se conmueve para ayudar", "Es lo mismo", "Son solo buenos modales", "Requiere entrenamiento formal"],
+      explanationEn: "We often reduce kindness to politeness, but biblical kindness is weightier: compassion, a heart that truly sees people in their need and is stirred to help them.", explanationEs: "A menudo reducimos la bondad a la cortesía, pero la bondad bíblica es más pesada: compasión, un corazón que de veras ve la necesidad de las personas y se conmueve para ayudarlas.", correct: 0 },
+    { textEn: "3. What does the Gospel word for Jesus' 'compassion' actually mean?", textEs: "3. ¿Qué significa en realidad la palabra del Evangelio para la 'compasión' de Jesús?",
+      optionsEn: ["A mild, distant sympathy", "A passing pity", "Polite concern", "To be moved viscerally, from the very core of one's being"],
+      optionsEs: ["Una simpatía leve y distante", "Una lástima pasajera", "Una preocupación cortés", "Ser movido visceralmente, desde el centro mismo del propio ser"],
+      explanationEn: "The word does not mean mild sympathy but to be moved viscerally, from the core of one's being; Jesus felt the people's pain in His gut.", explanationEs: "La palabra no significa simpatía leve sino ser movido visceralmente, desde el centro del propio ser; Jesús sintió el dolor de la gente en sus entrañas.", correct: 3 },
+    { textEn: "4. How does the Spanish phrase 'lo siento' illustrate compassion in the lesson?", textEs: "4. ¿Cómo ilustra la frase 'lo siento' la compasión en la lección?",
+      optionsEn: ["It means 'goodbye'", "It literally means something like 'I feel it' — 'I feel it with you'", "It has no connection to compassion", "It means 'I forgive you'"],
+      optionsEs: ["Significa 'adiós'", "Significa literalmente algo como 'lo siento' en el sentido de sentirlo — 'lo siento contigo'", "No tiene conexión con la compasión", "Significa 'te perdono'"],
+      explanationEn: "'Lo siento,' we translate 'I am sorry,' literally means closer to 'I feel it'; to say it to someone in pain is to say 'I feel it with you' — like Jesus, who felt their pain.", explanationEs: "'Lo siento,' que traducimos 'estoy apenado,' significa más cerca de sentirlo; decirlo a alguien que sufre es decir 'lo siento contigo' — como Jesús, que sintió su dolor.", correct: 1 },
+    { textEn: "5. According to Ephesians 4:32, where does Christian kindness come from?", textEs: "5. Según Efesios 4:32, ¿de dónde viene la bondad cristiana?",
+      optionsEn: ["It overflows from the kindness God showed us — 'as God in Christ forgave you'", "From our natural temperament", "From trying very hard", "From following rules"],
+      optionsEs: ["Se desborda de la bondad que Dios nos mostró — 'como Dios os perdonó en Cristo'", "De nuestro temperamento natural", "De esforzarse mucho", "De seguir reglas"],
+      explanationEn: "Paul says be kind 'even as God in Christ forgave you'; our kindness is a reflection and overflow of the kindness God has already shown us.", explanationEs: "Pablo dice sed benignos 'como también Dios os perdonó en Cristo'; nuestra bondad es un reflejo y desbordamiento de la bondad que Dios ya nos ha mostrado.", correct: 0 },
+    { textEn: "6. The lesson says kindness is best understood as what?", textEs: "6. La lección dice que la bondad se entiende mejor como ¿qué?",
+      optionsEn: ["A debt to earn God's favor", "Gratitude in action — giving what we have received", "A strain we manufacture", "A reward for good people"],
+      optionsEs: ["Una deuda para ganar el favor de Dios", "La gratitud en acción — dar lo que hemos recibido", "Una tensión que fabricamos", "Una recompensa para los buenos"],
+      explanationEn: "Kindness is not a debt to earn favor or a strain we manufacture; it is gratitude in action, the natural response of a heart treated far more kindly than it deserved.", explanationEs: "La bondad no es una deuda para ganar favor ni una tensión que fabricamos; es la gratitud en acción, la respuesta natural de un corazón tratado mucho más bondadosamente de lo que merecía.", correct: 1 },
+    { textEn: "7. According to the lesson, what does true compassion always become?", textEs: "7. Según la lección, ¿en qué se vuelve siempre la compasión verdadera?",
+      optionsEn: ["A private feeling", "A topic for discussion", "A deed — it never stays a feeling but always acts", "An occasional gesture"],
+      optionsEs: ["Un sentimiento privado", "Un tema de discusión", "Una obra — nunca se queda en sentimiento sino que siempre actúa", "Un gesto ocasional"],
+      explanationEn: "True compassion never stays a feeling; it always becomes a deed. When Jesus was moved, He healed, fed, and forgave; sentiment that does nothing is not real kindness.", explanationEs: "La compasión verdadera nunca se queda en sentimiento; siempre se vuelve obra. Cuando Jesús fue movido, sanó, alimentó, y perdonó; el sentimiento que nada hace no es bondad real.", correct: 2 },
+    { textEn: "8. How does the example of Caleb illustrate compassion that acts?", textEs: "8. ¿Cómo ilustra el ejemplo de Caleb la compasión que actúa?",
+      optionsEn: ["He organized a large charity", "He gave a speech about kindness", "He prayed but did nothing", "He carried a plate of food to a man who couldn't walk, then bought him a Coke"],
+      optionsEs: ["Organizó una gran caridad", "Dio un discurso sobre la bondad", "Oró pero no hizo nada", "Llevó un plato de comida a un hombre que no podía caminar, luego le compró una Coca"],
+      explanationEn: "Caleb carried a plate of food to a man around the corner who couldn't walk, then bought him a Coke too — noticing a nearby need and meeting it, with thoughtfulness added.", explanationEs: "Caleb llevó un plato de comida a un hombre a la vuelta de la esquina que no podía caminar, luego le compró una Coca — notando una necesidad cercana y supliéndola, con consideración añadida.", correct: 3 },
+    { textEn: "9. What is the 'genius' of Christian kindness, according to the lesson?", textEs: "9. ¿Cuál es la 'genialidad' de la bondad cristiana, según la lección?",
+      optionsEn: ["It requires great resources", "It is available to everyone, all the time — take the small occasion and fill it with love", "It is only for the wealthy", "It needs a special calling"],
+      optionsEs: ["Requiere grandes recursos", "Está al alcance de todos, todo el tiempo — toma la pequeña ocasión y llénala de amor", "Es solo para los ricos", "Necesita un llamado especial"],
+      explanationEn: "We may not feed five thousand, but we can carry a plate to a neighbor; compassion that acts takes the small occasion at hand and fills it with love.", explanationEs: "Quizá no alimentemos a cinco mil, pero podemos llevar un plato a un vecino; la compasión que actúa toma la pequeña ocasión a la mano y la llena de amor.", correct: 1 },
+    { textEn: "10. How does James 1:27 define 'pure and undefiled religion'?", textEs: "10. ¿Cómo define Santiago 1:27 la 'religión pura y sin mácula'?",
+      optionsEn: ["By visiting orphans and widows in their trouble, and keeping unspotted from the world", "By correct ceremony", "By right opinions", "By regular attendance"],
+      optionsEs: ["Por visitar a huérfanos y viudas en su tribulación, y guardarse sin mancha del mundo", "Por la ceremonia correcta", "Por opiniones correctas", "Por la asistencia regular"],
+      explanationEn: "James defines pure religion not by ceremony or opinion but by looking after orphans and widows in distress — caring for those who can do nothing for us in return.", explanationEs: "Santiago define la religión pura no por ceremonia ni opinión sino por cuidar de huérfanos y viudas en aflicción — cuidar de quienes nada pueden hacer por nosotros a cambio.", correct: 0 },
+    { textEn: "11. According to the lesson, what is the truest test of our kindness?", textEs: "11. Según la lección, ¿cuál es la prueba más cierta de nuestra bondad?",
+      optionsEn: ["How kind we are to important people", "How kind we feel inside", "How we treat those who can do nothing for us in return", "How often we mention kindness"],
+      optionsEs: ["Cuán bondadosos somos con los importantes", "Cuán bondadosos nos sentimos por dentro", "Cómo tratamos a quienes nada pueden hacer por nosotros a cambio", "Cuán seguido mencionamos la bondad"],
+      explanationEn: "The truest test of kindness is how we treat those who can do nothing for us in return — the powerless, the forgotten, the down-and-out, where God's compassion flows.", explanationEs: "La prueba más cierta de la bondad es cómo tratamos a quienes nada pueden hacer por nosotros a cambio — los sin poder, los olvidados, los caídos, donde fluye la compasión de Dios.", correct: 2 },
+    { textEn: "12. In Matthew 25, what did Jesus teach about kindness to 'the least of these'?", textEs: "12. En Mateo 25, ¿qué enseñó Jesús sobre la bondad a 'uno de estos más pequeños'?",
+      optionsEn: ["It is optional", "It applies only to family", "It earns no reward", "Compassion shown or withheld to the least is shown or withheld to Him"],
+      optionsEs: ["Es opcional", "Aplica solo a la familia", "No gana recompensa", "La compasión mostrada o negada al más pequeño es mostrada o negada a Él"],
+      explanationEn: "Jesus warned 'I was a stranger... sick and in prison and you did not visit Me,' teaching that compassion shown or withheld to the least of these is shown or withheld to Him.", explanationEs: "Jesús advirtió 'fui extranjero... enfermo y en la cárcel y no me visitasteis,' enseñando que la compasión mostrada o negada al más pequeño es mostrada o negada a Él.", correct: 3 },
+    { textEn: "13. What does Colossians 3:12 ('put on kindness') teach about being kind?", textEs: "13. ¿Qué enseña Colosenses 3:12 ('vestíos de benignidad') sobre ser bondadoso?",
+      optionsEn: ["Kindness is a garment we deliberately put on, even before we feel it", "Kindness is a fixed personality trait", "Kindness cannot be chosen", "Kindness comes only naturally"],
+      optionsEs: ["La bondad es una prenda que deliberadamente nos ponemos, aun antes de sentirla", "La bondad es un rasgo fijo de personalidad", "La bondad no se puede elegir", "La bondad viene solo naturalmente"],
+      explanationEn: "Paul says 'put on' kindness like a garment; we don't wait until we feel kind but deliberately clothe ourselves with it, and the feeling often follows the choice.", explanationEs: "Pablo dice 'vestíos' de benignidad como una prenda; no esperamos a sentirnos bondadosos sino que deliberadamente nos revestimos de ella, y el sentimiento a menudo sigue a la decisión.", correct: 0 },
+    { textEn: "14. What common excuse does the 'put on kindness' command address?", textEs: "14. ¿Qué excusa común aborda el mandamiento de 'vestirse de bondad'?",
+      optionsEn: ["That kindness is too easy", "That kindness is unbiblical", "That we are simply 'not a naturally kind person'", "That only pastors must be kind"],
+      optionsEs: ["Que la bondad es demasiado fácil", "Que la bondad no es bíblica", "Que sencillamente 'no somos una persona naturalmente bondadosa'", "Que solo los pastores deben ser bondadosos"],
+      explanationEn: "We excuse ourselves as 'not naturally kind,' but Paul treats kindness as a decision available to every believer; even the grumpiest can choose to speak gently and help.", explanationEs: "Nos excusamos como 'no naturalmente bondadosos,' pero Pablo trata la bondad como una decisión al alcance de todo creyente; hasta el más gruñón puede elegir hablar con suavidad y ayudar.", correct: 2 },
+    { textEn: "15. According to Galatians 5:22, what keeps 'put on kindness' from being mere self-improvement?", textEs: "15. Según Gálatas 5:22, ¿qué impide que 'vestirse de bondad' sea mera superación personal?",
+      optionsEn: ["Nothing; it is just willpower", "It is impossible anyway", "It depends on talent", "Kindness is fruit of the Spirit — God grows it in a surrendered life"],
+      optionsEs: ["Nada; es solo fuerza de voluntad", "Es imposible de todos modos", "Depende del talento", "La bondad es fruto del Espíritu — Dios la cultiva en una vida rendida"],
+      explanationEn: "Kindness is listed among the fruit of the Spirit, not achievements of the flesh; lasting kindness is finally produced by God in us, not manufactured by willpower.", explanationEs: "La bondad se enumera entre el fruto del Espíritu, no los logros de la carne; la bondad duradera es al final producida por Dios en nosotros, no fabricada por fuerza de voluntad.", correct: 3 },
+    { textEn: "16. How does the lesson hold together 'put on kindness' and 'kindness is fruit'?", textEs: "16. ¿Cómo sostiene la lección juntos 'vestirse de bondad' y 'la bondad es fruto'?",
+      optionsEn: ["They contradict each other", "We deliberately choose kindness AND depend on the Spirit to grow it, like a branch abiding in the vine", "Neither matters", "Only one is true"],
+      optionsEs: ["Se contradicen", "Deliberadamente elegimos la bondad Y dependemos del Espíritu para cultivarla, como una rama que permanece en la vid", "Ninguna importa", "Solo una es verdad"],
+      explanationEn: "We keep choosing kindness before we feel it, and keep abiding in Christ; a branch doesn't strain to produce fruit but stays connected to the vine, and fruit comes.", explanationEs: "Seguimos eligiendo la bondad antes de sentirla, y seguimos permaneciendo en Cristo; una rama no se esfuerza por producir fruto sino que permanece en la vid, y el fruto viene.", correct: 1 },
+    { textEn: "17. How did the Christians in the Soviet prison (Kozlov's account) bear witness?", textEs: "17. ¿Cómo dieron testimonio los cristianos en la prisión soviética (relato de Kozlov)?",
+      optionsEn: ["Amid despair, their gentleness and faith became a shining example of real life for thousands", "By organizing escapes", "By despairing like the others", "By keeping to themselves"],
+      optionsEs: ["En medio de la desesperación, su gentileza y fe se volvieron un ejemplo brillante de vida real para miles", "Organizando fugas", "Desesperando como los demás", "Manteniéndose apartados"],
+      explanationEn: "Amid despair where men cursed and harmed themselves, the Christians did not despair; their gentleness became a shining example of real life — one could see Christ in their faces.", explanationEs: "En medio de la desesperación donde los hombres maldecían y se dañaban, los cristianos no desesperaban; su gentileza se volvió un ejemplo brillante de vida real — se veía a Cristo en sus rostros.", correct: 0 },
+    { textEn: "18. According to Luke 6:35, to whom is God kind, and whom should we be kind to?", textEs: "18. Según Lucas 6:35, ¿con quién es bondadoso Dios, y con quién debemos serlo?",
+      optionsEn: ["Only the deserving", "God is kind to the unthankful and evil; we are to be kind even to those who don't deserve it", "Only fellow believers", "Only our friends"],
+      optionsEs: ["Solo con los que lo merecen", "Dios es benigno con los ingratos y malos; debemos ser bondadosos aun con quienes no lo merecen", "Solo con los creyentes", "Solo con nuestros amigos"],
+      explanationEn: "God is kind to the unthankful and evil, and calls us to be kind even to the ungrateful, difficult, and enemy; kindness only to the deserving is mere ordinary fairness.", explanationEs: "Dios es benigno con los ingratos y malos, y nos llama a ser bondadosos aun con el ingrato, el difícil, y el enemigo; la bondad solo con los que la merecen es apenas justicia ordinaria.", correct: 1 },
+    { textEn: "19. What is the two-part pattern for a kind heart the lesson gives?", textEs: "19. ¿Cuál es el patrón de dos partes para un corazón bondadoso que da la lección?",
+      optionsEn: ["Feel deeply, but never act", "Act always, never feel", "Think about kindness often", "Be moved (feel it), and then move (let feeling become a deed)"],
+      optionsEs: ["Sentir hondamente, pero nunca actuar", "Actuar siempre, nunca sentir", "Pensar en la bondad a menudo", "Ser movido (sentirlo), y luego moverse (dejar que el sentimiento se vuelva obra)"],
+      explanationEn: "First be genuinely moved — feel the suffering, say 'I feel you' — then move, letting feeling become a deed; compassion only felt dies, compassion without feeling becomes cold duty.", explanationEs: "Primero ser genuinamente movido — sentir el sufrimiento, decir 'te siento' — luego moverse, dejando que el sentimiento se vuelva obra; la compasión solo sentida muere, la que no siente se vuelve deber frío.", correct: 3 },
+    { textEn: "20. According to the lesson, what is it ultimately to be kind?", textEs: "20. Según la lección, ¿qué es en última instancia ser bondadoso?",
+      optionsEn: ["To have a pleasant personality", "To follow social rules", "Nothing less than to share the heart of Christ", "To avoid conflict"],
+      optionsEs: ["Tener una personalidad agradable", "Seguir reglas sociales", "Nada menos que compartir el corazón de Cristo", "Evitar el conflicto"],
+      explanationEn: "To be kind is nothing less than to share the heart of Christ: moved with compassion at the multitudes, and then getting up to help; God makes us kind like Himself.", explanationEs: "Ser bondadoso no es nada menos que compartir el corazón de Cristo: movido a compasión ante las multitudes, y luego levantándose a ayudar; Dios nos hace bondadosos como Él.", correct: 2 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Explain Matthew 9:36 and how Jesus' compassion reveals what kindness truly is.",
+      textEs: "21. Explique Mateo 9:36 y cómo la compasión de Jesús revela lo que es de veras la bondad.",
+      kw_en: ["compassion", "multitudes", "sheep", "shepherd", "moved", "politeness", "stirred", "need"],
+      kw_es: ["compasión", "multitudes", "ovejas", "pastor", "movido", "cortesía", "conmueve", "necesidad"],
+      modelEn: "Before Jesus ever commands us to be kind, the Gospels show His own kindness in action, for again and again we read that He had compassion on them. He saw the multitudes not as a faceless crowd or a problem to be managed but as weary, scattered people, like sheep having no shepherd, and something moved in Him. Kindness in its deepest Christian sense begins not with a duty we perform but with a heart genuinely moved by the condition of others. This matters because we often reduce kindness to mere politeness or good manners, but the kindness Jesus models and commands is far weightier: it is compassion, a heart that truly sees people in their need and is stirred to help them. The crowds were harassed and helpless, and Jesus did not look past them or grow annoyed; He was moved for them, and to be kind is to let our hearts be moved as His was and then to act.",
+      modelEs: "Antes de que Jesús nos mande siquiera ser bondadosos, los Evangelios muestran su propia bondad en acción, pues una y otra vez leemos que tuvo compasión de ellos. Vio las multitudes no como una masa sin rostro ni un problema que administrar sino como personas cansadas y esparcidas, como ovejas sin pastor, y algo se movió en Él. La bondad en su sentido cristiano más hondo comienza no con un deber que cumplimos sino con un corazón genuinamente movido por la condición de los demás. Esto importa porque a menudo reducimos la bondad a mera cortesía o buenos modales, pero la bondad que Jesús modela y manda es mucho más pesada: es compasión, un corazón que de veras ve a las personas en su necesidad y se conmueve para ayudarlas. Las multitudes estaban acosadas y desamparadas, y Jesús no las pasó por alto ni se irritó; se conmovió por ellas, y ser bondadoso es dejar que nuestro corazón sea movido como el suyo y luego actuar.",
+      },
+    { textEn: "22. Explain the meaning of biblical compassion using the 'lo siento / I feel you' insight.",
+      textEs: "22. Explique el significado de la compasión bíblica usando la idea de 'lo siento / te siento.'",
+      kw_en: ["viscerally", "core", "feel", "lo siento", "pain", "healed", "fed", "abstract"],
+      kw_es: ["visceralmente", "centro", "sentir", "lo siento", "dolor", "sanó", "alimentó", "abstracta"],
+      modelEn: "The word the Gospels use for Jesus' compassion is remarkably physical; it does not describe a mild sympathy or passing pity but means to be moved viscerally, from the very core of one's being, so that Jesus felt the people's pain in His gut. There is a beautiful picture of this in the Spanish phrase lo siento, which we translate I am sorry but which literally means something closer to I feel it. To say lo siento to someone in pain is to say I feel it with you, and in places of deep suffering people say much the same thing, I feel you. That is exactly what Jesus was like, for He felt their pain, and so His compassion was never abstract: when people were sick He healed them, when they were hungry He fed them, on one occasion more than five thousand, and when they were trapped in sin He forgave them. Compassion that truly feels will always move toward the one who hurts.",
+      modelEs: "La palabra que los Evangelios usan para la compasión de Jesús es notablemente física; no describe una simpatía leve ni una lástima pasajera sino que significa ser movido visceralmente, desde el centro mismo del propio ser, de modo que Jesús sintió el dolor de la gente en sus entrañas. Hay una hermosa imagen de esto en la frase lo siento, que traducimos estoy apenado pero que significa literalmente algo más cercano a sentirlo. Decir lo siento a alguien que sufre es decir lo siento contigo, y en lugares de hondo sufrimiento la gente dice algo muy parecido, te siento. Eso es exactamente como era Jesús, pues sintió su dolor, y por eso su compasión nunca fue abstracta: cuando las personas estaban enfermas las sanó, cuando tenían hambre las alimentó, en una ocasión a más de cinco mil, y cuando estaban atrapadas en el pecado las perdonó. La compasión que de veras siente siempre se moverá hacia el que sufre.",
+      },
+    { textEn: "23. Using Ephesians 4:32, explain where Christian kindness comes from and why that matters.",
+      textEs: "23. Usando Efesios 4:32, explique de dónde viene la bondad cristiana y por qué eso importa.",
+      kw_en: ["forgave", "overflow", "reflection", "repentance", "gratitude", "debt", "received", "grace"],
+      kw_es: ["perdonó", "desbordamiento", "reflejo", "arrepentimiento", "gratitud", "deuda", "recibido", "gracia"],
+      modelEn: "We cannot understand the command to be kind until we see where Christian kindness comes from. Paul does not simply say be kind; he says be kind to one another even as God in Christ forgave you, so our kindness is meant to be a reflection and overflow of the kindness God has already shown us. Scripture says it is the kindness of God that leads us to repentance, that we love because He first loved us and are kind because He was first kind to us. This changes how we approach the command, for kindness is not a debt we pay to earn God's favor nor a strain we manufacture by gritted teeth. It is gratitude in action, the natural response of a heart treated far more kindly than it deserved. When we remember how patient and merciful God has been with us in Christ, kindness toward others stops feeling like a burden and becomes the most reasonable thing in the world, for we give what we have received.",
+      modelEs: "No podemos entender el mandamiento de ser bondadosos hasta que veamos de dónde viene la bondad cristiana. Pablo no dice sencillamente sed bondadosos; dice sed benignos unos con otros como también Dios os perdonó en Cristo, así que nuestra bondad ha de ser un reflejo y desbordamiento de la bondad que Dios ya nos ha mostrado. La Escritura dice que es la bondad de Dios la que nos guía al arrepentimiento, que amamos porque Él nos amó primero y somos bondadosos porque Él fue bondadoso con nosotros primero. Esto cambia cómo abordamos el mandamiento, pues la bondad no es una deuda que pagamos para ganar el favor de Dios ni una tensión que fabricamos con los dientes apretados. Es la gratitud en acción, la respuesta natural de un corazón tratado mucho más bondadosamente de lo que merecía. Cuando recordamos cuán paciente y misericordioso ha sido Dios con nosotros en Cristo, la bondad hacia los demás deja de sentirse como carga y se vuelve lo más razonable del mundo, pues damos lo que hemos recibido.",
+      },
+    { textEn: "24. Explain why true compassion must act, using the example of Caleb.",
+      textEs: "24. Explique por qué la compasión verdadera debe actuar, usando el ejemplo de Caleb.",
+      kw_en: ["deed", "sentiment", "healed", "Caleb", "plate", "Coke", "small", "love"],
+      kw_es: ["obra", "sentimentalismo", "sanó", "Caleb", "plato", "Coca", "pequeña", "amor"],
+      modelEn: "True compassion never stays a feeling; it always becomes a deed, for when Jesus was moved with compassion He did something about it, healing, feeding, and forgiving. Feeling sorry for people while doing nothing is not the kindness Scripture commends but sentiment, and sentiment costs nothing and helps no one, while the kindness God calls for gets up off its chair. Kindness like this is usually unspectacular and close to home. A young man named Caleb knew of a man around the corner who could not walk, so he carried a plate of food down to him and then went back out and bought him a Coke as well, with no grand program and no fanfare, just a person who noticed a nearby need and met it with a little extra thoughtfulness. We may not be able to feed five thousand, but we can carry a plate to a neighbor; compassion that acts does not wait for a great occasion but takes the small occasion at hand and fills it with love.",
+      modelEs: "La compasión verdadera nunca se queda en sentimiento; siempre se vuelve obra, pues cuando Jesús fue movido a compasión hizo algo al respecto, sanando, alimentando, y perdonando. Sentir lástima por las personas sin hacer nada no es la bondad que la Escritura elogia sino sentimentalismo, y el sentimentalismo no cuesta nada y a nadie ayuda, mientras que la bondad que Dios pide se levanta de su silla. La bondad como ésta suele ser poco espectacular y cercana a casa. Un joven llamado Caleb sabía de un hombre a la vuelta de la esquina que no podía caminar, así que le llevó un plato de comida y luego salió y le compró también una Coca-Cola, sin ningún gran programa y sin fanfarria, solo una persona que notó una necesidad cercana y la suplió con un poco de consideración extra. Quizá no podamos alimentar a cinco mil, pero podemos llevar un plato a un vecino; la compasión que actúa no espera una gran ocasión sino que toma la pequeña ocasión a la mano y la llena de amor.",
+      },
+    { textEn: "25. How does James 1:27 and Matthew 25 show kindness toward the overlooked?",
+      textEs: "25. ¿Cómo muestran Santiago 1:27 y Mateo 25 la bondad hacia los olvidados?",
+      kw_en: ["orphans", "widows", "overlooked", "stranger", "prisoner", "least", "return", "test"],
+      kw_es: ["huérfanos", "viudas", "olvidados", "extranjero", "preso", "más pequeño", "cambio", "prueba"],
+      modelEn: "Scripture has a special concern for the people the world tends to overlook. From the days of Moses the widow and the orphan were placed under God's particular protection and commended to the tender care of the righteous, and James defines pure religion not by ceremony or correct opinion but by looking after orphans and widows in their distress. The truest test of our kindness is how we treat those who can do nothing for us in return, the people with no power, no status, and nothing to offer. Jesus extended the same concern to the stranger, the sick, and the prisoner, warning I was a stranger and you did not take Me in, I was sick and in prison and you did not visit Me, teaching that compassion shown or withheld to the least of these is shown or withheld to Him. Kindness is therefore not reserved for friends and equals who can repay us but flows especially toward the forgotten and the down-and-out, because that is where the compassion of God flows.",
+      modelEs: "La Escritura tiene una preocupación especial por las personas que el mundo tiende a pasar por alto. Desde los días de Moisés la viuda y el huérfano fueron puestos bajo la protección particular de Dios y encomendados al tierno cuidado de los justos, y Santiago define la religión pura no por ceremonia ni opinión correcta sino por cuidar de los huérfanos y las viudas en su aflicción. La prueba más cierta de nuestra bondad es cómo tratamos a quienes nada pueden hacer por nosotros a cambio, las personas sin poder, sin estatus, y sin nada que ofrecer. Jesús extendió la misma preocupación al extranjero, al enfermo, y al preso, advirtiendo fui extranjero y no me recogisteis, enfermo y en la cárcel y no me visitasteis, enseñando que la compasión mostrada o negada al más pequeño es mostrada o negada a Él. La bondad por tanto no se reserva para amigos e iguales que pueden recompensarnos sino que fluye especialmente hacia el olvidado y el caído, porque ahí es donde fluye la compasión de Dios.",
+      },
+    { textEn: "26. Explain Colossians 3:12 and how kindness can be a garment we choose to wear.",
+      textEs: "26. Explique Colosenses 3:12 y cómo la bondad puede ser una prenda que elegimos vestir.",
+      kw_en: ["put on", "garment", "choose", "wait", "feel", "excuse", "personality", "decision"],
+      kw_es: ["vestir", "prenda", "elegir", "esperar", "sentir", "excusa", "personalidad", "decisión"],
+      modelEn: "Paul tells us to put on kindness as one puts on a garment, and the image is deliberate, for kindness is something we choose to wear intentionally each day. This means we do not have to wait until we feel kind to act kindly; on the days when we are tired, irritable, or preoccupied, we can still deliberately clothe ourselves with kindness toward the people we meet, and very often the feeling follows the choice. This protects us from a common excuse, for we tell ourselves we are simply not a naturally kind person, as though kindness were a fixed personality trait we either possess or lack. But Paul addresses kindness as a decision, a garment available to every believer to put on, so even the grumpiest among us can choose in a given moment to speak gently, to be patient, and to do the helpful thing. Character is built precisely by choosing kindness before we feel it, until the wearing of it becomes second nature.",
+      modelEs: "Pablo nos dice que nos vistamos de benignidad como uno se pone una prenda, y la imagen es deliberada, pues la bondad es algo que elegimos vestir intencionalmente cada día. Esto significa que no tenemos que esperar a sentirnos bondadosos para actuar con bondad; en los días en que estamos cansados, irritables, o preocupados, todavía podemos deliberadamente revestirnos de bondad hacia las personas que encontramos, y muy a menudo el sentimiento sigue a la decisión. Esto nos protege de una excusa común, pues nos decimos que sencillamente no somos una persona naturalmente bondadosa, como si la bondad fuera un rasgo fijo de personalidad que poseemos o nos falta. Pero Pablo trata la bondad como una decisión, una prenda al alcance de todo creyente para ponérsela, así que hasta el más gruñón de nosotros puede elegir en un momento dado hablar con suavidad, ser paciente, y hacer la cosa útil. El carácter se forma precisamente al elegir la bondad antes de sentirla, hasta que el vestirla se vuelve segunda naturaleza.",
+      },
+    { textEn: "27. Explain Galatians 5:22 and how kindness as 'fruit' balances kindness as a choice.",
+      textEs: "27. Explique Gálatas 5:22 y cómo la bondad como 'fruto' equilibra la bondad como elección.",
+      kw_en: ["fruit", "Spirit", "willpower", "grows", "surrendered", "branch", "vine", "abiding"],
+      kw_es: ["fruto", "Espíritu", "fuerza de voluntad", "cultiva", "rendida", "rama", "vid", "permanecer"],
+      modelEn: "There is a deeper truth that keeps the put on kindness command from becoming mere self-improvement, for Paul lists kindness among the fruit of the Spirit, not the achievements of the flesh but the fruit the Holy Spirit grows in a surrendered life. This means genuine, lasting kindness is finally not something we manufacture by willpower at all but something God produces in us as we walk with Him. Holding the two truths together keeps us balanced: on the one hand we deliberately put on kindness, choosing it before we feel it, and on the other hand we depend on the Spirit to grow real kindness in us from the inside, knowing our own efforts will run dry. A branch does not strain to produce fruit but simply stays connected to the vine, and the fruit comes; so with kindness, we keep choosing it and keep abiding in Christ, and the Spirit makes our chosen kindness into something genuine and deep, the very kindness of God flowing through us.",
+      modelEs: "Hay una verdad más honda que impide que el mandamiento de vestirse de bondad se vuelva mera superación personal, pues Pablo enumera la bondad entre el fruto del Espíritu, no los logros de la carne sino el fruto que el Espíritu Santo cultiva en una vida rendida. Esto significa que la bondad genuina y duradera no es al final algo que fabricamos por fuerza de voluntad en absoluto sino algo que Dios produce en nosotros al caminar con Él. Sostener juntas las dos verdades nos mantiene equilibrados: por un lado deliberadamente nos vestimos de bondad, eligiéndola antes de sentirla, y por otro lado dependemos del Espíritu para cultivar bondad real en nosotros desde adentro, sabiendo que nuestros propios esfuerzos se secarán. Una rama no se esfuerza por producir fruto sino que sencillamente permanece conectada a la vid, y el fruto viene; así con la bondad, seguimos eligiéndola y seguimos permaneciendo en Cristo, y el Espíritu hace de nuestra bondad elegida algo genuino y hondo, la bondad misma de Dios fluyendo a través de nosotros.",
+      },
+    { textEn: "28. Using the Kozlov account, explain how kindness becomes a witness.",
+      textEs: "28. Usando el relato de Kozlov, explique cómo la bondad se vuelve un testimonio.",
+      kw_en: ["witness", "Soviet", "Kozlov", "despair", "gentleness", "shining", "Christ", "faces"],
+      kw_es: ["testimonio", "soviética", "Kozlov", "desesperación", "gentileza", "brillante", "Cristo", "rostros"],
+      modelEn: "A heart full of Christ's compassion becomes one of the most powerful testimonies in the world, especially in places of darkness, for kindness shines brightest against the blackest backgrounds and the watching world cannot easily explain it away. A man named Kozlov, once a criminal and later a church leader, wrote of life in a Soviet labor camp where prisoners often served sentences of twenty or twenty-five years. Amid the general despair, where men cursed their fate, harmed themselves, and even took their own lives, the Christians did not despair, and their pure and upright lives, deep faith, and above all their gentleness toward others became a shining example of real life for thousands, so that one could see Christ reflected in their faces. Their kindness in a place of cruelty preached more loudly than any sermon, showing the radical reach of a compassion that makes the invisible God strangely visible.",
+      modelEs: "Un corazón lleno de la compasión de Cristo se vuelve uno de los testimonios más poderosos del mundo, especialmente en lugares de oscuridad, pues la bondad brilla más intensamente contra los fondos más negros y el mundo que observa no puede fácilmente explicarla. Un hombre llamado Kozlov, una vez criminal y luego líder de iglesia, escribió de la vida en un campo de trabajo soviético donde los presos a menudo cumplían sentencias de veinte o veinticinco años. En medio de la desesperación general, donde los hombres maldecían su suerte, se hacían daño, y hasta se quitaban la vida, los cristianos no desesperaban, y sus vidas puras y rectas, su fe profunda, y sobre todo su gentileza hacia los demás se volvieron un ejemplo brillante de vida real para miles, de modo que se podía ver a Cristo reflejado en sus rostros. Su bondad en un lugar de crueldad predicó más fuerte que cualquier sermón, mostrando el alcance radical de una compasión que hace al Dios invisible extrañamente visible.",
+      },
+    { textEn: "29. According to Luke 6:35, how far does kingdom kindness reach, and why?",
+      textEs: "29. Según Lucas 6:35, ¿hasta dónde alcanza la bondad del reino, y por qué?",
+      kw_en: ["unthankful", "evil", "enemy", "deserving", "fairness", "merciful", "kingdom", "visible"],
+      kw_es: ["ingratos", "malos", "enemigo", "merecen", "justicia", "misericordiosos", "reino", "visible"],
+      modelEn: "Kindness in the kingdom of God reaches further than ordinary human kindness, for Jesus tells us that God Himself is kind to the unthankful and evil and calls us to be kind even to those who do not deserve it or return it. A kindness that extends only to the deserving is just ordinary fairness, the kind even pagans practice, but the kindness of the kingdom reaches the ungrateful, the difficult, and the enemy. Blessed are the merciful, Jesus said, for they shall obtain mercy, and in showing mercy to those who cannot repay it we reflect the very heart of God who showed mercy to us when we were His enemies. This is why such kindness makes the invisible God strangely visible: it cannot be explained by self-interest or by the ordinary calculations of the world, and so it points beyond itself to the God whose kindness has no limit and no condition.",
+      modelEs: "La bondad en el reino de Dios alcanza más lejos que la bondad humana ordinaria, pues Jesús nos dice que Dios mismo es benigno con los ingratos y malos y nos llama a ser bondadosos aun con quienes no lo merecen ni lo devuelven. Una bondad que se extiende solo a los que la merecen es apenas justicia ordinaria, la que hasta los paganos practican, pero la bondad del reino alcanza al ingrato, al difícil, y al enemigo. Bienaventurados los misericordiosos, dijo Jesús, porque ellos alcanzarán misericordia, y al mostrar misericordia a quienes no pueden recompensarla reflejamos el corazón mismo de Dios que nos mostró misericordia cuando éramos sus enemigos. Por esto tal bondad hace al Dios invisible extrañamente visible: no puede explicarse por el interés propio ni por los cálculos ordinarios del mundo, y así apunta más allá de sí misma al Dios cuya bondad no tiene límite ni condición.",
+      },
+    { textEn: "30. Summarize the two-part pattern of a kind heart and what it ultimately means to be kind.",
+      textEs: "30. Resuma el patrón de dos partes de un corazón bondadoso y qué significa en última instancia ser bondadoso.",
+      kw_en: ["moved", "move", "deed", "felt", "duty", "heart of Christ", "garment", "Spirit"],
+      kw_es: ["movido", "moverse", "obra", "sentida", "deber", "corazón de Cristo", "prenda", "Espíritu"],
+      modelEn: "We come back to where we began, to Jesus looking out over the weary crowds and being moved with compassion, for that is the pattern for every kind heart: first to be genuinely moved, to let the suffering of others register in us, to feel it, to say with Christ I feel you, and then to move, to let that feeling become a deed. Compassion that is only felt and never acted on dies in the heart, while compassion that acts without feeling becomes cold duty, so real kindness holds both together, a heart that is moved and hands that move. To be kind, then, is nothing less than to share the heart of Christ. We put on kindness deliberately as a garment, we depend on the Spirit to grow it as fruit, we aim it especially at the overlooked and the undeserving, and we let it become our witness to a watching world, as the God who was kind to us when we were unthankful makes us kind like Himself.",
+      modelEs: "Volvemos a donde comenzamos, a Jesús contemplando las multitudes cansadas y siendo movido a compasión, pues ése es el patrón para todo corazón bondadoso: primero ser genuinamente movido, dejar que el sufrimiento de los demás registre en nosotros, sentirlo, decir con Cristo te siento, y luego moverse, dejar que ese sentimiento se vuelva obra. La compasión que solo se siente y nunca se actúa muere en el corazón, mientras que la compasión que actúa sin sentir se vuelve deber frío, así que la bondad verdadera sostiene ambas juntas, un corazón que es movido y manos que se mueven. Ser bondadoso, entonces, no es nada menos que compartir el corazón de Cristo. Nos vestimos de bondad deliberadamente como una prenda, dependemos del Espíritu para cultivarla como fruto, la dirigimos especialmente al olvidado y al inmerecedor, y dejamos que se vuelva nuestro testimonio ante un mundo que observa, mientras el Dios que fue bondadoso con nosotros cuando éramos ingratos nos hace bondadosos como Él.",
+      }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 12 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 12 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            lsSet(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSRadicalReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

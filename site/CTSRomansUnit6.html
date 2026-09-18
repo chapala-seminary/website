@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Romans | Unit 6: The Internal War</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', Times, serif; line-height: 1.6; background: #f9f7f3; color: #1a2a1f; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+.course-header { background: #5a1e1e; color: white; padding: 1.5rem 2rem; text-align: center; }
+.course-header h1 { font-size: 2rem; letter-spacing: 2px; margin-bottom: 0.25rem; }
+.course-header h2 { font-size: 1.2rem; font-weight: normal; opacity: 0.9; }
+.author-line { font-size: 0.95rem; color: #d4a64a; font-style: italic; margin-top: 0.35rem; letter-spacing: 0.5px; }
+.unit-badge { display: inline-block; background: #d4a64a; color: #5a1e1e; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-top: 0.5rem; }
+.controls-bar { background: #ede4d8; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #cbc3ae; }
+.lang-buttons { display: flex; gap: 10px; }
+.lang-btn { background: white; border: 1px solid #5a1e1e; padding: 0.4rem 1rem; cursor: pointer; font-weight: bold; transition: 0.2s; border-radius: 4px; }
+.lang-btn.active { background: #5a1e1e; color: white; }
+.track-indicator { background: #5a1e1e; color: #d4a64a; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+body.lang-en .lang-es { display: none; }
+body.lang-en .lang-both { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-both { display: none; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 900px) {
+    body.lang-both .lesson-grid { grid-template-columns: 1fr; }
+    body.lang-both .lang-es { border-top: 2px dashed #cbc3ae; padding-top: 1rem; margin-top: 1rem; }
+}
+.registration-section { background: #fef7e0; border-bottom: 3px solid #d4a64a; padding: 2rem; }
+.registration-section h3 { color: #5a1e1e; margin-bottom: 1rem; text-align: center; }
+.registration-form { max-width: 500px; margin: 0 auto; }
+.registration-form label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+.registration-form input[type="text"] { width: 100%; padding: 0.6rem; margin-bottom: 1rem; border: 1px solid #cbc3ae; border-radius: 4px; font-size: 1rem; font-family: inherit; }
+.registration-form .track-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+.registration-form .track-options label { font-weight: normal; cursor: pointer; padding: 0.5rem; border: 1px solid #cbc3ae; border-radius: 4px; background: white; }
+.registration-form .track-options input { margin-right: 0.5rem; }
+.registration-form button { background: #5a1e1e; color: white; border: none; padding: 0.75rem 2rem; font-size: 1rem; cursor: pointer; border-radius: 4px; width: 100%; }
+.registration-form button:hover { background: #401414; }
+.lesson-section { padding: 2rem; }
+.lesson-section h3 { color: #5a1e1e; border-left: 4px solid #d4a64a; padding-left: 1rem; margin: 1.5rem 0 1rem 0; }
+.lesson-section h3:first-of-type { margin-top: 0; }
+.lesson-section p { margin-bottom: 1rem; }
+.scripture { background: #f0ede5; padding: 1rem 1.5rem; border-left: 4px solid #d4a64a; font-style: italic; margin: 1rem 0; font-family: 'Courier New', monospace; }
+.illustration { background: #e8f0e5; padding: 1rem 1.5rem; border-radius: 8px; margin: 1rem 0; }
+.exam-section { background: #fefaf0; border-top: 3px solid #5a1e1e; padding: 2rem; page-break-before: always; }
+.exam-header { text-align: center; margin-bottom: 2rem; }
+.question-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; page-break-inside: avoid; }
+.question-text { font-weight: bold; margin-bottom: 0.75rem; }
+.options { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+.options label { display: block; margin: 0.4rem 0; cursor: pointer; }
+.feedback { margin-top: 0.75rem; padding: 0.5rem; border-radius: 4px; font-size: 0.9rem; }
+.feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+.modelbox { margin-top: 0.6rem; padding: 0.6rem 0.75rem; background: #fff8e1; color: #5d4a00; border-left: 4px solid #d4af37; border-radius: 4px; }
+
+.essay-question textarea { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+.action-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+.action-buttons button { background: #5a1e1e; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+.action-buttons button:hover { background: #401414; }
+.action-buttons button.reset-btn { background: #8b6b3d; }
+.lockout-timer { text-align: center; padding: 1rem; background: #f8d7da; color: #721c24; margin: 1rem; border-radius: 8px; font-weight: bold; }
+.nav-links { display: flex; justify-content: space-between; padding: 1rem 2rem; background: #ede4d8; }
+.nav-links a { color: #5a1e1e; text-decoration: none; font-weight: bold; }
+.exam-locked { background: #fff3cd; color: #856404; padding: 2rem; text-align: center; border-radius: 8px; font-weight: bold; }
+@media print {
+    .controls-bar, .action-buttons, .nav-links, .lockout-timer, .registration-section { display: none !important; }
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; margin: 0; }
+    .course-header { background: #5a1e1e; color: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .question-card { border: 1px solid #ccc; page-break-inside: avoid; }
+    .exam-section { page-break-before: always; }
+    .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.lang-both .lesson-grid { display: block; }
+}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 2px;font-family:'Georgia',serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#5a1e1e;margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid #cdbf9d;color:#5a1e1e;text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:#5a1e1e;}
+.unitnav a.active{background:#5a1e1e;color:#fff;border-color:#5a1e1e;}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+    <div class="course-header">
+        <h1>ΡΩΜΑΙΟΥΣ</h1>
+        <h2><span class="lang-en">The Book of Romans</span><span class="lang-es">El Libro de Romanos</span></h2>
+        <div class="author-line"><span class="lang-en">by Dr. Wayne Cook &amp; Dr. Ted Rogers</span><span class="lang-es">por el Dr. Wayne Cook y el Dr. Ted Rogers</span></div>
+        <div class="unit-badge"><span class="lang-en">Unit 6 · The Internal War</span><span class="lang-es">Unidad 6 · La Guerra Interna</span></div>
+    </div>
+
+    <div class="controls-bar">
+        <div class="lang-buttons">
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="es">Español</button>
+            <button class="lang-btn" data-lang="both">Both</button>
+        </div>
+        <div class="track-indicator" id="trackIndicator">Loading...</div>
+    </div>
+
+    <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+      <span class="nl"><span class="lang-en">Units</span><span class="lang-es">Unidades</span></span>
+      <a href="CTSRomansUnit1.html">1</a>
+      <a href="CTSRomansUnit2.html">2</a>
+      <a href="CTSRomansUnit3.html">3</a>
+      <a href="CTSRomansUnit4.html">4</a>
+      <a href="CTSRomansUnit5.html">5</a>
+      <a href="CTSRomansUnit6.html" class="active">6</a>
+      <a href="CTSRomansUnit7.html">7</a>
+      <a href="CTSRomansUnit8.html">8</a>
+      <a href="CTSRomansUnit9.html">9</a>
+      <a href="CTSRomansUnit10.html">10</a>
+    </nav>
+
+    <div class="registration-section" id="registrationSection" style="display:none;">
+        <h3><span class="lang-en">Register for CTS Romans</span><span class="lang-es">Regístrate en CTS Romanos</span></h3>
+        <div class="registration-form">
+            <p style="margin-bottom: 1rem;"><span class="lang-en">Welcome. Before beginning Unit 1, please enter your name (as you would like it to appear on your certificate) and select your study track.</span><span class="lang-es">Bienvenido. Antes de comenzar la Unidad 1, ingrese su nombre (como desea que aparezca en su certificado) y seleccione su vía de estudio.</span></p>
+            <label for="regName"><span class="lang-en">Full Name:</span><span class="lang-es">Nombre Completo:</span></label>
+            <input type="text" id="regName" placeholder="Jane Doe / María García">
+            <label><span class="lang-en">Study Track:</span><span class="lang-es">Vía de Estudio:</span></label>
+            <div class="track-options">
+                <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en"><strong>Certificate</strong> — 20 multiple choice per unit, 18/20 to pass</span><span class="lang-es"><strong>Certificado</strong> — 20 opción múltiple por unidad, 18/20 para aprobar</span></label>
+                <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en"><strong>Th.M.</strong> — 20 MC + 10 short answer, both 90%</span><span class="lang-es"><strong>Th.M.</strong> — 20 OM + 10 respuesta corta, ambos 90%</span></label>
+                <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en"><strong>M.Div.</strong> — 20 MC + 10 short answer, both 90% (advanced)</span><span class="lang-es"><strong>M.Div.</strong> — 20 OM + 10 respuesta corta, ambos 90% (avanzado)</span></label>
+            </div>
+            <button id="regSubmit"><span class="lang-en">Begin Course</span><span class="lang-es">Comenzar Curso</span></button>
+        </div>
+    </div>
+
+    <div class="lesson-section">
+        <div class="lesson-grid">
+            <div class="lang-en">
+                <h3>1. Is the Law Sinful? (7:7-12)</h3>
+                <p>After releasing the believer from the law in 7:1-6, Paul knows the next obvious question. If the law is something we have died to, something we serve in newness rather than the oldness of the letter — has the law itself been sinful? Has the problem been with the law?</p>
+
+                <p>His answer is a thunderclap: <em>mē genoito.</em> By no means. The law has not been the problem. The law has been the diagnostician. Paul writes that he would not have known sin except by the law. He would not have known what coveting was if the commandment had not said <em>"You shall not covet."</em> The law did not create sin. The law revealed sin.</p>
+
+                <div class="scripture">
+                    <strong>Romans 7:7 (NKJV):</strong> "What shall we say then? Is the law sin? Certainly not! On the contrary, I would not have known sin except through the law. For I would not have known covetousness unless the law had said, 'You shall not covet.'"
+                </div>
+
+                <p>Think of the law as a flashlight in a dark room. The flashlight reveals the hazards on the floor — the table corners, the toys, the cord across the rug — but the flashlight is not the hazard. Switch off the flashlight and the hazards do not disappear; they only become invisible until you trip over them. The law functions the same way. It does not create the sin in our hearts. It exposes the sin that was already there.</p>
+
+                <p>Paul ends the section with a verse worth memorizing. <em>Therefore the law is holy, and the commandment holy and just and good.</em> No quarrel with the law. The problem was never with God's standard. The problem has always been with sinful hearts that the standard exposes.</p>
+
+                <h3>2. Sin's Use of the Commandment (7:8-13)</h3>
+                <p>But Paul presses further. There is something perverse in the way sinful human nature responds to the law. Tell a child not to touch the hot stove and you have just created the urgent question of how the stove feels. Tell someone <em>whatever you do, don't think of the word "elephant"</em> and they will think of elephants for the rest of the afternoon. The commandment does not produce the impulse, but it gives the impulse a clear target. Sin, Paul says, "taking opportunity by the commandment, produced in me all manner of evil desire."</p>
+
+                <p>This is not a flaw in the law. It is a feature of sin. Sin uses the very prohibitions designed to restrain it as raw material for further rebellion. The law that should have led to life becomes — through the perversity of indwelling sin — the occasion of death. Paul makes that clear in verse 13: it was not the good law that brought death; it was sin, using what is good, that worked death in him, so that sin might be exposed as exceedingly sinful.</p>
+
+                <h3>3. The Internal War (7:14-20)</h3>
+                <p>Then Paul does something most theological writers in the ancient world would not have done. He becomes intensely personal. He opens up the daily struggle of the believer with indwelling sin. The man who wrote the most important theological document in church history pauses to confess that he himself does not understand what he does. He wants the good. He hates the evil. And yet he keeps falling into the very evil he hates.</p>
+
+                <div class="scripture">
+                    <strong>Romans 7:15 (NKJV):</strong> "For what I am doing, I do not understand. For what I will to do, that I do not practice; but what I hate, that I do."
+                </div>
+
+                <p>Every Christian who has ever wrestled with a long-standing sin will recognize that sentence. It does not describe failure to know what is right. It describes failure to do what one knows is right. Paul lays out the strange anatomy of this struggle. The "I" that wants the good is the new self — the believer regenerated by the Spirit. The "I" that keeps doing the evil is the residual sinful nature still resident in the body. Both are present in the same person. They are not equals — the new nature is supreme — but the old nature is not yet dead, and it goes on lobbying for its desires until the resurrection.</p>
+
+                <div class="illustration">
+                    <strong>Pastoral Illustration:</strong> Anyone who has ever tried to quit smoking knows exactly what Paul is describing. A man decides he is finished with cigarettes. He throws away the pack. He means it. He prays about it. He puts the lighter in the trash. He is fully convinced this habit has cost him too much and is robbing him of his health. And three hours later he finds himself at the gas station buying another pack, hating himself the whole drive home. He did not want to. He had decided not to. And he did it anyway. That is exactly Paul's picture in Romans 7. The wanting-to-stop and the doing-it-anyway are both real. The new desire is genuine and the old habit is genuine. Both live in the same person — for now.
+                </div>
+
+                <p>Paul presses the point in verse 17: <em>Now then, it is no longer I who do it, but sin that dwells in me.</em> He is not making an excuse. He is not trying to evade responsibility. He is identifying the source of the impulse. The new self he became at conversion is not the one generating the sin. The source is the indwelling sinful nature that has not yet been removed. The believer remains responsible — but the believer is also clear about which part of himself is the problem.</p>
+
+                <h3>4. The Two Laws Within (7:21-23)</h3>
+                <p>Out of this struggle Paul names a "law" — a principle, a regularity — that operates in his members. The Greek word <em>nomos</em> can mean the Mosaic Law, but it can also mean a fixed principle that always operates a certain way. Paul says he finds the principle that <em>when I want to do good, evil is present with me.</em> That regularity is so consistent it functions like a law.</p>
+
+                <div class="scripture">
+                    <strong>Romans 7:22-23 (NKJV):</strong> "For I delight in the law of God according to the inward man. But I see another law in my members, warring against the law of my mind, and bringing me into captivity to the law of sin which is in my members."
+                </div>
+
+                <p>There are several "laws" at work in Romans 7. There is the law of God — the Mosaic standard. There is the law of the mind — the inner delight in God's law that marks the new nature. There is the law in the members — the principle of indwelling sin still operating in the physical body. And the new nature and the old nature wage war in the believer every day.</p>
+
+                <p>This is the great Christian paradox. The believer has been justified, set free from sin's dominion, raised with Christ — and yet still wrestles with the residual presence of sin until the resurrection. Justification was instantaneous; sanctification is a war. Glorification will be the day that war ends.</p>
+
+                <h3>5. The Wretched Man's Cry (7:24)</h3>
+                <p>This realization wrings from Paul the most personal cry in the entire letter. <em>O wretched man that I am! Who will deliver me from this body of death?</em> The phrase "body of death" was used in the ancient world for the corpse a murderer was sometimes chained to as punishment — forced to drag a dead body wherever he went until he himself died. Paul says the indwelling sin still lodged in his mortal body feels like that. It is a corpse he must drag, a weight he cannot put down, an old nature not yet dead but no longer alive enough to stop fighting.</p>
+
+                <div class="scripture">
+                    <strong>Romans 7:24 (NKJV):</strong> "O wretched man that I am! Who will deliver me from this body of death?"
+                </div>
+
+                <p>Notice that this is the cry of a <em>believer</em> — not an unbeliever. Unbelievers are not wretched over sin; they are comfortable in it. Only the regenerate heart cries out at the gap between what it wants to do and what it actually does. The cry of "wretched man" is itself evidence that the new nature has taken hold. The dead do not lament their corpses; the living do.</p>
+
+                <h3>6. Thanks Be to God (7:25)</h3>
+                <p>Paul does not leave us in the lament. He immediately answers his own cry. <em>Thanks be to God through Jesus Christ our Lord!</em></p>
+
+                <div class="scripture">
+                    <strong>Romans 7:25 (NKJV):</strong> "I thank God — through Jesus Christ our Lord! So then, with the mind I myself serve the law of God, but with the flesh the law of sin."
+                </div>
+
+                <p>The deliverance has already been provided. The deliverer is named. The full experience of that deliverance — the complete victory — awaits the resurrection, when the body of death will be exchanged for a body of glory. But the deliverer is at work <em>now</em>, and the assurance that He has secured the final victory is enough to enable the believer to keep fighting today.</p>
+
+                <p>Notice the final sentence of the chapter: <em>So then, with the mind I myself serve the law of God, but with the flesh the law of sin.</em> The two natures coexist in the believer until the resurrection. Paul does not pretend the war is over. He acknowledges it is real, and he sets up the next chapter — Romans 8 — where the Spirit's empowerment in this war becomes the theme. There is no condemnation. There is power for victory. There is glory ahead. The believer who cried "wretched man" in chapter 7 will hear in chapter 8 that nothing can separate him from the love of God in Christ Jesus.</p>
+
+                <p>The honest assessment of Romans 7 is the necessary doorway into the glorious confidence of Romans 8. Anyone who has not felt the wretched-man cry has not understood the depth of the war within. Anyone who has felt it but stops there has not yet heard the answer. Paul refuses to let his readers off either hook. Sin is more serious than easy religion admits; grace is more powerful than weary religion believes. Both halves of that sentence are the point of Romans 7.</p>
+            </div>
+
+            <div class="lang-es">
+                <h3>1. ¿Es la Ley Pecado? (7:7-12)</h3>
+                <p>Después de liberar al creyente de la ley en 7:1-6, Pablo sabe la siguiente pregunta obvia. Si la ley es algo a lo que hemos muerto, algo que servimos en novedad y no en la vejez de la letra — ¿ha sido la ley misma pecaminosa? ¿Ha sido el problema con la ley?</p>
+
+                <p>Su respuesta es un trueno: <em>mē genoito.</em> En ninguna manera. La ley no ha sido el problema. La ley ha sido la diagnosticadora. Pablo escribe que no habría conocido el pecado sino por la ley. No habría conocido lo que era la codicia si el mandamiento no hubiera dicho <em>"No codiciarás."</em> La ley no creó el pecado. La ley reveló el pecado.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 7:7 (RVG):</strong> "¿Qué, pues, diremos? ¿La ley es pecado? ¡En ninguna manera! Pero yo no conocí el pecado sino por la ley; porque tampoco conociera la codicia, si la ley no dijera: No codiciarás."
+                </div>
+
+                <p>Piense en la ley como una linterna en un cuarto oscuro. La linterna revela los peligros en el piso — las esquinas de las mesas, los juguetes, el cable atravesado en la alfombra — pero la linterna no es el peligro. Apague la linterna y los peligros no desaparecen; solo se vuelven invisibles hasta que tropieza con ellos. La ley funciona de la misma manera. No crea el pecado en nuestros corazones. Expone el pecado que ya estaba allí.</p>
+
+                <p>Pablo termina la sección con un versículo digno de memorizar. <em>De manera que la ley a la verdad es santa, y el mandamiento santo, justo y bueno.</em> Sin disputa con la ley. El problema nunca fue con el estándar de Dios. El problema siempre ha sido con corazones pecaminosos que el estándar expone.</p>
+
+                <h3>2. El Uso del Mandamiento por el Pecado (7:8-13)</h3>
+                <p>Pero Pablo presiona más allá. Hay algo perverso en la manera en que la naturaleza humana pecaminosa responde a la ley. Dígale a un niño que no toque la estufa caliente y acaba de crear la pregunta urgente de cómo se siente la estufa. Dígale a alguien <em>haga lo que haga, no piense en la palabra "elefante"</em> y pensarán en elefantes el resto de la tarde. El mandamiento no produce el impulso, pero le da al impulso un blanco claro. El pecado, dice Pablo, "tomando ocasión por el mandamiento, obró en mí toda clase de codicia."</p>
+
+                <p>Esto no es un defecto en la ley. Es una característica del pecado. El pecado usa las mismas prohibiciones diseñadas para restringirlo como materia prima para mayor rebelión. La ley que debió haber llevado a la vida se vuelve — por la perversidad del pecado morador — la ocasión de la muerte. Pablo lo deja claro en el versículo 13: no fue la buena ley la que trajo muerte; fue el pecado, usando lo que es bueno, que obró muerte en él, para que el pecado fuese expuesto como pecaminoso en gran manera.</p>
+
+                <h3>3. La Guerra Interna (7:14-20)</h3>
+                <p>Luego Pablo hace algo que la mayoría de los escritores teológicos del mundo antiguo no habrían hecho. Se vuelve intensamente personal. Abre la lucha diaria del creyente con el pecado morador. El hombre que escribió el documento teológico más importante de la historia de la iglesia se detiene a confesar que él mismo no entiende lo que hace. Quiere el bien. Odia el mal. Y sin embargo sigue cayendo en el mismo mal que odia.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 7:15 (RVG):</strong> "Porque lo que hago, no lo entiendo; pues no hago lo que quiero, sino lo que aborrezco, eso hago."
+                </div>
+
+                <p>Todo cristiano que alguna vez ha luchado con un pecado de larga data reconocerá esa oración. No describe el fracaso de saber lo correcto. Describe el fracaso de hacer lo que uno sabe que es correcto. Pablo presenta la extraña anatomía de esta lucha. El "yo" que quiere el bien es el nuevo yo — el creyente regenerado por el Espíritu. El "yo" que sigue haciendo el mal es la naturaleza pecaminosa residual todavía residente en el cuerpo. Ambos están presentes en la misma persona. No son iguales — la naturaleza nueva es suprema — pero la naturaleza vieja no está aún muerta, y sigue cabildeando por sus deseos hasta la resurrección.</p>
+
+                <div class="illustration">
+                    <strong>Ilustración Pastoral:</strong> Cualquiera que haya intentado dejar de fumar sabe exactamente lo que Pablo está describiendo. Un hombre decide que ha terminado con los cigarrillos. Tira el paquete. Lo dice en serio. Ora por ello. Pone el encendedor a la basura. Está plenamente convencido de que este hábito le ha costado demasiado y le está robando la salud. Y tres horas después se encuentra en la gasolinera comprando otro paquete, odiándose a sí mismo todo el camino a casa. No quería hacerlo. Había decidido no hacerlo. Y lo hizo de todos modos. Eso es exactamente el cuadro de Pablo en Romanos 7. El querer-parar y el hacerlo-de-todos-modos son ambos reales. El nuevo deseo es genuino y el viejo hábito es genuino. Ambos viven en la misma persona — por ahora.
+                </div>
+
+                <p>Pablo presiona el punto en el versículo 17: <em>De manera que ya no soy yo quien hace aquello, sino el pecado que mora en mí.</em> No está poniendo una excusa. No está tratando de evadir la responsabilidad. Está identificando la fuente del impulso. El nuevo yo en el que se convirtió en la conversión no es el que genera el pecado. La fuente es la naturaleza pecaminosa morando que aún no ha sido removida. El creyente sigue siendo responsable — pero el creyente también tiene claro cuál parte de sí mismo es el problema.</p>
+
+                <h3>4. Las Dos Leyes Internas (7:21-23)</h3>
+                <p>De esta lucha Pablo nombra una "ley" — un principio, una regularidad — que opera en sus miembros. La palabra griega <em>nomos</em> puede significar la Ley Mosaica, pero también puede significar un principio fijo que siempre opera de cierta manera. Pablo dice que encuentra el principio de que <em>cuando quiero hacer el bien, el mal está presente conmigo.</em> Esa regularidad es tan consistente que funciona como una ley.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 7:22-23 (RVG):</strong> "Porque según el hombre interior, me deleito en la ley de Dios; pero veo otra ley en mis miembros, que se rebela contra la ley de mi mente, y que me lleva cautivo a la ley del pecado que está en mis miembros."
+                </div>
+
+                <p>Hay varias "leyes" obrando en Romanos 7. Está la ley de Dios — el estándar mosaico. Está la ley de la mente — el deleite interior en la ley de Dios que marca la nueva naturaleza. Está la ley en los miembros — el principio del pecado morador todavía operando en el cuerpo físico. Y la nueva naturaleza y la vieja naturaleza hacen guerra en el creyente todos los días.</p>
+
+                <p>Esta es la gran paradoja cristiana. El creyente ha sido justificado, liberado del dominio del pecado, resucitado con Cristo — y sin embargo todavía lucha con la presencia residual del pecado hasta la resurrección. La justificación fue instantánea; la santificación es una guerra. La glorificación será el día en que esa guerra termine.</p>
+
+                <h3>5. El Clamor del Hombre Miserable (7:24)</h3>
+                <p>Esta realización arranca de Pablo el clamor más personal de toda la carta. <em>¡Oh miserable hombre de mí! ¿Quién me librará de este cuerpo de muerte?</em> La frase "cuerpo de muerte" se usaba en el mundo antiguo para referirse al cadáver al que a veces se encadenaba a un asesino como castigo — obligado a arrastrar un cuerpo muerto a donde fuera hasta que él mismo muriera. Pablo dice que el pecado morador todavía alojado en su cuerpo mortal se siente así. Es un cadáver que debe arrastrar, un peso que no puede dejar, una vieja naturaleza no aún muerta pero ya no lo suficientemente viva para detener la lucha.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 7:24 (RVG):</strong> "¡Oh miserable hombre de mí! ¿Quién me librará de este cuerpo de muerte?"
+                </div>
+
+                <p>Note que este es el clamor de un <em>creyente</em> — no de un incrédulo. Los incrédulos no son miserables por el pecado; están cómodos en él. Solo el corazón regenerado clama por la brecha entre lo que quiere hacer y lo que realmente hace. El clamor de "miserable hombre" es en sí mismo evidencia de que la nueva naturaleza ha tomado posesión. Los muertos no lamentan sus cadáveres; los vivos sí.</p>
+
+                <h3>6. Gracias a Dios (7:25)</h3>
+                <p>Pablo no nos deja en el lamento. Inmediatamente responde a su propio clamor. <em>¡Gracias doy a Dios por Jesucristo Señor nuestro!</em></p>
+
+                <div class="scripture">
+                    <strong>Romanos 7:25 (RVG):</strong> "Gracias doy a Dios, por Jesucristo Señor nuestro. Así que, yo mismo con la mente sirvo a la ley de Dios, mas con la carne, a la ley del pecado."
+                </div>
+
+                <p>La liberación ya ha sido provista. El libertador es nombrado. La experiencia completa de esa liberación — la victoria completa — espera la resurrección, cuando el cuerpo de muerte será cambiado por un cuerpo de gloria. Pero el libertador está obrando <em>ahora</em>, y la seguridad de que Él ha asegurado la victoria final es suficiente para capacitar al creyente para seguir luchando hoy.</p>
+
+                <p>Note la oración final del capítulo: <em>Así que, yo mismo con la mente sirvo a la ley de Dios, mas con la carne, a la ley del pecado.</em> Las dos naturalezas coexisten en el creyente hasta la resurrección. Pablo no pretende que la guerra ha terminado. Reconoce que es real, y prepara el siguiente capítulo — Romanos 8 — donde el empoderamiento del Espíritu en esta guerra se vuelve el tema. No hay condenación. Hay poder para la victoria. Hay gloria por delante. El creyente que gritó "miserable hombre" en el capítulo 7 escuchará en el capítulo 8 que nada puede separarlo del amor de Dios en Cristo Jesús.</p>
+
+                <p>La evaluación honesta de Romanos 7 es la puerta necesaria a la gloriosa confianza de Romanos 8. Cualquiera que no haya sentido el clamor del hombre miserable no ha entendido la profundidad de la guerra interna. Cualquiera que lo haya sentido pero se detenga allí aún no ha escuchado la respuesta. Pablo se niega a dejar a sus lectores escapar de ninguno de los dos ganchos. El pecado es más serio de lo que la religión fácil admite; la gracia es más poderosa de lo que la religión cansada cree. Ambas mitades de esa oración son el punto de Romanos 7.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="exam-section" id="examSection">
+        <div class="exam-header">
+            <h2><span class="lang-en">Unit 6 Examination — Romans 7:7-25</span><span class="lang-es">Examen de la Unidad 6 — Romanos 7:7-25</span></h2>
+            <p><span class="lang-en">20 multiple choice questions + 10 short answer questions (essays required for Th.M. and M.Div. only)</span><span class="lang-es">20 preguntas de opción múltiple + 10 preguntas de respuesta corta (requeridas solo para Th.M. y M.Div.)</span></p>
+        </div>
+        <div id="mcQuestions"></div>
+        <div id="saQuestions"></div>
+        <div class="action-buttons">
+            <button id="submitBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Entregar Examen</span></button>
+            <button id="resetBtn" class="reset-btn"><span class="lang-en">Reset Exam</span><span class="lang-es">Reiniciar Examen</span></button>
+        </div>
+        <div id="lockoutTimer" class="lockout-timer" style="display:none;"></div>
+    </div>
+
+    <div class="nav-links">
+        <a href="CTSRomansUnit5.html"><span class="lang-en">← Previous Unit</span><span class="lang-es">← Unidad Anterior</span></a>
+        <a href="CTSRomansUnit7.html"><span class="lang-en">Next Unit →</span><span class="lang-es">Unidad Siguiente →</span></a>
+    </div>
+</div>
+
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+// ============================================================
+// PER-UNIT CONSTANTS
+// ============================================================
+const UNIT = 6;
+const COURSE_PREFIX = "romans";
+const NEXT_URL = "CTSRomansUnit7.html";
+const PREV_URL = "CTSRomansUnit5.html";
+const IS_LAST_UNIT = false;
+const SHOW_REGISTRATION_CARD = false;
+const CERT_URL = "CTSRomansCertificate.html";
+
+// ============================================================
+// MULTIPLE CHOICE QUESTIONS (20) — Distribution A=5, B=5, C=5, D=5
+// ============================================================
+const mcQuestions = [{"text": "1. According to Romans 7:7, what is Paul's answer to 'Is the law sin?'", "options": ["A. Certainly not — the law is not sin; it reveals sin", "D. The law is irrelevant to Christians", "B. Yes, the law is partly sinful", "C. The law has been abolished"], "correct": 0, "correctFeedback": "Correct. Mē genoito — the law is not sin. It is the diagnostician, not the disease.", "incorrectFeedback": "Romans 7:7 — mē genoito, by no means. The law is not sin; it reveals sin. The problem is with sinful hearts the standard exposes, not with the standard itself.", "textEs": "1. Según Romanos 7:7, ¿cuál es la respuesta de Pablo a '¿Es pecado la ley?'", "optionsEs": ["A. En ninguna manera — la ley no es pecado; revela el pecado", "D. La ley es irrelevante para los cristianos", "B. Sí, la ley es en parte pecaminosa", "C. La ley ha sido abolida"], "correctFeedbackEs": "Correcto. Mē genoito — la ley no es pecado. Es el diagnosticador, no la enfermedad.", "incorrectFeedbackEs": "Romanos 7:7 — mē genoito, en ninguna manera. La ley no es pecado; revela el pecado. El problema está en los corazones pecaminosos que la norma expone, no en la norma misma."}, {"text": "2. In Romans 7:7, Paul says he would not have known sin except by what?", "options": ["D. His conscience alone", "A. Personal experience", "C. His teachers", "B. The law"], "correct": 3, "correctFeedback": "Correct. The law revealed sin. Paul names coveting as the specific example.", "incorrectFeedback": "Romans 7:7 — 'I would not have known sin except through the law.' The law is the flashlight that exposes the hazards already in the room.", "textEs": "2. En Romanos 7:7, Pablo dice que no habría conocido el pecado sino por ¿qué?", "optionsEs": ["D. Solo su conciencia", "A. La experiencia personal", "C. Sus maestros", "B. La ley"], "correctFeedbackEs": "Correcto. La ley reveló el pecado. Pablo nombra la codicia como el ejemplo específico.", "incorrectFeedbackEs": "Romanos 7:7 — 'no conocí el pecado sino por la ley.' La ley es la linterna que expone los peligros que ya están en la habitación."}, {"text": "3. The flashlight analogy in this unit teaches that the law:", "options": ["C. Reveals hazards that were already there but does not create them", "B. Is identical to sin", "A. Creates the moral problem", "D. Makes sin disappear"], "correct": 0, "correctFeedback": "Correct. The flashlight reveals hazards in the dark room; it does not create them.", "incorrectFeedback": "The flashlight analogy — the law reveals what was already there. Switch off the law and the sin does not disappear; it only becomes invisible until you trip over it.", "textEs": "3. La analogía de la linterna en esta unidad enseña que la ley:", "optionsEs": ["C. Revela peligros que ya estaban allí, pero no los crea", "B. Es idéntica al pecado", "A. Crea el problema moral", "D. Hace desaparecer el pecado"], "correctFeedbackEs": "Correcto. La linterna revela los peligros en el cuarto oscuro; no los crea.", "incorrectFeedbackEs": "La analogía de la linterna — la ley revela lo que ya estaba allí. Apaga la ley y el pecado no desaparece; solo se vuelve invisible hasta que tropiezas con él."}, {"text": "4. According to Romans 7:12, the law is:", "options": ["D. Holy, just, and good", "B. Outdated", "A. Burdensome", "C. Impossible to keep"], "correct": 0, "correctFeedback": "Correct. 'The law is holy, and the commandment holy and just and good.' No quarrel with the standard.", "incorrectFeedback": "Romans 7:12 — the law is holy, and the commandment holy and just and good. Paul affirms the goodness of God's standard before exposing the problem with sinful hearts.", "textEs": "4. Según Romanos 7:12, la ley es:", "optionsEs": ["D. Santa, justa y buena", "B. Anticuada", "A. Pesada", "C. Imposible de guardar"], "correctFeedbackEs": "Correcto. 'La ley a la verdad es santa, y el mandamiento santo, justo y bueno.' Ningún conflicto con la norma.", "incorrectFeedbackEs": "Romanos 7:12 — la ley es santa, y el mandamiento santo, justo y bueno. Pablo afirma la bondad de la norma de Dios antes de exponer el problema de los corazones pecaminosos."}, {"text": "5. According to Romans 7:15, Paul confesses he does what?", "options": ["D. Only what the law commands", "B. Exactly what he wants every time", "A. The very thing he hates — not what he wants", "C. Nothing he can be ashamed of"], "correct": 2, "correctFeedback": "Correct. 'What I will to do, that I do not practice; but what I hate, that I do.' The internal war.", "incorrectFeedback": "Romans 7:15 — Paul confesses he does the very thing he hates and fails to do what he wants. Every Christian who has wrestled with long-standing sin recognizes this sentence.", "textEs": "5. Según Romanos 7:15, Pablo confiesa que hace ¿qué?", "optionsEs": ["D. Solo lo que la ley manda", "B. Exactamente lo que quiere cada vez", "A. Precisamente lo que aborrece — no lo que quiere", "C. Nada de lo que pueda avergonzarse"], "correctFeedbackEs": "Correcto. 'Lo que quiero hacer, no lo hago; pero lo que aborrezco, eso hago.' La guerra interna.", "incorrectFeedbackEs": "Romanos 7:15 — Pablo confiesa que hace precisamente lo que aborrece y falla en hacer lo que quiere. Todo cristiano que ha luchado con un pecado arraigado reconoce esta frase."}, {"text": "6. The 'I' in Romans 7:14-20 who wants the good is:", "options": ["C. A theoretical hypothetical man", "B. The regenerated new self produced by the Spirit", "A. Paul's pre-conversion self", "D. The legalistic Jew"], "correct": 1, "correctFeedback": "Correct. The new self — the believer regenerated by the Spirit. The new desire is genuine.", "incorrectFeedback": "The 'I' that wants the good in Rom 7 is the regenerated new self. The new nature genuinely desires righteousness; the residual sinful nature still resists it.", "textEs": "6. El 'yo' en Romanos 7:14-20 que quiere lo bueno es:", "optionsEs": ["C. Un hombre hipotético teórico", "B. El nuevo yo regenerado producido por el Espíritu", "A. El yo de Pablo antes de la conversión", "D. El judío legalista"], "correctFeedbackEs": "Correcto. El nuevo yo — el creyente regenerado por el Espíritu. El nuevo deseo es genuino.", "incorrectFeedbackEs": "El 'yo' que quiere lo bueno en Ro 7 es el nuevo yo regenerado. La nueva naturaleza desea de verdad la justicia; la naturaleza pecaminosa residual aún se le resiste."}, {"text": "7. According to Romans 7:17, who or what does Paul identify as the source of his sinful acts?", "options": ["A. His upbringing", "B. The devil only", "C. Sin that dwells in him", "D. God's permission"], "correct": 2, "correctFeedback": "Correct. 'It is no longer I who do it, but sin that dwells in me.' Identifying the source, not evading responsibility.", "incorrectFeedback": "Romans 7:17 — 'sin that dwells in me.' Paul is not evading responsibility; he is naming the source of the impulse — the indwelling sinful nature still resident in the body.", "textEs": "7. Según Romanos 7:17, ¿a quién o a qué identifica Pablo como la fuente de sus actos pecaminosos?", "optionsEs": ["A. Su crianza", "B. Solo el diablo", "C. El pecado que mora en él", "D. El permiso de Dios"], "correctFeedbackEs": "Correcto. 'Ya no soy yo quien hace aquello, sino el pecado que mora en mí.' Identifica la fuente, no evade la responsabilidad.", "incorrectFeedbackEs": "Romanos 7:17 — 'el pecado que mora en mí.' Pablo no evade la responsabilidad; nombra la fuente del impulso — la naturaleza pecaminosa que todavía reside en el cuerpo."}, {"text": "8. The quit-smoking analogy in this unit illustrates:", "options": ["C. The need for medical treatment first", "A. The wisdom of total self-control", "D. The wanting-to-stop and doing-it-anyway dynamic Paul describes — both real, both in the same person", "B. The futility of evangelism"], "correct": 2, "correctFeedback": "Correct. The smoker who throws away the pack and buys another three hours later — that is Paul's Romans 7 dynamic.", "incorrectFeedback": "The quit-smoking analogy captures Paul's Rom 7 dynamic exactly: the wanting-to-stop and doing-it-anyway are both real and live in the same person — for now, until the resurrection.", "textEs": "8. La analogía de dejar de fumar en esta unidad ilustra:", "optionsEs": ["C. La necesidad de tratamiento médico primero", "A. La sabiduría del autocontrol total", "D. La dinámica de querer-dejarlo y hacerlo-de-todos-modos que Pablo describe — ambas reales, ambas en la misma persona", "B. La inutilidad del evangelismo"], "correctFeedbackEs": "Correcto. El fumador que tira la cajetilla y compra otra tres horas después — esa es la dinámica de Romanos 7 de Pablo.", "incorrectFeedbackEs": "La analogía de dejar de fumar capta exactamente la dinámica de Ro 7 de Pablo: el querer-dejarlo y el hacerlo-de-todos-modos son ambos reales y viven en la misma persona — por ahora, hasta la resurrección."}, {"text": "9. According to Romans 7:22, Paul delights in what 'according to the inward man'?", "options": ["A. The law of God", "C. His own achievements", "B. Earthly pleasures", "D. Personal autonomy"], "correct": 0, "correctFeedback": "Correct. 'I delight in the law of God according to the inward man.' The new self genuinely loves God's law.", "incorrectFeedback": "Romans 7:22 — Paul delights in the law of God according to the inward man. The new nature loves what the old nature rebelled against.", "textEs": "9. Según Romanos 7:22, Pablo se deleita en ¿qué 'según el hombre interior'?", "optionsEs": ["A. La ley de Dios", "C. Sus propios logros", "B. Los placeres terrenales", "D. La autonomía personal"], "correctFeedbackEs": "Correcto. 'Según el hombre interior, me deleito en la ley de Dios.' El nuevo yo ama de verdad la ley de Dios.", "incorrectFeedbackEs": "Romanos 7:22 — Pablo se deleita en la ley de Dios según el hombre interior. La nueva naturaleza ama lo que la vieja naturaleza rechazaba."}, {"text": "10. Romans 7:23 describes another law warring against the law of the mind. That other law is:", "options": ["A. The civil law of Rome", "D. Greek philosophy", "B. The law of sin operating in the members", "C. The Ten Commandments"], "correct": 2, "correctFeedback": "Correct. The law of sin in the members — the principle of indwelling sin still operating in the body.", "incorrectFeedback": "Romans 7:23 — the law in the members, warring against the law of the mind. This is the principle of indwelling sin still operating in the physical body.", "textEs": "10. Romanos 7:23 describe otra ley que se rebela contra la ley de la mente. Esa otra ley es:", "optionsEs": ["A. La ley civil de Roma", "D. La filosofía griega", "B. La ley del pecado que opera en los miembros", "C. Los Diez Mandamientos"], "correctFeedbackEs": "Correcto. La ley del pecado en los miembros — el principio del pecado que mora y todavía opera en el cuerpo.", "incorrectFeedbackEs": "Romanos 7:23 — la ley en los miembros, que se rebela contra la ley de la mente. Es el principio del pecado que mora y todavía opera en el cuerpo físico."}, {"text": "11. The Greek word nomos in Romans 7 can refer to:", "options": ["C. Either the Mosaic Law or a fixed principle that operates with regularity", "B. Only Roman civil law", "D. Only ceremonial regulations", "A. Only the Mosaic Law"], "correct": 0, "correctFeedback": "Correct. Nomos means law in the sense of Torah or in the sense of a fixed governing principle.", "incorrectFeedback": "Nomos can mean the Mosaic Law or a fixed principle that always operates a certain way. Romans 7 uses both senses, sometimes in adjacent verses.", "textEs": "11. La palabra griega nomos en Romanos 7 puede referirse a:", "optionsEs": ["C. Sea la ley mosaica o un principio fijo que opera con regularidad", "B. Solo la ley civil romana", "D. Solo regulaciones ceremoniales", "A. Solo la ley mosaica"], "correctFeedbackEs": "Correcto. Nomos significa ley en el sentido de la Torá o en el sentido de un principio gobernante fijo.", "incorrectFeedbackEs": "Nomos puede significar la ley mosaica o un principio fijo que siempre opera de cierta manera. Romanos 7 usa ambos sentidos, a veces en versículos contiguos."}, {"text": "12. In Romans 7:24, Paul cries out:", "options": ["B. Hallelujah!", "A. Glory to God!", "C. Blessed be the Lord!", "D. O wretched man that I am!"], "correct": 3, "correctFeedback": "Correct. The wretched-man cry — the deepest personal lament in the entire letter.", "incorrectFeedback": "Romans 7:24 — 'O wretched man that I am! Who will deliver me from this body of death?' The most personal cry in the entire letter.", "textEs": "12. En Romanos 7:24, Pablo clama:", "optionsEs": ["B. ¡Aleluya!", "A. ¡Gloria a Dios!", "C. ¡Bendito sea el Señor!", "D. ¡Miserable hombre de mí!"], "correctFeedbackEs": "Correcto. El clamor del hombre miserable — el lamento personal más profundo de toda la carta.", "incorrectFeedbackEs": "Romanos 7:24 — '¡Miserable hombre de mí! ¿quién me librará de este cuerpo de muerte?' El clamor más personal de toda la carta."}, {"text": "13. The phrase 'body of death' in Romans 7:24 refers to:", "options": ["B. Physical illness", "C. The death penalty for sin", "D. Pagan funeral rites", "A. The indwelling sin still lodged in the mortal body, felt as a weight that must be dragged"], "correct": 3, "correctFeedback": "Correct. The image evokes a corpse a murderer was chained to as punishment — the indwelling sin feels like that to Paul.", "incorrectFeedback": "'Body of death' draws on the ancient practice of chaining a murderer to a corpse. Paul says the indwelling sin still lodged in his mortal body feels like that — a weight he cannot put down.", "textEs": "13. La frase 'cuerpo de muerte' en Romanos 7:24 se refiere a:", "optionsEs": ["B. La enfermedad física", "C. La pena de muerte por el pecado", "D. Los ritos funerarios paganos", "A. El pecado que mora todavía alojado en el cuerpo mortal, sentido como un peso que hay que arrastrar"], "correctFeedbackEs": "Correcto. La imagen evoca el cadáver al que se encadenaba a un asesino como castigo — así siente Pablo el pecado que mora en él.", "incorrectFeedbackEs": "'Cuerpo de muerte' alude a la antigua práctica de encadenar a un asesino a un cadáver. Pablo dice que el pecado que mora todavía alojado en su cuerpo mortal se siente así — un peso que no puede soltar."}, {"text": "14. The 'wretched man' cry is significant because it is the cry of:", "options": ["C. A philosopher complaining about life", "B. A believer wrestling with indwelling sin — itself evidence that the new nature has taken hold", "D. A Pharisee defending the law", "A. An unbeliever wishing he could be saved"], "correct": 1, "correctFeedback": "Correct. Only the regenerate heart cries out at the gap between wanting and doing. The dead do not lament their corpses; the living do.", "incorrectFeedback": "The wretched-man cry is the cry of a believer. Unbelievers are comfortable in sin; only the regenerate heart cries out at the gap between what it wants and what it does. The lament itself is evidence of life.", "textEs": "14. El clamor del 'hombre miserable' es significativo porque es el clamor de:", "optionsEs": ["C. Un filósofo quejándose de la vida", "B. Un creyente que lucha con el pecado que mora en él — lo cual es evidencia de que la nueva naturaleza ha echado raíz", "D. Un fariseo defendiendo la ley", "A. Un incrédulo que desearía poder ser salvo"], "correctFeedbackEs": "Correcto. Solo el corazón regenerado clama por la brecha entre el querer y el hacer. Los muertos no lamentan sus cadáveres; los vivos sí.", "incorrectFeedbackEs": "El clamor del hombre miserable es el clamor de un creyente. Los incrédulos están cómodos en el pecado; solo el corazón regenerado clama por la brecha entre lo que quiere y lo que hace. El lamento mismo es evidencia de vida."}, {"text": "15. Paul's immediate answer to the wretched-man cry in Romans 7:25 is:", "options": ["A. Try harder next time", "B. Meditation on the law", "D. Despair and silence", "C. Thanks be to God through Jesus Christ our Lord!"], "correct": 3, "correctFeedback": "Correct. The deliverer has been provided. The deliverance is in Christ.", "incorrectFeedback": "Romans 7:25 — 'Thanks be to God through Jesus Christ our Lord!' Paul does not leave us in lament; he immediately names the deliverer.", "textEs": "15. La respuesta inmediata de Pablo al clamor del hombre miserable en Romanos 7:25 es:", "optionsEs": ["A. Esfuérzate más la próxima vez", "B. La meditación en la ley", "D. Desesperación y silencio", "C. ¡Gracias doy a Dios, por Jesucristo Señor nuestro!"], "correctFeedbackEs": "Correcto. El libertador ha sido provisto. La liberación está en Cristo.", "incorrectFeedbackEs": "Romanos 7:25 — '¡Gracias doy a Dios, por Jesucristo Señor nuestro!' Pablo no nos deja en el lamento; de inmediato nombra al libertador."}, {"text": "16. According to Romans 7:25, until the resurrection the believer:", "options": ["A. Has no remaining struggle with sin", "D. Serves God's law with the mind and the law of sin with the flesh", "C. Has become morally perfect already", "B. Has been removed from temptation"], "correct": 1, "correctFeedback": "Correct. The two natures coexist until the resurrection. Paul refuses to pretend the war is over.", "incorrectFeedback": "Romans 7:25 — 'with the mind I myself serve the law of God, but with the flesh the law of sin.' The two natures coexist in the believer until the resurrection finally ends the war.", "textEs": "16. Según Romanos 7:25, hasta la resurrección el creyente:", "optionsEs": ["A. No tiene ninguna lucha restante con el pecado", "D. Sirve con la mente a la ley de Dios, y con la carne a la ley del pecado", "C. Ya ha llegado a ser moralmente perfecto", "B. Ha sido apartado de la tentación"], "correctFeedbackEs": "Correcto. Las dos naturalezas coexisten hasta la resurrección. Pablo se niega a fingir que la guerra terminó.", "incorrectFeedbackEs": "Romanos 7:25 — 'así que, yo mismo con la mente sirvo a la ley de Dios, mas con la carne a la ley del pecado.' Las dos naturalezas coexisten en el creyente hasta que la resurrección por fin termine la guerra."}, {"text": "17. Sin uses the commandment as:", "options": ["B. Protection from temptation", "C. A weapon against God only", "D. A symbol with no real effect", "A. Raw material for further rebellion — the prohibition gives the impulse a target"], "correct": 3, "correctFeedback": "Correct. The 'don't think of an elephant' phenomenon. Sin exploits the commandment to provoke desire.", "incorrectFeedback": "Sin uses the commandment as raw material — tell someone not to do X and the impulse to do X intensifies. The commandment is not the problem; sin's perversity is.", "textEs": "17. El pecado usa el mandamiento como:", "optionsEs": ["B. Protección contra la tentación", "C. Un arma solo contra Dios", "D. Un símbolo sin efecto real", "A. Materia prima para más rebelión — la prohibición le da al impulso un blanco"], "correctFeedbackEs": "Correcto. El fenómeno de 'no pienses en un elefante.' El pecado explota el mandamiento para provocar el deseo.", "incorrectFeedbackEs": "El pecado usa el mandamiento como materia prima — dile a alguien que no haga X y el impulso de hacer X se intensifica. El mandamiento no es el problema; lo es la perversidad del pecado."}, {"text": "18. The relationship between Romans 7 and Romans 8 is:", "options": ["C. Romans 7 cancels Romans 8", "A. Romans 7 contradicts Romans 8", "B. Romans 7 is the necessary doorway into Romans 8 — honest assessment leads to glorious confidence", "D. They address different audiences"], "correct": 2, "correctFeedback": "Correct. The wretched-man cry of Rom 7 opens the way to the no-condemnation triumph of Rom 8.", "incorrectFeedback": "Romans 7 is the honest doorway into Romans 8. The wretched-man cry is answered by 'there is therefore now no condemnation for those who are in Christ Jesus.' Both halves are necessary.", "textEs": "18. La relación entre Romanos 7 y Romanos 8 es:", "optionsEs": ["C. Romanos 7 cancela a Romanos 8", "A. Romanos 7 contradice a Romanos 8", "B. Romanos 7 es la puerta necesaria hacia Romanos 8 — la evaluación honesta lleva a una gloriosa confianza", "D. Tratan audiencias diferentes"], "correctFeedbackEs": "Correcto. El clamor del hombre miserable de Ro 7 abre el camino al triunfo de 'ninguna condenación' de Ro 8.", "incorrectFeedbackEs": "Romanos 7 es la puerta honesta hacia Romanos 8. El clamor del hombre miserable es respondido por 'ninguna condenación hay para los que están en Cristo Jesús.' Ambas mitades son necesarias."}, {"text": "19. Justification, sanctification, and glorification differ in that:", "options": ["D. None of them require Christ", "C. Justification is instantaneous; sanctification is a daily war; glorification ends the war at the resurrection", "B. They all happen simultaneously", "A. They are unrelated"], "correct": 1, "correctFeedback": "Correct. Three tenses of salvation: declared righteous now, being transformed daily, fully glorified at resurrection.", "incorrectFeedback": "Justification is the instantaneous verdict. Sanctification is the daily war against indwelling sin. Glorification is the day at the resurrection when the war ends and the body of death is exchanged for a body of glory.", "textEs": "19. La justificación, la santificación y la glorificación difieren en que:", "optionsEs": ["D. Ninguna requiere a Cristo", "C. La justificación es instantánea; la santificación es una guerra diaria; la glorificación termina la guerra en la resurrección", "B. Todas suceden simultáneamente", "A. No tienen relación"], "correctFeedbackEs": "Correcto. Tres tiempos de la salvación: declarado justo ahora, siendo transformado a diario, plenamente glorificado en la resurrección.", "incorrectFeedbackEs": "La justificación es el veredicto instantáneo. La santificación es la guerra diaria contra el pecado que mora en uno. La glorificación es el día en la resurrección cuando la guerra termina y el cuerpo de muerte se cambia por un cuerpo de gloria."}, {"text": "20. The point of Romans 7 in a single sentence is:", "options": ["A. Christians have no struggle", "D. Sin is more serious than easy religion admits; grace is more powerful than weary religion believes", "C. We should give up trying", "B. The law is bad"], "correct": 1, "correctFeedback": "Correct. Both halves of the sentence — Paul refuses to let his readers off either hook.", "incorrectFeedback": "Romans 7 — sin is more serious than easy religion admits, AND grace is more powerful than weary religion believes. Both halves must be held together; the chapter rejects both presumption and despair.", "textEs": "20. El punto de Romanos 7 en una sola frase es:", "optionsEs": ["A. Los cristianos no tienen lucha", "D. El pecado es más serio de lo que la religión fácil admite; la gracia es más poderosa de lo que la religión cansada cree", "C. Debemos dejar de intentar", "B. La ley es mala"], "correctFeedbackEs": "Correcto. Ambas mitades de la frase — Pablo se niega a soltar a sus lectores de cualquiera de los dos anzuelos.", "incorrectFeedbackEs": "Romanos 7 — el pecado es más serio de lo que la religión fácil admite, Y la gracia es más poderosa de lo que la religión cansada cree. Ambas mitades deben sostenerse juntas; el capítulo rechaza tanto la presunción como la desesperación."}];
+
+// ============================================================
+// SHORT ANSWER QUESTIONS (10) — split kw_en / kw_es
+// ============================================================
+const saQuestions = [
+    { id: "sa_u6_1", textEn: "Summarize Paul's overall argument in Romans 7:7-25 about the law, sin, and the believer's internal struggle.", textEs: "Resuma el argumento general de Pablo en Romanos 7:7-25 sobre la ley, el pecado y la lucha interna del creyente.", kw_en: ["law", "sin", "reveal", "command", "war", "good", "wretch", "Christ"], kw_es: ["ley", "pecado", "revel", "mandam", "guerra", "bien", "miserab", "Cristo"], explanationEn: "Romans 7:7-25 defends the law as holy and good, exposes how sin uses the commandment as raw material for rebellion, and then opens up Paul's personal experience of the war between the regenerate new nature and the residual sinful nature. The chapter climaxes in the wretched-man cry and is immediately answered: 'Thanks be to God through Jesus Christ our Lord.'", explanationEs: "Romanos 7:7-25 defiende la ley como santa y buena, expone cómo el pecado usa el mandamiento como materia prima para la rebelión, y luego abre la experiencia personal de Pablo de la guerra entre la nueva naturaleza regenerada y la naturaleza pecaminosa residual. El capítulo culmina en el clamor del hombre miserable y es inmediatamente respondido: 'Gracias doy a Dios por Jesucristo Señor nuestro.'" },
+    { id: "sa_u6_2", textEn: "Explain Paul's defense of the law in Romans 7:7-12. Why is the law not the problem?", textEs: "Explique la defensa que hace Pablo de la ley en Romanos 7:7-12. ¿Por qué la ley no es el problema?", kw_en: ["holy", "just", "good", "reveal", "flashlight", "diagnos", "covet", "heart"], kw_es: ["santa", "justa", "buena", "revel", "lintern", "diagnos", "codici", "corazón"], explanationEn: "Paul defends the law as holy, just, and good. The law did not create sin; it revealed sin. Like a flashlight in a dark room, the law exposes the hazards already there but is not itself the hazard. Switch off the law and the sin does not disappear — it only becomes invisible. The problem has always been with sinful hearts, never with God's standard.", explanationEs: "Pablo defiende la ley como santa, justa y buena. La ley no creó el pecado; reveló el pecado. Como una linterna en un cuarto oscuro, la ley expone los peligros ya allí pero no es ella misma el peligro. Apague la ley y el pecado no desaparece — solo se vuelve invisible. El problema siempre ha sido con corazones pecaminosos, nunca con el estándar de Dios." },
+    { id: "sa_u6_3", textEn: "How does sin use the commandment, according to Romans 7:8-13?", textEs: "¿Cómo usa el pecado el mandamiento, según Romanos 7:8-13?", kw_en: ["opportun", "command", "prohibit", "target", "perver", "death", "expos", "sin"], kw_es: ["ocasi", "mandam", "prohibi", "blanco", "perver", "muerte", "expon", "pecado"], explanationEn: "Sin uses the commandment as raw material for further rebellion. The prohibition does not create the impulse, but gives the impulse a target — like 'don't think of an elephant.' This is not a flaw in the law; it is a feature of sin. The law that should have led to life becomes, through sin's perversity, the occasion of death — exposing sin as exceedingly sinful.", explanationEs: "El pecado usa el mandamiento como materia prima para mayor rebelión. La prohibición no crea el impulso, pero le da al impulso un blanco — como 'no pienses en elefante.' Esto no es un defecto en la ley; es una característica del pecado. La ley que debió llevar a la vida se vuelve, por la perversidad del pecado, la ocasión de la muerte — exponiendo el pecado como sobremanera pecaminoso." },
+    { id: "sa_u6_4", textEn: "Explain the internal war described in Romans 7:14-20 and the two 'I's at work in the believer.", textEs: "Explique la guerra interna descrita en Romanos 7:14-20 y los dos 'yos' obrando en el creyente.", kw_en: ["new", "good", "sin", "regenerat", "will", "hate", "both", "nature"], kw_es: ["nuevo", "bien", "pecado", "regener", "quier", "aborr", "ambos", "naturalez"], explanationEn: "Two 'I's are at work in the believer. The 'I' that wants the good is the regenerated new self produced by the Spirit. The 'I' that keeps doing the evil is the residual sinful nature still resident in the body. Both are present in the same person — not equals (the new nature is supreme) but the old nature is not yet dead and continues to lobby for its desires until the resurrection.", explanationEs: "Dos 'yos' obran en el creyente. El 'yo' que quiere el bien es el nuevo yo regenerado producido por el Espíritu. El 'yo' que sigue haciendo el mal es la naturaleza pecaminosa residual todavía residente en el cuerpo. Ambos están presentes en la misma persona — no iguales (la nueva naturaleza es suprema) pero la vieja naturaleza aún no está muerta y sigue cabildeando por sus deseos hasta la resurrección." },
+    { id: "sa_u6_5", textEn: "How does the quit-smoking analogy illuminate Paul's experience in Romans 7?", textEs: "¿Cómo ilumina la analogía de dejar de fumar la experiencia de Pablo en Romanos 7?", kw_en: ["pack", "gas", "want", "anyway", "desire", "habit", "same", "believ"], kw_es: ["paquet", "gasolin", "quer", "modos", "deseo", "hábito", "misma", "creyent"], explanationEn: "The quit-smoking analogy captures Paul's experience exactly: a man decides he is finished with cigarettes, throws away the pack, and finds himself at the gas station three hours later buying another, hating himself the whole drive home. The wanting-to-stop and the doing-it-anyway are both real and live in the same person. The new desire is genuine; the old habit is genuine. That is Romans 7.", explanationEs: "La analogía de dejar de fumar captura exactamente la experiencia de Pablo: un hombre decide que ha terminado con los cigarrillos, tira el paquete, y se encuentra en la gasolinera tres horas después comprando otro, odiándose a sí mismo todo el camino a casa. El querer-parar y el hacerlo-de-todos-modos son ambos reales y viven en la misma persona. El nuevo deseo es genuino; el viejo hábito es genuino. Eso es Romanos 7." },
+    { id: "sa_u6_6", textEn: "Why is the wretched-man cry of Romans 7:24 the cry of a believer, not an unbeliever?", textEs: "¿Por qué es el clamor del hombre miserable de Romanos 7:24 el clamor de un creyente, no de un incrédulo?", kw_en: ["unbeliev", "comfort", "regener", "lament", "life", "longing", "deliver", "sensit"], kw_es: ["incrédul", "cómod", "regener", "lament", "vida", "anhel", "liber", "sensib"], explanationEn: "Unbelievers are not wretched over sin; they are comfortable in it. Only the regenerate heart cries out at the gap between what it wants to do and what it actually does. The dead do not lament their corpses; the living do. The wretched-man cry itself is evidence that the new nature has taken hold — the longing for deliverance proves spiritual life.", explanationEs: "Los incrédulos no son miserables por el pecado; están cómodos en él. Solo el corazón regenerado clama por la brecha entre lo que quiere hacer y lo que realmente hace. Los muertos no lamentan sus cadáveres; los vivos sí. El clamor del hombre miserable mismo es evidencia de que la nueva naturaleza ha tomado posesión — el anhelo de liberación prueba la vida espiritual." },
+    { id: "sa_u6_7", textEn: "Explain the 'body of death' image in Romans 7:24.", textEs: "Explique la imagen del 'cuerpo de muerte' en Romanos 7:24.", kw_en: ["corpse", "chain", "murder", "drag", "indwell", "weight", "old", "resurrect"], kw_es: ["cadáver", "encaden", "asesin", "arrastr", "morador", "peso", "vieja", "resurrecci"], explanationEn: "In the ancient world, a murderer was sometimes chained to the corpse of his victim as punishment — forced to drag the dead body until he died himself. Paul says the indwelling sin still lodged in his mortal body feels like that: a corpse he must drag, a weight he cannot put down. The old nature is not yet dead, and it continues to fight until the resurrection.", explanationEs: "En el mundo antiguo, un asesino a veces era encadenado al cadáver de su víctima como castigo — obligado a arrastrar el cuerpo muerto hasta que él mismo muriera. Pablo dice que el pecado morador todavía alojado en su cuerpo mortal se siente así: un cadáver que debe arrastrar, un peso que no puede dejar. La vieja naturaleza aún no está muerta y sigue luchando hasta la resurrección." },
+    { id: "sa_u6_8", textEn: "How does Romans 7:25 answer the wretched-man cry?", textEs: "¿Cómo responde Romanos 7:25 al clamor del hombre miserable?", kw_en: ["thanks", "Jesus", "Lord", "deliver", "name", "victor", "resurrect", "provid"], kw_es: ["gracias", "Jesucri", "Señor", "liber", "nombr", "victor", "resurrecci", "provis"], explanationEn: "Paul answers immediately: 'Thanks be to God through Jesus Christ our Lord!' The deliverance has been provided and the deliverer is named. The full experience of that deliverance — complete victory — awaits the resurrection. But the deliverer is at work now, and the assurance that He has secured the final victory is enough to enable the believer to keep fighting today.", explanationEs: "Pablo responde inmediatamente: '¡Gracias doy a Dios por Jesucristo Señor nuestro!' La liberación ha sido provista y el libertador es nombrado. La experiencia completa de esa liberación — la victoria completa — espera la resurrección. Pero el libertador está obrando ahora, y la seguridad de que Él ha asegurado la victoria final es suficiente para capacitar al creyente para seguir luchando hoy." },
+    { id: "sa_u6_9", textEn: "How does Romans 7 relate to Romans 8?", textEs: "¿Cómo se relaciona Romanos 7 con Romanos 8?", kw_en: ["honest", "condemn", "indwell", "Spirit", "doorway", "both", "presumpt", "despair"], kw_es: ["honest", "conden", "morador", "Espíritu", "puerta", "ambas", "presunci", "desesper"], explanationEn: "Romans 7's honest assessment of indwelling sin is the necessary doorway into Romans 8's glorious confidence. The wretched-man cry is answered by 'there is therefore now no condemnation for those in Christ Jesus.' Anyone who has not felt the wretched-man cry has not understood the depth of the war within; anyone who feels it but stops there has not yet heard the answer. Paul refuses to let his readers off either hook.", explanationEs: "La evaluación honesta de Romanos 7 sobre el pecado morador es la puerta necesaria a la gloriosa confianza de Romanos 8. El clamor del hombre miserable es respondido por 'ahora, pues, ninguna condenación hay para los que están en Cristo Jesús.' Cualquiera que no haya sentido el clamor del hombre miserable no ha entendido la profundidad de la guerra interna; cualquiera que lo sienta pero se detenga allí aún no ha escuchado la respuesta. Pablo se niega a dejar a sus lectores escapar de ninguno de los dos ganchos." },
+    { id: "sa_u6_10", textEn: "What is the difference between justification, sanctification, and glorification?", textEs: "¿Cuál es la diferencia entre justificación, santificación y glorificación?", kw_en: ["justif", "sanctif", "glorif", "resurrect", "tense", "declar", "transform", "God"], kw_es: ["justif", "santif", "glorif", "resurrecci", "tiempo", "declar", "transform", "Dios"], explanationEn: "Justification is the instantaneous verdict — the believer is declared righteous once and for all at conversion. Sanctification is the ongoing process — the daily war against indwelling sin, the gradual conforming to the image of Christ. Glorification is the future completion — at the resurrection the body of death is exchanged for a body of glory, and the war ends forever. All three are the work of God.", explanationEs: "La justificación es el veredicto instantáneo — el creyente es declarado justo de una vez para siempre en la conversión. La santificación es el proceso continuo — la guerra diaria contra el pecado morador, la conformación gradual a la imagen de Cristo. La glorificación es la culminación futura — en la resurrección el cuerpo de muerte es cambiado por un cuerpo de gloria, y la guerra termina para siempre. Las tres son obra de Dios." }
+];
+
+// ============================================================
+// GLOBAL STATE
+// ============================================================
+let studentTrack = "cert";
+let studentName = "";
+let lockoutEnd = null;
+let examPassed = false;
+const PASS_MC = 18;
+const PASS_SA = 9;
+
+function getStorageKey(key) { return `cts_${COURSE_PREFIX}_${key}`; }
+
+function loadState() {
+    const student = lsGet("cts_student");
+    if (student) {
+        try {
+            const s = JSON.parse(student);
+            studentName = s.name || "";
+            studentTrack = s.track || "cert";
+        } catch(e) {}
+    }
+    const trackOverride = lsGet("cts_track");
+    if (trackOverride && ["cert","thm","mdiv"].includes(trackOverride)) studentTrack = trackOverride;
+
+    const lock = lsGet(getStorageKey(`unit${UNIT}_lockout`));
+    if (lock && parseInt(lock) > Date.now()) lockoutEnd = parseInt(lock);
+
+    const passedFlag = lsGet(getStorageKey(`unit${UNIT}_passed`));
+    if (passedFlag === "true") examPassed = true;
+
+    const lang = lsGet(getStorageKey(`unit${UNIT}_lang`)) || "en";
+    document.body.className = `lang-${lang}`;
+
+    updateTrackDisplay();
+    handleRegistrationCard();
+}
+
+function handleRegistrationCard() {
+    const regSection = document.getElementById("registrationSection");
+    if (SHOW_REGISTRATION_CARD && !lsGet("cts_student")) {
+        regSection.style.display = "block";
+    } else {
+        regSection.style.display = "none";
+    }
+}
+
+function updateTrackDisplay() {
+    const trackMap = { cert: "Certificate", thm: "Th.M.", mdiv: "M.Div." };
+    document.getElementById("trackIndicator").innerHTML = `<span class="lang-en">Track: ${trackMap[studentTrack]}</span><span class="lang-es">Vía: ${trackMap[studentTrack]}</span>`;
+}
+
+function saveLanguage(lang) {
+    lsSet(getStorageKey(`unit${UNIT}_lang`), lang);
+    document.body.className = `lang-${lang}`;
+}
+
+function submitRegistration() {
+    const name = document.getElementById("regName").value.trim();
+    const trackEl = document.querySelector('input[name="regTrack"]:checked');
+    if (!name) {
+        const isEs = document.body.className.includes("lang-es");
+        alert(isEs ? "Por favor ingrese su nombre." : "Please enter your name.");
+        return;
+    }
+    const track = trackEl ? trackEl.value : "cert";
+    lsSet("cts_student", JSON.stringify({ name, track }));
+    lsSet("cts_track", track);
+    studentName = name;
+    studentTrack = track;
+    updateTrackDisplay();
+    document.getElementById("registrationSection").style.display = "none";
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const mcContainer = document.getElementById("mcQuestions");
+    mcContainer.innerHTML = "";
+    mcQuestions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.text}</span><span class="lang-es">${q.textEs}</span></div>
+            <div class="options" id="mc-${idx}-opts">
+                ${q.options.map((opt, optIdx) => `<label><input type="radio" name="mc${idx}" value="${optIdx}"> <span class="lang-en">${opt}</span><span class="lang-es">${q.optionsEs[optIdx]}</span></label>`).join('')}
+            </div>
+            <div class="feedback" id="mc-${idx}-fb"></div>
+        `;
+        mcContainer.appendChild(card);
+    });
+
+    const saContainer = document.getElementById("saQuestions");
+    saContainer.innerHTML = "";
+    saQuestions.forEach((q, idx) => {
+        const isCert = studentTrack === "cert";
+        const card = document.createElement("div");
+        card.className = "question-card essay-question";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${mcQuestions.length + idx + 1}. ${q.textEn}</span><span class="lang-es">${mcQuestions.length + idx + 1}. ${q.textEs}</span></div>
+            <textarea rows="3" id="sa-${idx}" placeholder='${isCert ? "Optional for Certificate track / Opcional para Certificado" : "Type your answer here... / Escriba su respuesta aquí..."}' ></textarea>
+            <button type="button" class="check-kw-btn" data-sa="${idx}"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>
+            <div class="feedback" id="sa-${idx}-fb"></div>
+        `;
+        saContainer.appendChild(card);
+    });
+
+    attachAutoScore();
+    attachSAAutoSave();
+    restoreAnswers();
+}
+
+function attachAutoScore() {
+    mcQuestions.forEach((q, idx) => {
+        const radios = document.querySelectorAll(`input[name="mc${idx}"]`);
+        radios.forEach(r => {
+            r.addEventListener("change", () => {
+                const selected = document.querySelector(`input[name="mc${idx}"]:checked`);
+                const fbDiv = document.getElementById(`mc-${idx}-fb`);
+                if (selected) {
+                    lsSet(getStorageKey(`unit${UNIT}_mc${idx}`), selected.value);
+                    const isCorr = parseInt(selected.value) === q.correct;
+                    if (fbDiv) {
+                        fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+                        fbDiv.innerHTML = isCorr ? q.correctFeedback : q.incorrectFeedback;
+                    }
+                    document.querySelectorAll(`input[name="mc${idx}"]`).forEach(x => { x.disabled = true; });
+                }
+            });
+        });
+    });
+}
+
+function attachSAAutoSave() {
+    saQuestions.forEach((q, idx) => {
+        const ta = document.getElementById(`sa-${idx}`);
+        if (ta) {
+            ta.addEventListener("input", () => {
+                lsSet(getStorageKey(`unit${UNIT}_sa${idx}`), ta.value);
+            });
+        }
+    });
+    document.querySelectorAll(".check-kw-btn").forEach(function(btn){
+        btn.addEventListener("click", function(){ checkSA(parseInt(btn.getAttribute("data-sa"), 10)); });
+    });
+}
+
+function restoreAnswers() {
+    mcQuestions.forEach((q, idx) => {
+        const saved = lsGet(getStorageKey(`unit${UNIT}_mc${idx}`));
+        if (saved !== null) {
+            const radio = document.querySelector(`input[name="mc${idx}"][value="${saved}"]`);
+            if (radio) {
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change'));
+            }
+        }
+    });
+    saQuestions.forEach((q, idx) => {
+        const saved = lsGet(getStorageKey(`unit${UNIT}_sa${idx}`));
+        if (saved !== null) {
+            const ta = document.getElementById(`sa-${idx}`);
+            if (ta) ta.value = saved;
+        }
+    });
+}
+
+
+// --- Q24 smart keyword matcher (word-boundary regex). Added by fairness pass. ---
+function kwHit(answer, kw) {
+    if (!kw) return false;
+    var a = (answer || "").toLowerCase();
+    var k = kw.toLowerCase().trim();
+    if (!k) return false;
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    // unicode-aware-ish boundary: not preceded/followed by a letter or digit
+    var L = "0-9a-zA-Záéíóúüñ";
+    var re;
+    if (k.length <= 4) {
+        re = new RegExp("(?:^|[^" + L + "])" + esc + "(?![" + L + "])");
+    } else {
+        re = new RegExp("(?:^|[^" + L + "])" + esc);
+    }
+    return re.test(a);
+}
+
+
+function checkSA(idx) {
+    var ta = document.getElementById("sa-" + idx);
+    var fbDiv = document.getElementById("sa-" + idx + "-fb");
+    if (!ta || !fbDiv) return;
+    var lang = document.body.className.replace("lang-", "");
+    var isEs = lang === "es";
+    var answer = (ta.value || "").trim();
+    if (!answer) {
+        fbDiv.className = "feedback";
+        fbDiv.innerHTML = isEs ? "Escriba su respuesta primero, luego verifique." : "Write your answer first, then check.";
+        return;
+    }
+    var keywords = isEs ? saQuestions[idx].kw_es : saQuestions[idx].kw_en;
+    if (lang === "both") keywords = [].concat(saQuestions[idx].kw_en, saQuestions[idx].kw_es);
+    var hits = keywords.filter(function(kw){ return kwHit(answer, kw); }).length;
+    var passed = hits >= 3 && answer.length >= 100;
+    fbDiv.className = "feedback " + (passed ? "correct" : "incorrect");
+    var _model = isEs ? saQuestions[idx].explanationEs : saQuestions[idx].explanationEn;
+    var _hdr = isEs ? "Respuesta modelo — estúdiela" : "Model answer — study this";
+    var _verdict = passed
+        ? (isEs ? "Suficiente." : "Sufficient.")
+        : (isEs ? ("Insuficiente — necesita ≥3 palabras clave y ≥100 caracteres. (" + hits + "/3)") : ("Insufficient — need ≥3 keywords and ≥100 chars. (" + hits + "/3)"));
+    fbDiv.innerHTML = "<div>" + _verdict + "</div><div class=\"modelbox\"><strong>" + _hdr + ":</strong><br>" + _model + "</div>";
+}
+
+function gradeExam() {
+    if (lockoutEnd && lockoutEnd > Date.now()) {
+        const min = Math.ceil((lockoutEnd - Date.now()) / 60000);
+        alert(`Lockout active. Please wait ${min} minutes. / Bloqueo activo. Espere ${min} minutos.`);
+        return false;
+    }
+
+    let mcCorrect = 0;
+    for (let i = 0; i < mcQuestions.length; i++) {
+        const selected = document.querySelector(`input[name="mc${i}"]:checked`);
+        const fbDiv = document.getElementById(`mc-${i}-fb`);
+        if (selected) {
+            const isCorr = parseInt(selected.value) === mcQuestions[i].correct;
+            if (isCorr) mcCorrect++;
+            fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+            fbDiv.innerHTML = isCorr ? ('<span class="lang-en">'+mcQuestions[i].correctFeedback+'</span><span class="lang-es">'+mcQuestions[i].correctFeedbackEs+'</span>') : ('<span class="lang-en">'+mcQuestions[i].incorrectFeedback+'</span><span class="lang-es">'+mcQuestions[i].incorrectFeedbackEs+'</span>');
+        } else {
+            fbDiv.className = "feedback incorrect";
+            fbDiv.innerHTML = "No answer selected. / No seleccionó respuesta.";
+        }
+    }
+
+    let saPass = true;
+    let saCorrectCount = 0;
+    if (studentTrack !== "cert") {
+        for (let i = 0; i < saQuestions.length; i++) {
+            const answer = document.getElementById(`sa-${i}`).value.trim();
+            const lang = document.body.className.replace("lang-", "");
+            let keywords = lang === "es" ? saQuestions[i].kw_es : saQuestions[i].kw_en;
+            if (lang === "both") keywords = [...saQuestions[i].kw_en, ...saQuestions[i].kw_es];
+            const hits = keywords.filter(kw => kwHit(answer, kw)).length;
+            const passed = hits >= 3 && answer.length >= 100;
+            if (passed) saCorrectCount++;
+            const fbDiv = document.getElementById(`sa-${i}-fb`);
+            fbDiv.className = `feedback ${passed ? "correct" : "incorrect"}`;
+            const _model = (lang === "es" ? saQuestions[i].explanationEs : saQuestions[i].explanationEn);
+            const _hdr = (lang === "es" ? "Respuesta modelo — estúdiela" : "Model answer — study this");
+            const _verdict = passed ? (lang === "es" ? "Suficiente." : "Sufficient.") : (lang === "es" ? "Insuficiente — necesita ≥3 palabras clave y ≥100 caracteres." : "Insufficient — need ≥3 keywords and ≥100 chars.");
+            fbDiv.innerHTML = `<div>${_verdict}</div><div class="modelbox"><strong>${_hdr}:</strong><br>${_model}</div>`;
+        }
+        saPass = saCorrectCount >= PASS_SA;
+    }
+
+    const mcPass = mcCorrect >= PASS_MC;
+    const overallPass = studentTrack === "cert" ? mcPass : (mcPass && saPass);
+
+    if (overallPass) {
+        lsSet(getStorageKey(`unit${UNIT}_passed`), "true");
+        examPassed = true;
+        const msg = document.body.className.includes("lang-es") ? `¡Aprobado! Redirigiendo a la siguiente unidad...` : `Passed! Redirecting to the next unit...`;
+        alert(msg);
+    } else {
+        const lockoutTime = Date.now() + 15 * 60 * 1000;
+        lsSet(getStorageKey(`unit${UNIT}_lockout`), lockoutTime);
+        lockoutEnd = lockoutTime;
+        showLockoutTimer();
+        const failMsg = document.body.className.includes("lang-es") ? `No aprobado. Bloqueo de 15 minutos iniciado. (OM: ${mcCorrect}/20${studentTrack !== "cert" ? `, RC: ${saCorrectCount}/10` : ""})` : `Failed. 15-minute lockout started. (MC: ${mcCorrect}/20${studentTrack !== "cert" ? `, SA: ${saCorrectCount}/10` : ""})`;
+        alert(failMsg);
+    }
+    return overallPass;
+}
+
+function showLockoutTimer() {
+    const timerDiv = document.getElementById("lockoutTimer");
+    if (!lockoutEnd || lockoutEnd <= Date.now()) { timerDiv.style.display = "none"; return; }
+    timerDiv.style.display = "block";
+    const update = () => {
+        const remaining = Math.max(0, Math.ceil((lockoutEnd - Date.now()) / 1000));
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        timerDiv.innerHTML = `<span class="lang-en">Lockout: ${minutes}:${seconds.toString().padStart(2,'0')} remaining</span><span class="lang-es">Bloqueo: ${minutes}:${seconds.toString().padStart(2,'0')} restantes</span>`;
+        if (remaining <= 0) { timerDiv.style.display = "none"; lockoutEnd = null; }
+        else setTimeout(update, 1000);
+    };
+    update();
+}
+
+function resetExam() {
+    const isEs = document.body.className.includes("lang-es");
+    const msg = isEs ? "¿Reiniciar todas las respuestas? Esto no se puede deshacer." : "Reset all answers? This cannot be undone.";
+    if (confirm(msg)) {
+        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        document.querySelectorAll('textarea').forEach(t => t.value = "");
+        document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+        mcQuestions.forEach((q, idx) => lsDel(getStorageKey(`unit${UNIT}_mc${idx}`)));
+        saQuestions.forEach((q, idx) => lsDel(getStorageKey(`unit${UNIT}_sa${idx}`)));
+    }
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => saveLanguage(btn.dataset.lang));
+});
+document.getElementById("submitBtn").addEventListener("click", gradeExam);
+document.getElementById("resetBtn").addEventListener("click", resetExam);
+document.getElementById("regSubmit").addEventListener("click", submitRegistration);
+
+loadState();
+renderQuestions();
+if (lockoutEnd) showLockoutTimer();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSRomansReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

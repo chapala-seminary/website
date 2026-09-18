@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Church Growth — Unit 11: Discipleship</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 12 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📈 Church Growth — Unit 11: Discipleship</span><span class="lang-es">📈 Crecimiento de la Iglesia — Unidad 11: El Discipulado</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Go therefore and make disciples of all the nations." — Matthew 28:19 (NKJV)</span><span class="lang-es">"Por tanto, id, y haced discípulos a todas las naciones." — Mateo 28:19 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Church Growth course. Please register before beginning Unit 11.</span><span class="lang-es">Bienvenido al curso Crecimiento de la Iglesia. Por favor registrese antes de comenzar la Unidad 11.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<p>We come now to the unit the whole course has been leaning toward. We
+have spoken of gathering people — through worship, through the screen,
+through the small group — but gathering was never the goal. The Lord did
+not commission us to make decisions, to fill rooms, or to produce casual
+believers and church attenders. He commissioned us to <em>make
+disciples</em> (Matthew 28:19). That one word governs everything. A
+church may gather a great crowd and still fail its commission utterly,
+if the crowd never becomes disciples. And here, in truth, is the root of
+the dechurching we have traced: we became expert at gathering attenders
+and never made them disciples, and an attender, untaught and unrooted,
+drifts away at the first change of weather. The cure for the open back
+door is not a better front door. It is discipleship.</p>
+<p>So we must learn from the Master Discipler Himself.</p>
+<p><strong>How Jesus made disciples.</strong> The first thing to see is
+the most easily missed: He called the Twelve, Mark says, <em>that they
+might be with Him</em> (Mark 3:14). Before they were sent, before they
+preached or healed, they were simply <em>with</em> Him. Discipleship
+began not with a curriculum but with a Presence — three years of shared
+road and shared table, of watching how He prayed and how He treated a
+leper and how He answered a trap. We have too often reduced discipleship
+to a class and a workbook; He made it a life lived alongside a life.</p>
+<p>See, too, that He went <em>deep</em> rather than wide. He preached to
+thousands, but He poured Himself into twelve, and within the twelve into
+three. He was building not an audience but a nucleus, knowing that a few
+thoroughly formed would outlast a multitude lightly touched. He taught
+in the teachable moment — a coin, a fig tree, a child set in the midst —
+and He taught by <em>question</em> as much as by lecture: “Who do you
+say that I am?” He did not hand them conclusions; He drew the truth up
+out of them. And He taught by <em>sending:</em> He showed them, then
+sent them out two by two to do it themselves, then gathered them back to
+reckon with what had happened. Show, send, debrief — that is how a skill
+becomes a life.</p>
+<p>And He never hid the <em>cost.</em> “If anyone would come after me,
+let him deny himself and take up his cross and follow me” (Luke 9:23).
+There was nothing casual in His call; He spoke of a yoke, a cross, a
+narrow gate, and He let the crowds thin when the saying grew hard. The
+aim of it all was <em>transformation</em> — “a disciple is not above his
+teacher, but everyone when he is fully trained will be like his teacher”
+(Luke 6:40) — Christ formed in a person until the life begins to
+resemble the One who made it. And then, the last move and the whole
+point: He made disciples who would <em>make disciples.</em> “Go and make
+disciples,” He said, and the chain has run unbroken ever since — what He
+poured into twelve, they poured into others, who taught others still (2
+Timothy 2:2). Discipleship that does not reproduce is not yet finished
+discipleship.</p>
+<p><strong>The most effective way to do it.</strong> A student may grant
+all of this and still ask the honest question: <em>so what do I actually
+do Monday morning?</em> The answer, by both the example of the Master
+and the witness of our own day, is simpler than our programs have led us
+to believe. The most effective discipleship is <em>relational, and it
+reproduces.</em> It is not first a class, a curriculum, or a screen; it
+is one maturing believer walking life beside a few others, with the open
+intention that those few will soon go and do the same. A life beside a
+life — that is the method that outperforms all the rest.</p>
+<p>The proven shape is a <em>small, reproducing group</em> — not merely
+one-on-one, but three or four together. Larger than a pair, so it does
+not collapse when one person is away and so it already feels like a
+little body; small enough that no one can hide. Such a group runs on
+four plain engines. The <em>Word,</em> read and obeyed together.
+<em>Accountability</em> honest enough to ask, “How is it really with
+your soul?” <em>Prayer,</em> for and with one another. And
+<em>multiplication</em> — the settled expectation that within a year or
+two each person will start a group of his own. That fourth engine is the
+one we always omit and the one that changes everything; without it a
+group becomes a cozy huddle that warms a few and reaches no one. With
+it, the chain runs on as the Lord designed: He poured into the Twelve,
+who poured into others, who taught others still. “What you have heard
+from me… entrust to faithful men who will be able to teach others also”
+(2 Timothy 2:2) — four generations of disciples in a single verse.</p>
+<p>Hear clearly what this does and does not say. The classes, the
+foundations course, the online teaching, the Sunday sermon — these are
+good and useful, but they are <em>scaffolding,</em> not the building.
+They feed the relationship; they cannot replace it. The great mistake of
+the last generation was to mistake the scaffolding for the house — to
+run the classes and fill the rooms and assume that disciples were being
+made. They were not. Disciples are made the way they have always been
+made, the way the Lord first made them: <em>find a few, walk with them,
+and send them to find a few of their own.</em></p>
+<p><strong>Grounding a believer in the faith and into a church.</strong>
+Bring that down to the new believer in your own congregation, the one
+who has just trusted Christ — and who will, statistically, drift away
+within a year or two unless something holds him. Our task is to
+<em>ground</em> him, and the word has two directions. He must be rooted
+<em>in the faith</em> — the vertical — and rooted <em>into the
+church</em> — the horizontal. Neglect either and he will not stand.</p>
+<p>Rooted <em>in the faith</em> means he is no longer left to fend for
+himself the moment he believes. He is given the next step, and then the
+next: the Scriptures, until a man who may never have owned a Bible
+learns to find his way through it and feed himself; prayer, taught and
+modeled until it becomes his own; the basic doctrines, so his faith has
+bones and not only feelings; and the long, patient disciplines that, as
+the old word has it, <em>form</em> a soul into the likeness of Christ
+rather than merely informing a mind about Him. Best of all, and most
+like the Master, this happens not chiefly in a classroom but in a
+relationship — one older believer walking life beside one younger, the
+with-Him principle carried on in us.</p>
+<p>Rooted <em>into the church</em> means he is brought into the body
+until he genuinely <em>belongs</em> — and here, by God’s design, the
+very machinery of this course becomes the machinery of discipleship. He
+needs <em>friends,</em> and not a few; he needs to be <em>missed</em>
+when he is absent and reached when he slips; he needs a <em>small
+circle</em> where life is actually shared; he needs a <em>task,</em> a
+place to use his gift so that he knows he is not a spectator but a
+member with work to do. We will say in the next unit that a new member
+who does not quickly make friends and find a role will leave — and that
+is simply discipleship described from the back door. Membership, rightly
+understood, is not consumer access to religious goods; it is covenant, a
+joining of oneself to a people. The same enrolling, missing, contacting,
+gift-deploying labor that grows a church is exactly what roots a
+disciple — which is why discipleship is not one program among the
+church’s many, but the thread running through them all.</p>
+<p>So weigh the two side by side, the casual believer and the disciple,
+for the difference is the difference between a church that leaks and a
+church that holds. The casual believer <em>consumes</em> — he attends
+when convenient, watches the screen, takes what he likes, and drifts
+when life shifts, and no one is the wiser. The disciple is <em>formed,
+belongs, serves, and reproduces</em> — he is known and knows others, he
+has a place and a task, he is being slowly changed into the image of
+Christ, and in time he becomes the one walking beside the next new
+believer. The first is the open back door we keep trying to close with
+better programs. The second <em>is</em> the door closed, from the
+inside, by love.</p>
+<p>This is the unit toward which the whole course has been moving, and
+it can be said in a single line. The goal of church growth was never the
+crowd. It was the disciple. <em>Make disciples</em> — not casual
+believers, not mere attenders — and the crowd, the health, and the
+staying power will follow; aim at the crowd alone, and you will lose
+even that.</p>
+<h2 id="where-we-are-now-2026">Where We Are Now (2026)</h2>
+<p>If there is one word the whole movement has circled back to in these
+last years, it is this one. After a long season of counting decisions
+and attendance, the church has been driven — by the dechurching, by its
+own hard self-examination — to remember that the Commission said
+<em>make disciples,</em> and that we had been making something else. The
+recovery of discipleship and spiritual formation is the most hopeful
+turn of our moment, and it is, at bottom, a return to the very thing the
+Master did at the beginning.</p>
+<p>The tools have multiplied, and rightly used they are a gift: a church
+can now track every new believer’s next step so that no one quietly
+falls through; it can carry teaching to a phone in a pocket; it can
+connect a mentor and a young believer across any distance. But here the
+warning of the digital unit returns with full force. Information is not
+formation. A library of online teaching can fill a head while leaving a
+life untouched and a soul un-companioned, and a disciple has never yet
+been mass-produced through a screen. The screen can deliver the
+<em>content;</em> it cannot be the <em>community,</em> and it was always
+in the community — with Him, and with one another — that disciples were
+made. Use every new tool to serve the ancient pattern; never imagine the
+tool can replace it.</p>
+<p>For the pattern itself has not aged a day. A new generation, weary of
+spectacle and hungry for what is real, is quietly asking for exactly
+what Jesus offered the Twelve: not a better production, but a Presence;
+not more content, but a life to walk beside. The church that will grow
+and <em>hold</em> in this dechurching age is not the one with the
+brightest stage or the largest screen. It is the one that does the slow,
+unglamorous, deeply personal work the Master did on the roads of Galilee
+— being with people, and forming them, one life beside another, into
+disciples who will go and do the same.</p>
+
+</div>
+<div class="lang-es">
+
+<p>Llegamos ahora a la unidad hacia la cual todo el curso se ha estado inclinando. Hemos hablado de reunir a la gente — por la adoración, por la pantalla, por el grupo pequeño — pero reunir nunca fue la meta. El Señor no nos comisionó a hacer decisiones, a llenar salones, ni a producir creyentes casuales y asistentes. Nos comisionó a <em>hacer discípulos</em> (Mateo 28:19). Esa sola palabra gobierna todo. Una iglesia puede reunir una gran multitud y aun fallar su comisión por completo, si la multitud nunca se vuelve discípulos. Y aquí, en verdad, está la raíz del abandono que hemos trazado: nos volvimos expertos en reunir asistentes y nunca los hicimos discípulos, y un asistente, sin enseñanza y sin raíces, se aleja al primer cambio de clima. La cura para la puerta de atrás abierta no es una mejor puerta de entrada. Es el discipulado.</p>
+
+<p>Así que debemos aprender del Maestro Discipulador mismo.</p>
+
+<p><strong>Como Jesús hizo discípulos.</strong> Lo primero que hay que ver es lo que más fácil se pasa por alto: llamó a los Doce, dice Marcos, <em>para que estuviesen con Él</em> (Marcos 3:14). Antes de ser enviados, antes de predicar o sanar, sencillamente estaban <em>con</em> El. El discipulado comenzó no con un currículo sino con una Presencia — tres años de camino compartido y mesa compartida, de observar como oraba y como trataba a un leproso y como respondía a una trampa. Con demasiada frecuencia hemos reducido el discipulado a una clase y un cuaderno; El lo hizo una vida vivida junto a una vida.</p>
+
+<p>Vea, también, que fue a lo <em>hondo</em> en vez de a lo ancho. Predicó a miles, pero se vertió en doce, y dentro de los doce en tres. Estaba construyendo no un público sino un núcleo, sabiendo que unos pocos formados a fondo durarían más que una multitud tocada a la ligera. Enseñó en el momento enseñable — una moneda, una higuera, un niño puesto en medio — y enseñó por <em>pregunta</em> tanto como por conferencia: "¿Quién decís que soy yo?" No les entregó conclusiones; sacó la verdad de dentro de ellos. Y enseñó <em>enviando:</em> les mostró, luego los envió de dos en dos a hacerlo ellos mismos, luego los reunió de vuelta para dar cuenta de lo que había pasado. Mostrar, enviar, evaluar — así es como una destreza se vuelve una vida.</p>
+
+<p>Y nunca escondió el <em>costo.</em> "Si alguno quiere venir en pos de mí, niéguese a sí mismo, y tome su cruz, y sígame" (Lucas 9:23). No había nada casual en Su llamado; habló de un yugo, una cruz, una puerta estrecha, y dejó menguar a las multitudes cuando el dicho se hizo duro. La meta de todo era la <em>transformación</em> — "el discípulo no es superior a su maestro; más todo el que fuere perfeccionado, será como su maestro" (Lucas 6:40) — Cristo formado en una persona hasta que la vida comienza a parecerse a Aquel que la hizo. Y luego, el último movimiento y el punto entero: hizo discípulos que <em>harían discípulos.</em> "Id y haced discípulos," dijo, y la cadena ha corrido sin romperse desde entonces — lo que vertió en doce, ellos lo vertieron en otros, que enseñaron a otros aun (2 Timoteo 2:2). El discipulado que no se reproduce no es aun discipulado terminado.</p>
+
+<p><strong>La manera más eficaz de hacerlo.</strong> Un estudiante puede conceder todo esto y aún hacer la pregunta honesta: <em>¿entonces qué hago de veras el lunes por la mañana?</em> La respuesta, por el ejemplo del Maestro y el testimonio de nuestros propios días, es más simple de lo que nuestros programas nos han hecho creer. El discipulado más eficaz es <em>relacional, y se reproduce.</em> No es primero una clase, un currículo o una pantalla; es un creyente que madura caminando la vida junto a unos pocos otros, con la intención abierta de que esos pocos pronto vayan y hagan lo mismo. Una vida junto a una vida — ese es el método que supera a todos los demás.</p>
+
+<p>La forma probada es un <em>grupo pequeño y reproductor</em> — no meramente uno a uno, sino tres o cuatro juntos. Mayor que una pareja, para que no colapse cuando una persona falta y para que ya se sienta como un pequeño cuerpo; lo bastante pequeño para que nadie pueda esconderse. Tal grupo corre sobre cuatro motores llanos. La <em>Palabra,</em> leída y obedecida juntos. La <em>rendición de cuentas</em> lo bastante honesta para preguntar: "¿Cómo está de veras tu alma?" La <em>oración,</em> por y con unos y otros. Y la <em>multiplicación</em> — la expectativa asentada de que dentro de un año o dos cada persona iniciará un grupo propio. Ese cuarto motor es el que siempre omitimos y el que lo cambia todo; sin él un grupo se vuelve un corro acogedor que calienta a unos pocos y no alcanza a nadie. Con el, la cadena sigue corriendo como el Señor la diseñó: vertió en los Doce, que vertieron en otros, que enseñaron a otros aun. "Lo que has oído de mí... esto encarga a hombres fieles que sean idóneos para enseñar también a otros" (2 Timoteo 2:2) — cuatro generaciones de discípulos en un solo versículo.</p>
+
+<p>Oiga con claridad lo que esto dice y no dice. Las clases, el curso de fundamentos, la enseñanza en línea, el sermón dominical — son buenos y útiles, pero son <em>andamio,</em> no el edificio. Alimentan la relación; no pueden reemplazarla. El gran error de la última generación fue confundir el andamio con la casa — correr las clases y llenar los salones y suponer que se estaban haciendo discípulos. No se estaban haciendo. Los discípulos se hacen como siempre se han hecho, como el Señor primero los hizo: <em>halle a unos pocos, camine con ellos, y envíelos a hallar a unos pocos propios.</em></p>
+
+<p><strong>Cimentar a un creyente en la fe y en una iglesia.</strong> Lleve eso al nuevo creyente en su propia congregación, el que acaba de confiar en Cristo — y que, estadísticamente, se alejara en un año o dos a menos que algo lo sostenga. Nuestra tarea es <em>cimentarlo,</em> y la palabra tiene dos direcciones. Debe ser arraigado <em>en la fe</em> — lo vertical — y arraigado <em>en la iglesia</em> — lo horizontal. Descuide cualquiera y no se sostendrá.</p>
+
+<p>Arraigado <em>en la fe</em> significa que ya no se le deja valerse por sí mismo en el momento en que cree. Se le da el siguiente paso, y luego el siguiente: las Escrituras, hasta que un hombre que quizá nunca tuvo una Biblia aprende a hallar su camino por ella y alimentarse; la oración, enseñada y modelada hasta que se vuelve suya; las doctrinas básicas, para que su fe tenga huesos y no solo sentimientos; y las disciplinas largas y pacientes que, como dice la vieja palabra, <em>forman</em> un alma a la semejanza de Cristo en vez de meramente informar una mente acerca de Él. Lo mejor de todo, y lo más parecido al Maestro, esto ocurre no principalmente en un aula sino en una relación — un creyente mayor caminando la vida junto a uno más joven, el principio del estar-con-Él continuado en nosotros.</p>
+
+<p>Arraigado <em>en la iglesia</em> significa que es traído al cuerpo hasta que genuinamente <em>pertenece</em> — y aquí, por diseño de Dios, la maquinaria misma de este curso se vuelve la maquinaria del discipulado. Necesita <em>amigos,</em> y no pocos; necesita ser <em>extrañado</em> cuando falta y alcanzado cuando se desliza; necesita un <em>círculo pequeño</em> donde la vida de veras se comparta; necesita una <em>tarea,</em> un lugar para usar su don de modo que sepa que no es un espectador sino un miembro con trabajo que hacer. Diremos en la siguiente unidad que un nuevo miembro que no hace pronto amigos ni halla un papel se irá — y eso es sencillamente el discipulado descrito desde la puerta de atrás. La membresía, bien entendida, no es acceso de consumidor a bienes religiosos; es pacto, un unirse a un pueblo. El mismo trabajo de inscribir, extranar, contactar y desplegar dones que hace crecer una iglesia es exactamente lo que arraiga a un discípulo — por lo cual el discipulado no es un programa entre los muchos de la iglesia, sino el hilo que corre por todos ellos.</p>
+
+<p>Así que pese a ambos lado a lado, el creyente casual y el discípulo, pues la diferencia es la diferencia entre una iglesia que gotea y una iglesia que sostiene. El creyente casual <em>consume</em> — asiste cuando es conveniente, observa la pantalla, toma lo que le gusta, y se aleja cuando la vida cambia, y nadie se entera. El discípulo es <em>formado, pertenece, sirve y se reproduce</em> — es conocido y conoce a otros, tiene un lugar y una tarea, está siendo lentamente cambiado a la imagen de Cristo, y con el tiempo se vuelve el que camina junto al siguiente nuevo creyente. El primero es la puerta de atrás abierta que seguimos tratando de cerrar con mejores programas. El segundo <em>es</em> la puerta cerrada, desde adentro, por el amor.</p>
+
+<p>Esta es la unidad hacia la cual todo el curso se ha estado moviendo, y puede decirse en una sola línea. La meta del crecimiento de la iglesia nunca fue la multitud. Fue el discípulo. <em>Haga discípulos</em> — no creyentes casuales, no meros asistentes — y la multitud, la salud y el poder de permanecer seguirán; apunte a la multitud sola, y perderá aun eso.</p>
+
+<h2>Dónde Estamos Ahora (2026)</h2>
+
+<p>Si hay una palabra a la que todo el movimiento ha regresado en estos últimos años, es esta. Tras una larga temporada de contar decisiones y asistencia, la iglesia ha sido llevada — por el abandono, por su propio duro autoexamen — a recordar que la Comisión dijo <em>haced discípulos,</em> y que habíamos estado haciendo otra cosa. La recuperación del discipulado y la formación espiritual es el giro más esperanzador de nuestro momento, y es, en el fondo, un regreso a lo mismo que el Maestro hizo al principio.</p>
+
+<p>Las herramientas se han multiplicado, y bien usadas son un don: una iglesia ahora puede rastrear el siguiente paso de cada nuevo creyente para que nadie caiga calladamente; puede llevar la enseñanza a un teléfono en un bolsillo; puede conectar a un mentor y a un joven creyente a cualquier distancia. Pero aquí la advertencia de la unidad digital vuelve con toda su fuerza. La información no es la formación. Una biblioteca de enseñanza en línea puede llenar una cabeza dejando una vida intacta y un alma sin compañía, y un discípulo jamás se ha producido en masa por una pantalla. La pantalla puede entregar el <em>contenido;</em> no puede ser la <em>comunidad,</em> y siempre fue en la comunidad — con Él, y unos con otros — donde se hacían los discípulos. Use cada herramienta nueva para servir al patrón antiguo; nunca imagine que la herramienta puede reemplazarlo.</p>
+
+<p>Pues el patrón mismo no ha envejecido un día. Una nueva generación, cansada del espectáculo y hambrienta de lo que es real, pide calladamente exactamente lo que Jesús ofreció a los Doce: no una mejor producción, sino una Presencia; no más contenido, sino una vida junto a la cual caminar. La iglesia que crecerá y <em>sostendrá</em> en esta era de abandono no es la del escenario más brillante o la pantalla más grande. Es la que hace la obra lenta, sin gloria, profundamente personal que el Maestro hizo en los caminos de Galilea — estar con la gente, y formarla, una vida junto a otra, en discípulos que irán y harán lo mismo.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 11 Final Exam — 30 Questions</span><span class="lang-es">Examen Final — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>Fail the multiple-choice (1–20) and it locks for 2 minutes; fail the master's-level short answer (21–30) and it locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba la opción múltiple (1–20), se bloquea por 2 minutos; si reprueba la respuesta corta de nivel de maestría (21–30), se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Joshua — Unit 1 (retrofit to CTS pattern, 2026-05-16)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 11;
+const COURSE = 'cg';
+const NEXT_UNIT_URL = 'CTSCGUnit12.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 — Introduction",
+    "Unit 2 — Biblical Background",
+    "Unit 3 — Terms and History",
+    "Unit 4 — Principles",
+    "Unit 5 — Change and the Generations",
+    "Unit 6 — Diagnosing Your Church",
+    "Unit 7 — Pastoral Leadership",
+    "Unit 8 — Worship",
+    "Unit 9 — Digital and Online Ministry",
+    "Unit 10 — Sunday School and Small Groups",
+    "Unit 11 — Discipleship",
+    "Unit 12 — Retention"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCGUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// L3 semantic audit: all 20 verified against options and Joshua 1
+const mcQuestions = [
+    { textEn: "1. The Great Commission commands us to make:", textEs: "1. La Gran Comisión nos manda hacer:",
+      optionsEn: ["donors", "decisions", "attenders", "disciples"],
+      optionsEs: ["donantes", "decisiones", "asistentes", "discípulos"], correct: 3 },
+    { textEn: "2. A root cause of the dechurching, this unit argues, is that the church made:", textEs: "2. Una causa raíz del abandono, argumenta esta unidad, es que la iglesia hizo:",
+      optionsEn: ["too many disciples", "too many leaders", "attenders rather than disciples", "no converts"],
+      optionsEs: ["demasiados discípulos", "demasiados líderes", "asistentes en vez de discípulos", "ningún converso"], correct: 2 },
+    { textEn: "3. Jesus' first act in making disciples (Mark 3:14) was to call them:", textEs: "3. El primer acto de Jesús al hacer discípulos (Marcos 3:14) fue llamarlos:",
+      optionsEn: ["to be with Him", "to give money", "to a seminar", "to lead crowds"],
+      optionsEs: ["a estar con Él", "a dar dinero", "a un seminario", "a dirigir multitudes"], correct: 0 },
+    { textEn: "4. Rather than going wide, Jesus discipled:", textEs: "4. En vez de ir a lo ancho, Jesús discípulo:",
+      optionsEn: ["thousands at once", "deep, into twelve and an inner three", "through crowds only", "by mail"],
+      optionsEs: ["a miles a la vez", "a lo hondo, a doce y a tres del círculo íntimo", "solo por multitudes", "por correo"], correct: 1 },
+    { textEn: "5. Jesus often taught his disciples through:", textEs: "5. Jesús a menudo enseñó a sus discípulos por medio de:",
+      optionsEn: ["silence", "written exams", "long lectures only", "teachable moments and questions"],
+      optionsEs: ["el silencio", "exámenes escritos", "solo largas conferencias", "momentos enseñables y preguntas"], correct: 3 },
+    { textEn: "6. Jesus' training method can be summed up as show, send, and:", textEs: "6. El método de entrenamiento de Jesús se resume en mostrar, enviar y:",
+      optionsEn: ["debrief", "forget", "abandon", "replace"],
+      optionsEs: ["evaluar juntos", "olvidar", "abandonar", "reemplazar"], correct: 0 },
+    { textEn: "7. The cost of discipleship (Luke 9:23) is to deny self and:", textEs: "7. El costo del discipulado (Lucas 9:23) es negarse a sí mismo y:",
+      optionsEn: ["pay a fee", "join a committee", "take up the cross daily", "move away"],
+      optionsEs: ["pagar una cuota", "unirse a un comite", "tomar la cruz cada día", "mudarse"], correct: 2 },
+    { textEn: "8. The aim of discipleship (Luke 6:40) is that the student becomes:", textEs: "8. La meta del discipulado (Lucas 6:40) es que el alumno llegue a ser:",
+      optionsEn: ["wealthy", "like his teacher", "busy", "famous"],
+      optionsEs: ["rico", "como su maestro", "ocupado", "famoso"], correct: 1 },
+    { textEn: "9. Discipleship must reproduce; 2 Timothy 2:2 commands entrusting truth to:", textEs: "9. El discipulado debe reproducirse; 2 Timoteo 2:2 manda confiar la verdad a:",
+      optionsEn: ["no one", "only the clergy", "faithful people who will teach others", "the crowd"],
+      optionsEs: ["nadie", "solo el clero", "personas fieles que ensenaran a otros", "la multitud"], correct: 2 },
+    { textEn: "10. The most effective way to disciple, this unit says, is:", textEs: "10. La manera más eficaz de discipular, dice esta unidad, es:",
+      optionsEn: ["mass events", "large lectures", "online courses", "relational and reproducing, in a small group of three or four"],
+      optionsEs: ["los eventos masivos", "grandes conferencias", "cursos en línea", "relacional y reproductora, en un grupo pequeño de tres o cuatro"], correct: 3 },
+    { textEn: "11. The four 'engines' of a discipling group are the Word, accountability, prayer, and:", textEs: "11. Los cuatro 'motores' de un grupo de discipulado son la Palabra, la rendición de cuentas, la oración y:",
+      optionsEn: ["multiplication", "money", "music", "marketing"],
+      optionsEs: ["la multiplicación", "el dinero", "la música", "el mercadeo"], correct: 0 },
+    { textEn: "12. Programs are compared to scaffolding; the actual building is:", textEs: "12. Los programas se comparan con un andamio; el edificio real es:",
+      optionsEn: ["the budget", "the transformed life", "the program", "the sanctuary"],
+      optionsEs: ["el presupuesto", "la vida transformada", "el programa", "el santuario"], correct: 1 },
+    { textEn: "13. To ground a believer 'in' the faith is the vertical work of rooting them in:", textEs: "13. Cimentar a un creyente 'en' la fe es la obra vertical de arraigarlo en:",
+      optionsEn: ["the budget", "a committee", "the building", "Christ, the Word, and prayer"],
+      optionsEs: ["el presupuesto", "un comite", "el edificio", "Cristo, la Palabra y la oración"], correct: 3 },
+    { textEn: "14. To ground a believer 'into' the church is the horizontal work of giving them:", textEs: "14. Cimentar a un creyente 'en' la iglesia es la obra horizontal de darle:",
+      optionsEn: ["a salary", "friends, a small circle, and a task", "a title", "a building"],
+      optionsEs: ["un salario", "amigos, un círculo pequeño y una tarea", "un título", "un edificio"], correct: 1 },
+    { textEn: "15. A casual believer tends to:", textEs: "15. Un creyente casual tiende a:",
+      optionsEn: ["reproduce", "serve sacrificially", "consume", "lead"],
+      optionsEs: ["reproducirse", "servir con sacrificio", "consumir", "dirigir"], correct: 2 },
+    { textEn: "16. A true disciple, by contrast, is formed, belongs, serves, and:", textEs: "16. Un verdadero discípulo, en cambio, es formado, pertenece, sirve y:",
+      optionsEn: ["reproduces", "drifts", "consumes", "hides"],
+      optionsEs: ["se reproduce", "se aleja", "consume", "se esconde"], correct: 0 },
+    { textEn: "17. A believer with no real friends in the church and no one who would notice his absence is:", textEs: "17. Un creyente sin amigos reales en la iglesia y sin nadie que note su ausencia está:",
+      optionsEn: ["a leader", "perfectly secure", "a strong disciple", "at high risk of leaving"],
+      optionsEs: ["un líder", "perfectamente seguro", "un discípulo fuerte", "en alto riesgo de irse"], correct: 3 },
+    { textEn: "18. Jesus went deep with a few in order ultimately to reach:", textEs: "18. Jesús fue a lo hondo con unos pocos para finalmente alcanzar a:",
+      optionsEn: ["no one", "only twelve", "the many", "himself"],
+      optionsEs: ["nadie", "solo doce", "los muchos", "si mismo"], correct: 2 },
+    { textEn: "19. The difference between an attender and a disciple is finally a difference of:", textEs: "19. La diferencia entre un asistente y un discípulo es, al final, una diferencia de:",
+      optionsEn: ["building", "transformation", "seating", "schedule"],
+      optionsEs: ["edificio", "transformación", "asientos", "horario"], correct: 0 },
+    { textEn: "20. The cure this unit offers for a church that makes attenders is to recover:", textEs: "20. La cura que esta unidad ofrece para una iglesia que hace asistentes es recuperar:",
+      optionsEn: ["bigger services", "intentional, relational disciple-making", "better marketing", "more programs"],
+      optionsEs: ["servicios más grandes", "el discipulado intencional y relacional", "mejor mercadeo", "más programas"], correct: 1 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "Explain the difference between making disciples and making attenders, and why the Commission demands the first.",
+      textEs: "Explique la diferencia entre hacer discípulos y hacer asistentes, y por qué la Comisión exige lo primero.",
+      kw_en: ["disciple", "attender", "decision", "commission", "make", "casual", "follow", "obey"],
+      kw_es: ["discipul", "asistent", "decision", "comision", "hacer", "casual", "segu", "obedec"],
+      modelEn: "An attender shows up; a disciple follows Christ, is taught to obey, and is being transformed into His likeness. The Great Commission does not say make decisions or gather attenders, but make disciples of all nations. A decision and a seat are only the doorway; the Commission demands a follower formed in obedience, which is a long and personal work, not a single response.",
+      modelEs: "Un asistente se presenta; un discípulo sigue a Cristo, es enseñado a obedecer, y está siendo transformado a Su semejanza. La Gran Comisión no dice hacer decisiones ni reunir asistentes, sino hacer discípulos de todas las naciones. Una decisión y un asiento son solo la puerta; la Comisión exige un seguidor formado en la obediencia, lo cual es una obra larga y personal, no una sola respuesta." },
+    { textEn: "Argue this unit's claim that a root of the dechurching is that the church made attenders, not disciples.",
+      textEs: "Argumente la afirmación de esta unidad de que una raíz del abandono es que la iglesia hizo asistentes, no discípulos.",
+      kw_en: ["dechurch", "attender", "disciple", "root", "made", "shallow", "leave", "consume"],
+      kw_es: ["desiglesi", "asistent", "discipul", "raiz", "hizo", "superficial", "irse", "consum"],
+      modelEn: "If a generation was taught to attend rather than to follow, then its faith was shallow, rooted in a service rather than in Christ, and shallow roots are easily pulled up. People who were only attenders drift away when life shifts, because nothing deep was formed in them. So a root of the dechurching is that the church grew skilled at gathering attenders and consumers, and never made disciples.",
+      modelEs: "Si a una generación se le enseñó a asistir en vez de a seguir, entonces su fe fue superficial, arraigada en un servicio en vez de en Cristo, y las raíces superficiales se arrancan fácil. Los que solo eran asistentes se alejan cuando la vida cambia, porque nada profundo se formó en ellos. Así que una raíz del abandono es que la iglesia se volvió hábil en reunir asistentes y consumidores, y nunca hizo discípulos." },
+    { textEn: "Describe how Jesus made disciples. Name at least four features of His method.",
+      textEs: "Describa cómo Jesús hizo discípulos. Nombre al menos cuatro rasgos de Su método.",
+      kw_en: ["jesus", "with", "deep", "teachable", "show", "send", "cost", "transform"],
+      kw_es: ["jesus", "con", "hond", "ensenabl", "mostr", "envi", "costo", "transform"],
+      modelEn: "Jesus called the Twelve first to be with Him, sharing life before assigning tasks. He went deep rather than wide, pouring into a few and an inner three. He taught in teachable moments and through questions, showed them how, sent them out, and debriefed them. He called them to count the cost and take up the cross daily, aiming at transformation, that the student become like his teacher.",
+      modelEs: "Jesús llamó a los Doce primero a estar con Él, compartiendo la vida antes de asignar tareas. Fue a lo hondo en vez de a lo ancho, vertiéndose en unos pocos y en tres del círculo íntimo. Enseñó en momentos enseñables y por preguntas, les mostró cómo, los envió, y evaluó con ellos. Los llamó a contar el costo y tomar la cruz cada día, apuntando a la transformación, que el alumno llegue a ser como su maestro." },
+    { textEn: "Why is the most effective discipleship relational and reproducing, in a small group of three or four?",
+      textEs: "Por qué el discipulado más eficaz es relacional y reproductor, en un grupo pequeño de tres o cuatro?",
+      kw_en: ["relational", "reproduc", "small", "group", "three", "four", "effective", "life"],
+      kw_es: ["relacion", "reproduc", "pequen", "grupo", "tres", "cuatro", "eficaz", "vida"],
+      modelEn: "Disciples are formed in relationship, not in rows, so the most effective discipleship is a small group of three or four where life is genuinely shared and known. Small enough for honesty yet built to reproduce, each member is equipped to start another group. This relational, reproducing pattern follows the way Jesus worked and multiplies disciples rather than merely informing crowds.",
+      modelEs: "Los discípulos se forman en relación, no en filas, así que el discipulado más eficaz es un grupo pequeño de tres o cuatro donde la vida se comparte y se conoce de veras. Lo bastante pequeño para la honestidad pero hecho para reproducirse, cada miembro queda equipado para iniciar otro grupo. Este patrón relacional y reproductor sigue la manera en que Jesús trabajó y multiplica discípulos en vez de solo informar multitudes." },
+    { textEn: "Name and explain the four 'engines' that drive a discipling group.",
+      textEs: "Nombre y explique los cuatro 'motores' que impulsan un grupo de discipulado.",
+      kw_en: ["word", "account", "prayer", "multipli", "engine", "reproduc", "scriptur", "group"],
+      kw_es: ["palabra", "rendicion", "oracion", "multiplic", "motor", "reproduc", "escritur", "grupo"],
+      modelEn: "A discipling group runs on four engines. The Word forms us as Scripture is read and obeyed. Accountability lets brothers ask the honest questions and bear one another's burdens. Prayer joins the group to God and to each other. And multiplication keeps it from turning inward, each member preparing to reproduce the group in others. Drop any engine and the group stalls.",
+      modelEs: "Un grupo de discipulado corre sobre cuatro motores. La Palabra nos forma al leer y obedecer la Escritura. La rendición de cuentas permite que los hermanos hagan las preguntas honestas y lleven las cargas unos de otros. La oración une al grupo con Dios y entre sí. Y la multiplicación lo guarda de volverse hacia adentro, cada miembro preparándose para reproducir el grupo en otros. Quite cualquier motor y el grupo se detiene." },
+    { textEn: "Explain the scaffolding-and-building image. What is the program, and what is the actual building?",
+      textEs: "Explique la imagen del andamio y el edificio. Qué es el programa, y qué es el edificio real?",
+      kw_en: ["scaffold", "building", "program", "transform", "life", "structur", "temporar", "disciple"],
+      kw_es: ["andami", "edifici", "programa", "transform", "vida", "estructur", "temporal", "discipul"],
+      modelEn: "Programs are scaffolding, useful structures that go up around the work and come down when it is done. The actual building is the transformed life, the disciple formed in Christ. A church that mistakes the scaffolding for the building counts programs and attendance as the goal, when these only serve the goal. When the program ends, what remains, the changed person, is what was always being built.",
+      modelEs: "Los programas son andamios, estructuras útiles que se levantan alrededor de la obra y se quitan cuando termina. El edificio real es la vida transformada, el discípulo formado en Cristo. Una iglesia que confunde el andamio con el edificio cuenta los programas y la asistencia como la meta, cuando estos solo sirven a la meta. Cuando el programa termina, lo que queda, la persona cambiada, es lo que siempre se estaba edificando." },
+    { textEn: "Explain grounding a believer 'in' the faith. What is this vertical work?",
+      textEs: "Explique cimentar a un creyente 'en' la fe. Cuál es esta obra vertical?",
+      kw_en: ["ground", "faith", "vertical", "christ", "word", "prayer", "root", "anchor"],
+      kw_es: ["ciment", "fe", "vertical", "cristo", "palabra", "oracion", "raiz", "anclar"],
+      modelEn: "To ground a believer in the faith is the vertical work of rooting him in Christ Himself, in the Word he learns to read and obey, and in prayer through which he walks with God. This is the deep anchoring without which faith blows over in the first storm. A believer rooted in Christ has a faith that holds when feelings, circumstances, and even the church disappoint.",
+      modelEs: "Cimentar a un creyente en la fe es la obra vertical de arraigarlo en Cristo mismo, en la Palabra que aprende a leer y obedecer, y en la oración por la que camina con Dios. Este es el anclaje profundo sin el cual la fe se vuelca en la primera tormenta. Un creyente arraigado en Cristo tiene una fe que se sostiene cuando los sentimientos, las circunstancias, y aun la iglesia decepcionan." },
+    { textEn: "Explain grounding a believer 'into' the church. What is this horizontal work, and why does it guard against the back door?",
+      textEs: "Explique cimentar a un creyente 'en' la iglesia. Cuál es esta obra horizontal, y por qué guarda contra la puerta de atrás?",
+      kw_en: ["church", "horizontal", "friend", "circle", "task", "belong", "miss", "ministry"],
+      kw_es: ["iglesi", "horizontal", "amig", "circul", "tarea", "pertenec", "extran", "ministeri"],
+      modelEn: "To ground a believer into the church is the horizontal work of weaving him into the body: real friends, a small circle where he is known, and a task or ministry that needs him. A believer with friends, a circle, and a role belongs, and would be missed if absent. This is exactly what guards the back door, for people rarely leave a place where they are known and needed.",
+      modelEs: "Cimentar a un creyente en la iglesia es la obra horizontal de entretejerlo en el cuerpo: amigos reales, un círculo pequeño donde es conocido, y una tarea o ministerio que lo necesita. Un creyente con amigos, un círculo y un papel pertenece, y sería extrañado si faltara. Esto es justo lo que guarda la puerta de atrás, pues la gente rara vez deja un lugar donde es conocida y necesitada." },
+    { textEn: "Contrast the casual believer with the true disciple across the four marks named in this unit.",
+      textEs: "Contraste al creyente casual con el verdadero discípulo a través de las cuatro marcas nombradas en esta unidad.",
+      kw_en: ["casual", "consume", "disciple", "form", "belong", "serve", "reproduc", "transform"],
+      kw_es: ["casual", "consum", "discipul", "form", "pertenec", "serv", "reproduc", "transform"],
+      modelEn: "The casual believer attends and consumes, treating the church as a service he receives. The true disciple shows four marks: he is being formed into Christ's likeness, he belongs to a body where he is known, he serves rather than only receives, and he reproduces, helping form others. The difference is not intensity of feeling but transformation, belonging, service, and reproduction.",
+      modelEs: "El creyente casual asiste y consume, tratando la iglesia como un servicio que recibe. El verdadero discípulo muestra cuatro marcas: está siendo formado a la semejanza de Cristo, pertenece a un cuerpo donde es conocido, sirve en vez de solo recibir, y se reproduce, ayudando a formar a otros. La diferencia no es intensidad de sentimiento sino transformación, pertenencia, servicio y reproducción." },
+    { textEn: "Synthesis: Prescribe how a church that has been making attenders can begin making disciples instead.",
+      textEs: "Síntesis: Prescriba cómo una iglesia que ha estado haciendo asistentes puede comenzar a hacer discípulos.",
+      kw_en: ["disciple", "relational", "reproduc", "intention", "jesus", "transform", "ground", "recover"],
+      kw_es: ["discipul", "relacion", "reproduc", "intencion", "jesus", "transform", "ciment", "recuper"],
+      modelEn: "Such a church must recover intentional, relational disciple-making in the pattern of Jesus: small reproducing groups of three or four, running on the Word, accountability, prayer, and multiplication. It grounds each believer vertically in Christ and horizontally into the body with friends and a task, aiming not at fuller services but at transformed lives that in turn make other disciples.",
+      modelEs: "Tal iglesia debe recuperar el discipulado intencional y relacional al modo de Jesús: grupos pequeños y reproductores de tres o cuatro, que corren sobre la Palabra, la rendición de cuentas, la oración y la multiplicación. Cimienta a cada creyente verticalmente en Cristo y horizontalmente en el cuerpo con amigos y una tarea, apuntando no a servicios más llenos sino a vidas transformadas que a su vez hacen otros discípulos." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 12 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 12 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ Bloqueado. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ Locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ MC ✓ aprobado. Sección SA bloqueada. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ MC ✓ passed. SA section locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const mb = document.createElement('div');
+        mb.className = 'js-model-box';
+        mb.style.cssText = 'display:none;margin-top:10px;padding:10px 12px;background:#fbf3d5;border:1px solid #d4af37;border-radius:8px;';
+        mb.innerHTML = (currentLang === 'en'
+            ? '<strong>Model answer — study this</strong><br>' + q.modelEn
+            : '<strong>Respuesta modelo — estúdiela</strong><br>' + q.modelEs);
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                return;
+            }
+            // Smart matcher (kwHit) — matches the official grade, not raw indexOf.
+            const hitList = kws.filter(kw => kwHit(ans, kw));
+            const hits = hitList.length;
+            if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? `✓ Solid answer (${hits}/${kws.length} key concepts referenced).` : `✓ Respuesta sólida (${hits}/${kws.length} conceptos clave referenciados).`;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en'
+                    ? `✗ Need at least 3 key concepts; got ${hits}/${kws.length}. Compare your answer with the model below.`
+                    : `✗ Necesita al menos 3 conceptos clave; obtuvo ${hits}/${kws.length}. Compare su respuesta con el modelo abajo.`;
+            }
+            mb.style.display = 'block'; // reveal model answer after every check, pass or fail
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(mb);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    // Reveal every model answer after submit — the teaching is the comparison.
+    document.querySelectorAll('.js-model-box').forEach(function(e){ e.style.display = 'block'; });
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ Reprobado: ${mcScore}/20 (se requiere 18). Bloqueado 2 minutos.</span>`
+                : `<span style='color:#8a1f1f'>✗ Failed: ${mcScore}/20 (need 18). Locked 2 minutes.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ MC ✓ permanece aprobado. SA reprobada: ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min.</span>`
+                : `<span style='color:#8a1f1f'>✗ MC ✓ stays passed. SA failed: ${saScore}/10 (need 9). SA section locked 15 min.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 2 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 2 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    location.reload();
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCGReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

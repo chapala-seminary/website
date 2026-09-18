@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Acts Intensive — Unit 2: Bold Witness in Jerusalem (Acts 3:1–6:7)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+/* === Retrofit additions === */
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-bottom: 2px dashed #d7cec1; padding-bottom: 18px; margin-bottom: 18px; }
+.lang-toggle-group { display: inline-flex; gap: 4px; margin-bottom: 15px; }
+.lang-toggle-group button { background: #f4c542; color: #5b3a1f; border: 1px solid #c9a032; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+.lang-toggle-group button.active { background: #5b3a1f; color: white; border-color: #5b3a1f; }
+.track-badge { display: inline-block; background: #f4c542; color: #5b3a1f; padding: 4px 12px; border-radius: 30px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 12px; vertical-align: middle; }
+.exam-status { padding: 12px 16px; margin: 14px 0; border-radius: 8px; font-size: 0.95rem; font-weight: 600; }
+.exam-status.mc-passed { background: #d6e2f0; color: #2c3e6b; border-left: 5px solid #3f5a8a; }
+.exam-status.locked { background: #fae5e3; color: #8a1f1f; border-left: 5px solid #b03a2e; }
+.exam-status.hidden { display: none; }
+.mc-section, .sa-section { margin-top: 20px; }
+.sa-section h3, .mc-section h3 { color: #5b3a1f; border-bottom: 2px solid #f4c542; padding-bottom: 4px; margin-bottom: 12px; font-size: 1.1rem; }
+.sa-badge { display: inline-block; background: #f4c542; color: #5b3a1f; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; margin-left: 8px; vertical-align: middle; }
+.sa-note { margin: 0 0 14px; padding: 10px 14px; background: #f6f1e8; border-left: 3px solid #c9a032; color: #22201d; font-size: 0.9rem; font-style: italic; border-radius: 6px; }
+.question.review-locked { opacity: 0.7; background: #fbfaf6; border-left: 3px solid #f4c542; }
+.question.review-locked .option { pointer-events: none; }
+.question.review-locked .kw-answer, .question.review-locked .check-kw-btn { pointer-events: none; }
+.btn-reset { background: #8a6a4a; color: white; border: none; border-radius: 30px; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 0.88rem; margin-left: 8px; }
+.btn-reset:hover { background: #6b5236; }
+.reg-modal { position: fixed; inset: 0; background: rgba(40, 30, 20, 0.65); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.reg-modal.hidden { display: none; }
+.reg-modal-inner { background: #fffdfa; max-width: 520px; width: 100%; border-radius: 16px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 1px solid #d7cec1; }
+.reg-modal-inner h2 { color: #5b3a1f; margin: 0 0 10px; font-size: 1.4rem; }
+.reg-modal-inner p { margin: 10px 0; font-size: 0.95rem; }
+.reg-modal-inner label { display: block; margin: 12px 0 4px; font-weight: 700; font-size: 0.92rem; }
+.reg-modal-inner input[type="text"], .reg-modal-inner input[type="email"] { width: 100%; padding: 9px 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; background: #fcfbf8; }
+.reg-modal-inner .track-options { display: flex; gap: 10px; margin-top: 6px; }
+.reg-modal-inner .track-options label { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 12px; border: 1px solid #d7cec1; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.92rem; background: #fcfbf8; }
+.reg-modal-inner .track-options input[type="radio"] { margin: 0; }
+.reg-modal-inner .track-options label:has(input:checked) { background: #f4c542; border-color: #c9a032; }
+.reg-modal-inner button { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 9px 22px; cursor: pointer; font-family: inherit; font-size: 1rem; margin-top: 18px; }
+.reg-warn { background: #faecd0; border: 1px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; color: #5b3a1f; }
+.reg-warn.hidden { display: none; }
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .nav-bar, .toggle-btn, .lang-toggle-group, .btn-reset, button.small, .check-kw-btn, .reg-modal, .reg-warn, #submitExamBtn, .exam-status, .sa-badge, .track-badge { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+  body.lang-en .lang-es, body.lang-es .lang-en { display: none; }
+  body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+}
+
+.sa-model { margin-top: 8px; padding: 10px 14px; background:#fff8e1; color:#5d4a00; border-left:4px solid #d4af37; border-radius:6px; font-size:0.92rem; line-height:1.45; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" role="group" aria-label="Language">
+  <button data-lang="en" class="active">English</button>
+  <button data-lang="es">Español</button>
+  <button data-lang="both">Both / Ambos</button>
+</div>
+<span id="trackBadgeSlot"></span>
+
+<div id="regWarn" class="reg-warn hidden">
+  <span class="lang-en">⚠ Please register your name to receive credit for this unit. <button class="small" id="openRegBtn" type="button">Register</button></span>
+  <span class="lang-es">⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class="small" id="openRegBtn2" type="button">Registrar</button></span>
+</div>
+<div id="regModal" class="reg-modal hidden" role="dialog" aria-labelledby="regModalTitle">
+  <div class="reg-modal-inner">
+    <h2 id="regModalTitle"><span class="lang-en">Welcome to the Acts Intensive</span><span class="lang-es">Bienvenido al Intensivo de Hechos</span></h2>
+    <p><span class="lang-en">Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.</span><span class="lang-es">Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full name</span><span class="lang-es">Nombre completo</span></label>
+    <input type="text" id="regName" placeholder="" autocomplete="name" aria-label="regName">
+    <label><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span></label>
+    <input type="email" id="regEmail" placeholder="" autocomplete="email" aria-label="regEmail">
+    <label><span class="lang-en">Track</span><span class="lang-es">Vía</span></label>
+    <div class="track-options">
+      <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></label>
+      <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en">M.Div</span><span class="lang-es">M.Div</span></label>
+      <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en">Th.M.</span><span class="lang-es">Th.M.</span></label>
+    </div>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;">
+      <span class="lang-en"><strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.</span>
+      <span class="lang-es"><strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%.</span>
+    </p>
+    <button id="regSaveBtn" type="button"><span class="lang-en">Save and Continue</span><span class="lang-es">Guardar y Continuar</span></button>
+  </div>
+</div>
+<div class="card">
+    <h1><span class="lang-en">📖 Acts Intensive — Unit 2: Bold Witness in Jerusalem (Acts 3:1–6:7)</span><span class="lang-es">📖 Intensivo de Hechos — Unidad 2: Testimonio audaz en Jerusalén (Hechos 3:1–6:7)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>I. Three O'Clock at the Beautiful Gate</h2>
+        <p>Pentecost is over. The crowds have gone home to Parthia and Mesopotamia and Egypt and Crete. Three thousand new believers are still in Jerusalem trying to figure out what they have just become part of. And on an ordinary afternoon in late spring of AD 33, two of the apostles — Peter and John, the same pair Jesus singled out at the transfiguration and Gethsemane — went up to the temple at the ninth hour, three o'clock, the hour of evening prayer.</p>
+
+        <p>At the gate called Beautiful sat a man who had been carried there every working day for forty years (Acts 4:22 tells us his age). He was lame from his mother's womb. The Beautiful Gate was the prime begging spot in the city — every pilgrim coming up to pray had to pass it on his way in. He asked Peter and John for an alms. The Greek says they fixed their eyes on him. The man perked up — he must have thought a really fat coin was coming. Then Peter said the line that has rung in the church's ears for two thousand years: <em>"Silver and gold I do not have, but what I do have I give you: In the name of Jesus Christ of Nazareth, rise up and walk"</em> (Acts 3:6, NKJV). And he reached down and grabbed the man by the right hand and pulled him up.</p>
+
+        <p>What happened next is one of the most joyful sentences in the New Testament. <em>"And he, leaping up, stood and walked and entered the temple with them — walking, leaping, and praising God"</em> (Acts 3:8, NKJV). Forty years he had sat outside that gate. Now he goes <em>inside</em> on his own two feet, jumping like a child, and he never sits at the gate again. The crowd that recognized him was filled with wonder and amazement. They came running from all directions. Peter, never one to waste a crowd, immediately preached his second sermon — and three thousand more became five thousand (Acts 4:4). The deflection in his sermon is striking. He looked at the gawkers and said, <em>"Why do you marvel at this? Or why look so intently at us, as though by our own power or godliness we had made this man walk?"</em> (Acts 3:12, NKJV). It was the name of Jesus that did it. Peter is firm about that, and we should be too. The minute the messenger gets the credit, the Master gets robbed.</p>
+
+        <h2>II. The First Arrest, and a Phrase the World Could Not Forget</h2>
+        <p>By the next morning Peter and John were in custody. The captain of the temple guard, the priests, and the Sadducees were "greatly disturbed" — Luke's understatement of the year — because the apostles were teaching the people the resurrection of the dead, the very doctrine the Sadducees did not even believe in. They threw the apostles in jail until morning. The Sanhedrin convened the next day, the same body that less than two months earlier had condemned Jesus. They posed one question: <em>"By what power or by what name have you done this?"</em> (Acts 4:7, NKJV).</p>
+
+        <p>Peter, filled with the Holy Spirit, gave a one-paragraph answer that contains one of the most exclusive claims ever made in human religion: <em>"Let it be known to you all, and to all the people of Israel, that by the name of Jesus Christ of Nazareth, whom you crucified, whom God raised from the dead, by Him this man stands here before you whole… Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved"</em> (Acts 4:10, 12, NKJV). Read that twice. <em>No other name.</em> Not Buddha. Not Muhammad. Not Confucius. Not Krishna. Not the Dalai Lama. Not your own sincerity, your own good works, your own decency. Only Jesus.</p>
+
+        <p>The council marveled. Luke says they noticed two things about these men. First, they were uneducated and untrained — they did not have the proper schooling and the proper degrees. Second, the Sanhedrin <em>"realized that they had been with Jesus"</em> (Acts 4:13, NKJV). What a benediction to receive. People who had spent any time at all with Christ carried something of Him with them when they walked into a room. May God grant that the same thing be said of us.</p>
+
+        <p>The healed man was standing right there — they could not deny the miracle. So they fell back on the only weapon a corrupt institution has when its arguments are gone: intimidation. They commanded Peter and John to stop speaking in Jesus' name. The reply has shaped Christian conscience ever since: <em>"Whether it is right in the sight of God to listen to you more than to God, you judge. For we cannot but speak the things which we have seen and heard"</em> (Acts 4:19–20, NKJV).</p>
+
+        <p>Released with threats, the apostles went back to their own people and held a prayer meeting. They did not pray for safety. They did not pray for an injunction against the Sanhedrin. They prayed, <em>"Now, Lord… grant to Your servants that with all boldness they may speak Your word"</em> (Acts 4:29, NKJV). And the building shook. <em>"They were all filled with the Holy Spirit, and they spoke the word of God with boldness"</em> (Acts 4:31, NKJV). In Acts the response to threats is more boldness, not less. We have largely lost that instinct. May God restore it.</p>
+
+        <h2>III. A Story Inside the Church That Almost No One Tells</h2>
+        <p>The believers held all things in common. A man named Joseph from Cyprus — a Levite — sold a field and brought the entire amount and laid it at the apostles' feet. The apostles were so impressed they gave him a new nickname: Barnabas, "Son of Encouragement." Remember that name. He will rescue Saul of Tarsus a few chapters from now and find a young man named Mark a few chapters after that. The church needs Barnabases.</p>
+
+        <p>Then came the dark counterpart. A husband and wife named Ananias and Sapphira sold a piece of property too. They wanted the credit Barnabas had received, but they did not want to give all the money. So they cooked up a plan. They would bring part of it and tell the church it was the whole amount. It was not the partial gift that was the sin — Peter makes this clear: <em>"While it remained, was it not your own? And after it was sold, was it not in your own control?"</em> (Acts 5:4, NKJV). They could have given any percentage they wanted. The sin was the lie. They wanted the reputation of full surrender without the reality of it. <em>"You have not lied to men but to God"</em> (Acts 5:4, NKJV). Ananias dropped dead at the apostle's feet. Three hours later Sapphira walked in not knowing, told the same lie, and joined her husband. <em>"So great fear came upon all the church and upon all who heard these things"</em> (Acts 5:11, NKJV).</p>
+
+        <p>This is the first internal threat to the new church and God dealt with it without a single committee meeting. Why so severely? Because the cancer of religious pretending kills a Spirit-filled fellowship faster than any persecution from outside. Every honest pastor I have known has had to weep over a church that had not died but had been embalmed — going through the motions of life with a corpse inside it. Acts 5 is a warning as fierce as any in Scripture: God is not impressed by our performance. He sees the heart, He sees the books, He sees the conversations in the parking lot. May we never trade the reality of the Spirit for the reputation of the Spirit.</p>
+
+        <h2>IV. Round Two with the Sanhedrin</h2>
+        <p>Signs and wonders kept coming. People brought the sick into the streets so that even Peter's shadow falling across them might bring healing. The high priest and the Sadducees, "filled with indignation" (literally <em>jealousy</em> — they could read the room and the room was emptying out of their party), arrested the apostles and threw them all in the public jail. That night an angel of the Lord opened the prison doors and brought them out, with marching orders: <em>"Go, stand in the temple and speak to the people all the words of this life"</em> (Acts 5:20, NKJV). At daybreak they were back in the temple courts, preaching. The Sanhedrin assembled. Officers were sent. The officers came back baffled — the prison was secure, the guards were at their posts, but the cell was empty. Then a messenger ran in: "The men you put in prison last night are standing in the temple teaching the people."</p>
+
+        <p>Brought before the council a second time, the apostles delivered the line that has carved itself into the marrow of Christian history. The high priest said, "We strictly commanded you not to teach in this name." Peter answered: <em>"We ought to obey God rather than men"</em> (Acts 5:29, NKJV). Eight English words. Six Greek ones. There is the marching order of the Christian Church for two thousand years.</p>
+
+        <p>It is the line Tyndale obeyed when he translated the Bible knowing they would burn him for it. It is the line the African church has obeyed when its members were beheaded by ISIS on the beaches of Libya. It is the line every faithful pastor obeys when a denomination tells him to soften the gospel and he does not soften it. Peter and the apostles laid that principle down in front of the most powerful religious court in their nation, and the principle is still standing.</p>
+
+        <p>The Sanhedrin wanted them dead. But a Pharisee named Gamaliel — Saul of Tarsus's old teacher — stood up. He was, by the New Testament's own admission, a wise man. He cited two recent failed messianic movements (Theudas and Judas of Galilee) and said, in effect, "If this is just another human flash in the pan, it will burn itself out. But if it is from God you cannot stop it, and you may even find yourselves <em>fighting against God</em>" (Acts 5:39, NKJV). It is a phrase to chill a councilman's blood. Gamaliel's caution carried the day. They flogged the apostles and let them go. And the apostles departed from the council <em>"rejoicing that they were counted worthy to suffer shame for His name"</em> (Acts 5:41, NKJV). I have never been beaten for the gospel. I have read the testimonies of those who have. Almost without exception they say the same thing — the joy on the other side of obedience is unlike any joy this world can manufacture.</p>
+
+        <h2>V. From Pearl Harbor to Calvary</h2>
+        <p>It is worth pausing on Gamaliel's warning, because the line "fighting against God" describes more lives than we like to admit. There are people fighting against Him who do not even know it. There are people fighting against Him who genuinely think they are serving Him — Saul of Tarsus is the clearest case in the Bible.</p>
+
+        <p>Captain Mitsuo Fuchida was the Japanese pilot who led the air raid on Pearl Harbor on December 7, 1941. After the war he was a defeated, humiliated, unemployed ex-officer farming near Osaka. One day at a Tokyo train station an American handed him a tract titled <em>I Was a Prisoner in Japan</em>. It was the testimony of an American bombardier named Jacob DeShazer who had been captured by the Japanese in 1942 after the Doolittle raid, beaten and starved for forty months in a prison camp, and yet had come back to Japan after the war as a missionary because he had read a Bible in his cell and had been converted by the words <em>"Father, forgive them, for they do not know what they do"</em> (Luke 23:34, NKJV). DeShazer's story so disturbed Fuchida that he bought a Bible. He read those same words of Christ from the cross. He wrote later, <em>"Right at that moment I seemed to meet Jesus for the first time."</em> The bomber pilot got on his knees and asked the very Jesus he had been fighting against to forgive him. Then he and DeShazer — the man Fuchida's air force had captured, the man Fuchida had helped imprison — traveled all over Japan together for the next thirty years preaching the gospel. Tens of thousands of Japanese came to Christ.</p>
+
+        <p>Fuchida had been fighting against God for forty years and did not know it. Saul of Tarsus had been fighting against God for years and did not know it. The Sanhedrin had been fighting against God for almost two months and did not know it. Gamaliel knew enough to be afraid. The wisest thing the great Pharisee ever said was, <em>"Lest you be found to fight against God."</em> Some of you reading this right now are fighting against God in a way you have not yet admitted. Stop. Lay it down. Let Him forgive you the way He forgave the Pearl Harbor pilot. The same Jesus is reaching out the same hand.</p>
+
+        <h2>VI. The First Internal Crisis Solved</h2>
+        <p>The church was now growing so fast that it ran into its first organizational problem. The Greek-speaking widows (the Hellenists) felt they were being neglected in the daily food distribution compared with the Aramaic-speaking widows (the Hebrews). The Twelve called a congregational meeting. Their answer was a piece of leadership wisdom every pastor should keep on his desk: <em>"It is not desirable that we should leave the word of God and serve tables"</em> (Acts 6:2, NKJV). Not because waiting on tables is beneath them — Jesus had washed feet — but because the apostles' particular calling required them to give themselves to <em>"prayer and to the ministry of the word"</em> (Acts 6:4, NKJV). So they instructed the church to choose seven men of good reputation, full of the Holy Spirit and wisdom, to handle the food distribution. The seven were chosen, the apostles laid hands on them, and the church kept going.</p>
+
+        <p>This is, for what it is worth, the first appearance in Scripture of what we now call the office of deacon. Notice it was created not in a strategic planning session but in response to a real congregational complaint that needed a real and prompt solution. Notice also the qualifications: full of the Holy Spirit and wisdom. Notice further that two of the seven — Stephen and Philip — would within a year be the first martyr and the first cross-cultural evangelist in the history of the church. The man you let serve the soup may be three months from preaching to the Sanhedrin or evangelizing an Ethiopian official.</p>
+
+        <p>Luke wraps up this section with one of his great summary statements: <em>"Then the word of God spread, and the number of the disciples multiplied greatly in Jerusalem, and a great many of the priests were obedient to the faith"</em> (Acts 6:7, NKJV). Note that last phrase. <em>Priests.</em> The very same temple establishment that had handed Jesus over to Pilate was now sending some of its members into the church. The gospel had jumped the wall. Jerusalem was being shaken from the inside. The Spirit had come, and nobody — neither the Sanhedrin nor a hypocritical couple in the pews nor a logistical bottleneck in the soup kitchen — could shut down what God had started.</p>
+
+        <h2>VII. Three Marching Orders</h2>
+        <p>From these four chapters take three lessons home with you tonight. First, <strong>the name still works</strong>. The healing of the lame man at the Beautiful Gate is still the pattern. We are not promised silver or gold to give the broken people of our cities. We are given the name of Jesus, and that name is more than enough.</p>
+
+        <p>Second, <strong>obedience to God beats permission from men</strong>. <em>"We ought to obey God rather than men."</em> If your government says preach a different gospel, refuse. If your denomination says soften the cross, refuse. If your culture says rewrite the sexual ethic of Scripture, refuse. The Sanhedrin's permission slip is not required for the work of Christ.</p>
+
+        <p>Third, <strong>watch the inside, not just the outside</strong>. The church survived the Sanhedrin. It almost did not survive Ananias and Sapphira. The deadliest threats to a Spirit-filled fellowship are almost never external. They are the lies we tell to look more spiritual than we are. Live a transparent life before God and your brothers and sisters. Bring the whole offering or none at all. He sees through you anyway.</p>
+
+        <p>The Lord who shook the prison doors is the same Lord who shakes prayer meetings still. Believe Him. Obey Him. And, like the apostles, leave every Sanhedrin in your life rejoicing that you have been counted worthy to bear His name.</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>I. Las tres de la tarde en la puerta llamada Hermosa</h2>
+        <p>Pentecostés ha terminado. Las multitudes han regresado a Partia y Mesopotamia y Egipto y Creta. Tres mil nuevos creyentes siguen en Jerusalén tratando de descubrir de qué acaban de hacerse parte. Y en una tarde corriente de finales de la primavera del año 33 d.C., dos de los apóstoles — Pedro y Juan, la misma pareja que Jesús apartó en la transfiguración y en Getsemaní — subieron al templo a la hora novena, las tres de la tarde, la hora de la oración vespertina.</p>
+
+        <p>A la puerta llamada Hermosa estaba sentado un hombre que había sido cargado allí cada día laborable durante cuarenta años (Hechos 4:22 nos dice su edad). Era cojo desde el vientre de su madre. La Puerta Hermosa era el sitio principal para mendigar en la ciudad — todo peregrino que subía a orar tenía que pasarla al entrar. Pidió a Pedro y a Juan una limosna. El griego dice que fijaron los ojos en él. El hombre se animó — debió pensar que venía una moneda generosa. Entonces Pedro dijo la línea que ha resonado en los oídos de la iglesia durante dos mil años: <em>"No tengo plata ni oro; mas lo que tengo te doy: En el nombre de Jesucristo de Nazaret, levántate y anda"</em> (Hechos 3:6, RVG). Y se inclinó y le tomó la mano derecha y lo levantó.</p>
+
+        <p>Lo que pasó después es una de las frases más alegres del Nuevo Testamento. <em>"Y saltando, se puso en pie, y anduvo; y entró con ellos en el templo, andando, y saltando, y alabando a Dios"</em> (Hechos 3:8, RVG). Cuarenta años había estado sentado fuera de aquella puerta. Ahora entra <em>adentro</em> sobre sus dos pies, brincando como un niño, y nunca más se sentó a la puerta. La multitud que lo reconoció se llenó de asombro y maravilla. Vinieron corriendo de todos lados. Pedro, que nunca desperdició un público, predicó de inmediato su segundo sermón — y los tres mil pasaron a ser cinco mil (Hechos 4:4). La desviación en su sermón es notable. Miró a los curiosos y dijo: <em>"¿Por qué os maravilláis de esto? ¿O por qué ponéis los ojos en nosotros, como si por nuestro poder o piedad hubiésemos hecho andar a éste?"</em> (Hechos 3:12, RVG). Fue el nombre de Jesús lo que lo hizo. Pedro es firme en eso, y nosotros también deberíamos serlo. En el momento en que el mensajero recibe el crédito, al Maestro le roban.</p>
+
+        <h2>II. El primer arresto, y una frase que el mundo no pudo olvidar</h2>
+        <p>Para la mañana siguiente Pedro y Juan estaban presos. El capitán de la guardia del templo, los sacerdotes y los saduceos estaban "muy molestos" — el eufemismo del año por parte de Lucas — porque los apóstoles enseñaban al pueblo la resurrección de los muertos, la misma doctrina que los saduceos ni siquiera creían. Echaron a los apóstoles en la cárcel hasta la mañana. El Sanedrín se reunió al día siguiente, el mismo cuerpo que menos de dos meses antes había condenado a Jesús. Plantearon una sola pregunta: <em>"¿Con qué potestad, o en qué nombre, habéis hecho vosotros esto?"</em> (Hechos 4:7, RVG).</p>
+
+        <p>Pedro, lleno del Espíritu Santo, dio una respuesta de un solo párrafo que contiene una de las afirmaciones más exclusivas hechas jamás en la religión humana: <em>"Sea notorio a todos vosotros, y a todo el pueblo de Israel, que en el nombre de Jesucristo de Nazaret, a quien vosotros crucificasteis, y a quien Dios resucitó de los muertos, por él, este hombre está en pie sano delante de vosotros… Y en ningún otro hay salvación; porque no hay otro nombre debajo del cielo, dado a los hombres, en que podamos ser salvos"</em> (Hechos 4:10, 12, RVG). Léalo dos veces. <em>Ningún otro nombre.</em> Ni Buda. Ni Mahoma. Ni Confucio. Ni Krishna. Ni el Dalai Lama. Ni su propia sinceridad, ni sus propias buenas obras, ni su propia decencia. Solo Jesús.</p>
+
+        <p>El concilio se maravilló. Lucas dice que notaron dos cosas en estos hombres. Primero, eran sin letras y sin instrucción — no tenían la educación adecuada ni los títulos adecuados. Segundo, el Sanedrín <em>"reconocían que habían estado con Jesús"</em> (Hechos 4:13, RVG). Qué bendición recibir. La gente que había pasado cualquier tiempo con Cristo llevaba algo de Él consigo cuando entraba en una sala. Quiera Dios que se diga lo mismo de nosotros.</p>
+
+        <p>El hombre sanado estaba parado allí mismo — no podían negar el milagro. Así que recurrieron al único arma que una institución corrupta tiene cuando se le acaban los argumentos: la intimidación. Mandaron a Pedro y Juan a dejar de hablar en el nombre de Jesús. La respuesta ha moldeado la conciencia cristiana desde entonces: <em>"Juzgad si es justo delante de Dios obedecer antes a vosotros que a Dios. Porque no podemos dejar de decir lo que hemos visto y oído"</em> (Hechos 4:19–20, RVG).</p>
+
+        <p>Liberados con amenazas, los apóstoles regresaron a los suyos y celebraron una reunión de oración. No oraron por seguridad. No oraron por una orden judicial contra el Sanedrín. Oraron: <em>"Y ahora Señor… concede a tus siervos que con todo denuedo hablen tu palabra"</em> (Hechos 4:29, RVG). Y el edificio tembló. <em>"Fueron todos llenos del Espíritu Santo, y hablaban con denuedo la palabra de Dios"</em> (Hechos 4:31, RVG). En Hechos la respuesta a las amenazas es más denuedo, no menos. Hemos perdido en gran medida ese instinto. Que Dios lo restaure.</p>
+
+        <h2>III. Una historia dentro de la iglesia que casi nadie cuenta</h2>
+        <p>Los creyentes tenían todas las cosas en común. Un hombre llamado José, de Chipre, levita, vendió un campo y trajo el monto entero y lo puso a los pies de los apóstoles. Los apóstoles quedaron tan impresionados que le pusieron un nuevo apodo: Bernabé, "Hijo de consolación". Recuerde ese nombre. Va a rescatar a Saulo de Tarso unos capítulos más adelante y va a hallar a un joven llamado Marcos unos capítulos después. La iglesia necesita Bernabés.</p>
+
+        <p>Luego vino la contraparte oscura. Un esposo y su esposa, llamados Ananías y Safira, también vendieron una propiedad. Querían el reconocimiento que había recibido Bernabé, pero no querían entregar todo el dinero. Así que urdieron un plan. Traerían parte y le dirían a la iglesia que era el monto completo. No era el regalo parcial el pecado — Pedro lo deja claro: <em>"Reteniéndola, ¿no se te quedaba a ti? y vendida, ¿no estaba en tu poder?"</em> (Hechos 5:4, RVG). Podían haber dado el porcentaje que quisieran. El pecado fue la mentira. Querían la reputación de la entrega total sin la realidad de ella. <em>"No has mentido a los hombres, sino a Dios"</em> (Hechos 5:4, RVG). Ananías cayó muerto a los pies del apóstol. Tres horas después Safira entró sin saber, dijo la misma mentira, y se unió a su esposo. <em>"Y vino gran temor sobre toda la iglesia, y sobre todos los que oyeron estas cosas"</em> (Hechos 5:11, RVG).</p>
+
+        <p>Esta es la primera amenaza interna a la nueva iglesia y Dios la trató sin una sola reunión de comité. ¿Por qué tan severamente? Porque el cáncer del fingimiento religioso mata a una congregación llena del Espíritu más rápido que cualquier persecución externa. Cada pastor honrado que he conocido ha tenido que llorar por una iglesia que no había muerto sino que había sido embalsamada — guardando los movimientos de la vida con un cadáver dentro. Hechos 5 es una advertencia tan feroz como cualquiera de la Escritura: a Dios no le impresiona nuestro desempeño. Él ve el corazón, ve los libros, ve las conversaciones del estacionamiento. Que nunca cambiemos la realidad del Espíritu por la reputación del Espíritu.</p>
+
+        <h2>IV. Segundo round con el Sanedrín</h2>
+        <p>Las señales y los prodigios siguieron. La gente sacaba a los enfermos a las calles para que la sombra de Pedro al pasar tocara a alguno y los sanara. El sumo sacerdote y los saduceos, "llenos de celos" (literalmente <em>celos</em> — sabían leer la sala y la sala se les estaba vaciando), arrestaron a los apóstoles y los echaron a todos en la cárcel pública. Esa noche un ángel del Señor abrió las puertas de la prisión y los sacó, con órdenes de marcha: <em>"Id, y puestos en pie en el templo, anunciad al pueblo todas las palabras de esta vida"</em> (Hechos 5:20, RVG). Al amanecer estaban de vuelta en los atrios del templo, predicando. El Sanedrín se reunió. Mandaron oficiales. Los oficiales volvieron desconcertados — la prisión estaba segura, los guardias en sus puestos, pero la celda estaba vacía. Entonces un mensajero entró corriendo: "Los hombres que metieron en la cárcel anoche están en el templo enseñando al pueblo."</p>
+
+        <p>Llevados ante el concilio una segunda vez, los apóstoles entregaron la línea que se ha grabado en el tuétano de la historia cristiana. El sumo sacerdote dijo: "Os mandamos estrictamente que no enseñaseis en este nombre." Pedro respondió: <em>"Es necesario obedecer a Dios antes que a los hombres"</em> (Hechos 5:29, RVG). Es la orden de marcha de la Iglesia cristiana por dos mil años.</p>
+
+        <p>Es la línea que Tyndale obedeció cuando tradujo la Biblia sabiendo que lo quemarían por ello. Es la línea que la iglesia africana ha obedecido cuando sus miembros fueron decapitados por el ISIS en las playas de Libia. Es la línea que cada pastor fiel obedece cuando una denominación le dice que suavice el evangelio y él no lo suaviza. Pedro y los apóstoles plantaron ese principio frente al tribunal religioso más poderoso de su nación, y el principio sigue en pie.</p>
+
+        <p>El Sanedrín los quería muertos. Pero un fariseo llamado Gamaliel — el viejo maestro de Saulo de Tarso — se levantó. Era, por la propia admisión del Nuevo Testamento, un hombre sabio. Citó dos movimientos mesiánicos recientes y fracasados (Teudas y Judas el galileo) y dijo, en efecto: "Si esto es solo otro fogonazo humano, se apagará por sí solo. Pero si es de Dios, no podréis pararlo, y aun podréis veros <em>luchando contra Dios</em>" (Hechos 5:39, RVG). Es una frase que hiela la sangre de un consejero. La cautela de Gamaliel ganó el día. Azotaron a los apóstoles y los soltaron. Y los apóstoles partieron del concilio <em>"gozosos de haber sido tenidos por dignos de padecer afrenta por su nombre"</em> (Hechos 5:41, RVG). Yo nunca he sido azotado por el evangelio. He leído los testimonios de quienes sí lo han sido. Casi sin excepción dicen lo mismo — el gozo del otro lado de la obediencia no se parece a ningún gozo que este mundo pueda fabricar.</p>
+
+        <h2>V. De Pearl Harbor al Calvario</h2>
+        <p>Vale la pena detenerse en la advertencia de Gamaliel, porque la frase "luchando contra Dios" describe más vidas de las que nos gusta admitir. Hay personas peleando contra Él que ni siquiera lo saben. Hay personas peleando contra Él que sinceramente piensan que le sirven — Saulo de Tarso es el caso más claro de la Biblia.</p>
+
+        <p>El capitán Mitsuo Fuchida fue el piloto japonés que dirigió el ataque aéreo contra Pearl Harbor el 7 de diciembre de 1941. Después de la guerra era un ex oficial derrotado, humillado y desempleado, cultivando cerca de Osaka. Un día, en una estación de tren de Tokio, un norteamericano le entregó un folleto titulado <em>Yo fui prisionero en Japón</em>. Era el testimonio de un bombardero norteamericano llamado Jacob DeShazer que había sido capturado por los japoneses en 1942 después del ataque Doolittle, golpeado y hambreado durante cuarenta meses en un campo de prisioneros, y que sin embargo había vuelto al Japón después de la guerra como misionero porque había leído una Biblia en su celda y había sido convertido por las palabras <em>"Padre, perdónalos, porque no saben lo que hacen"</em> (Lucas 23:34, RVG). La historia de DeShazer perturbó tanto a Fuchida que compró una Biblia. Leyó esas mismas palabras de Cristo desde la cruz. Escribió después: <em>"En ese mismo momento me pareció encontrar a Jesús por primera vez."</em> El piloto bombardero se puso de rodillas y le pidió al mismo Jesús contra quien había estado peleando que lo perdonara. Después él y DeShazer — el hombre que la fuerza aérea de Fuchida había capturado, el hombre a quien Fuchida había ayudado a encarcelar — viajaron juntos por todo el Japón los siguientes treinta años predicando el evangelio. Decenas de miles de japoneses vinieron a Cristo.</p>
+
+        <p>Fuchida había estado peleando contra Dios durante cuarenta años y no lo sabía. Saulo de Tarso había estado peleando contra Dios por años y no lo sabía. El Sanedrín había estado peleando contra Dios por casi dos meses y no lo sabía. Gamaliel sabía lo suficiente para temer. Lo más sabio que dijo el gran fariseo fue: <em>"No seáis tal vez hallados luchando contra Dios."</em> Algunos de ustedes leyendo esto en este momento están peleando contra Dios de una manera que aún no han admitido. Deténganse. Déjenlo. Permítanle perdonarles como perdonó al piloto de Pearl Harbor. El mismo Jesús está extendiendo la misma mano.</p>
+
+        <h2>VI. La primera crisis interna resuelta</h2>
+        <p>La iglesia ahora crecía tan rápido que tropezó con su primer problema organizativo. Las viudas de habla griega (los helenistas) sentían que estaban siendo desatendidas en la distribución diaria de alimentos en comparación con las viudas de habla aramea (los hebreos). Los Doce convocaron una reunión congregacional. Su respuesta es una pieza de sabiduría de liderazgo que cada pastor debería tener sobre el escritorio: <em>"No es justo que nosotros dejemos la palabra de Dios, para servir a las mesas"</em> (Hechos 6:2, RVG). No porque servir las mesas estuviera por debajo de ellos — Jesús había lavado pies — sino porque el llamado particular de los apóstoles requería que se entregaran a <em>"la oración, y al ministerio de la palabra"</em> (Hechos 6:4, RVG). Así que instruyeron a la iglesia a escoger siete varones de buen testimonio, llenos del Espíritu Santo y de sabiduría, para encargarse de la distribución de alimentos. Los siete fueron elegidos, los apóstoles les impusieron las manos, y la iglesia siguió adelante.</p>
+
+        <p>Esta es, por lo que vale, la primera aparición en la Escritura de lo que ahora llamamos el oficio de diácono. Note que no fue creado en una sesión de planificación estratégica sino en respuesta a una queja real de la congregación que necesitaba una solución real y pronta. Note también las cualificaciones: llenos del Espíritu Santo y de sabiduría. Note además que dos de los siete — Esteban y Felipe — dentro de un año serían el primer mártir y el primer evangelista intercultural en la historia de la iglesia. El hombre a quien permita servir la sopa puede estar a tres meses de predicar al Sanedrín o evangelizar a un funcionario etíope.</p>
+
+        <p>Lucas cierra esta sección con una de sus grandes declaraciones resumen: <em>"Y crecía la palabra del Señor, y el número de los discípulos se multiplicaba grandemente en Jerusalén; también muchos de los sacerdotes obedecían a la fe"</em> (Hechos 6:7, RVG). Note esa última frase. <em>Sacerdotes.</em> El mismo establecimiento del templo que había entregado a Jesús a Pilato ahora estaba enviando a algunos de sus miembros a la iglesia. El evangelio había saltado el muro. Jerusalén estaba siendo sacudida desde adentro. El Espíritu había venido, y nadie — ni el Sanedrín ni una pareja hipócrita en las bancas ni un cuello de botella logístico en el comedor de beneficencia — podía detener lo que Dios había comenzado.</p>
+
+        <h2>VII. Tres órdenes de marcha</h2>
+        <p>De estos cuatro capítulos lleve a casa esta noche tres lecciones. Primera, <strong>el nombre todavía funciona</strong>. La sanidad del cojo en la Puerta Hermosa sigue siendo el patrón. No se nos promete plata u oro para dar a la gente quebrantada de nuestras ciudades. Se nos da el nombre de Jesús, y ese nombre es más que suficiente.</p>
+
+        <p>Segunda, <strong>la obediencia a Dios vale más que el permiso de los hombres</strong>. <em>"Es necesario obedecer a Dios antes que a los hombres."</em> Si su gobierno le manda predicar otro evangelio, niéguese. Si su denominación le dice que suavice la cruz, niéguese. Si su cultura le dice que reescriba la ética sexual de la Escritura, niéguese. El permiso del Sanedrín no se requiere para la obra de Cristo.</p>
+
+        <p>Tercera, <strong>vigile lo de adentro, no solo lo de afuera</strong>. La iglesia sobrevivió al Sanedrín. Casi no sobrevivió a Ananías y Safira. Las amenazas más mortíferas a una congregación llena del Espíritu casi nunca son externas. Son las mentiras que decimos para parecer más espirituales de lo que somos. Viva una vida transparente delante de Dios y de sus hermanos y hermanas. Traiga la ofrenda entera o no traiga ninguna. Él lo ve todo de todas maneras.</p>
+
+        <p>El Señor que sacudió las puertas de la prisión es el mismo Señor que todavía sacude las reuniones de oración. Créale. Obedézcale. Y, como los apóstoles, salga de cada Sanedrín de su vida regocijándose de haber sido tenido por digno de llevar Su nombre.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 2 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 2 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></span><span class="lang-es"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></span></p>
+    <div class="exam-status hidden" id="examStatus"></div>
+<div class="mc-section" id="mcSection">
+  <h3><span class="lang-en">Multiple Choice &mdash; 20 Questions</span><span class="lang-es">Opción Múltiple &mdash; 20 Preguntas</span></h3>
+  <div id="mcContainer"></div>
+</div>
+<div class="sa-section" id="saSection">
+  <h3><span class="lang-en">Short Answer &mdash; 10 Questions <span class="sa-badge" id="saBadgeEn"></span></span><span class="lang-es">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="saBadgeEs"></span></span></h3>
+  <p class="sa-note"><span class="lang-en" id="saNoteEn"></span><span class="lang-es" id="saNoteEs"></span></p>
+  <div id="kwContainer"></div>
+</div>
+<div style="margin-top: 20px;">
+  <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+  <button id="resetExamBtn" class="btn-reset" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+  <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+</div>
+</div>
+
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+
+const TOTAL_UNITS = 11;
+const CURRENT_UNIT = 2;
+const NEXT_URL = 'CTSActsUnit3.html';
+
+// === MC + SA data (preserved verbatim from upstream) ===
+const mcQuestions = [
+    { textEn: "1. The lame man at the temple gate had been crippled:", textEs: "1. El cojo en la puerta del templo había estado paralítico:", optionsEn: ["From birth, for over forty years", "For only a few months", "From a recent accident", "From old age"], optionsEs: ["Desde su nacimiento, por más de cuarenta años", "Por solo unos meses", "Por un accidente reciente", "Por la vejez"], correct: 0 },
+    { textEn: "2. Peter's exact words to the lame man were:", textEs: "2. Las palabras exactas de Pedro al cojo fueron:", optionsEn: ["By the power of God I command you", "Take this coin and walk", "Silver and gold I do not have, but what I do have I give you: in the name of Jesus Christ of Nazareth, rise up and walk", "Believe and you will be healed"], optionsEs: ["Por el poder de Dios te mando", "Toma esta moneda y anda", "No tengo plata ni oro; mas lo que tengo te doy: En el nombre de Jesucristo de Nazaret, levántate y anda", "Cree y serás sanado"], correct: 2 },
+    { textEn: "3. After healing, the lame man went into the temple:", textEs: "3. Después de la sanidad, el cojo entró al templo:", optionsEn: ["Carried by Peter and John", "Walking, leaping, and praising God", "Quietly", "Asking for more money"], optionsEs: ["Cargado por Pedro y Juan", "Andando, saltando y alabando a Dios", "En silencio", "Pidiendo más dinero"], correct: 1 },
+    { textEn: "4. Peter's first defense before the Sanhedrin declared:", textEs: "4. La primera defensa de Pedro ante el Sanedrín declaró:", optionsEn: ["Salvation can come through many religions", "We acted on our own authority", "There is no other name under heaven by which we must be saved", "We will obey the council"], optionsEs: ["La salvación puede venir por muchas religiones", "Actuamos por nuestra propia autoridad", "No hay otro nombre bajo el cielo en que podamos ser salvos", "Obedeceremos al concilio"], correct: 2 },
+    { textEn: "5. The Sanhedrin marveled at Peter and John because they:", textEs: "5. El Sanedrín se maravilló de Pedro y Juan porque ellos:", optionsEn: ["Were uneducated and untrained yet bold; they realized they had been with Jesus", "Spoke many languages", "Were wealthy", "Were Pharisees"], optionsEs: ["Eran sin letras e indoctos pero audaces; reconocieron que habían estado con Jesús", "Hablaban muchos idiomas", "Eran ricos", "Eran fariseos"], correct: 0 },
+    { textEn: "6. After being released the apostles prayed primarily for:", textEs: "6. Después de ser liberados los apóstoles oraron principalmente por:", optionsEn: ["Safety from further persecution", "Recognition from the Sanhedrin", "Wealth and ease", "Boldness to speak the word of God"], optionsEs: ["Seguridad contra más persecución", "Reconocimiento del Sanedrín", "Riqueza y comodidad", "Denuedo para hablar la palabra de Dios"], correct: 3 },
+    { textEn: "7. Joseph the Levite from Cyprus received a new name from the apostles. That name was:", textEs: "7. José, el levita de Chipre, recibió un nuevo nombre de los apóstoles. Ese nombre era:", optionsEn: ["Peter (Stone)", "Boanerges (Son of Thunder)", "Cephas (Rock)", "Barnabas (Son of Encouragement)"], optionsEs: ["Pedro (Piedra)", "Boanerges (Hijo del trueno)", "Cefas (Roca)", "Bernabé (Hijo de consolación)"], correct: 3 },
+    { textEn: "8. The sin of Ananias and Sapphira was:", textEs: "8. El pecado de Ananías y Safira fue:", optionsEn: ["Lying to the Holy Spirit about the amount given", "Keeping any portion of the sale", "Owning property at all", "Refusing to give"], optionsEs: ["Mentir al Espíritu Santo sobre el monto entregado", "Quedarse con cualquier porción de la venta", "Poseer propiedad", "Negarse a dar"], correct: 0 },
+    { textEn: "9. Peter told Ananias the property:", textEs: "9. Pedro le dijo a Ananías que la propiedad:", optionsEn: ["While owned was his own, and after sale was in his control", "Should have been given in full", "Belonged entirely to the church", "Was forbidden to be sold"], optionsEs: ["Mientras la tenía era suya, y vendida estaba en su poder", "Debía haber sido entregada completa", "Pertenecía totalmente a la iglesia", "Estaba prohibido venderla"], correct: 0 },
+    { textEn: "10. The result of Ananias and Sapphira's death was that:", textEs: "10. El resultado de la muerte de Ananías y Safira fue que:", optionsEn: ["The church became wealthy", "The Sanhedrin was pleased", "Great fear came upon all the church", "Persecution increased"], optionsEs: ["La iglesia se hizo rica", "El Sanedrín se alegró", "Vino gran temor sobre toda la iglesia", "Aumentó la persecución"], correct: 2 },
+    { textEn: "11. The angel released the apostles from prison and told them to:", textEs: "11. El ángel liberó a los apóstoles de la cárcel y les mandó:", optionsEn: ["Flee Jerusalem immediately", "Go, stand in the temple, and speak the words of this life", "Hide until the storm passed", "Return to Galilee"], optionsEs: ["Huir de Jerusalén inmediatamente", "Ir, ponerse en pie en el templo, y anunciar las palabras de esta vida", "Esconderse hasta que pasara la tormenta", "Regresar a Galilea"], correct: 1 },
+    { textEn: "12. Peter's defining principle in Acts 5:29 is:", textEs: "12. El principio definitorio de Pedro en Hechos 5:29 es:", optionsEn: ["Always obey civil authorities", "We ought to obey God rather than men", "We must seek peace at any cost", "Religious freedom is a human right"], optionsEs: ["Siempre obedecer a las autoridades civiles", "Es necesario obedecer a Dios antes que a los hombres", "Debemos buscar la paz a toda costa", "La libertad religiosa es un derecho humano"], correct: 1 },
+    { textEn: "13. Gamaliel was:", textEs: "13. Gamaliel era:", optionsEn: ["A Sadducee high priest", "A Roman governor", "A Zealot", "A Pharisee teacher of the law respected by all the people"], optionsEs: ["Un sumo sacerdote saduceo", "Un gobernador romano", "Un zelote", "Un maestro fariseo de la ley respetado por todo el pueblo"], correct: 3 },
+    { textEn: "14. Gamaliel's argument warned the Sanhedrin they might be:", textEs: "14. El argumento de Gamaliel advirtió al Sanedrín que podían estar:", optionsEn: ["Insulting the emperor", "Found fighting against God", "Wasting tax revenue", "Disturbing public order"], optionsEs: ["Insultando al emperador", "Hallándose luchando contra Dios", "Desperdiciando impuestos", "Perturbando el orden público"], correct: 1 },
+    { textEn: "15. After being flogged, the apostles departed from the Sanhedrin:", textEs: "15. Después de ser azotados, los apóstoles partieron del Sanedrín:", optionsEn: ["Discouraged and silenced", "Fleeing Jerusalem", "Planning legal action", "Rejoicing that they were counted worthy to suffer shame for His name"], optionsEs: ["Desanimados y silenciados", "Huyendo de Jerusalén", "Planeando acción legal", "Gozosos de haber sido tenidos por dignos de padecer afrenta por su nombre"], correct: 3 },
+    { textEn: "16. The dispute that led to the appointment of the Seven concerned:", textEs: "16. La disputa que llevó al nombramiento de los Siete se trataba de:", optionsEn: ["The neglect of Hellenist (Greek-speaking) widows in the daily distribution", "Doctrinal disagreement", "Building plans", "Financial corruption"], optionsEs: ["El descuido de las viudas helenistas (de habla griega) en la distribución diaria", "Desacuerdo doctrinal", "Planes de construcción", "Corrupción financiera"], correct: 0 },
+    { textEn: "17. The apostles' reason for delegating food distribution was that they should:", textEs: "17. La razón de los apóstoles para delegar la distribución de alimentos fue que ellos debían:", optionsEn: ["Avoid contact with the poor", "Travel more", "Give themselves to prayer and the ministry of the word", "Manage finances directly"], optionsEs: ["Evitar contacto con los pobres", "Viajar más", "Entregarse a la oración y al ministerio de la palabra", "Manejar las finanzas directamente"], correct: 2 },
+    { textEn: "18. The qualifications for the Seven were:", textEs: "18. Las cualificaciones para los Siete eran:", optionsEn: ["Wealthy and well-connected", "Of good reputation, full of the Holy Spirit and wisdom", "Born in Jerusalem", "Trained as Pharisees"], optionsEs: ["Ricos y bien conectados", "De buen testimonio, llenos del Espíritu Santo y de sabiduría", "Nacidos en Jerusalén", "Entrenados como fariseos"], correct: 1 },
+    { textEn: "19. Two of the Seven who would later become prominent in the church were:", textEs: "19. Dos de los Siete que más tarde se destacarían en la iglesia fueron:", optionsEn: ["Peter and John", "Andrew and James", "Stephen and Philip", "Matthew and Thomas"], optionsEs: ["Pedro y Juan", "Andrés y Jacobo", "Esteban y Felipe", "Mateo y Tomás"], correct: 2 },
+    { textEn: "20. Acts 6:7 reports that even some members of which group were 'obedient to the faith'?", textEs: "20. Hechos 6:7 informa que incluso algunos miembros de qué grupo 'obedecían a la fe'?", optionsEn: ["Roman soldiers", "Greek philosophers", "Samaritans", "The priests of the temple"], optionsEs: ["Soldados romanos", "Filósofos griegos", "Samaritanos", "Los sacerdotes del templo"], correct: 3 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Explain why Peter immediately deflected glory from himself after the healing of the lame man (Acts 3:12). Why does this deflection matter for ministry today?", textEs: "21. Explique por qué Pedro inmediatamente desvió la gloria de sí mismo después de la sanidad del cojo (Hechos 3:12). ¿Por qué importa esta desviación para el ministerio hoy?", kwEn: ["deflect", "name", "jesus", "glory", "humb", "credit", "minis", "power"], kwEs: ["desv", "nombre", "jesús", "gloria", "humild", "crédito", "minis", "poder"] , modelEn: "When the crowd gawked at the healing, Peter immediately deflected the glory from himself, asking why they stared as though by his own power or godliness he had made the man walk — it was the name of Jesus that did it. This humility matters for ministry today because the minute the messenger takes the credit, the Master gets robbed. A servant of Christ points past himself to the name and power of Jesus rather than building a following on his own gifts.", modelEs: "Cuando la multitud se asombró por la sanidad, Pedro inmediatamente desvió la gloria de sí mismo, preguntando por qué los miraban como si por su propio poder o piedad hubieran hecho andar al hombre; fue el nombre de Jesús lo que lo hizo. Esta humildad importa para el ministerio hoy porque en cuanto el mensajero toma el crédito, al Maestro se le roba. El siervo de Cristo señala más allá de sí mismo al nombre y al poder de Jesús." },
+    { textEn: "22. Discuss the exclusivity claim of Acts 4:12 ('there is no other name'). How should this shape Christian witness in a pluralistic culture?", textEs: "22. Discuta la afirmación exclusiva de Hechos 4:12 ('no hay otro nombre'). ¿Cómo debería esto moldear el testimonio cristiano en una cultura pluralista?", kwEn: ["exclus", "other", "name", "jesus", "salv", "plural", "witness", "only"], kwEs: ["exclus", "otro", "nombre", "jesús", "salv", "plural", "testi", "único"] , modelEn: "Acts 4:12 makes one of the most exclusive claims in all religion: there is no other name under heaven by which we must be saved — only Jesus, not Buddha, Muhammad, or our own good works. In a pluralistic culture this should make Christian witness both humble and unflinching: we hold the exclusivity of salvation in Christ with compassion, never softening the one name even when the culture prizes many paths. We witness in love, but we do not negotiate the only name that saves.", modelEs: "Hechos 4:12 hace una de las afirmaciones más exclusivas de toda religión: no hay otro nombre bajo el cielo por el cual debamos ser salvos — solo Jesús, no Buda ni Mahoma ni nuestras buenas obras. En una cultura pluralista esto debe hacer el testimonio cristiano humilde pero firme: sostenemos la exclusividad de la salvación en Cristo con compasión, sin suavizar el único nombre. Testificamos en amor, pero no negociamos el único nombre que salva." },
+    { textEn: "23. The believers prayed for boldness, not safety, after their first arrest (Acts 4:29). What does this priority teach us about prayer in persecution?", textEs: "23. Los creyentes oraron por denuedo, no por seguridad, después de su primer arresto (Hechos 4:29). ¿Qué nos enseña esta prioridad sobre la oración en la persecución?", kwEn: ["bold", "pray", "persec", "spirit", "courag", "safe", "fear", "arrest"], kwEs: ["denuedo", "oraci", "persec", "espíritu", "valor", "segur", "temor", "arrest"] , modelEn: "After their first arrest the believers did not pray for safety or for relief from persecution; they prayed for boldness to keep speaking the word, and the building shook as they were filled with the Holy Spirit. This teaches that in persecution the right request is courage, not comfort. The biblical instinct under threat is more boldness, not less — we ask God not to remove the danger but to take away our fear so we keep proclaiming Christ after every arrest.", modelEs: "Tras su primer arresto los creyentes no oraron por seguridad ni por alivio de la persecución; la petición en su oración fue denuedo para seguir hablando la palabra, y el lugar tembló al ser llenos del Espíritu Santo. Esto enseña que en la persecución la petición correcta es valor, no comodidad. El instinto bíblico bajo amenaza es más denuedo, no menos: pedimos a Dios no que quite el peligro sino que quite nuestro temor para seguir proclamando a Cristo." },
+    { textEn: "24. Why did God deal so severely with Ananias and Sapphira? What does this teach about hypocrisy in the church?", textEs: "24. ¿Por qué trató Dios tan severamente a Ananías y Safira? ¿Qué enseña esto sobre la hipocresía en la iglesia?", kwEn: ["anan", "saph", "lie", "hypoc", "spirit", "holy", "church", "sever"], kwEs: ["anan", "safi", "menti", "hipoc", "espíritu", "santo", "iglesia", "sever"] , modelEn: "God dealt severely with Ananias and Sapphira not because they gave only part of the money — that was theirs to give — but because they lied, claiming a full surrender they had not made; Peter says they lied not to men but to the Holy Spirit. The severity warns that the cancer of religious hypocrisy kills a Spirit-filled church faster than any outside persecution. God is not impressed by performance; He sees the heart, and the church must prize the reality of the Holy Spirit over the reputation of it.", modelEs: "Dios trató severamente a Ananías y Safira no porque dieran solo parte del dinero — eso era suyo — sino porque mintieron, fingiendo una entrega total que no hicieron; Pedro dice que mintieron no a los hombres sino al Espíritu Santo. La severidad advierte que el cáncer de la hipocresía religiosa mata a una iglesia llena del Espíritu más rápido que cualquier persecución externa. Dios no se impresiona con la actuación; ve el corazón, y la iglesia debe valorar la realidad del Espíritu Santo por encima de su reputación." },
+    { textEn: "25. Explain the principle 'we ought to obey God rather than men' (Acts 5:29). Give a concrete example of how this might apply to a believer today.", textEs: "25. Explique el principio 'es necesario obedecer a Dios antes que a los hombres' (Hechos 5:29). Dé un ejemplo concreto de cómo podría aplicarse a un creyente hoy.", kwEn: ["obey", "god", "men", "author", "conscien", "civil", "law", "right"], kwEs: ["obedec", "dios", "hombres", "autorid", "concien", "civil", "ley", "antes"] , modelEn: "The principle of Acts 5:29 is that when human authority commands what God forbids, we must obey God rather than men — the line Tyndale obeyed in translating the Bible and that martyrs have obeyed under ISIS. It does not despise civil law or authority; rather, a conscience bound to God outranks any human command that contradicts Him. A concrete example today: if a government or denomination orders a pastor to preach a different gospel or rewrite Scripture's ethics, he refuses, because obedience to God is the higher right.", modelEs: "El principio de Hechos 5:29 es que cuando la autoridad humana ordena lo que Dios prohíbe, debemos obedecer a Dios antes que a los hombres — la línea que Tyndale obedeció al traducir la Biblia. No desprecia la ley civil ni la autoridad; más bien, la conciencia ligada a Dios está por encima de cualquier mandato humano que lo contradiga. Ejemplo concreto hoy: si un gobierno o denominación ordena predicar otro evangelio o reescribir la ética de la Escritura, el pastor se niega, porque obedecer a Dios es lo correcto." },
+    { textEn: "26. What was wise about Gamaliel's counsel (Acts 5:34–39)? Was he himself a believer? What does his caution teach about discernment?", textEs: "26. ¿Qué tenía de sabio el consejo de Gamaliel (Hechos 5:34–39)? ¿Era él mismo creyente? ¿Qué enseña su cautela sobre el discernimiento?", kwEn: ["gamal", "wis", "fight", "god", "discern", "patien", "against", "time"], kwEs: ["gamal", "sab", "luch", "dios", "discern", "pacien", "contra", "tiempo"] , modelEn: "Gamaliel, Saul of Tarsus's teacher, wisely counseled patience: if the movement were merely human it would burn out like Theudas and Judas of Galilee, but if it were from God they could not stop it and might find themselves fighting against God. There is no evidence he ever became a believer; his was prudent discernment, not faith. His caution teaches that time tests what is of God, and that we should be slow to fight against what we do not understand lest we oppose God Himself.", modelEs: "Gamaliel, maestro de Saulo de Tarso, aconsejó sabiamente paciencia: si el movimiento era solo humano se apagaría como Teudas y Judas el galileo, pero si era de Dios no podrían detenerlo y podrían hallarse luchando contra Dios. No hay evidencia de que llegara a creer; fue discernimiento prudente, no fe. Su cautela enseña que el tiempo prueba lo que es de Dios, y que debemos ser lentos para luchar contra lo que no entendemos." },
+    { textEn: "27. Discuss the appointment of the Seven (Acts 6:1–7) as a model for delegation and church leadership.", textEs: "27. Discuta el nombramiento de los Siete (Hechos 6:1–7) como modelo para la delegación y el liderazgo eclesial.", kwEn: ["seven", "deacon", "deleg", "lead", "word", "pray", "serve", "table"], kwEs: ["siete", "diácon", "deleg", "líder", "palabra", "oraci", "serv", "mesa"] , modelEn: "When the Greek-speaking widows were neglected, the Twelve refused to leave the word of God to serve tables; instead they had the church choose seven men full of the Spirit and wisdom to handle the food — the first appearance of the office of deacon. This models healthy leadership and delegation: leaders guard their primary calling to prayer and the ministry of the word, and delegate genuine needs to qualified servants. Note that two of the seven, Stephen and Philip, soon became a martyr and an evangelist — the one you let serve soup may be months from the front lines.", modelEs: "Cuando las viudas de habla griega fueron desatendidas, los Doce se negaron a dejar la palabra de Dios para servir a las mesas; en cambio hicieron que la iglesia eligiera a siete hombres llenos del Espíritu y de sabiduría para la distribución — la primera aparición del oficio de diácono. Esto modela el liderazgo y la delegación sanos: los líderes guardan su llamado primario a la oración y al ministerio de la palabra, y delegan las necesidades genuinas a siervos calificados. Dos de los siete, Esteban y Felipe, pronto fueron mártir y evangelista." },
+    { textEn: "28. The story of Mitsuo Fuchida and Jacob DeShazer illustrates Gamaliel's warning about 'fighting against God.' Explain how the story functions as an Acts illustration.", textEs: "28. La historia de Mitsuo Fuchida y Jacob DeShazer ilustra la advertencia de Gamaliel sobre 'luchar contra Dios'. Explique cómo funciona la historia como ilustración de Hechos.", kwEn: ["fuchid", "deshaz", "pearl", "harbor", "forgiv", "fight", "god", "convert"], kwEs: ["fuchid", "deshaz", "pearl", "harbor", "perdón", "luch", "dios", "convert"] , modelEn: "Mitsuo Fuchida, who led the attack on Pearl Harbor, was handed a tract by Jacob DeShazer, an American airman imprisoned and tortured by Japan who was converted in his cell by Christ's words 'Father, forgive them.' Reading those same words, Fuchida met Jesus and knelt to ask forgiveness of the very God he had been fighting against, and the two former enemies preached across Japan together. The story is a living illustration of Gamaliel's warning: like the Sanhedrin and like Saul, Fuchida had been fighting against God without knowing it — until grace stopped him.", modelEs: "Mitsuo Fuchida, que dirigió el ataque a Pearl Harbor, recibió un folleto de Jacob DeShazer, un aviador estadounidense encarcelado y torturado por Japón que fue convertido en su celda por las palabras de Cristo 'Padre, perdónalos'. Al leer esas mismas palabras, Fuchida se encontró con Jesús y se arrodilló a pedir perdón al mismo Dios contra quien había estado luchando, y los dos antiguos enemigos predicaron por todo Japón. La historia ilustra la advertencia de Gamaliel: como el Sanedrín y como Saulo, Fuchida había estado luchando contra Dios sin saberlo, hasta que la gracia lo detuvo." },
+    { textEn: "29. Internal threats (Ananias) versus external threats (Sanhedrin) — which is more dangerous to a healthy church and why?", textEs: "29. Amenazas internas (Ananías) frente a amenazas externas (Sanedrín) — ¿cuál es más peligrosa para una iglesia sana y por qué?", kwEn: ["intern", "extern", "hypoc", "persec", "church", "danger", "anan", "sanhe"], kwEs: ["intern", "extern", "hipoc", "persec", "iglesia", "peligr", "anan", "sane"] , modelEn: "The church survived the external threat of the Sanhedrin's persecution but nearly did not survive the internal threat of Ananias and Sapphira's hypocrisy. The internal danger is the greater one: outside persecution often purifies and strengthens a church, while inside hypocrisy quietly embalms it, leaving the motions of life around a corpse. The deadliest threats to a Spirit-filled fellowship are rarely external; they are the lies we tell to appear more spiritual than we are.", modelEs: "La iglesia sobrevivió la amenaza externa de la persecución del Sanedrín pero casi no sobrevivió la amenaza interna de la hipocresía de Ananías y Safira. El peligro interno es el mayor: la persecución externa a menudo purifica y fortalece, mientras la hipocresía interna embalsama en silencio, dejando los movimientos de vida alrededor de un cadáver. Las amenazas más mortales a una comunidad llena del Espíritu rara vez son externas; son las mentiras que decimos para parecer más espirituales de lo que somos." },
+    { textEn: "30. Synthesize the lessons of Acts 3–6:7 for contemporary church leaders facing both opposition and internal challenges.", textEs: "30. Sintetice las lecciones de Hechos 3–6:7 para los líderes eclesiales contemporáneos que enfrentan tanto oposición como desafíos internos.", kwEn: ["bold", "obey", "integ", "spirit", "lead", "pray", "humb", "deleg"], kwEs: ["denuedo", "obedec", "integ", "espíritu", "líder", "oraci", "humild", "deleg"] , modelEn: "Acts 3–6:7 hands today's leaders three marching orders: the name of Jesus still works, so minister in His power with humility; obey God rather than men, refusing every pressure to soften the gospel; and watch the inside, not just the outside, guarding personal integrity against hypocrisy. Underneath all three is a Spirit-filled life of prayer and bold proclamation — leaders who delegate wisely while keeping themselves to the word. Face opposition with boldness and internal challenges with integrity, and leave every Sanhedrin rejoicing.", modelEs: "Hechos 3–6:7 da a los líderes de hoy tres órdenes de marcha: el nombre de Jesús todavía obra, así que ministre en Su poder con humildad; obedezca a Dios antes que a los hombres, negándose a suavizar el evangelio; y vigile lo interno, no solo lo externo, guardando la integridad contra la hipocresía. Debajo de las tres hay una vida llena del Espíritu, de oración y proclamación con denuedo — líderes que delegan con sabiduría sin dejar la palabra. Enfrente la oposición con denuedo y los desafíos internos con integridad." }
+];
+
+// === Language toggle (3-button group) ===
+const langButtons = document.querySelectorAll('.lang-toggle-group button');
+function setLang(lang) {
+  document.body.classList.remove('lang-en','lang-es','lang-both');
+  document.body.classList.add('lang-' + lang);
+  langButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-lang') === lang));
+}
+langButtons.forEach(btn => btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang'))));
+
+// === Student + Track ===
+function readStudent() {
+  try { return JSON.parse(lsGet('cts_student') || 'null'); } catch(e) { return null; }
+}
+function readTrack() {
+  const t = lsGet('cts_track');
+  if (t === 'cert' || t === 'mdiv' || t === 'thm') return t;
+  const st = readStudent();
+  if (st && st.track) return st.track;
+  return 'cert';
+}
+function isMdiv() { const t = readTrack(); return t === 'mdiv' || t === 'thm'; }
+
+// === Greeting + track badge ===
+function applyStudentUI() {
+  const student = readStudent();
+  const isEs = document.body.classList.contains('lang-es');
+  const greetEl = document.getElementById('studentGreeting');
+  const warn = document.getElementById('regWarn');
+  const slot = document.getElementById('trackBadgeSlot');
+  if (student && student.name) {
+    greetEl.innerHTML = '👋 ' + student.name;
+    if (warn) warn.classList.add('hidden');
+    const track = readTrack();
+    const label = track === 'thm' ? 'Th.M.' : (track === 'mdiv' ? 'M.Div' : (isEs ? 'Certificado' : 'Certificate'));
+    if (slot) slot.innerHTML = '<span class="track-badge">' + label + '</span>';
+  } else {
+    greetEl.innerHTML = '<span style="color:#5b3a1f;">' + (isEs ? 'Bienvenido al Intensivo de Hechos' : 'Welcome to the Acts Intensive') + '</span>';
+    if (warn) warn.classList.remove('hidden');
+    if (slot) slot.innerHTML = '';
+  }
+}
+
+// === Registration modal (U1 only) ===
+
+function showRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.remove('hidden');
+}
+function hideRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.add('hidden');
+}
+const regModal = document.getElementById('regModal');
+const openBtn = document.getElementById('openRegBtn');
+const openBtn2 = document.getElementById('openRegBtn2');
+const saveBtn = document.getElementById('regSaveBtn');
+if (openBtn) openBtn.addEventListener('click', showRegModal);
+if (openBtn2) openBtn2.addEventListener('click', showRegModal);
+if (saveBtn) saveBtn.addEventListener('click', () => {
+  const name = (document.getElementById('regName').value || '').trim();
+  const email = (document.getElementById('regEmail').value || '').trim();
+  const track = (document.querySelector('input[name="regTrack"]:checked') || {}).value || 'cert';
+  const isEs = document.body.classList.contains('lang-es');
+  if (!name) {
+    alert(isEs ? 'Por favor ingrese su nombre completo.' : 'Please enter your full name.');
+    return;
+  }
+  const rec = { name: name, email: email, track: track };
+  try {
+    lsSet('cts_student', JSON.stringify(rec));
+    lsSet('cts_track', track);
+  } catch(e) {}
+  hideRegModal();
+  applyStudentUI();
+  applyExamState();
+});
+// Auto-open modal on U1 if no cts_student present
+if (CURRENT_UNIT === 1 && !readStudent()) {
+  showRegModal();
+}
+
+
+// === Progress grid ===
+let progress = {};
+try { progress = JSON.parse(lsGet('cts_acts_progress')) || {}; } catch(e) { progress = {}; }
+function updateProgressGrid() {
+  const grid = document.getElementById('progressGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 1; i <= TOTAL_UNITS; i++) {
+    let cls = '';
+    if (progress['unit' + i]) cls = 'completed';
+    if (i === CURRENT_UNIT) cls += ' active';
+    grid.innerHTML += '<a href="CTSActsUnit' + i + '.html" class="' + cls + '">' + i + '</a>';
+  }
+}
+updateProgressGrid();
+document.getElementById('prevUnitBtn').onclick = () => {};
+document.getElementById('nextUnitBtn').onclick = () => { window.location.href = NEXT_URL; };
+
+// === Per-unit state keys ===
+const MC_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_passed';
+const SA_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_passed';
+const MC_SCORE_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_score';
+const LOCK_MC_KEY = 'cts_acts_u' + CURRENT_UNIT + '_lockout';
+const LOCK_SA_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_lockout';
+
+function mcPassed() { return lsGet(MC_PASSED_KEY) === '1'; }
+function saPassed() { return lsGet(SA_PASSED_KEY) === '1'; }
+function activeLock() {
+  const now = Date.now();
+  const mc = parseInt(lsGet(LOCK_MC_KEY) || '0', 10);
+  const sa = parseInt(lsGet(LOCK_SA_KEY) || '0', 10);
+  if (mcPassed()) { if (now < sa) return { until: sa, scope: 'sa' }; }
+  else { if (now < mc) return { until: mc, scope: 'mc' }; }
+  return null;
+}
+
+// === Render MC ===
+const mcContainer = document.getElementById('mcContainer');
+mcQuestions.forEach((q, idx) => {
+    /* CTS answer-shuffle (anti-gaming): randomize option order on each render */
+    (function(){var _o=q.optionsEn,_s=q.optionsEs,_n=_o.length,_p=[],_k,_i,_j,_t;for(_k=0;_k<_n;_k++){_p.push(_k);}for(_i=_n-1;_i>0;_i--){_j=Math.floor(Math.random()*(_i+1));_t=_p[_i];_p[_i]=_p[_j];_p[_j]=_t;}q.optionsEn=_p.map(function(x){return _o[x];});q.optionsEs=_p.map(function(x){return _s[x];});q.correct=_p.indexOf(q.correct);})();
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'mcq' + (idx + 1);
+  let h = '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>';
+  for (let i = 0; i < 4; i++) {
+    const letter = 'ABCD'[i];
+    h += '<button class="option" data-mc="' + idx + '" data-opt="' + i + '" type="button">' +
+         '<strong>' + letter + '.</strong> ' +
+         '<span class="lang-en">' + q.optionsEn[i] + '</span><span class="lang-es">' + q.optionsEs[i] + '</span>' +
+         '</button>';
+  }
+  mcContainer.appendChild(qDiv);
+  qDiv.innerHTML = h;
+  // Click handler on each option
+  qDiv.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (mcPassed()) return;
+      if (qDiv.dataset.answered !== undefined && qDiv.dataset.answered !== '') return;
+      const isEs = document.body.classList.contains('lang-es');
+      const chosen = parseInt(btn.getAttribute('data-opt'), 10);
+      const correct = q.correct;
+      qDiv.dataset.answered = String(chosen);
+      qDiv.querySelectorAll('.option').forEach(b => {
+        const oi = parseInt(b.getAttribute('data-opt'), 10);
+        b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+        if (oi === correct) b.classList.add('correct');
+        else if (oi === chosen) b.classList.add('wrong');
+      });
+      const oldfb = qDiv.querySelector('.feedback-text'); if (oldfb) oldfb.remove();
+      const fb = document.createElement('div');
+      if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+      else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+      qDiv.appendChild(fb);
+    });
+  });
+});
+
+// === Smart keyword matcher (word-boundary, like the other CTS courses) ===
+function kwHit(answer, kw){
+  if(!kw) return false;
+  var a=(answer||'').toLowerCase();
+  var k=String(kw).toLowerCase().trim();
+  if(!k) return false;
+  var esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var L='0-9a-zA-Z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1';
+  var re = k.length<=4 ? new RegExp('(?:^|[^'+L+'])'+esc+'(?!['+L+'])') : new RegExp('(?:^|[^'+L+'])'+esc);
+  return re.test(a);
+}
+function saHits(idx){
+  var ta=document.querySelector('.kw-answer[data-sa="'+idx+'"]');
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var kws=isEs?(q.kwEs||[]):(q.kwEn||[]);
+  var ans=(ta&&ta.value)||'';
+  var n=0; kws.forEach(function(k){ if(kwHit(ans,k)) n++; });
+  return n;
+}
+function revealSAModel(idx){
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var box=document.getElementById('saModel'+idx);
+  if(!box) return;
+  var head=isEs?'Respuesta modelo \u2014 est\u00fadiela':'Model answer \u2014 study this';
+  box.innerHTML='<strong>'+head+':</strong><br>'+(isEs?(q.modelEs||''):(q.modelEn||''));
+  box.style.display='block';
+}
+
+// === Render SA ===
+const kwContainer = document.getElementById('kwContainer');
+kwQuestions.forEach((q, idx) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'saq' + (idx + 1);
+  qDiv.innerHTML =
+    '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>' +
+    '<textarea class="kw-answer" data-sa="' + idx + '" placeholder=""></textarea>' +
+    '<button class="small check-kw-btn" type="button"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>' +
+    '<div class="feedback-text" id="saFb' + idx + '" style="display:none"></div>' +
+    '<div class="sa-model" id="saModel' + idx + '" style="display:none"></div>';
+  kwContainer.appendChild(qDiv);
+  const btn = qDiv.querySelector('.check-kw-btn');
+  const ta = qDiv.querySelector('.kw-answer');
+  btn.addEventListener('click', () => {
+    const isEs = document.body.classList.contains('lang-es');
+    const fb = document.getElementById('saFb' + idx);
+    const ans = (ta.value || '').trim();
+    if(!ans){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba su respuesta primero, luego verifique.' : 'Write your answer first, then check.';
+      var mb=document.getElementById('saModel'+idx); if(mb) mb.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    if(ans.length < 100){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.';
+      var mb2=document.getElementById('saModel'+idx); if(mb2) mb2.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    const hits = saHits(idx);
+    const ok = hits >= 3;
+    qDiv.dataset.answered = ok ? '1' : '0';
+    fb.className = 'feedback-text ' + (ok ? 'correct' : 'incorrect');
+    fb.style.display = 'block';
+    fb.textContent = ok
+      ? (isEs ? ('\u2713 Suficientes palabras clave (' + hits + ').') : ('\u2713 Sufficient keywords (' + hits + ').'))
+      : (isEs ? ('\u2717 A\u00fan no acreditada. Encontr\u00f3 ' + hits + ' de 3.') : ('\u2717 Not yet credited. Found ' + hits + ' of 3.'));
+    revealSAModel(idx);
+  });
+});
+
+// === UI state machine ===
+const mcSection = document.getElementById('mcSection');
+const saSection = document.getElementById('saSection');
+const statusEl = document.getElementById('examStatus');
+const submitBtn = document.getElementById('submitExamBtn');
+const resetBtn = document.getElementById('resetExamBtn');
+const resultEl = document.getElementById('examResult');
+
+function setStatus(cls, en, es) {
+  statusEl.className = 'exam-status ' + cls;
+  statusEl.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function clearStatus() { statusEl.className = 'exam-status hidden'; statusEl.innerHTML = ''; }
+function lockMcAsReview() {
+  document.querySelectorAll('#mcContainer .question').forEach(q => {
+    q.classList.add('review-locked');
+    q.querySelectorAll('.option').forEach(b => { b.disabled = true; });
+  });
+}
+
+function revealMC() {
+  const isEs = document.body.classList.contains('lang-es');
+  for (let i = 0; i < mcQuestions.length; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (!qd) continue;
+    const correct = mcQuestions[i].correct;
+    const chosen = (qd.dataset.answered !== undefined && qd.dataset.answered !== '') ? parseInt(qd.dataset.answered, 10) : -1;
+    qd.querySelectorAll('.option').forEach(b => {
+      const oi = parseInt(b.getAttribute('data-opt'), 10);
+      b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+      if (oi === correct) b.classList.add('correct');
+      else if (oi === chosen) b.classList.add('wrong');
+    });
+    let fb = qd.querySelector('.feedback-text');
+    if (!fb) { fb = document.createElement('div'); qd.appendChild(fb); }
+    if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+    else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+  }
+}
+
+
+function applyExamState() {
+  const isEs = document.body.classList.contains('lang-es');
+  // SA section is ALWAYS visible
+  saSection.style.display = '';
+  const badgeEn = document.getElementById('saBadgeEn');
+  const badgeEs = document.getElementById('saBadgeEs');
+  const noteEn = document.getElementById('saNoteEn');
+  const noteEs = document.getElementById('saNoteEs');
+  if (isMdiv()) {
+    badgeEn.textContent = 'Required for M.Div';
+    badgeEs.textContent = 'Requerido para M.Div';
+    noteEn.textContent = 'These 10 short-answer questions are required to complete Unit ' + CURRENT_UNIT + ' on the M.Div track. You must pass at 9 of 10.';
+    noteEs.textContent = 'Estas 10 preguntas de respuesta corta son requeridas para completar la Unidad ' + CURRENT_UNIT + ' en la vía M.Div. Debe aprobar con 9 de 10.';
+  } else {
+    badgeEn.textContent = 'Self-study — not graded for Certificate';
+    badgeEs.textContent = 'Auto-estudio — no cuenta para Certificado';
+    noteEn.textContent = 'These are the M.Div-level questions. Certificate students are welcome to attempt them for self-check; your answers will not affect your Unit ' + CURRENT_UNIT + ' pass status.';
+    noteEs.textContent = 'Estas son las preguntas de nivel M.Div. Los estudiantes de Certificado pueden intentarlas para auto-evaluarse; sus respuestas no afectarán el estado de aprobación de la Unidad ' + CURRENT_UNIT + '.';
+  }
+  const lock = activeLock();
+  if (lock) {
+    const minsLeft = Math.ceil((lock.until - Date.now()) / 60000);
+    submitBtn.disabled = true;
+    if (lock.scope === 'mc') {
+      setStatus('locked',
+        'Exam locked. Try again in ' + minsLeft + ' minute(s). The full exam will reset.',
+        'Examen bloqueado. Intente de nuevo en ' + minsLeft + ' minuto(s). El examen completo se reiniciará.');
+    } else {
+      setStatus('locked',
+        'Short-answer section locked. Try again in ' + minsLeft + ' minute(s). Multiple-choice pass is preserved.',
+        'Sección de respuesta corta bloqueada. Intente de nuevo en ' + minsLeft + ' minuto(s). Su aprobación de opción múltiple se conserva.');
+      lockMcAsReview();
+    }
+    setTimeout(applyExamState, 30000);
+    return;
+  }
+  submitBtn.disabled = false;
+  if (mcPassed()) {
+    lockMcAsReview();
+    if (isMdiv() && !saPassed()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed (saved). Complete the 10 short-answer questions to finish Unit ' + CURRENT_UNIT + '.',
+        'Opción múltiple aprobada (guardada). Complete las 10 preguntas de respuesta corta para terminar la Unidad ' + CURRENT_UNIT + '.');
+    } else if (!isMdiv()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed. Unit ' + CURRENT_UNIT + ' complete for Certificate track.',
+        'Opción múltiple aprobada. Unidad ' + CURRENT_UNIT + ' completa para la vía Certificado.');
+    } else {
+      clearStatus();
+    }
+  } else {
+    clearStatus();
+  }
+}
+
+submitBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const lock = activeLock();
+  if (lock) { applyExamState(); return; }
+
+  // Score MC
+  let mc = 0;
+  for (let i = 0; i < 20; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (qd && qd.dataset.answered !== undefined && parseInt(qd.dataset.answered, 10) === mcQuestions[i].correct) mc++;
+  }
+  if (mcPassed()) {
+    mc = parseInt(lsGet(MC_SCORE_KEY) || '18', 10);
+  }
+  const mcPass = mc >= 18;
+  revealMC();
+
+  // Score SA (recompute with the smart matcher; reveal models on masters submit)
+  let sa = 0;
+  for (let i = 0; i < 10; i++) {
+    if (saHits(i) >= 3) sa++;
+    if (isMdiv()) revealSAModel(i);
+  }
+  const saPass = sa >= 9;
+
+  if (!isMdiv()) {
+    // Certificate track — only MC matters
+    if (mcPass) {
+      lsSet(MC_PASSED_KEY, '1');
+      lsSet(MC_SCORE_KEY, String(mc));
+      progress['unit' + CURRENT_UNIT] = true;
+      lsSet('cts_acts_progress', JSON.stringify(progress));
+      resultEl.style.color = '#1f6b3b';
+      resultEl.textContent = (isEs
+        ? '¡Aprobado! OM ' + mc + '/20. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+        : 'Passed! MC ' + mc + '/20. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+    } else {
+      lsSet(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+    }
+    return;
+  }
+
+  // M.Div track
+  if (!mcPassed()) {
+    if (!mcPass) {
+      lsSet(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min. Examen completo se reiniciará.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min. Full exam will reset.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+      return;
+    }
+    lsSet(MC_PASSED_KEY, '1');
+    lsSet(MC_SCORE_KEY, String(mc));
+  }
+  if (saPass) {
+    lsSet(SA_PASSED_KEY, '1');
+    progress['unit' + CURRENT_UNIT] = true;
+    lsSet('cts_acts_progress', JSON.stringify(progress));
+    const finalMc = parseInt(lsGet(MC_SCORE_KEY) || '18', 10);
+    resultEl.style.color = '#1f6b3b';
+    resultEl.textContent = (isEs
+      ? '¡Aprobado! OM ' + finalMc + '/20, RC ' + sa + '/10. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+      : 'Passed! MC ' + finalMc + '/20, SA ' + sa + '/10. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+  } else {
+    lsSet(LOCK_SA_KEY, String(Date.now() + 15 * 60 * 1000));
+    resultEl.style.color = '#8a1f1f';
+    resultEl.textContent = (isEs
+      ? 'RC ' + sa + '/10. Necesita 9. Sección RC bloqueada 15 min. OM permanece aprobada.'
+      : 'SA ' + sa + '/10. Need 9. SA section locked 15 min. MC pass preserved.');
+    submitBtn.disabled = true;
+    setTimeout(applyExamState, 30000);
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar la Unidad ' + CURRENT_UNIT + '? Esto borrará sus respuestas y el estado de aprobación de OM/RC para esta unidad. (Esto no borra su registro.)'
+    : 'Reset Unit ' + CURRENT_UNIT + '? This will clear your answers and MC/SA pass state for this unit. (Does not clear your registration.)';
+  if (!window.confirm(msg)) return;
+  [MC_PASSED_KEY, SA_PASSED_KEY, LOCK_MC_KEY, LOCK_SA_KEY, MC_SCORE_KEY].forEach(k => lsDel(k));
+  if (progress['unit' + CURRENT_UNIT]) {
+    delete progress['unit' + CURRENT_UNIT];
+    lsSet('cts_acts_progress', JSON.stringify(progress));
+  }
+  window.location.reload();
+});
+
+// Initial render
+applyStudentUI();
+langButtons.forEach(b => b.addEventListener('click', applyStudentUI));
+applyExamState();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSActsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

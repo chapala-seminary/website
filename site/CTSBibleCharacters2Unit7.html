@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Characters II — Unit 7</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 8 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Bible Characters II — Unit 7: Peter — From Fisherman to the Rock Who Feeds the Sheep</span><span class="lang-es">📖 Personajes de la Biblia II — Unidad 7: Pedro — Del Pescador a la Roca que Apacienta las Ovejas</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But I have prayed for you, that your faith should not fail; and when you have returned to Me, strengthen your brethren." — Luke 22:32 (NKJV)</span><span class="lang-es">«Mas yo he rogado por ti, que tu fe no falte; y tú, una vez vuelto, confirma a tus hermanos.» — Lucas 22:32 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>Of all the disciples, Peter is the one we know best, because Peter is the one most like us. He is bold and then afraid, believing and then doubting, loyal and then a coward — and through it all, loved and never let go by his Lord. His life asks each of us a single question: how firm is your faith? And it answers with good news for every faltering believer: Christ takes a stumbling man and, through failure and the power of the resurrection, makes him a rock who feeds the sheep.</p><p><strong>Subject:</strong> Peter — from impulsive fisherman to the rock who feeds the flock.</p><p><strong>Proposition:</strong> Christ takes a faltering man and, through failure and resurrection-power, makes him a fearless shepherd.</p><p>We will trace three movements in the life of Peter.</p><h2>I. The Fisherman</h2><p>Peter was a fisherman, mending his nets by the Sea of Galilee when Jesus walked by. Anyone who has watched the fishermen on Lake Chapala set out before dawn knows the life: hard, weathered, unglamorous, ruled by the wind and the catch. To that ordinary working man Jesus said:</p><div class="scripture">Follow Me, and I will make you fishers of men. (Matthew 4:19, NKJV)</div><p>And Peter left his nets and followed. He did not yet understand all that it would mean; he simply came. That is where every disciple begins — not with a finished faith, but with a willingness to follow the One who calls.</p><p>There was a day when Peter had fished all night and caught nothing, and Jesus told him to let down his nets once more. Peter obeyed, and the catch was so great that the nets began to break and the boats began to sink. Seeing it, Peter fell down at Jesus' knees and said, "Depart from me, for I am a sinful man, O Lord!" He sensed at once that he was unworthy to stand so near such holiness. But Jesus answered, "Do not be afraid. From now on you will catch men." From the very beginning, then, the Lord was calling not a worthy man but a sinful one — and a sinful man is the only kind He has ever called.</p><h2>II. The Disciple</h2><p>Peter's years with Jesus show us the good, the bad, and the ugly — for the same man who reached the heights also stumbled badly, and the Lord used both.</p><p><strong>The good — the great confession.</strong> When Jesus asked the disciples who they believed He was, it was Peter who answered for them all:</p><div class="scripture">You are the Christ, the Son of the living God. (Matthew 16:16, NKJV)</div><p>This was a confession given by revelation, and Jesus blessed him for it. Upon the great truth Peter had just confessed, the Lord declared, "On this rock I will build My church, and the gates of Hades shall not prevail against it." Here Peter is at his best, speaking the central truth of the faith.</p><p><strong>The bad — the Peter Doubt.</strong> But the same Peter who could rise so high could also sink. One night the disciples were straining at the oars in a storm when they saw Jesus walking on the water. Peter, impulsive as ever, called out, "Lord, if it is You, command me to come to You on the water." Jesus said, "Come" — and Peter actually walked on the water toward Him. Then something happened:</p><div class="scripture">But when he saw that the wind was boisterous, he was afraid; and beginning to sink he cried out, saying, "Lord, save me!" (Matthew 14:30, NKJV)</div><p>As long as Peter looked at Christ, he walked; the moment he saw the wind, he lost faith in his Lord's power and began to sink. Jesus immediately reached out His hand and caught him, saying, "O you of little faith, why did you doubt?" Notice what failed — not Christ's power, but Peter's confidence in it. I once knew a seminary student named Wayne Woodward, a deaf man who had given up a good job at Boeing and moved his family clear across the country to prepare for ministry. His doubt was not about God at all; it was about himself. "I don't belong here," he would say. "I could never pastor a church." That is the Peter doubt — not doubting God's power, but doubting whether God could use someone like you. And the answer to it is always the same: God is not looking for ability; He is looking for availability. The One who bid Peter walk will not let him sink.</p><p><strong>The ugly — the denial.</strong> Then came Peter's darkest hour. On the night Jesus was arrested, Peter, who had sworn he would die before denying his Lord, denied three times that he even knew Him — the last time with curses, as a servant girl pressed him. And then the rooster crowed. Luke tells us that at that very moment "the Lord turned and looked at Peter," and the memory of that look broke him. He went out and wept bitterly. This is the lowest point a follower can reach: not weakness on the water, but open denial of the Lord he loved.</p><h2>III. The Pastor</h2><p>And here the gospel shines, for the story does not end at the denial. After the resurrection, the risen Christ sought Peter out by the same sea where He had first called him, and three times — one for each denial — He asked, "Simon, son of Jonah, do you love Me?" Each time Peter answered yes, and each time Jesus gave him a charge:</p><div class="scripture">Feed My lambs... Tend My sheep... Feed My sheep. (John 21:15-17, NKJV)</div><p>The Lord did not cast Peter off for his failure; He restored him and recommissioned him. The fisherman who had denied his Master was made a shepherd to feed the flock. And feed them he did. On the Day of Pentecost, the same Peter who had cowered before a servant girl stood up before thousands and boldly preached Christ crucified and risen, and three thousand were saved. Later God used him to open the door of the gospel to the Gentiles, sending him to the house of Cornelius (Acts 10) with the realization that God shows no partiality. The denying disciple had become the rock who feeds the sheep. Years later this same Peter would write two letters to scattered, suffering believers, comforting them in their trials and urging the elders among them, "Shepherd the flock of God which is among you, serving as overseers" — the very charge the risen Christ had given him by the sea. The trembling lamb had truly become a faithful shepherd, and he spent the rest of his life feeding the flock he had once been too afraid to own.</p><h2>The Resurrection Turned the Coward into a Crusader</h2><p>What changed Peter? It was not a stronger personality or a fresh resolve. The difference was the resurrection. Before the resurrection, Peter denied Christ three times to save his own skin. After it, the very same man proclaimed Christ openly, was arrested, beaten, jailed, and threatened — and gained nothing for himself in this world. Tradition tells us Peter at last died for Christ, crucified upside down, counting himself unworthy to die as his Lord had died. No ordinary explanation accounts for that change. Only one thing does: he had seen the risen Lord. As Peter himself declared at Pentecost, "This Jesus God has raised up, of which we are all witnesses" (Acts 2:32).</p><p>The risen Christ still turns fear into courage. There was an African man named Malamba, a converted witch doctor, who was tormented by his neighbors' threats of voodoo and curses, until the missionaries taught him the words of the risen Christ to John:</p><div class="scripture">Do not be afraid; I am the First and the Last. I am He who lives, and was dead, and behold, I am alive forevermore. Amen. And I have the keys of Hades and of Death. (Revelation 1:17-18, NKJV)</div><p>When Malamba grasped that the living Christ — not the witch doctors, not the spirits — held the keys of death and held his own destiny, fear lost its grip and he was filled with courage and hope. The same risen Lord who emptied the tomb holds your life in His hands as well.</p><h2>Failure Is Not the End</h2><p>This is the great encouragement of Peter's life: failure is not the end for the one Christ restores. Peter doubted on the water and denied at the fire, yet he became the rock who fed the flock and finally laid down his life for his Lord. It was never his natural strength that made him; it was grace and risen power. So if you have stumbled, take heart — the Lord who looked at Peter still looks at you, not to condemn, but to restore. He is asking the same question He asked by the sea: "Do you love Me?" And to all who answer yes, He gives the same charge and the same power: follow Me, and feed My sheep.</p></div>
+<div class="lang-es"><p>De todos los discípulos, Pedro es el que mejor conocemos, porque Pedro es el más parecido a nosotros. Es audaz y luego temeroso, creyente y luego dudoso, leal y luego cobarde —y a través de todo ello, amado y nunca soltado por su Señor—. Su vida nos hace a cada uno una sola pregunta: ¿cuán firme es tu fe? Y la responde con buenas nuevas para todo creyente vacilante: Cristo toma a un hombre que tropieza y, por medio del fracaso y del poder de la resurrección, lo hace una roca que apacienta las ovejas.</p><p><strong>Tema:</strong> Pedro — del pescador impulsivo a la roca que apacienta el rebaño.</p><p><strong>Proposición:</strong> Cristo toma a un hombre vacilante y, por medio del fracaso y del poder de la resurrección, lo hace un pastor sin temor.</p><p>Trazaremos tres movimientos en la vida de Pedro.</p><h2>I. El Pescador</h2><p>Pedro era un pescador, remendando sus redes junto al Mar de Galilea cuando Jesús pasó. Cualquiera que haya visto a los pescadores del Lago de Chapala salir antes del amanecer conoce esa vida: dura, curtida, sin glamur, gobernada por el viento y la pesca. A aquel hombre común y trabajador Jesús le dijo:</p><div class="scripture">Venid en pos de mí, y os haré pescadores de hombres. (Mateo 4:19, RVG)</div><p>Y Pedro dejó sus redes y le siguió. Todavía no entendía todo lo que significaría; simplemente vino. Ahí es donde comienza todo discípulo —no con una fe terminada, sino con la disposición de seguir al que llama—.</p><p>Hubo un día en que Pedro había pescado toda la noche sin sacar nada, y Jesús le dijo que echara las redes una vez más. Pedro obedeció, y la pesca fue tan grande que las redes comenzaron a romperse y las barcas a hundirse. Al verlo, Pedro cayó de rodillas ante Jesús y dijo: «Apártate de mí, Señor, porque soy hombre pecador». Sintió de inmediato que era indigno de estar tan cerca de tal santidad. Pero Jesús respondió: «No temas; desde ahora pescarás hombres». Desde el mismo principio, pues, el Señor estaba llamando no a un hombre digno sino a uno pecador —y un hombre pecador es el único que jamás ha llamado—.</p><h2>II. El Discípulo</h2><p>Los años de Pedro con Jesús nos muestran lo bueno, lo malo y lo feo —porque el mismo hombre que alcanzó las alturas también tropezó gravemente, y el Señor usó ambas cosas—.</p><p><strong>Lo bueno — la gran confesión.</strong> Cuando Jesús preguntó a los discípulos quién creían que era Él, fue Pedro quien respondió por todos:</p><div class="scripture">Tú eres el Cristo, el Hijo del Dios viviente. (Mateo 16:16, RVG)</div><p>Esta fue una confesión dada por revelación, y Jesús lo bendijo por ella. Sobre la gran verdad que Pedro acababa de confesar, el Señor declaró: «Sobre esta roca edificaré mi iglesia; y las puertas del infierno no prevalecerán contra ella». Aquí Pedro está en su mejor momento, diciendo la verdad central de la fe.</p><p><strong>Lo malo — la Duda de Pedro.</strong> Pero el mismo Pedro que podía subir tan alto también podía hundirse. Una noche los discípulos remaban con esfuerzo en una tormenta cuando vieron a Jesús caminando sobre el agua. Pedro, impulsivo como siempre, gritó: «Señor, si eres tú, manda que yo vaya a ti sobre las aguas». Jesús dijo: «Ven» —y Pedro de veras caminó sobre el agua hacia Él—. Entonces algo sucedió:</p><div class="scripture">Mas viendo el viento fuerte, tuvo miedo; y comenzando a hundirse, dio voces, diciendo: ¡Señor, sálvame! (Mateo 14:30, RVG)</div><p>Mientras Pedro miraba a Cristo, caminaba; en el momento en que vio el viento, perdió la fe en el poder de su Señor y comenzó a hundirse. Jesús enseguida extendió la mano y lo sostuvo, diciendo: «¡Hombre de poca fe! ¿por qué dudaste?». Note lo que falló —no el poder de Cristo, sino la confianza de Pedro en él—. Conocí una vez a un estudiante de seminario llamado Wayne Woodward, un hombre sordo que había dejado un buen empleo en Boeing y había mudado a su familia al otro lado del país para prepararse para el ministerio. Su duda no era acerca de Dios en absoluto; era acerca de sí mismo. «No pertenezco aquí», decía. «Nunca podría pastorear una iglesia». Esa es la duda de Pedro —no dudar del poder de Dios, sino dudar de que Dios pudiera usar a alguien como tú—. Y la respuesta es siempre la misma: Dios no busca capacidad; busca disponibilidad. El que mandó a Pedro caminar no lo dejará hundirse.</p><p><strong>Lo feo — la negación.</strong> Luego vino la hora más oscura de Pedro. La noche en que Jesús fue arrestado, Pedro, que había jurado que moriría antes de negar a su Señor, negó tres veces que siquiera lo conocía —la última vez con maldiciones, mientras una criada lo presionaba—. Y entonces cantó el gallo. Lucas nos dice que en ese mismo momento «vuelto el Señor, miró a Pedro», y el recuerdo de aquella mirada lo quebrantó. Salió fuera y lloró amargamente. Este es el punto más bajo que un seguidor puede alcanzar: no la debilidad sobre el agua, sino la negación abierta del Señor a quien amaba.</p><h2>III. El Pastor</h2><p>Y aquí resplandece el evangelio, porque la historia no termina en la negación. Después de la resurrección, el Cristo resucitado buscó a Pedro junto al mismo mar donde lo había llamado por primera vez, y tres veces —una por cada negación— le preguntó: «Simón, hijo de Jonás, ¿me amas?». Cada vez Pedro respondió que sí, y cada vez Jesús le dio un encargo:</p><div class="scripture">Apacienta mis corderos... Pastorea mis ovejas... Apacienta mis ovejas. (Juan 21:15-17, RVG)</div><p>El Señor no desechó a Pedro por su fracaso; lo restauró y lo volvió a comisionar. El pescador que había negado a su Maestro fue hecho un pastor para apacentar el rebaño. Y vaya que lo apacentó. En el Día de Pentecostés, el mismo Pedro que se había acobardado ante una criada se puso de pie ante miles y predicó con valentía a Cristo crucificado y resucitado, y tres mil fueron salvos. Después Dios lo usó para abrir la puerta del evangelio a los gentiles, enviándolo a la casa de Cornelio (Hechos 10) con la comprensión de que Dios no hace acepción de personas. El discípulo que había negado se había vuelto la roca que apacienta las ovejas. Años después este mismo Pedro escribiría dos cartas a creyentes dispersos y sufrientes, consolándolos en sus pruebas y exhortando a los ancianos entre ellos: «Apacentad la grey de Dios que está entre vosotros, cuidando de ella» —el mismo encargo que el Cristo resucitado le había dado junto al mar—. El cordero tembloroso se había vuelto en verdad un pastor fiel, y pasó el resto de su vida apacentando el rebaño que una vez había tenido demasiado miedo de reconocer.</p><h2>La Resurrección Convirtió al Cobarde en Cruzado</h2><p>¿Qué cambió a Pedro? No fue una personalidad más fuerte ni una nueva resolución. La diferencia fue la resurrección. Antes de la resurrección, Pedro negó a Cristo tres veces para salvar su propio pellejo. Después de ella, el mismísimo hombre proclamó a Cristo abiertamente, fue arrestado, golpeado, encarcelado y amenazado —y no ganó nada para sí mismo en este mundo—. La tradición nos dice que Pedro al fin murió por Cristo, crucificado de cabeza, considerándose indigno de morir como había muerto su Señor. Ninguna explicación ordinaria da cuenta de ese cambio. Solo una lo hace: él había visto al Señor resucitado. Como el mismo Pedro declaró en Pentecostés: «A este Jesús resucitó Dios, de lo cual todos nosotros somos testigos» (Hechos 2:32).</p><p>El Cristo resucitado todavía convierte el temor en valor. Hubo un hombre africano llamado Malamba, un hechicero convertido, que era atormentado por las amenazas de vudú y maldiciones de sus vecinos, hasta que los misioneros le enseñaron las palabras del Cristo resucitado a Juan:</p><div class="scripture">No temas; yo soy el primero y el último; y el que vivo, y he estado muerto; mas he aquí que vivo por los siglos de los siglos, Amén. Y tengo las llaves del infierno y de la muerte. (Apocalipsis 1:17-18, RVG)</div><p>Cuando Malamba comprendió que el Cristo vivo —no los hechiceros, no los espíritus— tenía las llaves de la muerte y tenía su propio destino, el temor perdió su poder y fue lleno de valor y esperanza. El mismo Señor resucitado que vació la tumba tiene también tu vida en sus manos.</p><h2>El Fracaso No es el Fin</h2><p>Este es el gran consuelo de la vida de Pedro: el fracaso no es el fin para aquel a quien Cristo restaura. Pedro dudó sobre el agua y negó junto al fuego, y sin embargo llegó a ser la roca que apacentó el rebaño y al fin entregó su vida por su Señor. Nunca fue su fuerza natural lo que lo hizo; fue la gracia y el poder de la resurrección. Así que si has tropezado, ten ánimo —el Señor que miró a Pedro todavía te mira a ti, no para condenar, sino para restaurar—. Está haciendo la misma pregunta que hizo junto al mar: «¿Me amas?». Y a todos los que responden que sí, les da el mismo encargo y el mismo poder: sígueme, y apacienta mis ovejas.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 7 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 7 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 7;
+const COURSE = 'CTSBC2';
+const FILE_PREFIX = 'CTSBibleCharacters2';
+const NEXT_UNIT_URL = 'CTSBibleCharacters2Unit8.html';
+const totalUnits = 11;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - Jonah — The Prophet Who Ran from God", "Unit 2 - Hosea — The Prophet Who Loved an Unfaithful Wife", "Unit 3 - Jeremiah — The Weeping Prophet Who Stayed Faithful", "Unit 4 - Esther — For Such a Time as This: The Hidden Providence of God", "Unit 5 - Ezra — A Fresh New Start, the Scribe Who Restored God’s Word", "Unit 6 - John the Baptist — The Forerunner Who Doubted in the Dark", "Unit 7 - Peter — From Fisherman to the Rock Who Feeds the Sheep", "Unit 8 - Thomas — The Doubter Who Made the Great Confession", "Unit 9 - Lazarus — The Dead Man Jesus Called Back to Life", "Unit 10 - Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ", "Unit 11 - Paul — From Persecutor to Apostle of Grace"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [{"textEn":"1. What was Peter's occupation when Jesus called him?","textEs":"1. ¿Cuál era la ocupación de Pedro cuando Jesús lo llamó?","optionsEn":["A tax collector", "A carpenter", "A fisherman", "A Pharisee"],"optionsEs":["Un cobrador de impuestos", "Un carpintero", "Un pescador", "Un fariseo"],"explanationEn":"Peter was an ordinary fisherman by the Sea of Galilee, mending his nets.","explanationEs":"Pedro era un pescador común junto al Mar de Galilea, remendando sus redes.","correct":2},{"textEn":"2. What did Jesus say when He called Peter?","textEs":"2. ¿Qué dijo Jesús cuando llamó a Pedro?","optionsEn":["\"Sell all you have\"", "\"Go and sin no more\"", "\"Take up your cross\"", "\"Follow Me, and I will make you fishers of men\""],"optionsEs":["«Vende todo lo que tienes»", "«Vete y no peques más»", "«Toma tu cruz»", "«Venid en pos de mí, y os haré pescadores de hombres»"],"explanationEn":"Jesus called Peter from his nets to follow Him and become a fisher of men.","explanationEs":"Jesús llamó a Pedro de sus redes a seguirle y ser pescador de hombres.","correct":3},{"textEn":"3. How did Peter respond to the call?","textEs":"3. ¿Cómo respondió Pedro al llamado?","optionsEn":["He left his nets and followed", "He asked for time to think", "He refused at first", "He demanded a sign"],"optionsEs":["Dejó sus redes y le siguió", "Pidió tiempo para pensar", "Se negó al principio", "Exigió una señal"],"explanationEn":"Peter simply left his nets and followed, though his faith was not yet finished.","explanationEs":"Pedro simplemente dejó sus redes y le siguió, aunque su fe no estaba aún terminada.","correct":0},{"textEn":"4. In the great confession, what did Peter declare about Jesus?","textEs":"4. En la gran confesión, ¿qué declaró Pedro acerca de Jesús?","optionsEn":["\"You are a great teacher\"", "\"You are the Christ, the Son of the living God\"", "\"You are Elijah\"", "\"You are a prophet\""],"optionsEs":["«Eres un gran maestro»", "«Tú eres el Cristo, el Hijo del Dios viviente»", "«Eres Elías»", "«Eres un profeta»"],"explanationEn":"Peter's confession, given by revelation, is the central truth of the faith.","explanationEs":"La confesión de Pedro, dada por revelación, es la verdad central de la fe.","correct":1},{"textEn":"5. What did Jesus say in response to the confession?","textEs":"5. ¿Qué dijo Jesús en respuesta a la confesión?","optionsEn":["\"On this rock I will build My church\"", "\"Tell no one\"", "\"Your faith has saved you\"", "\"Come and see\""],"optionsEs":["«Sobre esta roca edificaré mi iglesia»", "«No lo digas a nadie»", "«Tu fe te ha salvado»", "«Ven y ve»"],"explanationEn":"On the truth Peter confessed, Christ would build His church, unconquered by Hades.","explanationEs":"Sobre la verdad que Pedro confesó, Cristo edificaría su iglesia, no vencida por el infierno.","correct":0},{"textEn":"6. In the \"Peter Doubt,\" what did Peter ask Jesus on the water?","textEs":"6. En la «Duda de Pedro», ¿qué le pidió Pedro a Jesús sobre el agua?","optionsEn":["\"Why have You come?\"", "\"Are You a ghost?\"", "\"Will You calm the storm?\"", "\"Lord, if it is You, command me to come to You on the water\""],"optionsEs":["«¿Por qué has venido?»", "«¿Eres un fantasma?»", "«¿Calmarás la tormenta?»", "«Señor, si eres tú, manda que yo vaya a ti sobre las aguas»"],"explanationEn":"At Jesus' word \"Come,\" Peter actually walked on the water toward Him.","explanationEs":"A la palabra de Jesús «Ven», Pedro de veras caminó sobre el agua hacia Él.","correct":3},{"textEn":"7. What happened when Peter \"saw the wind\"?","textEs":"7. ¿Qué pasó cuando Pedro «vio el viento»?","optionsEn":["He turned back to the boat", "He walked faster", "He was afraid and began to sink", "He fell asleep"],"optionsEs":["Regresó a la barca", "Caminó más rápido", "Tuvo miedo y comenzó a hundirse", "Se quedó dormido"],"explanationEn":"As long as Peter looked at Christ he walked; when he saw the wind he sank.","explanationEs":"Mientras Pedro miraba a Cristo caminaba; cuando vio el viento se hundió.","correct":2},{"textEn":"8. What did Peter cry as he began to sink?","textEs":"8. ¿Qué gritó Pedro al comenzar a hundirse?","optionsEn":["\"It is finished\"", "\"Lord, save me!\"", "\"Why have You forsaken me?\"", "\"I can do all things\""],"optionsEs":["«Consumado es»", "«¡Señor, sálvame!»", "«¿Por qué me has desamparado?»", "«Todo lo puedo»"],"explanationEn":"Jesus immediately reached out and caught him.","explanationEs":"Jesús enseguida extendió la mano y lo sostuvo.","correct":1},{"textEn":"9. What did Jesus say after catching Peter?","textEs":"9. ¿Qué dijo Jesús después de sostener a Pedro?","optionsEn":["\"Well done\"", "\"Peace, be still\"", "\"O you of little faith, why did you doubt?\"", "\"Your sins are forgiven\""],"optionsEs":["«Bien hecho»", "«Calla, enmudece»", "«¡Hombre de poca fe! ¿por qué dudaste?»", "«Tus pecados te son perdonados»"],"explanationEn":"What failed was not Christ's power but Peter's confidence in it.","explanationEs":"Lo que falló no fue el poder de Cristo sino la confianza de Pedro en él.","correct":2},{"textEn":"10. What does Wayne Woodward's story (the deaf seminary student) illustrate?","textEs":"10. ¿Qué ilustra la historia de Wayne Woodward (el estudiante de seminario sordo)?","optionsEn":["That God only uses the talented", "That his doubt was about himself, not God — God wants availability, not ability", "That ministry requires wealth", "That doubt is unforgivable"],"optionsEs":["Que Dios solo usa a los talentosos", "Que su duda era acerca de sí mismo, no de Dios — Dios quiere disponibilidad, no capacidad", "Que el ministerio requiere riqueza", "Que la duda es imperdonable"],"explanationEn":"Like Peter, his doubt was self-doubt; God uses the one who makes himself available.","explanationEs":"Como Pedro, su duda era duda de sí mismo; Dios usa al que se pone a disposición.","correct":1},{"textEn":"11. What was Peter's \"ugly\" failure?","textEs":"11. ¿Cuál fue el fracaso «feo» de Pedro?","optionsEn":["He denied knowing Jesus three times", "He stole from the treasury", "He fled the country", "He betrayed Jesus for money"],"optionsEs":["Negó conocer a Jesús tres veces", "Robó del tesoro", "Huyó del país", "Traicionó a Jesús por dinero"],"explanationEn":"Peter, who had sworn to die for Jesus, denied three times that he knew Him.","explanationEs":"Pedro, que había jurado morir por Jesús, negó tres veces que lo conocía.","correct":0},{"textEn":"12. What happened right after Peter's third denial?","textEs":"12. ¿Qué pasó justo después de la tercera negación de Pedro?","optionsEn":["He was arrested", "He ran to the tomb", "He fell asleep in the garden", "The rooster crowed and the Lord looked at him, and he wept bitterly"],"optionsEs":["Fue arrestado", "Corrió a la tumba", "Se durmió en el huerto", "Cantó el gallo y el Señor lo miró, y lloró amargamente"],"explanationEn":"The Lord's look broke Peter, and he went out and wept bitterly.","explanationEs":"La mirada del Señor quebrantó a Pedro, y salió fuera y lloró amargamente.","correct":3},{"textEn":"13. How did the risen Christ restore Peter?","textEs":"13. ¿Cómo restauró el Cristo resucitado a Pedro?","optionsEn":["By asking three times \"Do you love Me?\" and charging him, \"Feed My sheep\"", "By rebuking him publicly", "By sending him away", "By giving him money"],"optionsEs":["Preguntando tres veces «¿Me amas?» y encargándole «Apacienta mis ovejas»", "Reprendiéndolo públicamente", "Enviándolo lejos", "Dándole dinero"],"explanationEn":"Three questions for three denials; the denying fisherman was made a shepherd.","explanationEs":"Tres preguntas por tres negaciones; el pescador que negó fue hecho un pastor.","correct":0},{"textEn":"14. What did the restored Peter do at Pentecost?","textEs":"14. ¿Qué hizo el Pedro restaurado en Pentecostés?","optionsEn":["He hid in fear", "He boldly preached Christ, and three thousand were saved", "He denied Christ again", "He returned to fishing"],"optionsEs":["Se escondió de miedo", "Predicó con valentía a Cristo, y tres mil fueron salvos", "Negó a Cristo de nuevo", "Volvió a pescar"],"explanationEn":"The man who cowered before a servant girl now preached boldly to thousands.","explanationEs":"El hombre que se acobardó ante una criada ahora predicó con valentía a miles.","correct":1},{"textEn":"15. To whom did God use Peter to open the door of the gospel in Acts 10?","textEs":"15. ¿A quiénes usó Dios a Pedro para abrir la puerta del evangelio en Hechos 10?","optionsEn":["The Roman soldiers only", "The Pharisees", "The Gentiles (the house of Cornelius)", "The Samaritans"],"optionsEs":["Solo los soldados romanos", "Los fariseos", "Los gentiles (la casa de Cornelio)", "Los samaritanos"],"explanationEn":"Peter saw that God shows no partiality and opened the gospel to the Gentiles.","explanationEs":"Pedro vio que Dios no hace acepción de personas y abrió el evangelio a los gentiles.","correct":2},{"textEn":"16. What turned the coward into a crusader?","textEs":"16. ¿Qué convirtió al cobarde en cruzado?","optionsEn":["A stronger personality", "A fresh resolution", "A reward of money", "The resurrection — he had seen the risen Lord"],"optionsEs":["Una personalidad más fuerte", "Una nueva resolución", "Una recompensa de dinero", "La resurrección — había visto al Señor resucitado"],"explanationEn":"No ordinary explanation fits the change; only the risen Christ does.","explanationEs":"Ninguna explicación ordinaria encaja con el cambio; solo el Cristo resucitado.","correct":3},{"textEn":"17. What did Peter declare at Pentecost (Acts 2:32)?","textEs":"17. ¿Qué declaró Pedro en Pentecostés (Hechos 2:32)?","optionsEn":["\"I never knew Him\"", "\"Depart from me\"", "\"This Jesus God has raised up, of which we are all witnesses\"", "\"Let this cup pass\""],"optionsEs":["«Nunca lo conocí»", "«Apártate de mí»", "«A este Jesús resucitó Dios, de lo cual todos nosotros somos testigos»", "«Pase de mí esta copa»"],"explanationEn":"Peter staked everything on the fact that he had witnessed the risen Christ.","explanationEs":"Pedro lo apostó todo en el hecho de que había sido testigo del Cristo resucitado.","correct":2},{"textEn":"18. According to tradition, how did Peter ultimately die?","textEs":"18. Según la tradición, ¿cómo murió Pedro al final?","optionsEn":["Of old age in peace", "By stoning", "He escaped persecution", "Crucified upside down, counting himself unworthy to die as his Lord"],"optionsEs":["De vejez en paz", "Apedreado", "Escapó de la persecución", "Crucificado de cabeza, considerándose indigno de morir como su Señor"],"explanationEn":"Peter gained nothing materially and finally died for Christ.","explanationEs":"Pedro no ganó nada materialmente y al fin murió por Cristo.","correct":3},{"textEn":"19. What gave Malamba, the converted witch doctor, courage against threats of voodoo?","textEs":"19. ¿Qué le dio valor a Malamba, el hechicero convertido, contra las amenazas de vudú?","optionsEn":["A charm from the missionaries", "Revelation 1:17-18 — the risen Christ holds the keys of Hades and Death and held his destiny", "Moving to another village", "Paying off his neighbors"],"optionsEs":["Un amuleto de los misioneros", "Apocalipsis 1:17-18 — el Cristo resucitado tiene las llaves del infierno y la muerte y tenía su destino", "Mudarse a otra aldea", "Pagar a sus vecinos"],"explanationEn":"The living Christ, not the spirits, held the keys of death; fear lost its grip.","explanationEs":"El Cristo vivo, no los espíritus, tenía las llaves de la muerte; el temor perdió su poder.","correct":1},{"textEn":"20. What is the central lesson of Peter's life?","textEs":"20. ¿Cuál es la lección central de la vida de Pedro?","optionsEn":["Failure is not the end for the one Christ restores; grace and risen power make the man", "Failure disqualifies a believer forever", "Only perfect people can serve God", "Natural strength is what God rewards"],"optionsEs":["El fracaso no es el fin para aquel a quien Cristo restaura; la gracia y el poder de la resurrección hacen al hombre", "El fracaso descalifica al creyente para siempre", "Solo las personas perfectas pueden servir a Dios", "La fuerza natural es lo que Dios recompensa"],"explanationEn":"It was grace and risen power, not natural strength, that made Peter.","explanationEs":"Fue la gracia y el poder de la resurrección, no la fuerza natural, lo que hizo a Pedro.","correct":0}];
+const kwQuestions = [{"textEn":"21. What kind of man was Peter, and how was he called?","textEs":"21. ¿Qué clase de hombre era Pedro, y cómo fue llamado?","kw_en":["fisherman","nets","follow","impulsive","called","jesus","galilee","men"],"kw_es":["pescador","redes","segui","impulsivo","llam","jesus","galilea","hombres"],"modelEn":"Peter was an ordinary fisherman by the Sea of Galilee, impulsive and bold, mending his nets when Jesus called him. The Lord said, \"Follow Me, and I will make you fishers of men,\" and Peter left his nets and followed. He did not yet have a finished faith; he simply came. Every disciple begins the same way, with a willingness to follow the One who calls.","modelEs":"Pedro era un pescador común junto al Mar de Galilea, impulsivo y audaz, remendando sus redes cuando Jesús lo llamó. El Señor dijo: \"Venid en pos de mí, y os haré pescadores de hombres\", y Pedro dejó sus redes y le siguió. Todavía no tenía una fe terminada; simplemente vino. Todo discípulo comienza de la misma manera, con la disposición de seguir al que llama."},{"textEn":"22. Explain the great confession and Jesus' words about the rock.","textEs":"22. Explica la gran confesión y las palabras de Jesús sobre la roca.","kw_en":["confession","christ","son","god","rock","church","revelation","peter"],"kw_es":["confesion","cristo","hijo","dios","roca","iglesia","revelacion","pedro"],"modelEn":"When Jesus asked who He was, Peter confessed, \"You are the Christ, the Son of the living God.\" It was a confession given by revelation, the central truth of the faith. Jesus blessed him and declared that on this rock — the great truth Peter had confessed — He would build His church, and the gates of Hades would not prevail against it. Here Peter is at his best, speaking the truth on which the church stands.","modelEs":"Cuando Jesús preguntó quién era, Pedro confesó: \"Tú eres el Cristo, el Hijo del Dios viviente\". Fue una confesión dada por revelación, la verdad central de la fe. Jesús lo bendijo y declaró que sobre esta roca —la gran verdad que Pedro había confesado— edificaría su iglesia, y las puertas del infierno no prevalecerían contra ella. Aquí Pedro está en su mejor momento, diciendo la verdad sobre la que se levanta la iglesia."},{"textEn":"23. Describe the Peter Doubt on the water.","textEs":"23. Describe la Duda de Pedro sobre el agua.","kw_en":["water","walk","wind","afraid","sink","save","doubt","faith"],"kw_es":["agua","camin","viento","miedo","hund","salv","dud","fe"],"modelEn":"Seeing Jesus walking on the water, Peter asked, \"Lord, if it is You, command me to come,\" and at Jesus' word he actually walked on the water. But when he saw the boisterous wind he was afraid, and beginning to sink he cried, \"Lord, save me!\" Jesus caught him and said, \"O you of little faith, why did you doubt?\" As long as Peter looked at Christ he walked; when he looked at the wind he sank. What failed was not Christ's power but Peter's confidence in it.","modelEs":"Al ver a Jesús caminando sobre el agua, Pedro pidió: \"Señor, si eres tú, manda que yo vaya a ti\", y a la palabra de Jesús de veras caminó sobre el agua. Pero al ver el viento fuerte tuvo miedo, y comenzando a hundirse gritó: \"¡Señor, sálvame!\". Jesús lo sostuvo y dijo: \"¡Hombre de poca fe! ¿por qué dudaste?\". Mientras Pedro miraba a Cristo caminaba; cuando miró el viento se hundió. Lo que falló no fue el poder de Cristo sino la confianza de Pedro en él."},{"textEn":"24. What does Wayne Woodward's story teach?","textEs":"24. ¿Qué enseña la historia de Wayne Woodward?","kw_en":["woodward","deaf","doubt","himself","god","availability","ability","use"],"kw_es":["woodward","sordo","dud","mismo","dios","disponibilidad","capacidad","usar"],"modelEn":"Wayne Woodward was a deaf seminary student who had given up a good Boeing job and moved his family across the country, yet he doubted himself, saying, \"I could never pastor a church.\" His doubt was not about God's power but about whether God could use someone like him. That is the Peter doubt. The answer is always that God is not looking for ability but for availability, and He can use the one who simply makes himself available.","modelEs":"Wayne Woodward era un estudiante de seminario sordo que había dejado un buen empleo en Boeing y mudado a su familia al otro lado del país, y sin embargo dudaba de sí mismo, diciendo: \"Nunca podría pastorear una iglesia\". Su duda no era acerca del poder de Dios sino de si Dios podía usar a alguien como él. Esa es la duda de Pedro. La respuesta es siempre que Dios no busca capacidad sino disponibilidad, y puede usar al que simplemente se pone a disposición."},{"textEn":"25. Describe Peter's denial and the look of Jesus.","textEs":"25. Describe la negación de Pedro y la mirada de Jesús.","kw_en":["denied","three","rooster","look","jesus","wept","bitterly","failure"],"kw_es":["neg","tres","gallo","mir","jesus","llor","amarg","fracaso"],"modelEn":"On the night Jesus was arrested, Peter — who had sworn to die for Him — denied three times that he even knew Jesus. When the rooster crowed, the Lord turned and looked at Peter, and that look broke him; he went out and wept bitterly. It was the lowest point a follower can reach, an open denial of the Lord he loved. Yet even this failure would not be the end of his story.","modelEs":"La noche en que Jesús fue arrestado, Pedro —que había jurado morir por Él— negó tres veces que siquiera conocía a Jesús. Cuando cantó el gallo, el Señor se volvió y miró a Pedro, y aquella mirada lo quebrantó; salió fuera y lloró amargamente. Fue el punto más bajo que un seguidor puede alcanzar, una negación abierta del Señor a quien amaba. Pero aun este fracaso no sería el fin de su historia."},{"textEn":"26. How did the risen Christ restore Peter (John 21)?","textEs":"26. ¿Cómo restauró el Cristo resucitado a Pedro (Juan 21)?","kw_en":["risen","love","three","feed","sheep","restore","pastor","commission"],"kw_es":["resucitado","amas","tres","apacient","ovejas","restaur","pastor","comision"],"modelEn":"After the resurrection, the risen Christ sought Peter out and asked him three times — one for each denial — \"Do you love Me?\" Each time Peter said yes, and each time Jesus charged him, \"Feed My sheep.\" The Lord did not cast him off for his failure but restored and recommissioned him. The denying fisherman was made a shepherd to feed the flock.","modelEs":"Después de la resurrección, el Cristo resucitado buscó a Pedro y le preguntó tres veces —una por cada negación—: \"¿Me amas?\". Cada vez Pedro dijo que sí, y cada vez Jesús le encargó: \"Apacienta mis ovejas\". El Señor no lo desechó por su fracaso sino que lo restauró y lo volvió a comisionar. El pescador que negó fue hecho un pastor para apacentar el rebaño."},{"textEn":"27. How did the resurrection turn the coward into a crusader?","textEs":"27. ¿Cómo convirtió la resurrección al cobarde en cruzado?","kw_en":["resurrection","bold","preach","pentecost","risen","witness","change","fear"],"kw_es":["resurreccion","valent","predic","pentecostes","resucitado","testigo","cambio","temor"],"modelEn":"Before the resurrection Peter denied Christ three times to save himself; after it the same man boldly preached Christ at Pentecost and was arrested, beaten, and threatened, gaining nothing in this world. No ordinary explanation accounts for the change — only that he had seen the risen Lord, of whom he said, \"This Jesus God has raised up, of which we are all witnesses.\" The resurrection turned his fear into fearless courage.","modelEs":"Antes de la resurrección Pedro negó a Cristo tres veces para salvarse; después de ella el mismo hombre predicó con valentía a Cristo en Pentecostés y fue arrestado, golpeado y amenazado, sin ganar nada en este mundo. Ninguna explicación ordinaria da cuenta del cambio —solo que había visto al Señor resucitado, de quien dijo: \"A este Jesús resucitó Dios, de lo cual todos nosotros somos testigos\"—. La resurrección convirtió su temor en valor sin miedo."},{"textEn":"28. What is the lesson of Malamba and Revelation 1:17-18?","textEs":"28. ¿Cuál es la lección de Malamba y Apocalipsis 1:17-18?","kw_en":["malamba","witch","fear","risen","keys","death","courage","christ"],"kw_es":["malamba","hechicero","temor","resucitado","llaves","muerte","valor","cristo"],"modelEn":"Malamba was a converted witch doctor tormented by his neighbors' threats of voodoo until the missionaries taught him Revelation 1:17-18. There the risen Christ says, \"Do not be afraid... I am alive forevermore, and I have the keys of Hades and of Death.\" When Malamba grasped that the living Christ, not the spirits, held the keys of death and held his destiny, his fear lost its grip and he was filled with courage and hope. The risen Lord holds our lives in His hands too.","modelEs":"Malamba era un hechicero convertido atormentado por las amenazas de vudú de sus vecinos hasta que los misioneros le enseñaron Apocalipsis 1:17-18. Allí el Cristo resucitado dice: \"No temas... vivo por los siglos de los siglos, y tengo las llaves del infierno y de la muerte\". Cuando Malamba comprendió que el Cristo vivo, no los espíritus, tenía las llaves de la muerte y tenía su destino, su temor perdió su poder y fue lleno de valor y esperanza. El Señor resucitado tiene también nuestras vidas en sus manos."},{"textEn":"29. What made the difference in Peter — natural strength or something else?","textEs":"29. ¿Qué hizo la diferencia en Pedro — la fuerza natural o algo más?","kw_en":["grace","risen","power","natural","strength","christ","restore","weak"],"kw_es":["gracia","resucitado","poder","natural","fuerza","cristo","restaur","debil"],"modelEn":"It was never Peter's natural strength that made him the rock who fed the flock; it was grace and risen power. Left to himself he doubted on the water and denied at the fire. But Christ restored him and the resurrection transformed him, so that the weak fisherman became a fearless shepherd. The credit belongs to Christ, not to Peter's ability.","modelEs":"Nunca fue la fuerza natural de Pedro lo que lo hizo la roca que apacentó el rebaño; fue la gracia y el poder de la resurrección. Dejado a sí mismo dudó sobre el agua y negó junto al fuego. Pero Cristo lo restauró y la resurrección lo transformó, de modo que el débil pescador llegó a ser un pastor sin temor. El mérito pertenece a Cristo, no a la capacidad de Pedro."},{"textEn":"30. How does Peter's life encourage someone who has failed?","textEs":"30. ¿Cómo anima la vida de Pedro a alguien que ha fracasado?","kw_en":["failure","end","restore","christ","love","feed","hope","grace"],"kw_es":["fracaso","fin","restaur","cristo","amas","apacient","esperanza","gracia"],"modelEn":"Peter's life shows that failure is not the end for the one Christ restores. He doubted and denied, yet became the rock who fed the flock and finally died for his Lord. The same Lord who looked at Peter still looks at the one who has stumbled, not to condemn but to restore. He asks, \"Do you love Me?\" and to all who answer yes He gives the same charge and power: follow Me, and feed My sheep.","modelEs":"La vida de Pedro muestra que el fracaso no es el fin para aquel a quien Cristo restaura. Dudó y negó, y sin embargo llegó a ser la roca que apacentó el rebaño y al fin murió por su Señor. El mismo Señor que miró a Pedro todavía mira al que ha tropezado, no para condenar sino para restaurar. Pregunta: \"¿Me amas?\", y a todos los que responden que sí les da el mismo encargo y poder: sígueme, y apacienta mis ovejas."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleCharacters2Readings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

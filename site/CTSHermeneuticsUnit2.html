@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Hermeneutics — Unit 2: The Holy Spirit, Prayer, and the Heart of the Interpreter</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Georgia,"Times New Roman",serif;line-height:1.65;color:#222;background:#f6f3ec;padding-bottom:3rem}
+  body.lang-en .lang-es,body.lang-es .lang-en{display:none}
+  .container{max-width:780px;margin:0 auto;padding:1.25rem}
+  header{background:#3d2b1f;color:#f6f3ec;padding:1rem 1.25rem;position:sticky;top:0;z-index:10;border-bottom:3px solid #b08240}
+  header .hwrap{max-width:780px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;justify-content:space-between}
+  header h1{font-size:1.05rem;margin:0;font-weight:600;letter-spacing:.02em}
+  header .toggle{background:#b08240;color:#3d2b1f;border:none;padding:.4rem .8rem;border-radius:4px;font-weight:700;cursor:pointer;font-family:inherit;font-size:.85rem}
+  header .toggle:hover{background:#c79352}
+  .progress-grid{display:flex;flex-wrap:wrap;gap:.3rem;margin:.75rem auto 0;max-width:780px}
+  .pill{width:2.2rem;height:2.2rem;border-radius:50%;background:#5a4332;color:#f6f3ec;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;border:2px solid transparent}
+  .pill.done{background:#6b8e4e;border-color:#9bc176}
+  .pill.current{border-color:#b08240;background:#b08240;color:#3d2b1f}
+  h1.unit-title{font-size:1.7rem;color:#3d2b1f;margin:1.5rem 0 .25rem;line-height:1.2}
+  h2.unit-sub{font-size:1.1rem;color:#7a5a3a;margin:0 0 1.5rem;font-style:italic;font-weight:normal}
+  h3{font-size:1.2rem;color:#3d2b1f;margin-top:2rem;border-bottom:1px solid #d4c5a8;padding-bottom:.3rem}
+  p{margin:.85rem 0}
+  .scripture{background:#fff7e8;border-left:4px solid #b08240;padding:.75rem 1rem;margin:1rem 0;font-style:italic}
+  .card{background:#fff;border:1px solid #d4c5a8;border-radius:8px;padding:1.25rem;margin:1.5rem 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .card h3{margin-top:0;border:none;color:#3d2b1f}
+  label{display:block;margin:.5rem 0 .2rem;font-weight:600;color:#3d2b1f}
+  input[type=text],input[type=email],textarea,select{width:100%;padding:.55rem;border:1px solid #c4b598;border-radius:4px;font-family:inherit;font-size:1rem;background:#fff}
+  textarea{min-height:5rem;resize:vertical}
+  .btn{background:#3d2b1f;color:#f6f3ec;border:none;padding:.65rem 1.2rem;border-radius:4px;cursor:pointer;font-family:inherit;font-size:1rem;font-weight:600;margin:.3rem .3rem .3rem 0}
+  .btn:hover{background:#5a4332}
+  .btn.primary{background:#b08240;color:#3d2b1f}
+  .btn.primary:hover{background:#c79352}
+  .btn.danger{background:#8b3a2c;color:#fff}
+  .btn.danger:hover{background:#a54838}
+  .btn:disabled{background:#999;cursor:not-allowed}
+  .track-buttons{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+  .track-buttons .btn{flex:1;min-width:140px}
+  .track-buttons .btn.selected{outline:3px solid #6b8e4e}
+  .question{margin:1.25rem 0;padding:1rem;background:#fff;border:1px solid #d4c5a8;border-radius:6px}
+  .question p.qtext{font-weight:600;margin-top:0}
+  .option{display:block;margin:.35rem 0;padding:.5rem .75rem;background:#f6f3ec;border:1px solid #d4c5a8;border-radius:4px;cursor:pointer}
+  .option:hover{background:#ede6d2}
+  .option input{margin-right:.5rem}
+  .option.correct-answer{background:#dcebc4;border-color:#6b8e4e}
+  .option.wrong-answer{background:#f4d4cc;border-color:#8b3a2c}
+  .feedback{margin-top:.6rem;padding:.6rem .8rem;border-radius:4px;font-size:.95rem}
+  .feedback.correct{background:#dcebc4;border-left:4px solid #6b8e4e}
+  .feedback.incorrect{background:#f4d4cc;border-left:4px solid #8b3a2c}
+  .sa-feedback{margin-top:.4rem;font-size:.9rem;font-style:italic;color:#5a4332}
+  .sa-model{margin-top:.6rem;padding:.8rem 1rem;background:#fdf6e3;border:1px solid #e6cf7a;border-left:5px solid #f4c542;border-radius:6px;font-size:.95rem;color:#3a3026}
+  .sa-model-label{font-weight:700;color:#8a6d1f;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.5px;font-size:.78rem}
+  .sa-feedback.pass{color:#3a5a25}
+  .sa-feedback.fail{color:#7a2618}
+  .results{background:#fff;border:2px solid #b08240;border-radius:8px;padding:1.25rem;margin:1.5rem 0}
+  .results.pass{border-color:#6b8e4e;background:#f0f7e3}
+  .results.fail{border-color:#8b3a2c;background:#fbeae5}
+  .results h2{margin-top:0}
+  .lockout{background:#fbeae5;border:2px solid #8b3a2c;border-radius:8px;padding:1.25rem;margin:1.5rem 0;text-align:center}
+  .lockout .timer{font-size:1.4rem;font-weight:700;color:#8b3a2c;margin:.5rem 0}
+  .hidden{display:none !important}
+  footer{text-align:center;padding:2rem 1rem 1rem;font-size:.85rem;color:#7a5a3a}
+  @media print{
+    body{background:#fff;color:#000}
+    header,.toggle,.progress-grid,.btn,#exam-section,#results-block,#lockout-block,#registration-card,#track-card,footer{display:none !important}
+    .container{max-width:none;padding:0}
+    body.lang-en .lang-es,body.lang-es .lang-en{display:none}
+    h1.unit-title,h3{color:#000;page-break-after:avoid}
+    .scripture{border-left:2px solid #000;background:none}
+  }
+    .sa-check-btn{margin:.4rem 0;padding:.4rem .9rem;font-size:.9rem}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+
+<header>
+  <div class="hwrap">
+    <h1>
+      <span class="lang-en">CTS Hermeneutics &middot; Unit 2</span>
+      <span class="lang-es">Hermenéutica CTS &middot; Unidad 2</span>
+    </h1>
+    <button class="toggle" onclick="toggleLang()">
+      <span class="lang-en">Español</span>
+      <span class="lang-es">English</span>
+    </button>
+  </div>
+  <div class="progress-grid" id="progress-grid"></div>
+</header>
+
+<div class="container">
+
+  <h1 class="unit-title">
+    <span class="lang-en">Unit 2: The Holy Spirit, Prayer, and the Heart of the Interpreter</span>
+    <span class="lang-es">Unidad 2: El Espíritu Santo, la oración y el corazón del intérprete</span>
+  </h1>
+  <h2 class="unit-sub">
+    <span class="lang-en">Dr. Wayne Cook &middot; Chapala Theological Seminary</span>
+    <span class="lang-es">Dr. Wayne Cook &middot; Seminario Teológico de Chapala</span>
+  </h2>
+  <!-- ============================================================ -->
+  <!-- TRACK SELECTION                                              -->
+  <!-- ============================================================ -->
+  <section class="card" id="track-card">
+    <h3>
+      <span class="lang-en">Choose your track</span>
+      <span class="lang-es">Escoja su modalidad</span>
+    </h3>
+    <p>
+      <span class="lang-en"><strong>Certificate of Ministry:</strong> Twenty multiple-choice questions per unit. Pass at 18 of 20 (90&percnt;).</span>
+      <span class="lang-es"><strong>Certificado de Ministerio:</strong> Veinte preguntas de opción múltiple por unidad. Aprobación con 18 de 20 (90&percnt;).</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>Master of Divinity:</strong> Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice <em>and</em> 9 of 10 short-answer, scored independently.</span>
+      <span class="lang-es"><strong>Maestría en Divinidad:</strong> Las mismas veinte preguntas de opción múltiple, más diez preguntas de respuesta breve. Aprobación con 18 de 20 de opción múltiple <em>y</em> 9 de 10 de respuesta breve, evaluadas de forma independiente.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>Master of Theology:</strong> Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice <em>and</em> 9 of 10 short-answer, scored independently.</span>
+      <span class="lang-es"><strong>Maestría en Teología:</strong> Evaluada exactamente como la Maestría en Divinidad: las mismas veinte preguntas de opción múltiple más diez preguntas de respuesta breve, aprobando con 18 de 20 de opción múltiple <em>y</em> 9 de 10 de respuesta breve, evaluadas de forma independiente.</span>
+    </p>
+    <div class="track-buttons">
+      <button class="btn" id="track-cert-btn" onclick="setTrack('cert')">
+        <span class="lang-en">Certificate</span>
+        <span class="lang-es">Certificado</span>
+      </button>
+      <button class="btn" id="track-mdiv-btn" onclick="setTrack('mdiv')">
+        <span class="lang-en">M.Div</span>
+        <span class="lang-es">Maestría</span>
+      </button>
+      <button class="btn" id="track-thm-btn" onclick="setTrack('thm')">
+        <span class="lang-en">Th.M</span>
+        <span class="lang-es">Maestría en Teología</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TEACHING CONTENT                                             -->
+  <!-- ============================================================ -->
+  <article class="teaching">
+
+    <h3>
+      <span class="lang-en">1. Monday Morning at the Desk</span>
+      <span class="lang-es">1. Lunes por la mañana en el escritorio</span>
+    </h3>
+    <p>
+      <span class="lang-en">Imagine the pastor on a Monday morning. He has put away yesterday&rsquo;s bulletin. He has answered his text messages. He has finished his coffee. Now he opens his Bible to next Sunday&rsquo;s text. The room is quiet. The page is open. Everything that will happen on Sunday morning &mdash; every soul fed or starved, every doubt answered or deepened, every command obeyed or twisted &mdash; depends on what happens at that desk this morning.</span>
+      <span class="lang-es">Imagine al pastor un lunes por la mañana. Ha guardado el boletín del domingo. Ha contestado sus mensajes de texto. Ha terminado su café. Ahora abre su Biblia en el texto del próximo domingo. La habitación está en silencio. La página está abierta. Todo lo que ocurra el domingo por la mañana &mdash; cada alma alimentada o desnutrida, cada duda respondida o profundizada, cada mandamiento obedecido o torcido &mdash; depende de lo que suceda en ese escritorio esta mañana.</span>
+    </p>
+    <p>
+      <span class="lang-en">You can come to that desk with sharp pencils and good commentaries and excellent training, and still fail. You can come with none of those and still feed your people. The difference is not in your tools. The difference is in your heart, and in the Spirit who must teach you before you teach anyone else.</span>
+      <span class="lang-es">Usted puede venir a ese escritorio con lápices afilados, buenos comentarios, y excelente preparación, y aún fracasar. Puede venir sin nada de eso y aun así alimentar a su pueblo. La diferencia no está en las herramientas. La diferencia está en su corazón, y en el Espíritu que debe enseñarle a usted antes de que usted enseñe a nadie más.</span>
+    </p>
+    <p>
+      <span class="lang-en">Hermeneutics is not finally a technique. It is a conversation between three Persons &mdash; the Father who gave the Word, the Son who is the Word made flesh, and the Spirit who interprets the Word &mdash; and one preacher who has come quietly to the page with his heart in his hands.</span>
+      <span class="lang-es">La hermenéutica no es, al final, una técnica. Es una conversación entre tres Personas &mdash; el Padre que dio la Palabra, el Hijo que es la Palabra hecha carne, y el Espíritu que interpreta la Palabra &mdash; y un predicador que ha venido en silencio a la página con su corazón en las manos.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">2. The Author and His Interpreter</span>
+      <span class="lang-es">2. El Autor y Su Intérprete</span>
+    </h3>
+    <p>
+      <span class="lang-en">Paul tells us in 1 Corinthians 2 that the Spirit alone knows the deep things of God:</span>
+      <span class="lang-es">Pablo nos dice en 1 Corintios 2 que solo el Espíritu conoce las cosas profundas de Dios:</span>
+    </p>
+    <div class="scripture">
+      <span class="lang-en">&ldquo;The Spirit searches all things, yes, the deep things of God. For what man knows the things of a man except the spirit of the man which is in him? Even so no one knows the things of God except the Spirit of God.&rdquo; (1 Corinthians 2:10b&ndash;11, NKJV)</span>
+      <span class="lang-es">&laquo;El Espíritu todo lo escudriña, aun lo profundo de Dios. Porque &iquest;quién de los hombres sabe las cosas del hombre, sino el espíritu del hombre que está en él? Así tampoco nadie conoce las cosas de Dios, sino el Espíritu de Dios.&raquo; (1 Corintios 2:10b&ndash;11, RVG)</span>
+    </div>
+    <p>
+      <span class="lang-en">Think of it this way. No one knows what I am thinking right now except my own spirit. If you want to know what is in my mind, I must tell you. The same is true of God. No commentary, no Greek dictionary, no degree of intelligence will reach the mind of God. Only the Spirit of God knows the mind of God. And He has been given to us.</span>
+      <span class="lang-es">Piénselo de esta manera. Nadie sabe lo que estoy pensando en este momento excepto mi propio espíritu. Si usted quiere saber lo que hay en mi mente, yo se lo debo decir. Lo mismo es cierto de Dios. Ningún comentario, ningún diccionario griego, ningún grado de inteligencia alcanzará la mente de Dios. Solo el Espíritu de Dios conoce la mente de Dios. Y Él nos ha sido dado.</span>
+    </p>
+    <div class="scripture">
+      <span class="lang-en">&ldquo;The natural man does not receive the things of the Spirit of God, for they are foolishness to him; nor can he know them, because they are spiritually discerned.&rdquo; (1 Corinthians 2:14, NKJV)</span>
+      <span class="lang-es">&laquo;Pero el hombre natural no percibe las cosas que son del Espíritu de Dios, porque para él son locura, y no las puede entender, porque se han de discernir espiritualmente.&raquo; (1 Corintios 2:14, RVG)</span>
+    </div>
+    <p>
+      <span class="lang-en">There it is. A brilliant unbeliever cannot read the Bible well. A simple believer who comes with the Spirit can. This is not anti-intellectualism &mdash; Paul himself was a trained scholar &mdash; but it is anti-arrogance. The first qualification for understanding the Word is not a library card. It is a Helper.</span>
+      <span class="lang-es">Ahí está. Un incrédulo brillante no puede leer bien la Biblia. Un creyente sencillo que viene con el Espíritu sí puede. Esto no es anti-intelectualismo &mdash; Pablo mismo era un erudito formado &mdash; pero sí es anti-arrogancia. La primera condición para entender la Palabra no es una credencial de biblioteca. Es un Ayudador.</span>
+    </p>
+    <p>
+      <span class="lang-en">A caution belongs here, so none of this is misread. Illumination is not new revelation, and it is not a shortcut around the work this course will teach you &mdash; the careful study of grammar, context, historical background, language, and sound reasoning. Paul, the very author of these words, was himself a rigorously trained scholar who reasoned from the text with precision. The ordinary means of interpretation are not in competition with the Spirit; they are usually the very channel through which He works. A pastor who prays for understanding and then refuses to do the hard work of study has not honored the Spirit &mdash; he has excused his own laziness. The Spirit illuminates disciplined engagement with the text; He does not replace it.</span>
+      <span class="lang-es">Aquí corresponde una advertencia, para que nada de esto se malinterprete. La iluminación no es nueva revelación, y no es un atajo alrededor del trabajo que este curso le enseñará &mdash; el estudio cuidadoso de la gramática, el contexto, el trasfondo histórico, el idioma y el razonamiento sólido. Pablo, el mismo autor de estas palabras, era él mismo un erudito rigurosamente formado que razonaba desde el texto con precisión. Los medios ordinarios de interpretación no compiten con el Espíritu; usualmente son el mismo canal por el cual Él obra. Un pastor que ora por entendimiento y luego se niega a hacer el trabajo arduo del estudio no ha honrado al Espíritu &mdash; ha excusado su propia pereza. El Espíritu ilumina el compromiso disciplinado con el texto; no lo reemplaza.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">3. The Heart Before the Page</span>
+      <span class="lang-es">3. El corazón antes de la página</span>
+    </h3>
+    <p>
+      <span class="lang-en">Ezra 7:10 said it before Paul did: &ldquo;Ezra had prepared his heart to seek the Law of the LORD.&rdquo; Not his notes. Not his outline. His heart. The pastor comes to the desk on Monday morning not first to think, but first to bow.</span>
+      <span class="lang-es">Esdras 7:10 lo dijo antes que Pablo: &laquo;Esdras había preparado su corazón para inquirir la ley de Jehová.&raquo; No sus notas. No su bosquejo. Su corazón. El pastor viene al escritorio el lunes por la mañana no primero a pensar, sino primero a inclinarse.</span>
+    </p>
+    <p>
+      <span class="lang-en">A heart unprepared turns exegesis into eisegesis &mdash; pulling our own meaning out of the text instead of letting the text put meaning into us. We will study eisegesis as a danger in another unit. For now, the antidote: a humble heart, brought daily under the Author&rsquo;s gaze, asking for help.</span>
+      <span class="lang-es">Un corazón no preparado convierte la exégesis en eiségesis &mdash; sacar nuestro propio significado del texto en lugar de dejar que el texto ponga significado en nosotros. Estudiaremos la eiségesis como peligro en otra unidad. Por ahora, el antídoto: un corazón humilde, traído cada día bajo la mirada del Autor, pidiendo ayuda.</span>
+    </p>
+    <p>
+      <span class="lang-en">A pastor who comes to the page proud will read his pride back out of the page. A pastor who comes angry will hear an angry God. A pastor who comes broken and asking will be answered. The Word is a mirror &mdash; it gives back the heart that bends over it.</span>
+      <span class="lang-es">Un pastor que viene a la página orgulloso leerá su orgullo de regreso desde la página. Un pastor que viene enojado oirá a un Dios enojado. Un pastor que viene quebrantado y pidiendo será respondido. La Palabra es un espejo &mdash; devuelve el corazón que se inclina sobre ella.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">4. If Any Lacks Wisdom &mdash; Pray</span>
+      <span class="lang-es">4. Si a alguno le falta sabiduría, pida</span>
+    </h3>
+    <p>
+      <span class="lang-en">James, the brother of our Lord, was direct:</span>
+      <span class="lang-es">Jacobo, el hermano de nuestro Señor, fue directo:</span>
+    </p>
+    <div class="scripture">
+      <span class="lang-en">&ldquo;If any of you lacks wisdom, let him ask of God, who gives to all liberally and without reproach, and it will be given to him.&rdquo; (James 1:5, NKJV)</span>
+      <span class="lang-es">&laquo;Si alguno de vosotros tiene falta de sabiduría, pídala a Dios, el cual da a todos abundantemente y sin reproche, y le será dada.&raquo; (Santiago 1:5, RVG)</span>
+    </div>
+    <p>
+      <span class="lang-en">Some things God gives us simply because we are His children. He gives us air to breathe and sun on our faces without our asking. But other things come only when we ask. I remember taking my children to the store when they were small. Sometimes I would buy them a treat just because they were mine. But sometimes they would ask, and I would give it to them because they had asked.</span>
+      <span class="lang-es">Algunas cosas Dios nos las da simplemente porque somos Sus hijos. Nos da el aire que respiramos y el sol en el rostro sin que se lo pidamos. Pero otras cosas vienen solo cuando pedimos. Recuerdo llevar a mis hijos a la tienda cuando eran pequeños. A veces les compraba un dulce simplemente porque eran míos. Pero otras veces ellos pedían, y yo se los daba porque habían pedido.</span>
+    </p>
+    <p>
+      <span class="lang-en">Understanding of the Bible is one of the things God gives us by asking. He does not push His Word into a closed pastor. He answers a pastor who knocks.</span>
+      <span class="lang-es">El entendimiento de la Biblia es una de las cosas que Dios nos da al pedir. No empuja Su Palabra dentro de un pastor cerrado. Responde al pastor que llama.</span>
+    </p>
+    <p>
+      <span class="lang-en">James adds a warning: <em>let him ask in faith, with no doubting</em>. A double-minded pastor &mdash; half asking, half doubting &mdash; will receive nothing from the Lord. Pray for understanding. Believe that He answers. Then open the page.</span>
+      <span class="lang-es">Jacobo añade una advertencia: <em>pida con fe, no dudando nada</em>. Un pastor de doble ánimo &mdash; medio pidiendo, medio dudando &mdash; no recibirá nada del Señor. Ore por entendimiento. Crea que Él responde. Luego abra la página.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">5. Three Prayers That Worked</span>
+      <span class="lang-es">5. Tres oraciones que funcionaron</span>
+    </h3>
+    <p>
+      <span class="lang-en">Three stories that taught me what prayer can do for a pastor over a page.</span>
+      <span class="lang-es">Tres historias que me enseñaron lo que la oración puede hacer por un pastor sobre una página.</span>
+    </p>
+    <p>
+      <span class="lang-en">A Norwegian missionary named Maria Monsen was working in North China in the 1930s. She prayed for revival and saw nothing. Then she remembered that the mighty Yangtze River begins as raindrops in the mountains, and she went looking for one prayer partner who would agree with her. When she found her, she cried, &ldquo;The awakening has begun! Two of us have agreed!&rdquo; Within two years a great revival swept that province. Sometimes the prayer that opens the Bible begins with two believers agreeing.</span>
+      <span class="lang-es">Una misionera noruega llamada Maria Monsen trabajaba en el norte de China en los años 1930. Oraba por avivamiento y no veía nada. Entonces recordó que el poderoso río Yangtsé comienza como gotas de lluvia en las montañas, y salió a buscar una compañera de oración que se pusiera de acuerdo con ella. Cuando la encontró, gritó: &laquo;&iexcl;Ha comenzado el despertar! &iexcl;Dos de nosotras hemos acordado!&raquo; En dos años un gran avivamiento barrió aquella provincia. A veces la oración que abre la Biblia comienza con dos creyentes que se ponen de acuerdo.</span>
+    </p>
+    <p>
+      <span class="lang-en">Dallas Theological Seminary almost went bankrupt in its early days. The creditors were going to foreclose at noon. The president gathered his men together and they prayed. Harry Ironside prayed in his usual way: &ldquo;Lord, the cattle on a thousand hills are Thine. Please sell some of them and send us the money.&rdquo; While they were still praying, a Texas cattleman knocked at the door with a check in his hand. The amount was exactly the debt. Sometimes God answers our prayer before we have finished speaking it.</span>
+      <span class="lang-es">El Seminario Teológico de Dallas casi quebró en sus primeros días. Los acreedores iban a embargar al mediodía. El presidente reunió a sus hombres y oraron. Harry Ironside oró a su manera habitual: &laquo;Señor, los ganados de mil colinas son Tuyos. Por favor vende algunos y envíanos el dinero.&raquo; Mientras todavía oraban, un ganadero de Texas tocó a la puerta con un cheque en la mano. La cantidad era exactamente la deuda. A veces Dios responde nuestra oración antes de que terminemos de hablarla.</span>
+    </p>
+    <p>
+      <span class="lang-en">A man once brought me four sheets of paper covered with prayer requests. He said his prayer life felt empty and mechanical. I told him to put the lists away for a week and spend the time only in praise. He was angry. He came back a week later and said, &ldquo;It worked. Something has been restored.&rdquo; When prayer becomes management, return it to praise, and the Bible will open more readily that morning than it has in a year.</span>
+      <span class="lang-es">Un hombre me trajo una vez cuatro hojas de papel cubiertas de peticiones de oración. Decía que su vida de oración se sentía vacía y mecánica. Le dije que guardara las listas durante una semana y dedicara el tiempo solo a la alabanza. Se enojó. Volvió una semana después y dijo: &laquo;Funcionó. Algo ha sido restaurado.&raquo; Cuando la oración se vuelve administración, devuélvala a la alabanza, y la Biblia se abrirá más fácilmente esa mañana de lo que se ha abierto en un año.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">6. The Three Doubts of the Interpreter</span>
+      <span class="lang-es">6. Las tres dudas del intérprete</span>
+    </h3>
+    <p>
+      <span class="lang-en">A pastor who handles the Word will face doubts &mdash; not occasionally, but constantly. I have wrestled with three kinds of doubt, and I have found all three named in the Gospels. Let me name them in the men who suffered them: Thomas, Peter, and John the Baptist.</span>
+      <span class="lang-es">Un pastor que maneja la Palabra enfrentará dudas &mdash; no ocasionalmente, sino constantemente. Yo he luchado con tres clases de duda, y he encontrado las tres nombradas en los Evangelios. Permítame nombrarlas en los hombres que las sufrieron: Tomás, Pedro, y Juan el Bautista.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">7. Thomas Doubt &mdash; Does God Exist?</span>
+      <span class="lang-es">7. La duda de Tomás: &iquest;existe Dios?</span>
+    </h3>
+    <p>
+      <span class="lang-en">Thomas had heard from his friends that Jesus was alive again. He did not believe it. Dead men do not rise; nothing in his experience had prepared him for the report. He said, &ldquo;Unless I see the marks in His hand and side, I will not believe.&rdquo; A whole week he carried that doubt. Then Jesus came, and stood in front of him, and said, &ldquo;Stop doubting and believe.&rdquo; Thomas fell at His feet: &ldquo;My Lord and my God.&rdquo;</span>
+      <span class="lang-es">Tomás había oído de sus amigos que Jesús estaba vivo otra vez. No lo creía. Los muertos no resucitan; nada en su experiencia lo había preparado para el reporte. Dijo: &laquo;Si no veo en Sus manos la señal de los clavos, y meto mi mano en Su costado, no creeré.&raquo; Llevó esa duda durante toda una semana. Entonces Jesús vino, se paró frente a él, y dijo: &laquo;Deja de dudar y cree.&raquo; Tomás cayó a Sus pies: &laquo;&iexcl;Señor mío, y Dios mío!&raquo;</span>
+    </p>
+    <p>
+      <span class="lang-en">I remember when I was still very young that I had my first crisis of belief. I asked myself, &ldquo;What if there is really no God? What if there is nothing but this world we experience?&rdquo; Later I doubted other things &mdash; what if Jesus was not really the Son of God but, as one professor told me, only a dead Jew? In seminary I studied apologetics, and the books helped. But in the end the answer to Thomas doubt is what it was for Thomas: the risen Christ Himself, standing in the room.</span>
+      <span class="lang-es">Recuerdo que cuando todavía era muy joven tuve mi primera crisis de fe. Me pregunté: &laquo;&iquest;Y si en realidad no hay Dios? &iquest;Y si no hay nada más que este mundo que experimentamos?&raquo; Más tarde dudé de otras cosas &mdash; &iquest;y si Jesús no fue realmente el Hijo de Dios, sino, como me dijo un profesor, solo un judío muerto? En el seminario estudié apologética, y los libros ayudaron. Pero al final, la respuesta a la duda de Tomás es lo que fue para Tomás: el Cristo resucitado mismo, parado en la habitación.</span>
+    </p>
+    <p>
+      <span class="lang-en">A man named Rick was converted in one of our revival meetings in Evansburg. He went back to his old drinking friends to witness. One of them said, &ldquo;You know, you could be wrong.&rdquo; Rick said, &ldquo;You could be right. But even if I am wrong, I haven&rsquo;t lost anything &mdash; Jesus has given me a better life than I had before. But if YOU are wrong, you are going to spend a long time in hell.&rdquo; A pastor who has wrestled Thomas doubt to the ground can stand calmly in front of any unbeliever&rsquo;s challenge.</span>
+      <span class="lang-es">Un hombre llamado Rick fue convertido en una de nuestras reuniones de avivamiento en Evansburg. Volvió con sus viejos amigos bebedores para testificar. Uno de ellos le dijo: &laquo;Mira, podrías estar equivocado.&raquo; Rick respondió: &laquo;Tú podrías tener razón. Pero aun si yo estoy equivocado, no he perdido nada &mdash; Jesús me ha dado una vida mejor que la que tenía antes. Pero si TÚ estás equivocado, vas a pasar mucho tiempo en el infierno.&raquo; Un pastor que ha luchado con la duda de Tomás hasta vencerla puede estar calmadamente frente al desafío de cualquier incrédulo.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">8. Peter Doubt &mdash; Does His Power Reach Me?</span>
+      <span class="lang-es">8. La duda de Pedro: &iquest;Su poder me alcanza a mí?</span>
+    </h3>
+    <p>
+      <span class="lang-en">Peter once asked the Lord to let him walk on the water. Christ said come, and he stepped out, and for a moment he walked. Then he saw the wind. And the man who had been walking on the sea began to sink. Christ caught him and said, &ldquo;O you of little faith, why did you doubt?&rdquo; Peter did not doubt that Jesus was Lord. He doubted that Jesus&rsquo; power reached him in those particular waves.</span>
+      <span class="lang-es">Pedro una vez le pidió al Señor que le permitiera caminar sobre el agua. Cristo dijo ven, y él dio el paso, y por un momento caminó. Entonces vio el viento. Y el hombre que había estado caminando sobre el mar comenzó a hundirse. Cristo lo agarró y le dijo: &laquo;&iexcl;Oh hombre de poca fe! &iquest;Por qué dudaste?&raquo; Pedro no dudaba de que Jesús era el Señor. Dudaba de que el poder de Jesús lo alcanzara a él en esas olas particulares.</span>
+    </p>
+    <p>
+      <span class="lang-en">A few years ago a man came to our seminary in Cochrane. His name was Wayne Woodward. He lived a long way from us, in Winnipeg. He had a good job with Boeing, two small daughters, and only a high-school diploma. Friends told him he was crazy to give up the job and bring his family across the country to study for ministry. Wayne himself was full of questions: What kind of church could he ever pastor? How would he compete with master&rsquo;s-level students? How would he feed his family while studying?</span>
+      <span class="lang-es">Hace algunos años un hombre llegó a nuestro seminario en Cochrane. Se llamaba Wayne Woodward. Vivía muy lejos de nosotros, en Winnipeg. Tenía un buen trabajo en Boeing, dos hijas pequeñas, y solo un diploma de secundaria. Sus amigos le dijeron que estaba loco al dejar el trabajo y traer a su familia cruzando el país para estudiar para el ministerio. Wayne mismo estaba lleno de preguntas: &iquest;Qué clase de iglesia podría pastorear algún día? &iquest;Cómo competiría con estudiantes de nivel de maestría? &iquest;Cómo alimentaría a su familia mientras estudiaba?</span>
+    </p>
+    <p>
+      <span class="lang-en">I should mention also: Wayne Woodward is deaf.</span>
+      <span class="lang-es">Debo mencionar también: Wayne Woodward es sordo.</span>
+    </p>
+    <p>
+      <span class="lang-en">When his wife came to class with him, she would sign the lectures or type them on a computer so he could follow what was being taught. He worked nights as a janitor to pay the bills. A deaf congregation in Calgary asked him to be their pastor. One Sunday, after a sermon on doubt, Wayne came forward to rededicate his life. I asked him afterward what God was doing. He said, &ldquo;I have been doubting my own abilities. I speak a language no one can understand. I struggle with English. Master&rsquo;s-level students sit beside me. I have been thinking, &lsquo;I don&rsquo;t belong here. I could never pastor a church.&rsquo;&rdquo;</span>
+      <span class="lang-es">Cuando su esposa venía a la clase con él, ella señalizaba las clases o las escribía en una computadora para que él pudiera seguir lo que se enseñaba. Él trabajaba de noche como conserje para pagar las cuentas. Una congregación sorda en Calgary le pidió que fuera su pastor. Un domingo, después de un sermón sobre la duda, Wayne pasó al frente a reconsagrar su vida. Le pregunté después qué estaba haciendo Dios. Dijo: &laquo;He estado dudando de mis propias capacidades. Hablo un idioma que nadie puede entender. Lucho con el inglés. Estudiantes de nivel de maestría se sientan junto a mí. He estado pensando: &lsquo;Yo no pertenezco aquí. Nunca podría pastorear una iglesia.&rsquo;&raquo;</span>
+    </p>
+    <p>
+      <span class="lang-en">That is Peter doubt. Not &ldquo;Is Christ real?&rdquo; but &ldquo;Can Christ&rsquo;s power reach me, this man, in these waves?&rdquo; The answer is the same now as in Galilee. The hand of the Lord is not too short.</span>
+      <span class="lang-es">Esa es la duda de Pedro. No &laquo;&iquest;Es Cristo real?&raquo; sino &laquo;&iquest;Puede el poder de Cristo alcanzarme a mí, este hombre, en estas olas?&raquo; La respuesta es la misma ahora que en Galilea. La mano del Señor no se ha acortado.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">9. John the Baptist Doubt &mdash; Am I Really His?</span>
+      <span class="lang-es">9. La duda de Juan el Bautista: &iquest;soy verdaderamente Suyo?</span>
+    </h3>
+    <p>
+      <span class="lang-en">John had baptized Jesus and seen the Spirit descend. He had said, &ldquo;Behold the Lamb of God.&rdquo; Then Herod threw him in prison, and in the dark John began to doubt the very Man he had pointed out. He sent disciples to ask, &ldquo;Are You really the One, or should we look for another?&rdquo; Jesus did not rebuke him. He sent back evidence &mdash; the blind see, the dead are raised, the gospel is preached to the poor &mdash; and then a tender word: &ldquo;Blessed is he who is not offended in Me.&rdquo;</span>
+      <span class="lang-es">Juan había bautizado a Jesús y había visto descender al Espíritu. Había dicho: &laquo;He aquí el Cordero de Dios.&raquo; Entonces Herodes lo arrojó a la prisión, y en la oscuridad Juan comenzó a dudar del mismo Hombre al cual había señalado. Envió a sus discípulos a preguntar: &laquo;&iquest;Eres tú aquel que había de venir, o esperaremos a otro?&raquo; Jesús no lo reprendió. Le devolvió evidencia &mdash; los ciegos ven, los muertos son levantados, el evangelio es predicado a los pobres &mdash; y luego una palabra tierna: &laquo;Bienaventurado es el que no fuere escandalizado en mí.&raquo;</span>
+    </p>
+    <p>
+      <span class="lang-en">Many years ago my wife asked me one evening, &ldquo;How do you go about dealing with doubt?&rdquo; I was pleased to launch into how I had wrestled with Thomas doubt and come through. She stopped me. &ldquo;I have never doubted there is a God. I am doubting whether <em>I</em> am really a Christian. How do you know if you have really been saved?&rdquo;</span>
+      <span class="lang-es">Hace muchos años, mi esposa me preguntó una noche: &laquo;&iquest;Cómo manejas tú la duda?&raquo; Yo estaba complacido en empezar a describir cómo había luchado con la duda de Tomás y la había superado. Ella me detuvo. &laquo;Yo nunca he dudado de que Dios exista. Estoy dudando de si <em>yo</em> soy verdaderamente cristiana. &iquest;Cómo sabe uno si verdaderamente ha sido salvo?&raquo;</span>
+    </p>
+    <p>
+      <span class="lang-en">This is John the Baptist doubt &mdash; not doubt about God, or about His power, but about myself. <em>Am I really His?</em> It comes most often to the sincerest believers. A pastor who has not faced it cannot help his people through it.</span>
+      <span class="lang-es">Esta es la duda de Juan el Bautista &mdash; no duda acerca de Dios, ni acerca de Su poder, sino acerca de uno mismo. <em>&iquest;Soy verdaderamente Suyo?</em> Viene más a menudo a los creyentes más sinceros. Un pastor que no la ha enfrentado no puede ayudar a su pueblo a atravesarla.</span>
+    </p>
+    <p>
+      <span class="lang-en">The answer is the same one Jesus sent back to John. Go back to the evidence. Go back to Christ. <em>These things I have written to you who believe in the name of the Son of God, that you may know that you have eternal life</em> (1 John 5:13). Our relationship with God does not rest on being good people, or on our feelings, or on a steady mood. It rests on Christ&rsquo;s promise &mdash; <em>I will never leave you nor forsake you</em> &mdash; and on the cross where He proved it.</span>
+      <span class="lang-es">La respuesta es la misma que Jesús le envió a Juan. Vuelva a la evidencia. Vuelva a Cristo. <em>Estas cosas os he escrito a vosotros que creéis en el nombre del Hijo de Dios, para que sepáis que tenéis vida eterna</em> (1 Juan 5:13). Nuestra relación con Dios no descansa en ser buenas personas, ni en nuestros sentimientos, ni en un estado de ánimo estable. Descansa en la promesa de Cristo &mdash; <em>nunca te dejaré ni te desampararé</em> &mdash; y en la cruz donde Él lo demostró.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">10. Availability, Not Ability</span>
+      <span class="lang-es">10. Disponibilidad, no habilidad</span>
+    </h3>
+    <p>
+      <span class="lang-en">When God called Moses, Moses had four excuses ready. <em>I have no body</em> &mdash; no presence, no position. <em>I have no authority</em> &mdash; no warrant to speak. <em>I have no credentials</em> &mdash; no resume. <em>I have no ability</em> &mdash; I am slow of speech, my tongue stumbles. God answered the fourth one with a question: &ldquo;Who made the mouth?&rdquo; God is not interested in your ability. He is interested in your availability.</span>
+      <span class="lang-es">Cuando Dios llamó a Moisés, Moisés tenía cuatro excusas listas. <em>No tengo cuerpo</em> &mdash; sin presencia, sin posición. <em>No tengo autoridad</em> &mdash; sin licencia para hablar. <em>No tengo credenciales</em> &mdash; sin currículum. <em>No tengo habilidad</em> &mdash; soy tardo en el habla, mi lengua tropieza. Dios respondió la cuarta con una pregunta: &laquo;&iquest;Quién hizo la boca?&raquo; A Dios no le interesa su habilidad. Le interesa su disponibilidad.</span>
+    </p>
+    <p>
+      <span class="lang-en">Bring your unfinished training, your unanswered doubts, your slow tongue, and your tired Monday morning. Bring them to the desk. Open the Bible. Pray for the Spirit. Believe He answers. The Word will yield to a heart that comes.</span>
+      <span class="lang-es">Traiga su preparación incompleta, sus dudas sin respuesta, su lengua tarda, y su lunes cansado por la mañana. Tráigalos al escritorio. Abra la Biblia. Ore por el Espíritu. Crea que Él responde. La Palabra se rendirá a un corazón que viene.</span>
+    </p>
+    <p>
+      <span class="lang-en">You do not need to be the brightest pastor in your city. You need to be the quietest before the Author of the Book. That is enough.</span>
+      <span class="lang-es">Usted no necesita ser el pastor más brillante de su ciudad. Necesita ser el más callado ante el Autor del Libro. Eso es suficiente.</span>
+    </p>
+
+  </article>
+
+  <!-- ============================================================ -->
+  <!-- EXAM                                                         -->
+  <!-- ============================================================ -->
+  <section id="lockout-block" class="lockout hidden">
+    <h2>
+      <span class="lang-en">Exam Locked</span>
+      <span class="lang-es">Examen bloqueado</span>
+    </h2>
+    <p>
+      <span class="lang-en">You did not reach the passing score. Please review the unit and try again after the lockout period.</span>
+      <span class="lang-es">No alcanzó la nota mínima. Repase la unidad y vuelva a intentarlo después del período de bloqueo.</span>
+    </p>
+    <div class="timer" id="lockout-timer"></div>
+    <p id="lockout-scope" style="font-style:italic"></p>
+  </section>
+
+  <section id="exam-section" class="card">
+    <h2 id="exam-title">
+      <span class="lang-en">Examination &mdash; Unit 1</span>
+      <span class="lang-es">Examen &mdash; Unidad 1</span>
+    </h2>
+    <p id="exam-track-note" style="font-style:italic;color:#7a5a3a"></p>
+
+    <div id="mc-container">
+      <h3>
+        <span class="lang-en">Multiple-Choice (20 questions, 18 to pass)</span>
+        <span class="lang-es">Opción múltiple (20 preguntas, 18 para aprobar)</span>
+      </h3>
+      <div id="mc-questions"></div>
+    </div>
+
+    <div id="sa-container">
+      <h3>
+        <span class="lang-en">Short-Answer (10 questions)</span>
+        <span class="lang-es">Respuesta breve (10 preguntas)</span>
+      </h3>
+      <p id="sa-note" style="font-weight:600"></p>
+      <p style="font-style:italic;color:#7a5a3a">
+        <span class="lang-en">Type your answer in the language you are studying in. Each answer must be at least a few sentences (about 100 characters) and contain the key concepts from the lesson.</span>
+        <span class="lang-es">Escriba su respuesta en el idioma en que está estudiando. Cada respuesta debe tener al menos unas cuantas oraciones (unos 100 caracteres) y contener los conceptos clave de la lección.</span>
+      </p>
+      <div id="sa-questions"></div>
+    </div>
+
+    <button class="btn primary" onclick="submitExam()" id="submit-btn">
+      <span class="lang-en">Submit Exam</span>
+      <span class="lang-es">Enviar examen</span>
+    </button>
+    <button class="btn danger" onclick="resetExam()">
+      <span class="lang-en">Reset</span>
+      <span class="lang-es">Reiniciar</span>
+    </button>
+  </section>
+
+  <section id="results-block" class="hidden"></section>
+
+</div>
+
+<footer>
+  <span class="lang-en">Chapala Theological Seminary &middot; CTS Hermeneutics &middot; &copy; Dr. Wayne Cook</span>
+  <span class="lang-es">Seminario Teológico de Chapala &middot; Hermenéutica CTS &middot; &copy; Dr. Wayne Cook</span>
+</footer>
+
+<script>
+  // ============================================================
+  // PER-UNIT CONFIG (the only block that changes between units)
+  // ============================================================
+  const UNIT = 2;
+  const NEXT_UNIT_URL = "CTSHermeneuticsUnit3.html";
+  const PREV_UNIT_URL = "CTSHermeneuticsUnit1.html";
+  const TOTAL_UNITS = 11;
+  const IS_FINAL_UNIT = false;
+  const FINAL_REDIRECT_URL = "CTSHermeneuticsCertificate.html";
+  const SHOW_REGISTRATION = false;
+
+  // ============================================================
+  // ENGINE CONSTANTS (carried unchanged across units)
+  // ============================================================
+  const COURSE_CODE = "herm";
+  const PROGRESS_KEY = "cts_herm_progress";
+  const STUDENT_KEY = "cts_student";
+  const TRACK_KEY = "cts_track";
+  const UNIT_KEY = "cts_herm_u" + UNIT + "_passed";
+  const MC_KEY = "cts_herm_u" + UNIT + "_mc_passed";
+  const SA_KEY = "cts_herm_u" + UNIT + "_sa_passed";
+  const STATE_KEY = "cts_herm_u" + UNIT + "_state";
+  const LOCKOUT_KEY = "cts_herm_u" + UNIT + "_lockout";
+  const LOCKOUT_SCOPE_KEY = "cts_herm_u" + UNIT + "_lockout_scope";
+  const MC_PASS = 18;
+  const SA_PASS = 9;
+  const LOCKOUT_MS = 15 * 60 * 1000;
+  const REDIRECT_MS = 3000;
+
+  // ============================================================
+  // MULTIPLE-CHOICE QUESTIONS (exactly 20; A=5, B=5, C=5, D=5)
+  // ============================================================
+  const mcQuestions = [
+    {
+      textEn: "1. According to 1 Corinthians 2:10-11, who alone knows the deep things of God?",
+      textEs: "1. Según 1 Corintios 2:10-11, ¿quién es el único que conoce las cosas profundas de Dios?",
+      optionsEn: ["A. The most learned scholars","B. The Spirit of God","C. The original authors of Scripture","D. The ancient apostles"],
+      optionsEs: ["A. Los eruditos más doctos","B. El Espíritu de Dios","C. Los autores originales de la Escritura","D. Los antiguos apóstoles"],
+      correct: "B",
+      correctFeedbackEn: "Correct. Just as only my own spirit knows what I am thinking, only the Spirit of God knows the mind of God. He has been given to us so we may understand the things freely given by God.",
+      correctFeedbackEs: "Correcto. Así como solo mi propio espíritu conoce lo que pienso, solo el Espíritu de Dios conoce la mente de Dios. Nos ha sido dado para que podamos entender las cosas que Dios nos ha dado.",
+      incorrectFeedbackEn: "Scholars, original authors, and apostles all served as instruments, but none of them — by themselves — can give a believer access to the deep things of God. Only the Spirit can.",
+      incorrectFeedbackEs: "Eruditos, autores originales, y apóstoles sirvieron todos como instrumentos, pero ninguno de ellos, por sí mismo, puede dar al creyente acceso a las cosas profundas de Dios. Solo el Espíritu puede."
+    },
+    {
+      textEn: "2. According to Paul in 1 Corinthians 2:14, the natural man:",
+      textEs: "2. Según Pablo en 1 Corintios 2:14, el hombre natural:",
+      optionsEn: ["A. Cannot receive or understand the things of God's Spirit","B. Can grasp Scripture easily with enough study","C. Is naturally drawn to spiritual things","D. Always rejects truth on purpose"],
+      optionsEs: ["A. No puede recibir ni entender las cosas del Espíritu de Dios","B. Puede captar la Escritura fácilmente con suficiente estudio","C. Es atraído naturalmente a las cosas espirituales","D. Siempre rechaza la verdad a propósito"],
+      correct: "A",
+      correctFeedbackEn: "Correct. Paul says they are foolishness to the natural man, and he cannot know them because they are spiritually discerned. A brilliant unbeliever cannot read the Bible well; a simple believer with the Spirit can.",
+      correctFeedbackEs: "Correcto. Pablo dice que son locura para el hombre natural, y no las puede entender porque se han de discernir espiritualmente. Un incrédulo brillante no puede leer bien la Biblia; un creyente sencillo con el Espíritu sí puede.",
+      incorrectFeedbackEn: "The verse says spiritual things are foolishness to the natural man and that he CANNOT know them. The problem is not effort or intent — it is a missing faculty. Only the Spirit can give what the natural man lacks.",
+      incorrectFeedbackEs: "El versículo dice que las cosas espirituales son locura para el hombre natural y que NO PUEDE entenderlas. El problema no es esfuerzo ni intención: es una facultad ausente. Solo el Espíritu puede dar lo que al hombre natural le falta."
+    },
+    {
+      textEn: "3. According to the lesson, the first qualification for understanding the Bible is:",
+      textEs: "3. Según la lección, la primera condición para entender la Biblia es:",
+      optionsEn: ["A. A theological degree","B. A complete library of commentaries","C. Knowledge of Hebrew and Greek","D. The presence and help of the Holy Spirit"],
+      optionsEs: ["A. Un título teológico","B. Una biblioteca completa de comentarios","C. Conocimiento del hebreo y del griego","D. La presencia y la ayuda del Espíritu Santo"],
+      correct: "D",
+      correctFeedbackEn: "Correct. Paul himself was a trained scholar, so this is not anti-intellectualism. But the first qualification is not a library card; it is a Helper. The Spirit of God must teach the pastor before the pastor teaches anyone.",
+      correctFeedbackEs: "Correcto. Pablo mismo era un erudito formado, así que esto no es anti-intelectualismo. Pero la primera condición no es una credencial de biblioteca; es un Ayudador. El Espíritu de Dios debe enseñar al pastor antes de que el pastor enseñe a nadie.",
+      incorrectFeedbackEn: "Degrees, libraries, and languages are useful tools, but Scripture is clear: only the Spirit gives access to the deep things of God. The first qualification is the Helper, not the credentials.",
+      incorrectFeedbackEs: "Los títulos, las bibliotecas, y los idiomas son herramientas útiles, pero la Escritura es clara: solo el Espíritu da acceso a las cosas profundas de Dios. La primera condición es el Ayudador, no las credenciales."
+    },
+    {
+      textEn: "4. The lesson teaches that hermeneutics is, in the end:",
+      textEs: "4. La lección enseña que la hermenéutica es, al final:",
+      optionsEn: ["A. A technique to be mastered through repetition","B. A conversation between three Persons and the preacher","C. The work of seminary professors alone","D. An ancient art with limited modern relevance"],
+      optionsEs: ["A. Una técnica que se domina por repetición","B. Una conversación entre tres Personas y el predicador","C. La obra de profesores de seminario solamente","D. Un arte antiguo de poca relevancia moderna"],
+      correct: "B",
+      correctFeedbackEn: "Correct. The Father who gave the Word, the Son who is the Word made flesh, the Spirit who interprets the Word — and one preacher who has come quietly to the page with his heart in his hands.",
+      correctFeedbackEs: "Correcto. El Padre que dio la Palabra, el Hijo que es la Palabra hecha carne, el Espíritu que interpreta la Palabra — y un predicador que ha venido en silencio a la página con su corazón en las manos.",
+      incorrectFeedbackEn: "Hermeneutics is not finally a technique to memorize or an academic monopoly. It is a personal conversation between the Triune God who authored the Word and the preacher who has come humbly to read it.",
+      incorrectFeedbackEs: "La hermenéutica no es al final una técnica para memorizar ni un monopolio académico. Es una conversación personal entre el Dios Trino que es Autor de la Palabra y el predicador que ha venido humildemente a leerla."
+    },
+    {
+      textEn: "5. Ezra 7:10 is connected to this unit because it teaches that the pastor:",
+      textEs: "5. Esdras 7:10 se conecta con esta unidad porque enseña que el pastor:",
+      optionsEn: ["A. Should research the text before he prays over it","B. Should write his sermon before reading the passage","C. Should prepare his heart before he opens the page","D. Should consult three commentaries before deciding"],
+      optionsEs: ["A. Debe investigar el texto antes de orar sobre él","B. Debe escribir su sermón antes de leer el pasaje","C. Debe preparar su corazón antes de abrir la página","D. Debe consultar tres comentarios antes de decidir"],
+      correct: "C",
+      correctFeedbackEn: "Correct. Ezra prepared not his notes nor his outline, but his heart. The pastor comes to the desk on Monday morning not first to think, but first to bow.",
+      correctFeedbackEs: "Correcto. Esdras preparó no sus notas ni su bosquejo, sino su corazón. El pastor viene al escritorio el lunes por la mañana no primero a pensar, sino primero a inclinarse.",
+      incorrectFeedbackEn: "Ezra 7:10 is explicit: he prepared his HEART. Not research, not an outline, not commentaries — but the inward posture in which all the other work must be done.",
+      incorrectFeedbackEs: "Esdras 7:10 es explícito: preparó su CORAZÓN. Ni investigación, ni bosquejo, ni comentarios — sino la postura interior en la que toda la otra labor debe hacerse."
+    },
+    {
+      textEn: "6. According to the lesson, what is the antidote to eisegesis (reading our own meaning into the text)?",
+      textEs: "6. Según la lección, ¿cuál es el antídoto contra la eiségesis (leer nuestro propio significado dentro del texto)?",
+      optionsEn: ["A. Memorizing more verses","B. A humble heart, brought daily under the Author's gaze, asking for help","C. Reading only modern translations","D. Avoiding the Old Testament"],
+      optionsEs: ["A. Memorizar más versículos","B. Un corazón humilde, traído cada día bajo la mirada del Autor, pidiendo ayuda","C. Leer solo traducciones modernas","D. Evitar el Antiguo Testamento"],
+      correct: "B",
+      correctFeedbackEn: "Correct. A pastor who comes proud will read his pride back out of the page. A pastor who comes broken and asking will be answered. The antidote to eisegesis is a heart prepared by humility and prayer.",
+      correctFeedbackEs: "Correcto. Un pastor que viene orgulloso leerá su orgullo de regreso desde la página. Un pastor que viene quebrantado y pidiendo será respondido. El antídoto contra la eiségesis es un corazón preparado por humildad y oración.",
+      incorrectFeedbackEn: "Memorization, translation choices, and Old-Testament avoidance do nothing about the heart. Eisegesis is fundamentally a heart problem. The cure is a humble heart in daily prayer, not a method on the desk.",
+      incorrectFeedbackEs: "La memorización, la elección de traducción, y evitar el Antiguo Testamento no hacen nada por el corazón. La eiségesis es fundamentalmente un problema del corazón. La cura es un corazón humilde en oración diaria, no un método sobre el escritorio."
+    },
+    {
+      textEn: "7. According to James 1:5, what does God give to those who ask for wisdom?",
+      textEs: "7. Según Santiago 1:5, ¿qué le da Dios a los que piden sabiduría?",
+      optionsEn: ["A. A measured response delayed by years","B. Wisdom only after seven years of formal study","C. The exact wisdom He once gave Solomon","D. Wisdom liberally and without reproach"],
+      optionsEs: ["A. Una respuesta medida y retrasada por años","B. Sabiduría solo después de siete años de estudio formal","C. Exactamente la sabiduría que dio a Salomón","D. Sabiduría abundantemente y sin reproche"],
+      correct: "D",
+      correctFeedbackEn: "Correct. God gives liberally and without reproach — He is not stingy, and He does not scold the one who asks. The pastor who asks for wisdom over a text receives wisdom over a text.",
+      correctFeedbackEs: "Correcto. Dios da abundantemente y sin reproche — no es tacaño, y no regaña al que pide. El pastor que pide sabiduría sobre un texto recibe sabiduría sobre ese texto.",
+      incorrectFeedbackEn: "James says God gives LIBERALLY (generously) and WITHOUT REPROACH (no scolding). There is no delay, no quota of study, no Solomon-special. He answers the one who asks in faith.",
+      incorrectFeedbackEs: "Santiago dice que Dios da ABUNDANTEMENTE (generosamente) y SIN REPROCHE (sin regaños). No hay demora, ni cuota de estudio, ni un Salomón especial. Responde al que pide con fe."
+    },
+    {
+      textEn: "8. James 1:6-8 warns that the double-minded man:",
+      textEs: "8. Santiago 1:6-8 advierte que el hombre de doble ánimo:",
+      optionsEn: ["A. Will receive a partial answer","B. Will eventually be granted his request","C. Should pray louder and longer","D. Will receive nothing from the Lord"],
+      optionsEs: ["A. Recibirá una respuesta parcial","B. Eventualmente se le concederá su petición","C. Debe orar más fuerte y por más tiempo","D. No recibirá nada del Señor"],
+      correct: "D",
+      correctFeedbackEn: "Correct. James says the double-minded man — half asking, half doubting, tossed like a wave — should not suppose he will receive anything from the Lord. Faith in prayer matters.",
+      correctFeedbackEs: "Correcto. Santiago dice que el hombre de doble ánimo — medio pidiendo, medio dudando, agitado como una ola — no suponga que recibirá cosa alguna del Señor. La fe en la oración importa.",
+      incorrectFeedbackEn: "James is severe here. The double-minded man receives NOTHING — not a partial answer, not a delayed answer. He is unstable in all his ways. The remedy is single-minded faith, not louder volume.",
+      incorrectFeedbackEs: "Santiago es severo aquí. El hombre de doble ánimo no recibe NADA — ni una respuesta parcial, ni una respuesta retrasada. Es inconstante en todos sus caminos. El remedio es fe de un solo ánimo, no volumen más alto."
+    },
+    {
+      textEn: "9. The father-at-the-store illustration teaches the principle that:",
+      textEs: "9. La ilustración del padre en la tienda enseña el principio de que:",
+      optionsEn: ["A. Children only receive what they earn","B. Some good gifts from God come only by asking","C. Parents should always say yes to their children","D. Asking earns merit before God"],
+      optionsEs: ["A. Los hijos solo reciben lo que ganan","B. Algunos buenos regalos de Dios vienen solo al pedir","C. Los padres siempre deben decir sí a sus hijos","D. Pedir gana mérito delante de Dios"],
+      correct: "B",
+      correctFeedbackEn: "Correct. Some gifts the father gave just because the child was his. Other gifts came because the child asked. So with the understanding of Scripture: God does not push His Word into a closed pastor.",
+      correctFeedbackEs: "Correcto. Algunos regalos el padre los daba simplemente porque el hijo era suyo. Otros regalos venían porque el hijo pedía. Así con el entendimiento de la Escritura: Dios no empuja Su Palabra dentro de un pastor cerrado.",
+      incorrectFeedbackEn: "Asking does not earn merit, parents do not always say yes, and children do not have to earn every gift. The point is that some specific gifts (like Bible understanding) come ONLY when asked.",
+      incorrectFeedbackEs: "Pedir no gana mérito, los padres no siempre dicen sí, y los hijos no tienen que ganar cada regalo. El punto es que algunos dones específicos (como el entendimiento bíblico) vienen SOLO cuando se pide."
+    },
+    {
+      textEn: "10. The Maria Monsen story (North China, 1932) illustrates the principle that:",
+      textEs: "10. La historia de Maria Monsen (Norte de China, 1932) ilustra el principio de que:",
+      optionsEn: ["A. Prayer is more powerful in some countries than others","B. Missionaries always see revival in their first year","C. Mighty rivers begin as raindrops — agreed prayer starts the awakening","D. Norwegian missionaries were the most effective in Asia"],
+      optionsEs: ["A. La oración es más poderosa en algunos países que en otros","B. Los misioneros siempre ven avivamiento en su primer año","C. Los ríos poderosos comienzan como gotas de lluvia — la oración acordada inicia el despertar","D. Los misioneros noruegos fueron los más eficaces en Asia"],
+      correct: "C",
+      correctFeedbackEn: "Correct. Maria Monsen remembered the Yangtze River begins as raindrops in the mountains, and she found one prayer partner. \"Two of us have agreed!\" Two years later, revival swept the province.",
+      correctFeedbackEs: "Correcto. Maria Monsen recordó que el río Yangtsé comienza como gotas de lluvia en las montañas, y encontró una compañera de oración. «¡Dos de nosotras hemos acordado!» Dos años después, el avivamiento barrió la provincia.",
+      incorrectFeedbackEn: "Geography and nationality do not change prayer's power; first-year revival is not promised. The principle is the raindrop-to-river image: two believers agreeing in prayer are how the awakening begins.",
+      incorrectFeedbackEs: "La geografía y la nacionalidad no cambian el poder de la oración; el avivamiento del primer año no se promete. El principio es la imagen de gota a río: dos creyentes que se ponen de acuerdo en oración es como comienza el despertar."
+    },
+    {
+      textEn: "11. The \"God sold the cattle\" story from Dallas Theological Seminary illustrates:",
+      textEs: "11. La historia «Dios vendió el ganado» del Seminario Teológico de Dallas ilustra:",
+      optionsEn: ["A. God sometimes answers prayer before we finish praying it","B. Texas cattlemen built the early American seminaries","C. Seminaries should never go into debt","D. Prayer is most effective at the noon hour"],
+      optionsEs: ["A. Dios a veces responde la oración antes de que terminemos de orarla","B. Los ganaderos de Texas edificaron los seminarios estadounidenses tempranos","C. Los seminarios nunca deben endeudarse","D. La oración es más eficaz al mediodía"],
+      correct: "A",
+      correctFeedbackEn: "Correct. While they were still praying, a Texas cattleman knocked at the door with a check — exactly the amount of the debt. Sometimes God answers before we have finished speaking.",
+      correctFeedbackEs: "Correcto. Mientras todavía oraban, un ganadero de Texas tocó a la puerta con un cheque — exactamente la cantidad de la deuda. A veces Dios responde antes de que terminemos de hablar.",
+      incorrectFeedbackEn: "The story is not about seminaries, cattlemen as a class, debt policy, or noon hours. It is about how God can answer faster than we can pray — the cattleman arrived WHILE the men were still praying.",
+      incorrectFeedbackEs: "La historia no trata de seminarios, ganaderos como clase, política de deuda, ni horarios del mediodía. Trata de cómo Dios puede responder más rápido de lo que oramos — el ganadero llegó MIENTRAS los hombres aún oraban."
+    },
+    {
+      textEn: "12. The lesson identifies three doubts that pastors face, named after which three biblical men?",
+      textEs: "12. La lección identifica tres dudas que enfrentan los pastores, nombradas por cuáles tres hombres bíblicos:",
+      optionsEn: ["A. Abraham, Moses, David","B. Peter, Paul, John","C. Thomas, Peter, John the Baptist","D. Job, Jeremiah, Habakkuk"],
+      optionsEs: ["A. Abraham, Moisés, David","B. Pedro, Pablo, Juan","C. Tomás, Pedro, Juan el Bautista","D. Job, Jeremías, Habacuc"],
+      correct: "C",
+      correctFeedbackEn: "Correct. Thomas doubted that Christ had risen at all (does God exist?). Peter doubted that Christ's power reached him in the waves. John the Baptist, in prison, doubted whether Jesus was really the One.",
+      correctFeedbackEs: "Correcto. Tomás dudó de que Cristo hubiera resucitado (¿existe Dios?). Pedro dudó de que el poder de Cristo lo alcanzara en las olas. Juan el Bautista, en prisión, dudó si Jesús era realmente el Esperado.",
+      incorrectFeedbackEn: "The three names from the Gospels are THOMAS (after the resurrection), PETER (on the water), and JOHN THE BAPTIST (from prison). Each one suffered a distinct kind of doubt the pastor will recognize.",
+      incorrectFeedbackEs: "Los tres nombres de los Evangelios son TOMÁS (después de la resurrección), PEDRO (sobre el agua), y JUAN EL BAUTISTA (desde la prisión). Cada uno sufrió una clase distinta de duda que el pastor reconocerá."
+    },
+    {
+      textEn: "13. The Thomas doubt is essentially the question:",
+      textEs: "13. La duda de Tomás es esencialmente la pregunta:",
+      optionsEn: ["A. Does God exist at all?","B. Will I be remembered after death?","C. Are my sins really forgiven?","D. Does the Bible contradict itself?"],
+      optionsEs: ["A. ¿Existe Dios siquiera?","B. ¿Seré recordado después de la muerte?","C. ¿Están mis pecados realmente perdonados?","D. ¿Se contradice la Biblia a sí misma?"],
+      correct: "A",
+      correctFeedbackEn: "Correct. Thomas-doubt is the prior question: is there a God at all? Is Christ really risen? It is the question that hits every honest believer, often when they are young. The answer was — and is — the risen Christ Himself.",
+      correctFeedbackEs: "Correcto. La duda de Tomás es la pregunta previa: ¿existe acaso un Dios? ¿Resucitó Cristo de verdad? Es la pregunta que golpea a todo creyente honesto, muchas veces cuando es joven. La respuesta era — y es — el Cristo resucitado mismo.",
+      incorrectFeedbackEn: "Memory, forgiveness, and Bible coherence are real questions but they presuppose Thomas-doubt has already been answered. Thomas doubt is the most basic: Is there a God? Did Christ really rise?",
+      incorrectFeedbackEs: "La memoria, el perdón, y la coherencia de la Biblia son preguntas reales pero presuponen que la duda de Tomás ya fue respondida. La duda de Tomás es la más básica: ¿Hay un Dios? ¿Resucitó Cristo de verdad?"
+    },
+    {
+      textEn: "14. The Peter doubt, in the lesson's framework, is the question:",
+      textEs: "14. La duda de Pedro, en el marco de la lección, es la pregunta:",
+      optionsEn: ["A. Am I really saved?","B. Does Christ's power reach me, in my particular weakness?","C. Did Christ really rise from the dead?","D. Are all religions equally valid paths?"],
+      optionsEs: ["A. ¿Soy verdaderamente salvo?","B. ¿Alcanza el poder de Cristo a mí, en mi debilidad particular?","C. ¿Resucitó Cristo verdaderamente de los muertos?","D. ¿Son todas las religiones caminos igualmente válidos?"],
+      correct: "B",
+      correctFeedbackEn: "Correct. Peter did not doubt that Christ was Lord. He doubted that Christ's power reached HIM in those particular waves. Many pastors carry this doubt about themselves: am I adequate? Can He use me?",
+      correctFeedbackEs: "Correcto. Pedro no dudaba de que Cristo era Señor. Dudaba de que el poder de Cristo lo alcanzara a ÉL en esas olas particulares. Muchos pastores cargan esta duda acerca de sí mismos: ¿soy adecuado? ¿Puede usarme?",
+      incorrectFeedbackEn: "Peter doubt is not about salvation status or about Christ's identity or about other religions. Peter doubt is about whether Christ's power reaches us in the particular waves we are sinking in right now.",
+      incorrectFeedbackEs: "La duda de Pedro no es sobre el estado de salvación, ni sobre la identidad de Cristo, ni sobre otras religiones. La duda de Pedro es sobre si el poder de Cristo nos alcanza en las olas particulares en las que nos estamos hundiendo ahora mismo."
+    },
+    {
+      textEn: "15. The Wayne Woodward story (the deaf seminary student from Winnipeg) illustrates:",
+      textEs: "15. La historia de Wayne Woodward (el estudiante sordo de seminario de Winnipeg) ilustra:",
+      optionsEn: ["A. A pastor wrestling with Peter doubt about his own abilities","B. The importance of bilingual seminary education","C. A miraculous physical healing","D. The dangers of moving across country for ministry"],
+      optionsEs: ["A. Un pastor que lucha con la duda de Pedro sobre sus propias capacidades","B. La importancia de la educación bilingüe en el seminario","C. Una sanidad física milagrosa","D. Los peligros de mudarse a través del país por el ministerio"],
+      correct: "A",
+      correctFeedbackEn: "Correct. Wayne said, \"I don't belong here. I could never pastor a church.\" That is Peter doubt — not about Christ's existence or power in general, but about whether Christ's power reaches HIM, with his particular weakness.",
+      correctFeedbackEs: "Correcto. Wayne dijo: «Yo no pertenezco aquí. Nunca podría pastorear una iglesia.» Esa es la duda de Pedro — no sobre la existencia o el poder de Cristo en general, sino sobre si el poder de Cristo lo alcanza a ÉL, con su debilidad particular.",
+      incorrectFeedbackEn: "Wayne's story is not about education policy, miraculous healing, or relocation risks. It is the picture of Peter doubt: a man called to ministry asking whether Christ's power reaches HIM in his particular weakness.",
+      incorrectFeedbackEs: "La historia de Wayne no es sobre política educativa, sanidad milagrosa, ni riesgos de reubicación. Es el cuadro de la duda de Pedro: un hombre llamado al ministerio preguntando si el poder de Cristo lo alcanza a ÉL en su debilidad particular."
+    },
+    {
+      textEn: "16. The John the Baptist doubt, in the lesson's framework, is the question:",
+      textEs: "16. La duda de Juan el Bautista, en el marco de la lección, es la pregunta:",
+      optionsEn: ["A. Will God provide for my financial needs?","B. Did the prophets predict the right Messiah?","C. Am I really His? — doubt about one's own salvation","D. Will the church grow under my leadership?"],
+      optionsEs: ["A. ¿Proveerá Dios para mis necesidades financieras?","B. ¿Predijeron los profetas al Mesías correcto?","C. ¿Soy verdaderamente Suyo? — duda sobre la propia salvación","D. ¿Crecerá la iglesia bajo mi liderazgo?"],
+      correct: "C",
+      correctFeedbackEn: "Correct. John doubted his own relationship to the One he had baptized. The pastor's version: \"Am I really His? Have I really been saved?\" It comes most often to the sincerest believers.",
+      correctFeedbackEs: "Correcto. Juan dudó de su propia relación con Aquel a quien había bautizado. La versión del pastor: «¿Soy verdaderamente Suyo? ¿He sido verdaderamente salvo?» Viene más a menudo a los creyentes más sinceros.",
+      incorrectFeedbackEn: "Finance, prophecy, and church growth are pastoral concerns but they are not John-the-Baptist doubt. JtB doubt is personal and inward: am I really saved? Am I really His?",
+      incorrectFeedbackEs: "Las finanzas, la profecía, y el crecimiento de la iglesia son preocupaciones pastorales, pero no son la duda de Juan el Bautista. La duda de JeB es personal e interior: ¿soy verdaderamente salvo? ¿Soy verdaderamente Suyo?"
+    },
+    {
+      textEn: "17. According to the lesson, our relationship with God does NOT depend on which of the following?",
+      textEs: "17. Según la lección, nuestra relación con Dios NO depende de cuál de los siguientes:",
+      optionsEn: ["A. Christ's promise and His finished work on the cross","B. The witness of the Holy Spirit","C. The unchanging Word of God","D. Our feelings or steady moods"],
+      optionsEs: ["A. La promesa de Cristo y Su obra terminada en la cruz","B. El testimonio del Espíritu Santo","C. La Palabra inmutable de Dios","D. Nuestros sentimientos o estados de ánimo estables"],
+      correct: "D",
+      correctFeedbackEn: "Correct. Feelings come and go; the psychologists tell us chemistry shifts day to day. Our relationship rests on Christ's promise and finished work, not on the glands. \"I will never leave you nor forsake you.\"",
+      correctFeedbackEs: "Correcto. Los sentimientos van y vienen; los psicólogos nos dicen que la química cambia día a día. Nuestra relación descansa en la promesa de Cristo y Su obra terminada, no en las glándulas. «Nunca te dejaré ni te desampararé.»",
+      incorrectFeedbackEn: "Christ's work, the Spirit's witness, and the Word ARE the foundations. Feelings are not. The pastor who has wrestled John-the-Baptist doubt knows that mood-based assurance is treacherous.",
+      incorrectFeedbackEs: "La obra de Cristo, el testimonio del Espíritu, y la Palabra SÍ son los fundamentos. Los sentimientos no. El pastor que ha luchado con la duda de Juan el Bautista sabe que la seguridad basada en el estado de ánimo es traicionera."
+    },
+    {
+      textEn: "18. According to the lesson's treatment of Exodus 4, which excuse did Moses raise against God's call?",
+      textEs: "18. Según el tratamiento que la lección da a Éxodo 4, ¿qué excusa puso Moisés contra el llamado de Dios?",
+      optionsEn: ["A. He was too old to begin a new task","B. He had committed too many sins","C. He was slow of speech and tongue","D. He could not read or write"],
+      optionsEs: ["A. Era demasiado viejo para comenzar una nueva tarea","B. Había cometido demasiados pecados","C. Era tardo en el habla y de lengua torpe","D. No sabía leer ni escribir"],
+      correct: "C",
+      correctFeedbackEn: "Correct. Moses said, \"O Lord, I have never been eloquent... I am slow of speech and tongue.\" God answered with His own question: Who made the mouth? God is interested in availability, not ability.",
+      correctFeedbackEs: "Correcto. Moisés dijo: «Señor, nunca he sido elocuente... soy tardo en el habla y torpe de lengua.» Dios respondió con Su propia pregunta: ¿Quién hizo la boca? A Dios le interesa la disponibilidad, no la habilidad.",
+      incorrectFeedbackEn: "Moses had four excuses — no body, no authority, no credentials, no ability. The lesson features the fourth: he was slow of speech and tongue. God's answer: \"Who made the mouth?\"",
+      incorrectFeedbackEs: "Moisés tenía cuatro excusas — sin cuerpo, sin autoridad, sin credenciales, sin habilidad. La lección destaca la cuarta: era tardo en el habla y torpe de lengua. La respuesta de Dios: «¿Quién hizo la boca?»"
+    },
+    {
+      textEn: "19. God's answer to Moses' \"no ability\" excuse is summed up in the lesson as:",
+      textEs: "19. La respuesta de Dios a la excusa de «no tengo habilidad» de Moisés se resume en la lección como:",
+      optionsEn: ["A. God is interested in availability, not ability","B. God will reduce the size of the assignment","C. God only sends the naturally gifted","D. God will train Moses for forty more years before sending him"],
+      optionsEs: ["A. A Dios le interesa la disponibilidad, no la habilidad","B. Dios reducirá el tamaño de la tarea","C. Dios envía solo a los naturalmente dotados","D. Dios entrenará a Moisés por cuarenta años más antes de enviarlo"],
+      correct: "A",
+      correctFeedbackEn: "Correct. God did not promise to make Moses eloquent. He did not shrink the task. He asked, \"Who made the mouth?\" — and sent him. The pastor's qualification is not natural ability but a willing yes.",
+      correctFeedbackEs: "Correcto. Dios no prometió hacer elocuente a Moisés. No redujo la tarea. Preguntó: «¿Quién hizo la boca?» — y lo envió. La calificación del pastor no es la habilidad natural sino un sí dispuesto.",
+      incorrectFeedbackEn: "God did not reduce the task, restrict His call to the gifted, or delay Moses another generation. He sent him as he was. The pastor's call works the same way: availability matters more than ability.",
+      incorrectFeedbackEs: "Dios no redujo la tarea, ni restringió Su llamado a los dotados, ni demoró a Moisés otra generación. Lo envió tal como era. El llamado del pastor funciona igual: la disponibilidad importa más que la habilidad."
+    },
+    {
+      textEn: "20. The closing charge to the pastor in this unit is:",
+      textEs: "20. El encargo de cierre al pastor en esta unidad es:",
+      optionsEn: ["A. Memorize the text before praying over it","B. Spend most of your week debating other pastors","C. Use only one commentary per sermon you prepare","D. You do not need to be the brightest pastor; you need to be the quietest before the Author"],
+      optionsEs: ["A. Memorice el texto antes de orar sobre él","B. Pase la mayor parte de la semana debatiendo con otros pastores","C. Use solo un comentario por sermón que prepare","D. No necesita ser el pastor más brillante; necesita ser el más callado ante el Autor"],
+      correct: "D",
+      correctFeedbackEn: "Correct. You do not need to be the brightest pastor in your city. You need to be the quietest before the Author of the Book. That is enough.",
+      correctFeedbackEs: "Correcto. Usted no necesita ser el pastor más brillante de su ciudad. Necesita ser el más callado ante el Autor del Libro. Eso es suficiente.",
+      incorrectFeedbackEn: "Memorization, debate, and commentary-counting are not the heart of pastoral hermeneutics. The closing charge is quietness before the Author — a humble heart at a quiet desk, waiting on the Spirit.",
+      incorrectFeedbackEs: "La memorización, el debate, y el conteo de comentarios no son el corazón de la hermenéutica pastoral. El encargo de cierre es quietud delante del Autor — un corazón humilde en un escritorio quieto, esperando en el Espíritu."
+    }
+  ];
+
+  // ============================================================
+  // SHORT-ANSWER QUESTIONS (10; split kw_en / kw_es)
+  // ============================================================
+  const kwQuestions = [
+    {
+      textEn: "21. According to 1 Corinthians 2:10-14, why is the Holy Spirit essential for understanding the Bible? Explain what only the Spirit can give the interpreter.",
+      textEs: "21. Según 1 Corintios 2:10-14, ¿por qué es esencial el Espíritu Santo para entender la Biblia? Explique lo que solo el Espíritu le puede dar al intérprete.",
+      kw_en: ["Spirit", "deep", "reveal", "natural", "discern", "mind", "God", "spiritual"],
+      kw_es: ["Espíritu", "profund", "revel", "natural", "discern", "mente", "Dios", "espiritual"],
+      modelEn: "Paul says the Spirit searches the deep things of God and reveals them; the natural man cannot receive them because they are spiritually discerned. Only the Spirit can give the interpreter the mind to understand what God has freely given, so apart from the Spirit the Bible stays closed.",
+      modelEs: "Pablo dice que el Espíritu escudriña las cosas profundas de Dios y las revela; el hombre natural no puede recibirlas porque deben discernirse espiritualmente. Solo el Espíritu puede dar al intérprete la mente para entender lo que Dios ha dado, así que sin el Espíritu la Biblia permanece cerrada."
+    },
+    {
+      textEn: "22. Explain the principle in Ezra 7:10 that \"Ezra prepared his heart.\" Why does heart-preparation come before exegesis in this unit's argument?",
+      textEs: "22. Explique el principio de Esdras 7:10 — «Esdras preparó su corazón». ¿Por qué la preparación del corazón viene antes de la exégesis en el argumento de esta unidad?",
+      kw_en: ["heart", "prepar", "humble", "posture", "pray", "bow", "before", "Ezra"],
+      kw_es: ["coraz", "prepar", "humild", "postura", "orar", "inclin", "antes", "Esdras"],
+      modelEn: "Ezra prepared his heart before he handled the Law. Heart-preparation comes before exegesis because the interpreter must come in a humble posture — praying and bowing before the page — so that he reads to obey rather than to master. A proud heart will twist even good exegesis.",
+      modelEs: "Esdras preparó su corazón antes de manejar la Ley. La preparación del corazón viene antes de la exégesis porque el intérprete debe acercarse en una postura humilde — orando e inclinándose ante la página — para leer y obedecer en lugar de dominar. Un corazón orgulloso torcerá aun la buena exégesis."
+    },
+    {
+      textEn: "23. James 1:5-8 tells the pastor to ask God for wisdom. Explain what kind of asking receives wisdom, and what kind of asking does NOT.",
+      textEs: "23. Santiago 1:5-8 le dice al pastor que pida sabiduría a Dios. Explique qué clase de petición recibe sabiduría, y qué clase de petición NO la recibe.",
+      kw_en: ["wisdom", "ask", "faith", "doubt", "waver", "double", "liberal", "receiv"],
+      kw_es: ["sabiduría", "pedir", "fe", "duda", "vacil", "doble", "abundant", "recib"],
+      modelEn: "God gives wisdom liberally to the one who asks in faith without doubting. The kind of asking that receives is single-hearted trust; the kind that does not is the double-minded man who wavers like a wave of the sea, and he should not expect to receive anything from the Lord.",
+      modelEs: "Dios da sabiduría en abundancia al que la pide con fe, sin dudar. La clase de petición que recibe es la confianza sin doblez; la que no recibe es el hombre de doble ánimo que vacila como una ola del mar, y no debe esperar recibir nada del Señor."
+    },
+    {
+      textEn: "24. Describe at least two of the three prayer stories in this unit (Maria Monsen, \"God sold the cattle,\" the man with prayer lists) and explain what each teaches about prayer over the Bible.",
+      textEs: "24. Describa al menos dos de las tres historias de oración en esta unidad (Maria Monsen, «Dios vendió el ganado», el hombre de las listas de oración) y explique lo que cada una enseña sobre la oración sobre la Biblia.",
+      kw_en: ["Monsen", "raindrop", "agree", "revival", "Dallas", "cattle", "check", "prayer"],
+      kw_es: ["Monsen", "gotas", "acuerdo", "avivamiento", "Dallas", "ganado", "cheque", "oración"],
+      modelEn: "Maria Monsen prayed for revival in China and, remembering that the Yangtze begins as raindrops, found one partner to agree with her — and revival came. At Dallas Seminary, facing foreclosure, Harry Ironside prayed that God would sell some of the cattle on a thousand hills, and a Texas rancher arrived with a check for the exact debt. Both stories teach that prayer over the Bible moves God to act.",
+      modelEs: "Maria Monsen oró por avivamiento en China y, recordando que el Yangtsé comienza como gotas de lluvia, encontró una compañera de acuerdo con ella — y vino el avivamiento. En el Seminario de Dallas, ante el embargo, Harry Ironside pidió que Dios vendiera algo del ganado de mil colinas, y un ranchero de Texas llegó con un cheque por la deuda exacta. Ambas historias enseñan que la oración sobre la Biblia mueve a Dios a actuar."
+    },
+    {
+      textEn: "25. The lesson names three doubts after Thomas, Peter, and John the Baptist. Name each doubt and briefly explain the question it asks.",
+      textEs: "25. La lección nombra tres dudas según Tomás, Pedro, y Juan el Bautista. Nombre cada duda y explique brevemente la pregunta que plantea.",
+      kw_en: ["Thomas", "Peter", "John", "exist", "power", "reach", "really", "doubt"],
+      kw_es: ["Tomás", "Pedro", "Juan", "existe", "poder", "alcanz", "realmente", "duda"],
+      modelEn: "The three doubts are named for three men. Thomas doubt asks, 'Does God really exist?' Peter doubt asks, 'Does His power reach me?' And John the Baptist doubt asks, 'Am I really His?' The first is about God, the second about His power, the third about myself.",
+      modelEs: "Las tres dudas llevan el nombre de tres hombres. La duda de Tomás pregunta: «¿Existe realmente Dios?» La duda de Pedro pregunta: «¿Me alcanza Su poder?» Y la duda de Juan el Bautista pregunta: «¿Soy realmente Suyo?» La primera es sobre Dios, la segunda sobre Su poder, la tercera sobre mí mismo."
+    },
+    {
+      textEn: "26. Explain Thomas doubt and how a pastor who has wrestled with it can help an unbeliever or a doubting believer.",
+      textEs: "26. Explique la duda de Tomás y cómo un pastor que ha luchado con ella puede ayudar a un incrédulo o a un creyente que duda.",
+      kw_en: ["Thomas", "exist", "risen", "Christ", "evidence", "doubt", "unbeliev", "answer"],
+      kw_es: ["Tomás", "existe", "resucitado", "Cristo", "evidencia", "duda", "incrédulo", "respuesta"],
+      modelEn: "Thomas doubt asks whether God exists and whether the risen Christ is real. The pastor who has wrestled this doubt to the ground — and found his answer in the risen Christ Himself, not only in the evidence of apologetics — can stand calmly before an unbeliever or a doubting believer and meet the same question with quiet confidence.",
+      modelEs: "La duda de Tomás pregunta si Dios existe y si el Cristo resucitado es real. El pastor que ha luchado con esta duda hasta vencerla — y ha hallado su respuesta en el Cristo resucitado mismo, no solo en la evidencia de la apologética — puede estar tranquilo ante un incrédulo o un creyente que duda y enfrentar la misma pregunta con confianza."
+    },
+    {
+      textEn: "27. Tell the Wayne Woodward story in your own words and explain why it is an illustration of Peter doubt rather than Thomas doubt or John the Baptist doubt.",
+      textEs: "27. Cuente la historia de Wayne Woodward con sus propias palabras y explique por qué es una ilustración de la duda de Pedro y no de la duda de Tomás o de la duda de Juan el Bautista.",
+      kw_en: ["Woodward", "deaf", "seminary", "ability", "Peter", "reach", "power", "Boeing"],
+      kw_es: ["Woodward", "sordo", "seminario", "habilidad", "Pedro", "alcanz", "poder", "Boeing"],
+      modelEn: "Wayne Woodward left a good job at Boeing in Winnipeg and brought his family across the country to seminary, even though he was deaf and had only a high-school diploma. His questions were all about his own ability — what church could he pastor, how could he compete? That is Peter doubt: not 'Is Christ real?' but 'Can Christ's power reach and use me, this man, in these waves?'",
+      modelEs: "Wayne Woodward dejó un buen empleo en Boeing en Winnipeg y trajo a su familia a través del país al seminario, aunque era sordo y solo tenía un diploma de secundaria. Sus preguntas eran todas sobre su propia habilidad — ¿qué iglesia podría pastorear, cómo competiría? Esa es la duda de Pedro: no «¿Es real Cristo?» sino «¿Puede el poder de Cristo alcanzarme y usarme, a este hombre, en estas olas?»"
+    },
+    {
+      textEn: "28. Explain John the Baptist doubt and how Jesus addressed John's question from prison. What does this teach about pastoral care for doubting believers?",
+      textEs: "28. Explique la duda de Juan el Bautista y cómo Jesús respondió la pregunta de Juan desde la prisión. ¿Qué enseña esto sobre el cuidado pastoral de los creyentes que dudan?",
+      kw_en: ["John", "Baptist", "prison", "Messiah", "evidence", "blessed", "works", "doubt"],
+      kw_es: ["Juan", "Bautista", "prisión", "Mesías", "evidencia", "bienaventur", "obras", "duda"],
+      modelEn: "John the Baptist, in prison, sent to ask whether Jesus was really the Messiah. Jesus did not rebuke him; He pointed to the evidence of His works — the blind see, the lame walk — and said, 'Blessed is he who is not offended in Me.' This teaches the pastor to meet a doubting believer not with scorn but with gentle evidence and reassurance.",
+      modelEs: "Juan el Bautista, en la prisión, mandó a preguntar si Jesús era realmente el Mesías. Jesús no lo reprendió; señaló la evidencia de Sus obras — los ciegos ven, los cojos andan — y dijo: «Bienaventurado el que no halle tropiezo en Mí.» Esto enseña al pastor a tratar a un creyente que duda no con desprecio sino con evidencia suave y consuelo."
+    },
+    {
+      textEn: "29. List at least three of Moses' four excuses in Exodus 3-4, and explain the lesson's summary: \"God is interested in availability, not ability.\"",
+      textEs: "29. Enumere al menos tres de las cuatro excusas de Moisés en Éxodo 3-4, y explique el resumen de la lección: «A Dios le interesa la disponibilidad, no la habilidad».",
+      kw_en: ["Moses", "excuse", "mouth", "ability", "availability", "speech", "tongue", "send"],
+      kw_es: ["Moisés", "excusa", "boca", "habilidad", "disponibilidad", "habla", "lengua", "enviar"],
+      modelEn: "Moses made four excuses at the burning bush: Who am I? What is Your name? They will not believe me. And I am slow of speech, not eloquent. To each God answered with His own sufficiency. The lesson is that God is interested in availability, not ability — He supplies the mouth and the words; He only asks that Moses go.",
+      modelEs: "Moisés puso cuatro excusas en la zarza: ¿Quién soy yo? ¿Cuál es Tu nombre? No me creerán. Y soy torpe de habla, no elocuente. A cada una Dios respondió con Su propia suficiencia. La lección es que a Dios le interesa la disponibilidad, no la habilidad — Él provee la boca y las palabras; solo pide que Moisés vaya."
+    },
+    {
+      textEn: "30. The lesson calls hermeneutics \"a conversation between three Persons and the preacher.\" Name each Person and briefly explain the role each plays in the pastor's interpretation of Scripture.",
+      textEs: "30. La lección llama a la hermenéutica «una conversación entre tres Personas y el predicador». Nombre cada Persona y explique brevemente el papel que cada una juega en la interpretación pastoral de la Escritura.",
+      kw_en: ["Father", "Son", "Spirit", "preacher", "interpret", "Trinity", "Word", "conversation"],
+      kw_es: ["Padre", "Hijo", "Espíritu", "predicador", "interpret", "Trinidad", "Palabra", "conversación"],
+      modelEn: "Hermeneutics is a conversation among three Persons and the preacher. The Father is the source who speaks; the Son is the Word, the center of all Scripture; the Spirit reveals and applies the meaning to the interpreter. The preacher listens to all three and carries the Word to the people, so interpretation is a Trinity-shaped conversation, not a solo act.",
+      modelEs: "La hermenéutica es una conversación entre tres Personas y el predicador. El Padre es la fuente que habla; el Hijo es la Palabra, el centro de toda la Escritura; el Espíritu revela y aplica el significado al intérprete. El predicador escucha a los tres y lleva la Palabra al pueblo, así que la interpretación es una conversación con forma de Trinidad, no un acto en solitario."
+    }
+  ];
+
+  // ============================================================
+  // ENGINE
+  // ============================================================
+  function getCurrentLang(){ return document.body.classList.contains("lang-es") ? "es" : "en"; }
+
+  function toggleLang(){
+    if (document.body.classList.contains("lang-en")){
+      document.body.classList.remove("lang-en");
+      document.body.classList.add("lang-es");
+    } else {
+      document.body.classList.remove("lang-es");
+      document.body.classList.add("lang-en");
+    }
+  }
+
+  // ---------- Registration ----------
+  function loadRegistration(){
+    if (!SHOW_REGISTRATION){
+      const card = document.getElementById("registration-card");
+      if (card) card.classList.add("hidden");
+      return;
+    }
+    const raw = localStorage.getItem(STUDENT_KEY);
+    if (raw){
+      try {
+        const s = JSON.parse(raw);
+        document.getElementById("reg-name").value = s.name || "";
+        document.getElementById("reg-email").value = s.email || "";
+        document.getElementById("reg-church").value = s.church || "";
+        document.getElementById("reg-status").textContent = (getCurrentLang()==="es")
+          ? "Registrado como: " + (s.name || "(sin nombre)")
+          : "Registered as: " + (s.name || "(no name)");
+      } catch(e){}
+    }
+  }
+  function saveRegistration(){
+    const name = document.getElementById("reg-name").value.trim();
+    const email = document.getElementById("reg-email").value.trim();
+    const church = document.getElementById("reg-church").value.trim();
+    if (!name){
+      document.getElementById("reg-status").style.color = "#8b3a2c";
+      document.getElementById("reg-status").textContent = (getCurrentLang()==="es")
+        ? "Por favor escriba su nombre completo."
+        : "Please enter your full name.";
+      return;
+    }
+    localStorage.setItem(STUDENT_KEY, JSON.stringify({name:name,email:email,church:church}));
+    document.getElementById("reg-status").style.color = "#3a5a25";
+    document.getElementById("reg-status").textContent = (getCurrentLang()==="es")
+      ? "Guardado. Bienvenido, " + name + "."
+      : "Saved. Welcome, " + name + ".";
+  }
+
+  // ---------- Track ----------
+  function loadTrack(){
+    const t = localStorage.getItem(TRACK_KEY) || "";
+    if (t) setTrack(t,true);
+    updateSANote();
+    updateTrackNote();
+  }
+  function isMastersLevel(){
+    var t = localStorage.getItem(TRACK_KEY);
+    return t === "mdiv" || t === "thm";
+  }
+  function setTrack(t,silent){
+    localStorage.setItem(TRACK_KEY,t);
+    document.getElementById("track-cert-btn").classList.toggle("selected", t==="cert");
+    document.getElementById("track-mdiv-btn").classList.toggle("selected", t==="mdiv");
+    document.getElementById("track-thm-btn").classList.toggle("selected", t==="thm");
+    // Short answer is available to ALL students; only scored for masters (see submitExam).
+    document.getElementById("sa-container").classList.remove("hidden");
+    updateSANote();
+    updateTrackNote();
+  }
+  function updateSANote(){
+    const t = localStorage.getItem(TRACK_KEY) || "";
+    const note = document.getElementById("sa-note");
+    if (!note) return;
+    if (t==="mdiv" || t==="thm"){
+      note.style.color = "#3a5a25";
+      note.innerHTML = '<span class="lang-en">Counted toward your result: 9 of 10 required to pass.</span><span class="lang-es">Cuenta para su resultado: se requieren 9 de 10 para aprobar.</span>';
+    } else {
+      note.style.color = "#7a5a3a";
+      note.innerHTML = '<span class="lang-en">Open to all students. For Certificate students this section is for practice and is not counted toward your result.</span><span class="lang-es">Disponible para todos los estudiantes. Para estudiantes de Certificado esta sección es de práctica y no cuenta para su resultado.</span>';
+    }
+  }
+
+  function updateTrackNote(){
+    const t = localStorage.getItem(TRACK_KEY) || "";
+    const note = document.getElementById("exam-track-note");
+    if (!t){
+      note.innerHTML = '<span class="lang-en">Choose a track above to begin the exam.</span><span class="lang-es">Escoja una modalidad arriba para comenzar el examen.</span>';
+    } else if (t==="cert"){
+      note.innerHTML = '<span class="lang-en">Certificate track: 20 multiple-choice questions. Pass at 18 of 20.</span><span class="lang-es">Modalidad Certificado: 20 preguntas de opción múltiple. Aprobación con 18 de 20.</span>';
+    } else if (t==="thm"){
+      note.innerHTML = '<span class="lang-en">Th.M track: 20 multiple-choice (18 to pass) AND 10 short-answer (9 to pass), independently scored.</span><span class="lang-es">Modalidad Maestría en Teología: 20 de opción múltiple (18 para aprobar) Y 10 de respuesta breve (9 para aprobar), evaluadas de forma independiente.</span>';
+    } else {
+      note.innerHTML = '<span class="lang-en">M.Div track: 20 multiple-choice (18 to pass) AND 10 short-answer (9 to pass), independently scored.</span><span class="lang-es">Modalidad Maestría: 20 de opción múltiple (18 para aprobar) Y 10 de respuesta breve (9 para aprobar), evaluadas de forma independiente.</span>';
+    }
+  }
+
+  // ---------- Lockout ----------
+  function checkLockout(){
+    const lockedUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)||"0",10);
+    const scope = localStorage.getItem(LOCKOUT_SCOPE_KEY) || "full";
+    const now = Date.now();
+    if (lockedUntil > now){
+      const exam = document.getElementById("exam-section");
+      const lock = document.getElementById("lockout-block");
+      // If lockout is SA-only and MC is banked, hide only SA. Else hide whole exam.
+      if (scope === "sa"){
+        document.getElementById("mc-container").classList.add("hidden");
+        document.getElementById("sa-container").classList.add("hidden");
+        document.getElementById("submit-btn").classList.add("hidden");
+      } else {
+        exam.classList.add("hidden");
+      }
+      lock.classList.remove("hidden");
+      document.getElementById("lockout-scope").innerHTML = (scope==="sa")
+        ? '<span class="lang-en">Multiple-choice score has been banked. Short-answer retake available after lockout.</span><span class="lang-es">El puntaje de opción múltiple está guardado. El reintento de respuesta breve estará disponible después del bloqueo.</span>'
+        : '<span class="lang-en">Both sections must be retaken.</span><span class="lang-es">Ambas secciones deben volver a tomarse.</span>';
+      runLockoutTimer(lockedUntil);
+      return true;
+    } else if (lockedUntil > 0){
+      // Lockout expired — clear
+      localStorage.removeItem(LOCKOUT_KEY);
+      localStorage.removeItem(LOCKOUT_SCOPE_KEY);
+    }
+    return false;
+  }
+  function runLockoutTimer(until){
+    const el = document.getElementById("lockout-timer");
+    function tick(){
+      const remain = until - Date.now();
+      if (remain <= 0){ location.reload(); return; }
+      const m = Math.floor(remain/60000);
+      const s = Math.floor((remain%60000)/1000);
+      el.textContent = m + ":" + (s<10?"0":"") + s;
+      setTimeout(tick,1000);
+    }
+    tick();
+  }
+
+  // ---------- Render questions ----------
+  function renderMCQuestions(){
+    const c = document.getElementById("mc-questions");
+    c.innerHTML = "";
+    mcQuestions.forEach((q,i)=>{
+      const div = document.createElement("div");
+      div.className = "question";
+      div.id = "mc-q-" + i;
+      let html = '<p class="qtext"><span class="lang-en">'+q.textEn+'</span><span class="lang-es">'+q.textEs+'</span></p>';
+      const letters = ["A","B","C","D"];
+      letters.forEach((L,idx)=>{
+        const id = "mc-"+i+"-"+L;
+        html += '<label class="option" id="opt-'+i+'-'+L+'">'
+          + '<input type="radio" name="mc-'+i+'" value="'+L+'" onchange="onMCChange('+i+',\''+L+'\')">'
+          + '<span class="lang-en">'+q.optionsEn[idx]+'</span>'
+          + '<span class="lang-es">'+q.optionsEs[idx]+'</span>'
+          + '</label>';
+      });
+      html += '<div class="feedback hidden" id="fb-'+i+'"></div>';
+      div.innerHTML = html;
+      c.appendChild(div);
+    });
+  }
+  function renderSAQuestions(){
+    const c = document.getElementById("sa-questions");
+    c.innerHTML = "";
+    kwQuestions.forEach((q,i)=>{
+      const div = document.createElement("div");
+      div.className = "question";
+      div.id = "sa-q-" + i;
+      div.innerHTML = '<p class="qtext"><span class="lang-en">'+q.textEn+'</span><span class="lang-es">'+q.textEs+'</span></p>'
+        + '<textarea id="sa-'+i+'" oninput="onSAInput('+i+')" placeholder="" aria-label="sa"></textarea>'
+        + '<button type="button" class="btn sa-check-btn" onclick="checkSA('+i+')">'
+        + '<span class="lang-en">Check answer</span><span class="lang-es">Verificar respuesta</span></button>'
+        + '<div class="sa-feedback" id="sa-fb-'+i+'"></div>'
+        + '<div class="sa-model hidden" id="sa-model-'+i+'"></div>';
+      c.appendChild(div);
+    });
+  }
+
+  // ---------- Save / restore state ----------
+  function saveState(){
+    const state = {mc:{}, sa:{}};
+    mcQuestions.forEach((q,i)=>{
+      const sel = document.querySelector('input[name="mc-'+i+'"]:checked');
+      if (sel) state.mc[i] = sel.value;
+    });
+    kwQuestions.forEach((q,i)=>{
+      const el = document.getElementById("sa-"+i);
+      if (el && el.value) state.sa[i] = el.value;
+    });
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
+  }
+  function restoreState(){
+    const raw = localStorage.getItem(STATE_KEY);
+    if (!raw) return;
+    try {
+      const state = JSON.parse(raw);
+      Object.keys(state.mc||{}).forEach(i=>{
+        const v = state.mc[i];
+        const radio = document.querySelector('input[name="mc-'+i+'"][value="'+v+'"]');
+        if (radio){ radio.checked = true; }
+      });
+      Object.keys(state.sa||{}).forEach(i=>{
+        const el = document.getElementById("sa-"+i);
+        if (el){ el.value = state.sa[i]; renderSAFeedback(parseInt(i,10)); }
+      });
+    } catch(e){}
+  }
+
+  // ---------- MC / SA change handlers ----------
+  function onMCChange(i, value){
+    saveState();
+    renderMCFeedback(i, value);
+    var rs = document.getElementsByName("mc-"+i);
+    for (var ri=0; ri<rs.length; ri++) rs[ri].disabled = true;
+  }
+  function renderMCFeedback(i,value){
+    const q = mcQuestions[i];
+    const fb = document.getElementById("fb-"+i);
+    const isCorrect = (value === q.correct);
+    // Clear previous highlights
+    ["A","B","C","D"].forEach(L=>{
+      const opt = document.getElementById("opt-"+i+"-"+L);
+      opt.classList.remove("correct-answer","wrong-answer");
+    });
+    if (isCorrect){
+      document.getElementById("opt-"+i+"-"+value).classList.add("correct-answer");
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en">'+q.correctFeedbackEn+'</span><span class="lang-es">'+q.correctFeedbackEs+'</span>';
+    } else {
+      document.getElementById("opt-"+i+"-"+value).classList.add("wrong-answer");
+      document.getElementById("opt-"+i+"-"+q.correct).classList.add("correct-answer");
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en">'+q.incorrectFeedbackEn+'</span><span class="lang-es">'+q.incorrectFeedbackEs+'</span>';
+    }
+    fb.classList.remove("hidden");
+  }
+  function onSAInput(i){
+    saveState();
+    renderSAFeedback(i);
+  }
+  // Smart keyword matcher: short keywords (<=4 chars) match as whole words;
+  // longer keywords match as a left-anchored prefix (catches inflections).
+  function kwHit(text, kw){
+    text = (text||"").toLowerCase();
+    kw = (kw||"").toLowerCase();
+    const esc = kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const re = (kw.length <= 4) ? new RegExp("\\b"+esc+"\\b") : new RegExp("\\b"+esc);
+    return re.test(text);
+  }
+  function gradeSA(i){
+    const q = kwQuestions[i];
+    const el = document.getElementById("sa-"+i);
+    const text = (el ? el.value : "").toLowerCase();
+    if (text.length < 100) return false;
+    const kws = (getCurrentLang()==="es") ? q.kw_es : q.kw_en;
+    let hits = 0;
+    kws.forEach(k=>{ if (kwHit(text, k)) hits++; });
+    return hits >= 3;
+  }
+  // Reveal the gold model-answer box under every short-answer question after submit.
+  function revealModel(i){
+    const q = kwQuestions[i];
+    const box = document.getElementById("sa-model-"+i);
+    if (!box) return;
+    box.innerHTML =
+      '<div class="sa-model-label"><span class="lang-en">Correct answer</span><span class="lang-es">Respuesta correcta</span></div>'
+      + '<span class="lang-en">'+q.modelEn+'</span><span class="lang-es">'+q.modelEs+'</span>';
+    box.classList.remove("hidden");
+  }
+
+  function checkSA(i){
+    renderSAFeedback(i);
+    const el = document.getElementById("sa-"+i);
+    const text = (el ? el.value : "").toLowerCase();
+    if (text.length >= 100) revealModel(i);
+  }
+
+  function revealModels(){
+    kwQuestions.forEach((q,i)=>{ revealModel(i); });
+  }
+
+  function renderSAFeedback(i){
+    const fb = document.getElementById("sa-fb-"+i);
+    if (!fb) return;
+    const el = document.getElementById("sa-"+i);
+    const text = el ? el.value : "";
+    if (text.length === 0){
+      fb.className = "sa-feedback fail";
+      fb.innerHTML = '<span class="lang-en">✗ No answer yet. Type your answer, then check it against the correct answer below.</span><span class="lang-es">✗ Aún no hay respuesta. Escriba su respuesta y compárela con la respuesta correcta abajo.</span>';
+      return;
+    }
+    if (text.length < 100){
+      fb.className = "sa-feedback fail";
+      fb.innerHTML = '<span class="lang-en">✗ Incorrect — answer too short (at least a few sentences (about 100 characters)). Compare with the correct answer below.</span><span class="lang-es">✗ Incorrecto: la respuesta es demasiado corta (al menos unas cuantas oraciones (unos 100 caracteres)). Compare con la respuesta correcta abajo.</span>';
+      return;
+    }
+    if (gradeSA(i)){
+      fb.className = "sa-feedback pass";
+      fb.innerHTML = '<span class="lang-en">✓ Correct — your answer includes the key concepts. Compare it with the correct answer below.</span><span class="lang-es">✓ Correcto: su respuesta incluye los conceptos clave. Compárela con la respuesta correcta abajo.</span>';
+    } else {
+      fb.className = "sa-feedback fail";
+      fb.innerHTML = '<span class="lang-en">✗ Not yet — your answer is missing key concepts from the lesson. Study the correct answer below.</span><span class="lang-es">✗ Todavía no: a su respuesta le faltan conceptos clave de la lección. Estudie la respuesta correcta abajo.</span>';
+    }
+  }
+
+  // ---------- Submit ----------
+  function submitExam(){
+    const track = localStorage.getItem(TRACK_KEY);
+    if (!track){
+      alert(getCurrentLang()==="es" ? "Por favor escoja una modalidad antes de enviar." : "Please choose a track before submitting.");
+      return;
+    }
+    const student = localStorage.getItem(STUDENT_KEY);
+    if (SHOW_REGISTRATION && !student){
+      alert(getCurrentLang()==="es" ? "Por favor complete el registro antes de enviar." : "Please complete registration before submitting.");
+      return;
+    }
+
+    // Score MC
+    let mcScore = 0;
+    mcQuestions.forEach((q,i)=>{
+      const sel = document.querySelector('input[name="mc-'+i+'"]:checked');
+      if (sel){
+        renderMCFeedback(i, sel.value);
+        if (sel.value === q.correct) mcScore++;
+      } else {
+        // Mark unanswered as wrong by showing correct answer
+        const fb = document.getElementById("fb-"+i);
+        ["A","B","C","D"].forEach(L=>{
+          const opt = document.getElementById("opt-"+i+"-"+L);
+          opt.classList.remove("correct-answer","wrong-answer");
+        });
+        document.getElementById("opt-"+i+"-"+q.correct).classList.add("correct-answer");
+        fb.className = "feedback incorrect";
+        fb.innerHTML = '<span class="lang-en">No answer given. '+q.incorrectFeedbackEn+'</span><span class="lang-es">No se dio respuesta. '+q.incorrectFeedbackEs+'</span>';
+        fb.classList.remove("hidden");
+      }
+    });
+    const mcBanked = localStorage.getItem(MC_KEY) === "true";
+    const mcPassed = mcBanked || (mcScore >= MC_PASS);
+
+    let saScore = 0;
+    if (isMastersLevel()){
+      kwQuestions.forEach((q,i)=>{
+        renderSAFeedback(i);
+        if (gradeSA(i)) saScore++;
+      });
+      revealModels();
+    }
+    const saPassed = isMastersLevel() ? (saScore >= SA_PASS) : true;
+
+    // Persist MC pass (banking)
+    if (mcPassed){
+      localStorage.setItem(MC_KEY,"true");
+    }
+    if (isMastersLevel() && saPassed){
+      localStorage.setItem(SA_KEY,"true");
+    }
+
+    const fullPassed = mcPassed && saPassed;
+    if (fullPassed){
+      localStorage.setItem(UNIT_KEY,"true");
+      // Update progress JSON
+      let progress = {};
+      try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)||"{}"); } catch(e){}
+      progress["unit"+UNIT] = true;
+      localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    } else {
+      // Determine lockout scope
+      if (!mcPassed){
+        localStorage.setItem(LOCKOUT_KEY, String(Date.now() + LOCKOUT_MS));
+        localStorage.setItem(LOCKOUT_SCOPE_KEY, "full");
+      } else if (isMastersLevel() && !saPassed){
+        localStorage.setItem(LOCKOUT_KEY, String(Date.now() + LOCKOUT_MS));
+        localStorage.setItem(LOCKOUT_SCOPE_KEY, "sa");
+      }
+    }
+
+    showResults(track, mcScore, mcPassed, saScore, saPassed, fullPassed);
+  }
+
+  function showResults(track, mcScore, mcPassed, saScore, saPassed, fullPassed){
+    const block = document.getElementById("results-block");
+    block.classList.remove("hidden");
+    block.className = "results " + (fullPassed ? "pass" : "fail");
+    let html = '<h2><span class="lang-en">Results</span><span class="lang-es">Resultados</span></h2>';
+    html += '<p><strong><span class="lang-en">Multiple-Choice:</span><span class="lang-es">Opción múltiple:</span></strong> '+mcScore+' / 20 — '
+      + (mcPassed
+          ? '<span class="lang-en" style="color:#3a5a25;font-weight:600">PASS</span><span class="lang-es" style="color:#3a5a25;font-weight:600">APROBADO</span>'
+          : '<span class="lang-en" style="color:#7a2618;font-weight:600">FAIL</span><span class="lang-es" style="color:#7a2618;font-weight:600">REPROBADO</span>')
+      + '</p>';
+    if (isMastersLevel()){
+      html += '<p><strong><span class="lang-en">Short-Answer:</span><span class="lang-es">Respuesta breve:</span></strong> '+saScore+' / 10 — '
+        + (saPassed
+            ? '<span class="lang-en" style="color:#3a5a25;font-weight:600">PASS</span><span class="lang-es" style="color:#3a5a25;font-weight:600">APROBADO</span>'
+            : '<span class="lang-en" style="color:#7a2618;font-weight:600">FAIL</span><span class="lang-es" style="color:#7a2618;font-weight:600">REPROBADO</span>')
+        + '</p>';
+    }
+    if (fullPassed){
+      const nextUrl = IS_FINAL_UNIT ? FINAL_REDIRECT_URL : NEXT_UNIT_URL;
+      const label = IS_FINAL_UNIT
+        ? '<span class="lang-en">View Certificate \u2192</span><span class="lang-es">Ver Certificado \u2192</span>'
+        : '<span class="lang-en">Continue to Unit '+(UNIT+1)+' \u2192</span><span class="lang-es">Continuar a la Unidad '+(UNIT+1)+' \u2192</span>';
+      const note = '<span class="lang-en">Passed. Study the model answers above before you continue.</span><span class="lang-es">Aprobado. Estudie las respuestas modelo de arriba antes de continuar.</span>';
+      html += '<p style="font-weight:600">'+note+'</p>'
+            + '<p><a class="btn" href="'+nextUrl+'">'+label+'</a></p>';
+    } else {
+      const scope = localStorage.getItem(LOCKOUT_SCOPE_KEY);
+      const lockMsg = (scope==="sa")
+        ? '<span class="lang-en">Multiple-choice has been banked. Review the lesson and retake the short-answer section after the 15-minute lockout.</span><span class="lang-es">La sección de opción múltiple ha sido guardada. Repase la lección y vuelva a tomar la sección de respuesta breve después del bloqueo de 15 minutos.</span>'
+        : '<span class="lang-en">Review the lesson and retake the exam after the 15-minute lockout.</span><span class="lang-es">Repase la lección y vuelva a tomar el examen después del bloqueo de 15 minutos.</span>';
+      const study = '<span class="lang-en"> Study the model answers above while you wait.</span><span class="lang-es"> Estudie las respuestas modelo de arriba mientras espera.</span>';
+      html += '<p style="font-weight:600">'+lockMsg+study+'</p>';
+      // No auto-reload: keep the model answers visible. The lockout is enforced on the next submit.
+    }
+    block.innerHTML = html;
+    block.scrollIntoView({behavior:"smooth"});
+  }
+
+  function resetExam(){
+    const msg = (getCurrentLang()==="es")
+      ? "¿Está seguro de que desea reiniciar? Esto borrará todas sus respuestas en esta unidad."
+      : "Are you sure you want to reset? This will clear all your answers in this unit.";
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    // Do NOT clear MC banking, lockout, or progress on reset — that is a separate action.
+    location.reload();
+  }
+
+  // ---------- Progress grid ----------
+  function renderProgressGrid(){
+    const grid = document.getElementById("progress-grid");
+    let progress = {};
+    try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)||"{}"); } catch(e){}
+    for (let u=1; u<=TOTAL_UNITS; u++){
+      const pill = document.createElement("div");
+      pill.className = "pill";
+      if (progress["unit"+u]) pill.classList.add("done");
+      if (u === UNIT) pill.classList.add("current");
+      pill.textContent = "U"+u;
+      grid.appendChild(pill);
+    }
+  }
+
+  // ---------- Init ----------
+  document.addEventListener("DOMContentLoaded", function(){
+    renderProgressGrid();
+    loadRegistration();
+    loadTrack();
+    renderMCQuestions();
+    renderSAQuestions();
+    if (!checkLockout()){
+      restoreState();
+    }
+  });
+</script>
+
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSHermeneuticsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Acts Intensive — Unit 5: The Hand of the Lord at Antioch (Acts 9:32–12:24)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+/* === Retrofit additions === */
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-bottom: 2px dashed #d7cec1; padding-bottom: 18px; margin-bottom: 18px; }
+.lang-toggle-group { display: inline-flex; gap: 4px; margin-bottom: 15px; }
+.lang-toggle-group button { background: #f4c542; color: #5b3a1f; border: 1px solid #c9a032; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+.lang-toggle-group button.active { background: #5b3a1f; color: white; border-color: #5b3a1f; }
+.track-badge { display: inline-block; background: #f4c542; color: #5b3a1f; padding: 4px 12px; border-radius: 30px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 12px; vertical-align: middle; }
+.exam-status { padding: 12px 16px; margin: 14px 0; border-radius: 8px; font-size: 0.95rem; font-weight: 600; }
+.exam-status.mc-passed { background: #d6e2f0; color: #2c3e6b; border-left: 5px solid #3f5a8a; }
+.exam-status.locked { background: #fae5e3; color: #8a1f1f; border-left: 5px solid #b03a2e; }
+.exam-status.hidden { display: none; }
+.mc-section, .sa-section { margin-top: 20px; }
+.sa-section h3, .mc-section h3 { color: #5b3a1f; border-bottom: 2px solid #f4c542; padding-bottom: 4px; margin-bottom: 12px; font-size: 1.1rem; }
+.sa-badge { display: inline-block; background: #f4c542; color: #5b3a1f; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; margin-left: 8px; vertical-align: middle; }
+.sa-note { margin: 0 0 14px; padding: 10px 14px; background: #f6f1e8; border-left: 3px solid #c9a032; color: #22201d; font-size: 0.9rem; font-style: italic; border-radius: 6px; }
+.question.review-locked { opacity: 0.7; background: #fbfaf6; border-left: 3px solid #f4c542; }
+.question.review-locked .option { pointer-events: none; }
+.question.review-locked .kw-answer, .question.review-locked .check-kw-btn { pointer-events: none; }
+.btn-reset { background: #8a6a4a; color: white; border: none; border-radius: 30px; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 0.88rem; margin-left: 8px; }
+.btn-reset:hover { background: #6b5236; }
+.reg-modal { position: fixed; inset: 0; background: rgba(40, 30, 20, 0.65); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.reg-modal.hidden { display: none; }
+.reg-modal-inner { background: #fffdfa; max-width: 520px; width: 100%; border-radius: 16px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 1px solid #d7cec1; }
+.reg-modal-inner h2 { color: #5b3a1f; margin: 0 0 10px; font-size: 1.4rem; }
+.reg-modal-inner p { margin: 10px 0; font-size: 0.95rem; }
+.reg-modal-inner label { display: block; margin: 12px 0 4px; font-weight: 700; font-size: 0.92rem; }
+.reg-modal-inner input[type="text"], .reg-modal-inner input[type="email"] { width: 100%; padding: 9px 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; background: #fcfbf8; }
+.reg-modal-inner .track-options { display: flex; gap: 10px; margin-top: 6px; }
+.reg-modal-inner .track-options label { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 12px; border: 1px solid #d7cec1; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.92rem; background: #fcfbf8; }
+.reg-modal-inner .track-options input[type="radio"] { margin: 0; }
+.reg-modal-inner .track-options label:has(input:checked) { background: #f4c542; border-color: #c9a032; }
+.reg-modal-inner button { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 9px 22px; cursor: pointer; font-family: inherit; font-size: 1rem; margin-top: 18px; }
+.reg-warn { background: #faecd0; border: 1px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; color: #5b3a1f; }
+.reg-warn.hidden { display: none; }
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .nav-bar, .toggle-btn, .lang-toggle-group, .btn-reset, button.small, .check-kw-btn, .reg-modal, .reg-warn, #submitExamBtn, .exam-status, .sa-badge, .track-badge { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+  body.lang-en .lang-es, body.lang-es .lang-en { display: none; }
+  body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+}
+
+.sa-model { margin-top: 8px; padding: 10px 14px; background:#fff8e1; color:#5d4a00; border-left:4px solid #d4af37; border-radius:6px; font-size:0.92rem; line-height:1.45; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" role="group" aria-label="Language">
+  <button data-lang="en" class="active">English</button>
+  <button data-lang="es">Español</button>
+  <button data-lang="both">Both / Ambos</button>
+</div>
+<span id="trackBadgeSlot"></span>
+
+<div id="regWarn" class="reg-warn hidden">
+  <span class="lang-en">⚠ Please register your name to receive credit for this unit. <button class="small" id="openRegBtn" type="button">Register</button></span>
+  <span class="lang-es">⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class="small" id="openRegBtn2" type="button">Registrar</button></span>
+</div>
+<div id="regModal" class="reg-modal hidden" role="dialog" aria-labelledby="regModalTitle">
+  <div class="reg-modal-inner">
+    <h2 id="regModalTitle"><span class="lang-en">Welcome to the Acts Intensive</span><span class="lang-es">Bienvenido al Intensivo de Hechos</span></h2>
+    <p><span class="lang-en">Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.</span><span class="lang-es">Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full name</span><span class="lang-es">Nombre completo</span></label>
+    <input type="text" id="regName" placeholder="" autocomplete="name" aria-label="regName">
+    <label><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span></label>
+    <input type="email" id="regEmail" placeholder="" autocomplete="email" aria-label="regEmail">
+    <label><span class="lang-en">Track</span><span class="lang-es">Vía</span></label>
+    <div class="track-options">
+      <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></label>
+      <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en">M.Div</span><span class="lang-es">M.Div</span></label>
+      <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en">Th.M.</span><span class="lang-es">Th.M.</span></label>
+    </div>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;">
+      <span class="lang-en"><strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.</span>
+      <span class="lang-es"><strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%.</span>
+    </p>
+    <button id="regSaveBtn" type="button"><span class="lang-en">Save and Continue</span><span class="lang-es">Guardar y Continuar</span></button>
+  </div>
+</div>
+<div class="card">
+    <h1><span class="lang-en">📖 Acts Intensive — Unit 5: The Hand of the Lord at Antioch (Acts 9:32–12:24)</span><span class="lang-es">📖 Intensivo de Hechos — Unidad 5: La mano del Señor en Antioquía (Hechos 9:32–12:24)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>I. Peter on the Move</h2>
+        <p>The last time we saw Peter in any extended scene he was preaching at Pentecost. Then Stephen died, the church was scattered, Saul was converted, and Luke turned the camera on the new convert. Now Luke turns it back to Peter, who is on the road. Acts 9:32 says simply, <em>"Now it came to pass, as Peter went through all parts of the country, that he also came down to the saints who dwelt in Lydda."</em></p>
+
+        <p>At Lydda, on the coastal plain, Peter found a man named Aeneas who had been bedridden with paralysis for eight years. Eight years of being lifted from one corner of the room to another. Eight years of family members carrying him to the privy. Eight years of nobody asking his opinion because the answer was always going to be the same. Peter walked into that room and said, <em>"Aeneas, Jesus the Christ heals you. Arise and make your bed"</em> (Acts 9:34, NKJV). Notice the verb tense. Not <em>will heal</em> you. Not <em>can heal</em> you if you have enough faith. Jesus the Christ <em>heals</em> you, present tense, fact already accomplished. The man got up. He did not need a long course of physical therapy to teach his legs how to walk again. The Lord who made the legs in the womb can repair them in a sickbed in two seconds. Luke notes that the inhabitants of Lydda and the surrounding plain of Sharon, seeing him, turned to the Lord. One healing converted a region.</p>
+
+        <p>Then word came from the seacoast town of Joppa, a dozen miles to the west. A disciple named Tabitha — her Greek name was Dorcas, both meaning "gazelle" — had died. Luke pauses to tell us that this woman <em>"was full of good works and charitable deeds"</em> (Acts 9:36, NKJV). When Peter arrived, the widows of the town were weeping in the upper room and showing him the tunics and garments she had sewn for them while she was alive. Read that detail. The widows did not eulogize Tabitha with a list of her accomplishments. They held up <em>her clothes</em>. Some saints leave behind clothes that other people are wearing. Some saints leave behind nothing but a tax return. May the Lord let us be the first kind.</p>
+
+        <p>Peter put them all out, knelt down, prayed, turned to the body and said, <em>"Tabitha, arise"</em> (Acts 9:40, NKJV). The Aramaic original would have been <em>Tabitha cumi</em> — two syllables off from his Master's <em>Talitha cumi</em> in Mark 5:41. Peter was not freelancing. He had watched Christ raise a girl from the dead and he was repeating, almost syllable for syllable, what he had seen done. She opened her eyes. She sat up. He gave her his hand and she stood. The widows got their seamstress back, and many in Joppa believed on the Lord.</p>
+
+        <h2>II. The Centurion in Caesarea</h2>
+        <p>While Peter was still in Joppa, lodging at the house of one Simon a tanner — a man whose trade kept him ceremonially unclean by traditional Jewish standards, which is one of Luke's quiet little setups — God was already at work thirty miles up the coast in Caesarea. A man named Cornelius, a centurion of what was called the Italian Regiment, was praying in his house at three o'clock in the afternoon. Luke tells us four things about this man before he ever meets Peter. He was <em>"a devout man and one who feared God with all his household, who gave alms generously to the people, and prayed to God always"</em> (Acts 10:2, NKJV). Devout. God-fearing. Generous. Prayerful. He was a Gentile in every blood-cell, but he was a Gentile who had sought after the God of Israel as far as a Gentile could without circumcision.</p>
+
+        <p>An angel appeared in his house and called him by name. <em>"Your prayers and your alms have come up for a memorial before God"</em> (Acts 10:4, NKJV). What a sentence. Cornelius had been praying in his villa in Caesarea, perhaps for years, wondering if anyone in heaven was listening. Heaven was listening. Heaven knew his street address. The angel sent him to Joppa to fetch a man named Simon Peter, lodging by the seaside at the home of Simon the tanner. The Roman officer dispatched two of his servants and a devout soldier from his personal staff. They were on the road by morning.</p>
+
+        <h2>III. The Rooftop in Joppa</h2>
+        <p>About noon the next day, while the messengers from Caesarea were still on the road, Peter went up to the flat roof of Simon the tanner's house to pray. He was hungry. While dinner was being prepared, he fell into a trance and saw a sheet let down from heaven by its four corners, full of every kind of four-footed beast, reptile, and bird the Mosaic dietary laws had spent fifteen centuries forbidding. A voice said, <em>"Rise, Peter; kill and eat"</em> (Acts 10:13, NKJV). Peter recoiled. <em>"Not so, Lord! For I have never eaten anything common or unclean"</em> (Acts 10:14, NKJV). The voice answered, <em>"What God has cleansed you must not call common"</em> (Acts 10:15, NKJV). The vision came three times. Three times the unclean menu was lowered. Three times the voice corrected him. Three times the sheet went back up. While Peter was still trying to figure out what on earth the vision meant, the men from Caesarea knocked on the front gate.</p>
+
+        <p>The Holy Spirit told him plainly: go with these men, doubting nothing, for I have sent them. The next morning Peter and six brothers from Joppa traveled to Caesarea. Cornelius had filled his house with relatives and close friends. He met Peter at the door, fell down at his feet to worship him, and Peter pulled him up with the line every visiting preacher should keep on the inside of his collar: <em>"Stand up; I myself am also a man"</em> (Acts 10:26, NKJV). Then Peter walked into the room of Gentiles and said the line that broke five hundred years of separation: <em>"You know how unlawful it is for a Jewish man to keep company with or go to one of another nation. But God has shown me that I should not call any man common or unclean"</em> (Acts 10:28, NKJV). The vision had not been about food. It had been about people. The dietary code had been a fence keeping the holy people pure for the Messiah. Now the Messiah had come, and the fence was being taken down.</p>
+
+        <h2>IV. God Shows No Partiality</h2>
+        <p>Peter began to preach. The opening line of his sermon is one of the most important sentences any preacher has ever spoken. <em>"In truth I perceive that God shows no partiality. But in every nation whoever fears Him and works righteousness is accepted by Him"</em> (Acts 10:34–35, NKJV). The Greek phrase translated "shows no partiality" literally means <em>God is not a face-receiver</em>. He does not pick favorites by ethnicity, passport, or pedigree. The same gospel is offered on the same terms to every person on every continent. The Jew has no genetic advantage over the Gentile at the foot of the cross. The Greek has no philosophical leg up over the Hebrew at the foot of the cross. We all come the same way and we all leave the same way.</p>
+
+        <p>Peter preached Christ — His baptism, His ministry, His death, His resurrection, His command to preach forgiveness in His name. He had not finished his sermon. Luke says, <em>"While Peter was still speaking these words, the Holy Spirit fell upon all those who heard the word"</em> (Acts 10:44, NKJV). The Jewish brothers who had come with Peter were <em>astonished</em> — Luke's word — that the Holy Spirit had been poured out on Gentiles too. They heard them speaking in tongues and magnifying God. Peter said the only thing left to say. <em>"Can anyone forbid water, that these should not be baptized who have received the Holy Spirit just as we have?"</em> (Acts 10:47, NKJV). And he commanded them to be baptized in the name of the Lord. The first wholesale Gentile conversion in church history happened in the living room of a Roman officer, and the Roman officer's whole household was saved with him. The Andrew Principle is loose in Caesarea: the man who comes to faith in his living room brings his living room with him.</p>
+
+        <p>Peter went back to Jerusalem. The brothers there were waiting for him with their arms folded. <em>"You went in to uncircumcised men and ate with them!"</em> (Acts 11:3, NKJV). Peter explained the whole thing in order. The trance, the sheet, the messengers, the sermon, the falling of the Spirit. He closed his explanation with a sentence that should silence every theological argument that pretends to know better than God. <em>"If therefore God gave them the same gift as He gave us when we believed on the Lord Jesus Christ, who was I that I could withstand God?"</em> (Acts 11:17, NKJV). The Jerusalem brethren had no answer. <em>"They became silent; and they glorified God, saying, 'Then God has also granted to the Gentiles repentance to life'"</em> (Acts 11:18, NKJV). The hardest theological mile in church history was just walked.</p>
+
+        <h2>V. The Hand of the Lord at Antioch</h2>
+        <p>Now Luke pulls back to a wider angle. Remember those scattered believers from Acts 8 — the ones the Stephen-persecution flung out of Jerusalem? Some of them had run all the way to Antioch in Syria, three hundred miles to the north, the third largest city of the Roman Empire after Rome and Alexandria. At first these scattered Jewish believers had only spoken to Jews. But some of them, men of Cyprus and Cyrene, started speaking to the Greeks too. And Luke writes the verse that has launched a thousand revivals: <em>"And the hand of the Lord was with them, and a great number believed and turned to the Lord"</em> (Acts 11:21, NKJV).</p>
+
+        <p>The hand of the Lord. That is an old Hebrew anthropomorphism — the hand stands for power and might. The hand acts. The hand strikes. The hand heals. The hand had moved in Acts 4 to extend the apostles' boldness, and now the hand was moving in Antioch to convert Greeks. Wherever the hand of the Lord shows up, three things show up with it. They showed up in Antioch in AD 42, they showed up in Wales in AD 1904, and they will show up in any town in any century where the Lord chooses to put His hand.</p>
+
+        <p><strong>One: the hand of the Lord produces conversions.</strong> A great number believed and turned to the Lord. C. H. Spurgeon used to say that those who do not like numbers usually have none to report. Luke counted. Luke noted three thousand at Pentecost, then five thousand, and now <em>"a great number"</em> at Antioch. Numbers are not the only mark of revival, and a small church can be full of the Spirit while a large church can be empty as a tomb. But where the hand of the Lord is moving, the room fills up.</p>
+
+        <p><strong>Two: the hand of the Lord produces commissions.</strong> When the Jerusalem church heard about Antioch, they sent Barnabas — the Son of Encouragement, the Cyprus levite, the same Barnabas who had vouched for Saul. Barnabas walked into Antioch, <em>"saw the grace of God, and was glad, and encouraged them all that with purpose of heart they should continue with the Lord"</em> (Acts 11:23, NKJV). Then he did a thing that ought to be commemorated in stained glass. He realized this revival had outgrown one preacher and went to find help. He took the long road north to Tarsus, hunted up Saul, and brought him back to Antioch. For an entire year these two men taught a multitude. From that taught multitude went out the first organized cross-cultural missionary effort in the history of the church. Antioch sent Paul. The hand of the Lord that produces conversions also produces commissions.</p>
+
+        <p><strong>Three: the hand of the Lord produces celebrations.</strong> Barnabas, watching Greeks repent, was <em>glad</em>. Heaven, watching Greeks repent, was glad. The angels were running up and down the streets of gold over Antioch. Where the hand of the Lord is moving, there is rejoicing. Sour congregations are not Spirit-filled congregations. Glum churches are not awakened churches. The hand of the Lord brings joy with it as surely as fire brings light.</p>
+
+        <h2>VI. Wales, 1904, and the Pattern That Repeats</h2>
+        <p>Read what happened at Antioch and you have read what happened in Wales. In the autumn of 1904 a pastor named Joseph Jenkins stood up in front of his young people's society in the village of New Quay. He asked them one question. <em>What does Jesus Christ mean to you?</em> Embarrassed silence. They were nice young people. They opened in prayer. They sang hymns. They had treated the meeting as a kind of church social club. One brave boy, to fill the silence, said, "He is the hope of the world." Jenkins said, "That is not what I meant. What does He mean to you?" Dead silence again. And then a timid girl named Flory Evans, three weeks converted, stood up and said one sentence. <em>"I love the Lord Jesus with all my heart."</em> She sat down. Within weeks the village was on fire. By the time it had spread to a young coal miner named Evan Roberts — twenty-six years old, a layman who had been praying eleven years for revival — the Welsh churches were filled night and day. One hundred thousand people came to Christ in five months.</p>
+
+        <p>Conversions, commissions, celebrations. The Welsh judges were presented with white gloves — the old custom for a court session with no cases to try. Drunkenness was cut in half. Crime fell so far the police had nothing to do, so the constables organized themselves into Gospel quartets and went around singing in the churches. There was an energy shortage in the coal mines because the converted miners stopped cursing at their pit ponies, and the ponies — accustomed only to obscene commands — could no longer understand what was being asked of them. Illegitimate births dropped forty-four percent in several Welsh counties. The same revival swept Korea in 1907 with seventy-nine thousand converts in one year. The hand of the Lord is the same hand in every century. He has not changed. He has not retired. He is not waiting for our committee meetings. He moves where He is welcomed.</p>
+
+        <h2>VII. Christians for the First Time, and a King Eaten by Worms</h2>
+        <p>Luke drops one of the most consequential parentheses in the New Testament. <em>"And the disciples were first called Christians in Antioch"</em> (Acts 11:26, NKJV). The Greek <em>Christianoi</em> originally seems to have been a slight bit derisive — <em>little Christs</em>, <em>Christ's people</em>, the way you might call Lincoln's followers Lincolnites. The pagans of Antioch, watching these believers go about town, noticed that they kept talking about, dressing in, smelling like, sounding like Christ. So the city stuck the label on them. They wore it forever. May people who watch you and me ever feel the need for that label.</p>
+
+        <p>Acts 12 picks up the story in a darker key. King Herod Agrippa I — the grandson of Herod the Great, the nephew of the Herod who beheaded John the Baptist — decided to score political points with the Jewish authorities by going after the church. He killed James the brother of John, the first apostle to be martyred, with the sword. James, son of Zebedee, the man Jesus had nicknamed Boanerges along with his brother John, son of Thunder. The first to follow may also be the first to fall. When Herod saw it pleased the Jews, he arrested Peter too, intending to bring him out to the people after Passover.</p>
+
+        <p>The church was praying for Peter without ceasing. An angel woke Peter in the prison cell, knocked off his chains, walked him past two guard posts and through an iron gate that opened by itself, and left him standing on a Jerusalem street in the small hours of the morning. Peter, thinking he was still seeing a vision, came to himself and went to the house of Mary the mother of John Mark, where the prayer meeting was still going on. He knocked at the gate. A servant girl named Rhoda came to the door, recognized his voice, was so overjoyed she forgot to actually open the gate, and ran back inside to announce, <em>"Peter is standing at the gate!"</em> The praying believers told her she was crazy. They said it must be his angel. Peter kept knocking outside on the street. (Honest preachers admit the truth: many of us pray for things and then refuse to believe it when God answers.) Finally they opened the door and were astonished.</p>
+
+        <p>Herod was not done. He went down to Caesarea, gave a public oration in royal robes, and the assembled crowd shouted, <em>"The voice of a god and not of a man!"</em> (Acts 12:22, NKJV). The book of Acts is the only book on the planet that records what happened next. Josephus the Jewish historian records the same death from the outside; Luke records it from heaven's side. <em>"Then immediately an angel of the Lord struck him, because he did not give glory to God. And he was eaten by worms and died"</em> (Acts 12:23, NKJV). The Roman appointee who had killed an apostle in the morning was being consumed by maggots before sundown. <em>"But the word of God grew and multiplied"</em> (Acts 12:24, NKJV). Herod is dead. The church is alive. That is the verdict.</p>
+
+        <h2>VIII. Take These Three Lessons Home</h2>
+        <p>First, <strong>God is not a face-receiver</strong>. The same Christ died for the centurion in Caesarea and the fisherman in Galilee and the housewife in Chapala. Repentance unto life has been granted to every nation. Stop ranking sinners on the scale of how easy they ought to be to convert. Cornelius was easier than Saul, Saul was easier than Stephen's executioners, and yet the Lord saved them all.</p>
+
+        <p>Second, <strong>where the hand of the Lord moves, conversions, commissions, and celebrations follow</strong>. Watch for them in your own ministry. If your church has none of the three, ask whether you are leaning on a method when you should be leaning on the Lord. Wales did not begin with a marketing campaign. It began with one timid girl saying she loved the Lord Jesus with all her heart.</p>
+
+        <p>Third, <strong>kings die and the word grows</strong>. Acts 12 ends with one of the great contrasts in Scripture: a worm-eaten despot at Caesarea and a multiplying gospel from one end of the empire to the other. The next time the cable news depresses you, read Acts 12:23–24 in succession. The Herods of every age go down. The word of God always grows. He buries His undertakers.</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>I. Pedro en marcha</h2>
+        <p>La última vez que vimos a Pedro en una escena extendida estaba predicando en Pentecostés. Luego murió Esteban, la iglesia fue esparcida, Saulo fue convertido, y Lucas giró la cámara hacia el nuevo convertido. Ahora Lucas la regresa hacia Pedro, que está en el camino. Hechos 9:32 dice simplemente: <em>"Y aconteció que Pedro, andando por todas partes, vino también a los santos que habitaban en Lida."</em></p>
+
+        <p>En Lida, en la llanura costera, Pedro encontró a un hombre llamado Eneas que había estado postrado en cama paralítico durante ocho años. Ocho años de ser cargado de un rincón del cuarto a otro. Ocho años de que sus familiares lo llevaran al baño. Ocho años de que nadie le pidiera su opinión porque la respuesta siempre iba a ser la misma. Pedro entró a aquel cuarto y dijo: <em>"Eneas, Jesucristo te sana; levántate, y haz tu cama"</em> (Hechos 9:34, RVG). Note el tiempo verbal. No <em>te sanará</em>. No <em>puede sanarte</em> si tienes suficiente fe. Jesucristo <em>te sana</em>, tiempo presente, hecho ya consumado. El hombre se levantó. No necesitó un largo curso de fisioterapia para enseñarles a sus piernas a caminar de nuevo. El Señor que hizo las piernas en el vientre puede repararlas en una cama de enfermo en dos segundos. Lucas anota que los habitantes de Lida y la llanura circundante de Sarón, viéndolo, se convirtieron al Señor. Una sanidad convirtió a una región.</p>
+
+        <p>Entonces vino la noticia desde el pueblo costero de Jope, a unos veinte kilómetros al oeste. Una discípula llamada Tabita — su nombre griego era Dorcas, ambos significan "gacela" — había muerto. Lucas se detiene a decirnos que esta mujer <em>"era llena de buenas obras y de limosnas que hacía"</em> (Hechos 9:36, RVG). Cuando Pedro llegó, las viudas del pueblo lloraban en el aposento alto y le mostraban las túnicas y vestidos que ella les había hecho mientras vivía. Lea ese detalle. Las viudas no honraron la memoria de Tabita con una lista de sus logros. Sostuvieron en alto <em>su ropa</em>. Algunos santos dejan tras de sí ropa que otra gente sigue usando. Algunos santos no dejan más que una declaración de impuestos. Que el Señor permita que seamos del primer tipo.</p>
+
+        <p>Pedro los sacó a todos, se arrodilló, oró, se volvió al cuerpo y dijo: <em>"Tabita, levántate"</em> (Hechos 9:40, RVG). El original arameo habría sido <em>Tabita cumi</em> — a dos sílabas del <em>Talita cumi</em> de su Maestro en Marcos 5:41. Pedro no estaba improvisando. Había visto a Cristo levantar a una niña de los muertos y estaba repitiendo, casi sílaba por sílaba, lo que había visto hacer. Ella abrió los ojos. Se sentó. Él le dio la mano y ella se puso en pie. Las viudas recobraron a su costurera, y muchos en Jope creyeron en el Señor.</p>
+
+        <h2>II. El centurión en Cesarea</h2>
+        <p>Mientras Pedro todavía estaba en Jope, hospedándose en casa de un tal Simón curtidor — un hombre cuyo oficio lo mantenía ceremonialmente impuro según los estándares judíos tradicionales, lo cual es una de las pequeñas preparaciones discretas de Lucas — Dios ya estaba obrando a unos cincuenta kilómetros más arriba en la costa, en Cesarea. Un hombre llamado Cornelio, centurión de la llamada Compañía Italiana, estaba orando en su casa a las tres de la tarde. Lucas nos dice cuatro cosas sobre este hombre antes de que conozca a Pedro. Era <em>"piadoso y temeroso de Dios con toda su casa, y que daba muchas limosnas al pueblo, y oraba a Dios siempre"</em> (Hechos 10:2, RVG). Piadoso. Temeroso de Dios. Generoso. Orador. Era un gentil en cada glóbulo de sangre, pero era un gentil que había buscado al Dios de Israel hasta donde un gentil podía sin circuncidarse.</p>
+
+        <p>Un ángel apareció en su casa y lo llamó por su nombre. <em>"Tus oraciones y tus limosnas han subido en memoria delante de Dios"</em> (Hechos 10:4, RVG). Qué frase. Cornelio había estado orando en su villa de Cesarea, quizás durante años, preguntándose si alguien en el cielo escuchaba. El cielo escuchaba. El cielo conocía la dirección de su calle. El ángel lo envió a Jope a buscar a un hombre llamado Simón Pedro, hospedado junto al mar en casa de Simón el curtidor. El oficial romano despachó a dos de sus criados y a un soldado piadoso de su personal. Salieron al camino por la mañana.</p>
+
+        <h2>III. La azotea en Jope</h2>
+        <p>Cerca del mediodía del día siguiente, mientras los mensajeros de Cesarea aún iban en camino, Pedro subió a la azotea plana de la casa de Simón el curtidor para orar. Tenía hambre. Mientras preparaban la comida, cayó en éxtasis y vio un lienzo descender del cielo atado por sus cuatro puntas, lleno de toda clase de cuadrúpedos, reptiles y aves que las leyes mosaicas sobre alimentos habían pasado quince siglos prohibiendo. Una voz dijo: <em>"Levántate, Pedro, mata y come"</em> (Hechos 10:13, RVG). Pedro retrocedió. <em>"Señor, no; porque ninguna cosa común o inmunda he comido jamás"</em> (Hechos 10:14, RVG). La voz respondió: <em>"Lo que Dios limpió, no lo llames tú común"</em> (Hechos 10:15, RVG). La visión vino tres veces. Tres veces el menú impuro fue bajado. Tres veces la voz lo corrigió. Tres veces el lienzo subió de nuevo. Mientras Pedro todavía intentaba descifrar qué significaba la visión, los hombres de Cesarea tocaron a la puerta de afuera.</p>
+
+        <p>El Espíritu Santo le dijo claramente: vete con estos hombres, no dudando, porque Yo los he enviado. A la mañana siguiente Pedro y seis hermanos de Jope viajaron a Cesarea. Cornelio había llenado su casa de parientes y amigos cercanos. Recibió a Pedro en la puerta, cayó a sus pies para adorarle, y Pedro lo levantó con la línea que cada predicador visitante debería tener escrita por dentro del cuello de la camisa: <em>"Levántate; pues yo mismo también soy hombre"</em> (Hechos 10:26, RVG). Luego Pedro entró al cuarto lleno de gentiles y dijo la línea que rompió quinientos años de separación: <em>"Vosotros sabéis que es abominable a un varón judío juntarse o llegarse a un extranjero; mas Dios me ha mostrado que a ningún hombre llame común o inmundo"</em> (Hechos 10:28, RVG). La visión no había sido sobre comida. Había sido sobre personas. El código alimentario había sido una cerca que mantenía puro al pueblo santo para el Mesías. Ahora el Mesías había venido, y la cerca estaba siendo derribada.</p>
+
+        <h2>IV. Dios no hace acepción de personas</h2>
+        <p>Pedro comenzó a predicar. La línea inicial de su sermón es una de las frases más importantes que un predicador haya jamás pronunciado. <em>"Por verdad hallo que Dios no hace acepción de personas; sino que de cualquier nación que le teme y obra justicia, se agrada"</em> (Hechos 10:34–35, RVG). La frase griega traducida "no hace acepción de personas" significa literalmente que <em>Dios no es un recibidor de rostros</em>. No escoge favoritos por etnicidad, pasaporte o pedigrí. El mismo evangelio se ofrece en los mismos términos a cada persona en cada continente. El judío no tiene ventaja genética sobre el gentil al pie de la cruz. El griego no tiene una ventaja filosófica sobre el hebreo al pie de la cruz. Todos venimos por el mismo camino y todos salimos por el mismo camino.</p>
+
+        <p>Pedro predicó a Cristo — Su bautismo, Su ministerio, Su muerte, Su resurrección, Su mandamiento de predicar el perdón en Su nombre. No había terminado el sermón. Lucas dice: <em>"Mientras aún hablaba Pedro estas palabras, el Espíritu Santo cayó sobre todos los que oían el sermón"</em> (Hechos 10:44, RVG). Los hermanos judíos que habían venido con Pedro estaban <em>atónitos</em> — la palabra de Lucas — de que el Espíritu Santo se hubiera derramado también sobre los gentiles. Los oyeron hablar en lenguas y magnificar a Dios. Pedro dijo lo único que quedaba por decir. <em>"¿Puede alguno impedir el agua, para que no sean bautizados éstos que han recibido el Espíritu Santo también como nosotros?"</em> (Hechos 10:47, RVG). Y mandó que fueran bautizados en el nombre del Señor. La primera conversión gentil masiva en la historia de la iglesia ocurrió en la sala de un oficial romano, y toda la casa del oficial romano fue salva con él. El Principio de Andrés está suelto en Cesarea: el hombre que llega a la fe en su sala lleva su sala consigo.</p>
+
+        <p>Pedro regresó a Jerusalén. Los hermanos allí lo esperaban con los brazos cruzados. <em>"¿Por qué has entrado a hombres incircuncisos, y has comido con ellos?"</em> (Hechos 11:3, RVG). Pedro explicó todo en orden. El éxtasis, el lienzo, los mensajeros, el sermón, la caída del Espíritu. Cerró su explicación con una frase que debería silenciar todo argumento teológico que pretende saber más que Dios. <em>"Así que, si Dios les dio el mismo don también a ellos como a nosotros que hemos creído en el Señor Jesucristo, ¿quién era yo que pudiese estorbar a Dios?"</em> (Hechos 11:17, RVG). Los hermanos de Jerusalén no tuvieron respuesta. <em>"Entonces, oídas estas cosas, callaron, y glorificaron a Dios, diciendo: De manera que también a los gentiles ha dado Dios arrepentimiento para vida"</em> (Hechos 11:18, RVG). La milla teológica más difícil de la historia de la iglesia acababa de ser caminada.</p>
+
+        <h2>V. La mano del Señor en Antioquía</h2>
+        <p>Ahora Lucas se aleja al gran angular. Recuerden a aquellos creyentes esparcidos de Hechos 8 — los que la persecución de Esteban arrojó fuera de Jerusalén. Algunos de ellos habían corrido hasta Antioquía de Siria, a quinientos kilómetros al norte, la tercera ciudad más grande del Imperio Romano después de Roma y Alejandría. Al principio estos creyentes judíos esparcidos solo habían hablado a los judíos. Pero algunos de ellos, hombres de Chipre y Cirene, comenzaron a hablar también a los griegos. Y Lucas escribe el versículo que ha lanzado mil avivamientos: <em>"Y la mano del Señor era con ellos; y un gran número creyendo, se convirtió al Señor"</em> (Hechos 11:21, RVG).</p>
+
+        <p>La mano del Señor. Es un viejo antropomorfismo hebreo — la mano representa el poder y la fuerza. La mano actúa. La mano golpea. La mano sana. La mano se había movido en Hechos 4 para extender la audacia de los apóstoles, y ahora la mano se movía en Antioquía para convertir griegos. Donde quiera que aparece la mano del Señor, aparecen tres cosas con ella. Aparecieron en Antioquía en el año 42 d.C., aparecieron en Gales en el 1904 d.C., y aparecerán en cualquier pueblo de cualquier siglo en donde el Señor decida poner Su mano.</p>
+
+        <p><strong>Una: la mano del Señor produce conversiones.</strong> Un gran número creyó y se convirtió al Señor. C. H. Spurgeon decía que a quienes no les gustan los números usualmente no tienen ninguno que reportar. Lucas contó. Lucas anotó tres mil en Pentecostés, luego cinco mil, y ahora <em>"un gran número"</em> en Antioquía. Los números no son la única marca de un avivamiento, y una iglesia pequeña puede estar llena del Espíritu mientras una iglesia grande puede estar vacía como una tumba. Pero donde la mano del Señor se mueve, el cuarto se llena.</p>
+
+        <p><strong>Dos: la mano del Señor produce comisiones.</strong> Cuando la iglesia de Jerusalén oyó sobre Antioquía, enviaron a Bernabé — el Hijo de Consolación, el levita de Chipre, el mismo Bernabé que había respondido por Saulo. Bernabé entró a Antioquía, <em>"vio la gracia de Dios, se gozó, y exhortó a todos a que con propósito de corazón permaneciesen en el Señor"</em> (Hechos 11:23, RVG). Luego hizo algo que debería ser conmemorado en vitral. Se dio cuenta de que este avivamiento había superado a un solo predicador y se fue a buscar ayuda. Tomó el largo camino al norte, hasta Tarso, buscó a Saulo y lo trajo de regreso a Antioquía. Por todo un año estos dos hombres enseñaron a una multitud. De esa multitud enseñada salió el primer esfuerzo misionero intercultural organizado en la historia de la iglesia. Antioquía envió a Pablo. La mano del Señor que produce conversiones también produce comisiones.</p>
+
+        <p><strong>Tres: la mano del Señor produce celebraciones.</strong> Bernabé, viendo a los griegos arrepentirse, se <em>gozó</em>. El cielo, viendo a los griegos arrepentirse, se gozó. Los ángeles corrían arriba y abajo por las calles de oro a causa de Antioquía. Donde se mueve la mano del Señor, hay regocijo. Las congregaciones agrias no son congregaciones llenas del Espíritu. Las iglesias adustas no son iglesias despertadas. La mano del Señor trae gozo consigo tan ciertamente como el fuego trae luz.</p>
+
+        <h2>VI. Gales, 1904, y el patrón que se repite</h2>
+        <p>Lea lo que pasó en Antioquía y habrá leído lo que pasó en Gales. En el otoño de 1904 un pastor llamado Joseph Jenkins se puso de pie frente a la sociedad de jóvenes de su iglesia en el pueblo de New Quay. Les hizo una sola pregunta. <em>¿Qué significa Jesucristo para ustedes?</em> Silencio incómodo. Eran jóvenes decentes. Abrían en oración. Cantaban himnos. Habían tratado la reunión como una especie de club social eclesiástico. Un muchacho valiente, para llenar el silencio, dijo: "Es la esperanza del mundo." Jenkins respondió: "No es eso lo que quise decir. ¿Qué significa Él para ti?" Silencio sepulcral otra vez. Y entonces una niña tímida llamada Flory Evans, convertida hacía tres semanas, se puso de pie y dijo una sola frase. <em>"Yo amo al Señor Jesús con todo mi corazón."</em> Y se sentó. En semanas el pueblo estaba en llamas. Para cuando se había extendido a un joven minero de carbón llamado Evan Roberts — veintiséis años, un laico que había estado orando once años por avivamiento — las iglesias galesas estaban llenas día y noche. Cien mil personas vinieron a Cristo en cinco meses.</p>
+
+        <p>Conversiones, comisiones, celebraciones. A los jueces galeses se les presentaron guantes blancos — la vieja costumbre para una sesión de corte sin casos que juzgar. La embriaguez se redujo a la mitad. El crimen cayó tanto que la policía no tenía nada que hacer, así que los oficiales se organizaron en cuartetos del Evangelio y andaban cantando en las iglesias. Hubo escasez de energía en las minas de carbón porque los mineros convertidos dejaron de maldecir a sus caballitos de tiro, y los caballos — acostumbrados solo a órdenes obscenas — ya no podían entender lo que se les pedía. Los nacimientos ilegítimos cayeron un cuarenta y cuatro por ciento en varios condados galeses. El mismo avivamiento barrió Corea en 1907 con setenta y nueve mil convertidos en un año. La mano del Señor es la misma mano en cada siglo. No ha cambiado. No se ha jubilado. No está esperando nuestras reuniones de comité. Se mueve donde es bienvenida.</p>
+
+        <h2>VII. Cristianos por primera vez, y un rey comido por gusanos</h2>
+        <p>Lucas deja caer uno de los paréntesis más trascendentales del Nuevo Testamento. <em>"Y a los discípulos se les llamó cristianos por primera vez en Antioquía"</em> (Hechos 11:26, RVG). El griego <em>Christianoi</em> originalmente parece haber sido ligeramente despectivo — <em>cristitos</em>, <em>los de Cristo</em>, como llamaríamos a los seguidores de un líder. Los paganos de Antioquía, viendo a estos creyentes andar por la ciudad, notaron que seguían hablando de Cristo, vistiéndose como Cristo, oliendo a Cristo, sonando como Cristo. Así que la ciudad les puso la etiqueta. La llevaron para siempre. Que la gente que nos observe a usted y a mí alguna vez sienta la necesidad de esa etiqueta.</p>
+
+        <p>Hechos 12 retoma la historia en una clave más oscura. El rey Herodes Agripa I — nieto de Herodes el Grande, sobrino del Herodes que decapitó a Juan el Bautista — decidió ganarse puntos políticos con las autoridades judías persiguiendo a la iglesia. Mató a Jacobo el hermano de Juan, el primer apóstol martirizado, con la espada. Jacobo, hijo de Zebedeo, el hombre a quien Jesús había apodado Boanerges junto con su hermano Juan, hijo del trueno. El primero en seguir también puede ser el primero en caer. Cuando Herodes vio que esto agradaba a los judíos, también arrestó a Pedro, con la intención de sacarlo al pueblo después de la Pascua.</p>
+
+        <p>La iglesia oraba sin cesar por Pedro. Un ángel despertó a Pedro en la celda de la prisión, le quitó las cadenas, lo hizo pasar dos guardias y atravesar una puerta de hierro que se abrió por sí sola, y lo dejó parado en una calle de Jerusalén en las primeras horas de la mañana. Pedro, pensando que aún veía una visión, volvió en sí y fue a la casa de María la madre de Juan Marcos, donde la reunión de oración seguía. Tocó a la puerta. Una criada llamada Rode vino, reconoció su voz, se alegró tanto que se olvidó de abrirle, y corrió adentro a anunciar: <em>"¡Pedro está a la puerta!"</em> Los creyentes que oraban le dijeron que estaba loca. Dijeron que debía ser su ángel. Pedro seguía tocando afuera en la calle. (Los predicadores honrados admiten la verdad: muchos de nosotros oramos por cosas y luego nos negamos a creer cuando Dios contesta.) Por fin abrieron la puerta y se quedaron pasmados.</p>
+
+        <p>Herodes no había terminado. Bajó a Cesarea, dio una oración pública en ropas reales, y la multitud reunida gritó: <em>"¡Voz de Dios, y no de hombre!"</em> (Hechos 12:22, RVG). El libro de Hechos es el único libro del planeta que registra lo que pasó después. Josefo el historiador judío registra la misma muerte desde afuera; Lucas la registra desde el lado del cielo. <em>"Y luego el ángel del Señor le hirió, por cuanto no dio la gloria a Dios; y comido de gusanos, expiró"</em> (Hechos 12:23, RVG). El nombrado de Roma que había matado a un apóstol por la mañana estaba siendo consumido por gusanos antes del anochecer. <em>"Mas la palabra del Señor crecía y se multiplicaba"</em> (Hechos 12:24, RVG). Herodes está muerto. La iglesia está viva. Ese es el veredicto.</p>
+
+        <h2>VIII. Lleve a casa estas tres lecciones</h2>
+        <p>Primero, <strong>Dios no es recibidor de rostros</strong>. El mismo Cristo murió por el centurión en Cesarea y por el pescador en Galilea y por la ama de casa en Chapala. El arrepentimiento para vida ha sido concedido a toda nación. Dejen de clasificar a los pecadores en una escala de cuán fáciles deberían ser de convertir. Cornelio fue más fácil que Saulo, Saulo fue más fácil que los verdugos de Esteban, y sin embargo el Señor los salvó a todos.</p>
+
+        <p>Segundo, <strong>donde se mueve la mano del Señor, siguen conversiones, comisiones y celebraciones</strong>. Búsquenlas en su propio ministerio. Si su iglesia no tiene ninguna de las tres, pregúntense si están apoyándose en un método cuando deberían estar apoyándose en el Señor. Gales no comenzó con una campaña de mercadeo. Comenzó con una niña tímida diciendo que amaba al Señor Jesús con todo su corazón.</p>
+
+        <p>Tercero, <strong>los reyes mueren y la palabra crece</strong>. Hechos 12 termina con uno de los grandes contrastes de la Escritura: un déspota comido por gusanos en Cesarea y un evangelio que se multiplica de un extremo del imperio al otro. La próxima vez que las noticias del cable los depriman, lean Hechos 12:23–24 en sucesión. Los Herodes de cada época caen. La palabra de Dios siempre crece. Él entierra a Sus enterradores.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></span><span class="lang-es"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></span></p>
+    <div class="exam-status hidden" id="examStatus"></div>
+<div class="mc-section" id="mcSection">
+  <h3><span class="lang-en">Multiple Choice &mdash; 20 Questions</span><span class="lang-es">Opción Múltiple &mdash; 20 Preguntas</span></h3>
+  <div id="mcContainer"></div>
+</div>
+<div class="sa-section" id="saSection">
+  <h3><span class="lang-en">Short Answer &mdash; 10 Questions <span class="sa-badge" id="saBadgeEn"></span></span><span class="lang-es">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="saBadgeEs"></span></span></h3>
+  <p class="sa-note"><span class="lang-en" id="saNoteEn"></span><span class="lang-es" id="saNoteEs"></span></p>
+  <div id="kwContainer"></div>
+</div>
+<div style="margin-top: 20px;">
+  <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+  <button id="resetExamBtn" class="btn-reset" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+  <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+</div>
+</div>
+
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+
+const TOTAL_UNITS = 11;
+const CURRENT_UNIT = 5;
+const NEXT_URL = 'CTSActsUnit6.html';
+
+// === MC + SA data (preserved verbatim from upstream) ===
+const mcQuestions = [
+    { textEn: "1. The man Peter healed at Lydda was named:", textEs: "1. El hombre que Pedro sanó en Lida se llamaba:", optionsEn: ["Aeneas, paralyzed eight years", "Bartimaeus, blind from birth", "Lazarus of Bethany", "Malchus, ear severed"], optionsEs: ["Eneas, paralítico ocho años", "Bartimeo, ciego de nacimiento", "Lázaro de Betania", "Malco, oreja cortada"], correct: 0 },
+    { textEn: "2. The Greek name Dorcas (Aramaic Tabitha) means:", textEs: "2. El nombre griego Dorcas (en arameo Tabita) significa:", optionsEn: ["Dove", "Gazelle", "Lily", "Beloved"], optionsEs: ["Paloma", "Gacela", "Lirio", "Amada"], correct: 1 },
+    { textEn: "3. When Peter raised Tabitha he echoed his Master's words from Mark 5:41 — Talitha cumi. Peter said:", textEs: "3. Cuando Pedro levantó a Tabita repitió las palabras de su Maestro en Marcos 5:41 — Talita cumi. Pedro dijo:", optionsEn: ["Lazarus, come forth", "Maranatha", "Tabitha, arise", "Be still"], optionsEs: ["Lázaro, ven fuera", "Maranata", "Tabita, levántate", "Calla"], correct: 2 },
+    { textEn: "4. Cornelius lived in:", textEs: "4. Cornelio vivía en:", optionsEn: ["Caesarea, on the Mediterranean coast", "Joppa", "Capernaum", "Rome itself"], optionsEs: ["Cesarea, en la costa mediterránea", "Jope", "Capernaum", "Roma misma"], correct: 0 },
+    { textEn: "5. Cornelius was a centurion of the:", textEs: "5. Cornelio era centurión de la:", optionsEn: ["Praetorian Guard", "Tenth Legion", "Augustan Cohort", "Italian Regiment"], optionsEs: ["Guardia Pretoriana", "Décima Legión", "Cohorte Augusta", "Compañía Italiana"], correct: 3 },
+    { textEn: "6. Peter was lodging in Joppa with:", textEs: "6. Pedro se hospedaba en Jope con:", optionsEn: ["A Pharisee", "Simon a tanner (whose trade made him ceremonially unclean)", "His brother Andrew", "A wealthy widow"], optionsEs: ["Un fariseo", "Simón curtidor (cuyo oficio lo hacía ceremonialmente impuro)", "Su hermano Andrés", "Una viuda rica"], correct: 1 },
+    { textEn: "7. The vision Peter saw on the rooftop was a sheet let down containing:", textEs: "7. La visión que Pedro vio en la azotea era un lienzo que descendía con:", optionsEn: ["Bread and wine", "Olive branches", "Every kind of four-footed beast, reptile, and bird (including unclean animals)", "Roman coins"], optionsEs: ["Pan y vino", "Ramas de olivo", "Toda clase de cuadrúpedos, reptiles y aves (incluyendo animales impuros)", "Monedas romanas"], correct: 2 },
+    { textEn: "8. The vision came to Peter how many times before the men from Caesarea arrived?", textEs: "8. La visión vino a Pedro ¿cuántas veces antes de que llegaran los hombres de Cesarea?", optionsEn: ["Once", "Twice", "Seven times", "Three times"], optionsEs: ["Una vez", "Dos veces", "Siete veces", "Tres veces"], correct: 3 },
+    { textEn: "9. Peter understood the vision was not really about food but about:", textEs: "9. Pedro entendió que la visión no era realmente sobre comida sino sobre:", optionsEn: ["People — that no man should be called common or unclean", "Animal sacrifice", "The temple", "The Sabbath"], optionsEs: ["Personas — que a ningún hombre debía llamar común o inmundo", "El sacrificio de animales", "El templo", "El día de reposo"], correct: 0 },
+    { textEn: "10. Peter's opening line of his sermon to Cornelius's household was:", textEs: "10. La línea inicial del sermón de Pedro a la casa de Cornelio fue:", optionsEn: ["Repent and be baptized", "I am the resurrection and the life", "Behold the Lamb of God", "In truth I perceive that God shows no partiality"], optionsEs: ["Arrepentíos y bautizaos", "Yo soy la resurrección y la vida", "He aquí el Cordero de Dios", "Por verdad hallo que Dios no hace acepción de personas"], correct: 3 },
+    { textEn: "11. The Holy Spirit fell on Cornelius's household:", textEs: "11. El Espíritu Santo cayó sobre la casa de Cornelio:", optionsEn: ["After they were all baptized", "While Peter was still speaking these words", "After a forty-day fast", "Once a year had passed"], optionsEs: ["Después de que todos fueran bautizados", "Mientras Pedro aún hablaba estas palabras", "Después de un ayuno de cuarenta días", "Después de pasado un año"], correct: 1 },
+    { textEn: "12. Defending himself in Jerusalem, Peter concluded with the question:", textEs: "12. Defendiéndose en Jerusalén, Pedro concluyó con la pregunta:", optionsEn: ["Who is my neighbor?", "Who was I that I could withstand God?", "Why have you forsaken me?", "Are not all the apostles?"], optionsEs: ["¿Quién es mi prójimo?", "¿Quién era yo que pudiese estorbar a Dios?", "¿Por qué me has desamparado?", "¿No son todos apóstoles?"], correct: 1 },
+    { textEn: "13. The scattered believers from Acts 8 who founded the church at Antioch were originally from:", textEs: "13. Los creyentes esparcidos de Hechos 8 que fundaron la iglesia en Antioquía eran originalmente de:", optionsEn: ["Galilee and Judea only", "Rome and Alexandria", "Cyprus and Cyrene, who began speaking to the Greeks too", "Damascus and Tarsus"], optionsEs: ["Solo de Galilea y Judea", "Roma y Alejandría", "Chipre y Cirene, que comenzaron a hablar también a los griegos", "Damasco y Tarso"], correct: 2 },
+    { textEn: "14. Acts 11:21 says about Antioch:", textEs: "14. Hechos 11:21 dice acerca de Antioquía:", optionsEn: ["The hand of the Lord was with them, and a great number believed", "The temple was rebuilt", "The persecution was lifted", "The Sanhedrin sent emissaries"], optionsEs: ["La mano del Señor era con ellos, y un gran número creyó", "El templo fue reconstruido", "La persecución se levantó", "El Sanedrín envió emisarios"], correct: 0 },
+    { textEn: "15. The Jerusalem church sent which man to investigate Antioch?", textEs: "15. La iglesia de Jerusalén envió ¿a qué hombre a investigar Antioquía?", optionsEn: ["Peter", "James", "Barnabas (the Son of Encouragement)", "Philip the deacon"], optionsEs: ["Pedro", "Jacobo", "Bernabé (el Hijo de Consolación)", "Felipe el diácono"], correct: 2 },
+    { textEn: "16. When Barnabas saw the Antioch revival had outgrown one preacher, he went to fetch:", textEs: "16. Cuando Bernabé vio que el avivamiento de Antioquía había sobrepasado a un solo predicador, fue a buscar a:", optionsEn: ["Apollos", "Mark", "Saul, in Tarsus", "Silas"], optionsEs: ["Apolos", "Marcos", "Saulo, en Tarso", "Silas"], correct: 2 },
+    { textEn: "17. The disciples were first called 'Christians' (Greek Christianoi, 'Christ's people') in:", textEs: "17. Los discípulos fueron llamados 'cristianos' (griego Christianoi, 'los de Cristo') por primera vez en:", optionsEn: ["Antioch", "Jerusalem", "Caesarea", "Rome"], optionsEs: ["Antioquía", "Jerusalén", "Cesarea", "Roma"], correct: 0 },
+    { textEn: "18. The first apostle to be martyred was:", textEs: "18. El primer apóstol martirizado fue:", optionsEn: ["Peter", "Stephen the deacon (he was not an apostle)", "John the Beloved", "James the brother of John, killed by the sword by Herod Agrippa I"], optionsEs: ["Pedro", "Esteban el diácono (no era apóstol)", "Juan el Amado", "Jacobo el hermano de Juan, muerto a espada por Herodes Agripa I"], correct: 3 },
+    { textEn: "19. When Peter, freed from prison by an angel, knocked at Mary's gate, the servant girl Rhoda:", textEs: "19. Cuando Pedro, liberado de la prisión por un ángel, tocó a la puerta de María, la criada Rode:", optionsEn: ["Opened the gate immediately", "Was so overjoyed she forgot to open the gate and ran inside to announce him", "Did not recognize his voice", "Reported him to the authorities"], optionsEs: ["Abrió la puerta inmediatamente", "Se gozó tanto que se olvidó de abrir la puerta y corrió adentro a anunciarlo", "No reconoció su voz", "Lo denunció a las autoridades"], correct: 1 },
+    { textEn: "20. Herod Agrippa I's death is described in Acts 12:23 as:", textEs: "20. La muerte de Herodes Agripa I es descrita en Hechos 12:23 como:", optionsEn: ["A peaceful old age", "A military assassination", "Drowning at sea", "Struck by an angel of the Lord and eaten by worms because he did not give glory to God"], optionsEs: ["Una vejez pacífica", "Un asesinato militar", "Ahogamiento en el mar", "Herido por un ángel del Señor y comido por gusanos porque no dio la gloria a Dios"], correct: 3 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Discuss the symbolic significance of Peter lodging at the home of Simon the tanner before his vision in Joppa. How does Luke set up the Cornelius episode through such small details?", textEs: "21. Discuta el significado simbólico de que Pedro se hospedara en casa de Simón el curtidor antes de su visión en Jope. ¿Cómo prepara Lucas el episodio de Cornelio a través de pequeños detalles?", kwEn: ["simon", "tanner", "unclean", "prepar", "corneli", "vision", "lodg", "joppa"], kwEs: ["simón", "curtidor", "inmund", "prepar", "cornelio", "visión", "hosped", "jope"] , modelEn: "Peter was lodging in Joppa at the house of Simon a tanner, whose trade kept him ceremonially unclean by traditional Jewish standards, one of Luke's quiet little setups. By placing Peter under the roof of a man the purity code marked as unclean, Luke is already loosening Peter's grip on those boundaries before the rooftop vision ever comes. Through such small details Luke prepares the Cornelius episode: the apostle who will be told 'do not call unclean what God has cleansed' is already, without realizing it, living with the unclean.", modelEs: "Pedro se hospedaba en Jope en casa de Simón el curtidor, cuyo oficio lo mantenía ceremonialmente inmundo según las normas judías tradicionales, uno de los pequeños arreglos silenciosos de Lucas. Al poner a Pedro bajo el techo de un hombre que el código de pureza marcaba como inmundo, Lucas ya está aflojando el apego de Pedro a esas fronteras antes de la visión en la azotea. Mediante tales detalles prepara el episodio de Cornelio: el apóstol a quien se le dirá 'no llames inmundo lo que Dios limpió' ya vive, sin darse cuenta, con lo inmundo." },
+    { textEn: "22. Explain Peter's rooftop vision (Acts 10:9-16). Why was the vision repeated three times, and why does Peter not realize at first that it is about people rather than food?", textEs: "22. Explique la visión de Pedro en la azotea (Hechos 10:9-16). ¿Por qué se repitió la visión tres veces, y por qué Pedro no se da cuenta al principio de que se trata de personas y no de comida?", kwEn: ["sheet", "three", "unclean", "people", "vision", "animal", "gentil", "repeat"], kwEs: ["lienzo", "tres", "inmund", "person", "visión", "animal", "gentil", "repet"] , modelEn: "On the rooftop Peter saw a sheet lowered from heaven full of animals the dietary law forbade, with the command 'kill and eat,' and the vision was repeated three times. The threefold repetition pressed the lesson past Peter's deep resistance — he had never eaten anything unclean — and underscored that God truly meant it. Peter did not realize at first that it was about people, not food, because the dietary code had been the very fence separating Jew from Gentile; only when the men from Caesarea arrived did he see the vision meant that no person is to be called common or unclean.", modelEs: "En la azotea Pedro vio un lienzo descender del cielo lleno de animales que la ley dietética prohíba, con la orden 'mata y come', y la visión se repitió tres veces. La repetición triple grabó la lección más allá de la profunda resistencia de Pedro — nunca había comido nada inmundo — y subrayó que Dios lo decía en serio. Pedro no se dio cuenta al principio de que se trataba de personas y no de comida, porque el código dietético había sido la cerca que separaba al judío del gentil; solo cuando llegaron los hombres de Cesarea vio que la visión significaba que a ninguna persona se le ha de llamar común o inmunda." },
+    { textEn: "23. The phrase 'God shows no partiality' (Acts 10:34) is foundational to Christian missions. How does this principle reshape how the church views ethnicity and nationality?", textEs: "23. La frase 'Dios no hace acepción de personas' (Hechos 10:34) es fundamental para las misiones cristianas. ¿Cómo reformula este principio la manera en que la iglesia ve la etnicidad y la nacionalidad?", kwEn: ["partial", "nation", "miss", "equal", "ethnic", "gentil", "show", "respect"], kwEs: ["acepc", "nación", "misión", "igual", "étnic", "gentil", "muestr", "respet"] , modelEn: "Peter's sermon opens with a foundational missions truth: God shows no partiality — literally, He is not a face-receiver — but in every nation whoever fears Him is accepted. This reshapes how the church views ethnicity and nationality: no people group has a genetic or cultural advantage at the foot of the cross, and the same gospel comes on the same terms to every nation. It demolishes any ranking by ethnic background or passport, demands equal respect for every person, and shows the missionary thrust toward the Gentiles.", modelEs: "El sermón de Pedro abre con una verdad fundamental para las misiones: Dios no hace acepción de personas — literalmente, no es un recibidor de rostros — sino que en toda nación el que le teme es aceptado. Esto reformula cómo la iglesia ve lo étnico y la nacionalidad: ningún pueblo tiene ventaja genética ni cultural al pie de la cruz, y el mismo evangelio llega en los mismos términos a toda nación. Derriba todo ranking por raza o pasaporte, exige igual respeto por cada persona, y muestra el impulso misionero hacia los gentiles." },
+    { textEn: "24. Discuss Peter's defense of his ministry to Cornelius before the Jerusalem church (Acts 11:1-18). What does the Jerusalem church's response teach about gospel humility?", textEs: "24. Discuta la defensa de Pedro de su ministerio a Cornelio ante la iglesia de Jerusalén (Hechos 11:1-18). ¿Qué enseña la respuesta de la iglesia de Jerusalén sobre la humildad evangélica?", kwEn: ["peter", "defen", "withstand", "jerusal", "humil", "gentil", "spirit", "fell"], kwEs: ["pedro", "defen", "resist", "jerusal", "humild", "gentil", "espíritu", "cay"] , modelEn: "Back in Jerusalem the circumcised believers confronted Peter for eating with Gentiles, and he defended his ministry to Cornelius by recounting the vision and how the Holy Spirit fell on the Gentiles just as on the Jews. He ended, 'who was I that I could withstand God?' The Jerusalem church's response teaches gospel humility: confronted with what God had plainly done, they fell silent and glorified God rather than defend their prejudice. True humility submits its theology to the evidence of the Spirit's work, even when it overturns long-held assumptions.", modelEs: "De vuelta en Jerusalén los creyentes circuncidados confrontaron a Pedro por comer con gentiles, y él defendió su ministerio a Cornelio relatando la visión y cómo el Espíritu Santo cayó sobre los gentiles igual que sobre los judíos. Terminó: '¿quién era yo para resistir a Dios?' La respuesta de la iglesia de Jerusalén enseña la humildad evangélica: ante lo que Dios había hecho claramente, callaron y glorificaron a Dios en vez de defender su prejuicio. La verdadera humildad somete su teología a la evidencia de la obra del Espíritu." },
+    { textEn: "25. Acts 11:21 says 'the hand of the Lord was with them.' Discuss the three-fold pattern that follows when the hand of the Lord moves: conversions, commissions, and celebrations.", textEs: "25. Hechos 11:21 dice 'la mano del Señor era con ellos.' Discuta el patrón triple que sigue cuando la mano del Señor se mueve: conversiones, comisiones y celebraciones.", kwEn: ["hand", "lord", "convers", "commis", "celeb", "antio", "spirit", "move"], kwEs: ["mano", "señor", "convers", "comis", "celeb", "antio", "espíritu", "mov"] , modelEn: "When the hand of the Lord was with them at Antioch, a three-fold pattern followed. First came conversions — a great number believed and turned to the Lord. Then came commissions — the church sent Barnabas, who fetched Saul, and the work was organized and extended. Then came celebrations — Barnabas, seeing the grace of God, was glad, for where the Spirit moves there is joy. Wherever the hand of the Lord truly moves, these three follow together; a sour, joyless church is not an awakened one.", modelEs: "Cuando la mano del Señor era con ellos en Antioquía, siguió un patrón triple. Primero vinieron conversiones — un gran número creyó y se volvió al Señor. Luego comisiones — la iglesia envió a Bernabé, quien trajo a Saulo, y la obra se organizó y extendió. Luego celebraciones — Bernabé, viendo la gracia de Dios, se alegró, porque donde hay movimiento del Espíritu hay gozo. Dondequiera que la mano del Señor verdaderamente se mueve, estas tres siguen juntas; una iglesia agria y sin gozo no es una iglesia avivada." },
+    { textEn: "26. The Welsh Revival of 1904-05 began with a timid girl, Flory Evans, saying 'I love the Lord Jesus with all my heart.' Discuss the parallel between this story and Antioch and what it teaches about how revival begins.", textEs: "26. El Avivamiento Galés de 1904-05 comenzó con una niña tímida, Flory Evans, diciendo 'Yo amo al Señor Jesús con todo mi corazón.' Discuta el paralelo entre esta historia y Antioquía y lo que enseña sobre cómo comienza un avivamiento.", kwEn: ["welsh", "flory", "evans", "jenkins", "antioch", "reviv", "girl", "love"], kwEs: ["galés", "flory", "evans", "jenkins", "antio", "avivam", "niña", "amo"] , modelEn: "In 1904 pastor Joseph Jenkins asked his young people what Jesus meant to them, and after embarrassed silence a timid girl named Flory Evans, three weeks converted, stood and said, 'I love the Lord Jesus with all my heart' — and within weeks the Welsh Revival swept the nation, a hundred thousand converted in five months. The parallel to Antioch is that revival begins not with a campaign but with the hand of the Lord stirring ordinary, sincere love for Christ. God lit Antioch and Wales the same way: through humble believers, even one timid girl whose love for Jesus overflowed.", modelEs: "En 1904 el pastor Joseph Jenkins preguntó a sus jóvenes qué significaba Jesús para ellos, y tras un silencio incómodo una niña tímida llamada Flory Evans, convertida hacía tres semanas, se puso de pie y dijo: 'Yo amo al Señor Jesús con todo mi corazón' — y en pocas semanas el Avivamiento Galés barrió la nación, cien mil convertidos en cinco meses. El paralelo con Antioquía es que el avivamiento comienza no con una campaña sino con la mano del Señor avivando un amor sincero y ordinario por Cristo. Dios encendió Antioquía y Gales de la misma manera: por medio de creyentes humildes, hasta una niña tímida." },
+    { textEn: "27. The disciples were first called 'Christians' at Antioch. Discuss the original derisive sense of the term and what it means for believers today to bear the label.", textEs: "27. Los discípulos fueron llamados 'cristianos' por primera vez en Antioquía. Discuta el sentido despectivo original del término y lo que significa para los creyentes hoy llevar la etiqueta.", kwEn: ["christ", "christian", "antio", "label", "name", "deris", "first", "called"], kwEs: ["cristo", "cristian", "antio", "apelat", "nombre", "burla", "primer", "llam"] , modelEn: "The disciples were first called Christians at Antioch, and the term Christianoi seems to have begun as a slightly derisive label — 'little Christs' or 'Christ's people' — pinned on them by pagans who noticed they constantly talked about, dressed like, and sounded like Christ. The believers wore the name forever. For Christians today it means bearing a label that should still fit: to be called by Christ's name is to live so saturated with Him that watching neighbors feel the need to name us after Him.", modelEs: "Los discípulos fueron llamados cristianos por primera vez en Antioquía, y el término Christianoi parece haber comenzado como un apelativo de burla algo despectivo — 'pequeños Cristos' o 'los de Cristo' — puesto por paganos que notaban que hablaban, vestían y sonaban como Cristo. Los creyentes llevaron el nombre para siempre. Para los cristianos de hoy significa llevar una etiqueta que aún debería ajustar: ser llamado por el nombre de Cristo es vivir tan saturado de Él que los vecinos que observan sientan la necesidad de nombrarnos por Él." },
+    { textEn: "28. The death of James (Acts 12:2) and the deliverance of Peter (Acts 12:7-11) happen in the same chapter. What does the contrast teach about the providence of God in suffering and rescue?", textEs: "28. La muerte de Jacobo (Hechos 12:2) y la liberación de Pedro (Hechos 12:7-11) ocurren en el mismo capítulo. ¿Qué enseña el contraste sobre la providencia de Dios en el sufrimiento y el rescate?", kwEn: ["james", "peter", "provid", "sover", "deliver", "kill", "rescu", "chapter"], kwEs: ["jacobo", "pedro", "provid", "sober", "libera", "matar", "rescat", "capít"] , modelEn: "In one chapter Herod kills James the apostle with the sword, yet an angel delivers Peter from the same prison the same season. The contrast teaches God's providence and sovereignty in both suffering and rescue: James is martyred and Peter is rescued, and Scripture does not explain why one died and one was spared. The Lord is equally sovereign over the apostle He delivers and the apostle He allows to be killed; faithfulness, not outcome, is the constant, and the church kept praying through both.", modelEs: "En un mismo capítulo Herodes mata a espada al apóstol Jacobo, y sin embargo un ángel libera a Pedro de la misma prisión en la misma temporada. El contraste enseña la providencia y soberanía de Dios tanto en el sufrimiento como en el rescate: Jacobo es martirizado y Pedro es rescatado, y la Escritura no explica por qué uno murió y otro fue librado. El Señor es igualmente soberano sobre el apóstol que libera y sobre el que permite matar; la fidelidad, no el resultado, es lo constante, y la iglesia siguió orando por ambos." },
+    { textEn: "29. The story of Rhoda forgetting to open the gate (Acts 12:13-16) is a humorous moment in Acts. What gentle pastoral lesson does Luke embed in the scene?", textEs: "29. La historia de Rode olvidándose de abrir la puerta (Hechos 12:13-16) es un momento humorístico de Hechos. ¿Qué lección pastoral suave incrusta Lucas en la escena?", kwEn: ["rhoda", "rode", "pray", "answer", "door", "faith", "gate", "joy"], kwEs: ["rode", "puerta", "ora", "respond", "fe", "alegr", "abrir", "gozo"] , modelEn: "When Peter knocked, the servant girl Rhoda recognized his voice and was so overjoyed she forgot to open the gate, running back to announce him while Peter kept knocking outside — and the praying believers told her she was crazy. Luke embeds a gentle pastoral lesson: the church was praying earnestly for Peter's release, yet would not believe it when God answered the very prayer. Honest believers admit we often pray for something and then refuse to open the door when the answer arrives; the joy of Rhoda rebukes our small faith.", modelEs: "Cuando Pedro llamó, la criada Rode reconoció su voz y de tanta alegría se olvidó de abrir la puerta, corriendo a anunciarlo mientras Pedro seguía llamando afuera — y los creyentes que oraban le dijeron que estaba loca. Lucas incrusta una suave lección pastoral: la iglesia oraba fervientemente por la liberación de Pedro, y sin embargo no creyó cuando Dios respondió esa misma oración. Los creyentes honestos admiten que a menudo oramos por algo y luego nos negamos a abrir la puerta cuando llega la respuesta; el gozo de Rode reprende nuestra poca fe." },
+    { textEn: "30. Acts 12:23-24 places Herod's death and the gospel's growth in immediate sequence. Discuss how this contrast functions as a theological summary of the entire chapter.", textEs: "30. Hechos 12:23-24 coloca la muerte de Herodes y el crecimiento del evangelio en secuencia inmediata. Discuta cómo este contraste funciona como un resumen teológico de todo el capítulo.", kwEn: ["herod", "worm", "word", "grew", "provid", "kingdom", "die", "spread"], kwEs: ["herod", "gusan", "palabra", "creci", "provid", "reino", "morir", "extend"] , modelEn: "Acts 12:23–24 sets Herod's death beside the gospel's growth in immediate sequence: the king who had killed an apostle was struck by an angel and eaten by worms, and the very next sentence says the word of God grew and multiplied. This contrast is the theological summary of the whole chapter and of history: the proud kings who oppose God's kingdom die, while the word of God always spreads. Herod is dead and the church is alive — God buries His undertakers, and His providence guarantees the word will grow no matter who tries to stop it.", modelEs: "Hechos 12:23–24 coloca la muerte de Herodes junto al crecimiento del evangelio en secuencia inmediata: el rey que había matado a un apóstol fue herido por un ángel y comido de gusanos, y la frase siguiente dice que la palabra de Dios crecía y se multiplicaba. Este contraste es el resumen teológico de todo el capítulo y de la historia: los reyes soberbios que se oponen al reino de Dios están condenados a morir, mientras la palabra de Dios siempre llega a extenderse. Herodes está muerto y la iglesia viva — Dios entierra a sus sepultureros, y Su providencia garantiza que la palabra crecerá sin importar quién intente detenerla." }
+];
+
+// === Language toggle (3-button group) ===
+const langButtons = document.querySelectorAll('.lang-toggle-group button');
+function setLang(lang) {
+  document.body.classList.remove('lang-en','lang-es','lang-both');
+  document.body.classList.add('lang-' + lang);
+  langButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-lang') === lang));
+}
+langButtons.forEach(btn => btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang'))));
+
+// === Student + Track ===
+function readStudent() {
+  try { return JSON.parse(lsGet('cts_student') || 'null'); } catch(e) { return null; }
+}
+function readTrack() {
+  const t = lsGet('cts_track');
+  if (t === 'cert' || t === 'mdiv' || t === 'thm') return t;
+  const st = readStudent();
+  if (st && st.track) return st.track;
+  return 'cert';
+}
+function isMdiv() { const t = readTrack(); return t === 'mdiv' || t === 'thm'; }
+
+// === Greeting + track badge ===
+function applyStudentUI() {
+  const student = readStudent();
+  const isEs = document.body.classList.contains('lang-es');
+  const greetEl = document.getElementById('studentGreeting');
+  const warn = document.getElementById('regWarn');
+  const slot = document.getElementById('trackBadgeSlot');
+  if (student && student.name) {
+    greetEl.innerHTML = '👋 ' + student.name;
+    if (warn) warn.classList.add('hidden');
+    const track = readTrack();
+    const label = track === 'thm' ? 'Th.M.' : (track === 'mdiv' ? 'M.Div' : (isEs ? 'Certificado' : 'Certificate'));
+    if (slot) slot.innerHTML = '<span class="track-badge">' + label + '</span>';
+  } else {
+    greetEl.innerHTML = '<span style="color:#5b3a1f;">' + (isEs ? 'Bienvenido al Intensivo de Hechos' : 'Welcome to the Acts Intensive') + '</span>';
+    if (warn) warn.classList.remove('hidden');
+    if (slot) slot.innerHTML = '';
+  }
+}
+
+// === Registration modal (U1 only) ===
+
+function showRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.remove('hidden');
+}
+function hideRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.add('hidden');
+}
+const regModal = document.getElementById('regModal');
+const openBtn = document.getElementById('openRegBtn');
+const openBtn2 = document.getElementById('openRegBtn2');
+const saveBtn = document.getElementById('regSaveBtn');
+if (openBtn) openBtn.addEventListener('click', showRegModal);
+if (openBtn2) openBtn2.addEventListener('click', showRegModal);
+if (saveBtn) saveBtn.addEventListener('click', () => {
+  const name = (document.getElementById('regName').value || '').trim();
+  const email = (document.getElementById('regEmail').value || '').trim();
+  const track = (document.querySelector('input[name="regTrack"]:checked') || {}).value || 'cert';
+  const isEs = document.body.classList.contains('lang-es');
+  if (!name) {
+    alert(isEs ? 'Por favor ingrese su nombre completo.' : 'Please enter your full name.');
+    return;
+  }
+  const rec = { name: name, email: email, track: track };
+  try {
+    lsSet('cts_student', JSON.stringify(rec));
+    lsSet('cts_track', track);
+  } catch(e) {}
+  hideRegModal();
+  applyStudentUI();
+  applyExamState();
+});
+// Auto-open modal on U1 if no cts_student present
+if (CURRENT_UNIT === 1 && !readStudent()) {
+  showRegModal();
+}
+
+
+// === Progress grid ===
+let progress = {};
+try { progress = JSON.parse(lsGet('cts_acts_progress')) || {}; } catch(e) { progress = {}; }
+function updateProgressGrid() {
+  const grid = document.getElementById('progressGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 1; i <= TOTAL_UNITS; i++) {
+    let cls = '';
+    if (progress['unit' + i]) cls = 'completed';
+    if (i === CURRENT_UNIT) cls += ' active';
+    grid.innerHTML += '<a href="CTSActsUnit' + i + '.html" class="' + cls + '">' + i + '</a>';
+  }
+}
+updateProgressGrid();
+document.getElementById('prevUnitBtn').onclick = () => {};
+document.getElementById('nextUnitBtn').onclick = () => { window.location.href = NEXT_URL; };
+
+// === Per-unit state keys ===
+const MC_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_passed';
+const SA_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_passed';
+const MC_SCORE_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_score';
+const LOCK_MC_KEY = 'cts_acts_u' + CURRENT_UNIT + '_lockout';
+const LOCK_SA_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_lockout';
+
+function mcPassed() { return lsGet(MC_PASSED_KEY) === '1'; }
+function saPassed() { return lsGet(SA_PASSED_KEY) === '1'; }
+function activeLock() {
+  const now = Date.now();
+  const mc = parseInt(lsGet(LOCK_MC_KEY) || '0', 10);
+  const sa = parseInt(lsGet(LOCK_SA_KEY) || '0', 10);
+  if (mcPassed()) { if (now < sa) return { until: sa, scope: 'sa' }; }
+  else { if (now < mc) return { until: mc, scope: 'mc' }; }
+  return null;
+}
+
+// === Render MC ===
+const mcContainer = document.getElementById('mcContainer');
+mcQuestions.forEach((q, idx) => {
+    /* CTS answer-shuffle (anti-gaming): randomize option order on each render */
+    (function(){var _o=q.optionsEn,_s=q.optionsEs,_n=_o.length,_p=[],_k,_i,_j,_t;for(_k=0;_k<_n;_k++){_p.push(_k);}for(_i=_n-1;_i>0;_i--){_j=Math.floor(Math.random()*(_i+1));_t=_p[_i];_p[_i]=_p[_j];_p[_j]=_t;}q.optionsEn=_p.map(function(x){return _o[x];});q.optionsEs=_p.map(function(x){return _s[x];});q.correct=_p.indexOf(q.correct);})();
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'mcq' + (idx + 1);
+  let h = '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>';
+  for (let i = 0; i < q.optionsEn.length; i++) {
+    const letter = 'ABCDEFGHIJ'[i];
+    h += '<button class="option" data-mc="' + idx + '" data-opt="' + i + '" type="button">' +
+         '<strong>' + letter + '.</strong> ' +
+         '<span class="lang-en">' + q.optionsEn[i] + '</span><span class="lang-es">' + q.optionsEs[i] + '</span>' +
+         '</button>';
+  }
+  mcContainer.appendChild(qDiv);
+  qDiv.innerHTML = h;
+  // Click handler on each option
+  qDiv.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (mcPassed()) return;
+      if (qDiv.dataset.answered !== undefined && qDiv.dataset.answered !== '') return;
+      const isEs = document.body.classList.contains('lang-es');
+      const chosen = parseInt(btn.getAttribute('data-opt'), 10);
+      const correct = q.correct;
+      qDiv.dataset.answered = String(chosen);
+      qDiv.querySelectorAll('.option').forEach(b => {
+        const oi = parseInt(b.getAttribute('data-opt'), 10);
+        b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+        if (oi === correct) b.classList.add('correct');
+        else if (oi === chosen) b.classList.add('wrong');
+      });
+      const oldfb = qDiv.querySelector('.feedback-text'); if (oldfb) oldfb.remove();
+      const fb = document.createElement('div');
+      if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+      else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+      qDiv.appendChild(fb);
+    });
+  });
+});
+
+// === Smart keyword matcher (word-boundary, like the other CTS courses) ===
+function kwHit(answer, kw){
+  if(!kw) return false;
+  var a=(answer||'').toLowerCase();
+  var k=String(kw).toLowerCase().trim();
+  if(!k) return false;
+  var esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var L='0-9a-zA-Z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1';
+  var re = k.length<=4 ? new RegExp('(?:^|[^'+L+'])'+esc+'(?!['+L+'])') : new RegExp('(?:^|[^'+L+'])'+esc);
+  return re.test(a);
+}
+function saHits(idx){
+  var ta=document.querySelector('.kw-answer[data-sa="'+idx+'"]');
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var kws=isEs?(q.kwEs||[]):(q.kwEn||[]);
+  var ans=(ta&&ta.value)||'';
+  var n=0; kws.forEach(function(k){ if(kwHit(ans,k)) n++; });
+  return n;
+}
+function revealSAModel(idx){
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var box=document.getElementById('saModel'+idx);
+  if(!box) return;
+  var head=isEs?'Respuesta modelo \u2014 est\u00fadiela':'Model answer \u2014 study this';
+  box.innerHTML='<strong>'+head+':</strong><br>'+(isEs?(q.modelEs||''):(q.modelEn||''));
+  box.style.display='block';
+}
+
+// === Render SA ===
+const kwContainer = document.getElementById('kwContainer');
+kwQuestions.forEach((q, idx) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'saq' + (idx + 1);
+  qDiv.innerHTML =
+    '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>' +
+    '<textarea class="kw-answer" data-sa="' + idx + '" placeholder=""></textarea>' +
+    '<button class="small check-kw-btn" type="button"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>' +
+    '<div class="feedback-text" id="saFb' + idx + '" style="display:none"></div>' +
+    '<div class="sa-model" id="saModel' + idx + '" style="display:none"></div>';
+  kwContainer.appendChild(qDiv);
+  const btn = qDiv.querySelector('.check-kw-btn');
+  const ta = qDiv.querySelector('.kw-answer');
+  btn.addEventListener('click', () => {
+    const isEs = document.body.classList.contains('lang-es');
+    const fb = document.getElementById('saFb' + idx);
+    const ans = (ta.value || '').trim();
+    if(!ans){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba su respuesta primero, luego verifique.' : 'Write your answer first, then check.';
+      var mb=document.getElementById('saModel'+idx); if(mb) mb.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    if(ans.length < 100){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.';
+      var mb2=document.getElementById('saModel'+idx); if(mb2) mb2.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    const hits = saHits(idx);
+    const ok = hits >= 3;
+    qDiv.dataset.answered = ok ? '1' : '0';
+    fb.className = 'feedback-text ' + (ok ? 'correct' : 'incorrect');
+    fb.style.display = 'block';
+    fb.textContent = ok
+      ? (isEs ? ('\u2713 Suficientes palabras clave (' + hits + ').') : ('\u2713 Sufficient keywords (' + hits + ').'))
+      : (isEs ? ('\u2717 A\u00fan no acreditada. Encontr\u00f3 ' + hits + ' de 3.') : ('\u2717 Not yet credited. Found ' + hits + ' of 3.'));
+    revealSAModel(idx);
+  });
+});
+
+// === UI state machine ===
+const mcSection = document.getElementById('mcSection');
+const saSection = document.getElementById('saSection');
+const statusEl = document.getElementById('examStatus');
+const submitBtn = document.getElementById('submitExamBtn');
+const resetBtn = document.getElementById('resetExamBtn');
+const resultEl = document.getElementById('examResult');
+
+function setStatus(cls, en, es) {
+  statusEl.className = 'exam-status ' + cls;
+  statusEl.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function clearStatus() { statusEl.className = 'exam-status hidden'; statusEl.innerHTML = ''; }
+function lockMcAsReview() {
+  document.querySelectorAll('#mcContainer .question').forEach(q => {
+    q.classList.add('review-locked');
+    q.querySelectorAll('.option').forEach(b => { b.disabled = true; });
+  });
+}
+
+function revealMC() {
+  const isEs = document.body.classList.contains('lang-es');
+  for (let i = 0; i < mcQuestions.length; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (!qd) continue;
+    const correct = mcQuestions[i].correct;
+    const chosen = (qd.dataset.answered !== undefined && qd.dataset.answered !== '') ? parseInt(qd.dataset.answered, 10) : -1;
+    qd.querySelectorAll('.option').forEach(b => {
+      const oi = parseInt(b.getAttribute('data-opt'), 10);
+      b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+      if (oi === correct) b.classList.add('correct');
+      else if (oi === chosen) b.classList.add('wrong');
+    });
+    let fb = qd.querySelector('.feedback-text');
+    if (!fb) { fb = document.createElement('div'); qd.appendChild(fb); }
+    if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+    else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+  }
+}
+
+
+function applyExamState() {
+  const isEs = document.body.classList.contains('lang-es');
+  // SA section is ALWAYS visible
+  saSection.style.display = '';
+  const badgeEn = document.getElementById('saBadgeEn');
+  const badgeEs = document.getElementById('saBadgeEs');
+  const noteEn = document.getElementById('saNoteEn');
+  const noteEs = document.getElementById('saNoteEs');
+  if (isMdiv()) {
+    badgeEn.textContent = 'Required for M.Div';
+    badgeEs.textContent = 'Requerido para M.Div';
+    noteEn.textContent = 'These 10 short-answer questions are required to complete Unit ' + CURRENT_UNIT + ' on the M.Div track. You must pass at 9 of 10.';
+    noteEs.textContent = 'Estas 10 preguntas de respuesta corta son requeridas para completar la Unidad ' + CURRENT_UNIT + ' en la vía M.Div. Debe aprobar con 9 de 10.';
+  } else {
+    badgeEn.textContent = 'Self-study — not graded for Certificate';
+    badgeEs.textContent = 'Auto-estudio — no cuenta para Certificado';
+    noteEn.textContent = 'These are the M.Div-level questions. Certificate students are welcome to attempt them for self-check; your answers will not affect your Unit ' + CURRENT_UNIT + ' pass status.';
+    noteEs.textContent = 'Estas son las preguntas de nivel M.Div. Los estudiantes de Certificado pueden intentarlas para auto-evaluarse; sus respuestas no afectarán el estado de aprobación de la Unidad ' + CURRENT_UNIT + '.';
+  }
+  const lock = activeLock();
+  if (lock) {
+    const minsLeft = Math.ceil((lock.until - Date.now()) / 60000);
+    submitBtn.disabled = true;
+    if (lock.scope === 'mc') {
+      setStatus('locked',
+        'Exam locked. Try again in ' + minsLeft + ' minute(s). The full exam will reset.',
+        'Examen bloqueado. Intente de nuevo en ' + minsLeft + ' minuto(s). El examen completo se reiniciará.');
+    } else {
+      setStatus('locked',
+        'Short-answer section locked. Try again in ' + minsLeft + ' minute(s). Multiple-choice pass is preserved.',
+        'Sección de respuesta corta bloqueada. Intente de nuevo en ' + minsLeft + ' minuto(s). Su aprobación de opción múltiple se conserva.');
+      lockMcAsReview();
+    }
+    setTimeout(applyExamState, 30000);
+    return;
+  }
+  submitBtn.disabled = false;
+  if (mcPassed()) {
+    lockMcAsReview();
+    if (isMdiv() && !saPassed()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed (saved). Complete the 10 short-answer questions to finish Unit ' + CURRENT_UNIT + '.',
+        'Opción múltiple aprobada (guardada). Complete las 10 preguntas de respuesta corta para terminar la Unidad ' + CURRENT_UNIT + '.');
+    } else if (!isMdiv()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed. Unit ' + CURRENT_UNIT + ' complete for Certificate track.',
+        'Opción múltiple aprobada. Unidad ' + CURRENT_UNIT + ' completa para la vía Certificado.');
+    } else {
+      clearStatus();
+    }
+  } else {
+    clearStatus();
+  }
+}
+
+submitBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const lock = activeLock();
+  if (lock) { applyExamState(); return; }
+
+  // Score MC
+  let mc = 0;
+  for (let i = 0; i < 20; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (qd && qd.dataset.answered !== undefined && parseInt(qd.dataset.answered, 10) === mcQuestions[i].correct) mc++;
+  }
+  if (mcPassed()) {
+    mc = parseInt(lsGet(MC_SCORE_KEY) || '18', 10);
+  }
+  const mcPass = mc >= 18;
+  revealMC();
+
+  // Score SA (recompute with the smart matcher; reveal models on masters submit)
+  let sa = 0;
+  for (let i = 0; i < 10; i++) {
+    if (saHits(i) >= 3) sa++;
+    if (isMdiv()) revealSAModel(i);
+  }
+  const saPass = sa >= 9;
+
+  if (!isMdiv()) {
+    // Certificate track — only MC matters
+    if (mcPass) {
+      lsSet(MC_PASSED_KEY, '1');
+      lsSet(MC_SCORE_KEY, String(mc));
+      progress['unit' + CURRENT_UNIT] = true;
+      lsSet('cts_acts_progress', JSON.stringify(progress));
+      resultEl.style.color = '#1f6b3b';
+      resultEl.textContent = (isEs
+        ? '¡Aprobado! OM ' + mc + '/20. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+        : 'Passed! MC ' + mc + '/20. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+    } else {
+      lsSet(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+    }
+    return;
+  }
+
+  // M.Div track
+  if (!mcPassed()) {
+    if (!mcPass) {
+      lsSet(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min. Examen completo se reiniciará.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min. Full exam will reset.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+      return;
+    }
+    lsSet(MC_PASSED_KEY, '1');
+    lsSet(MC_SCORE_KEY, String(mc));
+  }
+  if (saPass) {
+    lsSet(SA_PASSED_KEY, '1');
+    progress['unit' + CURRENT_UNIT] = true;
+    lsSet('cts_acts_progress', JSON.stringify(progress));
+    const finalMc = parseInt(lsGet(MC_SCORE_KEY) || '18', 10);
+    resultEl.style.color = '#1f6b3b';
+    resultEl.textContent = (isEs
+      ? '¡Aprobado! OM ' + finalMc + '/20, RC ' + sa + '/10. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+      : 'Passed! MC ' + finalMc + '/20, SA ' + sa + '/10. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+  } else {
+    lsSet(LOCK_SA_KEY, String(Date.now() + 15 * 60 * 1000));
+    resultEl.style.color = '#8a1f1f';
+    resultEl.textContent = (isEs
+      ? 'RC ' + sa + '/10. Necesita 9. Sección RC bloqueada 15 min. OM permanece aprobada.'
+      : 'SA ' + sa + '/10. Need 9. SA section locked 15 min. MC pass preserved.');
+    submitBtn.disabled = true;
+    setTimeout(applyExamState, 30000);
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar la Unidad ' + CURRENT_UNIT + '? Esto borrará sus respuestas y el estado de aprobación de OM/RC para esta unidad. (Esto no borra su registro.)'
+    : 'Reset Unit ' + CURRENT_UNIT + '? This will clear your answers and MC/SA pass state for this unit. (Does not clear your registration.)';
+  if (!window.confirm(msg)) return;
+  [MC_PASSED_KEY, SA_PASSED_KEY, LOCK_MC_KEY, LOCK_SA_KEY, MC_SCORE_KEY].forEach(k => lsDel(k));
+  if (progress['unit' + CURRENT_UNIT]) {
+    delete progress['unit' + CURRENT_UNIT];
+    lsSet('cts_acts_progress', JSON.stringify(progress));
+  }
+  window.location.reload();
+});
+
+// Initial render
+applyStudentUI();
+langButtons.forEach(b => b.addEventListener('click', applyStudentUI));
+applyExamState();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSActsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

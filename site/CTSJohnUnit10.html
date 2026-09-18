@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS The Gospel of John &mdash; Unit 10: The Way, the Truth, and the Life / The True Vine</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form label { font-weight:bold; font-size:0.9rem; display:block; margin-top:8px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 11 &rarr;</span><span class="lang-es">Unidad 11 &rarr;</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">&#128214; The Gospel of John &mdash; Unit 10: The Way, the Truth, and the Life / The True Vine</span><span class="lang-es">&#128214; El Evangelio de Juan &mdash; Unidad 10: El Camino, la Verdad y la Vida / La Vid Verdadera</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"I am the way, the truth, and the life. No one comes to the Father except through Me." &mdash; John 14:6 (NKJV)</span><span class="lang-es">&#9889; "Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por m&iacute;." &mdash; Juan 14:6 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard" style="display:none;">
+    <h3><span class="lang-en">Register to Begin</span><span class="lang-es">Reg&iacute;strese para comenzar</span></h3>
+    <p style="font-size:0.9rem;"><span class="lang-en">Your name and track are saved on this device and carry across every unit and every CTS course.</span><span class="lang-es">Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS.</span></p>
+    <label class="lang-en">Full name</label><label class="lang-es">Nombre completo</label>
+    <input type="text" id="regName" placeholder="..." aria-label="...">
+    <label class="lang-en">Email</label><label class="lang-es">Correo electr&oacute;nico</label>
+    <input type="email" id="regEmail" placeholder="..." aria-label="...">
+    <label class="lang-en">Track</label><label class="lang-es">Trayecto</label>
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate / Certificado</option>
+        <option value="mdiv">M.Div.</option>
+        <option value="thm">Th.M.</option>
+    </select>
+    <button id="regBtn" class="nav-btn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top:8px;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h3>Introduction &mdash; In the Upper Room</h3>
+<p>On the night before the cross, Jesus gathered His disciples in the upper room and gave them His final, most intimate teaching. It was, in a sense, their graduation from His seminary, with the Master Himself as the keynote speaker: summarizing what they must never forget, warning them of the trials to come, and pointing them to the truths they would live and die by. In these chapters two more of His great "I AM" sayings appear, and with them the seven are complete: the bread, the light, the door, the good shepherd, the resurrection and the life &mdash; and now the way, and the true vine. The first tells us how to come to the Father; the second tells us how to stay alive once we have come. Together they answer the two deepest questions of the soul: How do I get home to God? And how do I live until I get there?</p>
+
+<h3>I. "Let Not Your Heart Be Troubled"</h3>
+<p>He begins with comfort, for their hearts were breaking: <em>"Let not your heart be troubled; you believe in God, believe also in Me. In My Father's house are many mansions... I go to prepare a place for you. And if I go and prepare a place for you, I will come again and receive you to Myself; that where I am, there you may be also"</em> (John 14:1&ndash;3). Heaven is not wishful thinking or "pie in the sky." It is a real place &mdash; the Father's house, the believer's true home. The word translated "mansions" simply means rooms, abiding places; we are not promised marble palaces but a place prepared by Christ Himself, and every prepared place will be beautiful.</p>
+<div class="illustration"><strong>"Come home."</strong> A widow once lived with her small son in a bare attic, far from the homeland she had left, against her family's wishes, to marry a man who had since died and left them nothing. The happiest hours of the boy's life were when his mother gathered him up and told him of her father's house in the old country &mdash; the green lawns, the great trees, the wonderful meals. He had never seen it, yet it became the most beautiful place in the world to him, and he longed to go. Then one day a letter came. Inside was money for the journey and a slip of paper with two words in his grandfather's hand: "Come home." That is the heart of what Jesus says. He has gone ahead to the Father's house, and one day the word will come for us too.</div>
+
+<h3>II. "I Am the Way, the Truth, and the Life"</h3>
+<p>Thomas, ever the honest doubter, broke in: "Lord, we do not know where You are going, and how can we know the way?" Jesus did not hand him a map or a set of directions. He gave him a Person: <em>"I am the way, the truth, and the life. No one comes to the Father except through Me"</em> (John 14:6). Each word answers a need. <strong>He is the Way</strong> &mdash; and the opposite of the way is being lost. Not every road reaches the destination, however sincerely it is traveled; Jesus said there are finally only two roads, the broad way that many take and that ends in destruction, and the narrow way of humility and obedience that few find. And He says plainly that He Himself is the one Way to the Father; every other road that promises to reach God while going around Him falls short. <strong>He is the Truth</strong> &mdash; not merely a teacher of true things but the Truth in person, so that to know Him is to know what is real. <strong>He is the Life</strong> &mdash; and the person without Him is not merely uneducated or unlucky but spiritually dead, alive to the world yet dead to God. Only Christ can make such a one truly alive, giving both an abundant life now and eternal life forever.</p>
+<div class="illustration"><strong>"I didn't say religion."</strong> As a restless young man, Josh McDowell tried church, prestige, and parties, and found his life empty &mdash; "a living hell," he said. Drawn in spite of himself to a group of Christians whose joy he could not explain, he leaned back in his chair and demanded, "Tell me &mdash; what changed your lives?" A young woman looked him straight in the eye and said two words: "Jesus Christ." He snapped back that he was fed up with religion. She answered, "Mister, I didn't say religion. I said Jesus Christ." That distinction undid him, and after long study of the evidence he came to confess that Jesus is exactly who He claimed to be &mdash; the only way to the Father.</div>
+
+<h3>III. "I Am the True Vine"</h3>
+<p>Still in that room, Jesus reached for a picture every one of them knew, and gave the last of the seven sayings: <em>"I am the true vine, and My Father is the vinedresser"</em> (John 15:1). Near London there grows a grapevine called the Great Vine, planted over two hundred and fifty years ago, with a root two feet thick and branches stretching two hundred feet, still bearing hundreds of pounds of grapes each year. But Jesus is the <em>true</em> vine, the real source of life, and the Father is the gardener. A good vinedresser is far more than a farmer: he knows each vine intimately, how it fares from year to year, what it needs and when, even the exact place and angle to cut. And cut he does. <em>"Every branch that bears fruit He prunes, that it may bear more fruit"</em> (John 15:2). Pruning is not punishment; it is love with a knife. Sometimes the Father cuts away what is plainly dead, but often He cuts away even the good and the better, so that we may have the best. It hurts, but it helps. Paul begged three times for his thorn to be taken away, and instead was told, "My grace is sufficient for you"; the very thing he wanted removed was the Gardener's tool to make him more fruitful.</p>
+
+<h3>IV. "Abide in Me"</h3>
+<p>At the center of the picture is one repeated command: <em>"Abide in Me, and I in you. As the branch cannot bear fruit of itself, unless it abides in the vine, neither can you, unless you abide in Me"</em> (John 15:4). The word "abide" is the verb behind the word "abode" &mdash; a dwelling place. To abide in Christ is not merely to know facts about Him, nor even only to pray, but to live with Him in a close, family relationship, aware of Him beside us every moment of every day. And mark this carefully: fruit is not automatic. Many imagine that a real Christian will simply produce fruit on his own; but Jesus says fruit comes only by abiding &mdash; and abiding is not automatic either, or He would not have had to command it. That very night every one of them would fail to abide, Peter most of all.</p>
+<div class="illustration"><strong>Staying plugged in.</strong> It is like charging a phone. The battery runs low through the day, so we plug it into the power; but if we grow impatient and unplug it to use it before it has charged, it dies again. So with us: the life and power we need flow only while we stay connected to the Vine. Stuart Briscoe once preached on abiding in Christ to a hundred young believers crammed into a building in Cold-War Poland. Ten minutes in, the lights went out and the room went black, and he preached on in the dark. When the lights blinked back, he was startled to see every person on their knees &mdash; and they stayed on their knees long after he finished. "Your teaching was new to us," one told him. "We wanted to make sure we were abiding in Christ."</div>
+
+<h3>V. Bearing Much Fruit</h3>
+<p><em>"I am the vine, you are the branches. He who abides in Me, and I in him, bears much fruit; for without Me you can do nothing"</em> (John 15:5). Apart from Christ we can do exactly nothing of eternal worth, but abiding in Him the life flows and the fruit comes. And fruit is more than evangelism alone, though it surely includes the winning of souls. Every believer bears fruit by exercising the gifts God has given &mdash; teaching, hospitality, mercy, prayer &mdash; and above all the fruit of the Spirit: "love, joy, peace" and the rest (Galatians 5:22&ndash;23). When the watching world sees a people marked by that fruit, it sees something it cannot explain and cannot produce. And when there is no fruit, the trouble is an attachment problem &mdash; something blocking the flow of life from the Vine &mdash; and the cure is not to give up but to clear away the sin and abide afresh. All of this, Jesus says, is "to My Father's glory, that you bear much fruit." So the two sayings come together: the Way brings us home to the Father, and the Vine keeps us alive and fruitful all the way there. Have you come to the Father by the one Way? Then stay close to the Vine, and let His life bear its fruit through you.</p>
+
+</div>
+<div class="lang-es">
+
+<h3>Introducci&oacute;n &mdash; En el aposento alto</h3>
+<p>La noche antes de la cruz, Jes&uacute;s reuni&oacute; a sus disc&iacute;pulos en el aposento alto y les dio su ense&ntilde;anza final y m&aacute;s &iacute;ntima. Fue, en cierto sentido, su graduaci&oacute;n del seminario de &eacute;l, con el Maestro mismo como orador principal: resumiendo lo que nunca deben olvidar, advirti&eacute;ndoles de las pruebas por venir, y se&ntilde;al&aacute;ndoles las verdades por las cuales vivir&iacute;an y morir&iacute;an. En estos cap&iacute;tulos aparecen dos m&aacute;s de sus grandes declaraciones "YO SOY", y con ellas las siete quedan completas: el pan, la luz, la puerta, el buen pastor, la resurrecci&oacute;n y la vida &mdash; y ahora el camino, y la vid verdadera. La primera nos dice c&oacute;mo venir al Padre; la segunda nos dice c&oacute;mo permanecer vivos una vez que hemos venido. Juntas responden las dos preguntas m&aacute;s hondas del alma: &iquest;C&oacute;mo llego a casa, a Dios? Y &iquest;c&oacute;mo vivo hasta llegar?</p>
+
+<h3>I. "No se turbe vuestro coraz&oacute;n"</h3>
+<p>Comienza con consuelo, pues sus corazones se romp&iacute;an: &#9889; <em>"No se turbe vuestro coraz&oacute;n; cre&eacute;is en Dios, creed tambi&eacute;n en m&iacute;. En la casa de mi Padre muchas moradas hay... voy, pues, a preparar lugar para vosotros. Y si me fuere y os preparare lugar, vendr&eacute; otra vez, y os tomar&eacute; a m&iacute; mismo, para que donde yo estoy, vosotros tambi&eacute;n est&eacute;is"</em> (Juan 14:1&ndash;3). El cielo no es una ilusi&oacute;n ni "pastel en el cielo." Es un lugar real &mdash; la casa del Padre, el verdadero hogar del creyente. La palabra traducida "moradas" significa simplemente habitaciones, lugares para morar; no se nos prometen palacios de m&aacute;rmol sino un lugar preparado por Cristo mismo, y cada lugar preparado ser&aacute; hermoso.</p>
+<div class="illustration"><strong>"Vuelve a casa."</strong> Una viuda viv&iacute;a una vez con su peque&ntilde;o hijo en un &aacute;tico desnudo, lejos de la tierra natal que hab&iacute;a dejado, contra los deseos de su familia, para casarse con un hombre que desde entonces hab&iacute;a muerto y los hab&iacute;a dejado sin nada. Las horas m&aacute;s felices del ni&ntilde;o eran cuando su madre lo tomaba en brazos y le contaba de la casa de su abuelo en el viejo pa&iacute;s &mdash; los prados verdes, los grandes &aacute;rboles, las comidas maravillosas. Nunca la hab&iacute;a visto, y sin embargo lleg&oacute; a ser el lugar m&aacute;s hermoso del mundo para &eacute;l, y anhelaba ir. Entonces un d&iacute;a lleg&oacute; una carta. Dentro hab&iacute;a dinero para el viaje y un papel con dos palabras de pu&ntilde;o y letra del abuelo: "Vuelve a casa." Ese es el coraz&oacute;n de lo que dice Jes&uacute;s. Ha ido delante a la casa del Padre, y un d&iacute;a la palabra vendr&aacute; tambi&eacute;n para nosotros.</div>
+
+<h3>II. "Yo soy el camino, y la verdad, y la vida"</h3>
+<p>Tom&aacute;s, siempre el dudador honesto, interrumpi&oacute;: "Se&ntilde;or, no sabemos a d&oacute;nde vas; &iquest;c&oacute;mo, pues, podemos saber el camino?" Jes&uacute;s no le entreg&oacute; un mapa ni un juego de indicaciones. Le dio una Persona: &#9889; <em>"Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por m&iacute;"</em> (Juan 14:6). Cada palabra responde a una necesidad. <strong>&Eacute;l es el Camino</strong> &mdash; y lo opuesto del camino es estar perdido. No todo camino llega al destino, por sincero que sea el que lo recorre; Jes&uacute;s dijo que al fin hay solo dos caminos, el ancho que muchos toman y que termina en destrucci&oacute;n, y el angosto de humildad y obediencia que pocos hallan. Y dice llanamente que &eacute;l mismo es el &uacute;nico Camino al Padre; todo otro camino que promete llegar a Dios rode&aacute;ndole se queda corto. <strong>&Eacute;l es la Verdad</strong> &mdash; no meramente un maestro de cosas verdaderas sino la Verdad en persona, de modo que conocerle a &eacute;l es conocer lo que es real. <strong>&Eacute;l es la Vida</strong> &mdash; y la persona sin &eacute;l no es meramente ignorante ni desafortunada sino espiritualmente muerta, viva al mundo pero muerta a Dios. Solo Cristo puede hacer vivo de veras a tal persona, dando tanto una vida abundante ahora como vida eterna para siempre.</p>
+<div class="illustration"><strong>"No dije religi&oacute;n."</strong> De joven inquieto, Josh McDowell prob&oacute; la iglesia, el prestigio y las fiestas, y hall&oacute; su vida vac&iacute;a &mdash; "un infierno en vida," dijo. Atra&iacute;do a pesar de s&iacute; mismo por un grupo de cristianos cuyo gozo no pod&iacute;a explicar, se recost&oacute; en su silla y exigi&oacute;: "D&iacute;ganme &mdash; &iquest;qu&eacute; cambi&oacute; sus vidas?" Una joven lo mir&oacute; directo a los ojos y dijo dos palabras: "Jesucristo." &Eacute;l replic&oacute; que estaba harto de la religi&oacute;n. Ella respondi&oacute;: "Se&ntilde;or, no dije religi&oacute;n. Dije Jesucristo." Esa distinci&oacute;n lo deshizo, y tras largo estudio de la evidencia lleg&oacute; a confesar que Jes&uacute;s es exactamente quien afirm&oacute; ser &mdash; el &uacute;nico camino al Padre.</div>
+
+<h3>III. "Yo soy la vid verdadera"</h3>
+<p>A&uacute;n en aquel aposento, Jes&uacute;s tom&oacute; una imagen que todos ellos conoc&iacute;an, y dio la &uacute;ltima de las siete declaraciones: &#9889; <em>"Yo soy la vid verdadera, y mi Padre es el labrador"</em> (Juan 15:1). Cerca de Londres crece una vid llamada la Gran Vid, plantada hace m&aacute;s de doscientos cincuenta a&ntilde;os, con una ra&iacute;z de dos pies de grueso y ramas que se extienden doscientos pies, que a&uacute;n da cientos de libras de uvas cada a&ntilde;o. Pero Jes&uacute;s es la vid <em>verdadera</em>, la fuente real de vida, y el Padre es el labrador. Un buen vi&ntilde;ador es mucho m&aacute;s que un granjero: conoce cada vid &iacute;ntimamente, c&oacute;mo le va de a&ntilde;o en a&ntilde;o, qu&eacute; necesita y cu&aacute;ndo, aun el lugar y el &aacute;ngulo exactos donde cortar. Y corta. &#9889; <em>"Todo aquel que lleva fruto, lo limpia, para que lleve m&aacute;s fruto"</em> (Juan 15:2). La poda no es castigo; es amor con un cuchillo. A veces el Padre corta lo que est&aacute; claramente muerto, pero a menudo corta aun lo bueno y lo mejor, para que tengamos lo mejor de todo. Duele, pero ayuda. Pablo rog&oacute; tres veces que le fuese quitado su aguij&oacute;n, y en cambio se le dijo: "B&aacute;state mi gracia"; lo mismo que quer&iacute;a quitar era la herramienta del Labrador para hacerlo m&aacute;s fruct&iacute;fero.</p>
+
+<h3>IV. "Permaneced en m&iacute;"</h3>
+<p>En el centro de la imagen hay un mandato repetido: &#9889; <em>"Permaneced en m&iacute;, y yo en vosotros. Como el p&aacute;mpano no puede llevar fruto por s&iacute; mismo, si no permanece en la vid, as&iacute; tampoco vosotros, si no perman&eacute;is en m&iacute;"</em> (Juan 15:4). La palabra "permanecer" (morar) es el verbo detr&aacute;s de la palabra "morada" &mdash; un lugar donde se habita. Permanecer en Cristo no es meramente saber datos acerca de &eacute;l, ni siquiera solo orar, sino vivir con &eacute;l en una relaci&oacute;n estrecha, de familia, conscientes de &eacute;l a nuestro lado cada momento de cada d&iacute;a. Y note esto con cuidado: el fruto no es autom&aacute;tico. Muchos imaginan que un verdadero cristiano producir&aacute; fruto por s&iacute; solo; pero Jes&uacute;s dice que el fruto viene solo por permanecer &mdash; y permanecer tampoco es autom&aacute;tico, o no habr&iacute;a tenido que mandarlo. Esa misma noche cada uno de ellos fallar&iacute;a en permanecer, Pedro m&aacute;s que todos.</p>
+<div class="illustration"><strong>Permanecer conectado.</strong> Es como cargar un tel&eacute;fono. La bater&iacute;a se agota durante el d&iacute;a, as&iacute; que lo conectamos a la corriente; pero si nos impacientamos y lo desconectamos para usarlo antes de que se cargue, se apaga otra vez. As&iacute; con nosotros: la vida y el poder que necesitamos fluyen solo mientras permanecemos conectados a la Vid. Stuart Briscoe predic&oacute; una vez sobre permanecer en Cristo a cien j&oacute;venes creyentes apretujados en un edificio en la Polonia de la Guerra Fr&iacute;a. A los diez minutos las luces se apagaron y el cuarto qued&oacute; a oscuras, y &eacute;l sigui&oacute; predicando en la oscuridad. Cuando las luces volvieron, se sorprendi&oacute; al ver a cada persona de rodillas &mdash; y siguieron de rodillas mucho despu&eacute;s de que &eacute;l termin&oacute;. "Su ense&ntilde;anza era nueva para nosotros," le dijo uno. "Quer&iacute;amos asegurarnos de estar permaneciendo en Cristo."</div>
+
+<h3>V. Llevar mucho fruto</h3>
+<p>&#9889; <em>"Yo soy la vid, vosotros los p&aacute;mpanos; el que permanece en m&iacute;, y yo en &eacute;l, &eacute;ste lleva mucho fruto; porque sin m&iacute; nada pod&eacute;is hacer"</em> (Juan 15:5). Aparte de Cristo no podemos hacer nada de valor eterno, pero permaneciendo en &eacute; la vida fluye y el fruto viene. Y el fruto es m&aacute;s que la evangelizaci&oacute;n sola, aunque ciertamente la incluye. Todo creyente lleva fruto al ejercer los dones que Dios le ha dado &mdash; ense&ntilde;ar, hospedar, tener misericordia, orar &mdash; y sobre todo el fruto del Esp&iacute;ritu: "amor, gozo, paz" y lo dem&aacute;s (G&aacute;latas 5:22&ndash;23). Cuando el mundo que observa ve a un pueblo marcado por ese fruto, ve algo que no puede explicar ni producir. Y cuando no hay fruto, el problema es de conexi&oacute;n &mdash; algo que bloquea el flujo de vida de la Vid &mdash; y el remedio no es rendirse sino quitar el pecado y permanecer de nuevo. Todo esto, dice Jes&uacute;s, es "para la gloria de mi Padre, que llev&eacute;is mucho fruto." As&iacute; que las dos declaraciones se unen: el Camino nos lleva a casa, al Padre, y la Vid nos mantiene vivos y fruct&iacute;feros todo el trayecto. &iquest;Ha venido usted al Padre por el &uacute;nico Camino? Entonces permanezca cerca de la Vid, y deje que su vida lleve su fruto a trav&eacute;s de usted.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La secci&oacute;n de respuesta corta es pr&aacute;ctica para el Certificado y no cuenta en su contra.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 10;
+const COURSE = 'john';
+const NEXT_UNIT_URL = 'CTSJohnUnit11.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Word Made Flesh", "Unit 2 - You Must Be Born Again", "Unit 3 - Living Water", "Unit 4 - The Bread of Life", "Unit 5 - The Light of the World", "Unit 6 - The Witnesses to Christ", "Unit 7 - The Door and the Good Shepherd", "Unit 8 - The Resurrection and the Life", "Unit 9 - The Hour of Glory", "Unit 10 - The Way, the Truth, and the Life", "Unit 11 - The Spirit and the High-Priestly Prayer", "Unit 12 - It Is Finished"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSJohnUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    } else {
+        document.getElementById('studentGreeting').innerHTML = '<a href="CTSJohnUnit1.html" style="color:#8a1f1f;">Please register on Unit 1 / Reg&iacute;strese en la Unidad 1</a>';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields. / Por favor complete todos los campos.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered! / \u00a1Registrado!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "John 14–17 is often called:", "textEs": "Juan 14–17 se llama a menudo:", "optionsEn": ["the parables of the kingdom", "the Sermon on the Mount", "the Olivet prophecy", "the Upper Room Discourse, Jesus' final teaching to His disciples"], "optionsEs": ["las parábolas del reino", "el Sermón del Monte", "la profecía del Olivar", "el Discurso del Aposento Alto, la enseñanza final de Jesús a sus discípulos"], "explanationEn": "On the night before the cross, Jesus gave His most intimate final teaching in the upper room.", "explanationEs": "La noche antes de la cruz, Jesús dio su enseñanza final más íntima en el aposento alto.", "correct": 3}, {"textEn": "Jesus opens by comforting His troubled disciples with:", "textEs": "Jesús comienza consolando a sus discípulos turbados con:", "optionsEn": ["a sharp rebuke", "a warning of judgment", "a command to fast", "\"Let not your heart be troubled... in My Father's house are many mansions; I go to prepare a place for you\""], "optionsEs": ["una dura reprensión", "una advertencia de juicio", "un mandato de ayunar", "\"No se turbe vuestro corazón... en la casa de mi Padre muchas moradas hay; voy a preparar lugar para vosotros\""], "explanationEn": "John 14:1-3 — He promises a prepared place and His own return to receive them.", "explanationEs": "Juan 14:1-3 — promete un lugar preparado y su propio regreso para recibirlos.", "correct": 3}, {"textEn": "Cook says that heaven is:", "textEs": "Cook dice que el cielo es:", "optionsEn": ["a state of mind", "a real place, the Father's house and the believer's home", "unknowable", "a religious metaphor only"], "optionsEs": ["un estado mental", "un lugar real, la casa del Padre y el hogar del creyente", "incognoscible", "solo una metáfora religiosa"], "explanationEn": "Not \"pie in the sky\" but a real home prepared by Christ Himself.", "explanationEs": "No \"pastel en el cielo\" sino un hogar real preparado por Cristo mismo.", "correct": 1}, {"textEn": "Thomas objected that they did not know the way, prompting Jesus to say:", "textEs": "Tomás objetó que no sabían el camino, llevando a Jesús a decir:", "optionsEn": ["\"ask the Father\"", "\"I am the way, the truth, and the life. No one comes to the Father except through Me\"", "\"wait here\"", "\"follow the map\""], "optionsEs": ["\"pregúntenle al Padre\"", "\"Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí\"", "\"esperen aquí\"", "\"sigan el mapa\""], "explanationEn": "John 14:6 — He gave not directions but Himself.", "explanationEs": "Juan 14:6 — no dio indicaciones sino a sí mismo.", "correct": 1}, {"textEn": "Cook stresses that Jesus did not give the disciples directions but:", "textEs": "Cook recalca que Jesús no dio a los discípulos indicaciones sino:", "optionsEn": ["drew a chart", "appointed a human guide", "gave Himself — He is the Way, a Person, not a map", "named a distant city"], "optionsEs": ["dibujó un diagrama", "designó un guía humano", "se dio a sí mismo — él es el Camino, una Persona, no un mapa", "nombró una ciudad lejana"], "explanationEn": "The Way is not a route to follow but a Person to know and trust.", "explanationEs": "El Camino no es una ruta a seguir sino una Persona a conocer y en quien confiar.", "correct": 2}, {"textEn": "\"I am the way\" means, Cook teaches, that Jesus is:", "textEs": "\"Yo soy el camino\" significa, enseña Cook, que Jesús es:", "optionsEn": ["the only way to the Father", "one path among many", "a good example only", "a teacher of many paths"], "optionsEs": ["el único camino al Padre", "un camino entre muchos", "solo un buen ejemplo", "un maestro de muchos caminos"], "explanationEn": "Every other road that promises to reach God while going around Him falls short.", "explanationEs": "Todo otro camino que promete llegar a Dios rodeándole se queda corto.", "correct": 0}, {"textEn": "Jesus elsewhere described two roads: the broad way that leads to destruction, and:", "textEs": "Jesús describió en otro lugar dos caminos: el ancho que lleva a destrucción, y:", "optionsEn": ["a royal road", "a hidden way", "a circular way", "the narrow way of humility, service, and obedience, which few take"], "optionsEs": ["un camino real", "un camino oculto", "un camino circular", "el camino angosto de humildad, servicio y obediencia, que pocos toman"], "explanationEn": "Not every road reaches the destination, however sincerely it is traveled.", "explanationEs": "No todo camino llega al destino, por sincero que sea quien lo recorre.", "correct": 3}, {"textEn": "\"I am the truth\" means that Jesus:", "textEs": "\"Yo soy la verdad\" significa que Jesús:", "optionsEn": ["is the Truth in person", "merely teaches true things", "only points to truth", "debates about truth"], "optionsEs": ["es la Verdad en persona", "meramente enseña cosas verdaderas", "solo señala la verdad", "debate sobre la verdad"], "explanationEn": "To know Him is to know what is real; He does not merely teach truth, He is the Truth.", "explanationEs": "Conocerle es conocer lo real; no solo enseña la verdad, él es la Verdad.", "correct": 0}, {"textEn": "\"I am the life\" speaks to the condition of the unsaved, who are:", "textEs": "\"Yo soy la vida\" habla de la condición del no salvo, que está:", "optionsEn": ["simply unlucky", "spiritually dead, alive to the world but dead to God", "merely uneducated", "physically ill"], "optionsEs": ["simplemente sin suerte", "espiritualmente muerto, vivo al mundo pero muerto a Dios", "meramente sin educación", "físicamente enfermo"], "explanationEn": "Only Christ can make such a one truly alive, with abundant and eternal life.", "explanationEs": "Solo Cristo puede hacer vivo de veras a tal persona, con vida abundante y eterna.", "correct": 1}, {"textEn": "Josh McDowell's testimony turned when a believer answered his scorn for \"religion\" by saying:", "textEs": "El testimonio de Josh McDowell cambió cuando una creyente respondió a su desprecio por la \"religión\" diciendo:", "optionsEn": ["\"leave us alone\"", "\"try harder\"", "\"I didn't say religion; I said Jesus Christ\"", "\"read more books\""], "optionsEs": ["\"déjanos en paz\"", "\"esfþrzate más\"", "\"no dije religión; dije Jesucristo\"", "\"lee más libros\""], "explanationEn": "The distinction between religion and the Person of Christ undid him and led to faith.", "explanationEs": "La distinción entre la religión y la Persona de Cristo lo deshizo y lo llevó a la fe.", "correct": 2}, {"textEn": "\"I am the true vine, and My Father is the ___\" (15:1):", "textEs": "\"Yo soy la vid verdadera, y mi Padre es el ___\" (15:1):", "optionsEn": ["shepherd", "vinedresser (gardener)", "harvester", "builder"], "optionsEs": ["pastor", "labrador (viñador)", "segador", "constructor"], "explanationEn": "Jesus is the true source of life; the Father tends the vine.", "explanationEs": "Jesús es la fuente verdadera de vida; el Padre cuida la vid.", "correct": 1}, {"textEn": "Cook describes the vinedresser as one who:", "textEs": "Cook describe al viñador como uno que:", "optionsEn": ["only plants", "sells the grapes", "knows each vine intimately and prunes it to make it more fruitful", "ignores the vines"], "optionsEs": ["solo planta", "vende las uvas", "conoce cada vid íntimamente y la poda para hacerla más fructífera", "ignora las vides"], "explanationEn": "A good vinedresser knows what each vine needs and exactly where to cut.", "explanationEs": "Un buen viñador sabe lo que cada vid necesita y exactamente dónde cortar.", "correct": 2}, {"textEn": "Pruning, Cook says, sometimes cuts away even the good and the better:", "textEs": "La poda, dice Cook, a veces corta aun lo bueno y lo mejor:", "optionsEn": ["so that we might enjoy the best", "to kill the branch", "to punish the vine", "for no reason"], "optionsEs": ["para que disfrutemos lo mejor", "para matar la rama", "para castigar la vid", "sin razón alguna"], "explanationEn": "Pruning is love with a knife; it hurts, but it helps — as with Paul's thorn.", "explanationEs": "La poda es amor con un cuchillo; duele, pero ayuda — como con el aguijón de Pablo.", "correct": 0}, {"textEn": "The word \"abide\" is related to \"abode,\" meaning to:", "textEs": "La palabra \"permanecer\" se relaciona con \"morada,\" que significa:", "optionsEn": ["keep a list of rules", "visit briefly", "live with Christ in a close, family relationship, aware of Him every moment", "study about Him"], "optionsEs": ["guardar una lista de reglas", "visitar brevemente", "vivir con Cristo en una relación estrecha, de familia, conscientes de él cada momento", "estudiar acerca de él"], "explanationEn": "Abiding is a living, moment-by-moment relationship, not mere knowledge about Christ.", "explanationEs": "Permanecer es una relación viva, momento a momento, no mero conocimiento acerca de Cristo.", "correct": 2}, {"textEn": "Cook insists that bearing fruit is:", "textEs": "Cook insiste en que llevar fruto es:", "optionsEn": ["impossible for anyone", "not automatic — it comes only by abiding in Christ, which is itself not automatic", "automatic for every Christian", "unimportant"], "optionsEs": ["imposible para cualquiera", "no automático — viene solo por permanecer en Cristo, lo cual tampoco es automático", "automático para todo cristiano", "sin importancia"], "explanationEn": "Jesus had to command abiding; that very night the disciples failed to abide.", "explanationEs": "Jesús tuvo que mandar permanecer; esa misma noche los discípulos fallaron en permanecer.", "correct": 1}, {"textEn": "\"I am the vine, you are the branches... apart from Me you can do ___\" (15:5):", "textEs": "\"Yo soy la vid, vosotros los pámpanos... sin mí nada podéis ___\" (15:5):", "optionsEn": ["better", "a little", "nothing", "much"], "optionsEs": ["mejor", "poco", "nada (hacer)", "mucho"], "explanationEn": "Apart from Christ we can do nothing of eternal worth; abiding in Him, the fruit comes.", "explanationEs": "Aparte de Cristo no podemos hacer nada de valor eterno; permaneciendo en él, el fruto viene.", "correct": 2}, {"textEn": "The believers in Poland, after Briscoe preached on abiding, spent much of the night on their knees because:", "textEs": "Los creyentes en Polonia, tras predicar Briscoe sobre permanecer, pasaron gran parte de la noche de rodillas porque:", "optionsEn": ["they were afraid", "they were ordered to", "the lights had failed", "they wanted to be sure they were abiding in Christ"], "optionsEs": ["tenían miedo", "se les ordenó", "las luces habían fallado", "querían asegurarse de estar permaneciendo en Cristo"], "explanationEn": "The teaching was new to them, and they took abiding in Christ with utter seriousness.", "explanationEs": "La enseñanza era nueva para ellos, y tomaron con toda seriedad el permanecer en Cristo.", "correct": 3}, {"textEn": "Cook teaches that bearing fruit is:", "textEs": "Cook enseña que llevar fruto es:", "optionsEn": ["not only evangelism but every believer's use of his gifts, including the fruit of the Spirit", "only evangelism", "only for pastors", "only baptism"], "optionsEs": ["no solo evangelización sino el uso de los dones de cada creyente, incluyendo el fruto del Espíritu", "solo evangelización", "solo para pastores", "solo el bautismo"], "explanationEn": "Teaching, hospitality, mercy, prayer, and the fruit of the Spirit are all fruit.", "explanationEs": "Enseñar, hospedar, misericordia, oración, y el fruto del Espíritu son todos fruto.", "correct": 0}, {"textEn": "If a believer bears no fruit, Cook says the issue is:", "textEs": "Si un creyente no lleva fruto, Cook dice que el problema es:", "optionsEn": ["God's failure", "the weather", "bad luck", "an attachment problem — something blocking the flow, calling for the purging of sin and renewed abiding"], "optionsEs": ["el fracaso de Dios", "el clima", "mala suerte", "un problema de conexión — algo bloquea el flujo, lo que pide quitar el pecado y permanecer de nuevo"], "explanationEn": "The cure is not to give up but to clear away the sin and abide afresh in the Vine.", "explanationEs": "El remedio no es rendirse sino quitar el pecado y permanecer de nuevo en la Vid.", "correct": 3}, {"textEn": "\"The Way\" and \"the true vine\" complete the seven great \"I AM\" sayings of John, which the world is meant to:", "textEs": "\"El camino\" y \"la vid verdadera\" completan las siete grandes declaraciones \"YO SOY\" de Juan, que el mundo ha de:", "optionsEn": ["believe — that Jesus is the Christ", "debate endlessly", "fear", "ignore"], "optionsEs": ["creer — que Jesús es el Cristo", "debatir sin fin", "temer", "ignorar"], "explanationEn": "All seven \"I AM\" sayings point to the one purpose of the Gospel: that we believe and have life in His name.", "explanationEs": "Las siete declaraciones \"YO SOY\" apuntan al único propósito del Evangelio: que creamos y tengamos vida en su nombre.", "correct": 0}];
+const kwQuestions = [
+{"textEn":"Explain how Jesus comforts His troubled disciples with the promise of the Father's house (John 14:1-3).","textEs":"Explique c\u00f3mo Jes\u00fas consuela a sus disc\u00edpulos turbados con la promesa de la casa del Padre (Juan 14:1-3).","kw_en":["trouble","heart","father","house","place","prepare","heaven","home"],"kw_es":["turba","corazon","padre","casa","lugar","prepara","cielo","hogar"],"modelEn":"With their hearts breaking, Jesus said, Let not your heart be troubled; you believe in God, believe also in Me. In My Father's house are many mansions, and I go to prepare a place for you, and I will come again and receive you to Myself. He comforts them by promising that heaven is a real place, the Father's house, the believer's true home, not wishful thinking. The word for mansions means rooms or abiding places, prepared by Christ Himself, and one day He will return to bring His people there.","modelEs":"Con sus corazones rompi\u00e9ndose, Jes\u00fas dijo: No se turbe vuestro coraz\u00f3n; cre\u00e9is en Dios, creed tambi\u00e9n en m\u00ed. En la casa de mi Padre muchas moradas hay, y voy a preparar lugar para vosotros, y vendr\u00e9 otra vez y os tomar\u00e9 a m\u00ed mismo. Los consuela prometiendo que el cielo es un lugar real, la casa del Padre, el verdadero hogar del creyente, no una ilusi\u00f3n. La palabra para moradas significa habitaciones o lugares para morar, preparados por Cristo mismo, y un d\u00eda volver\u00e1 para llevar a su pueblo all\u00ed."},
+{"textEn":"Explain \"I am the way\" and why Jesus is the only way to the Father (John 14:6).","textEs":"Explique \"Yo soy el camino\" y por qu\u00e9 Jes\u00fas es el \u00fanico camino al Padre (Juan 14:6).","kw_en":["way","only","father","jesus","come","lost","person","road"],"kw_es":["camino","unico","padre","jesus","viene","perdid","persona","via"],"modelEn":"When Thomas said they did not know the way, Jesus answered, I am the way, the truth, and the life; no one comes to the Father except through Me. He did not give a map but Himself, a Person. The opposite of the way is being lost, and not every road reaches God however sincerely it is traveled. Jesus said there are only two roads, the broad way to destruction and the narrow way few find. He is the only way to the Father; every other road that bypasses Him falls short, for no one comes to the Father except through Him.","modelEs":"Cuando Tom\u00e1s dijo que no sab\u00edan el camino, Jes\u00fas respondi\u00f3: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por m\u00ed. No dio un mapa sino a s\u00ed mismo, una Persona. Lo opuesto del camino es estar perdido, y no toda v\u00eda llega a Dios por sincero que sea quien la recorre. Jes\u00fas dijo que hay solo dos caminos, el ancho a destrucci\u00f3n y el angosto que pocos hallan. \u00c9l es el \u00fanico camino al Padre; todo otro camino que lo rodea se queda corto, pues nadie viene al Padre sino por \u00e9l."},
+{"textEn":"Explain \"I am the truth\" and \"I am the life\" (John 14:6).","textEs":"Explique \"Yo soy la verdad\" y \"Yo soy la vida\" (Juan 14:6).","kw_en":["truth","life","jesus","dead","spiritual","eternal","abundant","is"],"kw_es":["verdad","vida","jesus","muerto","espiritual","eterna","abundante","es"],"modelEn":"Jesus is the truth, not merely a teacher of true things but the Truth in person, so that to know Him is to know what is real. He is also the life. The person without Christ is spiritually dead, alive to the world but dead to God. Only Jesus can make such a one truly alive, giving both an abundant life now and eternal life forever. So the Way, the Truth, and the Life are not three separate gifts but the one Christ who brings us to the Father, shows us reality, and raises us from spiritual death.","modelEs":"Jes\u00fas es la verdad, no meramente un maestro de cosas verdaderas sino la Verdad en persona, de modo que conocerle es conocer lo real. Tambi\u00e9n es la vida. La persona sin Cristo est\u00e1 espiritualmente muerta, viva al mundo pero muerta a Dios. Solo Jes\u00fas puede hacer vivo de veras a tal persona, dando tanto vida abundante ahora como vida eterna para siempre. As\u00ed que el Camino, la Verdad y la Vida no son tres regalos separados sino el \u00fanico Cristo que nos lleva al Padre, nos muestra la realidad y nos levanta de la muerte espiritual."},
+{"textEn":"Explain \"I am the true vine, and My Father is the vinedresser\" (John 15:1).","textEs":"Explique \"Yo soy la vid verdadera, y mi Padre es el labrador\" (Juan 15:1).","kw_en":["vine","true","father","vinedresser","gardener","jesus","source","life"],"kw_es":["vid","verdadera","padre","labrador","jardinero","jesus","fuente","vida"],"modelEn":"Jesus said, I am the true vine, and My Father is the vinedresser. He is the true vine, the real source of spiritual life and nourishment, just as branches draw everything they have from the vine. The Father is the gardener, the vinedresser, who is far more than a farmer: He knows each vine intimately, what it needs and when, and even the exact place to cut. So Jesus is the life and the Father lovingly tends His people, working to make each one more fruitful as a good vinedresser tends his vines.","modelEs":"Jes\u00fas dijo: Yo soy la vid verdadera, y mi Padre es el labrador. \u00c9l es la vid verdadera, la fuente real de vida y alimento espiritual, as\u00ed como los p\u00e1mpanos sacan todo lo que tienen de la vid. El Padre es el jardinero, el labrador, que es mucho m\u00e1s que un granjero: conoce cada vid \u00edntimamente, lo que necesita y cu\u00e1ndo, y aun el lugar exacto donde cortar. As\u00ed que Jes\u00fas es la vida y el Padre cuida amorosamente a su pueblo, obrando para hacer a cada uno m\u00e1s fruct\u00edfero como un buen vi\u00f1ador cuida sus vides."},
+{"textEn":"Explain how and why the Father prunes the branches (John 15:2).","textEs":"Explique c\u00f3mo y por qu\u00e9 el Padre poda los p\u00e1mpanos (Juan 15:2).","kw_en":["prune","branch","fruit","father","cut","more","grow","best"],"kw_es":["poda","rama","fruto","padre","corta","mas","crece","mejor"],"modelEn":"Jesus said that every branch that bears fruit the Father prunes, that it may bear more fruit. Pruning is not punishment but love with a knife. Sometimes the Father cuts away what is plainly dead, but often He cuts away even the good and the better so that we may have the best. It hurts, but it helps us grow. Paul begged three times for his thorn to be removed, and was told instead, My grace is sufficient for you; the very thing he wanted gone was the Gardener's tool to make him more fruitful.","modelEs":"Jes\u00fas dijo que todo p\u00e1mpano que lleva fruto el Padre lo poda, para que lleve m\u00e1s fruto. La poda no es castigo sino amor con un cuchillo. A veces el Padre corta lo que est\u00e1 claramente muerto, pero a menudo corta aun lo bueno y lo mejor para que tengamos lo mejor de todo. Duele, pero nos ayuda a crecer. Pablo rog\u00f3 tres veces que le quitaran su aguij\u00f3n, y en cambio se le dijo: B\u00e1state mi gracia; lo mismo que quer\u00eda quitar era la herramienta del Labrador para hacerlo m\u00e1s fruct\u00edfero."},
+{"textEn":"Explain what it means to \"abide in Me\" (John 15:4).","textEs":"Explique qu\u00e9 significa \"permaneced en m\u00ed\" (Juan 15:4).","kw_en":["abide","remain","christ","relationship","connect","live","word","daily"],"kw_es":["permanece","abide","cristo","relacion","conecta","vive","palabra","diario"],"modelEn":"Jesus said, Abide in Me, and I in you; the branch cannot bear fruit unless it abides in the vine. The word abide is the verb behind the word abode, a dwelling place. To abide in Christ is not merely to know facts about Him, nor even only to pray, but to remain connected to Him and live with Him in a close, family relationship, aware of Him beside us every day. As His word remains in us we stay joined to Him, and only by this daily abiding can the life of the vine flow into the branch.","modelEs":"Jes\u00fas dijo: Permaneced en m\u00ed, y yo en vosotros; el p\u00e1mpano no puede llevar fruto si no permanece en la vid. La palabra permanecer es el verbo detr\u00e1s de la palabra morada, un lugar donde se habita. Permanecer en Cristo no es meramente saber datos acerca de \u00e9l, ni siquiera solo orar, sino seguir conectados a \u00e9l y vivir con \u00e9l en una relaci\u00f3n estrecha, de familia, conscientes de \u00e9l a nuestro lado cada d\u00eda. Al permanecer su palabra en nosotros seguimos unidos a \u00e9l, y solo por este permanecer diario puede la vida de la vid fluir al p\u00e1mpano."},
+{"textEn":"Explain \"apart from Me you can do nothing\" (John 15:5).","textEs":"Explique \"sin m\u00ed nada pod\u00e9is hacer\" (Juan 15:5).","kw_en":["apart","nothing","branch","vine","fruit","christ","depend","connect"],"kw_es":["sin","nada","rama","vid","fruto","cristo","depende","conecta"],"modelEn":"Jesus said, I am the vine, you are the branches; he who abides in Me bears much fruit, for without Me you can do nothing. A branch cut off from the vine can produce nothing; so apart from Christ we can do nothing of eternal worth. We depend on Him entirely, as a branch depends on the vine for all its life and sap. It is like a phone that runs only while it stays connected to the power. As long as we remain connected to Christ, His life flows through us and the fruit comes; cut off from Him, we wither.","modelEs":"Jes\u00fas dijo: Yo soy la vid, vosotros los p\u00e1mpanos; el que permanece en m\u00ed lleva mucho fruto, porque sin m\u00ed nada pod\u00e9is hacer. Un p\u00e1mpano cortado de la vid no puede producir nada; as\u00ed que aparte de Cristo no podemos hacer nada de valor eterno. Dependemos de \u00e9l por completo, como el p\u00e1mpano depende de la vid para toda su vida y savia. Es como un tel\u00e9fono que funciona solo mientras se conecta a la corriente. Mientras permanecemos conectados a Cristo, su vida fluye por nosotros y el fruto viene; cortados de \u00e9l, nos secamos."},
+{"textEn":"Explain why bearing fruit is not automatic and how it comes (John 15:4-5).","textEs":"Explique por qu\u00e9 llevar fruto no es autom\u00e1tico y c\u00f3mo viene (Juan 15:4-5).","kw_en":["fruit","automatic","abide","christ","bear","connect","come","branch"],"kw_es":["fruto","automatico","permanece","cristo","lleva","conecta","viene","rama"],"modelEn":"Many imagine that a real Christian will automatically produce fruit, but Cook insists this is not what Jesus says. Fruit comes only by abiding in Christ, and abiding is not automatic either, or Jesus would not have had to command it; that very night the disciples failed to abide, Peter most of all. The branch bears fruit only while it stays connected to the vine. So fruit comes not by trying harder on our own but by remaining joined to Christ, letting His life flow through us, the way a branch draws from the vine.","modelEs":"Muchos imaginan que un verdadero cristiano producir\u00e1 fruto autom\u00e1ticamente, pero Cook insiste en que no es lo que dice Jes\u00fas. El fruto viene solo por permanecer en Cristo, y permanecer tampoco es autom\u00e1tico, o Jes\u00fas no habr\u00eda tenido que mandarlo; esa misma noche los disc\u00edpulos fallaron en permanecer, Pedro m\u00e1s que todos. El p\u00e1mpano lleva fruto solo mientras sigue conectado a la vid. As\u00ed que el fruto viene no por esforzarnos m\u00e1s por nuestra cuenta sino por seguir unidos a Cristo, dejando que su vida fluya por nosotros, como la rama saca de la vid."},
+{"textEn":"Describe the kinds of fruit the abiding believer bears (John 15:5-8; Galatians 5).","textEs":"Describa las clases de fruto que lleva el creyente que permanece (Juan 15:5-8; G\u00e1latas 5).","kw_en":["fruit","love","joy","peace","prayer","service","gift","spirit"],"kw_es":["fruto","amor","gozo","paz","oracion","servicio","don","espiritu"],"modelEn":"Cook teaches that fruit is more than evangelism alone, though it surely includes winning souls. Every believer bears fruit by exercising the gifts God has given, such as teaching, hospitality, mercy, and prayer, and above all the fruit of the Spirit named in Galatians 5: love, joy, peace, and the rest. Abiding in Christ also leads to persistent prayer and selfless service to others. When the watching world sees a people marked by such love and fruit, it sees something it cannot explain or produce on its own, and it is drawn to Christ.","modelEs":"Cook ense\u00f1a que el fruto es m\u00e1s que la evangelizaci\u00f3n sola, aunque ciertamente incluye ganar almas. Todo creyente lleva fruto al ejercer los dones que Dios le ha dado, como ense\u00f1ar, hospedar, misericordia y oraci\u00f3n, y sobre todo el fruto del Esp\u00edritu nombrado en G\u00e1latas 5: amor, gozo, paz, y lo dem\u00e1s. Permanecer en Cristo lleva tambi\u00e9n a la oraci\u00f3n persistente y al servicio desinteresado a otros. Cuando el mundo que observa ve a un pueblo marcado por tal amor y fruto, ve algo que no puede explicar ni producir por s\u00ed mismo, y es atra\u00eddo a Cristo."},
+{"textEn":"How do \"the Way\" and \"the true Vine\" fit together, and what do they call us to?","textEs":"\u00bfC\u00f3mo encajan \"el Camino\" y \"la Vid verdadera,\" y a qu\u00e9 nos llaman?","kw_en":["way","vine","father","abide","fruit","home","follow","christ"],"kw_es":["camino","vid","padre","permanece","fruto","hogar","sigue","cristo"],"modelEn":"The two sayings answer the two deepest questions of the soul. As the Way, Jesus brings us home to the Father, for no one comes to the Father except through Him. As the true Vine, He keeps us alive and fruitful all the way there, since apart from Him we can do nothing. So the Way gets us to the Father's house, and the Vine sustains us on the journey. Together they call us to come to the Father by the one Way, Christ, and then to abide close to the Vine so that His life bears much fruit through us.","modelEs":"Las dos declaraciones responden las dos preguntas m\u00e1s hondas del alma. Como el Camino, Jes\u00fas nos lleva a casa, al Padre, pues nadie viene al Padre sino por \u00e9l. Como la Vid verdadera, nos mantiene vivos y fruct\u00edferos todo el trayecto, ya que sin \u00e9l nada podemos hacer. As\u00ed que el Camino nos lleva a la casa del Padre, y la Vid nos sostiene en el viaje. Juntas nos llaman a venir al Padre por el \u00fanico Camino, Cristo, y luego a permanecer cerca de la Vid para que su vida lleve mucho fruto a trav\u00e9s de nosotros, y as\u00ed sigamos a Cristo hasta el hogar."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 11 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 11 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s).</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (mcQuestions.length + idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register on Unit 1 first.' : 'Por favor reg\u00edstrese en la Unidad 1 primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y reintente la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSJohnReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

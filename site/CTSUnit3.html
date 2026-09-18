@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Old Testament Survey — Unit 3: Wilderness and Renewal (Numbers & Deuteronomy)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .action-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.action-btn.reset { background: #8a5a2f; }
+.action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+p { margin-bottom: 12px; }
+ul { margin: 8px 0 14px 22px; }
+li { margin-bottom: 6px; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 0; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.track-banner { background: #fffaf0; border-left: 4px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin-bottom: 15px; font-size: 0.95rem; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.locked { cursor: default; }
+.option.locked:hover { background: #fcfbf8; }
+.option.locked.correct:hover { background: #e8f5ea; }
+.option.locked.wrong:hover { background: #fae8e8; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.exam-result { margin-top: 15px; padding: 12px 18px; border-radius: 12px; font-size: 1.05rem; }
+.exam-result.pass { background: #e8f5ea; color: #1f6b3b; border: 1px solid #b9dfc2; }
+.exam-result.fail { background: #fae8e8; color: #8a1f1f; border: 1px solid #efc2c2; }
+.exam-result.locked { background: #fff4d6; color: #6b4f1f; border: 1px solid #e8d28a; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en .block-en { display: block; }
+body.lang-en .block-es { display: none; }
+body.lang-es .block-en { display: none; }
+body.lang-es .block-es { display: block; }
+@media print {
+    body { background: white; font-size: 12pt; padding: 0; }
+    .nav-bar, .toggle-btn, .action-btn, button.small, .registration-panel { display: none !important; }
+    .card { box-shadow: none; border: none; padding: 10pt 0; margin-bottom: 8pt; page-break-inside: avoid; }
+    .question { page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .option.correct { background: white; border: 1px solid #888; }
+    .option.wrong { background: white; border: 1px solid #888; }
+}
+.reg-readout { font-size: 0.95rem; }
+.reg-readout-grid { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.reg-readout-grid > div { min-width: 180px; }
+.reg-readout-note { margin-top: 8px; font-size: 0.82rem; color: #6b6256; }
+.reg-readout.missing { color: #8a1f1f; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Old Testament Survey — Unit 3: Wilderness and Renewal (Numbers & Deuteronomy)</span><span class="lang-es">📖 Estudio del Antiguo Testamento — Unidad 3: Desierto y Renovación (Números y Deuteronomio)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="registration-panel" id="regPanel">
+    <h3><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h3>
+    <div id="regReadout" class="reg-readout"></div>
+    <!-- Hidden fields preserve the IDs used by grading/loadReg; registration is edited on Unit 1. -->
+    <input type="hidden" id="studentName">
+    <input type="hidden" id="studentEmail">
+    <input type="hidden" id="studentCountry">
+    <input type="hidden" id="studentProgram">
+</div>
+
+<!-- TEACHING CONTENT -->
+<div class="card" id="teachingContent">
+    <div class="block-en">
+        <h2>I. Numbers — The Wilderness Is Yours</h2>
+        <p>The English title comes from the two censuses. The Hebrew title is <em>Bemidbar</em> — "in the wilderness." That is the truer name. Numbers is the book about what happens to a believer who has been delivered out of bondage but is not yet willing to trust God with the next mile.</p>
+
+        <p>Numbers opens with a count: 603,550 fighting men aged twenty and up, organized tribe by tribe around the tabernacle. Forty years later, Numbers ends with a second count: 601,730 fighting men, organized tribe by tribe around the tabernacle. Roughly the same number — but the names are different. The men of the first roll call lay buried in the sand. The men of the second would walk into the Promised Land. That is Numbers in a thumbnail. And it asks every reader the question only he can answer: <em>which generation am I?</em></p>
+
+        <p>In both counts, the tabernacle stands in the center of the camp — a holy God in the middle of His people. That image is a foretaste. Centuries later John would write, <em>"The Word became flesh and tabernacled among us"</em> (John 1:14), and in his Revelation he would see it full-grown: <em>the dwelling place of God is with man</em> (Revelation 21:3). The tabernacle in the center of the camp is Christ in the middle of every camp He gathers.</p>
+
+        <p>The journey from Sinai to Canaan should have taken eleven days (Deuteronomy 1:2). It took forty years. Calculate the math of two million people sentenced to die in those four decades and you reach a sobering figure — roughly eighty-two funerals per day, twenty-four hours a day, for forty years. The wilderness was one huge graveyard. Israel had two main occupations: complaining and burying. They did not run out of either.</p>
+
+        <h3>A. The Three Murmurings</h3>
+        <p>Open the middle of Numbers and the same pattern keeps surfacing — a people grumbling. Three layers of complaint, each one with a parallel in your own life.</p>
+
+        <p>First, <strong>complaint against circumstances</strong>. They complained about the manna, the water, the meat, the dust. Manna fell from heaven six mornings a week and tasted like wafers made with honey, and they got tired of it. Read that sentence again — it is one of the more haunting lines in the Old Testament. They got tired of bread from heaven. When you find yourself complaining about the people, the work, the church, the spouse God has given you, you do not have a circumstance problem. You have a wilderness problem.</p>
+
+        <p>Second, <strong>complaint against blessing</strong>. This was the fatal one. They reached the edge of Canaan, sent in twelve spies, and ten came back saying the giants were too big. The grapes were wonderful — a single cluster two men had to carry on a pole — but the giants were too big. Israel sat down at the threshold and wept. They preferred to march back into the desert with bellies full of fear than to walk forward into the land their God had given them. God's response was severe and exact: forty days of spying, forty years of wandering — a year for a day. Every man over twenty would die in the desert except the two who had said yes: Caleb and Joshua. The giants you saw last year are still in the same spot. What you cannot finally bear is not the giants. It is the manna.</p>
+
+        <p>Third, <strong>complaint against authority</strong>. Korah and a crowd of two hundred and fifty leaders confronted Moses: <em>"all the congregation are holy, every one of them"</em> (Numbers 16:3). In other words, who put you in charge? Moses fell on his face. God answered the question Himself. The ground opened up beneath Korah's tents and swallowed them alive. Then, to seal the point, God told the head of each tribe to lay a rod before the LORD overnight. In the morning, twelve rods lay where they had been placed; one — Aaron's — had budded, blossomed, and ripened almonds on its branches. Twelve dry sticks; one alive. Authority in the camp of God does not finally rest on volume, on numbers, on credentials. It rests on resurrection life. The murmuring you do behind your pastor's back, behind your husband's back, behind your supervisor's back — God is listening, and He is not impressed by your reasons. Korah had reasons too.</p>
+
+        <h3>B. Manna and the Bread of Life</h3>
+        <p>Pause for a moment on the manna itself. The Bible says it tasted like wafers made with oil and honey (Exodus 16:31; Numbers 11:8). Oil is the standing biblical symbol of the Spirit. Honey is the symbol of God's sweetness. Both pointed forward. Centuries later Christ would stand on a hillside and say, <em>"I am the bread of life; whoever comes to me shall not hunger"</em> (John 6:35). The manna of Numbers kept a wilderness generation alive. The Bread of John 6 is given to keep you alive forever.</p>
+
+        <p>But hear this. The manna was sustaining; it was never satisfying. Many believers are camping for life on a wafer when God has set out a feast. If your Christian life feels like manna in the third decade — sustaining but never abundant — the question is not whether God is feeding you. He is. The question is what you are still doing in the wilderness.</p>
+
+        <p>And here is the warning Numbers ends with for those who linger. When the new generation finally reached the east bank of the Jordan, the tribes of Reuben and Gad, with half of Manasseh, asked Moses if they might settle on the wrong side of the river. The land east of the Jordan was good grazing country, they had cattle, and they had grown comfortable on this side (Numbers 32). Moses gave them what they asked for. They got their land. They never got Canaan. They survived. They never thrived. Every generation of the church has its borderline believers — saved out of Egypt, but unwilling to cross the last river. The wages of half-trust is half a life.</p>
+
+        <h3>C. The Bronze Serpent — Look and Live</h3>
+        <p>Late in Numbers, when the people complained yet again, the LORD sent fiery serpents into the camp. Israelites began to die. They came to Moses begging him to intercede. God's answer is one of the strangest scenes in the Old Testament. He told Moses to make a bronze serpent, set it on a pole, and lift it up. Anyone bitten who looked at the bronze serpent would live (Numbers 21:8–9).</p>
+
+        <p>Notice what the cure did not require. It did not require a sacrifice. It did not require a confession ceremony. It did not require getting cleaner before the looking. It required one thing: a look. The man dying of snake venom in his veins lifted his eyes — and he lived.</p>
+
+        <p>This is the next great station on the Scarlet Thread. From Eden's garments of skin, to Abel's slaughtered firstborn, to Noah's altar, to Moriah's ram, to the doorposts of Egypt, to the Day of Atonement — and now to a bronze serpent on a pole in a snake-bitten camp. Each scene has been pointing the same direction. Jesus Himself made it plain: <em>"As Moses lifted up the serpent in the wilderness, so must the Son of Man be lifted up, that whoever believes in Him may have eternal life"</em> (John 3:14–15). The cross is the bronze serpent of Numbers 21. The look of faith is the cure for the venom in your veins. Some of you are bitten and you know it. Quit working. Look at the cross. The healing comes through your eyes, not through your hands.</p>
+
+        <p>The book closes on the same note it began — a generation in the wilderness, watching the new generation gather at the river. Paul will sum up the whole Numbers experience in a single anguished sentence: <em>"O wretched man that I am! Who shall deliver me from this body of death? I thank God — through Jesus Christ our Lord!"</em> (Romans 7:24–25). That is why we move from Numbers into Deuteronomy. The first law showed us our deadness. We need the second.</p>
+
+        <h2>II. Deuteronomy — Moses' Love Letter</h2>
+        <p>Deuteronomy is a love letter. A man one hundred and twenty years old, who knows the LORD will not let him cross the Jordan, gathers the children of the people he has led for forty years and preaches three sermons of love to them before he climbs the mountain to die. The question Moses is asking — and the question this book asks every reader since — is: <em>how shall the people I love go on living after I am gone?</em></p>
+
+        <p>I once read of a pastor who visited a faithful old member of his church on his deathbed. The man had spent his life serving the Lord quietly — never missed a service, sent his tithe along when illness kept him home. As they sat beside the bed, the dying man lifted his hand and said, <em>"I'm so glad. I'm so glad. I'm so glad."</em> His wife asked, "Dear, what are you so glad about?" And he said, <em>"I'm so glad God is here."</em> Those were among his last words. Deuteronomy is, among other things, the question of how to live now so that the last sentence will be the right one.</p>
+
+        <h3>A. The Shema (Deuteronomy 6:4–9)</h3>
+        <p>The first great word of Moses' farewell is the line every devout Jew has prayed since: <em>"Hear, O Israel: The LORD our God, the LORD is one. You shall love the LORD your God with all your heart and with all your soul and with all your might"</em> (Deuteronomy 6:4–5). Jesus called this the greatest commandment (Mark 12:29–30). If God is one, He has all of you. If you have ten gods, He has none of you.</p>
+
+        <p>But the Shema does not stay in the synagogue. <em>"You shall teach them diligently to your children, and shall talk of them when you sit in your house, and when you walk by the way, and when you lie down, and when you rise"</em> (Deuteronomy 6:7). The most important discipleship in Israel happened around the dinner table. It still does. The most spiritual children in your church are not the ones whose parents drop them off at the right programs. They are the ones whose parents talk about the Lord when they sit, when they walk, when they lie down, and when they rise.</p>
+
+        <h3>B. Blessings and Curses (Deuteronomy 28)</h3>
+        <p>The second sermon is the law restated, and at its climax (chapter 28) is the long catalogue of blessings for obedience and curses for disobedience. Read in retrospect, Deuteronomy 28 reads like the entire history of Israel written in advance. The northern kingdom fell to Assyria in 722 B.C. The southern kingdom fell to Babylon in 586. Every detail Moses warned of came to pass.</p>
+
+        <p>A textile mill once wove fine linen on looms strung with thirty thousand threads each. The foreman told a visitor: "If a single thread out of the thirty thousand breaks, every loom in the factory stops instantly until the thread is fixed." To prove it, he stepped up and broke a thread. Every loom went silent. That is what one sin does in the life of a believer who is trying to weave. The Holy Spirit is not crushed by your one compromise — but He is grieved, and the work stops, and nothing else gets woven until the thread is repaired. The small thing you have been rationalizing for six months has more leverage in your life than you think it does.</p>
+
+        <h3>C. Choose Life (Deuteronomy 30:19)</h3>
+        <p>The last sermon climbs to its peak in chapter thirty. <em>"I have set before you life and death, blessing and curse. Therefore choose life, that you and your offspring may live"</em> (Deuteronomy 30:19). Hear that as Moses meant it. He is not preaching at unbelievers. He is preaching at the redeemed — people the LORD already brought out of Egypt by His blood, fed in the wilderness by His hand, and led to the threshold by His cloud. To <em>them</em>, on the last day of his ministry, Moses says: <em>choose life</em>.</p>
+
+        <p><em>Choose life</em> is not a conversion-day verb. It is a Tuesday-morning verb. Every day the redeemed wake up to a choice between life and death. And the One whom Deuteronomy ultimately points to — the Greater Moses — would one day stand before His people and say, <em>"I am the way, and the truth, and the life"</em> (John 14:6). To choose life, finally, is to choose Him.</p>
+
+        <h3>D. Mount Nebo</h3>
+        <p>The book closes on the saddest mountain in the Bible. <em>"And the LORD said to him, 'This is the land of which I swore to Abraham, to Isaac, and to Jacob… I have let you see it with your eyes, but you shall not go over there'"</em> (Deuteronomy 34:4). Moses sees the land. He does not enter it. The reason was a single act of impatience forty years earlier at the waters of Meribah, when he struck the rock he had been told to speak to. One sin. Forty years past. He had served faithfully ever since, and the LORD did not retract the discipline.</p>
+
+        <p>That is a hard lesson, especially for older believers. Faithfulness does not always mean walking in to the destination. Sometimes faithfulness means carrying the people right up to the door, and somebody else takes them through. Joshua took them in. Moses watched from the mountain — and there is no record in Scripture that he complained. He had learned, finally, what he could not learn at Meribah: to trust the God who would not change His standard for him, and would not love him less for it. <em>And the LORD buried him there in the valley, and no man knows the place of his burial to this day</em> (Deuteronomy 34:6). He died well. And yet Nebo is not the last word. Moses watched from the mountain because he could not enter. Christ entered the country Moses could only see, and He brings every one of His people in by His own blood.</p>
+
+        <h2>III. Christ in Numbers and Deuteronomy</h2>
+        <p>Christ is the <strong>Tabernacle</strong> in the middle of the camp, dwelling among His people (Numbers 2; John 1:14). He is the <strong>Manna</strong> from heaven, the bread of life on which a wilderness Church survives (Numbers 11; John 6:35). He is the <strong>Rock</strong> in the wilderness, struck once for the water of life (Numbers 20; 1 Corinthians 10:4). He is the <strong>Bronze Serpent</strong> lifted up so that the dying might look and live (Numbers 21; John 3:14). He is the <strong>Prophet greater than Moses</strong> whom Moses himself promised: <em>"The LORD your God will raise up for you a prophet like me from your brothers; it is to him you shall listen"</em> (Deuteronomy 18:15; cf. Acts 3:22). Moses preached Deuteronomy from the threshold of a land he could not enter. Christ leads us into a country Moses could only point to.</p>
+
+        <p>Two convictions to take from Numbers and Deuteronomy. First, <strong>God's discipline is not God's abandonment</strong>. The cloud never left Israel for a single day of those forty years. The manna fell every morning, including the mornings after the murmuring. The pillar of fire stood watch every night, including the nights of Korah's rebellion. He was disciplining a people He refused to abandon. He still does. If you are in your own wilderness right now, look up. The cloud is still there.</p>
+
+        <p>Second, <strong>faith is the difference between the generation that dies and the generation that crosses</strong>. Same God. Same promises. Same manna falling on the same camp. Two generations on the same border. The one that died refused to believe the report. The one that crossed believed it. You and I stand on a border much like Kadesh-barnea, with a promise much like Canaan, and a God exactly the same. <em>Choose life.</em></p>
+    </div>
+
+    <div class="block-es">
+        <h2>I. Números — el desierto es tuyo</h2>
+        <p>El título inglés viene de los dos censos. El título hebreo es <em>Bemidbar</em> — "en el desierto." Ese es el nombre más fiel. Números es el libro acerca de lo que le sucede a un creyente que ha sido librado de la esclavitud pero todavía no está dispuesto a confiar en Dios para la próxima milla.</p>
+
+        <p>Números abre con un censo: 603,550 hombres de guerra de veinte años en adelante, organizados tribu por tribu alrededor del tabernáculo. Cuarenta años después, Números termina con un segundo censo: 601,730 hombres de guerra, organizados tribu por tribu alrededor del tabernáculo. Aproximadamente el mismo número — pero los nombres son distintos. Los hombres del primer pase de lista yacían enterrados en la arena. Los hombres del segundo entrarían caminando en la Tierra Prometida. Y le hace a cada lector la pregunta que solo él puede responder: <em>¿cuál de las dos generaciones soy yo?</em></p>
+
+        <p>En ambos censos, el tabernáculo está en el centro del campamento — un Dios santo en el medio de Su pueblo. Esa imagen es un anticipo. Siglos después Juan escribirá: <em>"El Verbo se hizo carne, y habitó entre nosotros"</em> (Juan 1:14), y en su Apocalipsis lo verá hecho realidad: <em>el tabernáculo de Dios con los hombres</em> (Apocalipsis 21:3). El tabernáculo en el centro del campamento es Cristo en el medio de cada campamento que Él reúne.</p>
+
+        <p>El viaje desde Sinaí hasta Canaán debió haber tomado once días (Deuteronomio 1:2). Tomó cuarenta años. Calcule la matemática de dos millones de personas sentenciadas a morir en esas cuatro décadas y llegará a una cifra sobria — aproximadamente ochenta y dos funerales por día, veinticuatro horas al día, durante cuarenta años. El desierto era un enorme cementerio. Israel tenía dos ocupaciones principales: quejarse y enterrar. No se les acabó ninguna.</p>
+
+        <h3>A. Las tres murmuraciones</h3>
+        <p>Abra el medio de Números y el mismo patrón sigue apareciendo — un pueblo quejándose. Tres capas de queja, cada una con un paralelo en su propia vida.</p>
+
+        <p>Primero, <strong>queja contra las circunstancias</strong>. Se quejaban del maná, del agua, de la carne, del polvo. El maná caía del cielo seis mañanas a la semana y sabía como obleas hechas con miel, y se cansaron de él. Lea esa frase otra vez — es una de las líneas más inquietantes del Antiguo Testamento. Se cansaron del pan del cielo. Cuando usted se encuentra quejándose de la gente, del trabajo, de la iglesia, del cónyuge que Dios le ha dado, no tiene un problema de circunstancias. Tiene un problema de desierto.</p>
+
+        <p>Segundo, <strong>queja contra la bendición</strong>. Esta fue la fatal. Llegaron al borde de Canaán, enviaron a doce espías, y diez regresaron diciendo que los gigantes eran demasiado grandes. Las uvas eran maravillosas — un solo racimo que dos hombres tenían que cargar en un palo — pero los gigantes eran demasiado grandes. Israel se sentó en el umbral y lloró. Prefirieron marchar de regreso al desierto con el vientre lleno de miedo antes que caminar hacia adelante a la tierra que su Dios les había dado. La respuesta de Dios fue severa y exacta: cuarenta días de espiar, cuarenta años vagando — un año por día. Todo hombre mayor de veinte moriría en el desierto excepto los dos que habían dicho sí: Caleb y Josué. Los gigantes que vio el año pasado siguen en el mismo lugar. Lo que finalmente no puede soportar no son los gigantes. Es el maná.</p>
+
+        <p>Tercero, <strong>queja contra la autoridad</strong>. Coré y una multitud de doscientos cincuenta líderes confrontaron a Moisés: <em>"toda la congregación, todos ellos son santos"</em> (Números 16:3). En otras palabras, ¿quién te puso a cargo? Moisés cayó sobre su rostro. Dios respondió la pregunta Él mismo. La tierra se abrió debajo de las tiendas de Coré y los tragó vivos. Luego, para sellar el punto, Dios le dijo al jefe de cada tribu que pusiera una vara delante del SEÑOR durante la noche. En la mañana, doce varas seguían donde habían sido colocadas; una — la de Aarón — había brotado, florecido y producido almendras maduras en sus ramas. Doce palos secos; uno vivo. La autoridad en el campamento de Dios no descansa finalmente en el volumen, en los números, en las credenciales. Descansa en la vida de resurrección. La murmuración que usted hace a espaldas de su pastor, a espaldas de su esposo, a espaldas de su supervisor — Dios está escuchando, y no está impresionado por sus razones. Coré también tenía razones.</p>
+
+        <h3>B. El maná y el Pan de Vida</h3>
+        <p>Detengámonos un momento en el maná mismo. La Biblia dice que sabía como obleas hechas con aceite y miel (Éxodo 16:31; Números 11:8). El aceite es el símbolo bíblico estándar del Espíritu. La miel es el símbolo de la dulzura de Dios. Ambos apuntaban hacia adelante. Siglos después Cristo se pararía en una ladera y diría: <em>"Yo soy el pan de vida; el que a mí viene, nunca tendrá hambre"</em> (Juan 6:35). El maná de Números mantuvo viva a una generación del desierto. El Pan de Juan 6 se da para mantenerlo vivo para siempre.</p>
+
+        <p>Pero escuche esto. El maná sostenía; nunca satisfacía. Muchos creyentes están acampando de por vida sobre una oblea cuando Dios ha puesto un banquete. Si su vida cristiana se siente como maná en la tercera década — sustentadora pero nunca abundante — la pregunta no es si Dios le está alimentando. Lo está. La pregunta es qué sigue usted haciendo en el desierto.</p>
+
+        <p>Y aquí está la advertencia con la que Números termina para los que se rezagan. Cuando la nueva generación finalmente llegó a la ribera oriental del Jordán, las tribus de Rubén y Gad, con media tribu de Manasés, le pidieron a Moisés si podían establecerse al lado equivocado del río. La tierra al este del Jordán era buena tierra de pastoreo, tenían ganado, y se habían vuelto cómodos en ese lado (Números 32). Moisés les dio lo que pidieron. Obtuvieron su tierra. Nunca obtuvieron Canaán. Sobrevivieron. Nunca prosperaron. Cada generación de la iglesia tiene sus creyentes fronterizos — salvados de Egipto, pero no dispuestos a cruzar el último río. El salario de la media-confianza es media vida.</p>
+
+        <h3>C. La serpiente de bronce — mire y viva</h3>
+        <p>Avanzado el libro de Números, cuando el pueblo se quejó una vez más, el SEÑOR envió serpientes ardientes al campamento. Los israelitas empezaron a morir. Vinieron a Moisés rogándole que intercediera. La respuesta de Dios es una de las escenas más extrañas del Antiguo Testamento. Le dijo a Moisés que hiciera una serpiente de bronce, la pusiera sobre un poste y la levantara. Cualquiera mordido que mirara a la serpiente de bronce viviría (Números 21:8–9).</p>
+
+        <p>Note lo que la cura no requería. No requería un sacrificio. No requería una ceremonia de confesión. No requería limpiarse antes de mirar. Requería una sola cosa: una mirada. El hombre que se moría con veneno de serpiente en las venas levantaba los ojos — y vivía.</p>
+
+        <p>Esta es la próxima gran estación del Hilo Escarlata. Desde las túnicas de pieles del Edén, al primogénito sacrificado de Abel, al altar de Noé, al carnero de Moriah, a los dinteles de Egipto, al Día de la Expiación — y ahora a una serpiente de bronce sobre un poste en un campamento mordido por serpientes. Cada escena ha apuntado en la misma dirección. Jesús mismo lo dejó claro: <em>"Como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del Hombre sea levantado, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna"</em> (Juan 3:14–15). La cruz es la serpiente de bronce de Números 21. La mirada de fe es la cura para el veneno en sus venas. Algunos de ustedes están mordidos y lo saben. Deje de trabajar. Mire la cruz. La sanidad viene por sus ojos, no por sus manos.</p>
+
+        <p>El libro cierra en la misma nota en la que empezó — una generación en el desierto, mirando a la nueva generación reunirse en el río. Pablo resumirá toda la experiencia de Números en una sola frase angustiada: <em>"¡Miserable de mí! ¿quién me librará de este cuerpo de muerte? Gracias doy a Dios, por Jesucristo Señor nuestro"</em> (Romanos 7:24–25). Por eso pasamos de Números a Deuteronomio. La primera ley nos mostró nuestra muerte. Necesitamos la segunda.</p>
+
+        <h2>II. Deuteronomio — la carta de amor de Moisés</h2>
+        <p>Deuteronomio es una carta de amor. Un hombre de ciento veinte años, que sabe que el SEÑOR no le permitirá cruzar el Jordán, reúne a los hijos del pueblo que ha guiado por cuarenta años y les predica tres sermones de amor antes de subir la montaña para morir. La pregunta que Moisés hace — y la pregunta que este libro le hace a cada lector desde entonces — es: <em>¿cómo vivirá el pueblo que amo después de que yo me haya ido?</em></p>
+
+        <p>Una vez leí de un pastor que visitó a un fiel miembro anciano de su iglesia en su lecho de muerte. El hombre había pasado su vida sirviendo al Señor en silencio — nunca se perdía un servicio, enviaba su diezmo cuando la enfermedad lo mantenía en casa. Mientras estaban sentados junto a la cama, el moribundo levantó la mano y dijo: <em>"Estoy tan contento. Estoy tan contento. Estoy tan contento."</em> Su esposa preguntó: "Querido, ¿de qué estás tan contento?" Y él dijo: <em>"Estoy tan contento de que Dios está aquí."</em> Esas estuvieron entre sus últimas palabras. Deuteronomio es, entre otras cosas, la pregunta de cómo vivir ahora para que la última frase sea la correcta.</p>
+
+        <h3>A. El Shemá (Deuteronomio 6:4–9)</h3>
+        <p>La primera gran palabra de la despedida de Moisés es la línea que todo judío devoto ha orado desde entonces: <em>"Oye, Israel: Jehová nuestro Dios, Jehová uno es. Y amarás a Jehová tu Dios de todo tu corazón, y de toda tu alma, y con todas tus fuerzas"</em> (Deuteronomio 6:4–5). Jesús llamó a esto el mandamiento más grande (Marcos 12:29–30). Si Dios es uno, lo tiene todo de usted. Si usted tiene diez dioses, Él no tiene nada de usted.</p>
+
+        <p>Pero el Shemá no se queda en la sinagoga. <em>"Y las repetirás a tus hijos, y hablarás de ellas estando en tu casa, y andando por el camino, y al acostarte, y cuando te levantes"</em> (Deuteronomio 6:7). El discipulado más importante en Israel sucedía alrededor de la mesa de la cena. Todavía es así. Los niños más espirituales en su iglesia no son aquellos cuyos padres los dejan en los programas correctos. Son aquellos cuyos padres hablan del Señor cuando se sientan, cuando andan, cuando se acuestan y cuando se levantan.</p>
+
+        <h3>B. Bendiciones y maldiciones (Deuteronomio 28)</h3>
+        <p>El segundo sermón es la ley reformulada, y en su clímax (capítulo 28) está el largo catálogo de bendiciones para la obediencia y maldiciones para la desobediencia. Leído retrospectivamente, Deuteronomio 28 se lee como toda la historia de Israel escrita por adelantado. El reino del norte cayó ante Asiria en 722 a.C. El reino del sur cayó ante Babilonia en 586. Cada detalle del que Moisés advirtió se cumplió.</p>
+
+        <p>Un molino textil tejía una vez finos linos en telares enhebrados con treinta mil hilos cada uno. El capataz le dijo a un visitante: "Si un solo hilo de los treinta mil se rompe, cada telar de la fábrica se detiene instantáneamente hasta que el hilo se repare." Para probarlo, se acercó y rompió un hilo. Cada telar quedó en silencio. Eso es lo que un pecado hace en la vida de un creyente que está intentando tejer. El Espíritu Santo no es aplastado por un compromiso suyo — pero sí es contristado, y la obra se detiene, y nada más se teje hasta que el hilo se repare. Esa pequeña cosa que usted ha estado racionalizando por seis meses tiene más peso en su vida del que usted cree.</p>
+
+        <h3>C. Escoge la vida (Deuteronomio 30:19)</h3>
+        <p>El último sermón sube a su cumbre en el capítulo treinta. <em>"A los cielos y a la tierra llamo por testigos hoy contra vosotros, que os he puesto delante la vida y la muerte, la bendición y la maldición; escoge, pues, la vida, para que vivas tú y tu descendencia"</em> (Deuteronomio 30:19). Oiga eso como Moisés lo quiso. No está predicando a incrédulos. Está predicando a redimidos — gente a la que el SEÑOR ya sacó de Egipto por Su sangre, alimentó en el desierto con Su mano, y guió al umbral con Su nube. A <em>ellos</em>, en el último día de su ministerio, Moisés les dice: <em>escoge la vida</em>.</p>
+
+        <p><em>Escoge la vida</em> no es un verbo del día de la conversión. Es un verbo del martes por la mañana. Cada día los redimidos despiertan a una elección entre vida y muerte. Y Aquel a quien Deuteronomio finalmente apunta — el Moisés Mayor — un día se pararía ante Su pueblo y diría: <em>"Yo soy el camino, y la verdad, y la vida"</em> (Juan 14:6). Escoger la vida, finalmente, es escogerle a Él.</p>
+
+        <h3>D. El Monte Nebo</h3>
+        <p>El libro cierra en la montaña más triste de la Biblia. <em>"Y le dijo Jehová: Esta es la tierra de que juré a Abraham, a Isaac y a Jacob… te he permitido verla con tus ojos, mas no pasarás allá"</em> (Deuteronomio 34:4). Moisés ve la tierra. No entra en ella. La razón fue un solo acto de impaciencia cuarenta años antes en las aguas de Meriba, cuando golpeó la roca a la que se le había dicho que hablara. Un pecado. Cuarenta años atrás. Había servido fielmente desde entonces, y el SEÑOR no retiró la disciplina.</p>
+
+        <p>Esa es una lección dura, especialmente para los creyentes mayores. La fidelidad no siempre significa entrar caminando al destino. A veces la fidelidad significa cargar al pueblo justo hasta la puerta, y que alguien más los lleve adentro. Josué los llevó. Moisés miró desde la montaña — y no hay registro en las Escrituras de que se quejara. Había aprendido, finalmente, lo que no pudo aprender en Meriba: a confiar en el Dios que no bajaría Su estándar por él, y no lo amaría menos por eso. <em>Y lo enterró Jehová en el valle, y ninguno sabe el lugar de su sepultura hasta hoy</em> (Deuteronomio 34:6). Murió bien. Y sin embargo Nebo no es la última palabra. Moisés miró desde la montaña porque no podía entrar. Cristo entró en el país que Moisés solo pudo ver, y trae a cada uno de Sus hijos por Su propia sangre.</p>
+
+        <h2>III. Cristo en Números y Deuteronomio</h2>
+        <p>Cristo es el <strong>Tabernáculo</strong> en el medio del campamento, habitando entre Su pueblo (Números 2; Juan 1:14). Él es el <strong>Maná</strong> del cielo, el pan de vida del que sobrevive una Iglesia en desierto (Números 11; Juan 6:35). Él es la <strong>Roca</strong> en el desierto, golpeada una vez por el agua de vida (Números 20; 1 Corintios 10:4). Él es la <strong>Serpiente de Bronce</strong> levantada para que los que mueren miren y vivan (Números 21; Juan 3:14). Él es el <strong>Profeta mayor que Moisés</strong> que Moisés mismo prometió: <em>"Profeta de en medio de ti, de tus hermanos, como yo, te levantará Jehová tu Dios; a él oiréis"</em> (Deuteronomio 18:15; cf. Hechos 3:22). Moisés predicó Deuteronomio desde el umbral de una tierra a la que no podía entrar. Cristo nos lleva a un país que Moisés solo pudo señalar.</p>
+
+        <p>Dos convicciones para llevarse de Números y Deuteronomio. Primero, <strong>la disciplina de Dios no es el abandono de Dios</strong>. La nube nunca dejó a Israel un solo día de aquellos cuarenta años. El maná caía cada mañana, incluyendo las mañanas después de la murmuración. La columna de fuego velaba cada noche, incluyendo las noches de la rebelión de Coré. Estaba disciplinando a un pueblo que se negó a abandonar. Aún lo hace. Si usted está en su propio desierto ahora mismo, mire arriba. La nube sigue ahí.</p>
+
+        <p>Segundo, <strong>la fe es la diferencia entre la generación que muere y la generación que cruza</strong>. El mismo Dios. Las mismas promesas. El mismo maná cayendo sobre el mismo campamento. Dos generaciones en la misma frontera. La que murió rehusó creer el reporte. La que cruzó lo creyó. Usted y yo estamos sobre una frontera muy parecida a Cades-barnea, con una promesa muy parecida a Canaán, y un Dios exactamente el mismo. <em>Escoja la vida.</em></p>
+    </div>
+</div>
+
+<!-- TRACK BANNER + EXAM -->
+<div class="card">
+    <h2><span class="lang-en">Unit 3 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 3 — 30 Preguntas</span></h2>
+    <div class="track-banner" id="trackBanner"></div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button class="action-btn" id="submitExamBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="action-btn reset" id="resetExamBtn"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+    </div>
+    <div id="examResult" class="exam-result" style="display:none;"></div>
+</div>
+
+</div>
+
+<script>
+const COURSE_KEY = 'cts_ots_progress';
+const STUDENT_KEY = 'cts_student';
+const UNIT_NUM = 3;
+const TOTAL_UNITS = 13;
+const NEXT_UNIT_HREF = 'CTSUnit4.html';
+const PREV_UNIT_HREF = 'CTSUnit2.html';
+const UNIT_PASSED_KEY = 'cts_ots_unit3_passed';
+const UNIT_STATE_KEY = 'cts_ots_unit3_state';
+const LOCKOUT_KEY = 'cts_ots_unit3_lockout';
+const PASS_THRESHOLD_MC = 18;
+const PASS_THRESHOLD_SA = 9;
+const LOCKOUT_MS = 15 * 60 * 1000; // legacy ceiling (Masters); see lockMinutes()
+// Track-aware review wait: gentle 2-min pause for lay/Certificate, full 15 min for Masters.
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+function lockoutMs() { return lockMinutes() * 60 * 1000; }
+const REDIRECT_MS = 3000;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_ots_unit3_mc_passed';
+const SA_LOCK_KEY = 'cts_ots_unit3_sa_lockout';
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = new Array(20).fill(false);
+let unitPassed = localStorage.getItem(UNIT_PASSED_KEY) === 'true';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10)
+        : parseInt(localStorage.getItem(LOCKOUT_KEY) || '0', 10);
+}
+let lockUntil = activeLockUntil();
+let progress = JSON.parse(localStorage.getItem(COURSE_KEY) || '{}');
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+
+function getTrack() { if (student.program === 'Master of Divinity') return 'mdiv';
+    if (student.program === 'Master of Theology') return 'thm';
+    return 'cert'; }
+function isMDiv() { return getTrack() === 'mdiv'; }
+function isMastersLevel() { const t = getTrack(); return t === 'mdiv' || t === 'thm'; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(`cts_ots_unit${i}_passed`) === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (unitPassed) location.href = NEXT_UNIT_HREF;
+    else alert(currentLang === 'en' ? 'Please pass Unit 3 first.' : 'Por favor apruebe la Unidad 3 primero.');
+};
+document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_UNIT_HREF; };
+
+function loadReg() {
+    let saved = localStorage.getItem(STUDENT_KEY);
+    if (saved) {
+        student = JSON.parse(saved);
+        document.getElementById('studentName').value = student.name || '';
+        document.getElementById('studentEmail').value = student.email || '';
+        document.getElementById('studentCountry').value = student.country || '';
+        document.getElementById('studentProgram').value = student.program || 'Certificate of Ministry';
+    }
+}
+function saveReg() {
+    student.name = document.getElementById('studentName').value.trim();
+    student.email = document.getElementById('studentEmail').value.trim();
+    student.country = document.getElementById('studentCountry').value.trim();
+    student.program = document.getElementById('studentProgram').value;
+    if (student.name && student.email) localStorage.setItem(STUDENT_KEY, JSON.stringify(student));
+}
+['studentName','studentEmail','studentCountry'].forEach(id => {
+    document.getElementById(id).addEventListener('change', saveReg);
+});
+document.getElementById('studentProgram').addEventListener('change', () => {
+    saveReg(); renderTrackBanner(); renderQuestions();
+});
+
+function renderTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    if (!banner) return;
+    if (isMastersLevel()) {
+        banner.innerHTML = currentLang === 'en'
+            ? ('<strong>' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ' Track:</strong> Answer all 30 questions. To pass you need <strong>18/20</strong> multiple choice <em>and</em> <strong>9/10</strong> short answer, judged independently. Short answers may be written in English or Spanish.')
+            : ('<strong>Pista ' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ':</strong> Responda las 30 preguntas. Para aprobar necesita <strong>18/20</strong> en opción múltiple <em>y</em> <strong>9/10</strong> en respuesta corta, evaluadas independientemente. Las respuestas cortas pueden escribirse en inglés o español.');
+    } else {
+        banner.innerHTML = currentLang === 'en'
+            ? '<strong>Certificate Track:</strong> Answer questions 1–20 (multiple choice). To pass you need <strong>18/20</strong> (90%). Short-answer questions are optional practice and not graded.'
+            : '<strong>Pista Certificado:</strong> Responda las preguntas 1–20 (opción múltiple). Para aprobar necesita <strong>18/20</strong> (90%). Las preguntas de respuesta corta son práctica opcional y no se califican.';
+    }
+}
+
+function saveState() {
+    localStorage.setItem(UNIT_STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers, mcRevealed }));
+}
+function loadState() {
+    const raw = localStorage.getItem(UNIT_STATE_KEY);
+    if (!raw) return;
+    try {
+        const s = JSON.parse(raw);
+        if (Array.isArray(s.mcAnswers)) mcAnswers = s.mcAnswers;
+        if (Array.isArray(s.kwAnswers)) kwAnswers = s.kwAnswers;
+        if (Array.isArray(s.mcRevealed)) mcRevealed = s.mcRevealed;
+    } catch (e) {}
+}
+
+const mcQuestions = [
+    { id:1, en:"1. The Hebrew title of Numbers, <em>Bemidbar</em>, means:", es:"1. El título hebreo de Números, <em>Bemidbar</em>, significa:",
+      optionsEn:["In the Wilderness","Numbers","The Second Law","The Wanderings"],
+      optionsEs:["En el desierto","Números","La segunda ley","Las peregrinaciones"], correct:"A",
+      fcEn:"Correct. <em>Bemidbar</em> — 'in the wilderness' — is the truer name. Numbers is the wilderness book.",
+      fcEs:"Correcto. <em>Bemidbar</em> — 'en el desierto' — es el nombre más fiel. Números es el libro del desierto.",
+      fiEn:"The Hebrew title is 'In the Wilderness' (Bemidbar). 'Numbers' is the English title from the two censuses. 'The Second Law' is Deuteronomy.",
+      fiEs:"El título hebreo es 'En el desierto' (Bemidbar). 'Números' es el título inglés de los dos censos. 'La segunda ley' es Deuteronomio." },
+    { id:2, en:"2. How many fighting men were counted in the first census of Numbers?", es:"2. ¿Cuántos hombres de guerra fueron contados en el primer censo de Números?",
+      optionsEn:["400,000","800,000","603,550","1,200,000"],
+      optionsEs:["400,000","800,000","603,550","1,200,000"], correct:"C",
+      fcEn:"Correct. 603,550 in the first census. By the second census, forty years later, the number was 601,730 — roughly the same, with different names.",
+      fcEs:"Correcto. 603,550 en el primer censo. Para el segundo censo, cuarenta años después, eran 601,730 — aproximadamente el mismo, con nombres diferentes.",
+      fiEn:"The first census counted 603,550 fighting men aged twenty and up (Numbers 1).",
+      fiEs:"El primer censo contó 603,550 hombres de guerra de veinte años en adelante (Números 1)." },
+    { id:3, en:"3. Which two spies gave a positive report and urged the people to enter Canaan?", es:"3. ¿Cuáles dos espías dieron un informe positivo y exhortaron al pueblo a entrar en Canaán?",
+      optionsEn:["Moses and Aaron","Caleb and Joshua","Phinehas and Eleazar","Korah and Dathan"],
+      optionsEs:["Moisés y Aarón","Caleb y Josué","Fineas y Eleazar","Coré y Datán"], correct:"B",
+      fcEn:"Correct. Caleb and Joshua were the only two of the spy generation who would enter the land.",
+      fcEs:"Correcto. Caleb y Josué fueron los únicos dos de la generación de espías que entrarían a la tierra.",
+      fiEn:"Caleb and Joshua said yes; the other ten said no. Only those two of all the men over twenty entered Canaan.",
+      fiEs:"Caleb y Josué dijeron sí; los otros diez dijeron no. Solo esos dos de todos los hombres mayores de veinte entraron a Canaán." },
+    { id:4, en:"4. As a consequence of unbelief, Israel wandered in the wilderness for:", es:"4. Como consecuencia de la incredulidad, Israel vagó en el desierto por:",
+      optionsEn:["10 years","20 years","80 years","40 years"],
+      optionsEs:["10 años","20 años","80 años","40 años"], correct:"D",
+      fcEn:"Correct. Forty years — a year for every day the twelve spies were in the land. God's response was severe and exact.",
+      fcEs:"Correcto. Cuarenta años — un año por cada día que los doce espías estuvieron en la tierra. La respuesta de Dios fue severa y exacta.",
+      fiEn:"Forty years (Numbers 14:34) — one year for each of the forty days the spies spent in the land.",
+      fiEs:"Cuarenta años (Números 14:34) — un año por cada uno de los cuarenta días que los espías pasaron en la tierra." },
+    { id:5, en:"5. The bronze serpent lifted up in Numbers 21 is a type of:", es:"5. La serpiente de bronce levantada en Números 21 es un tipo de:",
+      optionsEn:["The cross of Christ","The tabernacle","The temple","The ark of the covenant"],
+      optionsEs:["La cruz de Cristo","El tabernáculo","El templo","El arca del pacto"], correct:"A",
+      fcEn:"Correct. Jesus Himself made this connection: 'As Moses lifted up the serpent in the wilderness, so must the Son of Man be lifted up' (John 3:14).",
+      fcEs:"Correcto. Jesús mismo hizo esta conexión: 'Como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del Hombre sea levantado' (Juan 3:14).",
+      fiEn:"The bronze serpent is one of the clearest types of the cross in the Old Testament. Jesus identified it with His crucifixion in John 3:14.",
+      fiEs:"La serpiente de bronce es uno de los tipos más claros de la cruz en el Antiguo Testamento. Jesús la identificó con Su crucifixión en Juan 3:14." },
+    { id:6, en:"6. Deuteronomy means:", es:"6. Deuteronomio significa:",
+      optionsEn:["First law","Renewed covenant","Second law","The book of Moses"],
+      optionsEs:["Primera ley","Pacto renovado","Segunda ley","El libro de Moisés"], correct:"C",
+      fcEn:"Correct. The Greek <em>deuteros nomos</em> — 'second law.' Moses preaches the law a second time to the new generation about to enter Canaan.",
+      fcEs:"Correcto. El griego <em>deuteros nomos</em> — 'segunda ley.' Moisés predica la ley una segunda vez a la nueva generación que está por entrar en Canaán.",
+      fiEn:"Deuteronomy is from the Greek meaning 'second law' — Moses' restatement of the Law to the new generation.",
+      fiEs:"Deuteronomio viene del griego 'segunda ley' — la reformulación de Moisés de la Ley a la nueva generación." },
+    { id:7, en:"7. The Shema (Deuteronomy 6:4–5) commands Israel to:", es:"7. El Shemá (Deuteronomio 6:4–5) ordena a Israel:",
+      optionsEn:["Keep the Sabbath","Offer sacrifices","Build the tabernacle","Love God with all their heart"],
+      optionsEs:["Guardar el día de reposo","Ofrecer sacrificios","Construir el tabernáculo","Amar a Dios con todo su corazón"], correct:"D",
+      fcEn:"Correct. 'Hear, O Israel: The LORD our God, the LORD is one. You shall love the LORD your God…' (Deuteronomy 6:4–5). Jesus called this the greatest commandment.",
+      fcEs:"Correcto. 'Oye, Israel: Jehová nuestro Dios, Jehová uno es. Y amarás a Jehová tu Dios…' (Deuteronomio 6:4–5). Jesús llamó a esto el mandamiento más grande.",
+      fiEn:"The Shema commands wholehearted love for the LORD — Jesus called this the greatest commandment (Mark 12:29–30).",
+      fiEs:"El Shemá ordena el amor de todo corazón al SEÑOR — Jesús lo llamó el mandamiento más grande (Marcos 12:29–30)." },
+    { id:8, en:"8. The rebellion of Korah in Numbers 16 was a complaint against:", es:"8. La rebelión de Coré en Números 16 era una queja contra:",
+      optionsEn:["Food","Water","Leadership and priesthood","The golden calf"],
+      optionsEs:["Comida","Agua","Liderazgo y sacerdocio","El becerro de oro"], correct:"C",
+      fcEn:"Correct. Korah challenged Moses' authority: 'all the congregation are holy' (Numbers 16:3). The ground opened and swallowed them, and Aaron's rod budded overnight.",
+      fcEs:"Correcto. Coré desafió la autoridad de Moisés: 'toda la congregación, todos ellos son santos' (Números 16:3). La tierra se abrió y los tragó, y la vara de Aarón brotó durante la noche.",
+      fiEn:"Korah and his 250 leaders challenged Moses and Aaron's leadership and priesthood. God's response was severe: the ground swallowed them, and Aaron's rod budded to confirm divinely appointed authority.",
+      fiEs:"Coré y sus 250 líderes desafiaron el liderazgo y sacerdocio de Moisés y Aarón. La respuesta de Dios fue severa: la tierra los tragó, y la vara de Aarón brotó para confirmar la autoridad designada por Dios." },
+    { id:9, en:"9. According to Deuteronomy 28, disobedience leads to:", es:"9. Según Deuteronomio 28, la desobediencia conduce a:",
+      optionsEn:["Curse and exile","Blessing","Wealth","Long life"],
+      optionsEs:["Maldición y exilio","Bendición","Riqueza","Larga vida"], correct:"A",
+      fcEn:"Correct. Deuteronomy 28 reads like the entire history of Israel written in advance — the northern kingdom fell to Assyria in 722, the southern to Babylon in 586.",
+      fcEs:"Correcto. Deuteronomio 28 se lee como toda la historia de Israel escrita por adelantado — el reino del norte cayó ante Asiria en 722, el del sur ante Babilonia en 586.",
+      fiEn:"Deuteronomy 28 details curses for disobedience including drought, defeat, disease, and finally exile. Every detail Moses warned of came to pass.",
+      fiEs:"Deuteronomio 28 detalla maldiciones por desobediencia incluyendo sequía, derrota, enfermedad y finalmente exilio. Cada detalle del que Moisés advirtió se cumplió." },
+    { id:10, en:"10. Moses died:", es:"10. Moisés murió:",
+      optionsEn:["After entering Canaan","On Mount Nebo, before entering Canaan","During the conquest","After Joshua died"],
+      optionsEs:["Después de entrar en Canaán","En el Monte Nebo, antes de entrar en Canaán","Durante la conquista","Después de la muerte de Josué"], correct:"B",
+      fcEn:"Correct. Moses saw the land from Mount Nebo but did not enter — the discipline for striking the rock at Meribah forty years earlier (Deuteronomy 34).",
+      fcEs:"Correcto. Moisés vio la tierra desde el Monte Nebo pero no entró — la disciplina por golpear la roca en Meriba cuarenta años antes (Deuteronomio 34).",
+      fiEn:"Moses died on Mount Nebo before crossing the Jordan. Joshua led the people into Canaan.",
+      fiEs:"Moisés murió en el Monte Nebo antes de cruzar el Jordán. Josué llevó al pueblo a Canaán." },
+    { id:11, en:"11. Aaron's rod budding overnight (Numbers 17) was a sign that:", es:"11. La vara de Aarón brotando durante la noche (Números 17) era una señal de que:",
+      optionsEn:["God-appointed authority rests on resurrection life","Israel could choose any priest","Moses could be replaced","All twelve tribes had equal priesthood"],
+      optionsEs:["La autoridad designada por Dios descansa en la vida de resurrección","Israel podía elegir cualquier sacerdote","Moisés podía ser reemplazado","Las doce tribus tenían sacerdocio igual"], correct:"A",
+      fcEn:"Correct. Twelve dry sticks; one alive. Authority in the camp of God rests on resurrection life, not volume or credentials.",
+      fcEs:"Correcto. Doce palos secos; uno vivo. La autoridad en el campamento de Dios descansa en la vida de resurrección, no en el volumen o las credenciales.",
+      fiEn:"After Korah's rebellion, God had each tribe lay a rod before Him; only Aaron's budded, blossomed, and bore almonds — confirming his priesthood by resurrection life (Numbers 17).",
+      fiEs:"Después de la rebelión de Coré, Dios hizo que cada tribu pusiera una vara delante de Él; solo la de Aarón brotó, floreció y dio almendras — confirmando su sacerdocio por la vida de resurrección (Números 17)." },
+    { id:12, en:"12. Which New Testament book uses Israel's wilderness failure as a warning?", es:"12. ¿Qué libro del Nuevo Testamento usa el fracaso de Israel en el desierto como advertencia?",
+      optionsEn:["Romans","James","Hebrews","Revelation"],
+      optionsEs:["Romanos","Santiago","Hebreos","Apocalipsis"], correct:"C",
+      fcEn:"Correct. Hebrews 3–4 quotes Psalm 95 about Israel's hardened hearts: 'Today, if you hear His voice, do not harden your hearts as they did.'",
+      fcEs:"Correcto. Hebreos 3–4 cita el Salmo 95 sobre los corazones endurecidos de Israel: 'Si oyereis hoy su voz, no endurezcáis vuestros corazones, como en la provocación.'",
+      fiEn:"Hebrews 3–4 uses the wilderness generation as a sustained warning for Christians not to harden their hearts.",
+      fiEs:"Hebreos 3–4 usa la generación del desierto como una advertencia sostenida para los cristianos a no endurecer sus corazones." },
+    { id:13, en:"13. How many men of the exodus generation entered the Promised Land?", es:"13. ¿Cuántos hombres de la generación del éxodo entraron en la Tierra Prometida?",
+      optionsEn:["None","Twelve","Forty","Two (Caleb and Joshua)"],
+      optionsEs:["Ninguno","Doce","Cuarenta","Dos (Caleb y Josué)"], correct:"D",
+      fcEn:"Correct. Only Caleb and Joshua — the two who had said yes — entered. Every other man over twenty died in the desert.",
+      fcEs:"Correcto. Solo Caleb y Josué — los dos que habían dicho sí — entraron. Cada otro hombre mayor de veinte murió en el desierto.",
+      fiEn:"Of all the men over twenty in the exodus generation, only Caleb and Joshua entered Canaan — the rest died in the wilderness.",
+      fiEs:"De todos los hombres mayores de veinte en la generación del éxodo, solo Caleb y Josué entraron a Canaán — el resto murió en el desierto." },
+    { id:14, en:"14. The rock in the wilderness that gave water is interpreted by Paul as:", es:"14. La roca en el desierto que dio agua es interpretada por Pablo como:",
+      optionsEn:["A literal rock only","The Law","The temple","Christ (1 Corinthians 10:4)"],
+      optionsEs:["Una roca literal solamente","La Ley","El templo","Cristo (1 Corintios 10:4)"], correct:"D",
+      fcEn:"Correct. 'They drank from the spiritual Rock that followed them, and the Rock was Christ' (1 Corinthians 10:4).",
+      fcEs:"Correcto. 'Bebían de la roca espiritual que los seguía, y la roca era Cristo' (1 Corintios 10:4).",
+      fiEn:"Paul reads the wilderness rock as a type of Christ — struck once, pouring out living water for His people.",
+      fiEs:"Pablo lee la roca del desierto como un tipo de Cristo — golpeada una vez, derramando agua viva para Su pueblo." },
+    { id:15, en:"15. The tribes of Reuben, Gad, and half-Manasseh asked to settle:", es:"15. Las tribus de Rubén, Gad y media Manasés pidieron establecerse:",
+      optionsEn:["In Egypt","East of the Jordan, outside Canaan","On Mount Sinai","In the wilderness of Sin"],
+      optionsEs:["En Egipto","Al este del Jordán, fuera de Canaán","En el Monte Sinaí","En el desierto de Sin"], correct:"B",
+      fcEn:"Correct. They survived. They never thrived. Every generation of the church has its borderline believers — saved out of Egypt, unwilling to cross the last river.",
+      fcEs:"Correcto. Sobrevivieron. Nunca prosperaron. Cada generación de la iglesia tiene sus creyentes fronterizos — salvados de Egipto, no dispuestos a cruzar el último río.",
+      fiEn:"In Numbers 32, Reuben, Gad, and half-Manasseh settled east of the Jordan — outside the Promised Land — for the sake of grazing land for their cattle.",
+      fiEs:"En Números 32, Rubén, Gad y media Manasés se establecieron al este del Jordán — fuera de la Tierra Prometida — por causa de la tierra de pastoreo para su ganado." },
+    { id:16, en:"16. The primary message of Deuteronomy is:", es:"16. El mensaje principal de Deuteronomio es:",
+      optionsEn:["God's judgment only","Build the tabernacle","Choose life through love and obedience","Celebrate festivals"],
+      optionsEs:["Solo el juicio de Dios","Construir el tabernáculo","Elegir la vida mediante el amor y la obediencia","Celebrar fiestas"], correct:"C",
+      fcEn:"Correct. 'I have set before you life and death… therefore choose life' (Deuteronomy 30:19). A Tuesday-morning verb, not a conversion-day one.",
+      fcEs:"Correcto. 'Os he puesto delante la vida y la muerte… escoge, pues, la vida' (Deuteronomio 30:19). Un verbo del martes por la mañana, no del día de la conversión.",
+      fiEn:"Deuteronomy is a love letter calling the redeemed to choose life through love for God and obedience to His covenant.",
+      fiEs:"Deuteronomio es una carta de amor llamando a los redimidos a escoger la vida mediante el amor a Dios y la obediencia a Su pacto." },
+    { id:17, en:"17. The tabernacle in the center of Israel's camp pictures:", es:"17. El tabernáculo en el centro del campamento de Israel figura:",
+      optionsEn:["The tribes' military strength","Christ dwelling among His people","Egyptian architecture","The wealth of Israel"],
+      optionsEs:["La fuerza militar de las tribus","Cristo habitando entre Su pueblo","La arquitectura egipcia","La riqueza de Israel"], correct:"B",
+      fcEn:"Correct. 'The Word became flesh and tabernacled among us' (John 1:14). The tabernacle in the center of the camp is Christ in the middle of every camp He gathers.",
+      fcEs:"Correcto. 'El Verbo se hizo carne, y habitó entre nosotros' (Juan 1:14). El tabernáculo en el centro del campamento es Cristo en el medio de cada campamento que Él reúne.",
+      fiEn:"The tabernacle stood in the center of the camp — a holy God in the middle of His people. John 1:14 says the Word 'tabernacled' among us in Christ.",
+      fiEs:"El tabernáculo estaba en el centro del campamento — un Dios santo en el medio de Su pueblo. Juan 1:14 dice que el Verbo 'habitó' entre nosotros en Cristo." },
+    { id:18, en:"18. The book of Numbers records the death of:", es:"18. El libro de Números registra la muerte de:",
+      optionsEn:["Joshua","Aaron","Moses","Caleb"],
+      optionsEs:["Josué","Aarón","Moisés","Caleb"], correct:"B",
+      fcEn:"Correct. Aaron dies in Numbers 20 on Mount Hor. Moses dies in Deuteronomy 34; Joshua and Caleb live to enter Canaan.",
+      fcEs:"Correcto. Aarón muere en Números 20 en el Monte Hor. Moisés muere en Deuteronomio 34; Josué y Caleb viven para entrar a Canaán.",
+      fiEn:"Aaron dies in Numbers 20 — Moses' death is in Deuteronomy 34.",
+      fiEs:"Aarón muere en Números 20 — la muerte de Moisés está en Deuteronomio 34." },
+    { id:19, en:"19. The 'wretched man… who shall deliver me from this body of death' verse (Romans 7:24) summarizes the experience of:", es:"19. El versículo '¡Miserable de mí!… ¿quién me librará de este cuerpo de muerte?' (Romanos 7:24) resume la experiencia de:",
+      optionsEn:["The wilderness generation under the law","David's reign","Paul's missionary journeys","The exile in Babylon"],
+      optionsEs:["La generación del desierto bajo la ley","El reinado de David","Los viajes misioneros de Pablo","El exilio en Babilonia"], correct:"A",
+      fcEn:"Correct. The first law showed Israel her deadness. Paul's anguished cry sums up the Numbers experience and answers itself: 'I thank God — through Jesus Christ our Lord!'",
+      fcEs:"Correcto. La primera ley le mostró a Israel su muerte. El clamor angustiado de Pablo resume la experiencia de Números y se responde a sí mismo: '¡Gracias doy a Dios, por Jesucristo Señor nuestro!'",
+      fiEn:"Romans 7:24 captures the wilderness experience under law — the recognition of helpless deadness that drives a sinner to Christ.",
+      fiEs:"Romanos 7:24 captura la experiencia del desierto bajo la ley — el reconocimiento de la muerte impotente que lleva al pecador a Cristo." },
+    { id:20, en:"20. The overall lesson of Numbers and Deuteronomy for Christians is:", es:"20. La lección general de Números y Deuteronomio para los cristianos es:",
+      optionsEn:["Work hard to earn salvation","Build churches","Ignore the Old Testament","Trust God's promises and obey by faith"],
+      optionsEs:["Trabajar duro para ganar la salvación","Construir iglesias","Ignorar el Antiguo Testamento","Confiar en las promesas de Dios y obedecer por fe"], correct:"D",
+      fcEn:"Correct. Same God, same promises, same manna — but only the believing generation crosses. God's discipline is not abandonment, and faith is the difference.",
+      fcEs:"Correcto. El mismo Dios, las mismas promesas, el mismo maná — pero solo la generación creyente cruza. La disciplina de Dios no es abandono, y la fe es la diferencia.",
+      fiEn:"The believing generation crossed; the unbelieving generation died. Faith — trusting God's promises and obeying — makes the difference.",
+      fiEs:"La generación creyente cruzó; la generación incrédula murió. La fe — confiar en las promesas de Dios y obedecer — hace la diferencia." }
+];
+
+const kwQuestions = [
+    { id:21, en:"21. Explain the significance of the Hebrew title <em>Bemidbar</em> for understanding the book of Numbers.",
+      es:"21. Explique el significado del título hebreo <em>Bemidbar</em> para entender el libro de Números.",
+      kw_en:[["bemidbar", "hebrew title", "in the wilderness"], ["wilderness", "desert", "wandering"], ["unbelief", "did not trust", "refused to believe", "distrust"], ["forty years", "forty", "40 years", "a generation died"]],
+      kw_es:[["bemidbar", "título hebreo", "en el desierto"], ["desierto", "yermo", "errante", "vagar"], ["incredulidad", "no confiaron", "se negaron a creer", "desconfianza"], ["cuarenta años", "cuarenta", "40 años", "una generación murió"]],
+      modelEn:"The English title 'Numbers' comes from the two censuses, but the Hebrew title is Bemidbar, meaning 'in the wilderness,' which is the truer name for the book. Numbers is about what happens to a believer who has been delivered out of bondage but is not yet willing to trust God for the next mile. Because of their unbelief at the edge of Canaan, the whole generation was sentenced to wander forty years in the wilderness until they died, while a new generation grew up to enter the land. The wilderness theme captures the cost of unbelief.",
+      modelEs:"El título en español 'Números' viene de los dos censos, pero el título hebreo es Bemidbar, que significa 'en el desierto,' que es el nombre más verdadero del libro. Números trata de lo que le sucede a un creyente que ha sido librado de la esclavitud pero aún no está dispuesto a confiar en Dios para la siguiente milla. Por su incredulidad al borde de Canaán, toda la generación fue sentenciada a vagar cuarenta años en el desierto hasta morir, mientras una nueva generación crecía para entrar a la tierra. El tema del desierto capta el costo de la incredulidad." },
+    { id:22, en:"22. Why did the ten spies give a negative report, and what was the consequence for Israel?",
+      es:"22. ¿Por qué dieron los diez espías un informe negativo, y cuál fue la consecuencia para Israel?",
+      kw_en:[["spies", "twelve spies", "ten spies", "scouts"], ["giants", "too big", "fortified", "anakim"], ["unbelief", "fear", "refused", "did not trust"], ["forty years", "forty", "year for a day", "wandering"], ["caleb"], ["joshua"]],
+      kw_es:[["espías", "espias", "doce espías", "diez espías", "exploradores"], ["gigantes", "demasiado grandes", "fortificadas", "anaceos"], ["incredulidad", "temor", "miedo", "se negaron", "no confiaron"], ["cuarenta años", "cuarenta", "año por día", "errantes"], ["caleb"], ["josué", "josue"]],
+      modelEn:"Twelve spies were sent into Canaan, and though the grapes were so large that a single cluster had to be carried on a pole, ten spies came back saying the giants were too big to face. Their report was unbelief: they preferred to retreat into the desert in fear rather than walk forward into the land God had given them. The consequence was severe and exact — forty days of spying became forty years of wandering, a year for a day. Every man over twenty would die in the desert except the two who trusted God, Caleb and Joshua.",
+      modelEs:"Doce espías fueron enviados a Canaán, y aunque las uvas eran tan grandes que un solo racimo había que cargarlo en un palo, diez espías volvieron diciendo que los gigantes eran demasiado grandes para enfrentarlos. Su reporte fue incredulidad: prefirieron retroceder al desierto con temor antes que avanzar a la tierra que Dios les había dado. La consecuencia fue severa y exacta — cuarenta días de espionaje se volvieron cuarenta años de andar errantes, un año por cada día. Todo hombre mayor de veinte moriría en el desierto excepto los dos que confiaron en Dios, Caleb y Josué." },
+    { id:23, en:"23. Describe the bronze serpent event (Numbers 21) and explain how it fits within the Scarlet Thread leading to the cross (John 3:14).",
+      es:"23. Describa el evento de la serpiente de bronce (Números 21) y explique cómo encaja en el Hilo Escarlata que lleva a la cruz (Juan 3:14).",
+      kw_en:[["bronze serpent", "brazen serpent", "serpent on a pole", "bronze snake"], ["lifted up", "raised", "set on a pole", "on a pole"], ["look", "looked", "a look", "gaze"], ["scarlet thread", "crimson thread", "thread of blood"], ["cross", "calvary", "crucified"], ["john 3:14", "son of man lifted", "jesus said"]],
+      kw_es:[["serpiente de bronce", "serpiente de metal", "serpiente en un asta"], ["levantada", "alzada", "sobre un asta", "en un asta"], ["mirar", "miraba", "una mirada", "mirada de fe"], ["hilo escarlata", "hilo carmesí", "hilo de sangre"], ["cruz", "calvario", "crucificado"], ["juan 3:14", "hijo del hombre levantado", "jesús dijo"]],
+      modelEn:"When fiery serpents came into the camp and people were dying, God told Moses to make a bronze serpent, set it on a pole, and lift it up; anyone bitten who simply looked at it would live. The cure required no sacrifice, no ceremony, no cleaning up first — only a look of faith. This is a key station on the Scarlet Thread and points directly to the cross, for Jesus said that as Moses lifted up the serpent in the wilderness, so must the Son of Man be lifted up, that whoever believes in Him may have eternal life (John 3:14). The look of faith is the cure.",
+      modelEs:"Cuando serpientes ardientes entraron al campamento y la gente moría, Dios le dijo a Moisés que hiciera una serpiente de bronce, la pusiera sobre un asta y la levantara; cualquiera que fuera mordido y simplemente la mirara, viviría. La cura no requería sacrificio, ni ceremonia, ni limpiarse primero — solo una mirada de fe. Esta es una estación clave del Hilo Escarlata y apunta directamente a la cruz, pues Jesús dijo que como Moisés levantó la serpiente en el desierto, así debe ser levantado el Hijo del Hombre, para que todo el que crea en Él tenga vida eterna (Juan 3:14). La mirada de fe es la cura." },
+    { id:24, en:"24. What was the significance of Aaron's rod budding overnight (Numbers 17)?",
+      es:"24. ¿Cuál fue el significado de la vara de Aarón brotando durante la noche (Números 17)?",
+      kw_en:[["aaron", "aaron's rod"], ["rod", "staff", "stick", "branch"], ["budded", "blossomed", "sprouted", "almonds", "came alive"], ["resurrection", "life", "alive", "raised"], ["authority", "chosen", "god's choice", "confirmed"]],
+      kw_es:[["aarón", "aaron", "vara de aarón"], ["vara", "cayado", "palo", "rama"], ["brotó", "reverdeció", "floreció", "almendras", "cobró vida"], ["resurrección", "vida", "viva", "levantada"], ["autoridad", "escogido", "elección de dios", "confirmado"]],
+      modelEn:"When Korah and others challenged Moses' authority, God told the head of each tribe to lay a rod before the LORD overnight. In the morning, eleven rods lay dry where they had been placed, but Aaron's rod had budded, blossomed, and ripened almonds on its branches — twelve dry sticks, and one alive. The budding rod showed that authority in God's camp does not rest on volume, numbers, or credentials, but on resurrection life. The dead stick brought to life is a picture of the resurrection that confirms God's chosen one.",
+      modelEs:"Cuando Coré y otros desafiaron la autoridad de Moisés, Dios mandó que el jefe de cada tribu pusiera una vara delante del SEÑOR durante la noche. Por la mañana, once varas yacían secas donde habían sido puestas, pero la vara de Aarón había brotado, florecido y producido almendras maduras en sus ramas — doce palos secos, y uno vivo. La vara que reverdeció mostró que la autoridad en el campamento de Dios no descansa en el volumen, los números ni las credenciales, sino en la vida de resurrección. El palo muerto vuelto a la vida es figura de la resurrección que confirma al escogido de Dios." },
+    { id:25, en:"25. Explain the Shema (Deuteronomy 6:4–5) and how it shapes daily discipleship in the home.",
+      es:"25. Explique el Shemá (Deuteronomio 6:4–5) y cómo da forma al discipulado diario en el hogar.",
+      kw_en:[["shema", "hear o israel"], ["hear o israel", "the lord is one", "lord our god"], ["love", "love the lord", "heart soul might"], ["heart", "soul", "might", "all your"], ["teach", "teach diligently", "talk of them", "discipleship"], ["children", "sons", "home", "family"]],
+      kw_es:[["shemá", "shema", "oye israel"], ["oye israel", "el señor uno es", "señor nuestro dios"], ["amar", "amarás al señor", "corazón alma fuerzas"], ["corazón", "alma", "fuerzas", "todo tu"], ["enseñar", "enseñar diligentemente", "hablar de ellas", "discipulado"], ["hijos", "niños", "hogar", "familia"]],
+      modelEn:"The Shema (Deuteronomy 6:4-5) begins, 'Hear, O Israel: The LORD our God, the LORD is one. You shall love the LORD your God with all your heart and with all your soul and with all your might.' Jesus called this the greatest commandment. If God is one, He has all of you. But the Shema does not stay in the synagogue: Moses commanded that these words be taught diligently to the children, talked about when you sit in your house, walk by the way, lie down, and rise. The most important discipleship in Israel happened in the home, around the dinner table.",
+      modelEs:"El Shemá (Deuteronomio 6:4-5) comienza: 'Oye, Israel: El SEÑOR nuestro Dios, el SEÑOR uno es. Y amarás al SEÑOR tu Dios de todo tu corazón, de toda tu alma y con todas tus fuerzas.' Jesús lo llamó el mandamiento más grande. Si Dios es uno, Él tiene todo de ti. Pero el Shemá no se queda en la sinagoga: Moisés mandó que estas palabras se enseñaran diligentemente a los hijos, que se hablara de ellas al sentarte en casa, al andar por el camino, al acostarte y al levantarte. El discipulado más importante en Israel sucedía en el hogar, alrededor de la mesa." },
+    { id:26, en:"26. How does Deuteronomy 28 demonstrate the principle of covenant blessings and curses, and how did Israel's later history fulfill it?",
+      es:"26. ¿Cómo demuestra Deuteronomio 28 el principio de las bendiciones y maldiciones del pacto, y cómo lo cumplió la historia posterior de Israel?",
+      kw_en:[["blessing", "blessings"], ["curse", "curses"], ["obedience", "obey", "faithfulness"], ["disobedience", "disobey", "rebellion", "unfaithfulness"], ["exile", "captivity", "fall", "conquered"], ["assyria", "722", "northern kingdom"], ["babylon", "586", "southern kingdom", "judah"]],
+      kw_es:[["bendición", "bendiciones"], ["maldición", "maldiciones"], ["obediencia", "obedecer", "fidelidad"], ["desobediencia", "desobedecer", "rebelión", "infidelidad"], ["exilio", "cautiverio", "caída", "conquistado"], ["asiria", "722", "reino del norte"], ["babilonia", "586", "reino del sur", "judá"]],
+      modelEn:"Deuteronomy 28 sets out the long catalogue of blessings promised for obedience and curses warned for disobedience. Read in retrospect, it reads like the whole history of Israel written in advance: every detail Moses warned of came to pass. The northern kingdom of Israel fell to Assyria in 722 B.C., and the southern kingdom of Judah fell to Babylon in 586 B.C. The covenant principle is that obedience brings blessing and disobedience brings curse, and Israel's later exile shows that God kept His word exactly as Moses had warned.",
+      modelEs:"Deuteronomio 28 expone el largo catálogo de bendiciones prometidas por la obediencia y maldiciones advertidas por la desobediencia. Leído en retrospectiva, se lee como toda la historia de Israel escrita de antemano: cada detalle que Moisés advirtió se cumplió. El reino del norte, Israel, cayó ante Asiria en el 722 a.C., y el reino del sur, Judá, cayó ante Babilonia en el 586 a.C. El principio del pacto es que la obediencia trae bendición y la desobediencia trae maldición, y el posterior exilio de Israel muestra que Dios cumplió Su palabra exactamente como Moisés había advertido." },
+    { id:27, en:"27. What is the significance of Moses not being allowed to enter the Promised Land?",
+      es:"27. ¿Cuál es el significado de que no se permitiera a Moisés entrar en la Tierra Prometida?",
+      kw_en:[["moses"], ["meribah", "waters of meribah"], ["struck the rock", "struck rock", "hit the rock", "strike"], ["disobedience", "impatience", "one sin", "disobeyed"], ["joshua", "joshua led"], ["nebo", "mount nebo", "saw the land"]],
+      kw_es:[["moisés", "moises"], ["meriba", "aguas de meriba"], ["golpeó la roca", "golpear la roca", "hirió la peña", "golpear"], ["desobediencia", "impaciencia", "un pecado", "desobedeció"], ["josué", "josue", "josué guió"], ["nebo", "monte nebo", "vio la tierra"]],
+      modelEn:"Moses was not allowed to enter the Promised Land because of a single act of impatience forty years earlier at the waters of Meribah, when he struck the rock he had been told only to speak to. That one act of disobedience kept him out, even though he served faithfully ever after, and the LORD did not retract the discipline. From Mount Nebo, Moses was allowed to see the land but not enter it; Joshua led the people in instead. The lesson is sobering: faithfulness does not always mean walking in to the destination — sometimes it means carrying the people to the door while someone else takes them through.",
+      modelEs:"A Moisés no se le permitió entrar a la Tierra Prometida por un solo acto de impaciencia cuarenta años antes, en las aguas de Meriba, cuando golpeó la roca a la que se le había dicho solamente que le hablara. Ese único acto de desobediencia lo dejó fuera, aunque sirvió fielmente desde entonces, y el SEÑOR no retiró la disciplina. Desde el monte Nebo, a Moisés se le permitió ver la tierra pero no entrar en ella; Josué guió al pueblo en su lugar. La lección es solemne: la fidelidad no siempre significa entrar al destino — a veces significa llevar al pueblo hasta la puerta mientras otro los hace pasar." },
+    { id:28, en:"28. Why does the writer of Hebrews (chapters 3–4) use Israel's wilderness failure as a warning for Christians?",
+      es:"28. ¿Por qué el escritor de Hebreos (capítulos 3–4) usa el fracaso de Israel en el desierto como advertencia para los cristianos?",
+      kw_en:[["hebrews", "book of hebrews", "chapters 3-4"], ["unbelief", "did not believe", "not mixed with faith"], ["rest", "god's rest", "enter the rest"], ["hardened heart", "hard heart", "harden your hearts"], ["warning", "warn", "take care", "lest"]],
+      kw_es:[["hebreos", "libro de hebreos", "capítulos 3-4"], ["incredulidad", "no creyeron", "no mezclada con fe"], ["reposo", "descanso", "reposo de dios", "entrar al reposo"], ["corazón endurecido", "corazón duro", "endurezcáis", "endurecidos"], ["advertencia", "advertir", "cuidar", "no sea que"]],
+      modelEn:"The writer of Hebrews (chapters 3-4) uses Israel's wilderness failure as a warning to the church. Israel could not enter God's rest because of unbelief and hardened hearts, and Hebrews warns believers not to repeat the same hardness lest they too fail to enter the rest God promises. The wilderness generation heard the good news but it did not profit them because it was not mixed with faith. So the warning is to take care that no one has an unbelieving, hardened heart, but to hold fast in faith and enter the rest that remains for the people of God.",
+      modelEs:"El escritor de Hebreos (capítulos 3-4) usa el fracaso de Israel en el desierto como advertencia para la iglesia. Israel no pudo entrar al reposo de Dios por la incredulidad y los corazones endurecidos, y Hebreos advierte a los creyentes no repetir la misma dureza no sea que ellos también dejen de entrar al reposo que Dios promete. La generación del desierto oyó la buena nueva pero no les aprovechó porque no fue mezclada con fe. Así que la advertencia es cuidar que ninguno tenga corazón endurecido e incrédulo, sino mantenerse firmes en fe y entrar al reposo que queda para el pueblo de Dios." },
+    { id:29, en:"29. What does Moses mean when he says 'I have set before you life and death… choose life' (Deuteronomy 30:19)? Who is the audience?",
+      es:"29. ¿Qué significa Moisés cuando dice 'os he puesto delante la vida y la muerte… escoge la vida' (Deuteronomio 30:19)? ¿Quién es la audiencia?",
+      kw_en:[["choose life", "choose", "set before you life"], ["redeemed", "already saved", "brought out of egypt", "the saved"], ["daily", "every day", "tuesday morning", "each day"], ["covenant", "covenant faithfulness"], ["blessing", "life", "christ", "the way the truth the life"]],
+      kw_es:[["escoge la vida", "escoger", "puesto delante la vida"], ["redimidos", "ya salvados", "sacados de egipto", "los salvos"], ["diaria", "cada día", "cada mañana", "a diario"], ["pacto", "fidelidad al pacto"], ["bendición", "vida", "cristo", "el camino la verdad y la vida"]],
+      modelEn:"When Moses says 'I have set before you life and death... therefore choose life' (Deuteronomy 30:19), he is not preaching to unbelievers but to the redeemed — a people God had already brought out of Egypt by His blood and led to the threshold of the land. 'Choose life' is therefore not only a conversion-day decision but a daily, Tuesday-morning choice. Every day the redeemed wake to a choice between life and death, between covenant faithfulness and drifting away. To choose life ultimately means to choose Christ, who said, 'I am the way, the truth, and the life.'",
+      modelEs:"Cuando Moisés dice 'os he puesto delante la vida y la muerte... escoge, pues, la vida' (Deuteronomio 30:19), no está predicando a incrédulos sino a los redimidos — un pueblo que Dios ya había sacado de Egipto por Su sangre y llevado al umbral de la tierra. 'Escoge la vida' es por tanto no solo una decisión del día de la conversión sino una elección diaria, de cada mañana. Cada día los redimidos despiertan a una elección entre la vida y la muerte, entre la fidelidad al pacto y el alejarse. Escoger la vida significa en última instancia escoger a Cristo, que dijo: 'Yo soy el camino, la verdad y la vida.'" },
+    { id:30, en:"30. Synthesize the message of Numbers and Deuteronomy: how does God's discipline of the wilderness generation lead to renewal in the second-law generation?",
+      es:"30. Sintetice el mensaje de Números y Deuteronomio: ¿cómo la disciplina de Dios de la generación del desierto conduce a la renovación en la generación de la segunda ley?",
+      kw_en:[["numbers", "bemidbar"], ["deuteronomy", "moses' sermons", "love letter"], ["discipline", "disciplined", "not abandonment", "chastening"], ["faith", "believe", "trust"], ["renewal", "covenant renewal", "choose life", "new generation"], ["covenant", "promises", "cloud never left"]],
+      kw_es:[["números", "numeros", "bemidbar"], ["deuteronomio", "sermones de moisés", "carta de amor"], ["disciplina", "disciplinó", "no abandono", "corrección"], ["fe", "creer", "confiar"], ["renovación", "renovación del pacto", "escoger la vida", "nueva generación"], ["pacto", "promesas", "la nube nunca se fue"]],
+      modelEn:"Numbers and Deuteronomy together teach how God's discipline of the wilderness leads to covenant renewal and faith. Two convictions emerge. First, God's discipline is not God's abandonment: through all forty years the cloud never left, the manna fell every morning, and the pillar of fire stood watch every night — He was disciplining a people He refused to abandon. Second, faith is the difference between the generation that dies and the generation that crosses: same God, same promises, same manna, two generations on the same border — one refused to believe and perished, the other believed and entered. The call to every reader is to choose life and trust God for the next mile.",
+      modelEs:"Números y Deuteronomio juntos enseñan cómo la disciplina de Dios en el desierto conduce a la renovación del pacto y a la fe. Surgen dos convicciones. Primera, la disciplina de Dios no es el abandono de Dios: durante los cuarenta años la nube nunca se fue, el maná caía cada mañana, y la columna de fuego velaba cada noche — Él disciplinaba a un pueblo que se negaba a abandonar. Segunda, la fe es la diferencia entre la generación que muere y la que cruza: el mismo Dios, las mismas promesas, el mismo maná, dos generaciones en la misma frontera — una se negó a creer y pereció, la otra creyó y entró. El llamado a cada lector es escoger la vida y confiar en Dios para la siguiente milla." }
+];
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed[idx]) {
+                btn.classList.add('locked');
+                if (letter === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2'; btn.style.borderColor = '#d4af37'; btn.style.fontWeight = '600';
+            }
+            btn.onclick = function() {
+                if (mcRevealed[idx] || unitPassed) return;
+                mcAnswers[idx] = letter;
+                mcRevealed[idx] = true;
+                saveState();
+                renderQuestions();
+            };
+            div.appendChild(btn);
+        });
+
+        if (mcRevealed[idx]) renderMCFeedback(div, q, idx, true);
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMastersLevel() ? ('Short Answer (Questions 21–30) — ' + (getTrack()==='thm' ? 'Master of Theology' : 'Master of Divinity') + ' (graded, 9/10 to pass)') : 'Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMastersLevel() ? ('Respuesta Corta (Preguntas 21–30) — ' + (getTrack()==='thm' ? 'Maestría en Teología' : 'Maestría en Divinidad') + ' (calificado, 9/10 para aprobar)') : 'Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here...' : 'Escriba su respuesta aquí...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.addEventListener('input', (e) => { kwAnswers[idx] = e.target.value; saveState(); });
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+
+        checkBtn.onclick = function() {
+            const result = gradeSA(q, textarea.value);
+            if (result.tooShort) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a sentence).' : 'Escriba una respuesta más completa (al menos una oración).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else if (result.pass) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? '✓ Your answer includes the key concepts.' : '✓ Su respuesta incluye los conceptos clave.';
+                feedbackDiv.className = 'feedback-text correct';
+            } else {
+                feedbackDiv.innerHTML = currentLang === 'en' ? `✗ Try to include more of: ${result.missing.join(', ')}.` : `✗ Intente incluir más de: ${result.missing.join(', ')}.`;
+                feedbackDiv.className = 'feedback-text incorrect';
+            }
+        };
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.cssText = 'display:none;margin-top:10px;padding:12px 14px;border-left:4px solid #c9a961;background:#fdf9ed;border-radius:3px;font-size:.92rem;line-height:1.5;';
+        const modelBtn = document.createElement('button');
+        modelBtn.className = 'small';
+        modelBtn.style.marginLeft = '6px';
+        modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+        modelBtn.onclick = function() {
+            if ((textarea.value || '').trim().length < 100) {
+                feedbackDiv.className = 'feedback-text incorrect';
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a sentence) — then you can compare it with the model.' : 'Escriba primero su propia respuesta (al menos una oración) — luego podrá compararla con el modelo.';
+                return;
+            }
+            if (modelBox.style.display === 'none') {
+                modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estúdiela:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+                modelBox.style.display = 'block';
+                modelBtn.textContent = currentLang === 'en' ? 'Hide model answer' : 'Ocultar respuesta modelo';
+            } else {
+                modelBox.style.display = 'none';
+                modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(modelBtn);
+        div.appendChild(feedbackDiv);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+    });
+}
+
+function renderMCFeedback(div, q, idx, skipRedraw) {
+    if (!skipRedraw) {
+        const buttons = div.querySelectorAll('.option');
+        buttons.forEach(btn => {
+            const letter = btn.textContent.charAt(0);
+            btn.classList.add('locked');
+            btn.classList.remove('correct', 'wrong');
+            if (letter === q.correct) btn.classList.add('correct');
+            else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+        });
+    }
+    let existing = div.querySelector('.feedback-text');
+    if (existing) existing.remove();
+    const fb = document.createElement('div');
+    const correct = (mcAnswers[idx] === q.correct);
+    fb.className = 'feedback-text ' + (correct ? 'correct' : 'incorrect');
+    if (correct) {
+        fb.innerHTML = '✓ ' + (currentLang === 'en' ? q.fcEn : q.fcEs);
+    } else {
+        const correctLetter = q.correct;
+        fb.innerHTML = (currentLang === 'en' ? `✗ Correct answer: ${correctLetter}. ` : `✗ Respuesta correcta: ${correctLetter}. `) + (currentLang === 'en' ? q.fiEn : q.fiEs);
+    }
+    div.appendChild(fb);
+}
+
+function gradeSA(q, answer) {
+    const text = (answer || '').toLowerCase().trim();
+    if (text.length < 100) return { tooShort: true, pass: false, missing: [] };
+    const isEs = document.body.classList.contains('lang-es');
+    const groups = isEs ? q.kw_es : q.kw_en;
+    const missing = [];
+    let matched = 0;
+    groups.forEach(group => {
+        const hit = group.some(term => text.includes(term.toLowerCase()));
+        if (hit) matched++;
+        else missing.push(group[0]);
+    });
+    const need = Math.max(2, Math.ceil(groups.length * 0.4));
+    return { tooShort: false, pass: matched >= need, missing };
+}
+
+function submitExam() {
+    saveReg();
+    if (!student.name || !student.email) {
+        alert(currentLang === 'en' ? 'Please fill in your registration first.' : 'Por favor complete su registro primero.');
+        return;
+    }
+    if (unitPassed) {
+        showResult('pass', currentLang === 'en' ? '✅ Unit 3 already passed. You may proceed.' : '✅ Unidad 3 ya aprobada. Puede continuar.');
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        showResult('locked', currentLang === 'en' ? `⏰ Locked for ${wait} more minute(s).` : `⏰ Bloqueado por ${wait} minuto(s) más.`);
+        return;
+    }
+
+    for (let i = 0; i < mcRevealed.length; i++) mcRevealed[i] = true;
+    renderQuestions();
+    let mcCorrect = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === mcQuestions[i].correct) mcCorrect++;
+    }
+
+    let saCorrect = 0;
+    if (isMastersLevel()) {
+        for (let i = 0; i < 10; i++) {
+            const r = gradeSA(kwQuestions[i], kwAnswers[i]);
+            if (!r.tooShort && r.pass) saCorrect++;
+        }
+    }
+    const mcOk = mcCorrect >= PASS_THRESHOLD_MC;
+    const saOk = saCorrect >= PASS_THRESHOLD_SA;
+
+    function passUnit(detail) {
+        unitPassed = true;
+        localStorage.setItem(UNIT_PASSED_KEY, 'true');
+        progress[`unit${UNIT_NUM}`] = true;
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(SA_LOCK_KEY);
+        const msg = currentLang === 'en'
+            ? `✅ PASSED. ${detail}. Unit 3 complete! Your answers are marked below. Review them, then continue when ready.`
+            : `✅ APROBADO. ${detail}. ¡Unidad 3 completa! Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.`;
+        showResult('pass', msg);
+        updateProgressGrid();
+    }
+
+    if (!isMastersLevel()) {
+        const detail = currentLang === 'en' ? `MC: ${mcCorrect}/20 (need 18)` : `OM: ${mcCorrect}/20 (necesita 18)`;
+        if (mcOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+                : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        const detail = currentLang === 'en'
+            ? `MC: ✓ banked · SA: ${saCorrect}/10 (need 9)`
+            : `OM: ✓ en banco · RC: ${saCorrect}/10 (necesita 9)`;
+        if (saOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Your multiple-choice pass is safe. ${detail}. Review the lesson and try the short-answer section again in ${lockMinutes()} minute(s).`
+                : `Su aprobación de opción múltiple está a salvo. ${detail}. Repase la lección y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    const detail = currentLang === 'en'
+        ? `MC: ${mcCorrect}/20 (need 18) · SA: ${saCorrect}/10 (need 9)`
+        : `OM: ${mcCorrect}/20 (necesita 18) · RC: ${saCorrect}/10 (necesita 9)`;
+    if (mcOk && saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit(detail);
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `MC ${mcCorrect}/20 ✓ passed and banked. SA ${saCorrect}/10 (need 9). When you try again in ${lockMinutes()} minute(s), you'll only need to resubmit the short answers — MC stays passed.`
+            : `OM ${mcCorrect}/20 ✓ aprobado y guardado. RC ${saCorrect}/10 (necesita 9). Al reintentar en ${lockMinutes()} minuto(s), solo necesitará reenviar las respuestas cortas — el OM permanece aprobado.`;
+        showResult('fail', msg);
+        startLockTimer();
+    } else {
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+            : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+        showResult('fail', msg);
+        startLockTimer();
+    }
+}
+
+function showResult(cls, html) {
+    const r = document.getElementById('examResult');
+    r.style.display = 'block';
+    r.className = 'exam-result ' + cls;
+    r.innerHTML = html;
+}
+
+function startLockTimer() {
+    const r = document.getElementById('examResult');
+    const interval = setInterval(() => {
+        const remaining = lockUntil - Date.now();
+        if (remaining <= 0) { clearInterval(interval); r.innerHTML += currentLang === 'en' ? '<br><em>Lockout ended. You may retry.</em>' : '<br><em>Bloqueo terminado. Puede reintentar.</em>'; return; }
+        const m = Math.floor(remaining / 60000);
+        const s = Math.floor((remaining % 60000) / 1000);
+        const note = currentLang === 'en' ? `<br>⏱️ Locked: ${m}:${String(s).padStart(2,'0')}` : `<br>⏱️ Bloqueado: ${m}:${String(s).padStart(2,'0')}`;
+        const base = r.innerHTML.split('<br>⏱️')[0];
+        r.innerHTML = base + note;
+    }, 1000);
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? 'Reset this unit? All your answers and pass status for Unit 3 will be cleared. (Your name, email, and other units are not affected.)'
+        : '¿Reiniciar esta unidad? Todas sus respuestas y el estado de aprobación para la Unidad 3 se borrarán. (Su nombre, correo y otras unidades no se afectan.)';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcRevealed = new Array(20).fill(false);
+    unitPassed = false;
+    mcPreviouslyPassed = false;
+    lockUntil = 0;
+    localStorage.removeItem(UNIT_STATE_KEY);
+    localStorage.removeItem(UNIT_PASSED_KEY);
+    localStorage.removeItem(LOCKOUT_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    if (progress[`unit${UNIT_NUM}`]) {
+        delete progress[`unit${UNIT_NUM}`];
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+    }
+    document.getElementById('examResult').style.display = 'none';
+    renderQuestions();
+    updateProgressGrid();
+}
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') { currentLang = 'es'; document.body.className = 'lang-es'; this.textContent = 'English'; }
+    else { currentLang = 'en'; document.body.className = 'lang-en'; this.textContent = 'Español'; }
+    renderTrackBanner(); renderReadout(); renderQuestions();
+};
+
+// ========== REGISTRATION READOUT (read-only on Units 2-13) ==========
+function renderReadout() {
+    const el = document.getElementById('regReadout');
+    if (!el) return;
+    const saved = localStorage.getItem(STUDENT_KEY);
+    const en = (currentLang !== 'es');
+    if (!saved) {
+        el.innerHTML = en
+            ? 'No registration found. Please <a href="CTSUnit1.html">register on Unit 1</a> before taking this exam.'
+            : 'No se encontr\u00f3 registro. Por favor <a href="CTSUnit1.html">reg\u00edstrese en la Unidad 1</a> antes de tomar este examen.';
+        el.className = 'reg-readout missing';
+        return;
+    }
+    const st = JSON.parse(saved);
+    const progLabel = st.program || 'Certificate of Ministry';
+    const lblName = en ? 'Name' : 'Nombre';
+    const lblEmail = en ? 'Email' : 'Correo';
+    const lblCountry = en ? 'Country' : 'Pa\u00eds';
+    const lblProg = en ? 'Program' : 'Programa';
+    const note = en
+        ? 'Registered on Unit 1. To change your details, return to Unit 1.'
+        : 'Registrado en la Unidad 1. Para cambiar sus datos, vuelva a la Unidad 1.';
+    el.innerHTML =
+        '<div class="reg-readout-grid">' +
+        '<div><strong>' + lblName + ':</strong> ' + (st.name||'') + '</div>' +
+        '<div><strong>' + lblEmail + ':</strong> ' + (st.email||'') + '</div>' +
+        '<div><strong>' + lblCountry + ':</strong> ' + (st.country||'') + '</div>' +
+        '<div><strong>' + lblProg + ':</strong> ' + progLabel + '</div>' +
+        '</div><div class="reg-readout-note">' + note + '</div>';
+    el.className = 'reg-readout';
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+loadReg();
+renderReadout();
+loadState();
+updateProgressGrid();
+renderTrackBanner();
+renderQuestions();
+if (unitPassed) showResult('pass', currentLang === 'en' ? '✅ Unit 3 already passed.' : '✅ Unidad 3 ya aprobada.');
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSOTSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

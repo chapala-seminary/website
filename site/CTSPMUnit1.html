@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pastoral Ministries — Unit 1: Biblical Foundations of Pastoral Ministry</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #f8f4e8; border: 1px solid #e8d9b8; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 10px; margin: 6px 0 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; }
+.reg-form label { font-weight: bold; display: block; margin-top: 10px; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-form { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" disabled>← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 2 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Pastoral Ministries — Unit 1: Biblical Foundations of Pastoral Ministry</span><span class="lang-es">📖 Ministerios Pastorales — Unidad 1: Fundamentos Bíblicos del Ministerio Pastoral</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"Shepherd the flock of God which is among you, serving as overseers, not by compulsion but willingly… and when the Chief Shepherd appears, you will receive the crown of glory that does not fade away." — 1 Peter 5:2–4 (NKJV)</span><span class="lang-es">"Apacentad la grey de Dios que está entre vosotros, teniendo cuidado de ella, no por fuerza, sino voluntariamente… Y cuando aparezca el Príncipe de los pastores, vosotros recibiréis la corona incorruptible de gloria." — 1 Pedro 5:2–4 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="registrationCard">
+    <h2><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h2>
+    <p><span class="lang-en">Please register before beginning Unit 1. Your registration is saved on this device and used across all CTS courses.</span><span class="lang-es">Por favor regístrese antes de comenzar la Unidad 1. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full Name</span><span class="lang-es">Nombre Completo</span></label>
+    <input type="text" id="regName" placeholder="" / aria-label="regName">
+    <label><span class="lang-en">Email</span><span class="lang-es">Correo Electrónico</span></label>
+    <input type="email" id="regEmail" placeholder="" / aria-label="regEmail">
+    <label><span class="lang-en">Country</span><span class="lang-es">País</span></label>
+    <input type="text" id="regCountry" placeholder="" / aria-label="regCountry">
+    <label><span class="lang-en">Program Track</span><span class="lang-es">Programa</span></label>
+    <input type="hidden" id="regTrack" value="cert" />
+    <div id="trackButtons" style="display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;">
+        <button type="button" class="track-opt" data-track="certificate"><span class="lang-en">Certificate of Ministry</span><span class="lang-es">Certificado de Ministerio</span></button>
+        <button type="button" class="track-opt" data-track="mdiv"><span class="lang-en">Master of Divinity (M.Div.)</span><span class="lang-es">Maestría en Divinidad (M.Div.)</span></button>
+        <button type="button" class="track-opt" data-track="thm"><span class="lang-en">Master of Theology (Th.M.)</span><span class="lang-es">Maestría en Teología (Th.M.)</span></button>
+    </div>
+    <button class="small" id="saveRegBtn" style="margin-top: 10px;"><span class="lang-en">Save Registration</span><span class="lang-es">Guardar Registro</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>Pastoral ministry did not begin in a seminary. It did not begin with a denomination. It did not begin with a credentialing committee. Pastoral ministry began in the heart of God Himself, who is the original and eternal Shepherd of His people. Before there was ever a pastor, there was a Shepherd. Before there was ever a flock, there was a Shepherd's heart. And every man who steps into the pastoral office today is stepping into a stream that began at the throne of God and runs through every page of Scripture.</p>
+
+        <p>To understand the work of the pastor, we must understand the heart of the One who calls pastors. The pastor is not an executive. He is not a salesman. He is not a chief executive officer. He is a shepherd — and a shepherd is only as good as his Master. This unit lays the biblical foundation for everything else we will study in this course.</p>
+
+        <h2>I. The Shepherd-Heart of God in the Old Testament</h2>
+        <p>From the earliest pages of Scripture, God reveals Himself as the Shepherd of His people. He is the One who leads, feeds, protects, gathers, and restores. When David — himself a young shepherd boy in the fields of Bethlehem — picked up his pen to describe the God of Israel, he reached for the most familiar image in his life: <em>"The LORD is my shepherd; I shall not want"</em> (Psalm 23:1).</p>
+
+        <p>That little word <em>my</em> makes all the difference. There is a story told of a father who taught his small son to recite the twenty-third Psalm by counting it out on the four little fingers of his hand. The first finger was <em>the</em>, the second finger was <em>Lord</em>, the third finger was <em>is</em>, and the fourth finger was <em>my</em>. The father emphasized that fourth finger — <em>my</em> Shepherd — and made his son grasp it tightly each time he recited the psalm. Years later, that little boy lay dying. When the doctor came to examine the body, he found the child's hand wrapped firmly around the fourth finger of his own opposite hand. The father, with tears running down his face, explained, "It means he really knew, and confidently trusted, the Lord Jesus as the Shepherd of his soul." That is what every pastor must remember about every member of his flock — the only thing that matters in the end is whether they know Him as <em>my</em> Shepherd.</p>
+
+        <p>Isaiah painted the same picture: <em>"He shall feed His flock like a shepherd; He shall gather the lambs with His arm, and carry them in His bosom, and gently lead those who are with young"</em> (Isaiah 40:11). Notice the tenderness. The shepherd does not drive his sheep — he leads them. He does not abandon the weak — he carries them. He does not exhaust the young mothers — he gently leads them at their pace. This is the heart of the God who calls pastors.</p>
+
+        <p>But the Old Testament also gives us a sobering picture of what happens when shepherds fail. Ezekiel 34 stands as the most terrifying chapter in all of Scripture for any man who would step into pastoral leadership. Through the prophet, God thunders against the false shepherds of Israel: <em>"Woe to the shepherds of Israel who feed themselves! Should not the shepherds feed the flocks?"</em> (Ezekiel 34:2). These shepherds had eaten the fat, clothed themselves with the wool, and slaughtered the fatlings — but they had not fed the flock. The weak they had not strengthened. The sick they had not healed. The broken they had not bound up. The scattered they had not gathered. The lost they had not sought. And God Himself stood up and said, <em>"I am against the shepherds"</em> (Ezekiel 34:10). Every man who reads Ezekiel 34 ought to read it on his knees.</p>
+
+        <h2>II. Christ the Good Shepherd</h2>
+        <p>Every shepherd theme of the Old Testament reaches its fulfillment in Jesus Christ. In John 10, Jesus stood up among the religious leaders of His day — many of them hireling shepherds in the worst sense — and made the most astonishing claim in pastoral history: <em>"I am the good shepherd. The good shepherd gives His life for the sheep"</em> (John 10:11).</p>
+
+        <p>Sheep, by their very nature, cannot take care of themselves. Phillip Keller, who spent years as an actual shepherd before he became a writer, tells of a beautiful and productive sheep he owned. She bore sturdy lambs that matured quickly. Her only fault was that she was a fence-crawler. She was restless and discontent. She would always end up outside the fence in some burned-out pasture. And worse than that, she taught the other sheep to follow her. That is a perfect picture of the human heart. The prophet Isaiah said it plainly: <em>"All we like sheep have gone astray; we have turned, every one, to his own way"</em> (Isaiah 53:6). The pastor must never forget that the people in his pews are not customers, not consumers, not contributors — they are sheep. And sheep, left to themselves, will wander into burned-out pastures and lead others with them.</p>
+
+        <p>Jesus said three things about the Good Shepherd that every pastor must understand. First, <em>He knows His sheep</em>. <em>"He calls his own sheep by name and leads them out"</em> (John 10:3). In the rugged hills of New Zealand there is a shepherd named Andrew who walks his flock at dawn and calls each sheep by name. Each sheep responds individually to its own name. That is a picture of how Jesus knows His flock — not as a herd but as individuals, each one called by name. Second, <em>His sheep know His voice</em>. H. V. Morton tells of two shepherds who had taken shelter in a single cave near Bethlehem during the night, their flocks all mixed together. In the morning, one shepherd stood some distance away and gave his peculiar call. His sheep — and only his sheep — separated themselves from the mass and ran to him. They would have come for no one else, but they knew the call of their own shepherd. And third, <em>He lays down His life for them</em>. The Good Shepherd does not run when the wolf comes. The hireling runs. The Good Shepherd dies.</p>
+
+        <p>After His resurrection, Jesus took Peter aside on the shore of the Sea of Galilee and gave him the commission that defines pastoral ministry to this day: <em>"Feed My lambs… Tend My sheep… Feed My sheep"</em> (John 21:15–17). Notice the pronoun. <em>My</em> lambs. <em>My</em> sheep. They never belong to the pastor. The flock belongs to Christ, and the pastor is a steward — never an owner.</p>
+
+        <h2>III. The Pastor as Undershepherd</h2>
+        <p>Here we come to the heart of this course. The pastor is not the chief shepherd. He is an <em>undershepherd</em> — a shepherd serving beneath the Chief Shepherd. This is the foundational truth that will keep a pastor humble in his successes, faithful in his failures, and steady in his old age.</p>
+
+        <p>The course Scripture, 1 Peter 5:1–4, lays out the office with surgical clarity:</p>
+        <p style="margin-left: 30px; font-style: italic; border-left: 3px solid #f4c542; padding-left: 15px;">"The elders who are among you I exhort, I who am a fellow elder and a witness of the sufferings of Christ, and also a partaker of the glory that will be revealed: Shepherd the flock of God which is among you, serving as overseers, not by compulsion but willingly, not for dishonest gain but eagerly; nor as being lords over those entrusted to you, but being examples to the flock; and when the Chief Shepherd appears, you will receive the crown of glory that does not fade away."</p>
+
+        <p>Read that passage slowly. Every phrase is a sermon to itself. <em>Shepherd the flock of God</em> — not your flock, His flock. <em>Which is among you</em> — God places pastors in specific places among specific people. <em>Serving as overseers</em> — the pastor is both shepherd and overseer; both heart and head are required. <em>Not by compulsion but willingly</em> — pastoral ministry that is mere duty will eventually destroy the man. <em>Not for dishonest gain but eagerly</em> — the moment money becomes the motive, the office is corrupted. <em>Nor as being lords</em> — the pastor never owns the people. <em>But being examples</em> — preaching is doubled by living. <em>And when the Chief Shepherd appears</em> — there is coming a day of accountability that no pastor escapes. <em>You will receive the crown of glory that does not fade away</em> — and on that day, every faithful undershepherd will receive his reward from the hand of Christ Himself.</p>
+
+        <p>That is the office. That is the calling. That is the standard.</p>
+
+        <h2>IV. Five Marks of Biblical Pastoral Ministry</h2>
+        <p>Drawing from the entire biblical witness, we may identify five marks that define faithful pastoral ministry. These five will recur throughout the course.</p>
+
+        <p>First, pastoral ministry is <em>theological</em>. The pastor feeds the flock through the Word of God. Paul told Timothy, <em>"Preach the word! Be ready in season and out of season"</em> (2 Timothy 4:2). When the pulpit grows weak, the church grows weak. When Scripture is replaced with stories, when exegesis is replaced with anecdotes, when the Word of God is reduced to a launching pad for the pastor's opinions, the flock starves. Sheep are fed by green grass, not by ribbons tied around the fence post.</p>
+
+        <p>Second, pastoral ministry is <em>protective</em>. The pastor guards the flock against false teaching, false teachers, and false hopes. Paul warned the Ephesian elders, <em>"I know this, that after my departure savage wolves will come in among you, not sparing the flock. Also from among yourselves men will rise up, speaking perverse things, to draw away the disciples after themselves"</em> (Acts 20:29–30). Every pastor must be a watchman. He cannot afford to be naive about wolves from outside, and in my own experience, he cannot afford to be naive about the possibility of opposition arising from within his own leadership structures either — even, at times, from his own deacon board.</p>
+
+        <p>Third, pastoral ministry is <em>relational</em>. The pastor knows his sheep by name. He visits the hospital. He sits at the kitchen table. He weeps at the funeral. He laughs at the wedding. The pastor who only knows his people from the pulpit will never truly shepherd them. The pulpit is the watchtower; the pasture is where the work gets done.</p>
+
+        <p>Fourth, pastoral ministry is <em>sacrificial</em>. The Good Shepherd laid down His life. The undershepherd cannot do less. There will be sleep lost, vacations interrupted, family time surrendered, and reputation risked. Anyone who steps into pastoral ministry expecting comfort has not read the job description.</p>
+
+        <p>Fifth, pastoral ministry is <em>equipping</em>. Ephesians 4:11–12 tells us that pastors and teachers are given to the church <em>"for the equipping of the saints for the work of ministry, for the edifying of the body of Christ."</em> The pastor is not the only minister in the congregation. He is the equipper of ministers. A successful pastorate is not measured by how much the pastor does, but by how many believers have been raised up to serve.</p>
+
+        <h2>V. The Eternal Accountability of the Undershepherd</h2>
+        <p>We come back to where we began. The shepherd serves under a Chief Shepherd, and one day He will appear. James warns, <em>"Let not many of you become teachers, my brethren, knowing that we shall receive a stricter judgment"</em> (James 3:1). The pastoral office is glorious — but it is also weighty. Ezekiel 34's warning to false shepherds did not expire when the Old Testament closed. It still stands.</p>
+
+        <p>There is, however, a comforting flip side. The same God who judges unfaithful shepherds rewards faithful ones. Peter calls it <em>"the crown of glory that does not fade away"</em> (1 Peter 5:4). Paul, near the end of his life, wrote, <em>"I have fought the good fight, I have finished the race, I have kept the faith. Finally, there is laid up for me the crown of righteousness, which the Lord, the righteous Judge, will give to me on that Day"</em> (2 Timothy 4:7–8).</p>
+
+        <p>Every pastor reading this should pause and ask himself a simple question: <em>When the Chief Shepherd appears, will He find me feeding His flock, or feeding myself? Will He find me knowing my sheep by name, or merely managing a religious institution? Will He find me laying down my life, or protecting it?</em> These are not theoretical questions. They are the only questions that finally matter.</p>
+
+        <p>This is the foundation. Christ is the Shepherd. We are undershepherds. The flock is His, not ours. The Word is our food, the truth is our weapon, the people are our charge, and the Day of accountability is our horizon. Everything else we will study in this course — calling and character, preaching, worship, ordinances, weddings and funerals, visitation, counseling, evangelism, discipleship, leadership, and the long faithful finish — flows from these biblical foundations. Without them, pastoral ministry becomes a profession. With them, pastoral ministry becomes a sacred calling worthy of a man's whole life.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>El ministerio pastoral no comenzó en un seminario. No comenzó con una denominación. No comenzó con un comité de credenciales. El ministerio pastoral comenzó en el corazón de Dios mismo, quien es el Pastor original y eterno de Su pueblo. Antes de que existiera un pastor humano, ya existía un Pastor. Antes de que existiera un rebaño, ya existía un corazón de Pastor. Y todo hombre que entra hoy al oficio pastoral entra en una corriente que comenzó en el trono de Dios y corre por cada página de la Escritura.</p>
+
+        <p>Para entender la obra del pastor, debemos entender el corazón de Aquel que llama a los pastores. El pastor no es un ejecutivo. No es un vendedor. No es un director general. Es un pastor — y un pastor solo es tan bueno como su Maestro. Esta unidad establece el fundamento bíblico para todo lo demás que estudiaremos en este curso.</p>
+
+        <h2>I. El corazón pastoral de Dios en el Antiguo Testamento</h2>
+        <p>Desde las primeras páginas de la Escritura, Dios se revela como el Pastor de Su pueblo. Él es Quien guía, alimenta, protege, recoge y restaura. Cuando David — siendo él mismo un joven pastor en los campos de Belén — tomó la pluma para describir al Dios de Israel, alcanzó la imagen más familiar de su vida: <em>"Jehová es mi pastor; nada me faltará"</em> (Salmo 23:1).</p>
+
+        <p>Esa pequeña palabra <em>mi</em> hace toda la diferencia. Se cuenta de un padre que enseñó a su hijo pequeño a recitar el Salmo 23 contándolo en los cuatro deditos de su mano. El primer dedo era <em>Jehová</em>, el segundo dedo era <em>es</em>, el tercer dedo era <em>mi</em>, y el cuarto dedo era <em>pastor</em>. Pero el padre puso el énfasis en la palabra <em>mi</em>, e hizo que su hijo agarrara firmemente ese dedo cada vez que recitaba el Salmo. Años más tarde, el niño yacía moribundo. Cuando el doctor llegó a examinar el cuerpo, encontró la mano del niño firmemente cerrada alrededor de un dedo de su otra mano. El padre, con lágrimas corriendo por su rostro, explicó: "Significa que él realmente conocía, y confiadamente confiaba, en el Señor Jesús como el Pastor de su alma." Esto es lo que cada pastor debe recordar acerca de cada miembro de su rebaño — lo único que importa al final es si lo conocen como <em>mi</em> Pastor.</p>
+
+        <p>Isaías pintó el mismo cuadro: <em>"Como pastor apacentará su rebaño; en su brazo recogerá los corderos, y en su seno los llevará; pastoreará suavemente a las recién paridas"</em> (Isaías 40:11). Note la ternura. El pastor no arrea a sus ovejas — las guía. No abandona a las débiles — las lleva. No agota a las recién paridas — las pastorea suavemente al paso de ellas. Este es el corazón del Dios que llama pastores.</p>
+
+        <p>Pero el Antiguo Testamento también nos da un cuadro sobrio de lo que sucede cuando los pastores fallan. Ezequiel 34 se levanta como el capítulo más aterrador de toda la Escritura para cualquier hombre que entraría al liderazgo pastoral. Por medio del profeta, Dios truena contra los falsos pastores de Israel: <em>"¡Ay de los pastores de Israel, que se apacientan a sí mismos! ¿No apacientan los pastores a los rebaños?"</em> (Ezequiel 34:2). Estos pastores habían comido de la grosura, se habían vestido de la lana, y habían matado las engordadas — pero no habían apacentado al rebaño. Las débiles no las habían fortalecido. Las enfermas no las habían sanado. Las quebrantadas no las habían vendado. Las descarriadas no las habían recogido. Las perdidas no las habían buscado. Y Dios mismo se levantó y dijo: <em>"He aquí, yo estoy contra los pastores"</em> (Ezequiel 34:10). Todo hombre que lea Ezequiel 34 debería leerlo de rodillas.</p>
+
+        <h2>II. Cristo el Buen Pastor</h2>
+        <p>Cada tema del pastor en el Antiguo Testamento alcanza su cumplimiento en Jesucristo. En Juan 10, Jesús se levantó entre los líderes religiosos de Su día — muchos de ellos asalariados en el peor sentido — e hizo la afirmación más asombrosa en la historia pastoral: <em>"Yo soy el buen pastor; el buen pastor su vida da por las ovejas"</em> (Juan 10:11).</p>
+
+        <p>Las ovejas, por su misma naturaleza, no pueden cuidarse a sí mismas. Phillip Keller, quien pasó años como pastor literal antes de hacerse escritor, cuenta de una oveja hermosa y productiva que él poseía. Daba corderos robustos que maduraban rápidamente. Su único defecto era que se trepaba por las cercas. Era inquieta y descontenta. Siempre terminaba fuera de la cerca, en algún pastizal quemado. Y peor aún, enseñaba a las otras ovejas a seguirla. Es un retrato perfecto del corazón humano. El profeta Isaías lo dijo claramente: <em>"Todos nosotros nos descarriamos como ovejas, cada cual se apartó por su camino"</em> (Isaías 53:6). El pastor nunca debe olvidar que las personas en sus bancos no son clientes, no son consumidores, no son contribuyentes — son ovejas. Y las ovejas, dejadas a sí mismas, vagarán a pastizales quemados y llevarán a otras consigo.</p>
+
+        <p>Jesús dijo tres cosas acerca del Buen Pastor que cada pastor debe entender. Primero, <em>Él conoce a Sus ovejas</em>. <em>"A sus ovejas llama por nombre, y las saca"</em> (Juan 10:3). En las escabrosas colinas de Nueva Zelanda hay un pastor llamado Andrew que recorre su rebaño al amanecer y llama a cada oveja por nombre. Cada oveja responde individualmente a su propio nombre. Es un retrato de cómo Jesús conoce a Su rebaño — no como una manada sino como individuos, cada uno llamado por nombre. Segundo, <em>Sus ovejas conocen Su voz</em>. H. V. Morton cuenta de dos pastores que se habían refugiado en una sola cueva cerca de Belén durante la noche, con sus rebaños mezclados. Por la mañana, uno de los pastores se paró a cierta distancia y dio su llamado peculiar. Sus ovejas — y solo sus ovejas — se separaron de la masa y corrieron hacia él. No habrían venido por nadie más, pero conocían el llamado de su propio pastor. Y tercero, <em>Él da Su vida por ellas</em>. El Buen Pastor no huye cuando viene el lobo. El asalariado huye. El Buen Pastor muere.</p>
+
+        <p>Después de Su resurrección, Jesús apartó a Pedro a la orilla del Mar de Galilea y le dio la comisión que define el ministerio pastoral hasta hoy: <em>"Apacienta mis corderos… Pastorea mis ovejas… Apacienta mis ovejas"</em> (Juan 21:15–17). Note el pronombre. <em>Mis</em> corderos. <em>Mis</em> ovejas. Nunca pertenecen al pastor. El rebaño pertenece a Cristo, y el pastor es un mayordomo — nunca un dueño.</p>
+
+        <h2>III. El pastor como subpastor</h2>
+        <p>Aquí llegamos al corazón de este curso. El pastor no es el Príncipe de los pastores. Es un <em>subpastor</em> — un pastor sirviendo bajo el Príncipe de los pastores. Esta es la verdad fundamental que mantendrá a un pastor humilde en sus éxitos, fiel en sus fracasos, y estable en su vejez.</p>
+
+        <p>La Escritura del curso, 1 Pedro 5:1–4, expone el oficio con claridad quirúrgica:</p>
+        <p style="margin-left: 30px; font-style: italic; border-left: 3px solid #f4c542; padding-left: 15px;">"Ruego a los ancianos que están entre vosotros, yo anciano también con ellos, y testigo de las aflicciones de Cristo, que soy también participante de la gloria que ha de ser revelada: Apacentad la grey de Dios que está entre vosotros, teniendo cuidado de ella, no por fuerza, sino voluntariamente; no por ganancia deshonesta, sino con ánimo pronto; no como teniendo señorío sobre los que están a vuestro cargo, sino siendo ejemplos de la grey. Y cuando aparezca el Príncipe de los pastores, vosotros recibiréis la corona incorruptible de gloria."</p>
+
+        <p>Lea ese pasaje despacio. Cada frase es un sermón en sí misma. <em>Apacentad la grey de Dios</em> — no su rebaño, Su rebaño. <em>Que está entre vosotros</em> — Dios coloca a los pastores en lugares específicos entre personas específicas. <em>Teniendo cuidado de ella</em> — el pastor es tanto pastor como obispo; se requieren tanto el corazón como la cabeza. <em>No por fuerza, sino voluntariamente</em> — un ministerio pastoral que es mero deber eventualmente destruirá al hombre. <em>No por ganancia deshonesta, sino con ánimo pronto</em> — el momento en que el dinero se convierte en el motivo, el oficio se corrompe. <em>No como teniendo señorío</em> — el pastor nunca posee al pueblo. <em>Sino siendo ejemplos</em> — la predicación se duplica con la vida. <em>Y cuando aparezca el Príncipe de los pastores</em> — viene un día de rendición de cuentas del cual ningún pastor escapa. <em>Vosotros recibiréis la corona incorruptible de gloria</em> — y en aquel día, cada subpastor fiel recibirá su recompensa de la mano de Cristo mismo.</p>
+
+        <p>Ese es el oficio. Ese es el llamado. Ese es el estándar.</p>
+
+        <h2>IV. Cinco marcas del ministerio pastoral bíblico</h2>
+        <p>Tomando del testimonio bíblico entero, podemos identificar cinco marcas que definen el ministerio pastoral fiel. Estas cinco recurrirán a lo largo del curso.</p>
+
+        <p>Primero, el ministerio pastoral es <em>teológico</em>. El pastor alimenta al rebaño por medio de la Palabra de Dios. Pablo le dijo a Timoteo: <em>"¡Predica la palabra! Insta a tiempo y fuera de tiempo"</em> (2 Timoteo 4:2). Cuando el púlpito se debilita, la iglesia se debilita. Cuando la Escritura se reemplaza con historias, cuando la exégesis se reemplaza con anécdotas, cuando la Palabra de Dios se reduce a una plataforma de lanzamiento para las opiniones del pastor, el rebaño pasa hambre. Las ovejas se alimentan de pasto verde, no de cintas atadas al poste de la cerca.</p>
+
+        <p>Segundo, el ministerio pastoral es <em>protector</em>. El pastor guarda al rebaño contra la falsa enseñanza, los falsos maestros y las falsas esperanzas. Pablo advirtió a los ancianos efesios: <em>"Yo sé que después de mi partida entrarán en medio de vosotros lobos rapaces, que no perdonarán al rebaño. Y de vosotros mismos se levantarán hombres que hablen cosas perversas, para arrastrar tras sí a los discípulos"</em> (Hechos 20:29–30). Cada pastor debe ser un atalaya. No puede darse el lujo de ser ingenuo acerca de los lobos de afuera, y en mi propia experiencia, tampoco puede darse el lujo de ser ingenuo acerca de la posibilidad de oposición que surge desde dentro de sus propias estructuras de liderazgo — aun, a veces, de su propia junta de diáconos.</p>
+
+        <p>Tercero, el ministerio pastoral es <em>relacional</em>. El pastor conoce a sus ovejas por nombre. Visita el hospital. Se sienta a la mesa de la cocina. Llora en el funeral. Ríe en la boda. El pastor que solo conoce a su pueblo desde el púlpito nunca lo pastoreará verdaderamente. El púlpito es la atalaya; el pastizal es donde se hace el trabajo.</p>
+
+        <p>Cuarto, el ministerio pastoral es <em>sacrificial</em>. El Buen Pastor dio Su vida. El subpastor no puede hacer menos. Habrá sueño perdido, vacaciones interrumpidas, tiempo familiar entregado y reputación arriesgada. Cualquiera que entre al ministerio pastoral esperando comodidad no ha leído la descripción del trabajo.</p>
+
+        <p>Quinto, el ministerio pastoral es <em>equipador</em>. Efesios 4:11–12 nos dice que los pastores y maestros son dados a la iglesia <em>"a fin de perfeccionar a los santos para la obra del ministerio, para la edificación del cuerpo de Cristo."</em> El pastor no es el único ministro en la congregación. Es el equipador de ministros. Un pastorado exitoso no se mide por cuánto hace el pastor, sino por cuántos creyentes han sido levantados para servir.</p>
+
+        <h2>V. La rendición eterna de cuentas del subpastor</h2>
+        <p>Volvemos al lugar donde comenzamos. El pastor sirve bajo un Príncipe de los pastores, y un día Él aparecerá. Santiago advierte: <em>"Hermanos míos, no os hagáis maestros muchos de vosotros, sabiendo que recibiremos mayor condenación"</em> (Santiago 3:1). El oficio pastoral es glorioso — pero también es pesado. La advertencia de Ezequiel 34 a los falsos pastores no expiró cuando se cerró el Antiguo Testamento. Sigue en pie.</p>
+
+        <p>Sin embargo, hay un reverso reconfortante. El mismo Dios que juzga a los pastores infieles recompensa a los fieles. Pedro lo llama <em>"la corona incorruptible de gloria"</em> (1 Pedro 5:4). Pablo, cerca del final de su vida, escribió: <em>"He peleado la buena batalla, he acabado la carrera, he guardado la fe. Por lo demás, me está guardada la corona de justicia, la cual me dará el Señor, juez justo, en aquel día"</em> (2 Timoteo 4:7–8).</p>
+
+        <p>Cada pastor que lea esto debería detenerse y preguntarse una pregunta sencilla: <em>Cuando aparezca el Príncipe de los pastores, ¿me encontrará apacentando Su rebaño, o apacentándome a mí mismo? ¿Me encontrará conociendo a mis ovejas por nombre, o meramente administrando una institución religiosa? ¿Me encontrará dando mi vida, o protegiéndola?</em> Estas no son preguntas teóricas. Son las únicas preguntas que al final importan.</p>
+
+        <p>Este es el fundamento. Cristo es el Pastor. Nosotros somos subpastores. El rebaño es Suyo, no nuestro. La Palabra es nuestro alimento, la verdad es nuestra arma, el pueblo es nuestra carga, y el Día de la rendición de cuentas es nuestro horizonte. Todo lo demás que estudiaremos en este curso — llamado y carácter, predicación, adoración, ordenanzas, bodas y funerales, visitación, consejería, evangelismo, discipulado, liderazgo, y el largo final fiel — fluye de estos fundamentos bíblicos. Sin ellos, el ministerio pastoral se convierte en una profesión. Con ellos, el ministerio pastoral se convierte en un llamado sagrado digno de toda una vida de hombre.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 1 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 1;
+let progress = JSON.parse(localStorage.getItem('cts_pm_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPMUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit1) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSPMUnit2.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        const trackLabel = student.track === 'mdiv' ? 'M.Div.' : (student.track === 'thm' ? 'Th.M.' : 'Certificate');
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name} <span style="font-weight:normal;font-size:0.85rem;">(${trackLabel})</span> &nbsp;<a href="#" id="changeTrackLink" style="font-size:0.8rem;color:#5b3a1f;">Change track</a>`;
+        document.getElementById('registrationCard').style.display = 'none';
+        const link = document.getElementById('changeTrackLink');
+        if (link) link.onclick = function(e) {
+            e.preventDefault();
+            const card = document.getElementById('registrationCard');
+            card.style.display = 'block';
+            if (student.name) document.getElementById('regName').value = student.name;
+            if (student.email) document.getElementById('regEmail').value = student.email;
+            if (student.country) document.getElementById('regCountry').value = student.country;
+            if (student.track && typeof setTrack === 'function') setTrack(student.track);
+            card.scrollIntoView({ behavior: 'smooth' });
+        };
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<span style="color:#5b3a1f;">⚠️ Please register</span>`;
+    }
+}
+displayStudentGreeting();
+
+
+function setTrack(t) {
+    document.getElementById('regTrack').value = t;
+    document.querySelectorAll('.track-opt').forEach(b => { b.classList.toggle('selected', b.getAttribute('data-track') === t); });
+}
+document.querySelectorAll('.track-opt').forEach(b => { b.onclick = function() { setTrack(this.getAttribute('data-track')); }; });
+setTrack('certificate');
+document.getElementById('saveRegBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const country = document.getElementById('regCountry').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = `<span style="color:red;">⚠️ Name and email are required.</span>`;
+        return;
+    }
+    localStorage.setItem('cts_student', JSON.stringify({ name, email, country, track }));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = `<span style="color:green;">✓ Saved! Welcome, ${name}.</span>`;
+    setTimeout(() => { displayStudentGreeting(); }, 1000);
+    renderQuestions();
+};
+
+// Q3 reshuffled (Psalm 23 author) to move David from C to B for 5/5/5/5 balance.
+const mcQuestions = [
+  {
+    "textEn": "1. Pastoral ministry originates in:",
+    "textEs": "1. El ministerio pastoral se origina en:",
+    "optionsEn": [
+      "God Himself",
+      "Seminaries",
+      "Denominations",
+      "The apostles"
+    ],
+    "optionsEs": [
+      "Dios mismo",
+      "Los seminarios",
+      "Las denominaciones",
+      "Los apóstoles"
+    ],
+    "c": 21,
+    "explEn": "Pastoral ministry begins in the heart of God, the eternal Shepherd, long before any human institution.",
+    "explEs": "El ministerio pastoral comienza en el corazón de Dios, el Pastor eterno, mucho antes de cualquier institución humana."
+  },
+  {
+    "textEn": "2. The most important pastoral image of God in the Old Testament is:",
+    "textEs": "2. La imagen pastoral de Dios más importante en el Antiguo Testamento es:",
+    "optionsEn": [
+      "Judge",
+      "King",
+      "Shepherd",
+      "Warrior"
+    ],
+    "optionsEs": [
+      "Juez",
+      "Rey",
+      "Pastor",
+      "Guerrero"
+    ],
+    "c": 30,
+    "explEn": "Scripture's dominant pastoral picture of God is the Shepherd who leads, feeds, and gathers His people.",
+    "explEs": "La imagen pastoral dominante de Dios en la Escritura es el Pastor que guía, alimenta y recoge a Su pueblo."
+  },
+  {
+    "textEn": "3. Psalm 23 was written by:",
+    "textEs": "3. El Salmo 23 fue escrito por:",
+    "optionsEn": [
+      "Solomon",
+      "David",
+      "Asaph",
+      "Moses"
+    ],
+    "optionsEs": [
+      "Salomón",
+      "David",
+      "Asaf",
+      "Moisés"
+    ],
+    "c": 36,
+    "explEn": "David, the shepherd-boy of Bethlehem, wrote Psalm 23 from his own experience tending sheep.",
+    "explEs": "David, el pastorcillo de Belén, escribió el Salmo 23 desde su propia experiencia cuidando ovejas."
+  },
+  {
+    "textEn": "4. Ezekiel 34 thunders against:",
+    "textEs": "4. Ezequiel 34 truena contra:",
+    "optionsEn": [
+      "False prophets",
+      "False shepherds",
+      "Egypt",
+      "Babylon"
+    ],
+    "optionsEs": [
+      "Falsos profetas",
+      "Falsos pastores",
+      "Egipto",
+      "Babilonia"
+    ],
+    "c": 43,
+    "explEn": "Ezekiel 34 is God's thunderous indictment of the false shepherds who fed themselves and neglected the flock.",
+    "explEs": "Ezequiel 34 es la atronadora acusación de Dios contra los falsos pastores que se apacentaron a sí mismos y descuidaron el rebaño."
+  },
+  {
+    "textEn": "5. In John 10:11, Jesus declares:",
+    "textEs": "5. En Juan 10:11, Jesús declara:",
+    "optionsEn": [
+      "\"I am the good shepherd\"",
+      "\"I am the way\"",
+      "\"I am the vine\"",
+      "\"I am the bread\""
+    ],
+    "optionsEs": [
+      "\"Yo soy el buen pastor\"",
+      "\"Yo soy el camino\"",
+      "\"Yo soy la vid\"",
+      "\"Yo soy el pan\""
+    ],
+    "c": 49,
+    "explEn": "In John 10:11 Jesus claims to be the good shepherd who gives His life for the sheep.",
+    "explEs": "En Juan 10:11 Jesús afirma ser el buen pastor que da Su vida por las ovejas."
+  },
+  {
+    "textEn": "6. The Good Shepherd is distinguished from the hireling because He:",
+    "textEs": "6. El Buen Pastor se distingue del asalariado porque Él:",
+    "optionsEn": [
+      "Charges more",
+      "Trains other shepherds",
+      "Lays down His life for the sheep",
+      "Sleeps in the fold"
+    ],
+    "optionsEs": [
+      "Cobra más",
+      "Entrena a otros pastores",
+      "Da Su vida por las ovejas",
+      "Duerme en el redil"
+    ],
+    "c": 58,
+    "explEn": "Unlike the hireling who flees, the Good Shepherd lays down His life for the sheep.",
+    "explEs": "A diferencia del asalariado que huye, el Buen Pastor da Su vida por las ovejas."
+  },
+  {
+    "textEn": "7. After His resurrection, Jesus restored Peter with the words:",
+    "textEs": "7. Después de Su resurrección, Jesús restauró a Pedro con las palabras:",
+    "optionsEn": [
+      "\"Wait in Jerusalem\"",
+      "\"Build my church\"",
+      "\"Make disciples\"",
+      "\"Feed My sheep\""
+    ],
+    "optionsEs": [
+      "\"Esperen en Jerusalén\"",
+      "\"Edifica mi iglesia\"",
+      "\"Hagan discípulos\"",
+      "\"Apacienta mis ovejas\""
+    ],
+    "c": 66,
+    "explEn": "Jesus restored Peter on the shore with the threefold charge, 'Feed My sheep.'",
+    "explEs": "Jesús restauró a Pedro en la orilla con el triple encargo: 'Apacienta mis ovejas.'"
+  },
+  {
+    "textEn": "8. Pastors are best described as:",
+    "textEs": "8. Los pastores se describen mejor como:",
+    "optionsEn": [
+      "Chief shepherds",
+      "Hirelings",
+      "Prophets",
+      "Undershepherds"
+    ],
+    "optionsEs": [
+      "Príncipes de los pastores",
+      "Asalariados",
+      "Profetas",
+      "Subpastores"
+    ],
+    "c": 73,
+    "explEn": "Pastors are undershepherds who serve beneath the Chief Shepherd, never owners of the flock.",
+    "explEs": "Los pastores son subpastores que sirven bajo el Príncipe de los pastores, nunca dueños del rebaño."
+  },
+  {
+    "textEn": "9. The course Scripture for Pastoral Ministries is:",
+    "textEs": "9. La Escritura del curso de Ministerios Pastorales es:",
+    "optionsEn": [
+      "Acts 20:28",
+      "2 Timothy 4:2",
+      "1 Peter 5:2-4",
+      "John 21:17"
+    ],
+    "optionsEs": [
+      "Hechos 20:28",
+      "2 Timoteo 4:2",
+      "1 Pedro 5:2-4",
+      "Juan 21:17"
+    ],
+    "c": 79,
+    "explEn": "The course Scripture is 1 Peter 5:2-4, which lays out the pastoral office with surgical clarity.",
+    "explEs": "La Escritura del curso es 1 Pedro 5:2-4, que expone el oficio pastoral con claridad quirúrgica."
+  },
+  {
+    "textEn": "10. Phillip Keller's 'fence-crawler' sheep teaches that sheep:",
+    "textEs": "10. La oveja 'trepadora de cercas' de Phillip Keller enseña que las ovejas:",
+    "optionsEn": [
+      "Wander and lead others astray",
+      "Protect the flock",
+      "Need no guidance",
+      "Graze independently"
+    ],
+    "optionsEs": [
+      "Vagan y llevan a otras por mal camino",
+      "Protegen al rebaño",
+      "No necesitan guía",
+      "Pastan independientemente"
+    ],
+    "c": 84,
+    "explEn": "Keller's restless fence-crawler shows that sheep wander into ruin and lead others astray with them.",
+    "explEs": "La inquieta trepadora de cercas de Keller muestra que las ovejas vagan a la ruina y llevan a otras consigo."
+  },
+  {
+    "textEn": "11. The shepherd Andrew of New Zealand illustrates:",
+    "textEs": "11. El pastor Andrew de Nueva Zelanda ilustra:",
+    "optionsEn": [
+      "Sheep know themselves",
+      "Shepherds are unnecessary",
+      "Sheep follow any voice",
+      "The shepherd knows each sheep by name"
+    ],
+    "optionsEs": [
+      "Las ovejas se conocen a sí mismas",
+      "Los pastores son innecesarios",
+      "Las ovejas siguen cualquier voz",
+      "El pastor conoce cada oveja por nombre"
+    ],
+    "c": 94,
+    "explEn": "Shepherd Andrew calling each sheep by name pictures how the shepherd knows the flock individually.",
+    "explEs": "El pastor Andrew llamando a cada oveja por nombre retrata cómo el pastor conoce al rebaño individualmente."
+  },
+  {
+    "textEn": "12. Peter commands pastors to shepherd God's flock:",
+    "textEs": "12. Pedro manda a los pastores a apacentar la grey de Dios:",
+    "optionsEn": [
+      "For dishonest gain",
+      "By lording over them",
+      "Willingly, as examples",
+      "Only when paid"
+    ],
+    "optionsEs": [
+      "Por ganancia deshonesta",
+      "Teniendo señorío sobre ellos",
+      "Voluntariamente, como ejemplos",
+      "Solo cuando se les paga"
+    ],
+    "c": 100,
+    "explEn": "Peter commands pastors to shepherd willingly and as examples, not for gain or by domineering.",
+    "explEs": "Pedro manda a los pastores apacentar voluntariamente y como ejemplos, no por ganancia ni dominando."
+  },
+  {
+    "textEn": "13. The 'Chief Shepherd' of 1 Peter 5:4 is:",
+    "textEs": "13. El 'Príncipe de los pastores' de 1 Pedro 5:4 es:",
+    "optionsEn": [
+      "Peter",
+      "Paul",
+      "Timothy",
+      "Jesus Christ"
+    ],
+    "optionsEs": [
+      "Pedro",
+      "Pablo",
+      "Timoteo",
+      "Jesucristo"
+    ],
+    "c": 108,
+    "explEn": "The Chief Shepherd of 1 Peter 5:4 is Jesus Christ, to whom every pastor will give account.",
+    "explEs": "El Príncipe de los pastores de 1 Pedro 5:4 es Jesucristo, a quien todo pastor dará cuentas."
+  },
+  {
+    "textEn": "14. According to 1 Peter 5:3, pastors lead by:",
+    "textEs": "14. Según 1 Pedro 5:3, los pastores lideran:",
+    "optionsEn": [
+      "Example",
+      "Compulsion",
+      "Money",
+      "Seniority"
+    ],
+    "optionsEs": [
+      "Por ejemplo",
+      "Por fuerza",
+      "Por dinero",
+      "Por antigüedad"
+    ],
+    "c": 112,
+    "explEn": "1 Peter 5:3 says pastors lead by example, not by compulsion, money, or seniority.",
+    "explEs": "1 Pedro 5:3 dice que los pastores lideran por ejemplo, no por fuerza, dinero o antigüedad."
+  },
+  {
+    "textEn": "15. Which is NOT one of the five marks of biblical pastoral ministry?",
+    "textEs": "15. ¿Cuál NO es una de las cinco marcas del ministerio pastoral bíblico?",
+    "optionsEn": [
+      "Theological",
+      "Protective",
+      "Entertaining",
+      "Sacrificial"
+    ],
+    "optionsEs": [
+      "Teológico",
+      "Protector",
+      "Entretenido",
+      "Sacrificial"
+    ],
+    "c": 121,
+    "explEn": "'Entertaining' is not a biblical mark; the five marks are theological, protective, relational, sacrificial, and equipping.",
+    "explEs": "'Entretenido' no es una marca bíblica; las cinco marcas son teológico, protector, relacional, sacrificial y equipador."
+  },
+  {
+    "textEn": "16. Paul warned the Ephesian elders in Acts 20:29 about:",
+    "textEs": "16. Pablo advirtió a los ancianos efesios en Hechos 20:29 acerca de:",
+    "optionsEn": [
+      "Financial trouble",
+      "Savage wolves",
+      "Lazy deacons",
+      "Roman soldiers"
+    ],
+    "optionsEs": [
+      "Problemas financieros",
+      "Lobos rapaces",
+      "Diáconos perezosos",
+      "Soldados romanos"
+    ],
+    "c": 127,
+    "explEn": "Paul warned the Ephesian elders that savage wolves would come in, not sparing the flock.",
+    "explEs": "Pablo advirtió a los ancianos efesios que entrarían lobos rapaces que no perdonarían al rebaño."
+  },
+  {
+    "textEn": "17. Ephesians 4:11-12 teaches that pastors are given to:",
+    "textEs": "17. Efesios 4:11-12 enseña que los pastores son dados para:",
+    "optionsEn": [
+      "Rule the saints",
+      "Equip the saints for ministry",
+      "Replace the saints",
+      "Entertain the saints"
+    ],
+    "optionsEs": [
+      "Gobernar a los santos",
+      "Perfeccionar a los santos para la obra del ministerio",
+      "Reemplazar a los santos",
+      "Entretener a los santos"
+    ],
+    "c": 134,
+    "explEn": "Ephesians 4:11-12 says pastors are given to equip the saints for the work of ministry.",
+    "explEs": "Efesios 4:11-12 dice que los pastores son dados para perfeccionar a los santos para la obra del ministerio."
+  },
+  {
+    "textEn": "18. The 'crown of glory that does not fade away' is given by:",
+    "textEs": "18. La 'corona incorruptible de gloria' es dada por:",
+    "optionsEn": [
+      "The church board",
+      "The denomination",
+      "The seminary",
+      "The Chief Shepherd"
+    ],
+    "optionsEs": [
+      "La junta de la iglesia",
+      "La denominación",
+      "El seminario",
+      "El Príncipe de los pastores"
+    ],
+    "c": 143,
+    "explEn": "The unfading crown of glory is given by the Chief Shepherd Himself when He appears.",
+    "explEs": "La corona incorruptible de gloria es dada por el Príncipe de los pastores mismo cuando Él aparece."
+  },
+  {
+    "textEn": "19. James 3:1 warns teachers because they will receive:",
+    "textEs": "19. Santiago 3:1 advierte a los maestros porque recibirán:",
+    "optionsEn": [
+      "Stricter judgment",
+      "Public honor",
+      "Easier work",
+      "More pay"
+    ],
+    "optionsEs": [
+      "Mayor condenación",
+      "Honor público",
+      "Trabajo más fácil",
+      "Más paga"
+    ],
+    "c": 147,
+    "explEn": "James 3:1 warns that those who teach will receive a stricter judgment.",
+    "explEs": "Santiago 3:1 advierte que los que enseñan recibirán mayor condenación."
+  },
+  {
+    "textEn": "20. Pastoral ministry is fundamentally:",
+    "textEs": "20. El ministerio pastoral es fundamentalmente:",
+    "optionsEn": [
+      "A hobby",
+      "A sacred calling",
+      "A business",
+      "A profession"
+    ],
+    "optionsEs": [
+      "Un pasatiempo",
+      "Un llamado sagrado",
+      "Un negocio",
+      "Una profesión"
+    ],
+    "c": 155,
+    "explEn": "Pastoral ministry is fundamentally a sacred calling, not a hobby, business, or mere profession.",
+    "explEs": "El ministerio pastoral es fundamentalmente un llamado sagrado, no un pasatiempo, negocio ni mera profesión."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Why is it significant that pastoral ministry begins with God's own shepherd-heart and not with seminaries or denominations?",
+    "textEs": "21. ¿Por qué es significativo que el ministerio pastoral comience con el corazón pastoral de Dios mismo y no con seminarios o denominaciones?",
+    "kw_en": [
+      "god",
+      "shepherd",
+      "origin",
+      "heart",
+      "begin",
+      "throne",
+      "etern",
+      "call"
+    ],
+    "kw_es": [
+      "dios",
+      "pastor",
+      "origen",
+      "corazón",
+      "comenz",
+      "trono",
+      "etern",
+      "llam"
+    ],
+    "modelEn": "Pastoral ministry did not begin in a seminary, a denomination, or a credentialing committee — it began in the heart of God Himself, who is the original and eternal Shepherd of His people. Before there was ever a pastor, there was a Shepherd; before there was ever a flock, there was a Shepherd's heart. This matters because it locates the pastor's authority and pattern in God, not in human institutions. Every man who enters the office today steps into a stream that began at the throne of God and runs through every page of Scripture. The pastor is therefore accountable first to the One who calls, not to the structures that train or recognize him.",
+    "modelEs": "El ministerio pastoral no comenzó en un seminario, una denominación ni un comité de credenciales — comenzó en el corazón de Dios mismo, quien es el Pastor original y eterno de Su pueblo. Antes de que existiera un pastor, ya existía un Pastor; antes de que existiera un rebaño, ya existía un corazón de Pastor. Esto importa porque ubica la autoridad y el modelo del pastor en Dios, no en instituciones humanas. Todo hombre que entra hoy al oficio entra en una corriente que comenzó en el trono de Dios y corre por cada página de la Escritura. El pastor, por tanto, rinde cuentas primero a Aquel que llama, no a las estructuras que lo entrenan o reconocen."
+  },
+  {
+    "textEn": "22. Explain how Ezekiel 34 functions as both warning and gospel for pastors today.",
+    "textEs": "22. Explique cómo funciona Ezequiel 34 tanto como advertencia y evangelio para los pastores hoy.",
+    "kw_en": [
+      "ezekiel",
+      "shepherd",
+      "warn",
+      "judg",
+      "feed",
+      "neglect",
+      "flock",
+      "account"
+    ],
+    "kw_es": [
+      "ezequiel",
+      "pastor",
+      "advert",
+      "juicio",
+      "aliment",
+      "descuid",
+      "rebaño",
+      "cuenta"
+    ],
+    "modelEn": "Ezekiel 34 is the most sobering chapter in Scripture for any man who would enter pastoral leadership, because God thunders against shepherds who fed themselves instead of the flock. They had eaten the fat and worn the wool, but the weak they had not strengthened, the sick they had not healed, and the scattered they had not gathered — so God said, 'I am against the shepherds.' As warning, it tells every pastor that the office carries real accountability and that neglect of the flock is sin God Himself opposes. As gospel, the same chapter promises that God will Himself seek His sheep and set over them one true Shepherd, fulfilled in Christ. The faithful pastor reads it on his knees: warned by the woe, comforted that the Chief Shepherd has not abandoned the flock.",
+    "modelEs": "Ezequiel 34 es el capítulo más solemne de la Escritura para cualquier hombre que entraría al liderazgo pastoral, porque Dios truena contra los pastores que se apacentaron a sí mismos en lugar del rebaño. Habían comido la grosura y se habían vestido de la lana, pero a las débiles no fortalecieron, a las enfermas no sanaron y a las descarriadas no recogieron — por eso Dios dijo: 'Yo estoy contra los pastores.' Como advertencia, le dice a todo pastor que el oficio conlleva verdadera responsabilidad y que descuidar el rebaño es pecado que Dios mismo combate. Como evangelio, el mismo capítulo promete que Dios mismo buscará Sus ovejas y pondrá sobre ellas un Pastor verdadero, cumplido en Cristo. El pastor fiel lo lee de rodillas: advertido por el ay, consolado de que el Príncipe de los pastores no ha abandonado el rebaño."
+  },
+  {
+    "textEn": "23. Discuss what John 10's image of the Good Shepherd teaches about pastoral character and sacrifice.",
+    "textEs": "23. Discuta lo que la imagen del Buen Pastor en Juan 10 enseña sobre el carácter pastoral y el sacrificio.",
+    "kw_en": [
+      "shepherd",
+      "life",
+      "sheep",
+      "sacrific",
+      "hireling",
+      "know",
+      "voice",
+      "lay"
+    ],
+    "kw_es": [
+      "pastor",
+      "vida",
+      "ovejas",
+      "sacrific",
+      "asalariado",
+      "conoc",
+      "voz",
+      "da"
+    ],
+    "modelEn": "In John 10 Jesus declares, 'I am the good shepherd. The good shepherd gives His life for the sheep,' setting Himself apart from the hireling who runs when the wolf comes. Three things mark the Good Shepherd: He knows His sheep by name, His sheep know His voice, and He lays down His life for them. This teaches that pastoral character is measured by sacrifice, not salary or convenience. The undershepherd cannot do less than his Master — there will be sleep lost, comfort surrendered, and reputation risked. A pastor who flees at the first sign of danger has shown himself a hireling, not a shepherd.",
+    "modelEs": "En Juan 10 Jesús declara: 'Yo soy el buen pastor; el buen pastor su vida da por las ovejas,' distinguiéndose del asalariado que huye cuando viene el lobo. Tres cosas marcan al Buen Pastor: conoce a Sus ovejas por nombre, Sus ovejas conocen Su voz, y da Su vida por ellas. Esto enseña que el carácter pastoral se mide por el sacrificio, no por el salario ni la comodidad. El subpastor no puede hacer menos que su Maestro — habrá sueño perdido, comodidad entregada y reputación arriesgada. Un pastor que huye a la primera señal de peligro se ha mostrado asalariado, no pastor."
+  },
+  {
+    "textEn": "24. What does it mean that the pastor is an 'undershepherd' rather than the chief shepherd? Why does this matter for daily ministry?",
+    "textEs": "24. ¿Qué significa que el pastor es un 'subpastor' y no el Príncipe de los pastores? ¿Por qué importa esto para el ministerio diario?",
+    "kw_en": [
+      "under",
+      "shepherd",
+      "serve",
+      "steward",
+      "christ",
+      "account",
+      "flock",
+      "humb"
+    ],
+    "kw_es": [
+      "sub",
+      "pastor",
+      "sirv",
+      "mayordom",
+      "cristo",
+      "cuenta",
+      "rebaño",
+      "humil"
+    ],
+    "modelEn": "To be an undershepherd means the pastor serves beneath the Chief Shepherd; he is never the owner of the flock but a steward of it. The flock belongs to Christ — they are 'My sheep,' as Jesus told Peter — and the pastor manages what is not his own. This keeps a man humble in his successes, faithful in his failures, and steady in his old age, because the weight of ownership never rested on him. For daily ministry it changes everything: decisions are made to please the Chief Shepherd, not the man himself or the crowd. One day He will appear, and the steward will give account for how he cared for another's sheep.",
+    "modelEs": "Ser subpastor significa que el pastor sirve bajo el Príncipe de los pastores; nunca es el dueño del rebaño sino un mayordomo de él. El rebaño pertenece a Cristo — son 'mis ovejas,' como Jesús le dijo a Pedro — y el pastor administra lo que no es suyo. Esto mantiene al hombre humilde en sus éxitos, fiel en sus fracasos y estable en su vejez, porque el peso de la propiedad nunca recayó sobre él. Para el ministerio diario lo cambia todo: las decisiones se toman para agradar al Príncipe de los pastores, no al hombre mismo ni a la multitud. Un día Él aparecerá, y el mayordomo dará cuentas de cómo cuidó las ovejas de Otro."
+  },
+  {
+    "textEn": "25. Apply 1 Peter 5:1-4 to a modern pastor's life. Which phrase challenges you most, and why?",
+    "textEs": "25. Aplique 1 Pedro 5:1-4 a la vida de un pastor moderno. ¿Cuál frase le desafía más, y por qué?",
+    "kw_en": [
+      "peter",
+      "willing",
+      "example",
+      "compulsion",
+      "shepherd",
+      "eager",
+      "elder",
+      "crown"
+    ],
+    "kw_es": [
+      "pedro",
+      "voluntar",
+      "ejemplo",
+      "fuerza",
+      "pastor",
+      "ánimo",
+      "anciano",
+      "corona"
+    ],
+    "modelEn": "1 Peter 5:1-4 lays out the office with surgical clarity: shepherd the flock of God among you, serving as overseers not by compulsion but willingly, not for dishonest gain but eagerly, not lording over those entrusted to you but being examples. Applied to a modern pastor, every phrase confronts a real temptation — duty without willingness, ministry shaped by money, leadership that dominates rather than models. The phrase that challenges most is often 'being examples to the flock,' because it means the preaching must be doubled by the living. Peter, himself a fellow elder and a restored failure, writes not as a distant authority but as a shepherd among shepherds. And he anchors it all in the promise that when the Chief Shepherd appears, the faithful will receive the crown of glory that does not fade away.",
+    "modelEs": "1 Pedro 5:1-4 expone el oficio con claridad quirúrgica: apacentad la grey de Dios que está entre vosotros, cuidando de ella no por fuerza sino voluntariamente, no por ganancia deshonesta sino con ánimo pronto, no como teniendo señorío sobre los que están a vuestro cargo sino siendo ejemplos. Aplicada a un pastor moderno, cada frase confronta una tentación real — el deber sin voluntad, el ministerio moldeado por el dinero, el liderazgo que domina en vez de modelar. La frase que más desafía suele ser 'siendo ejemplos a la grey,' porque significa que la predicación debe duplicarse con la vida. Pedro, él mismo anciano y un fracasado restaurado, escribe no como autoridad distante sino como pastor entre pastores. Y lo ancla todo en la promesa de que cuando aparezca el Príncipe de los pastores, los fieles recibirán la corona incorruptible de gloria."
+  },
+  {
+    "textEn": "26. List and explain the five marks of biblical pastoral ministry. Which is most often missing in modern ministry?",
+    "textEs": "26. Enumere y explique las cinco marcas del ministerio pastoral bíblico. ¿Cuál falta más a menudo en el ministerio moderno?",
+    "kw_en": [
+      "theolog",
+      "protect",
+      "relation",
+      "sacrific",
+      "equip",
+      "word",
+      "wolf",
+      "saint"
+    ],
+    "kw_es": [
+      "teológ",
+      "protect",
+      "relacion",
+      "sacrific",
+      "equip",
+      "palabra",
+      "lobo",
+      "santo"
+    ],
+    "modelEn": "The five marks of biblical pastoral ministry are that it is theological, protective, relational, sacrificial, and equipping. It is theological because the pastor feeds the flock through the Word; protective because he guards against wolves and false teaching; relational because he knows his sheep by name and is present in their lives; sacrificial because, like the Good Shepherd, he lays down his life; and equipping because Ephesians 4 says he is given to prepare the saints for the work of ministry. In modern ministry the relational and equipping marks are most often missing — many men preach well but never enter the homes, and many do all the work themselves rather than raising up others to serve. A faithful pastorate is measured not by how much the pastor does but by how many believers have been raised up to serve. Recovering all five keeps the office from collapsing into mere performance or management.",
+    "modelEs": "Las cinco marcas del ministerio pastoral bíblico son que es teológico, protector, relacional, sacrificial y equipador. Es teológico porque el pastor alimenta al rebaño por medio de la Palabra; protector porque guarda contra los lobos y la falsa enseñanza; relacional porque conoce a sus ovejas por nombre y está presente en sus vidas; sacrificial porque, como el Buen Pastor, da su vida; y equipador porque Efesios 4 dice que es dado para perfeccionar a los santos para la obra del ministerio. En el ministerio moderno las marcas relacional y equipadora son las que más faltan — muchos hombres predican bien pero nunca entran en los hogares, y muchos hacen toda la obra ellos mismos en vez de levantar a otros para servir. Un pastorado fiel no se mide por cuánto hace el pastor sino por cuántos creyentes han sido levantados para servir. Recuperar las cinco evita que el oficio se reduzca a mero desempeño o administración."
+  },
+  {
+    "textEn": "27. How does the pastor's accountability to the Chief Shepherd shape his daily decisions and long-term faithfulness?",
+    "textEs": "27. ¿Cómo da forma la rendición de cuentas del pastor al Príncipe de los pastores a sus decisiones diarias y a su fidelidad a largo plazo?",
+    "kw_en": [
+      "account",
+      "shepherd",
+      "appear",
+      "judg",
+      "crown",
+      "faithful",
+      "day",
+      "give"
+    ],
+    "kw_es": [
+      "cuenta",
+      "pastor",
+      "aparec",
+      "juicio",
+      "corona",
+      "fiel",
+      "día",
+      "dar"
+    ],
+    "modelEn": "The pastor serves under a Chief Shepherd who will one day appear, and that coming day of accountability shapes every present decision. James warns that teachers will receive a stricter judgment, so the office is glorious but weighty. Knowing he will give account, the faithful pastor asks whether the Chief Shepherd will find him feeding the flock or feeding himself, knowing his sheep by name or merely managing an institution. This horizon guards him from the small compromises that accumulate over a long ministry. It is also a comfort, for the same Lord who judges unfaithful shepherds rewards the faithful with the crown of glory that does not fade away.",
+    "modelEs": "El pastor sirve bajo un Príncipe de los pastores que un día aparecerá, y ese día venidero de rendición de cuentas da forma a cada decisión presente. Santiago advierte que los maestros recibirán mayor condenación, así que el oficio es glorioso pero pesado. Sabiendo que dará cuentas, el pastor fiel se pregunta si el Príncipe de los pastores lo hallará apacentando el rebaño o apacentándose a sí mismo, conociendo a sus ovejas por nombre o simplemente administrando una institución. Este horizonte lo guarda de los pequeños compromisos que se acumulan a lo largo de un ministerio largo. También es un consuelo, porque el mismo Señor que juzga a los pastores infieles recompensa a los fieles con la corona incorruptible de gloria."
+  },
+  {
+    "textEn": "28. Why is preaching the Word of God ('theological' ministry) the foundation of pastoral work? What happens when this foundation is weakened?",
+    "textEs": "28. ¿Por qué es la predicación de la Palabra de Dios (ministerio 'teológico') el fundamento de la obra pastoral? ¿Qué sucede cuando se debilita este fundamento?",
+    "kw_en": [
+      "preach",
+      "word",
+      "scripture",
+      "feed",
+      "starv",
+      "foundation",
+      "pulpit",
+      "weak"
+    ],
+    "kw_es": [
+      "predic",
+      "palabra",
+      "escritura",
+      "aliment",
+      "hambre",
+      "fundamento",
+      "púlpito",
+      "débil"
+    ],
+    "modelEn": "Preaching the Word is the theological mark, and it is foundational because the pastor feeds the flock through the Word of God, as Paul charged Timothy to 'preach the word.' When the pulpit grows weak, the church grows weak; sheep are fed by green grass, not by ribbons tied around the fence post. When Scripture is replaced with stories, exegesis with anecdotes, and the Word reduced to a launching pad for the pastor's opinions, the flock starves in the middle of plenty. Everything else in ministry rests on this — a man who will not feed the people from the Word has nothing to protect, and no foundation to build on. The weakening of this foundation is the quiet beginning of most pastoral collapse.",
+    "modelEs": "Predicar la Palabra es la marca teológica, y es fundamental porque el pastor alimenta al rebaño por medio de la Palabra de Dios, como Pablo encargó a Timoteo: 'predica la palabra.' Cuando el púlpito se debilita, la iglesia se debilita; las ovejas se alimentan de pasto verde, no de cintas atadas al poste de la cerca. Cuando la Escritura se reemplaza con historias, la exégesis con anécdotas, y la Palabra se reduce a una plataforma de lanzamiento para las opiniones del pastor, el rebaño muere de hambre en medio de la abundancia. Todo lo demás en el ministerio descansa sobre esto — un hombre que no alimentará al pueblo de la Palabra no tiene nada que proteger ni fundamento sobre el cual edificar. El debilitamiento de este fundamento es el comienzo silencioso de la mayoría de los colapsos pastorales."
+  },
+  {
+    "textEn": "29. Discuss how the equipping mark of pastoral ministry (Ephesians 4:11-12) reshapes how a pastor measures success.",
+    "textEs": "29. Discuta cómo la marca equipadora del ministerio pastoral (Efesios 4:11-12) reformula cómo un pastor mide el éxito.",
+    "kw_en": [
+      "equip",
+      "ephesian",
+      "saint",
+      "ministry",
+      "success",
+      "serv",
+      "body",
+      "raise"
+    ],
+    "kw_es": [
+      "equip",
+      "efesios",
+      "santo",
+      "ministerio",
+      "éxito",
+      "serv",
+      "cuerpo",
+      "levant"
+    ],
+    "modelEn": "Ephesians 4:11-12 says pastors and teachers are given to the church 'for the equipping of the saints for the work of ministry, for the edifying of the body of Christ.' This reshapes how a pastor measures success: the pastor is not the only minister in the congregation but the equipper of ministers. A successful pastorate is not measured by how much the pastor does, but by how many believers have been raised up to serve. The man who tries to do everything himself produces a dependent church and an exhausted pastor. The man who equips produces a body where every member shares the work, which is the New Testament pattern.",
+    "modelEs": "Efesios 4:11-12 dice que los pastores y maestros son dados a la iglesia 'a fin de perfeccionar a los santos para la obra del ministerio, para la edificación del cuerpo de Cristo.' Esto reformula cómo un pastor mide el éxito: el pastor no es el único ministro en la congregación sino el equipador de ministros. Un pastorado exitoso no se mide por cuánto hace el pastor, sino por cuántos creyentes han sido levantados para servir. El hombre que intenta hacer todo él mismo produce una iglesia dependiente y un pastor agotado. El hombre que equipa produce un cuerpo donde cada miembro comparte la obra, que es el patrón del Nuevo Testamento."
+  },
+  {
+    "textEn": "30. Synthesize the entire unit: How does the biblical foundation of pastoral ministry shape both the calling and the daily work of a faithful pastor?",
+    "textEs": "30. Sintetice toda la unidad: ¿Cómo da forma el fundamento bíblico del ministerio pastoral tanto al llamado como a la labor diaria de un pastor fiel?",
+    "kw_en": [
+      "shepherd",
+      "under",
+      "christ",
+      "scripture",
+      "call",
+      "flock",
+      "account",
+      "sacred"
+    ],
+    "kw_es": [
+      "pastor",
+      "sub",
+      "cristo",
+      "escritura",
+      "llam",
+      "rebaño",
+      "cuenta",
+      "sagrado"
+    ],
+    "modelEn": "The biblical foundation of pastoral ministry is that Christ is the Shepherd and the pastor is His undershepherd; the flock is His, not ours. From this everything flows: the Word is our food, the truth is our weapon, the people are our charge, and the Day of accountability is our horizon. The calling is shaped by this because no man takes the office to himself — he is called by God and confirmed by the church. The daily work is shaped by it because the undershepherd feeds, protects, knows, sacrifices for, and equips a flock that belongs to Another. Without these foundations pastoral ministry becomes a profession; with them it becomes a sacred calling worthy of a man's whole life.",
+    "modelEs": "El fundamento bíblico del ministerio pastoral es que Cristo es el Pastor y el pastor es Su subpastor; el rebaño es Suyo, no nuestro. De esto fluye todo: la Palabra es nuestro alimento, la verdad es nuestra arma, el pueblo es nuestra carga, y el Día de la rendición de cuentas es nuestro horizonte. El llamado se forma por esto porque ningún hombre toma el oficio para sí — es llamado por Dios y confirmado por la iglesia. La labor diaria se forma por ello porque el subpastor alimenta, protege, conoce, se sacrifica por y equipa a un rebaño que pertenece a Otro. Sin estos fundamentos el ministerio pastoral se vuelve una profesión; con ellos se vuelve un llamado sagrado digno de toda la vida de un hombre."
+  }
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit1 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_pm_u1_mc_passed';
+const SA_LOCK_KEY = 'cts_pm_u1_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_pm_u1_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read the student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(normalize(ans), kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 2 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first." : "Por favor regístrese primero.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'cert';
+    let total, score, required, mcGatePass, saGatePass;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let correctKW = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+        required = null;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit1 = true;
+                localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_pm_u1_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit1 = true;
+        localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_pm_u1_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        // MC passed — bank it so it never has to be redone. Only SA is locked.
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_pm_u1_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        renderQuestions();
+    };
+});
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 1 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPMReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

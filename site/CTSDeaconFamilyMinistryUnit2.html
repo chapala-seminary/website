@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deacon Family Ministry Plan — Unit 2</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<!-- CTS Deacon Family Ministry Plan — Unit 2. Built on Cook's validated Q24 masters engine (ported from Bible Characters Unit 3). Bilingual EN (NKJV) / ES (RVG). Author: Dr. Wayne Cook. Spanish + SA keywords/models pending native RVG / author spot-check. -->
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 3 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Deacon Family Ministry Plan — Unit 2: Qualifications and Character of Deacons</span><span class="lang-es">📖 Plan de Ministerio Familiar del Diácono — Unidad 2: Cualidades y Carácter de los Diáconos</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But let these also first be tested; then let them serve as deacons, being found blameless." — 1 Timothy 3:10 (NKJV)</span><span class="lang-es">«Y éstos también sean primero probados; y luego ejerzan el diaconado, siendo irreprensibles.» — 1 Timoteo 3:10 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="cert">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>In Unit 1 we learned what a deacon is: a servant, set apart by the church to carry the load of practical care so that the ministry of the Word may go forward. But the New Testament is never content to tell us only what a deacon does; it is equally concerned with what a deacon <em>is</em>. Service in the church is never a matter of mere willingness or availability. The man who handles a congregation's people, its money, its sorrows, and its secrets must himself be a man of tested character. So in this unit we turn from the work to the worker, and we ask a single question: what kind of man may the church rightly set apart as a deacon?</p>
+<p>We have already seen the answer begin in Acts 6, where the seven were to be &ldquo;men of good reputation, full of the Holy Spirit and wisdom&rdquo; (Acts 6:3). Notice again that not one of those three marks was administrative skill. The work waiting to be done was the daily distribution of food; the requirement was spiritual maturity. From the very first day, the church refused to separate practical service from personal holiness. A man was chosen for what he was before he was trusted with what he would do.</p>
+<p>Why should the standard be so high? Because the deacon stands where the life of the church is most tender. He enters homes in their grief, handles money given in sacrifice, and hears confessions no one else will ever hear. A careless member may wound one family; a careless deacon may wound many. The higher the trust, the higher the character it requires; and so the church examines the man before it ever hands him the work.</p>
+<p>When the Apostle Paul came to write down the standing requirements for this office, he took those early marks and expanded them into a fuller portrait. To a young pastor in Ephesus he set down, in plain words, the character the church must look for:</p>
+<div class="scripture">Likewise deacons must be reverent, not double-tongued, not given to much wine, not greedy for money, holding the mystery of the faith with a pure conscience. But let these also first be tested; then let them serve as deacons, being found blameless. Likewise, their wives must be reverent, not slanderers, temperate, faithful in all things. Let deacons be the husbands of one wife, ruling their children and their own houses well. For those who have served well as deacons obtain for themselves a good standing and great boldness in the faith which is in Christ Jesus. (1 Timothy 3:8&ndash;13, NKJV)</div>
+<p><strong>Subject:</strong> the qualifications and character of the deacon.</p>
+<p><strong>Proposition:</strong> God requires that the deacon be a man of proven character, sound conviction, examined worth, and a well-ordered home before the church entrusts him with its service.</p>
+<p>From this passage we will draw <strong>four qualifications</strong> the church must require of those it sets apart.</p>
+<h2>I. The Qualification of Character</h2>
+<p>Paul begins not with what the deacon must <em>do</em> but with what he must <em>be</em>: &ldquo;Likewise deacons must be reverent, not double-tongued, not given to much wine, not greedy for money&rdquo; (1 Timothy 3:8). First comes a thing he must be, and then three things he must not be.</p>
+<p>He must be <strong>reverent</strong> &mdash; a man of weight and dignity, who is taken seriously because he himself takes holy things seriously. He is not frivolous or unstable, but a man whose bearing makes others trust him with sacred matters. Then come the three warnings. He must not be <strong>double-tongued</strong> &mdash; saying one thing to one person and another to the next. This is no small danger, for the deacon moves from home to home, and he must carry the same truth, and keep the same confidence, in every house he enters. A man who shades his words to please each listener will soon sow confusion and break trust across the whole congregation. He must not be <strong>given to much wine</strong> &mdash; not enslaved to appetite, for a man who cannot master his own cravings cannot be trusted to master a difficult visit or a delicate need. And he must not be <strong>greedy for money</strong> &mdash; for the deacon will often handle the benevolence funds of the church, and a man who loves money will sooner or later betray the very poor he was set apart to serve. The portrait is of a man whose private appetites are under control, so that he may be trusted in public service. Character is not what a man shows on the platform; it is what he is when no one is watching.</p>
+<p>See how practical this list is. Every fault Paul names is one that does its damage quietly, in private, over time &mdash; a loose tongue, a secret thirst, a love of money. These are not the sins that get a man removed from the platform; they are the sins that slowly rot a ministry of care from the inside. So the church must look beneath the surface and ask not only, &ldquo;Can this man serve?&rdquo; but &ldquo;Is this man sound all the way through?&rdquo;</p>
+<h2>II. The Qualification of Conviction</h2>
+<p>&ldquo;holding the mystery of the faith with a pure conscience&rdquo; (1 Timothy 3:9). The deacon is not merely a good man with clean habits; he is a man who holds the faith. The &ldquo;mystery of the faith&rdquo; is the gospel that was once hidden and is now revealed in Christ &mdash; and the deacon must hold it firmly and personally, not as a hired manager of a religious institution, but as a believer who himself rests on the truth he serves.</p>
+<p>And he must hold it &ldquo;with a pure conscience&rdquo; &mdash; that is, his belief and his behavior must agree. It is a terrible and hollow thing for a man to defend a faith his daily life denies. The deacon's doctrine and his conscience must be at peace with one another, so that what he confesses with his mouth is confirmed by the way he lives. A divided man &mdash; sound in word but careless in life &mdash; cannot lead the people of God, because they will follow what he does long before they follow what he says. Here, instead, is a man you can both trust and follow, because his creed and his conduct tell the same story.</p>
+<p>And do not miss how much the deacon teaches without ever standing to preach. As he carries the gospel from house to house in word and in life, the families he serves read the faith in him. A deacon whose conviction is real and whose conscience is clean becomes a quiet sermon in every home he enters &mdash; and that is a kind of preaching the whole church needs.</p>
+<h2>III. The Qualification of Proven Worth</h2>
+<p>&ldquo;But let these also first be tested; then let them serve as deacons, being found blameless&rdquo; (1 Timothy 3:10). Here is the great safeguard of the office, and the order is fixed and must never be reversed: first tested, then trusted; first proven, then placed. The church is not to lay its hands on a man hastily (compare 1 Timothy 5:22), handing a new or unknown convert the care of souls before his character has been seen over time.</p>
+<p>The word &ldquo;tested&rdquo; does not mean a written examination; it means a life observed &mdash; a man watched in the ordinary trials of church life until the congregation can say of him, &ldquo;He is blameless.&rdquo; Watch how a man serves in small things, and you will know whether to trust him with large ones.</p>
+<div class="illustration"><strong>Illustration.</strong> No wise builder hangs the weight of a roof on a beam he has never tested. He loads it first, watches it under strain, and only then builds upon it. The church does the same with a man's character: it lets him bear small weights &mdash; a hard visit, a quiet need, a sum of money &mdash; and watches how he carries them, before it lays upon him the care of souls. A gifted but ungodly worker will cost a church far more than an empty office ever could. Proven, then placed; tested, then trusted.</div>
+<h2>IV. The Qualification of a Well-Ordered Home</h2>
+<p>The deacon's qualification reaches past himself to his household: &ldquo;Likewise, their wives must be reverent, not slanderers, temperate, faithful in all things. Let deacons be the husbands of one wife, ruling their children and their own houses well&rdquo; (1 Timothy 3:11&ndash;12).</p>
+<p>Verse 11 has been read in two ways by faithful interpreters, and a humble church should know both. Some take &ldquo;their wives&rdquo; to mean the wives of the deacons, who share so closely in this ministry of care that they too must be reverent, no slanderers &mdash; no carriers of gossip from house to house &mdash; temperate, and faithful in all things. Others take the same word to mean &ldquo;the women&rdquo; &mdash; women who themselves serve in a diaconal role, what some churches have called deaconesses, pointing to Phoebe, who is called a servant (<em>diakonos</em>) of the church at Cenchrea (Romans 16:1). The grammar allows both readings, and godly churches have differed in good conscience. What is beyond all dispute is that the women closely bound to this ministry of care must themselves be trustworthy, for they will hear the same sorrows and keep the same confidences as the deacons they serve beside.</p>
+<p>Then Paul requires that the deacon be &ldquo;the husband of one wife&rdquo; &mdash; a man of marital faithfulness and undivided integrity &mdash; and one who rules &ldquo;their children and their own houses well.&rdquo; The reasoning is the same that Paul applies to the overseer just above: a man's home is the proving ground of his fitness to serve the household of God. If he cannot lead, love, and order his own family, he is not yet ready to be trusted with the family of the church. The man who is faithful in the small kingdom of his home gives the church good reason to trust him in the larger work of service.</p>
+<p>This is no harsh demand. It simply recognizes that the same graces a man needs to shepherd a home &mdash; patience, faithfulness, gentle authority, self-denial &mdash; are the very graces he will need to serve the wider family of God. The home is not a separate test from the ministry; it is the first rehearsal of it.</p>
+<h2>Conclusion</h2>
+<p>Paul ends not with a threat but with a promise: &ldquo;For those who have served well as deacons obtain for themselves a good standing and great boldness in the faith which is in Christ Jesus&rdquo; (1 Timothy 3:13). The deacon who serves well gains two things. He gains a <strong>good standing</strong> &mdash; an honored place and a good reputation in the church and before God. And he gains <strong>great boldness in the faith</strong> &mdash; a holy confidence that grows in a man as he pours himself out in faithful service. Service never diminishes a man; it enlarges him.</p>
+<p>Gather the four qualifications and the portrait is complete. The deacon must be a man of tested character, sound conviction, proven worth, and a faithful home &mdash; the very pattern we first met in Acts 6, where the seven were to be of good reputation, full of the Spirit, and full of wisdom. The standard is high, and it is meant to be, for the deacon is not a volunteer filling a slot but a servant carrying the care of God's people. In Unit 3 we will trace how this biblical office took shape in Southern Baptist life and gave rise to the Deacon Family Ministry Plan. But the foundation is laid here, and it is the same foundation Paul and the apostles laid: the church must choose its deacons not first for what they can do, but for what, by the grace of God, they already are.</p>
+<p>Let every church, then, weigh the man before it weighs the need. A need can wait a little; a wrong man in a trusted office can do harm that years will not undo. Choose slowly, choose prayerfully, and choose for character &mdash; and God will give His church servants worthy of the towel they carry.</p></div>
+<div class="lang-es"><p>En la Unidad 1 aprendimos qu&eacute; es un di&aacute;cono: un siervo, apartado por la iglesia para llevar la carga del cuidado pr&aacute;ctico de modo que el ministerio de la Palabra pueda avanzar. Pero el Nuevo Testamento nunca se contenta con decirnos solo lo que un di&aacute;cono hace; le importa por igual lo que un di&aacute;cono <em>es</em>. El servicio en la iglesia nunca es cuesti&oacute;n de mera disposici&oacute;n o disponibilidad. El hombre que maneja a la gente de una congregaci&oacute;n, su dinero, sus dolores y sus secretos, debe ser &eacute;l mismo un hombre de car&aacute;cter probado. As&iacute; que en esta unidad pasamos de la obra al obrero, y hacemos una sola pregunta: &iquest;qu&eacute; clase de hombre puede la iglesia apartar con raz&oacute;n como di&aacute;cono?</p>
+<p>Ya hemos visto comenzar la respuesta en Hechos 6, donde los siete deb&iacute;an ser &laquo;varones de buen testimonio, llenos del Esp&iacute;ritu Santo y de sabidur&iacute;a&raquo; (Hechos 6:3). Note de nuevo que ninguna de esas tres marcas era habilidad administrativa. La obra que esperaba era el reparto diario de los alimentos; el requisito era madurez espiritual. Desde el primer d&iacute;a, la iglesia se neg&oacute; a separar el servicio pr&aacute;ctico de la santidad personal. Un hombre era escogido por lo que era antes de que se le confiara lo que har&iacute;a.</p>
+<p>&iquest;Por qu&eacute; ha de ser tan alta la norma? Porque el di&aacute;cono est&aacute; donde la vida de la iglesia es m&aacute;s tierna. Entra en los hogares en su dolor, maneja dinero dado en sacrificio, y oye confidencias que nadie m&aacute;s oir&aacute; jam&aacute;s. Un miembro descuidado puede herir a una familia; un di&aacute;cono descuidado puede herir a muchas. Cuanto mayor es la confianza, mayor es el car&aacute;cter que exige; y por eso la iglesia examina al hombre antes de entregarle la obra.</p>
+<p>Cuando el ap&oacute;stol Pablo lleg&oacute; a poner por escrito los requisitos permanentes de este oficio, tom&oacute; aquellas primeras marcas y las ampli&oacute; en un retrato m&aacute;s completo. A un joven pastor en &Eacute;feso le dej&oacute; escrito, en palabras claras, el car&aacute;cter que la iglesia debe buscar:</p>
+<div class="scripture">Los di&aacute;conos asimismo deben ser honestos, sin doblez, no dados a mucho vino, no amadores de las ganancias deshonestas; que tengan el misterio de la fe con limpia conciencia. Y &eacute;stos tambi&eacute;n sean primero probados; y luego ejerzan el diaconado, siendo irreprensibles. Las mujeres asimismo sean honestas, no calumniadoras, sino sobrias, fieles en todo. Los di&aacute;conos sean maridos de una sola esposa, que gobiernen bien sus hijos y sus casas. Porque los que bien ejercieren el diaconado, ganan para s&iacute; buen grado, y mucha confianza en la fe que es en Cristo Jes&uacute;s. (1 Timoteo 3:8&ndash;13, RVG)</div>
+<p><strong>Tema:</strong> las cualidades y el car&aacute;cter del di&aacute;cono.</p>
+<p><strong>Proposici&oacute;n:</strong> Dios requiere que el di&aacute;cono sea un hombre de car&aacute;cter probado, de convicci&oacute;n s&oacute;lida, de valor examinado y de un hogar bien ordenado, antes de que la iglesia le confíe su servicio.</p>
+<p>De este pasaje sacaremos <strong>cuatro cualidades</strong> que la iglesia debe exigir a los que aparta.</p>
+<h2>I. La Cualidad del Car&aacute;cter</h2>
+<p>Pablo no comienza con lo que el di&aacute;cono debe <em>hacer</em>, sino con lo que debe <em>ser</em>: &laquo;Los di&aacute;conos asimismo deben ser honestos, sin doblez, no dados a mucho vino, no amadores de las ganancias deshonestas&raquo; (1 Timoteo 3:8). Primero viene algo que debe ser, y luego tres cosas que no debe ser.</p>
+<p>Debe ser <strong>honesto</strong> (digno de respeto) &mdash; un hombre de peso y dignidad, a quien se toma en serio porque &eacute;l mismo toma en serio las cosas santas. No es frívolo ni inestable, sino un hombre cuyo porte hace que otros le confíen asuntos sagrados. Luego vienen las tres advertencias. No debe ser <strong>de doblez</strong> &mdash; diciendo una cosa a una persona y otra a la siguiente. Este no es un peligro peque&ntilde;o, porque el di&aacute;cono va de hogar en hogar, y debe llevar la misma verdad, y guardar la misma confianza, en cada casa donde entra. Un hombre que matiza sus palabras para agradar a cada oyente pronto sembrar&aacute; confusi&oacute;n y quebrar&aacute; la confianza en toda la congregaci&oacute;n. No debe ser <strong>dado a mucho vino</strong> &mdash; no esclavo del apetito, porque un hombre que no puede dominar sus propios antojos no puede ser confiado para dominar una visita difícil o una necesidad delicada. Y no debe ser <strong>amador de las ganancias deshonestas</strong> &mdash; porque el di&aacute;cono a menudo manejar&aacute; los fondos de beneficencia de la iglesia, y un hombre que ama el dinero tarde o temprano traicionar&aacute; a los mismos pobres que fue apartado para servir. El retrato es de un hombre cuyos apetitos privados est&aacute;n bajo control, para que se le pueda confiar el servicio p&uacute;blico. El car&aacute;cter no es lo que un hombre muestra en la plataforma; es lo que es cuando nadie lo observa.</p>
+<p>Vea cu&aacute;n pr&aacute;ctica es esta lista. Cada falta que Pablo nombra es una que hace su da&ntilde;o en silencio, en privado, con el tiempo &mdash; una lengua suelta, una sed secreta, un amor al dinero. Estos no son los pecados que sacan a un hombre de la plataforma; son los pecados que poco a poco pudren un ministerio de cuidado desde adentro. Por eso la iglesia debe mirar debajo de la superficie y preguntar no solo: &laquo;&iquest;Puede este hombre servir?&raquo; sino: &laquo;&iquest;Es este hombre s&oacute;lido hasta lo m&aacute;s hondo?&raquo;</p>
+<h2>II. La Cualidad de la Convicci&oacute;n</h2>
+<p>&laquo;que tengan el misterio de la fe con limpia conciencia&raquo; (1 Timoteo 3:9). El di&aacute;cono no es solo un buen hombre de h&aacute;bitos limpios; es un hombre que tiene la fe. El &laquo;misterio de la fe&raquo; es el evangelio que estuvo una vez escondido y ahora es revelado en Cristo &mdash; y el di&aacute;cono debe tenerlo firme y personalmente, no como un gerente contratado de una instituci&oacute;n religiosa, sino como un creyente que &eacute;l mismo descansa en la verdad que sirve.</p>
+<p>Y debe tenerlo &laquo;con limpia conciencia&raquo; &mdash; es decir, su creencia y su conducta deben concordar. Es algo terrible y hueco que un hombre defienda una fe que su vida diaria niega. La doctrina del di&aacute;cono y su conciencia deben estar en paz una con otra, de modo que lo que confiesa con su boca sea confirmado por la manera en que vive. Un hombre dividido &mdash; s&oacute;lido en palabra pero descuidado en la vida &mdash; no puede dirigir al pueblo de Dios, porque seguir&aacute;n lo que hace mucho antes de seguir lo que dice. Aqu&iacute;, en cambio, hay un hombre en quien se puede confiar y a quien se puede seguir, porque su credo y su conducta cuentan la misma historia.</p>
+<p>Y no pase por alto cu&aacute;nto ense&ntilde;a el di&aacute;cono sin jam&aacute;s ponerse de pie a predicar. Conforme lleva el evangelio de casa en casa en palabra y en vida, las familias a quienes sirve leen la fe en &eacute;l. Un di&aacute;cono cuya convicci&oacute;n es real y cuya conciencia est&aacute; limpia se vuelve un serm&oacute;n callado en cada hogar donde entra &mdash; y esa es una clase de predicaci&oacute;n que toda la iglesia necesita.</p>
+<h2>III. La Cualidad del Valor Probado</h2>
+<p>&laquo;Y &eacute;stos tambi&eacute;n sean primero probados; y luego ejerzan el diaconado, siendo irreprensibles&raquo; (1 Timoteo 3:10). Aqu&iacute; est&aacute; la gran salvaguarda del oficio, y el orden es fijo y nunca debe invertirse: primero probados, luego confiados; primero comprobados, luego colocados. La iglesia no ha de imponer las manos a un hombre apresuradamente (compare 1 Timoteo 5:22), entregando a un converso nuevo o desconocido el cuidado de las almas antes de que su car&aacute;cter haya sido visto con el tiempo.</p>
+<p>La palabra &laquo;probados&raquo; no significa un examen escrito; significa una vida observada &mdash; un hombre vigilado en las pruebas ordinarias de la vida de la iglesia hasta que la congregaci&oacute;n pueda decir de &eacute;l: &laquo;Es irreprensible.&raquo; Observe c&oacute;mo sirve un hombre en las cosas peque&ntilde;as, y sabr&aacute; si confiarle las grandes.</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> Ning&uacute;n constructor sabio cuelga el peso de un techo de una viga que nunca ha probado. La carga primero, la observa bajo tensi&oacute;n, y solo entonces edifica sobre ella. La iglesia hace lo mismo con el car&aacute;cter de un hombre: le deja llevar pesos peque&ntilde;os &mdash; una visita difícil, una necesidad callada, una suma de dinero &mdash; y observa c&oacute;mo los carga, antes de poner sobre &eacute;l el cuidado de las almas. Un obrero dotado pero impío le costar&aacute; a la iglesia mucho m&aacute;s que un oficio vac&iacute;o. Comprobado, luego colocado; probado, luego confiado.</div>
+<h2>IV. La Cualidad de un Hogar Bien Ordenado</h2>
+<p>La cualidad del di&aacute;cono se extiende m&aacute;s all&aacute; de s&iacute; mismo hasta su casa: &laquo;Las mujeres asimismo sean honestas, no calumniadoras, sino sobrias, fieles en todo. Los di&aacute;conos sean maridos de una sola esposa, que gobiernen bien sus hijos y sus casas&raquo; (1 Timoteo 3:11&ndash;12).</p>
+<p>El vers&iacute;culo 11 se ha le&iacute;do de dos maneras por int&eacute;rpretes fieles, y una iglesia humilde deber&iacute;a conocer ambas. Algunos toman &laquo;las mujeres&raquo; como las esposas de los di&aacute;conos, que comparten tan de cerca este ministerio de cuidado que tambi&eacute;n ellas deben ser honestas, no calumniadoras &mdash; no portadoras de chismes de casa en casa &mdash; sobrias y fieles en todo. Otros toman la misma palabra como &laquo;las mujeres&raquo; que sirven ellas mismas en un papel diaconal, lo que algunas iglesias han llamado diaconisas, se&ntilde;alando a Febe, que es llamada sierva (<em>diakonos</em>) de la iglesia en Cencrea (Romanos 16:1). La gram&aacute;tica permite ambas lecturas, y iglesias piadosas han diferido en buena conciencia. Lo que est&aacute; fuera de toda disputa es que las mujeres estrechamente ligadas a este ministerio de cuidado deben ser ellas mismas dignas de confianza, porque oir&aacute;n los mismos dolores y guardar&aacute;n las mismas confidencias que los di&aacute;conos junto a quienes sirven.</p>
+<p>Luego Pablo requiere que el di&aacute;cono sea &laquo;marido de una sola esposa&raquo; &mdash; un hombre de fidelidad conyugal e integridad indivisa &mdash; y uno que gobierne &laquo;bien sus hijos y sus casas.&raquo; El razonamiento es el mismo que Pablo aplica al obispo justo antes: el hogar de un hombre es el campo de prueba de su aptitud para servir a la casa de Dios. Si no puede dirigir, amar y ordenar a su propia familia, todav&iacute;a no est&aacute; listo para que se le confíe la familia de la iglesia. El hombre que es fiel en el peque&ntilde;o reino de su hogar le da a la iglesia buena raz&oacute;n para confiar en &eacute;l en la obra mayor del servicio.</p>
+<p>Esto no es una exigencia dura. Simplemente reconoce que las mismas gracias que un hombre necesita para pastorear un hogar &mdash; paciencia, fidelidad, autoridad amable, abnegaci&oacute;n &mdash; son las mismas gracias que necesitar&aacute; para servir a la familia m&aacute;s amplia de Dios. El hogar no es una prueba aparte del ministerio; es el primer ensayo de &eacute;l.</p>
+<h2>Conclusi&oacute;n</h2>
+<p>Pablo no termina con una amenaza, sino con una promesa: &laquo;Porque los que bien ejercieren el diaconado, ganan para s&iacute; buen grado, y mucha confianza en la fe que es en Cristo Jes&uacute;s&raquo; (1 Timoteo 3:13). El di&aacute;cono que sirve bien gana dos cosas. Gana un <strong>buen grado</strong> &mdash; un lugar honrado y una buena reputaci&oacute;n en la iglesia y delante de Dios. Y gana <strong>mucha confianza en la fe</strong> &mdash; una santa seguridad que crece en un hombre conforme se derrama en servicio fiel. El servicio nunca disminuye a un hombre; lo engrandece.</p>
+<p>Re&uacute;na las cuatro cualidades y el retrato queda completo. El di&aacute;cono debe ser un hombre de car&aacute;cter probado, de convicci&oacute;n s&oacute;lida, de valor probado y de un hogar fiel &mdash; el mismo patr&oacute;n que encontramos primero en Hechos 6, donde los siete deb&iacute;an ser de buen testimonio, llenos del Esp&iacute;ritu y llenos de sabidur&iacute;a. La norma es alta, y as&iacute; debe ser, porque el di&aacute;cono no es un voluntario que llena un puesto, sino un siervo que lleva el cuidado del pueblo de Dios. En la Unidad 3 trazaremos c&oacute;mo este oficio b&iacute;blico tom&oacute; forma en la vida bautista del Sur y dio origen al Plan de Ministerio Familiar del Di&aacute;cono. Pero el fundamento queda puesto aqu&iacute;, y es el mismo fundamento que Pablo y los ap&oacute;stoles pusieron: la iglesia debe escoger a sus di&aacute;conos no primero por lo que pueden hacer, sino por lo que, por la gracia de Dios, ya son.</p>
+<p>Que cada iglesia, pues, pese al hombre antes de pesar la necesidad. Una necesidad puede esperar un poco; un hombre equivocado en un oficio de confianza puede hacer un da&ntilde;o que los a&ntilde;os no deshar&aacute;n. Escoja despacio, escoja con oraci&oacute;n, y escoja por el car&aacute;cter &mdash; y Dios dar&aacute; a su iglesia siervos dignos de la toalla que llevan.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 2 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 2 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 2;
+const COURSE = 'CTSDFM';
+const FILE_PREFIX = 'CTSDeaconFamilyMinistry';
+const NEXT_UNIT_URL = 'CTSDeaconFamilyMinistryUnit3.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 — Biblical Foundations of the Diaconate","Unit 2 — Qualifications and Character of Deacons","Unit 3 — Historical Development in Southern Baptist Life","Unit 4 — The Deacon Family Ministry Plan: Vision and Definition","Unit 5 — Organizing the Plan: Assigning Families","Unit 6 — Ongoing Care: Visitation and Prayer","Unit 7 — Discipleship and Evangelism within Assigned Families","Unit 8 — Crisis Ministry, Confidentiality, and Referral","Unit 9 — Deacon Meetings, Reporting, and Pastor Relations","Unit 10 — Sustaining the Plan: Challenges and Evaluation"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [
+{"textEn":"1. Acts 6:3 required the seven to be of good reputation, full of the Holy Spirit, and full of:","textEs":"1. Hechos 6:3 requería que los siete fueran de buen testimonio, llenos del Espíritu Santo y llenos de:","optionsEn":["wealth","wisdom","eloquence","experience"],"optionsEs":["riquezas","sabiduría","elocuencia","experiencia"],"explanationEn":"Acts 6:3 — good reputation, full of the Holy Spirit and wisdom.","explanationEs":"Hechos 6:3 — buen testimonio, llenos del Espíritu Santo y de sabiduría.","correct":1},
+{"textEn":"2. According to 1 Timothy 3:8, deacons must be reverent and must NOT be:","textEs":"2. Según 1 Timoteo 3:8, los diáconos deben ser honestos y NO deben ser:","optionsEn":["wealthy","highly educated","double-tongued","unmarried"],"optionsEs":["ricos","muy educados","de doblez","solteros"],"explanationEn":"1 Tim 3:8 — not double-tongued.","explanationEs":"1 Timoteo 3:8 — sin doblez.","correct":2},
+{"textEn":"3. To be 'not given to much wine' means the deacon must not be:","textEs":"3. Ser 'no dado a mucho vino' significa que el diácono no debe ser:","optionsEn":["mastered by appetite or drink","a total abstainer only","a winemaker","wealthy"],"optionsEs":["dominado por el apetito o la bebida","solo un abstemio total","un fabricante de vino","rico"],"explanationEn":"It describes a man not enslaved to appetite.","explanationEs":"Describe a un hombre no esclavo del apetito.","correct":0},
+{"textEn":"4. Why is 'not greedy for money' especially important for a deacon?","textEs":"4. ¿Por qué es 'no amador del dinero' especialmente importante para un diácono?","optionsEn":["deacons are paid a large salary","money is inherently evil","he sets the church budget","he often handles the church's benevolence funds"],"optionsEs":["a los diáconos se les paga un gran salario","el dinero es malo en sí mismo","él fija el presupuesto de la iglesia","a menudo maneja los fondos de beneficencia de la iglesia"],"explanationEn":"The deacon handles benevolence funds for the poor.","explanationEs":"El diácono maneja los fondos de beneficencia para los pobres.","correct":3},
+{"textEn":"5. First Timothy 3:9 says the deacon must hold 'the mystery of the faith' with:","textEs":"5. Primera de Timoteo 3:9 dice que el diácono debe tener 'el misterio de la fe' con:","optionsEn":["a pure conscience","great learning","public eloquence","a written creed"],"optionsEs":["limpia conciencia","gran erudición","elocuencia pública","un credo escrito"],"explanationEn":"1 Tim 3:9 — with a pure conscience.","explanationEs":"1 Timoteo 3:9 — con limpia conciencia.","correct":0},
+{"textEn":"6. 'Holding the mystery of the faith' means the deacon must:","textEs":"6. 'Tener el misterio de la fe' significa que el diácono debe:","optionsEn":["keep church secrets","personally hold the gospel as a believer","memorize the catechism","have seminary training"],"optionsEs":["guardar los secretos de la iglesia","tener personalmente el evangelio como creyente","memorizar el catecismo","tener formación de seminario"],"explanationEn":"He must personally believe the gospel he serves.","explanationEs":"Debe creer personalmente el evangelio que sirve.","correct":1},
+{"textEn":"7. What does 1 Timothy 3:10 require before a man serves as a deacon?","textEs":"7. ¿Qué requiere 1 Timoteo 3:10 antes de que un hombre sirva como diácono?","optionsEn":["ordination by a bishop","payment of a fee","that he first be tested, then serve","a unanimous vote"],"optionsEs":["ordenación por un obispo","el pago de una cuota","que primero sea probado, y luego sirva","un voto unánime"],"explanationEn":"1 Tim 3:10 — first tested, then serve.","explanationEs":"1 Timoteo 3:10 — primero probado, luego que sirva.","correct":2},
+{"textEn":"8. The fixed order Paul gives in verse 10 is:","textEs":"8. El orden fijo que Pablo da en el versículo 10 es:","optionsEn":["serve first, prove later","appointed, then examined","elected, then trained","tested first, then trusted"],"optionsEs":["servir primero, comprobar después","nombrado, luego examinado","elegido, luego entrenado","probado primero, luego confiado"],"explanationEn":"First proven, then placed.","explanationEs":"Primero comprobado, luego colocado.","correct":3},
+{"textEn":"9. 'Let these also first be tested' implies the church should:","textEs":"9. 'Y éstos también sean primero probados' implica que la iglesia debe:","optionsEn":["give a written exam","observe a man's character over time","wait exactly one year","require a college degree"],"optionsEs":["dar un examen escrito","observar el carácter de un hombre con el tiempo","esperar exactamente un año","exigir un título universitario"],"explanationEn":"'Tested' means a life observed over time.","explanationEs":"'Probado' significa una vida observada con el tiempo.","correct":1},
+{"textEn":"10. First Timothy 5:22, cited alongside, warns the church to:","textEs":"10. Primera de Timoteo 5:22, citada junto al texto, advierte a la iglesia que:","optionsEn":["not lay hands on anyone hastily","pay the elders well","ordain new converts quickly","avoid the laying on of hands entirely"],"optionsEs":["no imponga las manos a nadie con ligereza","pague bien a los ancianos","ordene pronto a los nuevos convertidos","evite por completo la imposición de manos"],"explanationEn":"1 Tim 5:22 — do not lay hands on anyone hastily.","explanationEs":"1 Timoteo 5:22 — no impongas las manos a nadie con ligereza.","correct":0},
+{"textEn":"11. First Timothy 3:11 says the women/wives must NOT be:","textEs":"11. Primera de Timoteo 3:11 dice que las mujeres/esposas NO deben ser:","optionsEn":["slanderers","employed","silent in church","wealthy"],"optionsEs":["calumniadoras","empleadas","calladas en la iglesia","ricas"],"explanationEn":"1 Tim 3:11 — not slanderers.","explanationEs":"1 Timoteo 3:11 — no calumniadoras.","correct":0},
+{"textEn":"12. The phrase in 1 Timothy 3:11 ('their wives' / 'the women') has been faithfully understood as:","textEs":"12. La frase en 1 Timoteo 3:11 ('las mujeres') ha sido entendida fielmente como:","optionsEn":["only widows","only the pastor's wife","either deacons' wives or women who serve (deaconesses)","female elders"],"optionsEs":["solo las viudas","solo la esposa del pastor","las esposas de los diáconos o las mujeres que sirven (diaconisas)","ancianas (mujeres ancianos)"],"explanationEn":"The grammar allows both readings; godly churches differ.","explanationEs":"La gramática permite ambas lecturas; iglesias piadosas difieren.","correct":2},
+{"textEn":"13. First Timothy 3:12 requires the deacon to be:","textEs":"13. Primera de Timoteo 3:12 requiere que el diácono sea:","optionsEn":["unmarried","the husband of one wife","a widower","over fifty years old"],"optionsEs":["soltero","marido de una sola esposa","viudo","mayor de cincuenta años"],"explanationEn":"1 Tim 3:12 — the husband of one wife.","explanationEs":"1 Timoteo 3:12 — marido de una sola esposa.","correct":1},
+{"textEn":"14. 'Ruling their children and their own houses well' teaches that:","textEs":"14. 'Que gobiernen bien sus hijos y sus casas' enseña que:","optionsEn":["deacons must have many children","only fathers may ever serve","wives must remain silent","the home is the proving ground for church service"],"optionsEs":["los diáconos deben tener muchos hijos","solo los padres pueden servir","las esposas deben permanecer calladas","el hogar es el campo de prueba para el servicio en la iglesia"],"explanationEn":"A man's home proves his fitness to serve the church.","explanationEs":"El hogar de un hombre prueba su aptitud para servir a la iglesia.","correct":3},
+{"textEn":"15. First Timothy 3:13 promises those who serve well:","textEs":"15. Primera de Timoteo 3:13 promete a los que sirven bien:","optionsEn":["a generous salary","a good standing and great boldness in the faith","the office of elder","earthly riches"],"optionsEs":["un salario generoso","un buen grado y mucha confianza en la fe","el oficio de anciano","riquezas terrenales"],"explanationEn":"1 Tim 3:13 — good standing and great boldness.","explanationEs":"1 Timoteo 3:13 — buen grado y mucha confianza.","correct":1},
+{"textEn":"16. 'Great boldness in the faith' is best described as:","textEs":"16. 'Mucha confianza en la fe' se describe mejor como:","optionsEn":["natural aggressiveness","skill in public speaking","holy confidence grown through faithful service","political influence"],"optionsEs":["agresividad natural","habilidad para hablar en público","santa seguridad crecida por el servicio fiel","influencia política"],"explanationEn":"It is a holy confidence that grows through service.","explanationEs":"Es una santa seguridad que crece por el servicio.","correct":2},
+{"textEn":"17. The common thread between Acts 6:3 and 1 Timothy 3 is that a deacon is chosen first for:","textEs":"17. El hilo común entre Hechos 6:3 y 1 Timoteo 3 es que un diácono es escogido primero por:","optionsEn":["his character (what he is)","his skills","his wealth","his age"],"optionsEs":["su carácter (lo que es)","sus habilidades","su riqueza","su edad"],"explanationEn":"Both passages put character before ability.","explanationEs":"Ambos pasajes ponen el carácter antes de la habilidad.","correct":0},
+{"textEn":"18. To be 'reverent' (v8) describes a man who is:","textEs":"18. Ser 'honesto/digno' (v8) describe a un hombre que es:","optionsEn":["habitually silent","dignified and serious about holy things","wealthy and influential","advanced in age"],"optionsEs":["habitualmente callado","digno y serio en cuanto a las cosas santas","rico e influyente","de edad avanzada"],"explanationEn":"Reverent = a man of weight and dignity.","explanationEs":"Honesto/digno = un hombre de peso y dignidad.","correct":1},
+{"textEn":"19. A 'double-tongued' man is dangerous as a deacon because he:","textEs":"19. Un hombre 'de doblez' es peligroso como diácono porque:","optionsEn":["speaks two languages","talks far too much","is painfully shy","says one thing in one house and another elsewhere"],"optionsEs":["habla dos idiomas","habla demasiado","es muy tímido","dice una cosa en una casa y otra en otra parte"],"explanationEn":"He breaks trust and confidence from house to house.","explanationEs":"Quebranta la confianza de casa en casa.","correct":3},
+{"textEn":"20. The chief lesson of this unit is that the church must choose deacons:","textEs":"20. La lección principal de esta unidad es que la iglesia debe escoger diáconos:","optionsEn":["by seniority","for what they can do","for what, by grace, they already are","by lottery"],"optionsEs":["por antigüedad","por lo que pueden hacer","por lo que, por gracia, ya son","por sorteo"],"explanationEn":"Character precedes service; choose for what a man is.","explanationEs":"El carácter precede al servicio; escoja por lo que un hombre es.","correct":2}
+];
+const kwQuestions = [
+{"textEn":"21. What three marks did Acts 6:3 require of the seven, and why is it significant that none was administrative skill?","textEs":"21. ¿Qué tres marcas requería Hechos 6:3 de los siete, y por qué es significativo que ninguna fuera habilidad administrativa?","kw_en":["reputat","spirit","wisdom","charact","administ","servant","maturit","holines"],"kw_es":["testimoni","santo","sabidur","administ","siervo","espiritu","madur","santidad"],"modelEn":"Acts 6:3 required that the seven be men of good reputation, full of the Holy Spirit, and full of wisdom. Not one of these three marks was administrative skill or business ability. This is significant because it shows the church chose its first servants for spiritual character rather than mere competence. The work was the daily distribution of food, yet the requirement was maturity, godliness, and a good reputation. From the start the church refused to separate practical service from personal holiness.","modelEs":"Hechos 6:3 requería que los siete fueran varones de buen testimonio, llenos del Espíritu Santo y de sabiduría. Ninguna de estas tres marcas era habilidad administrativa ni capacidad de negocios. Esto es significativo porque muestra que la iglesia escogió a sus primeros siervos por el carácter espiritual y no por la mera competencia. La obra era el reparto diario de los alimentos, pero el requisito era madurez, piedad y un buen testimonio. Desde el principio la iglesia se negó a separar el servicio práctico de la santidad personal."},
+{"textEn":"22. Explain the four character requirements of 1 Timothy 3:8.","textEs":"22. Explique los cuatro requisitos de carácter de 1 Timoteo 3:8.","kw_en":["reverent","dignit","double","confiden","appetit","greedy","benevol","charact"],"kw_es":["honesto","dignidad","doblez","confidenc","apetito","dinero","beneficenc","requisit"],"modelEn":"First Timothy 3:8 gives four character requirements. The deacon must be reverent, a man of dignity who is taken seriously because he takes holy things seriously. He must not be double-tongued, saying one thing in one house and another elsewhere, for he must keep the same truth and confidence everywhere. He must not be given to much wine, mastered by no appetite. And he must not be greedy for money, since he handles the benevolence funds of the church. Each fault works its damage quietly, so the church must look beneath the surface at the whole man.","modelEs":"Primera de Timoteo 3:8 da cuatro requisitos de carácter. El diácono debe ser honesto, un hombre de dignidad a quien se toma en serio porque toma en serio las cosas santas. No debe ser de doblez, diciendo una cosa en una casa y otra en otra, porque debe guardar la misma verdad y confidencia en todas partes. No debe ser dado a mucho vino, dominado por ningún apetito. Y no debe ser amador del dinero, pues maneja los fondos de beneficencia de la iglesia. Cada falta hace su daño en silencio, así que la iglesia debe mirar al hombre entero."},
+{"textEn":"23. What does it mean that the deacon must hold 'the mystery of the faith with a pure conscience'?","textEs":"23. ¿Qué significa que el diácono debe tener 'el misterio de la fe con limpia conciencia'?","kw_en":["mystery","faith","gospel","believ","conscien","doctrin","behavi","creed"],"kw_es":["misterio","evangelio","creyente","conciencia","creencia","doctrina","conducta","revelad"],"modelEn":"To hold the mystery of the faith means the deacon must personally believe the gospel that was hidden and is now revealed in Christ. He holds it not as a hired manager but as a believer who rests on the truth he serves. To hold it with a pure conscience means his belief and his behavior must agree, so that his doctrine and his life tell the same story. A man whose conduct denies his creed cannot lead the people of God, for they follow what he does before what he says.","modelEs":"Tener el misterio de la fe significa que el diácono debe creer personalmente el evangelio que estuvo escondido y ahora es revelado en Cristo. Lo tiene no como un gerente contratado sino como un creyente que descansa en la verdad que sirve. Tenerlo con limpia conciencia significa que su creencia y su conducta deben concordar, de modo que su doctrina y su vida cuenten la misma historia. Un hombre cuya conducta niega su credo no puede dirigir al pueblo de Dios, porque siguen lo que hace antes de lo que dice."},
+{"textEn":"24. Explain the principle of 1 Timothy 3:10 — 'let these also first be tested; then let them serve.'","textEs":"24. Explique el principio de 1 Timoteo 3:10 — 'y éstos también sean primero probados; y luego ejerzan el diaconado.'","kw_en":["tested","trusted","proven","hastily","convert","blameles","observ","charact"],"kw_es":["probad","confiad","comprobad","converso","irreprensi","observ","imponer","examen"],"modelEn":"First Timothy 3:10 sets a fixed order that must never be reversed: first tested, then trusted; first proven, then placed. The church must not lay hands on a man hastily, handing a new convert the care of souls before his character has been seen over time. To be tested does not mean a written examination but a life observed in the ordinary trials of church life until he is found blameless. A gifted but ungodly worker will cost the church far more than an empty office. So the church watches a man in small things before trusting him with large ones.","modelEs":"Primera de Timoteo 3:10 establece un orden fijo que nunca debe invertirse: primero probados, luego confiados; primero comprobados, luego colocados. La iglesia no debe imponer las manos a un hombre apresuradamente, entregando a un converso nuevo el cuidado de las almas antes de que su carácter haya sido visto con el tiempo. Ser probado no significa un examen escrito sino una vida observada en las pruebas ordinarias de la iglesia hasta que sea hallado irreprensible. Un obrero dotado pero impío costará a la iglesia mucho más que un oficio vacío. Así que la iglesia observa al hombre en cosas pequeñas antes de confiarle las grandes."},
+{"textEn":"25. Why does Paul require the deacon to rule 'their children and their own houses well'?","textEs":"25. ¿Por qué requiere Pablo que el diácono gobierne 'bien sus hijos y sus casas'?","kw_en":["children","household","proving","patienc","faithful","authorit","rehears","family"],"kw_es":["gobiern","hijos","hogar","paciencia","fidelidad","autoridad","familia","ensayo"],"modelEn":"Paul requires the deacon to rule his children and his own house well because the home is the proving ground of a man's fitness to serve the household of God. The same graces a man needs to shepherd a family, namely patience, faithfulness, gentle authority, and self-denial, are the graces he needs in the wider ministry of the church. If a man cannot lead, love, and order his own household, he is not yet ready to be trusted with the family of the church. The home is not a separate test but the first rehearsal of service.","modelEs":"Pablo requiere que el diácono gobierne bien sus hijos y su propia casa porque el hogar es el campo de prueba de la aptitud de un hombre para servir a la casa de Dios. Las mismas gracias que un hombre necesita para pastorear una familia, a saber, paciencia, fidelidad, autoridad amable y abnegación, son las gracias que necesita en el ministerio más amplio de la iglesia. Si un hombre no puede dirigir, amar y ordenar su propia casa, todavía no está listo para que se le confíe la familia de la iglesia. El hogar no es una prueba aparte sino el primer ensayo del servicio."},
+{"textEn":"26. Describe the two ways 1 Timothy 3:11 has been understood, and what is beyond dispute in either reading.","textEs":"26. Describa las dos maneras en que se ha entendido 1 Timoteo 3:11, y qué está fuera de disputa en cualquiera de las lecturas.","kw_en":["understood","interpret","slander","deaconess","phoebe","grammar","trustworth","faithful"],"kw_es":["entendid","esposas","calumniad","diaconis","sierva","lecturas","confianza","diaconal"],"modelEn":"First Timothy 3:11 has been understood in two ways by faithful interpreters. Some take the verse to mean the wives of the deacons, who share so closely in the ministry of care that they too must be reverent, no slanderers, temperate, and faithful. Others take the same word to mean the women who serve in a diaconal role, what some churches have called deaconesses, pointing to Phoebe, a servant of the church at Cenchrea. The grammar allows both readings, and godly churches have differed. What is beyond dispute is that the women bound to this ministry of care must themselves be trustworthy.","modelEs":"Primera de Timoteo 3:11 se ha entendido de dos maneras por intérpretes fieles. Algunos toman el versículo como las esposas de los diáconos, que comparten tan de cerca el ministerio de cuidado que también deben ser honestas, no calumniadoras, sobrias y fieles. Otros toman la misma palabra como las mujeres que sirven en un papel diaconal, lo que algunas iglesias han llamado diaconisas, señalando a Febe, una sierva de la iglesia en Cencrea. La gramática permite ambas lecturas, y las iglesias piadosas han diferido. Lo que está fuera de disputa es que las mujeres ligadas a este ministerio deben ser dignas de confianza."},
+{"textEn":"27. What two things does 1 Timothy 3:13 promise to those who serve well as deacons?","textEs":"27. ¿Qué dos cosas promete 1 Timoteo 3:13 a los que sirven bien como diáconos?","kw_en":["promise","standing","reputat","boldness","confiden","honor","service","enlarge"],"kw_es":["promesa","grado","honrado","reputac","confianza","servicio","seguridad","engrandec"],"modelEn":"First Timothy 3:13 ends not with a threat but with a promise. The deacon who serves well gains two things. First, he gains a good standing, an honored place and a good reputation in the church and before God. Second, he gains great boldness in the faith, a holy confidence that grows in a man as he pours himself out in faithful service. The promise teaches that service never diminishes a man; it enlarges him. The faithful deacon grows in honor and in confidence the longer he serves.","modelEs":"Primera de Timoteo 3:13 no termina con una amenaza sino con una promesa. El diácono que sirve bien gana dos cosas. Primero, gana un buen grado, un lugar honrado y una buena reputación en la iglesia y delante de Dios. Segundo, gana mucha confianza en la fe, una santa seguridad que crece en un hombre conforme se derrama en servicio fiel. La promesa enseña que el servicio nunca disminuye a un hombre; lo engrandece. El diácono fiel crece en honra y en confianza cuanto más sirve."},
+{"textEn":"28. Why must a deacon not be 'greedy for money,' and what is at stake?","textEs":"28. ¿Por qué un diácono no debe ser 'amador del dinero', y qué está en juego?","kw_en":["greedy","money","benevol","betray","trust","congregat","weakest","ministr"],"kw_es":["dinero","beneficenc","ofrendas","traicion","confianza","congregac","avaricia","ministeri"],"modelEn":"A deacon must not be greedy for money because he will often handle the benevolence funds of the church, the gifts given for the poor and the suffering. A man who loves money will sooner or later betray the very people he was set apart to serve, by skimming, favoring, or hoarding what belongs to others. What is at stake is the trust of the whole congregation and the care of its weakest members. Greed is one of those quiet faults that rots a ministry from the inside, so the church must require a man free from the love of money.","modelEs":"Un diácono no debe ser amador del dinero porque a menudo manejará los fondos de beneficencia de la iglesia, las ofrendas dadas para los pobres y los que sufren. Un hombre que ama el dinero tarde o temprano traicionará a las mismas personas que fue apartado para servir, robando, favoreciendo o acaparando lo que pertenece a otros. Lo que está en juego es la confianza de toda la congregación y el cuidado de sus miembros más débiles. La avaricia es una de esas faltas calladas que pudre un ministerio desde adentro, así que la iglesia debe exigir un hombre libre del amor al dinero."},
+{"textEn":"29. How do Acts 6:3 and 1 Timothy 3 together show that character precedes service?","textEs":"29. ¿Cómo muestran juntos Hechos 6:3 y 1 Timoteo 3 que el carácter precede al servicio?","kw_en":["charact","servant","reputat","spirit","wisdom","tested","faithful","service"],"kw_es":["testimoni","sabidur","siervo","probad","honesto","hogar","servicio","habilidad"],"modelEn":"Acts 6:3 and First Timothy 3 together teach the same lesson: the church must choose its servants first for character, not for ability. In Acts the seven were to be of good reputation, full of the Spirit, and full of wisdom, even though the work was only the distribution of food. In First Timothy Paul requires that deacons be reverent, sound in faith, tested, and faithful at home before they serve. In both passages a man is chosen for what he is before he is trusted with what he does. Character comes first, and service follows from it.","modelEs":"Hechos 6:3 y Primera de Timoteo 3 enseñan juntos la misma lección: la iglesia debe escoger a sus siervos primero por el carácter, no por la habilidad. En Hechos los siete debían ser de buen testimonio, llenos del Espíritu y llenos de sabiduría, aunque la obra era solo el reparto de los alimentos. En Primera de Timoteo Pablo requiere que los diáconos sean honestos, sólidos en la fe, probados y fieles en el hogar antes de servir. En ambos pasajes un hombre es escogido por lo que es antes de que se le confíe lo que hace. El carácter va primero, y el servicio se sigue de él."},
+{"textEn":"30. Summarize the kind of man the church should set apart as a deacon, according to this unit.","textEs":"30. Resuma la clase de hombre que la iglesia debe apartar como diácono, según esta unidad.","kw_en":["charact","convict","reverent","conscien","gospel","tested","blameles","household"],"kw_es":["probad","convicc","honesto","dinero","evangelio","conciencia","irreprensi","fidelidad"],"modelEn":"According to this unit, the church should set apart a man of tested character, sound conviction, proven worth, and a well-ordered home. He must be reverent and free from the love of money and the mastery of appetite. He must hold the gospel personally with a pure conscience, so that his life and his doctrine agree. He must first be tested and found blameless before he serves, and he must lead his own household faithfully. Such a man is chosen not for what he can do but for what, by grace, he already is, and the church does well to choose slowly and prayerfully.","modelEs":"Según esta unidad, la iglesia debe apartar a un hombre de carácter probado, de convicción sólida, de valor probado y de un hogar bien ordenado. Debe ser honesto y libre del amor al dinero y del dominio del apetito. Debe tener el evangelio personalmente con limpia conciencia, de modo que su vida y su doctrina concuerden. Debe ser primero probado y hallado irreprensible antes de servir, y debe dirigir su propia casa con fidelidad. Tal hombre es escogido no por lo que puede hacer sino por lo que, por gracia, ya es, y la iglesia hace bien en escoger despacio y con oración."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'cert';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSDeaconFamilyMinistryReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

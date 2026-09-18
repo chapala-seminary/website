@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruth and Esther — Unit 4</title>
+<style>
+  :root { --maroon:#7B2E2E; --gold:#C8A24B; --ink:#1d1d1d; --soft:#f5f2ec; --line:#ddd6c8; }
+  * { box-sizing:border-box; }
+  body { font-family:Georgia,'Times New Roman',serif; color:var(--ink); margin:0; background:#fbf9f4; line-height:1.6; }
+  body[data-lang="en"] .es { display:none; }
+  body[data-lang="es"] .en { display:none; }
+  header { background:var(--maroon); color:#fff; padding:24px 22px; }
+  header h1 { margin:0 0 6px; font-size:1.45rem; }
+  header .sub { font-style:italic; opacity:.92; }
+  header .credit { margin-top:10px; font-size:.78rem; opacity:.85; font-family:Arial,sans-serif; }
+  .langbar { background:#5e2222; padding:8px 22px; }
+  .langbar button { background:transparent; border:1px solid #fff; color:#fff; padding:5px 14px; margin-right:6px; border-radius:5px; cursor:pointer; font-family:Arial,sans-serif; font-size:.85rem; }
+  .langbar button.active { background:#fff; color:var(--maroon); font-weight:bold; }
+  .wrap { max-width:860px; margin:0 auto; padding:22px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:22px; margin:18px 0; }
+  h2 { color:var(--maroon); border-bottom:2px solid var(--gold); padding-bottom:6px; }
+  .track-bar { background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:14px 18px; margin:18px 0; font-family:Arial,sans-serif; }
+  .track-bar label { font-weight:bold; margin-right:10px; }
+  select, button { font-size:1rem; padding:8px 12px; border-radius:6px; border:1px solid #bbb; }
+  button { cursor:pointer; background:var(--maroon); color:#fff; border:none; font-family:Arial,sans-serif; }
+  button:disabled { background:#bbb; cursor:not-allowed; }
+  button.secondary { background:#fff; color:var(--maroon); border:1px solid var(--maroon); }
+  .teaching p { margin:0 0 14px; }
+  .q { border-top:1px solid var(--line); padding:18px 0; }
+  .q:first-child { border-top:none; }
+  .q .stem { font-weight:bold; margin-bottom:10px; }
+  .opt { display:block; margin:7px 0; padding:9px 12px; border:1px solid var(--line); border-radius:6px; cursor:pointer; background:#fff; font-family:Arial,sans-serif; }
+  .opt:hover { background:var(--soft); }
+  .opt.sel { border-color:var(--maroon); background:#f3e7e7; }
+  .opt.correct { border-color:#2e7d32; background:#e6f3e7; }
+  .opt.wrong { border-color:#b00020; background:#f7e6e9; }
+  .fb { font-family:Arial,sans-serif; font-size:.9rem; margin-top:8px; padding:8px 10px; border-radius:6px; display:none; }
+  .fb.ok { background:#e6f3e7; color:#1b5e20; display:block; }
+  .fb.no { background:#f7e6e9; color:#8e0018; display:block; }
+  textarea { width:100%; min-height:84px; font-family:Arial,sans-serif; font-size:.95rem; padding:10px; border:1px solid #bbb; border-radius:6px; resize:vertical; }
+  .model { display:none; margin-top:10px; border-left:4px solid var(--gold); background:#fdf8ec; padding:10px 14px; font-family:Arial,sans-serif; font-size:.92rem; }
+  .model.show { display:block; }
+  .model b { color:var(--maroon); }
+  .flag { color:#b00020; font-family:Arial,sans-serif; font-size:.8rem; }
+  .practice-tag { font-family:Arial,sans-serif; font-size:.78rem; color:#555; font-style:italic; }
+  .result { font-family:Arial,sans-serif; font-size:1.02rem; padding:14px; border-radius:8px; margin-top:14px; }
+  .result.pass { background:#e6f3e7; color:#1b5e20; }
+  .result.fail { background:#f7e6e9; color:#8e0018; }
+  .navrow { display:flex; justify-content:space-between; align-items:center; margin:24px 0; font-family:Arial,sans-serif; }
+  .note { font-family:Arial,sans-serif; font-size:.82rem; color:#666; }
+</style>
+</head>
+<body data-lang="en">
+
+<script src="cts-lang.js"></script>
+<header>
+  <h1>Ruth and Esther &mdash; <span class="en">Unit 4</span><span class="es">Unidad 4</span></h1>
+  <div class="sub"><span class="en">Class 4 — God&#x27;s Provision (Ruth 4)</span><span class="es">Clase 4 — La Provisión de Dios (Rut 4)</span></div>
+  <div class="credit">Glenda Rogers &middot; Chapala Theological Seminary &middot; Dr. Ted Rogers, Director</div>
+</header>
+<div class="langbar">
+  <button id="btnEn" class="active" onclick="setLang('en')">English</button>
+  <button id="btnEs" onclick="setLang('es')">Espa&ntilde;ol</button>
+</div>
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSREUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSREUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSREUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSREUnit4.html" title="Unit 4 · Unidad 4" class="active">4</a><a href="CTSREUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSREUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSREUnit7.html" title="Unit 7 · Unidad 7">7</a><a href="CTSREUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSREUnit9.html" title="Unit 9 · Unidad 9">9</a></nav><script>(function(){try{var p=JSON.parse(localStorage.getItem('cts_re_progress')||'{}');document.querySelectorAll('.cts-unitnav a').forEach(function(a,i){if(p['unit'+(i+1)])a.classList.add('completed');});}catch(e){}})();</script>
+
+  <div id="greet" class="note" style="margin:8px 0 0;"></div>
+
+
+  <div class="track-bar">
+    <label for="track"><span class="en">Track:</span><span class="es">Programa:</span></label>
+    <select id="track" onchange="setTrack()">
+      <option value="cert">Certificate / Certificado</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div class="note" id="trackNote" style="margin-top:8px;"></div>
+  </div>
+
+  <div class="card teaching">
+    <h2><span class="en">The Class</span><span class="es">La Clase</span></h2>
+    <p class="note">
+      <span class="en">Passage: Ruth 4 &middot; Taught by Glenda Rogers. This preserves her teaching and class discussion.</span>
+      <span class="es">Pasaje: Rut 4 &middot; Ense&ntilde;ado por Glenda Rogers. Conserva su ense&ntilde;anza y la discusi&oacute;n de clase.</span>
+    </p>
+    <div class="en"><p style="font-style:italic;color:#7B2E2E">Please open with a word of prayer.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Week 4 Chapter 4</strong></p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Observations</strong></p>
+    <p>1. Main gate to the city of Jerusalem. Where all business was conducted. Bazaar and courthouse.</p>
+    <p>2. The nearer kinsman redeemer’s name is not recorded. Boaz addresses him as “my friend.” In original Hebrew it can mean friend, but it can also mean simply, a certain someone. In fact the term became a catch phrase in Rabbinic writings to mean a John Doe.</p>
+    <p>3. It is probable that the writer didn’t record his name as a type of judgment on him while Boaz’s name becomes significant indeed.</p>
+    <p>4. Witnesses were chosen for a legal binding. It wasn’t necessary that it be 10 but Boaz wanted to be certain of a legal binding in this situation.</p>
+    <p>5. Since he was the nearest kinsman he had a moral obligation to buy the property and to marry Ruth. According to custom, refusal to do so would have brought disgrace upon himself, hence probably why the author didn’t record the man’s name. Ruth and her affairs were legally bound up in the field of Elimelech, so if one redeemed the land they also had to redeem Ruth to perpetuate her line. Though interestingly, the redemption of property (Lev. 25: 25-28) and the levirate law (Deuteronomy 25:5-10) were separate procedures, Boaz was intent to handle both matters at the same time and we will see why.</p>
+    <p>6. Boaz is shrewd, he offers him the land first and the unnamed man is willing to buy it. Then Boaz makes the stipulation that he must also marry Ruth. Apparently when Elimelech died his property passed to Mahlon. Then Mahlon died and so he was left without an heir. There could be many reasons why Naomi had this property and yet was still destitute. The land could have been mortgaged to pay for their way. The land could have had squatters on it from their time in Moab. We really don’t know why except that her poverty required that she sell it to someone in her tribe.</p>
+    <p>7. When the man hears he must also marry Ruth, not Naomi who is past childbearing age, he refused on the grounds that it would jeopardize his inheritance to himself and his descendants because a portion of his inheritance would go to Ruth’s heir and he would have to spend his own money to provide for Ruth and Naomi. He was unwilling to do this. Boaz, the honorable one, was willing.</p>
+    <p>8. In first presenting the man with the obligation to purchase the property and the man’s willingness to buy it, then as an afterthought also saying he must marry Ruth and he refusing, there is no doubt this man is shirking his responsibility according to Mosaic law. He is willing to bear the shame of disobedience for money. Cunning, though, how Boaz handles this. He starts with informing the man of purchasing the land from Naomi, an old widow beyond child-bearing age. The man at first agrees. Clearly he is thinking he will get the land when Naomi dies. Naomi probably won’t live long and shouldn’t cost much to keep her adequately fed. Those are all pretty good odds for increasing his income. Then Boaz drops the bombshell, on the day you buy the field you will also have to take on Ruth and raise up a child in her late husband’s name. Clearly Boaz had done his research regarding this nearer kinsman and suspected this would be a problem for him. We don’t know why. It could be that he was not wealthy enough to take on the bigger financial burden, or that he feared marrying a Moabite or suffering the same fate as Mahlon had, or it could be that money meant more to him than obedience to the law and I suspect somehow Boaz knew this. Perhaps the man’s character and reputation were as well known as Boaz’ and Ruth’s were. It seemed everyone knew everything about everyone in this small town.</p>
+    <p>9. Removing the sandal is symbolic that the person is giving the right to the other person to walk on the land, to possess it. If you will recall it is not unlike Ruth uncovering the feet of Boaz to ask him to take her in.</p>
+    <p>10. Boaz’s declaration to the elders and people gathered there as witnesses that he would buy all the land and marry Ruth and raise up a child in Elimelech’s name attests to his character and his obedience to God. So honoring.</p>
+    <p>11. Clearly all those gathered there knew of Ruth’s impeccable and excellent reputation as well as Boaz’s reputation for they bestow on them all tremendous blessings.</p>
+    <p>12. Rachel and Leah brought Jacob many offspring. In fact they brought up the heads of the 12 tribes of Israel. It could be that Rachel is named first because she was barren for many years while her sister bore Leah many offspring before her. And Ruth had obviously been barren during her time in Moab. It could also be that Rachel is named first because her grave was very near to Bethlehem where she died giving birth to Benjamin. It could also be that she is named first because it is Rachel whom Jacob loved most. At any rate they prayed that Ruth would be as fruitful with Boaz as Rachel and Leah were.</p>
+    <p>13. Wealth in verse 11 again is the Hebrew word Chayil that is more than material gain. It is strength, valor, excellence, and power, the same descriptors already given for both Boaz and Ruth.</p>
+    <p>14. The house of Perez whom Tamar bore to Judah. (Judah, of course is one of the sons of Jacob.) Anyone recount that story? The house of Perez is from Boaz’s side of the family. His descendants. His ancestors are also listed later in I Chronicles 2:9-15: Perez bore Hezron. Hezron bore Ram and Ram bore Amminadab, and to Amminadab was born Nashon and to Nashon, Salmon, and to Salmon was born Boaz and to Boaz, Obed, and from Obed will come Jesse the father of King David. And since we can trace the line of Christ’s royal right to the throne through Joseph, Mary’ husband, back to King David, (Matthew 1:2-16) then we see just how richly God answered the blessings of the people of Bethlehem made on behalf of Ruth and Boaz.</p>
+    <p>15. The women bless Boaz in front of Naomi that he become famous, that he restore her life, and sustain her old age. The women remind Naomi of how God blessed her and changed her mourning into gladness because of Ruth’s worth and because of God’s blessings in giving her a son. They name the boy Obed which means “worshiper.”</p>
+    <p>16. Verse 17 of course brings us to the ultimate climax or purpose of the book. I like how the commentator Hubbard puts I best, “ This verse [v. 17] is, of course, a clue to the book&#x27;s purpose: to show that the reign of David resulted from neither his</p>
+    <p>shrewd politics nor his clever tactics but from the divine</p>
+    <p>preservation of his worthy family line. Therefore, Israel was to</p>
+    <p>accept David&#x27;s kingship as the gift of divine guidance.&quot;</p>
+    <p>17. The Lord enabled her to conceive. Just as God’s providence shines throughout the events of the story, it shines here.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Interpretations of Chapter 4</strong></p>
+    <p>1. Boaz happens to be at the gate when the closer relative comes by. I’d call that God’s providence.</p>
+    <p>2. Boaz also gathers witnesses. Do our homework. Don’t just assume you have no role to play in God’s plan. How to know this is a right interpretation? Let’s examine other stories in Scripture. God sought to include Abraham in His decisions concerning Sodom/Gom. Christ chose 12 disciples to follow Him, take up their cross and make more disciples. We have roles to play as God leads us.</p>
+    <p>3. Be wise as serpents yet gentle as doves. Boaz is quite shrewd in how he handles the relative. He knew that taking Ruth would be a sticking point for the man, either because of the man’s financial status, or his prejudice against Moabites, or his selfish character. He knew how this would go down and was prepared with witnesses.</p>
+    <p>4. Good standing, upright living, living out our faith with love, generosity, honesty, and self sacrifice – people will see that, respect it, and possibly be drawn to God by that.</p>
+    <p>5. God will reward His faithful.</p>
+    <p>6. God will work out His plans. We can choose to be a part of them or relinquish our rights.</p>
+    <p>7. Know that in choosing to be a part of those plans will come sacrifice. Boaz paid dearly but honored his God in raising up a son in Mahlon’s name. It cost him financially too. But I daresay Boaz felt God’s great reward in doing so. Great grandfather to King David. And Ruth sacrificed everything to follow the one true God. She gave up her country, her people, their gods, her home, the chance to marry again, to have children all to follow Naomi and care for her mother in law. God honored that. And made her great grandmother to King David.</p>
+    <p>8. Once again scripture mentions Tamar and she is a part of David’s lineage, just as Rahab is. The Jewish women praise the Moabitess Ruth for being better than seven sons. God will use whom he chooses to. God has always had a plan for women to be a significant and crucial part in His plans, just as he has always had plans for the Gentiles to be included as well. After all, Abraham was once a Gentile. We can’t put God in a box. We can’t expect Him to behave the way we want Him to or make decisions the way we think He should. We see in a mirror dimly. But He sees fully. As Mr Beaver says in The Lion the Witch and the Wardrobe, &quot;Safe?&quot; said Mr. Beaver.&quot;Who said anything about safe? &#x27;Course he (meaning God) isn&#x27;t safe. But he&#x27;s good. He&#x27;s the King, I tell you.&quot;</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Applications:</strong></p>
+    <p>1. Do I want to be a part of God’s plans? When have I relinquished that right?</p>
+    <p>2. Am I prepared for the tasks God has for me from teaching this class, to sharing God’s love at the right moment?</p>
+    <p>3. Am I in prayer constantly seeking His will instead of my own.</p>
+    <p>4. Does my daily life reflect the loyal love of God. Can people see the Christ in me?</p>
+    <p>5. Do I trust God with His timing? Do I trust that His rewards will be greater than any present suffering I endure?</p>
+    <p>6. Am I prepared to assume the responsibilities God has placed before me regardless of the cost?</p></div>
+    <div class="es"><p style="font-style:italic;color:#7B2E2E">Por favor, comiencen con una palabra de oración.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Semana 4 – Capítulo 4</strong></p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Observaciones</strong></p>
+<p>1. La puerta principal de la ciudad de Jerusalén. Donde se realizaban todos los negocios. Bazar y tribunal.</p>
+<p>2. El nombre del pariente redentor más cercano no se registra. Booz se dirige a él como “mi amigo”. En el hebreo original puede significar amigo, pero también puede significar simplemente cierta persona. De hecho, el término llegó a ser una frase hecha en los escritos rabínicos para referirse a un fulano de tal.</p>
+<p>3. Es probable que el escritor no registrara su nombre como una especie de juicio sobre él, mientras que el nombre de Booz, en cambio, llega a ser muy significativo.</p>
+<p>4. Se eligieron testigos para un acuerdo legalmente vinculante. No era necesario que fueran 10, pero Booz quería estar seguro de un acuerdo legal en esta situación.</p>
+<p>5. Como él era el pariente más cercano, tenía la obligación moral de comprar la propiedad y de casarse con Rut. Según la costumbre, negarse a hacerlo le habría traído deshonra, y de ahí, probablemente, por qué el autor no registró el nombre del hombre. Rut y sus asuntos estaban legalmente ligados al campo de Elimelec, así que, si alguien redimía la tierra, también tenía que redimir a Rut para perpetuar su descendencia. Aunque, curiosamente, la redención de la propiedad (Levítico 25:25-28) y la ley del levirato (Deuteronomio 25:5-10) eran procedimientos separados, Booz tenía la intención de tratar ambos asuntos al mismo tiempo, y veremos por qué.</p>
+<p>6. Booz es astuto: primero le ofrece la tierra, y el hombre sin nombre está dispuesto a comprarla. Entonces Booz pone la condición de que también debe casarse con Rut. Al parecer, cuando Elimelec murió, su propiedad pasó a Mahlón. Luego Mahlón murió, y así quedó sin heredero. Podría haber muchas razones por las que Noemí tenía esta propiedad y, sin embargo, seguía en la miseria. La tierra pudo haber sido hipotecada para costear su sustento. La tierra pudo haber tenido ocupantes ilegales durante su tiempo en Moab. Realmente no sabemos por qué, salvo que su pobreza requería que la vendiera a alguien de su tribu.</p>
+<p>7. Cuando el hombre oye que también debe casarse con Rut —no con Noemí, que ya ha pasado la edad de tener hijos— se negó alegando que pondría en peligro su herencia para sí mismo y para sus descendientes, porque una porción de su herencia iría al heredero de Rut, y tendría que gastar su propio dinero para proveer a Rut y a Noemí. No estaba dispuesto a hacer esto. Booz, el honorable, sí lo estaba.</p>
+<p>8. Al presentarle primero al hombre la obligación de comprar la propiedad, y ante su disposición a comprarla, y luego, como algo añadido, decirle que también debe casarse con Rut —ante lo cual él se niega—, no hay duda de que este hombre está eludiendo su responsabilidad según la ley mosaica. Está dispuesto a cargar con la vergüenza de la desobediencia por dinero. Sin embargo, qué astuto es Booz al manejar esto. Comienza informando al hombre de la compra de la tierra a Noemí, una vieja viuda más allá de la edad de tener hijos. El hombre al principio acepta. Claramente piensa que obtendrá la tierra cuando Noemí muera. Noemí probablemente no vivirá mucho, y no debería costar mucho mantenerla adecuadamente alimentada. Todas esas son probabilidades bastante buenas para aumentar sus ingresos. Entonces Booz suelta la bomba: el día que compres el campo, también tendrás que hacerte cargo de Rut y levantar un hijo en nombre de su difunto esposo. Claramente Booz había investigado respecto a este pariente más cercano y sospechaba que esto sería un problema para él. No sabemos por qué. Podría ser que no fuera lo bastante rico como para asumir la mayor carga financiera, o que temiera casarse con una moabita o sufrir la misma suerte que Mahlón, o podría ser que el dinero significara para él más que la obediencia a la ley; y sospecho que, de algún modo, Booz lo sabía. Quizás el carácter y la reputación del hombre eran tan conocidos como los de Booz y los de Rut. Parecía que todos sabían todo de todos en este pequeño pueblo.</p>
+<p>9. Quitarse la sandalia es simbólico de que la persona le da a la otra el derecho de caminar sobre la tierra, de poseerla. Si lo recuerdan, no es muy distinto de cuando Rut descubrió los pies de Booz para pedirle que la acogiera.</p>
+<p>10. La declaración de Booz a los ancianos y a la gente allí reunida como testigos, de que compraría toda la tierra, se casaría con Rut y levantaría un hijo en nombre de Elimelec, da testimonio de su carácter y de su obediencia a Dios. Tan honroso.</p>
+<p>11. Claramente, todos los allí reunidos conocían la impecable y excelente reputación de Rut, así como la reputación de Booz, pues les otorgan a ambos tremendas bendiciones.</p>
+<p>12. Raquel y Lea le dieron a Jacob muchos descendientes. De hecho, dieron a luz a las cabezas de las 12 tribus de Israel. Podría ser que Raquel se nombre primero porque fue estéril durante muchos años, mientras que su hermana Lea le dio muchos hijos antes que ella. Y Rut, obviamente, había sido estéril durante su tiempo en Moab. También podría ser que Raquel se nombre primero porque su tumba estaba muy cerca de Belén, donde murió al dar a luz a Benjamín. También podría ser que se nombre primero porque es a Raquel a quien Jacob amó más. En todo caso, oraron para que Rut fuera tan fructífera con Booz como lo fueron Raquel y Lea.</p>
+<p>13. “Riqueza”, en el versículo 11, es nuevamente la palabra hebrea “Chayil”, que es más que ganancia material. Es fuerza, valor, excelencia y poder, los mismos descriptores ya dados tanto para Booz como para Rut.</p>
+<p>14. La casa de Fares, a quien Tamar dio a luz para Judá. (Judá, por supuesto, es uno de los hijos de Jacob.) ¿Alguien recuerda esa historia? La casa de Fares es del lado de la familia de Booz: sus descendientes. Sus antepasados también se enumeran más adelante en 1 Crónicas 2:9-15: Fares engendró a Hezrón; Hezrón engendró a Ram, y Ram engendró a Aminadab; y a Aminadab le nació Naasón, y a Naasón, Salmón; y a Salmón le nació Booz, y a Booz, Obed; y de Obed vendrá Isaí, el padre del rey David. Y puesto que podemos trazar la línea del derecho real de Cristo al trono a través de José, el esposo de María, hasta el rey David (Mateo 1:2-16), entonces vemos cuán ricamente respondió Dios las bendiciones que el pueblo de Belén pronunció en favor de Rut y de Booz.</p>
+<p>15. Las mujeres bendicen a Booz delante de Noemí: que llegue a ser famoso, que restaure la vida de ella y sustente su vejez. Las mujeres le recuerdan a Noemí cómo Dios la bendijo y cambió su luto en alegría por el valor de Rut y por las bendiciones de Dios al darle un hijo. Llaman al niño Obed, que significa “adorador”.</p>
+<p>16. El versículo 17, por supuesto, nos lleva al clímax o propósito último del libro. Me gusta cómo lo expresa mejor el comentarista Hubbard: “Este versículo [v. 17] es, por supuesto, una clave del propósito del libro: mostrar que el reinado de David no resultó de su</p>
+<p>astuta política ni de sus hábiles tácticas, sino de la divina</p>
+<p>preservación de su digno linaje familiar. Por tanto, Israel debía</p>
+<p>aceptar el reinado de David como el don de la guía divina.”</p>
+<p>17. El Señor le permitió concebir. Así como la providencia de Dios resplandece a lo largo de los acontecimientos de la historia, resplandece aquí.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Interpretaciones del Capítulo 4</strong></p>
+<p>1. Booz resulta estar en la puerta cuando pasa el pariente más cercano. Yo llamaría a eso la providencia de Dios.</p>
+<p>2. Booz también reúne testigos. Hagamos nuestra tarea. No supongamos simplemente que no tenemos ningún papel que desempeñar en el plan de Dios. ¿Cómo saber que esta es una interpretación correcta? Examinemos otras historias en la Escritura. Dios procuró incluir a Abraham en sus decisiones acerca de Sodoma y Gomorra. Cristo escogió a 12 discípulos para que lo siguieran, tomaran su cruz e hicieran más discípulos. Tenemos papeles que desempeñar conforme Dios nos guía.</p>
+<p>3. Sed prudentes como serpientes y sencillos como palomas. Booz es bastante astuto en cómo maneja al pariente. Sabía que tomar a Rut sería un punto delicado para el hombre, ya fuera por la situación económica del hombre, o por su prejuicio contra los moabitas, o por su carácter egoísta. Sabía cómo se desarrollaría esto y estaba preparado con testigos.</p>
+<p>4. Buena reputación, vida recta, vivir nuestra fe con amor, generosidad, honestidad y sacrificio propio: la gente verá eso, lo respetará y posiblemente sea atraída a Dios por ello.</p>
+<p>5. Dios recompensará a sus fieles.</p>
+<p>6. Dios llevará a cabo sus planes. Podemos elegir ser parte de ellos o renunciar a nuestros derechos.</p>
+<p>7. Sepa que, al elegir ser parte de esos planes, vendrá el sacrificio. Booz pagó caro, pero honró a su Dios al levantar un hijo en nombre de Mahlón. También le costó en lo económico. Pero me atrevo a decir que Booz sintió la gran recompensa de Dios al hacerlo: bisabuelo del rey David. Y Rut lo sacrificó todo para seguir al único Dios verdadero. Renunció a su país, a su pueblo, a sus dioses, a su hogar, a la oportunidad de casarse de nuevo y de tener hijos, todo para seguir a Noemí y cuidar de su suegra. Dios honró eso. Y la hizo bisabuela del rey David.</p>
+<p>8. Una vez más, la Escritura menciona a Tamar, y ella es parte del linaje de David, así como lo es Rahab. Las mujeres judías alaban a la moabita Rut por ser mejor que siete hijos. Dios usará a quien Él elija. Dios siempre ha tenido un plan para que las mujeres sean una parte significativa y crucial de sus planes, así como siempre ha tenido planes para que los gentiles también sean incluidos. Después de todo, Abraham fue una vez gentil. No podemos encerrar a Dios en una caja. No podemos esperar que se comporte como queremos, ni que tome decisiones como nosotros pensamos que debería. Nosotros vemos por espejo, oscuramente; pero Él ve plenamente. Como dice el señor Castor en El león, la bruja y el ropero: “¿Seguro? —dijo el señor Castor—. ¿Quién dijo algo de seguro? Claro que él (es decir, Dios) no es seguro. Pero es bueno. Es el Rey, os lo aseguro.”</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Aplicaciones:</strong></p>
+<p>1. ¿Quiero ser parte de los planes de Dios? ¿Cuándo he renunciado a ese derecho?</p>
+<p>2. ¿Estoy preparada para las tareas que Dios tiene para mí, desde enseñar esta clase hasta compartir el amor de Dios en el momento oportuno?</p>
+<p>3. ¿Estoy en oración constante, buscando su voluntad en lugar de la mía?</p>
+<p>4. ¿Refleja mi vida diaria el amor leal de Dios? ¿Puede la gente ver a Cristo en mí?</p>
+<p>5. ¿Confío en Dios y en su tiempo? ¿Confío en que sus recompensas serán mayores que cualquier sufrimiento presente que yo soporte?</p>
+<p>6. ¿Estoy preparada para asumir las responsabilidades que Dios ha puesto delante de mí, sin importar el costo?</p></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="en">Part I &middot; Multiple Choice</span><span class="es">Parte I &middot; Opci&oacute;n M&uacute;ltiple</span> <span class="note">(20 &middot; 90%)</span></h2>
+    <div id="mc"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="en">Part II &middot; Short Answer</span><span class="es">Parte II &middot; Respuesta Breve</span> <span class="note">(10 &middot; 3/8)</span></h2>
+    <p class="practice-tag" id="saMode"></p>
+    <div id="sa"></div>
+  </div>
+
+  <div class="card">
+    <button onclick="grade()"><span class="en">Submit Unit 4</span><span class="es">Enviar Unidad 4</span></button>
+    <div id="result"></div>
+  </div>
+
+  <div class="navrow">
+    <span class="note">CTSRE &middot; <span class="en">Unit 4</span><span class="es">Unidad 4</span></span>
+    <button id="nextBtn" class="secondary" disabled onclick="goNext()"><span class="en">Continue &rarr;</span><span class="es">Continuar &rarr;</span></button>
+  </div>
+</div>
+<script>
+var _ctsMem={};
+function lsGet(k){ try{var v=localStorage.getItem(k);return v===null?(_ctsMem[k]!==undefined?_ctsMem[k]:null):v;}catch(e){return _ctsMem[k]!==undefined?_ctsMem[k]:null;} }
+function lsSet(k,v){ try{localStorage.setItem(k,v);}catch(e){} _ctsMem[k]=v; }
+function lsDel(k){ try{localStorage.removeItem(k);}catch(e){} delete _ctsMem[k]; }
+
+var UNIT=4, NEXT_URL="CTSREUnit5.html", MC=[{"stemEn": "Where does Boaz conduct the legal business of redemption?", "stemEs": "¿Dónde realiza Booz el asunto legal de la redención?", "optionsEn": ["his home", "the temple", "the threshing floor", "the main gate of the city"], "optionsEs": ["su casa", "el templo", "la era", "la puerta principal de la ciudad"], "answer": "D", "whyEn": "The city gate served as courthouse and marketplace.", "whyEs": "La puerta servía de tribunal y mercado."}, {"stemEn": "The nearer kinsman's name is not recorded, likely as:", "stemEs": "El nombre del pariente más cercano no se registra, probablemente como:", "optionsEn": ["a type of judgment on him for refusing his duty", "a scribe's error", "a sign of honor", "a royal secret"], "optionsEs": ["un tipo de juicio sobre él por rehusar su deber", "error del escriba", "señal de honor", "secreto real"], "answer": "A", "whyEn": "His namelessness reflects judgment for refusing.", "whyEs": "Su anonimato refleja juicio por rehusar."}, {"stemEn": "Boaz gathers how many witnesses?", "stemEs": "¿Cuántos testigos reúne Booz?", "optionsEn": ["three priests", "seven judges", "ten elders", "twelve scribes"], "optionsEs": ["tres sacerdotes", "siete jueces", "diez ancianos", "doce escribas"], "answer": "C", "whyEn": "Ten elders, to make the transaction legally binding.", "whyEs": "Diez ancianos, para hacerlo legalmente vinculante."}, {"stemEn": "Boaz's strategy is to offer the land first, then reveal:", "stemEs": "La estrategia de Booz es ofrecer la tierra primero, luego revelar:", "optionsEn": ["the price is doubled", "that the redeemer must also marry Ruth", "the land is cursed", "Naomi is wealthy"], "optionsEs": ["que el precio se duplica", "que el redentor también debe casarse con Rut", "que la tierra está maldita", "que Noemí es rica"], "answer": "B", "whyEn": "Land first, then the duty to marry Ruth — shrewd.", "whyEs": "Tierra primero, luego el deber de casarse — astuto."}, {"stemEn": "Why does the nearer kinsman refuse once Ruth is mentioned?", "stemEs": "¿Por qué rehusa el pariente cercano al mencionarse a Rut?", "optionsEn": ["it would jeopardize his own inheritance/estate", "he disliked Naomi", "he lived too far", "he was already redeemed"], "optionsEs": ["pondría en peligro su propia herencia", "le disgustaba Noemí", "vivía muy lejos", "ya estaba redimido"], "answer": "A", "whyEn": "He fears harming his own estate and heirs.", "whyEs": "Teme dañar su herencia y herederos."}, {"stemEn": "Removing the sandal symbolized:", "stemEs": "Quitarse la sandalia simbolizaba:", "optionsEn": ["a curse", "transferring the right to possess the land", "a marriage vow", "payment of a debt"], "optionsEs": ["una maldición", "transferir el derecho de poseer la tierra", "un voto matrimonial", "el pago de una deuda"], "answer": "B", "whyEn": "It transferred the right to walk on/possess the land.", "whyEs": "Transfería el derecho de poseer la tierra."}, {"stemEn": "The people bless Ruth to be like which matriarchs?", "stemEs": "El pueblo bendice a Rut para que sea como cuáles matriarcas?", "optionsEn": ["Sarah and Hagar", "Deborah and Jael", "Mary and Elizabeth", "Rachel and Leah"], "optionsEs": ["Sara y Agar", "Débora y Jael", "María y Elisabet", "Raquel y Lea"], "answer": "D", "whyEn": "Rachel and Leah built up the house of Israel.", "whyEs": "Raquel y Lea edificaron la casa de Israel."}, {"stemEn": "'Wealth' (Hebrew chayil) in the blessing means more than money; it means:", "stemEs": "'Riqueza' (heb. jayil) en la bendición significa más que dinero; significa:", "optionsEn": ["gold and silver", "many cattle", "strength, valor, excellence, and power", "large land"], "optionsEs": ["oro y plata", "mucho ganado", "fuerza, valor, excelencia y poder", "mucha tierra"], "answer": "C", "whyEn": "Chayil = strength/valor/excellence, used of Boaz and Ruth.", "whyEs": "Jayil = fuerza/valor/excelencia, dicho de ambos."}, {"stemEn": "The reference to 'Perez, whom Tamar bore to Judah' connects to:", "stemEs": "La mención de 'Férez, que Tamar dio a Judá' conecta con:", "optionsEn": ["Boaz's own ancestral line", "Moab's kings", "the Levite priests", "Naomi's father"], "optionsEs": ["la propia línea ancestral de Booz", "los reyes de Moab", "los sacerdotes levitas", "el padre de Noemí"], "answer": "A", "whyEn": "Perez is in Boaz's ancestry (1 Chron. 2).", "whyEs": "Férez está en la ascendencia de Booz."}, {"stemEn": "The child born to Ruth and Boaz is named Obed, which means:", "stemEs": "El niño de Rut y Booz se llama Obed, que significa:", "optionsEn": ["redeemer", "strength", "worshiper", "bitter"], "optionsEs": ["redentor", "fuerza", "adorador", "amargo"], "answer": "C", "whyEn": "Obed means 'worshiper.'", "whyEs": "Obed significa 'adorador.'"}, {"stemEn": "Obed becomes the father of Jesse, the father of:", "stemEs": "Obed llega a ser padre de Isaí, el padre de:", "optionsEn": ["King Saul", "King David", "King Solomon", "the prophet Samuel"], "optionsEs": ["el rey Saúl", "el rey David", "el rey Salomón", "el profeta Samuel"], "answer": "B", "whyEn": "Obed → Jesse → David — the royal line.", "whyEs": "Obed → Isaí → David — la línea real."}, {"stemEn": "Christ's royal right to the throne is traced through Joseph back to:", "stemEs": "El derecho real de Cristo al trono se traza por José hasta:", "optionsEn": ["Abraham only", "Moses", "Aaron", "King David (Matthew 1:2-16)"], "optionsEs": ["solo Abraham", "Moisés", "Aarón", "el rey David (Mateo 1:2-16)"], "answer": "D", "whyEn": "Matthew traces Christ's legal line to David.", "whyEs": "Mateo traza la línea legal de Cristo a David."}, {"stemEn": "It is the women of Bethlehem who:", "stemEs": "Son las mujeres de Belén quienes:", "optionsEn": ["arrange the marriage", "bless Boaz and name the child Obed", "redeem the land", "reject Ruth"], "optionsEs": ["arreglan la boda", "bendicen a Booz y nombran al niño Obed", "redimen la tierra", "rechazan a Rut"], "answer": "B", "whyEn": "The women bless and name the child — their role.", "whyEs": "Las mujeres bendicen y nombran al niño."}, {"stemEn": "Hubbard's note says the verse about Obed shows David's reign resulted from:", "stemEs": "La nota de Hubbard dice que el verso sobre Obed muestra que el reinado de David resultó de:", "optionsEn": ["God's divine preservation of a worthy family line", "David's clever politics", "military conquest", "popular vote"], "optionsEs": ["la preservación divina de una digna línea familiar", "la política astuta de David", "conquista militar", "voto popular"], "answer": "A", "whyEn": "Not shrewd politics but God's preserving providence.", "whyEs": "No política astuta sino la providencia preservadora."}, {"stemEn": "Glenda notes 'the Lord enabled her to conceive,' highlighting:", "stemEs": "Glenda nota que 'el Señor le concedió concebir,' resaltando:", "optionsEn": ["a medical miracle", "Ruth's youth", "God's providence shining at the climax", "Boaz's wealth"], "optionsEs": ["un milagro médico", "la juventud de Rut", "la providencia de Dios brillando en el clímax", "la riqueza de Booz"], "answer": "C", "whyEn": "Conception is credited to God — providence.", "whyEs": "La concepción se atribuye a Dios — providencia."}, {"stemEn": "Boaz being at the gate just as the kinsman passes by is interpreted as:", "stemEs": "Que Booz esté en la puerta justo cuando pasa el pariente se interpreta como:", "optionsEn": ["luck", "coincidence with no meaning", "Naomi's planning", "God's providence"], "optionsEs": ["suerte", "coincidencia sin sentido", "planeación de Noemí", "la providencia de Dios"], "answer": "D", "whyEn": "Glenda calls the timing God's providence.", "whyEs": "Glenda llama a esa oportunidad providencia de Dios."}, {"stemEn": "Boaz gathering witnesses teaches us to:", "stemEs": "Que Booz reúna testigos nos enseña a:", "optionsEn": ["avoid legal matters", "leave everything to fate", "do our homework and not assume we have no role in God's plan", "act in secret"], "optionsEs": ["evitar lo legal", "dejar todo al destino", "hacer la tarea y no suponer que no tenemos papel en el plan de Dios", "actuar en secreto"], "answer": "C", "whyEn": "We have a role to play as God leads — do the work.", "whyEs": "Tenemos un papel mientras Dios guía — hacer la obra."}, {"stemEn": "'Be wise as serpents yet gentle as doves' describes how Boaz:", "stemEs": "'Sed astutos como serpientes y sencillos como palomas' describe cómo Booz:", "optionsEn": ["shrewdly handled the nearer kinsman", "deceived the elders", "avoided Ruth", "hid the land"], "optionsEs": ["manejó con astucia al pariente cercano", "engañó a los ancianos", "evitó a Rut", "ocultó la tierra"], "answer": "A", "whyEn": "He was shrewd yet honorable in the negotiation.", "whyEs": "Fue astuto pero honorable en la negociación."}, {"stemEn": "Ruth, a Moabitess, being praised by Jewish women as 'better than seven sons' shows:", "stemEs": "Que las judías alaben a la moabita Rut como 'mejor que siete hijos' muestra:", "optionsEn": ["seven is a curse", "sons are unwanted", "Moab is superior", "God includes Gentiles and women in His plans"], "optionsEs": ["siete es maldición", "los hijos no se desean", "Moab es superior", "Dios incluye a gentiles y mujeres en sus planes"], "answer": "D", "whyEn": "God uses Gentiles and women — Ruth is exalted.", "whyEs": "Dios usa a gentiles y mujeres — Rut es exaltada."}, {"stemEn": "The Mr. Beaver quote ('he isn't safe, but he's good') is used to say God is:", "stemEs": "La cita del Sr. Castor ('no es seguro, pero es bueno') se usa para decir que Dios es:", "optionsEn": ["dangerous and cruel", "not tame/controllable, yet good and sovereign", "predictable", "distant and silent"], "optionsEs": ["peligroso y cruel", "no domesticable, pero bueno y soberano", "predecible", "distante y callado"], "answer": "B", "whyEn": "God is not 'safe'/tame but good and King.", "whyEs": "Dios no es 'seguro'/manso sino bueno y Rey."}], SA=[{"promptEn": "Describe how Boaz handles the redemption at the town gate.", "promptEs": "Describa cómo maneja Booz la redención en la puerta de la ciudad.", "modelEn": "At the city gate Boaz gathers ten elder witnesses, offers the nearer kinsman the land first — which he accepts — then reveals he must also marry Ruth to raise an heir, at which the man refuses to protect his own estate.", "modelEs": "En la puerta Booz reúne diez ancianos como testigos, ofrece al pariente cercano la tierra primero — que acepta — y luego revela que también debe casarse con Rut para levantar heredero, ante lo cual el hombre rehusa para proteger su herencia.", "keywords": {"en": ["gate", "ten", "witness", "land", "ruth", "marry", "heir", "refuse"], "es": ["puerta", "diez", "testigo", "tierra", "rut", "casar", "heredero", "rehusa"]}}, {"promptEn": "Why is the nearer kinsman left unnamed?", "promptEs": "¿Por qué queda sin nombre el pariente más cercano?", "modelEn": "Refusing his moral duty would, by custom, bring disgrace; the writer likely leaves him unnamed as a type of judgment, while Boaz's name becomes significant for his obedience and honor.", "modelEs": "Rehusar su deber moral traía, por costumbre, deshonra; el escritor probablemente lo deja sin nombre como tipo de juicio, mientras el nombre de Booz se vuelve significativo por su obediencia y honor.", "keywords": {"en": ["unnamed", "disgrace", "judgment", "duty", "refuse", "boaz", "honor", "custom"], "es": ["nombre", "deshonra", "juicio", "deber", "rehusa", "booz", "honor", "costumbre"]}}, {"promptEn": "Explain the significance of removing the sandal.", "promptEs": "Explique el significado de quitarse la sandalia.", "modelEn": "Removing the sandal symbolized giving another the right to walk on and possess the land — a legal confirmation of the transfer, not unlike Ruth uncovering Boaz's feet to ask him to take her in.", "modelEs": "Quitarse la sandalia simbolizaba dar a otro el derecho de andar sobre la tierra y poseerla — una confirmación legal de la transferencia, no muy distinta de Rut descubriendo los pies de Booz para pedirle amparo.", "keywords": {"en": ["sandal", "right", "possess", "land", "legal", "transfer", "walk", "confirm"], "es": ["sandalia", "derecho", "poseer", "tierra", "legal", "transfer", "andar", "confirm"]}}, {"promptEn": "What does the people's blessing (Rachel, Leah, Perez/Tamar, chayil) signify?", "promptEs": "¿Qué significa la bendición del pueblo (Raquel, Lea, Férez/Tamar, jayil)?", "modelEn": "They pray Ruth be fruitful like Rachel and Leah who built Israel, and like the house of Perez (Boaz's line through Tamar and Judah). 'Wealth' (chayil) means strength, valor, and excellence — the same word used of both Boaz and Ruth.", "modelEs": "Oran que Rut sea fecunda como Raquel y Lea que edificaron a Israel, y como la casa de Férez (la línea de Booz por Tamar y Judá). 'Riqueza' (jayil) significa fuerza, valor y excelencia — la misma palabra usada de Booz y de Rut.", "keywords": {"en": ["rachel", "leah", "perez", "tamar", "chayil", "strength", "valor", "fruitful"], "es": ["raquel", "lea", "férez", "tamar", "jayil", "fuerza", "valor", "fecund"]}}, {"promptEn": "Trace the genealogy from Obed and explain its importance.", "promptEs": "Trace la genealogía desde Obed y explique su importancia.", "modelEn": "Obed (meaning worshiper) becomes the father of Jesse, the father of King David; since Christ's royal line is traced through Joseph back to David, the Bethlehem blessings on Ruth and Boaz are richly answered — the book's purpose.", "modelEs": "Obed (que significa adorador) llega a ser padre de Isaí, el padre del rey David; y como la línea real de Cristo se traza por José hasta David, las bendiciones de Belén sobre Rut y Booz se cumplen ricamente — el propósito del libro.", "keywords": {"en": ["obed", "jesse", "david", "christ", "lineage", "joseph", "worship", "purpose"], "es": ["obed", "isaí", "david", "cristo", "linaje", "josé", "adorador", "propósito"]}}, {"promptEn": "According to Hubbard, what does the Obed verse reveal about David's reign?", "promptEs": "Según Hubbard, ¿qué revela el verso de Obed sobre el reinado de David?", "modelEn": "David's reign resulted not from shrewd politics or clever tactics but from God's divine preservation of a worthy family line; Israel was to accept David's kingship as the gift of divine guidance.", "modelEs": "El reinado de David no resultó de política astuta ni tácticas hábiles sino de la preservación divina de una digna línea familiar; Israel debía aceptar el reinado de David como don de la guía divina.", "keywords": {"en": ["david", "reign", "politics", "preserv", "divine", "family", "guidance", "gift"], "es": ["david", "reino", "política", "preserv", "divina", "familia", "guía", "don"]}}, {"promptEn": "How does chapter 4 display God's providence?", "promptEs": "¿Cómo muestra el capítulo 4 la providencia de Dios?", "modelEn": "Boaz 'happens' to be at the gate just as the nearer kinsman passes, the negotiation resolves in Ruth's favor, and the Lord enables Ruth to conceive — God's providence shines throughout and especially at the climax.", "modelEs": "Booz 'casualmente' está en la puerta justo cuando pasa el pariente, la negociación se resuelve a favor de Rut, y el Señor concede a Rut concebir — la providencia de Dios brilla en todo y sobre todo en el clímax.", "keywords": {"en": ["providence", "gate", "kinsman", "conceive", "lord", "resolve", "climax", "god"], "es": ["providencia", "puerta", "pariente", "concebir", "señor", "resuelve", "clímax", "dios"]}}, {"promptEn": "What does Boaz's example teach about diligence and our role in God's plan?", "promptEs": "¿Qué enseña el ejemplo de Booz sobre la diligencia y nuestro papel en el plan de Dios?", "modelEn": "Boaz gathered witnesses and did his homework, showing we should not assume we have no role to play; like Abraham and the twelve disciples, we have parts to play as God leads, acting wisely yet gently.", "modelEs": "Booz reúne testigos e hizo su tarea, mostrando que no debemos suponer que no tenemos papel; como Abraham y los doce discípulos, tenemos partes que cumplir mientras Dios guía, actuando con astucia pero con mansedumbre.", "keywords": {"en": ["witness", "homework", "role", "abraham", "disciple", "wise", "gentle", "lead"], "es": ["testigo", "tarea", "papel", "abraham", "discípulo", "astuto", "manso", "guía"]}}, {"promptEn": "How do Boaz and Ruth model sacrifice, and how did God reward them?", "promptEs": "¿Cómo modelan Booz y Rut el sacrificio, y cómo los recompensó Dios?", "modelEn": "Boaz paid dearly to raise a son in the dead man's name, and Ruth gave up country, people, and gods to follow the one true God and care for Naomi. God honored both, making them great-grandparents of King David.", "modelEs": "Booz pagó caro para levantar un hijo en nombre del difunto, y Rut renunció a su país, pueblo y dioses para seguir al único Dios y cuidar a Noemí. Dios honró a ambos, haciéndolos bisabuelos del rey David.", "keywords": {"en": ["sacrifice", "boaz", "ruth", "follow", "naomi", "reward", "david", "honor"], "es": ["sacrificio", "booz", "rut", "seguir", "noemí", "recompens", "david", "honra"]}}, {"promptEn": "What does Ruth's inclusion in David's (and Christ's) line teach about God?", "promptEs": "¿Qué enseña sobre Dios la inclusión de Rut en la línea de David (y de Cristo)?", "modelEn": "God uses whom He chooses — Gentiles like Ruth and Rahab, and women given crucial roles. We cannot put God in a box or expect Him to act as we would; we see dimly, but He sees fully, and He is good though not tame.", "modelEs": "Dios usa a quien escoge — gentiles como Rut y Rahab, y mujeres con papeles cruciales. No podemos encajonar a Dios ni esperar que actúe como nosotros; vemos en penumbra, pero Él ve plenamente, y es bueno aunque no domesticable.", "keywords": {"en": ["gentile", "ruth", "rahab", "women", "choose", "good", "box", "dimly"], "es": ["gentil", "rut", "rahab", "mujeres", "escoge", "bueno", "caja", "penumbra"]}}];
+
+function getTrack(){ return lsGet('cts_track')||'cert'; }
+function isMastersLevel(){ var t=getTrack(); return t==='mdiv'||t==='thm'||t==='mth'; }
+function lockMinutes(){ return isMastersLevel()?15:2; }
+
+function setLang(l){
+  document.body.setAttribute('data-lang',l); lsSet('cts_lang',l);
+  document.getElementById('btnEn').classList.toggle('active',l==='en');
+  document.getElementById('btnEs').classList.toggle('active',l==='es');
+}
+function saveReg(){
+  var nm=document.getElementById('regName').value.trim();
+  if(!nm) return;
+  lsSet('cts_student',nm);
+  document.getElementById('regOk').textContent=(document.body.getAttribute('data-lang')==='es'?'  Guardado: ':'  Saved: ')+nm;
+  renderGreet();
+}
+function renderGreet(){
+  var nm=lsGet('cts_student'); var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('greet').textContent = nm ? (es?('Estudiante: '+nm):('Student: '+nm)) : '';
+}
+function setTrack(){ lsSet('cts_track',document.getElementById('track').value); renderTrackNote(); renderSAmode(); }
+function renderTrackNote(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('trackNote').textContent = isMastersLevel()
+    ? (es?'Programa de maestría: la sección de respuesta breve CUENTA para aprobar.':'Masters track: the short-answer section COUNTS toward passing.')
+    : (es?'Certificado: la respuesta breve es práctica y no decide su aprobación.':'Certificate: short answer is practice and does not gate your pass.');
+}
+function renderSAmode(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('saMode').textContent = isMastersLevel()
+    ? (es?'Cuenta para su calificación (maestría).':'Counts toward your grade (masters).')
+    : (es?'Práctica: estudíela, pero no afecta su aprobación (certificado).':'Practice: study it, but it does not affect your pass (certificate).');
+}
+function kwHit(kw,text){
+  kw=kw.toLowerCase().trim(); text=(text||'').toLowerCase();
+  var e=kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var re=(kw.length<=3)?new RegExp('\\b'+e+'\\b'):new RegExp('\\b'+e);
+  return re.test(text);
+}
+function saHits(kws,ans){ var h=0; for(var i=0;i<kws.length;i++){ if(kwHit(kws[i],ans))h++; } return h; }
+
+function renderMC(){
+  var c=document.getElementById('mc'); c.innerHTML='';
+  MC.forEach(function(q,qi){
+    var d=document.createElement('div'); d.className='q';
+    var stem=document.createElement('div'); stem.className='stem';
+    stem.innerHTML='<span class="en">'+(qi+1)+'. '+q.stemEn+'</span><span class="es">'+(qi+1)+'. '+q.stemEs+'</span>';
+    d.appendChild(stem);
+    ['A','B','C','D'].forEach(function(L,oi){
+      var o=document.createElement('div'); o.className='opt'; o.id='mc'+qi+L;
+      o.innerHTML='<span class="en">'+L+'. '+q.optionsEn[oi]+'</span><span class="es">'+L+'. '+q.optionsEs[oi]+'</span>';
+      o.addEventListener('click',function(){ pickMC(qi,L); });
+      d.appendChild(o);
+    });
+    var bw=document.createElement('div'); bw.style.marginTop='8px';
+    var b=document.createElement('button'); b.className='secondary';
+    b.innerHTML='<span class="en">Check</span><span class="es">Revisar</span>';
+    b.addEventListener('click',function(){ checkMC(qi); });
+    bw.appendChild(b); d.appendChild(bw);
+    var fb=document.createElement('div'); fb.className='fb'; fb.id='mcfb'+qi; d.appendChild(fb);
+    c.appendChild(d);
+  });
+}
+var mcPick={};
+function pickMC(qi,L){ mcPick[qi]=L; ['A','B','C','D'].forEach(function(X){document.getElementById('mc'+qi+X).classList.remove('sel');}); document.getElementById('mc'+qi+L).classList.add('sel'); }
+function markMC(qi){
+  var q=MC[qi], pick=mcPick[qi];
+  ['A','B','C','D'].forEach(function(X){document.getElementById('mc'+qi+X).classList.remove('correct','wrong');});
+  if(pick===q.answer){ document.getElementById('mc'+qi+pick).classList.add('correct'); }
+  else { if(pick) document.getElementById('mc'+qi+pick).classList.add('wrong'); document.getElementById('mc'+qi+q.answer).classList.add('correct'); }
+  var fb=document.getElementById('mcfb'+qi); fb.className='fb '+(pick===q.answer?'ok':'no');
+  fb.innerHTML='<span class="en">'+(pick===q.answer?'Correct. ':'Answer: '+q.answer+'. ')+q.whyEn+'</span><span class="es">'+(pick===q.answer?'Correcto. ':'Respuesta: '+q.answer+'. ')+q.whyEs+'</span>';
+}
+function checkMC(qi){
+  var es=document.body.getAttribute('data-lang')==='es';
+  if(!mcPick[qi]){ var fb=document.getElementById('mcfb'+qi); fb.className='fb no'; fb.textContent=es?'Elija una opción primero.':'Pick an option first.'; return; }
+  markMC(qi);
+}
+
+function renderSA(){
+  var c=document.getElementById('sa'); c.innerHTML='';
+  SA.forEach(function(q,qi){
+    var d=document.createElement('div'); d.className='q';
+    var stem=document.createElement('div'); stem.className='stem';
+    stem.innerHTML='<span class="en">'+(MC.length+qi+1)+'. '+q.promptEn+'</span><span class="es">'+(MC.length+qi+1)+'. '+q.promptEs+'</span>';
+    d.appendChild(stem);
+    var ta=document.createElement('textarea'); ta.id='sa'+qi; ta.placeholder='...'; d.appendChild(ta);
+    var bw=document.createElement('div'); bw.style.marginTop='8px';
+    var b=document.createElement('button'); b.className='secondary';
+    b.innerHTML='<span class="en">Check Answer</span><span class="es">Revisar</span>';
+    b.addEventListener('click',function(){ checkSA(qi); });
+    bw.appendChild(b); d.appendChild(bw);
+    var fb=document.createElement('div'); fb.className='fb'; fb.id='safb'+qi; d.appendChild(fb);
+    var mo=document.createElement('div'); mo.className='model'; mo.id='samodel'+qi;
+    mo.innerHTML='<b><span class="en">Model answer — study this:</span><span class="es">Respuesta modelo &#9873; &mdash; est&uacute;diela:</span></b><br><span class="en">'+q.modelEn+'</span><span class="es">'+q.modelEs+'</span>';
+    d.appendChild(mo);
+    c.appendChild(d);
+  });
+}
+function checkSA(qi){
+  var ans=document.getElementById('sa'+qi).value.trim();
+  var fb=document.getElementById('safb'+qi); var es=document.body.getAttribute('data-lang')==='es';
+  if(!ans){ fb.className='fb no'; fb.textContent=es?'Escriba una respuesta antes de revisar.':'Please write an answer before checking.'; return; }
+  if(ans.length<100){ fb.className='fb no'; fb.textContent=es?'Escriba una respuesta más completa (mínimo 100 caracteres).':'Write a fuller answer (100 characters minimum).'; return; }
+  var q=SA[qi]; var hits=Math.max(saHits(q.keywords.en,ans),saHits(q.keywords.es,ans));
+  if(hits>=3){ fb.className='fb ok'; fb.textContent=(es?'Aprobado — ':'Pass — ')+hits+(es?' de 8 conceptos.':' of 8 key concepts.'); }
+  else { fb.className='fb no'; fb.textContent=(es?'Aún no — ':'Not yet — ')+hits+(es?' de 8 (necesita 3).':' of 8 (need 3).'); }
+  if(hits>=3) document.getElementById('samodel'+qi).classList.add('show');
+}
+
+function isLocked(){
+  var until=parseInt(lsGet('cts_re_u'+UNIT+'_lockout')||'0',10);
+  return until>Date.now()? until : 0;
+}
+function grade(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  var until=isLocked();
+  if(until){ var mins=Math.ceil((until-Date.now())/60000);
+    var r0=document.getElementById('result'); r0.className='result fail';
+    r0.textContent=(es?'Bloqueado. Intente de nuevo en ':'Locked out. Try again in ')+mins+(es?' min.':' min.'); return; }
+  var mcCorrect=0;
+  MC.forEach(function(q,qi){ markMC(qi); if(mcPick[qi]===q.answer) mcCorrect++; });
+  var saPass=0;
+  SA.forEach(function(q,qi){
+    var ans=document.getElementById('sa'+qi).value.trim(); var fb=document.getElementById('safb'+qi);
+    if(!ans){ fb.className='fb no'; fb.textContent=es?'Sin respuesta.':'No answer given.'; }
+    else if(ans.length<100){ fb.className='fb no'; fb.textContent=es?'Respuesta demasiado breve (mínimo 100 caracteres).':'Answer too short (100 characters minimum).'; }
+    else { var hits=Math.max(saHits(q.keywords.en,ans),saHits(q.keywords.es,ans));
+      if(hits>=3){ saPass++; fb.className='fb ok'; fb.textContent=(es?'Aprobado — ':'Pass — ')+hits+'/8.'; }
+      else { fb.className='fb no'; fb.textContent=(es?'Debajo — ':'Below — ')+hits+'/8.'; } }
+    document.getElementById('samodel'+qi).classList.add('show');
+  });
+  var mcPct=Math.round(mcCorrect/MC.length*100), mcOk=mcPct>=90;
+  var masters=isMastersLevel(), saOk=saPass>=9;
+  var pass = masters ? (mcOk&&saOk) : mcOk;
+  var r=document.getElementById('result');
+  if(pass){
+    r.className='result pass';
+    var saLine = masters ? ((es?' Respuesta breve: ':' Short answer: ')+saPass+'/'+SA.length+'.') : (es?' (Respuesta breve: práctica.)':' (Short answer: practice.)');
+    r.innerHTML='<b>'+(es?('Unidad '+UNIT+' aprobada.'):('Unit '+UNIT+' passed.'))+'</b> '+(es?'Opción múltiple: ':'Multiple choice: ')+mcCorrect+'/'+MC.length+' ('+mcPct+'%).'+saLine;
+    lsSet('re_unit'+UNIT+'_passed','1');
+    lsSet('cts_re_progress',String(Math.max(UNIT,parseInt(lsGet('cts_re_progress')||'0',10))));
+    lsDel('cts_re_u'+UNIT+'_lockout');
+    document.getElementById('nextBtn').disabled=false;
+  } else {
+    r.className='result fail';
+    var why=[]; if(!mcOk) why.push((es?'opción múltiple ':'multiple choice ')+mcPct+'% ('+(es?'necesita 90%':'need 90%')+')');
+    if(masters&&!saOk) why.push((es?'respuesta breve ':'short answer ')+saPass+'/'+SA.length);
+    var lk=lockMinutes(); lsSet('cts_re_u'+UNIT+'_lockout',String(Date.now()+lk*60000));
+    r.innerHTML='<b>'+(es?'Aún no aprobada.':'Not yet passed.')+'</b> '+why.join('; ')+'. '+(es?('Espere '+lk+' min y reintente.'):('Wait '+lk+' min and retry.'));
+    document.getElementById('nextBtn').disabled=true;
+  }
+  r.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function goNext(){ if(NEXT_URL) window.location.href=NEXT_URL; }
+
+(function(){
+  setLang(lsGet('cts_lang')||'en');
+  var t=getTrack(); document.getElementById('track').value=t;
+  renderGreet(); renderTrackNote(); renderSAmode(); renderMC(); renderSA();
+  var rn=document.getElementById('regName'); if(rn&&lsGet('cts_student')) rn.value=lsGet('cts_student');
+  if(lsGet('re_unit'+UNIT+'_passed')==='1') document.getElementById('nextBtn').disabled=false;
+})();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSREReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

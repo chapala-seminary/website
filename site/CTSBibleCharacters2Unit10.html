@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Characters II — Unit 10</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 11 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Bible Characters II — Unit 10: Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ</span><span class="lang-es">📖 Personajes de la Biblia II — Unidad 10: María Magdalena — Del Dolor en el Sepulcro a la Primera Testigo del Cristo Resucitado</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Jesus said to her, 'Mary!' She turned and said to Him, 'Rabboni!'" — John 20:16 (NKJV)</span><span class="lang-es">«Jesús le dijo: ¡María! Volviéndose ella, le dijo: ¡Raboni!» — Juan 20:16 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>On the first Easter morning, the first person to see the risen Lord Jesus was not Peter, nor John, nor any of the twelve. It was a woman named Mary Magdalene, who came to the tomb in tears and went away in worship. Her story is the story of what the resurrection does to a human heart: the risen Christ turns weeping into worship, and the One who calls us by name takes our grief away.</p><p><strong>Subject:</strong> Mary Magdalene — from grief at the tomb to the first witness of the risen Christ.</p><p><strong>Proposition:</strong> The risen Christ turns weeping into worship; the One who calls us by name takes our grief away.</p><p>First, let us be clear who she is. This is Mary Magdalene — not Mary the mother of Jesus, and not Mary of Bethany, the sister of Lazarus. The Bible tells us that she was a woman out of whom the Lord had cast seven demons (Luke 8:2). Whatever darkness had once held her, Jesus had set her completely free, and she never forgot it. She became one of the women who followed Jesus and supported His ministry out of their own means (Luke 8:1-3). When most of the disciples had fled in fear, Mary stood near the cross and watched her Lord die, and she watched to see where His body was laid (Mark 15:40, 47). And while it was still dark on the first day of the week, she was the first to come to the tomb. We will follow her through three movements.</p><h2>I. The Grief</h2><p>Mary came to the tomb expecting to find a dead body to anoint, and instead she found the stone rolled away and the grave empty. To her this could mean only one terrible thing: someone had taken the body of her Lord. She did not yet believe in the resurrection; the thought never entered her mind. In fact she had already run to tell Simon Peter and John, "They have taken away the Lord, and we do not know where they have laid Him." The two disciples raced to the tomb, saw the empty grave-clothes, and went back to their homes. But Mary could not leave. Love held her there at the graveside when everyone else had gone. So she stood outside the tomb, weeping. Stooping down to look inside, she saw two angels in white, sitting where the body of Jesus had lain.</p><div class="scripture">"Woman, why are you weeping?" She said to them, "Because they have taken away my Lord, and I do not know where they have laid Him." (John 20:13, NKJV)</div><p>Here is grief layered upon grief. It was not enough that they had crucified Him; now, she believed, they had even robbed Him of a resting place. Her state was one of trembling sorrow and fear, and she could not see past her tears. How often we are just like her — standing in the very presence of resurrection hope, yet so blinded by our weeping that we cannot see it.</p><h2>II. The Turning</h2><p>Then something made her turn around.</p><div class="scripture">Now when she had said this, she turned around and saw Jesus standing there, and did not know that it was Jesus. (John 20:14, NKJV)</div><p>She supposed Him to be the gardener. Through her tears she did not recognize the very One she was looking for. "Sir," she said, "if You have carried Him away, tell me where You have laid Him, and I will take Him away." She was ready to carry the body herself, this woman who loved Him so. And then the Lord Jesus spoke a single word — her own name.</p><div class="scripture">Jesus said to her, "Mary!" She turned and said to Him, "Rabboni!" (which is to say, Teacher). (John 20:16, NKJV)</div><p>One word, and everything changed. He did not preach her a sermon; He simply spoke her name, and in the sound of that beloved voice she knew Him at once. Grief became adoring worship in a single heartbeat. "Rabboni!" she cried — my Teacher, my Master. So overwhelmed was she that she took hold of Him, unwilling ever to let Him go again. But Jesus gently said, "Do not cling to Me, for I have not yet ascended to My Father" (John 20:17). She did not need to hold Him with her hands; He would be with her in a deeper and more lasting way than before. The risen Christ was not a ghost or a vision but her living Lord, the same Jesus she had followed, now triumphant over death. This is exactly what the Lord had said of Himself: the Good Shepherd "calls his own sheep by name and leads them out" (John 10:3). She knew His voice because she belonged to Him. The risen Christ still does this; He comes to His own in the middle of their sorrow and calls them by name, and the tears that blinded them are wiped away by the sight of His face.</p><h2>III. The Witness</h2><p>There was one thing more. Mary Magdalene was not only the first to see the risen Lord; she was the first to be sent to tell the good news.</p><div class="scripture">Jesus said to her, "Go to My brethren and say to them, 'I am ascending to My Father and your Father, and to My God and your God.'" (John 20:17, NKJV)</div><p>The first preacher of the resurrection was this woman whose life Christ had completely remade. She ran to the disciples with the greatest announcement the world had ever heard: "I have seen the Lord!" The resurrection had changed everything for her, and it would soon change everything for them. There is a quiet wonder in this. In that day the testimony of a woman was given little weight, yet God chose a woman to be the very first herald of the resurrection. The Lord who had cast seven demons out of her now entrusted to her the greatest news in history. This is how Christ honors the lowly and the redeemed: He lifts up those the world overlooks and sends them out as His witnesses.</p><h2>The Fact That Changes Lives</h2><p>This is the heart of the whole matter. The resurrection of Jesus Christ is not a comforting legend; it is a fact, and it is a fact that changes lives. The apostle Peter would later stand before thousands and declare, "This Jesus God has raised up, of which we are all witnesses" (Acts 2:32). Paul would write down the gospel in its simplest form: "Christ died for our sins according to the Scriptures, and that He was buried, and that He rose again the third day according to the Scriptures" (1 Corinthians 15:3-4), and he listed the many eyewitnesses who saw the risen Christ alive. Paul even staked the whole of the faith on it: if Christ is not risen, he said, then our preaching is empty and our faith is futile, and we are still in our sins. But Christ is risen indeed, and because He lives, all who belong to Him will live also. The empty tomb is the cornerstone of everything we believe and the guarantee of everything we hope for; it is the reason the gospel is good news at all. What the empty tomb took from Mary Magdalene was her grief; what it gave her was the living Christ. This is the difference between religion and the gospel. Religion can admire a dead teacher and keep his memory; only the gospel can introduce you to a Savior who is alive. Mary did not go home with a memory; she went home having seen the Lord.</p><p>There was once a man in a faraway British colony who had heard only of the death of Jesus, only of the cross. Moved by the sufferings of the crucified Christ, he wore a black armband to mark himself a follower of the One who had died. He carried his sorrow about as a kind of devotion, until one day he heard a sermon on the resurrection — and learned for the first time that his Lord was not dead and buried at all, but alive and risen. He took off the black armband then, and he never put it on again. Why should he mourn a Savior who lives?</p><p>That is the difference the empty tomb makes. We do not serve a dead teacher whose grave we visit; we serve a living Lord who walks with us still. When Mary turned that morning, she turned from a tomb to a Person, from death to life, from weeping to worship. And the Lord who called her by name knows your name too. Whatever grief has you standing blinded by your tears, the risen Christ is nearer than you think, ready to speak your name and turn your mourning into joy. Mary's cry of "Rabboni!" is the cry of every heart that has met the living Lord — and it can be yours. This is where the whole story of every believer begins: not at a grave to be mourned, but at an empty tomb and a living Savior who speaks our name. The same power that raised Him will one day raise all who are His, and wipe away every tear from their eyes.</p></div>
+<div class="lang-es"><p>En la primera mañana de Pascua, la primera persona en ver al Señor Jesús resucitado no fue Pedro, ni Juan, ni ninguno de los doce. Fue una mujer llamada María Magdalena, que vino al sepulcro entre lágrimas y se fue en adoración. Su historia es la historia de lo que la resurrección hace a un corazón humano: el Cristo resucitado convierte el llanto en adoración, y Aquél que nos llama por nuestro nombre nos quita el dolor.</p><p><strong>Tema:</strong> María Magdalena — del dolor en el sepulcro a la primera testigo del Cristo resucitado.</p><p><strong>Proposición:</strong> El Cristo resucitado convierte el llanto en adoración; Aquél que nos llama por nuestro nombre nos quita el dolor.</p><p>Primero, dejemos claro quién es ella. Esta es María Magdalena —no María la madre de Jesús, y no María de Betania, la hermana de Lázaro—. La Biblia nos dice que era una mujer de la cual el Señor había echado siete demonios (Lucas 8:2). Cualquiera que fuera la oscuridad que una vez la había dominado, Jesús la había librado por completo, y ella nunca lo olvidó. Llegó a ser una de las mujeres que seguían a Jesús y sostenían su ministerio con sus propios bienes (Lucas 8:1-3). Cuando la mayoría de los discípulos habían huido de miedo, María estuvo junto a la cruz y vio morir a su Señor, y observó dónde fue puesto su cuerpo (Marcos 15:40, 47). Y cuando aún estaba oscuro el primer día de la semana, ella fue la primera en venir al sepulcro. La seguiremos a través de tres movimientos.</p><h2>I. El Dolor</h2><p>María vino al sepulcro esperando hallar un cuerpo muerto para ungir, y en cambio halló la piedra removida y la tumba vacía. Para ella esto solo podía significar una cosa terrible: alguien se había llevado el cuerpo de su Señor. Todavía no creía en la resurrección; el pensamiento jamás entró en su mente. De hecho, ella ya había corrido a decir a Simón Pedro y a Juan: «Se han llevado al Señor, y no sabemos dónde le han puesto». Los dos discípulos corrieron al sepulcro, vieron los lienzos vacíos, y volvieron a sus casas. Pero María no podía irse. El amor la retuvo allí junto a la tumba cuando todos los demás se habían ido. Así que se quedó fuera del sepulcro, llorando. Inclinándose para mirar adentro, vio a dos ángeles vestidos de blanco, sentados donde había estado el cuerpo de Jesús.</p><div class="scripture">«Mujer, ¿por qué lloras?» Ella les dijo: «Porque se han llevado a mi Señor, y no sé dónde le han puesto.» (Juan 20:13, RVG)</div><p>Aquí hay dolor sobre dolor. No bastaba que lo hubieran crucificado; ahora, creía ella, hasta le habían robado un lugar de reposo. Su estado era de trémula tristeza y temor, y no podía ver más allá de sus lágrimas. Cuán a menudo somos como ella —de pie en la misma presencia de la esperanza de resurrección, y sin embargo tan cegados por nuestro llanto que no podemos verla—.</p><h2>II. El Giro</h2><p>Entonces algo la hizo volverse.</p><div class="scripture">Y habiendo dicho esto, se volvió, y vio a Jesús que estaba allí; mas no sabía que era Jesús. (Juan 20:14, RVG)</div><p>Lo supuso ser el hortelano. A través de sus lágrimas no reconoció al mismo que buscaba. «Señor», dijo, «si tú lo has llevado, dime dónde lo has puesto, y yo lo llevaré.» Estaba dispuesta a cargar el cuerpo ella misma, esta mujer que tanto lo amaba. Y entonces el Señor Jesús pronunció una sola palabra —su propio nombre—.</p><div class="scripture">Jesús le dijo: «¡María!» Volviéndose ella, le dijo: «¡Raboni!» (que quiere decir, Maestro). (Juan 20:16, RVG)</div><p>Una palabra, y todo cambió. No le predicó un sermón; simplemente pronunció su nombre, y en el sonido de aquella voz amada lo reconoció de inmediato. El dolor se volvió adoración en un solo latido. «¡Raboni!», clamó —mi Maestro, mi Señor—. Tan abrumada estaba que se asió de Él, sin querer dejarlo ir jamás de nuevo. Pero Jesús dijo con ternura: «No me toques, porque aún no he subido a mi Padre» (Juan 20:17). No necesitaba retenerlo con sus manos; Él estaría con ella de una manera más profunda y duradera que antes. El Cristo resucitado no era un fantasma ni una visión sino su Señor vivo, el mismo Jesús a quien había seguido, ahora triunfante sobre la muerte. Esto es exactamente lo que el Señor había dicho de sí mismo: el buen Pastor «a sus ovejas llama por nombre, y las saca» (Juan 10:3). Ella conoció su voz porque le pertenecía. El Cristo resucitado todavía hace esto; viene a los suyos en medio de su tristeza y los llama por nombre, y las lágrimas que los cegaban son enjugadas por la vista de su rostro.</p><h2>III. La Testigo</h2><p>Había una cosa más. María Magdalena no solo fue la primera en ver al Señor resucitado; fue la primera en ser enviada a anunciar las buenas nuevas.</p><div class="scripture">Jesús le dijo: «Ve a mis hermanos, y diles: Subo a mi Padre y a vuestro Padre, a mi Dios y a vuestro Dios.» (Juan 20:17, RVG)</div><p>La primera predicadora de la resurrección fue esta mujer cuya vida Cristo había rehecho por completo. Corrió a los discípulos con el más grande anuncio que el mundo jamás había oído: «¡He visto al Señor!». La resurrección lo había cambiado todo para ella, y pronto lo cambiaría todo para ellos. Hay una callada maravilla en esto. En aquel tiempo el testimonio de una mujer tenía poco peso, y sin embargo Dios escogió a una mujer para ser la primerísima heraldo de la resurrección. El Señor que había echado siete demonios de ella ahora le confiaba las más grandes nuevas de la historia. Así honra Cristo a los humildes y a los redimidos: levanta a los que el mundo pasa por alto y los envía como sus testigos.</p><h2>El Hecho que Cambia Vidas</h2><p>Este es el corazón de todo el asunto. La resurrección de Jesucristo no es una leyenda reconfortante; es un hecho, y es un hecho que cambia vidas. El apóstol Pedro más tarde se pararía ante miles y declararía: «A este Jesús resucitó Dios, de lo cual todos nosotros somos testigos» (Hechos 2:32). Pablo escribiría el evangelio en su forma más sencilla: «Cristo murió por nuestros pecados, conforme a las Escrituras; y que fue sepultado, y que resucitó al tercer día, conforme a las Escrituras» (1 Corintios 15:3-4), y enumeró a los muchos testigos oculares que vieron vivo al Cristo resucitado. Pablo incluso apostó toda la fe en ello: si Cristo no ha resucitado, dijo, entonces nuestra predicación es vana y nuestra fe es vana, y aún estamos en nuestros pecados. Pero Cristo ha resucitado verdaderamente, y porque Él vive, todos los que le pertenecen también vivirán. La tumba vacía es la piedra angular de todo lo que creemos y la garantía de todo lo que esperamos; es la razón por la que el evangelio es buenas nuevas en absoluto. Lo que la tumba vacía le quitó a María Magdalena fue su dolor; lo que le dio fue el Cristo vivo. Esta es la diferencia entre la religión y el evangelio. La religión puede admirar a un maestro muerto y guardar su memoria; solo el evangelio puede presentarte a un Salvador que está vivo. María no se fue a casa con un recuerdo; se fue a casa habiendo visto al Señor.</p><p>Hubo una vez un hombre en una lejana colonia británica que solo había oído de la muerte de Jesús, solo de la cruz. Conmovido por los sufrimientos del Cristo crucificado, llevaba un brazalete negro para marcarse como seguidor de Aquél que había muerto. Cargaba su tristeza como una especie de devoción, hasta que un día oyó un sermón sobre la resurrección —y supo por primera vez que su Señor no estaba muerto y sepultado en absoluto, sino vivo y resucitado—. Se quitó entonces el brazalete negro, y nunca más se lo volvió a poner. ¿Por qué habría de lamentar a un Salvador que vive?</p><p>Esa es la diferencia que hace la tumba vacía. No servimos a un maestro muerto cuya tumba visitamos; servimos a un Señor vivo que aún camina con nosotros. Cuando María se volvió aquella mañana, se volvió de una tumba a una Persona, de la muerte a la vida, del llanto a la adoración. Y el Señor que la llamó por nombre conoce también tu nombre. Cualquiera que sea el dolor que te tiene de pie cegado por tus lágrimas, el Cristo resucitado está más cerca de lo que piensas, listo para pronunciar tu nombre y convertir tu lamento en gozo. El clamor de María, «¡Raboni!», es el clamor de todo corazón que ha encontrado al Señor vivo —y puede ser el tuyo—. Aquí es donde comienza toda la historia de cada creyente: no en una tumba que lamentar, sino en un sepulcro vacío y un Salvador vivo que pronuncia nuestro nombre. El mismo poder que lo resucitó un día resucitará a todos los que son suyos, y enjugará toda lágrima de sus ojos.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 10;
+const COURSE = 'CTSBC2';
+const FILE_PREFIX = 'CTSBibleCharacters2';
+const NEXT_UNIT_URL = 'CTSBibleCharacters2Unit11.html';
+const totalUnits = 11;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - Jonah — The Prophet Who Ran from God", "Unit 2 - Hosea — The Prophet Who Loved an Unfaithful Wife", "Unit 3 - Jeremiah — The Weeping Prophet Who Stayed Faithful", "Unit 4 - Esther — For Such a Time as This: The Hidden Providence of God", "Unit 5 - Ezra — A Fresh New Start, the Scribe Who Restored God’s Word", "Unit 6 - John the Baptist — The Forerunner Who Doubted in the Dark", "Unit 7 - Peter — From Fisherman to the Rock Who Feeds the Sheep", "Unit 8 - Thomas — The Doubter Who Made the Great Confession", "Unit 9 - Lazarus — The Dead Man Jesus Called Back to Life", "Unit 10 - Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ", "Unit 11 - Paul — From Persecutor to Apostle of Grace"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [{"textEn":"1. Who was Mary Magdalene?","textEs":"1. ¿Quién era María Magdalena?","optionsEn":["The mother of Jesus", "Lazarus's sister of Bethany", "A Roman noblewoman", "A devoted follower of Jesus, out of whom He had cast seven demons"],"optionsEs":["La madre de Jesús", "La hermana de Lázaro de Betania", "Una noble romana", "Una devota seguidora de Jesús, de la cual Él había echado siete demonios"],"explanationEn":"She is distinct from Mary the mother of Jesus and Mary of Bethany.","explanationEs":"Es distinta de María la madre de Jesús y de María de Betania.","correct":3},{"textEn":"2. How did Mary and the other women serve Jesus (Luke 8:1-3)?","textEs":"2. ¿Cómo servían María y las otras mujeres a Jesús (Lucas 8:1-3)?","optionsEn":["They were never near Him", "They opposed Him", "They followed Him and supported His ministry out of their own means", "They ruled over the apostles"],"optionsEs":["Nunca estaban cerca de Él", "Se le oponían", "Lo seguían y sostenían su ministerio con sus propios bienes", "Gobernaban sobre los apóstoles"],"explanationEn":"Her love for Him flowed from how much He had done for her.","explanationEs":"Su amor por Él brotaba de cuánto Él había hecho por ella.","correct":2},{"textEn":"3. Where was Mary Magdalene at the crucifixion?","textEs":"3. ¿Dónde estaba María Magdalena en la crucifixión?","optionsEn":["She was present at the cross and watched where He was buried", "She had gone home", "She was unaware of it", "She had fled in fear"],"optionsEs":["Estuvo presente en la cruz y observó dónde fue sepultado", "Se había ido a casa", "No sabía de ello", "Había huido de miedo"],"explanationEn":"When most disciples fled, Mary stayed near her Lord.","explanationEs":"Cuando la mayoría de los discípulos huyeron, María se quedó cerca de su Señor.","correct":0},{"textEn":"4. When did Mary come to the tomb?","textEs":"4. ¿Cuándo vino María al sepulcro?","optionsEn":["A week later", "Early on the first day of the week — she was first at the tomb", "At midday", "She never went"],"optionsEs":["Una semana después", "Temprano el primer día de la semana — fue la primera en el sepulcro", "Al mediodía", "Nunca fue"],"explanationEn":"While it was still dark, she came first to the grave.","explanationEs":"Cuando aún estaba oscuro, vino primero a la tumba.","correct":1},{"textEn":"5. Why was Mary weeping outside the tomb?","textEs":"5. ¿Por qué lloraba María fuera del sepulcro?","optionsEn":["She was tired", "She had been scolded", "She thought His body had been taken, and did not yet believe in the resurrection", "She had lost her way"],"optionsEs":["Estaba cansada", "La habían regañado", "Pensaba que se habían llevado su cuerpo, y todavía no creía en la resurrección", "Había perdido el camino"],"explanationEn":"The empty tomb meant to her only that the body was stolen.","explanationEs":"La tumba vacía solo significaba para ella que el cuerpo había sido robado.","correct":2},{"textEn":"6. What did the two angels ask her?","textEs":"6. ¿Qué le preguntaron los dos ángeles?","optionsEn":["\"Woman, why are you weeping?\"", "\"Where are the disciples?\"", "\"Why are you here?\"", "\"Who sent you?\""],"optionsEs":["«Mujer, ¿por qué lloras?»", "«¿Dónde están los discípulos?»", "«¿Por qué estás aquí?»", "«¿Quién te envió?»"],"explanationEn":"They found her in trembling sorrow, unable to see past her tears.","explanationEs":"La hallaron en trémula tristeza, incapaz de ver más allá de sus lágrimas.","correct":0},{"textEn":"7. How did Mary answer?","textEs":"7. ¿Cómo respondió María?","optionsEn":["\"He is risen indeed\"", "\"They have taken away my Lord, and I do not know where they have laid Him\"", "\"I do not know this man\"", "\"I have seen the Lord\""],"optionsEs":["«Verdaderamente ha resucitado»", "«Se han llevado a mi Señor, y no sé dónde le han puesto»", "«No conozco a este hombre»", "«He visto al Señor»"],"explanationEn":"Grief was layered upon grief; even His resting place seemed lost.","explanationEs":"Era dolor sobre dolor; hasta su lugar de reposo parecía perdido.","correct":1},{"textEn":"8. When Mary first saw Jesus, whom did she suppose Him to be?","textEs":"8. Cuando María vio a Jesús por primera vez, ¿quién supuso que era?","optionsEn":["An angel", "Peter", "A soldier", "The gardener"],"optionsEs":["Un ángel", "Pedro", "Un soldado", "El hortelano"],"explanationEn":"Through her tears she did not recognize the One she sought.","explanationEs":"A través de sus lágrimas no reconoció al que buscaba.","correct":3},{"textEn":"9. What did Mary say to the one she thought was the gardener?","textEs":"9. ¿Qué dijo María al que pensaba que era el hortelano?","optionsEn":["\"Leave me alone\"", "\"Are you the Christ?\"", "\"Sir, if You have carried Him away, tell me where You have laid Him, and I will take Him away\"", "\"Why are you here?\""],"optionsEs":["«Déjame en paz»", "«¿Eres tú el Cristo?»", "«Señor, si tú lo has llevado, dime dónde lo has puesto, y yo lo llevaré»", "«¿Por qué estás aquí?»"],"explanationEn":"This woman who loved Him was ready to carry the body herself.","explanationEs":"Esta mujer que lo amaba estaba dispuesta a cargar el cuerpo ella misma.","correct":2},{"textEn":"10. What single word did Jesus say that changed everything?","textEs":"10. ¿Qué sola palabra dijo Jesús que lo cambió todo?","optionsEn":["\"Mary\"", "\"Believe\"", "\"Rejoice\"", "\"Peace\""],"optionsEs":["«María»", "«Cree»", "«Regocíjate»", "«Paz»"],"explanationEn":"He did not preach a sermon; He simply spoke her name.","explanationEs":"No predicó un sermón; simplemente pronunció su nombre.","correct":0},{"textEn":"11. How did Mary respond when she knew His voice?","textEs":"11. ¿Cómo respondió María cuando conoció su voz?","optionsEn":["She ran away", "She cried out, \"Rabboni!\" — that is, Teacher", "She said nothing", "She fainted"],"optionsEs":["Huyó", "Clamó: «¡Raboni!» — es decir, Maestro", "No dijo nada", "Se desmayó"],"explanationEn":"She knew His voice because she belonged to Him.","explanationEs":"Conoció su voz porque le pertenecía.","correct":1},{"textEn":"12. What happened in that instant?","textEs":"12. ¿Qué sucedió en ese instante?","optionsEn":["She forgot Him", "She returned to the tomb", "She doubted again", "Her grief became adoring worship"],"optionsEs":["Lo olvidó", "Regresó al sepulcro", "Dudó de nuevo", "Su dolor se volvió adoración"],"explanationEn":"In a single heartbeat weeping turned to worship.","explanationEs":"En un solo latido el llanto se volvió adoración.","correct":3},{"textEn":"13. What truth from John 10:3 does this moment show?","textEs":"13. ¿Qué verdad de Juan 10:3 muestra este momento?","optionsEn":["That the Good Shepherd calls His own sheep by name", "That the Lord forgets His own", "That sheep have no shepherd", "That faith needs no shepherd"],"optionsEs":["Que el buen Pastor llama a sus ovejas por nombre", "Que el Señor olvida a los suyos", "Que las ovejas no tienen pastor", "Que la fe no necesita pastor"],"explanationEn":"The risen Christ comes to His own in their sorrow and calls them by name.","explanationEs":"El Cristo resucitado viene a los suyos en su tristeza y los llama por nombre.","correct":0},{"textEn":"14. What was Mary Magdalene the first to do?","textEs":"14. ¿Qué fue lo primero que hizo María Magdalena?","optionsEn":["The first to deny Him", "She was the first to see the risen Lord", "The first to be baptized", "The first to doubt"],"optionsEs":["La primera en negarlo", "Fue la primera en ver al Señor resucitado", "La primera en ser bautizada", "La primera en dudar"],"explanationEn":"Not Peter, nor John, but Mary first saw the risen Christ.","explanationEs":"Ni Pedro, ni Juan, sino María vio primero al Cristo resucitado.","correct":1},{"textEn":"15. What did Jesus send Mary to do?","textEs":"15. ¿Qué envió Jesús a hacer a María?","optionsEn":["To keep it secret", "To stay at the tomb", "To find Pilate", "To go and tell His brethren the news"],"optionsEs":["A guardarlo en secreto", "A quedarse en el sepulcro", "A buscar a Pilato", "A ir y anunciar las nuevas a sus hermanos"],"explanationEn":"The first preacher of the resurrection was Mary Magdalene.","explanationEs":"La primera predicadora de la resurrección fue María Magdalena.","correct":3},{"textEn":"16. What is striking about this first witness and messenger of the resurrection?","textEs":"16. ¿Qué es notable de esta primera testigo y mensajera de la resurrección?","optionsEn":["She was an apostle", "She was a stranger to Jesus", "The first to see and proclaim the risen Christ was this woman whose life He had completely remade", "She never told anyone"],"optionsEs":["Era una apóstol", "Era una extraña para Jesús", "La primera en ver y proclamar al Cristo resucitado fue esta mujer cuya vida Él había rehecho por completo", "Nunca se lo dijo a nadie"],"explanationEn":"She ran to the disciples crying, \"I have seen the Lord!\"","explanationEs":"Corrió a los discípulos clamando: «¡He visto al Señor!»","correct":2},{"textEn":"17. What is the theme of Mary Magdalene's story?","textEs":"17. ¿Cuál es el tema de la historia de María Magdalena?","optionsEn":["Death has the last word", "Grief can never be healed", "The tomb was never empty", "The resurrection is a fact that changes lives — it took away her grief and gave her the living Christ"],"optionsEs":["La muerte tiene la última palabra", "El dolor nunca puede sanar", "La tumba nunca estuvo vacía", "La resurrección es un hecho que cambia vidas — le quitó su dolor y le dio el Cristo vivo"],"explanationEn":"What the empty tomb took was grief; what it gave was the living Christ.","explanationEs":"Lo que la tumba vacía quitó fue dolor; lo que dio fue el Cristo vivo.","correct":3},{"textEn":"18. What is the gospel Paul states in 1 Corinthians 15:3-4?","textEs":"18. ¿Cuál es el evangelio que Pablo expresa en 1 Corintios 15:3-4?","optionsEn":["That Christ died for our sins, was buried, and rose again the third day according to the Scriptures", "That Christ never died", "That the body was stolen", "That no one saw Him"],"optionsEs":["Que Cristo murió por nuestros pecados, fue sepultado, y resucitó al tercer día conforme a las Escrituras", "Que Cristo nunca murió", "Que el cuerpo fue robado", "Que nadie lo vio"],"explanationEn":"Paul listed the many eyewitnesses who saw the risen Christ alive.","explanationEs":"Pablo enumeró a los muchos testigos oculares que vieron vivo al Cristo resucitado.","correct":0},{"textEn":"19. What does the story of the man with the black armband illustrate?","textEs":"19. ¿Qué ilustra la historia del hombre con el brazalete negro?","optionsEn":["That mourning should never end", "That the cross is all there is", "He wore black for the crucified Christ until he heard of the resurrection — then took it off, for his Lord is alive and risen", "That Christ is still in the grave"],"optionsEs":["Que el lamento nunca debe terminar", "Que la cruz es todo lo que hay", "Llevaba negro por el Cristo crucificado hasta que oyó de la resurrección — entonces se lo quitó, porque su Señor está vivo y resucitado", "Que Cristo sigue en la tumba"],"explanationEn":"Why should he mourn a Savior who lives?","explanationEs":"¿Por qué habría de lamentar a un Salvador que vive?","correct":2},{"textEn":"20. What is the central truth of this account?","textEs":"20. ¿Cuál es la verdad central de este relato?","optionsEn":["That we must find Jesus on our own", "The risen Christ knows His own by name and turns mourning into joy; \"Rabboni\" is the cry of every heart that meets the living Lord", "That weeping is the end of the story", "That Jesus is a memory"],"optionsEs":["Que debemos hallar a Jesús por nuestra cuenta", "El Cristo resucitado conoce a los suyos por nombre y convierte el lamento en gozo; «Raboni» es el clamor de todo corazón que encuentra al Señor vivo", "Que el llanto es el fin de la historia", "Que Jesús es un recuerdo"],"explanationEn":"The Lord who called Mary by name knows your name too.","explanationEs":"El Señor que llamó a María por nombre conoce también tu nombre.","correct":1}];
+const kwQuestions = [{"textEn":"21. Who was Mary Magdalene, and how did she follow Jesus?","textEs":"21. ¿Quién era María Magdalena, y cómo seguía a Jesús?","kw_en":["magdalene","demons","follower","support","women","devoted","distinct","free"],"kw_es":["magdalena","demonios","seguidora","sosten","mujeres","devota","distinta","libr"],"modelEn":"Mary Magdalene was a devoted follower of Jesus, out of whom He had cast seven demons (Luke 8:2); whatever darkness had held her, He had set her completely free. She is distinct from Mary the mother of Jesus and from Mary of Bethany. She became one of the women who followed Jesus and supported His ministry out of their own means (Luke 8:1-3). Her love for Him flowed from how much He had done for her.","modelEs":"María Magdalena era una devota seguidora de Jesús, de la cual Él había echado siete demonios (Lucas 8:2); cualquiera que fuera la oscuridad que la había dominado, Él la había librado por completo. Es distinta de María la madre de Jesús y de María de Betania. Llegó a ser una de las mujeres que seguían a Jesús y sostenían su ministerio con sus propios bienes (Lucas 8:1-3). Su amor por Él brotaba de cuánto Él había hecho por ella."},{"textEn":"22. Where was Mary at the cross and the tomb?","textEs":"22. ¿Dónde estaba María en la cruz y en el sepulcro?","kw_en":["cross","burial","watched","first","tomb","dark","faithful","fled"],"kw_es":["cruz","sepultura","observ","primera","sepulcro","oscuro","fiel","huy"],"modelEn":"When most of the disciples had fled in fear, Mary stood near the cross and watched her Lord die, and she watched to see where His body was laid (Mark 15:40, 47). Then, while it was still dark on the first day of the week, she was the first to come to the tomb. Her faithfulness kept her near Him at the cross, at the burial, and at the grave, when others had scattered.","modelEs":"Cuando la mayoría de los discípulos habían huido de miedo, María estuvo junto a la cruz y vio morir a su Señor, y observó dónde fue puesto su cuerpo (Marcos 15:40, 47). Luego, cuando aún estaba oscuro el primer día de la semana, ella fue la primera en venir al sepulcro. Su fidelidad la mantuvo cerca de Él en la cruz, en la sepultura, y en la tumba, cuando otros se habían dispersado."},{"textEn":"23. Describe Mary's grief at the tomb.","textEs":"23. Describe el dolor de María en el sepulcro.","kw_en":["weeping","taken","lord","angels","resurrection","body","sorrow","believe"],"kw_es":["llorando","llevado","senor","angeles","resurreccion","cuerpo","tristeza","creer"],"modelEn":"Mary came expecting a dead body to anoint, but found the stone rolled away and the tomb empty, which to her meant only that someone had taken her Lord's body. She did not yet believe in the resurrection; the thought never entered her mind. So she stood outside the tomb weeping, and when two angels asked why, she said, \"They have taken away my Lord, and I do not know where they have laid Him.\" She was so blinded by sorrow she could not see the hope before her.","modelEs":"María vino esperando un cuerpo muerto para ungir, pero halló la piedra removida y la tumba vacía, lo cual para ella solo significaba que alguien se había llevado el cuerpo de su Señor. Todavía no creía en la resurrección; el pensamiento jamás entró en su mente. Así que se quedó fuera del sepulcro llorando, y cuando dos ángeles preguntaron por qué, dijo: \"Se han llevado a mi Señor, y no sé dónde le han puesto\". Estaba tan cegada por la tristeza que no podía ver la esperanza ante ella."},{"textEn":"24. Describe the turning, when Mary recognized Jesus.","textEs":"24. Describe el giro, cuando María reconoció a Jesús.","kw_en":["gardener","mary","rabboni","voice","worship","turn","teacher","grief"],"kw_es":["hortelano","maria","raboni","voz","adoracion","volv","maestro","dolor"],"modelEn":"Mary turned and saw Jesus but supposed Him to be the gardener, saying, \"Sir, if You have carried Him away, tell me where You have laid Him, and I will take Him away.\" Then the Lord spoke a single word — her own name, \"Mary.\" In the sound of that beloved voice she knew Him at once and cried, \"Rabboni!\" which means Teacher. In a single heartbeat her grief became adoring worship.","modelEs":"María se volvió y vio a Jesús pero lo supuso ser el hortelano, diciendo: \"Señor, si tú lo has llevado, dime dónde lo has puesto, y yo lo llevaré\". Entonces el Señor pronunció una sola palabra —su propio nombre, \"María\"—. En el sonido de aquella voz amada lo reconoció de inmediato y clamó: \"¡Raboni!\", que quiere decir Maestro. En un solo latido su dolor se volvió adoración."},{"textEn":"25. What does the Good Shepherd do (John 10:3), shown here?","textEs":"25. ¿Qué hace el buen Pastor (Juan 10:3), mostrado aquí?","kw_en":["shepherd","name","sheep","calls","own","voice","know","belong"],"kw_es":["pastor","nombre","ovejas","llama","propias","voz","conoc","perten"],"modelEn":"This moment shows what the Lord said of Himself: the Good Shepherd \"calls his own sheep by name and leads them out\" (John 10:3). Mary knew His voice because she belonged to Him. The risen Christ still does this — He comes to His own in the middle of their sorrow and calls them by name, and the tears that blinded them are wiped away by the sight of His face. His sheep know His voice.","modelEs":"Este momento muestra lo que el Señor dijo de sí mismo: el buen Pastor \"a sus ovejas llama por nombre, y las saca\" (Juan 10:3). María conoció su voz porque le pertenecía. El Cristo resucitado todavía hace esto —viene a los suyos en medio de su tristeza y los llama por nombre, y las lágrimas que los cegaban son enjugadas por la vista de su rostro—. Sus ovejas conocen su voz."},{"textEn":"26. What was Mary the first to do, and what was she sent to do?","textEs":"26. ¿Qué fue lo primero que hizo María, y a qué fue enviada?","kw_en":["first","see","risen","witness","sent","tell","brethren","proclaim"],"kw_es":["primera","ver","resucitado","testigo","enviada","anunciar","hermanos","proclam"],"modelEn":"Mary Magdalene was not only the first to see the risen Lord; she was the first to be sent to tell the good news. Jesus said, \"Go to My brethren and say to them, 'I am ascending to My Father and your Father.'\" So the first preacher of the resurrection was this woman whose life Christ had completely remade. She ran to the disciples with the greatest announcement the world had ever heard: \"I have seen the Lord!\"","modelEs":"María Magdalena no solo fue la primera en ver al Señor resucitado; fue la primera en ser enviada a anunciar las buenas nuevas. Jesús dijo: \"Ve a mis hermanos, y diles: Subo a mi Padre y a vuestro Padre\". Así que la primera predicadora de la resurrección fue esta mujer cuya vida Cristo había rehecho por completo. Corrió a los discípulos con el más grande anuncio que el mundo jamás había oído: \"¡He visto al Señor!\"."},{"textEn":"27. State the theme — the resurrection changes lives.","textEs":"27. Expresa el tema — la resurrección cambia vidas.","kw_en":["resurrection","fact","changes","grief","living","tears","adoration","acts"],"kw_es":["resurreccion","hecho","cambia","dolor","vivo","lagrimas","adoracion","hechos"],"modelEn":"The theme of Mary Magdalene's story is that the resurrection of Jesus Christ is a fact that changes lives. It is not a comforting legend but a fact, of which the apostles were witnesses (Acts 2:32). What the empty tomb took from Mary was her grief; what it gave was the living Christ. The resurrection wiped away her tears and replaced them with adoration, and it can do the same in any heart that meets the risen Lord.","modelEs":"El tema de la historia de María Magdalena es que la resurrección de Jesucristo es un hecho que cambia vidas. No es una leyenda reconfortante sino un hecho, del cual los apóstoles fueron testigos (Hechos 2:32). Lo que la tumba vacía le quitó a María fue su dolor; lo que le dio fue el Cristo vivo. La resurrección enjugó sus lágrimas y las reemplazó con adoración, y puede hacer lo mismo en cualquier corazón que encuentra al Señor resucitado."},{"textEn":"28. What is the gospel Paul states in 1 Corinthians 15:3-4?","textEs":"28. ¿Cuál es el evangelio que Pablo expresa en 1 Corintios 15:3-4?","kw_en":["died","sins","buried","rose","third","scriptures","christ","witnesses"],"kw_es":["murio","pecados","sepultado","resucito","tercer","escrituras","cristo","testigos"],"modelEn":"Paul states the gospel in its simplest form: \"Christ died for our sins according to the Scriptures, and that He was buried, and that He rose again the third day according to the Scriptures\" (1 Corinthians 15:3-4). He then listed the many eyewitnesses who saw the risen Christ alive. The gospel rests on a real death for our sins, a real burial, and a real resurrection on the third day, attested by witnesses.","modelEs":"Pablo expresa el evangelio en su forma más sencilla: \"Cristo murió por nuestros pecados, conforme a las Escrituras; y que fue sepultado, y que resucitó al tercer día, conforme a las Escrituras\" (1 Corintios 15:3-4). Luego enumeró a los muchos testigos oculares que vieron vivo al Cristo resucitado. El evangelio descansa en una muerte real por nuestros pecados, una sepultura real, y una resurrección real al tercer día, atestiguada por testigos."},{"textEn":"29. What does the man with the black armband illustrate?","textEs":"29. ¿Qué ilustra el hombre con el brazalete negro?","kw_en":["armband","black","crucified","resurrection","alive","risen","removed","dead"],"kw_es":["brazalete","negro","crucificado","resurreccion","vivo","resucitado","quito","muerto"],"modelEn":"A man in a faraway British colony had heard only of the death of Jesus, only of the cross, and wore a black armband to mark himself a follower of the One who had died. He carried his sorrow as a kind of devotion, until he heard a sermon on the resurrection and learned that his Lord was not dead and buried but alive and risen. He took off the black armband then and never put it on again, for why should he mourn a Savior who lives?","modelEs":"Un hombre en una lejana colonia británica solo había oído de la muerte de Jesús, solo de la cruz, y llevaba un brazalete negro para marcarse como seguidor de Aquél que había muerto. Cargaba su tristeza como una especie de devoción, hasta que oyó un sermón sobre la resurrección y supo que su Señor no estaba muerto y sepultado sino vivo y resucitado. Se quitó entonces el brazalete negro y nunca más se lo puso, porque ¿por qué habría de lamentar a un Salvador que vive?"},{"textEn":"30. What is the central truth — Mary's cry of \"Rabboni\"?","textEs":"30. ¿Cuál es la verdad central — el clamor de María, «Raboni»?","kw_en":["risen","name","mourning","joy","rabboni","living","lord","meet"],"kw_es":["resucitado","nombre","lamento","gozo","raboni","vivo","senor","encontr"],"modelEn":"The central truth is that the risen Christ knows His own by name and turns mourning into joy. We do not serve a dead teacher whose grave we visit, but a living Lord who walks with us still. The Lord who called Mary by name knows your name too, and however blinded you are by grief, He is nearer than you think, ready to turn your mourning into joy. Mary's cry of \"Rabboni!\" is the cry of every heart that has met the living Lord.","modelEs":"La verdad central es que el Cristo resucitado conoce a los suyos por nombre y convierte el lamento en gozo. No servimos a un maestro muerto cuya tumba visitamos, sino a un Señor vivo que aún camina con nosotros. El Señor que llamó a María por nombre conoce también tu nombre, y por más cegado que estés por el dolor, está más cerca de lo que piensas, listo para convertir tu lamento en gozo. El clamor de María, \"¡Raboni!\", es el clamor de todo corazón que ha encontrado al Señor vivo."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleCharacters2Readings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

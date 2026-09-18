@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pastoral Ministries — Unit 2: The Pastor's Calling and Character</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-warning { background: #fae8e8; border: 1px solid #efc2c2; border-radius: 12px; padding: 15px; margin-bottom: 20px; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-warning { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Unit 1</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 3 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Pastoral Ministries — Unit 2: The Pastor's Calling and Character</span><span class="lang-es">📖 Ministerios Pastorales — Unidad 2: El Llamado y el Carácter del Pastor</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"Then I heard the voice of the Lord, saying: 'Whom shall I send, and who will go for Us?' Then I said, 'Here am I! Send me.'" — Isaiah 6:8 (NKJV)</span><span class="lang-es">"Después oí la voz del Señor, que decía: ¿A quién enviaré, y quién irá por nosotros? Entonces respondí yo: Heme aquí, envíame a mí." — Isaías 6:8 (RVG)</span></p>
+</div>
+
+<div id="regWarning" class="reg-warning" style="display:none;">
+    <span class="lang-en">⚠️ You have not yet registered. Please <a href="CTSPMUnit1.html" style="color:#5b3a1f;">return to Unit 1</a> to register before continuing.</span>
+    <span class="lang-es">⚠️ Aún no se ha registrado. Por favor <a href="CTSPMUnit1.html" style="color:#5b3a1f;">regrese a la Unidad 1</a> para registrarse antes de continuar.</span>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>There are two pillars on which every faithful pastoral ministry stands. One is the <em>call</em> — the divine summons that places a man into the office. The other is <em>character</em> — the inward life that sustains him there. Take away either pillar and the building falls. A man with strong calling but weak character will scandalize the gospel before he is forty. A man with strong character but no genuine call will wear himself out doing what God never asked him to do. The world wants charisma. God demands character. The world wants platforms. God demands purity. The pulpit is no place for the unsent — and no place for the unprepared in soul.</p>
+
+        <p>This unit examines both pillars: the internal and external dimensions of the pastoral call, the biblical qualifications of character laid down in the Pastoral Epistles, the spiritual disciplines that sustain a long ministry, the protection of the pastor's family, and the dark-side temptations that have wrecked ministers since the days of Eli's sons. None of this is theoretical. Every paragraph below has a graveyard somewhere in the world to confirm it.</p>
+
+        <h2>I. The Internal Call</h2>
+        <p>The call to pastoral ministry begins inside a man, where no committee can see it. It is the Spirit of God awakening in the human heart a holy combination of desire, burden, and gifting that will not let go. Paul writes, <em>"This is a faithful saying: If a man desires the position of a bishop, he desires a good work"</em> (1 Timothy 3:1). The word <em>desires</em> there is strong — it means to <em>stretch oneself toward, to reach for, to long for</em>. The internal call is not a casual interest in religious work. It is a holy ache.</p>
+
+        <p>The Bible's great calling stories almost always come at moments of crisis or vacancy. Isaiah was called <em>"in the year that King Uzziah died"</em> (Isaiah 6:1). The throne was vacant. The nation was anxious. And in that very moment Isaiah saw the throne that was <em>never</em> vacant. He saw the Lord high and lifted up, His train filling the temple, the seraphim crying <em>"Holy, holy, holy is the LORD of hosts; the whole earth is full of His glory!"</em> (Isaiah 6:3). Isaiah's first response was not enthusiasm. It was undoing: <em>"Woe is me, for I am undone! Because I am a man of unclean lips, and I dwell in the midst of a people of unclean lips; for my eyes have seen the King, the LORD of hosts"</em> (Isaiah 6:5). Only after the burning coal touched his lips and his iniquity was taken away did the call come: <em>"Whom shall I send, and who will go for Us?"</em> And Isaiah answered with the most famous five words in pastoral history: <em>"Here am I! Send me"</em> (Isaiah 6:8).</p>
+
+        <p>Notice the order. Vision of God, then conviction of sin, then cleansing by grace, then calling to ministry. Reverse that order and you get a man who runs ahead of God on the strength of his own talent and burns out by forty.</p>
+
+        <p>Almost every man God calls in Scripture initially resists the call. Moses said, <em>"Who am I that I should go to Pharaoh?"</em> (Exodus 3:11). When God answered that, Moses said he was slow of speech. When God answered that, Moses simply said, <em>"O my Lord, please send by the hand of whomever else You may send"</em> (Exodus 4:13). Jeremiah protested, <em>"I cannot speak, for I am a youth"</em> (Jeremiah 1:6). Amos insisted he was <em>"no prophet, nor a son of a prophet, but… a sheepbreeder and a tender of sycamore fruit"</em> (Amos 7:14). The men who were eager to volunteer in Scripture are often the ones who failed. The men who hesitated, who felt unworthy, who argued with the call — those are the ones whose ministries lasted forty and fifty years.</p>
+
+        <p>The pattern is consistent through Scripture. Gideon was threshing wheat in a winepress to hide it from the Midianites when the angel of the LORD greeted him with <em>"The LORD is with you, you mighty man of valor!"</em> (Judges 6:12). Gideon's response was almost comical: <em>"O my Lord, if the LORD is with us, why then has all this happened to us?"</em> He went on to ask for not one but two fleeces before he believed. David was the runt of his family, left in the fields with the sheep when Samuel came looking for the next king of Israel — Jesse did not even bother to call him in for the lineup. Peter, the man Jesus would build His church on, was the same man who said, <em>"Depart from me, for I am a sinful man, O Lord!"</em> (Luke 5:8) the first time he saw Jesus' power up close. The internal call almost never lands on a man who is ready for it. It usually lands on a man who feels least qualified — and that very sense of unworthiness is part of how God prepares him to lean on grace rather than on himself for the rest of his ministry.</p>
+
+        <h2>II. The External Call</h2>
+        <p>But the internal call alone is not enough. Many evangelical traditions have found it wise and biblically grounded to distinguish a second half of pastoral calling: the Spirit who calls a man inwardly also confirms the call outwardly through the church. This is the half most often neglected today. Acts 13 gives us a model. Five faithful men were ministering in Antioch — Barnabas, Simeon, Lucius, Manaen, and Saul. As they fasted and prayed, <em>"the Holy Spirit said, 'Now separate to Me Barnabas and Saul for the work to which I have called them.' Then, having fasted and prayed, and laid hands on them, they sent them away"</em> (Acts 13:2–3). Notice the cooperation. The Spirit calls; the church confirms. Barnabas and Saul did not appoint themselves. Their brothers in Christ, after fasting and prayer, recognized what the Spirit had already begun.</p>
+
+        <p>Paul reminds Timothy, <em>"Do not neglect the gift that is in you, which was given to you by prophecy with the laying on of the hands of the eldership"</em> (1 Timothy 4:14). The laying on of hands matters. It is the church saying <em>yes</em> to what the Spirit has already said. A man who feels called but cannot get any congregation, any group of mature believers, any presbytery to confirm that call should pause long and hard before he insists he is right and they are wrong. God does not normally give the call to a man and hide it from his church. The two work together. When they do not, something is usually wrong with the man.</p>
+
+        <p>Calling is the convergence of three things: the inner witness of the Spirit, the outer affirmation of the church, and the visible fruitfulness of the ministry over time. When all three are present, you can be confident. When one is missing, slow down. When two are missing, stop.</p>
+
+        <h2>III. Character: The Qualifications of an Elder</h2>
+        <p>Calling is the door into the office. Character is the floor that holds you up after you walk through. Paul gave Timothy and Titus the most thorough character checklist in the New Testament — fifteen qualifications in 1 Timothy 3:1–7 and another seven in Titus 1:5–9. Read them slowly. Almost every one of them is about <em>character</em>, not about <em>skill</em>.</p>
+
+        <p>The umbrella over the entire list is the phrase <em>"above reproach"</em> (1 Timothy 3:2; Titus 1:6). It does not mean perfect. It means there is no glaring, ongoing pattern of sin that an outsider could legitimately point to and say, <em>"How can he stand in the pulpit and preach when his life is like that?"</em> The pastor must be <em>"the husband of one wife, temperate, sober-minded, of good behavior, hospitable, able to teach; not given to wine, not violent, not greedy for money, but gentle, not quarrelsome, not covetous"</em> (1 Timothy 3:2–3).</p>
+
+        <p>Notice what is <em>not</em> on the list. There is nothing about being charismatic. Nothing about being entertaining. Nothing about having a degree. Nothing about being a great speaker. Nothing about church-growth strategies. The biblical qualifications are almost entirely the qualifications of a <em>grown-up Christian</em> — a man whose ordinary life has been brought under the lordship of Christ in marriage, money, speech, temper, and reputation.</p>
+
+        <p>The ermine is a small white animal that lives in the northern regions, prized by hunters for its beautiful coat. The ermine has a peculiar habit. It will keep its coat clean at all costs. It will not enter a hole or den that is dirty or muddy, even if doing so would mean escaping a predator. The hunters know this. They find the ermine's home and smear it with dirt. Then they set their dogs loose. When the ermine, fleeing for its life, runs back to its home, it finds the entrance defiled — and it refuses to enter. It would rather face death than soil its coat. That is a parable of pastoral character. The man called to this office must value the cleanness of his life more than his own comfort, more than his own safety, more than his own preferences. There is a place where a pastor will not go, a thing he will not say, a profit he will not take, a flattery he will not accept — even if refusing costs him dearly. The ermine teaches us that the white coat is worth more than the easy escape.</p>
+
+        <p>Character is also the guardian of doctrine. In the early sixteenth century a Dominican friar named Johann Tetzel was traveling through Germany selling indulgences — paper certificates that supposedly forgave sins and shortened time in purgatory. Pope Leo X needed money to rebuild St. Peter's Basilica, and Tetzel was an effective salesman. People were profiting from God's free gift of forgiveness. A young Augustinian monk named Martin Luther saw what was happening and, on October 31, 1517, nailed his Ninety-Five Theses to the door of the Castle Church in Wittenberg. The Reformation was born. What gave Luther the courage to challenge Tetzel, the Pope, and the entire ecclesiastical establishment of Europe? It was a character formed by long years in the Word of God, refusing to call wrong right because it was popular or profitable. Pastoral character is what makes a man able, when the moment comes, to say, <em>"This is wrong, and I will not bless it."</em></p>
+
+        <p>The prophet Amos was given a vision that has become a permanent picture of pastoral accountability. He saw the Lord standing on a wall <em>"made with a plumb line, with a plumb line in His hand"</em> (Amos 7:7). A plumb line is a weight on a string used by builders to determine an exact vertical. It does not bend to the carpenter's whim. It does not adjust to fashion. It hangs true, and all the work must line up with it. God said to Amos, <em>"Behold, I am setting a plumb line in the midst of My people Israel; I will not pass by them anymore"</em> (Amos 7:8). The pastor lives under the plumb line. He measures himself, his marriage, his money, his speech, his preaching, his motives — all against the unchanging line of God's Word. The man who refuses to measure himself by the plumb line will eventually build a crooked life. The man who lives under it will build a life that lasts.</p>
+
+        <h2>IV. Spiritual Disciplines: The Hidden Life</h2>
+        <p>The character that 1 Timothy and Titus describe is not produced by accident. It is sustained by hidden disciplines that the congregation never sees. A pastor who does not have a private life with God will eventually have nothing to say in public from God. The pulpit will go dry; the family will grow distant; the sin patterns will tighten their grip; and one day the pastor will look around and wonder how he got so empty.</p>
+
+        <p>Countless icebergs float in the frigid waters around Greenland. Some are tiny; others tower skyward. At times the small ones move in one direction while their gigantic counterparts go in another. The small ones are subject to surface winds, but the huge ice masses are carried along by deep ocean currents. The pastor's life is subject to two similar forces. The winds represent everything changeable, unpredictable, distressing — the criticism in the Sunday meeting, the unexpected funeral on Tuesday, the deacon who quit, the donor who left. But underneath those gusts is another force, more powerful than anything on the surface — the deep current of God's purposes and the unchanging flow of His love. When a pastor is carried by the deep currents, the surface winds do not throw him off course. When a pastor is moved only by the surface winds, every storm sends him sideways. Spiritual disciplines are how a man drops his anchor into the deep current.</p>
+
+        <p>Six disciplines hold a pastor together over the long haul. First, <em>the daily Word</em> — not for sermon preparation, but for personal feeding. The pastor must read the Bible as a man, not as a preacher. If the only time he opens the Bible is to mine it for next Sunday's sermon, his soul will starve in the middle of plenty. Second, <em>consistent prayer</em> — not the public prayers from the platform, but the private wrestling. Luther is reported to have said that he had so much to do that he must spend the first three hours in prayer. Most modern pastors have inverted this — they spend the first three hours in email. Third, <em>Sabbath rest</em>. The pastor who does not rest will eventually be rested by force, either through illness, breakdown, or moral failure. The body God gave you was not designed to run six and a half days a week for thirty years. Fourth, <em>accountability</em>. Every pastor needs at least one or two trusted men who can ask the hard questions and get the truthful answers. Lone-wolf pastors are wolf food. Fifth, <em>self-examination</em>. Paul writes, <em>"Examine yourselves as to whether you are in the faith. Test yourselves"</em> (2 Corinthians 13:5). The pastor must regularly turn the searchlight inward. Sixth, <em>confession and repentance</em>. There is no sin so hidden that it does not eventually break the surface. The pastor who confesses early, repents quickly, and lives transparently before God will not be undone by what is dragged into the light. The pastor who hides will be.</p>
+
+        <h2>V. The Pastor's Family</h2>
+        <p>The qualifications give family leadership a place of unique weight. <em>"One who rules his own house well, having his children in submission with all reverence (for if a man does not know how to rule his own house, how will he take care of the church of God?)"</em> (1 Timothy 3:4–5). The home is the testing ground. Whatever a man cannot do at his own kitchen table, he cannot do in the pulpit either. Whatever spiritual leadership is missing from the dinner conversation will eventually be missing from the morning service.</p>
+
+        <p>This is not an argument for pastoral perfection. Children grow up and make their own choices, and even faithful pastors sometimes have prodigals. The point is not perfection of outcome but faithfulness of <em>function</em>. Is the pastor present in his home? Is he leading his wife in love? Is he discipling his children in the truth? Is the church getting his leftovers while his family gets his absence? Many ministries have died because the pastor traded his family for the work — and discovered too late that he had lost both.</p>
+
+        <p>Wisdom calls for protected rhythms. Date nights with your spouse that no one moves. Family meals that are not interrupted by phone calls. Vacations that actually happen. A weekly day off that is not eroded by <em>"just one quick thing."</em> Ministry never lacks for emergencies. Most of them are not actual emergencies. The pastor who learns to discern between the urgent and the truly important will keep both his ministry and his family.</p>
+
+        <h2>VI. The Dark Side</h2>
+        <p>Every pastor has a dark side — temptations that are particular to him, weak places where the enemy has been working since before he entered ministry. The five great wrecks of pastoral ministry are nearly always the same: <em>pride, lust, money, isolation, and discouragement</em>. Pride whispers that the man is now too successful to need accountability. Lust finds its ground in the long hours, the emotional intimacy of pastoral counseling, and the easy access of digital temptation. Money corrupts whenever a pastor allows the size of his salary or the praise of donors to shape his preaching. Isolation is the soil in which all of the above grow — the pastor with no peers, no friends, no one who can speak truth to him, is one bad decision away from disaster. And discouragement is the slow erosion that comes from Sundays that feel small, members who walk out the back door, and dreams that never seem to materialize.</p>
+
+        <p>The answer to the dark side is not denial. The answer is honest, regular, ruthless self-examination before the Lord, with at least one or two trusted brothers who know the dark places and pray with you about them by name. Better to confront the dark side at age thirty in private than to be confronted by it at age fifty in public.</p>
+
+        <h2>Closing</h2>
+        <p>Calling and character. Two pillars. Both required. The pastor who has both will outlast the storms. The pastor who is missing one will eventually fall. Most pastoral disasters in our day are not failures of strategy — they are failures of one of these two foundations. A man stepped into the office without a real call, and burned out. A man stepped into the office without real character, and crashed.</p>
+
+        <p>During the dark days of the Second World War, the radio newsman Walter Winchell ended one of his broadcasts with a single sentence — words spoken on a Friday evening when the British port of Singapore had just fallen to the Japanese: <em>"Singapore has fallen, but the Rock of Ages stands."</em> When everything around the pastor is shaking — the culture, the denomination, the congregation, his own weakness — the Rock of Ages still stands. The Chief Shepherd is still on His throne. The crown of glory still waits. And the same Lord who called Isaiah and Moses and Jeremiah and Amos and Gideon and David and Peter is still calling men today.</p>
+
+        <p>Read 1 Timothy 3 and Titus 1 every six months for the rest of your ministry. Read Isaiah 6 every year. Watch for the warning signs. Build the disciplines. Guard the family. Confess the dark side. And keep coming back to the One who called you in the first place — the Chief Shepherd Himself — who is not finished with you yet, and whose grace is sufficient for every weakness His call has uncovered. <em>"Faithful is He who calls you, who also will do it"</em> (1 Thessalonians 5:24).</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>Hay dos pilares sobre los cuales se sostiene todo ministerio pastoral fiel. Uno es el <em>llamado</em> — la convocatoria divina que coloca a un hombre en el oficio. El otro es el <em>carácter</em> — la vida interior que lo sostiene allí. Quítele cualquiera de los dos pilares y el edificio cae. Un hombre con un fuerte llamado pero carácter débil escandalizará al evangelio antes de los cuarenta. Un hombre con fuerte carácter pero sin un llamado genuino se agotará haciendo lo que Dios nunca le pidió. El mundo quiere carisma. Dios exige carácter. El mundo quiere plataformas. Dios exige pureza. El púlpito no es lugar para el no enviado — ni lugar para el no preparado en alma.</p>
+
+        <p>Esta unidad examina ambos pilares: las dimensiones interna y externa del llamado pastoral, las cualificaciones bíblicas de carácter establecidas en las Epístolas Pastorales, las disciplinas espirituales que sostienen un largo ministerio, la protección de la familia del pastor y las tentaciones del lado oscuro que han arruinado a ministros desde los días de los hijos de Elí. Nada de esto es teórico. Cada párrafo abajo tiene un cementerio en algún lugar del mundo que lo confirma.</p>
+
+        <h2>I. El llamado interno</h2>
+        <p>El llamado al ministerio pastoral comienza dentro del hombre, donde ningún comité puede verlo. Es el Espíritu de Dios despertando en el corazón humano una santa combinación de deseo, carga y don que no lo suelta. Pablo escribe: <em>"Palabra fiel: Si alguno anhela obispado, buena obra desea"</em> (1 Timoteo 3:1). La palabra <em>anhela</em> es fuerte — significa <em>extenderse hacia, alcanzar, anhelar</em>. El llamado interno no es un interés casual en el trabajo religioso. Es un anhelo santo.</p>
+
+        <p>Las grandes historias bíblicas de llamado casi siempre vienen en momentos de crisis o vacío. Isaías fue llamado <em>"en el año que murió el rey Uzías"</em> (Isaías 6:1). El trono estaba vacante. La nación estaba ansiosa. Y en ese mismo momento Isaías vio el trono que <em>nunca</em> estaba vacante. Vio al Señor sentado sobre un trono alto y sublime, llenando el templo Sus faldas, los serafines clamando: <em>"Santo, santo, santo, Jehová de los ejércitos; toda la tierra está llena de su gloria"</em> (Isaías 6:3). La primera respuesta de Isaías no fue entusiasmo. Fue deshacerse: <em>"¡Ay de mí! que soy muerto; porque siendo hombre inmundo de labios, y habitando en medio de pueblo que tiene labios inmundos, han visto mis ojos al Rey, Jehová de los ejércitos"</em> (Isaías 6:5). Solo después de que el carbón encendido tocara sus labios y su iniquidad fuera quitada vino el llamado: <em>"¿A quién enviaré, y quién irá por nosotros?"</em> E Isaías respondió con las cinco palabras más famosas en la historia pastoral: <em>"Heme aquí, envíame a mí"</em> (Isaías 6:8).</p>
+
+        <p>Note el orden. Visión de Dios, luego convicción de pecado, luego limpieza por gracia, luego llamado al ministerio. Invierta ese orden y obtendrá un hombre que corre delante de Dios con la fuerza de su propio talento y se quema antes de los cuarenta.</p>
+
+        <p>Casi cada hombre que Dios llama en la Escritura inicialmente resiste el llamado. Moisés dijo: <em>"¿Quién soy yo, para que vaya a Faraón?"</em> (Éxodo 3:11). Cuando Dios respondió a eso, Moisés dijo que era torpe de boca. Cuando Dios respondió a eso, Moisés simplemente dijo: <em>"¡Ay, Señor! envía, te ruego, por mano del que has de enviar"</em> (Éxodo 4:13). Jeremías protestó: <em>"No sé hablar, porque soy niño"</em> (Jeremías 1:6). Amós insistió en que era <em>"no soy profeta, ni soy hijo de profeta, sino que soy boyero, y recogedor de cabrahigos"</em> (Amós 7:14). Los hombres que se ofrecieron entusiastas en la Escritura son a menudo los que fracasaron. Los hombres que vacilaron, que se sintieron indignos, que discutieron con el llamado — esos son los que tuvieron ministerios que duraron cuarenta y cincuenta años.</p>
+
+        <p>El patrón es consistente a través de la Escritura. Gedeón estaba trillando trigo en un lagar para esconderlo de los madianitas cuando el ángel del Señor lo saludó con <em>"Jehová está contigo, varón esforzado y valiente"</em> (Jueces 6:12). La respuesta de Gedeón fue casi cómica: <em>"Ah, Señor mío, si Jehová es con nosotros, ¿por qué nos ha sobrevenido todo esto?"</em> Pidió no uno sino dos vellones antes de creer. David era el menor de su familia, dejado en los campos con las ovejas cuando Samuel vino buscando al próximo rey de Israel — Isaí ni siquiera se molestó en llamarlo para la fila. Pedro, el hombre sobre el cual Jesús edificaría Su iglesia, fue el mismo hombre que dijo: <em>"Apártate de mí, Señor, porque soy hombre pecador"</em> (Lucas 5:8) la primera vez que vio el poder de Jesús de cerca. El llamado interno casi nunca cae sobre un hombre que está listo para él. Usualmente cae sobre un hombre que se siente menos cualificado — y ese mismo sentido de indignidad es parte de cómo Dios lo prepara para apoyarse en la gracia más bien que en sí mismo por el resto de su ministerio.</p>
+
+        <h2>II. El llamado externo</h2>
+        <p>Pero el llamado interno por sí solo no es suficiente. Muchas tradiciones evangélicas han considerado sabio y bíblicamente fundamentado distinguir una segunda mitad del llamado pastoral: el Espíritu que llama al hombre internamente también confirma el llamado externamente a través de la iglesia. Esta es la mitad más a menudo descuidada hoy. Hechos 13 nos da un modelo. Cinco hombres fieles ministraban en Antioquía — Bernabé, Simeón, Lucio, Manaén y Saulo. Mientras ayunaban y oraban, <em>"dijo el Espíritu Santo: Apartadme a Bernabé y a Saulo para la obra a la que los he llamado. Entonces, habiendo ayunado y orado, y puesto las manos sobre ellos, los despidieron"</em> (Hechos 13:2–3). Note la cooperación. El Espíritu llama; la iglesia confirma. Bernabé y Saulo no se nombraron a sí mismos. Sus hermanos en Cristo, después de ayuno y oración, reconocieron lo que el Espíritu ya había comenzado.</p>
+
+        <p>Pablo recuerda a Timoteo: <em>"No descuides el don que está en ti, que te fue dado por profecía con la imposición de las manos del presbiterio"</em> (1 Timoteo 4:14). La imposición de manos importa. Es la iglesia diciendo <em>sí</em> a lo que el Espíritu ya ha dicho. Un hombre que se siente llamado pero no puede conseguir que ninguna congregación, ningún grupo de creyentes maduros, ningún presbiterio confirme ese llamado debería detenerse y considerar mucho antes de insistir que él tiene razón y ellos están equivocados. Dios normalmente no le da el llamado a un hombre y lo esconde de su iglesia. Los dos trabajan juntos. Cuando no lo hacen, usualmente algo está mal con el hombre.</p>
+
+        <p>El llamado es la convergencia de tres cosas: el testimonio interior del Espíritu, la afirmación exterior de la iglesia y el fruto visible del ministerio a lo largo del tiempo. Cuando los tres están presentes, puede tener confianza. Cuando uno falta, vaya despacio. Cuando dos faltan, deténgase.</p>
+
+        <h2>III. Carácter: Las cualificaciones del anciano</h2>
+        <p>El llamado es la puerta al oficio. El carácter es el piso que lo sostiene después de que entra. Pablo dio a Timoteo y a Tito la lista de carácter más completa del Nuevo Testamento — quince cualificaciones en 1 Timoteo 3:1–7 y otras siete en Tito 1:5–9. Léalas despacio. Casi cada una es sobre <em>carácter</em>, no sobre <em>habilidad</em>.</p>
+
+        <p>El paraguas sobre toda la lista es la frase <em>"irreprensible"</em> (1 Timoteo 3:2; Tito 1:6). No significa perfecto. Significa que no hay un patrón flagrante y continuo de pecado al cual un extraño podría legítimamente señalar y decir: <em>"¿Cómo puede este hombre estar en el púlpito y predicar cuando su vida es así?"</em> El pastor debe ser <em>"marido de una sola mujer, sobrio, prudente, decoroso, hospedador, apto para enseñar; no dado al vino, no pendenciero, no codicioso de ganancias deshonestas, sino apacible, no contencioso, no avaro"</em> (1 Timoteo 3:2–3).</p>
+
+        <p>Note lo que <em>no</em> está en la lista. Nada sobre ser carismático. Nada sobre ser entretenido. Nada sobre tener un título. Nada sobre ser un gran orador. Nada sobre estrategias de crecimiento de la iglesia. Las cualificaciones bíblicas son casi enteramente las cualificaciones de un <em>cristiano maduro</em> — un hombre cuya vida ordinaria ha sido puesta bajo el señorío de Cristo en matrimonio, dinero, palabra, temperamento y reputación.</p>
+
+        <p>El armiño es un pequeño animal blanco que vive en las regiones del norte, apreciado por los cazadores por su hermoso pelaje. El armiño tiene un hábito peculiar. Mantendrá su pelaje limpio a toda costa. No entrará en un agujero o guarida que esté sucio o lodoso, aunque hacerlo significara escapar de un depredador. Los cazadores lo saben. Encuentran la casa del armiño y la ensucian. Luego sueltan a sus perros. Cuando el armiño, huyendo por su vida, corre de regreso a su casa, encuentra la entrada profanada — y se rehúsa a entrar. Preferiría enfrentar la muerte antes que ensuciar su pelaje. Esa es una parábola del carácter pastoral. El hombre llamado a este oficio debe valorar la limpieza de su vida más que su propia comodidad, más que su propia seguridad, más que sus propias preferencias. Hay un lugar a donde un pastor no irá, una cosa que no dirá, una ganancia que no tomará, una adulación que no aceptará — aunque rehusarlo le cueste caro. El armiño nos enseña que el pelaje blanco vale más que el escape fácil.</p>
+
+        <p>El carácter es también el guardián de la doctrina. A principios del siglo dieciséis un fraile dominico llamado Juan Tetzel viajaba por Alemania vendiendo indulgencias — certificados de papel que supuestamente perdonaban pecados y acortaban el tiempo en el purgatorio. El Papa León X necesitaba dinero para reedificar la Basílica de San Pedro, y Tetzel era un vendedor eficaz. La gente se lucraba del don gratuito de Dios del perdón. Un joven monje agustino llamado Martín Lutero vio lo que sucedía y, el 31 de octubre de 1517, clavó sus Noventa y Cinco Tesis en la puerta de la Iglesia del Castillo en Wittenberg. Nació la Reforma. ¿Qué le dio a Lutero el coraje para desafiar a Tetzel, al Papa y a todo el establecimiento eclesiástico de Europa? Fue un carácter formado por largos años en la Palabra de Dios, rehusándose a llamar lo malo bueno porque era popular o lucrativo. El carácter pastoral es lo que hace a un hombre capaz, cuando llega el momento, de decir: <em>"Esto está mal, y yo no lo bendeciré."</em></p>
+
+        <p>Al profeta Amós se le dio una visión que se ha convertido en un cuadro permanente de la rendición de cuentas pastoral. Vio al Señor de pie sobre un muro <em>"hecho a plomo, y en su mano una plomada de albañil"</em> (Amós 7:7). Una plomada es un peso atado a un cordel usado por los albañiles para determinar una vertical exacta. No se dobla al capricho del carpintero. No se ajusta a la moda. Cuelga verdadera, y toda la obra debe alinearse con ella. Dios le dijo a Amós: <em>"He aquí, yo pongo plomada de albañil en medio de mi pueblo Israel; no le pasaré más"</em> (Amós 7:8). El pastor vive bajo la plomada. Se mide a sí mismo, su matrimonio, su dinero, su palabra, su predicación, sus motivos — todo contra la línea inmutable de la Palabra de Dios. El hombre que se rehúsa a medirse por la plomada eventualmente edificará una vida torcida. El hombre que vive bajo ella edificará una vida que dura.</p>
+
+        <h2>IV. Disciplinas espirituales: La vida oculta</h2>
+        <p>El carácter que 1 Timoteo y Tito describen no se produce por accidente. Se sostiene por disciplinas ocultas que la congregación nunca ve. Un pastor que no tiene una vida privada con Dios eventualmente no tendrá nada que decir en público de Dios. El púlpito se secará; la familia se distanciará; los patrones de pecado apretarán su agarre; y un día el pastor mirará a su alrededor y se preguntará cómo se vació tanto.</p>
+
+        <p>Innumerables icebergs flotan en las aguas heladas alrededor de Groenlandia. Algunos son diminutos; otros se elevan hacia el cielo. A veces los pequeños se mueven en una dirección mientras sus contrapartes gigantescas van en otra. Los pequeños están sujetos a los vientos de superficie, pero las enormes masas de hielo son llevadas por las corrientes oceánicas profundas. La vida del pastor está sujeta a dos fuerzas similares. Los vientos representan todo lo cambiante, impredecible, angustiante — la crítica en la reunión del domingo, el funeral inesperado del martes, el diácono que renunció, el donante que se fue. Pero debajo de esas ráfagas hay otra fuerza, más poderosa que cualquier cosa en la superficie — la corriente profunda de los propósitos de Dios y el flujo inmutable de Su amor. Cuando un pastor es llevado por las corrientes profundas, los vientos de superficie no lo desvían. Cuando un pastor es movido solo por los vientos de superficie, cada tormenta lo lanza de lado. Las disciplinas espirituales son cómo un hombre echa su ancla en la corriente profunda.</p>
+
+        <p>Seis disciplinas mantienen a un pastor unido a lo largo del camino. Primero, <em>la Palabra diaria</em> — no para preparación de sermones, sino para alimento personal. El pastor debe leer la Biblia como un hombre, no como un predicador. Si el único momento en que abre la Biblia es para extraer material para el sermón del próximo domingo, su alma morirá de hambre en medio de la abundancia. Segundo, <em>oración constante</em> — no las oraciones públicas desde la plataforma, sino la lucha privada. Se dice que Lutero dijo que tenía tanto que hacer que debía pasar las primeras tres horas en oración. La mayoría de los pastores modernos han invertido esto — pasan las primeras tres horas en correo electrónico. Tercero, <em>descanso sabático</em>. El pastor que no descansa eventualmente será descansado a la fuerza, sea por enfermedad, colapso o fracaso moral. El cuerpo que Dios le dio no fue diseñado para correr seis días y medio a la semana durante treinta años. Cuarto, <em>rendición de cuentas</em>. Cada pastor necesita al menos uno o dos hombres de confianza que puedan hacer las preguntas difíciles y obtener las respuestas verdaderas. Los pastores lobos-solitarios son comida de lobos. Quinto, <em>auto-examen</em>. Pablo escribe: <em>"Examinaos a vosotros mismos si estáis en la fe; probaos a vosotros mismos"</em> (2 Corintios 13:5). El pastor debe regularmente volver el reflector hacia adentro. Sexto, <em>confesión y arrepentimiento</em>. No hay pecado tan oculto que no salga eventualmente a la superficie. El pastor que confiesa temprano, se arrepiente rápidamente y vive transparentemente delante de Dios no será deshecho por lo que sea sacado a la luz. El pastor que esconde lo será.</p>
+
+        <h2>V. La familia del pastor</h2>
+        <p>Las cualificaciones le dan al liderazgo familiar un lugar de peso único. <em>"Que gobierne bien su casa, que tenga a sus hijos en sujeción con toda honestidad (porque el que no sabe gobernar su casa, ¿cómo cuidará de la iglesia de Dios?)"</em> (1 Timoteo 3:4–5). El hogar es el campo de prueba. Lo que un hombre no puede hacer en su propia mesa de cocina, no puede hacerlo en el púlpito tampoco. Cualquier liderazgo espiritual que falte en la conversación de la cena eventualmente faltará en el servicio de la mañana.</p>
+
+        <p>Esto no es un argumento por la perfección pastoral. Los hijos crecen y toman sus propias decisiones, y aun pastores fieles a veces tienen pródigos. El punto no es la perfección del resultado sino la fidelidad de la <em>función</em>. ¿Está presente el pastor en su hogar? ¿Está dirigiendo a su esposa en amor? ¿Está discipulando a sus hijos en la verdad? ¿Está la iglesia recibiendo sus sobras mientras su familia recibe su ausencia? Muchos ministerios han muerto porque el pastor cambió su familia por el trabajo — y descubrió demasiado tarde que había perdido ambos.</p>
+
+        <p>La sabiduría llama a ritmos protegidos. Citas con su esposa que nadie mueve. Comidas familiares que no son interrumpidas por llamadas telefónicas. Vacaciones que realmente suceden. Un día libre semanal que no es erosionado por <em>"solo una cosa rápida"</em>. El ministerio nunca carece de emergencias. La mayoría de ellas no son emergencias reales. El pastor que aprende a discernir entre lo urgente y lo verdaderamente importante mantendrá tanto su ministerio como su familia.</p>
+
+        <h2>VI. El lado oscuro</h2>
+        <p>Cada pastor tiene un lado oscuro — tentaciones que son particulares para él, lugares débiles donde el enemigo ha estado trabajando desde antes de que entrara al ministerio. Los cinco grandes naufragios del ministerio pastoral son casi siempre los mismos: <em>orgullo, lujuria, dinero, aislamiento y desánimo</em>. El orgullo susurra que el hombre ahora es demasiado exitoso para necesitar rendición de cuentas. La lujuria encuentra su terreno en las largas horas, la intimidad emocional de la consejería pastoral y el fácil acceso de la tentación digital. El dinero corrompe cuando un pastor permite que el tamaño de su salario o el elogio de los donantes moldee su predicación. El aislamiento es el suelo en el cual todo lo anterior crece — el pastor sin pares, sin amigos, sin nadie que pueda hablarle verdad, está a una mala decisión del desastre. Y el desánimo es la erosión lenta que viene de domingos que se sienten pequeños, miembros que salen por la puerta de atrás y sueños que nunca parecen materializarse.</p>
+
+        <p>La respuesta al lado oscuro no es la negación. La respuesta es un auto-examen honesto, regular y despiadado delante del Señor, con al menos uno o dos hermanos de confianza que conozcan los lugares oscuros y oren con usted sobre ellos por nombre. Mejor confrontar el lado oscuro a los treinta en privado que ser confrontado por él a los cincuenta en público.</p>
+
+        <h2>Cierre</h2>
+        <p>Llamado y carácter. Dos pilares. Ambos requeridos. El pastor que tiene ambos sobrevivirá las tormentas. El pastor al que le falta uno eventualmente caerá. La mayoría de los desastres pastorales en nuestros días no son fallas de estrategia — son fallas de uno de estos dos fundamentos. Un hombre entró al oficio sin un llamado real, y se quemó. Un hombre entró al oficio sin carácter real, y se estrelló.</p>
+
+        <p>Durante los días oscuros de la Segunda Guerra Mundial, el periodista de radio Walter Winchell terminó una de sus transmisiones con una sola frase — palabras dichas en un viernes por la noche cuando el puerto británico de Singapur acababa de caer ante los japoneses: <em>"Singapur ha caído, pero la Roca de los Siglos permanece."</em> Cuando todo alrededor del pastor está temblando — la cultura, la denominación, la congregación, su propia debilidad — la Roca de los Siglos todavía permanece. El Príncipe de los pastores todavía está sobre Su trono. La corona de gloria todavía espera. Y el mismo Señor que llamó a Isaías y a Moisés y a Jeremías y a Amós y a Gedeón y a David y a Pedro todavía está llamando hombres hoy.</p>
+
+        <p>Lea 1 Timoteo 3 y Tito 1 cada seis meses por el resto de su ministerio. Lea Isaías 6 cada año. Vigile las señales de advertencia. Construya las disciplinas. Guarde la familia. Confiese el lado oscuro. Y siga regresando al Que lo llamó en primer lugar — al Príncipe de los pastores mismo — quien no ha terminado con usted todavía, y cuya gracia es suficiente para cada debilidad que Su llamado ha descubierto. <em>"Fiel es el que os llama, el cual también lo hará"</em> (1 Tesalonicenses 5:24).</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 2 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 2 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 2;
+let progress = JSON.parse(localStorage.getItem('cts_pm_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPMUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit2) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSPMUnit1.html"; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSPMUnit3.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="CTSPMUnit1.html" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+        document.getElementById('regWarning').style.display = 'block';
+    }
+}
+displayStudentGreeting();
+
+// Q5 reshuffled (A↔B swap: Desire/burden/gifting moved A→B)
+// Q15 reshuffled (C↔D swap: Testing ground moved C→D)
+const mcQuestions = [
+  {
+    "textEn": "1. The two pillars of pastoral ministry are:",
+    "textEs": "1. Los dos pilares del ministerio pastoral son:",
+    "optionsEn": [
+      "Education and experience",
+      "Charisma and confidence",
+      "Calling and character",
+      "Preaching and prayer"
+    ],
+    "optionsEs": [
+      "Educación y experiencia",
+      "Carisma y confianza",
+      "Llamado y carácter",
+      "Predicación y oración"
+    ],
+    "c": 23,
+    "explEn": "The two pillars are calling (the divine summons) and character (the life that sustains a man in the office).",
+    "explEs": "Los dos pilares son el llamado (la convocatoria divina) y el carácter (la vida que sostiene al hombre en el oficio)."
+  },
+  {
+    "textEn": "2. Isaiah received his call:",
+    "textEs": "2. Isaías recibió su llamado:",
+    "optionsEn": [
+      "At Mount Sinai",
+      "In the year King Uzziah died",
+      "On the road to Damascus",
+      "At his father's farm"
+    ],
+    "optionsEs": [
+      "En el monte Sinaí",
+      "En el año que murió el rey Uzías",
+      "En el camino a Damasco",
+      "En la granja de su padre"
+    ],
+    "c": 29,
+    "explEn": "Isaiah was called 'in the year King Uzziah died,' when the throne was vacant and the nation anxious.",
+    "explEs": "Isaías fue llamado 'en el año que murió el rey Uzías,' cuando el trono estaba vacante y la nación ansiosa."
+  },
+  {
+    "textEn": "3. Isaiah's first response to seeing the Lord was:",
+    "textEs": "3. La primera respuesta de Isaías al ver al Señor fue:",
+    "optionsEn": [
+      "\"Woe is me, for I am undone\"",
+      "\"Here am I, send me\"",
+      "Joy and excitement",
+      "\"Who am I that I should go?\""
+    ],
+    "optionsEs": [
+      "\"¡Ay de mí! que soy muerto\"",
+      "\"Heme aquí, envíame a mí\"",
+      "Gozo y entusiasmo",
+      "\"¿Quién soy yo para que vaya?\""
+    ],
+    "c": 35,
+    "explEn": "Isaiah's first response was undoing — 'Woe is me, for I am undone' — not enthusiasm.",
+    "explEs": "La primera respuesta de Isaías fue deshacerse — '¡Ay de mí! que soy muerto' — no entusiasmo."
+  },
+  {
+    "textEn": "4. Which of these biblical figures DID NOT initially resist their call?",
+    "textEs": "4. ¿Cuál de estas figuras bíblicas NO resistió inicialmente su llamado?",
+    "optionsEn": [
+      "Moses",
+      "Jeremiah",
+      "Amos",
+      "Paul"
+    ],
+    "optionsEs": [
+      "Moisés",
+      "Jeremías",
+      "Amós",
+      "Pablo"
+    ],
+    "c": 45,
+    "explEn": "Paul is the exception; Moses, Jeremiah, and Amos all initially resisted their call.",
+    "explEs": "Pablo es la excepción; Moisés, Jeremías y Amós todos resistieron inicialmente su llamado."
+  },
+  {
+    "textEn": "5. The internal call is best described as:",
+    "textEs": "5. El llamado interno se describe mejor como:",
+    "optionsEn": [
+      "Academic credentials",
+      "Desire, burden, and gifting awakened by the Spirit",
+      "Family approval",
+      "Denominational endorsement"
+    ],
+    "optionsEs": [
+      "Credenciales académicas",
+      "Deseo, carga y don despertados por el Espíritu",
+      "Aprobación familiar",
+      "Respaldo denominacional"
+    ],
+    "c": 50,
+    "explEn": "The internal call is desire, burden, and gifting awakened by the Spirit — a holy ache, not a casual interest.",
+    "explEs": "El llamado interno es deseo, carga y don despertados por el Espíritu — un anhelo santo, no un interés casual."
+  },
+  {
+    "textEn": "6. The external call is confirmed through:",
+    "textEs": "6. El llamado externo se confirma por medio de:",
+    "optionsEn": [
+      "Personal feelings alone",
+      "Political success",
+      "The church's affirmation",
+      "Financial offerings"
+    ],
+    "optionsEs": [
+      "Sentimientos personales solamente",
+      "Éxito político",
+      "La afirmación de la iglesia",
+      "Ofrendas financieras"
+    ],
+    "c": 58,
+    "explEn": "The external call is confirmed by the church's affirmation, not by personal feelings alone.",
+    "explEs": "El llamado externo se confirma por la afirmación de la iglesia, no por sentimientos personales solamente."
+  },
+  {
+    "textEn": "7. In Acts 13, who commissioned Barnabas and Saul?",
+    "textEs": "7. En Hechos 13, ¿quién comisionó a Bernabé y Saulo?",
+    "optionsEn": [
+      "The Antioch church through prayer and fasting",
+      "The Roman emperor",
+      "The Jerusalem council",
+      "King Herod"
+    ],
+    "optionsEs": [
+      "La iglesia de Antioquía mediante oración y ayuno",
+      "El emperador romano",
+      "El concilio de Jerusalén",
+      "El rey Herodes"
+    ],
+    "c": 63,
+    "explEn": "In Acts 13 the Antioch church commissioned Barnabas and Saul through prayer and fasting.",
+    "explEs": "En Hechos 13 la iglesia de Antioquía comisionó a Bernabé y Saulo mediante oración y ayuno."
+  },
+  {
+    "textEn": "8. The umbrella qualification over the elder lists in 1 Timothy 3 and Titus 1 is:",
+    "textEs": "8. La cualificación paraguas sobre las listas de ancianos en 1 Timoteo 3 y Tito 1 es:",
+    "optionsEn": [
+      "Able to preach",
+      "Well-educated",
+      "Above reproach",
+      "Financially successful"
+    ],
+    "optionsEs": [
+      "Apto para predicar",
+      "Bien educado",
+      "Irreprensible",
+      "Financieramente exitoso"
+    ],
+    "c": 72,
+    "explEn": "'Above reproach' is the umbrella over every elder qualification in 1 Timothy 3 and Titus 1.",
+    "explEs": "'Irreprensible' es el paraguas sobre cada cualificación del anciano en 1 Timoteo 3 y Tito 1."
+  },
+  {
+    "textEn": "9. What is striking about what is NOT on the elder qualifications list?",
+    "textEs": "9. ¿Qué es notable sobre lo que NO está en la lista de cualificaciones del anciano?",
+    "optionsEn": [
+      "Character traits",
+      "Family leadership",
+      "Teaching ability",
+      "Charisma and entertainment skills"
+    ],
+    "optionsEs": [
+      "Rasgos de carácter",
+      "Liderazgo familiar",
+      "Capacidad de enseñanza",
+      "Carisma y habilidades de entretenimiento"
+    ],
+    "c": 80,
+    "explEn": "Strikingly absent from the lists are charisma and entertainment skills — the qualifications are about character.",
+    "explEs": "Notablemente ausentes de las listas están el carisma y las habilidades de entretenimiento — las cualificaciones son de carácter."
+  },
+  {
+    "textEn": "10. The ermine illustration teaches that:",
+    "textEs": "10. La ilustración del armiño enseña que:",
+    "optionsEn": [
+      "Animals are smarter than people",
+      "Appearance matters most",
+      "Character will not compromise even at the cost of life",
+      "Hunters always win"
+    ],
+    "optionsEs": [
+      "Los animales son más inteligentes que las personas",
+      "La apariencia importa más",
+      "El carácter no transige aun al costo de la vida",
+      "Los cazadores siempre ganan"
+    ],
+    "c": 86,
+    "explEn": "The ermine, which faces death rather than soil its coat, pictures character that will not compromise.",
+    "explEs": "El armiño, que enfrenta la muerte antes que ensuciar su pelaje, retrata el carácter que no transige."
+  },
+  {
+    "textEn": "11. Tetzel's selling of indulgences inspired:",
+    "textEs": "11. La venta de indulgencias por Tetzel inspiró:",
+    "optionsEn": [
+      "The Crusades",
+      "Martin Luther's 95 Theses",
+      "The Council of Trent",
+      "The founding of the Jesuits"
+    ],
+    "optionsEs": [
+      "Las Cruzadas",
+      "Las 95 Tesis de Martín Lutero",
+      "El Concilio de Trento",
+      "La fundación de los Jesuitas"
+    ],
+    "c": 92,
+    "explEn": "Tetzel's sale of indulgences provoked Martin Luther's 95 Theses and the Reformation.",
+    "explEs": "La venta de indulgencias por Tetzel provocó las 95 Tesis de Martín Lutero y la Reforma."
+  },
+  {
+    "textEn": "12. Amos's plumb line vision teaches that:",
+    "textEs": "12. La visión de la plomada de Amós enseña que:",
+    "optionsEn": [
+      "God measures His people's faithfulness against the unchanging line of His Word",
+      "Amos was a builder",
+      "Amos was a carpenter",
+      "Amos traveled in straight lines"
+    ],
+    "optionsEs": [
+      "Dios mide la fidelidad de Su pueblo contra la línea inmutable de Su Palabra",
+      "Amós era constructor",
+      "Amós era carpintero",
+      "Amós viajaba en líneas rectas"
+    ],
+    "c": 98,
+    "explEn": "Amos's plumb line shows God measuring His people against the unchanging line of His Word.",
+    "explEs": "La plomada de Amós muestra a Dios midiendo a Su pueblo contra la línea inmutable de Su Palabra."
+  },
+  {
+    "textEn": "13. The hidden life of the pastor is sustained primarily by:",
+    "textEs": "13. La vida oculta del pastor se sostiene principalmente por:",
+    "optionsEn": [
+      "Public attention",
+      "Denominational politics",
+      "Spiritual disciplines",
+      "Academic conferences"
+    ],
+    "optionsEs": [
+      "Atención pública",
+      "Política denominacional",
+      "Disciplinas espirituales",
+      "Conferencias académicas"
+    ],
+    "c": 107,
+    "explEn": "The pastor's hidden life is sustained primarily by spiritual disciplines the congregation never sees.",
+    "explEs": "La vida oculta del pastor se sostiene principalmente por disciplinas espirituales que la congregación nunca ve."
+  },
+  {
+    "textEn": "14. The iceberg illustration teaches that:",
+    "textEs": "14. La ilustración del iceberg enseña que:",
+    "optionsEn": [
+      "Icebergs are dangerous",
+      "Surface winds and deep ocean currents pull in different directions; the deep currents must rule",
+      "Most icebergs are unseen",
+      "Icebergs melt slowly"
+    ],
+    "optionsEs": [
+      "Los icebergs son peligrosos",
+      "Los vientos de superficie y las corrientes profundas tiran en direcciones diferentes; las corrientes profundas deben reinar",
+      "La mayoría de los icebergs no se ven",
+      "Los icebergs se derriten lentamente"
+    ],
+    "c": 113,
+    "explEn": "The iceberg shows that deep currents, not surface winds, must rule the pastor's life.",
+    "explEs": "El iceberg muestra que las corrientes profundas, no los vientos de superficie, deben gobernar la vida del pastor."
+  },
+  {
+    "textEn": "15. According to 1 Timothy 3:4-5, family leadership is:",
+    "textEs": "15. Según 1 Timoteo 3:4-5, el liderazgo familiar es:",
+    "optionsEn": [
+      "Optional for pastors",
+      "Less important than preaching",
+      "The deacon's responsibility",
+      "The testing ground for whether a man can lead the church"
+    ],
+    "optionsEs": [
+      "Opcional para pastores",
+      "Menos importante que la predicación",
+      "Responsabilidad del diácono",
+      "El campo de prueba para saber si un hombre puede dirigir la iglesia"
+    ],
+    "c": 122,
+    "explEn": "Family leadership is the testing ground for whether a man can lead the church (1 Timothy 3:4-5).",
+    "explEs": "El liderazgo familiar es el campo de prueba de si un hombre puede dirigir la iglesia (1 Timoteo 3:4-5)."
+  },
+  {
+    "textEn": "16. The five most common pastoral wrecks are:",
+    "textEs": "16. Los cinco naufragios pastorales más comunes son:",
+    "optionsEn": [
+      "Pride, lust, money, isolation, discouragement",
+      "Poor preaching and weak prayer",
+      "Lack of education",
+      "Denominational politics"
+    ],
+    "optionsEs": [
+      "Orgullo, lujuria, dinero, aislamiento, desánimo",
+      "Predicación pobre y oración débil",
+      "Falta de educación",
+      "Política denominacional"
+    ],
+    "c": 126,
+    "explEn": "The five common pastoral wrecks are pride, lust, money, isolation, and discouragement.",
+    "explEs": "Los cinco naufragios pastorales comunes son orgullo, lujuria, dinero, aislamiento y desánimo."
+  },
+  {
+    "textEn": "17. The answer to the dark side of ministry is:",
+    "textEs": "17. La respuesta al lado oscuro del ministerio es:",
+    "optionsEn": [
+      "Honest self-examination with trusted accountability",
+      "Denial and pretense",
+      "More activity",
+      "Quitting the ministry"
+    ],
+    "optionsEs": [
+      "Auto-examen honesto con rendición de cuentas confiable",
+      "Negación y fingimiento",
+      "Más actividad",
+      "Abandonar el ministerio"
+    ],
+    "c": 133,
+    "explEn": "The answer to the dark side is honest self-examination with trusted accountability, never denial.",
+    "explEs": "La respuesta al lado oscuro es el autoexamen honesto con rendición de cuentas confiable, nunca la negación."
+  },
+  {
+    "textEn": "18. James 3:1 reminds us that teachers will receive:",
+    "textEs": "18. Santiago 3:1 nos recuerda que los maestros recibirán:",
+    "optionsEn": [
+      "Higher salaries",
+      "An easier path",
+      "Exemption from criticism",
+      "Stricter judgment"
+    ],
+    "optionsEs": [
+      "Salarios más altos",
+      "Un camino más fácil",
+      "Exención de crítica",
+      "Mayor condenación"
+    ],
+    "c": 143,
+    "explEn": "James 3:1 reminds us that those who teach will receive a stricter judgment.",
+    "explEs": "Santiago 3:1 nos recuerda que los que enseñan recibirán mayor condenación."
+  },
+  {
+    "textEn": "19. The pastor's home is described in 1 Timothy 3 as:",
+    "textEs": "19. El hogar del pastor es descrito en 1 Timoteo 3 como:",
+    "optionsEn": [
+      "An optional concern",
+      "The testing ground for church leadership",
+      "A private matter",
+      "Less important than the pulpit"
+    ],
+    "optionsEs": [
+      "Una preocupación opcional",
+      "El campo de prueba para el liderazgo de la iglesia",
+      "Un asunto privado",
+      "Menos importante que el púlpito"
+    ],
+    "c": 148,
+    "explEn": "The pastor's home is described as the testing ground for church leadership.",
+    "explEs": "El hogar del pastor se describe como el campo de prueba para el liderazgo de la iglesia."
+  },
+  {
+    "textEn": "20. The promise to the faithful pastor at the end of his ministry is:",
+    "textEs": "20. La promesa al pastor fiel al final de su ministerio es:",
+    "optionsEn": [
+      "Worldly fame",
+      "Large congregations",
+      "Denominational promotion",
+      "The crown of glory that does not fade away from the Chief Shepherd"
+    ],
+    "optionsEs": [
+      "Fama mundana",
+      "Congregaciones grandes",
+      "Promoción denominacional",
+      "La corona incorruptible de gloria del Príncipe de los pastores"
+    ],
+    "c": 157,
+    "explEn": "The faithful pastor's promise is the unfading crown of glory from the Chief Shepherd.",
+    "explEs": "La promesa al pastor fiel es la corona incorruptible de gloria del Príncipe de los pastores."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Explain why both calling and character are essential pillars for pastoral ministry. What happens when one is missing?",
+    "textEs": "21. Explique por qué tanto el llamado como el carácter son pilares esenciales del ministerio pastoral. ¿Qué sucede cuando uno falta?",
+    "kw_en": [
+      "call",
+      "character",
+      "pillar",
+      "missing",
+      "fall",
+      "both",
+      "office",
+      "sustain"
+    ],
+    "kw_es": [
+      "llam",
+      "carácter",
+      "pilar",
+      "falta",
+      "cae",
+      "ambos",
+      "oficio",
+      "sostiene"
+    ],
+    "modelEn": "Pastoral ministry stands on two pillars: the call, which is the divine summons placing a man in the office, and character, the inward life that sustains him there. Both are essential — take away either and the building falls. A man with a strong call but weak character will scandalize the gospel before he is forty; a man with strong character but no genuine call will wear himself out doing what God never asked of him. The world wants charisma and platforms, but God demands character and purity. The pulpit is no place for the unsent, and no place for the unprepared in soul.",
+    "modelEs": "El ministerio pastoral se sostiene sobre dos pilares: el llamado, que es la convocatoria divina que coloca a un hombre en el oficio, y el carácter, la vida interior que lo sostiene allí. Ambos son esenciales — quite cualquiera de los dos y el edificio cae. Un hombre con un llamado fuerte pero carácter débil escandalizará al evangelio antes de los cuarenta; un hombre con carácter fuerte pero sin un llamado genuino se agotará haciendo lo que Dios nunca le pidió. El mundo quiere carisma y plataformas, pero Dios exige carácter y pureza. El púlpito no es lugar para el no enviado, ni lugar para el no preparado en alma."
+  },
+  {
+    "textEn": "22. Compare Moses, Jeremiah, and Amos in how they responded to God's call. What lesson does this teach about God's choice of leaders?",
+    "textEs": "22. Compare a Moisés, Jeremías y Amós en cómo respondieron al llamado de Dios. ¿Qué lección enseña esto sobre la elección de líderes por parte de Dios?",
+    "kw_en": [
+      "moses",
+      "jeremiah",
+      "amos",
+      "resist",
+      "unworthy",
+      "weak",
+      "choose",
+      "grace"
+    ],
+    "kw_es": [
+      "moisés",
+      "jeremías",
+      "amós",
+      "resist",
+      "indigno",
+      "débil",
+      "escoge",
+      "gracia"
+    ],
+    "modelEn": "Moses asked 'Who am I?', Jeremiah protested 'I am a youth,' and Amos insisted he was no prophet but a herdsman — almost every man God calls in Scripture initially resists. This teaches that God does not normally choose the eager and self-confident, but the man who feels least qualified. That very sense of unworthiness is part of how God prepares a man to lean on grace rather than on himself for the rest of his ministry. The men who were quick to volunteer often failed; the ones who hesitated and felt weak lasted forty and fifty years. God's choice of leaders runs opposite to the world's, which prizes the strong and the sure.",
+    "modelEs": "Moisés preguntó '¿Quién soy yo?', Jeremías protestó 'soy niño,' y Amós insistió en que no era profeta sino boyero — casi todo hombre que Dios llama en la Escritura inicialmente resiste. Esto enseña que Dios normalmente no escoge a los entusiastas y seguros de sí mismos, sino al hombre que se siente menos calificado. Ese mismo sentido de indignidad es parte de cómo Dios prepara a un hombre para apoyarse en la gracia y no en sí mismo por el resto de su ministerio. Los hombres que se ofrecieron rápido a menudo fracasaron; los que vacilaron y se sintieron débiles duraron cuarenta y cincuenta años. La elección de líderes por parte de Dios va al revés de la del mundo, que premia al fuerte y al seguro."
+  },
+  {
+    "textEn": "23. Discuss the relationship between the internal call (the Spirit's witness) and the external call (the church's confirmation). Why must both be present?",
+    "textEs": "23. Discuta la relación entre el llamado interno (testimonio del Espíritu) y el llamado externo (confirmación de la iglesia). ¿Por qué deben estar ambos presentes?",
+    "kw_en": [
+      "internal",
+      "external",
+      "spirit",
+      "church",
+      "confirm",
+      "both",
+      "witness",
+      "affirm"
+    ],
+    "kw_es": [
+      "interno",
+      "externo",
+      "espíritu",
+      "iglesia",
+      "confirm",
+      "ambos",
+      "testimonio",
+      "afirm"
+    ],
+    "modelEn": "The internal call is the inward witness of the Spirit — a holy combination of desire, burden, and gifting that will not let a man go. The external call is the church's confirmation, when a body of mature believers recognizes and affirms what the Spirit has already begun, as in Acts 13 when Antioch laid hands on Barnabas and Saul. Both must be present, because God does not normally give the call to a man and hide it from His church. When a man feels called but no congregation, presbytery, or group of mature believers will confirm it, he should pause long and hard before insisting he is right and they are wrong. The two work together; when they do not, something is usually wrong with the man.",
+    "modelEs": "El llamado interno es el testimonio interior del Espíritu — una santa combinación de deseo, carga y don que no suelta a un hombre. El llamado externo es la confirmación de la iglesia, cuando un cuerpo de creyentes maduros reconoce y afirma lo que el Espíritu ya ha comenzado, como en Hechos 13 cuando Antioquía impuso las manos sobre Bernabé y Saulo. Ambos deben estar presentes, porque Dios normalmente no le da el llamado a un hombre y lo esconde de Su iglesia. Cuando un hombre se siente llamado pero ninguna congregación, presbiterio o grupo de creyentes maduros lo confirma, debe detenerse mucho antes de insistir en que él tiene razón y ellos están equivocados. Los dos trabajan juntos; cuando no lo hacen, usualmente algo está mal con el hombre."
+  },
+  {
+    "textEn": "24. Examine the elder qualifications in 1 Timothy 3 and Titus 1. What is striking about what is NOT on these lists?",
+    "textEs": "24. Examine las cualificaciones del anciano en 1 Timoteo 3 y Tito 1. ¿Qué es notable sobre lo que NO está en estas listas?",
+    "kw_en": [
+      "reproach",
+      "character",
+      "charisma",
+      "skill",
+      "qualif",
+      "elder",
+      "mature",
+      "absent"
+    ],
+    "kw_es": [
+      "irreprensible",
+      "carácter",
+      "carisma",
+      "habilidad",
+      "cualific",
+      "anciano",
+      "maduro",
+      "ausente"
+    ],
+    "modelEn": "The elder qualifications in 1 Timothy 3 and Titus 1 are gathered under one umbrella phrase: above reproach. What is striking is what is absent from the lists — nothing about charisma, nothing about being entertaining, nothing about a degree, nothing about being a great speaker or having church-growth strategies. Almost every qualification is about character, not skill: the man's marriage, money, speech, temper, and reputation brought under the lordship of Christ. The biblical qualifications are essentially the marks of a grown-up Christian. This rebukes a modern church culture that hires for talent and platform while assuming character will sort itself out.",
+    "modelEs": "Las cualificaciones del anciano en 1 Timoteo 3 y Tito 1 se reúnen bajo una frase paraguas: irreprensible. Lo notable es lo que está ausente de las listas — nada sobre carisma, nada sobre ser entretenido, nada sobre un título, nada sobre ser un gran orador o tener estrategias de crecimiento. Casi toda cualificación es sobre carácter, no habilidad: el matrimonio del hombre, su dinero, su palabra, su temperamento y su reputación puestos bajo el señorío de Cristo. Las cualificaciones bíblicas son esencialmente las marcas de un cristiano maduro. Esto reprende a una cultura eclesial moderna que contrata por talento y plataforma asumiendo que el carácter se arreglará solo."
+  },
+  {
+    "textEn": "25. Apply the ermine illustration to pastoral character. What does it teach about compromise and integrity?",
+    "textEs": "25. Aplique la ilustración del armiño al carácter pastoral. ¿Qué enseña sobre el compromiso y la integridad?",
+    "kw_en": [
+      "ermine",
+      "character",
+      "compromise",
+      "integrity",
+      "clean",
+      "cost",
+      "refuse",
+      "value"
+    ],
+    "kw_es": [
+      "armiño",
+      "carácter",
+      "compromiso",
+      "integridad",
+      "limpio",
+      "costo",
+      "rehúsa",
+      "valor"
+    ],
+    "modelEn": "The ermine is a small white animal that values the cleanness of its coat above its own life; hunters smear its den with dirt, and rather than enter the filth to escape the dogs, the ermine turns and faces death. That is a parable of pastoral character: the man called to this office must value the cleanness of his life more than his own comfort, safety, or preferences. There is a place he will not go, a thing he will not say, a profit he will not take, a flattery he will not accept — even if refusing costs him dearly. Character is exactly this refusal to compromise integrity for advantage. The white coat is worth more than the easy escape.",
+    "modelEs": "El armiño es un pequeño animal blanco que valora la limpieza de su pelaje por encima de su propia vida; los cazadores ensucian su guarida con lodo, y antes que entrar en la suciedad para escapar de los perros, el armiño se vuelve y enfrenta la muerte. Esa es una parábola del carácter pastoral: el hombre llamado a este oficio debe valorar la limpieza de su vida más que su propia comodidad, seguridad o preferencias. Hay un lugar a donde no irá, una cosa que no dirá, una ganancia que no tomará, una adulación que no aceptará — aunque rehusarlo le cueste caro. El carácter es exactamente este rechazo a comprometer la integridad por ventaja. El pelaje blanco vale más que el escape fácil."
+  },
+  {
+    "textEn": "26. Why is Amos's plumb line a fitting symbol for pastoral accountability? How should pastors apply this image to their lives?",
+    "textEs": "26. ¿Por qué es la plomada de Amós un símbolo adecuado de la rendición de cuentas pastoral? ¿Cómo deben los pastores aplicar esta imagen a sus vidas?",
+    "kw_en": [
+      "plumb",
+      "amos",
+      "measure",
+      "word",
+      "account",
+      "straight",
+      "unchang",
+      "vertical"
+    ],
+    "kw_es": [
+      "plomada",
+      "amós",
+      "medir",
+      "palabra",
+      "cuenta",
+      "recto",
+      "inmutable",
+      "vertical"
+    ],
+    "modelEn": "Amos saw the Lord standing on a wall with a plumb line in His hand — a weighted string builders use to find true vertical. A plumb line does not bend to the carpenter's whim or adjust to fashion; it hangs true, and all the work must line up with it. God said He was setting a plumb line in the midst of His people, and that is a fitting symbol for pastoral accountability. The pastor lives under the plumb line, measuring himself, his marriage, his money, his speech, his preaching, and his motives against the unchanging line of God's Word. The man who refuses to measure himself by it will eventually build a crooked life; the man who lives under it builds a life that lasts.",
+    "modelEs": "Amós vio al Señor de pie sobre un muro con una plomada en Su mano — un cordel con peso que los albañiles usan para hallar la vertical exacta. Una plomada no se dobla al capricho del carpintero ni se ajusta a la moda; cuelga verdadera, y toda la obra debe alinearse con ella. Dios dijo que ponía una plomada en medio de Su pueblo, y ese es un símbolo adecuado de la rendición de cuentas pastoral. El pastor vive bajo la plomada, midiéndose a sí mismo, su matrimonio, su dinero, su palabra, su predicación y sus motivos contra la línea inmutable de la Palabra de Dios. El hombre que rehúsa medirse por ella eventualmente edificará una vida torcida; el que vive bajo ella edifica una vida que dura."
+  },
+  {
+    "textEn": "27. Discuss the iceberg illustration: surface winds versus deep ocean currents. How does this apply to the pastor's hidden spiritual disciplines?",
+    "textEs": "27. Discuta la ilustración del iceberg: vientos de superficie versus corrientes oceánicas profundas. ¿Cómo se aplica esto a las disciplinas espirituales ocultas del pastor?",
+    "kw_en": [
+      "iceberg",
+      "surface",
+      "deep",
+      "current",
+      "discipline",
+      "hidden",
+      "wind",
+      "anchor"
+    ],
+    "kw_es": [
+      "iceberg",
+      "superficie",
+      "profund",
+      "corriente",
+      "disciplina",
+      "oculto",
+      "viento",
+      "ancla"
+    ],
+    "modelEn": "Icebergs are pulled by two forces: surface winds that push the small ones around, and deep ocean currents that carry the great masses steadily, even against the wind. The pastor's life is subject to the same two forces — the surface winds are the criticism, the unexpected funeral, the deacon who quit, the donor who left; the deep current is the unchanging purpose and love of God. When a pastor is carried by the deep current, the surface winds do not throw him off course; when he is moved only by the surface, every storm sends him sideways. Hidden spiritual disciplines — the daily Word, private prayer, Sabbath rest, accountability, self-examination, and confession — are how a man drops his anchor into the deep current. The congregation never sees them, but they are what keep him steady over thirty years.",
+    "modelEs": "Los icebergs son arrastrados por dos fuerzas: los vientos de superficie que empujan a los pequeños, y las corrientes oceánicas profundas que llevan las grandes masas con firmeza, aun contra el viento. La vida del pastor está sujeta a las mismas dos fuerzas — los vientos de superficie son la crítica, el funeral inesperado, el diácono que renunció, el donante que se fue; la corriente profunda es el propósito y el amor inmutable de Dios. Cuando un pastor es llevado por la corriente profunda, los vientos de superficie no lo desvían; cuando es movido solo por la superficie, cada tormenta lo lanza de lado. Las disciplinas espirituales ocultas — la Palabra diaria, la oración privada, el descanso sabático, la rendición de cuentas, el autoexamen y la confesión — son cómo un hombre echa su ancla en la corriente profunda. La congregación nunca las ve, pero son lo que lo mantiene estable durante treinta años."
+  },
+  {
+    "textEn": "28. Explain why the pastor's family is the testing ground for his church leadership (1 Timothy 3:4-5). What practical wisdom flows from this?",
+    "textEs": "28. Explique por qué la familia del pastor es el campo de prueba para su liderazgo en la iglesia (1 Timoteo 3:4-5). ¿Qué sabiduría práctica fluye de esto?",
+    "kw_en": [
+      "family",
+      "home",
+      "testing",
+      "lead",
+      "church",
+      "present",
+      "wife",
+      "children"
+    ],
+    "kw_es": [
+      "familia",
+      "hogar",
+      "prueba",
+      "dirig",
+      "iglesia",
+      "presente",
+      "esposa",
+      "hijos"
+    ],
+    "modelEn": "Paul ties family leadership to church leadership: if a man does not know how to rule his own house, how will he take care of the church of God? The home is the testing ground — whatever a man cannot do at his own kitchen table, he cannot do in the pulpit either, and whatever spiritual leadership is missing from the dinner conversation will eventually be missing from the morning service. This is not a demand for perfect children, since they grow up and make their own choices; the point is faithfulness of function, not perfection of outcome. Is the pastor present in his home, leading his wife in love, discipling his children in the truth? The practical wisdom is to protect family rhythms — date nights, family meals, real vacations, a weekly day off — because ministry never lacks for 'emergencies,' most of which are not emergencies at all.",
+    "modelEs": "Pablo ata el liderazgo familiar al liderazgo eclesial: si un hombre no sabe gobernar su propia casa, ¿cómo cuidará de la iglesia de Dios? El hogar es el campo de prueba — lo que un hombre no puede hacer en su propia mesa de cocina, tampoco puede hacerlo en el púlpito, y cualquier liderazgo espiritual que falte en la conversación de la cena eventualmente faltará en el servicio de la mañana. Esto no es una exigencia de hijos perfectos, pues crecen y toman sus propias decisiones; el punto es la fidelidad de la función, no la perfección del resultado. ¿Está el pastor presente en su hogar, dirigiendo a su esposa en amor, discipulando a sus hijos en la verdad? La sabiduría práctica es proteger los ritmos familiares — citas, comidas familiares, vacaciones reales, un día libre semanal — porque el ministerio nunca carece de 'emergencias,' la mayoría de las cuales no son emergencias en absoluto."
+  },
+  {
+    "textEn": "29. Identify the five great wrecks of pastoral ministry and explain how each one operates. What is the antidote?",
+    "textEs": "29. Identifique los cinco grandes naufragios del ministerio pastoral y explique cómo opera cada uno. ¿Cuál es el antídoto?",
+    "kw_en": [
+      "pride",
+      "lust",
+      "money",
+      "isolation",
+      "discourage",
+      "wreck",
+      "account",
+      "antidote"
+    ],
+    "kw_es": [
+      "orgullo",
+      "lujuria",
+      "dinero",
+      "aislamiento",
+      "desánimo",
+      "naufragio",
+      "cuenta",
+      "antídoto"
+    ],
+    "modelEn": "The five great wrecks of pastoral ministry are nearly always the same: pride, lust, money, isolation, and discouragement. Pride whispers that the man is now too successful to need accountability. Lust finds its ground in long hours, the emotional intimacy of counseling, and the easy access of digital temptation. Money corrupts when the salary or the praise of donors begins to shape the preaching. Isolation is the soil in which all the others grow — the pastor with no peers and no one to speak truth to him is one bad decision from disaster. Discouragement is the slow erosion of small Sundays and members who leave. The antidote to all five is honest, regular, ruthless self-examination before the Lord with one or two trusted brothers who know the dark places and pray about them by name.",
+    "modelEs": "Los cinco grandes naufragios del ministerio pastoral son casi siempre los mismos: orgullo, lujuria, dinero, aislamiento y desánimo. El orgullo susurra que el hombre ahora es demasiado exitoso para necesitar rendición de cuentas. La lujuria encuentra su terreno en las largas horas, la intimidad emocional de la consejería y el fácil acceso de la tentación digital. El dinero corrompe cuando el salario o el elogio de los donantes empieza a moldear la predicación. El aislamiento es el suelo en el que crecen todos los demás — el pastor sin pares y sin nadie que le hable verdad está a una mala decisión del desastre. El desánimo es la erosión lenta de domingos pequeños y miembros que se van. El antídoto a los cinco es un autoexamen honesto, regular y despiadado delante del Señor con uno o dos hermanos de confianza que conozcan los lugares oscuros y oren por ellos por nombre."
+  },
+  {
+    "textEn": "30. Synthesize the entire unit: How does the convergence of true calling and proven character produce a faithful, lasting pastoral ministry?",
+    "textEs": "30. Sintetice toda la unidad: ¿Cómo produce la convergencia del llamado verdadero y el carácter probado un ministerio pastoral fiel y duradero?",
+    "kw_en": [
+      "call",
+      "character",
+      "faithful",
+      "last",
+      "pillar",
+      "discipline",
+      "shepherd",
+      "endure"
+    ],
+    "kw_es": [
+      "llam",
+      "carácter",
+      "fiel",
+      "dura",
+      "pilar",
+      "disciplina",
+      "pastor",
+      "perdura"
+    ],
+    "modelEn": "Calling and character are the two pillars, and a faithful, lasting pastoral ministry is produced when both converge in one man. The call gives him the right to be in the office and the authority to do the work; the character gives him the inward life to sustain it through decades of storms. Most pastoral disasters are not failures of strategy but failures of one of these two foundations — a man stepped in without a real call and burned out, or without real character and crashed. The man who has both will outlast the storms, kept by hidden disciplines that anchor him in the deep current of God's purposes. When the Chief Shepherd appears, the faithful undershepherd who guarded both pillars will receive the crown of glory that does not fade away.",
+    "modelEs": "El llamado y el carácter son los dos pilares, y un ministerio pastoral fiel y duradero se produce cuando ambos convergen en un solo hombre. El llamado le da el derecho de estar en el oficio y la autoridad para hacer la obra; el carácter le da la vida interior para sostenerlo a través de décadas de tormentas. La mayoría de los desastres pastorales no son fallas de estrategia sino fallas de uno de estos dos fundamentos — un hombre entró sin un llamado real y se quemó, o sin carácter real y se estrelló. El hombre que tiene ambos sobrevivirá las tormentas, guardado por disciplinas ocultas que lo anclan en la corriente profunda de los propósitos de Dios. Cuando aparezca el Príncipe de los pastores, el subpastor fiel que guardó ambos pilares recibirá la corona incorruptible de gloria."
+  }
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit2 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_pm_u2_mc_passed';
+const SA_LOCK_KEY = 'cts_pm_u2_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_pm_u2_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(normalize(ans), kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 3 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first on Unit 1." : "Por favor regístrese primero en la Unidad 1.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'cert';
+    let total, score, required, mcGatePass, saGatePass;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let correctKW = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+        required = null;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit2 = true;
+                localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_pm_u2_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit2 = true;
+        localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_pm_u2_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_pm_u2_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        renderQuestions();
+    };
+});
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 2 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPMReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

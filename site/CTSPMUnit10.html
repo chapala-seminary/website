@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pastoral Ministries — Unit 10: The Pastor and Evangelism</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-warning { background: #fae8e8; border: 1px solid #efc2c2; border-radius: 12px; padding: 15px; margin-bottom: 20px; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Unit 9</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 11 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Pastoral Ministries — Unit 10: The Pastor and Evangelism</span><span class="lang-es">📖 Ministerios Pastorales — Unidad 10: El Pastor y el Evangelismo</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"But you be watchful in all things, endure afflictions, do the work of an evangelist, fulfill your ministry." — 2 Timothy 4:5 (NKJV)</span><span class="lang-es">"Pero tú sé sobrio en todo, soporta las aflicciones, haz obra de evangelista, cumple tu ministerio." — 2 Timoteo 4:5 (RVG)</span></p>
+</div>
+
+<div id="regWarning" class="reg-warning" style="display:none;">
+    <span class="lang-en">⚠️ You have not yet registered. Please <a href="CTSPMUnit1.html" style="color:#5b3a1f;">return to Unit 1</a> to register before continuing.</span>
+    <span class="lang-es">⚠️ Aún no se ha registrado. Por favor <a href="CTSPMUnit1.html" style="color:#5b3a1f;">regrese a la Unidad 1</a> para registrarse antes de continuar.</span>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>A church without evangelism is a church on the way to extinction. It may have programs, beautiful music, polished preaching, full committees, and a healthy budget — and within forty years it will be empty, because no church survives that does not reproduce itself. Reproduction in the body of Christ happens through evangelism. The lost are saved. The new believers grow. They reach others. The cycle repeats. When the cycle stops, the church dies.</p>
+
+        <p>The pastor is not solely responsible for the evangelistic life of his congregation, but he is the principal driver of it. As the pastor goes, so goes the church. A pastor who does not personally evangelize cannot lead a church that does. A pastor whose heart breaks over lost people will lead a congregation whose heart breaks over lost people. This unit examines the pastor's role in evangelism — his own personal witness, the simple methods he can teach his people, the public invitation in the Sunday service, the discipling of new converts, and the spirit of the soul winner that must mark his life.</p>
+
+        <h2>I. The Pastor Must Be Personally Evangelistic</h2>
+        <p>Paul's charge to Timothy near the end of his life included a permanent instruction: <em>"Do the work of an evangelist, fulfill your ministry"</em> (2 Timothy 4:5). Notice the phrasing. Timothy was a pastor. Yet Paul charged him with the work of an evangelist. The two callings are not separate. The faithful pastor is also a faithful evangelist.</p>
+
+        <p>This is one of the easiest ministries for a busy pastor to neglect. The sermons must be written. The visits must be made. The meetings must be attended. The counseling appointments fill the calendar. Before he knows it, the pastor has gone six months without sitting down with a lost person and explaining the gospel. His preaching grows more and more inward. His prayer life becomes a series of requests for the saints. His vision shrinks to the four walls of the church.</p>
+
+        <p>The pastor must guard against this. He must build into his weekly rhythm time for relationships with people outside the church — neighbors, business contacts, parents from his children's school, men in the gym, the people who serve him coffee. He does not have to be obnoxious or pushy. He simply has to be present, friendly, available, and willing to speak of Christ when the conversation opens. Romans 1:16 is the pastor's anchor here: <em>"For I am not ashamed of the gospel of Christ, for it is the power of God to salvation for everyone who believes."</em></p>
+
+        <h2>II. Three Simple Methods Every Pastor Can Practice and Teach</h2>
+        <p>Most Christians do not share their faith because they think evangelism requires skills they do not have. They picture themselves on a doorstep with a tract pressed into a stranger's hand, expected to argue someone into the kingdom of God in five minutes. That is not what evangelism is, and the faithful pastor must demonstrate and teach methods that ordinary believers can actually use.</p>
+
+        <p>There are three simple methods that almost every Christian — including the pastor — can practice without fear.</p>
+
+        <p><em>The first is the invitation to church.</em> The Samaritan woman at the well in John 4 did not have a theological education. She did not have a memorized gospel presentation. What she had was a personal experience of Jesus and the courage to go back to her town and say, <em>"Come, see a Man who told me all things that I ever did. Could this be the Christ?"</em> (John 4:29). The whole town came out to meet Him. When I meet people in everyday situations — at a restaurant, in a store, at a community event — I will often introduce myself and then simply invite them to come worship with us. There is nothing threatening about that. There is no argument involved. It is a simple, friendly invitation. Some say no. Some say yes. Some say no the first time and yes the third time. The invitation is itself a planted seed.</p>
+
+        <p><em>The second is the testimony.</em> Every Christian has a story of how Christ has made a difference in his life. The story does not need to be dramatic. It does not need to involve a sudden conversion from a life of crime. It only needs to be honest. <em>"This is what I was. This is what Christ did. This is what I am now."</em> The blind man healed by Jesus in John 9 was challenged by hostile religious leaders to explain the theology of his healing. He answered with one of the simplest and most powerful testimonies in Scripture: <em>"One thing I know: that though I was blind, now I see"</em> (John 9:25). A pastor who teaches his people to share that kind of personal testimony has equipped them for a lifetime of evangelism.</p>
+
+        <p><em>The third is the gospel tract.</em> A good tract is essentially a written, portable gospel presentation. The believer who is nervous about explaining the gospel in his own words can hand a tract to a friend and say, <em>"Would you read this with me?"</em> Many tracts contain at the end a simple invitation prayer. The believer can ask, <em>"Is there any reason you would not want to receive Christ right now?"</em> If the person says no, they pray together. If the person says yes, the door is opened for further conversation. The tract has done what the believer felt unable to do on his own.</p>
+
+        <p>The pastor who teaches and models these three simple methods will multiply the evangelistic capacity of his congregation many times over. Personal evangelism stops being something only a few gifted believers do. It becomes something every believer can do, this week, with the next person they encounter.</p>
+
+        <h2>III. A Message to Carry</h2>
+        <p>There is an old true story from the Spanish-American War that captures the spirit of an evangelist. The American president needed to get a message to General Calixto García, who was leading insurgent forces somewhere in the mountains of Cuba. Nobody knew exactly where García was. A young army officer named Andrew Rowan was given the task. Rowan took the letter, strapped it over his heart in an oilskin pouch, landed by night off the coast of Cuba, disappeared into the jungle, and three weeks later came out the other side having delivered the message to García. Hubbard's essay about the incident — <em>"A Message to Garcia"</em> — became one of the most widely circulated American works of the early twentieth century, because it captured the kind of single-minded determination the world rarely sees.</p>
+
+        <p>The Christian has a message to carry. It is the gospel of Jesus Christ. It is more important than any military communiqué. The lost are not in some distant Cuban jungle; they are in our neighborhoods, our workplaces, our families. The pastor with the spirit of Rowan will not let obstacles stop him. He will not let the discomfort of asking spiritual questions stop him. He will not let the busyness of church administration crowd out the evangelistic conversations he is supposed to be having. He carries the message because somebody has to, and the Lord has put it in his hand.</p>
+
+        <h2>IV. The Pastor as Multiplier</h2>
+        <p>The pastor cannot evangelize a city by himself. Even the most gifted personal evangelist will reach only a few people in any given week. The pastor's larger evangelistic strategy is to lead the church into mission so that hundreds of believers, taught and equipped, are doing the work alongside him.</p>
+
+        <p>This means several practical things. The pastor <em>preaches</em> evangelism — not as guilt-trips, but as the joyful overflow of the gospel. He <em>trains</em> his members in the simple methods. He celebrates conversions publicly when they come. He keeps the Great Commission visible in the church's prayers, calendar, and budget. He builds outreach ministries — Vacation Bible School, community events, evangelistic services, mission trips — that give members of every age a structured way to share their faith.</p>
+
+        <p>A church without an evangelistic culture has lost something central to its identity. The earliest believers were not even called Christians at first. They were called <em>"the Way"</em> (Acts 9:2; John 14:6). They were the people who knew the way to the Father through Jesus Christ, and they were known for showing others the way. Every faithful pastor must labor to recover that name for his people.</p>
+
+        <h2>V. The Sunday Invitation</h2>
+        <p>Many pastors face a question that older generations did not face: should the Sunday service include a public invitation? In some traditions the answer has always been yes. In others the practice has fallen out of fashion. The faithful pastor must think this through biblically rather than fashionably.</p>
+
+        <p>Scripture is full of public invitations. Joshua at the end of his life called Israel together and said, <em>"Choose for yourselves this day whom you will serve... but as for me and my house, we will serve the Lord"</em> (Joshua 24:15). Elijah on Mount Carmel called Israel to choose between the Lord and Baal. Peter at Pentecost preached and then <em>"with many other words he testified and exhorted them, saying, 'Be saved from this perverse generation'"</em> (Acts 2:40). The Bible knows nothing of preaching that does not call for a response.</p>
+
+        <p>The form the invitation takes will vary by congregation. In some churches it is a public coming forward at the end of the service. In others it is a quiet bowing of the head and a raised hand, with private follow-up afterward. In others it is a card the visitor checks marking interest in salvation, baptism, or membership. The form is secondary. The principle is primary: <em>the gospel proclaimed must include a call to respond.</em></p>
+
+        <p>The pastor must be careful never to manipulate the invitation. He must not use emotional pressure, repeated verses of the closing hymn, or psychological tactics to produce decisions that are not real. The Holy Spirit converts; the pastor merely calls. But the pastor must call. To preach the gospel and then simply send people home is to leave the work unfinished.</p>
+
+        <h2>VI. Discipling the New Convert</h2>
+        <p>The moment of decision is the beginning, not the end. A new believer who is not discipled is a candidate for a faith that fades within months. The pastor's responsibility extends past the invitation. He must have a system in place for what happens next.</p>
+
+        <p>Most healthy churches have some form of new-believer follow-up. A trained member meets with the new convert that week. A simple Bible study walks them through the basics of the faith — assurance of salvation, prayer, Bible reading, the church, baptism. They are encouraged into baptism as soon as they are ready. They are connected to a small group, a Sunday school class, a discipler. They are introduced to people their own age and stage in life.</p>
+
+        <p>This connects directly to Unit 7. Evangelism without discipleship leaves spiritual infants behind. Discipleship without evangelism produces beautifully mature believers who never see anyone come to Christ. The faithful pastor refuses to choose between the two. He pours himself into both.</p>
+
+        <h2>VII. The Pastor's Soul-Winner Spirit</h2>
+        <p>There is a spirit that marks the evangelistic pastor, and it is recognizable from across a room. He genuinely loves lost people. He prays for them by name. He talks about them when he is at home with his wife. He weeps over them in his study. He sees them not as projects but as people God loves. That spirit cannot be faked, and it cannot be neglected. It must be cultivated.</p>
+
+        <p>The cultivation happens through prayer, Scripture, and the regular discipline of sitting with lost people. A pastor who has not had a real conversation with a non-believer in three months will, despite his best intentions, lose that spirit. His sermons will become abstract. His prayers will become routine. His evangelistic appeals from the pulpit will sound rehearsed because they will be rehearsed.</p>
+
+        <p>A pastor who is regularly with lost people, who is praying for them, who is pleading with God for their salvation — that pastor will preach with fire. His invitations will land with weight. His congregation will feel the urgency that he feels. They will catch from him the heart of the Lord who came <em>"to seek and to save that which was lost"</em> (Luke 19:10).</p>
+
+        <h2>Closing</h2>
+        <p>The pastor is, in Paul's language, an ambassador for Christ. Second Corinthians 5:20 puts it permanently: <em>"Now then, we are ambassadors for Christ, as though God were pleading through us: we implore you on Christ's behalf, be reconciled to God."</em> That word <em>ambassador</em> means a person who represents another, who speaks for another, who carries the authority of the one who sent him. The pastor stands in his community as Christ's ambassador. His invitation to the gospel is not his own; it is Christ's, through him.</p>
+
+        <p>When the pastor lives this way for a lifetime — personally evangelizing, equipping his people, calling for response from the pulpit, discipling new believers, walking with the soul-winner's spirit — the result is a church that grows for the right reasons. People come to Christ. New disciples are formed. The kingdom of God advances in that town. And the pastor, when he stands one day before the Chief Shepherd, will hear the words every faithful evangelist longs to hear: <em>"Well done, good and faithful servant... Enter into the joy of your lord"</em> (Matthew 25:21).</p>
+
+        <p><em>"How then shall they call on Him in whom they have not believed? And how shall they believe in Him of whom they have not heard? And how shall they hear without a preacher? And how shall they preach unless they are sent? As it is written: 'How beautiful are the feet of those who preach the gospel of peace, who bring glad tidings of good things!'"</em> (Romans 10:14–15).</p>
+
+        <p>May every pastor reading this commit afresh to do the work of an evangelist, to lead his church into mission, and to fulfill his ministry until the day Christ returns or calls him home.</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>Una iglesia sin evangelismo es una iglesia en camino a la extinción. Puede tener programas, música hermosa, predicación pulida, comités completos, y un presupuesto saludable — y dentro de cuarenta años estará vacía, porque ninguna iglesia sobrevive si no se reproduce. La reproducción en el cuerpo de Cristo sucede a través del evangelismo. Los perdidos son salvos. Los nuevos creyentes crecen. Alcanzan a otros. El ciclo se repite. Cuando el ciclo se detiene, la iglesia muere.</p>
+
+        <p>El pastor no es el único responsable de la vida evangelística de su congregación, pero es el conductor principal de ella. Como va el pastor, así va la iglesia. Un pastor que no evangeliza personalmente no puede dirigir una iglesia que sí lo hace. Un pastor cuyo corazón se rompe por las personas perdidas dirigirá una congregación cuyo corazón se rompe por las personas perdidas. Esta unidad examina el papel del pastor en el evangelismo — su propio testimonio personal, los métodos sencillos que puede enseñar a su gente, la invitación pública en el servicio dominical, el discipulado de nuevos convertidos, y el espíritu del ganador de almas que debe marcar su vida.</p>
+
+        <h2>I. El pastor debe ser personalmente evangelístico</h2>
+        <p>El encargo de Pablo a Timoteo cerca del final de su vida incluyó una instrucción permanente: <em>"Haz obra de evangelista, cumple tu ministerio"</em> (2 Timoteo 4:5). Note la frase. Timoteo era pastor. Sin embargo Pablo lo encargó con la obra de un evangelista. Los dos llamados no están separados. El pastor fiel es también un evangelista fiel.</p>
+
+        <p>Este es uno de los ministerios más fáciles de descuidar para un pastor ocupado. Hay que escribir los sermones. Hay que hacer las visitas. Hay que asistir a las reuniones. Las citas de consejería llenan el calendario. Antes de que se dé cuenta, el pastor ha pasado seis meses sin sentarse con una persona perdida y explicarle el evangelio. Su predicación se vuelve cada vez más interna. Su vida de oración se convierte en una serie de peticiones por los santos. Su visión se reduce a las cuatro paredes de la iglesia.</p>
+
+        <p>El pastor debe guardarse contra esto. Debe construir en su ritmo semanal tiempo para relaciones con personas afuera de la iglesia — vecinos, contactos de negocios, padres de la escuela de sus hijos, hombres en el gimnasio, las personas que le sirven el café. No tiene que ser obvio o agresivo. Simplemente tiene que estar presente, ser amistoso, estar disponible, y estar dispuesto a hablar de Cristo cuando la conversación se abra. Romanos 1:16 es el ancla del pastor aquí: <em>"Porque no me avergüenzo del evangelio de Cristo; porque es el poder de Dios para salvación a todo aquel que cree."</em></p>
+
+        <h2>II. Tres métodos sencillos que todo pastor puede practicar y enseñar</h2>
+        <p>La mayoría de los cristianos no comparten su fe porque piensan que el evangelismo requiere habilidades que no tienen. Se imaginan a sí mismos en una puerta con un tratado presionado en la mano de un extraño, esperados a discutir a alguien hacia el reino de Dios en cinco minutos. Eso no es evangelismo, y el pastor fiel debe demostrar y enseñar métodos que los creyentes ordinarios realmente puedan usar.</p>
+
+        <p>Hay tres métodos sencillos que casi todo cristiano — incluyendo al pastor — puede practicar sin temor.</p>
+
+        <p><em>El primero es la invitación a la iglesia.</em> La mujer samaritana en el pozo de Juan 4 no tenía educación teológica. No tenía una presentación memorizada del evangelio. Lo que tenía era una experiencia personal con Jesús y el valor para regresar a su pueblo y decir, <em>"Venid, ved a un hombre que me ha dicho todo cuanto he hecho. ¿No será éste el Cristo?"</em> (Juan 4:29). Todo el pueblo salió a encontrarlo. Cuando me encuentro con personas en situaciones cotidianas — en un restaurante, en una tienda, en un evento comunitario — a menudo me presentaré y luego simplemente los invitaré a venir a adorar con nosotros. No hay nada amenazante en eso. No hay argumento involucrado. Es una invitación simple, amistosa. Algunos dicen no. Algunos dicen sí. Algunos dicen no la primera vez y sí la tercera vez. La invitación es en sí misma una semilla plantada.</p>
+
+        <p><em>El segundo es el testimonio.</em> Cada cristiano tiene una historia de cómo Cristo ha hecho una diferencia en su vida. La historia no necesita ser dramática. No necesita involucrar una conversión repentina de una vida de crimen. Solo necesita ser honesta. <em>"Esto es lo que era. Esto es lo que Cristo hizo. Esto es lo que soy ahora."</em> El ciego sanado por Jesús en Juan 9 fue desafiado por líderes religiosos hostiles a explicar la teología de su sanidad. Él respondió con uno de los testimonios más simples y poderosos en la Escritura: <em>"Una cosa sé: que habiendo yo sido ciego, ahora veo"</em> (Juan 9:25). Un pastor que enseña a su gente a compartir esa clase de testimonio personal los ha equipado para toda una vida de evangelismo.</p>
+
+        <p><em>El tercero es el tratado evangelístico.</em> Un buen tratado es esencialmente una presentación escrita y portátil del evangelio. El creyente que está nervioso de explicar el evangelio en sus propias palabras puede entregar un tratado a un amigo y decir, <em>"¿Lo leería conmigo?"</em> Muchos tratados contienen al final una oración sencilla de invitación. El creyente puede preguntar, <em>"¿Hay alguna razón por la que no querría recibir a Cristo ahora mismo?"</em> Si la persona dice no, oran juntos. Si la persona dice sí, la puerta se abre para más conversación. El tratado ha hecho lo que el creyente sintió que no podía hacer por su cuenta.</p>
+
+        <p>El pastor que enseña y modela estos tres métodos sencillos multiplicará la capacidad evangelística de su congregación muchas veces. El evangelismo personal deja de ser algo que solo unos pocos creyentes dotados hacen. Se convierte en algo que cada creyente puede hacer, esta semana, con la próxima persona que encuentre.</p>
+
+        <h2>III. Un mensaje para llevar</h2>
+        <p>Hay una vieja historia verdadera de la Guerra Hispano-Estadounidense que captura el espíritu de un evangelista. El presidente americano necesitaba llevar un mensaje al General Calixto García, quien estaba dirigiendo fuerzas insurgentes en algún lugar en las montañas de Cuba. Nadie sabía exactamente dónde estaba García. Un joven oficial del ejército llamado Andrew Rowan recibió la tarea. Rowan tomó la carta, la ató sobre su corazón en una bolsa de hule, desembarcó de noche en la costa de Cuba, desapareció en la selva, y tres semanas después salió por el otro lado habiendo entregado el mensaje a García. El ensayo de Hubbard sobre el incidente — <em>"Un Mensaje para García"</em> — se convirtió en una de las obras americanas más ampliamente circuladas de principios del siglo veinte, porque capturó la clase de determinación de mente única que el mundo raramente ve.</p>
+
+        <p>El cristiano tiene un mensaje para llevar. Es el evangelio de Jesucristo. Es más importante que cualquier comunicado militar. Los perdidos no están en alguna selva cubana distante; están en nuestros vecindarios, nuestros lugares de trabajo, nuestras familias. El pastor con el espíritu de Rowan no permitirá que los obstáculos lo detengan. No permitirá que la incomodidad de hacer preguntas espirituales lo detenga. No permitirá que la ocupación de la administración de la iglesia desplace las conversaciones evangelísticas que se supone que debe estar teniendo. Lleva el mensaje porque alguien tiene que hacerlo, y el Señor lo ha puesto en su mano.</p>
+
+        <h2>IV. El pastor como multiplicador</h2>
+        <p>El pastor no puede evangelizar una ciudad por sí mismo. Aun el más dotado evangelista personal alcanzará solo a unas pocas personas en cualquier semana dada. La estrategia evangelística más grande del pastor es dirigir a la iglesia hacia la misión para que cientos de creyentes, enseñados y equipados, estén haciendo la obra junto a él.</p>
+
+        <p>Esto significa varias cosas prácticas. El pastor <em>predica</em> evangelismo — no como sentimientos de culpa, sino como el desbordamiento gozoso del evangelio. <em>Entrena</em> a sus miembros en los métodos sencillos. Celebra las conversiones públicamente cuando vienen. Mantiene la Gran Comisión visible en las oraciones, calendario, y presupuesto de la iglesia. Edifica ministerios de alcance — Escuela Bíblica de Vacaciones, eventos comunitarios, servicios evangelísticos, viajes misioneros — que dan a los miembros de cada edad una manera estructurada de compartir su fe.</p>
+
+        <p>Una iglesia sin una cultura evangelística ha perdido algo central a su identidad. Los primeros creyentes no fueron llamados cristianos al principio. Fueron llamados <em>"el Camino"</em> (Hechos 9:2; Juan 14:6). Eran las personas que conocían el camino al Padre a través de Jesucristo, y eran conocidos por mostrar a otros el camino. Cada pastor fiel debe trabajar para recuperar ese nombre para su gente.</p>
+
+        <h2>V. La invitación dominical</h2>
+        <p>Muchos pastores enfrentan una pregunta que las generaciones mayores no enfrentaron: ¿debe el servicio dominical incluir una invitación pública? En algunas tradiciones la respuesta siempre ha sido sí. En otras la práctica ha caído fuera de moda. El pastor fiel debe pensar esto bíblicamente en lugar de a la moda.</p>
+
+        <p>La Escritura está llena de invitaciones públicas. Josué al final de su vida llamó a Israel y dijo, <em>"Escogeos hoy a quién sirváis... pero yo y mi casa serviremos a Jehová"</em> (Josué 24:15). Elías en el Monte Carmelo llamó a Israel a escoger entre el Señor y Baal. Pedro en Pentecostés predicó y luego <em>"con otras muchas palabras testificaba y exhortaba, diciendo: Sed salvos de esta perversa generación"</em> (Hechos 2:40). La Biblia no conoce nada de la predicación que no llama a una respuesta.</p>
+
+        <p>La forma que la invitación toma variará por congregación. En algunas iglesias es una venida pública al frente al final del servicio. En otras es una inclinación silenciosa de la cabeza y una mano levantada, con seguimiento privado después. En otras es una tarjeta que el visitante marca indicando interés en salvación, bautismo, o membresía. La forma es secundaria. El principio es primario: <em>el evangelio proclamado debe incluir un llamado a responder.</em></p>
+
+        <p>El pastor debe ser cuidadoso de nunca manipular la invitación. No debe usar presión emocional, versos repetidos del himno final, o tácticas psicológicas para producir decisiones que no son reales. El Espíritu Santo convierte; el pastor solamente llama. Pero el pastor debe llamar. Predicar el evangelio y luego simplemente enviar a la gente a casa es dejar la obra inconclusa.</p>
+
+        <h2>VI. Discipulando al nuevo convertido</h2>
+        <p>El momento de la decisión es el comienzo, no el fin. Un nuevo creyente que no es discipulado es un candidato para una fe que se desvanece dentro de meses. La responsabilidad del pastor se extiende más allá de la invitación. Debe tener un sistema en su lugar para lo que sucede después.</p>
+
+        <p>La mayoría de las iglesias saludables tienen alguna forma de seguimiento del nuevo creyente. Un miembro entrenado se reúne con el nuevo convertido esa semana. Un estudio bíblico sencillo los acompaña a través de los conceptos básicos de la fe — seguridad de la salvación, oración, lectura de la Biblia, la iglesia, el bautismo. Son alentados al bautismo tan pronto como están listos. Son conectados a un grupo pequeño, una clase de escuela dominical, un discipulador. Son presentados a personas de su misma edad y etapa en la vida.</p>
+
+        <p>Esto se conecta directamente con la Unidad 7. El evangelismo sin discipulado deja infantes espirituales atrás. El discipulado sin evangelismo produce creyentes hermosamente maduros que nunca ven a nadie venir a Cristo. El pastor fiel rehúsa elegir entre los dos. Se derrama en ambos.</p>
+
+        <h2>VII. El espíritu de ganador de almas del pastor</h2>
+        <p>Hay un espíritu que marca al pastor evangelístico, y es reconocible de un lado de la sala al otro. Genuinamente ama a las personas perdidas. Ora por ellos por nombre. Habla de ellos cuando está en casa con su esposa. Llora por ellos en su estudio. Los ve no como proyectos sino como personas que Dios ama. Ese espíritu no se puede fingir, y no se puede descuidar. Debe ser cultivado.</p>
+
+        <p>El cultivo sucede a través de la oración, la Escritura, y la disciplina regular de sentarse con personas perdidas. Un pastor que no ha tenido una conversación real con un no creyente en tres meses, a pesar de sus mejores intenciones, perderá ese espíritu. Sus sermones se volverán abstractos. Sus oraciones se volverán rutinarias. Sus apelaciones evangelísticas desde el púlpito sonarán ensayadas porque lo serán.</p>
+
+        <p>Un pastor que está regularmente con personas perdidas, que está orando por ellos, que está suplicando a Dios por su salvación — ese pastor predicará con fuego. Sus invitaciones aterrizarán con peso. Su congregación sentirá la urgencia que él siente. Captarán de él el corazón del Señor que vino <em>"a buscar y a salvar lo que se había perdido"</em> (Lucas 19:10).</p>
+
+        <h2>Cierre</h2>
+        <p>El pastor es, en el lenguaje de Pablo, un embajador de Cristo. Segunda Corintios 5:20 lo expresa permanentemente: <em>"Así que, somos embajadores en nombre de Cristo, como si Dios rogase por medio de nosotros; os rogamos en nombre de Cristo: Reconciliaos con Dios."</em> Esa palabra <em>embajador</em> significa una persona que representa a otro, que habla por otro, que lleva la autoridad de aquel que lo envió. El pastor está en su comunidad como embajador de Cristo. Su invitación al evangelio no es la suya; es la de Cristo, a través de él.</p>
+
+        <p>Cuando el pastor vive de esta manera por toda una vida — evangelizando personalmente, equipando a su gente, llamando a la respuesta desde el púlpito, discipulando a nuevos creyentes, caminando con el espíritu del ganador de almas — el resultado es una iglesia que crece por las razones correctas. Las personas vienen a Cristo. Nuevos discípulos son formados. El reino de Dios avanza en ese pueblo. Y el pastor, cuando se pare un día delante del Príncipe de los Pastores, oirá las palabras que cada evangelista fiel anhela oír: <em>"Bien, buen siervo y fiel... entra en el gozo de tu Señor"</em> (Mateo 25:21).</p>
+
+        <p><em>"¿Cómo, pues, invocarán a aquel en el cual no han creído? ¿Y cómo creerán en aquel de quien no han oído? ¿Y cómo oirán sin haber quien les predique? ¿Y cómo predicarán si no fueren enviados? Como está escrito: ¡Cuán hermosos son los pies de los que anuncian el evangelio de la paz, de los que anuncian el evangelio de las cosas buenas!"</em> (Romanos 10:14-15).</p>
+
+        <p>Que cada pastor que lea esto se comprometa de nuevo a hacer la obra de un evangelista, a dirigir su iglesia a la misión, y a cumplir su ministerio hasta el día en que Cristo regrese o lo llame a casa.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer questions 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. You must achieve 90% to pass. <strong>If you fail, the unit locks for 15 minutes before a retake.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> Responda las preguntas 1–20. <strong>M.Div. / Th.M.:</strong> Responda las 30. Debe alcanzar 90% para aprobar. <strong>Si reprueba, la unidad se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small">Submit Exam &amp; Check Pass</button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 10;
+let progress = JSON.parse(localStorage.getItem('cts_pm_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPMUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSPMUnit9.html"; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSPMUnit11.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="CTSPMUnit1.html" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+        document.getElementById('regWarning').style.display = 'block';
+    }
+}
+displayStudentGreeting();
+
+const mcQuestions = [
+  {
+    "textEn": "1. According to this unit, a church without evangelism is:",
+    "textEs": "1. Según esta unidad, una iglesia sin evangelismo es:",
+    "optionsEn": [
+      "A church on the way to extinction",
+      "Theologically purified",
+      "Stronger in discipleship",
+      "Properly mature"
+    ],
+    "optionsEs": [
+      "Una iglesia en camino a la extinción",
+      "Teológicamente purificada",
+      "Más fuerte en discipulado",
+      "Apropiadamente madura"
+    ],
+    "c": 21,
+    "explEn": "A church without evangelism is a church on the way to extinction.",
+    "explEs": "Una iglesia sin evangelismo es una iglesia en camino a la extinción."
+  },
+  {
+    "textEn": "2. The principal driver of a church's evangelistic life is:",
+    "textEs": "2. El conductor principal de la vida evangelística de una iglesia es:",
+    "optionsEn": [
+      "The deacon board",
+      "The pastor",
+      "The Sunday school director",
+      "The denomination"
+    ],
+    "optionsEs": [
+      "La junta de diáconos",
+      "El pastor",
+      "El director de escuela dominical",
+      "La denominación"
+    ],
+    "c": 29,
+    "explEn": "The principal driver of a church's evangelistic life is the pastor.",
+    "explEs": "El principal motor de la vida evangelística de una iglesia es el pastor."
+  },
+  {
+    "textEn": "3. Paul's permanent charge to Timothy in 2 Timothy 4:5 was to:",
+    "textEs": "3. El encargo permanente de Pablo a Timoteo en 2 Timoteo 4:5 fue:",
+    "optionsEn": [
+      "Build buildings",
+      "Stop preaching to crowds",
+      "Do the work of an evangelist and fulfill his ministry",
+      "Become a denominational leader"
+    ],
+    "optionsEs": [
+      "Edificar edificios",
+      "Dejar de predicar a multitudes",
+      "Hacer obra de evangelista y cumplir su ministerio",
+      "Convertirse en un líder denominacional"
+    ],
+    "c": 37,
+    "explEn": "2 Timothy 4:5 charges Timothy to do the work of an evangelist and fulfill his ministry.",
+    "explEs": "2 Timoteo 4:5 encarga a Timoteo hacer obra de evangelista y cumplir su ministerio."
+  },
+  {
+    "textEn": "4. Romans 1:16 anchors the pastor in evangelism by declaring:",
+    "textEs": "4. Romanos 1:16 ancla al pastor en el evangelismo declarando:",
+    "optionsEn": [
+      "The gospel is for the educated only",
+      "The gospel is for Jews only",
+      "The gospel is optional",
+      "The gospel is the power of God to salvation for everyone who believes"
+    ],
+    "optionsEs": [
+      "El evangelio es solo para los educados",
+      "El evangelio es solo para los judíos",
+      "El evangelio es opcional",
+      "El evangelio es el poder de Dios para salvación a todo aquel que cree"
+    ],
+    "c": 45,
+    "explEn": "Romans 1:16 declares the gospel is the power of God to salvation for everyone who believes.",
+    "explEs": "Romanos 1:16 declara que el evangelio es poder de Dios para salvación a todo aquel que cree."
+  },
+  {
+    "textEn": "5. The three simple methods every pastor can practice and teach are:",
+    "textEs": "5. Los tres métodos sencillos que todo pastor puede practicar y enseñar son:",
+    "optionsEn": [
+      "Invitation to church, personal testimony, and gospel tract",
+      "Doorknocking, debate, and door-to-door surveys",
+      "Television, radio, and internet",
+      "Music, drama, and dance"
+    ],
+    "optionsEs": [
+      "Invitación a la iglesia, testimonio personal, y tratado evangelístico",
+      "Tocar puertas, debate, y encuestas casa por casa",
+      "Televisión, radio, e internet",
+      "Música, drama, y danza"
+    ],
+    "c": 49,
+    "explEn": "The three simple methods are invitation to church, personal testimony, and gospel tract.",
+    "explEs": "Los tres métodos sencillos son la invitación a la iglesia, el testimonio personal y el tratado del evangelio."
+  },
+  {
+    "textEn": "6. The Samaritan woman (John 4) modeled the invitation method by saying to her town:",
+    "textEs": "6. La mujer samaritana (Juan 4) modeló el método de invitación diciendo a su pueblo:",
+    "optionsEn": [
+      "You must repent or perish",
+      "Let me explain Jewish theology",
+      "Come, see a Man who told me all things I ever did. Could this be the Christ?",
+      "I have prepared a five-point sermon"
+    ],
+    "optionsEs": [
+      "Debéis arrepentiros o perecer",
+      "Déjenme explicar la teología judía",
+      "Venid, ved a un hombre que me ha dicho todo cuanto he hecho. ¿No será éste el Cristo?",
+      "He preparado un sermón de cinco puntos"
+    ],
+    "c": 58,
+    "explEn": "The Samaritan woman modeled the invitation: 'Come, see a Man who told me all I ever did.'",
+    "explEs": "La samaritana modeló la invitación: 'Venid, ved a un hombre que me dijo todo lo que he hecho.'"
+  },
+  {
+    "textEn": "7. The blind man's testimony in John 9:25 was:",
+    "textEs": "7. El testimonio del ciego en Juan 9:25 fue:",
+    "optionsEn": [
+      "A long theological argument",
+      "A list of his good works",
+      "An attack on the Pharisees",
+      "Though I was blind, now I see"
+    ],
+    "optionsEs": [
+      "Un largo argumento teológico",
+      "Una lista de sus buenas obras",
+      "Un ataque a los fariseos",
+      "Habiendo yo sido ciego, ahora veo"
+    ],
+    "c": 66,
+    "explEn": "The blind man's testimony in John 9:25 was 'Though I was blind, now I see.'",
+    "explEs": "El testimonio del ciego en Juan 9:25 fue 'habiendo yo sido ciego, ahora veo.'"
+  },
+  {
+    "textEn": "8. The professor's personal habit when meeting people in everyday situations is:",
+    "textEs": "8. La práctica personal del profesor cuando conoce gente en situaciones cotidianas es:",
+    "optionsEn": [
+      "Hand them a tract immediately",
+      "Introduce himself and invite them to come worship with him",
+      "Begin a doctrinal debate",
+      "Avoid the topic of faith"
+    ],
+    "optionsEs": [
+      "Entregarles un tratado inmediatamente",
+      "Presentarse e invitarlos a venir a adorar con él",
+      "Comenzar un debate doctrinal",
+      "Evitar el tema de la fe"
+    ],
+    "c": 71,
+    "explEn": "The professor's habit is to introduce himself and invite people to come worship with him.",
+    "explEs": "El hábito del profesor es presentarse e invitar a la gente a venir a adorar con él."
+  },
+  {
+    "textEn": "9. In Hubbard's essay, Andrew Rowan carried a message through the Cuban jungle to:",
+    "textEs": "9. En el ensayo de Hubbard, Andrew Rowan llevó un mensaje por la selva cubana a:",
+    "optionsEn": [
+      "General Calixto García",
+      "President McKinley",
+      "Theodore Roosevelt",
+      "Fidel Castro"
+    ],
+    "optionsEs": [
+      "El General Calixto García",
+      "El Presidente McKinley",
+      "Theodore Roosevelt",
+      "Fidel Castro"
+    ],
+    "c": 77,
+    "explEn": "In Hubbard's essay, Andrew Rowan carried the message through the jungle to General García.",
+    "explEs": "En el ensayo de Hubbard, Andrew Rowan llevó el mensaje por la selva al General García."
+  },
+  {
+    "textEn": "10. The earliest name for believers, before they were called Christians, was:",
+    "textEs": "10. El primer nombre para los creyentes, antes de ser llamados cristianos, fue:",
+    "optionsEn": [
+      "The Faithful",
+      "The Saints",
+      "The Followers",
+      "The Way"
+    ],
+    "optionsEs": [
+      "Los Fieles",
+      "Los Santos",
+      "Los Seguidores",
+      "El Camino"
+    ],
+    "c": 87,
+    "explEn": "Before they were called Christians, the earliest name for believers was 'the Way.'",
+    "explEs": "Antes de ser llamados cristianos, el nombre más antiguo de los creyentes era 'el Camino.'"
+  },
+  {
+    "textEn": "11. The reference for 'the Way' as the earliest name for believers includes:",
+    "textEs": "11. La referencia para 'el Camino' como el primer nombre de los creyentes incluye:",
+    "optionsEn": [
+      "Acts 2:42 and Hebrews 11:6",
+      "Acts 9:2 and John 14:6",
+      "Romans 8:1 and Ephesians 2:8",
+      "John 3:16 and Acts 1:8"
+    ],
+    "optionsEs": [
+      "Hechos 2:42 y Hebreos 11:6",
+      "Hechos 9:2 y Juan 14:6",
+      "Romanos 8:1 y Efesios 2:8",
+      "Juan 3:16 y Hechos 1:8"
+    ],
+    "c": 92,
+    "explEn": "'The Way' as the earliest name draws on Acts 9:2 and John 14:6.",
+    "explEs": "'El Camino' como nombre más antiguo se basa en Hechos 9:2 y Juan 14:6."
+  },
+  {
+    "textEn": "12. The pastor as evangelistic multiplier means he:",
+    "textEs": "12. El pastor como multiplicador evangelístico significa que él:",
+    "optionsEn": [
+      "Hires more staff",
+      "Schedules more services",
+      "Reduces evangelism programs",
+      "Preaches, trains, celebrates conversions, and builds outreach ministries"
+    ],
+    "optionsEs": [
+      "Contrata más personal",
+      "Programa más servicios",
+      "Reduce los programas evangelísticos",
+      "Predica, entrena, celebra conversiones, y edifica ministerios de alcance"
+    ],
+    "c": 101,
+    "explEn": "The evangelistic multiplier preaches, trains, celebrates conversions, and builds outreach.",
+    "explEs": "El multiplicador evangelístico predica, entrena, celebra conversiones y construye alcance."
+  },
+  {
+    "textEn": "13. Public invitations have biblical warrant from:",
+    "textEs": "13. Las invitaciones públicas tienen autorización bíblica de:",
+    "optionsEn": [
+      "Joshua at the end of his life, Elijah on Mount Carmel, and Peter at Pentecost",
+      "Only the New Testament epistles",
+      "Only Old Testament priests",
+      "Only modern revival traditions"
+    ],
+    "optionsEs": [
+      "Josué al final de su vida, Elías en el Monte Carmelo, y Pedro en Pentecostés",
+      "Solo las epístolas del Nuevo Testamento",
+      "Solo los sacerdotes del Antiguo Testamento",
+      "Solo las tradiciones modernas de avivamiento"
+    ],
+    "c": 105,
+    "explEn": "Public invitations have warrant from Joshua, Elijah on Carmel, and Peter at Pentecost.",
+    "explEs": "Las invitaciones públicas tienen fundamento en Josué, Elías en el Carmelo y Pedro en Pentecostés."
+  },
+  {
+    "textEn": "14. The pastor's primary danger in the public invitation is:",
+    "textEs": "14. El peligro principal del pastor en la invitación pública es:",
+    "optionsEn": [
+      "Being too brief",
+      "Forgetting to extend it",
+      "Manipulating decisions through emotional pressure or psychological tactics",
+      "Singing the wrong hymn"
+    ],
+    "optionsEs": [
+      "Ser muy breve",
+      "Olvidar extenderla",
+      "Manipular decisiones a través de presión emocional o tácticas psicológicas",
+      "Cantar el himno equivocado"
+    ],
+    "c": 114,
+    "explEn": "The primary danger in the public invitation is manipulating decisions through pressure.",
+    "explEs": "El peligro principal en la invitación pública es manipular decisiones mediante presión."
+  },
+  {
+    "textEn": "15. New-believer follow-up should ideally happen:",
+    "textEs": "15. El seguimiento del nuevo creyente idealmente debe suceder:",
+    "optionsEn": [
+      "Six months later",
+      "Within the first week after the decision",
+      "Only if requested",
+      "After baptism"
+    ],
+    "optionsEs": [
+      "Seis meses después",
+      "Dentro de la primera semana después de la decisión",
+      "Solo si se solicita",
+      "Después del bautismo"
+    ],
+    "c": 120,
+    "explEn": "New-believer follow-up should ideally happen within the first week after the decision.",
+    "explEs": "El seguimiento del nuevo creyente debe ocurrir idealmente en la primera semana tras la decisión."
+  },
+  {
+    "textEn": "16. The faithful pastor refuses to choose between:",
+    "textEs": "16. El pastor fiel rehúsa elegir entre:",
+    "optionsEn": [
+      "Preaching and praying",
+      "Prayer and Scripture",
+      "Pulpit and family",
+      "Evangelism and discipleship"
+    ],
+    "optionsEs": [
+      "Predicar y orar",
+      "Oración y Escritura",
+      "Púlpito y familia",
+      "Evangelismo y discipulado"
+    ],
+    "c": 129,
+    "explEn": "The faithful pastor refuses to choose between evangelism and discipleship.",
+    "explEs": "El pastor fiel rehúsa elegir entre el evangelismo y el discipulado."
+  },
+  {
+    "textEn": "17. The soul-winner spirit, according to this unit:",
+    "textEs": "17. El espíritu del ganador de almas, según esta unidad:",
+    "optionsEn": [
+      "Cannot be faked",
+      "Comes naturally to all pastors",
+      "Requires special training certification",
+      "Is unnecessary in modern ministry"
+    ],
+    "optionsEs": [
+      "No se puede fingir",
+      "Viene naturalmente a todos los pastores",
+      "Requiere certificación especial de entrenamiento",
+      "Es innecesario en el ministerio moderno"
+    ],
+    "c": 133,
+    "explEn": "The soul-winner spirit cannot be faked.",
+    "explEs": "El espíritu del ganador de almas no se puede fingir."
+  },
+  {
+    "textEn": "18. To keep the soul-winner spirit alive, the pastor needs:",
+    "textEs": "18. Para mantener vivo el espíritu de ganador de almas, el pastor necesita:",
+    "optionsEn": [
+      "More church meetings",
+      "More committees",
+      "Regular time with lost people, prayer for them by name, and pleading with God for their salvation",
+      "More books on theology"
+    ],
+    "optionsEs": [
+      "Más reuniones de iglesia",
+      "Más comités",
+      "Tiempo regular con personas perdidas, oración por ellos por nombre, y suplicar a Dios por su salvación",
+      "Más libros de teología"
+    ],
+    "c": 142,
+    "explEn": "To keep the spirit alive the pastor needs time with the lost, prayer by name, and pleading for them.",
+    "explEs": "Para mantener vivo el espíritu el pastor necesita tiempo con los perdidos, oración por nombre y súplica por ellos."
+  },
+  {
+    "textEn": "19. Second Corinthians 5:20 describes the pastor as:",
+    "textEs": "19. Segunda Corintios 5:20 describe al pastor como:",
+    "optionsEn": [
+      "A judge",
+      "An ambassador for Christ",
+      "A king",
+      "A scholar"
+    ],
+    "optionsEs": [
+      "Un juez",
+      "Un embajador en nombre de Cristo",
+      "Un rey",
+      "Un erudito"
+    ],
+    "c": 148,
+    "explEn": "2 Corinthians 5:20 describes the pastor as an ambassador for Christ.",
+    "explEs": "2 Corintios 5:20 describe al pastor como un embajador de Cristo."
+  },
+  {
+    "textEn": "20. Romans 10:14-15 establishes the chain that ends with:",
+    "textEs": "20. Romanos 10:14-15 establece la cadena que termina con:",
+    "optionsEn": [
+      "Education funding",
+      "More buildings",
+      "How beautiful are the feet of those who preach the gospel",
+      "Denominational programs"
+    ],
+    "optionsEs": [
+      "Financiamiento educativo",
+      "Más edificios",
+      "¡Cuán hermosos son los pies de los que anuncian el evangelio!",
+      "Programas denominacionales"
+    ],
+    "c": 156,
+    "explEn": "Romans 10:14-15 ends with 'How beautiful are the feet of those who preach the gospel.'",
+    "explEs": "Romanos 10:14-15 termina con '¡Cuán hermosos los pies de los que anuncian el evangelio!'"
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Defend the claim that a church without evangelism is on the way to extinction. Apply this to a typical established church scenario.",
+    "textEs": "21. Defienda la afirmación de que una iglesia sin evangelismo está en camino a la extinción. Aplique esto a un escenario típico de iglesia establecida.",
+    "kw_en": [
+      "evangelism",
+      "extinct",
+      "die",
+      "growth",
+      "mission",
+      "lost",
+      "decline",
+      "church"
+    ],
+    "kw_es": [
+      "evangelismo",
+      "extinción",
+      "morir",
+      "crecimiento",
+      "misión",
+      "perdido",
+      "declive",
+      "iglesia"
+    ],
+    "modelEn": "A church without evangelism is a church on the way to extinction, and this is true of even the most established congregation. A church that stops reaching the lost has only one direction to go: it ages, shrinks, and eventually closes its doors, because no congregation can survive on its existing members alone — they grow old and die, move away, or fall away. The established church is especially vulnerable to this, because it can mistake comfort for health, mistaking a full building of long-time members for a living church. But a body that is not reproducing is, by definition, dying. Evangelism is not an optional program for the energetic church; it is the breathing of a living body. Stop reaching the lost, and within a generation the church becomes a museum, then a memory.",
+    "modelEs": "Una iglesia sin evangelismo es una iglesia en camino a la extinción, y esto es cierto aun de la congregación más establecida. Una iglesia que deja de alcanzar a los perdidos solo tiene una dirección hacia donde ir: envejece, se encoge, y eventualmente cierra sus puertas, porque ninguna congregación puede sobrevivir solo de sus miembros existentes — envejecen y mueren, se mudan, o se apartan. La iglesia establecida es especialmente vulnerable a esto, porque puede confundir la comodidad con la salud, confundiendo un edificio lleno de miembros antiguos con una iglesia viva. Pero un cuerpo que no se reproduce está, por definición, muriendo. El evangelismo no es un programa opcional para la iglesia enérgica; es la respiración de un cuerpo vivo. Deja de alcanzar a los perdidos, y dentro de una generación la iglesia se vuelve un museo, luego un recuerdo."
+  },
+  {
+    "textEn": "22. Explain why Paul's charge in 2 Timothy 4:5 ('do the work of an evangelist') applies to pastors as well as evangelists. Why is this ministry one of the easiest for a busy pastor to neglect?",
+    "textEs": "22. Explique por qué el encargo de Pablo en 2 Timoteo 4:5 ('haz obra de evangelista') aplica a los pastores tanto como a los evangelistas. ¿Por qué es este ministerio uno de los más fáciles de descuidar para un pastor ocupado?",
+    "kw_en": [
+      "timothy",
+      "evangelist",
+      "pastor",
+      "neglect",
+      "busy",
+      "charge",
+      "ministry",
+      "work"
+    ],
+    "kw_es": [
+      "timoteo",
+      "evangelista",
+      "pastor",
+      "descuid",
+      "ocupado",
+      "encargo",
+      "ministerio",
+      "obra"
+    ],
+    "modelEn": "Paul's charge in 2 Timothy 4:5 — 'do the work of an evangelist, fulfill your ministry' — applies to pastors as well as to traveling evangelists, because the pastor is to lead his people in reaching the lost, not merely tend the saved. Timothy was a pastor, not an itinerant evangelist, yet Paul commanded him to do the evangelist's work. This ministry is one of the easiest for a busy pastor to neglect, because the demands of the already-converted are constant and loud: the sick to visit, the sermons to prepare, the meetings to attend, the members to please. The lost make no appointment and file no complaint when they are ignored, so they quietly fall off the pastor's calendar. A pastor can fill every hour caring for the flock he has while never seeking the sheep not yet in the fold. Paul's charge is a permanent guard against that drift.",
+    "modelEs": "El encargo de Pablo en 2 Timoteo 4:5 — 'haz obra de evangelista, cumple tu ministerio' — aplica a los pastores tanto como a los evangelistas itinerantes, porque el pastor debe dirigir a su pueblo en alcanzar a los perdidos, no meramente cuidar a los salvos. Timoteo era un pastor, no un evangelista itinerante, sin embargo Pablo le mandó hacer la obra del evangelista. Este ministerio es uno de los más fáciles de descuidar para un pastor ocupado, porque las demandas de los ya convertidos son constantes y ruidosas: los enfermos que visitar, los sermones que preparar, las reuniones que atender, los miembros que complacer. Los perdidos no hacen citas ni presentan quejas cuando se les ignora, así que silenciosamente se caen del calendario del pastor. Un pastor puede llenar cada hora cuidando del rebaño que tiene sin jamás buscar las ovejas que aún no están en el redil. El encargo de Pablo es un guarda permanente contra esa deriva."
+  },
+  {
+    "textEn": "23. Outline the three simple methods (invitation, testimony, tract) and explain how each removes a barrier that keeps ordinary believers from sharing their faith.",
+    "textEs": "23. Bosqueje los tres métodos sencillos (invitación, testimonio, tratado) y explique cómo cada uno remueve una barrera que evita que los creyentes ordinarios compartan su fe.",
+    "kw_en": [
+      "invitation",
+      "testimony",
+      "tract",
+      "barrier",
+      "simple",
+      "teach",
+      "ordinary",
+      "share"
+    ],
+    "kw_es": [
+      "invitación",
+      "testimonio",
+      "tratado",
+      "barrera",
+      "simple",
+      "enseñar",
+      "ordinario",
+      "compartir"
+    ],
+    "modelEn": "The three simple methods every pastor can practice and teach are invitation, testimony, and tract, and each removes a barrier that keeps ordinary believers from sharing their faith. The invitation — simply asking someone to come to church — removes the fear of having to explain everything, since the believer need only bring the person to where the gospel is preached. The personal testimony — telling one's own story of what Christ has done — removes the fear of not knowing enough theology, since no one can argue with your own experience, as the blind man said, 'though I was blind, now I see.' The gospel tract removes the fear of forgetting what to say, since the words are already printed. These methods are powerful precisely because they are simple enough for any believer to use, which is why the pastor must teach them: evangelism multiplies only when it is within reach of the ordinary member, not reserved for the gifted few.",
+    "modelEs": "Los tres métodos sencillos que todo pastor puede practicar y enseñar son la invitación, el testimonio y el tratado, y cada uno quita una barrera que impide a los creyentes ordinarios compartir su fe. La invitación — simplemente pedirle a alguien que venga a la iglesia — quita el miedo de tener que explicarlo todo, pues el creyente solo necesita traer a la persona a donde se predica el evangelio. El testimonio personal — contar la propia historia de lo que Cristo ha hecho — quita el miedo de no saber suficiente teología, pues nadie puede discutir con tu propia experiencia, como dijo el ciego: 'habiendo yo sido ciego, ahora veo.' El tratado del evangelio quita el miedo de olvidar qué decir, pues las palabras ya están impresas. Estos métodos son poderosos precisamente porque son lo bastante sencillos para que cualquier creyente los use, por lo cual el pastor debe enseñarlos: el evangelismo se multiplica solo cuando está al alcance del miembro ordinario, no reservado para los pocos dotados."
+  },
+  {
+    "textEn": "24. Apply the Samaritan woman of John 4 and the blind man of John 9 as biblical models for personal evangelism. What does each contribute to the pastor's training of his people?",
+    "textEs": "24. Aplique a la mujer samaritana de Juan 4 y al ciego de Juan 9 como modelos bíblicos para el evangelismo personal. ¿Qué aporta cada uno al entrenamiento del pastor a su gente?",
+    "kw_en": [
+      "samaritan",
+      "blind",
+      "john",
+      "testimony",
+      "experience",
+      "invite",
+      "model",
+      "personal"
+    ],
+    "kw_es": [
+      "samaritana",
+      "ciego",
+      "juan",
+      "testimonio",
+      "experiencia",
+      "invitar",
+      "modelo",
+      "personal"
+    ],
+    "modelEn": "The Samaritan woman of John 4 and the blind man of John 9 are biblical models for personal evangelism, and each contributes something to the pastor's training of his people. The Samaritan woman, newly met by Jesus, ran to her town and said, 'Come, see a Man who told me all things I ever did. Could this be the Christ?' — she modeled the invitation method, simply inviting others to come and see. The blind man, pressed by hostile authorities, gave the unanswerable testimony, 'Though I was blind, now I see' — he modeled the power of personal experience over theological debate. Neither was a trained theologian; both simply pointed to what Jesus had done for them. The pastor trains his people with these models to show that you do not need a seminary degree to evangelize — you need only to invite people to Jesus and to tell honestly what He has done in your own life.",
+    "modelEs": "La mujer samaritana de Juan 4 y el ciego de Juan 9 son modelos bíblicos para el evangelismo personal, y cada uno aporta algo al entrenamiento que el pastor da a su pueblo. La samaritana, recién encontrada por Jesús, corrió a su pueblo y dijo: 'Venid, ved a un hombre que me ha dicho todo cuanto he hecho. ¿No será éste el Cristo?' — modeló el método de la invitación, simplemente invitando a otros a venir y ver. El ciego, presionado por autoridades hostiles, dio el testimonio incontestable: 'habiendo yo sido ciego, ahora veo' — modeló el poder de la experiencia personal sobre el debate teológico. Ninguno era un teólogo entrenado; ambos simplemente señalaron a lo que Jesús había hecho por ellos. El pastor entrena a su pueblo con estos modelos para mostrar que no se necesita un título de seminario para evangelizar — solo se necesita invitar a la gente a Jesús y contar honestamente lo que Él ha hecho en la propia vida."
+  },
+  {
+    "textEn": "25. Apply Hubbard's 'A Message to Garcia' (Rowan delivering the message through the Cuban jungle) as a metaphor for the evangelist's spirit. What single-minded determination does the gospel demand?",
+    "textEs": "25. Aplique 'Un Mensaje para García' de Hubbard (Rowan entregando el mensaje por la selva cubana) como una metáfora para el espíritu del evangelista. ¿Qué determinación de mente única demanda el evangelio?",
+    "kw_en": [
+      "garcia",
+      "rowan",
+      "determination",
+      "single",
+      "mission",
+      "deliver",
+      "persever",
+      "spirit"
+    ],
+    "kw_es": [
+      "garcía",
+      "rowan",
+      "determinación",
+      "único",
+      "misión",
+      "entregar",
+      "persever",
+      "espíritu"
+    ],
+    "modelEn": "In Hubbard's essay 'A Message to Garcia,' Andrew Rowan was given a message to deliver to General Calixto García, hidden somewhere in the Cuban jungle, and he simply took the message and got it through — no excuses, no questions about how, just single-minded determination to complete the mission. As a metaphor for the evangelist's spirit, this pictures the determination the gospel demands: the soul-winner does not make excuses about why the lost cannot be reached, does not get bogged down in obstacles, but presses through whatever stands in the way to deliver the message of Christ. The gospel is a message entrusted to us for delivery, and the people perishing without it are like García waiting in the jungle. Rowan's single-mindedness rebukes the half-hearted evangelism that quits at the first difficulty. The faithful pastor and the trained believer carry the message with the resolve of a man who will get it through no matter what.",
+    "modelEs": "En el ensayo de Hubbard 'Un mensaje a García,' a Andrew Rowan se le dio un mensaje para entregar al General Calixto García, escondido en algún lugar de la selva cubana, y él simplemente tomó el mensaje y lo hizo llegar — sin excusas, sin preguntas sobre cómo, solo determinación de un solo propósito para completar la misión. Como metáfora del espíritu del evangelista, esto retrata la determinación que el evangelio exige: el ganador de almas no pone excusas sobre por qué los perdidos no pueden ser alcanzados, no se atasca en obstáculos, sino que presiona a través de lo que se interponga para entregar el mensaje de Cristo. El evangelio es un mensaje confiado a nosotros para su entrega, y la gente que perece sin él es como García esperando en la selva. La determinación de un solo propósito de Rowan reprende el evangelismo a medias que se rinde a la primera dificultad. El pastor fiel y el creyente entrenado llevan el mensaje con la resolución de un hombre que lo hará llegar pase lo que pase."
+  },
+  {
+    "textEn": "26. Discuss what it means for the pastor to be a multiplier of evangelism. How does he move from doing all the evangelism himself to leading a church into mission?",
+    "textEs": "26. Discuta lo que significa para el pastor ser un multiplicador del evangelismo. ¿Cómo se mueve de hacer todo el evangelismo él mismo a dirigir a una iglesia hacia la misión?",
+    "kw_en": [
+      "multiplier",
+      "train",
+      "equip",
+      "celebrate",
+      "mission",
+      "lead",
+      "outreach",
+      "others"
+    ],
+    "kw_es": [
+      "multiplicador",
+      "entrenar",
+      "equipar",
+      "celebrar",
+      "misión",
+      "dirig",
+      "alcance",
+      "otros"
+    ],
+    "modelEn": "For the pastor to be a multiplier of evangelism means he moves from doing all the evangelism himself to leading a whole church into mission. The multiplier preaches the gospel, trains his people in the simple methods, celebrates every conversion publicly so the church catches the joy, and builds outreach ministries that send members into the community. He understands that one pastor evangelizing reaches a few, but a pastor who equips a hundred members to evangelize reaches a multitude. The shift is from being the church's only soul-winner to being the trainer of soul-winners, the same Ephesians 4 principle applied to evangelism. A church where only the pastor evangelizes will grow slowly if at all; a church where the pastor has multiplied the work into the whole body becomes a mission force. The multiplier measures success not by his own conversions but by the evangelistic life he has awakened in his people.",
+    "modelEs": "Que el pastor sea un multiplicador del evangelismo significa que se mueve de hacer todo el evangelismo él mismo a dirigir a toda una iglesia hacia la misión. El multiplicador predica el evangelio, entrena a su pueblo en los métodos sencillos, celebra cada conversión públicamente para que la iglesia capte el gozo, y construye ministerios de alcance que envían a los miembros a la comunidad. Entiende que un pastor evangelizando alcanza a unos pocos, pero un pastor que equipa a cien miembros para evangelizar alcanza a una multitud. El cambio es de ser el único ganador de almas de la iglesia a ser el entrenador de ganadores de almas, el mismo principio de Efesios 4 aplicado al evangelismo. Una iglesia donde solo el pastor evangeliza crecerá lentamente si acaso; una iglesia donde el pastor ha multiplicado la obra en todo el cuerpo se vuelve una fuerza misionera. El multiplicador mide el éxito no por sus propias conversiones sino por la vida evangelística que ha despertado en su pueblo."
+  },
+  {
+    "textEn": "27. Defend the biblical legitimacy of the public invitation. Use Joshua 24:15, Elijah on Mount Carmel, and Peter at Pentecost. How should the pastor avoid manipulation?",
+    "textEs": "27. Defienda la legitimidad bíblica de la invitación pública. Use Josué 24:15, Elías en el Monte Carmelo, y Pedro en Pentecostés. ¿Cómo debe el pastor evitar la manipulación?",
+    "kw_en": [
+      "invitation",
+      "public",
+      "joshua",
+      "elijah",
+      "peter",
+      "manipulat",
+      "decision",
+      "response"
+    ],
+    "kw_es": [
+      "invitación",
+      "pública",
+      "josué",
+      "elías",
+      "pedro",
+      "manipul",
+      "decisión",
+      "respuesta"
+    ],
+    "modelEn": "The public invitation — calling people to a visible response to the gospel — has biblical warrant from Joshua, who at the end of his life called Israel to 'choose this day whom you will serve'; from Elijah on Mount Carmel, who demanded the people decide between the Lord and Baal; and from Peter at Pentecost, who called the convicted crowd to repent and be baptized. Scripture repeatedly calls people to a definite moment of decision. Yet the pastor's primary danger in the public invitation is manipulation — engineering decisions through emotional pressure, manufactured music, guilt, or psychological tactics that produce a response to the pastor rather than to the Spirit. The cure is to call genuinely for a response to the gospel while leaving the work of conviction to the Holy Spirit, trusting God to draw rather than pressuring people to walk an aisle. A real invitation honors both the biblical call to decide and the freedom of the Spirit to convict.",
+    "modelEs": "La invitación pública — llamar a la gente a una respuesta visible al evangelio — tiene fundamento bíblico en Josué, que al final de su vida llamó a Israel a 'escoged hoy a quién sirváis'; en Elías en el Monte Carmelo, que exigió que el pueblo decidiera entre el Señor y Baal; y en Pedro en Pentecostés, que llamó a la multitud convencida a arrepentirse y bautizarse. La Escritura repetidamente llama a la gente a un momento definido de decisión. Sin embargo, el peligro principal del pastor en la invitación pública es la manipulación — fabricar decisiones mediante presión emocional, música manipuladora, culpa o tácticas psicológicas que producen una respuesta al pastor en vez de al Espíritu. La cura es llamar genuinamente a una respuesta al evangelio mientras se deja la obra de convicción al Espíritu Santo, confiando en que Dios atraiga en vez de presionar a la gente a pasar al frente. Una invitación real honra tanto el llamado bíblico a decidir como la libertad del Espíritu para convencer."
+  },
+  {
+    "textEn": "28. Discuss the discipling of the new convert. Why does evangelism without discipleship leave spiritual infants, and how does the pastor build a follow-up system?",
+    "textEs": "28. Discuta el discipulado del nuevo convertido. ¿Por qué el evangelismo sin discipulado deja infantes espirituales, y cómo edifica el pastor un sistema de seguimiento?",
+    "kw_en": [
+      "disciple",
+      "follow-up",
+      "convert",
+      "infant",
+      "week",
+      "system",
+      "grow",
+      "nurture"
+    ],
+    "kw_es": [
+      "discípulo",
+      "seguimiento",
+      "convertido",
+      "infante",
+      "semana",
+      "sistema",
+      "crecer",
+      "nutrir"
+    ],
+    "modelEn": "Evangelism without discipleship leaves spiritual infants, so the discipling of the new convert is essential, not optional. A person who makes a decision but is never followed up is like a newborn left without care — vulnerable, undernourished, and likely to wither. New-believer follow-up should ideally happen within the first week after the decision, while the heart is soft and the commitment fresh, before doubts and old patterns reassert themselves. The pastor builds a follow-up system: someone assigned to make contact quickly, a simple plan to ground the new believer in basic truths, integration into the life of the church, and a relationship that walks alongside them in the early months. The faithful pastor refuses to choose between evangelism and discipleship, because they are two halves of one command — the Great Commission says to make disciples, not merely to gain decisions. A church that evangelizes without discipling fills a nursery that never grows up.",
+    "modelEs": "El evangelismo sin discipulado deja infantes espirituales, así que el discipulado del nuevo convertido es esencial, no opcional. Una persona que toma una decisión pero a quien nunca se le da seguimiento es como un recién nacido dejado sin cuidado — vulnerable, desnutrido y propenso a marchitarse. El seguimiento del nuevo creyente debe ocurrir idealmente dentro de la primera semana después de la decisión, mientras el corazón está blando y el compromiso fresco, antes de que las dudas y los viejos patrones se reafirmen. El pastor construye un sistema de seguimiento: alguien asignado a hacer contacto rápidamente, un plan sencillo para cimentar al nuevo creyente en las verdades básicas, la integración a la vida de la iglesia, y una relación que camine junto a él en los primeros meses. El pastor fiel rehúsa elegir entre el evangelismo y el discipulado, porque son dos mitades de un solo mandato — la Gran Comisión dice hacer discípulos, no meramente obtener decisiones. Una iglesia que evangeliza sin discipular llena una guardería que nunca crece."
+  },
+  {
+    "textEn": "29. Identify the marks of the pastor's soul-winner spirit. What practices keep this spirit alive over decades, and what allows it to die?",
+    "textEs": "29. Identifique las marcas del espíritu del ganador de almas del pastor. ¿Qué prácticas mantienen vivo este espíritu por décadas, y qué permite que muera?",
+    "kw_en": [
+      "soul",
+      "spirit",
+      "fake",
+      "pray",
+      "lost",
+      "burden",
+      "alive",
+      "decades"
+    ],
+    "kw_es": [
+      "alma",
+      "espíritu",
+      "fingir",
+      "orar",
+      "perdido",
+      "carga",
+      "vivo",
+      "décadas"
+    ],
+    "modelEn": "The soul-winner spirit cannot be faked; it is a genuine burden for the lost that either burns in a man or does not. The marks of this spirit are a real love for lost people, a grief over those headed to a Christless eternity, and a joy when one is found. To keep this spirit alive over decades, the pastor needs regular time with lost people — not retreating into a Christian bubble — prayer for them by name, and pleading with God for their salvation. The spirit dies when a pastor surrounds himself only with the converted, stops praying for specific lost souls, and lets the routine of church machinery replace the burden for the perishing. A man can preach evangelistically with no soul-winner spirit, and his people will sense the hollowness. The faithful pastor guards this fire the way he guards his own walk with God, because once it dies, evangelism becomes a program instead of a passion, and the church soon stops reaching anyone.",
+    "modelEs": "El espíritu del ganador de almas no se puede fingir; es una verdadera carga por los perdidos que o arde en un hombre o no. Las marcas de este espíritu son un amor real por los perdidos, un dolor por los que van hacia una eternidad sin Cristo, y un gozo cuando uno es hallado. Para mantener vivo este espíritu por décadas, el pastor necesita tiempo regular con los perdidos — sin replegarse en una burbuja cristiana — oración por ellos por nombre, y suplicar a Dios por su salvación. El espíritu muere cuando un pastor se rodea solo de los convertidos, deja de orar por almas perdidas específicas, y permite que la rutina de la maquinaria eclesial reemplace la carga por los que perecen. Un hombre puede predicar evangelísticamente sin espíritu de ganador de almas, y su pueblo sentirá el vacío. El pastor fiel guarda este fuego como guarda su propio andar con Dios, porque una vez que muere, el evangelismo se vuelve un programa en vez de una pasión, y la iglesia pronto deja de alcanzar a nadie."
+  },
+  {
+    "textEn": "30. Synthesize the entire unit: How does a pastor who personally evangelizes, equips his people, calls for response, disciples new believers, and walks with the soul-winner spirit fulfill 2 Corinthians 5:20 as an ambassador for Christ?",
+    "textEs": "30. Sintetice toda la unidad: ¿Cómo un pastor que evangeliza personalmente, equipa a su gente, llama a la respuesta, discipula a nuevos creyentes, y camina con el espíritu de ganador de almas cumple 2 Corintios 5:20 como un embajador en nombre de Cristo?",
+    "kw_en": [
+      "ambassador",
+      "evangelize",
+      "equip",
+      "disciple",
+      "spirit",
+      "corinthians",
+      "mission",
+      "christ"
+    ],
+    "kw_es": [
+      "embajador",
+      "evangelizar",
+      "equipar",
+      "discípulo",
+      "espíritu",
+      "corintios",
+      "misión",
+      "cristo"
+    ],
+    "modelEn": "A pastor fulfills 2 Corinthians 5:20 as an ambassador for Christ when he personally evangelizes, equips his people, calls for response, disciples new believers, and walks with the soul-winner spirit. An ambassador represents his King and carries his King's message into foreign territory — and the pastor pleads, as though God were making His appeal through him, 'be reconciled to God.' He does not delegate away the burden; he leads from the front by reaching the lost himself, then multiplies it by training his people in the simple methods so the whole church becomes a mission force. He calls for genuine response without manipulation, and he disciples the new convert so that decisions become disciples. Through it all the soul-winner spirit keeps the fire burning, sustained by prayer and time with lost people. This is the undershepherd doing the Chief Shepherd's own work — for the Son of Man came to seek and to save the lost, and the pastor who shares that mission shares His heart.",
+    "modelEs": "Un pastor cumple 2 Corintios 5:20 como embajador de Cristo cuando personalmente evangeliza, equipa a su pueblo, llama a la respuesta, discipula a los nuevos creyentes, y anda con el espíritu del ganador de almas. Un embajador representa a su Rey y lleva el mensaje de su Rey a territorio extranjero — y el pastor ruega, como si Dios hiciera Su súplica por medio de él: 'reconciliaos con Dios.' No delega la carga; dirige desde el frente alcanzando él mismo a los perdidos, luego lo multiplica entrenando a su pueblo en los métodos sencillos para que toda la iglesia se vuelva una fuerza misionera. Llama a una respuesta genuina sin manipulación, y discipula al nuevo convertido para que las decisiones se vuelvan discípulos. A través de todo, el espíritu del ganador de almas mantiene el fuego ardiendo, sostenido por la oración y el tiempo con los perdidos. Este es el subpastor haciendo la obra misma del Príncipe de los pastores — porque el Hijo del Hombre vino a buscar y a salvar lo que se había perdido, y el pastor que comparte esa misión comparte Su corazón."
+  }
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit10 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_pm_u10_mc_passed';
+const SA_LOCK_KEY = 'cts_pm_u10_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_pm_u10_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here...' : 'Escriba su respuesta aquí...';
+        textarea.value = kwAnswers[idx];
+        div.appendChild(textarea);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const answer = textarea.value.trim().toLowerCase();
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(normalize(answer), kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(normalize(answer), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(normalize(answer), kw));
+            if (answer.length < 100) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a sentence).' : 'Escriba una respuesta más completa (al menos una oración).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else if (hits >= 3) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto! Su respuesta incluye los conceptos clave.';
+                feedbackDiv.className = 'feedback-text correct';
+                kwAnswers[idx] = answer;
+            } else {
+                feedbackDiv.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+                feedbackDiv.className = 'feedback-text incorrect';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(feedbackDiv);
+        container.appendChild(div);
+        textarea.addEventListener('input', (e) => { kwAnswers[idx] = e.target.value; });
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) { document.getElementById('examResult').innerHTML = "<span style='color:green'>Unit already passed!</span>"; document.getElementById('nextUnitBtn').disabled = false; return; }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) { let wait = Math.ceil((lockUntil - Date.now()) / 60000); document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`; return; }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) { alert(currentLang === 'en' ? "Please register first on Unit 1." : "Por favor regístrese primero en la Unidad 1."); return; }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    const bodyClsSA = document.body.classList;
+    const isEsSA = bodyClsSA.contains('lang-es');
+    const isBothSA = bodyClsSA.contains('lang-both');
+    let advCorrect = 0;
+    for (let i = 0; i < 10; i++) {
+        let ans = kwAnswers[i].toLowerCase();
+        if (ans.length < 100) continue;
+        const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+        const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+        const hits = isBothSA ? Math.max(enHits, esHits) : (isEsSA ? esHits : enHits);
+        if (hits >= 3) advCorrect++;
+    }
+    let mcPercent = correctMC / 20;
+    let advPercent = advCorrect / 10;
+    const studentTrack = student.track || 'cert';
+    const isGrad = isMastersLevel(studentTrack);
+    const mcGatePass = correctMC >= 18;
+    const saGatePass = isGrad ? (advCorrect >= 9) : true;
+    let total = isGrad ? (mcPercent * 0.5 + advPercent * 0.5) : mcPercent;
+
+    if (isGrad && mcPreviouslyPassed) {
+        if (saGatePass) {
+            unitPassed = true;
+            progress.unit10 = true;
+            localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+            localStorage.removeItem('cts_pm_u10_lockout');
+            localStorage.removeItem(SA_LOCK_KEY);
+            document.getElementById('examResult').innerHTML = `<span style='color:green'>✅ PASSED. MC: ✓ already banked · SA: ${advCorrect}/10. Unit 10 completed! Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lockUntil = Date.now() + 15 * 60 * 1000;
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            document.getElementById('examResult').innerHTML = `<span style='color:red'>❌ MC: ✓ already banked · SA: ${advCorrect}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for 15 minutes.</span>`;
+            startTimer();
+        }
+        return;
+    }
+
+    if (mcGatePass && saGatePass) {
+        unitPassed = true;
+        progress.unit10 = true;
+        localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_pm_u10_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        document.getElementById('examResult').innerHTML = `<span style='color:green'>✅ PASSED (${Math.round(total * 100)}%). Unit 10 completed! Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isGrad && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + 15 * 60 * 1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>❌ MC: ${correctMC}/20 ✓ passed and banked. SA ${advCorrect}/10 (need 9). When you retry in 15 minutes, you'll only need the short-answer section — MC stays passed.</span>`;
+        startTimer();
+    } else {
+        lockUntil = Date.now() + 15 * 60 * 1000;
+        localStorage.setItem('cts_pm_u10_lockout', String(lockUntil));
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>❌ FAILED (${Math.round(total * 100)}% < 90%). Locked for 15 minutes.</span>`;
+        startTimer();
+    }
+}
+
+function startTimer() {
+    let timerEl = document.createElement('div');
+    timerEl.id = 'unitTimer';
+    timerEl.style.marginTop = '10px';
+    let existing = document.getElementById('unitTimer');
+    if (!existing) document.getElementById('examResult').after(timerEl);
+    let interval = setInterval(() => {
+        let remaining = lockUntil - Date.now();
+        if (remaining <= 0 || unitPassed) { clearInterval(interval); if (document.getElementById('unitTimer')) document.getElementById('unitTimer').remove(); return; }
+        let mins = Math.floor(remaining / 60000);
+        let secs = Math.floor((remaining % 60000) / 1000);
+        let timerDiv = document.getElementById('unitTimer');
+        if (timerDiv) timerDiv.innerText = `⏱️ Locked: ${mins}:${secs.toString().padStart(2, '0')}`;
+    }, 1000);
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        currentLang = (lang === 'es') ? 'es' : 'en';
+        renderQuestions();
+    };
+});
+
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✅ Unit 10 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPMReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

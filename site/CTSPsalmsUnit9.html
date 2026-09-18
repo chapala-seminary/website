@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Psalms — Unit 9: Psalm 103, Count Your Blessings</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 10 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 The Book of Psalms — Unit 9: Psalm 103, Count Your Blessings</span><span class="lang-es">📖 El Libro de los Salmos — Unidad 9: Salmo 103, Cuenta Tus Bendiciones</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Bless the Lord, O my soul; and forget not all His benefits." — Psalm 103:2 (NKJV)</span><span class="lang-es">"Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios." — Salmo 103:2 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to The Book of Psalms. Please register before beginning Unit 9.</span><span class="lang-es">Bienvenido a El Libro de los Salmos. Por favor regístrese antes de comenzar la Unidad 9.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+            <h3>1. Count Your Blessings</h3>
+            <p>In a revival campaign many years ago, the song leader Charles M. Alexander asked a paralyzed man, who had been wheeled down the aisle in his chair, to name his favorite hymn. The man called out for "Count Your Blessings." There was no whining and no complaining from that poor man &mdash; only a vivid, settled sense of the goodness of God. He had every earthly reason to grumble, and instead he counted his blessings. That is exactly what David does in Psalm 103.</p>
+            <p>The old hymn says, "Count your blessings, name them one by one, and it will surprise you what the Lord hath done." David sat down to do just that &mdash; to count up all the benefits of God. The only trouble was that there were so many of them he had to tie them into bundles to remember them all, and then he shaped the bundles into a song. If more of us as Christians would praise God for His blessings and stop complaining and feeling sorry for ourselves, we would be far happier, and we could turn the world upside down. It is a tragic thing to see ungrateful, complaining Christians advertising the good news of Jesus Christ &mdash; like starving men hired to carry signs for the finest restaurant in town. It is time we counted our blessings instead of our anxieties.</p>
+            <div class="scripture">
+                <strong>Psalm 103:1-2 (NKJV):</strong> "Bless the LORD, O my soul; and all that is within me, bless His holy name! Bless the LORD, O my soul, and forget not all His benefits."
+            </div>
+
+            <h3>2. The First Blessing: He Forgives Our Sins</h3>
+            <p>The first benefit David names is forgiveness: "who forgives all your iniquities." All through the Bible, sin is pictured as a disease &mdash; a terrible disease that is always fatal, and every one of us carries it. As Romans 3:23 says, "all have sinned and fall short of the glory of God." The disease is fatal, but there is one cure: Jesus died on the cross to forgive our sins. No matter what they are, they can be forgiven; we are given a second chance.</p>
+            <p>Think of the woman caught in her sin and dragged before Jesus, whom the crowd was ready to stone. He did not excuse what she had done, but neither did He condemn her; He said, "Neither do I condemn you; go and sin no more." That is the wonder of this first blessing. The guilt that would have crushed us, the record that stood against us, God has dealt with at the cross. When we count our blessings, this is where the counting must begin &mdash; not with health or wealth, but with a forgiven soul.</p>
+
+            <h3>3. The Second Blessing: He Heals Our Diseases</h3>
+            <p>The second benefit is healing: "who heals all your diseases." Only a person who has suffered a severe illness and recovered can fully appreciate the gift of health. Apparently the psalmist had passed through some terrible sickness that had wrecked his body and crushed his spirit, and now that he was well again he could not stop praising God for it.</p>
+            <p>I thank God for every instrument of healing He has given us &mdash; the doctors, the nurses, the medicines, the hospitals, all the miracles of modern medicine. But I am convinced that all healing is finally divine healing and a gift from God. The doctors do all they can do, and then we depend on God to bring the healing. Remember the woman who had been bleeding for twelve years. She had gone from doctor to doctor and spent everything she had, with no cure. Then one day she met the Great Physician, Jesus Christ, reached out and touched the hem of His garment, and was healed at once. Power flowed from Jesus, and He said to her, "Daughter, be of good cheer; your faith has made you well." Whether He heals through a physician's hands or by His own direct mercy, the healing is His gift, and it is cause to bless His name.</p>
+
+            <h3>4. The Third Blessing: He Redeems Us from the Pit</h3>
+            <p>The third benefit is rescue: "who redeems your life from destruction" &mdash; literally, from the pit. The word "pit" may point to the grave and to death itself; there may have been a dark moment when the psalmist's life hung in the balance, and God reached down and pulled him back. But there is also a deeper pit in view &mdash; the eternal pit that Jesus called hell. People sometimes say lightly to one another, "Go to hell," but hell is no light matter, and we would not wish it on anyone. The great blessing of the gospel is that those who have trusted in Jesus will never be cast into that everlasting pit.</p>
+            <div class="illustration">
+                <strong>Saved from the Pit:</strong> A young preacher was conducting a revival service when a well-dressed woman came down the aisle and received Christ. She went home to her husband, a big, raw-boned farmer over six feet tall, and said, "Dave, I heard a young fellow preach today, and I was saved. I'm so happy &mdash; I've been worried about where I would spend eternity, and today I got saved." Her husband loved her, but he was so furious he nearly struck her. "What kind of home are we going to have," he demanded, "with you saved and me lost?" He decided to deal with that preacher the next day. He came to the service ready for a fight, and sat there as meek as a lamb instead. He heard the story of Christ on the cross, bearing all our sins, and at the invitation he went forward and said, "Preacher, tell me how to be saved." From then on he went about thanking the preacher and praising God, for God had saved him from the pit.
+            </div>
+
+            <h3>5. The Fourth Blessing: He Crowns Us with Love and Mercy</h3>
+            <p>The fourth benefit is honor: "who crowns you with lovingkindness and tender mercies." This is no crown of gold, but a crown of steadfast love and mercy. Perhaps David means how close it is &mdash; nothing is nearer a person's head than a crown. Perhaps he means how completely it surrounds us, for a crown encircles the head. Whatever the exact picture, the truth is that God's love and mercy are always there, all the way around us, resting on us.</p>
+            <p>Nothing can ever cause us to lose that love. Sometimes it feels as though our sin must surely have cost us God's affection, but Jesus promised He would be with us always. As a parent, I know I will never stop loving my children. I may be disappointed with them, I may be angry, I may even have to discipline them &mdash; but nothing could make me stop loving them, for my love does not depend on their performance. And it is wonderful beyond words to know that even when I sin, God still crowns me with His love and His mercy. Sometimes it feels as though we have lost that love because He has not answered as we hoped or healed as we asked. But remember that some of God's choicest servants were never healed in this life &mdash; the apostle Paul kept his thorn in the flesh, and God told him, "My grace is sufficient for you." The crown of love rests on us still.</p>
+
+            <h3>6. The Fifth Blessing: He Satisfies Us with Good</h3>
+            <p>The fifth benefit is provision: "who satisfies your mouth with good things." No human need is finally left unsatisfied by God. He puts food on the table; He clothes the fields; in His providence He cares for the tiniest animal and the most ordinary flower. Surely, then, we can trust Him to care for us. David wrote in another place, "I have been young, and now am old; yet I have not seen the righteous forsaken, nor his descendants begging bread" &mdash; and neither, in all my years, have I.</p>
+            <p>Because God gives us our food day by day, we must never take it for granted. A college student once sat down at a cafeteria table with five other girls and quietly bowed her head to say grace. Some of the others laughed. When she finished, she asked why they had laughed. "Aren't you thankful?" she said. "For what?" one replied. "We paid for it." "Where did you get the money?" "From our families." "Where did they get it?" "They worked for it." "And where did they get the strength to work &mdash; where did all of it finally come from?" That evening, two more of the girls bowed to say grace before supper; the next day, all six of them did. We bless God because He satisfies our desires with good things.</p>
+
+            <h3>7. The Sixth Blessing: He Renews Our Strength</h3>
+            <div class="scripture">
+                <strong>Psalm 103:5 (NKJV):</strong> "…so that your youth is renewed like the eagle's."
+            </div>
+            <p>The sixth benefit is renewal: our youth renewed like the eagle's. One of the deepest longings of the human heart is to stay young; billions are spent every year on cosmetics and surgery and exercise to turn back the clock. Ponce de Leon was neither the first nor the last to search for the fountain of youth. But sooner or later time wears down every earthly body. The renewal David sings of is something else entirely. As Isaiah promised, "those who wait on the LORD shall renew their strength; they shall mount up with wings like eagles; they shall run and not be weary; they shall walk and not faint." That kind of renewal has nothing to do with age. I have known young people with no reason to live and no purpose, and I have known saints in their seventies and eighties and nineties who were soaring with the eagles &mdash; a zest for life, a zest for witnessing, a zest for God. Where do they get such strength? They are renewed continually by God Himself.</p>
+
+            <h3>8. Telling It with Our Last Breath</h3>
+            <div class="illustration">
+                <strong>John Jasper's Joy:</strong> When John Jasper, the great preacher who had been a slave, was converted, his master told him, "Keep telling it, John. Fly like an angel, and wherever you go, tell it!" Jasper said of his conversion morning: "O happy day! Can I ever forget it? That was my conversion morning, and that was the day the Lord sent me out with the good news of the kingdom. For more than sixty years I've been telling it. My step is getting rather slow, my voice breaks down, and sometimes I'm awful tired. But still I'm telling it. My lips shall sing the dying love of the Lamb with my last expiring breath." That is what a counted blessing finally becomes &mdash; not a private comfort hoarded up, but a song that must be sung, a testimony that must be told.
+            </div>
+            <p>So David gathers up all the benefits of God &mdash; forgiveness, healing, rescue from the pit, the crown of love, satisfaction with good, and renewed strength &mdash; and ties them into one great song of praise. Thank God that He renews our strength through Jesus Christ, and gives us a youth that the world and the years can never touch. Bless the LORD, O my soul, and forget not all His benefits. Count them, name them one by one, and it will surprise you what the Lord has done.</p>
+</div>
+
+<div class="lang-es">
+            <h3>1. Cuenta Tus Bendiciones</h3>
+            <p>En una campaña de avivamiento hace muchos años, el director de canto Charles M. Alexander pidió a un hombre paralítico, a quien habían llevado por el pasillo en su silla de ruedas, que nombrara su himno favorito. El hombre pidió "Cuenta tus bendiciones." No hubo queja ni lamento de aquel pobre hombre &mdash; solo un vivo y firme sentido de la bondad de Dios. Tenía toda razón terrenal para quejarse, y en cambio contó sus bendiciones. Eso es exactamente lo que hace David en el Salmo 103.</p>
+            <p>El viejo himno dice: "Cuenta tus bendiciones, una a una cuenta, y verás, sorprendido, lo que Dios por ti hará." David se sentó a hacer precisamente eso &mdash; a contar todos los beneficios de Dios. El único problema fue que había tantos que tuvo que atarlos en haces para recordarlos todos, y luego dio forma de canción a esos haces. Si más de nosotros como cristianos alabáramos a Dios por Sus bendiciones y dejáramos de quejarnos y de sentir lástima de nosotros mismos, seríamos mucho más felices, y podríamos poner el mundo de cabeza. Es algo trágico ver a cristianos ingratos y quejumbrosos anunciando las buenas nuevas de Jesucristo &mdash; como hombres hambrientos contratados para cargar carteles del mejor restaurante de la ciudad. Es hora de que contemos nuestras bendiciones en lugar de nuestras ansiedades.</p>
+            <div class="scripture">
+                <strong>Salmo 103:1-2 (RVG):</strong> "Bendice, alma mía, a Jehová; y bendiga todo mi ser su santo nombre. Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios."
+            </div>
+
+            <h3>2. La Primera Bendición: &Eacute;l Perdona Nuestros Pecados</h3>
+            <p>El primer beneficio que David nombra es el perdón: "&Eacute;l es quien perdona todas tus iniquidades." Por toda la Biblia, el pecado se presenta como una enfermedad &mdash; una enfermedad terrible que siempre es mortal, y cada uno de nosotros la lleva. Como dice Romanos 3:23: "por cuanto todos pecaron, y están destituidos de la gloria de Dios." La enfermedad es mortal, pero hay una sola cura: Jesús murió en la cruz para perdonar nuestros pecados. No importa cuáles sean, pueden ser perdonados; se nos da una segunda oportunidad.</p>
+            <p>Piense en la mujer sorprendida en su pecado y arrastrada ante Jesús, a quien la multitud estaba lista para apedrear. &Eacute;l no excusó lo que ella había hecho, pero tampoco la condenó; dijo: "Ni yo te condeno; vete, y no peques más." Esa es la maravilla de esta primera bendición. La culpa que nos habría aplastado, el registro que estaba contra nosotros, Dios lo ha tratado en la cruz. Cuando contamos nuestras bendiciones, aquí debe comenzar la cuenta &mdash; no con la salud ni con la riqueza, sino con un alma perdonada.</p>
+
+            <h3>3. La Segunda Bendición: &Eacute;l Sana Nuestras Enfermedades</h3>
+            <p>El segundo beneficio es la sanidad: "&Eacute;l es quien sana todas tus dolencias." Solo quien ha sufrido una enfermedad grave y se ha recuperado puede apreciar plenamente el don de la salud. Al parecer el salmista había pasado por alguna enfermedad terrible que había arruinado su cuerpo y aplastado su espíritu, y ahora que estaba bien de nuevo no podía dejar de alabar a Dios por ello.</p>
+            <p>Doy gracias a Dios por cada instrumento de sanidad que nos ha dado &mdash; los médicos, las enfermeras, las medicinas, los hospitales, todos los milagros de la medicina moderna. Pero estoy convencido de que toda sanidad es al fin sanidad divina y un don de Dios. Los médicos hacen todo lo que pueden, y luego dependemos de Dios para que traiga la sanidad. Recuerde a la mujer que había sangrado por doce años. Había ido de médico en médico y gastado todo lo que tenía, sin cura. Entonces un día se encontró con el Gran Médico, Jesucristo, extendió la mano y tocó el borde de Su manto, y fue sanada al instante. Poder fluyó de Jesús, y &Eacute;l le dijo: "Hija, ten ánimo; tu fe te ha sanado." Ya sea que sane por las manos de un médico o por Su propia misericordia directa, la sanidad es Su don, y es motivo para bendecir Su nombre.</p>
+
+            <h3>4. La Tercera Bendición: &Eacute;l Nos Rescata del Hoyo</h3>
+            <p>El tercer beneficio es el rescate: "&Eacute;l es quien rescata del hoyo tu vida" &mdash; literalmente, de la fosa. La palabra "hoyo" puede señalar la tumba y la muerte misma; pudo haber un momento oscuro en que la vida del salmista pendía de un hilo, y Dios extendió la mano y lo sacó. Pero también hay un hoyo más profundo a la vista &mdash; el hoyo eterno que Jesús llamó infierno. La gente a veces se dice a la ligera "vete al infierno," pero el infierno no es cosa ligera, y no se lo desearíamos a nadie. La gran bendición del evangelio es que los que han confiado en Jesús nunca serán echados en aquel hoyo eterno.</p>
+            <div class="illustration">
+                <strong>Rescatado del Hoyo:</strong> Un joven predicador dirigía un culto de avivamiento cuando una mujer bien vestida bajó por el pasillo y recibió a Cristo. Fue a casa con su esposo, un granjero grande y fornido de más de metro ochenta, y le dijo: "Dave, oí predicar hoy a un joven, y fui salva. Estoy tan feliz &mdash; he estado preocupada por dónde pasaría la eternidad, y hoy fui salva." Su esposo la amaba, pero se enfureció tanto que casi la golpeó. "¿Qué clase de hogar vamos a tener," exigió, "contigo salva y yo perdido?" Decidió arreglar cuentas con ese predicador al día siguiente. Vino al culto listo para pelear, y en cambio se quedó sentado manso como un cordero. Oyó la historia de Cristo en la cruz, llevando todos nuestros pecados, y a la invitación pasó al frente y dijo: "Predicador, dígame cómo ser salvo." Desde entonces anduvo dando gracias al predicador y alabando a Dios, porque Dios lo había rescatado del hoyo.
+            </div>
+
+            <h3>5. La Cuarta Bendición: &Eacute;l Nos Corona de Amor y Misericordia</h3>
+            <p>El cuarto beneficio es la honra: "&Eacute;l es quien te corona de favores y misericordias." No es una corona de oro, sino una corona de amor firme y misericordia. Quizá David se refiere a cuán cerca está &mdash; nada está más cerca de la cabeza de una persona que una corona. Quizá se refiere a cuán completamente nos rodea, pues una corona ciñe la cabeza. Sea cual sea la imagen exacta, la verdad es que el amor y la misericordia de Dios siempre están ahí, todo alrededor de nosotros, reposando sobre nosotros.</p>
+            <p>Nada puede jamás hacernos perder ese amor. A veces parece que nuestro pecado seguramente nos ha costado el afecto de Dios, pero Jesús prometió que estaría con nosotros siempre. Como padre, sé que nunca dejaré de amar a mis hijos. Puedo decepcionarme de ellos, puedo enojarme, puedo incluso tener que disciplinarlos &mdash; pero nada podría hacerme dejar de amarlos, porque mi amor no depende de su desempeño. Y es maravilloso más allá de las palabras saber que aun cuando peco, Dios todavía me corona con Su amor y Su misericordia. A veces parece que hemos perdido ese amor porque &Eacute;l no respondió como esperábamos ni sanó como pedimos. Pero recuerde que algunos de los siervos más escogidos de Dios nunca fueron sanados en esta vida &mdash; el apóstol Pablo conservó su aguijón en la carne, y Dios le dijo: "Bástate mi gracia." La corona de amor reposa sobre nosotros todavía.</p>
+
+            <h3>6. La Quinta Bendición: &Eacute;l Nos Sacia de Bien</h3>
+            <p>El quinto beneficio es la provisión: "&Eacute;l es quien sacia de bien tu boca." Ninguna necesidad humana queda al fin sin satisfacer por Dios. &Eacute;l pone alimento en la mesa; &Eacute;l viste los campos; en Su providencia cuida del animal más pequeño y de la flor más común. Seguramente, entonces, podemos confiar en que cuidará de nosotros. David escribió en otro lugar: "Joven fui, y he envejecido, y no he visto justo desamparado, ni su descendencia que mendigue pan" &mdash; y tampoco yo, en todos mis años.</p>
+            <p>Porque Dios nos da el alimento día a día, nunca debemos darlo por sentado. Una estudiante universitaria se sentó una vez a una mesa de cafetería con otras cinco muchachas e inclinó en silencio la cabeza para dar gracias. Algunas se rieron. Cuando terminó, preguntó por qué se habían reído. "¿No están agradecidas?" dijo. "¿Por qué?" respondió una. "Nosotras lo pagamos." "¿De dónde sacaron el dinero?" "De nuestras familias." "¿Y de dónde lo sacaron ellas?" "Trabajaron por él." "¿Y de dónde sacaron la fuerza para trabajar &mdash; de dónde vino al fin todo?" Esa noche, dos más de las muchachas inclinaron la cabeza para dar gracias antes de la cena; al día siguiente, las seis lo hicieron. Bendecimos a Dios porque sacia de bien nuestros deseos.</p>
+
+            <h3>7. La Sexta Bendición: &Eacute;l Renueva Nuestras Fuerzas</h3>
+            <div class="scripture">
+                <strong>Salmo 103:5 (RVG):</strong> "…de modo que te rejuvenezcas como el águila."
+            </div>
+            <p>El sexto beneficio es la renovación: nuestra juventud renovada como la del águila. Uno de los anhelos más profundos del corazón humano es seguir joven; se gastan miles de millones cada año en cosméticos, cirugías y ejercicio para hacer retroceder el reloj. Ponce de León no fue ni el primero ni el último en buscar la fuente de la juventud. Pero tarde o temprano el tiempo desgasta todo cuerpo terrenal. La renovación que David canta es algo enteramente distinto. Como prometió Isaías: "los que esperan a Jehová tendrán nuevas fuerzas; levantarán las alas como águilas; correrán, y no se cansarán; caminarán, y no se fatigarán." Esa clase de renovación no tiene nada que ver con la edad. He conocido jóvenes sin razón para vivir y sin propósito, y he conocido santos de setenta, ochenta y noventa años que volaban con las águilas &mdash; con ánimo para vivir, ánimo para testificar, ánimo para Dios. ¿De dónde sacan tal fuerza? Son renovados continuamente por Dios mismo.</p>
+
+            <h3>8. Contándolo con Nuestro Último Aliento</h3>
+            <div class="illustration">
+                <strong>El Gozo de John Jasper:</strong> Cuando John Jasper, el gran predicador que había sido esclavo, se convirtió, su amo le dijo: "Sigue contándolo, John. Vuela como un ángel, y dondequiera que vayas, ¡cuéntalo!" Jasper dijo de la mañana de su conversión: "¡Oh día feliz! ¿Podré olvidarlo alguna vez? Esa fue la mañana de mi conversión, y ese fue el día en que el Señor me envió con las buenas nuevas del reino. Por más de sesenta años lo he estado contando. Mi paso se hace algo lento, mi voz se quiebra, y a veces estoy terriblemente cansado. Pero todavía lo cuento. Mis labios cantarán el amor agonizante del Cordero con mi último aliento." En eso se convierte al fin una bendición contada &mdash; no en un consuelo privado guardado para uno mismo, sino en una canción que debe cantarse, un testimonio que debe contarse.
+            </div>
+            <p>Así David reúne todos los beneficios de Dios &mdash; el perdón, la sanidad, el rescate del hoyo, la corona de amor, la satisfacción con el bien, y las fuerzas renovadas &mdash; y los ata en una gran canción de alabanza. Gracias a Dios que renueva nuestras fuerzas por medio de Jesucristo, y nos da una juventud que el mundo y los años nunca pueden tocar. Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios. Cuéntalos, nómbralos uno a uno, y verás, sorprendido, lo que el Señor ha hecho.</p>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 9 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 9 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Psalms — Unit 9 (Josh engine, Psalm 103)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 9;
+const COURSE = 'psalms';
+const NEXT_UNIT_URL = 'CTSPsalmsUnit10.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Psalm 1 - The Two Ways",
+    "Psalm 23 - The Shepherd",
+    "Psalm 24 - The King of Glory",
+    "Psalm 51 - The Penitential Psalm",
+    "Psalm 119 - The Word of God",
+    "Psalm 22 - The Forsaken / Messianic Psalm",
+    "Psalm 56 - When I Am Afraid",
+    "Psalm 28 - When God Is Silent",
+    "Psalm 103 - Count Your Blessings",
+    "Psalm 55 - Casting Your Burden",
+    "The Psalms in Ministry I - Capstone",
+    "The Psalms in Ministry II - Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPsalmsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// MC answer key: A=B=C=D=5; all 20 verified against Psalm 103
+const mcQuestions = [
+    { textEn: "1. The paralyzed man who asked for \"Count Your Blessings\" at the revival illustrates what attitude the lesson commends?", textEs: "1. El hombre paralítico que pidió \"Cuenta tus bendiciones\" en el avivamiento ilustra ¿qué actitud recomienda la lección?",
+      optionsEn: ["Gratitude that counts God's mercies even in the midst of suffering", "That the sick should be left alone", "That cheerful people are never truly ill", "That music cures the body"],
+      optionsEs: ["Gratitud que cuenta las misericordias de Dios aun en medio del sufrimiento", "Que a los enfermos se les debe dejar solos", "Que las personas alegres nunca están de veras enfermas", "Que la música cura el cuerpo"], explanationEn: "The paralyzed man who asked for 'Count Your Blessings' models gratitude that counts God's mercies even in suffering.", explanationEs: "El hombre paralítico que pidió 'Cuenta tus bendiciones' modela la gratitud que cuenta las misericordias de Dios aun en el sufrimiento.", correct: 0 },
+    { textEn: "2. According to the lesson, why did David have to \"tie his blessings into bundles\"?", textEs: "2. Según la lección, ¿por qué tuvo David que \"atar sus bendiciones en haces\"?",
+      optionsEn: ["He was running out of time", "There were so many he needed to group them to remember them all", "He wanted to hide them", "He could only count to ten"],
+      optionsEs: ["Se le acababa el tiempo", "Eran tantas que necesitaba agruparlas para recordarlas todas", "Quería esconderlas", "Solo sabía contar hasta diez"], explanationEn: "David had so many blessings he tied them into bundles to remember them all — God's benefits are beyond counting.", explanationEs: "David tenía tantas bendiciones que las ató en haces para recordarlas todas — los beneficios de Dios son innumerables.", correct: 1 },
+    { textEn: "3. To what does the lesson compare ungrateful, complaining Christians?", textEs: "3. ¿Con qué compara la lección a los cristianos ingratos y quejumbrosos?",
+      optionsEn: ["Soldiers without weapons", "Sheep without a shepherd", "Starving men hired to carry signs for the finest restaurant", "Lamps without oil"],
+      optionsEs: ["Soldados sin armas", "Ovejas sin pastor", "Hombres hambrientos contratados para cargar carteles del mejor restaurante", "Lámparas sin aceite"], explanationEn: "Ungrateful, complaining Christians are like starving men carrying signs for the finest restaurant — they advertise what they won't enjoy.", explanationEs: "Los cristianos ingratos y quejumbrosos son como hombres hambrientos cargando carteles del mejor restaurante — anuncian lo que no disfrutan.", correct: 2 },
+    { textEn: "4. What does Psalm 103:2 call us to do?", textEs: "4. ¿A qué nos llama el Salmo 103:2?",
+      optionsEn: ["Fear the Lord and depart from evil", "Sing a new song to the Lord", "Wait quietly for the Lord", "Bless the Lord and forget not all His benefits"],
+      optionsEs: ["Temer a Jehová y apartarse del mal", "Cantar a Jehová un cántico nuevo", "Esperar en silencio a Jehová", "Bendecir a Jehová y no olvidar ninguno de sus beneficios"], explanationEn: "Psalm 103:2 sets the theme: 'Bless the LORD, O my soul, and forget not all His benefits.'", explanationEs: "El Salmo 103:2 fija el tema: 'Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios.'", correct: 3 },
+    { textEn: "5. What is the FIRST benefit David names in Psalm 103?", textEs: "5. ¿Cuál es el PRIMER beneficio que David nombra en el Salmo 103?",
+      optionsEn: ["Forgiveness of all our iniquities", "Healing of diseases", "A long life", "Victory over enemies"],
+      optionsEs: ["El perdón de todas nuestras iniquidades", "La sanidad de las dolencias", "Una larga vida", "La victoria sobre los enemigos"], explanationEn: "The first benefit David names is forgiveness — God forgives all our iniquities, the deepest mercy of all.", explanationEs: "El primer beneficio que David nombra es el perdón — Dios perdona todas nuestras iniquidades, la mayor misericordia de todas.", correct: 0 },
+    { textEn: "6. How does the lesson describe sin throughout the Bible?", textEs: "6. ¿Cómo describe la lección el pecado a lo largo de la Biblia?",
+      optionsEn: ["As a disease that is always fatal, which every person carries", "As a debt that can be repaid", "As a habit easily broken", "As a problem only for some people"],
+      optionsEs: ["Como una enfermedad siempre mortal, que toda persona lleva", "Como una deuda que puede pagarse", "Como un hábito fácil de romper", "Como un problema solo para algunos"], explanationEn: "Throughout the Bible sin is pictured as a disease that is always fatal, and which every person carries.", explanationEs: "Por toda la Biblia el pecado se presenta como una enfermedad siempre mortal, que cada persona lleva.", correct: 0 },
+    { textEn: "7. In illustrating forgiveness, the lesson recalls the woman about to be stoned. What did Jesus say to her?", textEs: "7. Al ilustrar el perdón, la lección recuerda a la mujer a punto de ser apedreada. ¿Qué le dijo Jesús?",
+      optionsEn: ["\"Your faith has saved you\"", "\"Go in peace and be healed\"", "\"Neither do I condemn you; go and sin no more\"", "\"Today you will be with Me in paradise\""],
+      optionsEs: ["\"Tu fe te ha salvado\"", "\"Vete en paz y sé sana\"", "\"Ni yo te condeno; vete, y no peques más\"", "\"Hoy estarás conmigo en el paraíso\""], explanationEn: "To the woman about to be stoned Jesus said, 'Neither do I condemn you; go and sin no more' — forgiveness with a call to new life.", explanationEs: "A la mujer a punto de ser apedreada Jesús dijo: 'Ni yo te condeno; vete, y no peques más' — perdón con un llamado a nueva vida.", correct: 2 },
+    { textEn: "8. What is the SECOND benefit David names?", textEs: "8. ¿Cuál es el SEGUNDO beneficio que David nombra?",
+      optionsEn: ["He gives us riches", "He grants us fame", "He defeats our foes", "He heals all our diseases"],
+      optionsEs: ["Nos da riquezas", "Nos concede fama", "Vence a nuestros enemigos", "Sana todas nuestras dolencias"], explanationEn: "The second benefit is healing — He heals all our diseases, in His time and way.", explanationEs: "El segundo beneficio es la sanidad — &Eacute;l sana todas nuestras dolencias, en Su tiempo y manera.", correct: 3 },
+    { textEn: "9. What does the lesson conclude about the source of all healing?", textEs: "9. ¿Qué concluye la lección sobre la fuente de toda sanidad?",
+      optionsEn: ["All healing is finally divine healing and a gift from God", "Healing comes only through doctors", "Healing is purely a matter of willpower", "Healing is impossible today"],
+      optionsEs: ["Toda sanidad es al fin sanidad divina y un don de Dios", "La sanidad viene solo por los médicos", "La sanidad es pura cuestión de voluntad", "La sanidad es imposible hoy"], explanationEn: "Whether through a doctor's hands or direct mercy, all healing is finally divine healing and a gift from God.", explanationEs: "Sea por las manos de un médico o por misericordia directa, toda sanidad es al fin sanidad divina y un don de Dios.", correct: 0 },
+    { textEn: "10. Which Gospel account does the lesson use to illustrate God's healing?", textEs: "10. ¿Qué relato del Evangelio usa la lección para ilustrar la sanidad de Dios?",
+      optionsEn: ["The healing of blind Bartimaeus", "The woman with the issue of blood who touched His garment", "The ten lepers", "The man at the pool of Bethesda"],
+      optionsEs: ["La sanidad del ciego Bartimeo", "La mujer del flujo de sangre que tocó Su manto", "Los diez leprosos", "El hombre en el estanque de Betesda"], explanationEn: "The woman with the issue of blood touched His garment and was healed — picturing healing that comes by faith in Christ.", explanationEs: "La mujer del flujo de sangre tocó Su manto y fue sanada — representando la sanidad que viene por la fe en Cristo.", correct: 1 },
+    { textEn: "11. What is the THIRD benefit, and what does \"the pit\" refer to?", textEs: "11. ¿Cuál es el TERCER beneficio, y a qué se refiere \"el hoyo\"?",
+      optionsEn: ["Wisdom; the depths of ignorance", "Peace; the storms of life", "Redemption from the pit; the grave and the eternal pit of hell", "Strength; the weakness of old age"],
+      optionsEs: ["Sabiduría; las profundidades de la ignorancia", "Paz; las tormentas de la vida", "Rescate del hoyo; la tumba y el hoyo eterno del infierno", "Fuerza; la debilidad de la vejez"], explanationEn: "The third benefit is redemption from the pit — both the grave and the eternal pit of hell, from which Christ saves us.", explanationEs: "El tercer beneficio es el rescate del hoyo — tanto la tumba como el hoyo eterno del infierno, del cual Cristo nos salva.", correct: 2 },
+    { textEn: "12. In the \"saved from the pit\" story, how did the furious farmer respond after coming to the service?", textEs: "12. En la historia de \"rescatado del hoyo,\" ¿cómo respondió el granjero furioso tras venir al culto?",
+      optionsEn: ["He stormed out in anger", "He argued with the preacher", "He waited silently and left unchanged", "He went forward and asked how to be saved"],
+      optionsEs: ["Salió furioso", "Discutió con el predicador", "Esperó en silencio y se fue sin cambiar", "Pasó al frente y preguntó cómo ser salvo"], explanationEn: "The furious farmer came to fight the preacher but, hearing of the cross, went forward and asked how to be saved.", explanationEs: "El granjero furioso vino a pelear con el predicador pero, al oír de la cruz, pasó al frente y preguntó cómo ser salvo.", correct: 3 },
+    { textEn: "13. What is the FOURTH benefit David names?", textEs: "13. ¿Cuál es el CUARTO beneficio que David nombra?",
+      optionsEn: ["He crowns us with lovingkindness and tender mercies", "He gives us a crown of gold", "He makes us rulers over nations", "He grants us many children"],
+      optionsEs: ["Nos corona de favores y misericordias", "Nos da una corona de oro", "Nos hace gobernantes de naciones", "Nos concede muchos hijos"], explanationEn: "The fourth benefit is honor — He crowns us with lovingkindness and tender mercies that surround us completely.", explanationEs: "El cuarto beneficio es la honra — &Eacute;l nos corona de favores y misericordias que nos rodean por completo.", correct: 0 },
+    { textEn: "14. What does the lesson say about whether our sin can cause us to lose God's love?", textEs: "14. ¿Qué dice la lección sobre si nuestro pecado puede hacernos perder el amor de Dios?",
+      optionsEn: ["Sin permanently removes God's love", "Nothing can cause us to lose it; His love does not depend on our performance", "We must earn His love back each day", "Only great sins forfeit His love"],
+      optionsEs: ["El pecado quita para siempre el amor de Dios", "Nada puede hacernos perderlo; Su amor no depende de nuestro desempeño", "Debemos ganarlo de nuevo cada día", "Solo los grandes pecados pierden Su amor"], explanationEn: "Nothing can make us lose God's love; like a parent's love, it does not depend on our performance.", explanationEs: "Nada puede hacernos perder el amor de Dios; como el amor de un padre, no depende de nuestro desempeño.", correct: 1 },
+    { textEn: "15. Which example shows that some of God's choicest servants were not healed in this life?", textEs: "15. ¿Qué ejemplo muestra que algunos de los siervos más escogidos de Dios no fueron sanados en esta vida?",
+      optionsEn: ["Job losing his children", "Moses not entering Canaan", "Paul keeping his thorn in the flesh, told 'My grace is sufficient'", "Elijah fleeing Jezebel"],
+      optionsEs: ["Job perdiendo a sus hijos", "Moisés sin entrar en Canaán", "Pablo conservando su aguijón, a quien se dijo 'Bástate mi gracia'", "Elías huyendo de Jezabel"], explanationEn: "Paul kept his thorn in the flesh and was told 'My grace is sufficient' — God's choicest servants are not always healed here.", explanationEs: "Pablo conservó su aguijón en la carne y se le dijo 'Bástate mi gracia' — los siervos más escogidos de Dios no siempre son sanados aquí.", correct: 2 },
+    { textEn: "16. What is the FIFTH benefit David names?", textEs: "16. ¿Cuál es el QUINTO beneficio que David nombra?",
+      optionsEn: ["He gives us authority", "He grants us long days", "He surrounds us with friends", "He satisfies our mouth with good things"],
+      optionsEs: ["Nos da autoridad", "Nos concede largos días", "Nos rodea de amigos", "Sacia de bien nuestra boca"], explanationEn: "The fifth benefit is provision — He satisfies our mouth with good things; no true need is left unmet.", explanationEs: "El quinto beneficio es la provisión — &Eacute;l sacia de bien nuestra boca; ninguna necesidad verdadera queda sin suplir.", correct: 3 },
+    { textEn: "17. The cafeteria story, where the girls said \"we paid for it,\" is used to teach what about our daily provision?", textEs: "17. La historia de la cafetería, donde las muchachas dijeron \"nosotras lo pagamos,\" se usa para enseñar ¿qué acerca de nuestra provisión diaria?",
+      optionsEn: ["That nothing should be free", "That ultimately every good thing traces back to God, who deserves our thanks", "That paying for food removes the need for prayer", "That gratitude is only for special occasions"],
+      optionsEs: ["Que nada debería ser gratis", "Que en última instancia todo lo bueno se remonta a Dios, quien merece nuestra gratitud", "Que pagar por la comida elimina la necesidad de orar", "Que la gratitud es solo para ocasiones especiales"], explanationEn: "The cafeteria story teaches that ultimately every good thing traces back to God, who deserves our thanks.", explanationEs: "La historia de la cafetería enseña que en última instancia todo lo bueno se remonta a Dios, quien merece nuestra gratitud.", correct: 1 },
+    { textEn: "18. What is the SIXTH benefit, pictured as \"renewed like the eagle's\"?", textEs: "18. ¿Cuál es el SEXTO beneficio, representado como \"renovada como la del águila\"?",
+      optionsEn: ["Renewal of our wealth", "Renewal of our strength and youth", "Renewal of our reputation", "Renewal of our property"],
+      optionsEs: ["Renovación de nuestra riqueza", "Renovación de nuestra fuerza y juventud", "Renovación de nuestra reputación", "Renovación de nuestra propiedad"], explanationEn: "The sixth benefit is renewal — our strength and youth renewed like the eagle's, a vigor the years cannot touch.", explanationEs: "El sexto beneficio es la renovación — nuestra fuerza y juventud renovadas como las del águila, un vigor que los años no pueden tocar.", correct: 1 },
+    { textEn: "19. According to the lesson, the renewal David sings of has nothing to do with what?", textEs: "19. Según la lección, ¿con qué no tiene nada que ver la renovación que canta David?",
+      optionsEn: ["Faith", "Prayer", "Age", "Hope"],
+      optionsEs: ["La fe", "La oración", "La edad", "La esperanza"], explanationEn: "This renewal has nothing to do with age; saints in their nineties can soar while the young may have no life at all.", explanationEs: "Esta renovación no tiene nada que ver con la edad; santos de noventa años pueden remontarse mientras los jóvenes pueden no tener vida alguna.", correct: 2 },
+    { textEn: "20. In the closing illustration, what did John Jasper vow to do with his last expiring breath?", textEs: "20. En la ilustración final, ¿qué prometió John Jasper hacer con su último aliento?",
+      optionsEn: ["Rest at last from his labors", "Return to his old home", "Write down his whole story", "Sing the dying love of the Lamb — keep telling it"],
+      optionsEs: ["Descansar al fin de sus labores", "Volver a su antiguo hogar", "Escribir toda su historia", "Cantar el amor agonizante del Cordero — seguir contándolo"], explanationEn: "John Jasper vowed to sing the dying love of the Lamb with his last breath — a counted blessing becomes a testimony to tell.", explanationEs: "John Jasper prometió cantar el amor agonizante del Cordero con su último aliento — una bendición contada se vuelve un testimonio que contar.", correct: 3 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "21. Explain the opening illustration of the paralyzed man and the hymn, and how it sets up the theme of Psalm 103.",
+      textEs: "21. Explique la ilustración inicial del hombre paralítico y el himno, y cómo establece el tema del Salmo 103.",
+      kw_en: ["paralyzed", "Alexander", "count your blessings", "no complaining", "goodness of God", "benefits", "thankful", "praise"],
+      kw_es: ["paralítico", "Alexander", "cuenta tus bendiciones", "sin queja", "bondad de Dios", "beneficios", "agradecido", "alabanza"],
+      modelEn: "The lesson opens with a paralyzed man at a revival who, unable to do anything else, called for the hymn \"Count Your Blessings.\" Even in his affliction he chose gratitude, numbering God's mercies rather than his troubles. This sets up the theme of Psalm 103, which is one long call to bless the LORD and forget not all His benefits. The man becomes a living picture of what the psalm teaches: that thankfulness is not a response to easy circumstances but a deliberate counting of God's goodness in every condition, even hardship. Psalm 103 trains the soul to do exactly that.",
+      modelEs: "La lección abre con un hombre paralítico en un avivamiento que, sin poder hacer otra cosa, pidió el himno \"Cuenta tus bendiciones.\" Aun en su aflicción eligió la gratitud, contando las misericordias de Dios en vez de sus problemas. Esto establece el tema del Salmo 103, que es un largo llamado a bendecir a Jehová y no olvidar ninguno de Sus beneficios. El hombre se vuelve un retrato vivo de lo que enseña el salmo: que la gratitud no es una respuesta a circunstancias fáciles sino un contar deliberado de la bondad de Dios en toda condición, aun en la aflicción. El Salmo 103 entrena al alma a hacer exactamente eso." },
+    { textEn: "22. Why does the lesson say David had to \"tie his blessings into bundles,\" and what attitude does Psalm 103 call us to?",
+      textEs: "22. ¿Por qué dice la lección que David tuvo que \"atar sus bendiciones en haces,\" y a qué actitud nos llama el Salmo 103?",
+      kw_en: ["so many", "bundles", "remember", "song", "bless the Lord", "forget not", "count blessings", "not anxieties"],
+      kw_es: ["tantas", "haces", "recordar", "canción", "bendice a Jehová", "no olvides", "contar bendiciones", "no ansiedades"],
+      modelEn: "The lesson says David had so many blessings that he had to \"tie them into bundles\" to take them in, grouping God's benefits because they were too many to count one by one. Psalm 103 then calls us to the same practice: \"Bless the LORD, O my soul, and forget not all His benefits.\" The attitude the psalm calls for is deliberate, grateful remembering. Our natural tendency is to forget mercies and dwell on complaints; David disciplines his soul to do the opposite, to recall and rehearse God's goodness. Gratitude here is not a mood but a chosen act of remembering what God has done.",
+      modelEs: "La lección dice que David tenía tantas bendiciones que tuvo que \"atarlas en haces\" para abarcarlas, agrupando los beneficios de Dios porque eran demasiados para contarlos uno por uno. El Salmo 103 entonces nos llama a la misma práctica: \"Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios.\" La actitud que el salmo pide es un recordar deliberado y agradecido. Nuestra tendencia natural es olvidar las misericordias y detenernos en las quejas; David disciplina su alma para hacer lo contrario, para recordar y repasar la bondad de Dios. La gratitud aquí no es un estado de ánimo sino un acto elegido de recordar lo que Dios ha hecho." },
+    { textEn: "23. Explain the first benefit, forgiveness, including how the lesson pictures sin and its only cure.",
+      textEs: "23. Explique el primer beneficio, el perdón, incluyendo cómo presenta la lección el pecado y su única cura.",
+      kw_en: ["forgiveness", "sin", "disease", "fatal", "all have sinned", "cross", "cure", "second chance"],
+      kw_es: ["perdón", "pecado", "enfermedad", "mortal", "todos pecaron", "cruz", "cura", "segunda oportunidad"],
+      modelEn: "The first benefit David names is forgiveness: God \"forgives all your iniquities.\" The lesson pictures sin as a disease that is always fatal and which every person carries; left untreated it ends in eternal death. The only cure is the forgiveness God provides through the cross of Christ, where our sin was paid for. When God forgives, He deals with the deepest problem we have, not merely our circumstances but our guilt. This is named first because it is the greatest benefit of all: every other mercy flows from being a forgiven people, restored to the God against whom we had sinned.",
+      modelEs: "El primer beneficio que David nombra es el perdón: Dios \"perdona todas tus iniquidades.\" La lección presenta el pecado como una enfermedad siempre mortal que cada persona carga; sin tratar termina en muerte eterna. La única cura es el perdón que Dios provee por la cruz de Cristo, donde nuestro pecado fue pagado. Cuando Dios perdona, trata con el problema más profundo que tenemos, no meramente nuestras circunstancias sino nuestra culpa. Esto se nombra primero porque es el mayor beneficio de todos: toda otra misericordia fluye de ser un pueblo perdonado, restaurado al Dios contra quien habíamos pecado." },
+    { textEn: "24. Explain the second benefit, healing, and use the woman with the issue of blood to show the source of healing.",
+      textEs: "24. Explique el segundo beneficio, la sanidad, y use a la mujer del flujo de sangre para mostrar la fuente de la sanidad.",
+      kw_en: ["healing", "diseases", "doctors", "divine", "gift", "woman", "touched", "garment"],
+      kw_es: ["sanidad", "dolencias", "médicos", "divina", "don", "mujer", "tocó", "manto"],
+      modelEn: "The second benefit is that God \"heals all your diseases.\" The woman with the issue of blood, who had spent all she had on physicians without help, touched the hem of Jesus' garment in faith and was healed. The lesson uses her to show the true source of healing: it comes from God, received by faith in Christ. Whether God heals through a physician's skill or by direct mercy, all healing is finally His gift. He cares about the body as well as the soul. Yet the deepest healing is the wholeness He gives His people, in His time and way, for our good.",
+      modelEs: "El segundo beneficio es que Dios \"sana todas tus dolencias.\" La mujer del flujo de sangre, que había gastado todo lo que tenía en médicos sin remedio, tocó el borde del manto de Jesús con fe y fue sanada. La lección la usa para mostrar la verdadera fuente de la sanidad: viene de Dios, recibida por la fe en Cristo. Sea que Dios sane por la habilidad de un médico o por misericordia directa, toda sanidad es al fin Su don. Le importa el cuerpo tanto como el alma. Sin embargo la sanidad más profunda es la plenitud que da a Su pueblo, en Su tiempo y manera, para nuestro bien." },
+    { textEn: "25. Explain the third benefit, redemption from the pit, including both meanings of \"the pit.\"",
+      textEs: "25. Explique el tercer beneficio, el rescate del hoyo, incluyendo ambos significados de \"el hoyo.\"",
+      kw_en: ["redeem", "pit", "grave", "death", "hell", "eternal", "trusted Jesus", "never cast"],
+      kw_es: ["rescatar", "hoyo", "tumba", "muerte", "infierno", "eterno", "confiar en Jesús", "nunca echado"],
+      modelEn: "The third benefit is that God \"redeems your life from the pit.\" The lesson explains that \"the pit\" carries two meanings. It refers to the grave, the physical death from which God will finally raise His people; and it refers to the eternal pit, hell itself, from which Christ redeems all who trust Him. To redeem is to buy back at a price, and the price was the blood of Christ. So this benefit reaches past our present troubles to our ultimate destiny: God has rescued us from both the grave's final hold and the eternal ruin our sin deserved, securing us forever.",
+      modelEs: "El tercer beneficio es que Dios \"rescata del hoyo tu vida.\" La lección explica que \"el hoyo\" lleva dos significados. Se refiere a la tumba, la muerte física de la que Dios al fin levantará a Su pueblo; y se refiere al hoyo eterno, el infierno mismo, del cual Cristo redime a todos los que confían en &Eacute;l. Redimir es comprar de vuelta a un precio, y el precio fue la sangre de Cristo. Así este beneficio alcanza más allá de nuestras aflicciones presentes hasta nuestro destino final: Dios nos ha rescatado tanto del dominio final de la tumba como de la ruina eterna que nuestro pecado merecía, asegurándonos para siempre." },
+    { textEn: "26. What does the account of the farmer who was \"saved from the pit\" illustrate about God's power to redeem a hardened heart?",
+      textEs: "26. ¿Qué ilustra el relato del granjero que fue \"rescatado del hoyo\" sobre el poder de Dios para redimir un corazón endurecido?",
+      kw_en: ["farmer", "angry", "service", "cross", "saved", "went forward", "redeem", "changed"],
+      kw_es: ["granjero", "furioso", "culto", "cruz", "salvo", "pasó al frente", "redimir", "cambió"],
+      modelEn: "The lesson tells of a furious farmer who came to a service angry, perhaps intending to cause trouble, but who, on hearing the message of the cross, was so moved that he went forward and asked how to be saved. The account illustrates God's power to redeem even a hardened heart. No one is beyond the reach of grace; the very man who arrived in anger left as a new creation. It shows that the gospel does not depend on the worthiness or readiness of the hearer but on the power of God to break through and rescue, lifting a soul out of the pit of sin.",
+      modelEs: "La lección habla de un granjero furioso que vino a un culto enojado, quizá con intención de causar problemas, pero que, al oír el mensaje de la cruz, quedó tan conmovido que pasó al frente y preguntó cómo ser salvo. El relato ilustra el poder de Dios para redimir aun un corazón endurecido. Nadie está fuera del alcance de la gracia; el mismo hombre que llegó con ira se fue como una nueva criatura. Muestra que el evangelio no depende del mérito ni de la disposición del oyente sino del poder de Dios para penetrar y rescatar, sacando un alma del hoyo del pecado." },
+    { textEn: "27. Explain the fourth benefit, the crown of love and mercy, and why we cannot lose God's love.",
+      textEs: "27. Explique el cuarto beneficio, la corona de amor y misericordia, y por qué no podemos perder el amor de Dios.",
+      kw_en: ["crown", "love", "mercy", "surrounds", "cannot lose", "not depend", "Paul", "thorn"],
+      kw_es: ["corona", "amor", "misericordia", "rodea", "no perder", "no depende", "Pablo", "aguijón"],
+      modelEn: "The fourth benefit is that God \"crowns you with lovingkindness and tender mercies.\" To be crowned is to be surrounded and honored; God encircles His people with steadfast love and compassion. The lesson stresses that we cannot lose this love by our failures, because it does not depend on our performance but on God's own faithful character, like a parent's love for a child. Our sin grieves Him, but it cannot make Him stop loving us. This is profound security: the believer lives crowned with a love that was never earned and therefore can never be lost through unworthiness.",
+      modelEs: "El cuarto beneficio es que Dios \"te corona de favores y misericordias.\" Ser coronado es ser rodeado y honrado; Dios rodea a Su pueblo con amor firme y compasión. La lección recalca que no podemos perder este amor por nuestros fracasos, porque no depende de nuestro desempeño sino del carácter fiel de Dios mismo, como el amor de un padre por un hijo. Nuestro pecado le entristece, pero no puede hacer que deje de amarnos. Esta es una seguridad profunda: el creyente vive coronado de un amor que nunca se ganó y que por tanto nunca puede perderse por indignidad." },
+    { textEn: "28. Explain the fifth benefit, satisfaction with good, and use the cafeteria grace story.",
+      textEs: "28. Explique el quinto beneficio, la satisfacción con el bien, y use la historia de dar gracias en la cafetería.",
+      kw_en: ["satisfies", "good things", "provision", "food", "providence", "thankful", "grace", "where did it come from"],
+      kw_es: ["sacia", "cosas buenas", "provisión", "comida", "providencia", "agradecido", "gracias", "de dónde vino"],
+      modelEn: "The fifth benefit is that God \"satisfies your mouth with good things.\" He is a generous provider who meets the real needs of His people. The cafeteria grace story shows the wrong attitude: some girls would not give thanks, their first reason being \"we paid for it.\" But the lesson points out that ultimately every good thing traces back to God, the money, the work, the food, the very life that earned it. Nothing we have is finally self-made. Recognizing that all good comes from God turns ordinary provision into an occasion for gratitude, and guards us from the pride that forgets the Giver.",
+      modelEs: "El quinto beneficio es que Dios \"sacia de bien tu boca.\" Es un proveedor generoso que suple las necesidades reales de Su pueblo. La historia de la oración en la cafetería muestra la actitud equivocada: unas muchachas no daban gracias, siendo su primera razón \"nosotras lo pagamos.\" Pero la lección señala que en última instancia todo lo bueno se remonta a Dios, el dinero, el trabajo, la comida, la vida misma que lo ganó. Nada de lo que tenemos es al fin hecho por nosotros mismos. Reconocer que todo bien viene de Dios convierte la provisión ordinaria en ocasión de gratitud, y nos guarda del orgullo que olvida al Dador." },
+    { textEn: "29. Explain the sixth benefit, renewal of strength, and how Isaiah's eagle promise differs from the world's search for youth.",
+      textEs: "29. Explique el sexto beneficio, la renovación de las fuerzas, y cómo la promesa del águila de Isaías difiere de la búsqueda de juventud del mundo.",
+      kw_en: ["renew", "strength", "eagle", "Isaiah", "wait on the Lord", "not weary", "not about age", "fountain of youth"],
+      kw_es: ["renovar", "fuerzas", "águila", "Isaías", "esperar a Jehová", "no cansarse", "no es la edad", "fuente de juventud"],
+      modelEn: "The sixth benefit is that God renews our strength, so that our \"youth is renewed like the eagle's.\" The lesson is careful to say this renewal has nothing to do with age; it is not about staying physically young. It is the inner renewal Isaiah promised: those who wait on the LORD renew their strength and mount up with wings like eagles. The world spends itself searching for youth in the body and always loses the race; God gives a renewal of spirit that the years cannot touch. Saints can grow stronger in faith as the body weakens, soaring on a vigor that comes from waiting on the Lord.",
+      modelEs: "El sexto beneficio es que Dios renueva nuestras fuerzas, de modo que \"se rejuvenece como el águila\" nuestra juventud. La lección cuida de decir que esta renovación no tiene nada que ver con la edad; no se trata de mantenerse físicamente joven. Es la renovación interior que Isaías prometió: los que esperan en Jehová renuevan sus fuerzas y se remontan con alas como águilas. El mundo se desgasta buscando juventud en el cuerpo y siempre pierde la carrera; Dios da una renovación del espíritu que los años no pueden tocar. Los santos pueden crecer más fuertes en la fe mientras el cuerpo se debilita, remontándose con un vigor que viene de esperar en el Señor." },
+    { textEn: "30. Retell John Jasper's testimony and explain what a counted blessing should finally become.",
+      textEs: "30. Vuelva a contar el testimonio de John Jasper y explique en qué debe convertirse al fin una bendición contada.",
+      kw_en: ["John Jasper", "converted", "keep telling it", "sixty years", "last breath", "dying love", "testimony", "song"],
+      kw_es: ["John Jasper", "convertido", "seguir contándolo", "sesenta años", "último aliento", "amor agonizante", "testimonio", "canción"],
+      modelEn: "John Jasper, a former slave who became a powerful preacher, vowed that with his last expiring breath he would keep singing the dying love of the Lamb, telling of Christ to the very end. The lesson uses him to show what a counted blessing should finally become: not a private comfort hoarded for ourselves, but a testimony we tell to others. When we have truly numbered God's benefits, forgiveness, healing, redemption, love, satisfaction, renewal, the natural overflow is praise that proclaims His goodness. The blessings we count are meant to be turned outward, becoming the song and witness of a grateful life until our final breath.",
+      modelEs: "John Jasper, un antiguo esclavo que llegó a ser un poderoso predicador, prometió que con su último aliento seguiría cantando el amor agonizante del Cordero, hablando de Cristo hasta el final mismo. La lección lo usa para mostrar en qué debe convertirse al fin una bendición contada: no un consuelo privado guardado para nosotros, sino un testimonio que contamos a otros. Cuando hemos contado de veras los beneficios de Dios, perdón, sanidad, redención, amor, satisfacción, renovación, el desbordamiento natural es la alabanza que proclama Su bondad. Las bendiciones que contamos están hechas para volverse hacia afuera, llegando a ser el canto y el testimonio de una vida agradecida hasta el último aliento." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 10 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 10 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPsalmsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

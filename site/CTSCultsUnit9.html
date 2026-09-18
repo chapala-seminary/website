@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Cults & World Religions — Unit 9</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 10 →</span><span class="lang-es">Unidad 10 →</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Cults &amp; World Religions — Unit 9: Folk Religion — Santa Muerte, Spiritism &amp; Syncretism</span><span class="lang-es">📖 Las Sectas y las Religiones del Mundo — Unidad 9: La Religión Popular — La Santa Muerte, el Espiritismo y el Sincretismo</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed." — Galatians 1:8 (NKJV)</span><span class="lang-es">"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema." — Gálatas 1:8 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Cults &amp; World Religions. Please register before beginning Unit 9.</span><span class="lang-es">Bienvenido a Las Sectas y las Religiones del Mundo. Por favor regístrese antes de comenzar la Unidad 9.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Anchor: Deuteronomy 18:10-12; 1 Corinthians 10:20; Colossians 2:15; Hebrews 2:14-15 (NKJV)</strong></p>
+<div class="scripture">"There shall not be found among you... one who conjures spells, or a medium, or a spiritist, or one who calls up the dead. For all who do these things are an abomination to the LORD." &mdash; Deuteronomy 18:10-12 (NKJV)</div>
+
+<h3>What We Are Facing</h3>
+<p>The last unit spoke of a church that shares our creed. This one does not. Here we come to the folk religion of our own land &mdash; Santa Muerte, spiritism, the curandero and the brujo, and the whole tangle of practices in which Christian words and Catholic images are mixed with the occult and the worship of other powers. Let us be plain from the first sentence: this is not a Christian tradition with which we have a family disagreement. It is a return to the very things the living God has forbidden, dressed up in familiar clothing. It cannot save; it enslaves. And it is not empty superstition, as we shall see, but real traffic with real darkness. We say this not because we despise those caught in it &mdash; they are our neighbors, and many of them are poor, sick, and afraid &mdash; but because we love them, and because no one is set free by being told that their chains are jewelry. Official Catholicism, it should be said, condemns much of this too, and rightly; what we describe here is not the teaching of Rome but the folk practice that has grown up alongside and beneath it. Our purpose is to name it truthfully, to hear God's verdict on it, and to hold out the only power that can break it: the finished victory of Jesus Christ.</p>
+
+<h3>Santa Muerte: Devotion to Death</h3>
+<p>Consider first Santa Muerte, "Holy Death," whose skeletal image, robed and carrying a scythe, now stands on altars in millions of Mexican homes. She is prayed to for protection, for love, for money, for healing, and, darkly, for vengeance against enemies; she is embraced especially by the poor, by prisoners, and by those in the violent trades who feel abandoned by everyone else. Her devotees call her a saint, but she is no saint: she is death itself, personified and adored. The Catholic Church has condemned her cult as incompatible with the Christian faith, and the Church is right to do so. For here is the heart of the matter: the Christian faith proclaims that death is the last enemy, the very thing Christ came to destroy &mdash; and Santa Muerte invites men and women to bow down and pray to that enemy. To seek life, protection, and blessing from death is to beg the executioner for mercy. It is a lie at the deepest level, and behind it stands not a kindly folk-mother but the one whom Scripture calls the enemy of our souls.</p>
+
+<h3>Spiritism and the Consulting of the Dead</h3>
+<p>Alongside this runs espiritismo, spiritism: the attempt to reach and consult the spirits of the dead through mediums, séances, and spirit-guides, a practice spread widely through Latin America and blended freely with folk healing. It promises contact with departed loved ones and hidden knowledge from beyond. But Scripture calls this by its true name, necromancy &mdash; the consulting of the dead &mdash; and forbids it absolutely. "Should they seek the dead on behalf of the living?" asks the prophet (Isaiah 8:19). When Saul sought out a medium, it was counted among the sins for which he lost his life and his kingdom (1 Samuel 28; 1 Chronicles 10:13). The dead in Christ are with the Lord and are not ours to summon; and the "spirits" that answer the medium's call are not the loved ones they pretend to be, but deceiving spirits wearing their faces.</p>
+
+<h3>Curanderismo, Brujería, and Divination</h3>
+<p>Then there is the wide world of the curandero and the bruja. We must be fair on one point: not everything a folk healer does is occult. A remedy of herbs is simply folk medicine, and there is no sin in a tea. But curanderismo seldom stops at herbs; it moves quickly to the limpia that cleanses by ritual and spirit, to the diagnosis given by divination, to the invoking of saints and spirits for supernatural power &mdash; and there it has crossed the line into the forbidden. Brujería crosses it openly: the spell, the hex, the amarre that binds another's will in love or lust, the curse laid on an enemy, the "work" purchased from a brujo to bend the world by dark power. And with these travels the whole trade of divination &mdash; the cards, the tarot, the reading of palms and eggs and signs to uncover the future. Scripture does not treat these as harmless games. It names sorcery among the works of the flesh that shut men out of the kingdom of God (Galatians 5:19-21), and it lists the sorcerer among those outside the city of God forever (Revelation 21:8; 22:15).</p>
+
+<h3>What God Says</h3>
+<p>When we turn to the Word of God, there is no ambiguity, and no gentleness for the practice itself. In one place God gathers nearly the whole of this dark world into a single list and pronounces His verdict: "There shall not be found among you anyone who makes his son or his daughter pass through the fire, or one who practices witchcraft, or a soothsayer, or one who interprets omens, or a sorcerer, or one who conjures spells, or a medium, or a spiritist, or one who calls up the dead. For all who do these things are an abomination to the LORD, and because of these abominations the LORD your God drives them out from before you" (Deuteronomy 18:10-12). Read it slowly. Every branch of folk religion we have named is there &mdash; witchcraft, divination, spells, mediums, calling up the dead &mdash; and every one of them God calls an abomination. It was for these very practices that He drove the nations out of the land in judgment. The command runs from one end of Scripture to the other: "Give no regard to mediums and familiar spirits" (Leviticus 19:31); "You shall have no other gods before Me" (Exodus 20:3). This is not one option among many that happens to be inferior. It is rebellion against God, and He calls it what it is.</p>
+
+<h3>The Powers Are Real &mdash; and Already Defeated</h3>
+<p>Someone will object that all of this is mere superstition, that the amulets and spells have no power and so do no harm. Scripture does not grant the comfort of that objection. Behind the idols, Paul says, stand demons: "the things which the Gentiles sacrifice they sacrifice to demons and not to God" (1 Corinthians 10:20). The traffic is real; that is precisely why it is dangerous, and why those who dabble in it are not playing but binding themselves. But now hear the gospel, and hear it as the thunder of victory it is. The powers that folk religion fears and flatters, Christ has already conquered. On the cross, "having disarmed principalities and powers, He made a public spectacle of them, triumphing over them in it" (Colossians 2:15). "For this purpose the Son of God was manifested, that He might destroy the works of the devil" (1 John 3:8). And to the fear that drives a frightened woman to the altar of Santa Muerte &mdash; the fear of death itself &mdash; the answer is Christ, who shared our flesh and blood "that through death He might destroy him who had the power of death, that is, the devil, and release those who through fear of death were all their lifetime subject to bondage" (Hebrews 2:14-15). The very death people worship, He has defeated; the very fear that enslaves them, He breaks.</p>
+
+<h3>Freedom, Not a Stronger Spell</h3>
+<p>We must be clear about what the gospel offers, for it is easy to misunderstand. We do not come to the Santa Muerte devotee or the client of the brujo offering a stronger charm, a more powerful saint, a better spell to fight the old ones. The gospel is not superior magic. It is a finished victory, into which a person enters not by bargaining but by surrender &mdash; not by paying a price to a power, but by trusting the One who has already paid and already won. And that entrance requires a clean break. When the Ephesians turned to Christ, those who had practiced magic "brought their books together and burned them in the sight of all" (Acts 19:19) &mdash; a fortune in occult books turned to ash, because a soul cannot serve two masters, and Christ will not share an altar with demons. So it must be still: the amulets renounced, the images removed, the practices forsaken, the whole allegiance handed over to Christ alone. He does not ask us to add Him to our other powers. He commands us to be free of them.</p>
+
+<h3>A Redemptive Aim</h3>
+<p>Let no one mistake this plainness for hardness toward people. The sharpest words in this unit are aimed at the darkness, never at the frightened soul bound by it. Those who turn to folk religion are, so often, the ones the world has failed &mdash; the poor who cannot pay a doctor, the sick who have run out of hope, the mother terrified for a son in danger, the abandoned who found no help in any church. We do not sneer at them; we grieve for them, because they are seeking protection from what can only destroy them, and paying the enemy for the privilege. To them we bring not a rival superstition but the living God &mdash; who actually hears, who actually heals, who actually protects, and who has actually conquered the death and the powers they fear &mdash; and He gives freely, with no price and no bargain. This is the most urgent evangelism of all, for it is the freeing of captives. We go to them, then, with clear truth and deep compassion, longing to see the chains fall and the fear lifted, and the one who bowed to death stand upright in the life of Christ.</p>
+<div class="scripture">"...that through death He might destroy him who had the power of death, that is, the devil, and release those who through fear of death were all their lifetime subject to bondage." &mdash; Hebrews 2:14-15 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto base: Deuteronomio 18:10-12; 1 Corintios 10:20; Colosenses 2:15; Hebreos 2:14-15 (RVG)</strong></p>
+<div class="scripture">"No sea hallado en ti... ni encantador, ni quien pregunte a espíritu familiar, ni mago, ni quien consulte a los muertos. Porque es abominación para con Jehová cualquiera que hace estas cosas." &mdash; Deuteronomio 18:10-12 (RVG)</div>
+
+<h3>Lo Que Enfrentamos</h3>
+<p>La unidad anterior habló de una iglesia que comparte nuestro credo. Esta no. Aquí llegamos a la religión popular de nuestra propia tierra &mdash; la Santa Muerte, el espiritismo, el curandero y el brujo, y toda la maraña de prácticas en que palabras cristianas e imágenes católicas se mezclan con lo oculto y la adoración de otros poderes. Seamos claros desde la primera frase: esto no es una tradición cristiana con la que tenemos un desacuerdo de familia. Es un regreso a las mismas cosas que el Dios vivo ha prohibido, vestido con ropa familiar. No puede salvar; esclaviza. Y no es superstición vacía, como veremos, sino tráfico real con tinieblas reales. Decimos esto no porque despreciemos a los atrapados en ella &mdash; son nuestros prójimos, y muchos de ellos son pobres, enfermos, y temerosos &mdash; sino porque los amamos, y porque nadie es liberado al decirle que sus cadenas son joyas. El catolicismo oficial, hay que decirlo, condena mucho de esto también, y con razón; lo que describimos aquí no es la enseñanza de Roma sino la práctica popular que ha crecido junto a ella y debajo de ella. Nuestro propósito es nombrarlo con verdad, oír el veredicto de Dios sobre ello, y extender el único poder que puede romperlo: la victoria consumada de Jesucristo.</p>
+
+<h3>La Santa Muerte: Devoción a la Muerte</h3>
+<p>Considere primero la Santa Muerte, cuya imagen esquelética, con túnica y guadaña, ahora se yergue sobre altares en millones de hogares mexicanos. Se le ora por protección, por amor, por dinero, por sanidad, y, oscuramente, por venganza contra los enemigos; es abrazada especialmente por los pobres, por los presos, y por los que están en los oficios violentos que se sienten abandonados por todos los demás. Sus devotos la llaman una santa, pero no es santa alguna: es la muerte misma, personificada y adorada. La Iglesia Católica ha condenado su culto como incompatible con la fe cristiana, y hace bien. Pues aquí está el corazón del asunto: la fe cristiana proclama que la muerte es el postrer enemigo, la cosa misma que Cristo vino a destruir &mdash; y la Santa Muerte invita a hombres y mujeres a postrarse y orar a ese enemigo. Buscar vida, protección, y bendición de la muerte es rogar misericordia al verdugo. Es una mentira en el nivel más profundo, y detrás de ella no está una bondadosa madre popular sino aquel a quien la Escritura llama el enemigo de nuestras almas.</p>
+
+<h3>El Espiritismo y la Consulta de los Muertos</h3>
+<p>Junto a esto corre el espiritismo: el intento de alcanzar y consultar a los espíritus de los muertos por medio de médiums, sesiones, y guías espirituales, una práctica difundida ampliamente por América Latina y mezclada libremente con la sanación popular. Promete contacto con los seres queridos que partieron y conocimiento oculto del más allá. Pero la Escritura lo llama por su verdadero nombre, necromancia &mdash; la consulta de los muertos &mdash; y lo prohíbe absolutamente. "¿Consultará a los muertos por los vivos?", pregunta el profeta (Isaías 8:19). Cuando Saúl buscó a una médium, se contó entre los pecados por los que perdió su vida y su reino (1 Samuel 28; 1 Crónicas 10:13). Los muertos en Cristo están con el Señor y no son nuestros para invocarlos; y los "espíritus" que responden al llamado del médium no son los seres queridos que fingen ser, sino espíritus engañadores que llevan sus rostros.</p>
+
+<h3>El Curanderismo, la Brujería, y la Adivinación</h3>
+<p>Luego está el ancho mundo del curandero y la bruja. Debemos ser justos en un punto: no todo lo que hace un sanador popular es oculto. Un remedio de hierbas es simplemente medicina popular, y no hay pecado en un té. Pero el curanderismo pocas veces se detiene en las hierbas; se mueve rápidamente a la limpia que purifica por ritual y espíritu, al diagnóstico dado por adivinación, a la invocación de santos y espíritus para poder sobrenatural &mdash; y allí ha cruzado la línea a lo prohibido. La brujería la cruza abiertamente: el hechizo, el maleficio, el amarre que ata la voluntad de otro en amor o lujuria, la maldición puesta sobre un enemigo, el "trabajo" comprado a un brujo para torcer el mundo por poder oscuro. Y con estos viaja todo el comercio de la adivinación &mdash; las cartas, el tarot, la lectura de las manos y los huevos y las señales para descubrir el futuro. La Escritura no trata estos como juegos inofensivos. Nombra la hechicería entre las obras de la carne que cierran a los hombres el reino de Dios (Gálatas 5:19-21), y pone al hechicero entre los que están fuera de la ciudad de Dios para siempre (Apocalipsis 21:8; 22:15).</p>
+
+<h3>Lo Que Dice Dios</h3>
+<p>Cuando nos volvemos a la Palabra de Dios, no hay ambigüedad, y no hay suavidad para la práctica misma. En un lugar Dios reúne casi todo este mundo oscuro en una sola lista y pronuncia su veredicto: "No sea hallado en ti quien haga pasar a su hijo o a su hija por el fuego, ni quien practique adivinación, ni agorero, ni sortílego, ni hechicero, ni encantador, ni quien pregunte a espíritu familiar, ni mago, ni quien consulte a los muertos. Porque es abominación para con Jehová cualquiera que hace estas cosas; y por estas abominaciones Jehová tu Dios los echa de delante de ti" (Deuteronomio 18:10-12). Léalo despacio. Cada rama de la religión popular que hemos nombrado está allí &mdash; hechicería, adivinación, hechizos, médiums, consultar a los muertos &mdash; y a cada una Dios la llama abominación. Fue por estas mismas prácticas que echó a las naciones de la tierra en juicio. El mandato corre de un extremo de la Escritura al otro: "No os volváis a los encantadores ni a los adivinos" (Levítico 19:31); "No tendrás dioses ajenos delante de mí" (Éxodo 20:3). Esto no es una opción entre muchas que resulta ser inferior. Es rebelión contra Dios, y Él lo llama lo que es.</p>
+
+<h3>Los Poderes Son Reales &mdash; y Ya Vencidos</h3>
+<p>Alguien objetará que todo esto es mera superstición, que los amuletos y hechizos no tienen poder y por tanto no hacen daño. La Escritura no concede el consuelo de esa objeción. Detrás de los ídolos, dice Pablo, están los demonios: "lo que los gentiles sacrifican, a los demonios lo sacrifican, y no a Dios" (1 Corintios 10:20). El tráfico es real; por eso mismo es peligroso, y por eso los que juguetean con ello no están jugando sino atándose. Pero ahora oiga el evangelio, y óigalo como el trueno de victoria que es. Los poderes que la religión popular teme y halaga, Cristo ya los ha vencido. En la cruz, "despojando a los principados y a las potestades, los exhibió públicamente, triunfando sobre ellos en sí mismo" (Colosenses 2:15). "Para esto apareció el Hijo de Dios, para deshacer las obras del diablo" (1 Juan 3:8). Y al temor que lleva a una mujer asustada al altar de la Santa Muerte &mdash; el temor de la muerte misma &mdash; la respuesta es Cristo, que participó de nuestra carne y sangre "para destruir por la muerte al que tenía el imperio de la muerte, esto es, al diablo; y librar a los que por el temor de la muerte estaban durante toda la vida sujetos a servidumbre" (Hebreos 2:14-15). La muerte misma que la gente adora, Él la ha vencido; el temor mismo que los esclaviza, Él lo rompe.</p>
+
+<h3>Libertad, No un Hechizo Más Fuerte</h3>
+<p>Debemos ser claros acerca de lo que el evangelio ofrece, pues es fácil malentenderlo. No venimos al devoto de la Santa Muerte ni al cliente del brujo ofreciendo un amuleto más fuerte, un santo más poderoso, un mejor hechizo para combatir a los viejos. El evangelio no es magia superior. Es una victoria consumada, en la cual una persona entra no por negociar sino por rendirse &mdash; no por pagar un precio a un poder, sino por confiar en Aquel que ya ha pagado y ya ha vencido. Y esa entrada requiere una ruptura limpia. Cuando los efesios se volvieron a Cristo, los que habían practicado la magia "trajeron los libros, y los quemaron delante de todos" (Hechos 19:19) &mdash; una fortuna en libros ocultos vuelta ceniza, porque un alma no puede servir a dos amos, y Cristo no compartirá un altar con demonios. Así debe ser todavía: los amuletos renunciados, las imágenes quitadas, las prácticas abandonadas, toda la lealtad entregada a Cristo solo. Él no nos pide añadirlo a nuestros otros poderes. Nos manda ser libres de ellos.</p>
+
+<h3>Un Fin Redentor</h3>
+<p>Que nadie confunda esta claridad con dureza hacia las personas. Las palabras más agudas de esta unidad apuntan a las tinieblas, nunca al alma asustada atada por ellas. Los que se vuelven a la religión popular son, tan a menudo, aquellos a quienes el mundo ha fallado &mdash; el pobre que no puede pagar un médico, el enfermo que se ha quedado sin esperanza, la madre aterrada por un hijo en peligro, el abandonado que no halló ayuda en ninguna iglesia. No nos burlamos de ellos; nos dolemos por ellos, porque buscan protección de lo que solo puede destruirlos, y pagan al enemigo por el privilegio. A ellos traemos no una superstición rival sino al Dios vivo &mdash; que de veras oye, que de veras sana, que de veras protege, y que de veras ha vencido la muerte y los poderes que temen &mdash; y Él da gratuitamente, sin precio y sin trato. Este es el evangelismo más urgente de todos, pues es la liberación de cautivos. Vamos a ellos, entonces, con verdad clara y profunda compasión, anhelando ver caer las cadenas y levantarse el temor, y al que se postró ante la muerte ponerse de pie en la vida de Cristo.</p>
+<div class="scripture">"...para destruir por la muerte al que tenía el imperio de la muerte, esto es, al diablo; y librar a los que por el temor de la muerte estaban durante toda la vida sujetos a servidumbre." &mdash; Hebreos 2:14-15 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 9 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 9 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Cults & World Religions — Unit 9 (Folk Religion: Santa Muerte, Spiritism & Syncretism)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 9;
+const COURSE = 'cults';
+const NEXT_UNIT_URL = 'CTSCultsUnit10.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - What Is a Cult? The Biblical Test", "Unit 2 - The Trinity and the Deity of Christ", "Unit 3 - Jehovah's Witnesses", "Unit 4 - The Latter-day Saints", "Unit 5 - The Prosperity Gospel", "Unit 6 - Progressive Revelation: Islam and Baha'i", "Unit 7 - Eastern Religions: Hinduism and Buddhism", "Unit 8 - Roman Catholicism", "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism", "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCultsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. Mexican folk religion is best described as:", "textEs": "1. La religión popular mexicana se describe mejor como:", "optionsEn": ["A mix (syncretism) of Christian forms with indigenous, spiritist, and occult practices", "A branch of official Catholicism", "A harmless cultural custom", "A Protestant movement"], "optionsEs": ["Una mezcla (sincretismo) de formas cristianas con prácticas indígenas, espiritistas, y ocultas", "Una rama del catolicismo oficial", "Una costumbre cultural inofensiva", "Un movimiento protestante"], "explanationEn": "Folk religion is a syncretism — Christian forms mixed with indigenous, spiritist, and occult practice.", "explanationEs": "La religión popular es un sincretismo — formas cristianas mezcladas con prácticas indígenas, espiritistas, y ocultas.", "correct": 0}, {"textEn": "2. Unlike Roman Catholicism, these folk practices are:", "textEs": "2. A diferencia del catolicismo romano, estas prácticas populares son:", "optionsEn": ["Not a Christian tradition at all, but a return to the occult and the worship of other powers", "A Christian tradition we merely differ with", "Approved by the Vatican", "Required for salvation"], "optionsEs": ["No una tradición cristiana en absoluto, sino un regreso a lo oculto y la adoración de otros poderes", "Una tradición cristiana con la que solo diferimos", "Aprobadas por el Vaticano", "Requeridas para la salvación"], "explanationEn": "This is not a Christian tradition but a return to the occult that God forbids.", "explanationEs": "Esto no es una tradición cristiana sino un regreso a lo oculto que Dios prohíbe.", "correct": 0}, {"textEn": "3. Santa Muerte is:", "textEs": "3. La Santa Muerte es:", "optionsEn": ["A folk 'saint' who is a skeletal personification of death, venerated for protection, love, money, and vengeance", "A canonized Catholic saint", "An angel", "A Bible character"], "optionsEs": ["Una 'santa' popular que es una personificación esquelética de la muerte, venerada por protección, amor, dinero, y venganza", "Una santa católica canonizada", "Un ángel", "Un personaje bíblico"], "explanationEn": "Santa Muerte is death personified, venerated as a folk 'saint' — not a real saint at all.", "explanationEs": "La Santa Muerte es la muerte personificada, venerada como 'santa' popular — no una santa real.", "correct": 0}, {"textEn": "4. The Roman Catholic Church itself regards the cult of Santa Muerte as:", "textEs": "4. La Iglesia Católica Romana misma considera el culto a la Santa Muerte como:", "optionsEn": ["A beautiful devotion", "Incompatible with Christianity, and has condemned it", "A form of the Mass", "Devotion to Mary"], "optionsEs": ["Una hermosa devoción", "Incompatible con el cristianismo, y lo ha condenado", "Una forma de la Misa", "Devoción a María"], "explanationEn": "Even the Catholic Church condemns Santa Muerte as incompatible with Christianity.", "explanationEs": "Aun la Iglesia Católica condena la Santa Muerte como incompatible con el cristianismo.", "correct": 1}, {"textEn": "5. The deep irony of venerating Santa Muerte is that devotees give worship to:", "textEs": "5. La profunda ironía de venerar a la Santa Muerte es que los devotos rinden adoración a:", "optionsEn": ["A living saint", "An angel of light", "Death — the very enemy that Christ defeated", "The Virgin"], "optionsEs": ["Una santa viva", "Un ángel de luz", "La muerte — el enemigo mismo que Cristo venció", "La Virgen"], "explanationEn": "They bow to death — the last enemy Christ came to destroy.", "explanationEs": "Se postran ante la muerte — el postrer enemigo que Cristo vino a destruir.", "correct": 2}, {"textEn": "6. Espiritismo (spiritism) centers on:", "textEs": "6. El espiritismo se centra en:", "optionsEn": ["Reading the Bible", "Singing hymns", "Fasting", "Communicating with the spirits of the dead through mediums"], "optionsEs": ["Leer la Biblia", "Cantar himnos", "Ayunar", "Comunicarse con los espíritus de los muertos por medio de médiums"], "explanationEn": "Spiritism seeks to consult the spirits of the dead through mediums.", "explanationEs": "El espiritismo busca consultar a los espíritus de los muertos por medio de médiums.", "correct": 3}, {"textEn": "7. The Bible's word for consulting the dead is:", "textEs": "7. La palabra de la Biblia para consultar a los muertos es:", "optionsEn": ["Necromancy, which Scripture forbids", "Prayer", "Worship", "Prophecy"], "optionsEs": ["Necromancia, que la Escritura prohíbe", "Oración", "Adoración", "Profecía"], "explanationEn": "Consulting the dead is necromancy, which Scripture absolutely forbids.", "explanationEs": "Consultar a los muertos es necromancia, que la Escritura prohíbe absolutamente.", "correct": 0}, {"textEn": "8. In curanderismo, the practice becomes occult and forbidden when it moves from simple herbal remedy to:", "textEs": "8. En el curanderismo, la práctica se vuelve oculta y prohibida cuando pasa del simple remedio de hierbas a:", "optionsEn": ["Invoking spirits, divining diagnoses, and ritual power", "Drinking water", "Resting", "Eating food"], "optionsEs": ["Invocar espíritus, diagnosticar por adivinación, y el poder ritual", "Beber agua", "Descansar", "Comer alimentos"], "explanationEn": "Herbs are neutral; the line is crossed when spirits are invoked and divination used.", "explanationEs": "Las hierbas son neutrales; la línea se cruza cuando se invocan espíritus y se usa la adivinación.", "correct": 0}, {"textEn": "9. Brujería involves spells, hexes, love-binding (amarres), and curses — what Scripture plainly calls:", "textEs": "9. La brujería involucra hechizos, maleficios, amarres, y maldiciones — lo que la Escritura llama claramente:", "optionsEn": ["Wisdom", "Medicine", "Counsel", "Sorcery and witchcraft, works of the flesh"], "optionsEs": ["Sabiduría", "Medicina", "Consejo", "Hechicería y brujería, obras de la carne"], "explanationEn": "Scripture names sorcery among the works of the flesh that shut men out of the kingdom.", "explanationEs": "La Escritura nombra la hechicería entre las obras de la carne que cierran el reino a los hombres.", "correct": 3}, {"textEn": "10. Deuteronomy 18:10-12 lists divination, sorcery, mediums, and calling up the dead, and calls all who do these things:", "textEs": "10. Deuteronomio 18:10-12 enumera la adivinación, la hechicería, los médiums, y consultar a los muertos, y llama a todos los que hacen estas cosas:", "optionsEn": ["Wise", "An abomination to the LORD", "Blessed", "Prophets"], "optionsEs": ["Sabios", "Abominación para con Jehová", "Bienaventurados", "Profetas"], "explanationEn": "God calls all who do these things an abomination to the LORD.", "explanationEs": "Dios llama a todos los que hacen estas cosas abominación para con Jehová.", "correct": 1}, {"textEn": "11. According to Deuteronomy 18, it was for these very occult practices that God:", "textEs": "11. Según Deuteronomio 18, fue por estas mismas prácticas ocultas que Dios:", "optionsEn": ["Rewarded the nations", "Stayed silent", "Drove out the nations before Israel in judgment", "Sent more prophets"], "optionsEs": ["Recompensó a las naciones", "Guardó silencio", "Echó a las naciones delante de Israel en juicio", "Envió más profetas"], "explanationEn": "It was for these abominations that God drove the nations out of the land in judgment.", "explanationEs": "Fue por estas abominaciones que Dios echó a las naciones de la tierra en juicio.", "correct": 2}, {"textEn": "12. When the Ephesians turned to Christ (Acts 19:18-19), they showed a clean break with the occult by:", "textEs": "12. Cuando los efesios se volvieron a Cristo (Hechos 19:18-19), mostraron una ruptura limpia con lo oculto al:", "optionsEn": ["Keeping their charms hidden", "Selling their spell books", "Consulting one last medium", "Burning their magic books publicly"], "optionsEs": ["Guardar ocultos sus amuletos", "Vender sus libros de hechizos", "Consultar a un último médium", "Quemar sus libros de magia públicamente"], "explanationEn": "They burned their magic books publicly — a decisive, clean break with the occult.", "explanationEs": "Quemaron sus libros de magia públicamente — una ruptura decisiva y limpia con lo oculto.", "correct": 3}, {"textEn": "13. Are these powers merely empty superstition? Scripture says that behind idols:", "textEs": "13. ¿Son estos poderes mera superstición vacía? La Escritura dice que detrás de los ídolos:", "optionsEn": ["There is nothing at all", "Are demons, so the traffic is real (1 Corinthians 10:20)", "Are angels", "Are the saints"], "optionsEs": ["No hay nada en absoluto", "Están los demonios, así que el tráfico es real (1 Corintios 10:20)", "Están los ángeles", "Están los santos"], "explanationEn": "Behind idols stand demons, so the traffic is real — not empty superstition.", "explanationEs": "Detrás de los ídolos están los demonios, así que el tráfico es real — no superstición vacía.", "correct": 1}, {"textEn": "14. Because the powers are real, folk religion does not protect people; it:", "textEs": "14. Porque los poderes son reales, la religión popular no protege a las personas; las:", "optionsEn": ["Heals them fully", "Is perfectly safe", "Enslaves them and traffics with what can destroy", "Pleases God"], "optionsEs": ["Sana por completo", "Es perfectamente segura", "Esclaviza y trafica con lo que puede destruir", "Agrada a Dios"], "explanationEn": "Folk religion does not protect but enslaves, trafficking with what can destroy.", "explanationEs": "La religión popular no protege sino que esclaviza, traficando con lo que puede destruir.", "correct": 2}, {"textEn": "15. Colossians 2:15 says that at the cross Christ:", "textEs": "15. Colosenses 2:15 dice que en la cruz Cristo:", "optionsEn": ["Was defeated by the powers", "Ignored the powers", "Made peace with the powers", "Disarmed the principalities and powers and triumphed over them"], "optionsEs": ["Fue vencido por los poderes", "Ignoró a los poderes", "Hizo paz con los poderes", "Despojó a los principados y potestades y triunfó sobre ellos"], "explanationEn": "At the cross Christ disarmed the powers and triumphed over them openly.", "explanationEs": "En la cruz Cristo despojó a los poderes y triunfó sobre ellos abiertamente.", "correct": 3}, {"textEn": "16. Hebrews 2:14-15 gives the direct answer to the fear of death behind Santa Muerte: Christ destroyed the one who had the power of death and:", "textEs": "16. Hebreos 2:14-15 da la respuesta directa al temor de la muerte detrás de la Santa Muerte: Cristo destruyó al que tenía el imperio de la muerte y:", "optionsEn": ["Left us in fear", "Frees those who through fear of death were subject to bondage", "Became death", "Fled from death"], "optionsEs": ["Nos dejó en temor", "Libra a los que por el temor de la muerte estaban sujetos a servidumbre", "Se convirtió en muerte", "Huyó de la muerte"], "explanationEn": "Christ frees those who through fear of death were all their lifetime in bondage.", "explanationEs": "Cristo libra a los que por el temor de la muerte estaban toda la vida en servidumbre.", "correct": 1}, {"textEn": "17. 1 John 3:8 says the Son of God was manifested that He might:", "textEs": "17. 1 Juan 3:8 dice que el Hijo de Dios apareció para:", "optionsEn": ["Start a religion", "Teach ethics", "Destroy the works of the devil", "Collect offerings"], "optionsEs": ["Comenzar una religión", "Enseñar ética", "Deshacer las obras del diablo", "Recoger ofrendas"], "explanationEn": "The Son of God was manifested to destroy the works of the devil.", "explanationEs": "El Hijo de Dios apareció para deshacer las obras del diablo.", "correct": 2}, {"textEn": "18. The gospel does not offer people a stronger spell or a better charm, but:", "textEs": "18. El evangelio no ofrece a las personas un hechizo más fuerte ni un mejor amuleto, sino:", "optionsEn": ["A higher price to pay", "A new amulet", "Another spirit to consult", "A finished victory in Christ, received freely with no bargain"], "optionsEs": ["Un precio más alto que pagar", "Un nuevo amuleto", "Otro espíritu que consultar", "Una victoria consumada en Cristo, recibida gratuitamente sin trato"], "explanationEn": "The gospel is not stronger magic but a finished victory in Christ, received freely.", "explanationEs": "El evangelio no es magia más fuerte sino una victoria consumada en Cristo, recibida gratuitamente.", "correct": 3}, {"textEn": "19. Because God demands exclusive worship, the folk habit of covering all bases — the true God plus other powers 'just in case' — is:", "textEs": "19. Porque Dios demanda adoración exclusiva, la costumbre popular de cubrir todo — el Dios verdadero más otros poderes 'por si acaso' — es:", "optionsEn": ["Wise", "Forbidden; no one can serve two masters", "Acceptable", "Encouraged"], "optionsEs": ["Sabia", "Prohibida; nadie puede servir a dos amos", "Aceptable", "Recomendada"], "explanationEn": "Covering all bases is forbidden; no one can serve two masters.", "explanationEs": "Cubrir todo está prohibido; nadie puede servir a dos amos.", "correct": 1}, {"textEn": "20. Our aim toward those bound in folk religion, who are often poor, sick, and frightened, is:", "textEs": "20. Nuestro fin hacia los atados en la religión popular, que a menudo son pobres, enfermos, y temerosos, es:", "optionsEn": ["Contempt", "To leave them enslaved", "Compassion — to bring them the real protection of the living God and freedom in Christ", "Mockery"], "optionsEs": ["El desprecio", "Dejarlos esclavizados", "Compasión — traerles la protección real del Dios vivo y la libertad en Cristo", "La burla"], "explanationEn": "We come with compassion, bringing the real protection of the living God and freedom in Christ.", "explanationEs": "Venimos con compasión, trayendo la protección real del Dios vivo y la libertad en Cristo.", "correct": 2}];
+
+const kwQuestions = [{"textEn": "21. Explain what Mexican folk religion is (syncretism) and why it is not a Christian tradition but a return to the occult that God forbids.", "textEs": "21. Explique qué es la religión popular mexicana (sincretismo) y por qué no es una tradición cristiana sino un regreso a lo oculto que Dios prohíbe.", "kw_en": ["syncretism", "occult", "folk", "forbidden", "abomination", "powers", "mixing", "god"], "kw_es": ["sincretismo", "oculto", "popular", "prohibe", "abominaci", "poderes", "mezcla", "dios"], "modelEn": "Mexican folk religion is a syncretism, a mixing of Christian forms and Catholic images with indigenous, spiritist, and occult practices. It is not a Christian tradition with which we merely disagree, but a return to the very things the living God has forbidden, dressed in familiar clothing. It includes Santa Muerte, spiritism, curanderismo, brujería, and divination, and in God's own word these are named as abomination. Behind the forms stand other powers, not the true God, and Scripture treats this traffic as real and dangerous, not empty. So folk religion cannot save; it enslaves, and it stands under God's verdict of abomination. It is rebellion against the God who demands exclusive worship, however Christian its outward clothing may appear.", "modelEs": "La religión popular mexicana es un sincretismo, una mezcla de formas cristianas e imágenes católicas con prácticas indígenas, espiritistas, y ocultas. No es una tradición cristiana con la que solo diferimos, sino un regreso a las mismas cosas que el Dios vivo ha prohibido, vestido con ropa familiar. Incluye la Santa Muerte, el espiritismo, el curanderismo, la brujería, y la adivinación, y en la propia palabra de Dios estas son nombradas como abominación. Detrás de las formas están otros poderes, no el Dios verdadero, y la Escritura trata este tráfico como real y peligroso, no vacío. Así que la religión popular no puede salvar; esclaviza, y está bajo el veredicto de Dios de abominación. Es rebelión contra el Dios que demanda adoración exclusiva, por muy cristiana que parezca su ropa exterior."}, {"textEn": "22. Describe Santa Muerte fairly, and explain the biblical problem with venerating death.", "textEs": "22. Describa a la Santa Muerte justamente, y explique el problema bíblico de venerar a la muerte.", "kw_en": ["death", "santa", "venerate", "protection", "fear", "christ", "defeated", "idol"], "kw_es": ["muerte", "santa", "venera", "protecci", "temor", "cristo", "venci", "demonio"], "modelEn": "Santa Muerte, Holy Death, is a skeletal figure venerated as a folk saint, prayed to for protection, love, money, healing, and even vengeance, and embraced especially by the poor, prisoners, and the violent trades. But she is no saint; she is death itself, personified and adored, and even the Catholic Church condemns her cult. The biblical problem is profound: the Christian faith proclaims that death is the last enemy, the very thing Christ came to destroy and has defeated, yet Santa Muerte invites people to bow and pray to that enemy. To seek life and protection from death is to beg the executioner for mercy. And behind the image stands not a kindly mother but a demon and the enemy of our souls. So this is not devotion to a saint but worship of death, which Christ has already conquered.", "modelEs": "La Santa Muerte es una figura esquelética venerada como una santa popular, a la que se ora por protección, amor, dinero, sanidad, y aun venganza, y abrazada especialmente por los pobres, los presos, y los oficios violentos. Pero no es santa alguna; es la muerte misma, personificada y adorada, y aun la Iglesia Católica condena su culto. El problema bíblico es profundo: la fe cristiana proclama que la muerte es el postrer enemigo, la cosa misma que Cristo vino a destruir y ha vencido, y sin embargo la Santa Muerte invita a la gente a postrarse y orar a ese enemigo. Buscar vida y protección de la muerte es rogar misericordia al verdugo. Y detrás de la imagen no está una madre bondadosa sino un demonio y el enemigo de nuestras almas. Así que esto no es devoción a una santa sino adoración de la muerte, que Cristo ya ha vencido, y libra del temor a los suyos."}, {"textEn": "23. Explain the biblical prohibition of spiritism, necromancy, sorcery, and divination (Deuteronomy 18).", "textEs": "23. Explique la prohibición bíblica del espiritismo, la necromancia, la hechicería, y la adivinación (Deuteronomio 18).", "kw_en": ["deuteronomy", "divination", "sorcery", "mediums", "dead", "abomination", "forbid", "spirits"], "kw_es": ["deuteronomio", "adivinaci", "hechiceri", "muertos", "abominaci", "prohibe", "consultar", "dios"], "modelEn": "Deuteronomy 18 gathers nearly the whole dark world of folk religion into a single list and pronounces God's verdict. It forbids witchcraft, divination, soothsaying, sorcery, conjuring spells, consulting mediums and familiar spirits, and calling up the dead, and it says that all who do these things are an abomination to the LORD. It adds that it was for these very abominations that God drove the nations out of the land in judgment. This prohibition runs through Scripture: give no regard to mediums and familiar spirits, and you shall have no other gods before Me. So spiritism, which consults the dead, along with sorcery and divination, is not a lesser option but rebellion against God, which He calls what it is, an abomination that He absolutely forbids.", "modelEs": "Deuteronomio 18 reúne casi todo el mundo oscuro de la religión popular en una sola lista y pronuncia el veredicto de Dios. Prohíbe la hechicería, la adivinación, el agüero, la magia, los hechizos, consultar a médiums y espíritus familiares, y llamar a los muertos, y dice que todos los que hacen estas cosas son abominación para con Jehová. Añade que fue por estas mismas abominaciones que Dios echó a las naciones de la tierra en juicio. Esta prohibición corre por la Escritura: no os volváis a los encantadores ni a los adivinos, y no tendrás dioses ajenos delante de mí. Así que el espiritismo, que consulta a los muertos, junto con la hechicería y la adivinación, no es una opción menor sino rebelión contra Dios, que Él llama lo que es, una abominación que prohíbe absolutamente."}, {"textEn": "24. Explain that these powers are not empty superstition (1 Corinthians 10:20), and why that makes folk religion dangerous rather than harmless.", "textEs": "24. Explique que estos poderes no son superstición vacía (1 Corintios 10:20), y por qué eso hace la religión popular peligrosa en lugar de inofensiva.", "kw_en": ["demons", "real", "idols", "powers", "dangerous", "enslave", "superstition", "destroy"], "kw_es": ["demonios", "real", "poderes", "peligro", "esclaviza", "destru", "protege", "dioses"], "modelEn": "Some object that folk religion is mere superstition, that amulets and spells have no power and do no harm. But Scripture does not grant that comfort. Paul says that behind idols stand demons: what the Gentiles sacrifice, they sacrifice to demons and not to God. So the traffic is real; the powers are real. And that is precisely what makes folk religion dangerous rather than harmless. Those who dabble in it are not merely playing a game but binding themselves to real demonic powers. Far from protecting people, it enslaves them and traffics with what can destroy them. So we cannot dismiss these practices as empty; they are dealings with the demonic, and Scripture warns us to have nothing to do with them and to flee to Christ, who has conquered the powers.", "modelEs": "Algunos objetan que la religión popular es mera superstición, que los amuletos y hechizos no tienen poder y no hacen daño. Pero la Escritura no concede ese consuelo. Pablo dice que detrás de los ídolos están los demonios: lo que los gentiles sacrifican, a los demonios lo sacrifican, y no a Dios. Así que el tráfico es real; los poderes son reales. Y eso es precisamente lo que hace la religión popular peligrosa en lugar de inofensiva. Los que juguetean con ella no están meramente jugando sino atándose a poderes demoníacos reales. Lejos de proteger a las personas, las esclaviza y trafica con lo que puede destruirlas. Así que no podemos descartar estas prácticas como vacías; son tratos con lo demoníaco, y la Escritura nos advierte no tener nada que ver con ellas y huir a Cristo, que ha vencido a los poderes y no a otros dioses."}, {"textEn": "25. From Scripture, show Christ's victory over the powers (Colossians 2:15; 1 John 3:8) and over death and its fear (Hebrews 2:14-15).", "textEs": "25. Desde la Escritura, muestre la victoria de Cristo sobre los poderes (Colosenses 2:15; 1 Juan 3:8) y sobre la muerte y su temor (Hebreos 2:14-15).", "kw_en": ["christ", "cross", "disarmed", "powers", "death", "fear", "destroy", "devil"], "kw_es": ["cristo", "cruz", "desarm", "poderes", "muerte", "temor", "destruir", "diablo"], "modelEn": "Scripture proclaims Christ's total victory over the very powers folk religion fears and flatters. On the cross, having disarmed the principalities and powers, He made a public spectacle of them, triumphing over them in it. For this purpose the Son of God was manifested, that He might destroy the works of the devil. So the powers people bargain with are already defeated. And to the fear of death that drives a frightened soul to the altar of Santa Muerte, the answer is Christ, who shared our flesh and blood that through death He might destroy the one who had the power of death, that is, the devil, and free those who through fear of death were all their lifetime in bondage. So Christ has disarmed the powers, destroyed the works of the devil, defeated death, and broken the fear that enslaves.", "modelEs": "La Escritura proclama la victoria total de Cristo sobre los poderes mismos que la religión popular teme y halaga. En la cruz, habiendo despojado a los principados y potestades, los exhibió públicamente, triunfando sobre ellos en ella. Para esto apareció el Hijo de Dios, para deshacer las obras del diablo. Así que los poderes con los que la gente negocia ya están vencidos. Y al temor de la muerte que lleva a un alma asustada al altar de la Santa Muerte, la respuesta es Cristo, que participó de nuestra carne y sangre para destruir por la muerte al que tenía el imperio de la muerte, esto es, al diablo, y librar a los que por el temor de la muerte estaban toda la vida en servidumbre. Así que Cristo ha desarmado a los poderes, deshecho las obras del diablo, vencido la muerte, y roto el temor que esclaviza."}, {"textEn": "26. Explain why the gospel is not a stronger spell but a finished victory, and what a clean break with the occult looks like (Acts 19).", "textEs": "26. Explique por qué el evangelio no es un hechizo más fuerte sino una victoria consumada, y cómo se ve una ruptura limpia con lo oculto (Hechos 19).", "kw_en": ["gospel", "spell", "victory", "finished", "break", "burn", "occult", "free"], "kw_es": ["evangelio", "hechizo", "victoria", "consumada", "ruptura", "quemar", "oculto", "libre"], "modelEn": "The gospel is not a stronger spell, a more powerful saint, or a better charm to fight the old ones; it is not superior magic at all. It is a finished victory in Christ, into which a person enters not by bargaining or paying a price to a power, but by surrender and trust in the One who has already paid and already won. And that entrance requires a clean break with the occult. When the Ephesians turned to Christ, those who had practiced magic brought their books together and burned them in the sight of all, a fortune in occult books turned to ash, because a soul cannot serve two masters and Christ will not share an altar with demons. So it must be still: the amulets renounced, the images removed, the practices forsaken, and the whole allegiance handed over to Christ alone, who makes us free.", "modelEs": "El evangelio no es un hechizo más fuerte, un santo más poderoso, ni un mejor amuleto para combatir a los viejos; no es magia superior en absoluto. Es una victoria consumada en Cristo, en la cual una persona entra no por negociar ni pagar un precio a un poder, sino por rendirse y confiar en Aquel que ya ha pagado y ya ha vencido. Y esa entrada requiere una ruptura limpia con lo oculto. Cuando los efesios se volvieron a Cristo, los que habían practicado la magia trajeron los libros y los quemaron delante de todos, una fortuna en libros ocultos vuelta ceniza, porque un alma no puede servir a dos amos y Cristo no compartirá un altar con demonios. Así debe ser todavía: los amuletos renunciados, las imágenes quitadas, las prácticas abandonadas, y toda la lealtad entregada a Cristo solo, que nos hace libres."}, {"textEn": "27. Explain why covering all bases — the true God plus other powers 'just in case' — is forbidden (exclusive worship; two masters).", "textEs": "27. Explique por qué cubrir todo — el Dios verdadero más otros poderes 'por si acaso' — está prohibido (adoración exclusiva; dos amos).", "kw_en": ["exclusive", "worship", "god", "masters", "two", "forbidden", "powers", "serve"], "kw_es": ["exclusiva", "adoraci", "dios", "amos", "dos", "prohibe", "poderes", "servir"], "modelEn": "Folk religion often keeps the true God while adding other powers just in case, covering all the bases. But God forbids this, because He demands exclusive worship. He says, you shall have no other gods before Me, and He will not share His glory with another. Jesus said that no one can serve two masters. So to worship God and also to seek help from Santa Muerte, the spirits, or the brujo is not a harmless addition but a betrayal of the exclusive allegiance God requires. Christ will not share an altar with demons. So the gospel does not add Christ to our other powers; it calls us to renounce them and serve God alone. To try to serve both is to serve neither faithfully, and it remains forbidden.", "modelEs": "La religión popular a menudo mantiene al Dios verdadero mientras añade otros poderes por si acaso, cubriendo todo. Pero Dios prohíbe esto, porque demanda adoración exclusiva. Dice, no tendrás dioses ajenos delante de mí, y no dará su gloria a otro. Jesús dijo que nadie puede servir a dos amos. Así que adorar a Dios y también buscar ayuda de la Santa Muerte, los espíritus, o el brujo no es una añadidura inofensiva sino una traición a la lealtad exclusiva que Dios requiere. Cristo no compartirá un altar con demonios. Así que el evangelio no añade a Cristo a nuestros otros poderes; nos llama a renunciar a ellos y servir a Dios solo. Intentar servir a ambos es no servir fielmente a ninguno, y permanece prohibido."}, {"textEn": "28. Explain the difference between morally-neutral folk medicine (herbs) and the occult elements woven into folk healing.", "textEs": "28. Explique la diferencia entre la medicina popular moralmente neutral (hierbas) y los elementos ocultos entretejidos en la sanación popular.", "kw_en": ["herbs", "medicine", "neutral", "occult", "spirits", "divination", "invoke", "difference"], "kw_es": ["hierbas", "medicina", "neutral", "oculto", "invocar", "adivinaci", "diferencia", "ritual"], "modelEn": "We must be fair and make a real difference here. A remedy of herbs is simply folk medicine, and there is no sin in a tea; such herbal knowledge is morally neutral, like any medicine. So we do not condemn folk remedies as such. But curanderismo seldom stops at herbs. It moves quickly to the limpia that cleanses by ritual and spirit, to a diagnosis given by divination, and to the invoking of saints and spirits for supernatural power, and there it has crossed the line into the occult and the forbidden. So the difference is between neutral herbal medicine, which is allowed, and the spiritual invocation, ritual, and divination woven into folk healing, which are occult and forbidden. We keep what is only medicine and renounce what invokes spirits or seeks hidden knowledge by divination.", "modelEs": "Debemos ser justos y hacer una diferencia real aquí. Un remedio de hierbas es simplemente medicina popular, y no hay pecado en un té; tal conocimiento de hierbas es moralmente neutral, como cualquier medicina. Así que no condenamos los remedios populares como tales. Pero el curanderismo pocas veces se detiene en las hierbas. Se mueve rápidamente a la limpia que purifica por ritual y espíritu, a un diagnóstico dado por adivinación, y a la invocación de santos y espíritus para poder sobrenatural, y allí ha cruzado la línea a lo oculto y lo prohibido. Así que la diferencia es entre la medicina de hierbas neutral, que es permitida, y la invocación espiritual, el ritual, y la adivinación entretejidos en la sanación popular, que son ocultos y prohibidos. Guardamos lo que es solo medicina y renunciamos a lo que invoca espíritus o busca conocimiento oculto por adivinación."}, {"textEn": "29. Describe the redemptive aim toward people bound in folk religion — who they often are, and what we bring them.", "textEs": "29. Describa el fin redentor hacia las personas atadas en la religión popular — quiénes son a menudo, y qué les traemos.", "kw_en": ["compassion", "poor", "fear", "free", "christ", "protection", "enslaved", "love"], "kw_es": ["compasi", "pobre", "temor", "libre", "cristo", "protecci", "esclavi", "amor"], "modelEn": "The sharpest words in this unit are aimed at the darkness, never at the people bound by it. Those who turn to folk religion are so often the ones the world has failed: the poor who cannot pay a doctor, the sick who have run out of hope, the mother terrified for a son in danger, the abandoned who found no help in any church. We do not sneer at them; we grieve for them with compassion, because they are seeking protection from what can only destroy them and are enslaved by fear. To them we bring not a rival superstition but the living God, who actually hears, heals, and protects, and who has conquered the death and the powers they fear, and He gives freely with no price. This is the most urgent evangelism of all, the freeing of captives. So we go with clear truth and deep love, longing to see the chains fall, the fear lifted, and the one who bowed to death stand upright and free in Christ.", "modelEs": "Las palabras más agudas de esta unidad apuntan a las tinieblas, nunca a las personas atadas por ellas. Los que se vuelven a la religión popular son tan a menudo aquellos a quienes el mundo ha fallado: el pobre que no puede pagar un médico, el enfermo que se ha quedado sin esperanza, la madre aterrada por un hijo en peligro, el abandonado que no halló ayuda en ninguna iglesia. No nos burlamos de ellos; nos dolemos por ellos con compasión, porque buscan protección de lo que solo puede destruirlos y están esclavizados por el temor. A ellos traemos no una superstición rival sino al Dios vivo, que de veras oye, sana, y protege, y que ha vencido la muerte y los poderes que temen, y Él da gratuitamente sin precio. Este es el evangelismo más urgente de todos, la liberación de cautivos. Así que vamos con verdad clara y profundo amor, anhelando ver caer las cadenas, levantarse el temor, y al que se postró ante la muerte ponerse de pie y libre en Cristo."}, {"textEn": "30. Summarize Unit 9: what folk religion is, God's verdict, Christ's victory, and the redemptive aim.", "textEs": "30. Resuma la Unidad 9: qué es la religión popular, el veredicto de Dios, la victoria de Cristo, y el fin redentor.", "kw_en": ["folk", "occult", "forbidden", "christ", "victory", "death", "free", "gospel"], "kw_es": ["popular", "oculto", "prohibe", "cristo", "victoria", "muerte", "libre", "evangelio"], "modelEn": "Unit 9 examines Mexican folk religion, a syncretism that mixes Christian forms with Santa Muerte, spiritism, curanderismo, brujería, and divination. This is not a Christian tradition but a return to the occult, and God's verdict is plain: in Deuteronomy 18 He calls all these practices an abomination and forbids them, for behind the idols stand real demons. Yet the gospel is the thunder of victory: at the cross Christ disarmed the powers, destroyed the works of the devil, and by His own death defeated death itself and freed those enslaved by the fear of it. The gospel is not a stronger spell but a finished victory requiring a clean break with the occult. And the aim is redemptive: with compassion for people who are often poor and frightened, we bring them the living God and freedom in Christ.", "modelEs": "La Unidad 9 examina la religión popular mexicana, un sincretismo que mezcla formas cristianas con la Santa Muerte, el espiritismo, el curanderismo, la brujería, y la adivinación. Esto no es una tradición cristiana sino un regreso a lo oculto, y el veredicto de Dios es claro: en Deuteronomio 18 llama a todas estas prácticas abominación y las prohíbe, pues detrás de los ídolos están demonios reales. Sin embargo, el evangelio es el trueno de victoria: en la cruz Cristo despojó a los poderes, deshizo las obras del diablo, y por su propia muerte venció la muerte misma y libró a los esclavizados por el temor de ella. El evangelio no es un hechizo más fuerte sino una victoria consumada que requiere una ruptura limpia con lo oculto. Y el fin es redentor: con compasión por personas que a menudo son pobres y temerosas, les traemos al Dios vivo y la libertad en Cristo."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en el botón de arriba para continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click the button above to continue.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '\u2713 Correct! ' : '\u2713 \u00a1Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `\u2717 Incorrect. Correct answer: ${correctLetter}. ` : `\u2717 Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a few sentences (about 100 characters)), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos unas cuantas oraciones (unos 100 caracteres)), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            renderQuestions();
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        renderQuestions();
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCultsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

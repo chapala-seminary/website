@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Doctrinal Preaching — Unit 2: The Method</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.eai { background:#eef2fa; border-left:4px solid #4f6fae; padding:12px 18px; margin:14px 0; border-radius:6px; }
+.eai strong.lbl { color:#2f3f6f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+table.method { width:100%; border-collapse:collapse; margin:18px 0; font-size:0.9rem; }
+table.method th,table.method td { border:1px solid #c5d0c5; padding:8px 10px; text-align:left; vertical-align:top; }
+table.method th { background:#e3ebe3; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 3 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Doctrinal Preaching — Unit 2: The Method of Sermon Construction</span><span class="lang-es">📖 Predicación Doctrinal — Unidad 2: El Método de Construcción del Sermón</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"Rightly dividing the word of truth." — 2 Timothy 2:15 (NKJV)</span><span class="lang-es">"Que traza bien la palabra de verdad." — 2 Timoteo 2:15 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard" style="display:none;">
+    <p><span class="lang-en">Registration carries over from Unit 1.</span><span class="lang-es">El registro se mantiene desde la Unidad 1.</span></p>
+    <input type="text" id="regName" style="display:none;" aria-label="regName"><input type="email" id="regEmail" style="display:none;" aria-label="regEmail">
+    <select id="regTrack" style="display:none;" aria-label="regTrack"><option value="certificate">c</option></select>
+    <button id="regBtn" style="display:none;"></button><div id="regStatus"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p><em>Note: this method is drawn from the CTS preaching course (WiseSpeak), and much of it will be familiar if you took that course. We give it again here on purpose — to reinforce afresh how to put structure on a sermon before we turn that structure loose on doctrine, unit by unit.</em></p>
+
+<h3>Day 1 — From Text to Idea</h3>
+<p>Unit 1 set the vision; this unit puts the tools in your hand. The doctrinal preacher works with a small set of terms, and learning them is the difference between a sermon that wanders and one that goes somewhere.</p>
+<p><strong>Text.</strong> The word means “to weave.” The text is the thread on which the whole sermon is woven — the passage of Scripture that is its basis. <strong>Idea.</strong> The idea is the general topic of the sermon, and it must come <em>from</em> the text, not be carried <em>to</em> it. Donald Miller laid down a rule that has shaped a generation of preachers: the theme of the text and the theme of the sermon must be the same. If they are not, the text is no longer a text — it is a <em>pretext</em>, a starting point for the preacher’s own thoughts.</p>
+<p>Examples of an idea include faith, the kingdom of God, hope, law, works, love, fasting, baptism, family. Each is a real biblical idea — but each is far too large to preach in one sermon. Try preaching on faith: you could speak of the qualities of faith, the demands of faith, examples of faith, men of faith, or the reasons faith matters — and each of those is itself a full sermon. The idea is the raw quarry stone. It must be cut down before it can be set in a wall.</p>
+<div class="scripture">"Be diligent to present yourself approved to God, a worker who does not need to be ashamed, rightly dividing the word of truth." — 2 Timothy 2:15 (NKJV)</div>
+
+<h3>Day 2 — The Probing Question (the Interrogative)</h3>
+<p>Once you have the idea, you ask a question of it. This probing question — the <strong>interrogative</strong> — is the hinge of the whole method, because the question you ask determines the sermon you will preach. The news writer uses these same questions to produce a story. Rudyard Kipling gave us the easiest way to remember them:</p>
+<div class="pull-quote">I keep six honest serving men<br>(They taught me all I knew);<br>Their names are What and Why and When<br>And How and Where and Who.</div>
+<p>For preaching, Kipling’s six become eight by adding <em>which</em> and <em>how much</em>. So the eight interrogatives, and what each one opens up:</p>
+<table class="method">
+<tr><th>Interrogative</th><th>What it opens</th></tr>
+<tr><td><strong>Who / Whom</strong></td><td>people</td></tr>
+<tr><td><strong>Which</strong></td><td>choices or alternatives</td></tr>
+<tr><td><strong>What</strong></td><td>means, value, objectives</td></tr>
+<tr><td><strong>Why</strong></td><td>reasons, definitions, characteristics</td></tr>
+<tr><td><strong>When</strong></td><td>kinds, phases, conditions</td></tr>
+<tr><td><strong>Where</strong></td><td>places, sources, results</td></tr>
+<tr><td><strong>How</strong></td><td>sequences, ways</td></tr>
+<tr><td><strong>How much</strong></td><td>quantity, cost, effort</td></tr>
+</table>
+<p>The probing question is formed by joining the idea to one of these in a full sentence: take the idea of hope and ask, “Who has hope?” or “Which kinds of hope are valid?” or “Why is hope necessary?” Each question is the doorway to a different sermon.</p>
+
+<h3>Day 3 — The Keyword (the generative step)</h3>
+<p>The <strong>keyword</strong> arises naturally from the interrogative. It is usually a plural noun, and it is the single most important word in your sermon’s structure — because the keyword is what unites the outline. Every point of the sermon will be one particular instance of the keyword.</p>
+<p>Three rules govern it. <strong>First, it is always plural</strong> — almost without exception your keyword ends in ‑s; if it does not, and is not an irregular plural like “people” or “men,” it is probably wrong. <strong>Second, only one keyword per sermon</strong>, just as you use only one interrogative. <strong>Third, avoid generic words like “things.”</strong> “Three things about prayer” is not a keyword; it is laziness. The keyword should be as specific as the actual content of your points.</p>
+<p>Watch one idea — <em>immersion</em> — turn under different questions; the keyword changes, and so does the whole sermon:</p>
+<table class="method">
+<tr><th>Interrogative</th><th>Keyword it yields</th></tr>
+<tr><td>Who was immersed?</td><td><strong>people</strong> (who were immersed)</td></tr>
+<tr><td>Which kinds of baptism?</td><td><strong>types</strong> of baptism</td></tr>
+<tr><td>What are its effects?</td><td><strong>effects</strong> (identification, subjugation, multiplication)</td></tr>
+<tr><td>Why have it?</td><td><strong>reasons</strong> (commanded, modeled, meaningful)</td></tr>
+<tr><td>When should it be done?</td><td><strong>times</strong></td></tr>
+<tr><td>Where may it be done?</td><td><strong>places</strong></td></tr>
+<tr><td>How is it practiced?</td><td><strong>ways</strong></td></tr>
+</table>
+<p>One idea, seven sermons — and the keyword chose each one. The same thing happens with the idea of <em>faith</em>: <em>people</em> of faith (men who believed God); <em>effects</em> of faith (seeing the invisible, doing the impossible, believing the incredible); <em>times</em> for faith (when discouraged, when distracted, when disappointed); <em>ways</em> we show faith (by word, by walk, by witness); <em>reasons</em> to have faith (for the abundant life, for the eternal life); even <em>amounts</em> of faith (enough to cover our sorrow, enough to fill our lives, enough to move our mountains). One idea, and the interrogative chose the keyword, and the keyword generated a different sermon every time. This is why the interrogative and the keyword together are the generative heart of the method.</p>
+
+<h3>Day 4 — Subject, Objective, and the Two Directions</h3>
+<p>A clear <strong>subject</strong> is what keeps a sermon from wandering. I remember walking through the woods with my father as a boy. I would have been hopelessly lost — every tree looked the same — but my father pulled out his compass at intervals; it gave him a fixed point of reference, and we did not wander. The subject of a sermon is its compass.</p>
+<p>The subject is the keyword plus a <em>modifier</em> — anything that describes or limits the keyword. Three forms are common: the <strong>adjective</strong> (“seven deadly sins”), the <strong>prepositional phrase</strong> (“ways of knowing we have security”), and the <strong>subordinate clause</strong> (“qualities that God possesses”). The subject answers the question, “What is the sermon about?” Its value is chiefly to the preacher, keeping him aware of his direction; and the people, taking notes, can write the subject at the top of the page and each point beneath it.</p>
+<p>Then comes the <strong>objective</strong> — the goal of the sermon. It answers a different question: “What do I want people to <em>do</em>?” Phrase it as an action, not a feeling, because right actions carry right beliefs with them. A useful formula begins, “People will…” — “People will respond during the invitation to receive Christ,” or “People will set aside a specific time each day this week for prayer.” Concrete, measurable, and it gives the conclusion a destination.</p>
+<p>Finally, the two directions of movement. <strong>Deduction</strong> reasons from the general to the specific: begin with a general statement — “God is great” — and break it into specific points (great in His knowledge, great in His power, great in His presence). This is the way of <em>topical</em> preaching. <strong>Induction</strong> reasons the opposite way, from the specific to the general: begin with the points the text supplies and let them build to the subject. It is something like the game show <em>Jeopardy</em> — the answer is given in the text, and you must find the question. This is the way of <em>textual</em> and <em>expository</em> preaching.</p>
+
+<h3>Day 5 — The Method at Work, and the Analysis</h3>
+<p>Here is the whole method running at once, in a sermon on the doctrine of last things. The idea is <em>the return of Christ</em>; the interrogatives are visible right in the points; each point stands on its own text:</p>
+<table class="method">
+<tr><th>Interrogative → Point</th><th>Anchor text</th></tr>
+<tr><td><strong>When?</strong> — No one knows the day</td><td>Matthew 24</td></tr>
+<tr><td><strong>What?</strong> — What will happen at His coming</td><td>1 Thessalonians 4</td></tr>
+<tr><td><strong>What will we become?</strong></td><td>1 John 3:2</td></tr>
+</table>
+<p>The preacher arranged those three points (deduction, topical), yet not one floats free of Scripture — which is the Unit 1 thesis proved in practice. A topical sermon can be every bit as biblical as an expository one, <em>provided every point is anchored in a verse</em>. A Good Friday sermon I have preached more than once shows it: “The Seven Words of the Cross” — idea, the Cross; keyword, <em>words</em>; subject, the seven words of the Cross. A word of pardon (Luke 23:34), a word of promise (Luke 23:43), a word of provision (John 19:26–27), a word of pain (John 19:28), a word of dereliction (Matthew 27:46), a word of triumph (John 19:30), a word of commitment (Luke 23:46). Seven points breaks the usual rule of three to five, so when I preach it I use no subpoints — as a rule, when a sermon has more than three points, drop the subpoints; the people cannot hold a long outline and a layered one at once.</p>
+<p>Two of Cook’s working maxims name the difference between the inductive forms. In the <em>textual</em> sermon the points come from the text but the preacher supplies the explanation — the text supplies the skeleton; the preacher supplies the flesh. In the <em>expository</em> sermon both the points and their explanation come from the text — the preacher is the messenger; the text is the message.</p>
+<p>Finally, a <strong>preaching analysis</strong> is the reverse exercise: going through a text by induction to discover its interrogatives and keywords. It is not the same as an outline of the chapter; it begins with a question and contains the subject of the passage. Master the analysis and you can preach any text in the Book. Unit 3 begins applying all of this, doctrine by doctrine, starting with Revelation.</p>
+<div class="scripture">"Preach the word!" — 2 Timothy 4:2 (NKJV)</div>
+</div>
+<div class="lang-es">
+<p><em>Nota: este método proviene del curso de predicación de CTS (WiseSpeak), y mucho le resultará familiar si tomó aquel curso. Lo repetimos aquí a propósito — para reforzar de nuevo cómo poner estructura a un sermón, antes de soltar esa estructura sobre la doctrina, unidad por unidad.</em></p>
+
+<h3>Día 1 — Del texto a la idea</h3>
+<p>La Unidad 1 fijó la visión; esta unidad pone las herramientas en su mano. El predicador doctrinal trabaja con un pequeño conjunto de términos, y aprenderlos es la diferencia entre un sermón que divaga y uno que llega a alguna parte.</p>
+<p><strong>Texto.</strong> La palabra significa “tejer.” El texto es el hilo sobre el cual se teje todo el sermón — el pasaje de la Escritura que es su base. <strong>Idea.</strong> La idea es el tema general del sermón, y debe venir <em>del</em> texto, no ser llevada <em>al</em> texto. Donald Miller estableció una regla que ha moldeado a una generación de predicadores: el tema del texto y el tema del sermón deben ser el mismo. Si no lo son, el texto deja de ser texto — se vuelve un <em>pretexto</em>, un punto de partida para los propios pensamientos del predicador.</p>
+<p>Ejemplos de una idea: la fe, el reino de Dios, la esperanza, la ley, las obras, el amor, el ayuno, el bautismo, la familia. Cada una es una idea bíblica real — pero cada una es demasiado grande para predicarse en un solo sermón. Intente predicar sobre la fe: podría hablar de las cualidades de la fe, las exigencias de la fe, ejemplos de fe, hombres de fe, o las razones por las que la fe importa — y cada una es ya un sermón completo. La idea es la piedra en bruto de la cantera. Hay que tallarla antes de poder asentarla en el muro.</p>
+<div class="scripture">"Procura con diligencia presentarte a Dios aprobado... que traza bien la palabra de verdad." — 2 Timoteo 2:15 (RVG)</div>
+
+<h3>Día 2 — La pregunta de sondeo (el interrogativo)</h3>
+<p>Una vez que tiene la idea, le hace una pregunta. Esta pregunta de sondeo — el <strong>interrogativo</strong> — es el gozne de todo el método, porque la pregunta que hace determina el sermón que predicará. El periodista usa estas mismas preguntas para producir una nota. Rudyard Kipling nos dio la manera más fácil de recordarlas:</p>
+<div class="pull-quote">Mantengo a seis sirvientes honestos<br>(me enseñaron todo lo que sabía);<br>sus nombres son Qué, Por qué, Cuándo,<br>y Cómo, Dónde y Quién.</div>
+<p>Para la predicación, las seis de Kipling se vuelven ocho al añadir <em>cuál</em> y <em>cuánto</em>. Así que los ocho interrogativos, y lo que cada uno abre:</p>
+<table class="method">
+<tr><th>Interrogativo</th><th>Lo que abre</th></tr>
+<tr><td><strong>Quién</strong></td><td>personas</td></tr>
+<tr><td><strong>Cuál</strong></td><td>opciones o alternativas</td></tr>
+<tr><td><strong>Qué</strong></td><td>medios, valor, objetivos</td></tr>
+<tr><td><strong>Por qué</strong></td><td>razones, definiciones, características</td></tr>
+<tr><td><strong>Cuándo</strong></td><td>clases, fases, condiciones</td></tr>
+<tr><td><strong>Dónde</strong></td><td>lugares, fuentes, resultados</td></tr>
+<tr><td><strong>Cómo</strong></td><td>secuencias, maneras</td></tr>
+<tr><td><strong>Cuánto</strong></td><td>cantidad, costo, esfuerzo</td></tr>
+</table>
+<p>La pregunta de sondeo se forma uniendo la idea a uno de estos en una oración completa: tome la idea de la esperanza y pregunte: “¿Quién tiene esperanza?” o “¿Cuáles esperanzas son válidas?” o “¿Por qué es necesaria la esperanza?” Cada pregunta es la puerta a un sermón distinto.</p>
+
+<h3>Día 3 — La palabra clave (el paso generativo)</h3>
+<p>La <strong>palabra clave</strong> surge naturalmente del interrogativo. Suele ser un sustantivo plural, y es la palabra más importante en la estructura de su sermón — porque la palabra clave es lo que une el bosquejo. Cada punto del sermón será un caso particular de la palabra clave.</p>
+<p>Tres reglas la gobiernan. <strong>Primera: siempre es plural</strong> — casi sin excepción termina en ‑s; si no, y no es un plural irregular, probablemente está equivocada. <strong>Segunda: solo una palabra clave por sermón</strong>, así como usa un solo interrogativo. <strong>Tercera: evite palabras genéricas como “cosas.”</strong> “Tres cosas sobre la oración” no es una palabra clave; es pereza. La palabra clave debe ser tan específica como el contenido real de sus puntos.</p>
+<p>Observe una idea — <em>inmersión</em> — girar bajo distintas preguntas; la palabra clave cambia, y con ella todo el sermón:</p>
+<table class="method">
+<tr><th>Interrogativo</th><th>Palabra clave que produce</th></tr>
+<tr><td>¿Quién fue sumergido?</td><td><strong>personas</strong> (que fueron sumergidas)</td></tr>
+<tr><td>¿Cuáles clases de bautismo?</td><td><strong>tipos</strong> de bautismo</td></tr>
+<tr><td>¿Cuáles son sus efectos?</td><td><strong>efectos</strong> (identificación, sujeción, multiplicación)</td></tr>
+<tr><td>¿Por qué tenerlo?</td><td><strong>razones</strong> (mandado, modelado, significativo)</td></tr>
+<tr><td>¿Cuándo debe hacerse?</td><td><strong>tiempos</strong></td></tr>
+<tr><td>¿Dónde puede hacerse?</td><td><strong>lugares</strong></td></tr>
+<tr><td>¿Cómo se practica?</td><td><strong>maneras</strong></td></tr>
+</table>
+<p>Una idea, siete sermones — y la palabra clave eligió cada uno. Lo mismo ocurre con la idea de <em>fe</em>: <em>personas</em> de fe (hombres que creyeron a Dios); <em>efectos</em> de la fe (ver lo invisible, hacer lo imposible, creer lo increíble); <em>tiempos</em> para la fe (cuando desanimados, cuando distraídos, cuando decepcionados); <em>maneras</em> de mostrar fe (por la palabra, por el andar, por el testimonio); <em>razones</em> para tener fe (por la vida abundante, por la vida eterna); aun <em>cantidades</em> de fe (suficiente para cubrir nuestra tristeza, suficiente para llenar nuestra vida, suficiente para mover nuestras montañas). Una idea, y el interrogativo eligió la palabra clave, y la palabra clave generó un sermón distinto cada vez. Por eso el interrogativo y la palabra clave juntos son el corazón generativo del método.</p>
+
+<h3>Día 4 — Sujeto, objetivo, y las dos direcciones</h3>
+<p>Un <strong>sujeto</strong> claro es lo que impide que un sermón divague. Recuerdo caminar por el bosque con mi padre cuando era niño. Yo me habría perdido sin remedio — cada árbol parecía igual — pero mi padre sacaba su brújula a intervalos; le daba un punto fijo de referencia, y no divagábamos. El sujeto de un sermón es su brújula.</p>
+<p>El sujeto es la palabra clave más un <em>modificador</em> — cualquier cosa que describa o limite la palabra clave. Tres formas son comunes: el <strong>adjetivo</strong> (“siete pecados mortales”), la <strong>frase preposicional</strong> (“maneras de saber que tenemos seguridad”), y la <strong>cláusula subordinada</strong> (“cualidades que Dios posee”). El sujeto responde a la pregunta: “¿De qué trata el sermón?” Su valor es sobre todo para el predicador, manteniéndolo consciente de su rumbo; y la gente, tomando notas, puede escribir el sujeto al principio de la página y cada punto debajo.</p>
+<p>Luego viene el <strong>objetivo</strong> — la meta del sermón. Responde a otra pregunta: “¿Qué quiero que la gente <em>haga</em>?” Expréselo como una acción, no un sentimiento, porque las acciones correctas llevan consigo las creencias correctas. Una fórmula útil comienza: “La gente…” — “La gente responderá durante la invitación para recibir a Cristo,” o “La gente apartará un tiempo específico cada día esta semana para la oración.” Concreto, medible, y le da un destino a la conclusión.</p>
+<p>Por último, las dos direcciones del movimiento. La <strong>deducción</strong> razona de lo general a lo específico: comience con una afirmación general — “Dios es grande” — y divídala en puntos específicos (grande en su conocimiento, grande en su poder, grande en su presencia). Es la vía de la predicación <em>tópica</em>. La <strong>inducción</strong> razona al revés, de lo específico a lo general: comience con los puntos que el texto provee y deje que construyan el sujeto. Es algo como el programa <em>Jeopardy</em> — la respuesta está dada en el texto, y usted debe hallar la pregunta. Es la vía del sermón <em>textual</em> y <em>expositivo</em>.</p>
+
+<h3>Día 5 — El método en acción, y el análisis</h3>
+<p>He aquí todo el método corriendo a la vez, en un sermón sobre la doctrina de las últimas cosas. La idea es <em>el regreso de Cristo</em>; los interrogativos están a la vista en los puntos mismos; cada punto se apoya en su propio texto:</p>
+<table class="method">
+<tr><th>Interrogativo → Punto</th><th>Texto base</th></tr>
+<tr><td><strong>¿Cuándo?</strong> — Nadie sabe el día</td><td>Mateo 24</td></tr>
+<tr><td><strong>¿Qué?</strong> — Qué sucederá en su venida</td><td>1 Tesalonicenses 4</td></tr>
+<tr><td><strong>¿Qué llegaremos a ser?</strong></td><td>1 Juan 3:2</td></tr>
+</table>
+<p>El predicador ordenó esos tres puntos (deducción, tópico), y sin embargo ni uno flota libre de la Escritura — que es la tesis de la Unidad 1 probada en la práctica. Un sermón tópico puede ser tan bíblico como uno expositivo, <em>siempre que cada punto esté anclado en un versículo</em>. Un sermón de Viernes Santo que he predicado más de una vez lo muestra: “Las siete palabras de la Cruz” — idea, la Cruz; palabra clave, <em>palabras</em>; sujeto, las siete palabras de la Cruz. Una palabra de perdón (Lucas 23:34), una de promesa (Lucas 23:43), una de provisión (Juan 19:26–27), una de dolor (Juan 19:28), una de desamparo (Mateo 27:46), una de triunfo (Juan 19:30), una de entrega (Lucas 23:46). Siete puntos rompe la regla usual de tres a cinco, así que cuando lo predico no uso subpuntos — por regla, cuando un sermón tiene más de tres puntos, deje caer los subpuntos; la gente no puede sostener a la vez un bosquejo largo y uno en capas.</p>
+<p>Dos máximas de Cook nombran la diferencia entre las formas inductivas. En el sermón <em>textual</em> los puntos vienen del texto pero el predicador aporta la explicación — el texto provee el esqueleto; el predicador aporta la carne. En el sermón <em>expositivo</em> tanto los puntos como su explicación vienen del texto — el predicador es el mensajero; el texto es el mensaje.</p>
+<p>Por último, un <strong>análisis de predicación</strong> es el ejercicio inverso: recorrer un texto por inducción para descubrir sus interrogativos y palabras clave. No es lo mismo que un bosquejo del capítulo; comienza con una pregunta y contiene el tema del pasaje. Domina el análisis y podrás predicar cualquier texto del Libro. La Unidad 3 comienza a aplicar todo esto, doctrina por doctrina, empezando con la Revelación.</p>
+<div class="scripture">"¡Predica la palabra!" — 2 Timoteo 4:2 (RVG)</div>
+</div>
+</div>
+
+
+<figure class="cts-figure" style="margin:30px auto;max-width:700px;text-align:center;">
+<svg style="width:100%;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1560" role="img" aria-label="The WiseSpeak Method">
+<defs>
+  <radialGradient id="vig" cx="50%" cy="42%" r="75%">
+    <stop offset="0%" stop-color="#f3ead0"/>
+    <stop offset="100%" stop-color="#efe4c4"/>
+  </radialGradient>
+  <marker id="arr" markerWidth="13" markerHeight="13" refX="8.5" refY="5" orient="auto">
+    <path d="M0.5,0.5 L10,5 L0.5,9.5 Z" fill="#7c2a2f"/>
+  </marker>
+</defs>
+<rect x="0" y="0" width="1000" height="1560" fill="#f3ead0"/>
+<rect x="0" y="0" width="1000" height="1560" fill="url(#vig)"/>
+<rect x="14" y="14" width="972" height="1532" fill="none" stroke="#b08a2e" stroke-width="6"/>
+<rect x="26" y="26" width="948" height="1508" fill="none" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="500.0" y="96" font-size="60" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="1">WiseSpeak</text>
+<line x1="350.0" y1="118" x2="650.0" y2="118" stroke="#b08a2e" stroke-width="2"/>
+<circle cx="500.0" cy="118" r="4" fill="#b08a2e"/>
+<text x="500.0" y="150" font-size="19" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">A Method for Building the Sermon Outline</text>
+<text x="500.0" y="174" font-size="17" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Un método para construir el bosquejo del sermón</text>
+<text x="500.0" y="202" font-size="12.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.6" opacity="0.8">© 1993 Wayne Cook  ·  Chapala Theological Seminary / Seminario Teológico de Chapala</text>
+<rect x="80" y="248" width="400" height="132" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="280.0" y="272" font-size="11.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="2.2">STEP 1 / PASO 1</text>
+<text x="280.0" y="300" font-size="24" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.5">SUBJECT</text>
+<text x="280.0" y="322" font-size="16.5" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El Tema</text>
+<text x="280.0" y="345" font-size="13.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">The theme — what you preach about.</text>
+<text x="280.0" y="364" font-size="13" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.85">El tema — sobre qué predicas.</text>
+<rect x="520" y="248" width="400" height="132" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="720.0" y="272" font-size="11.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="2.2">STEP 2 / PASO 2</text>
+<text x="720.0" y="300" font-size="24" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.5">TEXT</text>
+<text x="720.0" y="322" font-size="16.5" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El Texto</text>
+<text x="720.0" y="345" font-size="13.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">The Scripture passage preached.</text>
+<text x="720.0" y="364" font-size="13" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.85">El pasaje bíblico que se predica.</text>
+<path d="M280,380 C280,412 500.0,382 500.0,426" fill="none" stroke="#7c2a2f" stroke-width="2.2" marker-end="url(#arr)"/>
+<path d="M720,380 C720,412 500.0,382 500.0,426" fill="none" stroke="#7c2a2f" stroke-width="2.2"/>
+<rect x="120" y="432" width="760" height="132" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="500.0" y="456" font-size="11.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="2.2">STEP 3 / PASO 3</text>
+<text x="500.0" y="484" font-size="24" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.5">PROPOSITION</text>
+<text x="500.0" y="506" font-size="16.5" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">La Proposición</text>
+<text x="500.0" y="529" font-size="13.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">The one timeless truth, stated in a single declarative sentence.</text>
+<text x="500.0" y="548" font-size="13" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.85">La única verdad eterna, en una sola oración declarativa.</text>
+<line x1="500.0" y1="564" x2="500.0" y2="592" stroke="#7c2a2f" stroke-width="2.2" marker-end="url(#arr)"/>
+<rect x="120" y="596" width="760" height="124" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="500.0" y="620" font-size="11.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="2.2">STEP 4 / PASO 4</text>
+<text x="500.0" y="648" font-size="24" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.5">INTERROGATIVE</text>
+<text x="500.0" y="670" font-size="16.5" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El Interrogante</text>
+<text x="500.0" y="693" font-size="13.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">The probing question:  Why?  How?  What?  Where?  When?  Who?</text>
+<text x="500.0" y="712" font-size="13" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.85">La pregunta que sondea:  ¿Por qué?  ¿Cómo?  ¿Qué?  ¿Dónde?  ¿Cuándo?  ¿Quién?</text>
+<line x1="500.0" y1="720" x2="500.0" y2="748" stroke="#7c2a2f" stroke-width="2.2" marker-end="url(#arr)"/>
+<rect x="120" y="752" width="760" height="150" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="500.0" y="776" font-size="11.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="2.2">STEP 5 / PASO 5  ·  THE HINGE OF UNITY / EL EJE DE LA UNIDAD</text>
+<text x="500.0" y="804" font-size="24" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.5">KEYWORD</text>
+<text x="500.0" y="826" font-size="16.5" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">La Palabra Clave</text>
+<text x="500.0" y="849" font-size="13.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">A plural noun that answers the interrogative and classifies every main division.</text>
+<text x="500.0" y="868" font-size="13" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.85">Un sustantivo plural que responde al interrogante y clasifica cada división.</text>
+<line x1="500.0" y1="902" x2="500.0" y2="932" stroke="#7c2a2f" stroke-width="2.2" marker-end="url(#arr)"/>
+<rect x="120" y="936" width="760" height="124" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="500.0" y="960" font-size="11.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="2.2">STEP 6 / PASO 6</text>
+<text x="500.0" y="988" font-size="24" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.5">TRANSITIONAL SENTENCE</text>
+<text x="500.0" y="1010" font-size="16.5" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">La Oración de Transición</text>
+<text x="500.0" y="1033" font-size="13.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Bridges proposition, interrogative, and keyword into the body of the sermon.</text>
+<text x="500.0" y="1052" font-size="13" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.85">Enlaza la proposición, el interrogante y la palabra clave con el cuerpo.</text>
+<line x1="500.0" y1="1060" x2="500.0" y2="1086" stroke="#7c2a2f" stroke-width="2.2" marker-end="url(#arr)"/>
+<text x="500.0" y="1094" font-size="13" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="1.6">MAIN DIVISIONS  /  LAS DIVISIONES PRINCIPALES</text>
+<text x="500.0" y="1113" font-size="12.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.85">Parallel — each one a member of the keyword.  ·  Paralelas — cada una, un miembro de la palabra clave.</text>
+<rect x="120" y="1126" width="230" height="78" rx="10" ry="10" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.4"/>
+<text x="235.0" y="1164" font-size="26" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">I</text>
+<text x="235.0" y="1186" font-size="12" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.8">Division One</text>
+<rect x="385" y="1126" width="230" height="78" rx="10" ry="10" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.4"/>
+<text x="500.0" y="1164" font-size="26" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">II</text>
+<text x="500.0" y="1186" font-size="12" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.8">Division Two</text>
+<rect x="650" y="1126" width="230" height="78" rx="10" ry="10" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.4"/>
+<text x="765.0" y="1164" font-size="26" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">III</text>
+<text x="765.0" y="1186" font-size="12" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.8">Division Three</text>
+<rect x="120" y="1234" width="760" height="66" rx="8" ry="8" fill="#ecd9a0" stroke="#8a661c" stroke-width="1.4"/>
+<text x="500.0" y="1262" font-size="16" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Unity is the chief mark of a good outline — the keyword is its tool.</text>
+<text x="500.0" y="1284" font-size="14" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">La unidad es la marca principal de un buen bosquejo — la palabra clave es su herramienta.</text>
+<rect x="120" y="1326" width="760" height="200" rx="10" ry="10" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="500.0" y="1356" font-size="12.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="2">A WORKED EXAMPLE  ·  UN EJEMPLO</text>
+<text x="152" y="1384" font-size="13.5" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Subject: Prayer   ·   Proposition: “The believer should pray with confidence.”</text>
+<text x="152" y="1406" font-size="13.5" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Interrogative: Why?   ·   Keyword: Reasons  (a plural noun)</text>
+<text x="152" y="1428" font-size="13.5" fill="#561c20" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Divisions  →   I. God hears     II. God loves     III. God answers     (each one a reason)</text>
+<text x="152" y="1462" font-size="13" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Tema: La oración   ·   Proposición: «El creyente debe orar con confianza.»</text>
+<text x="152" y="1484" font-size="13" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Interrogante: ¿Por qué?   ·   Palabra clave: Razones  (un sustantivo plural)</text>
+<text x="152" y="1506" font-size="13" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Divisiones  →   I. Dios oye     II. Dios ama     III. Dios responde     (cada una, una razón)</text>
+</svg>
+<figcaption style="font-family:Georgia,'Times New Roman',serif;font-size:0.9em;line-height:1.5;margin-top:10px;color:#561c20;"><span style="font-weight:bold;">The WiseSpeak method — the structure behind every doctrinal sermon.</span><br><span style="font-style:italic;color:#8a661c;">El método WiseSpeak — la estructura tras cada sermón doctrinal.</span></figcaption>
+</figure>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 2 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 2 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 2;
+const COURSE = 'dp';
+const NEXT_UNIT_URL = 'CTSDPUnit3.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - What Is Doctrinal Preaching?", "Unit 2 - The Method: Text, Interrogative, Keyword", "Unit 3 - Preaching the Doctrine of Revelation", "Unit 4 - Preaching the Doctrine of God", "Unit 5 - Preaching the Doctrine of Man", "Unit 6 - Preaching the Life and Work of Christ", "Unit 7 - Preaching the Holy Spirit", "Unit 8 - Preaching the Doctrine of Salvation", "Unit 9 - Preaching the Doctrine of the Church", "Unit 10 - Preaching the Doctrine of Last Things"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSDPUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\U0001F44B ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+const regBtn = document.getElementById('regBtn');
+if (regBtn) regBtn.onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "1. The word “text” literally means:", "textEs": "1. La palabra “texto” significa literalmente:", "optionsEn": ["To weave", "To divide", "To memorize", "To shout"], "optionsEs": ["Tejer", "Dividir", "Memorizar", "Gritar"], "explanationEn": "“Text” means “to weave” — the thread on which the sermon is woven.", "explanationEs": "“Texto” significa “tejer” — el hilo sobre el cual se teje el sermón.", "correct": 0}, {"textEn": "2. The idea of the sermon must come:", "textEs": "2. La idea del sermón debe venir:", "optionsEn": ["From the preacher’s imagination", "From the text", "From the hymnbook", "From tradition"], "optionsEs": ["De la imaginación del predicador", "Del texto", "Del himnario", "De la tradición"], "explanationEn": "The idea must come from the text; the theme of the text and of the sermon must be the same.", "explanationEs": "La idea debe venir del texto; el tema del texto y del sermón debe ser el mismo.", "correct": 1}, {"textEn": "3. When the theme of the sermon differs from the theme of the text, the text has become a:", "textEs": "3. Cuando el tema del sermón difiere del tema del texto, el texto se ha vuelto un:", "optionsEn": ["Keyword", "Subject", "Pretext", "Analysis"], "optionsEs": ["Palabra clave", "Tema", "Pretexto", "Análisis"], "explanationEn": "If the sermon’s theme is not the text’s theme, the text is only a pretext.", "explanationEs": "Si el tema del sermón no es el del texto, el texto es solo un pretexto.", "correct": 2}, {"textEn": "4. The interrogative is best described as:", "textEs": "4. El interrogativo se describe mejor como:", "optionsEn": ["A plural noun", "A probing question asked of the idea", "The sermon title", "The closing hymn"], "optionsEs": ["Un sustantivo plural", "Una pregunta indagadora hecha a la idea", "El título del sermón", "El himno final"], "explanationEn": "The interrogative is the probing question you ask of the idea; it shapes the sermon.", "explanationEs": "El interrogativo es la pregunta indagadora que haces a la idea; da forma al sermón.", "correct": 1}, {"textEn": "5. Which interrogative chiefly opens up people?", "textEs": "5. ¿Cuál interrogativo abre principalmente a las personas?", "optionsEn": ["How much", "Where", "Why", "Who / Whom"], "optionsEs": ["Cuánto", "Dónde", "Por qué", "Quién"], "explanationEn": "“Who/Whom” describes people.", "explanationEs": "“Quién” describe a las personas.", "correct": 3}, {"textEn": "6. Which interrogative opens up choices or alternatives?", "textEs": "6. ¿Cuál interrogativo abre opciones o alternativas?", "optionsEn": ["Which", "Who", "When", "How"], "optionsEs": ["Cuál", "Quién", "Cuándo", "Cómo"], "explanationEn": "“Which” describes choices or alternatives.", "explanationEs": "“Cuál” describe opciones o alternativas.", "correct": 0}, {"textEn": "7. The keyword is usually:", "textEs": "7. La palabra clave suele ser:", "optionsEn": ["A verb", "A proper name", "An adjective", "A plural noun"], "optionsEs": ["Un verbo", "Un nombre propio", "Un adjetivo", "Un sustantivo plural"], "explanationEn": "The keyword is usually a plural noun arising from the interrogative.", "explanationEs": "La palabra clave suele ser un sustantivo plural que surge del interrogativo.", "correct": 3}, {"textEn": "8. The outline of the sermon is derived from the:", "textEs": "8. El bosquejo del sermón se deriva de la:", "optionsEn": ["Keyword", "Illustration", "Modifier", "Title"], "optionsEs": ["Palabra clave", "Ilustración", "Modificador", "Título"], "explanationEn": "The keyword generates the outline; each point is an instance of it.", "explanationEs": "La palabra clave genera el bosquejo; cada punto es un caso de ella.", "correct": 0}, {"textEn": "9. A good keyword should be:", "textEs": "9. Una buena palabra clave debe ser:", "optionsEn": ["As specific as possible, avoiding vague words like “things”", "A whole sentence", "A Bible reference", "As general as possible"], "optionsEs": ["Lo más específica posible, evitando palabras vagas como “cosas”", "Una oración completa", "Una referencia bíblica", "Lo más general posible"], "explanationEn": "Keep the keyword specific; avoid empty words like “things.”", "explanationEs": "Mantén específica la palabra clave; evita palabras vacías como “cosas.”", "correct": 0}, {"textEn": "10. The subject of the sermon is:", "textEs": "10. El tema del sermón es:", "optionsEn": ["The interrogative", "The keyword alone", "The text reference", "The keyword plus a modifier"], "optionsEs": ["El interrogativo", "Solo la palabra clave", "La referencia del texto", "La palabra clave más un modificador"], "explanationEn": "The subject is the keyword plus a modifier (often a prepositional phrase).", "explanationEs": "El tema es la palabra clave más un modificador (a menudo una frase preposicional).", "correct": 3}, {"textEn": "11. The subject answers which question?", "textEs": "11. ¿A qué pregunta responde el tema?", "optionsEn": ["What is the sermon about?", "What text is it?", "How long is it?", "Who is preaching?"], "optionsEs": ["¿ De qué trata el sermón?", "¿Qué texto es?", "¿Cuánto dura?", "¿Quién predica?"], "explanationEn": "The subject answers, “What is the sermon about?” and keeps the preacher’s direction clear.", "explanationEs": "El tema responde: “¿De qué trata el sermón?” y mantiene clara la dirección del predicador.", "correct": 0}, {"textEn": "12. Deduction moves from:", "textEs": "12. La deducción va de:", "optionsEn": ["Specific to general", "Text to title", "End to beginning", "General to specific"], "optionsEs": ["Lo específico a lo general", "El texto al título", "El final al principio", "Lo general a lo específico"], "explanationEn": "Deduction goes general→specific and is used in topical preaching.", "explanationEs": "La deducción va de lo general a lo específico y se usa en la predicación tópica.", "correct": 3}, {"textEn": "13. Induction moves from:", "textEs": "13. La inducción va de:", "optionsEn": ["General to specific", "Title to text", "Specific to general", "Loud to soft"], "optionsEs": ["Lo general a lo específico", "El título al texto", "Lo específico a lo general", "Fuerte a suave"], "explanationEn": "Induction goes specific→general and is used in textual and expository preaching.", "explanationEs": "La inducción va de lo específico a lo general y se usa en la predicación textual y expositiva.", "correct": 2}, {"textEn": "14. Topical preaching uses which process?", "textEs": "14. ¿Qué proceso usa la predicación tópica?", "optionsEn": ["Induction", "Memorization", "Deduction", "Translation"], "optionsEs": ["Inducción", "Memorización", "Deducción", "Traducción"], "explanationEn": "Topical preaching is deductive: the preacher arranges points under a chosen subject.", "explanationEs": "La predicación tópica es deductiva: el predicador ordena los puntos bajo un tema escogido.", "correct": 2}, {"textEn": "15. From the idea “immersion,” the question “What are its effects?” yields the keyword:", "textEs": "15. De la idea “inmersión,” la pregunta “¿Cuáles son sus efectos?” produce la palabra clave:", "optionsEn": ["Times", "Effects", "Places", "Reasons"], "optionsEs": ["Tiempos", "Efectos", "Lugares", "Razones"], "explanationEn": "“What are its effects?” → keyword “effects.” The interrogative chooses the keyword.", "explanationEs": "“¿Cuáles son sus efectos?” → palabra clave “efectos.” El interrogativo escoge la palabra clave.", "correct": 1}, {"textEn": "16. From the idea “immersion,” the question “Why have it?” yields the keyword:", "textEs": "16. De la idea “inmersión,” la pregunta “¿Por qué tenerlo?” produce la palabra clave:", "optionsEn": ["Places", "Times", "Reasons", "Ways"], "optionsEs": ["Lugares", "Tiempos", "Razones", "Maneras"], "explanationEn": "“Why?” → keyword “reasons” (commanded, modeled, meaningful).", "explanationEs": "“¿Por qué?” → palabra clave “razones” (mandado, modelado, significativo).", "correct": 2}, {"textEn": "17. A preaching analysis is best described as:", "textEs": "17. Un análisis de predicación se describe mejor como:", "optionsEn": ["A summary outline of the chapter", "Going through a text by induction to find its interrogatives and keywords", "A word-for-word translation", "A list of cross-references"], "optionsEs": ["Un bosquejo resumido del capítulo", "Recorrer un texto por inducción para hallar sus interrogativos y palabras clave", "Una traducción palabra por palabra", "Una lista de referencias cruzadas"], "explanationEn": "Analysis works through a text inductively to surface its interrogatives and keywords.", "explanationEs": "El análisis recorre un texto inductivamente para descubrir sus interrogativos y palabras clave.", "correct": 1}, {"textEn": "18. How does a preaching analysis differ from an ordinary outline of a passage?", "textEs": "18. ¿En qué difiere un análisis de predicación de un bosquejo común del pasaje?", "optionsEn": ["It uses no Scripture", "It begins with a question and contains the subject of the passage", "It ignores the text", "It is always longer"], "optionsEs": ["No usa la Escritura", "Comienza con una pregunta y contiene el tema del pasaje", "Ignora el texto", "Siempre es más largo"], "explanationEn": "An analysis begins with a question and carries the subject; it is not a mere chapter outline.", "explanationEs": "Un análisis comienza con una pregunta y lleva el tema; no es un mero bosquejo del capítulo.", "correct": 1}, {"textEn": "19. In the worked sermon on Christ’s return, the point “No one knows the day” rests on:", "textEs": "19. En el sermón modelo sobre el regreso de Cristo, el punto “Nadie sabe el día” se apoya en:", "optionsEn": ["1 John 3", "Romans 8", "1 Thessalonians 4", "Matthew 24"], "optionsEs": ["1 Juan 3", "Romanos 8", "1 Tesalonicenses 4", "Mateo 24"], "explanationEn": "“When? — no one knows” rests on Matthew 24.", "explanationEs": "“¿Cuándo? — nadie sabe” se apoya en Mateo 24.", "correct": 3}, {"textEn": "20. The chief value of naming the subject is:", "textEs": "20. El valor principal de nombrar el tema es:", "optionsEn": ["Choosing a hymn", "Filling time", "Keeping the preacher aware of the sermon’s direction", "Impressing the congregation"], "optionsEs": ["Escoger un himno", "Llenar el tiempo", "Mantener al predicador consciente de la dirección del sermón", "Impresionar a la congregación"], "explanationEn": "The subject’s value is chiefly to the preacher — it keeps the sermon’s direction clear.", "explanationEs": "El valor del tema es principalmente para el predicador — mantiene clara la dirección del sermón.", "correct": 2}];
+const kwQuestions = [{"textEn": "21. Define “text” and “idea,” and explain how they must relate.", "textEs": "21. Defina “texto” e “idea,” y explique cómo deben relacionarse.", "kw_en": ["text", "weave", "idea", "topic", "theme", "scripture", "pretext", "same"], "kw_es": ["texto", "tej", "idea", "tema", "general", "escritura", "pretexto", "mism"], "modelEn": "The text is the passage of Scripture on which the sermon is based; the word itself means to weave, and the text is the thread the sermon is woven upon. The idea is the general topic or theme of the sermon. The two must relate in one strict way: the idea must come from the text, so that the theme of the text and the theme of the sermon are the same. If they differ, the text has become only a pretext, a mere starting point for the preacher’s own notions rather than the Word he is bound to preach.", "modelEs": "El texto es el pasaje de la Escritura sobre el cual se basa el sermón; la palabra misma significa tejer, y el texto es el hilo sobre el que se teje el sermón. La idea es el tema general del sermón. Los dos deben relacionarse de una manera estricta: la idea debe venir del texto, de modo que el tema del texto y el tema del sermón sean el mismo. Si difieren, el texto se ha vuelto solo un pretexto, un mero punto de partida para las ocurrencias del predicador en lugar de la Palabra que está obligado a predicar."}, {"textEn": "22. What is an interrogative, and how does it move the preacher toward a keyword? Give an example.", "textEs": "22. ¿Qué es un interrogativo, y cómo lleva al predicador hacia una palabra clave? Dé un ejemplo.", "kw_en": ["interrogative", "question", "idea", "keyword", "example", "probe", "who", "why"], "kw_es": ["interrogativo", "pregunta", "idea", "clave", "ejemplo", "indag", "quién", "raz"], "modelEn": "An interrogative is the probing question the preacher asks of the idea, such as who, which, what, why, when, where, how, or how much. It is the hinge of the method because the question chosen determines the sermon. The interrogative moves toward a keyword because the answer to the question is naturally a plural noun, and that noun becomes the keyword from which the outline grows. For example, taking the idea of immersion and asking “Why have it?” yields the keyword reasons — commanded, modeled, meaningful — and those become the points.", "modelEs": "Un interrogativo es la pregunta indagadora que el predicador hace a la idea, como quién, cuál, qué, por qué, cuándo, dónde, cómo o cuánto. Es el gozne del método porque la pregunta escogida determina el sermón. El interrogativo lleva a una palabra clave porque la respuesta a la pregunta es naturalmente un sustantivo plural, y ese sustantivo se vuelve la palabra clave de la que crece el bosquejo. Por ejemplo, tomando la idea de la inmersión y preguntando “¿Por qué tenerla?” se obtiene la palabra clave razones — mandada, modelada, significativa — y esas se vuelven los puntos."}, {"textEn": "23. Define the keyword. What makes a good one, and what should you avoid?", "textEs": "23. Defina la palabra clave. ¿Qué hace buena a una, y qué debe evitar?", "kw_en": ["keyword", "plural", "noun", "outline", "specific", "interrogative", "avoid", "things"], "kw_es": ["clave", "plural", "sustantiv", "bosquej", "específic", "interrogativo", "evit", "cosas"], "modelEn": "The keyword is usually a plural noun that arises from the interrogative, and from it the whole outline is derived, since each point of the sermon is one instance of the keyword. A good keyword is as specific as possible, so that it genuinely controls and shapes the points. What you should avoid is a vague, empty word such as “things,” which gives the outline no real direction. The more precise the keyword, the clearer and stronger the sermon that grows from it.", "modelEs": "La palabra clave suele ser un sustantivo plural que surge del interrogativo, y de ella se deriva todo el bosquejo, pues cada punto del sermón es un caso de la palabra clave. Una buena palabra clave es lo más específica posible, para que de veras controle y dé forma a los puntos. Lo que se debe evitar es una palabra vaga y vacía como “cosas,” que no da al bosquejo ninguna dirección real. Cuanto más precisa la palabra clave, más claro y fuerte el sermón que crece de ella."}, {"textEn": "24. Explain the “subject”: what it includes and what question it answers.", "textEs": "24. Explique el “tema”: qué incluye y a qué pregunta responde.", "kw_en": ["subject", "keyword", "modifier", "phrase", "about", "direction", "preacher", "focal"], "kw_es": ["tema", "clave", "modificador", "frase", "trata", "direcci", "predicador", "focal"], "modelEn": "The subject is the focal idea of the sermon, and it includes the keyword plus a modifier, which is often a prepositional phrase — for example, “ways of knowing we have security,” where ways is the keyword and the rest is the modifier. It answers the question, “What is the sermon about?” Its value is chiefly to the preacher, because it keeps him aware of the exact direction of the sermon and guards him from wandering off the point he set out to make.", "modelEs": "El tema es la idea focal del sermón, e incluye la palabra clave más un modificador, que a menudo es una frase preposicional — por ejemplo, “maneras de saber que tenemos seguridad,” donde maneras es la palabra clave y el resto es el modificador. Responde a la pregunta: “¿De qué trata el sermón?” Su valor es principalmente para el predicador, porque lo mantiene consciente de la dirección exacta del sermón y lo guarda de desviarse del punto que se propuso."}, {"textEn": "25. Walk through the whole method from idea to outline, using immersion or another doctrine as your example.", "textEs": "25. Recorra todo el método desde la idea hasta el bosquejo, usando la inmersión u otra doctrina como ejemplo.", "kw_en": ["idea", "interrogative", "keyword", "subject", "point", "outline", "text", "deduct"], "kw_es": ["idea", "interrogativo", "clave", "tema", "punto", "bosquej", "texto", "deducc"], "modelEn": "The method runs in order. You begin with an idea drawn from the text, say immersion. You ask an interrogative of it, for example “Why have it?” That question yields a keyword, here reasons. The keyword plus a modifier forms the subject, “reasons for immersion.” The keyword then generates the outline, so each point is one reason — commanded, modeled, meaningful — and each point is anchored to its own text. The whole movement from a general subject down to specific points is deduction, the way of topical preaching, yet it stays biblical because every point rests on Scripture.", "modelEs": "El método corre en orden. Comienzas con una idea sacada del texto, digamos la inmersión. Le haces un interrogativo, por ejemplo “¿Por qué tenerla?” Esa pregunta produce una palabra clave, aquí razones. La palabra clave más un modificador forma el tema, “razones para la inmersión.” La palabra clave genera entonces el bosquejo, así que cada punto es una razón — mandada, modelada, significativa — y cada punto se ancla a su propio texto. Todo el movimiento de un tema general hacia puntos específicos es deducción, el camino de la predicación tópica, y sin embargo sigue siendo bíblico porque cada punto descansa en la Escritura."}, {"textEn": "26. Distinguish deduction and induction, and tell which sermon types use each.", "textEs": "26. Distinga la deducción y la inducción, y diga qué tipos de sermón usa cada una.", "kw_en": ["deduct", "induct", "general", "specific", "topical", "textual", "exposit", "point"], "kw_es": ["deducc", "inducc", "general", "específic", "tópic", "textual", "exposit", "punto"], "modelEn": "Deduction moves from the general to the specific: the preacher begins with a general subject and divides it into its specific points. This is the process of topical preaching. Induction moves the opposite way, from the specific to the general: the preacher begins with the particular points the text supplies and lets them build up to the general subject. This is the process of textual and expository preaching. So the difference is the direction of travel, and each direction belongs to its own family of sermons.", "modelEs": "La deducción va de lo general a lo específico: el predicador comienza con un tema general y lo divide en sus puntos específicos. Este es el proceso de la predicación tópica. La inducción va al revés, de lo específico a lo general: el predicador comienza con los puntos particulares que el texto provee y deja que formen el tema general. Este es el proceso de la predicación textual y expositiva. Así que la diferencia es la dirección del recorrido, y cada dirección pertenece a su propia familia de sermones."}, {"textEn": "27. What is a preaching analysis, and how is it different from an outline of the passage?", "textEs": "27. ¿Qué es un análisis de predicación, y en qué se diferencia de un bosquejo del pasaje?", "kw_en": ["analysis", "induct", "interrogative", "keyword", "question", "subject", "text", "outline"], "kw_es": ["análisis", "inducc", "interrogativo", "clave", "pregunta", "tema", "texto", "bosquej"], "modelEn": "A preaching analysis is the work of going through a text by induction to discover the interrogatives and keywords hidden in it. It is different from an ordinary outline of the passage in that an outline merely lists what the chapter says, while an analysis begins with a question and contains the subject of the passage. The analysis is aimed at preaching: it does not just describe the text but draws out the questions and keywords from which sermons can actually be built.", "modelEs": "Un análisis de predicación es la labor de recorrer un texto por inducción para descubrir los interrogativos y las palabras clave escondidos en él. Se diferencia de un bosquejo común del pasaje en que el bosquejo solo enumera lo que dice el capítulo, mientras que el análisis comienza con una pregunta y contiene el tema del pasaje. El análisis apunta a la predicación: no solo describe el texto, sino que saca las preguntas y palabras clave de las que de veras se pueden construir sermones."}, {"textEn": "28. Take one doctrine and show how two different interrogatives produce two different keywords, and so two different sermons.", "textEs": "28. Tome una doctrina y muestre cómo dos interrogativos distintos producen dos palabras clave distintas, y así dos sermones distintos.", "kw_en": ["interrogative", "keyword", "different", "sermon", "idea", "point", "two", "generat"], "kw_es": ["interrogativo", "clave", "distint", "sermón", "idea", "punto", "dos", "gener"], "modelEn": "Take the doctrine of immersion as the idea. Ask one interrogative, “What are its effects?” and the keyword is effects, giving a sermon whose points are identification, subjugation, and multiplication. Ask a different interrogative of the very same idea, “Why have it?” and the keyword becomes reasons, giving a different sermon whose points are commanded, modeled, and meaningful. The idea never changed; the interrogative chose the keyword, and the keyword generated two distinct outlines. This is why the interrogative and keyword are the generative heart of the method.", "modelEs": "Toma la doctrina de la inmersión como la idea. Haz un interrogativo, “¿Cuáles son sus efectos?” y la palabra clave es efectos, dando un sermón cuyos puntos son identificación, sujeción y multiplicación. Haz un interrogativo distinto a la misma idea, “¿Por qué tenerla?” y la palabra clave se vuelve razones, dando un sermón distinto cuyos puntos son mandada, modelada y significativa. La idea nunca cambió; el interrogativo escogió la palabra clave, y la palabra clave generó dos bosquejos distintos. Por eso el interrogativo y la palabra clave son el corazón generativo del método."}, {"textEn": "29. Why must the subject of the sermon be the subject of the text?", "textEs": "29. ¿Por qué debe el tema del sermón ser el tema del texto?", "kw_en": ["subject", "text", "idea", "biblical", "pretext", "authority", "scripture", "same"], "kw_es": ["tema", "texto", "idea", "bíblic", "pretexto", "autoridad", "escritura", "mism"], "modelEn": "The subject of the sermon must be the subject of the text because that is what keeps the sermon biblical rather than merely the preacher’s own opinion. If the idea is drawn from the text, the preacher is proclaiming the Word; if it is brought to the text from outside, the text becomes a pretext and the authority of the sermon collapses into the authority of the man. The text must govern the idea, not the reverse, so that what the people hear is what God said and not what the preacher wished to say.", "modelEs": "El tema del sermón debe ser el tema del texto porque eso es lo que mantiene el sermón bíblico y no una mera opinión del predicador. Si la idea se saca del texto, el predicador proclama la Palabra; si se trae al texto desde afuera, el texto se vuelve un pretexto y la autoridad del sermón se reduce a la autoridad del hombre. El texto debe gobernar la idea, y no al revés, para que lo que el pueblo oiga sea lo que Dios dijo y no lo que el predicador quiso decir."}, {"textEn": "30. Summarize the method of Unit 2 in your own words, from idea to finished outline.", "textEs": "30. Resuma el método de la Unidad 2 con sus propias palabras, desde la idea hasta el bosquejo terminado.", "kw_en": ["idea", "interrogative", "keyword", "subject", "outline", "text", "point", "method"], "kw_es": ["idea", "interrogativo", "clave", "tema", "bosquej", "texto", "punto", "método"], "modelEn": "The method of Unit 2 moves in clear steps. The preacher draws an idea from the text, then asks an interrogative of that idea. The interrogative yields a keyword, usually a plural noun, and the keyword joined to a modifier forms the subject. From the keyword the outline is derived, each point being one instance of it, and each point is anchored to its own text. Whether the preacher reasons from the general down to the points by deduction or from the points up to the subject by induction, the method keeps the sermon both ordered and biblical.", "modelEs": "El método de la Unidad 2 avanza en pasos claros. El predicador saca una idea del texto, luego le hace un interrogativo a esa idea. El interrogativo produce una palabra clave, normalmente un sustantivo plural, y la palabra clave unida a un modificador forma el tema. De la palabra clave se deriva el bosquejo, siendo cada punto un caso de ella, y cada punto se ancla a su propio texto. Ya sea que el predicador razone de lo general hacia los puntos por deducción o de los puntos hacia el tema por inducción, el método mantiene el sermón ordenado y bíblico."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en la siguiente unidad arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click the next unit above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\U0001F4D6 Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\U0001F4D6 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\U0001F4D6 Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s). \u00a1Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>\U0001F4D6 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const h = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (h.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${h.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${h.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let h = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) h++; });
+        if (h >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then continue when ready.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y vuelva a intentar la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then continue when ready.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSDPReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

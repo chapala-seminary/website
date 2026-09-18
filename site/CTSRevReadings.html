@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CTS Revelation — Supplemental Reading Room</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root{
+    --primary:#512b7a;
+    --primary-deep:#3d1f5e;
+    --gold:#c9a227;
+    --gold-deep:#98771d;
+    --paper:#f1edf6;
+    --card:#fffdfb;
+    --border:#d8cfe2;
+    --ink:#241d2e;
+    --ink-soft:#574a63;
+  }
+
+  body{
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 17px;
+    padding: 20px;
+  }
+  .container{ max-width: 900px; margin: 0 auto; }
+
+  /* ---------- language toggle mechanics (house pattern) ---------- */
+  body.lang-en .lang-es{ display:none; }
+  body.lang-en .lang-en{ display:inline; }
+  body.lang-es .lang-en{ display:none; }
+  body.lang-es .lang-es{ display:inline; }
+  .lang-en.block, .lang-es.block{ display:none; }
+  body.lang-en .lang-en.block{ display:block; }
+  body.lang-es .lang-es.block{ display:block; }
+  body.lang-both .lang-es.block{ display:block; }
+  body.lang-both .lang-en.block{ display:block; }
+  body.lang-both .lang-es:not(.block){ display:inline; }
+  body.lang-both .lang-en:not(.block){ display:inline; }
+  body.lang-both .lang-es.block{ opacity:.9; border-top:1px dashed var(--border); margin-top:8px; padding-top:8px; }
+
+  /* ---------- builder note (delete before publishing) ---------- */
+  .builder{
+    border:2px dashed #b23a3a; background:#fdf4f4; color:#5a2020;
+    border-radius:12px; padding:16px 18px; margin-bottom:26px; font-size:.92rem; line-height:1.5;
+  }
+  .builder strong{ display:block; margin-bottom:6px; color:#8f2a2a; letter-spacing:.02em; text-transform:uppercase; font-size:.78rem; }
+  .builder ol{ margin:6px 0 0 18px; } .builder li{ margin:4px 0; }
+
+  /* ---------- toggle bar ---------- */
+  .bar{
+    background:#e4dcee; border-radius:40px; padding:10px 14px;
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-bottom:26px;
+  }
+  .bar span.bar-label{ color:var(--ink-soft); font-size:.85rem; margin-right:4px; }
+  .toggle-btn{
+    background:var(--card); color:var(--primary); border:1px solid var(--border);
+    border-radius:30px; padding:7px 18px; cursor:pointer; font-family:inherit; font-size:.92rem;
+  }
+  .toggle-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary); }
+
+  /* ---------- masthead ---------- */
+  .mast{ text-align:center; padding:14px 0 6px; }
+  .mast .eyebrow{
+    letter-spacing:.3em; text-transform:uppercase; font-size:.72rem; color:var(--gold-deep); margin-bottom:12px;
+  }
+  .mast h1{ color:var(--primary); font-size:2.05rem; line-height:1.2; font-weight:normal; }
+  .mast .rule{ width:88px; height:2px; background:var(--gold); margin:18px auto 14px; }
+  .mast .sub{ color:var(--ink-soft); font-style:italic; font-size:1.02rem; }
+
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .card h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:12px;
+  }
+  .card p{ margin:9px 0; }
+  .card p.lead{ margin-top:2px; }
+
+  .honors{ border-left:none; border-top:4px solid var(--gold); }
+  .honors h2{ border-left:none; padding-left:0; }
+  .pill-note{ display:inline-block; background:#efe9f4; border:1px solid var(--border); border-radius:20px; padding:3px 12px; font-size:.82rem; color:var(--primary); margin-top:4px; }
+
+  /* ---------- reading entries ---------- */
+  .shelf-head{ margin:34px 0 6px; text-align:center; }
+  .shelf-head h2{
+    color:var(--primary); font-weight:normal; font-size:1.4rem; border:none; padding:0; display:inline-block;
+  }
+  .shelf-head .rule{ width:60px; height:2px; background:var(--gold); margin:12px auto 0; }
+  .counter{
+    position:sticky; top:8px; z-index:5;
+    background:var(--primary); color:#fff; border-radius:30px;
+    padding:8px 18px; text-align:center; font-size:.95rem; margin:16px auto 6px; max-width:280px;
+    box-shadow:0 3px 10px rgba(0,0,0,.14);
+  }
+  .counter b{ color:var(--gold); }
+
+  .entry{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:20px 22px; margin:16px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+    transition:box-shadow .18s ease, border-color .18s ease;
+  }
+  .entry:hover{ box-shadow:0 7px 20px rgba(81,43,122,.14); }
+  .entry.chosen{ border-color:var(--primary); box-shadow:0 0 0 2px var(--primary) inset, 0 7px 20px rgba(81,43,122,.16); }
+  .entry .locus{
+    letter-spacing:.16em; text-transform:uppercase; font-size:.68rem; color:var(--gold-deep); margin-bottom:8px;
+  }
+  .entry .title{ font-size:1.14rem; color:var(--primary); margin-bottom:2px; }
+  .entry .title .num{
+    display:inline-block; min-width:1.7em; color:var(--gold-deep); font-style:italic;
+  }
+  .entry .byline{ color:var(--ink-soft); font-style:italic; font-size:.92rem; margin-bottom:10px; padding-left:1.7em; }
+  .entry .caption{ font-size:.98rem; }
+  .entry .foot{
+    display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center; justify-content:space-between;
+    margin-top:14px; padding-top:12px; border-top:1px solid var(--border);
+  }
+  .read-link{
+    color:var(--primary); text-decoration:none; font-size:.95rem; border-bottom:1.5px solid var(--gold); padding-bottom:1px;
+  }
+  .read-link:hover{ color:var(--gold-deep); }
+  .read-links{ display:flex; flex-wrap:wrap; gap:6px 16px; align-items:center; }
+  .read-link.mod{ border-bottom-color:var(--primary); }
+  .pick{ display:inline-flex; align-items:center; gap:9px; cursor:pointer; font-size:.92rem; color:var(--ink); user-select:none; }
+  .pick input{ width:19px; height:19px; accent-color:var(--primary); cursor:pointer; }
+  .pick.disabled{ opacity:.4; cursor:not-allowed; }
+
+  /* ---------- views panels (millennial + reading schools) ---------- */
+  .millennial{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .millennial > h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:10px;
+  }
+  .millennial .intro{ margin:8px 0 6px; }
+  .mv-grid{ margin-top:14px; }
+  .entry.mv{ box-shadow:none; border:none; border-top:1px solid var(--border); border-radius:0; margin:0; padding:18px 0; }
+  .entry.mv:first-of-type{ border-top:none; padding-top:4px; }
+  .entry.mv:hover{ box-shadow:none; }
+  .entry.mv.chosen{ box-shadow:none; border-top:1px solid var(--border); background:#f1ecf6; border-radius:8px; padding:14px 12px; }
+  .entry.mv:first-of-type.chosen{ border-top:none; }
+  .view-badge{
+    display:inline-block; background:var(--gold); color:var(--primary-deep);
+    font-size:.72rem; font-weight:bold; letter-spacing:.11em; text-transform:uppercase;
+    padding:5px 14px; border-radius:20px; margin-bottom:10px;
+  }
+
+  .limit-note{ text-align:center; color:var(--gold-deep); font-size:.9rem; min-height:1.2em; margin:4px 0 0; }
+
+  /* ---------- attestation ---------- */
+  .attest label.field{ display:block; margin:14px 0 6px; font-size:.9rem; color:var(--ink-soft); }
+  .attest input[type=text]{
+    width:100%; font-family:inherit; font-size:1rem; padding:11px 14px;
+    border:1px solid var(--border); border-radius:10px; background:#fffef9; color:var(--ink);
+  }
+  .attest .oath{
+    display:flex; gap:11px; align-items:flex-start; margin:16px 0; font-size:.96rem; background:#f1ecf6;
+    border:1px solid var(--border); border-radius:10px; padding:12px 14px;
+  }
+  .attest .oath input{ width:20px; height:20px; margin-top:2px; accent-color:var(--primary); flex-shrink:0; }
+  .btn{
+    background:var(--primary); color:#fff; border:none; border-radius:30px;
+    padding:11px 26px; cursor:pointer; font-family:inherit; font-size:1rem; margin-top:6px;
+  }
+  .btn:hover{ background:var(--primary-deep); }
+  .btn.ghost{ background:transparent; color:var(--primary); border:1px solid var(--primary); }
+  .msg{ color:var(--gold-deep); font-size:.92rem; margin-top:12px; min-height:1.2em; }
+
+  .record{ display:none; }
+  .record.show{ display:block; }
+  .record .seal-line{ width:70px; height:2px; background:var(--gold); margin:6px 0 16px; }
+  .record h3{ color:var(--primary); font-weight:normal; font-size:1.3rem; margin-bottom:4px; }
+  .record .named{ font-size:1.5rem; color:var(--primary); border-bottom:1px solid var(--gold-deep); display:inline-block; padding:0 10px 4px; margin:6px 0 12px; }
+  .record ul{ margin:12px 0 12px 20px; } .record li{ margin:5px 0; }
+  .record .stamp{ font-style:italic; color:var(--ink-soft); font-size:.92rem; }
+
+  .footnote{ text-align:center; color:var(--ink-soft); font-size:.82rem; margin:30px 0 6px; }
+
+  a:focus-visible, input:focus-visible, button:focus-visible, label:focus-within{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+
+  @media (max-width:520px){
+    body{ font-size:16px; padding:14px; }
+    .mast h1{ font-size:1.7rem; }
+    .entry .foot{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  /* ---------- print: show only the record ---------- */
+  @media print{
+    body{ background:#fff; }
+    .builder, .bar, .no-print, .entry, .millennial, .counter, .attest .oath, .attest input, .attest label.field, .attest .btn, .msg, .limit-note{ display:none !important; }
+    .card.attest{ border:none; box-shadow:none; }
+    .record{ display:block !important; }
+  }
+
+.assignment-note{background:#f7f3e7;border-left:4px solid var(--gold);padding:9px 11px;margin:10px 0;font-size:.95rem}
+</style>
+<style>
+.digest-inline{margin:12px 0 6px;border:1px solid var(--border,#e2d6c9);border-radius:9px;background:#fff;overflow:hidden}
+.digest-inline>summary{cursor:pointer;list-style:none;padding:11px 13px;font-family:Arial,Helvetica,sans-serif;font-weight:700;color:var(--primary,#33608f);display:flex;align-items:center;gap:9px}
+.digest-inline>summary::-webkit-details-marker{display:none}
+.digest-inline>summary::after{content:"\25B8";margin-left:auto;color:var(--gold-deep,#8a5a3c)}
+.digest-inline[open]>summary::after{content:"\25BE"}
+.dg-badge{flex:none;background:var(--primary,#33608f);color:#fff;font:800 .6rem/1 Arial,sans-serif;letter-spacing:.11em;padding:5px 8px;border-radius:5px}
+.dg-note-line{font-family:Arial,sans-serif;font-size:.82rem;color:var(--ink-soft,#6b5b4d);padding:0 15px 8px}
+.dg-scroll{padding:2px 15px 16px;border-top:1px solid var(--border,#eee)}
+.dg-block{max-width:none;margin:0}
+.dg-block .dg-doc{border-bottom:1.5px solid var(--border,#e2d6c9);padding-bottom:10px;margin:10px 0 12px}
+.dg-block h1{font-size:1.25rem;line-height:1.25;margin:.1rem 0 .4rem;color:var(--primary,#33608f)}
+.dg-block .dg-sub{color:var(--ink-soft,#6b5b4d);font-style:italic;margin:0 0 .5rem;font-size:.95rem}
+.dg-block .dg-src{font-size:.8rem;color:var(--ink-soft,#6b5b4d);margin:.2rem 0}
+.dg-block .dg-chips{margin:.5rem 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.35rem}
+.dg-block .dg-chips li{font:700 .66rem/1 Arial,sans-serif;background:var(--card,#eef2f6);color:var(--primary,#33608f);border:1px solid var(--border,#d5d5d5);border-radius:999px;padding:3px 8px}
+.dg-block .dg-note{background:var(--card,#eef2f6);border-left:3px solid var(--gold-deep,#8a5a3c);padding:.7rem .9rem;margin:1rem 0;font-size:.92rem;line-height:1.5}
+.dg-block h2{font-size:1.05rem;margin:1.3rem 0 .4rem;padding-top:.35rem;border-top:1px solid var(--border,#ece2d6);color:var(--primary,#33608f)}
+.dg-block h2 .dg-n{color:var(--gold-deep,#8a5a3c);font-weight:400;margin-right:.35rem}
+.dg-block p{margin:0 0 .8rem;font-size:.97rem;line-height:1.6}
+.dg-block blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--border,#e2d6c9);font-style:italic;color:#444}
+.dg-block .dg-reflect{background:var(--card,#eef2f6);padding:.7rem .9rem;border-radius:6px;margin:1rem 0}
+.dg-block footer{margin-top:1.4rem;padding-top:.8rem;border-top:1.5px solid var(--border,#e2d6c9);font-size:.8rem;color:var(--ink-soft,#6b5b4d);line-height:1.5}
+</style></head>
+<body class="lang-en">
+<div class="container">
+<!-- ============ LANGUAGE TOGGLE ============ -->
+<div class="bar no-print">
+<span class="bar-label lang-en">Language:</span>
+<span class="bar-label lang-es">Idioma:</span>
+<button class="toggle-btn active" data-lang="en" onclick="setLang('en')">English</button>
+<button class="toggle-btn" data-lang="es" onclick="setLang('es')">Español</button>
+<button class="toggle-btn" data-lang="both" onclick="setLang('both')">Both / Ambos</button>
+</div>
+<!-- ===== HONORS PROMPT (added by retrofit) ===== -->
+<div class="bar no-print" style="background:#f6f0e2;border:1px solid #e3d6bd;">
+<span class="lang-en">✦ Pursuing a degree <b>With Honors</b>? Complete this class's reading below, then track your progress:</span>
+<span class="lang-es">✦ ¿Cursando un título <b>Con Honores</b>? Complete la lectura de esta clase abajo, luego siga su progreso:</span>
+<a class="toggle-btn" href="cts-honors.html" style="text-decoration:none;"><span class="lang-en">Honors page ↗</span><span class="lang-es">Página de Honores ↗</span></a>
+</div>
+<!-- ============ MASTHEAD ============ -->
+<div class="mast">
+<div class="eyebrow">Chapala Theological Seminary · Revelation</div>
+<h1>
+<span class="lang-en">Supplemental Reading Room</span>
+<span class="lang-es">Sala de Lecturas Complementarias</span>
+</h1>
+<div class="rule"></div>
+<div class="sub">
+<span class="lang-en">The unveiling of Jesus Christ, and the end of the story — choose any three</span>
+<span class="lang-es">La revelación de Jesucristo, y el fin de la historia — elija tres cualesquiera</span>
+</div>
+</div>
+<!-- ============ FRAMING ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">How to read this shelf</span>
+<span class="lang-es">Cómo leer este estante</span>
+</h2>
+<p class="lead lang-en block">These works open the last book of the Bible — the unveiling of Jesus Christ, the reigning Lamb, and the certain triumph of God. These five readings are bilingual Chapala Theological Seminary digests, walking through Revelation — the glorified Christ and how to read the book, the four interpretive approaches, the seven churches and the throne, the judgments and the persevering saints, and the millennium and the new creation — and drawing on its classic public-domain expositors, from Swete and Matthew Henry to representatives of every school of interpretation and every millennial view. Each is written to be read on its own, in English or Spanish, entirely offline. Choose any three, read them in full, and record your reading below.</p>
+<p class="lang-en block">Revelation has been read faithfully in more than one way, and CTS binds you to none. These five readings draw on the great public-domain expositors of Revelation — Swete, Matthew Henry, and Ramsay on the churches — and fairly present the four schools of interpretation (Russell, Barnes, Seiss, Milligan) and the millennial views (Irenaeus, Blackstone, Brown, Augustine). Read these digests to see Christ unveiled in His glory, to be strengthened for endurance, and to hold the details with humility while holding the center with joy: Christ reigns, He is coming, and God will make all things new.</p>
+<p class="lead lang-es block">Estas obras abren el último libro de la Biblia — la revelación de Jesucristo, el Cordero que reina, y el cierto triunfo de Dios. Estas cinco lecturas son resúmenes bilingües del Seminario Teológico de Chapala, que recorren Apocalipsis — el Cristo glorificado y cómo leer el libro, los cuatro enfoques interpretativos, las siete iglesias y el trono, los juicios y los santos que perseveran, y el milenio y la nueva creación — y se apoyan en sus expositores clásicos de dominio público, desde Swete y Matthew Henry hasta representantes de cada escuela de interpretación y cada visión milenarista. Cada una está escrita para leerse por sí sola, en inglés o español, enteramente sin conexión. Elija tres cualesquiera, léalas por completo, y registre su lectura abajo.</p>
+<p class="lang-es block">Apocalipsis ha sido leído fielmente de más de una manera, y el STC no le ata a ninguna. Estas cinco lecturas se apoyan en los grandes expositores de dominio público de Apocalipsis — Swete, Matthew Henry, y Ramsay sobre las iglesias — y presentan con justicia las cuatro escuelas de interpretación (Russell, Barnes, Seiss, Milligan) y las visiones milenaristas (Ireneo, Blackstone, Brown, Agustín). Lea estos resúmenes para ver a Cristo revelado en su gloria, para ser fortalecido para la perseverancia, y para sostener los detalles con humildad mientras sostiene el centro con gozo: Cristo reina, viene, y Dios hará nuevas todas las cosas.</p>
+</div>
+<!-- ============ HONORS ============ -->
+<div class="card honors">
+<h2>
+<span class="lang-en">With Honors — an invitation, not a requirement</span>
+<span class="lang-es">Con Honores — una invitación, no un requisito</span>
+</h2>
+<p class="lang-en block">Your degree is complete without these readings. Every CTS degree — the Certificate, the Associate of Divinity, the Th.M., and the M.Div. — is earned in full through the course units themselves, and no student is ever penalized for being unable to reach this material.</p>
+<p class="lang-en block">These supplemental readings are the path to one added distinction — your degree awarded <em>with honors</em>. Each class whose reading you complete counts toward it: twelve classes for the Certificate or the Th.M., twenty-five for the Associate, and thirty for the M.Div. Choose any three of the readings below, read them in full, and record your reading on your honor — then track your progress on the Honors page.</p>
+<p class="lang-es block">Su título está completo sin estas lecturas. Todo título de CTS — el Certificado, el Asociado en Divinidad, la Maestría en Teología, y la Maestría en Divinidad — se obtiene por completo mediante las unidades del curso mismo, y ningún estudiante es penalizado por no poder acceder a este material.</p>
+<p class="lang-es block">Estas lecturas complementarias son el camino hacia una distinción adicional — su título otorgado <em>con honores</em>. Cada clase cuya lectura complete cuenta para ella: doce clases para el Certificado o la Maestría en Teología, veinticinco para el Asociado o la Maestría en Divinidad. Elija tres cualesquiera de las lecturas de abajo, léalas por completo, y registre su lectura bajo su honor — luego siga su progreso en la página de Honores.</p>
+<span class="pill-note lang-en">No constant internet required — see below</span>
+<span class="pill-note lang-es">No se requiere internet constante — vea abajo</span>
+</div>
+<!-- ============ ACCESS / OFFLINE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading offline</span>
+<span class="lang-es">Leer sin conexión</span>
+</h2>
+<p class="lang-en block">Every one of these five readings is a Chapala Theological Seminary bilingual digest, written by CTS and included in your course download — so all of them open directly on your device, in English or Spanish, with no internet connection at all. Each digest walks through part of Revelation and rests on the classic public-domain expositions, but the digests themselves are CTS-authored teaching, not reproductions, and those classic works are freely available online for any who wish to read them in full.</p>
+<p class="lang-es block">Cada una de estas cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala, escrito por el STC e incluido en la descarga de su curso — de modo que todas se abren directamente en su dispositivo, en inglés o español, sin conexión alguna. Cada resumen recorre parte de Apocalipsis y se apoya en las exposiciones clásicas de dominio público, pero los resúmenes mismos son enseñanza de autoría del STC, no reproducciones, y esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</p>
+</div>
+<!-- ============ TRANSLATE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading in another language</span>
+<span class="lang-es">Leer en otro idioma</span>
+</h2>
+<p class="lang-en block">Most of these works are in English. If you would rather read in Spanish or another language, the Chrome browser can translate a whole page for you. On a computer, right-click anywhere on the opened reading and choose “Translate to…”. On an Android phone or tablet, tap the three-dot menu and choose “Translate”. On an iPhone or iPad, tap the translate icon in the address bar — or open the page in the Chrome app if you don't see it. Machine translation is not perfect, but it is enough to follow the argument.</p>
+<p class="lang-es block">La mayoría de estas obras están en inglés. Si prefiere leer en español u otro idioma, el navegador Chrome puede traducir una página entera por usted. En una computadora, haga clic derecho en cualquier parte de la lectura abierta y elija “Traducir a…”. En un teléfono o tableta Android, toque el menú de tres puntos y elija “Traducir”. En un iPhone o iPad, toque el ícono de traducción en la barra de direcciones — o abra la página en la aplicación Chrome si no lo ve. La traducción automática no es perfecta, pero basta para seguir el argumento.</p>
+</div>
+<!-- ============ THE SHELF ============ -->
+<div class="shelf-head">
+<h2>
+<span class="lang-en">The Five Readings</span>
+<span class="lang-es">Las Cinco Lecturas</span>
+</h2>
+<div class="rule"></div>
+</div>
+<div class="counter no-print">
+<span class="lang-en">Chosen: <b id="cnt-en">0</b> of 3</span>
+<span class="lang-es">Elegidas: <b id="cnt-es">0</b> de 3</span>
+</div>
+<p class="limit-note no-print" id="limitNote"></p>
+<!-- 1 -->
+<article class="entry" data-id="1" data-title-en="The Unveiling of Jesus Christ &mdash; CTS digest" data-title-es="La Revelación de Jesucristo &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Revelation 1 &middot; introduction &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Apocalipsis 1 &middot; introducción &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">1.</span><span class="lang-en">The Unveiling of Jesus Christ</span><span class="lang-es">La Revelación de Jesucristo</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The book’s own title — it is first about Christ, the reigning Lamb; John on Patmos writing to seven pressured churches; how to read apocalyptic symbolism (for its message, not a coded calendar of dates); the overwhelming vision of the glorified Christ who holds “the keys of Hades and of Death”; and its purpose — to comfort suffering saints with the certainty that Christ reigns and will triumph. The center is a Person.</p>
+<p class="caption lang-es block">El propio título del libro — es ante todo acerca de Cristo, el Cordero que reina; Juan en Patmos escribiendo a siete iglesias presionadas; cómo leer el simbolismo apocalíptico (por su mensaje, no un calendario cifrado de fechas); la abrumadora visión del Cristo glorificado que sostiene “las llaves del infierno y de la muerte”; y su propósito — consolar a los santos que sufren con la certeza de que Cristo reina y triunfará. El centro es una Persona.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Unveiling of Jesus Christ</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Revelation 1: what the last book of the Bible is, and the glorified Christ at its center</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Revelation (Swete, Matthew Henry, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Revelation</li>
+<li>The Unveiling of Christ</li>
+<li>A Book of Hope</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> The last book of the Bible is "the Revelation of Jesus Christ" — first and foremost about Christ, the reigning Lamb. This first reading introduces what Revelation is, how to read its vivid symbols, and the opening vision of the glorified Christ who holds history in His hands.
+    </div>
+<h2><span class="dg-n">1.</span>The Revelation of Jesus Christ</h2>
+<p>The last book of the Bible announces its own subject in its very first words: it is "the Revelation of Jesus Christ." And the word "revelation" means an unveiling, an uncovering, a drawing back of the curtain. So we must be clear from the outset about what is being unveiled: it is, above all else, Christ Himself — the risen, glorified, and reigning Lord, shown to us here in His full majesty and in His certain, coming triumph. The book was written by the apostle John, who was at the time an old man in exile on the rocky island of Patmos, banished there for his faithfulness to the gospel; and he wrote it to seven real congregations in Asia Minor, small churches living under real pressure and the shadow of persecution. Its purpose is threefold, and worth holding in mind all the way through: to reveal Christ in His glory, to comfort and strengthen believers who are suffering, and to assure them of the certain and final victory of God. And, fittingly, it opens with a blessing pronounced upon everyone who reads it and hears it — the only book in all the Bible that begins that way.</p>
+<h2><span class="dg-n">2.</span>How to Read Revelation</h2>
+<p>Before we go a step further, a word must be said about what <em>kind</em> of book this is, for much confusion has come from misunderstanding it. Revelation belongs to a style of writing called "apocalyptic" — it is full of vivid and dramatic symbols, strange visions, meaningful numbers, and striking images, the great majority of which are drawn straight from the Old Testament. It was never written in the manner of a newspaper report or a history textbook, and it was never meant to be read woodenly and literally at every single point. Its symbols are the language it uses to convey deep spiritual realities. And so the right way to read it is to look for its <em>message</em> — not to treat it as a coded calendar of dates to be cracked. Now, precisely because the book is symbolic, and because so much of it concerns the future, sincere and godly Christians have long understood the details of it in genuinely different ways; and we will look honestly at those different approaches in the very next reading. But this much can be said now: read rightly, Revelation is not a book meant to frighten or bewilder the faithful. It is a book meant to comfort them and to make them strong.</p>
+<h2><span class="dg-n">3.</span>The Vision of the Glorified Christ</h2>
+<p>The book truly begins with a vision that sets the tone for everything that follows. John, alone on Patmos, hears a great voice behind him, and turns to look — and there he sees the glorified Christ, walking in the midst of seven golden lampstands, which are the seven churches. The sight is utterly overwhelming: His face shining like the sun in full strength, His eyes like a flame of fire, His voice like the sound of many rushing waters, and seven stars held in His right hand. And John, though he had once leaned on Jesus' breast at the supper, now falls down at His feet as though dead. But then the Lord lays His right hand upon him and speaks the words that steady the whole book: "Do not be afraid; I am the First and the Last. I am He who lives, and was dead, and behold, I am alive forevermore. Amen. And I have the keys of Hades and of Death." This is the risen Christ in His glory — the very same Jesus who was crucified, now reigning in unapproachable majesty, and holding in His own hand the keys of death itself. Whatever else Revelation may go on to unveil, it begins here, with the living and reigning Lord.</p>
+<h2><span class="dg-n">4.</span>A Book for Suffering Saints</h2>
+<p>It is worth remembering that Revelation was first written to churches that were facing real hardship and the threat of persecution — and that ever since, it has spoken with peculiar power to the people of God in their afflictions. Its great message to those first readers, and to us, is not in fact a detailed timetable of future events; it is a mighty and steadying assurance. Christ reigns <em>now</em>. He holds all of history, and death itself, in His nail-scarred hands. Evil, however loud and however cruel, will not be given the last word. God will surely judge every wrong that has ever been done, and He will vindicate His suffering people. And Christ will return in open triumph. For believers who are under pressure — whether in the first century or in our own day — this is not dry doctrine; it is bread for the hungry soul. Revelation takes the weary, downcast eyes of the suffering church and lifts them up, away from their present trials, to the throne of God and to the certain and coming victory of the Lamb.</p>
+<h2><span class="dg-n">5.</span>The Center Is a Person</h2>
+<p>So as we set out on this walk through Revelation, let us fix one thing firmly in place before all the rest. This book is not, first of all, about beasts, or seals, or bowls of wrath, or a thousand years, or even the end of the world. It is about Jesus Christ — the Lamb who was slain and now lives forevermore, the Lord who reigns over all, the King who is surely coming again. The many details along the way have been read in different ways by godly and faithful people down the centuries, and we will learn to hold those details with real humility. But the center of the book is clear and sure, and this we hold with unshakable confidence: Christ is on the throne. So do not approach the book of Revelation with dread, or with feverish and sensational speculation, but rather with worship. Read it in order to see Christ in His glory, to be comforted in the midst of your own trials, and to be assured, once and for all, that the long story of human history ends not in meaningless chaos but in the triumph of the Lamb and the making-new of all things. From its first word to its last, the closing book of the Bible is the unveiling of Jesus Christ — and He is worthy.</p>
+<h2><span class="dg-n">6.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Have you thought of Revelation mainly as a puzzle of end-times events — or as the unveiling of Christ in His glory? What does it mean for your own trials that the risen Jesus holds "the keys of Hades and of Death"? And can you come to this book not with dread or speculation, but with worship?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Revelation 1, anchored in the classic public-domain expositions of Revelation (Henry Barclay Swete's <em>The Apocalypse of St. John</em>, Matthew Henry's commentary, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This book study draws on a rich company of public-domain expositors of Revelation — including Henry Barclay Swete, Matthew Henry, William Ramsay on the seven churches, and representatives of every major school of interpretation — all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>La Revelación de Jesucristo</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Apocalipsis 1: qué es el último libro de la Biblia, y el Cristo glorificado en su centro</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Apocalipsis (Swete, Matthew Henry, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Apocalipsis</li>
+<li>La revelación de Cristo</li>
+<li>Un libro de esperanza</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> El último libro de la Biblia es "la revelación de Jesucristo" — ante todo acerca de Cristo, el Cordero que reina. Esta primera lectura introduce qué es Apocalipsis, cómo leer sus vívidos símbolos, y la visión inicial del Cristo glorificado que sostiene la historia en sus manos.
+    </div>
+<h2><span class="dg-n">1.</span>La revelación de Jesucristo</h2>
+<p>El último libro de la Biblia anuncia su propio tema en sus mismísimas primeras palabras: es "la revelación de Jesucristo." Y la palabra "revelación" significa un descubrimiento, un develamiento, un correr del velo. Así que debemos ser claros desde el comienzo sobre lo que se está develando: es, por encima de todo lo demás, Cristo mismo — el resucitado, glorificado, y reinante Señor, mostrado a nosotros aquí en su plena majestad y en su cierto y venidero triunfo. El libro fue escrito por el apóstol Juan, que era en ese tiempo un anciano en el exilio en la rocosa isla de Patmos, desterrado allí por su fidelidad al evangelio; y lo escribió a siete congregaciones reales en Asia Menor, pequeñas iglesias que vivían bajo verdadera presión y la sombra de la persecución. Su propósito es triple, y vale la pena tenerlo en mente por todo el camino: revelar a Cristo en su gloria, consolar y fortalecer a los creyentes que sufren, y asegurarles la cierta y final victoria de Dios. Y, apropiadamente, abre con una bienaventuranza pronunciada sobre todo el que lo lee y lo oye — el único libro de toda la Biblia que comienza así.</p>
+<h2><span class="dg-n">2.</span>Cómo leer Apocalipsis</h2>
+<p>Antes de que avancemos un paso más, debe decirse una palabra sobre qué <em>clase</em> de libro es este, porque mucha confusión ha venido de malentenderlo. Apocalipsis pertenece a un estilo de escritura llamado "apocalíptico" — está lleno de símbolos vívidos y dramáticos, visiones extrañas, números significativos, e impresionantes imágenes, la gran mayoría de los cuales están tomados directamente del Antiguo Testamento. Nunca fue escrito a la manera de un reportaje de periódico o un libro de historia, y nunca fue pensado para ser leído rígida y literalmente en cada solo punto. Sus símbolos son el lenguaje que usa para transmitir hondas realidades espirituales. Y así la manera correcta de leerlo es buscar su <em>mensaje</em> — no tratarlo como un calendario cifrado de fechas por descifrar. Ahora bien, precisamente porque el libro es simbólico, y porque tanto de él concierne al futuro, los cristianos sinceros y piadosos han entendido por mucho tiempo los detalles de él de maneras genuinamente diferentes; y miraremos honestamente esos diferentes enfoques en la mismísima lectura siguiente. Pero esto mucho puede decirse ahora: leído correctamente, Apocalipsis no es un libro pensado para asustar o desconcertar a los fieles. Es un libro pensado para consolarlos y hacerlos fuertes.</p>
+<h2><span class="dg-n">3.</span>La visión del Cristo glorificado</h2>
+<p>El libro de veras comienza con una visión que establece el tono para todo lo que sigue. Juan, solo en Patmos, oye una gran voz detrás de él, y se vuelve a mirar — y allí ve al Cristo glorificado, andando en medio de siete candeleros de oro, que son las siete iglesias. La vista es totalmente abrumadora: su rostro resplandeciendo como el sol en su fuerza, sus ojos como llama de fuego, su voz como el sonido de muchas aguas impetuosas, y siete estrellas sostenidas en su mano derecha. Y Juan, aunque una vez se había recostado sobre el pecho de Jesús en la cena, ahora cae a sus pies como muerto. Pero entonces el Señor pone su mano derecha sobre él y habla las palabras que estabilizan todo el libro: "No temas; yo soy el primero y el último; y el que vivo, y estuve muerto; y he aquí que vivo por los siglos de los siglos, Amén. Y tengo las llaves del infierno y de la muerte." Este es el Cristo resucitado en su gloria — el mismísimo Jesús que fue crucificado, ahora reinando en inaccesible majestad, y sosteniendo en su propia mano las llaves de la muerte misma. Cualquier otra cosa que Apocalipsis pueda seguir develando, comienza aquí, con el Señor viviente y reinante.</p>
+<h2><span class="dg-n">4.</span>Un libro para santos que sufren</h2>
+<p>Vale la pena recordar que Apocalipsis fue escrito primero a iglesias que enfrentaban verdadera dificultad y la amenaza de la persecución — y que desde entonces, ha hablado con peculiar poder al pueblo de Dios en sus aflicciones. Su gran mensaje a aquellos primeros lectores, y a nosotros, no es de hecho un detallado calendario de eventos futuros; es una poderosa y estabilizadora seguridad. Cristo reina <em>ahora</em>. Sostiene toda la historia, y la muerte misma, en sus manos con cicatrices de clavos. El mal, por más ruidoso y por más cruel, no será dado la última palabra. Dios seguramente juzgará cada mal que jamás se haya hecho, y vindicará a su pueblo que sufre. Y Cristo volverá en abierto triunfo. Para los creyentes que están bajo presión — sea en el primer siglo o en nuestro propio día — esto no es árida doctrina; es pan para el alma hambrienta. Apocalipsis toma los cansados y abatidos ojos de la iglesia que sufre y los levanta, lejos de sus presentes pruebas, al trono de Dios y a la cierta y venidera victoria del Cordero.</p>
+<h2><span class="dg-n">5.</span>El centro es una Persona</h2>
+<p>Así que al emprender este recorrido por Apocalipsis, fijemos firmemente una cosa en su lugar antes que todo lo demás. Este libro no es, ante todo, acerca de bestias, o sellos, o copas de ira, o mil años, ni siquiera el fin del mundo. Es acerca de Jesucristo — el Cordero que fue inmolado y ahora vive por los siglos de los siglos, el Señor que reina sobre todo, el Rey que seguramente viene otra vez. Los muchos detalles por el camino han sido leídos de maneras diferentes por gente piadosa y fiel a través de los siglos, y aprenderemos a sostener esos detalles con verdadera humildad. Pero el centro del libro es claro y seguro, y esto lo sostenemos con inconmovible confianza: Cristo está en el trono. Así que no se acerque al libro de Apocalipsis con pavor, ni con febril y sensacional especulación, sino más bien con adoración. Léalo a fin de ver a Cristo en su gloria, de ser consolado en medio de sus propias pruebas, y de estar seguro, de una vez por todas, de que la larga historia de la historia humana termina no en un caos sin sentido sino en el triunfo del Cordero y el hacer nuevas todas las cosas. Desde su primera palabra hasta su última, el libro final de la Biblia es la revelación de Jesucristo — y Él es digno.</p>
+<h2><span class="dg-n">6.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Ha pensado en Apocalipsis principalmente como un rompecabezas de eventos del fin de los tiempos — o como la revelación de Cristo en su gloria? ¿Qué significa para sus propias pruebas que el Jesús resucitado sostiene "las llaves del infierno y de la muerte"? Y ¿puede venir a este libro no con pavor o especulación, sino con adoración?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Apocalipsis 1, anclado en las exposiciones clásicas de dominio público de Apocalipsis (<em>The Apocalypse of St. John</em> de Henry Barclay Swete, el comentario de Matthew Henry, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Este estudio del libro se apoya en una rica compañía de expositores de dominio público de Apocalipsis — incluyendo a Henry Barclay Swete, Matthew Henry, William Ramsay sobre las siete iglesias, y representantes de cada escuela mayor de interpretación — todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="1" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 2 -->
+<article class="entry" data-id="2" data-title-en="How Christians Have Read Revelation &mdash; CTS digest" data-title-es="Cómo Han Leído los Cristianos Apocalipsis &mdash; resumen STC">
+<div class="locus"><span class="lang-en">The four interpretive approaches &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Los cuatro enfoques interpretativos &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">2.</span><span class="lang-en">How Christians Have Read Revelation</span><span class="lang-es">Cómo Han Leído los Cristianos Apocalipsis</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The four main approaches, each with a representative and its strength — Preterist (Russell), Historicist (Barnes), Futurist (Seiss), and Idealist (Milligan). CTS binds you to none and makes it no test of fellowship; hold the details with humility and the center with confidence — Christ reigns, evil will be judged, Christ will return, God will make all things new — letting disagreement drive you to worship, not division.</p>
+<p class="caption lang-es block">Los cuatro enfoques principales, cada uno con un representante y su fuerza — preterista (Russell), historicista (Barnes), futurista (Seiss), e idealista (Milligan). El STC no le ata a ninguno y no lo hace prueba de la comunión; sostenga los detalles con humildad y el centro con confianza — Cristo reina, el mal será juzgado, Cristo volverá, Dios hará nuevas todas las cosas — dejando que el desacuerdo le impulse a la adoración, no a la división.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>How Christians Have Read Revelation</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — the four main approaches to the book, presented fairly, and the center on which all agree</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Revelation (Russell, Seiss, Barnes, Milligan, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Revelation</li>
+<li>Four Approaches</li>
+<li>Held with Humility</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> Because Revelation is symbolic and looks to the future, sincere Christians have read it in genuinely different ways. This reading presents the four main approaches even-handedly — with a representative for each — and points to the center on which all four agree. CTS binds you to none.
+    </div>
+<h2><span class="dg-n">1.</span>One Book, Several Readings</h2>
+<p>More than almost any other book in the whole Bible, Revelation has been read and understood in genuinely different ways by sincere, godly, Bible-believing Christians. This is not a scandal, and it need not trouble or unsettle us in the least. Because the book is written throughout in symbols, and because so much of what it describes reaches out toward the future, faithful and careful interpreters have differed among themselves on just how its visions relate to actual history — whether they were fulfilled long ago, or are being fulfilled steadily through the ages, or are yet to be fulfilled at the very end, or whether they picture timeless truths that hold good in every age at once. Over the long centuries of the church, these differences have settled into four main approaches to the book. And it is genuinely worth knowing all four of them — not so that we may quickly choose a side and then look down on everyone who differs, but so that we may read Revelation with real understanding, and so that we may learn to hold its many details with a fitting humility. Our seminary, for its part, does not bind you to any single one of these four.</p>
+<h2><span class="dg-n">2.</span>The Preterist Approach: Fulfilled in the Past</h2>
+<p>The first approach is the <em>preterist</em> view, a word which comes from the Latin for "past." It holds that most of Revelation was already fulfilled in the early centuries of the church — that its visions describe events of John's own era and the period shortly after it, and especially the great tribulations of the first-century church, the fall of Jerusalem in AD 70, and God's judgment upon the persecuting power of Rome. On this reading, the book was written to encourage believers who were facing the fury of Roman persecution, assuring them that God would surely judge their oppressors, exactly as in due time He did. A well-known representative of this approach is J. Stuart Russell, whose lengthy work <em>The Parousia</em> argued the case in detail. The real strength of the preterist view is that it takes with full seriousness the plain fact that Revelation was a real letter, written to real first-century congregations, and that it must have carried a genuine and urgent meaning for those first readers in their own hour of need.</p>
+<h2><span class="dg-n">3.</span>The Historicist Approach: The Sweep of History</h2>
+<p>The second approach is the <em>historicist</em> view. It holds that Revelation surveys the entire course of church history, from John's own day all the way down to the end of the world — that its unfolding seals, trumpets, and bowls set out, in an orderly sequence, the great events and successive eras of the whole church age. On this reading, a careful student may trace within the pages of Revelation the rise and fall of empires, and the long trials and the reformations of the church, running down through the many centuries. This was the common and favored view of a great many of the Protestant Reformers. A representative of it is Albert Barnes, whose widely used <em>Notes on the Book of Revelation</em> read the book along these lines. The strength of the historicist view is that it takes Revelation to be a genuine and sweeping unfolding of God's providential rule over the whole vast span of human and church history, and not merely over one small slice of it.</p>
+<h2><span class="dg-n">4.</span>The Futurist Approach: Yet to Come</h2>
+<p>The third approach is the <em>futurist</em> view. It holds that a great deal of Revelation — and especially the long section from chapter four onward — describes events that are still future to us, clustered together around the return of Christ at the very end of the present age. On this reading, the great tribulation, the coming of the beast, the final climactic battles, and all the events that surround the second coming of Christ are matters that still lie ahead of us, yet to unfold in their appointed time. A representative of this approach is J. A. Seiss, whose <em>Lectures on the Book of Revelation</em> read the book in this way. The strength of the futurist view is that it takes with full seriousness the many passages in Revelation that so plainly and unmistakably point forward to the future return of Christ in glory and to the final consummation of all things at the close of the age.</p>
+<h2><span class="dg-n">5.</span>The Idealist Approach: Timeless Truth</h2>
+<p>The fourth approach is the <em>idealist</em>, or symbolic, view. It holds that Revelation is not tied down to any one particular set of historical events at all, but rather portrays the timeless and ever-repeating conflict between God and evil, between Christ and all His enemies, that plays out afresh in every single age. On this reading, the beast is not one single ruler but the recurring face of godless power wherever it rears its head; Babylon is not one single city but the whole world in its proud rebellion against God; and the book's central message — that Christ and His church will indeed suffer for a time, but that God will most certainly triumph in the end — is found to be gloriously true in every generation without exception. A representative of this approach is William Milligan, whose work on Revelation read the book in this way. The strength of the idealist view is that it makes Revelation speak directly, personally, and powerfully to believers in every time and every place — very much including our own.</p>
+<h2><span class="dg-n">6.</span>The Details with Humility, the Center with Confidence</h2>
+<p>So, then, which of these four approaches is the right one? The honest answer is that godly, learned, Christ-loving believers have held each one of the four, and that many wise readers combine them — reading Revelation as speaking meaningfully all at once to John's own day, and to the long sweep of history, and to the final future, and to the timeless struggle of every age. Our seminary does not require you to settle the matter and land firmly on one, and it most certainly does not make this question into a test of Christian fellowship. So read the approaches for yourself, weigh them prayerfully and carefully against the whole of Scripture, and then hold your own conclusions about the details with genuine humility — always remembering that sincere Christians who love the very same Lord and read the very same Bible disagree honestly here. But while we may hold the details loosely, we hold the center of the book firmly and without wavering, for on that center all four approaches fully agree: that Christ reigns now; that God is utterly sovereign over all of history; that His people may indeed suffer for a season, but that He will surely judge all evil at the last; that Christ will return in open triumph; and that God will make all things new. So do not ever allow disagreement over the details to rob you of the book's great and steadying comfort, nor to fracture your fellowship with other blood-bought believers. Read Revelation for its unshakable center — the reigning and returning Christ, and the certain victory of God — and let its details drive you, not toward division or feverish speculation, but toward worship, and hope, and faithful endurance.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Can you hold your own view of Revelation's details with humility, knowing godly Christians differ here? Do you tend to let disagreement over the end times divide you from fellow believers — and how might this reading reshape that? And can you rest your confidence squarely on the center that all four approaches share: the reigning, returning Christ?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of the four approaches to Revelation, anchored in the classic public-domain expositions of Revelation (J. Stuart Russell's <em>The Parousia</em>, J. A. Seiss's <em>Lectures</em>, Albert Barnes's <em>Notes</em>, William Milligan's <em>The Book of Revelation</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading fairly represents four public-domain approaches — J. Stuart Russell (preterist), Albert Barnes (historicist), J. A. Seiss (futurist), and William Milligan (idealist) — all in the public domain. CTS presents them even-handedly and binds you to none.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Cómo Han Leído los Cristianos Apocalipsis</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — los cuatro enfoques principales del libro, presentados con justicia, y el centro en que todos concuerdan</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Apocalipsis (Russell, Seiss, Barnes, Milligan, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Apocalipsis</li>
+<li>Cuatro enfoques</li>
+<li>Sostenido con humildad</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Porque Apocalipsis es simbólico y mira al futuro, los cristianos sinceros lo han leído de maneras genuinamente diferentes. Esta lectura presenta los cuatro enfoques principales con imparcialidad — con un representante para cada uno — y señala al centro en que los cuatro concuerdan. El STC no le ata a ninguno.
+    </div>
+<h2><span class="dg-n">1.</span>Un libro, varias lecturas</h2>
+<p>Más que casi cualquier otro libro de toda la Biblia, Apocalipsis ha sido leído y entendido de maneras genuinamente diferentes por cristianos sinceros, piadosos, y creyentes de la Biblia. Esto no es un escándalo, y no necesita en lo más mínimo perturbarnos ni inquietarnos. Porque el libro está escrito de principio a fin en símbolos, y porque tanto de lo que describe se extiende hacia el futuro, los intérpretes fieles y cuidadosos han diferido entre sí sobre cómo precisamente sus visiones se relacionan con la historia real — si fueron cumplidas hace mucho, o están siendo cumplidas firmemente a través de las edades, o han de ser aún cumplidas al mismísimo final, o si retratan verdades intemporales que valen en cada edad a la vez. A través de los largos siglos de la iglesia, estas diferencias se han asentado en cuatro enfoques principales del libro. Y vale genuinamente la pena conocer los cuatro — no para que rápidamente escojamos un bando y luego miremos con desdén a todo el que difiere, sino para que leamos Apocalipsis con verdadero entendimiento, y para que aprendamos a sostener sus muchos detalles con una apropiada humildad. Nuestro seminario, por su parte, no le ata a ninguno solo de estos cuatro.</p>
+<h2><span class="dg-n">2.</span>El enfoque preterista: cumplido en el pasado</h2>
+<p>El primer enfoque es la visión <em>preterista</em>, una palabra que viene del latín para "pasado." Sostiene que la mayor parte de Apocalipsis ya fue cumplida en los primeros siglos de la iglesia — que sus visiones describen eventos de la propia era de Juan y del período poco después de ella, y especialmente las grandes tribulaciones de la iglesia del primer siglo, la caída de Jerusalén en el año 70 d.C., y el juicio de Dios sobre el poder perseguidor de Roma. En esta lectura, el libro fue escrito para animar a los creyentes que enfrentaban la furia de la persecución romana, asegurándoles que Dios seguramente juzgaría a sus opresores, exactamente como a su debido tiempo lo hizo. Un conocido representante de este enfoque es J. Stuart Russell, cuya extensa obra <em>The Parousia</em> argumentó el caso en detalle. La verdadera fuerza de la visión preterista es que toma con plena seriedad el claro hecho de que Apocalipsis fue una carta real, escrita a congregaciones reales del primer siglo, y que debió haber llevado un significado genuino y urgente para aquellos primeros lectores en su propia hora de necesidad.</p>
+<h2><span class="dg-n">3.</span>El enfoque historicista: el barrido de la historia</h2>
+<p>El segundo enfoque es la visión <em>historicista</em>. Sostiene que Apocalipsis examina todo el curso de la historia de la iglesia, desde el propio día de Juan todo el camino hasta el fin del mundo — que sus sellos, trompetas, y copas que se despliegan exponen, en una secuencia ordenada, los grandes eventos y las sucesivas eras de toda la edad de la iglesia. En esta lectura, un estudiante cuidadoso puede rastrear dentro de las páginas de Apocalipsis el auge y la caída de imperios, y las largas pruebas y las reformas de la iglesia, corriendo a través de los muchos siglos. Esta fue la común y favorita visión de muchísimos de los Reformadores protestantes. Un representante de ella es Albert Barnes, cuyas ampliamente usadas <em>Notes on the Book of Revelation</em> leyeron el libro por estas líneas. La fuerza de la visión historicista es que toma Apocalipsis como un genuino y amplio despliegue del gobierno providencial de Dios sobre todo el vasto tramo de la historia humana y de la iglesia, y no meramente sobre una pequeña porción de ella.</p>
+<h2><span class="dg-n">4.</span>El enfoque futurista: aún por venir</h2>
+<p>El tercer enfoque es la visión <em>futurista</em>. Sostiene que gran parte de Apocalipsis — y especialmente la larga sección desde el capítulo cuatro en adelante — describe eventos que son aún futuros para nosotros, agrupados juntos alrededor del regreso de Cristo al mismísimo final de la presente edad. En esta lectura, la gran tribulación, la venida de la bestia, las batallas finales culminantes, y todos los eventos que rodean la segunda venida de Cristo son asuntos que todavía yacen por delante de nosotros, aún por desplegarse en su tiempo señalado. Un representante de este enfoque es J. A. Seiss, cuyas <em>Lectures on the Book of Revelation</em> leyeron el libro de esta manera. La fuerza de la visión futurista es que toma con plena seriedad los muchos pasajes en Apocalipsis que tan clara e inconfundiblemente señalan hacia adelante al futuro regreso de Cristo en gloria y a la final consumación de todas las cosas al cierre de la edad.</p>
+<h2><span class="dg-n">5.</span>El enfoque idealista: verdad intemporal</h2>
+<p>El cuarto enfoque es la visión <em>idealista</em>, o simbólica. Sostiene que Apocalipsis no está atado a ningún conjunto particular de eventos históricos en absoluto, sino que más bien retrata el intemporal y siempre repetido conflicto entre Dios y el mal, entre Cristo y todos sus enemigos, que se desarrolla de nuevo en cada sola edad. En esta lectura, la bestia no es un solo gobernante sino el rostro recurrente del poder impío dondequiera que se levanta; Babilonia no es una sola ciudad sino el mundo entero en su orgullosa rebelión contra Dios; y el mensaje central del libro — que Cristo y su iglesia en efecto sufrirán por un tiempo, pero que Dios muy ciertamente triunfará al final — se halla ser gloriosamente verdadero en cada generación sin excepción. Un representante de este enfoque es William Milligan, cuya obra sobre Apocalipsis leyó el libro de esta manera. La fuerza de la visión idealista es que hace que Apocalipsis hable directa, personal, y poderosamente a los creyentes en cada tiempo y cada lugar — muy incluyendo el nuestro.</p>
+<h2><span class="dg-n">6.</span>Los detalles con humildad, el centro con confianza</h2>
+<p>Así que, entonces, ¿cuál de estos cuatro enfoques es el correcto? La honesta respuesta es que creyentes piadosos, doctos, y amantes de Cristo han sostenido cada uno de los cuatro, y que muchos lectores sabios los combinan — leyendo Apocalipsis como hablando significativamente todo a la vez al propio día de Juan, y al largo barrido de la historia, y al futuro final, y a la lucha intemporal de cada edad. Nuestro seminario no le requiere zanjar el asunto y aterrizar firmemente en uno, y muy ciertamente no hace de esta pregunta una prueba de la comunión cristiana. Así que lea los enfoques usted mismo, sopéselos oración y cuidadosamente contra el todo de la Escritura, y luego sostenga sus propias conclusiones sobre los detalles con genuina humildad — recordando siempre que cristianos sinceros que aman al mismísimo Señor y leen la mismísima Biblia difieren honestamente aquí. Pero aunque podamos sostener los detalles con soltura, sostenemos el centro del libro firmemente y sin vacilar, porque en ese centro los cuatro enfoques concuerdan plenamente: que Cristo reina ahora; que Dios es totalmente soberano sobre toda la historia; que su pueblo en efecto puede sufrir por una temporada, pero que Él seguramente juzgará todo mal al final; que Cristo volverá en abierto triunfo; y que Dios hará nuevas todas las cosas. Así que nunca permita que el desacuerdo sobre los detalles le robe el gran y estabilizador consuelo del libro, ni fracture su comunión con otros creyentes comprados por sangre. Lea Apocalipsis por su inconmovible centro — el Cristo que reina y que vuelve, y la cierta victoria de Dios — y deje que sus detalles le impulsen, no hacia la división o la febril especulación, sino hacia la adoración, y la esperanza, y la fiel perseverancia.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Puede sostener su propia visión de los detalles de Apocalipsis con humildad, sabiendo que los cristianos piadosos difieren aquí? ¿Tiende a dejar que el desacuerdo sobre el fin de los tiempos le divida de otros creyentes — y cómo podría esta lectura reformar eso? Y ¿puede descansar su confianza directamente sobre el centro que los cuatro enfoques comparten: el Cristo que reina y que vuelve?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre los cuatro enfoques de Apocalipsis, anclado en las exposiciones clásicas de dominio público de Apocalipsis (<em>The Parousia</em> de J. Stuart Russell, <em>Lectures</em> de J. A. Seiss, <em>Notes</em> de Albert Barnes, <em>The Book of Revelation</em> de William Milligan, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura representa con justicia cuatro enfoques de dominio público — J. Stuart Russell (preterista), Albert Barnes (historicista), J. A. Seiss (futurista), y William Milligan (idealista) — todos en el dominio público. El STC los presenta con imparcialidad y no le ata a ninguno.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="2" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 3 -->
+<article class="entry" data-id="3" data-title-en="The Seven Churches and the Throne &mdash; CTS digest" data-title-es="Las Siete Iglesias y el Trono &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Revelation 2&ndash;5 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Apocalipsis 2&ndash;5 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">3.</span><span class="lang-en">The Seven Churches and the Throne</span><span class="lang-es">Las Siete Iglesias y el Trono</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The risen Christ’s personal letters (“I know your works”) to the seven churches, whose conditions — lost first love, faithful endurance, compromise, lukewarmness — recur in every age; the throne room where God reigns in glory (“Holy, holy, holy”); and the sealed scroll of history no one can open, until the Lamb “as though it had been slain” is found worthy and all heaven cries “Worthy is the Lamb.”</p>
+<p class="caption lang-es block">Las cartas personales del Cristo resucitado (“Yo conozco tus obras”) a las siete iglesias, cuyas condiciones — el primer amor perdido, la fiel perseverancia, el compromiso, la tibieza — se repiten en cada edad; la sala del trono donde Dios reina en gloria (“Santo, santo, santo”); y el rollo sellado de la historia que nadie puede abrir, hasta que el Cordero “como inmolado” es hallado digno y todo el cielo clama “¡Digno es el Cordero!”</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Seven Churches and the Throne</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Revelation 2–5: Christ among His churches, and the Lamb at the center of heaven's throne</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Revelation (Ramsay, Swete, Matthew Henry, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Revelation</li>
+<li>The Seven Churches</li>
+<li>Worthy Is the Lamb</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> Before the visions of judgment unfold, Revelation anchors us: Christ walks among His churches, knowing each one (chapters 2–3), and the Lamb who was slain sits at the center of heaven's throne, worthy to open the scroll of history (chapters 4–5). This reading walks through those chapters.
+    </div>
+<h2><span class="dg-n">1.</span>Letters from the Risen Christ</h2>
+<p>After the opening vision of the glorified Lord, the book of Revelation turns to a series of seven short letters — one addressed to each of the seven churches of Asia — and each of them is dictated by the risen Christ Himself. Then, when those letters are finished, the whole scene suddenly lifts up off the earth and into heaven, and we are given a breathtaking vision of the very throne of God, and of the Lamb who stands at its center. Taken together, these four chapters set two great scenes side by side before us: Christ moving among His churches here on earth, and God enthroned in unapproachable glory up in heaven — and, holding the two together, at the very center of it all, the Lamb who was slain. And so, before ever the visions of judgment and cosmic conflict begin to unfold, we are firmly anchored right here, in two settled truths: that Christ knows and walks among His churches, and that the Lamb holds all of history in His hands.</p>
+<h2><span class="dg-n">2.</span>Christ Among the Lampstands</h2>
+<p>To each one of the seven churches, Christ speaks a direct and personal message, and the pattern that runs through them is striking to see. He opens each letter with one of the titles of His own glory; then He says, "I know your works"; He commends whatever is good and faithful in them; He corrects whatever has gone wrong; He warns or He encourages as each one needs; and He closes every letter with a shining promise made "to him who overcomes." And so He knows them each by name. He knows Ephesus, so busy and hard-working, and yet having quietly left its first love. He knows Smyrna, outwardly poor but inwardly rich, facing bitter persecution, and He tells it to be faithful even unto death. He knows Pergamos and Thyatira, faithful in much, yet tolerating dangerous compromise and false teaching in their midst. He knows Sardis, which has a name and a reputation for being alive, but is in truth nearly dead. He knows Philadelphia, small and weak in strength yet faithful, and He sets before it an open door that no one can shut. And He knows Laodicea, lukewarm, neither cold nor hot, miserably poor and blind while imagining itself rich and in need of nothing — and it is to that church that He speaks the tender and famous words, "Behold, I stand at the door and knock." The living Christ walks among His churches still, and He knows each one of them through and through.</p>
+<h2><span class="dg-n">3.</span>Churches for Every Age</h2>
+<p>Now these were seven real and particular congregations, living in real cities in the first century of the church. And yet their spiritual conditions are by no means locked away in the distant past. The love that has quietly grown cold; the faithful endurance that holds firm under fierce persecution; the creeping compromise that makes its peace with the world; the deadening lukewarmness that has lost its fire; the small and weak church that is nonetheless given an open door — every one of these conditions recurs, again and again, in every age, in every land, and in our own churches and in our own hearts today. And so we are meant to read these seven letters not as a piece of ancient history that no longer touches us, but as the living word of Christ spoken directly to us. Do we hear Him saying to us, "I know your works"? Have we, like Ephesus, quietly left our first love? Are we, like Smyrna, faithful under pressure — or have we grown, like Laodicea, lukewarm in our ease and comfort? For at the end of every single letter comes the same searching call: "He who has an ear, let him hear what the Spirit says to the churches." And to every one who overcomes, without exception, Christ holds out a glorious and unfailing promise.</p>
+<h2><span class="dg-n">4.</span>The Throne of God</h2>
+<p>Then, in the fourth chapter, everything changes. A door is opened in heaven itself, and John is caught up in the Spirit to behold the very throne of God. And it is a scene of overwhelming and almost unbearable glory. There is One seated upon the throne, shining with the brilliance of jasper and of carnelian; a rainbow like a glowing emerald encircles it; out of the throne come flashes of lightning and peals of thunder; before it stretches a sea of glass, clear as crystal; and around it living creatures and elders fall down in ceaseless, tireless worship, crying out without end, "Holy, holy, holy, Lord God Almighty, who was and is and is to come!" and casting down their crowns and declaring, "You are worthy, O Lord, to receive glory and honor and power, for You created all things." And here is the point we must not miss: before we are shown a single beast, or a single seal, or a single outpoured judgment, we are first shown the throne. God reigns, in unshakable and undiminished glory, over the whole of everything. However fierce the storms that may rage down upon the earth, up in heaven all is filled with worship, and God is on the throne.</p>
+<h2><span class="dg-n">5.</span>Worthy Is the Lamb</h2>
+<p>Then, in the fifth chapter, a scroll appears, resting in the right hand of the One seated on the throne — a scroll sealed shut with seven seals, the very scroll of history and of destiny itself. And a mighty angel calls out with a loud voice across all creation: who is worthy to open the scroll and to loose its seals? And no one is found — not in heaven, nor on the earth, nor under the earth — who is worthy even to look upon it. And John, we are told, wept much, that no one was found worthy. But then one of the elders says to him, "Do not weep. Behold, the Lion of the tribe of Judah, the Root of David, has prevailed to open the scroll." And John turns to look for a Lion — and what he sees instead is a Lamb, standing at the very center of the throne, a Lamb bearing the marks of slaughter, "as though it had been slain." And this slain Lamb steps forward and takes the scroll out of the hand of God — and at once all of heaven erupts into thunderous worship: "Worthy is the Lamb who was slain to receive power and riches and wisdom and strength and honor and glory and blessing!" The one being found worthy to open and to unfold the whole scroll of history is none other than the Lamb who was slain — Christ crucified, and Christ risen. At the very center of the book of Revelation, and at the very center of history itself, there stands the slain and living Lamb.</p>
+<h2><span class="dg-n">6.</span>The Lamb on the Throne</h2>
+<p>And so, before the book of Revelation ever shows us a single seal broken open or a single bowl of judgment poured out, it plants us firmly and deliberately right here — with Christ walking among His churches and knowing each one of them by name, and with the Lamb at the very center of heaven's throne, found worthy to unfold the whole of history. This is the solid foundation for everything else that is to follow. Whatever the coming visions of conflict and judgment may hold, we have already been shown, plainly and unforgettably, who it is that is truly in charge: God reigns in glory, and the Lamb who was slain holds the sealed scroll of history in His own hands. And so, when the storms do come — both in the pages of the book, and in the pages of our own lives — we remember the throne. The churches of Asia were small and hard-pressed, some of them faithful and some of them faltering; and yet Christ walked among them, and knew them by name, and held their whole future in His hands. And exactly so it is with us. So hear what the Spirit says to the churches; return to your first love; be faithful even unto death; overcome. And lift up your eyes to the throne, where the Lamb who was slain reigns, worthy, forever and ever. Whatever else may come, the Lamb is on the throne — and He is worthy.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> If Christ wrote a letter to your church, and to your own heart, what would He commend — and what would He correct? Have you left your first love, or grown lukewarm in comfortable days? And when trials come, do you lift your eyes to the throne, where the slain Lamb reigns worthy over all of history?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Revelation 2–5, anchored in the classic public-domain expositions of Revelation (William Ramsay's <em>The Letters to the Seven Churches of Asia</em>, Henry Barclay Swete's <em>The Apocalypse of St. John</em>, Matthew Henry's commentary, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on William Ramsay's <em>The Letters to the Seven Churches of Asia</em>, Henry Barclay Swete's <em>The Apocalypse of St. John</em>, and Matthew Henry's commentary, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Las Siete Iglesias y el Trono</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Apocalipsis 2–5: Cristo entre sus iglesias, y el Cordero en el centro del trono del cielo</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Apocalipsis (Ramsay, Swete, Matthew Henry, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Apocalipsis</li>
+<li>Las siete iglesias</li>
+<li>Digno es el Cordero</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Antes de que se desplieguen las visiones del juicio, Apocalipsis nos ancla: Cristo anda entre sus iglesias, conociendo a cada una (capítulos 2–3), y el Cordero que fue inmolado se sienta en el centro del trono del cielo, digno de abrir el rollo de la historia (capítulos 4–5). Esta lectura recorre esos capítulos.
+    </div>
+<h2><span class="dg-n">1.</span>Cartas del Cristo resucitado</h2>
+<p>Después de la visión inicial del Señor glorificado, el libro de Apocalipsis se vuelve a una serie de siete cartas breves — una dirigida a cada una de las siete iglesias de Asia — y cada una de ellas es dictada por el Cristo resucitado mismo. Luego, cuando esas cartas terminan, toda la escena de repente se levanta de la tierra y hacia el cielo, y se nos da una impresionante visión del mismísimo trono de Dios, y del Cordero que está de pie en su centro. Tomados juntos, estos cuatro capítulos ponen dos grandes escenas lado a lado ante nosotros: Cristo moviéndose entre sus iglesias aquí en la tierra, y Dios entronizado en inaccesible gloria arriba en el cielo — y, sosteniendo a las dos juntas, en el mismísimo centro de todo ello, el Cordero que fue inmolado. Y así, antes de que jamás las visiones del juicio y el conflicto cósmico comiencen a desplegarse, somos firmemente anclados justo aquí, en dos verdades asentadas: que Cristo conoce y anda entre sus iglesias, y que el Cordero sostiene toda la historia en sus manos.</p>
+<h2><span class="dg-n">2.</span>Cristo entre los candeleros</h2>
+<p>A cada una de las siete iglesias, Cristo habla un mensaje directo y personal, y el patrón que recorre a través de ellas es impresionante de ver. Abre cada carta con uno de los títulos de su propia gloria; luego dice, "Yo conozco tus obras"; encomia todo lo que es bueno y fiel en ellas; corrige todo lo que ha ido mal; advierte o anima según cada una necesita; y cierra cada carta con una reluciente promesa hecha "al que venciere." Y así las conoce a cada una por nombre. Conoce a Éfeso, tan ocupada y trabajadora, y sin embargo habiendo dejado calladamente su primer amor. Conoce a Esmirna, exteriormente pobre pero interiormente rica, enfrentando amarga persecución, y le dice que sea fiel aun hasta la muerte. Conoce a Pérgamo y Tiatira, fieles en mucho, sin embargo tolerando peligroso compromiso y falsa enseñanza en medio de ellas. Conoce a Sardis, que tiene un nombre y una reputación de estar viva, pero está en verdad casi muerta. Conoce a Filadelfia, pequeña y débil en fuerza pero fiel, y pone delante de ella una puerta abierta que nadie puede cerrar. Y conoce a Laodicea, tibia, ni fría ni caliente, miserablemente pobre y ciega mientras se imagina rica y sin necesidad de nada — y es a esa iglesia que habla las tiernas y famosas palabras, "He aquí, yo estoy a la puerta y llamo." El Cristo viviente anda entre sus iglesias todavía, y conoce a cada una de ellas de principio a fin.</p>
+<h2><span class="dg-n">3.</span>Iglesias para cada edad</h2>
+<p>Ahora bien, estas eran siete congregaciones reales y particulares, viviendo en ciudades reales en el primer siglo de la iglesia. Y sin embargo sus condiciones espirituales de ningún modo están encerradas en el pasado distante. El amor que calladamente se ha enfriado; la fiel perseverancia que se mantiene firme bajo feroz persecución; el compromiso que se cuela y hace su paz con el mundo; la mortal tibieza que ha perdido su fuego; la pequeña y débil iglesia a quien no obstante se le da una puerta abierta — cada una de estas condiciones se repite, una y otra vez, en cada edad, en cada tierra, y en nuestras propias iglesias y en nuestros propios corazones hoy. Y así estamos destinados a leer estas siete cartas no como una pieza de historia antigua que ya no nos toca, sino como la palabra viviente de Cristo hablada directamente a nosotros. ¿Le oímos diciéndonos, "Yo conozco tus obras"? ¿Hemos, como Éfeso, dejado calladamente nuestro primer amor? ¿Somos, como Esmirna, fieles bajo presión — o nos hemos vuelto, como Laodicea, tibios en nuestra comodidad y bienestar? Porque al final de cada sola carta viene el mismo escrutador llamado: "El que tiene oído, oiga lo que el Espíritu dice a las iglesias." Y a cada uno que vence, sin excepción, Cristo extiende una gloriosa e infalible promesa.</p>
+<h2><span class="dg-n">4.</span>El trono de Dios</h2>
+<p>Luego, en el cuarto capítulo, todo cambia. Una puerta es abierta en el cielo mismo, y Juan es arrebatado en el Espíritu para contemplar el mismísimo trono de Dios. Y es una escena de abrumadora y casi insoportable gloria. Hay Uno sentado sobre el trono, resplandeciendo con el brillo del jaspe y de la cornalina; un arco iris como una esmeralda reluciente rodea el trono; del trono salen relámpagos y truenos; ante él se extiende un mar de vidrio, claro como el cristal; y alrededor de él seres vivientes y ancianos caen en incesante e incansable adoración, clamando sin fin, "Santo, santo, santo, Señor Dios Todopoderoso, que era, y que es, y que ha de venir!" y echando abajo sus coronas y declarando, "Señor, digno eres de recibir gloria y honra y poder; porque tú creaste todas las cosas." Y aquí está el punto que no debemos perder: antes de que se nos muestre una sola bestia, o un solo sello, o un solo juicio derramado, primero se nos muestra el trono. Dios reina, en inconmovible e indiminuta gloria, sobre el todo de todo. Por más feroces que sean las tormentas que puedan rugir abajo sobre la tierra, arriba en el cielo todo está lleno de adoración, y Dios está en el trono.</p>
+<h2><span class="dg-n">5.</span>Digno es el Cordero</h2>
+<p>Luego, en el quinto capítulo, aparece un rollo, descansando en la mano derecha del que está sentado en el trono — un rollo sellado con siete sellos, el mismísimo rollo de la historia y del destino mismo. Y un poderoso ángel clama con gran voz a través de toda la creación: ¿quién es digno de abrir el rollo y de soltar sus sellos? Y ninguno es hallado — ni en el cielo, ni en la tierra, ni debajo de la tierra — que sea digno siquiera de mirarlo. Y a Juan, se nos dice, lloró mucho, porque ninguno fue hallado digno. Pero entonces uno de los ancianos le dice, "No llores; he aquí que el León de la tribu de Judá, la raíz de David, ha vencido para abrir el rollo." Y Juan se vuelve a buscar un León — y lo que ve en cambio es un Cordero, de pie en el mismísimo centro del trono, un Cordero llevando las marcas de la matanza, "como inmolado." Y este Cordero inmolado da un paso adelante y toma el rollo de la mano de Dios — y de inmediato todo el cielo prorrumpe en atronadora adoración: "El Cordero que fue inmolado es digno de recibir el poder, y las riquezas, y la sabiduría, y la fortaleza, y la honra, y la gloria, y la alabanza!" El único hallado digno de abrir y de desplegar todo el rollo de la historia no es otro que el Cordero que fue inmolado — Cristo crucificado, y Cristo resucitado. En el mismísimo centro del libro de Apocalipsis, y en el mismísimo centro de la historia misma, está de pie el Cordero inmolado y viviente.</p>
+<h2><span class="dg-n">6.</span>El Cordero en el trono</h2>
+<p>Y así, antes de que el libro de Apocalipsis jamás nos muestre un solo sello abierto o una sola copa de juicio derramada, nos planta firme y deliberadamente justo aquí — con Cristo andando entre sus iglesias y conociendo a cada una de ellas por nombre, y con el Cordero en el mismísimo centro del trono del cielo, hallado digno de desplegar el todo de la historia. Este es el sólido fundamento para todo lo demás que ha de seguir. Cualesquiera que las venideras visiones de conflicto y juicio puedan sostener, ya se nos ha mostrado, clara e inolvidablemente, quién es el que verdaderamente está a cargo: Dios reina en gloria, y el Cordero que fue inmolado sostiene el rollo sellado de la historia en sus propias manos. Y así, cuando las tormentas sí vienen — tanto en las páginas del libro, como en las páginas de nuestras propias vidas — recordamos el trono. Las iglesias de Asia eran pequeñas y muy presionadas, algunas de ellas fieles y algunas de ellas vacilantes; y sin embargo Cristo andaba entre ellas, y las conocía por nombre, y sostenía todo su futuro en sus manos. Y exactamente así es con nosotros. Así que oiga lo que el Espíritu dice a las iglesias; vuelva a su primer amor; sea fiel aun hasta la muerte; venza. Y levante sus ojos al trono, donde el Cordero que fue inmolado reina, digno, por los siglos de los siglos. Cualquier otra cosa que pueda venir, el Cordero está en el trono — y Él es digno.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> Si Cristo escribiera una carta a su iglesia, y a su propio corazón, ¿qué encomiaría — y qué corregiría? ¿Ha dejado su primer amor, o se ha vuelto tibio en días cómodos? Y cuando vienen las pruebas, ¿levanta sus ojos al trono, donde el Cordero inmolado reina digno sobre toda la historia?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Apocalipsis 2–5, anclado en las exposiciones clásicas de dominio público de Apocalipsis (<em>The Letters to the Seven Churches of Asia</em> de William Ramsay, <em>The Apocalypse of St. John</em> de Henry Barclay Swete, el comentario de Matthew Henry, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>The Letters to the Seven Churches of Asia</em> de William Ramsay, <em>The Apocalypse of St. John</em> de Henry Barclay Swete, y el comentario de Matthew Henry, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="3" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 4 -->
+<article class="entry" data-id="4" data-title-en="Judgment, the Beast, and the Persevering Saints &mdash; CTS digest" data-title-es="Juicio, la Bestia, y los Santos que Perseveran &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Revelation 6&ndash;19 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Apocalipsis 6&ndash;19 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">4.</span><span class="lang-en">Judgment, the Beast, and the Persevering Saints</span><span class="lang-es">Juicio, la Bestia, y los Santos que Perseveran</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The seals, trumpets, and bowls as God’s righteous judgments answering the martyrs’ cry; the dragon (Satan, already defeated) and the beast as the spiritual conflict behind persecution; the great call — “here is the patience of the saints” — to endure and be faithful even to death, with a reverent word for the martyrs; and the fall of Babylon and the triumph of Christ, “KING OF KINGS AND LORD OF LORDS.” Your suffering is seen; the victory is the Lamb’s.</p>
+<p class="caption lang-es block">Los sellos, las trompetas, y las copas como los justos juicios de Dios que responden al clamor de los mártires; el dragón (Satanás, ya derrotado) y la bestia como el conflicto espiritual detrás de la persecución; el gran llamado — “aquí está la paciencia de los santos” — a perseverar y ser fieles aun hasta la muerte, con una palabra reverente para los mártires; y la caída de Babilonia y el triunfo de Cristo, “REY DE REYES Y SEÑOR DE SEÑORES.” Su sufrimiento es visto; la victoria es del Cordero.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>Judgment, the Beast, and the Persevering Saints</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Revelation 6–19: God's judgments, the conflict with evil, and the call to endure</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Revelation (Swete, Matthew Henry, the early church, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Revelation</li>
+<li>The Patience of the Saints</li>
+<li>Christ Triumphs</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> From chapter 6 to 19, Revelation unfolds its great central drama — God's judgments, the conflict between His people and the powers of evil, and the triumph of Christ. This reading walks through it, hearing above all its call to the suffering church: endure, for the victory is the Lamb's.
+    </div>
+<h2><span class="dg-n">1.</span>The Great Central Drama</h2>
+<p>From the sixth chapter all the way through to the nineteenth, the book of Revelation unfolds its great central drama — a vast and symbolic vision of God's judgments falling upon a rebellious world, of the fierce and unrelenting conflict between the people of God and the powers of evil, and, at the last, of the final and complete triumph of Christ. This is the portion of the book that is most crowded with vivid and often terrible imagery: seals broken open, trumpets sounded, bowls of wrath poured out, a great red dragon and monstrous beasts, a proud harlot city called Babylon, and, at the very end, a rider seated upon a white horse. It is also, as we have seen, the portion of the book that faithful Christians have interpreted in the most varied ways. But through the whole of it, beneath all the symbols, and however one chooses to read the finer details, one single message rings out clear and constant and unmistakable: God is sovereign over all; evil most surely will be judged; and His suffering people must, and by His grace will, endure faithfully to the very end.</p>
+<h2><span class="dg-n">2.</span>The Seals, Trumpets, and Bowls</h2>
+<p>The Lamb begins to open the seven seals of the scroll, and as He does, a series of judgments goes forth upon the earth — conquest, and war, and famine, and death, and beneath the altar the crying out of the martyrs for justice, and great upheavals in the heavens. Then seven angels sound seven trumpets, and later still, seven bowls of the wrath of God are poured out upon the earth — three great series of judgments, each building and intensifying upon the last. These portray, in vivid symbol, the righteous judgments of God poured out upon a world that has set itself in rebellion against Him, and His just answer to the long, patient cry of His oppressed and suffering people. The judgments are severe, and they are meant to be severe; for sin is a deadly serious thing, and God in His holiness will not allow evil to go on forever and ever unpunished. And yet, even in the very midst of these judgments, God carefully seals and protects His own people, marking them as His; and still He calls the rebellious world to repent and turn to Him. God is not indifferent to the evil and injustice of this world. He sees it all, and He will surely judge it.</p>
+<h2><span class="dg-n">3.</span>The Dragon and the Beast</h2>
+<p>At the very heart of this whole section stands the great conflict itself, laid bare. The twelfth chapter shows us a woman, and a male child who is caught up to God, and a great red dragon who stands ready to devour the child — but who fails, and is himself cast down and defeated. This dragon, we are plainly told, is Satan, "that serpent of old," now thrown down and, in his fury, making war upon the people of God. And the thirteenth chapter shows the dragon handing over his power to a beast — a symbol of oppressive and blasphemous world-power that demands worship for itself and makes war upon the saints — and then to a second beast, a false prophet who deceives the nations. We must read these figures as Scripture means them: not as any one particular ruler or nation to be picked out and named, but as the recurring face of proud, God-defying power wherever and whenever it arises. For here is the deep reality the vision uncovers: behind the visible persecution that God's people endure, there stands an unseen spiritual war — the dragon and his beasts arrayed against the Lamb and all who follow Him. In every age, the people of God face the settled hostility of a spiritual enemy who works through the proud powers of this world. And yet — let it never be forgotten — that dragon is already, at the cross, a defeated foe.</p>
+<h2><span class="dg-n">4.</span>The Patience of the Saints</h2>
+<p>And then, right in the very thick of this fearful conflict, comes the book's great and tender call to the people of God. Twice it sounds out like a refrain: "Here is the patience and the faith of the saints," and again, "Here is the patience of the saints; here are those who keep the commandments of God and the faith of Jesus." The saints are called neither to take up the weapons of the world and fight as the world fights, nor to lose their nerve and give in and compromise, but rather simply to <em>endure</em> — to hold fast their faith, to keep the commandments of God, and to remain faithful to their Lord, even if it should cost them their very lives. And there is a special and precious word here for the martyrs: "Blessed are the dead who die in the Lord." They are seen, earlier, crying out from beneath the altar, and later they are seen standing in victory, having come through great tribulation. Those who overcome the enemy do so, the vision tells us, "by the blood of the Lamb, and by the word of their testimony, and they did not love their lives to the death." And this is the living word of God to every persecuted, pressed-down, or bone-weary believer in every age: endure; be faithful; hold fast. For the final victory belongs to the Lamb, and all those who suffer now together with Him will most certainly reign together with Him then.</p>
+<h2><span class="dg-n">5.</span>The Fall of Babylon and the Triumph of Christ</h2>
+<p>As the section moves toward its great climax, two things happen. First, Babylon falls. Babylon is the book's grand symbol of proud, luxurious, God-defying world-power, decked in splendor and drunk with the blood of the saints — and she is shown first in all her arrogant glory, and then in her sudden and total collapse: "Babylon the great is fallen, is fallen!" All the proud and boasting power that had set itself against God and had trampled down His people comes crashing down in a single hour, and heaven rings with rejoicing over it. And then comes the triumph of Christ Himself. Heaven is opened, and behold, a white horse, and One seated upon it called Faithful and True; His eyes are like a flame of fire, His robe is dipped in blood, His name is called the Word of God, and the armies of heaven follow Him; and upon His robe and upon His thigh there is a name written for all to see: "KING OF KINGS AND LORD OF LORDS." The beast and the false prophet are seized and thrown down in utter defeat. The King has come at last in open triumph, and all the power of evil is overthrown before Him. The proud and cruel powers that had seemed for so long to be invincible fall in a moment — and Christ reigns, victorious over them all.</p>
+<h2><span class="dg-n">6.</span>Endure — the Victory Is the Lamb's</h2>
+<p>And so this great central section of the book of Revelation, for all its terrors and all its storms, carries at its heart one steadying and unshakable message to the people of God: evil is real, and it will rage for a season — but God is sovereign over all, He will surely judge every wickedness, and Christ will triumph fully in the end. The dragon, and the beast, and Babylon may seem, for a little while, to hold the upper hand — persecuting the saints, ruling over the nations, mocking the living God. But their time is desperately short, their judgment is utterly certain, and their doom is already sealed. And the call to the people of God through the whole of it is not to sink into despair, nor to fight back with the world's own weapons, nor to make a quiet peace with evil, but simply to endure — to keep the faith, to hold fast to Christ, and to remain faithful even unto death, knowing all the while that the victory belongs, and has always belonged, to the Lamb. So if you are suffering for your faith today, or if you have grown weary in the long, hard struggle, then hear this and take it deep into your heart: you are not forgotten by God; your suffering is fully seen by Him; your faithful endurance is precious in His sight; and the outcome of it all is already certain and secure. "Here is the patience of the saints." The dragon is defeated; Babylon will surely fall; and Christ, the King of kings, is coming in triumph. So do not lose heart, and do not give in, and do not let go — only hold fast. For the Lamb who was slain is also the Lion who has conquered — and all those who endure with Him will share in His victory forever.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> When evil and injustice seem to have the upper hand, do you believe that God sees it, and will surely judge it? What would it mean, in your own trials, to answer Christ's call simply to "endure" — to hold fast rather than give in? And can you take comfort that your faithfulness is seen and precious to God, and that the victory already belongs to the Lamb?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Revelation 6–19, anchored in the classic public-domain expositions of Revelation (Henry Barclay Swete's <em>The Apocalypse of St. John</em>, Matthew Henry's commentary, the early church's <em>Martyrdom of Polycarp</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on Henry Barclay Swete's <em>The Apocalypse of St. John</em>, Matthew Henry's commentary, and the early church's account of the <em>Martyrdom of Polycarp</em>, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Juicio, la Bestia, y los Santos que Perseveran</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Apocalipsis 6–19: los juicios de Dios, el conflicto con el mal, y el llamado a perseverar</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Apocalipsis (Swete, Matthew Henry, la iglesia primitiva, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Apocalipsis</li>
+<li>La paciencia de los santos</li>
+<li>Cristo triunfa</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Del capítulo 6 al 19, Apocalipsis despliega su gran drama central — los juicios de Dios, el conflicto entre su pueblo y los poderes del mal, y el triunfo de Cristo. Esta lectura lo recorre, oyendo por encima de todo su llamado a la iglesia que sufre: persevera, porque la victoria es del Cordero.
+    </div>
+<h2><span class="dg-n">1.</span>El gran drama central</h2>
+<p>Desde el sexto capítulo todo el camino hasta el decimonoveno, el libro de Apocalipsis despliega su gran drama central — una vasta y simbólica visión de los juicios de Dios cayendo sobre un mundo rebelde, del feroz e implacable conflicto entre el pueblo de Dios y los poderes del mal, y, al fin, del final y completo triunfo de Cristo. Esta es la porción del libro que está más colmada de imágenes vívidas y a menudo terribles: sellos abiertos, trompetas tocadas, copas de ira derramadas, un gran dragón escarlata y bestias monstruosas, una orgullosa ciudad ramera llamada Babilonia, y, al mismísimo final, un jinete sentado sobre un caballo blanco. Es también, como hemos visto, la porción del libro que los cristianos fieles han interpretado de las maneras más variadas. Pero a través del todo de ella, debajo de todos los símbolos, y de cualquier manera que uno escoja leer los detalles más finos, un solo mensaje suena claro y constante e inconfundible: Dios es soberano sobre todo; el mal muy seguramente será juzgado; y su pueblo que sufre debe, y por su gracia lo hará, perseverar fielmente hasta el mismísimo final.</p>
+<h2><span class="dg-n">2.</span>Los sellos, las trompetas, y las copas</h2>
+<p>El Cordero comienza a abrir los siete sellos del rollo, y al hacerlo, una serie de juicios sale sobre la tierra — conquista, y guerra, y hambre, y muerte, y debajo del altar el clamor de los mártires por justicia, y grandes trastornos en los cielos. Luego siete ángeles tocan siete trompetas, y aún más tarde, siete copas de la ira de Dios son derramadas sobre la tierra — tres grandes series de juicios, cada una acumulándose e intensificándose sobre la anterior. Estos retratan, en vívido símbolo, los justos juicios de Dios derramados sobre un mundo que se ha puesto en rebelión contra Él, y su justa respuesta al largo y paciente clamor de su pueblo oprimido y sufriente. Los juicios son severos, y están destinados a ser severos; porque el pecado es algo mortalmente serio, y Dios en su santidad no permitirá que el mal continúe por siempre jamás sin castigo. Y sin embargo, aun en el mismísimo medio de estos juicios, Dios cuidadosamente sella y protege a su propio pueblo, marcándolos como suyos; y todavía llama al mundo rebelde a arrepentirse y volverse a Él. Dios no es indiferente al mal y la injusticia de este mundo. Lo ve todo, y seguramente lo juzgará.</p>
+<h2><span class="dg-n">3.</span>El dragón y la bestia</h2>
+<p>En el mismísimo corazón de toda esta sección está el gran conflicto mismo, puesto al descubierto. El duodécimo capítulo nos muestra una mujer, y un hijo varón que es arrebatado a Dios, y un gran dragón escarlata que está listo para devorar al niño — pero que falla, y es él mismo derribado y derrotado. Este dragón, se nos dice claramente, es Satanás, "aquella serpiente antigua," ahora arrojado abajo y, en su furia, haciendo guerra contra el pueblo de Dios. Y el decimotercer capítulo muestra al dragón entregando su poder a una bestia — un símbolo del poder mundial opresor y blasfemo que exige adoración para sí mismo y hace guerra contra los santos — y luego a una segunda bestia, un falso profeta que engaña a las naciones. Debemos leer estas figuras como la Escritura las entiende: no como algún gobernante o nación en particular que señalar y nombrar, sino como el rostro recurrente del poder orgulloso y desafiante de Dios dondequiera y cuandoquiera que surja. Porque he aquí la honda realidad que la visión descubre: detrás de la persecución visible que el pueblo de Dios soporta, hay una guerra espiritual invisible — el dragón y sus bestias dispuestos contra el Cordero y todos los que le siguen. En cada edad, el pueblo de Dios enfrenta la asentada hostilidad de un enemigo espiritual que obra a través de los poderes orgullosos de este mundo. Y sin embargo — que nunca se olvide — ese dragón es ya, en la cruz, un enemigo derrotado.</p>
+<h2><span class="dg-n">4.</span>La paciencia de los santos</h2>
+<p>Y entonces, justo en lo más espeso de este temible conflicto, viene el gran y tierno llamado del libro al pueblo de Dios. Dos veces suena como un estribillo: "Aquí está la paciencia y la fe de los santos," y de nuevo, "Aquí está la paciencia de los santos; aquí están los que guardan los mandamientos de Dios y la fe de Jesús." Los santos son llamados ni a tomar las armas del mundo y pelear como el mundo pelea, ni a perder el ánimo y ceder y comprometerse, sino más bien sencillamente a <em>perseverar</em> — a mantener firme su fe, a guardar los mandamientos de Dios, y a permanecer fieles a su Señor, aun si les debiera costar sus mismísimas vidas. Y hay una especial y preciosa palabra aquí para los mártires: "Bienaventurados los muertos que de aquí en adelante mueren en el Señor." Se les ve, antes, clamando desde debajo del altar, y más tarde se les ve de pie en victoria, habiendo pasado por gran tribulación. Los que vencen al enemigo lo hacen, nos dice la visión, "por la sangre del Cordero, y por la palabra de su testimonio; y no han amado sus vidas hasta la muerte." Y esta es la palabra viviente de Dios a cada creyente perseguido, oprimido, o exhausto hasta los huesos en cada edad: persevera; sé fiel; mantente firme. Porque la victoria final pertenece al Cordero, y todos los que sufren ahora junto con Él muy ciertamente reinarán junto con Él entonces.</p>
+<h2><span class="dg-n">5.</span>La caída de Babilonia y el triunfo de Cristo</h2>
+<p>Al moverse la sección hacia su gran clímax, dos cosas suceden. Primero, Babilonia cae. Babilonia es el gran símbolo del libro del poder mundial orgulloso, lujoso, y desafiante de Dios, ataviado de esplendor y embriagado con la sangre de los santos — y se le muestra primero en toda su arrogante gloria, y luego en su súbito y total colapso: "Ha caído, ha caído Babilonia la grande!" Todo el poder orgulloso y jactancioso que se había puesto contra Dios y había pisoteado a su pueblo viene abajo estrepitosamente en una sola hora, y el cielo resuena con regocijo por ello. Y luego viene el triunfo de Cristo mismo. El cielo es abierto, y he aquí, un caballo blanco, y Uno sentado sobre él llamado Fiel y Verdadero; sus ojos son como llama de fuego, su manto está teñido en sangre, su nombre es llamado el Verbo de Dios, y los ejércitos del cielo le siguen; y sobre su manto y sobre su muslo hay un nombre escrito para que todos lo vean: "REY DE REYES Y SEÑOR DE SEÑORES." La bestia y el falso profeta son apresados y arrojados abajo en total derrota. El Rey ha venido al fin en abierto triunfo, y todo el poder del mal es derrocado ante Él. Los poderes orgullosos y crueles que habían parecido por tanto tiempo ser invencibles caen en un momento — y Cristo reina, victorioso sobre todos ellos.</p>
+<h2><span class="dg-n">6.</span>Persevera — la victoria es del Cordero</h2>
+<p>Y así esta gran sección central del libro de Apocalipsis, con todos sus terrores y todas sus tormentas, lleva en su corazón un solo mensaje estabilizador e inconmovible al pueblo de Dios: el mal es real, y rugirá por una temporada — pero Dios es soberano sobre todo, Él seguramente juzgará toda maldad, y Cristo triunfará plenamente al final. El dragón, y la bestia, y Babilonia pueden parecer, por un ratito, tener la ventaja — persiguiendo a los santos, gobernando sobre las naciones, burlándose del Dios viviente. Pero su tiempo es desesperadamente corto, su juicio es totalmente cierto, y su condena está ya sellada. Y el llamado al pueblo de Dios a través del todo de ello no es hundirse en la desesperación, ni pelear de vuelta con las propias armas del mundo, ni hacer una callada paz con el mal, sino sencillamente perseverar — mantener la fe, aferrarse a Cristo, y permanecer fieles aun hasta la muerte, sabiendo todo el tiempo que la victoria pertenece, y siempre ha pertenecido, al Cordero. Así que si usted sufre por su fe hoy, o si se ha cansado en la larga y dura lucha, entonces oiga esto y tómelo hondo en su corazón: usted no es olvidado por Dios; su sufrimiento es plenamente visto por Él; su fiel perseverancia es preciosa a su vista; y el resultado de todo ello es ya cierto y seguro. "Aquí está la paciencia de los santos." El dragón está derrotado; Babilonia seguramente caerá; y Cristo, el Rey de reyes, viene en triunfo. Así que no pierda el ánimo, y no ceda, y no suelte — solo manténgase firme. Porque el Cordero que fue inmolado es también el León que ha vencido — y todos los que perseveran con Él compartirán en su victoria para siempre.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> Cuando el mal y la injusticia parecen tener la ventaja, ¿cree que Dios lo ve, y seguramente lo juzgará? ¿Qué significaría, en sus propias pruebas, responder al llamado de Cristo sencillamente a "perseverar" — a mantenerse firme en lugar de ceder? Y ¿puede tomar consuelo de que su fidelidad es vista y preciosa a Dios, y de que la victoria ya pertenece al Cordero?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Apocalipsis 6–19, anclado en las exposiciones clásicas de dominio público de Apocalipsis (<em>The Apocalypse of St. John</em> de Henry Barclay Swete, el comentario de Matthew Henry, el <em>Martirio de Policarpo</em> de la iglesia primitiva, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>The Apocalypse of St. John</em> de Henry Barclay Swete, el comentario de Matthew Henry, y el relato de la iglesia primitiva del <em>Martirio de Policarpo</em>, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="4" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 5 -->
+<article class="entry" data-id="5" data-title-en="The Millennium, and All Things New &mdash; CTS digest" data-title-es="El Milenio, y Todas las Cosas Nuevas &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Revelation 20&ndash;22 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Apocalipsis 20&ndash;22 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">5.</span><span class="lang-en">The Millennium, and All Things New</span><span class="lang-es">El Milenio, y Todas las Cosas Nuevas</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The capstone: the thousand years, with the millennial views presented fairly and CTS binding you to none — Premillennial (Irenaeus, Blackstone), Postmillennial (Brown), and Amillennial (Augustine); held with humility, no test of fellowship; then the final judgment (grace-framed — safety in the Lamb’s Book of Life); the new heaven and earth where “God will wipe away every tear” and “Behold, I make all things new”; and the Bible’s closing prayer, “Even so, come, Lord Jesus!” Read in hope, not fear.</p>
+<p class="caption lang-es block">La culminación: los mil años, con las visiones milenaristas presentadas con justicia y el STC sin atarle a ninguna — premilenarista (Ireneo, Blackstone), posmilenarista (Brown), y amilenarista (Agustín); sostenidas con humildad, sin prueba de comunión; luego el juicio final (enmarcado en gracia — la seguridad en el Libro de la Vida del Cordero); el nuevo cielo y la nueva tierra donde “Dios enjugará toda lágrima” y “He aquí, yo hago nuevas todas las cosas”; y la oración final de la Biblia, “¡Sí, ven, Señor Jesús!” Léalo en esperanza, no en temor.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Millennium, and All Things New</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Revelation 20–22: the thousand years, the final judgment, and the new creation</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Revelation (Irenaeus, Augustine, Baxter, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Revelation</li>
+<li>The Millennial Views</li>
+<li>All Things New</li>
+<li>Capstone</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> The final chapters bring the last things — the thousand years, the final judgment, and the new heaven and earth. This closing reading presents the millennial views even-handedly, binding you to none, and then comes to the consummation on which all agree: Christ's return, and the making-new of all things.
+    </div>
+<h2><span class="dg-n">1.</span>The Last Things</h2>
+<p>We come now to the final three chapters of Revelation, and with them to the last things of all — the thousand years, the final judgment, and the new heaven and the new earth. Here the book of Revelation, and indeed the whole Bible along with it, arrives at its long-awaited consummation. And here, right at the opening of chapter twenty, we meet the one passage over which sincere and Bible-loving Christians have most famously and most persistently differed among themselves: the "millennium," the thousand-year reign. So we will do here exactly what our seminary always seeks to do with such matters — we will look honestly and fairly at the main views that faithful believers have held, and we will bind you to none of them. And then, having done so, we will come at last to the great and glorious consummation on which every one of the views fully agrees, and on which the whole of Scripture draws to its close: the making-new of all things, and the eternal dwelling of God Himself with His people.</p>
+<h2><span class="dg-n">2.</span>The Thousand Years, and the Views of It</h2>
+<p>The twentieth chapter speaks of Satan being bound for a thousand years, of the saints living and reigning together with Christ, and then of Satan's final loosing and defeat and the last judgment. Godly Christians have long understood this "thousand years" in genuinely different ways, and CTS sets out the main views fairly and binds you to none. The <em>premillennial</em> view holds that Christ returns <em>before</em> the thousand years, and then reigns upon the earth for a long age, before the final judgment; this view has ancient roots — the early church father Irenaeus held an early form of it, often called "historic premillennialism" — and a later and more detailed form of it arose in modern times, known as "dispensational premillennialism," represented for example by W. E. Blackstone's popular book <em>Jesus Is Coming</em>. The <em>postmillennial</em> view holds that, through the wide spread and triumph of the gospel, the world is increasingly won to Christ, ushering in a long age of gospel blessing (the "millennium"), <em>after</em> which Christ returns; this view is represented, for example, by David Brown's <em>Christ's Second Coming</em>. And the <em>amillennial</em> view holds that the "thousand years" is not a literal future period at all, but rather a symbolic picture of the present reign of Christ and His saints, in the whole age between His first and His second comings; this view is represented, for example, by Augustine in his <em>City of God</em>. Godly, Bible-believing, Christ-loving Christians have held, and do hold, each one of these.</p>
+<h2><span class="dg-n">3.</span>Holding the Millennium with Humility</h2>
+<p>So which of these views of the millennium is the correct one? Here once again, exactly as with the four approaches to the book as a whole, we must hold the details with real humility. Each of these views has its godly and learned defenders; each one earnestly seeks to be faithful to the whole of Scripture; and each reads the genuinely difficult symbols of the twentieth chapter in the light of the rest of the Bible. And the plain fact remains that sincere believers who love the very same Lord and who honor the very same Scripture arrive, in good conscience, at different conclusions here. Our seminary does not require you to settle the matter and land firmly on one view, and it most emphatically does not make your particular view of the millennium into any kind of test of Christian fellowship. For what matters far, far more than the precise timing and nature of the thousand years is the great certainty on which every single one of the views is fully and joyfully agreed: that Christ will surely return; that He will judge the living and the dead; that Satan and all evil will be finally and forever defeated; and that God will make all things new. So weigh the views carefully for yourself against Scripture, hold your own conclusion with genuine humility, and do not ever allow this question to divide you from a brother or sister in Christ.</p>
+<h2><span class="dg-n">4.</span>The Final Judgment</h2>
+<p>All of the views, whatever their differences, agree fully on what comes next: the final judgment of all. Satan is loosed for one last rebellion, and is then thrown down forever, defeated utterly. And then the great white throne appears, and the dead, both small and great, stand before God; the books are opened, and each one is judged according to his works; and at the last, death and Hades themselves are cast out, along with everyone whose name is not found written in the Book of Life. This is the sober and the certain end of all rebellion against God — a real judgment, and a real accounting, from which no one escapes. And yet, for those whose names <em>are</em> written in the Lamb's Book of Life — names written there by His own free grace, and received through simple faith in Him — there is no condemnation at all in that day, but only the boundless glory that follows. The judgment is certain, and it is meant to drive us, humbly and gratefully, straight to Christ — for in Him alone are we safe when we stand before that throne.</p>
+<h2><span class="dg-n">5.</span>All Things New</h2>
+<p>And then comes the glorious end of it all. John sees a new heaven and a new earth, and the holy city, the New Jerusalem, coming down out of heaven from God, prepared as a bride adorned for her husband. And a great voice thunders from the throne: "Behold, the tabernacle of God is with men, and He will dwell with them, and they shall be His people, and God Himself will be with them and be their God. And God will wipe away every tear from their eyes; there shall be no more death, nor sorrow, nor crying; there shall be no more pain, for the former things have passed away." And the One on the throne says, "Behold, I make all things new." The city has no need of the sun or the moon, for the glory of God gives it light, and the Lamb is its lamp. A pure river of the water of life flows out from the throne of God and of the Lamb, and the tree of life stands there, bearing its fruit and healing the nations. And His servants shall serve Him, and they shall see His face. Every last sorrow of this whole fallen world is at last undone and wiped away, and God comes down to dwell with His people forever and ever. This is the end toward which the whole Bible has been steadily moving from its very first page — not destruction, but glorious renewal; not the mere ending of the world, but the making-new of all things, and God Himself come home to dwell with His people.</p>
+<h2><span class="dg-n">6.</span>Come, Lord Jesus</h2>
+<p>And so the book of Revelation, and the whole Bible along with it, comes at last to its rest. We began this study with the unveiling of Jesus Christ, the glorified Lord walking among His churches; we saw the Lamb standing at the very center of heaven's throne, alone found worthy to open the scroll of all history; we walked together through the judgments and the great conflict, and we heard the mighty call to the saints to endure; and now we have come at last to the very end — the millennium, however we may understand it, the final judgment, and the new creation where God dwells with His people forever. And through the whole of it, one great truth has held perfectly steady: Christ reigns, and Christ will surely triumph. The details of the end — the timing of the thousand years, the precise sequence of the events — sincere Christians have read in different ways, and those we hold, always, with humility. But the center is utterly sure, and that we hold with overflowing joy: Christ will return; all evil will be judged and undone; and God will make all things new. So do not read the book of Revelation with dread, and do not waste your precious days in feverish speculation about dates and signs and the identity of beasts. Read it, and then go and live, in hope. Endure faithfully through all your trials, for the Lamb is on the throne. Long with all your heart for His appearing, for He is surely coming. And join your own heart to the final prayer of the whole Bible, which is the deep cry of the whole waiting church across all the ages: "He who testifies to these things says, 'Surely I am coming quickly.' Amen. Even so, come, Lord Jesus!" The last book of the Bible ends not in fear at all, but in this: the certain and living hope of the returning Christ, the making-new of all things, and God forever at home with His people. And He is worthy.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Can you hold your view of the millennium with humility, refusing to let it divide you from other believers who love the same Lord? Is your name written in the Lamb's Book of Life — do you rest, for that day of judgment, in Christ alone? And does the promise that God will "make all things new" fill you with hope, so that you can pray with the whole church, "Come, Lord Jesus"?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Revelation 20–22, anchored in the classic public-domain expositions of Revelation (Irenaeus, W. E. Blackstone, David Brown, Augustine, Richard Baxter's <em>The Saints' Everlasting Rest</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading fairly represents the main millennial views from public-domain authors — Irenaeus and W. E. Blackstone (premillennial), David Brown (postmillennial), and Augustine (amillennial) — together with Richard Baxter's <em>The Saints' Everlasting Rest</em>, all in the public domain. CTS presents them even-handedly and binds you to none.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>El Milenio, y Todas las Cosas Nuevas</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Apocalipsis 20–22: los mil años, el juicio final, y la nueva creación</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Apocalipsis (Ireneo, Agustín, Baxter, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Apocalipsis</li>
+<li>Las visiones milenaristas</li>
+<li>Todas las cosas nuevas</li>
+<li>Culminación</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Los capítulos finales traen las últimas cosas — los mil años, el juicio final, y el nuevo cielo y la nueva tierra. Esta lectura final presenta las visiones milenaristas con imparcialidad, sin atarle a ninguna, y luego llega a la consumación en que todos concuerdan: el regreso de Cristo, y el hacer nuevas todas las cosas.
+    </div>
+<h2><span class="dg-n">1.</span>Las últimas cosas</h2>
+<p>Venimos ahora a los tres capítulos finales de Apocalipsis, y con ellos a las últimas cosas de todas — los mil años, el juicio final, y el nuevo cielo y la nueva tierra. Aquí el libro de Apocalipsis, y en verdad toda la Biblia junto con él, llega a su tan esperada consumación. Y aquí, justo en la apertura del capítulo veinte, nos encontramos con el único pasaje sobre el cual los cristianos sinceros y amantes de la Biblia han diferido más famosa y más persistentemente entre sí: el "milenio," el reinado de mil años. Así que haremos aquí exactamente lo que nuestro seminario siempre busca hacer con tales asuntos — miraremos honesta y justamente las visiones principales que los creyentes fieles han sostenido, y no le ataremos a ninguna de ellas. Y luego, habiendo hecho eso, vendremos al fin a la grande y gloriosa consumación en que cada una de las visiones concuerda plenamente, y en que todo el conjunto de la Escritura llega a su cierre: el hacer nuevas todas las cosas, y el eterno morar de Dios mismo con su pueblo.</p>
+<h2><span class="dg-n">2.</span>Los mil años, y las visiones de ellos</h2>
+<p>El vigésimo capítulo habla de que Satanás es atado por mil años, de que los santos viven y reinan juntos con Cristo, y luego del final soltamiento y derrota de Satanás y el juicio final. Los cristianos piadosos han entendido por mucho tiempo estos "mil años" de maneras genuinamente diferentes, y el STC expone las visiones principales con justicia y no le ata a ninguna. La visión <em>premilenarista</em> sostiene que Cristo regresa <em>antes</em> de los mil años, y luego reina sobre la tierra por una larga edad, antes del juicio final; esta visión tiene raíces antiguas — el padre de la iglesia primitiva Ireneo sostuvo una forma temprana de ella, a menudo llamada "premilenarismo histórico" — y una forma posterior y más detallada de ella surgió en tiempos modernos, conocida como "premilenarismo dispensacional," representada por ejemplo por el popular libro <em>Jesus Is Coming</em> de W. E. Blackstone. La visión <em>posmilenarista</em> sostiene que, a través de la amplia difusión y el triunfo del evangelio, el mundo es crecientemente ganado para Cristo, dando paso a una larga edad de bendición del evangelio (el "milenio"), <em>después</em> de la cual Cristo regresa; esta visión es representada, por ejemplo, por <em>Christ's Second Coming</em> de David Brown. Y la visión <em>amilenarista</em> sostiene que los "mil años" no son un período futuro literal en absoluto, sino más bien un cuadro simbólico del presente reinado de Cristo y sus santos, en toda la edad entre su primera y su segunda venida; esta visión es representada, por ejemplo, por Agustín en su <em>Ciudad de Dios</em>. Los cristianos piadosos, creyentes de la Biblia, y amantes de Cristo han sostenido, y sostienen, cada una de estas.</p>
+<h2><span class="dg-n">3.</span>Sosteniendo el milenio con humildad</h2>
+<p>Así que ¿cuál de estas visiones del milenio es la correcta? Aquí una vez más, exactamente como con los cuatro enfoques del libro como un todo, debemos sostener los detalles con verdadera humildad. Cada una de estas visiones tiene sus piadosos y doctos defensores; cada una seriamente busca ser fiel al todo de la Escritura; y cada una lee los genuinamente difíciles símbolos del vigésimo capítulo a la luz del resto de la Biblia. Y el claro hecho permanece que creyentes sinceros que aman al mismísimo Señor y que honran la mismísima Escritura llegan, en buena conciencia, a diferentes conclusiones aquí. Nuestro seminario no le requiere zanjar el asunto y aterrizar firmemente en una visión, y muy enfáticamente no hace de su particular visión del milenio ninguna clase de prueba de la comunión cristiana. Porque lo que importa muchísimo más que el preciso tiempo y naturaleza de los mil años es la gran certeza en que cada sola de las visiones concuerda plena y gozosamente: que Cristo seguramente regresará; que juzgará a los vivos y a los muertos; que Satanás y todo mal serán final y para siempre derrotados; y que Dios hará nuevas todas las cosas. Así que sopese las visiones cuidadosamente usted mismo contra la Escritura, sostenga su propia conclusión con genuina humildad, y nunca permita que esta pregunta le divida de un hermano o hermana en Cristo.</p>
+<h2><span class="dg-n">4.</span>El juicio final</h2>
+<p>Todas las visiones, cualesquiera que sean sus diferencias, concuerdan plenamente en lo que viene después: el juicio final de todos. Satanás es soltado para una última rebelión, y luego es arrojado abajo para siempre, derrotado totalmente. Y entonces el gran trono blanco aparece, y los muertos, tanto pequeños como grandes, están de pie delante de Dios; los libros son abiertos, y cada uno es juzgado según sus obras; y al fin, la muerte y el Hades mismos son arrojados fuera, junto con todo aquel cuyo nombre no es hallado escrito en el Libro de la Vida. Este es el sobrio y cierto fin de toda rebelión contra Dios — un juicio real, y un ajuste de cuentas real, del cual nadie escapa. Y sin embargo, para aquellos cuyos nombres <em>sí</em> están escritos en el Libro de la Vida del Cordero — nombres escritos allí por su propia gracia libre, y recibidos por la sencilla fe en Él — no hay condenación alguna en ese día, sino solo la ilimitada gloria que sigue. El juicio es cierto, y está destinado a impulsarnos, humilde y agradecidamente, directo a Cristo — porque en Él solo estamos seguros cuando estamos de pie delante de ese trono.</p>
+<h2><span class="dg-n">5.</span>Todas las cosas nuevas</h2>
+<p>Y entonces viene el glorioso fin de todo ello. Juan ve un nuevo cielo y una nueva tierra, y la santa ciudad, la Nueva Jerusalén, descendiendo del cielo, de Dios, dispuesta como una esposa ataviada para su marido. Y una gran voz truena desde el trono: "He aquí el tabernáculo de Dios con los hombres, y él morará con ellos; y ellos serán su pueblo, y Dios mismo estará con ellos, y será su Dios. Y limpiará Dios toda lágrima de los ojos de ellos; y ya no habrá más muerte, ni habrá más llanto, ni clamor, ni dolor; porque las primeras cosas ya pasaron." Y el que está en el trono dice, "He aquí, yo hago nuevas todas las cosas." La ciudad no tiene necesidad del sol ni de la luna, porque la gloria de Dios la ilumina, y el Cordero es su lumbrera. Un puro río de agua de vida sale del trono de Dios y del Cordero, y el árbol de la vida está allí, llevando su fruto y sanando a las naciones. Y sus siervos le servirán, y verán su rostro. Toda última tristeza de todo este mundo caído es al fin deshecha y enjugada, y Dios desciende a morar con su pueblo por los siglos de los siglos. Este es el fin hacia el cual toda la Biblia ha estado firmemente moviéndose desde su mismísima primera página — no destrucción, sino gloriosa renovación; no el mero fin del mundo, sino el hacer nuevas todas las cosas, y Dios mismo venido a casa a morar con su pueblo.</p>
+<h2><span class="dg-n">6.</span>Ven, Señor Jesús</h2>
+<p>Y así el libro de Apocalipsis, y toda la Biblia junto con él, llega al fin a su reposo. Comenzamos este estudio con la revelación de Jesucristo, el Señor glorificado andando entre sus iglesias; vimos al Cordero de pie en el mismísimo centro del trono del cielo, único hallado digno de abrir el rollo de toda la historia; caminamos juntos a través de los juicios y el gran conflicto, y oímos el poderoso llamado a los santos a perseverar; y ahora hemos venido al fin al mismísimo final — el milenio, de cualquier manera que lo entendamos, el juicio final, y la nueva creación donde Dios mora con su pueblo para siempre. Y a través del todo de ello, una gran verdad se ha mantenido perfectamente firme: Cristo reina, y Cristo seguramente triunfará. Los detalles del final — el tiempo de los mil años, la precisa secuencia de los eventos — los cristianos sinceros los han leído de maneras diferentes, y esos los sostenemos, siempre, con humildad. Pero el centro es totalmente seguro, y ese lo sostenemos con gozo desbordante: Cristo regresará; todo mal será juzgado y deshecho; y Dios hará nuevas todas las cosas. Así que no lea el libro de Apocalipsis con pavor, y no desperdicie sus preciosos días en febril especulación sobre fechas y señales y la identidad de bestias. Léalo, y luego vaya y viva, en esperanza. Persevere fielmente a través de todas sus pruebas, porque el Cordero está en el trono. Anhele con todo su corazón su aparición, porque seguramente viene. Y una su propio corazón a la oración final de toda la Biblia, que es el hondo clamor de toda la iglesia que espera a través de todas las edades: "El que da testimonio de estas cosas, dice: Ciertamente vengo en breve. Amén. Sí, ven, Señor Jesús!" El último libro de la Biblia termina no en temor en absoluto, sino en esto: la cierta y viviente esperanza del Cristo que vuelve, el hacer nuevas todas las cosas, y Dios para siempre en casa con su pueblo. Y Él es digno.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Puede sostener su visión del milenio con humildad, rehusando dejar que le divida de otros creyentes que aman al mismo Señor? ¿Está su nombre escrito en el Libro de la Vida del Cordero — descansa, para ese día del juicio, en Cristo solo? Y ¿le llena de esperanza la promesa de que Dios hará "nuevas todas las cosas," de modo que pueda orar con toda la iglesia, "Ven, Señor Jesús"?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Apocalipsis 20–22, anclado en las exposiciones clásicas de dominio público de Apocalipsis (Ireneo, W. E. Blackstone, David Brown, Agustín, <em>The Saints' Everlasting Rest</em> de Richard Baxter, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura representa con justicia las principales visiones milenaristas de autores de dominio público — Ireneo y W. E. Blackstone (premilenarista), David Brown (posmilenarista), y Agustín (amilenarista) — junto con <em>The Saints' Everlasting Rest</em> de Richard Baxter, todos en el dominio público. El STC las presenta con imparcialidad y no le ata a ninguna.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="5" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- ============ ATTESTATION ============ -->
+<div class="card attest">
+<h2>
+<span class="lang-en">Record your reading</span>
+<span class="lang-es">Registre su lectura</span>
+</h2>
+<p class="lang-en block">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor.</p>
+<p class="lang-es block">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor.</p>
+<label class="field" for="stName"><span class="lang-en">Your name</span><span class="lang-es">Su nombre</span></label>
+<input autocomplete="name" id="stName" type="text"/>
+<div class="oath">
+<input id="oath" type="checkbox"/>
+<label for="oath"><span class="lang-en">On my honor, I have read in full the three excerpts or adaptations I selected above.</span><span class="lang-es">Bajo mi honor, he leído por completo los tres extractos o adaptaciones que seleccioné arriba.</span></label>
+</div>
+<button class="btn" onclick="recordReading()"><span class="lang-en">Record my reading</span><span class="lang-es">Registrar mi lectura</span></button>
+<p class="msg" id="attMsg"></p>
+<p class="msg no-print" id="honorsDone" style="display:none;color:#2f6b3a;"><span class="lang-en">✓ Recorded — this class counts toward your With Honors progress. <a href="cts-honors.html" style="color:#2f6b3a;">View progress ↗</a></span><span class="lang-es">✓ Registrado — esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html" style="color:#2f6b3a;">Ver progreso ↗</a></span></p>
+<!-- confirmation record -->
+<div class="record" id="record">
+<div class="seal-line"></div>
+<h3><span class="lang-en">Honors Reading — recorded</span><span class="lang-es">Lectura con Honores — registrada</span></h3>
+<div class="named" id="recName"></div>
+<p class="lang-en block">affirmed on <span id="recDateEn"></span> to have read, in full:</p>
+<p class="lang-es block">afirmó el <span id="recDateEs"></span> haber leído, por completo:</p>
+<ul id="recList"></ul>
+<p class="stamp"><span class="lang-en">Chapala Theological Seminary · Revelation · present or print this page as your honors reading record.</span><span class="lang-es">Seminario Teológico de Chapala · Apocalipsis · presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p style="margin-top:14px;">
+<button class="btn ghost no-print" onclick="window.print()"><span class="lang-en">Print this record</span><span class="lang-es">Imprimir este registro</span></button>
+<button class="btn ghost no-print" onclick="resetReading()"><span class="lang-en">Start over</span><span class="lang-es">Empezar de nuevo</span></button>
+</p>
+</div>
+</div>
+<p class="footnote">
+<span class="lang-en">Chapala Theological Seminary · Seminario Teológico de Chapala · free bilingual self-study</span>
+<span class="lang-es">Seminario Teológico de Chapala · Chapala Theological Seminary · estudio propio bilingüe gratuito</span>
+</p>
+</div>
+<script>
+  var MAX = 3;
+  var HONORS_CODE="Rev"; var HONORS_COURSE="Revelation";
+
+  function setLang(l){
+    document.body.className = 'lang-' + l;
+    document.querySelectorAll('.toggle-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+  }
+
+  function chosenBoxes(){
+    return Array.prototype.slice.call(document.querySelectorAll('input[data-pick]:checked'));
+  }
+
+  function refresh(){
+    var boxes = document.querySelectorAll('input[data-pick]');
+    var chosen = chosenBoxes();
+    var n = chosen.length;
+    document.getElementById('cnt-en').textContent = n;
+    document.getElementById('cnt-es').textContent = n;
+
+    var full = (n >= MAX);
+    boxes.forEach(function(b){
+      var lab = b.closest('.pick');
+      var art = b.closest('.entry');
+      if(!b.checked && full){
+        b.disabled = true; lab.classList.add('disabled');
+      } else {
+        b.disabled = false; lab.classList.remove('disabled');
+      }
+      if(art) art.classList.toggle('chosen', b.checked);
+    });
+
+    var note = document.getElementById('limitNote');
+    if(full){
+      note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+    } else {
+      note.textContent = "";
+    }
+  }
+
+  document.querySelectorAll('input[data-pick]').forEach(function(b){
+    b.addEventListener('change', refresh);
+  });
+
+  function recordReading(){
+    var chosen = chosenBoxes();
+    var name = document.getElementById('stName').value.trim();
+    var oath = document.getElementById('oath').checked;
+    var msg = document.getElementById('attMsg');
+
+    if(chosen.length !== MAX){
+      msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+      return;
+    }
+    if(!name){
+      msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+      return;
+    }
+    if(!oath){
+      msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+      return;
+    }
+    msg.textContent = "";
+
+    var now = new Date();
+    var en = now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+    var es = now.toLocaleDateString('es-MX', {year:'numeric', month:'long', day:'numeric'});
+    document.getElementById('recName').textContent = name;
+    document.getElementById('recDateEn').textContent = en;
+    document.getElementById('recDateEs').textContent = es;
+
+    var ul = document.getElementById('recList');
+    ul.innerHTML = "";
+    chosen.forEach(function(b){
+      var art = b.closest('.entry');
+      var li = document.createElement('li');
+      li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+      ul.appendChild(li);
+    });
+
+    try {
+      var _works=[];
+      chosen.forEach(function(b){ var a=b.closest('.entry'); if(a) _works.push(a.getAttribute('data-title-en')); });
+      localStorage.setItem('cts_honors_name_v1', name);
+      localStorage.setItem('cts_honors_v1:'+HONORS_CODE, JSON.stringify({name:name,date:en,course:HONORS_COURSE,works:_works}));
+      var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block';
+    } catch(e){}
+    document.getElementById('record').classList.add('show');
+    document.getElementById('record').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function resetReading(){
+    document.querySelectorAll('input[data-pick]').forEach(function(b){ b.checked = false; });
+    document.getElementById('stName').value = "";
+    document.getElementById('oath').checked = false;
+    document.getElementById('record').classList.remove('show');
+    document.getElementById('attMsg').textContent = "";
+    refresh();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  refresh();
+  try {
+    if(localStorage.getItem('cts_honors_v1:'+HONORS_CODE)){ var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block'; }
+    var _nm=localStorage.getItem('cts_honors_name_v1'); var _f=document.getElementById('stName'); if(_nm && _f && !_f.value){ _f.value=_nm; }
+  } catch(e){}
+</script>
+
+<!-- CTS-FURTHER-STUDY -->
+<style>
+.fs-wrap{max-width:900px;margin:38px auto 10px;padding:0 18px;font-family:Georgia,serif;color:#1f2a37;line-height:1.55;box-sizing:border-box}
+.fs-wrap *{box-sizing:border-box}
+.fs-head{border-top:6px solid #33608f;background:#eaf1f8;border:1px solid #dbe6f0;border-radius:12px;padding:18px 20px}
+.fs-eyebrow{font:700 .72rem/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#33608f}
+.fs-head h2{font-size:1.5rem;margin:.3rem 0 .1rem}
+.fs-es{color:#48586a;font-style:italic}
+.fs-tag{margin:.5rem 0 0;font-family:Arial,sans-serif;font-size:.9rem;color:#5b6b7b}
+.fs-online{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid #33608f;border-left:6px solid #33608f;border-radius:10px;padding:11px 14px;margin:13px 0 18px}
+.fs-online .fs-badge{flex:none;font:800 .66rem/1 Arial,sans-serif;letter-spacing:.1em;color:#fff;background:#33608f;padding:6px 9px;border-radius:6px;margin-top:2px}
+.fs-online p{margin:0;font-size:.9rem}
+.fs-grid{display:grid;gap:14px}
+.fs-card{background:#fff;border:1px solid #dbe6f0;border-radius:11px;padding:16px 17px;box-shadow:0 2px 8px #0b214a0a}
+.fs-kind{font:700 .7rem/1 Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#264a6e}
+.fs-card h3{margin:.3rem 0 .15rem;font-size:1.12rem}
+.fs-meta{font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b;margin:0 0 .5rem}
+.fs-langs span{font:700 .64rem/1 Arial,sans-serif;background:#eaf1f8;color:#264a6e;border:1px solid #cadcee;border-radius:999px;padding:3px 7px;margin-left:5px}
+.fs-card p{margin:.35rem 0 .5rem}
+.fs-note{background:#fbf3e6;border-left:4px solid #8a5a1c;border-radius:0 6px 6px 0;padding:9px 12px;margin:.5rem 0;font-size:.85rem}
+.fs-note b{color:#8a5a1c}
+.fs-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:9px}
+.fs-btn{display:inline-block;text-decoration:none;background:#33608f;color:#fff;font:700 .85rem Arial,sans-serif;padding:8px 12px;border-radius:7px}
+.fs-btn.fs-alt{background:#fff;color:#264a6e;border:1.5px solid #33608f}
+.fs-pick{border:2px dashed #b7c7d8;background:#fbfdff;color:#5b6b7b}
+.fs-pick h3{color:#5b6b7b}
+.fs-foot{margin-top:16px;font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b}
+@media(max-width:600px){.fs-head h2{font-size:1.3rem}}
+</style>
+<section class="fs-wrap" id="further-study">
+<div class="fs-head">
+  <div class="fs-eyebrow">Chapala Theological Seminary &middot; Further Study</div>
+  <h2>Further Study &mdash; Online</h2>
+  <div class="fs-es" style="font-size:1.05rem">Estudio Adicional &mdash; En Línea</div>
+  <p class="fs-tag">Optional resources for students with internet access &mdash; Revelation<br>
+  <span class="fs-es">Recursos opcionales para estudiantes con acceso a internet &mdash; Apocalipsis</span></p>
+</div>
+<div class="fs-online"><span class="fs-badge">ONLINE</span>
+  <p><strong>Requires an internet connection.</strong> These resources are hosted on the web and do not open offline. They supplement the course; they do not replace its units or exams.<br>
+  <span class="fs-es"><strong>Requiere una conexión a internet.</strong> Estos recursos están alojados en la web y no se abren sin conexión. Complementan el curso; no sustituyen sus unidades ni exámenes.</span></p>
+</div>
+<div class="fs-grid">
+<article class="fs-card">
+  <div class="fs-kind">Free animated Bible videos / Videos bíblicos animados gratuitos</div>
+  <h3>BibleProject &mdash; Proyecto Biblia</h3>
+  <p class="fs-meta">Video <span class="fs-langs"><span>English</span><span>Español</span></span></p>
+  <p>Short, well-crafted animated videos that walk through the whole of Scripture. In the video library, open the overview of <strong>Revelation</strong> to see its structure and message. Non-partisan and freely available.<br>
+  <span class="fs-es">Videos animados breves y bien hechos que recorren toda la Escritura. En la biblioteca de videos, abra el resumen de <strong>Apocalipsis</strong> para ver su estructura y mensaje. No partidista y de acceso gratuito.</span></p>
+  <div class="fs-links">
+    <a class="fs-btn" target="_blank" rel="noopener" href="https://bibleproject.com">Open (English) &#8599;</a>
+    <a class="fs-btn fs-alt" target="_blank" rel="noopener" href="https://proyectobiblia.com">Abrir (Español) &#8599;</a>
+  </div>
+</article>
+<article class="fs-card">
+  <div class="fs-kind">The end-times views, side by side / Las posturas del fin, lado a lado</div>
+  <h3>Views on the Millennium &mdash; a fair overview</h3>
+  <p class="fs-meta">Article &middot; text <span class="fs-langs"><span>English</span></span></p>
+  <p>A brief, even-handed account of the main millennial views &mdash; premillennial, postmillennial, and amillennial &mdash; noting that faithful Christians who love Scripture hold each one. This matches how the course presents them: fairly, a section for each, without pressing one as the seminary's own.<br>
+  <span class="fs-es">Un relato breve e imparcial de las principales posturas milenaristas &mdash; premilenial, posmilenial, y amilenial &mdash; notando que cristianos fieles que aman la Escritura sostienen cada una. Esto concuerda con cómo el curso las presenta: con justicia, una sección para cada una, sin imponer ninguna como propia del seminario.</span></p>
+  <div class="fs-links"><a class="fs-btn" target="_blank" rel="noopener" href="https://www.blueletterbible.org/faq/mill.cfm">Open article &#8599;</a></div>
+</article>
+<article class="fs-card fs-pick">
+  <div class="fs-kind">Instructor's vetted pick / Selección aprobada por el instructor</div>
+  <h3>[ Your chosen video goes here ]</h3>
+  <p>A place for a specific video the instructor has watched and approved for this course.<br>
+  <span class="fs-es">Un espacio para un video específico que el instructor haya visto y aprobado para este curso.</span></p>
+</article>
+</div>
+<div class="fs-foot">These optional supplements link to third-party websites that Chapala Theological Seminary does not control; weigh their content against Scripture and this course.<br>
+<span class="fs-es">Estos complementos opcionales enlazan a sitios web de terceros que el Seminario Teológico de Chapala no controla; pese su contenido a la luz de la Escritura y de este curso.</span></div>
+</section>
+<!-- /CTS-FURTHER-STUDY -->
+
+</body>
+</html>

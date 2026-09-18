@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Galatians Intensive — Unit 5</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 6 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Galatians Intensive — Unit 5: From Slaves to Sons</span><span class="lang-es">📖 Gálatas Intensivo — Unidad 5: De Esclavos a Hijos</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"...You are no longer a slave but a son, and if a son, then an heir of God through Christ." — Galatians 4:7 (NKJV)</span><span class="lang-es">"...Ya no eres siervo, sino hijo; y si hijo, también heredero de Dios por Cristo." — Gálatas 4:7 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Galatians Intensive. Please register before beginning Unit 5.</span><span class="lang-es">Bienvenido al Intensivo de Gálatas. Por favor regístrese antes de comenzar la Unidad 5.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="cert">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Galatians 4:1-31 (NKJV)</strong></p>
+<div class="scripture">"But when the fullness of the time had come, God sent forth His Son, born of a woman, born under the law, to redeem those who were under the law, that we might receive the adoption as sons." &mdash; Galatians 4:4-5 (NKJV)</div>
+
+<h3>The Heir as a Child</h3>
+<p>Paul has shown that the law was our tutor; now he presses the picture further. <strong>"The heir, as long as he is a child, does not differ at all from a slave, though he is master of all, but is under guardians and stewards until the time appointed by the father."</strong> A young heir owns the whole estate by right, yet while he is still a child he lives much like a servant, under guardians who direct his every step. So it was with God's people: <em>"Even so we, when we were children, were in bondage under the elements of the world."</em> Under the law they were held like minors, not yet entered into the full freedom that was theirs by promise. The bondage was real, but it was never meant to be permanent.</p>
+
+<h3>God Sent Forth His Son</h3>
+<p>Then came the turning point of all history. <strong>"When the fullness of the time had come, God sent forth His Son, born of a woman, born under the law, to redeem those who were under the law, that we might receive the adoption as sons."</strong> At the moment appointed by the Father, the Son entered our world &mdash; truly born of a woman, truly placed under the law He had given. He came under the law in order to keep it perfectly and to bear its curse, and so <em>to redeem</em> those imprisoned beneath it. The purpose was not merely to free slaves, but to make them sons: that we might receive <strong>the adoption as sons</strong>. Redemption and adoption are the twin gifts of that first Christmas &mdash; the Son became what we are that we might become what He is by grace.</p>
+<p class="pull-quote">In the fullness of time God sent forth His Son to redeem slaves, and then sent forth the Spirit of His Son to make those slaves cry, "Abba, Father."</p>
+
+<h3>The Spirit of His Son: Abba, Father</h3>
+<p>Adoption is no cold legal arrangement; it brings the warmth of the family into the heart. <strong>"Because you are sons, God has sent forth the Spirit of His Son into your hearts, crying out, 'Abba, Father!'"</strong> The same Spirit who moved the Son now moves in the believer, teaching him to speak to God with the very word of a child to his father. And Paul draws the conclusion plainly: <strong>"Therefore you are no longer a slave but a son, and if a son, then an heir of God through Christ."</strong> The believer is not a hired servant working for wages, nor a minor under guardians, but a grown son with the full standing of the family and the whole inheritance secured to him through Christ.</p>
+
+<h3>Why Turn Back to Bondage?</h3>
+<p>In light of such a standing, the Galatians' drift makes no sense, and Paul is grieved by it. Once, not knowing God, they had served things that by nature are not gods at all. But now, having come to know God &mdash; or rather, having been known by God &mdash; <strong>"how is it that you turn again to the weak and beggarly elements, to which you desire again to be in bondage?"</strong> To leave the freedom of sonship and return to a yoke of religious observance is to go backward into slavery. <em>"You observe days and months and seasons and years."</em> Paul does not despise reverence, but he sees the danger: they were treating the calendar of the law as the ground of their acceptance. So he says soberly, <strong>"I am afraid for you, lest I have labored for you in vain."</strong></p>
+
+<h3>Paul's Personal Appeal</h3>
+<p>Now the apostle speaks not as a judge but as a friend. <strong>"Brethren, I urge you to become like me, for I became like you."</strong> He reminds them how warmly they had once received him. When he first preached to them in physical infirmity, they did not despise his weakness; <strong>"you received me as an angel of God, even as Christ Jesus."</strong> Such was their love that they would have plucked out their own eyes and given them to him. Where had that joy gone? And then the wounded question of a true pastor: <strong>"Have I therefore become your enemy because I tell you the truth?"</strong> The one who tells the truth is the truest friend, even when the truth stings.</p>
+
+<h3>Zeal, True and False</h3>
+<p>Paul exposes the motives of the false teachers. <strong>"They zealously court you, but for no good; yes, they want to exclude you, that you may be zealous for them."</strong> Their eagerness was not love but ambition; they wanted to shut the Galatians out of true liberty so that they would become dependent followers. It is good to be zealous in a good thing, Paul says, and always &mdash; not only when he is present. Then he opens his pastor's heart: <strong>"My little children, for whom I labor in birth again until Christ is formed in you."</strong> He travails for them a second time as a mother in labor, longing not that they keep a calendar, but that Christ Himself be formed within them. He wishes he could be with them and change his tone, for he is perplexed about them.</p>
+
+<h3>The Allegory: Hagar and Sarah</h3>
+<p>To those determined to be under the law, Paul says, in effect, listen to what the law itself shows. <strong>"Abraham had two sons: the one by a bondwoman, the other by a freewoman."</strong> The son of the bondwoman, Hagar, was born according to the flesh; the son of the freewoman, Sarah, was born through promise. These things, Paul says, are symbolic, <em>"for these are the two covenants."</em> The one from Mount Sinai gives birth to bondage &mdash; this is Hagar, answering to the earthly Jerusalem, which is in bondage with her children. <strong>"But the Jerusalem above is free, which is the mother of us all."</strong> The believer's true mother-city is not the city of law and slavery, but the free city above, and her children are free.</p>
+
+<h3>Cast Out the Bondwoman; Children of Promise</h3>
+<p>Paul brings the allegory home to the Galatians directly. <strong>"Now we, brethren, as Isaac was, are children of promise."</strong> They were not born of the flesh and the law, but of the promise of God, like Isaac. And just as Ishmael, born of the flesh, once mocked Isaac, born of the Spirit, so now the children of the law persecute the children of promise. But the verdict of Scripture is clear: <strong>"Cast out the bondwoman and her son, for the son of the bondwoman shall not be heir with the son of the freewoman."</strong> Law and grace cannot share the inheritance; the way of works must be put out. And so Paul concludes with a banner over the whole chapter: <strong>"So then, brethren, we are not children of the bondwoman but of the free."</strong></p>
+<div class="scripture">"So then, brethren, we are not children of the bondwoman but of the free." &mdash; Galatians 4:31 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Gálatas 4:1-31 (RVG)</strong></p>
+<div class="scripture">"Mas venido el cumplimiento del tiempo, Dios envió a su Hijo, hecho de mujer, hecho bajo la ley, para que redimiese a los que estaban bajo la ley, a fin de que recibiésemos la adopción de hijos." &mdash; Gálatas 4:4-5 (RVG)</div>
+
+<h3>El Heredero Siendo Niño</h3>
+<p>Pablo ha mostrado que la ley fue nuestro ayo; ahora lleva la imagen más lejos. <strong>"Entre tanto que el heredero es niño, en nada difiere del siervo, aunque es señor de todo; mas está bajo tutores y curadores hasta el tiempo señalado por el padre."</strong> Un heredero joven posee toda la hacienda por derecho, mas mientras es niño vive como un siervo, bajo tutores que dirigen cada paso. Así fue con el pueblo de Dios: <em>"Así también nosotros, cuando éramos niños, estábamos en esclavitud bajo los rudimentos del mundo."</em> Bajo la ley eran tenidos como menores, aún no entrados en la plena libertad que era suya por promesa. La esclavitud era real, pero nunca fue pensada para ser permanente.</p>
+
+<h3>Dios Envió a su Hijo</h3>
+<p>Entonces vino el momento decisivo de toda la historia. <strong>"Venido el cumplimiento del tiempo, Dios envió a su Hijo, hecho de mujer, hecho bajo la ley, para que redimiese a los que estaban bajo la ley, a fin de que recibiésemos la adopción de hijos."</strong> En el momento señalado por el Padre, el Hijo entró en nuestro mundo &mdash; verdaderamente hecho de mujer, verdaderamente puesto bajo la ley que Él había dado. Vino bajo la ley para guardarla perfectamente y llevar su maldición, y así <em>redimir</em> a los presos bajo ella. El propósito no era solo librar a los esclavos, sino hacerlos hijos: que recibiésemos <strong>la adopción de hijos</strong>. La redención y la adopción son los dos dones de aquella primera Navidad &mdash; el Hijo se hizo lo que nosotros somos para que nosotros llegásemos a ser lo que Él es por gracia.</p>
+<p class="pull-quote">En el cumplimiento del tiempo Dios envió a su Hijo para redimir esclavos, y luego envió el Espíritu de su Hijo para hacer que esos esclavos clamaran: "Abba, Padre."</p>
+
+<h3>El Espíritu de su Hijo: Abba, Padre</h3>
+<p>La adopción no es un frío arreglo legal; trae al corazón el calor de la familia. <strong>"Por cuanto sois hijos, Dios envió el Espíritu de su Hijo a vuestros corazones, el cual clama: Abba, Padre."</strong> El mismo Espíritu que movía al Hijo ahora mueve en el creyente, enseñándole a hablar a Dios con la palabra misma de un niño a su padre. Y Pablo saca la conclusión claramente: <strong>"Así que ya no eres siervo, sino hijo; y si hijo, también heredero de Dios por Cristo."</strong> El creyente no es un siervo asalariado que trabaja por jornal, ni un menor bajo tutores, sino un hijo crecido con la plena posición de la familia y toda la herencia asegurada por Cristo.</p>
+
+<h3>¿Por Qué Volver a la Esclavitud?</h3>
+<p>A la luz de tal posición, el desvío de los gálatas no tiene sentido, y Pablo se aflige por ello. Antes, no conociendo a Dios, habían servido a cosas que por naturaleza no son dioses. Mas ahora, habiendo conocido a Dios &mdash; o más bien, siendo conocidos por Dios &mdash; <strong>"¿cómo es que os volvéis de nuevo a los débiles y pobres rudimentos, a los cuales os queréis volver a esclavizar?"</strong> Dejar la libertad de la filiación y volver a un yugo de observancia religiosa es retroceder a la esclavitud. <em>"Guardáis los días, los meses, los tiempos, y los años."</em> Pablo no desprecia la reverencia, mas ve el peligro: trataban el calendario de la ley como el fundamento de su aceptación. Por eso dice con seriedad: <strong>"Me temo de vosotros, que haya trabajado en vano con vosotros."</strong></p>
+
+<h3>El Llamamiento Personal de Pablo</h3>
+<p>Ahora el apóstol habla no como juez sino como amigo. <strong>"Os ruego, hermanos, que os hagáis como yo, porque yo me hice como vosotros."</strong> Les recuerda cuán calurosamente le habían recibido. Cuando les predicó por primera vez en flaqueza del cuerpo, no despreciaron su debilidad; <strong>"me recibisteis como a un ángel de Dios, como a Cristo Jesús."</strong> Tal era su amor que se hubieran sacado sus propios ojos para dárselos. ¿Dónde había ido aquel gozo? Y luego la herida pregunta de un verdadero pastor: <strong>"¿Me he hecho, pues, vuestro enemigo, por deciros la verdad?"</strong> El que dice la verdad es el más verdadero amigo, aun cuando la verdad duela.</p>
+
+<h3>El Celo, Verdadero y Falso</h3>
+<p>Pablo expone los motivos de los falsos maestros. <strong>"Tienen celo por vosotros, mas no para bien; antes os quieren apartar, para que vosotros tengáis celo por ellos."</strong> Su afán no era amor sino ambición; querían excluir a los gálatas de la verdadera libertad para que se hiciesen seguidores dependientes. Bueno es ser celoso en lo bueno, dice Pablo, y siempre &mdash; no solo cuando él está presente. Luego abre su corazón de pastor: <strong>"Hijitos míos, por quienes vuelvo a sufrir dolores de parto, hasta que Cristo sea formado en vosotros."</strong> Sufre por ellos por segunda vez como madre en parto, anhelando no que guarden un calendario, sino que Cristo mismo sea formado en ellos. Quisiera estar con ellos y cambiar su tono, pues está perplejo acerca de ellos.</p>
+
+<h3>La Alegoría: Agar y Sara</h3>
+<p>A los determinados a estar bajo la ley, Pablo les dice, en efecto, oíd lo que la ley misma muestra. <strong>"Abraham tuvo dos hijos; uno de la sierva, el otro de la libre."</strong> El hijo de la sierva, Agar, nació según la carne; el hijo de la libre, Sara, nació por la promesa. Estas cosas, dice Pablo, son una alegoría, <em>"porque estos son los dos pactos."</em> El uno del monte Sinaí engendra para servidumbre &mdash; esta es Agar, que corresponde a la Jerusalén terrenal, la cual está en esclavitud con sus hijos. <strong>"Mas la Jerusalén de arriba es libre; la cual es la madre de todos nosotros."</strong> La verdadera ciudad-madre del creyente no es la ciudad de la ley y la esclavitud, sino la ciudad libre de arriba, y sus hijos son libres.</p>
+
+<h3>Echa Fuera a la Sierva; Hijos de la Promesa</h3>
+<p>Pablo aplica la alegoría directamente a los gálatas. <strong>"Así que, hermanos, nosotros, como Isaac, somos hijos de la promesa."</strong> No nacieron de la carne y la ley, sino de la promesa de Dios, como Isaac. Y así como Ismael, nacido según la carne, una vez se burló de Isaac, nacido según el Espíritu, así ahora los hijos de la ley persiguen a los hijos de la promesa. Mas la sentencia de la Escritura es clara: <strong>"Echa fuera a la sierva y a su hijo; porque no será heredero el hijo de la sierva con el hijo de la libre."</strong> La ley y la gracia no pueden compartir la herencia; el camino de las obras ha de ser echado fuera. Y así Pablo concluye con una bandera sobre todo el capítulo: <strong>"De manera, hermanos, que no somos hijos de la sierva, sino de la libre."</strong></p>
+<div class="scripture">"De manera, hermanos, que no somos hijos de la sierva, sino de la libre." &mdash; Gálatas 4:31 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Galatians Intensive — Unit 5 (From Slaves to Sons, Galatians 4:1-31)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 5;
+const COURSE = 'gal';
+const NEXT_UNIT_URL = 'CTSGalatiansUnit6.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - No Other Gospel (Galatians 1:1-10)", "Unit 2 - Paul Defends the Gospel (Galatians 1:11-2:10)", "Unit 3 - I Do Not Set Aside Grace (Galatians 2:11-21)", "Unit 4 - Faith, Not Works of the Law (Galatians 3:1-29)", "Unit 5 - From Slaves to Sons (Galatians 4:1-31)", "Unit 6 - Freedom and the Fruit of the Spirit (Galatians 5:1-26)", "Unit 7 - Glory Only in the Cross (Galatians 6:1-18)", "Unit 8 - The Whole of Grace: Root and Fruit", "Unit 9 - Another Gospel: Jehovah's Witnesses", "Unit 10 - Another Gospel: The Latter-day Saints", "Unit 11 - Another Gospel: The Prosperity Gospel", "Unit 12 - Brothers in the Core: Seventh-day Adventists"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSGalatiansUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. Paul says the heir, as long as he is a child, does not differ at all from:", "textEs": "1. Pablo dice que el heredero, entre tanto que es niño, en nada difiere de:", "optionsEn": ["a stranger", "a slave, though he is master of all", "a hired teacher", "a foreigner"], "optionsEs": ["un extraño", "un siervo, aunque es señor de todo", "un maestro asalariado", "un extranjero"], "explanationEn": "Though heir of all, the child lives like a servant until the appointed time.", "explanationEs": "Aunque heredero de todo, el niño vive como siervo hasta el tiempo señalado.", "correct": 1}, {"textEn": "2. Until the time appointed by the father, the young heir is under:", "textEs": "2. Hasta el tiempo señalado por el padre, el heredero joven está bajo:", "optionsEn": ["guardians and stewards", "priests and Levites", "the synagogue rulers", "the prophets"], "optionsEs": ["tutores y curadores", "sacerdotes y levitas", "los principales de la sinagoga", "los profetas"], "explanationEn": "The child heir is under guardians and stewards, much like a slave.", "explanationEs": "El niño heredero está bajo tutores y curadores, como un siervo.", "correct": 0}, {"textEn": "3. 'When the fullness of the time had come, God sent forth His Son, born of a woman, born...'", "textEs": "3. 'Venido el cumplimiento del tiempo, Dios envió a su Hijo, hecho de mujer, hecho...'", "optionsEn": ["in a palace", "of the Spirit only", "without a body", "under the law"], "optionsEs": ["en un palacio", "solo del Espíritu", "sin cuerpo", "bajo la ley"], "explanationEn": "The Son was born under the law to redeem those under the law.", "explanationEs": "El Hijo fue hecho bajo la ley para redimir a los que estaban bajo la ley.", "correct": 3}, {"textEn": "4. Christ redeemed those under the law so that we might receive:", "textEs": "4. Cristo redimió a los que estaban bajo la ley para que recibiésemos:", "optionsEn": ["the land of Canaan", "a new law", "the adoption as sons", "earthly riches"], "optionsEs": ["la tierra de Canaán", "una nueva ley", "la adopción de hijos", "riquezas terrenales"], "explanationEn": "The purpose of redemption was adoption: to make slaves into sons.", "explanationEs": "El propósito de la redención fue la adopción: hacer hijos de los esclavos.", "correct": 2}, {"textEn": "5. Because we are sons, God sent the Spirit of His Son into our hearts, crying out:", "textEs": "5. Por cuanto somos hijos, Dios envió el Espíritu de su Hijo a nuestros corazones, clamando:", "optionsEn": ["'Glory to God'", "'Holy, holy, holy'", "'Peace, peace'", "'Abba, Father!'"], "optionsEs": ["'Gloria a Dios'", "'Santo, santo, santo'", "'Paz, paz'", "'¡Abba, Padre!'"], "explanationEn": "The Spirit teaches the believer to call God 'Abba, Father.'", "explanationEs": "El Espíritu enseña al creyente a llamar a Dios 'Abba, Padre.'", "correct": 3}, {"textEn": "6. 'Therefore you are no longer a slave but a son, and if a son, then...'", "textEs": "6. 'Así que ya no eres siervo, sino hijo; y si hijo, también...'", "optionsEn": ["a servant of Moses", "an heir of God through Christ", "under the law still", "a child of Hagar"], "optionsEs": ["siervo de Moisés", "heredero de Dios por Cristo", "aún bajo la ley", "hijo de Agar"], "explanationEn": "The son is an heir of God through Christ.", "explanationEs": "El hijo es heredero de Dios por Cristo.", "correct": 1}, {"textEn": "7. Before they knew God, the Galatians had served:", "textEs": "7. Antes de conocer a Dios, los gálatas habían servido a:", "optionsEn": ["those which by nature are not gods", "the holy angels", "the true and living God", "the prophets of old"], "optionsEs": ["los que por naturaleza no son dioses", "los santos ángeles", "el Dios vivo y verdadero", "los profetas antiguos"], "explanationEn": "They had served false gods that by nature are no gods at all.", "explanationEs": "Habían servido a falsos dioses que por naturaleza no son dioses.", "correct": 0}, {"textEn": "8. Paul is troubled that, turning back to weak elements, the Galatians observe:", "textEs": "8. A Pablo le preocupa que, volviéndose a débiles rudimentos, los gálatas guarden:", "optionsEn": ["the Lord's Supper", "baptism", "days and months and seasons and years", "prayer and fasting"], "optionsEs": ["la Cena del Señor", "el bautismo", "días y meses y tiempos y años", "oración y ayuno"], "explanationEn": "They treated the law's calendar as the ground of acceptance.", "explanationEs": "Trataban el calendario de la ley como el fundamento de su aceptación.", "correct": 2}, {"textEn": "9. Of his work among them, Paul fears that he may have:", "textEs": "9. Acerca de su obra entre ellos, Pablo teme haber:", "optionsEn": ["labored for them in vain", "preached without authority", "offended the apostles", "broken the law"], "optionsEs": ["trabajado en vano con ellos", "predicado sin autoridad", "ofendido a los apóstoles", "quebrantado la ley"], "explanationEn": "He is afraid his labor among them may prove to be in vain.", "explanationEs": "Teme que su trabajo entre ellos resulte ser en vano.", "correct": 0}, {"textEn": "10. When Paul first preached to them in physical infirmity, the Galatians received him:", "textEs": "10. Cuando Pablo les predicó por primera vez en flaqueza del cuerpo, los gálatas le recibieron:", "optionsEn": ["with suspicion", "as a mere teacher", "as an angel of God, even as Christ Jesus", "as an enemy"], "optionsEs": ["con sospecha", "como a un simple maestro", "como a un ángel de Dios, como a Cristo Jesús", "como a un enemigo"], "explanationEn": "They received him as an angel of God and would have given their own eyes.", "explanationEs": "Le recibieron como a un ángel de Dios y le hubieran dado sus propios ojos.", "correct": 2}, {"textEn": "11. Paul asks, 'Have I therefore become your enemy because...'", "textEs": "11. Pablo pregunta: '¿Me he hecho, pues, vuestro enemigo, porque...'", "optionsEn": ["I refused your gifts", "I preached the law", "I left you", "I tell you the truth"], "optionsEs": ["rechacé vuestros dones", "prediqué la ley", "os dejé", "os digo la verdad"], "explanationEn": "The truth-teller is the truest friend, even when the truth stings.", "explanationEs": "El que dice la verdad es el más verdadero amigo, aun cuando duela.", "correct": 3}, {"textEn": "12. The false teachers court the Galatians zealously, but their aim is to:", "textEs": "12. Los falsos maestros tienen celo por los gálatas, mas su fin es:", "optionsEn": ["teach them grace", "exclude them, so they will be zealous for the false teachers", "send them to Jerusalem", "build them up in Christ"], "optionsEs": ["enseñarles gracia", "apartarlos, para que tengan celo por los falsos maestros", "enviarlos a Jerusalén", "edificarlos en Cristo"], "explanationEn": "Their zeal was ambition, to make the Galatians dependent on them.", "explanationEs": "Su celo era ambición, para hacer dependientes a los gálatas de ellos.", "correct": 1}, {"textEn": "13. Paul says he labors in birth again until:", "textEs": "13. Pablo dice que vuelve a sufrir dolores de parto hasta que:", "optionsEn": ["the apostles arrive", "the law is kept", "they are circumcised", "Christ is formed in them"], "optionsEs": ["lleguen los apóstoles", "se guarde la ley", "sean circuncidados", "Cristo sea formado en ellos"], "explanationEn": "His longing is that Christ Himself be formed within them.", "explanationEs": "Su anhelo es que Cristo mismo sea formado en ellos.", "correct": 3}, {"textEn": "14. In the allegory, Abraham's two sons were born of:", "textEs": "14. En la alegoría, los dos hijos de Abraham nacieron de:", "optionsEn": ["two freewomen", "two bondwomen", "a bondwoman and a freewoman", "Sarah and Rebekah"], "optionsEs": ["dos libres", "dos siervas", "una sierva y una libre", "Sara y Rebeca"], "explanationEn": "One son was by the bondwoman Hagar, the other by the freewoman Sarah.", "explanationEs": "Un hijo fue de la sierva Agar, el otro de la libre Sara.", "correct": 2}, {"textEn": "15. The son of the bondwoman was born according to the flesh, but the son of the freewoman was born:", "textEs": "15. El hijo de la sierva nació según la carne, mas el hijo de la libre nació:", "optionsEn": ["by the law", "through promise", "by works", "by circumcision"], "optionsEs": ["por la ley", "por la promesa", "por obras", "por la circuncisión"], "explanationEn": "Isaac, the son of the freewoman, was born through God's promise.", "explanationEs": "Isaac, el hijo de la libre, nació por la promesa de Dios.", "correct": 1}, {"textEn": "16. Paul says the two women symbolize:", "textEs": "16. Pablo dice que las dos mujeres simbolizan:", "optionsEn": ["two covenants", "two kings", "two priesthoods", "two cities only"], "optionsEs": ["dos pactos", "dos reyes", "dos sacerdocios", "solo dos ciudades"], "explanationEn": "Hagar and Sarah stand for the two covenants, of law and of promise.", "explanationEs": "Agar y Sara representan los dos pactos, de la ley y de la promesa.", "correct": 0}, {"textEn": "17. The covenant from Mount Sinai gives birth to:", "textEs": "17. El pacto del monte Sinaí engendra para:", "optionsEn": ["the new creation", "freedom", "bondage", "the promise"], "optionsEs": ["la nueva criatura", "libertad", "servidumbre", "la promesa"], "explanationEn": "Sinai, answering to earthly Jerusalem, gives birth to bondage.", "explanationEs": "Sinaí, que corresponde a la Jerusalén terrenal, engendra servidumbre.", "correct": 2}, {"textEn": "18. 'But the Jerusalem above is...'", "textEs": "18. 'Mas la Jerusalén de arriba es...'", "optionsEn": ["in bondage with her children", "for the Jews only", "built by the law", "free, the mother of us all"], "optionsEs": ["esclava con sus hijos", "solo para los judíos", "edificada por la ley", "libre, la madre de todos nosotros"], "explanationEn": "The Jerusalem above is free, and she is the mother of all believers.", "explanationEs": "La Jerusalén de arriba es libre, y es la madre de todos los creyentes.", "correct": 3}, {"textEn": "19. Like Isaac, believers are:", "textEs": "19. Como Isaac, los creyentes son:", "optionsEn": ["children of the bondwoman", "children of promise", "under guardians", "servants of Sinai"], "optionsEs": ["hijos de la sierva", "hijos de la promesa", "bajo tutores", "siervos de Sinaí"], "explanationEn": "Believers, like Isaac, are children of promise, born of God's word.", "explanationEs": "Los creyentes, como Isaac, son hijos de la promesa, nacidos de la palabra de Dios.", "correct": 1}, {"textEn": "20. Scripture says, 'Cast out the bondwoman and her son,' for the son of the bondwoman:", "textEs": "20. La Escritura dice: 'Echa fuera a la sierva y a su hijo,' porque el hijo de la sierva:", "optionsEn": ["shall not be heir with the son of the freewoman", "shall be circumcised", "shall inherit Canaan", "shall keep the law"], "optionsEs": ["no será heredero con el hijo de la libre", "será circuncidado", "heredará Canaán", "guardará la ley"], "explanationEn": "Law and grace cannot share the inheritance; the way of works is cast out.", "explanationEs": "La ley y la gracia no pueden compartir la herencia; el camino de las obras es echado fuera.", "correct": 0}];
+
+const kwQuestions = [{"textEn": "21. Explain Paul's picture of the heir as a child in Galatians 4:1-3.", "textEs": "21. Explique la imagen de Pablo del heredero siendo niño en Gálatas 4:1-3.", "kw_en": ["heir", "child", "slave", "guardians", "elements", "bondage", "master", "appointed"], "kw_es": ["heredero", "niño", "siervo", "tutores", "rudimentos", "esclavitud", "señor", "señalado"], "modelEn": "Paul says that the heir, as long as he is a child, does not differ at all from a slave, even though he is master of all the estate. While still a child he is under guardians and stewards until the time appointed by the father. In the same way, God's people under the law were in bondage under the elements of the world, held like minors who had not yet entered their inheritance. The bondage was real but temporary, for the heir was always meant to grow up into the freedom that was his by right.", "modelEs": "Pablo dice que el heredero, entre tanto que es niño, en nada difiere del siervo, aunque es señor de toda la hacienda. Mientras es niño está bajo tutores y curadores hasta el tiempo señalado por el padre. De la misma manera, el pueblo de Dios bajo la ley estaba en esclavitud bajo los rudimentos del mundo, tenido como menores que aún no habían entrado en su herencia. La esclavitud era real pero temporal, pues el heredero siempre fue destinado a crecer en la libertad que era suya por derecho."}, {"textEn": "22. What is the meaning of 'when the fullness of the time had come, God sent forth His Son' (4:4-5)?", "textEs": "22. ¿Cuál es el significado de 'venido el cumplimiento del tiempo, Dios envió a su Hijo' (4:4-5)?", "kw_en": ["fullness", "time", "son", "woman", "law", "redeem", "adoption", "sons"], "kw_es": ["cumplimiento", "tiempo", "hijo", "mujer", "ley", "redimir", "adopción", "hijos"], "modelEn": "It means that at the moment appointed by the Father, the turning point of all history arrived: God sent forth His Son into the world. The Son was truly born of a woman and truly born under the law, placing Himself beneath the very law He had given. He came under the law in order to keep it perfectly and to bear its curse, and so to redeem those who were imprisoned under it. The purpose was not only to free slaves but to make them sons, that we might receive the adoption as sons. Redemption and adoption are the twin gifts of the fullness of time.", "modelEs": "Significa que en el momento señalado por el Padre llegó el punto decisivo de toda la historia: Dios envió a su Hijo al mundo. El Hijo fue verdaderamente hecho de mujer y verdaderamente hecho bajo la ley, poniéndose bajo la ley misma que Él había dado. Vino bajo la ley para guardarla perfectamente y llevar su maldición, y así redimir a los que estaban presos bajo ella. El propósito no era solo librar a los esclavos sino hacerlos hijos, para que recibiésemos la adopción de hijos. La redención y la adopción son los dos dones del cumplimiento del tiempo."}, {"textEn": "23. What does the Spirit crying 'Abba, Father' show about the believer (4:6-7)?", "textEs": "23. ¿Qué muestra el Espíritu clamando 'Abba, Padre' acerca del creyente (4:6-7)?", "kw_en": ["spirit", "hearts", "abba", "father", "son", "heir", "slave", "sons"], "kw_es": ["espíritu", "corazones", "abba", "padre", "hijo", "heredero", "siervo", "hijos"], "modelEn": "It shows that adoption is not a cold legal arrangement but brings the warmth of the family into the heart. Because we are sons, God has sent forth the Spirit of His Son into our hearts, and that Spirit cries out, Abba, Father, teaching us to speak to God with the word of a child to his father. From this Paul concludes that the believer is no longer a slave but a son, and if a son, then an heir of God through Christ. The believer is not a hired servant working for wages but a grown son with the full standing of the family and the whole inheritance secured to him.", "modelEs": "Muestra que la adopción no es un frío arreglo legal sino que trae al corazón el calor de la familia. Por cuanto somos hijos, Dios envió el Espíritu de su Hijo a nuestros corazones, y ese Espíritu clama, Abba, Padre, enseñándonos a hablar a Dios con la palabra de un niño a su padre. De esto Pablo concluye que el creyente ya no es siervo sino hijo, y si hijo, también heredero de Dios por Cristo. El creyente no es un siervo asalariado que trabaja por jornal sino un hijo crecido con la plena posición de la familia y toda la herencia asegurada."}, {"textEn": "24. Why does Paul rebuke the Galatians for turning back in Galatians 4:8-11?", "textEs": "24. ¿Por qué reprende Pablo a los gálatas por volverse atrás en Gálatas 4:8-11?", "kw_en": ["gods", "elements", "bondage", "days", "months", "vain", "known", "observe"], "kw_es": ["dioses", "rudimentos", "esclavitud", "días", "meses", "vano", "conocido", "guardáis"], "modelEn": "Paul rebukes them because, having come to know God, or rather having been known by God, they were turning back to the weak and beggarly elements they had left. Before, not knowing God, they had served things that by nature are not gods. Now they desired again to be in bondage, treating the calendar of the law as the ground of acceptance: you observe days and months and seasons and years. To leave the freedom of sonship and return to a yoke of religious observance is to go backward into slavery. So Paul says soberly that he is afraid for them, lest he has labored among them in vain.", "modelEs": "Pablo los reprende porque, habiendo conocido a Dios, o más bien habiendo sido conocidos por Dios, se volvían a los débiles y pobres rudimentos que habían dejado. Antes, no conociendo a Dios, habían servido a cosas que por naturaleza no son dioses. Ahora deseaban volver a la esclavitud, tratando el calendario de la ley como fundamento de aceptación: guardáis los días y los meses y los tiempos y los años. Dejar la libertad de la filiación y volver a un yugo de observancia es retroceder a la esclavitud. Por eso Pablo dice con seriedad que teme por ellos, no sea que haya trabajado entre ellos en vano."}, {"textEn": "25. Describe Paul's personal appeal to the Galatians in 4:12-16.", "textEs": "25. Describa el llamamiento personal de Pablo a los gálatas en 4:12-16.", "kw_en": ["brethren", "infirmity", "received", "angel", "eyes", "enemy", "truth", "preached"], "kw_es": ["hermanos", "flaqueza", "recibieron", "ángel", "ojos", "enemigo", "verdad", "predicó"], "modelEn": "Paul appeals not as a judge but as a friend, urging the brethren to become like him, for he became like them. He reminds them that when he first preached to them in physical infirmity, they did not despise his weakness but received him as an angel of God, even as Christ Jesus. Such was their love that they would have plucked out their own eyes and given them to him. He asks where that joy has gone, and then puts the wounded question of a true pastor: have I become your enemy because I tell you the truth? Paul shows that the one who tells the truth is the truest friend, even when the truth stings.", "modelEs": "Pablo apela no como juez sino como amigo, rogando a los hermanos que se hagan como él, porque él se hizo como ellos. Les recuerda que cuando les predicó por primera vez en flaqueza del cuerpo, no despreciaron su debilidad sino que le recibieron como a un ángel de Dios, como a Cristo Jesús. Tal era su amor que se hubieran sacado sus propios ojos para dárselos. Pregunta dónde ha ido aquel gozo, y luego pone la herida pregunta de un verdadero pastor: ¿me he hecho vuestro enemigo por deciros la verdad? Pablo muestra que el que dice la verdad es el más verdadero amigo, aun cuando la verdad duela."}, {"textEn": "26. Contrast the false teachers' zeal with Paul's travail in 4:17-20.", "textEs": "26. Contraste el celo de los falsos maestros con el dolor de parto de Pablo en 4:17-20.", "kw_en": ["zealous", "exclude", "children", "birth", "christ", "formed", "ambition", "present"], "kw_es": ["celo", "apartar", "hijitos", "parto", "cristo", "formado", "ambición", "presente"], "modelEn": "Paul contrasts a false zeal with a true one. The false teachers court the Galatians zealously, but not for good; they want to exclude them from true liberty so the Galatians will be zealous for them in return. Their eagerness is ambition, not love, seeking to make the Galatians dependent followers. Against this Paul shows the travail of a true pastor: my little children, for whom I labor in birth again until Christ is formed in you. He travails for them a second time, like a mother in labor, longing not that they keep a calendar but that Christ Himself be formed within them, and he is good to be zealous for them whether or not he is present.", "modelEs": "Pablo contrasta un celo falso con uno verdadero. Los falsos maestros tienen celo por los gálatas, mas no para bien; quieren apartarlos de la verdadera libertad para que los gálatas tengan celo por ellos a cambio. Su afán es ambición, no amor, buscando hacer de los gálatas seguidores dependientes. Contra esto Pablo muestra el dolor de un verdadero pastor: hijitos míos, por quienes vuelvo a sufrir dolores de parto, hasta que Cristo sea formado en vosotros. Sufre por ellos por segunda vez, como madre en parto, anhelando no que guarden un calendario sino que Cristo mismo sea formado en ellos, y es bueno tener celo por ellos esté o no presente."}, {"textEn": "27. Explain the allegory of Hagar and Sarah as the two covenants (4:21-27).", "textEs": "27. Explique la alegoría de Agar y Sara como los dos pactos (4:21-27).", "kw_en": ["abraham", "bondwoman", "freewoman", "covenants", "sinai", "jerusalem", "flesh", "promise"], "kw_es": ["abraham", "sierva", "libre", "pactos", "sinaí", "jerusalén", "carne", "promesa"], "modelEn": "Paul tells those who wish to be under the law to listen to what the law itself shows. Abraham had two sons, one by the bondwoman Hagar, born according to the flesh, and one by the freewoman Sarah, born through promise. These things are symbolic, for the two women are the two covenants. The covenant from Mount Sinai gives birth to bondage, and this is Hagar, answering to the earthly Jerusalem, which is in bondage with her children. But the Jerusalem above is free, and she is the mother of us all. So the allegory teaches that law and promise produce two different kinds of children, the slave and the free.", "modelEs": "Pablo dice a los que quieren estar bajo la ley que oigan lo que la ley misma muestra. Abraham tuvo dos hijos, uno de la sierva Agar, nacido según la carne, y uno de la libre Sara, nacido por la promesa. Estas cosas son una alegoría, porque las dos mujeres son los dos pactos. El pacto del monte Sinaí engendra para servidumbre, y esta es Agar, que corresponde a la Jerusalén terrenal, la cual está en esclavitud con sus hijos. Mas la Jerusalén de arriba es libre, y es la madre de todos nosotros. Así la alegoría enseña que la ley y la promesa producen dos clases de hijos, el esclavo y el libre."}, {"textEn": "28. What does Scripture mean by 'cast out the bondwoman' (4:28-31)?", "textEs": "28. ¿Qué significa la Escritura por 'echa fuera a la sierva' (4:28-31)?", "kw_en": ["isaac", "promise", "flesh", "bondwoman", "heir", "freewoman", "free", "children"], "kw_es": ["isaac", "promesa", "persiguen", "sierva", "heredero", "libre", "carne", "hijos"], "modelEn": "Paul applies the allegory to the Galatians: now we, brethren, as Isaac was, are children of promise, born not of the flesh and the law but of the promise of God. And just as Ishmael, born of the flesh, once mocked Isaac, born of the Spirit, so now the children of the law persecute the children of promise. But the verdict of Scripture is clear: cast out the bondwoman and her son, for the son of the bondwoman shall not be heir with the son of the freewoman. Law and grace cannot share the inheritance, so the way of works must be put out, and Paul concludes that we are not children of the bondwoman but of the free.", "modelEs": "Pablo aplica la alegoría a los gálatas: nosotros, hermanos, como Isaac, somos hijos de la promesa, nacidos no de la carne y la ley sino de la promesa de Dios. Y así como Ismael, nacido de la carne, una vez se burló de Isaac, nacido del Espíritu, así ahora los hijos de la ley persiguen a los hijos de la promesa. Mas la sentencia de la Escritura es clara: echa fuera a la sierva y a su hijo, porque no será heredero el hijo de la sierva con el hijo de la libre. La ley y la gracia no pueden compartir la herencia, así que el camino de las obras ha de ser echado fuera, y Pablo concluye que no somos hijos de la sierva sino de la libre."}, {"textEn": "29. Trace the movement from slavery to sonship that runs through Galatians 4.", "textEs": "29. Trace el movimiento de la esclavitud a la filiación que recorre Gálatas 4.", "kw_en": ["slave", "son", "heir", "spirit", "redeem", "adoption", "promise", "guardians"], "kw_es": ["siervo", "hijo", "heredero", "espíritu", "redimir", "adopción", "promesa", "tutores"], "modelEn": "Galatians 4 moves from slavery to sonship at every step. The heir as a child is no better than a slave, held under guardians, just as God's people were in bondage under the law. Then God sent forth His Son to redeem those under the law, that we might receive the adoption as sons. Because we are sons, the Spirit of His Son cries Abba, Father in our hearts, so we are no longer slaves but sons and heirs of God through Christ. The allegory of Hagar and Sarah confirms it, for we are children of promise and of the freewoman. So the whole chapter carries the believer out of slavery into the freedom of a son and heir.", "modelEs": "Gálatas 4 se mueve de la esclavitud a la filiación en cada paso. El heredero siendo niño no es mejor que un siervo, tenido bajo tutores, así como el pueblo de Dios estaba en esclavitud bajo la ley. Entonces Dios envió a su Hijo para redimir a los que estaban bajo la ley, para que recibiésemos la adopción de hijos. Por cuanto somos hijos, el Espíritu de su Hijo clama Abba, Padre en nuestros corazones, así que ya no somos siervos sino hijos y herederos de Dios por Cristo. La alegoría de Agar y Sara lo confirma, pues somos hijos de la promesa y de la libre. Así que todo el capítulo lleva al creyente de la esclavitud a la libertad de un hijo y heredero."}, {"textEn": "30. Summarize the central teaching of Unit 5 (Galatians 4:1-31).", "textEs": "30. Resuma la enseñanza central de la Unidad 5 (Gálatas 4:1-31).", "kw_en": ["son", "heir", "redeem", "adoption", "spirit", "promise", "bondwoman", "free"], "kw_es": ["hijo", "heredero", "redimir", "adopción", "espíritu", "promesa", "sierva", "libre"], "modelEn": "The central teaching of Unit 5 is that God in Christ has brought His people out of slavery and made them sons and heirs. Under the law they were like a child heir who differs nothing from a slave, but in the fullness of time God sent forth His Son, born under the law, to redeem them and to give them the adoption as sons. Because they are sons, the Spirit cries Abba, Father in their hearts, so they are heirs of God through Christ. The allegory of Hagar and Sarah seals the point: believers are children of promise, not of the bondwoman but of the free, and the way of law must be cast out so that grace alone inherits.", "modelEs": "La enseñanza central de la Unidad 5 es que Dios en Cristo ha sacado a su pueblo de la esclavitud y los ha hecho hijos y herederos. Bajo la ley eran como un niño heredero que en nada difiere del siervo, mas en el cumplimiento del tiempo Dios envió a su Hijo, hecho bajo la ley, para redimirlos y darles la adopción de hijos. Por cuanto son hijos, el Espíritu clama Abba, Padre en sus corazones, así que son herederos de Dios por Cristo. La alegoría de Agar y Sara sella el punto: los creyentes son hijos de la promesa, no de la sierva sino de la libre, y el camino de la ley ha de ser echado fuera para que la gracia sola herede."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 6 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 6 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '\u2713 Correct! ' : '\u2713 \u00a1Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `\u2717 Incorrect. Correct answer: ${correctLetter}. ` : `\u2717 Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a few sentences (about 100 characters)), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos unas cuantas oraciones (unos 100 caracteres)), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'cert';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            renderQuestions();
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        renderQuestions();
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSGalatiansReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

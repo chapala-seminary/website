@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Systematic Theology — Unit 3: The Doctrine of Christ</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 4 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Systematic Theology — Unit 3: The Doctrine of Christ (Christology)</span><span class="lang-es">📖 Teología Sistemática — Unidad 3: La Doctrina de Cristo (Cristología)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"When the fullness of the time had come, God sent forth His Son." — Galatians 4:4 (NKJV)</span><span class="lang-es">"Pero cuando vino el cumplimiento del tiempo, Dios envió a su Hijo." — Gálatas 4:4 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Systematic Theology. Please register before beginning Unit 3.</span><span class="lang-es">Bienvenido a Teología Sistemática. Por favor regístrese antes de comenzar la Unidad 3.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p>When we speak about Jesus Christ, we are speaking primarily about the historical Jesus—His person and His work. The person of Jesus concerns who He is; the work of Jesus concerns what He has done in history. Together, these form the foundation of Christology, the study of Jesus Christ.</p><p>The name of Jesus itself carries deep meaning. The word "Jesus" means "salvation," and it is related to the names Jeshua and Joshua. The title "Christ" is not merely a name but a designation meaning "Messiah" or "Anointed One." In Him, the long-awaited hope of humanity is fulfilled. What men had been searching for across generations is found in Jesus Christ.</p><div class="scripture">"When the fullness of time had come, God sent forth His Son." — Galatians 4:4</div>
+            <h3>The Fullness of Time and the Preparation for Christ</h3><p>Galatians 4:4 declares that "when the fullness of time had come, God sent forth His Son." This statement reveals that the coming of Jesus Christ was not accidental. It occurred at precisely the right moment in history according to the perfect plan of God. Everything had been prepared in advance.</p><p>The Greeks had already provided a unifying culture and a universal language. Greek was widely spoken throughout the known world, allowing the message of Christ to be communicated clearly across nations. When the gospel was later preached, it could move quickly because people already shared a common language.</p><p>The Romans contributed political stability and infrastructure. They built roads that connected cities and regions, making travel possible on an unprecedented scale. They established systems of communication and maintained a peace that allowed movement without constant threat. These conditions made it possible for the apostles and early missionaries to travel freely and spread the gospel.</p><p>The Jewish people provided the spiritual and moral preparation. They preserved the knowledge of the one true God and upheld a strict moral law. Their synagogues were scattered throughout the world, creating centers of teaching and worship. Many Gentiles were drawn to their faith and became known as "God-fearers." Though they had not fully converted, they were prepared to receive the message of Christ.</p><p>In this way, God prepared the world culturally, politically, and spiritually. When Christ came, the stage had been set. The timing was not merely appropriate—it was divinely perfect.</p>
+            <h3>The Humanity and Divinity of Christ</h3><p>When we consider the person of Jesus Christ, we encounter one of the most profound truths of the Christian faith: He is both fully human and fully divine.</p><p>As a man, Jesus experienced the full reality of human life. He bled, He wept, and He died. He grew tired and knew physical weakness. He lived within the genuine limitations of human existence. These experiences were not appearances—they were real expressions of His humanity.</p><p>Yet at the same time, Jesus is fully God. He performed miracles, demonstrating authority over nature, disease, and death. He walked upon the sea. He healed the sick and raised the dead. He exercised power that belongs to God alone.</p><p>His teaching further revealed His divine nature. He did not speak as the scribes or rabbis, relying on tradition. Instead, He spoke with direct authority. Those who heard Him recognized that His words carried a weight unlike any other teacher.</p><p>In Jesus Christ, the mind of Christ is the mind of God revealed to humanity. To see Him is to see the Father. To hear Him is to hear the voice of God. In Him, God has made Himself known in a way humanity can understand.</p><div class="scripture">"In the beginning was the Word, and the Word was with God, and the Word was God... and the Word became flesh and dwelt among us." — John 1:1,14</div>
+            <h3>The Logos: Bridging Jewish and Greek Thought</h3><p>The Christian answer to the question "Who is Jesus?" has remained consistent through the centuries: He is God who became man and lived among us. The Gospel of John expresses this clearly when it says, "The Word became flesh and dwelt among us." In that single statement, the mystery of Christ is revealed—God entering human history.</p><p>This truth was not always easy to communicate, especially across cultural boundaries. Among the Jews, it was natural to speak of Jesus as the Messiah, the Son of David, or the Son of God. These were familiar categories rooted in their Scriptures and expectations. But when the gospel moved into the Greek-speaking world, a different approach was needed.</p><p>John provides that bridge by calling Jesus "the Word of God." To the Greek mind, the concept of the "Word" (Logos) carried deep philosophical meaning. The Greeks observed order in the universe and sought to understand the principle behind it. They asked what held the stars in place, what governed the seasons, and what gave reason to humanity. Their answer was the Logos—the rational principle that ordered the cosmos.</p><p>John takes that concept and declares something revolutionary: the Logos is not an abstract principle but a person. The Word of God has become flesh. In Jesus, the rational order of the universe is revealed as personal, relational, and knowable.</p><p>This leads to a profound understanding of God. A word serves two primary functions: it communicates and it expresses thought. If Jesus is the Word of God, then God is communicating with humanity through Him. At the same time, Jesus is the expression of the very mind and nature of God. To know what God is like, one must look at Jesus. As He Himself declared, "If you have seen Me, you have seen the Father."</p><div class="scripture">"He who has seen Me has seen the Father." — John 14:9</div>
+            <h3>What Christ Reveals About God</h3><p>The coming of Jesus Christ reveals essential truths about the nature of God. First, we learn that God cares for humanity. Before Christ, many philosophies portrayed God as distant, unknowable, or indifferent. Some believed God was beyond human understanding; others thought He was unconcerned with human suffering. Still others imagined the divine as harsh, merciless, or even hostile. But in Jesus Christ, that picture is shattered. God is not distant—He is near. He enters into human experience, sharing in suffering, temptation, and sorrow. The incarnation reveals that God's love is not theoretical but personal.</p><div class="scripture">"For God so loved the world that He gave His only begotten Son." — John 3:16</div><p>Second, we learn that God works in His own time. Christ came in the "fullness of time" (Galatians 4:4). God prepared history—the Greek language, Jewish religion, and Roman roads—for this moment. Nothing is accidental in God's plan.</p><p>Third, we learn that God keeps His promises. Jesus fulfilled the specific prophecies of the Old Testament, such as being born in Bethlehem (Micah 5:2) and being born of a virgin (Isaiah 7:14). Centuries before the cross, Psalm 22 foretold the Messiah's suffering in startling detail — pierced hands and feet, lots cast for His garments, and the cry, "My God, My God, why have You forsaken Me?" — all fulfilled at Calvary. The faithfulness of God is demonstrated in the person of Christ.</p>
+            <h3>The Work of Jesus Christ</h3><p><strong>The Pre-existence and Creation:</strong> Jesus existed before His birth in Bethlehem (John 8:58). He was the Agent of Creation; all things were made through Him (John 1:3) and for Him (Colossians 1:16).</p><p><strong>The Virgin Birth:</strong> Jesus was divinely conceived by the Holy Spirit (Luke 1:35). This fulfillment of prophecy (Matthew 1:23) ensured that He was the "God-Man," not merely an ordinary human.</p><p><strong>The Temptations (The Battle in the Desert):</strong> Jesus was driven into the desert to be tested (Matthew 4:1). He used Scripture to defeat Satan. Regarding bread, He refused to abandon the spiritual for the physical, stating, "Man shall not live by bread alone" (Matthew 4:4). Regarding the pinnacle, He refused to test God's protection for personal ambition (Matthew 4:7). Regarding the kingdoms, He refused to worship Satan for instant power, declaring, "Worship the Lord your God, and serve him only" (Matthew 4:10).</p><p><strong>Sinlessness: The Real Choice:</strong> Jesus was tempted in every way, yet remained without sin (Hebrews 4:15). Scriptural evidence shows He committed no sin, and no deceit was found in His mouth (1 Peter 2:22). For His obedience to be meaningful, it had to be a choice (Hebrews 5:8). His victory over temptation makes His identification with our struggles real.</p><p><strong>The Last Adam:</strong> Paul calls Jesus "the last Adam" (1 Corinthians 15:45) and develops the parallel in Romans 5: through one man, Adam, disobedience brought death to all; through one Man, Christ, obedience brings righteousness and life to all who are in Him. Where the first Adam fell, the last Adam stood. His sinless obedience is therefore not merely personal; it reverses the ruin of the first Adam and becomes the ground of life for His people.</p>
+            <div class="illustration"><strong>💡 The Mallard Duck:</strong> Like a duck hearing the call from the sky, the believer feels an "upward" pull toward their citizenship in Heaven (Philippians 3:20).</div>
+            <h3>The Passion: Suffering and Death</h3><p><strong>The Suffering:</strong> Jesus suffered vicariously, meaning He took our place (Isaiah 53:5). He was the "Lamb of God" who takes away the sin of the world (John 1:29). On the cross, He refused the drugged wine (Mark 15:23), choosing to face the full weight of the atonement with a clear mind.</p><p><strong>The Resurrection:</strong> The Resurrection is the vindication of Christ's claims (Romans 1:4). On the first day of the week, the stone was rolled away and the tomb was empty (Luke 24:1-6). A powerful evidence for the resurrection is that even those who were antagonistic or doubtful believed when they saw the resurrected Jesus. Thomas the doubter demanded physical proof but cried out, "My Lord and my God!" when he saw Jesus (John 20:24-28). Saul of Tarsus, an active persecutor of the church, was transformed into the Apostle Paul after meeting the risen Christ on the road to Damascus (Acts 9:1-6). James, the half-brother of Jesus who did not believe in Him during His ministry (John 7:5), became a pillar of the church after a post-resurrection appearance (1 Corinthians 15:7).</p><p><strong>False Theories of the Resurrection:</strong> The Swoon Theory claims He fainted, but the spear in His side produced blood and water (John 19:34). The Spirit Theory claims only a ghost appeared, but Jesus invited them to touch His flesh and bones (Luke 24:39). The Vision Theory claims it was a hallucination, but He appeared to over 500 people at once (1 Corinthians 15:6). The Mistake Theory claims they went to the wrong tomb, but the women had carefully noted the location of the burial (Luke 23:55). The Fraud Theory claims the disciples stole the body, but frightened men do not die for a lie they know is a hoax (Matthew 28:11-15).</p>
+            <h3>The Ascension and Second Coming</h3><p><strong>Why Jesus Ascended:</strong> He ascended to speak for us as our Advocate and Intercessor at the right hand of God (Romans 8:34; Hebrews 7:25). He ascended to send the Holy Spirit, promising that it was for our good that He went away so the Counselor would come (John 16:7). He ascended to give us hope, preparing a place for us (John 14:2-3).</p><p><strong>The Second Coming (The Parousia):</strong> Jesus will return in the same way He left (Acts 1:11). This return will bring judgment to the ungodly (2 Thessalonians 2:8) and the final establishment of His kingdom (Revelation 21:1-5). The time of this arrival remains unknown to all but the Father (Matthew 24:36).</p>
+            <h3>Final Summary</h3><p>The Doctrine of Jesus Christ teaches us that God entered human history in the person of His Son. Jesus is fully God and fully man—the only qualified Mediator between God and humanity. He lived a sinless life, died a substitutionary death, rose bodily from the grave, ascended to the Father, and will return as King. Because of who He is and what He has done, salvation is available to all who believe. To know Christ is to know God. To trust Christ is to receive eternal life.</p><div class="scripture">"There is no other name under heaven given among men by which we must be saved." — Acts 4:12</div></div>
+        </div>
+
+<div class="lang-es">
+<p>Cuando hablamos de Jesucristo, hablamos principalmente del Jesús histórico—Su persona y Su obra. La persona de Jesús se refiere a quién es Él; la obra de Jesús se refiere a lo que Él ha hecho en la historia. Juntos, estos forman el fundamento de la Cristología, el estudio de Jesucristo.</p><p>El nombre de Jesús mismo tiene un significado profundo. La palabra "Jesús" significa "salvación", y está relacionada con los nombres Jeshua y Josué. El título "Cristo" no es meramente un nombre sino una designación que significa "Mesías" o "Ungido". En Él, la esperanza largamente esperada de la humanidad se cumple. Lo que los hombres habían estado buscando a través de las generaciones se encuentra en Jesucristo.</p><div class="scripture">"Pero cuando vino el cumplimiento del tiempo, Dios envió a su Hijo." — Gálatas 4:4</div>
+            <h3>El Cumplimiento del Tiempo y la Preparación para Cristo</h3><p>Gálatas 4:4 declara que "cuando vino el cumplimiento del tiempo, Dios envió a su Hijo". Esta declaración revela que la venida de Jesucristo no fue accidental. Ocurrió en el momento preciso en la historia según el plan perfecto de Dios. Todo había sido preparado de antemano.</p><p>Los griegos habían proporcionado una cultura unificadora y un lenguaje universal. El griego era ampliamente hablado en todo el mundo conocido, permitiendo que el mensaje de Cristo fuera comunicado claramente a través de las naciones.</p><p>Los romanos contribuyeron con estabilidad política e infraestructura. Construyeron caminos que conectaban ciudades y regiones, haciendo posible el viaje a una escala sin precedentes. Establecieron sistemas de comunicación y mantuvieron una paz que permitía el movimiento sin amenaza constante.</p><p>El pueblo judío proporcionó la preparación espiritual y moral. Preservaron el conocimiento del único Dios verdadero y mantuvieron una estricta ley moral. Sus sinagogas estaban esparcidas por todo el mundo, creando centros de enseñanza y adoración. Muchos gentiles fueron atraídos a su fe y se hicieron conocidos como "temerosos de Dios". Aunque no se habían convertido plenamente, estaban preparados para recibir el mensaje de Cristo.</p><p>De esta manera, Dios preparó el mundo cultural, política y espiritualmente. Cuando Cristo vino, el escenario estaba listo. El tiempo no solo fue apropiado—fue divinamente perfecto.</p>
+            <h3>La Humanidad y Divinidad de Cristo</h3><p>Cuando consideramos la persona de Jesucristo, encontramos una de las verdades más profundas de la fe cristiana: Él es tanto plenamente humano como plenamente divino.</p><p>Como hombre, Jesús experimentó la realidad completa de la vida humana. Sangró, lloró y murió. Se cansó y conoció la debilidad física. Vivió dentro de las limitaciones genuinas de la existencia humana. Estas experiencias no fueron apariencias—fueron expresiones reales de Su humanidad.</p><p>Sin embargo, al mismo tiempo, Jesús es plenamente Dios. Realizó milagros, demostrando autoridad sobre la naturaleza, la enfermedad y la muerte. Caminó sobre el mar. Sanó a los enfermos y resucitó a los muertos. Ejercitó el poder que pertenece solo a Dios.</p><p>Su enseñanza reveló aún más Su naturaleza divina. No habló como los escribas o rabinos, confiando en la tradición. En cambio, habló con autoridad directa. Los que le oyeron reconocieron que Sus palabras llevaban un peso como ningún otro maestro.</p><p>En Jesucristo, la mente de Cristo es la mente de Dios revelada a la humanidad. Verle a Él es ver al Padre. Escucharle es escuchar la voz de Dios. En Él, Dios se ha dado a conocer de una manera que la humanidad puede entender.</p><div class="scripture">"En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios... y el Verbo se hizo carne y habitó entre nosotros." — Juan 1:1,14</div>
+            <h3>El Logos: Puente entre el Pensamiento Judío y Griego</h3><p>La respuesta cristiana a la pregunta "¿Quién es Jesús?" se ha mantenido constante a través de los siglos: Él es Dios que se hizo hombre y vivió entre nosotros. El Evangelio de Juan lo expresa claramente cuando dice: "El Verbo se hizo carne y habitó entre nosotros". En esa sola declaración, el misterio de Cristo se revela: Dios entrando en la historia humana.</p><p>Esta verdad no siempre fue fácil de comunicar, especialmente a través de las fronteras culturales. Entre los judíos, era natural hablar de Jesús como el Mesías, el Hijo de David o el Hijo de Dios. Estas eran categorías familiares arraigadas en sus Escrituras y expectativas. Pero cuando el evangelio se movió hacia el mundo de habla griega, se necesitó un enfoque diferente.</p><p>Juan proporciona ese puente al llamar a Jesús "la Palabra de Dios". Para la mente griega, el concepto de la "Palabra" (Logos) tenía un profundo significado filosófico. Los griegos observaban el orden en el universo y buscaban entender el principio detrás de él. Preguntaban qué sostenía las estrellas en su lugar, qué gobernaba las estaciones y qué daba razón a la humanidad. Su respuesta era el Logos—el principio racional que ordenaba el cosmos.</p><p>Juan toma ese concepto y declara algo revolucionario: el Logos no es un principio abstracto sino una persona. La Palabra de Dios se ha hecho carne. En Jesús, el orden racional del universo se revela como personal, relacional y cognoscible.</p><p>Esto lleva a una comprensión profunda de Dios. Una palabra sirve para dos funciones primarias: comunica y expresa pensamiento. Si Jesús es la Palabra de Dios, entonces Dios se está comunicando con la humanidad a través de Él. Al mismo tiempo, Jesús es la expresión de la mente y naturaleza misma de Dios. Para saber cómo es Dios, uno debe mirar a Jesús. Como Él mismo declaró: "Si me habéis visto a mí, habéis visto al Padre".</p><div class="scripture">"El que me ha visto a mí, ha visto al Padre." — Juan 14:9</div>
+            <h3>Lo que Cristo Revela Acerca de Dios</h3><p>La venida de Jesucristo revela verdades esenciales sobre la naturaleza de Dios. Primero, aprendemos que Dios se preocupa por la humanidad. Antes de Cristo, muchas filosofías retrataban a Dios como distante, incognoscible o indiferente. Algunos creían que Dios estaba más allá de la comprensión humana; otros pensaban que no le importaba el sufrimiento humano. Otros imaginaban lo divino como severo, despiadado o incluso hostil. Pero en Jesucristo, esa imagen se rompe. Dios no está distante—está cerca. Entra en la experiencia humana, compartiendo el sufrimiento, la tentación y el dolor. La encarnación revela que el amor de Dios no es teórico sino personal.</p><div class="scripture">"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito." — Juan 3:16</div><p>Segundo, aprendemos que Dios obra en Su propio tiempo. Cristo vino en el "cumplimiento del tiempo" (Gálatas 4:4). Dios preparó la historia—el idioma griego, la religión judía y los caminos romanos—para este momento. Nada es accidental en el plan de Dios.</p><p>Tercero, aprendemos que Dios cumple Sus promesas. Jesús cumplió las profecías específicas del Antiguo Testamento, como nacer en Belén (Miqueas 5:2) y nacer de una virgen (Isaías 7:14). Siglos antes de la cruz, el Salmo 22 describió el sufrimiento del Mesías con detalle asombroso — las manos y los pies horadados, el echar suertes sobre Sus vestiduras, y el clamor de abandono: "Dios mío, Dios mío, ¿por qué me has desamparado?" — todo lo cual se cumplió en el Calvario. La fidelidad de Dios se demuestra en la persona de Cristo.</p>
+            <h3>La Obra de Jesucristo</h3><p><strong>La Pre-existencia y Creación:</strong> Jesús existió antes de Su nacimiento en Belén (Juan 8:58). Él fue el Agente de la Creación; todas las cosas fueron hechas por medio de Él (Juan 1:3) y para Él (Colosenses 1:16).</p><p><strong>El Nacimiento Virginal:</strong> Jesús fue concebido divinamente por el Espíritu Santo (Lucas 1:35). Este cumplimiento de la profecía (Mateo 1:23) aseguró que Él era el "Dios-Hombre", no meramente un humano ordinario.</p><p><strong>Las Tentaciones (La Batalla en el Desierto):</strong> Jesús fue llevado al desierto para ser probado (Mateo 4:1). Usó las Escrituras para derrotar a Satanás. En cuanto al pan, se negó a abandonar lo espiritual por lo físico, declarando: "No solo de pan vivirá el hombre" (Mateo 4:4). En cuanto al pináculo, se negó a poner a prueba la protección de Dios por ambición personal (Mateo 4:7). En cuanto a los reinos, se negó a adorar a Satanás por poder instantáneo, declarando: "Al Señor tu Dios adorarás, y a él solo servirás" (Mateo 4:10).</p><p><strong>Impecabilidad: La Elección Real:</strong> Jesús fue tentado en todo, pero permaneció sin pecado (Hebreos 4:15). La evidencia bíblica muestra que no cometió pecado, ni se halló engaño en Su boca (1 Pedro 2:22). Para que Su obediencia fuera significativa, tuvo que ser una elección (Hebreos 5:8). Su victoria sobre la tentación hace real Su identificación con nuestras luchas.</p><p><strong>El Postrer Adán:</strong> La Escritura pone a Jesús en contraste deliberado con el primer hombre. Pablo lo llama "el postrer Adán" (1 Corintios 15:45) y desarrolla el paralelo en Romanos 5: por un hombre, Adán, entró la desobediencia en el mundo y trajo muerte a todos; por un Hombre, Cristo, la obediencia trae justicia y vida a todos los que están en Él. Donde el primer Adán fue probado en un jardín de abundancia y cayó, el postrer Adán fue probado en un desierto estéril y se mantuvo firme. Su obediencia sin pecado no es, por tanto, meramente un logro personal; revierte la ruina del primer Adán y se convierte en el fundamento de vida para Su pueblo.</p>
+            <div class="illustration"><strong>💡 El Ánade Real:</strong> Como un pato que escucha el llamado del cielo, el creyente siente un tirón "hacia arriba" hacia su ciudadanía en el Cielo (Filipenses 3:20).</div>
+            <h3>La Pasión: Sufrimiento y Muerte</h3><p><strong>El Sufrimiento:</strong> Jesús sufrió vicariamente, es decir, tomó nuestro lugar (Isaías 53:5). Él fue el "Cordero de Dios" que quita el pecado del mundo (Juan 1:29). En la cruz, se negó a tomar el vino drogado (Marcos 15:23), eligiendo enfrentar todo el peso de la expiación con una mente clara.</p><p><strong>La Resurrección:</strong> La Resurrección es la vindicación de las afirmaciones de Cristo (Romanos 1:4). En el primer día de la semana, la piedra fue removida y el sepulcro estaba vacío (Lucas 24:1-6). Una evidencia poderosa de la resurrección es que incluso aquellos que eran antagonistas o dudosos creyeron cuando vieron a Jesús resucitado. Tomás el dudoso exigió prueba física pero exclamó: "¡Señor mío y Dios mío!" cuando vio a Jesús (Juan 20:24-28). Saulo de Tarso, un perseguidor activo de la iglesia, fue transformado en el apóstol Pablo después de encontrarse con Cristo resucitado en el camino a Damasco (Hechos 9:1-6). Jacobo, el medio hermano de Jesús que no creyó en Él durante Su ministerio (Juan 7:5), se convirtió en un pilar de la iglesia después de una aparición post-resurrección (1 Corintios 15:7).</p><p><strong>Falsas Teorías de la Resurrección:</strong> La Teoría del Desmayo afirma que se desmayó, pero la lanza en Su costado produjo sangre y agua (Juan 19:34). La Teoría del Espíritu afirma que solo apareció un fantasma, pero Jesús los invitó a tocar Su carne y huesos (Lucas 24:39). La Teoría de la Visión afirma que fue una alucinación, pero apareció a más de 500 personas a la vez (1 Corintios 15:6). La Teoría del Error afirma que fueron al sepulcro equivocado, pero las mujeres habían notado cuidadosamente la ubicación del entierro (Lucas 23:55). La Teoría del Fraude afirma que los discípulos robaron el cuerpo, pero los hombres asustados no mueren por una mentira que saben que es un engaño (Mateo 28:11-15).</p>
+            <h3>La Ascensión y Segunda Venida</h3><p><strong>Por qué Ascendió Jesús:</strong> Ascendió para hablar por nosotros como nuestro Abogado e Intercesor a la diestra de Dios (Romanos 8:34; Hebreos 7:25). Ascendió para enviar el Espíritu Santo, prometiendo que era para nuestro bien que Él se fuera para que viniera el Consolador (Juan 16:7). Ascendió para darnos esperanza, preparando un lugar para nosotros (Juan 14:2-3).</p><p><strong>La Segunda Venida (La Parusía):</strong> Jesús regresará de la misma manera que se fue (Hechos 1:11). Este regreso traerá juicio a los impíos (2 Tesalonicenses 2:8) y el establecimiento final de Su reino (Apocalipsis 21:1-5). El tiempo de esta llegada permanece desconocido para todos excepto el Padre (Mateo 24:36).</p>
+            <h3>Resumen Final</h3><p>La Doctrina de Jesucristo nos enseña que Dios entró en la historia humana en la persona de Su Hijo. Jesús es plenamente Dios y plenamente hombre—el único Mediador calificado entre Dios y la humanidad. Vivió una vida sin pecado, murió una muerte sustitutiva, resucitó corporalmente de la tumba, ascendió al Padre y volverá como Rey. Por quién es Él y lo que ha hecho, la salvación está disponible para todos los que creen. Conocer a Cristo es conocer a Dios. Confiar en Cristo es recibir vida eterna.</p><div class="scripture">"No hay otro nombre bajo el cielo dado a los hombres en que podamos ser salvos." — Hechos 4:12</div>
+        </div>
+</div>
+
+
+<figure class="cts-figure" style="margin:30px auto;max-width:950px;text-align:center;">
+<svg style="width:100%;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 830" role="img" aria-label="The Threefold Office of Christ">
+<defs><radialGradient id="vig" cx="50%" cy="42%" r="78%"><stop offset="0%" stop-color="#f3ead0"/><stop offset="100%" stop-color="#efe4c4"/></radialGradient></defs>
+<rect width="1120" height="830" fill="#f3ead0"/><rect width="1120" height="830" fill="url(#vig)"/><rect x="14" y="14" width="1092" height="802" fill="none" stroke="#b08a2e" stroke-width="6"/><rect x="26" y="26" width="1068" height="778" fill="none" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="560.0" y="76" font-size="30" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.3">The Threefold Office of Christ  /  El Triple Oficio de Cristo</text>
+<text x="560.0" y="106" font-size="14.5" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Prophet, Priest, and King — the Anointed One  ·  Profeta, Sacerdote y Rey — el Ungido</text>
+<line x1="560.0" y1="452" x2="560.0" y2="224" stroke="#b08a2e" stroke-width="6"/>
+<line x1="560.0" y1="452" x2="300" y2="598" stroke="#b08a2e" stroke-width="6"/>
+<line x1="560.0" y1="452" x2="820" y2="598" stroke="#b08a2e" stroke-width="6"/>
+<circle cx="560.0" cy="452" r="82" fill="#ecd9a0" stroke="#7c2a2f" stroke-width="3"/>
+<text x="560.0" y="440" font-size="24" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Christ</text>
+<text x="560.0" y="462" font-size="15" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Cristo</text>
+<text x="560.0" y="482" font-size="10.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">the Anointed One</text>
+<rect x="400.0" y="148.0" width="320" height="152" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="2"/>
+<path d="M400.0,160.0 a12,12 0 0 1 12,-12 h296 a12,12 0 0 1 12,12 v30 h-320 Z" fill="#3a5a8c"/>
+<text x="560.0" y="169.0" font-size="17" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="1">PROPHET</text>
+<text x="560.0" y="185.0" font-size="12" fill="#f3ead0" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">PROFETA</text>
+<text x="560.0" y="208.0" font-size="12.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Speaks God's word to men</text>
+<text x="560.0" y="224.0" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Habla la palabra de Dios a los hombres</text>
+<text x="560.0" y="245.0" font-size="11" fill="#3a5a8c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">God → man  ·  Dios → hombre</text>
+<text x="560.0" y="264.0" font-size="11.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Hebrews 1:1–2</text>
+<line x1="430.0" y1="273.0" x2="690.0" y2="273.0" stroke="#b08a2e" stroke-width="0.8" opacity="0.6"/>
+<text x="560.0" y="286.0" font-size="11" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Meets our ignorance</text>
+<text x="560.0" y="298.0" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Atiende nuestra ignorancia</text>
+<rect x="140.0" y="522.0" width="320" height="152" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="2"/>
+<path d="M140.0,534.0 a12,12 0 0 1 12,-12 h296 a12,12 0 0 1 12,12 v30 h-320 Z" fill="#7c2a2f"/>
+<text x="300" y="543.0" font-size="17" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="1">PRIEST</text>
+<text x="300" y="559.0" font-size="12" fill="#f3ead0" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">SACERDOTE</text>
+<text x="300" y="582.0" font-size="12.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Brings man's needs before God</text>
+<text x="300" y="598.0" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Presenta ante Dios las necesidades del hombre</text>
+<text x="300" y="619.0" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">man → God  ·  hombre → Dios</text>
+<text x="300" y="638.0" font-size="11.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Hebrews 4:14–16</text>
+<line x1="170.0" y1="647.0" x2="430.0" y2="647.0" stroke="#b08a2e" stroke-width="0.8" opacity="0.6"/>
+<text x="300" y="660.0" font-size="11" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Meets our guilt</text>
+<text x="300" y="672.0" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Atiende nuestra culpa</text>
+<rect x="660.0" y="522.0" width="320" height="152" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="2"/>
+<path d="M660.0,534.0 a12,12 0 0 1 12,-12 h296 a12,12 0 0 1 12,12 v30 h-320 Z" fill="#1f7a6b"/>
+<text x="820" y="543.0" font-size="17" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="1">KING</text>
+<text x="820" y="559.0" font-size="12" fill="#f3ead0" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">REY</text>
+<text x="820" y="582.0" font-size="12.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Rules and reigns over all</text>
+<text x="820" y="598.0" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Gobierna y reina sobre todo</text>
+<text x="820" y="619.0" font-size="11" fill="#1f7a6b" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">over all  ·  sobre todo</text>
+<text x="820" y="638.0" font-size="11.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Matthew 28:18</text>
+<line x1="690.0" y1="647.0" x2="950.0" y2="647.0" stroke="#b08a2e" stroke-width="0.8" opacity="0.6"/>
+<text x="820" y="660.0" font-size="11" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Meets our bondage</text>
+<text x="820" y="672.0" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Atiende nuestra esclavitud</text>
+<rect x="80" y="724" width="960" height="58" rx="10" ry="10" fill="#ecd9a0" stroke="#8a661c" stroke-width="1.3"/>
+<text x="560.0" y="746" font-size="12.3" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">In Israel, prophets, priests, and kings were anointed with oil. Jesus is the Christ — the Anointed One —</text>
+<text x="560.0" y="763" font-size="11.5" fill="#7c2a2f" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">who holds all three offices perfectly.  ·  Jesús es el Cristo, el Ungido, que posee los tres oficios perfectamente.</text>
+</svg>
+<figcaption style="font-family:Georgia,serif;font-size:0.9em;line-height:1.5;margin-top:10px;color:#561c20;"><span style="font-weight:bold;">The threefold office of Christ — Prophet, Priest, and King.</span><br><span style="font-style:italic;color:#8a661c;">El triple oficio de Cristo — Profeta, Sacerdote y Rey.</span></figcaption>
+</figure>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 3 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 3 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Systematic Theology — Unit 3 (Christology) — built on validated engine
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 3;
+const COURSE = 'st';
+const NEXT_UNIT_URL = 'CTSSTUnit4.html';
+const totalUnits = 13;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - The Doctrine of Revelation",
+    "Unit 2 - The Doctrine of God",
+    "Unit 3 - The Doctrine of Christ",
+    "Unit 4 - The Holy Spirit",
+    "Unit 5 - The Doctrine of Man",
+    "Unit 6 - Sin",
+    "Unit 7 - Salvation",
+    "Unit 8 - The Church",
+    "Unit 9 - Denominations and the Gospel",
+    "Unit 10 - Last Things",
+    "Unit 11 - Apologetics",
+    "Unit 12 - The Kingdom of God",
+    "Unit 13 - Church, State, and Nationalism"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSSTUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// MC answer key: A=B=C=D=5; all 20 verified against Psalm 1
+const mcQuestions = [
+    { textEn: "1. What does the name 'Jesus' mean?", textEs: "1. ¿Qué significa el nombre 'Jesús'?",
+      optionsEn: ["Messiah", "Salvation", "Son of God", "Anointed One"],
+      optionsEs: ["Mesías", "Salvación", "Hijo de Dios", "Ungido"], explanationEn: "The name 'Jesus' means salvation (Matthew 1:21).", explanationEs: "El nombre 'Jesús' significa salvación (Mateo 1:21).", correct: 1 },
+    { textEn: "2. What does the title 'Christ' mean?", textEs: "2. ¿Qué significa el título 'Cristo'?",
+      optionsEn: ["Son of God", "Lord", "Savior", "Messiah/Anointed One"],
+      optionsEs: ["Hijo de Dios", "Señor", "Salvador", "Mesías/Ungido"], explanationEn: "Christ means Messiah or Anointed One.", explanationEs: "Cristo significa Mesías o Ungido.", correct: 3 },
+    { textEn: "3. What does Galatians 4:4 teach about the timing of Christ's coming?", textEs: "3. ¿Qué enseña Gálatas 4:4 sobre el momento de la venida de Cristo?",
+      optionsEn: ["Jesus came at the wrong time", "Jesus came at the fullness of time", "The time doesn't matter", "Jesus came too early"],
+      optionsEs: ["Jesús vino en el momento equivocado", "Jesús vino en el cumplimiento del tiempo", "El momento no importa", "Jesús vino demasiado temprano"], explanationEn: "'When the fullness of time had come, God sent forth His Son.'", explanationEs: "'Cuando vino el cumplimiento del tiempo, Dios envió a su Hijo.'", correct: 1 },
+    { textEn: "4. What did the Greeks contribute to the preparation for Christ?", textEs: "4. ¿Qué contribuyeron los griegos a la preparación para Cristo?",
+      optionsEn: ["A universal language", "Moral law", "Roads", "Political stability"],
+      optionsEs: ["Un lenguaje universal", "Ley moral", "Caminos", "Estabilidad política"], explanationEn: "The Greeks provided a universal language (Greek).", explanationEs: "Los griegos proporcionaron un lenguaje universal (griego).", correct: 0 },
+    { textEn: "5. What did the Romans contribute?", textEs: "5. ¿Qué contribuyeron los romanos?",
+      optionsEn: ["Prophecy", "A universal language", "Political stability and roads", "Moral law"],
+      optionsEs: ["Profecía", "Un lenguaje universal", "Estabilidad política y caminos", "Ley moral"], explanationEn: "The Romans provided political stability and roads.", explanationEs: "Los romanos proporcionaron estabilidad política y caminos.", correct: 2 },
+    { textEn: "6. What did the Jewish people contribute?", textEs: "6. ¿Qué contribuyó el pueblo judío?",
+      optionsEn: ["Spiritual and moral preparation", "Political stability", "A universal language", "Roads"],
+      optionsEs: ["Preparación espiritual y moral", "Estabilidad política", "Un lenguaje universal", "Caminos"], explanationEn: "The Jewish people provided spiritual and moral preparation.", explanationEs: "El pueblo judío proporcionó preparación espiritual y moral.", correct: 0 },
+    { textEn: "7. Jesus is both:", textEs: "7. Jesús es a la vez:",
+      optionsEn: ["Only divine", "Fully human and fully divine", "An angel", "Only human"],
+      optionsEs: ["Solo divino", "Plenamente humano y plenamente divino", "Un ángel", "Solo humano"], explanationEn: "Jesus is both fully human and fully divine (the Hypostatic Union).", explanationEs: "Jesús es tanto plenamente humano como plenamente divino (la Unión Hipostática).", correct: 1 },
+    { textEn: "8. What does John 14:9 teach?", textEs: "8. ¿Qué enseña Juan 14:9?",
+      optionsEn: ["The Father is hidden", "Jesus is not God", "No one can see God", "He who has seen Jesus has seen the Father"],
+      optionsEs: ["El Padre está escondido", "Jesús no es Dios", "Nadie puede ver a Dios", "El que ha visto a Jesús ha visto al Padre"], explanationEn: "Jesus said, 'He who has seen Me has seen the Father.'", explanationEs: "Jesús dijo: 'El que me ha visto a mí, ha visto al Padre.'", correct: 3 },
+    { textEn: "9. What is the Logos?", textEs: "9. ¿Qué es el Logos?",
+      optionsEn: ["The rational principle that orders the universe, revealed as a person", "A philosophical school", "A Roman emperor", "A Greek god"],
+      optionsEs: ["El principio racional que ordena el universo, revelado como persona", "Una escuela filosófica", "Un emperador romano", "Un dios griego"], explanationEn: "The Logos is the rational principle, now revealed as a person in Christ.", explanationEs: "El Logos es el principio racional, ahora revelado como persona en Cristo.", correct: 0 },
+    { textEn: "10. Jesus was tempted:", textEs: "10. Jesús fue tentado:",
+      optionsEn: ["Never", "Only once", "In every way as we are, yet without sin", "Only by Satan"],
+      optionsEs: ["Nunca", "Solo una vez", "En todo como nosotros, pero sin pecado", "Solo por Satanás"], explanationEn: "Hebrews 4:15 says He was tempted in every way as we are, yet without sin.", explanationEs: "Hebreos 4:15 dice que fue tentado en todo como nosotros, pero sin pecado.", correct: 2 },
+    { textEn: "11. The Hypostatic Union means:", textEs: "11. La Unión Hipostática significa:",
+      optionsEn: ["Jesus only appeared human", "Two natures (divine and human) in one Person", "Jesus gave up His divinity", "Jesus was only divine"],
+      optionsEs: ["Jesús solo parecía humano", "Dos naturalezas (divina y humana) en una Persona", "Jesús renunció a Su divinidad", "Jesús era solo divino"], explanationEn: "The Hypostatic Union is the union of two natures in one Person.", explanationEs: "La Unión Hipostática es la unión de dos naturalezas en una Persona.", correct: 1 },
+    { textEn: "12. Jesus was born of:", textEs: "12. Jesús nació de:",
+      optionsEn: ["Joseph only", "A virgin", "Ordinary parents", "Unknown parents"],
+      optionsEs: ["Solo José", "Una virgen", "Padres ordinarios", "Padres desconocidos"], explanationEn: "Jesus was born of the virgin Mary (Isaiah 7:14, Matthew 1:23).", explanationEs: "Jesús nació de la virgen María (Isaías 7:14, Mateo 1:23).", correct: 1 },
+    { textEn: "13. What weapon did Jesus use against Satan in the desert?", textEs: "13. ¿Qué arma usó Jesús contra Satanás en el desierto?",
+      optionsEn: ["Scripture", "Arguments", "Physical force", "Angelic armies"],
+      optionsEs: ["La Escritura", "Argumentos", "Fuerza física", "Ejércitos angelicales"], explanationEn: "Jesus used Scripture to defeat Satan.", explanationEs: "Jesús usó la Escritura para derrotar a Satanás.", correct: 0 },
+    { textEn: "14. The Resurrection proves:", textEs: "14. La Resurrección prueba:",
+      optionsEn: ["The disciples were mistaken", "Jesus' body was stolen", "Jesus was a good teacher", "Jesus' claims are vindicated"],
+      optionsEs: ["Los discípulos estaban equivocados", "El cuerpo de Jesús fue robado", "Jesús era un buen maestro", "Las afirmaciones de Jesús son vindicadas"], explanationEn: "The Resurrection vindicates Jesus' claims about Himself.", explanationEs: "La Resurrección vindica las afirmaciones de Jesús sobre Sí mismo.", correct: 3 },
+    { textEn: "15. Who doubted until he saw Jesus' wounds?", textEs: "15. ¿Quién dudó hasta que vio las heridas de Jesús?",
+      optionsEn: ["Thomas", "John", "Peter", "James"],
+      optionsEs: ["Tomás", "Juan", "Pedro", "Jacobo"], explanationEn: "Thomas doubted until he saw the wounds (John 20:24-28).", explanationEs: "Tomás dudó hasta que vio las heridas (Juan 20:24-28).", correct: 0 },
+    { textEn: "16. Who persecuted the church then became the Apostle Paul?", textEs: "16. ¿Quién persiguió a la iglesia y luego se convirtió en el apóstol Pablo?",
+      optionsEn: ["James", "John", "Saul of Tarsus", "Peter"],
+      optionsEs: ["Jacobo", "Juan", "Saulo de Tarso", "Pedro"], explanationEn: "Saul of Tarsus was converted on the road to Damascus.", explanationEs: "Saulo de Tarso se convirtió en el camino a Damasco.", correct: 2 },
+    { textEn: "17. Why did Jesus ascend to heaven?", textEs: "17. ¿Por qué ascendió Jesús al cielo?",
+      optionsEn: ["To end His work", "To hide from the world", "To abandon His disciples", "To speak for us as Advocate and to send the Holy Spirit"],
+      optionsEs: ["Para terminar Su obra", "Para esconderse del mundo", "Para abandonar a Sus discípulos", "Para hablar por nosotros como Abogado y enviar el Espíritu Santo"], explanationEn: "Jesus ascended to intercede for us and send the Holy Spirit.", explanationEs: "Jesús ascendió para interceder por nosotros y enviar el Espíritu Santo.", correct: 3 },
+    { textEn: "18. What is the Parousia?", textEs: "18. ¿Qué es la Parusía?",
+      optionsEn: ["The Resurrection", "The Ascension", "The Virgin Birth", "The Second Coming"],
+      optionsEs: ["La Resurrección", "La Ascensión", "El Nacimiento Virginal", "La Segunda Venida"], explanationEn: "Parousia refers to the Second Coming of Christ.", explanationEs: "Parusía se refiere a la Segunda Venida de Cristo.", correct: 3 },
+    { textEn: "19. When will Jesus return?", textEs: "19. ¿Cuándo regresará Jesús?",
+      optionsEn: ["Tomorrow", "In 1000 years", "No one knows the day or hour", "Never"],
+      optionsEs: ["Mañana", "En 1000 años", "Nadie sabe el día ni la hora", "Nunca"], explanationEn: "Matthew 24:36 says no one knows the day or hour.", explanationEs: "Mateo 24:36 dice que nadie sabe el día ni la hora.", correct: 2 },
+    { textEn: "20. What should be the believer's response to Christ?", textEs: "20. ¿Cuál debe ser la respuesta del creyente a Cristo?",
+      optionsEn: ["Fear only", "Indifference", "Faith, obedience, and hope", "Skepticism"],
+      optionsEs: ["Solo miedo", "Indiferencia", "Fe, obediencia y esperanza", "Escepticismo"], explanationEn: "The proper response is faith, obedience, and hope.", explanationEs: "La respuesta apropiada es fe, obediencia y esperanza.", correct: 2 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "21. Trace the development of Christology from Old Testament prophecy (such as Isaiah 53 and Psalm 22) to New Testament fulfillment. How do these prophecies authenticate Jesus as the promised Messiah?",
+      textEs: "21. Trace el desarrollo de la Cristología desde la profecía del Antiguo Testamento (como Isaías 53 y el Salmo 22) hasta el cumplimiento del Nuevo Testamento. ¿Cómo autentican estas profecías a Jesús como el Mesías prometido?",
+      kw_en: ["prophecy", "Isaiah", "Psalm 22", "fulfilled", "Messiah", "pierced", "forsaken", "faithful"],
+      kw_es: ["profecía", "Isaías", "Salmo 22", "cumplió", "Mesías", "horadados", "desamparado", "fiel"],
+      modelEn: "The unit teaches that God keeps His promises, and Jesus is the proof: He fulfilled specific Old Testament prophecies no one could arrange for himself. Isaiah 53 had described the suffering servant who was pierced for our transgressions, and Psalm 22 foretold the Messiah's suffering in startling detail centuries before the cross, naming pierced hands and feet, the casting of lots for His garments, and the cry, \"My God, My God, why have You forsaken Me?\" All of these were fulfilled at Calvary. Together with prophecies like Bethlehem (Micah 5:2) and the virgin birth (Isaiah 7:14), this thread runs from promise to fulfillment in one person. Because the predictions were made long before and met precisely in Christ, they authenticate Him as the long-awaited Messiah rather than an ordinary claimant.",
+      modelEs: "La unidad enseña que Dios cumple Sus promesas, y Jesús es la prueba: cumplió profecías específicas del Antiguo Testamento que nadie podría arreglar por sí mismo. Isaías 53 había descrito al siervo sufriente que fue herido por nuestras rebeliones, y el Salmo 22 predijo el sufrimiento del Mesías con detalle asombroso siglos antes de la cruz, nombrando las manos y los pies horadados, el echar suertes sobre Sus vestiduras, y el clamor: \"Dios mío, Dios mío, ¿por qué me has desamparado?\" Todo esto se cumplió en el Calvario. Junto con profecías como Belén (Miqueas 5:2) y el nacimiento virginal (Isaías 7:14), este hilo corre desde la promesa hasta el cumplimiento en una sola persona. Como las predicciones se hicieron mucho antes y se cumplieron con precisión en Cristo, lo autentican como el Mesías largamente esperado y no como un pretendiente cualquiera." },
+
+    { textEn: "22. Explain the theological significance of the \"fullness of time\" (Galatians 4:4). How were the Roman Empire, the Greek language, and the Jewish religion suited for the spread of the gospel?",
+      textEs: "22. Explique el significado teológico del \"cumplimiento del tiempo\" (Gálatas 4:4). ¿Cómo el Imperio Romano, el idioma griego y la religión judía fueron adecuados para la difusión del evangelio?",
+      kw_en: ["fullness", "time", "Greek", "language", "Roman", "roads", "Jewish", "prepared"],
+      kw_es: ["cumplimiento", "tiempo", "griego", "idioma", "romanos", "caminos", "judío", "preparó"],
+      modelEn: "\"When the fullness of time had come, God sent forth His Son\" means the coming of Christ was not accidental but happened at exactly the right moment in God's perfect plan. The Greeks had given the world a unifying culture and a common language, so the message of Christ could be communicated clearly across nations. The Romans had built roads and maintained a peace that let the apostles travel freely and spread the gospel on an unprecedented scale. The Jewish people had preserved the knowledge of the one true God, upheld a strict moral law, and planted synagogues throughout the world, drawing in God-fearers who were prepared to receive Christ. Culturally, politically, and spiritually the stage was set, so the timing was not merely appropriate but divinely perfect.",
+      modelEs: "\"Cuando vino el cumplimiento del tiempo, Dios envió a su Hijo\" significa que la venida de Cristo no fue accidental sino que ocurrió en el momento exacto en el plan perfecto de Dios. Los griegos habían dado al mundo una cultura unificadora y un idioma común, de modo que el mensaje de Cristo pudo comunicarse claramente a través de las naciones. Los romanos habían construido caminos y mantenido una paz que permitió a los apóstoles viajar libremente y difundir el evangelio a una escala sin precedentes. El pueblo judío había preservado el conocimiento del único Dios verdadero, mantenido una estricta ley moral y plantado sinagogas por todo el mundo, atrayendo a temerosos de Dios preparados para recibir a Cristo. Cultural, política y espiritualmente el escenario estaba listo, así que el tiempo no solo fue apropiado sino divinamente perfecto." },
+
+    { textEn: "23. Why is the virgin birth essential for the doctrine of Christ's deity and sinlessness? What would be lost if it were denied?",
+      textEs: "23. ¿Por qué el nacimiento virginal es esencial para la doctrina de la deidad y la impecabilidad de Cristo? ¿Qué se perdería si se negara?",
+      kw_en: ["virgin", "conceived", "Holy Spirit", "God-Man", "prophecy", "divine", "ordinary", "deity"],
+      kw_es: ["virgen", "concebido", "Espíritu Santo", "Dios-Hombre", "profecía", "divino", "ordinario", "deidad"],
+      modelEn: "The unit teaches that Jesus was divinely conceived by the Holy Spirit (Luke 1:35), fulfilling the prophecy of Matthew 1:23. This is what ensured He was the \"God-Man\" and not merely an ordinary human being. The virgin birth matters because it marks the entrance of God Himself into human history through a real birth, joining full deity to full humanity in one person. If the virgin birth were denied, Jesus would be reduced to an ordinary man with an ordinary origin, and the basis for confessing Him as fully God entering the world would be lost. It also stands as one of the fulfilled prophecies that authenticate Him as the promised Messiah, so denying it would unravel both His deity and the trustworthiness of God's promises.",
+      modelEs: "La unidad enseña que Jesús fue concebido divinamente por el Espíritu Santo (Lucas 1:35), cumpliendo la profecía de Mateo 1:23. Esto es lo que aseguró que Él fuera el \"Dios-Hombre\" y no meramente un ser humano ordinario. El nacimiento virginal importa porque marca la entrada de Dios mismo en la historia humana mediante un nacimiento real, uniendo la plena deidad con la plena humanidad en una sola persona. Si se negara el nacimiento virginal, Jesús quedaría reducido a un hombre ordinario con un origen ordinario, y se perdería el fundamento para confesarlo como plenamente Dios entrando en el mundo. También se mantiene como una de las profecías cumplidas que lo autentican como el Mesías prometido, así que negarlo desharía tanto Su deidad como la confiabilidad de las promesas de Dios." },
+
+    { textEn: "24. Compare the three temptations of Jesus in the wilderness (Matthew 4:1-11). What do they reveal about temptation and the proper use of Scripture?",
+      textEs: "24. Compare las tres tentaciones de Jesús en el desierto (Mateo 4:1-11). ¿Qué revelan sobre la tentación y el uso correcto de las Escrituras?",
+      kw_en: ["temptation", "Scripture", "bread", "spiritual", "test", "worship", "Satan", "defeated"],
+      kw_es: ["tentación", "Escritura", "pan", "espiritual", "probar", "adorar", "Satanás", "derrotó"],
+      modelEn: "In the wilderness Jesus was tested and used Scripture to defeat Satan in each case. With the temptation to turn stones to bread, He refused to abandon the spiritual for the physical, saying, \"Man shall not live by bread alone.\" At the pinnacle of the temple, He refused to test God's protection for the sake of personal ambition, citing that we are not to put God to the test. Offered the kingdoms of the world, He refused to worship Satan for instant power, declaring, \"Worship the Lord your God, and serve Him only.\" Together they reveal that temptation attacks through legitimate needs, presumption, and shortcuts to glory, and that the proper response in every case is the rightly applied word of God rather than human reasoning.",
+      modelEs: "En el desierto Jesús fue probado y usó las Escrituras para derrotar a Satanás en cada caso. Ante la tentación de convertir las piedras en pan, se negó a abandonar lo espiritual por lo físico, diciendo: \"No solo de pan vivirá el hombre.\" En el pináculo del templo, se negó a poner a prueba la protección de Dios por ambición personal, citando que no debemos tentar a Dios. Ofrecidos los reinos del mundo, se negó a adorar a Satanás por poder instantáneo, declarando: \"Al Señor tu Dios adorarás, y a Él solo servirás.\" Juntas revelan que la tentación ataca a través de necesidades legítimas, la presunción y los atajos hacia la gloria, y que la respuesta correcta en cada caso es la palabra de Dios bien aplicada y no el razonamiento humano." },
+
+    { textEn: "25. Evaluate the five false theories of the resurrection (Swoon, Spirit, Vision, Mistake, Fraud). Why does each fail to account for the evidence?",
+      textEs: "25. Evalúe las cinco falsas teorías de la resurrección (Desmayo, Espíritu, Visión, Error, Fraude). ¿Por qué cada una no explica la evidencia?",
+      kw_en: ["swoon", "spirit", "vision", "mistake", "fraud", "blood", "touch", "500"],
+      kw_es: ["desmayo", "espíritu", "visión", "error", "fraude", "sangre", "tocar", "500"],
+      modelEn: "The unit answers each false theory with a specific fact. The Swoon Theory says Jesus only fainted, but the spear in His side produced blood and water, proving He was dead (John 19:34). The Spirit Theory says only a ghost appeared, but Jesus invited the disciples to touch His flesh and bones (Luke 24:39). The Vision Theory says it was a hallucination, but He appeared to more than five hundred people at once (1 Corinthians 15:6), and crowds do not share one hallucination. The Mistake Theory says they went to the wrong tomb, but the women had carefully noted the burial location (Luke 23:55). The Fraud Theory says the disciples stole the body, but frightened men do not die for a lie they know is a hoax. Each theory collapses under the historical evidence the resurrection actually left behind.",
+      modelEs: "La unidad responde a cada falsa teoría con un hecho específico. La Teoría del Desmayo dice que Jesús solo se desmayó, pero la lanza en Su costado produjo sangre y agua, probando que estaba muerto (Juan 19:34). La Teoría del Espíritu dice que solo apareció un fantasma, pero Jesús invitó a los discípulos a tocar Su carne y huesos (Lucas 24:39). La Teoría de la Visión dice que fue una alucinación, pero apareció a más de quinientas personas a la vez (1 Corintios 15:6), y las multitudes no comparten una sola alucinación. La Teoría del Error dice que fueron al sepulcro equivocado, pero las mujeres habían notado cuidadosamente el lugar del entierro (Lucas 23:55). La Teoría del Fraude dice que los discípulos robaron el cuerpo, pero los hombres asustados no mueren por una mentira que saben que es un engaño. Cada teoría se derrumba ante la evidencia histórica que la resurrección realmente dejó." },
+
+    { textEn: "26. Why is the conversion of Saul of Tarsus (Paul) a particularly compelling evidence for the resurrection?",
+      textEs: "26. ¿Por qué la conversión de Saulo de Tarso (Pablo) es una evidencia particularmente convincente de la resurrección?",
+      kw_en: ["Saul", "persecutor", "transformed", "Damascus", "risen", "hostile", "Paul", "convinced"],
+      kw_es: ["Saulo", "perseguidor", "transformado", "Damasco", "resucitado", "hostil", "Pablo", "convencido"],
+      modelEn: "The unit points out that some of the strongest evidence for the resurrection comes from people who were antagonistic or doubtful and yet believed once they saw the risen Jesus. Saul of Tarsus is the clearest case: he was an active persecutor of the church, not a sympathetic follower hoping Jesus was alive. After meeting the risen Christ on the road to Damascus he was completely transformed into the Apostle Paul (Acts 9:1-6). His change is compelling precisely because he had every reason to oppose the message and nothing earthly to gain by embracing it. A hostile enemy does not reverse his entire life over a rumor; the most natural explanation for so total a transformation is that he genuinely encountered the living Christ.",
+      modelEs: "La unidad señala que parte de la evidencia más fuerte de la resurrección proviene de personas que eran antagonistas o dudosas y que sin embargo creyeron una vez que vieron a Jesús resucitado. Saulo de Tarso es el caso más claro: era un perseguidor activo de la iglesia, no un seguidor compasivo que esperaba que Jesús estuviera vivo. Después de encontrarse con Cristo resucitado en el camino a Damasco quedó completamente transformado en el apóstol Pablo (Hechos 9:1-6). Su cambio es convincente precisamente porque tenía toda razón para oponerse al mensaje y nada terrenal que ganar al abrazarlo. Un enemigo hostil no revierte toda su vida por un rumor; la explicación más natural de una transformación tan total es que genuinamente se encontró con el Cristo vivo." },
+
+    { textEn: "27. Explain the significance of Jesus as the \"last Adam\" (1 Corinthians 15:45). How does His obedience reverse the disobedience of the first Adam?",
+      textEs: "27. Explique el significado de Jesús como el \"postrer Adán\" (1 Corintios 15:45). ¿Cómo Su obediencia revierte la desobediencia del primer Adán?",
+      kw_en: ["last Adam", "first", "obedience", "disobedience", "death", "life", "Romans 5", "reverses"],
+      kw_es: ["postrer Adán", "primer", "obediencia", "desobediencia", "muerte", "vida", "Romanos 5", "revierte"],
+      modelEn: "The unit teaches that Scripture sets Jesus in deliberate contrast with the first man. Paul calls Him \"the last Adam\" (1 Corinthians 15:45) and develops the parallel in Romans 5: through one man, Adam, disobedience brought death to all, while through one Man, Christ, obedience brings righteousness and life to all who are in Him. Where the first Adam fell, the last Adam stood. This is why His sinless obedience is not merely a personal achievement but the reversal of the ruin Adam began. The first Adam's failure spread death across the human race; the last Adam's perfect obedience becomes the ground of life for His people, so that what was lost in the first head of humanity is recovered in the second.",
+      modelEs: "La unidad enseña que la Escritura pone a Jesús en contraste deliberado con el primer hombre. Pablo lo llama \"el postrer Adán\" (1 Corintios 15:45) y desarrolla el paralelo en Romanos 5: por un hombre, Adán, la desobediencia trajo muerte a todos, mientras que por un Hombre, Cristo, la obediencia trae justicia y vida a todos los que están en Él. Donde el primer Adán cayó, el postrer Adán se mantuvo firme. Por eso Su obediencia sin pecado no es meramente un logro personal sino la reversión de la ruina que Adán comenzó. El fracaso del primer Adán extendió la muerte por toda la raza humana; la obediencia perfecta del postrer Adán se convierte en el fundamento de vida para Su pueblo, de modo que lo que se perdió en la primera cabeza de la humanidad se recupera en la segunda." },
+
+    { textEn: "28. Why did Jesus need to be fully human as well as fully divine? What would be lost if He were only one or the other?",
+      textEs: "28. ¿Por qué Jesús necesitaba ser plenamente humano además de plenamente divino? ¿Qué se perdería si fuera solo uno u otro?",
+      kw_en: ["human", "divine", "Mediator", "died", "miracles", "authority", "reveal", "Father"],
+      kw_es: ["humano", "divino", "Mediador", "murió", "milagros", "autoridad", "revelar", "Padre"],
+      modelEn: "The unit teaches that Jesus is both fully human and fully divine, and that He is the only qualified Mediator between God and humanity. As a man He truly bled, wept, died, grew tired, and lived within real human limits, so His suffering and death on our behalf were genuine. As God He performed miracles, exercised authority over nature, disease, and death, and taught with a direct authority no mere rabbi possessed, so that to see Him is to see the Father. If He were only divine, He could not truly take our place or share our weakness; if He were only human, He could not exercise divine power or reveal God to us. Both natures are required for Him to be the Mediator who joins God and humanity in one person.",
+      modelEs: "La unidad enseña que Jesús es tanto plenamente humano como plenamente divino, y que es el único Mediador calificado entre Dios y la humanidad. Como hombre verdaderamente sangró, lloró, murió, se cansó y vivió dentro de límites humanos reales, de modo que Su sufrimiento y muerte por nosotros fueron genuinos. Como Dios realizó milagros, ejerció autoridad sobre la naturaleza, la enfermedad y la muerte, y enseñó con una autoridad directa que ningún simple rabino poseía, de modo que verle a Él es ver al Padre. Si fuera solo divino, no podría tomar verdaderamente nuestro lugar ni compartir nuestra debilidad; si fuera solo humano, no podría ejercer poder divino ni revelarnos a Dios. Ambas naturalezas son necesarias para que Él sea el Mediador que une a Dios y a la humanidad en una sola persona." },
+
+    { textEn: "29. Why was it necessary for Jesus to ascend rather than remain on earth? What does His place at the right hand of the Father accomplish?",
+      textEs: "29. ¿Por qué fue necesario que Jesús ascendiera en vez de permanecer en la tierra? ¿Qué logra Su lugar a la diestra del Padre?",
+      kw_en: ["ascended", "advocate", "intercessor", "Spirit", "Counselor", "hope", "prepare", "right hand"],
+      kw_es: ["ascendió", "abogado", "intercesor", "Espíritu", "Consolador", "esperanza", "preparar", "diestra"],
+      modelEn: "The unit gives three reasons Jesus ascended. First, He ascended to speak for us as our Advocate and Intercessor at the right hand of God (Romans 8:34; Hebrews 7:25), so that we have someone representing us before the Father. Second, He ascended in order to send the Holy Spirit, having promised that it was for our good that He went away so the Counselor would come (John 16:7). Third, He ascended to give us hope by preparing a place for us (John 14:2-3). So His departure was not a loss but a gain: had He stayed on earth He would be confined to one location, but seated at the Father's right hand He intercedes for all His people and pours out the Spirit on the whole church. His ascension secures both our present help and our future hope.",
+      modelEs: "La unidad da tres razones por las que Jesús ascendió. Primero, ascendió para hablar por nosotros como nuestro Abogado e Intercesor a la diestra de Dios (Romanos 8:34; Hebreos 7:25), de modo que tenemos a alguien que nos representa ante el Padre. Segundo, ascendió para enviar el Espíritu Santo, habiendo prometido que era para nuestro bien que Él se fuera para que viniera el Consolador (Juan 16:7). Tercero, ascendió para darnos esperanza preparando un lugar para nosotros (Juan 14:2-3). Así que Su partida no fue una pérdida sino una ganancia: si se hubiera quedado en la tierra estaría confinado a un solo lugar, pero sentado a la diestra del Padre intercede por todo Su pueblo y derrama el Espíritu sobre toda la iglesia. Su ascensión asegura tanto nuestra ayuda presente como nuestra esperanza futura." },
+
+    { textEn: "30. Summarize the main point of Unit 3. Why is Christology central to the Christian faith?",
+      textEs: "30. Resuma el punto principal de la Unidad 3. ¿Por qué la Cristología es central para la fe cristiana?",
+      kw_en: ["God", "man", "Mediator", "sinless", "died", "rose", "salvation", "know"],
+      kw_es: ["Dios", "hombre", "Mediador", "sin pecado", "murió", "resucitó", "salvación", "conocer"],
+      modelEn: "The unit's main point is that God entered human history in the person of His Son, who is fully God and fully man and therefore the only qualified Mediator between God and humanity. Jesus lived a sinless life, died a substitutionary death in our place, rose bodily from the grave, ascended to the Father, and will return as King. Christology is central to the Christian faith because everything depends on who He is and what He has done: there is no other name under heaven by which we must be saved. To know Christ is to know God, since to see Him is to see the Father, and to trust Christ is to receive eternal life. So the doctrine of Christ is not one topic among many but the very center on which salvation rests.",
+      modelEs: "El punto principal de la unidad es que Dios entró en la historia humana en la persona de Su Hijo, quien es plenamente Dios y plenamente hombre y por tanto el único Mediador calificado entre Dios y la humanidad. Jesús vivió una vida sin pecado, murió una muerte sustitutiva en nuestro lugar, resucitó corporalmente de la tumba, ascendió al Padre y volverá como Rey. La Cristología es central para la fe cristiana porque todo depende de quién es Él y de lo que ha hecho: no hay otro nombre bajo el cielo en que debamos ser salvos. Conocer a Cristo es conocer a Dios, pues verle a Él es ver al Padre, y confiar en Cristo es recibir vida eterna. Así que la doctrina de Cristo no es un tema entre muchos sino el centro mismo sobre el cual descansa la salvación." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 4 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 4 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSSTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

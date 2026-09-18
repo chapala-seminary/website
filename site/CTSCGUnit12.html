@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Church Growth — Unit 12: Retention: Closing the Back Door</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Certificate →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📈 Church Growth — Unit 12: Retention: Closing the Back Door</span><span class="lang-es">📈 Crecimiento de la Iglesia — Unidad 12: Retención: Cerrando la Puerta de Atrás</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Of those whom You gave Me I have lost none." — John 18:9 (NKJV)</span><span class="lang-es">"De los que me diste, no perdi ninguno." — Juan 18:9 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Church Growth course. Please register before beginning Unit 12.</span><span class="lang-es">Bienvenido al curso Crecimiento de la Iglesia. Por favor registrese antes de comenzar la Unidad 12.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<p>By and large I have found it easier to <em>retain</em> members than
+to win new ones. I once knew a church that poured enormous effort into
+growth; over the years they recorded a long string of baptisms — and
+their attendance stayed about the same. Year after year they filled the
+front door and never noticed the open one in the back. That is the
+picture to keep before you in this final unit: it does no good to pour
+water into a bucket that leaks. The work of growth is only half done at
+the front door. The other half is closing the back.</p>
+<p><strong>When people drop out.</strong> People are most likely to slip
+away at four predictable seasons, and a wise church watches for
+them:</p>
+<ol type="1">
+<li>In the <em>teen years,</em> roughly fifteen to twenty-three — by far
+the highest dropout window. Most teenage dropouts do return later in
+life, especially in their late twenties and thirties, and the return is
+highest among those for whom faith was real in childhood. But the leak
+is real, and it is large.</li>
+<li>In the <em>first two years in a new community</em> — when the old
+ties are cut and the new ones not yet formed.</li>
+<li>In the <em>first years after the youngest child leaves home</em> —
+when the family reason for attending walks out the door.</li>
+<li><em>Just after a divorce</em> — when life fractures and the church
+too often feels like one more place of judgment.</li>
+</ol>
+<p><strong>Why people leave.</strong> Pastors like to believe the only
+reason for attending is devotion to Christ — but the truth is more human
+than that, and the repair of broken relationships must become a high
+priority for any church serious about retention. People leave when they
+<em>move;</em> when <em>health</em> fails in later years; when the
+church comes to feel <em>irrelevant;</em> when there is
+<em>conflict</em> with the pastor or other members; when <em>work
+schedules</em> or <em>transportation</em> or sheer <em>busyness</em>
+crowd the church out; when the <em>preaching and teaching</em> go dull —
+for if the sheep are not fed, they stop coming to the trough; and when
+<em>marriages</em> are strained, since the lower the marital
+satisfaction, the lower the church commitment tends to run. Mark
+especially the matter of conflict: in one study of dropouts, nearly a
+quarter had suffered some anxiety-provoking event, and <em>not one of
+them</em> was visited after they fell away. People give a church only a
+few weeks — six to eight — to notice they are gone. If no one reaches
+out in that window, they quietly reinvest their lives elsewhere.</p>
+<p><strong>Why people stay — and three ratios to build on.</strong>
+People remain where they are <em>known</em> and <em>needed.</em> Family
+and long membership ties hold them; so does genuine assimilation, which
+in close-knit settings happens naturally but in our mobile world must be
+<em>planned.</em> Three measurable ratios tell you whether the planning
+is working:</p>
+<ul>
+<li><strong>The friendship ratio, 7 to 1.</strong> A new member needs to
+make at least <em>seven</em> new friends in the church within his first
+six months. More is better; seven is the floor. Make fewer, and he will
+drift back to his old friends and his old life. People do not leave
+churches; they leave when they have no one in them.</li>
+<li><strong>The role-and-task ratio, 60 to 100.</strong> For every
+hundred members there should be at least <em>sixty</em> meaningful roles
+and tasks — teacher, officer, committee member, singer, servant. New
+members especially need a real job, not busywork, so they can see where
+they fit and matter. A member with a task is a member with a reason to
+stay.</li>
+<li><strong>The group ratio, 7 to 100.</strong> For every hundred
+members there should be at least <em>seven</em> groups. Groups create
+belonging, and they quietly drive the other two ratios — for it is in
+the group that friendships form and tasks are found.</li>
+</ul>
+<p>Get those three right and you have not merely retained members; you
+have woven them so thoroughly into the body that there is no loose
+thread to pull.</p>
+<h2 id="where-we-are-now-2026">Where We Are Now (2026)</h2>
+<p>Read this chapter today and it reads like prophecy. You wrote about
+the open back door of a single congregation; in the decades since, that
+back door has become the largest religious migration in the history of
+this country. The Great Dechurching we surveyed at the very beginning of
+this course — some forty million who once attended and no longer do — is
+nothing other than this unit’s problem written across a continent. And
+the cause the research now names is exactly the cause named here: most
+did not leave in a doctrinal crisis or a loss of faith. They
+<em>drifted</em> — they moved, life changed, a season ended — and no one
+reached for them in the six-to-eight-week window before they were gone.
+The four dropout seasons and the “nobody visited them” finding turn out
+to be the anatomy of the whole national exodus.</p>
+<p>The years have added one trigger that could not have been foreseen in
+full, and it must be named. Beyond moving and busyness and dull
+preaching, a great many have been driven out by <em>wounding</em> — by
+conflict, yes, but also by the failures and scandals of leaders and by
+churches that proved unsafe. Some have walked through the long
+reexamination of faith now called deconstruction. The pastoral task this
+unit identified — <em>the repair of broken relationships</em> — is
+therefore larger and more urgent than ever, and it now includes humility
+about the church’s own sins and a door held genuinely open to those the
+church itself has hurt.</p>
+<p>But here is the hope, and it is the right note to end the whole
+course on. That same back door swings <em>both ways.</em> The great
+company who left did not, for the most part, slam the door behind them —
+about half of them say they would consider coming back, and they are
+waiting, very often, for nothing more than an honest invitation and a
+real friend. Which means the three ratios are not merely a way to
+<em>keep</em> the people you have; they are now the strategy to <em>win
+back</em> the people you lost. The friend a returning believer needs is
+the seven-to-one friendship ratio. The place to belong is the
+seven-groups-per-hundred. The reason to stay is the role that says
+<em>you are needed here.</em> And the relentless contact we learned in
+the Sunday School unit — keep the name on the roll, reach for every soul
+— is simply the open back door watched from the inside.</p>
+<p>So we end where the whole course has pointed. We have spoken of
+gathering, of forming, of keeping — front door, formation, back door.
+But all of it comes down to people, known and reached and loved into a
+body, and held there not by programs but by belonging. <em>I will build
+my church,</em> the Lord said, and the gates of hell shall not prevail
+against it. Our part is small and our part is glorious: to swing wide
+the front door, to form disciples within, and to stand at the back door
+with a hand outstretched — so that of all the Father gives us, by His
+grace, we lose none. The harvest is His. The growth is His. We are only,
+and gladly, the laborers in His field.</p>
+
+</div>
+<div class="lang-es">
+
+<p>En general he hallado más fácil <em>retener</em> miembros que ganar nuevos. Una vez conocí una iglesia que volcó un esfuerzo enorme en el crecimiento; con los años registró una larga serie de bautismos — y su asistencia se mantuvo más o menos igual. Año tras año llenaban la puerta de entrada y nunca notaban la abierta en la parte de atrás. Esa es la imagen que hay que tener delante en esta unidad final: de nada sirve verter agua en un balde que gotea. La obra del crecimiento está solo a medio hacer en la puerta de entrada. La otra mitad es cerrar la de atrás.</p>
+
+<p><strong>Cuando la gente deserta.</strong> La gente tiende más a deslizarse en cuatro temporadas predecibles, y una iglesia sabia las vigila:</p>
+<ol>
+<li>En los <em>años de la adolescencia,</em> más o menos de quince a veintitrés — por mucho la ventana de deserción más alta. La mayoría de los desertores adolescentes sí regresan más tarde en la vida, especialmente al final de sus veinte y en sus treinta, y el regreso es más alto entre aquellos para quienes la fe fue real en la niñez. Pero la fuga es real, y es grande.</li>
+<li>En los <em>primeros dos años en una nueva comunidad</em> — cuando los viejos lazos se cortan y los nuevos aún no se forman.</li>
+<li>En los <em>primeros años después de que el hijo menor deja el hogar</em> — cuando la razón familiar para asistir sale por la puerta.</li>
+<li><em>Justo después de un divorcio</em> — cuando la vida se quiebra y la iglesia con demasiada frecuencia se siente como un lugar más de juicio.</li>
+</ol>
+
+<p><strong>Por qué la gente se va.</strong> A los pastores les gusta creer que la única razón para asistir es la devoción a Cristo — pero la verdad es más humana que eso, y la reparación de relaciones rotas debe volverse una alta prioridad para toda iglesia seria en cuanto a la retención. La gente se va cuando se <em>muda;</em> cuando la <em>salud</em> falla en los años posteriores; cuando la iglesia llega a sentirse <em>irrelevante;</em> cuando hay <em>conflicto</em> con el pastor u otros miembros; cuando los <em>horarios de trabajo</em> o el <em>transporte</em> o el puro <em>ajetreo</em> desplazan a la iglesia; cuando la <em>predicación y la enseñanza</em> se vuelven aburridas — pues si las ovejas no son alimentadas, dejan de venir al comedero; y cuando los <em>matrimonios</em> están tensos, ya que cuanto más baja la satisfacción marital, más bajo tiende a correr el compromiso con la iglesia. Note especialmente el asunto del conflicto: en un estudio de desertores, casi una cuarta parte había sufrido algún evento que provoca ansiedad, y <em>ni uno solo de ellos</em> fue visitado después de apartarse. La gente da a una iglesia solo unas pocas semanas — seis a ocho — para notar que se han ido. Si nadie los alcanza en esa ventana, calladamente reinvierten su vida en otra parte.</p>
+
+<p><strong>Por qué la gente se queda — y tres proporciones sobre las cuales edificar.</strong> La gente permanece donde es <em>conocida</em> y <em>necesitada.</em> Los lazos de familia y de larga membresía la sostienen; también lo hace la asimilación genuina, que en entornos muy unidos ocurre con naturalidad pero en nuestro mundo móvil debe ser <em>planeada.</em> Tres proporciones medibles le dicen si la planeación está funcionando:</p>
+<ul>
+<li><strong>La proporción de amistad, 7 a 1.</strong> Un nuevo miembro necesita hacer al menos <em>siete</em> nuevos amigos en la iglesia dentro de sus primeros seis meses. Más es mejor; siete es el piso. Si hace menos, se alejará de vuelta a sus viejos amigos y su vieja vida. La gente no deja iglesias; se va cuando no tiene a nadie en ellas.</li>
+<li><strong>La proporción de papeles y tareas, 60 por 100.</strong> Por cada cien miembros debería haber al menos <em>sesenta</em> papeles y tareas significativos — maestro, oficial, miembro de comité, cantante, servidor. Los nuevos miembros especialmente necesitan un trabajo real, no ocupaciones vacías, para que puedan ver donde encajan e importan. Un miembro con una tarea es un miembro con una razón para quedarse.</li>
+<li><strong>La proporción de grupos, 7 por 100.</strong> Por cada cien miembros debería haber al menos <em>siete</em> grupos. Los grupos crean pertenencia, y calladamente impulsan las otras dos proporciones — pues es en el grupo donde se forman las amistades y se hallan las tareas.</li>
+</ul>
+
+<p>Acierte en esas tres y no habrá meramente retenido miembros; los habrá entretejido tan a fondo en el cuerpo que no queda hilo suelto que jalar.</p>
+
+<h2>Dónde Estamos Ahora (2026)</h2>
+
+<p>Lea este capítulo hoy y se lee como profecía. Usted escribió sobre la puerta de atrás abierta de una sola congregación; en las décadas desde entonces, esa puerta de atrás se ha vuelto la migración religiosa más grande en la historia de este país. El Gran Abandono que examinamos al mismo principio de este curso — unos cuarenta millones que antes asistían y ya no — no es otra cosa que el problema de esta unidad escrito a lo ancho de un continente. Y la causa que la investigación ahora nombra es exactamente la causa nombrada aquí: la mayoría no se fue en una crisis doctrinal ni en una pérdida de fe. Se <em>alejaron</em> — se mudaron, la vida cambió, una temporada terminó — y nadie los alcanzó en la ventana de seis a ocho semanas antes de que se fueran. Las cuatro temporadas de deserción y el hallazgo de "nadie los visito" resultan ser la anatomía de todo el éxodo nacional.</p>
+
+<p>Los años han añadido un detonante que no pudo preverse del todo, y debe nombrarse. Más allá de la mudanza y el ajetreo y la predicación aburrida, una gran cantidad ha sido expulsada por <em>heridas</em> — por conflicto, sí, pero también por las fallas y los escándalos de líderes y por iglesias que probaron ser inseguras. Algunos han pasado por el largo reexamen de la fe ahora llamado deconstrucción. La tarea pastoral que esta unidad identificó — <em>la reparación de relaciones rotas</em> — es por tanto más grande y más urgente que nunca, y ahora incluye humildad acerca de los propios pecados de la iglesia y una puerta sostenida genuinamente abierta a aquellos que la iglesia misma ha herido.</p>
+
+<p>Pero aquí está la esperanza, y es la nota correcta para terminar todo el curso. Esa misma puerta de atrás se abre en <em>ambos sentidos.</em> La gran compañía que se fue no, en su mayor parte, dio un portazo al salir — cerca de la mitad de ellos dice que consideraría volver, y esperan, muy a menudo, nada más que una invitación honesta y un amigo real. Lo cual significa que las tres proporciones no son meramente una manera de <em>conservar</em> a la gente que tiene; son ahora la estrategia para <em>recuperar</em> a la gente que perdió. El amigo que un creyente que regresa necesita es la proporción de amistad de siete a uno. El lugar para pertenecer es el de siete grupos por cien. La razón para quedarse es el papel que dice <em>se te necesita aquí.</em> Y el contacto incansable que aprendimos en la unidad de la Escuela Dominical — conserve el nombre en la lista, alcance a cada alma — es sencillamente la puerta de atrás vigilada desde adentro.</p>
+
+<p>Así que terminamos donde todo el curso ha apuntado. Hemos hablado de reunir, de formar, de conservar — puerta de entrada, formación, puerta de atrás. Pero todo se reduce a personas, conocidas y alcanzadas y amadas hasta entrar en un cuerpo, y sostenidas allí no por programas sino por la pertenencia. <em>Edificaré mi iglesia,</em> dijo el Señor, y las puertas del infierno no prevalecerán contra ella. Nuestra parte es pequeña y nuestra parte es gloriosa: abrir de par en par la puerta de entrada, formar discípulos dentro, y pararnos en la puerta de atrás con la mano extendida — para que de todo lo que el Padre nos da, por Su gracia, no perdamos a ninguno. La mies es Suya. El crecimiento es Suyo. Somos solo, y con gozo, los obreros en Su campo.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 12 Final Exam — 30 Questions</span><span class="lang-es">Examen Final — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>Fail the multiple-choice (1–20) and it locks for 2 minutes; fail the master's-level short answer (21–30) and it locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba la opción múltiple (1–20), se bloquea por 2 minutos; si reprueba la respuesta corta de nivel de maestría (21–30), se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Joshua — Unit 1 (retrofit to CTS pattern, 2026-05-16)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 12;
+const COURSE = 'cg';
+const NEXT_UNIT_URL = 'CTSCGCertificate.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 — Introduction",
+    "Unit 2 — Biblical Background",
+    "Unit 3 — Terms and History",
+    "Unit 4 — Principles",
+    "Unit 5 — Change and the Generations",
+    "Unit 6 — Diagnosing Your Church",
+    "Unit 7 — Pastoral Leadership",
+    "Unit 8 — Worship",
+    "Unit 9 — Digital and Online Ministry",
+    "Unit 10 — Sunday School and Small Groups",
+    "Unit 11 — Discipleship",
+    "Unit 12 — Retention"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCGUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// L3 semantic audit: all 20 verified against options and Joshua 1
+const mcQuestions = [
+    { textEn: "1. This unit argues it is easier to:", textEs: "1. Esta unidad argumenta que es más fácil:",
+      optionsEn: ["win than to keep", "keep a member than to win a new one", "do neither", "ignore both"],
+      optionsEs: ["ganar que conservar", "conservar a un miembro que ganar uno nuevo", "ninguna de las dos", "ignorar ambas"], correct: 1 },
+    { textEn: "2. A church that wins members but loses them out the back is compared to:", textEs: "2. Una iglesia que gana miembros pero los pierde por atrás se compara con:",
+      optionsEn: ["a full barn", "a strong tower", "a bucket that leaks", "a deep well"],
+      optionsEs: ["un granero lleno", "una torre fuerte", "un balde que gotea", "un pozo profundo"], correct: 2 },
+    { textEn: "3. The dropout season with the highest risk is:", textEs: "3. La temporada de deserción de mayor riesgo es:",
+      optionsEn: ["old age", "infancy", "middle age", "the teen years and young adulthood, about 15 to 23"],
+      optionsEs: ["la vejez", "la infancia", "la edad madura", "la adolescencia y la juventud, cerca de 15 a 23"], correct: 3 },
+    { textEn: "4. Another high-risk season for dropping out is:", textEs: "4. Otra temporada de alto riesgo para desertar es:",
+      optionsEn: ["the first two years in a new community", "a new hobby", "a long vacation", "a raise at work"],
+      optionsEs: ["los primeros dos años en una nueva comunidad", "un nuevo pasatiempo", "unas vacaciones largas", "un aumento en el trabajo"], correct: 0 },
+    { textEn: "5. A further dropout season named is:", textEs: "5. Otra temporada de deserción nombrada es:",
+      optionsEn: ["a holiday", "a birthday", "a promotion", "after the youngest child leaves home"],
+      optionsEs: ["un día festivo", "un cumpleanos", "un ascenso", "después de que el hijo menor deja el hogar"], correct: 3 },
+    { textEn: "6. The unit also flags the months:", textEs: "6. La unidad también señala los meses:",
+      optionsEn: ["before a wedding", "after a graduation", "just after a divorce", "before retirement"],
+      optionsEs: ["antes de una boda", "después de una graduación", "justo después de un divorcio", "antes de la jubilación"], correct: 2 },
+    { textEn: "7. Many who eventually drop out were, in their first weeks, never:", textEs: "7. Muchos de los que finalmente desertan, en sus primeras semanas, nunca fueron:",
+      optionsEn: ["given a job", "visited or connected", "charged dues", "put on stage"],
+      optionsEs: ["dados un trabajo", "visitados o conectados", "cobrados cuotas", "puestos en el escenario"], correct: 1 },
+    { textEn: "8. The critical assimilation window is roughly the first:", textEs: "8. La ventana crítica de asimilación es aproximadamente las primeras:",
+      optionsEn: ["six to eight weeks", "five years", "one year", "ten years"],
+      optionsEs: ["seis a ocho semanas", "cinco años", "un año", "diez años"], correct: 0 },
+    { textEn: "9. The 'friendship ratio' says a new member needs, within six months, about:", textEs: "9. La 'proporción de amistad' dice que un nuevo miembro necesita, en seis meses, cerca de:",
+      optionsEn: ["no friends", "one friend", "seven friends in the church", "twenty friends"],
+      optionsEs: ["ningún amigo", "un amigo", "siete amigos en la iglesia", "veinte amigos"], correct: 2 },
+    { textEn: "10. The 'role/task ratio' suggests roughly how many roles per 100 members?", textEs: "10. La 'proporción de tareas' sugiere aproximadamente cuántas tareas por cada 100 miembros?",
+      optionsEn: ["60", "10", "5", "200"],
+      optionsEs: ["60", "10", "5", "200"], correct: 0 },
+    { textEn: "11. The 'group ratio' suggests about how many groups per 100 members?", textEs: "11. La 'proporción de grupos' sugiere cerca de cuántos grupos por cada 100 miembros?",
+      optionsEn: ["1", "3", "20", "7"],
+      optionsEs: ["1", "3", "20", "7"], correct: 3 },
+    { textEn: "12. A member with friends, a task, and a group is:", textEs: "12. Un miembro con amigos, una tarea y un grupo está:",
+      optionsEn: ["likely to leave", "very likely to stay", "unimportant", "hard to assimilate"],
+      optionsEs: ["propenso a irse", "muy propenso a quedarse", "sin importancia", "difícil de asimilar"], correct: 1 },
+    { textEn: "13. The 'back door' of the church, in our day, is essentially:", textEs: "13. La 'puerta de atrás' de la iglesia, en nuestros días, es esencialmente:",
+      optionsEn: ["a building feature", "a minor issue", "the whole national dechurching", "closed"],
+      optionsEs: ["un detalle del edificio", "un asunto menor", "todo el abandono nacional de la iglesia", "cerrada"], correct: 2 },
+    { textEn: "14. Most people who leave today go out, this unit says, by:", textEs: "14. La mayoría de los que se van hoy salen, dice esta unidad, por:",
+      optionsEn: ["a doctrinal dispute", "drifting rather than a crisis of doctrine", "a formal letter", "persecution"],
+      optionsEs: ["una disputa doctrinal", "alejarse en vez de una crisis de doctrina", "una carta formal", "la persecución"], correct: 1 },
+    { textEn: "15. Newer causes of leaving the unit adds include wounding, scandal, and:", textEs: "15. Las causas más nuevas de partida que la unidad añade incluyen heridas, escándalo y:",
+      optionsEn: ["deconstruction", "taxes", "weather", "traffic"],
+      optionsEs: ["la deconstrucción", "los impuestos", "el clima", "el trafico"], correct: 0 },
+    { textEn: "16. The hopeful truth about the back door is that it:", textEs: "16. La verdad esperanzadora sobre la puerta de atrás es que:",
+      optionsEn: ["is permanently shut", "only swings out", "traps people", "swings both ways"],
+      optionsEs: ["esta cerrada para siempre", "solo se abre hacia afuera", "atrapa a la gente", "se abre en ambos sentidos"], correct: 3 },
+    { textEn: "17. About what fraction of those who left would consider returning?", textEs: "17. ¿Qué fracción de los que se fueron consideraría regresar?",
+      optionsEn: ["none", "about half", "a tenth", "all"],
+      optionsEs: ["ninguno", "cerca de la mitad", "una decima parte", "todos"], correct: 1 },
+    { textEn: "18. The three ratios (friends, roles, groups) are best understood as a:", textEs: "18. Las tres proporciones (amigos, tareas, grupos) se entienden mejor como una:",
+      optionsEn: ["fundraising plan", "building program", "re-churching strategy", "advertising campaign"],
+      optionsEs: ["plan de recaudación", "programa de construcción", "estrategia de volver a la iglesia", "campana publicitaria"], correct: 2 },
+    { textEn: "19. To close the back door, the first weeks should be spent:", textEs: "19. Para cerrar la puerta de atrás, las primeras semanas deben pasarse:",
+      optionsEn: ["collecting dues", "redecorating", "doing nothing", "weaving the newcomer into friendships, tasks, and a group"],
+      optionsEs: ["cobrando cuotas", "redecorando", "sin hacer nada", "entretejiendo al recién llegado en amistades, tareas y un grupo"], correct: 3 },
+    { textEn: "20. The unit ends on Christ's promise that of those given to Him He will:", textEs: "20. La unidad termina con la promesa de Cristo de que de los que le fueron dados Él:",
+      optionsEn: ["lose none", "lose most", "lose many", "lose half"],
+      optionsEs: ["no pierde a ninguno", "pierde la mayoría", "pierde a muchos", "pierde la mitad"], correct: 0 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "Explain why retention matters as much as evangelism, using the leaking-bucket image.",
+      textEs: "Explique por qué la retención importa tanto como el evangelismo, usando la imagen del balde que gotea.",
+      kw_en: ["retain", "keep", "win", "bucket", "leak", "back", "door", "member"],
+      kw_es: ["reten", "conserv", "gan", "balde", "gote", "atras", "puerta", "miembr"],
+      modelEn: "It is easier to keep a member than to win a new one, so retention matters as much as evangelism. A church that pours new members in the front while they leak out the back is a bucket with a hole; it can run the evangelism faucet at full force and the water level never rises. Closing the back door is as urgent as opening the front.",
+      modelEs: "Es más fácil conservar a un miembro que ganar uno nuevo, así que la retención importa tanto como el evangelismo. Una iglesia que vierte nuevos miembros por el frente mientras gotean por atrás es un balde con un agujero; puede abrir el grifo del evangelismo a toda fuerza y el nivel del agua nunca sube. Cerrar la puerta de atrás es tan urgente como abrir la del frente." },
+    { textEn: "Name and explain the high-risk 'dropout seasons' when people are most likely to leave a church.",
+      textEs: "Nombre y explique las 'temporadas de deserción' de alto riesgo cuando la gente tiende más a dejar una iglesia.",
+      kw_en: ["dropout", "teen", "season", "community", "divorce", "child", "risk", "transition"],
+      kw_es: ["desercion", "adolescen", "temporad", "comunidad", "divorcio", "hijo", "riesgo", "transic"],
+      modelEn: "People leave most in predictable seasons: the teen years and young adulthood, the highest-risk span; the first two years in a new community before roots form; the stretch after the youngest child leaves home and the family's reason for attending seems to go; and the months just after a divorce. Each is a season of transition, exactly when the church must hold on tightest.",
+      modelEs: "La gente se va más en temporadas predecibles: la adolescencia y la juventud, el tramo de mayor riesgo; los primeros dos años en una nueva comunidad antes de echar raíces; el periodo después de que el hijo menor deja el hogar y la razón de la familia para asistir parece irse; y los meses justo después de un divorcio. Cada una es una temporada de transición, justo cuando la iglesia debe sostener con más fuerza." },
+    { textEn: "Explain the critical first-weeks window. Why are the first six to eight weeks decisive for whether a newcomer stays?",
+      textEs: "Explique la ventana crítica de las primeras semanas. Por qué son decisivas las primeras seis a ocho semanas para que un recién llegado se quede?",
+      kw_en: ["week", "window", "visit", "connect", "first", "assimil", "new", "contact"],
+      kw_es: ["seman", "ventana", "visit", "conect", "primer", "asimil", "nuev", "contact"],
+      modelEn: "The first six to eight weeks are the decisive window; most who eventually drop out were never visited or connected in those first weeks. A newcomer who is welcomed, contacted, and folded in quickly forms the bonds that hold; one left alone quietly concludes he was not missed and slips away. Assimilation that does not happen early usually does not happen at all.",
+      modelEs: "Las primeras seis a ocho semanas son la ventana decisiva; la mayoría de los que finalmente desertan nunca fueron visitados ni conectados en esas primeras semanas. Un recién llegado que es recibido, contactado e integrado pronto forma los lazos que sostienen; uno dejado solo concluye en silencio que no fue extrañado y se desliza. La asimilación que no ocurre temprano usualmente no ocurre en absoluto." },
+    { textEn: "Explain the friendship ratio and why friendships are the strongest cord holding a member.",
+      textEs: "Explique la proporción de amistad y por qué las amistades son el cordón más fuerte que sostiene a un miembro.",
+      kw_en: ["friend", "seven", "ratio", "member", "month", "belong", "relation", "stay"],
+      kw_es: ["amig", "siete", "proporcion", "miembr", "mes", "pertenec", "relacion", "qued"],
+      modelEn: "The friendship ratio holds that a new member needs to make about seven friends in the church within his first six months. Friendships are the strongest cord, because people stay where they are known and loved; a member with several real friends belongs and will weather offenses and dry seasons, while one who makes no friends has nothing personal holding him and soon drifts out.",
+      modelEs: "La proporción de amistad sostiene que un nuevo miembro necesita hacer cerca de siete amigos en la iglesia dentro de sus primeros seis meses. Las amistades son el cordón más fuerte, porque la gente se queda donde es conocida y amada; un miembro con varios amigos reales pertenece y resistirá las ofensas y las temporadas secas, mientras uno que no hace amigos no tiene nada personal que lo sostenga y pronto se aleja." },
+    { textEn: "Explain the role/task ratio and the group ratio. How do tasks and groups hold a member?",
+      textEs: "Explique la proporción de tareas y la proporción de grupos. Cómo sostienen una tarea y un grupo a un miembro?",
+      kw_en: ["role", "task", "group", "ratio", "hundred", "member", "belong", "need"],
+      kw_es: ["tarea", "funcion", "grupo", "proporcion", "cien", "miembr", "pertenec", "necesit"],
+      modelEn: "A healthy church needs roughly sixty roles or tasks per hundred members and about seven groups per hundred, so there is real work and a real circle for nearly everyone. A member with a task is needed and would be missed if absent; a member in a small group is known and carried. Tasks give a reason to belong and groups give a place to belong, and both hold a member in.",
+      modelEs: "Una iglesia sana necesita cerca de sesenta tareas o funciones por cada cien miembros y cerca de siete grupos por cada cien, de modo que haya trabajo real y un círculo real para casi todos. Un miembro con una tarea es necesario y sería extrañado si faltara; un miembro en un grupo pequeño es conocido y sostenido. Las tareas dan una razón para pertenecer y los grupos dan un lugar para pertenecer, y ambos sostienen al miembro dentro." },
+    { textEn: "List the common reasons people give for leaving a church. Which are about the church and which about life?",
+      textEs: "Liste las razones comunes que la gente da para dejar una iglesia. Cuáles son sobre la iglesia y cuáles sobre la vida?",
+      kw_en: ["move", "conflict", "irrelevant", "busy", "dull", "drift", "health", "reason"],
+      kw_es: ["mudan", "conflict", "irrelevant", "ocupad", "aburrid", "alej", "salud", "razon"],
+      modelEn: "Some reasons are about life: a move, failing health, a schedule or transport problem, the busyness that crowds church out. Others are about the church: conflict, a sense that the church became irrelevant, dull preaching, strain that follows them from a struggling marriage. Most are not dramatic crises of belief; people drift out the back for ordinary reasons, which is why ordinary care holds them in.",
+      modelEs: "Algunas razones son sobre la vida: una mudanza, salud que falla, un problema de horario o transporte, el ajetreo que desplaza a la iglesia. Otras son sobre la iglesia: el conflicto, la sensación de que la iglesia se volvió irrelevante, la predicación aburrida, la tensión que los sigue de un matrimonio en dificultades. La mayoría no son crisis dramáticas de fe; la gente se aleja por la puerta de atrás por razones ordinarias, por lo cual el cuidado ordinario los sostiene." },
+    { textEn: "Explain how the 'back door' has become the whole national dechurching, and what that reveals about how most people leave.",
+      textEs: "Explique como la 'puerta de atrás' se ha vuelto todo el abandono nacional de la iglesia, y qué revela eso sobre cómo se va la mayoría.",
+      kw_en: ["back", "door", "dechurch", "drift", "doctrine", "quiet", "national", "leave"],
+      kw_es: ["atras", "puerta", "desiglesi", "alej", "doctrin", "quiet", "nacional", "irse"],
+      modelEn: "The back door is no longer a trickle of individuals but the whole national dechurching, tens of millions slipped out the back over a generation. What it reveals is that most did not leave in a loud crisis of doctrine; they drifted quietly, unnoticed and unmissed, for ordinary reasons. The dechurching is mainly a back-door problem of people no one held onto, not a front-door problem of belief.",
+      modelEs: "La puerta de atrás ya no es un goteo de individuos sino todo el abandono nacional de la iglesia, decenas de millones deslizados por atrás a lo largo de una generación. Lo que revela es que la mayoría no se fue en una ruidosa crisis de doctrina; se alejaron en silencio, sin ser notados ni extrañados, por razones ordinarias. El abandono es principalmente un problema de puerta de atrás, de gente que nadie sostuvo, no un problema de puerta de entrada, de creencia." },
+    { textEn: "What newer causes of leaving must we now add, and how do they differ from the ordinary drift?",
+      textEs: "Qué causas más nuevas de partida debemos añadir ahora, y cómo difieren del alejamiento ordinario?",
+      kw_en: ["wound", "scandal", "deconstruct", "hurt", "trust", "newer", "leave", "cause"],
+      kw_es: ["herid", "escandal", "deconstru", "dano", "confian", "nuev", "irse", "caus"],
+      modelEn: "Beyond ordinary drift, we must now add wounding, scandal, and deconstruction. Some left because a leader's fall broke their trust; some were hurt by the church itself; some are reexamining an inherited faith and walking out in the process. These differ from quiet drift because they carry pain or doubt, so reaching them again calls not just for an invitation but for honesty, repentance, and the rebuilding of trust.",
+      modelEs: "Más allá del alejamiento ordinario, debemos añadir ahora las heridas, el escándalo y la deconstrucción. Algunos se fueron porque la caída de un líder rompió su confianza; algunos fueron dañados por la iglesia misma; algunos reexaminan una fe heredada y salen en el proceso. Estas difieren del alejamiento callado porque cargan dolor o duda, así que alcanzarlos de nuevo pide no solo una invitación sino honestidad, arrepentimiento y la reconstrucción de la confianza." },
+    { textEn: "Explain the hopeful truth that the back door 'swings both ways,' and what it asks of the church.",
+      textEs: "Explique la verdad esperanzadora de que la puerta de atrás 'se abre en ambos sentidos,' y qué pide a la iglesia.",
+      kw_en: ["back", "return", "half", "both", "way", "rechurch", "invit", "open"],
+      kw_es: ["atras", "regres", "mitad", "ambos", "sentid", "reiglesi", "invit", "abiert"],
+      modelEn: "The same back door people drift out of, they can also walk back through; about half of those who left say they would consider returning. So the back door swings both ways, and the great dechurching is also a great opportunity. It asks the church to go after the drifted with an honest, gracious invitation home, and to be the kind of community worth returning to.",
+      modelEs: "Por la misma puerta de atrás por la que la gente se aleja, también puede volver a entrar; cerca de la mitad de los que se fueron dice que consideraría regresar. Así que la puerta de atrás se abre en ambos sentidos, y el gran abandono es también una gran oportunidad. Pide a la iglesia ir tras los alejados con una invitación honesta y bondadosa a volver, y ser la clase de comunidad a la que vale la pena regresar." },
+    { textEn: "Synthesis: Show how the three ratios become a 're-churching' strategy, and tie it to Christ's promise to lose none.",
+      textEs: "Síntesis: Muestre como las tres proporciones se vuelven una estrategia de 'volver a la iglesia,' y átela a la promesa de Cristo de no perder a ninguno.",
+      kw_en: ["ratio", "friend", "role", "group", "rechurch", "retain", "none", "build"],
+      kw_es: ["proporcion", "amig", "tarea", "grupo", "reiglesi", "reten", "ningun", "edific"],
+      modelEn: "The three ratios, friends, roles, and groups, are a re-churching strategy: weave friendships, give every member a task, and fold everyone into a group, and people both stay and can be drawn back. Applied to the returning dechurched, the same cords that retain also reassimilate. This serves Christ's own promise over His people, that of those given to Him He would lose none; the church closes the back door because the Shepherd means to keep His sheep.",
+      modelEs: "Las tres proporciones, amigos, tareas y grupos, son una estrategia de volver a la iglesia: teja amistades, de a cada miembro una tarea, e integre a todos en un grupo, y la gente se queda y puede ser atraída de vuelta. Aplicados a los desiglesiados que regresan, los mismos cordones que retienen también reasimilan. Esto sirve a la promesa misma de Cristo sobre Su pueblo, que de los que le fueron dados no perdería a ninguno; la iglesia cierra la puerta de atrás porque el Pastor se propone guardar Sus ovejas." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Certificado arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Certificate above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ Bloqueado. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ Locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ MC ✓ aprobado. Sección SA bloqueada. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ MC ✓ passed. SA section locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const mb = document.createElement('div');
+        mb.className = 'js-model-box';
+        mb.style.cssText = 'display:none;margin-top:10px;padding:10px 12px;background:#fbf3d5;border:1px solid #d4af37;border-radius:8px;';
+        mb.innerHTML = (currentLang === 'en'
+            ? '<strong>Model answer — study this</strong><br>' + q.modelEn
+            : '<strong>Respuesta modelo — estúdiela</strong><br>' + q.modelEs);
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                return;
+            }
+            // Smart matcher (kwHit) — matches the official grade, not raw indexOf.
+            const hitList = kws.filter(kw => kwHit(ans, kw));
+            const hits = hitList.length;
+            if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? `✓ Solid answer (${hits}/${kws.length} key concepts referenced).` : `✓ Respuesta sólida (${hits}/${kws.length} conceptos clave referenciados).`;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en'
+                    ? `✗ Need at least 3 key concepts; got ${hits}/${kws.length}. Compare your answer with the model below.`
+                    : `✗ Necesita al menos 3 conceptos clave; obtuvo ${hits}/${kws.length}. Compare su respuesta con el modelo abajo.`;
+            }
+            mb.style.display = 'block'; // reveal model answer after every check, pass or fail
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(mb);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    // Reveal every model answer after submit — the teaching is the comparison.
+    document.querySelectorAll('.js-model-box').forEach(function(e){ e.style.display = 'block'; });
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ Reprobado: ${mcScore}/20 (se requiere 18). Bloqueado 2 minutos.</span>`
+                : `<span style='color:#8a1f1f'>✗ Failed: ${mcScore}/20 (need 18). Locked 2 minutes.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ MC ✓ permanece aprobado. SA reprobada: ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min.</span>`
+                : `<span style='color:#8a1f1f'>✗ MC ✓ stays passed. SA failed: ${saScore}/10 (need 9). SA section locked 15 min.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 2 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 2 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    location.reload();
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCGReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

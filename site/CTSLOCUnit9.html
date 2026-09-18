@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Life of Christ &mdash; Unit 9</title>
+<style>
+:root{
+  --ink:#241c12; --paper:#f7f1e4; --card:#fffdf8; --line:#d8ccb2;
+  --accent:#7a3b1e; --accent2:#9c6b2f; --gold:#fbf3d6; --goldln:#caa94e;
+  --good:#2f6b3a; --bad:#9b2c2c; --muted:#6c6150;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;line-height:1.6;}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+header.site{background:var(--accent);color:#f6ecd8;padding:18px 0;border-bottom:4px solid var(--goldln);}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:0;}
+header.site h1{font-size:1.15rem;margin:0;font-weight:600;letter-spacing:.2px;}
+header.site .sub{font-size:.78rem;opacity:.85;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+.langbtn{font-family:system-ui,sans-serif;font-size:.8rem;background:#f6ecd8;color:var(--accent);
+  border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600;}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 4px;
+  font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);}
+.badge{background:var(--gold);border:1px solid var(--goldln);border-radius:14px;padding:3px 10px;color:#6a531c;}
+.epigraph{font-style:italic;color:var(--accent2);border-left:3px solid var(--goldln);
+  padding:6px 0 6px 14px;margin:16px 0;font-size:.98rem;}
+h2.sec{font-size:1.25rem;color:var(--accent);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin:34px 0 14px;}
+article p{margin:0 0 14px;}
+article b{color:var(--accent);}
+.v{color:#3a4a2c;}
+.illo{background:#fbf6ea;border-left:3px solid var(--goldln);padding:10px 14px;border-radius:4px;}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:14px 0;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);}
+.qn{font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;color:var(--accent2);
+  text-transform:uppercase;letter-spacing:.6px;}
+.qp{margin:6px 0 10px;font-weight:600;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:9px 12px;margin:6px 0;cursor:pointer;font:inherit;color:inherit;}
+.opt:hover{border-color:var(--accent2);}
+.opt .lt{font-weight:700;color:var(--accent2);margin-right:8px;}
+.opt.correct{background:#e9f3e8;border-color:var(--good);}
+.opt.wrong{background:#f6e6e4;border-color:var(--bad);}
+.opt:disabled{cursor:default;opacity:1;}
+.expl{font-size:.9rem;color:var(--muted);margin:8px 2px 0;display:none;}
+.expl.show{display:block;}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:6px;padding:10px;
+  font:inherit;background:#fff;resize:vertical;}
+.btn{font-family:system-ui,sans-serif;font-weight:600;border:none;border-radius:6px;padding:9px 16px;
+  cursor:pointer;font-size:.9rem;}
+.btn.primary{background:var(--accent);color:#f6ecd8;}
+.btn.ghost{background:#efe6d2;color:var(--accent);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.sa-res{margin-top:10px;font-family:system-ui,sans-serif;font-size:.88rem;display:none;}
+.sa-res.show{display:block;}
+.sa-verdict{font-weight:700;}
+.sa-verdict.pass{color:var(--good);} .sa-verdict.soft{color:var(--accent2);}
+.model{background:var(--gold);border:1px solid var(--goldln);border-radius:6px;padding:10px 12px;margin-top:8px;}
+.model .ml{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:#6a531c;}
+.foot{margin-top:30px;border-top:2px solid var(--line);padding-top:18px;}
+.status{font-family:system-ui,sans-serif;font-size:.9rem;margin:10px 0;}
+.status.ok{color:var(--good);} .status.warn{color:var(--accent2);} .status.lock{color:var(--bad);}
+.modal{position:fixed;inset:0;background:rgba(36,28,18,.62);display:flex;align-items:center;
+  justify-content:center;padding:18px;z-index:50;}
+.modal .box{background:var(--card);border-radius:10px;max-width:420px;width:100%;padding:22px;
+  border-top:5px solid var(--goldln);}
+.modal h3{margin:0 0 6px;color:var(--accent);}
+.modal label{display:block;font-family:system-ui,sans-serif;font-size:.82rem;margin:12px 0 4px;color:var(--muted);}
+.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit;}
+.hide{display:none !important;}
+.next{display:inline-block;margin-top:12px;background:var(--good);color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:6px;font-family:system-ui,sans-serif;font-weight:600;}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:2px 0 18px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);margin-right:3px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:var(--card);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600;line-height:1;}
+.unitnav a:hover{border-color:var(--accent2);color:var(--accent2);}
+.unitnav a.active{background:var(--accent);color:#f6ecd8;border-color:var(--accent);}
+.unitnav a.done{background:var(--gold);border-color:var(--goldln);color:#6a531c;}
+.unitnav a.cert{min-width:auto;padding:0 12px;background:#efe6d2;}
+html[lang="es"] .en-lbl{display:none}html[lang="en"] .es-lbl{display:none}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site">
+  <div class="wrap">
+    <div><h1 id="t-title">The Life of Christ</h1><div class="sub" id="t-unit">Unit 9 · The Resurrection</div></div>
+    <button class="langbtn" id="langBtn" type="button">Espa&ntilde;ol</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <span id="t-greet"></span>
+    <span class="badge" id="t-track"></span>
+  </div>
+
+     <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+     <span class="nl"><span class="en-lbl">Units</span><span class="es-lbl">Unidades</span></span>
+     <a data-u="1" href="CTSLOCUnit1.html">1</a>
+     <a data-u="2" href="CTSLOCUnit2.html">2</a>
+     <a data-u="3" href="CTSLOCUnit3.html">3</a>
+     <a data-u="4" href="CTSLOCUnit4.html">4</a>
+     <a data-u="5" href="CTSLOCUnit5.html">5</a>
+     <a data-u="6" href="CTSLOCUnit6.html">6</a>
+     <a data-u="7" href="CTSLOCUnit7.html">7</a>
+     <a data-u="8" href="CTSLOCUnit8.html">8</a>
+     <a data-u="9" href="CTSLOCUnit9.html" class="active">9</a>
+     <a data-u="10" href="CTSLOCUnit10.html">10</a>
+     <a class="cert" href="CTSLOCCertificate.html"><span class="en-lbl">Certificate</span><span class="es-lbl">Certificado</span></a>
+   </nav>
+   <script>(function(){try{var raw=localStorage.getItem("cts_loc_progress")||"{}";var done=JSON.parse(raw);var nav=document.getElementById("unitnav");if(!nav)return;var a=nav.querySelectorAll("a[data-u]");for(var i=0;i<a.length;i++){var u=a[i].getAttribute("data-u");if(done[u]&&a[i].className.indexOf("active")<0){a[i].className=(a[i].className+" done").trim();}}}catch(e){}})();</script>
+
+   <div class="epigraph" id="epigraph"></div>
+
+  <article>
+    <div id="teach-en"><h3 style="color:var(--accent);margin:0 0 4px">The Lord Is Risen: The Empty Tomb and the Living Christ</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">The Empty Tomb, the Appearances, the Road to Emmaus, Thomas, and the Great Commission</p>
+<p><b>1. The Empty Tomb</b></p>
+<p>Very early on the first day of the week, while it was still dark, the women came to the tomb with spices to anoint the body — Mary Magdalene and the others who had followed Him from Galilee. As they walked they wondered among themselves who would roll away the great stone from the door, for it was very large.</p>
+<p>But there had been a great earthquake; an angel of the Lord had descended, rolled back the stone, and sat upon it. His countenance was like lightning and his clothing white as snow, and the soldiers on guard <span class="v">"shook for fear of him, and became like dead men"</span> (Matthew 28:3–4). The women found the stone rolled away and the tomb empty, and the angel said to them, <span class="v">"Do not be afraid... He is not here; for He is risen, as He said. Come, see the place where the Lord lay"</span> (Matthew 28:5–6). <span class="v">"Why do you seek the living among the dead?"</span> (Luke 24:5).</p>
+<p>Mary ran to Peter and John with the news, <span class="v">"They have taken away the Lord out of the tomb."</span> The two ran together; John outran Peter and reached the tomb first but waited at the door; then Peter went in and saw the linen cloths lying there, and the cloth that had been around His head folded together in a place by itself (John 20:6–7) — not the wild disorder of a robbery, but the quiet order of One who had risen and laid His grave clothes aside. Then John also went in, and <span class="v">"he saw and believed"</span> (John 20:8).</p>
+<p><b>2. The Risen Lord Appears</b></p>
+<p>Mary Magdalene lingered weeping outside the tomb. Stooping in, she saw two angels in white sitting where the body had lain, and they asked her, <span class="v">"Woman, why are you weeping?"</span> <span class="v">"Because they have taken away my Lord,"</span> she said, <span class="v">"and I do not know where they have laid Him."</span> Then she turned and saw Jesus standing there, though she did not know Him and supposed He was the gardener. <span class="v">"Woman, why are you weeping? Whom are you seeking?"</span> He said only one word — <span class="v">"Mary!"</span> — and at the sound of her name she knew Him and cried, <span class="v">"Rabboni!"</span> which is to say, Teacher (John 20:15–16).</p>
+<p><span class="v">"Do not cling to Me, for I have not yet ascended to My Father... but go to My brethren and say to them, 'I am ascending to My Father and your Father, and to My God and your God'"</span> (John 20:17). She was not to hold Him to the old manner of His earthly presence; she was to go and tell. So Mary Magdalene became the first to carry the word, <span class="v">"I have seen the Lord!"</span> He met the other women on the way as well, and they held Him by the feet and worshiped Him (Matthew 28:9). The first witnesses of the resurrection were women — a detail no inventor of that age would have chosen, and so itself a quiet mark of the truth.</p>
+<p><b>3. The Road to Emmaus</b></p>
+<p>That same day two disciples were walking to a village called Emmaus, downcast, talking over all that had happened. Jesus Himself drew near and walked along with them, but their eyes were restrained, and they did not know Him. <span class="v">"What kind of conversation is this?"</span> He asked, and they stood still, sad. They told the Stranger of Jesus of Nazareth, a mighty prophet, crucified by their rulers; <span class="v">"we were hoping that it was He who was going to redeem Israel"</span>; and of the women's astonishing report that the tomb was empty.</p>
+<p>Then He said to them, <span class="v">"O foolish ones, and slow of heart to believe... Ought not the Christ to have suffered these things and to enter into His glory?"</span> And beginning at Moses and all the Prophets, He expounded to them in all the Scriptures the things concerning Himself (Luke 24:25–27) — the cross and the empty tomb were no accident, no defeat; the whole of the Old Testament had been pointing to this all along. As they drew near the village, He made as though He would go farther, but they urged Him, <span class="v">"Abide with us, for it is toward evening, and the day is far spent"</span> (Luke 24:29); so He went in to stay with them. At the table He took bread, blessed and broke it — and in that moment their eyes were opened and they knew Him, and He vanished from their sight. <span class="v">"Did not our heart burn within us while He talked with us on the road, and while He opened the Scriptures to us?"</span> (Luke 24:32). They rose that very hour and ran back to Jerusalem.</p>
+<p><b>4. The Upper Room and Thomas</b></p>
+<p>That evening, the doors shut for fear of the authorities, Jesus came and stood in the midst and said, <span class="v">"Peace be with you."</span> He showed them His hands and His side, and the disciples were glad when they saw the Lord. <span class="v">"Behold My hands and My feet... Handle Me and see, for a spirit does not have flesh and bones as you see I have"</span> (Luke 24:39). To prove further that He was no ghost but risen in true body, He asked for food and ate a piece of broiled fish before them (Luke 24:42–43). Then again, <span class="v">"Peace to you! As the Father has sent Me, I also send you."</span> And He breathed on them, <span class="v">"Receive the Holy Spirit"</span> (John 20:21–22).</p>
+<p>But Thomas was not with them, and when they told him, he would not believe: <span class="v">"Unless I see in His hands the print of the nails, and put my finger into the print of the nails... I will not believe"</span> (John 20:25). Eight days later the disciples were inside again, and Thomas with them, and Jesus came though the doors were shut and stood among them. He turned to Thomas: <span class="v">"Reach your finger here, and look at My hands... Do not be unbelieving, but believing."</span> And Thomas answered Him, <span class="v">"My Lord and my God!"</span> (John 20:28). Jesus said to him, <span class="v">"Thomas, because you have seen Me, you have believed. Blessed are those who have not seen and yet have believed"</span> (John 20:29) — a word of blessing reaching down to every believer since.</p>
+<p><b>5. The Great Commission, the Ascension, and the Meaning of the Resurrection</b></p>
+<p>By the Sea of Galilee the risen Lord restored Peter, who had denied Him three times. Three times He asked, <span class="v">"Do you love Me?"</span> and three times He charged him, <span class="v">"Feed My sheep"</span> (John 21:15–17) — grace enough to lift up the fallen and send him out again.</p>
+<p>Then, on a mountain in Galilee, He gave the Great Commission: <span class="v">"All authority has been given to Me in heaven and on earth. Go therefore and make disciples of all the nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all things that I have commanded you; and lo, I am with you always, even to the end of the age"</span> (Matthew 28:18–20). The work of the church flows out of an empty tomb.</p>
+<p>And when He had led them out as far as Bethany, He lifted up His hands and blessed them, and while He blessed them He was parted from them and carried up into heaven (Luke 24:50–51; Acts 1:9). As they gazed upward, two men in white said, <span class="v">"This same Jesus... will so come in like manner as you saw Him go"</span> (Acts 1:11). He who rose will also return.</p>
+<p>What, then, does the resurrection mean? It is the Father's <span class="v">"Amen"</span> to the Son's <span class="v">"It is finished"</span> — the open proof that the sacrifice was accepted, the debt was truly paid, and death itself was conquered. <span class="v">"If Christ is not risen... your faith is futile; you are still in your sins"</span> (1 Corinthians 15:17); but Christ is risen, the firstfruits of those who have fallen asleep, and because He lives, all who trust Him will live also. He was seen by Peter, then by the Twelve, and then by more than five hundred at once (1 Corinthians 15:5–6); the witnesses were many and the tomb was empty. And as He rose, so all who are His will rise — His resurrection the firstfruits and the pledge of our own.</p>
+<p>And the divine and human stand together still. The very body that was crucified and buried rose again, was seen and touched and ate among them, yet passed through shut doors and was taken up into glory — truly man, truly God, the living Lord. The story that began in a manger and ran on to a cross does not end in a borrowed tomb. It ends with a living Christ who says to His own, in every age, <span class="v">"I am with you always."</span> The grave was not the end of the story but the doorway into endless life.</p></div>
+    <div id="teach-es" class="hide"><h3 style="color:var(--accent);margin:0 0 4px">El Se&ntilde;or ha resucitado: la tumba vac&iacute;a y el Cristo viviente</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">La tumba vac&iacute;a, las apariciones, el camino a Ema&uacute;s, Tom&aacute;s y la Gran Comisi&oacute;n</p>
+
+<p><b>1. La tumba vac&iacute;a</b></p>
+<p>Muy de ma&ntilde;ana, el primer d&iacute;a de la semana, siendo a&uacute;n oscuro, las mujeres vinieron al sepulcro con especias para ungir el cuerpo &mdash; Mar&iacute;a Magdalena y las otras que le hab&iacute;an seguido desde Galilea. Mientras caminaban se preguntaban entre s&iacute; qui&eacute;n les remover&iacute;a la gran piedra de la entrada, porque era muy grande.</p>
+<p>Pero hab&iacute;a habido un gran terremoto; un &aacute;ngel del Se&ntilde;or hab&iacute;a descendido, removido la piedra y se hab&iacute;a sentado sobre ella. Su rostro era como un rel&aacute;mpago y su vestidura blanca como la nieve, y los soldados de la guardia <span class="v">&ldquo;temblaron de miedo, y quedaron como muertos&rdquo; (Mateo 28:3&ndash;4).</span> Las mujeres hallaron la piedra removida y el sepulcro vac&iacute;o, y el &aacute;ngel les dijo: <span class="v">&ldquo;No tem&aacute;is... No est&aacute; aqu&iacute;; porque ha resucitado, como dijo. Venid, ved el lugar donde fue puesto el Se&ntilde;or&rdquo; (Mateo 28:5&ndash;6).</span> <span class="v">&ldquo;&iquest;Por qu&eacute; busc&aacute;is entre los muertos al que vive?&rdquo; (Lucas 24:5).</span></p>
+<p>Mar&iacute;a corri&oacute; a Pedro y a Juan con la noticia: <span class="v">&ldquo;Se han llevado del sepulcro al Se&ntilde;or.&rdquo;</span> Los dos corrieron juntos; Juan corri&oacute; m&aacute;s que Pedro y lleg&oacute; primero al sepulcro, mas se detuvo a la entrada; entonces Pedro entr&oacute; y vio los lienzos puestos all&iacute;, y el sudario que hab&iacute;a estado sobre su cabeza, enrollado en un lugar aparte (Juan 20:6&ndash;7) &mdash; no el desorden salvaje de un robo, sino el quieto orden de Uno que hab&iacute;a resucitado y dejado a un lado sus lienzos. Entonces entr&oacute; tambi&eacute;n Juan, y <span class="v">&ldquo;vio, y crey&oacute;&rdquo; (Juan 20:8).</span></p>
+
+<p><b>2. El Se&ntilde;or resucitado aparece</b></p>
+<p>Mar&iacute;a Magdalena se qued&oacute; llorando fuera del sepulcro. Inclin&aacute;ndose a mirar dentro, vio dos &aacute;ngeles vestidos de blanco sentados donde hab&iacute;a estado el cuerpo, y le preguntaron: <span class="v">&ldquo;Mujer, &iquest;por qu&eacute; lloras?&rdquo;</span> <span class="v">&ldquo;Porque se han llevado a mi Se&ntilde;or,&rdquo;</span> dijo ella, <span class="v">&ldquo;y no s&eacute; d&oacute;nde le han puesto.&rdquo;</span> Entonces se volvi&oacute; y vio a Jes&uacute;s de pie all&iacute;, aunque no le reconoci&oacute; y pens&oacute; que era el hortelano. <span class="v">&ldquo;Mujer, &iquest;por qu&eacute; lloras? &iquest;A qui&eacute;n buscas?&rdquo;</span> Dijo solo una palabra &mdash; <span class="v">&ldquo;&iexcl;Mar&iacute;a!&rdquo;</span> &mdash; y al sonido de su nombre le reconoci&oacute; y clam&oacute;: <span class="v">&ldquo;&iexcl;Raboni!&rdquo;</span> que quiere decir, Maestro (Juan 20:15&ndash;16).</p>
+<p><span class="v">&ldquo;No me toques, porque a&uacute;n no he subido a mi Padre... mas ve a mis hermanos, y diles: Subo a mi Padre y a vuestro Padre, a mi Dios y a vuestro Dios&rdquo; (Juan 20:17).</span> No hab&iacute;a de retenerle a la antigua manera de su presencia terrenal; hab&iacute;a de ir y anunciar. As&iacute; Mar&iacute;a Magdalena fue la primera en llevar la palabra: <span class="v">&ldquo;&iexcl;He visto al Se&ntilde;or!&rdquo;</span> Encontr&oacute; tambi&eacute;n a las otras mujeres en el camino, y ellas le abrazaron los pies y le adoraron (Mateo 28:9). Las primeras testigos de la resurrecci&oacute;n fueron mujeres &mdash; un detalle que ning&uacute;n inventor de aquella &eacute;poca habr&iacute;a escogido, y por eso mismo una callada se&ntilde;al de la verdad.</p>
+
+<p><b>3. El camino a Ema&uacute;s</b></p>
+<p>Aquel mismo d&iacute;a dos disc&iacute;pulos iban camino a una aldea llamada Ema&uacute;s, abatidos, hablando de todo lo que hab&iacute;a sucedido. Jes&uacute;s mismo se acerc&oacute; y camin&oacute; con ellos, mas los ojos de ellos estaban velados, y no le reconocieron. <span class="v">&ldquo;&iquest;Qu&eacute; pl&aacute;ticas son estas?&rdquo;</span> pregunt&oacute;, y ellos se detuvieron, tristes. Le contaron al Forastero de Jes&uacute;s de Nazaret, profeta poderoso, crucificado por sus gobernantes; <span class="v">&ldquo;nosotros esper&aacute;bamos que &eacute;l era el que hab&iacute;a de redimir a Israel&rdquo;;</span> y del asombroso informe de las mujeres de que el sepulcro estaba vac&iacute;o.</p>
+<p>Entonces les dijo: <span class="v">&ldquo;&iexcl;Oh insensatos, y tardos de coraz&oacute;n para creer... &iquest;No era necesario que el Cristo padeciera estas cosas, y que entrara en su gloria?&rdquo;</span> Y comenzando desde Mois&eacute;s y todos los profetas, les declaraba en todas las Escrituras lo que de &Eacute;l dec&iacute;an (Lucas 24:25&ndash;27) &mdash; la cruz y la tumba vac&iacute;a no eran accidente ni derrota; todo el Antiguo Testamento hab&iacute;a estado apuntando a esto desde siempre. Al acercarse a la aldea, hizo como que iba m&aacute;s lejos, mas le rogaron: <span class="v">&ldquo;Qu&eacute;date con nosotros, porque se hace tarde, y el d&iacute;a ya ha declinado&rdquo; (Lucas 24:29);</span> y entr&oacute; para quedarse con ellos. A la mesa tom&oacute; el pan, lo bendijo y lo parti&oacute; &mdash; y en aquel momento les fueron abiertos los ojos y le reconocieron, y &Eacute;l desapareci&oacute; de su vista. <span class="v">&ldquo;&iquest;No ard&iacute;a nuestro coraz&oacute;n en nosotros, mientras nos hablaba en el camino, y cuando nos abr&iacute;a las Escrituras?&rdquo; (Lucas 24:32).</span> Se levantaron en aquella misma hora y corrieron de vuelta a Jerusal&eacute;n.</p>
+
+<p><b>4. El aposento alto y Tom&aacute;s</b></p>
+<p>Aquella tarde, cerradas las puertas por miedo a las autoridades, Jes&uacute;s vino y se puso en medio y dijo: <span class="v">&ldquo;Paz a vosotros.&rdquo;</span> Les mostr&oacute; sus manos y su costado, y los disc&iacute;pulos se regocijaron al ver al Se&ntilde;or. <span class="v">&ldquo;Mirad mis manos y mis pies... Palpad, y ved; porque un esp&iacute;ritu no tiene carne ni huesos, como veis que yo tengo&rdquo; (Lucas 24:39).</span> Para probar a&uacute;n m&aacute;s que no era un fantasma sino resucitado en cuerpo verdadero, pidi&oacute; comida y comi&oacute; un trozo de pescado asado delante de ellos (Lucas 24:42&ndash;43). Luego de nuevo: <span class="v">&ldquo;&iexcl;Paz a vosotros! Como me envi&oacute; el Padre, as&iacute; tambi&eacute;n yo os env&iacute;o.&rdquo;</span> Y sopl&oacute; sobre ellos: <span class="v">&ldquo;Recibid el Esp&iacute;ritu Santo&rdquo; (Juan 20:21&ndash;22).</span></p>
+<p>Mas Tom&aacute;s no estaba con ellos, y cuando se lo dijeron, no quiso creer: <span class="v">&ldquo;Si no viere en sus manos la se&ntilde;al de los clavos, y metiere mi dedo en el lugar de los clavos... no creer&eacute;&rdquo; (Juan 20:25).</span> Ocho d&iacute;as despu&eacute;s estaban los disc&iacute;pulos otra vez dentro, y Tom&aacute;s con ellos, y vino Jes&uacute;s, cerradas las puertas, y se puso en medio. Se volvi&oacute; a Tom&aacute;s: <span class="v">&ldquo;Mete aqu&iacute; tu dedo, y mira mis manos... No seas incr&eacute;dulo, sino creyente.&rdquo;</span> Y Tom&aacute;s respondi&oacute;: <span class="v">&ldquo;&iexcl;Se&ntilde;or m&iacute;o, y Dios m&iacute;o!&rdquo; (Juan 20:28).</span> Jes&uacute;s le dijo: <span class="v">&ldquo;Tom&aacute;s, porque me has visto, cre&iacute;ste; bienaventurados los que no vieron, y creyeron&rdquo; (Juan 20:29)</span> &mdash; una palabra de bendici&oacute;n que alcanza a todo creyente desde entonces.</p>
+
+<p><b>5. La Gran Comisi&oacute;n, la ascensi&oacute;n y el sentido de la resurrecci&oacute;n</b></p>
+<p>Junto al mar de Galilea el Se&ntilde;or resucitado restaur&oacute; a Pedro, que le hab&iacute;a negado tres veces. Tres veces pregunt&oacute;: <span class="v">&ldquo;&iquest;Me amas?&rdquo;</span> y tres veces le encarg&oacute;: <span class="v">&ldquo;Apacienta mis ovejas&rdquo; (Juan 21:15&ndash;17)</span> &mdash; gracia bastante para levantar al ca&iacute;do y enviarlo de nuevo.</p>
+<p>Luego, en un monte de Galilea, dio la Gran Comisi&oacute;n: <span class="v">&ldquo;Toda potestad me es dada en el cielo y en la tierra. Por tanto, id, y haced disc&iacute;pulos a todas las naciones, bautiz&aacute;ndolos en el nombre del Padre, y del Hijo, y del Esp&iacute;ritu Santo; ense&ntilde;&aacute;ndoles que guarden todas las cosas que os he mandado; y he aqu&iacute;, yo estoy con vosotros todos los d&iacute;as, hasta el fin del mundo&rdquo; (Mateo 28:18&ndash;20).</span> La obra de la iglesia brota de un sepulcro vac&iacute;o.</p>
+<p>Y cuando los hubo llevado hasta Betania, alz&oacute; sus manos y los bendijo, y mientras los bendec&iacute;a, fue apartado de ellos y llevado arriba al cielo (Lucas 24:50&ndash;51; Hechos 1:9). Mientras miraban al cielo, dos varones vestidos de blanco dijeron: <span class="v">&ldquo;Este mismo Jes&uacute;s... as&iacute; vendr&aacute; como le hab&eacute;is visto ir&rdquo; (Hechos 1:11).</span> El que resucit&oacute; tambi&eacute;n ha de volver.</p>
+<p>&iquest;Qu&eacute; significa, pues, la resurrecci&oacute;n? Es el <span class="v">&ldquo;Am&eacute;n&rdquo;</span> del Padre al <span class="v">&ldquo;Consumado es&rdquo;</span> del Hijo &mdash; la prueba abierta de que el sacrificio fue aceptado, la deuda verdaderamente pagada, y la muerte misma vencida. <span class="v">&ldquo;Si Cristo no resucit&oacute;... vana es vuestra fe; a&uacute;n est&aacute;is en vuestros pecados&rdquo; (1 Corintios 15:17);</span> mas Cristo ha resucitado, primicias de los que durmieron, y porque &Eacute;l vive, todos los que conf&iacute;an en &Eacute;l vivir&aacute;n tambi&eacute;n. Fue visto por Pedro, luego por los Doce, y luego por m&aacute;s de quinientos a la vez (1 Corintios 15:5&ndash;6); muchos fueron los testigos y vac&iacute;o estaba el sepulcro. Y como &Eacute;l resucit&oacute;, as&iacute; todos los que son suyos resucitar&aacute;n &mdash; su resurrecci&oacute;n las primicias y la prenda de la nuestra.</p>
+<p>Y lo divino y lo humano est&aacute;n juntos todav&iacute;a. El mismo cuerpo que fue crucificado y sepultado resucit&oacute;, fue visto y palpado y comi&oacute; entre ellos, mas pas&oacute; a trav&eacute;s de puertas cerradas y fue llevado arriba a la gloria &mdash; verdadero hombre, verdadero Dios, el Se&ntilde;or viviente. La historia que comenz&oacute; en un pesebre y corri&oacute; hasta una cruz no termina en una tumba prestada. Termina con un Cristo viviente que dice a los suyos, en toda edad: <span class="v">&ldquo;Yo estoy con vosotros todos los d&iacute;as.&rdquo;</span> La tumba no fue el fin de la historia, sino la puerta a la vida sin fin.</p>
+</div>
+  </article>
+
+  <h2 class="sec" id="t-mc">Multiple Choice</h2>
+  <div id="mcWrap"></div>
+
+  <h2 class="sec" id="t-sa">Short Answer</h2>
+  <p class="status" id="t-saNote"></p>
+  <div id="saWrap"></div>
+
+  <div class="foot">
+    <button class="btn primary" id="completeBtn" type="button"></button>
+    <div class="status" id="statusMsg"></div>
+    <a class="next hide" id="nextLink" href="CTSLOCUnit10.html"></a>
+  </div>
+</div>
+
+<div class="modal hide" id="reg">
+  <div class="box">
+    <h3 id="m-h">Welcome</h3>
+    <p id="m-p" style="font-size:.9rem;color:var(--muted);margin:0"></p>
+    <label id="m-nl">Your name</label>
+    <input id="m-name" type="text" autocomplete="name" aria-label="m name">
+    <label id="m-tl">Track</label>
+    <select id="m-track" aria-label="m track">
+      <option value="cert">Certificate</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div style="margin-top:16px"><button class="btn primary" id="m-go" type="button">Begin</button></div>
+  </div>
+</div>
+
+<script>
+var CFG={course:'loc',unit:9,totalUnits:10,progressKey:'cts_loc_progress',
+  next:'CTSLOCUnit10.html',cert:'CTSLOCCertificate.html',lockKey:'cts_loc_u9_lock',showReg:false};
+var DATA={"mc": [{"en": "The women came to the tomb early on the first day to:", "es": "Las mujeres vinieron al sepulcro temprano el primer día para:", "oen": ["guard it", "roll the stone themselves", "anoint the body with spices", "mourn at a distance"], "oes": ["custodiarlo", "remover ellas mismas la piedra", "ungir el cuerpo con especias", "llorar a lo lejos"], "c": 23, "xen": "Mark 16:1.", "xes": "Marcos 16:1."}, {"en": "When the women arrived, the stone was:", "es": "Cuando las mujeres llegaron, la piedra estaba:", "oen": ["still sealed and shut", "rolled away, and the tomb empty", "broken in pieces", "covered with earth"], "oes": ["aún sellada y cerrada", "removida, y el sepulcro vacío", "rota en pedazos", "cubierta de tierra"], "c": 29, "xen": "Matthew 28:2.", "xes": "Mateo 28:2."}, {"en": "The angel told the women:", "es": "El ángel dijo a las mujeres:", "oen": ["“Wait three more days”", "“The body was stolen”", "“Tell no one ever”", "“He is not here; for He is risen, as He said”"], "oes": ["“Esperad tres días más”", "“El cuerpo fue robado”", "“No lo digáis jamás”", "“No está aquí; porque ha resucitado, como dijo”"], "c": 38, "xen": "Matthew 28:6.", "xes": "Mateo 28:6."}, {"en": "When Peter entered the tomb, he saw:", "es": "Cuando Pedro entró en el sepulcro, vio:", "oen": ["the linen cloths lying and the head cloth folded by itself", "the body still wrapped", "nothing at all", "an empty box"], "oes": ["los lienzos puestos y el sudario enrollado aparte", "el cuerpo aún envuelto", "nada en absoluto", "una caja vacía"], "c": 42, "xen": "John 20:6–7 — order, not robbery.", "xes": "Juan 20:6–7 — orden, no robo."}, {"en": "Mary Magdalene first supposed the risen Jesus to be:", "es": "María Magdalena al principio pensó que el Jesús resucitado era:", "oen": ["an angel", "the gardener", "Peter", "a soldier"], "oes": ["un ángel", "el hortelano", "Pedro", "un soldado"], "c": 50, "xen": "John 20:15.", "xes": "Juan 20:15."}, {"en": "Mary knew Jesus when He:", "es": "María reconoció a Jesús cuando Él:", "oen": ["spoke her name, “Mary”", "showed His hands", "broke bread", "vanished"], "oes": ["dijo su nombre, “María”", "mostró sus manos", "partió el pan", "desapareció"], "c": 56, "xen": "John 20:16 — “Rabboni!”", "xes": "Juan 20:16 — “¡Raboni!”"}, {"en": "The first witnesses to announce the resurrection were:", "es": "Las primeras testigos en anunciar la resurrección fueron:", "oen": ["the Roman guards", "the chief priests", "women — Mary Magdalene and the others", "the Twelve"], "oes": ["los guardias romanos", "los principales sacerdotes", "mujeres — María Magdalena y las otras", "los Doce"], "c": 65, "xen": "John 20:18 — a quiet mark of the truth.", "xes": "Juan 20:18 — una callada señal de la verdad."}, {"en": "On the road to Emmaus the two disciples:", "es": "En el camino a Emaús los dos discípulos:", "oen": ["knew Him at once", "saw an angel", "refused to walk with Him", "did not recognize Jesus, their eyes restrained"], "oes": ["le reconocieron al instante", "vieron un ángel", "rehusaron caminar con Él", "no reconocieron a Jesús, velados sus ojos"], "c": 73, "xen": "Luke 24:16.", "xes": "Lucas 24:16."}, {"en": "Jesus showed the Emmaus disciples that the Christ:", "es": "Jesús mostró a los discípulos de Emaús que el Cristo:", "oen": ["had to suffer and enter His glory, foretold in all the Scriptures", "would never die", "had failed", "would rule Rome"], "oes": ["debía padecer y entrar en su gloria, anunciado en todas las Escrituras", "nunca moriría", "había fracasado", "gobernaría Roma"], "c": 77, "xen": "Luke 24:26–27 — from Moses and all the Prophets.", "xes": "Lucas 24:26–27 — desde Moisés y todos los profetas."}, {"en": "The Emmaus disciples recognized Jesus when He:", "es": "Los discípulos de Emaús reconocieron a Jesús cuando Él:", "oen": ["healed a man", "wept", "quoted the law", "took bread, blessed and broke it"], "oes": ["sanó a un hombre", "lloró", "citó la ley", "tomó el pan, lo bendijo y lo partió"], "c": 87, "xen": "Luke 24:30–31.", "xes": "Lucas 24:30–31."}, {"en": "To prove He was risen in body, not a ghost, Jesus:", "es": "Para probar que estaba resucitado en cuerpo, no un fantasma, Jesús:", "oen": ["glowed with light", "showed His hands and feet and ate fish before them", "spoke from heaven", "appeared in a dream"], "oes": ["resplandeció de luz", "mostró sus manos y pies y comió pescado delante de ellos", "habló desde el cielo", "apareció en un sueño"], "c": 92, "xen": "Luke 24:39–43.", "xes": "Lucas 24:39–43."}, {"en": "In the upper room Jesus breathed on the disciples and said:", "es": "En el aposento alto Jesús sopló sobre los discípulos y dijo:", "oen": ["“Go and rest”", "“Wait for Elijah”", "“Receive the Holy Spirit”", "“Build the temple”"], "oes": ["“Id y descansad”", "“Esperad a Elías”", "“Recibid el Espíritu Santo”", "“Edificad el templo”"], "c": 100, "xen": "John 20:22.", "xes": "Juan 20:22."}, {"en": "Thomas said he would not believe unless he:", "es": "Tomás dijo que no creería a menos que:", "oen": ["met an angel", "heard a voice", "saw an empty tomb", "saw and touched the print of the nails"], "oes": ["encontrase un ángel", "oyese una voz", "viese un sepulcro vacío", "viese y tocase la señal de los clavos"], "c": 108, "xen": "John 20:25.", "xes": "Juan 20:25."}, {"en": "When Jesus appeared to him, Thomas confessed:", "es": "Cuando Jesús se le apareció, Tomás confesó:", "oen": ["“My Lord and my God!”", "“Now I doubt no law”", "“You are Elijah”", "“Forgive my sin”"], "oes": ["“¡Señor mío, y Dios mío!”", "“Ya no dudo de la ley”", "“Tú eres Elías”", "“Perdona mi pecado”"], "c": 112, "xen": "John 20:28.", "xes": "Juan 20:28."}, {"en": "Jesus' blessing on later believers was:", "es": "La bendición de Jesús sobre los creyentes posteriores fue:", "oen": ["“Blessed are the rich”", "“Seeing is believing”", "“Blessed are those who have not seen and yet have believed”", "“Wait for proof”"], "oes": ["“Bienaventurados los ricos”", "“Ver es creer”", "“Bienaventurados los que no vieron, y creyeron”", "“Esperad la prueba”"], "c": 121, "xen": "John 20:29.", "xes": "Juan 20:29."}, {"en": "By the Sea of Galilee, Jesus restored Peter by asking three times:", "es": "Junto al mar de Galilea, Jesús restauró a Pedro preguntando tres veces:", "oen": ["“Why did you deny Me?”", "“Do you love Me?” and charging “Feed My sheep”", "“Where are the others?”", "“Will you fish again?”"], "oes": ["“¿Por qué me negaste?”", "“¿Me amas?” y encargando “Apacienta mis ovejas”", "“¿Dónde están los otros?”", "“¿Volverás a pescar?”"], "c": 127, "xen": "John 21:15–17 — grace for the fallen.", "xes": "Juan 21:15–17 — gracia para el caído."}, {"en": "In the Great Commission Jesus claimed:", "es": "En la Gran Comisión Jesús declaró:", "oen": ["“Wait for the kingdom”", "“Some power is Mine”", "“Authority belongs to Rome”", "“All authority has been given to Me in heaven and on earth”"], "oes": ["“Esperad el reino”", "“Parte del poder es mío”", "“La autoridad es de Roma”", "“Toda potestad me es dada en el cielo y en la tierra”"], "c": 136, "xen": "Matthew 28:18.", "xes": "Mateo 28:18."}, {"en": "The disciples were to make disciples of all nations, baptizing them:", "es": "Los discípulos habían de hacer discípulos a todas las naciones, bautizándolos:", "oen": ["in the name of Moses", "in the name of the Father, Son, and Holy Spirit", "by their own authority", "in secret only"], "oes": ["en el nombre de Moisés", "en el nombre del Padre, del Hijo, y del Espíritu Santo", "por su propia autoridad", "solo en secreto"], "c": 141, "xen": "Matthew 28:19.", "xes": "Mateo 28:19."}, {"en": "After blessing the disciples, Jesus was:", "es": "Tras bendecir a los discípulos, Jesús fue:", "oen": ["carried up into heaven", "taken to Galilee", "hidden in a cloud forever", "buried again"], "oes": ["llevado arriba al cielo", "llevado a Galilea", "ocultado en una nube para siempre", "sepultado de nuevo"], "c": 147, "xen": "Luke 24:51; Acts 1:9 — He will come again.", "xes": "Lucas 24:51; Hechos 1:9 — ha de volver."}, {"en": "Paul says that if Christ is not risen:", "es": "Pablo dice que si Cristo no resucitó:", "oen": ["we should still hope", "nothing changes", "our faith is futile and we are still in our sins", "the law remains enough"], "oes": ["aún debemos esperar", "nada cambia", "vana es nuestra fe y aún estamos en nuestros pecados", "la ley basta aún"], "c": 156, "xen": "1 Corinthians 15:17 — but He is risen, the firstfruits.", "xes": "1 Corintios 15:17 — mas Él resucitó, las primicias."}], "sa": [{"en": "Describe the empty tomb and the grave clothes (Matt 28; Luke 24; John 20).", "es": "Describa la tumba vacía y los lienzos (Mateo 28; Lucas 24; Juan 20).", "men": "Early on the first day the women came with spices and found the stone rolled away and the tomb empty, for there had been an earthquake and an angel had descended. The angel said, “He is not here; for He is risen.” Peter and John ran to the tomb, and Peter saw the linen cloths lying and the head cloth folded by itself, the quiet order of One who had risen, not a robbery; and John saw and believed.", "mes": "Temprano el primer día las mujeres vinieron con especias y hallaron la piedra removida y el sepulcro vacío, pues había habido un terremoto y un ángel había descendido. El ángel dijo: “No está aquí; porque ha resucitado.” Pedro y Juan corrieron al sepulcro, y Pedro vio los lienzos puestos y el sudario enrollado aparte, el quieto orden de Uno que había resucitado, no un robo; y Juan vio y creyó.", "ken": ["tomb", "stone", "empty", "angel", "risen", "linen", "peter", "believ"], "kes": ["sepulcro", "piedra", "vacio", "angel", "resucit", "lienzo", "pedro", "crey"]}, {"en": "Describe Jesus' appearance to Mary Magdalene (John 20; Matt 28).", "es": "Describa la aparición de Jesús a María Magdalena (Juan 20; Mateo 28).", "men": "Mary Magdalene lingered weeping at the tomb and saw two angels, then turned and saw Jesus, supposing Him the gardener. He said, “Mary,” and she knew Him, crying “Rabboni,” Teacher. He told her, “Do not cling to Me, for I have not yet ascended,” but to go and tell His brethren. So Mary became the first to announce, “I have seen the Lord.” The first witnesses were women.", "mes": "María Magdalena se quedó llorando en el sepulcro y vio dos ángeles, luego se volvió y vio a Jesús, pensando que era el hortelano. Él dijo: “María,” y le reconoció, clamando “Raboni,” Maestro. Le dijo: “No me toques, porque aún no he subido,” mas que fuera a decirlo a sus hermanos. Así María fue la primera en anunciar: “He visto al Señor.” Las primeras testigos fueron mujeres.", "ken": ["mary", "weeping", "gardener", "rabboni", "cling", "ascend", "witness", "lord"], "kes": ["maria", "llor", "hortelano", "raboni", "toques", "subido", "testig", "senor"]}, {"en": "Recount the road to Emmaus (Luke 24).", "es": "Relate el camino a Emaús (Lucas 24).", "men": "Two disciples walked to Emmaus, downcast, and Jesus drew near, but their eyes were restrained. They told the Stranger of Jesus crucified and the empty tomb. He called them slow of heart and showed from Moses and all the Prophets that the Christ had to suffer and enter glory. At the table He broke bread, their eyes were opened, and they knew Him; their hearts had burned as He opened the Scriptures.", "mes": "Dos discípulos iban a Emaús, abatidos, y Jesús se acercó, mas sus ojos estaban velados. Contaron al Forastero de Jesús crucificado y del sepulcro vacío. Les llamó tardos de corazón y mostró desde Moisés y todos los profetas que el Cristo debía padecer y entrar en gloria. A la mesa partió el pan, se les abrieron los ojos y le reconocieron; sus corazones habían ardido mientras abría las Escrituras.", "ken": ["emmaus", "disciple", "stranger", "moses", "prophet", "bread", "burn", "scripture"], "kes": ["emaus", "discipul", "forastero", "moises", "profeta", "pan", "ardi", "escritura"]}, {"en": "Describe the upper-room appearance: peace, the body, and the Spirit (Luke 24; John 20).", "es": "Describa la aparición en el aposento alto: la paz, el cuerpo y el Espíritu (Lucas 24; Juan 20).", "men": "That evening, the doors shut, Jesus stood among them and said, “Peace be with you,” showing His hands and side. To prove He was risen in body, not a ghost, He said, “Handle Me and see,” and ate fish before them. Then He said, “As the Father sent Me, so I send you,” and breathed on them, “Receive the Holy Spirit.”", "mes": "Aquella tarde, cerradas las puertas, Jesús se puso en medio y dijo: “Paz a vosotros,” mostrando sus manos y su costado. Para probar que estaba resucitado en cuerpo, no un fantasma, dijo: “Palpad, y ved,” y comió pescado delante de ellos. Luego dijo: “Como me envió el Padre, así yo os envío,” y sopló sobre ellos: “Recibid el Espíritu Santo.”", "ken": ["peace", "hands", "body", "ghost", "handle", "fish", "spirit", "send"], "kes": ["paz", "manos", "cuerpo", "fantasma", "palpad", "pescado", "espiritu", "envi"]}, {"en": "Explain the account of Thomas (John 20).", "es": "Explique el relato de Tomás (Juan 20).", "men": "Thomas was absent and would not believe unless he saw and touched the print of the nails. Eight days later Jesus came though the doors were shut and said to Thomas, “Reach your finger here... do not be unbelieving, but believing.” Thomas answered, “My Lord and my God.” Jesus blessed those who have not seen and yet have believed, a word for every later believer.", "mes": "Tomás estaba ausente y no quiso creer si no veía y tocaba la señal de los clavos. Ocho días después vino Jesús, cerradas las puertas, y dijo a Tomás: “Mete aquí tu dedo... no seas incrédulo, sino creyente.” Tomás respondió: “Señor mío, y Dios mío.” Jesús bendijo a los que no vieron y creyeron, una palabra para todo creyente posterior.", "ken": ["thomas", "believe", "nails", "finger", "touch", "lord", "god", "blessed"], "kes": ["tomas", "creer", "clavos", "dedo", "toca", "senor", "dios", "bendij"]}, {"en": "State the Great Commission (Matt 28:18-20).", "es": "Exponga la Gran Comisión (Mateo 28:18-20).", "men": "On a mountain in Galilee Jesus gave the Great Commission, claiming, “All authority has been given to Me in heaven and on earth.” He commanded them to go and make disciples of all the nations, baptizing them in the name of the Father, Son, and Holy Spirit, and teaching them to obey all He commanded. He promised, “I am with you always, even to the end of the age.”", "mes": "En un monte de Galilea Jesús dio la Gran Comisión, declarando: “Toda potestad me es dada en el cielo y en la tierra.” Les mandó ir y hacer discípulos a todas las naciones, bautizándolos en el nombre del Padre, del Hijo y del Espíritu Santo, y enseñándoles a guardar todo lo que mandó. Prometió: “Yo estoy con vosotros todos los días, hasta el fin del mundo.”", "ken": ["authority", "commission", "disciple", "nations", "baptiz", "father", "teach", "always"], "kes": ["potestad", "comision", "discipul", "naciones", "bautiz", "padre", "ensen", "dias"]}, {"en": "Explain the restoration of Peter (John 21).", "es": "Explique la restauración de Pedro (Juan 21).", "men": "By the Sea of Galilee the risen Lord restored Peter, who had denied Him three times. Three times Jesus asked, “Do you love Me?” and three times charged him, “Feed My sheep.” The threefold question matched the threefold denial, and the grace of the risen Christ was enough to lift up the fallen disciple and send him out again to serve.", "mes": "Junto al mar de Galilea el Señor resucitado restauró a Pedro, que le había negado tres veces. Tres veces Jesús preguntó: “¿Me amas?” y tres veces le encargó: “Apacienta mis ovejas.” La triple pregunta correspondía a la triple negación, y la gracia del Cristo resucitado bastó para levantar al discípulo caído y enviarlo de nuevo a servir.", "ken": ["peter", "restore", "denied", "love", "feed", "sheep", "grace", "three"], "kes": ["pedro", "restaur", "negado", "amas", "apacienta", "ovejas", "gracia", "tres"]}, {"en": "Describe the ascension and the promise of His return (Luke 24; Acts 1).", "es": "Describa la ascensión y la promesa de su regreso (Lucas 24; Hechos 1).", "men": "After blessing the disciples near Bethany, Jesus was parted from them and carried up into heaven. As they gazed upward, two men in white said, “This same Jesus will so come in like manner as you saw Him go.” He who rose has also ascended, and He will return. The work of the church now flows out of an empty tomb and a risen, reigning Lord.", "mes": "Tras bendecir a los discípulos cerca de Betania, Jesús fue apartado de ellos y llevado arriba al cielo. Mientras miraban al cielo, dos varones de blanco dijeron: “Este mismo Jesús así vendrá como le habéis visto ir.” El que resucitó también ha ascendido, y volverá. La obra de la iglesia brota ahora de un sepulcro vacío y de un Señor resucitado y reinante.", "ken": ["bless", "ascend", "heaven", "return", "jesus", "gaze", "church", "risen"], "kes": ["bendec", "ascend", "cielo", "volver", "jesus", "mira", "iglesia", "resucit"]}, {"en": "What does the resurrection mean (1 Cor 15)?", "es": "¿Qué significa la resurrección (1 Cor 15)?", "men": "The resurrection is the Father's “Amen” to the Son's “It is finished,” the open proof that the sacrifice was accepted, the debt paid, and death conquered. Paul says if Christ is not risen our faith is futile and we are still in our sins; but Christ is risen, the firstfruits of those who sleep. Because He lives, all who trust Him will live, and as He rose, His people will rise.", "mes": "La resurrección es el “Amén” del Padre al “Consumado es” del Hijo, la prueba abierta de que el sacrificio fue aceptado, la deuda pagada y la muerte vencida. Pablo dice que si Cristo no resucitó vana es nuestra fe y aún estamos en nuestros pecados; mas Cristo resucitó, primicias de los que duermen. Porque Él vive, todos los que confían en Él vivirán, y como Él resucitó, su pueblo resucitará.", "ken": ["resurrection", "father", "finished", "death", "futile", "firstfruits", "risen", "live"], "kes": ["resurreccion", "padre", "consumado", "muerte", "vana", "primicias", "resucit", "vive"]}, {"en": "How do the divine and human stand together in the risen Lord, and how does the story close?", "es": "¿Cómo están juntos lo divino y lo humano en el Señor resucitado, y cómo cierra la historia?", "men": "The divine and human stand together still: the same body that was crucified and buried rose, was seen and touched and ate, yet passed through shut doors and ascended to glory — truly man, truly God, the living Lord. The story that began in a manger and ran to a cross does not end in a tomb but with a living Christ who says, “I am with you always.”", "mes": "Lo divino y lo humano están juntos todavía: el mismo cuerpo que fue crucificado y sepultado resucitó, fue visto y palpado y comió, mas pasó a través de puertas cerradas y ascendió a la gloria — verdadero hombre, verdadero Dios, el Señor viviente. La historia que comenzó en un pesebre y corrió hasta una cruz no termina en una tumba sino con un Cristo viviente que dice: “Yo estoy con vosotros todos los días.”", "ken": ["divine", "human", "body", "rose", "touch", "ascend", "living", "always"], "kes": ["divino", "humano", "cuerpo", "resucit", "palpad", "ascend", "viviente", "dias"]}]};
+
+/* ---- storage hardening (Android content:// safe) ---- */
+var _ctsMem={};
+function lsGet(k){try{var v=localStorage.getItem(k);return v===null?(k in _ctsMem?_ctsMem[k]:null):v;}catch(e){return k in _ctsMem?_ctsMem[k]:null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}_ctsMem[k]=v;}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}delete _ctsMem[k];}
+
+/* ---- helpers ---- */
+function fold(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function kwHit(ans,kw){var a=fold(ans),k=fold(kw);if(!k)return false;
+  if(k.length<=3){return new RegExp('(^|[^a-z0-9])'+reEsc(k)+'([^a-z0-9]|$)').test(a);}
+  return new RegExp('(^|[^a-z0-9])'+reEsc(k)).test(a);}
+function saScore(ans,kws){var n=0;for(var i=0;i<kws.length;i++){if(kwHit(ans,kws[i]))n++;}return n;}
+function mcCorrectIdx(code,qpos){return(((code-7*(qpos+3))%251)+251)%251;}
+
+var LET=['A','B','C','D'];
+var STATE={lang:'en',track:'cert',name:'',mc:[],sa:[],revealed:false};
+for(var i=0;i<DATA.mc.length;i++)STATE.mc.push({answered:false,chosen:-1});
+for(var j=0;j<DATA.sa.length;j++)STATE.sa.push({checked:false,text:'',hits:0});
+
+var I18N={
+ en:{title:'The Life of Christ',unit:'Unit 9 · The Resurrection',lang:'Espa\u00f1ol',
+   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
+   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
+   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
+   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
+   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
+   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
+   complete:'Complete Unit 9',
+   epigraph:'“He is not here; for He is risen, as He said.” (Matthew 28:6)',
+   mGood:'✓ Unit complete. You may continue to Unit 10.',
+   mShort:'Keep going \u2014 review the material and try again.',
+   nextTxt:'Next: Unit 10 →',
+   mh:'Welcome to The Life of Christ',mp:'Please register once. Your name and track carry across every CTS course on this site.',
+   mnl:'Your name',mtl:'Track',mgo:'Begin',
+   hitFmt:function(h){return h+' of 8 keywords';},
+   passV:'Pass',softV:'Practice noted'},
+ es:{title:'La Vida de Cristo',unit:'Unidad 9 · La Resurrección',lang:'English',
+   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
+   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
+   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
+   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
+   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
+   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
+   complete:'Completar la Unidad 9',
+   epigraph:'“No está aquí; porque ha resucitado, como dijo.” (Mateo 28:6)',
+   mGood:'✓ Unidad completa. Puede continuar a la Unidad 10.',
+   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
+   nextTxt:'Siguiente: Unidad 10 →',
+   mh:'Bienvenido a La Vida de Cristo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
+   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
+   hitFmt:function(h){return h+' de 8 palabras clave';},
+   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+};
+function T(){return I18N[STATE.lang];}
+function isMasters(){return STATE.track==='mdiv'||STATE.track==='thm';}
+function lockMin(){return isMasters()?15:2;}
+
+function $(id){return document.getElementById(id);}
+
+/* ---------- rendering ---------- */
+function renderTeaching(){
+  $('teach-en').className=STATE.lang==='en'?'':'hide';
+  $('teach-es').className=STATE.lang==='es'?'':'hide';
+}
+function renderChrome(){
+  var t=T();
+  document.documentElement.lang=STATE.lang;
+  $('t-title').textContent=t.title;$('t-unit').innerHTML=t.unit;
+  $('langBtn').textContent=t.lang;
+  $('t-greet').textContent=t.greet(STATE.name);
+  $('t-track').textContent=t.track(STATE.track);
+  $('epigraph').textContent=t.epigraph;
+  $('t-mc').textContent=t.mc;$('t-sa').textContent=t.sa;
+  $('t-saNote').textContent=isMasters()?t.saNoteMast:t.saNoteCert;
+  $('completeBtn').textContent=t.complete;
+  $('m-h').textContent=t.mh;$('m-p').textContent=t.mp;$('m-nl').textContent=t.mnl;
+  $('m-tl').textContent=t.mtl;$('m-go').textContent=t.mgo;
+}
+function renderMC(){
+  var wrap=$('mcWrap');wrap.innerHTML='';
+  for(var i=0;i<DATA.mc.length;i++){
+    (function(i){
+      var q=DATA.mc[i],st=STATE.mc[i];
+      var opts=STATE.lang==='en'?q.oen:q.oes;
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var expl=STATE.lang==='en'?q.xen:q.xes;
+      var correct=mcCorrectIdx(q.c,i);
+      var div=document.createElement('div');div.className='q';
+      var h='<div class="qn">'+(i+1)+'</div><div class="qp">'+prompt+'</div>';
+      div.innerHTML=h;
+      for(var o=0;o<4;o++){
+        (function(o){
+          var b=document.createElement('button');b.type='button';b.className='opt';
+          b.innerHTML='<span class="lt">'+LET[o]+'</span>'+opts[o];
+          if(st.answered){b.disabled=true;
+            if(o===correct)b.className='opt correct';
+            else if(o===st.chosen)b.className='opt wrong';}
+          else if(st.answered&&o===st.chosen){b.style.background='#efe7d2';b.style.borderColor='#d4af37';b.style.fontWeight='600';}
+          b.onclick=function(){if(st.answered)return;
+            STATE.mc[i].answered=true;STATE.mc[i].chosen=o;renderMC();};
+          div.appendChild(b);
+        })(o);
+      }
+      var e=document.createElement('div');e.className='expl'+(st.answered?' show':'');
+      e.textContent=expl;div.appendChild(e);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderSA(){
+  var wrap=$('saWrap');wrap.innerHTML='';var t=T();
+  for(var i=0;i<DATA.sa.length;i++){
+    (function(i){
+      var q=DATA.sa[i],st=STATE.sa[i];
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var model=STATE.lang==='en'?q.men:q.mes;
+      var div=document.createElement('div');div.className='q';
+      div.innerHTML='<div class="qn">'+(21+i)+'</div><div class="qp">'+prompt+'</div>';
+      var ta=document.createElement('textarea');ta.value=st.text;
+      ta.oninput=function(){STATE.sa[i].text=ta.value;};
+      div.appendChild(ta);
+      var btn=document.createElement('button');btn.type='button';btn.className='btn ghost';
+      btn.style.marginTop='8px';btn.textContent=t.check;
+      var res=document.createElement('div');res.className='sa-res'+(st.checked?' show':'');
+      function paint(){
+        var kws=STATE.lang==='en'?q.ken:q.kes;
+        var txt=STATE.sa[i].text||'';
+        if(txt.trim().length<100){
+          STATE.sa[i].hits=0;
+          res.innerHTML='<span class="sa-verdict soft">'+(STATE.lang==='en'?'Write a fuller answer (100 characters minimum).':'Escriba una respuesta m\u00e1s completa (m\u00ednimo 100 caracteres).')+'</span>';
+          res.classList.add('show');
+          return;
+        }
+        var hits=saScore(txt,kws);STATE.sa[i].hits=hits;
+        var pass=hits>=3;
+        var verdict=pass?('<span class="sa-verdict pass">'+t.passV+'</span>'):('<span class="sa-verdict soft">'+t.softV+'</span>');
+        res.innerHTML=verdict+' &middot; '+t.hitFmt(hits)+
+          '<div class="model"><div class="ml">'+t.model+'</div>'+model+'</div>';
+        res.className='sa-res show';STATE.sa[i].checked=true;
+      }
+      btn.onclick=function(){
+        if(!STATE.sa[i].text.trim()){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.blank+'</span>';return;}
+        if(STATE.sa[i].text.trim().length<100){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.minLen+'</span>';return;}
+        paint();
+      };
+      if(st.checked&&st.text.trim())paint();
+      div.appendChild(btn);div.appendChild(res);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderAll(){renderChrome();renderTeaching();renderMC();renderSA();refreshLock();}
+
+/* ---------- completion + lockout ---------- */
+function lockedUntil(){var v=lsGet(CFG.lockKey);return v?parseInt(v,10):0;}
+function refreshLock(){
+  var until=lockedUntil(),now=Date.now();
+  var btn=$('completeBtn');
+  if(until>now){
+    btn.disabled=true;
+    var mins=Math.ceil((until-now)/60000);
+    $('statusMsg').className='status lock';
+    $('statusMsg').textContent=(STATE.lang==='en'?'Locked. Try again in ':'Bloqueado. Reintente en ')+mins+(STATE.lang==='en'?' min.':' min.');
+  }else{btn.disabled=false;}
+}
+function markComplete(){
+  var p={};try{p=JSON.parse(lsGet(CFG.progressKey)||'{}');}catch(e){p={};}
+  p[CFG.unit]=true;lsSet(CFG.progressKey,JSON.stringify(p));
+  var t=T();
+  $('statusMsg').className='status ok';$('statusMsg').textContent=t.mGood;
+  var nl=$('nextLink');nl.href=CFG.next;nl.textContent=t.nextTxt;nl.className='next';
+  $('completeBtn').disabled=true;
+}
+function onComplete(){
+  var t=T();
+  var mcCorrect=0,mcAnswered=0;
+  for(var i=0;i<DATA.mc.length;i++){if(STATE.mc[i].answered){mcAnswered++;
+    if(STATE.mc[i].chosen===mcCorrectIdx(DATA.mc[i].c,i))mcCorrect++;}}
+  var saPass=0;for(var j=0;j<DATA.sa.length;j++){if(STATE.sa[j].hits>=3)saPass++;}
+  var needMC=18,needSA=9;
+  if(mcAnswered<DATA.mc.length){
+    $('statusMsg').className='status warn';
+    $('statusMsg').textContent=(STATE.lang==='en'
+      ?'Answer all multiple-choice questions first ('+mcAnswered+'/20).'
+      :'Responda primero todas las preguntas de opci\u00f3n m\u00faltiple ('+mcAnswered+'/20).');
+    return;
+  }
+  STATE.revealed=true;renderMC();
+  var saOk = isMasters() ? (saPass>=needSA) : true;
+  if(mcCorrect>=needMC&&saOk){markComplete();return;}
+  // genuine fail -> lockout
+  lsSet(CFG.lockKey,String(Date.now()+lockMin()*60000));
+  $('statusMsg').className='status lock';
+  $('statusMsg').textContent=(STATE.lang==='en'
+    ?('Not yet: MC '+mcCorrect+'/20 (need 18), SA '+saPass+'/10 (need 7). '+t.mShort)
+    :('A\u00fan no: OM '+mcCorrect+'/20 (necesita 18), RB '+saPass+'/10 (necesita 7). '+t.mShort));
+  refreshLock();
+}
+
+/* ---------- init ---------- */
+function startApp(){
+  STATE.lang=(lsGet('cts_lang')==='es')?'es':'en';
+  STATE.name=lsGet('cts_student')||'';
+  STATE.track=lsGet('cts_track')||'cert';
+  $('langBtn').onclick=function(){STATE.lang=STATE.lang==='en'?'es':'en';
+    lsSet('cts_lang',STATE.lang);renderAll();};
+  $('completeBtn').onclick=onComplete;
+  $('m-go').onclick=function(){
+    var nm=$('m-name').value.trim();var tk=$('m-track').value;
+    if(!nm){$('m-name').focus();return;}
+    STATE.name=nm;STATE.track=tk;
+    lsSet('cts_student',nm);lsSet('cts_track',tk);
+    $('reg').className='modal hide';renderAll();
+  };
+  if(CFG.showReg&&(!STATE.name||!lsGet('cts_track'))){
+    $('reg').className='modal';$('m-track').value=STATE.track;renderChrome();
+  }else{$('reg').className='modal hide';}
+  renderAll();
+  setInterval(refreshLock,30000);
+}
+if(typeof document!=='undefined'){
+  if(document.readyState!=='loading')startApp();
+  else document.addEventListener('DOMContentLoaded',startApp);
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSLOCReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

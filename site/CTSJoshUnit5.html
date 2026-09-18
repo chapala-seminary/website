@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Joshua Intensive — Unit 5: Achan's Sin & the Restoration of Ai</title>
+<style>
+:root{--green-dark:#2f4f2f;--green-mid:#3f6b3f;--green-light:#ecf2ec;--gold:#d4af37;--gold-soft:#efe2b3;--ink:#1f2a1f;--rule:#b9c9b9;--warn:#b03a2e;--white:#fff}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:var(--green-light);line-height:1.6;font-size:16px}
+body.lang-en .es-only{display:none}body.lang-es .en-only{display:none}
+header.site{background:var(--green-dark);color:var(--white);padding:18px 24px;border-bottom:4px solid var(--gold)}
+header.site .crest{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:4px}
+header.site h1{margin:0;font-size:1.45rem;font-weight:700}
+header.site .credits{font-size:.9rem;color:var(--gold-soft);margin-top:6px}
+.toolbar{background:var(--white);border-bottom:1px solid var(--rule);padding:10px 24px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.toolbar .lang-toggle button{background:var(--green-light);border:1px solid var(--green-mid);color:var(--green-dark);padding:6px 12px;font-family:inherit;cursor:pointer;border-radius:3px;font-size:.85rem;margin-right:4px}
+.toolbar .lang-toggle button.active{background:var(--green-dark);color:var(--white)}
+.toolbar .greeting{color:var(--green-dark);font-style:italic;font-size:.95rem}
+.reg-warn{background:#fff3cd;border-left:5px solid var(--gold);padding:12px 18px;margin:0;font-size:.92rem;color:#6b5800}
+.reg-warn.hidden{display:none}
+.progress-grid{background:var(--white);padding:16px 24px;border-bottom:1px solid var(--rule)}
+.progress-grid h3{margin:0 0 10px;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--green-dark)}
+.progress-grid .units{display:flex;gap:6px;flex-wrap:wrap}
+.progress-grid .unit-pill{padding:6px 10px;border:1px solid var(--rule);border-radius:3px;font-size:.78rem;background:var(--green-light);color:var(--green-dark);min-width:60px;text-align:center}
+.progress-grid .unit-pill.done{background:var(--green-dark);color:var(--white);border-color:var(--green-dark)}
+.progress-grid .unit-pill.current{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700}
+.progress-grid .unit-pill.locked{opacity:.55}
+main{max-width:920px;margin:0 auto;padding:24px}
+.unit-title{text-align:center;margin:8px 0 24px}
+.unit-title .label{font-size:.85rem;letter-spacing:.12em;color:var(--green-mid);text-transform:uppercase}
+.unit-title h2{font-size:1.9rem;margin:6px 0 4px;color:var(--green-dark)}
+.unit-title .subtitle{color:var(--green-mid);font-style:italic;font-size:1.05rem}
+.unit-title .scripture{margin-top:14px;padding:12px 18px;background:var(--white);border-left:4px solid var(--gold);font-size:.96rem}
+section.lesson{background:var(--white);padding:22px 26px;margin:22px 0;border-radius:4px;border-top:3px solid var(--green-dark);box-shadow:0 1px 3px rgba(0,0,0,.06)}
+section.lesson h3{color:var(--green-dark);font-size:1.3rem;margin:0 0 4px}
+section.lesson h4{color:var(--green-mid);font-size:1.08rem;margin:18px 0 6px;border-bottom:1px dotted var(--rule);padding-bottom:3px}
+section.lesson p{margin:0 0 12px}
+section.lesson blockquote{margin:12px 0;padding:10px 16px;background:var(--green-light);border-left:4px solid var(--green-mid);font-style:italic;color:var(--green-dark)}
+section.lesson .anchor{display:block;text-align:center;margin:14px auto;padding:10px 14px;background:var(--gold-soft);border:1px solid var(--gold);color:#5a4a10;font-weight:700;font-style:italic;max-width:600px}
+.exam{background:var(--white);padding:22px 26px;margin:30px 0 22px;border-radius:4px;border-top:3px solid var(--gold)}
+.exam h3{color:var(--green-dark);margin-top:0}
+.exam .question{padding:12px 0;border-bottom:1px dashed var(--rule)}
+.exam .question p.q{margin:0 0 8px;font-weight:600}
+.exam .options label{display:block;padding:4px 0 4px 18px;cursor:pointer}
+.exam textarea{width:100%;min-height:60px;font-family:inherit;padding:8px;border:1px solid var(--rule);border-radius:3px;resize:vertical}
+.exam-controls{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+button.submit-exam{background:var(--green-dark);color:var(--white);border:none;padding:12px 22px;font-size:1rem;font-family:inherit;cursor:pointer;border-radius:3px}
+button.submit-exam:disabled{background:#888;cursor:not-allowed}
+#result{font-weight:700;font-size:1.05rem;padding:10px 14px;border-radius:3px}
+#result.pass{background:#d6e9d6;color:var(--green-dark);border:1px solid var(--green-mid)}
+#result.fail{background:#f8d7da;color:var(--warn);border:1px solid var(--warn)}
+footer.unit-nav{max-width:920px;margin:0 auto;padding:18px 24px 40px;display:flex;justify-content:space-between;gap:12px}
+footer.unit-nav button{background:var(--green-dark);color:var(--white);border:none;padding:12px 18px;font-family:inherit;cursor:pointer;border-radius:3px;font-size:.95rem}
+footer.unit-nav button:disabled{background:#999;cursor:not-allowed}
+@media (max-width:640px){main{padding:14px}section.lesson{padding:16px 18px}.exam{padding:16px 18px}header.site h1{font-size:1.2rem}}
+
+@media print{
+.lang-toggle,.toolbar,.nav,.progress-grid,.exam-controls,.reg-warn,.unit-pill{display:none !important}
+.options label{display:block}
+body{background:white;padding:10px;font-size:12pt}
+.card{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}
+.question{page-break-inside:avoid}
+}
+</style></head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site"><div class="crest">Chapala Theological Seminary &middot; Seminario Teológico de Chapala</div><h1 class="en-only">Joshua Intensive &mdash; Unit 5: Achan's Sin &amp; the Restoration of Ai</h1><h1 class="es-only">Intensivo de Josué &mdash; Unidad 5: El pecado de Acán y la restauración de Hai</h1><div class="credits">Professor: Dr. Wayne Cook &nbsp;|&nbsp; Director: Dr. Ted Rogers</div></header>
+<div class="toolbar"><div class="lang-toggle" role="group" aria-label="Language"><button data-lang="en" class="active">English</button><button data-lang="es">Español</button><button data-lang="both">Both / Ambos</button></div><div class="greeting" id="greeting"></div></div>
+<div class="reg-warn hidden" id="reg-warn"><span class="en-only"><strong>Heads up:</strong> No registration found. Your progress will save in this browser, but ask the registrar to enroll you formally before exam day.</span><span class="es-only"><strong>Aviso:</strong> No se encontró registro. Tu progreso se guardará en este navegador, pero pide al registrador inscribirte formalmente antes del día del examen.</span></div>
+<div class="progress-grid"><h3 class="en-only">Course Progress &mdash; 10 Units</h3><h3 class="es-only">Progreso del Curso &mdash; 10 Unidades</h3><div class="units" id="progress-units"></div></div>
+<main>
+<div class="unit-title"><div class="label en-only">Unit 5 &middot; Joshua 7&ndash;8</div><div class="label es-only">Unidad 5 &middot; Josué 7&ndash;8</div><h2 class="en-only">Achan's Sin and the Restoration of Ai</h2><h2 class="es-only">El pecado de Acán y la restauración de Hai</h2><div class="subtitle en-only">"You don't sin alone."</div><div class="subtitle es-only">«No pecas a solas».</div><div class="scripture"><div class="en-only"><strong>Course Scripture:</strong> "My son, I beg you, give glory to the LORD God of Israel, and make confession to Him." &mdash; Joshua 7:19 (NKJV)</div><div class="es-only"><strong>Escritura del Curso:</strong> «Hijo mío, te ruego que des gloria a Jehová Dios de Israel, y dale alabanza; declárame ahora lo que has hecho.» &mdash; Josué 7:19 (RVG)</div></div></div>
+
+<section class="lesson"><h3 class="en-only">Orientation: When Bad Things Happen to People Who Do Bad Things</h3><h3 class="es-only">Orientación: Cuando suceden cosas malas a personas que hacen cosas malas</h3>
+<div class="en-only">
+<p>You have heard of the book <em>When Bad Things Happen to Good People</em>. That is certainly true. Job is the great Old Testament example: he did nothing wrong, yet lost his money, his health, and his children. His wife told him to curse God and die. His friends told him there had to be hidden sin in his life &mdash; that was the common sentiment in his day. Even the disciples were confused; they saw the man born blind from birth and asked Jesus whether it was the man's sin or his parents' sin that caused his blindness. Jesus said it was neither and just healed the man.</p>
+<p>But the other half of the truth is just as biblical, and Joshua 7 is the textbook case for it: <em>sometimes bad things happen to people who do bad things.</em> Sin has consequences. Wayne tells of a couple in Canada when he served there as a pastor. Debbie was a charter member of the church. She came regularly and brought her children. Her husband Dave had actually attended a Bible college after high school, but he said church was unnecessary to be a Christian and that besides, there were hypocrites in the church. When their son was in the second grade, the Sunday school teacher was talking about Memorial Day &mdash; and remembering people who had died. The boy spoke up: <em>"But they are not gone forever, because they are in heaven now."</em> Over the years, Dave scheduled more and more activities on Sunday. Debbie stopped coming. None of the five children really attended after the third grade or so &mdash; they wanted to be like their father. Today the boy who knew about heaven in the second grade is involved in bad crowds and drugs. Debbie has started attending church again, but none of the children attend with her. Bad things sometimes happen to people who do bad things, and the things that fall on them often fall on the people they love.</p>
+<span class="anchor">You don't sin alone.</span>
+<p>Joshua 7 and 8 work together as a single arc. Chapter 7 shows the defeat at Ai, the discovery of Achan's hidden sin, the public dealing with it in the Valley of Achor, and the restoration of the covenant. Chapter 8 shows the second attack on Ai &mdash; this time successful &mdash; and the building of an altar on Mount Ebal where the entire Law of God is read aloud over the assembled nation, blessings and curses both. The two chapters together teach a single lesson: <em>God will not bless an army that is hiding stolen goods in its tent, and God will gladly bless an army that has dealt with the sin and gathered again around His altar.</em></p>
+<p>This unit walks the same arc. Section I takes the three reasons for failure at Ai &mdash; pride, neglect of prayer, and disobedience. Section II walks the discovery and confession (the dying farmer who said, "Ring the bell"). Section III stands at the Valley of Achor with Achan's family and a more recent execution that mirrored it (Karla Faye Tucker, February 1998). Section IV listens to John Fischer's haunting refrain &mdash; <em>"You don't sin alone"</em>. Section V picks up the New Guinea monkey trap. Section VI moves into chapter 8: God says, <em>"Do not fear or be dismayed,"</em> and Israel takes the city it could not take a week earlier. Section VII climbs Mount Ebal where the altar is built and the Law is read aloud. The Closing turns the Valley of Achor into a door of hope (Hosea 2:15).</p>
+</div>
+<div class="es-only">
+<p>Has oído del libro <em>Cuando a la gente buena le pasan cosas malas</em>. Eso es ciertamente verdadero. Job es el gran ejemplo del Antiguo Testamento: no hizo nada malo, pero perdió su dinero, su salud y sus hijos. Su esposa le dijo que maldijera a Dios y muriera. Sus amigos le dijeron que debía haber pecado oculto en su vida &mdash; ese era el sentimiento común en su día. Aun los discípulos estaban confundidos; vieron al hombre ciego de nacimiento y preguntaron a Jesús si era el pecado del hombre o el de sus padres lo que causó su ceguera. Jesús dijo que ninguno y simplemente sanó al hombre.</p>
+<p>Pero la otra mitad de la verdad es igual de bíblica, y Josué 7 es el caso de manual para ella: <em>a veces les pasan cosas malas a las personas que hacen cosas malas.</em> El pecado tiene consecuencias. Wayne cuenta de una pareja en Canadá cuando servía allí como pastor. Debbie era miembro fundador de la iglesia. Venía regularmente y traía a sus hijos. Su esposo Dave había asistido a un instituto bíblico, pero decía que la iglesia no era necesaria para ser cristiano y que además había hipócritas en la iglesia. Cuando su hijo estaba en segundo grado, la maestra hablaba del Día de los Caídos &mdash; recordando a personas que habían muerto. El niño habló: <em>«Pero no se han ido para siempre, porque ya están en el cielo».</em> Con los años, Dave fue programando más actividades en domingo. Debbie dejó de venir. Ninguno de los cinco hijos realmente asistió después del tercer grado &mdash; querían ser como su padre. Hoy el niño que sabía del cielo en segundo grado está metido con malas compañías y drogas. Debbie ha vuelto a asistir, pero ninguno de los hijos asiste con ella. A veces les pasan cosas malas a las personas que hacen cosas malas, y las cosas que caen sobre ellos a menudo caen sobre la gente que aman.</p>
+<span class="anchor">No pecas a solas.</span>
+<p>Josué 7 y 8 funcionan juntos como un solo arco. El capítulo 7 muestra la derrota en Hai, el descubrimiento del pecado oculto de Acán, el trato público en el Valle de Acor y la restauración del pacto. El capítulo 8 muestra el segundo ataque a Hai &mdash; esta vez exitoso &mdash; y la edificación de un altar en el monte Ebal donde toda la Ley es leída en voz alta sobre la nación reunida, bendiciones y maldiciones por igual. Los dos capítulos juntos enseñan una sola lección: <em>Dios no bendecirá un ejército que esconde bienes robados en su tienda, y Dios bendecirá con gusto un ejército que ha tratado con el pecado y se ha vuelto a reunir alrededor de Su altar.</em></p>
+<p>Esta unidad recorre el mismo arco. La Sección I toma las tres razones del fracaso en Hai &mdash; orgullo, descuido de la oración y desobediencia. La Sección II camina por el descubrimiento y la confesión (el granjero moribundo que dijo: «Toca la campana»). La Sección III se detiene en el Valle de Acor con la familia de Acán y una ejecución más reciente que la reflejó (Karla Faye Tucker, febrero 1998). La Sección IV escucha el estribillo de John Fischer: <em>«No pecas a solas»</em>. La Sección V toma la trampa para monos de Nueva Guinea. La Sección VI entra en el capítulo 8: Dios dice, <em>«No temas ni desmayes»</em>, e Israel toma la ciudad que no pudo tomar una semana antes. La Sección VII sube al monte Ebal. El Cierre convierte el Valle de Acor en una puerta de esperanza (Oseas 2:15).</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">I. Three Reasons for the Defeat at Ai</h3><h3 class="es-only">I. Tres razones para la derrota en Hai</h3>
+<div class="en-only">
+<p>Joshua 7 begins with one of the most ominous sentences in the Old Testament: <em>"But the children of Israel committed a trespass regarding the accursed things, for Achan&hellip; took of the accursed things; so the anger of the LORD burned against the children of Israel"</em> (Joshua 7:1). One man took. The whole nation suffered. The text already knows what the army does not yet know &mdash; that the army marching toward the next city is marching with stolen goods buried in one of its tents. From the human side it looks like a failed military campaign. From God's side it is a covenant in trouble.</p>
+
+<h4>1. Pride &mdash; The Danger of Over-Confidence (Joshua 7:2&ndash;5)</h4>
+<p>Jericho had fallen without a sword being swung. Now Joshua sends scouts to look at Ai, the next town up the road. They come back with confident counsel: <em>"Do not let all the people go up, but let about two or three thousand men go up and attack Ai. Do not weary all the people there, for the people of Ai are few"</em> (Joshua 7:3). Joshua takes the spies' counsel. There is no record that he prayed about it. There is no record that he asked the LORD whether to attack at all. He simply nods at the report and sends three thousand men. The men of Ai come out, the Israelites flee, and thirty-six men are killed on the slope. The text says it plainly: <em>"the hearts of the people melted and became like water"</em> (Joshua 7:5). The same nation whose testimony had melted the kings of Canaan one chapter earlier now finds its own heart melting. That is what happens when a confident plan rests on a sin nobody has dealt with.</p>
+<p>Wayne illustrates the deeper problem with the story of Dr. C. J. Fowler, a noted holiness preacher and for many years head of the National Holiness Association. Fowler was the pastor of a very fine church and felt he needed to be sanctified to please God. He attended a holiness meeting and went to the altar. God guided him in his consecration, and he laid on God's altar many things, including a gold-headed cane and his stovepipe hat. After saying amen to all this, he still did not get the witness that he was sanctified. Then he asked God if there was anything else he should lay on the altar. God showed him that he had a professional pride, that there was in his heart a desire to be known as the pastor of a large church, and that he loved to have places of prominence. He promised God he would be content to be unknown, and that God would have his reputation. Then peace came and he knew he was sanctified. And God gave to him a field of usefulness wider than he could ever have attained had he refused to take the despised way of the Cross.</p>
+<p>That is the picture of pride that Joshua 7 is sketching at the army level. It is striking that Joshua instantly takes the counsel of the spies. The spies are confident, the camp is on a winning streak, and nobody asks the obvious question. Proverbs 16:18 walks into the room: <em>"Pride goes before destruction, and a haughty spirit before a fall."</em> Pride is the first reason for the defeat at Ai. The flint knives have been put away too soon. The sandals are back on.</p>
+
+<h4>2. Neglect of Prayer</h4>
+<p>The second reason follows the first like night follows day. When the three thousand soldiers headed out for Ai, the text records nothing about prayer. They are silent before God. Maybe they thought this was so trivial they didn't need to pray about it. Sometimes we forget we need God for the big things and the little things. We have to learn again that we can do nothing without Him. Wayne says he sometimes finds himself praying about very small things &mdash; even about finding a parking space. James says, <em>"You have not because you ask not"</em> (James 4:2).</p>
+<p>After the defeat, Joshua went straight to God. He even reproaches God: <em>"Why have You brought us here? Why are You going to destroy us?"</em> (cf. Joshua 7:7). God taught him that the blame did not lie at the LORD's door but at his own. The pattern is exactly backwards from how it should have been: pray before the battle, not just after the defeat. There is an old verse Wayne loves to quote about this:</p>
+<blockquote>"Restraining prayer, we cease to fight; / Prayer keeps the Christian's armor bright; / And Satan trembles when he sees, / The weakest saint upon his knees."</blockquote>
+<p>The weakest saint upon his knees has more authority in heaven than the strongest army on the slope of Ai. The three thousand had armor and weapons. They had no knees. They had no questions for God. They had only the spies' confident report. And so they ran.</p>
+
+<h4>3. Disobedience &mdash; Achan in the Tent</h4>
+<p>The third reason is the deepest and the hardest. After Joshua falls on his face before the LORD, God answers him with a flat statement: <em>"Israel has sinned, and they have also transgressed My covenant which I commanded them. For they have even taken some of the accursed things, and have both stolen and deceived; and they have also put it among their own stuff"</em> (Joshua 7:11). When Achan stole the Babylonian cloak, the silver, and the wedge of gold from Jericho, he surely never imagined there would be such terrible consequences. From Joshua to the whole camp, the one sin had a consequence. That is the way of sin. Like ripples on a stream, it spreads outward.</p>
+<p>The Captain of the LORD's host, who in chapter 5 had stood before Joshua with His sword drawn, has now sheathed His sword. The covenant is broken because someone has taken what belonged exclusively to the LORD. The army fights with no covering, and so the army loses. Pride opened the door. Prayerlessness left it open. Disobedience walked through.</p>
+</div>
+<div class="es-only">
+<p>Josué 7 comienza con una de las frases más ominosas del Antiguo Testamento: <em>«Mas los hijos de Israel cometieron prevaricación en cuanto al anatema; porque Acán&hellip; tomó del anatema; y la ira de Jehová se encendió contra los hijos de Israel»</em> (Josué 7:1). Un hombre tomó. Toda la nación sufrió. El texto ya sabe lo que el ejército todavía no sabe &mdash; que el ejército marcha con bienes robados enterrados en una de sus tiendas. Desde el lado humano parece una campaña militar fallida. Desde el lado de Dios es un pacto en problemas.</p>
+
+<h4>1. Orgullo &mdash; El peligro del exceso de confianza (Josué 7:2&ndash;5)</h4>
+<p>Jericó había caído sin que se blandiera una espada. Ahora Josué envía espías a observar Hai, la próxima ciudad camino arriba. Regresan con consejo confiado: <em>«No suba todo el pueblo, sino suban unos dos o tres mil hombres, y tomen a Hai; no fatigues a todo el pueblo yendo allá, porque son pocos»</em> (Josué 7:3). Josué toma el consejo de los espías. No hay registro de que orara al respecto. Simplemente asiente con el reporte y envía tres mil hombres. Los hombres de Hai salen, los israelitas huyen, y treinta y seis hombres son muertos en la cuesta. <em>«El corazón del pueblo desfalleció y vino a ser como agua»</em> (Josué 7:5). La misma nación cuyo testimonio había hecho desfallecer los corazones de los reyes de Canaán un capítulo antes ahora encuentra su propio corazón desfalleciendo. Eso es lo que pasa cuando un plan confiado descansa sobre un pecado que nadie ha tratado.</p>
+<p>Wayne ilustra el problema más profundo con la historia del Dr. C. J. Fowler, un notable predicador de santidad y por muchos años cabeza de la Asociación Nacional de Santidad. Fowler era pastor de una iglesia muy buena y sentía que necesitaba ser santificado para agradar a Dios. Asistió a una reunión de santidad y fue al altar. Dios lo guió en su consagración, y puso sobre el altar muchas cosas, incluyendo un bastón de cabeza dorada y su sombrero de copa. Después de decir amén a todo esto, todavía no recibía el testimonio de estar santificado. Entonces le preguntó a Dios si había algo más. Dios le mostró que tenía un orgullo profesional, un deseo de ser conocido como pastor de una iglesia grande, y que amaba lugares de prominencia. Le prometió a Dios que estaría contento de ser un desconocido, y que Dios tendría su reputación. Entonces vino la paz y supo que estaba santificado. Y Dios le dio un campo de utilidad más amplio del que jamás habría podido alcanzar de haberse rehusado a tomar el despreciado camino de la Cruz.</p>
+<p>Esa es la imagen del orgullo que Josué 7 está dibujando a nivel del ejército. Es sorprendente que Josué tome instantáneamente el consejo de los espías. Los espías están confiados, el campamento viene de una racha ganadora, y nadie hace la pregunta obvia. Proverbios 16:18 entra al cuarto: <em>«Antes del quebrantamiento es la soberbia; y antes de la caída la altivez de espíritu»</em>. El orgullo es la primera razón de la derrota en Hai.</p>
+
+<h4>2. Descuido de la oración</h4>
+<p>La segunda razón sigue a la primera como la noche sigue al día. Cuando los tres mil soldados salieron hacia Hai, el texto no registra nada sobre oración. Están silenciosos delante de Dios. Quizás pensaron que era tan trivial que no necesitaban orar. A veces olvidamos que necesitamos a Dios para las cosas grandes y para las pequeñas. Wayne dice que a veces se encuentra orando por cosas muy pequeñas &mdash; aun por encontrar un lugar de estacionamiento. Santiago dice: <em>«No tenéis lo que deseáis, porque no pedís»</em> (Santiago 4:2).</p>
+<p>Después de la derrota, Josué fue directamente a Dios. Aun le reprocha a Dios: <em>«¿Por qué nos has hecho pasar el Jordán?»</em> Dios le enseñó que la culpa no estaba a la puerta del SEÑOR sino a la suya propia. El patrón es al revés de como debió haber sido: orar antes de la batalla, no sólo después de la derrota. Hay una vieja estrofa que a Wayne le encanta citar:</p>
+<blockquote>«Restringiendo la oración, dejamos de pelear; / La oración mantiene brillante la armadura del cristiano; / Y Satanás tiembla cuando ve, / Al santo más débil de rodillas».</blockquote>
+<p>El santo más débil de rodillas tiene más autoridad en el cielo que el ejército más fuerte en la cuesta de Hai. Los tres mil tenían armadura y armas. No tenían rodillas. No tenían preguntas para Dios. Sólo tenían el reporte confiado de los espías. Y así huyeron.</p>
+
+<h4>3. Desobediencia &mdash; Acán en la tienda</h4>
+<p>La tercera razón es la más profunda y la más dura. Después de que Josué cae sobre su rostro delante de Jehová, Dios le responde con una declaración llana: <em>«Israel ha pecado&hellip; pues aun han tomado del anatema, y hasta han hurtado, y también han mentido, y aun lo han guardado entre sus enseres»</em> (Josué 7:11). Cuando Acán robó el manto babilónico, la plata y la cuña de oro de Jericó, seguramente nunca imaginó que habría tales terribles consecuencias. Desde Josué hasta todo el campamento, el único pecado tuvo una consecuencia. Esa es la forma del pecado. Como ondas en un arroyo, se extiende hacia afuera.</p>
+<p>El Capitán del ejército de Jehová, que en el capítulo 5 se había parado delante de Josué con Su espada desnuda, ahora ha envainado Su espada. El pacto está roto porque alguien ha tomado lo que pertenecía exclusivamente al SEÑOR. El ejército pelea sin cobertura, y así el ejército pierde. El orgullo abrió la puerta. La oración descuidada la dejó abierta. La desobediencia entró por ella.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">II. The Discovery and the Confession &mdash; "Ring the Bell"</h3><h3 class="es-only">II. El descubrimiento y la confesión &mdash; «Toca la campana»</h3>
+<div class="en-only">
+<p>The LORD does not name Achan to Joshua at first. Instead He prescribes a process: the nation will come near tribe by tribe, then by family, then by household, then man by man, and the LORD Himself will single out the offender (Joshua 7:14). It is slow on purpose. Every Israelite has all night to think about whether the lot might land on him. By the time the lot finally falls on Achan, every man in the camp has had to ask himself the question Achan should have asked weeks before.</p>
+<p>When Achan is finally identified, Joshua's words to him are remarkable. They are not the words of a furious general; they are the words of a pastor: <em>"My son, I beg you, give glory to the LORD God of Israel, and make confession to Him. Tell me now what you have done; do not hide it from me"</em> (Joshua 7:19). And Achan tells the whole truth. He saw a beautiful Babylonian garment, two hundred shekels of silver, and a wedge of gold weighing fifty shekels. He coveted them. He took them. He hid them in the earth in the middle of his tent. The progression is the progression of every secret sin: <em>I saw, I coveted, I took, I hid.</em> The same four verbs that ran through the Garden of Eden run through Achan's tent.</p>
+<p>Wayne illustrates the power of confession with a story:</p>
+<blockquote>It is said that a farmer was sick and prayed earnestly for his recovery. Somehow he felt it was the will of the Lord. But, after much prayer, neither he nor any of his friends seemed to be able to have any faith for his healing, and he became resigned to go. He was expected to die at any time. However, as he lingered, his children and friends returned to their nearby homes. It was agreed that, when his attendants felt that the end was about there, they would ring the bell, and this was to be the signal to assemble for the last good-bye. Finally, one day he said to his wife, "Ring the bell." She replied, "Are you worse, and do you feel the end is near?" He simply said, "Ring the bell."<br><br>The bell was rung, and soon all the children stood weeping around the bedside. Then he began confessing his failures. He would address the children, one by one, and speak of his faults, and how he had been impatient, or wronged them in some way. There was weeping and confessing all around. It was like a camp meeting. Finally he was through, and amid tears and shouts of joy he said, "Now, just one more thing; please get my clothes and let me out of here, for the Lord has healed me." And out he came.
+</blockquote>
+<p>God does say, <em>"Confess your faults one to another&hellip; that ye may be healed"</em> (James 5:16). Sometimes this might go a long way toward physical healing, or toward bringing spiritual healing to a home or church. This might precipitate a revival. Achan would not get the farmer's outcome. But the spiritual mechanism is the same: confession is the only thing that puts hidden sin out in the open where God can deal with it. The bell has to be rung. The clothes have to come out from under the floorboards of the tent.</p>
+</div>
+<div class="es-only">
+<p>Jehová no le nombra a Acán a Josué al principio. En vez de eso, prescribe un proceso: la nación vendrá tribu por tribu, después por familia, después por casa, después hombre por hombre, y el SEÑOR mismo señalará al ofensor (Josué 7:14). Es lento a propósito. Cada israelita tiene toda la noche para pensar si la suerte podría caer sobre él. Para cuando la suerte cae sobre Acán, cada hombre en el campamento ha tenido que hacerse la pregunta que Acán debió haberse hecho semanas antes.</p>
+<p>Cuando Acán es finalmente identificado, las palabras de Josué hacia él son notables. No son las palabras de un general furioso; son las palabras de un pastor: <em>«Hijo mío, da gloria a Jehová Dios de Israel, y dale alabanza, y declárame ahora lo que has hecho; no me lo encubras»</em> (Josué 7:19). Y Acán cuenta toda la verdad. Vio un hermoso manto babilónico, doscientos siclos de plata y una cuña de oro de cincuenta siclos. Los codició. Los tomó. Los escondió en la tierra en medio de su tienda. La progresión es la progresión de todo pecado secreto: <em>vi, codicié, tomé, escondí.</em> Los mismos cuatro verbos del huerto de Edén corren por la tienda de Acán.</p>
+<p>Wayne ilustra el poder de la confesión con una historia:</p>
+<blockquote>Se cuenta que un granjero estaba enfermo y oraba fervientemente por su recuperación. Sentía que era la voluntad del Señor. Pero, después de mucha oración, ni él ni ninguno de sus amigos podían tener fe para su sanidad, y se resignó a partir. Se esperaba que muriera en cualquier momento. Sin embargo, mientras se demoraba, sus hijos y amigos regresaron a sus hogares. Se acordó que, cuando sus acompañantes sintieran que el fin estaba cerca, tocarían la campana, y esa sería la señal para reunirse para el último adiós. Finalmente, un día le dijo a su esposa: «Toca la campana». Ella respondió: «¿Estás peor? ¿Sientes que el fin está cerca?» Simplemente dijo: «Toca la campana».<br><br>Se tocó la campana, y pronto todos los hijos estaban llorando alrededor del lecho. Entonces él comenzó a confesar sus fallas. Se dirigía a los hijos, uno por uno, y hablaba de sus faltas, y de cómo había sido impaciente, o los había agraviado de alguna manera. Hubo llanto y confesión por todas partes. Era como una reunión de campamento. Finalmente terminó, y en medio de lágrimas y gritos de gozo dijo: «Ahora, sólo una cosa más; por favor traigan mi ropa y déjenme salir de aquí, porque el Señor me ha sanado». Y salió.
+</blockquote>
+<p>Dios sí dice: <em>«Confesaos vuestras ofensas unos a otros&hellip; para que seáis sanados»</em> (Santiago 5:16). A veces esto puede contribuir mucho a la sanidad física, o a llevar sanidad espiritual a un hogar o iglesia. Esto puede precipitar un avivamiento. Acán no obtendrá el desenlace del granjero. Pero el mecanismo espiritual es el mismo: la confesión es la única cosa que pone al descubierto el pecado oculto donde Dios puede tratar con él. La campana tiene que ser tocada. La ropa tiene que salir de debajo del piso de la tienda.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">III. The Valley of Achor &mdash; Punishment and Trouble</h3><h3 class="es-only">III. El Valle de Acor &mdash; Castigo y problema</h3>
+<div class="en-only">
+<p>The execution of Achan in Joshua 7:24&ndash;26 is one of the harshest scenes in the Old Testament. Achan, his sons, his daughters, his oxen, his donkeys, his sheep, his tent, and the stolen goods are all taken to a valley and stoned. A great heap of stones is raised over the place. The valley is named the Valley of Achor &mdash; from the same Hebrew root as the name Achan &mdash; meaning <em>trouble</em>. The pile of stones is a covenant marker. It says three things to anyone who walks past: <em>Sin in the camp is dangerous. The sin has been dealt with. God has restored Israel to a right relationship with Himself.</em></p>
+<p>The hardest detail is the family. Why is the whole household punished for one man's theft? Two notes hold this in tension. First, the text strongly implies the family was complicit &mdash; the goods were buried in the middle of the tent, in plain sight of every member, for an extended period. Hiding stolen treasure under the floor of a Bronze Age tent is not a one-man operation. Second, sin always has consequences that travel further than the sinner. The lesson we learn is that sin always has consequences. There is a ripple effect like a stone cast on a lake.</p>
+<p>A more recent execution sat in Wayne's notes alongside this passage. On February 3, 1998, Karla Faye Tucker was put to death by the State of Texas. She was thirty-eight. Tucker had killed a man and a woman with a pickax during a robbery after three days of taking drugs. She and a boyfriend had gone to steal motorcycle parts from an acquaintance, Jerry Lynn Dean. Her boyfriend, who was also sentenced to death but died in prison of liver disease, began beating Dean with a hammer. Tucker grabbed a pickax and finished Dean off, then turned on Deborah Thornton, who was cowering in the corner, killing her and leaving the pickax embedded in her chest. In prison Tucker became a born-again Christian. Before her death by lethal injection, she apologized to the families of her victims. <em>"I am so sorry,"</em> she said. <em>"I hope God will give you peace with this. I am going to be face to face with Jesus now. I love all of you very much. I will see you all when you get there. I will wait for you."</em></p>
+<p>Tucker's case drew support from across the nation and around the world. Pope John Paul II, the European Parliament, the United Nations, and even religious broadcaster Pat Robertson called for mercy. The Texas Board of Pardons and Parole voted 16&ndash;0 against commuting her sentence. Governor George W. Bush did not grant the one-time thirty-day reprieve that was his to give. Richard Thornton, husband of Deborah, said he could not accept the apology and did not believe the conversion. Deborah's brother Ron Carlson opposed the execution, saying she was a perfect example of how rehabilitation in the penal system is supposed to work. Tucker's husband, prison minister Dana Brown, called her <em>"a Christian who loved God with all her heart."</em> In her final interview, Tucker urged Christians to get involved with prison ministry: <em>"Because if God is literally living in somebody and his life is governed by His law, by His love, by His morals, and they walk out of here, they're not going to be a threat to our society."</em></p>
+<p>Karla Faye Tucker's case is not Joshua 7. The legal questions are different. The covenant context is different. But the spiritual mechanics are the same. Sin has consequences that the sinner cannot stop, even when she has been forgiven by God. The blood of Christ removes the eternal penalty in a heartbeat. The temporal consequences of pickaxes and stolen goods and dead victims do not always lift in this life. The Valley of Achor in Joshua 7 and the gurney in Huntsville in 1998 say the same hard sentence over the same hard truth: <em>your sin will find you out</em> (Numbers 32:23).</p>
+</div>
+<div class="es-only">
+<p>La ejecución de Acán en Josué 7:24&ndash;26 es una de las escenas más severas del Antiguo Testamento. Acán, sus hijos, sus hijas, sus bueyes, sus asnos, sus ovejas, su tienda y los bienes robados son todos llevados a un valle y apedreados. Un gran montón de piedras es levantado sobre el lugar. El valle es llamado el Valle de Acor &mdash; de la misma raíz hebrea que el nombre Acán &mdash; que significa <em>problema</em>. El montón de piedras es un marcador del pacto. Dice tres cosas: <em>El pecado en el campamento es peligroso. El pecado ha sido tratado. Dios ha restaurado a Israel a una relación correcta con Él mismo.</em></p>
+<p>El detalle más duro es la familia. ¿Por qué se castiga a toda la casa por el robo de un solo hombre? Dos notas sostienen esto en tensión. Primero, el texto sugiere fuertemente que la familia era cómplice &mdash; los bienes estaban enterrados en medio de la tienda, a plena vista de cada miembro, por un período extendido. Esconder tesoro robado bajo el piso de una tienda de la Edad de Bronce no es operación de un solo hombre. Segundo, el pecado siempre tiene consecuencias que viajan más lejos que el pecador. La lección es que el pecado siempre tiene consecuencias. Hay un efecto de ondas como una piedra arrojada sobre un lago.</p>
+<p>Una ejecución más reciente estaba en las notas de Wayne junto a este pasaje. El 3 de febrero de 1998, Karla Faye Tucker fue ejecutada por el Estado de Texas. Tenía treinta y ocho años. Tucker había matado a un hombre y a una mujer con un pico durante un robo después de tres días de tomar drogas. Ella y su novio habían ido a robar partes de motocicleta de un conocido, Jerry Lynn Dean. Su novio, que también fue sentenciado a muerte pero murió en prisión de enfermedad hepática, comenzó a golpear a Dean con un martillo. Tucker tomó un pico y acabó con Dean, luego se volvió hacia Deborah Thornton, que estaba acurrucada en la esquina, matándola y dejando el pico clavado en su pecho. En prisión Tucker se convirtió en cristiana nacida de nuevo. Antes de su muerte por inyección letal, pidió disculpas a las familias de sus víctimas. <em>«Lo siento mucho»,</em> dijo. <em>«Espero que Dios les dé paz con esto. Voy a estar cara a cara con Jesús ahora. Los amo mucho a todos».</em></p>
+<p>El caso de Tucker atrajo apoyo de toda la nación y del mundo. El papa Juan Pablo II, el Parlamento Europeo, las Naciones Unidas y aun el difusor religioso Pat Robertson pidieron misericordia. La Junta de Indultos y Libertad Condicional de Texas votó 16&ndash;0 contra conmutar su sentencia. El gobernador George W. Bush no concedió la prórroga de treinta días. Richard Thornton, esposo de Deborah, dijo que no podía aceptar la disculpa ni creía la conversión. Ron Carlson, hermano de Deborah, se opuso a la ejecución. El esposo de Tucker, el ministro de prisión Dana Brown, la llamó <em>«una cristiana que amó a Dios con todo su corazón».</em> En su entrevista final, Tucker urgió a los cristianos a involucrarse en el ministerio de prisión.</p>
+<p>El caso de Karla Faye Tucker no es Josué 7. Las preguntas legales son distintas. El contexto del pacto es distinto. Pero la mecánica espiritual es la misma. El pecado tiene consecuencias que el pecador no puede detener, aun cuando ha sido perdonado por Dios. La sangre de Cristo quita la pena eterna en un latido. Las consecuencias temporales de picos y bienes robados y víctimas muertas no siempre se levantan en esta vida. El Valle de Acor en Josué 7 y la camilla en Huntsville en 1998 pronuncian la misma sentencia dura sobre la misma verdad: <em>tu pecado os alcanzará</em> (Números 32:23).</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">IV. You Don't Sin Alone</h3><h3 class="es-only">IV. No pecas a solas</h3>
+<div class="en-only">
+<p>In Joshua 7:14&ndash;18 God explains to Joshua what he is to say to the nation, and talks about the profound effect of the disobedience of even one person. A number of years ago when John Fischer was on the staff at Wayne's church as a musician, he wrote a song out of this story of Achan and Ai. It has the haunting refrain, <em>"You don't sin alone."</em> Whatever I do has an effect on the people around me. A church family can be defeated by the malignancy of an individual's unconfessed sin.</p>
+<p>Wayne says: <em>"I've been involved recently with a family that was literally destroyed fifteen years ago by the sinful choices of the father. He was unwilling to repent and deal with the sin, and the marriage exploded. It was an acrimonious divorce. As a result of this mess, the three children, all in late adolescence or early adulthood, ended up estranged from both their mother and their father, and embittered against the Lord himself. That estrangement has gone on for almost fifteen years now."</em></p>
+<p>None of us sins alone. Sin has a corrupting influence. It rolls outward from the tent into the camp. It rolls outward from the marriage bed into the children's bedrooms and into the next generation. The thirty-six men who died on the slope of Ai never met Achan. They had no idea his tent contained the trigger that pulled their funeral. That is the part of sin we never quite want to look at: not what it does to me, but what it does to the people who happen to be in the same camp with me.</p>
+<p>Achan's sin took out thirty-six soldiers, his own household, and almost the entire campaign of conquest before God interrupted the chain. The 1998 case Wayne mentions took out a marriage and three young adult lives. The pattern is the same pattern. <em>You don't sin alone.</em></p>
+</div>
+<div class="es-only">
+<p>En Josué 7:14&ndash;18 Dios le explica a Josué lo que ha de decir a la nación, y habla del efecto profundo de la desobediencia de aun una persona. Hace varios años cuando John Fischer estuvo en el equipo de la iglesia de Wayne como músico, escribió una canción a partir de esta historia de Acán y Hai. Tiene el estribillo conmovedor: <em>«No pecas a solas».</em> Cualquier cosa que yo haga tiene un efecto en las personas a mi alrededor. Una familia eclesial puede ser derrotada por la malignidad del pecado no confesado de un individuo.</p>
+<p>Wayne dice: <em>«Recientemente he estado involucrado con una familia que fue literalmente destruida hace quince años por las elecciones pecaminosas del padre. No quiso arrepentirse y tratar con el pecado, y el matrimonio explotó. Fue un divorcio acrimonioso. Como resultado, los tres hijos, todos en la adolescencia tardía o adultez temprana, terminaron alejados tanto de su madre como de su padre, y amargados contra el Señor mismo. Ese alejamiento ha durado casi quince años».</em></p>
+<p>Ninguno de nosotros peca a solas. El pecado tiene una influencia corruptora. Rueda hacia afuera de la tienda al campamento. Rueda hacia afuera del lecho matrimonial a las recámaras de los hijos y a la siguiente generación. Los treinta y seis hombres que murieron en la cuesta de Hai nunca conocieron a Acán. No tenían idea de que su tienda contenía el gatillo que disparó su funeral. Esa es la parte del pecado que nunca queremos del todo ver: no lo que me hace a mí, sino lo que les hace a las personas que están en el mismo campamento conmigo.</p>
+<p>El pecado de Acán acabó con treinta y seis soldados, con su propia casa y con casi toda la campaña de conquista. El caso de 1998 que Wayne menciona acabó con un matrimonio y con tres vidas jóvenes. El patrón es el mismo. <em>No pecas a solas.</em></p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">V. The Monkey Trap</h3><h3 class="es-only">V. La trampa para monos</h3>
+<div class="en-only">
+<p>Some years ago Wayne read about how they catch monkeys in New Guinea. They take a big, dry gourd, hollow it out, and fill it up with nuts that the monkeys love. They cut a hole in the gourd just big enough for the monkey to slip his hand through. The monkey grabs the nuts inside, but cannot pull his hand out. All he has to do to get free is let the nuts go and slip his hand back out. But the monkey wants the nuts too badly and won't let go, and then he is captured.</p>
+<p>That is the point of the Achan and Ai story for the nation Israel, and for us today as well. When we hold onto sin in our lives, we become slaves to sin. We think we can get away with just a little moodiness, a little selfish anger, a little resentment. The hand is in the gourd. The fingers are around the nuts. And the hunter is walking up the path. The instinct of the monkey is to grip harder; the instinct of grace is to open the hand. The whole battle of Achan and the whole battle of every believer who has ever sat over a hidden sin and asked, <em>"Can I keep this and still serve God?"</em> &mdash; the answer is the same answer the monkey never figures out. Open the hand. The nuts are not worth the gourd.</p>
+</div>
+<div class="es-only">
+<p>Hace varios años Wayne leyó cómo atrapan monos en Nueva Guinea. Toman una calabaza grande y seca, la ahuecan y la llenan con nueces que los monos aman. Cortan un agujero en la calabaza apenas lo bastante grande para que el mono meta la mano. El mono agarra las nueces adentro, pero no puede sacar la mano. Todo lo que tiene que hacer para liberarse es soltar las nueces y deslizar la mano hacia fuera. Pero el mono quiere las nueces demasiado y no las suelta, y entonces es capturado.</p>
+<p>Ese es el punto de la historia de Acán y Hai. Cuando nos aferramos al pecado, nos volvemos esclavos del pecado. Pensamos que podemos salirnos con la nuestra con un poco de mal humor, un poco de ira egoísta, un poco de resentimiento. La mano está en la calabaza. Los dedos están alrededor de las nueces. Y el cazador viene subiendo por el sendero. El instinto del mono es apretar más fuerte; el instinto de la gracia es abrir la mano. Toda la batalla de Acán y toda la batalla de cada creyente que alguna vez se ha sentado sobre un pecado oculto y se ha preguntado: <em>«¿Puedo quedarme con esto y seguir sirviendo a Dios?»</em> &mdash; la respuesta es la misma respuesta que el mono nunca descubre. Abre la mano. Las nueces no valen la calabaza.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">VI. Restoration at Ai (Joshua 8)</h3><h3 class="es-only">VI. Restauración en Hai (Josué 8)</h3>
+<div class="en-only">
+<p>Joshua 8 opens with one of the most pastoral sentences in the book. After the discipline of chapter 7, the LORD does not leave Joshua under the cloud. He says, <em>"Do not be afraid, nor be dismayed; take all the people of war with you, and arise, go up to Ai. See, I have given into your hand the king of Ai, his people, his city, and his land"</em> (Joshua 8:1). The same past-tense word from chapter 6 is back: <em>I have given.</em> The covenant is restored. The Captain has unsheathed His sword again. Israel marches against the same city that routed it a chapter earlier &mdash; only this time everything is different.</p>
+<p>Now the army is led by the LORD instead of by spy reports. Now the strategy is divinely given: an ambush. Joshua sends thirty thousand mighty men of valor by night to lie in wait behind the city (Joshua 8:3&ndash;9). The next morning he leads the main force toward Ai as if to repeat the previous attack. The men of Ai see the Israelites flee, and just as before, they swarm out of the gates in pursuit, congratulating themselves on a second easy victory. The city stands empty. Then Joshua, at the LORD's command, stretches out his spear, the ambush rises behind the city and sets it on fire, and the fleeing army wheels around. Ai is caught between the two forces. The city falls.</p>
+<p>The textual detail to notice is the spear. Joshua holds it stretched out for the entire battle, lowering it only when the city is destroyed (Joshua 8:18, 26). It is a deliberate echo of Moses on the hilltop with arms raised over Amalek in Exodus 17. The same God who saved by Moses' raised hands saves by Joshua's stretched-out spear. The point is not the spear. The point is the leader interceding while the battle is fought below. Restoration after sin always involves a return to the posture of Moses and Joshua: arms up, eyes on the LORD, while the people fight the fight God has already won.</p>
+<p>The contrast with chapter 7 is total. There: pride, prayerlessness, hidden sin, defeat. Here: humility before God, prayerful obedience, sin dealt with, victory. Same army. Same city. Different campaign. The difference is not the soldiers. The difference is the covenant. <em>I have given.</em></p>
+</div>
+<div class="es-only">
+<p>Josué 8 abre con una de las frases más pastorales del libro. Después de la disciplina del capítulo 7, Jehová no deja a Josué bajo la nube. Dice: <em>«No temas ni desmayes; toma contigo toda la gente de guerra, y levántate, sube a Hai. Mira, yo he entregado en tu mano al rey de Hai, a su pueblo, a su ciudad y a su tierra»</em> (Josué 8:1). La misma palabra en pasado del capítulo 6 está de regreso: <em>Yo he entregado.</em> El pacto está restaurado. El Capitán ha desenvainado Su espada otra vez. Israel marcha contra la misma ciudad que lo derrotó un capítulo antes &mdash; sólo que esta vez todo es diferente.</p>
+<p>Ahora el ejército es dirigido por el SEÑOR en lugar de por reportes de espías. Ahora la estrategia es divinamente dada: una emboscada. Josué envía treinta mil hombres valientes de noche para que aguarden detrás de la ciudad (Josué 8:3&ndash;9). A la mañana siguiente lidera la fuerza principal hacia Hai como si fuera a repetir el ataque previo. Los hombres de Hai ven huir a los israelitas, y como antes, salen en tropel en persecución. La ciudad queda vacía. Entonces Josué, al mandato del SEÑOR, extiende su lanza, la emboscada se levanta detrás de la ciudad y la incendia, y el ejército que huye da media vuelta. Hai queda atrapada entre las dos fuerzas. La ciudad cae.</p>
+<p>El detalle textual que hay que notar es la lanza. Josué la sostiene extendida por toda la batalla, bajándola sólo cuando la ciudad es destruida (Josué 8:18, 26). Es un eco deliberado de Moisés en la cima del cerro con los brazos levantados sobre Amalec en Éxodo 17. El mismo Dios que salvó por las manos levantadas de Moisés salva por la lanza extendida de Josué. El punto no es la lanza. El punto es el líder intercediendo mientras la batalla se pelea abajo. La restauración después del pecado siempre involucra un retorno a la postura de Moisés y Josué: brazos arriba, ojos en el SEÑOR, mientras el pueblo pelea la pelea que Dios ya ganó.</p>
+<p>El contraste con el capítulo 7 es total. Allá: orgullo, falta de oración, pecado oculto, derrota. Aquí: humildad delante de Dios, obediencia orante, pecado tratado, victoria. Mismo ejército. Misma ciudad. Diferente campaña. La diferencia no son los soldados. La diferencia es el pacto. <em>Yo he entregado.</em></p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">VII. The Altar on Mount Ebal &mdash; Word and Worship Restored</h3><h3 class="es-only">VII. El altar en el monte Ebal &mdash; Palabra y adoración restauradas</h3>
+<div class="en-only">
+<p>Joshua 8 does not end with the smoking ruins of Ai. It ends with one of the most underrated worship services in the Old Testament. Joshua takes the entire nation &mdash; men, women, little ones, elders, officers, judges, including the foreigner who lived among them &mdash; and gathers them in the natural amphitheater between Mount Ebal and Mount Gerizim, exactly where Moses had commanded forty years earlier in Deuteronomy 27. There, on Mount Ebal, Joshua builds an altar of unhewn stones over which no iron tool has been raised. They offer burnt offerings and peace offerings to the LORD. Then Joshua inscribes a copy of the law of Moses on stones, in the presence of the entire nation. And then, with half the tribes standing on Mount Gerizim and half on Mount Ebal, Joshua reads aloud all the words of the Law &mdash; the blessings and the curses &mdash; <em>"according to all that is written in the Book of the Law. There was not a word of all that Moses had commanded which Joshua did not read before all the assembly of Israel"</em> (Joshua 8:34&ndash;35).</p>
+<p>Read what just happened. The first thing Israel does after recovering from a sin-driven defeat is not to build a fortress, not to consolidate territory, not to plan the next campaign. The first thing they do is build an altar and read the Bible. Worship and the Word are the two posts that hold up the door back into the covenant after sin has knocked it off its hinges. Without the altar there is no atonement for sin already committed. Without the Word there is no warning against sin still tempting. The two go together. A church that worships without reading the Word will drift. A church that reads the Word without worshipping will harden. A church that does both, on the same morning, on the same hill, gets back what Achan tried to steal.</p>
+<p>Notice also who is in the assembly: <em>"with the women, the little ones, and the strangers who were living among them"</em> (Joshua 8:35). The reading is not just for the priests or the warriors. The four-year-olds hear it. The foreign Gibeonite hears it &mdash; because by the next chapter of Joshua he will be there. The Word goes to the whole camp because the sin had infected the whole camp. The remedy travels as far as the disease.</p>
+<p>This is also where Joshua's Joshua 5 lesson finally lands. The Captain who told him to take off his sandals because the ground was holy is now standing in the assembly while the whole nation hears the same Law that was given on Sinai. The same God. The same covenant. The same expectation. After the discipline, Israel comes back to the place it should have been all along: standing under the Word, with sandals off in spirit if not in body, with the altar smoking in front of them and the blessings and curses ringing across the valley between two mountains. That is the picture of restoration. That is what God does after Achan.</p>
+</div>
+<div class="es-only">
+<p>Josué 8 no termina con las ruinas humeantes de Hai. Termina con uno de los cultos más subestimados del Antiguo Testamento. Josué toma a toda la nación &mdash; hombres, mujeres, pequeños, ancianos, oficiales, jueces, incluyendo al extranjero que vivía entre ellos &mdash; y los reúne en el anfiteatro natural entre el monte Ebal y el monte Gerizim, exactamente donde Moisés había mandado cuarenta años antes en Deuteronomio 27. Allí, sobre el monte Ebal, Josué construye un altar de piedras enteras sobre las cuales ninguna herramienta de hierro ha sido alzada. Ofrecen holocaustos y ofrendas de paz al SEÑOR. Luego Josué inscribe una copia de la ley de Moisés en piedras. Y luego, con la mitad de las tribus paradas en el monte Gerizim y la mitad en el monte Ebal, Josué lee en voz alta todas las palabras de la Ley &mdash; las bendiciones y las maldiciones &mdash; <em>«conforme a todo lo que está escrito en el libro de la ley. No hubo palabra alguna de todas las cosas que mandó Moisés, que Josué no hiciese leer delante de toda la congregación de Israel»</em> (Josué 8:34&ndash;35).</p>
+<p>Lee lo que acaba de pasar. Lo primero que hace Israel después de recuperarse de una derrota impulsada por el pecado no es construir una fortaleza, no es consolidar territorio, no es planear la próxima campaña. Lo primero que hacen es construir un altar y leer la Biblia. La adoración y la Palabra son los dos postes que sostienen la puerta de regreso al pacto después de que el pecado la ha sacado de sus goznes. Sin el altar no hay expiación. Sin la Palabra no hay advertencia. Los dos van juntos. Una iglesia que adora sin leer la Palabra derivará. Una iglesia que lee la Palabra sin adorar se endurecerá. Una iglesia que hace ambas cosas, en la misma mañana, en el mismo cerro, recupera lo que Acán trató de robar.</p>
+<p>Nota también quién está en la asamblea: <em>«con las mujeres y los niños, y los extranjeros que moraban entre ellos»</em> (Josué 8:35). La lectura no es sólo para los sacerdotes o los guerreros. Los de cuatro años la oyen. El gabaonita extranjero la oye &mdash; porque para el siguiente capítulo de Josué él estará allí. La Palabra va a todo el campamento porque el pecado había infectado todo el campamento. El remedio viaja tan lejos como la enfermedad.</p>
+<p>Este es también el lugar donde la lección de Josué 5 finalmente aterriza. El Capitán que le dijo que se quitara las sandalias porque la tierra era santa ahora está parado en la asamblea mientras toda la nación oye la misma Ley que fue dada en Sinaí. El mismo Dios. El mismo pacto. La misma expectativa. Después de la disciplina, Israel vuelve al lugar donde debió haber estado todo el tiempo: parado bajo la Palabra, con las sandalias afuera en espíritu si no en cuerpo, con el altar humeando delante de ellos y las bendiciones y maldiciones resonando a través del valle entre dos montañas. Esa es la imagen de la restauración. Eso es lo que Dios hace después de Acán.</p>
+</div></section>
+
+<section class="lesson"><h3 class="en-only">Closing: From the Valley of Achor to a Door of Hope</h3><h3 class="es-only">Cierre: Del Valle de Acor a una puerta de esperanza</h3>
+<div class="en-only">
+<p>Centuries after Joshua, the prophet Hosea picks up the same valley and repurposes it into one of the great pictures of grace in the Old Testament. Speaking of unfaithful Israel, the LORD says: <em>"I will give her her vineyards from there, and the Valley of Achor as a door of hope"</em> (Hosea 2:15). The same valley where one man's sin had killed his family becomes, in Hosea, the doorway through which God will lead a broken people back to Himself. The pile of stones over Achan's bones does not have the last word. The door of hope does.</p>
+<p>That is the gospel reading of Joshua 7&ndash;8. Sin in the camp is dangerous. Sin in the camp does not have the last word. The Captain still has His sword. The altar still smokes on Mount Ebal. The Law is still read over the assembly. And the Valley of Achor is still a door of hope for anyone willing to ring the bell, open the hand, drop the nuts, and come out from under the floor of the tent.</p>
+<p>You don't sin alone. You also do not have to repent alone. The God who gave Jericho gave Ai the second time, after Achan was buried under the stones. He will do the same for any believer this week.</p>
+</div>
+<div class="es-only">
+<p>Siglos después de Josué, el profeta Oseas toma el mismo valle y lo recicla en una de las grandes imágenes de gracia del Antiguo Testamento. Hablando de la infiel Israel, el SEÑOR dice: <em>«Y le daré sus viñas desde allí, y el valle de Acor por puerta de esperanza»</em> (Oseas 2:15). El mismo valle donde el pecado de un hombre había matado a su familia se vuelve, en Oseas, la entrada por la cual Dios llevará a un pueblo quebrantado de regreso a Sí mismo. El montón de piedras sobre los huesos de Acán no tiene la última palabra. La puerta de esperanza sí.</p>
+<p>Esa es la lectura evangélica de Josué 7&ndash;8. El pecado en el campamento es peligroso. El pecado en el campamento no tiene la última palabra. El Capitán todavía tiene Su espada. El altar todavía humea en el monte Ebal. La Ley todavía se lee sobre la asamblea. Y el Valle de Acor todavía es una puerta de esperanza para cualquiera dispuesto a tocar la campana, abrir la mano, soltar las nueces y salir de debajo del piso de la tienda.</p>
+<p>No pecas a solas. Tampoco tienes que arrepentirte a solas. El Dios que entregó a Jericó entregó a Hai la segunda vez, después de que Acán fue sepultado bajo las piedras. Hará lo mismo por cualquier creyente esta semana.</p>
+</div></section>
+
+<section class="exam"><h3 class="en-only">Unit 5 Examination &mdash; 30 Questions</h3><h3 class="es-only">Examen de la Unidad 5 &mdash; 30 Preguntas</h3>
+<p class="en-only"><em>20 multiple-choice + 10 short-answer (keyword). 90% required to pass. Failing the multiple-choice (1–20) locks the exam for 2 minutes; failing the master's-level short answer (21–30) locks it for 15 minutes.</em></p>
+<p class="es-only"><em>20 de opción múltiple + 10 de respuesta corta (palabras clave). Se requiere 90% para aprobar. Reprobar la opción múltiple (1–20) bloquea el examen por 2 minutos; reprobar la respuesta corta de nivel de maestría (21–30) lo bloquea por 15 minutos.</em></p>
+<div id="mc-questions"></div><div id="kw-questions"></div>
+<div class="exam-controls"><button class="submit-exam" id="submit-btn" type="button">Submit Exam / Enviar Examen</button> <button class="submit-exam" id="reset-btn" type="button" style="background:#8a1f1f;margin-left:8px">Reset / Reiniciar</button><div id="result" style="margin-top:10px;font-weight:bold"></div><div id="mc-banked-notice" style="margin-top:8px;font-size:.9rem;color:#1f6b3b;display:none"></div></div>
+</section>
+</main>
+<footer class="unit-nav"><button id="prev-unit-btn" type="button">&larr; Unit 4 / Unidad 4</button><button id="next-unit-btn" type="button" disabled>Unit 6 / Unidad 6 &rarr;</button></footer>
+<script>
+// CTS Joshua — Unit 5: Achan's Sin & Restoration of Ai (Joshua 7-8). Retrofit 2026-05-16.
+// MC L3 audit verified | distribution A=B=C=D=5 | split kw_en/kw_es | track gating | MC-persist
+(function(){
+'use strict';
+
+const UNIT = 5;
+const COURSE = 'josh';
+const NEXT_UNIT_URL = 'CTSJoshUnit6.html';
+const PREV_UNIT_URL = 'CTSJoshUnit4.html';
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+const langButtons=document.querySelectorAll('.lang-toggle button');
+langButtons.forEach(btn=>{btn.addEventListener('click',()=>{const lang=btn.getAttribute('data-lang');document.body.classList.remove('lang-en','lang-es','lang-both');document.body.classList.add('lang-'+lang);langButtons.forEach(b=>b.classList.toggle('active',b===btn));renderBankedNotice();});});
+
+let student=null;try{student=JSON.parse(localStorage.getItem('cts_student')||'null');}catch(e){student=null;}
+const greetingEl=document.getElementById('greeting');const regWarn=document.getElementById('reg-warn');
+if(student&&student.name){const isEs=document.body.classList.contains('lang-es');greetingEl.textContent=(isEs?'Bienvenido, ':'Welcome, ')+student.name;if(regWarn)regWarn.classList.add('hidden');}else{greetingEl.textContent='';if(regWarn)regWarn.classList.remove('hidden');}
+
+let progress={};try{progress=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'{}');}catch(e){progress={};}
+let unitPassed = !!progress['unit'+UNIT];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const grid=document.getElementById('progress-units');
+for(let n=1;n<=10;n++){const pill=document.createElement('div');pill.className='unit-pill';pill.textContent='U'+n;if(progress['unit'+n])pill.classList.add('done');if(n===UNIT)pill.classList.add('current');if(n>UNIT&&!progress['unit'+(n-1)])pill.classList.add('locked');grid.appendChild(pill);}
+
+// MC: L3 verified against Joshua 7-8. Distribution via KEY array below = A:5 B:5 C:5 D:5.
+const MC=[
+{q_en:"What single anchor phrase from John Fischer's song captures the lesson of Joshua 7?",q_es:"¿Qué frase ancla de la canción de John Fischer captura la lección de Josué 7?",options:{A:{en:"\"Pride goes before a fall.\"",es:"«El orgullo precede a la caída»."},B:{en:"\"You don't sin alone.\"",es:"«No pecas a solas»."},C:{en:"\"Be sure your sin will find you out.\"",es:"«Tu pecado os alcanzará»."},D:{en:"\"Confess your faults one to another.\"",es:"«Confesaos vuestras ofensas unos a otros»."}}},
+{q_en:"After Jericho fell, what was Israel's first major military setback?",q_es:"Después de que cayó Jericó, ¿cuál fue el primer revés militar mayor de Israel?",options:{A:{en:"Ai routed the 3,000 sent against it",es:"Hai derrotó a los 3,000 enviados contra ella"},B:{en:"The siege of Hebron failed",es:"El sitio de Hebrón fracasó"},C:{en:"The Gibeonites deceived them",es:"Los gabaonitas los engañaron"},D:{en:"The Amorites attacked at night",es:"Los amorreos atacaron de noche"}}},
+{q_en:"How many Israelites were killed in the first attack on Ai?",q_es:"¿Cuántos israelitas murieron en el primer ataque contra Hai?",options:{A:{en:"Twelve",es:"Doce"},B:{en:"Twenty-four",es:"Veinticuatro"},C:{en:"Thirty-six",es:"Treinta y seis"},D:{en:"One hundred",es:"Cien"}}},
+{q_en:"What does Joshua 7:2-5 reveal as the FIRST reason for the defeat at Ai?",q_es:"¿Qué revela Josué 7:2-5 como la PRIMERA razón de la derrota en Hai?",options:{A:{en:"Failure of equipment",es:"Falla del equipo"},B:{en:"Numerical inferiority",es:"Inferioridad numérica"},C:{en:"Pride and over-confidence based on the spies' report",es:"Orgullo y exceso de confianza basados en el reporte de los espías"},D:{en:"Disloyalty in the ranks",es:"Deslealtad en las filas"}}},
+{q_en:"Which Old Testament proverb does Wayne use to describe the spiritual posture before defeat?",q_es:"¿Qué proverbio usa Wayne para describir la postura espiritual antes de la derrota?",options:{A:{en:"\"Pride goes before destruction, and a haughty spirit before a fall.\" (Proverbs 16:18)",es:"«Antes del quebrantamiento es la soberbia». (Proverbios 16:18)"},B:{en:"\"The fear of the LORD is the beginning of wisdom.\"",es:"«El temor de Jehová es el principio de la sabiduría»."},C:{en:"\"A soft answer turns away wrath.\"",es:"«La blanda respuesta quita la ira»."},D:{en:"\"Trust in the LORD with all your heart.\"",es:"«Fíate de Jehová de todo tu corazón»."}}},
+{q_en:"What did Dr. C. J. Fowler put on God's altar before he found peace?",q_es:"¿Qué puso el Dr. C. J. Fowler sobre el altar de Dios antes de encontrar paz?",options:{A:{en:"His Bible and his pulpit notes",es:"Su Biblia y sus notas de púlpito"},B:{en:"A gold-headed cane and a stovepipe hat",es:"Un bastón de cabeza dorada y un sombrero de copa"},C:{en:"The deed to his home",es:"La escritura de su casa"},D:{en:"His salary check",es:"Su cheque de sueldo"}}},
+{q_en:"What did God ultimately show Dr. Fowler was the real obstacle to his sanctification?",q_es:"¿Qué le mostró Dios al Dr. Fowler que era el verdadero obstáculo a su santificación?",options:{A:{en:"A grudge against a deacon",es:"Un rencor contra un diácono"},B:{en:"Professional pride - desire to pastor a large church and hold prominent places",es:"Orgullo profesional - deseo de pastorear una iglesia grande y tener lugares prominentes"},C:{en:"A secret sin from his youth",es:"Un pecado secreto de su juventud"},D:{en:"Worry about his family's finances",es:"Preocupación por las finanzas de su familia"}}},
+{q_en:"What is the SECOND reason for the defeat at Ai that Wayne identifies?",q_es:"¿Cuál es la SEGUNDA razón de la derrota en Hai que Wayne identifica?",options:{A:{en:"Lack of equipment",es:"Falta de equipo"},B:{en:"Poor scouting of the terrain",es:"Mal reconocimiento del terreno"},C:{en:"Untrained soldiers",es:"Soldados no entrenados"},D:{en:"Neglect of prayer - silence before the battle",es:"Descuido de la oración - silencio antes de la batalla"}}},
+{q_en:"Wayne quotes a verse that ends, \"And Satan trembles when he sees / The weakest saint upon his ____.\"",q_es:"Wayne cita una estrofa que termina: «Y Satanás tiembla cuando ve / Al santo más débil sobre sus ____».",options:{A:{en:"Feet",es:"Pies"},B:{en:"Rooftop",es:"Techo"},C:{en:"Watchtower",es:"Atalaya"},D:{en:"Knees",es:"Rodillas"}}},
+{q_en:"What did Achan take from the spoils of Jericho?",q_es:"¿Qué tomó Acán de los despojos de Jericó?",options:{A:{en:"A bronze sword and a silver shield",es:"Una espada de bronce y un escudo de plata"},B:{en:"A Babylonian cloak, silver, and a wedge of gold",es:"Un manto babilónico, plata y una cuña de oro"},C:{en:"Two oxen and a war horse",es:"Dos bueyes y un caballo de guerra"},D:{en:"Pottery and grain",es:"Cerámica y grano"}}},
+{q_en:"When God explained the defeat to Joshua, what was the underlying problem?",q_es:"Cuando Dios le explicó la derrota a Josué, ¿cuál era el problema de fondo?",options:{A:{en:"The army was outnumbered",es:"El ejército estaba superado en número"},B:{en:"The spies had lied",es:"Los espías habían mentido"},C:{en:"The covenant was broken; one man had taken what was devoted to God",es:"El pacto estaba roto; un hombre había tomado lo que estaba dedicado a Dios"},D:{en:"The LORD had withdrawn His promise",es:"El SEÑOR había retirado Su promesa"}}},
+{q_en:"In the \"Ring the Bell\" story, what did the dying farmer do that brought his healing?",q_es:"En la historia de «Toca la campana», ¿qué hizo el granjero moribundo que trajo su sanidad?",options:{A:{en:"He confessed his faults to each of his children one by one",es:"Confesó sus faltas a cada uno de sus hijos uno por uno"},B:{en:"He recited the Lord's Prayer aloud",es:"Recitó el Padrenuestro en voz alta"},C:{en:"He had the elders anoint him with oil",es:"Hizo que los ancianos lo ungieran con aceite"},D:{en:"He drank a remedy his wife prepared",es:"Bebió un remedio que su esposa preparó"}}},
+{q_en:"What James verse does Wayne attach to the Ring-the-Bell story?",q_es:"¿Qué versículo de Santiago vincula Wayne a la historia de Toca-la-Campana?",options:{A:{en:"\"Faith without works is dead.\"",es:"«La fe sin obras es muerta»."},B:{en:"\"Confess your faults one to another, that ye may be healed.\"",es:"«Confesaos vuestras ofensas unos a otros, para que seáis sanados»."},C:{en:"\"Resist the devil and he will flee from you.\"",es:"«Resistid al diablo, y huirá de vosotros»."},D:{en:"\"The prayer of a righteous man avails much.\"",es:"«La oración eficaz del justo puede mucho»."}}},
+{q_en:"Who was Karla Faye Tucker?",q_es:"¿Quién fue Karla Faye Tucker?",options:{A:{en:"A pickax killer who became a born-again Christian in prison and was executed Feb 3, 1998",es:"Una asesina con pico que se hizo cristiana nacida de nuevo en prisión y fue ejecutada el 3 de febrero de 1998"},B:{en:"A holiness preacher converted at a camp meeting",es:"Una predicadora de santidad convertida en una reunión de campamento"},C:{en:"A missionary to New Guinea who died in the field",es:"Una misionera a Nueva Guinea que murió en el campo"},D:{en:"The wife of Achan in rabbinic tradition",es:"La esposa de Acán en tradición rabínica"}}},
+{q_en:"Who wrote a song based on the Achan/Ai story while serving on Wayne's church staff?",q_es:"¿Quién escribió una canción basada en la historia de Acán/Hai mientras servía en el equipo de la iglesia de Wayne?",options:{A:{en:"Luci Shaw",es:"Luci Shaw"},B:{en:"Ray Stedman",es:"Ray Stedman"},C:{en:"Doug Goins",es:"Doug Goins"},D:{en:"John Fischer",es:"John Fischer"}}},
+{q_en:"How is a monkey caught in the New Guinea gourd-trap illustration?",q_es:"¿Cómo es atrapado un mono en la ilustración de la trampa de calabaza de Nueva Guinea?",options:{A:{en:"Hunters startle it from the canopy",es:"Cazadores lo asustan desde el dosel"},B:{en:"It falls asleep eating the bait",es:"Se queda dormido comiendo el cebo"},C:{en:"It steps on a hidden snare",es:"Pisa un lazo oculto"},D:{en:"It refuses to let go of the nuts in its fist and cannot pull its hand free",es:"Se rehúsa a soltar las nueces en su puño y no puede sacar la mano"}}},
+{q_en:"What is the literal meaning of Achan's name?",q_es:"¿Cuál es el significado literal del nombre Acán?",options:{A:{en:"Trouble",es:"Problema"},B:{en:"Beloved",es:"Amado"},C:{en:"Wandering",es:"Errante"},D:{en:"Hidden",es:"Oculto"}}},
+{q_en:"When God spoke to Joshua about attacking Ai a second time, what were His first words?",q_es:"Cuando Dios le habló a Josué sobre atacar a Hai por segunda vez, ¿cuáles fueron Sus primeras palabras?",options:{A:{en:"\"I have given you the city's spoils.\"",es:"«Te he entregado los despojos de la ciudad»."},B:{en:"\"Sharpen your swords.\"",es:"«Afilen sus espadas»."},C:{en:"\"Do not fear or be dismayed.\"",es:"«No temas ni desmayes»."},D:{en:"\"Build an altar on Mount Ebal.\"",es:"«Edifica un altar en el monte Ebal»."}}},
+{q_en:"Where did Joshua build an altar after Ai was taken (Joshua 8:30)?",q_es:"¿Dónde edificó Josué un altar después de que fue tomada Hai (Josué 8:30)?",options:{A:{en:"Mount Sinai",es:"Monte Sinaí"},B:{en:"Mount Gerizim",es:"Monte Gerizim"},C:{en:"Mount Carmel",es:"Monte Carmelo"},D:{en:"Mount Ebal",es:"Monte Ebal"}}},
+{q_en:"What did Joshua do at Mount Ebal and Mount Gerizim after the altar was built (Joshua 8:32-35)?",q_es:"¿Qué hizo Josué en el monte Ebal y el monte Gerizim después de que se edificó el altar (Josué 8:32-35)?",options:{A:{en:"He divided the Promised Land among the tribes",es:"Repartió la Tierra Prometida entre las tribus"},B:{en:"He commissioned the priests as judges",es:"Comisionó a los sacerdotes como jueces"},C:{en:"He inscribed the Law on stones and read all the blessings and curses to the assembly",es:"Inscribió la Ley en piedras y leyó todas las bendiciones y maldiciones a la asamblea"},D:{en:"He led the people in a national fast",es:"Dirigió al pueblo en un ayuno nacional"}}}
+];
+const KEY=['B','A','C','C','A','B','B','D','D','B','C','A','B','A','D','D','A','C','D','C'];
+
+// SA: split kw_en/kw_es (was pooled: first 5 EN, last 5 ES)
+const KW=[
+{q_en:"State Wayne's central principle about sin, captured in John Fischer's song.",q_es:"Enuncia el principio central de Wayne sobre el pecado, capturado en la canción de John Fischer.",
+ kw_en:['alone','sin','other','effect','consequen','famil','ripple','love'], kw_es:['solas','pecado','otros','efecto','consecuen','familia','ondas','aman'],
+ modelEn:"Joshua 7 teaches the other half of the truth: sometimes bad things happen to people who do bad things, and the consequences fall on the people they love. One man, Achan, took, and the whole nation suffered; thirty-six men died on the slope of Ai. Wayne's story of Dave and Debbie shows the same ripple: a father's neglect pulled five children away from church, and the effects reached the ones he loved most. You do not sin alone. Sin spreads outward like ripples on a stream, and others always feel it.", modelEs:"Josué 7 enseña la otra mitad de la verdad: a veces les pasan cosas malas a personas que hacen cosas malas, y las consecuencias caen sobre la gente que aman. Un hombre, Acán, tomó, y toda la nación sufrió; treinta y seis hombres murieron en la cuesta de Hai. La historia de Dave y Debbie muestra la misma onda: el descuido de un padre alejó a cinco hijos de la iglesia, y los efectos alcanzaron a los que más amaba. No pecas a solas. El pecado se extiende como ondas en un arroyo, y otros siempre lo sienten."},
+{q_en:"Identify the three reasons for failure that Wayne draws from Joshua 7.",q_es:"Identifica las tres razones del fracaso que Wayne saca de Josué 7.",
+ kw_en:['pride','prayer','disobe','neglect','sin','ai','confiden','achan'], kw_es:['orgullo','oración','desobed','descuido','pecado','hai','confian','acán'],
+ modelEn:"Three reasons explain the defeat at Ai. First, pride: after Jericho fell without a sword, the confident spies advised sending only three thousand men, and Joshua agreed without asking God, for pride goes before a fall. Second, neglect of prayer: the text records no prayer before the battle; the weakest saint on his knees has more power than the strongest army on the slope. Third, disobedience: Achan's hidden sin had broken the covenant. Pride opened the door, prayerlessness left it open, and Achan's disobedience walked through it.", modelEs:"Tres razones explican la derrota en Hai. Primero, el orgullo: tras caer Jericó sin espada, los espías confiados aconsejaron enviar solo tres mil hombres, y Josué accedió sin preguntar a Dios, pues antes de la caída va la altivez. Segundo, el descuido de la oración: el texto no registra oración antes de la batalla; el santo más débil de rodillas tiene más poder que el ejército más fuerte. Tercero, la desobediencia: el pecado oculto de Acán había roto el pacto. El orgullo abrió la puerta, la falta de oración la dejó abierta, y la desobediencia de Acán entró por ella."},
+{q_en:"Summarize Dr. C. J. Fowler's altar story and what he learned about pride.",q_es:"Resume la historia del altar del Dr. C. J. Fowler y lo que aprendió sobre el orgullo.",
+ kw_en:['fowler','cane','hat','altar','professional','pride','prominen','reputation'], kw_es:['fowler','bastón','sombrero','altar','profesional','orgullo','prominen','reputación'],
+ modelEn:"Dr. C. J. Fowler, a noted holiness preacher, went to the altar seeking to be sanctified and laid down many things, including his gold-headed cane and his stovepipe hat. Yet the witness did not come. When he asked God what remained, God showed him a professional pride, a desire to be known as pastor of a large church and to hold places of prominence. Only when he surrendered his reputation to God did peace come. God then gave him a wider usefulness than pride could ever have won. The deepest idol is often the love of one's own prominence.", modelEs:"El Dr. C. J. Fowler, un notable predicador de santidad, fue al altar buscando ser santificado y entregó muchas cosas, incluyendo su bastón de cabeza dorada y su sombrero de copa. Pero el testimonio no llegaba. Cuando preguntó a Dios qué quedaba, Dios le mostró un orgullo profesional, un deseo de ser conocido como pastor de una iglesia grande y de tener lugares de prominencia. Solo cuando entregó su reputación a Dios vino la paz. Dios le dio una utilidad más amplia de la que el orgullo jamás habría ganado. El ídolo más profundo suele ser el amor a la propia prominencia."},
+{q_en:"Explain why \\\"Pride goes before destruction\\\" applied to Joshua's response to the spies' report.",q_es:"Explica por qué «Antes del quebrantamiento es la soberbia» se aplicó a la respuesta de Josué al reporte de los espías.",
+ kw_en:['pride','spies','report','confiden','fall','ai','prayer','three'], kw_es:['orgullo','espía','reporte','confian','caída','hai','oración','tres'],
+ modelEn:"After Jericho, pride and overconfidence set the trap. The spies brought back a confident report: the people of Ai are few, send only two or three thousand men. Joshua took the report without praying about it. The men of Ai routed them, and thirty-six fell. Proverbs warns, pride goes before destruction and a haughty spirit before a fall. The army was riding a winning streak, so no one asked God; the confident report rested on a sin no one had dealt with, and the fall came at Ai.", modelEs:"Tras Jericó, el orgullo y el exceso de confianza prepararon la trampa. Los espías trajeron un reporte confiado: los de Hai son pocos, envía solo dos o tres mil hombres. Josué tomó el reporte sin orar. Los hombres de Hai los derrotaron, y treinta y seis cayeron. Proverbios advierte: antes del quebrantamiento es la soberbia, y antes de la caída la altivez. El ejército venía de una racha ganadora, así que nadie preguntó a Dios; el reporte confiado descansaba sobre un pecado no tratado, y la caída vino en Hai."},
+{q_en:"Describe how the \\\"Ring the Bell\\\" story illustrates James's command about confession.",q_es:"Describe cómo la historia de «Toca la campana» ilustra el mandato de Santiago sobre la confesión.",
+ kw_en:['confess','fault','heal','ring','bell','farmer','james','hidden'], kw_es:['confes','falta','sanid','campana','toca','granjero','santiago','oculto'],
+ modelEn:"Wayne illustrates confession with a dying farmer. Resigned to death, he suddenly told his wife, Ring the bell, the signal for the family to gather for goodbye. As they wept around him he began confessing his faults to his children one by one, where he had wronged them. When he was through he asked for his clothes: the Lord had healed him. Confession can heal a home. James 5:16 says, confess your faults one to another that ye may be healed. Confession is the only thing that drags hidden sin into the open where God can deal with it; the bell has to be rung.", modelEs:"Wayne ilustra la confesión con un granjero moribundo. Resignado a morir, de repente dijo a su esposa: Toca la campana, la señal para que la familia se reuniera a despedirse. Mientras lloraban a su alrededor comenzó a confesar sus faltas a sus hijos uno por uno, donde los había agraviado. Al terminar pidió su ropa: el Señor lo había sanado. Santiago 5:16 dice: confesaos vuestras ofensas unos a otros, para que seáis sanados. La confesión es lo único que saca el pecado oculto a la luz donde Dios puede tratarlo; hay sanidad cuando se toca la campana."},
+{q_en:"Explain why Achan's whole household was punished and what lesson it teaches about sin's reach.",q_es:"Explica por qué toda la casa de Acán fue castigada y qué lección enseña sobre el alcance del pecado.",
+ kw_en:['famil','household','consequen','ripple','alone','sin','other','spread'], kw_es:['familia','casa','consecuen','ondas','solas','pecado','otros','extiende'],
+ modelEn:"John Fischer's refrain says it: you don't sin alone. Achan buried his loot in his own tent, but the consequences spread to the whole camp and finally to his own household. Sin is never private; like ripples on a stream it spreads outward from one heart to family and others who never touched the stolen goods. The thirty-six who died at Ai never saw Achan's tent, yet they bore his sin. No one sins in isolation; what we hide always reaches the people around us.", modelEs:"El estribillo de John Fischer lo dice: no pecas a solas. Acán enterró su botín en su propia tienda, pero las consecuencias se extendieron a todo el campamento y al fin a su propia casa. El pecado nunca es privado; como ondas en un arroyo se extiende hacia afuera de un corazón a la familia y a otros que nunca tocaron lo robado. Los treinta y seis que murieron en Hai nunca vieron la tienda de Acán, pero cargaron su pecado. Nadie peca en aislamiento; lo que escondemos siempre alcanza a la gente a nuestro alrededor."},
+{q_en:"Identify the meaning of Achan's name and how it relates to the Valley of Achor.",q_es:"Identifica el significado del nombre Acán y cómo se relaciona con el Valle de Acor.",
+ kw_en:['trouble','achan','achor','valley','name','hope','door','hosea'], kw_es:['problema','acán','acor','valle','nombre','esperanza','puerta','oseas'],
+ modelEn:"Achan and his family were dealt with publicly in a valley that took its name from the event: the Valley of Achor, which means trouble. The sin that troubled Israel was brought into the open and judged, and the covenant was restored. But the story does not end in trouble. Centuries later Hosea 2:15 promises that God will make the Valley of Achor a door of hope. The very place named for trouble becomes, in grace, the doorway through which hope enters; sin confessed and judged opens the way back to blessing.", modelEs:"Acán y su familia fueron tratados públicamente en un valle que tomó su nombre del suceso: el Valle de Acor, que significa problema. El pecado que turbó a Israel fue sacado a la luz y juzgado, y el pacto fue restaurado. Pero la historia no termina en problema. Siglos después Oseas 2:15 promete que Dios hará del Valle de Acor una puerta de esperanza. El mismo lugar llamado por el problema se vuelve, por gracia, la puerta por donde entra la esperanza; el pecado confesado y juzgado abre el camino de regreso a la bendición."},
+{q_en:"Describe the New Guinea monkey-trap illustration and what it teaches about holding onto sin.",q_es:"Describe la ilustración de la trampa para monos y lo que enseña sobre aferrarse al pecado.",
+ kw_en:['monkey','gourd','nuts','let','slave','grasp','hand','release'], kw_es:['mono','calabaza','nueces','soltar','esclav','agarr','mano','puño'],
+ modelEn:"The New Guinea monkey trap is a gourd tied down, with a hole just big enough for an open hand. Inside are nuts. The monkey reaches in, grasps a fistful, and cannot pull his closed hand back through the hole. He could be free in an instant if he would simply let go of the nuts, but he will not release them, and so he is caught. That is the slave to sin: not held by the trap but by his own refusal to open his hand. Sin keeps no one it cannot persuade to keep holding on.", modelEs:"La trampa para monos de Nueva Guinea es una calabaza atada, con un agujero apenas del tamaño de una mano abierta. Adentro hay nueces. El mono mete la mano, agarra un puño lleno, y no puede sacar su mano cerrada por el agujero. Podría quedar libre al instante si simplemente soltara las nueces, pero no quiere soltarlas, y así queda atrapado. Ese es el esclavo del pecado: no lo retiene la trampa sino su propia negativa a abrir la mano. El pecado no retiene a nadie a quien no convenza de seguir aferrado."},
+{q_en:"Summarize what changed for Israel after Achan was dealt with and they returned to Ai (Joshua 8).",q_es:"Resume qué cambió para Israel después de que se trató con Acán y regresaron a Hai (Josué 8).",
+ kw_en:['fear','ambush','victory','given','restor','dismayed','ai','covenant'], kw_es:['temas','emboscada','victoria','entregado','restaur','desmay','hai','pacto'],
+ modelEn:"Once Achan's sin was judged and the covenant restored, God spoke to Joshua again: Do not fear or be dismayed; take all the people and go up to Ai, for I have given its king and land into your hand. This time God's strategy used an ambush, drawing the men of Ai out of the city, then taking it from behind. The same Ai that routed Israel a week earlier now fell, and the victory came. The lesson: with sin dealt with and the covenant restored, the city that could not be taken was given.", modelEs:"Una vez que el pecado de Acán fue juzgado y el pacto restaurado, Dios habló a Josué otra vez: No temas ni desmayes; toma a todo el pueblo y sube a Hai, porque he entregado en tu mano a su rey y su tierra. Esta vez la estrategia de Dios usó una emboscada, sacando a los hombres de Hai de la ciudad, y luego tomándola por detrás. La misma Hai que derrotó a Israel una semana antes ahora cayó, y vino la victoria. La lección: tratado el pecado y restaurado el pacto, la ciudad que no se podía tomar fue entregada."},
+{q_en:"Explain the significance of building the altar on Mount Ebal and reading the Law (Joshua 8:30-35).",q_es:"Explica la significancia de construir el altar en el monte Ebal y leer la Ley (Josué 8:30-35).",
+ kw_en:['altar','ebal','gerizim','law','bless','curse','read','covenant'], kw_es:['altar','ebal','gerizim','ley','bendic','maldic','leyó','pacto'],
+ modelEn:"After the victory, Joshua climbed Mount Ebal and built an altar to the LORD, then read the whole Law aloud over the assembled nation, every word, blessings and curses both. Half the tribes stood on Mount Gerizim for the blessings and half on Mount Ebal for the curses, with the law read between them. The covenant that Achan had broken was now publicly renewed before all Israel. God will gladly bless an army that has dealt with its sin and gathered again around His altar and His Word.", modelEs:"Tras la victoria, Josué subió al monte Ebal y edificó un altar a Jehová, luego leyó toda la Ley en voz alta sobre la nación reunida, cada palabra, bendiciones y maldiciones por igual. La mitad de las tribus se puso en el monte Gerizim para las bendiciones y la mitad en el monte Ebal para las maldiciones, con la ley leída entre ellos. El pacto que Acán había roto fue ahora renovado públicamente ante todo Israel. Dios bendecirá con gusto a un ejército que ha tratado su pecado y se ha reunido de nuevo alrededor de Su altar y Su Palabra."}
+];
+
+// ---------- State ----------
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill('');
+try{const st=JSON.parse(localStorage.getItem(STATE_KEY)||'{}');if(Array.isArray(st.mcAnswers)&&st.mcAnswers.length===20)mcAnswers=st.mcAnswers;if(Array.isArray(st.kwAnswers)&&st.kwAnswers.length===10)kwAnswers=st.kwAnswers;}catch(e){}
+function saveState(){try{localStorage.setItem(STATE_KEY,JSON.stringify({mcAnswers,kwAnswers}));}catch(e){}}
+
+// ---------- Render MC ----------
+const mcc=document.getElementById('mc-questions');
+function renderMC(){
+  mcc.innerHTML='';
+  MC.forEach((q,idx)=>{
+    const n=idx+1;
+    const div=document.createElement('div');
+    div.className='question';
+    const fb='<div class="mc-fb" id="mcfb'+n+'" style="margin-top:6px;font-size:.9rem"></div>';
+    let h='<p class="q"><strong>'+n+'.</strong> <span class="en-only">'+q.q_en+'</span><span class="es-only">'+q.q_es+'</span></p><div class="options">';
+    ['A','B','C','D'].forEach(L=>{
+      const o=q.options[L];
+      const checked = (mcAnswers[idx]===L) ? ' checked' : '';
+      const disabled = mcPreviouslyPassed ? ' disabled' : '';
+      h+='<label><input type="radio" name="mc'+n+'" value="'+L+'"'+checked+disabled+'> <strong>'+L+'.</strong> <span class="en-only">'+o.en+'</span><span class="es-only">'+o.es+'</span></label>';
+    });
+    h+='</div>'+fb;
+    div.innerHTML=h;
+    mcc.appendChild(div);
+    if(mcAnswers[idx]) showMCFeedback(idx, mcAnswers[idx]);
+    div.querySelectorAll('input[type=radio]').forEach(r=>{
+      r.addEventListener('change',()=>{
+        if(mcPreviouslyPassed) return;
+        mcAnswers[idx]=r.value;
+        saveState();
+        showMCFeedback(idx, r.value);
+      });
+    });
+  });
+}
+function showMCFeedback(idx, picked){
+  const fb=document.getElementById('mcfb'+(idx+1));
+  if(!fb) return;
+  const correct = KEY[idx];
+  if(picked === correct){
+    fb.style.color = '#1f6b3b';
+    fb.innerHTML = '<span class="en-only">✓ Correct!</span><span class="es-only">✓ ¡Correcto!</span>';
+  } else {
+    fb.style.color = '#8a1f1f';
+    fb.innerHTML = '<span class="en-only">✗ Incorrect. Correct: '+correct+'.</span><span class="es-only">✗ Incorrecto. Correcta: '+correct+'.</span>';
+  }
+}
+
+// ---------- Render KW ----------
+const kwc=document.getElementById('kw-questions');
+function renderKW(){
+  kwc.innerHTML='';
+  KW.forEach((q,idx)=>{
+    const n=21+idx;
+    const div=document.createElement('div');
+    div.className='question';
+    div.innerHTML='<p class="q"><strong>'+n+'.</strong> <span class="en-only">'+q.q_en+'</span><span class="es-only">'+q.q_es+'</span></p><textarea id="kw'+(idx+1)+'" rows="3" placeholder="Your answer / Tu respuesta..." aria-label="Your answer / Tu respuesta..."></textarea>'+'<div class="js-model-box" style="display:none;margin-top:10px;padding:10px 12px;background:#fbf3d5;border:1px solid #d4af37;border-radius:8px;"><strong><span class="en-only">Model answer — study this</span><span class="es-only">Respuesta modelo — estúdiela</span></strong><br><span class="en-only">'+q.modelEn+'</span><span class="es-only">'+q.modelEs+'</span></div>' ;
+    kwc.appendChild(div);
+    const ta = div.querySelector('textarea');
+    ta.value = kwAnswers[idx] || '';
+    ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+  });
+}
+
+renderMC();
+renderKW();
+
+// ---------- Controls ----------
+const submitBtn=document.getElementById('submit-btn');
+const resetBtn=document.getElementById('reset-btn');
+const resultEl=document.getElementById('result');
+const bankedEl=document.getElementById('mc-banked-notice');
+const nextBtn=document.getElementById('next-unit-btn');
+const prevBtn=document.getElementById('prev-unit-btn');
+if(progress['unit'+UNIT])nextBtn.disabled=false;
+
+function renderBankedNotice(){
+  const isEs=document.body.classList.contains('lang-es');
+  if(mcPreviouslyPassed && !unitPassed){
+    bankedEl.style.display='block';
+    bankedEl.innerHTML = isEs
+      ? '✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10).'
+      : '✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).';
+  } else {
+    bankedEl.style.display='none';
+  }
+}
+
+function checkLockouts(){
+  const isEs=document.body.classList.contains('lang-es');
+  const now=Date.now();
+  const fullLock=parseInt(localStorage.getItem(FULL_LOCK_KEY)||'0',10);
+  const saLock=parseInt(localStorage.getItem(SA_LOCK_KEY)||'0',10);
+
+  if(unitPassed){
+    submitBtn.disabled=true;
+    resultEl.style.color='#1f6b3b';
+    resultEl.textContent = isEs ? '✓ Unidad ya aprobada. Haga clic en Unidad 6.' : '✓ Unit already passed. Click Unit 6.';
+    renderBankedNotice();
+    return true;
+  }
+  if(now<fullLock){
+    const m=Math.ceil((fullLock-now)/60000);
+    submitBtn.disabled=true;
+    resultEl.style.color='#8a1f1f';
+    resultEl.textContent = isEs ? '⏰ Bloqueado. Espera '+m+' min.' : '⏰ Locked. Wait '+m+' min.';
+    renderBankedNotice();
+    setTimeout(checkLockouts,30000);
+    return false;
+  }
+  if(mcPreviouslyPassed && now<saLock){
+    const m=Math.ceil((saLock-now)/60000);
+    submitBtn.disabled=true;
+    resultEl.style.color='#8a1f1f';
+    resultEl.textContent = isEs ? '⏰ MC ✓ aprobado. Sección SA bloqueada. Espera '+m+' min.' : '⏰ MC ✓ passed. SA section locked. Wait '+m+' min.';
+    renderBankedNotice();
+    setTimeout(checkLockouts,30000);
+    return false;
+  }
+  submitBtn.disabled=false;
+  resultEl.textContent='';
+  renderBankedNotice();
+  return true;
+}
+
+function gradeMC(){let c=0;for(let i=0;i<20;i++){if(mcAnswers[i]===KEY[i])c++;}return c;}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA(){
+  const isEs=document.body.classList.contains('lang-es');
+  let c=0;
+  for(let i=0;i<10;i++){
+    const ans=(kwAnswers[i]||'').toLowerCase();
+    if(ans.length < 100) continue;
+    const kws = isEs ? KW[i].kw_es : KW[i].kw_en;
+    let hits=0;
+    kws.forEach(k=>{ if(kwHit(ans,k)) hits++; });
+    if(hits >= 3) c++;
+  }
+  return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both graded on MC AND SA. Route grading through this.
+function isMastersLevel(track){ return track === 'mdiv' || track === 'thm'; }
+
+function passUnit(message){
+  progress['unit'+UNIT]=true;
+  localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
+  unitPassed=true;
+  resultEl.style.color='#1f6b3b';
+  resultEl.textContent=message;
+  nextBtn.disabled=false;
+  const pills=grid.querySelectorAll('.unit-pill');
+  if(pills[UNIT-1]){pills[UNIT-1].classList.add('done');pills[UNIT-1].classList.remove('current');}
+}
+
+submitBtn.addEventListener('click',()=>{
+  if(!checkLockouts()) return;
+  if(unitPassed) return;
+  if(!student || !student.name){
+    alert(document.body.classList.contains('lang-es') ? 'Por favor regístrese primero en la Unidad 1.' : 'Please register on Unit 1 first.');
+    return;
+  }
+  const isEs=document.body.classList.contains('lang-es');
+  const track=(student && student.track) || 'certificate';
+  document.querySelectorAll('.js-model-box').forEach(function(e){ e.style.display='block'; });
+  const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+  const mcOk = mcScore >= 18;
+
+  if(!isMastersLevel(track)){ // certificate / non-Masters: MC only
+    if(mcOk){
+      localStorage.setItem(MC_PASS_KEY,'true');
+      mcPreviouslyPassed=true;
+      passUnit(isEs ? '✓ ¡APROBADO! '+mcScore+'/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.' : '✓ PASSED! '+mcScore+'/20. Your answers are marked below. Review them, then use the button at the top to continue.');
+    } else {
+      localStorage.setItem(FULL_LOCK_KEY, String(Date.now()+2*60*1000));
+      resultEl.style.color='#8a1f1f';
+      resultEl.textContent = isEs ? '✗ Reprobado: '+mcScore+'/20 (se requiere 18). Bloqueado 2 minutos.' : '✗ Failed: '+mcScore+'/20 (need 18). Locked 2 minutes.';
+      checkLockouts();
+    }
+    return;
+  }
+
+  const saScore = gradeSA();
+  const saOk = saScore >= 9;
+
+  if(mcPreviouslyPassed){
+    if(saOk){
+      passUnit(isEs ? '✓ ¡APROBADO! MC ✓ banco + SA '+saScore+'/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.' : '✓ PASSED! MC ✓ banked + SA '+saScore+'/10. Your answers are marked below. Review them, then use the button at the top to continue.');
+    } else {
+      localStorage.setItem(SA_LOCK_KEY, String(Date.now()+15*60*1000));
+      resultEl.style.color='#8a1f1f';
+      resultEl.textContent = isEs ? '✗ MC ✓ permanece aprobado. SA reprobada: '+saScore+'/10 (se requiere 9). Sección SA bloqueada 15 min.' : '✗ MC ✓ stays passed. SA failed: '+saScore+'/10 (need 9). SA section locked 15 min.';
+      checkLockouts();
+    }
+    return;
+  }
+
+  if(mcOk && saOk){
+    localStorage.setItem(MC_PASS_KEY,'true');
+    mcPreviouslyPassed=true;
+    passUnit(isEs ? '✓ ¡APROBADO! MC '+mcScore+'/20 + SA '+saScore+'/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.' : '✓ PASSED! MC '+mcScore+'/20 + SA '+saScore+'/10. Your answers are marked below. Review them, then use the button at the top to continue.');
+  } else if(mcOk && !saOk){
+    localStorage.setItem(MC_PASS_KEY,'true');
+    mcPreviouslyPassed=true;
+    localStorage.setItem(SA_LOCK_KEY, String(Date.now()+15*60*1000));
+    renderMC();
+    resultEl.style.color='#8a1f1f';
+    resultEl.textContent = isEs ? 'MC '+mcScore+'/20 ✓ aprobado y guardado. SA '+saScore+'/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.' : 'MC '+mcScore+'/20 ✓ passed and banked. SA '+saScore+'/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.';
+    checkLockouts();
+  } else {
+    localStorage.setItem(FULL_LOCK_KEY, String(Date.now()+2*60*1000));
+    resultEl.style.color='#8a1f1f';
+    resultEl.textContent = isEs ? '✗ Reprobado: MC '+mcScore+'/20 + SA '+saScore+'/10 (se requiere 18 y 9). Unidad bloqueada 2 minutos.' : '✗ Failed: MC '+mcScore+'/20 + SA '+saScore+'/10 (need 18 and 9). Unit locked 2 minutes.';
+    checkLockouts();
+  }
+});
+
+resetBtn.addEventListener('click',()=>{
+  const isEs=document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+    : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+  if(!confirm(msg)) return;
+  localStorage.removeItem(STATE_KEY);
+  localStorage.removeItem(MC_PASS_KEY);
+  localStorage.removeItem(SA_LOCK_KEY);
+  localStorage.removeItem(FULL_LOCK_KEY);
+  delete progress['unit'+UNIT];
+  localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
+  location.reload();
+});
+
+prevBtn.addEventListener('click',()=>{window.location.href=PREV_UNIT_URL;});
+nextBtn.addEventListener('click',()=>{if(!nextBtn.disabled)window.location.href=NEXT_UNIT_URL;});
+
+checkLockouts();
+})();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSJoshReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body></html>

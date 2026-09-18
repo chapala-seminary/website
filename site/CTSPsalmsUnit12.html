@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Psalms — Unit 12: The Psalms in Ministry II (Capstone)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Certificate →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 The Book of Psalms — Unit 12: The Psalms in Ministry II (Capstone)</span><span class="lang-es">📖 El Libro de los Salmos — Unidad 12: Los Salmos en el Ministerio II (Proyecto Final)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"I will bless the Lord at all times; His praise shall continually be in my mouth." — Psalm 34:1 (NKJV)</span><span class="lang-es">"Bendeciré a Jehová en todo tiempo; su alabanza estará de continuo en mi boca." — Salmo 34:1 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to The Book of Psalms. Please register before beginning Unit 12.</span><span class="lang-es">Bienvenido a El Libro de los Salmos. Por favor regístrese antes de comenzar la Unidad 12.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+            <h3>1. From the Pulpit to the Heart</h3>
+            <p>In the previous unit we learned to carry the Psalms outward &mdash; into preaching, pastoral care, public worship, and the leading of others in prayer. But there is a danger in that direction alone. A minister can spend his whole life handling holy things for other people and never let them touch his own soul, like a waiter who carries rich food to every table and goes home hungry. So in this final unit we turn the Psalms inward. Before they are a tool for ministry, they are food for the minister. Before we sing them over a congregation, we must learn to sing them in the secret place, for ourselves and to our God.</p>
+            <div class="scripture">
+                <strong>Psalm 34:1 (NKJV):</strong> "I will bless the LORD at all times; His praise shall continually be in my mouth."
+            </div>
+            <p>The Psalms were given first for the closet, not the classroom. They are the only book of the Bible written entirely as words addressed <em>to</em> God rather than <em>from</em> Him, and that is precisely why they teach us to pray. This unit asks the most personal question of the whole course: not "How will I use the Psalms?" but "Will I let the Psalms shape the whole of my life with God, from its morning to its evening?"</p>
+
+            <h3>2. A Psalm for Every Season of the Soul</h3>
+            <p>One of the great gifts of the Psalter is that it refuses to pretend. It does not give us only sunny songs for sunny days; it gives us a psalm for every season the soul will ever pass through. When you wake in confidence, Psalm 1 sets your feet on the way of the righteous. When you walk through danger, Psalm 23 walks the valley beside you. When you have sinned and your heart is heavy, Psalm 51 hands you the words of repentance. When you are afraid, Psalm 56 teaches trust; when God seems silent, Psalm 28 teaches you to keep crying out; when the burden is crushing, Psalm 55 teaches you to cast it; and when you are full of mercy received, Psalm 103 teaches you to count your blessings one by one.</p>
+            <p>This is why the believer never outgrows the Psalms. A young Christian and a dying saint can open the same psalm and each find it fits. The book was built to companion a whole life. The wise believer learns, over the years, which psalm to reach for in which weather of the heart, until the Psalms become old friends who always know what to say.</p>
+
+            <h3>3. The Psalms in the Morning of Faith</h3>
+            <p>In the morning of the Christian life &mdash; whether that morning comes in youth or late in life &mdash; the Psalms lay a foundation. Psalm 1 draws the first great fork in the road, the two ways, and presses the new believer to choose the way of the righteous over the way that perishes. Psalm 119 then teaches the young heart to love and hide the Word of God, so that the springtime of faith is rooted in Scripture rather than mere feeling.</p>
+            <p>This is the season for building habits that will hold for a lifetime: a daily turning to the Word, an honest opening of the heart to God, the discipline of meditation that Psalm 1 commends &mdash; turning a verse over and over until it yields its nourishment. The minister especially must guard this. The temptation of trained hands is to let private devotion shrink as public skill grows. But the tree of Psalm 1 brings forth fruit only because its roots stay buried deep by the rivers of water. No amount of public usefulness can replace the hidden root.</p>
+
+            <h3>4. The Psalms in the Noonday of Trial</h3>
+            <p>Sooner or later the noonday comes, with its heat and its burdens. Here the Psalms prove their deepest worth, because they were forged in trouble, not in ease. The believer in the thick of life &mdash; carrying responsibilities, suffering losses, battling fears &mdash; finds in the Psalms a companion who has been there. Psalm 56 meets the fearful with the promise that God is in the house. Psalm 28 meets the one who prays into apparent silence and teaches him to keep knocking. Psalm 55 meets the one whose burden is too heavy to carry and commands him to cast it on the Lord, who sustains.</p>
+            <div class="illustration">
+                <strong>Grace Grows Best in the Winter:</strong> The old Scottish saint Samuel Rutherford, who knew much of imprisonment and grief, left us the line we met in our study of Psalm 55: "Grace grows best in the winter." It is a strange truth, but every seasoned believer comes to know it. The faith that was only a pleasant idea in the sunshine becomes, in the cold and the dark, the one solid thing left standing. The Psalms are honest about the winter precisely so that they can lead us through it &mdash; not around the valley, but through it, with the Shepherd at our side.
+            </div>
+
+            <h3>5. The Psalms in the Evening of Life</h3>
+            <p>And then comes the evening. The Psalms have walked countless believers down to the very edge of the river, and they do not fail there. We saw how Psalm 23 is read at gravesides "countless times over the years," its ancient cadences reaching the dying and the grieving when no fresh words can. The same psalm that comforts a child at bedtime &mdash; "I shall not want" &mdash; comforts an old saint at the last &mdash; "I will dwell in the house of the LORD forever."</p>
+            <p>This is the final test of everything we have studied, and it is a test the Psalms pass. The faith we have been building, verse by verse, is the faith that must hold when health is gone and the house is empty and the road turns steep. The believer who has lived in the Psalms does not come to that hour as a stranger to God; he comes as one who has been talking with God all his life, and who now simply continues the conversation on the far side of the valley. As Hopeful called back from the cold river in our study of Psalm 55, the bottom is sound.</p>
+
+            <h3>6. Honest Before God to the End</h3>
+            <p>If there is one lesson the Psalms press on us above all others for our personal walk, it is this: be honest with God. The Psalms never wear a mask. They rage and they weep; they doubt aloud and they exult; they accuse their enemies and then repent of their own sin. Psalm 51 confesses without excuse. Psalm 22 cries out, "My God, my God, why have You forsaken Me?" and only later climbs to praise. Psalm 42 admits, "Why are you cast down, O my soul?" before preaching hope back to itself.</p>
+            <p>This honesty is not irreverence; it is the deepest reverence, because it takes God seriously enough to bring Him everything. Many believers, and many ministers, carry a quiet wound for years because they think faith requires them to pretend before God. The Psalms forbid that pretense. They give us permission to say it all &mdash; the anger, the fear, the grief, the gladness &mdash; and to say it to God's face, in the confidence that He can bear it and will answer. A faith that hides from God is starving; a faith that tells Him everything is fed.</p>
+
+            <h3>7. Drawing the Course Together</h3>
+            <p>Look back now over the whole journey. We began at Psalm 1 with the two ways, and the blessed man rooted like a tree. We climbed through the Shepherd of Psalm 23 and the King of glory of Psalm 24; we knelt at the penitence of Psalm 51 and feasted on the Word in Psalm 119. We stood beneath the cross in Psalm 22, learned fearless trust in Psalm 56, waited through God's silence in Psalm 28, counted our blessings in Psalm 103, and cast our burden in Psalm 55. Ten psalms, and through them the whole range of the life of faith &mdash; sin and forgiveness, fear and trust, silence and song, burden and rest.</p>
+            <p>And running through every one of them, like a thread of gold, is Christ. The blessed Man of Psalm 1 is fulfilled in Him; the Shepherd of Psalm 23 lays down His life in John 10; the King of glory of Psalm 24 is our risen Lord; the forsaken cry of Psalm 22 is His on the cross. The Psalms were Israel's songbook, but they are finally about Jesus, and they teach the Christian to find Him on every page. That is the unity beneath the variety: every key of human experience, sounded in the presence of God, and answered in His Son.</p>
+
+            <h3>8. Take Up the Songs</h3>
+            <p>This is the end of the course, but it is meant to be the beginning of a lifelong practice. You have studied these songs; now make them your own. Pray them in the morning and the evening. Reach for them in the noonday heat. Carry them to the bedsides and gravesides of the people God gives you. Sing them over your own children, and let them be the words in your mouth when your own evening comes.</p>
+            <div class="scripture">
+                <strong>Psalm 96:1 (NKJV):</strong> "Oh, sing to the LORD a new song! Sing to the LORD, all the earth."
+            </div>
+            <p>The Psalms are the folk songs of the people of God, sung in every key of human experience and always in the presence of God. They have outlasted three thousand years of singers, and they will outlast us, carrying the faith forward to a people yet to be born. Take them up &mdash; not only as a book you have studied, but as a ministry and a companion you have been given for the whole of your life. Bless the LORD, O my soul, and let His praise be continually in your mouth, from this morning until the everlasting day. The course is finished; the singing is just beginning.</p>
+</div>
+
+<div class="lang-es">
+            <h3>1. Del Púlpito al Corazón</h3>
+            <p>En la unidad anterior aprendimos a llevar los Salmos hacia afuera &mdash; a la predicación, el cuidado pastoral, la adoración pública, y guiar a otros en oración. Pero hay un peligro en esa sola dirección. Un ministro puede pasar toda su vida manejando cosas santas para otras personas y nunca dejar que toquen su propia alma, como un mesero que lleva comida rica a cada mesa y se va a casa con hambre. Así que en esta unidad final volvemos los Salmos hacia adentro. Antes de ser una herramienta para el ministerio, son alimento para el ministro. Antes de cantarlos sobre una congregación, debemos aprender a cantarlos en el lugar secreto, para nosotros mismos y a nuestro Dios.</p>
+            <div class="scripture">
+                <strong>Salmo 34:1 (RVG):</strong> "Bendeciré a Jehová en todo tiempo; su alabanza estará de continuo en mi boca."
+            </div>
+            <p>Los Salmos fueron dados primero para el aposento, no para el aula. Son el único libro de la Biblia escrito enteramente como palabras dirigidas <em>a</em> Dios en lugar de <em>de</em> &Eacute;l, y por eso mismo nos enseñan a orar. Esta unidad hace la pregunta más personal de todo el curso: no "¿Cómo usaré los Salmos?" sino "¿Dejaré que los Salmos formen toda mi vida con Dios, desde su mañana hasta su atardecer?"</p>
+
+            <h3>2. Un Salmo para Cada Estación del Alma</h3>
+            <p>Uno de los grandes dones del Salterio es que se niega a fingir. No nos da solo cantos soleados para días soleados; nos da un salmo para cada estación por la que el alma habrá de pasar. Cuando despiertas en confianza, el Salmo 1 pone tus pies en el camino del justo. Cuando caminas por el peligro, el Salmo 23 recorre el valle a tu lado. Cuando has pecado y tu corazón está cargado, el Salmo 51 te entrega las palabras del arrepentimiento. Cuando tienes miedo, el Salmo 56 enseña a confiar; cuando Dios parece callar, el Salmo 28 enseña a seguir clamando; cuando la carga aplasta, el Salmo 55 enseña a echarla; y cuando estás lleno de la misericordia recibida, el Salmo 103 enseña a contar tus bendiciones una a una.</p>
+            <p>Por eso el creyente nunca supera los Salmos. Un cristiano joven y un santo moribundo pueden abrir el mismo salmo y cada uno hallarlo a su medida. El libro fue hecho para acompañar toda una vida. El creyente sabio aprende, con los años, cuál salmo tomar en cuál clima del corazón, hasta que los Salmos se vuelven viejos amigos que siempre saben qué decir.</p>
+
+            <h3>3. Los Salmos en la Mañana de la Fe</h3>
+            <p>En la mañana de la vida cristiana &mdash; venga esa mañana en la juventud o ya entrada la vida &mdash; los Salmos ponen un fundamento. El Salmo 1 traza la primera gran bifurcación del camino, los dos caminos, y urge al nuevo creyente a escoger el camino del justo por encima del camino que perece. El Salmo 119 enseña entonces al corazón joven a amar y atesorar la Palabra de Dios, para que la primavera de la fe eche raíces en la Escritura y no en el mero sentimiento.</p>
+            <p>Esta es la estación para edificar hábitos que sostendrán toda una vida: un volverse diario a la Palabra, un abrir honesto del corazón a Dios, la disciplina de la meditación que recomienda el Salmo 1 &mdash; dar vueltas a un versículo una y otra vez hasta que rinda su alimento. El ministro especialmente debe cuidar esto. La tentación de las manos entrenadas es dejar que la devoción privada se encoja a medida que crece la habilidad pública. Pero el árbol del Salmo 1 da fruto solo porque sus raíces permanecen hundidas hondo junto a las corrientes de las aguas. Ninguna utilidad pública puede reemplazar la raíz escondida.</p>
+
+            <h3>4. Los Salmos en el Mediodía de la Prueba</h3>
+            <p>Tarde o temprano llega el mediodía, con su calor y sus cargas. Aquí los Salmos prueban su valor más profundo, porque fueron forjados en la aflicción, no en la comodidad. El creyente en lo más espeso de la vida &mdash; cargando responsabilidades, sufriendo pérdidas, batallando temores &mdash; halla en los Salmos un compañero que ha estado allí. El Salmo 56 sale al encuentro del temeroso con la promesa de que Dios está en la casa. El Salmo 28 sale al encuentro del que ora en aparente silencio y le enseña a seguir tocando. El Salmo 55 sale al encuentro del que tiene una carga demasiado pesada para llevar y le manda echarla sobre Jehová, que sustenta.</p>
+            <div class="illustration">
+                <strong>La Gracia Crece Mejor en el Invierno:</strong> El viejo santo escocés Samuel Rutherford, que conoció mucho de la cárcel y el dolor, nos dejó la frase que encontramos en nuestro estudio del Salmo 55: "La gracia crece mejor en el invierno." Es una verdad extraña, pero todo creyente experimentado llega a conocerla. La fe que era solo una idea agradable bajo el sol llega a ser, en el frío y la oscuridad, lo único sólido que queda en pie. Los Salmos son honestos acerca del invierno precisamente para poder guiarnos a través de él &mdash; no alrededor del valle, sino a través de él, con el Pastor a nuestro lado.
+            </div>
+
+            <h3>5. Los Salmos en el Atardecer de la Vida</h3>
+            <p>Y entonces llega el atardecer. Los Salmos han acompañado a incontables creyentes hasta el borde mismo del río, y allí no fallan. Vimos cómo el Salmo 23 se lee en los sepelios "incontables veces a lo largo de los años," sus antiguas cadencias alcanzando al moribundo y al afligido cuando ninguna palabra nueva puede. El mismo salmo que consuela a un niño a la hora de dormir &mdash; "nada me faltará" &mdash; consuela a un viejo santo al final &mdash; "en la casa de Jehová moraré por largos días."</p>
+            <p>Esta es la prueba final de todo lo que hemos estudiado, y es una prueba que los Salmos aprueban. La fe que hemos estado edificando, versículo a versículo, es la fe que debe sostener cuando la salud se ha ido y la casa está vacía y el camino se vuelve empinado. El creyente que ha vivido en los Salmos no llega a esa hora como un extraño para Dios; llega como quien ha estado hablando con Dios toda su vida, y que ahora sencillamente continúa la conversación al otro lado del valle. Como Esperanzado llamó desde el río frío en nuestro estudio del Salmo 55, el fondo es firme.</p>
+
+            <h3>6. Honesto ante Dios hasta el Fin</h3>
+            <p>Si hay una lección que los Salmos nos imprimen por encima de todas las demás para nuestro andar personal, es esta: sé honesto con Dios. Los Salmos nunca llevan máscara. Se enfurecen y lloran; dudan en voz alta y se regocijan; acusan a sus enemigos y luego se arrepienten de su propio pecado. El Salmo 51 confiesa sin excusa. El Salmo 22 clama: "Dios mío, Dios mío, ¿por qué me has desamparado?" y solo después asciende a la alabanza. El Salmo 42 admite: "¿Por qué te abates, oh alma mía?" antes de predicarse la esperanza a sí mismo.</p>
+            <p>Esta honestidad no es irreverencia; es la reverencia más profunda, porque toma a Dios tan en serio como para traerle todo. Muchos creyentes, y muchos ministros, llevan una herida callada por años porque piensan que la fe les exige fingir delante de Dios. Los Salmos prohíben ese fingimiento. Nos dan permiso de decirlo todo &mdash; la ira, el temor, el dolor, la alegría &mdash; y de decirlo en el rostro de Dios, con la confianza de que &Eacute;l puede soportarlo y responderá. Una fe que se esconde de Dios se muere de hambre; una fe que le dice todo está alimentada.</p>
+
+            <h3>7. Reuniendo el Curso</h3>
+            <p>Mire ahora hacia atrás sobre toda la jornada. Comenzamos en el Salmo 1 con los dos caminos, y el hombre bienaventurado arraigado como un árbol. Subimos por el Pastor del Salmo 23 y el Rey de gloria del Salmo 24; nos arrodillamos en la penitencia del Salmo 51 y nos saciamos de la Palabra en el Salmo 119. Estuvimos bajo la cruz en el Salmo 22, aprendimos la confianza sin temor en el Salmo 56, esperamos a través del silencio de Dios en el Salmo 28, contamos nuestras bendiciones en el Salmo 103, y echamos nuestra carga en el Salmo 55. Diez salmos, y a través de ellos toda la gama de la vida de fe &mdash; pecado y perdón, temor y confianza, silencio y canto, carga y descanso.</p>
+            <p>Y corriendo por cada uno de ellos, como un hilo de oro, está Cristo. El Hombre bienaventurado del Salmo 1 se cumple en &Eacute;l; el Pastor del Salmo 23 da Su vida en Juan 10; el Rey de gloria del Salmo 24 es nuestro Señor resucitado; el clamor de desamparo del Salmo 22 es el Suyo en la cruz. Los Salmos eran el cancionero de Israel, pero al fin tratan de Jesús, y enseñan al cristiano a hallarle en cada página. Esa es la unidad bajo la variedad: cada tono de la experiencia humana, sonado en la presencia de Dios, y respondido en Su Hijo.</p>
+
+            <h3>8. Tome los Cantos</h3>
+            <p>Este es el fin del curso, pero está destinado a ser el comienzo de una práctica de por vida. Usted ha estudiado estos cantos; ahora hágalos suyos. Órelos en la mañana y en el atardecer. Recúrralos en el calor del mediodía. Llévelos a los lechos y los sepulcros de las personas que Dios le dé. Cántelos sobre sus propios hijos, y sean ellos las palabras en su boca cuando llegue su propio atardecer.</p>
+            <div class="scripture">
+                <strong>Salmo 96:1 (RVG):</strong> "Cantad a Jehová cántico nuevo; cantad a Jehová, toda la tierra."
+            </div>
+            <p>Los Salmos son las canciones del pueblo de Dios, cantadas en cada tono de la experiencia humana y siempre en la presencia de Dios. Han sobrevivido a tres mil años de cantores, y nos sobrevivirán, llevando la fe adelante a un pueblo que ha de nacer. Tómelos &mdash; no solo como un libro que ha estudiado, sino como un ministerio y un compañero que se le ha dado para toda su vida. Bendice, alma mía, a Jehová, y esté Su alabanza de continuo en tu boca, desde esta mañana hasta el día eterno. El curso ha terminado; el canto apenas comienza.</p>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 12 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 12 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Psalms — Unit 12 (Josh engine, Capstone II — The Psalms for a Lifetime)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 12;
+const COURSE = 'psalms';
+const NEXT_UNIT_URL = 'CTSPsalmsCertificate.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Psalm 1 - The Two Ways",
+    "Psalm 23 - The Shepherd",
+    "Psalm 24 - The King of Glory",
+    "Psalm 51 - The Penitential Psalm",
+    "Psalm 119 - The Word of God",
+    "Psalm 22 - The Forsaken / Messianic Psalm",
+    "Psalm 56 - When I Am Afraid",
+    "Psalm 28 - When God Is Silent",
+    "Psalm 103 - Count Your Blessings",
+    "Psalm 55 - Casting Your Burden",
+    "The Psalms in Ministry I - Capstone",
+    "The Psalms in Ministry II - Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPsalmsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// MC answer key: A=B=C=D=5; all 20 verified against Capstone II content
+const mcQuestions = [
+    { textEn: "1. How does this final unit's focus differ from the previous capstone unit?", textEs: "1. ¿En qué se diferencia el enfoque de esta unidad final del de la unidad capstone anterior?",
+      optionsEn: ["It reviews Hebrew grammar", "It abandons the Psalms for the Epistles", "It focuses only on preaching technique", "It turns the Psalms inward — food for the minister's own soul, not only a tool for others"],
+      optionsEs: ["Repasa la gramática hebrea", "Abandona los Salmos por las Epístolas", "Se enfoca solo en la técnica de predicación", "Vuelve los Salmos hacia adentro — alimento para el alma del ministro, no solo herramienta para otros"], explanationEn: "This final unit turns the Psalms inward — they are first food for the minister's own soul, not only a tool for others.", explanationEs: "Esta unidad final vuelve los Salmos hacia adentro — son primero alimento para el alma del ministro, no solo herramienta para otros.", correct: 3 },
+    { textEn: "2. What image does the lesson use to warn the minister who handles holy things only for others?", textEs: "2. ¿Qué imagen usa la lección para advertir al ministro que maneja cosas santas solo para otros?",
+      optionsEn: ["A lamp without oil", "A soldier without armor", "A waiter who carries rich food to every table and goes home hungry", "A shepherd without sheep"],
+      optionsEs: ["Una lámpara sin aceite", "Un soldado sin armadura", "Un mesero que lleva comida rica a cada mesa y se va a casa con hambre", "Un pastor sin ovejas"], explanationEn: "The warning image is a waiter who carries rich food to every table and goes home hungry — handling holy things without being fed.", explanationEs: "La imagen de advertencia es un mesero que lleva comida rica a cada mesa y se va a casa con hambre — manejar cosas santas sin ser alimentado.", correct: 2 },
+    { textEn: "3. According to the lesson, what is unique about the Psalms among all the books of the Bible?", textEs: "3. Según la lección, ¿qué es único de los Salmos entre todos los libros de la Biblia?",
+      optionsEn: ["They are the longest book", "They were written entirely as words addressed TO God rather than FROM Him", "They contain no mention of Christ", "They were written in Greek"],
+      optionsEs: ["Son el libro más largo", "Fueron escritos enteramente como palabras dirigidas A Dios y no DE &Eacute;l", "No contienen mención de Cristo", "Fueron escritos en griego"], explanationEn: "The Psalms are unique: written entirely as words addressed TO God rather than FROM Him, which is why they teach us to pray.", explanationEs: "Los Salmos son únicos: escritos enteramente como palabras dirigidas A Dios en lugar de DE &Eacute;l, por lo cual nos enseñan a orar.", correct: 1 },
+    { textEn: "4. What is the most personal question the lesson says this whole course finally asks?", textEs: "4. ¿Cuál es la pregunta más personal que dice la lección que hace finalmente todo este curso?",
+      optionsEn: ["Will I let the Psalms shape my whole life with God, morning to evening?", "Which psalm is the greatest?", "How will I teach the Psalms to others?", "How many psalms can I memorize?"],
+      optionsEs: ["¿Dejaré que los Salmos formen toda mi vida con Dios, de la mañana al atardecer?", "¿Cuál salmo es el más grande?", "¿Cómo enseñaré los Salmos a otros?", "¿Cuántos salmos puedo memorizar?"], explanationEn: "The course's most personal question is this: will I let the Psalms shape my whole life with God, morning to evening?", explanationEs: "La pregunta más personal del curso es esta: ¿dejaré que los Salmos formen toda mi vida con Dios, de la mañana al atardecer?", correct: 0 },
+    { textEn: "5. The lesson says the Psalter 'refuses to pretend.' What does it mean by this?", textEs: "5. La lección dice que el Salterio 'se niega a fingir.' ¿Qué significa esto?",
+      optionsEn: ["It hides the failures of its writers", "It never mentions suffering", "It gives a psalm for every season of the soul, not only sunny songs for sunny days", "It promises an easy life"],
+      optionsEs: ["Esconde los fracasos de sus escritores", "Nunca menciona el sufrimiento", "Da un salmo para cada estación del alma, no solo cantos soleados para días soleados", "Promete una vida fácil"], explanationEn: "The Psalter 'refuses to pretend': it gives a psalm for every season of the soul, not only sunny songs for sunny days.", explanationEs: "El Salterio 'se niega a fingir': da un salmo para cada estación del alma, no solo cantos soleados para días soleados.", correct: 2 },
+    { textEn: "6. Why does the lesson say a believer never outgrows the Psalms?", textEs: "6. ¿Por qué dice la lección que un creyente nunca supera los Salmos?",
+      optionsEn: ["Because a young Christian and a dying saint can open the same psalm and each find it fits", "Because they are short and easy", "Because they must be read in order", "Because they are required reading"],
+      optionsEs: ["Porque un cristiano joven y un santo moribundo pueden abrir el mismo salmo y cada uno hallarlo a su medida", "Porque son cortos y fáciles", "Porque deben leerse en orden", "Porque son lectura obligatoria"], explanationEn: "A believer never outgrows the Psalms because a young Christian and a dying saint can open the same psalm and each find it fits.", explanationEs: "El creyente nunca supera los Salmos porque un cristiano joven y un santo moribundo pueden abrir el mismo salmo y cada uno hallarlo a su medida.", correct: 0 },
+    { textEn: "7. In the 'morning of faith,' which two psalms does the lesson highlight as laying a foundation?", textEs: "7. En la 'mañana de la fe,' ¿qué dos salmos destaca la lección como los que ponen un fundamento?",
+      optionsEn: ["Psalm 22 and Psalm 24", "Psalm 1 (the two ways) and Psalm 119 (loving the Word)", "Psalm 55 and Psalm 56", "Psalm 28 and Psalm 103"],
+      optionsEs: ["Salmo 22 y Salmo 24", "Salmo 1 (los dos caminos) y Salmo 119 (amar la Palabra)", "Salmo 55 y Salmo 56", "Salmo 28 y Salmo 103"], explanationEn: "In the morning of faith two psalms lay the foundation: Psalm 1 (the two ways) and Psalm 119 (loving the Word).", explanationEs: "En la mañana de la fe dos salmos ponen el fundamento: el Salmo 1 (los dos caminos) y el Salmo 119 (amar la Palabra).", correct: 1 },
+    { textEn: "8. What temptation of 'trained hands' does the lesson warn ministers about?", textEs: "8. ¿De qué tentación de las 'manos entrenadas' advierte la lección a los ministros?",
+      optionsEn: ["Charging too much for ministry", "Preaching too long", "Avoiding difficult people", "Letting private devotion shrink as public skill grows"],
+      optionsEs: ["Cobrar demasiado por el ministerio", "Predicar demasiado largo", "Evitar a las personas difíciles", "Dejar que la devoción privada se encoja mientras crece la habilidad pública"], explanationEn: "The temptation of trained hands is to let private devotion shrink as public skill grows — the root must stay deep.", explanationEs: "La tentación de las manos entrenadas es dejar que la devoción privada se encoja mientras crece la habilidad pública — la raíz debe permanecer honda.", correct: 3 },
+    { textEn: "9. The lesson says the tree of Psalm 1 bears fruit only because of what?", textEs: "9. La lección dice que el árbol del Salmo 1 da fruto solo por causa de ¿qué?",
+      optionsEn: ["It grows in the sunniest spot", "Its roots stay buried deep by the rivers of water", "It is the tallest tree", "It is pruned every year"],
+      optionsEs: ["Crece en el lugar más soleado", "Sus raíces permanecen hundidas hondo junto a las corrientes de las aguas", "Es el árbol más alto", "Se poda cada año"], explanationEn: "The tree of Psalm 1 bears fruit only because its roots stay buried deep by the rivers of water — hidden devotion feeds public fruit.", explanationEs: "El árbol del Salmo 1 da fruto solo porque sus raíces permanecen hondas junto a las corrientes de las aguas — la devoción escondida nutre el fruto público.", correct: 1 },
+    { textEn: "10. Why does the lesson say the Psalms prove their deepest worth in the 'noonday of trial'?", textEs: "10. ¿Por qué dice la lección que los Salmos prueban su valor más profundo en el 'mediodía de la prueba'?",
+      optionsEn: ["Because they are easiest to read then", "Because trials are rare", "Because they were forged in trouble, not in ease, and meet us as a companion who has been there", "Because they promise to end every trial"],
+      optionsEs: ["Porque son más fáciles de leer entonces", "Porque las pruebas son raras", "Porque fueron forjados en la aflicción, no en la comodidad, y nos acompañan como uno que ha estado allí", "Porque prometen terminar toda prueba"], explanationEn: "The Psalms prove their deepest worth in the noonday of trial, because they were forged in trouble and meet us as a companion who has been there.", explanationEs: "Los Salmos prueban su valor más profundo en el mediodía de la prueba, porque fueron forjados en la aflicción y nos acompañan como uno que ha estado allí.", correct: 2 },
+    { textEn: "11. Whose saying, met earlier in Psalm 55, does the lesson recall: 'Grace grows best in the winter'?", textEs: "11. ¿De quién es el dicho, encontrado antes en el Salmo 55, que recuerda la lección: 'La gracia crece mejor en el invierno'?",
+      optionsEn: ["Samuel Rutherford", "C. S. Lewis", "Arthur John Gossip", "Charles Spurgeon"],
+      optionsEs: ["Samuel Rutherford", "C. S. Lewis", "Arthur John Gossip", "Charles Spurgeon"], explanationEn: "Samuel Rutherford's saying, met earlier in Psalm 55, holds: 'Grace grows best in the winter.'", explanationEs: "El dicho de Samuel Rutherford, hallado antes en el Salmo 55, se mantiene: 'La gracia crece mejor en el invierno.'", correct: 0 },
+    { textEn: "12. According to the lesson, how does the Shepherd lead us through the valley?", textEs: "12. Según la lección, ¿cómo nos guía el Pastor por el valle?",
+      optionsEn: ["By promising we will never enter a valley", "By removing all difficulty", "By sending others in our place", "Not around the valley, but through it, with the Shepherd at our side"],
+      optionsEs: ["Prometiendo que nunca entraremos en un valle", "Quitando toda dificultad", "Enviando a otros en nuestro lugar", "No alrededor del valle, sino a través de él, con el Pastor a nuestro lado"], explanationEn: "The Shepherd leads us not around the valley but through it, staying at our side the whole way.", explanationEs: "El Pastor nos guía no alrededor del valle sino a través de él, permaneciendo a nuestro lado todo el camino.", correct: 3 },
+    { textEn: "13. How does the lesson describe Psalm 23 in the 'evening of life'?", textEs: "13. ¿Cómo describe la lección el Salmo 23 en el 'atardecer de la vida'?",
+      optionsEn: ["It is too difficult for the dying", "It is only for funerals", "The same psalm comforts a child at bedtime and an old saint at the last", "It should be replaced with newer words"],
+      optionsEs: ["Es demasiado difícil para el moribundo", "Es solo para funerales", "El mismo salmo consuela a un niño a la hora de dormir y a un viejo santo al final", "Debe reemplazarse con palabras más nuevas"], explanationEn: "In the evening of life the same Psalm 23 comforts a child at bedtime and an old saint at the last.", explanationEs: "En el atardecer de la vida el mismo Salmo 23 consuela a un niño a la hora de dormir y a un viejo santo al final.", correct: 2 },
+    { textEn: "14. According to the lesson, how does the believer who has lived in the Psalms come to the hour of death?", textEs: "14. Según la lección, ¿cómo llega a la hora de la muerte el creyente que ha vivido en los Salmos?",
+      optionsEn: ["As a stranger to God", "Only if he memorized every psalm", "With no comfort at all", "Not as a stranger to God, but as one who simply continues a lifelong conversation"],
+      optionsEs: ["Como un extraño para Dios", "Solo si memorizó cada salmo", "Sin consuelo alguno", "No como un extraño para Dios, sino como quien sencillamente continúa una conversación de toda la vida"], explanationEn: "The believer who has lived in the Psalms comes to death not as a stranger to God, but continuing a lifelong conversation.", explanationEs: "El creyente que ha vivido en los Salmos llega a la muerte no como un extraño para Dios, sino continuando una conversación de toda la vida.", correct: 3 },
+    { textEn: "15. What does the lesson say is the one great lesson the Psalms press on us for our personal walk?", textEs: "15. ¿Qué dice la lección que es la gran lección que los Salmos nos imprimen para nuestro andar personal?",
+      optionsEn: ["Memorize as much as possible", "Be honest with God — bring Him everything", "Always feel happy", "Never question anything"],
+      optionsEs: ["Memorizar lo más posible", "Ser honesto con Dios — traerle todo", "Sentirse siempre feliz", "Nunca cuestionar nada"], explanationEn: "The one great personal lesson of the Psalms is this: be honest with God — bring Him everything.", explanationEs: "La gran lección personal de los Salmos es esta: sé honesto con Dios — tráele todo.", correct: 1 },
+    { textEn: "16. Which psalm does the lesson cite as preaching hope back to itself with 'Why are you cast down, O my soul?'", textEs: "16. ¿Qué salmo cita la lección como uno que se predica esperanza a sí mismo con '¿Por qué te abates, oh alma mía?'", 
+      optionsEn: ["Psalm 42", "Psalm 24", "Psalm 103", "Psalm 1"],
+      optionsEs: ["Salmo 42", "Salmo 24", "Salmo 103", "Salmo 1"], explanationEn: "Psalm 42 preaches hope back to itself: 'Why are you cast down, O my soul?' — faith speaking truth to feeling.", explanationEs: "El Salmo 42 se predica esperanza a sí mismo: '¿Por qué te abates, oh alma mía?' — la fe hablando verdad al sentimiento.", correct: 0 },
+    { textEn: "17. According to the lesson, why is honesty before God 'the deepest reverence'?", textEs: "17. Según la lección, ¿por qué es la honestidad ante Dios 'la reverencia más profunda'?",
+      optionsEn: ["Because God demands flattery", "Because it proves we are strong", "Because it takes God seriously enough to bring Him everything", "Because it impresses others"],
+      optionsEs: ["Porque Dios exige adulación", "Porque prueba que somos fuertes", "Porque toma a Dios tan en serio como para traerle todo", "Porque impresiona a otros"], explanationEn: "Honesty before God is the deepest reverence, because it takes God seriously enough to bring Him everything.", explanationEs: "La honestidad ante Dios es la reverencia más profunda, porque toma a Dios tan en serio como para traerle todo.", correct: 2 },
+    { textEn: "18. What does the lesson identify as the 'thread of gold' running through all ten psalms studied?", textEs: "18. ¿Qué identifica la lección como el 'hilo de oro' que corre por los diez salmos estudiados?",
+      optionsEn: ["The theme of music", "Christ — every psalm finally points to Jesus", "The history of Israel", "The poetry of David"],
+      optionsEs: ["El tema de la música", "Cristo — cada salmo al fin señala a Jesús", "La historia de Israel", "La poesía de David"], explanationEn: "The thread of gold through all ten psalms is Christ — every psalm finally points to Jesus.", explanationEs: "El hilo de oro a través de los diez salmos es Cristo — cada salmo al fin señala a Jesús.", correct: 1 },
+    { textEn: "19. How does the lesson summarize 'the unity beneath the variety' of the Psalms?", textEs: "19. ¿Cómo resume la lección 'la unidad bajo la variedad' de los Salmos?",
+      optionsEn: ["Every key of human experience, sounded in God's presence and answered in His Son", "A history textbook of Israel", "A collection of unrelated poems", "A list of moral rules"],
+      optionsEs: ["Cada tono de la experiencia humana, sonado en la presencia de Dios y respondido en Su Hijo", "Un libro de historia de Israel", "Una colección de poemas sin relación", "Una lista de reglas morales"], explanationEn: "The unity beneath the variety: every key of human experience, sounded in God's presence and answered in His Son.", explanationEs: "La unidad bajo la variedad: cada tono de la experiencia humana, sonado en la presencia de Dios y respondido en Su Hijo.", correct: 0 },
+    { textEn: "20. According to the closing charge, what is the end of the course meant to be?", textEs: "20. Según el encargo final, ¿qué se supone que sea el fin del curso?",
+      optionsEn: ["A reason to set the Psalms aside", "The completion of an academic requirement only", "A signal to move on to other books", "The beginning of a lifelong practice — take up the songs and make them your own"],
+      optionsEs: ["Una razón para dejar de lado los Salmos", "El cumplimiento de un requisito académico solamente", "Una señal para pasar a otros libros", "El comienzo de una práctica de por vida — tome los cantos y hágalos suyos"], explanationEn: "The end of the course is meant to be the beginning of a lifelong practice — take up the songs and make them your own.", explanationEs: "El fin del curso está destinado a ser el comienzo de una práctica de por vida — tome los cantos y hágalos suyos.", correct: 3 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "21. Explain how this final unit turns the Psalms inward, and why the lesson says they are first food for the minister.",
+      textEs: "21. Explique cómo esta unidad final vuelve los Salmos hacia adentro, y por qué dice la lección que son primero alimento para el ministro.",
+      kw_en: ["inward", "food", "minister", "soul", "waiter", "hungry", "closet", "pray"],
+      kw_es: ["adentro", "alimento", "ministro", "alma", "mesero", "hambre", "aposento", "orar"],
+      modelEn: "Where the previous unit turned the Psalms outward, into preaching and ministry to others, this final unit turns them inward. The Psalms are first food for the minister's own soul, not merely a tool he uses on others. The lesson warns with the picture of a waiter who carries rich food to every table yet goes home hungry: a minister can spend his life handling holy things for others and never let them feed him. So before the Psalms are something we use, they must be something we live on. They were given first for the closet, teaching us to pray and nourishing our own walk with God.",
+      modelEs: "Donde la unidad anterior volvió los Salmos hacia afuera, a la predicación y al ministerio a otros, esta unidad final los vuelve hacia adentro. Los Salmos son primero alimento para el alma del ministro, no solo una herramienta que usa con otros. La lección advierte con la imagen de un mesero que lleva comida rica a cada mesa y sin embargo se va a casa con hambre: un ministro puede pasar su vida manejando cosas santas para otros y nunca dejar que lo alimenten. Así que antes de que los Salmos sean algo que usamos, deben ser algo de lo que vivimos. Fueron dados primero para el aposento, enseñándonos a orar y nutriendo nuestro propio andar con Dios." },
+    { textEn: "22. Explain what it means that the Psalms give 'a psalm for every season of the soul,' with examples.",
+      textEs: "22. Explique qué significa que los Salmos dan 'un salmo para cada estación del alma,' con ejemplos.",
+      kw_en: ["season", "every", "danger", "sin", "afraid", "silent", "burden", "blessings"],
+      kw_es: ["estación", "cada", "peligro", "pecado", "miedo", "callar", "carga", "bendiciones"],
+      modelEn: "To say the Psalms give \"a psalm for every season of the soul\" means the Psalter refuses to pretend life is always sunny; it provides words for every condition the heart will pass through. There is a psalm for the morning of confidence and a psalm for the valley; a psalm for joy and a psalm for despair. The lesson gives examples: Psalm 23 for danger, Psalm 51 for guilt, Psalm 56 for fear, Psalm 28 for the silence of God, Psalm 55 for a crushing burden, Psalm 103 for thanksgiving. Whatever season the soul is in, the Psalms have already given honest words to bring that season to God.",
+      modelEs: "Decir que los Salmos dan \"un salmo para cada estación del alma\" significa que el Salterio se niega a fingir que la vida siempre es soleada; provee palabras para toda condición por la que el corazón pasará. Hay un salmo para la mañana de confianza y un salmo para el valle; un salmo para el gozo y un salmo para la desesperación. La lección da ejemplos: el Salmo 23 para el peligro, el 51 para la culpa, el 56 para el temor, el 28 para el silencio de Dios, el 55 para una carga aplastante, el 103 para la acción de gracias. Sea cual sea la estación del alma, los Salmos ya han dado palabras honestas para traer esa estación a Dios." },
+    { textEn: "23. Describe the Psalms in the 'morning of faith,' including the foundation Psalm 1 and Psalm 119 lay.",
+      textEs: "23. Describa los Salmos en la 'mañana de la fe,' incluyendo el fundamento que ponen el Salmo 1 y el Salmo 119.",
+      kw_en: ["morning", "foundation", "two ways", "righteous", "Word", "habits", "meditation", "roots"],
+      kw_es: ["mañana", "fundamento", "dos caminos", "justo", "Palabra", "hábitos", "meditación", "raíces"],
+      modelEn: "In the \"morning of faith,\" the early days of the Christian life, the Psalms lay a foundation for everything that follows. Psalm 1 sets out the two ways at the very start, calling the new believer to choose the way of the righteous over the way that perishes. Psalm 119 teaches the young heart to love and treasure the Word of God, so that faith is rooted in Scripture rather than in feeling. Together they build habits of meditation and devotion that will hold for a lifetime. The morning is the time to sink roots deep, so the tree will stand and bear fruit through all the seasons to come.",
+      modelEs: "En la \"mañana de la fe,\" los primeros días de la vida cristiana, los Salmos ponen un fundamento para todo lo que sigue. El Salmo 1 expone los dos caminos desde el inicio mismo, llamando al nuevo creyente a escoger el camino del justo por encima del que perece. El Salmo 119 enseña al corazón joven a amar y atesorar la Palabra de Dios, para que la fe eche raíces en la Escritura y no en el sentimiento. Juntos edifican hábitos de meditación y devoción que sostendrán toda una vida. La mañana es el tiempo de hundir hondo las raíces, para que el árbol esté firme y dé fruto por todas las estaciones venideras." },
+    { textEn: "24. Explain the warning the lesson gives ministers about private devotion, using the tree of Psalm 1.",
+      textEs: "24. Explique la advertencia que la lección da a los ministros sobre la devoción privada, usando el árbol del Salmo 1.",
+      kw_en: ["devotion", "shrink", "public", "skill", "tree", "roots", "rivers", "fruit"],
+      kw_es: ["devoción", "encoja", "pública", "habilidad", "árbol", "raíces", "aguas", "fruto"],
+      modelEn: "The lesson warns ministers using the tree of Psalm 1: that tree bears fruit only because its roots stay buried deep by the rivers of water. The danger of trained hands is to let private devotion shrink as public skill grows, so that a minister becomes ever more capable in public while his hidden root withers. But no amount of public usefulness can replace the hidden source of life. If the roots dry up, the fruit will fail, however impressive the branches look. The warning is to guard the secret place, the daily, unseen drawing from God, because that hidden devotion is what feeds everything the world can see.",
+      modelEs: "La lección advierte a los ministros usando el árbol del Salmo 1: ese árbol da fruto solo porque sus raíces permanecen hundidas hondo junto a las corrientes de las aguas. El peligro de las manos entrenadas es dejar que la devoción privada se encoja mientras crece la habilidad pública, de modo que un ministro se vuelve cada vez más capaz en público mientras su raíz escondida se seca. Pero ninguna utilidad pública puede reemplazar la fuente escondida de vida. Si las raíces se secan, el fruto fallará, por impresionantes que se vean las ramas. La advertencia es guardar el lugar secreto, el sacar diario e invisible de Dios, porque esa devoción escondida es lo que nutre todo lo que el mundo puede ver." },
+    { textEn: "25. Explain how the Psalms meet the believer in the 'noonday of trial,' with examples from the course.",
+      textEs: "25. Explique cómo los Salmos salen al encuentro del creyente en el 'mediodía de la prueba,' con ejemplos del curso.",
+      kw_en: ["noonday", "trial", "forged", "trouble", "companion", "fear", "silence", "cast"],
+      kw_es: ["mediodía", "prueba", "forjados", "aflicción", "compañero", "temor", "silencio", "echar"],
+      modelEn: "The Psalms meet the believer in the \"noonday of trial,\" the heat and burden of the middle of life, and there they prove their deepest worth, because they were forged in trouble, not in ease. They come to the suffering believer as a companion who has already been where he is. The lesson points to examples from the course: Psalm 56 meets the fearful, Psalm 28 meets the one praying into God's silence, Psalm 55 meets the one whose burden is crushing and tells him to cast it on the Lord. In the hardest stretch of the journey, the Psalms walk beside us, having suffered first, and lead us through.",
+      modelEs: "Los Salmos salen al encuentro del creyente en el \"mediodía de la prueba,\" el calor y la carga de la mitad de la vida, y allí prueban su valor más profundo, porque fueron forjados en la aflicción, no en la comodidad. Vienen al creyente que sufre como un compañero que ya ha estado donde él está. La lección señala ejemplos del curso: el Salmo 56 sale al encuentro del temeroso, el 28 al que ora en el silencio de Dios, el 55 al que tiene una carga aplastante y le dice que la eche sobre Jehová. En el tramo más duro del viaje, los Salmos caminan a nuestro lado, habiendo sufrido primero, y nos llevan a través." },
+    { textEn: "26. Explain Samuel Rutherford's saying 'grace grows best in the winter' and how it relates to walking through the valley.",
+      textEs: "26. Explique el dicho de Samuel Rutherford 'la gracia crece mejor en el invierno' y cómo se relaciona con caminar por el valle.",
+      kw_en: ["Rutherford", "grace", "winter", "solid", "valley", "through", "Shepherd", "honest"],
+      kw_es: ["Rutherford", "gracia", "invierno", "sólido", "valle", "través", "Pastor", "honesto"],
+      modelEn: "Samuel Rutherford, who knew much imprisonment and grief, left the saying \"grace grows best in the winter.\" It is a strange but proven truth: the faith that was only a pleasant idea in the sunshine becomes, in the cold and dark of suffering, the one solid thing left standing. Hardship deepens grace rather than destroying it. This relates directly to walking through the valley, for Psalm 23 promises not a way around the valley but a way through it, with the Shepherd at our side. We do not avoid the winter; we grow in it, because God uses the very cold to make grace take deeper root.",
+      modelEs: "Samuel Rutherford, que conoció mucha cárcel y dolor, dejó el dicho \"la gracia crece mejor en el invierno.\" Es una verdad extraña pero comprobada: la fe que era solo una idea agradable bajo el sol llega a ser, en el frío y la oscuridad del sufrimiento, lo único sólido que queda en pie. La aflicción profundiza la gracia en vez de destruirla. Esto se relaciona directamente con caminar por el valle, pues el Salmo 23 promete no un rodeo alrededor del valle sino un camino a través de él, con el Pastor a nuestro lado. No evitamos el invierno; crecemos en él, porque Dios usa el frío mismo para hacer que la gracia eche raíces más hondas." },
+    { textEn: "27. Describe how the Psalms serve the believer in the 'evening of life,' using Psalm 23.",
+      textEs: "27. Describa cómo los Salmos sirven al creyente en el 'atardecer de la vida,' usando el Salmo 23.",
+      kw_en: ["evening", "death", "Psalm 23", "graveside", "child", "dying", "conversation", "sound"],
+      kw_es: ["atardecer", "muerte", "Salmo 23", "sepelio", "niño", "moribundo", "conversación", "firme"],
+      modelEn: "In the \"evening of life,\" as strength fades and death draws near, the Psalms do not fail; they have walked countless believers right down to the edge of the river. Psalm 23 is the great example: read at gravesides over countless years, its ancient words reach the dying and the grieving when no fresh words can. The same psalm that comforts a child at bedtime, \"I shall not want,\" comforts the old saint at the last, \"I will dwell in the house of the LORD forever.\" The believer who has lived in the Psalms comes to that hour not as a stranger to God but as one simply continuing a lifelong conversation.",
+      modelEs: "En el \"atardecer de la vida,\" al desvanecerse las fuerzas y acercarse la muerte, los Salmos no fallan; han acompañado a incontables creyentes hasta el borde mismo del río. El Salmo 23 es el gran ejemplo: leído junto a las tumbas por incontables años, sus antiguas palabras alcanzan al moribundo y al doliente cuando ninguna palabra nueva puede. El mismo salmo que consuela a un niño a la hora de dormir, \"nada me faltará,\" consuela al viejo santo al final, \"en la casa de Jehová moraré por largos días.\" El creyente que ha vivido en los Salmos llega a esa hora no como un extraño para Dios sino como quien simplemente continúa una conversación de toda la vida." },
+    { textEn: "28. Explain why honesty before God is the great personal lesson of the Psalms, with examples.",
+      textEs: "28. Explique por qué la honestidad ante Dios es la gran lección personal de los Salmos, con ejemplos.",
+      kw_en: ["honest", "mask", "reverence", "everything", "anger", "fear", "confess", "fed"],
+      kw_es: ["honesto", "máscara", "reverencia", "todo", "ira", "temor", "confesar", "alimentada"],
+      modelEn: "Honesty before God is the great personal lesson of the Psalms because they never wear a mask. They rage and weep, doubt aloud and exult, and bring every real emotion straight to God. Psalm 51 confesses sin without excuse; Psalm 22 cries, \"why have You forsaken Me?\"; Psalm 42 admits, \"why are you cast down, O my soul?\" before preaching hope back to itself. This honesty is not irreverence but the deepest reverence, because it takes God seriously enough to bring Him everything. Many carry a hidden wound for years because they think faith means pretending before God; the Psalms forbid that pretense, and a heart that tells God everything is fed.",
+      modelEs: "La honestidad ante Dios es la gran lección personal de los Salmos porque nunca llevan máscara. Se enfurecen y lloran, dudan en voz alta y se regocijan, y traen cada emoción real directamente a Dios. El Salmo 51 confiesa el pecado sin excusa; el 22 clama: \"¿por qué me has desamparado?\"; el 42 admite: \"¿por qué te abates, oh alma mía?\" antes de predicarse la esperanza a sí mismo. Esta honestidad no es irreverencia sino la reverencia más profunda, porque toma a Dios tan en serio como para traerle todo. Muchos cargan una herida escondida por años porque piensan que la fe significa fingir ante Dios; los Salmos prohíben ese fingimiento, y un corazón que le dice todo a Dios es alimentado." },
+    { textEn: "29. Draw the whole course together: name several psalms studied and the thread of gold running through them.",
+      textEs: "29. Reúna todo el curso: nombre varios salmos estudiados y el hilo de oro que corre por ellos.",
+      kw_en: ["two ways", "Shepherd", "penitence", "Word", "cross", "Christ", "gold", "presence"],
+      kw_es: ["dos caminos", "Pastor", "penitencia", "Palabra", "cruz", "Cristo", "oro", "presencia"],
+      modelEn: "Looking back over the whole course, we began at Psalm 1 with the two ways and the blessed man rooted like a tree. We climbed through the Shepherd of Psalm 23 and the King of glory of Psalm 24; we knelt at the penitence of Psalm 51 and feasted on the Word in Psalm 119. We stood beneath the cross in Psalm 22, learned trust in Psalm 56, waited through silence in Psalm 28, counted blessings in Psalm 103, and cast our burden in Psalm 55. Running through every one of them, like a thread of gold, is Christ. The Psalms were Israel's songbook, but they are finally about Jesus, who is found on every page.",
+      modelEs: "Mirando atrás sobre todo el curso, comenzamos en el Salmo 1 con los dos caminos y el hombre bienaventurado arraigado como un árbol. Subimos por el Pastor del Salmo 23 y el Rey de gloria del 24; nos arrodillamos en la penitencia del 51 y nos saciamos de la Palabra en el 119. Estuvimos bajo la cruz en el Salmo 22, aprendimos la confianza en el 56, esperamos a través del silencio en el 28, contamos bendiciones en el 103, y echamos nuestra carga en el 55. Corriendo por cada uno de ellos, como un hilo de oro, está Cristo. Los Salmos eran el cancionero de Israel, pero al fin tratan de Jesús, que se halla en cada página." },
+    { textEn: "30. According to the closing charge, what should the student now do with the Psalms for the rest of life?",
+      textEs: "30. Según el encargo final, ¿qué debe hacer ahora el estudiante con los Salmos por el resto de la vida?",
+      kw_en: ["beginning", "own", "morning", "evening", "bedside", "sing", "companion", "lifelong"],
+      kw_es: ["comienzo", "suyos", "mañana", "atardecer", "lecho", "cantar", "compañero", "toda la vida"],
+      modelEn: "According to the closing charge, the end of the course is meant to be the beginning of a lifelong practice: take up the songs and make them your own. The student is to pray the Psalms in the morning and evening, reach for them in the noonday heat of trouble, carry them to the bedsides and gravesides of others, sing them over his own family, and let them be the words in his mouth when his own evening comes. They are not a book to finish and shelve but a companion given for the whole of life. The course ends, but the singing is just beginning, and it is meant to continue to the last breath.",
+      modelEs: "Según el encargo final, el fin del curso está destinado a ser el comienzo de una práctica de por vida: tomar los cantos y hacerlos propios. El estudiante ha de orar los Salmos en la mañana y en el atardecer, recurrirlos en el calor del mediodía de la aflicción, llevarlos a los lechos y las tumbas de otros, cantarlos sobre su propia familia, y dejar que sean las palabras en su boca cuando llegue su propio atardecer. No son un libro para terminar y guardar sino un compañero dado para toda la vida. El curso termina, pero el canto apenas comienza, y está destinado a continuar hasta el último aliento." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Vea su certificado.</span>"
+            : "<span style='color:green'>✓ Unit already passed! View your certificate.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPsalmsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS World Religions — Unit 1: Introduction to World Religions</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #f8f4e8; border: 1px solid #e8d9b8; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 10px; margin: 6px 0 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; }
+.reg-form label { font-weight: bold; display: block; margin-top: 10px; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-form { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" disabled>← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 2 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">🌍 World Religions — Unit 1: Introduction to World Religions</span><span class="lang-es">🌍 Religiones del Mundo — Unidad 1: Introducción a las Religiones del Mundo</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"Then Paul stood in the midst of the Areopagus and said... 'I perceived that in all things you are very religious; for as I was passing through and considering the objects of your worship, I even found an altar with this inscription: TO THE UNKNOWN GOD. Therefore, the One whom you worship without knowing, Him I proclaim to you.'" — Acts 17:22–23 (NKJV)</span><span class="lang-es">"Pablo, puesto en pie en medio del Areópago, dijo... 'Porque pasando y mirando vuestros santuarios, hallé también un altar en el cual estaba esta inscripción: AL DIOS NO CONOCIDO. Al que vosotros adoráis sin conocerle, es a quien yo os anuncio.'" — Hechos 17:22–23 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="registrationCard">
+    <h2><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h2>
+    <p><span class="lang-en">Please register before beginning Unit 1. Your registration is saved on this device and used across all CTS courses.</span><span class="lang-es">Por favor regístrese antes de comenzar la Unidad 1. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full Name</span><span class="lang-es">Nombre Completo</span></label>
+    <input type="text" id="regName" placeholder="" />
+    <label><span class="lang-en">Email</span><span class="lang-es">Correo Electrónico</span></label>
+    <input type="email" id="regEmail" placeholder="" />
+    <label><span class="lang-en">Country</span><span class="lang-es">País</span></label>
+    <input type="text" id="regCountry" placeholder="" />
+    <label><span class="lang-en">Program Track</span><span class="lang-es">Programa</span></label>
+    <input type="hidden" id="regTrack" value="certificate" />
+    <div id="trackButtons" style="display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;">
+        <button type="button" class="track-opt" data-track="certificate"><span class="lang-en">Certificate of Ministry</span><span class="lang-es">Certificado de Ministerio</span></button>
+        <button type="button" class="track-opt" data-track="mdiv"><span class="lang-en">Master of Divinity (M.Div.)</span><span class="lang-es">Maestría en Divinidad (M.Div.)</span></button>
+        <button type="button" class="track-opt" data-track="thm"><span class="lang-en">Master of Theology (Th.M.)</span><span class="lang-es">Maestría en Teología (Th.M.)</span></button>
+    </div>
+    <button class="small" id="saveRegBtn" style="margin-top: 10px;"><span class="lang-en">Save Registration</span><span class="lang-es">Guardar Registro</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>Every pastor will eventually stand where Paul stood on Mars Hill — surrounded by people who worship something, but not the living God. In Cuba it may be a neighbor who keeps a small altar to Santería's orishas alongside a photograph of Jesus. In Mexico it may be a curandera down the street, or a family that mixes rosary prayers with rituals passed down from before the conquest. In your own congregation it may be a new believer who still is not quite sure how the Christian gospel relates to the Buddhist meditation practice she grew up with, or a young man wrestling with what his Muslim coworker actually believes, or a widow who has begun attending a Jehovah's Witness Bible study because a neighbor was kind to her in her grief. A pastor who has never thought carefully about other faiths will either dismiss these encounters with contempt, or drift into vague generalities that satisfy no one and answer nothing. This course exists to prepare you for something better than either response.</p>
+
+        <p>We study world religions not because all paths lead to the same place — Scripture does not teach that, and this course will not pretend otherwise — but because love for our neighbor requires that we understand what he actually believes before we speak to him about Christ. Ignorance is not humility. It is simply ignorance, and it makes for bad shepherding. A doctor who refuses to learn what disease he is treating is not being modest; he is being negligent. The same is true of a pastor who refuses to learn what beliefs are actually shaping the people God has placed in his care.</p>
+
+        <p>This first unit lays a foundation for the eleven units that follow. We will not yet examine any single religion in detail — that begins with Judaism in Unit 2. Instead, we will ask three foundational questions that will govern our approach to every religion this course studies: Why do human beings worship at all? How should a follower of Christ approach an unfamiliar religious system? And what framework will help us compare very different religions fairly, without either flattening their real differences or losing sight of what makes the gospel unique among them?</p>
+
+        <h2>I. The Universal Religious Impulse</h2>
+        <p>Wherever you find human beings, you find worship. Virtually no culture has ever been documented with no religious practice at all. Every people group that has ever been studied has believed in something beyond itself, has offered something to that something, and has shaped its life around that belief — its calendar, its ethics, its rites of passage, even its architecture. This is not an accident of history, and it is not, as some modern skeptics claim, a mere byproduct of evolutionary psychology that clever people eventually outgrow. Scripture's own explanation is that it is a signature left by the Creator on every human heart. Ecclesiastes 3:11 says that God "has put eternity in their hearts." Paul, writing to the Romans, says that what can be known about God "is evident within them, for God has shown it to them," because His invisible attributes "are clearly seen, being understood by the things that are made, even His eternal power and Godhead" (Romans 1:19–20).</p>
+
+        <p>A Jewish legend about the young Abraham captures this well. Abraham's father, the story goes, kept an idol shop, and one day left the boy in charge while he ran an errand. A woman came in wanting the strongest idol in the shop, one able to guard her household. Abraham told her to return in an hour, and when she did, she found the shop smashed to pieces except for one idol, a stick placed in its hand. Abraham explained that the idols had fought over which among them was greatest, and this one had won. "It's made of stone," the woman objected. "A statue couldn't do such a thing." "Why worship it, then?" Abraham replied. The legend illustrates a truth Scripture teaches directly: man is not first and foremost homo sapiens, thinking man, but homo adorans, worshiping man. Worship, once diverted from its rightful object, does not simply vanish; it finds another. That single insight underlies every religion this course will study.</p>
+
+        <p>This means every religion in the world, however far it has wandered from the truth, began with a true instinct: that there is something greater than ourselves, and that we owe it something. Missionaries and anthropologists have documented this again and again in the most unlikely places. Don Richardson's account of the Sawi people of New Guinea, cannibals who prized treachery as a virtue, tells of tribal legends that spoke of a coming "peace child" whose exchange between warring villages would guarantee lasting peace — a myth God had apparently used to prepare that very tribe to understand the gospel of Christ, the true Peace Child, when missionaries finally arrived. What differs from religion to religion — and differs enormously — is not whether the impulse to worship exists, but what that "something greater" is understood to be, and what is understood to be owed to it. A course in world religions, rightly taught, is not a course in relativism. It is a course in taking seriously what Paul himself took seriously in Athens: that the nations, groping in the dark, are nevertheless reaching for something real, "though He is not far from each one of us" (Acts 17:27).</p>
+
+        <h2>II. Paul at the Areopagus: A Model for Studying Other Faiths</h2>
+        <p>Acts 17 gives us the finest model in all of Scripture for how a follower of Christ approaches an unfamiliar religious system. Paul arrives in Athens, a city Luke tells us was "given over to idols" (Acts 17:16), and his spirit was provoked within him. Any pastor who has walked through a market lined with Santería supply shops, or driven past a roadside shrine to Santa Muerte, knows something of what Paul felt that day. But notice carefully what Paul does next, because it is not what many of us would do in his place. He does not stand on a street corner shouting condemnation at people he has not bothered to understand. He walks the city. He looks carefully at the objects of their worship. He even reads their inscriptions — including one dedicated to "the unknown god" — and quotes their own poets back to them by name, citing both Epimenides and Aratus (Acts 17:28). Only after this careful, patient, respectful observation does he open his mouth to speak.</p>
+
+        <p>And when he finally speaks, he builds a bridge before he ever delivers the confrontation. "I perceived that in all things you are very religious," he tells them — not mockery, not sarcasm, but a genuine acknowledgment of their real spiritual hunger, however misdirected. He starts from what they already believe and moves patiently toward what they do not yet know: the God who made the world and everything in it, who does not dwell in temples made with hands as though He needed anything, who has determined the times and boundaries of every nation so that they would seek Him, who commands all people everywhere to repent, because He has fixed a day in which He will judge the world in righteousness through the Man He raised from the dead (Acts 17:24–31). Paul's method was not compromise of a single doctrine. His conclusion — repent, because judgment is coming through the risen Christ — was every bit as exclusive and urgent as any sermon he ever preached in a synagogue. But his method leading up to that conclusion was respectful, informed, and relational before it was ever confrontational. That is the model for this entire course, and we will return to it again and again as we study each new religion.</p>
+
+        <h2>III. A Framework for Comparison</h2>
+        <p>To keep from getting lost in the fascinating but overwhelming details of any single religion, it helps to ask the same four questions of every system we study in this course. Every religion, whether its own adherents could articulate it this clearly or not, gives some kind of answer to each of these four questions, and comparing those answers side by side is what will let this course move beyond mere trivia into genuine pastoral usefulness.</p>
+
+        <p><em>First, what is ultimate reality?</em> Is it a personal God who can be known and who speaks, an impersonal force that simply is, many gods each with limited power, or no god at all — only matter and energy? <em>Second, what is the fundamental human problem?</em> Is it sin against a holy God who has been offended, ignorance of a truth that was always available, disordered attachment and desire, karma accumulated across past lives, or simply the absence of enough willpower or right technique? <em>Third, what is the path out of that problem?</em> Is it grace received by faith in what Another has done, right conduct accumulated through a lifetime, correct performance of ritual, enlightenment achieved through meditation, submission to a set of laws, or relentless self-effort? <em>Fourth, what is the ultimate destiny of a human life?</em> Is it bodily resurrection and eternal, conscious fellowship with a personal God, absorption into an impersonal cosmic whole where individual identity dissolves, an endless cycle of rebirth governed by one's accumulated karma, or simple extinction at death with nothing beyond it?</p>
+
+        <p>Christianity's answers to these four questions are not simply one option among equally valid others sitting on a shelf — Scripture is emphatic that Jesus is "the way, the truth, and the life," and that "no one comes to the Father except through" Him (John 14:6). But asking these same four questions of every religion we study, unit by unit, will let you see with real clarity exactly where each system agrees with the biblical picture on some point, where it borrows from a true instinct planted by the Creator but then distorts or corrupts it, and where it departs from the biblical picture altogether. That clarity, developed carefully over the course of this semester, is what will make you genuinely useful in an actual pastoral conversation with a real person holding real beliefs, rather than merely informed with facts you cannot apply.</p>
+
+        <h2>IV. The Christian's Posture Toward Other Faiths</h2>
+        <p>Serious, Bible-believing Christian thinkers have long debated exactly how to understand the eternal status of those who have genuinely never heard the gospel, and how boldly or how gently to engage the sincere, often devout adherents of other faiths we meet in daily life. Three broad positions are commonly discussed in the literature, and you should be able to explain all three clearly, even though this course will not force you into any single camp on the finer points. <em>Exclusivism</em> holds that explicit, conscious faith in Jesus Christ is necessary for salvation, and that general revelation, while entirely real and leaving all people without excuse before God, is not by itself sufficient to save anyone. <em>Inclusivism</em> holds that Christ's atoning work on the cross remains the sole and only ground of salvation for anyone who is ever saved, but allows for the possibility that God may apply the benefits of that atoning work to some who respond in genuine faith to the limited light they have actually received, even without explicit historical knowledge of Christ's name or gospel. <em>Pluralism</em> holds that many different religious paths lead equally and validly to God, or to whatever one wishes to call ultimate reality — a position that runs directly against the plain sense of passages like John 14:6 and Acts 4:12 ("nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved"), and one that this course does not treat as a live theological option for a Christian minister to hold, though you should certainly be able to explain clearly why a pluralist believes what he believes when you meet one.</p>
+
+        <p>This course will not attempt to resolve every question the exclusivism-inclusivism debate raises for us — faithful, Bible-believing pastors across many denominations have disagreed sincerely on its finer points for generations, and our final unit, a full theology-of-religions capstone, will treat that particular debate far more fully than we can here in an introductory unit. What every single unit in this course will hold in common, without exception, is confidence in the uniqueness and sufficiency of Christ, genuine respect for the actual people who hold other beliefs, and scrupulous honesty about what those beliefs actually teach — not a caricature of them, not a strawman easy to knock down, but what thoughtful adherents of that faith would themselves recognize as a fair description.</p>
+
+        <h2>V. Why This Course Matters for Pastors in Cuba and Mexico</h2>
+        <p>This is not an abstract academic exercise for the pastors this course was specifically built to serve. In Cuba, decades of official state atheism did not succeed in eliminating religion, as its architects had hoped — it drove much of it underground instead, and left Santería, Espiritismo, and other Afro-Cuban traditions deeply woven into the fabric of daily life, often practiced quietly alongside a nominal Catholic identity, or even alongside a genuine evangelical profession of faith that has never fully confronted these older loyalties. A pastor who assumes his congregation is free of such influences simply because no one speaks of them from the pulpit is very often mistaken.</p>
+
+        <p>In Mexico, indigenous traditions blended centuries ago with Catholic practice brought by the conquistadors to produce distinctive and enduring forms of folk religion — the widespread veneration of Santa Muerte, the ongoing ministry of the curandero or curandera in nearly every town, syncretistic festivals that layer indigenous ritual beneath a thin Catholic surface — forms of belief and practice a pastor will meet in nearly every congregation he ever serves, whether it is openly discussed from the pulpit or quietly present in the background of family life. A pastor who cannot correctly name what he is actually looking at will very often misdiagnose it, treating a case of ancestor veneration as simple superstition, or a genuine spiritual bondage as mere cultural quirk — and a misdiagnosed spiritual condition rarely heals, no matter how sincerely the pastor prays over it.</p>
+
+        <p>This course will give particular, sustained attention, later in our study, to exactly these traditions your own ministry context is most likely to actually encounter — not as a brief footnote tacked onto the end of the semester, but as core material woven throughout, given the same careful treatment as the major world religions every seminary course of this kind is expected to cover. Our aim throughout is neither contempt for those who hold these beliefs, nor a soft-pedaled tolerance that refuses to name error as error, but the same disciplined combination Paul modeled at the Areopagus: patient understanding joined to a clear and urgent proclamation of the risen Christ.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>Todo pastor tarde o temprano se encontrará donde Pablo se encontró en el Areópago — rodeado de personas que adoran algo, pero no al Dios viviente. En Cuba puede ser un vecino que mantiene un pequeño altar a los orishas de la Santería junto a una fotografía de Jesús. En México puede ser una curandera al final de la calle, o una familia que mezcla oraciones del rosario con rituales heredados desde antes de la conquista. En su propia congregación puede ser un nuevo creyente que todavía no está seguro de cómo se relaciona el evangelio cristiano con la práctica de meditación budista en la que creció, o un joven que lucha por entender lo que realmente cree su compañero musulmán de trabajo, o una viuda que ha comenzado a asistir a un estudio bíblico de los Testigos de Jehová porque una vecina fue amable con ella en su duelo. Un pastor que nunca ha pensado con cuidado en otras religiones o bien descartará estos encuentros con desprecio, o bien caerá en generalidades vagas que no satisfacen a nadie ni responden nada. Este curso existe para prepararle para algo mejor que cualquiera de esas dos respuestas.</p>
+
+        <p>Estudiamos las religiones del mundo no porque todos los caminos lleguen al mismo lugar — la Escritura no enseña eso, y este curso no pretenderá lo contrario — sino porque el amor al prójimo exige que entendamos lo que realmente cree antes de hablarle de Cristo. La ignorancia no es humildad. Es simplemente ignorancia, y produce mal pastoreo. Un médico que se niega a aprender qué enfermedad está tratando no está siendo modesto; está siendo negligente. Lo mismo es cierto de un pastor que se niega a aprender qué creencias realmente están formando a las personas que Dios ha puesto bajo su cuidado.</p>
+
+        <p>Esta primera unidad sienta un fundamento para las once unidades que siguen. Todavía no examinaremos ninguna religión en detalle — eso comienza con el judaísmo en la Unidad 2. En cambio, haremos tres preguntas fundamentales que gobernarán nuestro acercamiento a cada religión que este curso estudie: ¿Por qué los seres humanos adoran en primer lugar? ¿Cómo debe un seguidor de Cristo acercarse a un sistema religioso desconocido? ¿Y qué marco nos ayudará a comparar religiones muy distintas de manera justa, sin aplanar sus diferencias reales ni perder de vista lo que hace único al evangelio entre ellas?</p>
+
+        <h2>I. El impulso religioso universal</h2>
+        <p>Dondequiera que se encuentren seres humanos, se encuentra adoración. Prácticamente ninguna cultura ha sido documentada sin práctica religiosa alguna. Todo grupo humano que se ha estudiado ha creído en algo más allá de sí mismo, le ha ofrecido algo a ese algo, y ha moldeado su vida en torno a esa creencia — su calendario, su ética, sus ritos de paso, incluso su arquitectura. Esto no es un accidente de la historia, y no es, como afirman algunos escépticos modernos, un mero subproducto de la psicología evolutiva que la gente inteligente eventualmente supera. La propia explicación de la Escritura es que es una firma que el Creador ha dejado en cada corazón humano. Eclesiastés 3:11 dice que Dios "ha puesto eternidad en el corazón" de ellos. Pablo, escribiendo a los romanos, dice que lo que se puede conocer acerca de Dios "se manifiesta en ellos, pues Dios se lo manifestó," porque Sus atributos invisibles "se hacen claramente visibles... siendo entendidas por medio de las cosas hechas, su eterno poder y deidad" (Romanos 1:19–20).</p>
+
+        <p>Una leyenda judía acerca del joven Abraham ilustra bien esto. El padre de Abraham, cuenta la historia, tenía una tienda de ídolos, y un día dejó al muchacho a cargo mientras hacía un mandado. Una mujer entró queriendo el ídolo más fuerte de la tienda, uno capaz de proteger su hogar. Abraham le dijo que regresara en una hora, y cuando lo hizo, encontró la tienda hecha pedazos excepto por un ídolo, con un palo colocado en su mano. Abraham explicó que los ídolos habían peleado por cuál de ellos era el mayor, y este había ganado. "Es de piedra," objetó la mujer. "Una estatua no podría hacer tal cosa." "¿Por qué adorarla, entonces?" respondió Abraham. La leyenda ilustra una verdad que la Escritura enseña directamente: el hombre no es primero y ante todo homo sapiens, hombre pensante, sino homo adorans, hombre adorador. La adoración, una vez desviada de su objeto legítimo, no simplemente desaparece; encuentra otro. Esa sola idea sostiene cada religión que este curso estudiará.</p>
+
+        <p>Esto significa que toda religión del mundo, por lejos que se haya extraviado de la verdad, comenzó con un instinto verdadero: que hay algo más grande que nosotros mismos, y que le debemos algo. Misioneros y antropólogos han documentado esto una y otra vez en los lugares más inesperados. El relato de Don Richardson sobre el pueblo Sawi de Nueva Guinea, caníbales que apreciaban la traición como una virtud, cuenta de leyendas tribales que hablaban de un "niño de paz" venidero cuyo intercambio entre aldeas enemigas garantizaría una paz duradera — un mito que Dios aparentemente había usado para preparar a esa misma tribu a entender el evangelio de Cristo, el verdadero Niño de Paz, cuando finalmente llegaron los misioneros. Lo que difiere de religión a religión — y difiere enormemente — no es si existe el impulso de adorar, sino lo que se entiende que es ese "algo más grande," y lo que se entiende que se le debe. Un curso de religiones del mundo, enseñado correctamente, no es un curso de relativismo. Es un curso que toma en serio lo que el mismo Pablo tomó en serio en Atenas: que las naciones, a tientas en la oscuridad, buscan sin embargo algo real, "aunque ciertamente no está lejos de cada uno de nosotros" (Hechos 17:27).</p>
+
+        <h2>II. Pablo en el Areópago: Un modelo para estudiar otras religiones</h2>
+        <p>Hechos 17 nos da el mejor modelo en toda la Escritura de cómo un seguidor de Cristo debe acercarse a un sistema religioso desconocido. Pablo llega a Atenas, ciudad que Lucas nos dice estaba "dada enteramente a la idolatría" (Hechos 17:16), y su espíritu se enardecía dentro de él. Cualquier pastor que haya caminado por un mercado lleno de tiendas de suministros de Santería, o que haya pasado en su auto junto a un altar callejero a la Santa Muerte, conoce algo de lo que Pablo sintió aquel día. Pero note con cuidado lo que Pablo hace después, porque no es lo que muchos de nosotros haríamos en su lugar. No se para en una esquina gritando condenación a gente que no se ha tomado la molestia de entender. Camina por la ciudad. Observa con cuidado los objetos de su adoración. Incluso lee sus inscripciones — incluyendo una dedicada "al dios no conocido" — y cita a sus propios poetas por nombre, mencionando tanto a Epiménides como a Aratо (Hechos 17:28). Solo después de esta observación cuidadosa, paciente y respetuosa, abre la boca para hablar.</p>
+
+        <p>Y cuando finalmente habla, construye un puente antes de entregar la confrontación. "Percibo que en todo sois muy religiosos," les dice — no burla, no sarcasmo, sino un reconocimiento genuino de su verdadera hambre espiritual, por más mal dirigida que estuviera. Comienza desde lo que ya creen y avanza con paciencia hacia lo que todavía no conocen: el Dios que hizo el mundo y todo lo que hay en él, que no habita en templos hechos por manos como si necesitara algo, que ha determinado los tiempos y los límites de cada nación para que le busquen, que manda a todos los hombres en todo lugar que se arrepientan, porque ha establecido un día en el cual juzgará al mundo con justicia por medio del Varón a quien resucitó de entre los muertos (Hechos 17:24–31). El método de Pablo no fue transigir ni una sola doctrina. Su conclusión — arrepentíos, porque el juicio viene por medio de Cristo resucitado — fue tan exclusiva y urgente como cualquier sermón que jamás predicó en una sinagoga. Pero su método antes de llegar a esa conclusión fue respetuoso, informado y relacional antes de ser confrontacional. Ese es el modelo para todo este curso, y volveremos a él una y otra vez conforme estudiemos cada nueva religión.</p>
+
+        <h2>III. Un marco para la comparación</h2>
+        <p>Para no perdernos en los detalles fascinantes pero abrumadores de cualquier religión individual, ayuda hacer las mismas cuatro preguntas a cada sistema que estudiemos en este curso. Toda religión, se den cuenta o no sus propios adherentes de articularlo con esta claridad, da algún tipo de respuesta a cada una de estas cuatro preguntas, y comparar esas respuestas lado a lado es lo que permitirá que este curso vaya más allá de la mera trivia hacia una utilidad pastoral genuina.</p>
+
+        <p><em>Primero, ¿qué es la realidad última?</em> ¿Es un Dios personal que puede conocerse y que habla, una fuerza impersonal que simplemente es, muchos dioses cada uno con poder limitado, o ningún dios — solo materia y energía? <em>Segundo, ¿cuál es el problema humano fundamental?</em> ¿Es el pecado contra un Dios santo que ha sido ofendido, la ignorancia de una verdad que siempre estuvo disponible, el apego y el deseo desordenados, el karma acumulado a través de vidas pasadas, o simplemente la falta de suficiente fuerza de voluntad o técnica correcta? <em>Tercero, ¿cuál es el camino para salir de ese problema?</em> ¿Es la gracia recibida por fe en lo que Otro ha hecho, la conducta correcta acumulada a lo largo de una vida, la realización correcta del ritual, la iluminación alcanzada por la meditación, la sumisión a un conjunto de leyes, o el esfuerzo propio implacable? <em>Cuarto, ¿cuál es el destino último de una vida humana?</em> ¿La resurrección corporal y la comunión eterna y consciente con un Dios personal, la absorción en un todo cósmico impersonal donde la identidad individual se disuelve, un ciclo interminable de renacimiento gobernado por el karma acumulado de cada uno, o la simple extinción al morir sin nada más allá?</p>
+
+        <p>Las respuestas del cristianismo a estas cuatro preguntas no son simplemente una opción entre otras igualmente válidas puestas en un estante — la Escritura es enfática en que Jesús es "el camino, y la verdad, y la vida," y que "nadie viene al Padre, sino por" Él (Juan 14:6). Pero hacer estas mismas cuatro preguntas a cada religión que estudiemos, unidad por unidad, le permitirá ver con verdadera claridad exactamente dónde cada sistema concuerda con el cuadro bíblico en algún punto, dónde toma prestado de un instinto verdadero plantado por el Creador pero luego lo distorsiona o lo corrompe, y dónde se aparta por completo del cuadro bíblico. Esa claridad, desarrollada con cuidado a lo largo de este semestre, es lo que le hará genuinamente útil en una conversación pastoral real con una persona real que sostiene creencias reales, y no meramente informado con datos que no puede aplicar.</p>
+
+        <h2>IV. La postura cristiana hacia otras religiones</h2>
+        <p>Serios pensadores cristianos, fieles a la Biblia, han debatido durante mucho tiempo exactamente cómo entender la condición eterna de quienes genuinamente nunca han escuchado el evangelio, y con cuánta audacia o delicadeza acercarse a los adherentes sinceros, a menudo devotos, de otras religiones que encontramos en la vida diaria. Tres posturas amplias se discuten comúnmente en la literatura, y usted debería poder explicar las tres con claridad, aunque este curso no le obligará a tomar partido en los matices más finos. El <em>exclusivismo</em> sostiene que la fe explícita y consciente en Jesucristo es necesaria para la salvación, y que la revelación general, aunque completamente real y dejando a todas las personas sin excusa delante de Dios, no es por sí sola suficiente para salvar a nadie. El <em>inclusivismo</em> sostiene que la obra expiatoria de Cristo en la cruz sigue siendo el único y exclusivo fundamento de la salvación para cualquiera que alguna vez sea salvo, pero permite la posibilidad de que Dios pueda aplicar los beneficios de esa obra expiatoria a algunos que responden con fe genuina a la luz limitada que realmente han recibido, incluso sin conocimiento histórico explícito del nombre o el evangelio de Cristo. El <em>pluralismo</em> sostiene que muchos caminos religiosos distintos llevan por igual y de manera igualmente válida a Dios, o a lo que uno quiera llamar realidad última — una postura que choca directamente con el sentido llano de pasajes como Juan 14:6 y Hechos 4:12 ("y en ningún otro hay salvación; porque no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos"), y que este curso no trata como una opción teológica viable para que la sostenga un ministro cristiano, aunque usted deberá poder explicar con claridad por qué un pluralista cree lo que cree cuando se encuentre con uno.</p>
+
+        <p>Este curso no intentará resolver todas las preguntas que plantea el debate entre exclusivismo e inclusivismo — pastores fieles y creyentes en la Biblia de muchas denominaciones han discrepado sinceramente sobre sus matices durante generaciones, y nuestra unidad final, un capítulo culminante de teología de las religiones, tratará ese debate en particular con mucha más profundidad de la que podemos darle aquí en una unidad introductoria. Lo que toda unidad de este curso tendrá en común, sin excepción, es confianza en la singularidad y suficiencia de Cristo, respeto genuino por las personas reales que sostienen otras creencias, y honestidad escrupulosa acerca de lo que esas creencias realmente enseñan — no una caricatura de ellas, no un hombre de paja fácil de derribar, sino lo que adherentes reflexivos de esa fe reconocerían ellos mismos como una descripción justa.</p>
+
+        <h2>V. Por qué este curso importa para los pastores de Cuba y México</h2>
+        <p>Esto no es un ejercicio académico abstracto para los pastores a quienes este curso fue diseñado específicamente para servir. En Cuba, décadas de ateísmo estatal oficial no lograron eliminar la religión, como sus arquitectos habían esperado — en cambio, empujaron gran parte de ella a la clandestinidad, y dejaron a la Santería, el Espiritismo y otras tradiciones afrocubanas profundamente entretejidas en el tejido de la vida diaria, practicadas a menudo en silencio junto a una identidad católica nominal, o incluso junto a una profesión evangélica genuina de fe que nunca ha confrontado del todo estas lealtades más antiguas. Un pastor que asume que su congregación está libre de tales influencias simplemente porque nadie habla de ellas desde el púlpito muy a menudo se equivoca.</p>
+
+        <p>En México, las tradiciones indígenas se mezclaron hace siglos con la práctica católica traída por los conquistadores para producir formas distintivas y duraderas de religiosidad popular — la veneración generalizada de la Santa Muerte, el ministerio continuo del curandero o la curandera en casi todo pueblo, festivales sincréticos que superponen ritual indígena bajo una fina superficie católica — formas de creencia y práctica que un pastor encontrará en casi toda congregación que llegue a servir, se discuta abiertamente desde el púlpito o esté presente en silencio en el trasfondo de la vida familiar. Un pastor que no puede nombrar correctamente lo que realmente está observando muy a menudo lo diagnosticará mal, tratando un caso de veneración a los ancestros como simple superstición, o una atadura espiritual genuina como mera peculiaridad cultural — y una condición espiritual mal diagnosticada rara vez sana, sin importar cuán sinceramente ore el pastor por ella.</p>
+
+        <p>Este curso dará atención particular y sostenida, más adelante en nuestro estudio, precisamente a estas tradiciones que su propio contexto de ministerio tiene más probabilidad de encontrar realmente — no como una breve nota al pie añadida al final del semestre, sino como material central entretejido a lo largo de todo el curso, con el mismo tratamiento cuidadoso que se da a las principales religiones del mundo que todo curso de seminario de este tipo debe cubrir. Nuestro objetivo en todo momento no es el desprecio hacia quienes sostienen estas creencias, ni una tolerancia blanda que se niegue a nombrar el error como error, sino la misma combinación disciplinada que Pablo modeló en el Areópago: comprensión paciente unida a una proclamación clara y urgente de Cristo resucitado.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 1 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 1;
+let progress = JSON.parse(localStorage.getItem('cts_wr_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSWRUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit1) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSWRUnit2.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        const trackLabel = student.track === 'mdiv' ? 'M.Div.' : (student.track === 'thm' ? 'Th.M.' : 'Certificate');
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name} <span style="font-weight:normal;font-size:0.85rem;">(${trackLabel})</span> &nbsp;<a href="#" id="changeTrackLink" style="font-size:0.8rem;color:#5b3a1f;">Change track</a>`;
+        document.getElementById('registrationCard').style.display = 'none';
+        const link = document.getElementById('changeTrackLink');
+        if (link) link.onclick = function(e) {
+            e.preventDefault();
+            const card = document.getElementById('registrationCard');
+            card.style.display = 'block';
+            if (student.name) document.getElementById('regName').value = student.name;
+            if (student.email) document.getElementById('regEmail').value = student.email;
+            if (student.country) document.getElementById('regCountry').value = student.country;
+            if (student.track && typeof setTrack === 'function') setTrack(student.track);
+            card.scrollIntoView({ behavior: 'smooth' });
+        };
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<span style="color:#5b3a1f;">⚠️ Please register</span>`;
+    }
+}
+displayStudentGreeting();
+
+
+function setTrack(t) {
+    document.getElementById('regTrack').value = t;
+    document.querySelectorAll('.track-opt').forEach(b => { b.classList.toggle('selected', b.getAttribute('data-track') === t); });
+}
+document.querySelectorAll('.track-opt').forEach(b => { b.onclick = function() { setTrack(this.getAttribute('data-track')); }; });
+setTrack('certificate');
+document.getElementById('saveRegBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const country = document.getElementById('regCountry').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = `<span style="color:red;">⚠️ Name and email are required.</span>`;
+        return;
+    }
+    localStorage.setItem('cts_student', JSON.stringify({ name, email, country, track }));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = `<span style="color:green;">✓ Saved! Welcome, ${name}.</span>`;
+    setTimeout(() => { displayStudentGreeting(); }, 1000);
+    renderQuestions();
+};
+
+// Q3 reshuffled (Psalm 23 author) to move David from C to B for 5/5/5/5 balance.
+const mcQuestions = [
+  {
+    "textEn": "1. According to Ecclesiastes 3:11 and Romans 1:19-20, the universal human impulse to worship something is best explained as:",
+    "textEs": "1. Según Eclesiastés 3:11 y Romanos 1:19-20, el impulso humano universal de adorar algo se explica mejor como:",
+    "optionsEn": [
+      "A signature the Creator has left on every human heart",
+      "A cultural accident found only in some societies",
+      "A leftover superstition from primitive fear",
+      "Proof that all religions are equally true"
+    ],
+    "optionsEs": [
+      "Una firma que el Creador ha dejado en cada corazón humano",
+      "Un accidente cultural que solo se halla en algunas sociedades",
+      "Una superstición residual del miedo primitivo",
+      "Prueba de que todas las religiones son igualmente verdaderas"
+    ],
+    "c": 21,
+    "explEn": "Religious or sacred practices appear across virtually all known human cultures; Scripture explains this as God's own imprint on the human heart, not accident or mere superstition.",
+    "explEs": "Prácticas religiosas o sagradas aparecen en prácticamente todas las culturas humanas conocidas; la Escritura explica esto como la huella de Dios mismo en el corazón humano, no un accidente ni mera superstición."
+  },
+  {
+    "textEn": "2. In Acts 17:16, Luke tells us Paul's spirit was provoked because Athens was:",
+    "textEs": "2. En Hechos 17:16, Lucas nos dice que el espíritu de Pablo se enardecía porque Atenas estaba:",
+    "optionsEn": [
+      "Under Roman military occupation",
+      "Given over to idols",
+      "Suffering from famine",
+      "Divided by civil war"
+    ],
+    "optionsEs": [
+      "Bajo ocupación militar romana",
+      "Dada enteramente a la idolatría",
+      "Sufriendo hambruna",
+      "Dividida por guerra civil"
+    ],
+    "c": 29,
+    "explEn": "Luke records that Paul's spirit was provoked within him because he saw the city was given over to idols.",
+    "explEs": "Lucas registra que el espíritu de Pablo se enardecía dentro de él al ver la ciudad dada enteramente a la idolatría."
+  },
+  {
+    "textEn": "3. Before Paul ever spoke at the Areopagus, what did he do first?",
+    "textEs": "3. Antes de que Pablo hablara en el Areópago, ¿qué hizo primero?",
+    "optionsEn": [
+      "Demanded the city repent immediately",
+      "Refused to enter any pagan temple",
+      "Walked the city and carefully observed their objects of worship",
+      "Left Athens in protest"
+    ],
+    "optionsEs": [
+      "Exigió que la ciudad se arrepintiera de inmediato",
+      "Se negó a entrar en cualquier templo pagano",
+      "Caminó por la ciudad y observó con cuidado sus objetos de adoración",
+      "Salió de Atenas en protesta"
+    ],
+    "c": 37,
+    "explEn": "Paul walked the city, carefully observed the objects of worship, and even read their inscriptions and quoted their poets before he ever spoke.",
+    "explEs": "Pablo caminó por la ciudad, observó con cuidado los objetos de adoración, e incluso leyó sus inscripciones y citó a sus poetas antes de hablar."
+  },
+  {
+    "textEn": "4. The altar Paul noticed in Athens was inscribed:",
+    "textEs": "4. El altar que Pablo notó en Atenas estaba inscrito:",
+    "optionsEn": [
+      "To Zeus, father of the gods",
+      "To the goddess Athena",
+      "To Caesar",
+      "To the unknown god"
+    ],
+    "optionsEs": [
+      "A Zeus, padre de los dioses",
+      "A la diosa Atenea",
+      "Al César",
+      "Al dios no conocido"
+    ],
+    "c": 45,
+    "explEn": "Paul found an altar inscribed 'TO THE UNKNOWN GOD' and used it as his opening bridge to proclaim the true God.",
+    "explEs": "Pablo halló un altar inscrito 'AL DIOS NO CONOCIDO' y lo usó como su puente inicial para proclamar al Dios verdadero."
+  },
+  {
+    "textEn": "5. Paul's opening line, 'I perceived that in all things you are very religious,' functioned as:",
+    "textEs": "5. La frase inicial de Pablo, 'Percibo que en todo sois muy religiosos,' funcionó como:",
+    "optionsEn": [
+      "A genuine bridge acknowledging their spiritual hunger",
+      "A curse against the Athenians",
+      "A sarcastic insult",
+      "A formal legal accusation"
+    ],
+    "optionsEs": [
+      "Un puente genuino que reconocía su hambre espiritual",
+      "Una maldición contra los atenienses",
+      "Un insulto sarcástico",
+      "Una acusación legal formal"
+    ],
+    "c": 49,
+    "explEn": "Paul's opening was a genuine acknowledgment of the Athenians' spiritual hunger, building a bridge before he proclaimed the true God.",
+    "explEs": "La apertura de Pablo fue un reconocimiento genuino del hambre espiritual de los atenienses, construyendo un puente antes de proclamar al Dios verdadero."
+  },
+  {
+    "textEn": "6. Which of the following was NOT part of Paul's method at the Areopagus?",
+    "textEs": "6. ¿Cuál de las siguientes NO fue parte del método de Pablo en el Areópago?",
+    "optionsEn": [
+      "Careful observation before speaking",
+      "Compromising the exclusivity of his conclusion",
+      "Quoting the Athenians' own poets",
+      "Building a bridge from common ground"
+    ],
+    "optionsEs": [
+      "Observación cuidadosa antes de hablar",
+      "Transigir la exclusividad de su conclusión",
+      "Citar a los propios poetas de los atenienses",
+      "Construir un puente desde el terreno común"
+    ],
+    "c": 57,
+    "explEn": "Paul's method was respectful and informed, but his conclusion remained just as exclusive and urgent as any sermon he preached — he did not compromise it.",
+    "explEs": "El método de Pablo fue respetuoso e informado, pero su conclusión siguió siendo tan exclusiva y urgente como cualquier sermón que predicó — no la transigió."
+  },
+  {
+    "textEn": "7. The four comparison questions this course asks of every religion include all EXCEPT:",
+    "textEs": "7. Las cuatro preguntas de comparación que este curso hace a cada religión incluyen todas EXCEPTO:",
+    "optionsEn": [
+      "What is ultimate reality?",
+      "What is the fundamental human problem?",
+      "Which nation founded this religion?",
+      "What is the ultimate destiny of a human life?"
+    ],
+    "optionsEs": [
+      "¿Qué es la realidad última?",
+      "¿Cuál es el problema humano fundamental?",
+      "¿Qué nación fundó esta religión?",
+      "¿Cuál es el destino último de una vida humana?"
+    ],
+    "c": 65,
+    "explEn": "The four framework questions are ultimate reality, the human problem, the path out of that problem, and ultimate destiny — not national origin.",
+    "explEs": "Las cuatro preguntas del marco son la realidad última, el problema humano, el camino para salir de ese problema, y el destino último — no el origen nacional."
+  },
+  {
+    "textEn": "8. According to John 14:6, cited in this unit, Jesus said:",
+    "textEs": "8. Según Juan 14:6, citado en esta unidad, Jesús dijo:",
+    "optionsEn": [
+      "All roads lead to God",
+      "I am one way among many",
+      "No one can know the Father",
+      "I am the way, the truth, and the life"
+    ],
+    "optionsEs": [
+      "Todos los caminos llevan a Dios",
+      "Soy un camino entre muchos",
+      "Nadie puede conocer al Padre",
+      "Yo soy el camino, y la verdad, y la vida"
+    ],
+    "c": 73,
+    "explEn": "Jesus declared, 'I am the way, the truth, and the life; no one comes to the Father except through Me' (John 14:6).",
+    "explEs": "Jesús declaró: 'Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí' (Juan 14:6)."
+  },
+  {
+    "textEn": "9. Exclusivism, as defined in this unit, holds that:",
+    "textEs": "9. El exclusivismo, según se define en esta unidad, sostiene que:",
+    "optionsEn": [
+      "Explicit faith in Christ is necessary for salvation",
+      "Many paths lead equally to God",
+      "General revelation alone is sufficient to save",
+      "No religion contains any truth"
+    ],
+    "optionsEs": [
+      "La fe explícita en Cristo es necesaria para la salvación",
+      "Muchos caminos llevan por igual a Dios",
+      "La revelación general por sí sola es suficiente para salvar",
+      "Ninguna religión contiene verdad alguna"
+    ],
+    "c": 77,
+    "explEn": "Exclusivism holds that explicit faith in Jesus Christ is necessary for salvation, and that general revelation, while real, is not sufficient to save.",
+    "explEs": "El exclusivismo sostiene que la fe explícita en Jesucristo es necesaria para la salvación, y que la revelación general, aunque real, no es suficiente para salvar."
+  },
+  {
+    "textEn": "10. Inclusivism, as defined in this unit, holds that:",
+    "textEs": "10. El inclusivismo, según se define en esta unidad, sostiene que:",
+    "optionsEn": [
+      "All religions are equally valid paths to God",
+      "Christ's atoning work is the only ground of salvation, but its benefits may be applied to some who respond in faith to the light they have",
+      "Salvation requires no knowledge of any deity",
+      "Only baptized Christians can be saved"
+    ],
+    "optionsEs": [
+      "Todas las religiones son caminos igualmente válidos a Dios",
+      "La obra expiatoria de Cristo es el único fundamento de la salvación, pero sus beneficios pueden aplicarse a algunos que responden con fe a la luz que tienen",
+      "La salvación no requiere conocimiento de ninguna deidad",
+      "Solo los cristianos bautizados pueden salvarse"
+    ],
+    "c": 85,
+    "explEn": "Inclusivism holds that Christ's atoning work remains the only ground of salvation, while allowing that God may apply its benefits to some who respond in faith to the light they have.",
+    "explEs": "El inclusivismo sostiene que la obra expiatoria de Cristo sigue siendo el único fundamento de la salvación, permitiendo que Dios aplique sus beneficios a algunos que responden con fe a la luz que tienen."
+  },
+  {
+    "textEn": "11. This course treats religious pluralism (the view that many paths lead equally to God) as:",
+    "textEs": "11. Este curso trata el pluralismo religioso (la postura de que muchos caminos llevan por igual a Dios) como:",
+    "optionsEn": [
+      "The preferred position of this seminary",
+      "Equally valid alongside exclusivism",
+      "Not a live option for a Christian minister, given passages like John 14:6 and Acts 4:12",
+      "A topic never addressed in Scripture"
+    ],
+    "optionsEs": [
+      "La postura preferida de este seminario",
+      "Igualmente válido junto al exclusivismo",
+      "No una opción viable para un ministro cristiano, dados pasajes como Juan 14:6 y Hechos 4:12",
+      "Un tema que la Escritura nunca aborda"
+    ],
+    "c": 93,
+    "explEn": "Pluralism runs directly against passages like John 14:6 and Acts 4:12, and this course does not treat it as a live option for a Christian minister.",
+    "explEs": "El pluralismo choca directamente con pasajes como Juan 14:6 y Hechos 4:12, y este curso no lo trata como una opción viable para un ministro cristiano."
+  },
+  {
+    "textEn": "12. In Cuba, decades of official atheism had the effect of:",
+    "textEs": "12. En Cuba, décadas de ateísmo oficial tuvieron el efecto de:",
+    "optionsEn": [
+      "Eliminating religion entirely",
+      "Converting the whole population to state atheism",
+      "Ending all Afro-Cuban traditions",
+      "Driving much religious practice underground, deeply woven into daily life"
+    ],
+    "optionsEs": [
+      "Eliminar la religión por completo",
+      "Convertir a toda la población al ateísmo estatal",
+      "Terminar con todas las tradiciones afrocubanas",
+      "Empujar gran parte de la práctica religiosa a la clandestinidad, profundamente entretejida en la vida diaria"
+    ],
+    "c": 101,
+    "explEn": "Official atheism in Cuba did not eliminate religion; it drove much of it underground, leaving Santería, Espiritismo, and other traditions deeply woven into daily life.",
+    "explEs": "El ateísmo oficial en Cuba no eliminó la religión; empujó gran parte de ella a la clandestinidad, dejando a la Santería, el Espiritismo y otras tradiciones profundamente entretejidas en la vida diaria."
+  },
+  {
+    "textEn": "13. In Mexico, centuries of blending indigenous tradition with Catholic practice produced:",
+    "textEs": "13. En México, siglos de mezcla entre la tradición indígena y la práctica católica produjeron:",
+    "optionsEn": [
+      "Forms of folk religion such as the veneration of Santa Muerte and the ministry of the curandero",
+      "The complete disappearance of indigenous belief",
+      "A purely Roman Catholic culture with no folk elements",
+      "An official state religion"
+    ],
+    "optionsEs": [
+      "Formas de religiosidad popular como la veneración de la Santa Muerte y el ministerio del curandero",
+      "La desaparición completa de la creencia indígena",
+      "Una cultura puramente católica romana sin elementos populares",
+      "Una religión estatal oficial"
+    ],
+    "c": 105,
+    "explEn": "Indigenous traditions blended with Catholic practice in Mexico to produce forms of folk religion, including veneration of Santa Muerte and the ministry of the curandero or curandera.",
+    "explEs": "Las tradiciones indígenas se mezclaron con la práctica católica en México para producir formas de religiosidad popular, incluyendo la veneración de la Santa Muerte y el ministerio del curandero o curandera."
+  },
+  {
+    "textEn": "14. This unit warns that a pastor who cannot name the spiritual condition in front of him will likely:",
+    "textEs": "14. Esta unidad advierte que un pastor que no puede nombrar la condición espiritual frente a él probablemente:",
+    "optionsEn": [
+      "Automatically succeed in ministry anyway",
+      "Misdiagnose it, and a misdiagnosed condition rarely heals",
+      "Need no further theological training",
+      "Should avoid the congregation entirely"
+    ],
+    "optionsEs": [
+      "Tendrá éxito automáticamente en el ministerio de todos modos",
+      "La diagnosticará mal, y una condición mal diagnosticada rara vez sana",
+      "No necesitará más formación teológica",
+      "Debería evitar por completo a la congregación"
+    ],
+    "c": 113,
+    "explEn": "A pastor who cannot name what he is looking at will misdiagnose it, and a misdiagnosed spiritual condition rarely heals.",
+    "explEs": "Un pastor que no puede nombrar lo que está observando lo diagnosticará mal, y una condición espiritual mal diagnosticada rara vez sana."
+  },
+  {
+    "textEn": "15. Romans 1:19-20 teaches that God's invisible attributes are:",
+    "textEs": "15. Romanos 1:19-20 enseña que los atributos invisibles de Dios son:",
+    "optionsEn": [
+      "Completely hidden from all people",
+      "Only knowable through Old Testament law",
+      "Clearly seen, understood through the things that are made",
+      "Irrelevant to non-Christians"
+    ],
+    "optionsEs": [
+      "Completamente ocultos a todas las personas",
+      "Solo conocibles por medio de la ley del Antiguo Testamento",
+      "Claramente visibles, entendidas por medio de las cosas hechas",
+      "Irrelevantes para los no cristianos"
+    ],
+    "c": 121,
+    "explEn": "Romans 1:20 says God's invisible attributes are clearly seen, being understood through the things that are made.",
+    "explEs": "Romanos 1:20 dice que los atributos invisibles de Dios se hacen claramente visibles, siendo entendidos por medio de las cosas hechas."
+  },
+  {
+    "textEn": "16. This course's overall posture toward other faiths, as stated in this unit, combines confidence in Christ's uniqueness with:",
+    "textEs": "16. La postura general de este curso hacia otras religiones, según se declara en esta unidad, combina confianza en la singularidad de Cristo con:",
+    "optionsEn": [
+      "Contempt for all non-Christian belief",
+      "Silence about doctrinal differences",
+      "Agreement that all religions are equally true",
+      "Respect for adherents and honesty about what they actually teach"
+    ],
+    "optionsEs": [
+      "Desprecio por toda creencia no cristiana",
+      "Silencio acerca de las diferencias doctrinales",
+      "Acuerdo en que todas las religiones son igualmente verdaderas",
+      "Respeto por los adherentes y honestidad acerca de lo que realmente enseñan"
+    ],
+    "c": 129,
+    "explEn": "This course holds confidence in the uniqueness of Christ together with respect for those who hold other beliefs and honesty about what those beliefs actually teach.",
+    "explEs": "Este curso sostiene confianza en la singularidad de Cristo junto con respeto por quienes sostienen otras creencias y honestidad acerca de lo que esas creencias realmente enseñan."
+  },
+  {
+    "textEn": "17. According to Acts 17:27, God fixed the times and boundaries of the nations so that they would:",
+    "textEs": "17. Según Hechos 17:27, Dios fijó los tiempos y límites de las naciones para que:",
+    "optionsEn": [
+      "Seek God, though He is not far from each one of us",
+      "Remain permanently separated from Him",
+      "Compete for territory",
+      "Never learn of His existence"
+    ],
+    "optionsEs": [
+      "Buscaran a Dios, aunque ciertamente no está lejos de cada uno de nosotros",
+      "Permanecieran separadas de Él para siempre",
+      "Compitieran por territorio",
+      "Nunca conocieran Su existencia"
+    ],
+    "c": 133,
+    "explEn": "Acts 17:27 says God did this so that people would seek Him, though He is not far from each one of us.",
+    "explEs": "Hechos 17:27 dice que Dios hizo esto para que buscaran a Dios, aunque ciertamente no está lejos de cada uno de nosotros."
+  },
+  {
+    "textEn": "18. The final unit of this course will treat which topic more fully?",
+    "textEs": "18. ¿Qué tema tratará con más profundidad la unidad final de este curso?",
+    "optionsEn": [
+      "The history of the Athenian Areopagus",
+      "The exclusivism-inclusivism debate itself",
+      "The geography of ancient Greece",
+      "The biography of the Apostle Paul"
+    ],
+    "optionsEs": [
+      "La historia del Areópago ateniense",
+      "El debate mismo entre exclusivismo e inclusivismo",
+      "La geografía de la Grecia antigua",
+      "La biografía del apóstol Pablo"
+    ],
+    "c": 141,
+    "explEn": "This unit notes that faithful pastors have disagreed on the finer points of the exclusivism-inclusivism debate, and that the course's final unit will treat the debate itself more fully.",
+    "explEs": "Esta unidad señala que pastores fieles han discrepado sobre los matices del debate entre exclusivismo e inclusivismo, y que la unidad final del curso tratará el debate mismo con más profundidad."
+  },
+  {
+    "textEn": "19. This unit states that ignorance of what other faiths actually teach is:",
+    "textEs": "19. Esta unidad declara que la ignorancia de lo que otras religiones realmente enseñan es:",
+    "optionsEn": [
+      "A form of true humility",
+      "Required for sound doctrine",
+      "Simply ignorance, and it makes for bad shepherding",
+      "Irrelevant to pastoral ministry"
+    ],
+    "optionsEs": [
+      "Una forma de verdadera humildad",
+      "Requerida para la sana doctrina",
+      "Simplemente ignorancia, y produce mal pastoreo",
+      "Irrelevante para el ministerio pastoral"
+    ],
+    "c": 149,
+    "explEn": "The unit states plainly that ignorance is not humility — it is simply ignorance, and it makes for bad shepherding.",
+    "explEs": "La unidad declara claramente que la ignorancia no es humildad — es simplemente ignorancia, y produce mal pastoreo."
+  },
+  {
+    "textEn": "20. Which best summarizes the purpose of this course, according to Unit 1?",
+    "textEs": "20. ¿Cuál resume mejor el propósito de este curso, según la Unidad 1?",
+    "optionsEn": [
+      "To prove all religions teach the same truth",
+      "To replace the study of Scripture with world religions",
+      "To avoid ever discussing non-Christian belief",
+      "To equip pastors to understand other faiths accurately so they can love their neighbors and proclaim Christ, as Paul did at the Areopagus"
+    ],
+    "optionsEs": [
+      "Demostrar que todas las religiones enseñan la misma verdad",
+      "Reemplazar el estudio de la Escritura con las religiones del mundo",
+      "Evitar siempre discutir la creencia no cristiana",
+      "Equipar a los pastores para entender con precisión otras religiones para que puedan amar a su prójimo y proclamar a Cristo, como Pablo lo hizo en el Areópago"
+    ],
+    "c": 157,
+    "explEn": "This course exists to prepare pastors to understand other faiths accurately, following Paul's Areopagus model, so they can love their neighbors well and proclaim Christ.",
+    "explEs": "Este curso existe para preparar a los pastores a entender con precisión otras religiones, siguiendo el modelo de Pablo en el Areópago, para que puedan amar bien a su prójimo y proclamar a Cristo."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Why does Ecclesiastes 3:11 and Romans 1:19-20 suggest that the universal religious impulse is not merely a cultural accident?",
+    "textEs": "21. ¿Por qué sugieren Eclesiastés 3:11 y Romanos 1:19-20 que el impulso religioso universal no es meramente un accidente cultural?",
+    "kw_en": [
+      "eternity",
+      "heart",
+      "creator",
+      "signature",
+      "invisible",
+      "attribute",
+      "clearly",
+      "romans"
+    ],
+    "kw_es": [
+      "eternidad",
+      "corazón",
+      "creador",
+      "firma",
+      "invisible",
+      "atributo",
+      "claramente",
+      "romanos"
+    ],
+    "modelEn": "Ecclesiastes 3:11 says God has put eternity in the human heart, and Romans 1:19-20 says God's invisible attributes are clearly seen through creation. Together these passages teach that the universal human impulse to worship is not an accident of culture but a signature the Creator has left on every human heart. Religious or sacred practices appear across virtually all known human cultures, because every person carries this built-in awareness of something greater than themselves, however that awareness later becomes distorted.",
+    "modelEs": "Eclesiastés 3:11 dice que Dios ha puesto eternidad en el corazón humano, y Romanos 1:19-20 dice que los atributos invisibles de Dios se hacen claramente visibles por medio de la creación. Juntos estos pasajes enseñan que el impulso humano universal de adorar no es un accidente cultural sino una firma que el Creador ha dejado en cada corazón humano. Prácticas religiosas o sagradas aparecen en prácticamente todas las culturas humanas conocidas, porque cada persona lleva esta conciencia incorporada de algo más grande que sí misma, por más que esa conciencia luego se distorsione."
+  },
+  {
+    "textEn": "22. Describe Paul's method at the Areopagus in Acts 17, and explain why his approach matters for how we study other religions today.",
+    "textEs": "22. Describa el método de Pablo en el Areópago en Hechos 17, y explique por qué su enfoque importa para cómo estudiamos otras religiones hoy.",
+    "kw_en": [
+      "observe",
+      "athens",
+      "idol",
+      "bridge",
+      "poet",
+      "respect",
+      "proclaim",
+      "areopagus"
+    ],
+    "kw_es": [
+      "observ",
+      "atenas",
+      "idolatría",
+      "puente",
+      "poeta",
+      "respet",
+      "proclam",
+      "areópago"
+    ],
+    "modelEn": "At the Areopagus, Paul first walked Athens and carefully observed the objects of worship, even reading their inscriptions and quoting their own poets by name, before he ever spoke. When he did speak, he built a bridge by acknowledging their genuine spiritual hunger before moving to proclaim the true God and call for repentance. This matters for us today because it shows that respectful, informed observation is not compromise; Paul's conclusion remained fully exclusive even though his method was relational and patient. Studying other religions carefully, as this course asks, follows Paul's own pattern rather than departing from it.",
+    "modelEs": "En el Areópago, Pablo primero caminó por Atenas y observó con cuidado los objetos de adoración, incluso leyendo sus inscripciones y citando a sus propios poetas por nombre, antes de hablar. Cuando habló, construyó un puente reconociendo su genuina hambre espiritual antes de avanzar a proclamar al Dios verdadero y llamar al arrepentimiento. Esto importa para nosotros hoy porque muestra que la observación respetuosa e informada no es transigencia; la conclusión de Pablo siguió siendo totalmente exclusiva aunque su método fue relacional y paciente. Estudiar otras religiones con cuidado, como pide este curso, sigue el propio patrón de Pablo en lugar de apartarse de él."
+  },
+  {
+    "textEn": "23. List the four comparison questions this course asks of every religion, and explain why they are useful.",
+    "textEs": "23. Enumere las cuatro preguntas de comparación que este curso hace a cada religión, y explique por qué son útiles.",
+    "kw_en": [
+      "ultimate",
+      "reality",
+      "problem",
+      "path",
+      "destiny",
+      "framework",
+      "compare",
+      "clarity"
+    ],
+    "kw_es": [
+      "última",
+      "realidad",
+      "problema",
+      "camino",
+      "destino",
+      "marco",
+      "compar",
+      "claridad"
+    ],
+    "modelEn": "The four framework questions are: what is ultimate reality, what is the fundamental human problem, what is the path out of that problem, and what is the ultimate destiny of a human life. They are useful because asking the same four questions of every religion we study keeps us from getting lost in details and lets us see clearly where each system agrees with the biblical picture, where it borrows a true instinct but distorts it, and where it departs entirely. This clarity is what makes a pastor useful in an actual conversation rather than merely informed.",
+    "modelEs": "Las cuatro preguntas del marco son: qué es la realidad última, cuál es el problema humano fundamental, cuál es el camino para salir de ese problema, y cuál es el destino último de una vida humana. Son útiles porque hacer las mismas cuatro preguntas a cada religión que estudiamos nos evita perdernos en los detalles y nos permite ver con claridad dónde cada sistema concuerda con el cuadro bíblico, dónde toma prestado un instinto verdadero pero lo distorsiona, y dónde se aparta por completo. Esta claridad es lo que hace útil a un pastor en una conversación real y no meramente informado."
+  },
+  {
+    "textEn": "24. Distinguish exclusivism, inclusivism, and pluralism as defined in this unit. Which does this course treat as a live option, and why?",
+    "textEs": "24. Distinga el exclusivismo, el inclusivismo y el pluralismo según se definen en esta unidad. ¿Cuál trata este curso como una opción viable, y por qué?",
+    "kw_en": [
+      "exclusiv",
+      "inclusiv",
+      "plural",
+      "explicit",
+      "atone",
+      "general",
+      "revelation",
+      "john"
+    ],
+    "kw_es": [
+      "exclusiv",
+      "inclusiv",
+      "plural",
+      "explícit",
+      "expiator",
+      "general",
+      "revelación",
+      "juan"
+    ],
+    "modelEn": "Exclusivism holds that explicit faith in Christ is necessary for salvation and that general revelation alone is not sufficient. Inclusivism holds that Christ's atoning work remains the only ground of salvation, but allows that its benefits may be applied to some who respond in faith to the light they have without explicit knowledge of Christ. Pluralism holds that many paths lead equally to God. This course does not treat pluralism as a live option for a Christian minister, because it runs directly against passages like John 14:6 and Acts 4:12; the course does allow that faithful pastors have long debated the finer points between exclusivism and inclusivism.",
+    "modelEs": "El exclusivismo sostiene que la fe explícita en Cristo es necesaria para la salvación y que la revelación general por sí sola no es suficiente. El inclusivismo sostiene que la obra expiatoria de Cristo sigue siendo el único fundamento de la salvación, pero permite que sus beneficios se apliquen a algunos que responden con fe a la luz que tienen sin conocimiento explícito de Cristo. El pluralismo sostiene que muchos caminos llevan por igual a Dios. Este curso no trata el pluralismo como una opción viable para un ministro cristiano, porque choca directamente con pasajes como Juan 14:6 y Hechos 4:12; el curso sí permite que pastores fieles hayan debatido durante mucho tiempo los matices entre exclusivismo e inclusivismo."
+  },
+  {
+    "textEn": "25. Explain how decades of official atheism in Cuba actually affected religious practice, according to this unit.",
+    "textEs": "25. Explique cómo décadas de ateísmo oficial en Cuba realmente afectaron la práctica religiosa, según esta unidad.",
+    "kw_en": [
+      "atheism",
+      "underground",
+      "santería",
+      "espiritismo",
+      "daily",
+      "nominal",
+      "woven",
+      "cuba"
+    ],
+    "kw_es": [
+      "ateísmo",
+      "clandestin",
+      "santería",
+      "espiritismo",
+      "diaria",
+      "nominal",
+      "entretej",
+      "cuba"
+    ],
+    "modelEn": "According to this unit, decades of official atheism in Cuba did not eliminate religion; instead it drove much religious practice underground, leaving Santería, Espiritismo, and other Afro-Cuban traditions deeply woven into daily life. This often happens alongside a nominal Catholic or even evangelical identity, meaning a pastor may find these practices present in his own congregation even when they are not openly discussed.",
+    "modelEs": "Según esta unidad, décadas de ateísmo oficial en Cuba no eliminaron la religión; en cambio, empujaron gran parte de la práctica religiosa a la clandestinidad, dejando a la Santería, el Espiritismo y otras tradiciones afrocubanas profundamente entretejidas en la vida diaria. Esto ocurre a menudo junto a una identidad católica nominal o incluso evangélica, lo que significa que un pastor puede encontrar estas prácticas presentes en su propia congregación aunque no se discutan abiertamente."
+  },
+  {
+    "textEn": "26. Describe the kind of folk religion this unit says a pastor is likely to encounter in Mexico, and name two specific examples given.",
+    "textEs": "26. Describa el tipo de religiosidad popular que esta unidad dice que un pastor probablemente encontrará en México, y nombre dos ejemplos específicos que se dan.",
+    "kw_en": [
+      "indigenous",
+      "catholic",
+      "blend",
+      "santa muerte",
+      "curandero",
+      "syncret",
+      "folk",
+      "century"
+    ],
+    "kw_es": [
+      "indígena",
+      "católic",
+      "mezcl",
+      "santa muerte",
+      "curandero",
+      "sincrét",
+      "popular",
+      "siglo"
+    ],
+    "modelEn": "This unit describes how, in Mexico, indigenous traditions blended centuries ago with Catholic practice to produce forms of folk religion. Two specific examples given are the veneration of Santa Muerte and the ministry of the curandero or curandera, along with syncretistic festivals that combine indigenous and Catholic elements. A pastor is likely to meet these traditions in nearly every congregation, whether openly discussed or not.",
+    "modelEs": "Esta unidad describe cómo, en México, las tradiciones indígenas se mezclaron hace siglos con la práctica católica para producir formas de religiosidad popular. Dos ejemplos específicos que se dan son la veneración de la Santa Muerte y el ministerio del curandero o la curandera, junto con festivales sincréticos que combinan elementos indígenas y católicos. Un pastor probablemente encontrará estas tradiciones en casi toda congregación, se hable abiertamente de ello o no."
+  },
+  {
+    "textEn": "27. Why does this unit insist that studying world religions is not the same as teaching that all religions are equally true?",
+    "textEs": "27. ¿Por qué insiste esta unidad en que estudiar las religiones del mundo no es lo mismo que enseñar que todas las religiones son igualmente verdaderas?",
+    "kw_en": [
+      "relativism",
+      "instinct",
+      "true",
+      "distort",
+      "unique",
+      "christ",
+      "nation",
+      "wander"
+    ],
+    "kw_es": [
+      "relativismo",
+      "instinto",
+      "verdad",
+      "distorsion",
+      "único",
+      "cristo",
+      "nación",
+      "extravi"
+    ],
+    "modelEn": "This unit insists that a course in world religions is not a course in relativism. It explains that every religion began with a true instinct — that there is something greater than ourselves — but that what differs enormously is what that something is understood to be and what is owed to it. Studying these systems seriously, as Paul did with the nations groping in the dark, means taking their true instincts seriously without conceding that they are equally true; the uniqueness of Christ remains central throughout the course.",
+    "modelEs": "Esta unidad insiste en que un curso de religiones del mundo no es un curso de relativismo. Explica que toda religión comenzó con un instinto verdadero — que hay algo más grande que nosotros mismos — pero que lo que difiere enormemente es lo que se entiende que es ese algo y lo que se le debe. Estudiar estos sistemas en serio, como Pablo lo hizo con las naciones a tientas en la oscuridad, significa tomar en serio sus instintos verdaderos sin conceder que sean igualmente verdaderos; la singularidad de Cristo permanece central a lo largo del curso."
+  },
+  {
+    "textEn": "28. What does this unit mean when it says a pastor who cannot name a spiritual condition will 'misdiagnose' it? Give a pastoral application.",
+    "textEs": "28. ¿Qué quiere decir esta unidad cuando afirma que un pastor que no puede nombrar una condición espiritual la 'diagnosticará mal'? Dé una aplicación pastoral.",
+    "kw_en": [
+      "misdiagnose",
+      "heal",
+      "name",
+      "context",
+      "shepherd",
+      "condition",
+      "congregation",
+      "understand"
+    ],
+    "kw_es": [
+      "diagnos",
+      "san",
+      "nombr",
+      "contexto",
+      "pastor",
+      "condición",
+      "congregación",
+      "entend"
+    ],
+    "modelEn": "This unit means that spiritual conditions, like medical ones, must be correctly identified before they can be addressed; a pastor who does not understand what he is looking at — whether Santería, Espiritismo, or folk Catholic syncretism — will misdiagnose it, and a misdiagnosed spiritual condition rarely heals. A pastoral application is that a pastor should learn to recognize the specific beliefs and practices present in his own congregation's context rather than responding with vague generalities, so that his counsel and preaching actually address what people are struggling with.",
+    "modelEs": "Esta unidad quiere decir que las condiciones espirituales, como las médicas, deben identificarse correctamente antes de poder abordarse; un pastor que no entiende lo que está observando — sea Santería, Espiritismo, o sincretismo popular católico — lo diagnosticará mal, y una condición espiritual mal diagnosticada rara vez sana. Una aplicación pastoral es que el pastor debe aprender a reconocer las creencias y prácticas específicas presentes en el contexto de su propia congregación en lugar de responder con generalidades vagas, para que su consejo y predicación realmente aborden aquello con lo que la gente lucha."
+  },
+  {
+    "textEn": "29. According to this unit, what combination of attitudes should mark a Christian's engagement with people of other faiths?",
+    "textEs": "29. Según esta unidad, ¿qué combinación de actitudes debe marcar el acercamiento de un cristiano hacia personas de otras religiones?",
+    "kw_en": [
+      "confidence",
+      "uniqueness",
+      "respect",
+      "honest",
+      "adherent",
+      "teach",
+      "love",
+      "neighbor"
+    ],
+    "kw_es": [
+      "confianza",
+      "singularidad",
+      "respet",
+      "honest",
+      "adherente",
+      "enseñ",
+      "amor",
+      "prójimo"
+    ],
+    "modelEn": "This unit teaches that every unit in the course holds three things in common: confidence in the uniqueness of Christ, respect for the people who hold other beliefs, and honesty about what those beliefs actually teach. This combination reflects the command to love our neighbor, which requires understanding what he actually believes before speaking to him about Christ, following Paul's own pattern at the Areopagus rather than either contemptuous dismissal or vague relativism.",
+    "modelEs": "Esta unidad enseña que toda unidad del curso tiene tres cosas en común: confianza en la singularidad de Cristo, respeto por las personas que sostienen otras creencias, y honestidad acerca de lo que esas creencias realmente enseñan. Esta combinación refleja el mandamiento de amar al prójimo, que exige entender lo que realmente cree antes de hablarle de Cristo, siguiendo el propio patrón de Pablo en el Areópago en lugar de un descarte despectivo o un relativismo vago."
+  },
+  {
+    "textEn": "30. Synthesize this unit: why does the author believe a course like this one is essential preparation for pastors serving in Cuba and Mexico specifically?",
+    "textEs": "30. Sintetice esta unidad: ¿por qué cree el autor que un curso como este es preparación esencial para los pastores que sirven específicamente en Cuba y México?",
+    "kw_en": [
+      "context",
+      "encounter",
+      "santería",
+      "curandero",
+      "misdiagnose",
+      "areopagus",
+      "core",
+      "ministry"
+    ],
+    "kw_es": [
+      "contexto",
+      "encuentr",
+      "santería",
+      "curandero",
+      "diagnos",
+      "areópago",
+      "central",
+      "ministerio"
+    ],
+    "modelEn": "The author believes this course is essential because it is not an abstract academic exercise but a direct response to what pastors in Cuba and Mexico actually encounter in their congregations — Santería and Espiritismo woven into daily life in Cuba, and folk traditions like Santa Muerte veneration and curanderismo in Mexico. Following Paul's Areopagus model of careful, respectful observation before proclamation, this course gives these specific traditions core attention rather than treating them as a footnote, so that pastors can correctly name what they encounter, avoid misdiagnosis, and shepherd their people toward Christ with both accuracy and love.",
+    "modelEs": "El autor cree que este curso es esencial porque no es un ejercicio académico abstracto sino una respuesta directa a lo que los pastores en Cuba y México realmente encuentran en sus congregaciones — la Santería y el Espiritismo entretejidos en la vida diaria en Cuba, y tradiciones populares como la veneración de la Santa Muerte y el curanderismo en México. Siguiendo el modelo de Pablo en el Areópago de observación cuidadosa y respetuosa antes de proclamar, este curso da a estas tradiciones específicas atención central en lugar de tratarlas como una nota al pie, para que los pastores puedan nombrar correctamente lo que encuentran, evitar el mal diagnóstico, y pastorear a su gente hacia Cristo con precisión y amor a la vez."
+  }
+];
+
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit1 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_wr_u1_mc_passed';
+const SA_LOCK_KEY = 'cts_wr_u1_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_wr_u1_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function kwHit(ans, kw) {
+  kw = (kw||'').toLowerCase(); if (!kw) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (kw.length <= 4) ? '(?:^|[^'+WC+'])'+esc+'(?!['+WC+'])' : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); } catch(e) { return ans.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read the student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(ans, kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 2 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first." : "Por favor regístrese primero.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'certificate';
+    let total, score, required, mcGatePass, saGatePass, correctKW = 0;
+    const mcPct2 = correctMC;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW; required = null;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit1 = true;
+                localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_wr_u1_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit1 = true;
+        localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_wr_u1_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_wr_u1_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        renderQuestions();
+    };
+});
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 1 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+</body>
+</html>

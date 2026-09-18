@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS New Testament Survey — Unit 12: Revelation: The Consummation of the Ages</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+.track-bar { background: #f6f1e8; border: 1px solid #d7cec1; border-radius: 12px; padding: 12px 16px; margin: 15px 0; }
+.track-bar label { margin-right: 18px; cursor: pointer; font-size: 0.95rem; }
+.track-bar input[type=radio] { margin-right: 6px; vertical-align: middle; }
+.reset-btn { background: #8a5a3a; color: white; border: none; border-radius: 30px; padding: 8px 18px; cursor: pointer; font-family: inherit; margin-left: 10px; font-size: 0.9rem; }
+.reset-btn:hover { background: #6e4528; }
+.redirect-notice { background: #e8f5ea; border: 1px solid #b9dfc2; color: #1f6b3b; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-weight: bold; }
+@media print {
+  @page { margin: 0.5in; }
+  body { background: white; color: black; font-size: 12pt; padding: 0; }
+  .nav-bar, .toggle-btn, #submitExamBtn, .reset-btn, #examResult, .track-bar, button.small { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; padding: 12px; margin-bottom: 12px; }
+  .question { page-break-inside: avoid; }
+  h1, h2, h3 { color: black; page-break-after: avoid; }
+  .option { background: white; border-color: #999; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Certificate →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 New Testament Survey — Unit 12: Revelation: The Consummation of the Ages</span><span class="lang-es">📖 Estudio del Nuevo Testamento — Unidad 12: Apocalipsis: La Consumación de las Edades</span></h1>
+    <p><span class="lang-en"><strong>Course Author:</strong> Dr. Wayne Cook | <strong>Seminary Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Autor del Curso:</strong> Dr. Wayne Cook | <strong>Director del Seminario:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic;"><span class="lang-en">"He who testifies to these things says, 'Surely I am coming quickly.' Amen. Even so, come, Lord Jesus!" — Revelation 22:20</span><span class="lang-es">"El que da testimonio de estas cosas dice: Ciertamente vengo en breve. Amén; sí, ven, Señor Jesús." — Apocalipsis 22:20</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+<div class="lang-en">
+
+<h2>I. The Three Millennial Interpretations</h2>
+<p>In Revelation 1:19, the Apostle John is provided with a structural blueprint for the book: <em>"Write the things which you have seen, and the things which are, and the things which will take place after this."</em> While interpretations of these "last things" differ, all major millennial views share an unwavering commitment to the return of Christ and the supreme authority of the Red Letter promise: <em>"I will come again"</em> (John 14:3). We give equal reverence to the three primary lenses through which believers view the return of the King. These positions do not divide fellowship, as all recognize that the timing of the Kingdom is secondary to the reality of the King.</p>
+
+<h3>A. Premillennialism: The Expectant Rescue</h3>
+<p>Premillennialism holds that the physical return of Jesus Christ occurs before the establishment of the thousand-year reign. This position relies on a literal, sequential reading of Revelation 19 and 20. Its defining feature is the timing of Christ's return: He comes back before the millennium begins, not after it. Many premillennialists also expect a period of intensifying apostasy, deception, and conflict in the time leading up to that return, culminating in the rise of a final Antichrist &mdash; though this is not the same as expecting nothing but uninterrupted decline; many premillennialists also anticipate real revival and gospel advance even amid growing opposition. In this view, the world's deepest problems will not be finally resolved by human effort but await the personal, physical intervention of Jesus Christ.</p>
+
+<p><strong>The Earthly Kingdom:</strong> Following the "rescue" or Second Coming, Christ establishes a literal political kingdom on earth for 1,000 years, often centered in Jerusalem. This fulfills Old Testament promises to Israel regarding a physical kingdom. For the Premillennialist, history is a line moving toward a specific "interruption" where the King takes the throne.</p>
+
+<p><strong>The Scofield Influence:</strong> This view gained massive traction in the American church via the Scofield Reference Bible. It categorizes time into "Dispensations," viewing the current era as the "Church Age" which must conclude before the "Kingdom Age" can begin. It prioritizes "Practice Reports" of spiritual preparedness, urging the believer to be a "Good Soldier" ready for the Commander's sudden arrival.</p>
+
+<h3>B. Postmillennialism: The Gospel's Triumph</h3>
+<p>Postmillennialism argues that Christ returns "after" the millennium, which is established by the Holy Spirit through the successful witness of the Church.</p>
+
+<p><strong>The Logic of the Leaven:</strong> This view draws heavily on the parables of the mustard seed and the leaven, suggesting that the Kingdom grows incrementally. It posits that through the "Practice Report" of the Great Commission &mdash; preaching, education, social reform, and legal justice &mdash; the Gospel will slowly permeate every sector of society until the world is largely Christianized.</p>
+
+<p><strong>The Long Golden Age:</strong> For the Postmillennialist, the "thousand years" is often a symbolic term for a long era of peace and righteousness that the Spirit brings about through the gospel's increasingly extensive influence, working through the Church's faithful witness. Christ reigns not from a physical throne in Jerusalem, but from the hearts of men and the institutions of society.</p>
+
+<p><strong>Historical Development:</strong> Postmillennialism was influential among a number of nineteenth-century Protestant theologians and missionaries, especially in settings marked by confidence in the expanding reach of the gospel. The catastrophes of the twentieth century, including two world wars and the Holocaust, weakened that confidence for many Christians and contributed to renewed interest in other eschatological frameworks. Those events did not, however, settle the biblical question; postmillennialists continue to argue their case from Scripture rather than from optimism about human progress.</p> <h3>C. Amillennialism: The Present Reign of Christ</h3>
+<p>Amillennialism (meaning "no literal future millennium") interprets the thousand years as a symbolic figure representing the current spiritual reign of Christ from the First Coming to the Second Coming.</p>
+
+<p><strong>The Historical Key:</strong> The thrust of the Amillennial position is that Revelation is deeply historical. To interpret it correctly, one must realize John was writing to seven real churches in Asia Minor who were being crushed under the weight of Roman persecution. The primary emphasis for the original audience was that persecution was not going to last forever.</p>
+
+<p><strong>Apocalyptic Imagery:</strong> John wrote in the apocalyptic genre, a recognized form of Jewish and early Christian prophetic literature that draws heavily on Old Testament imagery &mdash; beasts, dragons, numbers, thrones, and cosmic upheaval &mdash; to portray spiritual realities and the clash between God's kingdom and the kingdoms of this world. This symbolism belongs to the literary and prophetic character of Revelation; it was not simply a code John invented out of fear of naming the Emperor, though its symbolic, indirect quality would also have offered a persecuted church some real protection. Amillennial interpreters typically understand "the Beast" as pointing, in the first instance, to the Roman Empire and the cult of the Emperor, while also seeing in it a pattern that recurs whenever earthly power sets itself against God and His people.</p>
+
+<p><strong>The Present Victory:</strong> The Amillennialist sees the "thousand years" as the current age where Christ is already victorious over sin and death. The "binding of Satan" is the restriction of his power to stop the Gospel from reaching the nations. In this view, much of the book is seen as forensic history, describing the eternal struggle between the City of God and the City of Man, culminating in the Second Coming.</p>
+
+<h2>II. The Library of Heaven: The Forensic Records</h2>
+<p><strong>The Book of Deeds:</strong> This is the exhaustive "Practice Report" of every human life. It records every event from the cradle to the grave &mdash; every careless word, every idle thought, and every secret sin. <strong>The Forensic Verdict:</strong> When judged against the "Red Letter" standard of absolute holiness, the Book of Deeds reveals that all have fallen short. It is a record of "filthy rags" and tarnished efforts. For those not in Christ, this book serves as the legal evidence for their separation from God.</p>
+
+<p><strong>The Lamb's Book of Life:</strong> This is the most important volume in the celestial library, mentioned eight times in the Bible. It does not record our deeds, but our Relationship. <strong>The Entry Requirement:</strong> Names are not written in this book because of moral merit, church membership, or social status. A name is recorded here solely through faith in the shed blood of Jesus Christ. <strong>The Indelible Ink:</strong> In a "Red Letter" world, the ink used for this ledger is the scarlet blood of the Lamb. Once a name is recorded, it provides the "Whole Life" security that the Book of Deeds cannot offer.</p>
+
+<h2>III. The Salesman's Appeal: "Asking for the Sale"</h2>
+<p>In the world of professional outreach, there is a "Stark Realism" to the work of a life insurance salesman. A skilled agent does not simply explain the policy, put away his brochures, and leave his phone number. He knows the stakes are too high for a "convenient time." He asks for the sale. <strong>The Policy of Eternal Life:</strong> As believers, we offer a "Whole Life" policy that is more crucial than any earthly insurance. <strong>The Decision is Now:</strong> Like Felix in Acts 24, many people "tremble" when they hear the Truth but delay their decision for a "more convenient time." Forensic history shows that for many, that time never comes. To delay a decision is to decide. <strong>The Cost of Rejection:</strong> Whether it is the "Rich Young Ruler" choosing his money or the "Thief on the Cross" hardening his heart, the cost of walking away from the invitation is an eternity without hope.</p>
+
+<p>The study of Revelation is not merely an academic exercise in decoding timelines. It is a divine invitation. The "Library of Heaven" is real, the books will be opened, and the Great Salesman of the Soul is asking for a decision. The New Jerusalem, described in Revelation 21, has no temple because the Lord God Almighty and the Lamb are its temple. This is the final replacement of sacred space with sacred presence. You don't need a building when the Builder lives inside you.</p>
+
+<h2>IV. The Heart of Every Millennial Position</h2>
+<p>Whatever millennial position a believer holds, three pastoral truths remain non-negotiable. First, Christ will return personally and visibly &mdash; this is not metaphor, not allegory, not a feeling in the heart. Second, every human being will stand before the throne &mdash; rich and poor, famous and forgotten, the Mexican grandmother and the Anglo executive, the prisoner and the president. Third, the Lamb's Book of Life is the only ledger that matters that day. Speculation about charts and timelines is interesting, but it must never replace the urgency of the question every pastor asks every listener: <em>is your name written in the Book?</em> If a believer has read all twelve units of this course and the most they have learned is when the Antichrist arrives, the course has failed them. The Book of Revelation is, finally, an invitation. The Spirit and the Bride say, <em>"Come."</em> The thirsty are invited to take the water of life freely. That is the heart of every millennial position when it is read pastorally rather than academically.</p>
+
+</div>
+
+<div class="lang-es">
+
+<h2>I. Las Tres Interpretaciones Milenarias</h2>
+<p>En Apocalipsis 1:19, al apóstol Juan se le proporciona un plano estructural para el libro: <em>«Escribe las cosas que has visto, y las que son, y las que han de ser después de éstas»</em>. Aunque las interpretaciones de estas "últimas cosas" difieren, todas las principales posiciones milenarias comparten un compromiso inquebrantable con el regreso de Cristo y la autoridad suprema de la promesa en Letras Rojas: <em>«Vendré otra vez»</em> (Juan 14:3). Damos igual reverencia a los tres lentes primarios por los cuales los creyentes ven el regreso del Rey. Estas posiciones no dividen el compañerismo, pues todas reconocen que el tiempo del Reino es secundario frente a la realidad del Rey.</p>
+
+<h3>A. El Premilenialismo: El Rescate Expectante</h3>
+<p>El Premilenialismo sostiene que el regreso físico de Jesucristo ocurre antes del establecimiento del reinado de mil años. Esta posición se basa en una lectura literal y secuencial de Apocalipsis 19 y 20. Su rasgo definitorio es el momento del regreso de Cristo: Él vuelve antes de que comience el milenio, no después. Muchos premilenialistas también esperan un período de apostasía, engaño y conflicto crecientes en el tiempo previo a ese regreso, que culmina en el surgimiento de un Anticristo final &mdash; aunque esto no es lo mismo que esperar solamente un declive ininterrumpido; muchos premilenialistas también anticipan un verdadero avivamiento y avance del evangelio aun en medio de una oposición creciente. En esta visión, los problemas más profundos del mundo no serán finalmente resueltos por el esfuerzo humano, sino que aguardan la intervención personal y física de Jesucristo.</p>
+
+<p><strong>El Reino Terrenal:</strong> Tras el "rescate" o Segunda Venida, Cristo establece un reino político literal en la tierra por 1,000 años, a menudo centrado en Jerusalén. Esto cumple las promesas del Antiguo Testamento a Israel sobre un reino físico. Para el premilenialista, la historia es una línea moviéndose hacia una "interrupción" específica donde el Rey toma el trono.</p>
+
+<p><strong>La Influencia de Scofield:</strong> Esta visión ganó tracción masiva en la iglesia americana a través de la Biblia de Referencia Scofield. Categoriza el tiempo en "Dispensaciones," considerando la era actual como la "Edad de la Iglesia" que debe concluir antes de que pueda comenzar la "Edad del Reino." Prioriza los "Informes de Práctica" de preparación espiritual, instando al creyente a ser un "Buen Soldado" listo para la llegada repentina del Comandante.</p>
+
+<h3>B. El Postmilenialismo: El Triunfo del Evangelio</h3>
+<p>El Postmilenialismo argumenta que Cristo regresa "después" del milenio, el cual es establecido por el Espíritu Santo a través del testimonio exitoso de la Iglesia.</p>
+
+<p><strong>La Lógica de la Levadura:</strong> Esta visión se apoya fuertemente en las parábolas de la semilla de mostaza y la levadura, sugiriendo que el Reino crece incrementalmente. Postula que a través del "Informe de Práctica" de la Gran Comisión &mdash; la predicación, la educación, la reforma social y la justicia legal &mdash; el Evangelio permeará lentamente cada sector de la sociedad hasta que el mundo sea ampliamente cristianizado.</p>
+
+<p><strong>La Larga Era Dorada:</strong> Para el postmilenialista, los "mil años" son a menudo un término simbólico para una larga era de paz y justicia que el Espíritu trae a través de la influencia cada vez más extensa del evangelio, obrando por medio del testimonio fiel de la Iglesia. Cristo reina, no desde un trono físico en Jerusalén, sino desde los corazones de los hombres y las instituciones de la sociedad.</p>
+
+<p><strong>Desarrollo Histórico:</strong> El posmilenialismo fue influyente entre varios teólogos y misioneros protestantes del siglo XIX, especialmente en ambientes marcados por la confianza en la expansión del evangelio. Las catástrofes del siglo XX, incluidas dos guerras mundiales y el Holocausto, debilitaron esa confianza para muchos cristianos y contribuyeron a un renovado interés en otros esquemas escatológicos. Sin embargo, aquellos acontecimientos no resolvieron la cuestión bíblica; los posmilenialistas continúan defendiendo su posición a partir de las Escrituras y no del optimismo acerca del progreso humano.</p> <h3>C. El Amilenialismo: El Reinado Presente de Cristo</h3>
+<p>El Amilenialismo (que significa "sin milenio futuro literal") interpreta los mil años como una figura simbólica que representa el reinado espiritual actual de Cristo desde la Primera Venida hasta la Segunda Venida.</p>
+
+<p><strong>La Clave Histórica:</strong> El énfasis de la posición amilenialista es que el Apocalipsis es profundamente histórico. Para interpretarlo correctamente, uno debe darse cuenta de que Juan escribía a siete iglesias reales en Asia Menor que estaban siendo aplastadas bajo el peso de la persecución romana. El énfasis primario para la audiencia original era que la persecución no iba a durar para siempre.</p>
+
+<p><strong>Las Imágenes Apocalípticas:</strong> Juan escribió en el género apocalíptico, una forma reconocida de literatura profética judía y cristiana primitiva que se apoya fuertemente en las imágenes del Antiguo Testamento &mdash; bestias, dragones, números, tronos, y trastornos cósmicos &mdash; para retratar realidades espirituales y el choque entre el reino de Dios y los reinos de este mundo. Este simbolismo pertenece al carácter literario y profético del Apocalipsis; no fue simplemente un código que Juan inventó por temor a nombrar al Emperador, aunque su cualidad simbólica e indirecta también habría ofrecido cierta protección real a una iglesia perseguida. Los intérpretes amilenialistas típicamente entienden que "la Bestia" apunta, en primer lugar, al Imperio Romano y al culto del Emperador, mientras también ven en ella un patrón que se repite cada vez que el poder terrenal se levanta contra Dios y su pueblo.</p>
+
+<p><strong>La Victoria Presente:</strong> El amilenialista ve los "mil años" como la era actual donde Cristo ya es victorioso sobre el pecado y la muerte. La "atadura de Satanás" es la restricción de su poder para impedir que el Evangelio alcance a las naciones. En esta visión, gran parte del libro se ve como historia forense, describiendo la lucha eterna entre la Ciudad de Dios y la Ciudad del Hombre, culminando en la Segunda Venida.</p>
+
+<h2>II. La Biblioteca del Cielo: Los Registros Forenses</h2>
+<p><strong>El Libro de las Obras:</strong> Este es el "Informe de Práctica" exhaustivo de cada vida humana. Registra cada evento desde la cuna hasta la tumba &mdash; cada palabra descuidada, cada pensamiento ocioso y cada pecado secreto. <strong>El Veredicto Forense:</strong> Cuando se juzga contra el estándar de las "Letras Rojas" de santidad absoluta, el Libro de las Obras revela que todos han quedado cortos. Es un registro de "trapos de inmundicia" y esfuerzos empañados. Para aquellos que no están en Cristo, este libro sirve como la evidencia legal para su separación de Dios.</p>
+
+<p><strong>El Libro de la Vida del Cordero:</strong> Este es el volumen más importante en la biblioteca celestial, mencionado ocho veces en la Biblia. No registra nuestras obras, sino nuestra Relación. <strong>El Requisito de Entrada:</strong> Los nombres no se escriben en este libro por mérito moral, membresía en la iglesia o estatus social. Un nombre se registra aquí únicamente a través de la fe en la sangre derramada de Jesucristo. <strong>La Tinta Indeleble:</strong> En un mundo de "Letras Rojas", la tinta utilizada para este libro mayor es la sangre escarlata del Cordero. Una vez que se registra un nombre, proporciona la seguridad de "Toda la Vida" que el Libro de las Obras no puede ofrecer.</p>
+
+<h2>III. El Llamado del Vendedor: "Pidiendo la Venta"</h2>
+<p>En el mundo de la divulgación profesional, hay un "Realismo Crudo" en el trabajo de un vendedor de seguros de vida. Un agente hábil no simplemente explica la póliza, guarda sus folletos y deja su número de teléfono. Sabe que lo que está en juego es demasiado alto para un "momento conveniente." Pide la venta. <strong>La Póliza de Vida Eterna:</strong> Como creyentes, ofrecemos una póliza de "Toda la Vida" que es más crucial que cualquier seguro terrenal. <strong>La Decisión es Ahora:</strong> Como Félix en Hechos 24, muchas personas "tiemblan" cuando escuchan la Verdad pero posponen su decisión para un "momento más conveniente." La historia forense muestra que para muchos, ese momento nunca llega. Posponer una decisión es decidir. <strong>El Costo del Rechazo:</strong> Ya sea el "Joven Rico" eligiendo su dinero o el "Ladrón en la Cruz" endureciendo su corazón, el costo de alejarse de la invitación es una eternidad sin esperanza.</p>
+
+<p>El estudio del Apocalipsis no es meramente un ejercicio académico para decodificar líneas de tiempo. Es una invitación divina. La "Biblioteca del Cielo" es real, los libros serán abiertos, y el Gran Vendedor del Alma está pidiendo una decisión. La Nueva Jerusalén, descrita en Apocalipsis 21, no tiene templo porque el Señor Dios Todopoderoso y el Cordero son su templo. Este es el reemplazo final del espacio sagrado por la presencia sagrada. No necesitas un edificio cuando el Constructor vive dentro de ti.</p>
+
+<h2>IV. El Corazón de Toda Posición Milenarista</h2>
+<p>Cualquiera que sea la posición milenarista que sostenga el creyente, tres verdades pastorales permanecen no negociables. Primero, Cristo regresará personal y visiblemente &mdash; esto no es metáfora, no es alegoría, no es un sentimiento en el corazón. Segundo, todo ser humano se presentará delante del trono &mdash; ricos y pobres, famosos y olvidados, la abuela mexicana y el ejecutivo anglosajón, el preso y el presidente. Tercero, el Libro de la Vida del Cordero es el único registro que importa aquel día. La especulación sobre gráficos y cronogramas es interesante, pero nunca debe reemplazar la urgencia de la pregunta que todo pastor le hace a todo oyente: <em>¿está su nombre escrito en el Libro?</em> Si un creyente ha leído las doce unidades de este curso y lo más que ha aprendido es cuándo llega el Anticristo, el curso le ha fallado. El libro del Apocalipsis es, finalmente, una invitación. El Espíritu y la Esposa dicen: <em>«Ven»</em>. A los sedientos se les invita a tomar del agua de la vida gratuitamente. Ese es el corazón de toda posición milenarista cuando se lee pastoralmente y no académicamente.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 12 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 12 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer questions 1–20 (multiple choice). You must achieve 90% (18/20) on the multiple-choice section to pass. <strong>M.Div. / Th.M. students:</strong> Answer all 30 questions. You must achieve 90% on both sections independently — 18/20 multiple choice AND 9/10 short answer. Click an answer for immediate feedback. <strong>Once all 12 units are passed, you will be redirected to your certificate.</strong></span><span class="lang-es"><strong>Estudiantes de certificado:</strong> Respondan las preguntas 1–20 (opción múltiple). Debe alcanzar el 90% (18/20) en la sección de opción múltiple para aprobar. <strong>Estudiantes de M.Div. / Th.M.:</strong> Respondan las 30 preguntas. Debe alcanzar el 90% en ambas secciones de manera independiente — 18/20 opción múltiple Y 9/10 respuesta corta. Haga clic en una respuesta para retroalimentación inmediata. <strong>Una vez aprobadas las 12 unidades, será redirigido a su certificado.</strong></span></p>
+    <div class="track-bar">
+        <strong><span class="lang-en">Your Track:</span><span class="lang-es">Su Modalidad:</span></strong>
+        <span style="margin-left:14px;">
+            <label><input type="radio" name="ctsTrack" value="cert"><span class="lang-en">Certificate (MC only)</span><span class="lang-es">Certificado (solo opción múltiple)</span></label>
+            <label><input type="radio" name="ctsTrack" value="mdiv"><span class="lang-en">Master of Divinity (MC + SA)</span><span class="lang-es">Maestría en Divinidad (MC + RC)</span></label>
+            <label><input type="radio" name="ctsTrack" value="thm"><span class="lang-en">Master of Theology (Th.M.) Track</span><span class="lang-es">Maestría en Teología (Th.M.)</span></label>
+        </span>
+    </div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar Aprobación</span></button>
+        <button id="resetExamBtn" class="reset-btn"><span class="lang-en">↺ Reset Exam</span><span class="lang-es">↺ Restablecer Examen</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ===== PER-UNIT CONFIG =====
+const UNIT = 12;
+const TOTAL_UNITS = 12;
+const NEXT_URL = 'CTSNTCertificate.html';
+const PREV_URL = 'CTSNTUnit11.html';
+const PASS_THRESHOLD = 0.90;
+
+let progress = JSON.parse(localStorage.getItem('cts_nt_progress')) || {};
+let currentTrack = localStorage.getItem('cts_track') || 'cert';
+
+function isMastersLevel() { return currentTrack === 'mdiv' || currentTrack === 'thm'; }
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === UNIT) cls += ' active';
+        grid.innerHTML += `<a href="CTSNTUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_URL; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="#" onclick="promptName(); return false;" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+    }
+}
+function promptName() {
+    const name = prompt("Welcome to CTS New Testament Survey! Please enter your full name as you'd like it to appear on your certificate:");
+    if (name && name.trim().length > 1) {
+        localStorage.setItem('cts_student', JSON.stringify({name: name.trim()}));
+        displayStudentGreeting();
+    }
+}
+displayStudentGreeting();
+
+// MC answer key audit-targeted distribution: 5A / 5B / 5C / 5D
+// Index 0..19 maps to: C,A,D,B,A,D,C,B,A,D,B,C,A,B,D,C,B,A,D,C
+const mcQuestions = [
+    { textEn: "1. According to Revelation 1:19, what three-fold structure does Christ provide for the book?", textEs: "1. Según Apocalipsis 1:19, ¿qué estructura triple proporciona Cristo para el libro?",
+      optionsEn: ["The good, the bad, and the ugly", "The Father, the Son, and the Spirit", "What you have seen, what is now, and what will take place after this", "The seals, the trumpets, and the bowls"],
+      optionsEs: ["Lo bueno, lo malo y lo feo", "El Padre, el Hijo y el Espíritu", "Lo que has visto, lo que es, y lo que ha de ser después", "Los sellos, las trompetas y las copas"],
+      explanationEn: "Revelation 1:19 gives the book's blueprint: write what you have seen, what is, and what will take place after this.", explanationEs: "Apocalipsis 1:19 da el plano del libro: escribe lo que has visto, lo que es, y lo que ha de ser después de esto.", correct: 2 },
+    { textEn: "2. In Premillennialism, when does Christ return relative to the thousand-year reign?", textEs: "2. En el premilenialismo, ¿cuándo regresa Cristo en relación con el reinado de mil años?",
+      optionsEn: ["Before the thousand years", "During the thousand years", "After the thousand years", "There is no literal thousand years"],
+      optionsEs: ["Antes de los mil años", "Durante los mil años", "Después de los mil años", "No hay mil años literales"],
+      explanationEn: "In Premillennialism, Christ returns before the thousand-year reign, a literal reading of Revelation 19–20.", explanationEs: "En el premilenarismo, Cristo vuelve antes del reinado de mil años, una lectura literal de Apocalipsis 19–20.", correct: 0 },
+    { textEn: "3. According to Premillennialism, where is Christ's earthly kingdom most often centered?", textEs: "3. Según el premilenialismo, ¿dónde se centra más a menudo el reino terrenal de Cristo?",
+      optionsEn: ["Rome", "Babylon", "Bethlehem", "Jerusalem"],
+      optionsEs: ["Roma", "Babilonia", "Belén", "Jerusalén"],
+      explanationEn: "Premillennialism places Christ's earthly kingdom most often centered in Jerusalem after His return.", explanationEs: "El premilenarismo ubica el reino terrenal de Cristo centrado más a menudo en Jerusalén después de Su regreso.", correct: 3 },
+    { textEn: "4. The Scofield Reference Bible categorizes time into what framework?", textEs: "4. La Biblia de Referencia Scofield categoriza el tiempo en ¿qué marco?",
+      optionsEn: ["Covenants", "Dispensations", "Epochs", "Generations"],
+      optionsEs: ["Pactos", "Dispensaciones", "Épocas", "Generaciones"],
+      explanationEn: "The Scofield Reference Bible categorizes time into Dispensations, viewing the present as the Church Age before the Kingdom Age.", explanationEs: "La Biblia de referencia Scofield clasifica el tiempo en Dispensaciones, viendo el presente como la Era de la Iglesia antes de la Era del Reino.", correct: 1 },
+    { textEn: "5. Postmillennialism draws heavily on which two parables to argue the Kingdom grows incrementally?", textEs: "5. El postmilenialismo se apoya fuertemente en ¿qué dos parábolas para argumentar que el Reino crece incrementalmente?",
+      optionsEn: ["The mustard seed and the leaven", "The sower and the soils", "The wheat and the tares", "The pearl and the treasure"],
+      optionsEs: ["La semilla de mostaza y la levadura", "El sembrador y los suelos", "El trigo y la cizaña", "La perla y el tesoro"],
+      explanationEn: "Postmillennialism draws on the parables of the mustard seed and the leaven to argue the Kingdom grows incrementally.", explanationEs: "El posmilenarismo se apoya en las parábolas de la semilla de mostaza y la levadura para argumentar que el Reino crece gradualmente.", correct: 0 },
+    { textEn: "6. For the Postmillennialist, from where does Christ reign during the long golden age?", textEs: "6. Para el postmilenialista, ¿desde dónde reina Cristo durante la larga era dorada?",
+      optionsEn: ["From a physical throne in Jerusalem", "From the New Jerusalem only", "From the seven churches in Asia Minor", "From the hearts of men and the institutions of society"],
+      optionsEs: ["Desde un trono físico en Jerusalén", "Solo desde la Nueva Jerusalén", "Desde las siete iglesias de Asia Menor", "Desde los corazones de los hombres y las instituciones de la sociedad"],
+      explanationEn: "For the Postmillennialist, Christ reigns during the golden age from the hearts of men and the institutions of society.", explanationEs: "Para el posmilenarista, Cristo reina durante la edad de oro desde los corazones de los hombres y las instituciones de la sociedad.", correct: 3 },
+    { textEn: "7. Postmillennialism was especially influential in which nineteenth-century setting?", textEs: "7. ¿En qué ambiente del siglo XIX fue especialmente influyente el posmilenialismo?",
+      optionsEn: ["The Protestant Reformation", "The American Great Awakening", "Many Protestant missionary and reform movements", "The early church fathers"],
+      optionsEs: ["La Reforma Protestante", "El Gran Despertar americano", "Muchos movimientos protestantes misioneros y de reforma", "Los padres de la iglesia primitiva"],
+      explanationEn: "Postmillennialism was influential among a number of nineteenth-century Protestant missionaries, theologians, and reformers.", explanationEs: "El posmilenialismo fue influyente entre varios misioneros, teólogos y reformadores protestantes del siglo XIX.", correct: 2 },
+    { textEn: "8. In Amillennialism, the 'thousand years' refers to:", textEs: "8. En el amilenialismo, los 'mil años' se refieren a:",
+      optionsEn: ["A literal future earthly reign", "The current spiritual reign of Christ from the First to the Second Coming", "The seventy weeks of Daniel", "The age of the patriarchs"],
+      optionsEs: ["Un reinado terrenal literal futuro", "El reinado espiritual actual de Cristo desde la Primera hasta la Segunda Venida", "Las setenta semanas de Daniel", "La era de los patriarcas"],
+      explanationEn: "In Amillennialism the thousand years is symbolic, representing Christ's present spiritual reign from the first to the second coming.", explanationEs: "En el amilenarismo los mil años son simbólicos, representando el reinado espiritual presente de Cristo desde la primera hasta la segunda venida.", correct: 1 },
+    { textEn: "9. According to Amillennialism, John originally wrote Revelation to:", textEs: "9. Según el amilenialismo, Juan escribió originalmente el Apocalipsis a:",
+      optionsEn: ["Seven real churches in Asia Minor crushed under Roman persecution", "The synagogue in Jerusalem", "The Roman Senate", "The Christians scattered in Babylon"],
+      optionsEs: ["Siete iglesias reales en Asia Menor aplastadas bajo la persecución romana", "La sinagoga en Jerusalén", "El senado romano", "Los cristianos dispersos en Babilonia"],
+      explanationEn: "Amillennialism stresses that John wrote to seven real churches in Asia Minor crushed under Roman persecution.", explanationEs: "El amilenarismo recalca que Juan escribió a siete iglesias reales en Asia Menor aplastadas bajo la persecución romana.", correct: 0 },
+    { textEn: "10. Why did John use apocalyptic 'code' language like beasts, dragons, and strange numbers?", textEs: "10. ¿Por qué usó Juan el lenguaje apocalíptico de 'código' como bestias, dragones y números extraños?",
+      optionsEn: ["To make the book harder to interpret", "To preserve mystery for future generations", "To match Old Testament prophetic style", "To avoid naming the Emperor directly and provoking further persecution"],
+      optionsEs: ["Para hacer el libro más difícil de interpretar", "Para preservar el misterio para futuras generaciones", "Para imitar el estilo profético del Antiguo Testamento", "Para evitar nombrar al Emperador directamente y provocar mayor persecución"],
+      explanationEn: "John used the recognized imagery of apocalyptic prophecy — drawing heavily on the Old Testament — to communicate God’s message to persecuted churches; its symbolic form could also speak about imperial power indirectly.", explanationEs: "Juan usó las imágenes reconocidas de la profecía apocalíptica — apoyándose ampliamente en el Antiguo Testamento — para comunicar el mensaje de Dios a iglesias perseguidas; su forma simbólica también podía hablar del poder imperial de manera indirecta.", correct: 3 },
+    { textEn: "11. In the Amillennial reading, who or what is 'The Beast'?", textEs: "11. En la lectura amilenialista, ¿quién o qué es 'La Bestia'?",
+      optionsEn: ["A future Antichrist who has not yet arisen", "The Roman Empire and the cult of the Emperor", "The papacy in Rome", "A symbol of all human governments combined"],
+      optionsEs: ["Un Anticristo futuro que aún no ha surgido", "El Imperio Romano y el culto del Emperador", "El papado en Roma", "Un símbolo de todos los gobiernos humanos combinados"],
+      explanationEn: "In the Amillennial reading, the Beast refers historically to the Roman Empire and the cult of the Emperor.", explanationEs: "En la lectura amilenarista, la Bestia se refiere históricamente al Imperio Romano y al culto al Emperador.", correct: 1 },
+    { textEn: "12. The Book of Deeds records:", textEs: "12. El Libro de las Obras registra:",
+      optionsEn: ["Only the sins for which we have not yet repented", "Only the public actions of national leaders", "Every event from the cradle to the grave — every careless word, every idle thought, every secret sin", "Only the good works of believers"],
+      optionsEs: ["Solo los pecados de los que aún no nos hemos arrepentido", "Solo las acciones públicas de líderes nacionales", "Cada evento desde la cuna hasta la tumba — cada palabra descuidada, cada pensamiento ocioso, cada pecado secreto", "Solo las buenas obras de los creyentes"],
+      explanationEn: "The Book of Deeds records every event of a life — every careless word, idle thought, and secret sin.", explanationEs: "El Libro de las Obras registra cada evento de una vida — cada palabra ociosa, pensamiento vano y pecado secreto.", correct: 2 },
+    { textEn: "13. In Amillennialism, what is the 'binding of Satan'?", textEs: "13. En el amilenialismo, ¿qué es la 'atadura de Satanás'?",
+      optionsEn: ["The restriction of his power to stop the Gospel from reaching the nations", "His chaining in the bottomless pit at the Second Coming", "His final defeat at Armageddon", "The end of all temptation in the believer's life"],
+      optionsEs: ["La restricción de su poder para impedir que el Evangelio alcance a las naciones", "Su encadenamiento en el abismo en la Segunda Venida", "Su derrota final en Armagedón", "El fin de toda tentación en la vida del creyente"],
+      explanationEn: "In Amillennialism the binding of Satan is the restriction of his power to stop the Gospel from reaching the nations.", explanationEs: "En el amilenarismo la atadura de Satanás es la restricción de su poder para impedir que el evangelio alcance a las naciones.", correct: 0 },
+    { textEn: "14. What was the Scofield Reference Bible's contribution to Premillennialism?", textEs: "14. ¿Cuál fue la contribución de la Biblia de Referencia Scofield al premilenialismo?",
+      optionsEn: ["It introduced the doctrine for the first time in church history", "It gave the view massive traction in the American church by popularizing the dispensational framework", "It rejected Premillennialism in favor of Amillennialism", "It limited the view to academic seminaries"],
+      optionsEs: ["Introdujo la doctrina por primera vez en la historia de la iglesia", "Le dio a la visión una tracción masiva en la iglesia americana al popularizar el marco dispensacional", "Rechazó el premilenialismo en favor del amilenialismo", "Limitó la visión a seminarios académicos"],
+      explanationEn: "The Scofield Reference Bible gave Premillennialism massive traction in the American church through its dispensational notes.", explanationEs: "La Biblia de referencia Scofield dio al premilenarismo gran difusión en la iglesia estadounidense mediante sus notas dispensacionales.", correct: 1 },
+    { textEn: "15. Which historical events shattered Postmillennial optimism?", textEs: "15. ¿Qué eventos históricos destruyeron el optimismo postmilenialista?",
+      optionsEn: ["The Protestant Reformation and the Council of Trent", "The fall of Constantinople and the Crusades", "The American and French Revolutions", "World War I, World War II, and the Holocaust"],
+      optionsEs: ["La Reforma Protestante y el Concilio de Trento", "La caída de Constantinopla y las Cruzadas", "Las revoluciones americana y francesa", "La Primera Guerra Mundial, la Segunda Guerra Mundial y el Holocausto"],
+      explanationEn: "World War I, World War II, and the Holocaust shattered the Postmillennial optimism that the world was naturally getting better.", explanationEs: "La Primera y Segunda Guerra Mundial y el Holocausto destrozaron el optimismo posmilenarista de que el mundo mejoraba por sí solo.", correct: 3 },
+    { textEn: "16. What three things do all major millennial views share?", textEs: "16. ¿Qué tres cosas comparten todas las principales posiciones milenialistas?",
+      optionsEn: ["Agreement on the timing of the rapture, the identity of Antichrist, and the date of Armageddon", "A common rejection of literal interpretation of Old Testament prophecy", "Christ's personal and visible return, every human standing before the throne, and the Lamb's Book of Life as the only ledger that matters", "Belief in seven dispensations, two resurrections, and three judgments"],
+      optionsEs: ["Acuerdo sobre el tiempo del arrebatamiento, la identidad del Anticristo y la fecha de Armagedón", "Un rechazo común de la interpretación literal de la profecía del AT", "El regreso personal y visible de Cristo, cada ser humano de pie ante el trono, y el Libro de la Vida del Cordero como el único registro que importa", "Creencia en siete dispensaciones, dos resurrecciones y tres juicios"],
+      explanationEn: "All major millennial views share that Christ will return, that all will face the throne, and that the Lamb's Book of Life decides that day.", explanationEs: "Todas las principales visiones milenarias comparten que Cristo volverá, que todos comparecerán ante el trono, y que el Libro de la Vida del Cordero decide aquel día.", correct: 2 },
+    { textEn: "17. Why is the Lamb's Book of Life called the most important volume?", textEs: "17. ¿Por qué se llama al Libro de la Vida del Cordero el volumen más importante?",
+      optionsEn: ["Because it lists the names of the twelve apostles in order", "Because it does not record our deeds but our relationship — names entered solely through faith in the shed blood of Jesus Christ", "Because it determines the seating order at the marriage supper", "Because it includes the family genealogies of the patriarchs"],
+      optionsEs: ["Porque enumera los nombres de los doce apóstoles en orden", "Porque no registra nuestras obras sino nuestra relación — nombres inscritos únicamente por la fe en la sangre derramada de Jesucristo", "Porque determina el orden de los asientos en las bodas del Cordero", "Porque incluye las genealogías familiares de los patriarcas"],
+      explanationEn: "The Lamb's Book of Life is the most important volume because it records relationship, not deeds — names written by faith in Christ's blood.", explanationEs: "El Libro de la Vida del Cordero es el volumen más importante porque registra la relación, no las obras — nombres escritos por la fe en la sangre de Cristo.", correct: 1 },
+    { textEn: "18. What is the consequence of the Book of Deeds for those not in Christ?", textEs: "18. ¿Cuál es la consecuencia del Libro de las Obras para los que no están en Cristo?",
+      optionsEn: ["It serves as the legal evidence for their separation from God", "It is destroyed before the great white throne judgment", "It is read aloud only to the angels", "It is rewritten with new entries on the last day"],
+      optionsEs: ["Sirve como la evidencia legal para su separación de Dios", "Es destruido antes del juicio del gran trono blanco", "Se lee en voz alta solo a los ángeles", "Se reescribe con nuevas entradas en el último día"],
+      explanationEn: "For those not in Christ, the Book of Deeds serves as the legal evidence for their separation from God.", explanationEs: "Para los que no están en Cristo, el Libro de las Obras sirve como la evidencia legal de su separación de Dios.", correct: 0 },
+    { textEn: "19. What is the 'Felix moment' Paul faced in Acts 24?", textEs: "19. ¿Qué es el 'momento Félix' que Pablo enfrentó en Hechos 24?",
+      optionsEn: ["Felix immediately repented and was baptized", "Felix had Paul executed for preaching the resurrection", "Felix denounced the gospel as foolishness", "Felix trembled when he heard the truth but postponed his decision for 'a more convenient time'"],
+      optionsEs: ["Félix se arrepintió inmediatamente y fue bautizado", "Félix mandó ejecutar a Pablo por predicar la resurrección", "Félix denunció el evangelio como necedad", "Félix tembló al oír la verdad pero pospuso su decisión para 'un momento más conveniente'"],
+      explanationEn: "The Felix moment in Acts 24 is when a person trembles at the truth but delays the decision for a more convenient time.", explanationEs: "El momento de Félix en Hechos 24 es cuando una persona tiembla ante la verdad pero demora la decisión para un tiempo más conveniente.", correct: 3 },
+    { textEn: "20. What is the central pastoral takeaway of Revelation regardless of millennial view?", textEs: "20. ¿Cuál es la enseñanza pastoral central del Apocalipsis independientemente de la visión milenialista?",
+      optionsEn: ["The Antichrist will arise from a specific modern political bloc", "Christians must withdraw from culture to escape coming wrath", "The Spirit and the Bride say 'Come' — the book is finally an invitation, and the question that matters is whether your name is written in the Book", "Only those who correctly identify the millennial timeline will be saved"],
+      optionsEs: ["El Anticristo surgirá de un bloque político moderno específico", "Los cristianos deben retirarse de la cultura para escapar de la ira venidera", "El Espíritu y la Esposa dicen 'Ven' — el libro es finalmente una invitación, y la pregunta que importa es si tu nombre está escrito en el Libro", "Solo los que identifiquen correctamente la cronología milenarista serán salvos"],
+      explanationEn: "The central pastoral takeaway is that Revelation is an invitation: the Spirit and the Bride say Come — is your name in the Book?", explanationEs: "La enseñanza pastoral central es que Apocalipsis es una invitación: el Espíritu y la Esposa dicen Ven — ¿está tu nombre en el Libro?", correct: 2 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Compare the three millennial views (Premillennialism, Postmillennialism, Amillennialism). What does each say about the timing and nature of the thousand years?", textEs: "21. Compare las tres visiones milenialistas (premilenialismo, postmilenialismo, amilenialismo). ¿Qué dice cada una sobre el tiempo y la naturaleza de los mil años?",
+      kw_en: ["premillennialism", "postmillennialism", "amillennialism", "before", "after", "symbolic", "literal"], kw_es: ["premilenialismo", "postmilenialismo", "amilenialismo", "antes", "despues", "simbolico", "literal"],
+      modelEn: "The three millennial views differ chiefly on the timing and nature of the thousand years. Premillennialism reads Revelation 19–20 literally and holds that Christ returns before a literal earthly reign. Postmillennialism holds that Christ returns after a golden age the Gospel brings about. Amillennialism takes the thousand years as symbolic of Christ's present spiritual reign. The unit gives equal reverence to all three, since they do not divide fellowship.", modelEs: "Las tres visiones milenarias difieren principalmente en el tiempo y la naturaleza de los mil años. El premilenarismo lee Apocalipsis 19–20 literalmente y sostiene que Cristo vuelve antes de un reinado terrenal literal. El posmilenarismo sostiene que Cristo vuelve después de una edad de oro que el evangelio produce. El amilenarismo toma los mil años como símbolo del reinado espiritual presente de Cristo. La unidad da igual reverencia a las tres, pues no dividen el compañerismo." },
+    { textEn: "22. Explain why the Scofield Reference Bible was so influential in American Premillennialism.", textEs: "22. Explique por qué la Biblia de Referencia Scofield fue tan influyente en el premilenialismo americano.",
+      kw_en: ["scofield", "dispensations", "american", "premillennialism", "popularized"], kw_es: ["scofield", "dispensaciones", "americana", "premilenialismo", "popularizo"],
+      modelEn: "The Scofield Reference Bible popularized Premillennialism in the American church. By printing dispensational notes alongside the text, it categorized history into Dispensations and taught readers to see the present as the Church Age preceding the Kingdom Age. Because it was so widely used, it spread the premillennial framework through American churches more effectively than any single book.", modelEs: "La Biblia de referencia Scofield popularizó el premilenarismo en la iglesia estadounidense. Al imprimir notas dispensacionales junto al texto, clasificó la historia en Dispensaciones y enseñó a los lectores a ver el presente como la Era de la Iglesia que precede a la Era del Reino. Por ser tan usada, difundió el marco premilenarista por las iglesias estadounidenses con más eficacia que ningún otro libro." },
+    { textEn: "23. Why did the events of World War I, World War II, and the Holocaust create a crisis for Postmillennialism?", textEs: "23. ¿Por qué los eventos de la Primera y Segunda Guerra Mundial y el Holocausto crearon una crisis para el postmilenialismo?",
+      kw_en: ["world war", "holocaust", "optimism", "postmillennialism", "shattered"], kw_es: ["guerra mundial", "holocausto", "optimismo", "postmilenialismo", "destruyo"],
+      modelEn: "Postmillennialism rested on the optimism that the world was steadily getting better as the Gospel spread. World War I, World War II, and the Holocaust shattered that optimism, for the evidence of global slaughter made it hard to claim the world was naturally improving. The crisis led many to shift toward more rescue-oriented frameworks, though Postmillennialism remained vital for those emphasizing the Church's present authority.", modelEs: "El posmilenarismo descansaba en el optimismo de que el mundo mejoraba constantemente al difundirse el evangelio. La Primera y Segunda Guerra Mundial y el Holocausto destrozaron ese optimismo, pues la evidencia de la matanza global hizo difícil afirmar que el mundo mejoraba por sí solo. La crisis llevó a muchos a desplazarse hacia marcos más orientados al rescate, aunque el posmilenarismo siguió siendo vital para quienes recalcan la autoridad presente de la Iglesia." },
+    { textEn: "24. How does Amillennialism understand the original audience of Revelation, and why does that matter for interpretation?", textEs: "24. ¿Cómo entiende el amilenialismo a la audiencia original del Apocalipsis, y por qué importa eso para la interpretación?",
+      kw_en: ["seven churches", "asia minor", "persecution", "roman", "code", "beast"], kw_es: ["siete iglesias", "asia menor", "persecucion", "romano", "codigo", "bestia"],
+      modelEn: "Amillennialism understands Revelation as deeply historical, written to seven real churches in Asia Minor crushed under Roman persecution. John wrote in the recognized apocalyptic-prophetic genre, drawing heavily on Old Testament imagery such as beasts, numbers, thrones, and cosmic conflict. Amillennial interpreters commonly see the Beast as referring in the first instance to Roman imperial power and emperor worship, while also seeing a recurring pattern of anti-Christian political power. The message assured persecuted believers that such opposition would not have the final word.", modelEs: "El amilenarismo entiende Apocalipsis como profundamente histórico, escrito a siete iglesias reales en Asia Menor aplastadas bajo la persecución romana. Juan escribió en el género apocalíptico-profético reconocido, apoyándose ampliamente en imágenes del Antiguo Testamento como bestias, números, tronos y conflicto cósmico. Los intérpretes amilenialistas suelen ver a la Bestia como una referencia, en primera instancia, al poder imperial romano y al culto al emperador, mientras reconocen también un patrón recurrente de poder político anticristiano. El mensaje aseguraba a los creyentes perseguidos que tal oposición no tendría la última palabra." },
+    { textEn: "25. Explain the difference between the 'Book of Deeds' and the 'Lamb's Book of Life.' What is recorded in each and how does one enter each?", textEs: "25. Explique la diferencia entre el 'Libro de las Obras' y el 'Libro de la Vida del Cordero.' ¿Qué se registra en cada uno y cómo se entra a cada uno?",
+      kw_en: ["book of deeds", "lamb", "relationship", "faith", "blood", "separation"], kw_es: ["libro de las obras", "cordero", "relacion", "fe", "sangre", "separacion"],
+      modelEn: "The Book of Deeds and the Lamb's Book of Life record two different things. The Book of Deeds is the exhaustive record of every event of a life, and judged against absolute holiness it shows all have fallen short, serving as legal evidence of separation from God for those not in Christ. The Lamb's Book of Life records relationship rather than deeds; a name is written there solely through faith in the shed blood of the Lamb.", modelEs: "El Libro de las Obras y el Libro de la Vida del Cordero registran dos cosas distintas. El Libro de las Obras es el registro exhaustivo de cada evento de una vida, y juzgado contra la santidad absoluta muestra que todos han fallado, sirviendo como evidencia legal de separación de Dios para los que no están en Cristo. El Libro de la Vida del Cordero registra la relación más que las obras; un nombre se escribe allí únicamente por la fe en la sangre derramada del Cordero." },
+    { textEn: "26. What does it mean that 'to delay a decision is to decide'? Use the example of Felix in Acts 24.", textEs: "26. ¿Qué significa que 'posponer una decisión es decidir'? Use el ejemplo de Félix en Hechos 24.",
+      kw_en: ["felix", "acts 24", "tremble", "convenient", "decide", "delay"], kw_es: ["felix", "hechos 24", "tiembla", "conveniente", "decidir", "posponer"],
+      modelEn: "To say that to delay a decision is to decide means that putting off the choice for Christ is itself a choice against Him. The example is Felix in Acts 24, who trembled when he heard Paul but delayed for a more convenient time. History shows that for many that convenient time never comes, so the delay becomes a permanent refusal. The decision for Christ must be made now, not postponed.", modelEs: "Decir que demorar una decisión es decidir significa que posponer la elección por Cristo es en sí una elección en Su contra. El ejemplo es Félix en Hechos 24, que tembló al oír a Pablo pero demoró para un tiempo más conveniente. La historia muestra que para muchos ese tiempo conveniente nunca llega, así que la demora se vuelve un rechazo permanente. La decisión por Cristo debe tomarse ahora, no posponerse." },
+    { textEn: "27. Why is the absence of a temple in the New Jerusalem (Revelation 21) theologically significant?", textEs: "27. ¿Por qué es teológicamente significativa la ausencia de templo en la Nueva Jerusalén (Apocalipsis 21)?",
+      kw_en: ["new jerusalem", "temple", "lord god", "lamb", "sacred presence"], kw_es: ["nueva jerusalen", "templo", "señor dios", "cordero", "presencia sagrada"],
+      modelEn: "The New Jerusalem of Revelation 21 has no temple, and that is theologically significant. In the old order the temple was the one place where sacred space met the people; but in the New Jerusalem the Lord God Almighty and the Lamb are themselves its temple. It is the final replacement of sacred space with sacred presence — you do not need a building when the Builder lives among His people.", modelEs: "La Nueva Jerusalén de Apocalipsis 21 no tiene templo, y eso es teológicamente significativo. En el orden antiguo el templo era el único lugar donde el espacio sagrado se encontraba con el pueblo; pero en la Nueva Jerusalén el Señor Dios Todopoderoso y el Cordero son ellos mismos su templo. Es el reemplazo final del espacio sagrado por la presencia sagrada — no se necesita un edificio cuando el Constructor vive entre Su pueblo." },
+    { textEn: "28. What are the three non-negotiable pastoral truths that all millennial views share?", textEs: "28. ¿Cuáles son las tres verdades pastorales no negociables que comparten todas las visiones milenialistas?",
+      kw_en: ["personally", "visibly", "throne", "lamb", "book of life"], kw_es: ["personalmente", "visiblemente", "trono", "cordero", "libro de la vida"],
+      modelEn: "Three pastoral truths hold across every millennial view. First, Christ will return personally and visibly, not as metaphor or feeling. Second, every human being will stand before the throne, rich and poor, famous and forgotten alike. Third, the Lamb's Book of Life is the only ledger that matters on that day. These shared truths matter more than any chart, and the urgent question remains whether one's name is written in the Book.", modelEs: "Tres verdades pastorales se sostienen en toda visión milenaria. Primero, Cristo volverá personal y visiblemente, no como metáfora o sentimiento. Segundo, todo ser humano comparecerá ante el trono, ricos y pobres, famosos y olvidados por igual. Tercero, el Libro de la Vida del Cordero es el único registro que importa aquel día. Estas verdades compartidas importan más que cualquier diagrama, y la pregunta urgente sigue siendo si el nombre de uno está escrito en el Libro." },
+    { textEn: "29. How does the metaphor of the 'salesman asking for the sale' sharpen the urgency of evangelism?", textEs: "29. ¿Cómo agudiza la metáfora del 'vendedor pidiendo la venta' la urgencia de la evangelización?",
+      kw_en: ["salesman", "sale", "decision", "urgent", "eternity", "policy"], kw_es: ["vendedor", "venta", "decision", "urgente", "eternidad", "poliza"],
+      modelEn: "The salesman metaphor sharpens the urgency of the gospel call. A skilled life-insurance agent does not merely explain the policy and leave a phone number; he asks for the sale, because the stakes are too high to wait. The believer offers a whole-life policy of eternal life that is more crucial than any earthly one, and the decision cannot be left for a convenient time. Because eternity hangs on it, the appeal must be urgent and the sale must be asked for now.", modelEs: "La metáfora del vendedor agudiza la urgencia del llamado del evangelio. Un agente de seguros de vida hábil no solo explica la póliza y deja un número de teléfono; pide la venta, porque lo que está en juego es demasiado alto para esperar. El creyente ofrece una póliza de vida entera de vida eterna más crucial que cualquiera terrenal, y la decisión no puede dejarse para un tiempo conveniente. Como la eternidad depende de ello, la apelación debe ser urgente y la venta debe pedirse ahora." },
+    { textEn: "30. Synthesize: What is the heart of every millennial position when Revelation is read pastorally rather than academically?", textEs: "30. Sintetice: ¿Cuál es el corazón de toda posición milenialista cuando el Apocalipsis se lee pastoralmente y no académicamente?",
+      kw_en: ["invitation", "spirit", "bride", "come", "name", "book", "pastoral"], kw_es: ["invitacion", "espiritu", "esposa", "ven", "nombre", "libro", "pastoral"],
+      modelEn: "Read pastorally rather than academically, the heart of every millennial position is that Revelation is an invitation. The Spirit and the Bride say Come, and the thirsty are invited to take the water of life freely. If a student finishes the course knowing only when the Antichrist arrives, the course has failed; the real question is whether one's name is written in the Book of Life. Revelation ends not with a timeline but with an open door.", modelEs: "Leído pastoral y no académicamente, el corazón de toda posición milenaria es que Apocalipsis es una invitación. El Espíritu y la Esposa dicen Ven, y al sediento se le invita a tomar del agua de la vida gratuitamente. Si un estudiante termina el curso sabiendo solo cuándo llega el Anticristo, el curso ha fallado; la verdadera pregunta es si el nombre de uno está escrito en el Libro de la Vida. Apocalipsis termina no con una cronología sino con una puerta abierta." }
+];
+
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_nt_u12_mc_passed';
+const SA_LOCK_KEY = 'cts_nt_u12_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0')
+        : parseInt(localStorage.getItem('cts_nt_u12_lockout') || '0');
+}
+let lockUntil = activeLockUntil();
+let unitPassed = progress.unit12 || false;
+
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function isEs() { return document.body.classList.contains('lang-es'); }
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer as left-boundary prefix.
+// Pass standard is >=3 hits (NOT all keywords).
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function kwHitCount(normAns, keys) { return keys.filter(function(k){ return kwHit(normAns, k); }).length; }
+
+function checkAllUnitsPassed() {
+    for (let i = 1; i <= TOTAL_UNITS; i++) { if (!progress[`unit${i}`]) return false; }
+    return true;
+}
+
+function syncTrackUI() {
+    document.querySelectorAll('input[name="ctsTrack"]').forEach(r => { r.checked = (r.value === currentTrack); });
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = isEs() ? 'Opción Múltiple (Preguntas 1–20)' : 'Multiple Choice (Questions 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (!isEs()) ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (!isEs()) ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (!isEs()) ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((!isEs()) ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = isEs() ? 'Respuesta Corta (Preguntas 21–30) — Pista Maestría en Divinidad' : 'Short Answer (Questions 21–30) — Master of Divinity Track';
+    container.appendChild(kwTitle);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = isEs() ? q.textEs : q.textEn;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = isEs() ? 'Escriba su respuesta aquí...' : 'Type your answer here...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = isEs() ? 'Verificar Respuesta' : 'Check Answer';
+        const fb = document.createElement('div');
+        fb.className = 'feedback-text';
+        fb.style.marginTop = '8px';
+        const model = document.createElement('div');
+        model.className = 'model-answer';
+        model.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ansRaw = ta.value.trim();
+            const ans = normalize(ansRaw);
+            const keys = isEs() ? q.kw_es : q.kw_en;
+            const hits = kwHitCount(ans, keys);
+            if (ansRaw.length < 100) {
+                fb.innerHTML = isEs() ? 'Escriba una respuesta más completa (al menos una oración).' : 'Please write a more complete answer (at least a sentence).';
+                fb.className = 'feedback-text incorrect';
+            } else if (hits >= 3) {
+                fb.innerHTML = isEs() ? `✓ ¡Bien! Su respuesta toca ${hits} conceptos clave.` : `✓ Good! Your answer touches ${hits} key concepts.`;
+                fb.className = 'feedback-text correct';
+                kwAnswers[idx] = ansRaw;
+            } else {
+                fb.innerHTML = isEs() ? `Va bien — toca ${hits}. Apunte a al menos 3 conceptos clave; revise la lección y vuelva a intentarlo.` : `Good start — you touched ${hits}. Aim for at least 3 key concepts; review the lesson and try again.`;
+                fb.className = 'feedback-text incorrect';
+            }
+            const mk = isEs() ? q.modelEs : q.modelEn;
+            if (mk) {
+                model.innerHTML = (isEs() ? '<strong>Respuesta modelo — estúdiela:</strong> ' : '<strong>Model answer — study this:</strong> ') + mk;
+                model.style.display = 'block';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(model);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+}
+
+function triggerRedirect() {
+    const target = checkAllUnitsPassed() ? 'CTSNTCertificate.html' : NEXT_URL;
+    const result = document.getElementById('examResult');
+    let seconds = 3;
+    function tick() {
+        const msg = isEs()
+            ? `Redirigiendo al certificado en ${seconds}...`
+            : `Redirecting to your certificate in ${seconds}...`;
+        result.innerHTML = `<div class='redirect-notice'>✅ ${isEs() ? '¡APROBADO!' : 'PASSED!'} ${msg}</div>`;
+        if (seconds <= 0) { location.href = target; return; }
+        seconds--;
+        setTimeout(tick, 1000);
+    }
+    tick();
+}
+
+function submitExam() {
+    const result = document.getElementById('examResult');
+    if (unitPassed) {
+        result.innerHTML = `<span style='color:green'>${isEs() ? '✅ Unidad ya aprobada.' : '✅ Unit already passed!'}</span>`;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        result.innerHTML = `<span style='color:red'>${isEs() ? `⏰ Bloqueado por ${wait} minutos más.` : `⏰ Locked for ${wait} more minutes.`}</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) { promptName(); return; }
+
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    let advCorrect = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = normalize(kwAnswers[i] || '');
+        const keys = isEs() ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        if (kwHitCount(ans, keys) >= 3 && ans.length >= 100) advCorrect++;
+    }
+
+    const mcPct = correctMC / 20;
+    const saPct = advCorrect / 10;
+    const mcPass = mcPct >= PASS_THRESHOLD;
+    const saPass = saPct >= PASS_THRESHOLD;
+
+    function passUnit() {
+        unitPassed = true;
+        progress.unit12 = true;
+        localStorage.setItem('cts_nt_progress', JSON.stringify(progress));
+        localStorage.setItem('nt_unit12_passed', 'true');
+        localStorage.removeItem('cts_nt_u12_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        updateProgressGrid();
+        triggerRedirect();
+    }
+
+    if (!isMastersLevel()) {
+        if (mcPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem('cts_nt_u12_lockout', String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Necesita 18/20 para Certificado.`
+                : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Need 18/20 for Certificate.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        if (saPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ✓ ya guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+                : `MC: ✓ already banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Su opción múltiple está a salvo. Puede reintentar la sección de respuesta corta en ${mins} min.` : `Your multiple-choice pass is safe. You can retry the short-answer section in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPass && saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit();
+    } else if (mcPass && !saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ aprobado y guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ passed and banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Al reintentar en ${mins} min, solo necesitará la sección de respuesta corta — el OM permanece aprobado.` : `When you retry in ${mins} min, you'll only need the short-answer section — MC stays passed.`}</span>`;
+    } else {
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem('cts_nt_u12_lockout', String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 18/20 Y 9/10 para M.Div.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 18/20 AND 9/10 for M.Div.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+    }
+}
+
+function resetExam() {
+    const msg = isEs()
+        ? '¿Restablecer el examen? Esto borrará sus respuestas en pantalla y eliminará el bloqueo de 15 minutos. Las unidades ya aprobadas no se afectan.'
+        : 'Reset the exam? This will clear your on-screen answers and remove the 15-minute lockout. Already-passed units are not affected.';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill('');
+    lockUntil = 0;
+    mcPreviouslyPassed = false;
+    localStorage.removeItem('cts_nt_u12_lockout');
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+document.querySelectorAll('input[name="ctsTrack"]').forEach(r => {
+    r.addEventListener('change', e => {
+        currentTrack = e.target.value;
+        localStorage.setItem('cts_track', currentTrack);
+    });
+});
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.className = 'lang-es';
+        this.textContent = 'English';
+    } else {
+        document.body.className = 'lang-en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+syncTrackUI();
+renderQuestions();
+if (unitPassed) document.getElementById('examResult').innerHTML = `<span style='color:green'>${isEs() ? '✅ Unidad 12 ya aprobada.' : '✅ Unit 12 already passed.'}</span>`;
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSNTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Hermeneutics — Unit 11: Tracking Christ Through the Whole Bible</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Georgia,"Times New Roman",serif;line-height:1.65;color:#222;background:#f6f3ec;padding-bottom:3rem}
+  body.lang-en .lang-es,body.lang-es .lang-en{display:none}
+  .container{max-width:780px;margin:0 auto;padding:1.25rem}
+  header{background:#3d2b1f;color:#f6f3ec;padding:1rem 1.25rem;position:sticky;top:0;z-index:10;border-bottom:3px solid #b08240}
+  header .hwrap{max-width:780px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;justify-content:space-between}
+  header h1{font-size:1.05rem;margin:0;font-weight:600;letter-spacing:.02em}
+  header .toggle{background:#b08240;color:#3d2b1f;border:none;padding:.4rem .8rem;border-radius:4px;font-weight:700;cursor:pointer;font-family:inherit;font-size:.85rem}
+  header .toggle:hover{background:#c79352}
+  .progress-grid{display:flex;flex-wrap:wrap;gap:.3rem;margin:.75rem auto 0;max-width:780px}
+  .pill{width:2.2rem;height:2.2rem;border-radius:50%;background:#5a4332;color:#f6f3ec;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;border:2px solid transparent}
+  .pill.done{background:#6b8e4e;border-color:#9bc176}
+  .pill.current{border-color:#b08240;background:#b08240;color:#3d2b1f}
+  h1.unit-title{font-size:1.7rem;color:#3d2b1f;margin:1.5rem 0 .25rem;line-height:1.2}
+  h2.unit-sub{font-size:1.1rem;color:#7a5a3a;margin:0 0 1.5rem;font-style:italic;font-weight:normal}
+  h3{font-size:1.2rem;color:#3d2b1f;margin-top:2rem;border-bottom:1px solid #d4c5a8;padding-bottom:.3rem}
+  p{margin:.85rem 0}
+  .scripture{background:#fff7e8;border-left:4px solid #b08240;padding:.75rem 1rem;margin:1rem 0;font-style:italic}
+  .card{background:#fff;border:1px solid #d4c5a8;border-radius:8px;padding:1.25rem;margin:1.5rem 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .card h3{margin-top:0;border:none;color:#3d2b1f}
+  label{display:block;margin:.5rem 0 .2rem;font-weight:600;color:#3d2b1f}
+  input[type=text],input[type=email],textarea,select{width:100%;padding:.55rem;border:1px solid #c4b598;border-radius:4px;font-family:inherit;font-size:1rem;background:#fff}
+  textarea{min-height:5rem;resize:vertical}
+  .btn{background:#3d2b1f;color:#f6f3ec;border:none;padding:.65rem 1.2rem;border-radius:4px;cursor:pointer;font-family:inherit;font-size:1rem;font-weight:600;margin:.3rem .3rem .3rem 0}
+  .btn:hover{background:#5a4332}
+  .btn.primary{background:#b08240;color:#3d2b1f}
+  .btn.primary:hover{background:#c79352}
+  .btn.danger{background:#8b3a2c;color:#fff}
+  .btn.danger:hover{background:#a54838}
+  .btn:disabled{background:#999;cursor:not-allowed}
+  .track-buttons{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+  .track-buttons .btn{flex:1;min-width:140px}
+  .track-buttons .btn.selected{outline:3px solid #6b8e4e}
+  .question{margin:1.25rem 0;padding:1rem;background:#fff;border:1px solid #d4c5a8;border-radius:6px}
+  .question p.qtext{font-weight:600;margin-top:0}
+  .option{display:block;margin:.35rem 0;padding:.5rem .75rem;background:#f6f3ec;border:1px solid #d4c5a8;border-radius:4px;cursor:pointer}
+  .option:hover{background:#ede6d2}
+  .option input{margin-right:.5rem}
+  .option.correct-answer{background:#dcebc4;border-color:#6b8e4e}
+  .option.wrong-answer{background:#f4d4cc;border-color:#8b3a2c}
+  .feedback{margin-top:.6rem;padding:.6rem .8rem;border-radius:4px;font-size:.95rem}
+  .feedback.correct{background:#dcebc4;border-left:4px solid #6b8e4e}
+  .feedback.incorrect{background:#f4d4cc;border-left:4px solid #8b3a2c}
+  .sa-feedback{margin-top:.4rem;font-size:.9rem;font-style:italic;color:#5a4332}
+  .sa-model{margin-top:.6rem;padding:.8rem 1rem;background:#fdf6e3;border:1px solid #e6cf7a;border-left:5px solid #f4c542;border-radius:6px;font-size:.95rem;color:#3a3026}
+  .sa-model-label{font-weight:700;color:#8a6d1f;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.5px;font-size:.78rem}
+  .sa-feedback.pass{color:#3a5a25}
+  .sa-feedback.fail{color:#7a2618}
+  .results{background:#fff;border:2px solid #b08240;border-radius:8px;padding:1.25rem;margin:1.5rem 0}
+  .results.pass{border-color:#6b8e4e;background:#f0f7e3}
+  .results.fail{border-color:#8b3a2c;background:#fbeae5}
+  .results h2{margin-top:0}
+  .lockout{background:#fbeae5;border:2px solid #8b3a2c;border-radius:8px;padding:1.25rem;margin:1.5rem 0;text-align:center}
+  .lockout .timer{font-size:1.4rem;font-weight:700;color:#8b3a2c;margin:.5rem 0}
+  .hidden{display:none !important}
+  footer{text-align:center;padding:2rem 1rem 1rem;font-size:.85rem;color:#7a5a3a}
+  @media print{
+    body{background:#fff;color:#000}
+    header,.toggle,.progress-grid,.btn,#exam-section,#results-block,#lockout-block,#registration-card,#track-card,footer{display:none !important}
+    .container{max-width:none;padding:0}
+    body.lang-en .lang-es,body.lang-es .lang-en{display:none}
+    h1.unit-title,h3{color:#000;page-break-after:avoid}
+    .scripture{border-left:2px solid #000;background:none}
+  }
+    .sa-check-btn{margin:.4rem 0;padding:.4rem .9rem;font-size:.9rem}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+
+<header>
+  <div class="hwrap">
+    <h1>
+      <span class="lang-en">CTS Hermeneutics &middot; Unit 11</span>
+      <span class="lang-es">Hermenéutica CTS &middot; Unidad 11</span>
+    </h1>
+    <button class="toggle" onclick="toggleLang()">
+      <span class="lang-en">Español</span>
+      <span class="lang-es">English</span>
+    </button>
+  </div>
+  <div class="progress-grid" id="progress-grid"></div>
+</header>
+
+<div class="container">
+
+  <h1 class="unit-title">
+    <span class="lang-en">Unit 11: Tracking Christ Through the Whole Bible</span>
+    <span class="lang-es">Unidad 11: Rastreando a Cristo a través de toda la Biblia</span>
+  </h1>
+  <h2 class="unit-sub">
+    <span class="lang-en">Dr. Wayne Cook &middot; Chapala Theological Seminary</span>
+    <span class="lang-es">Dr. Wayne Cook &middot; Seminario Teológico de Chapala</span>
+  </h2>
+  <!-- ============================================================ -->
+  <!-- TRACK SELECTION                                              -->
+  <!-- ============================================================ -->
+  <section class="card" id="track-card">
+    <h3>
+      <span class="lang-en">Choose your track</span>
+      <span class="lang-es">Escoja su modalidad</span>
+    </h3>
+    <p>
+      <span class="lang-en"><strong>Certificate of Ministry:</strong> Twenty multiple-choice questions per unit. Pass at 18 of 20 (90&percnt;).</span>
+      <span class="lang-es"><strong>Certificado de Ministerio:</strong> Veinte preguntas de opción múltiple por unidad. Aprobación con 18 de 20 (90&percnt;).</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>Master of Divinity:</strong> Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice <em>and</em> 9 of 10 short-answer, scored independently.</span>
+      <span class="lang-es"><strong>Maestría en Divinidad:</strong> Las mismas veinte preguntas de opción múltiple, más diez preguntas de respuesta breve. Aprobación con 18 de 20 de opción múltiple <em>y</em> 9 de 10 de respuesta breve, evaluadas de forma independiente.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>Master of Theology:</strong> Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice <em>and</em> 9 of 10 short-answer, scored independently.</span>
+      <span class="lang-es"><strong>Maestría en Teología:</strong> Evaluada exactamente como la Maestría en Divinidad: las mismas veinte preguntas de opción múltiple más diez preguntas de respuesta breve, aprobando con 18 de 20 de opción múltiple <em>y</em> 9 de 10 de respuesta breve, evaluadas de forma independiente.</span>
+    </p>
+    <div class="track-buttons">
+      <button class="btn" id="track-cert-btn" onclick="setTrack('cert')">
+        <span class="lang-en">Certificate</span>
+        <span class="lang-es">Certificado</span>
+      </button>
+      <button class="btn" id="track-mdiv-btn" onclick="setTrack('mdiv')">
+        <span class="lang-en">M.Div</span>
+        <span class="lang-es">Maestría</span>
+      </button>
+      <button class="btn" id="track-thm-btn" onclick="setTrack('thm')">
+        <span class="lang-en">Th.M</span>
+        <span class="lang-es">Maestría en Teología</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TEACHING CONTENT                                             -->
+  <!-- ============================================================ -->
+  <article class="teaching">
+
+    <h3>
+      <span class="lang-en">1. Paul on Mars Hill</span>
+      <span class="lang-es">1. Pablo en el Areópago</span>
+    </h3>
+    <p>
+      <span class="lang-en">Paul walked into Athens and saw statues to every Greek god a man could imagine. There was Apollo, god of the sun. There was Bacchus, god of wine. There was Aphrodite, goddess of love. There was Mars, god of war. And then, just to make sure they had not offended any deity by accident, there was an altar inscribed <em>To the Unknown God</em>. The Athenians were religious in every direction. They were also, by Paul&rsquo;s reckoning, lost. He had a single sermon to preach to them, and a hostile audience of Stoics and Epicureans. He had to bring them, in a few minutes, from creation to Christ.</span>
+      <span class="lang-es">Pablo entró en Atenas y vio estatuas a cada dios griego que un hombre pudiera imaginar. Estaba Apolo, dios del sol. Estaba Baco, dios del vino. Estaba Afrodita, diosa del amor. Estaba Marte, dios de la guerra. Y luego, solo para asegurarse de que no habían ofendido a ninguna deidad por accidente, había un altar inscrito <em>Al Dios No Conocido</em>. Los atenienses eran religiosos en cada dirección. También estaban, según el cálculo de Pablo, perdidos. Tenía un solo sermón para predicarles, y una audiencia hostil de estoicos y epicúreos. Tenía que traerlos, en unos pocos minutos, de la creación a Cristo.</span>
+    </p>
+    <p>
+      <span class="lang-en">Notice what he did. He started where they were. <em>I see that you are religious. You even have a statue to the unknown God. Let me tell you about Him.</em> Then he reached for their own poets &mdash; <em>in Him we live and move and have our being</em> &mdash; and tracked the line forward to the Creator of all things, and to the resurrection of a Man through whom God will judge the world. The journey from <em>unknown god</em> to <em>risen Christ</em> took one sermon. That is the principle of this unit. <em>The whole Bible is one Christ-tracking story</em>. Every text in the Book belongs to that story. The pastor who can trace the line through the Bible can trace it through any single passage.</span>
+      <span class="lang-es">Note lo que hizo. Comenzó donde ellos estaban. <em>Veo que sois religiosos. Hasta tenéis una estatua al Dios no conocido. Déjenme contarles de Él.</em> Luego alcanzó a sus propios poetas &mdash; <em>en Él vivimos y nos movemos y existimos</em> &mdash; y trazó la línea hacia adelante hasta el Creador de todas las cosas, y hasta la resurrección de un Hombre por medio de quien Dios juzgará al mundo. El viaje del <em>dios no conocido</em> al <em>Cristo resucitado</em> tomó un solo sermón. Ése es el principio de esta unidad. <em>Toda la Biblia es una sola historia rastreando a Cristo</em>. Cada texto en el Libro pertenece a esa historia. El pastor que pueda trazar la línea a través de la Biblia puede trazarla a través de cualquier pasaje individual.</span>
+    </p>
+    <p>
+      <span class="lang-en">A word of caution belongs here before we go further, because this principle is easily misused. Saying that every text belongs to the one story that culminates in Christ is not the same as saying that every single verse is a direct prophecy, type, symbol, or reference to Jesus. Some passages point to Him directly, by promise or type or image, as the sections below will show. Others contribute to the story simply by being a true part of its unfolding &mdash; a law that reveals the holiness His righteousness would satisfy, a genealogy that traces the line His birth would complete, a wisdom saying that describes the good life His kingdom brings. Any route you draw from a text to Christ must still respect that text&rsquo;s own context and genre. Christ-centered preaching is not a license to ignore what a passage actually says in order to arrive at Him by a shortcut; it is the discipline of showing, honestly and from the text itself, where that passage stands in the one story He completes.</span>
+      <span class="lang-es">Aquí corresponde una palabra de precaución antes de continuar, porque este principio se malinterpreta con facilidad. Decir que todo texto pertenece a la única historia que culmina en Cristo no es lo mismo que decir que cada versículo individual es una profecía, tipo, símbolo o referencia directa a Jesús. Algunos pasajes apuntan a Él directamente, por promesa, tipo o imagen, como mostrarán las secciones siguientes. Otros contribuyen a la historia simplemente por ser una parte verdadera de su desarrollo &mdash; una ley que revela la santidad que Su justicia satisfaría, una genealogía que traza la línea que Su nacimiento completaría, un dicho de sabiduría que describe la vida buena que Su reino trae. Cualquier ruta que trace desde un texto hasta Cristo debe respetar todavía el contexto y el género propios de ese texto. La predicación centrada en Cristo no es una licencia para ignorar lo que un pasaje realmente dice con tal de llegar a Él por un atajo; es la disciplina de mostrar, honesta y desde el texto mismo, dónde se sitúa ese pasaje en la única historia que Él completa.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">2. The Whole Bible Is His Story</span>
+      <span class="lang-es">2. Toda la Biblia es Su historia</span>
+    </h3>
+    <p>
+      <span class="lang-en">On the Sunday afternoon of His resurrection, Jesus walked the road to Emmaus with two heartbroken disciples. They did not yet recognize Him. He asked what they had been talking about. They told Him about Jesus of Nazareth, whom they had hoped would redeem Israel and who had instead been crucified. Then Jesus did something that became the foundation for every Christ-centered sermon ever preached after Him:</span>
+      <span class="lang-es">En el domingo por la tarde de Su resurrección, Jesús caminó por el camino a Emaús con dos discípulos con el corazón roto. Aún no Lo reconocían. Preguntó de qué habían estado hablando. Le contaron sobre Jesús de Nazaret, a quien habían esperado redimiría a Israel y que en cambio había sido crucificado. Luego Jesús hizo algo que se volvió el fundamento para cada sermón centrado en Cristo predicado después de Él:</span>
+    </p>
+    <div class="scripture">
+      <span class="lang-en">&ldquo;And beginning at Moses and all the Prophets, He expounded to them in all the Scriptures the things concerning Himself.&rdquo; (Luke 24:27, NKJV)</span>
+      <span class="lang-es">&laquo;Y comenzando desde Moisés, y de todos los profetas, declarábales en todas las Escrituras lo que de él decían.&raquo; (Lucas 24:27, RVG)</span>
+    </div>
+    <p>
+      <span class="lang-en">All the Scriptures. The things concerning Himself. Jesus took the whole Old Testament &mdash; Moses, the Prophets, the Writings &mdash; and showed how every part of it had been pointing at Him. The seed of the woman, the ram in the thicket, the Passover Lamb, the manna, the rock, the bronze serpent, the son of David, the suffering servant of Isaiah, the new covenant of Jeremiah, the resurrection Job hoped for. Every chapter of the older Testament was a chapter <em>about Him</em>. By the time the two reached the inn, they would see it.</span>
+      <span class="lang-es">Todas las Escrituras. Las cosas referentes a Él. Jesús tomó todo el Antiguo Testamento &mdash; Moisés, los Profetas, los Escritos &mdash; y mostró cómo cada parte de él había estado apuntando a Él. La simiente de la mujer, el carnero en el zarzal, el Cordero Pascual, el maná, la roca, la serpiente de bronce, el hijo de David, el siervo sufriente de Isaías, el nuevo pacto de Jeremías, la resurrección que Job esperaba. Cada capítulo del Testamento más antiguo era un capítulo <em>acerca de Él</em>. Para cuando los dos llegaran al mesón, lo verían.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">3. The Macro-Arc of the Bible</span>
+      <span class="lang-es">3. El macroarco de la Biblia</span>
+    </h3>
+    <p>
+      <span class="lang-en">Before a pastor can track Christ through any single passage, he must know the shape of the whole story. Six movements organize the entire library. <em>Creation</em>: God made everything good. The world had a Maker, and the Maker had a purpose. <em>Fall</em>: man rebelled, the curse fell, and every chapter since carries the wreckage. <em>Israel</em>: God chose a covenant people through whom He would bring redemption to the whole world, and the long history of patriarchs, exodus, conquest, kings, exile, and return is the story of that people being prepared and pruned. <em>Christ</em>: God Himself entered the story as a man, lived without sin, died for our rebellion, and rose again to break the curse. <em>Church</em>: the gospel goes out from Jerusalem to Judea to Samaria to the ends of the earth, gathering a new people for God&rsquo;s name. <em>Consummation</em>: Christ returns, the curse is fully reversed, and the original Eden is restored as a city of God forever.</span>
+      <span class="lang-es">Antes de que un pastor pueda rastrear a Cristo a través de cualquier pasaje individual, debe conocer la forma de la historia entera. Seis movimientos organizan toda la biblioteca. <em>Creación</em>: Dios hizo todo bueno. El mundo tenía un Hacedor, y el Hacedor tenía un propósito. <em>Caída</em>: el hombre se rebeló, la maldición cayó, y cada capítulo desde entonces carga los escombros. <em>Israel</em>: Dios escogió un pueblo del pacto a través del cual traería la redención al mundo entero, y la larga historia de patriarcas, éxodo, conquista, reyes, exilio, y regreso es la historia de ese pueblo siendo preparado y podado. <em>Cristo</em>: Dios mismo entró en la historia como hombre, vivió sin pecado, murió por nuestra rebelión, y resucitó para romper la maldición. <em>Iglesia</em>: el evangelio sale de Jerusalén a Judea a Samaria a los confines de la tierra, reuniendo un nuevo pueblo para el nombre de Dios. <em>Consumación</em>: Cristo regresa, la maldición es revertida completamente, y el Edén original es restaurado como una ciudad de Dios para siempre.</span>
+    </p>
+    <p>
+      <span class="lang-en">Every passage in the Bible sits somewhere on this arc. The arc is the map. A Genesis story sits before Christ and forward-looks to Him. A Gospel passage has Him at its center. An Epistle unfolds what He did. Revelation looks forward to His return. The pastor without the map reads each passage as a stand-alone moment and misses what makes every passage a chapter <em>in His story</em>.</span>
+      <span class="lang-es">Cada pasaje en la Biblia se sienta en algún lugar de este arco. El arco es el mapa. Una historia del Génesis se sienta antes de Cristo y mira hacia adelante a Él. Un pasaje evangélico Lo tiene en su centro. Una epístola desenvuelve lo que Él hizo. Apocalipsis mira hacia adelante a Su regreso. El pastor sin el mapa lee cada pasaje como un momento independiente y pierde lo que hace de cada pasaje un capítulo <em>en Su historia</em>.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">4. Four Roads to Christ</span>
+      <span class="lang-es">4. Cuatro caminos a Cristo</span>
+    </h3>
+    <p>
+      <span class="lang-en">From any Old Testament passage, there are four reliable roads to Christ. <strong>Promise.</strong> God said it; Christ fulfilled it. Genesis 3:15, the seed of the woman; 2 Samuel 7, the son of David; Isaiah 53, the suffering servant; Jeremiah 31, the new covenant. The line runs straight from the promise to the Person. <strong>Type.</strong> A historical figure or event prefigures Christ in shape if not in identity. Adam is a type of the second Adam. Joseph is a type of the brother betrayed who saves his family. Moses is a type of the prophet who would come. The bronze serpent in the wilderness is a type Jesus Himself claimed. <strong>Image.</strong> The Bible uses pictures that Christ later inhabits. The Passover lamb. The manna. The rock that gave water. The high priest. The temple. He says, <em>I am the bread, I am the door, I am the way</em>, and every image He claims has a long Old Testament history that He is fulfilling. <strong>Presence.</strong> The pre-incarnate Christ appears throughout the Old Testament &mdash; the fourth Man in the fiery furnace, the Angel of the Lord wrestling Jacob, the Captain of the host meeting Joshua. The same Person who will be born in Bethlehem has been walking through Genesis already.</span>
+      <span class="lang-es">Desde cualquier pasaje del Antiguo Testamento, hay cuatro caminos confiables a Cristo. <strong>Promesa.</strong> Dios lo dijo; Cristo lo cumplió. Génesis 3:15, la simiente de la mujer; 2 Samuel 7, el hijo de David; Isaías 53, el siervo sufriente; Jeremías 31, el nuevo pacto. La línea corre derecho de la promesa a la Persona. <strong>Tipo.</strong> Una figura o evento histórico prefigura a Cristo en forma aunque no en identidad. Adán es tipo del segundo Adán. José es tipo del hermano traicionado que salva a su familia. Moisés es tipo del profeta que vendría. La serpiente de bronce en el desierto es un tipo que Jesús mismo reclamó. <strong>Imagen.</strong> La Biblia usa cuadros que Cristo luego habita. El cordero pascual. El maná. La roca que dio agua. El sumo sacerdote. El templo. Dice: <em>Yo soy el pan, Yo soy la puerta, Yo soy el camino</em>, y cada imagen que reclama tiene una larga historia en el Antiguo Testamento que Él está cumpliendo. <strong>Presencia.</strong> El Cristo preencarnado aparece a través del Antiguo Testamento &mdash; el cuarto Hombre en el horno de fuego, el Ángel del Señor luchando con Jacob, el Capitán del ejército encontrándose con Josué. La misma Persona que nacerá en Belén ya ha estado caminando por el Génesis.</span>
+    </p>
+    <p>
+      <span class="lang-en">For any Old Testament passage you will preach, ask which of the four roads connects it to Christ. Most passages have at least one. Some have all four. Passages that offer none of the four directly &mdash; a wisdom saying, a law code, a genealogy &mdash; still find their place in the larger story this unit has traced; even there, be honest about the difference between a passage that names Him and a passage that simply serves the story that leads to Him.</span>
+      <span class="lang-es">Para cualquier pasaje del Antiguo Testamento que predicará, pregunte cuál de los cuatro caminos lo conecta con Cristo. La mayoría de los pasajes tienen al menos uno. Algunos tienen los cuatro. Los pasajes que no ofrecen ninguno de los cuatro directamente &mdash; un dicho de sabiduría, un código legal, una genealogía &mdash; todavía encuentran su lugar en la historia más amplia que esta unidad ha trazado; aun ahí, sea honesto sobre la diferencia entre un pasaje que Lo nombra y un pasaje que simplemente sirve a la historia que conduce a Él.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">5. The Man of Vision in Cochrane</span>
+      <span class="lang-es">5. El Hombre de Visión en Cochrane</span>
+    </h3>
+    <p>
+      <span class="lang-en">Outside the town of Cochrane in Alberta, Canada, there is a bronze statue called <em>The Man of Vision</em>. It depicts a cowboy on horseback at the original Cochrane Ranch site, looking out over the Bow Valley. The statue is the most visible sight in town. If the apostle Paul had traveled through Cochrane the way he traveled through Athens, he would have stood beneath that statue and reached for the gospel through it. <em>I see your Man of Vision watches over the valley. Let me tell you about the original Man of Vision.</em> He would have begun where the town was and worked toward Christ.</span>
+      <span class="lang-es">Afuera del pueblo de Cochrane en Alberta, Canadá, hay una estatua de bronce llamada <em>El Hombre de Visión</em>. Representa a un vaquero a caballo en el sitio del Rancho Cochrane original, mirando sobre el Valle Bow. La estatua es la vista más visible del pueblo. Si el apóstol Pablo hubiera viajado por Cochrane de la manera en que viajó por Atenas, se habría parado debajo de esa estatua y habría alcanzado el evangelio a través de ella. <em>Veo que su Hombre de Visión vigila el valle. Déjenme contarles del Hombre de Visión original.</em> Habría comenzado donde el pueblo estaba y trabajado hacia Cristo.</span>
+    </p>
+    <p>
+      <span class="lang-en">Every pastor walks into a Mars Hill on Sunday morning. The statues are different, but the principle is identical. Your people are religious about something &mdash; their work, their team, their politics, their bodies, their family. They have erected altars to gods they do not name as gods. Your task as the preacher is not to mock the altars. It is to find the line that runs from where they stand to Christ, and walk them up it. The Cochrane Man of Vision watches the valley; the Christ of God sees His people and is seen by them. Begin with what they know. Track to who He is. That is hermeneutics in motion in the public square.</span>
+      <span class="lang-es">Cada pastor entra a un Areópago el domingo por la mañana. Las estatuas son distintas, pero el principio es idéntico. Su pueblo es religioso acerca de algo &mdash; su trabajo, su equipo, su política, sus cuerpos, su familia. Han erigido altares a dioses que no nombran como dioses. Su tarea como predicador no es burlarse de los altares. Es encontrar la línea que corre de donde están parados a Cristo, y caminarlos hacia arriba por ella. El Hombre de Visión de Cochrane vigila el valle; el Cristo de Dios ve a Su pueblo y es visto por ellos. Comience con lo que conocen. Rastree hacia quién Él es. Ésa es la hermenéutica en movimiento en la plaza pública.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">6. As a Man, But as God</span>
+      <span class="lang-es">6. Como hombre, pero como Dios</span>
+    </h3>
+    <p>
+      <span class="lang-en">The center of Christ-tracking is the Person Himself, fully God and fully man. Christians have affirmed this from the earliest councils, and the whole Bible bends toward this confession. Either Jesus is God or He is the greatest fraud who ever lived. There is no third option. The pastor who tracks Christ through the Bible must hold both natures in view at once. The Apostle John&rsquo;s Gospel begins by saying both in one verse: <em>In the beginning was the Word, and the Word was with God, and the Word was God.</em> The Hebrew prophets had seen Him coming as the Mighty God and as the Suffering Servant. The Gospel writers told us how the two natures lived in one Person. Here is the contrast that walks through the whole story.</span>
+      <span class="lang-es">El centro del rastreo de Cristo es la Persona misma, plenamente Dios y plenamente hombre. Los cristianos han afirmado esto desde los concilios más antiguos, y toda la Biblia se inclina hacia esta confesión. O Jesús es Dios o es el fraude más grande que jamás ha vivido. No hay tercera opción. El pastor que rastrea a Cristo a través de la Biblia debe tener ambas naturalezas a la vista a la vez. El Evangelio del apóstol Juan comienza diciendo ambas en un solo versículo: <em>En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios.</em> Los profetas hebreos Lo habían visto venir como el Dios Fuerte y como el Siervo Sufriente. Los escritores evangélicos nos contaron cómo las dos naturalezas vivieron en una sola Persona. Aquí está el contraste que camina a través de toda la historia.</span>
+    </p>
+    <p>
+      <span class="lang-en">As a man He was born in a manger; but as God He is the Everlasting One. As a man He was hungry; but as God He is the Bread of Life. As a man He was thirsty; but as God He is the Living Water. As a man He was tired; but as God He said, <em>Come to Me, all that are weary.</em> As a man He was tempted in all points; but as God He was sinless. As a man He wept in Gethsemane; but as God He wipes away every tear from our eyes. As a man He was baptized with water; but as God He baptizes with fire. As a man He walked with those in darkness; but as God He is the light of the world. As a man He was called a Nazarene; but as God He is called Emmanuel. As a man He was the Son of Man; but as God He is the Son of God. As a man He was called a lunatic; but as God He is called Lord. As a man He was called a servant; but as God He is called Savior. As a man He died on a cross; but as God He could have called a million angels. As a man He was laid in a tomb; but as God He came crashing out three days later with all power in His hand. As a man He had scars in His hands; but as God He sits at the right hand of the Father.</span>
+      <span class="lang-es">Como hombre nació en un pesebre; pero como Dios es el Eterno. Como hombre tuvo hambre; pero como Dios es el Pan de Vida. Como hombre tuvo sed; pero como Dios es el Agua Viva. Como hombre se cansó; pero como Dios dijo: <em>Venid á mí todos los que estáis trabajados.</em> Como hombre fue tentado en todo; pero como Dios fue sin pecado. Como hombre lloró en Getsemaní; pero como Dios enjuga toda lágrima de nuestros ojos. Como hombre fue bautizado con agua; pero como Dios bautiza con fuego. Como hombre caminó con los que estaban en tinieblas; pero como Dios es la luz del mundo. Como hombre fue llamado nazareno; pero como Dios es llamado Emanuel. Como hombre fue Hijo del Hombre; pero como Dios es el Hijo de Dios. Como hombre fue llamado lunático; pero como Dios es llamado Señor. Como hombre fue llamado siervo; pero como Dios es llamado Salvador. Como hombre murió en una cruz; pero como Dios pudo haber llamado a un millón de ángeles. Como hombre fue puesto en una tumba; pero como Dios salió rompiendo tres días después con todo poder en Su mano. Como hombre tuvo cicatrices en Sus manos; pero como Dios se sienta a la diestra del Padre.</span>
+    </p>
+    <p>
+      <span class="lang-en">That is the Bible in seventeen lines. That is the Person every passage tracks toward. Whatever text you preach on Sunday, somewhere in the line of your sermon He must appear in both natures. Some texts will lean on His humanity &mdash; His tears, His hunger, His weariness. Some texts will lean on His deity &mdash; His authority, His resurrection, His judgment. The full Christ requires both, and the Bible insists on both. A sermon that gives you only one of the two has not yet tracked all the way to the Person.</span>
+      <span class="lang-es">Eso es la Biblia en diecisiete líneas. Ésa es la Persona hacia la cual cada pasaje rastrea. Cualquier texto que predique el domingo, en algún lugar en la línea de su sermón Él debe aparecer en ambas naturalezas. Algunos textos se apoyarán en Su humanidad &mdash; Sus lágrimas, Su hambre, Su cansancio. Algunos textos se apoyarán en Su divinidad &mdash; Su autoridad, Su resurrección, Su juicio. El Cristo pleno requiere ambas, y la Biblia insiste en ambas. Un sermón que le da solo una de las dos no ha rastreado todavía todo el camino hasta la Persona.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">7. Three Errors in Christ-Tracking</span>
+      <span class="lang-es">7. Tres errores al rastrear a Cristo</span>
+    </h3>
+    <p>
+      <span class="lang-en">The first error is <strong>forcing every detail to mean Christ</strong>. The five smooth stones in David&rsquo;s bag are not the five wounds. The thirty pieces of silver in Joseph&rsquo;s story do not exactly equal the thirty Judas threw down. Some details connect; many do not. The pastor who assigns christological meaning to every named object loses the legitimate connections in a fog of invented ones. Honor what the text makes; resist what it does not.</span>
+      <span class="lang-es">El primer error es <strong>forzar cada detalle para que signifique Cristo</strong>. Las cinco piedras lisas en la bolsa de David no son las cinco heridas. Las treinta piezas de plata en la historia de José no equivalen exactamente a las treinta que Judas tiró. Algunos detalles se conectan; muchos no. El pastor que asigna significado cristológico a cada objeto nombrado pierde las conexiones legítimas en una neblina de inventadas. Honre lo que el texto hace; resista lo que no hace.</span>
+    </p>
+    <p>
+      <span class="lang-en">The second error is <strong>ignoring the connections the Bible itself makes</strong>. The pastor preaches Genesis 22 as a story about a father&rsquo;s faith and never mentions that the New Testament treats it as a picture of the Father offering the Son. He preaches Numbers 21 as an episode with a bronze serpent and never quotes John 3:14: <em>as Moses lifted up the serpent in the wilderness, even so must the Son of Man be lifted up.</em> The Spirit provided the map; do not refuse to follow it.</span>
+      <span class="lang-es">El segundo error es <strong>ignorar las conexiones que la misma Biblia hace</strong>. El pastor predica Génesis 22 como una historia sobre la fe de un padre y nunca menciona que el Nuevo Testamento la trata como un cuadro del Padre ofreciendo al Hijo. Predica Números 21 como un episodio con una serpiente de bronce y nunca cita Juan 3:14: <em>como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del Hombre sea levantado</em>. El Espíritu proveyó el mapa; no se rehúse a seguirlo.</span>
+    </p>
+    <p>
+      <span class="lang-en">The third error is <strong>skipping the Old Testament entirely</strong>. The pastor who preaches only from the Gospels and the Epistles starves his people of three-quarters of the Bible and disconnects them from the soil out of which the gospel grew. Without Passover they cannot understand the Lord&rsquo;s Supper. Without the priesthood they cannot understand Hebrews. Without David&rsquo;s kingdom they cannot understand the throne the angel promised Mary&rsquo;s Son. Skip the Old Testament and the climax loses most of its weight.</span>
+      <span class="lang-es">El tercer error es <strong>saltarse el Antiguo Testamento por completo</strong>. El pastor que predica solo de los Evangelios y las Epístolas mata de hambre a su pueblo de tres cuartas partes de la Biblia y los desconecta del suelo del cual el evangelio creció. Sin la Pascua no pueden entender la Cena del Señor. Sin el sacerdocio no pueden entender Hebreos. Sin el reino de David no pueden entender el trono que el ángel le prometió al Hijo de María. Sáltese el Antiguo Testamento y el clímax pierde la mayor parte de su peso.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">8. The Mars Hill Preaching Method</span>
+      <span class="lang-es">8. El método de predicación del Areópago</span>
+    </h3>
+    <p>
+      <span class="lang-en">Paul&rsquo;s Athens sermon is a method, not just a model. It can be reduced to four steps that a pastor can use any Sunday. <strong>One: begin where they are.</strong> Paul began with their altars, not with his Bible. The pastor who begins each sermon with a question, a story, an observation about the community life of his people, has already passed the threshold the same way Paul did. <strong>Two: name the unknown that lives in their lives.</strong> The Athenians had a literal altar to the unknown god. Your people have unnamed longings, unnamed griefs, unnamed fears. Name them. Show your people that the Bible speaks to those specific unknowns. <strong>Three: introduce the One they have been unwittingly seeking.</strong> Paul said, <em>that unknown God whom you worship without knowing &mdash; I declare Him to you.</em> The pastor takes the same posture. <em>The longing you have not been able to name, the home you have not been able to find, the forgiveness you cannot manufacture &mdash; let me declare to you the One who has been seeking you all along.</em> <strong>Four: drive to the resurrection.</strong> Paul did not stop at theism. He pressed all the way to <em>the Man whom He has appointed, of whom He has given assurance by raising Him from the dead</em>. Without the resurrection there is no gospel. End every Mars Hill sermon at the empty tomb.</span>
+      <span class="lang-es">El sermón de Pablo en Atenas es un método, no solo un modelo. Puede reducirse a cuatro pasos que un pastor puede usar cualquier domingo. <strong>Uno: comience donde ellos están.</strong> Pablo comenzó con sus altares, no con su Biblia. El pastor que comienza cada sermón con una pregunta, una historia, una observación sobre la vida comunitaria de su pueblo, ya ha pasado el umbral de la misma manera que Pablo. <strong>Dos: nombre lo desconocido que vive en sus vidas.</strong> Los atenienses tenían un altar literal al dios no conocido. Su pueblo tiene anhelos sin nombre, duelos sin nombre, temores sin nombre. Nómbrelos. Muéstrele a su pueblo que la Biblia habla a esos desconocidos específicos. <strong>Tres: presente al que han estado buscando sin saberlo.</strong> Pablo dijo: <em>al que vosotros honráis sin conocerle &mdash; á éste pues os anuncio yo</em>. El pastor toma la misma postura. <em>El anhelo que no han podido nombrar, el hogar que no han podido encontrar, el perdón que no pueden fabricar &mdash; déjenme anunciarles al que les ha estado buscando todo el tiempo.</em> <strong>Cuatro: vaya hasta la resurrección.</strong> Pablo no se detuvo en el teísmo. Empujó todo el camino hasta <em>aquel varón al cual destinó, dando fe á todos con haberle levantado de los muertos</em>. Sin la resurrección no hay evangelio. Termine cada sermón del Areópago en la tumba vacía.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">9. The Three Responses on Mars Hill</span>
+      <span class="lang-es">9. Las tres respuestas en el Areópago</span>
+    </h3>
+    <p>
+      <span class="lang-en">When Paul reached the resurrection, the Athenians divided into three groups. <em>Some mocked.</em> The Greek philosophers laughed at the idea that a man had come back from the dead. They had a categorical framework that excluded the resurrection, and they rejected the sermon. The pastor must expect mockers in every congregation. Some will laugh, sometimes openly. Do not stop preaching the resurrection. <em>Some delayed.</em> They said, <em>we will hear you again on this matter.</em> This is the most common response, and the most dangerous. Delay is decision, and most who delay do not return. The pastor must press for response now. <em>Some believed and were saved.</em> Dionysius and Damaris and others clave unto Paul and believed. Even the smallest Mars Hill response carries the seed of a church. Paul left Athens with a few converts, and from those few a community of faith eventually formed.</span>
+      <span class="lang-es">Cuando Pablo llegó a la resurrección, los atenienses se dividieron en tres grupos. <em>Algunos burlaban.</em> Los filósofos griegos se rieron de la idea de que un hombre había regresado de los muertos. Tenían un marco categórico que excluía la resurrección, y rechazaron el sermón. El pastor debe esperar burladores en cada congregación. Algunos se reirán, a veces abiertamente. No deje de predicar la resurrección. <em>Algunos demoraron.</em> Dijeron: <em>te oiremos acerca de esto otra vez</em>. Ésta es la respuesta más común, y la más peligrosa. La demora es una decisión, y la mayoría de los que demoran no regresan. El pastor debe presionar por una respuesta ahora. <em>Algunos creyeron y fueron salvos.</em> Dionisio y Dámaris y otros se unieron a Pablo y creyeron. Aun la respuesta más pequeña del Areópago carga la semilla de una iglesia. Pablo dejó Atenas con unos pocos conversos, y de esos pocos una comunidad de fe eventualmente se formó.</span>
+    </p>
+    <p>
+      <span class="lang-en">Preach with the three responses in mind. The mockers do not need a softer message; they need a sharper one. The delayers do not need more time; they need a stronger invitation. The believers do not need encouragement to keep waiting; they need a church to belong to. Your hermeneutics will deliver each kind of hearer to one of these three doors. Make sure your preaching keeps all three open.</span>
+      <span class="lang-es">Predique con las tres respuestas en mente. Los burladores no necesitan un mensaje más suave; necesitan uno más agudo. Los que demoran no necesitan más tiempo; necesitan una invitación más fuerte. Los creyentes no necesitan ánimo para seguir esperando; necesitan una iglesia a la cual pertenecer. Su hermenéutica entregará a cada clase de oyente a una de estas tres puertas. Asegúrese que su predicación mantenga las tres abiertas.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">10. God Had His Address</span>
+      <span class="lang-es">10. Dios tenía su dirección</span>
+    </h3>
+    <p>
+      <span class="lang-en">A pastor tells the story of a boy, born illegitimate, whose parents abandoned him. He used rocks for a pillow. He bathed in the St. John&rsquo;s River. He sold aluminum cans for food and studied under the light of a 7-Eleven. He slept some nights at the police station for warmth, others on the pavement under a bridge. Within thirteen years he was a pastor preaching every Sunday to fifteen hundred people. He looked back and said, <em>God had my address.</em> David said the same in Psalm 27: <em>When my father and mother forsake me, the LORD will take me up.</em></span>
+      <span class="lang-es">Un pastor cuenta la historia de un niño, nacido ilegítimo, cuyos padres lo abandonaron. Usaba piedras como almohada. Se bañaba en el río St. John&rsquo;s. Vendía latas de aluminio para comer y estudiaba bajo la luz de una tienda 7-Eleven. Dormía algunas noches en la estación de policía para tener calor, otras en el pavimento bajo un puente. Dentro de trece años era un pastor predicando cada domingo a mil quinientas personas. Miró hacia atrás y dijo: <em>Dios tenía mi dirección.</em> David dijo lo mismo en el Salmo 27: <em>cuando mi padre y mi madre me dejaren, Jehová me recogerá</em>.</span>
+    </p>
+    <p>
+      <span class="lang-en">Pastor, the people in front of you on Sunday have their own Mars Hill. Some are wealthy with altars to careers and family. Some are sleeping under their own bridges with no altars at all. The God of the Bible has every one of their addresses. The whole Book has been pointing at the One who came to find them. Track Christ through your text this week and you will be doing what Paul did on the Areopagus. Begin where they are. End where He is. He had their address before they knew His name.</span>
+      <span class="lang-es">Pastor, las personas frente a usted el domingo tienen su propio Areópago. Algunos son acaudalados con altares a las carreras y la familia. Algunos están durmiendo bajo sus propios puentes sin altares en absoluto. El Dios de la Biblia tiene la dirección de cada uno de ellos. Todo el Libro ha estado apuntando a Aquel que vino a encontrarlos. Rastree a Cristo a través de su texto esta semana y estará haciendo lo que Pablo hizo en el Areópago. Comience donde están. Termine donde Él está. Él tenía su dirección antes de que conocieran Su nombre.</span>
+    </p>
+
+  </article>
+
+  <!-- ============================================================ -->
+  <!-- EXAM                                                         -->
+  <!-- ============================================================ -->
+  <section id="lockout-block" class="lockout hidden">
+    <h2>
+      <span class="lang-en">Exam Locked</span>
+      <span class="lang-es">Examen bloqueado</span>
+    </h2>
+    <p>
+      <span class="lang-en">You did not reach the passing score. Please review the unit and try again after the lockout period.</span>
+      <span class="lang-es">No alcanzó la nota mínima. Repase la unidad y vuelva a intentarlo después del período de bloqueo.</span>
+    </p>
+    <div class="timer" id="lockout-timer"></div>
+    <p id="lockout-scope" style="font-style:italic"></p>
+  </section>
+
+  <section id="exam-section" class="card">
+    <h2 id="exam-title">
+      <span class="lang-en">Examination &mdash; Unit 1</span>
+      <span class="lang-es">Examen &mdash; Unidad 1</span>
+    </h2>
+    <p id="exam-track-note" style="font-style:italic;color:#7a5a3a"></p>
+
+    <div id="mc-container">
+      <h3>
+        <span class="lang-en">Multiple-Choice (20 questions, 18 to pass)</span>
+        <span class="lang-es">Opción múltiple (20 preguntas, 18 para aprobar)</span>
+      </h3>
+      <div id="mc-questions"></div>
+    </div>
+
+    <div id="sa-container">
+      <h3>
+        <span class="lang-en">Short-Answer (10 questions)</span>
+        <span class="lang-es">Respuesta breve (10 preguntas)</span>
+      </h3>
+      <p id="sa-note" style="font-weight:600"></p>
+      <p style="font-style:italic;color:#7a5a3a">
+        <span class="lang-en">Type your answer in the language you are studying in. Each answer must be at least a few sentences (about 100 characters) and contain the key concepts from the lesson.</span>
+        <span class="lang-es">Escriba su respuesta en el idioma en que está estudiando. Cada respuesta debe tener al menos unas cuantas oraciones (unos 100 caracteres) y contener los conceptos clave de la lección.</span>
+      </p>
+      <div id="sa-questions"></div>
+    </div>
+
+    <button class="btn primary" onclick="submitExam()" id="submit-btn">
+      <span class="lang-en">Submit Exam</span>
+      <span class="lang-es">Enviar examen</span>
+    </button>
+    <button class="btn danger" onclick="resetExam()">
+      <span class="lang-en">Reset</span>
+      <span class="lang-es">Reiniciar</span>
+    </button>
+  </section>
+
+  <section id="results-block" class="hidden"></section>
+
+</div>
+
+<footer>
+  <span class="lang-en">Chapala Theological Seminary &middot; CTS Hermeneutics &middot; &copy; Dr. Wayne Cook</span>
+  <span class="lang-es">Seminario Teológico de Chapala &middot; Hermenéutica CTS &middot; &copy; Dr. Wayne Cook</span>
+</footer>
+
+<script>
+  // ============================================================
+  // PER-UNIT CONFIG (the only block that changes between units)
+  // ============================================================
+  const UNIT = 11;
+  const NEXT_UNIT_URL = "CTSHermeneuticsCertificate.html";
+  const PREV_UNIT_URL = "CTSHermeneuticsUnit10.html";
+  const TOTAL_UNITS = 11;
+  const IS_FINAL_UNIT = true;
+  const FINAL_REDIRECT_URL = "CTSHermeneuticsCertificate.html";
+  const SHOW_REGISTRATION = false;
+
+  // ============================================================
+  // ENGINE CONSTANTS (carried unchanged across units)
+  // ============================================================
+  const COURSE_CODE = "herm";
+  const PROGRESS_KEY = "cts_herm_progress";
+  const STUDENT_KEY = "cts_student";
+  const TRACK_KEY = "cts_track";
+  const UNIT_KEY = "cts_herm_u" + UNIT + "_passed";
+  const MC_KEY = "cts_herm_u" + UNIT + "_mc_passed";
+  const SA_KEY = "cts_herm_u" + UNIT + "_sa_passed";
+  const STATE_KEY = "cts_herm_u" + UNIT + "_state";
+  const LOCKOUT_KEY = "cts_herm_u" + UNIT + "_lockout";
+  const LOCKOUT_SCOPE_KEY = "cts_herm_u" + UNIT + "_lockout_scope";
+  const MC_PASS = 18;
+  const SA_PASS = 9;
+  const LOCKOUT_MS = 15 * 60 * 1000;
+  const REDIRECT_MS = 3000;
+
+  // ============================================================
+  // MULTIPLE-CHOICE QUESTIONS (exactly 20; A=5, B=5, C=5, D=5)
+  // ============================================================
+  const mcQuestions = [
+    {
+      textEn: "1. The central thesis of this unit is:",
+      textEs: "1. La tesis central de esta unidad es:",
+      optionsEn: ["A. The whole Bible is one Christ-tracking story; every text in the Book points there","B. The Old Testament can safely be skipped","C. The Bible is a random collection of moral lessons","D. Only the Gospels track Christ"],
+      optionsEs: ["A. Toda la Biblia es una sola historia rastreando a Cristo; cada texto en el Libro apunta allá","B. El Antiguo Testamento puede saltarse con seguridad","C. La Biblia es una colección al azar de lecciones morales","D. Solo los Evangelios rastrean a Cristo"],
+      correct: "A",
+      correctFeedbackEn: "Correct. The pastor's job is to bring his people from wherever they sit on Mars Hill to the foot of the Resurrected One. The pastor who can trace the line through the Bible can trace it through any single passage.",
+      correctFeedbackEs: "Correcto. El trabajo del pastor es traer a su pueblo desde donde sea que estén sentados en el Areópago hasta el pie del Resucitado. El pastor que pueda trazar la línea a través de la Biblia puede trazarla a través de cualquier pasaje individual.",
+      incorrectFeedbackEn: "The OT cannot be skipped, the Bible is not random morality, and Christ is tracked through ALL Scripture, not only the Gospels. The thesis is: THE WHOLE BIBLE IS ONE CHRIST-TRACKING STORY. Every text points there.",
+      incorrectFeedbackEs: "El AT no puede saltarse, la Biblia no es moralidad al azar, y Cristo es rastreado a través de TODA la Escritura, no solo los Evangelios. La tesis es: TODA LA BIBLIA ES UNA SOLA HISTORIA RASTREANDO A CRISTO. Cada texto apunta allá."
+    },
+    {
+      textEn: "2. On the road to Emmaus, Jesus did what (Luke 24:27)?",
+      textEs: "2. En el camino a Emaús, Jesús hizo qué (Lucas 24:27)?",
+      optionsEn: ["A. Quoted only the Psalms","B. Refused to speak of Himself","C. Beginning at Moses and all the Prophets, expounded in all the Scriptures the things concerning Himself","D. Asked the disciples to teach Him"],
+      optionsEs: ["A. Citó solo los Salmos","B. Se negó a hablar de Sí mismo","C. Comenzando desde Moisés y de todos los profetas, declaró en todas las Escrituras lo que decían de Él","D. Pidió a los discípulos que Le enseñaran"],
+      correct: "C",
+      correctFeedbackEn: "Correct. All the Scriptures. The things concerning Himself. Jesus took the whole Old Testament and showed how every part had been pointing at Him. This is the foundational text for every Christ-centered sermon ever preached after Him.",
+      correctFeedbackEs: "Correcto. Todas las Escrituras. Las cosas referentes a Él. Jesús tomó todo el Antiguo Testamento y mostró cómo cada parte había estado apuntando a Él. Éste es el texto fundamental para cada sermón centrado en Cristo predicado después de Él.",
+      incorrectFeedbackEn: "Jesus did not limit Himself to the Psalms, did not refuse to speak of Himself, and did not ask to be taught. He BEGAN AT MOSES AND ALL THE PROPHETS and expounded in ALL THE SCRIPTURES the things concerning Himself. That is the model for Christ-centered preaching.",
+      incorrectFeedbackEs: "Jesús no se limitó a los Salmos, no se negó a hablar de Sí mismo, y no pidió ser enseñado. COMENZÓ DESDE MOISÉS Y TODOS LOS PROFETAS y declaró en TODAS LAS ESCRITURAS las cosas referentes a Él. Ése es el modelo para la predicación centrada en Cristo."
+    },
+    {
+      textEn: "3. The six movements that organize the macro-arc of the Bible are:",
+      textEs: "3. Los seis movimientos que organizan el macroarco de la Biblia son:",
+      optionsEn: ["A. Law, prophets, gospels, epistles, history, apocalypse","B. Creation, Fall, Israel, Christ, Church, Consummation","C. Hebrew, Greek, Aramaic, Latin, English, Spanish","D. Patriarchs, Egypt, wilderness, conquest, kings, exile"],
+      optionsEs: ["A. Ley, profetas, evangelios, epístolas, historia, apocalipsis","B. Creación, Caída, Israel, Cristo, Iglesia, Consumación","C. Hebreo, griego, arameo, latín, inglés, español","D. Patriarcas, Egipto, desierto, conquista, reyes, exilio"],
+      correct: "B",
+      correctFeedbackEn: "Correct. CREATION (God made everything good), FALL (rebellion brought the curse), ISRAEL (the covenant people through whom redemption would come), CHRIST (God Himself entered the story), CHURCH (the gospel goes out), CONSUMMATION (Christ returns). Every passage sits somewhere on this arc.",
+      correctFeedbackEs: "Correcto. CREACIÓN (Dios hizo todo bueno), CAÍDA (la rebelión trajo la maldición), ISRAEL (el pueblo del pacto a través del cual vendría la redención), CRISTO (Dios mismo entró en la historia), IGLESIA (el evangelio sale), CONSUMACIÓN (Cristo regresa). Cada pasaje se sienta en algún lugar de este arco.",
+      incorrectFeedbackEn: "Canon divisions, OT subdivisions, and languages are not the macro-arc. The six MOVEMENTS are CREATION → FALL → ISRAEL → CHRIST → CHURCH → CONSUMMATION. Every passage in the Bible sits somewhere on this arc, and placement tells the pastor how Christ is connected to it.",
+      incorrectFeedbackEs: "Las divisiones del canon, las subdivisiones del AT, y los idiomas no son el macroarco. Los seis MOVIMIENTOS son CREACIÓN → CAÍDA → ISRAEL → CRISTO → IGLESIA → CONSUMACIÓN. Cada pasaje en la Biblia se sienta en algún lugar de este arco, y la colocación le dice al pastor cómo Cristo está conectado con él."
+    },
+    {
+      textEn: "4. The lesson names four reliable roads from any Old Testament passage to Christ. They are:",
+      textEs: "4. La lección nombra cuatro caminos confiables desde cualquier pasaje del Antiguo Testamento a Cristo. Son:",
+      optionsEn: ["A. Promise, Type, Image, Presence","B. Genesis, Exodus, Numbers, Deuteronomy","C. Reading, marking, learning, inwardly digesting","D. Doctrine, ethics, history, prophecy"],
+      optionsEs: ["A. Promesa, Tipo, Imagen, Presencia","B. Génesis, Éxodo, Números, Deuteronomio","C. Leer, marcar, aprender, asimilar","D. Doctrina, ética, historia, profecía"],
+      correct: "A",
+      correctFeedbackEn: "Correct. PROMISE: God said it; Christ fulfilled it. TYPE: a figure or event prefigures Him. IMAGE: pictures He later inhabits (lamb, manna, rock). PRESENCE: the pre-incarnate Christ appears in the OT itself. Most passages have at least one road. None has none.",
+      correctFeedbackEs: "Correcto. PROMESA: Dios lo dijo; Cristo lo cumplió. TIPO: una figura o evento Lo prefigura. IMAGEN: cuadros que Él luego habita (cordero, maná, roca). PRESENCIA: el Cristo preencarnado aparece en el AT mismo. La mayoría de los pasajes tienen al menos un camino. Ninguno tiene ninguno.",
+      incorrectFeedbackEn: "Pentateuch names, devotional verbs, and broad theological categories are not the four roads. The four are PROMISE, TYPE, IMAGE, PRESENCE. From any OT passage, at least one of these four leads to Christ.",
+      incorrectFeedbackEs: "Los nombres del Pentateuco, los verbos devocionales, y las categorías teológicas amplias no son los cuatro caminos. Los cuatro son PROMESA, TIPO, IMAGEN, PRESENCIA. Desde cualquier pasaje del AT, al menos uno de estos cuatro lleva a Cristo."
+    },
+    {
+      textEn: "5. The Cochrane \"Man of Vision\" bronze statue is used in this lesson as:",
+      textEs: "5. La estatua de bronce «Hombre de Visión» de Cochrane se usa en esta lección como:",
+      optionsEn: ["A. A monument that should be replaced","B. The required topic of all Cochrane sermons","C. An example of biblical idolatry","D. A modern parallel to the Athenian altars — a starting point from which the pastor can track to the original Man of Vision, Christ"],
+      optionsEs: ["A. Un monumento que debe ser reemplazado","B. El tema requerido de todos los sermones de Cochrane","C. Un ejemplo de la idolatría bíblica","D. Un paralelo moderno a los altares atenienses — un punto de partida desde el cual el pastor puede rastrear al Hombre de Visión original, Cristo"],
+      correct: "D",
+      correctFeedbackEn: "Correct. Every pastor walks into a Mars Hill on Sunday. The statues are different, but the principle is identical. Find the line that runs from where the people stand to Christ, and walk them up it. The Cochrane statue is a worked example of the Mars Hill method in modern dress.",
+      correctFeedbackEs: "Correcto. Cada pastor entra a un Areópago el domingo. Las estatuas son distintas, pero el principio es idéntico. Encuentre la línea que corre de donde está parado el pueblo a Cristo, y camínelos hacia arriba por ella. La estatua de Cochrane es un ejemplo trabajado del método del Areópago en vestido moderno.",
+      incorrectFeedbackEn: "The Cochrane statue is not to be replaced, is not a required topic, and is not idolatry. It is a MARS HILL ICON: a visible local landmark from which the pastor can build a sermon to the original Man of Vision, Christ. Use what the community already sees as the entry to what they need to hear.",
+      incorrectFeedbackEs: "La estatua de Cochrane no debe reemplazarse, no es un tema requerido, y no es idolatría. Es un ÍCONO DE MARTE HILL: un punto de referencia local visible desde el cual el pastor puede construir un sermón al Hombre de Visión original, Cristo. Use lo que la comunidad ya ve como entrada a lo que necesitan oír."
+    },
+    {
+      textEn: "6. The 17-line \"As a man, but as God\" progression in this lesson teaches:",
+      textEs: "6. La progresión de 17 líneas «como hombre, pero como Dios» en esta lección enseña:",
+      optionsEn: ["A. Two persons in Jesus","B. The full Christ requires both natures held in view at once — fully God and fully man, the centerpiece of every Christ-centered sermon","C. Three natures coexisting","D. The humanity of Christ alone"],
+      optionsEs: ["A. Dos personas en Jesús","B. El Cristo pleno requiere ambas naturalezas a la vista a la vez — plenamente Dios y plenamente hombre, el eje de cada sermón centrado en Cristo","C. Tres naturalezas coexistiendo","D. Solo la humanidad de Cristo"],
+      correct: "B",
+      correctFeedbackEn: "Correct. Either Jesus is God or He is the greatest fraud who ever lived. There is no third option. A sermon that gives you only one of the two natures has not yet tracked all the way to the Person. The Bible insists on both, and the pastor must hold both in view.",
+      correctFeedbackEs: "Correcto. O Jesús es Dios o es el fraude más grande que jamás ha vivido. No hay tercera opción. Un sermón que le da solo una de las dos naturalezas no ha rastreado todavía todo el camino hasta la Persona. La Biblia insiste en ambas, y el pastor debe tener ambas a la vista.",
+      incorrectFeedbackEn: "Two persons, three natures, and humanity-only are all errors. The lesson teaches the orthodox confession: ONE PERSON, TWO NATURES — fully God and fully man. Every Christ-centered sermon must hold both in view, because the Bible insists on both.",
+      incorrectFeedbackEs: "Dos personas, tres naturalezas, y solo la humanidad son todos errores. La lección enseña la confesión ortodoxa: UNA PERSONA, DOS NATURALEZAS — plenamente Dios y plenamente hombre. Cada sermón centrado en Cristo debe tener ambas a la vista, porque la Biblia insiste en ambas."
+    },
+    {
+      textEn: "7. According to the \"As a man, but as God\" passage, Jesus as a man was born in a manger; but as God He is:",
+      textEs: "7. Según el pasaje «como hombre, pero como Dios», Jesús como hombre nació en un pesebre; pero como Dios Él es:",
+      optionsEn: ["A. A historical figure only","B. The Everlasting One","C. A teacher among teachers","D. A symbolic construction"],
+      optionsEs: ["A. Solo una figura histórica","B. El Eterno","C. Un maestro entre maestros","D. Una construcción simbólica"],
+      correct: "B",
+      correctFeedbackEn: "Correct. The manger is a real historical event in time. The Everlasting One is the eternal Son who entered time. Both are equally true. The Christmas story preaches both natures in one event, and the pastor must preach both in his sermons.",
+      correctFeedbackEs: "Correcto. El pesebre es un evento histórico real en el tiempo. El Eterno es el Hijo eterno que entró en el tiempo. Ambos son igualmente ciertos. La historia de Navidad predica ambas naturalezas en un solo evento, y el pastor debe predicar ambas en sus sermones.",
+      incorrectFeedbackEn: "Historical only, teacher only, and symbolic only all reduce Christ. The truth is BOTH — born in a manger AS A MAN; the EVERLASTING ONE as God. Both natures coexist in one Person. That is the Christ every passage tracks toward.",
+      incorrectFeedbackEs: "Solo histórico, solo maestro, y solo simbólico todos reducen a Cristo. La verdad es AMBOS — nacido en un pesebre COMO HOMBRE; el ETERNO como Dios. Ambas naturalezas coexisten en una sola Persona. Ése es el Cristo hacia el cual rastrea cada pasaje."
+    },
+    {
+      textEn: "8. The first error in Christ-tracking, according to this lesson, is:",
+      textEs: "8. El primer error al rastrear a Cristo, según esta lección, es:",
+      optionsEn: ["A. Reading the Bible too often","B. Using study tools","C. Forcing every detail to mean Christ — assigning christological meaning to every named object the text contains","D. Consulting commentaries"],
+      optionsEs: ["A. Leer la Biblia demasiado a menudo","B. Usar herramientas de estudio","C. Forzar cada detalle para que signifique Cristo — asignar significado cristológico a cada objeto nombrado que contiene el texto","D. Consultar comentarios"],
+      correct: "C",
+      correctFeedbackEn: "Correct. The five smooth stones are not the five wounds. The thirty pieces of silver in Joseph's story do not equal the thirty Judas threw down. Some details connect; many do not. Forced connections cost the legitimate ones their force, and the congregation learns to mistrust.",
+      correctFeedbackEs: "Correcto. Las cinco piedras lisas no son las cinco heridas. Las treinta piezas de plata en la historia de José no equivalen a las treinta que Judas tiró. Algunos detalles se conectan; muchos no. Las conexiones forzadas cuestan a las legítimas su fuerza, y la congregación aprende a desconfiar.",
+      incorrectFeedbackEn: "Reading frequency, study tools, and commentaries are not errors. The FIRST error is FORCING EVERY DETAIL — assigning christological meaning to objects the text never asked you to spiritualize. Honor the connections the text makes; resist the ones it does not.",
+      incorrectFeedbackEs: "La frecuencia de lectura, las herramientas de estudio, y los comentarios no son errores. El PRIMER error es FORZAR CADA DETALLE — asignar significado cristológico a objetos que el texto nunca le pidió espiritualizar. Honre las conexiones que el texto hace; resista las que no hace."
+    },
+    {
+      textEn: "9. The second error in Christ-tracking is:",
+      textEs: "9. El segundo error al rastrear a Cristo es:",
+      optionsEn: ["A. Ignoring the connections the Bible itself makes — preaching Genesis 22 without the NT's Father-Son framing, or Numbers 21 without John 3:14","B. Praying before sermon preparation","C. Reading multiple translations","D. Using illustrations"],
+      optionsEs: ["A. Ignorar las conexiones que la misma Biblia hace — predicar Génesis 22 sin el marco Padre-Hijo del NT, o Números 21 sin Juan 3:14","B. Orar antes de la preparación del sermón","C. Leer múltiples traducciones","D. Usar ilustraciones"],
+      correct: "A",
+      correctFeedbackEn: "Correct. The Spirit provided the map. The NT explicitly tracks Christ through dozens of OT passages. The pastor who preaches Genesis 22 without the Father-Son framing, or Numbers 21 without John 3:14, has refused to follow the map. Use the connections the Bible itself gives.",
+      correctFeedbackEs: "Correcto. El Espíritu proveyó el mapa. El NT explícitamente rastrea a Cristo a través de docenas de pasajes del AT. El pastor que predica Génesis 22 sin el marco Padre-Hijo, o Números 21 sin Juan 3:14, se ha rehusado a seguir el mapa. Use las conexiones que la misma Biblia da.",
+      incorrectFeedbackEn: "Prayer, translations, and illustrations are not errors. The SECOND error is IGNORING THE BIBLE'S OWN CONNECTIONS — refusing to track Christ through OT passages that the NT itself explicitly connects to Him. The map exists; follow it.",
+      incorrectFeedbackEs: "La oración, las traducciones, y las ilustraciones no son errores. El SEGUNDO error es IGNORAR LAS PROPIAS CONEXIONES DE LA BIBLIA — rehusarse a rastrear a Cristo a través de pasajes del AT que el NT mismo conecta explícitamente con Él. El mapa existe; sígalo."
+    },
+    {
+      textEn: "10. The third error in Christ-tracking is:",
+      textEs: "10. El tercer error al rastrear a Cristo es:",
+      optionsEn: ["A. Preaching too quickly","B. Using only one Bible translation","C. Skipping the Old Testament entirely — starving the people of three-quarters of the Bible and disconnecting them from the gospel's soil","D. Preaching for too long"],
+      optionsEs: ["A. Predicar demasiado rápido","B. Usar solo una traducción de la Biblia","C. Saltarse el Antiguo Testamento por completo — matando de hambre al pueblo de tres cuartas partes de la Biblia y desconectándolos del suelo del evangelio","D. Predicar por demasiado tiempo"],
+      correct: "C",
+      correctFeedbackEn: "Correct. Without Passover the people cannot understand the Lord's Supper. Without the priesthood they cannot understand Hebrews. Without David's kingdom they cannot understand the throne the angel promised Mary's Son. Skip the OT and the climax loses most of its weight.",
+      correctFeedbackEs: "Correcto. Sin la Pascua el pueblo no puede entender la Cena del Señor. Sin el sacerdocio no pueden entender Hebreos. Sin el reino de David no pueden entender el trono que el ángel le prometió al Hijo de María. Sáltese el AT y el clímax pierde la mayor parte de su peso.",
+      incorrectFeedbackEn: "Speed, single translation, and length are not the third error. The THIRD error is SKIPPING THE OT — preaching only from the Gospels and Epistles. The OT is not a museum; it is the first three-quarters of one story whose climax is Christ.",
+      incorrectFeedbackEs: "La velocidad, la única traducción, y la duración no son el tercer error. El TERCER error es SALTARSE EL AT — predicar solo de los Evangelios y las Epístolas. El AT no es un museo; es las primeras tres cuartas partes de una sola historia cuyo clímax es Cristo."
+    },
+    {
+      textEn: "11. The Mars Hill preaching method, reduced to four steps, begins with:",
+      textEs: "11. El método de predicación del Areópago, reducido a cuatro pasos, comienza con:",
+      optionsEn: ["A. A condemnation of the audience's idolatry","B. Beginning where they are — starting with the question, story, or observation that meets the community in its own life","C. A long quotation from the prophets","D. A doctrinal statement"],
+      optionsEs: ["A. Una condenación de la idolatría de la audiencia","B. Comenzando donde están — comenzando con la pregunta, historia, u observación que encuentra a la comunidad en su propia vida","C. Una cita larga de los profetas","D. Una declaración doctrinal"],
+      correct: "B",
+      correctFeedbackEn: "Correct. Paul began with their altars, not with his Bible. The pastor who opens each sermon with a question, a story, or an observation about his people's lives has already passed the threshold the same way Paul did at the Areopagus.",
+      correctFeedbackEs: "Correcto. Pablo comenzó con sus altares, no con su Biblia. El pastor que abre cada sermón con una pregunta, una historia, o una observación sobre la vida de su pueblo ya ha pasado el umbral de la misma manera que Pablo en el Areópago.",
+      incorrectFeedbackEn: "Condemnation, prophet quotations, and doctrinal statements are not where Paul began. Paul BEGAN WHERE THEY WERE. The first step of the Mars Hill method is to meet people in their own context — what they see, what they value, what they fear — and start there.",
+      incorrectFeedbackEs: "La condenación, las citas de los profetas, y las declaraciones doctrinales no son donde Pablo comenzó. Pablo COMENZÓ DONDE ESTABAN. El primer paso del método del Areópago es encontrar a la gente en su propio contexto — lo que ven, lo que valoran, lo que temen — y comenzar allí."
+    },
+    {
+      textEn: "12. The fourth and final step of the Mars Hill preaching method is:",
+      textEs: "12. El cuarto y último paso del método de predicación del Areópago es:",
+      optionsEn: ["A. End with general theism","B. End with moral exhortation","C. End with social commentary","D. Drive to the resurrection — without the resurrection there is no gospel; end every Mars Hill sermon at the empty tomb"],
+      optionsEs: ["A. Termine con teísmo general","B. Termine con exhortación moral","C. Termine con comentario social","D. Vaya hasta la resurrección — sin la resurrección no hay evangelio; termine cada sermón del Areópago en la tumba vacía"],
+      correct: "D",
+      correctFeedbackEn: "Correct. Paul did not stop at theism. He pressed all the way to \"the Man whom He has appointed, of whom He has given assurance by raising Him from the dead.\" Without the resurrection there is no gospel. Every Mars Hill sermon must end at the empty tomb.",
+      correctFeedbackEs: "Correcto. Pablo no se detuvo en el teísmo. Empujó todo el camino hasta «aquel varón al cual destinó, dando fe á todos con haberle levantado de los muertos». Sin la resurrección no hay evangelio. Cada sermón del Areópago debe terminar en la tumba vacía.",
+      incorrectFeedbackEn: "Theism, moral exhortation, and social commentary are not Paul's destination. He drove ALL THE WAY TO THE RESURRECTION. The empty tomb is the climax of every Mars Hill sermon. Stop short of it and you have not preached the gospel.",
+      incorrectFeedbackEs: "El teísmo, la exhortación moral, y el comentario social no son el destino de Pablo. Empujó TODO EL CAMINO HASTA LA RESURRECCIÓN. La tumba vacía es el clímax de cada sermón del Areópago. Deténgase antes y no habrá predicado el evangelio."
+    },
+    {
+      textEn: "13. According to Acts 17, the three responses to Paul's Mars Hill sermon were:",
+      textEs: "13. Según Hechos 17, las tres respuestas al sermón de Pablo en el Areópago fueron:",
+      optionsEn: ["A. Some mocked, some delayed, some believed and were saved","B. All believed immediately","C. All rejected him completely","D. All asked for further evidence"],
+      optionsEs: ["A. Algunos burlaron, algunos demoraron, algunos creyeron y fueron salvos","B. Todos creyeron inmediatamente","C. Todos lo rechazaron completamente","D. Todos pidieron más evidencia"],
+      correct: "A",
+      correctFeedbackEn: "Correct. Some mocked when Paul reached the resurrection. Some delayed: \"we will hear you again on this matter.\" Some believed: Dionysius, Damaris, and others. Every Mars Hill audience will divide into these three groups. Preach with all three in view.",
+      correctFeedbackEs: "Correcto. Algunos burlaron cuando Pablo llegó a la resurrección. Algunos demoraron: «te oiremos acerca de esto otra vez». Algunos creyeron: Dionisio, Dámaris, y otros. Cada audiencia del Areópago se dividirá en estos tres grupos. Predique con los tres a la vista.",
+      incorrectFeedbackEn: "Acts 17 does not record unanimous belief, total rejection, or universal request for more evidence. It records THREE GROUPS: MOCKERS, DELAYERS, AND BELIEVERS. The pastor must preach to all three because every congregation contains all three.",
+      incorrectFeedbackEs: "Hechos 17 no registra creencia unánime, ni rechazo total, ni petición universal de más evidencia. Registra TRES GRUPOS: BURLADORES, DEMORADORES, Y CREYENTES. El pastor debe predicar a los tres porque cada congregación contiene a los tres."
+    },
+    {
+      textEn: "14. The lesson says the MOST COMMON and MOST DANGEROUS response on Mars Hill is:",
+      textEs: "14. La lección dice que la respuesta MÁS COMÚN y MÁS PELIGROSA en el Areópago es:",
+      optionsEn: ["A. Mocking","B. Belief","C. Persecution","D. Delay — \"we will hear you again on this matter\" — because delay is decision, and most who delay do not return"],
+      optionsEs: ["A. Burlarse","B. La creencia","C. La persecución","D. La demora — «te oiremos acerca de esto otra vez» — porque la demora es una decisión, y la mayoría de los que demoran no regresan"],
+      correct: "D",
+      correctFeedbackEn: "Correct. Mockers self-identify; believers join the church. The danger is the DELAYERS. They feel they have responded politely, but they have decided against the gospel by postponing it. The pastor must press for response now.",
+      correctFeedbackEs: "Correcto. Los burladores se identifican solos; los creyentes se unen a la iglesia. El peligro son los DEMORADORES. Sienten que han respondido cortésmente, pero han decidido contra el evangelio al posponerlo. El pastor debe presionar por una respuesta ahora.",
+      incorrectFeedbackEn: "Mocking is visible but not the most common; belief is the goal not the danger; persecution is not Acts 17's response. The most COMMON and most DANGEROUS response is DELAY. Most who delay never return. Press for response now.",
+      incorrectFeedbackEs: "Burlarse es visible pero no la más común; la creencia es la meta no el peligro; la persecución no es la respuesta de Hechos 17. La respuesta más COMÚN y más PELIGROSA es la DEMORA. La mayoría de los que demoran nunca regresan. Presione por una respuesta ahora."
+    },
+    {
+      textEn: "15. The story a pastor tells (a homeless boy who became a pastor preaching to 1500 people) is told in this lesson to illustrate:",
+      textEs: "15. La historia que cuenta un pastor (un niño sin hogar que se volvió pastor predicando a 1500 personas) se cuenta en esta lección para ilustrar:",
+      optionsEn: ["A. The American Dream applied to ministry","B. That homeless people can be successful","C. The economic impact of urban ministry","D. That God has every Mars Hill address — even the ones with no statues and no altars — and the gospel finds them"],
+      optionsEs: ["A. El sueño americano aplicado al ministerio","B. Que las personas sin hogar pueden ser exitosas","C. El impacto económico del ministerio urbano","D. Que Dios tiene la dirección de cada Areópago — incluso las que no tienen estatuas ni altares — y el evangelio las encuentra"],
+      correct: "D",
+      correctFeedbackEn: "Correct. \"God had my address.\" Even when the boy was sleeping on the pavement under a bridge, God knew where he was. David said the same in Psalm 27: \"When my father and mother forsake me, the LORD will take me up.\" Every Mars Hill has an address, and God has it.",
+      correctFeedbackEs: "Correcto. «Dios tenía mi dirección». Aun cuando el niño estaba durmiendo en el pavimento bajo un puente, Dios sabía dónde estaba. David dijo lo mismo en el Salmo 27: «cuando mi padre y mi madre me dejaren, Jehová me recogerá». Cada Areópago tiene una dirección, y Dios la tiene.",
+      incorrectFeedbackEn: "The story is not about the American Dream, generic success, or urban economics. It is about THE GOSPEL FINDING THE FORGOTTEN. God has every Mars Hill address — even the addresses with no altars at all. The pastor preaches to people God already knows.",
+      incorrectFeedbackEs: "La historia no se trata del sueño americano, ni del éxito genérico, ni de la economía urbana. Se trata del EVANGELIO ENCONTRANDO AL OLVIDADO. Dios tiene la dirección de cada Areópago — incluso las direcciones sin altares en absoluto. El pastor predica a personas que Dios ya conoce."
+    },
+    {
+      textEn: "16. The lesson uses Genesis 22 (Abraham offering Isaac) as an example of:",
+      textEs: "16. La lección usa Génesis 22 (Abraham ofreciendo a Isaac) como un ejemplo de:",
+      optionsEn: ["A. A connection the Bible itself makes — the NT treats this story as a picture of the Father offering the Son; the pastor must not ignore this explicit link","B. A passage that should be skipped","C. A story about ancient Middle Eastern customs only","D. A passage with no christological connection"],
+      optionsEs: ["A. Una conexión que la misma Biblia hace — el NT trata esta historia como un cuadro del Padre ofreciendo al Hijo; el pastor no debe ignorar este vínculo explícito","B. Un pasaje que debe saltarse","C. Una historia sobre las costumbres antiguas del Medio Oriente solamente","D. Un pasaje sin conexión cristológica"],
+      correct: "A",
+      correctFeedbackEn: "Correct. The NT explicitly treats Genesis 22 as Father-Son Calvary typology. Preaching it as merely a story of Abraham's faith — without the NT's framing — is the second error in Christ-tracking. The Spirit gave the map; the pastor must follow it.",
+      correctFeedbackEs: "Correcto. El NT explícitamente trata Génesis 22 como tipología Padre-Hijo del Calvario. Predicarlo como meramente una historia de la fe de Abraham — sin el marco del NT — es el segundo error al rastrear a Cristo. El Espíritu dio el mapa; el pastor debe seguirlo.",
+      incorrectFeedbackEn: "Genesis 22 should not be skipped, is not merely ancient custom, and has a CLEAR christological connection in the NT. The lesson uses it as the prime example of a connection the Bible ITSELF makes that the pastor must not ignore.",
+      incorrectFeedbackEs: "Génesis 22 no debe saltarse, no es meramente costumbre antigua, y tiene una CLARA conexión cristológica en el NT. La lección lo usa como el ejemplo principal de una conexión que la Biblia MISMA hace y que el pastor no debe ignorar."
+    },
+    {
+      textEn: "17. Numbers 21 (the bronze serpent in the wilderness) is connected to Christ by:",
+      textEs: "17. Números 21 (la serpiente de bronce en el desierto) se conecta con Cristo por:",
+      optionsEn: ["A. A medieval allegory","B. A pastor's personal interpretation","C. Jesus Himself in John 3:14 — \"as Moses lifted up the serpent in the wilderness, even so must the Son of Man be lifted up\"","D. A Reformation tradition"],
+      optionsEs: ["A. Una alegoría medieval","B. La interpretación personal de un pastor","C. El mismo Jesús en Juan 3:14 — «como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del Hombre sea levantado»","D. Una tradición de la Reforma"],
+      correct: "C",
+      correctFeedbackEn: "Correct. The connection is not medieval allegory, personal interpretation, or Reformation tradition — it is JESUS HIMSELF in John 3:14. The Spirit recorded the link directly. The pastor who preaches Numbers 21 without quoting John 3:14 has chosen to ignore the connection Jesus made.",
+      correctFeedbackEs: "Correcto. La conexión no es alegoría medieval, ni interpretación personal, ni tradición de la Reforma — es JESÚS MISMO en Juan 3:14. El Espíritu registró el vínculo directamente. El pastor que predica Números 21 sin citar Juan 3:14 ha escogido ignorar la conexión que Jesús hizo.",
+      incorrectFeedbackEn: "The bronze serpent → Christ connection is not allegory, opinion, or tradition. JESUS HIMSELF made it explicit in John 3:14. The NT provides the typology; the pastor uses it. This is exactly the kind of biblical connection the lesson commands the pastor not to ignore.",
+      incorrectFeedbackEs: "La conexión serpiente de bronce → Cristo no es alegoría, ni opinión, ni tradición. JESÚS MISMO la hizo explícita en Juan 3:14. El NT provee la tipología; el pastor la usa. Ésta es exactamente la clase de conexión bíblica que la lección manda al pastor no ignorar."
+    },
+    {
+      textEn: "18. According to this lesson, the pastor's central task in tracking Christ on any given Sunday is to:",
+      textEs: "18. Según esta lección, la tarea central del pastor al rastrear a Cristo en cualquier domingo dado es:",
+      optionsEn: ["A. Find every detail that could symbolize Christ, however remote","B. Avoid the Old Testament entirely","C. Walk his people from wherever they sit on Mars Hill to the foot of the Resurrected One — using the four roads where applicable","D. Translate the original languages aloud"],
+      optionsEs: ["A. Encontrar cada detalle que pudiera simbolizar a Cristo, por remoto que sea","B. Evitar el Antiguo Testamento completamente","C. Caminar a su pueblo desde donde sea que estén sentados en el Areópago hasta el pie del Resucitado — usando los cuatro caminos donde se aplique","D. Traducir los idiomas originales en voz alta"],
+      correct: "C",
+      correctFeedbackEn: "Correct. Begin where they are. End where He is. Use the four roads — promise, type, image, presence — where the text supports them. Hold both natures of Christ in view. Drive to the resurrection. That is Christ-centered preaching every Sunday.",
+      correctFeedbackEs: "Correcto. Comience donde están. Termine donde Él está. Use los cuatro caminos — promesa, tipo, imagen, presencia — donde el texto los apoya. Tenga ambas naturalezas de Cristo a la vista. Vaya hasta la resurrección. Ésa es la predicación centrada en Cristo cada domingo.",
+      incorrectFeedbackEn: "Forcing details, avoiding the OT, and reciting Greek are not the central task. The TASK is to WALK PEOPLE FROM MARS HILL TO THE RESURRECTED CHRIST — using the four roads where they apply, holding both natures in view, ending at the empty tomb.",
+      incorrectFeedbackEs: "Forzar detalles, evitar el AT, y recitar griego no son la tarea central. La TAREA es CAMINAR A LA GENTE DE MARTE HILL AL CRISTO RESUCITADO — usando los cuatro caminos donde se aplican, teniendo ambas naturalezas a la vista, terminando en la tumba vacía."
+    },
+    {
+      textEn: "19. The closing image of this unit — \"God had my address\" — teaches the pastor that:",
+      textEs: "19. La imagen de cierre de esta unidad — «Dios tenía mi dirección» — le enseña al pastor que:",
+      optionsEn: ["A. Postal services are spiritually significant","B. Genealogy research is a pastoral priority","C. Only those with stable addresses can be reached by the gospel","D. The God of the Bible knows every Mars Hill address — including the ones with no altars at all — and the whole Book points at the One who came to find them"],
+      optionsEs: ["A. Los servicios postales son espiritualmente significativos","B. La investigación genealógica es una prioridad pastoral","C. Solo los que tienen direcciones estables pueden ser alcanzados por el evangelio","D. El Dios de la Biblia conoce la dirección de cada Areópago — incluyendo las que no tienen altares en absoluto — y todo el Libro apunta a Aquel que vino a encontrarlos"],
+      correct: "D",
+      correctFeedbackEn: "Correct. Some sitting in front of the pastor have wealthy altars. Some have no altars at all. The God of the Bible has every address. The whole Book has been pointing at the One who came to find them. The pastor's job is to put before them the Person every passage was pointing to all along.",
+      correctFeedbackEs: "Correcto. Algunos sentados frente al pastor tienen altares acaudalados. Algunos no tienen altares en absoluto. El Dios de la Biblia tiene cada dirección. Todo el Libro ha estado apuntando a Aquel que vino a encontrarlos. El trabajo del pastor es poner ante ellos a la Persona a la que cada pasaje ha estado apuntando todo el tiempo.",
+      incorrectFeedbackEn: "Postal services, genealogy, and stable addresses are not the point. The point is that GOD KNOWS EVERY MARS HILL ADDRESS — including the addresses of those sleeping under bridges with no altars at all. The whole Book points at the One who came to find them.",
+      incorrectFeedbackEs: "Los servicios postales, la genealogía, y las direcciones estables no son el punto. El punto es que DIOS CONOCE LA DIRECCIÓN DE CADA MARTE HILL — incluyendo las direcciones de los que duermen bajo puentes sin altares en absoluto. Todo el Libro apunta a Aquel que vino a encontrarlos."
+    },
+    {
+      textEn: "20. The closing charge of this unit to the pastor is:",
+      textEs: "20. El encargo de cierre de esta unidad al pastor es:",
+      optionsEn: ["A. Memorize the Pauline epistles","B. Begin where your people are; end where He is — track Christ through every text, because He had their address before they knew His name","C. Read only Acts on Sundays","D. Avoid speaking of the resurrection except at Easter"],
+      optionsEs: ["A. Memorice las epístolas paulinas","B. Comience donde está su pueblo; termine donde Él está — rastree a Cristo a través de cada texto, porque Él tenía su dirección antes de que conocieran Su nombre","C. Lea solo Hechos los domingos","D. Evite hablar de la resurrección excepto en Pascua"],
+      correct: "B",
+      correctFeedbackEn: "Correct. Track Christ through your text this week and you will be doing in your pulpit what Paul did on the Areopagus. The whole Bible is one Christ-tracking story, and the pastor's job is to walk his people from wherever they stand to the foot of the Resurrected One.",
+      correctFeedbackEs: "Correcto. Rastree a Cristo a través de su texto esta semana y estará haciendo en su púlpito lo que Pablo hizo en el Areópago. Toda la Biblia es una sola historia rastreando a Cristo, y el trabajo del pastor es caminar a su pueblo desde donde sea que estén parados hasta el pie del Resucitado.",
+      incorrectFeedbackEn: "Memorization-only, Acts-only, and Easter-only resurrection preaching are not the closing charge. The CHARGE is to BEGIN WHERE THE PEOPLE ARE, END WHERE HE IS — track Christ through every text, every Sunday, because He had their address before they knew His name.",
+      incorrectFeedbackEs: "La memorización solamente, Hechos solamente, y predicar la resurrección solo en Pascua no son el encargo de cierre. El ENCARGO es COMENZAR DONDE ESTÁ EL PUEBLO, TERMINAR DONDE ÉL ESTÁ — rastree a Cristo a través de cada texto, cada domingo, porque Él tenía su dirección antes de que conocieran Su nombre."
+    }
+  ];
+
+  // ============================================================
+  // SHORT-ANSWER QUESTIONS (10; split kw_en / kw_es)
+  // ============================================================
+  const kwQuestions = [
+    {
+      textEn: "21. State the central thesis of this unit in your own words, and explain why every text in the Bible is part of one Christ-tracking story.",
+      textEs: "21. Declare la tesis central de esta unidad con sus propias palabras, y explique por qué cada texto en la Biblia es parte de una sola historia rastreando a Cristo.",
+      kw_en: ["whole", "Bible", "Christ", "tracking", "story", "every", "points", "one"],
+      kw_es: ["toda", "Biblia", "Cristo", "rastrea", "historia", "cada", "apunta", "una"],
+      modelEn: "The thesis of this unit is that the whole Bible is one Christ-tracking story: every text, in every book, finds its place in the single account that points to Him. From Genesis to Revelation the Scriptures track toward Christ, so the pastor's task is to find where any given passage stands in that one story and follow the line to Him.",
+      modelEs: "La tesis de esta unidad es que toda la Biblia es una sola historia que rastrea a Cristo: cada texto, en cada libro, encuentra su lugar en el único relato que apunta a Él. De Génesis a Apocalipsis las Escrituras rastrean hacia Cristo, así que la tarea del pastor es hallar dónde se sitúa un pasaje en esa única historia y seguir la línea hasta Él."
+    },
+    {
+      textEn: "22. Tell the story of Paul on Mars Hill (Acts 17), and explain how he moved his hostile audience from the altar of \"the unknown god\" to the risen Christ in a single sermon.",
+      textEs: "22. Cuente la historia de Pablo en el Areópago (Hechos 17), y explique cómo movió a su audiencia hostil del altar al «dios no conocido» al Cristo resucitado en un solo sermón.",
+      kw_en: ["Paul", "Athens", "Mars", "unknown", "god", "altar", "resurrection", "Christ"],
+      kw_es: ["Pablo", "Atenas", "Marte", "desconocido", "dios", "altar", "resurrección", "Cristo"],
+      modelEn: "In Athens Paul stood on Mars Hill among altars to every Greek god, including one inscribed 'to the unknown god.' He began where his hostile audience stood, with that altar, and moved them step by step to the God they did not know and to the risen Christ. In a single sermon he tracked from their own religion to the resurrection.",
+      modelEs: "En Atenas Pablo se paró en la colina de Marte, el Areópago, entre altares a cada dios griego, incluido uno con la inscripción «al dios desconocido». Comenzó donde estaba su audiencia hostil, con ese altar, y los llevó paso a paso al Dios que no conocían y al Cristo resucitado. En un solo sermón rastreó desde su propia religión hasta la resurrección."
+    },
+    {
+      textEn: "23. Explain Luke 24:27, what Jesus did on the road to Emmaus, and why this verse is the foundation for every Christ-centered sermon.",
+      textEs: "23. Explique Lucas 24:27, lo que Jesús hizo en el camino a Emaús, y por qué este versículo es el fundamento para cada sermón centrado en Cristo.",
+      kw_en: ["Emmaus", "Moses", "Prophets", "Scriptures", "Himself", "Christ", "expounded", "concerning"],
+      kw_es: ["Emaús", "Moisés", "Profetas", "Escrituras", "Mismo", "Cristo", "expuso", "acerca"],
+      modelEn: "Luke 24:27 is the foundation for every Christ-centered sermon. On the Emmaus road, beginning at Moses and all the Prophets, Jesus expounded in all the Scriptures the things concerning Himself. He shows that the Old Testament is about Him, so the preacher is authorized — and obligated — to track Christ through every passage as Jesus did.",
+      modelEs: "Lucas 24:27 es el fundamento de todo sermón centrado en Cristo. En el camino a Emaús, comenzando por Moisés y todos los Profetas, Jesús expuso en todas las Escrituras las cosas acerca de Sí mismo. Muestra que el Antiguo Testamento trata de Él, así que el predicador está autorizado — y obligado — a rastrear a Cristo por cada pasaje como Jesús lo hizo."
+    },
+    {
+      textEn: "24. Name and briefly describe the six movements of the Bible's macro-arc, and explain how knowing the arc helps the pastor place any single passage.",
+      textEs: "24. Nombre y describa brevemente los seis movimientos del macroarco de la Biblia, y explique cómo conocer el arco ayuda al pastor a colocar cualquier pasaje individual.",
+      kw_en: ["Creation", "Fall", "Israel", "Christ", "Church", "Consummation", "arc", "passage"],
+      kw_es: ["Creación", "Caída", "Israel", "Cristo", "Iglesia", "Consumación", "arco", "pasaje"],
+      modelEn: "The Bible's macro-arc has six movements: Creation, Fall, Israel, Christ, Church, and Consummation. Knowing this arc lets the pastor place any single passage on the storyline — is this before or after the Fall, in Israel's history, in Christ's coming, in the Church's age, or pointing to the Consummation? Locating the passage on the arc shows how it relates to Christ at the center.",
+      modelEs: "El macro-arco de la Biblia tiene seis movimientos: Creación, Caída, Israel, Cristo, Iglesia y Consumación. Conocer este arco permite al pastor ubicar cualquier pasaje en la línea de la historia — ¿está antes o después de la Caída, en la historia de Israel, en la venida de Cristo, en la era de la Iglesia, o apuntando a la Consumación? Ubicar el pasaje en el arco muestra cómo se relaciona con Cristo en el centro."
+    },
+    {
+      textEn: "25. Identify and briefly describe the four roads from any Old Testament passage to Christ.",
+      textEs: "25. Identifique y describa brevemente los cuatro caminos desde cualquier pasaje del Antiguo Testamento a Cristo.",
+      kw_en: ["promise", "type", "image", "presence", "fulfill", "prefigure", "appears", "Christ"],
+      kw_es: ["promesa", "tipo", "imagen", "presencia", "cumple", "prefigura", "aparece", "Cristo"],
+      modelEn: "There are four roads from any Old Testament passage to Christ. A passage may hold a promise He fulfills; it may give a type — a person or event that prefigures Him; it may carry an image of His character; or it may record His presence, where the pre-incarnate Christ actually appears. Ask which road connects the passage to Christ; most have at least one, none has none.",
+      modelEs: "Hay cuatro caminos de cualquier pasaje del Antiguo Testamento a Cristo. Un pasaje puede contener una promesa que Él cumple; puede dar un tipo — una persona o evento que lo prefigura; puede llevar una imagen de Su carácter; o puede registrar Su presencia, donde el Cristo pre-encarnado realmente aparece. Pregunte qué camino conecta el pasaje con Cristo; la mayoría tiene al menos uno, ninguno no tiene ninguno."
+    },
+    {
+      textEn: "26. Explain the \"As a man, but as God\" christological progression in your own words. Why must every Christ-centered sermon hold both natures in view at once?",
+      textEs: "26. Explique la progresión cristológica «como hombre, pero como Dios» con sus propias palabras. ¿Por qué debe cada sermón centrado en Cristo tener ambas naturalezas a la vista a la vez?",
+      kw_en: ["man", "God", "natures", "Person", "Christ", "both", "manger", "Bread"],
+      kw_es: ["hombre", "Dios", "naturalezas", "Persona", "Cristo", "ambas", "pesebre", "Pan"],
+      modelEn: "The 'As a man, but as God' progression holds both natures of Christ in view at once: as a man He was born in a manger, but as God He is the Everlasting One; as a man He hungered, but as God He is the Bread of Life; as a man He thirsted, but as God He is the Living Water. Every Christ-centered sermon must hold both natures together, for He is one Person, fully God and fully man.",
+      modelEs: "La progresión «como hombre, pero como Dios» sostiene ambas naturalezas de Cristo a la vez: como hombre nació en un pesebre, pero como Dios es el Eterno; como hombre tuvo hambre, pero como Dios es el Pan de Vida; como hombre tuvo sed, pero como Dios es el Agua Viva. Todo sermón centrado en Cristo debe sostener ambas naturalezas juntas, porque Él es una sola Persona, plenamente Dios y plenamente hombre."
+    },
+    {
+      textEn: "27. Name and briefly explain the three errors in Christ-tracking that the lesson warns against.",
+      textEs: "27. Nombre y explique brevemente los tres errores al rastrear a Cristo contra los cuales la lección advierte.",
+      kw_en: ["forcing", "ignoring", "skipping", "connection", "detail", "Old", "Testament", "Christ"],
+      kw_es: ["forzar", "ignorar", "saltar", "conexión", "detalle", "Antiguo", "Testamento", "Cristo"],
+      modelEn: "Three errors threaten Christ-tracking. Forcing — dragging Christ into a text by allegory where the connection is not really there. Ignoring — refusing to track Christ at all and preaching the Old Testament as mere morality. And skipping — leaping to Christ so fast that the details and original meaning of the passage are lost. The pastor must track Christ honestly, neither forcing nor ignoring nor skipping.",
+      modelEs: "Tres errores amenazan el rastreo de Cristo. Forzar — arrastrar a Cristo a un texto por alegoría donde la conexión no está realmente. Ignorar — negarse a rastrear a Cristo y predicar el Antiguo Testamento como mera moral. Y saltar — brincar a Cristo tan rápido que se pierden los detalles y el significado original del pasaje. El pastor debe rastrear a Cristo con honestidad, sin forzar, ignorar ni saltar."
+    },
+    {
+      textEn: "28. List the four steps of the Mars Hill preaching method, and briefly explain each.",
+      textEs: "28. Enumere los cuatro pasos del método de predicación del Areópago, y explique brevemente cada uno.",
+      kw_en: ["begin", "unknown", "introduce", "resurrection", "seeking", "Christ", "method", "response"],
+      kw_es: ["comenzar", "desconocido", "presentar", "resurrección", "buscando", "Cristo", "método", "respuesta"],
+      modelEn: "The Mars Hill method has four steps. Begin where the people are, with the altar to the unknown god they already have. Introduce the true God they are seeking without knowing. Track to the resurrection of Christ. And call for a response. Begin with what they know, track to who He is — a method any pastor can use to preach Christ in the public square.",
+      modelEs: "El método del Areópago tiene cuatro pasos. Comenzar donde está la gente, con el altar al dios desconocido que ya tienen. Presentar al Dios verdadero que están buscando sin saberlo. Rastrear hasta la resurrección de Cristo. Y llamar a una respuesta. Comenzar con lo que conocen, rastrear hacia quién es Él — un método que cualquier pastor puede usar para predicar a Cristo en la plaza pública."
+    },
+    {
+      textEn: "29. Describe the three responses to Paul's Mars Hill sermon, and explain why DELAY is named the most dangerous of the three.",
+      textEs: "29. Describa las tres respuestas al sermón de Pablo en el Areópago, y explique por qué la DEMORA se nombra la más peligrosa de las tres.",
+      kw_en: ["mocked", "delayed", "believed", "danger", "decision", "press", "response", "Paul"],
+      kw_es: ["burlaron", "postergaron", "creyeron", "peligro", "decisión", "presionar", "respuesta", "demora"],
+      modelEn: "Paul's Mars Hill sermon drew three responses: some mocked, some delayed saying 'we will hear you again,' and some believed. Delay is named the most dangerous, because the mocker may still be argued with and the believer is saved, but the one who delays feels he has made no decision when in fact he has — he postpones until the moment passes. The preacher must press for a decision now, not later.",
+      modelEs: "El sermón de Pablo en el Areópago provocó tres respuestas: algunos se burlaron, algunos postergaron diciendo «te oiremos otra vez», y algunos creyeron. La demora es la más peligrosa, porque al burlador todavía se le puede argumentar y el creyente es salvo, pero el que posterga siente que no ha tomado ninguna decisión cuando en realidad sí — la aplaza hasta que el momento pasa. El predicador debe presionar por una decisión ahora, no después."
+    },
+    {
+      textEn: "30. Tell the story of the homeless boy who became a pastor (as told in this lesson) and explain the closing image \"God had my address\" — what does this teach the pastor about preaching to a Mars Hill that has no altars at all?",
+      textEs: "30. Cuente la historia del niño sin hogar que se volvió pastor (como se relata en esta lección) y explique la imagen de cierre «Dios tenía mi dirección» — ¿qué le enseña esto al pastor sobre predicar a un Areópago que no tiene altares en absoluto?",
+      kw_en: ["abandon", "homeless", "bridge", "God", "address", "preached", "Mars", "lost"],
+      kw_es: ["abandon", "hogar", "puente", "Dios", "dirección", "predicaba", "perdido", "Areópago"],
+      modelEn: "The boy in the story was abandoned, homeless, sleeping under a bridge and studying by a 7-Eleven light, yet within thirteen years he preached to fifteen hundred people. Looking back he said, 'God had my address' — God knew where to find him even with no home. The lesson is that the pastor preaches to a Mars Hill with no altars at all, trusting that God already has the address of every lost hearer.",
+      modelEs: "El niño de la historia fue abandonado, sin hogar, durmiendo bajo un puente y estudiando a la luz de un 7-Eleven, y sin embargo en trece años predicaba a mil quinientas personas. Mirando atrás dijo: «Dios tenía mi dirección» — Dios sabía dónde encontrarlo aun sin hogar. La lección es que el pastor predica a un Areópago sin altares, confiando en que Dios ya tiene la dirección de cada oyente perdido."
+    }
+  ];
+
+  // ============================================================
+  // ENGINE
+  // ============================================================
+  function getCurrentLang(){ return document.body.classList.contains("lang-es") ? "es" : "en"; }
+
+  function toggleLang(){
+    if (document.body.classList.contains("lang-en")){
+      document.body.classList.remove("lang-en");
+      document.body.classList.add("lang-es");
+    } else {
+      document.body.classList.remove("lang-es");
+      document.body.classList.add("lang-en");
+    }
+  }
+
+  // ---------- Registration ----------
+  function loadRegistration(){
+    if (!SHOW_REGISTRATION){
+      const card = document.getElementById("registration-card");
+      if (card) card.classList.add("hidden");
+      return;
+    }
+    const raw = localStorage.getItem(STUDENT_KEY);
+    if (raw){
+      try {
+        const s = JSON.parse(raw);
+        document.getElementById("reg-name").value = s.name || "";
+        document.getElementById("reg-email").value = s.email || "";
+        document.getElementById("reg-church").value = s.church || "";
+        document.getElementById("reg-status").textContent = (getCurrentLang()==="es")
+          ? "Registrado como: " + (s.name || "(sin nombre)")
+          : "Registered as: " + (s.name || "(no name)");
+      } catch(e){}
+    }
+  }
+  function saveRegistration(){
+    const name = document.getElementById("reg-name").value.trim();
+    const email = document.getElementById("reg-email").value.trim();
+    const church = document.getElementById("reg-church").value.trim();
+    if (!name){
+      document.getElementById("reg-status").style.color = "#8b3a2c";
+      document.getElementById("reg-status").textContent = (getCurrentLang()==="es")
+        ? "Por favor escriba su nombre completo."
+        : "Please enter your full name.";
+      return;
+    }
+    localStorage.setItem(STUDENT_KEY, JSON.stringify({name:name,email:email,church:church}));
+    document.getElementById("reg-status").style.color = "#3a5a25";
+    document.getElementById("reg-status").textContent = (getCurrentLang()==="es")
+      ? "Guardado. Bienvenido, " + name + "."
+      : "Saved. Welcome, " + name + ".";
+  }
+
+  // ---------- Track ----------
+  function loadTrack(){
+    const t = localStorage.getItem(TRACK_KEY) || "";
+    if (t) setTrack(t,true);
+    updateSANote();
+    updateTrackNote();
+  }
+  function isMastersLevel(){
+    var t = localStorage.getItem(TRACK_KEY);
+    return t === "mdiv" || t === "thm";
+  }
+  function setTrack(t,silent){
+    localStorage.setItem(TRACK_KEY,t);
+    document.getElementById("track-cert-btn").classList.toggle("selected", t==="cert");
+    document.getElementById("track-mdiv-btn").classList.toggle("selected", t==="mdiv");
+    document.getElementById("track-thm-btn").classList.toggle("selected", t==="thm");
+    // Short answer is available to ALL students; only scored for masters (see submitExam).
+    document.getElementById("sa-container").classList.remove("hidden");
+    updateSANote();
+    updateTrackNote();
+  }
+  function updateSANote(){
+    const t = localStorage.getItem(TRACK_KEY) || "";
+    const note = document.getElementById("sa-note");
+    if (!note) return;
+    if (t==="mdiv" || t==="thm"){
+      note.style.color = "#3a5a25";
+      note.innerHTML = '<span class="lang-en">Counted toward your result: 9 of 10 required to pass.</span><span class="lang-es">Cuenta para su resultado: se requieren 9 de 10 para aprobar.</span>';
+    } else {
+      note.style.color = "#7a5a3a";
+      note.innerHTML = '<span class="lang-en">Open to all students. For Certificate students this section is for practice and is not counted toward your result.</span><span class="lang-es">Disponible para todos los estudiantes. Para estudiantes de Certificado esta sección es de práctica y no cuenta para su resultado.</span>';
+    }
+  }
+
+  function updateTrackNote(){
+    const t = localStorage.getItem(TRACK_KEY) || "";
+    const note = document.getElementById("exam-track-note");
+    if (!t){
+      note.innerHTML = '<span class="lang-en">Choose a track above to begin the exam.</span><span class="lang-es">Escoja una modalidad arriba para comenzar el examen.</span>';
+    } else if (t==="cert"){
+      note.innerHTML = '<span class="lang-en">Certificate track: 20 multiple-choice questions. Pass at 18 of 20.</span><span class="lang-es">Modalidad Certificado: 20 preguntas de opción múltiple. Aprobación con 18 de 20.</span>';
+    } else if (t==="thm"){
+      note.innerHTML = '<span class="lang-en">Th.M track: 20 multiple-choice (18 to pass) AND 10 short-answer (9 to pass), independently scored.</span><span class="lang-es">Modalidad Maestría en Teología: 20 de opción múltiple (18 para aprobar) Y 10 de respuesta breve (9 para aprobar), evaluadas de forma independiente.</span>';
+    } else {
+      note.innerHTML = '<span class="lang-en">M.Div track: 20 multiple-choice (18 to pass) AND 10 short-answer (9 to pass), independently scored.</span><span class="lang-es">Modalidad Maestría: 20 de opción múltiple (18 para aprobar) Y 10 de respuesta breve (9 para aprobar), evaluadas de forma independiente.</span>';
+    }
+  }
+
+  // ---------- Lockout ----------
+  function checkLockout(){
+    const lockedUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)||"0",10);
+    const scope = localStorage.getItem(LOCKOUT_SCOPE_KEY) || "full";
+    const now = Date.now();
+    if (lockedUntil > now){
+      const exam = document.getElementById("exam-section");
+      const lock = document.getElementById("lockout-block");
+      // If lockout is SA-only and MC is banked, hide only SA. Else hide whole exam.
+      if (scope === "sa"){
+        document.getElementById("mc-container").classList.add("hidden");
+        document.getElementById("sa-container").classList.add("hidden");
+        document.getElementById("submit-btn").classList.add("hidden");
+      } else {
+        exam.classList.add("hidden");
+      }
+      lock.classList.remove("hidden");
+      document.getElementById("lockout-scope").innerHTML = (scope==="sa")
+        ? '<span class="lang-en">Multiple-choice score has been banked. Short-answer retake available after lockout.</span><span class="lang-es">El puntaje de opción múltiple está guardado. El reintento de respuesta breve estará disponible después del bloqueo.</span>'
+        : '<span class="lang-en">Both sections must be retaken.</span><span class="lang-es">Ambas secciones deben volver a tomarse.</span>';
+      runLockoutTimer(lockedUntil);
+      return true;
+    } else if (lockedUntil > 0){
+      // Lockout expired — clear
+      localStorage.removeItem(LOCKOUT_KEY);
+      localStorage.removeItem(LOCKOUT_SCOPE_KEY);
+    }
+    return false;
+  }
+  function runLockoutTimer(until){
+    const el = document.getElementById("lockout-timer");
+    function tick(){
+      const remain = until - Date.now();
+      if (remain <= 0){ location.reload(); return; }
+      const m = Math.floor(remain/60000);
+      const s = Math.floor((remain%60000)/1000);
+      el.textContent = m + ":" + (s<10?"0":"") + s;
+      setTimeout(tick,1000);
+    }
+    tick();
+  }
+
+  // ---------- Render questions ----------
+  function renderMCQuestions(){
+    const c = document.getElementById("mc-questions");
+    c.innerHTML = "";
+    mcQuestions.forEach((q,i)=>{
+      const div = document.createElement("div");
+      div.className = "question";
+      div.id = "mc-q-" + i;
+      let html = '<p class="qtext"><span class="lang-en">'+q.textEn+'</span><span class="lang-es">'+q.textEs+'</span></p>';
+      const letters = ["A","B","C","D"];
+      letters.forEach((L,idx)=>{
+        const id = "mc-"+i+"-"+L;
+        html += '<label class="option" id="opt-'+i+'-'+L+'">'
+          + '<input type="radio" name="mc-'+i+'" value="'+L+'" onchange="onMCChange('+i+',\''+L+'\')">'
+          + '<span class="lang-en">'+q.optionsEn[idx]+'</span>'
+          + '<span class="lang-es">'+q.optionsEs[idx]+'</span>'
+          + '</label>';
+      });
+      html += '<div class="feedback hidden" id="fb-'+i+'"></div>';
+      div.innerHTML = html;
+      c.appendChild(div);
+    });
+  }
+  function renderSAQuestions(){
+    const c = document.getElementById("sa-questions");
+    c.innerHTML = "";
+    kwQuestions.forEach((q,i)=>{
+      const div = document.createElement("div");
+      div.className = "question";
+      div.id = "sa-q-" + i;
+      div.innerHTML = '<p class="qtext"><span class="lang-en">'+q.textEn+'</span><span class="lang-es">'+q.textEs+'</span></p>'
+        + '<textarea id="sa-'+i+'" oninput="onSAInput('+i+')" placeholder="" aria-label="sa"></textarea>'
+        + '<button type="button" class="btn sa-check-btn" onclick="checkSA('+i+')">'
+        + '<span class="lang-en">Check answer</span><span class="lang-es">Verificar respuesta</span></button>'
+        + '<div class="sa-feedback" id="sa-fb-'+i+'"></div>'
+        + '<div class="sa-model hidden" id="sa-model-'+i+'"></div>';
+      c.appendChild(div);
+    });
+  }
+
+  // ---------- Save / restore state ----------
+  function saveState(){
+    const state = {mc:{}, sa:{}};
+    mcQuestions.forEach((q,i)=>{
+      const sel = document.querySelector('input[name="mc-'+i+'"]:checked');
+      if (sel) state.mc[i] = sel.value;
+    });
+    kwQuestions.forEach((q,i)=>{
+      const el = document.getElementById("sa-"+i);
+      if (el && el.value) state.sa[i] = el.value;
+    });
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
+  }
+  function restoreState(){
+    const raw = localStorage.getItem(STATE_KEY);
+    if (!raw) return;
+    try {
+      const state = JSON.parse(raw);
+      Object.keys(state.mc||{}).forEach(i=>{
+        const v = state.mc[i];
+        const radio = document.querySelector('input[name="mc-'+i+'"][value="'+v+'"]');
+        if (radio){ radio.checked = true; }
+      });
+      Object.keys(state.sa||{}).forEach(i=>{
+        const el = document.getElementById("sa-"+i);
+        if (el){ el.value = state.sa[i]; renderSAFeedback(parseInt(i,10)); }
+      });
+    } catch(e){}
+  }
+
+  // ---------- MC / SA change handlers ----------
+  function onMCChange(i, value){
+    saveState();
+    renderMCFeedback(i, value);
+    var rs = document.getElementsByName("mc-"+i);
+    for (var ri=0; ri<rs.length; ri++) rs[ri].disabled = true;
+  }
+  function renderMCFeedback(i,value){
+    const q = mcQuestions[i];
+    const fb = document.getElementById("fb-"+i);
+    const isCorrect = (value === q.correct);
+    // Clear previous highlights
+    ["A","B","C","D"].forEach(L=>{
+      const opt = document.getElementById("opt-"+i+"-"+L);
+      opt.classList.remove("correct-answer","wrong-answer");
+    });
+    if (isCorrect){
+      document.getElementById("opt-"+i+"-"+value).classList.add("correct-answer");
+      fb.className = "feedback correct";
+      fb.innerHTML = '<span class="lang-en">'+q.correctFeedbackEn+'</span><span class="lang-es">'+q.correctFeedbackEs+'</span>';
+    } else {
+      document.getElementById("opt-"+i+"-"+value).classList.add("wrong-answer");
+      document.getElementById("opt-"+i+"-"+q.correct).classList.add("correct-answer");
+      fb.className = "feedback incorrect";
+      fb.innerHTML = '<span class="lang-en">'+q.incorrectFeedbackEn+'</span><span class="lang-es">'+q.incorrectFeedbackEs+'</span>';
+    }
+    fb.classList.remove("hidden");
+  }
+  function onSAInput(i){
+    saveState();
+    renderSAFeedback(i);
+  }
+  // Smart keyword matcher: short keywords (<=4 chars) match as whole words;
+  // longer keywords match as a left-anchored prefix (catches inflections).
+  function kwHit(text, kw){
+    text = (text||"").toLowerCase();
+    kw = (kw||"").toLowerCase();
+    const esc = kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const re = (kw.length <= 4) ? new RegExp("\\b"+esc+"\\b") : new RegExp("\\b"+esc);
+    return re.test(text);
+  }
+  function gradeSA(i){
+    const q = kwQuestions[i];
+    const el = document.getElementById("sa-"+i);
+    const text = (el ? el.value : "").toLowerCase();
+    if (text.length < 100) return false;
+    const kws = (getCurrentLang()==="es") ? q.kw_es : q.kw_en;
+    let hits = 0;
+    kws.forEach(k=>{ if (kwHit(text, k)) hits++; });
+    return hits >= 3;
+  }
+  // Reveal the gold model-answer box under every short-answer question after submit.
+  function revealModel(i){
+    const q = kwQuestions[i];
+    const box = document.getElementById("sa-model-"+i);
+    if (!box) return;
+    box.innerHTML =
+      '<div class="sa-model-label"><span class="lang-en">Correct answer</span><span class="lang-es">Respuesta correcta</span></div>'
+      + '<span class="lang-en">'+q.modelEn+'</span><span class="lang-es">'+q.modelEs+'</span>';
+    box.classList.remove("hidden");
+  }
+
+  function checkSA(i){
+    renderSAFeedback(i);
+    const el = document.getElementById("sa-"+i);
+    const text = (el ? el.value : "").toLowerCase();
+    if (text.length >= 100) revealModel(i);
+  }
+
+  function revealModels(){
+    kwQuestions.forEach((q,i)=>{ revealModel(i); });
+  }
+
+  function renderSAFeedback(i){
+    const fb = document.getElementById("sa-fb-"+i);
+    if (!fb) return;
+    const el = document.getElementById("sa-"+i);
+    const text = el ? el.value : "";
+    if (text.length === 0){
+      fb.className = "sa-feedback fail";
+      fb.innerHTML = '<span class="lang-en">✗ No answer yet. Type your answer, then check it against the correct answer below.</span><span class="lang-es">✗ Aún no hay respuesta. Escriba su respuesta y compárela con la respuesta correcta abajo.</span>';
+      return;
+    }
+    if (text.length < 100){
+      fb.className = "sa-feedback fail";
+      fb.innerHTML = '<span class="lang-en">✗ Incorrect — answer too short (at least a few sentences (about 100 characters)). Compare with the correct answer below.</span><span class="lang-es">✗ Incorrecto: la respuesta es demasiado corta (al menos unas cuantas oraciones (unos 100 caracteres)). Compare con la respuesta correcta abajo.</span>';
+      return;
+    }
+    if (gradeSA(i)){
+      fb.className = "sa-feedback pass";
+      fb.innerHTML = '<span class="lang-en">✓ Correct — your answer includes the key concepts. Compare it with the correct answer below.</span><span class="lang-es">✓ Correcto: su respuesta incluye los conceptos clave. Compárela con la respuesta correcta abajo.</span>';
+    } else {
+      fb.className = "sa-feedback fail";
+      fb.innerHTML = '<span class="lang-en">✗ Not yet — your answer is missing key concepts from the lesson. Study the correct answer below.</span><span class="lang-es">✗ Todavía no: a su respuesta le faltan conceptos clave de la lección. Estudie la respuesta correcta abajo.</span>';
+    }
+  }
+
+  // ---------- Submit ----------
+  function submitExam(){
+    const track = localStorage.getItem(TRACK_KEY);
+    if (!track){
+      alert(getCurrentLang()==="es" ? "Por favor escoja una modalidad antes de enviar." : "Please choose a track before submitting.");
+      return;
+    }
+    const student = localStorage.getItem(STUDENT_KEY);
+    if (SHOW_REGISTRATION && !student){
+      alert(getCurrentLang()==="es" ? "Por favor complete el registro antes de enviar." : "Please complete registration before submitting.");
+      return;
+    }
+
+    // Score MC
+    let mcScore = 0;
+    mcQuestions.forEach((q,i)=>{
+      const sel = document.querySelector('input[name="mc-'+i+'"]:checked');
+      if (sel){
+        renderMCFeedback(i, sel.value);
+        if (sel.value === q.correct) mcScore++;
+      } else {
+        // Mark unanswered as wrong by showing correct answer
+        const fb = document.getElementById("fb-"+i);
+        ["A","B","C","D"].forEach(L=>{
+          const opt = document.getElementById("opt-"+i+"-"+L);
+          opt.classList.remove("correct-answer","wrong-answer");
+        });
+        document.getElementById("opt-"+i+"-"+q.correct).classList.add("correct-answer");
+        fb.className = "feedback incorrect";
+        fb.innerHTML = '<span class="lang-en">No answer given. '+q.incorrectFeedbackEn+'</span><span class="lang-es">No se dio respuesta. '+q.incorrectFeedbackEs+'</span>';
+        fb.classList.remove("hidden");
+      }
+    });
+    const mcBanked = localStorage.getItem(MC_KEY) === "true";
+    const mcPassed = mcBanked || (mcScore >= MC_PASS);
+
+    let saScore = 0;
+    if (isMastersLevel()){
+      kwQuestions.forEach((q,i)=>{
+        renderSAFeedback(i);
+        if (gradeSA(i)) saScore++;
+      });
+      revealModels();
+    }
+    const saPassed = isMastersLevel() ? (saScore >= SA_PASS) : true;
+
+    // Persist MC pass (banking)
+    if (mcPassed){
+      localStorage.setItem(MC_KEY,"true");
+    }
+    if (isMastersLevel() && saPassed){
+      localStorage.setItem(SA_KEY,"true");
+    }
+
+    const fullPassed = mcPassed && saPassed;
+    if (fullPassed){
+      localStorage.setItem(UNIT_KEY,"true");
+      // Update progress JSON
+      let progress = {};
+      try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)||"{}"); } catch(e){}
+      progress["unit"+UNIT] = true;
+      localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    } else {
+      // Determine lockout scope
+      if (!mcPassed){
+        localStorage.setItem(LOCKOUT_KEY, String(Date.now() + LOCKOUT_MS));
+        localStorage.setItem(LOCKOUT_SCOPE_KEY, "full");
+      } else if (isMastersLevel() && !saPassed){
+        localStorage.setItem(LOCKOUT_KEY, String(Date.now() + LOCKOUT_MS));
+        localStorage.setItem(LOCKOUT_SCOPE_KEY, "sa");
+      }
+    }
+
+    showResults(track, mcScore, mcPassed, saScore, saPassed, fullPassed);
+  }
+
+  function showResults(track, mcScore, mcPassed, saScore, saPassed, fullPassed){
+    const block = document.getElementById("results-block");
+    block.classList.remove("hidden");
+    block.className = "results " + (fullPassed ? "pass" : "fail");
+    let html = '<h2><span class="lang-en">Results</span><span class="lang-es">Resultados</span></h2>';
+    html += '<p><strong><span class="lang-en">Multiple-Choice:</span><span class="lang-es">Opción múltiple:</span></strong> '+mcScore+' / 20 — '
+      + (mcPassed
+          ? '<span class="lang-en" style="color:#3a5a25;font-weight:600">PASS</span><span class="lang-es" style="color:#3a5a25;font-weight:600">APROBADO</span>'
+          : '<span class="lang-en" style="color:#7a2618;font-weight:600">FAIL</span><span class="lang-es" style="color:#7a2618;font-weight:600">REPROBADO</span>')
+      + '</p>';
+    if (isMastersLevel()){
+      html += '<p><strong><span class="lang-en">Short-Answer:</span><span class="lang-es">Respuesta breve:</span></strong> '+saScore+' / 10 — '
+        + (saPassed
+            ? '<span class="lang-en" style="color:#3a5a25;font-weight:600">PASS</span><span class="lang-es" style="color:#3a5a25;font-weight:600">APROBADO</span>'
+            : '<span class="lang-en" style="color:#7a2618;font-weight:600">FAIL</span><span class="lang-es" style="color:#7a2618;font-weight:600">REPROBADO</span>')
+        + '</p>';
+    }
+    if (fullPassed){
+      const nextUrl = IS_FINAL_UNIT ? FINAL_REDIRECT_URL : NEXT_UNIT_URL;
+      const label = IS_FINAL_UNIT
+        ? '<span class="lang-en">View Certificate \u2192</span><span class="lang-es">Ver Certificado \u2192</span>'
+        : '<span class="lang-en">Continue to Unit '+(UNIT+1)+' \u2192</span><span class="lang-es">Continuar a la Unidad '+(UNIT+1)+' \u2192</span>';
+      const note = '<span class="lang-en">Passed. Study the model answers above before you continue.</span><span class="lang-es">Aprobado. Estudie las respuestas modelo de arriba antes de continuar.</span>';
+      html += '<p style="font-weight:600">'+note+'</p>'
+            + '<p><a class="btn" href="'+nextUrl+'">'+label+'</a></p>';
+    } else {
+      const scope = localStorage.getItem(LOCKOUT_SCOPE_KEY);
+      const lockMsg = (scope==="sa")
+        ? '<span class="lang-en">Multiple-choice has been banked. Review the lesson and retake the short-answer section after the 15-minute lockout.</span><span class="lang-es">La sección de opción múltiple ha sido guardada. Repase la lección y vuelva a tomar la sección de respuesta breve después del bloqueo de 15 minutos.</span>'
+        : '<span class="lang-en">Review the lesson and retake the exam after the 15-minute lockout.</span><span class="lang-es">Repase la lección y vuelva a tomar el examen después del bloqueo de 15 minutos.</span>';
+      const study = '<span class="lang-en"> Study the model answers above while you wait.</span><span class="lang-es"> Estudie las respuestas modelo de arriba mientras espera.</span>';
+      html += '<p style="font-weight:600">'+lockMsg+study+'</p>';
+      // No auto-reload: keep the model answers visible. The lockout is enforced on the next submit.
+    }
+    block.innerHTML = html;
+    block.scrollIntoView({behavior:"smooth"});
+  }
+
+  function resetExam(){
+    const msg = (getCurrentLang()==="es")
+      ? "¿Está seguro de que desea reiniciar? Esto borrará todas sus respuestas en esta unidad."
+      : "Are you sure you want to reset? This will clear all your answers in this unit.";
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    // Do NOT clear MC banking, lockout, or progress on reset — that is a separate action.
+    location.reload();
+  }
+
+  // ---------- Progress grid ----------
+  function renderProgressGrid(){
+    const grid = document.getElementById("progress-grid");
+    let progress = {};
+    try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)||"{}"); } catch(e){}
+    for (let u=1; u<=TOTAL_UNITS; u++){
+      const pill = document.createElement("div");
+      pill.className = "pill";
+      if (progress["unit"+u]) pill.classList.add("done");
+      if (u === UNIT) pill.classList.add("current");
+      pill.textContent = "U"+u;
+      grid.appendChild(pill);
+    }
+  }
+
+  // ---------- Init ----------
+  document.addEventListener("DOMContentLoaded", function(){
+    renderProgressGrid();
+    loadRegistration();
+    loadTrack();
+    renderMCQuestions();
+    renderSAQuestions();
+    if (!checkLockout()){
+      restoreState();
+    }
+  });
+</script>
+
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSHermeneuticsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Administration &amp; Leadership &mdash; Unit 5: Financial Stewardship and Budgeting</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 6 &rarr;</span><span class="lang-es">Unidad 6 &rarr;</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Administration &amp; Leadership &mdash; Unit 5: Financial Stewardship and Budgeting</span><span class="lang-es">📖 Administraci&oacute;n y Liderazgo &mdash; Unidad 5: Mayordom&iacute;a financiera y presupuesto</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"He who is faithful in what is least is faithful also in much." &mdash; Luke 16:10 (NKJV)</span><span class="lang-es">&#9873; "El que es fiel en lo muy poco, tambi&eacute;n en lo m&aacute;s es fiel." &mdash; Lucas 16:10 (RVG)</span></p>
+</div>
+
+<div id="regCard" style="display:none;">
+    <input type="text" id="regName" aria-label="regName"><input type="email" id="regEmail" aria-label="regEmail">
+    <select id="regTrack" aria-label="regTrack"><option value="certificate"></option></select>
+    <button id="regBtn"></button><div id="regStatus"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h3>Introduction &mdash; The Subject Jesus Did Not Avoid</h3>
+<p>There is an old myth that money is somehow beneath the spiritual leader &mdash; that a true man of God should not dirty his hands with budgets and bank accounts. But you cannot read the Gospels honestly and believe that myth. Our Lord spoke about money constantly &mdash; more than He spoke of heaven, more than He spoke of prayer. He knew what we keep forgetting: that a man's wallet is wired directly to his heart, and that how a church handles its money is a spiritual matter from the first peso to the last. So we will not be too pious to talk about money and budgets. We will follow the Master, who looked the subject full in the face and called it by its name &mdash; a test.</p>
+
+<h3>I. You Cannot Serve God and Money</h3>
+<p>Begin where Jesus begins, with a line that allows no middle ground: <em>"No servant can serve two masters... You cannot serve God and mammon"</em> (Luke 16:13). Mammon is money personified, money with a will of its own, money that wants to be lord. And Jesus says you will have a master; the only question is which one. Money is a wonderful servant and a terrible master. Under God it builds churches, feeds the hungry, and sends missionaries. On the throne it corrupts everything it touches, pastors included.</p>
+<p>And just before it, He gives the principle that governs this whole unit: <em>"He who is faithful in what is least is faithful also in much... if you have not been faithful in the unrighteous mammon, who will commit to your trust the true riches?"</em> (Luke 16:10-11). Hear what He says. Money is the very least &mdash; the training ground. God watches how a man handles the small, the dirty, and the temporary thing of money to decide whether He can trust him with the large and eternal thing of souls. Show me how a pastor handles the offering plate, and I will show you whether God can trust him with a flock. Faithfulness with money is the test that comes before the trust.</p>
+<div class="scripture">"No servant can serve two masters... You cannot serve God and mammon." &mdash; Luke 16:13 (NKJV)</div>
+
+<h3>II. The Sacred Trust</h3>
+<p>So whose money is it? Settle it the way we settled the question of the flock in Unit 2: it is not yours. When a widow lays her offering on the plate, she is not paying the pastor; she is giving to God. That money is a sacred trust &mdash; the worship of the people, laid on the altar, passing through your hands on its way to the work of God. The man who forgets this and begins to think of the church's money as his money has committed the first and most deadly error of church finance.</p>
+<p>The leader, then, handles the money exactly as he handles the flock: as a steward of what belongs to Another. He will give account for every peso, not first to an auditor but to God. This one conviction &mdash; this is God's money, entrusted by His people &mdash; will keep a man honest when no one is watching, careful when the amounts are large, and humble when the budget is healthy. Lose that conviction, and no accounting system on earth will save him. Hold it, and he will handle the Lord's money as the holy thing it is.</p>
+
+<h3>III. Count the Cost: The Budget as a Plan</h3>
+<p>Now the practical tool, and notice that Jesus Himself recommends it. <em>"For which of you, intending to build a tower, does not sit down first and count the cost, to see whether he has enough to finish it?"</em> (Luke 14:28). That is budgeting, straight from the lips of the Lord. A church that rushes into commitments without sitting down to count the cost is the man who laid a foundation and could not finish, and <em>"all who see it begin to mock him"</em> (Luke 14:29). Budgeting is not unbelief; it is obedience to a direct word of Christ.</p>
+<p>So understand what a budget really is. A budget is not a cage; it is a plan expressed in money. It is your priorities translated into numbers. Show me a church budget and I will read you the church's true values, because money does not lie &mdash; a church spends on what it truly treasures, whatever it says it treasures. This is why budgeting belongs in a leadership course and not only an accounting course. When you build a budget, you are putting the vision of Unit 3 into figures, deciding before God where the people's offerings will go. Count the cost. Make the plan. Let the money follow the mission.</p>
+<div class="scripture">"For which of you, intending to build a tower, does not sit down first and count the cost...?" &mdash; Luke 14:28 (NKJV)</div>
+
+<h3>IV. Honest Before All</h3>
+<p>Now hear the apostle Paul, who handled an enormous relief offering for Jerusalem, tell you how to keep your hands clean. <em>"Avoiding this: that anyone should blame us in this lavish gift which is administered by us &mdash; providing honorable things, not only in the sight of the Lord, but also in the sight of men"</em> (2 Corinthians 8:20-21). Read it twice. Paul was an apostle; surely his integrity was beyond question. Yet he refused to carry the money alone. He traveled with trusted brothers chosen by the churches, so that no one could so much as whisper an accusation.</p>
+<p>There is the rule that has saved a thousand ministries and whose absence has destroyed a thousand more: be honest not only before God, who sees the heart, but before men, who see only the appearance. It is not enough to be honest; you must be visibly honest. This is why a church's money must never be controlled by one person alone &mdash; least of all the pastor &mdash; by himself. More than one hand counts it. More than one signature releases it. The books are open. There are reports the congregation can see and an audit they can trust. This is not suspicion; it is wisdom and love. The leader who builds these walls of transparency protects the church not only from himself; he protects himself from the accusation that will surely come, and he protects the gospel from reproach. Avoid even the appearance of evil where money is concerned, and you take a weapon out of the enemy's hand.</p>
+<div class="scripture">"...providing honorable things, not only in the sight of the Lord, but also in the sight of men." &mdash; 2 Corinthians 8:21 (NKJV)</div>
+
+<h3>V. The Joy of Generosity</h3>
+<p>But money in the church is not only to be guarded; it is to be given, and given with joy. <em>"He who sows sparingly will also reap sparingly, and he who sows bountifully will also reap bountifully. So let each one give as he purposes in his heart, not grudgingly or of necessity; for God loves a cheerful giver"</em> (2 Corinthians 9:6-7). And the promise that frees us to give: <em>"And God is able to make all grace abound toward you, that you... may have an abundance for every good work"</em> (2 Corinthians 9:8).</p>
+<p>A church that speaks of money only to receive it has missed the point entirely. The leader's task is to teach and to model generosity &mdash; to lead the people into the sheer joy of cheerful, open-handed giving, because that giving does them good. A generous church is a happy church, and a stingy church is a sick one, however full its accounts. So preach giving not as the church's need to receive but as the giver's privilege to sow, trusting the God who makes grace abound. And let the leaders give first and give most, for no man can call a people to a generosity he does not practice himself.</p>
+
+<h3>VI. The Love of Money</h3>
+<p>Now the warning, sharp and unavoidable. <em>"For the love of money is a root of all kinds of evil, for which some have strayed from the faith in their greediness, and pierced themselves through with many sorrows"</em> (1 Timothy 6:10). Mark the words well &mdash; not money, but the love of money; and not a trivial danger, but a root from which all kinds of evil spring. And note whom Paul warns: not rich pagans, but men who "stray from the faith." Pastors fall here. The overseer, Paul says, must not be <em>"greedy for money"</em> (1 Timothy 3:3).</p>
+<p>So the leader must mount a guard over his own heart at exactly the point where money meets ministry. The danger is not that he will steal &mdash; most never do. The danger is subtler: that money will quietly rise from servant to master, that he will begin to make decisions for the offering rather than for the Lord, that contentment will slip away and greed move in. The remedy is contentment, <em>"for we brought nothing into this world, and it is certain we can carry nothing out"</em> (1 Timothy 6:7). Guard your heart, brother. Keep money in its place as a servant, and never let the thing you handle every week become the thing you love.</p>
+<div class="scripture">"For the love of money is a root of all kinds of evil... and pierced themselves through with many sorrows." &mdash; 1 Timothy 6:10 (NKJV)</div>
+
+<h3>VII. The Laborer Is Worthy</h3>
+<p>Lest all this make us stingy with those who serve, Paul corrects us in the other direction too. <em>"Let the elders who rule well be counted worthy of double honor, especially those who labor in the word and doctrine. For the Scripture says, 'You shall not muzzle an ox while it treads out the grain,' and, 'The laborer is worthy of his wages'"</em> (1 Timothy 5:17-18). Faithful stewardship is not only about guarding money from waste; it is about using it justly, and that includes justly providing for those who give their lives to the work.</p>
+<p>A church that leaves its pastor and its workers without what they need, while sitting on full accounts, is not being thrifty; it is muzzling the ox, and God notices. So the same budget that funds the mission must also honor the worker. Here is the beautiful balance of this whole unit: the leader himself must not be greedy, but the church must not be stingy with him; he holds money loosely for his own sake, and the church holds him generously for his. Guard it as a steward, give it as a holy thing, and provide for the worker as a just and grateful people. Be faithful with the unrighteous mammon, and the God who tested you with the very least will commit to you the true riches.</p>
+<div class="scripture">"The laborer is worthy of his wages." &mdash; 1 Timothy 5:18 (NKJV)</div>
+
+</div>
+<div class="lang-es">
+
+<h3>Introducci&oacute;n &mdash; El tema que Jes&uacute;s no evit&oacute;</h3>
+<p>Hay un viejo mito de que el dinero est&aacute; de alg&uacute;n modo por debajo del l&iacute;der espiritual, que un verdadero hombre de Dios no debe ensuciarse las manos con presupuestos y cuentas de banco. Pero usted no puede leer los Evangelios con honradez y creer ese mito. Nuestro Se&ntilde;or habl&oacute; del dinero constantemente &mdash; m&aacute;s de lo que habl&oacute; del cielo, m&aacute;s de lo que habl&oacute; de la oraci&oacute;n. &Eacute;l sab&iacute;a lo que nosotros seguimos olvidando: que la billetera de un hombre est&aacute; conectada directamente a su coraz&oacute;n, y que c&oacute;mo maneja una iglesia su dinero es un asunto espiritual desde el primer peso hasta el &uacute;ltimo. As&iacute; que no seremos demasiado piadosos para hablar de pesos y presupuestos. Seguiremos al Maestro, que mir&oacute; el tema de frente y lo llam&oacute; por su nombre &mdash; una prueba.</p>
+
+<h3>I. No pod&eacute;is servir a Dios y a las riquezas</h3>
+<p>Comience donde Jes&uacute;s comienza, con una l&iacute;nea que no permite t&eacute;rmino medio: <em>"Ning&uacute;n siervo puede servir a dos se&ntilde;ores... No pod&eacute;is servir a Dios y a las riquezas"</em> (&#9873; Lucas 16:13). Las riquezas (Mam&oacute;n) son el dinero personificado, el dinero con voluntad propia, el dinero que quiere ser se&ntilde;or. Y Jes&uacute;s dice que usted tendr&aacute; un amo; la &uacute;nica pregunta es cu&aacute;l. El dinero es un siervo maravilloso y un amo terrible. Bajo Dios construye iglesias, alimenta al hambriento y env&iacute;a misioneros. En el trono corrompe todo lo que toca, incluidos los pastores.</p>
+<p>Y justo antes, da el principio que gobierna toda esta unidad: <em>"El que es fiel en lo muy poco, tambi&eacute;n en lo m&aacute;s es fiel... si en las riquezas injustas no fuisteis fieles, &iquest;qui&eacute;n os confiar&aacute; lo verdadero?"</em> (&#9873; Lucas 16:10-11). Oiga lo que dice. El dinero es lo muy poco &mdash; el campo de entrenamiento. Dios observa c&oacute;mo maneja un hombre lo peque&ntilde;o, lo sucio y lo temporal del dinero para decidir si puede confiarle lo grande y eterno de las almas. Mu&eacute;streme c&oacute;mo maneja un pastor el plato de la ofrenda, y le mostrar&eacute; si Dios puede confiarle una grey. La fidelidad con las riquezas es la prueba que viene antes de la confianza.</p>
+<div class="scripture">&#9873; "Ning&uacute;n siervo puede servir a dos se&ntilde;ores... No pod&eacute;is servir a Dios y a las riquezas." &mdash; Lucas 16:13 (RVG)</div>
+
+<h3>II. La confianza sagrada</h3>
+<p>Entonces, &iquest;de qui&eacute;n es el dinero? Resu&eacute;lvalo como resolvimos la cuesti&oacute;n de la grey en la Unidad 2: no es suyo. Cuando una viuda deja su ofrenda en el plato, no le est&aacute; pagando al pastor; est&aacute; dando a Dios. Ese dinero es una confianza sagrada &mdash; la adoraci&oacute;n del pueblo, puesta sobre el altar, pasando por sus manos camino a la obra de Dios. El hombre que olvida esto y comienza a pensar en el dinero de la iglesia como su dinero ha cometido el primero y m&aacute;s mortal error de las finanzas de la iglesia.</p>
+<p>El l&iacute;der, pues, maneja el dinero exactamente como maneja la grey: como mayordomo de lo que pertenece a Otro. Dar&aacute; cuenta de cada peso, no primero a un auditor sino a Dios. Esta sola convicci&oacute;n &mdash; este es el dinero de Dios, confiado por su pueblo &mdash; mantendr&aacute; honrado a un hombre cuando nadie observa, cuidadoso cuando las cantidades son grandes, y humilde cuando el presupuesto est&aacute; sano. Pierda esa convicci&oacute;n, y ning&uacute;n sistema contable en la tierra lo salvar&aacute;. Sost&eacute;ngala, y manejar&aacute; el dinero del Se&ntilde;or como la cosa santa que es.</p>
+
+<h3>III. Contad el costo: el presupuesto como plan</h3>
+<p>Ahora la herramienta pr&aacute;ctica, y note que Jes&uacute;s mismo la recomienda. <em>"Porque &iquest;qui&eacute;n de vosotros, queriendo edificar una torre, no se sienta primero y cuenta el costo, para ver si tiene lo que necesita para acabarla?"</em> (&#9873; Lucas 14:28). Eso es presupuestar, directamente de los labios del Se&ntilde;or. Una iglesia que se lanza a compromisos sin sentarse a contar el costo es el hombre que puso un cimiento y no pudo terminar, <em>"y todos los que lo vieren comiencen a hacer burla de &eacute;l"</em> (&#9873; Lucas 14:29). Presupuestar no es incredulidad; es obediencia a una palabra directa de Cristo.</p>
+<p>As&iacute; que entienda lo que un presupuesto realmente es. Un presupuesto no es una jaula; es un plan expresado en dinero. Son sus prioridades traducidas a n&uacute;meros. Mu&eacute;streme un presupuesto de iglesia y le leer&eacute; los verdaderos valores de la iglesia, porque el dinero no miente &mdash; una iglesia gasta en lo que de veras atesora, diga lo que diga que atesora. Por eso presupuestar pertenece a un curso de liderazgo y no solo a un curso de contabilidad. Cuando construye un presupuesto, est&aacute; poniendo la visi&oacute;n de la Unidad 3 en cifras, decidiendo delante de Dios a d&oacute;nde ir&aacute;n las ofrendas del pueblo. Cuente el costo. Haga el plan. Que el dinero siga a la misi&oacute;n.</p>
+<div class="scripture">&#9873; "Porque &iquest;qui&eacute;n de vosotros, queriendo edificar una torre, no se sienta primero y cuenta el costo...?" &mdash; Lucas 14:28 (RVG)</div>
+
+<h3>IV. Honesto delante de todos</h3>
+<p>Ahora oiga al ap&oacute;stol Pablo, que manej&oacute; una enorme ofrenda de ayuda para Jerusal&eacute;n, decirle c&oacute;mo mantener limpias las manos. <em>"Evitando que nadie nos vitupere en esta abundancia que administramos; procurando hacer las cosas honradamente, no s&oacute;lo delante del Se&ntilde;or, sino tambi&eacute;n delante de los hombres"</em> (&#9873; 2 Corintios 8:20-21). L&eacute;alo dos veces. Pablo era ap&oacute;stol; seguramente su integridad estaba fuera de duda. Sin embargo, se neg&oacute; a llevar el dinero solo. Viaj&oacute; con hermanos de confianza escogidos por las iglesias, para que nadie pudiera siquiera susurrar una acusaci&oacute;n.</p>
+<p>Ah&iacute; est&aacute; la regla que ha salvado a mil ministerios y cuya ausencia ha destruido a otros mil: sea honesto no solo delante de Dios, que ve el coraz&oacute;n, sino delante de los hombres, que solo ven la apariencia. No basta con ser honesto; debe ser visiblemente honesto. Por eso el dinero de la iglesia nunca debe ser controlado por una sola persona &mdash; y menos el pastor &mdash; a solas. M&aacute;s de una mano lo cuenta. M&aacute;s de una firma lo libera. Los libros est&aacute;n abiertos. Hay informes que la congregaci&oacute;n puede ver, y una auditor&iacute;a en la que pueda confiar. Esto no es sospecha; es sabidur&iacute;a y amor. El l&iacute;der que construye estos muros de transparencia no protege a la iglesia solo de s&iacute; mismo; se protege a s&iacute; mismo de la acusaci&oacute;n que ciertamente vendr&aacute;, y protege el evangelio del oprobio. Evite aun la apariencia de mal donde el dinero est&aacute; en juego, y quitar&aacute; un arma de la mano del enemigo.</p>
+<div class="scripture">&#9873; "...procurando hacer las cosas honradamente, no s&oacute;lo delante del Se&ntilde;or, sino tambi&eacute;n delante de los hombres." &mdash; 2 Corintios 8:21 (RVG)</div>
+
+<h3>V. El gozo de la generosidad</h3>
+<p>Pero el dinero en la iglesia no solo se ha de guardar; se ha de dar, y dar con gozo. <em>"El que siembra escasamente, tambi&eacute;n segar&aacute; escasamente; y el que siembra abundantemente, abundantemente tambi&eacute;n segar&aacute;. Cada uno d&eacute; como propuso en su coraz&oacute;n; no con tristeza, ni por necesidad; porque Dios ama al dador alegre"</em> (&#9873; 2 Corintios 9:6-7). Y la promesa que nos libera para dar: <em>"Y poderoso es Dios para hacer que abunde en vosotros toda gracia; a fin de que... abund&eacute;is para toda buena obra"</em> (&#9873; 2 Corintios 9:8).</p>
+<p>Una iglesia que solo habla del dinero para recibirlo ha perdido el punto por completo. La tarea del l&iacute;der es ense&ntilde;ar y modelar la generosidad &mdash; guiar al pueblo al puro gozo de un dar alegre y de mano abierta, porque ese dar les hace bien. Una iglesia generosa es una iglesia feliz, y una iglesia tacа&ntilde;a es una iglesia enferma, por llenas que est&eacute;n sus cuentas. As&iacute; que predique el dar no como la necesidad de la iglesia de recibir sino como el privilegio del dador de sembrar, confiando en el Dios que hace abundar la gracia. Y que los l&iacute;deres den primero y den m&aacute;s, porque ning&uacute;n hombre puede llamar a un pueblo a una generosidad que &eacute;l mismo no practica.</p>
+
+<h3>VI. El amor al dinero</h3>
+<p>Ahora la advertencia, aguda e inevitable. <em>"Porque el amor al dinero es la ra&iacute;z de todos los males; el cual codiciando algunos, se extraviaron de la fe, y fueron traspasados de muchos dolores"</em> (&#9873; 1 Timoteo 6:10). Marque bien las palabras &mdash; no el dinero, sino el amor al dinero; no la ra&iacute;z de un mal, sino la ra&iacute;z de todos los males. Y note a qui&eacute;n advierte Pablo: no a los paganos ricos, sino a hombres que "se extrav&iacute;an de la fe". Los pastores caen aqu&iacute;. El obispo, dice Pablo, no ha de ser <em>"codicioso de ganancias deshonestas"</em> (&#9873; 1 Timoteo 3:3).</p>
+<p>As&iacute; que el l&iacute;der debe montar guardia sobre su propio coraz&oacute;n justo en el punto donde el dinero se encuentra con el ministerio. El peligro no es que robe &mdash; la mayor&iacute;a nunca lo hace. El peligro es m&aacute;s sutil: que el dinero suba calladamente de siervo a amo, que empiece a tomar decisiones por la ofrenda en vez de por el Se&ntilde;or, que el contentamiento se fugue y la codicia se instale. El remedio es el contentamiento, <em>"porque nada hemos tra&iacute;do a este mundo, y sin duda nada podremos sacar"</em> (&#9873; 1 Timoteo 6:7). Guarde su coraz&oacute;n, hermano. Mantenga el dinero en su lugar como siervo, y nunca deje que aquello que maneja cada semana se vuelva aquello que ama.</p>
+<div class="scripture">&#9873; "Porque el amor al dinero es la ra&iacute;z de todos los males... y fueron traspasados de muchos dolores." &mdash; 1 Timoteo 6:10 (RVG)</div>
+
+<h3>VII. El obrero es digno</h3>
+<p>Para que todo esto no nos vuelva taca&ntilde;os con quienes sirven, Pablo nos corrige tambi&eacute;n en la otra direcci&oacute;n. <em>"Los ancianos que gobiernan bien, sean tenidos por dignos de doble honra; mayormente los que trabajan en predicar y ense&ntilde;ar. Pues la Escritura dice: No pondr&aacute;s bozal al buey que trilla. Y: Digno es el obrero de su salario"</em> (&#9873; 1 Timoteo 5:17-18). La mayordom&iacute;a fiel no se trata solo de guardar el dinero del despilfarro; se trata de usarlo con justicia, y eso incluye proveer con justicia para quienes dan su vida a la obra.</p>
+<p>Una iglesia que deja a su pastor y a sus obreros sin lo necesario, mientras se sienta sobre cuentas llenas, no est&aacute; siendo ahorradora; est&aacute; poniendo bozal al buey, y Dios lo nota. As&iacute; que el mismo presupuesto que financia la misi&oacute;n tambi&eacute;n debe honrar al obrero. Aqu&iacute; est&aacute; el hermoso equilibrio de toda esta unidad: el l&iacute;der mismo no debe ser avaricioso, pero la iglesia no debe ser taca&ntilde;a con &eacute;l; &eacute;l sostiene el dinero con holgura por su propio bien, y la iglesia lo sostiene con generosidad por el bien de &eacute;l. Gu&aacute;rdelo como mayordomo, d&eacute;lo como santo, y provea para el obrero como un pueblo justo y agradecido. Sea fiel con las riquezas injustas, y el Dios que lo prob&oacute; con lo muy poco le confiar&aacute; las verdaderas riquezas.</p>
+<div class="scripture">&#9873; "Digno es el obrero de su salario." &mdash; 1 Timoteo 5:18 (RVG)</div>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lecci&oacute;n y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 5;
+const COURSE = 'al';
+const NEXT_UNIT_URL = 'CTSALUnit6.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Biblical Call to Lead God's House", "Unit 2 - The Pastor as Undershepherd & Steward", "Unit 3 - Vision, Calling & Strategic Planning", "Unit 4 - Organization, Structure & Delegation", "Unit 5 - Financial Stewardship and Budgeting", "Unit 6 - Personnel and Volunteer Management", "Unit 7 - Conflict Resolution and Church Discipline", "Unit 8 - Facilities, Legal Matters, and Risk Management", "Unit 9 - Multiplication, Church Planting, and Succession", "Unit 10 - The Leader's Heart: Integrity, Rest, and Finishing Well"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSALUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "How often did Jesus speak about money, according to this unit?", "textEs": "Según esta unidad, ¿con qué frecuencia habló Jesús del dinero?", "optionsEn": ["Only to the rich", "More than He spoke of heaven or prayer", "Only once", "Rarely"], "optionsEs": ["Solo a los ricos", "Más de lo que habló del cielo o de la oración", "Solo una vez", "Rara vez"], "explanationEn": "Jesus spoke of money constantly — more than of heaven or prayer — because the wallet is wired to the heart.", "explanationEs": "Jesús habló del dinero constantemente — más que del cielo o la oración — porque la billetera está unida al corazón.", "correct": 1}, {"textEn": "'You cannot serve God and mammon' teaches that money is:", "textEs": "'No podéis servir a Dios y a las riquezas' enseña que el dinero es:", "optionsEn": ["A wonderful servant but a terrible master", "Beneath the leader's notice", "Always evil", "Spiritually neutral forever"], "optionsEs": ["Un siervo maravilloso pero un amo terrible", "Indigno de la atención del líder", "Siempre malo", "Espiritualmente neutral para siempre"], "explanationEn": "Money is a wonderful servant and a terrible master; you will have a master — the question is which.", "explanationEs": "El dinero es un siervo maravilloso y un amo terrible; tendrá un amo — la pregunta es cuál.", "correct": 0}, {"textEn": "In Luke 16:10-11, money is described as the 'least' because it is:", "textEs": "En Lucas 16:10-11, el dinero se describe como 'lo muy poco' porque es:", "optionsEn": ["The training ground God uses before trusting a man with souls", "Worthless", "Only for unbelievers", "Unimportant to God"], "optionsEs": ["El campo de entrenamiento que Dios usa antes de confiar almas a un hombre", "Sin valor", "Solo para incrédulos", "Sin importancia para Dios"], "explanationEn": "Money is the training ground; God watches how a man handles it before trusting him with souls.", "explanationEs": "El dinero es el campo de entrenamiento; Dios observa cómo lo maneja un hombre antes de confiarle almas.", "correct": 0}, {"textEn": "Whose money is the church's offering, according to the unit?", "textEs": "¿De quién es el dinero de la ofrenda de la iglesia, según la unidad?", "optionsEn": ["The pastor's", "The largest donor's", "The board's", "God's, a sacred trust given by His people"], "optionsEs": ["Del pastor", "Del mayor donante", "De la junta", "De Dios, una confianza sagrada dada por su pueblo"], "explanationEn": "The offering is given to God; it is a sacred trust passing through the leader's hands to God's work.", "explanationEs": "La ofrenda se da a Dios; es una confianza sagrada que pasa por las manos del líder hacia la obra de Dios.", "correct": 3}, {"textEn": "The first and most deadly error of church finance is:", "textEs": "El primero y más mortal error de las finanzas de la iglesia es:", "optionsEn": ["Keeping a budget", "Having an audit", "Thinking of the church's money as one's own", "Giving generously"], "optionsEs": ["Llevar un presupuesto", "Tener una auditoría", "Pensar en el dinero de la iglesia como propio", "Dar con generosidad"], "explanationEn": "Forgetting the money is God's and treating it as one's own is the first and deadliest error.", "explanationEs": "Olvidar que el dinero es de Dios y tratarlo como propio es el primero y más mortal error.", "correct": 2}, {"textEn": "According to Luke 14:28, a budget is essentially:", "textEs": "Según Lucas 14:28, un presupuesto es esencialmente:", "optionsEn": ["Optional for spiritual churches", "A worldly intrusion", "A sign of unbelief", "Counting the cost — a plan Jesus Himself recommends"], "optionsEs": ["Opcional para iglesias espirituales", "Una intrusión mundana", "Señal de incredulidad", "Contar el costo — un plan que Jesús mismo recomienda"], "explanationEn": "Jesus told builders to count the cost first; budgeting is obedience to a direct word of Christ.", "explanationEs": "Jesús dijo que el constructor cuente primero el costo; presupuestar es obediencia a una palabra de Cristo.", "correct": 3}, {"textEn": "A church budget, rightly understood, is:", "textEs": "Un presupuesto de iglesia, bien entendido, es:", "optionsEn": ["A secret kept from the people", "Just an accounting chore", "A plan expressed in money — priorities translated into numbers", "A cage that limits faith"], "optionsEs": ["Un secreto que se oculta al pueblo", "Solo una tarea contable", "Un plan expresado en dinero — prioridades traducidas a números", "Una jaula que limita la fe"], "explanationEn": "A budget is not a cage but a plan in money form; it reveals a church's true values.", "explanationEs": "Un presupuesto no es una jaula sino un plan en forma de dinero; revela los verdaderos valores de la iglesia.", "correct": 2}, {"textEn": "Why does the unit say 'money does not lie'?", "textEs": "¿Por qué dice la unidad que 'el dinero no miente'?", "optionsEn": ["Money is morally perfect", "A church spends on what it truly treasures", "Numbers cannot be misused", "Budgets are always accurate"], "optionsEs": ["El dinero es moralmente perfecto", "Una iglesia gasta en lo que de veras atesora", "Los números no pueden mal usarse", "Los presupuestos siempre son exactos"], "explanationEn": "A budget reveals real values because a church spends on what it truly treasures, whatever it claims.", "explanationEs": "Un presupuesto revela los valores reales porque una iglesia gasta en lo que de veras atesora, diga lo que diga.", "correct": 1}, {"textEn": "Why did Paul refuse to carry the Jerusalem relief offering alone?", "textEs": "¿Por qué se negó Pablo a llevar solo la ofrenda de ayuda para Jerusalén?", "optionsEn": ["So no one could even whisper an accusation", "He distrusted Jerusalem", "He was too busy", "He needed help lifting it"], "optionsEs": ["Para que nadie pudiera siquiera susurrar una acusación", "Desconfiaba de Jerusalén", "Estaba muy ocupado", "Necesitaba ayuda para cargarla"], "explanationEn": "Though his integrity was beyond question, Paul traveled with trusted brothers to prevent any accusation.", "explanationEs": "Aunque su integridad estaba fuera de duda, Pablo viajó con hermanos de confianza para evitar toda acusación.", "correct": 0}, {"textEn": "'Honorable... not only before the Lord but before men' means a leader must be:", "textEs": "'Honrado... no solo delante del Señor sino de los hombres' significa que el líder debe ser:", "optionsEn": ["Secretive about finances", "Honest only in his heart", "Not merely honest but visibly honest", "Trusted without any checks"], "optionsEs": ["Reservado con las finanzas", "Honesto solo en su corazón", "No solo honesto sino visiblemente honesto", "Confiado sin ningún control"], "explanationEn": "It is not enough to be honest before God; one must be visibly honest before men as well.", "explanationEs": "No basta con ser honesto delante de Dios; hay que ser visiblemente honesto también delante de los hombres.", "correct": 2}, {"textEn": "Which practice does the unit require for handling church money?", "textEs": "¿Qué práctica exige la unidad para el manejo del dinero de la iglesia?", "optionsEn": ["No records are kept", "Only the largest donor decides", "The pastor controls it alone", "More than one hand counts it and more than one signature releases it"], "optionsEs": ["No se llevan registros", "Solo el mayor donante decide", "El pastor lo controla solo", "Más de una mano lo cuenta y más de una firma lo libera"], "explanationEn": "Money must never be controlled by one person alone; multiple hands count and multiple signatures release it.", "explanationEs": "El dinero nunca debe ser controlado por una sola persona; varias manos cuentan y varias firmas lo liberan.", "correct": 3}, {"textEn": "Transparency in church finances is described as:", "textEs": "La transparencia en las finanzas de la iglesia se describe como:", "optionsEn": ["An insult to leadership", "Wisdom and love that also protect the leader and the gospel", "Suspicion of the pastor", "Unnecessary for honest men"], "optionsEs": ["Un insulto al liderazgo", "Sabiduría y amor que también protegen al líder y al evangelio", "Sospecha del pastor", "Innecesaria para hombres honestos"], "explanationEn": "Transparency is wisdom and love; it protects the church, the leader from accusation, and the gospel from reproach.", "explanationEs": "La transparencia es sabiduría y amor; protege a la iglesia, al líder de la acusación, y al evangelio del oprobio.", "correct": 1}, {"textEn": "According to 2 Corinthians 9:7, God loves:", "textEs": "Según 2 Corintios 9:7, Dios ama:", "optionsEn": ["The largest giver", "A cheerful giver", "The reluctant giver", "The one who gives by necessity"], "optionsEs": ["Al que más da", "Al dador alegre", "Al dador renuente", "Al que da por necesidad"], "explanationEn": "Each should give as he purposes in his heart, not grudgingly; for God loves a cheerful giver.", "explanationEs": "Cada uno dé como propuso en su corazón, no con tristeza; porque Dios ama al dador alegre.", "correct": 1}, {"textEn": "How should a leader preach giving?", "textEs": "¿Cómo debe un líder predicar el dar?", "optionsEn": ["As a tax on members", "As the church's need to receive", "As the giver's privilege to sow, trusting God who makes grace abound", "Only when funds are low"], "optionsEs": ["Como un impuesto a los miembros", "Como la necesidad de la iglesia de recibir", "Como el privilegio del dador de sembrar, confiando en Dios que hace abundar la gracia", "Solo cuando faltan fondos"], "explanationEn": "Preach giving as the giver's joyful privilege to sow, not as the church's need to receive.", "explanationEs": "Predique el dar como el privilegio gozoso del dador de sembrar, no como la necesidad de la iglesia de recibir.", "correct": 2}, {"textEn": "First Timothy 6:10 warns that the root of all kinds of evil is:", "textEs": "1 Timoteo 6:10 advierte que la raíz de todos los males es:", "optionsEn": ["Budgeting", "Poverty", "Money itself", "The love of money"], "optionsEs": ["Presupuestar", "La pobreza", "El dinero mismo", "El amor al dinero"], "explanationEn": "Not money but the LOVE of money is the root; some have strayed from the faith through greed.", "explanationEs": "No el dinero sino el AMOR al dinero es la raíz; algunos se extraviaron de la fe por la codicia.", "correct": 3}, {"textEn": "The subtle danger of money for a pastor is usually that:", "textEs": "El peligro sutil del dinero para un pastor suele ser que:", "optionsEn": ["He will obviously steal", "He will give too much away", "He will refuse all salary", "Money quietly rises from servant to master in his heart"], "optionsEs": ["Robará de forma obvia", "Regalará demasiado", "Rechazará todo salario", "El dinero sube calladamente de siervo a amo en su corazón"], "explanationEn": "Most pastors never steal; the subtler danger is money rising from servant to master and greed moving in.", "explanationEs": "La mayoría nunca roba; el peligro sutil es que el dinero suba de siervo a amo y entre la codicia.", "correct": 3}, {"textEn": "The remedy the unit prescribes against the love of money is:", "textEs": "El remedio que la unidad prescribe contra el amor al dinero es:", "optionsEn": ["Earning more", "Avoiding all money", "Contentment ('we brought nothing into this world')", "Frequent fundraising"], "optionsEs": ["Ganar más", "Evitar todo dinero", "El contentamiento ('nada hemos traído a este mundo')", "Recaudar fondos con frecuencia"], "explanationEn": "The remedy is contentment, remembering we brought nothing in and can carry nothing out (1 Tim 6:7).", "explanationEs": "El remedio es el contentamiento, recordando que nada trajimos ni podremos sacar (1 Ti 6:7).", "correct": 2}, {"textEn": "First Timothy 5:17-18 ('do not muzzle the ox') teaches that the church must:", "textEs": "1 Timoteo 5:17-18 ('no pongas bozal al buey') enseña que la iglesia debe:", "optionsEn": ["Keep all funds in reserve", "Justly provide for those who labor in the work", "Spend only on buildings", "Pay workers nothing"], "optionsEs": ["Guardar todos los fondos en reserva", "Proveer con justicia para quienes trabajan en la obra", "Gastar solo en edificios", "No pagar nada a los obreros"], "explanationEn": "Faithful stewardship includes justly providing for those who labor; a church that withholds muzzles the ox.", "explanationEs": "La mayordomía fiel incluye proveer con justicia para los que trabajan; una iglesia que retiene pone bozal al buey.", "correct": 1}, {"textEn": "The 'beautiful balance' of this unit is that:", "textEs": "El 'hermoso equilibrio' de esta unidad es que:", "optionsEn": ["The leader must not be greedy, yet the church must not be stingy with him", "Both leader and church should be frugal to the bone", "Money should never be discussed", "The leader hoards and the church spends"], "optionsEs": ["El líder no debe ser avaricioso, pero la iglesia no debe ser tacaña con él", "Líder e iglesia deben ser frugales al extremo", "El dinero nunca debe discutirse", "El líder acapara y la iglesia gasta"], "explanationEn": "He holds money loosely for his own sake; the church holds him generously for his — a beautiful balance.", "explanationEs": "Él sostiene el dinero con holgura por su bien; la iglesia lo sostiene con generosidad por el de él — un hermoso equilibrio.", "correct": 0}, {"textEn": "The governing principle of Unit 5 is that faithfulness with money:", "textEs": "El principio rector de la Unidad 5 es que la fidelidad con el dinero:", "optionsEn": ["Is the test that comes before God entrusts the true riches of souls", "Matters only to accountants", "Guarantees wealth", "Is unrelated to spiritual trust"], "optionsEs": ["Es la prueba que viene antes de que Dios confíe las verdaderas riquezas de las almas", "Solo importa a los contadores", "Garantiza riqueza", "No tiene relación con la confianza espiritual"], "explanationEn": "Be faithful with the least (money) and God will commit to you the true riches; it is the test before the trust.", "explanationEs": "Sea fiel en lo muy poco (el dinero) y Dios le confiará las verdaderas riquezas; es la prueba antes de la confianza.", "correct": 0}];
+const kwQuestions = [{"textEn": "Why is how a church handles money a spiritual matter, and how did Jesus treat the subject?", "textEs": "¿Por qué es un asunto espiritual cómo maneja una iglesia el dinero, y cómo trató Jesús el tema?", "kw_en": ["money", "heart", "spiritual", "jesus", "test", "master", "serv", "treasure"], "kw_es": ["dinero", "corazón", "espiritual", "jesús", "prueba", "amo", "sirv", "atesor"], "modelEn": "How a church handles money is a spiritual matter because a man's wallet is wired directly to his heart; Jesus said you cannot serve God and money, so money is never neutral but reveals whom you treasure. Far from treating it as beneath the spiritual leader, Jesus spoke about money constantly, more than He spoke of heaven or prayer, and He called it a test: he who is faithful in the least is faithful also in much. Money is a wonderful servant and a terrible master, and God watches how a man handles it to decide whether He can trust him with the eternal riches of souls.", "modelEs": "Cómo maneja una iglesia el dinero es un asunto espiritual porque la billetera de un hombre está unida directamente a su corazón; Jesús dijo que no se puede servir a Dios y a las riquezas, así que el dinero nunca es neutral sino que revela a quién se atesora. Lejos de tratarlo como algo indigno del líder espiritual, Jesús habló del dinero constantemente, más de lo que habló del cielo o de la oración, y lo llamó una prueba: el que es fiel en lo muy poco también en lo más es fiel. El dinero es un siervo maravilloso y un amo terrible, y Dios observa cómo lo maneja un hombre para decidir si puede confiarle las riquezas eternas de las almas."}, {"textEn": "Explain why the church's money is a 'sacred trust' and how that conviction guards a leader.", "textEs": "Explique por qué el dinero de la iglesia es una 'confianza sagrada' y cómo esa convicción guarda al líder.", "kw_en": ["trust", "god", "steward", "account", "offer", "honest", "belong", "worship"], "kw_es": ["confianza", "dios", "mayord", "cuenta", "ofrend", "honest", "pertenec", "adora"], "modelEn": "The church's money is a sacred trust because when a member gives, she is not paying the pastor but giving to God; the offering is the people's worship, laid on the altar and passing through the leader's hands to God's work. It belongs to Another, so the leader handles it as a steward who will give account for every peso, first to God and not merely to an auditor. This one conviction — that it is God's money, entrusted by His people — keeps a man honest when no one watches, careful when amounts are large, and humble when the budget is healthy. Lose the conviction and no accounting system can save him; hold it and he treats the money as the holy thing it is.", "modelEs": "El dinero de la iglesia es una confianza sagrada porque cuando un miembro da, no le paga al pastor sino que da a Dios; la ofrenda es la adoración del pueblo, puesta sobre el altar y pasando por las manos del líder hacia la obra de Dios. Pertenece a Otro, así que el líder lo maneja como mayordomo que dará cuenta de cada peso, primero a Dios y no solo a un auditor. Esta sola convicción — que es el dinero de Dios, confiado por su pueblo — mantiene honrado a un hombre cuando nadie observa, cuidadoso cuando las cantidades son grandes, y humilde cuando el presupuesto está sano. Pierda la convicción y ningún sistema contable lo salva; sosténgala y trata el dinero como la cosa santa que es."}, {"textEn": "How does Luke 14:28 make budgeting an act of obedience, and what is a budget really?", "textEs": "¿Cómo hace Lucas 14:28 del presupuesto un acto de obediencia, y qué es realmente un presupuesto?", "kw_en": ["budget", "cost", "count", "plan", "priorit", "obedience", "mission", "value"], "kw_es": ["presupuesto", "costo", "cuent", "plan", "priorid", "obediencia", "misión", "valor"], "modelEn": "In Luke 14:28 Jesus says a wise builder sits down first and counts the cost to see whether he can finish, so budgeting is not unbelief but obedience to a direct word of Christ; a church that rushes into commitments without counting the cost is the builder who could not finish and is mocked. A budget is not a cage but a plan expressed in money — the church's priorities translated into numbers. Money does not lie, so a budget reveals a church's true values, since a church spends on what it truly treasures. That is why budgeting belongs to leadership: building a budget puts the vision into figures and decides before God where the people's offerings will go, letting the money follow the mission.", "modelEs": "En Lucas 14:28 Jesús dice que el constructor sabio se sienta primero y cuenta el costo para ver si puede acabar, así que presupuestar no es incredulidad sino obediencia a una palabra directa de Cristo; una iglesia que se lanza a compromisos sin contar el costo es el constructor que no pudo terminar y es objeto de burla. Un presupuesto no es una jaula sino un plan expresado en dinero — las prioridades de la iglesia traducidas a números. El dinero no miente, así que un presupuesto revela los verdaderos valores de la iglesia, pues una iglesia gasta en lo que de veras atesora. Por eso presupuestar pertenece al liderazgo: construir un presupuesto pone la visión en cifras y decide delante de Dios a dónde irán las ofrendas del pueblo, dejando que el dinero siga a la misión."}, {"textEn": "What does Paul's example in 2 Corinthians 8:20-21 teach about financial transparency?", "textEs": "¿Qué enseña el ejemplo de Pablo en 2 Corintios 8:20-21 sobre la transparencia financiera?", "kw_en": ["honest", "men", "visible", "accus", "transparen", "alone", "sign", "protect"], "kw_es": ["honest", "hombres", "visible", "acusa", "transparen", "solo", "firma", "proteg"], "modelEn": "Paul handled a large relief offering and, though his integrity was beyond question, refused to carry the money alone; he traveled with trusted brothers chosen by the churches so that no one could even whisper an accusation. This teaches that a leader must be honest not only before God, who sees the heart, but before men, who see only the appearance — it is not enough to be honest, one must be visibly honest. So church money should never be controlled by one person alone, least of all the pastor: more than one hand counts it, more than one signature releases it, the books are open, and there are reports and an audit the people can trust. This transparency is not suspicion but wisdom and love, protecting the church, the leader, and the gospel.", "modelEs": "Pablo manejó una gran ofrenda de ayuda y, aunque su integridad estaba fuera de duda, se negó a llevar el dinero solo; viajó con hermanos de confianza escogidos por las iglesias para que nadie pudiera siquiera susurrar una acusación. Esto enseña que el líder debe ser honesto no solo delante de Dios, que ve el corazón, sino delante de los hombres, que solo ven la apariencia — no basta con ser honesto, hay que ser visiblemente honesto. Así que el dinero de la iglesia nunca debe ser controlado por una sola persona, y menos el pastor: más de una mano lo cuenta, más de una firma lo libera, los libros están abiertos, y hay informes y una auditoría en que el pueblo puede confiar. Esta transparencia no es sospecha sino sabiduría y amor, que protege a la iglesia, al líder y al evangelio."}, {"textEn": "How should a leader teach generosity, and why is a generous church a healthy one?", "textEs": "¿Cómo debe un líder enseñar la generosidad, y por qué una iglesia generosa es sana?", "kw_en": ["generos", "cheerful", "give", "joy", "sow", "model", "grace", "privilege"], "kw_es": ["generos", "alegre", "dar", "gozo", "sembr", "model", "gracia", "privilegio"], "modelEn": "A leader should teach and model generosity, leading the people into the sheer joy of cheerful, open-handed giving, because God loves a cheerful giver and such giving does the giver good. He should preach giving not as the church's need to receive but as the giver's privilege to sow, trusting the God who makes all grace abound so the people have enough for every good work. A generous church is a healthy, happy church, while a stingy church is a sick one however full its accounts, because the heart that gives freely is right with God. And the leaders must give first and give most, for no one can call a people to a generosity he does not practice himself.", "modelEs": "Un líder debe enseñar y modelar la generosidad, guiando al pueblo al puro gozo de un dar alegre y de mano abierta, porque Dios ama al dador alegre y ese dar le hace bien al dador. Debe predicar el dar no como la necesidad de la iglesia de recibir sino como el privilegio del dador de sembrar, confiando en el Dios que hace abundar toda gracia para que el pueblo tenga bastante para toda buena obra. Una iglesia generosa es una iglesia sana y feliz, mientras que una iglesia tacaña es una enferma por llenas que estén sus cuentas, porque el corazón que da con libertad está bien con Dios. Y los líderes deben dar primero y dar más, porque nadie puede llamar a un pueblo a una generosidad que él mismo no practica."}, {"textEn": "Explain 1 Timothy 6:10 carefully: what exactly is the danger, and whom does Paul warn?", "textEs": "Explique con cuidado 1 Timoteo 6:10: ¿cuál es exactamente el peligro, y a quién advierte Pablo?", "kw_en": ["love", "money", "root", "faith", "stray", "greed", "pastor", "heart"], "kw_es": ["amor", "dinero", "raíz", "fe", "extravi", "codicia", "pastor", "corazón"], "modelEn": "First Timothy 6:10 says the love of money is a root of all kinds of evil, and the words must be marked carefully: not money itself but the love of it, and not a trivial danger but a root from which all kinds of evil spring. Paul warns not rich pagans but men who stray from the faith in their greed and pierce themselves with many sorrows — and pastors fall here, which is why the overseer must not be greedy for money. The danger is rarely outright theft; it is subtler, that money quietly rises from servant to master, that a leader begins deciding for the offering rather than for the Lord, and that contentment slips away while greed moves in. So the leader must guard his heart where money meets ministry.", "modelEs": "Primera de Timoteo 6:10 dice que el amor al dinero es la raíz de todos los males, y hay que marcar bien las palabras: no el dinero mismo sino el amor a él, y no un peligro trivial sino una raíz de la cual brotan todos los males. Pablo advierte no a paganos ricos sino a hombres que se extravían de la fe por su codicia y se traspasan de muchos dolores — y los pastores caen aquí, por lo cual el obispo no ha de ser codicioso de ganancias. El peligro rara vez es el robo abierto; es más sutil, que el dinero suba calladamente de siervo a amo, que el líder empiece a decidir por la ofrenda en vez de por el Señor, y que el contentamiento se fugue mientras entra la codicia. Así que el líder debe guardar su corazón donde el dinero se encuentra con el ministerio."}, {"textEn": "What does 'do not muzzle the ox' (1 Timothy 5:17-18) require of a church?", "textEs": "¿Qué exige 'no pongas bozal al buey' (1 Timoteo 5:17-18) de una iglesia?", "kw_en": ["worker", "worthy", "provide", "honor", "just", "muzzle", "labor", "wage"], "kw_es": ["obrero", "digno", "prove", "honr", "just", "bozal", "trabaj", "salario"], "modelEn": "'Do not muzzle the ox that treads out the grain' requires a church to provide justly for those who labor in the work, for the laborer is worthy of his wages and the elders who rule well, especially those who labor in word and doctrine, are worthy of double honor. Faithful stewardship is not only guarding money from waste but using it justly, and that includes fair provision for the pastor and workers. A church that leaves its workers without what they need while sitting on full accounts is not thrifty but is muzzling the ox, and God notices. So the same budget that funds the mission must also honor the worker, providing for him as a just and grateful people.", "modelEs": "'No pongas bozal al buey que trilla' exige que una iglesia provea con justicia para quienes trabajan en la obra, porque el obrero es digno de su salario y los ancianos que gobiernan bien, mayormente los que trabajan en predicar y enseñar, son dignos de doble honra. La mayordomía fiel no es solo guardar el dinero del despilfarro sino usarlo con justicia, y eso incluye proveer con justicia para el pastor y los obreros. Una iglesia que deja a sus obreros sin lo necesario mientras se sienta sobre cuentas llenas no es ahorradora sino que pone bozal al buey, y Dios lo nota. Así que el mismo presupuesto que financia la misión también debe honrar al obrero, proveyendo para él como un pueblo justo y agradecido."}, {"textEn": "Describe the 'beautiful balance' Unit 5 strikes between the leader and the church regarding money.", "textEs": "Describa el 'hermoso equilibrio' que la Unidad 5 establece entre el líder y la iglesia respecto al dinero.", "kw_en": ["leader", "greed", "church", "stingy", "loose", "generous", "balance", "worker"], "kw_es": ["líder", "avaric", "iglesia", "tacañ", "holgura", "generos", "equilibr", "obrero"], "modelEn": "The beautiful balance is that the leader himself must not be greedy, holding money loosely as a servant for his own spiritual good, while the church must not be stingy with him, holding him generously for his good. These two truths protect each other: a leader guarding his heart against the love of money does not grasp for more, and a church obeying the command not to muzzle the ox provides fairly for its workers. So the same unit that warns the leader against greed also warns the church against tightfistedness. He keeps money in its place as a servant, and the church provides justly for those who labor, so that the money guards no one's idol yet leaves no faithful worker in need.", "modelEs": "El hermoso equilibrio es que el líder mismo no debe ser avaricioso, sosteniendo el dinero con holgura como siervo para su propio bien espiritual, mientras que la iglesia no debe ser tacaña con él, sosteniéndolo con generosidad para el bien de él. Estas dos verdades se protegen mutuamente: un líder que guarda su corazón contra el amor al dinero no codicia más, y una iglesia que obedece el mandato de no poner bozal al buey provee con justicia para sus obreros. Así que la misma unidad que advierte al líder contra la codicia también advierte a la iglesia contra la tacañería. Él mantiene el dinero en su lugar como siervo, y la iglesia provee con justicia para los que trabajan, de modo que el dinero no guarde el ídolo de nadie pero tampoco deje en necesidad a ningún obrero fiel."}, {"textEn": "Connect the principle of Luke 16:10 to the leader's broader ministry of souls.", "textEs": "Conecte el principio de Lucas 16:10 con el ministerio más amplio del líder hacia las almas.", "kw_en": ["faithful", "least", "much", "soul", "trust", "money", "test", "true"], "kw_es": ["fiel", "poco", "mucho", "alma", "confí", "dinero", "prueba", "verdader"], "modelEn": "Luke 16:10 says he who is faithful in the least is faithful also in much, and that if a man is not faithful with unrighteous mammon, no one will commit to him the true riches. Money is the least — the small, temporary training ground — while souls are the true and eternal riches. God uses a leader's handling of money to test whether He can trust him with people, so the offering plate is a proving ground for the pastorate itself. A man careless or dishonest with money reveals he cannot yet be trusted with souls, while one faithful in finances shows the character God will entrust with His flock. So faithfulness with money is never separate from the ministry of souls; it is the test that comes before the trust.", "modelEs": "Lucas 16:10 dice que el que es fiel en lo muy poco también en lo más es fiel, y que si un hombre no es fiel con las riquezas injustas, nadie le confiará las verdaderas riquezas. El dinero es lo muy poco — el pequeño y temporal campo de entrenamiento — mientras que las almas son las verdaderas y eternas riquezas. Dios usa el manejo del dinero por parte del líder para probar si puede confiarle personas, así que el plato de la ofrenda es un campo de prueba para el pastorado mismo. Un hombre descuidado o deshonesto con el dinero revela que aún no se le pueden confiar almas, mientras que uno fiel en las finanzas muestra el carácter que Dios confiará con su grey. Así que la fidelidad con el dinero nunca está separada del ministerio de las almas; es la prueba que viene antes de la confianza."}, {"textEn": "Summarize Unit 5: how should a faithful leader handle the church's money from first peso to last?", "textEs": "Resuma la Unidad 5: ¿cómo debe un líder fiel manejar el dinero de la iglesia, del primer peso al último?", "kw_en": ["steward", "budget", "transparen", "generos", "greed", "worker", "trust", "mission"], "kw_es": ["mayord", "presupuesto", "transparen", "generos", "codicia", "obrero", "confianza", "misión"], "modelEn": "Unit 5 teaches that a faithful leader handles the church's money as a sacred trust from first peso to last. He remembers it is God's money, given by His people, and so manages it as a steward who will give account. He budgets, counting the cost as Jesus commanded, letting a plan in money form follow the mission and reveal true values. He builds transparency so he is honest not only before God but visibly before men, never controlling money alone. He teaches and models cheerful generosity rather than mere fundraising. He guards his own heart against the love of money, the root of all kinds of evil, with contentment. And he ensures the church justly provides for its workers, not muzzling the ox. Faithful in the least, he is entrusted by God with the true riches of souls.", "modelEs": "La Unidad 5 enseña que un líder fiel maneja el dinero de la iglesia como una confianza sagrada, del primer peso al último. Recuerda que es el dinero de Dios, dado por su pueblo, y por eso lo administra como mayordomo que dará cuenta. Presupuesta, contando el costo como Jesús mandó, dejando que un plan en forma de dinero siga a la misión y revele los verdaderos valores. Construye transparencia para ser honesto no solo delante de Dios sino visiblemente delante de los hombres, sin controlar nunca el dinero solo. Enseña y modela la generosidad alegre en vez de la mera recaudación. Guarda su propio corazón contra el amor al dinero, la raíz de todos los males, con contentamiento. Y procura que la iglesia provea con justicia para sus obreros, sin poner bozal al buey. Fiel en lo muy poco, Dios le confía las verdaderas riquezas de las almas."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 6 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 6 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s).</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (answered || mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (answered || mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (mcQuestions.length + idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 100 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 100 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y reintente la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSALReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

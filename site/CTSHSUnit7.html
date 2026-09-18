@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Doctrine of the Holy Spirit &mdash; Unit 7</title>
+<style>
+:root{
+  --ink:#241c12; --paper:#f7f1e4; --card:#fffdf8; --line:#d8ccb2;
+  --accent:#7a3b1e; --accent2:#9c6b2f; --gold:#fbf3d6; --goldln:#caa94e;
+  --good:#2f6b3a; --bad:#9b2c2c; --muted:#6c6150;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;line-height:1.6;}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+header.site{background:var(--accent);color:#f6ecd8;padding:18px 0;border-bottom:4px solid var(--goldln);}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:0;}
+header.site h1{font-size:1.15rem;margin:0;font-weight:600;letter-spacing:.2px;}
+header.site .sub{font-size:.78rem;opacity:.85;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+.langbtn{font-family:system-ui,sans-serif;font-size:.8rem;background:#f6ecd8;color:var(--accent);
+  border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600;}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 4px;
+  font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);}
+.badge{background:var(--gold);border:1px solid var(--goldln);border-radius:14px;padding:3px 10px;color:#6a531c;}
+.epigraph{font-style:italic;color:var(--accent2);border-left:3px solid var(--goldln);
+  padding:6px 0 6px 14px;margin:16px 0;font-size:.98rem;}
+h2.sec{font-size:1.25rem;color:var(--accent);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin:34px 0 14px;}
+article p{margin:0 0 14px;}
+article b{color:var(--accent);}
+.v{color:#3a4a2c;}
+.illo{background:#fbf6ea;border-left:3px solid var(--goldln);padding:10px 14px;border-radius:4px;}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:14px 0;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);}
+.qn{font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;color:var(--accent2);
+  text-transform:uppercase;letter-spacing:.6px;}
+.qp{margin:6px 0 10px;font-weight:600;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:9px 12px;margin:6px 0;cursor:pointer;font:inherit;color:inherit;}
+.opt:hover{border-color:var(--accent2);}
+.opt .lt{font-weight:700;color:var(--accent2);margin-right:8px;}
+.opt.correct{background:#e9f3e8;border-color:var(--good);}
+.opt.wrong{background:#f6e6e4;border-color:var(--bad);}
+.opt:disabled{cursor:default;opacity:1;}
+.expl{font-size:.9rem;color:var(--muted);margin:8px 2px 0;display:none;}
+.expl.show{display:block;}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:6px;padding:10px;
+  font:inherit;background:#fff;resize:vertical;}
+.btn{font-family:system-ui,sans-serif;font-weight:600;border:none;border-radius:6px;padding:9px 16px;
+  cursor:pointer;font-size:.9rem;}
+.btn.primary{background:var(--accent);color:#f6ecd8;}
+.btn.ghost{background:#efe6d2;color:var(--accent);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.sa-res{margin-top:10px;font-family:system-ui,sans-serif;font-size:.88rem;display:none;}
+.sa-res.show{display:block;}
+.sa-verdict{font-weight:700;}
+.sa-verdict.pass{color:var(--good);} .sa-verdict.soft{color:var(--accent2);}
+.model{background:var(--gold);border:1px solid var(--goldln);border-radius:6px;padding:10px 12px;margin-top:8px;}
+.model .ml{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:#6a531c;}
+.foot{margin-top:30px;border-top:2px solid var(--line);padding-top:18px;}
+.status{font-family:system-ui,sans-serif;font-size:.9rem;margin:10px 0;}
+.status.ok{color:var(--good);} .status.warn{color:var(--accent2);} .status.lock{color:var(--bad);}
+.modal{position:fixed;inset:0;background:rgba(36,28,18,.62);display:flex;align-items:center;
+  justify-content:center;padding:18px;z-index:50;}
+.modal .box{background:var(--card);border-radius:10px;max-width:420px;width:100%;padding:22px;
+  border-top:5px solid var(--goldln);}
+.modal h3{margin:0 0 6px;color:var(--accent);}
+.modal label{display:block;font-family:system-ui,sans-serif;font-size:.82rem;margin:12px 0 4px;color:var(--muted);}
+.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit;}
+.hide{display:none !important;}
+.next{display:inline-block;margin-top:12px;background:var(--good);color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:6px;font-family:system-ui,sans-serif;font-weight:600;}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:2px 0 18px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);margin-right:3px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:var(--card);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600;line-height:1;}
+.unitnav a:hover{border-color:var(--accent2);color:var(--accent2);}
+.unitnav a.active{background:var(--accent);color:#f6ecd8;border-color:var(--accent);}
+html[lang="es"] .en-lbl{display:none}html[lang="en"] .es-lbl{display:none}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site">
+  <div class="wrap">
+    <div><h1 id="t-title">The Doctrine of the Holy Spirit</h1><div class="sub" id="t-unit">Unit 7 &middot; The Three Sins Against the Spirit</div></div>
+    <button class="langbtn" id="langBtn" type="button">Espa&ntilde;ol</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <span id="t-greet"></span>
+    <span class="badge" id="t-track"></span>
+  </div>
+
+    <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+     <span class="nl"><span class="en-lbl">Units</span><span class="es-lbl">Unidades</span></span>
+     <a href="CTSHSUnit1.html">1</a>
+     <a href="CTSHSUnit2.html">2</a>
+     <a href="CTSHSUnit3.html">3</a>
+     <a href="CTSHSUnit4.html">4</a>
+     <a href="CTSHSUnit5.html">5</a>
+     <a href="CTSHSUnit6.html">6</a>
+     <a href="CTSHSUnit7.html" class="active">7</a>
+     <a href="CTSHSUnit8.html">8</a>
+     <a href="CTSHSUnit9.html">9</a>
+     <a href="CTSHSUnit10.html">10</a>
+  </nav>
+
+  <div class="epigraph" id="epigraph"></div>
+
+  <article>
+    <div id="teach-en"><h3 style="color:var(--accent);margin:0 0 4px">The Three Sins Against the Spirit</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">We may quench the Spirit, grieve the Spirit, and there is a blasphemy against the Spirit that is not forgiven</p>
+<p><b>1. Sins Against the One We Cannot See</b></p>
+<p>So far we have studied who the Spirit is and what He does for us. Now we must turn to a more solemn theme, for it is possible to sin against the Holy Spirit. Both believers and unbelievers can wrong Him, and ordinary people have carried real fear over these sins. The Bible names three of them, each with its own warning: we may <i>quench</i> the Spirit, we may <i>grieve</i> the Spirit, and there is a <i>blasphemy</i> against the Spirit that is not forgiven. We will take them one at a time, asking in each case what the sin is and how we may guard ourselves against it. None of this is meant to frighten the trusting believer, but to teach us to walk softly and reverently before the gracious Spirit of God, who deserves our tenderest care.</p>
+<p><b>2. Quenching the Spirit</b></p>
+<p>The first is the sin of quenching. Paul writes plainly, <span class="v">"Do not quench the Spirit"</span> (1 Thessalonians 5:19). To quench means to put out, to dampen, to extinguish. In the Bible the Holy Spirit is often pictured as a fire, and when we quench Him we are putting that fire out. From the setting of the passage, Paul seems to be warning against a church losing its warmth, its joy, and its life. Dwight L. Moody said he once attended a church so cold you could skate down the aisles. There are two ways to put out a fire. One is to take away the fuel; a church exists to serve God, and when we begin to think of it as ours rather than His, we are cutting off the fuel. The other is to throw water or dirt upon it; in the same way, willful sin can smother the fire of a growing church. When the Spirit is quenched, the warmth that once drew sinners in grows cold, the bickering replaces fellowship, and the church that should be a hearth becomes an empty grate. The funeral may not yet have been preached, but the body is already lying in state.</p>
+<p><b>3. Marks of a Spirit-Filled Church</b></p>
+<p>It helps to look at the opposite of a quenched church. In the verses just before this command, Paul gives us the marks of a church where the Spirit's fire still burns (1 Thessalonians 5:16-22). It is a <i>happy</i> church, full of joy, <span class="v">"Rejoice always"</span> (v. 16); and why should we not be glad, when God has promised us abundant life now and life with Him forever? It is a <i>thankful</i> church, for Paul says, <span class="v">"In everything give thanks"</span> (v. 18); even on the darkest day there are blessings to count. It is a <i>praying</i> church, for he writes, <span class="v">"Pray without ceasing"</span> (v. 17). And it is a <i>preaching</i> church, for he says, <span class="v">"Do not despise prophecies"</span> (v. 20), and bids us, <span class="v">"Test all things; hold fast what is good"</span> (v. 21). There are two extremes to avoid. Some undermine preaching and teaching, and so put the fire out. Others grow fanatical and let the fire burn everything up; fire without light is dangerous, and zeal without truth has wrecked many a soul. So we keep the Spirit's fire burning by the way we worship: ours should be a happy, prayerful, thankful, teaching church, warm enough to draw the lost and sound enough to hold them.</p>
+<p><b>4. Grieving the Spirit</b></p>
+<p>The second sin is grieving the Spirit. Paul writes, <span class="v">"And do not grieve the Holy Spirit of God, by whom you were sealed for the day of redemption"</span> (Ephesians 4:30). Grieve is a love word. It tells us that we can do things which cause God sorrow, and there is great tenderness in it. If Paul had written "anger not the Spirit," we would have had an entirely different thought. This is not the wrath of God; it is a hurt that only one who loves us can feel. Notice that Paul is speaking of Christians, those <span class="v">"sealed for the day of redemption."</span> In the ancient world a king wore a ring bearing his own mark, and pressed it into soft wax to seal what was his. The seal emphasizes that believers belong to God and points forward to the day of redemption. Paul’s immediate point is not to settle every Christian disagreement about final perseverance, but to show how serious it is for those marked as God’s own to grieve the Holy Spirit. We do wound the Spirit, and we bring pain to Him.</p>
+<p><b>5. How We Grieve Him</b></p>
+<p>How do we grieve the Spirit? In a word, by whatever is unlike Christ in our conduct, our speech, or our disposition. It helps to consider Him by His own names. He is the Spirit of <i>truth</i> (John 14:17), so whatever is false, deceitful, or hypocritical grieves Him. He is the Spirit of <i>faith</i> (2 Corinthians 4:13), so doubt, distrust, anxiety, and worry grieve Him. He is the Spirit of <i>grace</i> (Hebrews 10:29), so whatever in us is hard, bitter, unforgiving, or unloving grieves Him. And He is the Spirit of <i>holiness</i> (Romans 1:4), so whatever is unclean or degrading grieves Him. The Christian who has begun to drift from God in these ways is often called a backslider. He no longer prays; the leaves of his Bible are stuck together; he has no witness; and the joy has gone out of his religion. Yet we do not need a host of sins to hinder the Spirit's work. One sin, one act of disobedience that we will not turn over to God, can hold back His work, as a single broken thread can stop a whole loom. We sometimes imagine it would take a great catalog of sins to hinder the Spirit, but it is not so; the smallest reserved corner, the one thing we will not surrender, is enough to grieve Him. And mark this: only a person can be grieved. An influence cannot be made sorrowful. Jesus taught us to call God <i>Father</i>, and we pain our Father when we go against His loving warning.</p>
+<p><b>6. Blaspheming the Spirit</b></p>
+<p>The third and most serious sin against the Holy Spirit is blaspheming Him. In Matthew 12 the Pharisees accused Jesus of casting out demons by the power of Satan, when in truth He was working by the power of the Holy Spirit. Their hardened hearts had led them to deny the plain evidence before their eyes. So Jesus answered, <span class="v">"Every sin and blasphemy will be forgiven men, but the blasphemy against the Spirit will not be forgiven men"</span> (Matthew 12:31). To blaspheme means to defame, to speak evil of, to curse. Because this one sin is said to be unforgivable, many tender souls have worried that they might have committed it. Billy Graham tells how his own father became convinced for years that he had committed the unpardonable sin and lived in fear, until at last he learned that his sin was not one that shut him out from the grace and mercy of God.</p>
+<p><b>7. What the Unpardonable Sin Is Not</b></p>
+<p>It is a great comfort to see what the unpardonable sin is not. The long story of humanity has been one of continual sin, and over and over God has forgiven. From the things God has forgiven, we know the unpardonable sin is not murder, as horrible as that is; it is not lying, it is not stealing, it is not adultery, it is not even taking the Lord's name in vain, as irreverent as that is. All these have been forgiven. The work of the Holy Spirit has always been to bring men the truth of God and then to help them recognize it. The trouble with the Pharisees was that the Spirit could no longer reach them; they had grown so hardened that they could not see that Jesus was empowered by the Spirit. A man may reject the testimony of Jesus and still be reached; but if he finally rejects the Spirit who is leading him to salvation through Christ, there is no other hope left. So the unpardonable sin seems to be the settled sin of unbelief, the refusal of Jesus as the Christ. And the very fact that a fearful soul dreads having committed it is good evidence that he has not.</p>
+<p><b>8. The Danger of Saying No</b></p>
+<p>The real tragedy is that a person can keep saying no to the Spirit until at last it is too late. The sin is unpardonable not because God runs out of mercy, but because such a heart grows too stubborn to repent. There is a deadening that comes from refusing the Spirit's call. A man who lives beside a railroad crossing hears the trains shake the house at first, but after a while he no longer hears them at all. So it is with the Spirit's voice: if a person hears His calling and says no, the next call will not sound as strong, and a man may reach the place where he no longer hears the Spirit telling him to turn to God. The warning, then, is also an invitation. While the Spirit still strives with you, while you can still hear His voice, do not harden your heart. The same Spirit who can be quenched and grieved is also patient and kind, pleading still with all who will listen. Yield to Him today, for He is faithful, and He will lead every willing soul home to God.</p></div>
+    <div id="teach-es" class="hide"><h3 style="color:var(--accent);margin:0 0 4px">Los tres pecados contra el Esp&iacute;ritu</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">Podemos apagar al Esp&iacute;ritu, contristar al Esp&iacute;ritu, y hay una blasfemia contra el Esp&iacute;ritu que no es perdonada</p>
+
+<p><b>1. Pecados contra Aquel que no podemos ver</b></p>
+<p>Hasta aqu&iacute; hemos estudiado qui&eacute;n es el Esp&iacute;ritu y lo que hace por nosotros. Ahora debemos volvernos a un tema m&aacute;s solemne, pues es posible pecar contra el Esp&iacute;ritu Santo. Tanto creyentes como incr&eacute;dulos pueden agraviarlo, y gente com&uacute;n ha cargado verdadero temor por estos pecados. La Biblia nombra tres de ellos, cada uno con su propia advertencia: podemos <span class="v">&ldquo;apagar&rdquo;</span> al Esp&iacute;ritu, podemos <span class="v">&ldquo;contristar&rdquo;</span> al Esp&iacute;ritu, y hay una <span class="v">&ldquo;blasfemia&rdquo;</span> contra el Esp&iacute;ritu que no es perdonada. Los tomaremos uno por uno, preguntando en cada caso qu&eacute; es el pecado y c&oacute;mo podemos guardarnos de &eacute;l. Nada de esto pretende atemorizar al creyente que conf&iacute;a, sino ense&ntilde;arnos a andar con cuidado y reverencia delante del bondadoso Esp&iacute;ritu de Dios, que merece nuestro m&aacute;s tierno cuidado.</p>
+<p><b>2. Apagar al Esp&iacute;ritu</b></p>
+<p>El primero es el pecado de apagar. Pablo escribe sencillamente: <span class="v">&ldquo;No apagu&eacute;is al Esp&iacute;ritu&rdquo;</span> (1 Tesalonicenses 5:19). Apagar significa extinguir, sofocar, poner fin. En la Biblia el Esp&iacute;ritu Santo es a menudo representado como un fuego, y cuando lo apagamos estamos extinguiendo ese fuego. Por el contexto del pasaje, Pablo parece advertir contra una iglesia que pierde su calor, su gozo y su vida. Dwight L. Moody dijo que una vez asisti&oacute; a una iglesia tan fr&iacute;a que se pod&iacute;a patinar por los pasillos. Hay dos maneras de apagar un fuego. Una es quitar el combustible; una iglesia existe para servir a Dios, y cuando empezamos a pensar en ella como nuestra y no suya, estamos cortando el combustible. La otra es echarle agua o tierra encima; del mismo modo, el pecado voluntario puede sofocar el fuego de una iglesia creciente. Cuando el Esp&iacute;ritu es apagado, el calor que antes atra&iacute;a a los pecadores se enfr&iacute;a, las disputas reemplazan a la comuni&oacute;n, y la iglesia que deb&iacute;a ser un hogar se vuelve un brasero vac&iacute;o. Quiz&aacute; a&uacute;n no se haya predicado el funeral, pero el cuerpo ya est&aacute; de cuerpo presente.</p>
+<p><b>3. Marcas de una iglesia llena del Esp&iacute;ritu</b></p>
+<p>Ayuda mirar lo opuesto de una iglesia apagada. En los vers&iacute;culos justo antes de este mandato, Pablo nos da las marcas de una iglesia donde el fuego del Esp&iacute;ritu a&uacute;n arde (1 Tesalonicenses 5:16-22). Es una iglesia <span class="v">&ldquo;alegre&rdquo;</span>, llena de gozo, <span class="v">&ldquo;Estad siempre gozosos&rdquo;</span> (v. 16); &iquest;y por qu&eacute; no habr&iacute;amos de alegrarnos, cuando Dios nos ha prometido vida abundante ahora y vida con &Eacute;l para siempre? Es una iglesia <span class="v">&ldquo;agradecida&rdquo;</span>, pues Pablo dice: <span class="v">&ldquo;Dad gracias en todo&rdquo;</span> (v. 18); aun en el d&iacute;a m&aacute;s oscuro hay bendiciones que contar. Es una iglesia que <span class="v">&ldquo;ora&rdquo;</span>, pues escribe: <span class="v">&ldquo;Orad sin cesar&rdquo;</span> (v. 17). Y es una iglesia que <span class="v">&ldquo;predica&rdquo;</span>, pues dice: <span class="v">&ldquo;No menospreci&eacute;is las profec&iacute;as&rdquo;</span> (v. 20), y nos manda: <span class="v">&ldquo;Examinadlo todo; retened lo bueno&rdquo;</span> (v. 21). Hay dos extremos que evitar. Algunos socavan la predicaci&oacute;n y la ense&ntilde;anza, y as&iacute; apagan el fuego. Otros se vuelven fan&aacute;ticos y dejan que el fuego lo consuma todo; el fuego sin luz es peligroso, y el celo sin verdad ha arruinado a muchas almas. As&iacute; que mantenemos ardiendo el fuego del Esp&iacute;ritu por la manera en que adoramos: la nuestra debe ser una iglesia alegre, orante, agradecida y que ense&ntilde;a, bastante c&aacute;lida para atraer a los perdidos y bastante s&oacute;lida para retenerlos.</p>
+<p><b>4. Contristar al Esp&iacute;ritu</b></p>
+<p>El segundo pecado es contristar al Esp&iacute;ritu. Pablo escribe: <span class="v">&ldquo;Y no contrist&eacute;is al Esp&iacute;ritu Santo de Dios, con el cual est&aacute;is sellados para el d&iacute;a de la redenci&oacute;n&rdquo;</span> (Efesios 4:30). Contristar es una palabra de amor. Nos dice que podemos hacer cosas que causan tristeza a Dios, y hay gran ternura en ella. Si Pablo hubiera escrito "no enoj&eacute;is al Esp&iacute;ritu," habr&iacute;amos tenido un pensamiento enteramente distinto. Esto no es la ira de Dios; es un dolor que solo puede sentir quien nos ama. Note que Pablo habla de cristianos, los <span class="v">&ldquo;sellados para el d&iacute;a de la redenci&oacute;n&rdquo;</span>. En el mundo antiguo un rey llevaba un anillo con su propia marca, y lo imprim&iacute;a en cera blanda para sellar lo que era suyo. El sello significa que aun cuando contristamos al Esp&iacute;ritu Santo, seguimos siendo suyos; no somos desechados ni perecemos. Pero s&iacute; herimos al Esp&iacute;ritu, y le traemos dolor.</p>
+<p><b>5. C&oacute;mo lo contristamos</b></p>
+<p>&iquest;C&oacute;mo contristamos al Esp&iacute;ritu? En una palabra, por todo lo que es contrario a Cristo en nuestra conducta, nuestra habla o nuestra disposici&oacute;n. Ayuda considerarlo por sus propios nombres. &Eacute;l es el Esp&iacute;ritu de <span class="v">&ldquo;verdad&rdquo;</span> (Juan 14:17), as&iacute; que todo lo que es falso, enga&ntilde;oso o hip&oacute;crita lo contrista. &Eacute;l es el Esp&iacute;ritu de <span class="v">&ldquo;fe&rdquo;</span> (2 Corintios 4:13), as&iacute; que la duda, la desconfianza, la ansiedad y el af&aacute;n lo contristan. &Eacute;l es el Esp&iacute;ritu de <span class="v">&ldquo;gracia&rdquo;</span> (Hebreos 10:29), as&iacute; que cuanto en nosotros es duro, amargo, rencoroso o falto de amor lo contrista. Y &Eacute;l es el Esp&iacute;ritu de <span class="v">&ldquo;santidad&rdquo;</span> (Romanos 1:4), as&iacute; que todo lo que es inmundo o degradante lo contrista. Al cristiano que ha comenzado a alejarse de Dios de estas maneras se le llama a menudo un reincidente. Ya no ora; las hojas de su Biblia est&aacute;n pegadas; no tiene testimonio; y el gozo se ha ido de su religi&oacute;n. Sin embargo, no necesitamos una multitud de pecados para estorbar la obra del Esp&iacute;ritu. Un solo pecado, un acto de desobediencia que no entregamos a Dios, puede detener su obra, como un solo hilo roto puede parar todo un telar. A veces imaginamos que har&iacute;a falta un gran cat&aacute;logo de pecados para estorbar al Esp&iacute;ritu, pero no es as&iacute;; el rinc&oacute;n m&aacute;s peque&ntilde;o reservado, lo &uacute;nico que no entregamos, basta para contristarlo. Y note esto: solo una persona puede ser contristada. Una influencia no puede entristecerse. Jes&uacute;s nos ense&ntilde;&oacute; a llamar a Dios <span class="v">&ldquo;Padre&rdquo;</span>, y herimos a nuestro Padre cuando vamos contra su amorosa advertencia.</p>
+<p><b>6. Blasfemar contra el Esp&iacute;ritu</b></p>
+<p>El tercer y m&aacute;s serio pecado contra el Esp&iacute;ritu Santo es blasfemar contra &Eacute;l. En Mateo 12 los fariseos acusaron a Jes&uacute;s de echar fuera demonios por el poder de Satan&aacute;s, cuando en verdad obraba por el poder del Esp&iacute;ritu Santo. Sus corazones endurecidos los hab&iacute;an llevado a negar la clara evidencia ante sus ojos. Por eso Jes&uacute;s respondi&oacute;: <span class="v">&ldquo;Todo pecado y blasfemia ser&aacute; perdonado a los hombres; mas la blasfemia contra el Esp&iacute;ritu no les ser&aacute; perdonada&rdquo;</span> (Mateo 12:31). Blasfemar significa difamar, hablar mal de, maldecir. Porque se dice que este pecado no tiene perd&oacute;n, muchas almas tiernas han temido haberlo cometido. Billy Graham cuenta c&oacute;mo su propio padre qued&oacute; convencido por a&ntilde;os de haber cometido el pecado imperdonable y vivi&oacute; con temor, hasta que al fin aprendi&oacute; que su pecado no era uno que lo dejara fuera de la gracia y la misericordia de Dios.</p>
+<p><b>7. Lo que el pecado imperdonable no es</b></p>
+<p>Es un gran consuelo ver lo que el pecado imperdonable no es. La larga historia de la humanidad ha sido de pecado continuo, y una y otra vez Dios ha perdonado. Por las cosas que Dios ha perdonado, sabemos que el pecado imperdonable no es el asesinato, por horrible que sea; no es la mentira, no es el robo, no es el adulterio, no es ni siquiera tomar el nombre del Se&ntilde;or en vano, por irreverente que sea. Todos estos han sido perdonados. La obra del Esp&iacute;ritu Santo siempre ha sido traer a los hombres la verdad de Dios y luego ayudarlos a reconocerla. El problema de los fariseos era que el Esp&iacute;ritu ya no pod&iacute;a alcanzarlos; se hab&iacute;an endurecido tanto que no pod&iacute;an ver que Jes&uacute;s era investido de poder por el Esp&iacute;ritu. Un hombre puede rechazar el testimonio de Jes&uacute;s y a&uacute;n ser alcanzado; pero si al fin rechaza al Esp&iacute;ritu que lo gu&iacute;a a la salvaci&oacute;n por medio de Cristo, no queda otra esperanza. As&iacute; que el pecado imperdonable parece ser el pecado arraigado de la incredulidad, el rechazo de Jes&uacute;s como el Cristo. Y el mismo hecho de que un alma temerosa tema haberlo cometido es buena evidencia de que no lo ha hecho.</p>
+<p><b>8. El peligro de decir no</b></p>
+<p>La verdadera tragedia es que una persona puede seguir diciendo no al Esp&iacute;ritu hasta que al fin es demasiado tarde. El pecado es imperdonable no porque a Dios se le acabe la misericordia, sino porque tal coraz&oacute;n se vuelve demasiado terco para arrepentirse. Hay un adormecimiento que viene de rechazar el llamado del Esp&iacute;ritu. Un hombre que vive junto a un cruce de ferrocarril oye al principio los trenes sacudir la casa, pero despu&eacute;s de un tiempo ya no los oye en absoluto. As&iacute; es con la voz del Esp&iacute;ritu: si una persona oye su llamado y dice no, el siguiente llamado no sonar&aacute; tan fuerte, y un hombre puede llegar al punto en que ya no oye al Esp&iacute;ritu dici&eacute;ndole que se vuelva a Dios. La advertencia, pues, es tambi&eacute;n una invitaci&oacute;n. Mientras el Esp&iacute;ritu a&uacute;n lucha contigo, mientras todav&iacute;a puedas o&iacute;r su voz, no endurezcas tu coraz&oacute;n. El mismo Esp&iacute;ritu que puede ser apagado y contristado es tambi&eacute;n paciente y bondadoso, rogando todav&iacute;a a todos los que quieran escuchar. Entr&eacute;gate a &Eacute;l hoy, pues &Eacute;l es fiel, y guiar&aacute; a casa, a Dios, a toda alma dispuesta.</p>
+</div>
+  </article>
+
+  <h2 class="sec" id="t-mc">Multiple Choice</h2>
+  <div id="mcWrap"></div>
+
+  <h2 class="sec" id="t-sa">Short Answer</h2>
+  <p class="status" id="t-saNote"></p>
+  <div id="saWrap"></div>
+
+  <div class="foot">
+    <button class="btn primary" id="completeBtn" type="button"></button>
+    <div class="status" id="statusMsg"></div>
+    <a class="next hide" id="nextLink" href="CTSHSUnit8.html"></a>
+  </div>
+</div>
+
+<div class="modal hide" id="reg">
+  <div class="box">
+    <h3 id="m-h">Welcome</h3>
+    <p id="m-p" style="font-size:.9rem;color:var(--muted);margin:0"></p>
+    <label id="m-nl">Your name</label>
+    <input id="m-name" type="text" autocomplete="name" aria-label="m name">
+    <label id="m-tl">Track</label>
+    <select id="m-track" aria-label="m track">
+      <option value="cert">Certificate</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div style="margin-top:16px"><button class="btn primary" id="m-go" type="button">Begin</button></div>
+  </div>
+</div>
+
+<script>
+var CFG={course:'hs',unit:7,totalUnits:10,progressKey:'cts_hs_progress',
+  next:'CTSHSUnit8.html',cert:'CTSHSCertificate.html',lockKey:'cts_hs_u7_lock',showReg:false};
+var DATA={"mc": [{"en": "According to this unit, it is possible to sin against:", "es": "Según esta unidad, es posible pecar contra:", "oen": ["the Holy Spirit", "the angels only", "no one", "the law alone"], "oes": ["el Espíritu Santo", "solo los ángeles", "nadie", "solo la ley"], "c": 21, "xen": "Both believers and unbelievers can wrong the Spirit.", "xes": "Tanto creyentes como incrédulos pueden agraviar al Espíritu."}, {"en": "The three sins against the Spirit named in this unit are to:", "es": "Los tres pecados contra el Espíritu nombrados en esta unidad son:", "oen": ["quench, grieve, and blaspheme Him", "be baptized, sealed, and filled", "pray, give, and serve", "teach, lead, and show mercy"], "oes": ["apagarlo, contristarlo y blasfemar contra Él", "ser bautizado, sellado y lleno", "orar, dar y servir", "enseñar, guiar y mostrar misericordia"], "c": 29, "xen": "Quench, grieve, and blaspheme — the three sins.", "xes": "Apagar, contristar y blasfemar — los tres pecados."}, {"en": "“Do not quench the Spirit” is from:", "es": "“No apaguéis al Espíritu” es de:", "oen": ["Ephesians 4:30", "1 Thessalonians 5:19", "Matthew 12:31", "Romans 8:26"], "oes": ["Efesios 4:30", "1 Tesalonicenses 5:19", "Mateo 12:31", "Romanos 8:26"], "c": 38, "xen": "1 Thessalonians 5:19 — do not quench the Spirit.", "xes": "1 Tesalonicenses 5:19 — no apaguéis al Espíritu."}, {"en": "To quench the Spirit pictures putting out:", "es": "Apagar al Espíritu representa extinguir:", "oen": ["a light meal", "a long journey", "a flood", "a fire"], "oes": ["una comida ligera", "un largo viaje", "una inundación", "un fuego"], "c": 44, "xen": "The Spirit is pictured as fire; to quench is to put it out.", "xes": "El Espíritu es representado como fuego; apagar es extinguirlo."}, {"en": "One way the unit says we quench the Spirit's fire is by:", "es": "Una manera en que la unidad dice que apagamos el fuego del Espíritu es:", "oen": ["reading the Bible", "singing too loudly", "meeting too often", "willful sin, or treating the church as ours, not God's"], "oes": ["leyendo la Biblia", "cantando muy fuerte", "reuniéndonos muy seguido", "el pecado voluntario, o tratar la iglesia como nuestra y no de Dios"], "c": 52, "xen": "Willful sin and self-claim cut off the fuel and quench Him.", "xes": "El pecado voluntario y el reclamo propio cortan el combustible."}, {"en": "Among the marks of a Spirit-filled church, Paul commands “rejoice always, pray without ceasing, in everything give thanks” in:", "es": "Entre las marcas de una iglesia llena del Espíritu, Pablo manda “regocijaos siempre, orad sin cesar, dad gracias en todo” en:", "oen": ["1 Thessalonians 5:16-18", "Romans 8", "Matthew 12", "Titus 3"], "oes": ["1 Tesalonicenses 5:16-18", "Romanos 8", "Mateo 12", "Tito 3"], "c": 58, "xen": "1 Thessalonians 5:16-18 — marks of a Spirit-filled church.", "xes": "1 Tesalonicenses 5:16-18 — marcas de una iglesia llena."}, {"en": "“Test all things; hold fast what is good” warns us not to quench the Spirit by:", "es": "“Examinadlo todo; retened lo bueno” nos advierte a no apagar al Espíritu:", "oen": ["singing hymns", "despising preaching and teaching", "giving money", "attending church"], "oes": ["cantando himnos", "menospreciando la predicación y la enseñanza", "dando dinero", "asistiendo a la iglesia"], "c": 64, "xen": "A Spirit-filled church preaches, teaches, and tests all things.", "xes": "Una iglesia llena predica, enseña y examina todo."}, {"en": "Two extremes that harm the Spirit's fire are undermining preaching and:", "es": "Dos extremos que dañan el fuego del Espíritu son socavar la predicación y:", "oen": ["praying quietly", "studying hard", "fanaticism — fire without light", "giving generously"], "oes": ["orar en silencio", "estudiar mucho", "el fanatismo — fuego sin luz", "dar generosamente"], "c": 70, "xen": "Avoid both undermining preaching and fanatical fire without light.", "xes": "Evite socavar la predicación y el fuego fanático sin luz."}, {"en": "“Do not grieve the Holy Spirit of God” is from:", "es": "“No contristéis al Espíritu Santo de Dios” es de:", "oen": ["1 Thessalonians 5:19", "Ephesians 4:30", "Matthew 12:31", "Galatians 5:22"], "oes": ["1 Tesalonicenses 5:19", "Efesios 4:30", "Mateo 12:31", "Gálatas 5:22"], "c": 78, "xen": "Ephesians 4:30 — do not grieve the Spirit.", "xes": "Efesios 4:30 — no contristéis al Espíritu."}, {"en": "The unit teaches that the word “grieve” is:", "es": "La unidad enseña que la palabra “contristar” es:", "oen": ["a word of wrath and judgment", "a word for strangers", "a legal term", "a love word, for we cause God sorrow"], "oes": ["una palabra de ira y juicio", "una palabra para extraños", "un término legal", "una palabra de amor, pues causamos tristeza a Dios"], "c": 87, "xen": "Grieve is a love word — a hurt only love can feel.", "xes": "Contristar es palabra de amor — dolor que solo el amor siente."}, {"en": "In Ephesians 4:30, being “sealed for the day of redemption” especially emphasizes that the believer:", "es": "En Efesios 4:30, estar “sellado para el día de la redención” enfatiza especialmente que el creyente:", "oen": ["was never saved", "belongs to God and is marked for the day of redemption", "loses his salvation at once", "must be baptized again"], "oes": ["nunca fue salvo", "pertenece a Dios y está marcado para el día de la redención", "pierde su salvación de inmediato", "debe ser bautizado de nuevo"], "c": 93, "xen": "Paul uses the seal to emphasize belonging to God and the promised day of redemption; Christians differ over how this text relates to the larger perseverance debate.", "xes": "Pablo usa el sello para enfatizar que pertenecemos a Dios y el día prometido de la redención; los cristianos difieren sobre cómo se relaciona este texto con el debate más amplio sobre la perseverancia."}, {"en": "We grieve the Spirit, the unit says, by whatever is:", "es": "Contristamos al Espíritu, dice la unidad, por todo lo que es:", "oen": ["loud in worship", "done by others", "unlike Christ in conduct, speech, or disposition", "done in private"], "oes": ["ruidoso en la adoración", "hecho por otros", "contrario a Cristo en conducta, habla o disposición", "hecho en privado"], "c": 98, "xen": "Whatever is unlike Christ in us grieves the Spirit.", "xes": "Cuanto en nosotros es contrario a Cristo contrista al Espíritu."}, {"en": "Because He is the Spirit of truth, He is grieved by whatever is:", "es": "Porque Él es el Espíritu de verdad, lo contrista todo lo que es:", "oen": ["quiet and slow", "simple and plain", "old and familiar", "false, deceitful, or hypocritical"], "oes": ["callado y lento", "sencillo y claro", "viejo y conocido", "falso, engañoso o hipócrita"], "c": 108, "xen": "As the Spirit of truth, falsehood and hypocrisy grieve Him.", "xes": "Como Espíritu de verdad, la falsedad y la hipocresía lo contristan."}, {"en": "How many sins does it take to hinder the Spirit's work?", "es": "¿Cuántos pecados hacen falta para estorbar la obra del Espíritu?", "oen": ["even one unconfessed sin can hold it back", "a great catalog of sins", "only the very worst sins", "none, He cannot be hindered"], "oes": ["aun un solo pecado no confesado puede detenerla", "un gran catálogo de pecados", "solo los peores pecados", "ninguno, no puede ser estorbado"], "c": 114, "xen": "One reserved sin, like a broken thread, can stop the loom.", "xes": "Un solo pecado reservado, como un hilo roto, para el telar."}, {"en": "That the Spirit can be grieved proves He is:", "es": "Que el Espíritu pueda ser contristado prueba que Él es:", "oen": ["a force", "a person, for an influence cannot be grieved", "an idea", "a feeling"], "oes": ["una fuerza", "una persona, pues una influencia no puede ser contristada", "una idea", "un sentimiento"], "c": 119, "xen": "Only a person can be grieved, not a mere influence.", "xes": "Solo una persona puede ser contristada, no una mera influencia."}, {"en": "“The blasphemy against the Spirit will not be forgiven” is from:", "es": "“La blasfemia contra el Espíritu no será perdonada” es de:", "oen": ["1 Thessalonians 5:19", "Ephesians 4:30", "Matthew 12:31", "Romans 8:9"], "oes": ["1 Tesalonicenses 5:19", "Efesios 4:30", "Mateo 12:31", "Romanos 8:9"], "c": 127, "xen": "Matthew 12:31 — the blasphemy against the Spirit.", "xes": "Mateo 12:31 — la blasfemia contra el Espíritu."}, {"en": "The Pharisees blasphemed the Spirit by attributing Jesus' Spirit-empowered works to:", "es": "Los fariseos blasfemaron contra el Espíritu atribuyendo las obras de Jesús, hechas por el Espíritu, a:", "oen": ["Moses", "the prophets", "the angels", "Satan"], "oes": ["Moisés", "los profetas", "los ángeles", "Satanás"], "c": 136, "xen": "They called the Spirit's works the work of Satan.", "xes": "Llamaron obra de Satanás a las obras del Espíritu."}, {"en": "The unit teaches that the unpardonable sin is NOT:", "es": "La unidad enseña que el pecado imperdonable NO es:", "oen": ["murder, lying, or adultery", "rejecting Christ", "settled unbelief", "refusing the Spirit's call"], "oes": ["el asesinato, la mentira o el adulterio", "rechazar a Cristo", "la incredulidad arraigada", "rechazar el llamado del Espíritu"], "c": 141, "xen": "God has forgiven murder, lying, and adultery; that is not it.", "xes": "Dios ha perdonado asesinato, mentira y adulterio; no es eso."}, {"en": "The unpardonable sin appears to be:", "es": "El pecado imperdonable parece ser:", "oen": ["a single angry word", "the settled sin of unbelief, rejecting Christ", "missing church once", "doubting for a day"], "oes": ["una sola palabra airada", "el pecado arraigado de incredulidad, rechazar a Cristo", "faltar a la iglesia una vez", "dudar por un día"], "c": 147, "xen": "It is settled unbelief, the final rejection of Christ.", "xes": "Es la incredulidad arraigada, el rechazo final de Cristo."}, {"en": "A fearful soul who dreads having committed the unpardonable sin:", "es": "Un alma temerosa que teme haber cometido el pecado imperdonable:", "oen": ["must do penance", "can never be sure", "is surely lost", "has good evidence he has not"], "oes": ["debe hacer penitencia", "nunca puede estar segura", "está ciertamente perdida", "tiene buena evidencia de que no lo ha hecho"], "c": 156, "xen": "The very dread of it is evidence one has not committed it.", "xes": "El mismo temor es evidencia de que no lo ha cometido."}], "sa": [{"en": "What does it mean to quench the Spirit, and how does it happen?", "es": "¿Qué significa apagar al Espíritu, y cómo sucede?", "men": "To quench the Spirit, commanded against in 1 Thessalonians 5:19, means to put out His fire, for the Spirit is pictured as a fire. It happens when we remove the fuel by treating the church as ours rather than God's, or when willful sin smothers the fire of a living church.", "mes": "Apagar al Espíritu, prohibido en 1 Tesalonicenses 5:19, significa extinguir su fuego, pues el Espíritu es representado como un fuego. Sucede cuando quitamos el combustible al tratar la iglesia como nuestra y no de Dios, o cuando el pecado voluntario sofoca el fuego de una iglesia viva.", "ken": ["quench", "spirit", "fire", "fuel", "willful", "sin", "church", "put"], "kes": ["apag", "espiritu", "fuego", "combustib", "voluntari", "pecado", "iglesia", "quit"]}, {"en": "Describe the marks of a Spirit-filled church from 1 Thessalonians 5.", "es": "Describa las marcas de una iglesia llena del Espíritu según 1 Tesalonicenses 5.", "men": "It is a happy church full of joy, a thankful church that gives thanks in everything, a praying church that does not cease to pray, and a preaching church that does not despise prophecy but tests all things and holds fast what is good.", "mes": "Es una iglesia alegre llena de gozo, una iglesia agradecida que da gracias en todo, una iglesia que ora sin cesar, y una iglesia que predica, que no menosprecia la profecía sino que examina todo y retiene lo bueno.", "ken": ["happy", "joy", "thank", "pray", "preach", "test", "church", "mark"], "kes": ["alegr", "gozo", "agradec", "ora", "predic", "examin", "iglesia", "marca"]}, {"en": "What does it mean to grieve the Spirit, and why is “grieve” a love word?", "es": "¿Qué significa contristar al Espíritu, y por qué es “contristar” una palabra de amor?", "men": "To grieve the Spirit, warned against in Ephesians 4:30, is to cause Him sorrow. Grieve is a love word because it is not the wrath of God but a hurt that only one who loves us can feel; there is great tenderness in it, for we wound the Spirit as we wound a loved one.", "mes": "Contristar al Espíritu, advertido en Efesios 4:30, es causarle tristeza. Contristar es una palabra de amor porque no es la ira de Dios sino un dolor que solo quien nos ama puede sentir; hay gran ternura en ella, pues herimos al Espíritu como herimos a un ser amado.", "ken": ["griev", "spirit", "love", "sorrow", "wrath", "tender", "word", "christ"], "kes": ["contrist", "espiritu", "amor", "tristez", "ira", "ternur", "palabra", "herir"]}, {"en": "What does Paul’s language of being sealed for the day of redemption emphasize in Ephesians 4:30?", "es": "¿Qué enfatiza el lenguaje de Pablo sobre estar sellados para el día de la redención en Efesios 4:30?", "men": "Paul’s language emphasizes that believers belong to God and are marked for the promised day of redemption, like a king marking what is his with a seal. His immediate pastoral point is that those who belong to God must not grieve the Holy Spirit. Christians differ over how this passage relates to the broader question of final perseverance.", "mes": "El lenguaje de Pablo enfatiza que los creyentes pertenecen a Dios y están marcados para el día prometido de la redención, como un rey marcaba con un sello lo que era suyo. Su punto pastoral inmediato es que quienes pertenecen a Dios no deben contristar al Espíritu Santo. Los cristianos difieren sobre cómo se relaciona este pasaje con la cuestión más amplia de la perseverancia final.", "ken": ["seal", "remain", "cast", "redempt", "signet", "griev", "believ", "god"], "kes": ["sell", "suyo", "desech", "redenc", "anillo", "contrist", "creyent", "dios"]}, {"en": "In what ways do we grieve the Spirit?", "es": "¿De qué maneras contristamos al Espíritu?", "men": "We grieve Him by whatever is unlike Christ in conduct, speech, or disposition. As the Spirit of truth, falsehood grieves Him; as the Spirit of faith, doubt and worry grieve Him; as the Spirit of grace, bitterness grieves Him; and as the Spirit of holiness, whatever is unclean grieves Him.", "mes": "Lo contristamos por todo lo que es contrario a Cristo en conducta, habla o disposición. Como Espíritu de verdad, la falsedad lo contrista; como Espíritu de fe, la duda y el afán lo contristan; como Espíritu de gracia, la amargura lo contrista; y como Espíritu de santidad, lo inmundo lo contrista.", "ken": ["griev", "unlike", "christ", "truth", "faith", "grace", "holi", "spirit"], "kes": ["contrist", "contrari", "cristo", "verdad", "fe", "graci", "santidad", "espiritu"]}, {"en": "How can even one sin affect the Spirit's work?", "es": "¿Cómo puede un solo pecado afectar la obra del Espíritu?", "men": "Even one act of disobedience that we will not turn over to God can hold back the Spirit's work, as a single broken thread can stop a whole loom. It does not take a great catalog of sins; one reserved corner of the heart is enough to grieve Him.", "mes": "Aun un solo acto de desobediencia que no entregamos a Dios puede detener la obra del Espíritu, como un solo hilo roto puede parar todo un telar. No hace falta un gran catálogo de pecados; un solo rincón reservado del corazón basta para contristarlo.", "ken": ["one", "sin", "hold", "work", "loom", "thread", "disobed", "spirit"], "kes": ["solo", "pecado", "deten", "obra", "telar", "hilo", "desobed", "espiritu"]}, {"en": "What was the Pharisees' blasphemy against the Spirit?", "es": "¿Cuál fue la blasfemia de los fariseos contra el Espíritu?", "men": "The Pharisees blasphemed by attributing the works that Jesus did by the power of the Holy Spirit to the power of Satan. Their hardened hearts denied the plain evidence, so Jesus said the blasphemy against the Spirit would not be forgiven.", "mes": "Los fariseos blasfemaron atribuyendo las obras que Jesús hizo por el poder del Espíritu Santo al poder de Satanás. Sus corazones endurecidos negaron la clara evidencia, por eso Jesús dijo que la blasfemia contra el Espíritu no sería perdonada.", "ken": ["pharisee", "blasphem", "satan", "spirit", "power", "harden", "forgiv", "work"], "kes": ["fariseo", "blasfem", "satan", "espiritu", "poder", "endurec", "perdon", "obra"]}, {"en": "What is the unpardonable sin NOT, and what comfort does this give?", "es": "¿Qué NO es el pecado imperdonable, y qué consuelo da esto?", "men": "It is not murder, lying, stealing, adultery, or taking the Lord's name in vain, for all these God has forgiven. This gives comfort to fearful souls, and the very dread of having committed the unpardonable sin is good evidence that one has not.", "mes": "No es el asesinato, la mentira, el robo, el adulterio, ni tomar el nombre del Señor en vano, pues todos estos Dios los ha perdonado. Esto da consuelo a las almas temerosas, y el mismo temor de haber cometido el pecado imperdonable es buena evidencia de que no lo ha hecho.", "ken": ["unpardon", "murder", "forgiv", "adulter", "lying", "comfort", "not", "dread"], "kes": ["imperdona", "asesin", "perdon", "adulter", "mentira", "consuelo", "temor", "robo"]}, {"en": "What does the unpardonable sin appear to be?", "es": "¿Qué parece ser el pecado imperdonable?", "men": "It appears to be the settled sin of unbelief, the final rejection of Jesus as the Christ. It is unpardonable not because God runs out of mercy, but because such a heart grows too stubborn to repent and refuses the Spirit who leads to salvation.", "mes": "Parece ser el pecado arraigado de la incredulidad, el rechazo final de Jesús como el Cristo. Es imperdonable no porque a Dios se le acabe la misericordia, sino porque tal corazón se vuelve demasiado terco para arrepentirse y rechaza al Espíritu que guía a la salvación.", "ken": ["settl", "unbelief", "reject", "christ", "repent", "stubborn", "spirit", "sin"], "kes": ["arraig", "incredul", "rechaz", "cristo", "arrepent", "terco", "espiritu", "pecado"]}, {"en": "What is the danger of repeatedly saying no to the Spirit?", "es": "¿Cuál es el peligro de decir no repetidamente al Espíritu?", "men": "There is a deadening that comes from refusing the Spirit's call, so that each call sounds fainter, as a man beside a railroad stops hearing the trains. A person can harden until he no longer hears the Spirit telling him to turn to God; so we must yield to Him today.", "mes": "Hay un adormecimiento que viene de rechazar el llamado del Espíritu, de modo que cada llamado suena más débil, como un hombre junto a un ferrocarril deja de oír los trenes. Una persona puede endurecerse hasta que ya no oye al Espíritu diciéndole que se vuelva a Dios; por eso debemos entregarnos a Él hoy.", "ken": ["danger", "deaden", "call", "faint", "railroad", "harden", "turn", "spirit"], "kes": ["peligro", "adormec", "llam", "debil", "ferrocarril", "endurec", "volv", "espiritu"]}]};
+
+/* ---- storage hardening (Android content:// safe) ---- */
+var _ctsMem={};
+function lsGet(k){try{var v=localStorage.getItem(k);return v===null?(k in _ctsMem?_ctsMem[k]:null):v;}catch(e){return k in _ctsMem?_ctsMem[k]:null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}_ctsMem[k]=v;}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}delete _ctsMem[k];}
+
+/* ---- helpers ---- */
+function fold(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function kwHit(ans,kw){var a=fold(ans),k=fold(kw);if(!k)return false;
+  if(k.length<=3){return new RegExp('(^|[^a-z0-9])'+reEsc(k)+'([^a-z0-9]|$)').test(a);}
+  return new RegExp('(^|[^a-z0-9])'+reEsc(k)).test(a);}
+function saScore(ans,kws){var n=0;for(var i=0;i<kws.length;i++){if(kwHit(ans,kws[i]))n++;}return n;}
+function mcCorrectIdx(code,qpos){return(((code-7*(qpos+3))%251)+251)%251;}
+
+var LET=['A','B','C','D'];
+var STATE={lang:'en',track:'cert',name:'',mc:[],sa:[],revealed:false};
+for(var i=0;i<DATA.mc.length;i++)STATE.mc.push({answered:false,chosen:-1});
+for(var j=0;j<DATA.sa.length;j++)STATE.sa.push({checked:false,text:'',hits:0});
+
+var I18N={
+ en:{title:'The Doctrine of the Holy Spirit',unit:'Unit 7 &middot; The Three Sins Against the Spirit',lang:'Espa\u00f1ol',
+   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
+   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
+   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
+   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
+   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
+   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
+   complete:'Mark Unit 7 complete',
+   epigraph:'“Do not grieve the Holy Spirit of God.” — Ephesians 4:30',
+   mGood:'Unit 7 complete. Well done — continue to Unit 8.',
+   mShort:'Keep going \u2014 review the material and try again.',
+   nextTxt:'Continue to Unit 8 →',
+   mh:'Welcome to The Doctrine of the Holy Spirit',mp:'Please register once. Your name and track carry across every CTS course on this site.',
+   mnl:'Your name',mtl:'Track',mgo:'Begin',
+   hitFmt:function(h){return h+' of 8 keywords';},
+   passV:'Pass',softV:'Practice noted'},
+ es:{title:'La Doctrina del Esp\u00edritu Santo',unit:'Unidad 7 &middot; Los tres pecados contra el Espíritu',lang:'English',
+   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
+   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
+   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
+   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
+   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
+   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
+   complete:'Marcar la Unidad 7 como completa',
+   epigraph:'“No contristéis al Espíritu Santo de Dios.” — Efesios 4:30',
+   mGood:'Unidad 7 completa. Bien hecho — continúe a la Unidad 8.',
+   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
+   nextTxt:'Continuar a la Unidad 8 →',
+   mh:'Bienvenido a La Doctrina del Esp\u00edritu Santo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
+   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
+   hitFmt:function(h){return h+' de 8 palabras clave';},
+   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+};
+function T(){return I18N[STATE.lang];}
+function isMasters(){return STATE.track==='mdiv'||STATE.track==='thm';}
+function lockMin(){return isMasters()?15:2;}
+
+function $(id){return document.getElementById(id);}
+
+/* ---------- rendering ---------- */
+function renderTeaching(){
+  $('teach-en').className=STATE.lang==='en'?'':'hide';
+  $('teach-es').className=STATE.lang==='es'?'':'hide';
+}
+function renderChrome(){
+  var t=T();
+  document.documentElement.lang=STATE.lang;
+  $('t-title').textContent=t.title;$('t-unit').innerHTML=t.unit;
+  $('langBtn').textContent=t.lang;
+  $('t-greet').textContent=t.greet(STATE.name);
+  $('t-track').textContent=t.track(STATE.track);
+  $('epigraph').textContent=t.epigraph;
+  $('t-mc').textContent=t.mc;$('t-sa').textContent=t.sa;
+  $('t-saNote').textContent=isMasters()?t.saNoteMast:t.saNoteCert;
+  $('completeBtn').textContent=t.complete;
+  $('m-h').textContent=t.mh;$('m-p').textContent=t.mp;$('m-nl').textContent=t.mnl;
+  $('m-tl').textContent=t.mtl;$('m-go').textContent=t.mgo;
+}
+function renderMC(){
+  var wrap=$('mcWrap');wrap.innerHTML='';
+  for(var i=0;i<DATA.mc.length;i++){
+    (function(i){
+      var q=DATA.mc[i],st=STATE.mc[i];
+      var opts=STATE.lang==='en'?q.oen:q.oes;
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var expl=STATE.lang==='en'?q.xen:q.xes;
+      var correct=mcCorrectIdx(q.c,i);
+      var div=document.createElement('div');div.className='q';
+      var h='<div class="qn">'+(i+1)+'</div><div class="qp">'+prompt+'</div>';
+      div.innerHTML=h;
+      for(var o=0;o<4;o++){
+        (function(o){
+          var b=document.createElement('button');b.type='button';b.className='opt';
+          b.innerHTML='<span class="lt">'+LET[o]+'</span>'+opts[o];
+          if(st.answered){b.disabled=true;
+            if(o===correct)b.className='opt correct';
+            else if(o===st.chosen)b.className='opt wrong';}
+          else if(st.answered&&o===st.chosen){b.style.background='#efe7d2';b.style.borderColor='#d4af37';b.style.fontWeight='600';}
+          b.onclick=function(){if(st.answered)return;
+            STATE.mc[i].answered=true;STATE.mc[i].chosen=o;renderMC();};
+          div.appendChild(b);
+        })(o);
+      }
+      var e=document.createElement('div');e.className='expl'+(st.answered?' show':'');
+      e.textContent=expl;div.appendChild(e);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderSA(){
+  var wrap=$('saWrap');wrap.innerHTML='';var t=T();
+  for(var i=0;i<DATA.sa.length;i++){
+    (function(i){
+      var q=DATA.sa[i],st=STATE.sa[i];
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var model=STATE.lang==='en'?q.men:q.mes;
+      var div=document.createElement('div');div.className='q';
+      div.innerHTML='<div class="qn">'+(21+i)+'</div><div class="qp">'+prompt+'</div>';
+      var ta=document.createElement('textarea');ta.value=st.text;
+      ta.oninput=function(){STATE.sa[i].text=ta.value;};
+      div.appendChild(ta);
+      var btn=document.createElement('button');btn.type='button';btn.className='btn ghost';
+      btn.style.marginTop='8px';btn.textContent=t.check;
+      var res=document.createElement('div');res.className='sa-res'+(st.checked?' show':'');
+      function paint(){
+        var kws=STATE.lang==='en'?q.ken:q.kes;
+        var hits=saScore(STATE.sa[i].text,kws);STATE.sa[i].hits=hits;
+        var pass=hits>=3;
+        var verdict=pass?('<span class="sa-verdict pass">'+t.passV+'</span>'):('<span class="sa-verdict soft">'+t.softV+'</span>');
+        res.innerHTML=verdict+' &middot; '+t.hitFmt(hits)+
+          '<div class="model"><div class="ml">'+t.model+'</div>'+model+'</div>';
+        res.className='sa-res show';STATE.sa[i].checked=true;
+      }
+      btn.onclick=function(){
+        if(!STATE.sa[i].text.trim()){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.blank+'</span>';return;}
+        if(STATE.sa[i].text.trim().length<100){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.minLen+'</span>';return;}
+        paint();
+      };
+      if(st.checked&&st.text.trim())paint();
+      div.appendChild(btn);div.appendChild(res);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderAll(){renderChrome();renderTeaching();renderMC();renderSA();refreshLock();}
+
+/* ---------- completion + lockout ---------- */
+function lockedUntil(){var v=lsGet(CFG.lockKey);return v?parseInt(v,10):0;}
+function refreshLock(){
+  var until=lockedUntil(),now=Date.now();
+  var btn=$('completeBtn');
+  if(until>now){
+    btn.disabled=true;
+    var mins=Math.ceil((until-now)/60000);
+    $('statusMsg').className='status lock';
+    $('statusMsg').textContent=(STATE.lang==='en'?'Locked. Try again in ':'Bloqueado. Reintente en ')+mins+(STATE.lang==='en'?' min.':' min.');
+  }else{btn.disabled=false;}
+}
+function markComplete(){
+  var p={};try{p=JSON.parse(lsGet(CFG.progressKey)||'{}');}catch(e){p={};}
+  p[CFG.unit]=true;lsSet(CFG.progressKey,JSON.stringify(p));
+  var t=T();
+  $('statusMsg').className='status ok';$('statusMsg').textContent=t.mGood;
+  var nl=$('nextLink');nl.href=CFG.next;nl.textContent=t.nextTxt;nl.className='next';
+  $('completeBtn').disabled=true;
+}
+function onComplete(){
+  var t=T();
+  if(!isMasters()){STATE.revealed=true;renderMC();markComplete();return;}
+  var mcCorrect=0,mcAnswered=0;
+  for(var i=0;i<DATA.mc.length;i++){if(STATE.mc[i].answered){mcAnswered++;
+    if(STATE.mc[i].chosen===mcCorrectIdx(DATA.mc[i].c,i))mcCorrect++;}}
+  var saPass=0;for(var j=0;j<DATA.sa.length;j++){if(STATE.sa[j].hits>=3)saPass++;}
+  var needMC=18,needSA=7;
+  if(mcAnswered<DATA.mc.length){
+    $('statusMsg').className='status warn';
+    $('statusMsg').textContent=(STATE.lang==='en'
+      ?'Answer all multiple-choice questions first ('+mcAnswered+'/20).'
+      :'Responda primero todas las preguntas de opci\u00f3n m\u00faltiple ('+mcAnswered+'/20).');
+    return;
+  }
+  STATE.revealed=true;renderMC();
+  if(mcCorrect>=needMC&&saPass>=needSA){markComplete();return;}
+  // genuine fail -> lockout
+  lsSet(CFG.lockKey,String(Date.now()+lockMin()*60000));
+  $('statusMsg').className='status lock';
+  $('statusMsg').textContent=(STATE.lang==='en'
+    ?('Not yet: MC '+mcCorrect+'/20 (need 18), SA '+saPass+'/10 (need 7). '+t.mShort)
+    :('A\u00fan no: OM '+mcCorrect+'/20 (necesita 18), RB '+saPass+'/10 (necesita 7). '+t.mShort));
+  refreshLock();
+}
+
+/* ---------- init ---------- */
+function startApp(){
+  STATE.lang=(lsGet('cts_lang')==='es')?'es':'en';
+  STATE.name=lsGet('cts_student')||'';
+  STATE.track=lsGet('cts_track')||'cert';
+  $('langBtn').onclick=function(){STATE.lang=STATE.lang==='en'?'es':'en';
+    lsSet('cts_lang',STATE.lang);renderAll();};
+  $('completeBtn').onclick=onComplete;
+  $('m-go').onclick=function(){
+    var nm=$('m-name').value.trim();var tk=$('m-track').value;
+    if(!nm){$('m-name').focus();return;}
+    STATE.name=nm;STATE.track=tk;
+    lsSet('cts_student',nm);lsSet('cts_track',tk);
+    $('reg').className='modal hide';renderAll();
+  };
+  if(CFG.showReg&&(!STATE.name||!lsGet('cts_track'))){
+    $('reg').className='modal';$('m-track').value=STATE.track;renderChrome();
+  }else{$('reg').className='modal hide';}
+  renderAll();
+  setInterval(refreshLock,30000);
+}
+if(typeof document!=='undefined'){
+  if(document.readyState!=='loading')startApp();
+  else document.addEventListener('DOMContentLoaded',startApp);
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSHSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

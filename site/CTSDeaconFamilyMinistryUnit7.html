@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deacon Family Ministry Plan — Unit 7</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<!-- CTS Deacon Family Ministry Plan — Unit 7. Built on Cook's validated Q24 masters engine (ported from Bible Characters Unit 3). Bilingual EN (NKJV) / ES (RVG). Author: Dr. Wayne Cook. Spanish + SA keywords/models pending native RVG / author spot-check. -->
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 8 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Deacon Family Ministry Plan — Unit 7: Discipleship and Evangelism within Assigned Families</span><span class="lang-es">📖 Plan de Ministerio Familiar del Diácono — Unidad 7: Discipulado y Evangelismo dentro de las Familias Asignadas</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Go therefore and make disciples of all the nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit." — Matthew 28:19 (NKJV)</span><span class="lang-es">«Por tanto, id, y enseñad a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo.» — Mateo 28:19 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="cert">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>In Unit 6 we saw the ongoing care of the deacon &mdash; his ministry of visitation and prayer. But that care is never an end in itself. The deacon is not merely a friendly visitor or a kindly social worker; he is a servant of Christ, and his deepest aim for every family in his care is a spiritual one. He longs to see the believers among them grow into strong, mature disciples, and the lost among them come to faith in Christ. Woven through all his visiting and praying, then, are two great spiritual purposes: discipleship and evangelism.</p>
+<p><strong>Subject:</strong> the deacon's ministry of discipleship and evangelism within his assigned families.</p>
+<p><strong>Proposition:</strong> Beyond meeting his families' needs, the deacon labors to make disciples of them &mdash; disciples marked by commitment, confession, and a willingness to bear the cost &mdash; and to win the lost among them to Christ.</p>
+<p>We will consider the three <strong>marks</strong> of the disciple the deacon seeks to build, and then the evangelistic burden he carries for the lost.</p>
+<h2>I. The Disciple's Mark</h2>
+<p>The word &ldquo;disciple&rdquo; appears over and over in the New Testament. It means a <em>learner</em> &mdash; one who follows the teaching and lifestyle of another. The disciple is not only a pupil; he is an imitator of his teacher. And a true disciple bears his Master's mark.</p>
+<div class="illustration"><strong>Illustration.</strong> I have at home an old family branding iron, stamped with our name. Years ago my father used it to brand his cattle, and everyone knew the cattle belonged to him because of the mark they bore. In the same way, the disciple of Christ carries the Lord's markings upon him. People can tell whose he is.</div>
+<p>The deacon's spiritual aim for his families is exactly this: that every soul among them should bear the unmistakable mark of belonging to Christ. He cares for their bodies and their burdens, but most of all he longs to see them branded as the Lord's own &mdash; true disciples. From the words of Christ in Matthew 10 we may draw three marks of such a disciple, and the deacon labors to see all three formed in the families he serves.</p>
+<h2>II. The First Mark: Commitment</h2>
+<p>The first mark is commitment. Jesus said we are to love the Lord our God with all our heart, with all our soul, and with all our mind. To declare our love for God is a fine thing, but it means nothing if there is no commitment behind it. The great danger is a religion that is wide but shallow. There is often much interest in God &mdash; people who will debate about God, study about God, and seek help from God &mdash; while the depth of real commitment remains pathetically thin, like a river a mile wide and an inch deep. The deacon's task is to help lead his families out of shallow interest and into genuine, committed discipleship.</p>
+<p>A committed Christian is an active Christian, one who serves joyfully &mdash; not out of duty, not out of guilt, but out of love.</p>
+<div class="illustration"><strong>Illustration.</strong> In the stagecoach days, a man bought a third-class ticket and congratulated himself on the money he had saved, for all the seats were the same. Then they came to a steep hill. The driver stopped the horses and shouted, &ldquo;First-class passengers, keep your seats; second-class, get out and walk; third-class, get out and push.&rdquo; What the church needs is more third-class passengers who will get out and push &mdash; not first-class who are content to sit and look on, nor second-class who walk away when the real work begins. The deacon quietly encourages his families to be the kind who push.</div>
+<p>Such commitment shows itself also in enthusiasm and loyalty &mdash; a holy expectancy that looks for great things from God, and a faithfulness to the gathered church. To say one need not gather with the church to be a Christian is rather like saying one need not be faithful to keep a marriage. The deacon models this committed, active, loyal discipleship, and gently calls his families up into it.</p>
+<p>And he calls them up into it chiefly by example. A deacon who is himself only a Sunday Christian will never lift his families higher than he has climbed; but one whose own commitment is plain &mdash; in service, in faithfulness, in joy &mdash; raises the whole standard simply by living it before them. We reproduce what we are far more than what we say.</p>
+<h2>III. The Second Mark: Confession</h2>
+<p>The second mark is confession &mdash; the open owning of Christ before others. The Lord Himself made this a dividing line.</p>
+<div class="scripture">Therefore whoever confesses Me before men, him I will also confess before My Father who is in heaven. But whoever denies Me before men, him I will also deny before My Father who is in heaven. (Matthew 10:32&ndash;33, NKJV)</div>
+<p>There has always been a pressure to blend in with the crowd and avoid trouble. A well-known man, asked whether he was a Christian, once answered, &ldquo;Yes, but not offensively so&rdquo; &mdash; meaning that he never let his Christianity interfere with the friends he kept or the pleasures he loved. The true disciple, by contrast, owns Christ openly and without apology. This confession is made in two ways. It is made by the life, for it is impossible to divorce a witness from a lifestyle; in everything he does a believer is either drawing people toward Jesus or driving them away. Why should Christ make a difference in others' lives when He makes no visible difference in our own? And it is made by the lips, for we must not be too timid or ashamed to tell others plainly of the Lord. The deacon helps his families become bold and consistent confessors, whose lives and words alike point to Christ.</p>
+<h2>IV. The Third Mark: Cost</h2>
+<p>The third mark is a willingness to bear the cost, for following Jesus has never been without cost. The world that hated the Master hates His disciples too; Peter reminds us that Christ suffered for us, &ldquo;leaving us an example, that you should follow His steps&rdquo; (1 Peter 2:21). That cost may fall in several places. It may touch our families, for Christ warned that He came not to bring peace but a sword, even setting a man at odds with his own household (Matthew 10:34&ndash;36); many a new believer has met the hardest opposition at home. It may touch our worldly interests, for if we love anything more than the Lord, He may ask us to lay it down &mdash; as He once asked Isaac of Abraham, and all his riches of the rich young ruler. And it may touch even life itself, for Christ said that whoever does not take up his cross and follow Him is not worthy of Him, and that whoever loses his life for His sake will find it (Matthew 10:38&ndash;39).</p>
+<div class="illustration"><strong>Illustration.</strong> When the ship <em>Empress of Ireland</em> went down with many Salvation Army officers aboard, the survivors told how those officers, finding there were not enough life belts for all, took off their own and strapped them onto others &mdash; even onto strong men &mdash; saying, &ldquo;I can die better than you can.&rdquo; Of the bodies later recovered, not one wore a life belt. That is a disciple who has counted the cost.</div>
+<p>The deacon prepares and strengthens his families to count this cost honestly, so that they will follow Christ even when it is hard and even when it is costly. A disciple who has counted the cost beforehand will not fall away when the trouble comes.</p>
+<p>This is why honest teaching about the cost is itself an act of love. A deacon who promises his families an easy, comfortable Christianity sets them up to stumble at the first hardship; but one who tells them the truth &mdash; that the path is glorious but not always easy &mdash; gives them roots that will hold. He does not frighten them away from Christ; he prepares them to follow Him all the way home.</p>
+<h2>V. Seeking the Lost: The Deacon as Soul-Winner</h2>
+<p>The deacon labors to build disciples &mdash; committed, confessing, and ready to bear the cost. But his spiritual work has a second great aim: he also seeks the lost among his families, that they too may come to Christ. We must never assume that everyone already knows the Lord; most do not. And the deacon shares his Master's own heart:</p>
+<div class="scripture">For the Son of Man has come to seek and to save that which was lost. (Luke 19:10, NKJV)</div>
+<p>The deacon is uniquely placed to reach the lost, because most people come to Christ not through a stranger but through a friend. Of the many people healed by Jesus in the Gospels, the great majority were brought to Him by others; only a handful found their way to Him alone. So it is still: people are most often brought to Jesus by those who already know and love them. The deacon, who knows his families and has earned their trust, is exactly such a friend &mdash; and, being a layman, he often has an access that no preacher enjoys.</p>
+<div class="illustration"><strong>Illustration.</strong> A plumber in Texas carried a New Testament alongside his tools and became known as the &ldquo;witnessing plumber.&rdquo; A minister said of him, &ldquo;That witnessing plumber has won hundreds to Christ since he became a Christian. Many will listen to a workingman who will not listen to a preacher.&rdquo; The deacon is just such a workingman among workingmen; his families, and their relatives and neighbors, will often hear the gospel from him as they would from no one else.</div>
+<p>So the deacon watches for open doors, builds the relationship, and speaks of Christ &mdash; personally, lovingly, and plainly. He prays for the lost by name. He remembers that his families' unsaved loved ones will one day face eternity, and that Jesus is not merely an answer but the only answer. And, like Andrew who first brought his brother Simon to Jesus (John 1:41&ndash;42), he brings them to the Savior, for how shall they believe in Him of whom they have not heard (Romans 10:14)? This is evangelism within the Plan &mdash; not a cold program of strangers, but the natural overflow of a deacon who loves the souls in his care too much to let them perish.</p>
+<p>Such evangelism is usually patient work. The deacon may sow for years before he reaps, praying and loving and waiting while the seed takes root in a hard heart. He need not be pushy, but neither may he be silent; he simply keeps the door open, keeps the relationship warm, and keeps speaking of Christ as the Spirit gives opportunity. In the end it is God who saves; but He is pleased to use a faithful friend to bring the lost within reach of His grace.</p>
+<h2>Conclusion</h2>
+<p>The deacon's care reaches all the way to the soul. He visits and he prays, as Unit 6 showed; but he also disciples and evangelizes, longing to see every person in his families bear the Lord's mark &mdash; the saved growing into committed, confessing, cross-bearing disciples, and the lost brought home to Christ. This is the highest reach of the whole Plan. A deacon might meet every physical need a family has and still have failed them, if he never cared for their souls; but the deacon who makes disciples and wins the lost is doing the very work of Christ, who came to seek and to save.</p>
+<p>&ldquo;Go therefore and make disciples,&rdquo; the Lord commanded. The faithful deacon obeys that great commission not among far-off nations, but among the handful of families entrusted to his care. With this, the heart of his spiritual work is set. Yet those same families will also pass through deep waters &mdash; sickness, tragedy, and hard secrets &mdash; and how the deacon ministers in crisis, guards what is told him in confidence, and knows when to call for help is the subject we take up in Unit 8.</p></div>
+<div class="lang-es"><p>En la Unidad 6 vimos el cuidado continuo del di&aacute;cono &mdash; su ministerio de visitaci&oacute;n y oraci&oacute;n. Pero ese cuidado nunca es un fin en s&iacute; mismo. El di&aacute;cono no es meramente un visitante amistoso ni un bondadoso trabajador social; es un siervo de Cristo, y su prop&oacute;sito m&aacute;s profundo para cada familia a su cuidado es espiritual. Anhela ver a los creyentes entre ellas crecer hasta ser disc&iacute;pulos fuertes y maduros, y a los perdidos entre ellas venir a la fe en Cristo. Entretejidos, pues, en todo su visitar y orar, hay dos grandes prop&oacute;sitos espirituales: el discipulado y el evangelismo.</p>
+<p><strong>Tema:</strong> el ministerio del di&aacute;cono de discipulado y evangelismo dentro de sus familias asignadas.</p>
+<p><strong>Proposici&oacute;n:</strong> M&aacute;s all&aacute; de suplir las necesidades de sus familias, el di&aacute;cono se esfuerza por hacer disc&iacute;pulos de ellas &mdash; disc&iacute;pulos marcados por el compromiso, la confesi&oacute;n, y una disposici&oacute;n a llevar el costo &mdash; y por ganar para Cristo a los perdidos entre ellas.</p>
+<p>Consideraremos las tres <strong>marcas</strong> del disc&iacute;pulo que el di&aacute;cono procura edificar, y luego la carga evangel&iacute;stica que lleva por los perdidos.</p>
+<h2>I. La Marca del Disc&iacute;pulo</h2>
+<p>La palabra &laquo;disc&iacute;pulo&raquo; aparece una y otra vez en el Nuevo Testamento. Significa un <em>aprendiz</em> &mdash; uno que sigue la ense&ntilde;anza y el estilo de vida de otro. El disc&iacute;pulo no es solo un alumno; es un imitador de su maestro. Y un verdadero disc&iacute;pulo lleva la marca de su Se&ntilde;or.</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> Tengo en casa un viejo hierro de marcar de la familia, estampado con nuestro apellido. Hace a&ntilde;os mi padre lo usaba para marcar su ganado, y todos sab&iacute;an que el ganado era suyo por la marca que llevaba. De la misma manera, el disc&iacute;pulo de Cristo lleva las marcas del Se&ntilde;or sobre s&iacute;. La gente puede ver de qui&eacute;n es.</div>
+<p>El prop&oacute;sito espiritual del di&aacute;cono para sus familias es exactamente este: que cada alma entre ellas lleve la marca inconfundible de pertenecer a Cristo. Cuida de sus cuerpos y de sus cargas, pero sobre todo anhela verlas marcadas como propiedad del Se&ntilde;or &mdash; verdaderos disc&iacute;pulos. De las palabras de Cristo en Mateo 10 podemos sacar tres marcas de tal disc&iacute;pulo, y el di&aacute;cono se esfuerza por ver las tres formadas en las familias que sirve.</p>
+<h2>II. La Primera Marca: el Compromiso</h2>
+<p>La primera marca es el compromiso. Jes&uacute;s dijo que hemos de amar al Se&ntilde;or nuestro Dios con todo nuestro coraz&oacute;n, con toda nuestra alma, y con toda nuestra mente. Declarar nuestro amor por Dios es algo bueno, pero no significa nada si no hay compromiso detr&aacute;s de ello. El gran peligro es una religi&oacute;n ancha pero superficial. A menudo hay mucho inter&eacute;s en Dios &mdash; personas que debatir&aacute;n acerca de Dios, estudiar&aacute;n acerca de Dios, y buscar&aacute;n ayuda de Dios &mdash; mientras la profundidad del compromiso real permanece l&aacute;stimosamente delgada, como un r&iacute;o de una milla de ancho y una pulgada de profundidad. La tarea del di&aacute;cono es ayudar a guiar a sus familias fuera del inter&eacute;s superficial y hacia un discipulado genuino y comprometido.</p>
+<p>Un cristiano comprometido es un cristiano activo, uno que sirve con gozo &mdash; no por deber, no por culpa, sino por amor.</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> En los d&iacute;as de las diligencias, un hombre compr&oacute; un boleto de tercera clase y se felicit&oacute; por el dinero que hab&iacute;a ahorrado, pues todos los asientos eran iguales. Entonces llegaron a una cuesta empinada. El conductor detuvo los caballos y grit&oacute;: &laquo;Pasajeros de primera clase, qu&eacute;dense sentados; los de segunda, bajen y caminen; los de tercera, bajen y empujen.&raquo; Lo que la iglesia necesita son m&aacute;s pasajeros de tercera clase que bajen y empujen &mdash; no los de primera que se contentan con sentarse y mirar, ni los de segunda que se alejan cuando comienza la obra de veras. El di&aacute;cono anima calladamente a sus familias a ser de los que empujan.</div>
+<p>Tal compromiso se muestra tambi&eacute;n en el entusiasmo y la lealtad &mdash; una santa expectativa que espera grandes cosas de Dios, y una fidelidad a la iglesia reunida. Decir que uno no necesita reunirse con la iglesia para ser cristiano es algo as&iacute; como decir que uno no necesita ser fiel para mantener un matrimonio. El di&aacute;cono modela este discipulado comprometido, activo y leal, y suavemente llama a sus familias a alcanzarlo.</p>
+<p>Y los llama a alcanzarlo principalmente por el ejemplo. Un di&aacute;cono que &eacute;l mismo es solo un cristiano de domingo nunca levantar&aacute; a sus familias m&aacute;s alto de lo que &eacute;l ha subido; pero aquel cuyo propio compromiso es evidente &mdash; en el servicio, en la fidelidad, en el gozo &mdash; eleva toda la norma sencillamente vivi&eacute;ndola delante de ellas. Reproducimos lo que somos mucho m&aacute;s que lo que decimos.</p>
+<h2>III. La Segunda Marca: la Confesi&oacute;n</h2>
+<p>La segunda marca es la confesi&oacute;n &mdash; el reconocimiento abierto de Cristo delante de otros. El Se&ntilde;or mismo hizo de esto una l&iacute;nea divisoria.</p>
+<div class="scripture">Cualquiera, pues, que me confesare delante de los hombres, le confesar&eacute; yo tambi&eacute;n delante de mi Padre que est&aacute; en los cielos. Y cualquiera que me negare delante de los hombres, le negar&eacute; yo tambi&eacute;n delante de mi Padre que est&aacute; en los cielos. (Mateo 10:32&ndash;33, RVG)</div>
+<p>Siempre ha habido una presi&oacute;n para mezclarse con la multitud y evitar problemas. Un hombre muy conocido, al pregunt&aacute;rsele si era cristiano, respondi&oacute; una vez: &laquo;S&iacute;, pero no de manera ofensiva&raquo; &mdash; queriendo decir que nunca permit&iacute;a que su cristianismo interfiriera con los amigos que ten&iacute;a ni con los placeres que amaba. El verdadero disc&iacute;pulo, por el contrario, reconoce a Cristo abiertamente y sin disculpas. Esta confesi&oacute;n se hace de dos maneras. Se hace con la vida, porque es imposible divorciar el testimonio del estilo de vida; en todo lo que hace, un creyente est&aacute; atrayendo a las personas hacia Jes&uacute;s o alej&aacute;ndolas. &iquest;Por qu&eacute; habr&iacute;a Cristo de hacer una diferencia en la vida de otros cuando no hace ninguna diferencia visible en la nuestra? Y se hace con los labios, porque no debemos ser demasiado t&iacute;midos ni avergonzados para hablar a otros claramente del Se&ntilde;or. El di&aacute;cono ayuda a sus familias a ser confesores audaces y consecuentes, cuyas vidas y palabras por igual se&ntilde;alan a Cristo.</p>
+<h2>IV. La Tercera Marca: el Costo</h2>
+<p>La tercera marca es una disposici&oacute;n a llevar el costo, porque seguir a Jes&uacute;s nunca ha sido sin costo. El mundo que odi&oacute; al Maestro odia tambi&eacute;n a sus disc&iacute;pulos; Pedro nos recuerda que Cristo padeci&oacute; por nosotros, &laquo;dej&aacute;ndonos ejemplo, para que sig&aacute;is sus pisadas&raquo; (1 Pedro 2:21). Ese costo puede caer en varios lugares. Puede tocar a nuestras familias, porque Cristo advirti&oacute; que no vino a traer paz sino espada, poniendo aun a un hombre en contra de su propia casa (Mateo 10:34&ndash;36); muchos creyentes nuevos han hallado la oposici&oacute;n m&aacute;s dura en su propio hogar. Puede tocar nuestros intereses mundanos, porque si amamos algo m&aacute;s que al Se&ntilde;or, &Eacute;l puede pedirnos que lo dejemos &mdash; como una vez pidi&oacute; a Isaac de Abraham, y todas sus riquezas del joven rico. Y puede tocar aun la vida misma, porque Cristo dijo que el que no toma su cruz y le sigue no es digno de &Eacute;l, y que el que pierde su vida por causa de &Eacute;l la hallar&aacute; (Mateo 10:38&ndash;39).</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> Cuando el barco <em>Empress of Ireland</em> se hundi&oacute; con muchos oficiales del Ej&eacute;rcito de Salvaci&oacute;n a bordo, los sobrevivientes contaron c&oacute;mo aquellos oficiales, al hallar que no hab&iacute;a suficientes salvavidas para todos, se quitaron los suyos y los amarraron a otros &mdash; aun a hombres fuertes &mdash; diciendo: &laquo;Yo puedo morir mejor que t&uacute;.&raquo; De los cuerpos recuperados despu&eacute;s, ni uno llevaba salvavidas. Ese es un disc&iacute;pulo que ha contado el costo.</div>
+<p>El di&aacute;cono prepara y fortalece a sus familias para contar este costo honestamente, de modo que sigan a Cristo aun cuando sea dif&iacute;cil y aun cuando sea costoso. Un disc&iacute;pulo que ha contado el costo de antemano no caer&aacute; cuando venga la dificultad.</p>
+<p>Por esto la ense&ntilde;anza honesta acerca del costo es en s&iacute; misma un acto de amor. Un di&aacute;cono que promete a sus familias un cristianismo f&aacute;cil y c&oacute;modo las prepara para tropezar a la primera dificultad; pero el que les dice la verdad &mdash; que el camino es glorioso pero no siempre f&aacute;cil &mdash; les da ra&iacute;ces que sostendr&aacute;n. No las asusta alej&aacute;ndolas de Cristo; las prepara para seguirle todo el camino a casa.</p>
+<h2>V. Buscando a los Perdidos: el Di&aacute;cono como Ganador de Almas</h2>
+<p>El di&aacute;cono se esfuerza por edificar disc&iacute;pulos &mdash; comprometidos, confesantes, y listos para llevar el costo. Pero su obra espiritual tiene un segundo gran objetivo: tambi&eacute;n busca a los perdidos entre sus familias, para que ellos tambi&eacute;n vengan a Cristo. Nunca debemos suponer que todos ya conocen al Se&ntilde;or; la mayor&iacute;a no. Y el di&aacute;cono comparte el coraz&oacute;n mismo de su Maestro:</p>
+<div class="scripture">Porque el Hijo del Hombre vino a buscar y a salvar lo que se hab&iacute;a perdido. (Lucas 19:10, RVG)</div>
+<p>El di&aacute;cono est&aacute; en una posici&oacute;n &uacute;nica para alcanzar a los perdidos, porque la mayor&iacute;a de las personas vienen a Cristo no por medio de un extra&ntilde;o sino por medio de un amigo. De las muchas personas sanadas por Jes&uacute;s en los Evangelios, la gran mayor&iacute;a fueron tra&iacute;das a &Eacute;l por otros; solo unos pocos hallaron el camino a &Eacute;l por s&iacute; solos. As&iacute; sigue siendo: las personas son tra&iacute;das a Jes&uacute;s, las m&aacute;s de las veces, por los que ya las conocen y las aman. El di&aacute;cono, que conoce a sus familias y se ha ganado su confianza, es precisamente tal amigo &mdash; y, siendo un laico, a menudo tiene un acceso del que ning&uacute;n predicador goza.</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> Un plomero en Texas llevaba un Nuevo Testamento junto a sus herramientas y lleg&oacute; a ser conocido como el &laquo;plomero que testificaba.&raquo; Un ministro dijo de &eacute;l: &laquo;Ese plomero que testifica ha ganado a cientos para Cristo desde que se hizo cristiano. Muchos escuchar&aacute;n a un obrero que no escuchar&iacute;an a un predicador.&raquo; El di&aacute;cono es justamente tal obrero entre obreros; sus familias, y sus parientes y vecinos, a menudo oir&aacute;n el evangelio de &eacute;l como no lo oir&iacute;an de ning&uacute;n otro.</div>
+<p>As&iacute; que el di&aacute;cono vela por las puertas abiertas, edifica la relaci&oacute;n, y habla de Cristo &mdash; personal, amorosa y claramente. Ora por los perdidos por nombre. Recuerda que los seres queridos no salvos de sus familias un d&iacute;a enfrentar&aacute;n la eternidad, y que Jes&uacute;s no es meramente una respuesta sino la &uacute;nica respuesta. Y, como Andr&eacute;s que primero trajo a su hermano Sim&oacute;n a Jes&uacute;s (Juan 1:41&ndash;42), los trae al Salvador, porque &iquest;c&oacute;mo creer&aacute;n en Aquel de quien no han o&iacute;do (Romanos 10:14)? Esto es evangelismo dentro del Plan &mdash; no un programa fr&iacute;o de extra&ntilde;os, sino el desborde natural de un di&aacute;cono que ama demasiado las almas a su cuidado como para dejarlas perecer.</p>
+<p>Tal evangelismo es por lo general una obra paciente. El di&aacute;cono puede sembrar por a&ntilde;os antes de segar, orando y amando y esperando mientras la semilla echa ra&iacute;ces en un coraz&oacute;n duro. No necesita ser insistente, pero tampoco puede callar; sencillamente mantiene la puerta abierta, mantiene c&aacute;lida la relaci&oacute;n, y sigue hablando de Cristo conforme el Esp&iacute;ritu da la oportunidad. Al final es Dios quien salva; pero le place usar a un amigo fiel para traer a los perdidos al alcance de su gracia.</p>
+<h2>Conclusi&oacute;n</h2>
+<p>El cuidado del di&aacute;cono llega hasta el alma misma. Visita y ora, como mostr&oacute; la Unidad 6; pero tambi&eacute;n discipula y evangeliza, anhelando ver a cada persona en sus familias llevar la marca del Se&ntilde;or &mdash; los salvos creciendo hasta ser disc&iacute;pulos comprometidos, confesantes y portadores de la cruz, y los perdidos tra&iacute;dos a casa a Cristo. Este es el alcance m&aacute;s alto de todo el Plan. Un di&aacute;cono podr&iacute;a suplir cada necesidad f&iacute;sica que una familia tenga y aun as&iacute; haberle fallado, si nunca cuid&oacute; de sus almas; pero el di&aacute;cono que hace disc&iacute;pulos y gana a los perdidos est&aacute; haciendo la obra misma de Cristo, que vino a buscar y a salvar.</p>
+<p>&laquo;Id, y haced disc&iacute;pulos,&raquo; mand&oacute; el Se&ntilde;or. El di&aacute;cono fiel obedece esa gran comisi&oacute;n no entre naciones lejanas, sino entre el pu&ntilde;ado de familias confiadas a su cuidado. Con esto, el coraz&oacute;n de su obra espiritual queda establecido. Sin embargo, esas mismas familias tambi&eacute;n pasar&aacute;n por aguas profundas &mdash; enfermedad, tragedia, y secretos dif&iacute;ciles &mdash; y c&oacute;mo el di&aacute;cono ministra en la crisis, guarda lo que se le dice en confianza, y sabe cu&aacute;ndo pedir ayuda es el tema que tomamos en la Unidad 8.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 7 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 7 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 7;
+const COURSE = 'CTSDFM';
+const FILE_PREFIX = 'CTSDeaconFamilyMinistry';
+const NEXT_UNIT_URL = 'CTSDeaconFamilyMinistryUnit8.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 — Biblical Foundations of the Diaconate","Unit 2 — Qualifications and Character of Deacons","Unit 3 — Historical Development in Southern Baptist Life","Unit 4 — The Deacon Family Ministry Plan: Vision and Definition","Unit 5 — Organizing the Plan: Assigning Families","Unit 6 — Ongoing Care: Visitation and Prayer","Unit 7 — Discipleship and Evangelism within Assigned Families","Unit 8 — Crisis Ministry, Confidentiality, and Referral","Unit 9 — Deacon Meetings, Reporting, and Pastor Relations","Unit 10 — Sustaining the Plan: Challenges and Evaluation"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [
+{"textEn":"1. The deacon's two great spiritual purposes for his families are:","textEs":"1. Los dos grandes propósitos espirituales del diácono para sus familias son:","optionsEn":["music and ushering", "budgeting and building", "discipleship and evangelism", "voting and meeting"],"optionsEs":["la música y el ujier", "el presupuesto y la construcción", "el discipulado y el evangelismo", "votar y reunirse"],"explanationEn":"His spiritual aims are discipleship and evangelism.","explanationEs":"Sus objetivos espirituales son el discipulado y el evangelismo.","correct":2},
+{"textEn":"2. The word 'disciple' means:","textEs":"2. La palabra 'discípulo' significa:","optionsEn":["a learner, an imitator of the teacher", "a ruler", "a critic", "a spectator"],"optionsEs":["un aprendiz, un imitador del maestro", "un gobernante", "un crítico", "un espectador"],"explanationEn":"A disciple is a learner who imitates his teacher.","explanationEs":"Un discípulo es un aprendiz que imita a su maestro.","correct":0},
+{"textEn":"3. The branding iron illustrates that a true disciple:","textEs":"3. El hierro de marcar ilustra que un verdadero discípulo:","optionsEn":["owns much property", "bears his Master's mark", "is always wealthy", "works with cattle"],"optionsEs":["posee mucha propiedad", "lleva la marca de su Señor", "es siempre rico", "trabaja con ganado"],"explanationEn":"As cattle bear a brand, the disciple bears the Lord's mark.","explanationEs":"Como el ganado lleva una marca, el discípulo lleva la marca del Señor.","correct":1},
+{"textEn":"4. The deacon's deepest aim for his families is:","textEs":"4. El objetivo más profundo del diácono para sus familias es:","optionsEn":["financial", "social", "recreational", "spiritual — that they bear the mark of Christ"],"optionsEs":["financiero", "social", "recreativo", "espiritual — que lleven la marca de Cristo"],"explanationEn":"His deepest aim is spiritual: that they belong to Christ.","explanationEs":"Su objetivo más profundo es espiritual: que pertenezcan a Cristo.","correct":3},
+{"textEn":"5. The first mark of a disciple is:","textEs":"5. La primera marca de un discípulo es:","optionsEn":["cleverness", "wealth", "commitment", "popularity"],"optionsEs":["la astucia", "la riqueza", "el compromiso", "la popularidad"],"explanationEn":"The first mark is commitment.","explanationEs":"La primera marca es el compromiso.","correct":2},
+{"textEn":"6. A religion 'a mile wide and an inch deep' describes:","textEs":"6. Una religión 'de una milla de ancho y una pulgada de profundidad' describe:","optionsEn":["shallow commitment", "deep devotion", "strong doctrine", "faithful service"],"optionsEs":["compromiso superficial", "devoción profunda", "doctrina fuerte", "servicio fiel"],"explanationEn":"It pictures wide but shallow commitment.","explanationEs":"Representa un compromiso ancho pero superficial.","correct":0},
+{"textEn":"7. A committed Christian is:","textEs":"7. Un cristiano comprometido es:","optionsEn":["a passive observer", "a reluctant helper", "a Sunday-only attender", "an active Christian who serves in love"],"optionsEs":["un observador pasivo", "un ayudante reacio", "uno que asiste solo el domingo", "un cristiano activo que sirve en amor"],"explanationEn":"A committed Christian is active, serving out of love.","explanationEs":"Un cristiano comprometido es activo, sirviendo por amor.","correct":3},
+{"textEn":"8. The stagecoach illustration says the church needs more:","textEs":"8. La ilustración de la diligencia dice que la iglesia necesita más:","optionsEn":["first-class passengers who sit", "third-class passengers who get out and push", "paying customers", "second-class who walk away"],"optionsEs":["pasajeros de primera clase que se sientan", "pasajeros de tercera clase que bajan y empujan", "clientes que pagan", "los de segunda que se alejan"],"explanationEn":"The church needs third-class passengers who get out and push.","explanationEs":"La iglesia necesita pasajeros de tercera clase que bajen y empujen.","correct":1},
+{"textEn":"9. The second mark of a disciple is:","textEs":"9. La segunda marca de un discípulo es:","optionsEn":["caution", "comfort", "confession", "conformity"],"optionsEs":["la cautela", "la comodidad", "la confesión", "la conformidad"],"explanationEn":"The second mark is confession — owning Christ before men.","explanationEs":"La segunda marca es la confesión — reconocer a Cristo ante los hombres.","correct":2},
+{"textEn":"10. In Matthew 10:32-33, to confess Christ before men brings:","textEs":"10. En Mateo 10:32-33, confesar a Cristo delante de los hombres trae:","optionsEn":["Christ's confession of us before the Father", "earthly reward", "exemption from trials", "public applause"],"optionsEs":["la confesión de Cristo de nosotros ante el Padre", "recompensa terrenal", "exención de pruebas", "aplauso público"],"explanationEn":"'Whoever confesses Me... I will confess before My Father.'","explanationEs":"'Cualquiera que me confiese... le confesaré ante mi Padre.'","correct":0},
+{"textEn":"11. The man who said he was a Christian 'but not offensively so' meant:","textEs":"11. El hombre que dijo que era cristiano 'pero no de manera ofensiva' quería decir:","optionsEn":["he was very bold", "he preached often", "he was a missionary", "he never let it interfere with his friends or pleasures"],"optionsEs":["que era muy audaz", "que predicaba a menudo", "que era misionero", "que nunca dejó que interfiriera con sus amigos o placeres"],"explanationEn":"He kept his faith from interfering with his friends and pleasures.","explanationEs":"Evitó que su fe interfiriera con sus amigos y placeres.","correct":3},
+{"textEn":"12. Confession of Christ is made:","textEs":"12. La confesión de Cristo se hace:","optionsEn":["only at baptism", "by the life and by the lips", "only on Sundays", "only by the lips"],"optionsEs":["solo en el bautismo", "con la vida y con los labios", "solo los domingos", "solo con los labios"],"explanationEn":"By the life (lifestyle) and by the lips alike.","explanationEs":"Con la vida (el estilo de vida) y con los labios por igual.","correct":1},
+{"textEn":"13. The third mark of a disciple is a willingness to bear:","textEs":"13. La tercera marca de un discípulo es una disposición a llevar:","optionsEn":["the leisure", "the applause", "the cost", "the wealth"],"optionsEs":["el ocio", "el aplauso", "el costo", "la riqueza"],"explanationEn":"The third mark is willingness to bear the cost.","explanationEs":"La tercera marca es la disposición a llevar el costo.","correct":2},
+{"textEn":"14. Christ's saying that He came 'not to bring peace but a sword' warns the cost may fall on:","textEs":"14. El dicho de Cristo de que vino 'no a traer paz sino espada' advierte que el costo puede caer sobre:","optionsEn":["our finances only", "our families and household", "our health", "our reputation only"],"optionsEs":["solo nuestras finanzas", "nuestras familias y casa", "nuestra salud", "solo nuestra reputación"],"explanationEn":"The cost may set a believer at odds with his own household.","explanationEs":"El costo puede poner a un creyente en contra de su propia casa.","correct":1},
+{"textEn":"15. The Salvation Army officers on the Empress of Ireland illustrate:","textEs":"15. Los oficiales del Ejército de Salvación en el Empress of Ireland ilustran:","optionsEn":["giving up one's life for others", "good swimming", "careful planning", "wearing life belts"],"optionsEs":["dar la vida por otros", "la buena natación", "la planificación cuidadosa", "usar salvavidas"],"explanationEn":"They gave their life belts to others — the cost of discipleship.","explanationEs":"Dieron sus salvavidas a otros — el costo del discipulado.","correct":0},
+{"textEn":"16. Honest teaching about the cost of discipleship is:","textEs":"16. La enseñanza honesta acerca del costo del discipulado es:","optionsEn":["unkind", "discouraging", "unnecessary", "an act of love that gives roots"],"optionsEs":["cruel", "desalentadora", "innecesaria", "un acto de amor que da raíces"],"explanationEn":"Telling the truth gives a disciple roots that will hold.","explanationEs":"Decir la verdad da al discípulo raíces que sostendrán.","correct":3},
+{"textEn":"17. The deacon must not assume that everyone in his families:","textEs":"17. El diácono no debe suponer que todos en sus familias:","optionsEn":["needs a visit", "already knows Christ", "has a Bible", "attends church"],"optionsEs":["necesitan una visita", "ya conocen a Cristo", "tienen una Biblia", "asisten a la iglesia"],"explanationEn":"He must not assume all are saved; most are not.","explanationEs":"No debe suponer que todos son salvos; la mayoría no lo son.","correct":1},
+{"textEn":"18. Luke 19:10 says the Son of Man came to:","textEs":"18. Lucas 19:10 dice que el Hijo del Hombre vino a:","optionsEn":["seek and to save the lost", "judge the world", "build a temple", "gather taxes"],"optionsEs":["buscar y salvar lo que se había perdido", "juzgar al mundo", "edificar un templo", "recoger impuestos"],"explanationEn":"He came to seek and to save the lost.","explanationEs":"Vino a buscar y a salvar lo que se había perdido.","correct":0},
+{"textEn":"19. That most of those healed in the Gospels were brought by friends shows:","textEs":"19. Que la mayoría de los sanados en los Evangelios fueron traídos por amigos muestra:","optionsEn":["miracles were rare", "Jesus refused strangers", "healing required payment", "people are usually brought to Christ by friends"],"optionsEs":["que los milagros eran raros", "que Jesús rechazaba a los extraños", "que la sanidad requería pago", "que las personas usualmente son traídas a Cristo por amigos"],"explanationEn":"People are most often brought to Jesus by friends.","explanationEs":"Las personas son traídas a Jesús, las más de las veces, por amigos.","correct":3},
+{"textEn":"20. The 'witnessing plumber' illustrates that:","textEs":"20. El 'plomero que testificaba' ilustra que:","optionsEn":["only pastors should evangelize", "tools are unimportant", "a layman can reach people a preacher cannot", "plumbing is a ministry"],"optionsEs":["solo los pastores deben evangelizar", "las herramientas no importan", "un laico puede alcanzar a personas que un predicador no", "la plomería es un ministerio"],"explanationEn":"A workingman often reaches those a preacher cannot.","explanationEs":"Un obrero a menudo alcanza a los que un predicador no puede.","correct":2}
+];
+const kwQuestions = [
+{"textEn":"21. What are the deacon's two great spiritual aims for his families?","textEs":"21. ¿Cuáles son los dos grandes objetivos espirituales del diácono para sus familias?","kw_en":["discipleship","evangelism","spiritual","servant","believers","disciples","lost","faith"],"kw_es":["discipulado","evangelismo","espiritual","siervo","creyentes","compromiso","perdidos","cristo"],"modelEn":"The deacon's two great spiritual aims for his families are discipleship and evangelism. He is not merely a friendly visitor or a social worker but a servant of Christ, so his deepest concern for every family is spiritual. By discipleship he labors to see the believers among them grow into strong, mature disciples, marked by commitment, confession, and a willingness to bear the cost. By evangelism he seeks the lost among them, that they too may come to faith in Christ. Both purposes are woven through all his ordinary visiting and praying.","modelEs":"Los dos grandes objetivos espirituales del diácono para sus familias son el discipulado y el evangelismo. No es meramente un visitante amistoso ni un trabajador social, sino un siervo de Cristo, así que su preocupación más profunda por cada familia es espiritual. Por el discipulado se esfuerza por ver a los creyentes entre ellas crecer hasta ser discípulos fuertes y maduros, marcados por el compromiso, la confesión y una disposición a llevar el costo. Por el evangelismo busca a los perdidos entre ellas, para que ellos también vengan a la fe en Cristo. Ambos propósitos están entretejidos en todo su visitar y orar ordinario."},
+{"textEn":"22. What is a disciple, and what does the branding iron teach about him?","textEs":"22. ¿Qué es un discípulo, y qué enseña el hierro de marcar acerca de él?","kw_en":["disciple","learner","imitator","branding","mark","cattle","markings","belonging"],"kw_es":["aprendiz","imitador","maestro","marca","ganado","pertenecer","estilo","propiedad"],"modelEn":"A disciple is a learner, one who follows the teaching and lifestyle of another; he is not only a pupil but an imitator of his teacher. The branding iron teaches that a true disciple bears his Master's mark. Just as a rancher's cattle carry his brand so that everyone knows whose they are, the disciple of Christ carries the Lord's markings upon him, and people can tell whose he is. The deacon's aim is that every soul in his families should bear that unmistakable mark of belonging to Christ, branded as the Lord's own.","modelEs":"Un discípulo es un aprendiz, uno que sigue la enseñanza y el estilo de vida de otro; no es solo un alumno sino un imitador de su maestro. El hierro de marcar enseña que un verdadero discípulo lleva la marca de su Señor. Así como el ganado de un ranchero lleva su marca para que todos sepan de quién es, el discípulo de Cristo lleva las marcas del Señor sobre sí, y la gente puede ver de quién es. El propósito del diácono es que cada alma en sus familias lleve esa marca inconfundible de pertenecer a Cristo, marcada como propiedad del Señor."},
+{"textEn":"23. Explain the first mark of a disciple, commitment, and the lesson of the stagecoach.","textEs":"23. Explique la primera marca de un discípulo, el compromiso, y la lección de la diligencia.","kw_en":["commitment","shallow","river","active","stagecoach","third","push","example"],"kw_es":["compromiso","superficial","activo","diligencia","tercera","empujaron","ejemplo","gozo"],"modelEn":"The first mark of a disciple is commitment. To declare love for God means nothing without commitment behind it, and the great danger is a religion that is wide but shallow, like a river a mile wide and an inch deep. A committed Christian is an active one who serves joyfully, out of love and not duty. The stagecoach illustration makes the point: when the coach reached a steep hill, the first-class kept their seats, the second-class got out and walked, but the third-class got out and pushed. The church needs more third-class passengers who will push, and the deacon calls his families to be that kind, chiefly by his own example.","modelEs":"La primera marca de un discípulo es el compromiso. Declarar amor por Dios no significa nada sin compromiso detrás de ello, y el gran peligro es una religión ancha pero superficial, como un río de una milla de ancho y una pulgada de profundidad. Un cristiano comprometido es uno activo que sirve con gozo, por amor y no por deber. La ilustración de la diligencia lo deja claro: cuando el coche llegó a una cuesta empinada, los de primera clase se quedaron sentados, los de segunda bajaron y caminaron, pero los de tercera bajaron y empujaron. La iglesia necesita más pasajeros de tercera clase que empujen, y el diácono llama a sus familias a ser de esa clase, principalmente por su propio ejemplo."},
+{"textEn":"24. Explain the second mark, confession, and the two ways it is made.","textEs":"24. Explique la segunda marca, la confesión, y las dos maneras en que se hace.","kw_en":["confession","confesses","denies","life","lifestyle","lips","ashamed","confessors"],"kw_es":["confesi","confiese","niegue","testimonio","labios","avergonzados","confesores","creyente"],"modelEn":"The second mark of a disciple is confession, the open owning of Christ before others. In Matthew 10:32-33 the Lord said that whoever confesses Him before men, He will also confess before His Father, but whoever denies Him He will deny. Confession is made in two ways. It is made by the life, for a witness cannot be divorced from a lifestyle, and in everything a believer does he is drawing people toward Jesus or driving them away. And it is made by the lips, for we must not be too timid or ashamed to tell others plainly of the Lord. The deacon helps his families become bold and consistent confessors.","modelEs":"La segunda marca de un discípulo es la confesión, el reconocimiento abierto de Cristo delante de otros. En Mateo 10:32-33 el Señor dijo que cualquiera que le confiese delante de los hombres, Él también le confesará delante de su Padre, pero a cualquiera que le niegue, Él le negará. La confesión se hace de dos maneras. Se hace con la vida, porque el testimonio no puede divorciarse del estilo de vida, y en todo lo que hace un creyente está atrayendo a las personas hacia Jesús o alejándolas. Y se hace con los labios, porque no debemos ser demasiado tímidos ni avergonzados para hablar a otros claramente del Señor. El diácono ayuda a sus familias a ser confesores audaces y consecuentes."},
+{"textEn":"25. Explain the third mark, the cost of discipleship.","textEs":"25. Explique la tercera marca, el costo del discipulado.","kw_en":["cost","following","disciples","families","sword","household","life","count"],"kw_es":["costo","maestro","familias","espada","casa","mundanos","salvavidas","contar"],"modelEn":"The third mark of a disciple is a willingness to bear the cost, for following Jesus has never been without cost. The world that hated the Master hates His disciples too. That cost may touch our families, since Christ came not to bring peace but a sword and can set a believer at odds with his own household. It may touch our worldly interests, for if we love anything more than the Lord, He may ask us to lay it down. And it may touch even life itself, as the Salvation Army officers showed when they gave their life belts to others, saying they could die better. The deacon strengthens his families to count this cost honestly.","modelEs":"La tercera marca de un discípulo es una disposición a llevar el costo, porque seguir a Jesús nunca ha sido sin costo. El mundo que odió al Maestro odia también a sus discípulos. Ese costo puede tocar a nuestras familias, ya que Cristo no vino a traer paz sino espada y puede poner a un creyente en contra de su propia casa. Puede tocar nuestros intereses mundanos, porque si amamos algo más que al Señor, Él puede pedirnos que lo dejemos. Y puede tocar aun la vida misma, como mostraron los oficiales del Ejército de Salvación cuando dieron sus salvavidas a otros, diciendo que podían morir mejor. El diácono fortalece a sus familias para contar este costo honestamente."},
+{"textEn":"26. Why is honest teaching about the cost an act of love?","textEs":"26. ¿Por qué es la enseñanza honesta acerca del costo un acto de amor?","kw_en":["honest","cost","roots","comfortable","stumble","truth","endure","counted"],"kw_es":["honesta","costo","promete","tropezar","verdad","perseverar","contado","dificultad"],"modelEn":"Honest teaching about the cost is an act of love because it gives a disciple roots that will hold. A deacon who promises his families an easy, comfortable Christianity sets them up to stumble at the very first hardship, when reality does not match the promise. But one who tells them the truth, that the path is glorious yet not always easy, prepares them to endure. He does not frighten them away from Christ; rather he readies them to follow Him all the way home. A disciple who has counted the cost beforehand will not fall away when the trouble finally comes.","modelEs":"La enseñanza honesta acerca del costo es un acto de amor porque da al discípulo raíces que sostendrán. Un diácono que promete a sus familias un cristianismo fácil y cómodo las prepara para tropezar a la primera dificultad, cuando la realidad no concuerda con la promesa. Pero el que les dice la verdad, que el camino es glorioso pero no siempre fácil, las prepara para perseverar. No las asusta alejándolas de Cristo; más bien las apresta para seguirle todo el camino a casa. Un discípulo que ha contado el costo de antemano no caerá cuando por fin venga la dificultad."},
+{"textEn":"27. Why is the deacon, as a layman, so well placed to evangelize his families?","textEs":"27. ¿Por qué está el diácono, siendo un laico, tan bien situado para evangelizar a sus familias?","kw_en":["layman","evangelize","stranger","friend","brought","access","plumber","workingman"],"kw_es":["laico","evangelizar","amigo","confianza","acceso","plomero","obrero","predicador"],"modelEn":"The deacon, as a layman, is well placed to evangelize his families for two reasons. First, most people come to Christ not through a stranger but through a friend; of the many healed by Jesus in the Gospels, the great majority were brought to Him by others, and the deacon, who knows his families and has their trust, is exactly such a friend. Second, a layman often has an access no preacher enjoys. The witnessing plumber won hundreds to Christ, and a minister said that many will listen to a workingman who will not listen to a preacher. The deacon is a workingman among workingmen.","modelEs":"El diácono, siendo un laico, está bien situado para evangelizar a sus familias por dos razones. Primero, la mayoría de las personas vienen a Cristo no por medio de un extraño sino por medio de un amigo; de los muchos sanados por Jesús en los Evangelios, la gran mayoría fueron traídos a Él por otros, y el diácono, que conoce a sus familias y tiene su confianza, es precisamente tal amigo. Segundo, un laico a menudo tiene un acceso del que ningún predicador goza. El plomero que testificaba ganó a cientos para Cristo, y un ministro dijo que muchos escucharán a un obrero que no escucharían a un predicador. El diácono es un obrero entre obreros."},
+{"textEn":"28. How does Luke 19:10 shape the deacon's burden for the lost?","textEs":"28. ¿Cómo da forma Lucas 19:10 a la carga del diácono por los perdidos?","kw_en":["luke","seek","save","lost","burden","assume","eternity","perishing"],"kw_es":["buscar","salvar","perdido","carga","maestro","perecen","supone","eternidad"],"modelEn":"Luke 19:10 says that the Son of Man came to seek and to save that which was lost, and this shapes the deacon's whole burden for the lost. He shares his Master's heart, which is set on seeking the perishing. So he never assumes that everyone in his families already knows Christ, for most people do not. He remembers that the unsaved loved ones among his families will one day face eternity, and that Jesus is not merely an answer but the only answer. Because his Lord came to seek and to save, the deacon also goes seeking the lost entrusted to his care.","modelEs":"Lucas 19:10 dice que el Hijo del Hombre vino a buscar y a salvar lo que se había perdido, y esto da forma a toda la carga del diácono por los perdidos. Comparte el corazón de su Maestro, que está puesto en buscar a los que perecen. Así que nunca supone que todos en sus familias ya conocen a Cristo, porque la mayoría no. Recuerda que los seres queridos no salvos entre sus familias un día enfrentarán la eternidad, y que Jesús no es meramente una respuesta sino la única respuesta. Porque su Señor vino a buscar y a salvar, el diácono también va buscando a los perdidos confiados a su cuidado."},
+{"textEn":"29. Describe how the deacon goes about seeking the lost among his families.","textEs":"29. Describa cómo el diácono busca a los perdidos entre sus familias.","kw_en":["lost","patient","relationship","sow","prays","opportunity","andrew","grace"],"kw_es":["perdidos","paciente","relaci","sembrar","oportunidad","insistente","salvador","gracia"],"modelEn":"The deacon seeks the lost among his families by patient, loving, personal work. He watches for open doors and builds the relationship warmly, knowing that he may sow for years before he reaps. He prays for the lost by name. He speaks of Christ personally and plainly as the Spirit gives opportunity, never pushy yet never silent, and like Andrew bringing his brother Simon, he brings them to the Savior. He keeps the door open and the relationship warm, remembering that in the end it is God who saves, but that God is pleased to use a faithful friend to bring the lost within reach of His grace.","modelEs":"El diácono busca a los perdidos entre sus familias por medio de una obra paciente, amorosa y personal. Vela por las puertas abiertas y edifica la relación cálidamente, sabiendo que puede sembrar por años antes de segar. Ora por los perdidos por nombre. Habla de Cristo personal y claramente conforme el Espíritu da la oportunidad, nunca insistente pero nunca callado, y como Andrés que trajo a su hermano Simón, los trae al Salvador. Mantiene la puerta abierta y la relación cálida, recordando que al final es Dios quien salva, pero que a Dios le place usar a un amigo fiel para traer a los perdidos al alcance de su gracia."},
+{"textEn":"30. Summarize the deacon's ministry of discipleship and evangelism.","textEs":"30. Resuma el ministerio del diácono de discipulado y evangelismo.","kw_en":["discipleship","evangelism","soul","disciples","commitment","confession","lost","commission"],"kw_es":["discipulado","evangelismo","alma","compromiso","confesi","perdidos","evangelio","comisi"],"modelEn":"The deacon's ministry of discipleship and evangelism is the highest reach of his care, going all the way to the soul. By discipleship he labors to form true disciples among his believing families, marked by commitment, by confession, and by a willingness to bear the cost. By evangelism he seeks the lost among his families, sharing the gospel as a trusted friend so they may come to Christ. He longs to see every soul bear the Lord's mark, the saved growing strong and the lost brought home. In this he obeys the Great Commission, making disciples not among far nations but among the families given to his care.","modelEs":"El ministerio del diácono de discipulado y evangelismo es el alcance más alto de su cuidado, llegando hasta el alma misma. Por el discipulado se esfuerza por formar verdaderos discípulos entre sus familias creyentes, marcados por el compromiso, por la confesión, y por una disposición a llevar el costo. Por el evangelismo busca a los perdidos entre sus familias, compartiendo el evangelio como un amigo de confianza para que vengan a Cristo. Anhela ver a cada alma llevar la marca del Señor, los salvos creciendo fuertes y los perdidos traídos a casa. En esto obedece la Gran Comisión, haciendo discípulos no entre naciones lejanas sino entre las familias dadas a su cuidado."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'cert';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSDeaconFamilyMinistryReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

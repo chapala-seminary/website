@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Life of Christ &mdash; Unit 8</title>
+<style>
+:root{
+  --ink:#241c12; --paper:#f7f1e4; --card:#fffdf8; --line:#d8ccb2;
+  --accent:#7a3b1e; --accent2:#9c6b2f; --gold:#fbf3d6; --goldln:#caa94e;
+  --good:#2f6b3a; --bad:#9b2c2c; --muted:#6c6150;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;line-height:1.6;}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+header.site{background:var(--accent);color:#f6ecd8;padding:18px 0;border-bottom:4px solid var(--goldln);}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:0;}
+header.site h1{font-size:1.15rem;margin:0;font-weight:600;letter-spacing:.2px;}
+header.site .sub{font-size:.78rem;opacity:.85;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+.langbtn{font-family:system-ui,sans-serif;font-size:.8rem;background:#f6ecd8;color:var(--accent);
+  border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600;}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 4px;
+  font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);}
+.badge{background:var(--gold);border:1px solid var(--goldln);border-radius:14px;padding:3px 10px;color:#6a531c;}
+.epigraph{font-style:italic;color:var(--accent2);border-left:3px solid var(--goldln);
+  padding:6px 0 6px 14px;margin:16px 0;font-size:.98rem;}
+h2.sec{font-size:1.25rem;color:var(--accent);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin:34px 0 14px;}
+article p{margin:0 0 14px;}
+article b{color:var(--accent);}
+.v{color:#3a4a2c;}
+.illo{background:#fbf6ea;border-left:3px solid var(--goldln);padding:10px 14px;border-radius:4px;}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:14px 0;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);}
+.qn{font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;color:var(--accent2);
+  text-transform:uppercase;letter-spacing:.6px;}
+.qp{margin:6px 0 10px;font-weight:600;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:9px 12px;margin:6px 0;cursor:pointer;font:inherit;color:inherit;}
+.opt:hover{border-color:var(--accent2);}
+.opt .lt{font-weight:700;color:var(--accent2);margin-right:8px;}
+.opt.correct{background:#e9f3e8;border-color:var(--good);}
+.opt.wrong{background:#f6e6e4;border-color:var(--bad);}
+.opt:disabled{cursor:default;opacity:1;}
+.expl{font-size:.9rem;color:var(--muted);margin:8px 2px 0;display:none;}
+.expl.show{display:block;}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:6px;padding:10px;
+  font:inherit;background:#fff;resize:vertical;}
+.btn{font-family:system-ui,sans-serif;font-weight:600;border:none;border-radius:6px;padding:9px 16px;
+  cursor:pointer;font-size:.9rem;}
+.btn.primary{background:var(--accent);color:#f6ecd8;}
+.btn.ghost{background:#efe6d2;color:var(--accent);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.sa-res{margin-top:10px;font-family:system-ui,sans-serif;font-size:.88rem;display:none;}
+.sa-res.show{display:block;}
+.sa-verdict{font-weight:700;}
+.sa-verdict.pass{color:var(--good);} .sa-verdict.soft{color:var(--accent2);}
+.model{background:var(--gold);border:1px solid var(--goldln);border-radius:6px;padding:10px 12px;margin-top:8px;}
+.model .ml{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:#6a531c;}
+.foot{margin-top:30px;border-top:2px solid var(--line);padding-top:18px;}
+.status{font-family:system-ui,sans-serif;font-size:.9rem;margin:10px 0;}
+.status.ok{color:var(--good);} .status.warn{color:var(--accent2);} .status.lock{color:var(--bad);}
+.modal{position:fixed;inset:0;background:rgba(36,28,18,.62);display:flex;align-items:center;
+  justify-content:center;padding:18px;z-index:50;}
+.modal .box{background:var(--card);border-radius:10px;max-width:420px;width:100%;padding:22px;
+  border-top:5px solid var(--goldln);}
+.modal h3{margin:0 0 6px;color:var(--accent);}
+.modal label{display:block;font-family:system-ui,sans-serif;font-size:.82rem;margin:12px 0 4px;color:var(--muted);}
+.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit;}
+.hide{display:none !important;}
+.next{display:inline-block;margin-top:12px;background:var(--good);color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:6px;font-family:system-ui,sans-serif;font-weight:600;}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:2px 0 18px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);margin-right:3px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:var(--card);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600;line-height:1;}
+.unitnav a:hover{border-color:var(--accent2);color:var(--accent2);}
+.unitnav a.active{background:var(--accent);color:#f6ecd8;border-color:var(--accent);}
+.unitnav a.done{background:var(--gold);border-color:var(--goldln);color:#6a531c;}
+.unitnav a.cert{min-width:auto;padding:0 12px;background:#efe6d2;}
+html[lang="es"] .en-lbl{display:none}html[lang="en"] .es-lbl{display:none}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site">
+  <div class="wrap">
+    <div><h1 id="t-title">The Life of Christ</h1><div class="sub" id="t-unit">Unit 8 · The Cross</div></div>
+    <button class="langbtn" id="langBtn" type="button">Espa&ntilde;ol</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <span id="t-greet"></span>
+    <span class="badge" id="t-track"></span>
+  </div>
+
+     <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+     <span class="nl"><span class="en-lbl">Units</span><span class="es-lbl">Unidades</span></span>
+     <a data-u="1" href="CTSLOCUnit1.html">1</a>
+     <a data-u="2" href="CTSLOCUnit2.html">2</a>
+     <a data-u="3" href="CTSLOCUnit3.html">3</a>
+     <a data-u="4" href="CTSLOCUnit4.html">4</a>
+     <a data-u="5" href="CTSLOCUnit5.html">5</a>
+     <a data-u="6" href="CTSLOCUnit6.html">6</a>
+     <a data-u="7" href="CTSLOCUnit7.html">7</a>
+     <a data-u="8" href="CTSLOCUnit8.html" class="active">8</a>
+     <a data-u="9" href="CTSLOCUnit9.html">9</a>
+     <a data-u="10" href="CTSLOCUnit10.html">10</a>
+     <a class="cert" href="CTSLOCCertificate.html"><span class="en-lbl">Certificate</span><span class="es-lbl">Certificado</span></a>
+   </nav>
+   <script>(function(){try{var raw=localStorage.getItem("cts_loc_progress")||"{}";var done=JSON.parse(raw);var nav=document.getElementById("unitnav");if(!nav)return;var a=nav.querySelectorAll("a[data-u]");for(var i=0;i<a.length;i++){var u=a[i].getAttribute("data-u");if(done[u]&&a[i].className.indexOf("active")<0){a[i].className=(a[i].className+" done").trim();}}}catch(e){}})();</script>
+
+   <div class="epigraph" id="epigraph"></div>
+
+  <article>
+    <div id="teach-en"><h3 style="color:var(--accent);margin:0 0 4px">The Lamb of God: Trial, Cross, and Tomb</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">The Trials, the Crucifixion, the Seven Words, the Death, and the Burial</p>
+<p><b>1. The Trials</b></p>
+<p>They led Him first to the high priests, Annas and then Caiaphas, and the council sought testimony to put Him to death but found only false and conflicting witnesses. At last the high priest demanded, <span class="v">"Are You the Christ, the Son of the Blessed?"</span> And Jesus answered plainly, <span class="v">"I am. And you will see the Son of Man... coming with the clouds of heaven"</span> (Mark 14:61–62). The high priest tore his clothes and cried, <span class="v">"He has spoken blasphemy!"</span> They judged Him worthy of death, then spat on Him, struck Him, and mocked Him.</p>
+<p>Outside in the courtyard the brave promise of the night before collapsed. Three times Peter was asked if he knew the Man, and three times he denied it, the last with oaths. Then the rooster crowed, and the Lord turned and looked at Peter; and Peter remembered the word, went out, and <span class="v">"wept bitterly"</span> (Luke 22:61–62).</p>
+<p>At dawn they handed Him to Pilate. <span class="v">"Are You the King of the Jews?"</span> Pilate examined Him and declared, <span class="v">"I find no fault in this Man"</span> (Luke 23:4). Even Pilate's wife sent word to him, <span class="v">"Have nothing to do with that just Man, for I have suffered many things... in a dream because of Him"</span> (Matthew 27:19); and when Jesus spoke of bearing witness to the truth, Pilate only shrugged, <span class="v">"What is truth?"</span> (John 18:38) — truth itself standing bound before him. He sent Him to Herod, who mocked Him and sent Him back. Seeking to release Him, Pilate offered the crowd a choice between Jesus and a murderer named Barabbas; but the chief priests stirred the people, who cried, <span class="v">"Barabbas!"</span> and <span class="v">"Crucify Him!"</span> Pilate washed his hands before them, <span class="v">"I am innocent of the blood of this just Person,"</span> and the people answered, <span class="v">"His blood be on us and on our children"</span> (Matthew 27:24–25). Then he had Jesus scourged. The soldiers twisted a crown of thorns for His head, threw a purple robe on Him, and mocked, <span class="v">"Hail, King of the Jews!"</span> striking Him; and Pilate brought Him out, <span class="v">"Behold the Man!"</span> (John 19:5). When Pilate boasted of his authority, Jesus answered, <span class="v">"You could have no power at all against Me unless it had been given you from above"</span> (John 19:11); and at last Pilate yielded Him up to be crucified.</p>
+<p><b>2. The Crucifixion</b></p>
+<p>They led Him out to Golgotha, the place of a skull. Worn from the scourging, He could no longer carry the cross, so the soldiers compelled Simon of Cyrene to bear it behind Him. A crowd of women followed, weeping, and He turned to them: <span class="v">"Daughters of Jerusalem, do not weep for Me, but weep for yourselves and for your children"</span> (Luke 23:28), for He saw the judgment coming on the city.</p>
+<p>There they crucified Him, and with Him two robbers, one on the right and one on the left. Over His head they fixed the written charge, <span class="v">"THIS IS JESUS THE KING OF THE JEWS."</span> And the soldiers took His garments and cast lots for His robe, fulfilling the ancient word, <span class="v">"They divide My garments among them, and for My clothing they cast lots"</span> (Psalm 22:18).</p>
+<p>Those who passed by mocked Him, wagging their heads: <span class="v">"He saved others; Himself He cannot save. If He is the King of Israel, let Him now come down from the cross, and we will believe Him"</span> (Matthew 27:42). Even the two robbers reviled Him at first; but one of them, hanging there in his own agony, came to his senses and turned to the dying King beside him.</p>
+<p><b>3. The Seven Words from the Cross</b></p>
+<p>From the cross He spoke seven times, and each word is a window into His heart.</p>
+<p>First, for His executioners: <span class="v">"Father, forgive them, for they do not know what they do"</span> (Luke 23:34). Second, to the dying thief who rebuked the other — <span class="v">"we receive the due reward of our deeds, but this Man has done nothing wrong"</span> — and then turned to Christ, <span class="v">"Lord, remember me when You come into Your kingdom,"</span> He promised, <span class="v">"Assuredly, I say to you, today you will be with Me in Paradise"</span> (Luke 23:43) — that very day, in conscious joy, with Christ. Third, seeing His mother and the disciple John, He gave her into John's care: <span class="v">"Woman, behold your son!... Behold your mother!"</span> (John 19:26–27).</p>
+<p>Then, from noon, darkness covered the land, and out of it came the fourth word, the cry of dereliction: <span class="v">"My God, My God, why have You forsaken Me?"</span> (Matthew 27:46), the opening of Psalm 22. In that hour He bore the judgment our sin deserved, drinking to the dregs the forsaking that was ours, that we might never be forsaken. It was not that the Father had ceased to love the Son; it was that the Son, bearing our sin, tasted in our place the abandonment that sin deserves. Fifth, <span class="v">"I thirst"</span> (John 19:28) — true human anguish, and Scripture fulfilled. Sixth came the cry of triumph: <span class="v">"It is finished"</span> (John 19:30) — a single word in the Greek, <i>tetelestai</i>. And seventh, in willing surrender: <span class="v">"Father, into Your hands I commit My spirit"</span> (Luke 23:46); and having said this, He gave up His spirit. No man took His life; He laid it down. Even in His dying He was Lord of His own death.</p>
+<p>In the old markets a paid debt was stamped with one word — <i>tetelestai</i>, "paid in full." That is the word Jesus cried from the cross. The debt of our sin was not reduced, nor rescheduled, nor partly covered; it was paid, in full, forever.</p>
+<p><b>4. The Death and Its Signs</b></p>
+<p>The death of the Son of God shook heaven and earth. The veil of the temple, the heavy curtain that barred the way into the Most Holy Place, was torn in two <span class="v">"from top to bottom"</span> (Matthew 27:51) — torn from heaven downward, by no human hand, for the way into God's presence was now opened through His blood. Behind that veil had stood the Most Holy Place, where only the high priest could enter, and only once a year, and never without blood. Now it hung open from top to bottom: the death of the Lamb had opened a new and living way for every believer to draw near to God. The earth quaked and the rocks split. And the Roman centurion who stood watch, seeing how He died, confessed, <span class="v">"Truly this was the Son of God!"</span> (Matthew 27:54) — a pagan soldier saying what the council had denied.</p>
+<p>And there is a further wonder hidden in that torn curtain. By the time of Herod's temple the Most Holy Place stood <i>empty</i> — the ark of the covenant, with its mercy seat, had vanished centuries before, lost when Babylon destroyed the first temple, and the glory of God had long since departed (Ezekiel 10–11). For nearly six hundred years the high priest had entered once a year into a bare room that held only a stone. So when the veil was torn from top to bottom, it opened upon an empty chamber — because the meeting place between God and man was no longer there. It had moved to the cross. Paul calls the crucified Christ our <span class="v">"propitiation"</span> (Romans 3:25) — the very word the Greek Old Testament used for the mercy seat. The true Mercy Seat was no longer hidden behind a curtain in an empty room; it was lifted up on a hill, sprinkled not with the blood of bulls and goats but with the blood of the Son. God tore the veil to say: stop searching the empty room — here, in My Son, is where heaven and earth now meet.</p>
+<p>To make certain He was dead, a soldier pierced His side with a spear, and <span class="v">"immediately blood and water came out"</span> (John 19:34): He was truly, fully dead. Yet they did not break His legs as they broke the others', and so another Scripture was fulfilled: <span class="v">"Not one of His bones shall be broken"</span> (John 19:36) — for He is the true Passover Lamb, whose bones were never to be broken.</p>
+<p><b>5. The Burial and the Meaning of the Cross</b></p>
+<p>Then Joseph of Arimathea, a disciple who had followed in secret, took courage and asked Pilate for the body. With Nicodemus, who brought about a hundred pounds of myrrh and aloes, he wrapped it in linen with the spices and laid it in his own new tomb, cut from the rock, where no one had yet lain, and rolled a great stone across the door (John 19:38–42). So He was <span class="v">"with the rich in His death,"</span> as the prophet had foretold (Isaiah 53:9). The women watched where He was laid. And the chief priests, still afraid, set a guard and sealed the stone (Matthew 27:62–66).</p>
+<p>What, then, does the cross mean? The Lamb of God was slain in our place. <span class="v">"It is finished"</span> declares the price of sin paid in full; the torn veil declares the way to God thrown open; the forsaken cry tells us He bore the judgment we deserved, so that all who trust Him will never be forsaken. This is the heart of the gospel: He died for our sins, the just for the unjust, to bring us to God. Barabbas had felt it first in his own flesh: the guilty man walked free because Another took the cross that was his. So it is for every sinner who trusts Him — the innocent died, and the guilty go free. This is grace: His death counted as ours, and His righteousness given to us in exchange.</p>
+<p>And the divine and human stand together to the last. The eternal Son died as a man, commending His spirit to the Father; the Lord of glory was wrapped in linen and laid in a borrowed grave. The death was real, the price was paid, and the Lamb was slain. The stone was rolled, the seal was set, the guard was posted — and all of it, in three days, would be undone. For the grave that received the Lamb of God could not be its keeper.</p></div>
+    <div id="teach-es" class="hide"><h3 style="color:var(--accent);margin:0 0 4px">El Cordero de Dios: juicio, cruz y sepulcro</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">Los juicios, la crucifixi&oacute;n, las siete palabras, la muerte y la sepultura</p>
+
+<p><b>1. Los juicios</b></p>
+<p>Lo llevaron primero ante los sumos sacerdotes, An&aacute;s y luego Caif&aacute;s, y el concilio buscaba testimonio para darle muerte, mas solo hall&oacute; testigos falsos y discordantes. Al fin el sumo sacerdote le exigi&oacute;: <span class="v">&ldquo;&iquest;Eres t&uacute; el Cristo, el Hijo del Bendito?&rdquo;</span> Y Jes&uacute;s respondi&oacute; claramente: <span class="v">&ldquo;Yo soy; y ver&eacute;is al Hijo del Hombre... viniendo en las nubes del cielo&rdquo; (Marcos 14:61&ndash;62).</span> El sumo sacerdote rasg&oacute; sus vestiduras y clam&oacute;: <span class="v">&ldquo;&iexcl;Ha blasfemado!&rdquo;</span> Le juzgaron reo de muerte, y luego le escupieron, le golpearon y se burlaron de &Eacute;l.</p>
+<p>Afuera, en el patio, la valiente promesa de la noche anterior se derrumb&oacute;. Tres veces preguntaron a Pedro si conoc&iacute;a al Hombre, y tres veces lo neg&oacute;, la &uacute;ltima con juramentos. Entonces cant&oacute; el gallo, y el Se&ntilde;or se volvi&oacute; y mir&oacute; a Pedro; y Pedro record&oacute; la palabra, sali&oacute; fuera y <span class="v">&ldquo;llor&oacute; amargamente&rdquo; (Lucas 22:61&ndash;62).</span></p>
+<p>Al amanecer le entregaron a Pilato. <span class="v">&ldquo;&iquest;Eres t&uacute; el Rey de los jud&iacute;os?&rdquo;</span> Pilato le examin&oacute; y declar&oacute;: <span class="v">&ldquo;Ninguna falta hallo en este hombre&rdquo; (Lucas 23:4).</span> Aun la mujer de Pilato le mand&oacute; decir: <span class="v">&ldquo;No tengas nada que ver con ese justo; porque hoy he padecido mucho en sue&ntilde;os por causa de &Eacute;l&rdquo; (Mateo 27:19);</span> y cuando Jes&uacute;s habl&oacute; de dar testimonio de la verdad, Pilato solo se encogi&oacute;: <span class="v">&ldquo;&iquest;Qu&eacute; es la verdad?&rdquo; (Juan 18:38)</span> &mdash; la verdad misma de pie, atada, ante &eacute;l. Le envi&oacute; a Herodes, que se burl&oacute; de &Eacute;l y se lo devolvi&oacute;. Buscando soltarle, Pilato ofreci&oacute; a la multitud escoger entre Jes&uacute;s y un homicida llamado Barrab&aacute;s; pero los principales sacerdotes incitaron al pueblo, que clam&oacute;: <span class="v">&ldquo;&iexcl;Barrab&aacute;s!&rdquo;</span> y <span class="v">&ldquo;&iexcl;Crucif&iacute;cale!&rdquo;</span> Pilato se lav&oacute; las manos delante de ellos: <span class="v">&ldquo;Inocente soy yo de la sangre de este justo,&rdquo;</span> y el pueblo respondi&oacute;: <span class="v">&ldquo;Su sangre sea sobre nosotros, y sobre nuestros hijos&rdquo; (Mateo 27:24&ndash;25).</span> Entonces mand&oacute; azotar a Jes&uacute;s. Los soldados trenzaron una corona de espinas para su cabeza, le echaron un manto de p&uacute;rpura y se burlaron: <span class="v">&ldquo;&iexcl;Salve, Rey de los jud&iacute;os!&rdquo;</span> golpe&aacute;ndole; y Pilato le sac&oacute;: <span class="v">&ldquo;&iexcl;He aqu&iacute; el hombre!&rdquo; (Juan 19:5).</span> Cuando Pilato se jact&oacute; de su autoridad, Jes&uacute;s respondi&oacute;: <span class="v">&ldquo;Ninguna potestad tendr&iacute;as contra m&iacute;, si no te fuese dado de arriba&rdquo; (Juan 19:11);</span> y al fin Pilato le entreg&oacute; para ser crucificado.</p>
+
+<p><b>2. La crucifixi&oacute;n</b></p>
+<p>Le sacaron al G&oacute;lgota, el lugar de la calavera. Agotado por los azotes, ya no pod&iacute;a cargar la cruz, as&iacute; que los soldados obligaron a Sim&oacute;n de Cirene a llevarla tras &Eacute;l. Una multitud de mujeres le segu&iacute;a, llorando, y &Eacute;l se volvi&oacute; a ellas: <span class="v">&ldquo;Hijas de Jerusal&eacute;n, no llor&eacute;is por m&iacute;, sino llorad por vosotras mismas y por vuestros hijos&rdquo; (Lucas 23:28),</span> porque ve&iacute;a el juicio que ven&iacute;a sobre la ciudad.</p>
+<p>All&iacute; le crucificaron, y con &Eacute;l a dos ladrones, uno a la derecha y otro a la izquierda. Sobre su cabeza fijaron la acusaci&oacute;n escrita: <span class="v">&ldquo;ESTE ES JES&Uacute;S EL REY DE LOS JUD&Iacute;OS.&rdquo;</span> Y los soldados tomaron sus vestidos y echaron suertes sobre su t&uacute;nica, cumpliendo la antigua palabra: <span class="v">&ldquo;Repartieron entre s&iacute; mis vestidos, y sobre mi ropa echaron suertes&rdquo; (Salmo 22:18).</span></p>
+<p>Los que pasaban se burlaban de &Eacute;l, meneando la cabeza: <span class="v">&ldquo;A otros salv&oacute;, a s&iacute; mismo no se puede salvar. Si es el Rey de Israel, descienda ahora de la cruz, y creeremos en &Eacute;l&rdquo; (Mateo 27:42).</span> Aun los dos ladrones le injuriaban al principio; pero uno de ellos, colgado all&iacute; en su propia agon&iacute;a, volvi&oacute; en s&iacute; y se volvi&oacute; al Rey moribundo a su lado.</p>
+
+<p><b>3. Las siete palabras desde la cruz</b></p>
+<p>Desde la cruz habl&oacute; siete veces, y cada palabra es una ventana a su coraz&oacute;n.</p>
+<p>Primera, por sus verdugos: <span class="v">&ldquo;Padre, perd&oacute;nalos, porque no saben lo que hacen&rdquo; (Lucas 23:34).</span> Segunda, al ladr&oacute;n moribundo que reprendi&oacute; al otro &mdash; <span class="v">&ldquo;nosotros recibimos lo que merecieron nuestros hechos; mas este ning&uacute;n mal hizo&rdquo;</span> &mdash; y luego se volvi&oacute; a Cristo: <span class="v">&ldquo;Se&ntilde;or, acu&eacute;rdate de m&iacute; cuando vengas en tu reino,&rdquo;</span> le prometi&oacute;: <span class="v">&ldquo;De cierto te digo que hoy estar&aacute;s conmigo en el para&iacute;so&rdquo; (Lucas 23:43)</span> &mdash; ese mismo d&iacute;a, en gozo consciente, con Cristo. Tercera, viendo a su madre y al disc&iacute;pulo Juan, la encomend&oacute; al cuidado de Juan: <span class="v">&ldquo;Mujer, he ah&iacute; tu hijo... He ah&iacute; tu madre&rdquo; (Juan 19:26&ndash;27).</span></p>
+<p>Entonces, desde el mediod&iacute;a, las tinieblas cubrieron la tierra, y de ellas vino la cuarta palabra, el clamor de abandono: <span class="v">&ldquo;Dios m&iacute;o, Dios m&iacute;o, &iquest;por qu&eacute; me has desamparado?&rdquo; (Mateo 27:46),</span> el comienzo del Salmo 22. En aquella hora llev&oacute; el juicio que nuestro pecado merec&iacute;a, bebiendo hasta las heces el desamparo que era nuestro, para que nosotros nunca fu&eacute;semos desamparados. No fue que el Padre dejara de amar al Hijo; fue que el Hijo, llevando nuestro pecado, gust&oacute; en nuestro lugar el abandono que el pecado merece. Quinta: <span class="v">&ldquo;Tengo sed&rdquo; (Juan 19:28)</span> &mdash; verdadera angustia humana, y la Escritura cumplida. Sexta vino el clamor de triunfo: <span class="v">&ldquo;Consumado es&rdquo; (Juan 19:30)</span> &mdash; una sola palabra en el griego, <i>tetelestai</i>. Y s&eacute;ptima, en entrega voluntaria: <span class="v">&ldquo;Padre, en tus manos encomiendo mi esp&iacute;ritu&rdquo; (Lucas 23:46);</span> y habiendo dicho esto, entreg&oacute; el esp&iacute;ritu. Ning&uacute;n hombre le quit&oacute; la vida; &Eacute;l la puso. Aun en su morir era Se&ntilde;or de su propia muerte.</p>
+<p>En los antiguos mercados, una deuda pagada se sellaba con una sola palabra &mdash; <i>tetelestai</i>, &ldquo;pagado por completo.&rdquo; Esa es la palabra que Jes&uacute;s clam&oacute; desde la cruz. La deuda de nuestro pecado no fue reducida, ni reprogramada, ni cubierta a medias; fue pagada, por completo, para siempre.</p>
+
+<p><b>4. La muerte y sus se&ntilde;ales</b></p>
+<p>La muerte del Hijo de Dios sacudi&oacute; cielo y tierra. El velo del templo, la pesada cortina que cerraba el paso al Lugar Sant&iacute;simo, se rasg&oacute; en dos <span class="v">&ldquo;de arriba abajo&rdquo; (Mateo 27:51)</span> &mdash; rasgado desde el cielo hacia abajo, por ninguna mano humana, porque ya se hab&iacute;a abierto el camino a la presencia de Dios por su sangre. Tras aquel velo hab&iacute;a estado el Lugar Sant&iacute;simo, donde solo el sumo sacerdote pod&iacute;a entrar, y solo una vez al a&ntilde;o, y nunca sin sangre. Ahora colgaba abierto de arriba abajo: la muerte del Cordero hab&iacute;a abierto un camino nuevo y vivo para que todo creyente se acerque a Dios. La tierra tembl&oacute; y las rocas se partieron. Y el centuri&oacute;n romano que montaba guardia, viendo c&oacute;mo muri&oacute;, confes&oacute;: <span class="v">&ldquo;Verdaderamente este era el Hijo de Dios&rdquo; (Mateo 27:54)</span> &mdash; un soldado pagano diciendo lo que el concilio hab&iacute;a negado.</p>
+<p>Y hay una maravilla m&aacute;s escondida en aquella cortina rasgada. Para los d&iacute;as del templo de Herodes, el Lugar Sant&iacute;simo estaba <i>vac&iacute;o</i> &mdash; el arca del pacto, con su propiciatorio, hab&iacute;a desaparecido siglos atr&aacute;s, perdida cuando Babilonia destruy&oacute; el primer templo, y la gloria de Dios hac&iacute;a mucho que se hab&iacute;a apartado (Ezequiel 10&ndash;11). Por casi seiscientos a&ntilde;os el sumo sacerdote hab&iacute;a entrado una vez al a&ntilde;o en una sala desnuda que solo guardaba una piedra. As&iacute; que cuando el velo se rasg&oacute; de arriba abajo, se abri&oacute; sobre una c&aacute;mara vac&iacute;a &mdash; porque el lugar de encuentro entre Dios y el hombre ya no estaba all&iacute;. Se hab&iacute;a trasladado a la cruz. Pablo llama al Cristo crucificado nuestra <span class="v">&ldquo;propiciaci&oacute;n&rdquo; (Romanos 3:25)</span> &mdash; la misma palabra que el Antiguo Testamento griego us&oacute; para el propiciatorio. El verdadero Propiciatorio ya no estaba oculto tras una cortina en una sala vac&iacute;a; estaba levantado en un monte, rociado no con la sangre de toros y machos cabr&iacute;os, sino con la sangre del Hijo. Dios rasg&oacute; el velo para decir: dejen de buscar en la sala vac&iacute;a &mdash; aqu&iacute;, en mi Hijo, es donde ahora se encuentran el cielo y la tierra.</p>
+<p>Para cerciorarse de que estaba muerto, un soldado le traspas&oacute; el costado con una lanza, y <span class="v">&ldquo;al instante sali&oacute; sangre y agua&rdquo; (Juan 19:34):</span> estaba verdadera y plenamente muerto. Mas no le quebraron las piernas como a los otros, y as&iacute; se cumpli&oacute; otra Escritura: <span class="v">&ldquo;No ser&aacute; quebrado hueso suyo&rdquo; (Juan 19:36)</span> &mdash; porque &Eacute;l es el verdadero Cordero pascual, cuyos huesos nunca hab&iacute;an de ser quebrados.</p>
+
+<p><b>5. La sepultura y el sentido de la cruz</b></p>
+<p>Entonces Jos&eacute; de Arimatea, un disc&iacute;pulo que hab&iacute;a seguido en secreto, cobr&oacute; &aacute;nimo y pidi&oacute; a Pilato el cuerpo. Con Nicodemo, que trajo como cien libras de mirra y &aacute;loes, lo envolvi&oacute; en lienzos con las especias y lo puso en su propio sepulcro nuevo, abierto en la roca, donde nadie a&uacute;n hab&iacute;a sido puesto, y rod&oacute; una gran piedra a la entrada (Juan 19:38&ndash;42). As&iacute; fue <span class="v">&ldquo;con los ricos en su muerte,&rdquo;</span> como el profeta hab&iacute;a anunciado (Isa&iacute;as 53:9). Las mujeres miraban d&oacute;nde le pon&iacute;an. Y los principales sacerdotes, a&uacute;n temerosos, pusieron guardia y sellaron la piedra (Mateo 27:62&ndash;66).</p>
+<p>&iquest;Qu&eacute; significa, pues, la cruz? El Cordero de Dios fue inmolado en nuestro lugar. <span class="v">&ldquo;Consumado es&rdquo;</span> declara el precio del pecado pagado por completo; el velo rasgado declara el camino a Dios abierto de par en par; el clamor de abandono nos dice que llev&oacute; el juicio que merec&iacute;amos, para que todo el que conf&iacute;a en &Eacute;l nunca sea desamparado. Este es el coraz&oacute;n del evangelio: muri&oacute; por nuestros pecados, el justo por los injustos, para llevarnos a Dios. Barrab&aacute;s lo sinti&oacute; primero en su propia carne: el culpable qued&oacute; libre porque Otro tom&oacute; la cruz que era suya. As&iacute; es para todo pecador que conf&iacute;a en &Eacute;l &mdash; el inocente muri&oacute;, y los culpables quedan libres. Esto es la gracia: su muerte contada como nuestra, y su justicia dada a nosotros a cambio.</p>
+<p>Y lo divino y lo humano est&aacute;n juntos hasta el fin. El Hijo eterno muri&oacute; como hombre, encomendando su esp&iacute;ritu al Padre; el Se&ntilde;or de gloria fue envuelto en lienzos y puesto en una tumba prestada. La muerte fue real, el precio fue pagado, y el Cordero fue inmolado. La piedra fue rodada, el sello fue puesto, la guardia fue apostada &mdash; y todo ello, en tres d&iacute;as, ser&iacute;a deshecho. Porque la tumba que recibi&oacute; al Cordero de Dios no pod&iacute;a ser su guardiana.</p>
+</div>
+  </article>
+
+  <h2 class="sec" id="t-mc">Multiple Choice</h2>
+  <div id="mcWrap"></div>
+
+  <h2 class="sec" id="t-sa">Short Answer</h2>
+  <p class="status" id="t-saNote"></p>
+  <div id="saWrap"></div>
+
+  <div class="foot">
+    <button class="btn primary" id="completeBtn" type="button"></button>
+    <div class="status" id="statusMsg"></div>
+    <a class="next hide" id="nextLink" href="CTSLOCUnit9.html"></a>
+  </div>
+</div>
+
+<div class="modal hide" id="reg">
+  <div class="box">
+    <h3 id="m-h">Welcome</h3>
+    <p id="m-p" style="font-size:.9rem;color:var(--muted);margin:0"></p>
+    <label id="m-nl">Your name</label>
+    <input id="m-name" type="text" autocomplete="name" aria-label="m name">
+    <label id="m-tl">Track</label>
+    <select id="m-track" aria-label="m track">
+      <option value="cert">Certificate</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div style="margin-top:16px"><button class="btn primary" id="m-go" type="button">Begin</button></div>
+  </div>
+</div>
+
+<script>
+var CFG={course:'loc',unit:8,totalUnits:10,progressKey:'cts_loc_progress',
+  next:'CTSLOCUnit9.html',cert:'CTSLOCCertificate.html',lockKey:'cts_loc_u8_lock',showReg:false};
+var DATA={"mc": [{"en": "Before the high priest, asked if He was the Christ, Jesus answered:", "es": "Ante el sumo sacerdote, preguntado si era el Cristo, Jesús respondió:", "oen": ["“I will not say”", "“You have said it, but no”", "“I am”", "“Ask My disciples”"], "oes": ["“No lo diré”", "“Tú lo dices, mas no”", "“Yo soy”", "“Preguntad a mis discípulos”"], "c": 23, "xen": "Mark 14:62.", "xes": "Marcos 14:62."}, {"en": "The high priest reacted to Jesus' answer by:", "es": "El sumo sacerdote reaccionó a la respuesta de Jesús:", "oen": ["setting Him free", "fleeing", "praising Him", "tearing his clothes and crying “blasphemy”"], "oes": ["poniéndole en libertad", "huyendo", "alabándole", "rasgando sus vestiduras y clamando “blasfemia”"], "c": 31, "xen": "Mark 14:63–64.", "xes": "Marcos 14:63–64."}, {"en": "In the courtyard, Peter:", "es": "En el patio, Pedro:", "oen": ["denied Jesus three times, then wept bitterly", "slept", "defended Jesus boldly", "fought the guards"], "oes": ["negó a Jesús tres veces, y luego lloró amargamente", "durmió", "defendió a Jesús con valor", "peleó con los guardias"], "c": 35, "xen": "Luke 22:61–62.", "xes": "Lucas 22:61–62."}, {"en": "Pilate's verdict about Jesus was:", "es": "El veredicto de Pilato sobre Jesús fue:", "oen": ["“He deserves death”", "“I find no fault in this Man”", "“Let the priests decide”", "“He is a rebel”"], "oes": ["“Merece la muerte”", "“Ninguna falta hallo en este hombre”", "“Decidan los sacerdotes”", "“Es un rebelde”"], "c": 43, "xen": "Luke 23:4.", "xes": "Lucas 23:4."}, {"en": "The prisoner released instead of Jesus was:", "es": "El preso soltado en lugar de Jesús fue:", "oen": ["Simon", "Lazarus", "Judas", "Barabbas"], "oes": ["Simón", "Lázaro", "Judas", "Barrabás"], "c": 52, "xen": "Matthew 27:26.", "xes": "Mateo 27:26."}, {"en": "When Pilate washed his hands, the people cried:", "es": "Cuando Pilato se lavó las manos, el pueblo clamó:", "oen": ["“We are innocent”", "“His blood be on us and on our children”", "“Free Him”", "“Long live the King”"], "oes": ["“Somos inocentes”", "“Su sangre sea sobre nosotros, y sobre nuestros hijos”", "“Suéltale”", "“¡Viva el Rey!”"], "c": 57, "xen": "Matthew 27:25.", "xes": "Mateo 27:25."}, {"en": "On the way to Golgotha, the cross was carried by:", "es": "Camino al Gólgota, la cruz fue llevada por:", "oen": ["Simon of Cyrene", "John", "Peter", "a Roman soldier"], "oes": ["Simón de Cirene", "Juan", "Pedro", "un soldado romano"], "c": 63, "xen": "Luke 23:26.", "xes": "Lucas 23:26."}, {"en": "Jesus was crucified between:", "es": "Jesús fue crucificado entre:", "oen": ["two priests", "two soldiers", "two robbers, one on each side", "two disciples"], "oes": ["dos sacerdotes", "dos soldados", "dos ladrones, uno a cada lado", "dos discípulos"], "c": 72, "xen": "Luke 23:33.", "xes": "Lucas 23:33."}, {"en": "To His enemies from the cross, Jesus said:", "es": "A sus enemigos desde la cruz, Jesús dijo:", "oen": ["“Let them be cursed”", "“Father, forgive them, for they do not know what they do”", "“I will repay”", "“Depart from Me”"], "oes": ["“Sean malditos”", "“Padre, perdónalos, porque no saben lo que hacen”", "“Yo pagaré”", "“Apartaos de mí”"], "c": 78, "xen": "Luke 23:34.", "xes": "Lucas 23:34."}, {"en": "To the penitent thief Jesus promised:", "es": "Al ladrón arrepentido Jesús prometió:", "oen": ["“Wait for the last day”", "“Your sins remain”", "“Today you will be with Me in Paradise”", "“Ask again later”"], "oes": ["“Espera el día postrero”", "“Tus pecados permanecen”", "“Hoy estarás conmigo en el paraíso”", "“Pide otra vez después”"], "c": 86, "xen": "Luke 23:43 — immediate, conscious presence with Christ.", "xes": "Lucas 23:43 — presencia inmediata y consciente con Cristo."}, {"en": "The cry of dereliction was:", "es": "El clamor de abandono fue:", "oen": ["“Why do they hate Me?”", "“Where are My friends?”", "“Save Yourself”", "“My God, My God, why have You forsaken Me?”"], "oes": ["“¿Por qué me odian?”", "“¿Dónde están mis amigos?”", "“Sálvate a ti mismo”", "“Dios mío, Dios mío, ¿por qué me has desamparado?”"], "c": 94, "xen": "Matthew 27:46 — quoting Psalm 22, bearing our judgment.", "xes": "Mateo 27:46 — citando el Salmo 22, llevando nuestro juicio."}, {"en": "“It is finished” (John 19:30) translates the Greek word:", "es": "“Consumado es” (Juan 19:30) traduce la palabra griega:", "oen": ["tetelestai — “paid in full / accomplished”", "hosanna", "hallelujah", "maranatha"], "oes": ["tetelestai — “pagado por completo / consumado”", "hosanna", "aleluya", "maranata"], "c": 98, "xen": "The work of redemption accomplished.", "xes": "La obra de redención consumada."}, {"en": "Jesus' last word, in willing surrender, was:", "es": "La última palabra de Jesús, en entrega voluntaria, fue:", "oen": ["“I am undone”", "“Father, into Your hands I commit My spirit”", "“Let Me live”", "“It is too much”"], "oes": ["“Estoy deshecho”", "“Padre, en tus manos encomiendo mi espíritu”", "“Dejadme vivir”", "“Es demasiado”"], "c": 106, "xen": "Luke 23:46 — no man took His life; He laid it down.", "xes": "Lucas 23:46 — ningún hombre le quitó la vida; Él la puso."}, {"en": "At Jesus' death the temple veil was:", "es": "A la muerte de Jesús el velo del templo fue:", "oen": ["left untouched", "repaired", "set on fire", "torn in two from top to bottom"], "oes": ["dejado intacto", "reparado", "incendiado", "rasgado en dos de arriba abajo"], "c": 115, "xen": "Matthew 27:51.", "xes": "Mateo 27:51."}, {"en": "The tearing of the veil from top to bottom signified:", "es": "El rasgarse del velo de arriba abajo significó:", "oen": ["the way into God's presence opened by His blood", "a new festival", "the temple's wealth", "God's anger only"], "oes": ["el camino a la presencia de Dios abierto por su sangre", "una nueva fiesta", "la riqueza del templo", "solo la ira de Dios"], "c": 119, "xen": "Hebrews 10:19–20 — a new and living way.", "xes": "Hebreos 10:19–20 — un camino nuevo y vivo."}, {"en": "Seeing how Jesus died, the Roman centurion said:", "es": "Viendo cómo murió Jesús, el centurión romano dijo:", "oen": ["“He was a rebel”", "“He was only a man”", "“Truly this was the Son of God!”", "nothing at all"], "oes": ["“Era un rebelde”", "“Era solo un hombre”", "“Verdaderamente este era el Hijo de Dios”", "nada en absoluto"], "c": 128, "xen": "Matthew 27:54 — a pagan confesses what the council denied.", "xes": "Mateo 27:54 — un pagano confiesa lo que el concilio negó."}, {"en": "When the soldier pierced Jesus' side, there came out:", "es": "Cuando el soldado traspasó el costado de Jesús, salió:", "oen": ["only water", "blood and water — proof He was truly dead", "nothing", "fire"], "oes": ["solo agua", "sangre y agua — prueba de que estaba verdaderamente muerto", "nada", "fuego"], "c": 134, "xen": "John 19:34.", "xes": "Juan 19:34."}, {"en": "That Jesus' legs were not broken fulfilled the Scripture about:", "es": "Que no le quebraran las piernas a Jesús cumplió la Escritura sobre:", "oen": ["the Passover lamb — “not one of His bones shall be broken”", "the bronze serpent", "the scapegoat", "the ark"], "oes": ["el cordero pascual — “no será quebrado hueso suyo”", "la serpiente de bronce", "el macho cabrío", "el arca"], "c": 140, "xen": "John 19:36.", "xes": "Juan 19:36."}, {"en": "Jesus' body was buried by:", "es": "El cuerpo de Jesús fue sepultado por:", "oen": ["the apostles", "the Roman soldiers", "Joseph of Arimathea, with Nicodemus", "His mother alone"], "oes": ["los apóstoles", "los soldados romanos", "José de Arimatea, con Nicodemo", "su madre sola"], "c": 149, "xen": "John 19:38–42.", "xes": "Juan 19:38–42."}, {"en": "After the burial, the chief priests:", "es": "Tras la sepultura, los principales sacerdotes:", "oen": ["repented", "removed the body", "opened the tomb", "set a guard and sealed the stone"], "oes": ["se arrepintieron", "quitaron el cuerpo", "abrieron el sepulcro", "pusieron guardia y sellaron la piedra"], "c": 157, "xen": "Matthew 27:62–66.", "xes": "Mateo 27:62–66."}], "sa": [{"en": "Describe the Jewish trial and Peter's denial (Mark 14; Luke 22).", "es": "Describa el juicio judío y la negación de Pedro (Marcos 14; Lucas 22).", "men": "Led before Annas and Caiaphas, Jesus faced false witnesses. When the high priest asked if He was the Christ, the Son of the Blessed, He answered “I am,” and the priest tore his clothes, crying blasphemy; they judged Him worthy of death. Meanwhile Peter denied Him three times in the courtyard, and when the rooster crowed and the Lord looked at him, he went out and wept bitterly.", "mes": "Llevado ante Anás y Caifás, Jesús enfrentó testigos falsos. Cuando el sumo sacerdote preguntó si era el Cristo, el Hijo del Bendito, respondió “Yo soy,” y el sacerdote rasgó sus vestiduras clamando blasfemia; le juzgaron reo de muerte. Entre tanto Pedro le negó tres veces en el patio, y cuando cantó el gallo y el Señor le miró, salió fuera y lloró amargamente.", "ken": ["caiaphas", "christ", "blasphemy", "death", "peter", "denied", "rooster", "wept"], "kes": ["caifas", "cristo", "blasfem", "muerte", "pedro", "nego", "gallo", "lloro"]}, {"en": "Describe the Roman trial before Pilate (Matt 27; Luke 23; John 18-19).", "es": "Describa el juicio romano ante Pilato (Mateo 27; Lucas 23; Juan 18-19).", "men": "Pilate examined Jesus and declared, “I find no fault in this Man,” even after his wife warned him. He offered the crowd a choice, but they cried for Barabbas the murderer and “Crucify Him.” Pilate washed his hands, and the people said, “His blood be on us.” He had Jesus scourged; the soldiers crowned Him with thorns, robed Him in purple, and mocked, “Hail, King of the Jews.”", "mes": "Pilato examinó a Jesús y declaró: “Ninguna falta hallo en este hombre,” aun después que su mujer le advirtió. Ofreció a la multitud una elección, pero clamaron por Barrabás el homicida y “¡Crucifícale!” Pilato se lavó las manos, y el pueblo dijo: “Su sangre sea sobre nosotros.” Mandó azotar a Jesús; los soldados le coronaron de espinas, le vistieron de púrpura y se burlaron: “¡Salve, Rey de los judíos!”", "ken": ["pilate", "fault", "barabbas", "crucify", "scourged", "thorns", "king", "wash"], "kes": ["pilato", "falta", "barrabas", "crucif", "azotar", "espina", "rey", "lavar"]}, {"en": "Describe the crucifixion at Golgotha (Luke 23; Matt 27; Psalm 22).", "es": "Describa la crucifixión en el Gólgota (Lucas 23; Mateo 27; Salmo 22).", "men": "Too weak to carry the cross, Jesus had Simon of Cyrene compelled to bear it to Golgotha. He told the weeping women to weep for themselves. There they crucified Him between two robbers, fixed the charge “King of the Jews” above His head, and cast lots for His garments, fulfilling Psalm 22. The passersby and one of the robbers mocked Him at first.", "mes": "Demasiado débil para cargar la cruz, a Jesús le obligaron a Simón de Cirene a llevarla al Gólgota. Dijo a las mujeres que lloraban que llorasen por sí mismas. Allí le crucificaron entre dos ladrones, fijaron la acusación “Rey de los judíos” sobre su cabeza, y echaron suertes sobre sus vestidos, cumpliendo el Salmo 22. Los que pasaban y uno de los ladrones se burlaron de Él al principio.", "ken": ["cross", "simon", "golgotha", "crucif", "robber", "king", "lots", "mock"], "kes": ["cruz", "simon", "golgota", "crucif", "ladron", "rey", "suerte", "burl"]}, {"en": "Explain the first three of the seven words from the cross (Luke 23; John 19).", "es": "Explique las primeras tres de las siete palabras desde la cruz (Lucas 23; Juan 19).", "men": "From the cross Jesus first prayed for His executioners, “Father, forgive them, for they do not know what they do.” To the penitent thief who asked to be remembered, He promised, “Today you will be with Me in Paradise,” that very day in conscious joy. And to His mother and the disciple John, He said, “Woman, behold your son... behold your mother,” caring for Mary even while dying.", "mes": "Desde la cruz Jesús oró primero por sus verdugos: “Padre, perdónalos, porque no saben lo que hacen.” Al ladrón arrepentido que pidió ser recordado, le prometió: “Hoy estarás conmigo en el paraíso,” ese mismo día en gozo consciente. Y a su madre y al discípulo Juan, dijo: “Mujer, he ahí tu hijo... he ahí tu madre,” cuidando de María aun mientras moría.", "ken": ["father", "forgive", "thief", "paradise", "today", "mother", "john", "cross"], "kes": ["padre", "perdon", "ladron", "paraiso", "hoy", "madre", "juan", "cruz"]}, {"en": "Explain the cry of dereliction and its meaning (Matt 27:46; Psalm 22).", "es": "Explique el clamor de abandono y su significado (Mateo 27:46; Salmo 22).", "men": "From the noon darkness Jesus cried, “My God, My God, why have You forsaken Me?” quoting Psalm 22. In that hour He bore the judgment our sin deserved, tasting in our place the forsaking that was ours, so that we might never be forsaken. It was not that the Father ceased to love the Son, but that the Son, bearing our sin, endured the abandonment sin deserves.", "mes": "Desde las tinieblas del mediodía Jesús clamó: “¿Dios mío, Dios mío, por qué me has desamparado?” citando el Salmo 22. En aquella hora llevó el juicio que nuestro pecado merecía, gustando en nuestro lugar el desamparo que era nuestro, para que nunca fuésemos desamparados. No fue que el Padre dejara de amar al Hijo, sino que el Hijo, llevando nuestro pecado, soportó el abandono que el pecado merece.", "ken": ["forsaken", "darkness", "judgment", "sin", "psalm", "father", "bore", "abandon"], "kes": ["desampar", "tinieblas", "juicio", "pecado", "salmo", "padre", "llevo", "abandono"]}, {"en": "Explain “It is finished” and the final word (John 19:30; Luke 23:46).", "es": "Explique “Consumado es” y la palabra final (Juan 19:30; Lucas 23:46).", "men": "Jesus cried, “It is finished,” one word in Greek, tetelestai, meaning the work of redemption was accomplished and the debt of sin paid in full. Then in willing surrender He said, “Father, into Your hands I commit My spirit,” and gave up His spirit. No man took His life; He laid it down. Even in dying He was Lord of His own death.", "mes": "Jesús clamó: “Consumado es,” una palabra en griego, tetelestai, que significa que la obra de redención se cumplió y la deuda del pecado fue pagada por completo. Luego, en entrega voluntaria, dijo: “Padre, en tus manos encomiendo mi espíritu,” y entregó el espíritu. Ningún hombre le quitó la vida; Él la puso. Aun en su morir era Señor de su propia muerte.", "ken": ["finished", "tetelestai", "paid", "debt", "father", "spirit", "redemption", "surrender"], "kes": ["consumado", "tetelestai", "pagad", "deuda", "padre", "espiritu", "redencion", "entreg"]}, {"en": "Describe the signs at Jesus' death: the veil, the centurion, and the pierced side (Matt 27; John 19).", "es": "Describa las señales a la muerte de Jesús: el velo, el centurión y el costado traspasado (Mateo 27; Juan 19).", "men": "At His death the temple veil was torn in two from top to bottom, opening the way into God's presence, for behind it stood the Most Holy Place where only the high priest could enter. The earth quaked, and the Roman centurion confessed, “Truly this was the Son of God.” A soldier pierced His side, and blood and water came out, proving He was truly dead, yet not a bone was broken, fulfilling the Passover lamb.", "mes": "A su muerte el velo del templo se rasgó en dos de arriba abajo, abriendo el camino a la presencia de Dios, pues tras él estaba el Lugar Santísimo donde solo el sumo sacerdote podía entrar. La tierra tembló, y el centurión romano confesó: “Verdaderamente este era el Hijo de Dios.” Un soldado le traspasó el costado, y salió sangre y agua, probando que estaba muerto, mas ningún hueso fue quebrado, cumpliendo el cordero pascual.", "ken": ["veil", "temple", "centurion", "pierced", "blood", "dead", "bone", "quake"], "kes": ["velo", "templo", "centurion", "traspas", "sangre", "muerto", "hueso", "temblo"]}, {"en": "Describe the burial of Jesus (John 19; Matt 27; Isaiah 53).", "es": "Describa la sepultura de Jesús (Juan 19; Mateo 27; Isaías 53).", "men": "Joseph of Arimathea, a secret disciple, took courage and asked Pilate for the body. With Nicodemus, who brought a hundred pounds of spices, he wrapped it in linen and laid it in his own new tomb cut from rock, rolling a great stone across the door. So He was with the rich in His death, as Isaiah foretold. The chief priests set a guard and sealed the stone.", "mes": "José de Arimatea, un discípulo secreto, cobró ánimo y pidió a Pilato el cuerpo. Con Nicodemo, que trajo cien libras de especias, lo envolvió en lienzos y lo puso en su propio sepulcro nuevo abierto en la roca, rodando una gran piedra a la entrada. Así estuvo con los ricos en su muerte, como Isaías anunció. Los principales sacerdotes pusieron guardia y sellaron la piedra.", "ken": ["joseph", "arimathea", "nicodemus", "tomb", "linen", "stone", "guard", "seal"], "kes": ["jose", "arimatea", "nicodemo", "sepulcro", "lienzo", "piedra", "guardia", "sell"]}, {"en": "What does the cross mean, and how does Barabbas picture substitution?", "es": "¿Qué significa la cruz, y cómo retrata Barrabás la sustitución?", "men": "The cross means the Lamb of God was slain in our place. “It is finished” declares the price of sin paid in full; the torn veil declares the way to God opened; the forsaken cry shows He bore the judgment we deserved. Like Barabbas, the guilty go free because the innocent died. This is the gospel: the just died for the unjust to bring us to God, His death counted as ours.", "mes": "La cruz significa que el Cordero de Dios fue inmolado en nuestro lugar. “Consumado es” declara el precio del pecado pagado por completo; el velo rasgado declara el camino a Dios abierto; el clamor de abandono muestra que llevó el juicio que merecíamos. Como Barrabás, los culpables quedan libres porque el inocente murió. Este es el evangelio: el justo murió por los injustos para llevarnos a Dios, su muerte contada como nuestra.", "ken": ["lamb", "slain", "paid", "sin", "veil", "barabbas", "just", "gospel"], "kes": ["cordero", "inmolad", "pagad", "pecado", "velo", "barrabas", "justo", "evangelio"]}, {"en": "How do the divine and human stand together at the cross and tomb?", "es": "¿Cómo están juntos lo divino y lo humano en la cruz y la tumba?", "men": "The divine and human stand together: the eternal Son died as a man, commending His spirit to the Father, and the Lord of glory was wrapped in linen and laid in a borrowed grave. The death was real, the price was paid, the Lamb was slain. The stone was rolled, the seal set, the guard posted — yet in three days all of it would be undone, for the grave could not keep the Lamb of God.", "mes": "Lo divino y lo humano están juntos: el Hijo eterno murió como hombre, encomendando su espíritu al Padre, y el Señor de gloria fue envuelto en lienzos y puesto en una tumba prestada. La muerte fue real, el precio pagado, el Cordero inmolado. La piedra fue rodada, el sello puesto, la guardia apostada — mas en tres días todo sería deshecho, porque la tumba no podía retener al Cordero de Dios.", "ken": ["divine", "human", "died", "spirit", "grave", "lamb", "stone", "undone"], "kes": ["divino", "humano", "murio", "espiritu", "tumba", "cordero", "piedra", "deshecho"]}]};
+
+/* ---- storage hardening (Android content:// safe) ---- */
+var _ctsMem={};
+function lsGet(k){try{var v=localStorage.getItem(k);return v===null?(k in _ctsMem?_ctsMem[k]:null):v;}catch(e){return k in _ctsMem?_ctsMem[k]:null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}_ctsMem[k]=v;}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}delete _ctsMem[k];}
+
+/* ---- helpers ---- */
+function fold(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function kwHit(ans,kw){var a=fold(ans),k=fold(kw);if(!k)return false;
+  if(k.length<=3){return new RegExp('(^|[^a-z0-9])'+reEsc(k)+'([^a-z0-9]|$)').test(a);}
+  return new RegExp('(^|[^a-z0-9])'+reEsc(k)).test(a);}
+function saScore(ans,kws){var n=0;for(var i=0;i<kws.length;i++){if(kwHit(ans,kws[i]))n++;}return n;}
+function mcCorrectIdx(code,qpos){return(((code-7*(qpos+3))%251)+251)%251;}
+
+var LET=['A','B','C','D'];
+var STATE={lang:'en',track:'cert',name:'',mc:[],sa:[],revealed:false};
+for(var i=0;i<DATA.mc.length;i++)STATE.mc.push({answered:false,chosen:-1});
+for(var j=0;j<DATA.sa.length;j++)STATE.sa.push({checked:false,text:'',hits:0});
+
+var I18N={
+ en:{title:'The Life of Christ',unit:'Unit 8 · The Cross',lang:'Espa\u00f1ol',
+   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
+   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
+   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
+   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
+   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
+   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
+   complete:'Complete Unit 8',
+   epigraph:'“It is finished!” (John 19:30)',
+   mGood:'✓ Unit complete. You may continue to Unit 9.',
+   mShort:'Keep going \u2014 review the material and try again.',
+   nextTxt:'Next: Unit 9 →',
+   mh:'Welcome to The Life of Christ',mp:'Please register once. Your name and track carry across every CTS course on this site.',
+   mnl:'Your name',mtl:'Track',mgo:'Begin',
+   hitFmt:function(h){return h+' of 8 keywords';},
+   passV:'Pass',softV:'Practice noted'},
+ es:{title:'La Vida de Cristo',unit:'Unidad 8 · La Cruz',lang:'English',
+   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
+   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
+   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
+   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
+   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
+   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
+   complete:'Completar la Unidad 8',
+   epigraph:'“Consumado es.” (Juan 19:30)',
+   mGood:'✓ Unidad completa. Puede continuar a la Unidad 9.',
+   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
+   nextTxt:'Siguiente: Unidad 9 →',
+   mh:'Bienvenido a La Vida de Cristo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
+   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
+   hitFmt:function(h){return h+' de 8 palabras clave';},
+   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+};
+function T(){return I18N[STATE.lang];}
+function isMasters(){return STATE.track==='mdiv'||STATE.track==='thm';}
+function lockMin(){return isMasters()?15:2;}
+
+function $(id){return document.getElementById(id);}
+
+/* ---------- rendering ---------- */
+function renderTeaching(){
+  $('teach-en').className=STATE.lang==='en'?'':'hide';
+  $('teach-es').className=STATE.lang==='es'?'':'hide';
+}
+function renderChrome(){
+  var t=T();
+  document.documentElement.lang=STATE.lang;
+  $('t-title').textContent=t.title;$('t-unit').innerHTML=t.unit;
+  $('langBtn').textContent=t.lang;
+  $('t-greet').textContent=t.greet(STATE.name);
+  $('t-track').textContent=t.track(STATE.track);
+  $('epigraph').textContent=t.epigraph;
+  $('t-mc').textContent=t.mc;$('t-sa').textContent=t.sa;
+  $('t-saNote').textContent=isMasters()?t.saNoteMast:t.saNoteCert;
+  $('completeBtn').textContent=t.complete;
+  $('m-h').textContent=t.mh;$('m-p').textContent=t.mp;$('m-nl').textContent=t.mnl;
+  $('m-tl').textContent=t.mtl;$('m-go').textContent=t.mgo;
+}
+function renderMC(){
+  var wrap=$('mcWrap');wrap.innerHTML='';
+  for(var i=0;i<DATA.mc.length;i++){
+    (function(i){
+      var q=DATA.mc[i],st=STATE.mc[i];
+      var opts=STATE.lang==='en'?q.oen:q.oes;
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var expl=STATE.lang==='en'?q.xen:q.xes;
+      var correct=mcCorrectIdx(q.c,i);
+      var div=document.createElement('div');div.className='q';
+      var h='<div class="qn">'+(i+1)+'</div><div class="qp">'+prompt+'</div>';
+      div.innerHTML=h;
+      for(var o=0;o<4;o++){
+        (function(o){
+          var b=document.createElement('button');b.type='button';b.className='opt';
+          b.innerHTML='<span class="lt">'+LET[o]+'</span>'+opts[o];
+          if(st.answered){b.disabled=true;
+            if(o===correct)b.className='opt correct';
+            else if(o===st.chosen)b.className='opt wrong';}
+          else if(st.answered&&o===st.chosen){b.style.background='#efe7d2';b.style.borderColor='#d4af37';b.style.fontWeight='600';}
+          b.onclick=function(){if(st.answered)return;
+            STATE.mc[i].answered=true;STATE.mc[i].chosen=o;renderMC();};
+          div.appendChild(b);
+        })(o);
+      }
+      var e=document.createElement('div');e.className='expl'+(st.answered?' show':'');
+      e.textContent=expl;div.appendChild(e);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderSA(){
+  var wrap=$('saWrap');wrap.innerHTML='';var t=T();
+  for(var i=0;i<DATA.sa.length;i++){
+    (function(i){
+      var q=DATA.sa[i],st=STATE.sa[i];
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var model=STATE.lang==='en'?q.men:q.mes;
+      var div=document.createElement('div');div.className='q';
+      div.innerHTML='<div class="qn">'+(21+i)+'</div><div class="qp">'+prompt+'</div>';
+      var ta=document.createElement('textarea');ta.value=st.text;
+      ta.oninput=function(){STATE.sa[i].text=ta.value;};
+      div.appendChild(ta);
+      var btn=document.createElement('button');btn.type='button';btn.className='btn ghost';
+      btn.style.marginTop='8px';btn.textContent=t.check;
+      var res=document.createElement('div');res.className='sa-res'+(st.checked?' show':'');
+      function paint(){
+        var kws=STATE.lang==='en'?q.ken:q.kes;
+        var txt=STATE.sa[i].text||'';
+        if(txt.trim().length<100){
+          STATE.sa[i].hits=0;
+          res.innerHTML='<span class="sa-verdict soft">'+(STATE.lang==='en'?'Write a fuller answer (100 characters minimum).':'Escriba una respuesta m\u00e1s completa (m\u00ednimo 100 caracteres).')+'</span>';
+          res.classList.add('show');
+          return;
+        }
+        var hits=saScore(txt,kws);STATE.sa[i].hits=hits;
+        var pass=hits>=3;
+        var verdict=pass?('<span class="sa-verdict pass">'+t.passV+'</span>'):('<span class="sa-verdict soft">'+t.softV+'</span>');
+        res.innerHTML=verdict+' &middot; '+t.hitFmt(hits)+
+          '<div class="model"><div class="ml">'+t.model+'</div>'+model+'</div>';
+        res.className='sa-res show';STATE.sa[i].checked=true;
+      }
+      btn.onclick=function(){
+        if(!STATE.sa[i].text.trim()){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.blank+'</span>';return;}
+        if(STATE.sa[i].text.trim().length<100){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.minLen+'</span>';return;}
+        paint();
+      };
+      if(st.checked&&st.text.trim())paint();
+      div.appendChild(btn);div.appendChild(res);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderAll(){renderChrome();renderTeaching();renderMC();renderSA();refreshLock();}
+
+/* ---------- completion + lockout ---------- */
+function lockedUntil(){var v=lsGet(CFG.lockKey);return v?parseInt(v,10):0;}
+function refreshLock(){
+  var until=lockedUntil(),now=Date.now();
+  var btn=$('completeBtn');
+  if(until>now){
+    btn.disabled=true;
+    var mins=Math.ceil((until-now)/60000);
+    $('statusMsg').className='status lock';
+    $('statusMsg').textContent=(STATE.lang==='en'?'Locked. Try again in ':'Bloqueado. Reintente en ')+mins+(STATE.lang==='en'?' min.':' min.');
+  }else{btn.disabled=false;}
+}
+function markComplete(){
+  var p={};try{p=JSON.parse(lsGet(CFG.progressKey)||'{}');}catch(e){p={};}
+  p[CFG.unit]=true;lsSet(CFG.progressKey,JSON.stringify(p));
+  var t=T();
+  $('statusMsg').className='status ok';$('statusMsg').textContent=t.mGood;
+  var nl=$('nextLink');nl.href=CFG.next;nl.textContent=t.nextTxt;nl.className='next';
+  $('completeBtn').disabled=true;
+}
+function onComplete(){
+  var t=T();
+  var mcCorrect=0,mcAnswered=0;
+  for(var i=0;i<DATA.mc.length;i++){if(STATE.mc[i].answered){mcAnswered++;
+    if(STATE.mc[i].chosen===mcCorrectIdx(DATA.mc[i].c,i))mcCorrect++;}}
+  var saPass=0;for(var j=0;j<DATA.sa.length;j++){if(STATE.sa[j].hits>=3)saPass++;}
+  var needMC=18,needSA=9;
+  if(mcAnswered<DATA.mc.length){
+    $('statusMsg').className='status warn';
+    $('statusMsg').textContent=(STATE.lang==='en'
+      ?'Answer all multiple-choice questions first ('+mcAnswered+'/20).'
+      :'Responda primero todas las preguntas de opci\u00f3n m\u00faltiple ('+mcAnswered+'/20).');
+    return;
+  }
+  STATE.revealed=true;renderMC();
+  var saOk = isMasters() ? (saPass>=needSA) : true;
+  if(mcCorrect>=needMC&&saOk){markComplete();return;}
+  // genuine fail -> lockout
+  lsSet(CFG.lockKey,String(Date.now()+lockMin()*60000));
+  $('statusMsg').className='status lock';
+  $('statusMsg').textContent=(STATE.lang==='en'
+    ?('Not yet: MC '+mcCorrect+'/20 (need 18), SA '+saPass+'/10 (need 7). '+t.mShort)
+    :('A\u00fan no: OM '+mcCorrect+'/20 (necesita 18), RB '+saPass+'/10 (necesita 7). '+t.mShort));
+  refreshLock();
+}
+
+/* ---------- init ---------- */
+function startApp(){
+  STATE.lang=(lsGet('cts_lang')==='es')?'es':'en';
+  STATE.name=lsGet('cts_student')||'';
+  STATE.track=lsGet('cts_track')||'cert';
+  $('langBtn').onclick=function(){STATE.lang=STATE.lang==='en'?'es':'en';
+    lsSet('cts_lang',STATE.lang);renderAll();};
+  $('completeBtn').onclick=onComplete;
+  $('m-go').onclick=function(){
+    var nm=$('m-name').value.trim();var tk=$('m-track').value;
+    if(!nm){$('m-name').focus();return;}
+    STATE.name=nm;STATE.track=tk;
+    lsSet('cts_student',nm);lsSet('cts_track',tk);
+    $('reg').className='modal hide';renderAll();
+  };
+  if(CFG.showReg&&(!STATE.name||!lsGet('cts_track'))){
+    $('reg').className='modal';$('m-track').value=STATE.track;renderChrome();
+  }else{$('reg').className='modal hide';}
+  renderAll();
+  setInterval(refreshLock,30000);
+}
+if(typeof document!=='undefined'){
+  if(document.readyState!=='loading')startApp();
+  else document.addEventListener('DOMContentLoaded',startApp);
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSLOCReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

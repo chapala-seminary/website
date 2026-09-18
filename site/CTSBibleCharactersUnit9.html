@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Characters — Unit 9</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 10 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Bible Characters — Unit 9: Hannah — The Praying Mother Who Gave Her Son to God</span><span class="lang-es">📖 Personajes de la Biblia — Unidad 9: Ana — La Madre que Oró y Dio su Hijo a Dios</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"For this child I prayed, and the LORD has granted me my petition which I asked of Him." — 1 Samuel 1:27 (NKJV)</span><span class="lang-es">«Por este niño oraba, y Jehová me dio lo que le pedí.» — 1 Samuel 1:27 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>Tucked into the opening of First Samuel, at one of the lowest points in Israel's history, stands one of the most beautiful women of faith in all the Bible. Hannah is not a queen or a warrior; she is a heartbroken wife who could not have a child. Yet out of her tears and her prayers came a son who would change the nation, and from her lips came a song that the mother of our Lord would one day echo. Hannah teaches us how to pray when life is hard, how to surrender what we love most, and how to praise the God who lifts up the lowly and fills the empty. Hers is the story of a praying mother who gave her son back to God.</p>
+<p><strong>Subject:</strong> Hannah — the praying mother who gave her son back to God.</p>
+<p><strong>Proposition:</strong> In a hard place Hannah poured out her heart to God in humble, persistent, fervent prayer; God heard her, gave her a son, and she gave him back — and her praise overflowed, teaching us that God lifts up the lowly, and that the surrendered son of a praying mother became the prophet who anointed kings, in the line that leads to Christ.</p>
+<p>We will trace five movements in the life of Hannah.</p>
+<h2>I. A Hard Place</h2>
+<p>Hannah's story begins in a dark time and a hard home. The nation of Israel had fallen far from God; in the days of the judges everyone did what was right in his own eyes, and even the house of God was corrupt, for the aged priest Eli had wicked sons who stole the offerings and defiled the worship. Into that spiritually barren age came a personally barren woman. Hannah's husband, Elkanah, had taken two wives — Hannah, whom he loved, and Peninnah, who had children.</p>
+<div class="scripture">And her rival also provoked her severely, to make her miserable... So it was, year by year... that she provoked her; therefore she wept and did not eat. (1 Samuel 1:6-7, NKJV)</div>
+<p>Year after year Peninnah taunted and provoked Hannah over her childlessness, until Hannah wept and could not eat. Perhaps you know something of Hannah's hard place — a world that has drifted from God, a family that is far from ideal, a private grief that others cannot see. Do not despise that place. It may be the very soil in which God means to teach you to pray as Hannah prayed.</p>
+<p>It is worth pausing on how God so often begins His greatest works in the most unlikely places. The Bible has a striking pattern of barren women — Sarah, Rebekah, Rachel, Hannah, and later Elizabeth — to whom God gave sons of destiny. He seems to delight in starting where there is no human possibility, so that when the gift comes everyone knows it was His doing and not ours. Hannah's empty arms were not a sign that God had forgotten her; they were the place where He was preparing to show His power. If you are in a season of waiting and lack, do not assume God is absent. The very emptiness you grieve may be the room He intends to fill.</p>
+<h2>II. Hannah's Prayer</h2>
+<p>In her anguish Hannah went up to the house of the Lord and poured out her soul. Notice how she prayed.</p>
+<div class="scripture">No, my lord, I am a woman of sorrowful spirit... but have poured out my soul before the LORD... for out of the abundance of my complaint and grief I have spoken until now. (1 Samuel 1:15-16, NKJV)</div>
+<p>She prayed humbly. She did not come demanding her rights; she called herself the Lord's maidservant and simply asked that He would remember her. She was the opposite of the proud man in Jesus' parable who stood and thanked God that he was not like other men, and went home unheard; Hannah came low, and God lifted her up. She prayed persistently. This was no first attempt; year by year she had come, and now in bitterness of soul she prayed and wept and would not give up until God answered. The Lord Himself taught us to pray like this — to keep knocking, like the man at his neighbor's door at midnight, until the door is opened. And she prayed fervently. Hannah was so caught up in pouring out her heart that only her lips moved and no sound came, and old Eli, watching, actually thought she was drunk. One wonders how many of us have ever been so lost in prayer that someone might mistake our earnestness for intoxication. Then Hannah made a vow: if God would give her a son, she would give him back to the Lord all the days of his life. Eli blessed her, and Hannah went away and ate, and her face was no longer sad. She had left her burden with God.</p>
+<p>There is a quiet but important moment at the end of Hannah's praying that we must not miss. After she had poured out her soul and made her vow, the Scripture says she went her way, and ate, and her face was no longer sad — and all of this before there was any sign that her prayer would be answered. Nothing had changed in her circumstances; she was still childless when she rose from her knees. What had changed was that she had truly handed her burden over to God. That is the mark of real prayer: not that we always get an immediate answer, but that we are able to leave the matter with the Lord and walk away lighter. Hannah teaches us that we can cast our care on Him and rise in peace, trusting Him with the outcome.</p>
+<h2>III. The Vow Kept and a Mother's Love</h2>
+<p>And God remembered Hannah. In time she conceived and bore a son, and she named him Samuel, for she had asked him of the Lord. But Hannah did not forget her vow. Many of us, having made such a promise in a desperate hour, would quietly take it back — we would tell ourselves we were under stress and did not really mean it. Hannah kept her word.</p>
+<div class="scripture">For this child I prayed, and the LORD has granted me my petition which I asked of Him. Therefore I also have lent him to the LORD; as long as he lives he shall be lent to the LORD. (1 Samuel 1:27-28, NKJV)</div>
+<p>When the boy was weaned, she brought him to Eli at the house of the Lord, with a sacrifice, and gave him back: "For this child I prayed, and the Lord has granted my petition; therefore I have lent him to the Lord as long as he lives." Think of what that cost her — the very thing she had wept and prayed for through all those bitter years, she now placed into the hands of God and left at the tabernacle. Yet giving him up did not mean she stopped loving him. Every year, when the family went up to worship, Hannah brought Samuel a little coat that she had sewn with her own hands, and we may be sure she put love into every stitch; as he grew, each year she made him a larger one. Is that not just like a mother? She had surrendered her son to God, but her love followed him all his days. This is faith come full circle — to ask God for a gift, to receive it with joy, to give it back open-handed, and to go on loving in the giving.</p>
+<p>Consider also what Hannah's faithfulness meant for the nation. Because one mother kept her word and gave her son to God, Israel received Samuel, the prophet who would call the whole people back to the Lord and anoint its first kings. We never know what God intends to do through the children we dedicate to Him. Hannah could not have seen the centuries of history that hung upon her quiet obedience at the tabernacle door. Parents today carry the same unseen significance: when we give our children to the Lord, pray over them, and raise them for His purposes, we may be placing into His hands a life He will use far beyond anything we could imagine. Faithfulness in the small, hidden duties of the home echoes down through generations.</p>
+<h2>IV. Praise That Overflows</h2>
+<p>And here is the wonder: it was after Hannah gave her son away that she sang. Her great song in First Samuel 2 is not the giddy relief of a prayer just answered; it rises in the aftermath of surrender.</p>
+<div class="scripture">My heart rejoices in the LORD... There is none holy like the LORD, for there is none besides You, nor is there any rock like our God. (1 Samuel 2:1-2, NKJV)</div>
+<p>"My heart rejoices in the Lord," she begins, and then she sings of the God who turns the world upside down: "The bows of the mighty men are broken, and those who stumbled are girded with strength... The Lord makes poor and makes rich; He brings low and lifts up. He raises the poor from the dust and lifts the beggar from the ash heap, to set them among princes." This is the heart of Hannah's faith and the lesson of her life: God exalts the lowly and casts down the proud; He fills the empty and humbles the full. So let me ask you what Hannah's life asks us all: does your praise overflow from the good you have had to let go? Anyone can thank God for what they receive; Hannah teaches a deeper thanksgiving — the praise that is born when we surrender to Him the thing we love most. Centuries later a young virgin named Mary would stand and sing almost the same song — "He has put down the mighty from their thrones, and exalted the lowly" — for the God of Hannah is the God of the Magnificat, and He had not changed.</p>
+<p>It is striking that Hannah's song hardly mentions her baby at all. We might have expected a new mother's lullaby, full of the child she had longed for; instead she sings almost entirely about God — His holiness, His power, His justice, His care for the weak. Her answered prayer had lifted her eyes off the gift and onto the Giver. This is the true direction of praise. Lesser thanksgiving stops at the blessing; mature thanksgiving runs past the blessing to the God who gave it. Hannah received a son and worshiped the Lord; she let the good thing point her to the best thing. May our own answered prayers do the same in us, turning every gift into a window through which we see and adore the God behind it.</p>
+<h2>V. From a Surrendered Son to the King of Kings</h2>
+<p>The child Hannah gave back to God became Samuel, the last of the judges and the first of the prophets — the very bridge from the chaos of the judges to the kingdom of Israel. While he was still a boy ministering before Eli, the Lord called him by name in the night, and the child answered, "Speak, for Your servant hears."</p>
+<div class="scripture">He will guard the feet of His saints... The LORD will judge the ends of the earth. He will give strength to His king, and exalt the horn of His anointed. (1 Samuel 2:9-10, NKJV)</div>
+<p>It was this same Samuel who would one day anoint Saul, and then David, the shepherd-king after God's own heart, from whose line the Messiah Himself would come. Do you see it? Hannah's surrendered son stands at the hinge of the whole story. The thread runs straight from a weeping woman's prayer to the throne of David and on to David's greater Son, Jesus Christ, the King of kings. And the God of Hannah's song is the God of the gospel — the God who lifts the lowly, fills the empty, and exalts the humble; who receives everyone who comes to Him empty-handed and low; who gave His own Son so that we might be lifted from the dust and set among princes. Hannah came to God with nothing but her tears and went away with a song. So may we. Pray in the hard place, as Hannah prayed — humbly, persistently, fervently. Surrender to God the very thing you love most, as Hannah gave back her son, and go on loving in the giving. And let your praise overflow, not only for what He gives, but for the joy of belonging to the God who lifts up the lowly and fills the empty with good things. For the same Lord who heard a barren woman's prayer hears yours, and the King who came at last from her son's anointing reigns forever.</p></div>
+<div class="lang-es"><p>En el comienzo de Primero de Samuel, en uno de los puntos más bajos de la historia de Israel, está una de las mujeres de fe más hermosas de toda la Biblia. Ana no es una reina ni una guerrera; es una esposa con el corazón quebrantado que no podía tener un hijo. Y sin embargo, de sus lágrimas y sus oraciones vino un hijo que cambiaría la nación, y de sus labios vino un cántico que la madre de nuestro Señor un día repetiría. Ana nos enseña cómo orar cuando la vida es dura, cómo entregar lo que más amamos, y cómo alabar al Dios que levanta al humilde y llena al vacío. La suya es la historia de una madre que oró y dio su hijo de vuelta a Dios.</p>
+<p><strong>Tema:</strong> Ana — la madre que oró y dio su hijo de vuelta a Dios.</p>
+<p><strong>Proposición:</strong> En una prueba dura Ana derramó su corazón ante Dios en oración humilde, persistente y ferviente; Dios la oyó, le dio un hijo, y ella lo devolvió —y su alabanza se desbordó, enseñándonos que Dios levanta al humilde, y que el hijo entregado de una madre que ora llegó a ser el profeta que ungió reyes, en el linaje que lleva a Cristo—.</p>
+<p>Trazaremos cinco movimientos en la vida de Ana.</p>
+<h2>I. Una Prueba Dura</h2>
+<p>La historia de Ana comienza en un tiempo oscuro y un hogar difícil. La nación de Israel se había alejado mucho de Dios; en los días de los jueces cada uno hacía lo que bien le parecía, y aun la casa de Dios estaba corrompida, porque el anciano sacerdote Elí tenía hijos malvados que robaban las ofrendas y profanaban la adoración. A aquella época espiritualmente estéril vino una mujer personalmente sin hijos. El esposo de Ana, Elcana, había tomado dos esposas —Ana, a quien amaba, y Penina, que tenía hijos—.</p>
+<div class="scripture">Y su rival la irritaba, enojándola y entristeciéndola... Y así hacía cada año... ella la irritaba; y Ana lloraba, y no comía. (1 Samuel 1:6-7, RVG)</div>
+<p>Año tras año Penina se burlaba de Ana y la provocaba por su esterilidad, hasta que Ana lloraba y no podía comer. Quizá tú conoces algo de la prueba dura de Ana —un mundo que se ha alejado de Dios, una familia que está lejos de ser ideal, un dolor privado que otros no pueden ver—. No desprecies ese lugar. Puede ser el suelo mismo en el que Dios quiere enseñarte a orar como oró Ana.</p>
+<p>Vale la pena detenernos en cómo Dios tan a menudo comienza sus obras más grandes en los lugares más improbables. La Biblia tiene un patrón llamativo de mujeres estériles —Sara, Rebeca, Raquel, Ana, y después Elisabet— a quienes Dios dio hijos de destino. Parece deleitarse en comenzar donde no hay posibilidad humana, para que cuando venga el don todos sepan que fue obra suya y no nuestra. Los brazos vacíos de Ana no eran una señal de que Dios la había olvidado; eran el lugar donde Él se preparaba para mostrar su poder. Si estás en una temporada de espera y carencia, no supongas que Dios está ausente. El vacío mismo que lamentas puede ser el espacio que Él se propone llenar.</p>
+<h2>II. La Oración de Ana</h2>
+<p>En su angustia Ana subió a la casa de Jehová y derramó su alma. Note cómo oró.</p>
+<div class="scripture">No, señor mío... soy una mujer atribulada de espíritu... he derramado mi alma delante de Jehová... porque por la multitud de mis congojas y de mi aflicción he hablado hasta ahora. (1 Samuel 1:15-16, RVG)</div>
+<p>Oró con humildad. No vino exigiendo sus derechos; se llamó a sí misma la sierva del Señor y simplemente pidió que Él se acordara de ella. Era lo opuesto del hombre soberbio en la parábola de Jesús que se puso de pie y dio gracias a Dios de que no era como los demás hombres, y se fue a casa sin ser oído; Ana vino baja, y Dios la levantó. Oró con persistencia. Este no era un primer intento; año tras año había venido, y ahora con amargura de alma oraba y lloraba y no se daría por vencida hasta que Dios respondiera. El Señor mismo nos enseñó a orar así —a seguir llamando, como el hombre a la puerta de su vecino a la medianoche, hasta que la puerta se abra—. Y oró con fervor. Ana estaba tan absorta derramando su corazón que solo se movían sus labios y no salía sonido, y el viejo Elí, observando, de hecho pensó que estaba borracha. Uno se pregunta cuántos de nosotros hemos estado alguna vez tan perdidos en oración que alguien pudiera confundir nuestro fervor con embriaguez. Entonces Ana hizo un voto: si Dios le daba un hijo, lo daría de vuelta al Señor todos los días de su vida. Elí la bendijo, y Ana se fue y comió, y su rostro ya no estuvo triste. Había dejado su carga con Dios.</p>
+<p>Hay un momento callado pero importante al final de la oración de Ana que no debemos pasar por alto. Después de haber derramado su alma y hecho su voto, la Escritura dice que se fue por su camino, y comió, y su rostro ya no estuvo triste —y todo esto antes de que hubiera señal alguna de que su oración sería respondida—. Nada había cambiado en sus circunstancias; seguía sin hijos cuando se levantó de rodillas. Lo que había cambiado era que verdaderamente había entregado su carga a Dios. Esa es la marca de la oración verdadera: no que siempre recibamos una respuesta inmediata, sino que podamos dejar el asunto con el Señor y alejarnos más livianos. Ana nos enseña que podemos echar sobre Él nuestra ansiedad y levantarnos en paz, confiándole el resultado.</p>
+<h2>III. El Voto Cumplido y el Amor de una Madre</h2>
+<p>Y Dios se acordó de Ana. A su tiempo concibió y dio a luz un hijo, y lo llamó Samuel, porque lo había pedido a Jehová. Pero Ana no olvidó su voto. Muchos de nosotros, habiendo hecho tal promesa en una hora desesperada, calladamente la retiraríamos —nos diríamos que estábamos bajo presión y que en realidad no lo dijimos en serio—. Ana cumplió su palabra.</p>
+<div class="scripture">Por este niño oraba, y Jehová me dio lo que le pedí. Yo, pues, lo dedico también a Jehová; todos los días que viva, será de Jehová. (1 Samuel 1:27-28, RVG)</div>
+<p>Cuando el niño fue destetado, lo trajo a Elí a la casa de Jehová, con un sacrificio, y lo dio de vuelta: "Por este niño oraba, y Jehová me dio mi petición; por tanto, yo lo dedico a Jehová todos los días que viva." Piense en lo que eso le costó —la cosa misma por la que había llorado y orado durante todos aquellos años amargos, ahora la colocaba en las manos de Dios y la dejaba en el tabernáculo—. Sin embargo, entregarlo no significó que dejara de amarlo. Cada año, cuando la familia subía a adorar, Ana le traía a Samuel un pequeño abrigo que había cosido con sus propias manos, y podemos estar seguros de que puso amor en cada puntada; conforme él crecía, cada año le hacía uno más grande. ¿No es eso justo como una madre? Había entregado a su hijo a Dios, pero su amor lo siguió todos sus días. Esta es la fe llegada a su círculo completo —pedir a Dios un don, recibirlo con gozo, devolverlo con la mano abierta, y seguir amando en el dar—.</p>
+<p>Considere también lo que la fidelidad de Ana significó para la nación. Porque una madre cumplió su palabra y dio su hijo a Dios, Israel recibió a Samuel, el profeta que llamaría a todo el pueblo de vuelta al Señor y ungiría a sus primeros reyes. Nunca sabemos lo que Dios se propone hacer por medio de los hijos que le dedicamos. Ana no pudo haber visto los siglos de historia que pendían de su callada obediencia a la puerta del tabernáculo. Los padres de hoy llevan la misma significancia invisible: cuando damos nuestros hijos al Señor, oramos por ellos y los criamos para sus propósitos, podemos estar colocando en sus manos una vida que Él usará mucho más allá de cualquier cosa que pudiéramos imaginar. La fidelidad en los deberes pequeños y ocultos del hogar resuena por generaciones.</p>
+<h2>IV. Alabanza que se Desborda</h2>
+<p>Y aquí está la maravilla: fue después de que Ana dio a su hijo que cantó. Su gran cántico en Primero de Samuel 2 no es el alivio eufórico de una oración recién respondida; se eleva en las secuelas de la entrega.</p>
+<div class="scripture">Mi corazón se regocija en Jehová... No hay santo como Jehová; porque no hay ninguno fuera de ti, y no hay refugio como el Dios nuestro. (1 Samuel 2:1-2, RVG)</div>
+<p>"Mi corazón se regocija en Jehová," comienza, y luego canta del Dios que pone el mundo al revés: "Los arcos de los fuertes fueron quebrados, y los débiles se ciñeron de poder... Jehová empobrece, y Él enriquece; abate, y ensalza. Él levanta del polvo al pobre, y al menesteroso alza del estiércol, para hacerlos sentar con los príncipes." Este es el corazón de la fe de Ana y la lección de su vida: Dios exalta al humilde y abate al soberbio; llena al vacío y humilla al lleno. Así que déjame preguntarte lo que la vida de Ana nos pregunta a todos: ¿se desborda tu alabanza del bien que has tenido que soltar? Cualquiera puede dar gracias a Dios por lo que recibe; Ana enseña una acción de gracias más profunda —la alabanza que nace cuando le entregamos la cosa que más amamos—. Siglos después una joven virgen llamada María se pondría de pie y cantaría casi el mismo cántico —"quitó de los tronos a los poderosos, y levantó a los humildes"— porque el Dios de Ana es el Dios del Magníficat, y Él no había cambiado.</p>
+<p>Es llamativo que el cántico de Ana apenas menciona a su bebé. Habríamos esperado la canción de cuna de una nueva madre, llena del niño que había anhelado; en cambio canta casi enteramente acerca de Dios —su santidad, su poder, su justicia, su cuidado por el débil—. Su oración respondida había levantado sus ojos del don al Dador. Esta es la verdadera dirección de la alabanza. La acción de gracias menor se detiene en la bendición; la acción de gracias madura corre más allá de la bendición hasta el Dios que la dio. Ana recibió un hijo y adoró al Señor; dejó que lo bueno la señalara a lo mejor. Que nuestras propias oraciones respondidas hagan lo mismo en nosotros, convirtiendo cada don en una ventana por la cual veamos y adoremos al Dios detrás de él.</p>
+<h2>V. De un Hijo Entregado al Rey de reyes</h2>
+<p>El niño que Ana dio de vuelta a Dios llegó a ser Samuel, el último de los jueces y el primero de los profetas —el puente mismo del caos de los jueces al reino de Israel—. Cuando aún era un niño ministrando delante de Elí, el Señor lo llamó por su nombre en la noche, y el niño respondió: "Habla, que tu siervo oye."</p>
+<div class="scripture">Él guarda los pies de sus santos... Jehová juzgará los confines de la tierra; Él dará poder a su rey, y exaltará el poder de su ungido. (1 Samuel 2:9-10, RVG)</div>
+<p>Fue este mismo Samuel quien un día ungiría a Saúl, y luego a David, el rey pastor conforme al corazón de Dios, de cuyo linaje vendría el Mesías mismo. ¿Lo ves? El hijo entregado de Ana está en el gozne de toda la historia. El hilo corre directo de la oración de una mujer que lloraba al trono de David y sigue hasta el Hijo mayor de David, Jesucristo, el Rey de reyes. Y el Dios del cántico de Ana es el Dios del evangelio —el Dios que levanta al humilde, llena al vacío y exalta al humilde; que recibe a todo el que viene a Él con las manos vacías y bajo; que dio a su propio Hijo para que nosotros fuéramos levantados del polvo y sentados con los príncipes—. Ana vino a Dios con nada sino sus lágrimas y se fue con un cántico. Así también nosotros. Ora en la prueba dura, como oró Ana —con humildad, con persistencia, con fervor—. Entrega a Dios la cosa misma que más amas, como Ana dio de vuelta a su hijo, y sigue amando en el dar. Y deja que tu alabanza se desborde, no solo por lo que Él da, sino por el gozo de pertenecer al Dios que levanta al humilde y llena de bienes al vacío. Porque el mismo Señor que oyó la oración de una mujer estéril oye la tuya, y el Rey que vino al fin del ungimiento de su hijo reina para siempre.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 9 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 9 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 9;
+const COURSE = 'CTSBC';
+const FILE_PREFIX = 'CTSBibleCharacters';
+const NEXT_UNIT_URL = 'CTSBibleCharactersUnit10.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - Enoch — The Man Who Walked with God", "Unit 2 - Job — Faith That Holds When Everything Is Stripped Away", "Unit 3 - Abraham — Father of the Faithful, Friend of God", "Unit 4 - Rebekah — The Bride Who Said “I Will Go”", "Unit 5 - Joseph — From the Pit to the Palace, the Man Who Forgave", "Unit 6 - Moses — The Man Who Asked to See God’s Glory", "Unit 7 - Gideon — When God Wins With Few", "Unit 8 - Ruth — When Life Looks Hopeless, There Is Always Hope and God", "Unit 9 - Hannah — The Praying Mother Who Gave Her Son to God", "Unit 10 - Samuel — The Boy Who Heard God, the Prophet Who Anointed Kings", "Unit 11 - David — A Man After God's Own Heart", "Unit 12 - Elijah — The Prophet of Fire and the Still Small Voice"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [{"textEn":"1. Hannah's story begins in which book of the Bible?","textEs":"1. ¿La historia de Ana comienza en qué libro de la Biblia?","optionsEn":["Judges", "1 Samuel", "Ruth", "1 Kings"],"optionsEs":["Jueces", "1 Samuel", "Rut", "1 Reyes"],"explanationEn":"Hannah's story opens the book of 1 Samuel (1 Samuel 1).","explanationEs":"La historia de Ana abre el libro de 1 Samuel (1 Samuel 1).","correct":1},{"textEn":"2. In Hannah's day, the spiritual condition of Israel was:","textEs":"2. En los días de Ana, la condición espiritual de Israel era:","optionsEn":["fallen far from God", "in revival", "at peace", "prospering"],"optionsEs":["alejada de Dios", "en avivamiento", "en paz", "prosperando"],"explanationEn":"It was the days of the judges; the nation had fallen far from God, and Eli's sons were corrupt.","explanationEs":"Eran los días de los jueces; la nación se había alejado de Dios, y los hijos de Elí eran corruptos.","correct":0},{"textEn":"3. The aged priest at the house of the Lord was:","textEs":"3. El anciano sacerdote en la casa de Jehová era:","optionsEn":["Aaron", "Phinehas", "Eli", "Samuel"],"optionsEs":["Aarón", "Finees", "Elí", "Samuel"],"explanationEn":"Eli was the aged priest, whose sons were wicked (1 Samuel 1-2).","explanationEs":"Elí era el anciano sacerdote, cuyos hijos eran malvados (1 Samuel 1-2).","correct":2},{"textEn":"4. Hannah's husband, Elkanah, had:","textEs":"4. El esposo de Ana, Elcana, tenía:","optionsEn":["no wife", "a foreign wife", "one wife", "two wives"],"optionsEs":["ninguna esposa", "una esposa extranjera", "una esposa", "dos esposas"],"explanationEn":"Elkanah had two wives, Hannah and Peninnah (1 Samuel 1:2).","explanationEs":"Elcana tenía dos esposas, Ana y Penina (1 Samuel 1:2).","correct":3},{"textEn":"5. Hannah's rival, who taunted her, was:","textEs":"5. La rival de Ana, que se burlaba de ella, era:","optionsEn":["Peninnah", "Naomi", "Abigail", "Michal"],"optionsEs":["Penina", "Noemí", "Abigail", "Mical"],"explanationEn":"Peninnah provoked Hannah year by year over her childlessness (1 Samuel 1:6-7).","explanationEs":"Penina provocaba a Ana año tras año por su esterilidad (1 Samuel 1:6-7).","correct":0},{"textEn":"6. The cause of Hannah's deep grief was that she:","textEs":"6. La causa del profundo dolor de Ana era que ella:","optionsEn":["lived in poverty", "was barren (had no children)", "was sick", "was in exile"],"optionsEs":["vivía en pobreza", "era estéril (no tenía hijos)", "estaba enferma", "estaba en exilio"],"explanationEn":"Hannah was barren, and her rival mocked her for it (1 Samuel 1:5-7).","explanationEs":"Ana era estéril, y su rival se burlaba de ella por eso (1 Samuel 1:5-7).","correct":1},{"textEn":"7. Hannah prayed humbly, calling herself the Lord's:","textEs":"7. Ana oró con humildad, llamándose a sí misma la... del Señor:","optionsEn":["queen", "prophetess", "maidservant", "daughter"],"optionsEs":["reina", "profetisa", "sierva", "hija"],"explanationEn":"Hannah called herself the Lord's maidservant and asked Him to remember her (1 Samuel 1:11).","explanationEs":"Ana se llamó la sierva del Señor y le pidió que se acordara de ella (1 Samuel 1:11).","correct":2},{"textEn":"8. Hannah's persistence is like Jesus' picture of the man who:","textEs":"8. La persistencia de Ana es como la imagen de Jesús del hombre que:","optionsEn":["gave a feast", "built a house", "planted a field", "kept knocking at midnight"],"optionsEs":["dio un banquete", "construyó una casa", "plantó un campo", "siguió llamando a la medianoche"],"explanationEn":"Jesus taught persistence with the man knocking at his neighbor's door at midnight (Luke 11).","explanationEs":"Jesús enseñó la persistencia con el hombre que llamaba a la puerta de su vecino a la medianoche (Lucas 11).","correct":3},{"textEn":"9. Hannah prayed so fervently that Eli thought she was:","textEs":"9. Ana oró tan fervientemente que Elí pensó que estaba:","optionsEn":["a prophetess", "drunk", "an angel", "a beggar"],"optionsEs":["una profetisa", "borracha", "un ángel", "una mendiga"],"explanationEn":"Only her lips moved and no voice was heard, so Eli thought she was drunk (1 Samuel 1:13-14).","explanationEs":"Solo se movían sus labios y no se oía voz, así que Elí pensó que estaba borracha (1 Samuel 1:13-14).","correct":1},{"textEn":"10. In her prayer Hannah made a vow to:","textEs":"10. En su oración Ana hizo un voto de:","optionsEn":["give her son back to the Lord", "build a temple", "leave Shiloh", "fast forever"],"optionsEs":["dar su hijo de vuelta al Señor", "construir un templo", "dejar Silo", "ayunar para siempre"],"explanationEn":"Hannah vowed that if God gave her a son, she would give him to the Lord (1 Samuel 1:11).","explanationEs":"Ana hizo voto de que si Dios le daba un hijo, lo daría al Señor (1 Samuel 1:11).","correct":0},{"textEn":"11. God answered, and Hannah bore a son she named:","textEs":"11. Dios respondió, y Ana dio a luz un hijo que llamó:","optionsEn":["Saul", "Eli", "Levi", "Samuel"],"optionsEs":["Saúl", "Elí", "Leví", "Samuel"],"explanationEn":"She named him Samuel, for she had asked him of the Lord (1 Samuel 1:20).","explanationEs":"Lo llamó Samuel, porque lo había pedido a Jehová (1 Samuel 1:20).","correct":3},{"textEn":"12. When the boy was weaned, Hannah:","textEs":"12. Cuando el niño fue destetado, Ana:","optionsEn":["raised him at home", "sent him to Egypt", "brought him to Eli and gave him to the Lord", "hid him away"],"optionsEs":["lo crió en casa", "lo envió a Egipto", "lo trajo a Elí y lo dio al Señor", "lo escondió"],"explanationEn":"Hannah brought the weaned child to Eli and lent him to the Lord (1 Samuel 1:24-28).","explanationEs":"Ana trajo al niño destetado a Elí y lo dedicó a Jehová (1 Samuel 1:24-28).","correct":2},{"textEn":"13. \"For this child I prayed\" shows Hannah's prayer was:","textEs":"13. «Por este niño oraba» muestra que la oración de Ana fue:","optionsEn":["denied", "ignored", "delayed", "answered"],"optionsEs":["negada", "ignorada", "demorada", "respondida"],"explanationEn":"\"The LORD has granted me my petition which I asked of Him\" (1 Samuel 1:27).","explanationEs":"«Jehová me dio lo que le pedí» (1 Samuel 1:27).","correct":3},{"textEn":"14. After giving Samuel to the Lord, each year Hannah brought him:","textEs":"14. Después de dar a Samuel al Señor, cada año Ana le traía:","optionsEn":["a sacrifice", "a little coat she had made", "silver", "a scroll"],"optionsEs":["un sacrificio", "un pequeño abrigo que había hecho", "plata", "un rollo"],"explanationEn":"Hannah made Samuel a little coat each year and brought it when they came to worship (1 Samuel 2:19).","explanationEs":"Ana le hacía a Samuel un pequeño abrigo cada año y se lo traía cuando subían a adorar (1 Samuel 2:19).","correct":1},{"textEn":"15. Hannah's song of praise is found in:","textEs":"15. El cántico de alabanza de Ana se encuentra en:","optionsEn":["1 Samuel 2", "Judges", "Psalms", "Exodus"],"optionsEs":["1 Samuel 2", "Jueces", "Salmos", "Éxodo"],"explanationEn":"Hannah's song is in 1 Samuel 2:1-10.","explanationEs":"El cántico de Ana está en 1 Samuel 2:1-10.","correct":0},{"textEn":"16. Hannah sang that the Lord brings low and:","textEs":"16. Ana cantó que Jehová abate y:","optionsEn":["forgets", "hides", "lifts up", "sleeps"],"optionsEs":["olvida", "esconde", "ensalza", "duerme"],"explanationEn":"\"The LORD... brings low and lifts up\" (1 Samuel 2:7).","explanationEs":"«Jehová... abate, y ensalza» (1 Samuel 2:7).","correct":2},{"textEn":"17. The great theme of Hannah's song is that God:","textEs":"17. El gran tema del cántico de Ana es que Dios:","optionsEn":["exalts the lowly and casts down the proud", "rewards the rich", "favors the strong", "ignores the weak"],"optionsEs":["exalta al humilde y abate al soberbio", "premia al rico", "favorece al fuerte", "ignora al débil"],"explanationEn":"God exalts the lowly and casts down the proud; He fills the empty (1 Samuel 2:4-8).","explanationEs":"Dios exalta al humilde y abate al soberbio; llena al vacío (1 Samuel 2:4-8).","correct":0},{"textEn":"18. Hannah's song was later echoed by:","textEs":"18. El cántico de Ana fue después repetido por:","optionsEn":["Deborah", "Mary in the Magnificat", "Miriam", "Ruth"],"optionsEs":["Débora", "María en el Magníficat", "Miriam", "Rut"],"explanationEn":"Mary's Magnificat echoes Hannah's song — \"He has... exalted the lowly\" (Luke 1).","explanationEs":"El Magníficat de María hace eco del cántico de Ana — «levantó a los humildes» (Lucas 1).","correct":1},{"textEn":"19. Hannah's son Samuel became:","textEs":"19. El hijo de Ana, Samuel, llegó a ser:","optionsEn":["a warrior", "a priest-king", "a scribe", "the bridge from the judges to the kings"],"optionsEs":["un guerrero", "un rey-sacerdote", "un escriba", "el puente de los jueces a los reyes"],"explanationEn":"Samuel was the last judge and first prophet — the bridge to the monarchy.","explanationEs":"Samuel fue el último juez y el primer profeta — el puente a la monarquía.","correct":3},{"textEn":"20. Samuel would anoint Saul and then:","textEs":"20. Samuel ungiría a Saúl y luego a:","optionsEn":["Goliath", "Eli", "David", "Solomon"],"optionsEs":["Goliat", "Elí", "David", "Salomón"],"explanationEn":"Samuel anointed Saul and then David, in the line that leads to Christ.","explanationEs":"Samuel ungió a Saúl y luego a David, en el linaje que lleva a Cristo.","correct":2}];
+const kwQuestions = [{"textEn":"21. Trace the five movements of the life of Hannah.","textEs":"21. Trace los cinco movimientos de la vida de Ana.","kw_en":["hard","prayer","vow","coat","song","lowly","samuel","christ"],"kw_es":["prueba","oraci","voto","abrigo","canto","humilde","samuel","cristo"],"modelEn":"The life of Hannah moves through five movements. First she is in a hard place, barren and taunted in a nation fallen from God. Second comes Hannah's prayer, poured out humbly, persistently, and fervently, with her vow. Third, the vow is kept and a mother's love shown, as she gives Samuel back yet sews him a coat each year. Fourth, her praise overflows in song, exalting the God who lifts the lowly. Fifth, her surrendered son becomes the prophet in the line that leads to Christ.","modelEs":"La vida de Ana pasa por cinco movimientos. Primero está en una prueba dura, estéril y burlada en una nación alejada de Dios. Segundo viene la oración de Ana, derramada con humildad, persistencia y fervor, con su voto. Tercero, el voto se cumple y se muestra el amor de una madre, pues da a Samuel de vuelta y sin embargo le cose un abrigo cada año. Cuarto, su alabanza se desborda en canto, exaltando al Dios que levanta al humilde. Quinto, su hijo entregado llega a ser el profeta en el linaje que lleva a Cristo."},{"textEn":"22. Describe the hard place in which Hannah's story begins.","textEs":"22. Describa la prueba dura en que comienza la historia de Ana.","kw_en":["israel","fallen","elkanah","peninnah","barren","taunt","wept","grief"],"kw_es":["israel","alejado","elcana","penina","hijos","burla","llora","dolor"],"modelEn":"Hannah's story begins in a dark time and a hard home. The nation of Israel had fallen far from God in the days of the judges, and even Eli's house was corrupt. Hannah's husband Elkanah had two wives; Hannah was barren while Peninnah had children. Year after year Peninnah taunted and provoked Hannah over her childlessness, until she wept and could not eat. It was a private grief no one else could see, yet it became the very soil in which God taught her to pray.","modelEs":"La historia de Ana comienza en un tiempo oscuro y un hogar difícil. La nación de Israel se había alejado mucho de Dios en los días de los jueces, y aun la casa de Elí estaba corrompida. El esposo de Ana, Elcana, tenía dos esposas; Ana no tenía hijos mientras Penina sí. Año tras año Penina se burlaba de Ana y la provocaba por su esterilidad, hasta que ella lloraba y no podía comer. Era un dolor privado que nadie más podía ver, y sin embargo llegó a ser el suelo mismo en que Dios le enseñó a orar."},{"textEn":"23. How did Hannah pray — humbly, persistently, and fervently?","textEs":"23. ¿Cómo oró Ana — con humildad, persistencia y fervor?","kw_en":["humbly","maidservant","persisten","knocking","fervent","drunk","soul","vow"],"kw_es":["humilde","sierva","persisten","puerta","fervor","borracha","alma","voto"],"modelEn":"Hannah prayed humbly, calling herself the Lord's maidservant and simply asking Him to remember her, unlike the proud man in Jesus' parable. She prayed persistently, coming year by year and not giving up, like the man knocking at his neighbor's door at midnight until it opened. And she prayed fervently, so caught up in pouring out her soul that only her lips moved and Eli thought she was drunk. Then she made a vow to give her son back to the Lord, and went away at peace, her burden left with God.","modelEs":"Ana oró con humildad, llamándose la sierva del Señor y simplemente pidiéndole que se acordara de ella, a diferencia del hombre soberbio de la parábola de Jesús. Oró con persistencia, viniendo año tras año y no dándose por vencida, como el hombre que llamaba a la puerta de su vecino a la medianoche hasta que se abrió. Y oró con fervor, tan absorta derramando su alma que solo se movían sus labios y Elí pensó que estaba borracha. Entonces hizo un voto de dar su hijo de vuelta al Señor, y se fue en paz, dejando su carga con Dios."},{"textEn":"24. What vow did Hannah make, and how did she keep it?","textEs":"24. ¿Qué voto hizo Ana, y cómo lo cumplió?","kw_en":["vow","son","lord","weaned","brought","kept","coat","love"],"kw_es":["voto","hijo","dios","destet","trajo","cumpli","abrigo","amor"],"modelEn":"Hannah vowed that if God gave her a son, she would give him back to the Lord all his days. Many would have taken back such a promise, claiming they were under stress, but Hannah kept her word. When the boy was weaned, she brought him to Eli at the house of the Lord and gave him back. Yet her love continued: every year she sewed Samuel a little coat and brought it to him. She surrendered her son to the Lord but went on loving him.","modelEs":"Ana hizo voto de que si Dios le daba un hijo, lo daría de vuelta al Señor todos sus días. Muchos habrían retirado tal promesa, alegando que estaban bajo presión, pero Ana cumplió su palabra. Cuando el niño fue destetado, lo trajo a Elí a la casa de Dios y lo dio de vuelta. Sin embargo su amor continuó: cada año le cosía a Samuel un pequeño abrigo y se lo traía. Entregó a su hijo al Señor pero siguió amándolo."},{"textEn":"25. What did it cost Hannah to give Samuel back, and what does it teach about faith?","textEs":"25. ¿Qué le costó a Ana dar a Samuel de vuelta, y qué enseña sobre la fe?","kw_en":["cost","surrender","gave","open","faith","longed","trust","love"],"kw_es":["precio","entreg","abierta","anhel","confiar","fe","amor","dar"],"modelEn":"It cost Hannah dearly to give Samuel back: the very child she had longed for and wept over for years, she now placed in God's hands and left at the tabernacle. This teaches that true faith comes full circle. We ask God for a gift, receive it with joy, and then hold it open-handed, willing to give it back and to keep loving in the giving. Hannah trusted God enough to surrender her greatest treasure, and her faith shows us how to hold every gift loosely before Him.","modelEs":"A Ana le costó caro dar a Samuel de vuelta: el niño mismo que había anhelado y por quien había llorado por años, ahora lo colocaba en las manos de Dios y lo dejaba en el tabernáculo. Esto enseña que la verdadera fe llega a su círculo completo. Pedimos a Dios un don, lo recibimos con gozo, y luego lo sostenemos con la mano abierta, dispuestos a devolverlo y a seguir amando en el dar. Ana confió en Dios lo suficiente para entregar su mayor tesoro, y su fe nos muestra cómo sostener cada don sin aferrarnos ante Él."},{"textEn":"26. What is the great theme of Hannah's song (1 Samuel 2)?","textEs":"26. ¿Cuál es el gran tema del cántico de Ana (1 Samuel 2)?","kw_en":["lowly","exalt","proud","low","lifts","empty","fills","god"],"kw_es":["humilde","exalt","soberbi","abate","levant","pobre","llena","dios"],"modelEn":"The great theme of Hannah's song is that God turns the world upside down: He exalts the lowly and casts down the proud. She sings that the bows of the mighty are broken while the weak are girded with strength, that the Lord brings low and lifts up, and that He raises the poor from the dust to set them among princes. God fills the empty and humbles the full. This is the heart of her faith: the God who lifted a barren woman is the God who lifts all who come to Him low.","modelEs":"El gran tema del cántico de Ana es que Dios pone el mundo al revés: exalta al humilde y abate al soberbio. Canta que los arcos de los fuertes son quebrados mientras los débiles se ciñen de poder, que Jehová abate y ensalza, y que levanta del polvo al pobre para sentarlo con los príncipes. Dios llena al vacío y humilla al lleno. Este es el corazón de su fe: el Dios que levantó a una mujer estéril es el Dios que levanta a todos los que vienen a Él bajos."},{"textEn":"27. How does Hannah's song connect to Mary's Magnificat?","textEs":"27. ¿Cómo se conecta el cántico de Ana con el Magníficat de María?","kw_en":["mary","magnificat","echo","lowly","mighty","thrones","exalt","same"],"kw_es":["maria","magnificat","eco","humilde","poderosos","tronos","exalt","mismo"],"modelEn":"Hannah's song connects directly to Mary's Magnificat. Centuries after Hannah, the young virgin Mary stood and sang almost the same song, saying that God has put down the mighty from their thrones and exalted the lowly. Both women praise the God who lifts the lowly and casts down the proud. The echo shows that the God of Hannah is the God of the Magnificat, unchanged across the centuries, and that both songs point to the same saving work he was about to do.","modelEs":"El cántico de Ana se conecta directamente con el Magníficat de María. Siglos después de Ana, la joven virgen María se puso de pie y cantó casi el mismo cántico, diciendo que Dios quitó de los tronos a los poderosos y levantó a los humildes. Ambas mujeres alaban al Dios que levanta al humilde y abate al soberbio. El eco muestra que el Dios de Ana es el mismo Dios del Magníficat, sin cambiar a través de los siglos, y que ambos cánticos señalan la misma obra salvadora que Él iba a hacer."},{"textEn":"28. Why is Samuel called the bridge from the judges to the kings?","textEs":"28. ¿Por qué se llama a Samuel el puente de los jueces a los reyes?","kw_en":["samuel","last","judges","first","prophet","anoint","saul","david"],"kw_es":["samuel","jueces","primer","profeta","reyes","saul","david","monarqu"],"modelEn":"Samuel is called the bridge because he was the last of the judges and the first of the prophets, standing exactly at the turn from the chaos of the judges to the monarchy. While still a boy he heard God call him in the night. It was Samuel who would anoint Saul, Israel's first king, and then David, the king after God's own heart. So Samuel closes one era and opens another, the very hinge from the judges to the kings of Israel.","modelEs":"Samuel se llama el puente porque fue el último de los jueces y el primero de los profetas, situado exactamente en el giro del caos de los jueces a la monarquía. Cuando aún era niño oyó a Dios llamarlo en la noche. Fue Samuel quien ungiría a Saúl, el primer rey de Israel, y luego a David, el rey conforme al corazón de Dios. Así Samuel cierra una era y abre otra, el gozne mismo de los jueces a los reyes de Israel."},{"textEn":"29. How does Hannah's story point forward to Christ?","textEs":"29. ¿Cómo señala hacia adelante a Cristo la historia de Ana?","kw_en":["samuel","anoint","david","line","messiah","christ","lowly","lifts"],"kw_es":["samuel","david","linaje","salvador","cristo","humilde","levant","reino"],"modelEn":"Hannah's story points to Christ because her surrendered son Samuel anointed David, and from David's line the Messiah Himself would come. The thread runs straight from a weeping woman's prayer to the throne of David and on to David's greater Son, Jesus Christ, the King of kings. Moreover, the God of Hannah's song, who lifts the lowly and fills the empty, is the God of the gospel, who gave His own Son to lift us from the dust. Hannah came with nothing and went away with a song that pointed to the Savior.","modelEs":"La historia de Ana señala a Cristo porque su hijo entregado Samuel ungió a David, y del linaje de David vendría el Mesías mismo. El hilo corre directo de la oración de una mujer que lloraba al trono de David y sigue hasta el Hijo mayor de David, Jesucristo, el Rey de reyes. Además, el Dios del cántico de Ana, que levanta al humilde y llena al vacío, es el Dios del evangelio, que dio a su propio Hijo, nuestro Salvador, para levantarnos del polvo. Ana vino con nada y se fue con un cántico que señalaba al Salvador, y a su reino."},{"textEn":"30. What does Hannah teach believers about prayer and praise?","textEs":"30. ¿Qué enseña Ana a los creyentes sobre la oración y la alabanza?","kw_en":["pray","hard","surrender","praise","overflow","lowly","empty","fills"],"kw_es":["orar","prueba","entreg","alabanza","desbord","humilde","pobre","llena"],"modelEn":"Hannah teaches believers to pray in the hard place, humbly, persistently, and fervently, bringing our grief to God. She teaches us to surrender to God the very thing we love most, holding His gifts open-handed. And she teaches a deeper praise: thanksgiving that overflows not only from what we receive but from what we have had to let go. Above all she shows us the God who lifts the lowly and fills the empty, so that we come to Him with nothing and go away with a song.","modelEs":"Ana enseña a los creyentes a orar en la prueba dura, con humildad, persistencia y fervor, trayendo nuestro dolor a Dios. Nos enseña a entregar a Dios la cosa misma que más amamos, sosteniendo sus dones con la mano abierta. Y enseña una alabanza más profunda: una acción de gracias que se desborda no solo de lo que recibimos sino de lo que hemos tenido que soltar. Sobre todo nos muestra al Dios que levanta al humilde y llena al pobre vacío, para que vengamos a Él con nada y nos vayamos con un cántico."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleCharactersReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

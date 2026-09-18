@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Matthew Intensive — Unit 2</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 3 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Matthew Intensive — Unit 2: The King Presented</span><span class="lang-es">📖 Mateo Intensivo — Unidad 2: El Rey Presentado</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"This is My beloved Son, in whom I am well pleased." — Matthew 3:17</span><span class="lang-es">"Éste es mi Hijo amado, en quien tengo contentamiento." — Mateo 3:17</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Matthew Intensive. Please register before beginning Unit 2.</span><span class="lang-es">Bienvenido al Intensivo de Mateo. Por favor regístrese antes de comenzar la Unidad 2.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Matthew 3:2</strong></p>
+<div class="scripture">"Repent, for the kingdom of heaven is at hand!" — Matthew 3:2 (NKJV)</div>
+
+<h3>The King Steps Forward</h3>
+<p>In the first unit Matthew answered the question of identity: who is this child? He is the Son of David and the Son of Abraham; He is Jesus, who saves His people from their sins; and He is Immanuel, God with us. Now, in chapters 3 and 4, the King who was hidden in Nazareth steps forward to be presented to His people. Nearly thirty silent years have passed since the wise men knelt at the cradle. Then, all at once, the silence breaks. A prophet's voice cries in the wilderness; the heavens open over a river; a tempter is met and mastered in a desert; and the first men are called to follow. Matthew is showing us the King attested and proven before His public work begins — attested by the forerunner, by the Father's own voice, and by the descending Spirit, and proven against the enemy who had ruined the first man. By the end of these two chapters the King has been presented, and He has begun to gather a kingdom.</p>
+
+<h3>The Voice in the Wilderness</h3>
+<p>"In those days John the Baptist came preaching in the wilderness of Judea, and saying, 'Repent, for the kingdom of heaven is at hand!'" (Matthew 3:1-2). Matthew sees in John the very herald the prophets foretold: "For this is he who was spoken of by the prophet Isaiah, saying: 'The voice of one crying in the wilderness: Prepare the way of the LORD, make His paths straight'" (Matthew 3:3, quoting Isaiah 40:3). A king of the ancient world did not arrive unannounced; a herald went before him to make the road ready. John is that herald. He comes in rough camel's hair with a leather belt, eating locusts and wild honey — a man stripped of every comfort so that nothing about him competes with his message. Crowds stream out from Jerusalem and all Judea, confessing their sins and being baptized in the Jordan. The herald's whole glory is that men look past him to the One who comes after. He is, as he says of himself, only a voice; the Word is Another.</p>
+
+<h3>Repentance with Roots</h3>
+<p>But when John sees many of the Pharisees and Sadducees coming to his baptism, he does not flatter them. He calls them a "brood of vipers" and presses the one demand they least expect: "Bear fruits worthy of repentance, and do not think to say to yourselves, 'We have Abraham as our father'" (Matthew 3:8-9). Here is the heart of John's preaching, and it searches us still. The people of his day rested in their pedigree — they were children of Abraham, and surely that was enough. John tells them it is not. A bloodline cannot repent; only a person can. Repentance in the Bible is more than regret and more than a good resolution; it is a turning — a turning away from sin and a turning back to God — and a true turning bears fruit. "Even now the axe is laid to the root of the trees," John warns; "every tree which does not bear good fruit is cut down and thrown into the fire" (Matthew 3:10). We must not presume that a Christian upbringing, a church membership, or a long family history has settled the matter of our hearts. God has no grandchildren. Each soul must turn for itself.</p>
+
+<h3>One Mightier Than I</h3>
+<p>John knows the limit of his own work. "I indeed baptize you with water unto repentance, but He who is coming after me is mightier than I, whose sandals I am not worthy to carry. He will baptize you with the Holy Spirit and fire" (Matthew 3:11). John's baptism is a baptism of preparation — water that confesses the need of cleansing. The One who comes will do what water cannot: He will baptize with the Holy Spirit, pouring out God's own life upon His people. John adds a solemn word of judgment too: the Coming One holds a winnowing fan, and He will gather the wheat into the barn but burn the chaff with unquenchable fire (Matthew 3:12). The same King who saves will also judge; the gospel is good news precisely because the judgment it answers is real.</p>
+
+<h3>To Fulfill All Righteousness</h3>
+<p>Then the One whom John announced arrives at the river. "Jesus came from Galilee to John at the Jordan to be baptized by him" (Matthew 3:13). John recoils, for this is backward — "I need to be baptized by You, and are You coming to me?" (Matthew 3:14). Why would the sinless Son submit to a baptism of repentance, when He had no sin to confess? Jesus answers, "Permit it to be so now, for thus it is fitting for us to fulfill all righteousness" (Matthew 3:15). He is not confessing sin of His own; He is taking His place with sinners. From the very threshold of His ministry, the King steps down into the river beside the guilty, identifying Himself with the people He came to save. It is the first step of a road that will end at a cross.</p>
+<p>And as He comes up from the water, heaven answers. "The heavens were opened to Him, and He saw the Spirit of God descending like a dove and alighting upon Him. And suddenly a voice came from heaven, saying, 'This is My beloved Son, in whom I am well pleased'" (Matthew 3:16-17). Here, at the Jordan, the one God is shown as Father, Son, and Spirit in a single moment: the Son stands in the water, the Spirit descends as a dove, the Father speaks from heaven. This is not three Gods but one God in three Persons — a truth no human mind invented and none can fully fathom, yet a truth the Scripture plainly sets before our eyes. The King is anointed for His work and openly declared to be the beloved Son.</p>
+
+<h3>The True Israel in the Wilderness</h3>
+<p>"Then Jesus was led up by the Spirit into the wilderness to be tempted by the devil. And when He had fasted forty days and forty nights, afterward He was hungry" (Matthew 4:1-2). The same Spirit that descended as a dove now leads Him into the desert to be tested. Notice the number: forty days. Israel of old wandered forty years in the wilderness and failed again and again — grumbling for bread, testing God, turning aside to idols. Now the true Son of God enters the same wilderness, and where the nation fell, He stands. This is the pattern we named in Unit 1 and will meet again and again in Matthew: what God did with His people Israel is taken up and brought to its true completion in Jesus. Scholars call it recapitulation — Jesus relives Israel's story and gets it right. He is the new Adam, who does not yield where the first man yielded, and the true Israel, faithful where the nation was faithless.</p>
+<p>The three temptations probe Him at every point. First the tempter says, "If You are the Son of God, command that these stones become bread" — turn Your power to Your own appetite. Jesus answers from Deuteronomy: "Man shall not live by bread alone, but by every word that proceeds from the mouth of God" (Matthew 4:4). Then Satan sets Him on the pinnacle of the temple: throw Yourself down, for it is written that angels will bear You up — force God's hand with a spectacle. Jesus answers, "You shall not tempt the LORD your God" (Matthew 4:7). Finally the devil shows Him all the kingdoms of the world and their glory: "All these things I will give You if You will fall down and worship me" — the crown without the cross. Jesus answers, "Away with you, Satan! For it is written, 'You shall worship the LORD your God, and Him only you shall serve'" (Matthew 4:10). Three times the King meets the lie with "It is written," wielding the very Scripture His people had been given. The tempter leaves Him, and angels come and minister to Him. The King has been proven; He will not buy the kingdom on the enemy's terms.</p>
+
+<h3>Light Has Dawned</h3>
+<p>When Jesus hears that John has been put in prison, He withdraws to Galilee and makes His home in Capernaum, by the sea (Matthew 4:12-13). Matthew, faithful to his great theme, sees a prophecy fulfilled: this is the region Isaiah called "Galilee of the Gentiles," where "the people who sat in darkness have seen a great light, and upon those who sat in the region and shadow of death light has dawned" (Matthew 4:16, quoting Isaiah 9:1-2). The light dawns in the very place the world counted least. And then Jesus begins to preach — and His first word is John's word: "From that time Jesus began to preach and to say, 'Repent, for the kingdom of heaven is at hand'" (Matthew 4:17). The herald's torch passes to the King. The cry that opened the chapter on John's lips now opens the ministry on the lips of the King Himself, for John was only ever the voice preparing the way for this word.</p>
+
+<h3>Follow Me</h3>
+<p>The King's first public act is not to build a throne but to call men. Walking by the Sea of Galilee, He sees two fishermen, Simon called Peter and Andrew his brother, casting a net, and He says, "Follow Me, and I will make you fishers of men" (Matthew 4:19). "They immediately left their nets and followed Him" (Matthew 4:20). A little farther He calls James and John, mending nets in the boat with their father Zebedee, and "immediately they left the boat and their father, and followed Him" (Matthew 4:22). Mark the word Matthew twice repeats: immediately. As Joseph in the opening chapters obeyed God's word without a question, so these men leave nets, boat, and father at the King's call. This is how the kingdom is gathered — not by force, but by a word that summons and a heart that answers. The King who was presented at the Jordan now begins to draw a people to Himself, one call at a time.</p>
+
+<h3>The King Presented</h3>
+<p>By the close of Matthew 4 the King has been fully presented. He was announced by a prophet sent ahead to prepare His way. He was attested at His baptism by the Father's voice and the Spirit's descent. He was proven in the wilderness against the tempter who had ruined the first man. He has taken up His message — repent, for the kingdom is here — and begun to gather the first of His followers. Everything still rests, as Unit 1 said, on who He is; but now the world has been shown who He is. And the same word that fell on Peter and Andrew by the lake falls on every reader still: "Follow Me." The King has been presented to you. The only question is whether, like those first fishermen, you will leave the net and go.</p>
+<div class="scripture">"Follow Me, and I will make you fishers of men." — Matthew 4:19 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Mateo 3:2 (RVG)</strong></p>
+<div class="scripture">"Arrepentíos, porque el reino de los cielos se ha acercado." — Mateo 3:2</div>
+
+<h3>El Rey Da un Paso al Frente</h3>
+<p>En la primera unidad Mateo respondió la pregunta de la identidad: ¿quién es este niño? Es el Hijo de David y el Hijo de Abraham; es Jesús, quien salva a su pueblo de sus pecados; y es Emanuel, Dios con nosotros. Ahora, en los capítulos 3 y 4, el Rey que estaba escondido en Nazaret da un paso al frente para ser presentado a su pueblo. Casi treinta años de silencio han pasado desde que los magos se arrodillaron ante la cuna. Entonces, de golpe, el silencio se rompe. La voz de un profeta clama en el desierto; los cielos se abren sobre un río; un tentador es enfrentado y vencido en un desierto; y los primeros hombres son llamados a seguir. Mateo nos muestra al Rey atestiguado y probado antes de que comience su obra pública — atestiguado por el precursor, por la propia voz del Padre y por el Espíritu que desciende, y probado contra el enemigo que había arruinado al primer hombre. Al final de estos dos capítulos el Rey ha sido presentado, y ha comenzado a reunir un reino.</p>
+
+<h3>La Voz en el Desierto</h3>
+<p>"En aquellos días vino Juan el Bautista predicando en el desierto de Judea, y diciendo: Arrepentíos, porque el reino de los cielos se ha acercado" (Mateo 3:1-2). Mateo ve en Juan al mismísimo heraldo que los profetas anunciaron: "Porque éste es aquel de quien habló el profeta Isaías, diciendo: Voz del que clama en el desierto: Preparad el camino del Señor; enderezad sus sendas" (Mateo 3:3, citando Isaías 40:3). Un rey del mundo antiguo no llegaba sin anuncio; un heraldo iba delante de él para preparar el camino. Juan es ese heraldo. Viene en áspero pelo de camello con un cinto de cuero, comiendo langostas y miel silvestre — un hombre despojado de toda comodidad para que nada en él compita con su mensaje. Las multitudes salen de Jerusalén y de toda Judea, confesando sus pecados y siendo bautizadas en el Jordán. Toda la gloria del heraldo está en que los hombres miren más allá de él hacia Aquel que viene después. Él es, como dice de sí mismo, solo una voz; el Verbo es Otro.</p>
+
+<h3>Arrepentimiento con Raíces</h3>
+<p>Pero cuando Juan ve a muchos de los fariseos y saduceos venir a su bautismo, no los adula. Los llama "generación de víboras" y presiona la única exigencia que menos esperan: "Haced, pues, frutos dignos de arrepentimiento, y no penséis decir dentro de vosotros mismos: A Abraham tenemos por padre" (Mateo 3:8-9). Aquí está el corazón de la predicación de Juan, y todavía nos examina. Los hombres de su día descansaban en su linaje — eran hijos de Abraham, y seguramente eso bastaba. Juan les dice que no basta. Una estirpe no puede arrepentirse; solo una persona puede. El arrepentimiento en la Biblia es más que remordimiento y más que un buen propósito; es un volverse — un apartarse del pecado y un volverse a Dios — y un verdadero volverse da fruto. "Y ya también la segur está puesta a la raíz de los árboles," advierte Juan; "por tanto, todo árbol que no da buen fruto es cortado y echado en el fuego" (Mateo 3:10). No debemos presumir que una crianza cristiana, una membresía en la iglesia o una larga historia familiar ha resuelto el asunto de nuestro corazón. Dios no tiene nietos. Cada alma debe volverse por sí misma.</p>
+
+<h3>Uno Más Poderoso Que Yo</h3>
+<p>Juan conoce el límite de su propia obra. "Yo a la verdad os bautizo en agua para arrepentimiento; pero el que viene tras mí, cuyo calzado no soy digno de llevar, es más poderoso que yo; él os bautizará con el Espíritu Santo y con fuego" (Mateo 3:11). El bautismo de Juan es un bautismo de preparación — agua que confiesa la necesidad de limpieza. Aquel que viene hará lo que el agua no puede: bautizará con el Espíritu Santo, derramando la propia vida de Dios sobre su pueblo. Juan añade también una solemne palabra de juicio: el que viene tiene su aventador en la mano, y recogerá el trigo en el granero, pero quemará la paja en fuego que nunca se apagará (Mateo 3:12). El mismo Rey que salva también juzgará; el evangelio es buena nueva precisamente porque el juicio que responde es real.</p>
+
+<h3>Cumplir Toda Justicia</h3>
+<p>Entonces Aquel a quien Juan anunció llega al río. "Entonces Jesús vino de Galilea a Juan al Jordán, para ser bautizado por él" (Mateo 3:13). Juan retrocede, pues esto está al revés — "Yo necesito ser bautizado por ti, ¿y tú vienes a mí?" (Mateo 3:14). ¿Por qué se sometería el Hijo sin pecado a un bautismo de arrepentimiento, cuando no tenía pecado que confesar? Jesús responde: "Deja ahora, porque así nos conviene cumplir toda justicia" (Mateo 3:15). No está confesando pecado propio; está tomando su lugar junto a los pecadores. Desde el mismo umbral de su ministerio, el Rey desciende al río al lado de los culpables, identificándose con el pueblo que vino a salvar. Es el primer paso de un camino que terminará en una cruz.</p>
+<p>Y al subir del agua, el cielo responde. "Y he aquí los cielos le fueron abiertos, y vio al Espíritu de Dios que descendía como paloma, y venía sobre él. Y he aquí una voz del cielo que decía: Éste es mi Hijo amado, en quien tengo contentamiento" (Mateo 3:16-17). Aquí, en el Jordán, el único Dios se muestra como Padre, Hijo y Espíritu en un solo momento: el Hijo está en el agua, el Espíritu desciende como paloma, el Padre habla desde el cielo. Esto no es tres Dioses sino un solo Dios en tres Personas — una verdad que ninguna mente humana inventó y que ninguna puede sondear del todo, y sin embargo una verdad que la Escritura pone claramente ante nuestros ojos. El Rey es ungido para su obra y declarado abiertamente como el Hijo amado.</p>
+
+<h3>El Verdadero Israel en el Desierto</h3>
+<p>"Entonces Jesús fue llevado por el Espíritu al desierto, para ser tentado por el diablo. Y habiendo ayunado cuarenta días y cuarenta noches, después tuvo hambre" (Mateo 4:1-2). El mismo Espíritu que descendió como paloma ahora lo lleva al desierto para ser probado. Note el número: cuarenta días. El Israel de antaño vagó cuarenta años en el desierto y falló una y otra vez — murmurando por pan, tentando a Dios, apartándose tras los ídolos. Ahora el verdadero Hijo de Dios entra en el mismo desierto, y donde la nación cayó, Él permanece firme. Este es el patrón que nombramos en la Unidad 1 y que hallaremos una y otra vez en Mateo: lo que Dios hizo con su pueblo Israel es tomado y llevado a su verdadera consumación en Jesús. Los eruditos lo llaman recapitulación — Jesús revive la historia de Israel y la hace bien. Es el nuevo Adán, que no cede donde el primer hombre cedió, y el verdadero Israel, fiel donde la nación fue infiel.</p>
+<p>Las tres tentaciones lo prueban en cada punto. Primero el tentador dice: "Si eres Hijo de Dios, di que estas piedras se conviertan en pan" — vuelve tu poder hacia tu propio apetito. Jesús responde desde Deuteronomio: "Escrito está: No sólo de pan vivirá el hombre, sino de toda palabra que sale de la boca de Dios" (Mateo 4:4). Luego Satanás lo pone sobre el pináculo del templo: échate abajo, porque escrito está que los ángeles te sostendrán — fuerza la mano de Dios con un espectáculo. Jesús responde: "No tentarás al Señor tu Dios" (Mateo 4:7). Finalmente el diablo le muestra todos los reinos del mundo y su gloria: "Todo esto te daré, si postrado me adorares" — la corona sin la cruz. Jesús responde: "Vete, Satanás, porque escrito está: Al Señor tu Dios adorarás, y a él sólo servirás" (Mateo 4:10). Tres veces el Rey enfrenta la mentira con "Escrito está," empuñando la misma Escritura que su pueblo había recibido. El tentador lo deja, y vienen ángeles y le sirven. El Rey ha sido probado; no comprará el reino en los términos del enemigo.</p>
+
+<h3>La Luz Ha Resplandecido</h3>
+<p>Cuando Jesús oye que Juan ha sido encarcelado, se retira a Galilea y hace su hogar en Capernaum, junto al mar (Mateo 4:12-13). Mateo, fiel a su gran tema, ve cumplirse una profecía: esta es la región que Isaías llamó "Galilea de los gentiles," donde "el pueblo asentado en tinieblas vio gran luz; y a los asentados en región y sombra de muerte, luz les resplandeció" (Mateo 4:16, citando Isaías 9:1-2). La luz resplandece en el mismo lugar que el mundo tenía por menos. Y entonces Jesús comienza a predicar — y su primera palabra es la palabra de Juan: "Desde entonces comenzó Jesús a predicar, y a decir: Arrepentíos, porque el reino de los cielos se ha acercado" (Mateo 4:17). La antorcha del heraldo pasa al Rey. El clamor que abrió el capítulo en labios de Juan ahora abre el ministerio en labios del Rey mismo, pues Juan nunca fue sino la voz que preparaba el camino para esta palabra.</p>
+
+<h3>Venid en Pos de Mí</h3>
+<p>El primer acto público del Rey no es edificar un trono sino llamar a hombres. Andando junto al mar de Galilea, ve a dos pescadores, Simón llamado Pedro y Andrés su hermano, echando la red, y les dice: "Venid en pos de mí, y os haré pescadores de hombres" (Mateo 4:19). "Ellos entonces, dejando luego las redes, le siguieron" (Mateo 4:20). Un poco más allá llama a Jacobo y a Juan, remendando las redes en la barca con su padre Zebedeo, y "ellos, dejando luego la barca y a su padre, le siguieron" (Mateo 4:22). Note la palabra que Mateo repite: luego, al instante. Como José en los capítulos iniciales obedeció la palabra de Dios sin una pregunta, así estos hombres dejan redes, barca y padre al llamado del Rey. Así se reúne el reino — no por la fuerza, sino por una palabra que convoca y un corazón que responde. El Rey que fue presentado en el Jordán ahora comienza a atraer hacia sí a un pueblo, un llamado a la vez.</p>
+
+<h3>El Rey Presentado</h3>
+<p>Al cierre de Mateo 4 el Rey ha sido plenamente presentado. Fue anunciado por un profeta enviado delante para preparar su camino. Fue atestiguado en su bautismo por la voz del Padre y el descenso del Espíritu. Fue probado en el desierto contra el tentador que había arruinado al primer hombre. Ha tomado su mensaje — arrepentíos, porque el reino está aquí — y ha comenzado a reunir a los primeros de sus seguidores. Todo descansa todavía, como dijo la Unidad 1, en quién es Él; pero ahora al mundo se le ha mostrado quién es. Y la misma palabra que cayó sobre Pedro y Andrés junto al lago cae todavía sobre cada lector: "Venid en pos de mí." El Rey ha sido presentado a usted. La única pregunta es si, como aquellos primeros pescadores, dejará la red e irá.</p>
+<div class="scripture">"Venid en pos de mí, y os haré pescadores de hombres." — Mateo 4:19 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 2 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 2 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Matthew Intensive — Unit 2 (The King Presented, Matthew 3-4)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 2;
+const COURSE = 'matt';
+const NEXT_UNIT_URL = 'CTSMattUnit3.html';
+const totalUnits = 13;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The King's Origins (Matthew 1-2)", "Unit 2 - The King Presented (Matthew 3-4)", "Unit 3 - Sermon on the Mount I: The Character of the Kingdom (Matthew 5)", "Unit 4 - Sermon on the Mount II: The Practice of the Kingdom (Matthew 6-7)", "Unit 5 - The Lord's Prayer (Matthew 6:9-13)", "Unit 6 - The King's Authority: Miracles (Matthew 8-9)", "Unit 7 - The King's Mission and Rising Opposition (Matthew 10-12)", "Unit 8 - The Parables of the Kingdom (Matthew 13)", "Unit 9 - The King and His Church (Matthew 14-18)", "Unit 10 - The Road to Jerusalem (Matthew 19-23)", "Unit 11 - The Olivet Discourse: Last Things (Matthew 24-25)", "Unit 12 - The Passion (Matthew 26-27)", "Unit 13 - The Resurrection and the Great Commission (Matthew 28)"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSMattUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. John the Baptist came preaching in the wilderness of Judea, calling people to:", "textEs": "1. Juan el Bautista vino predicando en el desierto de Judea, llamando a la gente a:", "optionsEn": ["Repent, for the kingdom of heaven is at hand", "Pay the temple tax", "Rebuild the temple", "Take up arms against Rome"], "optionsEs": ["Arrepentirse, porque el reino de los cielos se ha acercado", "Pagar el tributo del templo", "Reconstruir el templo", "Tomar las armas contra Roma"], "explanationEn": "John's message was a call to repentance because the kingdom was near.", "explanationEs": "El mensaje de Juan era un llamado al arrepentimiento porque el reino estaba cerca.", "correct": 0}, {"textEn": "2. Matthew says John fulfilled the word of which prophet — 'The voice of one crying in the wilderness'?", "textEs": "2. Mateo dice que Juan cumplió la palabra de cuál profeta — 'Voz del que clama en el desierto'?", "optionsEn": ["Malachi", "Hosea", "Jeremiah", "Isaiah"], "optionsEs": ["Malaquías", "Oseas", "Jeremías", "Isaías"], "explanationEn": "Matthew cites Isaiah 40:3 to identify John as the promised forerunner.", "explanationEs": "Mateo cita Isaías 40:3 para identificar a Juan como el precursor prometido.", "correct": 3}, {"textEn": "3. John warned the Pharisees and Sadducees not to presume on:", "textEs": "3. Juan advirtió a los fariseos y saduceos que no presumieran de:", "optionsEn": ["Their wealth", "Having Abraham as their father", "Their learning", "Their Roman citizenship"], "optionsEs": ["Su riqueza", "Tener a Abraham por padre", "Su erudición", "Su ciudadanía romana"], "explanationEn": "They rested in their pedigree as children of Abraham; John said that is not enough.", "explanationEs": "Descansaban en su linaje como hijos de Abraham; Juan dijo que eso no basta.", "correct": 1}, {"textEn": "4. John demanded that true repentance be shown by:", "textEs": "4. Juan exigió que el verdadero arrepentimiento se mostrara por:", "optionsEn": ["Bearing fruits worthy of repentance", "Temple sacrifice", "Eloquent prayers", "Forty days of fasting"], "optionsEs": ["Hacer frutos dignos de arrepentimiento", "Sacrificio en el templo", "Oraciones elocuentes", "Cuarenta días de ayuno"], "explanationEn": "Repentance is a turning that bears fruit, not a mere claim of descent.", "explanationEs": "El arrepentimiento es un volverse que da fruto, no una mera pretensión de descendencia.", "correct": 0}, {"textEn": "5. John said the Coming One, mightier than he, would baptize with:", "textEs": "5. Juan dijo que el que venía, más poderoso que él, bautizaría con:", "optionsEn": ["Blood", "Oil and wine", "The Holy Spirit and fire", "Water only"], "optionsEs": ["Sangre", "Aceite y vino", "El Espíritu Santo y fuego", "Agua solamente"], "explanationEn": "John baptized with water; the Coming One baptizes with the Holy Spirit and fire.", "explanationEs": "Juan bautizaba con agua; el que venía bautiza con el Espíritu Santo y fuego.", "correct": 2}, {"textEn": "6. When Jesus came to be baptized, John at first objected because:", "textEs": "6. Cuando Jesús vino a ser bautizado, Juan al principio se opuso porque:", "optionsEn": ["John felt he needed to be baptized by Jesus, not the reverse", "The water was unclean", "It was the Sabbath", "Jesus was unknown to him"], "optionsEs": ["Juan sentía que él necesitaba ser bautizado por Jesús, no al revés", "El agua estaba impura", "Era el día de reposo", "Jesús le era desconocido"], "explanationEn": "John recognized Jesus' greatness and felt the order was backward.", "explanationEs": "Juan reconoció la grandeza de Jesús y sintió que el orden estaba al revés.", "correct": 0}, {"textEn": "7. Jesus explained His baptism by saying it was fitting to:", "textEs": "7. Jesús explicó su bautismo diciendo que convenía:", "optionsEn": ["Rebuke John", "Fulfill all righteousness", "Begin a new law", "Satisfy the crowd"], "optionsEs": ["Reprender a Juan", "Cumplir toda justicia", "Comenzar una nueva ley", "Satisfacer a la multitud"], "explanationEn": "Though sinless, Jesus took His place with sinners to fulfill all righteousness.", "explanationEs": "Aunque sin pecado, Jesús tomó su lugar con los pecadores para cumplir toda justicia.", "correct": 1}, {"textEn": "8. At Jesus' baptism, the Spirit of God descended:", "textEs": "8. En el bautismo de Jesús, el Espíritu de Dios descendió:", "optionsEn": ["As a flame", "Like a dove", "As a rushing wind", "As a thick cloud"], "optionsEs": ["Como llama", "Como paloma", "Como viento recio", "Como nube espesa"], "explanationEn": "The Spirit descended like a dove and rested upon Him.", "explanationEs": "El Espíritu descendió como paloma y reposó sobre Él.", "correct": 1}, {"textEn": "9. The voice from heaven at the baptism declared:", "textEs": "9. La voz del cielo en el bautismo declaró:", "optionsEn": ["'Behold the Lamb of God'", "'Repent and believe'", "'Follow Me'", "'This is My beloved Son, in whom I am well pleased'"], "optionsEs": ["'He aquí el Cordero de Dios'", "'Arrepentíos y creed'", "'Sígueme'", "'Éste es mi Hijo amado, en quien tengo contentamiento'"], "explanationEn": "The Father openly declared Jesus to be His beloved Son.", "explanationEs": "El Padre declaró abiertamente que Jesús es su Hijo amado.", "correct": 3}, {"textEn": "10. The scene at the Jordan reveals the one God as:", "textEs": "10. La escena en el Jordán revela al único Dios como:", "optionsEn": ["The Son alone", "Father and Son only", "Two Persons only", "Father, Son, and Holy Spirit together"], "optionsEs": ["Solo el Hijo", "Solo Padre e Hijo", "Solo dos Personas", "Padre, Hijo y Espíritu Santo juntos"], "explanationEn": "The Son in the water, the Spirit as a dove, the Father's voice — one God in three Persons.", "explanationEs": "El Hijo en el agua, el Espíritu como paloma, la voz del Padre — un Dios en tres Personas.", "correct": 3}, {"textEn": "11. Jesus was led into the wilderness to be tempted by:", "textEs": "11. Jesús fue llevado al desierto para ser tentado por:", "optionsEn": ["The crowds", "The Pharisees", "The devil", "Herod"], "optionsEs": ["Las multitudes", "Los fariseos", "El diablo", "Herodes"], "explanationEn": "He was led by the Spirit into the wilderness to be tempted by the devil.", "explanationEs": "Fue llevado por el Espíritu al desierto para ser tentado por el diablo.", "correct": 2}, {"textEn": "12. Before His temptation, Jesus fasted for:", "textEs": "12. Antes de su tentación, Jesús ayunó por:", "optionsEn": ["Forty days and forty nights", "Three days", "One day", "Seven days"], "optionsEs": ["Cuarenta días y cuarenta noches", "Tres días", "Un día", "Siete días"], "explanationEn": "He fasted forty days and forty nights, recalling Israel's forty years.", "explanationEs": "Ayunó cuarenta días y cuarenta noches, recordando los cuarenta años de Israel.", "correct": 0}, {"textEn": "13. To each of the three temptations, Jesus replied with:", "textEs": "13. A cada una de las tres tentaciones, Jesús respondió con:", "optionsEn": ["'It is written' — words of Scripture", "A miracle", "Silence", "A clever question"], "optionsEs": ["'Escrito está' — palabras de la Escritura", "Un milagro", "Silencio", "Una pregunta ingeniosa"], "explanationEn": "Three times He answered 'It is written,' quoting the Scripture from Deuteronomy.", "explanationEs": "Tres veces respondió 'Escrito está,' citando la Escritura de Deuteronomio.", "correct": 0}, {"textEn": "14. In the first temptation, the devil told Jesus to:", "textEs": "14. En la primera tentación, el diablo le dijo a Jesús que:", "optionsEn": ["Bow down and worship him", "Command stones to become bread", "Leave the wilderness", "Jump from the temple"], "optionsEs": ["Se postrara y lo adorara", "Mandara que las piedras se hicieran pan", "Saliera del desierto", "Saltara del templo"], "explanationEn": "The first temptation urged Him to turn stones to bread for His own appetite.", "explanationEs": "La primera tentación lo instaba a convertir piedras en pan para su propio apetito.", "correct": 1}, {"textEn": "15. To gain all the kingdoms of the world, the devil demanded that Jesus:", "textEs": "15. Para ganar todos los reinos del mundo, el diablo exigió que Jesús:", "optionsEn": ["Return to Nazareth", "Perform a sign", "Fall down and worship him", "Raise an army"], "optionsEs": ["Volviera a Nazaret", "Hiciera una señal", "Se postrara y lo adorara", "Levantara un ejército"], "explanationEn": "Satan offered the kingdoms — the crown without the cross — in exchange for worship.", "explanationEs": "Satanás ofreció los reinos — la corona sin la cruz — a cambio de adoración.", "correct": 2}, {"textEn": "16. That Jesus succeeds in the wilderness (forty days) where Israel failed (forty years) illustrates what the unit calls:", "textEs": "16. Que Jesús triunfe en el desierto (cuarenta días) donde Israel falló (cuarenta años) ilustra lo que la unidad llama:", "optionsEn": ["Justification", "Predestination", "Recapitulation", "Substitution"], "optionsEs": ["Justificación", "Predestinación", "Recapitulación", "Sustitución"], "explanationEn": "Recapitulation: Jesus, the true Israel and new Adam, relives the story and gets it right.", "explanationEs": "Recapitulación: Jesús, el verdadero Israel y nuevo Adán, revive la historia y la hace bien.", "correct": 2}, {"textEn": "17. When John was put in prison, Jesus withdrew and made His home in:", "textEs": "17. Cuando Juan fue encarcelado, Jesús se retiró e hizo su hogar en:", "optionsEn": ["Egypt", "Capernaum in Galilee", "Bethlehem", "Jerusalem"], "optionsEs": ["Egipto", "Capernaum en Galilea", "Belén", "Jerusalén"], "explanationEn": "He withdrew to Galilee and settled in Capernaum by the sea.", "explanationEs": "Se retiró a Galilea y se estableció en Capernaum junto al mar.", "correct": 1}, {"textEn": "18. Matthew sees Jesus' move to Galilee fulfilling Isaiah's word that the people who sat in darkness:", "textEs": "18. Mateo ve el traslado de Jesús a Galilea cumpliendo la palabra de Isaías de que el pueblo asentado en tinieblas:", "optionsEn": ["Would build a temple", "Would be scattered", "Have seen a great light", "Would be judged"], "optionsEs": ["Edificaría un templo", "Sería esparcido", "Vio gran luz", "Sería juzgado"], "explanationEn": "Isaiah 9 foretold a great light dawning on Galilee of the Gentiles.", "explanationEs": "Isaías 9 anunció una gran luz que resplandecería sobre Galilea de los gentiles.", "correct": 2}, {"textEn": "19. When Jesus began to preach, His first message was:", "textEs": "19. Cuando Jesús comenzó a predicar, su primer mensaje fue:", "optionsEn": ["A parable of the sower", "An entirely new commandment", "A prophecy of judgment on Rome", "The same as John's: 'Repent, for the kingdom of heaven is at hand'"], "optionsEs": ["Una parábola del sembrador", "Un mandamiento enteramente nuevo", "Una profecía de juicio sobre Roma", "El mismo de Juan: 'Arrepentíos, porque el reino de los cielos se ha acercado'"], "explanationEn": "Jesus took up the very cry of John, showing the continuity of the message.", "explanationEs": "Jesús retomó el mismo clamor de Juan, mostrando la continuidad del mensaje.", "correct": 3}, {"textEn": "20. When Jesus called Peter, Andrew, James, and John to be 'fishers of men,' they:", "textEs": "20. Cuando Jesús llamó a Pedro, Andrés, Jacobo y Juan a ser 'pescadores de hombres,' ellos:", "optionsEn": ["Refused at first", "Asked for time to decide", "Consulted the Pharisees", "Immediately left their nets, boat, and father and followed Him"], "optionsEs": ["Se negaron al principio", "Pidieron tiempo para decidir", "Consultaron a los fariseos", "Dejaron luego sus redes, la barca y a su padre y le siguieron"], "explanationEn": "They left nets, boat, and father at once — immediate obedience to the King's call.", "explanationEs": "Dejaron redes, barca y padre al instante — obediencia inmediata al llamado del Rey.", "correct": 3}];
+
+const kwQuestions = [{"textEn": "21. Who was John the Baptist, what was his message, and what prophecy did he fulfill?", "textEs": "21. ¿Quién era Juan el Bautista, cuál era su mensaje y qué profecía cumplió?", "kw_en": ["herald", "wilder", "isaiah", "prepar", "repent", "kingdom", "baptis", "voice"], "kw_es": ["heraldo", "desier", "isaías", "prepar", "arrepent", "reino", "bautis", "camino"], "modelEn": "John the Baptist was the herald sent ahead of the King, the one Matthew identifies from Isaiah as the voice crying in the wilderness to prepare the way of the LORD. He came preaching in the wilderness of Judea, and his message was a call to repent, for the kingdom of heaven is at hand. He baptized those who confessed their sins in the Jordan, a baptism of preparation that pointed beyond itself. He fulfilled the prophecy of Isaiah 40:3, that a voice would prepare the road for the coming Lord, so that his whole glory was to make men look past himself to the One who came after.", "modelEs": "Juan el Bautista era el heraldo enviado delante del Rey, aquel a quien Mateo identifica desde Isaías como la voz que clama en el desierto para preparar el camino del Señor. Vino predicando en el desierto de Judea, y su mensaje era un llamado a arrepentirse, porque el reino de los cielos se ha acercado. Bautizaba en el Jordán a los que confesaban sus pecados, un bautismo de preparación que apuntaba más allá de sí mismo. Cumplió la profecía de Isaías 40:3, que una voz prepararía el camino para el Señor que venía, de modo que toda su gloria era hacer que los hombres miraran más allá de él hacia Aquel que vino después."}, {"textEn": "22. Why would John not let the people rest in being 'children of Abraham,' and what is true repentance?", "textEs": "22. ¿Por qué no dejaba Juan que el pueblo descansara en ser 'hijos de Abraham,' y qué es el verdadero arrepentimiento?", "kw_en": ["abraham", "repent", "fruits", "turnin", "pedigr", "presum", "viper", "root"], "kw_es": ["abraham", "arrepent", "frutos", "volver", "linaje", "presum", "víbora", "raíz"], "modelEn": "The people of John's day rested in their pedigree as children of Abraham, presuming that their descent settled the matter of their hearts. John would not allow it; he called the Pharisees and Sadducees a brood of vipers and told them not to presume to say they had Abraham as their father, because a bloodline cannot repent, only a person can. True repentance is more than regret or a good resolution; it is a turning away from sin and a turning back to God, and a real turning bears fruits worthy of repentance. He warned that the axe is already laid to the root of the trees, so that every tree not bearing good fruit is cut down. God has no grandchildren, and each soul must turn for itself.", "modelEs": "Los hombres del día de Juan descansaban en su linaje como hijos de Abraham, presumiendo que su descendencia resolvía el asunto de su corazón. Juan no lo permitía; llamó a los fariseos y saduceos generación de víboras y les dijo que no presumieran de tener a Abraham por padre, porque una estirpe no puede arrepentirse, solo una persona puede. El verdadero arrepentimiento es más que remordimiento o un buen propósito; es un apartarse del pecado y un volverse a Dios, y un verdadero volverse da frutos dignos de arrepentimiento. Advirtió que la segur ya está puesta a la raíz de los árboles, de modo que todo árbol que no da buen fruto es cortado. Dios no tiene nietos, y cada alma debe volverse por sí misma."}, {"textEn": "23. What is the difference between John's baptism with water and the baptism the Coming One would bring?", "textEs": "23. ¿Cuál es la diferencia entre el bautismo de Juan con agua y el bautismo que traería el que venía?", "kw_en": ["water", "repent", "spirit", "mighti", "prepar", "cleans", "holy", "fire"], "kw_es": ["agua", "arrepent", "espíritu", "podero", "prepar", "limpi", "santo", "fuego"], "modelEn": "John's baptism was a baptism with water unto repentance, an act of preparation by which people confessed their need of cleansing; the water itself could not cleanse the heart. John said the One coming after him was mightier than he, and that this One would baptize with the Holy Spirit and fire. The Coming One would do what water cannot, pouring out God's own life upon His people by the Holy Spirit. John also spoke a word of judgment, for the Mightier One holds a winnowing fan to gather the wheat and burn the chaff with fire. So John's water prepared, while the Spirit the King would give actually cleanses and renews.", "modelEs": "El bautismo de Juan era un bautismo con agua para arrepentimiento, un acto de preparación por el cual la gente confesaba su necesidad de limpieza; el agua misma no podía limpiar el corazón. Juan dijo que el que venía tras él era más poderoso que él, y que ese bautizaría con el Espíritu Santo y fuego. El que venía haría lo que el agua no puede, derramando la propia vida de Dios sobre su pueblo por el Espíritu Santo. Juan también habló una palabra de juicio, pues el más poderoso tiene el aventador para recoger el trigo y quemar la paja con fuego. Así el agua de Juan preparaba, mientras el Espíritu que el Rey daría de veras limpia y renueva."}, {"textEn": "24. Why did the sinless Jesus submit to baptism, and what does 'to fulfill all righteousness' mean?", "textEs": "24. ¿Por qué se sometió al bautismo el Jesús sin pecado, y qué significa 'cumplir toda justicia'?", "kw_en": ["righteous", "fulfil", "sinles", "sinner", "identif", "baptis", "jordan", "permit"], "kw_es": ["justicia", "cumplir", "pecado", "identif", "jordán", "bautis", "conviene", "pecador"], "modelEn": "When Jesus came to the Jordan, John objected, since a baptism of repentance seemed backward for the sinless Son who had no sin to confess. Jesus told him to permit it, because thus it was fitting for them to fulfill all righteousness. He was not confessing sin of His own; rather He was taking His place with sinners, identifying Himself from the very threshold of His ministry with the guilty people He came to save. To fulfill all righteousness means He fully obeyed and embraced God's whole saving plan, standing in the river beside the very people He would rescue. It is the first step of a road of identification that would end at the cross.", "modelEs": "Cuando Jesús vino al Jordán, Juan se opuso, pues un bautismo de arrepentimiento parecía al revés para el Hijo sin pecado que no tenía pecado que confesar. Jesús le dijo que lo permitiera, porque así les convenía cumplir toda justicia. No estaba confesando pecado propio; más bien tomaba su lugar con los pecadores, identificándose desde el mismo umbral de su ministerio con el pueblo culpable que vino a salvar. Cumplir toda justicia significa que obedeció plenamente y abrazó todo el plan salvador de Dios, de pie en el río al lado del mismo pueblo que rescataría. Es el primer paso de un camino de identificación que terminaría en la cruz."}, {"textEn": "25. Describe what happened at the Jordan that reveals God as Father, Son, and Holy Spirit.", "textEs": "25. Describa lo que sucedió en el Jordán que revela a Dios como Padre, Hijo y Espíritu Santo.", "kw_en": ["father", "spirit", "dove", "voice", "heaven", "beloved", "trinit", "descen"], "kw_es": ["padre", "espíritu", "paloma", "cielo", "amado", "trinid", "descen", "persona"], "modelEn": "As Jesus came up from the water, the heavens were opened and three things happened together. The Spirit of God descended like a dove and rested upon Him; a voice came from heaven; and the voice was the Father's, saying, This is My beloved Son, in whom I am well pleased. In a single moment at the Jordan the one God is shown as Father, Son, and Holy Spirit: the Son stands in the water, the Spirit descends as a dove, and the Father speaks from heaven. This is not three Gods but one God in three Persons, the truth the church calls the Trinity. No human mind invented it and none can fully fathom it, yet the Scripture sets it plainly before our eyes, and here the King is anointed and declared to be the beloved Son.", "modelEs": "Al subir Jesús del agua, los cielos se abrieron y tres cosas sucedieron juntas. El Espíritu de Dios descendió como paloma y reposó sobre Él; una voz vino del cielo; y la voz era del Padre, que decía: Éste es mi Hijo amado, en quien tengo contentamiento. En un solo momento en el Jordán el único Dios se muestra como Padre, Hijo y Espíritu Santo: el Hijo está en el agua, el Espíritu desciende como paloma, y el Padre habla desde el cielo. Esto no es tres Dioses sino un solo Dios en tres Personas, la verdad que la iglesia llama la Trinidad. Ninguna mente humana lo inventó y ninguna puede sondearlo del todo, pero la Escritura lo pone claramente ante nuestros ojos, y aquí el Rey es ungido y declarado como el Hijo amado."}, {"textEn": "26. Explain the temptation as recapitulation — how Jesus is the true Israel and the new Adam.", "textEs": "26. Explique la tentación como recapitulación — cómo Jesús es el verdadero Israel y el nuevo Adán.", "kw_en": ["wilder", "israel", "forty", "recapitul", "true", "tempt", "faithf", "desert"], "kw_es": ["desier", "israel", "cuarenta", "recapitul", "verdader", "tentad", "fiel", "adán"], "modelEn": "After His baptism Jesus was led by the Spirit into the wilderness, where He fasted forty days and forty nights and was tempted by the devil. The number forty is the key: Israel of old wandered forty years in the desert and failed again and again, grumbling and testing God and turning to idols. Now the true Son of God enters the same wilderness, and where the nation fell, He stands firm. The unit calls this recapitulation, meaning that Jesus relives Israel's story and gets it right. He is the true Israel, faithful where the nation was faithless, and the new Adam, who does not yield where the first man yielded. This is the same double-fulfillment pattern from Unit 1, in which what God did with His people is taken up and completed in Jesus.", "modelEs": "Después de su bautismo Jesús fue llevado por el Espíritu al desierto, donde ayunó cuarenta días y cuarenta noches y fue tentado por el diablo. El número cuarenta es la clave: el Israel de antaño vagó cuarenta años en el desierto y falló una y otra vez, murmurando y tentando a Dios y apartándose tras los ídolos. Ahora el verdadero Hijo de Dios entra en el mismo desierto, y donde la nación cayó, Él permanece firme. La unidad llama a esto recapitulación, queriendo decir que Jesús revive la historia de Israel y la hace bien. Es el verdadero Israel, fiel donde la nación fue infiel, y el nuevo Adán, que no cede donde el primer hombre cedió. Este es el mismo patrón de doble cumplimiento de la Unidad 1, en que lo que Dios hizo con su pueblo es tomado y consumado en Jesús."}, {"textEn": "27. Describe the three temptations and how Jesus answered each.", "textEs": "27. Describa las tres tentaciones y cómo respondió Jesús a cada una.", "kw_en": ["bread", "stone", "temple", "worship", "kingdom", "written", "scriptur", "satan"], "kw_es": ["piedra", "templo", "adora", "reino", "escrito", "escritur", "satanás", "pan"], "modelEn": "In the first temptation the devil told Jesus, who was hungry, to command the stones to become bread, turning His power to His own appetite; Jesus answered from Scripture, Man shall not live by bread alone but by every word that proceeds from the mouth of God. In the second the devil set Him on the pinnacle of the temple and urged Him to throw Himself down to force God's hand; Jesus answered, You shall not tempt the LORD your God. In the third the devil showed Him all the kingdoms of the world and offered them if Jesus would fall down and worship him, the crown without the cross; Jesus answered, Away with you, Satan, for you shall worship the LORD your God and Him only shall you serve. Three times He met the lie with the written Scripture, and the tempter left Him.", "modelEs": "En la primera tentación el diablo dijo a Jesús, que tenía hambre, que mandara que las piedras se hicieran pan, volviendo su poder hacia su propio apetito; Jesús respondió desde la Escritura: No sólo de pan vivirá el hombre, sino de toda palabra que sale de la boca de Dios. En la segunda el diablo lo puso sobre el pináculo del templo y lo instó a echarse abajo para forzar la mano de Dios; Jesús respondió: No tentarás al Señor tu Dios. En la tercera el diablo le mostró todos los reinos del mundo y se los ofreció si Jesús se postraba y lo adoraba, la corona sin la cruz; Jesús respondió: Vete, Satanás, porque al Señor tu Dios adorarás y a él sólo servirás. Tres veces enfrentó la mentira con la Escritura escrita, y el tentador lo dejó."}, {"textEn": "28. How does Matthew see Isaiah's prophecy of light fulfilled when Jesus begins His work in Galilee?", "textEs": "28. ¿Cómo ve Mateo cumplirse la profecía de luz de Isaías cuando Jesús comienza su obra en Galilea?", "kw_en": ["galilee", "isaiah", "light", "darkn", "capernaum", "prophe", "fulfil", "dawn"], "kw_es": ["galilea", "isaías", "tinieb", "capernaum", "profec", "cumpl", "resplan", "sombra"], "modelEn": "When Jesus heard that John had been put in prison, He withdrew to Galilee and made His home in Capernaum by the sea. Matthew, faithful to his theme of fulfillment, sees in this a prophecy of Isaiah coming true. Isaiah had called that region Galilee of the Gentiles and said the people who sat in darkness have seen a great light, and on those in the shadow of death the light has dawned. So the light dawns in the very place the world counted least. Matthew presents Jesus' move not as an accident but as the fulfillment of Isaiah 9, and there Jesus begins to preach and to gather a people, the great light shining where there had been darkness.", "modelEs": "Cuando Jesús oyó que Juan había sido encarcelado, se retiró a Galilea e hizo su hogar en Capernaum junto al mar. Mateo, fiel a su tema del cumplimiento, ve en esto cumplirse una profecía de Isaías. Isaías había llamado a esa región Galilea de los gentiles y dijo que el pueblo asentado en tinieblas vio gran luz, y a los asentados en sombra de muerte la luz les resplandeció. Así la luz resplandece en el mismo lugar que el mundo tenía por menos. Mateo presenta el traslado de Jesús no como un accidente sino como el cumplimiento de Isaías 9, y allí Jesús comienza a predicar y a reunir un pueblo, la gran luz brillando donde había habido tinieblas."}, {"textEn": "29. Why is it significant that Jesus' first preaching is the same as John's, and what does it show about the kingdom?", "textEs": "29. ¿Por qué es significativo que la primera predicación de Jesús sea la misma de Juan, y qué muestra acerca del reino?", "kw_en": ["repent", "kingdom", "heaven", "preach", "messag", "continu", "herald", "torch"], "kw_es": ["arrepent", "reino", "cielo", "predic", "mensaj", "continu", "heraldo", "juan"], "modelEn": "When Jesus began to preach, His first message was the very same as John's: Repent, for the kingdom of heaven is at hand. This is significant because it shows the continuity between the herald and the King; John was only ever the voice preparing the way, and now the torch of that message passes to the One it pointed to. The sameness of the words tells us the kingdom John announced is the kingdom Jesus brings, that repentance is the door into it, and that the nearness of the kingdom is the heart of the gospel from the start. The forerunner's preaching and the King's preaching are one continuous message, with Jesus taking up on His own lips the cry that opened the chapter on the lips of John.", "modelEs": "Cuando Jesús comenzó a predicar, su primer mensaje fue el mismo de Juan: Arrepentíos, porque el reino de los cielos se ha acercado. Esto es significativo porque muestra la continuidad entre el heraldo y el Rey; Juan nunca fue sino la voz que preparaba el camino, y ahora la antorcha de ese mensaje pasa a Aquel a quien señalaba. La igualdad de las palabras nos dice que el reino que Juan anunció es el reino que Jesús trae, que el arrepentimiento es la puerta para entrar, y que la cercanía del reino es el corazón del evangelio desde el comienzo. La predicación del precursor y la predicación del Rey son un solo mensaje continuo, tomando Jesús en sus propios labios el clamor que abrió el capítulo en labios de Juan."}, {"textEn": "30. Describe the calling of the first disciples and what it teaches about how the King gathers His kingdom.", "textEs": "30. Describa el llamado de los primeros discípulos y lo que enseña sobre cómo reúne el Rey su reino.", "kw_en": ["follow", "fisher", "discipl", "immedi", "peter", "andrew", "kingdom", "leave"], "kw_es": ["pescador", "discíp", "luego", "pedro", "andrés", "redes", "reino", "siguie"], "modelEn": "Walking by the Sea of Galilee, Jesus saw the fishermen Simon called Peter and his brother Andrew casting a net, and He said, Follow Me, and I will make you fishers of men; they immediately left their nets and followed Him. A little farther He called James and John, who were mending nets in the boat with their father, and they immediately left the boat and their father and followed Him. The word Matthew repeats is immediately, and as Joseph in the opening chapters obeyed without a question, these first disciples leave nets, boat, and father at the King's call. This teaches that the King gathers His kingdom not by force but by a word that summons and a heart that answers, drawing a people to Himself one call at a time.", "modelEs": "Andando junto al mar de Galilea, Jesús vio a los pescadores Simón llamado Pedro y a su hermano Andrés echando la red, y les dijo: Venid en pos de mí, y os haré pescadores de hombres; ellos, dejando luego las redes, le siguieron. Un poco más allá llamó a Jacobo y a Juan, que remendaban las redes en la barca con su padre, y ellos, dejando luego la barca y a su padre, le siguieron. La palabra que Mateo repite es luego, al instante, y como José en los capítulos iniciales obedeció sin una pregunta, estos primeros discípulos dejan redes, barca y padre al llamado del Rey. Esto enseña que el Rey reúne su reino no por la fuerza sino por una palabra que convoca y un corazón que responde, atrayendo hacia sí a un pueblo un llamado a la vez."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 3 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 3 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSMattReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

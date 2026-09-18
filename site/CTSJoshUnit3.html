@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Joshua Intensive — Unit 3: Crossing the Jordan / Memorial Stones</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-warning { background: #fae8e8; border: 1px solid #efc2c2; border-radius: 12px; padding: 15px; margin-bottom: 20px; color: #8a1f1f; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Unit 2</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 4 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Joshua Intensive — Unit 3: Crossing the Jordan / Memorial Stones</span><span class="lang-es">📖 Intensivo de Josué — Unidad 3: Cruzando el Jordán / Piedras Memoriales</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"That this may be a sign among you when your children ask in time to come, saying, 'What do these stones mean to you?' Then you shall answer them that the waters of the Jordan were cut off before the ark of the covenant of the Lord." — Joshua 4:6–7 (NKJV)</span><span class="lang-es">"Para que esto sea señal entre vosotros; y cuando vuestros hijos preguntaren a sus padres en el tiempo venidero, diciendo: ¿Qué significan estas piedras?, les responderéis: Que las aguas del Jordán fueron cortadas delante del arca del pacto de Jehová." — Josué 4:6-7 (RVG)</span></p>
+</div>
+
+<div id="regWarning" class="reg-warning" style="display:none;">
+    <span class="lang-en">⚠️ You have not yet registered. Please <a href="CTSJoshUnit1.html" style="color:#2f4f2f;">return to Unit 1</a> to register.</span>
+    <span class="lang-es">⚠️ Aún no se ha registrado. Por favor <a href="CTSJoshUnit1.html" style="color:#2f4f2f;">regrese a la Unidad 1</a>.</span>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h2>Orientation</h2>
+<p>Joshua chapters three and four belong together. Chapter three tells us how Israel crossed the Jordan. Chapter four tells us what they did to remember the crossing. The two chapters are a single act in two scenes — the act of crossing, and the act of memorializing. The crossing happened once. The memorial was meant to last for generations. The crossing was a miracle in time. The memorial was a sermon in stone, designed to preach to children not yet born.</p>
+
+<p>The Jordan River at flood stage could be a mile wide and a hundred and fifty feet deep. Two and a half million people, with women and children and livestock and tents and tabernacle, were about to walk across it on dry ground. The Egyptians had seen the Red Sea opened a generation earlier. The Canaanites were about to see the Jordan opened in their own back yard. <em>How do you fight against a God who can stop a river?</em> When the kings of Canaan heard what had happened, the text tells us their hearts melted (5:1). The conquest of Canaan was won, in a real sense, the day the Jordan stood up.</p>
+
+<h2>I. Three Days at the Bank (Joshua 3:1–6)</h2>
+<p>Joshua moves the camp from Acacia Grove to the very edge of the Jordan and waits there three days. The text gives no reason for the delay, but the pattern is striking. Israel is told to look at the river. Look at the priests. Look at the ark. Wait. Watch. <em>Sanctify yourselves, for tomorrow the Lord will do wonders among you</em> (3:5). Sometimes God brings His people right to the edge of impossibility and asks them to stand and look. The waiting is not wasted time. The waiting is part of the preparation. It is in the three days at the riverbank that faith hardens into obedience.</p>
+
+<p>Joshua's first instruction is striking. The priests, carrying the ark of the covenant, are to go ahead of the people. <em>"When you see the ark of the covenant of the Lord your God, and the priests, the Levites, bearing it, then you shall set out from your place and go after it"</em> (3:3). The order of march is theological. The ark — the visible throne of the unseen God — leads. The priests bear it. The people follow. This is not a military formation. This is a worship procession. Israel does not invade Canaan. Israel walks into Canaan behind the presence of God.</p>
+
+<h2>II. Feet First, Then the Miracle (Joshua 3:7–17)</h2>
+<p>Notice carefully the sequence in Joshua 3:13. <em>"And it shall come to pass, as soon as the soles of the feet of the priests who bear the ark of the Lord, the Lord of all the earth, shall rest in the waters of the Jordan, that the waters of the Jordan shall be cut off."</em> The miracle does not happen before the priests step in. The miracle happens <em>when</em> the priests step in. As long as the priests are still on the bank, the river is still flooding. The water does not part until human feet are wet.</p>
+
+<p>This is the rhythm of biblical faith. Faith is not standing on the bank waiting for the miracle. Faith is stepping into the water and trusting that the miracle will meet your feet. Peter walked on water only after he climbed out of the boat. The lepers were healed only after they started walking back to the priest. The widow's oil multiplied only after she started pouring. The Jordan opened only after the priests' soles were wet.</p>
+
+<p>The priests step in. The water from upstream stops in a heap at a town called Adam, miles to the north. The flow downstream toward the Dead Sea drains away. And while two and a half million people cross over on dry ground, the priests stand in the middle of the riverbed with the ark on their shoulders, motionless, until the last Israelite has reached the western bank (3:17). The whole nation walks past the priests. The priests do not move until the people are safely across. That is a picture of pastoral ministry that the centuries have not exhausted.</p>
+
+<div class="pull-quote">Faith is not standing on the bank waiting for the miracle. Faith is stepping into the water and trusting that the miracle will meet your feet.</div>
+
+<h2>III. Two Sets of Stones (Joshua 4:1–9)</h2>
+<p>When the crossing is finished, the Lord gives Joshua an unusual command. He tells him to choose twelve men, one from each tribe, and to have each man pick up a stone from the riverbed where the priests had stood, and carry it across to the western bank. These twelve stones are to be set up at Gilgal as a memorial.</p>
+
+<p>That is the well-known set of stones. There is a less-noticed second set. Joshua himself, the text tells us, sets up another twelve stones <em>in the middle of the Jordan</em>, in the dry riverbed, where the priests' feet had stood (4:9). Two memorials, not one. One on the western bank, where every traveler could see it. One under the water, where only God could see it.</p>
+
+<p>Imagine someone standing at the riverbank watching Joshua do this and grumbling, <em>"Joshua, what are you doing? Once you let the river go again, no one will ever see those stones. Let's get on across this thing while we can. The water is rising."</em> But Joshua is not stacking stones for the people. Joshua is stacking stones for God. He is leaving a marker that no human eye will ever read again, but that God Himself will know is there. Some memorials are public. Some memorials are private. Both matter. Some of God's most precious witness is in the things He alone sees us do.</p>
+
+<h2>IV. The Children Will Ask (Joshua 4:6–7, 21–24)</h2>
+<p>The whole point of the memorial stones, the text tells us twice, is the question of the next generation. <em>"That this may be a sign among you when your children ask in time to come, saying, 'What do these stones mean to you?' Then you shall answer them..."</em> (4:6–7). And again: <em>"When your children ask their fathers in time to come, saying, 'What are these stones?' then you shall let your children know, saying, 'Israel crossed over this Jordan on dry land...'"</em> (4:21–22).</p>
+
+<p>The stones are designed to provoke the question. They are deliberately strange. A pile of twelve oversized boulders dragged out of a riverbed is unusual. A child walking past Gilgal a hundred years later sees them and asks his father, <em>What are these stones?</em> And the father has the obligation, the privilege, and the joy of saying, <em>Son, let me tell you what God did for our family.</em></p>
+
+<p>This is one of the central duties of every Christian household and every Christian church. We must leave stones for the next generation. We must build into our families and our congregations the kind of unmistakable, unexplainable, deliberately strange witnesses to the work of God that will provoke the children to ask <em>What are these stones?</em> If our faith looks like the world's life, our children will not ask the question. If our marriages, our worship, our giving, our priorities, our way of handling suffering — if any of these stand up like a pile of unmistakable stones, the children will ask, and we will be ready to answer.</p>
+
+<h2>V. The German Lamb on the Roof</h2>
+<p>In an old German city there is a sight that catches every traveler who passes through. High up on the peaked roof of one of the old houses, carved in marble, is a statue of a lamb. The traveler asks the local resident what it means. The story comes out. When the original owner of the house was building it, he was working high up on the roof, near the very spot where the marble lamb now stands. He slipped, lost his balance, and fell. He should have been dashed to pieces on the ground below. But at that exact moment, his pet lamb happened to be lying on the green grass below the eaves. The man fell with all his weight onto the lamb. The lamb was crushed. The man stood up unscratched. Not a bone broken. Not a bruise. The lamb lay there in its blood, beneath the body of its master.</p>
+
+<p>The owner carved the marble lamb and lifted it up onto the highest place of his house. Every time he passed under it, he remembered. Every time a stranger asked him about it, he had an opportunity to tell the story. The lamb on the roof was his memorial — a perpetual sign in stone that his life had been spared by the death of an innocent creature taking the fall in his place.</p>
+
+<p>Memorials matter. They keep alive what the rush of life would otherwise let us forget.</p>
+
+<h2>VI. Forty Years to the Day</h2>
+<p>The text gives one detail in chapter four that is easy to miss. The crossing of the Jordan takes place in the first month, the tenth day of the first month (4:19). That is the same day, forty years earlier, that Israel had been told in Egypt to set apart the Passover lamb (Exodus 12:3). The Jews enter the Promised Land on the precise calendar day they had begun the journey. There are no coincidences with God. Just as God planned for Jesus, fifteen hundred years later, to spend forty days in the wilderness mirroring the forty years Israel had spent there, God planned the day Israel would arrive in the Promised Land down to the calendar square. What God intends, God times. What God times, God brings to pass on the appointed day.</p>
+
+<h2>VII. Christian Memorial Stones — The Lord's Supper and Baptism</h2>
+<p>When Jesus gathered with His disciples on the night before He died, He left them a memorial. He did not leave them a stone monument. He did not commission a building. He could have asked for a temple, a pyramid, a basilica. The Great Pyramid at Giza covers thirteen acres of base, contains two and a third million blocks weighing between two and fifteen tons each, and took a hundred thousand men twenty years to build. Jesus could have asked for something like that. He did not.</p>
+
+<p>What He did ask for was bread and a cup. <em>Frequently meet together. Eat a meal with the bread that will remind you of My broken body and the cup that will remind you of My blood. Look into the faces of one another, and love one another as I did when I was with men. While you remember My cross, remember that I am coming for you. And wherever you thus meet, I will meet with you.</em> Stone monuments crumble. Pyramids erode. The Church of the Nativity at Bethlehem becomes a tourist stop. But this simple meal, repeated for two thousand years across every continent and language, is as fresh and as inspiring today as it was the night He gave it. The Lord's Supper is the Christian's memorial stone in the Jordan — a memorial we set up to remember a crossing that has already taken place, the crossing of the Son of God through death and out the other side.</p>
+
+<p>And then there is baptism. Romans 6 tells us that when we are baptized, we are joined to the death, burial, and resurrection of Jesus. The water is not the salvation. The water is the marker. We go down into the water and we come up out of the water as a public memorial of the day we crossed our own Jordan and entered our own Promised Land. Years later, when temptation comes, when the old life calls, when we wonder whether we really belonged to Christ, we can look back on that day and say, <em>I was buried with Him there. I was raised with Him there. I have already crossed.</em></p>
+
+<p>This is also why I have a habit, when I lead someone to Christ, of having them kneel down to pray. They could pray sitting in their chair. They could pray walking down the road. The kneeling does not save them — Christ does. But the kneeling is a marker. Ten years later, when the doubt comes, when the question comes, <em>did I really mean it?</em> — they can look back to the day they knelt by the chair, and the kneel itself is a stone in the riverbed they can return to. Markers matter. Memorials hold.</p>
+
+<h2>VIII. The Lock of Hair</h2>
+<p>An old man once received a visitor in his home, and during the conversation he produced a lock of hair from a small box. The visitor said, <em>"I imagine that is a curl from the head of some dear child long since gone to be with God."</em> The old man said, <em>"No. That is a lock of my own hair, and it is now almost seventy years since it was cut from my head."</em></p>
+
+<p>Then the old man told the story. When he was a little boy of four, he was standing near his father in the yard watching him chop wood. As the splinters flew, the boy bent down to gather some at his feet. As he bent, he fell forward, and his curly head landed on the chopping log just as his father swung the axe. It was too late to stop the blow. The axe came down. The boy screamed. The father fell to the ground in terror, certain he had killed his only son. They both sat there shaking. When the father finally took the boy in his arms and searched him from head to foot, there was not a scar, not a drop of blood, not a wound. Only a lock of hair sliced off cleanly by the blade of the axe. The boy was untouched. The angel of the Lord had stood between the axe and the child.</p>
+
+<p>The father saved that lock of hair for the rest of his life. It became his memorial of God's care. When he died, he passed it to his son. The old man held it up to his visitor and said, <em>"I have many tokens of my heavenly Father's love through these long years. But somehow this one speaks most plainly to my heart. It used to speak to my father's heart. It now speaks to mine."</em></p>
+
+<p>That is a memorial stone. That is a sermon in a small box. That is the kind of thing every believer ought to have somewhere — a tangible reminder of a moment when God's hand stopped the axe. We all have such moments if we will pay attention. The night we should have died and did not. The phone call we should have gotten and did not. The temptation we should have fallen into and did not. The financial collapse that should have buried us and did not. Find your stones. Pile them up at your Gilgal. Tell the story to your children when they ask.</p>
+
+<h2>IX. The Plaque in the Wrong Place</h2>
+<p>Memorials can also be misunderstood. A pastor once gave a tour of his church auditorium to a young family. He pointed out the various memorial plaques that lined the walls — the window in memory of one family, the organ in memory of another, the pulpit in memory of a third. Finally he stopped at a small plaque on the back wall and said, <em>"And this plaque lists the names of those who died in the service."</em> A little boy looked up at his father with wide eyes and asked, <em>"Mister, which one? The morning service or the evening service?"</em></p>
+
+<p>Some memorials need explaining. That is the whole point of a stone. The stone provokes the question, and the answer is the gospel. If a believer's life produces no questions, then no answer is ever called for. Live in such a way that people ask you about the stones.</p>
+
+<h2>Closing</h2>
+<p>The chapter ends with Israel camped at Gilgal, the twelve stones standing as a witness, the memory of the priests in the riverbed fresh in everyone's mind, and the walls of Jericho standing six miles away in plain sight. The crossing is finished. The memorial is built. The next obstacle is already on the horizon. But Israel will fight that battle from a different position than they had at the start of the chapter. They have been on the eastern bank. Now they are on the western. They have been a wandering people. Now they are a people of the land. Between the two stands a pile of twelve stones, the marker of a moment when God did the impossible and they walked through the place where the river used to be.</p>
+
+<p>Whoever you are, build your memorials. Mark the places of God's deliverance in your life. Tell the stories. Pass them down. Set up the bread and the cup. Walk through the waters of baptism. Kneel to pray. Save the lock of hair. Lift the marble lamb to the highest place on your house. The God who carried you across once did not do it for you alone. He did it so that the children, three generations from now, would ask <em>What are these stones?</em> and someone would still be alive who knew the answer.</p>
+
+</div>
+
+<div class="lang-es">
+
+<h2>Orientación</h2>
+<p>Josué capítulos tres y cuatro pertenecen juntos. El capítulo tres nos dice cómo Israel cruzó el Jordán. El capítulo cuatro nos dice qué hicieron para recordar el cruce. Los dos capítulos son un solo acto en dos escenas — el acto de cruzar, y el acto de conmemorar. El cruce sucedió una vez. El memorial fue diseñado para durar generaciones.</p>
+
+<p>El río Jordán en pleno desbordamiento podía ser de una milla de ancho y ciento cincuenta pies de profundidad. Dos millones y medio de personas, con mujeres y niños y ganado y tiendas y tabernáculo, estaban a punto de cruzarlo en suelo seco. Los egipcios habían visto el Mar Rojo abrirse una generación antes. Los cananeos estaban a punto de ver el Jordán abrirse en su propio patio trasero. <em>¿Cómo peleas contra un Dios que puede detener un río?</em> Cuando los reyes de Canaán oyeron lo que había sucedido, el texto nos dice que sus corazones se derritieron (5:1). La conquista de Canaán fue ganada, en un sentido real, el día que el Jordán se levantó.</p>
+
+<h2>I. Tres días a la orilla (Josué 3:1-6)</h2>
+<p>Josué mueve el campamento de Sitim hasta el borde mismo del Jordán y espera ahí tres días. El texto no da razón para la demora, pero el patrón es notable. A Israel se le dice que mire el río. Que mire a los sacerdotes. Que mire el arca. Que espere. Que observe. <em>Santificaos, porque mañana Jehová hará maravillas entre vosotros</em> (3:5). A veces Dios trae a Su pueblo justo al borde de lo imposible y les pide que se paren y miren. La espera no es tiempo perdido. La espera es parte de la preparación. Es en los tres días a la orilla del río que la fe se endurece en obediencia.</p>
+
+<p>La primera instrucción de Josué es notable. Los sacerdotes, llevando el arca del pacto, deben ir delante del pueblo. <em>"Cuando viereis el arca del pacto de Jehová vuestro Dios, y los levitas sacerdotes que la llevan, vosotros partiréis de vuestro lugar y marcharéis en pos de ella"</em> (3:3). El orden de marcha es teológico. El arca — el trono visible del Dios invisible — guía. Los sacerdotes la llevan. El pueblo sigue. Esto no es una formación militar. Esto es una procesión de adoración. Israel no invade a Canaán. Israel camina a Canaán detrás de la presencia de Dios.</p>
+
+<h2>II. Primero los pies, luego el milagro (Josué 3:7-17)</h2>
+<p>Note cuidadosamente la secuencia en Josué 3:13. <em>"Y cuando las plantas de los pies de los sacerdotes que llevan el arca de Jehová, Señor de toda la tierra, se asienten en las aguas del Jordán, las aguas del Jordán se cortarán."</em> El milagro no sucede antes de que los sacerdotes entren. El milagro sucede <em>cuando</em> los sacerdotes entran. Mientras los sacerdotes estén todavía en la orilla, el río sigue desbordando. El agua no se parte hasta que los pies humanos están mojados.</p>
+
+<p>Este es el ritmo de la fe bíblica. La fe no es pararse en la orilla esperando el milagro. La fe es entrar al agua y confiar en que el milagro encontrará tus pies. Pedro caminó sobre el agua solo después de salir de la barca. Los leprosos fueron sanados solo después de comenzar a caminar de regreso al sacerdote. El aceite de la viuda se multiplicó solo después de que ella comenzó a verter. El Jordán se abrió solo después de que las plantas de los sacerdotes estuvieron mojadas.</p>
+
+<p>Los sacerdotes entran. El agua de río arriba se detiene en un montón en una ciudad llamada Adam, millas al norte. El flujo río abajo hacia el Mar Muerto se drena. Y mientras dos millones y medio de personas cruzan al otro lado en suelo seco, los sacerdotes se paran en medio del lecho del río con el arca sobre sus hombros, inmóviles, hasta que el último israelita haya alcanzado la orilla occidental (3:17). La nación entera camina más allá de los sacerdotes. Los sacerdotes no se mueven hasta que el pueblo esté sano y salvo al otro lado. Esa es una imagen del ministerio pastoral que los siglos no han agotado.</p>
+
+<div class="pull-quote">La fe no es pararse en la orilla esperando el milagro. La fe es entrar al agua y confiar en que el milagro encontrará tus pies.</div>
+
+<h2>III. Dos juegos de piedras (Josué 4:1-9)</h2>
+<p>Cuando el cruce está terminado, el Señor le da a Josué un mandamiento inusual. Le dice que escoja a doce hombres, uno de cada tribu, y que cada hombre tome una piedra del lecho del río donde los sacerdotes habían estado, y la lleve al otro lado a la orilla occidental. Estas doce piedras serán colocadas en Gilgal como memorial.</p>
+
+<p>Ese es el conocido juego de piedras. Hay un segundo juego menos notado. Josué mismo, nos dice el texto, coloca otras doce piedras <em>en medio del Jordán</em>, en el lecho seco del río, donde los pies de los sacerdotes habían estado (4:9). Dos memoriales, no uno. Uno en la orilla occidental, donde cada viajero podía verlo. Uno bajo el agua, donde solo Dios podía verlo.</p>
+
+<p>Imagine a alguien parado a la orilla del río viendo a Josué hacer esto y refunfuñando: <em>"Josué, ¿qué estás haciendo? Una vez que dejes ir el río de nuevo, nadie verá esas piedras jamás. Vamos a cruzar esta cosa mientras podamos. El agua está subiendo."</em> Pero Josué no está apilando piedras para el pueblo. Josué está apilando piedras para Dios. Está dejando un marcador que ningún ojo humano leerá jamás, pero que Dios mismo sabrá que está ahí. Algunos memoriales son públicos. Algunos memoriales son privados. Ambos importan. Algunos de los testimonios más preciosos de Dios están en las cosas que solo Él nos ve hacer.</p>
+
+<h2>IV. Los hijos preguntarán (Josué 4:6-7, 21-24)</h2>
+<p>El propósito de las piedras memoriales, nos dice el texto dos veces, es la pregunta de la siguiente generación. <em>"Para que esto sea señal entre vosotros; y cuando vuestros hijos preguntaren a sus padres en el tiempo venidero, diciendo: ¿Qué significan estas piedras?, les responderéis..."</em> (4:6-7). Y de nuevo: <em>"Cuando mañana preguntaren vuestros hijos a sus padres, y dijeren: ¿Qué significan estas piedras?, declararéis a vuestros hijos, diciendo: Israel pasó en seco por este Jordán..."</em> (4:21-22).</p>
+
+<p>Las piedras son diseñadas para provocar la pregunta. Son deliberadamente extrañas. Una pila de doce piedras enormes arrastradas de un lecho de río es inusual. Un niño caminando junto a Gilgal cien años después las ve y le pregunta a su padre: <em>¿Qué son estas piedras?</em> Y el padre tiene la obligación, el privilegio, y el gozo de decir: <em>Hijo, déjame decirte lo que Dios hizo por nuestra familia.</em></p>
+
+<p>Esta es una de las deberes centrales de cada hogar cristiano y cada iglesia cristiana. Debemos dejar piedras para la siguiente generación. Debemos edificar dentro de nuestras familias y nuestras congregaciones la clase de testimonios inconfundibles, inexplicables, deliberadamente extraños de la obra de Dios que provocarán a los niños a preguntar <em>¿Qué son estas piedras?</em> Si nuestra fe se ve como la vida del mundo, nuestros hijos no harán la pregunta. Si nuestros matrimonios, nuestra adoración, nuestra entrega, nuestras prioridades, nuestra manera de manejar el sufrimiento — si cualquiera de estas se levanta como una pila de piedras inconfundibles, los niños preguntarán, y nosotros estaremos listos para responder.</p>
+
+<h2>V. El cordero alemán en el tejado</h2>
+<p>En una vieja ciudad alemana hay una vista que atrae a cada viajero que pasa. Alto en el tejado puntiagudo de una de las viejas casas, tallada en mármol, hay una estatua de un cordero. El viajero pregunta al residente local qué significa. La historia sale. Cuando el dueño original de la casa la estaba construyendo, estaba trabajando en lo alto del tejado, cerca del lugar mismo donde ahora se encuentra el cordero de mármol. Resbaló, perdió el equilibrio, y cayó. Debió haber sido despedazado en el suelo abajo. Pero en ese momento exacto, su cordero mascota estaba descansando en el césped verde debajo del alero. El hombre cayó con todo su peso sobre el cordero. El cordero fue aplastado. El hombre se levantó sin un rasguño. Ni un hueso roto. Ni un moretón. El cordero yacía ahí en su sangre, debajo del cuerpo de su amo.</p>
+
+<p>El dueño talló el cordero de mármol y lo levantó al lugar más alto de su casa. Cada vez que pasaba debajo de él, recordaba. Cada vez que un extraño le preguntaba sobre él, tenía una oportunidad de contar la historia. El cordero en el tejado era su memorial — una señal perpetua en piedra de que su vida había sido salvada por la muerte de una criatura inocente tomando la caída en su lugar.</p>
+
+<p>Los memoriales importan. Mantienen vivo lo que el apuro de la vida nos haría olvidar.</p>
+
+<h2>VI. Cuarenta años al día</h2>
+<p>El texto da un detalle en el capítulo cuatro que es fácil pasar por alto. El cruce del Jordán toma lugar en el primer mes, el día diez del primer mes (4:19). Ese es el mismo día, cuarenta años antes, que a Israel se le había dicho en Egipto que apartara el cordero pascual (Éxodo 12:3). Los judíos entran en la Tierra Prometida en el día calendario preciso en que habían comenzado el viaje. No hay coincidencias con Dios. Tal como Dios planeó que Jesús, mil quinientos años después, pasaría cuarenta días en el desierto reflejando los cuarenta años que Israel había pasado allí, Dios planeó el día que Israel llegaría a la Tierra Prometida hasta el cuadro del calendario. Lo que Dios intenta, Dios cronometra. Lo que Dios cronometra, Dios lleva a cabo en el día señalado.</p>
+
+<h2>VII. Piedras memoriales cristianas — La Cena del Señor y el Bautismo</h2>
+<p>Cuando Jesús se reunió con Sus discípulos la noche antes de morir, les dejó un memorial. No les dejó un monumento de piedra. No comisionó un edificio. Pudo haber pedido un templo, una pirámide, una basílica. La Gran Pirámide en Giza cubre trece acres de base, contiene dos millones y un tercio de bloques que pesan entre dos y quince toneladas cada uno, y tomó cien mil hombres veinte años para construir. Jesús pudo haber pedido algo así. No lo hizo.</p>
+
+<p>Lo que pidió fue pan y una copa. <em>Reunámonos frecuentemente. Comamos una comida con el pan que les recordará Mi cuerpo quebrado y la copa que les recordará Mi sangre. Vean los rostros unos de otros, y ámense unos a otros como Yo lo hice cuando estaba con los hombres. Mientras recuerdan Mi cruz, recuerden que vengo por ustedes. Y dondequiera que se reúnan así, Yo me reuniré con ustedes.</em> Los monumentos de piedra se desmoronan. Las pirámides se erosionan. La Iglesia de la Natividad en Belén se vuelve una parada turística. Pero esta sencilla comida, repetida por dos mil años a través de cada continente y lengua, está tan fresca y tan inspiradora hoy como lo estaba la noche en que Él la dio. La Cena del Señor es la piedra memorial del cristiano en el Jordán — un memorial que establecemos para recordar un cruce que ya ha tenido lugar, el cruce del Hijo de Dios a través de la muerte y al otro lado.</p>
+
+<p>Y luego está el bautismo. Romanos 6 nos dice que cuando somos bautizados, somos unidos a la muerte, sepultura, y resurrección de Jesús. El agua no es la salvación. El agua es el marcador. Bajamos al agua y subimos del agua como un memorial público del día que cruzamos nuestro propio Jordán y entramos en nuestra propia Tierra Prometida. Años después, cuando viene la tentación, cuando llama la vida vieja, cuando nos preguntamos si verdaderamente pertenecíamos a Cristo, podemos mirar atrás a ese día y decir, <em>fui sepultado con Él allí. Fui resucitado con Él allí. Ya he cruzado.</em></p>
+
+<p>Esto es también por qué tengo el hábito, cuando guío a alguien a Cristo, de hacer que se arrodille para orar. Podrían orar sentados en su silla. Podrían orar caminando por la calle. El arrodillarse no los salva — Cristo lo hace. Pero el arrodillarse es un marcador. Diez años después, cuando viene la duda, cuando viene la pregunta, <em>¿realmente lo dije en serio?</em> — pueden mirar atrás al día en que se arrodillaron junto a la silla, y la rodilla misma es una piedra en el lecho del río a la que pueden regresar. Los marcadores importan. Los memoriales sostienen.</p>
+
+<h2>VIII. El rizo de cabello</h2>
+<p>Un anciano una vez recibió a un visitante en su casa, y durante la conversación sacó un rizo de cabello de una pequeña caja. El visitante dijo: <em>"Imagino que es un rizo de la cabeza de algún niño querido hace tiempo ido para estar con Dios."</em> El anciano dijo: <em>"No. Ese es un rizo de mi propio cabello, y han pasado casi setenta años desde que fue cortado de mi cabeza."</em></p>
+
+<p>Entonces el anciano contó la historia. Cuando era un pequeño niño de cuatro años, estaba parado cerca de su padre en el patio mirándolo cortar madera. Mientras las astillas volaban, el niño se agachó para recoger algunas a sus pies. Mientras se agachaba, cayó hacia adelante, y su cabeza rizada aterrizó en el tronco de cortar justo cuando su padre balanceaba el hacha. Era demasiado tarde para detener el golpe. El hacha bajó. El niño gritó. El padre cayó al suelo en terror, seguro de que había matado a su único hijo. Ambos se sentaron allí temblando. Cuando el padre finalmente tomó al niño en sus brazos y lo examinó de cabeza a pies, no había ni una cicatriz, ni una gota de sangre, ni una herida. Solo un rizo de cabello cortado limpiamente por el filo del hacha. El niño estaba intacto. El ángel del Señor había estado entre el hacha y el niño.</p>
+
+<p>El padre guardó ese rizo de cabello por el resto de su vida. Se convirtió en su memorial del cuidado de Dios. Cuando murió, lo pasó a su hijo. El anciano lo levantó hacia su visitante y dijo: <em>"Tengo muchas señales del amor de mi Padre celestial a través de estos largos años. Pero de alguna manera esta habla más claramente a mi corazón. Solía hablar al corazón de mi padre. Ahora habla al mío."</em></p>
+
+<p>Esa es una piedra memorial. Ese es un sermón en una pequeña caja. Esa es la clase de cosa que cada creyente debiera tener en algún lugar — un recordatorio tangible de un momento cuando la mano de Dios detuvo el hacha. Todos tenemos tales momentos si prestamos atención. La noche en que debiéramos haber muerto y no morimos. La llamada telefónica que debiéramos haber recibido y no recibimos. La tentación en la que debiéramos haber caído y no caímos. El colapso financiero que debiera habernos sepultado y no lo hizo. Encuentre sus piedras. Apílelas en su Gilgal. Cuente la historia a sus hijos cuando pregunten.</p>
+
+<h2>IX. La placa en el lugar equivocado</h2>
+<p>Los memoriales también pueden ser malentendidos. Un pastor una vez dio un recorrido por el auditorio de su iglesia a una familia joven. Señaló las varias placas memoriales que cubrían las paredes — la ventana en memoria de una familia, el órgano en memoria de otra, el púlpito en memoria de una tercera. Finalmente se detuvo en una placa pequeña en la pared trasera y dijo: <em>"Y esta placa lista los nombres de aquellos que murieron en el servicio."</em> Un niño pequeño miró a su padre con ojos abiertos y preguntó: <em>"Señor, ¿cuál? ¿El servicio de la mañana o el de la noche?"</em></p>
+
+<p>Algunos memoriales necesitan explicación. Ese es todo el punto de una piedra. La piedra provoca la pregunta, y la respuesta es el evangelio. Si la vida de un creyente no produce preguntas, entonces ninguna respuesta es jamás necesaria. Vivan de tal manera que la gente les pregunte sobre las piedras.</p>
+
+<h2>Cierre</h2>
+<p>El capítulo termina con Israel acampado en Gilgal, las doce piedras en pie como testigo, la memoria de los sacerdotes en el lecho del río fresca en la mente de todos, y los muros de Jericó parados a seis millas de distancia a plena vista. El cruce está terminado. El memorial está construido. El siguiente obstáculo ya está en el horizonte. Pero Israel peleará esa batalla desde una posición diferente que tenían al inicio del capítulo. Han estado en la orilla oriental. Ahora están en la occidental. Han sido un pueblo errante. Ahora son un pueblo de la tierra. Entre los dos hay una pila de doce piedras, el marcador de un momento cuando Dios hizo lo imposible y ellos caminaron a través del lugar donde el río solía estar.</p>
+
+<p>Quienquiera que usted sea, edifique sus memoriales. Marque los lugares de la liberación de Dios en su vida. Cuente las historias. Pásalas. Establezca el pan y la copa. Camine a través de las aguas del bautismo. Arrodíllese a orar. Guarde el rizo de cabello. Levante el cordero de mármol al lugar más alto de su casa. El Dios que lo cargó al otro lado una vez no lo hizo solo por usted. Lo hizo para que los niños, tres generaciones desde ahora, pregunten <em>¿Qué son estas piedras?</em> y alguien todavía esté vivo que sepa la respuesta.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 3 Final Exam — 30 Questions</span><span class="lang-es">Examen Final — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>Fail the multiple-choice (1–20) and it locks for 2 minutes; fail the master's-level short answer (21–30) and it locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba la opción múltiple (1–20), se bloquea por 2 minutos; si reprueba la respuesta corta de nivel de maestría (21–30), se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// CTS Joshua — Unit 3 (retrofit 2026-05-16) | MC L3 verified | 5/5/5/5 | split kw
+
+const UNIT = 3;
+const COURSE = 'josh';
+const NEXT_UNIT_URL = 'CTSJoshUnit4.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "The Commission (Joshua 1)",
+    "Rahab and the Scarlet Cord (Joshua 2)",
+    "Crossing the Jordan / Memorial Stones (Joshua 3-4)",
+    "Captain of the Lord's Host / Jericho (Joshua 5-6)",
+    "Achan's Sin and Ai Restored (Joshua 7-8)",
+    "Gibeonite Deception and the Long Day (Joshua 9-10)",
+    "Northern Conquest / Kings Defeated (Joshua 11-12)",
+    "The Inheritance Allotted (Joshua 13-19)",
+    "Cities of Refuge / Altar of Witness (Joshua 20-22)",
+    "Choose This Day (Joshua 23-24) - Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSJoshUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC: A=B=C=D=5 (cycle 0,1,2,3 ×5). L3 audit: all 20 verified against Joshua 3-4.
+const mcQuestions = [
+    { textEn: "1. Joshua 3-4 records the crossing of which river?", textEs: "1. Josué 3-4 registra el cruce de cuál río?",
+      optionsEn: ["The Jordan", "The Nile", "The Euphrates", "The Tigris"],
+      optionsEs: ["El Jordán", "El Nilo", "El Éufrates", "El Tigris"], correct: 0 },
+    { textEn: "2. According to Joshua 3:13, the waters of the Jordan were cut off:", textEs: "2. Según Josué 3:13, las aguas del Jordán fueron cortadas:",
+      optionsEn: ["Before the priests reached the bank", "When the soles of the priests' feet rested in the waters", "After the entire nation had crossed", "Three days before the crossing"],
+      optionsEs: ["Antes de que los sacerdotes llegaran a la orilla", "Cuando las plantas de los pies de los sacerdotes se asentaron en las aguas", "Después de que toda la nación había cruzado", "Tres días antes del cruce"], correct: 1 },
+    { textEn: "3. The order of march at the crossing was:", textEs: "3. El orden de marcha en el cruce fue:",
+      optionsEn: ["Soldiers first, then priests", "The priests bearing the ark first, then the people followed", "All twelve tribes simultaneously", "Joshua and Caleb first"],
+      optionsEs: ["Soldados primero, luego sacerdotes", "Los sacerdotes con el arca primero, luego el pueblo siguió", "Las doce tribus simultáneamente", "Josué y Caleb primero"], correct: 1 },
+    { textEn: "4. The priests carrying the ark stood in the middle of the riverbed:", textEs: "4. Los sacerdotes llevando el arca se pararon en medio del lecho del río:",
+      optionsEn: ["For one minute", "Until Joshua signaled retreat", "Until the entire nation had crossed safely", "Only at the start of the crossing"],
+      optionsEs: ["Por un minuto", "Hasta que Josué señalara retirada", "Hasta que toda la nación había cruzado sano y salvo", "Solo al inicio del cruce"], correct: 2 },
+    { textEn: "5. How many memorial stones were taken from the riverbed and set up at Gilgal?", textEs: "5. ¿Cuántas piedras memoriales fueron tomadas del lecho del río y colocadas en Gilgal?",
+      optionsEn: ["Seven", "Forty", "Twelve — one for each tribe", "Three"],
+      optionsEs: ["Siete", "Cuarenta", "Doce — una para cada tribu", "Tres"], correct: 2 },
+    { textEn: "6. In addition to the twelve stones at Gilgal, Joshua himself set up:", textEs: "6. Además de las doce piedras en Gilgal, Josué mismo colocó:",
+      optionsEn: ["A second set of twelve stones in the middle of the Jordan, where the priests had stood", "An altar on Mount Ebal", "A bronze pillar", "A wooden post"],
+      optionsEs: ["Un segundo juego de doce piedras en medio del Jordán, donde los sacerdotes habían estado", "Un altar en el Monte Ebal", "Una columna de bronce", "Un poste de madera"], correct: 0 },
+    { textEn: "7. The stated purpose of the memorial stones was:", textEs: "7. El propósito declarado de las piedras memoriales fue:",
+      optionsEn: ["To mark the boundary between tribes", "To honor fallen soldiers", "So that when children ask 'What do these stones mean?' parents would answer with the story of God's deliverance", "To decorate the altar of sacrifice"],
+      optionsEs: ["Marcar la frontera entre tribus", "Honrar a los soldados caídos", "Que cuando los niños pregunten '¿Qué significan estas piedras?' los padres respondan con la historia de la liberación de Dios", "Decorar el altar de sacrificio"], correct: 2 },
+    { textEn: "8. The German marble lamb statue on the rooftop illustrates:", textEs: "8. La estatua del cordero de mármol alemán en el tejado ilustra:",
+      optionsEn: ["European architectural style", "Pet ownership in old Germany", "Childhood ambition", "A perpetual memorial of an innocent substitute taking the fall in the master's place"],
+      optionsEs: ["Estilo arquitectónico europeo", "Posesión de mascotas en la vieja Alemania", "Ambición de la infancia", "Un memorial perpetuo de un sustituto inocente tomando la caída en lugar del amo"], correct: 3 },
+    { textEn: "9. Israel crossed the Jordan on:", textEs: "9. Israel cruzó el Jordán el:",
+      optionsEn: ["Pentecost", "The tenth day of the first month — exactly forty years to the day from the Passover instructions of the Exodus", "The Day of Atonement", "Tabernacles"],
+      optionsEs: ["Pentecostés", "Décimo día del primer mes — exactamente cuarenta años al día desde las instrucciones de la Pascua del Éxodo", "El Día de la Expiación", "Tabernáculos"], correct: 1 },
+    { textEn: "10. The Christian's primary memorial of Christ's death is:", textEs: "10. El memorial cristiano principal de la muerte de Cristo es:",
+      optionsEn: ["The Lord's Supper — bread and cup", "The crucifix", "The cross necklace", "The empty tomb in Jerusalem"],
+      optionsEs: ["La Cena del Señor — pan y copa", "El crucifijo", "El collar de la cruz", "La tumba vacía en Jerusalén"], correct: 0 },
+    { textEn: "11. According to Romans 6:1-4, baptism is a memorial of:", textEs: "11. Según Romanos 6:1-4, el bautismo es un memorial de:",
+      optionsEn: ["Becoming a church member", "Family tradition", "The believer's union with Christ in His death, burial, and resurrection", "Confession of sin"],
+      optionsEs: ["Volverse miembro de la iglesia", "Tradición familiar", "La unión del creyente con Cristo en Su muerte, sepultura, y resurrección", "Confesión del pecado"], correct: 2 },
+    { textEn: "12. The professor's habit of having new converts kneel to pray serves as:", textEs: "12. El hábito del profesor de hacer que los nuevos convertidos se arrodillen para orar sirve como:",
+      optionsEn: ["A liturgical requirement", "A test of sincerity", "A cultural courtesy", "A physical marker the believer can return to in years of doubt"],
+      optionsEs: ["Un requisito litúrgico", "Una prueba de sinceridad", "Una cortesía cultural", "Un marcador físico al que el creyente puede regresar en años de duda"], correct: 3 },
+    { textEn: "13. The lock-of-hair story (the four-year-old boy and his father's axe) is preserved as:", textEs: "13. La historia del rizo de cabello (el niño de cuatro años y el hacha de su padre) se preserva como:",
+      optionsEn: ["A medical curiosity", "A warning against unsupervised children", "A Civil War souvenir", "A father's tangible memorial of God's protective care, passed down to his son"],
+      optionsEs: ["Una curiosidad médica", "Una advertencia contra niños sin supervisión", "Un recuerdo de la Guerra Civil", "El memorial tangible del padre del cuidado protector de Dios, pasado a su hijo"], correct: 3 },
+    { textEn: "14. The principle 'feet first, then the miracle' teaches that:", textEs: "14. El principio 'primero los pies, luego el milagro' enseña que:",
+      optionsEn: ["Miracles are random", "The priests acted independently of God's command", "Israel had no faith at the bank", "Faith steps into the water trusting that the miracle will meet its feet"],
+      optionsEs: ["Los milagros son aleatorios", "Los sacerdotes actuaron independientemente del mandamiento de Dios", "Israel no tenía fe en la orilla", "La fe entra al agua y confía que el milagro encontrará sus pies"], correct: 3 },
+    { textEn: "15. The waters from upstream stopped in a heap at:", textEs: "15. Las aguas de río arriba se detuvieron en un montón en:",
+      optionsEn: ["A city called Adam", "Bethel", "Jericho", "Shechem"],
+      optionsEs: ["Una ciudad llamada Adam", "Bet-el", "Jericó", "Siquem"], correct: 0 },
+    { textEn: "16. The decision to leave a second set of stones in the riverbed (where only God could see them) teaches that:", textEs: "16. La decisión de dejar un segundo juego de piedras en el lecho del río (donde solo Dios podía verlas) enseña que:",
+      optionsEn: ["Joshua was confused", "Public memorials are not important", "Some of God's most precious witnesses are in the things only He sees us do", "Only stones in temples count as memorials"],
+      optionsEs: ["Josué estaba confundido", "Los memoriales públicos no son importantes", "Algunos de los testimonios más preciosos de Dios están en las cosas que solo Él nos ve hacer", "Solo las piedras en templos cuentan como memoriales"], correct: 2 },
+    { textEn: "17. Three days standing at the bank of the Jordan teaches that:", textEs: "17. Tres días parados a la orilla del Jordán enseña que:",
+      optionsEn: ["Israel was lazy", "Joshua was indecisive", "The river was always too dangerous", "Waiting at the edge of the impossible is part of the preparation; faith hardens into obedience in the waiting"],
+      optionsEs: ["Israel era flojo", "Josué era indeciso", "El río siempre era demasiado peligroso", "Esperar al borde de lo imposible es parte de la preparación; la fe se endurece en obediencia en la espera"], correct: 3 },
+    { textEn: "18. The reaction of the Canaanite kings when they heard about the Jordan crossing was that:", textEs: "18. La reacción de los reyes cananeos cuando oyeron sobre el cruce del Jordán fue que:",
+      optionsEn: ["They mobilized for war", "Their hearts melted and they had no more courage to face Israel", "They made a treaty with Israel", "They fled to Egypt"],
+      optionsEs: ["Se movilizaron para la guerra", "Sus corazones se derritieron y no tuvieron más valor para enfrentar a Israel", "Hicieron un tratado con Israel", "Huyeron a Egipto"], correct: 1 },
+    { textEn: "19. Jesus chose as His memorial:", textEs: "19. Jesús escogió como Su memorial:",
+      optionsEn: ["A simple meal of bread and cup that has lasted two thousand years across every continent", "A great pyramid", "A basilica", "A bronze statue"],
+      optionsEs: ["Una sencilla comida de pan y copa que ha durado dos mil años a través de cada continente", "Una gran pirámide", "Una basílica", "Una estatua de bronce"], correct: 0 },
+    { textEn: "20. The proper Christian application of Joshua 3-4 is that the believer should:", textEs: "20. La aplicación cristiana propia de Josué 3-4 es que el creyente debe:",
+      optionsEn: ["Imitate exact rituals", "Build deliberate memorials of God's deliverance so the next generation asks 'What are these stones?' and the gospel is told", "Build a church museum", "Hold an annual march"],
+      optionsEs: ["Imitar rituales exactos", "Edificar memoriales deliberados de la liberación de Dios para que la siguiente generación pregunte '¿Qué son estas piedras?' y el evangelio sea contado", "Construir un museo de iglesia", "Sostener una marcha anual"], correct: 1 }
+];
+
+// SA: split kw_en / kw_es. Threshold: ≥3 hits per language, length ≥20.
+const kwQuestions = [
+    { textEn: "21. Defend the principle 'feet first, then the miracle' from Joshua 3:13. How does this rhythm of faith appear elsewhere in Scripture (Peter on water, ten lepers, widow's oil)? Apply to a believer's life today.",
+      textEs: "21. Defienda el principio 'primero los pies, luego el milagro' de Josué 3:13. ¿Cómo aparece este ritmo de fe en otras partes de la Escritura (Pedro sobre el agua, los diez leprosos, el aceite de la viuda)? Aplique a la vida del creyente hoy.",
+      kw_en: ["feet", "miracle", "faith", "step", "water", "priest", "wet", "jordan"],
+      kw_es: ["pies", "milagro", "fe", "paso", "río", "sacerdote", "mojad", "jordán"],
+      modelEn: "Notice the sequence in Joshua 3:13: the Jordan is cut off only as the priests' feet rest in the water. The miracle does not happen before they step in; it happens when they step in. While they stand on the bank the river still floods; the water parts only when human feet are wet. That is the rhythm of faith — not waiting on the bank for the miracle but stepping into the water and trusting the miracle to meet your feet, as Peter walked only after leaving the boat.",
+      modelEs: "Note la secuencia en Josué 3:13: el Jordán se corta solo cuando los pies de los sacerdotes reposan en el agua del río. El milagro no ocurre antes de que entren; ocurre cuando entran. Mientras están en la orilla el río sigue creciendo; el agua se abre solo cuando los pies humanos están mojados. Ese es el ritmo de la fe: no esperar en la orilla el milagro sino dar el paso al río y confiar en que el milagro saldrá al encuentro de tus pies, como Pedro caminó solo tras salir de la barca." },
+    { textEn: "22. Explain the theological significance of two sets of stones (the public twelve at Gilgal and the hidden twelve in the riverbed). What does this teach about public and private witness?",
+      textEs: "22. Explique el significado teológico de los dos juegos de piedras (las doce públicas en Gilgal y las doce escondidas en el lecho del río). ¿Qué enseña sobre el testimonio público y privado?",
+      kw_en: ["two", "stone", "public", "private", "memorial", "gilgal", "river", "god"],
+      kw_es: ["dos", "piedra", "público", "privado", "memorial", "gilgal", "lecho", "dios"],
+      modelEn: "There are two sets of stones, not one. Twelve are carried to the western bank and set up at Gilgal as a public memorial every traveler could see. But Joshua sets up a second twelve in the middle of the Jordan, in the dry riverbed where the priests had stood, which no human eye would ever read again. One memorial is public, one is private; one for the people, one for God alone. Some of God's most precious witness is in the things He alone sees us do.",
+      modelEs: "Hay dos juegos de piedras, no uno. Doce se llevan a la orilla occidental y se erigen en Gilgal como memorial público que todo viajero podía ver. Pero Josué levanta un segundo grupo de doce en medio del Jordán, en el lecho seco donde estuvieron los sacerdotes, que ningún ojo humano volvería a leer. Un memorial es público, otro privado; uno para el pueblo, otro solo para Dios. Parte del testimonio más precioso de Dios está en lo que solo Él nos ve hacer." },
+    { textEn: "23. Discuss the question 'What do these stones mean?' (Joshua 4:6-7) as the missional purpose of memorials. How can families and churches deliberately build provocative witnesses for the next generation?",
+      textEs: "23. Discuta la pregunta '¿Qué significan estas piedras?' (Josué 4:6-7) como el propósito misional de los memoriales. ¿Cómo pueden las familias e iglesias edificar deliberadamente testimonios provocativos para la siguiente generación?",
+      kw_en: ["children", "ask", "stone", "generation", "witness", "sign", "strange", "famil"],
+      kw_es: ["hijos", "pregunt", "piedra", "generación", "testimonio", "señal", "extrañ", "famil"],
+      modelEn: "The whole point of the stones, said twice, is the next generation: when your children ask, What do these stones mean? you shall tell them what God did. The stones are deliberately strange — oversized boulders dragged from a riverbed — built to provoke the question. Every Christian family and church must leave such stones: unmistakable witnesses of God's work that make children ask. If our faith looks like the world's life, the children will not ask; if our worship stands up like a strange pile of stones, they will, and we will be ready with the sign's meaning.",
+      modelEs: "El propósito de las piedras, dicho dos veces, es la próxima generación: cuando tus hijos pregunten, ¿Qué significan estas piedras? les contarás lo que Dios hizo. Las piedras son deliberadamente extrañas — peñascos enormes sacados de un lecho — hechas para provocar la pregunta. Toda familia e iglesia cristiana debe dejar tales piedras: testimonios inconfundibles de la obra de Dios que hagan preguntar a los hijos. Si nuestra fe luce como la vida del mundo, los hijos no preguntarán; si nuestra adoración se levanta como un montón extraño de piedras, sí, y estaremos listos con el sentido de la señal." },
+    { textEn: "24. Apply the Lord's Supper and baptism as Christian memorial stones. Why did Jesus choose a simple meal over stone monuments, and what does this teach about lasting memorials?",
+      textEs: "24. Aplique la Cena del Señor y el bautismo como piedras memoriales cristianas. ¿Por qué Jesús escogió una comida sencilla en lugar de monumentos de piedra, y qué enseña esto sobre los memoriales duraderos?",
+      kw_en: ["supper", "communion", "baptis", "memorial", "bread", "cup", "simple", "monument"],
+      kw_es: ["cena", "comunión", "bautismo", "memorial", "pan", "copa", "sencill", "monument"],
+      modelEn: "On the night before He died, Jesus left a memorial — not a stone monument or a pyramid, but bread and a cup. He could have asked for a basilica; instead He asked us to meet often, eat the bread that recalls His broken body and the cup that recalls His blood, and love one another. Stone monuments crumble, but this simple meal, the Lord's Supper, is the Christian's memorial stone in the Jordan. Baptism is the other marker: we go down and rise from the water as a public sign that we have already crossed with Christ through death.",
+      modelEs: "La noche antes de morir, Jesús dejó un memorial — no un monumento de piedra ni una pirámide, sino pan y una copa. Pudo pedir una basílica; en cambio pidió que nos reunamos a menudo, comamos el pan que recuerda Su cuerpo partido y la copa que recuerda Su sangre, y nos amemos. Los monumentos de piedra se desmoronan, pero esta comida sencilla, la Cena del Señor, es el memorial del cristiano en el Jordán. El bautismo es el otro marcador: bajamos y subimos del agua como señal pública de que ya cruzamos con Cristo por la muerte." },
+    { textEn: "25. Discuss the marble lamb on the German rooftop as a picture of Christ. Trace the substitutionary parallel: an innocent creature taking the fall, the master walking away unscratched, the visible memorial lifted up.",
+      textEs: "25. Discuta el cordero de mármol en el tejado alemán como cuadro de Cristo. Trace el paralelo sustitutivo: una criatura inocente tomando la caída, el amo saliendo ileso, el memorial visible levantado.",
+      kw_en: ["lamb", "marble", "substitut", "innocent", "memorial", "roof", "crush", "spared"],
+      kw_es: ["cordero", "mármol", "sustitut", "inocente", "memorial", "techo", "aplast", "salva"],
+      modelEn: "In an old German city a marble lamb stands on a peaked roof. When the owner was building the house he slipped from that very spot and fell; he should have been dashed to pieces, but his pet lamb lay on the grass below and he fell on it. The lamb was crushed; the man stood up without a scratch. He carved the marble lamb and lifted it to the highest place as his memorial — a perpetual sign that an innocent creature died as his substitute, taking the fall in his place, so that he was spared.",
+      modelEs: "En una vieja ciudad alemana un cordero de mármol está sobre un techo en pico. Cuando el dueño construía la casa resbaló de ese mismo lugar y cayó; debió hacerse pedazos, pero su cordero mascota yacía en la hierba abajo y cayó sobre él. El cordero quedó aplastado; el hombre se levantó sin un rasguño. Talló el cordero de mármol y lo alzó al lugar más alto como su memorial — señal perpetua de que una criatura inocente murió como su sustituto, recibiendo la caída en su lugar, para que él fuera salvado." },
+    { textEn: "26. Defend the practice of having new converts kneel when first praying to receive Christ. How does a physical posture function as a stone in the riverbed for years of later doubt?",
+      textEs: "26. Defienda la práctica de hacer que los nuevos convertidos se arrodillen al orar para recibir a Cristo por primera vez. ¿Cómo funciona una postura física como una piedra en el lecho del río para años de duda posterior?",
+      kw_en: ["kneel", "marker", "convert", "doubt", "physical", "pray", "save", "christ"],
+      kw_es: ["arrodill", "marcador", "convert", "duda", "físic", "orar", "salva", "cristo"],
+      modelEn: "When Cook leads someone to Christ he has them kneel to pray. The kneeling does not save them — Christ does — but it is a physical marker. Ten years later, when doubt comes and they wonder whether they really meant it, they can look back to the day they knelt by the chair, and the kneel itself is a stone in the riverbed they can return to. Like the memorial stones, a physical marker holds the moment of conversion fast so it can answer the later doubt.",
+      modelEs: "Cuando Cook guía a alguien a Cristo le pide que se arrodille para orar. El arrodillarse no lo salva — Cristo lo hace — pero es un marcador físico. Diez años después, cuando viene la duda y se pregunta si de veras lo dijo en serio, puede mirar atrás al día en que se arrodilló junto a la silla, y el arrodillarse mismo es una piedra en el lecho a la que volver. Como las piedras memoriales, un marcador físico sostiene firme el momento de la conversión para responder a la duda posterior." },
+    { textEn: "27. Explain the lock-of-hair story (boy/axe) as a model of household memorial. How can a family preserve tangible reminders of God's specific deliverances and pass them across generations?",
+      textEs: "27. Explique la historia del rizo de cabello (niño/hacha) como modelo de memorial familiar. ¿Cómo puede una familia preservar recordatorios tangibles de las liberaciones específicas de Dios y pasarlas a través de generaciones?",
+      kw_en: ["hair", "axe", "memorial", "famil", "deliver", "father", "wood", "spared"],
+      kw_es: ["cabello", "hacha", "memorial", "famil", "liberac", "padre", "leña", "salva"],
+      modelEn: "An old man kept a lock of his own hair, cut seventy years earlier. As a boy of four he bent to gather wood splinters by his father, who was chopping wood, and his curly head fell on the log just as the axe came down. The father was sure he had killed his only son, but there was not a scratch — only a lock of hair sliced clean off. The father saved that lock as a memorial of God's deliverance and passed it to his son. It is a sermon in a small box: a tangible reminder of a moment God's hand stopped the axe over the family.",
+      modelEs: "Un anciano guardaba un mechón de su propio cabello, cortado setenta años antes. De niño, a los cuatro años, se agachó a juntar astillas de leña junto a su padre, que cortaba leña, y su cabeza rizada cayó sobre el tronco justo cuando bajaba el hacha. El padre creyó haber matado a su único hijo, pero no había un rasguño — solo un mechón de cabello cortado limpiamente. El padre guardó ese mechón como memorial de la liberación de Dios y lo pasó a su hijo. Es un sermón en una cajita: recordatorio tangible de un momento en que la mano de Dios detuvo el hacha sobre la familia." },
+    { textEn: "28. Discuss the timing of the crossing (tenth day of first month, forty years to the Passover preparations). What does this teach about God's calendar precision in Scripture and in the believer's life?",
+      textEs: "28. Discuta el cronometraje del cruce (décimo día del primer mes, cuarenta años a las preparaciones de la Pascua). ¿Qué enseña sobre la precisión del calendario de Dios en la Escritura y en la vida del creyente?",
+      kw_en: ["forty", "calendar", "passover", "timing", "precision", "day", "tenth", "timed"],
+      kw_es: ["cuarenta", "calendario", "pascua", "tiempo", "precisión", "día", "décimo", "program"],
+      modelEn: "Joshua 4:19 says the crossing happened on the tenth day of the first month — the same calendar day, forty years earlier, that Israel had been told in Egypt to set apart the Passover lamb. The nation entered the Promised Land on the precise day the journey began. There are no coincidences with God; just as He later had Jesus spend forty days in the wilderness mirroring the forty years, He timed Israel's arrival down to the calendar square. What God intends, God times with precision.",
+      modelEs: "Josué 4:19 dice que el cruce ocurrió el día décimo del primer mes — el mismo día del calendario, cuarenta años antes, en que a Israel se le dijo en Egipto que apartara el cordero de la Pascua. La nación entró a la Tierra Prometida en el día preciso en que comenzó el viaje. No hay coincidencias con Dios; así como luego hizo que Jesús pasara cuarenta días en el desierto reflejando los cuarenta años, programó la llegada de Israel hasta el cuadro del calendario. Lo que Dios propone, lo programa con precisión." },
+    { textEn: "29. Defend the position that the priests standing motionless in the riverbed until every Israelite had crossed is a picture of pastoral ministry. Apply to a pastor's call to remain in dangerous places until his people are safe.",
+      textEs: "29. Defienda la posición que los sacerdotes parados inmóviles en el lecho del río hasta que cada israelita había cruzado es un cuadro del ministerio pastoral. Aplique al llamado del pastor a permanecer en lugares peligrosos hasta que su pueblo esté a salvo.",
+      kw_en: ["priest", "stand", "pastor", "people", "ministry", "ark", "middle", "cross"],
+      kw_es: ["sacerdote", "parad", "pastor", "pueblo", "ministerio", "arca", "medio", "cruzar"],
+      modelEn: "The priests bearing the ark step in first and stand motionless in the middle of the dry riverbed while all two and a half million people cross past them; they do not move until the last Israelite reaches the far bank. That is a picture of pastoral ministry the centuries have not exhausted: the shepherd stands in the hard place, bearing the presence of God, holding steady until all the people are safely over. The pastor crosses last, after the flock.",
+      modelEs: "Los sacerdotes que llevan el arca entran primero y se quedan parados, inmóviles, en medio del lecho seco mientras los dos millones y medio de personas cruzan junto a ellos; no se mueven hasta que el último israelita llega a la otra orilla. Esa es una imagen del ministerio pastoral que los siglos no han agotado: el pastor se queda en el lugar difícil, llevando la presencia de Dios, firme hasta que todo el pueblo esté a salvo al otro lado. El pastor cruza al final, tras el rebaño." },
+    { textEn: "30. Synthesis: Compose a personal 'Gilgal' for your own life — three to five concrete memorial stones from God's deliverance in your story that you intend to pass down. Explain how each will provoke the question and what the answer will be.",
+      textEs: "30. Síntesis: Componga un 'Gilgal' personal para su propia vida — tres a cinco piedras memoriales concretas de la liberación de Dios en su historia que usted intenta pasar. Explique cómo cada una provocará la pregunta y cuál será la respuesta.",
+      kw_en: ["gilgal", "memorial", "stone", "story", "deliver", "cross", "tell", "generation"],
+      kw_es: ["gilgal", "memorial", "piedra", "historia", "liberac", "cruce", "generación", "dios"],
+      modelEn: "The stones at Gilgal stand as a permanent memorial so that the story of the crossing can be told to every generation. When a child asks what they mean, the family tells how God dried the Jordan and brought Israel through — the deliverance God worked. Like the Lord's Supper, the stones are a memorial we set up to keep telling the story of a crossing already accomplished, so that no generation forgets the deliverance of God.",
+      modelEs: "Las piedras en Gilgal quedan como memorial permanente para que la historia del cruce se cuente a cada generación. Cuando un niño pregunta qué significan, la familia cuenta cómo Dios secó el Jordán y pasó a Israel — la liberación que Dios obró. Como la Cena del Señor, las piedras son un memorial que erigimos para seguir contando la historia de un cruce ya consumado, para que ninguna generación olvide la liberación de Dios." }
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 4 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 4 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ Bloqueado. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ Locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ MC ✓ aprobado. Sección SA bloqueada. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ MC ✓ passed. SA section locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; pase directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (answered || mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (answered || mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const mb = document.createElement('div');
+        mb.className = 'js-model-box';
+        mb.style.cssText = 'display:none;margin-top:10px;padding:10px 12px;background:#fbf3d5;border:1px solid #d4af37;border-radius:8px;';
+        mb.innerHTML = (currentLang === 'en'
+            ? '<strong>Model answer — study this</strong><br>' + q.modelEn
+            : '<strong>Respuesta modelo — estúdiela</strong><br>' + q.modelEs);
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least 20 characters).' : 'Escriba una respuesta más completa (al menos 20 caracteres).';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? `✓ Solid answer (${hits}/${kws.length} key concepts referenced).` : `✓ Respuesta sólida (${hits}/${kws.length} conceptos clave referenciados).`;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en'
+                    ? `✗ Need at least 3 key concepts; got ${hits}/${kws.length}. Compare your answer with the model below.`
+                    : `✗ Necesita al menos 3 conceptos clave; obtuvo ${hits}/${kws.length}. Compare su respuesta con el modelo abajo.`;
+            }
+            mb.style.display = 'block';
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(mb);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register on Unit 1 first.' : 'Por favor regístrese primero en la Unidad 1.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    document.querySelectorAll('.js-model-box').forEach(function(e){ e.style.display = 'block'; });
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) { // certificate / non-Masters: MC only
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ Reprobado: ${mcScore}/20 (se requiere 18). Bloqueado 2 minutos.</span>`
+                : `<span style='color:#8a1f1f'>✗ Failed: ${mcScore}/20 (need 18). Locked 2 minutes.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ MC ✓ permanece aprobado. SA reprobada: ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min.</span>`
+                : `<span style='color:#8a1f1f'>✗ MC ✓ stays passed. SA failed: ${saScore}/10 (need 9). SA section locked 15 min.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 2 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 2 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    location.reload();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSJoshReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

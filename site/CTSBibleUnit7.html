@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How We Got the Bible — Unit 7: Archaeology — Correlation, Not Proof</title>
+<style>
+  :root{
+    --green:#2c5f2d; --green-d:#1f4420; --gold:#d4af37; --cream:#faf7f0;
+    --parch:#f3ecdd; --ink:#2b2721; --muted:#6b6355; --line:#e2d9c4;
+    --hl:#efe7d2; --ok:#2c5f2d; --no:#a23b32;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:Georgia,'Times New Roman',serif; color:var(--ink);
+    background:var(--cream); line-height:1.6;
+  }
+  body.lang-en .lang-es{display:none;}
+  body.lang-es .lang-en{display:none;}
+  .wrap{max-width:820px; margin:0 auto; padding:0 18px 60px;}
+  header.masthead{
+    background:linear-gradient(135deg,var(--green),var(--green-d));
+    color:#fff; padding:26px 18px 22px; text-align:center;
+    border-bottom:4px solid var(--gold);
+  }
+  header.masthead .course{font-size:.82rem; letter-spacing:2px; text-transform:uppercase; opacity:.9;}
+  header.masthead h1{margin:6px 0 2px; font-size:1.5rem;}
+  header.masthead .unit{font-size:1rem; color:#f1e6bf; margin-top:4px;}
+  .toolbar{
+    display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+    background:var(--parch); padding:10px; border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:5;
+  }
+  .toggle-btn{
+    background:var(--green); color:#fff; border:none; padding:8px 14px;
+    border-radius:6px; font-family:inherit; font-size:.9rem; cursor:pointer; font-weight:600;
+  }
+  .toggle-btn:hover{background:var(--green-d);}
+  .amber-note{
+    background:#fff6df; border:1px solid var(--gold); color:#7a5c12;
+    padding:8px 12px; border-radius:6px; font-size:.82rem; margin:14px 0;
+  }
+  .track-select{
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+    background:#fff; border:1px solid var(--line); border-radius:8px;
+    padding:12px 14px; margin:16px 0; font-size:.95rem;
+  }
+  .track-select > span{font-weight:bold; color:var(--muted); margin-right:4px;}
+  .track-btn{
+    background:#efe9db; color:var(--ink); border:1px solid var(--line);
+    padding:6px 12px; border-radius:20px; font-family:inherit; cursor:pointer; font-size:.88rem;
+  }
+  .track-btn.active{background:var(--green); color:#fff; border-color:var(--green);}
+  h3{
+    color:var(--green-d); font-size:1.18rem; margin:30px 0 8px;
+    border-bottom:2px solid var(--gold); padding-bottom:5px;
+  }
+  section.teach p{margin:10px 0;}
+  blockquote.verse{
+    margin:14px 0; padding:10px 16px; border-left:4px solid var(--gold);
+    background:var(--parch); font-style:italic; color:#4a4335;
+  }
+  .aside{
+    margin:16px 0; padding:14px 18px; background:var(--green);
+    color:#fff; border-radius:8px; font-size:1.05rem; text-align:center;
+    font-style:italic;
+  }
+  .exam{background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px; margin:26px 0;}
+  .exam h2{color:var(--green-d); font-size:1.25rem; margin:0 0 4px; border-bottom:2px solid var(--gold); padding-bottom:6px;}
+  .exam .lead{font-size:.9rem; color:var(--muted); margin:6px 0 14px;}
+  .question{margin:0 0 18px; padding-bottom:6px; border-bottom:1px dashed var(--line);}
+  .qtext{font-weight:bold; margin:0 0 8px;}
+  .option{
+    display:block; width:100%; text-align:left; margin:5px 0; padding:9px 12px;
+    background:#fbf9f3; border:1px solid var(--line); border-radius:6px;
+    font-family:inherit; font-size:.95rem; cursor:pointer; color:var(--ink);
+  }
+  .option:hover{background:var(--hl);}
+  .option.correct{background:#e4f0e0; border-color:var(--ok); color:#1f4420; font-weight:600;}
+  .option.wrong{background:#f6e2df; border-color:var(--no); color:#7a2a23;}
+  .feedback-text{margin:8px 0 2px; padding:8px 10px; border-radius:6px; font-size:.9rem;}
+  .feedback-text.correct{background:#e4f0e0; color:#1f4420;}
+  .feedback-text.incorrect{background:#f6e2df; color:#7a2a23;}
+  textarea{
+    width:100%; font-family:inherit; font-size:.95rem; padding:10px;
+    border:1px solid var(--line); border-radius:6px; resize:vertical; background:#fbf9f3;
+  }
+  .sa-note{font-size:.85rem; color:var(--muted); margin:2px 0 14px;}
+  .btn-primary{
+    background:var(--gold); color:#3a2f0a; border:none; padding:11px 20px;
+    border-radius:6px; font-family:inherit; font-weight:bold; font-size:1rem; cursor:pointer;
+  }
+  .btn-primary:hover{filter:brightness(1.05);}
+  .result{display:none; margin-top:14px; padding:12px 14px; border-radius:8px; font-weight:600;}
+  .result.pass{background:#e4f0e0; color:#1f4420; border:1px solid var(--ok);}
+  .result.fail{background:#f6e2df; color:#7a2a23; border:1px solid var(--no);}
+  .result.progress{display:block; background:#f3ecdd; color:#5c5443; border:1px solid var(--line); font-weight:600;}
+  .completion{
+    display:none; margin:22px 0; padding:16px; background:var(--green);
+    color:#fff; border-radius:10px; text-align:center; font-size:1.05rem; font-weight:600;
+  }
+  .foot-nav{display:flex; justify-content:center; gap:10px; margin:30px 0 0; flex-wrap:wrap;}
+  .foot-nav a{
+    background:var(--green); color:#fff; text-decoration:none; padding:10px 18px;
+    border-radius:6px; font-weight:600; font-size:.95rem;
+  }
+</style>
+</head>
+<body class="lang-en">
+
+
+<header class="masthead">
+  <div class="course"><span class="lang-en">How We Got the Bible</span><span class="lang-es">Cómo Obtuvimos la Biblia</span></div>
+  <h1><span class="lang-en">The Third Witness: Stones That Speak</span><span class="lang-es">El Tercer Testigo: Piedras que Hablan</span></h1>
+  <div class="unit"><span class="lang-en">Unit 7 — Archaeology: Correlation, Not Proof</span><span class="lang-es">Unidad 7 — Arqueología: Correlación, No Prueba</span></div>
+</header>
+
+<div class="toolbar">
+  <button class="toggle-btn" id="langToggleBtn" onclick="toggleLang()">Español</button>
+  <a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+</div>
+
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSBibleUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSBibleUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSBibleUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSBibleUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSBibleUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSBibleUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSBibleUnit7.html" title="Unit 7 · Unidad 7" class="active">7</a><a href="CTSBibleUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSBibleUnit9.html" title="Unit 9 · Unidad 9">9</a><a href="CTSBibleUnit10.html" title="Unit 10 · Unidad 10">10</a></nav>
+
+
+  <div class="track-select">
+    <span class="lang-en">Your track:</span><span class="lang-es">Tu vía:</span>
+    <button id="track-cert" class="track-btn" onclick="setTrack('cert')"><span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></button><button id="track-assoc" class="track-btn" onclick="setTrack('assoc')"><span class="lang-en">Associate</span><span class="lang-es">Asociado</span></button>
+    <button id="track-thm" class="track-btn" onclick="setTrack('thm')">Th.M.</button>
+    <button id="track-mdiv" class="track-btn" onclick="setTrack('mdiv')">M.Div.</button>
+  </div>
+
+  <!-- ===================== TEACHING ===================== -->
+
+  <section class="teach">
+    <h3><span class="lang-en">1. A Witness That Speaks in Stone</span><span class="lang-es">1. Un Testigo que Habla en Piedra</span></h3>
+    <div class="lang-en"><p>A third witness now rises, and it is unlike the first two. The witness of the canon spoke in the church's recognition of its books; the witness of the text spoke in ink and parchment. This third witness speaks in stone. It is the evidence of archaeology — the buried cities, the clay tablets, the carved inscriptions, the broken pottery and toppled walls that the spade lifts out of the ground. Its testimony is real and valuable, but it is easily misunderstood, and misunderstanding it has done great harm on both sides. So before we look at any single discovery, we must learn how this witness actually testifies — what archaeology can do, what it cannot, and how an honest believer should weigh it. This unit sets the rules; the next will walk among the actual finds. And the rule that governs everything here can be stated in three words: correlation, not proof. Archaeology can show, again and again, that the world of the Bible was a real world — real kings, real cities, real customs in real places. That is correlation, and it is a genuine and powerful thing. But it is not the same as proof, and the believer who confuses the two, in either direction, will stumble. Let us learn to hear this witness rightly.</p></div>
+    <div class="lang-es"><p>Ahora se levanta un tercer testigo, y es distinto de los dos primeros. El testigo del canon habló en el reconocimiento que la iglesia hizo de sus libros; el testigo del texto habló en tinta y pergamino. Este tercer testigo habla en piedra. Es la evidencia de la arqueología — las ciudades sepultadas, las tablillas de barro, las inscripciones talladas, la cerámica rota y los muros derribados que la pala levanta de la tierra. Su testimonio es real y valioso, pero se malentiende con facilidad, y malentenderlo ha hecho gran daño en ambos lados. Así que antes de mirar un solo descubrimiento, debemos aprender cómo testifica en verdad este testigo — qué puede hacer la arqueología, qué no puede, y cómo un creyente honesto debe pesarla. Esta unidad fija las reglas; la próxima caminará entre los hallazgos reales. Y la regla que gobierna todo aquí puede decirse en tres palabras: correlación, no prueba. La arqueología puede mostrar, una y otra vez, que el mundo de la Biblia era un mundo real — reyes reales, ciudades reales, costumbres reales en lugares reales. Eso es correlación, y es algo genuino y poderoso. Pero no es lo mismo que prueba, y el creyente que confunde las dos, en cualquier dirección, tropezará. Aprendamos a oír a este testigo correctamente.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">2. What Archaeology Is, and Is Not</span><span class="lang-es">2. Qué Es la Arqueología, y Qué No Es</span></h3>
+    <div class="lang-en"><p>First, what is archaeology, and what is it not? Archaeology is the recovery and interpretation of the material remains of the past — the physical things that people long dead left behind. It is, by its nature, a science of fragments. Consider how little survives and how little is recovered. Only a small fraction of the ancient sites that once existed have ever been located; of those, only a fraction have been excavated; of any site that is dug, only a portion is ever opened; and of what is opened, most of what was once there has perished — the wood, the cloth, the leather, the papyrus, the flesh, all gone, leaving mostly stone and baked clay. Written inscriptions, which tell us the most, are the rarest survivals of all. And every object that is found must still be interpreted — dated, identified, fitted into a story — and interpretation can be revised. So archaeology is not a machine that you feed a Bible verse into and receive a verdict of "true" or "false." It is a patient, partial, human reading of the scattered leftovers of the past. Understanding that limitation is the beginning of using this witness honestly, for it explains at once why archaeology so rarely proves, and why its silence proves even less.</p></div>
+    <div class="lang-es"><p>Primero, ¿qué es la arqueología, y qué no es? La arqueología es la recuperación e interpretación de los restos materiales del pasado — las cosas físicas que dejaron atrás personas muertas hace mucho. Es, por su naturaleza, una ciencia de fragmentos. Considera cuán poco sobrevive y cuán poco se recupera. Solo una pequeña fracción de los sitios antiguos que alguna vez existieron han sido localizados; de esos, solo una fracción han sido excavados; de cualquier sitio que se excava, solo una porción se abre jamás; y de lo que se abre, la mayor parte de lo que allí hubo ha perecido — la madera, la tela, el cuero, el papiro, la carne, todo ido, dejando mayormente piedra y barro cocido. Las inscripciones escritas, que más nos dicen, son las supervivencias más raras de todas. Y todo objeto que se halla debe aún interpretarse — fecharse, identificarse, encajarse en una historia — y la interpretación puede revisarse. Así que la arqueología no es una máquina en la que metes un versículo bíblico y recibes un veredicto de "verdadero" o "falso". Es una lectura paciente, parcial y humana de los restos dispersos del pasado. Entender esa limitación es el principio de usar este testigo con honestidad, pues explica de inmediato por qué la arqueología tan rara vez prueba, y por qué su silencio prueba aún menos.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">3. The Three Things the Spade Can Do</span><span class="lang-es">3. Las Tres Cosas que la Pala Puede Hacer</span></h3>
+    <div class="lang-en"><p>Recall the three things evidence can do, which we learned in the very first unit, and see how each applies to the spade. Evidence can <em>prove</em> — settle a matter beyond dispute — but in archaeology, as in all of history, real proof is rare; we almost never get it. Evidence can <em>corroborate</em> — confirm and support, line up with a claim, make it credible — and this is what archaeology does best and most often. When a dig turns up a king the Bible names, a city the Bible places just there, a custom the Bible describes, that is corroboration, the honest workhorse. And evidence can <em>illustrate</em> — make the real vivid before our eyes. When we uncover the very pavement where a trial was held, or a house like the ones the first Christians met in, or a lamp such as the wise virgins carried, the world of the Bible comes alive, and we read it with new sight. Corroboration and illustration are the daily work of biblical archaeology; proof is the rare exception. This is why our maxim holds: correlation, not proof. To expect proof from archaeology is to ask of it what it was never able to give — and to miss the very real gift it does give.</p></div>
+    <div class="lang-es"><p>Recuerda las tres cosas que la evidencia puede hacer, que aprendimos en la primera unidad, y ve cómo cada una se aplica a la pala. La evidencia puede <em>probar</em> — zanjar un asunto sin disputa — pero en la arqueología, como en toda la historia, la prueba real es rara; casi nunca la obtenemos. La evidencia puede <em>corroborar</em> — confirmar y apoyar, concordar con una afirmación, hacerla creíble — y esto es lo que la arqueología hace mejor y con más frecuencia. Cuando una excavación saca a la luz un rey que la Biblia nombra, una ciudad que la Biblia ubica justo allí, una costumbre que la Biblia describe, eso es corroboración, la herramienta honesta. Y la evidencia puede <em>ilustrar</em> — hacer vívido lo real ante nuestros ojos. Cuando descubrimos el mismísimo pavimento donde se celebró un juicio, o una casa como aquellas en que se reunían los primeros cristianos, o una lámpara como las que llevaban las vírgenes prudentes, el mundo de la Biblia cobra vida, y lo leemos con nueva vista. La corroboración y la ilustración son el trabajo diario de la arqueología bíblica; la prueba es la rara excepción. Por esto se mantiene nuestra máxima: correlación, no prueba. Esperar prueba de la arqueología es pedirle lo que nunca pudo dar — y perder el don muy real que sí da.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">4. The Skeptic's Error: Arguing from Silence</span><span class="lang-es">4. El Error del Escéptico: Argumentar desde el Silencio</span></h3>
+    <div class="aside"><span class="lang-en">Absence of evidence is not evidence of absence.</span><span class="lang-es">La ausencia de evidencia no es evidencia de ausencia.</span></div>
+    <div class="lang-en"><p>Now the first great error, and it belongs to the skeptic. Because archaeology is so incomplete, the absence of a find can never, by itself, be a verdict. Yet again and again something in the Bible has been declared unhistorical simply because no trace of it had turned up — and then the trace turned up. For many years some scholars taught that the Hittites, a people the Old Testament mentions dozens of times, were a biblical fiction, since no independent record of them was known; today we possess vast archives of the Hittite empire, and their reality is beyond question. For a time it was said that King David was a legend, until a stone was found at Tel Dan bearing the words "the house of David." The existence of Pontius Pilate, of the Assyrian king Sargon, of the pools of Jerusalem where Jesus healed — all were doubted, and all have been confirmed by the spade. So the skeptic who reasons "no evidence has been found, therefore it did not happen" is swallowing a camel: he mistakes a gap in what the spade has reached for a proof of what never was. Absence of evidence is not evidence of absence. This is the first rule of the road.</p></div>
+    <div class="lang-es"><p>Ahora el primer gran error, y pertenece al escéptico. Porque la arqueología es tan incompleta, la ausencia de un hallazgo nunca puede, por sí sola, ser un veredicto. Sin embargo, una y otra vez algo en la Biblia ha sido declarado no histórico simplemente porque ningún rastro de ello había aparecido — y luego el rastro apareció. Por muchos años algunos eruditos enseñaron que los hititas, un pueblo que el Antiguo Testamento menciona docenas de veces, eran una ficción bíblica, ya que no se conocía ningún registro independiente de ellos; hoy poseemos vastos archivos del imperio hitita, y su realidad está fuera de duda. Por un tiempo se dijo que el rey David era una leyenda, hasta que se halló una piedra en Tel Dan que llevaba las palabras "la casa de David". La existencia de Poncio Pilato, del rey asirio Sargón, de los estanques de Jerusalén donde Jesús sanó — todos fueron dudados, y todos han sido confirmados por la pala. Así que el escéptico que razona "no se ha hallado evidencia, por tanto no sucedió" traga un camello: confunde un vacío en lo que la pala ha alcanzado con una prueba de lo que nunca fue. La ausencia de evidencia no es evidencia de ausencia. Esta es la primera regla del camino.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">5. The Apologist's Error: Overclaiming</span><span class="lang-es">5. El Error del Apologista: Exagerar</span></h3>
+    <div class="lang-en"><p>But the opposite error is just as real, and it belongs to us. The eager believer, wanting to defend the Bible, seizes on every discovery and cries, "Archaeology proves the Bible!" He means well, but he promises what archaeology cannot deliver, and in doing so he builds the very trap his brother will fall into. For archaeology does not prove the Bible; it correlates with it. And when the believer who has been told "it is all proven" meets a genuine dispute — a dig whose dating is contested, a wall whose fall is argued over, an event for which no clear evidence yet stands — his faith can be shaken far more violently than the difficulty deserved, because it had been resting on a promise that was never true. This is the gnat-strain of Matthew twenty-three: straining after more certainty than the evidence holds, and swallowing a hidden camel of future doubt. We refuse this overclaim not because we lack confidence in the Bible, but precisely to protect the faith of those we teach. An honest correlation, soberly stated, is a firmer foundation than a proof that cannot bear weight. We will say what the evidence says, and no more.</p></div>
+    <div class="lang-es"><p>Pero el error opuesto es igual de real, y nos pertenece a nosotros. El creyente entusiasta, queriendo defender la Biblia, se aferra a cada descubrimiento y clama: "¡La arqueología prueba la Biblia!" Tiene buena intención, pero promete lo que la arqueología no puede cumplir, y al hacerlo construye la misma trampa en que caerá su hermano. Pues la arqueología no prueba la Biblia; se correlaciona con ella. Y cuando el creyente al que se le dijo "todo está probado" halla una disputa genuina — una excavación cuya datación se discute, un muro cuya caída se debate, un evento para el cual aún no hay evidencia clara — su fe puede ser sacudida mucho más violentamente de lo que la dificultad merecía, porque había descansado en una promesa que nunca fue verdadera. Este es el colar el mosquito de Mateo veintitrés: buscar más certeza de la que la evidencia sostiene, y tragar un camello oculto de duda futura. Rechazamos esta exageración no porque nos falte confianza en la Biblia, sino precisamente para proteger la fe de aquellos a quienes enseñamos. Una correlación honesta, dicha con sobriedad, es un fundamento más firme que una prueba que no puede sostener peso. Diremos lo que la evidencia dice, y nada más.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">6. How Correlation Builds Honest Confidence</span><span class="lang-es">6. Cómo la Correlación Construye Confianza Honesta</span></h3>
+    <div class="lang-en"><p>If archaeology only correlates and never proves, someone may ask, what is it really worth? A very great deal — for the cumulative weight of honest correlation is powerful. The Bible is crowded with checkable claims: it names kings and nations and officials, it places cities and battles and building projects, it describes coins and courts and customs. And across a century and a half of excavation, these checkable details have been confirmed on an enormous scale. Time and again the Bible's world has proven to be the real world of the ancient Near East, precise in its geography, accurate in its politics, at home in its own age. Now, a document that gets its verifiable world right, over and over, in a thousand incidental details, earns a reasonable trust for the rest of its account. This is corroboration doing exactly its proper work. It does not prove that the sea parted or that the tomb was empty — no spade can reach a miracle. But it shows that the Bible is not an account detached from history; it is a record rooted in real places and real events, in real places, among real people. That is a modest claim, and it is a strong one, and it is true.</p></div>
+    <div class="lang-es"><p>Si la arqueología solo se correlaciona y nunca prueba, alguien preguntará: ¿qué vale en realidad? Muchísimo — pues el peso acumulado de la correlación honesta es poderoso. La Biblia está llena de afirmaciones verificables: nombra reyes y naciones y funcionarios, ubica ciudades y batallas y proyectos de construcción, describe monedas y tribunales y costumbres. Y a través de siglo y medio de excavación, estos detalles verificables han sido confirmados a una escala enorme. Una y otra vez el mundo de la Biblia ha resultado ser el mundo real del antiguo Cercano Oriente, preciso en su geografía, exacto en su política, en casa en su propia época. Ahora bien, un documento que acierta su mundo verificable, una y otra vez, en mil detalles incidentales, gana una confianza razonable para el resto de su relato. Esto es la corroboración haciendo exactamente su trabajo propio. No prueba que el mar se partió ni que la tumba estaba vacía — ninguna pala puede alcanzar un milagro. Pero muestra que la Biblia no es un relato separado de la historia; es un registro arraigado en lugares y acontecimientos reales, en lugares reales, entre personas reales. Esa es una afirmación modesta, y es una afirmación fuerte, y es verdadera.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">7. Where the Witness Falls Silent</span><span class="lang-es">7. Dónde el Testigo Enmudece</span></h3>
+    <div class="aside"><span class="lang-en">No spade can reach a miracle.</span><span class="lang-es">Ninguna pala puede alcanzar un milagro.</span></div>
+    <div class="lang-en"><p>We must be equally clear about where this witness falls silent, for its limits are as important as its strength. Archaeology can confirm that a city was destroyed by fire; it cannot tell you that the LORD gave it into Israel's hand. It can show that a man named Jesus was crucified in Judea under Pontius Pilate; it cannot show that on the third day He rose. It reaches the material and the datable — walls, bones, coins, names — and there it stops. It cannot reach the miracle, or the meaning, or the God who stands behind the event. And this is not a weakness we must hide; it is simply the shape of the tool. The deepest truths of the faith were never meant to be dug out of the ground. They rest, as we said at the very beginning, on the character of the God who spoke and the witness of His Spirit. So archaeology takes its proper place: not the foundation of our faith, but a supporting witness to the world in which our faith's events occurred. It corroborates the stage and the actors; it cannot script the drama, and it does not need to.</p></div>
+    <div class="lang-es"><p>Debemos ser igual de claros sobre dónde este testigo enmudece, pues sus límites son tan importantes como su fuerza. La arqueología puede confirmar que una ciudad fue destruida por fuego; no puede decirte que Jehová la entregó en mano de Israel. Puede mostrar que un hombre llamado Jesús fue crucificado en Judea bajo Poncio Pilato; no puede mostrar que al tercer día resucitó. Alcanza lo material y lo databe — muros, huesos, monedas, nombres — y ahí se detiene. No puede alcanzar el milagro, ni el significado, ni el Dios que está detrás del evento. Y esto no es una debilidad que debamos ocultar; es sencillamente la forma de la herramienta. Las verdades más profundas de la fe nunca fueron destinadas a ser desenterradas de la tierra. Descansan, como dijimos al mismísimo principio, en el carácter del Dios que habló y el testimonio de su Espíritu. Así que la arqueología toma su lugar propio: no el fundamento de nuestra fe, sino un testigo que apoya el mundo en que ocurrieron los eventos de nuestra fe. Corrobora el escenario y los actores; no puede escribir el drama, y no necesita hacerlo.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">8. The Rules for the Road Ahead</span><span class="lang-es">8. Las Reglas para el Camino que Sigue</span></h3>
+    <div class="lang-en"><p>So we have the rules by which to hear this third witness, and they are worth gathering in one place. Expect correlation, not proof. Never argue from silence, in either direction, for the ground is only partly dug. Refuse the skeptic's camel, that a missing find is a verdict; and refuse the apologist's overclaim, that a lucky find proves all things. Where a genuine dispute stands — and there are a few — hold it honestly as an open question, remembering that both the reading of the Bible and the reading of the dig can be revisited as more is learned. Let the great cumulative weight of real correlations build an honest and unhurried confidence. And remember always that this witness testifies to the world of the Bible, never to its miracles or its meaning. With these rules in hand, we are ready to walk among the actual finds — the confirmations that answered the skeptics and the honest puzzles that remain unsettled. In the next unit, the spade itself will testify: the stones that speak for Scripture, and the questions we are still content to leave open.</p></div>
+    <div class="lang-es"><p>Así que tenemos las reglas para oír a este tercer testigo, y vale reunirlas en un solo lugar. Espera correlación, no prueba. Nunca argumentes desde el silencio, en ninguna dirección, pues la tierra está solo parcialmente excavada. Rechaza el camello del escéptico, de que un hallazgo faltante es un veredicto; y rechaza la exageración del apologista, de que un hallazgo afortunado prueba todas las cosas. Donde hay una disputa genuina — y hay unas pocas — sostenla con honestidad como una pregunta abierta, recordando que tanto la lectura de la Biblia como la lectura de la excavación pueden revisarse conforme se aprende más. Deja que el gran peso acumulado de correlaciones reales construya una confianza honesta y sin prisa. Y recuerda siempre que este testigo testifica del mundo de la Biblia, nunca de sus milagros ni de su significado. Con estas reglas en mano, estamos listos para caminar entre los hallazgos reales — las confirmaciones que respondieron a los escépticos y los enigmas honestos que quedan sin resolver. En la próxima unidad, la pala misma testificará: las piedras que hablan por la Escritura, y las preguntas que aún estamos contentos de dejar abiertas.</p></div>
+  </section>
+
+  <!-- ===================== MULTIPLE CHOICE ===================== -->
+  <div class="exam">
+    <h2><span class="lang-en">Review — Multiple Choice</span><span class="lang-es">Repaso — Opción Múltiple</span></h2>
+    <div class="lead"><span class="lang-en">20 questions. Tap an answer and you will see at once whether it is right — with the correct answer and a short explanation. A score of 18 is required to pass.</span><span class="lang-es">20 preguntas. Toca una respuesta y verás de inmediato si es correcta — con la respuesta correcta y una breve explicación. Se requieren 18 para aprobar.</span></div>
+    <div id="mcContainer"></div>
+    <div id="mcResult" class="result"></div>
+    <button class="btn-primary" onclick="resetMC()" style="margin-top:12px;"><span class="lang-en">Reset Exam</span><span class="lang-es">Reiniciar Examen</span></button>
+  </div>
+
+  <!-- ===================== SHORT ANSWER ===================== -->
+  <div class="exam">
+    <h2><span class="lang-en">Written Work — Short Answer</span><span class="lang-es">Trabajo Escrito — Respuesta Corta</span></h2>
+    <div class="sa-note"><span class="lang-en">Required for the Th.M. and M.Div. tracks; optional (but encouraged) for the Certificate track. Write a few sentences; the model answer appears after a real attempt.</span><span class="lang-es">Requerido para las vías Th.M. y M.Div.; opcional (pero recomendado) para la vía de Certificado. Escribe unas cuantas oraciones; la respuesta modelo aparece tras un intento real.</span></div>
+    <div id="saContainer"></div>
+    <button class="btn-primary" onclick="gradeSA()"><span class="lang-en">Check My Answers</span><span class="lang-es">Revisar Mis Respuestas</span></button>
+  </div>
+
+  <div id="completionBanner" class="completion"></div>
+
+  <div class="foot-nav">
+    <a href="CTSBibleUnit6.html">← <span class="lang-en">Previous: Unit 6</span><span class="lang-es">Anterior: Unidad 6</span></a>
+    <a href="index.html"><span class="lang-en">📚 Return to Catalog</span><span class="lang-es">📚 Volver al Catálogo</span></a>
+    <a href="CTSBibleUnit8.html"><span class="lang-en">Next: Unit 8</span><span class="lang-es">Siguiente: Unidad 8</span> →</a>
+  </div>
+
+</div>
+
+<script>
+/* ===== CTS "How We Got the Bible" — Unit 7 — immediate-feedback engine ===== */
+const COURSE_PREFIX = 'cts_bible_u7_';
+function K(s){ return COURSE_PREFIX + s; }
+
+let currentLang = localStorage.getItem('cts_lang') || 'en';
+let track = localStorage.getItem('cts_track') || 'cert';
+let mcAnswers = new Array(20).fill('');
+let kwAnswers = new Array(10).fill('');
+let mcPreviouslyPassed = false;
+let unitPassed = false;
+
+const mcQuestions = [
+  { textEn:`The third witness of the course is:`, textEs:`El tercer testigo del curso es:`,
+    optionsEn:[`The canon`,`The text`,`Archaeology`,`Personal experience`],
+    optionsEs:[`El canon`,`El texto`,`La arqueología`,`La experiencia personal`],
+    correct:2, explanationEn:`The third witness is archaeology — the world of the Bible in the ground.`, explanationEs:`El tercer testigo es la arqueología — el mundo de la Biblia en la tierra.` },
+
+  { textEn:`The governing maxim for archaeology in this course is:`, textEs:`La máxima rectora para la arqueología en este curso es:`,
+    optionsEn:[`Correlation, not proof`,`Proof, not correlation`,`Silence is a verdict`,`Archaeology proves everything`],
+    optionsEs:[`Correlación, no prueba`,`Prueba, no correlación`,`El silencio es un veredicto`,`La arqueología prueba todo`],
+    correct:0, explanationEn:`Correlation, not proof — the maxim that governs the archaeology units.`, explanationEs:`Correlación, no prueba — la máxima que gobierna las unidades de arqueología.` },
+
+  { textEn:`Archaeology is best described as:`, textEs:`La arqueología se describe mejor como:`,
+    optionsEn:[`A machine that proves or disproves the Bible`,`The recovery and interpretation of the material remains of the past`,`A branch of theology`,`The study of ancient languages only`],
+    optionsEs:[`Una máquina que prueba o refuta la Biblia`,`La recuperación e interpretación de los restos materiales del pasado`,`Una rama de la teología`,`Solo el estudio de lenguas antiguas`],
+    correct:1, explanationEn:`It is the recovery and interpretation of material remains — a science of fragments.`, explanationEs:`Es la recuperación e interpretación de restos materiales — una ciencia de fragmentos.` },
+
+  { textEn:`Which is true of how much survives and is recovered?`, textEs:`¿Qué es verdad de cuánto sobrevive y se recupera?`,
+    optionsEn:[`Nearly everything ancient is found`,`All inscriptions survive`,`Only a small fraction of sites are dug, and most materials perish`,`Excavation is complete`],
+    optionsEs:[`Casi todo lo antiguo se halla`,`Todas las inscripciones sobreviven`,`Solo una pequeña fracción de los sitios se excavan, y la mayoría de los materiales perecen`,`La excavación está completa`],
+    correct:2, explanationEn:`Only a fraction is dug and most materials perish — archaeology is incomplete.`, explanationEs:`Solo una fracción se excava y la mayoría de los materiales perecen — la arqueología es incompleta.` },
+
+  { textEn:`In archaeology, as in all history, real proof is:`, textEs:`En la arqueología, como en toda la historia, la prueba real es:`,
+    optionsEn:[`The usual result`,`Guaranteed by every dig`,`The same as illustration`,`Rare; we almost never get it`],
+    optionsEs:[`El resultado usual`,`Garantizada por cada excavación`,`Lo mismo que la ilustración`,`Rara; casi nunca la obtenemos`],
+    correct:3, explanationEn:`Real proof is rare in archaeology, as in all history.`, explanationEs:`La prueba real es rara en la arqueología, como en toda la historia.` },
+
+  { textEn:`What does archaeology do best and most often?`, textEs:`¿Qué hace la arqueología mejor y con más frecuencia?`,
+    optionsEn:[`Prove doctrines`,`Corroborate — confirm and support the Bible's world`,`Contradict the Bible`,`Nothing`],
+    optionsEs:[`Probar doctrinas`,`Corroborar — confirmar y apoyar el mundo de la Biblia`,`Contradecir la Biblia`,`Nada`],
+    correct:1, explanationEn:`Corroboration is the daily work of biblical archaeology.`, explanationEs:`La corroboración es el trabajo diario de la arqueología bíblica.` },
+
+  { textEn:`Uncovering a lamp, a house, or a pavement from Bible times is an example of archaeology's power to:`, textEs:`Descubrir una lámpara, una casa o un pavimento de los tiempos bíblicos es un ejemplo del poder de la arqueología para:`,
+    optionsEn:[`Prove inspiration`,`Disprove miracles`,`Illustrate — make the world of the text vivid`,`Date the autographs`],
+    optionsEs:[`Probar la inspiración`,`Refutar los milagros`,`Ilustrar — hacer vívido el mundo del texto`,`Fechar los autógrafos`],
+    correct:2, explanationEn:`Such finds illustrate — they make the world of the text vivid.`, explanationEs:`Tales hallazgos ilustran — hacen vívido el mundo del texto.` },
+
+  { textEn:`"Absence of evidence is not evidence of absence" warns against:`, textEs:`"La ausencia de evidencia no es evidencia de ausencia" advierte contra:`,
+    optionsEn:[`The apologist's overclaim`,`Reading the Bible`,`Excavating at all`,`The skeptic's error of treating a missing find as a verdict`],
+    optionsEs:[`La exageración del apologista`,`Leer la Biblia`,`Excavar en absoluto`,`El error del escéptico de tratar un hallazgo faltante como un veredicto`],
+    correct:3, explanationEn:`It warns the skeptic not to treat a missing find as a verdict.`, explanationEs:`Advierte al escéptico de no tratar un hallazgo faltante como un veredicto.` },
+
+  { textEn:`The Hittites are a classic example because they were:`, textEs:`Los hititas son un ejemplo clásico porque fueron:`,
+    optionsEn:[`Never mentioned in the Bible`,`Once dismissed as a biblical fiction, then confirmed by vast archives`,`A Christian invention`,`Proof of the resurrection`],
+    optionsEs:[`Nunca mencionados en la Biblia`,`Una vez descartados como ficción bíblica, luego confirmados por vastos archivos`,`Una invención cristiana`,`Prueba de la resurrección`],
+    correct:1, explanationEn:`The Hittites were doubted, then confirmed by vast archives.`, explanationEs:`Los hititas fueron dudados, luego confirmados por vastos archivos.` },
+
+  { textEn:`The stone found at Tel Dan is significant because it bears the words:`, textEs:`La piedra hallada en Tel Dan es significativa porque lleva las palabras:`,
+    optionsEn:[`"Pontius Pilate"`,`"Jesus of Nazareth"`,`"the house of David"`,`"the Hittites"`],
+    optionsEs:[`"Poncio Pilato"`,`"Jesús de Nazaret"`,`"la casa de David"`,`"los hititas"`],
+    correct:2, explanationEn:`The Tel Dan stone names "the house of David."`, explanationEs:`La piedra de Tel Dan nombra "la casa de David".` },
+
+  { textEn:`The overclaim "Archaeology proves the Bible!" is dangerous because it:`, textEs:`La exageración "¡La arqueología prueba la Biblia!" es peligrosa porque:`,
+    optionsEn:[`Sets up a believer to stumble when he meets a genuine dispute`,`Is too modest`,`Denies the Bible`,`Is always false`],
+    optionsEs:[`Prepara al creyente para tropezar cuando halla una disputa genuina`,`Es demasiado modesta`,`Niega la Biblia`,`Siempre es falsa`],
+    correct:0, explanationEn:`Overclaiming sets a believer up to stumble at the first real dispute.`, explanationEs:`Exagerar prepara al creyente para tropezar ante la primera disputa real.` },
+
+  { textEn:`Refusing the overclaim, the unit says, is done in order to:`, textEs:`Rechazar la exageración, dice la unidad, se hace para:`,
+    optionsEn:[`Weaken the Bible`,`Please skeptics`,`Avoid study`,`Protect the faith of those we teach`],
+    optionsEs:[`Debilitar la Biblia`,`Complacer a los escépticos`,`Evitar el estudio`,`Proteger la fe de aquellos a quienes enseñamos`],
+    correct:3, explanationEn:`We refuse the overclaim to protect the faith of those we teach.`, explanationEs:`Rechazamos la exageración para proteger la fe de aquellos a quienes enseñamos.` },
+
+  { textEn:`The cumulative weight of many honest correlations:`, textEs:`El peso acumulado de muchas correlaciones honestas:`,
+    optionsEn:[`Proves the resurrection`,`Earns reasonable trust for the Bible's whole account`,`Means nothing`,`Disproves the Bible`],
+    optionsEs:[`Prueba la resurrección`,`Gana una confianza razonable para todo el relato de la Biblia`,`No significa nada`,`Refuta la Biblia`],
+    correct:1, explanationEn:`Cumulative correlation earns reasonable trust for the whole account.`, explanationEs:`La correlación acumulada gana confianza razonable para todo el relato.` },
+
+  { textEn:`A document that gets its verifiable world right again and again:`, textEs:`Un documento que acierta su mundo verificable una y otra vez:`,
+    optionsEn:[`Earns a reasonable trust for the rest of its account`,`Should be distrusted`,`Proves every miracle`,`Has no historical value`],
+    optionsEs:[`Gana una confianza razonable para el resto de su relato`,`Debe desconfiarse`,`Prueba cada milagro`,`No tiene valor histórico`],
+    correct:0, explanationEn:`Getting the verifiable world right earns trust for the rest.`, explanationEs:`Acertar el mundo verificable gana confianza para el resto.` },
+
+  { textEn:`Archaeology can confirm that a city was destroyed by fire, but it cannot:`, textEs:`La arqueología puede confirmar que una ciudad fue destruida por fuego, pero no puede:`,
+    optionsEn:[`Date the ruins`,`Identify pottery`,`Find inscriptions`,`Tell you that God gave it into Israel's hand`],
+    optionsEs:[`Fechar las ruinas`,`Identificar la cerámica`,`Hallar inscripciones`,`Decirte que Dios la entregó en mano de Israel`],
+    correct:3, explanationEn:`It can date the fire, but not tell you God gave the city to Israel.`, explanationEs:`Puede fechar el fuego, pero no decirte que Dios dio la ciudad a Israel.` },
+
+  { textEn:`Archaeology can show a man named Jesus was crucified under Pilate, but it cannot show:`, textEs:`La arqueología puede mostrar que un hombre llamado Jesús fue crucificado bajo Pilato, pero no puede mostrar:`,
+    optionsEn:[`That Pilate existed`,`That on the third day He rose`,`That Judea was Roman`,`That crucifixion happened`],
+    optionsEs:[`Que Pilato existió`,`Que al tercer día resucitó`,`Que Judea era romana`,`Que la crucifixión sucedió`],
+    correct:1, explanationEn:`It cannot reach the resurrection — the miracle lies beyond the spade.`, explanationEs:`No puede alcanzar la resurrección — el milagro está más allá de la pala.` },
+
+  { textEn:`The deepest truths of the faith, the unit says, rest on:`, textEs:`Las verdades más profundas de la fe, dice la unidad, descansan en:`,
+    optionsEn:[`The character of the God who spoke and the witness of His Spirit`,`The spade`,`Archaeology alone`,`Inscriptions`],
+    optionsEs:[`El carácter del Dios que habló y el testimonio de su Espíritu`,`La pala`,`Solo la arqueología`,`Las inscripciones`],
+    correct:0, explanationEn:`Faith rests on God's character and the Spirit's witness, not the spade.`, explanationEs:`La fe descansa en el carácter de Dios y el testimonio del Espíritu, no en la pala.` },
+
+  { textEn:`When a genuine archaeological dispute stands, the unit counsels us to:`, textEs:`Cuando hay una disputa arqueológica genuina, la unidad nos aconseja:`,
+    optionsEn:[`Declare the Bible false`,`Ignore it`,`Hold it honestly as an open question`,`Overclaim a resolution`],
+    optionsEs:[`Declarar la Biblia falsa`,`Ignorarla`,`Sostenerla con honestidad como una pregunta abierta`,`Exagerar una resolución`],
+    correct:2, explanationEn:`Hold genuine disputes honestly as open questions.`, explanationEs:`Sostén las disputas genuinas con honestidad como preguntas abiertas.` },
+
+  { textEn:`Archaeology's proper place is:`, textEs:`El lugar propio de la arqueología es:`,
+    optionsEn:[`The foundation of our faith`,`Irrelevant`,`Greater than Scripture`,`A supporting witness to the world in which faith's events occurred`],
+    optionsEs:[`El fundamento de nuestra fe`,`Irrelevante`,`Mayor que la Escritura`,`Un testigo que apoya el mundo en que ocurrieron los eventos de la fe`],
+    correct:3, explanationEn:`It is a supporting witness to the world of the events, not the foundation.`, explanationEs:`Es un testigo que apoya el mundo de los eventos, no el fundamento.` },
+
+  { textEn:`The next unit (Unit 8) will:`, textEs:`La próxima unidad (Unidad 8):`,
+    optionsEn:[`Walk among actual finds — confirmations and honest puzzles`,`Abandon archaeology`,`Return to the canon`,`Discuss geography only`],
+    optionsEs:[`Caminará entre los hallazgos reales — confirmaciones y enigmas honestos`,`Abandonará la arqueología`,`Volverá al canon`,`Discutirá solo la geografía`],
+    correct:0, explanationEn:`Unit 8 walks among actual finds — confirmations and honest puzzles.`, explanationEs:`La Unidad 8 camina entre los hallazgos reales — confirmaciones y enigmas honestos.` }
+];
+
+const saQuestions = [
+  { promptEn:`What is the governing maxim for archaeology in this course, and why?`,
+    promptEs:`¿Cuál es la máxima rectora para la arqueología en este curso, y por qué?`,
+    keywords:[`correlat`,`correlac`,`proof`,`prueb`,`archaeolog`,`arqueolog`,`real`,`stumbl`],
+    modelEn:`The governing maxim is "correlation, not proof." Archaeology can show again and again that the world of the Bible was real — real kings, cities, and customs — which is genuine correlation, but it is not the same as proof, which settles a matter beyond dispute. Confusing correlation with proof, in either direction, leads a believer to stumble.`,
+    modelEs:`La máxima rectora es "correlación, no prueba". La arqueología puede mostrar una y otra vez que el mundo de la Biblia era real — reyes, ciudades y costumbres reales — lo cual es correlación genuina, pero no es lo mismo que prueba, que zanja un asunto sin disputa. Confundir la correlación con la prueba, en cualquier dirección, lleva al creyente a tropezar.` },
+
+  { promptEn:`Explain why archaeology so rarely proves and why its silence proves even less.`,
+    promptEs:`Explica por qué la arqueología tan rara vez prueba y por qué su silencio prueba aún menos.`,
+    keywords:[`fragment`,`excavat`,`excav`,`perish`,`perec`,`inscription`,`absence`,`ausenc`],
+    modelEn:`Archaeology is a science of fragments: only a fraction of ancient sites are found, only a fraction excavated, and most materials perish, while inscriptions are rarest of all, and every find must still be interpreted. Because so little survives and is recovered, a matter is rarely settled beyond dispute, and the mere absence of a find proves even less, since the ground is only partly dug.`,
+    modelEs:`La arqueología es una ciencia de fragmentos: solo una fracción de los sitios antiguos se hallan, solo una fracción se excavan, y la mayoría de los materiales perecen, mientras que las inscripciones son las más raras de todas, y todo hallazgo aún debe interpretarse. Porque tan poco sobrevive y se recupera, un asunto rara vez se zanja sin disputa, y la mera ausencia de un hallazgo prueba aún menos, pues la tierra está solo parcialmente excavada.` },
+
+  { promptEn:`Name and apply the three things evidence can do to archaeology.`,
+    promptEs:`Nombra y aplica las tres cosas que la evidencia puede hacer a la arqueología.`,
+    keywords:[`proof`,`prueb`,`corrobor`,`illustrat`,`ilustr`,`confirm`,`custom`,`costumbr`],
+    modelEn:`Proof settles a matter beyond dispute, and in archaeology it is rare. Corroboration confirms and supports — a king, city, or custom the Bible names turning up in the ground — and this is what archaeology does best. Illustration makes the world of the text vivid, as when a lamp or a house or a pavement from Bible times is uncovered. Corroboration and illustration are the daily work of biblical archaeology.`,
+    modelEs:`La prueba zanja un asunto sin disputa, y en la arqueología es rara. La corroboración confirma y apoya — un rey, ciudad o costumbre que la Biblia nombra apareciendo en la tierra — y esto es lo que la arqueología hace mejor. La ilustración hace vívido el mundo del texto, como cuando se descubre una lámpara o una casa o un pavimento de los tiempos bíblicos. La corroboración y la ilustración son el trabajo diario de la arqueología bíblica.` },
+
+  { promptEn:`Explain "absence of evidence is not evidence of absence," with an example.`,
+    promptEs:`Explica "la ausencia de evidencia no es evidencia de ausencia", con un ejemplo.`,
+    keywords:[`absence`,`ausenc`,`hittite`,`hitita`,`david`,`camel`,`evidence`,`evidenc`],
+    modelEn:`Because archaeology is so incomplete, a missing find can never by itself be a verdict. Again and again the Bible has been called unhistorical because nothing had turned up, and then it did. The Hittites were once dismissed as a fiction until vast archives were found; King David was called a legend until a stone at Tel Dan named "the house of David." So the skeptic who says "no evidence, therefore it did not happen" swallows a camel.`,
+    modelEs:`Porque la arqueología es tan incompleta, un hallazgo faltante nunca puede por sí solo ser un veredicto. Una y otra vez la Biblia ha sido llamada no histórica porque nada había aparecido, y luego apareció. Los hititas fueron una vez descartados como ficción hasta que se hallaron vastos archivos; el rey David fue llamado una leyenda hasta que una piedra en Tel Dan nombró "la casa de David". Así que el escéptico que dice "no hay evidencia, por tanto no sucedió" traga un camello.` },
+
+  { promptEn:`Why does the unit refuse the overclaim "Archaeology proves the Bible"?`,
+    promptEs:`¿Por qué la unidad rechaza la exageración "La arqueología prueba la Biblia"?`,
+    keywords:[`overclaim`,`exager`,`correlat`,`correlac`,`protect`,`proteg`,`dispute`,`disput`],
+    modelEn:`Because archaeology does not prove the Bible; it correlates with it. The believer told "it is all proven," when he later meets a genuine dispute, can have his faith shaken far more than the difficulty deserved, since it rested on a promise that was never true. The unit refuses the overclaim not from weakness but to protect the faith of those we teach; honest correlation is a firmer foundation than a proof that cannot bear weight.`,
+    modelEs:`Porque la arqueología no prueba la Biblia; se correlaciona con ella. El creyente al que se le dijo "todo está probado", cuando luego halla una disputa genuina, puede ver su fe sacudida mucho más de lo que la dificultad merecía, pues descansaba en una promesa que nunca fue verdadera. La unidad rechaza la exageración no por debilidad sino para proteger la fe de los que enseñamos; la correlación honesta es un fundamento más firme que una prueba que no puede sostener peso.` },
+
+  { promptEn:`If archaeology only correlates, what is it worth?`,
+    promptEs:`Si la arqueología solo se correlaciona, ¿qué vale?`,
+    keywords:[`cumulat`,`acumul`,`correlat`,`correlac`,`confirm`,`verifiab`,`trust`,`confianz`],
+    modelEn:`A great deal, because the cumulative weight of honest correlation is powerful. The Bible names many checkable kings, nations, cities, and customs, and across a century and a half of excavation these details have been confirmed on an enormous scale. A document that gets its verifiable world right again and again earns reasonable trust for the rest of its account — not proof of the miracles, but strong evidence that the Bible is rooted in real history, not detached from it.`,
+    modelEs:`Muchísimo, porque el peso acumulado de la correlación honesta es poderoso. La Biblia nombra muchos reyes, naciones, ciudades y costumbres verificables, y a través de siglo y medio de excavación estos detalles han sido confirmados a una escala enorme. Un documento que acierta su mundo verificable una y otra vez gana una confianza razonable para el resto de su relato — no prueba de los milagros, sino fuerte evidencia de que la Biblia está arraigada en la historia real, no separada de ella.` },
+
+  { promptEn:`What can archaeology NOT touch?`,
+    promptEs:`¿Qué NO puede alcanzar la arqueología?`,
+    keywords:[`material`,`miracle`,`milagr`,`meaning`,`significa`,`crucif`,`pilat`,`confirm`],
+    modelEn:`Archaeology reaches the material and the datable — walls, bones, coins, names — and there it stops. It can confirm that a city burned but not that the LORD gave it to Israel; it can show that Jesus was crucified under Pilate but not that He rose on the third day. It cannot reach the miracle, the meaning, or the God behind the event. The deepest truths of the faith were never meant to be dug out of the ground.`,
+    modelEs:`La arqueología alcanza lo material y lo databe — muros, huesos, monedas, nombres — y ahí se detiene. Puede confirmar que una ciudad se quemó pero no que Jehová la dio a Israel; puede mostrar que Jesús fue crucificado bajo Pilato pero no que resucitó al tercer día. No puede alcanzar el milagro, el significado, ni el Dios detrás del evento. Las verdades más profundas de la fe nunca fueron destinadas a ser desenterradas de la tierra.` },
+
+  { promptEn:`What are the rules for weighing archaeological evidence, according to the unit?`,
+    promptEs:`¿Cuáles son las reglas para pesar la evidencia arqueológica, según la unidad?`,
+    keywords:[`correlat`,`correlac`,`silence`,`silenc`,`camel`,`overclaim`,`exager`,`dispute`],
+    modelEn:`Expect correlation, not proof. Never argue from silence in either direction, since the ground is only partly dug. Refuse the skeptic's camel that a missing find is a verdict, and refuse the apologist's overclaim that a find proves all things. Hold genuine disputes honestly as open questions, and let the cumulative weight of real correlations build an unhurried confidence, remembering that archaeology reaches the world of the Bible but not its miracles.`,
+    modelEs:`Espera correlación, no prueba. Nunca argumentes desde el silencio en ninguna dirección, pues la tierra está solo parcialmente excavada. Rechaza el camello del escéptico de que un hallazgo faltante es un veredicto, y rechaza la exageración del apologista de que un hallazgo prueba todas las cosas. Sostén las disputas genuinas con honestidad como preguntas abiertas, y deja que el peso acumulado de correlaciones reales construya una confianza sin prisa, recordando que la arqueología alcanza el mundo de la Biblia pero no sus milagros.` },
+
+  { promptEn:`Explain archaeology's proper place in relation to faith.`,
+    promptEs:`Explica el lugar propio de la arqueología en relación con la fe.`,
+    keywords:[`foundation`,`fundament`,`witness`,`testig`,`corrobor`,`miracle`,`milagr`,`real`],
+    modelEn:`Archaeology is not the foundation of faith but a supporting witness to the world in which faith's events occurred. It corroborates the stage and the actors — real places, real people, real history — but it cannot script the drama or reach the miracle. Our faith rests, as from the beginning, on the character of the God who spoke and the witness of His Spirit, and archaeology takes its modest, honest place beside that foundation, not in place of it.`,
+    modelEs:`La arqueología no es el fundamento de la fe sino un testigo que apoya el mundo en que ocurrieron los eventos de la fe. Corrobora el escenario y los actores — lugares reales, personas reales, historia real — pero no puede escribir el drama ni alcanzar el milagro. Nuestra fe descansa, como desde el principio, en el carácter del Dios que habló y el testimonio de su Espíritu, y la arqueología toma su lugar modesto y honesto junto a ese fundamento, no en su lugar.` },
+
+  { promptEn:`In your own words, how should the rules of this unit guide you when you hear a claim about archaeology and the Bible?`,
+    promptEs:`Con tus palabras, ¿cómo deben las reglas de esta unidad guiarte cuando oyes una afirmación sobre la arqueología y la Biblia?`,
+    keywords:[`correlat`,`correlac`,`prove`,`prob`,`absence`,`ausenc`,`extrem`,`dispute`],
+    modelEn:`When I hear that a find "proves the Bible," I should remember it correlates rather than proves, and state it soberly. When I hear that a missing find shows the Bible is false, I should recall that absence of evidence is not evidence of absence. I should refuse both extremes, hold genuine disputes as open questions, and rest my faith not on the spade but on God, letting real correlations build honest confidence.`,
+    modelEs:`Cuando oiga que un hallazgo "prueba la Biblia", debo recordar que se correlaciona en vez de probar, y afirmarlo con sobriedad. Cuando oiga que un hallazgo faltante muestra que la Biblia es falsa, debo recordar que la ausencia de evidencia no es evidencia de ausencia. Debo rechazar ambos extremos, sostener las disputas genuinas como preguntas abiertas, y descansar mi fe no en la pala sino en Dios, dejando que las correlaciones reales construyan una confianza honesta.` }
+];
+
+function saveState(){
+  try{
+    localStorage.setItem(K('mc'), JSON.stringify(mcAnswers));
+    localStorage.setItem(K('sa'), JSON.stringify(kwAnswers));
+    localStorage.setItem(K('mcpass'), mcPreviouslyPassed ? '1' : '0');
+    localStorage.setItem('cts_track', track);
+    localStorage.setItem('cts_lang', currentLang);
+  }catch(e){}
+}
+function restoreState(){
+  try{ const a = JSON.parse(localStorage.getItem(K('mc'))); if(Array.isArray(a) && a.length===20) mcAnswers = a; }catch(e){}
+  try{ const b = JSON.parse(localStorage.getItem(K('sa'))); if(Array.isArray(b) && b.length===10) kwAnswers = b; }catch(e){}
+  mcPreviouslyPassed = localStorage.getItem(K('mcpass')) === '1';
+}
+
+function applyLang(){
+  document.body.className = 'lang-' + currentLang;
+  document.getElementById('langToggleBtn').textContent = currentLang === 'en' ? 'Español' : 'English';
+}
+function toggleLang(){
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  applyLang(); renderMC(); updateMCResult(); renderSA(); saveState();
+}
+
+function setTrack(t){ track = t; saveState(); updateTrackUI(); updateCompletion(); }
+function updateTrackUI(){
+  ['cert','assoc','thm','mdiv'].forEach(function(t){
+    const el = document.getElementById('track-' + t);
+    if(el) el.classList.toggle('active', track === t);
+  });
+}
+
+/* Immediate-feedback MC: the first tap on a question locks it, shows right/wrong,
+   the correct answer, and a short explanation at once. A running score is shown
+   below; when all 20 are answered a pass/fail verdict appears. Reset starts over. */
+function renderMC(){
+  const container = document.getElementById('mcContainer');
+  container.innerHTML = '';
+  const allAnswered = mcAnswers.filter(function(a){ return !!a; }).length === 20;
+  mcQuestions.forEach(function(q, idx){
+    const answered = !!mcAnswers[idx];
+    const div = document.createElement('div'); div.className = 'question';
+    const p = document.createElement('p'); p.className = 'qtext';
+    p.textContent = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+    div.appendChild(p);
+    const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+    const correctLetter = String.fromCharCode(65 + q.correct);
+    options.forEach(function(opt, optIdx){
+      const letter = String.fromCharCode(65 + optIdx);
+      const btn = document.createElement('button'); btn.className = 'option';
+      btn.textContent = letter + '. ' + opt;
+      if(answered){
+        if(optIdx === q.correct) btn.classList.add('correct');
+        else if(mcAnswers[idx] === letter) btn.classList.add('wrong');
+        btn.disabled = true; btn.style.cursor = 'default';
+      } else {
+        if(mcAnswers[idx] === letter){ btn.style.background = '#efe7d2'; btn.style.borderColor = '#d4af37'; btn.style.fontWeight = '600'; }
+        btn.onclick = function(){
+          mcAnswers[idx] = letter;
+          saveState();
+          renderMC();
+          updateMCResult();
+        };
+      }
+      div.appendChild(btn);
+    });
+    if(answered){
+      const fb = document.createElement('div');
+      const exp = currentLang === 'en' ? q.explanationEn : q.explanationEs;
+      if(mcAnswers[idx] === correctLetter){
+        fb.className = 'feedback-text correct';
+        fb.textContent = (currentLang === 'en' ? '\u2713 Correct! ' : '\u2713 \u00a1Correcto! ') + exp;
+      } else {
+        fb.className = 'feedback-text incorrect';
+        fb.textContent = (currentLang === 'en'
+          ? ('\u2717 Incorrect. Correct answer: ' + correctLetter + '. ')
+          : ('\u2717 Incorrecto. Respuesta correcta: ' + correctLetter + '. ')) + exp;
+      }
+      div.appendChild(fb);
+    }
+    container.appendChild(div);
+  });
+}
+
+function updateMCResult(){
+  let answered = 0, score = 0;
+  mcQuestions.forEach(function(q, idx){
+    if(mcAnswers[idx]){
+      answered++;
+      if(mcAnswers[idx] === String.fromCharCode(65 + q.correct)) score++;
+    }
+  });
+  const res = document.getElementById('mcResult');
+  if(answered === 0){ res.style.display = 'none'; res.className = 'result'; res.textContent = ''; updateCompletion(); return; }
+  if(answered < 20){
+    res.className = 'result progress';
+    res.textContent = currentLang === 'en'
+      ? ('Answered ' + answered + '/20 \u00b7 ' + score + ' correct so far.')
+      : ('Respondidas ' + answered + '/20 \u00b7 ' + score + ' correctas hasta ahora.');
+  } else {
+    const pass = score >= 18;
+    if(pass) mcPreviouslyPassed = true;
+    res.className = 'result ' + (pass ? 'pass' : 'fail');
+    res.textContent = currentLang === 'en'
+      ? ('You scored ' + score + '/20. ' + (pass ? 'Passed (18 required).' : 'Not yet \u2014 18 required. Tap "Reset Exam" to try again.'))
+      : ('Obtuviste ' + score + '/20. ' + (pass ? 'Aprobado (se requieren 18).' : 'A\u00fan no \u2014 se requieren 18. Toca "Reiniciar Examen" para intentarlo de nuevo.'));
+  }
+  saveState();
+  updateCompletion();
+}
+
+function resetMC(){
+  mcAnswers = new Array(20).fill('');
+  mcPreviouslyPassed = false;
+  saveState();
+  renderMC();
+  const res = document.getElementById('mcResult');
+  res.style.display = 'none'; res.className = 'result'; res.textContent = '';
+  updateCompletion();
+}
+
+function kwHit(answer, stem){
+  const norm = (answer || '').toLowerCase();
+  const tokens = norm.split(/[^a-z\u00e0-\u00ff]+/i).filter(Boolean);
+  return tokens.some(function(t){ return t.indexOf(stem) === 0; });
+}
+
+function saPassState(){
+  let allPass = true;
+  saQuestions.forEach(function(q, idx){
+    const ans = (kwAnswers[idx] || '').trim();
+    if(ans.length < 100){ allPass = false; return; }
+    let hits = 0;
+    q.keywords.forEach(function(k){ if(kwHit(ans, k)) hits++; });
+    if(hits < 3) allPass = false;
+  });
+  return allPass;
+}
+
+function gradeSA(){
+  saQuestions.forEach(function(q, idx){
+    const ans = (kwAnswers[idx] || '').trim();
+    const fb = document.getElementById('sa-fb-' + idx);
+    if(!fb) return;
+    fb.style.display = 'block';
+    if(ans.length < 100){
+      fb.className = 'feedback-text incorrect';
+      fb.textContent = currentLang === 'en'
+        ? 'Please write at least a few sentences (about 100 characters) before the model answer is shown.'
+        : 'Por favor escribe al menos unas cuantas oraciones (unos 100 caracteres) antes de mostrar la respuesta modelo.';
+      return;
+    }
+    let hits = 0;
+    q.keywords.forEach(function(k){ if(kwHit(ans, k)) hits++; });
+    const pass = hits >= 3;
+    fb.className = 'feedback-text ' + (pass ? 'correct' : 'incorrect');
+    const model = currentLang === 'en' ? q.modelEn : q.modelEs;
+    const label = pass
+      ? (currentLang === 'en' ? ('\u2713 Sufficient (' + hits + ' key ideas). ') : ('\u2713 Suficiente (' + hits + ' ideas clave). '))
+      : (currentLang === 'en' ? ('Keep developing (' + hits + '/3 key ideas). ') : ('Sigue desarrollando (' + hits + '/3 ideas clave). '));
+    const modelLabel = currentLang === 'en' ? 'Model answer: ' : 'Respuesta modelo: ';
+    fb.innerHTML = '<strong>' + label + '</strong><br><em>' + modelLabel + '</em>' + model;
+  });
+  saveState(); updateCompletion();
+}
+
+function renderSA(){
+  const c = document.getElementById('saContainer');
+  c.innerHTML = '';
+  saQuestions.forEach(function(q, idx){
+    const div = document.createElement('div'); div.className = 'question';
+    const p = document.createElement('p'); p.className = 'qtext';
+    p.textContent = (idx + 1) + '. ' + (currentLang === 'en' ? q.promptEn : q.promptEs);
+    div.appendChild(p);
+    const ta = document.createElement('textarea');
+    ta.id = 'sa-input-' + idx; ta.rows = 4; ta.value = kwAnswers[idx] || '';
+    ta.placeholder = currentLang === 'en' ? 'Write your answer...' : 'Escribe tu respuesta...';
+    ta.oninput = function(){ kwAnswers[idx] = ta.value; saveState(); };
+    div.appendChild(ta);
+    const fb = document.createElement('div');
+    fb.id = 'sa-fb-' + idx; fb.className = 'feedback-text'; fb.style.display = 'none';
+    div.appendChild(fb);
+    c.appendChild(div);
+  });
+}
+
+function updateCompletion(){
+  const complete = (track === 'cert' || track === 'assoc') ? mcPreviouslyPassed : (mcPreviouslyPassed && saPassState());
+  unitPassed = complete;
+  const banner = document.getElementById('completionBanner');
+  if(complete){
+    const trackName = track === 'cert' ? (currentLang === 'en' ? 'Certificate' : 'de Certificado')
+                    : track === 'assoc' ? (currentLang === 'en' ? 'Associate' : 'de Asociado')
+                    : track === 'thm'  ? 'Th.M.' : 'M.Div.';
+    banner.style.display = 'block';
+    banner.textContent = currentLang === 'en'
+      ? ('\u2705 Unit 7 complete on the ' + trackName + ' track. Well done.')
+      : ('\u2705 Unidad 7 completada en la v\u00eda ' + trackName + '. Bien hecho.');
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  restoreState();
+  applyLang();
+  updateTrackUI();
+  renderMC();
+  updateMCResult();
+  renderSA();
+  updateCompletion();
+});
+</script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

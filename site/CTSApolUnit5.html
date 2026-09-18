@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Apologetics — Unit 5</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 6 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Apologetics — Unit 5: The Reliability of Scripture</span><span class="lang-es">📖 Apologética — Unidad 5: La Confiabilidad de la Escritura</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"All Scripture is given by inspiration of God." — 2 Timothy 3:16</span><span class="lang-es">"Toda la Escritura es dada por inspiración de Dios." — 2 Timoteo 3:16 (RVG)</span></p>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: 2 Timothy 3:16</strong></p><div class="scripture">"All Scripture is given by inspiration of God, and is profitable for doctrine, for reproof, for correction, for instruction in righteousness." — 2 Timothy 3:16</div>
+
+<h3>Can We Trust the Book?</h3>
+<p>We turn now to the third trail, the reliability of the documents. The skeptic raises an objection that sounds devastating until you examine it. "Your Bible," he says, "has been copied and recopied for two thousand years, translated and retranslated, edited by monks and councils with agendas of their own. By now it is a game of telephone — whatever Jesus said at the start, you cannot possibly have it now." It is a fair-sounding charge, and many a believer has gone quiet before it. But it happens to be one of the easiest charges in all of apologetics to answer, because here the evidence is not a matter of philosophy at all. It is a matter of counting, and the counting is not close.</p>
+
+<h3>The Bibliographical Test</h3>
+<p>Historians have a standard test for any ancient writing, and it asks two questions. First, how many copies of the document survive? The more copies, the more we can compare them and catch any error that crept into one. Second, how small is the gap between the original and our earliest copy? The shorter the gap, the less time legend or corruption had to creep in. Apply that test to the famous writings of the ancient world. Caesar's <em>Gallic Wars</em> survives in only a handful of copies, and the earliest is about nine hundred years after Caesar wrote. Homer's <em>Iliad</em> does better, with a few hundred copies. No classical scholar doubts these works, and no one calls Caesar a legend. Now apply the very same test to the New Testament.</p>
+
+<h3>The Mountain of Manuscripts</h3>
+<p>Of the New Testament we possess more than five thousand eight hundred manuscripts in the original Greek, and many thousands more in other ancient languages. No other writing of antiquity comes within a thousand miles of that number. And the gap is not nine hundred years; we have fragments within a generation or two of the events, and complete books within a couple of centuries. Indeed, the evidence is so abundant that even if every Greek manuscript were somehow lost, the entire New Testament could be very nearly reconstructed from the thousands of quotations the early church writers scattered through their letters and sermons. Stand the two side by side. For Caesar, a handful of copies and a thousand-year gap, and the world believes it without a murmur. For the New Testament, a mountain of copies and a gap so short the eyewitnesses' own children could have read it, and the world calls it doubtful. The honest conclusion is plain: if we throw out the New Testament as unreliable, we must throw out every other book of ancient history along with it, and burn the libraries down. The New Testament is not the weakest-attested book of antiquity; it is by far the strongest.</p>
+
+<h3>The Telephone Game Answered</h3>
+<p>"But copying breeds error," says the skeptic, "and error breeds more error." Here he misunderstands what happened. The transmission of Scripture was not one man whispering to one man down a line of a hundred, where the message drifts and no one can check it. It was more like a thousand photocopies made from the original and scattered across the world, so that when a slip of the pen appears in one, the other nine hundred and ninety-nine expose it instantly. With so many manuscripts to compare, the scholars can reconstruct the original text with extraordinary confidence. And what of the differences among the copies? The vast bulk of them are matters of spelling and word order, the kind of thing that never changes the sense. Not one teaching of the Christian faith hangs in doubt because of a copyist's variant. The wonder is not that the manuscripts differ here and there; the wonder is how astonishingly they agree.</p>
+
+<h3>Ramsay in the Dirt</h3>
+<p>Let me tell you about a man who set out to bury the Bible and ended by trusting it. Sir William Ramsay was a brilliant archaeologist trained in the German critical school, which taught with great confidence that the book of Acts was a fiction written long after the events by someone who knew nothing of the first century. Ramsay believed it, and he sailed to Asia Minor with his spade and his maps to prove it — to show that Luke's geography was wrong, his customs invented, his political titles impossible. But the dirt would not cooperate with his theory. Everywhere he dug, Luke turned out to be right. The borders were where Luke said. The local customs matched. Even the strange, shifting political titles — the very places where a forger writing later would surely have blundered — were exactly correct for the exact decade Luke described. Ramsay, an honest man, followed the evidence against his own wishes, and he came at last to call Luke a historian of the first rank and to trust the book he had come to destroy. He learned what every honest skeptic learns: that truth is often found by getting down into the dirt.</p>
+
+<h3>Greenleaf in the Court</h3>
+<p>Now let me tell you about a lawyer. Simon Greenleaf was the Royall Professor of Law at Harvard and one of the great legal minds America has produced; he wrote the standard work of his age on how testimony is to be weighed in a court of law. A skeptic challenged him to apply his own rules of evidence to the four Gospels — to put the evangelists in the witness box and cross-examine them as he would any witness. Greenleaf took up the challenge expecting, perhaps, to expose them. He examined their consistency, their character, the circumstances under which they testified, and whether they had anything to gain by lying. And the master of evidence reached a verdict that surprised him: that if the testimony of Matthew, Mark, Luke, and John were presented in any honest court of law, a jury would be compelled by the rules of evidence to accept it as true. Faith, he concluded, is not the abandonment of reason. It is the verdict a fair-minded judge returns when he has weighed the witnesses.</p>
+
+<h3>The Ring of Truth</h3>
+<p>There is one more mark of honesty in these documents, and once you see it you cannot unsee it. Forgers flatter themselves and their heroes; honest witnesses tell the truth even when it costs them. Now look at the Gospels. The disciples — the very men who wrote or stood behind these books — come off looking slow, cowardly, and quarrelsome. Peter denies his Lord with curses. They all run away at the cross. And who does the risen Christ appear to first? Not to the apostles, not to the men, but to women — whose testimony, in that culture, was not even accepted in a court. No inventor building a religion to impress the ancient world would have written the story that way. They wrote it that way for one reason: because that is how it happened. The very details that embarrass the writers are the fingerprints of the truth.</p>
+<!-- APOL_ENRICHMENT_START U5 EN -->
+<div class="lang-en block">
+<h3>The Gospels Know Their World</h3>
+<p>Another kind of evidence is easy to overlook because it comes in small pieces. The Gospels know the world they describe: towns and roads, Jewish customs, local rulers, ordinary names, and the geography of first-century Palestine. Peter J. Williams has emphasized how these details form a cumulative case. Any one accurate detail might be explained away, but repeated familiarity with the right places, people, and customs is what we would expect from accounts rooted close to the events. This does not mean that every difficult passage has been solved, nor does it make historical investigation unnecessary. It means something more modest and useful: the Gospels do not read like stories invented centuries later by writers unfamiliar with the land and culture of Jesus. Their many ordinary details fit the world they claim to describe.</p>
+</div>
+<!-- APOL_ENRICHMENT_END U5 EN -->
+
+
+<h3>The Church Did Not Make the Book</h3>
+<p>A word about how we got the canon, the list of books we call Scripture. It is sometimes said that the church created the Bible, voting books in and out as it pleased. That is backward. The church did not create the canon; it recognized it. God gave His Word, and the church, over time, received what bore the marks of God's own breathing and set aside what did not. As Paul says, "All Scripture is given by inspiration of God" — literally, God-breathed — and Peter adds that holy men of old "spoke as they were moved by the Holy Spirit." The Word is divine in its origin and human in its writing, the same God-and-man pattern we find in the incarnation itself: God's truth carried perfectly through the pens of men.</p>
+
+<h3>The Book That Outlasts Its Pallbearers</h3>
+<p>So the documents stand, and they stand on ground no other ancient book can claim. Men have buried this book a hundred times — burned it, banned it, mocked it, pronounced it dead and dancing on its grave — and every time, the grave would not hold it. "Heaven and earth will pass away," said the One it proclaims, "but My words will by no means pass away." Yet remember once more what reliability can and cannot do. To prove the documents trustworthy is to establish that the Witnesses are credible; it is to bring the jury to the brink of its verdict. But a credible witness still asks to be believed. The reliability of Scripture carries us to the door. Whether we will walk through it and trust the One to whom every page bears witness — that is the question still waiting on the other side.</p>
+<div class="scripture">"The grass withers, the flower fades, but the word of our God stands forever." — Isaiah 40:8</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: 2 Timoteo 3:16</strong></p><div class="scripture">"Toda la Escritura es dada por inspiración de Dios, y es útil para enseñar, para redargüir, para corregir, para instruir en justicia." — 2 Timoteo 3:16 (RVG)</div>
+
+<h3>¿Podemos Confiar en el Libro?</h3>
+<p>Pasamos ahora al tercer sendero, la confiabilidad de los documentos. El escéptico levanta una objeción que suena devastadora hasta que se examina. "Su Biblia", dice, "ha sido copiada y vuelta a copiar por dos mil años, traducida y vuelta a traducir, editada por monjes y concilios con agendas propias. A estas alturas es un juego del teléfono — lo que Jesús dijo al principio, no es posible que ustedes lo tengan ahora." Es una acusación que suena razonable, y más de un creyente ha enmudecido ante ella. Pero resulta ser una de las acusaciones más fáciles de responder en toda la apologética, porque aquí la evidencia no es asunto de filosofía en absoluto. Es asunto de contar, y la cuenta no está pareja.</p>
+
+<h3>La Prueba Bibliográfica</h3>
+<p>Los historiadores tienen una prueba estándar para cualquier escrito antiguo, y hace dos preguntas. Primero, ¿cuántas copias del documento sobreviven? Mientras más copias, más podemos compararlas y atrapar cualquier error que se haya colado en una. Segundo, ¿qué tan pequeña es la brecha entre el original y nuestra copia más antigua? Mientras más corta la brecha, menos tiempo tuvo la leyenda o la corrupción para colarse. Aplique esa prueba a los escritos famosos del mundo antiguo. Las <em>Guerras Galas</em> de César sobreviven en solo un puñado de copias, y la más antigua es de unos novecientos años después de que César escribió. La <em>Ilíada</em> de Homero le va mejor, con unos cientos de copias. Ningún erudito clásico duda de estas obras, y nadie llama leyenda a César. Ahora aplique la misma prueba al Nuevo Testamento.</p>
+
+<h3>La Montaña de Manuscritos</h3>
+<p>Del Nuevo Testamento poseemos más de cinco mil ochocientos manuscritos en el griego original, y muchos miles más en otras lenguas antiguas. Ningún otro escrito de la antigüedad se acerca ni a mil millas de ese número. Y la brecha no es de novecientos años; tenemos fragmentos dentro de una generación o dos de los hechos, y libros completos dentro de un par de siglos. De hecho, la evidencia es tan abundante que aun si se perdiera de algún modo cada manuscrito griego, el Nuevo Testamento entero podría reconstruirse casi por completo a partir de las miles de citas que los escritores de la iglesia primitiva esparcieron por sus cartas y sermones. Ponga los dos lado a lado. Para César, un puñado de copias y una brecha de mil años, y el mundo lo cree sin un murmullo. Para el Nuevo Testamento, una montaña de copias y una brecha tan corta que los propios hijos de los testigos oculares pudieron haberla leído, y el mundo lo llama dudoso. La conclusión honesta es clara: si descartamos el Nuevo Testamento como no confiable, debemos descartar todo otro libro de la historia antigua junto con él, y quemar las bibliotecas. El Nuevo Testamento no es el libro peor atestiguado de la antigüedad; es por mucho el más fuerte.</p>
+
+<h3>El Juego del Teléfono Respondido</h3>
+<p>"Pero copiar engendra error", dice el escéptico, "y el error engendra más error." Aquí malentiende lo que sucedió. La transmisión de la Escritura no fue un hombre susurrando a otro a lo largo de una fila de cien, donde el mensaje se desvía y nadie puede verificarlo. Fue más bien como mil fotocopias hechas del original y esparcidas por el mundo, de modo que cuando aparece un desliz de la pluma en una, las otras novecientas noventa y nueve lo exponen al instante. Con tantos manuscritos para comparar, los eruditos pueden reconstruir el texto original con confianza extraordinaria. ¿Y qué de las diferencias entre las copias? La inmensa mayoría de ellas son cuestiones de ortografía y orden de palabras, la clase de cosa que nunca cambia el sentido. Ni una sola enseñanza de la fe cristiana queda en duda por la variante de un copista. La maravilla no es que los manuscritos difieran aquí y allá; la maravilla es cuán asombrosamente concuerdan.</p>
+
+<h3>Ramsay en la Tierra</h3>
+<p>Déjeme contarle de un hombre que se propuso enterrar la Biblia y terminó confiando en ella. Sir William Ramsay era un arqueólogo brillante formado en la escuela crítica alemana, que enseñaba con gran confianza que el libro de los Hechos era una ficción escrita mucho después de los eventos por alguien que nada sabía del primer siglo. Ramsay lo creía, y zarpó hacia Asia Menor con su pala y sus mapas para probarlo — para mostrar que la geografía de Lucas estaba equivocada, sus costumbres inventadas, sus títulos políticos imposibles. Pero la tierra no quiso cooperar con su teoría. Dondequiera que cavaba, Lucas resultaba tener razón. Las fronteras estaban donde Lucas decía. Las costumbres locales coincidían. Aun los extraños y cambiantes títulos políticos — los lugares mismos donde un falsificador que escribiera después seguramente habría errado — eran exactamente correctos para la década exacta que Lucas describía. Ramsay, un hombre honesto, siguió la evidencia contra sus propios deseos, y llegó al fin a llamar a Lucas un historiador de primer orden y a confiar en el libro que había venido a destruir. Aprendió lo que todo escéptico honesto aprende: que la verdad a menudo se halla metiéndose en la tierra.</p>
+
+<h3>Greenleaf en el Tribunal</h3>
+<p>Ahora déjeme contarle de un abogado. Simon Greenleaf era el Profesor Royall de Derecho en Harvard y una de las grandes mentes jurídicas que América ha producido; escribió la obra estándar de su época sobre cómo se ha de sopesar el testimonio en un tribunal de justicia. Un escéptico lo desafió a aplicar sus propias reglas de evidencia a los cuatro Evangelios — a poner a los evangelistas en el estrado y examinarlos como examinaría a cualquier testigo. Greenleaf aceptó el reto esperando, tal vez, exponerlos. Examinó su coherencia, su carácter, las circunstancias bajo las cuales testificaron, y si tenían algo que ganar mintiendo. Y el maestro de la evidencia llegó a un veredicto que lo sorprendió: que si el testimonio de Mateo, Marcos, Lucas y Juan se presentara en cualquier tribunal honesto, un jurado estaría obligado por las reglas de la evidencia a aceptarlo como verdadero. La fe, concluyó, no es el abandono de la razón. Es el veredicto que un juez imparcial emite cuando ha sopesado a los testigos.</p>
+
+<h3>El Sello de la Verdad</h3>
+<p>Hay una marca más de honestidad en estos documentos, y una vez que la ve no puede dejar de verla. Los falsificadores se halagan a sí mismos y a sus héroes; los testigos honestos dicen la verdad aun cuando les cuesta. Ahora mire los Evangelios. Los discípulos — los hombres mismos que escribieron o respaldaron estos libros — quedan luciendo lentos, cobardes y pendencieros. Pedro niega a su Señor con maldiciones. Todos huyen en la cruz. ¿Y a quién aparece primero el Cristo resucitado? No a los apóstoles, no a los hombres, sino a mujeres — cuyo testimonio, en aquella cultura, ni siquiera se aceptaba en un tribunal. Ningún inventor que construyera una religión para impresionar al mundo antiguo habría escrito la historia así. La escribieron así por una razón: porque así fue como sucedió. Los detalles mismos que avergüenzan a los escritores son las huellas digitales de la verdad.</p>
+<!-- APOL_ENRICHMENT_START U5 ES -->
+<div class="lang-es block">
+<h3>Los Evangelios Conocen Su Mundo</h3>
+<p>Hay otra clase de evidencia que es fácil pasar por alto porque aparece en pequeños detalles. Los Evangelios conocen el mundo que describen: pueblos y caminos, costumbres judías, gobernantes locales, nombres comunes y la geografía de la Palestina del primer siglo. Peter J. Williams ha destacado cómo estos detalles forman un caso acumulativo. Un solo detalle correcto podría explicarse de otra manera, pero la familiaridad repetida con los lugares, las personas y las costumbres apropiadas es precisamente lo que esperaríamos de relatos arraigados cerca de los acontecimientos. Esto no significa que cada pasaje difícil haya sido resuelto, ni hace innecesaria la investigación histórica. Significa algo más modesto y útil: los Evangelios no se leen como historias inventadas siglos después por escritores que desconocían la tierra y la cultura de Jesús. Sus muchos detalles ordinarios encajan con el mundo que afirman describir.</p>
+</div>
+<!-- APOL_ENRICHMENT_END U5 ES -->
+
+
+<h3>La Iglesia No Hizo el Libro</h3>
+<p>Una palabra sobre cómo recibimos el canon, la lista de libros que llamamos Escritura. A veces se dice que la iglesia creó la Biblia, votando libros adentro y afuera a su antojo. Eso está al revés. La iglesia no creó el canon; lo reconoció. Dios dio su Palabra, y la iglesia, con el tiempo, recibió lo que llevaba las marcas del propio soplo de Dios y apartó lo que no. Como dice Pablo, "Toda la Escritura es dada por inspiración de Dios" — literalmente, soplada por Dios — y Pedro añade que los santos hombres de antaño "hablaron siendo inspirados por el Espíritu Santo". La Palabra es divina en su origen y humana en su escritura, el mismo patrón de Dios-y-hombre que hallamos en la encarnación misma: la verdad de Dios llevada perfectamente por las plumas de los hombres.</p>
+
+<h3>El Libro que Sobrevive a sus Sepultureros</h3>
+<p>Así que los documentos están en pie, y están en un terreno que ningún otro libro antiguo puede reclamar. Los hombres han enterrado este libro cien veces — lo han quemado, prohibido, burlado, declarado muerto y bailado sobre su tumba — y cada vez, la tumba no lo retuvo. "El cielo y la tierra pasarán", dijo Aquel a quien proclama, "mas mis palabras no pasarán." Pero recuerde una vez más lo que la confiabilidad puede y no puede hacer. Probar que los documentos son dignos de confianza es establecer que los Testigos son creíbles; es llevar al jurado al borde de su veredicto. Pero un testigo creíble todavía pide ser creído. La confiabilidad de la Escritura nos lleva hasta la puerta. Si la cruzaremos y confiaremos en Aquel de quien cada página da testimonio — esa es la pregunta que sigue esperando del otro lado.</p>
+<div class="scripture">"Sécase la hierba, marchítase la flor; mas la palabra del Dios nuestro permanece para siempre." — Isaías 40:8 (RVG)</div>
+</div>
+</div>
+
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Apologetics — Unit 5 (The Reliability of Scripture)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 5;
+const COURSE = 'apol';
+const NEXT_UNIT_URL = 'CTSApolUnit6.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - The Reason for the Hope",
+    "Unit 2 - The Design of the Heavens",
+    "Unit 3 - Revelation and the Witness Within",
+    "Unit 4 - The Problem of Evil and Suffering",
+    "Unit 5 - The Reliability of Scripture",
+    "Unit 6 - The Person and Claims of Christ",
+    "Unit 7 - The Resurrection and the Changed Skeptics",
+    "Unit 8 - Science, Chance, and the Limits of Naturalism",
+    "Unit 9 - Other Religions and Worldviews",
+    "Unit 10 - Apologetics in Practice"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSApolUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        var _rc = document.getElementById('regCard'); if (_rc) _rc.style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+// (registration handled on Unit 1 only)
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [
+    { textEn: "1. The skeptic's charge against the Bible's reliability is that it has been:", textEs: "1. La acusación del escéptico contra la confiabilidad de la Biblia es que ha sido:",
+      optionsEn: ["Copied and changed until corrupted, like a game of telephone", "Too short", "Written in English", "Lost entirely"],
+      optionsEs: ["Copiada y cambiada hasta corromperse, como un juego del teléfono", "Demasiado corta", "Escrita en inglés", "Perdida por completo"], explanationEn: "The charge is that centuries of copying corrupted the text like a whispered chain.", explanationEs: "La acusación es que siglos de copiado corrompieron el texto como una cadena susurrada.", correct: 0 },
+    { textEn: "2. The bibliographical test asks two questions about an ancient writing:", textEs: "2. La prueba bibliográfica hace dos preguntas sobre un escrito antiguo:",
+      optionsEn: ["Its price and its length", "Its color and its size", "Its language and its author's age", "How many copies survive and how small the gap to the original is"],
+      optionsEs: ["Su precio y su extensión", "Su color y su tamaño", "Su idioma y la edad del autor", "Cuántas copias sobreviven y qué tan pequeña es la brecha con el original"], explanationEn: "More copies allow comparison; a shorter gap leaves less time for corruption.", explanationEs: "Más copias permiten comparar; una brecha más corta deja menos tiempo para la corrupción.", correct: 3 },
+    { textEn: "3. The earliest surviving copy of Caesar's 'Gallic Wars' comes about how long after the original?", textEs: "3. ¿Cuánto tiempo después del original viene la copia más antigua de las 'Guerras Galas' de César?",
+      optionsEn: ["10 years", "About 900 years", "100 years", "It is the original"],
+      optionsEs: ["10 años", "Unos 900 años", "100 años", "Es el original"], explanationEn: "About 900 years, on only a handful of copies — yet no one calls Caesar a legend.", explanationEs: "Unos 900 años, con solo un puñado de copias — y nadie llama leyenda a César.", correct: 1 },
+    { textEn: "4. How many manuscripts of the New Testament survive in the original Greek?", textEs: "4. ¿Cuántos manuscritos del Nuevo Testamento sobreviven en el griego original?",
+      optionsEn: ["About 50", "About 300", "More than 5,800", "About 1,000"],
+      optionsEs: ["Unos 50", "Unos 300", "Más de 5,800", "Unos 1,000"], explanationEn: "Over 5,800 Greek manuscripts, far more than any other ancient writing.", explanationEs: "Más de 5,800 manuscritos griegos, muchos más que cualquier otro escrito antiguo.", correct: 2 },
+    { textEn: "5. The unit's conclusion from the manuscript evidence is:", textEs: "5. La conclusión de la unidad a partir de la evidencia manuscrita es:",
+      optionsEn: ["The Bible is the weakest ancient book", "If we reject the New Testament, we must reject all of ancient history", "Only Homer can be trusted", "Copies prove nothing"],
+      optionsEs: ["La Biblia es el libro antiguo más débil", "Si rechazamos el Nuevo Testamento, debemos rechazar toda la historia antigua", "Solo Homero es confiable", "Las copias no prueban nada"], explanationEn: "The NT is the best-attested ancient book; rejecting it would mean burning the libraries.", explanationEs: "El NT es el libro antiguo mejor atestiguado; rechazarlo significaría quemar las bibliotecas.", correct: 1 },
+    { textEn: "6. The unit answers the 'telephone game' objection by saying transmission was more like:", textEs: "6. La unidad responde a la objeción del 'juego del teléfono' diciendo que la transmisión fue más bien como:",
+      optionsEn: ["A thousand photocopies of the original that check one another", "One whisper down a long line", "A single fragile scroll", "A secret kept by one man"],
+      optionsEs: ["Mil fotocopias del original que se verifican entre sí", "Un susurro por una larga fila", "Un solo rollo frágil", "Un secreto guardado por un hombre"], explanationEn: "Many scattered copies expose any one error, allowing the text to be reconstructed.", explanationEs: "Muchas copias esparcidas exponen cualquier error, permitiendo reconstruir el texto.", correct: 0 },
+    { textEn: "7. The unit says the differences among New Testament manuscripts are mostly:", textEs: "7. La unidad dice que las diferencias entre los manuscritos del Nuevo Testamento son en su mayoría:",
+      optionsEn: ["Whole missing books", "New teachings", "Matters of spelling and word order that never change the sense", "Contradictions of doctrine"],
+      optionsEs: ["Libros enteros faltantes", "Nuevas enseñanzas", "Cuestiones de ortografía y orden de palabras que nunca cambian el sentido", "Contradicciones de doctrina"], explanationEn: "No teaching of the faith is in doubt because of a copyist's variant.", explanationEs: "Ninguna enseñanza de la fe está en duda por la variante de un copista.", correct: 2 },
+    { textEn: "8. Sir William Ramsay was trained in a school that taught the book of Acts was:", textEs: "8. Sir William Ramsay fue formado en una escuela que enseñaba que el libro de los Hechos era:",
+      optionsEn: ["Perfectly accurate", "Written by Paul", "Too holy to study", "A late fiction by someone ignorant of the first century"],
+      optionsEs: ["Perfectamente exacto", "Escrito por Pablo", "Demasiado santo para estudiar", "Una ficción tardía de alguien ignorante del primer siglo"], explanationEn: "The German critical school claimed Acts was a late fabrication.", explanationEs: "La escuela crítica alemana afirmaba que Hechos era una fabricación tardía.", correct: 3 },
+    { textEn: "9. What did Ramsay's archaeological digging in Asia Minor reveal about Luke?", textEs: "9. ¿Qué reveló la excavación arqueológica de Ramsay en Asia Menor acerca de Lucas?",
+      optionsEn: ["That Luke invented everything", "That Luke was accurate even in shifting political titles and geography", "That the cities never existed", "That Acts was written in Rome"],
+      optionsEs: ["Que Lucas lo inventó todo", "Que Lucas era exacto aun en los cambiantes títulos políticos y la geografía", "Que las ciudades nunca existieron", "Que Hechos se escribió en Roma"], explanationEn: "Everywhere Ramsay dug, Luke proved right, even on details a later forger would have missed.", explanationEs: "Dondequiera que Ramsay cavaba, Lucas resultaba correcto, aun en detalles que un falsificador tardío habría errado.", correct: 1 },
+    { textEn: "10. As a result of his research, Ramsay:", textEs: "10. Como resultado de su investigación, Ramsay:",
+      optionsEn: ["Kept his original theory", "Proved Acts false", "Stopped doing archaeology", "Came to trust the book he set out to destroy"],
+      optionsEs: ["Mantuvo su teoría original", "Probó que Hechos era falso", "Dejó la arqueología", "Llegó a confiar en el libro que se propuso destruir"], explanationEn: "An honest man, Ramsay followed the evidence and came to trust Luke and the New Testament.", explanationEs: "Hombre honesto, Ramsay siguió la evidencia y llegó a confiar en Lucas y el Nuevo Testamento.", correct: 3 },
+    { textEn: "11. Simon Greenleaf was a leading authority on:", textEs: "11. Simon Greenleaf era una autoridad principal en:",
+      optionsEn: ["The law of evidence (how testimony is weighed in court)", "Medicine", "Astronomy", "Ancient languages"],
+      optionsEs: ["La ley de la evidencia (cómo se sopesa el testimonio en el tribunal)", "Medicina", "Astronomía", "Lenguas antiguas"], explanationEn: "Greenleaf, of Harvard, wrote the standard work on the law of evidence.", explanationEs: "Greenleaf, de Harvard, escribió la obra estándar sobre la ley de la evidencia.", correct: 0 },
+    { textEn: "12. When Greenleaf applied his rules of evidence to the four Gospels, he concluded:", textEs: "12. Cuando Greenleaf aplicó sus reglas de evidencia a los cuatro Evangelios, concluyó:",
+      optionsEn: ["The witnesses were liars", "The Gospels were too vague to judge", "An honest court would be compelled to accept their testimony as true", "Testimony cannot be tested"],
+      optionsEs: ["Los testigos eran mentirosos", "Los Evangelios eran demasiado vagos para juzgar", "Un tribunal honesto estaría obligado a aceptar su testimonio como verdadero", "El testimonio no se puede probar"], explanationEn: "Faith, he said, is the verdict a fair judge returns after weighing the witnesses.", explanationEs: "La fe, dijo, es el veredicto que un juez imparcial emite tras sopesar a los testigos.", correct: 2 },
+    { textEn: "13. The 'criterion of embarrassment' notes that the Gospels include details that:", textEs: "13. El 'criterio de la vergüenza' nota que los Evangelios incluyen detalles que:",
+      optionsEn: ["Praise the Romans", "Flatter the apostles", "Were added by kings", "Make the writers and disciples look bad"],
+      optionsEs: ["Alaban a los romanos", "Halagan a los apóstoles", "Fueron añadidos por reyes", "Hacen quedar mal a los escritores y discípulos"], explanationEn: "Forgers flatter; the Gospels show the disciples as slow and cowardly — a mark of truth.", explanationEs: "Los falsificadores halagan; los Evangelios muestran a los discípulos lentos y cobardes — una marca de verdad.", correct: 3 },
+    { textEn: "14. The unit notes that the risen Christ appeared first to women, which is significant because:", textEs: "14. La unidad nota que el Cristo resucitado apareció primero a mujeres, lo cual es significativo porque:",
+      optionsEn: ["In that culture their testimony was not even accepted in court, so no inventor would write it that way", "Women lived longer", "It was a legal requirement", "The men were traveling"],
+      optionsEs: ["En aquella cultura su testimonio ni se aceptaba en el tribunal, así que ningún inventor lo escribiría así", "Las mujeres vivían más", "Era un requisito legal", "Los hombres estaban de viaje"], explanationEn: "An inventor would never base the claim on witnesses the culture discounted; they wrote it because it happened.", explanationEs: "Un inventor jamás basaría la afirmación en testigos que la cultura descartaba; lo escribieron porque sucedió.", correct: 0 },
+    { textEn: "15. According to the unit, how did the church relate to the canon of Scripture?", textEs: "15. Según la unidad, ¿cómo se relacionó la iglesia con el canon de la Escritura?",
+      optionsEn: ["It invented the books", "It changed the books each century", "It did not create the canon but recognized it", "It hid the books"],
+      optionsEs: ["Inventó los libros", "Cambió los libros cada siglo", "No creó el canon sino que lo reconoció", "Escondió los libros"], explanationEn: "God gave the Word; the church received and recognized what bore the marks of His breathing.", explanationEs: "Dios dio la Palabra; la iglesia recibió y reconoció lo que llevaba las marcas de su soplo.", correct: 2 },
+    { textEn: "16. 2 Timothy 3:16 says all Scripture is 'given by inspiration of God,' which literally means:", textEs: "16. 2 Timoteo 3:16 dice que toda la Escritura es 'dada por inspiración de Dios', lo cual literalmente significa:",
+      optionsEn: ["Written by angels", "God-breathed", "Invented by councils", "Copied by monks"],
+      optionsEs: ["Escrita por ángeles", "Soplada por Dios", "Inventada por concilios", "Copiada por monjes"], explanationEn: "Inspiration means God-breathed; divine in origin, human in writing.", explanationEs: "Inspiración significa soplada por Dios; divina en origen, humana en escritura.", correct: 1 },
+    { textEn: "17. The unit compares the Bible's divine-and-human authorship to:", textEs: "17. La unidad compara la autoría divina y humana de la Biblia con:",
+      optionsEn: ["A chain letter", "A government document", "The same God-and-man pattern as the incarnation", "A modern novel"],
+      optionsEs: ["Una carta en cadena", "Un documento de gobierno", "El mismo patrón de Dios-y-hombre que la encarnación", "Una novela moderna"], explanationEn: "God's truth carried perfectly through human pens, as in the Word made flesh.", explanationEs: "La verdad de Dios llevada perfectamente por plumas humanas, como en el Verbo hecho carne.", correct: 2 },
+    { textEn: "18. Jesus said of His words (Matthew 24:35):", textEs: "18. Jesús dijo de sus palabras (Mateo 24:35):",
+      optionsEn: ["They would soon be forgotten", "They could be edited freely", "They were only for His day", "Heaven and earth will pass away, but My words will not"],
+      optionsEs: ["Pronto serían olvidadas", "Podían editarse libremente", "Eran solo para su época", "El cielo y la tierra pasarán, mas mis palabras no pasarán"], explanationEn: "The book has outlasted every attempt to bury it, as Christ promised.", explanationEs: "El libro ha sobrevivido a todo intento de enterrarlo, como Cristo prometió.", correct: 3 },
+    { textEn: "19. The unit says the embarrassing details in the Gospels are best explained as:", textEs: "19. La unidad dice que los detalles embarazosos en los Evangelios se explican mejor como:",
+      optionsEn: ["Clever marketing", "The fingerprints of the truth — they wrote it because it happened", "Later additions", "Mistakes to be removed"],
+      optionsEs: ["Mercadeo ingenioso", "Las huellas digitales de la verdad — lo escribieron porque sucedió", "Añadiduras tardías", "Errores que deben quitarse"], explanationEn: "Honest witnesses tell the truth even when it costs them; the cost is the proof.", explanationEs: "Los testigos honestos dicen la verdad aun cuando les cuesta; el costo es la prueba.", correct: 1 },
+    { textEn: "20. The unit says proving the documents reliable establishes that the Witnesses are credible, but:", textEs: "20. La unidad dice que probar que los documentos son confiables establece que los Testigos son creíbles, pero:",
+      optionsEn: ["A credible witness still asks to be believed — it brings us to the door", "Reliability alone saves", "Faith is now unnecessary", "No one needs to read them"],
+      optionsEs: ["Un testigo creíble todavía pide ser creído — nos lleva a la puerta", "La confiabilidad sola salva", "La fe ahora es innecesaria", "Nadie necesita leerlos"], explanationEn: "Reliability carries us to the door; whether we trust the One they testify to remains the question.", explanationEs: "La confiabilidad nos lleva a la puerta; si confiaremos en Aquel de quien testifican sigue siendo la pregunta.", correct: 0 }
+];
+
+const kwQuestions = [
+    { textEn: "21. State the skeptic's charge that the Bible has been changed, and how the unit frames its answer.",
+      textEs: "21. Exponga la acusación del escéptico de que la Biblia ha sido cambiada, y cómo la unidad plantea su respuesta.",
+      kw_en: ["changed", "copy", "corrupt", "telephone", "reliab", "count", "evidence", "answer"],
+      kw_es: ["cambiad", "copia", "corromp", "teléfono", "confiab", "contar", "evidencia", "responder"],
+      modelEn: "The skeptic charges that the Bible has been copied and recopied for two thousand years until it became corrupted, like a game of telephone in which the original message drifts beyond recovery. The unit frames its answer by pointing out that this charge, fearsome as it sounds, is one of the easiest to answer, because the matter is not philosophy but counting, and the counting is not close. The reliability of the documents can be tested by evidence anyone can check, namely how many copies survive and how short the gap to the original is. So instead of conceding that copying corrupted the text, the unit shows by the manuscript evidence that the New Testament is in fact the most trustworthy and best-attested writing of the ancient world.",
+      modelEs: "El escéptico acusa que la Biblia ha sido copiada y vuelta a copiar por dos mil años hasta corromperse, como un juego del teléfono en el que el mensaje original se desvía más allá de toda recuperación. La unidad plantea su respuesta señalando que esta acusación, por temible que suene, es una de las más fáciles de responder, porque el asunto no es filosofía sino contar, y la cuenta no está pareja. La confiabilidad de los documentos puede probarse con evidencia que cualquiera puede verificar, a saber cuántas copias sobreviven y qué tan corta es la brecha con el original. Así que en lugar de conceder que el copiado corrompió el texto, la unidad muestra por la evidencia manuscrita que el Nuevo Testamento es de hecho el escrito más digno de confianza y mejor atestiguado del mundo antiguo." },
+
+    { textEn: "22. Explain the bibliographical test and how the New Testament compares to writings like Homer and Caesar.",
+      textEs: "22. Explique la prueba bibliográfica y cómo se compara el Nuevo Testamento con escritos como Homero y César.",
+      kw_en: ["bibliograph", "copy", "gap", "origin", "homer", "caesar", "ancient", "test"],
+      kw_es: ["bibliográf", "copia", "brecha", "original", "homero", "césar", "antigu", "prueba"],
+      modelEn: "The bibliographical test is the standard historians use for any ancient writing, and it asks two things: how many copies survive, and how small the gap is between the original and the earliest copy. More copies allow scholars to compare and catch errors, and a shorter gap leaves less time for legend to creep in. Applied to other ancient works, Caesar's Gallic Wars survives in only a handful of copies with the earliest about nine hundred years after the original, and Homer's Iliad in a few hundred copies, yet no scholar doubts them. Applied to the New Testament, the same test yields a mountain of copies and a gap of only a generation or two, which means by the historians' own standard the New Testament is far better attested than the classics no one questions.",
+      modelEs: "La prueba bibliográfica es el estándar que los historiadores usan para cualquier escrito antiguo, y pregunta dos cosas: cuántas copias sobreviven, y qué tan pequeña es la brecha entre el original y la copia más antigua. Más copias permiten a los eruditos comparar y atrapar errores, y una brecha más corta deja menos tiempo para que la leyenda se cuele. Aplicada a otras obras antiguas, las Guerras Galas de César sobreviven en solo un puñado de copias con la más antigua a unos novecientos años del original, y la Ilíada de Homero en unos cientos de copias, y sin embargo ningún erudito duda de ellas. Aplicada al Nuevo Testamento, la misma prueba arroja una montaña de copias y una brecha de solo una generación o dos, lo cual significa que por el estándar mismo de los historiadores el Nuevo Testamento está mucho mejor atestiguado que los clásicos que nadie cuestiona." },
+
+    { textEn: "23. Describe the manuscript evidence for the New Testament — its number and its closeness to the events.",
+      textEs: "23. Describa la evidencia manuscrita del Nuevo Testamento — su número y su cercanía a los hechos.",
+      kw_en: ["manuscript", "greek", "thousand", "fragment", "gap", "generation", "attest", "history"],
+      kw_es: ["manuscrito", "griego", "mil", "fragmento", "brecha", "generación", "atestigu", "historia"],
+      modelEn: "The unit describes a mountain of evidence. We possess more than five thousand eight hundred manuscripts of the New Testament in the original Greek, and thousands more in other ancient languages, far more than any other writing of antiquity. The gap to the originals is short as well: we have fragments within a generation or two of the events and complete books within a couple of centuries, not the nine-hundred-year gap of Caesar. So the New Testament is the best-attested ancient document by a wide margin, with both the greatest number of copies and one of the smallest gaps. The honest conclusion is that if we reject it as unreliable, we would have to reject every other piece of ancient history along with it.",
+      modelEs: "La unidad describe una montaña de evidencia. Poseemos más de cinco mil ochocientos manuscritos del Nuevo Testamento en el griego original, y miles más en otras lenguas antiguas, muchos más que cualquier otro escrito de la antigüedad. La brecha con los originales también es corta: tenemos fragmentos dentro de una generación o dos de los hechos y libros completos dentro de un par de siglos, no la brecha de novecientos años de César. Así que el Nuevo Testamento es el documento antiguo mejor atestiguado por amplio margen, con el mayor número de copias y una de las brechas más pequeñas. La conclusión honesta es que si lo rechazamos como no confiable, tendríamos que rechazar toda otra pieza de la historia antigua junto con él." },
+
+    { textEn: "24. How does the unit answer the 'telephone game' objection about copying errors?",
+      textEs: "24. ¿Cómo responde la unidad a la objeción del 'juego del teléfono' sobre los errores de copiado?",
+      kw_en: ["telephone", "copy", "photocopy", "variant", "spelling", "doctrine", "reconstruct", "agree"],
+      kw_es: ["teléfono", "copia", "fotocopia", "variante", "ortograf", "doctrina", "reconstruir", "concuerd"],
+      modelEn: "The unit answers that transmission was not one whisper passed down a long line, where the message drifts and no one can check it. It was more like a thousand photocopies made from the original and scattered across the world, so that when an error appears in one copy, the hundreds of others expose it at once. With so many manuscripts to compare, scholars can reconstruct the original text with great confidence. As for the differences among copies, the vast majority are matters of spelling and word order that never change the sense, and not one teaching of the faith is in doubt because of a copyist's variant. The wonder is not that the manuscripts differ here and there, but how astonishingly they agree.",
+      modelEs: "La unidad responde que la transmisión no fue un susurro pasado por una larga fila, donde el mensaje se desvía y nadie puede verificarlo. Fue más bien como mil fotocopias hechas del original y esparcidas por el mundo, de modo que cuando aparece un error en una copia, los cientos de otras lo exponen al instante. Con tantos manuscritos para comparar, los eruditos pueden reconstruir el texto original con gran confianza. En cuanto a las diferencias entre copias, la inmensa mayoría son cuestiones de ortografía y orden de palabras que nunca cambian el sentido, y ni una sola enseñanza de la fe está en duda por la variante de un copista. La maravilla no es que los manuscritos difieran aquí y allá, sino cuán asombrosamente concuerdan." },
+
+    { textEn: "25. Tell the story of Sir William Ramsay and explain what it shows about Scripture's reliability.",
+      textEs: "25. Cuente la historia de Sir William Ramsay y explique qué muestra sobre la confiabilidad de la Escritura.",
+      kw_en: ["ramsay", "acts", "luke", "archaeolog", "accurate", "critical", "destroy", "trust"],
+      kw_es: ["ramsay", "hechos", "lucas", "arqueolog", "exacto", "crítica", "destruir", "confiar"],
+      modelEn: "Sir William Ramsay was a brilliant archaeologist trained in the German critical school, which taught that the book of Acts was a late fiction written by someone ignorant of the first century. Ramsay went to Asia Minor intending to prove Luke wrong, expecting to show his geography, customs, and political titles to be invented. Instead, everywhere he dug, Luke proved accurate, even in the shifting political titles where a later forger would surely have blundered. Being an honest man, Ramsay followed the evidence against his own wishes and came to call Luke a historian of the first rank, trusting the very book he had set out to destroy. His story shows that the reliability of Scripture stands up to the hardest investigation, and that truth is often found by getting down into the dirt rather than by academic distance.",
+      modelEs: "Sir William Ramsay era un arqueólogo brillante formado en la escuela crítica alemana, que enseñaba que el libro de los Hechos era una ficción tardía escrita por alguien ignorante del primer siglo. Ramsay fue a Asia Menor con la intención de probar que Lucas estaba equivocado, esperando mostrar que su geografía, costumbres y títulos políticos eran inventados. En cambio, dondequiera que cavaba, Lucas resultaba exacto, aun en los cambiantes títulos políticos donde un falsificador tardío seguramente habría errado. Siendo un hombre honesto, Ramsay siguió la evidencia contra sus propios deseos y llegó a llamar a Lucas un historiador de primer orden, confiando en el libro mismo que se había propuesto destruir. Su historia muestra que la confiabilidad de la Escritura resiste la investigación más dura, y que la verdad a menudo se halla metiéndose en la tierra y no en la distancia académica." },
+
+    { textEn: "26. Tell the story of Simon Greenleaf and explain what it shows about the Gospel witnesses.",
+      textEs: "26. Cuente la historia de Simon Greenleaf y explique qué muestra sobre los testigos del Evangelio.",
+      kw_en: ["greenleaf", "law", "evidence", "testimony", "court", "witness", "verdict", "reason"],
+      kw_es: ["greenleaf", "ley", "evidencia", "testimonio", "tribunal", "testigo", "veredicto", "razón"],
+      modelEn: "Simon Greenleaf was the Royall Professor of Law at Harvard and the author of the standard work of his age on the law of evidence, that is, how testimony is weighed in a court. Challenged to apply his own rules to the four Gospels, he put the evangelists in the witness box and examined their consistency, their character, the circumstances of their testimony, and whether they had anything to gain by lying. The master of evidence reached a verdict that surprised him: that if the testimony of Matthew, Mark, Luke, and John were presented in any honest court, a jury would be compelled by the rules of evidence to accept it as true. His story shows that faith is not the abandonment of reason but the verdict a fair-minded judge returns when he has carefully weighed the witnesses.",
+      modelEs: "Simon Greenleaf era el Profesor Royall de Derecho en Harvard y el autor de la obra estándar de su época sobre la ley de la evidencia, es decir, cómo se sopesa el testimonio en un tribunal. Desafiado a aplicar sus propias reglas a los cuatro Evangelios, puso a los evangelistas en el estrado y examinó su coherencia, su carácter, las circunstancias de su testimonio, y si tenían algo que ganar mintiendo. El maestro de la evidencia llegó a un veredicto que lo sorprendió: que si el testimonio de Mateo, Marcos, Lucas y Juan se presentara en cualquier tribunal honesto, un jurado estaría obligado por las reglas de la evidencia a aceptarlo como verdadero. Su historia muestra que la fe no es el abandono de la razón sino el veredicto que un juez imparcial emite cuando ha sopesado con cuidado a los testigos." },
+
+    { textEn: "27. Explain the 'ring of truth' (the criterion of embarrassment) in the Gospels.",
+      textEs: "27. Explique el 'sello de la verdad' (el criterio de la vergüenza) en los Evangelios.",
+      kw_en: ["embarrass", "women", "witness", "disciple", "cowardly", "forger", "flatter", "truth"],
+      kw_es: ["vergüenza", "mujeres", "testigo", "discípulo", "cobarde", "falsific", "halag", "verdad"],
+      modelEn: "The ring of truth, or criterion of embarrassment, is that forgers flatter themselves and their heroes, while honest witnesses tell the truth even when it costs them. In the Gospels the disciples come off looking slow, cowardly, and quarrelsome; Peter denies his Lord, and they all run away at the cross. Moreover, the risen Christ appears first to women, whose testimony in that culture was not even accepted in a court. No inventor building a religion to impress the ancient world would have written the story with such embarrassing details. They wrote it that way for one reason: because that is how it happened. So the very details that embarrass the writers are the fingerprints of the truth, a mark of honesty that a forger would never have left.",
+      modelEs: "El sello de la verdad, o criterio de la vergüenza, es que los falsificadores se halagan a sí mismos y a sus héroes, mientras que los testigos honestos dicen la verdad aun cuando les cuesta. En los Evangelios los discípulos quedan luciendo lentos, cobardes y pendencieros; Pedro niega a su Señor, y todos huyen en la cruz. Además, el Cristo resucitado aparece primero a mujeres, cuyo testimonio en aquella cultura ni siquiera se aceptaba en un tribunal. Ningún inventor que construyera una religión para impresionar al mundo antiguo habría escrito la historia con detalles tan embarazosos. La escribieron así por una razón: porque así sucedió. Así que los detalles mismos que avergüenzan a los escritores son las huellas digitales de la verdad, una marca de honestidad que un falsificador jamás habría dejado." },
+
+    { textEn: "28. Explain how the church related to the canon — recognizing it rather than creating it.",
+      textEs: "28. Explique cómo se relacionó la iglesia con el canon — reconociéndolo en lugar de crearlo.",
+      kw_en: ["canon", "church", "recogni", "create", "receive", "word", "gave", "breath"],
+      kw_es: ["canon", "iglesia", "reconoci", "crear", "recibi", "palabra", "dio", "soplo"],
+      modelEn: "The unit corrects the idea that the church created the Bible by voting books in and out as it pleased. The truth is the reverse: the church did not create the canon but recognized it. God gave His Word, and over time the church received what bore the marks of God's own breathing and set aside what did not. So the authority of Scripture does not come from a council's vote but from God who breathed it out; the church merely acknowledged what was already His Word. This is why the canon is not a human committee's invention but a divine gift the church gratefully recognized, the same Word that 2 Timothy calls God-breathed and that holy men spoke as they were moved by the Holy Spirit.",
+      modelEs: "La unidad corrige la idea de que la iglesia creó la Biblia votando libros adentro y afuera a su antojo. La verdad es lo contrario: la iglesia no creó el canon sino que lo reconoció. Dios dio su Palabra, y con el tiempo la iglesia recibió lo que llevaba las marcas del propio soplo de Dios y apartó lo que no. Así que la autoridad de la Escritura no viene del voto de un concilio sino de Dios que la sopló; la iglesia simplemente reconoció lo que ya era su Palabra. Por eso el canon no es la invención de un comité humano sino un don divino que la iglesia reconoció con gratitud, la misma Palabra que 2 Timoteo llama soplada por Dios y que los santos hombres hablaron siendo movidos por el Espíritu Santo." },
+
+    { textEn: "29. What does 2 Timothy 3:16 mean by 'inspiration,' and how is Scripture both divine and human?",
+      textEs: "29. ¿Qué significa 'inspiración' en 2 Timoteo 3:16, y cómo es la Escritura a la vez divina y humana?",
+      kw_en: ["inspir", "scripture", "breath", "divine", "human", "timothy", "peter", "pattern"],
+      kw_es: ["inspir", "escritura", "soplo", "divin", "humana", "timoteo", "pedro", "patrón"],
+      modelEn: "2 Timothy 3:16 says all Scripture is given by inspiration of God, and the word inspiration literally means God-breathed. So Scripture is not merely inspiring human thoughts but the very breath of God expressed through human authors. Peter adds that holy men of old spoke as they were moved by the Holy Spirit, which shows the same truth from the human side. This makes Scripture both divine and human at once: divine in its origin, since God breathed it out, and human in its writing, since real men wrote in their own languages and styles. The unit compares this to the God-and-man pattern of the incarnation itself, where God's perfect truth was carried through human instruments without being corrupted by them.",
+      modelEs: "2 Timoteo 3:16 dice que toda la Escritura es dada por inspiración de Dios, y la palabra inspiración literalmente significa soplada por Dios. Así que la Escritura no es meramente pensamientos humanos inspiradores sino el aliento mismo de Dios expresado por medio de autores humanos. Pedro añade que los santos hombres de antaño hablaron siendo movidos por el Espíritu Santo, lo cual muestra la misma verdad desde el lado humano. Esto hace que la Escritura sea a la vez divina y humana: divina en su origen, pues Dios la sopló, y humana en su escritura, pues hombres reales escribieron en sus propias lenguas y estilos. La unidad compara esto con el patrón de Dios-y-hombre de la encarnación misma, donde la verdad perfecta de Dios fue llevada por instrumentos humanos sin ser corrompida por ellos." },
+
+    { textEn: "30. How does the reliability of Scripture function in the apologetic — what can it do and not do?",
+      textEs: "30. ¿Cómo funciona la confiabilidad de la Escritura en la apologética — qué puede y qué no puede hacer?",
+      kw_en: ["reliab", "door", "witness", "believe", "credible", "verdict", "trust", "record"],
+      kw_es: ["confiab", "puerta", "testigo", "creer", "creíble", "veredicto", "confiar", "registro"],
+      modelEn: "The unit says that proving the documents reliable establishes that the Witnesses are credible; it is to bring the jury to the very brink of its verdict. The manuscript evidence, the archaeology of Ramsay, the legal verdict of Greenleaf, and the embarrassing details all show that the record is trustworthy and the witnesses are honest. But a credible witness still asks to be believed, and reliability cannot by itself make a person trust. So the reliability of Scripture carries us to the door, just as the earlier arguments did; it removes the excuse that the Bible cannot be trusted. Whether a person will walk through the door and trust the One to whom every page bears witness remains the question waiting on the other side, a question only the heart, moved by the Spirit, can answer.",
+      modelEs: "La unidad dice que probar que los documentos son confiables establece que los Testigos son creíbles; es llevar al jurado al borde mismo de su veredicto. La evidencia manuscrita, la arqueología de Ramsay, el veredicto legal de Greenleaf, y los detalles embarazosos muestran todos que el registro es digno de confianza y los testigos son honestos. Pero un testigo creíble todavía pide ser creído, y la confiabilidad no puede por sí sola hacer que una persona confíe. Así que la confiabilidad de la Escritura nos lleva hasta la puerta, igual que los argumentos anteriores; quita la excusa de que la Biblia no se puede creer. Si una persona cruzará la puerta y confiará en Aquel de quien cada página da testimonio sigue siendo la pregunta que espera del otro lado, una pregunta que solo el corazón, movido por el Espíritu, puede responder." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 6 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 6 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSApolReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

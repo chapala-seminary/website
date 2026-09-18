@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Revelation Intensive — Unit 5</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 6 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Revelation Intensive — Unit 5: The Throne and the Lamb</span><span class="lang-es">📖 Apocalipsis Intensivo — Unidad 5: El Trono y el Cordero</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Worthy is the Lamb who was slain." — Revelation 5:12 (NKJV)</span><span class="lang-es">"El Cordero que fue inmolado es digno." — Apocalipsis 5:12 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Revelation Intensive. Please register before beginning Unit 5.</span><span class="lang-es">Bienvenido al Intensivo de Apocalipsis. Por favor regístrese antes de comenzar la Unidad 5.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Revelation 4-5</strong></p>
+<div class="scripture">"Immediately I was in the Spirit; and behold, a throne set in heaven, and One sat on the throne... 'You are worthy... for You were slain, and have redeemed us to God by Your blood.'" &mdash; Revelation 4:2; 5:9 (NKJV)</div>
+
+<h3>A Door Standing Open in Heaven</h3>
+<p>With the letters to the seven churches finished, the scene changes. "After these things I looked, and behold, a door standing open in heaven. And the first voice which I heard was like a trumpet speaking with me, saying, 'Come up here, and I will show you things which must take place after this'" (Revelation 4:1). The reader is lifted from earth, where the churches struggle, into heaven itself, the realm of unseen reality that lies behind and above everything we can see. As in chapter one, John says, "Immediately I was in the Spirit" (Revelation 4:2), the phrase that marks the great visions of the book; he is carried by the Holy Spirit into a sight no natural eye could reach. The summons "Come up here" has been read in more than one way: some hear in it a foreshadowing of the church's being caught up to be with Christ, while others take it simply as John's own call to ascend in vision, and the course leaves the question open. What is certain is that the curtain is drawn back, and the rest of the book will be understood only from this vantage point, looking at the troubles of earth from the throne room of heaven.</p>
+
+<h3>One Seated on the Throne</h3>
+<p>The first thing John sees, and the center of everything that follows, is a throne. "Behold, a throne set in heaven, and One sat on the throne" (Revelation 4:2). The throne is the focal point of the entire book of Revelation; before any seal is opened, any trumpet sounded, or any bowl poured out, the reader is shown that God is seated, sovereign, and in command of all. John does not attempt to describe the One on the throne by face or form, but only by the flash of precious stones: He was "like a jasper and a sardius stone in appearance; and there was a rainbow around the throne, in appearance like an emerald" (Revelation 4:3). The brilliance speaks of a holiness and majesty too great for words, and the encircling rainbow recalls God's covenant mercy, the promise that His judgments are always ringed about with grace. Whatever storms break upon the earth in the chapters to come, this is the unchanging fact behind them all: a throne stands in heaven, and God is on it.</p>
+
+<h3>The Elders and the Living Creatures</h3>
+<p>Around the throne John sees two circles of worshipers. First, "around the throne were twenty-four thrones, and on the thrones I saw twenty-four elders sitting, clothed in white robes; and they had crowns of gold on their heads" (Revelation 4:4). Their white robes speak of purity and their golden crowns of reward and reign. Who they are has been understood in more than one way: many take them as the redeemed people of God, perhaps the union of Israel and the church in their twelve-and-twelve numbers; others see an exalted order of heavenly beings; the course presents the views fairly and does not insist on one. From the throne proceed "lightnings, thunderings, and voices," and before it burn "seven lamps of fire, which are the seven Spirits of God" (Revelation 4:5), a picture of the fullness of the Holy Spirit. Before the throne stretches what looks like "a sea of glass, like crystal" (Revelation 4:6), a floor of stillness and clarity. And in the midst are four living creatures full of eyes, one like a lion, one like a calf, one with a face like a man, and one like a flying eagle &mdash; beings much like the cherubim of Ezekiel and the seraphim of Isaiah, covered with eyes to show that nothing escapes their sight as they guard the throne of God.</p>
+
+<h3>Holy, Holy, Holy: The Worship of the Creator</h3>
+<p>The living creatures never cease their cry, "Holy, holy, holy, Lord God Almighty, who was and is and is to come!" (Revelation 4:8). The threefold "holy" lifts up the perfect, unapproachable purity of God, and the title "who was and is and is to come" declares Him the eternal Lord of all time. As often as the creatures give glory, the twenty-four elders fall down before the throne and do a striking thing: they cast their crowns before it, surrendering every honor they have been given back to the One who gave it (Revelation 4:10). Their song names the ground of this first great act of worship: "You are worthy, O Lord, to receive glory and honor and power; for You created all things, and by Your will they exist and were created" (Revelation 4:11). Here God is worshiped as Creator. Because He made all things and holds them in being by His will, He alone is worthy of glory, and every crown in heaven belongs at His feet. Chapter four sets the throne and the worship of the Creator before us, and only then does the book move to the question that will fill chapter five.</p>
+
+<h3>The Sealed Scroll and the Lion Who Is a Lamb</h3>
+<p>"And I saw in the right hand of Him who sat on the throne a scroll written inside and on the back, sealed with seven seals" (Revelation 5:1). The sealed scroll is best understood as the unfolding plan and purpose of God for all history, the title-deed to the world, which cannot take effect until someone is found worthy to break its seals. A strong angel cries out, "Who is worthy to open the scroll and to loose its seals?" (Revelation 5:2), and the silence is total: no one in heaven, on earth, or under the earth could open it. John weeps much at this, for if no one can open the scroll, then God's purposes seem to stall and history has no redeemer. Then one of the elders comforts him: "Do not weep. Behold, the Lion of the tribe of Judah, the Root of David, has prevailed to open the scroll" (Revelation 5:5). John turns to see the conquering Lion &mdash; and sees instead "a Lamb as though it had been slain" (Revelation 5:6). This is the heart of the vision. The mighty Lion of Judah, the King of all, has triumphed, but He triumphed by being slain; He still bears the marks of the One whose throat was cut as a sacrifice. The Lion and the Lamb are the same Person, and He conquers not by force but by His own death. The Lamb has seven horns and seven eyes, the fullness of power and of the Spirit sent into all the earth, and He steps forward and takes the scroll from the right hand of Him who sits on the throne.</p>
+
+<h3>The New Song: Worthy Is the Lamb</h3>
+<p>The moment the Lamb takes the scroll, heaven erupts in worship. The four living creatures and the twenty-four elders fall down before Him, each holding a harp and "golden bowls full of incense, which are the prayers of the saints" (Revelation 5:8) &mdash; a tender detail, that the prayers of struggling believers on earth are gathered up and treasured in heaven. They sing a new song: "You are worthy to take the scroll, and to open its seals; for You were slain, and have redeemed us to God by Your blood out of every tribe and tongue and people and nation, and have made us kings and priests to our God" (Revelation 5:9-10). The Lamb is worthy because He was slain and by His blood purchased a people for God from every nation on earth, making them a kingdom of priests. Then the circle of worship widens. John hears the voice of countless angels around the throne, ten thousand times ten thousand and thousands of thousands, all saying with a loud voice, "Worthy is the Lamb who was slain to receive power and riches and wisdom and strength and honor and glory and blessing!" (Revelation 5:12). What chapter four gave to the Creator, chapter five now gives to the Lamb.</p>
+
+<h3>Every Creature Worships the Lamb</h3>
+<p>The worship spreads until it fills the whole creation. "And every creature which is in heaven and on the earth and under the earth and such as are in the sea, and all that are in them, I heard saying: 'Blessing and honor and glory and power be to Him who sits on the throne, and to the Lamb, forever and ever!'" (Revelation 5:13). This final doxology is addressed to two and yet sounds as one: to Him who sits on the throne and to the Lamb together. The slain Lamb receives the very worship given to God on the throne, which is among the clearest declarations in all of Scripture that Jesus Christ is fully God and shares the throne of heaven. The four living creatures answer "Amen!" and the elders fall down and worship (Revelation 5:14). So the two chapters set the stage for everything that follows. Whatever seals are about to be opened, whatever judgments are about to fall, history is utterly safe, because the One on the throne reigns over all and the slain Lamb has prevailed and holds the scroll. The right response, in heaven and on earth, is worship.</p>
+<div class="scripture">"Worthy is the Lamb who was slain to receive power and riches and wisdom and strength and honor and glory and blessing!" &mdash; Revelation 5:12 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Apocalipsis 4-5</strong></p>
+<div class="scripture">"Al instante yo estaba en el Espíritu; y he aquí, un trono que estaba puesto en el cielo, y sobre el trono uno sentado... 'Digno eres... porque tú fuiste inmolado, y nos has redimido para Dios con tu sangre.'" &mdash; Apocalipsis 4:2; 5:9 (RVG)</div>
+
+<h3>Una Puerta Abierta en el Cielo</h3>
+<p>Terminadas las cartas a las siete iglesias, la escena cambia. "Después de estas cosas miré, y he aquí una puerta abierta en el cielo; y la primera voz que oí, era como de trompeta que hablaba conmigo, diciendo: Sube acá, y yo te mostraré las cosas que han de ser después de éstas" (Apocalipsis 4:1). El lector es levantado de la tierra, donde las iglesias luchan, hasta el cielo mismo, el reino de la realidad invisible que está detrás y por encima de todo lo que podemos ver. Como en el capítulo uno, Juan dice: "Al instante yo estaba en el Espíritu" (Apocalipsis 4:2), la frase que marca las grandes visiones del libro; es llevado por el Espíritu Santo a una vista que ningún ojo natural podría alcanzar. El llamado "Sube acá" se ha entendido de más de una manera: algunos oyen en él una prefiguración de que la iglesia sea arrebatada para estar con Cristo, mientras que otros lo toman simplemente como el llamado de Juan a ascender en visión, y el curso deja la pregunta abierta. Lo cierto es que se descorre la cortina, y el resto del libro se entenderá solo desde este punto de vista, mirando los problemas de la tierra desde la sala del trono del cielo.</p>
+
+<h3>Uno Sentado sobre el Trono</h3>
+<p>Lo primero que Juan ve, y el centro de todo lo que sigue, es un trono. "He aquí, un trono que estaba puesto en el cielo, y sobre el trono uno sentado" (Apocalipsis 4:2). El trono es el punto focal de todo el libro del Apocalipsis; antes de que se abra un sello, suene una trompeta, o se derrame una copa, se le muestra al lector que Dios está sentado, soberano, y al mando de todo. Juan no intenta describir al que está sobre el trono por rostro o forma, sino solo por el destello de piedras preciosas: era "semejante a una piedra de jaspe y de sardio; y había alrededor del trono un arco iris, semejante en aspecto a la esmeralda" (Apocalipsis 4:3). El resplandor habla de una santidad y majestad demasiado grandes para palabras, y el arco iris que lo rodea recuerda la misericordia del pacto de Dios, la promesa de que sus juicios siempre están rodeados de gracia. Cualesquiera tormentas estallen sobre la tierra en los capítulos por venir, este es el hecho inmutable detrás de todas ellas: un trono está puesto en el cielo, y Dios está sobre él.</p>
+
+<h3>Los Ancianos y los Cuatro Animales</h3>
+<p>Alrededor del trono Juan ve dos círculos de adoradores. Primero, "alrededor del trono había veinticuatro tronos; y vi sobre los tronos veinticuatro ancianos sentados, vestidos de ropas blancas; y tenían sobre sus cabezas coronas de oro" (Apocalipsis 4:4). Sus ropas blancas hablan de pureza y sus coronas de oro de galardón y reinado. Quiénes son se ha entendido de más de una manera: muchos los toman como el pueblo redimido de Dios, quizás la unión de Israel y la iglesia en sus números de doce y doce; otros ven un orden exaltado de seres celestiales; el curso presenta las visiones con justicia y no insiste en una. Del trono salen "relámpagos y truenos y voces," y delante de él arden "siete lámparas de fuego, las cuales son los siete Espíritus de Dios" (Apocalipsis 4:5), una imagen de la plenitud del Espíritu Santo. Delante del trono se extiende lo que parece "un mar de vidrio semejante al cristal" (Apocalipsis 4:6), un piso de quietud y claridad. Y en medio están cuatro animales llenos de ojos, uno semejante a un león, otro a un becerro, otro con rostro como de hombre, y otro como un águila volando &mdash; seres muy parecidos a los querubines de Ezequiel y los serafines de Isaías, cubiertos de ojos para mostrar que nada escapa a su vista mientras guardan el trono de Dios.</p>
+
+<h3>Santo, Santo, Santo: La Adoración del Creador</h3>
+<p>Los animales no cesan su clamor: "Santo, santo, santo, Señor Dios Todopoderoso, el que era, el que es, y el que ha de venir" (Apocalipsis 4:8). El triple "santo" exalta la pureza perfecta e inaccesible de Dios, y el título "el que era, el que es, y el que ha de venir" lo declara el Señor eterno de todo tiempo. Cada vez que los animales dan gloria, los veinticuatro ancianos se postran delante del trono y hacen algo impactante: echan sus coronas delante de él, entregando todo honor que se les ha dado de vuelta al que se lo dio (Apocalipsis 4:10). Su cántico nombra el fundamento de este primer gran acto de adoración: "Señor, digno eres de recibir gloria y honra y poder; porque tú creaste todas las cosas, y por tu voluntad existen y fueron creadas" (Apocalipsis 4:11). Aquí Dios es adorado como Creador. Porque hizo todas las cosas y las sostiene en existencia por su voluntad, solo él es digno de gloria, y toda corona en el cielo pertenece a sus pies. El capítulo cuatro pone delante de nosotros el trono y la adoración del Creador, y solo entonces el libro pasa a la pregunta que llenará el capítulo cinco.</p>
+
+<h3>El Libro Sellado y el León que Es un Cordero</h3>
+<p>"Y vi en la mano derecha del que estaba sentado sobre el trono un libro escrito por dentro y por fuera, sellado con siete sellos" (Apocalipsis 5:1). El libro sellado se entiende mejor como el plan y propósito desplegado de Dios para toda la historia, el título de propiedad del mundo, que no puede tener efecto hasta que se halle a alguien digno de romper sus sellos. Un ángel fuerte clama: "¿Quién es digno de abrir el libro y desatar sus sellos?" (Apocalipsis 5:2), y el silencio es total: ninguno en el cielo, ni en la tierra, ni debajo de la tierra podía abrirlo. Juan llora mucho ante esto, pues si ninguno puede abrir el libro, entonces los propósitos de Dios parecen detenerse y la historia no tiene redentor. Entonces uno de los ancianos lo consuela: "No llores; he aquí que el León de la tribu de Judá, la raíz de David, ha vencido para abrir el libro" (Apocalipsis 5:5). Juan se vuelve para ver al León vencedor &mdash; y ve en cambio "un Cordero como inmolado" (Apocalipsis 5:6). Este es el corazón de la visión. El poderoso León de Judá, el Rey de todo, ha triunfado, pero triunfó siendo inmolado; aún lleva las marcas de aquel cuya garganta fue cortada como sacrificio. El León y el Cordero son la misma Persona, y vence no por la fuerza sino por su propia muerte. El Cordero tiene siete cuernos y siete ojos, la plenitud del poder y del Espíritu enviado a toda la tierra, y se adelanta y toma el libro de la mano derecha del que está sentado sobre el trono.</p>
+
+<h3>El Nuevo Cántico: Digno Es el Cordero</h3>
+<p>En el momento en que el Cordero toma el libro, el cielo estalla en adoración. Los cuatro animales y los veinticuatro ancianos se postran delante de él, cada uno con un arpa y "copas de oro llenas de incienso, que son las oraciones de los santos" (Apocalipsis 5:8) &mdash; un detalle tierno, que las oraciones de los creyentes que luchan en la tierra son recogidas y atesoradas en el cielo. Cantan un nuevo cántico: "Digno eres de tomar el libro y de abrir sus sellos; porque tú fuiste inmolado, y nos has redimido para Dios con tu sangre, de todo linaje y lengua y pueblo y nación; y nos has hecho para nuestro Dios reyes y sacerdotes" (Apocalipsis 5:9-10). El Cordero es digno porque fue inmolado y por su sangre compró un pueblo para Dios de toda nación de la tierra, haciéndolos un reino de sacerdotes. Luego el círculo de adoración se ensancha. Juan oye la voz de innumerables ángeles alrededor del trono, millones de millones, todos diciendo a gran voz: "El Cordero que fue inmolado es digno de tomar el poder y riquezas y sabiduría y fortaleza y honra y gloria y alabanza" (Apocalipsis 5:12). Lo que el capítulo cuatro dio al Creador, el capítulo cinco ahora lo da al Cordero.</p>
+
+<h3>Toda Criatura Adora al Cordero</h3>
+<p>La adoración se extiende hasta llenar toda la creación. "Y oí a toda criatura que está en el cielo, y sobre la tierra, y debajo de la tierra, y que está en el mar, y todas las cosas que en ellos hay, diciendo: Al que está sentado en el trono, y al Cordero, sea la alabanza, y la honra, y la gloria, y el poder, para siempre jamás" (Apocalipsis 5:13). Esta doxología final se dirige a dos y sin embargo suena como una: al que está sentado en el trono y al Cordero juntos. El Cordero inmolado recibe la misma adoración dada a Dios en el trono, lo cual es una de las declaraciones más claras de toda la Escritura de que Jesucristo es plenamente Dios y comparte el trono del cielo. Los cuatro animales responden "Amén," y los ancianos se postran y adoran (Apocalipsis 5:14). Así los dos capítulos preparan el escenario para todo lo que sigue. Cualesquiera sellos estén por abrirse, cualesquiera juicios estén por caer, la historia está completamente segura, porque el que está sobre el trono reina sobre todo y el Cordero inmolado ha vencido y tiene el libro. La respuesta correcta, en el cielo y en la tierra, es la adoración.</p>
+<div class="scripture">"El Cordero que fue inmolado es digno de tomar el poder y riquezas y sabiduría y fortaleza y honra y gloria y alabanza." &mdash; Apocalipsis 5:12 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Revelation Intensive — Unit 5 (The Throne and the Lamb, Revelation 4-5)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 5;
+const COURSE = 'rev';
+const NEXT_UNIT_URL = 'CTSRevUnit6.html';
+const totalUnits = 15;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - How to Read Revelation (Revelation 1:1-8)", "Unit 2 - Son of Man Among the Lampstands (Revelation 1:9-20)", "Unit 3 - Seven Churches I: Ephesus to Thyatira (Revelation 2)", "Unit 4 - Seven Churches II: Sardis to Laodicea (Revelation 3)", "Unit 5 - The Throne and the Lamb (Revelation 4-5)", "Unit 6 - The Seven Seals (Revelation 6:1-8:1)", "Unit 7 - The Seven Trumpets (Revelation 8:2-11:19)", "Unit 8 - The Woman, the Dragon, and the Beasts (Revelation 12-13)", "Unit 9 - The Harvest and the Seven Bowls (Revelation 14-16)", "Unit 10 - The Fall of Babylon (Revelation 17-18)", "Unit 11 - The Return of Christ, the Millennium, and Judgment (Revelation 19-20)", "Unit 12 - The Millennial Views: Postmillennialism (Revelation 20)", "Unit 13 - The Millennial Views: Premillennialism (Revelation 20)", "Unit 14 - The Millennial Views: Amillennialism (Revelation 20)", "Unit 15 - The New Heaven and the New Earth (Revelation 21-22)"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSRevUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. As chapters 4-5 open, the scene of the vision shifts from the churches on earth to:", "textEs": "1. Al comenzar los capítulos 4-5, la escena de la visión cambia de las iglesias en la tierra a:", "optionsEn": ["Heaven, the throne room of God", "A battlefield", "The city of Rome", "A wilderness"], "optionsEs": ["El cielo, la sala del trono de Dios", "Un campo de batalla", "La ciudad de Roma", "Un desierto"], "explanationEn": "A door opens in heaven and John is taken up into the throne room (4:1-2).", "explanationEs": "Una puerta se abre en el cielo y Juan es llevado a la sala del trono (4:1-2).", "correct": 0}, {"textEn": "2. As the heavenly vision begins, John is \"in the Spirit\" and the first thing he sees is:", "textEs": "2. Al comenzar la visión celestial, Juan está \"en el Espíritu\" y lo primero que ve es:", "optionsEn": ["An army of horsemen", "A sealed tomb", "A great red dragon", "A throne set in heaven, with One seated on it"], "optionsEs": ["Un ejército de jinetes", "Una tumba sellada", "Un gran dragón rojo", "Un trono puesto en el cielo, con uno sentado en él"], "explanationEn": "\"A throne set in heaven, and One sat on the throne\" (4:2).", "explanationEs": "\"Un trono puesto en el cielo, y sobre el trono uno sentado\" (4:2).", "correct": 3}, {"textEn": "3. The dominant feature of the heavenly vision, the focal point of the whole book, is:", "textEs": "3. El rasgo dominante de la visión celestial, el punto focal de todo el libro, es:", "optionsEn": ["The sea of glass", "The throne", "The angels", "The four living creatures"], "optionsEs": ["El mar de vidrio", "El trono", "Los ángeles", "Los cuatro animales"], "explanationEn": "The throne is central; God is shown seated and sovereign before anything else (4:2).", "explanationEs": "El trono es central; Dios se muestra sentado y soberano antes que nada (4:2).", "correct": 1}, {"textEn": "4. Around the throne John saw twenty-four elders in white robes wearing:", "textEs": "4. Alrededor del trono Juan vio veinticuatro ancianos en ropas blancas con:", "optionsEn": ["Helmets of bronze", "Sandals of gold", "Crowns of gold", "Breastplates of iron"], "optionsEs": ["Yelmos de bronce", "Sandalias de oro", "Coronas de oro", "Corazas de hierro"], "explanationEn": "They had crowns of gold on their heads (4:4).", "explanationEs": "Tenían coronas de oro sobre sus cabezas (4:4).", "correct": 2}, {"textEn": "5. The seven lamps of fire burning before the throne are identified as:", "textEs": "5. Las siete lámparas de fuego que arden delante del trono se identifican como:", "optionsEn": ["The seven churches", "The seven Spirits of God", "Seven archangels", "Seven prophets"], "optionsEs": ["Las siete iglesias", "Los siete Espíritus de Dios", "Siete arcángeles", "Siete profetas"], "explanationEn": "The seven lamps are the seven Spirits of God (4:5).", "explanationEs": "Las siete lámparas son los siete Espíritus de Dios (4:5).", "correct": 1}, {"textEn": "6. The four living creatures full of eyes resemble the heavenly beings in the visions of:", "textEs": "6. Los cuatro animales llenos de ojos se asemejan a los seres celestiales en las visiones de:", "optionsEn": ["Daniel and Jonah", "Jeremiah and Amos", "Moses and Elijah", "Ezekiel and Isaiah"], "optionsEs": ["Daniel y Jonás", "Jeremías y Amós", "Moisés y Elías", "Ezequiel e Isaías"], "explanationEn": "They are like the cherubim of Ezekiel and the seraphim of Isaiah (4:6-8).", "explanationEs": "Son como los querubines de Ezequiel y los serafines de Isaías (4:6-8).", "correct": 3}, {"textEn": "7. The ceaseless cry of the four living creatures around the throne is:", "textEs": "7. El clamor incesante de los cuatro animales alrededor del trono es:", "optionsEn": ["Worthy is the Lamb", "Hallelujah, salvation", "Holy, holy, holy, Lord God Almighty", "Come, Lord Jesus"], "optionsEs": ["Digno es el Cordero", "Aleluya, salvación", "Santo, santo, santo, Señor Dios Todopoderoso", "Ven, Señor Jesús"], "explanationEn": "\"Holy, holy, holy, Lord God Almighty\" (4:8).", "explanationEs": "\"Santo, santo, santo, Señor Dios Todopoderoso\" (4:8).", "correct": 2}, {"textEn": "8. In chapter 4 God is worshiped especially in His character as:", "textEs": "8. En el capítulo 4 Dios es adorado especialmente en su carácter como:", "optionsEn": ["Creator of all things", "Shepherd", "Warrior", "Judge"], "optionsEs": ["Creador de todas las cosas", "Pastor", "Guerrero", "Juez"], "explanationEn": "\"You created all things\" — God worshiped as Creator (4:11).", "explanationEs": "\"Tú creaste todas las cosas\" — Dios adorado como Creador (4:11).", "correct": 0}, {"textEn": "9. The twenty-four elders express their worship by:", "textEs": "9. Los veinticuatro ancianos expresan su adoración:", "optionsEn": ["Sounding trumpets", "Lighting incense", "Casting their crowns before the throne", "Reading the scroll"], "optionsEs": ["Tocando trompetas", "Encendiendo incienso", "Echando sus coronas delante del trono", "Leyendo el libro"], "explanationEn": "They cast their crowns before the throne (4:10).", "explanationEs": "Echan sus coronas delante del trono (4:10).", "correct": 2}, {"textEn": "10. The scroll in the right hand of the One on the throne was sealed with:", "textEs": "10. El libro en la mano derecha del que está sobre el trono estaba sellado con:", "optionsEn": ["A single seal", "Seven seals", "Twelve seals", "No seal"], "optionsEs": ["Un solo sello", "Siete sellos", "Doce sellos", "Ningún sello"], "explanationEn": "The scroll was sealed with seven seals (5:1).", "explanationEs": "El libro estaba sellado con siete sellos (5:1).", "correct": 1}, {"textEn": "11. John wept much in chapter 5 because:", "textEs": "11. Juan lloró mucho en el capítulo 5 porque:", "optionsEn": ["No one was found worthy to open the scroll", "Heaven was empty", "The churches had fallen", "The vision had ended"], "optionsEs": ["Ninguno fue hallado digno de abrir el libro", "El cielo estaba vacío", "Las iglesias habían caído", "La visión había terminado"], "explanationEn": "No one in heaven or earth was found worthy to open the scroll (5:3-4).", "explanationEs": "Ninguno en el cielo ni en la tierra fue hallado digno de abrir el libro (5:3-4).", "correct": 0}, {"textEn": "12. One of the elders comforted John by announcing the triumph of:", "textEs": "12. Uno de los ancianos consoló a Juan anunciando el triunfo de:", "optionsEn": ["A mighty angel", "The seven Spirits", "The twenty-four elders", "The Lion of the tribe of Judah"], "optionsEs": ["Un ángel poderoso", "Los siete Espíritus", "Los veinticuatro ancianos", "El León de la tribu de Judá"], "explanationEn": "\"The Lion of the tribe of Judah... has prevailed\" (5:5).", "explanationEs": "\"El León de la tribu de Judá... ha vencido\" (5:5).", "correct": 3}, {"textEn": "13. When John looked to see the conquering Lion, he saw instead:", "textEs": "13. Cuando Juan miró para ver al León vencedor, vio en cambio:", "optionsEn": ["An open grave", "A throne of fire", "A Lamb as though it had been slain", "A mighty warrior"], "optionsEs": ["Una tumba abierta", "Un trono de fuego", "Un Cordero como inmolado", "Un guerrero poderoso"], "explanationEn": "The Lion is revealed as a Lamb that had been slain (5:6).", "explanationEs": "El León se revela como un Cordero que había sido inmolado (5:6).", "correct": 2}, {"textEn": "14. The Lamb's seven horns and seven eyes signify:", "textEs": "14. Los siete cuernos y siete ojos del Cordero significan:", "optionsEn": ["His complete power and the seven Spirits sent into all the earth", "Seven kingdoms and seven kings", "Seven years of tribulation", "Seven churches and seven angels"], "optionsEs": ["Su poder completo y los siete Espíritus enviados a toda la tierra", "Siete reinos y siete reyes", "Siete años de tribulación", "Siete iglesias y siete ángeles"], "explanationEn": "Seven horns and eyes: full power and the seven Spirits sent into all the earth (5:6).", "explanationEs": "Siete cuernos y ojos: poder pleno y los siete Espíritus enviados a toda la tierra (5:6).", "correct": 0}, {"textEn": "15. The golden bowls of incense held by the elders are explained as:", "textEs": "15. Las copas de oro de incienso que tienen los ancianos se explican como:", "optionsEn": ["The wrath of God", "The prayers of the saints", "The seven seals", "The blood of martyrs"], "optionsEs": ["La ira de Dios", "Las oraciones de los santos", "Los siete sellos", "La sangre de los mártires"], "explanationEn": "The bowls of incense are the prayers of the saints (5:8).", "explanationEs": "Las copas de incienso son las oraciones de los santos (5:8).", "correct": 1}, {"textEn": "16. The \"new song\" praises the Lamb because by His blood He has:", "textEs": "16. El \"nuevo cántico\" alaba al Cordero porque por su sangre ha:", "optionsEn": ["Destroyed His enemies", "Built a temple", "Sealed the scroll", "Redeemed people from every tribe, tongue, and nation"], "optionsEs": ["Destruido a sus enemigos", "Construido un templo", "Sellado el libro", "Redimido a personas de todo linaje, lengua y nación"], "explanationEn": "He redeemed people to God by His blood from every tribe and nation (5:9).", "explanationEs": "Redimió personas para Dios por su sangre de todo linaje y nación (5:9).", "correct": 3}, {"textEn": "17. By His blood the Lamb has made the redeemed to be:", "textEs": "17. Por su sangre el Cordero ha hecho a los redimidos ser:", "optionsEn": ["Judges of the world", "Angels in heaven", "Kings and priests to God", "Prophets to the nations"], "optionsEs": ["Jueces del mundo", "Ángeles en el cielo", "Reyes y sacerdotes para Dios", "Profetas a las naciones"], "explanationEn": "He made them kings and priests to our God (5:10).", "explanationEs": "Los hizo reyes y sacerdotes para nuestro Dios (5:10).", "correct": 2}, {"textEn": "18. The number of angels surrounding the throne is described as:", "textEs": "18. El número de ángeles que rodean el trono se describe como:", "optionsEn": ["Seven", "One hundred forty-four thousand", "Twenty-four", "Countless, thousands of thousands"], "optionsEs": ["Siete", "Ciento cuarenta y cuatro mil", "Veinticuatro", "Innumerables, millones de millones"], "explanationEn": "Ten thousand times ten thousand and thousands of thousands (5:11).", "explanationEs": "Millones de millones rodean el trono (5:11).", "correct": 3}, {"textEn": "19. At the climax, the same worship is given both to Him on the throne and to the Lamb, which points to:", "textEs": "19. En el clímax, la misma adoración se da tanto al que está sobre el trono como al Cordero, lo cual señala:", "optionsEn": ["The full deity of Christ, who shares God's throne", "The worth of the elders", "The power of the angels", "The end of the world"], "optionsEs": ["La plena deidad de Cristo, que comparte el trono de Dios", "El valor de los ancianos", "El poder de los ángeles", "El fin del mundo"], "explanationEn": "Worship of the Lamb alongside God declares Christ's full deity (5:13).", "explanationEs": "La adoración del Cordero junto a Dios declara la plena deidad de Cristo (5:13).", "correct": 0}, {"textEn": "20. The central truth of chapters 4-5, underlying all the judgments to come, is that:", "textEs": "20. La verdad central de los capítulos 4-5, que subyace a todos los juicios por venir, es que:", "optionsEn": ["The church will escape all trouble", "God reigns on the throne and the slain Lamb has prevailed to open the scroll", "Evil cannot be defeated", "History is random"], "optionsEs": ["La iglesia escapará de todo problema", "Dios reina en el trono y el Cordero inmolado ha vencido para abrir el libro", "El mal no puede ser vencido", "La historia es aleatoria"], "explanationEn": "God reigns and the worthy Lamb holds history's scroll; history is safe (4-5).", "explanationEs": "Dios reina y el Cordero digno tiene el libro de la historia; la historia está segura (4-5).", "correct": 1}];
+
+const kwQuestions = [{"textEn": "21. Describe the opening of the heavenly vision in Revelation 4:1-2: the open door, the call \"come up here,\" and being \"in the Spirit.\"", "textEs": "21. Describa la apertura de la visión celestial en Apocalipsis 4:1-2: la puerta abierta, el llamado \"sube acá,\" y estar \"en el Espíritu.\"", "kw_en": ["door", "heaven", "spirit", "throne", "vision", "earth", "trumpet", "unseen"], "kw_es": ["puerta", "cielo", "espíritu", "trono", "visión", "tierra", "trompeta", "invisible"], "modelEn": "After the letters to the seven churches, the scene changes. John sees a door standing open in heaven, and a voice like a trumpet calls, Come up here, and I will show you what must take place. He is lifted from the earth, where the churches struggle, into heaven itself, the realm of unseen reality behind all that we can see. As in chapter one, he says he was immediately in the Spirit, the phrase that marks the great visions of the book, for he is carried by the Holy Spirit into a sight no natural eye could reach. The call come up here has been understood in more than one way, some hearing a foreshadowing of the church being caught up to Christ and others taking it simply as John's own summons to ascend in vision, and the course leaves the question open. What is certain is that the curtain is drawn back, and the rest of the book is to be read from this vantage point, looking at the troubles of earth from the throne room of heaven.", "modelEs": "Después de las cartas a las siete iglesias, la escena cambia. Juan ve una puerta abierta en el cielo, y una voz como de trompeta llama: Sube acá, y yo te mostraré las cosas que han de ser. Es levantado de la tierra, donde las iglesias luchan, hasta el cielo mismo, el reino de la realidad invisible detrás de todo lo que podemos ver. Como en el capítulo uno, dice que al instante estaba en el Espíritu, la frase que marca las grandes visiones del libro, pues es llevado por el Espíritu Santo a una vista que ningún ojo natural podría alcanzar. El llamado sube acá se ha entendido de más de una manera, oyendo algunos una prefiguración de que la iglesia sea arrebatada a Cristo y tomándolo otros simplemente como el llamado de Juan a ascender en visión, y el curso deja la pregunta abierta. Lo cierto es que se descorre la cortina, y el resto del libro ha de leerse desde este punto de vista, mirando los problemas de la tierra desde la sala del trono del cielo."}, {"textEn": "22. Describe the throne and the One seated on it, and explain why the throne is so central to Revelation.", "textEs": "22. Describa el trono y al que está sentado sobre él, y explique por qué el trono es tan central en el Apocalipsis.", "kw_en": ["throne", "seated", "sovereign", "jasper", "rainbow", "majesty", "central", "reign"], "kw_es": ["trono", "sentado", "soberano", "jaspe", "arco", "majestad", "central", "reina"], "modelEn": "The first thing John sees, and the center of everything that follows, is a throne set in heaven with One seated on it. The throne is the focal point of the whole book of Revelation, for before any seal is opened, any trumpet sounded, or any bowl poured out, the reader is shown that God is seated, sovereign, and in command of all. John does not describe the One on the throne by face or form but only by the flash of precious stones, like jasper and sardius, with a rainbow like an emerald around the throne. The brilliance speaks of a holiness and majesty too great for words, and the encircling rainbow recalls God's covenant mercy, so that His judgments are always ringed about with grace. This is why the throne is central: whatever storms break upon the earth in the chapters to come, the unchanging fact behind them all is that a throne stands in heaven and God reigns upon it. The vision steadies the believer by fixing his eyes first on the sovereign God before any trouble is shown.", "modelEs": "Lo primero que Juan ve, y el centro de todo lo que sigue, es un trono puesto en el cielo con uno sentado sobre él. El trono es el punto focal de todo el libro del Apocalipsis, pues antes de que se abra un sello, suene una trompeta, o se derrame una copa, se le muestra al lector que Dios está sentado, soberano, y al mando de todo. Juan no describe al que está sobre el trono por rostro o forma sino solo por el destello de piedras preciosas, como jaspe y sardio, con un arco iris semejante a la esmeralda alrededor del trono. El resplandor habla de una santidad y majestad demasiado grandes para palabras, y el arco iris que lo rodea recuerda la misericordia del pacto de Dios, de modo que sus juicios siempre están rodeados de gracia. Por esto el trono es central: cualesquiera tormentas estallen sobre la tierra en los capítulos por venir, el hecho inmutable detrás de todas ellas es que un trono está en el cielo y Dios reina sobre él. La visión afirma al creyente fijando sus ojos primero en el Dios soberano antes de mostrar problema alguno."}, {"textEn": "23. Who are the twenty-four elders and the four living creatures around the throne?", "textEs": "23. ¿Quiénes son los veinticuatro ancianos y los cuatro animales alrededor del trono?", "kw_en": ["elders", "crowns", "white", "creatures", "eyes", "cherubim", "throne", "views"], "kw_es": ["ancianos", "coronas", "blanc", "animales", "ojos", "querubines", "trono", "vista"], "modelEn": "Around the throne John sees two circles of worshipers. First are twenty-four elders seated on thrones, clothed in white robes, with crowns of gold on their heads, the white speaking of purity and the crowns of reward and reign. Who they are has been understood in more than one way: many take them as the redeemed people of God, perhaps Israel and the church together in their twelve-and-twelve numbers, while others see an exalted order of heavenly beings, and the course presents the views fairly without insisting on one. Second are four living creatures full of eyes, one like a lion, one like a calf, one with a face like a man, and one like a flying eagle. They are much like the cherubim of Ezekiel and the seraphim of Isaiah, and their many eyes show that nothing escapes their sight as they guard the throne and lead the worship of God. Together with the seven lamps that are the seven Spirits of God and the sea of glass, they fill the throne room with reverence.", "modelEs": "Alrededor del trono Juan ve dos círculos de adoradores. Primero están veinticuatro ancianos sentados sobre tronos, vestidos de ropas blancas, con coronas de oro sobre sus cabezas, hablando lo blanco de pureza y las coronas de galardón y reinado. Quiénes son se ha entendido de más de una manera: muchos los toman como el pueblo redimido de Dios, quizás Israel y la iglesia juntos en sus números de doce y doce, mientras que otros ven un orden exaltado de seres celestiales, y el curso presenta las vistas con justicia sin insistir en una. Segundo están cuatro animales llenos de ojos, uno como un león, otro como un becerro, otro con rostro como de hombre, y otro como un águila volando. Son muy parecidos a los querubines de Ezequiel y los serafines de Isaías, y sus muchos ojos muestran que nada escapa a su vista mientras guardan el trono y guían la adoración de Dios. Junto con las siete lámparas que son los siete Espíritus de Dios y el mar de vidrio, llenan la sala del trono de reverencia."}, {"textEn": "24. Explain the worship of God as Creator in Revelation 4 (\"Holy, holy, holy\" and the casting of crowns).", "textEs": "24. Explique la adoración de Dios como Creador en Apocalipsis 4 (\"Santo, santo, santo\" y el echar las coronas).", "kw_en": ["holy", "creator", "created", "worthy", "crowns", "glory", "eternal", "worship"], "kw_es": ["santo", "creador", "creaste", "digno", "coronas", "gloria", "eterno", "adoración"], "modelEn": "The four living creatures never cease to cry, Holy, holy, holy, Lord God Almighty, who was and is and is to come. The threefold holy lifts up the perfect, unapproachable purity of God, and the title who was and is and is to come declares Him the eternal Lord of all time. As often as the creatures give glory, the twenty-four elders fall down and cast their crowns before the throne, surrendering every honor they have been given back to the One who gave it. Their song names the ground of this worship: You are worthy, O Lord, to receive glory and honor and power, for You created all things, and by Your will they exist and were created. Here God is worshiped specifically as Creator. Because He made all things and holds them in being by His will, He alone is worthy of glory, and every crown in heaven belongs at His feet. Chapter four fixes the worship of the Creator in view before the book turns to the sealed scroll and the Lamb.", "modelEs": "Los cuatro animales no cesan de clamar: Santo, santo, santo, Señor Dios Todopoderoso, el que era, el que es, y el que ha de venir. El triple santo exalta la pureza perfecta e inaccesible de Dios, y el título el que era, el que es, y el que ha de venir lo declara el Señor eterno de todo tiempo. Cada vez que los animales dan gloria, los veinticuatro ancianos se postran y echan sus coronas delante del trono, entregando todo honor que se les ha dado de vuelta al que se lo dio. Su cántico nombra el fundamento de esta adoración: Señor, digno eres de recibir gloria y honra y poder, porque tú creaste todas las cosas, y por tu voluntad existen y fueron creadas. Aquí Dios es adorado específicamente como Creador. Porque hizo todas las cosas y las sostiene en existencia por su voluntad, solo él es digno de gloria, y toda corona en el cielo pertenece a sus pies. El capítulo cuatro fija la adoración del Creador a la vista antes de que el libro pase al libro sellado y al Cordero."}, {"textEn": "25. What is the sealed scroll, and why could no one open it, and why did John weep?", "textEs": "25. ¿Qué es el libro sellado, y por qué ninguno podía abrirlo, y por qué lloró Juan?", "kw_en": ["scroll", "seals", "plan", "history", "worthy", "weep", "open", "redeemer"], "kw_es": ["libro", "sellos", "plan", "historia", "digno", "llor", "abrir", "redentor"], "modelEn": "In the right hand of the One on the throne John sees a scroll written inside and on the back and sealed with seven seals. The scroll is best understood as the unfolding plan and purpose of God for all history, the title-deed to the world, which cannot take effect until someone worthy is found to break its seals. A strong angel cries, Who is worthy to open the scroll and loose its seals, and the silence is total, for no one in heaven, on earth, or under the earth was able to open it or even to look at it. John weeps much at this, because if no one can open the scroll, then God's purposes seem to stall and history has no redeemer to carry them through. His tears show how much hangs on the question of who is worthy. The weeping does not last, for an elder will point him to the One who has prevailed, but it underscores that the whole plan of God for the world waits on a worthy hand to open the scroll.", "modelEs": "En la mano derecha del que está sobre el trono Juan ve un libro escrito por dentro y por fuera y sellado con siete sellos. El libro se entiende mejor como el plan y propósito desplegado de Dios para toda la historia, el título de propiedad del mundo, que no puede tener efecto hasta que se halle a alguien digno de romper sus sellos. Un ángel fuerte clama: ¿Quién es digno de abrir el libro y desatar sus sellos?, y el silencio es total, pues ninguno en el cielo, en la tierra, ni debajo de la tierra podía abrirlo ni aun mirarlo. Juan llora mucho ante esto, porque si ninguno puede abrir el libro, entonces los propósitos de Dios parecen detenerse y la historia no tiene redentor que los lleve a cabo. Sus lágrimas muestran cuánto depende de la pregunta de quién es digno. El llanto no dura, pues un anciano lo señalará al que ha vencido, pero subraya que todo el plan de Dios para el mundo espera una mano digna que abra el libro."}, {"textEn": "26. Explain how the Lion of Judah turns out to be a slain Lamb, and what this reveals about the way Christ conquers.", "textEs": "26. Explique cómo el León de Judá resulta ser un Cordero inmolado, y qué revela esto sobre la manera en que Cristo vence.", "kw_en": ["lion", "judah", "lamb", "slain", "prevail", "blood", "conquer", "cross"], "kw_es": ["león", "judá", "cordero", "inmolado", "venc", "sangre", "conquist", "cruz"], "modelEn": "When John weeps, an elder comforts him: do not weep, for the Lion of the tribe of Judah, the Root of David, has prevailed to open the scroll. John turns to see the conquering Lion, and instead he sees a Lamb as though it had been slain. This is the heart of the vision. The mighty Lion of Judah, the King of all, has truly triumphed, but He triumphed by being slain, and He still bears the marks of one offered up as a sacrifice. The Lion and the Lamb are the same Person, and the point is that He conquers not by force or violence but by His own death and shed blood. The victory that opens history's scroll was won at the cross. This reframes what power and triumph mean: the strongest act in the universe was the Lamb laying down His life. So the One worthy to take the scroll is worthy precisely because He was slain, and the redeemed will praise Him forever as the Lamb who conquered by being slain for them.", "modelEs": "Cuando Juan llora, un anciano lo consuela: no llores, porque el León de la tribu de Judá, la raíz de David, ha vencido para abrir el libro. Juan se vuelve para ver al León vencedor, y en cambio ve un Cordero como inmolado. Este es el corazón de la visión. El poderoso León de Judá, el Rey de todo, ha triunfado de veras, pero triunfó siendo inmolado, y aún lleva las marcas de uno ofrecido como sacrificio. El León y el Cordero son la misma Persona, y el punto es que vence no por la fuerza ni la violencia sino por su propia muerte y sangre derramada. La victoria que abre el libro de la historia se ganó en la cruz. Esto replantea lo que significan el poder y el triunfo: el acto más fuerte del universo fue que el Cordero entregara su vida. Así el que es digno de tomar el libro es digno precisamente porque fue inmolado, y los redimidos lo alabarán para siempre como el Cordero que venció siendo inmolado por ellos."}, {"textEn": "27. Describe the Lamb that John sees (His seven horns and seven eyes) and what He does with the scroll.", "textEs": "27. Describa al Cordero que Juan ve (sus siete cuernos y siete ojos) y lo que hace con el libro.", "kw_en": ["lamb", "horns", "eyes", "power", "spirit", "earth", "scroll", "took"], "kw_es": ["cordero", "cuernos", "ojos", "poder", "espíritu", "tierra", "libro", "tomó"], "modelEn": "The figure John sees in the midst of the throne is a Lamb as though it had been slain, bearing the marks of sacrifice yet alive and standing. The Lamb has seven horns and seven eyes. In Scripture the horn is a symbol of power, so seven horns picture His complete and perfect power, and the seven eyes are explained as the seven Spirits of God sent out into all the earth, picturing His full possession of the Spirit and His all-seeing presence everywhere. Then the Lamb does what no one else in all creation could do: He steps forward and takes the scroll out of the right hand of Him who sits on the throne. This single act answers John's tears and changes everything, for the One worthy to open the scroll has come and has taken it into His hand. The plan of God for history is now safe in the hand of the slain and risen Lamb, who has the power and the Spirit to carry it through to the end.", "modelEs": "La figura que Juan ve en medio del trono es un Cordero como inmolado, que lleva las marcas del sacrificio y sin embargo está vivo y en pie. El Cordero tiene siete cuernos y siete ojos. En la Escritura el cuerno es símbolo de poder, así que siete cuernos retratan su poder completo y perfecto, y los siete ojos se explican como los siete Espíritus de Dios enviados a toda la tierra, retratando su plena posesión del Espíritu y su presencia que todo lo ve en todas partes. Entonces el Cordero hace lo que ningún otro en toda la creación podía hacer: se adelanta y toma el libro de la mano derecha del que está sentado sobre el trono. Este solo acto responde a las lágrimas de Juan y lo cambia todo, pues el que es digno de abrir el libro ha venido y lo ha tomado en su mano. El plan de Dios para la historia está ahora seguro en la mano del Cordero inmolado y resucitado, que tiene el poder y el Espíritu para llevarlo a cabo hasta el fin."}, {"textEn": "28. Explain the \"new song\" of Revelation 5 and what it declares the Lamb accomplished by His blood.", "textEs": "28. Explique el \"nuevo cántico\" de Apocalipsis 5 y lo que declara que el Cordero logró por su sangre.", "kw_en": ["song", "worthy", "slain", "blood", "redeem", "tribe", "nation", "priests"], "kw_es": ["cántico", "digno", "inmolado", "sangre", "redimi", "linaje", "nación", "sacerdot"], "modelEn": "The moment the Lamb takes the scroll, the living creatures and the elders fall down before Him, each with a harp and golden bowls of incense, which are explained as the prayers of the saints, a tender sign that the prayers of struggling believers are treasured in heaven. They sing a new song: You are worthy to take the scroll and to open its seals, for You were slain, and have redeemed us to God by Your blood out of every tribe and tongue and people and nation, and have made us kings and priests to our God. The song declares why the Lamb is worthy: He was slain, and by His shed blood He purchased a people for God out of every nation on earth, gathering a worldwide family and making them a kingdom of priests who will reign. The new song is the song of redemption, and it could not have been sung before the cross. It centers all the worship of heaven on what the Lamb has done in saving sinners by His blood.", "modelEs": "En el momento en que el Cordero toma el libro, los animales y los ancianos se postran delante de él, cada uno con un arpa y copas de oro de incienso, que se explican como las oraciones de los santos, una señal tierna de que las oraciones de los creyentes que luchan son atesoradas en el cielo. Cantan un nuevo cántico: Digno eres de tomar el libro y de abrir sus sellos, porque tú fuiste inmolado, y nos has redimido para Dios con tu sangre, de todo linaje y lengua y pueblo y nación, y nos has hecho para nuestro Dios reyes y sacerdotes. El cántico declara por qué el Cordero es digno: fue inmolado, y por su sangre derramada compró un pueblo para Dios de toda nación de la tierra, reuniendo una familia mundial y haciéndolos un reino de sacerdotes que reinarán. El nuevo cántico es el cántico de la redención, y no podría haberse cantado antes de la cruz. Centra toda la adoración del cielo en lo que el Cordero ha hecho al salvar a los pecadores por su sangre."}, {"textEn": "29. Describe the widening circles of worship in Revelation 5 and what the worship of the Lamb reveals about who He is.", "textEs": "29. Describa los círculos crecientes de adoración en Apocalipsis 5 y lo que la adoración del Cordero revela acerca de quién es él.", "kw_en": ["worship", "angels", "creature", "throne", "lamb", "deity", "glory", "forever"], "kw_es": ["adoración", "ángeles", "criatura", "trono", "cordero", "deidad", "gloria", "siempre"], "modelEn": "The worship in chapter five widens in ever larger circles. First the living creatures and elders sing the new song to the Lamb. Then John hears countless angels around the throne, thousands of thousands, crying with a loud voice, Worthy is the Lamb who was slain to receive power and riches and wisdom and strength and honor and glory and blessing. Finally the circle takes in the whole creation, every creature in heaven and on earth and under the earth and in the sea, saying, Blessing and honor and glory and power be to Him who sits on the throne and to the Lamb forever and ever. This final praise is given to two and yet sounds as one, to God on the throne and to the Lamb together. The fact that the slain Lamb receives the very worship given to God is among the clearest declarations in Scripture that Jesus Christ is fully God and shares the throne of heaven. The living creatures answer Amen, and the elders fall down and worship, sealing the truth that the Lamb is worthy of all the glory due to God.", "modelEs": "La adoración en el capítulo cinco se ensancha en círculos cada vez más grandes. Primero los animales y los ancianos cantan el nuevo cántico al Cordero. Luego Juan oye innumerables ángeles alrededor del trono, millones de millones, clamando a gran voz: El Cordero que fue inmolado es digno de tomar el poder y riquezas y sabiduría y fortaleza y honra y gloria y alabanza. Finalmente el círculo abarca toda la creación, toda criatura en el cielo y sobre la tierra y debajo de la tierra y en el mar, diciendo: Al que está sentado en el trono y al Cordero sea la alabanza y la honra y la gloria y el poder para siempre jamás. Esta alabanza final se da a dos y sin embargo suena como una, a Dios en el trono y al Cordero juntos. El hecho de que el Cordero inmolado reciba la misma adoración dada a Dios es una de las declaraciones más claras de la Escritura de que Jesucristo es plenamente Dios y comparte el trono del cielo. Los animales responden Amén, y los ancianos se postran y adoran, sellando la verdad de que el Cordero es digno de toda la gloria debida a Dios."}, {"textEn": "30. Summarize the central truth of Unit 5: what do the throne of chapter 4 and the Lamb of chapter 5 establish for the rest of the book?", "textEs": "30. Resuma la verdad central de la Unidad 5: ¿qué establecen el trono del capítulo 4 y el Cordero del capítulo 5 para el resto del libro?", "kw_en": ["throne", "reign", "lamb", "worthy", "scroll", "history", "worship", "safe"], "kw_es": ["trono", "reina", "cordero", "digno", "libro", "historia", "adoración", "segura"], "modelEn": "The central truth of Unit 5 is set by two chapters that belong together. Chapter four shows the throne in heaven with God seated upon it, sovereign over all, worshiped without ceasing as the holy Creator, with every crown cast at His feet. Chapter five shows the sealed scroll of history, which no one was worthy to open, and then the Lion of Judah who is a slain Lamb, the only One worthy to take the scroll and open its seals, worshiped by the whole creation as the Redeemer who bought a people by His blood. Together they establish the foundation for everything that follows. Before any seal is broken or any judgment falls in the chapters to come, the reader knows that God reigns on the throne and that the slain and risen Lamb has prevailed and holds the scroll of history in His hand. Therefore history is utterly safe, guided by a sovereign God and a worthy Lamb, and the right response, in heaven and on earth, is worship.", "modelEs": "La verdad central de la Unidad 5 la establecen dos capítulos que van juntos. El capítulo cuatro muestra el trono en el cielo con Dios sentado sobre él, soberano sobre todo, adorado sin cesar como el santo Creador, con toda corona echada a sus pies. El capítulo cinco muestra el libro sellado de la historia, que ninguno era digno de abrir, y luego el León de Judá que es un Cordero inmolado, el único digno de tomar el libro y abrir sus sellos, adorado por toda la creación como el Redentor que compró un pueblo por su sangre. Juntos establecen el fundamento para todo lo que sigue. Antes de que se rompa un sello o caiga un juicio en los capítulos por venir, el lector sabe que Dios reina en el trono y que el Cordero inmolado y resucitado ha vencido y tiene el libro de la historia en su mano. Por tanto la historia está completamente segura, guiada por un Dios soberano y un Cordero digno, y la respuesta correcta, en el cielo y en la tierra, es la adoración."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 6 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 6 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSRevReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

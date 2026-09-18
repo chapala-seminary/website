@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Characters II — Unit 5</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 6 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Bible Characters II — Unit 5: Ezra — A Fresh New Start, the Scribe Who Restored God’s Word</span><span class="lang-es">📖 Personajes de la Biblia II — Unidad 5: Esdras — Un Nuevo Comienzo, el Escriba que Restauró la Palabra de Dios</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"For Ezra had prepared his heart to seek the Law of the LORD, and to do it, and to teach statutes and ordinances in Israel." — Ezra 7:10 (NKJV)</span><span class="lang-es">«Porque Esdras había preparado su corazón para inquirir la ley de Jehová, y para cumplirla, y para enseñar en Israel sus estatutos y derechos.» — Esdras 7:10 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>All of us who came to live in a new country started over when we arrived. We may have left behind cars and houses, a familiar lifestyle, and old friends, and faced new challenges of culture, language, and daily life. But there was a gift hidden in it: a fresh start, a chance to become something better than we had been. The book of Ezra is the great Bible story of a fresh new start. After seventy years of captivity in Babylon, a remnant of the Jews came home to a ruined Jerusalem — the temple destroyed, the walls broken down — to begin again. And the keyword that holds the whole book together is one beautiful word: <em>Restoration</em>. Ezra shows us how God restores what sin has wrecked, whether in a nation, a church, or a single human heart.</p>
+<p><strong>Subject:</strong> Ezra — a fresh new start, and the God who restores.</p>
+<p><strong>Keyword:</strong> Restoration. <strong>Text:</strong> Ezra 1:1-4.</p>
+<p><strong>Proposition:</strong> After the exile God stirred a king and a people to come home and rebuild; under Zerubbabel the temple was restored, and under Ezra the scribe the Word was restored and the people brought to repentance — and it all pictures how God, by His grace, restores the fallen and points us at last to the greater restoration we have in Christ.</p>
+<p>We will trace five movements in the message of Ezra.</p>
+<h2>I. A Fresh New Start</h2>
+<p>The book opens after Judah's seventy years in Babylon. Those born in exile had never seen the homeland; those old enough to remember knew that everything they had loved was gone. Yet the very first verse shows where any restoration begins — not with human resolve, but with God.</p>
+<div class="scripture">In the first year of Cyrus king of Persia... the LORD stirred up the spirit of Cyrus king of Persia, so that he made a proclamation throughout all his kingdom. (Ezra 1:1, NKJV)</div>
+<p>The Lord stirred up the spirit of a pagan emperor to send His people home, and then, verse five tells us, He stirred the spirits of the people themselves so that they rose up to go. Here is the first lesson of restoration: it is the work of God's grace from start to finish. We do not climb back to God on our own; He moves first, He stirs the heart, He opens the door — and those whose hearts He stirs respond and go. About fifty thousand made the long journey home. The God who began the work of bringing them back is the same God who still takes the initiative with every wandering soul, awakening in us a holy discontent with the far country and a longing to come home.</p>
+<p>There is great comfort in beginning the book this way. The exiles were not summoned home because they had earned their way back, nor because seventy years had somehow paid their debt; they came home because God remembered His promise and moved. So it is with every spiritual comeback. The first stirring of desire you feel to return to God, the first discomfort with the life you have been living, is not something you manufactured — it is God already at work, calling you home. Do not despise that small beginning. It is the sign that the great Restorer has set His hand to your restoration.</p>
+<h2>II. The King's Work: Rebuilding the Temple</h2>
+<p>The book divides naturally between two men. The first is Zerubbabel, the governor, a descendant of David of the kingly line, and his work was to rebuild the temple, told in chapters one through six. The work of a king is to build. Notice the order of what they did. Their very first act, out under the open sky among the ruins, was to build an altar and renew the worship and sacrifice God had commanded. Before they raised a single wall, they restored worship, for restoration always begins at the altar. Then they laid the foundation of the temple, and the sound that went up was strange and mixed.</p>
+<div class="scripture">...many of the priests and Levites and heads of the fathers' houses, old men who had seen the first temple, wept with a loud voice when the foundation of this temple was laid before their eyes... so the people could not discern the noise of the shout of joy from the noise of the weeping. (Ezra 3:12-13, NKJV)</div>
+<p>The young shouted for joy at a beginning; the old wept, remembering Solomon's glorious temple now lost. And then came opposition, as it always does. The adversaries of the land offered to "help" build — but their worship was mixed with idolatry, and to join with them would have corrupted the work, so they were refused. The veil of friendship quickly turned to hostility; the enemies discouraged the people, made them afraid, and even used legal means to stop the work for years. But God sent two prophets, Haggai and Zechariah, to stir the people's hearts again; the work resumed, the decree of Darius confirmed it, and at last the temple was finished and the people kept the Passover with joy. The pattern is unmistakable: God's work meets opposition, but God's word, through His prophets, revives His people to finish what He began.</p>
+<p>We should not pass quickly over those mixed voices at the foundation. The same event drew shouts of joy from some and tears from others, and both were sincere. Restoration often feels exactly like that. When God begins to rebuild a broken life, there is real joy at the fresh beginning, and yet there can be honest grief over the wasted years and the ruined glory that sin destroyed. Both belong. We may weep over what was lost even as we rejoice over what God is now doing, and the Lord receives both the shout and the tear as worship from a heart coming home.</p>
+<h2>III. The Priest's Work: Restoring the Word</h2>
+<p>The second man is Ezra himself, and he appears more than sixty years later, in chapters seven through ten. If Zerubbabel was of the kingly line and came to rebuild, Ezra was of the priestly line, descended from Aaron, and the work of a priest is to cleanse. He came to restore not stones but souls — to bring the people back to the Word of God.</p>
+<div class="scripture">...this Ezra came up from Babylon; and he was a skilled scribe in the Law of Moses... And the king granted him all his request, according to the hand of the LORD his God upon him. (Ezra 7:6, NKJV)</div>
+<p>Would you not like to have it said of you, "the king granted him all that he asked"? What kind of man is this, that a pagan emperor holds him in such regard? The secret is given in the next verses, in the great epigraph of his life: Ezra had set his heart to study the Law of the Lord, and to do it, and to teach His statutes in Israel. Notice the order — study, do, teach. He did not merely prepare his arguments or sharpen his intellect; he prepared his heart. He first learned the Word, then obeyed the Word, and only then taught the Word, and because he lived it before he preached it, his teaching had power. That is what the Word of God does in a life given to it: it strengthens and beautifies the place of our fellowship with God, the way a restored temple is made glorious again.</p>
+<p>It is worth weighing how rare such a man is. Many know the Scriptures well enough to argue about them, yet have never let the Word govern their conduct. Ezra closed that gap. The book he opened was not first a book to debate but a book to obey, and only a man who has bowed to the Word himself can teach it with authority to others. This is the order God still honors in those who would handle His Word. Learn it on your knees, live it in your home and your work, and then your teaching will carry a weight that mere cleverness can never give.</p>
+<h2>IV. Restoration Means Repentance</h2>
+<p>When Ezra arrived in Jerusalem, he found a heartbreaking condition. The people, the priests, even the leaders had intermarried with the surrounding pagan nations, mixing the holy people of God with the idolatry of the land. It was the very sin that had broken the nation before the exile — and after seventy years of discipline, they had drifted right back into it. The flesh never changes; no matter how long we have walked with God, we are never beyond the reach of our old sins if we leave off depending on Him. Ezra's reaction was not a shrug but anguish.</p>
+<div class="scripture">So when I heard this thing, I tore my garment and my robe, and plucked out some of the hair of my head and beard, and sat down astonished. (Ezra 9:3, NKJV)</div>
+<p>Ezra tore his clothes, sat appalled, and then poured out a prayer of confession, identifying himself with his people's guilt. And God moved in their hearts. The leaders came in broken-hearted contrition; a proclamation went out; and the people assembled — thousands of them, standing in the pouring rain in front of the temple — to confess their guilt and to put away the compromise they had embraced outside the will of God. It was radical, costly repentance. Real restoration is never cheap; it means naming the sin honestly, turning from it decisively, and making a clean break with whatever has pulled us away from God. The Lord Jesus taught the same severity: if your hand causes you to sin, cut it off. Be ruthless with the thing that is destroying you.</p>
+<p>One sobering truth runs beneath this whole scene. These were God's own people, freshly returned from the discipline of exile, and still they drifted back into the very sin that had ruined them. It is a warning to every believer that no amount of past blessing makes us safe in the present. The flesh does not improve with age; the moment we stop leaning on the Spirit of God, we are capable of returning to the worst we ever were. That is why the work of restoration is never finished in a single ceremony. It is a daily returning, a daily dependence, a daily keeping of the heart near to God.</p>
+<h2>V. The Greater Restoration in Christ</h2>
+<p>Stand back now and see the whole picture, for the book of Ezra is a portrait of how God restores a fallen heart, and it points beyond itself to Christ. First, the temple. Under the new covenant, God no longer dwells in a building of stone. There were no church buildings at all for the first centuries; the early believers met in homes, because the church has never been a building — it is the people of God when they gather.</p>
+<div class="scripture">Do you not know that you are the temple of God and that the Spirit of God dwells in you? (1 Corinthians 3:16, NKJV)</div>
+<p>You yourself, believer, are now the temple where God's Spirit lives; and Jesus told the woman at the well that true worshipers worship not on this mountain or that, but in spirit and in truth, for the temple is no longer a place but a Presence. And see how the two men of Ezra meet in one Person. Christ is our King of David's line, who rebuilds what sin tore down; and Christ is our great High Priest, who cleanses what sin defiled. He does both works of restoration that Zerubbabel and Ezra only pictured. Remember, too, that no one fallen into sin ever comes back unless God first brings him back; the same grace that stirred Cyrus and stirred the exiles is the grace that stirs the heart of every prodigal, making us restless with the husks of the far country until we rise and go home to the Father. So hear the message of Ezra. If you have fallen, God has already taken the first step toward you. Come back to the altar; let His Word search and restore you; make a clean break with the sin; and be restored. For our God is the God of the fresh new start, and in Christ the ruined temple of the human heart is raised up and made glorious again.</p></div>
+<div class="lang-es"><p>Todos los que vinimos a vivir a un país nuevo comenzamos de nuevo al llegar. Quizá dejamos atrás autos y casas, un estilo de vida familiar y viejos amigos, y enfrentamos nuevos desafíos de cultura, idioma y vida diaria. Pero había un regalo escondido en ello: un nuevo comienzo, una oportunidad de llegar a ser algo mejor de lo que habíamos sido. El libro de Esdras es la gran historia bíblica de un nuevo comienzo. Después de setenta años de cautiverio en Babilonia, un remanente de los judíos volvió a casa a una Jerusalén en ruinas —el templo destruido, los muros derribados— para comenzar otra vez. Y la palabra clave que sostiene todo el libro es una hermosa palabra: <em>Restauración</em>. Esdras nos muestra cómo Dios restaura lo que el pecado ha arruinado, sea en una nación, una iglesia, o un solo corazón humano.</p>
+<p><strong>Tema:</strong> Esdras — un nuevo comienzo, y el Dios que restaura.</p>
+<p><strong>Palabra clave:</strong> Restauración. <strong>Texto:</strong> Esdras 1:1-4.</p>
+<p><strong>Proposición:</strong> Después del exilio Dios movió a un rey y a un pueblo a volver a casa y reconstruir; bajo Zorobabel el templo fue restaurado, y bajo Esdras el escriba la Palabra fue restaurada y el pueblo llevado al arrepentimiento —y todo ello retrata cómo Dios, por su gracia, restaura al caído y nos señala al fin a la mayor restauración que tenemos en Cristo—.</p>
+<p>Trazaremos cinco movimientos en el mensaje de Esdras.</p>
+<h2>I. Un Nuevo Comienzo</h2>
+<p>El libro abre después de los setenta años de Judá en Babilonia. Los nacidos en el exilio nunca habían visto la tierra natal; los bastante mayores para recordar sabían que todo lo que habían amado se había perdido. Sin embargo, el primer versículo mismo muestra dónde comienza toda restauración —no con la resolución humana, sino con Dios—.</p>
+<div class="scripture">En el primer año de Ciro rey de Persia... despertó Jehová el espíritu de Ciro rey de Persia, el cual hizo pregonar de palabra y también por escrito, por todo su reino. (Esdras 1:1, RVG)</div>
+<p>Jehová despertó el espíritu de un emperador pagano para enviar a su pueblo a casa, y luego, el versículo cinco nos dice, despertó los espíritus del pueblo mismo de modo que se levantaron para ir. Aquí está la primera lección de la restauración: es la obra de la gracia de Dios de principio a fin. No subimos de vuelta a Dios por nuestra cuenta; Él se mueve primero, Él despierta el corazón, Él abre la puerta —y aquellos cuyo corazón Él despierta responden y van—. Unos cincuenta mil hicieron el largo viaje a casa. El Dios que comenzó la obra de traerlos de vuelta es el mismo Dios que todavía toma la iniciativa con cada alma errante, despertando en nosotros un santo descontento con la tierra lejana y un anhelo de volver a casa.</p>
+<p>Hay gran consuelo en comenzar el libro de esta manera. Los exiliados no fueron llamados a casa porque se hubieran ganado el regreso, ni porque setenta años de algún modo hubieran pagado su deuda; volvieron a casa porque Dios recordó su promesa y se movió. Así es con todo regreso espiritual. El primer despertar del deseo que sientes de volver a Dios, la primera incomodidad con la vida que has estado viviendo, no es algo que tú fabricaste —es Dios ya obrando, llamándote a casa—. No desprecies ese pequeño comienzo. Es la señal de que el gran Restaurador ha puesto su mano a tu restauración.</p>
+<h2>II. La Obra del Rey: Reconstruir el Templo</h2>
+<p>El libro se divide naturalmente entre dos hombres. El primero es Zorobabel, el gobernador, descendiente de David de la línea real, y su obra era reconstruir el templo, narrada en los capítulos uno al seis. La obra de un rey es construir. Note el orden de lo que hicieron. Su primer acto, al aire libre entre las ruinas, fue edificar un altar y renovar la adoración y el sacrificio que Dios había mandado. Antes de levantar un solo muro, restauraron la adoración, porque la restauración siempre comienza en el altar. Luego pusieron el fundamento del templo, y el sonido que se elevó fue extraño y mezclado.</p>
+<div class="scripture">...muchos de los sacerdotes y de los levitas y de los jefes de las casas paternas, ancianos que habían visto el primer templo, viendo echar los cimientos de este templo, lloraban en alta voz... y no podía distinguir el pueblo el clamor de los gritos de alegría, de la voz del lloro. (Esdras 3:12-13, RVG)</div>
+<p>Los jóvenes gritaban de alegría ante un comienzo; los ancianos lloraban, recordando el glorioso templo de Salomón ahora perdido. Y entonces vino la oposición, como siempre sucede. Los adversarios de la tierra se ofrecieron a "ayudar" a construir —pero su adoración estaba mezclada con idolatría, y unirse a ellos habría corrompido la obra, así que fueron rechazados—. El velo de amistad pronto se volvió hostilidad; los enemigos desanimaron al pueblo, lo atemorizaron, y aun usaron medios legales para detener la obra por años. Pero Dios envió dos profetas, Hageo y Zacarías, para despertar de nuevo los corazones del pueblo; la obra se reanudó, el decreto de Darío la confirmó, y al fin el templo fue terminado y el pueblo celebró la Pascua con gozo. El patrón es inconfundible: la obra de Dios encuentra oposición, pero la palabra de Dios, por medio de sus profetas, reaviva a su pueblo para terminar lo que Él comenzó.</p>
+<p>No debemos pasar rápido sobre aquellas voces mezcladas en el fundamento. El mismo suceso sacó gritos de gozo de algunos y lágrimas de otros, y ambos eran sinceros. La restauración a menudo se siente exactamente así. Cuando Dios comienza a reconstruir una vida quebrantada, hay gozo verdadero ante el nuevo comienzo, y sin embargo puede haber dolor honesto por los años perdidos y la gloria arruinada que el pecado destruyó. Ambos pertenecen. Podemos llorar por lo que se perdió aun mientras nos regocijamos por lo que Dios ahora hace, y el Señor recibe tanto el grito como la lágrima como adoración de un corazón que vuelve a casa.</p>
+<h2>III. La Obra del Sacerdote: Restaurar la Palabra</h2>
+<p>El segundo hombre es Esdras mismo, y aparece más de sesenta años después, en los capítulos siete al diez. Si Zorobabel era de la línea real y vino a reconstruir, Esdras era de la línea sacerdotal, descendiente de Aarón, y la obra de un sacerdote es limpiar. Vino a restaurar no piedras sino almas —a traer al pueblo de vuelta a la Palabra de Dios—.</p>
+<div class="scripture">...este Esdras subió de Babilonia; y era escriba diligente en la ley de Moisés... y le concedió el rey todo lo que pidió, porque la mano de Jehová su Dios estaba sobre él. (Esdras 7:6, RVG)</div>
+<p>¿No le gustaría que se dijera de usted: "le concedió el rey todo lo que pidió"? ¿Qué clase de hombre es éste, que un emperador pagano lo tiene en tal estima? El secreto se da en los versículos siguientes, en el gran epígrafe de su vida: Esdras había preparado su corazón para inquirir la ley de Jehová, y para cumplirla, y para enseñar en Israel sus estatutos. Note el orden —estudiar, cumplir, enseñar—. No solo preparó sus argumentos ni afiló su intelecto; preparó su corazón. Primero aprendió la Palabra, luego obedeció la Palabra, y solo entonces enseñó la Palabra, y porque la vivió antes de predicarla, su enseñanza tuvo poder. Eso es lo que la Palabra de Dios hace en una vida entregada a ella: fortalece y embellece el lugar de nuestra comunión con Dios, como un templo restaurado es hecho glorioso de nuevo.</p>
+<p>Vale la pena sopesar cuán raro es tal hombre. Muchos conocen las Escrituras lo bastante bien para discutir sobre ellas, y sin embargo nunca han dejado que la Palabra gobierne su conducta. Esdras cerró esa brecha. El libro que abrió no era primero un libro para debatir sino un libro para obedecer, y solo un hombre que se ha inclinado a la Palabra él mismo puede enseñarla con autoridad a otros. Este es el orden que Dios todavía honra en los que manejarían su Palabra. Apréndela de rodillas, vívela en tu hogar y tu trabajo, y entonces tu enseñanza llevará un peso que la mera astucia nunca puede dar.</p>
+<h2>IV. La Restauración Significa Arrepentimiento</h2>
+<p>Cuando Esdras llegó a Jerusalén, halló una condición desgarradora. El pueblo, los sacerdotes, aun los líderes se habían casado con las naciones paganas vecinas, mezclando al pueblo santo de Dios con la idolatría de la tierra. Era el pecado mismo que había quebrantado a la nación antes del exilio —y después de setenta años de disciplina, habían vuelto justo a él—. La carne nunca cambia; no importa cuánto hayamos andado con Dios, nunca estamos fuera del alcance de nuestros viejos pecados si dejamos de depender de Él. La reacción de Esdras no fue un encogimiento de hombros sino angustia.</p>
+<div class="scripture">Cuando oí esto, rasgué mi vestido y mi manto, y arranqué pelo de mi cabeza y de mi barba, y me senté angustiado en extremo. (Esdras 9:3, RVG)</div>
+<p>Esdras rasgó su ropa, se sentó consternado, y luego derramó una oración de confesión, identificándose con la culpa de su pueblo. Y Dios se movió en sus corazones. Los líderes vinieron con contrición quebrantada; salió una proclamación; y el pueblo se reunió —miles de ellos, de pie bajo la lluvia torrencial frente al templo— para confesar su culpa y poner aparte la transigencia que habían abrazado fuera de la voluntad de Dios. Fue un arrepentimiento radical y costoso. La restauración verdadera nunca es barata; significa nombrar el pecado honestamente, apartarse de él decididamente, y hacer un rompimiento limpio con todo lo que nos ha alejado de Dios. El Señor Jesús enseñó la misma severidad: si tu mano te hace pecar, córtala. Sé despiadado con la cosa que te está destruyendo.</p>
+<p>Una verdad aleccionadora corre por debajo de toda esta escena. Estos eran el pueblo mismo de Dios, recién vueltos de la disciplina del exilio, y aun así volvieron a deslizarse al pecado mismo que los había arruinado. Es una advertencia a todo creyente de que ninguna cantidad de bendición pasada nos hace seguros en el presente. La carne no mejora con la edad; en el momento en que dejamos de apoyarnos en el Espíritu de Dios, somos capaces de volver a lo peor que jamás fuimos. Por eso la obra de restauración nunca se termina en una sola ceremonia. Es un volver diario, una dependencia diaria, un guardar diario del corazón cerca de Dios.</p>
+<h2>V. La Mayor Restauración en Cristo</h2>
+<p>Demos un paso atrás ahora y veamos toda la imagen, porque el libro de Esdras es un retrato de cómo Dios restaura un corazón caído, y señala más allá de sí mismo a Cristo. Primero, el templo. Bajo el nuevo pacto, Dios ya no mora en un edificio de piedra. No hubo edificios de iglesia en absoluto durante los primeros siglos; los primeros creyentes se reunían en hogares, porque la iglesia nunca ha sido un edificio —es el pueblo de Dios cuando se reúne—.</p>
+<div class="scripture">¿No sabéis que sois templo de Dios, y que el Espíritu de Dios mora en vosotros? (1 Corintios 3:16, RVG)</div>
+<p>Tú mismo, creyente, eres ahora el templo donde vive el Espíritu de Dios; y Jesús le dijo a la mujer junto al pozo que los verdaderos adoradores adoran no en este monte ni en aquel, sino en espíritu y en verdad, porque el templo ya no es un lugar sino una Presencia. Y vea cómo los dos hombres de Esdras se encuentran en una sola Persona. Cristo es nuestro Rey de la línea de David, que reconstruye lo que el pecado derribó; y Cristo es nuestro gran Sumo Sacerdote, que limpia lo que el pecado contaminó. Él hace ambas obras de restauración que Zorobabel y Esdras solo retrataron. Recuerde, también, que nadie caído en pecado vuelve jamás a menos que Dios lo traiga de vuelta primero; la misma gracia que despertó a Ciro y despertó a los exiliados es la gracia que despierta el corazón de todo pródigo, haciéndonos inquietos con las algarrobas de la tierra lejana hasta que nos levantamos y vamos a casa al Padre. Así que oye el mensaje de Esdras. Si has caído, Dios ya ha dado el primer paso hacia ti. Vuelve al altar; deja que su Palabra te escudriñe y te restaure; haz un rompimiento limpio con el pecado; y sé restaurado. Porque nuestro Dios es el Dios del nuevo comienzo, y en Cristo el templo en ruinas del corazón humano es levantado y hecho glorioso de nuevo.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 5;
+const COURSE = 'CTSBC2';
+const FILE_PREFIX = 'CTSBibleCharacters2';
+const NEXT_UNIT_URL = 'CTSBibleCharacters2Unit6.html';
+const totalUnits = 11;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - Jonah — The Prophet Who Ran from God", "Unit 2 - Hosea — The Prophet Who Loved an Unfaithful Wife", "Unit 3 - Jeremiah — The Weeping Prophet Who Stayed Faithful", "Unit 4 - Esther — For Such a Time as This: The Hidden Providence of God", "Unit 5 - Ezra — A Fresh New Start, the Scribe Who Restored God’s Word", "Unit 6 - John the Baptist — The Forerunner Who Doubted in the Dark", "Unit 7 - Peter — From Fisherman to the Rock Who Feeds the Sheep", "Unit 8 - Thomas — The Doubter Who Made the Great Confession", "Unit 9 - Lazarus — The Dead Man Jesus Called Back to Life", "Unit 10 - Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ", "Unit 11 - Paul — From Persecutor to Apostle of Grace"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [{"textEn":"1. The book of Ezra opens after Judah's seventy years of captivity in:","textEs":"1. El libro de Esdras abre después de los setenta años de cautiverio de Judá en:","optionsEn":["Egypt", "Babylon", "Assyria", "Persia"],"optionsEs":["Egipto", "Babilonia", "Asiria", "Persia"],"explanationEn":"The return came after seventy years of Babylonian captivity (Ezra 1; Jeremiah 25).","explanationEs":"El regreso vino después de setenta años de cautiverio babilónico (Esdras 1; Jeremías 25).","correct":1},{"textEn":"2. God's first move in the return was to stir the spirit of King:","textEs":"2. El primer movimiento de Dios en el regreso fue despertar el espíritu del rey:","optionsEn":["Cyrus", "Darius", "Artaxerxes", "Nebuchadnezzar"],"optionsEs":["Ciro", "Darío", "Artajerjes", "Nabucodonosor"],"explanationEn":"\"The LORD stirred up the spirit of Cyrus king of Persia\" (Ezra 1:1).","explanationEs":"«Despertó Jehová el espíritu de Ciro rey de Persia» (Esdras 1:1).","correct":0},{"textEn":"3. The first leader, who rebuilt the temple, was:","textEs":"3. El primer líder, que reconstruyó el templo, fue:","optionsEn":["Ezra", "Nehemiah", "Haggai", "Zerubbabel"],"optionsEs":["Esdras", "Nehemías", "Hageo", "Zorobabel"],"explanationEn":"Zerubbabel the governor led the first return and rebuilt the temple (Ezra 1-6).","explanationEs":"Zorobabel el gobernador dirigió el primer regreso y reconstruyó el templo (Esdras 1-6).","correct":3},{"textEn":"4. Zerubbabel was of the kingly line, a descendant of:","textEs":"4. Zorobabel era de la línea real, descendiente de:","optionsEn":["Aaron", "Levi", "David", "Moses"],"optionsEs":["Aarón", "Leví", "David", "Moisés"],"explanationEn":"Zerubbabel was of David's royal line; the king's work is to build.","explanationEs":"Zorobabel era de la línea real de David; la obra del rey es construir.","correct":2},{"textEn":"5. The very first thing the returned exiles built was:","textEs":"5. Lo primero que edificaron los exiliados que volvieron fue:","optionsEn":["an altar", "a wall", "a palace", "a market"],"optionsEs":["un altar", "un muro", "un palacio", "un mercado"],"explanationEn":"They built an altar and restored worship first (Ezra 3:2-3).","explanationEs":"Edificaron un altar y restauraron la adoración primero (Esdras 3:2-3).","correct":0},{"textEn":"6. When the temple foundation was laid, the old men who remembered the first temple:","textEs":"6. Cuando se puso el fundamento del templo, los ancianos que recordaban el primer templo:","optionsEn":["shouted", "sang", "fled", "wept"],"optionsEs":["gritaron", "cantaron", "huyeron", "lloraron"],"explanationEn":"The old men wept, remembering Solomon's temple, while others shouted for joy (Ezra 3:12).","explanationEs":"Los ancianos lloraron, recordando el templo de Salomón, mientras otros gritaban de gozo (Esdras 3:12).","correct":3},{"textEn":"7. Those who offered to \"help\" build but were refused were the:","textEs":"7. Los que se ofrecieron a \"ayudar\" a construir pero fueron rechazados eran los:","optionsEn":["Persians", "adversaries (Samaritans)", "Egyptians", "Levites"],"optionsEs":["persas", "adversarios (samaritanos)", "egipcios", "levitas"],"explanationEn":"The adversaries' worship was mixed with idolatry, so they were refused (Ezra 4:1-3).","explanationEs":"La adoración de los adversarios estaba mezclada con idolatría, así que fueron rechazados (Esdras 4:1-3).","correct":1},{"textEn":"8. God sent two prophets to stir the people to finish the temple:","textEs":"8. Dios envió dos profetas para despertar al pueblo a terminar el templo:","optionsEn":["Ezra and Nehemiah", "Moses and Aaron", "Haggai and Zechariah", "Elijah and Elisha"],"optionsEs":["Esdras y Nehemías", "Moisés y Aarón", "Hageo y Zacarías", "Elías y Eliseo"],"explanationEn":"Haggai and Zechariah stirred the people, and the work resumed (Ezra 5:1-2).","explanationEs":"Hageo y Zacarías despertaron al pueblo, y la obra se reanudó (Esdras 5:1-2).","correct":2},{"textEn":"9. When the temple was finished, the people celebrated the:","textEs":"9. Cuando el templo fue terminado, el pueblo celebró la:","optionsEn":["Tabernacles", "Passover", "Pentecost", "Purim"],"optionsEs":["Tabernáculos", "Pascua", "Pentecostés", "Purim"],"explanationEn":"They kept the Passover with joy when the temple was finished (Ezra 6:19-22).","explanationEs":"Celebraron la Pascua con gozo cuando el templo fue terminado (Esdras 6:19-22).","correct":1},{"textEn":"10. The second leader, who restored the law, was:","textEs":"10. El segundo líder, que restauró la ley, fue:","optionsEn":["Ezra", "Zerubbabel", "Nehemiah", "Cyrus"],"optionsEs":["Esdras", "Zorobabel", "Nehemías", "Ciro"],"explanationEn":"Ezra led the second return and restored the Word (Ezra 7-10).","explanationEs":"Esdras dirigió el segundo regreso y restauró la Palabra (Esdras 7-10).","correct":0},{"textEn":"11. Ezra was descended from Aaron, so he was a:","textEs":"11. Esdras era descendiente de Aarón, así que era:","optionsEn":["king", "prophet", "priest", "soldier"],"optionsEs":["rey", "profeta", "sacerdote", "soldado"],"explanationEn":"Ezra was of the priestly line of Aaron; the priest's work is to cleanse (Ezra 7:1-5).","explanationEs":"Esdras era de la línea sacerdotal de Aarón; la obra del sacerdote es limpiar (Esdras 7:1-5).","correct":2},{"textEn":"12. Ezra was also a skilled:","textEs":"12. Esdras era también un diligente:","optionsEn":["farmer", "builder", "merchant", "scribe"],"optionsEs":["agricultor", "constructor", "mercader", "escriba"],"explanationEn":"Ezra was a skilled scribe in the Law of Moses (Ezra 7:6).","explanationEs":"Esdras era un escriba diligente en la ley de Moisés (Esdras 7:6).","correct":3},{"textEn":"13. The secret of Ezra was that he set his heart to study the law, to do it, and to:","textEs":"13. El secreto de Esdras era que preparó su corazón para estudiar la ley, cumplirla, y:","optionsEn":["teach it", "hide it", "sell it", "copy it"],"optionsEs":["enseñarla", "esconderla", "venderla", "copiarla"],"explanationEn":"\"...to study the Law of the LORD, and to do it, and to teach\" (Ezra 7:10).","explanationEs":"«...inquirir la ley de Jehová, y para cumplirla, y para enseñar» (Esdras 7:10).","correct":0},{"textEn":"14. Ezra 7:10 challenges us to be not just Bible students but Bible:","textEs":"14. Esdras 7:10 nos desafía a ser no solo estudiantes de la Biblia sino:","optionsEn":["readers", "scholars", "doers", "critics"],"optionsEs":["lectores", "eruditos", "hacedores", "críticos"],"explanationEn":"Ezra did the Word, not just studied it — we must be Bible doers (cf. James 1:22).","explanationEs":"Esdras cumplió la Palabra, no solo la estudió — debemos ser hacedores (cf. Santiago 1:22).","correct":2},{"textEn":"15. \"The king granted him all that he asked\" because the hand of the ___ was upon him:","textEs":"15. «El rey le concedió todo lo que pidió» porque la mano del ___ estaba sobre él:","optionsEn":["king", "governor", "people", "LORD"],"optionsEs":["rey", "gobernador", "pueblo", "Señor"],"explanationEn":"\"...according to the hand of the LORD his God upon him\" (Ezra 7:6).","explanationEs":"«...porque la mano de Jehová su Dios estaba sobre él» (Esdras 7:6).","correct":3},{"textEn":"16. The crisis Ezra found was that the people had:","textEs":"16. La crisis que Esdras halló fue que el pueblo se había:","optionsEn":["stopped praying", "married pagan foreign wives", "worshiped idols only", "robbed the temple"],"optionsEs":["dejado de orar", "casado con esposas paganas extranjeras", "adorado solo ídolos", "robado el templo"],"explanationEn":"The people had intermarried with the pagan nations, repeating the old sin (Ezra 9:1-2).","explanationEs":"El pueblo se había casado con las naciones paganas, repitiendo el viejo pecado (Esdras 9:1-2).","correct":1},{"textEn":"17. When Ezra heard of the sin, he:","textEs":"17. Cuando Esdras oyó del pecado, él:","optionsEn":["said nothing", "rejoiced", "fled the city", "tore his garment and mourned"],"optionsEs":["no dijo nada", "se regocijó", "huyó de la ciudad", "rasgó su vestido y se afligió"],"explanationEn":"\"I tore my garment and my robe... and sat down astonished\" (Ezra 9:3).","explanationEs":"«Rasgué mi vestido y mi manto... y me senté angustiado» (Esdras 9:3).","correct":3},{"textEn":"18. The people gathered to confess their guilt, standing in the:","textEs":"18. El pueblo se reunió a confesar su culpa, de pie bajo la:","optionsEn":["heat", "darkness", "rain", "snow"],"optionsEs":["calor", "oscuridad", "lluvia", "nieve"],"explanationEn":"The people stood trembling in the rain to confess and repent (Ezra 10:9).","explanationEs":"El pueblo estuvo temblando bajo la lluvia para confesar y arrepentirse (Esdras 10:9).","correct":2},{"textEn":"19. The keyword of Ezra's message is:","textEs":"19. La palabra clave del mensaje de Esdras es:","optionsEn":["Restoration", "Sacrifice", "Judgment", "Exile"],"optionsEs":["Restauración", "Sacrificio", "Juicio", "Exilio"],"explanationEn":"The keyword that holds the book together is Restoration.","explanationEs":"La palabra clave que sostiene el libro es Restauración.","correct":0},{"textEn":"20. The New Testament says that believers themselves are now God's:","textEs":"20. El Nuevo Testamento dice que los creyentes mismos son ahora el ___ de Dios:","optionsEn":["law", "temple", "army", "nation"],"optionsEs":["ley", "templo", "ejército", "nación"],"explanationEn":"\"You are the temple of God and... the Spirit of God dwells in you\" (1 Corinthians 3:16).","explanationEs":"«Sois templo de Dios, y... el Espíritu de Dios mora en vosotros» (1 Corintios 3:16).","correct":1}];
+const kwQuestions = [{"textEn":"21. Trace the five movements of the message of Ezra.","textEs":"21. Trace los cinco movimientos del mensaje de Esdras.","kw_en":["start","temple","zerubbabel","word","scribe","repentance","restoration","christ"],"kw_es":["comienzo","templo","zorobabel","ley","escriba","arrepent","restauraci","cristo"],"modelEn":"The message of Ezra moves through five movements. First comes a fresh new start, as God stirs Cyrus and the exiles return from Babylon. Second is the king's work, the rebuilding of the temple under Zerubbabel. Third is the priest's work, the restoring of the Word under Ezra the scribe. Fourth, restoration means repentance, as Ezra confronts the people's sin and they confess. And fifth, all of it points to the greater restoration in Christ, the keyword being Restoration throughout.","modelEs":"El mensaje de Esdras pasa por cinco movimientos. Primero viene un nuevo comienzo, pues Dios despierta a Ciro y los exiliados vuelven de Babilonia. Segundo es la obra del rey, la reconstrucción del templo bajo Zorobabel. Tercero es la obra del sacerdote, la restauración de la Palabra y la ley bajo Esdras el escriba. Cuarto, la restauración significa arrepentimiento, pues Esdras confronta el pecado del pueblo y ellos confiesan. Y quinto, todo ello señala a la mayor restauración en Cristo, siendo la Restauración la palabra clave en todo."},{"textEn":"22. How does the return from exile show that restoration is God's gracious initiative?","textEs":"22. ¿Cómo muestra el regreso del exilio que la restauración es la iniciativa llena de gracia de Dios?","kw_en":["stirred","cyrus","spirit","grace","initiative","return","god","brought"],"kw_es":["despert","ciro","gracia","iniciativa","regreso","dios","corazon","pueblo"],"modelEn":"The return shows that restoration is God's gracious initiative because the very first verse says the Lord stirred up the spirit of Cyrus, a pagan king, to send His people home. Then He stirred the spirits of the people themselves so they rose up to go. We do not climb back to God on our own; He moves first, He stirs the heart, He opens the door, and those whose hearts He stirs respond. The whole return was the work of grace from start to finish, and God still takes the initiative with every wandering soul.","modelEs":"El regreso muestra que la restauración es la iniciativa de Dios porque el primer versículo mismo dice que Jehová despertó el espíritu de Ciro, un rey pagano, para enviar a su pueblo a casa. Luego despertó los espíritus del pueblo mismo de modo que se levantaron para ir. No subimos de vuelta a Dios por nuestra cuenta; Él se mueve primero, despierta el corazón, abre la puerta, y aquellos cuyo corazón despierta responden. Todo el regreso fue obra de la gracia de principio a fin, y Dios todavía toma la iniciativa con cada alma errante."},{"textEn":"23. Describe the rebuilding of the temple under Zerubbabel.","textEs":"23. Describa la reconstrucción del templo bajo Zorobabel.","kw_en":["zerubbabel","altar","foundation","wept","opposition","haggai","zechariah","finished"],"kw_es":["zorobabel","altar","fundamento","llora","oposici","hageo","zacar","termin"],"modelEn":"Under Zerubbabel, of David's kingly line, the people first built an altar among the ruins and restored worship, for restoration begins at the altar. Then they laid the temple's foundation; the young shouted for joy while the old men wept, remembering Solomon's temple. Opposition arose: the adversaries offered to help but were refused, then discouraged the people and stopped the work by legal means for years. But God sent the prophets Haggai and Zechariah to stir the people, the work resumed, and the temple was at last finished and the Passover kept with joy.","modelEs":"Bajo Zorobabel, de la línea real de David, el pueblo primero edificó un altar entre las ruinas y restauró la adoración, porque la restauración comienza en el altar. Luego pusieron el fundamento del templo; los jóvenes gritaban de gozo mientras los ancianos lloraban, recordando el templo de Salomón. Surgió la oposición: los adversarios se ofrecieron a ayudar pero fueron rechazados, luego desanimaron al pueblo y detuvieron la obra por medios legales por años. Pero Dios envió a los profetas Hageo y Zacarías para despertar al pueblo, la obra se reanudó, y el templo fue al fin terminado y la Pascua celebrada con gozo."},{"textEn":"24. What was the secret of Ezra's character (Ezra 7:10)?","textEs":"24. ¿Cuál era el secreto del carácter de Esdras (Esdras 7:10)?","kw_en":["heart","study","law","do","teach","prepared","scribe","lord"],"kw_es":["corazon","estudi","ley","cumplir","maestro","prepar","escriba","dios"],"modelEn":"The secret of Ezra's character is given in Ezra 7:10: he had set his heart to study the law of the Lord, and to do it, and to teach it in Israel. Notice the order, study then do then teach. He did not merely prepare his arguments or sharpen his intellect; he prepared his heart. He first learned the Word, then obeyed the Word as a scribe and doer, and only then taught it. Because he lived the law before he preached it, his teaching had power, and the hand of the Lord his God was upon him.","modelEs":"El secreto del carácter de Esdras se da en Esdras 7:10: había preparado su corazón para inquirir la ley de Jehová, y para cumplirla, y para enseñarla en Israel. Note el orden, estudiar luego cumplir luego enseñar. No solo preparó sus argumentos ni afiló su intelecto; preparó su corazón. Primero aprendió la Palabra, luego obedeció la Palabra como escriba que la cumplía, y solo entonces la enseñó como maestro. Porque vivió la ley antes de predicarla, su enseñanza tuvo poder, y la mano de Jehová su Dios estaba sobre él."},{"textEn":"25. What does it mean to be a Bible doer and not only a Bible student?","textEs":"25. ¿Qué significa ser un hacedor de la Biblia y no solo un estudiante de la Biblia?","kw_en":["doer","student","obey","practice","hear","do","life","word"],"kw_es":["hacedor","estudiante","obedec","practica","oir","cumplir","vida","ley"],"modelEn":"To be a Bible doer means more than studying and knowing the Word; it means obeying it and putting it into practice in daily life. Ezra not only studied the law but set his heart to do it, and that obedience gave weight to all he taught. Many are content to hear and learn, sharpening their knowledge while their lives remain unchanged. But Scripture calls us to be doers of the Word and not hearers only. The student fills the head; the doer lets the Word reshape the life, which is what God is truly after.","modelEs":"Ser un hacedor de la Biblia significa más que estudiar y conocer la Palabra; significa obedecerla y ponerla en práctica en la vida diaria. Esdras no solo estudió la ley sino que preparó su corazón para cumplirla, y esa obediencia dio peso a todo lo que enseñó. Muchos se contentan con oír y aprender, afilando su conocimiento mientras su vida permanece sin cambio. Pero la Escritura nos llama a ser hacedores de la Palabra y no solo estudiantes. El estudiante llena la cabeza; el hacedor deja que la Palabra reforme la vida, que es lo que Dios verdaderamente busca."},{"textEn":"26. What crisis did Ezra find, and how did the people respond?","textEs":"26. ¿Qué crisis halló Esdras, y cómo respondió el pueblo?","kw_en":["married","foreign","wives","world","ezra","mourned","confessed","repented"],"kw_es":["casaron","extranjeras","esposas","mundo","esdras","lament","confes","arrepent"],"modelEn":"Ezra found that the people, the priests, and even the leaders had married pagan foreign wives, mixing the holy people of God with the idolatry of the world. It was the very sin that had broken the nation before the exile. Ezra mourned, tearing his garment and sitting appalled, and prayed a prayer of confession. God moved in the people's hearts; the leaders came in contrition, and thousands gathered in the rain, confessed their guilt, and repented, putting away the compromise they had embraced outside God's will.","modelEs":"Esdras halló que el pueblo, los sacerdotes, y aun los líderes se habían casado con esposas paganas extranjeras, mezclando al pueblo santo de Dios con la idolatría del mundo. Era el pecado mismo que había quebrantado a la nación antes del exilio. Esdras se lamentó, rasgando su vestido y sentándose consternado, y oró una oración de confesión. Dios se movió en los corazones del pueblo; los líderes vinieron con contrición, y miles se reunieron bajo la lluvia, confesaron su culpa, y se arrepintieron, poniendo aparte la transigencia que habían abrazado fuera de la voluntad de Dios."},{"textEn":"27. In what sense are believers today the temple of God?","textEs":"27. ¿En qué sentido son los creyentes hoy el templo de Dios?","kw_en":["temple","believers","spirit","dwells","church","people","building","gathered"],"kw_es":["templo","creyentes","mora","iglesia","pueblo","edificio","santo","reunidos"],"modelEn":"Believers today are the temple of God in the sense that, under the new covenant, God no longer dwells in a building of stone but in His people. Paul says you are the temple of God and the Spirit of God dwells in you. Jesus told the woman at the well that true worshipers worship in spirit and truth, not in one place. There were no church buildings for the first centuries; the early believers met in homes, because the church has never been a building but the people of God when they are gathered.","modelEs":"Los creyentes hoy son el templo de Dios en el sentido de que, bajo el nuevo pacto, Dios ya no mora en un edificio de piedra sino en su pueblo. Pablo dice que sois templo de Dios y el Espíritu Santo mora en vosotros. Jesús le dijo a la mujer junto al pozo que los verdaderos adoradores adoran en espíritu y en verdad, no en un solo lugar. No hubo edificios de iglesia durante los primeros siglos; los primeros creyentes se reunían en hogares, porque la iglesia nunca ha sido un edificio sino el pueblo de Dios cuando está reunido."},{"textEn":"28. Why is \"Restoration\" the keyword of the book of Ezra?","textEs":"28. ¿Por qué es «Restauración» la palabra clave del libro de Esdras?","kw_en":["restoration","grace","temple","law","brings","back","sin","heart"],"kw_es":["restauraci","corazon","gracia","templo","ley","regreso","pecado","dios"],"modelEn":"Restoration is the keyword because the whole book shows God restoring what sin had wrecked. The temple was rebuilt, the Word and the law were restored, and a people fallen into sin were brought back to God. Ezra becomes a picture of how God restores any fallen heart, church, or nation, always by His grace and always following this pattern: He takes the initiative, worship is renewed at the altar, His Word cleanses, and the people repent. Return from sin is always the work of God's grace, and that is restoration.","modelEs":"Restauración es la palabra clave porque todo el libro muestra a Dios restaurando lo que el pecado había arruinado. El templo fue reconstruido, la Palabra y la ley fueron restauradas, y un pueblo caído en pecado fue traído de vuelta a Dios. Esdras llega a ser una imagen de cómo Dios restaura cualquier corazón, iglesia o nación caída, siempre por su gracia y siempre siguiendo este patrón: Él toma la iniciativa, la adoración se renueva en el altar, su Palabra limpia, y el pueblo se arrepiente. El regreso del pecado siempre es obra de la gracia de Dios, y eso es restauración."},{"textEn":"29. What does Ezra teach about repentance and breaking with sin?","textEs":"29. ¿Qué enseña Esdras sobre el arrepentimiento y romper con el pecado?","kw_en":["repentance","confession","sin","separate","covenant","radical","break","return"],"kw_es":["arrepent","confes","pecado","separar","pacto","radical","romper","regreso"],"modelEn":"Ezra teaches that real repentance is radical and costly, not cheap. When the people's sin was exposed, they did not excuse it; they confessed their guilt, standing in the rain, and made a decisive break, separating themselves from the compromise they had embraced. True restoration means naming the sin honestly, turning from it, and breaking cleanly with whatever pulls us from God. Jesus taught the same severity, that if your hand causes you to sin you must cut it off. We are to be ruthless with the thing that is destroying us and return wholly to the Lord.","modelEs":"Esdras enseña que el arrepentimiento verdadero es radical y costoso, no barato. Cuando el pecado del pueblo fue expuesto, no lo excusaron; confesaron su culpa, de pie bajo la lluvia, e hicieron un rompimiento decisivo, separándose de la transigencia que habían abrazado. La restauración verdadera significa nombrar el pecado honestamente, apartarse de él, y romper limpiamente con todo lo que nos aparta de Dios. Jesús enseñó la misma severidad, que si tu mano te hace pecar debes cortarla. Hemos de ser despiadados con la cosa que nos destruye y volver enteramente al Señor, renovando el pacto."},{"textEn":"30. How does Ezra point us to the greater restoration in Christ?","textEs":"30. ¿Cómo nos señala Esdras a la mayor restauración en Cristo?","kw_en":["christ","temple","priest","restore","cleanse","grace","gospel","return"],"kw_es":["cristo","templo","sacerdote","restaur","limpiar","gracia","evangelio","regreso"],"modelEn":"Ezra points to the greater restoration in Christ because the two men who restore in the book meet in one Person. Christ is our King of David's line, who rebuilds what sin tore down, and our great High Priest, who cleanses what sin defiled, doing both works of restoration that Zerubbabel and Ezra only pictured. Believers are now the temple where God's Spirit dwells. And just as God took the initiative to bring the exiles home, His grace stirs every prodigal to return. The gospel is the offer of full restoration to all who come back to God through Christ.","modelEs":"Esdras señala a la mayor restauración en Cristo porque los dos hombres que restauran en el libro se encuentran en una sola Persona. Cristo es nuestro Rey de la línea de David, que reconstruye lo que el pecado derribó, y nuestro gran Sumo Sacerdote, que limpia lo que el pecado contaminó, haciendo ambas obras de restauración que Zorobabel y Esdras solo retrataron. Los creyentes son ahora el templo donde mora el Espíritu de Dios. Y así como Dios tomó la iniciativa para traer a los exiliados a casa, su gracia despierta a todo pródigo para que regrese. El evangelio es la oferta de restauración plena a todos los que vuelven a Dios por medio de Cristo."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleCharacters2Readings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

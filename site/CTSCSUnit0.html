@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapala Theological Seminary — Counseling Situations · Unit 0: Bringing the Ten Steps to a Real Situation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a2620;
+  --paper:#f6f1e6;
+  --paper-2:#efe8d6;
+  --teal:#0d3a36;
+  --teal-2:#155049;
+  --gold:#a07a2c;
+  --gold-2:#c79b3e;
+  --crimson:#7a2c2c;
+  --green-pass:#1e5a36;
+  --red-fail:#8a2a2a;
+  --shadow:0 8px 28px rgba(13,58,54,.12);
+  --display:'Cormorant Garamond', Georgia, serif;
+  --body:'Crimson Pro', Georgia, serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  font-size:18px;
+  line-height:1.65;
+  color:var(--ink);
+  background:var(--paper);
+  background-image:
+    radial-gradient(circle at 10% 5%,rgba(160,122,44,.06) 0%,transparent 35%),
+    radial-gradient(circle at 90% 95%,rgba(13,58,54,.05) 0%,transparent 40%);
+  padding-bottom:60px;
+}
+.seminary-header{
+  background:linear-gradient(160deg,var(--teal) 0%,var(--teal-2) 100%);
+  color:var(--paper);
+  padding:2.2rem 1.5rem 2rem;
+  text-align:center;
+  border-bottom:3px solid var(--gold);
+  position:relative;
+}
+.seminary-header::after{
+  content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);
+  width:56px;height:13px;background:var(--gold);
+  clip-path:polygon(0 0,100% 0,90% 100%,10% 100%);
+}
+.seminary-header h1{
+  font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4.5vw,2.4rem);
+  letter-spacing:.02em;line-height:1.15;
+}
+.seminary-header h1 small{display:block;font-size:.5em;font-weight:400;letter-spacing:.18em;text-transform:uppercase;opacity:.78;margin-bottom:.4em;color:var(--gold-2)}
+.seminary-header .course-title{font-style:italic;opacity:.92;margin-top:.6rem;font-size:1.05rem;letter-spacing:.01em}
+.instructors{
+  text-align:center;font-size:.92rem;
+  color:var(--teal);background:rgba(255,255,255,.55);
+  padding:.55rem 1rem;max-width:900px;margin:1rem auto 0;
+  border-radius:2px;border-left:2px solid var(--gold);border-right:2px solid var(--gold);
+}
+.registration-bar{
+  max-width:1100px;margin:1.4rem auto;padding:1.1rem 1.4rem;
+  background:#fff;border:1px solid rgba(13,58,54,.12);
+  border-radius:2px;box-shadow:var(--shadow);
+  display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;
+}
+.registration-fields{display:flex;flex-wrap:wrap;gap:.6rem;flex:1;min-width:280px}
+.registration-fields input,.registration-fields select{
+  padding:.55rem .8rem;border:1px solid rgba(13,58,54,.25);
+  border-radius:2px;font-family:var(--body);font-size:.95rem;
+  background:var(--paper);color:var(--ink);min-width:140px;flex:1;
+}
+.registration-fields input:focus,.registration-fields select:focus{outline:2px solid var(--gold);outline-offset:1px}
+button{
+  font-family:var(--body);background:var(--teal);color:var(--paper);
+  border:none;padding:.55rem 1.2rem;border-radius:2px;cursor:pointer;
+  font-weight:500;font-size:.95rem;letter-spacing:.02em;
+  transition:background .15s,transform .15s;
+}
+button:hover{background:var(--teal-2)}
+button:active{transform:translateY(1px)}
+.lang-toggle{background:var(--gold);color:var(--ink);font-weight:600}
+.lang-toggle:hover{background:var(--gold-2)}
+.registered-info{
+  background:var(--paper-2);padding:.4rem .9rem;border-radius:2px;
+  font-size:.85rem;color:var(--teal);font-style:italic;
+}
+.container{max-width:980px;margin:0 auto;padding:0 1rem}
+.unit-nav{
+  display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;
+  margin:1.4rem 0;padding:.8rem;background:rgba(255,255,255,.5);
+  border-radius:2px;
+}
+.unit-nav button{
+  background:transparent;color:var(--teal);border:1px solid rgba(13,58,54,.2);
+  padding:.4rem .7rem;font-size:.85rem;
+}
+.unit-nav button:hover{background:var(--teal);color:var(--paper)}
+.unit-nav button.passed{background:var(--green-pass);color:var(--paper);border-color:var(--green-pass)}
+
+.teaching-block{
+  background:#fff;border-radius:3px;padding:2rem 1.8rem;
+  margin-bottom:1.2rem;box-shadow:var(--shadow);
+  border-top:3px solid var(--gold);
+  position:relative;
+}
+.teaching-block::before{
+  content:"";position:absolute;top:0;left:0;width:80px;height:3px;background:var(--teal);
+}
+.unit-meta{
+  font-family:var(--display);font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.3rem;font-weight:500;
+}
+.teaching-block h2{
+  font-family:var(--display);font-weight:600;color:var(--teal);
+  font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.15;margin-bottom:.4rem;letter-spacing:.005em;
+}
+.teaching-block .focus-line{
+  font-style:italic;color:var(--ink);opacity:.75;margin-bottom:1.5rem;font-size:.98rem;
+  padding-bottom:1rem;border-bottom:1px solid rgba(13,58,54,.1);
+}
+.teaching-block h3{
+  font-family:var(--display);font-weight:600;color:var(--teal-2);
+  font-size:1.32rem;margin:1.6rem 0 .5rem;
+  padding-left:.7rem;border-left:3px solid var(--gold);
+}
+.teaching-block p{margin-bottom:.9rem;text-align:justify;hyphens:auto}
+.teaching-block p .em{font-style:italic;color:var(--teal)}
+.scripture-box{
+  background:var(--paper-2);padding:1rem 1.3rem;margin:1rem 0;
+  border-left:3px solid var(--crimson);font-style:italic;
+  font-family:var(--display);font-size:1.05rem;color:var(--teal);
+}
+.scripture-box cite{display:block;text-align:right;font-style:normal;font-size:.85rem;color:var(--gold);margin-top:.3rem;font-family:var(--body)}
+.example-box{
+  background:#faf6ec;padding:1rem 1.2rem;margin:1rem 0;
+  border-radius:2px;border:1px dashed rgba(160,122,44,.4);font-size:.96rem;
+}
+.example-box .label{
+  display:inline-block;font-family:var(--display);font-weight:600;
+  color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:.3rem;
+}
+.lang-en,.lang-es{display:block}
+.lang-es{display:none}
+body.spanish .lang-en{display:none}
+body.spanish .lang-es{display:block}
+.translation-note{
+  background:rgba(160,122,44,.08);border-left:3px solid var(--gold);
+  padding:.6rem 1rem;margin:1rem 0;font-size:.85rem;font-style:italic;color:var(--teal);
+}
+
+.quiz-section{
+  background:#fff;border-radius:3px;padding:1.8rem;
+  margin:1rem 0 2rem;box-shadow:var(--shadow);border-top:3px solid var(--teal);
+}
+.quiz-header{font-family:var(--display);font-size:1.5rem;color:var(--teal);margin-bottom:1rem}
+.quiz-meta{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:1.2rem}
+.meta-card{
+  background:var(--paper-2);padding:.4rem .9rem;border-radius:2px;
+  font-size:.85rem;color:var(--teal);
+}
+.meta-card strong{display:block;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.1rem}
+.question-card{
+  background:#fdfaf2;border:1px solid rgba(13,58,54,.1);border-radius:2px;
+  padding:1rem 1.2rem;margin-bottom:.9rem;
+}
+.question-text{font-weight:500;margin-bottom:.7rem;font-size:1rem;color:var(--ink)}
+.options{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.5rem}
+.option{
+  display:flex;align-items:flex-start;gap:.6rem;cursor:pointer;
+  padding:.45rem .7rem;border-radius:2px;background:var(--paper);
+  border:1px solid transparent;transition:.15s;
+}
+.option:hover{background:var(--paper-2);border-color:rgba(160,122,44,.3)}
+.option input{margin-top:.25rem;accent-color:var(--teal)}
+.option.selected{border-color:var(--gold);background:#fdf7e6}
+.feedback{
+  margin-top:.5rem;padding:.6rem .9rem;border-radius:2px;
+  font-size:.92rem;display:none;
+}
+.feedback.show{display:block}
+.feedback.correct{background:#e3efe1;color:var(--green-pass);border-left:3px solid var(--green-pass)}
+.feedback.incorrect{background:#f3dede;color:var(--red-fail);border-left:3px solid var(--red-fail)}
+.feedback strong{display:block;margin-bottom:.2rem}
+
+.essay-section{
+  margin-top:1.5rem;padding-top:1.2rem;border-top:2px solid var(--gold);
+}
+.essay-header{
+  font-family:var(--display);font-size:1.2rem;color:var(--gold);
+  margin-bottom:.4rem;font-weight:600;
+}
+.essay-header small{display:block;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:.3rem;font-family:var(--body)}
+.essay-card{
+  background:#fdfaf2;border:1px solid rgba(160,122,44,.2);
+  padding:1rem 1.2rem;margin-bottom:.9rem;border-radius:2px;
+}
+.essay-prompt{font-style:italic;margin-bottom:.6rem;color:var(--teal)}
+.essay-card textarea{
+  width:100%;padding:.6rem;border:1px solid rgba(13,58,54,.2);
+  border-radius:2px;font-family:var(--body);font-size:.95rem;
+  background:var(--paper);min-height:80px;resize:vertical;
+}
+.essay-rubric{
+  margin-top:.5rem;padding:.6rem .9rem;background:var(--paper-2);
+  border-left:2px solid var(--gold);font-size:.88rem;display:none;
+}
+.essay-rubric.show{display:block}
+.essay-rubric strong{color:var(--teal)}
+
+.model-answer{
+  margin-top:.6rem;padding:.8rem 1rem;background:#f4ecd6;
+  border-left:4px solid var(--gold-2);border-radius:4px;
+  font-size:.92rem;line-height:1.55;color:var(--ink);
+}
+.model-answer strong{color:var(--teal);display:block;margin-bottom:.3rem}
+
+.unit-actions{
+  display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem;justify-content:center;
+}
+.submit-btn{background:var(--teal);min-width:140px}
+.reset-btn{background:transparent;color:var(--teal);border:1px solid var(--teal)}
+.reset-btn:hover{background:var(--teal);color:var(--paper)}
+.small-check-btn{
+  margin-top:.5rem;padding:.4rem .8rem;font-size:.85rem;
+  background:transparent;color:var(--teal);border:1px solid var(--teal);
+  border-radius:2px;cursor:pointer;font-family:inherit;
+}
+.small-check-btn:hover{background:var(--teal);color:var(--paper)}
+.essay-optional-note{
+  padding:.85rem 1rem;margin:1rem 0;background:#fffbeb;
+  border-left:4px solid #d4a017;border-radius:2px;
+  font-size:.92rem;line-height:1.5;
+}
+.unit-result{
+  margin-top:1rem;padding:1rem;border-radius:2px;font-weight:500;
+  text-align:center;display:none;
+}
+.unit-result.show{display:block}
+.unit-result.pass{background:#e3efe1;color:var(--green-pass);border:1px solid var(--green-pass)}
+.unit-result.fail{background:#f3dede;color:var(--red-fail);border:1px solid var(--red-fail)}
+
+.toplink{
+  display:block;text-align:center;margin:1.2rem 0;
+  color:var(--teal);text-decoration:none;font-size:.9rem;font-style:italic;
+}
+.toplink:hover{color:var(--gold)}
+
+/* Course progress */
+.progress-section{
+  background:#fff;border-radius:3px;padding:1.4rem;
+  margin:1.2rem 0;box-shadow:var(--shadow);text-align:center;
+}
+.progress-section h3{font-family:var(--display);color:var(--teal);font-size:1.4rem;margin-bottom:.7rem}
+.progress-bar{
+  height:24px;background:var(--paper-2);border-radius:2px;overflow:hidden;
+  margin:.7rem 0;
+}
+.progress-bar-fill{
+  height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));
+  width:0%;transition:width .4s;display:flex;align-items:center;justify-content:flex-end;
+  padding-right:8px;color:var(--paper);font-size:.8rem;font-weight:600;
+}
+.course-complete{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);
+  color:var(--ink);padding:1rem;border-radius:2px;margin-top:.7rem;
+  font-family:var(--display);font-size:1.2rem;font-weight:600;display:none;
+}
+.course-complete.show{display:block}
+
+/* Certificate modal */
+.cert-modal{
+  display:none;position:fixed;inset:0;background:rgba(13,38,32,.85);
+  z-index:1000;justify-content:center;align-items:center;padding:1rem;overflow-y:auto;
+}
+.cert-modal.show{display:flex}
+.cert-content{
+  background:var(--paper);padding:2.5rem 2rem;border:8px double var(--gold);
+  max-width:680px;width:100%;text-align:center;position:relative;
+  background-image:
+    radial-gradient(circle at 0% 0%,rgba(160,122,44,.08) 0%,transparent 40%),
+    radial-gradient(circle at 100% 100%,rgba(13,58,54,.06) 0%,transparent 40%);
+}
+.cert-content h2{
+  font-family:var(--display);color:var(--teal);font-size:2rem;font-weight:600;
+  letter-spacing:.02em;margin-bottom:.2rem;
+}
+.cert-content .cert-sub{
+  font-family:var(--display);color:var(--gold);font-size:1.3rem;font-style:italic;
+  margin-bottom:1.5rem;letter-spacing:.05em;
+}
+.cert-content .cert-body{font-size:1.05rem;line-height:1.8;margin:1rem 0}
+.cert-content .cert-name{
+  font-family:var(--display);font-size:1.7rem;font-weight:600;color:var(--teal);
+  border-bottom:1px solid var(--gold);padding:.4rem 2rem;margin:.7rem auto;display:inline-block;
+}
+.cert-content .cert-track{font-style:italic;color:var(--gold);font-weight:600}
+.cert-date{margin-top:1.2rem;font-family:var(--display);font-size:.95rem;color:var(--ink);font-style:italic}
+.cert-seal{font-size:2.5rem;margin:1rem 0;color:var(--gold)}
+.cert-signatures{
+  display:flex;justify-content:space-around;margin-top:2rem;flex-wrap:wrap;gap:1.5rem;
+}
+.cert-sig{font-size:.92rem;flex:1;min-width:200px}
+.cert-sig .sig-name{
+  font-family:var(--display);font-size:1.15rem;font-weight:600;color:var(--teal);
+  border-top:1px solid var(--ink);padding-top:.4rem;margin-top:1.2rem;
+}
+.cert-sig .sig-title{font-style:italic;font-size:.82rem;color:var(--ink);opacity:.75}
+.cert-actions{margin-top:1.5rem;display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+.cert-close{background:transparent;color:var(--teal);border:1px solid var(--teal)}
+
+@media print{
+  body *{visibility:hidden}
+  .cert-modal,.cert-modal *{visibility:visible}
+  .cert-modal{position:absolute;background:white}
+  .cert-actions{display:none}
+}
+
+@media (max-width:700px){
+  body{font-size:16px}
+  .registration-bar{flex-direction:column;align-items:stretch}
+  .registration-fields{flex-direction:column}
+  .teaching-block{padding:1.4rem 1.1rem}
+  .quiz-section{padding:1.2rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<!-- Counseling Situations · Unit 0 of 13. Engine cloned from CTSCounseling.html, THIS_UNIT=0. Keys cts_cs_state / cts_cs_reg / cts_lang. Foundation/intro unit; full Robbins contrast of secular approaches; introduces course-wide safeguard; Rogerian + all lenses surveyed. -->
+<div class="seminary-header">
+  <h1><small>Chapala Theological Seminary</small>
+    <span class="lang-en">Counseling Situations</span><span class="lang-es">Situaciones de Consejería</span></h1>
+  <p class="course-title"><span class="lang-en">Applying Drakeford's Ten-Step Model to Real Situations — Unit 0: Bringing the Ten Steps to a Real Situation</span><span class="lang-es">Aplicando el Modelo de Diez Pasos de Drakeford a Situaciones Reales — Unidad 0: Llevando los Diez Pasos a una Situación Real</span></p>
+</div>
+<div class="instructors"><span class="lang-en">Professor: Dr. Wayne Cook &nbsp;·&nbsp; Seminary Director: Dr. Ted Rogers</span><span class="lang-es">Profesor: Dr. Wayne Cook &nbsp;·&nbsp; Director del Seminario: Dr. Ted Rogers</span></div>
+<div class="registration-bar" id="registrationBar">
+  <div class="registration-fields" id="regFields">
+    <input type="text" id="studentName" placeholder="Full Name / Nombre Completo" aria-label="Full Name / Nombre Completo">
+    <input type="email" id="studentEmail" placeholder="Email" aria-label="Email">
+    <input type="text" id="studentCountry" placeholder="Country / País" aria-label="Country / País">
+    <select id="programTrack" aria-label="programTrack"><option value="cert">Certificate of Ministry</option><option value="thm">Master of Theology</option><option value="mdiv">Master of Divinity</option></select>
+    <button id="saveRegBtn"><span class="lang-en">Save</span><span class="lang-es">Guardar</span></button>
+  </div>
+  <div id="regStatus" class="registered-info"><span class="lang-en">Please register above to begin</span><span class="lang-es">Por favor regístrese arriba para comenzar</span></div>
+  <button class="lang-toggle" id="langToggle">🇪🇸 Español</button>
+</div>
+<div class="container">
+<div class="translation-note"><span class="lang-en"><strong>Note on Spanish translation:</strong> Spanish text is provided for accessibility. A native-speaker theological review is recommended before publication.</span><span class="lang-es"><strong>Nota sobre la traducción:</strong> El texto en español se proporciona para accesibilidad. Se recomienda revisión teológica por hablante nativo antes de publicar.</span></div>
+<div class="progress-section">
+  <h3><span class="lang-en">Course Progress</span><span class="lang-es">Progreso del Curso</span></h3>
+  <div class="progress-bar"><div class="progress-bar-fill" id="progressFill">0%</div></div>
+  <div id="progressText"><span class="lang-en">0 of 13 situations completed</span><span class="lang-es">0 de 13 situaciones completadas</span></div>
+  <div class="course-complete" id="courseComplete"><span class="lang-en">🎓 You have completed all thirteen situations of Counseling Situations.</span><span class="lang-es">🎓 Ha completado las trece situaciones de Situaciones de Consejería.</span></div>
+</div>
+<div class="unit-nav" id="unitNav"></div>
+
+<div id="unit0" class="teaching-block">
+<div class="unit-meta"><span class="lang-en">Counseling Situations · Unit 0 · Bringing the Ten Steps to a Real Situation</span><span class="lang-es">Situaciones de Consejería · Unidad 0 · Llevando los Diez Pasos a una Situación Real</span></div>
+<h2><span class="lang-en">Bringing the Ten Steps to a Real Situation</span><span class="lang-es">Llevando los Diez Pasos a una Situación Real</span></h2>
+<p class="focus-line"><span class="lang-en">The ten steps are the spine of every unit; the situation is the flesh on it.</span><span class="lang-es">Los diez pasos son la columna vertebral de cada unidad; la situación es la carne sobre ella.</span></p>
+
+<h3><span class="lang-en">The Situation</span><span class="lang-es">La Situación</span></h3>
+<p class="lang-en">This course follows directly from <em>Drakeford's Ten-Step Counseling Model</em>. Where the first class teaches the ten steps in the abstract, this one takes those same steps and walks one real situation through them, start to finish — a deathbed, a failing marriage, a depression that will not lift. The steps are the spine; the situation is the flesh on it. Before we enter the first situation, this foundation unit does two things. First, it sets the ten steps back in front of us as the working frame of every unit that follows. Second, it places that biblical frame beside the main schools of secular counseling — surveyed in the Robbins notes — so that the student can see clearly what each secular approach noticed about human trouble, where it is useful, and where it must be refused. A pastor who has weighed these approaches is neither naive about them nor frightened of them; he keeps what is true and rejects what denies God or lifts responsibility off the human heart.</p>
+<p class="lang-es">Este curso sigue directamente de <em>El Modelo de Consejería de Diez Pasos de Drakeford</em>. Donde la primera clase enseña los diez pasos en lo abstracto, esta toma esos mismos pasos y recorre con ellos una situación real, de principio a fin — un lecho de muerte, un matrimonio que se derrumba, una depresión que no cede. Los pasos son la columna; la situación es la carne sobre ella. Antes de entrar en la primera situación, esta unidad de fundamento hace dos cosas. Primero, vuelve a poner ante nosotros los diez pasos como el marco de trabajo de cada unidad que sigue. Segundo, coloca ese marco bíblico junto a las principales escuelas de la consejería secular — reseñadas en las notas de Robbins — para que el estudiante vea con claridad qué notó cada enfoque secular sobre los problemas humanos, dónde es útil, y dónde debe rechazarse. Un pastor que ha sopesado estos enfoques ni es ingenuo ante ellos ni les teme; conserva lo que es verdadero y rechaza lo que niega a Dios o quita la responsabilidad del corazón humano.</p>
+
+<div class="essay-optional-note" style="border-left:4px solid var(--crimson)">
+<p class="lang-en"><strong>⚠ Standing Safeguard (course-wide):</strong> A pastor must never counsel someone of the opposite gender behind a closed office door or in a private home. Meet where the door stands open, a window gives view, or another person is present or nearby. This guards the counselee, guards the pastor from temptation, and guards him from false accusation that could destroy his witness. It applies in every unit that follows.</p>
+<p class="lang-es"><strong>⚠ Salvaguarda Permanente (de todo el curso):</strong> Un pastor nunca debe aconsejar a alguien del sexo opuesto tras una puerta de oficina cerrada o en una casa privada. Reúnase donde la puerta esté abierta, una ventana dé vista, u otra persona esté presente o cerca. Esto guarda al aconsejado, guarda al pastor de la tentación, y lo guarda de una acusación falsa que podría destruir su testimonio. Aplica en cada unidad que sigue.</p>
+</div>
+<h3><span class="lang-en">The Ten Steps, Applied</span><span class="lang-es">Los Diez Pasos, Aplicados</span></h3>
+
+<h3><span class="lang-en">Step One · Stage 1</span><span class="lang-es">Paso Uno · Etapa 1</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Determine the Time and the Place</em></span><span class="lang-es"><em>Determinar el Tiempo y el Lugar</em></span></p>
+<p class="lang-en">Choose a time unhurried enough to truly listen and a place that is private yet safe. Privacy lets a person speak honestly; safety protects everyone in the room. The course's standing safeguard lives here: a pastor never counsels someone of the opposite gender in a closed office or a private home. In a crisis the setting is often fixed for you — a hospital, a kitchen table, a hallway — and then the step bends rather than breaks, as you will see at the deathbed, where the 'place' had been prepared long beforehand in an ordinary friendship.</p>
+<p class="lang-es">Elija un tiempo sin prisa suficiente para escuchar de verdad y un lugar privado pero seguro. La privacidad permite que la persona hable con honestidad; la seguridad protege a todos en la sala. La salvaguarda permanente del curso vive aquí: un pastor nunca aconseja a alguien del sexo opuesto en una oficina cerrada o una casa privada. En una crisis el entorno suele estar fijado — un hospital, una mesa de cocina, un pasillo — y entonces el paso se dobla en vez de quebrarse, como verá junto al lecho de muerte, donde el 'lugar' se había preparado mucho antes en una amistad ordinaria.</p>
+<h3><span class="lang-en">Step Two · Stage 1</span><span class="lang-es">Paso Dos · Etapa 1</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Listen — "Why Don't You Tell Me About It?"</em></span><span class="lang-es"><em>Escuchar — "¿Por Qué No Me Cuenta?"</em></span></p>
+<p class="lang-en">Let the person speak before you speak. The first story is rarely the real one; the true burden surfaces only when he senses you are not in a hurry and not quick to judge. Listening is not passive — it is the hard work of attending to words, silences, and what is left unsaid. This is where the Rogerian lens described below has its strongest and most legitimate gift: empathy, reflection, and genuine regard. But the pastor listens in order to help, not merely to mirror; he will not stop at listening.</p>
+<p class="lang-es">Deje que la persona hable antes de hablar usted. La primera historia rara vez es la verdadera; la carga real aflora solo cuando percibe que usted no tiene prisa ni se apresura a juzgar. Escuchar no es pasivo — es el arduo trabajo de atender a las palabras, los silencios, y lo que se calla. Aquí la perspectiva rogeriana descrita abajo tiene su don más fuerte y legítimo: empatía, reflejo y aprecio genuino. Pero el pastor escucha para ayudar, no solo para reflejar; no se detendrá en escuchar.</p>
+<h3><span class="lang-en">Step Three · Stage 1</span><span class="lang-es">Paso Tres · Etapa 1</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Clarify the Situation — "Just What Do You Mean?"</em></span><span class="lang-es"><em>Aclarar la Situación — "¿Qué Quiere Decir?"</em></span></p>
+<p class="lang-en">Make sure you understand the real problem before you act on it. People often name one trouble and mean another — speaking of anger and meaning grief, speaking of a spouse and meaning fear. Gentle clarifying questions, asked without interrogation, keep the counselor from solving the wrong thing and wasting the trust that listening has just built. Clarifying also tells the counselor whether the matter is within his competence or whether it is already pointing toward referral, which is the subject of the final unit.</p>
+<p class="lang-es">Asegúrese de entender el problema real antes de actuar sobre él. La gente a menudo nombra un problema y se refiere a otro — habla de ira y se refiere al duelo, habla del cónyuge y se refiere al miedo. Las preguntas suaves de aclaración, hechas sin interrogar, evitan que el consejero resuelva lo equivocado y desperdicie la confianza que el escuchar acaba de construir. Aclarar también le dice al consejero si el asunto está dentro de su competencia o si ya apunta hacia una referencia, que es el tema de la última unidad.</p>
+<h3><span class="lang-en">Step Four · Stage 1</span><span class="lang-es">Paso Cuatro · Etapa 1</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Investigate Previous Counseling</em></span><span class="lang-es"><em>Investigar la Consejería Previa</em></span></p>
+<p class="lang-en">Find out what help the person has already sought — pastors, professionals, family, or none at all. This keeps the counselor from repeating what has already failed and from contradicting sound advice the person is already following. It also reveals the boundary of pastoral competence: when a problem has medical, psychiatric, or legal weight beyond what a pastor can carry, this is the step where that becomes visible, and where the faithful response is to involve those trained to help rather than to press on alone.</p>
+<p class="lang-es">Averigüe qué ayuda ha buscado ya la persona — pastores, profesionales, familia, o ninguna. Esto evita que el consejero repita lo que ya falló y que contradiga un consejo sano que la persona ya sigue. También revela el límite de la competencia pastoral: cuando un problema tiene peso médico, psiquiátrico o legal más allá de lo que un pastor puede cargar, este es el paso donde eso se hace visible, y donde la respuesta fiel es involucrar a quienes están capacitados para ayudar en lugar de seguir solo.</p>
+<h3><span class="lang-en">Step Five · Stage 2</span><span class="lang-es">Paso Cinco · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Responsibility — "Where Have You Failed?"</em></span><span class="lang-es"><em>Responsabilidad — "¿Dónde Has Fallado?"</em></span></p>
+<p class="lang-en">Gently help the person own his part in the trouble, for there is no real change without honest ownership. But this step carries a permanent warning: it is never applied to a victim, who bears no blame for what was done to him. Handled with care, responsibility opens the door to confession, repentance, and change; handled clumsily, it crushes or it blames the innocent. The counselor distinguishes the part a person can own from the part that was never his fault, and presses only on the first.</p>
+<p class="lang-es">Con suavidad ayude a la persona a reconocer su parte en el problema, pues no hay cambio real sin un reconocimiento honesto. Pero este paso lleva una advertencia permanente: nunca se aplica a una víctima, que no carga culpa por lo que le hicieron. Manejado con cuidado, la responsabilidad abre la puerta a la confesión, el arrepentimiento y el cambio; manejado torpemente, aplasta o culpa al inocente. El consejero distingue la parte que una persona puede reconocer de la parte que nunca fue su culpa, y presiona solo sobre la primera.</p>
+<h3><span class="lang-en">Step Six · Stage 2</span><span class="lang-es">Paso Seis · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Model the Role</em></span><span class="lang-es"><em>Modelar el Papel</em></span></p>
+<p class="lang-en">Show in your own bearing the calm faith, patience, and steadiness you hope the person can take hold of. A counselor cannot give a peace he is not displaying or a hope he does not hold. Much of counseling is caught rather than taught: the anxious person borrows the counselor's calm, the bitter person is disarmed by his gentleness, the despairing person sees in him a steadiness that makes hope believable. This is why the counselor tends his own walk with God before he sits down with anyone else.</p>
+<p class="lang-es">Muestre en su propia conducta la fe serena, la paciencia y la firmeza que espera que la persona pueda asir. Un consejero no puede dar una paz que no muestra ni una esperanza que no sostiene. Mucho de la consejería se contagia más que se enseña: el ansioso toma prestada la calma del consejero, el amargado es desarmado por su mansedumbre, el desesperado ve en él una firmeza que hace creíble la esperanza. Por eso el consejero cuida su propio andar con Dios antes de sentarse con cualquier otro.</p>
+<h3><span class="lang-en">Step Seven · Stage 2</span><span class="lang-es">Paso Siete · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Review the Alternatives</em></span><span class="lang-es"><em>Repasar las Alternativas</em></span></p>
+<p class="lang-en">Lay the real options before the person rather than dictating the one you prefer. Choices a counselee reaches himself are owned far more deeply than those imposed on him, and ownership is what carries a decision through the hard days that follow. The counselor is not silent or neutral — he brings Scripture and wisdom to bear — but he presents and persuades rather than commands, treating the person as a responsible adult who must answer to God for his own choices, not as a child to be managed.</p>
+<p class="lang-es">Exponga las opciones reales ante la persona en lugar de dictar la que usted prefiere. Las decisiones que un aconsejado alcanza por sí mismo se asumen mucho más hondo que las que se le imponen, y esa pertenencia es lo que sostiene una decisión a través de los días difíciles que siguen. El consejero no es mudo ni neutral — aplica la Escritura y la sabiduría — pero presenta y persuade en vez de mandar, tratando a la persona como un adulto responsable que debe responder a Dios por sus propias decisiones, no como un niño a quien manejar.</p>
+<h3><span class="lang-en">Step Eight · Stage 2</span><span class="lang-es">Paso Ocho · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Explore the Outcomes</em></span><span class="lang-es"><em>Explorar los Resultados</em></span></p>
+<p class="lang-en">Walk through where each alternative likely leads, honestly and without false promises. People in trouble often see only the next step; the counselor helps them look down each road far enough to choose with open eyes. He neither paints the obedient path as easy nor hides the cost of the destructive one. Exploring outcomes turns vague fear or wishful thinking into a clear-eyed view of consequences, so that the decision made in Step Seven is made in the light rather than the dark.</p>
+<p class="lang-es">Recorra hacia dónde lleva probablemente cada alternativa, con honestidad y sin falsas promesas. La gente en apuros suele ver solo el siguiente paso; el consejero les ayuda a mirar cada camino lo bastante lejos para elegir con los ojos abiertos. Ni pinta el camino obediente como fácil ni esconde el costo del destructivo. Explorar los resultados convierte el miedo vago o la ilusión en una visión clara de las consecuencias, para que la decisión tomada en el Paso Siete se tome en la luz y no en la oscuridad.</p>
+<h3><span class="lang-en">Step Nine · Stage 2</span><span class="lang-es">Paso Nueve · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Supply Information</em></span><span class="lang-es"><em>Proveer Información</em></span></p>
+<p class="lang-en">Bring Scripture and sound counsel to bear on the chosen path — the word of God applied to this real situation, not generic advice that would fit anyone and therefore helps no one. Here the counselor's knowledge of the Bible and of the problem at hand finally speaks plainly. This is also where the useful tool from a secular school may be picked up inside the step: a cognitive insight about guarding the thought, a behavioral plan for building a habit — always weighed against Scripture and never allowed to become the frame.</p>
+<p class="lang-es">Aplique la Escritura y el consejo sano al camino elegido — la palabra de Dios aplicada a esta situación real, no un consejo genérico que serviría a cualquiera y por tanto a nadie ayuda. Aquí el conocimiento que el consejero tiene de la Biblia y del problema en cuestión habla por fin con claridad. Aquí también se puede recoger, dentro del paso, la herramienta útil de una escuela secular: una idea cognitiva sobre guardar el pensamiento, un plan conductual para formar un hábito — siempre sopesado con la Escritura y nunca permitido que se vuelva el marco.</p>
+<h3><span class="lang-en">Step Ten · Stage 2</span><span class="lang-es">Paso Diez · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Provide Closure</em></span><span class="lang-es"><em>Proveer Cierre</em></span></p>
+<p class="lang-en">End with prayer and a plan, and with the door left open for return. Closure is rarely a single clean stop; in most situations it begins ongoing care rather than ending it. The counselor sends the person out with a concrete next step, the assurance that he is not alone, and a clear way back. In the situations ahead — the dying, the abused, the depressed, the addicted — closure will almost always mean the start of a longer walk alongside the person, not a tidy conclusion.</p>
+<p class="lang-es">Termine con oración y un plan, y con la puerta abierta para volver. El cierre rara vez es un solo alto limpio; en la mayoría de las situaciones inicia un cuidado continuo en vez de terminarlo. El consejero envía a la persona con un siguiente paso concreto, la certeza de que no está sola, y un camino claro de regreso. En las situaciones que vienen — el moribundo, el abusado, el deprimido, el adicto — el cierre casi siempre significará el comienzo de un andar más largo junto a la persona, no una conclusión ordenada.</p>
+
+<h3><span class="lang-en">Counseling Approaches Weighed by Scripture — from the Robbins Notes</span><span class="lang-es">Enfoques de Consejería Sopesados por la Escritura — de las Notas de Robbins</span></h3>
+<p class="lang-en">Secular counseling has studied human trouble closely and noticed real things about it. A Christian counselor need not fear every observation a secular school makes, but neither may he swallow a school whole. He tests all things and holds fast what is good (1 Thessalonians 5:21), keeping what is true and refusing what denies God or lifts responsibility off the human heart. The Robbins notes — a survey of the major schools, compiled by Dawn Wipf and weighed against Scripture — make that sorting possible. The course's thesis is simple: Drakeford's ten steps are the biblical frame, and the genuinely useful tools from these schools are picked up <em>inside</em> the steps, never made the frame itself.</p>
+<p class="lang-en"><strong>Reality Therapy (Glasser).</strong> Useful: it presses individual responsibility, focuses on the present and the future rather than endless excavation of the past, and grounds a person in love and self-worth (1 Corinthians 13:13). Caution: it can be too directive, and it tends to wave off emotion as if feelings did not matter — when to a hurting person they are a present fact.</p>
+<p class="lang-en"><strong>Behavioral Modification (Wolpe, Skinner, Watson).</strong> Useful: it shows that real change of thought and action is possible and that good habits can be built (Romans 12:1–2; Hebrews 5:13–14), and it deals with the trouble that grips a person now. Caution: in its pure form it treats man as a puppet of his environment and lifts responsibility off him, when Scripture locates behavior in the heart.</p>
+<p class="lang-en"><strong>Cognitive Therapy (Beck, with Ellis as the warning figure).</strong> Useful: it traces the chain from thought to feeling to word to act, and so hands a person a place to intervene — guard the thought (Philippians 4:8). Caution: in its secular form it can place man wholly in control with no reference to God; Ellis is the extreme, man at the center of the universe.</p>
+<p class="lang-en"><strong>The Twelve-Step Movement (Alcoholics Anonymous).</strong> Useful: it begins with admitting powerlessness, leans on dependence and on making amends, and surrounds a person with honest fellowship — faint echoes of confession, humility, restitution, and the body of Christ. Caution: its 'higher power as you understand him' is left undefined; the gospel names the Power that the program leaves blank.</p>
+<p class="lang-en"><strong>Transactional Analysis (Berne).</strong> Useful: it gives names to destructive patterns of interaction — the Parent, Adult, and Child in us, the repetitive 'games' people play — which can help a couple see what they keep doing to each other. Caution: it is descriptive only; it can excuse behavior as a 'script' and offers no gospel of forgiveness or call to love.</p>
+<p class="lang-en"><strong>Psychoanalytic Therapy (Freud, Jung).</strong> Useful: it takes seriously that the past shapes the present, and that talking a wound out — catharsis — can be part of healing. Caution: it can turn the past into an excuse, and it offers no real remedy for guilt or shame; only the gospel does. This is material best handed to a trained professional rather than worked alone.</p>
+<p class="lang-en"><strong>Rogerian / Person-Centered Therapy (Rogers).</strong> Useful: empathy, reflective listening, and genuine regard — the very gifts that strengthen Step Two and Step Three more than any technique. Caution: a purely non-directive stance can shortchange a person who needs concrete, loving guidance from Scripture. The pastor listens like Rogers but does not stop there.</p>
+<p class="lang-en"><strong>Hypnotherapy and Guided Imagery.</strong> These mark the far edge. They reach for techniques that bypass the conscious will or drift toward the mystical, and they raise serious biblical and ethical concerns about who is in control of a person's mind. They are outside the pastor's lane; where a need calls for anything like them, it has left pastoral counseling and belongs to accountable, trained professionals — and even then is weighed warily against Scripture.</p>
+<p class="lang-en">Each of these lenses returns in the situation it serves best: the Cognitive lens under Depression, Reality Therapy and Behavioral Modification under Anxiety and Fear, the Twelve-Step and habit material under Addiction, the Psychoanalytic insight under the Sexually Abused, Transactional Analysis under Marital Conflict, and Hypnotherapy and Imagery as the boundary marker in When to Refer. The frame, in every case, stays the same — the ten steps — and the tools are only ever tools.</p>
+<p class="lang-es">La consejería secular ha estudiado de cerca los problemas humanos y ha notado cosas reales sobre ellos. Un consejero cristiano no necesita temer cada observación que hace una escuela secular, pero tampoco puede tragarse una escuela entera. Examina todo y retiene lo bueno (1 Tesalonicenses 5:21), conservando lo verdadero y rechazando lo que niega a Dios o quita la responsabilidad del corazón humano. Las notas de Robbins — un estudio de las principales escuelas, compilado por Dawn Wipf y sopesado con la Escritura — hacen posible esa selección. La tesis del curso es sencilla: los diez pasos de Drakeford son el marco bíblico, y las herramientas verdaderamente útiles de estas escuelas se recogen <em>dentro</em> de los pasos, nunca convertidas en el marco mismo.</p>
+<p class="lang-es"><strong>Terapia de la Realidad (Glasser).</strong> Útil: insiste en la responsabilidad individual, se enfoca en el presente y el futuro más que en excavar sin fin el pasado, y arraiga a la persona en el amor y el valor propio (1 Corintios 13:13). Advertencia: puede ser demasiado directiva, y tiende a descartar la emoción como si los sentimientos no importaran — cuando para alguien que sufre son un hecho presente.</p>
+<p class="lang-es"><strong>Modificación de Conducta (Wolpe, Skinner, Watson).</strong> Útil: muestra que el cambio real de pensamiento y acción es posible y que se pueden formar buenos hábitos (Romanos 12:1–2; Hebreos 5:13–14), y trata el problema que aprieta a la persona ahora. Advertencia: en su forma pura trata al hombre como títere de su ambiente y le quita la responsabilidad, cuando la Escritura ubica la conducta en el corazón.</p>
+<p class="lang-es"><strong>Terapia Cognitiva (Beck, con Ellis como figura de advertencia).</strong> Útil: traza la cadena del pensamiento al sentimiento a la palabra al acto, y así da a la persona un lugar donde intervenir — guarda el pensamiento (Filipenses 4:8). Advertencia: en su forma secular puede colocar al hombre totalmente en control sin referencia a Dios; Ellis es el extremo, el hombre en el centro del universo.</p>
+<p class="lang-es"><strong>El Movimiento de los Doce Pasos (Alcohólicos Anónimos).</strong> Útil: comienza admitiendo la impotencia, se apoya en la dependencia y en reparar el daño, y rodea a la persona de una comunión honesta — ecos tenues de la confesión, la humildad, la restitución y el cuerpo de Cristo. Advertencia: su 'poder superior como lo entiendas' queda indefinido; el evangelio nombra el Poder que el programa deja en blanco.</p>
+<p class="lang-es"><strong>Análisis Transaccional (Berne).</strong> Útil: da nombre a patrones destructivos de interacción — el Padre, el Adulto y el Niño en nosotros, los 'juegos' repetitivos que la gente juega — lo cual puede ayudar a una pareja a ver lo que se hacen una y otra vez. Advertencia: es solo descriptivo; puede excusar la conducta como un 'guion' y no ofrece evangelio de perdón ni llamado a amar.</p>
+<p class="lang-es"><strong>Terapia Psicoanalítica (Freud, Jung).</strong> Útil: toma en serio que el pasado moldea el presente, y que hablar de una herida — la catarsis — puede ser parte de la sanación. Advertencia: puede convertir el pasado en excusa, y no ofrece remedio real para la culpa o la vergüenza; solo el evangelio lo hace. Este es material que conviene entregar a un profesional capacitado en lugar de trabajarlo solo.</p>
+<p class="lang-es"><strong>Terapia Rogeriana / Centrada en la Persona (Rogers).</strong> Útil: empatía, escucha reflexiva y aprecio genuino — los dones mismos que fortalecen el Paso Dos y el Paso Tres más que cualquier técnica. Advertencia: una postura puramente no directiva puede defraudar a quien necesita una guía concreta y amorosa de la Escritura. El pastor escucha como Rogers pero no se queda ahí.</p>
+<p class="lang-es"><strong>Hipnoterapia e Imágenes Guiadas.</strong> Estas marcan el borde lejano. Buscan técnicas que eluden la voluntad consciente o derivan hacia lo místico, y plantean serias preocupaciones bíblicas y éticas sobre quién controla la mente de una persona. Están fuera del campo del pastor; donde una necesidad pide algo así, ha salido de la consejería pastoral y pertenece a profesionales capacitados y responsables — y aun entonces se sopesa con cautela frente a la Escritura.</p>
+<p class="lang-es">Cada una de estas perspectivas vuelve en la situación a la que mejor sirve: la perspectiva Cognitiva en la Depresión, la Terapia de la Realidad y la Modificación de Conducta en la Ansiedad y el Temor, el material de los Doce Pasos y del hábito en la Adicción, la visión Psicoanalítica en el Abusado Sexualmente, el Análisis Transaccional en el Conflicto Conyugal, y la Hipnoterapia y las Imágenes como marcador de límite en Cuándo Referir. El marco, en todo caso, permanece igual — los diez pasos — y las herramientas nunca son más que herramientas.</p>
+<div class="quiz-header" style="margin-top:2rem"><h3><span class="lang-en">Unit 0 — Assessment</span><span class="lang-es">Unidad 0 — Evaluación</span></h3></div>
+<div id="mcq_0"></div>
+<div id="essay_0"></div>
+<div style="margin-top:1.2rem;display:flex;gap:.6rem;flex-wrap:wrap">
+  <button onclick="submitUnit(0)"><span class="lang-en">Submit Unit 0</span><span class="lang-es">Enviar Unidad 0</span></button>
+  <button onclick="resetUnit(0)" style="background:var(--crimson)"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+  <button onclick="location.href='CTSCSUnit1.html'" style="background:var(--gold);color:var(--ink)"><span class="lang-en">Next →</span><span class="lang-es">Siguiente →</span></button>
+</div>
+<div class="unit-result" id="result_0"></div>
+</div>
+
+</div>
+<script>
+
+
+const TRACK_NAMES = {cert:{en:"Certificate of Ministry",es:"Certificado de Ministerio"},thm:{en:"Master of Theology",es:"Maestría en Teología"},mdiv:{en:"Master of Divinity",es:"Maestría en Divinidades"}};
+const TOTAL_UNITS = 13;            // situations 0..12
+const THIS_UNIT = 0;               // <-- the only thing that changes per file
+const UNIT_LABELS = [
+ {en:"Foundation",es:"Fundamento"},{en:"The Dying",es:"El Moribundo"},{en:"Surgery",es:"Cirugía"},
+ {en:"Sexual Abuse",es:"Abuso Sexual"},{en:"Forced Termination",es:"Terminación Forzada"},
+ {en:"Marital Conflict",es:"Conflicto Marital"},{en:"Depression",es:"Depresión"},{en:"Grief",es:"Duelo"},
+ {en:"Anxiety & Fear",es:"Ansiedad y Temor"},{en:"Anger",es:"Ira"},{en:"Addiction",es:"Adicción"},
+ {en:"Distress",es:"Angustia"},{en:"When to Refer",es:"Cuándo Referir"}
+];
+const fileFor = u => 'CTSCSUnit'+u+'.html';
+const UNITS = {"0":{"mcq":[{"textEn":"In this course, the relationship between the ten steps and the situation is best described as:","textEs":"En este curso, la relación entre los diez pasos y la situación se describe mejor como:","options":[{"en":"The steps are the spine; the situation is the flesh on it","es":"Los pasos son la columna; la situación es la carne sobre ella"},{"en":"The situation replaces the steps","es":"La situación reemplaza los pasos"},{"en":"The steps and situation are unrelated","es":"Los pasos y la situación no se relacionan"},{"en":"The situation matters only for masters students","es":"La situación importa solo para estudiantes de maestría"}],"correct":0,"explainEn":"The ten steps give every unit its structure; the situation is what they are applied to.","explainEs":"Los diez pasos dan a cada unidad su estructura; la situación es a lo que se aplican."},{"textEn":"Drakeford's model divides the ten steps into two stages:","textEs":"El modelo de Drakeford divide los diez pasos en dos etapas:","options":[{"en":"Talking and praying","es":"Hablar y orar"},{"en":"Diagnosis and medication","es":"Diagnóstico y medicación"},{"en":"Listening and lecturing","es":"Escuchar y dar cátedra"},{"en":"Identify the Problem, then Determine an Action Plan","es":"Identificar el Problema, luego Determinar un Plan de Acción"}],"correct":3,"explainEn":"Steps 1–4 identify the problem; Steps 5–10 determine and carry out an action plan.","explainEs":"Los pasos 1–4 identifican el problema; los pasos 5–10 determinan y ejecutan un plan de acción."},{"textEn":"When a step 'bends but does not break,' it means:","textEs":"Cuando un paso 'se dobla pero no se quiebra', significa:","options":[{"en":"The step is skipped","es":"El paso se omite"},{"en":"The step is performed louder","es":"El paso se ejecuta más fuerte"},{"en":"The step changes form to fit the situation while keeping its purpose","es":"El paso cambia de forma para ajustarse a la situación conservando su propósito"},{"en":"The step is replaced by a new one","es":"El paso se reemplaza por uno nuevo"}],"correct":2,"explainEn":"At the deathbed, 'choose the place' became 'the place was prepared beforehand' — the step bent, not broke.","explainEs":"Junto al lecho, 'elegir el lugar' se volvió 'el lugar fue preparado de antemano' — el paso se dobló, no se quebró."},{"textEn":"The course's standing safeguard for counseling someone of the opposite gender is:","textEs":"La salvaguarda permanente del curso para aconsejar a alguien del sexo opuesto es:","options":[{"en":"Always meet privately so they feel safe","es":"Reunirse siempre en privado para que se sientan seguros"},{"en":"Never in a closed office or a private home; keep the door open or another person present","es":"Nunca en una oficina cerrada o casa privada; dejar la puerta abierta o con otra persona presente"},{"en":"Counsel only by telephone","es":"Aconsejar solo por teléfono"},{"en":"Refuse to counsel them","es":"Negarse a aconsejarles"}],"correct":1,"explainEn":"An open setting protects the counselee, guards the pastor from temptation, and guards him from false accusation.","explainEs":"Un entorno abierto protege al aconsejado, guarda al pastor de la tentación y lo guarda de una acusación falsa."},{"textEn":"The Rogerian (person-centered) lens contributes most directly to which step?","textEs":"La perspectiva rogeriana (centrada en la persona) contribuye más directamente a qué paso?","options":[{"en":"Step Nine (Supply Information)","es":"Paso Nueve (Proveer Información)"},{"en":"Step Ten (Provide Closure)","es":"Paso Diez (Proveer Cierre)"},{"en":"Step Two (Listen)","es":"Paso Dos (Escuchar)"},{"en":"Step Five (Responsibility)","es":"Paso Cinco (Responsabilidad)"}],"correct":2,"explainEn":"Rogers' empathy, reflection, and regard most strengthen the listening of Step Two (and clarifying in Step Three).","explainEs":"La empatía, el reflejo y el aprecio de Rogers fortalecen sobre todo la escucha del Paso Dos (y la aclaración del Paso Tres)."},{"textEn":"The biblical caution attached to the Rogerian lens is that:","textEs":"La advertencia bíblica unida a la perspectiva rogeriana es que:","options":[{"en":"Empathy is unbiblical","es":"La empatía es antibíblica"},{"en":"A purely non-directive stance can withhold the concrete guidance Scripture gives","es":"Una postura puramente no directiva puede negar la guía concreta que da la Escritura"},{"en":"Listening wastes time","es":"Escuchar pierde el tiempo"},{"en":"Feelings should be ignored","es":"Los sentimientos deben ignorarse"}],"correct":1,"explainEn":"The pastor listens like Rogers but does not stop there; he balances empathy with the direction of God's word.","explainEs":"El pastor escucha como Rogers pero no se detiene ahí; equilibra la empatía con la dirección de la palabra de Dios."},{"textEn":"Why does the model place Listening (Step Two) before Supplying Information (Step Nine)?","textEs":"¿Por qué el modelo coloca Escuchar (Paso Dos) antes de Proveer Información (Paso Nueve)?","options":[{"en":"Advice given before understanding usually misses the real problem","es":"El consejo dado antes de entender suele errar el problema real"},{"en":"Information is unimportant","es":"La información no es importante"},{"en":"Listening is only polite","es":"Escuchar es solo cortesía"},{"en":"The order does not matter","es":"El orden no importa"}],"correct":0,"explainEn":"A premature solution, offered before the counselor understands the situation, breaks trust and answers an unasked question.","explainEs":"Una solución prematura, ofrecida antes de que el consejero entienda la situación, rompe la confianza y responde una pregunta no hecha."},{"textEn":"Step Seven (Review the Alternatives) teaches the counselor to:","textEs":"El Paso Siete (Repasar las Alternativas) enseña al consejero a:","options":[{"en":"Dictate the one correct choice","es":"Dictar la única decisión correcta"},{"en":"Let the person decide without any input","es":"Dejar que la persona decida sin aporte alguno"},{"en":"Avoid all decisions","es":"Evitar toda decisión"},{"en":"Lay out real options so the person can own his decision","es":"Exponer opciones reales para que la persona asuma su decisión"}],"correct":3,"explainEn":"Choices a counselee reaches himself are owned more deeply than those imposed; the counselor presents, he does not impose.","explainEs":"Las decisiones que un aconsejado alcanza por sí mismo se asumen más que las impuestas; el consejero presenta, no impone."},{"textEn":"In this course, 'Provide Closure' (Step Ten) usually means:","textEs":"En este curso, 'Proveer Cierre' (Paso Diez) suele significar:","options":[{"en":"A clean, final end to all contact","es":"Un fin limpio y definitivo de todo contacto"},{"en":"Prayer, a plan, and an open door — often the start of ongoing care","es":"Oración, un plan y una puerta abierta — a menudo el inicio de un cuidado continuo"},{"en":"Filing paperwork","es":"Llenar papeleo"},{"en":"Referring everyone to a professional","es":"Referir a todos a un profesional"}],"correct":1,"explainEn":"Closure is rarely a single clean stop; in most situations it begins ongoing care.","explainEs":"El cierre rara vez es un solo alto limpio; en la mayoría de las situaciones inicia un cuidado continuo."},{"textEn":"The overall aim of walking each situation through all ten steps is to show that:","textEs":"El objetivo general de recorrer cada situación por los diez pasos es mostrar que:","options":[{"en":"The steps must be applied identically every time","es":"Los pasos deben aplicarse idénticamente cada vez"},{"en":"Counseling cannot be taught","es":"La consejería no se puede enseñar"},{"en":"Each situation needs an entirely new method","es":"Cada situación necesita un método totalmente nuevo"},{"en":"One sound model adapts to many different situations without losing its shape","es":"Un modelo sólido se adapta a muchas situaciones distintas sin perder su forma"}],"correct":3,"explainEn":"The point of the course is that the model bends to fit the deathbed, the marriage, the depression — and holds.","explainEs":"El punto del curso es que el modelo se dobla para ajustarse al lecho, al matrimonio, a la depresión — y se sostiene."}],"shortAnswer":[{"textEn":"Describe the relationship between the ten steps and the situation in this course.","textEs":"Describa la relación entre los diez pasos y la situación en este curso.","kw_en":["spine","situat","bend","apply","frame","master","shape","flesh"],"kw_es":["columna","situaci","doble","aplica","marco","carne","forma","estructur"],"modelEn":"The ten steps are the spine of every unit, and the situation is the flesh on it. The steps are the master frame that stays the same; the situation is where they are applied. A good counselor lets the steps bend to fit the shape of the real situation without losing them.","modelEs":"Los diez pasos son la columna vertebral de cada unidad, y la situación es la carne sobre ella. Los pasos son el marco maestro que permanece igual; la situación es donde se aplican. Un buen consejero deja que los pasos se doblen para ajustarse a la forma de la situación real sin perderlos, dentro de una estructura firme."},{"textEn":"Explain what it means that a step 'bends but does not break,' with an example.","textEs":"Explique qué significa que un paso 'se dobla pero no se quiebra', con un ejemplo.","kw_en":["bend","break","adapt","place","prepar","situat","rigid","purpos"],"kw_es":["doble","quiebr","adapt","lugar","prepar","situaci","rígid","propósit"],"modelEn":"A step bends when it changes form to fit the situation but keeps its purpose. In the dying unit, Step One ('the time and place') could not be chosen, so it bent: the place had been prepared beforehand in the relationship. The step adapted to the situation rather than breaking; the steps are never applied rigidly.","modelEs":"Un paso se dobla cuando cambia de forma para ajustarse a la situación pero conserva su propósito. En la unidad del moribundo, el Paso Uno ('el tiempo y el lugar') no podía elegirse, así que se dobló: el lugar había sido preparado de antemano en la relación. El paso se adaptó a la situación en lugar de quebrarse; los pasos nunca se aplican de forma rígida."},{"textEn":"Why must a pastor never counsel someone of the opposite gender in a closed office or private home? Name the protection it gives.","textEs":"¿Por qué un pastor nunca debe aconsejar a alguien del sexo opuesto en una oficina cerrada o casa privada? Nombre la protección que ofrece.","kw_en":["open","alone","protect","temptat","accus","anoth","presen","witness"],"kw_es":["abiert","solas","proteg","tentaci","acusaci","otra","presen","testimonio"],"modelEn":"A pastor should never meet alone with someone of the opposite gender behind a closed office door or in a private home. The setting should be open — a door left open, a window, or another person present nearby. This protects everyone: it guards the counselee, it guards the pastor from temptation, and it guards him from any false accusation that could destroy his witness.","modelEs":"Un pastor nunca debe reunirse a solas con alguien del sexo opuesto tras una puerta de oficina cerrada o en una casa privada. El entorno debe ser abierto — una puerta abierta, una ventana, u otra persona presente cerca. Esto protege a todos: guarda al aconsejado, guarda al pastor de la tentación, y lo guarda de cualquier acusación falsa que pueda destruir su testimonio."},{"textEn":"What does the Rogerian lens give the pastor, and what is its biblical caution?","textEs":"¿Qué le da al pastor la perspectiva rogeriana, y cuál es su advertencia bíblica?","kw_en":["listen","empath","reflect","regard","direct","guidanc","balanc","scriptur"],"kw_es":["escuch","empat","reflej","aprecio","directiv","guía","equilibr","escritur"],"modelEn":"Rogerian counseling teaches the pastor to listen with real empathy, to reflect back what the person feels, and to show genuine regard — gifts that strengthen Step Two. Its caution is that being purely non-directive can shortchange a person who needs concrete biblical guidance; the pastor listens like Rogers but does not stop there. He balances empathy with the direction of Scripture.","modelEs":"La consejería rogeriana enseña al pastor a escuchar con verdadera empatía, a reflejar lo que la persona siente, y a mostrar un aprecio genuino — dones que fortalecen el Paso Dos. Su advertencia es que ser puramente no directivo puede defraudar a quien necesita guía bíblica concreta; el pastor escucha como Rogers pero no se queda ahí. Equilibra la empatía con la dirección de la Escritura."},{"textEn":"Why does the model place listening before giving advice?","textEs":"¿Por qué el modelo coloca el escuchar antes de dar consejo?","kw_en":["listen","advis","problem","unders","prematu","soluti","trust","situat"],"kw_es":["escuch","consej","problema","entend","prematur","soluci","confian","situaci"],"modelEn":"The counselor listens before he advises because advice given too soon usually misses the real problem. A premature solution, offered before he truly understands the person's situation, breaks trust and often answers a question never asked. Listening first lets his help fit the problem as it actually is.","modelEs":"El consejero escucha antes de aconsejar porque el consejo dado demasiado pronto suele errar el problema real. Una solución prematura, ofrecida antes de entender de veras la situación de la persona, rompe la confianza y a menudo responde una pregunta nunca hecha. Escuchar primero permite que su ayuda se ajuste al problema tal como es."}]}};
+
+const state = { registration:null, unitState:{} };
+function blankUnit(u){
+  return { mcq:new Array((UNITS[u]?.mcq||[]).length).fill(null),
+           shortAnswer:new Array((UNITS[u]?.shortAnswer||[]).length).fill(""),
+           saChecked:new Array((UNITS[u]?.shortAnswer||[]).length).fill(false),
+           passed:false, score:0 };
+}
+function initState(){ state.unitState[THIS_UNIT] = blankUnit(THIS_UNIT); }
+function saveState(){
+  try{
+    localStorage.setItem('cts_cs_state', JSON.stringify(state.unitState));
+    if(state.registration) localStorage.setItem('cts_cs_reg', JSON.stringify(state.registration));
+  }catch(e){}
+}
+function loadState(){
+  try{
+    const s = localStorage.getItem('cts_cs_state');
+    const r = localStorage.getItem('cts_cs_reg');
+    if(s){
+      const parsed = JSON.parse(s);
+      // keep every unit's passed/score (for nav + progress); align THIS unit's answer arrays
+      for(const k in parsed) state.unitState[k] = parsed[k];
+      const blank = blankUnit(THIS_UNIT);
+      state.unitState[THIS_UNIT] = Object.assign(blank, parsed[THIS_UNIT]||{});
+      // repair array lengths in case the unit definition changed
+      ['mcq','shortAnswer','saChecked'].forEach(key=>{
+        const want = blank[key].length;
+        const cur = state.unitState[THIS_UNIT][key]||[];
+        state.unitState[THIS_UNIT][key] = blank[key].map((d,i)=> (cur[i]!==undefined?cur[i]:d));
+      });
+    }
+    if(r){
+      state.registration = JSON.parse(r);
+    } else {
+      // No local registration yet -- auto-fill from the site-wide student record
+      // (set at the seminary's main registration) so a Masters-track student is
+      // graded at the correct rigor here without re-registering on this page.
+      const shared = JSON.parse(localStorage.getItem('cts_student') || 'null');
+      if(shared && shared.name && shared.email){
+        const sharedTrack = String(localStorage.getItem('cts_track') || shared.track || shared.program || '').toLowerCase();
+        let track = 'cert';
+        if(sharedTrack === 'mdiv' || /master of divinity|m\.div/.test(sharedTrack)) track = 'mdiv';
+        else if(sharedTrack === 'thm' || sharedTrack === 'mth' || /master of theology|m\.th|th\.m/.test(sharedTrack)) track = 'thm';
+        state.registration = { name: shared.name, email: shared.email, country: shared.country || '', track };
+        saveState();
+      }
+    }
+  }catch(e){}
+}
+
+// ---- registration ----
+function renderRegStatus(){
+  const el = document.getElementById('regStatus');
+  if(state.registration){
+    const t = TRACK_NAMES[state.registration.track] || {en:"",es:""};
+    el.innerHTML = `<span class="lang-en">Registered: <strong>${state.registration.name}</strong> · ${state.registration.country} · ${t.en}</span>
+                    <span class="lang-es">Registrado: <strong>${state.registration.name}</strong> · ${state.registration.country} · ${t.es}</span>`;
+    document.getElementById('studentName').value = state.registration.name;
+    document.getElementById('studentEmail').value = state.registration.email;
+    document.getElementById('studentCountry').value = state.registration.country;
+    document.getElementById('programTrack').value = state.registration.track;
+  }
+}
+document.getElementById('saveRegBtn').addEventListener('click',()=>{
+  const name=document.getElementById('studentName').value.trim();
+  const email=document.getElementById('studentEmail').value.trim();
+  const country=document.getElementById('studentCountry').value.trim();
+  const track=document.getElementById('programTrack').value;
+  if(!name||!email||!country){ alert(document.body.classList.contains('spanish')?'Por favor complete todos los campos':'Please complete all fields'); return; }
+  state.registration={name,email,country,track};
+  saveState(); renderRegStatus(); renderQuiz(THIS_UNIT);
+});
+
+// ---- language ----
+document.getElementById('langToggle').addEventListener('click',()=>{
+  document.body.classList.toggle('spanish');
+  document.getElementById('langToggle').textContent = document.body.classList.contains('spanish')?'🇺🇸 English':'🇪🇸 Español';
+  saveLang(); renderUnitNav();
+});
+function saveLang(){try{localStorage.setItem('cts_lang',document.body.classList.contains('spanish')?'es':'en')}catch(e){}}
+function loadLang(){try{ if(localStorage.getItem('cts_lang')==='es'){ document.body.classList.add('spanish'); document.getElementById('langToggle').textContent='🇺🇸 English'; } }catch(e){}}
+
+// ---- cross-file unit nav ----
+function renderUnitNav(){
+  const nav=document.getElementById('unitNav'); nav.innerHTML='';
+  const es=document.body.classList.contains('spanish');
+  for(let i=0;i<TOTAL_UNITS;i++){
+    const b=document.createElement('button');
+    const lbl=UNIT_LABELS[i]?(es?UNIT_LABELS[i].es:UNIT_LABELS[i].en):('Unit '+i);
+    b.textContent=(i===0?'':i+'. ')+lbl;
+    if(state.unitState[i]?.passed) b.classList.add('passed');
+    if(i===THIS_UNIT) b.style.outline='2px solid var(--gold)';
+    b.onclick=()=>{ if(i!==THIS_UNIT) location.href=fileFor(i); };
+    nav.appendChild(b);
+  }
+}
+
+// ---- quiz render ----
+function renderQuiz(unitNum){
+  const unit=UNITS[unitNum]; if(!unit) return;
+  const mcqContainer=document.getElementById('mcq_'+unitNum);
+  const essayContainer=document.getElementById('essay_'+unitNum);
+  if(!mcqContainer) return;
+  let html='';
+  unit.mcq.forEach((q,i)=>{
+    const sel=state.unitState[unitNum].mcq[i];
+    html+=`<div class="question-card"><div class="question-text"><span class="lang-en">${i+1}. ${q.textEn}</span><span class="lang-es">${i+1}. ${q.textEs}</span></div><div class="options">`;
+    q.options.forEach((opt,j)=>{
+      const checked=sel===j?'checked':''; const selc=sel===j?'selected':'';
+      html+=`<label class="option ${selc}"><input type="radio" name="u${unitNum}q${i}" value="${j}" ${checked} onchange="answerMCQ(${unitNum},${i},${j})"><span><span class="lang-en">${String.fromCharCode(65+j)}. ${opt.en}</span><span class="lang-es">${String.fromCharCode(65+j)}. ${opt.es}</span></span></label>`;
+    });
+    html+=`</div><div class="feedback" id="fb_${unitNum}_${i}"></div></div>`;
+  });
+  mcqContainer.innerHTML=html;
+  if(essayContainer && unit.shortAnswer){
+    const isCert=state.registration && state.registration.track==='cert';
+    const isMasters=state.registration && state.registration.track!=='cert';
+    let sh='';
+    if(!state.registration){
+      sh+=`<div class="essay-optional-note"><span class="lang-en"><strong>Written questions (Master's level):</strong> open to every student; answers are checked gently against the lesson's key ideas. Required for the Master's tracks, optional for the Certificate. Register above to record your track.</span><span class="lang-es"><strong>Preguntas escritas (nivel de Maestría):</strong> abiertas a todo estudiante; las respuestas se revisan con suavidad frente a las ideas clave. Requeridas para las pistas de Maestría, opcionales para el Certificado. Regístrese arriba para registrar su pista.</span></div>`;
+    } else if(isCert){
+      sh+=`<div class="essay-optional-note"><span class="lang-en"><strong>Optional for Certificate students:</strong> reflection items; they do not count toward your passing score.</span><span class="lang-es"><strong>Opcional para estudiantes del Certificado:</strong> ejercicios de reflexión; no cuentan para su puntaje.</span></div>`;
+    } else if(isMasters){
+      sh+=`<div class="essay-optional-note"><span class="lang-en"><strong>Required for your track:</strong> aim to touch at least three of the key ideas in each answer. The model answer is shown so you can study it.</span><span class="lang-es"><strong>Requerido para su pista:</strong> procure tocar al menos tres de las ideas clave en cada respuesta. Se muestra la respuesta modelo para que la estudie.</span></div>`;
+    }
+    unit.shortAnswer.forEach((q,i)=>{
+      const ans=(state.unitState[unitNum].shortAnswer||[])[i]||"";
+      sh+=`<div class="essay-card"><div class="essay-prompt"><span class="lang-en">${i+1}. ${q.textEn}</span><span class="lang-es">${i+1}. ${q.textEs}</span></div><textarea oninput="saveShortAnswer(${unitNum},${i},this.value)" placeholder="${document.body.classList.contains('spanish')?'Escriba su respuesta (al menos una oración)...':'Write your response (at least one sentence)...'}" aria-label="Short answer">${ans}</textarea><button class="small-check-btn" onclick="checkShortAnswer(${unitNum},${i})"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar Respuesta</span></button><div class="feedback" id="sa_fb_${unitNum}_${i}"></div><div class="model-answer" id="sa_model_${unitNum}_${i}" style="display:none"></div></div>`;
+    });
+    essayContainer.innerHTML=sh; essayContainer.style.display='block';
+    unit.shortAnswer.forEach((q,i)=>{ if((state.unitState[unitNum].saChecked||[])[i]) revealModel(unitNum,i); });
+  }
+}
+function answerMCQ(u,i,j){
+  state.unitState[u].mcq[i]=j; saveState();
+  document.querySelectorAll(`input[name="u${u}q${i}"]`).forEach(inp=>inp.closest('.option').classList.toggle('selected',inp.checked));
+  const q=UNITS[u].mcq[i]; const fb=document.getElementById(`fb_${u}_${i}`);
+  if(fb){ if(j===q.correct){ fb.className='feedback show correct'; fb.innerHTML=`<strong><span class="lang-en">✓ Correct</span><span class="lang-es">✓ Correcto</span></strong><span class="lang-en">${q.explainEn}</span><span class="lang-es">${q.explainEs}</span>`; }
+    else { const r=String.fromCharCode(65+q.correct); fb.className='feedback show incorrect'; fb.innerHTML=`<strong><span class="lang-en">✗ Incorrect — correct: ${r}</span><span class="lang-es">✗ Incorrecto — correcta: ${r}</span></strong><span class="lang-en">${q.explainEn}</span><span class="lang-es">${q.explainEs}</span>`; } }
+}
+function saveShortAnswer(u,i,v){ state.unitState[u].shortAnswer[i]=v; if(state.unitState[u].saChecked) state.unitState[u].saChecked[i]=false; saveState(); }
+function kwHit(ans,k){
+  k=(k||'').toLowerCase(); if(!k) return false;
+  var WC='0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var pat=(k.length<=4)?'(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])':'(?:^|[^'+WC+'])'+esc;
+  try{ return new RegExp(pat,'i').test(ans); }catch(e){ return ans.indexOf(k)!==-1; }
+}
+const SA_MIN_HITS=3;
+function saKeywords(q){ const es=document.body.classList.contains('spanish'); if(es&&q.kw_es&&q.kw_es.length) return q.kw_es; if(!es&&q.kw_en&&q.kw_en.length) return q.kw_en; return q.keywords||[]; }
+function revealModel(u,i){
+  const q=UNITS[u].shortAnswer[i]; if(!q) return;
+  const box=document.getElementById(`sa_model_${u}_${i}`); if(!box) return;
+  box.style.display='block';
+  box.innerHTML=`<strong><span class="lang-en">Model answer — study this:</span><span class="lang-es">Respuesta modelo — estúdiela:</span></strong> <span class="lang-en">${q.modelEn||''}</span><span class="lang-es">${q.modelEs||''}</span>`;
+}
+function checkShortAnswer(u,i){
+  const q=UNITS[u].shortAnswer[i]; if(!q) return;
+  const ans=(state.unitState[u].shortAnswer[i]||"").trim().toLowerCase();
+  const fb=document.getElementById(`sa_fb_${u}_${i}`); if(!fb) return;
+  if(ans.length<20){ fb.className='feedback show incorrect'; fb.innerHTML=`<strong><span class="lang-en">✗ Please write a fuller answer (at least one full sentence).</span><span class="lang-es">✗ Escriba una respuesta más completa (al menos una oración).</span></strong>`; if(state.unitState[u].saChecked) state.unitState[u].saChecked[i]=false; saveState(); return; }
+  const matched=saKeywords(q).filter(kw=>kwHit(ans,kw));
+  if(matched.length>=SA_MIN_HITS){ fb.className='feedback show correct'; fb.innerHTML=`<strong><span class="lang-en">✓ Well done — your answer touches ${matched.length} of the lesson's key ideas. Study the model answer below.</span><span class="lang-es">✓ Muy bien — su respuesta toca ${matched.length} de las ideas clave. Estudie la respuesta modelo abajo.</span></strong>`; if(!state.unitState[u].saChecked) state.unitState[u].saChecked=[]; state.unitState[u].saChecked[i]=true; }
+  else { fb.className='feedback show incorrect'; fb.innerHTML=`<strong><span class="lang-en">Good start — ${matched.length} of the key ideas; aim for at least ${SA_MIN_HITS}. Read the model answer below and notice ideas you might add.</span><span class="lang-es">Buen comienzo — ${matched.length} de las ideas clave; procure al menos ${SA_MIN_HITS}. Lea la respuesta modelo abajo y note ideas que podría añadir.</span></strong>`; if(state.unitState[u].saChecked) state.unitState[u].saChecked[i]=false; }
+  saveState(); revealModel(u,i);
+}
+function submitUnit(unitNum){
+  const unit=UNITS[unitNum]; if(!unit) return;
+  if(!state.registration){ alert(document.body.classList.contains('spanish')?'Por favor regístrese primero':'Please register first'); return; }
+  let correct=0;
+  unit.mcq.forEach((q,i)=>{
+    const sel=state.unitState[unitNum].mcq[i]; const fb=document.getElementById(`fb_${unitNum}_${i}`);
+    if(sel===null||sel===undefined){ if(fb){fb.className='feedback show incorrect'; fb.innerHTML=`<strong><span class="lang-en">Not answered</span><span class="lang-es">Sin responder</span></strong>`;} return; }
+    if(sel===q.correct){ correct++; if(fb){fb.className='feedback show correct'; fb.innerHTML=`<strong><span class="lang-en">Correct</span><span class="lang-es">Correcto</span></strong><span class="lang-en">${q.explainEn}</span><span class="lang-es">${q.explainEs}</span>`;} }
+    else { const r=String.fromCharCode(65+q.correct); if(fb){fb.className='feedback show incorrect'; fb.innerHTML=`<strong><span class="lang-en">Incorrect (correct: ${r})</span><span class="lang-es">Incorrecto (correcta: ${r})</span></strong><span class="lang-en">${q.explainEn}</span><span class="lang-es">${q.explainEs}</span>`;} }
+  });
+  const total=unit.mcq.length; const mcPct=total>0?Math.round(correct/total*100):0;
+  let passed=false, saInfo='';
+  if(unit.shortAnswer && state.registration.track!=='cert'){
+    const sa=unit.shortAnswer; let saCorrect=0;
+    sa.forEach((q,i)=>{
+      const checked=(state.unitState[unitNum].saChecked||[])[i];
+      const ans=((state.unitState[unitNum].shortAnswer||[])[i]||"").trim().toLowerCase();
+      if(checked){ saCorrect++; }
+      else if(ans.length>=20){
+        const matched=saKeywords(q).filter(kw=>kwHit(ans,kw));
+        const fb=document.getElementById(`sa_fb_${unitNum}_${i}`);
+        if(matched.length>=SA_MIN_HITS){ saCorrect++; if(!state.unitState[unitNum].saChecked) state.unitState[unitNum].saChecked=[]; state.unitState[unitNum].saChecked[i]=true; if(fb){fb.className='feedback show correct'; fb.innerHTML=`<strong><span class="lang-en">✓ ${matched.length} key ideas. Study the model below.</span><span class="lang-es">✓ ${matched.length} ideas clave. Estudie el modelo abajo.</span></strong>`;} }
+        else if(fb){ fb.className='feedback show incorrect'; fb.innerHTML=`<strong><span class="lang-en">${matched.length} key ideas; aim for ${SA_MIN_HITS}. See the model below.</span><span class="lang-es">${matched.length} ideas clave; procure ${SA_MIN_HITS}. Vea el modelo abajo.</span></strong>`; }
+        revealModel(unitNum,i);
+      } else { const fb=document.getElementById(`sa_fb_${unitNum}_${i}`); if(fb){fb.className='feedback show incorrect'; fb.innerHTML=`<strong><span class="lang-en">✗ Not answered.</span><span class="lang-es">✗ Sin responder.</span></strong>`;} }
+    });
+    const saPct=sa.length>0?Math.round(saCorrect/sa.length*100):0;
+    passed=(mcPct>=90)&&(saPct>=90);
+    saInfo=` · <span class="lang-en">Written: ${saCorrect}/${sa.length} (${saPct}%)</span><span class="lang-es">Escritas: ${saCorrect}/${sa.length} (${saPct}%)</span>`;
+    state.unitState[unitNum].score=Math.min(mcPct,saPct);
+  } else { passed=mcPct>=90; state.unitState[unitNum].score=mcPct; }
+  state.unitState[unitNum].passed=passed; saveState();
+  const isCert=state.registration.track==='cert';
+  const result=document.getElementById('result_'+unitNum);
+  if(result){ result.className='unit-result show '+(passed?'pass':'fail');
+    if(passed){ result.innerHTML=`<span class="lang-en">✓ Passed. Multiple choice: ${correct}/${total} (${mcPct}%)${saInfo}. You may continue to the next situation.</span><span class="lang-es">✓ Aprobado. Opción múltiple: ${correct}/${total} (${mcPct}%)${saInfo}. Puede continuar a la siguiente situación.</span>`; }
+    else { const re=isCert?'90% required on the multiple-choice section':'90% required in each section'; const rs=isCert?'Se requiere 90% en opción múltiple':'Se requiere 90% en cada sección'; result.innerHTML=`<span class="lang-en">Multiple choice: ${correct}/${total} (${mcPct}%)${saInfo}. ${re}. Review the feedback and try again.</span><span class="lang-es">Opción múltiple: ${correct}/${total} (${mcPct}%)${saInfo}. ${rs}. Revise y reintente.</span>`; } }
+  renderUnitNav(); updateProgress();
+}
+function resetUnit(unitNum){
+  state.unitState[unitNum]=blankUnit(unitNum); saveState(); renderQuiz(unitNum);
+  document.querySelectorAll(`#unit${unitNum} .feedback`).forEach(f=>f.className='feedback');
+  const result=document.getElementById('result_'+unitNum); if(result) result.className='unit-result';
+  renderUnitNav(); updateProgress();
+}
+function updateProgress(){
+  let passed=0; for(let i=0;i<TOTAL_UNITS;i++) if(state.unitState[i]?.passed) passed++;
+  const pct=Math.round(passed/TOTAL_UNITS*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressFill').textContent=pct+'%';
+  document.getElementById('progressText').innerHTML=`<span class="lang-en">${passed} of ${TOTAL_UNITS} situations completed</span><span class="lang-es">${passed} de ${TOTAL_UNITS} situaciones completadas</span>`;
+  if(passed===TOTAL_UNITS) document.getElementById('courseComplete').classList.add('show');
+}
+// init
+loadLang(); initState(); loadState(); renderRegStatus(); renderUnitNav(); renderQuiz(THIS_UNIT); updateProgress();
+
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

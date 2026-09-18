@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS World Religions — Unit 6: Chinese Religions</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #f8f4e8; border: 1px solid #e8d9b8; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 10px; margin: 6px 0 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; }
+.reg-form label { font-weight: bold; display: block; margin-top: 10px; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-form { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 7 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">🌍 World Religions — Unit 6: Chinese Religions</span><span class="lang-es">🌍 Religiones del Mundo — Unidad 6: Las Religiones Chinas</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"Honor your father and your mother, that your days may be long upon the land which the LORD your God is giving you." — Exodus 20:12 (NKJV)</span><span class="lang-es">"Honra a tu padre y a tu madre, para que tus días se alarguen en la tierra que el SEÑOR tu Dios te da." — Éxodo 20:12 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="registrationCard">
+    <h2><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit. Your registration is saved on this device and used across all CTS courses.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full Name</span><span class="lang-es">Nombre Completo</span></label>
+    <input type="text" id="regName" placeholder="" />
+    <label><span class="lang-en">Email</span><span class="lang-es">Correo Electrónico</span></label>
+    <input type="email" id="regEmail" placeholder="" />
+    <label><span class="lang-en">Country</span><span class="lang-es">País</span></label>
+    <input type="text" id="regCountry" placeholder="" />
+    <label><span class="lang-en">Program Track</span><span class="lang-es">Programa</span></label>
+    <input type="hidden" id="regTrack" value="certificate" />
+    <div id="trackButtons" style="display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;">
+        <button type="button" class="track-opt" data-track="certificate"><span class="lang-en">Certificate of Ministry</span><span class="lang-es">Certificado de Ministerio</span></button>
+        <button type="button" class="track-opt" data-track="mdiv"><span class="lang-en">Master of Divinity (M.Div.)</span><span class="lang-es">Maestría en Divinidad (M.Div.)</span></button>
+        <button type="button" class="track-opt" data-track="thm"><span class="lang-en">Master of Theology (Th.M.)</span><span class="lang-es">Maestría en Teología (Th.M.)</span></button>
+    </div>
+    <button class="small" id="saveRegBtn" style="margin-top: 10px;"><span class="lang-en">Save Registration</span><span class="lang-es">Guardar Registro</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>Traditional Chinese religious life presents a pastor with a different kind of challenge than any religion studied so far in this course. Where Judaism, Islam, and Buddhism each generally expect exclusive adherence — a person is either Jewish or not, either a practicing Muslim or not — traditional Chinese religious culture has, for over two thousand years, comfortably blended three distinct streams of thought and practice that Western categories tend to treat as competing religions: Confucianism, Taoism, and Buddhism, which we studied in Unit 5. Chinese tradition itself names this blend the <em>san jiao</em>, "the three teachings," and an old Chinese saying captures the attitude precisely: the three teachings are one. A person raised in this tradition may consult a Confucian ethical framework for how to treat family and society, practice Taoist breathing exercises or feng shui for health and harmony with nature, burn incense at a Buddhist temple for blessing, and venerate ancestors at a home altar — all without any sense of contradiction or need to choose among them.</p>
+
+        <p>This unit will examine Confucianism and Taoism as the two indigenous Chinese philosophical-religious traditions this course has not yet covered, then turn to the broader folk religious practices, especially ancestor veneration, that run beneath and through all three teachings and remain, in many respects, the most deeply held and widely practiced religious commitment among people of Chinese heritage worldwide, including significant Chinese communities in Cuba, dating back to nineteenth-century labor migration, and smaller but growing communities across Mexico and Latin America more broadly.</p>
+
+        <h2>I. Confucius and the Vision of Social Order</h2>
+        <p>Confucius, known in Chinese as Kongzi or Kong Fuzi, lived from approximately 551 to 479 B.C., during a turbulent period of Chinese history marked by war between rival states and the breakdown of older social order. Rather than founding a religion in any sense Western readers typically use the term, Confucius understood himself as a transmitter rather than an innovator, seeking to restore and articulate clearly the wisdom of earlier Chinese sage-kings whose ordered, harmonious society he held up as the ideal his own chaotic age had abandoned. His teachings, recorded by later disciples in a collection called the <em>Analects</em>, center overwhelmingly on ethics, social relationships, and good governance rather than on questions of ultimate metaphysical reality, the afterlife, or the nature of the divine — when a disciple once asked Confucius about serving the spirits, tradition records him responding, "You are not yet able to serve men, how can you serve the spirits?" — a characteristically this-worldly redirection of attention toward present moral duty.</p>
+
+        <p>Central to Confucian ethics is the concept of <em>ren</em>, often translated "benevolence" or "humaneness," the fundamental virtue of genuine care and empathy for others that Confucius held to be the root from which all other virtues grow. Closely related is <em>li</em>, usually translated "ritual propriety," referring not merely to religious ceremony but to the entire fabric of proper behavior, etiquette, and social ritual that Confucius believed gave concrete expression to inward virtue and held society together in harmonious order. Confucian ethics organizes social obligation around what tradition calls the Five Relationships — ruler and subject, father and son, husband and wife, elder brother and younger brother, and friend and friend — each carrying specific mutual obligations, with the relationship between father and son, expressed through the virtue of <em>xiao</em>, filial piety, regarded as the foundational relationship from which the others take their pattern. The ideal person shaped by these virtues is called the <em>junzi</em>, often translated "gentleman" or "superior person," a figure of moral cultivation and social responsibility that Confucianism held up as the proper aim of education and self-discipline, achievable in principle by anyone regardless of birth, through sustained moral effort — a genuinely influential idea in a society still substantially organized around hereditary aristocracy.</p>
+
+        <p>Confucianism's enormous historical influence is difficult to overstate. For roughly two thousand years, from the Han dynasty onward, Confucian classics formed the core curriculum of the imperial examination system through which China's civil servants were selected, meaning Confucian ethics shaped not merely private morality but the entire structure of Chinese government and society. Later thinkers, particularly during the Song and Ming dynasties, developed what scholars call Neo-Confucianism, integrating metaphysical concepts partly drawn from Buddhism and Taoism into the originally more practical, ethically focused teaching of Confucius himself, producing a more fully developed philosophical system while retaining Confucius's central emphasis on virtue, right relationship, and social harmony as the substance of a well-lived life.</p>
+
+        <h2>II. Laozi and the Taoist Vision of the Natural Way</h2>
+        <p>Where Confucianism concerns itself chiefly with structuring human society correctly, Taoism, traditionally traced to a sage named Laozi, whose historicity scholars debate but whom Chinese tradition credits with authoring the foundational text called the <em>Tao Te Ching</em> ("The Way and Its Power"), takes a strikingly different orientation, concerning itself instead with aligning human life with the deeper, natural pattern underlying the entire universe, called the <em>Tao</em>, or "the Way." The opening line of the Tao Te Ching famously declares that the Tao which can be spoken is not the eternal Tao — signaling from its very first words a tradition deeply suspicious of the kind of confident, structured ethical and social system Confucianism sought to build, and drawn instead toward paradox, simplicity, and a kind of wise unknowing.</p>
+
+        <p>The central practical teaching of philosophical Taoism is <em>wu wei</em>, usually translated "non-action" or "effortless action" — not literal passivity, but a mode of acting in harmony with the natural flow of the Tao rather than forcing outcomes through excessive striving, social ambition, or rigid rule-following, the very things Confucianism prized. Taoist texts frequently use the image of water, which overcomes the hardest stone not through force but through patient yielding, as the model for this kind of action. Taoism also gave Chinese culture the concept of <em>yin and yang</em>, the complementary, interdependent opposite forces — dark and light, passive and active, feminine and masculine — whose dynamic balance, rather than the triumph of one over the other, is understood to constitute the natural harmony of the universe, a concept that has spread, like Buddhist mindfulness discussed in Unit 5, far beyond any formal Taoist religious commitment into broader popular culture and alternative medicine. Alongside this philosophical Taoism, a distinct and more overtly religious form of Taoism developed over the following centuries, involving temples, priests, elaborate ritual, a vast pantheon of deities and immortals, and practices aimed at physical longevity or even immortality — illustrating, much as this course found with Hinduism in Unit 4, that a single tradition can contain both a highly abstract philosophical current and a richly devotional popular religious current existing side by side.</p>
+
+        <h2>III. Chinese Folk Religion: Ancestor Veneration and Popular Deities</h2>
+        <p>Beneath and through both Confucianism and Taoism runs the older and, for most ordinary Chinese people historically, more immediately practiced layer of Chinese folk religion, centered above all on ancestor veneration. Rooted in the conviction that the dead continue to exist in some form and remain bound to their living descendants by ties of mutual obligation, traditional Chinese families maintained ancestral tablets inscribed with the names of deceased family members, before which descendants offered incense, food, and prayer, particularly during important family occasions and the annual Qingming festival, when families visit and tend ancestral graves. Confucian filial piety and folk ancestor veneration reinforced one another closely: the same obligation owed to living parents was understood to extend, in modified form, to parents and grandparents after death, and neglecting these observances was traditionally regarded as a serious moral failure, not merely a religious one.</p>
+
+        <p>Chinese folk religion also populates the world with a wide range of spiritual beings beyond ancestors: <em>shen</em>, benevolent gods and spirits, often deified historical figures or nature spirits, worshiped at local temples for protection and blessing; and <em>gui</em>, ghosts, particularly the "hungry ghosts" believed to wander without descendants to honor them or proper burial rites, appeased especially during the Hungry Ghost Festival. The practice of feng shui, arranging buildings, furniture, and graves in harmony with the flow of unseen natural energies, draws on both Taoist cosmology and folk belief about how the placement of the living and the dead affects fortune and family well-being. A pastor should understand that for many people of Chinese heritage, this entire complex of practice — ancestor veneration, feng shui, folk deities, alongside whatever combination of Confucian ethics, Taoist practice, and Buddhist devotion a family observes — functions as an integrated whole, not a a set of separate religious choices, which is precisely why conversion to Christianity has historically been experienced by many Chinese families and communities as a much more disruptive, all-encompassing decision than conversion between, say, Protestant denominations might be.</p>
+
+        <h2>IV. Points of Contact and Contrast with the Gospel</h2>
+        <p>Confucian filial piety offers a pastor genuine, substantial common ground with Scripture. The fifth of the Ten Commandments, "Honor your father and your mother, that your days may be long upon the land which the LORD your God is giving you" (Exodus 20:12), and Paul's instruction that children obey their parents "for this is right" (Ephesians 6:1), affirm precisely the kind of deep respect for parents and elders Confucian ethics has cultivated for over two millennia. A pastor need not, and should not, ask a Chinese convert to abandon honoring his parents and ancestors as people, remembering them, respecting their memory, or maintaining family customs of remembrance that involve no actual worship — the difficult pastoral line to draw carefully is not between honoring ancestors and dishonoring them, but between honoring the dead as beloved family members and worshiping them as objects of religious devotion, offering prayer and sacrifice to secure their favor or appease their potential displeasure, which crosses directly into the territory the first and second commandments forbid.</p>
+
+        <p>This is a considerably more delicate pastoral matter than in most of the religions studied earlier in this course, precisely because the practice in question, ancestor veneration, is bound up so tightly with genuine filial love that Scripture itself commands, rather than with a foreign deity easily identified as a rival to the true God. A pastor should help a Chinese convert distinguish clearly between remembering and honoring deceased parents — visiting graves, maintaining family memory, even continuing certain non-worshipful customs — and offering the kind of prayer, incense, and sacrificial food traditionally directed to ancestral tablets in the belief that ancestors can hear, bless, or need appeasement, since this latter practice functions, however lovingly intended, as a form of worship owed to God alone. On the question of the Tao itself, a pastor can note genuine partial insight — the conviction that reality has a discoverable, coherent underlying order, and that human flourishing consists in aligning oneself with something beyond mere willful self-assertion, echoes truths Scripture affirms about God's created order (Psalm 19:1-4; Romans 1:20) — while also proclaiming what wu wei's impersonal Way cannot offer: a Tao that is not merely an impersonal pattern to align with, but a Person who speaks, who acts decisively in history, and who was Himself, according to John's Gospel, present at creation as the Word — "In the beginning was the Word, and the Word was with God, and the Word was God... All things were made through Him" (John 1:1, 3), and who, unlike an impersonal natural order, can be known, trusted, and loved as He has first loved us (1 John 4:19).</p>
+
+        <h2>V. A Pastoral Path Forward: Family Loyalty Without Divided Worship</h2>
+        <p>Historically, missionaries to Chinese communities have not always drawn this distinction with care, and the record includes real pastoral failure on both sides of the question. Some missionaries in past centuries demanded new converts abandon every ancestral custom indiscriminately, including practices that involved no worship at all, needlessly alienating converts from their own families and communities and reinforcing the impression that Christianity required a wholesale rejection of Chinese identity and filial devotion rather than their fulfillment. Others blurred the line too far the other direction, permitting continued ancestral worship under the theory that it was merely civil commemoration rather than religious devotion — a controversy significant enough in Roman Catholic missionary history that it became known as the Chinese Rites controversy, unresolved for well over a century. A pastor in Cuba, Mexico, or anywhere serving a congregant of Chinese heritage today should learn from both failures: neither demanding the wholesale abandonment of filial custom that Scripture itself commends, nor permitting genuine worship of the dead to continue under the softened label of mere respect.</p>
+
+        <p>In practice, this means a pastor can affirm, without hesitation, a Chinese believer's continued honoring of parents and grandparents, visiting of graves, remembering of family history, and even the maintenance of certain non-religious customs of family gathering and remembrance, while helping that believer identify clearly which specific practices function as worship — prayer directed to ancestors, offerings intended to secure ancestral blessing or ward off ancestral displeasure, incense burned as an act of religious devotion rather than simple remembrance — and gently, patiently helping the new believer find ways to express the same filial love Scripture commands without those specific elements of worship, which belong to God alone. Done well, this approach allows the gospel to be received not as an attack on Chinese family loyalty but as its truest fulfillment: the same God who commanded "honor your father and your mother" is the God to whom, and only to whom, worship is finally due.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>La vida religiosa tradicional china presenta a un pastor un tipo de desafío diferente al de cualquier religión estudiada hasta ahora en este curso. Donde el judaísmo, el islam y el budismo generalmente esperan cada uno adhesión exclusiva — una persona es judía o no lo es, es musulmana practicante o no lo es — la cultura religiosa tradicional china ha, durante más de dos mil años, mezclado cómodamente tres corrientes distintas de pensamiento y práctica que las categorías occidentales tienden a tratar como religiones en competencia: el confucianismo, el taoísmo, y el budismo, que estudiamos en la Unidad 5. La tradición china misma nombra esta mezcla <em>san jiao</em>, "las tres enseñanzas," y un viejo dicho chino captura la actitud con precisión: las tres enseñanzas son una. Una persona criada en esta tradición puede consultar un marco ético confuciano para cómo tratar a la familia y la sociedad, practicar ejercicios de respiración taoístas o feng shui para la salud y la armonía con la naturaleza, quemar incienso en un templo budista para obtener bendición, y venerar a los ancestros en un altar familiar — todo sin ningún sentido de contradicción o necesidad de elegir entre ellos.</p>
+
+        <p>Esta unidad examinará el confucianismo y el taoísmo como las dos tradiciones filosófico-religiosas indígenas chinas que este curso aún no ha cubierto, luego se dirigirá a las prácticas religiosas populares más amplias, especialmente la veneración de los ancestros, que corren por debajo y a través de las tres enseñanzas y siguen siendo, en muchos aspectos, el compromiso religioso más profundamente sostenido y ampliamente practicado entre las personas de herencia china en todo el mundo, incluyendo comunidades chinas significativas en Cuba, que se remontan a la migración laboral del siglo diecinueve, y comunidades más pequeñas pero crecientes en todo México y América Latina en general.</p>
+
+        <h2>I. Confucio y la visión del orden social</h2>
+        <p>Confucio, conocido en chino como Kongzi o Kong Fuzi, vivió aproximadamente del 551 al 479 a.C., durante un período turbulento de la historia china marcado por la guerra entre estados rivales y el colapso del orden social más antiguo. En lugar de fundar una religión en cualquier sentido que los lectores occidentales típicamente usan el término, Confucio se entendía a sí mismo como transmisor más que innovador, buscando restaurar y articular con claridad la sabiduría de los reyes sabios chinos anteriores, cuya sociedad ordenada y armoniosa sostenía como el ideal que su propia época caótica había abandonado. Sus enseñanzas, registradas por discípulos posteriores en una colección llamada las <em>Analectas</em>, se centran abrumadoramente en la ética, las relaciones sociales, y el buen gobierno más que en cuestiones de realidad metafísica última, la vida después de la muerte, o la naturaleza de lo divino — cuando un discípulo una vez le preguntó a Confucio acerca de servir a los espíritus, la tradición registra que respondió: "Todavía no eres capaz de servir a los hombres, ¿cómo puedes servir a los espíritus?" — una redirección característicamente terrenal de la atención hacia el deber moral presente.</p>
+
+        <p>Central a la ética confuciana es el concepto de <em>ren</em>, a menudo traducido "benevolencia" o "humanidad," la virtud fundamental del cuidado genuino y la empatía por otros que Confucio sostenía era la raíz de la cual crecen todas las demás virtudes. Estrechamente relacionado está el <em>li</em>, usualmente traducido "propiedad ritual," refiriéndose no meramente a la ceremonia religiosa sino a todo el tejido del comportamiento apropiado, la etiqueta, y el ritual social que Confucio creía daba expresión concreta a la virtud interior y mantenía a la sociedad unida en orden armonioso. La ética confuciana organiza la obligación social en torno a lo que la tradición llama las Cinco Relaciones — gobernante y súbdito, padre e hijo, esposo y esposa, hermano mayor y hermano menor, y amigo y amigo — cada una llevando obligaciones mutuas específicas, con la relación entre padre e hijo, expresada a través de la virtud del <em>xiao</em>, la piedad filial, considerada la relación fundamental de la cual las demás toman su patrón. La persona ideal formada por estas virtudes se llama el <em>junzi</em>, a menudo traducido "caballero" o "persona superior," una figura de cultivo moral y responsabilidad social que el confucianismo sostenía como el propósito adecuado de la educación y la autodisciplina, alcanzable en principio por cualquiera sin importar su nacimiento, a través del esfuerzo moral sostenido — una idea genuinamente influyente en una sociedad todavía sustancialmente organizada en torno a la aristocracia hereditaria.</p>
+
+        <p>La enorme influencia histórica del confucianismo es difícil de exagerar. Durante aproximadamente dos mil años, desde la dinastía Han en adelante, los clásicos confucianos formaron el currículo central del sistema de exámenes imperiales a través del cual se seleccionaban los funcionarios públicos de China, lo que significa que la ética confuciana dio forma no meramente a la moralidad privada sino a toda la estructura del gobierno y la sociedad chinos. Pensadores posteriores, particularmente durante las dinastías Song y Ming, desarrollaron lo que los eruditos llaman el neoconfucianismo, integrando conceptos metafísicos en parte extraídos del budismo y el taoísmo en la enseñanza originalmente más práctica y éticamente enfocada del propio Confucio, produciendo un sistema filosófico más plenamente desarrollado mientras conservaba el énfasis central de Confucio en la virtud, la relación correcta, y la armonía social como la sustancia de una vida bien vivida.</p>
+
+        <h2>II. Laozi y la visión taoísta del camino natural</h2>
+        <p>Donde el confucianismo se ocupa principalmente de estructurar correctamente la sociedad humana, el taoísmo, tradicionalmente atribuido a un sabio llamado Laozi, cuya historicidad los eruditos debaten pero a quien la tradición china acredita como autor del texto fundacional llamado el <em>Tao Te Ching</em> ("El Camino y su Poder"), toma una orientación sorprendentemente diferente, ocupándose en cambio de alinear la vida humana con el patrón natural más profundo que subyace a todo el universo, llamado el <em>Tao</em>, o "el Camino." La línea inicial del Tao Te Ching declara famosamente que el Tao que puede ser hablado no es el Tao eterno — señalando desde sus primeras palabras mismas una tradición profundamente suspicaz del tipo de sistema ético y social confiado y estructurado que el confucianismo buscaba construir, y atraída en cambio hacia la paradoja, la simplicidad, y una especie de sabio no-saber.</p>
+
+        <p>La enseñanza práctica central del taoísmo filosófico es el <em>wu wei</em>, usualmente traducido "no-acción" o "acción sin esfuerzo" — no pasividad literal, sino un modo de actuar en armonía con el flujo natural del Tao en lugar de forzar resultados a través de la lucha excesiva, la ambición social, o el seguimiento rígido de reglas, las mismas cosas que el confucianismo apreciaba. Los textos taoístas frecuentemente usan la imagen del agua, que vence a la piedra más dura no a través de la fuerza sino a través de la cesión paciente, como el modelo para este tipo de acción. El taoísmo también le dio a la cultura china el concepto del <em>yin y el yang</em>, las fuerzas opuestas complementarias e interdependientes — oscuridad y luz, pasivo y activo, femenino y masculino — cuyo equilibrio dinámico, más que el triunfo de una sobre la otra, se entiende que constituye la armonía natural del universo, un concepto que se ha extendido, como la atención plena budista discutida en la Unidad 5, mucho más allá de cualquier compromiso religioso taoísta formal hacia la cultura popular más amplia y la medicina alternativa. Junto a este taoísmo filosófico, una forma distinta y más abiertamente religiosa de taoísmo se desarrolló a lo largo de los siglos siguientes, involucrando templos, sacerdotes, ritual elaborado, un vasto panteón de deidades e inmortales, y prácticas dirigidas a la longevidad física o incluso la inmortalidad — ilustrando, tal como este curso encontró con el hinduismo en la Unidad 4, que una sola tradición puede contener tanto una corriente filosófica altamente abstracta como una corriente religiosa popular ricamente devocional existiendo lado a lado.</p>
+
+        <h2>III. Religión popular china: Veneración de los ancestros y deidades populares</h2>
+        <p>Por debajo y a través tanto del confucianismo como del taoísmo corre la capa más antigua y, para la mayoría de las personas chinas ordinarias históricamente, más inmediatamente practicada de la religión popular china, centrada sobre todo en la veneración de los ancestros. Arraigada en la convicción de que los muertos continúan existiendo en alguna forma y permanecen atados a sus descendientes vivos por lazos de obligación mutua, las familias chinas tradicionales mantenían tablillas ancestrales inscritas con los nombres de los miembros familiares fallecidos, ante las cuales los descendientes ofrecían incienso, comida, y oración, particularmente durante ocasiones familiares importantes y el festival anual de Qingming, cuando las familias visitan y cuidan las tumbas ancestrales. La piedad filial confuciana y la veneración popular de los ancestros se reforzaban mutuamente de cerca: la misma obligación debida a los padres vivos se entendía que se extendía, en forma modificada, a padres y abuelos después de la muerte, y descuidar estas observancias se consideraba tradicionalmente una falla moral seria, no meramente religiosa.</p>
+
+        <p>La religión popular china también puebla el mundo con una amplia gama de seres espirituales más allá de los ancestros: los <em>shen</em>, dioses y espíritus benevolentes, a menudo figuras históricas deificadas o espíritus de la naturaleza, adorados en templos locales para protección y bendición; y los <em>gui</em>, fantasmas, particularmente los "fantasmas hambrientos" que se cree vagan sin descendientes que los honren o ritos de entierro apropiados, apaciguados especialmente durante el Festival de los Fantasmas Hambrientos. La práctica del feng shui, arreglando edificios, muebles, y tumbas en armonía con el flujo de energías naturales invisibles, se basa tanto en la cosmología taoísta como en la creencia popular acerca de cómo la ubicación de los vivos y los muertos afecta la fortuna y el bienestar familiar. Un pastor debe entender que para muchas personas de herencia china, todo este complejo de práctica — la veneración de los ancestros, el feng shui, las deidades populares, junto con cualquier combinación de ética confuciana, práctica taoísta, y devoción budista que una familia observe — funciona como un todo integrado, no un conjunto de elecciones religiosas separadas, que es precisamente por qué la conversión al cristianismo ha sido históricamente experimentada por muchas familias y comunidades chinas como una decisión mucho más disruptiva y totalizadora de lo que podría ser la conversión entre, digamos, denominaciones protestantes.</p>
+
+        <h2>IV. Puntos de contacto y contraste con el evangelio</h2>
+        <p>La piedad filial confuciana ofrece a un pastor un terreno común genuino y sustancial con la Escritura. El quinto de los Diez Mandamientos, "Honra a tu padre y a tu madre, para que tus días se alarguen en la tierra que el SEÑOR tu Dios te da" (Éxodo 20:12), y la instrucción de Pablo de que los hijos obedezcan a sus padres "porque esto es justo" (Efesios 6:1), afirman precisamente el tipo de profundo respeto por los padres y los ancianos que la ética confuciana ha cultivado durante más de dos milenios. Un pastor no necesita, y no debe, pedirle a un converso chino que abandone honrar a sus padres y ancestros como personas, recordarlos, respetar su memoria, o mantener costumbres familiares de recuerdo que no involucran adoración real — la difícil línea pastoral a trazar con cuidado no es entre honrar a los ancestros y deshonrarlos, sino entre honrar a los muertos como miembros familiares amados y adorarlos como objetos de devoción religiosa, ofreciendo oración y sacrificio para asegurar su favor o apaciguar su potencial descontento, lo cual cruza directamente hacia el territorio que el primer y segundo mandamientos prohíben.</p>
+
+        <p>Este es un asunto pastoral considerablemente más delicado que en la mayoría de las religiones estudiadas anteriormente en este curso, precisamente porque la práctica en cuestión, la veneración de los ancestros, está tan estrechamente ligada al amor filial genuino que la Escritura misma ordena, en lugar de a una deidad extranjera fácilmente identificada como rival del Dios verdadero. Un pastor debe ayudar a un converso chino a distinguir claramente entre recordar y honrar a los padres fallecidos — visitar tumbas, mantener la memoria familiar, incluso continuar ciertas costumbres no devocionales — y ofrecer el tipo de oración, incienso, y comida sacrificial tradicionalmente dirigida a las tablillas ancestrales en la creencia de que los ancestros pueden oír, bendecir, o necesitar apaciguamiento, ya que esta última práctica funciona, por más amorosamente que se pretenda, como una forma de adoración debida solo a Dios. Sobre la cuestión del Tao mismo, un pastor puede notar una intuición parcial genuina — la convicción de que la realidad tiene un orden subyacente descubrible y coherente, y que la plenitud humana consiste en alinearse con algo más allá de la mera autoafirmación voluntariosa, hace eco de verdades que la Escritura afirma acerca del orden creado de Dios (Salmo 19:1-4; Romanos 1:20) — mientras también proclama lo que el Camino impersonal del wu wei no puede ofrecer: un Tao que no es meramente un patrón impersonal con el cual alinearse, sino una Persona que habla, que actúa decisivamente en la historia, y que Él mismo, según el Evangelio de Juan, estuvo presente en la creación como el Verbo — "En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios... Todas las cosas fueron hechas por medio de él" (Juan 1:1, 3), y que, a diferencia de un orden natural impersonal, puede ser conocido, confiado, y amado ya que Él nos amó primero (1 Juan 4:19).</p>
+
+        <h2>V. Un camino pastoral hacia adelante: Lealtad familiar sin adoración dividida</h2>
+        <p>Históricamente, los misioneros a las comunidades chinas no siempre han trazado esta distinción con cuidado, y el registro incluye fracaso pastoral real en ambos lados de la cuestión. Algunos misioneros en siglos pasados exigían que los nuevos conversos abandonaran indiscriminadamente toda costumbre ancestral, incluyendo prácticas que no involucraban adoración alguna, alienando innecesariamente a los conversos de sus propias familias y comunidades y reforzando la impresión de que el cristianismo requería un rechazo total de la identidad china y la devoción filial en lugar de su cumplimiento. Otros difuminaron la línea demasiado en la dirección opuesta, permitiendo que continuara la adoración ancestral bajo la teoría de que era meramente conmemoración civil en lugar de devoción religiosa — una controversia lo suficientemente significativa en la historia misionera católica romana que llegó a conocerse como la controversia de los Ritos Chinos, sin resolver durante bien más de un siglo. Un pastor en Cuba, México, o cualquier lugar que sirva a un miembro de la congregación de herencia china hoy debe aprender de ambos fracasos: ni exigiendo el abandono total de la costumbre filial que la Escritura misma encomia, ni permitiendo que continúe la adoración genuina de los muertos bajo la etiqueta suavizada del mero respeto.</p>
+
+        <p>En la práctica, esto significa que un pastor puede afirmar, sin vacilación, la continua honra que un creyente chino da a padres y abuelos, la visita a tumbas, el recuerdo de la historia familiar, e incluso el mantenimiento de ciertas costumbres no religiosas de reunión y recuerdo familiar, mientras ayuda a ese creyente a identificar claramente cuáles prácticas específicas funcionan como adoración — la oración dirigida a los ancestros, las ofrendas destinadas a asegurar la bendición ancestral o evitar el descontento ancestral, el incienso quemado como acto de devoción religiosa en lugar de simple recuerdo — y ayudando con delicadeza y paciencia al nuevo creyente a encontrar formas de expresar el mismo amor filial que la Escritura ordena sin esos elementos específicos de adoración, que pertenecen solo a Dios. Hecho bien, este enfoque permite que el evangelio sea recibido no como un ataque a la lealtad familiar china sino como su más verdadero cumplimiento: el mismo Dios que ordenó "honra a tu padre y a tu madre" es el Dios a quien, y solo a quien, finalmente se debe la adoración.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 6 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 6;
+let progress = JSON.parse(localStorage.getItem('cts_wr_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSWRUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit6) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSWRUnit5.html"; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSWRUnit7.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        const trackLabel = student.track === 'mdiv' ? 'M.Div.' : (student.track === 'thm' ? 'Th.M.' : 'Certificate');
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name} <span style="font-weight:normal;font-size:0.85rem;">(${trackLabel})</span> &nbsp;<a href="#" id="changeTrackLink" style="font-size:0.8rem;color:#5b3a1f;">Change track</a>`;
+        document.getElementById('registrationCard').style.display = 'none';
+        const link = document.getElementById('changeTrackLink');
+        if (link) link.onclick = function(e) {
+            e.preventDefault();
+            const card = document.getElementById('registrationCard');
+            card.style.display = 'block';
+            if (student.name) document.getElementById('regName').value = student.name;
+            if (student.email) document.getElementById('regEmail').value = student.email;
+            if (student.country) document.getElementById('regCountry').value = student.country;
+            if (student.track && typeof setTrack === 'function') setTrack(student.track);
+            card.scrollIntoView({ behavior: 'smooth' });
+        };
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<span style="color:#5b3a1f;">⚠️ Please register</span>`;
+    }
+}
+displayStudentGreeting();
+
+
+function setTrack(t) {
+    document.getElementById('regTrack').value = t;
+    document.querySelectorAll('.track-opt').forEach(b => { b.classList.toggle('selected', b.getAttribute('data-track') === t); });
+}
+document.querySelectorAll('.track-opt').forEach(b => { b.onclick = function() { setTrack(this.getAttribute('data-track')); }; });
+setTrack('certificate');
+document.getElementById('saveRegBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const country = document.getElementById('regCountry').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = `<span style="color:red;">⚠️ Name and email are required.</span>`;
+        return;
+    }
+    localStorage.setItem('cts_student', JSON.stringify({ name, email, country, track }));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = `<span style="color:green;">✓ Saved! Welcome, ${name}.</span>`;
+    setTimeout(() => { displayStudentGreeting(); }, 1000);
+    renderQuestions();
+};
+
+// Q3 reshuffled (Psalm 23 author) to move David from C to B for 5/5/5/5 balance.
+const mcQuestions = [
+  {
+    "textEn": "1. The Chinese term san jiao refers to:",
+    "textEs": "1. El término chino san jiao se refiere a:",
+    "optionsEn": [
+      "The blend of Confucianism, Taoism, and Buddhism, 'the three teachings'",
+      "A single unified Chinese religion",
+      "The Chinese imperial examination system",
+      "A festival honoring ancestors"
+    ],
+    "optionsEs": [
+      "La mezcla de confucianismo, taoísmo y budismo, 'las tres enseñanzas'",
+      "Una sola religión china unificada",
+      "El sistema chino de exámenes imperiales",
+      "Un festival que honra a los ancestros"
+    ],
+    "c": 21,
+    "explEn": "San jiao, 'the three teachings,' names the traditional Chinese blend of Confucianism, Taoism, and Buddhism, held together without a sense of contradiction.",
+    "explEs": "San jiao, 'las tres enseñanzas,' nombra la mezcla tradicional china de confucianismo, taoísmo y budismo, sostenida junta sin sentido de contradicción."
+  },
+  {
+    "textEn": "2. Unlike Judaism, Islam, and Buddhism, which generally expect exclusive adherence, traditional Chinese religious culture:",
+    "textEs": "2. A diferencia del judaísmo, el islam y el budismo, que generalmente esperan adhesión exclusiva, la cultura religiosa tradicional china:",
+    "optionsEn": [
+      "Also demands exclusive membership in one tradition",
+      "Has comfortably blended multiple traditions for over two thousand years",
+      "Rejects all forms of ancestor veneration",
+      "Was founded by a single prophet"
+    ],
+    "optionsEs": [
+      "También exige membresía exclusiva en una tradición",
+      "Ha mezclado cómodamente múltiples tradiciones durante más de dos mil años",
+      "Rechaza toda forma de veneración de ancestros",
+      "Fue fundada por un solo profeta"
+    ],
+    "c": 29,
+    "explEn": "Traditional Chinese religious culture has comfortably blended Confucianism, Taoism, and Buddhism for over two thousand years without treating them as exclusive alternatives.",
+    "explEs": "La cultura religiosa tradicional china ha mezclado cómodamente el confucianismo, el taoísmo y el budismo durante más de dos mil años sin tratarlos como alternativas exclusivas."
+  },
+  {
+    "textEn": "3. Confucius understood himself primarily as:",
+    "textEs": "3. Confucio se entendía a sí mismo principalmente como:",
+    "optionsEn": [
+      "An innovator founding a new religion",
+      "A military general",
+      "A transmitter of the wisdom of earlier sage-kings",
+      "A Buddhist monk"
+    ],
+    "optionsEs": [
+      "Un innovador que fundaba una nueva religión",
+      "Un general militar",
+      "Un transmisor de la sabiduría de reyes sabios anteriores",
+      "Un monje budista"
+    ],
+    "c": 37,
+    "explEn": "Confucius understood himself as a transmitter rather than an innovator, seeking to restore the wisdom of earlier Chinese sage-kings.",
+    "explEs": "Confucio se entendía a sí mismo como transmisor más que innovador, buscando restaurar la sabiduría de reyes sabios chinos anteriores."
+  },
+  {
+    "textEn": "4. Confucius's teachings are recorded in a collection called the:",
+    "textEs": "4. Las enseñanzas de Confucio están registradas en una colección llamada:",
+    "optionsEn": [
+      "Tao Te Ching",
+      "Bhagavad Gita",
+      "Qur'an",
+      "Analects"
+    ],
+    "optionsEs": [
+      "El Tao Te Ching",
+      "El Bhagavad Gita",
+      "El Corán",
+      "Las Analectas"
+    ],
+    "c": 45,
+    "explEn": "Confucius's teachings were recorded by later disciples in a collection called the Analects.",
+    "explEs": "Las enseñanzas de Confucio fueron registradas por discípulos posteriores en una colección llamada las Analectas."
+  },
+  {
+    "textEn": "5. Ren, central to Confucian ethics, is usually translated:",
+    "textEs": "5. El ren, central a la ética confuciana, usualmente se traduce:",
+    "optionsEn": [
+      "Benevolence or humaneness",
+      "Ritual propriety",
+      "Non-action",
+      "Filial piety"
+    ],
+    "optionsEs": [
+      "Benevolencia o humanidad",
+      "Propiedad ritual",
+      "No-acción",
+      "Piedad filial"
+    ],
+    "c": 49,
+    "explEn": "Ren is usually translated 'benevolence' or 'humaneness,' the fundamental virtue Confucius held to be the root from which all other virtues grow.",
+    "explEs": "El ren usualmente se traduce 'benevolencia' o 'humanidad,' la virtud fundamental que Confucio sostenía era la raíz de la cual crecen todas las demás virtudes."
+  },
+  {
+    "textEn": "6. Xiao, regarded as the foundational Confucian relationship, refers to:",
+    "textEs": "6. El xiao, considerado la relación confuciana fundamental, se refiere a:",
+    "optionsEn": [
+      "Ritual propriety in temples",
+      "Filial piety, the relationship between father and son",
+      "The relationship between ruler and subject",
+      "Non-action in harmony with the Tao"
+    ],
+    "optionsEs": [
+      "La propiedad ritual en templos",
+      "La piedad filial, la relación entre padre e hijo",
+      "La relación entre gobernante y súbdito",
+      "La no-acción en armonía con el Tao"
+    ],
+    "c": 57,
+    "explEn": "Xiao, filial piety, expressed in the relationship between father and son, is regarded as the foundational relationship from which the other Five Relationships take their pattern.",
+    "explEs": "El xiao, la piedad filial, expresada en la relación entre padre e hijo, se considera la relación fundamental de la cual las demás Cinco Relaciones toman su patrón."
+  },
+  {
+    "textEn": "7. For roughly two thousand years, Confucian classics formed the core of:",
+    "textEs": "7. Durante aproximadamente dos mil años, los clásicos confucianos formaron el núcleo de:",
+    "optionsEn": [
+      "Taoist temple ritual",
+      "Buddhist monastic training only",
+      "The imperial examination system for selecting civil servants",
+      "Ancestor veneration ceremonies"
+    ],
+    "optionsEs": [
+      "El ritual del templo taoísta",
+      "Solo el entrenamiento monástico budista",
+      "El sistema de exámenes imperiales para seleccionar funcionarios públicos",
+      "Las ceremonias de veneración de ancestros"
+    ],
+    "c": 65,
+    "explEn": "Confucian classics formed the core curriculum of the imperial examination system through which China's civil servants were selected for roughly two thousand years.",
+    "explEs": "Los clásicos confucianos formaron el currículo central del sistema de exámenes imperiales a través del cual se seleccionaban los funcionarios públicos de China durante aproximadamente dos mil años."
+  },
+  {
+    "textEn": "8. The Tao Te Ching is traditionally attributed to:",
+    "textEs": "8. El Tao Te Ching tradicionalmente se atribuye a:",
+    "optionsEn": [
+      "Confucius",
+      "The Buddha",
+      "Muhammad",
+      "Laozi"
+    ],
+    "optionsEs": [
+      "Confucio",
+      "El Buda",
+      "Mahoma",
+      "Laozi"
+    ],
+    "c": 73,
+    "explEn": "The Tao Te Ching is traditionally credited to a sage named Laozi, though scholars debate his historicity.",
+    "explEs": "El Tao Te Ching tradicionalmente se atribuye a un sabio llamado Laozi, aunque los eruditos debaten su historicidad."
+  },
+  {
+    "textEn": "9. Wu wei, the central practical teaching of philosophical Taoism, is best translated:",
+    "textEs": "9. El wu wei, la enseñanza práctica central del taoísmo filosófico, se traduce mejor como:",
+    "optionsEn": [
+      "Effortless action in harmony with the Tao",
+      "Ritual propriety",
+      "Ancestor veneration",
+      "Filial piety"
+    ],
+    "optionsEs": [
+      "Acción sin esfuerzo en armonía con el Tao",
+      "Propiedad ritual",
+      "La veneración de ancestros",
+      "Piedad filial"
+    ],
+    "c": 77,
+    "explEn": "Wu wei, usually translated 'non-action' or 'effortless action,' means acting in harmony with the natural flow of the Tao rather than forcing outcomes.",
+    "explEs": "El wu wei, usualmente traducido 'no-acción' o 'acción sin esfuerzo,' significa actuar en armonía con el flujo natural del Tao en lugar de forzar resultados."
+  },
+  {
+    "textEn": "10. Taoist texts frequently use which image as the model for wu wei?",
+    "textEs": "10. ¿Qué imagen usan frecuentemente los textos taoístas como modelo del wu wei?",
+    "optionsEn": [
+      "Fire",
+      "Water overcoming stone through patient yielding",
+      "A soaring eagle",
+      "A burning candle"
+    ],
+    "optionsEs": [
+      "El fuego",
+      "El agua que vence a la piedra a través de la cesión paciente",
+      "Un águila que se eleva",
+      "Una vela encendida"
+    ],
+    "c": 85,
+    "explEn": "Taoist texts frequently use the image of water, which overcomes the hardest stone not through force but through patient yielding, as the model for wu wei.",
+    "explEs": "Los textos taoístas frecuentemente usan la imagen del agua, que vence a la piedra más dura no a través de la fuerza sino a través de la cesión paciente, como modelo del wu wei."
+  },
+  {
+    "textEn": "11. Yin and yang represent:",
+    "textEs": "11. El yin y el yang representan:",
+    "optionsEn": [
+      "Two rival Chinese gods",
+      "The two founders of Confucianism",
+      "Complementary, interdependent opposite forces in dynamic balance",
+      "A form of ancestor tablet"
+    ],
+    "optionsEs": [
+      "Dos dioses chinos rivales",
+      "Los dos fundadores del confucianismo",
+      "Fuerzas opuestas complementarias e interdependientes en equilibrio dinámico",
+      "Una forma de tablilla ancestral"
+    ],
+    "c": 93,
+    "explEn": "Yin and yang are complementary, interdependent opposite forces whose dynamic balance is understood to constitute the natural harmony of the universe.",
+    "explEs": "El yin y el yang son fuerzas opuestas complementarias e interdependientes cuyo equilibrio dinámico se entiende que constituye la armonía natural del universo."
+  },
+  {
+    "textEn": "12. Chinese folk religion's ancestor veneration is rooted in the conviction that:",
+    "textEs": "12. La veneración de ancestros de la religión popular china está arraigada en la convicción de que:",
+    "optionsEn": [
+      "The dead cease to exist entirely",
+      "Only Buddhist monks can honor the dead",
+      "Ancestors become Taoist immortals automatically",
+      "The dead continue to exist and remain bound to living descendants"
+    ],
+    "optionsEs": [
+      "Los muertos dejan de existir por completo",
+      "Solo los monjes budistas pueden honrar a los muertos",
+      "Los ancestros se convierten automáticamente en inmortales taoístas",
+      "Los muertos continúan existiendo y permanecen atados a los descendientes vivos"
+    ],
+    "c": 101,
+    "explEn": "Ancestor veneration is rooted in the conviction that the dead continue to exist in some form and remain bound to their living descendants by mutual obligation.",
+    "explEs": "La veneración de ancestros está arraigada en la convicción de que los muertos continúan existiendo en alguna forma y permanecen atados a sus descendientes vivos por obligación mutua."
+  },
+  {
+    "textEn": "13. The annual festival when Chinese families visit and tend ancestral graves is called:",
+    "textEs": "13. El festival anual cuando las familias chinas visitan y cuidan las tumbas ancestrales se llama:",
+    "optionsEn": [
+      "Qingming",
+      "Ramadan",
+      "Yom Kippur",
+      "Vesak"
+    ],
+    "optionsEs": [
+      "Qingming",
+      "Ramadán",
+      "Iom Kipur",
+      "Vesak"
+    ],
+    "c": 105,
+    "explEn": "The Qingming festival is when Chinese families traditionally visit and tend ancestral graves.",
+    "explEs": "El festival de Qingming es cuando las familias chinas tradicionalmente visitan y cuidan las tumbas ancestrales."
+  },
+  {
+    "textEn": "14. Gui, particularly 'hungry ghosts' in Chinese folk religion, are believed to be:",
+    "textEs": "14. Los gui, particularmente los 'fantasmas hambrientos' en la religión popular china, se cree que son:",
+    "optionsEn": [
+      "Benevolent nature spirits only",
+      "Spirits wandering without descendants to honor them or proper burial",
+      "Deified emperors",
+      "A Taoist term for yin and yang"
+    ],
+    "optionsEs": [
+      "Solo espíritus benevolentes de la naturaleza",
+      "Espíritus que vagan sin descendientes que los honren o entierro apropiado",
+      "Emperadores deificados",
+      "Un término taoísta para el yin y el yang"
+    ],
+    "c": 113,
+    "explEn": "Gui, particularly hungry ghosts, are believed to wander without descendants to honor them or proper burial rites, appeased during the Hungry Ghost Festival.",
+    "explEs": "Los gui, particularmente los fantasmas hambrientos, se cree que vagan sin descendientes que los honren o ritos de entierro apropiados, apaciguados durante el Festival de los Fantasmas Hambrientos."
+  },
+  {
+    "textEn": "15. Feng shui draws on both Taoist cosmology and folk belief regarding:",
+    "textEs": "15. El feng shui se basa tanto en la cosmología taoísta como en la creencia popular respecto a:",
+    "optionsEn": [
+      "The correct order of Confucian classics",
+      "The historical dates of Buddhist festivals",
+      "How placement of the living and dead affects fortune and family well-being",
+      "The structure of the imperial examination"
+    ],
+    "optionsEs": [
+      "El orden correcto de los clásicos confucianos",
+      "Las fechas históricas de los festivales budistas",
+      "Cómo la ubicación de los vivos y los muertos afecta la fortuna y el bienestar familiar",
+      "La estructura del examen imperial"
+    ],
+    "c": 121,
+    "explEn": "Feng shui draws on Taoist cosmology and folk belief about how the placement of the living and the dead affects fortune and family well-being.",
+    "explEs": "El feng shui se basa en la cosmología taoísta y la creencia popular acerca de cómo la ubicación de los vivos y los muertos afecta la fortuna y el bienestar familiar."
+  },
+  {
+    "textEn": "16. According to this unit, Exodus 20:12 and Ephesians 6:1 provide genuine common ground with which Confucian value?",
+    "textEs": "16. Según esta unidad, ¿con qué valor confuciano proporcionan Éxodo 20:12 y Efesios 6:1 un terreno común genuino?",
+    "optionsEn": [
+      "Wu wei",
+      "Yin and yang balance",
+      "Feng shui placement",
+      "Filial piety, honoring parents"
+    ],
+    "optionsEs": [
+      "El wu wei",
+      "El equilibrio de yin y yang",
+      "La ubicación del feng shui",
+      "La piedad filial, honrar a los padres"
+    ],
+    "c": 129,
+    "explEn": "Exodus 20:12's command to honor father and mother and Ephesians 6:1's instruction for children to obey parents affirm the deep respect for parents Confucian filial piety cultivates.",
+    "explEs": "El mandamiento de Éxodo 20:12 de honrar a padre y madre y la instrucción de Efesios 6:1 para que los hijos obedezcan a sus padres afirman el profundo respeto por los padres que cultiva la piedad filial confuciana."
+  },
+  {
+    "textEn": "17. According to this unit, the difficult pastoral line to draw is between:",
+    "textEs": "17. Según esta unidad, la difícil línea pastoral a trazar es entre:",
+    "optionsEn": [
+      "Honoring the dead as family members and worshiping them as objects of religious devotion",
+      "Honoring ancestors and dishonoring them entirely",
+      "Confucianism and Taoism generally",
+      "Buddhism and Chinese folk religion"
+    ],
+    "optionsEs": [
+      "Honrar a los muertos como miembros familiares y adorarlos como objetos de devoción religiosa",
+      "Honrar a los ancestros y deshonrarlos por completo",
+      "El confucianismo y el taoísmo en general",
+      "El budismo y la religión popular china"
+    ],
+    "c": 133,
+    "explEn": "The careful pastoral distinction is between honoring the dead as beloved family members and worshiping them as objects of religious devotion through prayer and sacrifice.",
+    "explEs": "La cuidadosa distinción pastoral es entre honrar a los muertos como miembros familiares amados y adorarlos como objetos de devoción religiosa mediante oración y sacrificio."
+  },
+  {
+    "textEn": "18. According to John 1:1, 3, cited in this unit, the Word (Logos) is presented in contrast to the impersonal Tao as:",
+    "textEs": "18. Según Juan 1:1, 3, citado en esta unidad, el Verbo (Logos) se presenta en contraste con el Tao impersonal como:",
+    "optionsEn": [
+      "An impersonal pattern to align with",
+      "A Person present at creation, through whom all things were made",
+      "Identical to the Confucian junzi",
+      "A minor deity among many"
+    ],
+    "optionsEs": [
+      "Un patrón impersonal con el cual alinearse",
+      "Una Persona presente en la creación, por medio de quien todas las cosas fueron hechas",
+      "Idéntico al junzi confuciano",
+      "Una deidad menor entre muchas"
+    ],
+    "c": 141,
+    "explEn": "John 1:1, 3 presents the Word as a Person present at creation, through whom all things were made, unlike the impersonal Tao that is merely a pattern to align with.",
+    "explEs": "Juan 1:1, 3 presenta al Verbo como una Persona presente en la creación, por medio de quien todas las cosas fueron hechas, a diferencia del Tao impersonal que es meramente un patrón con el cual alinearse."
+  },
+  {
+    "textEn": "19. The Chinese Rites controversy in Roman Catholic missionary history arose over disagreement about:",
+    "textEs": "19. La controversia de los Ritos Chinos en la historia misionera católica romana surgió por el desacuerdo acerca de:",
+    "optionsEn": [
+      "Whether Confucius was divine",
+      "The correct date of Easter",
+      "Whether ancestral rites were civil commemoration or religious worship",
+      "Whether Taoism should be studied at all"
+    ],
+    "optionsEs": [
+      "Si Confucio era divino",
+      "La fecha correcta de la Pascua",
+      "Si los ritos ancestrales eran conmemoración civil o adoración religiosa",
+      "Si el taoísmo debía estudiarse en absoluto"
+    ],
+    "c": 149,
+    "explEn": "The Chinese Rites controversy concerned whether ancestral rites were merely civil commemoration or religious worship, remaining unresolved for well over a century.",
+    "explEs": "La controversia de los Ritos Chinos concernía si los ritos ancestrales eran meramente conmemoración civil o adoración religiosa, sin resolverse durante bien más de un siglo."
+  },
+  {
+    "textEn": "20. According to this unit's final section, a pastor helping a Chinese convert should aim to help him express filial love:",
+    "textEs": "20. Según la sección final de esta unidad, un pastor que ayuda a un converso chino debe buscar ayudarlo a expresar el amor filial:",
+    "optionsEn": [
+      "By abandoning all family customs entirely",
+      "By continuing all ancestral worship unchanged",
+      "Only through Confucian ritual propriety",
+      "Without the specific elements of worship that belong to God alone"
+    ],
+    "optionsEs": [
+      "Abandonando por completo todas las costumbres familiares",
+      "Continuando toda la adoración ancestral sin cambios",
+      "Solo a través de la propiedad ritual confuciana",
+      "Sin los elementos específicos de adoración que pertenecen solo a Dios"
+    ],
+    "c": 157,
+    "explEn": "A pastor should help a new believer find ways to express the same filial love Scripture commands without the specific elements of worship, which belong to God alone.",
+    "explEs": "Un pastor debe ayudar a un nuevo creyente a encontrar formas de expresar el mismo amor filial que la Escritura ordena sin los elementos específicos de adoración, que pertenecen solo a Dios."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Explain the concept of san jiao and why traditional Chinese religious culture differs from most religions studied earlier in this course regarding exclusive adherence.",
+    "textEs": "21. Explique el concepto de san jiao y por qué la cultura religiosa tradicional china difiere de la mayoría de las religiones estudiadas anteriormente en este curso respecto a la adhesión exclusiva.",
+    "kw_en": ["san jiao", "three teachings", "blend", "confucianism", "taoism", "buddhism", "exclusive", "contradiction"],
+    "kw_es": ["san jiao", "tres enseñanzas", "mezcl", "confucianismo", "taoísmo", "budismo", "exclusiv", "contradicción"],
+    "modelEn": "San jiao, 'the three teachings,' names the traditional Chinese blend of Confucianism, Taoism, and Buddhism, captured in the saying that the three teachings are one. Unlike Judaism, Islam, and Buddhism studied earlier, which generally expect exclusive adherence, traditional Chinese religious culture has comfortably blended these three streams for over two thousand years, with a person consulting Confucian ethics, practicing Taoist disciplines, and venerating ancestors all without any sense of contradiction.",
+    "modelEs": "San jiao, 'las tres enseñanzas,' nombra la mezcla tradicional china de confucianismo, taoísmo y budismo, capturada en el dicho de que las tres enseñanzas son una. A diferencia del judaísmo, el islam y el budismo estudiados anteriormente, que generalmente esperan adhesión exclusiva, la cultura religiosa tradicional china ha mezclado cómodamente estas tres corrientes durante más de dos mil años, con una persona consultando la ética confuciana, practicando disciplinas taoístas, y venerando a los ancestros todo sin ningún sentido de contradicción."
+  },
+  {
+    "textEn": "22. Describe Confucius's own self-understanding and explain why his response about serving the spirits is described as 'characteristically this-worldly.'",
+    "textEs": "22. Describa el propio entendimiento de sí mismo de Confucio y explique por qué su respuesta acerca de servir a los espíritus se describe como 'característicamente terrenal.'",
+    "kw_en": ["transmitter", "innovator", "sage-kings", "spirits", "serve men", "ethics", "metaphysical", "present"],
+    "kw_es": ["transmisor", "innovador", "reyes sabios", "espíritus", "servir hombres", "ética", "metafísic", "presente"],
+    "modelEn": "Confucius understood himself as a transmitter rather than an innovator, seeking to restore the wisdom of earlier Chinese sage-kings. When asked about serving spirits, he responded, 'You are not yet able to serve men, how can you serve the spirits?' This is called characteristically this-worldly because it redirects attention from metaphysical or spiritual questions toward present moral duty toward other people, reflecting Confucianism's overwhelming focus on ethics and social relationships rather than the afterlife or ultimate reality.",
+    "modelEs": "Confucio se entendía a sí mismo como transmisor más que innovador, buscando restaurar la sabiduría de reyes sabios chinos anteriores. Cuando se le preguntó acerca de servir a los espíritus, respondió: 'Todavía no eres capaz de servir a los hombres, ¿cómo puedes servir a los espíritus?' Esto se llama característicamente terrenal porque redirige la atención de cuestiones metafísicas o espirituales hacia el deber moral presente hacia otras personas, reflejando el enfoque abrumador del confucianismo en la ética y las relaciones sociales más que en la vida después de la muerte o la realidad última."
+  },
+  {
+    "textEn": "23. Define ren, li, and xiao, and explain how they relate to the Confucian Five Relationships.",
+    "textEs": "23. Defina ren, li y xiao, y explique cómo se relacionan con las Cinco Relaciones confucianas.",
+    "kw_en": ["ren", "li", "xiao", "benevolence", "ritual propriety", "filial piety", "five relationships", "foundational"],
+    "kw_es": ["ren", "li", "xiao", "benevolencia", "propiedad ritual", "piedad filial", "cinco relaciones", "fundamental"],
+    "modelEn": "Ren is benevolence or humaneness, the root virtue of care for others. Li is ritual propriety, the fabric of proper behavior that expresses inward virtue. Xiao is filial piety, the obligation between father and son. These virtues structure the Five Relationships (ruler-subject, father-son, husband-wife, elder-younger brother, friend-friend), with xiao regarded as the foundational relationship from which the other four take their pattern.",
+    "modelEs": "El ren es benevolencia o humanidad, la virtud raíz del cuidado por otros. El li es propiedad ritual, el tejido del comportamiento apropiado que expresa la virtud interior. El xiao es piedad filial, la obligación entre padre e hijo. Estas virtudes estructuran las Cinco Relaciones (gobernante-súbdito, padre-hijo, esposo-esposa, hermano mayor-menor, amigo-amigo), con el xiao considerado la relación fundamental de la cual las otras cuatro toman su patrón."
+  },
+  {
+    "textEn": "24. Explain wu wei and how it reflects a different orientation from Confucianism, using the water imagery this unit describes.",
+    "textEs": "24. Explique el wu wei y cómo refleja una orientación diferente del confucianismo, usando la imagen del agua que describe esta unidad.",
+    "kw_en": ["wu wei", "effortless", "harmony", "forcing", "water", "yield", "stone", "confucianism"],
+    "kw_es": ["wu wei", "sin esfuerzo", "armonía", "forzar", "agua", "ced", "piedra", "confucianismo"],
+    "modelEn": "Wu wei, effortless action, means acting in harmony with the natural flow of the Tao rather than forcing outcomes through striving, ambition, or rigid rule-following, the very things Confucianism prized. Taoist texts use water, which overcomes the hardest stone not through force but through patient yielding, as the model, reflecting Taoism's orientation toward aligning with nature's deeper pattern rather than Confucianism's orientation toward structuring human society through active moral effort.",
+    "modelEs": "El wu wei, la acción sin esfuerzo, significa actuar en armonía con el flujo natural del Tao en lugar de forzar resultados a través de la lucha, la ambición, o el seguimiento rígido de reglas, las mismas cosas que el confucianismo apreciaba. Los textos taoístas usan el agua, que vence a la piedra más dura no a través de la fuerza sino a través de la cesión paciente, como modelo, reflejando la orientación del taoísmo hacia alinearse con el patrón más profundo de la naturaleza en lugar de la orientación del confucianismo hacia estructurar la sociedad humana a través del esfuerzo moral activo."
+  },
+  {
+    "textEn": "25. Describe Chinese ancestor veneration and how Confucian filial piety and folk religion reinforced one another regarding this practice.",
+    "textEs": "25. Describa la veneración de ancestros china y cómo la piedad filial confuciana y la religión popular se reforzaron mutuamente respecto a esta práctica.",
+    "kw_en": ["ancestral tablets", "incense", "qingming", "obligation", "descendants", "reinforce", "neglect", "moral failure"],
+    "kw_es": ["tablillas", "incienso", "qingming", "obligación", "descendientes", "refuerz", "descuid", "falla moral"],
+    "modelEn": "Chinese families maintained ancestral tablets inscribed with deceased family members' names, offering incense, food, and prayer, especially during the Qingming festival. Confucian filial piety and folk ancestor veneration reinforced each other closely: the obligation owed living parents was understood to extend, modified, to parents after death, and neglecting these observances was regarded as a serious moral failure, not merely a religious one.",
+    "modelEs": "Las familias chinas mantenían tablillas ancestrales inscritas con los nombres de los familiares fallecidos, ofreciendo incienso, comida y oración, especialmente durante el festival de Qingming. La piedad filial confuciana y la veneración popular de los ancestros se reforzaban mutuamente de cerca: la obligación debida a los padres vivos se entendía que se extendía, modificada, a los padres después de la muerte, y descuidar estas observancias se consideraba una falla moral seria, no meramente religiosa."
+  },
+  {
+    "textEn": "26. Why does this unit say that for many Chinese families, the entire complex of ancestor veneration, feng shui, and folk deities 'functions as an integrated whole, not a set of separate religious choices'? What pastoral consequence follows?",
+    "textEs": "26. ¿Por qué dice esta unidad que para muchas familias chinas, todo el complejo de veneración de ancestros, feng shui y deidades populares 'funciona como un todo integrado, no un conjunto de elecciones religiosas separadas'? ¿Qué consecuencia pastoral se deriva?",
+    "kw_en": ["integrated", "whole", "disruptive", "conversion", "encompassing", "separate", "denomination", "family"],
+    "kw_es": ["integrado", "todo", "disruptiv", "conversión", "totalizador", "separad", "denominación", "familia"],
+    "modelEn": "This unit says the practice functions as an integrated whole because a family's Confucian ethics, Taoist practice, folk deity worship, and Buddhist devotion are not experienced as separate religious choices but as one coherent way of life. The pastoral consequence is that conversion to Christianity has historically been a much more disruptive, all-encompassing decision for Chinese families than, for example, conversion between Protestant denominations, since it touches the entire integrated system at once rather than a single isolated religious choice.",
+    "modelEs": "Esta unidad dice que la práctica funciona como un todo integrado porque la ética confuciana, la práctica taoísta, la adoración de deidades populares y la devoción budista de una familia no se experimentan como elecciones religiosas separadas sino como una forma de vida coherente. La consecuencia pastoral es que la conversión al cristianismo ha sido históricamente una decisión mucho más disruptiva y totalizadora para las familias chinas que, por ejemplo, la conversión entre denominaciones protestantes, ya que toca todo el sistema integrado a la vez en lugar de una sola elección religiosa aislada."
+  },
+  {
+    "textEn": "27. Using Exodus 20:12 and Ephesians 6:1, explain the genuine common ground between Confucian filial piety and Scripture, and where a pastor must still draw a careful line.",
+    "textEs": "27. Usando Éxodo 20:12 y Efesios 6:1, explique el terreno común genuino entre la piedad filial confuciana y la Escritura, y dónde un pastor todavía debe trazar una línea cuidadosa.",
+    "kw_en": ["honor", "parents", "commandment", "obey", "right", "worship", "prayer", "distinguish"],
+    "kw_es": ["honra", "padres", "mandamiento", "obedec", "justo", "adoración", "oración", "distingu"],
+    "modelEn": "Exodus 20:12 commands honoring father and mother, and Ephesians 6:1 says children should obey parents 'for this is right,' affirming the deep respect Confucian ethics has cultivated for millennia. A pastor should not ask a convert to abandon honoring ancestors as people, but must still distinguish between honoring the dead as family members and worshiping them through prayer and sacrifice intended to secure their favor, since the latter crosses into worship owed to God alone.",
+    "modelEs": "Éxodo 20:12 ordena honrar a padre y madre, y Efesios 6:1 dice que los hijos deben obedecer a los padres 'porque esto es justo,' afirmando el profundo respeto que la ética confuciana ha cultivado durante milenios. Un pastor no debe pedirle a un converso que abandone honrar a los ancestros como personas, pero todavía debe distinguir entre honrar a los muertos como miembros familiares y adorarlos a través de oración y sacrificio destinados a asegurar su favor, ya que esto último cruza hacia la adoración debida solo a Dios."
+  },
+  {
+    "textEn": "28. Using John 1:1, 3, explain what the gospel's picture of the Word (Logos) offers that the impersonal Tao cannot.",
+    "textEs": "28. Usando Juan 1:1, 3, explique qué ofrece el cuadro evangélico del Verbo (Logos) que el Tao impersonal no puede ofrecer.",
+    "kw_en": ["word", "logos", "person", "creation", "impersonal", "pattern", "speak", "known"],
+    "kw_es": ["verbo", "logos", "persona", "creación", "impersonal", "patrón", "habla", "conocido"],
+    "modelEn": "This unit affirms partial insight in the Tao's conviction that reality has a coherent underlying order worth aligning with, echoing Romans 1:20 and Psalm 19. But John 1:1, 3 proclaims what wu wei's impersonal Way cannot offer: the Word was a Person present at creation, through whom all things were made, who speaks and acts decisively in history, and who, unlike an impersonal natural pattern, can be known, trusted, and loved.",
+    "modelEs": "Esta unidad afirma una intuición parcial en la convicción del Tao de que la realidad tiene un orden subyacente coherente digno de ser alineado, haciendo eco de Romanos 1:20 y el Salmo 19. Pero Juan 1:1, 3 proclama lo que el Camino impersonal del wu wei no puede ofrecer: el Verbo fue una Persona presente en la creación, por medio de quien todas las cosas fueron hechas, que habla y actúa decisivamente en la historia, y que, a diferencia de un patrón natural impersonal, puede ser conocido, confiado y amado."
+  },
+  {
+    "textEn": "29. Describe the two opposite pastoral failures this unit identifies in missionary history regarding ancestor veneration, including the Chinese Rites controversy.",
+    "textEs": "29. Describa los dos fracasos pastorales opuestos que identifica esta unidad en la historia misionera respecto a la veneración de ancestros, incluyendo la controversia de los Ritos Chinos.",
+    "kw_en": ["indiscriminate", "abandon", "alienate", "blur", "civil commemoration", "chinese rites", "unresolved", "century"],
+    "kw_es": ["indiscriminad", "abandon", "alien", "difumin", "conmemoración civil", "ritos chinos", "sin resolver", "siglo"],
+    "modelEn": "Some missionaries demanded converts abandon every ancestral custom indiscriminately, even non-worshipful ones, needlessly alienating converts from their families. Others blurred the line too far the other way, permitting continued ancestral worship under the theory it was merely civil commemoration, a controversy known as the Chinese Rites controversy in Roman Catholic missionary history, unresolved for well over a century.",
+    "modelEs": "Algunos misioneros exigían que los conversos abandonaran indiscriminadamente toda costumbre ancestral, incluso las no devocionales, alienando innecesariamente a los conversos de sus familias. Otros difuminaron la línea demasiado en la dirección opuesta, permitiendo que continuara la adoración ancestral bajo la teoría de que era meramente conmemoración civil, una controversia conocida como la controversia de los Ritos Chinos en la historia misionera católica romana, sin resolver durante bien más de un siglo."
+  },
+  {
+    "textEn": "30. Synthesize this unit: how can a pastor help a Chinese convert receive the gospel as 'the truest fulfillment' of filial loyalty rather than an attack on it?",
+    "textEs": "30. Sintetice esta unidad: ¿cómo puede un pastor ayudar a un converso chino a recibir el evangelio como 'su más verdadero cumplimiento' de la lealtad filial en lugar de un ataque a ella?",
+    "kw_en": ["affirm", "honoring", "identify", "distinguish", "worship alone", "fulfillment", "same god", "commanded"],
+    "kw_es": ["afirm", "honra", "identific", "distingu", "adoración sola", "cumplimiento", "mismo dios", "ordenó"],
+    "modelEn": "A pastor can affirm without hesitation a believer's continued honoring of parents and grandparents, visiting graves, and remembering family history, while helping the believer identify clearly which specific practices function as worship — prayer to ancestors, offerings for blessing, incense as devotion — and finding ways to express the same filial love without those elements, which belong to God alone. This allows the gospel to be received as the fulfillment of filial loyalty, since the same God who commanded honoring father and mother is the God to whom worship is finally due.",
+    "modelEs": "Un pastor puede afirmar sin vacilación la continua honra que un creyente da a padres y abuelos, la visita a tumbas, y el recuerdo de la historia familiar, mientras ayuda al creyente a identificar claramente cuáles prácticas específicas funcionan como adoración — la oración a los ancestros, las ofrendas para bendición, el incienso como devoción — y encontrando formas de expresar el mismo amor filial sin esos elementos, que pertenecen solo a Dios. Esto permite que el evangelio sea recibido como el cumplimiento de la lealtad filial, ya que el mismo Dios que ordenó honrar a padre y madre es el Dios a quien finalmente se debe la adoración."
+  }
+];
+
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit6 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_wr_u6_mc_passed';
+const SA_LOCK_KEY = 'cts_wr_u6_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_wr_u6_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function kwHit(ans, kw) {
+  kw = (kw||'').toLowerCase(); if (!kw) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (kw.length <= 4) ? '(?:^|[^'+WC+'])'+esc+'(?!['+WC+'])' : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); } catch(e) { return ans.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read the student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(ans, kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 7 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first." : "Por favor regístrese primero.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'certificate';
+    let total, score, required, mcGatePass, saGatePass, correctKW = 0;
+    const mcPct2 = correctMC;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW; required = null;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit6 = true;
+                localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_wr_u6_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit6 = true;
+        localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_wr_u6_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_wr_u6_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        renderQuestions();
+    };
+});
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 6 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSWRReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

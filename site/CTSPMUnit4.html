@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pastoral Ministries — Unit 4: Leading the People in Worship</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-warning { background: #fae8e8; border: 1px solid #efc2c2; border-radius: 12px; padding: 15px; margin-bottom: 20px; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-warning { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Unit 3</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 5 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Pastoral Ministries — Unit 4: Leading the People in Worship</span><span class="lang-es">📖 Ministerios Pastorales — Unidad 4: Guiando al Pueblo en la Adoración</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"God is Spirit, and those who worship Him must worship in spirit and truth." — John 4:24 (NKJV)</span><span class="lang-es">"Dios es Espíritu; y los que le adoran, en espíritu y en verdad es necesario que le adoren." — Juan 4:24 (RVG)</span></p>
+</div>
+
+<div id="regWarning" class="reg-warning" style="display:none;">
+    <span class="lang-en">⚠️ You have not yet registered. Please <a href="CTSPMUnit1.html" style="color:#5b3a1f;">return to Unit 1</a> to register before continuing.</span>
+    <span class="lang-es">⚠️ Aún no se ha registrado. Por favor <a href="CTSPMUnit1.html" style="color:#5b3a1f;">regrese a la Unidad 1</a> para registrarse antes de continuar.</span>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>Pastoral ministry has many faces. The pastor preaches, counsels, leads, equips, and shepherds. But there is one act of pastoral ministry that gathers all the others into a single moment — the Sunday service. When the people of God assemble to worship, the pastor stands at the convergence of everything he is. He is a preacher, but more than a preacher. He is a leader, but more than a manager. He is a guide leading the people into the presence of the One who has called them all together. The pastor who does not understand worship will eventually mismanage every other part of his ministry. The pastor who understands worship rightly can build a church that endures.</p>
+
+        <p>This unit examines the pastor as worship leader. We will define worship biblically, examine the pastor's role in leading public worship, walk through the components of a faithful service, study the two ordinances of baptism and the Lord's Supper, and identify the common errors that drain the life out of a congregation's worship.</p>
+
+        <h2>I. What Is Worship?</h2>
+        <p>Jesus gave us the most concise definition of worship in His conversation with the Samaritan woman: <em>"God is Spirit, and those who worship Him must worship in spirit and truth"</em> (John 4:24). Two pillars. Worship in spirit. Worship in truth. Pull either pillar and the whole thing collapses.</p>
+
+        <p>To worship in <em>spirit</em> means worship from the inside out, from the regenerated heart, by the Holy Spirit. It is not external performance. It is not ceremony. It is not mood. It is the inner man, made alive by God, responding to God. Hannah came to the temple of the LORD with a soul so heavy she could not even speak — <em>"she spoke in her heart, only her lips moved, but her voice was not heard. Therefore Eli thought she was drunk"</em> (1 Samuel 1:13). The high priest of Israel could not tell the difference between drunkenness and Spirit-filled worship. The same thing happened on the day of Pentecost. The disciples were filled with the Holy Spirit, began to praise God, and the bystanders said, <em>"They are full of new wine"</em> (Acts 2:13). Paul put the two side by side: <em>"Do not be drunk with wine, in which is dissipation; but be filled with the Spirit, speaking to one another in psalms and hymns and spiritual songs, singing and making melody in your heart to the Lord"</em> (Ephesians 5:18–19). Both produce surrender. Both produce abandon. But one comes from a bottle and the other comes from the throne.</p>
+
+        <p>To worship in <em>truth</em> means worship grounded in God's Word and centered on Jesus Christ. Sincerity is not enough. A man once said, <em>"It doesn't matter what you believe, as long as you're sincere."</em> His friend replied, <em>"If you drink poison thinking it's medicine, your sincerity won't save you."</em> Sincerity without truth is fatal. The pastor who builds worship on emotion alone, on tradition alone, on cultural preferences alone, has built a worship without truth. The Word of God must shape every element — the songs sung, the prayers prayed, the Scriptures read, the sermon preached, the ordinances administered. If the Word does not govern the worship, the worship has no claim on the God of the Word.</p>
+
+        <p>There is one more story that says it all. Paul and Silas had been beaten with rods and thrown into the inner prison at Philippi, their feet fastened in stocks, their backs cut to ribbons. <em>"But at midnight Paul and Silas were praying and singing hymns to God, and the prisoners were listening to them"</em> (Acts 16:25). No instruments. No platform. No worship team. Two bleeding men in stocks, in the dark, at midnight — and the prison walls shook. That is worship in spirit and truth. The pastor who leads people into that kind of worship has done the most pastoral thing he will do all week.</p>
+
+        <h2>II. The Pastor as Worship Leader</h2>
+        <p>The pastor is not necessarily the song leader. He is not necessarily the musician. But he is always the <em>worship</em> leader. The whole atmosphere of the service rises or falls with him. If he comes into the sanctuary half-prepared, half-prayed-up, distracted by the morning's frustrations, the congregation senses it within five minutes. If he comes into the sanctuary with his soul on fire and his mind on Christ, the congregation senses that too. Long before the pastor opens his mouth, the people are reading him.</p>
+
+        <p>A missionary once told of an elderly widow in Africa who came to church long before the service began. She would sit quietly in the corner, whispering prayers with her eyes closed. She owned almost nothing. She had no voice for singing. Yet her face glowed with peace. When someone asked why she came so early, she said, <em>"I just like to spend time loving Jesus before everyone else arrives."</em> That is the spirit a pastor should bring to every Sunday. The pastor who arrives late, walks straight to the platform, and shuffles his sermon notes during the opening prayer cannot lead his people in worship — because he himself has not yet entered into worship.</p>
+
+        <p>The pastor's role as worship leader is therefore first internal and then external. <em>Internally</em>, he prepares his own heart through prayer, Scripture, and quiet reflection. He takes the Saturday night and Sunday morning seriously — they are not just preparation for preaching, they are preparation for <em>being there</em> before God. <em>Externally</em>, he plans, organizes, and shepherds the service. He decides the order of worship, picks the Scriptures, frames the call to worship, and ensures that every element points to Christ. The worship service is the most theologically significant hour in the life of a congregation. It deserves the pastor's best preparation, not his leftovers.</p>
+
+        <h2>III. The Order of Worship</h2>
+        <p>There is no biblical mandate for one specific order of worship. Different traditions arrange the elements differently, and that is their freedom. But every faithful order will contain, in some form, the following essentials.</p>
+
+        <p>A <em>call to worship</em> opens the service. The congregation is summoned out of the world and into the presence of God. A Scripture is read. A psalm is recited. A song is sung. The call to worship reminds the people why they are there.</p>
+
+        <p><em>Songs of praise and adoration</em> lift the heart. Music has been God's gift to His people from the days of Moses through the Psalms through the apostles. Paul commanded the Ephesians to be <em>"speaking to one another in psalms and hymns and spiritual songs"</em> (Ephesians 5:19). The pastor must be careful here. Songs are not filler. They are not warm-up. They are themselves theology set to melody, and what the congregation sings on Sunday becomes what they believe by Tuesday. Choose songs that are biblically rich, Christ-centered, and singable.</p>
+
+        <p><em>Scripture reading</em> should be a substantial part of every service. Paul wrote to Timothy, <em>"Till I come, give attention to reading"</em> (1 Timothy 4:13). The Word read aloud has its own authority. A congregation that hears only the pastor's voice and never hears Scripture read at length grows shallow.</p>
+
+        <p><em>Prayer</em> punctuates the service at multiple points. The pastoral prayer, in particular, is one of the great gifts a pastor gives his people. He carries the burdens of the congregation before the throne — the sick, the bereaved, the wandering, the persecuted brethren around the world. A well-prayed pastoral prayer can do as much as a sermon to nourish a flock.</p>
+
+        <p><em>The sermon</em> is the central act of the service. Not because the preacher is more important than the singers or the congregation, but because in the preaching event the Word of God is opened, applied, and pressed home to the conscience. Everything else in the service prepares the heart to receive the Word, and everything afterward responds to the Word.</p>
+
+        <p><em>Tithes and offerings</em> are part of worship, not an interruption to it. Giving is an act of surrender — <em>"present your bodies a living sacrifice"</em> (Romans 12:1) — and the pastor should teach his people that the offering plate is one of the most personal acts of worship in the whole service.</p>
+
+        <p><em>The benediction</em> sends the people back into the world with a blessing from God. The benediction is not a closing announcement. It is the pastor speaking, on God's authority, the favor of God upon His people for the week to come.</p>
+
+        <h2>IV. The Ordinance of Baptism</h2>
+        <p>The Lord Jesus left His church two ordinances. Both are commanded. Both are pictures of the gospel. The first is baptism. <em>"Go therefore and make disciples of all the nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit"</em> (Matthew 28:19).</p>
+
+        <p>Baptism is for believers. It is the public testimony of someone who has personally trusted Christ as Savior. Romans 6:3–4 teaches the meaning: <em>"Do you not know that as many of us as were baptized into Christ Jesus were baptized into His death? Therefore we were buried with Him through baptism into death, that just as Christ was raised from the dead by the glory of the Father, even so we also should walk in newness of life."</em> The water is a picture. Going under the water represents death to the old life. Coming up out of the water represents resurrection to a new life in Christ. The mode that captures this picture most fully is immersion — burial and rising — and this is the New Testament pattern.</p>
+
+        <p>Baptism does not save. Salvation is by grace through faith — <em>"by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast"</em> (Ephesians 2:8–9). Baptism is the outward declaration of the inward salvation that has already taken place. The Ethiopian eunuch in Acts 8 believed first, and <em>then</em> he was baptized. The Philippian jailer in Acts 16 believed first, and <em>then</em> his whole household was baptized. The order is always the same in the New Testament: faith, then baptism.</p>
+
+        <p>The pastor administering baptism should do so with reverence and with clear teaching. The candidate publicly confesses Christ. The pastor declares the meaning of the ordinance. The water is applied in the name of the Father, the Son, and the Holy Spirit. The congregation witnesses. And heaven rejoices.</p>
+
+        <h2>V. The Ordinance of the Lord's Supper</h2>
+        <p>The second ordinance is the Lord's Supper. On the night He was betrayed, Jesus took bread and wine, gave them to His disciples, and said, <em>"This do in remembrance of Me"</em> (Luke 22:19). Paul repeated the institution to the Corinthian church and added, <em>"For as often as you eat this bread and drink this cup, you proclaim the Lord's death till He comes"</em> (1 Corinthians 11:26).</p>
+
+        <p>There are several main views of what happens at the Lord's Supper. <em>Transubstantiation</em>, taught by the Roman Catholic Church, holds that the bread and wine literally become the body and blood of Christ. <em>Consubstantiation</em>, taught by some Lutherans, holds that Christ is physically present in, with, and under the elements. The Reformed tradition, associated with John Calvin, teaches a spiritual presence view: Christ is not physically present in the bread and the cup, but through the Holy Spirit believers are truly and spiritually nourished by Christ as they partake in faith, a real communion distinct from mere remembrance. The historic Baptist position — and the position taught here — is the <em>memorial view</em>: the bread and the cup are symbols. They point to a real and historic sacrifice, but they do not become that sacrifice. Jesus was sitting at the table, in His body, when He held up the bread and said <em>"This is My body."</em> He was speaking symbolically, the way He spoke when He said <em>"I am the door"</em> and <em>"I am the vine."</em></p>
+
+        <p>The Lord's Supper is given to us because we forget. God has always given His people physical reminders of spiritual realities. The Passover meal reminded Israel of the night the death angel passed over their houses because of the lamb's blood on the doorposts (Exodus 12). When Joshua led the people across the Jordan into the Promised Land, twelve stones were set up to remind future generations of God's deliverance (Joshua 4:20–24). The Lord's Supper is the New Covenant memorial — the bread and the cup remind us of a body broken and a blood shed for our redemption.</p>
+
+        <p>A faithful Lord's Supper service has four elements. <em>The call to commemoration</em> — the pastor reminds the people why they are at the table, that they come not because they are perfect but because they are invited. <em>The period of self-examination</em> — <em>"let a man examine himself, and so let him eat of the bread and drink of the cup"</em> (1 Corinthians 11:28). The congregation is called to confession before partaking. <em>The bread</em> — the pastor takes the bread, gives thanks, breaks it, and distributes it as a picture of Christ's body broken for sin. <em>The cup</em> — the pastor takes the cup, gives thanks, and distributes it as a picture of the new covenant in the blood of Christ. The service is closed with prayer and a reminder of the day when we shall feast with Christ in His kingdom.</p>
+
+        <p>The pastor should never administer the Lord's Supper hastily or carelessly. Paul warned the Corinthians, <em>"For he who eats and drinks in an unworthy manner eats and drinks judgment to himself, not discerning the Lord's body. For this reason many are weak and sick among you, and many sleep"</em> (1 Corinthians 11:29–30). The table is sacred. Approach it that way and teach your people to approach it that way.</p>
+
+        <h2>VI. Common Errors in Public Worship</h2>
+        <p>Four errors most often weaken a congregation's worship.</p>
+
+        <p>The first is <em>entertainment</em>. The service is built around the platform performance — louder music, brighter lights, more dramatic effects — and the people leave amused but not changed. They came to be entertained, and they were. They came to meet God, but they did not. The pastor who borrows the world's playbook to attract a crowd will eventually have a crowd that does not know God.</p>
+
+        <p>The second is <em>deadness</em>. This is the opposite error. The service is a solemn march through ancient forms with no warmth, no engagement, no expectation that God will actually be present. The people sing without thinking, listen without hearing, partake without examining. Tradition without life is just as dangerous as novelty without truth.</p>
+
+        <p>The third is <em>pastor-centeredness</em>. The whole service is built around the pastor's personality. He dominates every element. The people come to see him, hear him, follow him. When the pastor leaves, the church collapses, because the people were never actually centered on Christ.</p>
+
+        <p>The fourth is <em>casualness</em>. The pastor walks onto the platform with no preparation, opens with a joke, ad-libs the prayers, mishandles the ordinances, and dismisses with a flippant remark. Worship should never be stiff, but it should always be reverent. We are addressing the King of kings.</p>
+
+        <h2>Closing</h2>
+        <p>The pastor stands at the door of the sanctuary every Sunday morning and watches the people of God come in. They have come from hospital rooms, from troubled marriages, from prodigal children, from job worries, from spiritual battles only they and the Lord know about. They have come to find Him. The pastor's job is not to entertain them, not to lecture them, not to perform for them. His job is to lead them — into the presence of the living God, where their souls are filled, their wounds are bound, their hopes are renewed, and their faith is strengthened for one more week.</p>
+
+        <p>The pastor who leads worship rightly is not building a brand. He is building an altar. <em>"Let us hold fast the confession of our hope without wavering, for He who promised is faithful. And let us consider one another in order to stir up love and good works, not forsaking the assembling of ourselves together, as is the manner of some, but exhorting one another, and so much the more as you see the Day approaching"</em> (Hebrews 10:23–25). May every pastor reading this become, by the grace of Christ, the kind of worship leader who gathers wounded sheep and ushers them into the presence of the Chief Shepherd Himself.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>El ministerio pastoral tiene muchos rostros. El pastor predica, aconseja, dirige, equipa y pastorea. Pero hay un acto del ministerio pastoral que reúne todos los demás en un solo momento — el servicio del domingo. Cuando el pueblo de Dios se reúne para adorar, el pastor está en la convergencia de todo lo que él es. Es un predicador, pero más que un predicador. Es un líder, pero más que un administrador. Es un guía que lleva al pueblo a la presencia de Aquel que los ha llamado a todos juntos. El pastor que no entiende la adoración eventualmente manejará mal cada otra parte de su ministerio. El pastor que entiende la adoración correctamente puede edificar una iglesia que perdura.</p>
+
+        <p>Esta unidad examina al pastor como guía de adoración. Definiremos la adoración bíblicamente, examinaremos el papel del pastor en guiar la adoración pública, recorreremos los componentes de un servicio fiel, estudiaremos las dos ordenanzas del bautismo y la Cena del Señor, e identificaremos los errores comunes que drenan la vida de la adoración congregacional.</p>
+
+        <h2>I. ¿Qué es la adoración?</h2>
+        <p>Jesús nos dio la definición más concisa de la adoración en Su conversación con la mujer samaritana: <em>"Dios es Espíritu; y los que le adoran, en espíritu y en verdad es necesario que le adoren"</em> (Juan 4:24). Dos pilares. Adoración en espíritu. Adoración en verdad. Quite cualquiera de los pilares y todo se desploma.</p>
+
+        <p>Adorar en <em>espíritu</em> significa adoración de adentro hacia afuera, desde el corazón regenerado, por el Espíritu Santo. No es desempeño externo. No es ceremonia. No es ánimo. Es el hombre interior, vivificado por Dios, respondiendo a Dios. Ana vino al templo de Jehová con un alma tan pesada que ni siquiera podía hablar — <em>"hablaba ella en su corazón, y solamente se movían sus labios, y su voz no se oía; y Elí la tuvo por ebria"</em> (1 Samuel 1:13). El sumo sacerdote de Israel no podía distinguir entre la embriaguez y la adoración llena del Espíritu. Lo mismo sucedió en el día de Pentecostés. Los discípulos fueron llenos del Espíritu Santo, comenzaron a alabar a Dios, y los espectadores dijeron: <em>"Están llenos de mosto"</em> (Hechos 2:13). Pablo puso los dos lado a lado: <em>"No os embriaguéis con vino, en lo cual hay disolución; antes bien sed llenos del Espíritu, hablando entre vosotros con salmos, con himnos y cánticos espirituales, cantando y alabando al Señor en vuestros corazones"</em> (Efesios 5:18–19). Ambos producen rendición. Ambos producen abandono. Pero uno viene de una botella y el otro viene del trono.</p>
+
+        <p>Adorar en <em>verdad</em> significa adoración fundamentada en la Palabra de Dios y centrada en Jesucristo. La sinceridad no es suficiente. Un hombre dijo una vez: <em>"No importa lo que crea, mientras sea sincero."</em> Su amigo respondió: <em>"Si bebe veneno pensando que es medicina, su sinceridad no le salvará."</em> La sinceridad sin verdad es fatal. El pastor que edifica la adoración solo sobre la emoción, solo sobre la tradición, solo sobre las preferencias culturales, ha edificado una adoración sin verdad. La Palabra de Dios debe moldear cada elemento — los himnos cantados, las oraciones oradas, las Escrituras leídas, el sermón predicado, las ordenanzas administradas. Si la Palabra no gobierna la adoración, la adoración no tiene reclamo sobre el Dios de la Palabra.</p>
+
+        <p>Hay una historia más que lo dice todo. Pablo y Silas habían sido azotados con varas y arrojados al calabozo más interior en Filipos, sus pies asegurados en el cepo, sus espaldas hechas tiras. <em>"Pero a media noche, orando Pablo y Silas, cantaban himnos a Dios; y los presos los oían"</em> (Hechos 16:25). Sin instrumentos. Sin plataforma. Sin equipo de adoración. Dos hombres sangrando en el cepo, en la oscuridad, a medianoche — y los muros de la cárcel se sacudieron. Eso es adoración en espíritu y en verdad. El pastor que guía a la gente a esa clase de adoración ha hecho la cosa más pastoral que hará en toda la semana.</p>
+
+        <h2>II. El pastor como guía de adoración</h2>
+        <p>El pastor no es necesariamente el director del canto. No es necesariamente el músico. Pero siempre es el guía de <em>adoración</em>. Toda la atmósfera del servicio sube o baja con él. Si entra al santuario a medio preparar, a medio orar, distraído por las frustraciones de la mañana, la congregación lo siente en cinco minutos. Si entra al santuario con su alma encendida y su mente en Cristo, la congregación también lo siente. Mucho antes de que el pastor abra la boca, la gente lo está leyendo.</p>
+
+        <p>Un misionero contó una vez de una viuda anciana en África que venía a la iglesia mucho antes de que comenzara el servicio. Se sentaba calladamente en el rincón, susurrando oraciones con los ojos cerrados. No poseía casi nada. No tenía voz para cantar. Sin embargo, su rostro brillaba con paz. Cuando alguien le preguntó por qué venía tan temprano, ella dijo: <em>"Me gusta pasar tiempo amando a Jesús antes de que lleguen los demás."</em> Ese es el espíritu que un pastor debe traer a cada domingo. El pastor que llega tarde, va directo a la plataforma, y baraja sus notas del sermón durante la oración de apertura no puede guiar a su pueblo en la adoración — porque él mismo aún no ha entrado en la adoración.</p>
+
+        <p>El papel del pastor como guía de adoración es por tanto primero interno y luego externo. <em>Internamente</em>, prepara su propio corazón mediante la oración, la Escritura y la reflexión silenciosa. Toma en serio la noche del sábado y la mañana del domingo — no son solo preparación para predicar, son preparación para <em>estar presente</em> delante de Dios. <em>Externamente</em>, planifica, organiza y pastorea el servicio. Decide el orden de la adoración, escoge las Escrituras, formula el llamado a la adoración, y se asegura de que cada elemento señale a Cristo. El servicio de adoración es la hora más teológicamente significativa en la vida de una congregación. Merece la mejor preparación del pastor, no sus sobras.</p>
+
+        <h2>III. El orden de adoración</h2>
+        <p>No hay un mandato bíblico para un orden específico de adoración. Diferentes tradiciones arreglan los elementos de manera diferente, y esa es su libertad. Pero todo orden fiel contendrá, en alguna forma, los siguientes elementos esenciales.</p>
+
+        <p>Un <em>llamado a la adoración</em> abre el servicio. La congregación es convocada fuera del mundo y a la presencia de Dios. Se lee una Escritura. Se recita un salmo. Se canta una canción. El llamado a la adoración recuerda al pueblo por qué están allí.</p>
+
+        <p>Los <em>cánticos de alabanza y adoración</em> elevan el corazón. La música ha sido el regalo de Dios a Su pueblo desde los días de Moisés a través de los Salmos a través de los apóstoles. Pablo mandó a los efesios <em>"hablando entre vosotros con salmos, con himnos y cánticos espirituales"</em> (Efesios 5:19). El pastor debe ser cuidadoso aquí. Los cánticos no son relleno. No son calentamiento. Son ellos mismos teología puesta a melodía, y lo que la congregación canta el domingo se convierte en lo que cree para el martes. Escoja cánticos que sean bíblicamente ricos, centrados en Cristo, y cantables.</p>
+
+        <p>La <em>lectura de la Escritura</em> debe ser una parte sustancial de cada servicio. Pablo escribió a Timoteo: <em>"Entre tanto que voy, ocúpate en la lectura"</em> (1 Timoteo 4:13). La Palabra leída en voz alta tiene su propia autoridad. Una congregación que oye solo la voz del pastor y nunca oye la Escritura leída en extensión se vuelve superficial.</p>
+
+        <p>La <em>oración</em> puntúa el servicio en múltiples puntos. La oración pastoral, en particular, es uno de los grandes regalos que un pastor da a su pueblo. Lleva las cargas de la congregación delante del trono — los enfermos, los enlutados, los descarriados, los hermanos perseguidos alrededor del mundo. Una oración pastoral bien orada puede hacer tanto como un sermón para nutrir a un rebaño.</p>
+
+        <p><em>El sermón</em> es el acto central del servicio. No porque el predicador sea más importante que los cantores o la congregación, sino porque en el evento de la predicación la Palabra de Dios es abierta, aplicada, y presionada al corazón de la conciencia. Todo lo demás en el servicio prepara el corazón para recibir la Palabra, y todo después responde a la Palabra.</p>
+
+        <p>Los <em>diezmos y ofrendas</em> son parte de la adoración, no una interrupción de ella. Dar es un acto de rendición — <em>"presentéis vuestros cuerpos en sacrificio vivo"</em> (Romanos 12:1) — y el pastor debe enseñar a su pueblo que el plato de la ofrenda es uno de los actos más personales de adoración en todo el servicio.</p>
+
+        <p>La <em>bendición</em> envía al pueblo de regreso al mundo con una bendición de Dios. La bendición no es un anuncio de cierre. Es el pastor hablando, en la autoridad de Dios, el favor de Dios sobre Su pueblo para la semana que viene.</p>
+
+        <h2>IV. La ordenanza del bautismo</h2>
+        <p>El Señor Jesús dejó a Su iglesia dos ordenanzas. Ambas son mandadas. Ambas son cuadros del evangelio. La primera es el bautismo. <em>"Por tanto, id, y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo"</em> (Mateo 28:19).</p>
+
+        <p>El bautismo es para creyentes. Es el testimonio público de alguien que ha confiado personalmente en Cristo como Salvador. Romanos 6:3–4 enseña el significado: <em>"¿O no sabéis que todos los que hemos sido bautizados en Cristo Jesús, hemos sido bautizados en su muerte? Porque somos sepultados juntamente con él para muerte por el bautismo, a fin de que como Cristo resucitó de los muertos por la gloria del Padre, así también nosotros andemos en novedad de vida."</em> El agua es un cuadro. Bajar al agua representa la muerte a la vieja vida. Salir del agua representa la resurrección a una nueva vida en Cristo. El modo que captura este cuadro más plenamente es la inmersión — sepultura y resurrección — y este es el patrón del Nuevo Testamento.</p>
+
+        <p>El bautismo no salva. La salvación es por gracia mediante la fe — <em>"por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se gloríe"</em> (Efesios 2:8–9). El bautismo es la declaración exterior de la salvación interior que ya ha tomado lugar. El eunuco etíope en Hechos 8 creyó primero, y <em>luego</em> fue bautizado. El carcelero filipense en Hechos 16 creyó primero, y <em>luego</em> toda su casa fue bautizada. El orden es siempre el mismo en el Nuevo Testamento: fe, luego bautismo.</p>
+
+        <p>El pastor que administra el bautismo debe hacerlo con reverencia y con enseñanza clara. El candidato confiesa públicamente a Cristo. El pastor declara el significado de la ordenanza. El agua es aplicada en el nombre del Padre, del Hijo y del Espíritu Santo. La congregación atestigua. Y el cielo se regocija.</p>
+
+        <h2>V. La ordenanza de la Cena del Señor</h2>
+        <p>La segunda ordenanza es la Cena del Señor. La noche que fue traicionado, Jesús tomó el pan y el vino, los dio a Sus discípulos, y dijo: <em>"Haced esto en memoria de mí"</em> (Lucas 22:19). Pablo repitió la institución a la iglesia de Corinto y añadió: <em>"Pues todas las veces que comiereis este pan, y bebiereis esta copa, la muerte del Señor anunciáis hasta que él venga"</em> (1 Corintios 11:26).</p>
+
+        <p>Hay varios puntos de vista principales sobre lo que sucede en la Cena del Señor. La <em>transubstanciación</em>, enseñada por la Iglesia Católica Romana, sostiene que el pan y el vino se convierten literalmente en el cuerpo y la sangre de Cristo. La <em>consubstanciación</em>, enseñada por algunos luteranos, sostiene que Cristo está físicamente presente en, con y debajo de los elementos. La tradición reformada, asociada con Juan Calvino, enseña una vista de presencia espiritual: Cristo no está físicamente presente en el pan y la copa, pero por medio del Espíritu Santo los creyentes son verdadera y espiritualmente nutridos por Cristo mientras participan por fe, una comunión real distinta de un mero recuerdo. La posición histórica bautista — y la posición enseñada aquí — es la <em>vista memorial</em>: el pan y la copa son símbolos. Señalan a un sacrificio real e histórico, pero no se convierten en ese sacrificio. Jesús estaba sentado a la mesa, en Su cuerpo, cuando levantó el pan y dijo <em>"Esto es mi cuerpo."</em> Estaba hablando simbólicamente, de la misma manera que habló cuando dijo <em>"Yo soy la puerta"</em> y <em>"Yo soy la vid."</em></p>
+
+        <p>La Cena del Señor nos es dada porque olvidamos. Dios siempre ha dado a Su pueblo recordatorios físicos de realidades espirituales. La cena de la Pascua le recordó a Israel la noche cuando el ángel de la muerte pasó por sus casas debido a la sangre del cordero en los postes (Éxodo 12). Cuando Josué condujo al pueblo a través del Jordán a la Tierra Prometida, doce piedras fueron erigidas para recordar a las generaciones futuras la liberación de Dios (Josué 4:20–24). La Cena del Señor es el memorial del Nuevo Pacto — el pan y la copa nos recuerdan un cuerpo quebrantado y una sangre derramada por nuestra redención.</p>
+
+        <p>Un servicio fiel de la Cena del Señor tiene cuatro elementos. <em>El llamado a la conmemoración</em> — el pastor recuerda al pueblo por qué están en la mesa, que vienen no porque sean perfectos sino porque son invitados. <em>El período de auto-examen</em> — <em>"pruébese cada uno a sí mismo, y coma así del pan, y beba de la copa"</em> (1 Corintios 11:28). La congregación es llamada a la confesión antes de participar. <em>El pan</em> — el pastor toma el pan, da gracias, lo parte, y lo distribuye como un cuadro del cuerpo de Cristo quebrantado por el pecado. <em>La copa</em> — el pastor toma la copa, da gracias, y la distribuye como un cuadro del nuevo pacto en la sangre de Cristo. El servicio se cierra con oración y un recordatorio del día cuando festejaremos con Cristo en Su reino.</p>
+
+        <p>El pastor nunca debe administrar la Cena del Señor de manera apresurada o descuidada. Pablo advirtió a los corintios: <em>"Porque el que come y bebe indignamente, juicio come y bebe para sí, no discerniendo el cuerpo del Señor. Por lo cual hay muchos enfermos y debilitados entre vosotros, y muchos duermen"</em> (1 Corintios 11:29–30). La mesa es sagrada. Acérquese a ella así y enseñe a su pueblo a acercarse a ella así.</p>
+
+        <h2>VI. Errores comunes en la adoración pública</h2>
+        <p>Cuatro errores debilitan más a menudo la adoración de una congregación.</p>
+
+        <p>El primero es <em>el entretenimiento</em>. El servicio se construye alrededor del desempeño de la plataforma — música más fuerte, luces más brillantes, efectos más dramáticos — y la gente sale entretenida pero no cambiada. Vinieron a ser entretenidos, y lo fueron. Vinieron a encontrarse con Dios, pero no lo hicieron. El pastor que toma prestado el manual del mundo para atraer una multitud eventualmente tendrá una multitud que no conoce a Dios.</p>
+
+        <p>El segundo es <em>la muerte</em>. Este es el error opuesto. El servicio es una marcha solemne a través de formas antiguas sin calidez, sin involucramiento, sin expectativa de que Dios realmente esté presente. La gente canta sin pensar, escucha sin oír, participa sin examinarse. La tradición sin vida es tan peligrosa como la novedad sin verdad.</p>
+
+        <p>El tercero es <em>el centrismo del pastor</em>. Todo el servicio se construye alrededor de la personalidad del pastor. Él domina cada elemento. La gente viene para verlo a él, oírlo a él, seguirlo a él. Cuando el pastor se va, la iglesia se desploma, porque el pueblo nunca estuvo realmente centrado en Cristo.</p>
+
+        <p>El cuarto es <em>la informalidad</em>. El pastor camina hacia la plataforma sin preparación, abre con un chiste, improvisa las oraciones, manipula mal las ordenanzas, y despide con un comentario frívolo. La adoración nunca debe ser rígida, pero siempre debe ser reverente. Estamos dirigiéndonos al Rey de reyes.</p>
+
+        <h2>Cierre</h2>
+        <p>El pastor está en la puerta del santuario cada domingo por la mañana y observa al pueblo de Dios entrar. Han venido de habitaciones de hospital, de matrimonios atribulados, de hijos pródigos, de preocupaciones de trabajo, de batallas espirituales que solo ellos y el Señor conocen. Han venido a encontrarlo. El trabajo del pastor no es entretenerlos, no es sermonearles, no es desempeñarse para ellos. Su trabajo es guiarlos — a la presencia del Dios viviente, donde sus almas son llenadas, sus heridas son vendadas, sus esperanzas son renovadas, y su fe es fortalecida para una semana más.</p>
+
+        <p>El pastor que guía la adoración correctamente no está construyendo una marca. Está construyendo un altar. <em>"Mantengamos firme, sin fluctuar, la profesión de nuestra fe; porque fiel es el que prometió. Y considerémonos unos a otros para estimularnos al amor y a las buenas obras; no dejando de congregarnos, como algunos tienen por costumbre, sino exhortándonos; y tanto más, cuanto veis que aquel día se acerca"</em> (Hebreos 10:23–25). Que cada pastor que lea esto se vuelva, por la gracia de Cristo, la clase de guía de adoración que reúne ovejas heridas y las introduce a la presencia del Príncipe de los pastores mismo.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 4 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 4 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 4;
+let progress = JSON.parse(localStorage.getItem('cts_pm_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPMUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit4) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSPMUnit3.html"; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSPMUnit5.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="CTSPMUnit1.html" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+        document.getElementById('regWarning').style.display = 'block';
+    }
+}
+displayStudentGreeting();
+
+// Q7 reshuffled (B↔D swap: "Worship in spirit and truth even in suffering" moved B→D)
+// Rebalanced from A=5/B=6/C=5/D=4 to 5/5/5/5
+const mcQuestions = [
+  {
+    "textEn": "1. Jesus's most concise definition of worship comes from:",
+    "textEs": "1. La definición más concisa de adoración de Jesús viene de:",
+    "optionsEn": [
+      "John 3:16",
+      "Matthew 6:9",
+      "John 4:24",
+      "Luke 4:18"
+    ],
+    "optionsEs": [
+      "Juan 3:16",
+      "Mateo 6:9",
+      "Juan 4:24",
+      "Lucas 4:18"
+    ],
+    "c": 23,
+    "explEn": "Jesus's most concise definition of worship comes from John 4:24 — in spirit and in truth.",
+    "explEs": "La definición más concisa de adoración de Jesús viene de Juan 4:24 — en espíritu y en verdad."
+  },
+  {
+    "textEn": "2. The two pillars of biblical worship are:",
+    "textEs": "2. Los dos pilares de la adoración bíblica son:",
+    "optionsEn": [
+      "Music and prayer",
+      "Spirit and truth",
+      "Tradition and emotion",
+      "Pastor and people"
+    ],
+    "optionsEs": [
+      "Música y oración",
+      "Espíritu y verdad",
+      "Tradición y emoción",
+      "Pastor y pueblo"
+    ],
+    "c": 29,
+    "explEn": "The two pillars of biblical worship are spirit and truth; both must be present.",
+    "explEs": "Los dos pilares de la adoración bíblica son espíritu y verdad; ambos deben estar presentes."
+  },
+  {
+    "textEn": "3. Hannah at the temple was mistaken by Eli for being:",
+    "textEs": "3. Ana en el templo fue confundida por Elí como:",
+    "optionsEn": [
+      "Possessed",
+      "Drunk",
+      "A foreigner",
+      "Sick"
+    ],
+    "optionsEs": [
+      "Poseída",
+      "Ebria",
+      "Extranjera",
+      "Enferma"
+    ],
+    "c": 36,
+    "explEn": "Hannah prayed so intensely that Eli mistook her for being drunk.",
+    "explEs": "Ana oró tan intensamente que Elí la confundió con estar ebria."
+  },
+  {
+    "textEn": "4. At Pentecost, the bystanders said the disciples were:",
+    "textEs": "4. En Pentecostés, los espectadores dijeron que los discípulos estaban:",
+    "optionsEn": [
+      "Full of new wine",
+      "Speaking nonsense",
+      "Possessed",
+      "Sleeping"
+    ],
+    "optionsEs": [
+      "Llenos de mosto",
+      "Hablando tonterías",
+      "Poseídos",
+      "Durmiendo"
+    ],
+    "c": 42,
+    "explEn": "At Pentecost the bystanders said the Spirit-filled disciples were full of new wine.",
+    "explEs": "En Pentecostés los presentes dijeron que los discípulos llenos del Espíritu estaban llenos de mosto."
+  },
+  {
+    "textEn": "5. Ephesians 5:18 contrasts being drunk with wine with being:",
+    "textEs": "5. Efesios 5:18 contrasta estar embriagado con vino con estar:",
+    "optionsEn": [
+      "Asleep",
+      "Hungry",
+      "Tired",
+      "Filled with the Spirit"
+    ],
+    "optionsEs": [
+      "Dormido",
+      "Hambriento",
+      "Cansado",
+      "Lleno del Espíritu"
+    ],
+    "c": 52,
+    "explEn": "Ephesians 5:18 contrasts being drunk with wine with being filled with the Spirit.",
+    "explEs": "Efesios 5:18 contrasta el embriagarse con vino con ser lleno del Espíritu."
+  },
+  {
+    "textEn": "6. The 'drink poison thinking it's medicine' illustration warns against:",
+    "textEs": "6. La ilustración de 'beber veneno pensando que es medicina' advierte contra:",
+    "optionsEn": [
+      "Modern medicine",
+      "Drinking water from wells",
+      "Sincerity without truth",
+      "Religious tradition"
+    ],
+    "optionsEs": [
+      "La medicina moderna",
+      "Beber agua de pozos",
+      "La sinceridad sin verdad",
+      "La tradición religiosa"
+    ],
+    "c": 58,
+    "explEn": "The 'poison as medicine' image warns against sincerity without truth.",
+    "explEs": "La imagen del 'veneno como medicina' advierte contra la sinceridad sin verdad."
+  },
+  {
+    "textEn": "7. Paul and Silas in the Philippian jail at midnight illustrate:",
+    "textEs": "7. Pablo y Silas en la cárcel de Filipos a medianoche ilustran:",
+    "optionsEn": [
+      "The danger of preaching",
+      "Pastoral burnout",
+      "The need for instruments",
+      "Worship in spirit and truth even in suffering"
+    ],
+    "optionsEs": [
+      "El peligro de predicar",
+      "El agotamiento pastoral",
+      "La necesidad de instrumentos",
+      "Adoración en espíritu y verdad aun en el sufrimiento"
+    ],
+    "c": 66,
+    "explEn": "Paul and Silas singing in the Philippian jail show worship in spirit and truth even in suffering.",
+    "explEs": "Pablo y Silas cantando en la cárcel de Filipos muestran adoración en espíritu y verdad aun en sufrimiento."
+  },
+  {
+    "textEn": "8. The African widow who came early to whisper prayers illustrates:",
+    "textEs": "8. La viuda africana que venía temprano a susurrar oraciones ilustra:",
+    "optionsEn": [
+      "Heart preparation for worship before the service",
+      "The need for early services",
+      "Africa's church life",
+      "Female piety"
+    ],
+    "optionsEs": [
+      "La preparación del corazón para la adoración antes del servicio",
+      "La necesidad de servicios tempranos",
+      "La vida eclesiástica de África",
+      "La piedad femenina"
+    ],
+    "c": 70,
+    "explEn": "The African widow coming early to whisper prayers illustrates heart preparation before the service.",
+    "explEs": "La viuda africana que llegaba temprano a susurrar oraciones ilustra la preparación del corazón antes del servicio."
+  },
+  {
+    "textEn": "9. The pastor's role as worship leader is first:",
+    "textEs": "9. El papel del pastor como guía de adoración es primero:",
+    "optionsEn": [
+      "Musical",
+      "Administrative",
+      "Internal — preparing his own heart",
+      "Logistical"
+    ],
+    "optionsEs": [
+      "Musical",
+      "Administrativo",
+      "Interno — preparando su propio corazón",
+      "Logístico"
+    ],
+    "c": 79,
+    "explEn": "The pastor's role as worship leader is first internal — preparing his own heart.",
+    "explEs": "El papel del pastor como líder de adoración es primero interno — preparar su propio corazón."
+  },
+  {
+    "textEn": "10. Songs sung in worship are properly understood as:",
+    "textEs": "10. Los cánticos cantados en adoración se entienden propiamente como:",
+    "optionsEn": [
+      "Filler material",
+      "Theology set to melody",
+      "Warm-up for the sermon",
+      "Optional decoration"
+    ],
+    "optionsEs": [
+      "Material de relleno",
+      "Teología puesta a melodía",
+      "Calentamiento para el sermón",
+      "Decoración opcional"
+    ],
+    "c": 85,
+    "explEn": "Songs in worship are properly understood as theology set to melody.",
+    "explEs": "Los cantos en la adoración se entienden propiamente como teología puesta en melodía."
+  },
+  {
+    "textEn": "11. The benediction at the end of the service is:",
+    "textEs": "11. La bendición al final del servicio es:",
+    "optionsEn": [
+      "A closing announcement",
+      "Optional",
+      "A formality",
+      "The pastor speaking God's favor on His people for the week"
+    ],
+    "optionsEs": [
+      "Un anuncio de cierre",
+      "Opcional",
+      "Una formalidad",
+      "El pastor hablando el favor de Dios sobre Su pueblo para la semana"
+    ],
+    "c": 94,
+    "explEn": "The benediction is the pastor speaking God's favor on His people for the week.",
+    "explEs": "La bendición es el pastor hablando el favor de Dios sobre Su pueblo para la semana."
+  },
+  {
+    "textEn": "12. Christ left His church how many ordinances?",
+    "textEs": "12. Cristo dejó a Su iglesia ¿cuántas ordenanzas?",
+    "optionsEn": [
+      "Four",
+      "Three",
+      "Two",
+      "Seven"
+    ],
+    "optionsEs": [
+      "Cuatro",
+      "Tres",
+      "Dos",
+      "Siete"
+    ],
+    "c": 100,
+    "explEn": "Christ left His church two ordinances: baptism and the Lord's Supper.",
+    "explEs": "Cristo dejó a Su iglesia dos ordenanzas: el bautismo y la Cena del Señor."
+  },
+  {
+    "textEn": "13. The biblical order regarding faith and baptism is always:",
+    "textEs": "13. El orden bíblico respecto a la fe y el bautismo es siempre:",
+    "optionsEn": [
+      "Faith, then baptism",
+      "Baptism, then faith",
+      "Simultaneous",
+      "Either order"
+    ],
+    "optionsEs": [
+      "Fe, luego bautismo",
+      "Bautismo, luego fe",
+      "Simultáneos",
+      "Cualquier orden"
+    ],
+    "c": 105,
+    "explEn": "The biblical order is always faith first, then baptism.",
+    "explEs": "El orden bíblico es siempre la fe primero, luego el bautismo."
+  },
+  {
+    "textEn": "14. Romans 6:3-4 teaches that baptism is a picture of:",
+    "textEs": "14. Romanos 6:3-4 enseña que el bautismo es un cuadro de:",
+    "optionsEn": [
+      "Cleansing only",
+      "Death and resurrection with Christ",
+      "Joining the local church",
+      "Receiving the Holy Spirit"
+    ],
+    "optionsEs": [
+      "Solo limpieza",
+      "Muerte y resurrección con Cristo",
+      "Unirse a la iglesia local",
+      "Recibir el Espíritu Santo"
+    ],
+    "c": 113,
+    "explEn": "Romans 6:3-4 teaches baptism is a picture of death and resurrection with Christ.",
+    "explEs": "Romanos 6:3-4 enseña que el bautismo es un cuadro de muerte y resurrección con Cristo."
+  },
+  {
+    "textEn": "15. The historic Baptist position on the Lord's Supper is:",
+    "textEs": "15. La posición histórica bautista sobre la Cena del Señor es:",
+    "optionsEn": [
+      "Transubstantiation",
+      "Consubstantiation",
+      "Real spiritual presence",
+      "Memorial view — symbols pointing to a real sacrifice"
+    ],
+    "optionsEs": [
+      "Transubstanciación",
+      "Consubstanciación",
+      "Presencia espiritual real",
+      "Vista memorial — símbolos que señalan a un sacrificio real"
+    ],
+    "c": 122,
+    "explEn": "The historic Baptist position is the memorial view — symbols pointing to a real sacrifice.",
+    "explEs": "La posición bautista histórica es la vista memorial — símbolos que señalan a un sacrificio real."
+  },
+  {
+    "textEn": "16. The doctrine that the bread and wine literally become the body and blood of Christ is called:",
+    "textEs": "16. La doctrina de que el pan y el vino se convierten literalmente en el cuerpo y la sangre de Cristo se llama:",
+    "optionsEn": [
+      "Transubstantiation",
+      "Memorial view",
+      "Spiritual presence",
+      "Symbolic communion"
+    ],
+    "optionsEs": [
+      "Transubstanciación",
+      "Vista memorial",
+      "Presencia espiritual",
+      "Comunión simbólica"
+    ],
+    "c": 126,
+    "explEn": "Transubstantiation is the doctrine that bread and wine literally become Christ's body and blood.",
+    "explEs": "La transubstanciación es la doctrina de que el pan y el vino literalmente se vuelven el cuerpo y sangre de Cristo."
+  },
+  {
+    "textEn": "17. The 12 stones at the Jordan (Joshua 4) and the Passover meal (Exodus 12) are examples of:",
+    "textEs": "17. Las 12 piedras en el Jordán (Josué 4) y la cena de la Pascua (Éxodo 12) son ejemplos de:",
+    "optionsEn": [
+      "Old Testament rituals only",
+      "Burdensome traditions",
+      "God's physical reminders of spiritual realities",
+      "Cultural celebrations"
+    ],
+    "optionsEs": [
+      "Solo rituales del Antiguo Testamento",
+      "Tradiciones onerosas",
+      "Recordatorios físicos de Dios sobre realidades espirituales",
+      "Celebraciones culturales"
+    ],
+    "c": 135,
+    "explEn": "The Jordan stones and the Passover are God's physical reminders of spiritual realities.",
+    "explEs": "Las piedras del Jordán y la Pascua son recordatorios físicos de Dios de realidades espirituales."
+  },
+  {
+    "textEn": "18. 1 Corinthians 11:28-30 warns that taking the Lord's Supper unworthily can result in:",
+    "textEs": "18. 1 Corintios 11:28-30 advierte que tomar la Cena del Señor indignamente puede resultar en:",
+    "optionsEn": [
+      "Excommunication",
+      "Loss of fellowship",
+      "Public shame",
+      "Weakness, sickness, and death"
+    ],
+    "optionsEs": [
+      "Excomunión",
+      "Pérdida del compañerismo",
+      "Vergüenza pública",
+      "Debilidad, enfermedad y muerte"
+    ],
+    "c": 143,
+    "explEn": "1 Corinthians 11 warns that taking the Supper unworthily can bring weakness, sickness, and death.",
+    "explEs": "1 Corintios 11 advierte que tomar la Cena indignamente puede traer debilidad, enfermedad y muerte."
+  },
+  {
+    "textEn": "19. Which is NOT one of the four common errors in public worship?",
+    "textEs": "19. ¿Cuál NO es uno de los cuatro errores comunes en la adoración pública?",
+    "optionsEn": [
+      "Entertainment",
+      "Long sermons",
+      "Pastor-centeredness",
+      "Casualness"
+    ],
+    "optionsEs": [
+      "Entretenimiento",
+      "Sermones largos",
+      "Centrismo del pastor",
+      "Informalidad"
+    ],
+    "c": 148,
+    "explEn": "Long sermons is NOT one of the four common worship errors named in the unit.",
+    "explEs": "Los sermones largos NO son uno de los cuatro errores comunes de adoración nombrados en la unidad."
+  },
+  {
+    "textEn": "20. The pastor's job in worship is fundamentally to:",
+    "textEs": "20. El trabajo del pastor en la adoración es fundamentalmente:",
+    "optionsEn": [
+      "Lead the people into the presence of the living God",
+      "Entertain the congregation",
+      "Showcase his talents",
+      "Manage logistics"
+    ],
+    "optionsEs": [
+      "Guiar al pueblo a la presencia del Dios viviente",
+      "Entretener a la congregación",
+      "Mostrar sus talentos",
+      "Manejar logística"
+    ],
+    "c": 154,
+    "explEn": "The pastor's fundamental job in worship is to lead the people into the presence of the living God.",
+    "explEs": "El trabajo fundamental del pastor en la adoración es llevar al pueblo a la presencia del Dios vivo."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Define worship biblically using John 4:24. Why must both pillars (spirit and truth) be present, and what happens when one is missing?",
+    "textEs": "21. Defina la adoración bíblicamente usando Juan 4:24. ¿Por qué deben estar presentes ambos pilares (espíritu y verdad), y qué sucede cuando uno falta?",
+    "kw_en": [
+      "spirit",
+      "truth",
+      "worship",
+      "pillar",
+      "john",
+      "balance",
+      "sincere",
+      "doctrine"
+    ],
+    "kw_es": [
+      "espíritu",
+      "verdad",
+      "adoración",
+      "pilar",
+      "juan",
+      "equilibrio",
+      "sincero",
+      "doctrina"
+    ],
+    "modelEn": "Jesus gave the most concise definition of worship in John 4:24: God is Spirit, and those who worship Him must worship in spirit and in truth. The two pillars are spirit and truth, and both must be present. Worship in spirit without truth becomes sincere emotion built on error — drinking poison thinking it is medicine. Worship in truth without spirit becomes correct doctrine with a dead heart, orthodox but cold. When one pillar is missing the whole act collapses: feeling without foundation, or foundation without feeling. True worship engages the renewed heart and the revealed truth of God together, neither sacrificed to the other.",
+    "modelEs": "Jesús dio la definición más concisa de adoración en Juan 4:24: Dios es Espíritu, y los que le adoran deben adorarle en espíritu y en verdad. Los dos pilares son espíritu y verdad, y ambos deben estar presentes. La adoración en espíritu sin verdad se vuelve emoción sincera edificada sobre el error — beber veneno pensando que es medicina. La adoración en verdad sin espíritu se vuelve doctrina correcta con un corazón muerto, ortodoxa pero fría. Cuando falta un pilar todo el acto colapsa: sentimiento sin fundamento, o fundamento sin sentimiento. La adoración verdadera compromete el corazón renovado y la verdad revelada de Dios juntos, sin sacrificar uno al otro."
+  },
+  {
+    "textEn": "22. Discuss the parallel between Hannah at the temple (1 Samuel 1) and the disciples at Pentecost (Acts 2). What does this teach about Spirit-filled worship?",
+    "textEs": "22. Discuta el paralelo entre Ana en el templo (1 Samuel 1) y los discípulos en Pentecostés (Hechos 2). ¿Qué enseña esto sobre la adoración llena del Espíritu?",
+    "kw_en": [
+      "hannah",
+      "pentecost",
+      "spirit",
+      "drunk",
+      "filled",
+      "wine",
+      "intense",
+      "mistaken"
+    ],
+    "kw_es": [
+      "ana",
+      "pentecostés",
+      "espíritu",
+      "ebrio",
+      "lleno",
+      "vino",
+      "intenso",
+      "confund"
+    ],
+    "modelEn": "Hannah at the temple prayed so intensely that Eli mistook her for being drunk, and at Pentecost the bystanders said the disciples were full of new wine. The parallel is striking: in both cases Spirit-filled worship was so intense that observers mistook it for drunkenness. Ephesians 5:18 makes the connection explicit, contrasting being drunk with wine with being filled with the Spirit. This teaches that genuine, Spirit-filled worship has an intensity and abandon that a cold, formal religion never produces — it can look excessive to the watching world. The pastor leading worship should not fear depth of feeling, nor should he manufacture it; he should seek the genuine filling of the Spirit that made Hannah and the disciples look intoxicated with God.",
+    "modelEs": "Ana en el templo oró tan intensamente que Elí la confundió con una ebria, y en Pentecostés los presentes dijeron que los discípulos estaban llenos de mosto. El paralelo es notable: en ambos casos la adoración llena del Espíritu fue tan intensa que los observadores la confundieron con embriaguez. Efesios 5:18 hace explícita la conexión, contrastando el embriagarse con vino con ser lleno del Espíritu. Esto enseña que la adoración genuina, llena del Espíritu, tiene una intensidad y un abandono que una religión fría y formal nunca produce — puede parecer excesiva al mundo que observa. El pastor que dirige la adoración no debe temer la profundidad del sentimiento, ni debe fabricarla; debe buscar el llenado genuino del Espíritu que hizo que Ana y los discípulos parecieran embriagados de Dios."
+  },
+  {
+    "textEn": "23. Apply Paul and Silas singing in the Philippian jail to a modern worship service. What does this teach the pastor about worship's true source?",
+    "textEs": "23. Aplique a Pablo y Silas cantando en la cárcel de Filipos a un servicio de adoración moderno. ¿Qué enseña esto al pastor sobre la verdadera fuente de la adoración?",
+    "kw_en": [
+      "paul",
+      "silas",
+      "jail",
+      "sing",
+      "suffer",
+      "midnight",
+      "source",
+      "spirit"
+    ],
+    "kw_es": [
+      "pablo",
+      "silas",
+      "cárcel",
+      "cantar",
+      "sufre",
+      "medianoche",
+      "fuente",
+      "espíritu"
+    ],
+    "modelEn": "Paul and Silas, beaten and chained in the Philippian jail at midnight, were singing hymns to God — worship in spirit and truth even in suffering. Applied to a modern worship service, this teaches the pastor that worship's true source is not the comfort of the circumstances, the quality of the music, or the warmth of the room, but the Spirit of God in the heart of the worshiper. If Paul and Silas could worship in a dungeon with bleeding backs, then worship does not depend on perfect conditions. A congregation that only worships when everything is pleasant has not learned this. The pastor should teach his people that real worship rises from the Spirit within, so that it can sing at midnight in a jail as truly as on a bright Sunday morning.",
+    "modelEs": "Pablo y Silas, azotados y encadenados en la cárcel de Filipos a medianoche, cantaban himnos a Dios — adoración en espíritu y verdad aun en el sufrimiento. Aplicado a un servicio de adoración moderno, esto enseña al pastor que la fuente verdadera de la adoración no es la comodidad de las circunstancias, la calidad de la música ni el calor del lugar, sino el Espíritu de Dios en el corazón del adorador. Si Pablo y Silas pudieron adorar en un calabozo con las espaldas sangrantes, entonces la adoración no depende de condiciones perfectas. Una congregación que solo adora cuando todo es agradable no ha aprendido esto. El pastor debe enseñar a su pueblo que la adoración real surge del Espíritu interior, de modo que pueda cantar a medianoche en una cárcel tan verdaderamente como en una brillante mañana de domingo."
+  },
+  {
+    "textEn": "24. Explain why the pastor's heart preparation is more important than the technical preparation of the service. Use the African widow illustration.",
+    "textEs": "24. Explique por qué la preparación del corazón del pastor es más importante que la preparación técnica del servicio. Use la ilustración de la viuda africana.",
+    "kw_en": [
+      "heart",
+      "prepar",
+      "widow",
+      "internal",
+      "technical",
+      "early",
+      "pray",
+      "service"
+    ],
+    "kw_es": [
+      "corazón",
+      "prepar",
+      "viuda",
+      "interno",
+      "técnic",
+      "temprano",
+      "orar",
+      "servicio"
+    ],
+    "modelEn": "The pastor's heart preparation is more important than the technical preparation of the service, because a perfectly run service led by an unprepared heart is a hollow performance. The African widow who came early to the church to whisper her prayers before anyone else arrived illustrates this: she prepared her heart to meet God before the service began. The pastor's first role as worship leader is internal — preparing his own heart — before it is external. He may have the order of service, the songs, the sound, and the sermon all in place, but if he has not met God in private, he leads the people toward a God he himself has not sought that morning. Technical excellence serves worship; it cannot substitute for the prepared heart that actually enters God's presence.",
+    "modelEs": "La preparación del corazón del pastor es más importante que la preparación técnica del servicio, porque un servicio perfectamente ejecutado dirigido por un corazón no preparado es una representación vacía. La viuda africana que llegaba temprano a la iglesia a susurrar sus oraciones antes de que llegara nadie más ilustra esto: preparaba su corazón para encontrarse con Dios antes de que comenzara el servicio. El primer papel del pastor como líder de adoración es interno — preparar su propio corazón — antes que externo. Puede tener el orden del servicio, los cantos, el sonido y el sermón todos listos, pero si no se ha encontrado con Dios en privado, dirige al pueblo hacia un Dios que él mismo no ha buscado esa mañana. La excelencia técnica sirve a la adoración; no puede sustituir al corazón preparado que realmente entra en la presencia de Dios."
+  },
+  {
+    "textEn": "25. Outline the major components of a faithful Sunday worship service and explain the function of each.",
+    "textEs": "25. Bosqueje los componentes principales de un servicio fiel de adoración dominical y explique la función de cada uno.",
+    "kw_en": [
+      "song",
+      "prayer",
+      "scripture",
+      "sermon",
+      "benediction",
+      "theology",
+      "component",
+      "lead"
+    ],
+    "kw_es": [
+      "canto",
+      "oración",
+      "escritura",
+      "sermón",
+      "bendición",
+      "teología",
+      "componente",
+      "dirig"
+    ],
+    "modelEn": "A faithful Sunday worship service gathers several components, each with a purpose. The songs are theology set to melody, teaching the congregation truth even as they express praise. The prayers — invocation, confession, intercession, thanksgiving — lead the people to address God directly. The reading and preaching of Scripture is the central act, feeding the flock from the Word. The ordinances, baptism and the Lord's Supper, give visible signs of invisible grace. And the benediction at the end is the pastor speaking God's favor on His people for the week ahead, sending them out blessed. Each component is not a filler between the sermon but a genuine movement of worship, and the pastor leads the people through them into the presence of the living God.",
+    "modelEs": "Un servicio de adoración dominical fiel reúne varios componentes, cada uno con un propósito. Los cantos son teología puesta en melodía, enseñando verdad a la congregación aun mientras expresan alabanza. Las oraciones — invocación, confesión, intercesión, acción de gracias — llevan al pueblo a dirigirse a Dios directamente. La lectura y predicación de la Escritura es el acto central, alimentando al rebaño de la Palabra. Las ordenanzas, el bautismo y la Cena del Señor, dan señales visibles de la gracia invisible. Y la bendición al final es el pastor hablando el favor de Dios sobre Su pueblo para la semana venidera, enviándolos bendecidos. Cada componente no es un relleno entre el sermón sino un movimiento genuino de adoración, y el pastor dirige al pueblo a través de ellos hacia la presencia del Dios vivo."
+  },
+  {
+    "textEn": "26. Explain and defend CTS's position on the New Testament pattern of believer's baptism by immersion, while fairly representing the paedobaptist covenant argument. How does Romans 6:3-4 inform both the meaning and the mode?",
+    "textEs": "26. Explique y defienda la posición de CTS sobre el patrón del Nuevo Testamento de bautismo de creyentes por inmersión, representando con justicia el argumento pedobautista del pacto. ¿Cómo informa Romanos 6:3-4 tanto el significado como el modo?",
+    "kw_en": [
+      "baptism",
+      "faith",
+      "immersion",
+      "romans",
+      "death",
+      "resurrection",
+      "believer",
+      "picture"
+    ],
+    "kw_es": [
+      "bautismo",
+      "fe",
+      "inmersión",
+      "romanos",
+      "muerte",
+      "resurrección",
+      "creyente",
+      "cuadro"
+    ],
+    "modelEn": "CTS teaches believer's baptism by immersion as the New Testament pattern, and the biblical order is faith first, then baptism -- never baptism before faith. Romans 6:3-4 informs both the meaning and the mode: baptism is a picture of death and resurrection with Christ, the believer buried with Him in the water and raised to walk in newness of life, a picture immersion displays more fully than sprinkling. Paedobaptist traditions, including Presbyterian, Reformed, and Lutheran churches, hold a different and seriously-reasoned position: drawing on the continuity between the Abrahamic covenant sign of circumcision and baptism as its New Testament counterpart, they baptize the children of believers as members of the covenant community, anticipating a later profession of faith rather than requiring one beforehand. CTS's own conclusion, following the immersionist reading of the New Testament pattern, is that baptism follows a personal profession of faith and is by immersion, because the act itself preaches the gospel of a buried and risen Savior.",
+    "modelEs": "CTS enseña el bautismo del creyente por inmersión como el patrón del Nuevo Testamento, y el orden bíblico es la fe primero, luego el bautismo — nunca el bautismo antes de la fe. Romanos 6:3-4 informa tanto el significado como el modo: el bautismo es un cuadro de muerte y resurrección con Cristo, el creyente sepultado con Él en el agua y levantado para andar en novedad de vida, un cuadro que la inmersión retrata más plenamente que la aspersión. Las tradiciones pedobautistas, incluyendo las iglesias presbiterianas, reformadas y luteranas, sostienen una posición diferente y seriamente razonada: partiendo de la continuidad entre la circuncisión como señal del pacto abrahámico y el bautismo como su contraparte del Nuevo Testamento, bautizan a los hijos de los creyentes como miembros de la comunidad del pacto, anticipando una profesión de fe posterior en lugar de exigirla de antemano. La propia conclusión de CTS, siguiendo la lectura inmersionista del patrón del Nuevo Testamento, es que el bautismo sigue a una profesión personal de fe y es por inmersión, porque el acto mismo predica el evangelio de un Salvador sepultado y resucitado."
+  },
+  {
+    "textEn": "27. Compare the three views of the Lord's Supper (transubstantiation, consubstantiation, memorial). Which view is taught here, and why?",
+    "textEs": "27. Compare las tres vistas de la Cena del Señor (transubstanciación, consubstanciación, memorial). ¿Cuál vista se enseña aquí y por qué?",
+    "kw_en": [
+      "memorial",
+      "transubstantiation",
+      "consubstantiation",
+      "symbol",
+      "baptist",
+      "supper",
+      "remember",
+      "view"
+    ],
+    "kw_es": [
+      "memorial",
+      "transubstanciación",
+      "consubstanciación",
+      "símbolo",
+      "bautista",
+      "cena",
+      "recordar",
+      "vista"
+    ],
+    "modelEn": "There are three historic views of the Lord's Supper. Transubstantiation holds that the bread and wine literally become the body and blood of Christ. Consubstantiation holds that Christ is present in, with, and under the elements. The memorial view, the historic Baptist position taught here, holds that the bread and wine are symbols pointing to a real sacrifice — Christ's once-for-all death — which the believer remembers with thanksgiving. The memorial view is taught because Jesus said 'do this in remembrance of Me,' and because Hebrews insists His sacrifice was once for all and is not repeated. The elements are not the body and blood; they are signs that direct the worshiper's heart back to the cross. This guards both the finished work of Christ and the heart-engagement of the worshiper.",
+    "modelEs": "Hay tres vistas históricas de la Cena del Señor. La transubstanciación sostiene que el pan y el vino literalmente se convierten en el cuerpo y la sangre de Cristo. La consubstanciación sostiene que Cristo está presente en, con y bajo los elementos. La vista memorial, la posición bautista histórica que se enseña aquí, sostiene que el pan y el vino son símbolos que señalan a un sacrificio real — la muerte de Cristo de una vez por todas — que el creyente recuerda con acción de gracias. La vista memorial se enseña porque Jesús dijo 'haced esto en memoria de mí,' y porque Hebreos insiste en que Su sacrificio fue una vez para siempre y no se repite. Los elementos no son el cuerpo y la sangre; son señales que dirigen el corazón del adorador de vuelta a la cruz. Esto guarda tanto la obra terminada de Cristo como el compromiso del corazón del adorador."
+  },
+  {
+    "textEn": "28. Discuss the connection between the Passover, the 12 stones at the Jordan, and the Lord's Supper. What does this teach about God's use of physical reminders?",
+    "textEs": "28. Discuta la conexión entre la Pascua, las 12 piedras en el Jordán, y la Cena del Señor. ¿Qué enseña esto sobre el uso de recordatorios físicos por parte de Dios?",
+    "kw_en": [
+      "passover",
+      "stones",
+      "supper",
+      "remind",
+      "physical",
+      "remember",
+      "jordan",
+      "spiritual"
+    ],
+    "kw_es": [
+      "pascua",
+      "piedras",
+      "cena",
+      "recordatorio",
+      "físico",
+      "recordar",
+      "jordán",
+      "espiritual"
+    ],
+    "modelEn": "The Passover meal in Exodus 12, the twelve stones set up at the Jordan in Joshua 4, and the Lord's Supper are all examples of God's use of physical reminders of spiritual realities. The Passover lamb and unleavened bread reminded Israel yearly of their deliverance from Egypt. The twelve stones stood at the Jordan so that when children asked 'What do these stones mean?' the fathers would tell of God's mighty crossing. The Lord's Supper takes bread and cup to remind the church of Christ's body broken and blood shed. This teaches that God knows we are forgetful creatures, so He gives tangible signs to anchor invisible truths in our memory. The pastor should value the ordinances not as empty ritual but as God-given physical reminders that preach to the senses what the heart is prone to forget.",
+    "modelEs": "La comida de la Pascua en Éxodo 12, las doce piedras levantadas en el Jordán en Josué 4, y la Cena del Señor son todos ejemplos del uso que Dios hace de recordatorios físicos de realidades espirituales. El cordero pascual y el pan sin levadura recordaban a Israel cada año su liberación de Egipto. Las doce piedras estaban en el Jordán para que cuando los hijos preguntaran '¿Qué significan estas piedras?' los padres contaran del poderoso cruce de Dios. La Cena del Señor toma pan y copa para recordar a la iglesia el cuerpo partido y la sangre derramada de Cristo. Esto enseña que Dios sabe que somos criaturas olvidadizas, así que da señales tangibles para anclar verdades invisibles en nuestra memoria. El pastor debe valorar las ordenanzas no como ritual vacío sino como recordatorios físicos dados por Dios que predican a los sentidos lo que el corazón tiende a olvidar."
+  },
+  {
+    "textEn": "29. Identify the four common errors in public worship. Which error is most prevalent in your tradition or region, and what is the cure?",
+    "textEs": "29. Identifique los cuatro errores comunes en la adoración pública. ¿Cuál error es más prevalente en su tradición o región, y cuál es la cura?",
+    "kw_en": [
+      "error",
+      "entertainment",
+      "ritual",
+      "irreverence",
+      "cold",
+      "worship",
+      "cure",
+      "balance"
+    ],
+    "kw_es": [
+      "error",
+      "entretenimiento",
+      "ritual",
+      "irreverencia",
+      "frío",
+      "adoración",
+      "cura",
+      "equilibrio"
+    ],
+    "modelEn": "Four common errors corrupt public worship. The first is entertainment — turning the service into a performance for an audience rather than an offering to God. The second is dead ritual — going through correct forms with no living heart, truth without spirit. The third is irreverence — a casualness that forgets we are entering the presence of a holy God. The fourth is emotionalism — feeling pursued for its own sake, spirit without truth. Each errs by losing one of the two pillars or the reverence both require. The cure in every case is worship in spirit and truth: heart and doctrine held together, reverence and joy together, an offering to God rather than a show for people. The pastor must guard against whichever error is most prevalent in his own tradition.",
+    "modelEs": "Cuatro errores comunes corrompen la adoración pública. El primero es el entretenimiento — convertir el servicio en una representación para un auditorio en vez de una ofrenda a Dios. El segundo es el ritual muerto — pasar por formas correctas sin corazón vivo, verdad sin espíritu. El tercero es la irreverencia — una informalidad que olvida que entramos en la presencia de un Dios santo. El cuarto es el emocionalismo — el sentimiento buscado por sí mismo, espíritu sin verdad. Cada uno yerra al perder uno de los dos pilares o la reverencia que ambos requieren. La cura en cada caso es la adoración en espíritu y verdad: corazón y doctrina sostenidos juntos, reverencia y gozo juntos, una ofrenda a Dios en vez de un espectáculo para la gente. El pastor debe guardarse contra cualquier error que sea más prevalente en su propia tradición."
+  },
+  {
+    "textEn": "30. Synthesize the unit: How does the pastor's role as worship leader gather all his other pastoral duties into a single act every Sunday morning?",
+    "textEs": "30. Sintetice la unidad: ¿Cómo el rol del pastor como guía de adoración reúne todos sus otros deberes pastorales en un solo acto cada domingo por la mañana?",
+    "kw_en": [
+      "worship",
+      "lead",
+      "gather",
+      "duty",
+      "presence",
+      "spirit",
+      "truth",
+      "sunday"
+    ],
+    "kw_es": [
+      "adoración",
+      "dirig",
+      "reúne",
+      "deber",
+      "presencia",
+      "espíritu",
+      "verdad",
+      "domingo"
+    ],
+    "modelEn": "The pastor's role as worship leader gathers all his other pastoral duties into a single act every Sunday morning. The shepherding, the teaching, the visiting, the counseling, the praying he has done all week converge as he leads the gathered people into the presence of the living God. In worship he feeds them through the Word, comforts the wounded he has visited, instructs through songs that are theology set to melody, and seals it with the ordinances and the benediction. Worship in spirit and truth is the summit toward which all his labor climbs, the moment when the flock he has tended all week meets their God together. His first preparation is internal — his own heart sought God before he leads — and his aim is never performance but presence. Sunday worship is where the undershepherd brings the whole flock before the Chief Shepherd.",
+    "modelEs": "El papel del pastor como líder de adoración reúne todos sus otros deberes pastorales en un solo acto cada domingo por la mañana. El pastoreo, la enseñanza, la visitación, la consejería, la oración que ha hecho toda la semana convergen mientras dirige al pueblo reunido a la presencia del Dios vivo. En la adoración los alimenta por la Palabra, consuela a los heridos que ha visitado, instruye mediante cantos que son teología en melodía, y lo sella con las ordenanzas y la bendición. La adoración en espíritu y verdad es la cumbre hacia la cual sube toda su labor, el momento en que el rebaño que ha cuidado toda la semana se encuentra con su Dios juntos. Su primera preparación es interna — su propio corazón buscó a Dios antes de dirigir — y su meta nunca es la representación sino la presencia. La adoración dominical es donde el subpastor trae a todo el rebaño ante el Príncipe de los pastores."
+  }
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit4 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_pm_u4_mc_passed';
+const SA_LOCK_KEY = 'cts_pm_u4_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_pm_u4_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(normalize(ans), kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 5 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first on Unit 1." : "Por favor regístrese primero en la Unidad 1.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'cert';
+    let total, score, required, mcGatePass, saGatePass;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let correctKW = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+        required = null;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit4 = true;
+                localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_pm_u4_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit4 = true;
+        localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_pm_u4_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_pm_u4_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        renderQuestions();
+    };
+});
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 4 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPMReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

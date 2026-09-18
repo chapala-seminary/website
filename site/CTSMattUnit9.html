@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Matthew Intensive — Unit 9</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 10 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Matthew Intensive — Unit 9: The King and His Church</span><span class="lang-es">📖 Mateo Intensivo — Unidad 9: El Rey y Su Iglesia</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"You are the Christ, the Son of the living God." — Matthew 16:16</span><span class="lang-es">"Tú eres el Cristo, el Hijo del Dios viviente." — Mateo 16:16</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Matthew Intensive. Please register before beginning Unit 9.</span><span class="lang-es">Bienvenido al Intensivo de Mateo. Por favor regístrese antes de comenzar la Unidad 9.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Matthew 16:16</strong></p>
+<div class="scripture">"Simon Peter answered and said, 'You are the Christ, the Son of the living God.'" — Matthew 16:16 (NKJV)</div>
+
+<h3>The King Over the Waters</h3>
+<p>These five chapters carry the King from Galilee toward Jerusalem, and at their center stands the confession on which He says He will build His church. They open with two great signs over the sea. After feeding five thousand from five loaves and two fish, Jesus sends the disciples ahead in the boat and comes to them walking on the water. Peter asks to come, steps out, and for a moment walks on the waves — until he sees the wind, is afraid, and begins to sink, crying, "Lord, save me!" Jesus catches him: "O you of little faith, why did you doubt?" (Matthew 14:31). When He climbs into the boat and the wind ceases, the disciples worship Him, saying, "Truly You are the Son of God" (Matthew 14:33). Here is the question of the whole unit already taking shape — who is this? — and the first stammering answer from the men closest to Him.</p>
+
+<h3>What Defiles, and a Great Faith</h3>
+<p>In chapter 15 the King corrects the Pharisees over their traditions. They were scandalized that His disciples ate with unwashed hands, but Jesus turns the matter inside out: "Not what goes into the mouth defiles a man; but what comes out of the mouth, this defiles a man" (Matthew 15:11). For "out of the heart proceed evil thoughts, murders, adulteries" and the rest (Matthew 15:19). Defilement is not a matter of ceremony but of the heart. Then comes a Gentile woman of Canaan, begging Him to heal her demon-tormented daughter. Jesus seems at first to refuse, testing her, but she presses on with humble persistence, and He marvels: "O woman, great is your faith! Let it be to you as you desire" (Matthew 15:28). As with the centurion earlier, it is an outsider who shows the faith the King seeks, another sign that His church will gather people from every nation.</p>
+
+<h3>The Great Confession</h3>
+<p>At Caesarea Philippi the King asks the question directly. First, "Who do men say that the Son of Man is?" The answers are flattering but wrong — John the Baptist, Elijah, Jeremiah, one of the prophets. Then He turns it on them: "But who do you say that I am?" Peter answers for them all: "You are the Christ, the Son of the living God" (Matthew 16:16). Jesus calls him blessed, "for flesh and blood has not revealed this to you, but My Father who is in heaven" (Matthew 16:17). This is the heart of the whole Gospel. No one comes to this confession by his own cleverness or by hearsay; it is given by God. And on this confession the King makes His great promise: "You are Peter, and on this rock I will build My church, and the gates of Hades shall not prevail against it" (Matthew 16:18). There is a play on words here — Peter (Petros) means a small stone, while the rock (petra) on which the church is built is the bedrock of the Spirit-given truth Peter has just confessed: that Jesus is the Christ, the Son of the living God. The church is not built on a man, but on Christ confessed. And the gates of Hades — gates being a defensive thing — will not hold out against it; the church is meant to advance, and hell's defenses will not stand. To His people the King gives the keys of the kingdom, the authority to open its doors by the gospel.</p>
+
+<h3>The Cross Foretold</h3>
+<p>From this high point the King turns at once toward the cross. "From that time Jesus began to show His disciples that He must go to Jerusalem, and suffer many things... and be killed, and be raised the third day" (Matthew 16:21). Peter, who had just confessed so rightly, now rebukes Him — surely this must never happen — and Jesus answers with startling sharpness, "Get behind Me, Satan! You are an offense to Me, for you are not mindful of the things of God but the things of men" (Matthew 16:23). The same Peter can be the voice of revelation one moment and the voice of the tempter the next. Then the King lays down the law of discipleship once more: "If anyone desires to come after Me, let him deny himself, and take up his cross, and follow Me. For whoever desires to save his life will lose it, but whoever loses his life for My sake will find it" (Matthew 16:24-25). The church is founded on a confessed Christ who is going to die, and to follow Him is to take up a cross too.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_START U9 EN -->
+<h3>True Discipleship: Deny, Take Up, Follow</h3>
+<p>A sermon from Matthew 16:21-26 organizes Jesus' call with three plain verbs: a true disciple denies himself, takes up his cross, and follows Christ. Self-denial is not self-mutilation or giving up something we never wanted in the first place. It means renouncing the throne of the self so that Christ is first. F. B. Meyer once pictured surrender as giving Christ the keys to every room of life; one locked room still meant an unsurrendered house. Taking up the cross is likewise more specific than enduring ordinary trouble. A cross is suffering that comes from doing the will of God. Finally, following Christ means walking in His steps rather than asking Him to approve a path we have already chosen. Peter's protest in this passage shows how easy it is to want a Messiah without a cross and discipleship without self-denial. Jesus will not permit that separation. The road of the King and the road of His disciple meet at the same place: "not my will," the surrender of self, and faithful obedience to God.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END U9 EN -->
+
+
+<h3>Glory on the Mountain</h3>
+<p>Six days later He takes Peter, James, and John up a high mountain and is transfigured before them, His face shining like the sun. Moses and Elijah — the law and the prophets — appear and talk with Him. Peter wants to build three tabernacles, but a bright cloud overshadows them, and the Father's voice repeats the word spoken at the Jordan, now with a command added: "This is My beloved Son, in whom I am well pleased. Hear Him!" (Matthew 17:5). The glory confirms the confession: this truly is the Son of God, and He, not Moses or Elijah, is the One to be heard. Coming down, they fail to heal an epileptic boy, and Jesus teaches that even faith as small as a mustard seed can move mountains (Matthew 17:20). The chapter ends with another quiet sign of who He is, as a coin to pay the temple tax is found in the mouth of a fish.</p>
+
+<h3>Who Is Greatest?</h3>
+<p>Chapter 18 is the fourth great discourse, and it is about life in the King's family, the church. The disciples ask who is greatest in the kingdom, and Jesus sets a little child among them: "Unless you are converted and become as little children, you will by no means enter the kingdom of heaven" (Matthew 18:3). Greatness in the church is not rank but the humility of a child. Then He gives a fierce warning against causing one of these little ones to stumble — better a millstone around the neck and the depths of the sea (Matthew 18:6). And He tells of the shepherd who leaves the ninety-nine to seek the one that wandered off, "for it is not the will of your Father who is in heaven that one of these little ones should perish" (Matthew 18:14). The church is to guard and seek its weakest members with the very heart of God.</p>
+
+<h3>The Way of the Church</h3>
+<p>Jesus then gives the pattern for dealing with sin among His people. "If your brother sins against you, go and tell him his fault between you and him alone." If he will not hear, take one or two others; if he still will not hear, "tell it to the church" (Matthew 18:15-17). The goal at every step is to win the brother, not to expose him. To the church He gives a real authority to bind and to loose — to declare the terms of the gospel and to exercise loving discipline. And in the middle of this teaching on the gathered church comes one of the most precious promises in the Gospel: "For where two or three are gathered together in My name, I am there in the midst of them" (Matthew 18:20). The church does not need a great crowd to have its King present; He is there wherever even two or three gather in His name.</p>
+
+<h3>Forgiveness Without Limit</h3>
+<p>Peter asks how often he must forgive a brother — up to seven times? Jesus answers, "Up to seventy times seven" (Matthew 18:22), which is to say, without keeping count. Then He tells the parable of the unforgiving servant. A servant who owed his king an unpayable fortune was forgiven the whole debt out of mercy. But that same servant went out and seized a fellow servant who owed him a trifling sum, refusing him the very mercy he had just received, and had him thrown into prison. When the king heard, he delivered the wicked servant to the tormentors. The warning is plain: "So My heavenly Father also will do to you if each of you, from his heart, does not forgive his brother his trespasses" (Matthew 18:35). The church is a community of the forgiven, and those who have been forgiven so great a debt by God cannot clutch the small debts of others.</p>
+
+<h3>The King and His Church</h3>
+<p>Put together, these chapters give us the King and the church He builds. The church rests on one foundation: the Spirit-given confession that Jesus is the Christ, the Son of the living God. It is built by Him, not by us, and the gates of hell will not withstand it. Its King is going to the cross, and to belong to Him is to deny self and follow. And its common life is to look like its King: marked by childlike humility rather than rivalry, by tender care for the weak and straying, by honest and loving correction when sin appears, and by a forgiveness without limit that flows from having been forgiven an unpayable debt. Wherever two or three gather around that confession in His name, the King Himself is present, and His church goes forward against the very gates of hell.</p>
+<div class="scripture">"For where two or three are gathered together in My name, I am there in the midst of them." — Matthew 18:20 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Mateo 16:16 (RVG)</strong></p>
+<div class="scripture">"Y respondiendo Simón Pedro, dijo: Tú eres el Cristo, el Hijo del Dios viviente." — Mateo 16:16</div>
+
+<h3>El Rey Sobre las Aguas</h3>
+<p>Estos cinco capítulos llevan al Rey desde Galilea hacia Jerusalén, y en su centro está la confesión sobre la cual dice que edificará su iglesia. Comienzan con dos grandes señales sobre el mar. Después de alimentar a cinco mil con cinco panes y dos peces, Jesús envía a los discípulos delante en la barca y viene a ellos andando sobre el agua. Pedro pide venir, sale, y por un momento anda sobre las olas — hasta que ve el viento, tiene miedo y comienza a hundirse, clamando: "¡Señor, sálvame!" Jesús lo toma: "Hombre de poca fe, ¿por qué dudaste?" (Mateo 14:31). Cuando sube a la barca y el viento cesa, los discípulos le adoran, diciendo: "Verdaderamente eres Hijo de Dios" (Mateo 14:33). Aquí ya toma forma la pregunta de toda la unidad — ¿quién es éste? — y la primera respuesta balbuciente de los hombres más cercanos a Él.</p>
+
+<h3>Lo Que Contamina, y una Gran Fe</h3>
+<p>En el capítulo 15 el Rey corrige a los fariseos sobre sus tradiciones. Se escandalizaban de que sus discípulos comieran con manos sin lavar, pero Jesús vuelve el asunto al revés: "No lo que entra en la boca contamina al hombre; mas lo que sale de la boca, esto contamina al hombre" (Mateo 15:11). Porque "del corazón salen los malos pensamientos, los homicidios, los adulterios" y lo demás (Mateo 15:19). La contaminación no es cuestión de ceremonia sino del corazón. Luego viene una mujer gentil de Canaán, rogándole que sane a su hija atormentada por un demonio. Jesús parece al principio negarse, probándola, pero ella insiste con humilde persistencia, y Él se maravilla: "Oh mujer, grande es tu fe; sea hecho contigo como quieres" (Mateo 15:28). Como con el centurión antes, es una extraña quien muestra la fe que el Rey busca, otra señal de que su iglesia reunirá gente de toda nación.</p>
+
+<h3>La Gran Confesión</h3>
+<p>En Cesarea de Filipo el Rey hace la pregunta directamente. Primero: "¿Quién dicen los hombres que es el Hijo del Hombre?" Las respuestas son halagadoras pero erradas — Juan el Bautista, Elías, Jeremías, uno de los profetas. Luego la vuelve hacia ellos: "Y vosotros, ¿quién decís que soy yo?" Pedro responde por todos: "Tú eres el Cristo, el Hijo del Dios viviente" (Mateo 16:16). Jesús lo llama bienaventurado, "porque no te lo reveló carne ni sangre, sino mi Padre que está en los cielos" (Mateo 16:17). Este es el corazón de todo el Evangelio. Nadie llega a esta confesión por su propia astucia ni de oídas; es dada por Dios. Y sobre esta confesión el Rey hace su gran promesa: "Tú eres Pedro, y sobre esta roca edificaré mi iglesia; y las puertas del Hades no prevalecerán contra ella" (Mateo 16:18). Hay aquí un juego de palabras: Pedro (Petros) significa una piedra pequeña, mientras que la roca (petra) sobre la cual se edifica la iglesia es la roca firme de la verdad dada por el Espíritu que Pedro acaba de confesar: que Jesús es el Cristo, el Hijo del Dios viviente. La iglesia no se edifica sobre un hombre, sino sobre Cristo confesado. Y las puertas del Hades — siendo las puertas algo defensivo — no resistirán contra ella; la iglesia ha de avanzar, y las defensas del infierno no se mantendrán en pie. A su pueblo el Rey le da las llaves del reino, la autoridad de abrir sus puertas por el evangelio.</p>
+
+<h3>La Cruz Anunciada</h3>
+<p>Desde este punto alto el Rey se vuelve enseguida hacia la cruz. "Desde entonces comenzó Jesús a declarar a sus discípulos que le era necesario ir a Jerusalén y padecer mucho... y ser muerto, y resucitar al tercer día" (Mateo 16:21). Pedro, que acababa de confesar tan correctamente, ahora lo reprende — seguramente esto nunca debe suceder — y Jesús responde con sorprendente aspereza: "¡Quítate de delante de mí, Satanás!; me eres tropiezo, porque no pones la mira en las cosas de Dios, sino en las de los hombres" (Mateo 16:23). El mismo Pedro puede ser la voz de la revelación en un momento y la voz del tentador al siguiente. Luego el Rey establece de nuevo la ley del discipulado: "Si alguno quiere venir en pos de mí, niéguese a sí mismo, y tome su cruz, y sígame. Porque todo el que quiera salvar su vida, la perderá; y todo el que pierda su vida por causa de mí, la hallará" (Mateo 16:24-25). La iglesia se funda sobre un Cristo confesado que va a morir, y seguirle es tomar también una cruz.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_START U9 ES -->
+<h3>El Verdadero Discipulado: Negarse, Tomar la Cruz, Seguir</h3>
+<p>Un sermón sobre Mateo 16:21-26 organiza el llamado de Jesús con tres verbos sencillos: el verdadero discípulo se niega a sí mismo, toma su cruz y sigue a Cristo. Negarse a uno mismo no significa mutilarse ni renunciar a algo que nunca deseábamos. Significa renunciar al trono del yo para que Cristo ocupe el primer lugar. F. B. Meyer ilustró una vez la entrega como dar a Cristo las llaves de cada habitación de la vida; una habitación cerrada todavía significaba una casa no entregada por completo. Tomar la cruz también es algo más específico que soportar las dificultades comunes. Una cruz es sufrimiento que viene por hacer la voluntad de Dios. Finalmente, seguir a Cristo significa andar en Sus pisadas en vez de pedirle que apruebe un camino que ya hemos escogido. La protesta de Pedro en este pasaje muestra cuán fácil es querer un Mesías sin cruz y un discipulado sin negación propia. Jesús no permite esa separación. El camino del Rey y el camino de Su discípulo se encuentran en el mismo lugar: «no mi voluntad», la rendición del yo y la obediencia fiel a Dios.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END U9 ES -->
+
+
+<h3>Gloria en el Monte</h3>
+<p>Seis días después toma a Pedro, Jacobo y Juan a un monte alto y es transfigurado delante de ellos, resplandeciendo su rostro como el sol. Moisés y Elías — la ley y los profetas — aparecen y hablan con Él. Pedro quiere hacer tres enramadas, pero una nube de luz los cubre, y la voz del Padre repite la palabra dicha en el Jordán, ahora con un mandato añadido: "Éste es mi Hijo amado, en quien tengo contentamiento; a él oíd" (Mateo 17:5). La gloria confirma la confesión: éste es verdaderamente el Hijo de Dios, y a Él, no a Moisés ni a Elías, hay que oír. Al descender, no logran sanar a un muchacho epiléptico, y Jesús enseña que aun una fe tan pequeña como un grano de mostaza puede mover montañas (Mateo 17:20). El capítulo termina con otra señal callada de quién es Él, al hallarse en la boca de un pez la moneda para pagar el tributo del templo.</p>
+
+<h3>¿Quién Es el Mayor?</h3>
+<p>El capítulo 18 es el cuarto gran discurso, y trata de la vida en la familia del Rey, la iglesia. Los discípulos preguntan quién es el mayor en el reino, y Jesús pone a un niño en medio de ellos: "De cierto os digo, que si no os volvéis y os hacéis como niños, no entraréis en el reino de los cielos" (Mateo 18:3). La grandeza en la iglesia no es el rango sino la humildad de un niño. Luego da una severa advertencia contra hacer tropezar a uno de estos pequeños — mejor una piedra de molino al cuello y lo profundo del mar (Mateo 18:6). Y habla del pastor que deja las noventa y nueve para buscar la que se descarrió, "porque no es la voluntad de vuestro Padre que está en los cielos, que se pierda uno de estos pequeños" (Mateo 18:14). La iglesia ha de guardar y buscar a sus miembros más débiles con el mismísimo corazón de Dios.</p>
+
+<h3>El Camino de la Iglesia</h3>
+<p>Entonces Jesús da el patrón para tratar con el pecado entre su pueblo. "Si tu hermano peca contra ti, ve y repréndele estando tú y él solos." Si no oye, toma a uno o dos más; si todavía no oye, "dilo a la iglesia" (Mateo 18:15-17). La meta en cada paso es ganar al hermano, no exponerlo. A la iglesia le da una verdadera autoridad de atar y desatar — de declarar los términos del evangelio y de ejercer una disciplina amorosa. Y en medio de esta enseñanza sobre la iglesia reunida viene una de las promesas más preciosas del Evangelio: "Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos" (Mateo 18:20). La iglesia no necesita una gran multitud para tener presente a su Rey; Él está allí dondequiera que aun dos o tres se reúnan en su nombre.</p>
+
+<h3>El Perdón Sin Límite</h3>
+<p>Pedro pregunta cuántas veces debe perdonar a un hermano — ¿hasta siete? Jesús responde: "Hasta setenta veces siete" (Mateo 18:22), es decir, sin llevar la cuenta. Luego cuenta la parábola del siervo que no perdonó. Un siervo que debía a su rey una fortuna impagable fue perdonado de toda la deuda por misericordia. Pero ese mismo siervo salió y agarró a un consiervo que le debía una suma insignificante, negándole la misma misericordia que acababa de recibir, y lo hizo echar en la cárcel. Cuando el rey lo oyó, entregó al siervo malvado a los verdugos. La advertencia es clara: "Así también mi Padre celestial hará con vosotros si no perdonáis de todo corazón cada uno a su hermano sus ofensas" (Mateo 18:35). La iglesia es una comunidad de los perdonados, y los que han sido perdonados de tan gran deuda por Dios no pueden aferrarse a las pequeñas deudas de los demás.</p>
+
+<h3>El Rey y Su Iglesia</h3>
+<p>Reunidos, estos capítulos nos dan al Rey y a la iglesia que Él edifica. La iglesia descansa sobre un solo fundamento: la confesión dada por el Espíritu de que Jesús es el Cristo, el Hijo del Dios viviente. Es edificada por Él, no por nosotros, y las puertas del infierno no resistirán contra ella. Su Rey va a la cruz, y pertenecerle es negarse a sí mismo y seguirle. Y su vida común ha de parecerse a su Rey: marcada por la humildad de un niño en vez de la rivalidad, por el tierno cuidado de los débiles y descarriados, por la corrección honesta y amorosa cuando aparece el pecado, y por un perdón sin límite que brota de haber sido perdonados de una deuda impagable. Dondequiera que dos o tres se reúnen en torno a esa confesión en su nombre, el Rey mismo está presente, y su iglesia avanza contra las puertas mismas del infierno.</p>
+<div class="scripture">"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos." — Mateo 18:20 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 9 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 9 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Matthew Intensive — Unit 9 (The King and His Church, Matthew 14-18)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 9;
+const COURSE = 'matt';
+const NEXT_UNIT_URL = 'CTSMattUnit10.html';
+const totalUnits = 13;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The King's Origins (Matthew 1-2)", "Unit 2 - The King Presented (Matthew 3-4)", "Unit 3 - Sermon on the Mount I: The Character of the Kingdom (Matthew 5)", "Unit 4 - Sermon on the Mount II: The Practice of the Kingdom (Matthew 6-7)", "Unit 5 - The Lord's Prayer (Matthew 6:9-13)", "Unit 6 - The King's Authority: Miracles (Matthew 8-9)", "Unit 7 - The King's Mission and Rising Opposition (Matthew 10-12)", "Unit 8 - The Parables of the Kingdom (Matthew 13)", "Unit 9 - The King and His Church (Matthew 14-18)", "Unit 10 - The Road to Jerusalem (Matthew 19-23)", "Unit 11 - The Olivet Discourse: Last Things (Matthew 24-25)", "Unit 12 - The Passion (Matthew 26-27)", "Unit 13 - The Resurrection and the Great Commission (Matthew 28)"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSMattUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. After feeding the five thousand, Jesus came to the disciples in the boat by:", "textEs": "1. Después de alimentar a los cinco mil, Jesús vino a los discípulos en la barca:", "optionsEn": ["Sending an angel", "Walking on the water", "Sailing another boat", "Calling from shore"], "optionsEs": ["Enviando un ángel", "Andando sobre el agua", "Navegando en otra barca", "Llamando desde la orilla"], "explanationEn": "Jesus walked on the sea, and Peter for a moment walked toward Him before sinking.", "explanationEs": "Jesús anduvo sobre el mar, y Pedro por un momento anduvo hacia Él antes de hundirse.", "correct": 1}, {"textEn": "2. When Peter began to sink, Jesus said:", "textEs": "2. Cuando Pedro comenzó a hundirse, Jesús dijo:", "optionsEn": ["'Return to shore'", "'You are not ready'", "'O you of little faith, why did you doubt?'", "'Where is your boat?'"], "optionsEs": ["'Vuelve a la orilla'", "'No estás listo'", "'Hombre de poca fe, ¿por qué dudaste?'", "'¿Dónde está tu barca?'"], "explanationEn": "Peter walked while looking to Jesus, but sank when he saw the wind and feared.", "explanationEs": "Pedro anduvo mirando a Jesús, pero se hundió cuando vio el viento y temió.", "correct": 2}, {"textEn": "3. Jesus taught the Pharisees that a person is defiled not by what enters the mouth but by:", "textEs": "3. Jesús enseñó a los fariseos que el hombre no se contamina por lo que entra en la boca sino por:", "optionsEn": ["Unwashed hands", "Touching the sick", "The food laws", "What comes out of the mouth, from the heart"], "optionsEs": ["Las manos sin lavar", "Tocar a los enfermos", "Las leyes de comida", "Lo que sale de la boca, del corazón"], "explanationEn": "Defilement is a matter of the heart, not of ceremony.", "explanationEs": "La contaminación es cuestión del corazón, no de ceremonia.", "correct": 3}, {"textEn": "4. When the Canaanite woman persisted in asking healing for her daughter, Jesus said:", "textEs": "4. Cuando la mujer cananea insistió en pedir sanidad para su hija, Jesús dijo:", "optionsEn": ["'O woman, great is your faith!'", "'You are not of Israel'", "'Come another day'", "'Bring your daughter here'"], "optionsEs": ["'¡Oh mujer, grande es tu fe!'", "'No eres de Israel'", "'Ven otro día'", "'Trae aquí a tu hija'"], "explanationEn": "Like the centurion, a Gentile outsider showed the faith the King seeks.", "explanationEs": "Como el centurión, una extraña gentil mostró la fe que el Rey busca.", "correct": 0}, {"textEn": "5. At Caesarea Philippi, Peter confessed that Jesus is:", "textEs": "5. En Cesarea de Filipo, Pedro confesó que Jesús es:", "optionsEn": ["Elijah returned", "The Christ, the Son of the living God", "A great prophet", "The son of David only"], "optionsEs": ["Elías que volvió", "El Cristo, el Hijo del Dios viviente", "Un gran profeta", "Solo el hijo de David"], "explanationEn": "This Spirit-given confession is the heart of the whole Gospel.", "explanationEs": "Esta confesión dada por el Espíritu es el corazón de todo el Evangelio.", "correct": 1}, {"textEn": "6. Jesus said Peter knew this confession because it was revealed by:", "textEs": "6. Jesús dijo que Pedro conocía esta confesión porque le fue revelada por:", "optionsEn": ["The Scriptures alone", "the Father in heaven, not flesh and blood", "The other disciples", "His own study"], "optionsEs": ["Solo las Escrituras", "el Padre que está en los cielos, no carne ni sangre", "Los otros discípulos", "Su propio estudio"], "explanationEn": "No one comes to this confession by cleverness; it is given by God.", "explanationEs": "Nadie llega a esta confesión por astucia; es dada por Dios.", "correct": 1}, {"textEn": "7. According to the lesson, the 'rock' on which Christ builds His church is:", "textEs": "7. Según la lección, la 'roca' sobre la cual Cristo edifica su iglesia es:", "optionsEn": ["Peter made the first pope", "The city of Rome", "The Spirit-given confession that Jesus is the Christ", "The temple in Jerusalem"], "optionsEs": ["Pedro hecho el primer papa", "La ciudad de Roma", "La confesión dada por el Espíritu de que Jesús es el Cristo", "El templo en Jerusalén"], "explanationEn": "Peter (Petros) is a small stone; the rock (petra) is Christ confessed, not a man.", "explanationEs": "Pedro (Petros) es una piedra pequeña; la roca (petra) es Cristo confesado, no un hombre.", "correct": 2}, {"textEn": "8. Jesus promised that against His church the gates of Hades would:", "textEs": "8. Jesús prometió que contra su iglesia las puertas del Hades:", "optionsEn": ["Open wide", "Stand forever", "Be rebuilt", "Not prevail"], "optionsEs": ["Se abrirían", "Permanecerían para siempre", "Serían reedificadas", "No prevalecerían"], "explanationEn": "Gates are defensive; the advancing church batters down hell's defenses.", "explanationEs": "Las puertas son defensivas; la iglesia que avanza derriba las defensas del infierno.", "correct": 3}, {"textEn": "9. Immediately after the confession, Jesus began to tell the disciples that He must:", "textEs": "9. Inmediatamente después de la confesión, Jesús comenzó a decir a los discípulos que le era necesario:", "optionsEn": ["Go to Jerusalem, be killed, and be raised the third day", "Build a temple", "Gather an army", "Crown Peter"], "optionsEs": ["Ir a Jerusalén, ser muerto, y resucitar al tercer día", "Edificar un templo", "Reunir un ejército", "Coronar a Pedro"], "explanationEn": "From the high point of the confession, the King turns at once toward the cross.", "explanationEs": "Desde el punto alto de la confesión, el Rey se vuelve enseguida hacia la cruz.", "correct": 0}, {"textEn": "10. When Peter rebuked Jesus for speaking of the cross, Jesus replied:", "textEs": "10. Cuando Pedro reprendió a Jesús por hablar de la cruz, Jesús respondió:", "optionsEn": ["'Get behind Me, Satan!'", "'Say no more'", "'You will lead the church'", "'Well spoken'"], "optionsEs": ["'¡Quítate de delante de mí, Satanás!'", "'No digas más'", "'Tú guiarás la iglesia'", "'Bien dicho'"], "explanationEn": "The same Peter can voice revelation one moment and the tempter the next.", "explanationEs": "El mismo Pedro puede expresar la revelación en un momento y al tentador al siguiente.", "correct": 0}, {"textEn": "11. Jesus said that whoever desires to come after Him must:", "textEs": "11. Jesús dijo que el que quiera venir en pos de Él debe:", "optionsEn": ["Keep his life safe", "Gain the whole world", "Deny himself, take up his cross, and follow Him", "Wait for glory"], "optionsEs": ["Guardar segura su vida", "Ganar el mundo entero", "Negarse a sí mismo, tomar su cruz y seguirle", "Esperar la gloria"], "explanationEn": "Whoever loses his life for Christ's sake will find it.", "explanationEs": "El que pierde su vida por causa de Cristo, la hallará.", "correct": 2}, {"textEn": "12. On the mountain of Transfiguration, the Father's voice said:", "textEs": "12. En el monte de la Transfiguración, la voz del Padre dijo:", "optionsEn": ["'Build three tabernacles'", "'Moses and Elijah are equal'", "'Wait here'", "'This is My beloved Son... Hear Him!'"], "optionsEs": ["'Haced tres enramadas'", "'Moisés y Elías son iguales'", "'Esperad aquí'", "'Éste es mi Hijo amado... a él oíd'"], "explanationEn": "The glory confirms the confession; Christ, not Moses or Elijah, is to be heard.", "explanationEs": "La gloria confirma la confesión; a Cristo, no a Moisés ni a Elías, hay que oír.", "correct": 3}, {"textEn": "13. When the disciples asked who is greatest in the kingdom, Jesus:", "textEs": "13. Cuando los discípulos preguntaron quién es el mayor en el reino, Jesús:", "optionsEn": ["Set a little child among them as the example", "Named Peter", "Pointed to the rich", "Named Himself"], "optionsEs": ["Puso a un niño en medio de ellos como ejemplo", "Nombró a Pedro", "Señaló a los ricos", "Se nombró a sí mismo"], "explanationEn": "Greatness in the church is the humility of a child, not rank.", "explanationEs": "La grandeza en la iglesia es la humildad de un niño, no el rango.", "correct": 0}, {"textEn": "14. About the one sheep that wandered off, Jesus said it is not the Father's will that:", "textEs": "14. Acerca de la oveja que se descarrió, Jesús dijo que no es la voluntad del Padre que:", "optionsEn": ["The shepherd rest", "The ninety-nine be left", "The flock be counted", "One of these little ones should perish"], "optionsEs": ["El pastor descanse", "Las noventa y nueve sean dejadas", "El rebaño sea contado", "Se pierda uno de estos pequeños"], "explanationEn": "The church seeks its weakest and straying members with the heart of God.", "explanationEs": "La iglesia busca a sus miembros más débiles y descarriados con el corazón de Dios.", "correct": 3}, {"textEn": "15. When a brother sins, Jesus said the first step is to:", "textEs": "15. Cuando un hermano peca, Jesús dijo que el primer paso es:", "optionsEn": ["Report him to the elders", "Remove him at once", "Go and tell him his fault between you and him alone", "Tell the whole town"], "optionsEs": ["Reportarlo a los ancianos", "Expulsarlo enseguida", "Ir y reprenderle estando tú y él solos", "Decirlo a todo el pueblo"], "explanationEn": "The goal at every step is to win the brother, not to expose him.", "explanationEs": "La meta en cada paso es ganar al hermano, no exponerlo.", "correct": 2}, {"textEn": "16. Jesus promised that where two or three are gathered in His name:", "textEs": "16. Jesús prometió que donde dos o tres están congregados en su nombre:", "optionsEn": ["A miracle will occur", "He is there in the midst of them", "They must wait for more", "The law is fulfilled"], "optionsEs": ["Ocurrirá un milagro", "Él está allí en medio de ellos", "Deben esperar a más", "La ley se cumple"], "explanationEn": "The church does not need a great crowd to have its King present.", "explanationEs": "La iglesia no necesita una gran multitud para tener presente a su Rey.", "correct": 1}, {"textEn": "17. When Peter asked how often to forgive, Jesus answered:", "textEs": "17. Cuando Pedro preguntó cuántas veces perdonar, Jesús respondió:", "optionsEn": ["As the law requires", "Up to seventy times seven", "Only once", "Up to seven times"], "optionsEs": ["Como la ley requiere", "Hasta setenta veces siete", "Solo una vez", "Hasta siete veces"], "explanationEn": "Seventy times seven means to forgive without keeping count.", "explanationEs": "Setenta veces siete significa perdonar sin llevar la cuenta.", "correct": 1}, {"textEn": "18. In the parable of the unforgiving servant, the servant who had been forgiven a vast debt:", "textEs": "18. En la parábola del siervo que no perdonó, el siervo que había sido perdonado de una gran deuda:", "optionsEn": ["Repaid the king", "Forgave others freely", "Left the country", "Refused mercy to a fellow servant who owed a small sum"], "optionsEs": ["Pagó al rey", "Perdonó a otros libremente", "Salió del país", "Negó misericordia a un consiervo que debía una pequeña suma"], "explanationEn": "Those forgiven so great a debt by God cannot clutch the small debts of others.", "explanationEs": "Los perdonados de tan gran deuda por Dios no pueden aferrarse a las pequeñas deudas de otros.", "correct": 3}, {"textEn": "19. The one foundation on which the church rests, according to this unit, is:", "textEs": "19. El único fundamento sobre el cual descansa la iglesia, según esta unidad, es:", "optionsEn": ["The Spirit-given confession that Jesus is the Christ, the Son of the living God", "A great building", "Numbers and money", "Human leadership"], "optionsEs": ["La confesión dada por el Espíritu de que Jesús es el Cristo, el Hijo del Dios viviente", "Un gran edificio", "Números y dinero", "El liderazgo humano"], "explanationEn": "The church is built on Christ confessed, by Him and not by us.", "explanationEs": "La iglesia se edifica sobre Cristo confesado, por Él y no por nosotros.", "correct": 0}, {"textEn": "20. The common life of the church, this unit teaches, should be marked by:", "textEs": "20. La vida común de la iglesia, enseña esta unidad, debe estar marcada por:", "optionsEn": ["Rivalry for rank", "Wealth and size", "Childlike humility, care for the weak, loving correction, and limitless forgiveness", "Strict secrecy"], "optionsEs": ["Rivalidad por el rango", "Riqueza y tamaño", "Humildad de niño, cuidado del débil, corrección amorosa y perdón sin límite", "Estricto secreto"], "explanationEn": "The church's life is to look like its King, who went to the cross for it.", "explanationEs": "La vida de la iglesia ha de parecerse a su Rey, que fue a la cruz por ella.", "correct": 2}];
+
+const kwQuestions = [{"textEn": "21. Describe the walking on the water and what it reveals about Jesus and about Peter's faith.", "textEs": "21. Describa el andar sobre el agua y lo que revela sobre Jesús y sobre la fe de Pedro.", "kw_en": ["walkin", "water", "peter", "sinkin", "little", "doubt", "worship", "afraid"], "kw_es": ["andar", "agua", "pedro", "hundir", "poca", "dudar", "adorar", "viento"], "modelEn": "After feeding the five thousand, Jesus sent the disciples ahead and came to them walking on the water. Peter asked to come and for a moment was walking on the waves toward Jesus, but when he saw the wind he was afraid and began sinking, crying for the Lord to save him. Jesus caught him and said, O you of little faith, why did you doubt, showing that Peter walked while looking to Jesus but sank when fear took over. When Jesus climbed into the boat the wind ceased, and the disciples began to worship Him, saying truly You are the Son of God. The scene reveals Jesus as Lord over the water and already presses the question of who He is that the whole unit will answer.", "modelEs": "Después de alimentar a los cinco mil, Jesús envió a los discípulos delante y vino a ellos andando sobre el agua. Pedro pidió venir y por un momento andaba sobre las olas hacia Jesús, pero cuando vio el viento tuvo miedo y comenzó a hundirse, clamando que el Señor lo salvara. Jesús lo tomó y dijo: Hombre de poca fe, ¿por qué dudaste?, mostrando que Pedro anduvo mirando a Jesús pero se hundió cuando el temor lo dominó. Cuando Jesús subió a la barca el viento cesó, y los discípulos comenzaron a adorarle, diciendo que verdaderamente Él es el Hijo de Dios. La escena revela a Jesús como Señor sobre el agua y ya apremia la pregunta de quién es Él que toda la unidad responderá."}, {"textEn": "22. According to Jesus, what truly defiles a person, and why?", "textEs": "22. Según Jesús, ¿qué contamina verdaderamente a una persona, y por qué?", "kw_en": ["defile", "heart", "mouth", "tradit", "pharis", "ceremon", "evil", "inside"], "kw_es": ["contamin", "corazón", "boca", "tradici", "fariseo", "ceremon", "malos", "dentro"], "modelEn": "When the Pharisees were scandalized that the disciples ate with unwashed hands, Jesus turned their tradition inside out and taught that what goes into the mouth does not defile a person, but what comes out of the mouth defiles him. He explained that the things which come out proceed from the heart, for out of the heart come evil thoughts, murders, adulteries, and the rest. So true defilement is not a matter of ceremony or ritual washing but of the heart inside. The Pharisees had focused on the outside while their hearts were unclean, and Jesus taught that the real problem in every person is the corrupt heart from which sin proceeds.", "modelEs": "Cuando los fariseos se escandalizaron de que los discípulos comieran con manos sin lavar, Jesús volvió su tradición al revés y enseñó que lo que entra en la boca no contamina a la persona, sino que lo que sale de la boca la contamina. Explicó que las cosas que salen proceden del corazón, porque del corazón salen los malos pensamientos, los homicidios, los adulterios y lo demás. Así que la verdadera contaminación no es cuestión de ceremonia ni de lavamiento ritual sino del corazón por dentro. Los fariseos se habían fijado en lo de afuera mientras su corazón estaba inmundo, y Jesús enseñó que el verdadero problema en cada persona es el corazón corrupto del cual procede el pecado."}, {"textEn": "23. Describe the faith of the Canaanite woman and what it shows about the King's church.", "textEs": "23. Describa la fe de la mujer cananea y lo que muestra sobre la iglesia del Rey.", "kw_en": ["canaan", "gentile", "faith", "daught", "persist", "healed", "nation", "outside"], "kw_es": ["cananea", "gentil", "hija", "persist", "sanar", "nación", "afuera", "grande"], "modelEn": "A Gentile woman of Canaan came begging Jesus to heal her daughter, who was tormented by a demon. Jesus at first seemed to refuse, testing her, but she pressed on with humble persistence and would not be turned away. He marveled and said, O woman, great is your faith, and her daughter was healed from that hour. As with the centurion earlier in the Gospel, it is an outsider, a Gentile from beyond Israel, who shows the very faith the King is looking for. This shows that the King's church will not be limited to one nation but will gather people of great faith from every nation, an early sign of the worldwide church being built on the confession of Christ.", "modelEs": "Una mujer gentil de Canaán vino rogando a Jesús que sanara a su hija, atormentada por un demonio. Jesús al principio pareció negarse, probándola, pero ella insistió con humilde persistencia y no se dejó apartar. Él se maravilló y dijo: Oh mujer, grande es tu fe, y su hija fue sanada desde aquella hora. Como con el centurión antes en el Evangelio, es una extraña, una gentil de fuera de Israel, quien muestra la fe misma que el Rey busca. Esto muestra que la iglesia del Rey no se limitará a una nación sino que reunirá gente de gran fe de toda nación, una señal temprana de la iglesia mundial edificada sobre la confesión de Cristo."}, {"textEn": "24. What was Peter's great confession, and how did he come to know it?", "textEs": "24. ¿Cuál fue la gran confesión de Pedro, y cómo llegó a conocerla?", "kw_en": ["confess", "christ", "living", "peter", "reveal", "father", "blessed", "caesar"], "kw_es": ["confes", "cristo", "viviente", "pedro", "revela", "padre", "bienavent", "cesarea"], "modelEn": "At Caesarea Philippi Jesus first asked who men said the Son of Man was, and the answers were John the Baptist, Elijah, or one of the prophets. Then He asked the disciples directly, and Peter confessed for them all, You are the Christ, the Son of the living God. Jesus called him blessed and said that flesh and blood had not revealed this to him, but His Father who is in heaven. So Peter did not come to this confession by his own cleverness or by hearsay; it was given to him by God. This is the heart of the whole Gospel, that no one truly confesses Jesus as the Christ and Son of God except by the revelation of the Father through the Spirit.", "modelEs": "En Cesarea de Filipo Jesús primero preguntó quién decían los hombres que era el Hijo del Hombre, y las respuestas fueron Juan el Bautista, Elías, o uno de los profetas. Luego preguntó a los discípulos directamente, y Pedro confesó por todos: Tú eres el Cristo, el Hijo del Dios viviente. Jesús lo llamó bienaventurado y dijo que no se lo había revelado carne ni sangre, sino su Padre que está en los cielos. Así que Pedro no llegó a esta confesión por su propia astucia ni de oídas; le fue dada por Dios. Este es el corazón de todo el Evangelio, que nadie confiesa verdaderamente a Jesús como el Cristo y el Hijo de Dios sino por la revelación del Padre por medio del Espíritu."}, {"textEn": "25. Explain what 'on this rock I will build My church' means in this unit, and the promise about the gates of Hades.", "textEs": "25. Explique lo que significa 'sobre esta roca edificaré mi iglesia' en esta unidad, y la promesa sobre las puertas del Hades.", "kw_en": ["church", "confess", "petros", "petra", "gates", "prevail", "christ", "build"], "kw_es": ["iglesia", "confes", "petros", "petra", "puertas", "prevale", "cristo", "edific"], "modelEn": "There is a play on words: Peter is Petros, a small stone, while the rock on which the church is built is petra, a bedrock. The lesson teaches that the rock is not the man Peter but the Spirit-given confession Peter had just made, that Jesus is the Christ, the Son of the living God. So the church is built not on a man but on Christ confessed, and not by us but by Him. Jesus promised that the gates of Hades would not prevail against it. Since gates are a defensive structure, the picture is of the advancing church battering down the defenses of hell rather than barely holding out. The church is meant to go forward against the gates of hell, and they will not stand.", "modelEs": "Hay un juego de palabras: Pedro es Petros, una piedra pequeña, mientras que la roca sobre la cual se edifica la iglesia es petra, una roca firme. La lección enseña que la roca no es el hombre Pedro sino la confesión dada por el Espíritu que Pedro acababa de hacer, que Jesús es el Cristo, el Hijo del Dios viviente. Así que la iglesia se edifica no sobre un hombre sino sobre Cristo confesado, y no por nosotros sino por Él. Jesús prometió que las puertas del Hades no prevalecerían contra ella. Puesto que las puertas son una estructura defensiva, el cuadro es de la iglesia que avanza derribando las defensas del infierno en vez de apenas resistir. La iglesia ha de avanzar contra las puertas del infierno, y no se mantendrán en pie."}, {"textEn": "26. After the confession, what did Jesus foretell, and what did He say it means to follow Him?", "textEs": "26. Después de la confesión, ¿qué anunció Jesús, y qué dijo que significa seguirle?", "kw_en": ["jerusal", "killed", "raised", "cross", "deny", "follow", "losing", "satan"], "kw_es": ["jerusal", "muerto", "resucit", "cruz", "negar", "seguir", "perder", "satanás"], "modelEn": "From the time of the confession Jesus began to show the disciples that He must go to Jerusalem, suffer many things, be killed, and be raised the third day. When Peter rebuked Him, saying this must never happen, Jesus answered, Get behind Me, Satan, for Peter was minding the things of men and not of God. Then Jesus said that if anyone desires to come after Him he must deny himself, take up his cross, and follow Him, for whoever would save his life will lose it, but whoever loses his life for Christ's sake will find it. So the church is founded on a confessed Christ who is going to the cross, and to follow Him is to take up a cross and lose one's life for His sake.", "modelEs": "Desde el tiempo de la confesión Jesús comenzó a mostrar a los discípulos que le era necesario ir a Jerusalén, padecer muchas cosas, ser muerto, y resucitar al tercer día. Cuando Pedro lo reprendió, diciendo que esto nunca debía suceder, Jesús respondió: Quítate de delante de mí, Satanás, porque Pedro ponía la mira en las cosas de los hombres y no de Dios. Luego Jesús dijo que si alguno quiere venir en pos de Él debe negarse a sí mismo, tomar su cruz, y seguirle, porque el que quiera salvar su vida la perderá, pero el que pierda su vida por causa de Cristo la hallará. Así que la iglesia se funda sobre un Cristo confesado que va a la cruz, y seguirle es tomar una cruz y perder la vida por causa de Él."}, {"textEn": "27. Describe the Transfiguration and the word the Father spoke.", "textEs": "27. Describa la Transfiguración y la palabra que habló el Padre.", "kw_en": ["transfig", "moses", "elijah", "shinin", "beloved", "cloud", "mountain", "hear"], "kw_es": ["transfig", "moisés", "elías", "resplan", "amado", "nube", "monte", "oíd"], "modelEn": "Jesus took Peter, James, and John up a high mountain and was transfigured before them, His face shining like the sun. Moses and Elijah, representing the law and the prophets, appeared and talked with Him. Peter wanted to build three tabernacles, but a bright cloud overshadowed them and the Father's voice came, repeating the word spoken at the Jordan and adding a command: This is My beloved Son, in whom I am well pleased, hear Him. The glory on the mountain confirmed Peter's confession, showing that this truly is the Son of God, and the Father's command made clear that Christ, and not Moses or Elijah, is the one to be heard. Coming down, Jesus taught that faith as small as a mustard seed can move mountains.", "modelEs": "Jesús tomó a Pedro, Jacobo y Juan a un monte alto y fue transfigurado delante de ellos, resplandeciendo su rostro como el sol. Moisés y Elías, que representan la ley y los profetas, aparecieron y hablaron con Él. Pedro quería hacer tres enramadas, pero una nube de luz los cubrió y vino la voz del Padre, repitiendo la palabra dicha en el Jordán y añadiendo un mandato: Éste es mi Hijo amado, en quien tengo contentamiento, a él oíd. La gloria en el monte confirmó la confesión de Pedro, mostrando que éste es verdaderamente el Hijo de Dios, y el mandato del Padre dejó claro que a Cristo, y no a Moisés ni a Elías, hay que oír. Al descender, Jesús enseñó que una fe tan pequeña como un grano de mostaza puede mover montañas."}, {"textEn": "28. What does chapter 18 teach about true greatness and about the little ones?", "textEs": "28. ¿Qué enseña el capítulo 18 sobre la verdadera grandeza y sobre los pequeños?", "kw_en": ["greates", "child", "humilit", "stumble", "little", "sheep", "perish", "kingdom"], "kw_es": ["mayor", "niño", "humild", "tropez", "pequeñ", "oveja", "perder", "reino"], "modelEn": "When the disciples asked who is greatest in the kingdom, Jesus set a little child among them and said that unless they are converted and become like little children they will not enter the kingdom of heaven. Greatness in the church is not rank but the humility of a child. He then warned fiercely against causing one of these little ones to stumble, saying it would be better to have a millstone around the neck and be drowned in the sea. And He told of the shepherd who leaves the ninety-nine to seek the one sheep that wandered off, because it is not the will of the Father that one of these little ones should perish. So the church is to guard and seek its weakest and straying members with the very heart of God.", "modelEs": "Cuando los discípulos preguntaron quién es el mayor en el reino, Jesús puso a un niño en medio de ellos y dijo que si no se vuelven y se hacen como niños no entrarán en el reino de los cielos. La grandeza en la iglesia no es el rango sino la humildad de un niño. Luego advirtió severamente contra hacer tropezar a uno de estos pequeños, diciendo que mejor le sería que le colgaran una piedra de molino al cuello y se ahogara en el mar. Y habló del pastor que deja las noventa y nueve para buscar la oveja que se descarrió, porque no es la voluntad del Padre que se pierda uno de estos pequeños. Así que la iglesia ha de guardar y buscar a sus miembros más débiles y descarriados con el mismísimo corazón de Dios."}, {"textEn": "29. What pattern did Jesus give for dealing with a sinning brother, and what did He promise about two or three gathered?", "textEs": "29. ¿Qué patrón dio Jesús para tratar con un hermano que peca, y qué prometió sobre dos o tres congregados?", "kw_en": ["brother", "fault", "church", "alone", "loose", "gather", "present", "correct"], "kw_es": ["hermano", "reprend", "iglesia", "solos", "desatar", "congrega", "presente", "ganar"], "modelEn": "Jesus gave a pattern for dealing with sin among His people. If a brother sins, the first step is to go and tell him his fault between the two of them alone; if he will not hear, take one or two others; and if he still will not hear, tell it to the church. The goal at every step is to win the brother back, not to expose him. To the church Jesus gave real authority to bind and to loose, to declare the terms of the gospel and to exercise loving correction and discipline. In the midst of this teaching He gave the precious promise that where two or three are gathered together in His name, He is present there in the midst of them. So the church does not need a great crowd to have its King present with it.", "modelEs": "Jesús dio un patrón para tratar con el pecado entre su pueblo. Si un hermano peca, el primer paso es ir y reprenderle estando los dos solos; si no oye, tomar a uno o dos más; y si todavía no oye, decirlo a la iglesia. La meta en cada paso es ganar al hermano, no exponerlo. A la iglesia Jesús le dio verdadera autoridad de atar y desatar, de declarar los términos del evangelio y de ejercer corrección y disciplina amorosa. En medio de esta enseñanza dio la preciosa promesa de que donde dos o tres están congregados en su nombre, Él está presente allí en medio de ellos. Así que la iglesia no necesita una gran multitud para tener presente a su Rey con ella."}, {"textEn": "30. Explain the parable of the unforgiving servant and how it gathers the unit's theme of the King and His church.", "textEs": "30. Explique la parábola del siervo que no perdonó y cómo reúne el tema de la unidad sobre el Rey y su iglesia.", "kw_en": ["forgive", "servant", "debt", "seventy", "mercy", "heart", "church", "confess"], "kw_es": ["perdón", "siervo", "deuda", "setenta", "miseric", "corazón", "iglesia", "confes"], "modelEn": "When Peter asked how often to forgive, Jesus said up to seventy times seven, meaning without keeping count, and told of a servant forgiven an unpayable debt by his king out of mercy, who then seized a fellow servant owing a trifling sum and refused him the same mercy. The king delivered the wicked servant to the tormentors, and Jesus warned that the heavenly Father will do the same if we do not forgive our brother from the heart. This gathers the whole theme of the King and His church, for the church is built on the Spirit-given confession that Jesus is the Christ, and its common life is to look like its King: a community of the forgiven who, having been forgiven so great a debt, forgive others, and who live in childlike humility, care for the weak, and loving correction.", "modelEs": "Cuando Pedro preguntó cuántas veces perdonar, Jesús dijo hasta setenta veces siete, queriendo decir sin llevar la cuenta, y habló de un siervo perdonado de una deuda impagable por su rey por misericordia, que luego agarró a un consiervo que le debía una suma insignificante y le negó la misma misericordia. El rey entregó al siervo malvado a los verdugos, y Jesús advirtió que el Padre celestial hará lo mismo si no perdonamos a nuestro hermano de corazón. Esto reúne todo el tema del Rey y su iglesia, pues la iglesia se edifica sobre la confesión dada por el Espíritu de que Jesús es el Cristo, y su vida común ha de parecerse a su Rey: una comunidad de los perdonados que, habiendo sido perdonados de tan gran deuda, perdonan a otros, y que viven en humildad de niño, cuidado del débil, y corrección amorosa."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 10 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 10 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSMattReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

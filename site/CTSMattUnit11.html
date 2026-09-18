@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Matthew Intensive — Unit 11</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 12 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Matthew Intensive — Unit 11: The Olivet Discourse</span><span class="lang-es">📖 Mateo Intensivo — Unidad 11: El Discurso del Monte de los Olivos</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Watch therefore, for you do not know what hour your Lord is coming." — Matthew 24:42</span><span class="lang-es">"Velad, pues, porque no sabéis a qué hora ha de venir vuestro Señor." — Mateo 24:42</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Matthew Intensive. Please register before beginning Unit 11.</span><span class="lang-es">Bienvenido al Intensivo de Mateo. Por favor regístrese antes de comenzar la Unidad 11.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Matthew 24:42</strong></p>
+<div class="scripture">"Watch therefore, for you do not know what hour your Lord is coming." — Matthew 24:42 (NKJV)</div>
+
+<h3>The Olivet Discourse and Three Questions</h3>
+<p>The burning question about the end of the age has been argued for two thousand years. We all want to know what happens next, and the disciples felt the same. As Jesus and the disciples were leaving the temple, He said that not one stone would be left upon another. On the Mount of Olives they came with three questions (Matthew 24:3): when will the temple be destroyed, what will be the sign of Your coming, and what is the sign of the end of the age? Jesus answered all three, but the answers are woven together so tightly that interpreters still debate which verse belongs to which question. This is the great discourse on the last things, and we should hold it with humility, for it was given less to satisfy our curiosity than to make us ready.</p>
+
+<h3>The Temple's Fall</h3>
+<p>The temple fell in A.D. 70, about forty years after Jesus' prediction, so that part of His answer was fulfilled within a single generation. The Roman legions under Titus surrounded the city and cut every supply line. Inside the walls the people were destroyed by famine, by civil war between rival factions, and by disease. The historian Josephus records starvation so severe that people ate the leather of their shoes and even, in one tragic case, turned to cannibalism. The Second Temple, the heart of Jewish identity, was burned to its foundations; the gold ornaments melted, and soldiers pried apart the very stones to recover it, literally fulfilling the word that not one stone would be left upon another. Hundreds of thousands perished, and tens of thousands were carried off as prisoners, sent to the mines, sold as slaves, or forced to fight as gladiators. For the first-century Jew this was the absolute end of the world as he knew it: the priesthood ceased, the sacrifices ended, and the central place of worship was gone. Today only a portion of the western retaining wall remains, where Jews still come to pray and to place written petitions in the cracks of the stone.</p>
+
+<h3>The Signs of the Age</h3>
+<p>Before that fall and stretching on toward His final coming, Jesus described the character of the whole age. There would be false christs who deceive many, wars and rumors of wars, famines and earthquakes — but these are only the beginning of sorrows, not the end itself. His people would be hated and persecuted, yet "this gospel of the kingdom will be preached in all the world as a witness to all the nations, and then the end will come" (Matthew 24:14). He spoke of the abomination of desolation and a great tribulation, and finally of the Son of Man coming on the clouds of heaven with power and great glory, gathering His elect. Interpreters differ over how much of this language pointed to A.D. 70 and how much reaches forward to the final coming, and faithful readers hold different views. What is certain is the lesson of the fig tree: when these things begin, the end is near, and "heaven and earth will pass away, but My words will by no means pass away" (Matthew 24:35).</p>
+
+<h3>When Is the End? No One Knows</h3>
+<p>About the date of His return Jesus said plainly that not even He knew it, but the Father only (Matthew 24:36). That has not stopped people from making predictions for two thousand years, and every one of them has been wrong — every single one. By the Old Testament standard of Deuteronomy 18, a prophet whose prediction fails is a false prophet, so by Scripture's own test these date-setters disqualified themselves. The 2011 prediction of Harold Camping is a modern warning: using an elaborate, homemade numerology to get around the Bible's caution, he convinced thousands that May 21, 2011, would be the day. When nothing happened, he simply moved the date to October. The harm was real and lasting — people drained their retirement savings, abandoned their careers, and suffered deep spiritual disillusionment when the predicted day came and went. Claiming divine authority for a human calculation does not only fail; it wounds the people who trusted it.</p>
+
+<h3>The Millennial Positions</h3>
+<p>Christians who love the very same Bible have long held different views about the thousand years of Revelation 20 and the sequence of end-time events. The premillennial view holds that Christ returns before a coming reign on the earth; the amillennial view understands the thousand years as a picture of Christ's present reign between His two comings; and the postmillennial view expects Christ to return after a long age in which the gospel's influence grows. Sincere, Bible-loving believers have held each of these for centuries, and none of these positions has ever been a test of Christian fellowship. On the central things every view agrees: Jesus Christ will return bodily and visibly, the dead will be raised, and there will be a final judgment. Rather than dividing over the order of events, we do better to stand together on what is certain and to be ready.</p>
+
+<h3>What Will Happen on That Day</h3>
+<p>The first time Jesus came, He came as the suffering Servant of Isaiah — born in a stable, rejected by His own, crucified between two thieves. When He comes again, He will come as a conquering King. The contrast could not be more complete. First Thessalonians 4 gives the clearest picture of that day: the dead in Christ will rise first, then those who are alive will be caught up to join them, all at the sound of the trumpet. The believers in Thessalonica were anxious about loved ones who had died while waiting for that return, and Paul assured them that death is no barrier — those who have died in Christ will not be left behind but will be the first to rise. Scripture also rejects the idea of "soul sleep": the Lord told the thief he would be with Him in Paradise that very day, and Paul says that to be absent from the body is to be present with the Lord. The "sleep" the Bible speaks of is the rest of the body in the grave, not the soul, which remains awake and with God. I remember riding to a cemetery with a funeral director in South Dakota who said proudly, "You know, the crypts we put in the ground last two hundred years" — and I asked him the obvious question: what happens after that? The body is only the mailbox. Once the letter is posted it is already in the sender's hands, and though the mailbox may rust and be replaced, the letter — the real person — is kept safe until the day it is delivered. The trumpet that announces that day carried rich meaning for Jewish ears, for the shofar sounded at Sinai when God came down, at the Jubilee when slaves went free, and at the crowning of kings — presence, liberation, and coronation all at once. C.S. Lewis observed that the second coming splits history into everything before it and everything after, so that this present age is only a kind of preface; we are not yet in the main story.</p>
+
+<h3>What We Will Become</h3>
+<p>There will be astonishing changes when we meet the Lord. We will receive glorified bodies like His resurrection body. He passed through locked doors; He was recognized by His closest friends, and sometimes not, as on the road to Emmaus where two of them walked and talked with Him for miles before their eyes were opened; He ate fish on the shore, not because He had to but because He could; and in that same glorified body He was taken up until a cloud received Him out of sight. But something even greater than a glorified body awaits us. First John 3:2 says that when He appears we shall see Him as He is, and we shall be like Him. In the Old Testament no one could look directly upon God; Moses saw only His back, for the glory would have destroyed sinful men. But on that day we will see Him face to face, and I believe we will be able to bear it because we will have been made like Him. Somehow — and this is one of the great mysteries of Scripture — God will make us holy without erasing who we are. He will purify us without deleting us. Our identity, our memory, our freedom: all of it carried through a holiness we cannot yet imagine. How He will do this is a great mystery.</p>
+
+<h3>From Humility to Wonder</h3>
+<p>This is the shape of the whole discourse. It moves from what we cannot know, the date, through what we are promised, the events of that day, to what we can barely imagine, what we shall become. It begins in humility, moves through hope, and closes in wonder. And chapter 25 turns it all into one urgent call. The ten virgins teach us to be ready, for five had oil and five did not, and the door was shut. The talents teach us to be faithful with whatever we have been given, that we may hear, "Well done, good and faithful servant." And the sheep and the goats show the King judging the nations and saying that whatever was done to the least of His brethren was done to Him. Watch, be faithful, and love — for the King will surely come. As Augustine prayed, "You have made us for Yourself, and our heart is restless until it rests in You." The face-to-face sight of God is the rest toward which every human longing has unknowingly reached, and the final mystery — that God will make us holy without undoing us — is the wonder we carry home.</p>
+<div class="scripture">"Beloved, now we are children of God; and it has not yet been revealed what we shall be, but we know that when He is revealed, we shall be like Him, for we shall see Him as He is." — 1 John 3:2 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Mateo 24:42 (RVG)</strong></p>
+<div class="scripture">"Velad, pues, porque no sabéis a qué hora ha de venir vuestro Señor." — Mateo 24:42</div>
+
+<h3>El Discurso del Monte de los Olivos y Tres Preguntas</h3>
+<p>La pregunta candente sobre el fin de la era se ha discutido durante dos mil años. Todos queremos saber qué sucederá después, y los discípulos sentían lo mismo. Mientras Jesús y los discípulos salían del templo, Él dijo que no quedaría piedra sobre piedra. En el Monte de los Olivos vinieron con tres preguntas (Mateo 24:3): ¿cuándo será destruido el templo?, ¿cuál será la señal de tu venida?, y ¿cuál es la señal del fin de la era? Jesús respondió a las tres, pero las respuestas están entretejidas tan estrechamente que los intérpretes aún debaten qué versículo corresponde a cada pregunta. Este es el gran discurso sobre las cosas finales, y debemos sostenerlo con humildad, porque fue dado menos para satisfacer nuestra curiosidad que para prepararnos.</p>
+
+<h3>La Caída del Templo</h3>
+<p>El templo cayó en el año 70 d.C., unos cuarenta años después de la predicción de Jesús, de modo que esa parte de su respuesta se cumplió dentro de una sola generación. Las legiones romanas dirigidas por Tito rodearon la ciudad y cortaron toda línea de suministro. Dentro de las murallas la gente fue destruida por el hambre, por la guerra civil entre facciones rivales, y por la enfermedad. El historiador Josefo registra una inanición tan severa que la gente comía el cuero de sus zapatos y, en un caso trágico, recurrió al canibalismo. El Segundo Templo, corazón de la identidad judía, fue quemado hasta sus cimientos; los ornamentos de oro se derritieron, y los soldados separaron las piedras mismas para recuperarlo, cumpliendo literalmente la palabra de que no quedaría piedra sobre piedra. Cientos de miles perecieron, y decenas de miles fueron llevados como prisioneros, enviados a las minas, vendidos como esclavos, u obligados a luchar como gladiadores. Para el judío del primer siglo este fue el fin absoluto del mundo tal como lo conocía: el sacerdocio cesó, los sacrificios terminaron, y el lugar central de adoración desapareció. Hoy solo queda una porción del muro de contención occidental, donde los judíos todavía vienen a orar y a colocar peticiones escritas en las grietas de la piedra.</p>
+
+<h3>Las Señales de la Era</h3>
+<p>Antes de esa caída y extendiéndose hacia su venida final, Jesús describió el carácter de toda la era. Habría falsos cristos que engañan a muchos, guerras y rumores de guerras, hambres y terremotos — pero esto es solo el principio de dolores, no el fin mismo. Su pueblo sería aborrecido y perseguido, y sin embargo "será predicado este evangelio del reino en todo el mundo, para testimonio a todas las naciones; y entonces vendrá el fin" (Mateo 24:14). Habló de la abominación desoladora y de una gran tribulación, y por fin del Hijo del Hombre viniendo sobre las nubes del cielo con poder y gran gloria, reuniendo a sus escogidos. Los intérpretes difieren sobre cuánto de este lenguaje apuntaba al año 70 y cuánto alcanza hacia la venida final, y lectores fieles sostienen distintas opiniones. Lo cierto es la lección de la higuera: cuando estas cosas comiencen, el fin está cerca, y "el cielo y la tierra pasarán, mas mis palabras no pasarán" (Mateo 24:35).</p>
+
+<h3>¿Cuándo Es el Fin? Nadie lo Sabe</h3>
+<p>Sobre la fecha de su regreso Jesús dijo claramente que ni siquiera Él la sabía, sino solo el Padre (Mateo 24:36). Eso no ha impedido que la gente haga predicciones durante dos mil años, y todas han estado equivocadas — todas y cada una. Según el estándar del Antiguo Testamento de Deuteronomio 18, un profeta cuya predicción falla es un falso profeta, así que por la propia prueba de la Escritura estos fijadores de fechas se descalificaron a sí mismos. La predicción de Harold Camping en 2011 es una advertencia moderna: usando una numerología elaborada y casera para eludir la cautela de la Biblia, convenció a miles de que el 21 de mayo de 2011 sería el día. Cuando nada sucedió, simplemente cambió la fecha a octubre. El daño fue real y duradero — la gente agotó sus ahorros de jubilación, abandonó sus carreras, y sufrió profunda desilusión espiritual cuando el día predicho pasó. Afirmar autoridad divina para un cálculo humano no solo fracasa; hiere a los que confiaron en él.</p>
+
+<h3>Las Posiciones Milenarias</h3>
+<p>Los cristianos que aman la misma Biblia han sostenido por mucho tiempo distintas opiniones sobre los mil años de Apocalipsis 20 y la secuencia de los eventos del fin. La posición premilenial sostiene que Cristo vuelve antes de un reinado venidero sobre la tierra; la posición amilenial entiende los mil años como un cuadro del reinado presente de Cristo entre sus dos venidas; y la posición posmilenial espera que Cristo vuelva después de una larga era en que crece la influencia del evangelio. Creyentes sinceros y amantes de la Biblia han sostenido cada una de estas por siglos, y ninguna de estas posiciones ha sido jamás una prueba de compañerismo cristiano. En las cosas centrales toda opinión concuerda: Jesucristo volverá corporal y visiblemente, los muertos serán resucitados, y habrá un juicio final. En vez de dividirnos por el orden de los eventos, hacemos mejor en mantenernos juntos en lo que es cierto y en estar preparados.</p>
+
+<h3>Qué Sucederá en Ese Día</h3>
+<p>La primera vez que Jesús vino, vino como el Siervo sufriente de Isaías — nacido en un establo, rechazado por los suyos, crucificado entre dos ladrones. Cuando venga otra vez, vendrá como un Rey conquistador. El contraste no podría ser más completo. Primera de Tesalonicenses 4 da el cuadro más claro de ese día: los muertos en Cristo resucitarán primero, luego los que estén vivos serán arrebatados para unirse a ellos, todo al sonido de la trompeta. Los creyentes en Tesalónica estaban ansiosos por los seres queridos que habían muerto mientras esperaban ese regreso, y Pablo les aseguró que la muerte no es barrera — los que han muerto en Cristo no serán dejados atrás sino que serán los primeros en resucitar. La Escritura también rechaza la idea del "sueño del alma": el Señor dijo al ladrón que estaría con Él en el Paraíso ese mismo día, y Pablo dice que estar ausente del cuerpo es estar presente con el Señor. El "sueño" del que habla la Biblia es el descanso del cuerpo en la tumba, no del alma, que permanece despierta y con Dios. Recuerdo que iba hacia un cementerio con un director de funeraria en Dakota del Sur que dijo con orgullo: "¿Sabe? Las criptas que ponemos en el suelo duran doscientos años" — y le hice la pregunta obvia: ¿qué sucede después? El cuerpo es solo el buzón. Una vez que la carta es enviada ya está en manos del remitente, y aunque el buzón se oxide y sea reemplazado, la carta — la persona real — se guarda a salvo hasta el día en que sea entregada. La trompeta que anuncia ese día llevaba un rico significado para el oído judío, porque el shofar sonaba en el Sinaí cuando Dios descendía, en el Jubileo cuando los esclavos quedaban libres, y en la coronación de los reyes — presencia, liberación y coronación a la vez. C.S. Lewis observó que la segunda venida divide la historia en todo lo anterior a ella y todo lo posterior, de modo que esta era presente es solo una especie de prefacio; todavía no estamos en la historia principal.</p>
+
+<h3>En Qué Nos Convertiremos</h3>
+<p>Habrá cambios asombrosos cuando nos encontremos con el Señor. Recibiremos cuerpos glorificados como su cuerpo de resurrección. Él atravesó puertas cerradas; fue reconocido por sus amigos más cercanos, y a veces no, como en el camino a Emaús donde dos de ellos caminaron y hablaron con Él por kilómetros antes de que sus ojos fueran abiertos; comió pescado en la orilla, no porque tuviera que hacerlo sino porque podía; y en ese mismo cuerpo glorificado fue llevado arriba hasta que una nube lo recibió fuera de su vista. Pero algo aún más grande que un cuerpo glorificado nos espera. Primera de Juan 3:2 dice que cuando Él aparezca le veremos como Él es, y seremos semejantes a Él. En el Antiguo Testamento nadie podía mirar directamente a Dios; Moisés solo vio su espalda, porque la gloria habría destruido a los hombres pecadores. Pero en ese día le veremos cara a cara, y creo que podremos soportarlo porque habremos sido hechos semejantes a Él. De alguna manera — y este es uno de los grandes misterios de la Escritura — Dios nos hará santos sin borrar quiénes somos. Nos purificará sin eliminarnos. Nuestra identidad, nuestra memoria, nuestra libertad: todo ello llevado a través de una santidad que aún no podemos imaginar. Cómo hará esto es un gran misterio.</p>
+
+<h3>De la Humildad al Asombro</h3>
+<p>Esta es la forma de todo el discurso. Se mueve desde lo que no podemos saber, la fecha, a través de lo que se nos promete, los eventos de ese día, hasta lo que apenas podemos imaginar, en qué nos convertiremos. Comienza en la humildad, avanza por la esperanza, y cierra en el asombro. Y el capítulo 25 lo vuelve todo un llamado urgente. Las diez vírgenes nos enseñan a estar preparados, porque cinco tenían aceite y cinco no, y la puerta fue cerrada. Los talentos nos enseñan a ser fieles con lo que se nos ha dado, para que oigamos: "Bien, buen siervo y fiel." Y las ovejas y los cabritos muestran al Rey juzgando a las naciones y diciendo que cuanto se hizo al más pequeño de sus hermanos, a Él se le hizo. Velad, sed fieles, y amad — porque el Rey ciertamente vendrá. Como oró Agustín: "Nos hiciste para ti, y nuestro corazón está inquieto hasta que descanse en ti." La visión de Dios cara a cara es el descanso hacia el cual todo anhelo humano ha alcanzado sin saberlo, y el misterio final — que Dios nos hará santos sin deshacernos — es el asombro que llevamos a casa.</p>
+<div class="scripture">"Amados, ahora somos hijos de Dios, y aún no se ha manifestado lo que hemos de ser; pero sabemos que cuando él apareciere, seremos semejantes a él, porque le veremos como él es." — 1 Juan 3:2 (RVG)</div>
+</div>
+</div>
+
+
+<figure class="cts-figure" style="margin:30px auto;max-width:1050px;text-align:center;">
+<svg style="width:100%;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 820" role="img" aria-label="Three views of the millennium">
+<defs><radialGradient id="vig" cx="50%" cy="42%" r="78%"><stop offset="0%" stop-color="#f3ead0"/><stop offset="100%" stop-color="#efe4c4"/></radialGradient></defs>
+<rect width="1320" height="820" fill="#f3ead0"/><rect width="1320" height="820" fill="url(#vig)"/><rect x="14" y="14" width="1292" height="792" fill="none" stroke="#b08a2e" stroke-width="6"/><rect x="26" y="26" width="1268" height="768" fill="none" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="660.0" y="80" font-size="32" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.3">Three Views of the Millennium  /  Tres Posturas sobre el Milenio</text>
+<text x="660.0" y="110" font-size="14.5" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">How Christians read the 1,000 years of Revelation 20  ·  Cómo los cristianos leen los 1,000 años de Apocalipsis 20</text>
+<rect x="52" y="176" width="393" height="528" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.8"/>
+<path d="M52,188 a12,12 0 0 1 12,-12 h369 a12,12 0 0 1 12,12 v34 h-393 Z" fill="#7c2a2f"/>
+<text x="248.5" y="198" font-size="18" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Premillennialism</text>
+<text x="248.5" y="216" font-size="13" fill="#f3ead0" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Premilenialismo</text>
+<rect x="76" y="258" width="345" height="16" rx="4" fill="#fbf6e9" stroke="#8a661c" stroke-width="1.2"/>
+<rect x="262.3" y="258" width="124.19999999999999" height="16" fill="#ecd9a0" stroke="#8a661c" stroke-width="1"/>
+<text x="324.4" y="270" font-size="9" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">1000</text>
+<line x1="76" y1="249" x2="76" y2="257" stroke="#7c2a2f" stroke-width="2.4"/>
+<line x1="72" y1="252" x2="80" y2="252" stroke="#7c2a2f" stroke-width="2.4"/>
+<path d="M242.5,246 L254.5,246 L248.5,257 Z" fill="#7c2a2f" stroke="#561c20" stroke-width="0.8"/>
+<text x="78" y="287" font-size="8.5" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.8">1st Coming</text>
+<text x="324.4" y="287" font-size="8.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Millennium</text>
+<text x="248.5" y="299" font-size="8.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Return</text>
+<text x="70" y="314" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">THE MILLENNIUM —</text>
+<text x="70" y="330" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">A literal future 1,000-year reign of Christ on</text>
+<text x="70" y="345" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">earth.</text>
+<text x="70" y="360" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Un reinado futuro y literal de Cristo de 1,000 años en</text>
+<text x="70" y="374" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">la tierra.</text>
+<text x="70" y="397" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">CHRIST RETURNS —</text>
+<text x="70" y="413" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Before the millennium (pre-).</text>
+<text x="70" y="428" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Antes del milenio (pre-).</text>
+<circle cx="74" cy="447" r="3.5" fill="#7c2a2f"/>
+<text x="84" y="451" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Christ returns, then establishes His earthly</text>
+<text x="84" y="466" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">kingdom.</text>
+<text x="84" y="481" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Cristo regresa, luego establece su reino terrenal.</text>
+<circle cx="74" cy="498" r="3.5" fill="#7c2a2f"/>
+<text x="84" y="502" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Held in two forms — Historic and Dispensational.</text>
+<text x="84" y="517" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Sostenido en dos formas — Histórico y Dispensacional.</text>
+<line x1="70" y1="535" x2="427" y2="535" stroke="#b08a2e" stroke-width="0.8" opacity="0.6"/>
+<text x="70" y="551" font-size="11" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Key texts:  Rev 20:1–6 · Isa 11 · Zech 14</text>
+<text x="70" y="569" font-size="10.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Historically:</text>
+<text x="70" y="584" font-size="10.3" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Justin Martyr, Irenaeus; much of modern</text>
+<text x="70" y="597" font-size="10.3" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">evangelicalism.</text>
+<text x="70" y="610" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Justino Mártir, Ireneo; gran parte del evangelicalismo</text>
+<text x="70" y="623" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">moderno.</text>
+<rect x="463" y="176" width="393" height="528" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.8"/>
+<path d="M463,188 a12,12 0 0 1 12,-12 h369 a12,12 0 0 1 12,12 v34 h-393 Z" fill="#8a661c"/>
+<text x="659.5" y="198" font-size="18" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Postmillennialism</text>
+<text x="659.5" y="216" font-size="13" fill="#f3ead0" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Posmilenialismo</text>
+<rect x="487" y="258" width="345" height="16" rx="4" fill="#fbf6e9" stroke="#8a661c" stroke-width="1.2"/>
+<rect x="625.0" y="258" width="117.29999999999998" height="16" fill="#ecd9a0" stroke="#8a661c" stroke-width="1"/>
+<text x="683.6500000000001" y="270" font-size="9" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">1000</text>
+<line x1="487" y1="249" x2="487" y2="257" stroke="#7c2a2f" stroke-width="2.4"/>
+<line x1="483" y1="252" x2="491" y2="252" stroke="#7c2a2f" stroke-width="2.4"/>
+<path d="M750.1,246 L762.1,246 L756.1,257 Z" fill="#7c2a2f" stroke="#561c20" stroke-width="0.8"/>
+<text x="489" y="287" font-size="8.5" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.8">1st Coming</text>
+<text x="683.6500000000001" y="287" font-size="8.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Millennium</text>
+<text x="756.1" y="299" font-size="8.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Return</text>
+<text x="481" y="314" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">THE MILLENNIUM —</text>
+<text x="481" y="330" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">A coming golden age as the gospel triumphs in the</text>
+<text x="481" y="345" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">world.</text>
+<text x="481" y="360" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Una era dorada venidera al triunfar el evangelio en el</text>
+<text x="481" y="374" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">mundo.</text>
+<text x="481" y="397" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">CHRIST RETURNS —</text>
+<text x="481" y="413" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">After the millennium (post-).</text>
+<text x="481" y="428" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Después del milenio (post-).</text>
+<circle cx="485" cy="447" r="3.5" fill="#8a661c"/>
+<text x="495" y="451" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">The gospel gradually wins the nations, then</text>
+<text x="495" y="466" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Christ returns.</text>
+<text x="495" y="481" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El evangelio gana gradualmente a las naciones, luego</text>
+<text x="495" y="495" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Cristo regresa.</text>
+<circle cx="485" cy="512" r="3.5" fill="#8a661c"/>
+<text x="495" y="516" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">The “millennium” may be a long age, not exactly</text>
+<text x="495" y="531" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">1,000 years.</text>
+<text x="495" y="546" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El “milenio” puede ser una era larga, no exactamente</text>
+<text x="495" y="560" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">1,000 años.</text>
+<line x1="481" y1="578" x2="838" y2="578" stroke="#b08a2e" stroke-width="0.8" opacity="0.6"/>
+<text x="481" y="594" font-size="11" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Key texts:  Matt 13 · Ps 2 · Ps 110 · Rev 20</text>
+<text x="481" y="612" font-size="10.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Historically:</text>
+<text x="481" y="627" font-size="10.3" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Jonathan Edwards and the Puritans.</text>
+<text x="481" y="640" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Jonathan Edwards y los puritanos.</text>
+<rect x="874" y="176" width="393" height="528" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.8"/>
+<path d="M874,188 a12,12 0 0 1 12,-12 h369 a12,12 0 0 1 12,12 v34 h-393 Z" fill="#4f6470"/>
+<text x="1070.5" y="198" font-size="18" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Amillennialism</text>
+<text x="1070.5" y="216" font-size="13" fill="#f3ead0" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Amilenialismo</text>
+<rect x="898" y="258" width="345" height="16" rx="4" fill="#fbf6e9" stroke="#8a661c" stroke-width="1.2"/>
+<rect x="908.35" y="258" width="279.45" height="16" fill="#ecd9a0" stroke="#8a661c" stroke-width="1"/>
+<text x="1048.075" y="270" font-size="9" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">1000</text>
+<line x1="898" y1="249" x2="898" y2="257" stroke="#7c2a2f" stroke-width="2.4"/>
+<line x1="894" y1="252" x2="902" y2="252" stroke="#7c2a2f" stroke-width="2.4"/>
+<path d="M1188.7,246 L1200.7,246 L1194.7,257 Z" fill="#7c2a2f" stroke="#561c20" stroke-width="0.8"/>
+<text x="900" y="287" font-size="8.5" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.8">1st Coming</text>
+<text x="1048.075" y="287" font-size="8.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Millennium</text>
+<text x="1194.7" y="299" font-size="8.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Return</text>
+<text x="892" y="314" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">THE MILLENNIUM —</text>
+<text x="892" y="330" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Symbolic of the present age — Christ reigns now</text>
+<text x="892" y="345" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">from heaven.</text>
+<text x="892" y="360" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Símbolo de la era presente — Cristo reina ahora desde</text>
+<text x="892" y="374" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">el cielo.</text>
+<text x="892" y="397" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">CHRIST RETURNS —</text>
+<text x="892" y="413" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">At the end of the present age.</text>
+<text x="892" y="428" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Al final de la era presente.</text>
+<circle cx="896" cy="447" r="3.5" fill="#4f6470"/>
+<text x="906" y="451" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">The “thousand years” is all the time between</text>
+<text x="906" y="466" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Christ's two comings.</text>
+<text x="906" y="481" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Los “mil años” son todo el tiempo entre las dos</text>
+<text x="906" y="495" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">venidas de Cristo.</text>
+<circle cx="896" cy="512" r="3.5" fill="#4f6470"/>
+<text x="906" y="516" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Return, resurrection, and judgment come together</text>
+<text x="906" y="531" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">at the end.</text>
+<text x="906" y="546" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El regreso, la resurrección y el juicio vienen juntos</text>
+<text x="906" y="560" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">al final.</text>
+<line x1="892" y1="578" x2="1249" y2="578" stroke="#b08a2e" stroke-width="0.8" opacity="0.6"/>
+<text x="892" y="594" font-size="11" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Key texts:  Rev 20 · John 5 · Col 1:13</text>
+<text x="892" y="612" font-size="10.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Historically:</text>
+<text x="892" y="627" font-size="10.3" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Augustine; Luther and Calvin; much of the Reformed</text>
+<text x="892" y="640" font-size="10.3" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">tradition.</text>
+<text x="892" y="653" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Agustín; Lutero y Calvino; gran parte de la tradición</text>
+<text x="892" y="666" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Reformada.</text>
+<rect x="52" y="726" width="1216" height="68" rx="10" ry="10" fill="#efe4c4" stroke="#8a661c" stroke-width="1.2"/>
+<text x="660.0" y="750" font-size="12.5" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">All three are held by orthodox Christians who affirm Christ's bodily return, the resurrection, and the final judgment.</text>
+<text x="660.0" y="768" font-size="12" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">The differences turn on how to interpret Revelation 20 and the prophetic Scriptures.</text>
+<text x="660.0" y="786" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Las tres son sostenidas por cristianos ortodoxos; difieren en cómo interpretar Apocalipsis 20.  ·  Chapala Theological Seminary</text>
+</svg>
+<figcaption style="font-family:Georgia,serif;font-size:0.9em;line-height:1.5;margin-top:10px;color:#561c20;"><span style="font-weight:bold;">Three views of the millennium — how Christians read the thousand years of Revelation 20.</span><br><span style="font-style:italic;color:#8a661c;">Tres posturas sobre el milenio — cómo los cristianos leen los mil años de Apocalipsis 20.</span></figcaption>
+</figure>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 11 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 11 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Matthew Intensive — Unit 11 (The Olivet Discourse, Matthew 24-25)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 11;
+const COURSE = 'matt';
+const NEXT_UNIT_URL = 'CTSMattUnit12.html';
+const totalUnits = 13;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The King's Origins (Matthew 1-2)", "Unit 2 - The King Presented (Matthew 3-4)", "Unit 3 - Sermon on the Mount I: The Character of the Kingdom (Matthew 5)", "Unit 4 - Sermon on the Mount II: The Practice of the Kingdom (Matthew 6-7)", "Unit 5 - The Lord's Prayer (Matthew 6:9-13)", "Unit 6 - The King's Authority: Miracles (Matthew 8-9)", "Unit 7 - The King's Mission and Rising Opposition (Matthew 10-12)", "Unit 8 - The Parables of the Kingdom (Matthew 13)", "Unit 9 - The King and His Church (Matthew 14-18)", "Unit 10 - The Road to Jerusalem (Matthew 19-23)", "Unit 11 - The Olivet Discourse: Last Things (Matthew 24-25)", "Unit 12 - The Passion (Matthew 26-27)", "Unit 13 - The Resurrection and the Great Commission (Matthew 28)"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSMattUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. As Jesus left the temple, He predicted that:", "textEs": "1. Al salir Jesús del templo, predijo que:", "optionsEn": ["The temple would be enlarged", "The priests would repent", "Rome would protect it", "Not one stone would be left upon another"], "optionsEs": ["El templo sería ampliado", "Los sacerdotes se arrepentirían", "Roma lo protegería", "No quedaría piedra sobre piedra"], "explanationEn": "This was fulfilled in A.D. 70 when the temple was destroyed.", "explanationEs": "Esto se cumplió en el año 70 d.C. cuando el templo fue destruido.", "correct": 3}, {"textEn": "2. On the Mount of Olives the disciples asked Jesus how many questions?", "textEs": "2. En el Monte de los Olivos los discípulos hicieron a Jesús cuántas preguntas?", "optionsEn": ["Three — about the temple, His coming, and the end of the age", "One", "Five", "Two"], "optionsEs": ["Tres — sobre el templo, su venida, y el fin de la era", "Una", "Cinco", "Dos"], "explanationEn": "Jesus answered all three, woven so closely that interpreters still debate them.", "explanationEs": "Jesús respondió a las tres, entretejidas tan estrechamente que los intérpretes aún las debaten.", "correct": 0}, {"textEn": "3. The temple was destroyed in A.D. 70, which was:", "textEs": "3. El templo fue destruido en el año 70 d.C., lo cual fue:", "optionsEn": ["Before Jesus spoke", "About forty years after Jesus' prediction, within a generation", "A thousand years later", "Never actually fulfilled"], "optionsEs": ["Antes de que Jesús hablara", "Unos cuarenta años después de la predicción de Jesús, dentro de una generación", "Mil años después", "Nunca realmente cumplido"], "explanationEn": "That part of Jesus' answer was fulfilled within a single generation.", "explanationEs": "Esa parte de la respuesta de Jesús se cumplió dentro de una sola generación.", "correct": 1}, {"textEn": "4. During the siege, the historian Josephus records that the famine grew so severe that people:", "textEs": "4. Durante el sitio, el historiador Josefo registra que el hambre se volvió tan severa que la gente:", "optionsEn": ["Were fed by Rome", "Ate shoe leather and even, in one case, turned to cannibalism", "Found hidden grain", "Left the city freely"], "optionsEs": ["Era alimentada por Roma", "Comía cuero de zapatos y, en un caso, recurrió al canibalismo", "Halló grano escondido", "Salía libremente de la ciudad"], "explanationEn": "Social order collapsed as the search for food became the only priority.", "explanationEs": "El orden social colapsó al volverse la búsqueda de comida la única prioridad.", "correct": 1}, {"textEn": "5. Jesus said that the gospel of the kingdom will be preached in all the world, and then:", "textEs": "5. Jesús dijo que el evangelio del reino será predicado en todo el mundo, y entonces:", "optionsEn": ["The temple will be rebuilt", "The law will be abolished", "The end will come", "Rome will fall"], "optionsEs": ["El templo será reedificado", "La ley será abolida", "Vendrá el fin", "Roma caerá"], "explanationEn": "The worldwide witness of the gospel marks the age before the end.", "explanationEs": "El testimonio mundial del evangelio marca la era antes del fin.", "correct": 2}, {"textEn": "6. About the exact date of His return, Jesus said:", "textEs": "6. Sobre la fecha exacta de su regreso, Jesús dijo:", "optionsEn": ["Not even He knew it, but the Father only", "The prophets had revealed it", "It would be in one generation", "It could be calculated"], "optionsEs": ["Ni siquiera Él la sabía, sino solo el Padre", "Los profetas la habían revelado", "Sería en una generación", "Podía calcularse"], "explanationEn": "Only the Father knows the day and hour (Matthew 24:36).", "explanationEs": "Solo el Padre sabe el día y la hora (Mateo 24:36).", "correct": 0}, {"textEn": "7. By the standard of Deuteronomy 18, a prophet whose prediction fails is:", "textEs": "7. Según el estándar de Deuteronomio 18, un profeta cuya predicción falla es:", "optionsEn": ["A false prophet", "To be honored anyway", "Merely mistaken", "To set a new date"], "optionsEs": ["Un falso profeta", "Honrado de todos modos", "Solo equivocado", "Quien fija una nueva fecha"], "explanationEn": "Every date-setter has failed, disqualifying himself by Scripture's own test.", "explanationEs": "Todo fijador de fechas ha fallado, descalificándose por la propia prueba de la Escritura.", "correct": 0}, {"textEn": "8. The 2011 prediction of Harold Camping is cited as a warning because:", "textEs": "8. La predicción de Harold Camping en 2011 se cita como advertencia porque:", "optionsEn": ["It was nearly correct", "It honored Scripture", "It was widely ignored", "It used homemade numerology and harmed those who trusted it"], "optionsEs": ["Estuvo casi correcta", "Honró la Escritura", "Fue ampliamente ignorada", "Usó numerología casera y dañó a los que confiaron en ella"], "explanationEn": "People drained savings and abandoned careers; the harm was real and lasting.", "explanationEs": "La gente agotó ahorros y abandonó carreras; el daño fue real y duradero.", "correct": 3}, {"textEn": "9. Instead of giving a date, Jesus gave parables and images whose point was:", "textEs": "9. En lugar de dar una fecha, Jesús dio parábolas e imágenes cuyo punto era:", "optionsEn": ["Fear the future", "Wait passively", "Be ready, for you will not see it coming", "Calculate the timing carefully"], "optionsEs": ["Temer el futuro", "Esperar pasivamente", "Estar listos, porque no lo verán venir", "Calcular el tiempo con cuidado"], "explanationEn": "He answered not the question they asked but the one they should have: Are you ready?", "explanationEs": "Respondió no la pregunta que hacían sino la que debían hacer: ¿Estás listo?", "correct": 2}, {"textEn": "10. In the parable of the ten virgins, the five who were shut out were the ones who:", "textEs": "10. En la parábola de las diez vírgenes, las cinco que quedaron fuera fueron las que:", "optionsEn": ["Brought gifts", "Had no oil ready when the bridegroom came", "Arrived early", "Slept too little"], "optionsEs": ["Trajeron regalos", "No tenían aceite listo cuando vino el novio", "Llegaron temprano", "Durmieron muy poco"], "explanationEn": "The bridegroom was delayed, and the unprepared found the door shut.", "explanationEs": "El novio se retrasó, y las no preparadas hallaron la puerta cerrada.", "correct": 1}, {"textEn": "11. Christians who hold premillennial, amillennial, and postmillennial views:", "textEs": "11. Los cristianos que sostienen las posiciones premilenial, amilenial y posmilenial:", "optionsEn": ["Cannot be true believers", "Agree on the order of events", "Must all be wrong", "Have differed for centuries, and this has never been a test of fellowship"], "optionsEs": ["No pueden ser verdaderos creyentes", "Concuerdan en el orden de los eventos", "Deben estar todos equivocados", "Han diferido por siglos, y esto nunca ha sido prueba de compañerismo"], "explanationEn": "Sincere, Bible-loving believers have held each view; it is not a test of fellowship.", "explanationEs": "Creyentes sinceros y amantes de la Biblia han sostenido cada opinión; no es prueba de compañerismo.", "correct": 3}, {"textEn": "12. On the central things, all the millennial views agree that:", "textEs": "12. En las cosas centrales, todas las posiciones milenarias concuerdan en que:", "optionsEn": ["Christ will return bodily, the dead will be raised, and there will be a judgment", "Only one nation is saved", "The date can be known", "There is no judgment"], "optionsEs": ["Cristo volverá corporalmente, los muertos resucitarán, y habrá un juicio", "Solo una nación se salva", "La fecha puede saberse", "No hay juicio"], "explanationEn": "We do better to stand together on what is certain and be ready.", "explanationEs": "Hacemos mejor en mantenernos juntos en lo cierto y estar preparados.", "correct": 0}, {"textEn": "13. The unit contrasts Jesus' two comings this way:", "textEs": "13. La unidad contrasta las dos venidas de Jesús así:", "optionsEn": ["Both comings are identical", "He first came as a conquering king, then as a servant", "Neither coming is bodily", "He first came as the suffering Servant, and will return as a conquering King"], "optionsEs": ["Ambas venidas son idénticas", "Primero vino como rey conquistador, luego como siervo", "Ninguna venida es corporal", "Primero vino como el Siervo sufriente, y volverá como un Rey conquistador"], "explanationEn": "Born in a stable and crucified, He returns in power; the contrast is complete.", "explanationEs": "Nacido en un establo y crucificado, vuelve en poder; el contraste es completo.", "correct": 3}, {"textEn": "14. First Thessalonians 4 assures believers that at Christ's return:", "textEs": "14. Primera de Tesalonicenses 4 asegura a los creyentes que en el regreso de Cristo:", "optionsEn": ["The dead are forgotten", "Only the living are gathered", "The dead in Christ will rise first", "No one is raised"], "optionsEs": ["Los muertos son olvidados", "Solo los vivos son reunidos", "Los muertos en Cristo resucitarán primero", "Nadie resucita"], "explanationEn": "Death is no barrier; those who died in Christ will not be left behind.", "explanationEs": "La muerte no es barrera; los que murieron en Cristo no serán dejados atrás.", "correct": 2}, {"textEn": "15. Scripture rejects 'soul sleep,' teaching instead that to be absent from the body is:", "textEs": "15. La Escritura rechaza el 'sueño del alma,' enseñando en cambio que estar ausente del cuerpo es:", "optionsEn": ["To sleep unconscious", "To wait outside heaven", "To cease to exist", "To be present with the Lord"], "optionsEs": ["Dormir inconsciente", "Esperar fuera del cielo", "Dejar de existir", "Estar presente con el Señor"], "explanationEn": "The thief was with Christ in Paradise that day; the soul remains awake with God.", "explanationEs": "El ladrón estuvo con Cristo en el Paraíso ese día; el alma permanece despierta con Dios.", "correct": 3}, {"textEn": "16. In the illustration, the physical body is compared to a mailbox, and the person to:", "textEs": "16. En la ilustración, el cuerpo físico se compara a un buzón, y la persona a:", "optionsEn": ["The post office", "A letter kept safe by the sender until delivered", "The mail truck", "The stamp"], "optionsEs": ["La oficina postal", "Una carta guardada a salvo por el remitente hasta ser entregada", "El camión de correo", "La estampilla"], "explanationEn": "The mailbox may rust and be replaced, but the letter is kept safe.", "explanationEs": "El buzón puede oxidarse y ser reemplazado, pero la carta se guarda a salvo.", "correct": 1}, {"textEn": "17. In Jewish tradition the trumpet (shofar) sounded at Sinai, at the Jubilee, and at coronations, signifying:", "textEs": "17. En la tradición judía la trompeta (shofar) sonaba en el Sinaí, en el Jubileo, y en las coronaciones, significando:", "optionsEn": ["War only", "A funeral", "God's presence, liberation, and the crowning of a king", "The harvest"], "optionsEs": ["Solo guerra", "Un funeral", "La presencia de Dios, la liberación, y la coronación de un rey", "La cosecha"], "explanationEn": "Jewish readers heard all three at once when Paul said the trumpet would sound.", "explanationEs": "Los lectores judíos oían las tres a la vez cuando Pablo decía que sonaría la trompeta.", "correct": 2}, {"textEn": "18. According to 1 John 3:2, when Christ appears we shall:", "textEs": "18. Según 1 Juan 3:2, cuando Cristo aparezca:", "optionsEn": ["Be destroyed by His glory", "Remain unchanged", "See Him as He is and be like Him", "Never see Him"], "optionsEs": ["Seremos destruidos por su gloria", "Quedaremos sin cambio", "Le veremos como Él es y seremos semejantes a Él", "Nunca le veremos"], "explanationEn": "In the Old Testament none could look on God; made like Him, we will see Him face to face.", "explanationEs": "En el Antiguo Testamento nadie podía mirar a Dios; hechos como Él, le veremos cara a cara.", "correct": 2}, {"textEn": "19. The 'great mystery' the sermon leaves with the hearer is that God will:", "textEs": "19. El 'gran misterio' que el sermón deja al oyente es que Dios:", "optionsEn": ["Make us holy without erasing who we are", "Erase our memories", "Replace us with new beings", "Keep us exactly as we are now"], "optionsEs": ["Nos hará santos sin borrar quiénes somos", "Borrará nuestros recuerdos", "Nos reemplazará con seres nuevos", "Nos dejará exactamente como somos ahora"], "explanationEn": "Our identity, memory, and freedom are carried through a holiness we cannot yet imagine.", "explanationEs": "Nuestra identidad, memoria y libertad son llevadas a través de una santidad que aún no imaginamos.", "correct": 0}, {"textEn": "20. The discourse and chapter 25 together call the hearer to:", "textEs": "20. El discurso y el capítulo 25 juntos llaman al oyente a:", "optionsEn": ["Calculate the date", "Watch, be faithful, and love, for the King will come", "Withdraw from the world", "Fear and despair"], "optionsEs": ["Calcular la fecha", "Velar, ser fiel, y amar, porque el Rey vendrá", "Apartarse del mundo", "Temer y desesperar"], "explanationEn": "The ten virgins, the talents, and the sheep and goats press readiness, faithfulness, and love.", "explanationEs": "Las diez vírgenes, los talentos, y las ovejas y cabritos recalcan preparación, fidelidad y amor.", "correct": 1}];
+
+const kwQuestions = [{"textEn": "21. Describe the setting of the Olivet Discourse and the three questions the disciples asked.", "textEs": "21. Describa el escenario del Discurso del Monte de los Olivos y las tres preguntas que hicieron los discípulos.", "kw_en": ["temple", "stone", "three", "questi", "coming", "age", "olivet", "destroy"], "kw_es": ["templo", "piedra", "tres", "pregunt", "venida", "era", "olivos", "destru"], "modelEn": "As Jesus and the disciples were leaving the temple, He said that not one stone would be left upon another. On the Mount of Olives they came to Him with three questions: when would the temple be destroyed, what would be the sign of His coming, and what is the sign of the end of the age. Jesus answered all three, but the answers are woven together so closely that interpreters still debate which verse belongs to which question. This is the great discourse on the last things. It was given less to satisfy our curiosity about the timing than to make His people ready, so we should hold it with humility and let its purpose be preparation rather than speculation.", "modelEs": "Mientras Jesús y los discípulos salían del templo, Él dijo que no quedaría piedra sobre piedra. En el Monte de los Olivos vinieron a Él con tres preguntas: cuándo sería destruido el templo, cuál sería la señal de su venida, y cuál es la señal del fin de la era. Jesús respondió a las tres, pero las respuestas están entretejidas tan estrechamente que los intérpretes aún debaten qué versículo corresponde a cada pregunta. Este es el gran discurso sobre las cosas finales. Fue dado menos para satisfacer nuestra curiosidad sobre el tiempo que para preparar a su pueblo, así que debemos sostenerlo con humildad y dejar que su propósito sea la preparación en vez de la especulación."}, {"textEn": "22. How was Jesus' prediction about the temple fulfilled in A.D. 70?", "textEs": "22. ¿Cómo se cumplió la predicción de Jesús sobre el templo en el año 70 d.C.?", "kw_en": ["titus", "siege", "famine", "burned", "stone", "generat", "destroy", "josephu"], "kw_es": ["tito", "sitio", "hambre", "quemad", "piedra", "generac", "destru", "josefo"], "modelEn": "The temple fell in A.D. 70, about forty years after Jesus spoke, so that part of His answer was fulfilled within a single generation. The Roman legions under Titus laid siege to the city and cut every supply line, and inside the walls the people were destroyed by famine, civil war, and disease. Josephus records starvation so severe that people ate shoe leather and even turned to cannibalism. The Second Temple was burned to its foundations, and because the gold ornaments had melted, soldiers pried apart the very stones to recover it, literally fulfilling the word that not one stone would be left upon another. Hundreds of thousands died and tens of thousands were enslaved, and for the Jew this was the end of his world, for the priesthood, the sacrifices, and the central place of worship all came to an end.", "modelEs": "El templo cayó en el año 70 d.C., unos cuarenta años después de que Jesús habló, de modo que esa parte de su respuesta se cumplió dentro de una sola generación. Las legiones romanas dirigidas por Tito sitiaron la ciudad y cortaron toda línea de suministro, y dentro de las murallas la gente fue destruida por el hambre, la guerra civil y la enfermedad. Josefo registra una inanición tan severa que la gente comía cuero de zapatos y aun recurrió al canibalismo. El Segundo Templo fue quemado hasta sus cimientos, y porque los ornamentos de oro se habían derretido, los soldados separaron las piedras mismas para recuperarlo, cumpliendo literalmente la palabra de que no quedaría piedra sobre piedra. Cientos de miles murieron y decenas de miles fueron esclavizados, y para el judío este fue el fin de su mundo, porque el sacerdocio, los sacrificios, y el lugar central de adoración llegaron todos a su fin."}, {"textEn": "23. What signs of the age did Jesus describe, and what do interpreters disagree about?", "textEs": "23. ¿Qué señales de la era describió Jesús, y sobre qué difieren los intérpretes?", "kw_en": ["false", "wars", "gospel", "nation", "tribula", "interpre", "differ", "clouds"], "kw_es": ["falsos", "guerras", "evangel", "nación", "tribula", "intérpre", "difier", "nubes"], "modelEn": "Jesus described the character of the whole age. There would be false christs who deceive many, wars and rumors of wars, famines and earthquakes, but these are only the beginning of sorrows. His people would be hated and persecuted, yet the gospel of the kingdom would be preached in all the world to every nation, and then the end would come. He spoke of the abomination of desolation and a great tribulation, and finally of the Son of Man coming on the clouds with power and great glory to gather His elect. Interpreters disagree over how much of this language pointed to the fall of Jerusalem in A.D. 70 and how much reaches forward to the final coming, and faithful readers differ. What is certain is the fig tree's lesson, that when these things begin the end is near, and that heaven and earth will pass away but His words will not.", "modelEs": "Jesús describió el carácter de toda la era. Habría falsos cristos que engañan a muchos, guerras y rumores de guerras, hambres y terremotos, pero esto es solo el principio de dolores. Su pueblo sería aborrecido y perseguido, y sin embargo el evangelio del reino sería predicado en todo el mundo a toda nación, y entonces vendría el fin. Habló de la abominación desoladora y de una gran tribulación, y por fin del Hijo del Hombre viniendo sobre las nubes con poder y gran gloria para reunir a sus escogidos. Los intérpretes difieren sobre cuánto de este lenguaje apuntaba a la caída de Jerusalén en el año 70 y cuánto alcanza hacia la venida final, y lectores fieles difieren. Lo cierto es la lección de la higuera, que cuando estas cosas comiencen el fin está cerca, y que el cielo y la tierra pasarán pero sus palabras no."}, {"textEn": "24. Why can no one know the date of Christ's return, and what does the failure of date-setters show?", "textEs": "24. ¿Por qué nadie puede saber la fecha del regreso de Cristo, y qué muestra el fracaso de los fijadores de fechas?", "kw_en": ["father", "date", "deutero", "prophet", "camping", "predict", "failed", "ready"], "kw_es": ["padre", "fecha", "deutero", "profeta", "camping", "predic", "fallad", "listo"], "modelEn": "Jesus said plainly that not even He knew the date of His return, but the Father only, so no one can calculate it. That has not stopped people from predicting it for two thousand years, and every one has been wrong. By the standard of Deuteronomy 18, a prophet whose prediction fails is a false prophet, so these date-setters disqualified themselves by Scripture's own test. The 2011 prediction of Harold Camping is a modern warning, for he used homemade numerology to convince thousands of a date, then simply moved it when nothing happened, and the harm was real as people drained their savings and abandoned their careers. The failure of every date-setter shows that we are not meant to calculate the day but to be ready, for Jesus answered not the question people asked but the one they should have: are you ready?", "modelEs": "Jesús dijo claramente que ni siquiera Él sabía la fecha de su regreso, sino solo el Padre, así que nadie puede calcularla. Eso no ha impedido que la gente la prediga durante dos mil años, y todas han estado equivocadas. Según el estándar de Deuteronomio 18, un profeta cuya predicción falla es un falso profeta, así que estos fijadores de fechas se descalificaron por la propia prueba de la Escritura. La predicción de Harold Camping en 2011 es una advertencia moderna, pues usó numerología casera para convencer a miles de una fecha, luego simplemente la cambió cuando nada sucedió, y el daño fue real al agotar la gente sus ahorros y abandonar sus carreras. El fracaso de todo fijador de fechas muestra que no debemos calcular el día sino estar listos, porque Jesús respondió no la pregunta que la gente hacía sino la que debían hacer: ¿estás listo?"}, {"textEn": "25. What do the parables and images of readiness (the ten virgins; one taken, one left) teach?", "textEs": "25. ¿Qué enseñan las parábolas e imágenes de preparación (las diez vírgenes; uno tomado, uno dejado)?", "kw_en": ["virgins", "oil", "bridegr", "ready", "ordinar", "taken", "watch", "prepar"], "kw_es": ["vírgenes", "aceite", "novio", "listo", "ordinar", "tomado", "velar", "prepar"], "modelEn": "Instead of a date, Jesus gave parables and images of readiness. Ten virgins waited for the bridegroom: five had enough oil and five did not, the bridegroom was delayed, and the five who were unprepared found the door shut when he finally came. In other images two are sleeping in a bed, two are working in a field, and two are grinding at the mill, and in each case one is taken and one is left. The circumstances are completely ordinary, with no one in the middle of a dramatic moment; they are simply sleeping, working, and going about their day. The point is unmistakable: they will not see it coming, so they had better always be ready. Jesus refused to answer the timing question and pressed instead the question they should have been asking, which is whether they are prepared and watching.", "modelEs": "En lugar de una fecha, Jesús dio parábolas e imágenes de preparación. Diez vírgenes esperaban al novio: cinco tenían suficiente aceite y cinco no, el novio se retrasó, y las cinco que no estaban preparadas hallaron la puerta cerrada cuando finalmente llegó. En otras imágenes dos duermen en una cama, dos trabajan en el campo, y dos muelen en el molino, y en cada caso uno es tomado y uno es dejado. Las circunstancias son completamente ordinarias, sin nadie en medio de un momento dramático; simplemente duermen, trabajan, y siguen con su día. El punto es inconfundible: no lo verán venir, así que mejor estén siempre listos. Jesús se negó a responder la pregunta del tiempo y recalcó en cambio la pregunta que debían hacer, que es si están preparados y velando."}, {"textEn": "26. Describe the main millennial positions and the even-handed way this unit treats them.", "textEs": "26. Describa las principales posiciones milenarias y la manera imparcial en que esta unidad las trata.", "kw_en": ["premill", "amill", "postmil", "differ", "fellows", "return", "raised", "agree"], "kw_es": ["premil", "amilen", "posmil", "difer", "compañe", "volver", "resucit", "concuer"], "modelEn": "Christians who love the same Bible have long held different views of the thousand years of Revelation 20. The premillennial view holds that Christ returns before a coming reign on the earth, the amillennial view understands the thousand years as a picture of Christ's present reign between His two comings, and the postmillennial view expects Christ to return after a long age in which the gospel's influence grows. Sincere, Bible-loving believers have held each of these for centuries, and none of them has ever been a test of Christian fellowship. This unit names the positions fairly without pushing any one of them. On the central things every view agrees: Christ will return bodily and visibly, the dead will be raised, and there will be a final judgment. We do better to stand together on what is certain than to divide over the order of events.", "modelEs": "Los cristianos que aman la misma Biblia han sostenido por mucho tiempo distintas opiniones sobre los mil años de Apocalipsis 20. La posición premilenial sostiene que Cristo vuelve antes de un reinado venidero sobre la tierra, la posición amilenial entiende los mil años como un cuadro del reinado presente de Cristo entre sus dos venidas, y la posición posmilenial espera que Cristo vuelva después de una larga era en que crece la influencia del evangelio. Creyentes sinceros y amantes de la Biblia han sostenido cada una de estas por siglos, y ninguna ha sido jamás una prueba de compañerismo cristiano. Esta unidad nombra las posiciones con justicia sin empujar ninguna. En las cosas centrales toda opinión concuerda: Cristo volverá corporal y visiblemente, los muertos resucitarán, y habrá un juicio final. Hacemos mejor en mantenernos juntos en lo cierto que en dividirnos por el orden de los eventos."}, {"textEn": "27. How does the unit contrast Christ's two comings, and what does 1 Thessalonians 4 promise?", "textEs": "27. ¿Cómo contrasta la unidad las dos venidas de Cristo, y qué promete Primera de Tesalonicenses 4?", "kw_en": ["servant", "conquer", "thessal", "trumpet", "dead", "first", "raised", "barrier"], "kw_es": ["siervo", "conquis", "tesalon", "trompeta", "muertos", "primero", "resucit", "barrera"], "modelEn": "The first time Jesus came, He came as the suffering Servant of Isaiah, born in a stable, rejected by His own, and crucified between two thieves, but when He comes again He will come as a conquering King, and the contrast could not be more complete. First Thessalonians 4 gives the clearest picture of that day: the dead in Christ will rise first, then those who are alive will be caught up to join them, all at the sound of the trumpet. The believers in Thessalonica were anxious about loved ones who had died while waiting, and Paul assured them that death is no barrier, for those who died in Christ will not be left behind but will be the first to be raised. So the same Lord who came in lowliness will return in power, and neither the living nor the dead who belong to Him will miss that day.", "modelEs": "La primera vez que Jesús vino, vino como el Siervo sufriente de Isaías, nacido en un establo, rechazado por los suyos, y crucificado entre dos ladrones, pero cuando venga otra vez vendrá como un Rey conquistador, y el contraste no podría ser más completo. Primera de Tesalonicenses 4 da el cuadro más claro de ese día: los muertos en Cristo resucitarán primero, luego los que estén vivos serán arrebatados para unirse a ellos, todo al sonido de la trompeta. Los creyentes en Tesalónica estaban ansiosos por seres queridos que habían muerto mientras esperaban, y Pablo les aseguró que la muerte no es barrera, pues los que murieron en Cristo no serán dejados atrás sino que serán los primeros en resucitar. Así que el mismo Señor que vino en humildad volverá en poder, y ni los vivos ni los muertos que le pertenecen perderán ese día."}, {"textEn": "28. How does the unit answer the question of the state of the dead, against 'soul sleep'?", "textEs": "28. ¿Cómo responde la unidad a la cuestión del estado de los muertos, contra el 'sueño del alma'?", "kw_en": ["soul", "sleep", "thief", "paradis", "absent", "present", "conscio", "grave"], "kw_es": ["alma", "sueño", "ladrón", "paraíso", "ausente", "present", "conscie", "tumba"], "modelEn": "Scripture rejects the idea of soul sleep, the notion that the soul is unconscious between death and the resurrection. The Lord told the thief on the cross that he would be with Him in Paradise that very day, and Paul says that to be absent from the body is to be present with the Lord, so the soul remains awake and in communion with God immediately after death. The references to sleep in Scripture are understood as a metaphor for the rest of the physical body in the grave rather than the condition of the soul itself. The body is only the mailbox, and once the letter is posted it is already in the sender's hands even before it reaches its destination; the mailbox may rust and be replaced, but the letter, the real person, is kept safe until the appointed day of delivery, which is the resurrection.", "modelEs": "La Escritura rechaza la idea del sueño del alma, la noción de que el alma está inconsciente entre la muerte y la resurrección. El Señor dijo al ladrón en la cruz que estaría con Él en el Paraíso ese mismo día, y Pablo dice que estar ausente del cuerpo es estar presente con el Señor, así que el alma permanece despierta y en comunión con Dios inmediatamente después de la muerte. Las referencias al sueño en la Escritura se entienden como una metáfora del descanso del cuerpo físico en la tumba en vez de la condición del alma misma. El cuerpo es solo el buzón, y una vez que la carta es enviada ya está en manos del remitente aun antes de llegar a su destino; el buzón puede oxidarse y ser reemplazado, pero la carta, la persona real, se guarda a salvo hasta el día señalado de la entrega, que es la resurrección."}, {"textEn": "29. What will believers become, according to 1 John 3:2, and what mystery does this involve?", "textEs": "29. ¿En qué se convertirán los creyentes, según 1 Juan 3:2, y qué misterio implica esto?", "kw_en": ["glorifi", "resurre", "appear", "like", "mystery", "holy", "identit", "face"], "kw_es": ["glorifi", "resurre", "aparec", "semejan", "misteri", "santos", "identid", "cara"], "modelEn": "When we meet the Lord we will receive glorified bodies like His resurrection body, which passed through locked doors, was recognized by His friends and sometimes not, and ate fish not from need but because He could. But something greater awaits, for First John 3:2 says that when He appears we shall see Him as He is and we shall be like Him. In the Old Testament no one could look directly on God, and Moses saw only His back, for the glory would have destroyed sinful men, but on that day we will see Him face to face because we will have been made like Him. This involves a great mystery, that God will make us holy without erasing who we are; He will purify us without deleting us, carrying our identity, our memory, and our freedom through a holiness we cannot yet imagine.", "modelEs": "Cuando nos encontremos con el Señor recibiremos cuerpos glorificados como su cuerpo de resurrección, que atravesó puertas cerradas, fue reconocido por sus amigos y a veces no, y comió pescado no por necesidad sino porque podía. Pero algo más grande nos espera, pues Primera de Juan 3:2 dice que cuando Él aparezca le veremos como Él es y seremos semejantes a Él. En el Antiguo Testamento nadie podía mirar directamente a Dios, y Moisés solo vio su espalda, porque la gloria habría destruido a los hombres pecadores, pero en ese día le veremos cara a cara porque habremos sido hechos semejantes a Él. Esto implica un gran misterio, que Dios nos hará santos sin borrar quiénes somos; nos purificará sin eliminarnos, llevando nuestra identidad, nuestra memoria, y nuestra libertad a través de una santidad que aún no podemos imaginar."}, {"textEn": "30. Describe the arc of the discourse and how chapter 25 turns it into a call to action.", "textEs": "30. Describa el arco del discurso y cómo el capítulo 25 lo vuelve un llamado a la acción.", "kw_en": ["humilit", "hope", "wonder", "virgins", "talents", "sheep", "faithfu", "watch"], "kw_es": ["humild", "esperan", "asombro", "vírgenes", "talentos", "ovejas", "fiel", "velar"], "modelEn": "The discourse moves from what we cannot know, the date, through what we are promised, the events of that day, to what we can barely imagine, what we shall become; it begins in humility, moves through hope, and closes in wonder. Chapter 25 turns all of this into one urgent call. The ten virgins teach us to be ready, for five had oil and five did not, and the door was shut. The talents teach us to be faithful with whatever we have been given, that we may hear, well done, good and faithful servant. And the sheep and the goats show the King judging the nations and saying that whatever was done to the least of His brethren was done to Him. So the proper response to the last things is to watch, to be faithful, and to love, for the King will surely come, and the final wonder is that God will make us holy without undoing us.", "modelEs": "El discurso se mueve desde lo que no podemos saber, la fecha, a través de lo que se nos promete, los eventos de ese día, hasta lo que apenas podemos imaginar, en qué nos convertiremos; comienza en la humildad, avanza por la esperanza, y cierra en el asombro. El capítulo 25 vuelve todo esto un llamado urgente. Las diez vírgenes nos enseñan a estar listos, porque cinco tenían aceite y cinco no, y la puerta fue cerrada. Los talentos nos enseñan a ser fieles con lo que se nos ha dado, para que oigamos, bien, buen siervo y fiel. Y las ovejas y los cabritos muestran al Rey juzgando a las naciones y diciendo que cuanto se hizo al más pequeño de sus hermanos, a Él se le hizo. Así que la respuesta correcta a las cosas finales es velar, ser fiel, y amar, porque el Rey ciertamente vendrá, y el asombro final es que Dios nos hará santos sin deshacernos."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 12 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 12 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSMattReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

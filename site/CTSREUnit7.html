@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruth and Esther — Unit 7</title>
+<style>
+  :root { --maroon:#7B2E2E; --gold:#C8A24B; --ink:#1d1d1d; --soft:#f5f2ec; --line:#ddd6c8; }
+  * { box-sizing:border-box; }
+  body { font-family:Georgia,'Times New Roman',serif; color:var(--ink); margin:0; background:#fbf9f4; line-height:1.6; }
+  body[data-lang="en"] .es { display:none; }
+  body[data-lang="es"] .en { display:none; }
+  header { background:var(--maroon); color:#fff; padding:24px 22px; }
+  header h1 { margin:0 0 6px; font-size:1.45rem; }
+  header .sub { font-style:italic; opacity:.92; }
+  header .credit { margin-top:10px; font-size:.78rem; opacity:.85; font-family:Arial,sans-serif; }
+  .langbar { background:#5e2222; padding:8px 22px; }
+  .langbar button { background:transparent; border:1px solid #fff; color:#fff; padding:5px 14px; margin-right:6px; border-radius:5px; cursor:pointer; font-family:Arial,sans-serif; font-size:.85rem; }
+  .langbar button.active { background:#fff; color:var(--maroon); font-weight:bold; }
+  .wrap { max-width:860px; margin:0 auto; padding:22px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:22px; margin:18px 0; }
+  h2 { color:var(--maroon); border-bottom:2px solid var(--gold); padding-bottom:6px; }
+  .track-bar { background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:14px 18px; margin:18px 0; font-family:Arial,sans-serif; }
+  .track-bar label { font-weight:bold; margin-right:10px; }
+  select, button { font-size:1rem; padding:8px 12px; border-radius:6px; border:1px solid #bbb; }
+  button { cursor:pointer; background:var(--maroon); color:#fff; border:none; font-family:Arial,sans-serif; }
+  button:disabled { background:#bbb; cursor:not-allowed; }
+  button.secondary { background:#fff; color:var(--maroon); border:1px solid var(--maroon); }
+  .teaching p { margin:0 0 14px; }
+  .q { border-top:1px solid var(--line); padding:18px 0; }
+  .q:first-child { border-top:none; }
+  .q .stem { font-weight:bold; margin-bottom:10px; }
+  .opt { display:block; margin:7px 0; padding:9px 12px; border:1px solid var(--line); border-radius:6px; cursor:pointer; background:#fff; font-family:Arial,sans-serif; }
+  .opt:hover { background:var(--soft); }
+  .opt.sel { border-color:var(--maroon); background:#f3e7e7; }
+  .opt.correct { border-color:#2e7d32; background:#e6f3e7; }
+  .opt.wrong { border-color:#b00020; background:#f7e6e9; }
+  .fb { font-family:Arial,sans-serif; font-size:.9rem; margin-top:8px; padding:8px 10px; border-radius:6px; display:none; }
+  .fb.ok { background:#e6f3e7; color:#1b5e20; display:block; }
+  .fb.no { background:#f7e6e9; color:#8e0018; display:block; }
+  textarea { width:100%; min-height:84px; font-family:Arial,sans-serif; font-size:.95rem; padding:10px; border:1px solid #bbb; border-radius:6px; resize:vertical; }
+  .model { display:none; margin-top:10px; border-left:4px solid var(--gold); background:#fdf8ec; padding:10px 14px; font-family:Arial,sans-serif; font-size:.92rem; }
+  .model.show { display:block; }
+  .model b { color:var(--maroon); }
+  .flag { color:#b00020; font-family:Arial,sans-serif; font-size:.8rem; }
+  .practice-tag { font-family:Arial,sans-serif; font-size:.78rem; color:#555; font-style:italic; }
+  .result { font-family:Arial,sans-serif; font-size:1.02rem; padding:14px; border-radius:8px; margin-top:14px; }
+  .result.pass { background:#e6f3e7; color:#1b5e20; }
+  .result.fail { background:#f7e6e9; color:#8e0018; }
+  .navrow { display:flex; justify-content:space-between; align-items:center; margin:24px 0; font-family:Arial,sans-serif; }
+  .note { font-family:Arial,sans-serif; font-size:.82rem; color:#666; }
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 6px;font-family:Georgia,serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--maroon);margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid var(--line);color:var(--maroon);text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:var(--maroon);}
+.unitnav a.active{background:var(--maroon);color:#fff;border-color:var(--maroon);}
+</style>
+</head>
+<body data-lang="en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header>
+  <h1>Ruth and Esther &mdash; <span class="en">Unit 7</span><span class="es">Unidad 7</span></h1>
+  <div class="sub"><span class="en">Class 7 — Haman&#x27;s Plot (Esther 2:21–4:3)</span><span class="es">Clase 7 — El Complot de Amán (Ester 2:21–4:3)</span></div>
+  <div class="credit">Glenda Rogers &middot; Chapala Theological Seminary &middot; Dr. Ted Rogers, Director</div>
+</header>
+<div class="langbar">
+  <button id="btnEn" class="active" onclick="setLang('en')">English</button>
+  <button id="btnEs" onclick="setLang('es')">Espa&ntilde;ol</button>
+</div>
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSREUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSREUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSREUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSREUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSREUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSREUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSREUnit7.html" title="Unit 7 · Unidad 7" class="active">7</a><a href="CTSREUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSREUnit9.html" title="Unit 9 · Unidad 9">9</a></nav><script>(function(){try{var p=JSON.parse(localStorage.getItem('cts_re_progress')||'{}');document.querySelectorAll('.cts-unitnav a').forEach(function(a,i){if(p['unit'+(i+1)])a.classList.add('completed');});}catch(e){}})();</script>
+  <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+    <span class="nl"><span class="en">Units</span><span class="es">Unidades</span></span>
+    <a href="CTSREUnit1.html">1</a>
+    <a href="CTSREUnit2.html">2</a>
+    <a href="CTSREUnit3.html">3</a>
+    <a href="CTSREUnit4.html">4</a>
+    <a href="CTSREUnit5.html">5</a>
+    <a href="CTSREUnit6.html">6</a>
+    <a href="CTSREUnit7.html" class="active">7</a>
+    <a href="CTSREUnit8.html">8</a>
+    <a href="CTSREUnit9.html">9</a>
+  </nav>
+
+
+  <div id="greet" class="note" style="margin:8px 0 0;"></div>
+
+
+  <div class="track-bar">
+    <label for="track"><span class="en">Track:</span><span class="es">Programa:</span></label>
+    <select id="track" onchange="setTrack()">
+      <option value="cert">Certificate / Certificado</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div class="note" id="trackNote" style="margin-top:8px;"></div>
+  </div>
+
+  <div class="card teaching">
+    <h2><span class="en">The Class</span><span class="es">La Clase</span></h2>
+    <p class="note">
+      <span class="en">Passage: Esther 2:21–4:3 &middot; Taught by Glenda Rogers. This preserves her teaching and class discussion.</span>
+      <span class="es">Pasaje: Ester 2:21–4:3 &middot; Ense&ntilde;ado por Glenda Rogers. Conserva su ense&ntilde;anza y la discusi&oacute;n de clase.</span>
+    </p>
+    <div class="en"><p>Heavenly Father, thank You for today. We pray that You would come into our presence now, teach us what You would have us know, fill us with Your Holy Spirit, and effect the changes in us that You want to see, so that we are made more and more into Your image. We pray these things in Your Son&#x27;s name and for His glory. Amen.</p>
+    <p>We&#x27;re still in the downhill stretch of Esther; our villain comes into this section, so it&#x27;s an interesting time. Last week we had the brief, wonderful “Esther becomes queen and all is right with the world” moment, and today we dive in with Esther 2:21 through 4:3.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Observations</strong></p>
+    <p>Mordecai was clearly considered an elder, because he sat at the king&#x27;s gate — he is in some sort of judicial or official position, most likely given to him once Esther became queen. Marcy smiled to herself at how Haman prospers and how it&#x27;s all going to come crashing down; it can be discouraging to watch evil people prosper, but here it won&#x27;t last. Marcy also noted that in chapter three Mordecai refuses to bow to Haman, but the text doesn&#x27;t say why — and remember, God is not mentioned anywhere in this book, which tells us a non-Jew (or at least a Jewish sympathizer) most likely wrote it. We&#x27;ll look at several possible reasons for his refusal today, because that refusal starts the whole thing.</p>
+    <p>Mordecai and Esther were brought into the citadel of Susa during the Babylonian captivity — that&#x27;s how they got there in the first place, before Esther&#x27;s beauty ever entered the story. When Persia took over Babylon, they were there. In fact, it&#x27;s generally assumed that Mordecai was a person of wealth, or even royalty, because he came in with the first group, with Jehoiachin, the king of Judah at the time. So it&#x27;s very possible he arrived with a great deal of wealth.</p>
+    <p>So Mordecai is sitting at the gate in an official position — which carries over from the Book of Ruth, where Boaz goes to the town gate to gather ten witnesses for the kinsman-redeemer matter. While there, Mordecai learns of a plot by two of the king&#x27;s eunuchs who guarded the door to assassinate the king. That&#x27;s highly believable: Xerxes is something of a mad, volatile king — you never knew what you&#x27;d get on a given day. In external history, Xerxes is eventually assassinated by his prime minister, who then puts his son Artaxerxes on the throne — only a couple of years after this. We know nothing of the two eunuchs beyond their names, but their names are recorded for posterity.</p>
+    <p>Importantly, Mordecai reports the plot to Esther, who informs the king on Mordecai&#x27;s behalf — that&#x27;s huge, because it comes into play later. It gets recorded in the king&#x27;s chronicles (his diary), but nothing is done at that time to honor Mordecai, which is a significant slight, since he just saved the king&#x27;s life. The two men are hung on the gallows — and “gallows” is a polite word here; it&#x27;s not a noose, but impalement on a spike, the body left in the city as a deterrent. A common Persian execution.</p>
+    <p>Then Xerxes honors Haman, our villain, who comes into the story as an Agagite. Some commentators say “Agagite” means he came from a province in Media called Agag; I lean toward the others, who connect it to the old, standing hatred between the Jews and the Amalekites, whom Agag headed. Whether this book is historical fiction or non-fiction, the writer clearly wants to emphasize the anti-Semitism between Haman and Mordecai, and likening Haman to one of the Jews&#x27; major enemies would be instantly understood by Jews of that era. We also know the book is written largely to establish the Feast of Purim, so it makes sense to set them up as mortal enemies.</p>
+    <p>So why does Mordecai refuse to bow? Several possibilities: first, the ancient animosity between the Amalekites and the Jews; second, that he wouldn&#x27;t bow to anyone but God — though we&#x27;ve seen Jews bow and even prostrate themselves before people elsewhere in the Old Testament (the brothers before Joseph, Bathsheba and Nathan before Solomon), so the question is whether Haman was demanding some kind of divine recognition, in which case Mordecai&#x27;s refusal would make sense; third, simple disdain for Haman&#x27;s arrogance — but if it were only that, why would Mordecai give being Jewish as the reason? Fourth, that Haman&#x27;s anti-Semitism was already well known to Mordecai, which is very likely. Ted offered another angle: poor people tend not to envy one another — a poor person whose neighbor lacks food brings food over — whereas the wealthy can resent one another (Tina: “keeping up with the Joneses”). With 127 provinces and a melting pot of peoples, not everyone is going to get along. Honestly, we don&#x27;t know; it would all be supposition. But the refusal is what sets things in motion.</p>
+    <p>Once it&#x27;s brought to Haman&#x27;s attention that Mordecai won&#x27;t bow, he becomes furious — and he doesn&#x27;t just want to punish Mordecai; he wants to take it out on all the Jews. That&#x27;s enormous anti-Semitism, which lends credence to the ancient-enemies theory. Then comes the casting of “Pur.” Casting Pur was done at the beginning of every year — like throwing dice, or more accurately a kind of bone-divination (scapulimancy), throwing bones to discern the future. They keep casting Pur to decide when to annihilate the Jews; it happens in the first month of the twelfth year of Xerxes&#x27; reign, and the date that falls is eleven months later. That&#x27;s fair warning — and I&#x27;d say it&#x27;s God&#x27;s providence: lots can happen in a full year.</p>
+    <p>Proverbs 16:33 captures it: “The lot is cast into the lap, but its every decision is from the Lord.” That&#x27;s exactly what&#x27;s happening with the casting of Pur. Even pagans like Haman think they&#x27;re trusting their own gods, when God says very clearly, “No, that&#x27;s my job.” We saw the same in Acts, when they cast lots to replace Judas Iscariot, expecting God to make the decision. It&#x27;s striking that here Haman thinks he&#x27;s casting lots to his gods, and it&#x27;s the God of the Jews who makes the decision. (When we worked in Cuba, those practicing Santería did something very similar with chicken bones — the same kind of scapulimancy.)</p>
+    <p>So Haman goes to the king to plead for permission. Notice what he leaves out: he never mentions that it&#x27;s the Jews — so from the king&#x27;s point of view, he&#x27;s probably thinking these are insurrectionists, not an entire people. Keep in mind the previous Persian kings were quite fond of the Jews — “go back, build your temple, and we&#x27;ll pay for it.” Haman tells a half-truth: he says they practice their own laws (true) and don&#x27;t obey the king&#x27;s laws (false — they were law-abiding), which sounds like a threat. And he offers a bribe — 10,000 talents of silver, about 750,000 pounds, some 12 million ounces of silver. (The Persian Empire used silver as its monetary standard.) Clearly he expects to loot the Jews as he kills them, because even as wealthy as he is, he probably doesn&#x27;t have that kind of money — and many Jews had come into Persia wealthy, with twelve years under Xerxes alone to prosper, so much so that many didn&#x27;t want to go back to Jerusalem to rebuild the temple.</p>
+    <p>The king, clearly in one of his more manic moods, signs off on the decree and even tells Haman to keep the money — a surprising amount to wave off. In verse 10: “The king took his signet ring from his finger and gave it to Haman son of Hammedatha the Agagite, the enemy of the Jews.” That&#x27;s the first of many times Haman is called the enemy of the Jews — significant; whether from Amalekite descent or personal prejudice, he was truly an anti-Semite. The decree goes out on the thirteenth day of the first month: all the Jews are to be annihilated in one day, the thirteenth day of the twelfth month.</p>
+    <p>Doesn&#x27;t giving them a year&#x27;s notice seem foolish — couldn&#x27;t they just flee? But consider the size of the Persian Empire. They wouldn&#x27;t flee to Greece (Xerxes had warred with Greece; they&#x27;d be killed at the border). Rome at that time was in its Republic stage, and they may not even have known of it. The only other empires were the Zhou dynasty in China and Mesoamerica. So technically they could flee, but where would they go? And we&#x27;ll see this all comes to a head within two months anyway. Incidentally, both the thirteenth of the first month and the thirteenth of the twelfth were ominous — thirteen was considered a bad omen in Persia, much as we skip the thirteenth floor.</p>
+    <p>So Haman and the king sit down to drink a toast over their plan, even though the king doesn&#x27;t yet know it&#x27;s the Jews. Meanwhile, the people of the city are bewildered — the translations vary (perplexed, agitated, bewildered) — they&#x27;re in a tizzy, wondering what in the world is going on. Mordecai&#x27;s reaction: he tears his clothes, puts on sackcloth, sits in ashes, and wails. How must he feel? Gutted — as though it&#x27;s all on him: “If I had not had this animosity toward Haman and done what I was told, I wouldn&#x27;t have caused this.” He recognizes the Jews may be annihilated because of something he did or didn&#x27;t do.</p>
+    <p>Keep in mind that under the previous Persian kings the Jews had enjoyed great prosperity and been encouraged to worship their God by rebuilding the temple — so this would have come as a complete shock, especially to those in Jerusalem: “Wait a minute, we&#x27;re rebuilding the temple because your previous king said we could.” Now they have a target on their backs simply for who they are. Why didn&#x27;t they flee? Perhaps, like many Jews at the beginning of Nazism, they thought their wealth would protect them, or that surely this could not be true. Ted offered a parallel: in World War II it tended to be the intellectuals and the tradesmen who left Germany, while the wealthy Jews stayed because they felt protected — they didn&#x27;t feel threatened. It occurred to me as I worked through this that the Jews in Susa may simply have assumed they&#x27;d somehow be protected — or, worse, that this was God&#x27;s judgment upon them. Whatever the case, they&#x27;re still there, and they&#x27;re mourning. (The decree goes out on the thirteenth day of the first month; the counter-decree will come on the twenty-third day of the third month — so the dread is comparatively short-lived, though at this point they&#x27;re all still trying to figure out what to do.)</p>
+    <p>As someone added, sometimes you&#x27;re just numb — and that&#x27;s it. Many of them sit in sackcloth and ashes in complete shock. Everybody&#x27;s grief takes a different path: some are moved to action quickly, others not.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Interpretation</strong></p>
+    <p>Nothing is done to honor Mordecai for saving the king&#x27;s life — highly unusual. Can we assume God&#x27;s hand is on this? That&#x27;s what I love about God&#x27;s providence: He can work through the ordinary in a way that doesn&#x27;t appear to be a miracle. As Ted put it, so often what we interpret as a setback is one of the greatest gifts God can give us — if he had gotten a tenure-track position stateside, he wouldn&#x27;t be here, and this is clearly much better. Setbacks can look insurmountable, yet often they&#x27;re God&#x27;s plan putting you right where you need to be.</p>
+    <p>Remember, the Jews are God&#x27;s chosen people — it&#x27;s in our best interest not to feud with them, and in fact it&#x27;s in our best interest to be at peace with all men (Romans 12:18). That&#x27;s an important point to remember when we live in a country or empire that is a melting pot of ethnicities. Christ showed no favoritism, especially on the cross, when He said, “Father, forgive them, for they know not what they do.” We would do well to emulate that. This text clearly shows that disdain for someone — for whatever reason — leads to ruin: Mordecai&#x27;s disdain for Haman and Haman&#x27;s disdain for the Jews can burgeon into something larger, even into war. We&#x27;ve seen it happen many times; it&#x27;s part of how World War I began. This is why Jesus reminds us to pray for our enemies. Our faith is to be lived outward and upward, not inward, thinking of our own best interests; when we put others above ourselves, we are most like Christ. Had Haman or Mordecai behaved that way, this wouldn&#x27;t have happened.</p>
+    <p>Even when it seems like a game of chance — as in casting Pur — God is still in control, working out His divine providence. Another interpretation: rash decisions, decisions made in anger, decisions made without seeking the truth and fully understanding the situation, are never our best. Mordecai, Haman, and the king are all guilty of such decisions — the king never even asked who the people were. As Ted said, we&#x27;re supposed to act in love, and love takes time; that&#x27;s how we should base our decisions. It&#x27;s always best not to celebrate until the victory is certain — and pride goes before the fall (Proverbs 16). Finally, when we receive bad news, what should our first action be? Wait — and I&#x27;d add, prayerfully wait, in active waiting, because God will work out His plans; He always does.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Application</strong></p>
+    <p>We as humans — even nations — tend to define ourselves by a hostile “other.” Ted pointed to Edward Said&#x27;s book Orientalism: the West has tended to look down on other cultures it once called “Oriental” (meaning anything that wasn&#x27;t Western), defining ourselves by what we are not — and building ourselves up by putting others down. There always seems to need to be someone we are fighting against: Republicans versus Democrats, Christians versus Muslims, the U.S. versus Russia, the cool kids versus the nerds, the legalists versus the grace-oriented. We have real differences, but that doesn&#x27;t make us sworn enemies — we are all made in the image of God. No matter what you believe or how you live, God desires that none should perish, but that all come to eternal life through Christ Jesus our Lord, and He calls us to pray for our enemies.</p>
+    <p>As we&#x27;ve been hitting again and again in the Acts class — whether it&#x27;s Peter or Paul proclaiming the gospel to the Gentiles — they believed and the Holy Spirit came upon them; it wasn&#x27;t that they first had to straighten up their act and get everything perfectly in line. Salvation came, and then the Holy Spirit brought the conviction. We don&#x27;t make the judgment, and we forget that. He asks us to love those who persecute us — Christ on the cross, pleading, “Father, forgive them, for they know not what they do.” We would do well to remember this and walk humbly in the power of the Holy Spirit, rather than being fueled by hurt, bitterness, anger, or feelings of betrayal. Pray for my enemies; pray for those who wish me harm; pray for those who believe differently than I do; pray for those who are simply reacting from their gut. Often it&#x27;s far easier said than done.</p>
+    <p>In short: when I doubt, when I&#x27;m afraid, when I seek understanding, when I feel downcast or trodden upon, when I feel hurt and betrayal, when I feel weak or insignificant — I need to be on my knees in prayer, because that is where truth comes in, through Scripture and through prayer. That is where I encounter the immeasurable love of God; that is where I gain strength and understanding; and that is where I can rest assured that I am walking the path my God has set before me, instead of walking my own. As Ted said, if you&#x27;re walking a path of hatred, you&#x27;re not walking with your Lord.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Closing Prayer</strong></p>
+    <p>Heavenly Father, thank You for being with us in this time to delve into Your word; we thank You for how You are always teaching us and helping us to grow in You. May we never quench the Holy Spirit&#x27;s work within us. We pray now, as we go forth, that we would honor and glorify You in all that we do and say. It&#x27;s in Your Son&#x27;s name that we pray. Amen.</p></div>
+    <div class="es"><p>Padre celestial, gracias por este día. Te pedimos que vengas ahora a nuestra presencia, nos enseñes lo que quieras que sepamos, nos llenes de Tu Espíritu Santo y efectúes en nosotros los cambios que deseas ver, para que seamos hechos cada vez más a Tu imagen. Te pedimos estas cosas en el nombre de Tu Hijo y para Su gloria. Amén.</p>
+<p>Seguimos en el tramo cuesta abajo de Ester; nuestro villano entra en esta sección, así que es un momento interesante. La semana pasada tuvimos el breve y maravilloso instante de “Ester llega a ser reina y todo está bien con el mundo”, y hoy entramos de lleno con Ester 2:21 hasta 4:3.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Observaciones</strong></p>
+<p>Mardoqueo era claramente considerado un anciano, porque se sentaba a la puerta del rey; ocupa algún tipo de posición judicial u oficial, muy probablemente otorgada una vez que Ester llegó a ser reina. Marcy sonreía para sí al ver cómo prospera Amán y cómo todo se va a venir abajo; puede ser desalentador ver prosperar a la gente malvada, pero aquí no durará. Marcy también notó que en el capítulo tres Mardoqueo se niega a inclinarse ante Amán, pero el texto no dice por qué, y recuerden que Dios no se menciona en ninguna parte de este libro, lo cual nos indica que muy probablemente lo escribió un no judío (o al menos un simpatizante de los judíos). Hoy veremos varias razones posibles para su negativa, porque esa negativa lo desencadena todo.</p>
+<p>Mardoqueo y Ester fueron llevados a la ciudadela de Susa durante el cautiverio babilónico; así es como llegaron allí en primer lugar, antes de que la belleza de Ester entrara en la historia. Cuando Persia se apoderó de Babilonia, ellos estaban allí. De hecho, generalmente se supone que Mardoqueo era una persona de riqueza, o incluso de la realeza, porque llegó con el primer grupo, con Joaquín, el rey de Judá en ese momento. Así que es muy posible que llegara con una gran riqueza.</p>
+<p>Así que Mardoqueo está sentado a la puerta en una posición oficial, lo cual se hereda del libro de Rut, donde Booz va a la puerta de la ciudad a reunir diez testigos para el asunto del pariente redentor. Estando allí, Mardoqueo se entera de un complot de dos de los eunucos del rey que guardaban la puerta para asesinar al rey. Eso es muy creíble: Jerjes es una especie de rey loco y volátil; nunca se sabía qué se obtendría en un día dado. En la historia externa, Jerjes finalmente es asesinado por su primer ministro, que luego pone a su hijo Artajerjes en el trono, apenas un par de años después de esto. No sabemos nada de los dos eunucos más allá de sus nombres, pero sus nombres quedan registrados para la posteridad.</p>
+<p>Es importante que Mardoqueo informa del complot a Ester, quien informa al rey de parte de Mardoqueo; eso es enorme, porque entra en juego más adelante. Queda registrado en las crónicas del rey (su diario), pero nada se hace en ese momento para honrar a Mardoqueo, lo cual es un desaire significativo, ya que acaba de salvar la vida del rey. Los dos hombres son colgados en la horca, y “horca” es una palabra cortés aquí; no es una soga, sino el empalamiento en una estaca, dejando el cuerpo en la ciudad como elemento disuasorio. Una ejecución persa común.</p>
+<p>Luego Jerjes honra a Amán, nuestro villano, que entra en la historia como agageo. Algunos comentaristas dicen que “agageo” significa que provenía de una provincia de Media llamada Agag; yo me inclino por los otros, que lo conectan con el antiguo y permanente odio entre los judíos y los amalecitas, a quienes Agag encabezaba. Sea este libro ficción histórica o no ficción, el escritor claramente quiere enfatizar el antisemitismo entre Amán y Mardoqueo, y comparar a Amán con uno de los principales enemigos de los judíos sería entendido al instante por los judíos de esa época. También sabemos que el libro se escribe en gran parte para establecer la Fiesta de Purim, así que tiene sentido presentarlos como enemigos mortales.</p>
+<p>Entonces, ¿por qué se niega Mardoqueo a inclinarse? Varias posibilidades: primero, la antigua animosidad entre los amalecitas y los judíos; segundo, que no se inclinaría ante nadie sino ante Dios, aunque hemos visto a judíos inclinarse e incluso postrarse ante personas en otras partes del Antiguo Testamento (los hermanos ante José, Betsabé y Natán ante Salomón), así que la cuestión es si Amán exigía alguna clase de reconocimiento divino, en cuyo caso la negativa de Mardoqueo tendría sentido; tercero, simple desdén por la arrogancia de Amán, pero si fuera solo eso, ¿por qué daría Mardoqueo el ser judío como razón? Cuarto, que el antisemitismo de Amán ya le era bien conocido a Mardoqueo, lo cual es muy probable. Ted ofreció otro ángulo: los pobres tienden a no envidiarse entre sí —un pobre cuyo vecino no tiene comida le lleva comida—, mientras que los ricos pueden resentirse unos de otros (Tina: “mantenerse al nivel de los vecinos”). Con 127 provincias y un crisol de pueblos, no todos van a llevarse bien. Sinceramente, no lo sabemos; todo sería suposición. Pero la negativa es lo que pone las cosas en marcha.</p>
+<p>Una vez que se le hace notar a Amán que Mardoqueo no se inclinará, se enfurece, y no solo quiere castigar a Mardoqueo; quiere desquitarse con todos los judíos. Eso es un antisemitismo enorme, lo cual da credibilidad a la teoría de los antiguos enemigos. Luego viene el echar el “Pur”. Echar Pur se hacía al comienzo de cada año, como tirar dados, o más exactamente una especie de adivinación con huesos (escapulimancia), echando huesos para discernir el futuro. Siguen echando Pur para decidir cuándo aniquilar a los judíos; ocurre en el primer mes del duodécimo año del reinado de Jerjes, y la fecha que sale es once meses después. Eso es bastante aviso, y yo diría que es la providencia de Dios: mucho puede pasar en un año entero.</p>
+<p>Proverbios 16:33 lo capta: “La suerte se echa en el regazo; mas de Jehová es el juicio de ella.” Eso es exactamente lo que sucede con el echar Pur. Incluso paganos como Amán creen que confían en sus propios dioses, cuando Dios dice muy claramente: “No, esa es mi tarea.” Vimos lo mismo en Hechos, cuando echaron suertes para reemplazar a Judas Iscariote, esperando que Dios tomara la decisión. Es llamativo que aquí Amán crea que echa suertes a sus dioses, y sea el Dios de los judíos quien toma la decisión. (Cuando trabajamos en Cuba, los que practicaban la santería hacían algo muy similar con huesos de pollo: la misma clase de escapulimancia.)</p>
+<p>Así que Amán va al rey a suplicar permiso. Note lo que omite: nunca menciona que se trata de los judíos, así que, desde el punto de vista del rey, probablemente piensa que son insurrectos, no todo un pueblo. Tengan en cuenta que los reyes persas anteriores eran bastante afectos a los judíos: “vuelvan, construyan su templo, y lo pagaremos”. Amán dice una verdad a medias: dice que practican sus propias leyes (cierto) y que no obedecen las leyes del rey (falso: eran cumplidores de la ley), lo cual suena como una amenaza. Y ofrece un soborno: 10,000 talentos de plata, unas 750,000 libras, unos 12 millones de onzas de plata. (El Imperio persa usaba la plata como patrón monetario.) Claramente espera saquear a los judíos mientras los mata, porque por muy rico que sea, probablemente no tiene esa clase de dinero, y muchos judíos habían llegado a Persia siendo ricos, con doce años solo bajo Jerjes para prosperar, tanto que muchos no querían volver a Jerusalén a reconstruir el templo.</p>
+<p>El rey, claramente en uno de sus estados más maníacos, aprueba el decreto e incluso le dice a Amán que se quede con el dinero, una cantidad sorprendente para desestimar. En el versículo 10: “Entonces el rey quitó de su mano su anillo, y lo dio a Amán hijo de Hamedata agageo, enemigo de los judíos.” Esa es la primera de muchas veces que se llama a Amán enemigo de los judíos, algo significativo; sea por descendencia amalecita o por prejuicio personal, era verdaderamente antisemita. El decreto sale el día trece del primer mes: todos los judíos han de ser aniquilados en un solo día, el día trece del duodécimo mes.</p>
+<p>¿No parece insensato darles un año de aviso? ¿No podrían simplemente huir? Pero consideren el tamaño del Imperio persa. No huirían a Grecia (Jerjes había guerreado con Grecia; los matarían en la frontera). Roma en ese tiempo estaba en su etapa de República, y puede que ni siquiera la conocieran. Los únicos otros imperios eran la dinastía Zhou en China y Mesoamérica. Así que técnicamente podían huir, pero ¿adónde irían? Y veremos que todo esto llega a su punto crítico dentro de dos meses de todos modos. Por cierto, tanto el trece del primer mes como el trece del duodécimo eran ominosos; el trece se consideraba un mal augurio en Persia, muy parecido a como nosotros omitimos el piso trece.</p>
+<p>Así que Amán y el rey se sientan a brindar por su plan, aunque el rey aún no sabe que se trata de los judíos. Mientras tanto, la gente de la ciudad está desconcertada —las traducciones varían (perpleja, agitada, desconcertada)—; están alborotados, preguntándose qué rayos está pasando. La reacción de Mardoqueo: rasga sus vestiduras, se viste de cilicio, se sienta en ceniza y se lamenta. ¿Cómo debe sentirse? Destrozado, como si todo recayera sobre él: “Si yo no hubiera tenido esta animosidad hacia Amán y hubiera hecho lo que me dijeron, no habría causado esto.” Reconoce que los judíos pueden ser aniquilados a causa de algo que él hizo o dejó de hacer.</p>
+<p>Tengan en cuenta que bajo los reyes persas anteriores los judíos habían disfrutado de gran prosperidad y habían sido animados a adorar a su Dios reconstruyendo el templo, así que esto habría llegado como una conmoción total, especialmente para los de Jerusalén: “Un momento, estamos reconstruyendo el templo porque su rey anterior dijo que podíamos.” Ahora tienen un blanco en la espalda simplemente por quiénes son. ¿Por qué no huyeron? Quizás, como muchos judíos al comienzo del nazismo, pensaron que su riqueza los protegería, o que seguramente esto no podía ser cierto. Ted ofreció un paralelo: en la Segunda Guerra Mundial solían ser los intelectuales y los comerciantes los que se iban de Alemania, mientras que los judíos ricos se quedaban porque se sentían protegidos; no se sentían amenazados. Se me ocurrió, al trabajar en esto, que los judíos de Susa simplemente pudieron suponer que de algún modo serían protegidos, o, peor, que esto era el juicio de Dios sobre ellos. Sea como sea, siguen allí, y están de luto. (El decreto sale el día trece del primer mes; el contradecreto vendrá el día veintitrés del tercer mes, así que el pavor es comparativamente breve, aunque en este punto todos siguen tratando de decidir qué hacer.)</p>
+<p>Como alguien añadió, a veces uno simplemente queda entumecido, y ya. Muchos de ellos se sientan en cilicio y ceniza en completa conmoción. El duelo de cada uno toma un camino distinto: a algunos los mueve a la acción rápidamente, a otros no.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Interpretación</strong></p>
+<p>Nada se hace para honrar a Mardoqueo por salvar la vida del rey, algo muy inusual. ¿Podemos suponer que la mano de Dios está en esto? Eso es lo que amo de la providencia de Dios: puede obrar a través de lo ordinario de una manera que no parece milagro. Como lo expresó Ted, muy a menudo lo que interpretamos como un revés es uno de los mayores regalos que Dios puede dar; si él hubiera obtenido una plaza fija en su país, no estaría aquí, y esto es claramente mucho mejor. Los reveses pueden parecer insuperables, y sin embargo a menudo son el plan de Dios poniéndote justo donde necesitas estar.</p>
+<p>Recuerden, los judíos son el pueblo escogido de Dios; nos conviene no contender con ellos, y de hecho nos conviene estar en paz con todos los hombres (Romanos 12:18). Ese es un punto importante para recordar cuando vivimos en un país o imperio que es un crisol de etnias. Cristo no mostró favoritismo, especialmente en la cruz, cuando dijo: “Padre, perdónalos, porque no saben lo que hacen.” Haríamos bien en imitar eso. Este texto muestra claramente que el desdén por alguien —por cualquier razón— conduce a la ruina: el desdén de Mardoqueo por Amán y el desdén de Amán por los judíos pueden crecer hasta convertirse en algo mayor, incluso en guerra. Lo hemos visto suceder muchas veces; es parte de cómo comenzó la Primera Guerra Mundial. Por eso Jesús nos recuerda orar por nuestros enemigos. Nuestra fe ha de vivirse hacia afuera y hacia arriba, no hacia adentro, pensando en nuestro propio interés; cuando ponemos a otros por encima de nosotros, somos más semejantes a Cristo. Si Amán o Mardoqueo se hubieran comportado así, esto no habría sucedido.</p>
+<p>Aun cuando parezca un juego de azar —como el echar Pur—, Dios sigue teniendo el control, llevando a cabo Su providencia divina. Otra interpretación: las decisiones precipitadas, las decisiones tomadas con ira, las decisiones tomadas sin buscar la verdad ni entender plenamente la situación, nunca son las mejores. Mardoqueo, Amán y el rey son todos culpables de tales decisiones; el rey ni siquiera preguntó quiénes eran esas personas. Como dijo Ted, hemos de actuar con amor, y el amor toma tiempo; así debemos basar nuestras decisiones. Siempre es mejor no celebrar hasta que la victoria sea segura, y la soberbia precede a la caída (Proverbios 16). Finalmente, cuando recibimos malas noticias, ¿cuál debe ser nuestra primera acción? Esperar, y yo añadiría, esperar en oración, en espera activa, porque Dios llevará a cabo Sus planes; siempre lo hace.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Aplicación</strong></p>
+<p>Nosotros como seres humanos —incluso las naciones— tendemos a definirnos por un “otro” hostil. Ted señaló el libro Orientalismo de Edward Said: Occidente ha tendido a menospreciar a otras culturas que una vez llamó “orientales” (es decir, cualquier cosa que no fuera occidental), definiéndonos por lo que no somos, y engrandeciéndonos al rebajar a otros. Siempre parece que necesitamos a alguien contra quien luchar: republicanos contra demócratas, cristianos contra musulmanes, EE. UU. contra Rusia, los populares contra los nerds, los legalistas contra los orientados a la gracia. Tenemos diferencias reales, pero eso no nos hace enemigos jurados; todos somos hechos a imagen de Dios. No importa lo que creas ni cómo vivas, Dios desea que ninguno perezca, sino que todos vengan a la vida eterna por medio de Cristo Jesús nuestro Señor, y nos llama a orar por nuestros enemigos.</p>
+<p>Como hemos venido recalcando una y otra vez en la clase de Hechos —ya sea Pedro o Pablo proclamando el evangelio a los gentiles—, ellos creyeron y el Espíritu Santo vino sobre ellos; no fue que primero tuvieran que enderezar su conducta y poner todo perfectamente en orden. Vino la salvación, y luego el Espíritu Santo trajo la convicción. Nosotros no hacemos el juicio, y lo olvidamos. Él nos pide amar a quienes nos persiguen: Cristo en la cruz, suplicando: “Padre, perdónalos, porque no saben lo que hacen.” Haríamos bien en recordar esto y andar humildemente en el poder del Espíritu Santo, en lugar de ser impulsados por el dolor, la amargura, la ira o los sentimientos de traición. Orar por mis enemigos; orar por los que me desean mal; orar por los que creen distinto a mí; orar por los que simplemente reaccionan por instinto. A menudo es mucho más fácil decirlo que hacerlo.</p>
+<p>En pocas palabras: cuando dudo, cuando tengo miedo, cuando busco entendimiento, cuando me siento abatido o pisoteado, cuando siento dolor y traición, cuando me siento débil o insignificante, necesito estar de rodillas en oración, porque ahí es donde entra la verdad, por medio de la Escritura y de la oración. Ahí es donde encuentro el amor inconmensurable de Dios; ahí es donde gano fuerza y entendimiento; y ahí es donde puedo descansar seguro de que ando por el camino que mi Dios ha puesto delante de mí, en lugar de andar por el mío. Como dijo Ted, si andas por un camino de odio, no andas con tu Señor.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Oración final</strong></p>
+<p>Padre celestial, gracias por estar con nosotros en este tiempo para profundizar en Tu palabra; te agradecemos cómo siempre nos enseñas y nos ayudas a crecer en Ti. Que nunca apaguemos la obra del Espíritu Santo en nosotros. Oramos ahora, al salir, que te honremos y glorifiquemos en todo lo que hagamos y digamos. En el nombre de Tu Hijo oramos. Amén.</p></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="en">Part I &middot; Multiple Choice</span><span class="es">Parte I &middot; Opci&oacute;n M&uacute;ltiple</span> <span class="note">(20 &middot; 90%)</span></h2>
+    <div id="mc"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="en">Part II &middot; Short Answer</span><span class="es">Parte II &middot; Respuesta Breve</span> <span class="note">(10 &middot; 3/8)</span></h2>
+    <p class="practice-tag" id="saMode"></p>
+    <div id="sa"></div>
+  </div>
+
+  <div class="card">
+    <button onclick="grade()"><span class="en">Submit Unit 7</span><span class="es">Enviar Unidad 7</span></button>
+    <div id="result"></div>
+  </div>
+
+  <div class="navrow">
+    <span class="note">CTSRE &middot; <span class="en">Unit 7</span><span class="es">Unidad 7</span></span>
+    <button id="nextBtn" class="secondary" disabled onclick="goNext()"><span class="en">Continue &rarr;</span><span class="es">Continuar &rarr;</span></button>
+  </div>
+</div>
+<script>
+var _ctsMem={};
+function lsGet(k){ try{var v=localStorage.getItem(k);return v===null?(_ctsMem[k]!==undefined?_ctsMem[k]:null):v;}catch(e){return _ctsMem[k]!==undefined?_ctsMem[k]:null;} }
+function lsSet(k,v){ try{localStorage.setItem(k,v);}catch(e){} _ctsMem[k]=v; }
+function lsDel(k){ try{localStorage.removeItem(k);}catch(e){} delete _ctsMem[k]; }
+
+var UNIT=7, NEXT_URL="CTSREUnit8.html", MC=[{"stemEn": "Haman is identified as an 'Agagite,' which Glenda links to:", "stemEs": "A Amán se le identifica como 'agagueo,' lo que Glenda relaciona con:", "optionsEn": ["the tribe of Judah", "a Persian province only", "the ancient enmity between the Jews and the Amalekites", "the Moabites"], "optionsEs": ["la tribu de Judá", "solo una provincia persa", "la antigua enemistad entre los judíos y los amalecitas", "los moabitas"], "answer": "C", "whyEn": "Agagite ties Haman to the Amalekites, Israel's old enemy.", "whyEs": "Agagueo liga a Amán con los amalecitas, viejo enemigo."}, {"stemEn": "'Gallows' in this account more accurately means:", "stemEs": "'Horca' en este relato significa con más exactitud:", "optionsEn": ["a noose", "a sword", "a prison cell", "impalement on a tall sharpened pole"], "optionsEs": ["una soga", "una espada", "una celda", "empalamiento en un poste alto y afilado"], "answer": "D", "whyEn": "Persian execution was impalement on a pole.", "whyEs": "La ejecución persa era empalamiento en un poste."}, {"stemEn": "Mordecai's refusal to bow to Haman triggers Haman's plan to:", "stemEs": "La negativa de Mardoqueo a inclinarse ante Amán desata el plan de Amán de:", "optionsEn": ["annihilate not just Mordecai but all the Jews", "fine the Jews", "exile Mordecai", "burn the gate"], "optionsEs": ["aniquilar no solo a Mardoqueo sino a todos los judíos", "multar a los judíos", "exiliar a Mardoqueo", "quemar la puerta"], "answer": "A", "whyEn": "Haman targets the whole people, not just Mordecai.", "whyEs": "Amán ataca a todo el pueblo, no solo a Mardoqueo."}, {"stemEn": "'Pur' (the casting of lots) was essentially a form of:", "stemEs": "'Pur' (echar suertes) era esencialmente una forma de:", "optionsEn": ["taxation", "divination to choose a date", "temple worship", "royal census"], "optionsEs": ["impuesto", "adivinación para escoger una fecha", "culto del templo", "censo real"], "answer": "B", "whyEn": "Pur was lot-casting/divination to set the date.", "whyEs": "Pur era echar suertes/adivinación para fijar la fecha."}, {"stemEn": "The lot fell on a date about eleven months away, which Glenda reads as:", "stemEs": "La suerte cayó en una fecha a unos once meses, lo que Glenda lee como:", "optionsEn": ["a scribal error", "Haman's mercy", "God's providence giving time for deliverance", "Persian custom"], "optionsEs": ["un error del escriba", "la misericordia de Amán", "la providencia de Dios dando tiempo para la liberación", "costumbre persa"], "answer": "C", "whyEn": "The long delay is providence — time for rescue.", "whyEs": "La larga demora es providencia — tiempo para rescate."}, {"stemEn": "Proverbs 16:33 ('the lot is cast... its every decision is from the LORD') shows that:", "stemEs": "Proverbios 16:33 ('la suerte se echa... toda decisión es del SEÑOR') muestra que:", "optionsEn": ["lots are forbidden", "even pagan lot-casting is under God's control", "Haman won", "God was absent"], "optionsEs": ["las suertes están prohibidas", "aun el echar suertes pagano está bajo el control de Dios", "Amán ganó", "Dios estaba ausente"], "answer": "B", "whyEn": "Haman casts lots, but God decides the outcome.", "whyEs": "Amán echa suertes, pero Dios decide el resultado."}, {"stemEn": "In persuading the king, Haman deliberately leaves out:", "stemEs": "Al persuadir al rey, Amán omite deliberadamente:", "optionsEn": ["that the targeted people are the Jews", "the bribe", "the date", "the empire's size"], "optionsEs": ["que el pueblo señalado son los judíos", "el soborno", "la fecha", "el tamaño del imperio"], "answer": "A", "whyEn": "He never names the Jews, hiding the truth from the king.", "whyEs": "Nunca nombra a los judíos, ocultando la verdad al rey."}, {"stemEn": "Haman tells the king a half-truth that the people:", "stemEs": "Amán dice al rey una verdad a medias de que el pueblo:", "optionsEn": ["worships the king", "plots with Greece", "refuses to pay taxes", "keeps its own laws and (falsely) does not obey the king's"], "optionsEs": ["adora al rey", "conspira con Grecia", "rehusa pagar impuestos", "guarda sus propias leyes y (falsamente) no obedece al rey"], "answer": "D", "whyEn": "True they have own laws; false that they're disloyal.", "whyEs": "Cierto que tienen leyes; falso que sean desleales."}, {"stemEn": "Haman offers the king a bribe of:", "stemEs": "Amán ofrece al rey un soborno de:", "optionsEn": ["a thousand horses", "ten thousand talents of silver", "half the empire", "his own daughter"], "optionsEs": ["mil caballos", "diez mil talentos de plata", "medio imperio", "su propia hija"], "answer": "B", "whyEn": "He offers 10,000 talents of silver — an enormous sum.", "whyEs": "Ofrece 10,000 talentos de plata — suma enorme."}, {"stemEn": "Haman likely expected to fund the bribe by:", "stemEs": "Amán probablemente esperaba financiar el soborno:", "optionsEn": ["raising taxes", "selling land", "looting the Jews as they were killed", "borrowing from the king"], "optionsEs": ["subiendo impuestos", "vendiendo tierras", "saqueando a los judíos al ser asesinados", "pidiendo prestado al rey"], "answer": "C", "whyEn": "He planned to loot the wealthy Jews he would destroy.", "whyEs": "Planeaba saquear a los judíos ricos que destruiría."}, {"stemEn": "The king's response to Haman's request reveals he:", "stemEs": "La respuesta del rey a la petición de Amán revela que él:", "optionsEn": ["approves it impulsively without asking who the people are", "consults Esther", "investigates carefully", "refuses the bribe"], "optionsEs": ["la aprueba impulsivamente sin preguntar quiénes son", "consulta a Ester", "investiga con cuidado", "rechaza el soborno"], "answer": "A", "whyEn": "He signs off impulsively, never asking who they are.", "whyEs": "Aprueba impulsivamente, sin preguntar quiénes son."}, {"stemEn": "The king gives Haman his signet ring, and Haman is repeatedly called:", "stemEs": "El rey da a Amán su anillo de sello, y a Amán se le llama repetidamente:", "optionsEn": ["the king's brother", "a righteous man", "a prophet", "the enemy of the Jews"], "optionsEs": ["el hermano del rey", "un hombre justo", "un profeta", "el enemigo de los judíos"], "answer": "D", "whyEn": "He is branded 'the enemy of the Jews.'", "whyEs": "Se le marca 'el enemigo de los judíos.'"}, {"stemEn": "Glenda observes the decree gave nearly a year's notice, raising the question:", "stemEs": "Glenda observa que el decreto dio casi un año de aviso, planteando la pregunta:", "optionsEn": ["why the king wept", "why Haman waited", "why the Jews did not simply flee", "why Esther hid"], "optionsEs": ["por qué lloró el rey", "por qué esperó Amán", "por qué los judíos no huyeron sin más", "por qué se ocultó Ester"], "answer": "C", "whyEn": "The long notice raises why they didn't flee.", "whyEs": "El largo aviso plantea por qué no huyeron."}, {"stemEn": "One reason flight was hard is that the Persian Empire:", "stemEs": "Una razón por la que huir era difícil es que el Imperio Persa:", "optionsEn": ["forbade all travel", "was at peace", "had walls everywhere", "was so vast there was almost nowhere safe to go"], "optionsEs": ["prohibía todo viaje", "estaba en paz", "tenía muros por todas partes", "era tan vasto que casi no había dónde ir a salvo"], "answer": "D", "whyEn": "Persia's vastness left almost nowhere to flee.", "whyEs": "La inmensidad persa dejaba casi sin dónde huir."}, {"stemEn": "Mordecai's response to the decree is to:", "stemEs": "La respuesta de Mardoqueo al decreto es:", "optionsEn": ["flee Susa", "tear his clothes, put on sackcloth and ashes, and wail", "confront Haman", "bribe the king"], "optionsEs": ["huir de Susa", "rasgar sus vestidos, vestir cilicio y ceniza, y lamentarse", "enfrentar a Amán", "sobornar al rey"], "answer": "B", "whyEn": "He mourns in sackcloth and ashes, wailing.", "whyEs": "Se lamenta en cilicio y ceniza, gimiendo."}, {"stemEn": "Glenda suggests Mordecai feels the crisis is:", "stemEs": "Glenda sugiere que Mardoqueo siente que la crisis es:", "optionsEn": ["partly on him, for the conflict with Haman", "God's abandonment", "Esther's failure", "the king's fault only"], "optionsEs": ["en parte suya, por el conflicto con Amán", "abandono de Dios", "fracaso de Ester", "solo culpa del rey"], "answer": "A", "whyEn": "He feels gutted, as if it stems from his own stand.", "whyEs": "Se siente destrozado, como si naciera de su postura."}, {"stemEn": "Glenda compares the Jews not fleeing to:", "stemEs": "Glenda compara que los judíos no huyeran con:", "optionsEn": ["the flood", "the Exodus", "the fall of Rome", "wealthy Jews who stayed in Nazi Germany feeling protected"], "optionsEs": ["el diluvio", "el Éxodo", "la caída de Roma", "judíos ricos que se quedaron en la Alemania nazi sentiéndose protegidos"], "answer": "D", "whyEn": "Like the wealthy who stayed, feeling safe, under Nazism.", "whyEs": "Como los ricos que se quedaron, sintendose seguros."}, {"stemEn": "The reaction of the people of Susa to the decree is:", "stemEs": "La reacción del pueblo de Susa ante el decreto es:", "optionsEn": ["bewilderment and confusion", "celebration", "indifference", "rebellion"], "optionsEs": ["desconcierto y confusión", "celebración", "indiferencia", "rebelión"], "answer": "A", "whyEn": "The city is thrown into bewildered confusion.", "whyEs": "La ciudad queda en desconcierto y confusión."}, {"stemEn": "Glenda notes that under previous Persian kings the Jews had:", "stemEs": "Glenda nota que bajo reyes persas anteriores los judíos habían:", "optionsEn": ["been enslaved", "enjoyed prosperity and freedom to rebuild the temple", "been expelled", "been taxed heavily"], "optionsEs": ["sido esclavizados", "gozado de prosperidad y libertad para reconstruir el templo", "sido expulsados", "sido gravados duramente"], "answer": "B", "whyEn": "They had prospered and been free to rebuild the temple.", "whyEs": "Habían prosperado y reconstruido el templo libremente."}, {"stemEn": "The number thirteen appears ominous because in Persia it was:", "stemEs": "El número trece parece ominoso porque en Persia era:", "optionsEn": ["a sacred number", "the king's number", "considered a bad omen", "the date of Purim"], "optionsEs": ["un número sagrado", "el número del rey", "considerado un mal presagio", "la fecha de Purim"], "answer": "C", "whyEn": "Thirteen was a bad omen in Persia.", "whyEs": "El trece era un mal presagio en Persia."}], SA=[{"promptEn": "Who is Haman, and why does Glenda emphasize his being an 'Agagite'?", "promptEs": "¿Quién es Amán, y por qué Glenda enfatiza que es 'agagueo'?", "modelEn": "Haman is the king's newly exalted official and the story's villain. Calling him an Agagite ties him to the Amalekites, Israel's ancient enemy, emphasizing the deep anti-Semitism behind his plot and making him a mortal enemy any Jew would recognize.", "modelEs": "Amán es el oficial recién exaltado del rey y el villano de la historia. Llamarlo agagueo lo liga a los amalecitas, antiguo enemigo de Israel, subrayando el profundo antisemitismo tras su complot y haciéndolo un enemigo mortal que todo judío reconocería.", "keywords": {"en": ["haman", "agagite", "amalekite", "enemy", "anti", "villain", "jew", "ancient"], "es": ["amán", "agagueo", "amalecita", "enemigo", "antisemit", "villano", "jud", "antiguo"]}}, {"promptEn": "Why does Mordecai refuse to bow, and what does it set in motion?", "promptEs": "¿Por qué rehusa inclinarse Mardoqueo, y qué pone en marcha?", "modelEn": "Glenda offers several possibilities — the ancient enmity, refusing worship due only to God, disdain for Haman's arrogance, or known anti-Semitism — we cannot be certain. His refusal enrages Haman, who resolves to annihilate not just Mordecai but all the Jews.", "modelEs": "Glenda ofrece varias posibilidades — la antigua enemistad, no rendir adoración debida solo a Dios, desdén por la arrogancia de Amán, o un antisemitismo conocido — no podemos estar seguros. Su negativa enfurece a Amán, que resuelve aniquilar no solo a Mardoqueo sino a todos los judíos.", "keywords": {"en": ["mordecai", "bow", "refuse", "worship", "arrogance", "haman", "annihilate", "jew"], "es": ["mardoqueo", "inclin", "rehus", "adoración", "arrogancia", "amán", "aniquil", "jud"]}}, {"promptEn": "What is the casting of Pur, and how is God sovereign over it?", "promptEs": "¿Qué es echar el Pur, y cómo es Dios soberano sobre ello?", "modelEn": "Pur is lot-casting, a pagan divination Haman uses to set the date for destroying the Jews. Yet Proverbs 16:33 says the lot's every decision is from the LORD — even Haman's lots fall under God's control, and the date lands almost a year away, giving time for deliverance.", "modelEs": "Pur es echar suertes, una adivinación pagana que Amán usa para fijar la fecha de destruir a los judíos. Pero Proverbios 16:33 dice que toda decisión de la suerte es del SEÑOR — aun las suertes de Amán caen bajo el control de Dios, y la fecha queda casi a un año, dando tiempo para la liberación.", "keywords": {"en": ["pur", "lot", "divination", "date", "proverbs", "lord", "control", "deliver"], "es": ["pur", "suerte", "adivinación", "fecha", "proverbios", "señor", "control", "libera"]}}, {"promptEn": "Describe how Haman manipulates the king into approving the decree.", "promptEs": "Describa cómo Amán manipula al rey para que apruebe el decreto.", "modelEn": "Haman never names the Jews, tells a half-truth that the people keep their own laws and (falsely) disobey the king, and offers a bribe of ten thousand talents of silver. The impulsive king approves it without even asking who the people are.", "modelEs": "Amán nunca nombra a los judíos, dice una verdad a medias de que el pueblo guarda sus propias leyes y (falsamente) desobedece al rey, y ofrece un soborno de diez mil talentos de plata. El rey impulsivo lo aprueba sin siquiera preguntar quiénes son.", "keywords": {"en": ["name", "half", "truth", "bribe", "talent", "silver", "king", "approve"], "es": ["nombr", "media", "verdad", "soborno", "talento", "plata", "rey", "aprueb"]}}, {"promptEn": "What does the king giving Haman his signet ring signify, and how is Haman labeled?", "promptEs": "¿Qué significa que el rey dé a Amán su anillo de sello, y cómo se etiqueta a Amán?", "modelEn": "Handing over the signet ring transfers royal authority to seal the decree. From here Haman is repeatedly named 'the enemy of the Jews,' marking him as a true anti-Semite whether by Amalekite descent or personal prejudice.", "modelEs": "Entregar el anillo de sello transfiere la autoridad real para sellar el decreto. Desde aquí a Amán se le nombra repetidamente 'el enemigo de los judíos,' marcándolo como verdadero antisemita, sea por ascendencia amalecita o prejuicio personal.", "keywords": {"en": ["signet", "ring", "authority", "seal", "enemy", "jew", "anti", "prejudice"], "es": ["sello", "anillo", "autoridad", "sella", "enemigo", "jud", "antisemit", "prejuicio"]}}, {"promptEn": "Why didn't the Jews simply flee, and what comparison does Glenda draw?", "promptEs": "¿Por qué no huyeron los judíos sin más, y qué comparación hace Glenda?", "modelEn": "The empire was so vast there was almost nowhere safe to go. Glenda compares it to wealthy Jews who stayed in Nazi Germany, feeling their wealth would protect them — perhaps the Jews of Susa likewise assumed they would somehow be safe.", "modelEs": "El imperio era tan vasto que casi no había dónde ir a salvo. Glenda lo compara con judíos ricos que se quedaron en la Alemania nazi, creyendo que su riqueza los protegería — quizá los judíos de Susa igualmente supusieron que de algún modo estarían a salvo.", "keywords": {"en": ["vast", "flee", "nowhere", "nazi", "germany", "wealth", "protect", "safe"], "es": ["vasto", "huir", "ninguna", "nazi", "alemania", "riqueza", "proteg", "salvo"]}}, {"promptEn": "Describe Mordecai's reaction to the decree and what Glenda suggests he feels.", "promptEs": "Describa la reacción de Mardoqueo al decreto y lo que Glenda sugiere que siente.", "modelEn": "Mordecai tears his clothes, puts on sackcloth and ashes, and wails. Glenda suggests he feels gutted, as though the looming annihilation of his people is partly on him because of his conflict with Haman.", "modelEs": "Mardoqueo rasga sus vestidos, se viste de cilicio y ceniza, y se lamenta. Glenda sugiere que se siente destrozado, como si la inminente aniquilación de su pueblo fuera en parte suya por su conflicto con Amán.", "keywords": {"en": ["mordecai", "sackcloth", "ashes", "wail", "gutted", "conflict", "haman", "mourn"], "es": ["mardoqueo", "cilicio", "ceniza", "lament", "destroz", "conflicto", "amán", "duelo"]}}, {"promptEn": "How had the Jews fared under previous Persian kings, and why is the decree such a shock?", "promptEs": "¿Cómo les había ido a los judíos bajo reyes persas anteriores, y por qué es tal choque el decreto?", "modelEn": "Under previous Persian kings the Jews had enjoyed prosperity and been encouraged to rebuild the temple. The decree comes as a complete shock — especially to those in Jerusalem rebuilding by royal permission — now suddenly targeted simply for who they are.", "modelEs": "Bajo reyes persas anteriores los judíos habían gozado de prosperidad y se les había animado a reconstruir el templo. El decreto llega como un choque total — sobre todo para los de Jerusalén reconstruyendo por permiso real — ahora señalados de golpe solo por quiénes son.", "keywords": {"en": ["previous", "prosper", "temple", "rebuild", "shock", "jerusalem", "permission", "target"], "es": ["anterior", "prosper", "templo", "reconstru", "choque", "jerusalén", "permiso", "señal"]}}, {"promptEn": "How does this section display God's providence even amid disaster?", "promptEs": "¿Cómo muestra esta sección la providencia de Dios aun en medio del desastre?", "modelEn": "Though God is unnamed and the news is dire, His providence appears in the timing: Haman's own lot sets the date almost a year off, leaving a window for deliverance, and the recorded earlier deed of Mordecai still waits to be repaid.", "modelEs": "Aunque Dios no es nombrado y la noticia es terrible, su providencia aparece en el momento: la propia suerte de Amán fija la fecha a casi un año, dejando una ventana para la liberación, y el acto antes registrado de Mardoqueo aún espera ser recompensado.", "keywords": {"en": ["providence", "timing", "lot", "date", "year", "deliver", "record", "mordecai"], "es": ["providencia", "momento", "suerte", "fecha", "año", "libera", "registr", "mardoqueo"]}}, {"promptEn": "What application can a believer draw from this dark turn in the story?", "promptEs": "¿Qué aplicación puede sacar un creyente de este giro oscuro de la historia?", "modelEn": "Even when God seems silent and circumstances look hopeless, He is still sovereign over the 'lots' of life. We can trust His providence and timing, mourn honestly like Mordecai, yet wait in faith for the deliverance He is already arranging unseen.", "modelEs": "Aun cuando Dios parece callado y las circunstancias se ven sin esperanza, Él sigue siendo soberano sobre las 'suertes' de la vida. Podemos confiar en su providencia y su tiempo, lamentar con sinceridad como Mardoqueo, y esperar en fe la liberación que ya prepara sin ser visto.", "keywords": {"en": ["silent", "sovereign", "trust", "providence", "timing", "mourn", "wait", "faith"], "es": ["callado", "soberano", "confiar", "providencia", "tiempo", "lament", "esperar", "fe"]}}];
+
+function getTrack(){ return lsGet('cts_track')||'cert'; }
+function isMastersLevel(){ var t=getTrack(); return t==='mdiv'||t==='thm'; }
+function lockMinutes(){ return isMastersLevel()?15:2; }
+
+function setLang(l){
+  document.body.setAttribute('data-lang',l); lsSet('cts_lang',l);
+  document.getElementById('btnEn').classList.toggle('active',l==='en');
+  document.getElementById('btnEs').classList.toggle('active',l==='es');
+}
+function saveReg(){
+  var nm=document.getElementById('regName').value.trim();
+  if(!nm) return;
+  lsSet('cts_student',nm);
+  document.getElementById('regOk').textContent=(document.body.getAttribute('data-lang')==='es'?'  Guardado: ':'  Saved: ')+nm;
+  renderGreet();
+}
+function renderGreet(){
+  var nm=lsGet('cts_student'); var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('greet').textContent = nm ? (es?('Estudiante: '+nm):('Student: '+nm)) : '';
+}
+function setTrack(){ lsSet('cts_track',document.getElementById('track').value); renderTrackNote(); renderSAmode(); }
+function renderTrackNote(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('trackNote').textContent = isMastersLevel()
+    ? (es?'Programa de maestría: la sección de respuesta breve CUENTA para aprobar.':'Masters track: the short-answer section COUNTS toward passing.')
+    : (es?'Certificado: la respuesta breve es práctica y no decide su aprobación.':'Certificate: short answer is practice and does not gate your pass.');
+}
+function renderSAmode(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('saMode').textContent = isMastersLevel()
+    ? (es?'Cuenta para su calificación (maestría).':'Counts toward your grade (masters).')
+    : (es?'Práctica: estudíela, pero no afecta su aprobación (certificado).':'Practice: study it, but it does not affect your pass (certificate).');
+}
+function kwHit(kw,text){
+  kw=kw.toLowerCase().trim(); text=(text||'').toLowerCase();
+  var e=kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var re=(kw.length<=3)?new RegExp('\\b'+e+'\\b'):new RegExp('\\b'+e);
+  return re.test(text);
+}
+function saHits(kws,ans){ var h=0; for(var i=0;i<kws.length;i++){ if(kwHit(kws[i],ans))h++; } return h; }
+
+function renderMC(){
+  var c=document.getElementById('mc'); c.innerHTML='';
+  MC.forEach(function(q,qi){
+    var d=document.createElement('div'); d.className='q';
+    var stem=document.createElement('div'); stem.className='stem';
+    stem.innerHTML='<span class="en">'+(qi+1)+'. '+q.stemEn+'</span><span class="es">'+(qi+1)+'. '+q.stemEs+'</span>';
+    d.appendChild(stem);
+    ['A','B','C','D'].forEach(function(L,oi){
+      var o=document.createElement('div'); o.className='opt'; o.id='mc'+qi+L;
+      o.innerHTML='<span class="en">'+L+'. '+q.optionsEn[oi]+'</span><span class="es">'+L+'. '+q.optionsEs[oi]+'</span>';
+      o.addEventListener('click',function(){ pickMC(qi,L); });
+      d.appendChild(o);
+    });
+    var bw=document.createElement('div'); bw.style.marginTop='8px';
+    var b=document.createElement('button'); b.className='secondary';
+    b.innerHTML='<span class="en">Check</span><span class="es">Revisar</span>';
+    b.addEventListener('click',function(){ checkMC(qi); });
+    bw.appendChild(b); d.appendChild(bw);
+    var fb=document.createElement('div'); fb.className='fb'; fb.id='mcfb'+qi; d.appendChild(fb);
+    c.appendChild(d);
+  });
+}
+var mcPick={};
+function pickMC(qi,L){ mcPick[qi]=L; ['A','B','C','D'].forEach(function(X){document.getElementById('mc'+qi+X).classList.remove('sel');}); document.getElementById('mc'+qi+L).classList.add('sel'); }
+function markMC(qi){
+  var q=MC[qi], pick=mcPick[qi];
+  ['A','B','C','D'].forEach(function(X){document.getElementById('mc'+qi+X).classList.remove('correct','wrong');});
+  if(pick===q.answer){ document.getElementById('mc'+qi+pick).classList.add('correct'); }
+  else { if(pick) document.getElementById('mc'+qi+pick).classList.add('wrong'); document.getElementById('mc'+qi+q.answer).classList.add('correct'); }
+  var fb=document.getElementById('mcfb'+qi); fb.className='fb '+(pick===q.answer?'ok':'no');
+  fb.innerHTML='<span class="en">'+(pick===q.answer?'Correct. ':'Answer: '+q.answer+'. ')+q.whyEn+'</span><span class="es">'+(pick===q.answer?'Correcto. ':'Respuesta: '+q.answer+'. ')+q.whyEs+'</span>';
+}
+function checkMC(qi){
+  var es=document.body.getAttribute('data-lang')==='es';
+  if(!mcPick[qi]){ var fb=document.getElementById('mcfb'+qi); fb.className='fb no'; fb.textContent=es?'Elija una opción primero.':'Pick an option first.'; return; }
+  markMC(qi);
+}
+
+function renderSA(){
+  var c=document.getElementById('sa'); c.innerHTML='';
+  SA.forEach(function(q,qi){
+    var d=document.createElement('div'); d.className='q';
+    var stem=document.createElement('div'); stem.className='stem';
+    stem.innerHTML='<span class="en">'+(MC.length+qi+1)+'. '+q.promptEn+'</span><span class="es">'+(MC.length+qi+1)+'. '+q.promptEs+'</span>';
+    d.appendChild(stem);
+    var ta=document.createElement('textarea'); ta.id='sa'+qi; ta.placeholder='...'; d.appendChild(ta);
+    var bw=document.createElement('div'); bw.style.marginTop='8px';
+    var b=document.createElement('button'); b.className='secondary';
+    b.innerHTML='<span class="en">Check Answer</span><span class="es">Revisar</span>';
+    b.addEventListener('click',function(){ checkSA(qi); });
+    bw.appendChild(b); d.appendChild(bw);
+    var fb=document.createElement('div'); fb.className='fb'; fb.id='safb'+qi; d.appendChild(fb);
+    var mo=document.createElement('div'); mo.className='model'; mo.id='samodel'+qi;
+    mo.innerHTML='<b><span class="en">Model answer — study this:</span><span class="es">Respuesta modelo &#9873; &mdash; est&uacute;diela:</span></b><br><span class="en">'+q.modelEn+'</span><span class="es">'+q.modelEs+'</span>';
+    d.appendChild(mo);
+    c.appendChild(d);
+  });
+}
+function checkSA(qi){
+  var ans=document.getElementById('sa'+qi).value.trim();
+  var fb=document.getElementById('safb'+qi); var es=document.body.getAttribute('data-lang')==='es';
+  if(!ans){ fb.className='fb no'; fb.textContent=es?'Escriba una respuesta antes de revisar.':'Please write an answer before checking.'; return; }
+  if(ans.length<100){ fb.className='fb no'; fb.textContent=es?'Escriba una respuesta más completa (mínimo 100 caracteres).':'Write a fuller answer (100 characters minimum).'; return; }
+  var q=SA[qi]; var hits=Math.max(saHits(q.keywords.en,ans),saHits(q.keywords.es,ans));
+  if(hits>=3){ fb.className='fb ok'; fb.textContent=(es?'Aprobado — ':'Pass — ')+hits+(es?' de 8 conceptos.':' of 8 key concepts.'); }
+  else { fb.className='fb no'; fb.textContent=(es?'Aún no — ':'Not yet — ')+hits+(es?' de 8 (necesita 3).':' of 8 (need 3).'); }
+  if(hits>=3) document.getElementById('samodel'+qi).classList.add('show');
+}
+
+function isLocked(){
+  var until=parseInt(lsGet('cts_re_u'+UNIT+'_lockout')||'0',10);
+  return until>Date.now()? until : 0;
+}
+function grade(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  var until=isLocked();
+  if(until){ var mins=Math.ceil((until-Date.now())/60000);
+    var r0=document.getElementById('result'); r0.className='result fail';
+    r0.textContent=(es?'Bloqueado. Intente de nuevo en ':'Locked out. Try again in ')+mins+(es?' min.':' min.'); return; }
+  var mcCorrect=0;
+  MC.forEach(function(q,qi){ markMC(qi); if(mcPick[qi]===q.answer) mcCorrect++; });
+  var saPass=0;
+  SA.forEach(function(q,qi){
+    var ans=document.getElementById('sa'+qi).value.trim(); var fb=document.getElementById('safb'+qi);
+    if(!ans){ fb.className='fb no'; fb.textContent=es?'Sin respuesta.':'No answer given.'; }
+    else if(ans.length<100){ fb.className='fb no'; fb.textContent=es?'Respuesta demasiado breve (mínimo 100 caracteres).':'Answer too short (100 characters minimum).'; }
+    else { var hits=Math.max(saHits(q.keywords.en,ans),saHits(q.keywords.es,ans));
+      if(hits>=3){ saPass++; fb.className='fb ok'; fb.textContent=(es?'Aprobado — ':'Pass — ')+hits+'/8.'; }
+      else { fb.className='fb no'; fb.textContent=(es?'Debajo — ':'Below — ')+hits+'/8.'; } }
+    document.getElementById('samodel'+qi).classList.add('show');
+  });
+  var mcPct=Math.round(mcCorrect/MC.length*100), mcOk=mcPct>=90;
+  var masters=isMastersLevel(), saOk=saPass>=9;
+  var pass = masters ? (mcOk&&saOk) : mcOk;
+  var r=document.getElementById('result');
+  if(pass){
+    r.className='result pass';
+    var saLine = masters ? ((es?' Respuesta breve: ':' Short answer: ')+saPass+'/'+SA.length+'.') : (es?' (Respuesta breve: práctica.)':' (Short answer: practice.)');
+    r.innerHTML='<b>'+(es?('Unidad '+UNIT+' aprobada.'):('Unit '+UNIT+' passed.'))+'</b> '+(es?'Opción múltiple: ':'Multiple choice: ')+mcCorrect+'/'+MC.length+' ('+mcPct+'%).'+saLine;
+    lsSet('re_unit'+UNIT+'_passed','1');
+    lsSet('cts_re_progress',String(Math.max(UNIT,parseInt(lsGet('cts_re_progress')||'0',10))));
+    lsDel('cts_re_u'+UNIT+'_lockout');
+    document.getElementById('nextBtn').disabled=false;
+  } else {
+    r.className='result fail';
+    var why=[]; if(!mcOk) why.push((es?'opción múltiple ':'multiple choice ')+mcPct+'% ('+(es?'necesita 90%':'need 90%')+')');
+    if(masters&&!saOk) why.push((es?'respuesta breve ':'short answer ')+saPass+'/'+SA.length);
+    var lk=lockMinutes(); lsSet('cts_re_u'+UNIT+'_lockout',String(Date.now()+lk*60000));
+    r.innerHTML='<b>'+(es?'Aún no aprobada.':'Not yet passed.')+'</b> '+why.join('; ')+'. '+(es?('Espere '+lk+' min y reintente.'):('Wait '+lk+' min and retry.'));
+    document.getElementById('nextBtn').disabled=true;
+  }
+  r.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function goNext(){ if(NEXT_URL) window.location.href=NEXT_URL; }
+
+(function(){
+  setLang(lsGet('cts_lang')||'en');
+  var t=getTrack(); document.getElementById('track').value=t;
+  renderGreet(); renderTrackNote(); renderSAmode(); renderMC(); renderSA();
+  var rn=document.getElementById('regName'); if(rn&&lsGet('cts_student')) rn.value=lsGet('cts_student');
+  if(lsGet('re_unit'+UNIT+'_passed')==='1') document.getElementById('nextBtn').disabled=false;
+})();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSREReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Evangelism — Unit 11: Types of Evangelists (Bilingual)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .clear-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.clear-btn { background: #a0512a; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.attribution { font-size: 0.95rem; color: #6b5840; font-style: italic; margin-bottom: 16px; }
+blockquote { margin: 14px 0; padding: 10px 14px; border-left: 4px solid #5b3a1f; background: #f4ede2; font-style: italic; }
+.track-banner { background: #5b3a1f; color: white; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-weight: bold; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+.kw-answer:disabled { background: #f5f0e8; cursor: not-allowed; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; margin-top: 5px; }
+button.small:disabled { background: #aaa; cursor: not-allowed; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.lockout-banner { background: #f8d7da; color: #721c24; padding: 12px 16px; border-radius: 12px; margin-bottom: 15px; font-weight: bold; border: 1px solid #f5c6cb; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en div.lang-en { display: block; }
+body.lang-es div.lang-es { display: block; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.scale-box { background: #fdfaf3; border: 1px solid #d7cec1; border-radius: 10px; padding: 14px 18px; margin: 14px 0; }
+.scale-box h4 { color: #5b3a1f; margin-top: 0; }
+.scale-box ol { margin-left: 1.4rem; }
+.scale-box ol li { margin-bottom: 6px; }
+@media print {
+  .toggle-btn, .clear-btn, .nav-bar, .registration-panel, button, .question input[type="radio"], textarea, .lockout-banner { display: none !important; }
+  body { background: white; }
+  .card { box-shadow: none; border: none; }
+}
+.model-answer-box { margin-top: 12px; padding: 12px 14px; background: #fbf3d9; border: 1px solid #e4c95b; border-left: 5px solid #c9a227; border-radius: 8px; color: #4a3c10; font-size: 0.95em; line-height: 1.5; }
+.model-answer-box strong { color: #7a5c00; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span></button>
+        <button class="nav-btn" id="nextUnitBtn"><span class="lang-en">Next</span><span class="lang-es">Siguiente</span> →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+<button class="clear-btn" id="clearDataBtn">🗑 <span class="lang-en">Clear Saved Data</span><span class="lang-es">Borrar Datos Guardados</span></button>
+
+<div class="card">
+    <h1>
+        <span class="lang-en">📖 Evangelism — Unit 11: Types of Evangelists and Approaches to Evangelism</span>
+        <span class="lang-es">📖 Evangelismo — Unidad 11: Tipos de Evangelistas y Enfoques del Evangelismo</span>
+    </h1>
+    <p class="attribution">
+        <span class="lang-en">Chapala Theological Seminary · Dr. Wayne Cook, Author and Professor · Dr. Ted Rogers, Seminary Director</span>
+        <span class="lang-es">Seminario Teológico de Chapala · Dr. Wayne Cook, Autor y Profesor · Dr. Ted Rogers, Director del Seminario</span>
+    </p>
+    <div id="trackBanner" class="track-banner" style="display:none;"></div>
+</div>
+
+<!-- CTS audit 2026-05-23: registration panel removed. Registration happens once on Unit 1.
+     Later units read the saved student/track from localStorage (cts_student / cts_track).
+     If none is saved, the student silently defaults to the Certificate track (per Wayne). -->
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        
+        <h2>Orientation</h2>
+        <p>Not all believers share the gospel in the same way. While the responsibility to evangelize belongs to every Christian, the manner in which that responsibility is expressed may differ. Scripture presents a unified message but allows for diversity in approach. Understanding the different ways believers engage in evangelism helps remove unnecessary guilt, encourages participation, and allows each believer to function more effectively within their God-given strengths.</p>
+
+        <h3>I. Unity of Message, Diversity of Approach</h3>
+        <p>The gospel itself does not change:</p>
+        <blockquote>"For I am not ashamed of the gospel of Christ, for it is the power of God to salvation for everyone who believes." (Romans 1:16, NKJV)</blockquote>
+        <p>However, the way it is communicated may vary. Paul wrote:</p>
+        <blockquote>"There are diversities of gifts, but the same Spirit." (1 Corinthians 12:4, NKJV)</blockquote>
+        <p>This principle applies directly to evangelism. The message is fixed, but the approach may differ from believer to believer.</p>
+
+        <h3>II. The Direct Evangelist</h3>
+        <p>Some believers are naturally direct. They are comfortable initiating conversations, clearly presenting the gospel, and calling for a response. Peter demonstrated this on the day of Pentecost:</p>
+        <blockquote>"Repent, and let every one of you be baptized in the name of Jesus Christ for the remission of sins." (Acts 2:38, NKJV)</blockquote>
+        <p>This approach is clear and bold. It is especially effective where there is openness and urgency. However, it must be balanced with sensitivity, lest boldness become harshness.</p>
+
+        <h3>III. The Relational Evangelist</h3>
+        <p>Others engage through relationships developed over time. Paul wrote:</p>
+        <blockquote>"So, affectionately longing for you, we were well pleased to impart to you not only the gospel of God, but also our own lives." (1 Thessalonians 2:8, NKJV)</blockquote>
+        <p>This approach emphasizes trust, consistency, and ongoing interaction. It may take longer, but it allows for deeper influence as the relationship earns a hearing for the gospel.</p>
+
+        <h3>IV. The Serving Evangelist</h3>
+        <p>Some believers communicate the gospel through acts of service. Jesus said:</p>
+        <blockquote>"Let your light so shine before men, that they may see your good works and glorify your Father in heaven." (Matthew 5:16, NKJV)</blockquote>
+        <p>Service opens doors for conversation and demonstrates the reality of the gospel in practical ways. However, service must be accompanied by a verbal explanation of the gospel, or it remains only kindness without its source named.</p>
+
+        <h3>V. The Apologetic Evangelist</h3>
+        <p>Some are particularly effective in addressing questions and objections. Peter instructed:</p>
+        <blockquote>"But sanctify the Lord God in your hearts, and always be ready to give a defense to everyone who asks you a reason for the hope that is in you, with meekness and fear." (1 Peter 3:15, NKJV)</blockquote>
+        <p>This approach is valuable when engaging individuals who have intellectual or philosophical barriers. It requires knowledge, clarity, and patience.</p>
+
+        <h3>VI. The Invitational Evangelist</h3>
+        <p>Some believers are effective in inviting others to encounter the gospel in a different setting. When Nathanael raised a doubt, Philip simply said:</p>
+        <blockquote>"And Nathanael said to him, 'Can anything good come out of Nazareth?' Philip said to him, 'Come and see.'" (John 1:46, NKJV)</blockquote>
+        <p>This may involve inviting someone to church, bringing them to a Bible study, or introducing them to another believer. It works well when combined with other forms of evangelism.</p>
+
+        <h3>VII. The Testimonial Evangelist</h3>
+        <p>Some share effectively through personal testimony. The man healed of blindness said:</p>
+        <blockquote>"One thing I know: that though I was blind, now I see." (John 9:25, NKJV)</blockquote>
+        <p>Personal testimony is powerful because it is authentic, relatable, and difficult to refute. However, it must be connected to the gospel message itself, not left as a mere story of personal improvement.</p>
+
+        <h3>VIII. Avoiding Comparison and Guilt</h3>
+        <p>A common mistake is comparing one approach to another and assuming that only one is valid. Scripture teaches diversity within unity. Each believer should understand their strengths, develop their ability, and remain faithful to the message. No single approach is superior in all situations.</p>
+
+        <h3>IX. Developing Balance</h3>
+        <p>While believers may lean toward one approach, they should seek to grow in others. A relational evangelist should learn to speak clearly. A direct evangelist should learn sensitivity. A serving evangelist should learn to articulate the gospel. Balance strengthens effectiveness and guards against the weaknesses of any single style.</p>
+
+        <h3>X. Illustration and Application</h3>
+        <p>Consider a group of believers. One speaks boldly and directly. Another builds relationships over time. Another serves faithfully. Another answers questions thoughtfully. Each is different, yet all are participating in the same mission. The effectiveness of evangelism is not found in uniformity, but in faithful diversity.</p>
+
+        <h3>Conclusion</h3>
+        <p>Evangelism allows for diversity in approach while maintaining unity in message. Each believer has a role to play. When these approaches are understood and practiced faithfully, the church becomes more effective in reaching a variety of people in different contexts.</p>
+        <blockquote>"And there are diversities of activities, but it is the same God who works all in all." (1 Corinthians 12:6, NKJV)</blockquote>
+    </div>
+
+    <div class="lang-es">
+        <!-- CTS audit 2026-05-23: Spanish developed by CTS faculty. RVG verses flagged for human proofread. -->
+        <h2>Orientación</h2>
+        <p>No todos los creyentes comparten el evangelio de la misma manera. Aunque la responsabilidad de evangelizar pertenece a todo cristiano, la manera en que esa responsabilidad se expresa puede diferir. Las Escrituras presentan un mensaje unificado, pero permiten diversidad en el enfoque. Comprender las diferentes maneras en que los creyentes participan en el evangelismo ayuda a eliminar la culpa innecesaria, fomenta la participación y permite que cada creyente funcione más eficazmente dentro de las fortalezas que Dios le ha dado.</p>
+
+        <h3>I. Unidad de Mensaje, Diversidad de Enfoque</h3>
+        <p>El evangelio mismo no cambia:</p>
+        <blockquote>"Porque no me avergüenzo del evangelio de Cristo; porque es el poder de Dios para salvación a todo aquel que cree." (Romanos 1:16, RVG)</blockquote>
+        <p>Sin embargo, la manera en que se comunica puede variar. Pablo escribió:</p>
+        <blockquote>"Ahora bien, hay diversidad de dones; pero el Espíritu es el mismo." (1 Corintios 12:4, RVG)</blockquote>
+        <p>Este principio se aplica directamente al evangelismo. El mensaje es fijo, pero el enfoque puede diferir de creyente a creyente.</p>
+
+        <h3>II. El Evangelista Directo</h3>
+        <p>Algunos creyentes son naturalmente directos. Se sienten cómodos iniciando conversaciones, presentando claramente el evangelio y llamando a una respuesta. Pedro lo demostró en el día de Pentecostés:</p>
+        <blockquote>"Arrepentíos, y bautícese cada uno de vosotros en el nombre de Jesucristo para perdón de los pecados." (Hechos 2:38, RVG)</blockquote>
+        <p>Este enfoque es claro y audaz. Es especialmente eficaz donde hay apertura y urgencia. Sin embargo, debe equilibrarse con sensibilidad, no sea que la valentía se vuelva dureza.</p>
+
+        <h3>III. El Evangelista Relacional</h3>
+        <p>Otros se relacionan a través de relaciones desarrolladas con el tiempo. Pablo escribió:</p>
+        <blockquote>"Tan grande es nuestro afecto por vosotros, que hubiéramos querido entregaros no sólo el evangelio de Dios, sino también nuestras propias almas." (1 Tesalonicenses 2:8, RVG)</blockquote>
+        <p>Este enfoque enfatiza la confianza, la constancia y la interacción continua. Puede tomar más tiempo, pero permite una influencia más profunda a medida que la relación gana un oído para el evangelio.</p>
+
+        <h3>IV. El Evangelista que Sirve</h3>
+        <p>Algunos creyentes comunican el evangelio a través de actos de servicio. Jesús dijo:</p>
+        <blockquote>"Así alumbre vuestra luz delante de los hombres, para que vean vuestras buenas obras, y glorifiquen a vuestro Padre que está en el cielo." (Mateo 5:16, RVG)</blockquote>
+        <p>El servicio abre puertas para la conversación y demuestra la realidad del evangelio de maneras prácticas. Sin embargo, el servicio debe ir acompañado de una explicación verbal del evangelio, o permanece solo como bondad sin nombrar su fuente.</p>
+
+        <h3>V. El Evangelista Apologético</h3>
+        <p>Algunos son particularmente eficaces en abordar preguntas y objeciones. Pedro instruyó:</p>
+        <blockquote>"sino santificad a Dios el Señor en vuestros corazones, y estad siempre preparados para responder con mansedumbre y reverencia a todo el que os demande razón de la esperanza que hay en vosotros." (1 Pedro 3:15, RVG)</blockquote>
+        <p>Este enfoque es valioso al tratar con personas que tienen barreras intelectuales o filosóficas. Requiere conocimiento, claridad y paciencia.</p>
+
+        <h3>VI. El Evangelista que Invita</h3>
+        <p>Algunos creyentes son eficaces en invitar a otros a encontrarse con el evangelio en otro entorno. Cuando Natanael planteó una duda, Felipe simplemente dijo:</p>
+        <blockquote>"Y le dijo Natanael: ¿De Nazaret puede haber algo de bueno? Le dijo Felipe: Ven y ve." (Juan 1:46, RVG)</blockquote>
+        <p>Esto puede implicar invitar a alguien a la iglesia, llevarlo a un estudio bíblico o presentarlo a otro creyente. Funciona bien cuando se combina con otras formas de evangelismo.</p>
+
+        <h3>VII. El Evangelista que Testifica</h3>
+        <p>Algunos comparten eficazmente a través del testimonio personal. El hombre sanado de ceguera dijo:</p>
+        <blockquote>"Una cosa sé: que habiendo yo sido ciego, ahora veo." (Juan 9:25, RVG)</blockquote>
+        <p>El testimonio personal es poderoso porque es auténtico, cercano y difícil de refutar. Sin embargo, debe estar conectado con el mensaje del evangelio mismo, no quedar como una mera historia de superación personal.</p>
+
+        <h3>VIII. Evitar la Comparación y la Culpa</h3>
+        <p>Un error común es comparar un enfoque con otro y suponer que solo uno es válido. Las Escrituras enseñan diversidad dentro de la unidad. Cada creyente debe comprender sus fortalezas, desarrollar su capacidad y permanecer fiel al mensaje. Ningún enfoque es superior en todas las situaciones.</p>
+
+        <h3>IX. Desarrollar el Equilibrio</h3>
+        <p>Aunque los creyentes pueden inclinarse hacia un enfoque, deben buscar crecer en otros. Un evangelista relacional debe aprender a hablar con claridad. Un evangelista directo debe aprender sensibilidad. Un evangelista que sirve debe aprender a articular el evangelio. El equilibrio fortalece la eficacia y protege contra las debilidades de cualquier estilo único.</p>
+
+        <h3>X. Ilustración y Aplicación</h3>
+        <p>Considere a un grupo de creyentes. Uno habla con audacia y de manera directa. Otro construye relaciones con el tiempo. Otro sirve fielmente. Otro responde preguntas con reflexión. Cada uno es diferente, pero todos participan en la misma misión. La eficacia del evangelismo no se encuentra en la uniformidad, sino en la diversidad fiel.</p>
+
+        <h3>Conclusión</h3>
+        <p>El evangelismo permite diversidad en el enfoque mientras mantiene unidad en el mensaje. Cada creyente tiene un papel que desempeñar. Cuando estos enfoques se comprenden y se practican fielmente, la iglesia se vuelve más eficaz en alcanzar a una variedad de personas en diferentes contextos.</p>
+        <blockquote>"Y hay diversidad de operaciones; pero es el mismo Dios que obra todas las cosas en todos." (1 Corintios 12:6, RVG)</blockquote>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 11 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 11 — 30 Preguntas</span></h2>
+    <p>
+        <span class="lang-en"><strong>Certificate track:</strong> Section A (multiple choice) required at 90%. Section B (short answer) optional.</span>
+        <span class="lang-es"><strong>Pista de Certificado:</strong> Sección A (opción múltiple) obligatoria al 90%. Sección B (respuesta corta) opcional.</span>
+    </p>
+    <p>
+        <span class="lang-en"><strong>M.Div./Th.M. track:</strong> Both sections required at 90% each, independently.</span>
+        <span class="lang-es"><strong>Pista de M.Div./Th.M.:</strong> Ambas secciones obligatorias al 90% cada una, independientemente.</span>
+    </p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="clearExamDataBtn" class="small" style="background:#a0512a;">🗑 <span class="lang-en">Clear My Answers</span><span class="lang-es">Borrar Mis Respuestas</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;" aria-live="polite"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ======================== CONFIG ========================
+const UNIT_NUM = 11;
+const TOTAL_UNITS = 13; /* CTS audit 2026-05-23: course confirmed to 13 units (Wayne). */
+const PASS_THRESHOLD = 0.90;
+const NS = 'cts_ev_';
+const UNIT_KEY = NS + 'unit' + UNIT_NUM;
+const PROGRESS_KEY = NS + 'progress';
+const PASSED_KEY = NS + 'unit' + UNIT_NUM + '_passed';
+const MC_PASSED_KEY = NS + 'u' + UNIT_NUM + '_mc_passed';
+const LOCKOUT_KEY = NS + 'unit' + UNIT_NUM + '_sa_lockout';
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch(e) { progress = {}; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(NS + 'unit' + i + '_passed') === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSEvangelismUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSEvangelismUnit10.html"; };
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (localStorage.getItem(PASSED_KEY) === 'true') location.href = "CTSEvangelismUnit12.html";
+    else alert(currentLang === 'es' ? "Por favor apruebe la Unidad 11 primero." : "Please pass Unit 11 first.");
+};
+updateProgressGrid();
+
+// ======================== REGISTRATION ========================
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+/* CTS audit 2026-05-23: registration is collected only on Unit 1. This unit reads the saved
+   student from localStorage. If nothing is saved, default silently to the Certificate track. */
+function loadReg() {
+    let saved = localStorage.getItem('cts_student');
+    if (saved) {
+        try { student = JSON.parse(saved); } catch(e) { student = { name: '', email: '', country: '', program: 'Certificate of Ministry' }; }
+    }
+    if (!student || !student.program) { student = student || {}; student.program = 'Certificate of Ministry'; }
+    if (!localStorage.getItem('cts_track')) {
+        localStorage.setItem('cts_track', student.program === 'Master of Divinity' ? 'mdiv' : (student.program === 'Master of Theology' ? 'thm' : 'cert'));
+    }
+    applyTrackBanner();
+}
+function applyTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    const track = localStorage.getItem('cts_track') || 'cert';
+    banner.style.display = 'block';
+    /* CTS audit 2026-05-23: added Th.M. banner branch; both Masters tracks require both sections. */
+    if (track === 'thm') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Theology — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Teología — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else if (track === 'mdiv') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Divinity — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Divinidad — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else {
+        banner.innerHTML = '<span class="lang-en">Track: Certificate — Section A required (90%). Section B optional.</span><span class="lang-es">Pista: Certificado — Sección A obligatoria (90%). Sección B opcional.</span>';
+    }
+}
+/* CTS audit 2026-05-23: registration listeners removed (no reg form on this unit). */
+loadReg();
+applyTrackBanner();
+
+// ======================== QUESTIONS — MC distribution already A=B=C=D=5 ========================
+/* CTS audit 2026-05-23: Unit 11 MC. Stems from Wayne's draft (Unit11_Evangelism.txt). Draft's AI key put the
+   correct answer in option B on all 20; answers set from the teaching text and POSITIONS rebalanced to 5/5/5/5. */
+const mcQuestions = [
+    { textEn: "1. The gospel message itself is:", textEs: "1. El mensaje del evangelio mismo es:", optionsEn: ["Fixed and unchanging", "Flexible", "Cultural", "Optional"], optionsEs: ["Fijo e inmutable", "Flexible", "Cultural", "Opcional"], correct: 0, explanationEn: "The message is fixed; only the approach to communicating it may vary.", explanationEs: "El mensaje es fijo; solo el enfoque para comunicarlo puede variar." },
+    { textEn: "2. Romans 1:16 declares the gospel to be:", textEs: "2. Romanos 1:16 declara que el evangelio es:", optionsEn: ["A cause for shame", "A matter for silence", "The power of God to salvation", "Best avoided"], optionsEs: ["Motivo de vergüenza", "Asunto de silencio", "El poder de Dios para salvación", "Mejor evitado"], correct: 2, explanationEn: "'I am not ashamed of the gospel... it is the power of God to salvation.'", explanationEs: "'No me avergüenzo del evangelio... es el poder de Dios para salvación.'" },
+    { textEn: "3. 1 Corinthians 12:4 teaches that there are:", textEs: "3. 1 Corintios 12:4 enseña que hay:", optionsEn: ["Forced uniformity", "Diversities of gifts by one Spirit", "Reasons for silence", "Grounds for avoidance"], optionsEs: ["Uniformidad forzada", "Diversidad de dones por un mismo Espíritu", "Razones para el silencio", "Motivos de evitación"], correct: 1, explanationEn: "'There are diversities of gifts, but the same Spirit.'", explanationEs: "'Hay diversidad de dones; pero el Espíritu es el mismo.'" },
+    { textEn: "4. The direct evangelist is characterized as:", textEs: "4. El evangelista directo se caracteriza como:", optionsEn: ["Silent", "Relational only", "Passive", "Bold and clear"], optionsEs: ["Silencioso", "Solo relacional", "Pasivo", "Audaz y claro"], correct: 3, explanationEn: "The direct evangelist initiates clearly and calls for a response, like Peter at Pentecost.", explanationEs: "El evangelista directo inicia con claridad y llama a una respuesta, como Pedro en Pentecostés." },
+    { textEn: "5. Acts 2:38 illustrates which approach?", textEs: "5. Hechos 2:38 ilustra ¿qué enfoque?", optionsEn: ["Direct proclamation", "Silence", "Endless debate", "Avoidance"], optionsEs: ["Proclamación directa", "Silencio", "Debate sin fin", "Evitación"], correct: 0, explanationEn: "'Repent, and let every one of you be baptized'—direct, clear proclamation.", explanationEs: "'Arrepentíos, y bautícese cada uno de vosotros'—proclamación directa y clara." },
+    { textEn: "6. The relational evangelist primarily focuses on:", textEs: "6. El evangelista relacional se enfoca principalmente en:", optionsEn: ["Speed", "Relationships over time", "Debate", "Silence"], optionsEs: ["Rapidez", "Relaciones a lo largo del tiempo", "Debate", "Silencio"], correct: 1, explanationEn: "The relational approach builds trust and influence through ongoing relationship.", explanationEs: "El enfoque relacional construye confianza e influencia a través de la relación continua." },
+    { textEn: "7. 1 Thessalonians 2:8 emphasizes:", textEs: "7. 1 Tesalonicenses 2:8 enfatiza:", optionsEn: ["Distance", "Avoidance", "Silence", "Personal investment in others"], optionsEs: ["Distancia", "Evitación", "Silencio", "Inversión personal en otros"], correct: 3, explanationEn: "Paul imparted 'not only the gospel... but also our own lives'—personal investment.", explanationEs: "Pablo entregó 'no sólo el evangelio... sino también nuestras propias almas'—inversión personal." },
+    { textEn: "8. The serving evangelist communicates the gospel chiefly through:", textEs: "8. El evangelista que sirve comunica el evangelio principalmente a través de:", optionsEn: ["Debate", "Pressure", "Acts of service", "Silence"], optionsEs: ["Debate", "Presión", "Actos de servicio", "Silencio"], correct: 2, explanationEn: "Service opens doors and demonstrates the gospel, paired with verbal witness.", explanationEs: "El servicio abre puertas y demuestra el evangelio, acompañado del testimonio verbal." },
+    { textEn: "9. Matthew 5:16 instructs believers to:", textEs: "9. Mateo 5:16 instruye a los creyentes a:", optionsEn: ["Let their good works shine", "Hide their works", "Avoid people", "Stay silent"], optionsEs: ["Dejar brillar sus buenas obras", "Esconder sus obras", "Evitar a la gente", "Permanecer en silencio"], correct: 0, explanationEn: "'Let your light so shine before men, that they may see your good works.'", explanationEs: "'Así alumbre vuestra luz delante de los hombres, para que vean vuestras buenas obras.'" },
+    { textEn: "10. The apologetic evangelist is marked by:", textEs: "10. El evangelista apologético se distingue por:", optionsEn: ["Avoiding questions", "Answering questions and objections", "Staying silent", "Pressuring people"], optionsEs: ["Evitar preguntas", "Responder preguntas y objeciones", "Permanecer en silencio", "Presionar a la gente"], correct: 1, explanationEn: "The apologetic approach addresses intellectual barriers with knowledge and patience.", explanationEs: "El enfoque apologético aborda las barreras intelectuales con conocimiento y paciencia." },
+    { textEn: "11. 1 Peter 3:15 calls believers to:", textEs: "11. 1 Pedro 3:15 llama a los creyentes a:", optionsEn: ["Stay silent", "Delay answering", "Be ready to give a defense", "Avoid the question"], optionsEs: ["Permanecer en silencio", "Demorar la respuesta", "Estar preparados para responder", "Evitar la pregunta"], correct: 2, explanationEn: "'Always be ready to give a defense... for the hope that is in you.'", explanationEs: "'Estad siempre preparados para responder... de la esperanza que hay en vosotros.'" },
+    { textEn: "12. The invitational evangelist is best described as one who:", textEs: "12. El evangelista que invita se describe mejor como alguien que:", optionsEn: ["Debates", "Avoids others", "Pressures people", "Invites others to come and see"], optionsEs: ["Debate", "Evita a otros", "Presiona a la gente", "Invita a otros a venir y ver"], correct: 3, explanationEn: "Like Philip's 'Come and see,' the invitational evangelist brings others to encounter Christ.", explanationEs: "Como el 'Ven y ve' de Felipe, el evangelista que invita lleva a otros a encontrarse con Cristo." },
+    { textEn: "13. John 1:46 records the words:", textEs: "13. Juan 1:46 registra las palabras:", optionsEn: ["A call to silence", "'Come and see'", "A demand for debate", "A refusal"], optionsEs: ["Un llamado al silencio", "'Ven y ve'", "Una exigencia de debate", "Una negativa"], correct: 1, explanationEn: "Philip answered Nathanael's doubt with a simple 'Come and see.'", explanationEs: "Felipe respondió a la duda de Natanael con un simple 'Ven y ve.'" },
+    { textEn: "14. The testimonial evangelist shares chiefly through:", textEs: "14. El evangelista que testifica comparte principalmente a través de:", optionsEn: ["Personal experience of Christ", "Avoiding personal story", "Debate", "Pressure"], optionsEs: ["La experiencia personal de Cristo", "Evitar la historia personal", "El debate", "La presión"], correct: 0, explanationEn: "Personal testimony is authentic and relatable, like the healed man's witness.", explanationEs: "El testimonio personal es auténtico y cercano, como el testimonio del hombre sanado." },
+    { textEn: "15. John 9:25 records the testimony:", textEs: "15. Juan 9:25 registra el testimonio:", optionsEn: ["A call to silence", "A refusal to speak", "'Though I was blind, now I see'", "A request for debate"], optionsEs: ["Un llamado al silencio", "Una negativa a hablar", "'Habiendo yo sido ciego, ahora veo'", "Una petición de debate"], correct: 2, explanationEn: "The healed man testified to what he personally knew: 'now I see.'", explanationEs: "El hombre sanado testificó de lo que él personalmente sabía: 'ahora veo.'" },
+    { textEn: "16. Comparing one's approach to another's tends to produce:", textEs: "16. Comparar el enfoque propio con el de otro tiende a producir:", optionsEn: ["Growth", "Clarity", "Strength", "Unnecessary guilt"], optionsEs: ["Crecimiento", "Claridad", "Fortaleza", "Culpa innecesaria"], correct: 3, explanationEn: "Assuming only one approach is valid produces guilt; Scripture teaches diversity in unity.", explanationEs: "Suponer que solo un enfoque es válido produce culpa; la Escritura enseña diversidad en unidad." },
+    { textEn: "17. Each believer should chiefly:", textEs: "17. Cada creyente debe principalmente:", optionsEn: ["Copy others exactly", "Use their God-given strengths", "Avoid evangelism", "Stay silent"], optionsEs: ["Copiar a otros exactamente", "Usar las fortalezas que Dios le dio", "Evitar el evangelismo", "Permanecer en silencio"], correct: 1, explanationEn: "Each believer should understand and develop their own God-given strengths.", explanationEs: "Cada creyente debe comprender y desarrollar las fortalezas que Dios le ha dado." },
+    { textEn: "18. Developing balance means:", textEs: "18. Desarrollar el equilibrio significa:", optionsEn: ["Using one method only", "Staying the same", "Avoiding change", "Growing in multiple approaches"], optionsEs: ["Usar solo un método", "Quedarse igual", "Evitar el cambio", "Crecer en múltiples enfoques"], correct: 3, explanationEn: "Believers should grow beyond their default style to strengthen effectiveness.", explanationEs: "Los creyentes deben crecer más allá de su estilo predeterminado para fortalecer la eficacia." },
+    { textEn: "19. The effectiveness of evangelism is found in:", textEs: "19. La eficacia del evangelismo se encuentra en:", optionsEn: ["Faithful diversity", "Pressure", "Forced uniformity", "Silence"], optionsEs: ["Diversidad fiel", "Presión", "Uniformidad forzada", "Silencio"], correct: 0, explanationEn: "Effectiveness comes not from uniformity but from faithful diversity of approach.", explanationEs: "La eficacia no viene de la uniformidad, sino de la diversidad fiel de enfoque." },
+    { textEn: "20. 1 Corinthians 12:6 teaches that:", textEs: "20. 1 Corintios 12:6 enseña que:", optionsEn: ["Only one method works", "All must be identical", "It is the same God who works all in all", "Diversity is forbidden"], optionsEs: ["Solo un método funciona", "Todos deben ser idénticos", "Es el mismo Dios que obra todo en todos", "La diversidad está prohibida"], correct: 2, explanationEn: "'There are diversities of activities, but it is the same God who works all in all.'", explanationEs: "'Hay diversidad de operaciones; pero es el mismo Dios que obra todas las cosas en todos.'" }
+];
+
+/* CTS audit 2026-05-23: Unit 11 Section B developed by CTS faculty from the teaching content. 10 keyword-graded items, EN+ES. */
+const kwQuestions = [
+    { textEn: "21. Explain the principle of 'unity of message, diversity of approach' using Romans 1:16 and 1 Corinthians 12:4.", textEs: "21. Explique el principio de 'unidad de mensaje, diversidad de enfoque' usando Romanos 1:16 y 1 Corintios 12:4.", kw_en: ["unity", "message", "divers", "approach", "roman", "gift", "one", "gospel"], kw_es: ["unidad", "unid", "mensaj", "divers", "enfoqu", "roman", "don", "uno"], modelEn: "Romans 1:16 declares the one unchanging gospel is the power of God to salvation, and 1 Corinthians 12:4 shows there are diversities of gifts but the same Spirit. Together they teach unity of message, diversity of approach: the gospel itself is fixed and shared by all, but the ways believers carry it differ according to their gifts and personalities. The message never changes; the approaches rightly vary, so different witnesses reach different people with the same saving truth.", modelEs: "Romanos 1:16 declara que el único evangelio inmutable es el poder de Dios para salvación, y 1 Corintios 12:4 muestra que hay diversidad de dones pero el mismo Espíritu. Juntos enseñan unidad de mensaje, diversidad de enfoque: el evangelio mismo es fijo y compartido por todos, pero las maneras en que los creyentes lo llevan difieren según sus dones y personalidades. El mensaje nunca cambia; los enfoques con razón varían, para que diferentes testigos alcancen a diferentes personas con la misma verdad salvadora.", authorDraft: true },
+    { textEn: "22. Describe the direct evangelist (Acts 2:38). What are its strengths and the danger it must guard against?", textEs: "22. Describa al evangelista directo (Hechos 2:38). ¿Cuáles son sus fortalezas y el peligro contra el que debe guardarse?", kw_en: ["direct", "bold", "acts", "strength", "danger", "insensit", "clear", "approach"], kw_es: ["direct", "valent", "valien", "hechos", "fortaleza", "peligr", "insensib", "clar"], modelEn: "The direct evangelist, modeled by Peter in Acts 2:38, confronts hearers plainly with their need to repent and believe. Its strengths are clarity and boldness — it states the gospel without evasion and calls for immediate response. The danger it must guard against is insensitivity: pressing so directly that it runs over people, ignores their questions, or wounds rather than wins. Directness is a gift when joined to love, but harsh when it forgets the person it addresses.", modelEs: "El evangelista directo, modelado por Pedro en Hechos 2:38, confronta a los oyentes claramente con su necesidad de arrepentirse y creer. Sus fortalezas son la claridad y la valentía — expone el evangelio sin evasión y llama a la respuesta inmediata. El peligro contra el que debe guardarse es la insensibilidad: presionar tan directamente que atropella a las personas, ignora sus preguntas o hiere en vez de ganar. La franqueza es un don cuando se une al amor, pero dura cuando olvida a la persona a quien se dirige.", authorDraft: true },
+    { textEn: "23. Explain the relational approach to evangelism using 1 Thessalonians 2:8. Why might it take longer but reach deeper?", textEs: "23. Explique el enfoque relacional del evangelismo usando 1 Tesalonicenses 2:8. ¿Por qué podría tomar más tiempo pero alcanzar más profundamente?", kw_en: ["relation", "trust", "invest", "thessalon", "longer", "deeper", "friend", "time"], kw_es: ["relacion", "confi", "invertir", "invers", "tesalonic", "tiempo", "crec", "profund"], modelEn: "1 Thessalonians 2:8 shows Paul so loved the Thessalonians that he shared not only the gospel but his own life. The relational approach builds trust through genuine friendship and shared life before and alongside the verbal witness. It may take longer because trust grows slowly, but it reaches deeper because the gospel comes from someone the hearer knows and believes cares for him. The investment of relationship gives the message credibility and access that a one-time encounter cannot.", modelEs: "1 Tesalonicenses 2:8 muestra que Pablo amó tanto a los tesalonicenses que compartió no solo el evangelio sino su propia vida. El enfoque relacional construye confianza mediante una amistad genuina y la vida compartida antes y junto al testimonio verbal. Puede tomar más tiempo porque la confianza crece despacio, pero alcanza más profundamente porque el evangelio viene de alguien que el oyente conoce y cree que se interesa por él. La inversión de la relación da al mensaje una credibilidad y un acceso que un encuentro único no puede.", authorDraft: true },
+    { textEn: "24. Discuss the serving evangelist (Matthew 5:16). Why must service be accompanied by a verbal witness?", textEs: "24. Discuta al evangelista que sirve (Mateo 5:16). ¿Por qué debe el servicio ir acompañado de un testimonio verbal?", kw_en: ["serv", "work", "verbal", "matthew", "light", "deed", "accompan", "witness"], kw_es: ["servir", "sirv", "obra", "verbal", "mateo", "luz", "hecho", "acompañ"], modelEn: "The serving evangelist witnesses through deeds of love, and Matthew 5:16 says let your light shine so others see your good works and glorify God. Service must be accompanied by a verbal witness because good works alone can be admired without anyone learning of Christ; people may praise the kindness yet never hear the gospel. Deeds open the door and demonstrate the love of Christ, but words are needed to name Him and explain the salvation those deeds point toward.", modelEs: "El evangelista que sirve testifica mediante obras de amor, y Mateo 5:16 dice dejad brillar vuestra luz para que otros vean vuestras buenas obras y glorifiquen a Dios. El servicio debe ir acompañado de un testimonio verbal porque las buenas obras solas pueden ser admiradas sin que nadie conozca a Cristo; las personas pueden alabar la bondad pero nunca oír el evangelio. Los hechos abren la puerta y demuestran el amor de Cristo, pero se necesitan palabras para nombrarlo y explicar la salvación a la que esos hechos apuntan.", authorDraft: true },
+    { textEn: "25. Explain the apologetic approach using 1 Peter 3:15. What qualities does it require?", textEs: "25. Explique el enfoque apologético usando 1 Pedro 3:15. ¿Qué cualidades requiere?", kw_en: ["apolog", "defense", "peter", "reason", "gentle", "respect", "answer", "qualit"], kw_es: ["apolog", "defensa", "peter", "pedro", "razón", "razon", "gentil", "respet"], modelEn: "1 Peter 3:15 calls believers to always be ready to give a defense for the hope within them, yet with gentleness and respect. The apologetic approach answers questions and objections, giving reasons for faith. It requires knowledge of the gospel and of common objections, but equally the qualities of gentleness and respect — answering not to win an argument but to win a person. The apologist removes intellectual barriers while keeping the tone humble, so reason serves love rather than replacing it.", modelEs: "1 Pedro 3:15 llama a los creyentes a estar siempre listos para dar defensa de la esperanza que hay en ellos, pero con gentileza y respeto. El enfoque apologético responde preguntas y objeciones, dando razones para la fe. Requiere conocimiento del evangelio y de las objeciones comunes, pero igualmente las cualidades de gentileza y respeto — respondiendo no para ganar una discusión sino para ganar a una persona. El apologista quita las barreras intelectuales mientras mantiene un tono humilde, para que la razón sirva al amor en vez de reemplazarlo.", authorDraft: true },
+    { textEn: "26. Describe the invitational and testimonial approaches (John 1:46; John 9:25). Why is personal testimony powerful?", textEs: "26. Describa los enfoques de invitación y testimonio (Juan 1:46; Juan 9:25). ¿Por qué es poderoso el testimonio personal?", kw_en: ["invit", "testimon", "john", "story", "power", "personal", "come", "experience"], kw_es: ["invit", "testimon", "juan", "histori", "poder", "personal", "ven", "experiencia"], modelEn: "The invitational approach simply brings others to see, as Philip told Nathanael 'Come and see' (John 1:46). The testimonial approach tells one's own story, as the healed blind man said 'one thing I know, that whereas I was blind, now I see' (John 9:25). Personal testimony is powerful because it is hard to argue against a changed life: the witness is not debating theory but reporting what God has actually done for him. His story makes the gospel concrete and credible.", modelEs: "El enfoque de invitación simplemente trae a otros a ver, como Felipe le dijo a Natanael 'Ven y ve' (Juan 1:46). El enfoque de testimonio cuenta la propia historia, como el ciego sanado dijo 'una cosa sé, que habiendo yo sido ciego, ahora veo' (Juan 9:25). El testimonio personal es poderoso porque es difícil discutir contra una vida cambiada: el testigo no debate teorías sino que reporta lo que Dios realmente ha hecho por él. Su historia hace el evangelio concreto y creíble.", authorDraft: true },
+    { textEn: "27. Why is comparing one approach to another a mistake? Explain how Scripture teaches diversity within unity.", textEs: "27. ¿Por qué es un error comparar un enfoque con otro? Explique cómo la Escritura enseña diversidad dentro de la unidad.", kw_en: ["compar", "guilt", "mistake", "divers", "unity", "scriptur", "gift", "diff"], kw_es: ["compar", "culpa", "error", "divers", "unidad", "unid", "escritur", "don"], modelEn: "Comparing one approach to another is a mistake because it breeds either pride or false guilt: the bold witness may look down on the quiet one, and the relational witness may feel inferior to the direct one. Scripture teaches diversity within unity — the same Spirit gives different gifts (1 Cor 12), all serving one body. No single approach is the standard for all. Each believer should witness according to his God-given design rather than measuring himself against another's style.", modelEs: "Comparar un enfoque con otro es un error porque genera orgullo o falsa culpa: el testigo audaz puede menospreciar al callado, y el testigo relacional puede sentirse inferior al directo. La Escritura enseña diversidad dentro de la unidad — el mismo Espíritu da diferentes dones (1 Corintios 12), todos sirviendo a un solo cuerpo. Ningún enfoque único es la norma para todos. Cada creyente debe testificar según su diseño dado por Dios en vez de medirse contra el estilo de otro.", authorDraft: true },
+    { textEn: "28. Explain why believers should develop balance, growing beyond their natural approach. Give an example.", textEs: "28. Explique por qué los creyentes deben desarrollar equilibrio, creciendo más allá de su enfoque natural. Dé un ejemplo.", kw_en: ["balance", "grow", "beyond", "natural", "strength", "develop", "example", "approach"], kw_es: ["equilibri", "balance", "crec", "allá", "alla", "natural", "fortaleza", "desarroll"], modelEn: "Believers should develop balance, growing beyond their natural approach, because relying only on one's default leaves whole kinds of people unreached. A naturally relational witness, for example, may be comfortable building friendships but avoid ever directly calling for a decision; he should grow in boldness so that his warm relationships actually lead someone to Christ. Developing the other approaches stretches the believer to meet people his natural style would miss, making him a more complete and useful witness.", modelEs: "Los creyentes deben desarrollar equilibrio, creciendo más allá de su enfoque natural, porque apoyarse solo en lo predeterminado deja a categorías enteras de personas sin alcanzar. Un testigo naturalmente relacional, por ejemplo, puede sentirse cómodo construyendo amistades pero evitar llamar directamente a una decisión; debe crecer en valentía para que sus relaciones cálidas realmente lleven a alguien a Cristo. Desarrollar los otros enfoques estira al creyente para alcanzar a personas que su estilo natural pasaría por alto, haciéndolo un testigo más completo y útil.", authorDraft: true },
+    { textEn: "29. Using the illustration of the group of believers, explain why effectiveness is found in faithful diversity, not uniformity.", textEs: "29. Usando la ilustración del grupo de creyentes, explique por qué la eficacia se encuentra en la diversidad fiel, no en la uniformidad.", kw_en: ["divers", "faithful", "not", "uniform", "effective", "group", "body", "mission"], kw_es: ["divers", "fiel", "no", "uniform", "efic", "grupo", "cuerpo", "misión"], modelEn: "The illustration of a group of believers, each witnessing differently, shows that effectiveness is found in faithful diversity, not uniformity. If all witnessed identically, they would reach only one kind of person; because they differ — one direct, one relational, one serving, one apologetic — together they reach many. Effectiveness comes not from everyone adopting the same style but from each being faithful to his own gifting, so the body as a whole touches every kind of heart with the one gospel.", modelEs: "La ilustración de un grupo de creyentes, cada uno testificando de manera diferente, muestra que la eficacia se encuentra en la diversidad fiel, no en la uniformidad. Si todos testificaran de forma idéntica, alcanzarían solo a un tipo de persona; porque difieren — uno directo, uno relacional, uno que sirve, uno apologético — juntos alcanzan a muchos. La eficacia no viene de que todos adopten el mismo estilo sino de que cada uno sea fiel a su propio don, para que el cuerpo entero toque toda clase de corazón con el único evangelio.", authorDraft: true },
+    { textEn: "30. Synthesize the unit: how does 1 Corinthians 12:6 ground the truth that diverse approaches serve one mission under one God?", textEs: "30. Sintetice la unidad: ¿cómo fundamenta 1 Corintios 12:6 la verdad de que enfoques diversos sirven a una misión bajo un solo Dios?", kw_en: ["divers", "one", "mission", "god", "corinth", "unity", "approach", "serve"], kw_es: ["divers", "uno", "misión", "mision", "dios", "corint", "unidad", "enfoqu"], modelEn: "1 Corinthians 12:6 says there are diversities of operations, but the same God works all in all. This grounds the truth that diverse approaches serve one mission under one God: the variety of styles is not competition or contradiction but the design of the one God who distributes different gifts for a single purpose. The relational, direct, serving, apologetic, invitational, and testimonial approaches are all the same God working through different believers to accomplish the one mission of reaching the lost with the one gospel.", modelEs: "1 Corintios 12:6 dice que hay diversidad de operaciones, pero el mismo Dios que obra todo en todos. Esto fundamenta la verdad de que enfoques diversos sirven a una misión bajo un solo Dios: la variedad de estilos no es competencia ni contradicción sino el diseño del único Dios que distribuye diferentes dones para un solo propósito. Los enfoques relacional, directo, de servicio, apologético, de invitación y de testimonio son todos el mismo Dios obrando a través de diferentes creyentes para cumplir la única misión de alcanzar a los perdidos con el único evangelio.", authorDraft: true }
+];
+
+// ======================== STATE ========================
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+let unitPassed = localStorage.getItem(PASSED_KEY) === 'true';
+let mcPassed = localStorage.getItem(MC_PASSED_KEY) === 'true';
+
+function kwHit(answer, kw) {
+    if (!answer) return false;
+    var a = answer.toLowerCase();
+    var k = kw.toLowerCase();
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    var re = (k.length <= 4)
+        ? new RegExp("(^|[^\\p{L}])" + esc + "($|[^\\p{L}])", "u")
+        : new RegExp("(^|[^\\p{L}])" + esc, "u");
+    return re.test(a);
+}
+function essayPartialMatch(answer, keywords) {
+    if (!answer || answer.trim().length < 100) return false;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched >= 3;
+}
+function kwHitCount(answer, keywords) {
+    if (!answer) return 0;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched;
+}
+
+function saveUnitState() {
+    localStorage.setItem(UNIT_KEY + '_mc', JSON.stringify(mcAnswers));
+    localStorage.setItem(UNIT_KEY + '_kw', JSON.stringify(kwAnswers));
+}
+function loadSavedAnswers() {
+    const savedMC = localStorage.getItem(UNIT_KEY + '_mc');
+    if (savedMC) { try { let p = JSON.parse(savedMC); if (Array.isArray(p) && p.length === 20) mcAnswers = p; } catch(e) {} }
+    const savedKW = localStorage.getItem(UNIT_KEY + '_kw');
+    if (savedKW) { try { let p = JSON.parse(savedKW); if (Array.isArray(p) && p.length === 10) kwAnswers = p; } catch(e) {} }
+}
+
+function clearAllLocal() {
+    if (confirm(currentLang === 'es' ? '⚠️ Esto borrará todas sus respuestas, estado de bloqueo y progreso de esta unidad. ¿Está seguro?' : '⚠️ This will erase all your answers, lockout status, and progress for this unit. Are you sure?')) {
+        localStorage.removeItem(UNIT_KEY + '_mc');
+        localStorage.removeItem(UNIT_KEY + '_kw');
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(PASSED_KEY);
+        localStorage.removeItem(MC_PASSED_KEY);
+        lockUntil = 0;
+        unitPassed = false;
+        mcPassed = false;
+        progress['unit' + UNIT_NUM] = false;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+        updateProgressGrid();
+    }
+}
+
+function clearExamAnswersOnly() {
+    if (confirm(currentLang === 'es' ? '⚠️ ¿Borrar todas sus respuestas para esta unidad? (El estado de aprobación de la unidad permanecerá si ya aprobó.)' : '⚠️ Clear all your answers for this unit? (Unit pass status will remain if already passed.)')) {
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        saveUnitState();
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+    }
+}
+
+function setSAOnlyLockout(disable) {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    const allTextareas = container.querySelectorAll('.kw-answer');
+    const allCheckBtns = container.querySelectorAll('button.small');
+    allTextareas.forEach(ta => ta.disabled = disable);
+    allCheckBtns.forEach(btn => {
+        if (btn.id !== 'submitExamBtn' && btn.id !== 'clearExamDataBtn' && btn.id !== 'clearDataBtn') btn.disabled = disable;
+    });
+}
+
+let lockoutInterval = null;
+function startLockoutTimer() {
+    if (lockoutInterval) clearInterval(lockoutInterval);
+    if (lockUntil > Date.now()) {
+        let banner = document.getElementById('lockoutBanner');
+        if (!banner) {
+            banner = document.createElement('div');
+            banner.id = 'lockoutBanner';
+            banner.className = 'lockout-banner';
+            const examResult = document.getElementById('examResult');
+            examResult.parentNode.insertBefore(banner, examResult);
+        }
+        setSAOnlyLockout(true);
+        const tick = () => {
+            if (lockUntil <= Date.now() || unitPassed) {
+                clearInterval(lockoutInterval);
+                setSAOnlyLockout(false);
+                if (banner) banner.remove();
+                return;
+            }
+            const rem = lockUntil - Date.now();
+            const mins = Math.floor(rem / 60000);
+            const secs = Math.floor((rem % 60000) / 1000);
+            banner.innerText = (currentLang === 'en'
+                ? `⏰ Section B locked for ${mins}:${secs.toString().padStart(2,'0')} (15-min retake lockout after failed submission)`
+                : `⏰ Sección B bloqueada por ${mins}:${secs.toString().padStart(2,'0')} (bloqueo de 15 min tras envío fallido)`);
+        };
+        tick();
+        lockoutInterval = setInterval(tick, 1000);
+    } else {
+        setSAOnlyLockout(false);
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+    }
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Section A — Multiple Choice (Questions 1–20)' : 'Sección A — Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const mcReveal = mcRevealed || mcPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMDiv ? 'Section B — Short Answer (Questions 21–30) — Masters Track (M.Div./Th.M.)' : 'Section B — Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMDiv ? 'Sección B — Respuesta Corta (Preguntas 21–30) — Pista de Maestría (M.Div./Th.M.)' : 'Sección B — Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here (minimum 20 characters)...' : 'Escriba su respuesta aquí (mínimo 20 caracteres)...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.disabled = (lockUntil > Date.now() || unitPassed);
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            if (lockUntil > Date.now() || unitPassed) return;
+            const answer = textarea.value.trim().toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? q.kw_es : q.kw_en;
+            if (answer.length < 100) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else {
+                var hc = kwHitCount(answer, keywords);
+                var passed = hc >= 3;
+                if (passed) {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('✓ Correct! (' + hc + ' key concepts found) Your answer includes the key ideas.') : ('✓ ¡Correcto! (' + hc + ' conceptos clave encontrados) Su respuesta incluye las ideas clave.');
+                    feedbackDiv.className = 'feedback-text correct';
+                    kwAnswers[idx] = textarea.value;
+                    saveUnitState();
+                } else {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('Not yet — ' + hc + ' of 3 needed key concepts found. Compare your answer with the model below, then revise.') : ('Todavía no — ' + hc + ' de 3 conceptos clave necesarios encontrados. Compare su respuesta con el modelo de abajo y revise.');
+                    feedbackDiv.className = 'feedback-text incorrect';
+                }
+                // Gold model-answer reveal box — shown after every check, pass or fail (Q24 standard rule 4)
+                var modelBox = div.querySelector('.model-answer-box');
+                if (!modelBox) {
+                    modelBox = document.createElement('div');
+                    modelBox.className = 'model-answer-box';
+                    div.appendChild(modelBox);
+                }
+                var label = currentLang === 'en' ? 'Model answer — study this' : 'Respuesta modelo — estudie esto';
+                var modelText = currentLang === 'en' ? q.modelEn : q.modelEs;
+                var draftFlag = q.authorDraft ? '<!--AUTHOR_DRAFT: model answer not yet voiced by author-->' : '';
+                modelBox.innerHTML = draftFlag + '<strong>' + label + '</strong><br>' + modelText;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(feedbackDiv);
+        container.appendChild(div);
+        textarea.addEventListener('input', (e) => { if (!(lockUntil > Date.now() || unitPassed)) { kwAnswers[idx] = e.target.value; saveUnitState(); } });
+    });
+    startLockoutTimer();
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? "<span style='color:green'>✓ ¡Unidad ya aprobada! Puede continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! You may proceed.</span>";
+        return;
+    }
+    if (Date.now() < lockUntil) {
+        let wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? `<span style='color:red'>⏰ Bloqueado ${wait} minutos más.</span>`
+            : `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    /* CTS audit 2026-05-23: no reg form here; student/track already loaded from localStorage (defaults to Certificate). */
+
+    let correctMC = 0;
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    const mcPercent = correctMC / 20;
+    if (!unitPassed) { mcRevealed = true; renderQuestions(); }
+
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    let saCorrect = 0;
+    if (isMDiv) {
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || '').toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+            if (essayPartialMatch(ans, keywords)) saCorrect++;
+        }
+    }
+    const saPercent = saCorrect / 10;
+
+    const mcPass = mcPercent >= PASS_THRESHOLD;
+    const saPass = saPercent >= PASS_THRESHOLD;
+    const overallPass = isMDiv ? (mcPass && saPass) : mcPass;
+
+    if (mcPass) {
+        mcPassed = true;
+        localStorage.setItem(MC_PASSED_KEY, 'true');
+    }
+
+    if (overallPass) {
+        unitPassed = true;
+        progress['unit' + UNIT_NUM] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(PASSED_KEY, 'true');
+        const msg = isMDiv
+            ? (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unidad 7 completada. Puede continuar a la Unidad 8.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unit 7 completed. You may proceed to Unit 8.</span>`)
+            : (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unidad 7 completada. Puede continuar a la Unidad 8.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unit 7 completed. You may proceed to Unit 8.</span>`);
+        document.getElementById('examResult').innerHTML = msg;
+        updateProgressGrid();
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+        if (lockoutInterval) clearInterval(lockoutInterval);
+    } else {
+        if (isMDiv && mcPass && !saPass) {
+            lockUntil = Date.now() + 15 * 60 * 1000;
+            localStorage.setItem(LOCKOUT_KEY, lockUntil);
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ Sección A APROBADA (${Math.round(mcPercent*100)}%). Sección B no aprobada (${Math.round(saPercent*100)}% &lt; 90%). Sección B bloqueada 15 minutos.</span>`
+                : `<span style='color:red'>❌ Section A PASSED (${Math.round(mcPercent*100)}%). Section B not yet passing (${Math.round(saPercent*100)}% &lt; 90%). Section B locked for 15 minutes.</span>`;
+            startLockoutTimer();
+            renderQuestions();
+        } else {
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ NO APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. Se requiere 90% en cada sección requerida. Revise sus respuestas e inténtelo de nuevo.</span>`
+                : `<span style='color:red'>❌ NOT PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. 90% required on each required section. Review your answers and try again.</span>`;
+        }
+    }
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('clearExamDataBtn').addEventListener('click', clearExamAnswersOnly);
+document.getElementById('clearDataBtn').addEventListener('click', clearAllLocal);
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') {
+        currentLang = 'es';
+        document.body.className = 'lang-es';
+        document.documentElement.lang = 'es';
+        this.textContent = 'English';
+    } else {
+        currentLang = 'en';
+        document.body.className = 'lang-en';
+        document.documentElement.lang = 'en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+loadSavedAnswers();
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = currentLang === 'es'
+        ? "<span style='color:green'>✅ Unidad 7 ya aprobada.</span>"
+        : "<span style='color:green'>✅ Unit 7 already passed.</span>";
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEvangelismReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

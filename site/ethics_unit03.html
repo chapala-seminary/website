@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pastoral &amp; Christian Ethics — Unit 3: Pastoral Vocation: Calling &amp; Character</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.pending-es { background: #fff4f4; border: 1px dashed #c98a8a; padding: 12px 18px; margin: 14px 0; border-radius: 6px; color: #8a1f1f; font-style: italic; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; } body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; } body.lang-es .lang-es { display: inline; }
+@media print { .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small, #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+ body { background: #fff; padding: 10px; font-size: 12pt; } .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; } h1, h2, h3 { color: #000; } .pull-quote { background: #fff; border-left: 2px solid #888; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 4 &#8594;</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">&#128214; Pastoral &amp; Christian Ethics &mdash; Unit 3: Pastoral Vocation: Calling &amp; Character</span><span class="lang-es">&#128214; &Eacute;tica Pastoral y Cristiana &mdash; Unidad 3: Vocaci&oacute;n Pastoral: Llamado y Car&aacute;cter</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Take heed to yourself and to the doctrine." &mdash; 1 Timothy 4:16 (NKJV)</span><span class="lang-es">&laquo;Ten cuidado de ti mismo y de la doctrina.&raquo; &mdash; 1 Timoteo 4:16 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">&#128221; Course Registration</span><span class="lang-es">&#128221; Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Pastoral &amp; Christian Ethics. Please register before beginning Unit 3.</span><span class="lang-es">Bienvenido a &Eacute;tica Pastoral y Cristiana. Por favor reg&iacute;strese antes de comenzar la Unidad 3.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+
+<div class="card">
+<div class="lang-en">
+<h3>Section 3.1 &mdash; The Call to the Ministry</h3>
+    <p>Before a man asks how to do the work of a pastor, he must settle a prior and more searching question: has God called him to it at all? There are two errors here, and both have wrecked churches. The first is the man who runs without being sent &mdash; ambitious, gifted perhaps, but never truly summoned, building a ministry as he would build a business. The second is the man who flees when he has plainly been sent &mdash; like Jonah, like Moses at the bush, hiding behind his unworthiness to escape a burden God has laid on him. The doctrine of calling is meant to deliver us from both: from presumption on the one hand and from disobedient cowardice on the other.</p>
+    <p>Scripture treats the desire for this work as a good thing, but never as a sufficient thing. <em class="ref">"If a man desires the position of a bishop, he desires a good work"</em> (1 Timothy 3:1). The desire is honorable; it is the first stirring of a true call. But desire alone ordains no one. A genuine call has two parts that must meet. There is the <em>internal</em> call &mdash; that holy compulsion Paul describes when he says, <em class="ref">"woe is me if I do not preach the gospel!"</em> (1 Corinthians 9:16). It is not mere willingness; it is a constraint, a sense that one cannot finally be at peace doing anything else. And there is the <em>external</em> call &mdash; the confirmation of the church, which examines a man's gifts and his character and recognizes the hand of God upon him. A man does not ordain himself. The inward fire must be confirmed by the outward judgment of God's people, or it is not yet a call but only a feeling.</p>
+    <p>And once both have met, the man must feel the weight of what he has taken up. He is now responsible for souls for whom Christ shed His blood, and, as we saw in Unit 1, he will be judged as a teacher, by a stricter standard than the rest of the flock. This is not a career. It is a stewardship of eternal things, and it should be entered soberly, with trembling as much as with joy.</p>
+<h3>Section 3.2 &mdash; The Qualifications: Character Before Competence</h3>
+    <p>A word before we go further on how this unit uses "he" and "his" for this office, and on where CTS stands. The requirement that this leader be "the husband of one wife" (1 Timothy 3:2; Titus 1:6) sits at the center of a real disagreement among Bible-believing Christians, so this course lays out three positions rather than treat the question as settled. The <strong>complementarian</strong> view reads the qualification lists, with 1 Timothy 2:12, as reserving the senior pastoral and eldership office for qualified men, while affirming women's gifting in the church's other ministries. The <strong>egalitarian</strong> view points to texts such as Galatians 3:28, Philip's four daughters who prophesied (Acts 21:9), and Paul's own regulation of women praying and prophesying in the gathered assembly (1 Corinthians 11:5), arguing a called and qualified woman may hold any ministry office. A third, <strong>team-ministry</strong> view holds that women may serve in substantial, even titled pastoral roles, while the senior or lead pastor remains a man, so that women's leadership operates under that oversight. This unit describes the qualifications below in the text's own traditional masculine language, without that settling the question for you. Where you land is a matter for your own study, conscience, and the church body you serve.</p>
+    <p>When the Spirit, through Paul, lists the qualifications for this office, the result should astonish anyone who has spent time in the world's leadership culture. Read 1 Timothy 3:1&ndash;7 and Titus 1:5&ndash;9 side by side and ask a simple question of each item: is this a <em>skill</em>, or is it a matter of <em>character</em>? You will find that nearly the entire list is character. Above reproach. The husband of one wife. Temperate, sober-minded, of good behavior. Not given to wine, not violent but gentle, not quarrelsome, not greedy for money. One who rules his own house well. Not a new convert. Of good testimony even among those outside the church.</p>
+    <p>And amid that long catalog of character, how much room is given to raw competency? Very little, and what is given is not about talent or charisma but about the ministry itself: he must be <em>able to teach</em>, and Titus adds that he must hold firmly to sound doctrine so that he can both exhort believers and refute those who contradict it (Titus 1:9). Even household management, listed alongside the character qualities, carries a real leadership dimension &mdash; Paul reasons that a man who cannot manage his own household well has not shown he can care for God's household either (1 Timothy 3:4&ndash;5). So the list is not pure character with zero competence attached; but character overwhelmingly dominates it, and the competencies required are modest and ministry-shaped rather than the markers the world prizes. The world assembles its leaders by talent &mdash; who is the most capable, the most charismatic, the most effective. God assembles His shepherds by holiness first, with sound teaching and demonstrated, humble leadership required alongside it. This is one of the most counter-cultural truths a seminarian will ever absorb, and it must be absorbed deep, because the temptation to reverse it never lets up. A church that selects its leaders the way a corporation selects executives &mdash; for giftedness while winking at character &mdash; is sowing a harvest of grief it will reap within the decade.</p>
+    <p>Notice too the warning against ordaining a new convert, <em class="ref">"lest being puffed up with pride he fall into the same condemnation as the devil"</em> (1 Timothy 3:6). The danger named there is not incompetence; it is pride. And notice the requirement of a good reputation with outsiders. The man's character must be visible and verified not only inside the warm circle of the church but out in the cold light of the marketplace, where reputations are not flattered. God screens His shepherds by who they are when no one is applauding.</p>
+<h3>Section 3.3 &mdash; Holiness, Humility, and the Spiritual Disciplines</h3>
+    <p>If the office is given to character, then the pastor's first and most neglected labor is the tending of his own soul. Paul's charge to Timothy puts the order beyond dispute: <em class="ref">"Take heed to yourself and to the doctrine"</em> (1 Timothy 4:16). To <em>yourself</em> first, and then to the doctrine. The man who reverses that &mdash; who pours all his care into his teaching while his own heart goes untended &mdash; is building a fine house on a rotting foundation. You cannot give your people water from a cistern you have let run dry. Every public word a pastor speaks should be drawn from a private well he is daily refilling in secret, alone with God.</p>
+    <p>This is why the spiritual disciplines are not optional refinements for the unusually devout pastor; they are the very supply lines of the ministry. Prayer that is more than the hurried blessing before a meal. The Word read for his own soul and not merely mined for next Sunday's sermon &mdash; for a man can study the Scriptures professionally for years and starve spiritually the whole time, handling the bread of life as a baker who never eats. There must be secret communion that no congregation ever sees, a hidden life with God behind the public life of ministry. The visible man in the pulpit must be matched by an invisible man on his knees, or the visible man will eventually become a hollow performance.</p>
+    <p>And over all of it must hang the guard of humility, for pride is the peculiar and besetting sin of those who handle holy things. The very platform that makes a man useful makes him a target; the higher he is lifted in the eyes of others, the deeper the pit that opens beneath his vanity. The shepherd who forgets that he is first a sheep, equally dependent on the grace he proclaims, has already begun to fall, however long it takes the fall to become visible. Keep low. The ground is safest there.</p>
+    <p>Consider how Nehemiah went about the great work of his life. When word reached him that the wall of Jerusalem was broken down and its gates burned, he did not first reach for a plan. He broke down and wept. He fasted and prayed, confessing the sin of his fathers and his own, and only then, after months of waiting on God, did he set out to build. And notice what kind of builder he was. He did not ride into the city announcing himself or rush the people into stacking bricks. He arose at night, while everyone slept, and rode quietly around the ruins &mdash; over rubble so bad that in places he had to go on foot &mdash; until he had seen the worst of it for himself and made an honest survey of the facts. Then he laid his plans. The inner work came before the outer; the honest look came before the bold call. And when the work was underway and his enemies tried every weapon to stop it &mdash; they laughed at him, they ridiculed him, they tried blackmail, they schemed to lure him away and kill him &mdash; he gave them one answer and kept building: <em class="ref">"I am doing a great work, so that I cannot come down"</em> (Nehemiah 6:3). He does the hidden work of prayer and self-examination before the public work begins, he tells himself the truth about the ruins before he sounds the trumpet, and once he knows the work is God&rsquo;s, he refuses to be argued, flattered, or frightened down off the wall.</p>
+<h3>Section 3.4 &mdash; The Pastor as Example, and Guarding Against Disqualification</h3>
+    <p>We return now to a truth first sounded in Unit 1, because it is the hinge of pastoral character: the pastor leads chiefly by what he is. Peter charges the elders to shepherd the flock <em class="ref">"being examples to the flock"</em> (1 Peter 5:3). The people will become, over time, more like what they watch their shepherd be than like what they hear him say. This is a glorious privilege and a terrifying responsibility in the same breath.</p>
+    <p>And because the stakes are so high, every pastor must reckon honestly with the possibility of his own ruin. Here is a truth I want pressed into you: moral catastrophe is almost never a sudden leap. It is a slow drift &mdash; a series of small, deniable compromises, each one excused, that quietly carve a channel down which the final disaster will one day rush. The unguarded glance becomes the entertained thought; the entertained thought becomes the secret habit; the secret habit becomes the public scandal that ends a ministry. No man wakes up one morning and decides to destroy his life's work. He drifts there, one unconfessed inch at a time. Even the apostle Paul refused to presume on his own standing: <em class="ref">"I discipline my body and bring it into subjection, lest, when I have preached to others, I myself should become disqualified"</em> (1 Corinthians 9:27). If Paul guarded himself, the man who thinks he has no need to is the man already in gravest danger.</p>
+    <p>What, then, are the safeguards? Honest accountability to men who are permitted to ask the hard questions and will not be flattered out of asking them. A vigilant guard over the eyes, the schedule, and the private hours, where ruin is always seeded. A refusal to minister from isolation, for the lone shepherd, cut off and accountable to no one, is the easiest of all to pick off. And the immediate confession of sin while it is still small, before it has had time to take root and grow strong in the dark. A pastor must also guard his marriage as part of guarding his ministry &mdash; a matter so weighty that we devote the next unit to it. The whole aim of this vigilance is summed up in the testimony every faithful minister longs to give at the end: <em class="ref">"I have fought the good fight, I have finished the race, I have kept the faith"</em> (2 Timothy 4:7). The goal is not merely to begin well. It is to finish.</p>
+    <div class="illustration"><strong>Cross-Reference &middot; Doctrinal Preaching</strong>The teaching that the preacher&rsquo;s character is inseparable from his message &mdash; &ldquo;not something you do but something you are&rdquo; &mdash; was developed in the Doctrinal Preaching course (Unit 1, What Is Doctrinal Preaching?) and underlies this entire unit.</div>
+</div>
+<div class="lang-es">
+
+<h3>Secci&oacute;n 3.1 &mdash; El llamamiento al ministerio</h3>
+    <p>Antes de que un hombre pregunte c&oacute;mo hacer la obra de un pastor, debe resolver una pregunta previa y m&aacute;s escudri&ntilde;adora: &iquest;lo ha llamado Dios a ella siquiera? Aqu&iacute; hay dos errores, y ambos han arruinado iglesias. El primero es el hombre que corre sin ser enviado &mdash; ambicioso, dotado quiz&aacute;, pero nunca verdaderamente convocado, edificando un ministerio como edificar&iacute;a un negocio. El segundo es el hombre que huye cuando claramente ha sido enviado &mdash; como Jon&aacute;s, como Mois&eacute;s en la zarza, escondi&eacute;ndose tras su indignidad para escapar de una carga que Dios le ha puesto. La doctrina del llamamiento busca librarnos de ambos: de la presunci&oacute;n por un lado y de la cobard&iacute;a desobediente por el otro.</p>
+    <p>La Escritura trata el deseo de esta obra como algo bueno, pero nunca como algo suficiente. <em class="ref">&laquo;Si alguno anhela obispado, buena obra desea&raquo;</em> (1 Timoteo 3:1). El deseo es honroso; es el primer despertar de un llamamiento verdadero. Pero el deseo solo no ordena a nadie. Un llamamiento genuino tiene dos partes que deben encontrarse. Est&aacute; el llamamiento <em>interno</em> &mdash; esa santa compulsi&oacute;n que Pablo describe cuando dice: <em class="ref">&laquo;&iexcl;ay de m&iacute; si no anunciare el evangelio!&raquo;</em> (1 Corintios 9:16). No es mera disposici&oacute;n; es una restricci&oacute;n, un sentir de que uno no puede finalmente estar en paz haciendo cualquier otra cosa. Y est&aacute; el llamamiento <em>externo</em> &mdash; la confirmaci&oacute;n de la iglesia, que examina los dones y el car&aacute;cter de un hombre y reconoce la mano de Dios sobre &eacute;l. Un hombre no se ordena a s&iacute; mismo. El fuego interior debe ser confirmado por el juicio exterior del pueblo de Dios, o todav&iacute;a no es un llamamiento sino solo un sentimiento.</p>
+    <p>Y una vez que ambos se han encontrado, el hombre debe sentir el peso de lo que ha tomado. Ahora es responsable de almas por las cuales Cristo derram&oacute; su sangre, y, como vimos en la Unidad 1, ser&aacute; juzgado como maestro, por una norma m&aacute;s estricta que el resto de la grey. Esto no es una carrera profesional. Es una mayordom&iacute;a de cosas eternas, y debe entrarse con sobriedad, con temblor tanto como con gozo.</p>
+<h3>Secci&oacute;n 3.2 &mdash; Los requisitos: car&aacute;cter antes que competencia</h3>
+    <p>Cuando el Esp&iacute;ritu, por medio de Pablo, enumera los requisitos para este oficio, el resultado deber&iacute;a asombrar a cualquiera que haya pasado tiempo en la cultura de liderazgo del mundo. Lea 1 Timoteo 3:1&ndash;7 y Tito 1:5&ndash;9 lado a lado y h&aacute;gase una pregunta sencilla de cada punto: &iquest;es esto una <em>destreza</em>, o es asunto de <em>car&aacute;cter</em>? Hallar&aacute; que casi toda la lista es car&aacute;cter. Irreprensible. Marido de una sola mujer. Sobrio, prudente, de buena conducta. No dado al vino, no violento sino amable, no peleador, no avaro de dinero. Que gobierne bien su propia casa. No un nuevo convertido. De buen testimonio aun entre los de afuera de la iglesia.</p>
+    <p>Y en medio de ese largo cat&aacute;logo de car&aacute;cter, &iquest;cu&aacute;ntas competencias pr&aacute;cticas exige el Esp&iacute;ritu? Esencialmente una: debe ser <em>apto para ense&ntilde;ar</em>. Esa es la totalidad de la destreza requerida. El mundo re&uacute;ne a sus l&iacute;deres por el talento &mdash; qui&eacute;n es el m&aacute;s capaz, el m&aacute;s carism&aacute;tico, el m&aacute;s eficaz. Dios re&uacute;ne a sus pastores por la santidad, con una sola competencia a&ntilde;adida. Esta es una de las verdades m&aacute;s contraculturales que un seminarista jam&aacute;s absorber&aacute;, y debe absorberse hondo, porque la tentaci&oacute;n de invertirla nunca cede. Una iglesia que selecciona a sus l&iacute;deres como una corporaci&oacute;n selecciona a sus ejecutivos &mdash; por la aptitud mientras gui&ntilde;a el ojo al car&aacute;cter &mdash; est&aacute; sembrando una cosecha de dolor que segar&aacute; dentro de la d&eacute;cada.</p>
+    <p>Note tambi&eacute;n la advertencia contra ordenar a un nuevo convertido, <em class="ref">&laquo;no sea que envaneci&eacute;ndose caiga en la condenaci&oacute;n del diablo&raquo;</em> (1 Timoteo 3:6). El peligro nombrado all&iacute; no es la incompetencia; es el orgullo. Y note el requisito de una buena reputaci&oacute;n con los de afuera. El car&aacute;cter del hombre debe ser visible y verificado no solo dentro del c&iacute;rculo c&aacute;lido de la iglesia, sino fuera, en la luz fr&iacute;a del mercado, donde las reputaciones no se adulan. Dios examina a sus pastores por qui&eacute;nes son cuando nadie aplaude.</p>
+<h3>Secci&oacute;n 3.3 &mdash; Santidad, humildad y las disciplinas espirituales</h3>
+    <p>Si el oficio se da al car&aacute;cter, entonces la primera y m&aacute;s descuidada labor del pastor es el cuidado de su propia alma. El encargo de Pablo a Timoteo pone el orden fuera de disputa: <em class="ref">&laquo;Ten cuidado de ti mismo y de la doctrina&raquo;</em> (1 Timoteo 4:16). De <em>ti mismo</em> primero, y luego de la doctrina. El hombre que invierte eso &mdash; que vierte todo su cuidado en su ense&ntilde;anza mientras su propio coraz&oacute;n queda sin atender &mdash; est&aacute; edificando una hermosa casa sobre un cimiento podrido. Usted no puede dar a su gente agua de una cisterna que ha dejado secar. Cada palabra p&uacute;blica que un pastor pronuncia debe sacarse de un pozo privado que llena a diario en secreto, a solas con Dios.</p>
+    <p>Por esto las disciplinas espirituales no son refinamientos opcionales para el pastor inusualmente devoto; son las l&iacute;neas mismas de abastecimiento del ministerio. Oraci&oacute;n que sea m&aacute;s que la bendici&oacute;n apresurada antes de una comida. La Palabra le&iacute;da para su propia alma y no meramente explotada para el serm&oacute;n del pr&oacute;ximo domingo &mdash; pues un hombre puede estudiar las Escrituras profesionalmente por a&ntilde;os y morir de hambre espiritualmente todo ese tiempo, manejando el pan de vida como un panadero que nunca come. Debe haber comuni&oacute;n secreta que ninguna congregaci&oacute;n vea jam&aacute;s, una vida escondida con Dios detr&aacute;s de la vida p&uacute;blica del ministerio. El hombre visible en el p&uacute;lpito debe corresponderse con un hombre invisible de rodillas, o el hombre visible llegar&aacute; finalmente a ser una actuaci&oacute;n hueca.</p>
+    <p>Y sobre todo ello debe pender la guarda de la humildad, porque el orgullo es el pecado peculiar y acosador de quienes manejan cosas santas. La misma plataforma que hace &uacute;til a un hombre lo hace blanco; cuanto m&aacute;s alto es levantado a los ojos de otros, m&aacute;s profundo el foso que se abre bajo su vanidad. El pastor que olvida que es primero una oveja, igualmente dependiente de la gracia que proclama, ya ha comenzado a caer, por mucho que tarde la ca&iacute;da en hacerse visible. Mant&eacute;ngase bajo. El suelo es m&aacute;s seguro all&iacute;.</p>
+    <p>Considere c&oacute;mo Nehem&iacute;as emprendi&oacute; la gran obra de su vida. Cuando le lleg&oacute; la noticia de que el muro de Jerusal&eacute;n estaba derribado y sus puertas quemadas, no ech&oacute; mano primero de un plan. Se derrumb&oacute; y llor&oacute;. Ayun&oacute; y or&oacute;, confesando el pecado de sus padres y el suyo propio, y solo entonces, despu&eacute;s de meses de esperar en Dios, sali&oacute; a edificar. Y note qu&eacute; clase de constructor fue. No entr&oacute; cabalgando a la ciudad anunci&aacute;ndose ni apresur&oacute; al pueblo a apilar ladrillos. Se levant&oacute; de noche, mientras todos dorm&iacute;an, y cabalg&oacute; en silencio alrededor de las ruinas &mdash; sobre escombros tan malos que en algunos lugares tuvo que ir a pie &mdash; hasta que hubo visto lo peor por s&iacute; mismo e hizo un reconocimiento honesto de los hechos. Entonces traz&oacute; sus planes. La obra interior vino antes que la exterior; la mirada honesta vino antes que el llamado audaz. Y cuando la obra estaba en marcha y sus enemigos probaron toda arma para detenerla &mdash; se rieron de &eacute;l, lo ridiculizaron, intentaron el chantaje, maquinaron para atraerlo y matarlo &mdash; les dio una sola respuesta y sigui&oacute; edificando: <em class="ref">&laquo;Yo hago una grande obra, y no puedo ir&raquo;</em> (Nehem&iacute;as 6:3). Hace la obra escondida de la oraci&oacute;n y el examen propio antes de que comience la obra p&uacute;blica, se dice a s&iacute; mismo la verdad sobre las ruinas antes de tocar la trompeta, y una vez que sabe que la obra es de Dios, reh&uacute;sa ser argumentado, adulado o atemorizado para que baje del muro.</p>
+<h3>Secci&oacute;n 3.4 &mdash; El pastor como ejemplo, y la guarda contra la descalificaci&oacute;n</h3>
+    <p>Volvemos ahora a una verdad sonada por primera vez en la Unidad 1, porque es el gozne del car&aacute;cter pastoral: el pastor dirige principalmente por lo que es. Pedro encarga a los ancianos que apacienten la grey <em class="ref">&laquo;siendo ejemplos de la grey&raquo;</em> (1 Pedro 5:3). Con el tiempo, la gente llegar&aacute; a ser m&aacute;s parecida a lo que ve que su pastor es que a lo que le oye decir. Esto es un privilegio glorioso y una responsabilidad aterradora en un mismo aliento.</p>
+    <p>Y porque lo que est&aacute; en juego es tan alto, todo pastor debe contar honestamente con la posibilidad de su propia ruina. He aqu&iacute; una verdad que quiero grabada en usted: la cat&aacute;strofe moral casi nunca es un salto repentino. Es una deriva lenta &mdash; una serie de peque&ntilde;as concesiones negables, cada una excusada, que en silencio labran un canal por el cual un d&iacute;a se precipitar&aacute; el desastre final. La mirada sin guardia se vuelve el pensamiento entretenido; el pensamiento entretenido se vuelve el h&aacute;bito secreto; el h&aacute;bito secreto se vuelve el esc&aacute;ndalo p&uacute;blico que termina un ministerio. Ning&uacute;n hombre despierta una ma&ntilde;ana y decide destruir la obra de su vida. Llega all&iacute; a la deriva, una pulgada no confesada a la vez. Aun el ap&oacute;stol Pablo rehus&oacute; presumir de su propia posici&oacute;n: <em class="ref">&laquo;sujeto mi cuerpo y lo pongo en servidumbre, no sea que habiendo predicado a otros, yo mismo venga a ser reprobado&raquo;</em> (1 Corintios 9:27). Si Pablo se guardaba a s&iacute; mismo, el hombre que cree no tener necesidad de hacerlo es el hombre que ya est&aacute; en el m&aacute;s grave peligro.</p>
+    <p>&iquest;Cu&aacute;les son, entonces, las salvaguardas? Rendir cuentas honestas a hombres a quienes se les permite hacer las preguntas dif&iacute;ciles y que no se dejar&aacute;n adular para no hacerlas. Una guarda vigilante sobre los ojos, el horario y las horas privadas, donde la ruina siempre se siembra. Una negativa a ministrar desde el aislamiento, pues el pastor solitario, aislado y sin rendir cuentas a nadie, es el m&aacute;s f&aacute;cil de todos de derribar. Y la confesi&oacute;n inmediata del pecado mientras a&uacute;n es peque&ntilde;o, antes de que haya tenido tiempo de echar ra&iacute;ces y fortalecerse en la oscuridad. El pastor debe tambi&eacute;n guardar su matrimonio como parte de guardar su ministerio &mdash; un asunto tan grave que dedicamos la pr&oacute;xima unidad a &eacute;l. Todo el prop&oacute;sito de esta vigilancia se resume en el testimonio que todo ministro fiel anhela dar al final: <em class="ref">&laquo;He peleado la buena batalla, he acabado la carrera, he guardado la fe&raquo;</em> (2 Timoteo 4:7). La meta no es meramente comenzar bien. Es terminar.</p>
+    <div class="illustration"><strong>Referencia cruzada &middot; Predicaci&oacute;n Doctrinal</strong>La ense&ntilde;anza de que el car&aacute;cter del predicador es inseparable de su mensaje &mdash; &laquo;no es algo que usted hace sino algo que usted es&raquo; &mdash; se desarroll&oacute; en el curso de Predicaci&oacute;n Doctrinal (Unidad 1, &iquest;Qu&eacute; es la predicaci&oacute;n doctrinal?) y subyace a toda esta unidad.</div>
+
+</div>
+</div>
+
+
+<div class="card">
+    <h2><span class="lang-en">Unit 3 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 3 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lecci&oacute;n y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ============================================================
+// CTS Pastoral & Christian Ethics — Unit 3 — ST/DP house engine
+// English complete; Spanish draft filled (lang-es / textEs / kw_es / modelEs).
+// Spanish + RVG citations are a Gate-1 draft pending native review.
+// Navigation uses the deployed Ethics filename scheme: ethics_unit0N.html
+// (two-digit, zero-padded), matching the other nine units.
+// ============================================================
+
+const UNIT = 3;
+const COURSE = 'ethics';
+const NEXT_UNIT_URL = 'ethics_unit04.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - Introduction to Christian Ethics",
+    "Unit 2 - Biblical and Theological Foundations",
+    "Unit 3 - Pastoral Vocation: Calling and Character",
+    "Unit 4 - Family Responsibilities and Personal Integrity",
+    "Unit 5 - Professional Ethics and Boundaries",
+    "Unit 6 - Ethics in Preaching, Leadership, and Speech",
+    "Unit 7 - Sanctity of Life and Bioethics",
+    "Unit 8 - Sexual Ethics, Purity, and Gender",
+    "Unit 9 - Money, Stewardship, and the Poor",
+    "Unit 10 - Judgment, Restoration, and Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="ethics_unit${String(i).padStart(2,'0')}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+// MC answer key audited. Spanish: Gate-1 draft.
+const mcQuestions = [
+    { textEn: "1. The two errors concerning the call to ministry are running without being sent and:", textEs: "1. Los dos errores acerca del llamamiento al ministerio son correr sin ser enviado y:",
+      optionsEn: ["fleeing when plainly sent", "preaching too boldly", "studying too little", "seeking ordination too early"], optionsEs: ["huir cuando claramente se es enviado", "predicar con demasiada audacia", "estudiar muy poco", "buscar la ordenaci\u00f3n demasiado pronto"],
+      explanationEn: "The doctrine of calling delivers from both presumption (running unsent) and disobedient cowardice (fleeing when sent).", explanationEs: "La doctrina del llamamiento libra de ambos: de la presunci\u00f3n (correr sin ser enviado) y de la cobard\u00eda desobediente (huir cuando se es enviado).", correct: 0 },
+    { textEn: "2. 1 Timothy 3:1 treats the desire for the office as:", textEs: "2. 1 Timoteo 3:1 trata el deseo del oficio como:",
+      optionsEn: ["a sign of pride", "a good thing, but not a sufficient thing", "irrelevant to calling", "proof of a genuine call by itself"], optionsEs: ["se\u00f1al de orgullo", "algo bueno, pero no algo suficiente", "irrelevante para el llamamiento", "prueba de un llamamiento genuino por s\u00ed solo"],
+      explanationEn: "The desire is honorable\u2014the first stirring of a true call\u2014but desire alone ordains no one.", explanationEs: "El deseo es honroso \u2014 el primer despertar de un llamamiento verdadero \u2014 pero el deseo solo no ordena a nadie.", correct: 1 },
+    { textEn: "3. The \u201cinternal call\u201d is illustrated by Paul's words:", textEs: "3. El \u00abllamamiento interno\u00bb se ilustra con las palabras de Pablo:",
+      optionsEn: ["\u201cTake heed to yourself\u201d", "\u201cI have finished the race\u201d", "\u201cwoe is me if I do not preach the gospel\u201d", "\u201cbe holy, for I am holy\u201d"], optionsEs: ["\u00abTen cuidado de ti mismo\u00bb", "\u00abHe acabado la carrera\u00bb", "\u00ab\u00a1ay de m\u00ed si no anunciare el evangelio!\u00bb", "\u00absed santos, porque yo soy santo\u00bb"],
+      explanationEn: "The internal call is the holy constraint Paul names: \u2018woe is me if I do not preach the gospel.\u2019", explanationEs: "El llamamiento interno es la santa restricci\u00f3n que Pablo nombra: \u00ab\u00a1ay de m\u00ed si no anunciare el evangelio!\u00bb", correct: 2 },
+    { textEn: "4. The \u201cexternal call\u201d consists of:", textEs: "4. El \u00abllamamiento externo\u00bb consiste en:",
+      optionsEn: ["a private vision", "a feeling of peace", "an academic degree", "the church confirming a man's gifts and character"], optionsEs: ["una visi\u00f3n privada", "un sentir de paz", "un t\u00edtulo acad\u00e9mico", "la iglesia confirmando los dones y el car\u00e1cter de un hombre"],
+      explanationEn: "The inward fire must be confirmed by the church's examination of a man's gifts and character, or it is only a feeling.", explanationEs: "El fuego interior debe ser confirmado por el examen que la iglesia hace de los dones y el car\u00e1cter, o es solo un sentimiento.", correct: 3 },
+    { textEn: "5. The unit insists that a man does not:", textEs: "5. La unidad insiste en que un hombre no:",
+      optionsEn: ["need any inward desire", "ordain himself", "require any gifts", "feel the weight of the office"], optionsEs: ["necesita deseo interior alguno", "se ordena a s\u00ed mismo", "requiere don alguno", "siente el peso del oficio"],
+      explanationEn: "A man does not ordain himself; the internal call must meet the external confirmation of God's people.", explanationEs: "Un hombre no se ordena a s\u00ed mismo; el llamamiento interno debe encontrarse con la confirmaci\u00f3n externa del pueblo de Dios.", correct: 1 },
+    { textEn: "6. Reading 1 Timothy 3 and Titus 1, nearly all the qualifications concern:", textEs: "6. Al leer 1 Timoteo 3 y Tito 1, casi todos los requisitos tienen que ver con:",
+      optionsEn: ["education", "experience", "character", "reputation for talent"], optionsEs: ["la educaci\u00f3n", "la experiencia", "el car\u00e1cter", "la reputaci\u00f3n por el talento"],
+      explanationEn: "Asked of each item whether it is a skill or character, nearly the entire list is character.", explanationEs: "Preguntando de cada punto si es destreza o car\u00e1cter, casi toda la lista es car\u00e1cter.", correct: 2 },
+    { textEn: "7. The one practical competency essentially required of an elder is that he be:", textEs: "7. La \u00fanica competencia pr\u00e1ctica esencialmente requerida de un anciano es que sea:",
+      optionsEn: ["able to teach", "able to administrate", "able to counsel", "able to raise funds"], optionsEs: ["apto para ense\u00f1ar", "apto para administrar", "apto para aconsejar", "apto para recaudar fondos"],
+      explanationEn: "Amid a long catalog of character, the specific teaching skill named is that he be able to teach — though Titus adds exhorting and refuting error, and household management carries its own leadership dimension.", explanationEs: "En medio de un largo cat\u00e1logo de car\u00e1cter, la destreza espec\u00edfica de ense\u00f1anza mencionada es que sea apto para ense\u00f1ar — aunque Tito a\u00f1ade exhortar y refutar el error, y el gobierno del hogar lleva su propia dimensi\u00f3n de liderazgo.", correct: 0 },
+    { textEn: "8. The world assembles leaders by talent; God assembles His shepherds by:", textEs: "8. El mundo re\u00fane a sus l\u00edderes por el talento; Dios re\u00fane a sus pastores por:",
+      optionsEn: ["seniority", "holiness", "popularity", "persuasiveness"], optionsEs: ["la antig\u00fcedad", "la santidad", "la popularidad", "la persuasi\u00f3n"],
+      explanationEn: "The world gathers leaders by talent; God assembles shepherds by holiness, with one competency added.", explanationEs: "El mundo re\u00fane l\u00edderes por el talento; Dios re\u00fane pastores por la santidad, con una sola competencia a\u00f1adida.", correct: 1 },
+    { textEn: "9. The warning against ordaining a new convert (1 Timothy 3:6) names which danger?", textEs: "9. La advertencia contra ordenar a un nuevo convertido (1 Timoteo 3:6) nombra \u00bfcu\u00e1l peligro?",
+      optionsEn: ["doctrinal error", "inexperience", "laziness", "pride"], optionsEs: ["el error doctrinal", "la inexperiencia", "la pereza", "el orgullo"],
+      explanationEn: "The danger named is not incompetence but pride\u2014being puffed up and falling into the condemnation of the devil.", explanationEs: "El peligro nombrado no es la incompetencia sino el orgullo \u2014 envanecerse y caer en la condenaci\u00f3n del diablo.", correct: 3 },
+    { textEn: "10. A church selecting leaders the way a corporation selects executives is:", textEs: "10. Una iglesia que selecciona l\u00edderes como una corporaci\u00f3n selecciona ejecutivos est\u00e1:",
+      optionsEn: ["sowing a harvest of grief", "following the apostolic pattern", "showing wise discernment", "honoring giftedness rightly"], optionsEs: ["sembrando una cosecha de dolor", "siguiendo el patr\u00f3n apost\u00f3lico", "mostrando sabio discernimiento", "honrando rectamente la aptitud"],
+      explanationEn: "Choosing for giftedness while winking at character sows a harvest of grief it will reap within the decade.", explanationEs: "Escoger por la aptitud mientras se gui\u00f1a el ojo al car\u00e1cter siembra una cosecha de dolor que segar\u00e1 dentro de la d\u00e9cada.", correct: 0 },
+    { textEn: "11. \u201cTake heed to yourself and to the doctrine\u201d establishes that the pastor must attend first to:", textEs: "11. \u00abTen cuidado de ti mismo y de la doctrina\u00bb establece que el pastor debe atender primero a:",
+      optionsEn: ["his preaching", "himself", "his congregation", "his reputation"], optionsEs: ["su predicaci\u00f3n", "s\u00ed mismo", "su congregaci\u00f3n", "su reputaci\u00f3n"],
+      explanationEn: "To yourself first, then the doctrine; the man who reverses it builds a fine house on a rotting foundation.", explanationEs: "A ti mismo primero, luego la doctrina; el que lo invierte edifica una hermosa casa sobre un cimiento podrido.", correct: 1 },
+    { textEn: "12. The image of a dry cistern teaches that a pastor cannot:", textEs: "12. La imagen de una cisterna seca ense\u00f1a que un pastor no puede:",
+      optionsEn: ["preach without notes", "lead without elders", "give his people water he has let run dry", "study without commentaries"], optionsEs: ["predicar sin notas", "dirigir sin ancianos", "dar a su gente agua que ha dejado secar", "estudiar sin comentarios"],
+      explanationEn: "You cannot give your people water from a cistern you have let run dry; the private well must be daily refilled.", explanationEs: "Usted no puede dar a su gente agua de una cisterna que ha dejado secar; el pozo privado debe llenarse a diario.", correct: 2 },
+    { textEn: "13. The spiritual disciplines are described as:", textEs: "13. Las disciplinas espirituales se describen como:",
+      optionsEn: ["optional refinements for the devout", "the supply lines of the ministry", "marks of legalism", "duties only for new converts"], optionsEs: ["refinamientos opcionales para el devoto", "las l\u00edneas de abastecimiento del ministerio", "marcas de legalismo", "deberes solo para nuevos convertidos"],
+      explanationEn: "They are not optional refinements but the very supply lines of the ministry.", explanationEs: "No son refinamientos opcionales sino las l\u00edneas mismas de abastecimiento del ministerio.", correct: 1 },
+    { textEn: "14. The unit calls which the \u201cpeculiar and besetting\u201d sin of those who handle holy things?", textEs: "14. \u00bfA cu\u00e1l llama la unidad el pecado \u00abpeculiar y acosador\u00bb de quienes manejan cosas santas?",
+      optionsEn: ["greed", "pride", "sloth", "envy"], optionsEs: ["la avaricia", "el orgullo", "la pereza", "la envidia"],
+      explanationEn: "Pride is the peculiar and besetting sin of those who handle holy things; the platform that makes a man useful makes him a target.", explanationEs: "El orgullo es el pecado peculiar y acosador de quienes manejan cosas santas; la plataforma que hace \u00fatil a un hombre lo hace blanco.", correct: 1 },
+    { textEn: "15. The shepherd who forgets that he is first a sheep has:", textEs: "15. El pastor que olvida que es primero una oveja ha:",
+      optionsEn: ["reached spiritual maturity", "earned his position", "proven his calling", "already begun to fall"], optionsEs: ["alcanzado la madurez espiritual", "ganado su posici\u00f3n", "probado su llamamiento", "ya comenzado a caer"],
+      explanationEn: "The shepherd who forgets he is first a sheep, equally dependent on grace, has already begun to fall.", explanationEs: "El pastor que olvida que es primero una oveja, igualmente dependiente de la gracia, ya ha comenzado a caer.", correct: 3 },
+    { textEn: "16. The pastor leads the flock chiefly by:", textEs: "16. El pastor dirige la grey principalmente por:",
+      optionsEn: ["what he is", "what he says", "what he schedules", "what he writes"], optionsEs: ["lo que es", "lo que dice", "lo que programa", "lo que escribe"],
+      explanationEn: "The people become, over time, more like what they watch their shepherd be than what they hear him say.", explanationEs: "Con el tiempo, la gente llega a ser m\u00e1s parecida a lo que ve que su pastor es que a lo que le oye decir.", correct: 0 },
+    { textEn: "17. Moral catastrophe in ministry is almost never:", textEs: "17. La cat\u00e1strofe moral en el ministerio casi nunca es:",
+      optionsEn: ["preventable", "a sudden leap", "the result of sin", "a public matter"], optionsEs: ["evitable", "un salto repentino", "el resultado del pecado", "un asunto p\u00fablico"],
+      explanationEn: "It is a slow drift\u2014small, deniable compromises\u2014not a sudden leap; no man wakes up and decides to destroy his life's work.", explanationEs: "Es una deriva lenta \u2014 concesiones peque\u00f1as y negables \u2014 no un salto repentino; nadie despierta y decide destruir la obra de su vida.", correct: 1 },
+    { textEn: "18. The progression of moral drift runs from the unguarded glance to the entertained thought to:", textEs: "18. La progresi\u00f3n de la deriva moral va de la mirada sin guardia al pensamiento entretenido y luego a:",
+      optionsEn: ["an open rebellion", "a doctrinal error", "the secret habit", "a public confession"], optionsEs: ["una rebeli\u00f3n abierta", "un error doctrinal", "el h\u00e1bito secreto", "una confesi\u00f3n p\u00fablica"],
+      explanationEn: "The unguarded glance becomes the entertained thought; the thought becomes the secret habit; the habit becomes the public scandal.", explanationEs: "La mirada sin guardia se vuelve el pensamiento entretenido; el pensamiento, el h\u00e1bito secreto; el h\u00e1bito, el esc\u00e1ndalo p\u00fablico.", correct: 2 },
+    { textEn: "19. That even Paul disciplined himself (1 Corinthians 9:27) teaches that the man in gravest danger is the one who:", textEs: "19. Que aun Pablo se disciplinara (1 Corintios 9:27) ense\u00f1a que el hombre en m\u00e1s grave peligro es el que:",
+      optionsEn: ["confesses sin quickly", "seeks accountability", "tends his marriage", "thinks he has no need to guard himself"], optionsEs: ["confiesa el pecado pronto", "busca rendir cuentas", "cuida su matrimonio", "cree no tener necesidad de guardarse"],
+      explanationEn: "If Paul guarded himself lest he be disqualified, the man who thinks he need not is already in gravest danger.", explanationEs: "Si Pablo se guardaba para no ser reprobado, el que cree no tener necesidad ya est\u00e1 en el m\u00e1s grave peligro.", correct: 3 },
+    { textEn: "20. The whole aim of pastoral vigilance is summed up in Paul's testimony that he had:", textEs: "20. Todo el prop\u00f3sito de la vigilancia pastoral se resume en el testimonio de Pablo de que hab\u00eda:",
+      optionsEn: ["gained many followers", "finished the race and kept the faith", "built a great church", "written many letters"], optionsEs: ["ganado muchos seguidores", "acabado la carrera y guardado la fe", "edificado una gran iglesia", "escrito muchas cartas"],
+      explanationEn: "The goal is not merely to begin well but to finish: \u2018I have fought the good fight, I have finished the race, I have kept the faith.\u2019", explanationEs: "La meta no es meramente comenzar bien sino terminar: \u00abHe peleado la buena batalla, he acabado la carrera, he guardado la fe\u00bb.", correct: 1 },
+];
+
+// Short-answer (21-30). English complete; Spanish: Gate-1 draft (kw_es + modelEs filled).
+const kwQuestions = [
+    { textEn: "21. Name the two errors regarding the call to ministry and how the doctrine of calling delivers from both.", textEs: "21. Nombre los dos errores respecto al llamamiento al ministerio y c\u00f3mo la doctrina del llamamiento libra de ambos.",
+      kw_en: ["run", "sent", "flee", "presumption", "cowardice", "jonah", "summon", "build"], kw_es: ["correr", "enviado", "huye", "presuncion", "cobardia", "jonas", "convocado", "negocio"],
+      modelEn: "The first error is the man who runs without being sent\u2014gifted perhaps, but never truly summoned, building a ministry as he would a business. The second is the man who flees when he has plainly been sent, like Jonah or Moses at the bush, hiding behind his unworthiness to escape a burden God has laid on him. The doctrine of calling is meant to deliver from both: from presumption on the one hand and from disobedient cowardice on the other.", modelEs: "El primer error es el hombre que corre sin ser enviado \u2014 dotado quiz\u00e1, pero nunca verdaderamente convocado, edificando un ministerio como edificar\u00eda un negocio. El segundo es el hombre que huye cuando claramente ha sido enviado, como Jon\u00e1s o Mois\u00e9s en la zarza, escondi\u00e9ndose tras su indignidad para escapar de una carga que Dios le ha puesto. La doctrina del llamamiento busca librar de ambos: de la presunci\u00f3n por un lado y de la cobard\u00eda desobediente por el otro." },
+    { textEn: "22. Distinguish the internal and external call, and why both must meet.", textEs: "22. Distinga el llamamiento interno y el externo, y por qu\u00e9 ambos deben encontrarse.",
+      kw_en: ["internal", "woe", "constraint", "external", "church", "confirm", "gifts", "ordain"], kw_es: ["interno", "externo", "compulsion", "restriccion", "iglesia", "confirma", "dones", "ordena"],
+      modelEn: "A genuine call has two parts that must meet. The internal call is the holy compulsion Paul describes\u2014\u2018woe is me if I do not preach the gospel\u2019\u2014not mere willingness but a constraint, a sense that one cannot finally be at peace doing anything else. The external call is the confirmation of the church, which examines a man's gifts and character and recognizes God's hand on him. A man does not ordain himself; the inward fire must be confirmed by the outward judgment of God's people, or it is not yet a call but only a feeling.", modelEs: "Un llamamiento genuino tiene dos partes que deben encontrarse. El llamamiento interno es la santa compulsi\u00f3n que Pablo describe \u2014 \u00ab\u00a1ay de m\u00ed si no anunciare el evangelio!\u00bb \u2014 no mera disposici\u00f3n sino una restricci\u00f3n, un sentir de que uno no puede finalmente estar en paz haciendo cualquier otra cosa. El llamamiento externo es la confirmaci\u00f3n de la iglesia, que examina los dones y el car\u00e1cter de un hombre y reconoce la mano de Dios sobre \u00e9l. Un hombre no se ordena a s\u00ed mismo; el fuego interior debe ser confirmado por el juicio exterior del pueblo de Dios, o todav\u00eda no es un llamamiento sino solo un sentimiento." },
+    { textEn: "23. Why are the qualifications for the office almost entirely about character rather than skill?", textEs: "23. \u00bfPor qu\u00e9 los requisitos del oficio son casi enteramente de car\u00e1cter y no de destreza?",
+      kw_en: ["character", "reproach", "teach", "holiness", "talent", "world", "competency", "counter-cultural"], kw_es: ["requisitos", "destreza", "apto", "talento", "santidad", "irreprensible", "competencia", "contracultural"],
+      modelEn: "Reading 1 Timothy 3 and Titus 1 and asking of each item whether it is a skill or a matter of character, one finds nearly the entire list is character: above reproach, temperate, gentle, not greedy, ruling his own house well. What competence is required is modest and ministry-shaped: he must be able to teach, and Titus adds holding firmly to sound doctrine so he can exhort and refute error, while household management itself carries a real leadership dimension. The world assembles leaders by talent\u2014the most capable and charismatic\u2014but God assembles His shepherds by holiness first, with sound teaching and demonstrated leadership required alongside it. This is among the most counter-cultural truths a seminarian will absorb, and the temptation to reverse it never lets up.", modelEs: "Al leer 1 Timoteo 3 y Tito 1 y preguntar de cada punto si es destreza o asunto de car\u00e1cter, se halla que casi toda la lista es car\u00e1cter: irreprensible, sobrio, amable, no avaro, que gobierna bien su propia casa. Lo que se requiere en competencia es modesto y moldeado por el ministerio: debe ser apto para ense\u00f1ar, y Tito a\u00f1ade sostener firmemente la sana doctrina para poder exhortar y refutar el error, mientras que el gobierno del hogar mismo lleva una verdadera dimensi\u00f3n de liderazgo. El mundo re\u00fane l\u00edderes por el talento \u2014 los m\u00e1s capaces y carism\u00e1ticos \u2014 pero Dios re\u00fane a sus pastores por la santidad primero, con sana ense\u00f1anza y liderazgo demostrado requeridos junto a ella. Esta es de las verdades m\u00e1s contraculturales que un seminarista absorber\u00e1, y la tentaci\u00f3n de invertirla nunca cede." },
+    { textEn: "24. Why does the unit warn against ordaining a new convert and require a good reputation with outsiders?", textEs: "24. \u00bfPor qu\u00e9 advierte la unidad contra ordenar a un nuevo convertido y exige buena reputaci\u00f3n con los de afuera?",
+      kw_en: ["pride", "condemnation", "devil", "convert", "outsiders", "marketplace", "verified", "reputation"], kw_es: ["orgullo", "condenacion", "diablo", "convertido", "afuera", "mercado", "verificado", "reputacion"],
+      modelEn: "The warning against ordaining a new convert (1 Timothy 3:6) names not incompetence but pride\u2014lest, being puffed up, he fall into the same condemnation as the devil. The requirement of a good testimony with outsiders means a man's character must be visible and verified not only inside the warm circle of the church but out in the cold light of the marketplace, where reputations are not flattered. God screens His shepherds by who they are when no one is applauding.", modelEs: "La advertencia contra ordenar a un nuevo convertido (1 Timoteo 3:6) nombra no la incompetencia sino el orgullo \u2014 no sea que, envaneci\u00e9ndose, caiga en la misma condenaci\u00f3n del diablo. El requisito de buen testimonio con los de afuera significa que el car\u00e1cter de un hombre debe ser visible y verificado no solo dentro del c\u00edrculo c\u00e1lido de la iglesia, sino fuera, en la luz fr\u00eda del mercado, donde las reputaciones no se adulan. Dios examina a sus pastores por qui\u00e9nes son cuando nadie aplaude." },
+    { textEn: "25. Explain \u201cTake heed to yourself and to the doctrine\u201d and the image of the dry cistern.", textEs: "25. Explique \u00abTen cuidado de ti mismo y de la doctrina\u00bb y la imagen de la cisterna seca.",
+      kw_en: ["yourself", "first", "doctrine", "cistern", "dry", "well", "private", "tend"], kw_es: ["doctrina", "cisterna", "agua", "pozo", "privado", "secreto", "atender", "cimiento"],
+      modelEn: "Paul's charge to Timothy puts the order beyond dispute: take heed to yourself first, and then to the doctrine. The man who reverses it\u2014pouring all his care into his teaching while his own heart goes untended\u2014is building a fine house on a rotting foundation. You cannot give your people water from a cistern you have let run dry. Every public word should be drawn from a private well the pastor is daily refilling in secret, alone with God.", modelEs: "El encargo de Pablo a Timoteo pone el orden fuera de disputa: ten cuidado de ti mismo primero, y luego de la doctrina. El hombre que lo invierte \u2014 vertiendo todo su cuidado en su ense\u00f1anza mientras su propio coraz\u00f3n queda sin atender \u2014 edifica una hermosa casa sobre un cimiento podrido. Usted no puede dar a su gente agua de una cisterna que ha dejado secar. Cada palabra p\u00fablica debe sacarse de un pozo privado que el pastor llena a diario en secreto, a solas con Dios." },
+    { textEn: "26. Why are the spiritual disciplines called the \u201csupply lines\u201d of ministry rather than optional refinements?", textEs: "26. \u00bfPor qu\u00e9 se llaman las disciplinas espirituales las \u00abl\u00edneas de abastecimiento\u00bb del ministerio y no refinamientos opcionales?",
+      kw_en: ["disciplines", "supply", "prayer", "word", "secret", "communion", "starve", "baker"], kw_es: ["disciplinas", "abastecimiento", "oracion", "palabra", "hambre", "panadero", "invisible", "pulpito"],
+      modelEn: "The spiritual disciplines are not optional refinements for the unusually devout pastor; they are the very supply lines of the ministry. They include prayer that is more than the hurried blessing before a meal, and the Word read for his own soul and not merely mined for next Sunday's sermon\u2014for a man can study the Scriptures professionally for years and starve spiritually the whole time, like a baker who never eats the bread. The visible man in the pulpit must be matched by an invisible man on his knees, or the public man becomes a hollow performance.", modelEs: "Las disciplinas espirituales no son refinamientos opcionales para el pastor inusualmente devoto; son las l\u00edneas mismas de abastecimiento del ministerio. Incluyen oraci\u00f3n que sea m\u00e1s que la bendici\u00f3n apresurada antes de una comida, y la Palabra le\u00edda para su propia alma y no meramente explotada para el serm\u00f3n del pr\u00f3ximo domingo \u2014 pues un hombre puede estudiar las Escrituras profesionalmente por a\u00f1os y morir de hambre espiritualmente todo ese tiempo, como un panadero que nunca come el pan. El hombre visible en el p\u00falpito debe corresponderse con un hombre invisible de rodillas, o el hombre p\u00fablico se vuelve una actuaci\u00f3n hueca." },
+    { textEn: "27. Why is pride the besetting sin of those who handle holy things, and what guards against it?", textEs: "27. \u00bfPor qu\u00e9 es el orgullo el pecado acosador de quienes manejan cosas santas, y qu\u00e9 lo guarda?",
+      kw_en: ["pride", "besetting", "platform", "target", "humility", "sheep", "low", "fall"], kw_es: ["orgullo", "plataforma", "blanco", "humildad", "oveja", "gracia", "caer", "bajo"],
+      modelEn: "Pride is the peculiar and besetting sin of those who handle holy things, because the very platform that makes a man useful makes him a target; the higher he is lifted in others' eyes, the deeper the pit that opens beneath his vanity. Over all his labor must hang the guard of humility. The shepherd who forgets that he is first a sheep, equally dependent on the grace he proclaims, has already begun to fall, however long the fall takes to become visible. Keep low\u2014the ground is safest there.", modelEs: "El orgullo es el pecado peculiar y acosador de quienes manejan cosas santas, porque la misma plataforma que hace \u00fatil a un hombre lo hace blanco; cuanto m\u00e1s alto es levantado a los ojos de otros, m\u00e1s profundo el foso que se abre bajo su vanidad. Sobre toda su labor debe pender la guarda de la humildad. El pastor que olvida que es primero una oveja, igualmente dependiente de la gracia que proclama, ya ha comenzado a caer, por mucho que tarde la ca\u00edda en hacerse visible. Mant\u00e9ngase bajo \u2014 el suelo es m\u00e1s seguro all\u00ed." },
+    { textEn: "28. Explain how moral catastrophe is a slow drift rather than a sudden leap.", textEs: "28. Explique c\u00f3mo la cat\u00e1strofe moral es una deriva lenta y no un salto repentino.",
+      kw_en: ["drift", "sudden", "glance", "thought", "habit", "scandal", "inch", "channel"], kw_es: ["deriva", "repentino", "mirada", "pensamiento", "habito", "escandalo", "pulgada", "canal"],
+      modelEn: "Moral catastrophe is almost never a sudden leap. It is a slow drift\u2014a series of small, deniable compromises, each one excused, that quietly carve a channel down which the final disaster will one day rush. The unguarded glance becomes the entertained thought; the entertained thought becomes the secret habit; the secret habit becomes the public scandal that ends a ministry. No man wakes up one morning and decides to destroy his life's work; he drifts there, one unconfessed inch at a time.", modelEs: "La cat\u00e1strofe moral casi nunca es un salto repentino. Es una deriva lenta \u2014 una serie de peque\u00f1as concesiones negables, cada una excusada, que en silencio labran un canal por el cual un d\u00eda se precipitar\u00e1 el desastre final. La mirada sin guardia se vuelve el pensamiento entretenido; el pensamiento entretenido se vuelve el h\u00e1bito secreto; el h\u00e1bito secreto se vuelve el esc\u00e1ndalo p\u00fablico que termina un ministerio. Ning\u00fan hombre despierta una ma\u00f1ana y decide destruir la obra de su vida; llega all\u00ed a la deriva, una pulgada no confesada a la vez." },
+    { textEn: "29. Why did even Paul discipline himself, and who is in the gravest danger?", textEs: "29. \u00bfPor qu\u00e9 se disciplin\u00f3 aun Pablo, y qui\u00e9n est\u00e1 en el m\u00e1s grave peligro?",
+      kw_en: ["discipline", "subjection", "disqualified", "presume", "standing", "gravest", "guard", "thinks"], kw_es: ["cuerpo", "servidumbre", "reprobado", "presumir", "posicion", "guardarse", "peligro", "inmunidad"],
+      modelEn: "Even the apostle Paul refused to presume on his own standing: \u2018I discipline my body and bring it into subjection, lest, when I have preached to others, I myself should become disqualified\u2019 (1 Corinthians 9:27). If a man of Paul's stature guarded himself against his own ruin, then the man who thinks he has no need to guard himself is the man already in gravest danger. Confidence in one's own immunity is itself the first symptom of the fall.", modelEs: "Aun el ap\u00f3stol Pablo rehus\u00f3 presumir de su propia posici\u00f3n: \u00absujeto mi cuerpo y lo pongo en servidumbre, no sea que habiendo predicado a otros, yo mismo venga a ser reprobado\u00bb (1 Corintios 9:27). Si un hombre de la estatura de Pablo se guardaba contra su propia ruina, entonces el hombre que cree no tener necesidad de guardarse es el que ya est\u00e1 en el m\u00e1s grave peligro. La confianza en la propia inmunidad es ella misma el primer s\u00edntoma de la ca\u00edda." },
+    { textEn: "30. List the safeguards against disqualification and the goal they aim at.", textEs: "30. Enumere las salvaguardas contra la descalificaci\u00f3n y la meta a la que apuntan.",
+      kw_en: ["accountability", "questions", "eyes", "isolation", "confession", "small", "finish", "race"], kw_es: ["salvaguardas", "cuentas", "ojos", "aislamiento", "confesion", "carrera", "terminar", "matrimonio"],
+      modelEn: "The safeguards are honest accountability to men permitted to ask the hard questions and not be flattered out of asking them; a vigilant guard over the eyes, the schedule, and the private hours where ruin is seeded; a refusal to minister from isolation, since the lone shepherd is easiest to pick off; and the immediate confession of sin while it is still small, before it takes root in the dark. Guarding one's marriage belongs to this vigilance as well. The whole aim is the testimony every faithful minister longs to give at the end\u2014\u2018I have fought the good fight, I have finished the race, I have kept the faith\u2019\u2014for the goal is not merely to begin well but to finish.", modelEs: "Las salvaguardas son rendir cuentas honestas a hombres a quienes se permite hacer las preguntas dif\u00edciles y que no se dejar\u00e1n adular para no hacerlas; una guarda vigilante sobre los ojos, el horario y las horas privadas donde la ruina se siembra; una negativa a ministrar desde el aislamiento, pues el pastor solitario es el m\u00e1s f\u00e1cil de derribar; y la confesi\u00f3n inmediata del pecado mientras a\u00fan es peque\u00f1o, antes de que eche ra\u00edces en la oscuridad. Guardar el matrimonio pertenece tambi\u00e9n a esta vigilancia. Toda la meta es el testimonio que todo ministro fiel anhela dar al final \u2014 \u00abHe peleado la buena batalla, he acabado la carrera, he guardado la fe\u00bb \u2014 pues la meta no es meramente comenzar bien sino terminar." },
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 4 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 4 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y vuelva a intentar la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEthicsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

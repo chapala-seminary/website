@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Practical Theology — Unit 6: The Word of God in Daily Life</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.sa-model { margin-top: 8px; padding: 10px 14px; background:#fff8e1; color:#5d4a00; border-left:4px solid #d4af37; border-radius:6px; font-size:0.92rem; line-height:1.45; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+/* === Retrofit additions === */
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-bottom: 2px dashed #d7cec1; padding-bottom: 18px; margin-bottom: 18px; }
+.lang-toggle-group { display: inline-flex; gap: 4px; margin-bottom: 15px; }
+.lang-toggle-group button { background: #f4c542; color: #5b3a1f; border: 1px solid #c9a032; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+.lang-toggle-group button.active { background: #5b3a1f; color: white; border-color: #5b3a1f; }
+.track-badge { display: inline-block; background: #f4c542; color: #5b3a1f; padding: 4px 12px; border-radius: 30px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 12px; vertical-align: middle; }
+.exam-status { padding: 12px 16px; margin: 14px 0; border-radius: 8px; font-size: 0.95rem; font-weight: 600; }
+.exam-status.mc-passed { background: #d6e2f0; color: #2c3e6b; border-left: 5px solid #3f5a8a; }
+.exam-status.locked { background: #fae5e3; color: #8a1f1f; border-left: 5px solid #b03a2e; }
+.exam-status.hidden { display: none; }
+.mc-section, .sa-section { margin-top: 20px; }
+.sa-section h3, .mc-section h3 { color: #5b3a1f; border-bottom: 2px solid #f4c542; padding-bottom: 4px; margin-bottom: 12px; font-size: 1.1rem; }
+.sa-badge { display: inline-block; background: #f4c542; color: #5b3a1f; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; margin-left: 8px; vertical-align: middle; }
+.sa-note { margin: 0 0 14px; padding: 10px 14px; background: #f6f1e8; border-left: 3px solid #c9a032; color: #22201d; font-size: 0.9rem; font-style: italic; border-radius: 6px; }
+.question.review-locked { opacity: 0.7; background: #fbfaf6; border-left: 3px solid #f4c542; }
+.question.review-locked .option { pointer-events: none; }
+.question.review-locked .kw-answer, .question.review-locked .check-kw-btn { pointer-events: none; }
+.btn-reset { background: #8a6a4a; color: white; border: none; border-radius: 30px; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 0.88rem; margin-left: 8px; }
+.btn-reset:hover { background: #6b5236; }
+.reg-modal { position: fixed; inset: 0; background: rgba(40, 30, 20, 0.65); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.reg-modal.hidden { display: none; }
+.reg-modal-inner { background: #fffdfa; max-width: 520px; width: 100%; border-radius: 16px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 1px solid #d7cec1; }
+.reg-modal-inner h2 { color: #5b3a1f; margin: 0 0 10px; font-size: 1.4rem; }
+.reg-modal-inner p { margin: 10px 0; font-size: 0.95rem; }
+.reg-modal-inner label { display: block; margin: 12px 0 4px; font-weight: 700; font-size: 0.92rem; }
+.reg-modal-inner input[type="text"], .reg-modal-inner input[type="email"] { width: 100%; padding: 9px 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; background: #fcfbf8; }
+.reg-modal-inner .track-options { display: flex; gap: 10px; margin-top: 6px; }
+.reg-modal-inner .track-options label { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 12px; border: 1px solid #d7cec1; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.92rem; background: #fcfbf8; }
+.reg-modal-inner .track-options input[type="radio"] { margin: 0; }
+.reg-modal-inner .track-options label:has(input:checked) { background: #f4c542; border-color: #c9a032; }
+.reg-modal-inner button { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 9px 22px; cursor: pointer; font-family: inherit; font-size: 1rem; margin-top: 18px; }
+.reg-warn { background: #faecd0; border: 1px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; color: #5b3a1f; }
+.reg-warn.hidden { display: none; }
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .nav-bar, .toggle-btn, .lang-toggle-group, .btn-reset, button.small, .check-kw-btn, .reg-modal, .reg-warn, #submitExamBtn, .exam-status, .sa-badge, .track-badge { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+  body.lang-en .lang-es, body.lang-es .lang-en { display: none; }
+  body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+}
+
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" role="group" aria-label="Language">
+  <button data-lang="en" class="active">English</button>
+  <button data-lang="es">Español</button>
+  <button data-lang="both">Both / Ambos</button>
+</div>
+<span id="trackBadgeSlot"></span>
+
+<div id="regWarn" class="reg-warn hidden">
+  <span class="lang-en">⚠ Please register your name to receive credit for this unit. <button class="small" id="openRegBtn" type="button">Register</button></span>
+  <span class="lang-es">⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class="small" id="openRegBtn2" type="button">Registrar</button></span>
+</div>
+<div id="regModal" class="reg-modal hidden" role="dialog" aria-labelledby="regModalTitle">
+  <div class="reg-modal-inner">
+    <h2 id="regModalTitle"><span class="lang-en">Welcome to Practical Theology</span><span class="lang-es">Bienvenido a la Teología Práctica</span></h2>
+    <p><span class="lang-en">Before you begin this unit, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.</span><span class="lang-es">Antes de comenzar esta unidad, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full name</span><span class="lang-es">Nombre completo</span></label>
+    <input type="text" id="regName" placeholder="" autocomplete="name" aria-label="regName">
+    <label><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span></label>
+    <input type="email" id="regEmail" placeholder="" autocomplete="email" aria-label="regEmail">
+    <label><span class="lang-en">Track</span><span class="lang-es">Vía</span></label>
+    <div class="track-options">
+      <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></label>
+      <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en">M.Div</span><span class="lang-es">M.Div</span></label>
+      <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en">Th.M.</span><span class="lang-es">Th.M.</span></label>
+    </div>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;">
+      <span class="lang-en"><strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.</span>
+      <span class="lang-es"><strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%.</span>
+    </p>
+    <button id="regSaveBtn" type="button"><span class="lang-en">Save and Continue</span><span class="lang-es">Guardar y Continuar</span></button>
+  </div>
+</div>
+<div class="card">
+    <h1><span class="lang-en">🌱 Practical Theology — Unit 6: The Word of God in Daily Life</span><span class="lang-es">🌱 Teología Práctica — Unidad 6: La Palabra de Dios en la Vida Diaria</span></h1>
+    <p><span class="lang-en"><strong>Professors:</strong> Dr. Wayne Cook &amp; Dr. Ted Rogers</span><span class="lang-es"><strong>Profesores:</strong> Dr. Wayne Cook y Dr. Ted Rogers</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Introduction: A Life Built on the Word</h2>
+        <p>We have learned to walk with God, to keep a daily time with Him, and to pray. At the center of all of these stands the Word of God. The Christian does not live by his own wisdom or by the changing opinions of the world, but by what God has spoken. <em>"Man shall not live by bread alone, but by every word that proceeds from the mouth of God"</em> (Matthew 4:4, NKJV). In this unit we ask what the Word is to us, how it makes us grow, how to take it into our daily lives, and where it is finally meant to lead us.</p>
+
+        <h2>I. The Word Is Our Daily Food</h2>
+        <p>Scripture again and again compares the Word of God to food, because we need it as truly and as regularly as we need our daily bread. Job said of God, <em>"I have treasured the words of His mouth more than my necessary food"</em> (Job 23:12, NKJV). The prophet Jeremiah said, <em>"Your words were found, and I ate them, and Your word was to me the joy and rejoicing of my heart"</em> (Jeremiah 15:16, NKJV). Peter urges the youngest believers, <em>"as newborn babes, desire the pure milk of the word, that you may grow thereby"</em> (1 Peter 2:2, NKJV). And this food is living food, for <em>"the word of God is living and powerful, and sharper than any two-edged sword"</em> (Hebrews 4:12, NKJV). A believer who neglects the Word grows weak in the same way a body grows weak that refuses to eat.</p>
+
+        <h2>II. How the Word Makes Us Grow</h2>
+        <p>The last command Peter left us is, <em>"but grow in the grace and knowledge of our Lord and Savior Jesus Christ"</em> (2 Peter 3:18, NKJV). How does a Christian grow? Chiefly by feeding on the Word. There is no growth in grace apart from the steady intake of Scripture, just as there is no growth in a child apart from food. The first Psalm describes the blessed man this way: <em>"his delight is in the law of the Lord, and in His law he meditates day and night. He shall be like a tree planted by the rivers of water, that brings forth its fruit in its season"</em> (Psalm 1:2&ndash;3, NKJV). Notice the picture: a tree that bears fruit because its roots are sunk deep in a steady supply of water. So it is with the believer who reads, hears, and meditates on the Word regularly &mdash; not in fits and starts, but day by day. This is why faithful Bible reading, faithful sitting under the preaching of the Word in the gathered church, and a willingness to sacrifice lesser things for it are among the surest ways a Christian grows.</p>
+
+        <h2>III. Taking the Word In: Read, Meditate, Memorize, Obey</h2>
+        <p>There are four simple ways to take the Word into daily life, and the believer who practices all four will be well fed. First, <em>read</em> it. Have a plan &mdash; a portion each day, perhaps a chapter, or a few verses read slowly &mdash; so that over time the whole counsel of God passes through your heart. Second, <em>meditate</em> on it. To meditate is not to empty the mind but to fill it: to turn a verse over slowly, as a cow chews its cud, asking what it says about God, about ourselves, and about how we are to live. Third, <em>memorize</em> it. <em>"Your word I have hidden in my heart, that I might not sin against You"</em> (Psalm 119:11, NKJV). A verse carried in the heart is ready in the hour of temptation, when no Bible is open before us. Fourth, and above all, <em>obey</em> it. As we learned in our first unit, we are to be <em>"doers of the word, and not hearers only"</em> (James 1:22, NKJV). Knowledge that is never obeyed puffs up; the Word truly received always bends the life toward obedience.</p>
+
+        <h2>IV. Where the Word Leads: To Christ Himself</h2>
+        <p>The written Word is not an end in itself. Its great purpose is to bring us to a Person. The Lord Jesus rebuked those who searched the Scriptures yet missed their point: <em>"You search the Scriptures, for in them you think you have eternal life; and these are they which testify of Me"</em> (John 5:39, NKJV). After His resurrection, <em>"beginning at Moses and all the Prophets, He expounded to them in all the Scriptures the things concerning Himself"</em> (Luke 24:27, NKJV). All Scripture points to Christ, the living Word, of whom John wrote, <em>"the Word became flesh and dwelt among us"</em> (John 1:14, NKJV). So when you open your Bible each day, do not read merely to gather facts or to win arguments; read to meet your Lord, to hear His voice, and to be changed into His likeness. The written Word in our hands is meant to lead us to the living Word, Jesus Christ.</p>
+
+        <h2>Conclusion</h2>
+        <p>The Word of God is our daily food, the means of our growth, and the path that leads us to Christ. To read it, meditate on it, memorize it, and obey it is not a burden laid on us to earn God's favor, but the privilege of children feeding at their Father's table. Make the Word a daily companion, and you will find your walk with God steadied, your prayers deepened, and your life slowly but surely conformed to the Savior of whom every page speaks.</p>
+    </div>
+    <div class="lang-es">
+        <h2>Introducción: Una Vida Edificada sobre la Palabra</h2>
+        <p>Hemos aprendido a andar con Dios, a guardar un tiempo diario con Él, y a orar. En el centro de todas estas cosas está la Palabra de Dios. El cristiano no vive por su propia sabiduría ni por las opiniones cambiantes del mundo, sino por lo que Dios ha hablado. <em>"No sólo de pan vivirá el hombre, sino de toda palabra que sale de la boca de Dios"</em> (Mateo 4:4, RVG). En esta unidad preguntamos qué es la Palabra para nosotros, cómo nos hace crecer, cómo tomarla en nuestra vida diaria, y a dónde está finalmente destinada a llevarnos.</p>
+
+        <h2>I. La Palabra Es Nuestro Alimento Diario</h2>
+        <p>La Escritura una y otra vez compara la Palabra de Dios con el alimento, porque la necesitamos tan verdadera y regularmente como necesitamos nuestro pan de cada día. Job dijo de Dios: <em>"guardé las palabras de su boca más que mi comida"</em> (Job 23:12, RVG). El profeta Jeremías dijo: <em>"Fueron halladas tus palabras, y yo las comí; y tu palabra me fue por gozo y por alegría de mi corazón"</em> (Jeremías 15:16, RVG). Pedro exhorta a los creyentes más jóvenes: <em>"desead, como niños recién nacidos, la leche no adulterada de la palabra, para que por ella crezcáis"</em> (1 Pedro 2:2, RVG). Y este alimento es alimento vivo, pues <em>"la palabra de Dios es viva y eficaz, y más penetrante que toda espada de dos filos"</em> (Hebreos 4:12, RVG). El creyente que descuida la Palabra se debilita del mismo modo que se debilita un cuerpo que se niega a comer.</p>
+
+        <h2>II. Cómo Nos Hace Crecer la Palabra</h2>
+        <p>El último mandato que Pedro nos dejó es: <em>"Mas creced en la gracia y el conocimiento de nuestro Señor y Salvador Jesucristo"</em> (2 Pedro 3:18, RVG). ¿Cómo crece un cristiano? Principalmente alimentándose de la Palabra. No hay crecimiento en la gracia aparte de la constante ingestión de la Escritura, así como no hay crecimiento en un niño aparte del alimento. El primer Salmo describe así al varón bienaventurado: <em>"sino que en la ley de Jehová está su delicia, y en su ley medita de día y de noche. Será como árbol plantado junto a corrientes de aguas, que da su fruto en su tiempo"</em> (Salmos 1:2&ndash;3, RVG). Note la imagen: un árbol que da fruto porque sus raíces están hundidas en una provisión constante de agua. Así es con el creyente que lee, oye, y medita en la Palabra regularmente &mdash; no a tropezones, sino día tras día. Por eso la lectura fiel de la Biblia, el fiel sentarse bajo la predicación de la Palabra en la iglesia reunida, y la disposición de sacrificar cosas menores por ella, están entre los modos más seguros en que crece un cristiano.</p>
+
+        <h2>III. Recibir la Palabra: Leer, Meditar, Memorizar, Obedecer</h2>
+        <p>Hay cuatro maneras sencillas de tomar la Palabra en la vida diaria, y el creyente que practica las cuatro estará bien alimentado. Primero, <em>léala</em>. Tenga un plan &mdash; una porción cada día, quizá un capítulo, o unos pocos versículos leídos despacio &mdash; para que con el tiempo todo el consejo de Dios pase por su corazón. Segundo, <em>medite</em> en ella. Meditar no es vaciar la mente sino llenarla: dar vuelta a un versículo despacio, como la vaca rumia, preguntando qué dice acerca de Dios, de nosotros mismos, y de cómo hemos de vivir. Tercero, <em>memorícela</em>. <em>"En mi corazón he guardado tus dichos, para no pecar contra ti"</em> (Salmos 119:11, RVG). Un versículo llevado en el corazón está listo en la hora de la tentación, cuando no hay Biblia abierta delante de nosotros. Cuarto, y sobre todo, <em>obedézcala</em>. Como aprendimos en nuestra primera unidad, hemos de ser <em>"hacedores de la palabra, y no tan solamente oidores"</em> (Santiago 1:22, RVG). El conocimiento que nunca se obedece envanece; la Palabra verdaderamente recibida siempre inclina la vida hacia la obediencia.</p>
+
+        <h2>IV. A Dónde Lleva la Palabra: A Cristo Mismo</h2>
+        <p>La Palabra escrita no es un fin en sí misma. Su gran propósito es traernos a una Persona. El Señor Jesús reprendió a los que escudriñaban las Escrituras y sin embargo erraban su punto: <em>"Escudriñad las Escrituras... ellas son las que dan testimonio de mí"</em> (Juan 5:39, RVG). Después de su resurrección, <em>"comenzando desde Moisés, y de todos los profetas, les declaraba en todas las Escrituras lo que de él decían"</em> (Lucas 24:27, RVG). Toda la Escritura apunta a Cristo, el Verbo vivo, de quien Juan escribió: <em>"Y el Verbo fue hecho carne, y habitó entre nosotros"</em> (Juan 1:14, RVG). Así que cuando abra su Biblia cada día, no lea meramente para reunir datos o para ganar discusiones; lea para encontrarse con su Señor, para oír su voz, y para ser transformado a su semejanza. La Palabra escrita en nuestras manos está destinada a llevarnos al Verbo vivo, Jesucristo.</p>
+
+        <h2>Conclusión</h2>
+        <p>La Palabra de Dios es nuestro alimento diario, el medio de nuestro crecimiento, y la senda que nos lleva a Cristo. Leerla, meditar en ella, memorizarla, y obedecerla no es una carga puesta sobre nosotros para ganar el favor de Dios, sino el privilegio de los hijos que se alimentan a la mesa de su Padre. Haga de la Palabra una compañera diaria, y hallará su andar con Dios afirmado, sus oraciones profundizadas, y su vida lenta pero seguramente conformada al Salvador de quien habla cada página.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 6 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></span><span class="lang-es"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></span></p>
+    <div class="exam-status hidden" id="examStatus"></div>
+<div class="mc-section" id="mcSection">
+  <h3><span class="lang-en">Multiple Choice &mdash; 20 Questions</span><span class="lang-es">Opción Múltiple &mdash; 20 Preguntas</span></h3>
+  <div id="mcContainer"></div>
+</div>
+<div class="sa-section" id="saSection">
+  <h3><span class="lang-en">Short Answer &mdash; 10 Questions <span class="sa-badge" id="saBadgeEn"></span></span><span class="lang-es">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="saBadgeEs"></span></span></h3>
+  <p class="sa-note"><span class="lang-en" id="saNoteEn"></span><span class="lang-es" id="saNoteEs"></span></p>
+  <div id="kwContainer"></div>
+</div>
+<div style="margin-top: 20px;">
+  <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+  <button id="resetExamBtn" class="btn-reset" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+  <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+</div>
+</div>
+
+<script>
+
+const TOTAL_UNITS = 10;
+const CURRENT_UNIT = 6;
+const NEXT_URL = 'CTSPTUnit7.html';
+const PREV_URL = 'CTSPTUnit5.html';
+
+// === MC + SA data ===
+const mcQuestions = [
+  {textEn:"1. According to Matthew 4:4, by what does man truly live?",
+   textEs:"1. Según Mateo 4:4, ¿de qué vive verdaderamente el hombre?",
+   optionsEn:["By the opinions of the world", "By bread alone", "By his own wisdom", "By every word that proceeds from the mouth of God"],
+   optionsEs:["De las opiniones del mundo", "Solo de pan", "De su propia sabiduría", "De toda palabra que sale de la boca de Dios"],correct:3},
+  {textEn:"2. How does Scripture most often picture the Word of God in relation to our need for it?",
+   textEs:"2. ¿Cómo retrata la Escritura con más frecuencia la Palabra de Dios en relación con nuestra necesidad de ella?",
+   optionsEn:["As an optional decoration", "As food we need daily", "As a burden too heavy to carry", "As a book only for scholars"],
+   optionsEs:["Como un adorno opcional", "Como alimento que necesitamos a diario", "Como una carga demasiado pesada", "Como un libro solo para eruditos"],correct:1},
+  {textEn:"3. What did Job say he treasured more than his necessary food?",
+   textEs:"3. ¿Qué dijo Job que estimaba más que su comida necesaria?",
+   optionsEn:["His own reputation", "His wealth and possessions", "The words of God's mouth", "The praise of others"],
+   optionsEs:["Su propia reputación", "Sus riquezas y posesiones", "Las palabras de la boca de Dios", "La alabanza de otros"],correct:2},
+  {textEn:"4. According to Hebrews 4:12, the word of God is...",
+   textEs:"4. Según Hebreos 4:12, la palabra de Dios es...",
+   optionsEn:["Living and powerful, sharper than any two-edged sword", "Difficult and best avoided", "Pleasant but powerless", "Outdated and weak"],
+   optionsEs:["Viva y eficaz, más penetrante que toda espada de dos filos", "Difícil y mejor evitarla", "Agradable pero sin poder", "Anticuada y débil"],correct:0},
+  {textEn:"5. What is the chief means by which a Christian grows in grace?",
+   textEs:"5. ¿Cuál es el medio principal por el cual un cristiano crece en la gracia?",
+   optionsEn:["Earning money for the church", "Feeding steadily on the Word of God", "Avoiding all other believers", "Gaining a position of authority"],
+   optionsEs:["Ganar dinero para la iglesia", "Alimentarse constantemente de la Palabra de Dios", "Evitar a todos los demás creyentes", "Obtener una posición de autoridad"],correct:1},
+  {textEn:"6. In Psalm 1, why does the blessed man bear fruit like a tree by the rivers of water?",
+   textEs:"6. En el Salmo 1, ¿por qué el varón bienaventurado da fruto como árbol junto a corrientes de aguas?",
+   optionsEn:["Because his delight is in the law of the Lord, on which he meditates day and night", "Because he is naturally talented", "Because he avoids all hardship", "Because he is wealthy"],
+   optionsEs:["Porque su delicia está en la ley de Jehová, en la que medita de día y de noche", "Porque es naturalmente talentoso", "Porque evita toda dificultad", "Porque es rico"],correct:0},
+  {textEn:"7. Which of these is one of the surest ways the unit says a Christian grows?",
+   textEs:"7. ¿Cuál de estas es uno de los modos más seguros en que, según la unidad, crece un cristiano?",
+   optionsEn:["Reading the Bible only on holidays", "Listening to no one but himself", "Faithful Bible reading and faithfully sitting under the preaching of the Word", "Avoiding the gathered church"],
+   optionsEs:["Leer la Biblia solo en días festivos", "No escuchar a nadie sino a sí mismo", "La lectura fiel de la Biblia y el fiel sentarse bajo la predicación de la Palabra", "Evitar la iglesia reunida"],correct:2},
+  {textEn:"8. What does it mean to 'meditate' on the Word, according to this unit?",
+   textEs:"8. ¿Qué significa 'meditar' en la Palabra, según esta unidad?",
+   optionsEn:["To empty the mind of all thought", "To read as fast as possible", "To repeat magic words", "To fill the mind by turning a verse over slowly, asking what it says about God and life"],
+   optionsEs:["Vaciar la mente de todo pensamiento", "Leer lo más rápido posible", "Repetir palabras mágicas", "Llenar la mente dando vuelta a un versículo despacio, preguntando qué dice de Dios y de la vida"],correct:3},
+  {textEn:"9. Why does the unit urge us to memorize Scripture (Psalm 119:11)?",
+   textEs:"9. ¿Por qué nos exhorta la unidad a memorizar la Escritura (Salmo 119:11)?",
+   optionsEn:["So a verse hidden in the heart is ready in the hour of temptation", "To impress other people", "To avoid ever reading the Bible again", "Because only memorized verses are true"],
+   optionsEs:["Para que un versículo guardado en el corazón esté listo en la hora de la tentación", "Para impresionar a otras personas", "Para no tener que volver a leer la Biblia", "Porque solo los versículos memorizados son verdaderos"],correct:0},
+  {textEn:"10. Above all the other ways of taking in the Word, what does the unit say we must do with it?",
+   textEs:"10. Por encima de las demás maneras de recibir la Palabra, ¿qué dice la unidad que debemos hacer con ella?",
+   optionsEn:["Argue about it", "Obey it — be doers of the word, not hearers only", "Hide it from others", "Read it once and forget it"],
+   optionsEs:["Discutir sobre ella", "Obedecerla — ser hacedores de la palabra, no solo oidores", "Esconderla de otros", "Leerla una vez y olvidarla"],correct:1},
+  {textEn:"11. What did Jesus say the Scriptures do, in John 5:39?",
+   textEs:"11. ¿Qué dijo Jesús que hacen las Escrituras, en Juan 5:39?",
+   optionsEn:["They make us wealthy", "They are a burden to be set aside", "They belong only to the past", "They testify of Him"],
+   optionsEs:["Nos hacen ricos", "Son una carga que debe dejarse de lado", "Pertenecen solo al pasado", "Dan testimonio de Él"],correct:3},
+  {textEn:"12. What is the great purpose of the written Word, according to this unit?",
+   textEs:"12. ¿Cuál es el gran propósito de la Palabra escrita, según esta unidad?",
+   optionsEn:["To fill our heads with facts", "To help us win every argument", "To bring us to a Person — Christ, the living Word", "To give us material for debate"],
+   optionsEs:["Llenar nuestra cabeza de datos", "Ayudarnos a ganar toda discusión", "Traernos a una Persona — Cristo, el Verbo vivo", "Darnos material para el debate"],correct:2},
+  {textEn:"13. After His resurrection, what did Jesus expound in all the Scriptures (Luke 24:27)?",
+   textEs:"13. Después de su resurrección, ¿qué declaró Jesús en todas las Escrituras (Lucas 24:27)?",
+   optionsEn:["The things concerning Himself", "A new set of laws", "The history of the nations", "Predictions about the weather"],
+   optionsEs:["Las cosas que de Él decían", "Un nuevo conjunto de leyes", "La historia de las naciones", "Predicciones sobre el clima"],correct:0},
+  {textEn:"14. How should we read our Bibles each day, according to the conclusion of this unit?",
+   textEs:"14. ¿Cómo debemos leer nuestra Biblia cada día, según la conclusión de esta unidad?",
+   optionsEn:["Only to gather facts", "To meet our Lord, hear His voice, and be changed into His likeness", "To prove we are better than others", "As quickly as possible to finish"],
+   optionsEs:["Solo para reunir datos", "Para encontrarnos con nuestro Señor, oír su voz, y ser transformados a su semejanza", "Para demostrar que somos mejores que otros", "Lo más rápido posible para terminar"],correct:1},
+  {textEn:"15. To what does Peter compare the believer's desire for the Word in 1 Peter 2:2?",
+   textEs:"15. ¿Con qué compara Pedro el deseo del creyente por la Palabra en 1 Pedro 2:2?",
+   optionsEn:["A soldier's weapon", "A merchant's gold", "A traveler's map", "A newborn baby's desire for pure milk"],
+   optionsEs:["El arma de un soldado", "El oro de un comerciante", "El mapa de un viajero", "El deseo de un recién nacido por la leche pura"],correct:3},
+  {textEn:"16. The four simple ways to take in the Word given in this unit are to read, meditate, memorize, and...",
+   textEs:"16. Las cuatro maneras sencillas de recibir la Palabra dadas en esta unidad son leer, meditar, memorizar, y...",
+   optionsEn:["Ignore it when inconvenient", "Keep it from others", "Obey it", "Argue over it"],
+   optionsEs:["Ignorarla cuando sea inconveniente", "Guardarla de otros", "Obedecerla", "Discutir sobre ella"],correct:2},
+  {textEn:"17. What did Jeremiah say happened when God's words were found (Jeremiah 15:16)?",
+   textEs:"17. ¿Qué dijo Jeremías que sucedió cuando fueron halladas las palabras de Dios (Jeremías 15:16)?",
+   optionsEn:["He ate them, and they were the joy and rejoicing of his heart", "He hid them away unread", "He gave them to others and kept none", "He grew weary of them"],
+   optionsEs:["Las comió, y fueron el gozo y la alegría de su corazón", "Las escondió sin leerlas", "Las dio a otros y no guardó ninguna", "Se cansó de ellas"],correct:0},
+  {textEn:"18. What does the unit warn about knowledge of the Word that is never obeyed?",
+   textEs:"18. ¿De qué advierte la unidad sobre el conocimiento de la Palabra que nunca se obedece?",
+   optionsEn:["It guarantees salvation by itself", "It is the highest goal", "It puffs up", "It pleases God fully"],
+   optionsEs:["Garantiza la salvación por sí mismo", "Es la meta más alta", "Envanece", "Agrada a Dios plenamente"],correct:2},
+  {textEn:"19. According to the unit, is reading, meditating, memorizing, and obeying the Word a way to earn God's favor?",
+   textEs:"19. Según la unidad, ¿es leer, meditar, memorizar, y obedecer la Palabra un modo de ganar el favor de Dios?",
+   optionsEn:["Yes, it earns our standing before God", "Yes, it is how we are first saved", "No — because the Word does not matter", "No — it is the privilege of children feeding at their Father's table"],
+   optionsEs:["Sí, gana nuestra posición ante Dios", "Sí, es como somos salvos primero", "No — porque la Palabra no importa", "No — es el privilegio de los hijos que se alimentan a la mesa de su Padre"],correct:3},
+  {textEn:"20. What happens to a believer who neglects the Word, according to the unit?",
+   textEs:"20. ¿Qué le sucede al creyente que descuida la Palabra, según la unidad?",
+   optionsEn:["He grows stronger on his own", "He grows weak, as a body grows weak that refuses to eat", "Nothing changes at all", "He needs it less over time"],
+   optionsEs:["Se hace más fuerte por sí mismo", "Se debilita, como se debilita un cuerpo que se niega a comer", "No cambia nada en absoluto", "La necesita menos con el tiempo"],correct:1}
+];
+
+const kwQuestions = [
+    {textEn:"21. According to Matthew 4:4, by what does man truly live, and what does this teach about the Word?",
+   textEs:"21. Según Mateo 4:4, ¿de qué vive verdaderamente el hombre, y qué enseña esto sobre la Palabra?",
+   kwEn:["word","mouth","god","bread","live","daily","need","food"],
+   kwEs:["palabra","boca","dios","pan","vive","diaria","necesidad","alimento"],
+      modelEn: 'According to Matthew 4:4, man shall not live by bread alone, but by every word that proceeds from the mouth of God. This teaches that the Word is as necessary to our spiritual life as food is to our physical life — we cannot truly live, spiritually, without it.',
+      modelEs: 'Según Mateo 4:4, no solo de pan vivirá el hombre, sino de toda palabra que sale de la boca de Dios. Esto enseña que la Palabra es tan necesaria para nuestra vida espiritual como el alimento lo es para nuestra vida física — no podemos vivir verdaderamente, en lo espiritual, sin ella.' },
+    {textEn:"22. Give two ways Scripture compares the Word of God to food.",
+   textEs:"22. Dé dos maneras en que la Escritura compara la Palabra de Dios con el alimento.",
+   kwEn:["food","milk","eat","job","jeremiah","peter","treasure","daily"],
+   kwEs:["alimento","leche","comer","job","jeremias","pedro","estimar","diaria"],
+      modelEn: 'Job said he treasured the words of God\'s mouth more than his necessary food (Job 23:12), and Jeremiah said God\'s words became to him the joy and rejoicing of his heart when he \'ate\' them (Jeremiah 15:16). Peter also urges believers, as newborn babes, to desire the pure milk of the word that they may grow by it (1 Peter 2:2).',
+      modelEs: 'Job dijo que estimó las palabras de la boca de Dios más que su comida necesaria (Job 23:12), y Jeremías dijo que las palabras de Dios se volvieron para él el gozo y la alegría de su corazón al \'comerlas\' (Jeremías 15:16). Pedro también exhorta a los creyentes, como niños recién nacidos, a desear la leche no adulterada de la palabra para que crezcan por ella (1 Pedro 2:2).' },
+    {textEn:"23. How does the Word of God make a Christian grow (2 Peter 3:18; Psalm 1)?",
+   textEs:"23. ¿Cómo hace crecer la Palabra de Dios a un cristiano (2 Pedro 3:18; Salmo 1)?",
+   kwEn:["grow","grace","feed","meditate","tree","fruit","daily","root"],
+   kwEs:["crecer","gracia","alimentar","meditar","arbol","fruto","diaria","raiz"],
+      modelEn: 'Peter\'s final command is to grow in the grace and knowledge of our Lord and Savior Jesus Christ (2 Peter 3:18), and this growth comes chiefly by feeding on the Word. Psalm 1 pictures the blessed man who meditates on God\'s law day and night as a tree planted by rivers of water, bearing fruit because its roots are sunk deep in a steady supply.',
+      modelEs: 'El último mandato de Pedro es crecer en la gracia y el conocimiento de nuestro Señor y Salvador Jesucristo (2 Pedro 3:18), y este crecimiento viene principalmente al alimentarse de la Palabra. El Salmo 1 describe al varón bienaventurado que medita en la ley de Dios de día y de noche como un árbol plantado junto a corrientes de aguas, que da fruto porque sus raíces están hundidas en un suministro constante.' },
+    {textEn:"24. Name the four ways to take the Word into daily life given in this unit.",
+   textEs:"24. Nombre las cuatro maneras de recibir la Palabra en la vida diaria dadas en esta unidad.",
+   kwEn:["read","meditate","memorize","obey","plan","heart","doer","daily"],
+   kwEs:["leer","meditar","memorizar","obedecer","plan","corazon","hacedor","diaria"],
+      modelEn: 'The four ways to take the Word into daily life are: read it, with a regular plan; meditate on it, turning a verse over slowly; memorize it, hiding it in the heart; and, above all, obey it, being a doer of the word and not a hearer only.',
+      modelEs: 'Las cuatro maneras de recibir la Palabra en la vida diaria son: leerla, con un plan regular; meditar en ella, dando vueltas despacio a un versículo; memorizarla, escondiéndola en el corazón; y, por encima de todo, obedecerla, siendo hacedor de la palabra y no tan solamente oidor.' },
+    {textEn:"25. What does it mean to meditate on the Word?",
+   textEs:"25. ¿Qué significa meditar en la Palabra?",
+   kwEn:["fill","mind","slowly","turn","verse","god","life","reflect"],
+   kwEs:["llenar","mente","despacio","dar","versiculo","dios","vida","reflexionar"],
+      modelEn: 'To meditate on the Word is not to empty the mind but to fill it — to turn a verse over slowly, the way a cow chews its cud, asking what it says about God, about ourselves, and about how we are to live. It is a slow, reflective dwelling on Scripture, not a quick reading and moving on.',
+      modelEs: 'Meditar en la Palabra no es vaciar la mente sino llenarla — dar vueltas despacio a un versículo, como una vaca rumia, preguntando qué dice acerca de Dios, de nosotros mismos, y de cómo debemos vivir. Es una morada lenta y reflexiva en la Escritura, no una lectura rápida para seguir adelante.' },
+    {textEn:"26. Why should we memorize Scripture (Psalm 119:11)?",
+   textEs:"26. ¿Por qué debemos memorizar la Escritura (Salmo 119:11)?",
+   kwEn:["hidden","heart","sin","ready","temptation","carry","word","guard"],
+   kwEs:["guardado","corazon","pecar","listo","tentacion","llevar","palabra","proteger"],
+      modelEn: 'Psalm 119:11 says, \'Your word I have hidden in my heart, that I might not sin against You.\' We should memorize Scripture because a verse carried in the heart is ready in the hour of temptation, when no Bible is open before us — it guards us from sin in the very moment we need it most.',
+      modelEs: 'Salmos 119:11 dice: \'En mi corazón he guardado tus dichos, para no pecar contra ti.\' Debemos memorizar la Escritura porque un versículo llevado en el corazón está listo en la hora de la tentación, cuando no hay Biblia abierta delante de nosotros — nos guarda del pecado en el mismo momento en que más lo necesitamos.' },
+    {textEn:"27. Above all, what must we do with the Word, and what verse teaches this?",
+   textEs:"27. Por encima de todo, ¿qué debemos hacer con la Palabra, y qué versículo lo enseña?",
+   kwEn:["obey","doer","hearer","james","live","action","word","deceive"],
+   kwEs:["obedecer","hacedor","oidor","santiago","vivir","accion","palabra","enganar"],
+      modelEn: 'Above all we must obey the Word, as James 1:22 teaches: \'be doers of the word, and not hearers only, deceiving yourselves.\' Knowledge that is never obeyed puffs up; the Word truly received always bends the life toward obedience, not just toward more information.',
+      modelEs: 'Por encima de todo debemos obedecer la Palabra, como enseña Santiago 1:22: \'sed, pues, hacedores de la palabra, y no tan solamente oidores, engañándoos a vosotros mismos.\' El conocimiento que nunca se obedece envanece; la Palabra verdaderamente recibida siempre inclina la vida hacia la obediencia, no solo hacia más información.' },
+    {textEn:"28. What is the great purpose of the written Word, and where does it lead us?",
+   textEs:"28. ¿Cuál es el gran propósito de la Palabra escrita, y a dónde nos lleva?",
+   kwEn:["christ","person","testify","living","lead","savior","meet","scripture"],
+   kwEs:["cristo","persona","testimonio","vivo","llevar","salvador","encontrar","escritura"],
+      modelEn: 'The great purpose of the written Word is not to be an end in itself but to bring us to a Person — Jesus Christ, the living Word. It leads us to meet our Lord, hear His voice, and be changed into His likeness, not merely to gather facts or win arguments.',
+      modelEs: 'El gran propósito de la Palabra escrita no es ser un fin en sí misma sino llevarnos a una Persona — Jesucristo, la Palabra viva. Nos lleva a encontrarnos con nuestro Señor, oír su voz, y ser transformados a su semejanza, no meramente a reunir datos o ganar discusiones.' },
+    {textEn:"29. How do the Scriptures relate to Christ (John 5:39; Luke 24:27)?",
+   textEs:"29. ¿Cómo se relacionan las Escrituras con Cristo (Juan 5:39; Lucas 24:27)?",
+   kwEn:["testify","christ","scripture","point","concerning","himself","reveal","jesus"],
+   kwEs:["testimonio","cristo","escritura","apuntar","decian","mismo","revelar","jesus"],
+      modelEn: 'Jesus said the Scriptures testify of Him (John 5:39), and after His resurrection He expounded in all the Scriptures, beginning at Moses and all the Prophets, the things concerning Himself (Luke 24:27). All Scripture, then, points to Christ, the living Word who became flesh and dwelt among us.',
+      modelEs: 'Jesús dijo que las Escrituras dan testimonio de Él (Juan 5:39), y después de su resurrección expuso en todas las Escrituras, comenzando desde Moisés y todos los Profetas, lo referente a sí mismo (Lucas 24:27). Toda la Escritura, entonces, apunta a Cristo, la Palabra viva que fue hecha carne y habitó entre nosotros.' },
+    {textEn:"30. Is feeding on the Word a way to earn God's favor, or something else?",
+   textEs:"30. ¿Es alimentarse de la Palabra un modo de ganar el favor de Dios, o algo más?",
+   kwEn:["not","earn","favor","privilege","child","father","grace","gift"],
+   kwEs:["no","ganar","favor","privilegio","hijo","padre","gracia","don"],
+      modelEn: 'Feeding on the Word is not a way to earn God\'s favor; it is the privilege of a child feeding at his Father\'s table. We are saved by grace through faith as the gift of God, so reading, meditating on, memorizing, and obeying the Word are gifts by which we grow in a relationship already given to us, not payments toward one we must win.',
+      modelEs: 'Alimentarse de la Palabra no es un modo de ganar el favor de Dios; es el privilegio de un hijo que se alimenta en la mesa de su Padre. Somos salvos por gracia por medio de la fe como el don de Dios, así que leer, meditar en, memorizar y obedecer la Palabra son dones por los cuales crecemos en una relación ya dada, no pagos hacia una que debamos ganar.' }
+
+];
+
+// === Language toggle (3-button group) ===
+const langButtons = document.querySelectorAll('.lang-toggle-group button');
+function setLang(lang) {
+  document.body.classList.remove('lang-en','lang-es','lang-both');
+  document.body.classList.add('lang-' + lang);
+  langButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-lang') === lang));
+}
+langButtons.forEach(btn => btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang'))));
+
+// === Student + Track ===
+function readStudent() {
+  try { return JSON.parse(localStorage.getItem('cts_student') || 'null'); } catch(e) { return null; }
+}
+function readTrack() {
+  const t = localStorage.getItem('cts_track');
+  if (t === 'cert' || t === 'mdiv' || t === 'thm') return t;
+  const st = readStudent();
+  if (st && st.track) return st.track;
+  return 'cert';
+}
+function isMdiv() { const t = readTrack(); return t === 'mdiv' || t === 'thm'; }
+
+// === Greeting + track badge ===
+function applyStudentUI() {
+  const student = readStudent();
+  const isEs = document.body.classList.contains('lang-es');
+  const greetEl = document.getElementById('studentGreeting');
+  const warn = document.getElementById('regWarn');
+  const slot = document.getElementById('trackBadgeSlot');
+  if (student && student.name) {
+    greetEl.innerHTML = '👋 ' + student.name;
+    if (warn) warn.classList.add('hidden');
+    const track = readTrack();
+    const label = track === 'thm' ? 'Th.M.' : (track === 'mdiv' ? 'M.Div' : (isEs ? 'Certificado' : 'Certificate'));
+    if (slot) slot.innerHTML = '<span class="track-badge">' + label + '</span>';
+  } else {
+    greetEl.innerHTML = '<span style="color:#5b3a1f;">' + (isEs ? 'Bienvenido a la Teología Práctica' : 'Welcome to Practical Theology') + '</span>';
+    if (warn) warn.classList.remove('hidden');
+    if (slot) slot.innerHTML = '';
+  }
+}
+
+// === Registration modal (U1 only) ===
+
+function showRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.remove('hidden');
+}
+function hideRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.add('hidden');
+}
+const regModal = document.getElementById('regModal');
+const openBtn = document.getElementById('openRegBtn');
+const openBtn2 = document.getElementById('openRegBtn2');
+const saveBtn = document.getElementById('regSaveBtn');
+if (openBtn) openBtn.addEventListener('click', showRegModal);
+if (openBtn2) openBtn2.addEventListener('click', showRegModal);
+if (saveBtn) saveBtn.addEventListener('click', () => {
+  const name = (document.getElementById('regName').value || '').trim();
+  const email = (document.getElementById('regEmail').value || '').trim();
+  const track = (document.querySelector('input[name="regTrack"]:checked') || {}).value || 'cert';
+  const isEs = document.body.classList.contains('lang-es');
+  if (!name) {
+    alert(isEs ? 'Por favor ingrese su nombre completo.' : 'Please enter your full name.');
+    return;
+  }
+  const rec = { name: name, email: email, track: track };
+  try {
+    localStorage.setItem('cts_student', JSON.stringify(rec));
+    localStorage.setItem('cts_track', track);
+  } catch(e) {
+    alert(isEs
+      ? 'No se pudo guardar su registro. Su navegador puede estar bloqueando el almacenamiento (por ejemplo, en modo privado). Su progreso no se guardar\u00e1 hasta que esto se resuelva.'
+      : 'Your registration could not be saved. Your browser may be blocking storage (for example, in private browsing mode). Your progress will not be saved until this is resolved.');
+  }
+  hideRegModal();
+  applyStudentUI();
+  applyExamState();
+});
+// Auto-open modal on U1 if no cts_student present
+if (CURRENT_UNIT === 1 && !readStudent()) {
+  showRegModal();
+}
+
+
+// === Progress grid ===
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem('cts_pt_progress')) || {}; } catch(e) { progress = {}; }
+function updateProgressGrid() {
+  const grid = document.getElementById('progressGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 1; i <= TOTAL_UNITS; i++) {
+    let cls = '';
+    if (progress['unit' + i]) cls = 'completed';
+    if (i === CURRENT_UNIT) cls += ' active';
+    grid.innerHTML += '<a href="CTSPTUnit' + i + '.html" class="' + cls + '">' + i + '</a>';
+  }
+}
+updateProgressGrid();
+document.getElementById('prevUnitBtn').onclick = () => { window.location.href = PREV_URL; };
+document.getElementById('nextUnitBtn').onclick = () => { window.location.href = NEXT_URL; };
+
+// === Per-unit state keys ===
+const MC_PASSED_KEY = 'cts_pt_u' + CURRENT_UNIT + '_mc_passed';
+const SA_PASSED_KEY = 'cts_pt_u' + CURRENT_UNIT + '_sa_passed';
+const MC_SCORE_KEY = 'cts_pt_u' + CURRENT_UNIT + '_mc_score';
+const LOCK_MC_KEY = 'cts_pt_u' + CURRENT_UNIT + '_lockout';
+const LOCK_SA_KEY = 'cts_pt_u' + CURRENT_UNIT + '_sa_lockout';
+
+function mcPassed() { return localStorage.getItem(MC_PASSED_KEY) === '1'; }
+function saPassed() { return localStorage.getItem(SA_PASSED_KEY) === '1'; }
+function activeLock() {
+  const now = Date.now();
+  const mc = parseInt(localStorage.getItem(LOCK_MC_KEY) || '0', 10);
+  const sa = parseInt(localStorage.getItem(LOCK_SA_KEY) || '0', 10);
+  if (mcPassed()) { if (now < sa) return { until: sa, scope: 'sa' }; }
+  else { if (now < mc) return { until: mc, scope: 'mc' }; }
+  return null;
+}
+
+// === Render MC ===
+const mcContainer = document.getElementById('mcContainer');
+mcQuestions.forEach((q, idx) => {
+    /* CTS answer-shuffle (anti-gaming): randomize option order on each render */
+    (function(){var _o=q.optionsEn,_s=q.optionsEs,_n=_o.length,_p=[],_k,_i,_j,_t;for(_k=0;_k<_n;_k++){_p.push(_k);}for(_i=_n-1;_i>0;_i--){_j=Math.floor(Math.random()*(_i+1));_t=_p[_i];_p[_i]=_p[_j];_p[_j]=_t;}q.optionsEn=_p.map(function(x){return _o[x];});q.optionsEs=_p.map(function(x){return _s[x];});q.correct=_p.indexOf(q.correct);})();
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'mcq' + (idx + 1);
+  let h = '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>';
+  for (let i = 0; i < 4; i++) {
+    const letter = 'ABCD'[i];
+    h += '<button class="option" data-mc="' + idx + '" data-opt="' + i + '" type="button">' +
+         '<strong>' + letter + '.</strong> ' +
+         '<span class="lang-en">' + q.optionsEn[i] + '</span><span class="lang-es">' + q.optionsEs[i] + '</span>' +
+         '</button>';
+  }
+  mcContainer.appendChild(qDiv);
+  qDiv.innerHTML = h;
+  // Click handler on each option
+  qDiv.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (mcPassed()) return;
+      if (qDiv.dataset.answered !== undefined && qDiv.dataset.answered !== '') return;
+      const isEs = document.body.classList.contains('lang-es');
+      const chosen = parseInt(btn.getAttribute('data-opt'), 10);
+      const correct = q.correct;
+      qDiv.dataset.answered = String(chosen);
+      qDiv.querySelectorAll('.option').forEach(b => {
+        const oi = parseInt(b.getAttribute('data-opt'), 10);
+        b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+        if (oi === correct) b.classList.add('correct');
+        else if (oi === chosen) b.classList.add('wrong');
+      });
+      const oldfb = qDiv.querySelector('.feedback-text'); if (oldfb) oldfb.remove();
+      const fb = document.createElement('div');
+      if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+      else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+      qDiv.appendChild(fb);
+    });
+  });
+});
+
+// === Smart keyword matcher (word-boundary, like the other CTS courses) ===
+function kwHit(answer, kw){
+  if(!kw) return false;
+  var a=(answer||'').toLowerCase();
+  var k=String(kw).toLowerCase().trim();
+  if(!k) return false;
+  var esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var L='0-9a-zA-Z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1';
+  var re = k.length<=3 ? new RegExp('(?:^|[^'+L+'])'+esc+'(?!['+L+'])') : new RegExp('(?:^|[^'+L+'])'+esc);
+  return re.test(a);
+}
+function revealSAModel(idx){
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var box=document.getElementById('saModel'+idx);
+  if(!box) return;
+  var head=isEs?'Respuesta modelo \u2014 est\u00fadiela':'Model answer \u2014 study this';
+  box.innerHTML='<strong>'+head+':</strong><br>'+(isEs?(q.modelEs||''):(q.modelEn||''));
+  box.style.display='block';
+}
+
+// === Render SA ===
+const kwContainer = document.getElementById('kwContainer');
+kwQuestions.forEach((q, idx) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'saq' + (idx + 1);
+  qDiv.innerHTML =
+    '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>' +
+    '<textarea class="kw-answer" data-sa="' + idx + '" placeholder=""></textarea>' +
+    '<button class="small check-kw-btn" type="button"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>' +
+    '<div class="feedback-text" id="saFb' + idx + '" style="display:none"></div>' +
+    '<div class="sa-model" id="saModel' + idx + '" style="display:none"></div>';
+  kwContainer.appendChild(qDiv);
+  const btn = qDiv.querySelector('.check-kw-btn');
+  const ta = qDiv.querySelector('.kw-answer');
+  btn.addEventListener('click', () => {
+    const isEs = document.body.classList.contains('lang-es');
+    const fb = document.getElementById('saFb' + idx);
+    const ans = (ta.value || '').trim();
+    if(!ans){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba su respuesta primero, luego verifique.' : 'Write your answer first, then check.';
+      var mb=document.getElementById('saModel'+idx); if(mb) mb.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    if(ans.length < 100){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba una respuesta m\u00e1s completa (m\u00ednimo 100 caracteres) antes de verificar.' : 'Write a fuller answer (100 characters minimum) before checking.';
+      var mb2=document.getElementById('saModel'+idx); if(mb2) mb2.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    const kws = isEs ? (q.kwEs || []) : (q.kwEn || []);
+    let hits = 0;
+    kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+    const ok = hits >= 3;
+    qDiv.dataset.answered = ok ? '1' : '0';
+    fb.className = 'feedback-text ' + (ok ? 'correct' : 'incorrect');
+    fb.style.display = 'block';
+    fb.textContent = ok
+      ? (isEs ? ('\u2713 Suficientes palabras clave (' + hits + ').') : ('\u2713 Sufficient keywords (' + hits + ').'))
+      : (isEs ? ('\u2717 A\u00fan no acreditada. Encontr\u00f3 ' + hits + ' de 3.') : ('\u2717 Not yet credited. Found ' + hits + ' of 3.'));
+    revealSAModel(idx);
+  });
+});
+
+// === UI state machine ===
+const mcSection = document.getElementById('mcSection');
+const saSection = document.getElementById('saSection');
+const statusEl = document.getElementById('examStatus');
+const submitBtn = document.getElementById('submitExamBtn');
+const resetBtn = document.getElementById('resetExamBtn');
+const resultEl = document.getElementById('examResult');
+
+function setStatus(cls, en, es) {
+  statusEl.className = 'exam-status ' + cls;
+  statusEl.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function clearStatus() { statusEl.className = 'exam-status hidden'; statusEl.innerHTML = ''; }
+function lockMcAsReview() {
+  document.querySelectorAll('#mcContainer .question').forEach(q => {
+    q.classList.add('review-locked');
+    q.querySelectorAll('.option').forEach(b => { b.disabled = true; });
+  });
+}
+
+function revealMC() {
+  const isEs = document.body.classList.contains('lang-es');
+  for (let i = 0; i < mcQuestions.length; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (!qd) continue;
+    const correct = mcQuestions[i].correct;
+    const chosen = (qd.dataset.answered !== undefined && qd.dataset.answered !== '') ? parseInt(qd.dataset.answered, 10) : -1;
+    qd.querySelectorAll('.option').forEach(b => {
+      const oi = parseInt(b.getAttribute('data-opt'), 10);
+      b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+      if (oi === correct) b.classList.add('correct');
+      else if (oi === chosen) b.classList.add('wrong');
+    });
+    let fb = qd.querySelector('.feedback-text');
+    if (!fb) { fb = document.createElement('div'); qd.appendChild(fb); }
+    if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+    else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+  }
+}
+
+
+function applyExamState() {
+  const isEs = document.body.classList.contains('lang-es');
+  // SA section is ALWAYS visible
+  saSection.style.display = '';
+  const badgeEn = document.getElementById('saBadgeEn');
+  const badgeEs = document.getElementById('saBadgeEs');
+  const noteEn = document.getElementById('saNoteEn');
+  const noteEs = document.getElementById('saNoteEs');
+  if (isMdiv()) {
+    badgeEn.textContent = 'Required for M.Div';
+    badgeEs.textContent = 'Requerido para M.Div';
+    noteEn.textContent = 'These 10 short-answer questions are required to complete Unit ' + CURRENT_UNIT + ' on the M.Div track. You must pass at 9 of 10.';
+    noteEs.textContent = 'Estas 10 preguntas de respuesta corta son requeridas para completar la Unidad ' + CURRENT_UNIT + ' en la vía M.Div. Debe aprobar con 9 de 10.';
+  } else {
+    badgeEn.textContent = 'Self-study — not graded for Certificate';
+    badgeEs.textContent = 'Auto-estudio — no cuenta para Certificado';
+    noteEn.textContent = 'These are the M.Div-level questions. Certificate students are welcome to attempt them for self-check; your answers will not affect your Unit ' + CURRENT_UNIT + ' pass status.';
+    noteEs.textContent = 'Estas son las preguntas de nivel M.Div. Los estudiantes de Certificado pueden intentarlas para auto-evaluarse; sus respuestas no afectarán el estado de aprobación de la Unidad ' + CURRENT_UNIT + '.';
+  }
+  const lock = activeLock();
+  if (lock) {
+    const minsLeft = Math.ceil((lock.until - Date.now()) / 60000);
+    submitBtn.disabled = true;
+    if (lock.scope === 'mc') {
+      setStatus('locked',
+        'Exam locked. Try again in ' + minsLeft + ' minute(s). The full exam will reset.',
+        'Examen bloqueado. Intente de nuevo en ' + minsLeft + ' minuto(s). El examen completo se reiniciará.');
+    } else {
+      setStatus('locked',
+        'Short-answer section locked. Try again in ' + minsLeft + ' minute(s). Multiple-choice pass is preserved.',
+        'Sección de respuesta corta bloqueada. Intente de nuevo en ' + minsLeft + ' minuto(s). Su aprobación de opción múltiple se conserva.');
+      lockMcAsReview();
+    }
+    setTimeout(applyExamState, 30000);
+    return;
+  }
+  submitBtn.disabled = false;
+  if (mcPassed()) {
+    lockMcAsReview();
+    if (isMdiv() && !saPassed()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed (saved). Complete the 10 short-answer questions to finish Unit ' + CURRENT_UNIT + '.',
+        'Opción múltiple aprobada (guardada). Complete las 10 preguntas de respuesta corta para terminar la Unidad ' + CURRENT_UNIT + '.');
+    } else if (!isMdiv()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed. Unit ' + CURRENT_UNIT + ' complete for Certificate track.',
+        'Opción múltiple aprobada. Unidad ' + CURRENT_UNIT + ' completa para la vía Certificado.');
+    } else {
+      clearStatus();
+    }
+  } else {
+    clearStatus();
+  }
+}
+
+function revealAllMC(){
+  const isEs = document.body.classList.contains('lang-es');
+  mcQuestions.forEach((q, i) => {
+    const qDiv = document.getElementById('mcq' + (i + 1));
+    if (!qDiv) return;
+    if (qDiv.querySelector('.feedback-text')) return;
+    const chosen = (qDiv.dataset.answered !== undefined && qDiv.dataset.answered !== '') ? parseInt(qDiv.dataset.answered, 10) : -1;
+    const correct = q.correct;
+    qDiv.querySelectorAll('.option').forEach(b => {
+      const oi = parseInt(b.getAttribute('data-opt'), 10);
+      b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+      if (oi === correct) b.classList.add('correct');
+      else if (oi === chosen) b.classList.add('wrong');
+    });
+    const fb = document.createElement('div');
+    if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '\u2713 \u00a1Correcto!' : '\u2713 Correct!'; }
+    else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '\u2717 Incorrecto. Respuesta correcta: ' : '\u2717 Incorrect. Correct answer: ') + cL; }
+    qDiv.appendChild(fb);
+  });
+}
+submitBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const lock = activeLock();
+  if (lock) { applyExamState(); return; }
+  revealAllMC();
+
+  // Score MC
+  let mc = 0;
+  for (let i = 0; i < 20; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (qd && qd.dataset.answered !== undefined && parseInt(qd.dataset.answered, 10) === mcQuestions[i].correct) mc++;
+  }
+  if (mcPassed()) {
+    mc = parseInt(localStorage.getItem(MC_SCORE_KEY) || '18', 10);
+  }
+  const mcPass = mc >= 18;
+  revealMC();
+
+  // Score SA
+  let sa = 0;
+  for (let i = 0; i < 10; i++) {
+    const qd = document.getElementById('saq' + (i + 1));
+    if (qd && qd.dataset.answered === '1') sa++;
+  }
+  const saPass = sa >= 9;
+
+  if (!isMdiv()) {
+    // Certificate track — only MC matters
+    if (mcPass) {
+      localStorage.setItem(MC_PASSED_KEY, '1');
+      localStorage.setItem(MC_SCORE_KEY, String(mc));
+      progress['unit' + CURRENT_UNIT] = true;
+      localStorage.setItem('cts_pt_progress', JSON.stringify(progress));
+      resultEl.style.color = '#1f6b3b';
+      resultEl.textContent = (isEs
+        ? '¡Aprobado! OM ' + mc + '/20. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+        : 'Passed! MC ' + mc + '/20. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+    } else {
+      localStorage.setItem(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+    }
+    return;
+  }
+
+  // M.Div track
+  if (!mcPassed()) {
+    if (!mcPass) {
+      localStorage.setItem(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min. Examen completo se reiniciará.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min. Full exam will reset.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+      return;
+    }
+    localStorage.setItem(MC_PASSED_KEY, '1');
+    localStorage.setItem(MC_SCORE_KEY, String(mc));
+  }
+  if (saPass) {
+    localStorage.setItem(SA_PASSED_KEY, '1');
+    progress['unit' + CURRENT_UNIT] = true;
+    localStorage.setItem('cts_pt_progress', JSON.stringify(progress));
+    const finalMc = parseInt(localStorage.getItem(MC_SCORE_KEY) || '18', 10);
+    resultEl.style.color = '#1f6b3b';
+    resultEl.textContent = (isEs
+      ? '¡Aprobado! OM ' + finalMc + '/20, RC ' + sa + '/10. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+      : 'Passed! MC ' + finalMc + '/20, SA ' + sa + '/10. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+  } else {
+    localStorage.setItem(LOCK_SA_KEY, String(Date.now() + 15 * 60 * 1000));
+    resultEl.style.color = '#8a1f1f';
+    resultEl.textContent = (isEs
+      ? 'RC ' + sa + '/10. Necesita 9. Sección RC bloqueada 15 min. OM permanece aprobada.'
+      : 'SA ' + sa + '/10. Need 9. SA section locked 15 min. MC pass preserved.');
+    submitBtn.disabled = true;
+    setTimeout(applyExamState, 30000);
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar la Unidad ' + CURRENT_UNIT + '? Esto borrará sus respuestas y el estado de aprobación de OM/RC para esta unidad. (Esto no borra su registro.)'
+    : 'Reset Unit ' + CURRENT_UNIT + '? This will clear your answers and MC/SA pass state for this unit. (Does not clear your registration.)';
+  if (!window.confirm(msg)) return;
+  [MC_PASSED_KEY, SA_PASSED_KEY, LOCK_MC_KEY, LOCK_SA_KEY, MC_SCORE_KEY].forEach(k => localStorage.removeItem(k));
+  if (progress['unit' + CURRENT_UNIT]) {
+    delete progress['unit' + CURRENT_UNIT];
+    localStorage.setItem('cts_pt_progress', JSON.stringify(progress));
+  }
+  window.location.reload();
+});
+
+// Initial render
+applyStudentUI();
+langButtons.forEach(b => b.addEventListener('click', applyStudentUI));
+applyExamState();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

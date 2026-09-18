@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS New Testament Survey — Unit 7: Romans, Corinthians, Galatians</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+.track-bar { background: #f6f1e8; border: 1px solid #d7cec1; border-radius: 12px; padding: 12px 16px; margin: 15px 0; }
+.track-bar label { margin-right: 18px; cursor: pointer; font-size: 0.95rem; }
+.track-bar input[type=radio] { margin-right: 6px; vertical-align: middle; }
+.reset-btn { background: #8a5a3a; color: white; border: none; border-radius: 30px; padding: 8px 18px; cursor: pointer; font-family: inherit; margin-left: 10px; font-size: 0.9rem; }
+.reset-btn:hover { background: #6e4528; }
+.redirect-notice { background: #e8f5ea; border: 1px solid #b9dfc2; color: #1f6b3b; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-weight: bold; }
+@media print {
+  @page { margin: 0.5in; }
+  body { background: white; color: black; font-size: 12pt; padding: 0; }
+  .nav-bar, .toggle-btn, #submitExamBtn, .reset-btn, #examResult, .track-bar, button.small { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; padding: 12px; margin-bottom: 12px; }
+  .question { page-break-inside: avoid; }
+  h1, h2, h3 { color: black; page-break-after: avoid; }
+  .option { background: white; border-color: #999; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" >← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 New Testament Survey — Unit 7: Romans, Corinthians, Galatians: Liberty and the Functional Church</span><span class="lang-es">📖 Estudio del Nuevo Testamento — Unidad 7: Romanos, Corintios, Gálatas: Libertad y la Iglesia Funcional</span></h1>
+    <p><span class="lang-en"><strong>Course Author:</strong> Dr. Wayne Cook | <strong>Seminary Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Autor del Curso:</strong> Dr. Wayne Cook | <strong>Director del Seminario:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic;"></p>
+</div>
+
+<div class="card" id="teachingContent">
+<div class="lang-en">
+        <h2>I. Three Letters, One Apostle, One Theme</h2>
+        <p>If you wanted to understand the soul of the apostle Paul, you needed to read three of his letters in order: <em>Romans</em>, then <em>1 and 2 Corinthians</em>, then <em>Galatians.</em> These three constellations of Paul's writing answer three of the largest questions a Christian ever asks. Romans answers, <em>How can a sinner be made right with a holy God?</em> The Corinthians answer, <em>How can a divided, struggling, often-failing church learn to function?</em> Galatians answers, <em>How can a Christian, once made free, stay free?</em> Three letters. Three questions. One Apostle. One theme that ties them all together: <strong>liberty</strong> — liberty <em>from</em> the guilt of sin in Romans, liberty <em>in</em> the Body of Christ in Corinthians, liberty <em>through</em> grace in Galatians.</p>
+
+        <p>The apostle Paul was the closest the New Testament comes to a systematic theologian. Peter writes from his heart. John writes from his memory. James writes from the pulpit. But Paul writes from his mind — a Pharisee's trained mind on fire with grace. The three letters we will survey in this unit are his three most argument-driven works, and they sit together in the Pauline letter cluster like the three legs of a stool. Pull any one of them out and the Christian life loses its balance.</p>
+
+        <h2>II. Romans — The Gospel from Top to Bottom</h2>
+        <p>Paul wrote Romans from the city of Corinth in or about AD 57, on the eve of his planned trip to Jerusalem with the offering and his hoped-for journey thereafter to Spain (Romans 15:23–28). He addressed it to a church he had never visited — a congregation he intended to meet for the first time on his way west. He wanted them to know him by his gospel before they knew him by his face. So he sat down and wrote out the most complete summary of the Christian gospel ever put on paper.</p>
+
+        <p>Romans falls cleanly into three sections that follow the great verbs of salvation. Chapters 1–8 deal with <em>justification</em> — how a sinner is declared righteous in the courtroom of heaven. Paul begins by demonstrating that the whole human race — Gentile pagans (chapter 1), self-righteous moralists (chapter 2), and religious Jews (chapter 3) — stands guilty before God. <em>"For all have sinned, and come short of the glory of God"</em> (Romans 3:23). Then comes the gospel: <em>"Being justified freely by His grace through the redemption that is in Christ Jesus"</em> (Romans 3:24). Romans 5 traces the parallel between Adam and Christ; Romans 6 explains union with Christ in His death and resurrection; Romans 7 wrestles with the indwelling struggle of the believer; Romans 8 crescendos into the great chapter of the Spirit and the unshakable love of God — <em>"Who shall separate us from the love of Christ?"</em> (Romans 8:35). Chapters 9–11 wrestle with the place of <em>Israel</em> in God's redemptive plan; chapters 12–16 turn to practical Christian living. Body, mind, gifts, government, conscience, the weak and the strong, the goal of unity — Paul lands the soaring theology of Romans 1–11 on the ground of how a Christian lives the next morning.</p>
+
+        <p>The key verse of Romans hangs over the whole letter: <em>"For I am not ashamed of the gospel of Christ, for it is the power of God to salvation for everyone who believes, for the Jew first and also for the Greek"</em> (Romans 1:16). Romans has changed more lives than any other book in the Bible. Augustine, on a garden bench in Milan in AD 386, heard a child singing <em>"Take up and read,"</em> picked up the book of Romans, read chapter 13:13–14, and was converted on the spot. Martin Luther, lecturing on Romans 1:17 in Wittenberg in the early 1500s, came to see that <em>"the just shall live by faith"</em> — and the Protestant Reformation was born. John Wesley, on Aldersgate Street in London on May 24, 1738, heard Luther's preface to Romans read aloud and felt his heart <em>strangely warmed.</em> The fire of every great spiritual awakening since the apostles has been lit from the same pages.</p>
+
+        <h2>III. 1 Corinthians — The Functional Church</h2>
+        <p>If Romans is Paul's most systematic letter, the Corinthian letters are his most pastoral. Paul wrote 1 Corinthians from Ephesus in or about AD 55. He had founded the Corinthian church on his second missionary journey (Acts 18). He had stayed in the city eighteen months, working as a tentmaker by day and preaching by night. Corinth was a great commercial port — wealthy, multicultural, sexually permissive, intellectually proud. After Paul left, the church he had planted began to fall apart. The congregation split into competing factions. A man in the church was living openly in incest. Believers were taking each other to pagan courts. There was confusion over marriage, food, gender roles, head coverings, the Lord's Supper, spiritual gifts, and the resurrection. The Corinthian church was a beautiful disaster, and Paul wrote to put it back together.</p>
+
+        <p>The structure of 1 Corinthians follows Paul's responses to two kinds of input. Chapters 1–6 respond to what Paul had heard about the church <em>"by the household of Chloe"</em> (1 Corinthians 1:11) — divisions, immorality, lawsuits. Chapters 7–16 respond to a letter the Corinthians had sent him with their own questions — <em>"now concerning the things of which you wrote to me"</em> (1 Corinthians 7:1). What follows is the single most practical Christian-living manual in the New Testament. Marriage and singleness (chapter 7). Food sacrificed to idols and Christian liberty (chapters 8–10). Worship and the Lord's Supper (chapter 11). Spiritual gifts and the Body of Christ (chapter 12). Love as the supreme gift, in the most famous chapter Paul ever wrote (chapter 13). The proper use of tongues and prophecy in the assembly (chapter 14). And then, towering over all of it, the great resurrection chapter — <em>"Now if Christ is preached that He has been raised from the dead, how do some among you say that there is no resurrection of the dead?"</em> (1 Corinthians 15:12). The key verse holds it all together: <em>"All things are lawful for me, but not all things are helpful; all things are lawful for me, but not all things edify"</em> (1 Corinthians 10:23). Liberty must serve love. That is the functional church.</p>
+
+        <h2>IV. 2 Corinthians — The Pastor's Heart</h2>
+        <p>Paul wrote 2 Corinthians from Macedonia, perhaps a year after the first letter, in or about AD 56. Between the two letters Paul had passed through what he calls in chapter 1 a trial in Asia that pressed him <em>"out of measure, above strength, so that we despaired even of life"</em> (2 Corinthians 1:8). He had also been wounded by the Corinthian church itself — by their suspicion, their criticism of his ministry, and the appearance among them of false apostles claiming to be more spiritual than he was. If 1 Corinthians is Paul's instruction manual, 2 Corinthians is Paul's open heart. It is the most personal letter he ever wrote.</p>
+
+        <p>The letter has three movements. Chapters 1–7 defend Paul's apostolic ministry and his pastoral integrity. Chapters 8–9 organize the great relief offering for the impoverished saints in Jerusalem — the most extended teaching on Christian giving in the New Testament. <em>"God loves a cheerful giver"</em> (2 Corinthians 9:7) sits in this section. Chapters 10–13 turn fierce, as Paul defends his apostleship against the so-called <em>"super-apostles"</em> who had infiltrated the church. The signature confession of the letter — and arguably the most beautiful sentence Paul ever wrote about Christian weakness — is in chapter 12. Paul, after recounting a vision of being caught up to the third heaven, says he was given <em>"a thorn in the flesh, a messenger of Satan to buffet me, lest I be exalted above measure"</em> (12:7). Three times he begged the Lord to take it away. The Lord's reply became Paul's pastoral motto for the rest of his life: <em>"My grace is sufficient for you, for My strength is made perfect in weakness"</em> (12:9). The functional church is not the strong church. The functional church is the weak church carried by the strong Christ.</p>
+
+        <h2>V. Galatians — Liberty in the Gospel</h2>
+        <p>Galatians is the shortest of these three letter clusters, and the hottest. It is Paul's <em>charter of Christian liberty.</em> Paul wrote it to the churches of Galatia in central Asia Minor — churches he had founded on his first missionary journey (Acts 13–14) — after he heard that traveling Jewish teachers known as <em>Judaizers</em> had moved into the region behind him. They were telling Paul's converts that faith in Christ was a fine start, but to be truly saved they also needed to be circumcised and keep the Mosaic law. Paul exploded. There is no salutation of thanksgiving in Galatians as there is in every other Paul letter. He skips the kindnesses and goes straight for the throat. <em>"I marvel that you are turning away so soon from Him who called you in the grace of Christ, to a different gospel"</em> (Galatians 1:6).</p>
+
+        <p>The letter has three sections. Chapters 1–2 defend the divine origin of Paul's gospel — it came to him not from men but by direct revelation of Jesus Christ. Chapters 3–4 argue from Scripture itself, from Abraham to Habakkuk, that the just have always lived by faith, never by works of the law. Chapters 5–6 apply the doctrine to the Christian life: liberty is not a license to sin; it is the freedom to walk in the Spirit and produce the fruit of the Spirit (Galatians 5:22–23). The key verse of Galatians is one verse from Paul's own pen that has been quoted by every revival preacher since the Reformation: <em>"I have been crucified with Christ; it is no longer I who live, but Christ lives in me; and the life which I now live in the flesh I live by faith in the Son of God, who loved me and gave Himself for me"</em> (Galatians 2:20).</p>
+
+        <h2>VI. Law and Grace — The Heart of Galatians</h2>
+        <p>The story is told of an old Native American believer who attended a Sunday school class in Oakland, California in the 1920s. The young people were arguing about law and grace, and could not seem to come to a clear understanding. Finally one of them turned to him and said, <em>"Friend, can you help us?"</em> The old man stood up and said: <em>"Let me try. When my pastor brought me from Arizona we took a train, and we got off at Barstow at the most beautiful train station I have ever seen. I walked all around the station, and at one end I saw a sign that said, 'Do not spit here.' I looked at that sign, and looked down at the ground, and saw that many had spit there, and before I had even finished thinking, I had spit there myself. Isn't that strange — when the sign says 'Do not spit'? Then we came to Oakland, and I went to the home of the lady who invited me to dinner today. I have never been in a finer home. Beautiful carpets, fine furniture, a grand piano. I looked all around the rooms for a sign that said, 'Do not spit here.' I could not find one. I thought, what a pity in such a beautiful home that they do not have a sign — people will spit all over it. But I looked all over those carpets, and nobody had spit there. What a queer thing! Where the sign was, people spit. Where there was no sign, nobody spit. Now I understand. The sign is the law. Inside the home is grace. They love their beautiful home. They want to keep it clean. They do not need a sign to tell them so."</em></p>
+
+        <p>That is Galatians in one parable. The law says <em>do not</em>. Grace says <em>I am loved</em>. The law commands from the outside. Grace transforms from the inside. The law shows the sinner what he is. Grace shows the sinner what he is becoming. A duck hunter caught out in a Georgia brush fire knew the only way to survive was to light another small fire around himself and stand inside the burned-over ground while the wall of flame swept over the spot where the fire had already passed. <em>"Fire does not pass where fire has already passed."</em> Calvary is the burned-over ground. The wrath of God has already passed over the spot where the Lord Jesus stood, and the believer who stands in Christ does not have to fear the brush fire of judgment, because the fire has already gone through. That is grace.</p>
+
+        <h2>VII. The Body of Christ — The Heart of 1 Corinthians 12</h2>
+        <p>1 Corinthians 12 was the most important chapter in the New Testament for understanding how a local church is supposed to work. Paul takes the human body as his picture. The body has many members — eyes, ears, hands, feet — and each member has a different function, but every one of them is necessary, and every one of them belongs. <em>"There should be no schism in the body, but that the members should have the same care for one another. And if one member suffers, all the members suffer with it; or if one member is honored, all the members rejoice with it"</em> (1 Corinthians 12:25–26).</p>
+
+        <p>The chapter teaches three things every congregation needs to learn. <strong>(1)</strong> Diversity is not a problem; it is the design. The eye is not better than the foot; the hand is not better than the ear; the church is meant to be a body of many gifts and many backgrounds, not a row of identical pews. <strong>(2)</strong> Every member matters. The most hidden member — the one who serves quietly, who prays, who comforts, who gives without recognition — is in Paul's word <em>more abundant honor</em> than the visible parts (12:23). <strong>(3)</strong> Love is the only nervous system that holds the body together. Take Paul's body metaphor in chapter 12 and add chapter 13 — the love chapter — and you have the functional church. <em>"And though I have the gift of prophecy, and understand all mysteries and all knowledge, and though I have all faith, so that I could remove mountains, but have not love, I am nothing"</em> (1 Corinthians 13:2). Without love, the body falls apart. With love, the body becomes the dwelling place of Christ.</p>
+
+        <h2>VIII. The Resurrection Chapter</h2>
+        <p>And over all the practical chaos of Corinth, Paul throws one chapter that anchors everything: 1 Corinthians 15. Some at Corinth had begun to deny the bodily resurrection of the dead. Paul answers with the longest sustained argument on the resurrection in the New Testament. He starts with the historical fact: Christ died, was buried, rose on the third day, appeared to Cephas, then to the Twelve, then to over five hundred at once, most of whom were still alive when Paul was writing — <em>go ask them</em> (15:5–6). Then he draws the line: <em>"If Christ is not risen, your faith is futile; you are still in your sins"</em> (15:17). But He is risen. And because He is, the believer has a coming resurrection. The chapter climaxes with Paul shouting to the cemetery in the language of Hosea: <em>"O Death, where is your sting? O Hades, where is your victory?"</em> (15:55).</p>
+
+        <p>1 Corinthians 15 is the verse the Christian funeral was made for. A believer does not bury a corpse; a believer plants a seed. <em>"It is sown a natural body, it is raised a spiritual body"</em> (15:44). The functional church does not give up at the graveside. It plants and waits, because the resurrection of Jesus has guaranteed that no grave that holds a believer holds him long.</p>
+
+        <h2>IX. Three Letters, One Liberty</h2>
+        <p>Consider what the connecting thread is that runs through these three Pauline letter clusters. It comes down to one word: <em>liberty.</em> Romans gives the believer liberty <em>from</em> condemnation — the chains of guilt fall off when the soul stands in Romans 8. The Corinthians give the believer liberty <em>in</em> the Body — the freedom to be different, to serve in love, to use one's particular gift, to belong without conformity. Galatians gives the believer liberty <em>through</em> grace — the freedom from the treadmill of trying to earn what Christ has already purchased. Three letters. One liberty. One Christ.</p>
+
+        <p>And so the apostle who once stood breathing threats and murder against the disciples in Damascus, who lay blinded on the road, who was carried by the hand into the house of Judas on the Street called Straight, became the apostle of liberty for the rest of the world. <em>"Stand fast therefore in the liberty by which Christ has made us free, and do not be entangled again with a yoke of bondage"</em> (Galatians 5:1). Press on, my friend, into the rest of the New Testament with the same Lord who freed Paul on the Damascus Road, who freed Augustine in the garden of Milan, who freed Luther in the lecture hall of Wittenberg, who freed Wesley on Aldersgate Street, and who is the same yesterday, today, and forever. Stand fast in His liberty. Amen.</p>
+    </div>
+<div class="lang-es">
+        <h2>I. Tres cartas, un apóstol, un tema</h2>
+        <p>Si uno quería entender el alma del apóstol Pablo, había que leer tres de sus cartas en orden: <em>Romanos</em>, luego <em>1 y 2 Corintios</em>, luego <em>Gálatas.</em> Decía que estas tres constelaciones de los escritos de Pablo contestan tres de las preguntas más grandes que un cristiano jamás hace. Romanos contesta: <em>¿Cómo puede un pecador ser hecho justo delante de un Dios santo?</em> Corintios contesta: <em>¿Cómo puede una iglesia dividida, en lucha y a menudo fallida, aprender a funcionar?</em> Gálatas contesta: <em>¿Cómo puede un cristiano, una vez hecho libre, permanecer libre?</em> Tres cartas. Tres preguntas. Un Apóstol. Un tema que las une: <strong>libertad</strong> — libertad <em>de</em> la culpa del pecado en Romanos, libertad <em>en</em> el Cuerpo de Cristo en Corintios, libertad <em>por</em> la gracia en Gálatas.</p>
+
+        <p>El apóstol Pablo era lo más cercano que tiene el Nuevo Testamento a un teólogo sistemático. Pedro escribe desde su corazón. Juan escribe desde su memoria. Jacobo escribe desde el púlpito. Pero Pablo escribe desde su mente — una mente entrenada de fariseo encendida con la gracia. Las tres cartas que estudiaremos en esta unidad son sus tres obras más argumentativas, y están juntas en el grupo de cartas paulinas como las tres patas de un banco. Quite cualquiera de ellas y la vida cristiana pierde su equilibrio.</p>
+
+        <h2>II. Romanos — El evangelio de arriba abajo</h2>
+        <p>Pablo escribió Romanos desde la ciudad de Corinto en o cerca del año 57, en la víspera de su viaje planeado a Jerusalén con la ofrenda y su viaje esperado luego a España (Romanos 15:23–28). La dirigió a una iglesia que nunca había visitado — una congregación que pensaba conocer por primera vez de camino hacia el oeste. Quería que lo conocieran por su evangelio antes de conocerlo por su rostro. Así que se sentó y escribió el resumen más completo del evangelio cristiano jamás puesto en papel.</p>
+
+        <p>Romanos se divide claramente en tres secciones que siguen los grandes verbos de la salvación. Los capítulos 1–8 tratan de la <em>justificación</em> — cómo un pecador es declarado justo en la sala del tribunal del cielo. Pablo comienza demostrando que toda la raza humana — paganos gentiles (capítulo 1), moralistas justos a sus propios ojos (capítulo 2), y judíos religiosos (capítulo 3) — está culpable delante de Dios. <em>"Por cuanto todos pecaron, y están destituidos de la gloria de Dios"</em> (Romanos 3:23). Luego viene el evangelio: <em>"Siendo justificados gratuitamente por su gracia, mediante la redención que es en Cristo Jesús"</em> (Romanos 3:24). Romanos 5 traza el paralelo entre Adán y Cristo; Romanos 6 explica la unión con Cristo en Su muerte y resurrección; Romanos 7 lucha con la lucha interior del creyente; Romanos 8 sube en crescendo hasta el gran capítulo del Espíritu y el amor inquebrantable de Dios — <em>"¿Quién nos apartará del amor de Cristo?"</em> (Romanos 8:35). Los capítulos 9–11 luchan con el lugar de <em>Israel</em> en el plan redentor de Dios; los capítulos 12–16 se vuelven a la vida cristiana práctica. Cuerpo, mente, dones, gobierno, conciencia, los débiles y los fuertes, la meta de la unidad — Pablo aterriza la elevada teología de Romanos 1–11 en el suelo de cómo un cristiano vive la mañana siguiente.</p>
+
+        <p>El versículo clave de Romanos cuelga sobre toda la carta: <em>"Porque no me avergüenzo del evangelio: porque es potencia de Dios para salud á todo aquel que cree; al Judío primeramente y también al Griego"</em> (Romanos 1:16). Romanos ha cambiado más vidas que cualquier otro libro en la Biblia. Agustín, en un banco de jardín en Milán en el año 386, oyó a un niño cantando <em>"Toma y lee,"</em> tomó el libro de Romanos, leyó 13:13–14 y se convirtió en el acto. Martín Lutero, dando clase sobre Romanos 1:17 en Wittenberg a comienzos del siglo XVI, llegó a ver que <em>"el justo por la fe vivirá"</em> — y nació la Reforma Protestante. Juan Wesley, en la calle Aldersgate de Londres el 24 de mayo de 1738, oyó leer en voz alta el prefacio de Lutero a Romanos y sintió su corazón <em>extrañamente calentado.</em> El fuego de cada gran avivamiento desde los apóstoles ha sido encendido desde las mismas páginas.</p>
+
+        <h2>III. 1 Corintios — La iglesia funcional</h2>
+        <p>Si Romanos es la carta más sistemática de Pablo, las cartas a los Corintios son sus más pastorales. Pablo escribió 1 Corintios desde Éfeso en o cerca del año 55. Había fundado la iglesia de Corinto en su segundo viaje misionero (Hechos 18). Se había quedado en la ciudad dieciocho meses, trabajando como fabricante de tiendas de día y predicando de noche. Corinto era un gran puerto comercial — rico, multicultural, sexualmente permisivo, intelectualmente orgulloso. Después de la salida de Pablo, la iglesia que había plantado comenzó a desmoronarse. La congregación se dividió en facciones rivales. Un hombre de la iglesia vivía abiertamente en incesto. Los creyentes se llevaban unos a otros a los tribunales paganos. Había confusión sobre el matrimonio, la comida, los roles de género, los velos en la cabeza, la Cena del Señor, los dones espirituales y la resurrección. La iglesia de Corinto era un desastre hermoso, y Pablo escribió para reconstruirla.</p>
+
+        <p>La estructura de 1 Corintios sigue las respuestas de Pablo a dos clases de información. Los capítulos 1–6 responden a lo que Pablo había oído sobre la iglesia <em>"por los que son de Cloé"</em> (1 Corintios 1:11) — divisiones, inmoralidad, pleitos. Los capítulos 7–16 responden a una carta que los corintios le habían enviado con sus propias preguntas — <em>"acerca de las cosas de que me escribisteis"</em> (1 Corintios 7:1). Lo que sigue es el manual de vida cristiana más práctico del Nuevo Testamento. Matrimonio y soltería (capítulo 7). Comida sacrificada a ídolos y libertad cristiana (capítulos 8–10). Adoración y la Cena del Señor (capítulo 11). Dones espirituales y el Cuerpo de Cristo (capítulo 12). El amor como el don supremo, en el capítulo más famoso que Pablo jamás escribió (capítulo 13). El uso apropiado de las lenguas y la profecía en la asamblea (capítulo 14). Y luego, dominando todo, el gran capítulo de la resurrección — <em>"Y si Cristo es predicado que resucitó de los muertos ¿cómo dicen algunos entre vosotros que no hay resurrección de muertos?"</em> (1 Corintios 15:12). El versículo clave une todo: <em>"Todo me es lícito, mas no todo conviene: todo me es lícito, mas no todo edifica"</em> (1 Corintios 10:23). La libertad debe servir al amor. Esa es la iglesia funcional.</p>
+
+        <h2>IV. 2 Corintios — El corazón del pastor</h2>
+        <p>Pablo escribió 2 Corintios desde Macedonia, quizás un año después de la primera carta, en o cerca del año 56. Entre ambas cartas Pablo había pasado por lo que llama en el capítulo 1 una prueba en Asia que lo abrumó <em>"sobre manera más de lo que podemos contar, de tal manera que estuviésemos en duda de la vida"</em> (2 Corintios 1:8). También había sido herido por la misma iglesia corintia — por su sospecha, sus críticas a su ministerio, y la aparición entre ellos de falsos apóstoles que pretendían ser más espirituales que él. Si 1 Corintios es el manual de instrucciones de Pablo, 2 Corintios es el corazón abierto de Pablo. Es la carta más personal que jamás escribió.</p>
+
+        <p>La carta tiene tres movimientos. Los capítulos 1–7 defienden el ministerio apostólico de Pablo y su integridad pastoral. Los capítulos 8–9 organizan la gran ofrenda de socorro para los santos empobrecidos en Jerusalén — la enseñanza más extensa sobre la dádiva cristiana en el Nuevo Testamento. <em>"Dios ama al dador alegre"</em> (2 Corintios 9:7) se ubica en esta sección. Los capítulos 10–13 se vuelven feroces, mientras Pablo defiende su apostolado contra los llamados <em>"súper apóstoles"</em> que se habían infiltrado en la iglesia. La confesión característica de la carta — y posiblemente la oración más hermosa que Pablo jamás escribió sobre la debilidad cristiana — está en el capítulo 12. Pablo, después de relatar una visión de haber sido arrebatado al tercer cielo, dice que se le dio <em>"un aguijón en mi carne, mensajero de Satanás que me abofetee, para que no me enaltezca sobremanera"</em> (12:7). Tres veces rogó al Señor que se lo quitase. La respuesta del Señor se convirtió en el lema pastoral de Pablo para el resto de su vida: <em>"Bástate mi gracia; porque mi potencia en la flaqueza se perfecciona"</em> (12:9). La iglesia funcional no es la iglesia fuerte. La iglesia funcional es la iglesia débil sostenida por el Cristo fuerte.</p>
+
+        <h2>V. Gálatas — Libertad en el evangelio</h2>
+        <p>Gálatas es el más corto de estos tres grupos de cartas, y el más caliente. Es la <em>carta magna de la libertad cristiana</em> de Pablo. Pablo lo escribió a las iglesias de Galacia en el centro de Asia Menor — iglesias que había fundado en su primer viaje misionero (Hechos 13–14) — después de oír que maestros judíos itinerantes conocidos como <em>judaizantes</em> habían entrado en la región detrás de él. Estaban diciendo a los convertidos de Pablo que la fe en Cristo era un buen comienzo, pero que para ser verdaderamente salvos también necesitaban ser circuncidados y guardar la ley mosaica. Pablo explotó. No hay saludo de acción de gracias en Gálatas como sí lo hay en cada otra carta de Pablo. Se salta las cortesías y va directamente al cuello. <em>"Estoy maravillado de que tan pronto os hayáis traspasado del que os llamó á la gracia de Cristo, á otro evangelio"</em> (Gálatas 1:6).</p>
+
+        <p>La carta tiene tres secciones. Los capítulos 1–2 defienden el origen divino del evangelio de Pablo — vino a él no de hombres sino por revelación directa de Jesucristo. Los capítulos 3–4 argumentan desde la Escritura misma, desde Abraham hasta Habacuc, que los justos siempre han vivido por la fe, nunca por obras de la ley. Los capítulos 5–6 aplican la doctrina a la vida cristiana: la libertad no es licencia para pecar; es la libertad de andar en el Espíritu y producir el fruto del Espíritu (Gálatas 5:22–23). El versículo clave de Gálatas es un versículo de la propia pluma de Pablo que ha sido citado por cada predicador de avivamiento desde la Reforma: <em>"Con Cristo estoy juntamente crucificado, y vivo, no ya yo, mas vive Cristo en mí: y lo que ahora vivo en la carne, lo vivo en la fe del Hijo de Dios, el cual me amó y se entregó á sí mismo por mí"</em> (Gálatas 2:20).</p>
+
+        <h2>VI. Ley y gracia — El corazón de Gálatas</h2>
+        <p>Se cuenta la historia de un anciano creyente indígena americano que asistía a una clase de escuela dominical en Oakland, California, en los años 1920. Los jóvenes estaban discutiendo sobre la ley y la gracia, y no parecían poder llegar a una comprensión clara. Al fin uno de ellos se volvió hacia él y dijo: <em>"Amigo, ¿puede ayudarnos?"</em> El anciano se levantó y dijo: <em>"Déjenme intentar. Cuando mi pastor me trajo desde Arizona tomamos un tren, y nos bajamos en Barstow en la estación de tren más hermosa que jamás haya visto. Caminé por toda la estación, y en un extremo vi un letrero que decía: 'No escupir aquí.' Miré ese letrero, y miré al suelo, y vi que muchos habían escupido allí, y antes de que terminara de pensarlo, yo mismo había escupido allí. ¿No es extraño — cuando el letrero dice 'No escupir'? Luego llegamos a Oakland, y fui a la casa de la señora que me invitó a comer hoy. Nunca he estado en una casa más fina. Hermosas alfombras, finos muebles, un piano de cola. Miré por todos los cuartos buscando un letrero que dijera, 'No escupir aquí.' No pude encontrar uno. Pensé, qué lástima en una casa tan hermosa que no tengan un letrero — la gente escupirá por todas partes. Pero miré por toda esa alfombra, y nadie había escupido allí. ¡Qué cosa más rara! Donde estaba el letrero, la gente escupió. Donde no había letrero, nadie escupió. Ahora entiendo. El letrero es la ley. Dentro de la casa es la gracia. Ellos aman su hermosa casa. Quieren mantenerla limpia. No necesitan un letrero que se los diga."</em></p>
+
+        <p>Eso es Gálatas en una sola parábola. La ley dice <em>no hagas</em>. La gracia dice <em>soy amado</em>. La ley manda desde afuera. La gracia transforma desde adentro. La ley muestra al pecador lo que es. La gracia muestra al pecador lo que está llegando a ser. Un cazador de patos atrapado en un incendio de matorral en Georgia supo que la única manera de sobrevivir era encender otro pequeño fuego alrededor de sí mismo y pararse sobre el suelo quemado mientras el muro de llamas pasaba sobre el lugar donde el fuego ya había pasado. <em>"El fuego no pasa donde el fuego ya ha pasado."</em> El Calvario es el suelo quemado. La ira de Dios ya ha pasado sobre el lugar donde estuvo el Señor Jesús, y el creyente que está en Cristo no tiene que temer el incendio del juicio, porque el fuego ya ha pasado. Eso es la gracia.</p>
+
+        <h2>VII. El Cuerpo de Cristo — El corazón de 1 Corintios 12</h2>
+        <p>1 Corintios 12 era el capítulo más importante del Nuevo Testamento para entender cómo se supone que funciona una iglesia local. Pablo toma el cuerpo humano como su figura. El cuerpo tiene muchos miembros — ojos, oídos, manos, pies — y cada miembro tiene una función diferente, pero cada uno es necesario, y cada uno pertenece. <em>"Para que no haya desavenencia en el cuerpo, sino que los miembros todos se interesen los unos por los otros. De manera que si un miembro padece, todos los miembros á una se duelen; y si un miembro es honrado, todos los miembros á una se gozan"</em> (1 Corintios 12:25–26).</p>
+
+        <p>El capítulo enseña tres cosas que cada congregación necesita aprender. <strong>(1)</strong> La diversidad no es un problema; es el diseño. El ojo no es mejor que el pie; la mano no es mejor que el oído; la iglesia está diseñada para ser un cuerpo de muchos dones y muchos orígenes, no una fila de bancas idénticas. <strong>(2)</strong> Cada miembro importa. El miembro más escondido — el que sirve calladamente, el que ora, el que consuela, el que da sin reconocimiento — recibe en la palabra de Pablo <em>más abundante honor</em> que las partes visibles (12:23). <strong>(3)</strong> El amor es el único sistema nervioso que mantiene unido al cuerpo. Tome la metáfora del cuerpo de Pablo en el capítulo 12 y añada el capítulo 13 — el capítulo del amor — y tendrá la iglesia funcional. <em>"Y si tuviese profecía, y entendiese todos los misterios y toda ciencia; y si tuviese toda la fe, de tal manera que traspasase los montes, y no tengo caridad, nada soy"</em> (1 Corintios 13:2). Sin amor, el cuerpo se desmorona. Con amor, el cuerpo se vuelve la morada de Cristo.</p>
+
+        <h2>VIII. El capítulo de la resurrección</h2>
+        <p>Y sobre todo el caos práctico de Corinto, Pablo arroja un capítulo que ancla todo: 1 Corintios 15. Algunos en Corinto habían empezado a negar la resurrección corporal de los muertos. Pablo responde con el argumento sostenido más largo sobre la resurrección en el Nuevo Testamento. Comienza con el hecho histórico: Cristo murió, fue sepultado, resucitó al tercer día, apareció a Cefas, luego a los Doce, luego a más de quinientos a la vez, la mayoría de los cuales todavía vivían cuando Pablo escribía — <em>vayan a preguntarles</em> (15:5–6). Luego traza la línea: <em>"Si Cristo no resucitó, vuestra fe es vana; aun estáis en vuestros pecados"</em> (15:17). Pero Él ha resucitado. Y porque lo ha hecho, el creyente tiene una resurrección venidera. El capítulo culmina con Pablo gritando al cementerio en el lenguaje de Oseas: <em>"¿Dónde está, oh muerte, tu aguijón? ¿Dónde, oh sepulcro, tu victoria?"</em> (15:55).</p>
+
+        <p>1 Corintios 15 es el versículo para el cual fue hecho el funeral cristiano. Un creyente no entierra un cadáver; un creyente planta una semilla. <em>"Siémbrase cuerpo animal, resucitará espiritual cuerpo"</em> (15:44). La iglesia funcional no se rinde junto a la tumba. Planta y espera, porque la resurrección de Jesús ha garantizado que ninguna tumba que retenga a un creyente lo retenga por mucho tiempo.</p>
+
+        <h2>IX. Tres cartas, una libertad</h2>
+        <p>Considere cuál es el hilo conector que corre por estos tres grupos de cartas paulinas. Se reduce a una sola palabra: <em>libertad.</em> Romanos da al creyente libertad <em>de</em> la condenación — las cadenas de la culpa se caen cuando el alma se para en Romanos 8. Corintios da al creyente libertad <em>en</em> el Cuerpo — la libertad de ser diferente, de servir en amor, de usar el don particular de uno, de pertenecer sin conformarse. Gálatas da al creyente libertad <em>por</em> la gracia — la libertad de la rueda sin fin de tratar de ganar lo que Cristo ya ha comprado. Tres cartas. Una libertad. Un Cristo.</p>
+
+        <p>Y así el apóstol que una vez estuvo respirando amenazas y muerte contra los discípulos en Damasco, que yació cegado en el camino, que fue llevado de la mano a la casa de Judas en la calle llamada Derecha, se convirtió en el apóstol de la libertad para el resto del mundo. <em>"Estad, pues, firmes en la libertad con que Cristo nos hizo libres, y no volváis otra vez á ser presos en el yugo de servidumbre"</em> (Gálatas 5:1). Avance, amigo mío, por el resto del Nuevo Testamento con el mismo Señor que liberó a Pablo en el camino a Damasco, que liberó a Agustín en el jardín de Milán, que liberó a Lutero en la sala de Wittenberg, que liberó a Wesley en la calle Aldersgate, y que es el mismo ayer, hoy y por los siglos. Permanezca firme en Su libertad. Amén.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 7 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 7 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer questions 1–20 (multiple choice). You must achieve 90% (18/20) on the multiple-choice section to pass. <strong>M.Div. / Th.M. students:</strong> Answer all 30 questions. You must achieve 90% on both sections independently — 18/20 multiple choice AND 9/10 short answer. Click an answer for immediate feedback. <strong>Once all 12 units are passed, you will be redirected to your certificate.</strong></span><span class="lang-es"><strong>Estudiantes de certificado:</strong> Respondan las preguntas 1–20 (opción múltiple). Debe alcanzar el 90% (18/20) en la sección de opción múltiple para aprobar. <strong>Estudiantes de M.Div. / Th.M.:</strong> Respondan las 30 preguntas. Debe alcanzar el 90% en ambas secciones de manera independiente — 18/20 opción múltiple Y 9/10 respuesta corta. Haga clic en una respuesta para retroalimentación inmediata. <strong>Una vez aprobadas las 12 unidades, será redirigido a su certificado.</strong></span></p>
+    <div class="track-bar">
+        <strong><span class="lang-en">Your Track:</span><span class="lang-es">Su Modalidad:</span></strong>
+        <span style="margin-left:14px;">
+            <label><input type="radio" name="ctsTrack" value="cert"><span class="lang-en">Certificate (MC only)</span><span class="lang-es">Certificado (solo opción múltiple)</span></label>
+            <label><input type="radio" name="ctsTrack" value="mdiv"><span class="lang-en">Master of Divinity (MC + SA)</span><span class="lang-es">Maestría en Divinidad (MC + RC)</span></label>
+            <label><input type="radio" name="ctsTrack" value="thm"><span class="lang-en">Master of Theology (Th.M.) Track</span><span class="lang-es">Maestría en Teología (Th.M.)</span></label>
+        </span>
+    </div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar Aprobación</span></button>
+        <button id="resetExamBtn" class="reset-btn"><span class="lang-en">↺ Reset Exam</span><span class="lang-es">↺ Restablecer Examen</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ===== PER-UNIT CONFIG =====
+const UNIT = 7;
+const TOTAL_UNITS = 12;
+const NEXT_URL = 'CTSNTUnit8.html';
+const PREV_URL = 'CTSNTUnit6.html';
+const PASS_THRESHOLD = 0.90;
+
+let progress = JSON.parse(localStorage.getItem('cts_nt_progress')) || {};
+let currentTrack = localStorage.getItem('cts_track') || 'cert';
+
+function isMastersLevel() { return currentTrack === 'mdiv' || currentTrack === 'thm'; }
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === UNIT) cls += ' active';
+        grid.innerHTML += `<a href="CTSNTUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+if (PREV_URL) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_URL; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="#" onclick="promptName(); return false;" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+    }
+}
+function promptName() {
+    const name = prompt("Welcome to CTS New Testament Survey! Please enter your full name as you'd like it to appear on your certificate:");
+    if (name && name.trim().length > 1) {
+        localStorage.setItem('cts_student', JSON.stringify({name: name.trim()}));
+        displayStudentGreeting();
+    }
+}
+displayStudentGreeting();
+
+const mcQuestions = [
+    { textEn: "1. Who is the author of Romans, 1-2 Corinthians, and Galatians?", textEs: "1. ¿Quién es el autor de Romanos, 1-2 Corintios y Gálatas?",
+      optionsEn: ["Peter the apostle", "John the apostle", "James the brother of Jesus", "Paul the apostle"],
+      optionsEs: ["Pedro el apóstol", "Juan el apóstol", "Jacobo hermano de Jesús", "Pablo el apóstol"],
+      explanationEn: "Paul wrote Romans, 1–2 Corinthians, and Galatians — his three most argument-driven letters, the closest the NT comes to systematic theology.", explanationEs: "Pablo escribió Romanos, 1–2 Corintios y Gálatas — sus tres cartas más argumentativas, lo más cercano que tiene el NT a la teología sistemática.", correct: 3 },
+    { textEn: "2. The key verse of Romans, declaring Paul's confidence in the gospel, is:", textEs: "2. El versículo clave de Romanos, declarando la confianza de Pablo en el evangelio, es:",
+      optionsEn: ["Romans 1:16", "Romans 3:23", "Romans 8:1", "Romans 12:1"],
+      optionsEs: ["Romanos 1:16", "Romanos 3:23", "Romanos 8:1", "Romanos 12:1"],
+      explanationEn: "The key verse of Romans is 1:16 — Paul is not ashamed of the gospel, the power of God to salvation for everyone who believes.", explanationEs: "El versículo clave de Romanos es 1:16 — Pablo no se avergüenza del evangelio, potencia de Dios para salvación a todo aquel que cree.", correct: 0 },
+    { textEn: "3. Paul wrote Romans from which city?", textEs: "3. Pablo escribió Romanos desde cuál ciudad?",
+      optionsEn: ["Antioch", "Corinth", "Ephesus", "Jerusalem"],
+      optionsEs: ["Antioquía", "Corinto", "Éfeso", "Jerusalén"],
+      explanationEn: "Paul wrote Romans from Corinth around AD 57 to a church he had never visited, to be known by his gospel before his face.", explanationEs: "Pablo escribió Romanos desde Corinto cerca del año 57 a una iglesia que nunca había visitado, para ser conocido por su evangelio antes que por su rostro.", correct: 1 },
+    { textEn: "4. Romans 1-8 primarily deals with which great verb of salvation?", textEs: "4. Romanos 1-8 trata principalmente con cuál gran verbo de la salvación?",
+      optionsEn: ["Sanctification", "Glorification", "Justification", "Predestination"],
+      optionsEs: ["Santificación", "Glorificación", "Justificación", "Predestinación"],
+      explanationEn: "Romans 3:23 says all have sinned and fall short of the glory of God, after Paul shows Gentile, moralist, and Jew all guilty.", explanationEs: "Romanos 3:23 dice que todos pecaron y están destituidos de la gloria de Dios, tras mostrar Pablo culpables al gentil, al moralista y al judío.", correct: 2 },
+    { textEn: "5. 1 Corinthians was written to address problems Paul heard about through:", textEs: "5. 1 Corintios fue escrita para tratar problemas que Pablo oyó a través de:",
+      optionsEn: ["The household of Chloe", "Apollos", "Timothy", "Silas"],
+      optionsEs: ["Los de Cloé", "Apolos", "Timoteo", "Silas"],
+      explanationEn: "Romans 1–8 deals with justification — how a sinner is declared righteous in the courtroom of heaven, freely by grace.", explanationEs: "Romanos 1–8 trata de la justificación — cómo un pecador es declarado justo en la sala del tribunal del cielo, gratuitamente por gracia.", correct: 0 },
+    { textEn: "6. Paul founded the church at Corinth on his:", textEs: "6. Pablo fundó la iglesia de Corinto en su:",
+      optionsEn: ["First missionary journey", "Second missionary journey", "Third missionary journey", "Journey to Rome"],
+      optionsEs: ["Primer viaje misionero", "Segundo viaje misionero", "Tercer viaje misionero", "Viaje a Roma"],
+      explanationEn: "Romans 9–11 wrestles with the place of Israel in God's redemptive plan, between justification and practical living.", explanationEs: "Romanos 9–11 lucha con el lugar de Israel en el plan redentor de Dios, entre la justificación y la vida práctica.", correct: 1 },
+    { textEn: "7. 1 Corinthians 13 is famously known as the chapter of:", textEs: "7. 1 Corintios 13 es famosamente conocido como el capítulo de:",
+      optionsEn: ["Faith", "Hope", "Love", "Salvation"],
+      optionsEs: ["La fe", "La esperanza", "El amor", "La salvación"],
+      explanationEn: "Romans converted Augustine in a Milan garden and lit Luther's Reformation and Wesley's warmed heart at Aldersgate.", explanationEs: "Romanos convirtió a Agustín en un jardín de Milán y encendió la Reforma de Lutero y el corazón calentado de Wesley en Aldersgate.", correct: 2 },
+    { textEn: "8. The longest sustained argument on resurrection in the New Testament is:", textEs: "8. El argumento sostenido más largo sobre la resurrección en el Nuevo Testamento es:",
+      optionsEn: ["Romans 6", "Romans 8", "1 Corinthians 13", "1 Corinthians 15"],
+      optionsEs: ["Romanos 6", "Romanos 8", "1 Corintios 13", "1 Corintios 15"],
+      explanationEn: "Paul wrote 1 Corinthians from Ephesus around AD 55 to a divided, struggling church he had founded and stayed in eighteen months.", explanationEs: "Pablo escribió 1 Corintios desde Éfeso cerca del año 55 a una iglesia dividida y en lucha que había fundado y donde se quedó dieciocho meses.", correct: 3 },
+    { textEn: "9. Paul's most extended teaching on Christian giving is found in:", textEs: "9. La enseñanza más extensa de Pablo sobre la dádiva cristiana se encuentra en:",
+      optionsEn: ["2 Corinthians 8-9", "Romans 12", "Galatians 6", "1 Corinthians 16"],
+      optionsEs: ["2 Corintios 8-9", "Romanos 12", "Gálatas 6", "1 Corintios 16"],
+      explanationEn: "Paul addressed the divisions, immorality, and lawsuits he had heard of by the household of Chloe (1 Cor 1–6).", explanationEs: "Pablo abordó las divisiones, la inmoralidad y los pleitos de que había oído por los de Cloé (1 Cor 1–6).", correct: 0 },
+    { textEn: "10. The Lord's response to Paul's prayer about the 'thorn in the flesh' was:", textEs: "10. La respuesta del Señor a la oración de Pablo sobre el 'aguijón en la carne' fue:",
+      optionsEn: ["I will remove it from you", "My grace is sufficient for you", "Pray harder", "It was sent by Satan"],
+      optionsEs: ["Te lo quitaré", "Bástate mi gracia", "Ora con más fuerza", "Fue enviado por Satanás"],
+      explanationEn: "The key verse of 1 Corinthians is 10:23 — all things are lawful, but not all edify; liberty must serve love.", explanationEs: "El versículo clave de 1 Corintios es 10:23 — todo es lícito, mas no todo edifica; la libertad debe servir al amor.", correct: 1 },
+    { textEn: "11. Galatians was written primarily to combat the false teaching of:", textEs: "11. Gálatas fue escrita principalmente para combatir la falsa enseñanza de:",
+      optionsEn: ["Gnostics", "Stoics", "Judaizers", "Epicureans"],
+      optionsEs: ["Gnósticos", "Estoicos", "Judaizantes", "Epicúreos"],
+      explanationEn: "First Corinthians 12 pictures the church as the body of Christ — many members, each necessary, each belonging.", explanationEs: "Primera de Corintios 12 pinta a la iglesia como el cuerpo de Cristo — muchos miembros, cada uno necesario, cada uno perteneciente.", correct: 2 },
+    { textEn: "12. The Judaizers taught that Christians must also be:", textEs: "12. Los judaizantes enseñaban que los cristianos también debían ser:",
+      optionsEn: ["Baptized in the Jordan", "Educated in Greek", "Sent to Jerusalem", "Circumcised and keep the Law of Moses"],
+      optionsEs: ["Bautizados en el Jordán", "Educados en griego", "Enviados a Jerusalén", "Circuncidados y guardar la Ley de Moisés"],
+      explanationEn: "First Corinthians 13, the famous love chapter, makes love the supreme gift, without which the gifted believer is nothing.", explanationEs: "Primera de Corintios 13, el famoso capítulo del amor, hace del amor el don supremo, sin el cual el creyente dotado no es nada.", correct: 3 },
+    { textEn: "13. The key verse of Galatians declares 'I have been crucified with Christ' and is found at:", textEs: "13. El versículo clave de Gálatas declara 'Con Cristo estoy juntamente crucificado' y se encuentra en:",
+      optionsEn: ["Galatians 2:20", "Galatians 3:13", "Galatians 5:1", "Galatians 6:14"],
+      optionsEs: ["Gálatas 2:20", "Gálatas 3:13", "Gálatas 5:1", "Gálatas 6:14"],
+      explanationEn: "First Corinthians 15 is the longest sustained argument on the resurrection in the New Testament, anchoring all of Corinth's chaos.", explanationEs: "Primera de Corintios 15 es el argumento sostenido más largo sobre la resurrección en el Nuevo Testamento, anclando todo el caos de Corinto.", correct: 0 },
+    { textEn: "14. The 'fruit of the Spirit' is found in Galatians 5:22-23 and begins with:", textEs: "14. El 'fruto del Espíritu' se encuentra en Gálatas 5:22-23 y comienza con:",
+      optionsEn: ["Joy", "Love", "Peace", "Faith"],
+      optionsEs: ["Gozo", "Amor", "Paz", "Fe"],
+      explanationEn: "Second Corinthians is Paul's most personal letter, his open heart, written from Macedonia around AD 56 after deep affliction.", explanationEs: "Segunda de Corintios es la carta más personal de Pablo, su corazón abierto, escrita desde Macedonia cerca del año 56 tras profunda aflicción.", correct: 1 },
+    { textEn: "15. Paul calls Galatians 'a different gospel' because the Judaizers added:", textEs: "15. Pablo llama a Gálatas 'otro evangelio' porque los judaizantes añadieron:",
+      optionsEn: ["Greek philosophy", "Mystery religion", "Works of the Law to faith", "Roman ceremonies"],
+      optionsEs: ["Filosofía griega", "Religión de misterios", "Obras de la Ley a la fe", "Ceremonias romanas"],
+      explanationEn: "Second Corinthians 8–9 gives the NT's fullest teaching on giving, where 'God loves a cheerful giver' (9:7) is found.", explanationEs: "Segunda de Corintios 8–9 da la enseñanza más plena del NT sobre la dádiva, donde está 'Dios ama al dador alegre' (9:7).", correct: 2 },
+    { textEn: "16. Augustine was famously converted by reading which passage in Romans?", textEs: "16. Agustín fue famosamente convertido leyendo cuál pasaje en Romanos?",
+      optionsEn: ["Romans 3:23", "Romans 6:23", "Romans 10:9", "Romans 13:13-14"],
+      optionsEs: ["Romanos 3:23", "Romanos 6:23", "Romanos 10:9", "Romanos 13:13-14"],
+      explanationEn: "Paul's thorn in the flesh taught him 'My grace is sufficient for you, for My strength is made perfect in weakness' (12:9).", explanationEs: "El aguijón en la carne de Pablo le enseñó 'Bástate mi gracia, porque mi potencia en la flaqueza se perfecciona' (12:9).", correct: 3 },
+    { textEn: "17. Martin Luther's understanding of justification by faith came largely from:", textEs: "17. La comprensión de Martín Lutero sobre la justificación por la fe vino principalmente de:",
+      optionsEn: ["Romans 1:17", "1 Corinthians 13", "Galatians 5:1", "Ephesians 2:8"],
+      optionsEs: ["Romanos 1:17", "1 Corintios 13", "Gálatas 5:1", "Efesios 2:8"],
+      explanationEn: "Galatians answers the Judaizers, who said converts must be circumcised and keep the law to be truly saved.", explanationEs: "Gálatas responde a los judaizantes, que decían que los convertidos debían circuncidarse y guardar la ley para ser verdaderamente salvos.", correct: 0 },
+    { textEn: "18. John Wesley's heart was 'strangely warmed' while hearing Luther's preface to:", textEs: "18. El corazón de Juan Wesley fue 'extrañamente calentado' mientras oía el prefacio de Lutero a:",
+      optionsEn: ["The Gospel of John", "Romans", "Galatians", "Hebrews"],
+      optionsEs: ["El Evangelio de Juan", "Romanos", "Gálatas", "Hebreos"],
+      explanationEn: "Galatians is the one Paul letter with no thanksgiving; he marvels they so soon turned to a different gospel (1:6).", explanationEs: "Gálatas es la única carta de Pablo sin acción de gracias; se maravilla de que tan pronto se volvieran a otro evangelio (1:6).", correct: 1 },
+    { textEn: "19. Paul uses which extended metaphor to describe how the local church should function in 1 Corinthians 12?", textEs: "19. Pablo usa cuál metáfora extendida para describir cómo debe funcionar la iglesia local en 1 Corintios 12?",
+      optionsEn: ["A vine and branches", "A building of stones", "A human body with many members", "An army with many ranks"],
+      optionsEs: ["Una vid y ramas", "Un edificio de piedras", "Un cuerpo humano con muchos miembros", "Un ejército con muchos rangos"],
+      explanationEn: "The key verse of Galatians is 2:20 — 'I have been crucified with Christ; it is no longer I who live, but Christ lives in me.'", explanationEs: "El versículo clave de Gálatas es 2:20 — 'Con Cristo estoy juntamente crucificado; y vivo, no ya yo, mas vive Cristo en mí'.", correct: 2 },
+    { textEn: "20. The unifying theme that runs through Romans, Corinthians, and Galatians is best summarized as:", textEs: "20. El tema unificador que corre por Romanos, Corintios y Gálatas se resume mejor como:",
+      optionsEn: ["Eschatology", "Holiness", "Suffering", "Liberty"],
+      optionsEs: ["Escatología", "Santidad", "Sufrimiento", "Libertad"],
+      explanationEn: "The theme uniting the three letters is liberty: from condemnation in Romans, in the Body in Corinthians, through grace in Galatians.", explanationEs: "El tema que une las tres cartas es la libertad: de la condenación en Romanos, en el Cuerpo en Corintios, por la gracia en Gálatas.", correct: 3 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Explain the three-part structure of Romans 1-8 (justification), 9-11 (Israel), and 12-16 (Christian living). How do they fit together?", textEs: "21. Explique la estructura tripartita de Romanos 1-8 (justificación), 9-11 (Israel), y 12-16 (vida cristiana). ¿Cómo encajan?",
+      kw_en: ["justification", "israel", "practical", "structure", "romans", "salvation"], kw_es: ["justificacion", "israel", "practica", "estructura", "romanos", "salvacion"],
+      modelEn: "Romans follows the great verbs of salvation in a clear structure. Chapters 1–8 set out justification, showing the whole race guilty and then declared righteous freely by grace through Christ. Chapters 9–11 wrestle with Israel's place in God's redemptive plan. Chapters 12–16 turn practical, landing the soaring theology on how a Christian lives the next morning.", modelEs: "Romanos sigue los grandes verbos de la salvación en una estructura clara. Los capítulos 1–8 exponen la justificación, mostrando a toda la raza culpable y luego declarada justa gratuitamente por gracia mediante Cristo. Los capítulos 9–11 luchan con el lugar de Israel en el plan redentor de Dios. Los capítulos 12–16 se vuelven prácticos, aterrizando la elevada teología en cómo vive el cristiano la mañana siguiente." },
+    { textEn: "22. Discuss the historical significance of Romans for Augustine, Luther, and Wesley. What does this tell us about the book?", textEs: "22. Discuta el significado histórico de Romanos para Agustín, Lutero y Wesley. ¿Qué nos dice esto sobre el libro?",
+      kw_en: ["augustine", "luther", "wesley", "reformation", "revival", "history"], kw_es: ["agustin", "lutero", "wesley", "reforma", "avivamiento", "historia"],
+      modelEn: "Romans has lit the fire of revival across history. Augustine was converted reading it in a Milan garden; Luther, lecturing on Romans 1:17, came to see the just shall live by faith, and the Reformation was born; and Wesley felt his heart strangely warmed hearing Luther's preface to Romans on Aldersgate Street. The same pages have kindled awakening after awakening.", modelEs: "Romanos ha encendido el fuego del avivamiento a lo largo de la historia. Agustín se convirtió leyéndola en un jardín de Milán; Lutero, enseñando sobre Romanos 1:17, llegó a ver que el justo por la fe vivirá, y nació la Reforma; y Wesley sintió su corazón extrañamente calentado al oír el prefacio de Lutero a Romanos en la calle Aldersgate. Las mismas páginas han encendido avivamiento tras avivamiento." },
+    { textEn: "23. Compare the tone and purpose of 1 Corinthians (instruction manual) with 2 Corinthians (open heart). Why both letters?", textEs: "23. Compare el tono y propósito de 1 Corintios (manual de instrucciones) con 2 Corintios (corazón abierto). ¿Por qué ambas cartas?",
+      kw_en: ["instruction", "personal", "pastoral", "corinth", "problems", "defense"], kw_es: ["instruccion", "personal", "pastoral", "corinto", "problemas", "defensa"],
+      modelEn: "First Corinthians is Paul's instruction manual, answering the problems of a divided Corinth point by point with practical correction. Second Corinthians is his open, personal heart, more pastoral than instructional, written after affliction and pain. Where the first letter instructs the church, the second defends his ministry against critics and false apostles and bares his own weakness.", modelEs: "Primera de Corintios es el manual de instrucciones de Pablo, respondiendo a los problemas de un Corinto dividido punto por punto con corrección práctica. Segunda de Corintios es su corazón abierto y personal, más pastoral que instructivo, escrita tras la aflicción y el dolor. Donde la primera carta instruye a la iglesia, la segunda defiende su ministerio contra críticos y falsos apóstoles y desnuda su propia debilidad." },
+    { textEn: "24. Apply the body metaphor of 1 Corinthians 12 to the local church today. What three principles emerge?", textEs: "24. Aplique la metáfora del cuerpo de 1 Corintios 12 a la iglesia local hoy. ¿Cuáles tres principios emergen?",
+      kw_en: ["body", "diversity", "every member", "love", "function", "gifts"], kw_es: ["cuerpo", "diversidad", "cada miembro", "amor", "funcion", "dones"],
+      modelEn: "The body metaphor of 1 Corinthians 12 teaches that the church is one body of many members with different gifts. Diversity is the design, not a problem, for the eye is not better than the foot; every member matters, including the hidden ones; and love is the only force that holds the body together so each part can function. A church applies it by valuing every member's gift in love.", modelEs: "La metáfora del cuerpo de 1 Corintios 12 enseña que la iglesia es un cuerpo de muchos miembros con diferentes dones. La diversidad es el diseño, no un problema, pues el ojo no es mejor que el pie; cada miembro importa, incluso los ocultos; y el amor es la única fuerza que mantiene unido al cuerpo para que cada parte funcione. Una iglesia lo aplica valorando en amor el don de cada miembro." },
+    { textEn: "25. Explain why love (1 Corinthians 13) is called the 'nervous system' of the Body of Christ and the supreme spiritual gift.", textEs: "25. Explique por qué el amor (1 Corintios 13) es llamado el 'sistema nervioso' del Cuerpo de Cristo y el supremo don espiritual.",
+      kw_en: ["love", "supreme", "gift", "13", "without", "nothing"], kw_es: ["amor", "supremo", "don", "13", "sin", "nada"],
+      modelEn: "Love is the nervous system of the body because 1 Corinthians 13 names it the supreme gift, the one that makes every other gift work. Paul says that without love even prophecy, knowledge, and mountain-moving faith leave him nothing. Add the love of chapter 13 to the body of chapter 12 and you have the functional church; remove love and the body falls apart.", modelEs: "El amor es el sistema nervioso del cuerpo porque 1 Corintios 13 lo nombra el don supremo, el que hace funcionar a todos los demás dones. Pablo dice que sin amor aun la profecía, el conocimiento y la fe que mueve montañas lo dejan sin nada. Añada el amor del capítulo 13 al cuerpo del capítulo 12 y tiene la iglesia funcional; quite el amor y el cuerpo se desmorona." },
+    { textEn: "26. Trace Paul's argument for resurrection in 1 Corinthians 15. Why is the bodily resurrection of Christ non-negotiable?", textEs: "26. Trace el argumento de Pablo a favor de la resurrección en 1 Corintios 15. ¿Por qué la resurrección corporal de Cristo es innegociable?",
+      kw_en: ["resurrection", "witnesses", "first fruits", "death", "victory", "futile"], kw_es: ["resurreccion", "testigos", "primicias", "muerte", "victoria", "vana"],
+      modelEn: "Paul argues for the resurrection in 1 Corinthians 15 first from history: Christ died, was buried, rose, and appeared to many witnesses still living. Then he draws the line — if Christ is not risen, the faith is futile and we are still in our sins. But because Christ is risen as the first fruits, the believer has a coming resurrection, and Paul shouts to death that its sting and victory are gone.", modelEs: "Pablo argumenta a favor de la resurrección en 1 Corintios 15 primero desde la historia: Cristo murió, fue sepultado, resucitó y apareció a muchos testigos aún vivos. Luego traza la línea — si Cristo no resucitó, la fe es vana y aún estamos en nuestros pecados. Pero porque Cristo resucitó como las primicias, el creyente tiene una resurrección venidera, y Pablo clama a la muerte que su aguijón y su victoria se han ido." },
+    { textEn: "27. Discuss the heresy of the Judaizers in Galatians. Why was Paul so fierce in his response?", textEs: "27. Discuta la herejía de los judaizantes en Gálatas. ¿Por qué fue Pablo tan feroz en su respuesta?",
+      kw_en: ["judaizers", "circumcision", "law", "different gospel", "another gospel", "anathema"], kw_es: ["judaizantes", "circuncision", "ley", "evangelio diferente", "otro evangelio", "anatema"],
+      modelEn: "The Judaizers told Paul's converts that faith in Christ was only a start and they must also be circumcised and keep the law to be saved. Paul was fierce because this was a different gospel that added works to grace and so destroyed the gospel itself. He pronounced anathema on anyone preaching it, since to add the law to Christ is to lose Christ.", modelEs: "Los judaizantes decían a los convertidos de Pablo que la fe en Cristo era solo un comienzo y que también debían circuncidarse y guardar la ley para ser salvos. Pablo fue feroz porque esto era otro evangelio que añadía obras a la gracia y así destruía el evangelio mismo. Pronunció anatema sobre cualquiera que lo predicara, pues añadir la ley a Cristo es perder a Cristo." },
+    { textEn: "28. Apply Galatians 2:20 ('I have been crucified with Christ') to the daily life of the believer. What does it mean practically?", textEs: "28. Aplique Gálatas 2:20 ('Con Cristo estoy juntamente crucificado') a la vida diaria del creyente. ¿Qué significa prácticamente?",
+      kw_en: ["crucified", "christ in me", "faith", "daily", "self", "new life"], kw_es: ["crucificado", "cristo en mi", "fe", "diariamente", "yo", "vida nueva"],
+      modelEn: "Galatians 2:20 applies to daily life as the pattern of the believer's existence: I have been crucified with Christ, so the old self no longer reigns, and the new life is Christ living in me. Each day is lived by faith in the Son of God who loved me and gave Himself for me, the self dethroned and Christ enthroned in its place.", modelEs: "Gálatas 2:20 se aplica a la vida diaria como el patrón de la existencia del creyente: con Cristo estoy juntamente crucificado, así que el viejo yo ya no reina, y la nueva vida es Cristo viviendo en mí. Cada día se vive por la fe en el Hijo de Dios que me amó y se entregó por mí, destronado el yo y entronizado Cristo en su lugar." },
+    { textEn: "29. Explain how the unifying theme of 'liberty' connects Romans (liberty from), Corinthians (liberty in), and Galatians (liberty through).", textEs: "29. Explique cómo el tema unificador de la 'libertad' conecta Romanos (libertad de), Corintios (libertad en), y Gálatas (libertad por).",
+      kw_en: ["liberty", "condemnation", "body", "grace", "romans", "galatians"], kw_es: ["libertad", "condenacion", "cuerpo", "gracia", "romanos", "galatas"],
+      modelEn: "The theme of liberty connects all three letters. Romans gives liberty from condemnation, the chains of guilt falling off in chapter 8. The Corinthians give liberty in the Body, the freedom to be different and serve in love. Galatians gives liberty through grace, freedom from trying to earn what Christ already purchased. Three letters, one liberty, one Christ.", modelEs: "El tema de la libertad conecta las tres cartas. Romanos da libertad de la condenación, cayendo las cadenas de la culpa en el capítulo 8. Corintios da libertad en el Cuerpo, la libertad de ser diferente y servir en amor. Gálatas da libertad por la gracia, libertad de tratar de ganar lo que Cristo ya compró. Tres cartas, una libertad, un Cristo." },
+    { textEn: "30. Synthesize: Why are Romans, Corinthians, and Galatians considered the heart of Paul's gospel for the Christian church?", textEs: "30. Sintetice: ¿Por qué se consideran Romanos, Corintios y Gálatas el corazón del evangelio de Pablo para la iglesia cristiana?",
+      kw_en: ["paul", "gospel", "doctrine", "practical", "liberty", "grace", "church"], kw_es: ["pablo", "evangelio", "doctrina", "practica", "libertad", "gracia", "iglesia"],
+      modelEn: "These three are the doctrinal heart of Paul because together they give the gospel whole: Romans sets out the doctrine of how a sinner is justified by grace, the Corinthians show that doctrine made practical in the life of the church, and Galatians guards the liberty of grace against every attempt to add works. Paul's mind on fire with grace gives the church its doctrine, its practice, and its freedom.", modelEs: "Estas tres son el corazón doctrinal de Pablo porque juntas dan el evangelio entero: Romanos expone la doctrina de cómo un pecador es justificado por gracia, los Corintios muestran esa doctrina hecha práctica en la vida de la iglesia, y Gálatas guarda la libertad de la gracia contra todo intento de añadir obras. La mente de Pablo encendida con la gracia da a la iglesia su doctrina, su práctica y su libertad." }
+];
+
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = `cts_nt_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY = `cts_nt_u${UNIT}_sa_lockout`;
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0')
+        : parseInt(localStorage.getItem(`cts_nt_u${UNIT}_lockout`) || '0');
+}
+let lockUntil = activeLockUntil();
+let unitPassed = progress[`unit${UNIT}`] || false;
+
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function isEs() { return document.body.classList.contains('lang-es'); }
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer as left-boundary prefix.
+// Pass standard is >=3 hits (NOT all keywords).
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function kwHitCount(normAns, keys) { return keys.filter(function(k){ return kwHit(normAns, k); }).length; }
+
+function checkAllUnitsPassed() {
+    for (let i = 1; i <= TOTAL_UNITS; i++) { if (!progress[`unit${i}`]) return false; }
+    return true;
+}
+
+function syncTrackUI() {
+    document.querySelectorAll('input[name="ctsTrack"]').forEach(r => { r.checked = (r.value === currentTrack); });
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = isEs() ? 'Opción Múltiple (Preguntas 1–20)' : 'Multiple Choice (Questions 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (!isEs()) ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (!isEs()) ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (!isEs()) ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((!isEs()) ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = isEs() ? 'Respuesta Corta (Preguntas 21–30) — Pista Maestría en Divinidad' : 'Short Answer (Questions 21–30) — Master of Divinity Track';
+    container.appendChild(kwTitle);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = isEs() ? q.textEs : q.textEn;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = isEs() ? 'Escriba su respuesta aquí...' : 'Type your answer here...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = isEs() ? 'Verificar Respuesta' : 'Check Answer';
+        const fb = document.createElement('div');
+        fb.className = 'feedback-text';
+        fb.style.marginTop = '8px';
+        const model = document.createElement('div');
+        model.className = 'model-answer';
+        model.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ansRaw = ta.value.trim();
+            const ans = normalize(ansRaw);
+            const keys = isEs() ? q.kw_es : q.kw_en;
+            const hits = kwHitCount(ans, keys);
+            if (ansRaw.length < 100) {
+                fb.innerHTML = isEs() ? 'Escriba una respuesta más completa (al menos una oración).' : 'Please write a more complete answer (at least a sentence).';
+                fb.className = 'feedback-text incorrect';
+            } else if (hits >= 3) {
+                fb.innerHTML = isEs() ? `✓ ¡Bien! Su respuesta toca ${hits} conceptos clave.` : `✓ Good! Your answer touches ${hits} key concepts.`;
+                fb.className = 'feedback-text correct';
+                kwAnswers[idx] = ansRaw;
+            } else {
+                fb.innerHTML = isEs() ? `Va bien — toca ${hits}. Apunte a al menos 3 conceptos clave; revise la lección y vuelva a intentarlo.` : `Good start — you touched ${hits}. Aim for at least 3 key concepts; review the lesson and try again.`;
+                fb.className = 'feedback-text incorrect';
+            }
+            const mk = isEs() ? q.modelEs : q.modelEn;
+            if (mk) {
+                model.innerHTML = (isEs() ? '<strong>Respuesta modelo — estúdiela:</strong> ' : '<strong>Model answer — study this:</strong> ') + mk;
+                model.style.display = 'block';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(model);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+}
+
+function triggerRedirect() {
+    const target = checkAllUnitsPassed() ? 'CTSNTCertificate.html' : NEXT_URL;
+    const result = document.getElementById('examResult');
+    let seconds = 3;
+    function tick() {
+        const msg = isEs()
+            ? `Redirigiendo a la siguiente unidad en ${seconds}...`
+            : `Redirecting to the next unit in ${seconds}...`;
+        result.innerHTML = `<div class='redirect-notice'>✅ ${isEs() ? '¡APROBADO!' : 'PASSED!'} ${msg}</div>`;
+        if (seconds <= 0) { location.href = target; return; }
+        seconds--;
+        setTimeout(tick, 1000);
+    }
+    tick();
+}
+
+function submitExam() {
+    const result = document.getElementById('examResult');
+    if (unitPassed) {
+        result.innerHTML = `<span style='color:green'>${isEs() ? '✅ Unidad ya aprobada.' : '✅ Unit already passed!'}</span>`;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        result.innerHTML = `<span style='color:red'>${isEs() ? `⏰ Bloqueado por ${wait} minutos más.` : `⏰ Locked for ${wait} more minutes.`}</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) { promptName(); return; }
+
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    let advCorrect = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = normalize(kwAnswers[i] || '');
+        const keys = isEs() ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        if (kwHitCount(ans, keys) >= 3 && ans.length >= 100) advCorrect++;
+    }
+
+    const mcPct = correctMC / 20;
+    const saPct = advCorrect / 10;
+    const mcPass = mcPct >= PASS_THRESHOLD;
+    const saPass = saPct >= PASS_THRESHOLD;
+
+    function passUnit() {
+        unitPassed = true;
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem('cts_nt_progress', JSON.stringify(progress));
+        localStorage.setItem(`nt_unit${UNIT}_passed`, 'true');
+        localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+        localStorage.removeItem(SA_LOCK_KEY);
+        updateProgressGrid();
+        triggerRedirect();
+    }
+
+    if (!isMastersLevel()) {
+        if (mcPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Necesita 18/20 para Certificado.`
+                : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Need 18/20 for Certificate.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        if (saPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ✓ ya guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+                : `MC: ✓ already banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Su opción múltiple está a salvo. Puede reintentar la sección de respuesta corta en ${mins} min.` : `Your multiple-choice pass is safe. You can retry the short-answer section in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPass && saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit();
+    } else if (mcPass && !saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ aprobado y guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ passed and banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Al reintentar en ${mins} min, solo necesitará la sección de respuesta corta — el OM permanece aprobado.` : `When you retry in ${mins} min, you'll only need the short-answer section — MC stays passed.`}</span>`;
+    } else {
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 18/20 Y 9/10 para M.Div.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 18/20 AND 9/10 for M.Div.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+    }
+}
+
+function resetExam() {
+    const msg = isEs()
+        ? '¿Restablecer el examen? Esto borrará sus respuestas en pantalla y eliminará el bloqueo de 15 minutos. Las unidades ya aprobadas no se afectan.'
+        : 'Reset the exam? This will clear your on-screen answers and remove the 15-minute lockout. Already-passed units are not affected.';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill('');
+    lockUntil = 0;
+    mcPreviouslyPassed = false;
+    localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+document.querySelectorAll('input[name="ctsTrack"]').forEach(r => {
+    r.addEventListener('change', e => {
+        currentTrack = e.target.value;
+        localStorage.setItem('cts_track', currentTrack);
+    });
+});
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.className = 'lang-es';
+        this.textContent = 'English';
+    } else {
+        document.body.className = 'lang-en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+syncTrackUI();
+renderQuestions();
+if (unitPassed) document.getElementById('examResult').innerHTML = `<span style='color:green'>${isEs() ? `✅ Unidad ${UNIT} ya aprobada.` : `✅ Unit ${UNIT} already passed.`}</span>`;
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSNTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

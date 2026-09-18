@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Church, State, and Nationalism — Unit 13</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 13 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Systematic Theology — Unit 13: Church, State, and Nationalism</span><span class="lang-es">📖 Teología Sistemática — Unidad 13: Iglesia, Estado y Nacionalismo</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"For our citizenship is in heaven." — Philippians 3:20 (NKJV)</span><span class="lang-es">"Mas nuestra ciudadanía está en los cielos." — Filipenses 3:20 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Systematic Theology. Please register before beginning Unit 13.</span><span class="lang-es">Bienvenido a Teología Sistemática. Por favor regístrese antes de comenzar la Unidad 13.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Philippians 3:20 (NKJV)</strong></p><div class="scripture">"For our citizenship is in heaven, from which we also eagerly wait for the Savior, the Lord Jesus Christ." — Philippians 3:20</div>
+            <h3>A Kingdom Not of This World</h3><p>Jesus stood before the most powerful political authority of His day and spoke words that have echoed through every generation since: "My kingdom is not of this world" (John 18:36). This was not an evasion. It was a declaration. It was a line drawn between two orders of reality — one temporal, the other eternal.</p><p>The kingdoms of this world are built upon structure and strength. They require borders to define them, laws to govern them, and force to preserve them. They rise through power and are sustained by it. Even at their best, they remain bound to the limitations of human authority.</p><p>The Kingdom of God is of an entirely different nature. It does not advance by conquest, nor is it preserved by violence. It has no borders because it cannot be contained. It has no army because it does not compel allegiance; it transforms the heart. It is not imposed from the outside, but born within.</p><p>The danger arises when these two kingdoms are confused. When the Church forgets that her Lord refused a political throne, she begins to seek one herself. When she forgets that Christ conquered through the cross, she is tempted to conquer through power. Christian nationalism, in its false form, is precisely this confusion. It takes the language of faith and places it in the service of political identity, territorial interest, and national ambition.</p><p>The Church may live within the nations, pray for them, and serve within them. But she must never surrender her identity to them. The New Testament does not present the Church as the chaplain of the state, but as a pilgrim people whose first and last loyalty belongs to Christ.</p>
+            <h3>From Nation to People — The Great Transition</h3><p>There was a time when God's redemptive work was visibly tied to a nation. Israel stood as a people set apart, with defined land, law, and identity. Through them, God revealed His holiness and His purposes to the world. Yet even then, the calling of Israel was never meant to terminate upon itself. It was to be a light — a witness pointing beyond its own borders.</p><p>With the coming of Christ, that trajectory reaches its fulfillment and transformation. No new nation replaces Israel. No sacred geography is established. Instead, a people is formed — drawn from every tribe, every language, every land. The boundaries that once defined identity are dissolved in a greater reality. Citizenship is no longer a matter of birthplace but of new birth.</p><p>The Church is not a nation among nations. She is a people within all nations, yet belonging fully to none of them. Her allegiance is not divided; it is redirected. This is why the New Covenant cannot be reduced to the political ambitions of modern states. Promises given within a specific covenantal setting must not be carelessly transferred to nations that neither stand in Israel's role nor bear Israel's covenantal identity.</p><p>When Christians attempt to read their own country into biblical prophecy or national covenant language, they often commit a theological error. They blur the line between the temporary and the eternal, between type and fulfillment, between the people of one covenant and the multinational body of Christ under the New Covenant. The Church's calling is not to baptize a nation's myths, but to bear witness to the reign of Christ in every nation.</p>
+            <h3>The Cross and the Sword</h3><p>In the garden, when the moment of crisis arrived, Peter reached instinctively for the sword. It was the most natural response imaginable. Power meets power. Force answers force. But Christ intervened: "Put your sword back in its place" (Matthew 26:52).</p><p>In that command, an entire theology is revealed. Jesus did not resist arrest. He did not call for defense. He did not justify retaliation. He chose instead the path that would lead to suffering, humiliation, and death — not because He lacked power, but because He refused to use it in that way.</p><p>The cross is not merely the means of salvation; it is the pattern of the Kingdom. To follow Christ is to walk that same path — to relinquish the instinct to dominate, to retaliate, to secure oneself through force. It is to trust that the purposes of God are not advanced by violence, but by obedience.</p><p>And yet, again and again, the Church has been tempted to reverse this pattern. The sword has been taken up in the name of the One who laid it down. Violence has been justified under the banner of righteousness. The language of faith has been used to sanctify the ambitions of men.</p><p>Even some of the great figures of Christian history reveal how easily zeal can harden into persecution. Before encountering the risen Christ, Saul sought to stamp out those he believed were in error. He was religious, certain, forceful, and wrong. In later centuries, both Martin Luther and John Calvin, for all their undeniable contributions, acted at points more like Saul before conversion than like the crucified Christ. Those who dissented could be suppressed, punished, or handed over to state power. That fact does not erase their theological importance, but it does remind us that truth can be defended in a manner profoundly unlike Christ.</p>
+            <h3>Augustine, Just War, and the Burden of Power</h3><p>The question of war is never merely theoretical. It confronts every society that bears responsibility for order, protection, and justice. Governments possess the authority to wield force, and with that authority comes the moral weight of its use. The Church, therefore, has long wrestled with whether such force can ever be justified.</p><p>Augustine approached this issue with sobriety rather than triumphalism. He did not glorify war; he regarded it as a tragic necessity within a fallen world. His concern was not to sanction violence, but to restrain it. From his reflections emerged what has come to be known as the just war tradition.</p><p><strong>Augustine's classic just war precepts, stated simply:</strong></p><ul style="margin-left: 25px; margin-bottom: 15px;"><li><strong>Legitimate authority:</strong> war must be declared by a proper governing authority, not by private vengeance or mob zeal.</li><li><strong>Just cause:</strong> war must address a real wrong, such as defense against aggression, not conquest, pride, or gain.</li><li><strong>Right intention:</strong> the true aim must be peace, justice, and the restraint of evil, not revenge, hatred, glory, or plunder.</li><li><strong>Last resort:</strong> peaceful remedies should be seriously pursued before force is used.</li><li><strong>Proportionality:</strong> the force used must not exceed what is necessary to address the wrong.</li><li><strong>Protection of the innocent:</strong> non-combatants are not to be treated as legitimate targets.</li></ul><p>These principles were intended as moral boundaries. They were meant to impose restraint upon human violence in recognition of human fallenness. Yet history presents a sobering reality. Nations rarely submit themselves to these constraints with integrity. Causes are declared just because they serve national interest. Intentions are framed as noble after decisions have already been made. Civilian suffering is acknowledged, but ultimately accepted. What is meant to restrain violence is often repurposed to legitimize it.</p><p>Measured against these precepts, many wars fail badly. The record of modern powers shows repeated departures from Augustine's safeguards. Many historians and ethicists contend that American involvement in Vietnam and later military engagements in the Middle East failed to meet Augustine's standard — that they lacked a clear and morally coherent just cause in his sense, or fell short as genuine last resorts, proportionate uses of force, or careful protections of the innocent. Others disagree, arguing the causes were more just than critics allow. The pastor need not settle every case to see the pattern Augustine warned against: the language of security and stability can conceal deeper interests and wider ambitions, in any nation's wars.</p><p>What was designed as a restraint upon war has often been used as a sermon in favor of it. This does not expose a failure in Augustine's moral vision so much as it exposes the tendency of power to bend ethical language to its own purposes. The state says peace is the goal while preparing for domination. The state says justice is the cause while pursuing influence. In that setting, the Church must not become the chaplain who blesses what Christ would judge.</p>
+            <div class="illustration"><strong>💡 Christ Among the Displaced:</strong> Jesus Himself was, for a season, a refugee — carried into Egypt as an infant to escape a murderous king (Matthew 2:13-15). He taught that whatever is done for "the least of these" — the hungry, the stranger, the prisoner — is done for Him (Matthew 25:35-40). Whatever a Christian concludes about the policy questions surrounding immigration, that identification with the poor and displaced is not optional for the disciple's heart.</div>
+            <h3>Citizenship, Conscience, and the Integrity of Faith</h3><p>The tension between the Church and the state is not resolved in theory. It is resolved in the life of the believer. A Christian may live under various governments, carry different passports, and participate responsibly in civic life. These realities are not insignificant. Yet they do not define ultimate identity. The believer's citizenship lies elsewhere.</p><p>That is why one may say, in the truest and holiest sense, "I am a Christian nationalist," provided it means this and nothing less: my nation is the Kingdom of God. An American passport may describe travel. A Canadian residence may describe history. A home in Mexico may describe present life. But none of these identifies the soul. The Christian's deepest citizenship is not of this world.</p><p><strong>Roger Williams and the Freedom of Conscience:</strong> Few voices saw the danger of religious power more clearly than Roger Williams. He understood that faith cannot be coerced. Belief compelled by law is not faith; it is compliance. For that reason, he argued that the church must not encroach upon the rights of individual belief, and the state must not compel conscience. His concern was not to weaken Christianity, but to protect its integrity from political corruption.</p><p>Whenever religion seeks to take over the state, it commonly speaks in the language of righteousness, but the deeper appetite is often power rather than the will of God. It is the spirit of Saul trying to stamp out Christians, convinced he is defending truth while opposing the work of Christ. When church and state join hands in coercion, persecution is never far behind.</p><h3>The Witness of History and Costly Discipleship</h3><p><strong>The Witness of History:</strong> History confirms how easily this pattern repeats. In Nazi Germany, large segments of both Protestant and Catholic communities aligned themselves with Hitler and the state. National identity and social order were elevated above obedience to Christ. Only a few were willing to pay the true cost of discipleship. Among them stood Dietrich Bonhoeffer, whose witness reminds the Church that discipleship is not proven in sentiment, but in costly obedience.</p><p><strong>Economics and Obedience:</strong> The same conflict emerges when faith runs against financial interest. In the American South, slavery was not merely a social custom; it was an economic engine. Cotton depended upon it. Because it was profitable, many Christians justified it, muted the claims of conscience, and ignored the fact that all men bear the image of God and that in Christ there is neither slave nor free. Resistance grew more strongly in places where there was less economic need to preserve the institution. That raises a painful but necessary question: does economics trump faith?</p><div class="scripture">"Why do you call me, 'Lord, Lord,' and do not do the things that I say?" — Luke 6:46</div><p><strong>The Stranger and the Memory of Arrival:</strong> The treatment of the foreigner reveals another layer of this tension. Europeans came to a new land with a sense of divine mandate. They arrived as aliens and strangers seeking land, opportunity, safety, and a future. Yet the native peoples they encountered were often deprived of rights, stripped of land, and at times pressed toward forced conversion. Those who came as outsiders did not always show mercy to those already there.</p><p>Today, a poor Mexican living on a few pesos wants what fathers and mothers everywhere have always wanted: the ability to provide safely, healthily, and economically for their family. In that respect, he wants what many Europeans wanted when they came to a new land. Scripture does not teach the people of God to despise such a person or to forget that he, too, bears God's image; whatever a nation's laws require, believers are called to care for the stranger and the alien in their hearts, and not let a person's legal status close off their compassion.</p><p>Immigration policy itself involves real, legitimate questions of law, security, and national sovereignty that Scripture does not resolve in detail, and Christians of good conscience weigh those questions differently. What Scripture does settle is the disposition of the heart: contempt for the foreigner has no place in a follower of Christ, whatever position a believer reaches on the policy questions themselves.</p><h3>Patriotism Under Christ</h3><p><strong>Patriotism Under Christ:</strong> Love of country may express gratitude and civic responsibility, but patriotism cannot redefine righteousness. No nation's slogans or ambitions can be baptized as God's own cause; no modern nation stands as the exclusive vessel of His purposes. Patriotism does not justify becoming unlike Christ. It cannot excuse cruelty, sanctify pride, or bless conduct that contradicts the Savior whose kingdom is not of this world.</p><p>When national loyalty and obedience to Christ come into conflict, the path is not unclear. Christ is Lord. The believer belongs first and finally to Him.</p>
+            <h3>Final Summary</h3><p>The doctrine of the Church, the State, and Christian Nationalism teaches us that the Kingdom of God is not of this world. The Church is a people within all nations, but her ultimate allegiance is to Christ, not to any earthly flag. While we honor earthly authorities and participate in civic life, we must never confuse the Kingdom of God with any nation. The cross is the pattern of the Kingdom — sacrifice, not conquest. Augustine's just war tradition reminds us that even necessary force must be restrained by moral boundaries. History warns us that when the church aligns too closely with state power, persecution follows. Roger Williams called for a wall of separation to protect the integrity of faith. And the example of Jesus Himself — who was Himself, for a season, a refugee, and who identified Himself with the stranger and the displaced — calls us to care for the outsider, resist the temptation of nationalism, and remember that our true citizenship is in heaven. Christ is Lord. The believer belongs first and finally to Him.</p><div class="scripture">"For our citizenship is in heaven, from which we also eagerly wait for the Savior, the Lord Jesus Christ." — Philippians 3:20</div></div>
+        </div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Filipenses 3:20</strong></p><div class="scripture">"Mas nuestra ciudadanía está en los cielos, de donde también esperamos al Salvador, al Señor Jesucristo." — Filipenses 3:20</div>
+            <h3>Un Reino No de Este Mundo</h3><p>Jesús se paró ante la autoridad política más poderosa de Su día y habló palabras que han resonado a través de cada generación desde entonces: "Mi reino no es de este mundo" (Juan 18:36). Esto no fue una evasión. Fue una declaración. Fue una línea trazada entre dos órdenes de realidad — uno temporal, el otro eterno.</p><p>Los reinos de este mundo están construidos sobre la estructura y la fuerza. Requieren fronteras que los definan, leyes que los gobiernen y fuerza para preservarlos. Se levantan a través del poder y son sostenidos por él. Incluso en su mejor estado, permanecen ligados a las limitaciones de la autoridad humana.</p><p>El Reino de Dios es de una naturaleza enteramente diferente. No avanza por conquista, ni se preserva por la violencia. No tiene fronteras porque no puede ser contenido. No tiene ejército porque no compele lealtad; transforma el corazón. No es impuesto desde afuera, sino nacido por dentro.</p><p>El peligro surge cuando estos dos reinos se confunden. Cuando la Iglesia olvida que su Señor rechazó un trono político, ella comienza a buscar uno para sí misma. Cuando ella olvida que Cristo conquistó a través de la cruz, es tentada a conquistar a través del poder. El nacionalismo cristiano, en su forma falsa, es precisamente esta confusión. Toma el lenguaje de la fe y lo coloca al servicio de la identidad política, el interés territorial y la ambición nacional.</p><p>La Iglesia puede vivir dentro de las naciones, orar por ellas y servir dentro de ellas. Pero nunca debe rendir su identidad a ellas. El Nuevo Testamento no presenta a la Iglesia como la capellán del estado, sino como un pueblo peregrino cuya primera y última lealtad pertenece a Cristo.</p>
+            <h3>De Nación a Pueblo — La Gran Transición</h3><p>Hubo un tiempo en que la obra redentora de Dios estaba visiblemente atada a una nación. Israel se levantaba como un pueblo apartado, con tierra, ley e identidad definidas. A través de ellos, Dios reveló Su santidad y Sus propósitos al mundo. Sin embargo, incluso entonces, el llamado de Israel nunca fue destinado a terminar en sí mismo. Era para ser una luz — un testimonio que apuntaba más allá de sus propias fronteras.</p><p>Con la venida de Cristo, esa trayectoria alcanza su cumplimiento y transformación. Ninguna nación nueva reemplaza a Israel. Ninguna geografía sagrada es establecida. En cambio, un pueblo es formado — extraído de cada tribu, cada lengua, cada tierra. Las fronteras que una vez definieron la identidad se disuelven en una realidad mayor. La ciudadanía ya no es asunto del lugar de nacimiento sino del nuevo nacimiento.</p><p>La Iglesia no es una nación entre naciones. Ella es un pueblo dentro de todas las naciones, sin pertenecer plenamente a ninguna de ellas. Su lealtad no está dividida; está redirigida. Por eso el Nuevo Pacto no puede ser reducido a las ambiciones políticas de los estados modernos. Las promesas dadas dentro de un contexto pactual específico no deben ser transferidas descuidadamente a naciones que ni están en el rol de Israel ni llevan la identidad pactual de Israel.</p><p>Cuando los cristianos intentan leer su propio país en la profecía bíblica o en el lenguaje del pacto nacional, a menudo cometen un error teológico. Borran la línea entre lo temporal y lo eterno, entre el tipo y el cumplimiento, entre el pueblo de un pacto y el cuerpo multinacional de Cristo bajo el Nuevo Pacto. El llamado de la Iglesia no es bautizar los mitos de una nación, sino dar testimonio del reinado de Cristo en cada nación.</p>
+            <h3>La Cruz y la Espada</h3><p>En el huerto, cuando llegó el momento de crisis, Pedro alcanzó instintivamente la espada. Era la respuesta más natural imaginable. El poder se encuentra con el poder. La fuerza responde a la fuerza. Pero Cristo intervino: "Vuelve tu espada a su lugar" (Mateo 26:52).</p><p>En ese mandato, toda una teología es revelada. Jesús no resistió el arresto. No llamó a defensa. No justificó la retaliación. Eligió en cambio el camino que llevaría al sufrimiento, la humillación y la muerte — no porque le faltara poder, sino porque rehusó usarlo de esa manera.</p><p>La cruz no es meramente el medio de salvación; es el patrón del Reino. Seguir a Cristo es caminar ese mismo camino — renunciar al instinto de dominar, de retaliar, de asegurarse a uno mismo por medio de la fuerza. Es confiar que los propósitos de Dios no se avanzan por la violencia, sino por la obediencia.</p><p>Y sin embargo, una y otra vez, la Iglesia ha sido tentada a invertir este patrón. La espada ha sido tomada en el nombre de Aquel que la depuso. La violencia ha sido justificada bajo el estandarte de la justicia. El lenguaje de la fe ha sido usado para santificar las ambiciones de los hombres.</p><p>Incluso algunas de las grandes figuras de la historia cristiana revelan cuán fácilmente el celo puede endurecerse en persecución. Antes de encontrar al Cristo resucitado, Saulo buscaba erradicar a los que él creía estaban en error. Era religioso, seguro, contundente y estaba equivocado. En siglos posteriores, tanto Martín Lutero como Juan Calvino, por todas sus contribuciones innegables, actuaron en puntos más como Saulo antes de la conversión que como el Cristo crucificado. Los que disentían podían ser suprimidos, castigados o entregados al poder del estado. Ese hecho no borra su importancia teológica, pero nos recuerda que la verdad puede ser defendida de una manera profundamente diferente a Cristo.</p>
+            <h3>Agustín, la Guerra Justa y la Carga del Poder</h3><p>La pregunta de la guerra nunca es meramente teórica. Confronta a cada sociedad que lleva la responsabilidad del orden, la protección y la justicia. Los gobiernos poseen la autoridad de empuñar la fuerza, y con esa autoridad viene el peso moral de su uso. La Iglesia, por lo tanto, ha luchado por mucho tiempo con si tal fuerza puede ser justificada alguna vez.</p><p>Agustín abordó este asunto con sobriedad en lugar de triunfalismo. No glorificó la guerra; la consideró como una necesidad trágica dentro de un mundo caído. Su preocupación no era sancionar la violencia, sino restringirla. De sus reflexiones surgió lo que ha llegado a ser conocido como la tradición de la guerra justa.</p><p><strong>Los preceptos clásicos de la guerra justa de Agustín, declarados simplemente:</strong></p><ul style="margin-left: 25px; margin-bottom: 15px;"><li><strong>Autoridad legítima:</strong> la guerra debe ser declarada por una autoridad gobernante apropiada, no por venganza privada o celo de turba.</li><li><strong>Causa justa:</strong> la guerra debe abordar una injusticia real, como la defensa contra la agresión, no la conquista, el orgullo o la ganancia.</li><li><strong>Intención recta:</strong> el verdadero objetivo debe ser la paz, la justicia y la restricción del mal, no la venganza, el odio, la gloria o el saqueo.</li><li><strong>Último recurso:</strong> los remedios pacíficos deben buscarse seriamente antes de usar la fuerza.</li><li><strong>Proporcionalidad:</strong> la fuerza usada no debe exceder lo necesario para abordar la injusticia.</li><li><strong>Protección del inocente:</strong> los no combatientes no deben ser tratados como blancos legítimos.</li></ul><p>Estos principios fueron destinados como límites morales. Estaban destinados a imponer restricción sobre la violencia humana en reconocimiento de la caída humana. Sin embargo, la historia presenta una realidad sobria. Las naciones rara vez se someten a estas restricciones con integridad. Las causas son declaradas justas porque sirven al interés nacional. Las intenciones son enmarcadas como nobles después de que las decisiones ya han sido tomadas. El sufrimiento civil es reconocido, pero finalmente aceptado. Lo que está destinado a restringir la violencia a menudo es reutilizado para legitimarla.</p><p>Medidas contra estos preceptos, muchas guerras fallan gravemente. El registro de los poderes modernos muestra repetidos apartamientos de las salvaguardas de Agustín. Muchos historiadores y eticistas sostienen que la participación estadounidense en Vietnam y los compromisos militares posteriores en el Medio Oriente no cumplieron el estándar de Agustín — que carecieron de una causa justa clara y moralmente coherente en su sentido, o no calificaron como últimos recursos genuinos, usos proporcionales de la fuerza, o protecciones cuidadosas del inocente. Otros discrepan, argumentando que las causas fueron más justas de lo que admiten los críticos. El pastor no necesita resolver cada caso para ver el patrón que Agustín advirtió: el lenguaje de seguridad y estabilidad puede ocultar intereses más profundos y ambiciones más amplias, en las guerras de cualquier nación.</p><p>Lo que fue diseñado como una restricción sobre la guerra a menudo ha sido usado como un sermón a favor de ella. Esto no expone un fracaso en la visión moral de Agustín tanto como expone la tendencia del poder a doblar el lenguaje ético a sus propios propósitos. El estado dice que la paz es la meta mientras se prepara para la dominación. El estado dice que la justicia es la causa mientras persigue la influencia. En ese contexto, la Iglesia no debe convertirse en la capellán que bendice lo que Cristo juzgaría.</p>
+            <div class="illustration"><strong>💡 Cristo entre los desplazados:</strong> Jesús mismo fue, por una temporada, un refugiado — llevado a Egipto de niño para escapar de un rey asesino (Mateo 2:13-15). Enseñó que lo que se hace por "estos mis hermanos más pequeños" — el hambriento, el extranjero, el preso — se hace por Él (Mateo 25:35-40). Cualquiera que sea la conclusión de un cristiano sobre las cuestiones de política migratoria, esa identificación con el pobre y el desplazado no es opcional para el corazón del discípulo.</div>
+            <h3>Ciudadanía, Conciencia e Integridad de la Fe</h3><p>La tensión entre la Iglesia y el estado no se resuelve en teoría. Se resuelve en la vida del creyente. Un cristiano puede vivir bajo varios gobiernos, llevar diferentes pasaportes y participar responsablemente en la vida cívica. Estas realidades no son insignificantes. Sin embargo, no definen la identidad última. La ciudadanía del creyente está en otro lugar.</p><p>Por eso uno puede decir, en el sentido más verdadero y santo: "Soy un nacionalista cristiano", siempre que signifique esto y nada menos: mi nación es el Reino de Dios. Un pasaporte estadounidense puede describir viajes. Una residencia canadiense puede describir historia. Un hogar en México puede describir la vida presente. Pero ninguna de estas identifica el alma. La ciudadanía más profunda del cristiano no es de este mundo.</p><p><strong>Roger Williams y la Libertad de Conciencia:</strong> Pocas voces vieron el peligro del poder religioso más claramente que Roger Williams. Entendió que la fe no puede ser coaccionada. La creencia compelida por la ley no es fe; es cumplimiento. Por esa razón, argumentó que la iglesia no debe usurpar los derechos de la creencia individual, y el estado no debe compeler la conciencia. Su preocupación no era debilitar el cristianismo, sino proteger su integridad de la corrupción política.</p><p>Cuando la religión busca apoderarse del estado, comúnmente habla en el lenguaje de la justicia, pero el apetito más profundo a menudo es el poder más que la voluntad de Dios. Es el espíritu de Saulo tratando de erradicar a los cristianos, convencido de que está defendiendo la verdad mientras se opone a la obra de Cristo. Cuando la iglesia y el estado se unen en la coerción, la persecución nunca está lejos.</p><h3>El Testimonio de la Historia y el Discipulado Costoso</h3><p><strong>El Testimonio de la Historia:</strong> La historia confirma cuán fácilmente este patrón se repite. En la Alemania Nazi, grandes segmentos tanto de las comunidades protestantes como católicas se alinearon con Hitler y el estado. La identidad nacional y el orden social fueron elevados por encima de la obediencia a Cristo. Solo unos pocos estaban dispuestos a pagar el verdadero costo del discipulado. Entre ellos estaba Dietrich Bonhoeffer, cuyo testimonio recuerda a la Iglesia que el discipulado no se prueba en el sentimiento, sino en la obediencia costosa.</p><p><strong>Economía y Obediencia:</strong> El mismo conflicto emerge cuando la fe se enfrenta al interés financiero. En el sur estadounidense, la esclavitud no era meramente una costumbre social; era un motor económico. El algodón dependía de ella. Porque era rentable, muchos cristianos la justificaron, silenciaron los reclamos de la conciencia e ignoraron el hecho de que todos los hombres llevan la imagen de Dios y que en Cristo no hay esclavo ni libre. La resistencia creció más fuertemente en lugares donde había menos necesidad económica de preservar la institución. Eso plantea una pregunta dolorosa pero necesaria: ¿la economía supera a la fe?</p><div class="scripture">"¿Por qué me llamáis, Señor, Señor, y no hacéis lo que yo digo?" — Lucas 6:46</div><p><strong>El Extranjero y la Memoria de la Llegada:</strong> El trato del extranjero revela otra capa de esta tensión. Los europeos vinieron a una nueva tierra con un sentido de mandato divino. Llegaron como extranjeros y peregrinos buscando tierra, oportunidad, seguridad y un futuro. Sin embargo, los pueblos nativos que encontraron a menudo fueron privados de derechos, despojados de tierra y a veces presionados hacia la conversión forzada. Aquellos que vinieron como forasteros no siempre mostraron misericordia a los que ya estaban allí.</p><p>Hoy, un pobre mexicano viviendo con unos pocos pesos quiere lo que los padres y madres en todas partes siempre han querido: la capacidad de proveer segura, saludable y económicamente para su familia. En ese aspecto, él quiere lo que muchos europeos querían cuando vinieron a una nueva tierra. La Escritura no enseña al pueblo de Dios a despreciar a tal persona ni a olvidar que él también lleva la imagen de Dios; cualesquiera que sean las leyes de una nación, los creyentes están llamados a cuidar al extranjero y al forastero en su corazón, sin dejar que el estatus legal de una persona cierre su compasión.</p><p>La política migratoria en sí misma involucra preguntas reales y legítimas de ley, seguridad, y soberanía nacional que la Escritura no resuelve en detalle, y cristianos de buena conciencia sopesan esas preguntas de manera diferente. Lo que la Escritura sí establece es la disposición del corazón: el desprecio al extranjero no tiene lugar en un seguidor de Cristo, sea cual sea la postura que un creyente adopte sobre las cuestiones de política.</p><h3>Patriotismo Bajo Cristo</h3><p><strong>Patriotismo Bajo Cristo:</strong> El amor al país puede expresar gratitud y responsabilidad cívica, pero el patriotismo no puede redefinir la justicia. Ningún lema ni ambición de una nación puede bautizarse como la causa misma de Dios; ninguna nación moderna se levanta como el vehículo exclusivo de Sus propósitos. El patriotismo no justifica volverse desemejante a Cristo. No puede excusar la crueldad, santificar el orgullo o bendecir conducta que contradice al Salvador cuyo reino no es de este mundo.</p><p>Cuando la lealtad nacional y la obediencia a Cristo entran en conflicto, el camino no es ambiguo. Cristo es Señor. El creyente pertenece primero y finalmente a Él.</p>
+            <h3>Resumen Final</h3><p>La doctrina de la Iglesia, el Estado y el Nacionalismo Cristiano nos enseña que el Reino de Dios no es de este mundo. La Iglesia es un pueblo dentro de todas las naciones, pero su lealtad última es a Cristo, no a ninguna bandera terrenal. Mientras honramos las autoridades terrenales y participamos en la vida cívica, nunca debemos confundir el Reino de Dios con ninguna nación. La cruz es el patrón del Reino — sacrificio, no conquista. La tradición de la guerra justa de Agustín nos recuerda que incluso la fuerza necesaria debe ser restringida por límites morales. La historia nos advierte que cuando la iglesia se alinea demasiado cerca con el poder del estado, la persecución sigue. Roger Williams llamó a un muro de separación para proteger la integridad de la fe. Y el ejemplo de Jesús mismo — quien fue, por una temporada, un refugiado, y quien se identificó con el extranjero y el desplazado — nos llama a cuidar al forastero, resistir la tentación del nacionalismo y recordar que nuestra verdadera ciudadanía está en los cielos. Cristo es Señor. El creyente pertenece primero y finalmente a Él.</p><div class="scripture">"Mas nuestra ciudadanía está en los cielos, de donde también esperamos al Salvador, al Señor Jesucristo." — Filipenses 3:20</div>
+        </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 13 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 13 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Systematic Theology — Unit 13 (Church, State, and Nationalism) — built on validated engine
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 13;
+const COURSE = 'st';
+const NEXT_UNIT_URL = 'CTSSTCertificate.html';
+const totalUnits = 13;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - The Doctrine of Revelation",
+    "Unit 2 - The Doctrine of God",
+    "Unit 3 - The Doctrine of Christ",
+    "Unit 4 - The Holy Spirit",
+    "Unit 5 - The Doctrine of Man",
+    "Unit 6 - Sin",
+    "Unit 7 - Salvation",
+    "Unit 8 - The Church",
+    "Unit 9 - Denominations and the Gospel",
+    "Unit 10 - Last Things",
+    "Unit 11 - Apologetics",
+    "Unit 12 - The Kingdom of God",
+    "Unit 13 - Church, State, and Nationalism"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSSTUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// MC answer key: A=B=C=D=5; all 20 verified against Psalm 1
+const mcQuestions = [
+    { textEn: "1. According to John 18:36, what did Jesus explicitly say about His kingdom?", textEs: "1. Según Juan 18:36, ¿qué dijo Jesús explícitamente acerca de Su reino?",
+      optionsEn: ["It is not of this world", "It belongs first to Israel alone", "It must be defended by force", "It would soon replace Rome politically"],
+      optionsEs: ["No es de este mundo", "Pertenece primero solo a Israel", "Debe defenderse por la fuerza", "Pronto reemplazaría políticamente a Roma"], explanationEn: "Jesus stated that His kingdom is not of this world, distinguishing His reign from earthly political systems.", explanationEs: "Jesús declaró que Su reino no es de este mundo, distinguiendo Su reinado de los sistemas políticos terrenales.", correct: 0 },
+    { textEn: "2. What is the main theological error of false Christian nationalism according to this unit?", textEs: "2. ¿Cuál es el error teológico principal del falso nacionalismo cristiano según esta unidad?",
+      optionsEn: ["It rejects all forms of historical theology", "It ignores all civil responsibility", "It collapses the distinction between the Kingdom of God and earthly nations", "It denies that God cares about justice"],
+      optionsEs: ["Rechaza toda forma de teología histórica", "Ignora toda responsabilidad civil", "Borra la distinción entre el Reino de Dios y las naciones terrenales", "Niega que a Dios le importe la justicia"], explanationEn: "The unit argues that false Christian nationalism wrongly merges Christ's kingdom with the ambitions and identity of the state.", explanationEs: "La unidad sostiene que el falso nacionalismo cristiano une equivocadamente el reino de Cristo con las ambiciones y la identidad del Estado.", correct: 2 },
+    { textEn: "3. Under the New Covenant, the people of God are primarily defined by:", textEs: "3. Bajo el Nuevo Pacto, el pueblo de Dios se define principalmente por:",
+      optionsEn: ["Shared ethnicity and land", "Faith in Christ", "Political sovereignty", "Military loyalty"],
+      optionsEs: ["Etnicidad y tierra compartidas", "Fe en Cristo", "Soberanía política", "Lealtad militar"], explanationEn: "The Church is drawn from every tribe and nation and is defined by faith in Christ, not by ethnicity or geography.", explanationEs: "La Iglesia es tomada de toda tribu y nación y se define por la fe en Cristo, no por etnicidad o geografía.", correct: 1 },
+    { textEn: "4. What did Jesus tell Peter in the garden?", textEs: "4. ¿Qué le dijo Jesús a Pedro en el huerto?",
+      optionsEn: ["Put your sword back in its place", "Defend the innocent by any means", "Wait for a larger army", "Take up your sword for the kingdom"],
+      optionsEs: ["Vuelve tu espada a su lugar", "Defiende a los inocentes por cualquier medio", "Espera un ejército más grande", "Toma tu espada por el reino"], explanationEn: "Matthew 26:52 is central in this unit because Jesus rebuked violent defense in His own cause.", explanationEs: "Mateo 26:52 es central en esta unidad porque Jesús reprendió la defensa violenta aun en su propia causa.", correct: 0 },
+    { textEn: "5. What does the unit say the cross is, beyond being the means of salvation?", textEs: "5. Además de ser el medio de salvación, ¿qué dice la unidad que es la cruz?",
+      optionsEn: ["A temporary stage before political rule", "A symbol of national identity", "A pattern of the Kingdom", "A reminder of Roman law"],
+      optionsEs: ["Una etapa temporal antes del poder político", "Un símbolo de identidad nacional", "Un patrón del Reino", "Un recuerdo de la ley romana"], explanationEn: "The unit teaches that the cross is also the pattern of the Kingdom: sacrifice, obedience, and suffering rather than coercion.", explanationEs: "La unidad enseña que la cruz también es el patrón del Reino: sacrificio, obediencia y sufrimiento en lugar de coerción.", correct: 2 },
+    { textEn: "6. How does the unit describe some of the behavior of Luther and Calvin toward dissenters?", textEs: "6. ¿Cómo describe la unidad parte de la conducta de Lutero y Calvino hacia los disidentes?",
+      optionsEn: ["Similar in some respects to Saul before his conversion", "Entirely unrelated to state power", "A model of religious liberty", "Always fully consistent with enemy-love"],
+      optionsEs: ["Parecida en algunos aspectos a Saulo antes de su conversión", "Completamente sin relación con el poder del Estado", "Un modelo de libertad religiosa", "Siempre totalmente de acuerdo con el amor al enemigo"], explanationEn: "The unit notes that their use of coercive power at points resembled Saul's persecuting zeal more than the spirit of Christ.", explanationEs: "La unidad señala que su uso del poder coercitivo en ciertos momentos se pareció más al celo perseguidor de Saulo que al espíritu de Cristo.", correct: 0 },
+    { textEn: "7. Which of the following is one of Augustine's just war precepts?", textEs: "7. ¿Cuál de los siguientes es uno de los principios de guerra justa en Agustín?",
+      optionsEn: ["War should increase national glory", "War must be declared by legitimate authority", "War should be pursued whenever interests are threatened", "Civilian casualties are unavoidable and morally irrelevant"],
+      optionsEs: ["La guerra debe aumentar la gloria nacional", "La guerra debe ser declarada por autoridad legítima", "La guerra debe buscarse siempre que los intereses sean amenazados", "Las bajas civiles son inevitables y moralmente irrelevantes"], explanationEn: "Legitimate authority is one of the classic just war conditions associated with Augustine's framework.", explanationEs: "La autoridad legítima es una de las condiciones clásicas de la guerra justa asociadas con el marco de Agustín.", correct: 1 },
+    { textEn: "8. Which is NOT one of Augustine's just war principles as presented in the unit?", textEs: "8. ¿Cuál NO es uno de los principios de guerra justa de Agustín presentados en la unidad?",
+      optionsEn: ["Proportionality", "Right intention", "Last resort", "Economic advantage"],
+      optionsEs: ["Proporcionalidad", "Intención correcta", "Último recurso", "Ventaja económica"], explanationEn: "Economic advantage is not a just war principle. The unit presents it as one of the ways nations often corrupt moral reasoning.", explanationEs: "La ventaja económica no es un principio de guerra justa. La unidad la presenta como una de las formas en que las naciones corrompen el razonamiento moral.", correct: 3 },
+    { textEn: "9. How does the unit describe the ongoing debate over American involvement in Vietnam and the Middle East?", textEs: "9. ¿Cómo describe la unidad el debate continuo sobre la participación estadounidense en Vietnam y en el Medio Oriente?",
+      optionsEn: ["As clearly just wars with no dispute", "As morally neutral conflicts", "As wars many historians argue fell short of Augustine's standards, though others disagree", "As wars required by biblical prophecy"],
+      optionsEs: ["Como guerras claramente justas y sin disputa", "Como conflictos moralmente neutrales", "Como guerras que muchos historiadores sostienen no cumplieron los estándares de Agustín, aunque otros discrepan", "Como guerras requeridas por la profecía bíblica"], explanationEn: "The unit presents this as a genuine historical debate, using Augustine's criteria as the framework for weighing the question rather than a settled verdict.", explanationEs: "La unidad presenta esto como un debate histórico genuino, usando los criterios de Agustín como marco para sopesar la pregunta, no como un veredicto ya resuelto.", correct: 2 },
+    { textEn: "10. What concern did Roger Williams emphasize?", textEs: "10. ¿Qué preocupación destacó Roger Williams?",
+      optionsEn: ["Faith grows best through state enforcement", "National religion is the highest form of unity", "The church should govern the conscience by civil power", "The church must not encroach on the rights of individual belief"],
+      optionsEs: ["Que la fe crece mejor por medio de la imposición estatal", "Que la religión nacional es la forma más alta de unidad", "Que la iglesia debe gobernar la conciencia por medio del poder civil", "Que la iglesia no debe invadir los derechos de la creencia individual"], explanationEn: "Roger Williams argued that conscience must not be coerced and that church and state should not dominate one another.", explanationEs: "Roger Williams sostuvo que la conciencia no debe ser forzada y que iglesia y Estado no deben dominarse mutuamente.", correct: 3 },
+    { textEn: "11. When religion seeks to take over the state, the unit says the deeper goal is often:", textEs: "11. Cuando la religión busca tomar el control del Estado, ¿cuál dice la unidad que suele ser el objetivo más profundo?",
+      optionsEn: ["Neutral citizenship", "Careful discipleship", "Pure evangelism", "Power rather than God's will"],
+      optionsEs: ["Ciudadanía neutral", "Discipulado cuidadoso", "Evangelismo puro", "Poder más que la voluntad de Dios"], explanationEn: "The unit warns that religious control of the state often masks a desire for power rather than humble obedience to God.", explanationEs: "La unidad advierte que el control religioso del Estado muchas veces esconde un deseo de poder más que de obediencia humilde a Dios.", correct: 3 },
+    { textEn: "12. What happened in Nazi Germany according to the unit?", textEs: "12. ¿Qué ocurrió en la Alemania nazi según la unidad?",
+      optionsEn: ["The church became more committed to liberty", "The state stopped using religion", "Most churches rejected Hitler immediately", "Both Protestant and Catholic communities often aligned with the state"],
+      optionsEs: ["La iglesia se volvió más comprometida con la libertad", "El Estado dejó de usar la religión", "La mayoría de las iglesias rechazó inmediatamente a Hitler", "Comunidades protestantes y católicas con frecuencia se alinearon con el Estado"], explanationEn: "The unit points to widespread alignment with Hitler among both Protestants and Catholics, with only a few resisting at great cost.", explanationEs: "La unidad señala una amplia alineación con Hitler entre protestantes y católicos, y solo unos pocos resistieron con gran costo.", correct: 3 },
+    { textEn: "13. Why did many Christians in the American South justify slavery?", textEs: "13. ¿Por qué muchos cristianos del sur de Estados Unidos justificaron la esclavitud?",
+      optionsEn: ["Because abolition was forbidden by law everywhere", "Because Scripture clearly commands race-based slavery", "Because it had no economic significance", "Because economic benefit distorted moral judgment"],
+      optionsEs: ["Porque la abolición estaba prohibida por ley en todas partes", "Porque la Escritura manda claramente una esclavitud basada en raza", "Porque no tenía importancia económica", "Porque el beneficio económico distorsionó el juicio moral"], explanationEn: "The unit argues that slavery's profitability led many to justify what contradicted the image of God and Christian equality.", explanationEs: "La unidad argumenta que la rentabilidad de la esclavitud llevó a muchos a justificar lo que contradecía la imagen de Dios y la igualdad cristiana.", correct: 3 },
+    { textEn: "14. Which biblical truth is used in the unit against slavery?", textEs: "14. ¿Qué verdad bíblica usa la unidad contra la esclavitud?",
+      optionsEn: ["Faith depends on class hierarchy", "All men are made in the image of God and in Christ there is neither slave nor free", "Slavery is necessary for order", "The Old Testament cancels the New Testament"],
+      optionsEs: ["La fe depende de la jerarquía social", "Todos los hombres fueron hechos a imagen de Dios y en Cristo no hay esclavo ni libre", "La esclavitud es necesaria para el orden", "El Antiguo Testamento cancela el Nuevo Testamento"], explanationEn: "The unit grounds its critique in the image of God and the New Testament teaching that in Christ there is neither slave nor free.", explanationEs: "La unidad basa su crítica en la imagen de Dios y en la enseñanza del Nuevo Testamento de que en Cristo no hay esclavo ni libre.", correct: 1 },
+    { textEn: "15. How does the unit compare poor Mexican migrants with earlier European settlers?", textEs: "15. ¿Cómo compara la unidad a los migrantes mexicanos pobres con los colonos europeos anteriores?",
+      optionsEn: ["They want the same basic things: safety, provision, and a future for their families", "One group is biblical and the other is not", "Their situations cannot be compared morally", "They are motivated by entirely different desires"],
+      optionsEs: ["Quieren las mismas cosas básicas: seguridad, provisión y un futuro para sus familias", "Un grupo es bíblico y el otro no", "Sus situaciones no se pueden comparar moralmente", "Están movidos por deseos completamente diferentes"], explanationEn: "The unit stresses the shared human desire for family welfare and exposes the inconsistency of praising one migration story while condemning another.", explanationEs: "La unidad destaca el deseo humano compartido por el bienestar de la familia y expone la inconsistencia de alabar una historia migratoria y condenar otra.", correct: 0 },
+    { textEn: "16. What does Scripture command regarding the stranger and the alien, according to the unit?", textEs: "16. Según la unidad, ¿qué manda la Escritura respecto al extranjero y al forastero?",
+      optionsEn: ["Use them for labor", "Care for them rather than oppress them", "Treat them only according to economic value", "Ignore them"],
+      optionsEs: ["Usarlos para trabajo", "Cuidarlos en vez de oprimirlos", "Tratarlos solo según su valor económico", "Ignorarlos"], explanationEn: "The unit emphasizes the biblical command to care for the stranger and alien rather than dehumanize or discard them.", explanationEs: "La unidad enfatiza el mandato bíblico de cuidar al extranjero y al forastero en lugar de deshumanizarlo o desecharlo.", correct: 1 },
+    { textEn: "17. Why does Christ's own experience as a refugee (Matthew 2:13-15) matter in this unit?", textEs: "17. ¿Por qué importa en esta unidad la propia experiencia de Cristo como refugiado (Mateo 2:13-15)?",
+      optionsEn: ["It claims citizenship laws never matter at all", "It suggests Jesus supported modern bureaucracy", "It grounds the call to compassion for the stranger in Christ's own life, not merely a principle", "It denies the incarnation"],
+      optionsEs: ["Porque afirma que las leyes de ciudadanía nunca importan", "Porque sugiere que Jesús apoyaba la burocracia moderna", "Porque fundamenta el llamado a la compasión por el extranjero en la propia vida de Cristo, no solo en un principio", "Porque niega la encarnación"], explanationEn: "Christ's own flight into Egypt grounds the call to compassion for the displaced in His own experience, not an abstract rule.", explanationEs: "La propia huida de Cristo a Egipto fundamenta el llamado a la compasión por los desplazados en Su propia experiencia, no en una regla abstracta.", correct: 2 },
+    { textEn: "18. What does the unit say about a nation's slogans or ambitions being treated as God's own cause?", textEs: "18. ¿Qué dice la unidad sobre tratar los lemas o ambiciones de una nación como la causa misma de Dios?",
+      optionsEn: ["They should be declared by God in Scripture", "They are a harmless synonym for discipleship", "No nation's slogans or ambitions can be baptized as God's own cause", "They are the central confession of the Church"],
+      optionsEs: ["Que deben ser declarados por Dios en la Escritura", "Que son un sinónimo inofensivo de discipulado", "Que ningún lema ni ambición de una nación puede bautizarse como la causa misma de Dios", "Que son la confesión central de la Iglesia"], explanationEn: "The unit explicitly rejects the idea that God has given any modern nation a divine first-place status.", explanationEs: "La unidad rechaza explícitamente la idea de que Dios haya dado a alguna nación moderna un lugar divino de primer rango.", correct: 2 },
+    { textEn: "19. What limit does the unit place on patriotism?", textEs: "19. ¿Qué límite pone la unidad al patriotismo?",
+      optionsEn: ["Patriotism must remain under the lordship and character of Christ", "Patriotism requires hostility to outsiders", "Patriotism can replace obedience to Christ", "Patriotism justifies being unlike Christ"],
+      optionsEs: ["Que el patriotismo debe permanecer bajo el señorío y el carácter de Cristo", "Que el patriotismo exige hostilidad hacia los de afuera", "Que el patriotismo puede reemplazar la obediencia a Cristo", "Que el patriotismo justifica ser distinto a Cristo"], explanationEn: "The unit teaches that patriotism cannot redefine righteousness or excuse conduct that contradicts Christ.", explanationEs: "La unidad enseña que el patriotismo no puede redefinir la justicia ni excusar conducta que contradiga a Cristo.", correct: 0 },
+    { textEn: "20. What is the final allegiance of the believer according to this unit?", textEs: "20. ¿Cuál es la lealtad final del creyente según esta unidad?",
+      optionsEn: ["To ethnic identity", "To Christ and His Kingdom", "To economic advantage", "To whichever state offers the most security"],
+      optionsEs: ["A la identidad étnica", "A Cristo y a Su Reino", "A la ventaja económica", "Al estado que ofrezca más seguridad"], explanationEn: "The conclusion of the unit is that Christ is Lord, and the believer belongs first and finally to Him.", explanationEs: "La conclusión de la unidad es que Cristo es Señor y que el creyente le pertenece a Él primero y al final.", correct: 1 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "21. Analyze the statement \"My kingdom is not of this world\" (John 18:36). What does it teach about the relationship between Christ's reign and earthly political power?",
+      textEs: "21. Analice la afirmación \"Mi reino no es de este mundo\" (Juan 18:36). ¿Qué enseña sobre la relación entre el reinado de Cristo y el poder político terrenal?",
+      kw_en: ["not of this world", "kingdom", "declaration", "two orders", "eternal", "political", "power", "different"],
+      kw_es: ["no de este mundo", "reino", "declaración", "dos órdenes", "eterno", "político", "poder", "diferente"],
+      modelEn: "The unit treats Jesus' words in John 18:36 not as an evasion but as a declaration. By saying His kingdom is not of this world, Christ drew a line between two orders of reality, one temporal and one eternal. His reign does not operate by the means of earthly political power and is not in competition for a throne in the ordinary political sense. This teaches that Christ's kingdom is of a different kind and source than the kingdoms of this world; it does not advance by force, conquest, or the machinery of the state. The relationship, then, is one of distinction: earthly political power belongs to a passing temporal order, while Christ's reign belongs to an eternal order that cannot be reduced to or captured by any nation or government. The kingdom of God is not a political program but a higher and lasting rule.",
+      modelEs: "La unidad trata las palabras de Jesús en Juan 18:36 no como una evasión sino como una declaración. Al decir que Su reino no es de este mundo, Cristo trazó una línea entre dos órdenes de realidad, uno temporal y otro eterno. Su reinado no opera por los medios del poder político terrenal y no compite por un trono en el sentido político ordinario. Esto enseña que el reino de Cristo es de una clase y un origen distintos de los reinos de este mundo; no avanza por la fuerza, la conquista ni la maquinaria del Estado. La relación, entonces, es de distinción: el poder político terrenal pertenece a un orden temporal pasajero, mientras que el reinado de Cristo pertenece a un orden eterno que no puede reducirse a ninguna nación o gobierno ni ser capturado por ellos. El reino de Dios no es un programa político sino un gobierno superior y duradero." },
+
+    { textEn: "22. Explain the \"Great Transition\" from national Israel to the multinational Church. Why is this significant for understanding Christian nationalism?",
+      textEs: "22. Explique la \"Gran Transición\" de Israel nacional a la Iglesia multinacional. ¿Por qué es significativo esto para entender el nacionalismo cristiano?",
+      kw_en: ["Great Transition", "Israel", "nation", "Church", "multinational", "people", "no single", "nationalism"],
+      kw_es: ["Gran Transición", "Israel", "nación", "Iglesia", "multinacional", "pueblo", "ninguna sola", "nacionalismo"],
+      modelEn: "The unit describes the Great Transition as the move from a time when God's redemptive work was visibly tied to a single nation to the era of the multinational Church. Israel stood as a people set apart, with a defined land, law, and national identity. Through Christ, God's people are no longer one nation but a community drawn from every nation, the Church. This transition is significant for understanding Christian nationalism because it means no single modern nation now occupies the place Israel once held. God's people are now multinational, so no country can claim to be God's chosen nation in the way Israel was. Christian nationalism errs precisely by trying to bind God's purposes to one country, ignoring the transition by which the people of God became a worldwide body. Recognizing the transition guards against confusing loyalty to a nation with loyalty to the kingdom of God.",
+      modelEs: "La unidad describe la Gran Transición como el paso de una época en que la obra redentora de Dios estaba visiblemente atada a una sola nación a la era de la Iglesia multinacional. Israel se erigía como un pueblo apartado, con tierra, ley e identidad nacional definidas. Por medio de Cristo, el pueblo de Dios ya no es una nación sino una comunidad reunida de toda nación, la Iglesia. Esta transición es significativa para entender el nacionalismo cristiano porque significa que ninguna nación moderna ocupa ahora el lugar que Israel tuvo una vez. El pueblo de Dios es ahora multinacional, así que ningún país puede pretender ser la nación escogida de Dios al modo en que lo fue Israel. El nacionalismo cristiano yerra precisamente al intentar atar los propósitos de Dios a un solo país, ignorando la transición por la cual el pueblo de Dios llegó a ser un cuerpo mundial. Reconocer la transición protege contra confundir la lealtad a una nación con la lealtad al reino de Dios." },
+
+    { textEn: "23. Explain Jesus' command to Peter to put away the sword (Matthew 26:52). What does it reveal about the kingdom's attitude toward violence?",
+      textEs: "23. Explique el mandato de Jesús a Pedro de guardar la espada (Mateo 26:52). ¿Qué revela sobre la actitud del reino hacia la violencia?",
+      kw_en: ["sword", "Peter", "put away", "violence", "force", "kingdom", "not advance", "Christ"],
+      kw_es: ["espada", "Pedro", "guardar", "violencia", "fuerza", "reino", "no avanza", "Cristo"],
+      modelEn: "The unit recounts how Peter reached for the sword in Jesus' defense, calling it the most natural response imaginable, the instinct by which power meets power and force answers force. But Christ intervened, telling Peter to put his sword back in its place. This reveals the kingdom's fundamental attitude toward violence. Christ's kingdom does not advance by the sword; it does not establish or defend itself through coercion and bloodshed. At the very moment when violence seemed most justified, in defense of the Lord Himself, Jesus refused it. The lesson is that the means of the kingdom are not the means of worldly power. Where earthly kingdoms rise and protect themselves by force, Christ's kingdom rejects that path. This sets a pattern: the people of the kingdom cannot rightly use violence and coercion to advance God's cause, because their King explicitly disowned the sword as His instrument.",
+      modelEs: "La unidad relata cómo Pedro echó mano de la espada en defensa de Jesús, llamándolo la respuesta más natural imaginable, el instinto por el cual el poder enfrenta al poder y la fuerza responde a la fuerza. Pero Cristo intervino, diciéndole a Pedro que volviera a poner su espada en su lugar. Esto revela la actitud fundamental del reino hacia la violencia. El reino de Cristo no avanza por la espada; no se establece ni se defiende mediante la coerción y el derramamiento de sangre. En el momento mismo en que la violencia parecía más justificada, en defensa del Señor mismo, Jesús la rechazó. La lección es que los medios del reino no son los medios del poder mundano. Donde los reinos terrenales se levantan y se protegen por la fuerza, el reino de Cristo rechaza ese camino. Esto establece un patrón: el pueblo del reino no puede usar correctamente la violencia y la coerción para avanzar la causa de Dios, porque su Rey desautorizó explícitamente la espada como Su instrumento." },
+
+    { textEn: "24. Explain Augustine's just war precepts. What was his intention in developing them, and how have they often been misused?",
+      textEs: "24. Explique los preceptos de la guerra justa de Agustín. ¿Cuál fue su intención al desarrollarlos, y cómo han sido a menudo mal utilizados?",
+      kw_en: ["Augustine", "just war", "restraint", "authority", "just cause", "intention", "misused", "limits"],
+      kw_es: ["Agustín", "guerra justa", "restricción", "autoridad", "causa justa", "intención", "mal usado", "límites"],
+      modelEn: "The unit presents Augustine's classic just war precepts, which include requirements such as legitimate authority, a just cause, right intention, war as a last resort, proportionality, and protection of the innocent. Augustine approached the question of war with sobriety rather than enthusiasm, and his intention was to set moral boundaries that would restrain war, treating these precepts as limits meant to hold violence in check. Measured against them, the unit notes, many wars fail badly. The misuse comes when what was designed as a restraint upon war is turned into a justification for it. Instead of using the precepts to question and limit conflict, people invoke them to bless wars they have already decided to fight. So Augustine's careful boundaries, intended to make war harder to justify, have often been twisted into a checklist for excusing it. The original purpose was restraint; the common abuse is to use them as permission.",
+      modelEs: "La unidad presenta los preceptos clásicos de la guerra justa de Agustín, que incluyen requisitos como la autoridad legítima, una causa justa, la recta intención, la guerra como último recurso, la proporcionalidad y la protección de los inocentes. Agustín abordó la cuestión de la guerra con sobriedad más que con entusiasmo, y su intención fue establecer límites morales que restringieran la guerra, tratando estos preceptos como límites destinados a frenar la violencia. Medidas contra ellos, observa la unidad, muchas guerras fracasan rotundamente. El mal uso surge cuando lo que fue diseñado como una restricción a la guerra se convierte en una justificación de ella. En lugar de usar los preceptos para cuestionar y limitar el conflicto, las personas los invocan para bendecir guerras que ya han decidido librar. Así que los cuidadosos límites de Agustín, destinados a hacer más difícil justificar la guerra, han sido a menudo torcidos hasta convertirse en una lista para excusarla. El propósito original era la restricción; el abuso común es usarlos como permiso." },
+
+    { textEn: "25. What did Roger Williams mean by the \"wall of separation\" between church and state? Why did he believe this protected the integrity of faith?",
+      textEs: "25. ¿Qué quiso decir Roger Williams con el \"muro de separación\" entre la iglesia y el estado? ¿Por qué creía que esto protegía la integridad de la fe?",
+      kw_en: ["Roger Williams", "wall", "separation", "conscience", "coerced", "integrity", "faith", "protect"],
+      kw_es: ["Roger Williams", "muro", "separación", "conciencia", "forzada", "integridad", "fe", "proteger"],
+      modelEn: "The unit presents Roger Williams as one who saw the danger of religious power with unusual clarity. He understood that faith cannot be coerced, and he built his wall of separation to protect the integrity of faith. His point was not to shield the state from religion but to shield faith from the corrupting grasp of state power. When religion seeks to take over the state, or when the state enforces religion, faith is damaged, because genuine faith must be free and uncoerced; forced belief is not true belief at all. The wall of separation guards the conscience by keeping the coercive power of government out of the realm of belief, so that faith remains authentic rather than compelled. Williams believed that whenever religion seeks to seize political power it corrupts itself, so the separation actually preserves the purity and integrity of faith rather than threatening it.",
+      modelEs: "La unidad presenta a Roger Williams como alguien que vio el peligro del poder religioso con una claridad inusual. Comprendió que la fe no puede ser forzada, y construyó su muro de separación para proteger la integridad de la fe. Su punto no era proteger al Estado de la religión sino proteger la fe del control corruptor del poder estatal. Cuando la religión busca apoderarse del Estado, o cuando el Estado impone la religión, la fe queda dañada, porque la fe genuina debe ser libre y no forzada; la creencia obligada no es verdadera creencia en absoluto. El muro de separación protege la conciencia manteniendo el poder coercitivo del gobierno fuera del ámbito de la creencia, de modo que la fe permanezca auténtica en lugar de obligada. Williams creía que siempre que la religión busca tomar el poder político se corrompe a sí misma, así que la separación de hecho preserva la pureza y la integridad de la fe en lugar de amenazarla." },
+
+    { textEn: "26. How does the unit use the example of Dietrich Bonhoeffer? What does his witness teach about costly discipleship?",
+      textEs: "26. ¿Cómo usa la unidad el ejemplo de Dietrich Bonhoeffer? ¿Qué enseña su testimonio sobre el discipulado costoso?",
+      kw_en: ["Bonhoeffer", "witness", "costly", "discipleship", "obedience", "sentiment", "resist", "faithful"],
+      kw_es: ["Bonhoeffer", "testimonio", "costoso", "discipulado", "obediencia", "sentimiento", "resistir", "fiel"],
+      modelEn: "The unit uses Dietrich Bonhoeffer as a witness from history that reminds the Church discipleship is not proven in sentiment but in costly obedience. Bonhoeffer lived in a time when the pressure to align faith with national and political power was intense, and his witness stands as an example of refusing that pressure at great personal cost. His life teaches that following Christ is not merely a matter of warm feelings or verbal agreement; it is tested when obedience to Christ comes into conflict with the demands of the state and the surrounding culture. Costly discipleship means staying faithful to Christ even when that faithfulness is dangerous and demands real sacrifice. Bonhoeffer's example warns against a cheap, sentimental faith that costs nothing, and calls believers to the kind of obedience that holds firm to Christ's lordship above national loyalty, whatever the price.",
+      modelEs: "La unidad usa a Dietrich Bonhoeffer como un testimonio de la historia que recuerda a la Iglesia que el discipulado no se prueba en el sentimiento sino en la obediencia costosa. Bonhoeffer vivió en una época en que la presión por alinear la fe con el poder nacional y político era intensa, y su testimonio se erige como ejemplo de rechazar esa presión a gran costo personal. Su vida enseña que seguir a Cristo no es meramente cuestión de sentimientos cálidos o acuerdo verbal; se prueba cuando la obediencia a Cristo entra en conflicto con las demandas del Estado y de la cultura circundante. El discipulado costoso significa permanecer fiel a Cristo aun cuando esa fidelidad es peligrosa y exige verdadero sacrificio. El ejemplo de Bonhoeffer advierte contra una fe barata y sentimental que no cuesta nada, y llama a los creyentes a la clase de obediencia que se aferra al señorío de Cristo por encima de la lealtad nacional, cueste lo que cueste." },
+
+    { textEn: "27. How does the unit connect economic interests to moral compromise? Use the example of slavery in the American South.",
+      textEs: "27. ¿Cómo conecta la unidad los intereses económicos con el compromiso moral? Use el ejemplo de la esclavitud en el Sur de Estados Unidos.",
+      kw_en: ["economics", "slavery", "South", "profitable", "justified", "compromise", "cotton", "muted"],
+      kw_es: ["economía", "esclavitud", "Sur", "rentable", "justificaron", "compromiso", "algodón", "silenciaron"],
+      modelEn: "The unit connects economic interest to moral compromise through the example of slavery in the American South. There, slavery was not merely a social custom but an economic engine; cotton depended upon it, and it was highly profitable. Because it was so profitable, many Christians justified it, muting the clear claims of conscience and Scripture in order to protect their economic advantage. The lesson is that economic self-interest has a powerful way of bending moral judgment. When obedience to God would threaten profit, there is strong temptation to rationalize wrong, soften convictions, and find religious cover for what benefits us financially. The example shows how easily faith can be compromised when money is at stake, and it warns believers that wherever economic interest collides with obedience to Christ, the pressure to justify sin for the sake of gain is real and must be resisted.",
+      modelEs: "La unidad conecta el interés económico con el compromiso moral mediante el ejemplo de la esclavitud en el Sur de Estados Unidos. Allí, la esclavitud no era meramente una costumbre social sino un motor económico; el algodón dependía de ella, y era muy rentable. Como era tan rentable, muchos cristianos la justificaron, silenciando los claros reclamos de la conciencia y de la Escritura para proteger su ventaja económica. La lección es que el interés económico propio tiene una manera poderosa de torcer el juicio moral. Cuando la obediencia a Dios amenazaría las ganancias, hay una fuerte tentación de racionalizar el mal, suavizar las convicciones y encontrar cobertura religiosa para lo que nos beneficia financieramente. El ejemplo muestra cuán fácilmente la fe puede comprometerse cuando hay dinero en juego, y advierte a los creyentes que dondequiera que el interés económico choque con la obediencia a Cristo, la presión por justificar el pecado en aras de la ganancia es real y debe resistirse." },
+
+    { textEn: "28. What does Christ's own experience as a displaced refugee signify, and how does it challenge Christian nationalism?",
+      textEs: "28. ¿Qué significa la propia experiencia de Cristo como refugiado desplazado, y cómo desafía al nacionalismo cristiano?",
+      kw_en: ["refugee", "Christ", "Egypt", "stranger", "migrant", "challenge", "nationalism", "identify"],
+      kw_es: ["refugiado", "Cristo", "Egipto", "extranjero", "migrante", "desafía", "nacionalismo", "identific"],
+      modelEn: "As an infant, Christ Himself was carried into Egypt to escape a murderous king, becoming for a season a refugee and a stranger in a foreign land. He later taught that whatever is done for the least of these — the hungry, the stranger, the prisoner — is done for Him. This grounds the call to compassion for the displaced in Christ's own life rather than an abstract rule, and it challenges Christian nationalism by showing that a faith fused too tightly with national identity or policy can grow cold toward the very people Christ identified Himself with. It does not settle the policy questions surrounding immigration, which believers may weigh differently, but it does mean that contempt for the stranger has no place in a follower of Christ.",
+      modelEs: "De niño, Cristo mismo fue llevado a Egipto para escapar de un rey asesino, convirtiéndose por una temporada en refugiado y extranjero en tierra ajena. Más tarde enseñó que lo que se hace por estos sus hermanos más pequeños — el hambriento, el extranjero, el preso — se hace por Él. Esto fundamenta el llamado a la compasión por los desplazados en la propia vida de Cristo, no en una regla abstracta, y desafía al nacionalismo cristiano al mostrar que una fe demasiado fusionada con la identidad nacional o la política puede enfriarse hacia las mismas personas con quienes Cristo se identificó. No resuelve las cuestiones de política migratoria, que los creyentes pueden sopesar de manera diferente, pero sí significa que el desprecio al extranjero no tiene lugar en un seguidor de Cristo." },
+
+    { textEn: "29. What does the unit teach about the proper limits of patriotism? How can a Christian love their country without idolizing it?",
+      textEs: "29. ¿Qué enseña la unidad sobre los límites apropiados del patriotismo? ¿Cómo puede un cristiano amar a su país sin idolatrarlo?",
+      kw_en: ["patriotism", "limits", "idolize", "love", "righteousness", "first", "loyalty", "Christ"],
+      kw_es: ["patriotismo", "límites", "idolatrar", "amar", "justicia", "primero", "lealtad", "Cristo"],
+      modelEn: "The unit teaches that patriotism has proper limits because it cannot redefine righteousness. It states plainly that God never declared any nation first, and that no modern nation stands as the exclusive vessel of His purposes. Patriotism crosses its limit when it begins to justify what God condemns or to claim God's special favor for one country above all others. A Christian can love their country without idolizing it by keeping that love in its proper place, under the lordship of Christ rather than above it. Loving one's nation is not wrong, but it becomes idolatry when national loyalty is treated as ultimate, when the nation is exalted as God's chosen above the multinational people of God, or when patriotism is used to excuse injustice. The believer loves their country rightly by refusing to let it redefine right and wrong, holding ultimate loyalty to the kingdom of God.",
+      modelEs: "La unidad enseña que el patriotismo tiene límites apropiados porque no puede redefinir la justicia. Afirma con claridad que Dios nunca declaró a ninguna nación como primera, y que ninguna nación moderna se erige como el vaso exclusivo de Sus propósitos. El patriotismo cruza su límite cuando comienza a justificar lo que Dios condena o a reclamar el favor especial de Dios para un país por encima de todos los demás. Un cristiano puede amar a su país sin idolatrarlo manteniendo ese amor en su lugar propio, bajo el señorío de Cristo en lugar de por encima de él. Amar a la propia nación no está mal, pero se vuelve idolatría cuando la lealtad nacional se trata como última, cuando la nación es exaltada como la escogida de Dios por encima del pueblo multinacional de Dios, o cuando el patriotismo se usa para excusar la injusticia. El creyente ama a su país correctamente al rehusar que este redefina el bien y el mal, sosteniendo la lealtad última al reino de Dios." },
+
+    { textEn: "30. Summarize the main point of this unit. How should Christians relate to the state while maintaining ultimate loyalty to the Kingdom of God?",
+      textEs: "30. Resuma el punto principal de esta unidad. ¿Cómo deben relacionarse los cristianos con el estado mientras mantienen la lealtad última al Reino de Dios?",
+      kw_en: ["state", "kingdom", "ultimate loyalty", "Christ", "not of this world", "conscience", "idolatry", "faithful"],
+      kw_es: ["estado", "reino", "lealtad última", "Cristo", "no de este mundo", "conciencia", "idolatría", "fiel"],
+      modelEn: "The main point of the unit is that Christ's kingdom is not of this world, so believers must keep their ultimate loyalty to the Kingdom of God above every earthly nation and power. Through the Great Transition, God's people became a multinational Church, so no single country can claim Israel's old place or be treated as God's chosen nation. The kingdom does not advance by the sword, as Christ showed when He told Peter to put it away; faith cannot be coerced, as Roger Williams saw; and economic interest, national pride, and political power all tempt the Church to compromise, as slavery, Christ's own life as a displaced refugee, and Bonhoeffer's costly witness illustrate. Christians should therefore relate to the state with respect in its proper place but never with the supreme allegiance owed to Christ alone. They may love their country without idolizing it, obey lawful authority while refusing to let patriotism redefine righteousness, and keep conscience free, holding firm to the kingdom of God as their highest loyalty.",
+      modelEs: "El punto principal de la unidad es que el reino de Cristo no es de este mundo, así que los creyentes deben mantener su lealtad última al Reino de Dios por encima de toda nación y poder terrenal. Por medio de la Gran Transición, el pueblo de Dios llegó a ser una Iglesia multinacional, así que ningún país puede reclamar el antiguo lugar de Israel ni ser tratado como la nación escogida de Dios. El reino no avanza por la espada, como mostró Cristo cuando le dijo a Pedro que la guardara; la fe no puede ser forzada, como vio Roger Williams; y el interés económico, el orgullo nacional y el poder político tientan todos a la Iglesia a comprometerse, como ilustran la esclavitud, la propia vida de Cristo como refugiado desplazado, y el testimonio costoso de Bonhoeffer. Por tanto, los cristianos deben relacionarse con el Estado con respeto en su lugar propio pero nunca con la lealtad suprema que se debe solo a Cristo. Pueden amar a su país sin idolatrarlo, obedecer a la autoridad legítima mientras rehúsan que el patriotismo redefina la justicia, y mantener libre la conciencia, aferrándose al reino de Dios como su lealtad más alta." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en el Certificado arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click the Certificate above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (answered || mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (answered || mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSSTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

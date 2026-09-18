@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Evangelistic Preaching · Unit 7 · Textual and Expository Approaches</title>
+<style>
+  :root{
+    --bg:#fbf7ef; --ink:#1f1a14; --rule:#c9b98a; --accent:#6b4423; --soft:#f3ead4;
+    --good:#1f6b3a; --bad:#a31e1e; --warn:#a35a00;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.55;font-size:17px}
+  header{background:var(--accent);color:#fff;padding:1.25rem 1.5rem;border-bottom:4px double #c9b98a}
+  header h1{margin:0;font-size:1.35rem;letter-spacing:.5px}
+  header .sub{font-size:.95rem;opacity:.92;margin-top:.25rem}
+  main{max-width:880px;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+  h2{font-size:1.35rem;border-bottom:2px solid var(--rule);padding-bottom:.3rem;margin-top:2.25rem;color:var(--accent)}
+  h3{font-size:1.1rem;margin-top:1.5rem;color:var(--accent)}
+  blockquote{border-left:4px solid var(--rule);background:var(--soft);margin:1rem 0;padding:.75rem 1rem;font-style:italic}
+  .controls{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;background:var(--soft);padding:.85rem 1rem;border:1px solid var(--rule);border-radius:6px;margin:1rem 0 0}
+  .controls .group{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+  .controls label{font-size:.92rem;font-weight:bold}
+  .controls select,.controls button{font-family:inherit;font-size:.95rem;padding:.4rem .7rem;border:1px solid var(--accent);background:#fff;color:var(--ink);border-radius:4px;cursor:pointer}
+  .controls button{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .controls button.secondary{background:#fff;color:var(--accent)}
+  .pill{display:inline-block;font-size:.8rem;padding:.15rem .55rem;border:1px solid var(--accent);border-radius:999px;background:#fff;color:var(--accent);font-weight:bold}
+  .q{margin:1.25rem 0;padding:.85rem 1rem;border:1px solid var(--rule);border-radius:6px;background:#fff}
+  .q .stem{font-weight:bold;margin-bottom:.5rem}
+  .q label{display:block;padding:.3rem .25rem;cursor:pointer}
+  .q input[type=radio]{margin-right:.5rem}
+  .q .fb{margin-top:.5rem;padding:.5rem .75rem;border-radius:4px;font-size:.92rem;display:none}
+  .q .fb.good{background:#e3f3e6;color:var(--good);border:1px solid #b6dcbf;display:block}
+  .q .fb.bad{background:#f7e1e1;color:var(--bad);border:1px solid #e0b3b3;display:block}
+  .q textarea{width:100%;min-height:75px;font-family:inherit;font-size:.95rem;padding:.5rem;border:1px solid var(--rule);border-radius:4px;resize:vertical}
+  .q .sa-fb{margin-top:.4rem;font-size:.9rem}
+.q .modelbox{margin-top:.5rem;padding:.55rem .7rem;background:#fff8e1;color:#5d4a00;border-left:4px solid #d4af37;border-radius:4px;font-size:.9rem}
+  .q .sa-actions{margin-top:.55rem}
+  .q .sa-check{font-size:.9rem;padding:.4rem .9rem;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:4px;font-weight:bold}
+  .q .sa-empty{color:#8a7a5e;font-style:italic}
+
+  .lang-es{display:none}
+  body.lang-es .lang-en{display:none}
+  body.lang-es .lang-es{display:block}
+  body.lang-es .lang-es-inline{display:inline}
+  body.lang-es header h1::after{content:" · Español"}
+  .result-box{margin-top:1.5rem;padding:1rem 1.25rem;border:2px solid var(--accent);border-radius:6px;background:var(--soft);font-size:1.02rem}
+  .result-box.locked{background:#f7e1e1;border-color:var(--bad);color:var(--bad)}
+  .result-box.passed{background:#e3f3e6;border-color:var(--good);color:var(--good)}
+  .cert-link{display:inline-block;margin-top:.75rem;padding:.5rem .9rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:4px;font-weight:bold}
+  footer{font-size:.85rem;color:#6b5a3e;text-align:center;padding:1.5rem 1rem;border-top:1px solid var(--rule)}
+  ul.clean{margin:.5rem 0 .5rem 1.25rem;padding:0}
+  ul.clean li{margin:.25rem 0}
+  .example{background:var(--soft);padding:.75rem 1rem;border-left:4px solid var(--accent);margin:.75rem 0;border-radius:0 4px 4px 0}
+  .example .label{font-weight:bold;color:var(--accent);font-size:.9rem;letter-spacing:.5px;text-transform:uppercase}
+  @media print{
+    .controls,button,.cert-link{display:none !important}
+    body{background:#fff;color:#000;font-size:12pt}
+    header{background:#fff;color:#000;border-bottom:2px solid #000}
+    .q{break-inside:avoid;border:1px solid #000}
+    h2,h3{color:#000}
+  }
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 16px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:#fff;border:1px solid var(--rule);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:var(--accent);}
+.unitnav a.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header>
+  <h1>
+    <span class="lang-en">CTS Evangelistic Preaching · Unit 7</span>
+    <span class="lang-es">CTS Predicación Evangelística · Unidad 7</span>
+  </h1>
+  <div class="sub">
+    <span class="lang-en">Planning Evangelistic Sermons – Textual and Expository Approaches</span>
+    <span class="lang-es">Planificación de Sermones Evangelísticos – Los Enfoques Textual y Expositivo</span>
+    &middot; <span class="pill">Dr. Wayne Cook</span>
+  </div>
+</header>
+
+<main>
+
+<div class="controls">
+  <div class="group">
+    <label><span class="lang-en">Language:</span><span class="lang-es">Idioma:</span></label>
+    <button id="btnLang" class="secondary" type="button">English / Español</button>
+  </div>
+  <div class="group">
+    <label><span class="lang-en">Track:</span><span class="lang-es">Vía:</span></label>
+    <select id="trackSel" aria-label="trackSel">
+      <option value="cert">Certificate / Certificado</option>
+      <option value="mdiv">M.Div</option>
+    </select>
+  </div>
+</div>
+
+<nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+  <span class="nl"><span class="lang-en">Units</span><span class="lang-es">Unidades</span></span>
+  <a href="CTSEvanPreachUnit1.html">1</a>
+  <a href="CTSEvanPreachUnit2.html">2</a>
+  <a href="CTSEvanPreachUnit3.html">3</a>
+  <a href="CTSEvanPreachUnit4.html">4</a>
+  <a href="CTSEvanPreachUnit5.html">5</a>
+  <a href="CTSEvanPreachUnit6.html">6</a>
+  <a href="CTSEvanPreachUnit7.html" class="active">7</a>
+  <a href="CTSEvanPreachUnit8.html">8</a>
+  <a href="CTSEvanPreachUnit9.html">9</a>
+  <a href="CTSEvanPreachUnit10.html">10</a>
+</nav>
+
+<!-- ============ TEACHING PROSE (EN) ============ -->
+<section class="lang-en">
+
+<h2>Learning Goal</h2>
+<p>After studying this unit you will be able to use the Textual and Expository Approaches taught in <em>WiseSpeak</em> to plan a complete evangelistic sermon. You will select a plural noun keyword from the text, form a clear subject, build three short parallel points (each five words or less), and write a one-sentence evangelistic objective that leads listeners to Christ.</p>
+
+<h3>The Textual and Expository Approaches in WiseSpeak</h3>
+<p><em>WiseSpeak</em> teaches two closely related planning methods that keep the sermon anchored in a single passage of Scripture. The <strong>Textual Approach</strong> takes one clear verse or short paragraph and lets its specific facts shape the entire sermon. The <strong>Expository Approach</strong> moves verse by verse through a longer passage, drawing out the main truths as it goes. These approaches are powerful for evangelistic preaching because they let the Bible speak for itself. The listener sees that the message comes directly from God's Word.</p>
+
+<h3>The Inductive Approach</h3>
+<p>Both methods follow the inductive approach from the first seven units of <em>WiseSpeak</em>. We begin with the specific facts in the text and work backward to discover the keyword and subject. When the keyword is a plural noun and each point is a short singular of that keyword, the sermon stays unified and easy to remember.</p>
+
+<h3>How the Textual Approach Works</h3>
+<ol>
+  <li>Choose one clear verse or short paragraph.</li>
+  <li>Read it carefully and ask the probing question the text answers.</li>
+  <li>Identify the key idea and turn it into a plural noun keyword.</li>
+  <li>Form the subject around the keyword.</li>
+  <li>List the specific facts or truths in the text. Turn each truth into a short point (five words or less) that is a singular of the keyword.</li>
+  <li>Write a one-sentence evangelistic objective.</li>
+  <li>Add a clear invitation at the end.</li>
+</ol>
+<p>The keyword is always a plural noun. Every point is a clean singular of that plural keyword. The points stay short and parallel so the listener can remember them easily.</p>
+
+<h3>Textual Example &mdash; John 3:16</h3>
+<p>The text answers the question, "Why did God send His Son?" The keyword is "reasons" (a plural noun). The subject is "Three Reasons God Sent His Son."</p>
+<div class="example">
+  <div class="label">Question: Why did God send His Son? &middot; Keyword: reasons</div>
+  <ol>
+    <li><strong>Reason One:</strong> Show His love.</li>
+    <li><strong>Reason Two:</strong> Offer eternal life.</li>
+    <li><strong>Reason Three:</strong> Save the world.</li>
+  </ol>
+</div>
+<p>Each point is a singular of the keyword "reasons." Each point is five words or less. The points are parallel. The sermon is built directly from the specific facts in the text.</p>
+
+<h3>Textual Example &mdash; Romans 10:9</h3>
+<p>The text answers the question, "How can I be saved?" The keyword is "conditions" (a plural noun). The subject is "God's Conditions for Salvation."</p>
+<div class="example">
+  <div class="label">Question: How can I be saved? &middot; Keyword: conditions</div>
+  <ol>
+    <li><strong>Condition One:</strong> Confess with your mouth.</li>
+    <li><strong>Condition Two:</strong> Believe in your heart.</li>
+    <li><strong>Condition Three:</strong> Receive God's salvation.</li>
+  </ol>
+</div>
+<p>Again the points are clean singulars of the keyword "conditions." The sermon stays anchored in the text.</p>
+
+<h3>How the Expository Approach Works</h3>
+<p>The Expository Approach moves through a longer passage verse by verse. We still use the same keyword rules. We read the entire passage, discover the central idea, select the plural noun keyword, form the subject, and then draw three short parallel points from the key truths in the passage.</p>
+
+<h3>Expository Example &mdash; Luke 15:11&ndash;32</h3>
+<p>The passage answers the question, "Can God still accept me after what I have done?" The keyword is "reasons" (a plural noun). The subject is "Three Reasons God Welcomes You Home."</p>
+<div class="example">
+  <div class="label">Question: Can God still accept me after what I have done? &middot; Keyword: reasons</div>
+  <ol>
+    <li><strong>Reason One:</strong> Father's love.</li>
+    <li><strong>Reason Two:</strong> Open arms.</li>
+    <li><strong>Reason Three:</strong> Full restoration.</li>
+  </ol>
+</div>
+<p>Each point is a singular of the keyword "reasons." Each point is short and parallel. The sermon moves through the story of the prodigal son but stays unified under one clear keyword.</p>
+
+<h3>Why These Approaches Are Powerful for Evangelistic Preaching</h3>
+<p>The Textual and Expository Approaches keep every sermon biblical. The listener knows the points come straight from Scripture. The short parallel points make the message easy to remember and take home. The plural noun keyword gives the whole sermon unity. The one-sentence objective keeps the focus on leading people to Christ. These methods work especially well when the text itself raises a question people today are still asking. When a single verse does not contain every point needed, we add supporting texts from other passages while the keyword still controls the outline. The sermon remains unified and the points stay short.</p>
+
+<h3>Practical Steps to Use the Textual and Expository Approaches in Your Preaching</h3>
+<p>Choose a clear text or short passage. Read it carefully and write the probing question it answers. Select the plural noun keyword that best captures the truths in the text. Form the subject by placing the keyword at the end. Build exactly three short parallel points, each five words or less. Write the evangelistic objective in one sentence. Prepare a clear invitation that calls for immediate response. These approaches, taught in <em>WiseSpeak</em>, turn any biblical text into a powerful evangelistic sermon that is clear, memorable, and aimed at the heart.</p>
+
+</section>
+
+<!-- ============ TEACHING PROSE (ES) ============ -->
+<section class="lang-es">
+
+<h2>Objetivo de Aprendizaje</h2>
+<p>Después de estudiar esta unidad podrá usar los Enfoques Textual y Expositivo enseñados en <em>WiseSpeak</em> para planificar un sermón evangelístico completo. Seleccionará una palabra clave (sustantivo plural) del texto, formará un tema claro, construirá tres puntos cortos y paralelos (cada uno de cinco palabras o menos) y escribirá un objetivo evangelístico de una sola oración que lleve a los oyentes a Cristo.</p>
+
+<h3>Los Enfoques Textual y Expositivo en WiseSpeak</h3>
+<p><em>WiseSpeak</em> enseña dos métodos de planificación estrechamente relacionados que mantienen el sermón anclado en un solo pasaje de las Escrituras. El <strong>Enfoque Textual</strong> toma un versículo claro o un párrafo corto y deja que sus hechos específicos formen todo el sermón. El <strong>Enfoque Expositivo</strong> avanza versículo por versículo a través de un pasaje más largo, extrayendo las verdades principales a medida que avanza. Estos enfoques son poderosos para la predicación evangelística porque dejan que la Biblia hable por sí misma. El oyente ve que el mensaje proviene directamente de la Palabra de Dios.</p>
+
+<h3>El Enfoque Inductivo</h3>
+<p>Ambos métodos siguen el enfoque inductivo de las primeras siete unidades de <em>WiseSpeak</em>. Comenzamos con los hechos específicos del texto y trabajamos hacia atrás para descubrir la palabra clave y el tema. Cuando la palabra clave es un sustantivo plural y cada punto es un singular corto de esa palabra clave, el sermón se mantiene unificado y fácil de recordar.</p>
+
+<h3>Cómo Funciona el Enfoque Textual</h3>
+<ol>
+  <li>Elegir un versículo claro o un párrafo corto.</li>
+  <li>Leerlo con cuidado y hacer la pregunta de sondeo que el texto responde.</li>
+  <li>Identificar la idea clave y convertirla en una palabra clave (sustantivo plural).</li>
+  <li>Formar el tema alrededor de la palabra clave.</li>
+  <li>Listar los hechos o verdades específicos del texto. Convertir cada verdad en un punto corto (cinco palabras o menos) que sea un singular de la palabra clave.</li>
+  <li>Escribir un objetivo evangelístico de una sola oración.</li>
+  <li>Agregar una invitación clara al final.</li>
+</ol>
+<p>La palabra clave es siempre un sustantivo plural. Cada punto es un singular limpio de esa palabra clave plural. Los puntos se mantienen cortos y paralelos para que el oyente pueda recordarlos fácilmente.</p>
+
+<h3>Ejemplo Textual &mdash; Juan 3:16</h3>
+<p>El texto responde a la pregunta: "¿Por qué envió Dios a Su Hijo?" La palabra clave es "razones" (un sustantivo plural). El tema es "Tres Razones por las que Dios Envió a Su Hijo".</p>
+<div class="example">
+  <div class="label">Pregunta: ¿Por qué envió Dios a Su Hijo? &middot; Palabra clave: razones</div>
+  <ol>
+    <li><strong>Razón Uno:</strong> Mostrar Su amor.</li>
+    <li><strong>Razón Dos:</strong> Ofrecer vida eterna.</li>
+    <li><strong>Razón Tres:</strong> Salvar al mundo.</li>
+  </ol>
+</div>
+<p>Cada punto es un singular de la palabra clave "razones". Cada punto tiene cinco palabras o menos. Los puntos son paralelos. El sermón se construye directamente de los hechos específicos del texto.</p>
+
+<h3>Ejemplo Textual &mdash; Romanos 10:9</h3>
+<p>El texto responde a la pregunta: "¿Cómo puedo ser salvo?" La palabra clave es "condiciones" (un sustantivo plural). El tema es "Las Condiciones de Dios para la Salvación".</p>
+<div class="example">
+  <div class="label">Pregunta: ¿Cómo puedo ser salvo? &middot; Palabra clave: condiciones</div>
+  <ol>
+    <li><strong>Condición Uno:</strong> Confesar con la boca.</li>
+    <li><strong>Condición Dos:</strong> Creer en el corazón.</li>
+    <li><strong>Condición Tres:</strong> Recibir la salvación de Dios.</li>
+  </ol>
+</div>
+<p>Nuevamente los puntos son singulares limpios de la palabra clave "condiciones". El sermón permanece anclado en el texto.</p>
+
+<h3>Cómo Funciona el Enfoque Expositivo</h3>
+<p>El Enfoque Expositivo avanza a través de un pasaje más largo versículo por versículo. Todavía usamos las mismas reglas de la palabra clave. Leemos todo el pasaje, descubrimos la idea central, seleccionamos la palabra clave (sustantivo plural), formamos el tema y luego extraemos tres puntos cortos y paralelos de las verdades clave del pasaje.</p>
+
+<h3>Ejemplo Expositivo &mdash; Lucas 15:11&ndash;32</h3>
+<p>El pasaje responde a la pregunta: "¿Puede Dios todavía aceptarme después de lo que he hecho?" La palabra clave es "razones" (un sustantivo plural). El tema es "Tres Razones por las que Dios Te Recibe en Casa".</p>
+<div class="example">
+  <div class="label">Pregunta: ¿Puede Dios todavía aceptarme después de lo que he hecho? &middot; Palabra clave: razones</div>
+  <ol>
+    <li><strong>Razón Uno:</strong> Amor del Padre.</li>
+    <li><strong>Razón Dos:</strong> Brazos abiertos.</li>
+    <li><strong>Razón Tres:</strong> Restauración completa.</li>
+  </ol>
+</div>
+<p>Cada punto es un singular de la palabra clave "razones". Cada punto es corto y paralelo. El sermón avanza a través de la historia del hijo pródigo pero se mantiene unificado bajo una sola palabra clave clara.</p>
+
+<h3>Por Qué Estos Enfoques Son Poderosos para la Predicación Evangelística</h3>
+<p>Los Enfoques Textual y Expositivo mantienen cada sermón bíblico. El oyente sabe que los puntos provienen directamente de las Escrituras. Los puntos cortos y paralelos hacen que el mensaje sea fácil de recordar y llevar a casa. La palabra clave (sustantivo plural) da unidad a todo el sermón. El objetivo de una sola oración mantiene el enfoque en llevar a las personas a Cristo. Estos métodos funcionan especialmente bien cuando el texto mismo plantea una pregunta que la gente hoy todavía se hace. Cuando un solo versículo no contiene cada punto necesario, simplemente agregamos textos de apoyo de otros pasajes mientras la palabra clave controla el bosquejo. El sermón permanece unificado y los puntos se mantienen cortos.</p>
+
+<h3>Pasos Prácticos para Usar los Enfoques Textual y Expositivo en Su Predicación</h3>
+<p>Elegir un texto claro o un pasaje corto. Leerlo con cuidado y escribir la pregunta de sondeo que responde. Seleccionar la palabra clave (sustantivo plural) que mejor capture las verdades del texto. Formar el tema colocando la palabra clave al final. Construir exactamente tres puntos cortos y paralelos, cada uno de cinco palabras o menos. Escribir el objetivo evangelístico en una oración. Preparar una invitación clara que llame a una respuesta inmediata. Estos enfoques, enseñados en <em>WiseSpeak</em>, convierten cualquier texto bíblico en un sermón evangelístico poderoso que es claro, memorable y apuntado al corazón.</p>
+
+</section>
+
+<!-- ============ SELF-CHECK ============ -->
+<h2>
+  <span class="lang-en">Self-Check &mdash; Unit 7</span>
+  <span class="lang-es">Autoevaluación &mdash; Unidad 7</span>
+</h2>
+<p>
+  <span class="lang-en"><strong>Certificate track:</strong> 18 of 20 multiple choice correct to pass.<br>
+  <strong>M.Div / Th.M. track:</strong> 18 of 20 multiple choice <em>and</em> 9 of 10 short answer correct, independently.</span>
+  <span class="lang-es"><strong>Vía Certificado:</strong> 18 de 20 de opción múltiple correctas para aprobar.<br>
+  <strong>Vía M.Div / Th.M.:</strong> 18 de 20 de opción múltiple <em>y</em> 9 de 10 de respuesta corta correctas, de forma independiente.</span>
+</p>
+
+<div id="mcBlock"></div>
+
+<h3>
+  <span class="lang-en">Short Answer (M.Div track only)</span>
+  <span class="lang-es">Respuesta Corta (solo vía M.Div)</span>
+</h3>
+<div id="saBlock"></div>
+
+<div class="controls" style="margin-top:1.25rem">
+  <button id="btnSubmit" type="button"><span class="lang-en">Submit / Grade</span><span class="lang-es">Enviar / Calificar</span></button>
+  <button id="btnReset" class="secondary" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+</div>
+
+<div id="resultBox"></div>
+
+</main>
+
+<footer>
+  <span class="lang-en">Chapala Theological Seminary &middot; CTS Evangelistic Preaching &middot; Unit 7 &middot; Course Author: Dr. Wayne Cook</span>
+  <span class="lang-es">Seminario Teológico de Chapala &middot; CTS Predicación Evangelística &middot; Unidad 7 &middot; Autor del Curso: Dr. Wayne Cook</span>
+</footer>
+
+<script>
+/* ===================== CTS ENGINE — Evangelism U7 ===================== */
+const UNIT_KEY        = "cts_evenpreach_unit7";
+const UNIT_PASSED_KEY = "cts_evenpreach_unit7_passed";
+const MC_PASSED_KEY   = "cts_evenpreach_u7_mc_passed";
+const PROGRESS_KEY    = "cts_evenpreach_progress";
+const LOCKOUT_KEY     = "cts_evenpreach_u7_lockout_until";
+const STUDENT_KEY     = "cts_student";
+const TRACK_KEY       = "cts_track";
+const PASS_MC = 18;
+const PASS_SA = 9;
+const TOTAL_MC = 20;
+const TOTAL_SA = 10;
+const LOCKOUT_MS = 15 * 60 * 1000;
+const REDIRECT_MS = 3000;
+const NEXT_UNIT = "CTSEvanPreachUnit8.html";
+
+const MC = [
+ {id:"q1", correct:"D",
+  en:{stem:"What sermon-planning approaches does this unit teach?",
+      a:"Word Method and Question Method",
+      b:"Allegorical Method and Topical Method",
+      c:"Interview Method and Word Method",
+      d:"Textual Approach and Expository Approach",
+      fbCorrect:"Correct. This unit teaches the Textual and Expository Approaches.",
+      fbWrong:"The unit title and opening name 'the Textual and Expository Approaches.'"},
+  es:{stem:"¿Qué enfoques de planificación de sermones enseña esta unidad?",
+      a:"Método de la Palabra y Método de la Pregunta",
+      b:"Método Alegórico y Método Topical",
+      c:"Método de la Entrevista y Método de la Palabra",
+      d:"Enfoque Textual y Enfoque Expositivo",
+      fbCorrect:"Correcto. Esta unidad enseña los Enfoques Textual y Expositivo.",
+      fbWrong:"El título y la apertura nombran 'los Enfoques Textual y Expositivo.'"}},
+ {id:"q2", correct:"C",
+  en:{stem:"The Textual Approach takes:",
+      a:"Several unrelated verses from different books",
+      b:"A whole chapter of narrative material",
+      c:"One clear verse or short paragraph and lets its specific facts shape the entire sermon",
+      d:"The preacher's personal life experience",
+      fbCorrect:"Correct. One verse or short paragraph, its specific facts shape the sermon.",
+      fbWrong:"See 'The Textual and Expository Approaches in WiseSpeak' — one verse or short paragraph."},
+  es:{stem:"El Enfoque Textual toma:",
+      a:"Varios versículos no relacionados de diferentes libros",
+      b:"Un capítulo entero de material narrativo",
+      c:"Un versículo claro o un párrafo corto y deja que sus hechos específicos formen todo el sermón",
+      d:"La experiencia personal del predicador",
+      fbCorrect:"Correcto. Un versículo o párrafo corto, sus hechos específicos forman el sermón.",
+      fbWrong:"Vea 'Los Enfoques Textual y Expositivo en WiseSpeak' — un versículo o párrafo corto."}},
+ {id:"q3", correct:"B",
+  en:{stem:"The Expository Approach:",
+      a:"Begins with a topic and gathers proof-texts from across Scripture",
+      b:"Moves verse by verse through a longer passage, drawing out main truths as it goes",
+      c:"Builds the sermon around the preacher's interview with a known person",
+      d:"Allegorizes the text to find hidden symbolic meanings",
+      fbCorrect:"Correct. Verse by verse through a longer passage.",
+      fbWrong:"See 'The Textual and Expository Approaches in WiseSpeak' — Expository moves verse by verse through a longer passage."},
+  es:{stem:"El Enfoque Expositivo:",
+      a:"Comienza con un tema y reúne textos de prueba de toda la Escritura",
+      b:"Avanza versículo por versículo a través de un pasaje más largo, extrayendo las verdades principales",
+      c:"Construye el sermón alrededor de la entrevista del predicador con una persona conocida",
+      d:"Alegoriza el texto para encontrar significados simbólicos ocultos",
+      fbCorrect:"Correcto. Versículo por versículo a través de un pasaje más largo.",
+      fbWrong:"Vea 'Los Enfoques Textual y Expositivo en WiseSpeak' — Expositivo avanza versículo por versículo."}},
+ {id:"q4", correct:"A",
+  en:{stem:"Both the Textual and Expository Approaches follow which method?",
+      a:"Inductive — begin with the text's specific facts and work backward",
+      b:"Allegorical — symbolic meaning behind the words",
+      c:"Deductive — topic first, then proof-texts",
+      d:"Anecdotal — begin with a personal story",
+      fbCorrect:"Correct. Both follow the inductive approach.",
+      fbWrong:"See 'The Inductive Approach' — both methods are inductive."},
+  es:{stem:"Tanto el Enfoque Textual como el Expositivo siguen qué método?",
+      a:"Inductivo — comenzar con los hechos específicos del texto y trabajar hacia atrás",
+      b:"Alegórico — significado simbólico detrás de las palabras",
+      c:"Deductivo — tema primero, luego textos de prueba",
+      d:"Anecdótico — comenzar con una historia personal",
+      fbCorrect:"Correcto. Ambos siguen el enfoque inductivo.",
+      fbWrong:"Vea 'El Enfoque Inductivo' — ambos métodos son inductivos."}},
+ {id:"q5", correct:"B",
+  en:{stem:"In the John 3:16 (Textual) example, the question the text answers is:",
+      a:"How can I be saved?",
+      b:"Why did God send His Son?",
+      c:"Can God still accept me after what I have done?",
+      d:"What must I do to inherit eternal life?",
+      fbCorrect:"Correct. 'Why did God send His Son?'",
+      fbWrong:"See 'Textual Example — John 3:16' — the question is 'Why did God send His Son?'"},
+  es:{stem:"En el ejemplo Textual de Juan 3:16, la pregunta que el texto responde es:",
+      a:"¿Cómo puedo ser salvo?",
+      b:"¿Por qué envió Dios a Su Hijo?",
+      c:"¿Puede Dios todavía aceptarme después de lo que he hecho?",
+      d:"¿Qué debo hacer para heredar la vida eterna?",
+      fbCorrect:"Correcto. '¿Por qué envió Dios a Su Hijo?'",
+      fbWrong:"Vea 'Ejemplo Textual — Juan 3:16' — la pregunta es '¿Por qué envió Dios a Su Hijo?'"}},
+ {id:"q6", correct:"A",
+  en:{stem:"In the John 3:16 example, the keyword chosen is:",
+      a:"reasons",
+      b:"sources",
+      c:"conditions",
+      d:"proofs",
+      fbCorrect:"Correct. 'Three Reasons God Sent His Son.'",
+      fbWrong:"See the John 3:16 worked example — the keyword is 'reasons.'"},
+  es:{stem:"En el ejemplo de Juan 3:16, la palabra clave escogida es:",
+      a:"razones",
+      b:"fuentes",
+      c:"condiciones",
+      d:"pruebas",
+      fbCorrect:"Correcto. 'Tres Razones por las que Dios Envió a Su Hijo.'",
+      fbWrong:"Vea el ejemplo trabajado de Juan 3:16 — la palabra clave es 'razones.'"}},
+ {id:"q7", correct:"D",
+  en:{stem:"In the John 3:16 example, the three points are:",
+      a:"Hear gospel; Believe in Jesus; Be baptized",
+      b:"Confess with mouth; Believe in heart; Receive salvation",
+      c:"Father's love; Open arms; Full restoration",
+      d:"Show His love; Offer eternal life; Save the world",
+      fbCorrect:"Correct. Show His love; Offer eternal life; Save the world.",
+      fbWrong:"See the John 3:16 outline — Show His love; Offer eternal life; Save the world."},
+  es:{stem:"En el ejemplo de Juan 3:16, los tres puntos son:",
+      a:"Escuchar el evangelio; Creer en Jesús; Ser bautizado",
+      b:"Confesar con la boca; Creer en el corazón; Recibir la salvación",
+      c:"Amor del Padre; Brazos abiertos; Restauración completa",
+      d:"Mostrar Su amor; Ofrecer vida eterna; Salvar al mundo",
+      fbCorrect:"Correcto. Mostrar Su amor; Ofrecer vida eterna; Salvar al mundo.",
+      fbWrong:"Vea el bosquejo de Juan 3:16 — Mostrar Su amor; Ofrecer vida eterna; Salvar al mundo."}},
+ {id:"q8", correct:"C",
+  en:{stem:"In the Romans 10:9 (Textual) example, the question the text answers is:",
+      a:"Why did God send His Son?",
+      b:"Can God still accept me?",
+      c:"How can I be saved?",
+      d:"Where does eternal life begin?",
+      fbCorrect:"Correct. 'How can I be saved?'",
+      fbWrong:"See 'Textual Example — Romans 10:9' — the question is 'How can I be saved?'"},
+  es:{stem:"En el ejemplo Textual de Romanos 10:9, la pregunta que el texto responde es:",
+      a:"¿Por qué envió Dios a Su Hijo?",
+      b:"¿Puede Dios todavía aceptarme?",
+      c:"¿Cómo puedo ser salvo?",
+      d:"¿Dónde comienza la vida eterna?",
+      fbCorrect:"Correcto. '¿Cómo puedo ser salvo?'",
+      fbWrong:"Vea 'Ejemplo Textual — Romanos 10:9' — la pregunta es '¿Cómo puedo ser salvo?'"}},
+ {id:"q9", correct:"A",
+  en:{stem:"In the Romans 10:9 example, the keyword chosen is:",
+      a:"conditions",
+      b:"reasons",
+      c:"steps",
+      d:"proofs",
+      fbCorrect:"Correct. 'God's Conditions for Salvation.'",
+      fbWrong:"See the Romans 10:9 worked example — the keyword is 'conditions.'"},
+  es:{stem:"En el ejemplo de Romanos 10:9, la palabra clave escogida es:",
+      a:"condiciones",
+      b:"razones",
+      c:"pasos",
+      d:"pruebas",
+      fbCorrect:"Correcto. 'Las Condiciones de Dios para la Salvación.'",
+      fbWrong:"Vea el ejemplo trabajado de Romanos 10:9 — la palabra clave es 'condiciones.'"}},
+ {id:"q10", correct:"B",
+  en:{stem:"In the Romans 10:9 example, the three points are:",
+      a:"Show His love; Offer eternal life; Save the world",
+      b:"Confess with your mouth; Believe in your heart; Receive God's salvation",
+      c:"Christ died for us; While we were sinners; God demonstrates love",
+      d:"Father's love; Open arms; Full restoration",
+      fbCorrect:"Correct. Confess with mouth; Believe in heart; Receive salvation.",
+      fbWrong:"See the Romans 10:9 outline — Confess with your mouth; Believe in your heart; Receive God's salvation."},
+  es:{stem:"En el ejemplo de Romanos 10:9, los tres puntos son:",
+      a:"Mostrar Su amor; Ofrecer vida eterna; Salvar al mundo",
+      b:"Confesar con la boca; Creer en el corazón; Recibir la salvación de Dios",
+      c:"Cristo murió por nosotros; Mientras éramos pecadores; Dios demuestra amor",
+      d:"Amor del Padre; Brazos abiertos; Restauración completa",
+      fbCorrect:"Correcto. Confesar con la boca; Creer en el corazón; Recibir la salvación de Dios.",
+      fbWrong:"Vea el bosquejo de Romanos 10:9 — Confesar con la boca; Creer en el corazón; Recibir la salvación de Dios."}},
+ {id:"q11", correct:"C",
+  en:{stem:"In the Luke 15:11–32 (Expository) example, the question the passage answers is:",
+      a:"How can I find real satisfaction?",
+      b:"Why did God send His Son?",
+      c:"Can God still accept me after what I have done?",
+      d:"What must I do to be saved?",
+      fbCorrect:"Correct. 'Can God still accept me after what I have done?'",
+      fbWrong:"See 'Expository Example — Luke 15:11–32' — 'Can God still accept me after what I have done?'"},
+  es:{stem:"En el ejemplo Expositivo de Lucas 15:11–32, la pregunta que el pasaje responde es:",
+      a:"¿Cómo puedo encontrar verdadera satisfacción?",
+      b:"¿Por qué envió Dios a Su Hijo?",
+      c:"¿Puede Dios todavía aceptarme después de lo que he hecho?",
+      d:"¿Qué debo hacer para ser salvo?",
+      fbCorrect:"Correcto. '¿Puede Dios todavía aceptarme después de lo que he hecho?'",
+      fbWrong:"Vea 'Ejemplo Expositivo — Lucas 15:11–32' — '¿Puede Dios todavía aceptarme después de lo que he hecho?'"}},
+ {id:"q12", correct:"D",
+  en:{stem:"In the Luke 15:11–32 example, the keyword chosen is:",
+      a:"conditions",
+      b:"steps",
+      c:"proofs",
+      d:"reasons",
+      fbCorrect:"Correct. 'Three Reasons God Welcomes You Home.'",
+      fbWrong:"See the Luke 15 worked example — the keyword is 'reasons.'"},
+  es:{stem:"En el ejemplo de Lucas 15:11–32, la palabra clave escogida es:",
+      a:"condiciones",
+      b:"pasos",
+      c:"pruebas",
+      d:"razones",
+      fbCorrect:"Correcto. 'Tres Razones por las que Dios Te Recibe en Casa.'",
+      fbWrong:"Vea el ejemplo trabajado de Lucas 15 — la palabra clave es 'razones.'"}},
+ {id:"q13", correct:"A",
+  en:{stem:"In the Luke 15:11–32 example, the three points are:",
+      a:"Father's love; Open arms; Full restoration",
+      b:"Show His love; Offer eternal life; Save the world",
+      c:"Living water; True worship; Personal testimony",
+      d:"Hear the gospel; Believe in Jesus; Be baptized",
+      fbCorrect:"Correct. Father's love; Open arms; Full restoration.",
+      fbWrong:"See the Luke 15 outline — Father's love; Open arms; Full restoration."},
+  es:{stem:"En el ejemplo de Lucas 15:11–32, los tres puntos son:",
+      a:"Amor del Padre; Brazos abiertos; Restauración completa",
+      b:"Mostrar Su amor; Ofrecer vida eterna; Salvar al mundo",
+      c:"Agua viva; Verdadera adoración; Testimonio personal",
+      d:"Escuchar el evangelio; Creer en Jesús; Ser bautizado",
+      fbCorrect:"Correcto. Amor del Padre; Brazos abiertos; Restauración completa.",
+      fbWrong:"Vea el bosquejo de Lucas 15 — Amor del Padre; Brazos abiertos; Restauración completa."}},
+ {id:"q14", correct:"D",
+  en:{stem:"The keyword in both the Textual and Expository Approaches must be:",
+      a:"A verb in the imperative mood",
+      b:"An adjective describing the listener",
+      c:"A proper name from the passage",
+      d:"A plural noun drawn from the text",
+      fbCorrect:"Correct. The keyword is always a plural noun.",
+      fbWrong:"Standing rule: the keyword is always a plural noun."},
+  es:{stem:"La palabra clave en los Enfoques Textual y Expositivo debe ser:",
+      a:"Un verbo en modo imperativo",
+      b:"Un adjetivo que describe al oyente",
+      c:"Un nombre propio del pasaje",
+      d:"Un sustantivo plural tomado del texto",
+      fbCorrect:"Correcto. La palabra clave es siempre un sustantivo plural.",
+      fbWrong:"Regla permanente: la palabra clave es siempre un sustantivo plural."}},
+ {id:"q15", correct:"B",
+  en:{stem:"The maximum length of each outline point is:",
+      a:"Ten words or less",
+      b:"Five words or less",
+      c:"Twelve words or less",
+      d:"A complete sentence of any length",
+      fbCorrect:"Correct. Each point is five words or less.",
+      fbWrong:"Each outline point must be five words or less."},
+  es:{stem:"La longitud máxima de cada punto del bosquejo es:",
+      a:"Diez palabras o menos",
+      b:"Cinco palabras o menos",
+      c:"Doce palabras o menos",
+      d:"Una oración completa de cualquier longitud",
+      fbCorrect:"Correcto. Cada punto tiene cinco palabras o menos.",
+      fbWrong:"Cada punto del bosquejo debe tener cinco palabras o menos."}},
+ {id:"q16", correct:"C",
+  en:{stem:"The chief difference between the Textual Approach and the Expository Approach is:",
+      a:"One uses the New Testament; the other uses only the Old",
+      b:"One is preached in the morning; the other in the evening",
+      c:"The Textual focuses on one verse or short paragraph; the Expository moves through a longer passage verse by verse",
+      d:"The Textual requires three points; the Expository requires seven",
+      fbCorrect:"Correct. Textual = one verse/short paragraph; Expository = longer passage verse by verse.",
+      fbWrong:"See the opening — Textual takes a short text; Expository moves verse by verse through a longer passage."},
+  es:{stem:"La principal diferencia entre el Enfoque Textual y el Enfoque Expositivo es:",
+      a:"Uno usa el Nuevo Testamento; el otro usa solo el Antiguo",
+      b:"Uno se predica en la mañana; el otro en la noche",
+      c:"El Textual se enfoca en un versículo o párrafo corto; el Expositivo avanza por un pasaje más largo versículo por versículo",
+      d:"El Textual requiere tres puntos; el Expositivo requiere siete",
+      fbCorrect:"Correcto. Textual = un versículo/párrafo corto; Expositivo = pasaje más largo versículo por versículo.",
+      fbWrong:"Vea la apertura — Textual toma un texto corto; Expositivo avanza versículo por versículo por un pasaje más largo."}},
+ {id:"q17", correct:"B",
+  en:{stem:"When a single verse does not contain every point needed:",
+      a:"The preacher must abandon the keyword discipline",
+      b:"Supporting texts are added from other passages while the keyword still controls the outline",
+      c:"The sermon must be reduced to one point only",
+      d:"The Textual Approach is replaced by an allegorical one",
+      fbCorrect:"Correct. Add supporting texts; the keyword still controls the outline.",
+      fbWrong:"See 'Why These Approaches Are Powerful' — supporting texts are added; the keyword still controls."},
+  es:{stem:"Cuando un solo versículo no contiene cada punto necesario:",
+      a:"El predicador debe abandonar la disciplina de la palabra clave",
+      b:"Se agregan textos de apoyo de otros pasajes mientras la palabra clave sigue controlando el bosquejo",
+      c:"El sermón debe reducirse a un solo punto",
+      d:"El Enfoque Textual se reemplaza por uno alegórico",
+      fbCorrect:"Correcto. Agregar textos de apoyo; la palabra clave sigue controlando el bosquejo.",
+      fbWrong:"Vea 'Por Qué Estos Enfoques Son Poderosos' — se agregan textos de apoyo; la palabra clave sigue controlando."}},
+ {id:"q18", correct:"C",
+  en:{stem:"What is the FIRST step in the Textual Approach?",
+      a:"Add a clear invitation at the end",
+      b:"Write the one-sentence evangelistic objective",
+      c:"Choose one clear verse or short paragraph",
+      d:"Form the subject around the keyword",
+      fbCorrect:"Correct. Step one: choose one clear verse or short paragraph.",
+      fbWrong:"See 'How the Textual Approach Works' — step one is to choose one clear verse or short paragraph."},
+  es:{stem:"¿Cuál es el PRIMER paso en el Enfoque Textual?",
+      a:"Agregar una invitación clara al final",
+      b:"Escribir el objetivo evangelístico de una sola oración",
+      c:"Elegir un versículo claro o un párrafo corto",
+      d:"Formar el tema alrededor de la palabra clave",
+      fbCorrect:"Correcto. Paso uno: elegir un versículo claro o un párrafo corto.",
+      fbWrong:"Vea 'Cómo Funciona el Enfoque Textual' — el paso uno es elegir un versículo claro o un párrafo corto."}},
+ {id:"q19", correct:"A",
+  en:{stem:"The three biblical texts used as worked examples in this unit are:",
+      a:"John 3:16, Romans 10:9, and Luke 15:11–32",
+      b:"John 4, Romans 5:8, and Acts 16",
+      c:"Genesis 1, Exodus 20, and Psalm 23",
+      d:"Acts 2:38, John 1:1, and Matthew 28:19",
+      fbCorrect:"Correct. John 3:16 (Textual), Romans 10:9 (Textual), Luke 15:11–32 (Expository).",
+      fbWrong:"This unit uses John 3:16, Romans 10:9, and Luke 15:11–32 as worked examples."},
+  es:{stem:"Los tres textos bíblicos usados como ejemplos trabajados en esta unidad son:",
+      a:"Juan 3:16, Romanos 10:9, y Lucas 15:11–32",
+      b:"Juan 4, Romanos 5:8, y Hechos 16",
+      c:"Génesis 1, Éxodo 20, y Salmo 23",
+      d:"Hechos 2:38, Juan 1:1, y Mateo 28:19",
+      fbCorrect:"Correcto. Juan 3:16 (Textual), Romanos 10:9 (Textual), Lucas 15:11–32 (Expositivo).",
+      fbWrong:"Esta unidad usa Juan 3:16, Romanos 10:9, y Lucas 15:11–32 como ejemplos trabajados."}},
+ {id:"q20", correct:"D",
+  en:{stem:"Why are the Textual and Expository Approaches especially powerful for evangelistic preaching?",
+      a:"They make the sermon shorter and easier to preach without preparation",
+      b:"They allow the preacher to avoid mentioning sin or judgment",
+      c:"They reduce the role of the keyword to optional decoration",
+      d:"They let the Bible speak for itself so the listener sees the message comes directly from God's Word",
+      fbCorrect:"Correct. The Bible speaks for itself; the message comes directly from God's Word.",
+      fbWrong:"See 'Why These Approaches Are Powerful' — the Bible speaks for itself; the message comes from God's Word."},
+  es:{stem:"¿Por qué son los Enfoques Textual y Expositivo especialmente poderosos para la predicación evangelística?",
+      a:"Hacen el sermón más corto y fácil de predicar sin preparación",
+      b:"Permiten al predicador evitar mencionar el pecado o el juicio",
+      c:"Reducen el papel de la palabra clave a una decoración opcional",
+      d:"Dejan que la Biblia hable por sí misma para que el oyente vea que el mensaje proviene directamente de la Palabra de Dios",
+      fbCorrect:"Correcto. La Biblia habla por sí misma; el mensaje proviene directamente de la Palabra de Dios.",
+      fbWrong:"Vea 'Por Qué Estos Enfoques Son Poderosos' — la Biblia habla por sí misma; el mensaje proviene de la Palabra de Dios."}}
+];
+
+const SA = [
+ {id:"sa1",
+  en:{stem:"Define both the Textual Approach and the Expository Approach in your own words."},
+  es:{stem:"Defina tanto el Enfoque Textual como el Enfoque Expositivo en sus propias palabras."},
+  kw_en:["textual","expositor","verse","paragraph","passage","induct","keyword","text"],
+  kw_es:["textual","expositiv","versícul","párraf","pasaje","induct","clave","text"],
+  min:3,model_en:"The Textual Approach takes one clear verse or short paragraph and lets its specific facts shape the whole sermon. The Expository Approach moves verse by verse through a longer passage, drawing out its truths. Both are inductive and built on a plural-noun keyword.",model_es:"El Enfoque Textual toma un versículo claro o un párrafo corto y deja que sus hechos específicos formen todo el sermón. El Enfoque Expositivo avanza versículo por versículo por un pasaje más largo, sacando sus verdades. Ambos son inductivos y construidos sobre una palabra clave plural."},
+ {id:"sa2",
+  en:{stem:"List the seven steps for using the Textual Approach."},
+  es:{stem:"Enumere los siete pasos para usar el Enfoque Textual."},
+  kw_en:["choose","read","question","keyword","subject","point","objectiv","invit"],
+  kw_es:["elegir","leer","pregunta","clave","sujeto","punto","objetiv","invit"],
+  min:3,model_en:"The seven steps are: choose the verse, read it carefully, ask the probing question, select the plural-noun keyword, form the subject, build the short parallel points and objective, and close with the invitation.",model_es:"Los siete pasos son: elegir el versículo, leerlo con cuidado, hacer la pregunta, seleccionar la palabra clave plural, formar el sujeto, construir los puntos cortos y paralelos y el objetivo, y cerrar con la invitación."},
+ {id:"sa3",
+  en:{stem:"In the John 3:16 example, what is the question, what is the keyword, and what are the three points?"},
+  es:{stem:"En el ejemplo de Juan 3:16, ¿cuál es la pregunta, cuál es la palabra clave, y cuáles son los tres puntos?"},
+  kw_en:["reason","sent","son","love","eternal","world","question","keyword"],
+  kw_es:["razon","envió","hijo","amor","etern","mundo","pregunta","clave"],
+  min:3,model_en:"In the John 3:16 example the question is 'Why did God send His Son?' The keyword is 'reasons,' and the three points are: show His love, offer eternal life, save the world.",model_es:"En el ejemplo de Juan 3:16 la pregunta es '¿Por qué envió Dios a Su Hijo?' La palabra clave es 'razones,' y los tres puntos son: mostrar Su amor, ofrecer vida eterna, salvar al mundo."},
+ {id:"sa4",
+  en:{stem:"In the Romans 10:9 example, what is the question, what is the keyword, and what are the three points?"},
+  es:{stem:"En el ejemplo de Romanos 10:9, ¿cuál es la pregunta, cuál es la palabra clave, y cuáles son los tres puntos?"},
+  kw_en:["saved","condition","confess","mouth","believe","heart","receive","question"],
+  kw_es:["salvo","condicion","confes","boca","cre","corazón","recib","pregunta"],
+  min:3,model_en:"In the Romans 10:9 example the question is 'How can I be saved?' The keyword is 'conditions,' and the three points are: confess with your mouth, believe in your heart, receive God's salvation.",model_es:"En el ejemplo de Romanos 10:9 la pregunta es '¿Cómo puedo ser salvo?' La palabra clave es 'condiciones,' y los tres puntos son: confesar con tu boca, creer en tu corazón, recibir la salvación de Dios."},
+ {id:"sa5",
+  en:{stem:"In the Luke 15 (Expository) example, what is the question, what is the keyword, and what are the three points?"},
+  es:{stem:"En el ejemplo Expositivo de Lucas 15, ¿cuál es la pregunta, cuál es la palabra clave, y cuáles son los tres puntos?"},
+  kw_en:["accept","reason","father","love","open","restorat","welcome","question"],
+  kw_es:["acept","razon","padre","amor","abiert","restaur","recib","pregunta"],
+  min:3,model_en:"In the Luke 15 expository example the question is 'Can God still accept me?' The keyword is 'reasons,' and the three points are: the Father's love, His open arms, full restoration - showing why God welcomes the returning sinner.",model_es:"En el ejemplo expositivo de Lucas 15 la pregunta es '¿Puede Dios aún aceptarme?' La palabra clave es 'razones,' y los tres puntos son: el amor del Padre, Sus brazos abiertos, la restauración completa - mostrando por qué Dios recibe al pecador que vuelve."},
+ {id:"sa6",
+  en:{stem:"How does the Textual Approach differ from the Expository Approach in scope of the text used?"},
+  es:{stem:"¿Cómo se diferencia el Enfoque Textual del Enfoque Expositivo en el alcance del texto usado?"},
+  kw_en:["textual","verse","paragraph","expositor","passage","verse","scope","shape"],
+  kw_es:["textual","versícul","párraf","expositiv","pasaje","largo","alcance","forma"],
+  min:3,model_en:"The two differ in scope: the Textual Approach uses one verse or short paragraph and lets its facts shape the sermon, while the Expository Approach works through a longer passage verse by verse, drawing the outline from the unfolding text.",model_es:"Los dos difieren en alcance: el Enfoque Textual usa un versículo o párrafo corto y deja que sus hechos formen el sermón, mientras el Enfoque Expositivo recorre un pasaje más largo versículo por versículo, sacando el esquema del texto que se desarrolla."},
+ {id:"sa7",
+  en:{stem:"Why does this unit say the Textual and Expository Approaches are especially powerful for evangelistic preaching?"},
+  es:{stem:"¿Por qué dice esta unidad que los Enfoques Textual y Expositivo son especialmente poderosos para la predicación evangelística?"},
+  kw_en:["bible","speak","scriptur","direct","word","biblical","unity","memorabl"],
+  kw_es:["biblia","habl","escritur","direct","palabra","bíblic","unidad","memorabl"],
+  min:3,model_en:"These approaches are especially powerful for evangelism because they let the Bible speak for itself: the listener sees the message comes directly from God's Word, which gives it biblical authority while the keyword keeps it unified and memorable.",model_es:"Estos enfoques son especialmente poderosos para la evangelización porque dejan que la Biblia hable por sí misma: el oyente ve que el mensaje viene directamente de la Palabra de Dios, lo que le da autoridad bíblica mientras la palabra clave lo mantiene unificado y memorable."},
+ {id:"sa8",
+  en:{stem:"State the keyword rule and the points rule that govern both approaches."},
+  es:{stem:"Indique la regla de la palabra clave y la regla de los puntos que gobiernan ambos enfoques."},
+  kw_en:["plural","noun","singular","short","parallel","five","keyword","point"],
+  kw_es:["plural","sustantiv","singular","cort","paralel","cinco","clave","punto"],
+  min:3,model_en:"Both approaches are governed by the same two rules: the keyword must be a plural noun, and every point must be a short, parallel singular of that keyword, five words or less.",model_es:"Ambos enfoques se rigen por las mismas dos reglas: la palabra clave debe ser un sustantivo plural, y cada punto debe ser un singular corto y paralelo de esa palabra clave, cinco palabras o menos."},
+ {id:"sa9",
+  en:{stem:"How do these approaches handle the case when a single verse does not contain every point needed?"},
+  es:{stem:"¿Cómo manejan estos enfoques el caso cuando un solo versículo no contiene cada punto necesario?"},
+  kw_en:["support","text","keyword","control","outline","add","unified","passage"],
+  kw_es:["apoy","text","clave","control","esquem","añad","unific","pasaje"],
+  min:3,model_en:"When one verse does not contain every point, these approaches add supporting texts, but the keyword still controls the outline so the added passages stay unified under one plural-noun keyword.",model_es:"Cuando un versículo no contiene cada punto, estos enfoques añaden textos de apoyo, pero la palabra clave sigue controlando el esquema para que los pasajes añadidos permanezcan unificados bajo una palabra clave plural."},
+ {id:"sa10",
+  en:{stem:"According to this unit, what do the Textual and Expository Approaches turn a biblical text into for the listener, and why is that effective in evangelism?"},
+  es:{stem:"Según esta unidad, ¿en qué convierten los Enfoques Textual y Expositivo un texto bíblico para el oyente, y por qué es eso eficaz en la evangelización?"},
+  kw_en:["clear","memorabl","sermon","scriptur","direct","authorit","heart","decision"],
+  kw_es:["clar","memorabl","sermón","escritur","direct","autorid","corazón","decisi"],
+  min:3,model_en:"These approaches turn a biblical text into a clear, memorable sermon that the listener sees comes straight from Scripture. That is effective in evangelism because the message carries God's own authority and presses the text directly on the heart toward a decision.",model_es:"Estos enfoques convierten un texto bíblico en un sermón claro y memorable que el oyente ve que viene directamente de la Escritura. Eso es eficaz en la evangelización porque el mensaje lleva la autoridad de Dios mismo y presiona el texto directamente sobre el corazón hacia una decisión."}
+];
+
+function renderMC(){const host=document.getElementById("mcBlock");host.innerHTML="";MC.forEach((q,i)=>{const div=document.createElement("div");div.className="q";div.id=q.id;div.innerHTML=`<div class="stem"><span class="lang-en">${i+1}. ${q.en.stem}</span><span class="lang-es">${i+1}. ${q.es.stem}</span></div>${["A","B","C","D"].map(L=>`<label><input type="radio" name="${q.id}" value="${L}"><span class="lang-en"><strong>${L}.</strong> ${q.en[L.toLowerCase()]}</span><span class="lang-es"><strong>${L}.</strong> ${q.es[L.toLowerCase()]}</span></label>`).join("")}<div class="fb" id="fb_${q.id}"></div>`;host.appendChild(div);});host.querySelectorAll("input[type=radio]").forEach(r=>{r.addEventListener("change",()=>{ saveState(); renderMCFeedback(); Array.from(document.getElementsByName(r.name)).forEach(x=>{x.disabled=true;}); });});}
+function renderSA(){const host=document.getElementById("saBlock");host.innerHTML="";SA.forEach((q,i)=>{const div=document.createElement("div");div.className="q";div.id=q.id;div.innerHTML=`<div class="stem"><span class="lang-en">${MC.length+i+1}. ${q.en.stem}</span><span class="lang-es">${MC.length+i+1}. ${q.es.stem}</span></div><textarea id="ta_${q.id}" data-placeholder-en="Type your answer here…" data-placeholder-es="Escriba su respuesta aquí…" aria-label="ta ${q.id}"></textarea><div class="sa-actions"><button type="button" class="sa-check" data-id="${q.id}"><span class="lang-en">Check answer</span><span class="lang-es">Revisar respuesta</span></button></div><div class="sa-fb" id="safb_${q.id}"></div>`;host.appendChild(div);});document.querySelectorAll("[data-placeholder-en]").forEach(el=>applyPh(el));host.querySelectorAll("textarea").forEach(t=>t.addEventListener("input",saveState));host.querySelectorAll(".sa-check").forEach(b=>b.addEventListener("click",()=>{saveState();const q=SA.find(x=>x.id===b.dataset.id);if(q)renderSAFeedback(q);}));}
+function applyPh(el){const isEs=document.body.classList.contains("lang-es");el.placeholder=isEs?el.dataset.placeholderEs:el.dataset.placeholderEn;}
+function saveState(){const data={mc:{},sa:{}};MC.forEach(q=>{const v=document.querySelector(`input[name="${q.id}"]:checked`);if(v)data.mc[q.id]=v.value;});SA.forEach(q=>{const t=document.getElementById(`ta_${q.id}`);if(t)data.sa[q.id]=t.value;});lsSet(UNIT_KEY,JSON.stringify(data));}
+function loadState(){try{const d=JSON.parse(lsGet(UNIT_KEY)||"{}");Object.entries(d.mc||{}).forEach(([k,v])=>{const r=document.querySelector(`input[name="${k}"][value="${v}"]`);if(r)r.checked=true;});Object.entries(d.sa||{}).forEach(([k,v])=>{const t=document.getElementById(`ta_${k}`);if(t)t.value=v;});}catch(e){}}
+let mcRevealed=false;
+function renderMCFeedback(){const isEs=document.body.classList.contains("lang-es");MC.forEach(q=>{const sel=document.querySelector(`input[name="${q.id}"]:checked`);const fb=document.getElementById(`fb_${q.id}`);if(!sel){fb.className="fb";fb.textContent="";return;}const right=sel.value===q.correct;const lang=isEs?q.es:q.en;fb.className="fb "+(right?"good":"bad");fb.textContent=right?lang.fbCorrect:lang.fbWrong;});}
+function lockoutRemaining(){const until=parseInt(lsGet(LOCKOUT_KEY)||"0",10);const left=until-Date.now();return left>0?left:0;}
+function fmtMs(ms){const m=Math.floor(ms/60000),s=Math.floor((ms%60000)/1000);return `${m}:${String(s).padStart(2,"0")}`;}
+var _ctsMem={};function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+function gradeMC(){let n=0;MC.forEach(q=>{const sel=document.querySelector(`input[name="${q.id}"]:checked`);if(sel&&sel.value===q.correct)n++;});return n;}
+function kwHit(answer,kw){if(!kw)return false;var a=(answer||"").toLowerCase();var k=kw.toLowerCase().trim();if(!k)return false;var esc=k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");var L="0-9a-zA-Z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1";var re=k.length<=4?new RegExp("(?:^|[^"+L+"])"+esc+"(?![" +L+ "])"):new RegExp("(?:^|[^"+L+"])"+esc);return re.test(a);}
+function renderSAFeedback(q){
+  const isEs=document.body.classList.contains("lang-es");
+  const t=document.getElementById(`ta_${q.id}`);
+  const fb=document.getElementById(`safb_${q.id}`);
+  if(!t) return false;
+  const raw=(t.value||"").trim();
+  if(!raw){
+    if(fb) fb.innerHTML="<div class=\"sa-empty\">"+(isEs?"Escriba su respuesta primero, luego revise.":"Write your answer first, then check.")+"</div>";
+    return false;
+  }
+  const txt=raw.toLowerCase();
+  const kws=isEs?q.kw_es:q.kw_en;
+  const hits=kws.filter(k=>kwHit(txt,k)).length;
+  const pass=hits>=q.min;
+  if(fb){
+    fb.style.color="";var _m=isEs?(q.model_es||""):(q.model_en||"");var _h=isEs?"Respuesta modelo \u2014 est\u00fadiela":"Model answer \u2014 study this";var _v=pass?(isEs?("\u2713 Acreditada ("+hits+" t\u00e9rmino(s) clave)."):("\u2713 Credit ("+hits+" keyword(s) detected).")):(isEs?("\u2717 A\u00fan no acreditada. Detectados: "+hits+". Necesita "+q.min+"."):("\u2717 Not yet credited. Detected: "+hits+". Need "+q.min+"."));fb.innerHTML="<div>"+_v+"</div><div class=\"modelbox\"><strong>"+_h+":</strong><br>"+_m+"</div>";
+  }
+  return pass;
+}
+function gradeSA(){
+  let n=0;
+  SA.forEach(q=>{ if(renderSAFeedback(q)) n++; });
+  return n;
+}
+function submit(){saveState();const isEs=document.body.classList.contains("lang-es");const track=document.getElementById("trackSel").value;lsSet(TRACK_KEY,track);const lockMs=lockoutRemaining();if(lockMs>0){showResult("locked",isEs?`Bloqueado por reintento. Tiempo restante: ${fmtMs(lockMs)}.`:`Locked for retry. Time remaining: ${fmtMs(lockMs)}.`);return;}const mc=gradeMC();mcRevealed=true;renderMCFeedback();const mcPassedBefore=lsGet(MC_PASSED_KEY)==="1";const mcPass=mcPassedBefore||(mc>=PASS_MC);if(mcPass)lsSet(MC_PASSED_KEY,"1");let unitPass=false;let msg="";const sa=gradeSA();if(track==="cert"){unitPass=mcPass;msg=isEs?`Vía Certificado &mdash; Opción Múltiple: <strong>${mc}/${TOTAL_MC}</strong> (se necesita ${PASS_MC}/${TOTAL_MC}). ${unitPass?"<strong>APROBADO.</strong>":"<strong>NO APROBADO.</strong>"}<br><em>La Respuesta Corta es práctica en esta vía y no cuenta para aprobar &mdash; vea las respuestas modelo abajo para estudiar.</em>`:`Certificate track &mdash; Multiple Choice: <strong>${mc}/${TOTAL_MC}</strong> (need ${PASS_MC}/${TOTAL_MC}). ${unitPass?"<strong>PASSED.</strong>":"<strong>NOT YET PASSED.</strong>"}<br><em>Short Answer is practice on this track and does not count toward passing &mdash; see the model answers below to study.</em>`;}else{unitPass=mcPass&&sa>=PASS_SA;const tLbl=track==="thm"?"Th.M.":"M.Div";msg=isEs?`Vía ${tLbl} &mdash; Opción Múltiple: <strong>${mc}/${TOTAL_MC}</strong> (necesita ${PASS_MC}); Respuesta Corta: <strong>${sa}/${TOTAL_SA}</strong> (necesita ${PASS_SA}). ${unitPass?"<strong>APROBADO.</strong>":"<strong>NO APROBADO.</strong>"}`:`${tLbl} track &mdash; Multiple Choice: <strong>${mc}/${TOTAL_MC}</strong> (need ${PASS_MC}); Short Answer: <strong>${sa}/${TOTAL_SA}</strong> (need ${PASS_SA}). ${unitPass?"<strong>PASSED.</strong>":"<strong>NOT YET PASSED.</strong>"}`;}if(unitPass){lsSet(UNIT_PASSED_KEY,"1");const prog=JSON.parse(lsGet(PROGRESS_KEY)||"{}");prog.unit7={passed:true,track,mc,when:Date.now()};lsSet(PROGRESS_KEY,JSON.stringify(prog));const tail=isEs?`<br><br>Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.<br><a class="cert-link" href="${NEXT_UNIT}">Continuar a la Unidad 8 →</a>`:`<br><br>Your answers are marked below. Review them, then continue when ready.<br><a class="cert-link" href="${NEXT_UNIT}">Continue to Unit 8 →</a>`;showResult("passed",msg+tail);}else{lsSet(LOCKOUT_KEY,String(Date.now()+LOCKOUT_MS));const tail=isEs?`<br>Repase la unidad y vuelva a intentarlo después de 15 minutos.${lsGet(MC_PASSED_KEY)==="1"?" (Su Opción Múltiple ya está aprobada — solo necesita reintentar la Respuesta Corta.)":""}`:`<br>Review the unit and retry after a 15-minute lockout.${lsGet(MC_PASSED_KEY)==="1"?" (Your Multiple Choice is already passed — only the Short Answer needs retake.)":""}`;showResult("",msg+tail);}}
+function showResult(kind,html){const box=document.getElementById("resultBox");box.className="result-box "+(kind||"");box.innerHTML=html;box.scrollIntoView({behavior:"smooth",block:"start"});}
+function resetUnit(){const isEs=document.body.classList.contains("lang-es");const ok=confirm(isEs?"¿Reiniciar toda la unidad? Se borrarán sus respuestas guardadas, la marca de aprobado de Opción Múltiple y el cronómetro de bloqueo.":"Reset the entire unit? This will clear your saved answers, your MC-pass flag, and the lockout timer.");if(!ok)return;lsDel(UNIT_KEY);lsDel(UNIT_PASSED_KEY);lsDel(MC_PASSED_KEY);lsDel(LOCKOUT_KEY);const prog=JSON.parse(lsGet(PROGRESS_KEY)||"{}");delete prog.unit7;lsSet(PROGRESS_KEY,JSON.stringify(prog));location.reload();}
+function toggleLang(){document.body.classList.toggle("lang-es");document.body.classList.toggle("lang-en");document.querySelectorAll("[data-placeholder-en]").forEach(el=>applyPh(el));renderMCFeedback();}
+document.addEventListener("DOMContentLoaded",()=>{renderMC();renderSA();loadState();if(lsGet(MC_PASSED_KEY)==="1"||lsGet(UNIT_PASSED_KEY)==="1"){mcRevealed=true;}renderMCFeedback();const t=lsGet(TRACK_KEY);if(t)document.getElementById("trackSel").value=t;document.getElementById("trackSel").addEventListener("change",e=>{lsSet(TRACK_KEY,e.target.value);});document.getElementById("btnSubmit").addEventListener("click",submit);document.getElementById("btnReset").addEventListener("click",resetUnit);document.getElementById("btnLang").addEventListener("click",toggleLang);});
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEvanPreachReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Apologetics — Unit 1</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 2 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Apologetics — Unit 1: The Reason for the Hope</span><span class="lang-es">📖 Apologética — Unidad 1: La Razón de la Esperanza</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Always be prepared to give an answer... for the hope that you have." — 1 Peter 3:15</span><span class="lang-es">"Estad siempre preparados para presentar defensa... de la esperanza que hay en vosotros." — 1 Pedro 3:15 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Apologetics. Please register before beginning Unit 1.</span><span class="lang-es">Bienvenido a Apologética. Por favor regístrese antes de comenzar la Unidad 1.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: 1 Peter 3:15</strong></p><div class="scripture">"But in your hearts revere Christ as Lord. Always be prepared to give an answer to everyone who asks you to give the reason for the hope that you have. But do this with gentleness and respect." — 1 Peter 3:15</div>
+
+<h3>A Word Borrowed from the Courtroom</h3>
+<p>Apologetics is the defense of the faith. The word has nothing to do with apologizing, with being sorry, with shuffling our feet and saying we hope no one is offended. It comes from the Greek word <em>apologia</em>, and in the ancient world that was a courtroom word. It was the formal answer a man gave when he stood before the bench and someone demanded to know why — the reasoned defense he offered for himself. Paul used it when he stood before kings. And Peter, writing to ordinary believers scattered and pressured and afraid, reaches up, takes that lawyer's word down off the shelf, and hands it to fishermen and farmers and slaves. "Always be prepared," he says, "to give an answer — an <em>apologia</em> — for the hope that you have."</p>
+<p>Notice carefully what Peter does <strong>not</strong> say. He does not say, always be prepared to win the argument. He does not say, always be prepared to crush the doubter, to humiliate the scoffer, to walk away the victor. The goal of apologetics is not a defeated opponent; it is an open door. We are not trying to win a debate. We are trying to clear a path.</p>
+
+<h3>Clearing the Path</h3>
+<p>Picture a man standing behind a wall. On the other side of that wall stands Christ, full of grace and truth, ready to receive him. But the man cannot see Him, because the wall is in the way — and the wall is built of stones. One stone is a hard question about suffering. Another is a teacher who told him the universe is an accident. Another is a wound from a church that failed him. Another is the quiet suspicion that no thinking person believes this anymore. Stone upon stone, until the wall is higher than his head and he has stopped even trying to look over it.</p>
+<p>Apologetics does not take a battering ram to that man. It does not try to knock him over the wall. It walks up quietly and begins to take the wall down, one stone at a time — answering this question, easing that fear, removing this false thing he was told was true — until the day comes when there are few enough stones left that the man lifts his eyes and, for the first time, sees the One who was standing there all along. We do not save anyone. The Spirit does that. But by God's grace we can move the stones, and a man cannot believe in a Christ he cannot see.</p>
+
+<h3>The Ice-Box Cookie</h3>
+<div class="illustration"><strong>💡 Let me tell you a story.</strong> A man was home alone. His wife had baked a great tray of cookies and gone out for the afternoon, and there they sat, cooling on the counter, and there he sat, looking at them. He ate one. Then he ate another. And somewhere past the fourth or fifth he made up his mind to finish the work, and he ate the whole tray. Now he had a problem. So he set about covering his tracks like a man who meant business. He washed the tray and dried it and put it away. He wiped the counter slick as a whistle. He brushed the crumbs into his hand and rinsed them down the drain. He stood back and surveyed the kitchen, and it was spotless — not a cookie, not a crumb, not a trace. He had committed the perfect crime. And then his wife came through the door, and before she had set down her bag, before she had taken off her coat, the very first words out of her mouth were: "Where are the cookies?"</p>
+<p>He had thought of everything but one thing. He had hidden the tray, but he could not hide the <em>smell</em>. The whole house was full of it.</div>
+<p>That is exactly how it is with the universe. A man may sweep away every visible proof. He may say there is no tray — no Bible he trusts, no church he respects, no argument he will grant. He may wipe the counter of his mind slick as a whistle. But he cannot get rid of the smell. The fingerprints of a Maker are on everything: on the order of the heavens, on the longing in his own chest, on the stubborn sense that some things are simply wrong. Paul says it plainly: "For since the creation of the world God's invisible qualities — his eternal power and divine nature — have been clearly seen, being understood from what has been made, so that people are without excuse" (Romans 1:20). You can hide the tray. You cannot hide the smell. And our task in apologetics is simply to help an honest man notice what his own house already smells of, and follow the scent back to the Baker.</p>
+
+<h3>Faith Is Not Blind, and Doubt Is Not the Enemy</h3>
+<p>There is a lie abroad that says faith is a leap in the dark — that to believe is to switch off the mind, close the eyes, and jump. That is not the faith of the Bible. Biblical faith is not blind; it is a trust grounded in evidence. It rests on the design of the universe, the fulfillment of prophecy, the historical reality of the resurrection, and the unmatched reliability of the documents that carry the story to us. We will walk through every one of these in the units to come. Faith is not a jump off a cliff. It is a step onto a bridge that has been tested and found to hold.</p>
+<p>But notice something the unbeliever rarely admits: he is not standing on neutral ground. Every man alive is living by faith. The Christian puts his faith in God; the man who calls himself an atheist puts his faith in the claim that the fine-tuned heavens, the moral law written on his own heart, the empty tomb, and the changed lives of hardened skeptics all came from nothing and mean nothing. That is not the absence of faith. It is a steeper faith than mine. I have looked at the same evidence, and I will tell you honestly: I do not have enough faith to be an unbeliever. So when we defend the gospel, let us lay down the notion that the believer carries a burden of proof the skeptic escapes. There is no neutral corner to stand in; the only question is which faith fits the evidence. And yet we must be honest about the limits of argument itself. I have come to believe that it is impossible to argue anyone into the kingdom of God. We may win every point and still not have moved the one thing that matters, for the last barrier is not in the mind but in the will. We can clear the path; we cannot make a man walk it. That is the Spirit's work. Ours is to remove the stones and trust Him for the rest.</p>
+<p>And if faith is not blind, then doubt is not the enemy. We have made doubt into a kind of sin, something to be hidden and ashamed of, and so the doubter suffers alone and says nothing. But look how the Lord treated a doubter. When Thomas refused to believe on the word of his friends and demanded to put his finger in the wounds, Jesus did not cast him out and did not scold him. He came back, stood before him, and said, "Put your finger here." Doubt that runs from God hardens into unbelief. But doubt that runs <em>toward</em> God, that brings its honest questions into the light and asks them out loud, is very often a pathway — the road by which a man comes at last to a faith that is his own and not merely borrowed. Do not fear the honest question. Welcome it. It is frequently the first stone coming down.</p>
+
+<h3>Two Witnesses</h3>
+<p>God has not left Himself without testimony. He has set two great witnesses before every human being, and they testify day and night. The first witness is <strong>the heavens above</strong> — the creation, vast and ordered and finely made, declaring a Maker to anyone who will look up. The second witness is <strong>the heart within</strong> — the conscience that knows there is such a thing as right and wrong, and the restless longing for something this world never quite satisfies. The sky preaches to us from the outside; the soul preaches to us from the inside; and the two are saying the same thing. As we go on, we will follow the witness of the heavens into the arguments from design and fine-tuning, and we will follow the witness within all the way to its deepest point — the inner seal of the Spirit, the eyes of the heart that come to <em>see</em> God and not merely to conclude that He must exist. Reason can carry a man to the door. Something more is needed to bring him through it.</p>
+
+<!-- SERMON_ARCHIVE_ENRICHMENT_START APOL1 EN -->
+<h3>Testimony Is Also an Answer</h3>
+<p>Paul's defense before Agrippa in Acts 26 reminds us that apologetics is not limited to formal arguments. Paul told what Christ had done in history, but he also told what Christ had done in him. A believer can sometimes say, in effect, <em>This is what I know; this is what happened to me.</em> Personal experience by itself does not prove every Christian claim, but neither is it irrelevant. A changed life is evidence that must be explained. In an older sermon on this passage, Dr. Cook put the point plainly: Christian faith is not blind faith. The believer may speak of the longing for God that the world cannot satisfy, the perfect life of Christ that exposes our sin, the grace that forgives, the strength God supplies for daily obedience and suffering, and the hope with which a Christian can face death. Those are not substitutes for the historical case for Christ; they are the lived side of that case.</p>
+<p>This also helps the ordinary Christian who feels unqualified to defend the faith. You may not be able to answer every philosophical objection, but you can explain why you trust Christ, what the gospel says about your sin and His grace, and what difference He has made in your life. Acts 26 shows argument and testimony standing together rather than competing with one another.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END APOL1 EN -->
+
+<h3>The Four Clues We Will Follow</h3>
+<p>This course is, in a sense, one long act of following clues back to their source. There are four great trails, and we will walk each one. <strong>First, the design of the heavens</strong> — the fine-tuning of a universe and an Earth so precisely calibrated for life that "accident" begins to strain credulity. <strong>Second, the fingerprint of prophecy</strong> — words written centuries in advance that landed on their target with a precision no guesswork can explain. <strong>Third, the empty tomb and the changed men</strong> — a resurrection so real that it turned a doubter, an enemy, and a skeptical brother into martyrs for the One they had refused. <strong>Fourth, the reliability of the documents</strong> — a New Testament better attested than any other writing of the ancient world. The design, the prophecy, the resurrection, the record: four clues, one Baker.</p>
+
+<h3>With Gentleness and Respect</h3>
+<p>Peter does not only tell us <em>what</em> to do; he tells us <em>how</em>. "But do this with gentleness and respect." This is not a footnote. It is part of the command, and it is part of the message. A man who defends the truth with contempt has already contradicted it, for the truth he claims to serve came in the form of a servant who washed feet. The manner is the message. If we are harsh, we build the wall higher with our own hands. If we are gentle, the gentleness itself becomes one of the clues — for the world expects the religious to be arrogant, and a humble, patient, respectful answer is its own small evidence that something real has changed us. So we answer honestly, and we answer well, but we answer on our knees.</p>
+
+<h3>Are You Ready to Give an Answer?</h3>
+<p>The command of 1 Peter 3:15 is not given to scholars only, or to pastors only, or to those with a gift for argument. It is given to every believer, because every believer has a hope, and someday someone is going to ask about it. A neighbor over the fence. A child at bedtime. A coworker who has watched you through a hard season and finally says, "How are you not falling apart?" In that moment you do not need to be a philosopher. You need only to be ready — ready to point past yourself to the design of the heavens, the fingerprint of prophecy, the empty tomb, and the steady record of those who were there. We follow the clues back to the Baker. Are you ready to give an answer?</p>
+<div class="scripture">"For I am not ashamed of the gospel of Christ, for it is the power of God to salvation for everyone who believes." — Romans 1:16</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: 1 Pedro 3:15 (RVG)</strong></p><div class="scripture">"Sino santificad a Dios el Señor en vuestros corazones, y estad siempre preparados para presentar defensa con mansedumbre y reverencia ante todo el que os demande razón de la esperanza que hay en vosotros." — 1 Pedro 3:15</div>
+
+<h3>Una Palabra Tomada del Tribunal</h3>
+<p>La apologética es la defensa de la fe. La palabra no tiene nada que ver con disculparse, con sentir pena, con arrastrar los pies diciendo que esperamos no ofender a nadie. Viene de la palabra griega <em>apologia</em>, y en el mundo antiguo esa era una palabra de tribunal. Era la respuesta formal que un hombre daba cuando se presentaba ante el juez y alguien exigía saber por qué — la defensa razonada que ofrecía por sí mismo. Pablo la usó cuando estuvo ante reyes. Y Pedro, escribiendo a creyentes comunes, dispersos y presionados y atemorizados, alcanza ese estante, baja esa palabra de abogado y la pone en manos de pescadores y campesinos y esclavos. "Estad siempre preparados", dice, "para presentar defensa — una <em>apologia</em> — de la esperanza que hay en vosotros".</p>
+<p>Note con cuidado lo que Pedro <strong>no</strong> dice. No dice: estad siempre preparados para ganar la discusión. No dice: estad siempre preparados para aplastar al que duda, para humillar al burlador, para retirarse como vencedor. La meta de la apologética no es un adversario derrotado; es una puerta abierta. No tratamos de ganar un debate. Tratamos de despejar un camino.</p>
+
+<h3>Despejar el Camino</h3>
+<p>Imagine a un hombre de pie detrás de un muro. Al otro lado de ese muro está Cristo, lleno de gracia y de verdad, listo para recibirlo. Pero el hombre no puede verlo, porque el muro está en medio — y el muro está hecho de piedras. Una piedra es una pregunta difícil sobre el sufrimiento. Otra es un maestro que le dijo que el universo es un accidente. Otra es una herida de una iglesia que le falló. Otra es la callada sospecha de que ninguna persona pensante cree ya en esto. Piedra sobre piedra, hasta que el muro es más alto que su cabeza y él ha dejado siquiera de intentar mirar por encima.</p>
+<p>La apologética no usa un ariete contra ese hombre. No trata de derribarlo por encima del muro. Se acerca en silencio y comienza a quitar el muro, una piedra a la vez — respondiendo esta pregunta, aliviando aquel temor, removiendo esto falso que le dijeron que era verdad — hasta que llega el día en que quedan tan pocas piedras que el hombre levanta los ojos y, por primera vez, ve a Aquel que estuvo allí parado todo el tiempo. Nosotros no salvamos a nadie. Eso lo hace el Espíritu. Pero por la gracia de Dios podemos mover las piedras, y un hombre no puede creer en un Cristo que no puede ver.</p>
+
+<h3>La Galleta del Refrigerador</h3>
+<div class="illustration"><strong>💡 Déjeme contarle una historia.</strong> Un hombre estaba solo en casa. Su esposa había horneado una gran bandeja de galletas y había salido por la tarde, y allí estaban, enfriándose en el mostrador, y allí estaba él, mirándolas. Se comió una. Luego se comió otra. Y en algún punto después de la cuarta o la quinta se decidió a terminar el trabajo, y se comió la bandeja entera. Ahora tenía un problema. Así que se puso a cubrir sus huellas como un hombre que va en serio. Lavó la bandeja, la secó y la guardó. Limpió el mostrador perfectamente. Recogió las migas en la mano y las enjuagó por el desagüe. Se echó atrás y examinó la cocina, y estaba impecable — ni una galleta, ni una miga, ni un rastro. Había cometido el crimen perfecto. Y entonces su esposa entró por la puerta, y antes de soltar su bolsa, antes de quitarse el abrigo, las primeras palabras que salieron de su boca fueron: "¿Dónde están las galletas?"</p>
+<p>Él había pensado en todo menos en una cosa. Había escondido la bandeja, pero no podía esconder el <em>olor</em>. Toda la casa estaba llena de él.</div>
+<p>Así es exactamente con el universo. Un hombre puede barrer toda prueba visible. Puede decir que no hay bandeja — ni Biblia en que confíe, ni iglesia que respete, ni argumento que conceda. Puede limpiar el mostrador de su mente perfectamente. Pero no puede deshacerse del olor. Las huellas de un Hacedor están sobre todo: sobre el orden de los cielos, sobre el anhelo en su propio pecho, sobre el terco sentido de que algunas cosas son sencillamente malas. Pablo lo dice claramente: "Porque las cosas invisibles de él, su eterno poder y deidad, se hacen claramente visibles desde la creación del mundo, siendo entendidas por medio de las cosas hechas, de modo que no tienen excusa" (Romanos 1:20). Puede esconder la bandeja. No puede esconder el olor. Y nuestra tarea en la apologética es sencillamente ayudar a un hombre honesto a notar a qué huele ya su propia casa, y seguir el aroma de vuelta al Panadero.</p>
+
+<h3>La Fe No Es Ciega, y la Duda No Es la Enemiga</h3>
+<p>Anda suelta una mentira que dice que la fe es un salto en la oscuridad — que creer es apagar la mente, cerrar los ojos y saltar. Esa no es la fe de la Biblia. La fe bíblica no es ciega; es una confianza fundada en evidencia. Descansa sobre el diseño del universo, el cumplimiento de la profecía, la realidad histórica de la resurrección y la incomparable confiabilidad de los documentos que nos traen la historia. Recorreremos cada una de estas cosas en las unidades por venir. La fe no es un salto desde un acantilado. Es un paso sobre un puente que ha sido probado y hallado firme.</p>
+<p>Pero note algo que el incrédulo rara vez admite: no está parado sobre terreno neutral. Todo hombre vivo vive por fe. El cristiano pone su fe en Dios; el hombre que se llama ateo pone su fe en la afirmación de que los cielos finamente ajustados, la ley moral escrita en su propio corazón, la tumba vacía y las vidas cambiadas de escépticos endurecidos vinieron todos de la nada y no significan nada. Eso no es la ausencia de fe. Es una fe más empinada que la mía. He mirado la misma evidencia, y le diré con honestidad: no tengo suficiente fe para ser un incrédulo. Así que cuando defendamos el evangelio, dejemos de lado la idea de que el creyente carga una prueba que el escéptico evade. No hay un rincón neutral donde pararse; la única pregunta es cuál fe corresponde a la evidencia. Y sin embargo debemos ser honestos sobre los límites del argumento mismo. He llegado a creer que es imposible argumentar a alguien para meterlo en el reino de Dios. Podemos ganar cada punto y aun así no haber movido lo único que importa, porque la última barrera no está en la mente sino en la voluntad. Podemos despejar el camino; no podemos hacer que un hombre lo recorra. Esa es la obra del Espíritu. La nuestra es remover las piedras y confiar en Él para lo demás.</p>
+<p>Y si la fe no es ciega, entonces la duda no es la enemiga. Hemos hecho de la duda una especie de pecado, algo que esconder y de qué avergonzarse, y así el que duda sufre a solas y no dice nada. Pero mire cómo trató el Señor a uno que dudaba. Cuando Tomás se negó a creer por la palabra de sus amigos y exigió meter el dedo en las heridas, Jesús no lo echó fuera ni lo reprendió. Volvió, se puso delante de él y dijo: "Mete aquí tu dedo". La duda que huye de Dios se endurece en incredulidad. Pero la duda que corre <em>hacia</em> Dios, que trae sus preguntas honestas a la luz y las hace en voz alta, es muy a menudo un camino — la senda por la cual un hombre llega al fin a una fe que es suya y no meramente prestada. No tema la pregunta honesta. Recíbala. Con frecuencia es la primera piedra que cae.</p>
+
+<h3>Dos Testigos</h3>
+<p>Dios no se ha dejado a sí mismo sin testimonio. Ha puesto dos grandes testigos delante de todo ser humano, y testifican día y noche. El primer testigo es <strong>los cielos arriba</strong> — la creación, vasta y ordenada y finamente hecha, declarando un Hacedor a todo el que quiera mirar. El segundo testigo es <strong>el corazón adentro</strong> — la conciencia que sabe que existe tal cosa como el bien y el mal, y el inquieto anhelo de algo que este mundo nunca llega a satisfacer del todo. El cielo nos predica desde afuera; el alma nos predica desde adentro; y los dos dicen lo mismo. Al avanzar, seguiremos el testimonio de los cielos hacia los argumentos del diseño y el ajuste fino, y seguiremos el testimonio interior hasta su punto más profundo — el sello interno del Espíritu, los ojos del corazón que llegan a <em>ver</em> a Dios y no meramente a concluir que debe existir. La razón puede llevar a un hombre hasta la puerta. Algo más se necesita para hacerlo entrar por ella.</p>
+
+<!-- SERMON_ARCHIVE_ENRICHMENT_START APOL1 ES -->
+<h3>El Testimonio También Es una Respuesta</h3>
+<p>La defensa de Pablo ante Agripa en Hechos 26 nos recuerda que la apologética no se limita a argumentos formales. Pablo contó lo que Cristo había hecho en la historia, pero también contó lo que Cristo había hecho en él. A veces el creyente puede decir, en efecto: <em>Esto es lo que sé; esto es lo que me sucedió.</em> La experiencia personal por sí sola no demuestra cada afirmación cristiana, pero tampoco es irrelevante. Una vida cambiada es evidencia que debe ser explicada. En un sermón anterior sobre este pasaje, el Dr. Cook expresó el punto con sencillez: la fe cristiana no es una fe ciega. El creyente puede hablar del anhelo de Dios que el mundo no puede satisfacer, de la vida perfecta de Cristo que expone nuestro pecado, de la gracia que perdona, de la fuerza que Dios da para la obediencia diaria y el sufrimiento, y de la esperanza con la cual un cristiano puede enfrentar la muerte. Estas cosas no sustituyen el caso histórico a favor de Cristo; son el lado vivido de ese caso.</p>
+<p>Esto también ayuda al cristiano común que se siente incapaz de defender la fe. Tal vez no pueda responder toda objeción filosófica, pero sí puede explicar por qué confía en Cristo, lo que el evangelio dice acerca de su pecado y la gracia de Cristo, y la diferencia que Él ha hecho en su vida. Hechos 26 muestra que el argumento y el testimonio pueden estar juntos en vez de competir entre sí.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END APOL1 ES -->
+
+<h3>Las Cuatro Pistas que Seguiremos</h3>
+<p>Este curso es, en cierto sentido, un largo acto de seguir pistas de vuelta a su origen. Hay cuatro grandes senderos, y recorreremos cada uno. <strong>Primero, el diseño de los cielos</strong> — el ajuste fino de un universo y de una Tierra tan precisamente calibrados para la vida que la palabra "accidente" empieza a forzar la credulidad. <strong>Segundo, la huella de la profecía</strong> — palabras escritas siglos por adelantado que dieron en el blanco con una precisión que ninguna conjetura puede explicar. <strong>Tercero, la tumba vacía y los hombres cambiados</strong> — una resurrección tan real que convirtió a uno que dudaba, a un enemigo y a un hermano escéptico en mártires de Aquel a quien habían rechazado. <strong>Cuarto, la confiabilidad de los documentos</strong> — un Nuevo Testamento mejor atestiguado que cualquier otro escrito del mundo antiguo. El diseño, la profecía, la resurrección, el registro: cuatro pistas, un Panadero.</p>
+
+<h3>Con Mansedumbre y Reverencia</h3>
+<p>Pedro no solo nos dice <em>qué</em> hacer; nos dice <em>cómo</em>. "Con mansedumbre y reverencia." Esto no es una nota al pie. Es parte del mandato, y es parte del mensaje. Un hombre que defiende la verdad con desprecio ya la ha contradicho, porque la verdad que dice servir vino en forma de un siervo que lavó pies. La manera es el mensaje. Si somos ásperos, levantamos el muro más alto con nuestras propias manos. Si somos mansos, la mansedumbre misma se vuelve una de las pistas — pues el mundo espera que los religiosos sean arrogantes, y una respuesta humilde, paciente y respetuosa es por sí misma una pequeña evidencia de que algo real nos ha cambiado. Así que respondemos con honestidad, y respondemos bien, pero respondemos de rodillas.</p>
+
+<h3>¿Estás Listo para Dar una Respuesta?</h3>
+<p>El mandato de 1 Pedro 3:15 no se da solo a los eruditos, ni solo a los pastores, ni solo a los que tienen un don para la discusión. Se da a todo creyente, porque todo creyente tiene una esperanza, y algún día alguien va a preguntar por ella. Un vecino sobre la cerca. Un hijo a la hora de dormir. Un compañero de trabajo que lo ha observado a través de una temporada dura y al fin dice: "¿Cómo es que no te derrumbas?" En ese momento usted no necesita ser un filósofo. Solo necesita estar listo — listo para señalar más allá de sí mismo hacia el diseño de los cielos, la huella de la profecía, la tumba vacía y el firme registro de los que estuvieron allí. Seguimos las pistas de vuelta al Panadero. ¿Estás listo para dar una respuesta?</p>
+<div class="scripture">"Porque no me avergüenzo del evangelio de Cristo, porque es poder de Dios para salvación a todo aquel que cree." — Romanos 1:16</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 1 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Apologetics — Unit 1 (The Reason for the Hope)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 1;
+const COURSE = 'apol';
+const NEXT_UNIT_URL = 'CTSApolUnit2.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - The Reason for the Hope",
+    "Unit 2 - The Design of the Heavens",
+    "Unit 3 - Revelation and the Witness Within",
+    "Unit 4 - The Problem of Evil and Suffering",
+    "Unit 5 - The Reliability of Scripture",
+    "Unit 6 - The Person and Claims of Christ",
+    "Unit 7 - The Resurrection and the Changed Skeptics",
+    "Unit 8 - Science, Chance, and the Limits of Naturalism",
+    "Unit 9 - Other Religions and Worldviews",
+    "Unit 10 - Apologetics in Practice"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSApolUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [
+    { textEn: "1. The word 'apologetics' comes from the Greek word 'apologia', which originally meant:", textEs: "1. La palabra 'apologética' viene de la palabra griega 'apologia', que originalmente significaba:",
+      optionsEn: ["A reasoned defense given in a court", "An apology for an offense", "A song of praise", "A private prayer"],
+      optionsEs: ["Una defensa razonada presentada en un tribunal", "Una disculpa por una ofensa", "Un canto de alabanza", "Una oración privada"], explanationEn: "'Apologia' was a courtroom word — the reasoned defense a person gave for himself.", explanationEs: "'Apologia' era una palabra de tribunal — la defensa razonada que una persona presentaba por sí misma.", correct: 0 },
+    { textEn: "2. According to 1 Peter 3:15, what are believers always to be prepared to give?", textEs: "2. Según 1 Pedro 3:15, ¿qué deben estar siempre preparados a dar los creyentes?",
+      optionsEn: ["A donation", "An answer for the hope they have", "A sermon", "A vote"],
+      optionsEs: ["Una donación", "Una respuesta de la esperanza que tienen", "Un sermón", "Un voto"], explanationEn: "Peter calls every believer to give an answer for the hope that is in them.", explanationEs: "Pedro llama a todo creyente a dar respuesta de la esperanza que hay en ellos.", correct: 1 },
+    { textEn: "3. The unit says the goal of apologetics is NOT to win an argument but to:", textEs: "3. La unidad dice que la meta de la apologética NO es ganar una discusión sino:",
+      optionsEn: ["Embarrass the skeptic", "Earn a degree", "Clear a path so a person can see Christ", "Memorize facts"],
+      optionsEs: ["Avergonzar al escéptico", "Obtener un título", "Despejar un camino para que la persona pueda ver a Cristo", "Memorizar datos"], explanationEn: "Apologetics removes obstacles so a person can see Christ; it is not about winning.", explanationEs: "La apologética remueve obstáculos para que la persona pueda ver a Cristo; no se trata de ganar.", correct: 2 },
+    { textEn: "4. In the wall illustration, the 'stones' in the wall represent:", textEs: "4. En la ilustración del muro, las 'piedras' del muro representan:",
+      optionsEn: ["Good works", "Church buildings", "Bible verses", "Questions, fears, and false ideas that block a person from Christ"],
+      optionsEs: ["Buenas obras", "Edificios de iglesia", "Versículos bíblicos", "Preguntas, temores e ideas falsas que impiden a la persona ver a Cristo"], explanationEn: "The stones are the obstacles — questions, wounds, and falsehoods — that the apologist removes one by one.", explanationEs: "Las piedras son los obstáculos — preguntas, heridas y falsedades — que el apologista remueve una por una.", correct: 3 },
+    { textEn: "5. In the Ice-Box Cookie story, the one thing the man could NOT hide was:", textEs: "5. En la historia de la Galleta del Refrigerador, lo único que el hombre NO pudo esconder fue:",
+      optionsEn: ["The smell", "The tray", "The crumbs", "The receipt"],
+      optionsEs: ["El olor", "La bandeja", "Las migas", "El recibo"], explanationEn: "He hid every visible trace, but he could not hide the smell that filled the house.", explanationEs: "Escondió todo rastro visible, pero no pudo esconder el olor que llenaba la casa.", correct: 0 },
+    { textEn: "6. The Ice-Box Cookie story teaches that the evidence of a Creator:", textEs: "6. La historia de la Galleta del Refrigerador enseña que la evidencia de un Creador:",
+      optionsEn: ["Is only found in church", "Permeates the whole creation like a smell", "Was lost long ago", "Is only for scholars"],
+      optionsEs: ["Solo se encuentra en la iglesia", "Impregna toda la creación como un olor", "Se perdió hace mucho", "Es solo para eruditos"], explanationEn: "Like the smell in the house, the Maker's fingerprints are on all creation.", explanationEs: "Como el olor en la casa, las huellas del Hacedor están sobre toda la creación.", correct: 1 },
+    { textEn: "7. According to the unit, biblical faith is best described as:", textEs: "7. Según la unidad, la fe bíblica se describe mejor como:",
+      optionsEn: ["A leap in the dark", "Switching off the mind", "A trust grounded in evidence", "An emotion with no reasons"],
+      optionsEs: ["Un salto en la oscuridad", "Apagar la mente", "Una confianza fundada en evidencia", "Una emoción sin razones"], explanationEn: "The unit insists faith is not blind; it is trust grounded in evidence.", explanationEs: "La unidad insiste en que la fe no es ciega; es confianza fundada en evidencia.", correct: 2 },
+    { textEn: "8. How did Jesus respond to Thomas, who doubted and demanded proof?", textEs: "8. ¿Cómo respondió Jesús a Tomás, que dudó y exigió pruebas?",
+      optionsEn: ["He cast him out", "He scolded him publicly", "He ignored him", "He came back and invited him to touch the wounds"],
+      optionsEs: ["Lo echó fuera", "Lo reprendió públicamente", "Lo ignoró", "Volvió y lo invitó a tocar las heridas"], explanationEn: "Jesus met the honest doubter and invited him to put his finger in the wounds.", explanationEs: "Jesús salió al encuentro del que dudaba honestamente y lo invitó a meter el dedo en las heridas.", correct: 3 },
+    { textEn: "9. The unit teaches that honest doubt brought to God can be:", textEs: "9. La unidad enseña que la duda honesta llevada a Dios puede ser:",
+      optionsEn: ["A pathway to a deeper, personal faith", "An unforgivable sin", "Proof that God is not real", "A reason to give up"],
+      optionsEs: ["Un camino hacia una fe más profunda y personal", "Un pecado imperdonable", "Prueba de que Dios no es real", "Una razón para rendirse"], explanationEn: "Doubt that runs toward God, not from Him, often becomes a pathway to faith.", explanationEs: "La duda que corre hacia Dios, no de Él, a menudo se vuelve un camino hacia la fe.", correct: 0 },
+    { textEn: "10. The 'two witnesses' God has set before every person are:", textEs: "10. Los 'dos testigos' que Dios ha puesto delante de toda persona son:",
+      optionsEn: ["The heavens above and the heart within", "The Old and New Testaments", "Angels and prophets", "The sun and the moon"],
+      optionsEs: ["Los cielos arriba y el corazón adentro", "El Antiguo y el Nuevo Testamento", "Ángeles y profetas", "El sol y la luna"], explanationEn: "Creation testifies from outside; conscience and longing testify from within.", explanationEs: "La creación testifica desde afuera; la conciencia y el anhelo testifican desde adentro.", correct: 0 },
+    { textEn: "11. Which of these is one of the 'four clues' the course will follow?", textEs: "11. ¿Cuál de estos es una de las 'cuatro pistas' que seguirá el curso?",
+      optionsEn: ["The wealth of the church", "The age of the preacher", "The size of the congregation", "The design of the heavens"],
+      optionsEs: ["La riqueza de la iglesia", "La edad del predicador", "El tamaño de la congregación", "El diseño de los cielos"], explanationEn: "The four clues are design, prophecy, the resurrection, and the reliability of the documents.", explanationEs: "Las cuatro pistas son el diseño, la profecía, la resurrección y la confiabilidad de los documentos.", correct: 3 },
+    { textEn: "12. According to Romans 1:20, God's invisible qualities are:", textEs: "12. Según Romanos 1:20, las cualidades invisibles de Dios son:",
+      optionsEn: ["Hidden from everyone", "Clearly seen from what has been made", "Known only to angels", "Revealed only in dreams"],
+      optionsEs: ["Escondidas de todos", "Claramente vistas por medio de lo que ha sido hecho", "Conocidas solo por los ángeles", "Reveladas solo en sueños"], explanationEn: "Paul says the creation makes God's power and nature clearly seen, leaving people without excuse.", explanationEs: "Pablo dice que la creación hace claramente visibles el poder y la naturaleza de Dios, dejando a las personas sin excusa.", correct: 1 },
+    { textEn: "13. 1 Peter 3:15 commands that we give our answer with:", textEs: "13. 1 Pedro 3:15 manda que demos nuestra respuesta con:",
+      optionsEn: ["Force and volume", "Cleverness and sarcasm", "Gentleness and respect", "Silence and distance"],
+      optionsEs: ["Fuerza y volumen", "Astucia y sarcasmo", "Mansedumbre y reverencia", "Silencio y distancia"], explanationEn: "The manner — gentleness and respect — is part of the command and part of the message.", explanationEs: "La manera — mansedumbre y reverencia — es parte del mandato y parte del mensaje.", correct: 2 },
+    { textEn: "14. Why does the unit say 'the manner is the message'?", textEs: "14. ¿Por qué dice la unidad que 'la manera es el mensaje'?",
+      optionsEn: ["Because volume convinces people", "Because arguments do not matter", "Because Spanish is required", "Because a harsh defense of truth contradicts the servant-truth it claims to serve"],
+      optionsEs: ["Porque el volumen convence a la gente", "Porque los argumentos no importan", "Porque se requiere el español", "Porque una defensa áspera de la verdad contradice la verdad-sierva que dice servir"], explanationEn: "Defending the gospel with contempt denies the humble, serving Christ at its center.", explanationEs: "Defender el evangelio con desprecio niega al Cristo humilde y servicial que está en su centro.", correct: 3 },
+    { textEn: "15. To whom is the command of 1 Peter 3:15 given?", textEs: "15. ¿A quién se da el mandato de 1 Pedro 3:15?",
+      optionsEn: ["Only to pastors", "Only to scholars", "To every believer", "Only to the apostles"],
+      optionsEs: ["Solo a los pastores", "Solo a los eruditos", "A todo creyente", "Solo a los apóstoles"], explanationEn: "Every believer has a hope, so the command to be ready is given to all believers.", explanationEs: "Todo creyente tiene una esperanza, así que el mandato de estar listo se da a todos los creyentes.", correct: 2 },
+    { textEn: "16. The unit says we ultimately do not save anyone; that work belongs to:", textEs: "16. La unidad dice que nosotros en última instancia no salvamos a nadie; esa obra pertenece a:",
+      optionsEn: ["The apologist", "The Holy Spirit", "The seminary", "The skeptic"],
+      optionsEs: ["El apologista", "El Espíritu Santo", "El seminario", "El escéptico"], explanationEn: "We can move the stones, but the Spirit does the saving.", explanationEs: "Nosotros podemos mover las piedras, pero el Espíritu hace la salvación.", correct: 1 },
+    { textEn: "17. The unit compares faith not to a leap off a cliff but to:", textEs: "17. La unidad compara la fe no con un salto desde un acantilado sino con:",
+      optionsEn: ["A blindfolded guess", "A roll of the dice", "A step onto a bridge tested and found to hold", "A closing of the eyes"],
+      optionsEs: ["Una conjetura con los ojos vendados", "Una tirada de dados", "Un paso sobre un puente probado y hallado firme", "Un cierre de los ojos"], explanationEn: "Faith is a reasoned step onto a tested bridge, not a blind leap.", explanationEs: "La fe es un paso razonado sobre un puente probado, no un salto ciego.", correct: 2 },
+    { textEn: "18. The unit says reason can carry a person to the door, but what is needed to bring him through it?", textEs: "18. La unidad dice que la razón puede llevar a la persona hasta la puerta, pero ¿qué se necesita para hacerla entrar por ella?",
+      optionsEn: ["A better argument", "More facts", "A louder voice", "Something more — the inner witness of the Spirit, the eyes of the heart"],
+      optionsEs: ["Un mejor argumento", "Más datos", "Una voz más fuerte", "Algo más — el testimonio interior del Espíritu, los ojos del corazón"], explanationEn: "Reason brings a person to the door; the inner witness of the Spirit brings him through.", explanationEs: "La razón lleva a la persona hasta la puerta; el testimonio interior del Espíritu la hace entrar.", correct: 3 },
+    { textEn: "19. Apologetics, the unit says, is the formal:", textEs: "19. La apologética, dice la unidad, es la:",
+      optionsEn: ["Defense of the faith", "Apology of the church", "History of doctrine", "Translation of the Bible"],
+      optionsEs: ["Defensa formal de la fe", "Disculpa formal de la iglesia", "Historia formal de la doctrina", "Traducción formal de la Biblia"], explanationEn: "Apologetics is the reasoned defense of the Christian faith.", explanationEs: "La apologética es la defensa razonada de la fe cristiana.", correct: 0 },
+    { textEn: "20. The closing verse, Romans 1:16, declares that the gospel is:", textEs: "20. El versículo final, Romanos 1:16, declara que el evangelio es:",
+      optionsEn: ["A private opinion", "The power of God for salvation to everyone who believes", "Too hard to understand", "Only for the Jews"],
+      optionsEs: ["Una opinión privada", "El poder de Dios para salvación a todo aquel que cree", "Demasiado difícil de entender", "Solo para los judíos"], explanationEn: "Paul is not ashamed of the gospel because it is God's power for salvation to all who believe.", explanationEs: "Pablo no se avergüenza del evangelio porque es el poder de Dios para salvación a todo aquel que cree.", correct: 1 }
+];
+
+const kwQuestions = [
+    { textEn: "21. What does the Greek word 'apologia' mean, and what does Peter's use of it in 1 Peter 3:15 teach about the believer's responsibility?",
+      textEs: "21. ¿Qué significa la palabra griega 'apologia', y qué enseña el uso que Pedro hace de ella en 1 Pedro 3:15 sobre la responsabilidad del creyente?",
+      kw_en: ["apolog", "defen", "reason", "answer", "hope", "court", "prepar", "ready"],
+      kw_es: ["apolog", "defen", "razón", "respuesta", "esperanza", "tribunal", "prepar", "listo"],
+      modelEn: "The word apologia is a courtroom word; it meant the reasoned defense a person gave for himself when someone demanded to know why. Peter takes that legal word and applies it to every believer, calling us to always be prepared to give an answer, a reason, for the hope that is in us. This teaches that the believer's responsibility is not merely to feel a private faith but to be ready to defend it thoughtfully when asked. The defense is not an apology in the modern sense of being sorry; it is a confident, reasoned account of why our hope is well founded. Peter addresses this to ordinary Christians, not only scholars, so the responsibility to be prepared belongs to all of us.",
+      modelEs: "La palabra apologia es una palabra de tribunal; significaba la defensa razonada que una persona presentaba por sí misma cuando alguien exigía saber por qué. Pedro toma esa palabra legal y la aplica a todo creyente, llamándonos a estar siempre preparados para dar una respuesta, una razón, de la esperanza que hay en nosotros. Esto enseña que la responsabilidad del creyente no es meramente sentir una fe privada sino estar listo para defenderla reflexivamente cuando se le pregunte. La defensa no es una disculpa en el sentido moderno de sentir pena; es un relato confiado y razonado de por qué nuestra esperanza está bien fundada. Pedro dirige esto a cristianos comunes, no solo a eruditos, así que la responsabilidad de estar preparado pertenece a todos nosotros." },
+
+    { textEn: "22. Explain the Ice-Box Cookie illustration and what it teaches about the evidence for a Creator in the world.",
+      textEs: "22. Explique la ilustración de la Galleta del Refrigerador y lo que enseña sobre la evidencia de un Creador en el mundo.",
+      kw_en: ["smell", "cookie", "tray", "clue", "creat", "made", "permeat", "baker"],
+      kw_es: ["olor", "galleta", "escond", "pista", "creador", "creación", "diseñ", "panadero"],
+      modelEn: "In the story a man eats the whole tray of cookies and carefully hides every visible trace, washing the tray and wiping the counter, yet the moment his wife walks in she asks where the cookies are, because he could not hide the smell that filled the house. The illustration teaches that the evidence for a Creator works the same way. A person may sweep away every visible proof he is willing to consider, but he cannot get rid of the smell, that is, the fingerprints of a Maker that permeate the whole creation. The order of the heavens, the longing in the human heart, and the sense of right and wrong are clues that point back to the Baker. Following Romans 1:20, the evidence is clearly seen in what God has made, so that people are without excuse.",
+      modelEs: "En la historia un hombre se come la bandeja entera de galletas y esconde cuidadosamente todo rastro visible, lavando la bandeja y limpiando el mostrador, y sin embargo en cuanto su esposa entra pregunta dónde están las galletas, porque él no pudo esconder el olor que llenaba la casa. La ilustración enseña que la evidencia de un Creador funciona de la misma manera. Una persona puede barrer toda prueba visible que esté dispuesta a considerar, pero no puede deshacerse del olor, es decir, de las huellas de un Hacedor que impregnan toda la creación. El orden de los cielos, el anhelo en el corazón humano y el sentido del bien y del mal son pistas que apuntan de vuelta al Panadero. Conforme a Romanos 1:20, la evidencia se ve claramente en lo que Dios ha hecho, de modo que las personas no tienen excusa." },
+
+    { textEn: "23. Why does the unit say apologetics is not about winning an argument but about clearing a path? Use the wall illustration.",
+      textEs: "23. ¿Por qué dice la unidad que la apologética no se trata de ganar una discusión sino de despejar un camino? Use la ilustración del muro.",
+      kw_en: ["clear", "wall", "stone", "obstacle", "remove", "question", "fear", "block"],
+      kw_es: ["camino", "despej", "muro", "piedra", "obstácul", "remov", "pregunta", "temor"],
+      modelEn: "The unit says the goal is not a defeated opponent but an open door. A person stands behind a wall built of stones, and each stone is an obstacle that keeps him from seeing Christ: a hard question, a false thing he was told, a wound from the church, a fear. Apologetics does not use a battering ram to knock the person over the wall. Instead it walks up quietly and removes the stones one at a time, answering questions and easing fears, until few enough remain that the person can lift his eyes and see Christ standing on the other side. Winning an argument might leave the wall standing and the person humiliated; clearing the path removes the obstacles so the person can see and respond for himself. We do not save anyone; we only remove the stones.",
+      modelEs: "La unidad dice que la meta no es un adversario derrotado sino una puerta abierta. Una persona está de pie detrás de un muro hecho de piedras, y cada piedra es un obstáculo que le impide ver a Cristo: una pregunta difícil, algo falso que le dijeron, una herida de la iglesia, un temor. La apologética no usa un ariete para derribar a la persona por encima del muro. En cambio se acerca en silencio y remueve las piedras una a la vez, respondiendo preguntas y aliviando temores, hasta que quedan tan pocas que la persona puede levantar los ojos y ver a Cristo de pie al otro lado. Ganar una discusión podría dejar el muro en pie y a la persona humillada; despejar el camino remueve los obstáculos para que la persona pueda ver y responder por sí misma. Nosotros no salvamos a nadie; solo removemos las piedras." },
+
+    { textEn: "24. How can honest doubt be a pathway to faith rather than its enemy? Use the example of Thomas.",
+      textEs: "24. ¿Cómo puede la duda honesta ser un camino hacia la fe en lugar de su enemiga? Use el ejemplo de Tomás.",
+      kw_en: ["doubt", "path", "faith", "Thomas", "honest", "question", "deeper", "enemy"],
+      kw_es: ["duda", "camino", "fe", "Tomás", "honest", "pregunta", "profund", "enemig"],
+      modelEn: "The unit argues that faith is not blind, so doubt does not have to be the enemy of faith. The key is the direction the doubt runs. Doubt that runs away from God and refuses to ask its questions hardens into unbelief. But doubt that runs toward God, bringing its honest questions into the light and asking them out loud, is often a pathway to a deeper and more personal faith. Thomas is the example. He refused to believe on the word of his friends and demanded to touch the wounds, yet Jesus did not cast him out or scold him; He came back and invited Thomas to put his finger in the wounds. The honest doubter was met, not rejected. So we should not fear honest questions but welcome them, because they are frequently the first obstacle coming down and the beginning of a faith a person can truly own.",
+      modelEs: "La unidad sostiene que la fe no es ciega, así que la duda no tiene que ser la enemiga de la fe. La clave es la dirección en que corre la duda. La duda que huye de Dios y se niega a hacer sus preguntas se endurece en incredulidad. Pero la duda que corre hacia Dios, trayendo sus preguntas honestas a la luz y haciéndolas en voz alta, a menudo es un camino hacia una fe más profunda y personal. Tomás es el ejemplo. Se negó a creer por la palabra de sus amigos y exigió tocar las heridas, y sin embargo Jesús no lo echó fuera ni lo reprendió; volvió e invitó a Tomás a meter el dedo en las heridas. Al que dudaba honestamente se le salió al encuentro, no se le rechazó. Así que no debemos temer las preguntas honestas sino recibirlas, porque con frecuencia son el primer obstáculo que cae y el comienzo de una fe que la persona puede de veras hacer suya." },
+
+    { textEn: "25. Describe the 'two witnesses' God has set before every person, and explain how they point to the same conclusion.",
+      textEs: "25. Describa los 'dos testigos' que Dios ha puesto delante de toda persona, y explique cómo apuntan a la misma conclusión.",
+      kw_en: ["heaven", "within", "conscience", "longing", "heart", "witness", "testif", "moral"],
+      kw_es: ["cielo", "creación", "adentro", "conciencia", "anhelo", "corazón", "testigo", "afuera"],
+      modelEn: "The unit teaches that God has not left Himself without testimony but has set two great witnesses before every human being. The first witness is the heavens above, the creation, which is vast and ordered and finely made and declares a Maker to anyone who will look up. The second witness is the heart within, namely the conscience that knows there is real right and wrong and the restless longing for something this world never fully satisfies. They point to the same conclusion because one preaches from the outside and the other from the inside, and both testify that there is a God. The witness of the heavens leads toward the arguments from design and fine-tuning, and the witness within leads to its deepest point, the inner seal of the Spirit and the eyes of the heart that come to see God and not merely to conclude that He must exist.",
+      modelEs: "La unidad enseña que Dios no se ha dejado sin testimonio sino que ha puesto dos grandes testigos delante de todo ser humano. El primer testigo es los cielos arriba, la creación, que es vasta y ordenada y finamente hecha y declara un Hacedor a todo el que quiera mirar. El segundo testigo es el corazón adentro, es decir la conciencia que sabe que hay un bien y un mal reales y el inquieto anhelo de algo que este mundo nunca satisface del todo. Apuntan a la misma conclusión porque uno predica desde afuera y el otro desde adentro, y ambos testifican que hay un Dios. El testimonio de los cielos conduce hacia los argumentos del diseño y el ajuste fino, y el testimonio interior conduce a su punto más profundo, el sello interno del Espíritu y los ojos del corazón que llegan a ver a Dios y no meramente a concluir que debe existir." },
+
+    { textEn: "26. What does 1 Peter 3:15 teach about HOW we are to defend the faith, and why does the unit call the manner part of the message?",
+      textEs: "26. ¿Qué enseña 1 Pedro 3:15 sobre CÓMO debemos defender la fe, y por qué llama la unidad a la manera parte del mensaje?",
+      kw_en: ["gentl", "respect", "manner", "message", "humb", "servant", "harsh", "attitude"],
+      kw_es: ["manso", "mansed", "respet", "manera", "mensaje", "humild", "siervo", "áspero"],
+      modelEn: "1 Peter 3:15 teaches not only what to do but how to do it, commanding that we give our answer with gentleness and respect. The unit calls this the manner, and says the manner is part of the message rather than a footnote. The reason is that the truth we defend came in the form of a servant who washed feet, so a person who defends that truth with contempt or harshness has already contradicted it. If we are harsh, we build the wall higher with our own hands and drive people away. If we are gentle, the gentleness itself becomes one of the clues, because the world expects religious people to be arrogant, and a humble, patient, respectful answer is its own small evidence that something real has changed us. So we answer honestly and well, but we answer on our knees, with an attitude that matches the gospel we proclaim.",
+      modelEs: "1 Pedro 3:15 enseña no solo qué hacer sino cómo hacerlo, mandando que demos nuestra respuesta con mansedumbre y reverencia. La unidad llama a esto la manera, y dice que la manera es parte del mensaje y no una nota al pie. La razón es que la verdad que defendemos vino en forma de un siervo que lavó pies, así que la persona que defiende esa verdad con desprecio o aspereza ya la ha contradicho. Si somos ásperos, levantamos el muro más alto con nuestras propias manos y alejamos a la gente. Si somos mansos, la mansedumbre misma se vuelve una de las pistas, porque el mundo espera que los religiosos sean arrogantes, y una respuesta humilde, paciente y respetuosa es por sí misma una pequeña evidencia de que algo real nos ha cambiado. Así que respondemos con honestidad y bien, pero respondemos de rodillas, con una actitud que corresponde al evangelio que proclamamos." },
+
+    { textEn: "27. Name the four lines of evidence the course will follow, and briefly describe each one.",
+      textEs: "27. Nombre las cuatro líneas de evidencia que seguirá el curso, y describa brevemente cada una.",
+      kw_en: ["design", "prophecy", "resurrect", "reliab", "manuscript", "tomb", "fine-tun", "evidence"],
+      kw_es: ["diseño", "profecía", "resurrec", "confiab", "manuscrito", "tumba", "ajuste", "evidencia"],
+      modelEn: "The unit lays out four great clues, or lines of evidence, that the course will follow. The first is the design of the heavens, the fine-tuning of a universe and an Earth so precisely calibrated for life that calling it an accident strains credulity. The second is the fingerprint of prophecy, words written centuries in advance that landed on their target with a precision no guesswork can explain. The third is the empty tomb and the changed men, a resurrection so real that it turned a doubter, an enemy, and a skeptical brother into martyrs for the One they had refused. The fourth is the reliability of the documents, a New Testament better attested by manuscript evidence than any other writing of the ancient world. The design, the prophecy, the resurrection, and the record are four clues that all lead back to the one Maker.",
+      modelEs: "La unidad presenta cuatro grandes pistas, o líneas de evidencia, que seguirá el curso. La primera es el diseño de los cielos, el ajuste fino de un universo y de una Tierra tan precisamente calibrados para la vida que llamarlo accidente fuerza la credulidad. La segunda es la huella de la profecía, palabras escritas siglos por adelantado que dieron en el blanco con una precisión que ninguna conjetura puede explicar. La tercera es la tumba vacía y los hombres cambiados, una resurrección tan real que convirtió a uno que dudaba, a un enemigo y a un hermano escéptico en mártires de Aquel a quien habían rechazado. La cuarta es la confiabilidad de los documentos, un Nuevo Testamento mejor atestiguado por la evidencia de los manuscritos que cualquier otro escrito del mundo antiguo. El diseño, la profecía, la resurrección y el registro son cuatro pistas que conducen todas de vuelta al único Hacedor." },
+
+    { textEn: "28. According to Romans 1:18-20, why does the unit say people are 'without excuse'?",
+      textEs: "28. Según Romanos 1:18-20, ¿por qué dice la unidad que las personas están 'sin excusa'?",
+      kw_en: ["creation", "invisible", "made", "clearly", "excuse", "power", "seen", "understood"],
+      kw_es: ["creación", "invisible", "hecho", "claramente", "excusa", "poder", "visible", "entend"],
+      modelEn: "The unit appeals to Romans 1:18-20, where Paul says that God's invisible qualities, His eternal power and divine nature, have been clearly seen since the creation of the world, being understood from the things that have been made. Because this testimony is plainly visible to everyone in the creation itself, people are without excuse. The point in the unit is that the evidence of a Maker is not hidden away for scholars but is on open display, like the smell of cookies filling a house. A person may refuse to follow the clues, but he cannot honestly say there were no clues to follow. The created order itself bears witness to God's power and nature, so no one can claim ignorance as a defense. This is why the unit insists the Maker's fingerprints permeate the whole creation and leave humanity accountable.",
+      modelEs: "La unidad apela a Romanos 1:18-20, donde Pablo dice que las cualidades invisibles de Dios, su eterno poder y deidad, se han hecho claramente visibles desde la creación del mundo, siendo entendidas por medio de las cosas hechas. Porque este testimonio es claramente visible para todos en la creación misma, las personas están sin excusa. El punto en la unidad es que la evidencia de un Hacedor no está escondida para los eruditos sino a la vista de todos, como el olor de galletas que llena una casa. Una persona puede negarse a seguir las pistas, pero no puede decir honestamente que no había pistas que seguir. El orden creado mismo da testimonio del poder y la naturaleza de Dios, así que nadie puede alegar ignorancia como defensa. Por eso la unidad insiste en que las huellas del Hacedor impregnan toda la creación y dejan a la humanidad responsable." },
+
+    { textEn: "29. The unit says faith is not 'a leap in the dark.' Explain the comparison it uses instead and what it means.",
+      textEs: "29. La unidad dice que la fe no es 'un salto en la oscuridad'. Explique la comparación que usa en su lugar y lo que significa.",
+      kw_en: ["leap", "dark", "bridge", "tested", "step", "blind", "evidence", "trust"],
+      kw_es: ["salto", "oscur", "puente", "probado", "paso", "ciega", "evidencia", "confian"],
+      modelEn: "The unit rejects the popular idea that faith is a leap in the dark, a switching off of the mind and a jump with the eyes closed. Instead it compares biblical faith to a step onto a bridge that has been tested and found to hold. The meaning is that faith is not blind; it is a trust grounded in evidence. Just as a person steps confidently onto a bridge because it has been built and tested, the believer rests his faith on real evidence: the design of the universe, the fulfillment of prophecy, the historical reality of the resurrection, and the reliability of the documents that carry the story to us. Faith still involves a step, a real act of trust, but it is a reasonable step onto something solid rather than a reckless jump off a cliff into nothing. This is why the unit insists faith and evidence belong together.",
+      modelEs: "La unidad rechaza la idea popular de que la fe es un salto en la oscuridad, un apagar la mente y saltar con los ojos cerrados. En su lugar compara la fe bíblica con un paso sobre un puente que ha sido probado y hallado firme. El significado es que la fe no es ciega; es una confianza fundada en evidencia. Así como una persona da el paso con confianza sobre un puente porque ha sido construido y probado, el creyente apoya su fe sobre evidencia real: el diseño del universo, el cumplimiento de la profecía, la realidad histórica de la resurrección y la confiabilidad de los documentos que nos traen la historia. La fe todavía implica un paso, un verdadero acto de confianza, pero es un paso razonable sobre algo sólido en lugar de un salto imprudente desde un acantilado hacia la nada. Por eso la unidad insiste en que la fe y la evidencia van juntas." },
+
+    { textEn: "30. Why should every believer — not only scholars or pastors — be ready to give an answer for the hope within them?",
+      textEs: "30. ¿Por qué debe todo creyente — no solo los eruditos o los pastores — estar listo para dar respuesta de la esperanza que hay en él?",
+      kw_en: ["every", "believer", "scholar", "command", "ready", "hope", "ask", "reason"],
+      kw_es: ["todo", "creyente", "erudito", "mandato", "listo", "esperanza", "pregunt", "razón"],
+      modelEn: "The unit stresses that the command of 1 Peter 3:15 is not given only to scholars or pastors or those with a gift for argument, but to every believer. The reason is simple: every believer has a hope, and someday someone is going to ask about it, whether a neighbor, a child at bedtime, or a coworker who has watched the believer through a hard season. In that moment a person does not need to be a philosopher; he only needs to be ready to point past himself to the evidence the course will follow, the design of the heavens, the fingerprint of prophecy, the empty tomb, and the steady record of those who were there. Because the command is addressed to all believers and because the questions come to ordinary people in ordinary life, the responsibility to be prepared with a reason for our hope belongs to every Christian.",
+      modelEs: "La unidad recalca que el mandato de 1 Pedro 3:15 no se da solo a los eruditos ni a los pastores ni a los que tienen un don para la discusión, sino a todo creyente. La razón es sencilla: todo creyente tiene una esperanza, y algún día alguien va a preguntar por ella, sea un vecino, un hijo a la hora de dormir o un compañero de trabajo que ha observado al creyente a través de una temporada dura. En ese momento la persona no necesita ser un filósofo; solo necesita estar lista para señalar más allá de sí misma hacia la evidencia que seguirá el curso, el diseño de los cielos, la huella de la profecía, la tumba vacía y el firme registro de los que estuvieron allí. Porque el mandato está dirigido a todos los creyentes y porque las preguntas les llegan a personas comunes en la vida ordinaria, la responsabilidad de estar preparados con una razón de nuestra esperanza pertenece a todo cristiano." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 2 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 2 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSApolReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

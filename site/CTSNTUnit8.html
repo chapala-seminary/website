@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS New Testament Survey — Unit 8: The Prison Epistles: The Body of Christ</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+.track-bar { background: #f6f1e8; border: 1px solid #d7cec1; border-radius: 12px; padding: 12px 16px; margin: 15px 0; }
+.track-bar label { margin-right: 18px; cursor: pointer; font-size: 0.95rem; }
+.track-bar input[type=radio] { margin-right: 6px; vertical-align: middle; }
+.reset-btn { background: #8a5a3a; color: white; border: none; border-radius: 30px; padding: 8px 18px; cursor: pointer; font-family: inherit; margin-left: 10px; font-size: 0.9rem; }
+.reset-btn:hover { background: #6e4528; }
+.redirect-notice { background: #e8f5ea; border: 1px solid #b9dfc2; color: #1f6b3b; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-weight: bold; }
+@media print {
+  @page { margin: 0.5in; }
+  body { background: white; color: black; font-size: 12pt; padding: 0; }
+  .nav-bar, .toggle-btn, #submitExamBtn, .reset-btn, #examResult, .track-bar, button.small { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; padding: 12px; margin-bottom: 12px; }
+  .question { page-break-inside: avoid; }
+  h1, h2, h3 { color: black; page-break-after: avoid; }
+  .option { background: white; border-color: #999; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" >← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 New Testament Survey — Unit 8: The Prison Epistles: The Body of Christ</span><span class="lang-es">📖 Estudio del Nuevo Testamento — Unidad 8: Las Epístolas de la Prisión: El Cuerpo de Cristo</span></h1>
+    <p><span class="lang-en"><strong>Course Author:</strong> Dr. Wayne Cook | <strong>Seminary Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Autor del Curso:</strong> Dr. Wayne Cook | <strong>Director del Seminario:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic;"></p>
+</div>
+
+<div class="card" id="teachingContent">
+<div class="lang-en">
+        <h2>I. Four Letters from a Rented House</h2>
+        <p>Some of the most beautiful music in the Bible was written behind bars. Four letters in the New Testament — <em>Ephesians, Philippians, Colossians, and Philemon</em> — share something worth noticing. The answer is the address line at the bottom of each one. All four were written by the apostle Paul during his first imprisonment in Rome, around AD 60 to 62, from the rented house where he was kept under guard for two years (Acts 28:30). A Roman soldier was chained to his wrist day and night. He could not preach in synagogues. He could not travel. He could not stand in marketplaces. So he picked up a pen, and from that chained right hand the Holy Spirit dictated four of the most theologically rich letters ever written.</p>
+
+        <p>These four letters belong together like four windows of a single house. Each one looks out at the same Christ from a different angle. <strong>Ephesians</strong> looks at the <em>wealth</em> of the Body of Christ. <strong>Philippians</strong> looks at the <em>joy</em> of the Body of Christ. <strong>Colossians</strong> looks at the <em>Head</em> of the Body of Christ. <strong>Philemon</strong> looks at the <em>fellowship</em> of the Body of Christ. Four windows. One house. One Christ. One Body.</p>
+
+        <h2>II. Ephesians — The Wealth of the Believer</h2>
+        <p>Ephesians is the most theological of the four prison epistles. It was almost certainly written as a circular letter, intended to be passed among the churches of Asia Minor with Ephesus as the lead city. The first three chapters spread the table of doctrine. The last three chapters serve the meal of duty. Henrietta Mears used to summarize it this way: chapters 1 through 3 tell you what God has done for you in Christ; chapters 4 through 6 tell you what you must now do because of it. Every <em>"therefore"</em> in the second half of Ephesians depends on every <em>"in Christ"</em> in the first half.</p>
+
+        <p>Chapter 1 is one of the most majestic single sentences in the Greek New Testament — verses 3 through 14 in our Bibles are actually one unbroken sentence in the original, and it lists the spiritual blessings of the believer the way a bank statement lists deposits. We were <em>chosen</em> before the foundation of the world, <em>predestined</em> to adoption, <em>accepted</em> in the Beloved, <em>redeemed</em> through His blood, <em>forgiven</em> of trespasses, <em>given</em> the inheritance, and <em>sealed</em> with the Holy Spirit of promise. The chapter divides into three movements that correspond to the three Persons of the Trinity. <em>The Father chose us</em> (verses 3–6). <em>The Son redeemed us</em> (verses 7–12). <em>The Spirit sealed us</em> (verses 13–14). Every blessing the human soul ever needed is already in the account.</p>
+
+        <p>Chapter 2 contains the most famous verses of Ephesians: <em>"For by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast"</em> (Ephesians 2:8–9). Paul then sweeps from individual salvation to corporate identity. Christ has broken down <em>"the middle wall of separation"</em> (2:14) between Jew and Gentile. The two have become <em>"one new man"</em> (2:15). And both together are being built into <em>"a holy temple in the Lord"</em> (2:21). The wealth of the believer is not only personal — it is corporate. Christ has formed one Body out of every tribe and tongue.</p>
+
+        <p>Chapters 4 through 6 then tell us how to walk in that wealth. Chapter 4 is the unity-and-gifts chapter: <em>"one Lord, one faith, one baptism, one God and Father of all"</em> (4:5–6). Chapter 5 is the husband-wife-Christ-Church mystery, where Paul lifts marriage off the human plane and shows it as a picture of Christ and His Church. Chapter 6 closes with the armor of God — the believer's wardrobe for the spiritual war. Truth as the belt. Righteousness as the breastplate. Peace as the shoes. Faith as the shield. Salvation as the helmet. The Word of God as the sword. Six pieces of armor for the believer who has now read the first three chapters and knows what he is fighting for. The key verse of Ephesians: <em>"That He might present her to Himself a glorious church, not having spot or wrinkle or any such thing, but that she should be holy and without blemish"</em> (Ephesians 5:27).</p>
+
+        <h2>III. Philippians — The Joy of the Believer</h2>
+        <p>If Ephesians is doctrine, Philippians is delight. It is Paul's <em>most personal letter.</em> He was writing to a church that he loved more than any other on earth — the church at Philippi, the first church he had founded on European soil (Acts 16). They had stood by him for over ten years. They had sent him money in prison. They had sent Epaphroditus, one of their own, to look after him personally in Rome. Philippians is Paul's thank-you letter, and his pastoral love overflows on every page.</p>
+
+        <p>The recurring word in Philippians is <em>joy</em> — used sixteen times in four short chapters. Note the irony: the apostle is writing the most joyful book in the Bible from a Roman prison, with his neck possibly under threat of execution. <em>"Rejoice in the Lord always. Again I will say, rejoice!"</em> (Philippians 4:4). And he means it. He has learned a secret: <em>"I have learned, in whatever state I am, to be content"</em> (4:11). The secret is not circumstances. The secret is the Person.</p>
+
+        <p>The structural backbone of Philippians is a single image that runs through each of the four chapters: <em>the mind of Christ</em>. <strong>Chapter 1</strong> — <em>"to live is Christ, and to die is gain"</em> (1:21). The mind of Christ on living and dying. <strong>Chapter 2</strong> — the great kenosis hymn: <em>"Let this mind be in you which was also in Christ Jesus, who, being in the form of God... made Himself of no reputation, taking the form of a bondservant"</em> (2:5–7). The mind of Christ on humility. <strong>Chapter 3</strong> — <em>"forgetting those things which are behind and reaching forward to those things which are ahead, I press toward the goal for the prize of the upward call of God in Christ Jesus"</em> (3:13–14). The mind of Christ on running the race. <strong>Chapter 4</strong> — <em>"Be anxious for nothing... and the peace of God, which surpasses all understanding, will guard your hearts and minds"</em> (4:6–7). The mind of Christ on worry.</p>
+
+        <p>The story is told of a pastor who was on a long flight when the storm broke. The captain's voice came on: <em>"Please be sure your seat belt is fastened; we are expecting turbulence."</em> The plane began to be tossed by violent winds. Cracks of thunder rattled above the engines. Lightning lit up the cabin. The pastor looked around and saw passengers white-knuckled in their seats, some praying, some weeping. Then his eye fell on a small girl two rows up, sitting calmly with her feet tucked under her, reading a book. The plane lurched and dropped; she turned a page. When at last the plane landed and they were filing out, the pastor knelt down beside her and asked, <em>"Were you not afraid?"</em> She looked up at him with no surprise on her face at all. <em>"No,"</em> she said. <em>"My Daddy's the pilot. He's taking me home."</em> That is the joy of Philippians. The plane is shaking. The Father is flying.</p>
+
+        <h2>IV. Colossians — The Head of the Body</h2>
+        <p>If Ephesians proclaims the riches of the Body, and Philippians proclaims the joy of the Body, Colossians proclaims the supremacy of the <em>Head</em>. Paul wrote it to a small church in the Lycus Valley of Asia Minor that he had never personally visited. It had been founded by Epaphras (Colossians 1:7), one of Paul's converts from Ephesus. But a strange teaching had crept into the Colossian church — a hybrid heresy that mixed Greek philosophy with Jewish ritual, angelic mysticism, and ascetic legalism. The Colossian error denied that Christ alone was enough. Colossians is Paul's answer.</p>
+
+        <p>The towering passage is Colossians 1:15–20, which most scholars believe was an early Christian hymn that Paul either quoted or composed. <em>"He is the image of the invisible God, the firstborn over all creation. For by Him all things were created that are in heaven and that are on earth, visible and invisible... all things were created through Him and for Him. And He is before all things, and in Him all things consist... For it pleased the Father that in Him all the fullness should dwell"</em> (Colossians 1:15–19). It is the highest Christology Paul ever wrote. The Christ of Colossians is bigger than every angel, bigger than every philosophy, bigger than every law, bigger than every demon, bigger than the universe itself. He is not one religious option among many. He is the <em>Head</em> over every power and principality (2:10), and the Body of which He is the Head is sufficient for every human need.</p>
+
+        <p>The key verse of Colossians stands like a wall of defense around the gospel: <em>"For in Him dwells all the fullness of the Godhead bodily; and you are complete in Him"</em> (Colossians 2:9–10). <em>Complete</em> in Him. Not partly complete. Not 90 percent complete. Not complete-plus-circumcision-plus-angel-worship-plus-special-diet. <em>Complete.</em> The rest of Colossians is a series of warnings about anything that would add to the all-sufficient Christ. <em>"Beware lest anyone cheat you through philosophy and empty deceit"</em> (2:8). The Christian life does not need supplements. It needs the Christ who already supplies every need.</p>
+
+        <h2>V. Philemon — A Brother Restored</h2>
+        <p>The shortest of the prison letters is the most personal. Philemon is a single chapter, twenty-five verses, written by Paul to a wealthy believer in Colossae whom Paul had personally led to the Lord. Philemon had a runaway slave named Onesimus, whose name means <em>useful.</em> Onesimus had stolen from his master, fled to Rome to disappear into the crowds of the imperial capital, and in the providence of God had ended up sitting at the feet of Paul under house arrest. Onesimus was converted. Paul kept him as a personal helper for a while, and then, in obedience to the law and to love, sent him back to Philemon with a letter in his hand.</p>
+
+        <p>The letter is one of the great masterpieces of pastoral tact in the literature of the world. Paul does not pull rank. He does not invoke apostolic authority. He simply asks. <em>"Though I might be very bold in Christ to command you what is fitting, yet for love's sake I rather appeal to you"</em> (Philemon 1:8–9). And then, in the most beautiful single sentence of substitutionary love in the New Testament outside the Gospels, Paul writes the verses 17 through 19: <em>"If then you count me as a partner, receive him as you would me. But if he has wronged you or owes anything, put that on my account. I, Paul, am writing with my own hand. I will repay."</em> Martin Luther was so moved by that paragraph that he once wrote: <em>"All of us are God's Onesimus."</em> We were the runaway. We stole. We disgraced the Name. We deserved punishment. And another Voice spoke up and said to the Father: <em>"If he has wronged you or owes you anything, put that on My account."</em> And the nail-pierced hand of the Lord Jesus Christ signed the bill. The Lord Jesus is the Paul of every prodigal. The Father is the Philemon. The believer is the Onesimus, no longer a slave but a beloved brother in the family.</p>
+
+        <p>The key verse of Philemon ties the whole prison epistle cluster together: <em>"No longer as a slave but more than a slave — a beloved brother... both in the flesh and in the Lord"</em> (Philemon 1:16).</p>
+
+        <h2>VI. The Body of Christ — One Theme, Four Letters</h2>
+        <p>There were a handful of unifying images in the New Testament that the Christian needed to memorize, and one of them was the Body of Christ. Paul speaks of it briefly in Romans 12 and at length in 1 Corinthians 12, but in the prison epistles the image reaches its full development. Christ is the <strong>Head</strong> of the Body (Colossians 1:18). Believers are the <strong>members</strong> of the Body (Ephesians 4:25). The Body is the <strong>fullness</strong> of Christ (Ephesians 1:23). The Body is built up by the <strong>gifts</strong> of every member (Ephesians 4:11–12). The Body is held together by <strong>love</strong> (Ephesians 4:16). And the Body is what every prodigal Onesimus is reconciled <em>into</em> — not as a slave, but as a brother in the family of God (Philemon 1:16).</p>
+
+        <p>The four prison letters together give us the complete picture. Ephesians tells us what the Body <em>has</em>. Philippians tells us what the Body <em>feels</em>. Colossians tells us what the Body's <em>Head</em> is like. Philemon tells us what the Body <em>does</em> when one of its members falls and needs to be restored. You cannot read these four letters without seeing that the Christian life is not a private spirituality. It is membership in a Body whose Head is Jesus Christ.</p>
+
+        <h2>VII. Two Stories of Restoration</h2>
+        <p>When the news broke that Adolph Coors III had been kidnapped and murdered in 1960, his fifteen-year-old son Adolph Coors IV lost the most important man in his life. For fifteen years young Coors carried a hatred for Joseph Corbett, the man who had murdered his father, like a stone in his chest. In 1975 Adolph Coors IV became a Christian, gave up his interest in the family brewery, and tried to walk with the Lord. But the hatred would not leave. It blocked his prayers. It chilled his fellowship. At last, claiming the help of the Holy Spirit, he drove to the maximum-security wing of the Colorado state penitentiary at Canon City and asked to see Joseph Corbett. Corbett refused. Coors left behind a Bible with a note written on the flyleaf. <em>"I'm here to see you today and I'm sorry that we could not meet. As a Christian I am summoned by our Lord and Savior, Jesus Christ, to forgive. I do forgive you, and I ask you to forgive me for the hatred I've held in my heart for you."</em> Coors said afterward, <em>"I have a love for that man that only Jesus Christ could have put in my heart."</em> That is the Body of Christ. That is Philemon in modern dress. That is forgiveness across the prison wall.</p>
+
+        <p>And there is one more story of restoration to close on. Two hundred years ago a young Member of Parliament in England named William Wilberforce was converted at the age of twenty-three. The night of his conversion he wrote in his diary: <em>"I am wretched, miserable, blind, and naked. What infinite love that Christ should die to save such a sinner as me."</em> From that night forward Wilberforce gave his life to a single cause — the abolition of the British slave trade. He stood in the House of Commons year after year, decade after decade. He was opposed, mocked, betrayed. In 1807 the slave trade was abolished. In 1833, three days before Wilberforce died, the act passed that ended slavery in all British dominions. One man, one converted Member of Parliament, brought down a global trade that had stood for centuries. <em>No longer as a slave but as a beloved brother.</em> That is the Body of Christ working through history. That is the prison-epistles' theology lived out on the floor of the House of Commons. That is grace going further than law.</p>
+
+        <h2>VIII. The Wardrobe of the Body</h2>
+        <p>Paul closes Ephesians, and effectively closes this whole prison cluster, by handing the believer a wardrobe. <em>"Put on the whole armor of God, that you may be able to stand against the wiles of the devil"</em> (Ephesians 6:11). Six pieces. The <strong>belt</strong> of truth, that holds the rest of the armor in place. The <strong>breastplate</strong> of righteousness, that covers the heart from the kill-shot of accusation. The <strong>shoes</strong> of the preparation of the gospel of peace, that let the soldier move forward without slipping. The <strong>shield</strong> of faith, that quenches the fiery darts of the enemy. The <strong>helmet</strong> of salvation, that protects the mind from doubt. And the <strong>sword</strong> of the Spirit, which is the Word of God, the only offensive weapon in the list and the most powerful of all.</p>
+
+        <p>You do not <em>achieve</em> the armor. You <em>wear</em> it. Every piece is already in the believer's wardrobe by virtue of being in Christ. The first three chapters of Ephesians have put the armor in the closet. The sixth chapter simply says, <em>get dressed.</em> No Christian gets out of bed in the morning fully clothed by accident. Every day, the believer chooses the belt, the breastplate, the shoes, the shield, the helmet, the sword. Every day, the Body of Christ goes out into the world dressed for the fight.</p>
+
+        <h2>IX. Four Letters, One Lord</h2>
+        <p>The apostle Paul wrote these four letters from a rented house in Rome with a soldier chained to his wrist, never imagining that two thousand years later students sitting in Mexico, in Africa, in Asia, and in every other corner of the earth would still be reading what he scratched onto papyrus by the light of an oil lamp. He thought he was writing to Ephesus and Philippi and Colossae and a man named Philemon. He was writing to you. Ephesians put the wealth in your account. Philippians put the song in your throat. Colossians put the supremacy of Christ over every rival power. Philemon put the runaway back into the family.</p>
+
+        <p>Press on, my friend, into the rest of the New Testament with the same Lord who sustained Paul in his rented house, who walked Wilberforce through forty-six years of parliamentary battle, who broke the hatred in the heart of Adolph Coors IV, and who is the same Lord today. Wear the armor. Sing the joy. Receive the wealth. Welcome the prodigal home. The Head of the Body is on the throne. The Body of Christ is on the move. He is your Lord, and He is the same yesterday, today, and forever. Amen.</p>
+    </div>
+<div class="lang-es">
+        <h2>I. Cuatro cartas desde una casa alquilada</h2>
+        <p>Parte de la música más hermosa de la Biblia fue escrita entre rejas. Cuatro cartas del Nuevo Testamento — <em>Efesios, Filipenses, Colosenses y Filemón</em> — comparten algo digno de notar. La respuesta está en la línea de dirección al final de cada una. Las cuatro fueron escritas por el apóstol Pablo durante su primer encarcelamiento en Roma, alrededor del año 60 al 62, desde la casa alquilada donde se le mantenía bajo guardia por dos años (Hechos 28:30). Un soldado romano estaba encadenado a su muñeca día y noche. No podía predicar en sinagogas. No podía viajar. No podía pararse en los mercados. Así que tomó una pluma, y desde aquella mano derecha encadenada el Espíritu Santo dictó cuatro de las cartas más ricas teológicamente jamás escritas.</p>
+
+        <p>Estas cuatro cartas pertenecen juntas como cuatro ventanas de una sola casa. Cada una mira al mismo Cristo desde un ángulo distinto. <strong>Efesios</strong> mira la <em>riqueza</em> del Cuerpo de Cristo. <strong>Filipenses</strong> mira el <em>gozo</em> del Cuerpo de Cristo. <strong>Colosenses</strong> mira la <em>Cabeza</em> del Cuerpo de Cristo. <strong>Filemón</strong> mira la <em>comunión</em> del Cuerpo de Cristo. Cuatro ventanas. Una casa. Un Cristo. Un Cuerpo.</p>
+
+        <h2>II. Efesios — La riqueza del creyente</h2>
+        <p>Efesios es la más teológica de las cuatro epístolas de la prisión. Fue casi con certeza escrita como carta circular, destinada a circular entre las iglesias de Asia Menor con Éfeso como ciudad principal. Los primeros tres capítulos tienden la mesa de la doctrina. Los últimos tres capítulos sirven la comida del deber. Henrietta Mears solía resumirlo así: los capítulos 1 al 3 le dicen lo que Dios ha hecho por usted en Cristo; los capítulos 4 al 6 le dicen lo que debe hacer ahora a causa de ello. Cada <em>"así que"</em> en la segunda mitad de Efesios depende de cada <em>"en Cristo"</em> en la primera mitad.</p>
+
+        <p>El capítulo 1 es una de las oraciones más majestuosas del Nuevo Testamento griego — los versículos 3 al 14 en nuestras Biblias son en realidad una sola oración ininterrumpida en el original, y enumera las bendiciones espirituales del creyente como un estado de cuenta bancario enumera depósitos. Fuimos <em>escogidos</em> antes de la fundación del mundo, <em>predestinados</em> a la adopción, <em>aceptados</em> en el Amado, <em>redimidos</em> por Su sangre, <em>perdonados</em> de transgresiones, se nos <em>dio</em> la herencia, y fuimos <em>sellados</em> con el Espíritu Santo de la promesa. El capítulo se divide en tres movimientos que corresponden a las tres Personas de la Trinidad. <em>El Padre nos escogió</em> (versículos 3–6). <em>El Hijo nos redimió</em> (versículos 7–12). <em>El Espíritu nos selló</em> (versículos 13–14). Cada bendición que el alma humana jamás necesitó ya está en la cuenta.</p>
+
+        <p>El capítulo 2 contiene los versículos más famosos de Efesios: <em>"Porque por gracia sois salvos por la fe; y esto no de vosotros, pues es don de Dios: No por obras, para que nadie se gloríe"</em> (Efesios 2:8–9). Pablo entonces barre desde la salvación individual a la identidad corporativa. Cristo ha derribado <em>"la pared intermedia de separación"</em> (2:14) entre judío y gentil. Los dos se han convertido en <em>"un nuevo hombre"</em> (2:15). Y ambos juntos están siendo edificados en <em>"templo santo en el Señor"</em> (2:21). La riqueza del creyente no es solo personal — es corporativa. Cristo ha formado un solo Cuerpo de cada tribu y lengua.</p>
+
+        <p>Los capítulos 4 al 6 luego nos dicen cómo andar en esa riqueza. El capítulo 4 es el capítulo de la unidad y los dones: <em>"un Señor, una fe, un bautismo, un Dios y Padre de todos"</em> (4:5–6). El capítulo 5 es el misterio esposo-esposa-Cristo-Iglesia, donde Pablo levanta el matrimonio del plano humano y lo muestra como un retrato de Cristo y Su Iglesia. El capítulo 6 cierra con la armadura de Dios — el guardarropa del creyente para la guerra espiritual. La verdad como cinto. La justicia como coraza. La paz como zapatos. La fe como escudo. La salvación como yelmo. La Palabra de Dios como espada. Seis piezas de armadura para el creyente que ahora ha leído los primeros tres capítulos y sabe por qué pelea. El versículo clave de Efesios: <em>"Para presentársela gloriosa para sí, una iglesia que no tuviese mancha ni arruga, ni cosa semejante; sino que fuese santa y sin mancha"</em> (Efesios 5:27).</p>
+
+        <h2>III. Filipenses — El gozo del creyente</h2>
+        <p>Si Efesios es doctrina, Filipenses es deleite. Es la <em>carta más personal</em> de Pablo. Estaba escribiendo a una iglesia que amaba más que cualquier otra en la tierra — la iglesia de Filipos, la primera iglesia que había fundado en suelo europeo (Hechos 16). Habían estado con él por más de diez años. Le habían enviado dinero en la cárcel. Le habían enviado a Epafrodito, uno de los suyos, para cuidarlo personalmente en Roma. Filipenses es la carta de agradecimiento de Pablo, y su amor pastoral se desborda en cada página.</p>
+
+        <p>La palabra recurrente en Filipenses es <em>gozo</em> — usada dieciséis veces en cuatro cortos capítulos. Note la ironía: el apóstol está escribiendo el libro más gozoso de la Biblia desde una prisión romana, con su cuello posiblemente bajo amenaza de ejecución. <em>"Regocijaos en el Señor siempre: otra vez digo: Que os gocéis"</em> (Filipenses 4:4). Y lo dice de veras. Ha aprendido un secreto: <em>"He aprendido á contentarme con lo que tengo"</em> (4:11). El secreto no son las circunstancias. El secreto es la Persona.</p>
+
+        <p>La columna vertebral estructural de Filipenses es una sola imagen que corre por cada uno de los cuatro capítulos: <em>la mente de Cristo</em>. <strong>Capítulo 1</strong> — <em>"para mí el vivir es Cristo, y el morir es ganancia"</em> (1:21). La mente de Cristo sobre vivir y morir. <strong>Capítulo 2</strong> — el gran himno de la kénosis: <em>"Haya, pues, en vosotros este sentir que hubo también en Cristo Jesús: el cual, siendo en forma de Dios... se anonadó á sí mismo, tomando forma de siervo"</em> (2:5–7). La mente de Cristo sobre la humildad. <strong>Capítulo 3</strong> — <em>"olvidando ciertamente lo que queda atrás, y extendiéndome á lo que está delante, prosigo al blanco, al premio de la soberana vocación de Dios en Cristo Jesús"</em> (3:13–14). La mente de Cristo sobre correr la carrera. <strong>Capítulo 4</strong> — <em>"Por nada estéis afanosos... y la paz de Dios, que sobrepuja todo entendimiento, guardará vuestros corazones y vuestros entendimientos"</em> (4:6–7). La mente de Cristo sobre la preocupación.</p>
+
+        <p>Se cuenta la historia de un pastor que estaba en un largo vuelo cuando estalló la tormenta. La voz del capitán llegó por el altavoz: <em>"Por favor, asegúrense de que su cinturón de seguridad esté abrochado; esperamos turbulencia."</em> El avión comenzó a ser sacudido por vientos violentos. Estruendos de truenos retumbaban por encima del rugido de los motores. Relámpagos iluminaban la cabina. El pastor miró alrededor y vio a los pasajeros con los nudillos blancos en sus asientos, algunos orando, algunos llorando. Entonces sus ojos se posaron en una pequeña niña dos filas más adelante, sentada calmadamente con los pies recogidos bajo ella, leyendo un libro. El avión se sacudió y cayó; ella pasó una página. Cuando al fin el avión aterrizó y estaban saliendo en fila, el pastor se arrodilló junto a ella y le preguntó: <em>"¿No tenías miedo?"</em> Ella lo miró sin la menor sorpresa en el rostro. <em>"No,"</em> dijo. <em>"Mi papi es el piloto. Me está llevando a casa."</em> Eso es el gozo de Filipenses. El avión se sacude. El Padre vuela.</p>
+
+        <h2>IV. Colosenses — La Cabeza del Cuerpo</h2>
+        <p>Si Efesios proclama las riquezas del Cuerpo, y Filipenses proclama el gozo del Cuerpo, Colosenses proclama la supremacía de la <em>Cabeza</em>. Pablo la escribió a una pequeña iglesia en el valle del río Lico de Asia Menor que nunca había visitado personalmente. Había sido fundada por Epafras (Colosenses 1:7), uno de los convertidos de Pablo de Éfeso. Pero una enseñanza extraña se había infiltrado en la iglesia colosense — una herejía híbrida que mezclaba filosofía griega con ritual judío, misticismo angélico y legalismo ascético. El error colosense negaba que Cristo solo fuera suficiente. Colosenses es la respuesta de Pablo.</p>
+
+        <p>El pasaje cumbre es Colosenses 1:15–20, que la mayoría de los eruditos creen que fue un himno cristiano temprano que Pablo o citó o compuso. <em>"El cual es la imagen del Dios invisible, el primogénito de toda criatura. Porque por él fueron criadas todas las cosas que están en los cielos, y que están en la tierra, visibles e invisibles... todo fué criado por él y para él. Y él es antes de todas las cosas, y por él todas las cosas subsisten... Por cuanto agradó al Padre que en él habitase toda plenitud"</em> (Colosenses 1:15–19). Es la cristología más alta que Pablo jamás escribió. El Cristo de Colosenses es más grande que cada ángel, más grande que cada filosofía, más grande que cada ley, más grande que cada demonio, más grande que el universo mismo. No es una opción religiosa entre muchas. Es la <em>Cabeza</em> sobre todo principado y potestad (2:10), y el Cuerpo del cual Él es la Cabeza es suficiente para toda necesidad humana.</p>
+
+        <p>El versículo clave de Colosenses se yergue como un muro de defensa alrededor del evangelio: <em>"Porque en él habita toda la plenitud de la divinidad corporalmente: Y en él estáis cumplidos"</em> (Colosenses 2:9–10). <em>Completos</em> en Él. No parcialmente completos. No 90 por ciento completos. No completos-más-circuncisión-más-adoración-de-ángeles-más-dieta-especial. <em>Completos.</em> El resto de Colosenses es una serie de advertencias contra cualquier cosa que añadiría al Cristo todo-suficiente. <em>"Mirad que ninguno os engañe por filosofías y vanas sutilezas"</em> (2:8). La vida cristiana no necesita suplementos. Necesita al Cristo que ya suple cada necesidad.</p>
+
+        <h2>V. Filemón — Un hermano restaurado</h2>
+        <p>La más corta de las cartas de la prisión es la más personal. Filemón es un solo capítulo, veinticinco versículos, escrito por Pablo a un creyente acaudalado en Colosas a quien Pablo personalmente había llevado al Señor. Filemón tenía un esclavo fugitivo llamado Onésimo, cuyo nombre significa <em>útil.</em> Onésimo había robado a su amo, huido a Roma para desaparecer entre las multitudes de la capital imperial, y en la providencia de Dios había terminado sentado a los pies de Pablo bajo arresto domiciliario. Onésimo fue convertido. Pablo lo retuvo como ayudante personal por un tiempo, y luego, en obediencia a la ley y al amor, lo envió de regreso a Filemón con una carta en la mano.</p>
+
+        <p>La carta es una de las grandes obras maestras del tacto pastoral en la literatura del mundo. Pablo no usa su rango. No invoca autoridad apostólica. Sencillamente pide. <em>"Aunque tengo mucha resolución en Cristo para mandarte lo que conviene, ruégote más bien por amor"</em> (Filemón 1:8–9). Y luego, en la oración más hermosa de amor sustitutivo en el Nuevo Testamento fuera de los Evangelios, Pablo escribe los versículos 17 al 19: <em>"Así que, si me tienes por compañero, recíbele como á mí. Y si en algo te dañó, ó te debe, ponlo á mi cuenta. Yo Pablo lo escribí de mi mano, yo lo pagaré."</em> Martín Lutero quedó tan conmovido por aquel párrafo que una vez escribió: <em>"Todos nosotros somos los Onésimos de Dios."</em> Nosotros éramos el fugitivo. Robamos. Deshonramos el Nombre. Merecíamos castigo. Y otra Voz se alzó y le dijo al Padre: <em>"Si te ha agraviado o te debe algo, ponlo a Mi cuenta."</em> Y la mano traspasada por los clavos del Señor Jesucristo firmó la factura. El Señor Jesús es el Pablo de cada pródigo. El Padre es el Filemón. El creyente es el Onésimo, ya no esclavo sino hermano amado en la familia.</p>
+
+        <p>El versículo clave de Filemón ata todo el grupo de epístolas de la prisión: <em>"No ya como siervo, antes más que siervo, como hermano amado... así en la carne como en el Señor"</em> (Filemón 1:16).</p>
+
+        <h2>VI. El Cuerpo de Cristo — Un tema, cuatro cartas</h2>
+        <p>Había un puñado de imágenes unificadoras en el Nuevo Testamento que el cristiano necesitaba memorizar, y una de ellas era el Cuerpo de Cristo. Pablo habla de él brevemente en Romanos 12 y extensamente en 1 Corintios 12, pero en las epístolas de la prisión la imagen alcanza su pleno desarrollo. Cristo es la <strong>Cabeza</strong> del Cuerpo (Colosenses 1:18). Los creyentes son los <strong>miembros</strong> del Cuerpo (Efesios 4:25). El Cuerpo es la <strong>plenitud</strong> de Cristo (Efesios 1:23). El Cuerpo es edificado por los <strong>dones</strong> de cada miembro (Efesios 4:11–12). El Cuerpo se mantiene unido por el <strong>amor</strong> (Efesios 4:16). Y el Cuerpo es aquello a lo cual cada Onésimo pródigo es reconciliado <em>dentro</em> — no como esclavo, sino como hermano en la familia de Dios (Filemón 1:16).</p>
+
+        <p>Las cuatro cartas de la prisión juntas nos dan el cuadro completo. Efesios nos dice lo que el Cuerpo <em>tiene</em>. Filipenses nos dice lo que el Cuerpo <em>siente</em>. Colosenses nos dice cómo es la <em>Cabeza</em> del Cuerpo. Filemón nos dice lo que el Cuerpo <em>hace</em> cuando uno de sus miembros cae y necesita ser restaurado. No se pueden leer estas cuatro cartas sin ver que la vida cristiana no es una espiritualidad privada. Es membresía en un Cuerpo cuya Cabeza es Jesucristo.</p>
+
+        <h2>VII. Dos historias de restauración</h2>
+        <p>Cuando la noticia se publicó de que Adolph Coors III había sido secuestrado y asesinado en 1960, su hijo de quince años Adolph Coors IV perdió al hombre más importante de su vida. Por quince años el joven Coors llevó un odio hacia Joseph Corbett, el hombre que había asesinado a su padre, como una piedra en el pecho. En 1975 Adolph Coors IV se hizo cristiano, renunció a su interés en la cervecería familiar y trató de caminar con el Señor. Pero el odio no se iba. Bloqueaba sus oraciones. Enfriaba su comunión. Al fin, reclamando la ayuda del Espíritu Santo, condujo al ala de máxima seguridad de la penitenciaría del estado de Colorado en Canon City y pidió ver a Joseph Corbett. Corbett se negó. Coors dejó atrás una Biblia con una nota escrita en la primera hoja. <em>"Estoy aquí para verte hoy y lamento que no hayamos podido encontrarnos. Como cristiano soy llamado por nuestro Señor y Salvador Jesucristo a perdonar. Te perdono, y te pido que me perdones por el odio que he llevado en mi corazón hacia ti."</em> Coors dijo después: <em>"Tengo un amor por ese hombre que solo Jesucristo pudo haber puesto en mi corazón."</em> Eso es el Cuerpo de Cristo. Eso es Filemón en traje moderno. Eso es perdón a través del muro de la prisión.</p>
+
+        <p>Y hay una historia más de restauración para cerrar. Hace doscientos años un joven miembro del Parlamento en Inglaterra llamado William Wilberforce se convirtió a los veintitrés años. La noche de su conversión escribió en su diario: <em>"Soy miserable, infeliz, ciego, y desnudo. ¡Qué amor infinito que Cristo muriera para salvar a un pecador como yo!"</em> Desde aquella noche en adelante Wilberforce dedicó su vida a una sola causa — la abolición de la trata de esclavos británica. Se paró en la Cámara de los Comunes año tras año, década tras década. Fue opuesto, ridiculizado, traicionado. En 1807 la trata de esclavos fue abolida. En 1833, tres días antes de la muerte de Wilberforce, se aprobó el acta que terminó con la esclavitud en todos los dominios británicos. Un hombre, un Miembro del Parlamento convertido, derribó un comercio global que había permanecido por siglos. <em>No ya como siervo, sino como hermano amado.</em> Eso es el Cuerpo de Cristo obrando en la historia. Esa es la teología de las epístolas de la prisión vivida en el suelo de la Cámara de los Comunes. Esa es la gracia yendo más allá de la ley.</p>
+
+        <h2>VIII. El guardarropa del Cuerpo</h2>
+        <p>Pablo cierra Efesios, y efectivamente cierra todo este grupo de la prisión, entregando al creyente un guardarropa. <em>"Vestíos de toda la armadura de Dios, para que podáis estar firmes contra las asechanzas del diablo"</em> (Efesios 6:11). Seis piezas. El <strong>cinto</strong> de la verdad, que mantiene en su lugar al resto de la armadura. La <strong>coraza</strong> de la justicia, que cubre el corazón del tiro mortal de la acusación. Los <strong>zapatos</strong> del apresto del evangelio de paz, que dejan al soldado avanzar sin resbalar. El <strong>escudo</strong> de la fe, que apaga los dardos de fuego del enemigo. El <strong>yelmo</strong> de la salvación, que protege la mente de la duda. Y la <strong>espada</strong> del Espíritu, que es la Palabra de Dios, la única arma ofensiva en la lista y la más poderosa de todas.</p>
+
+        <p>Uno no <em>logra</em> la armadura. Uno la <em>viste.</em> Cada pieza ya está en el guardarropa del creyente en virtud de estar en Cristo. Los primeros tres capítulos de Efesios han puesto la armadura en el armario. El sexto capítulo simplemente dice: <em>vístete.</em> Ningún cristiano se levanta de la cama por la mañana completamente vestido por accidente. Cada día, el creyente escoge el cinto, la coraza, los zapatos, el escudo, el yelmo, la espada. Cada día, el Cuerpo de Cristo sale al mundo vestido para la pelea.</p>
+
+        <h2>IX. Cuatro cartas, un Señor</h2>
+        <p>El apóstol Pablo escribió estas cuatro cartas desde una casa alquilada en Roma con un soldado encadenado a su muñeca, nunca imaginando que dos mil años después estudiantes sentados en México, en África, en Asia, y en cada otro rincón de la tierra todavía leerían lo que él rasguñaba en papiro a la luz de una lámpara de aceite. Pensaba que estaba escribiendo a Éfeso y a Filipos y a Colosas y a un hombre llamado Filemón. Le estaba escribiendo a usted. Efesios puso la riqueza en su cuenta. Filipenses puso la canción en su garganta. Colosenses puso la supremacía de Cristo sobre cada poder rival. Filemón puso al pródigo de regreso en la familia.</p>
+
+        <p>Avance, amigo mío, por el resto del Nuevo Testamento con el mismo Señor que sostuvo a Pablo en su casa alquilada, que caminó con Wilberforce por cuarenta y seis años de batalla parlamentaria, que rompió el odio en el corazón de Adolph Coors IV, y que es el mismo Señor hoy. Vista la armadura. Cante el gozo. Reciba la riqueza. Reciba al pródigo en casa. La Cabeza del Cuerpo está en el trono. El Cuerpo de Cristo está en marcha. Él es su Señor, y Él es el mismo ayer, hoy y por los siglos. Amén.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 8 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 8 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer questions 1–20 (multiple choice). You must achieve 90% (18/20) on the multiple-choice section to pass. <strong>M.Div. / Th.M. students:</strong> Answer all 30 questions. You must achieve 90% on both sections independently — 18/20 multiple choice AND 9/10 short answer. Click an answer for immediate feedback. <strong>Once all 12 units are passed, you will be redirected to your certificate.</strong></span><span class="lang-es"><strong>Estudiantes de certificado:</strong> Respondan las preguntas 1–20 (opción múltiple). Debe alcanzar el 90% (18/20) en la sección de opción múltiple para aprobar. <strong>Estudiantes de M.Div. / Th.M.:</strong> Respondan las 30 preguntas. Debe alcanzar el 90% en ambas secciones de manera independiente — 18/20 opción múltiple Y 9/10 respuesta corta. Haga clic en una respuesta para retroalimentación inmediata. <strong>Una vez aprobadas las 12 unidades, será redirigido a su certificado.</strong></span></p>
+    <div class="track-bar">
+        <strong><span class="lang-en">Your Track:</span><span class="lang-es">Su Modalidad:</span></strong>
+        <span style="margin-left:14px;">
+            <label><input type="radio" name="ctsTrack" value="cert"><span class="lang-en">Certificate (MC only)</span><span class="lang-es">Certificado (solo opción múltiple)</span></label>
+            <label><input type="radio" name="ctsTrack" value="mdiv"><span class="lang-en">Master of Divinity (MC + SA)</span><span class="lang-es">Maestría en Divinidad (MC + RC)</span></label>
+            <label><input type="radio" name="ctsTrack" value="thm"><span class="lang-en">Master of Theology (Th.M.) Track</span><span class="lang-es">Maestría en Teología (Th.M.)</span></label>
+        </span>
+    </div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar Aprobación</span></button>
+        <button id="resetExamBtn" class="reset-btn"><span class="lang-en">↺ Reset Exam</span><span class="lang-es">↺ Restablecer Examen</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ===== PER-UNIT CONFIG =====
+const UNIT = 8;
+const TOTAL_UNITS = 12;
+const NEXT_URL = 'CTSNTUnit9.html';
+const PREV_URL = 'CTSNTUnit7.html';
+const PASS_THRESHOLD = 0.90;
+
+let progress = JSON.parse(localStorage.getItem('cts_nt_progress')) || {};
+let currentTrack = localStorage.getItem('cts_track') || 'cert';
+
+function isMastersLevel() { return currentTrack === 'mdiv' || currentTrack === 'thm'; }
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === UNIT) cls += ' active';
+        grid.innerHTML += `<a href="CTSNTUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+if (PREV_URL) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_URL; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="#" onclick="promptName(); return false;" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+    }
+}
+function promptName() {
+    const name = prompt("Welcome to CTS New Testament Survey! Please enter your full name as you'd like it to appear on your certificate:");
+    if (name && name.trim().length > 1) {
+        localStorage.setItem('cts_student', JSON.stringify({name: name.trim()}));
+        displayStudentGreeting();
+    }
+}
+displayStudentGreeting();
+
+const mcQuestions = [
+    { textEn: "1. The 'Prison Epistles' refer to which four New Testament letters?", textEs: "1. Las 'Epístolas de la Prisión' se refieren a cuáles cuatro cartas del Nuevo Testamento?",
+      optionsEn: ["Ephesians, Philippians, Colossians, Philemon", "Romans, Galatians, Hebrews, James", "1-2 Timothy, Titus, Philemon", "1-2 Thessalonians, 1-2 Peter"],
+      optionsEs: ["Efesios, Filipenses, Colosenses, Filemón", "Romanos, Gálatas, Hebreos, Santiago", "1-2 Timoteo, Tito, Filemón", "1-2 Tesalonicenses, 1-2 Pedro"],
+      explanationEn: "The prison epistles are Ephesians, Philippians, Colossians, and Philemon, all written by Paul from imprisonment.", explanationEs: "Las epístolas de la prisión son Efesios, Filipenses, Colosenses y Filemón, todas escritas por Pablo desde el encarcelamiento.", correct: 0 },
+    { textEn: "2. Paul wrote the prison epistles during his first imprisonment in which city?", textEs: "2. Pablo escribió las epístolas de la prisión durante su primer encarcelamiento en cuál ciudad?",
+      optionsEn: ["Jerusalem", "Rome", "Caesarea", "Ephesus"],
+      optionsEs: ["Jerusalén", "Roma", "Cesarea", "Éfeso"],
+      explanationEn: "Paul wrote the prison epistles during his first imprisonment in Rome, around AD 60–62, from a rented house under guard.", explanationEs: "Pablo escribió las epístolas de la prisión durante su primer encarcelamiento en Roma, cerca del año 60–62, desde una casa alquilada bajo guardia.", correct: 1 },
+    { textEn: "3. Ephesians 1:3-14 is famously notable in Greek for being:", textEs: "3. Efesios 1:3-14 es famosamente notable en griego por ser:",
+      optionsEn: ["A poem in dactylic meter", "Quoted from the Psalms", "A single unbroken sentence", "A repeat of Genesis 1"],
+      optionsEs: ["Un poema en metro dactílico", "Citado de los Salmos", "Una sola oración ininterrumpida", "Una repetición de Génesis 1"],
+      explanationEn: "The four letters are four windows on one Christ: Ephesians the wealth, Philippians the joy, Colossians the Head, Philemon the fellowship.", explanationEs: "Las cuatro cartas son cuatro ventanas a un solo Cristo: Efesios la riqueza, Filipenses el gozo, Colosenses la Cabeza, Filemón la comunión.", correct: 2 },
+    { textEn: "4. The famous summary of salvation in Ephesians 2:8-9 declares that we are saved by:", textEs: "4. El famoso resumen de la salvación en Efesios 2:8-9 declara que somos salvos por:",
+      optionsEn: ["Faith and circumcision", "Works of the Law", "Faith and good works", "Grace through faith, not of works"],
+      optionsEs: ["La fe y la circuncisión", "Obras de la Ley", "La fe y las buenas obras", "La gracia por la fe, no por obras"],
+      explanationEn: "Ephesians divides into doctrine (chapters 1–3, what God did for you) and duty (chapters 4–6, what you must now do).", explanationEs: "Efesios se divide en doctrina (capítulos 1–3, lo que Dios hizo por usted) y deber (capítulos 4–6, lo que debe hacer ahora).", correct: 3 },
+    { textEn: "5. The 'whole armor of God' is described in:", textEs: "5. La 'armadura completa de Dios' se describe en:",
+      optionsEn: ["Ephesians 4", "Ephesians 6", "Colossians 3", "Philippians 4"],
+      optionsEs: ["Efesios 4", "Efesios 6", "Colosenses 3", "Filipenses 4"],
+      explanationEn: "Ephesians 2:8–9 says you are saved by grace through faith, the gift of God, not of works, lest anyone boast.", explanationEs: "Efesios 2:8–9 dice que sois salvos por gracia mediante la fe, don de Dios, no por obras, para que nadie se gloríe.", correct: 1 },
+    { textEn: "6. The recurring keyword that appears 16 times in Philippians is:", textEs: "6. La palabra clave recurrente que aparece 16 veces en Filipenses es:",
+      optionsEn: ["Joy", "Faith", "Hope", "Peace"],
+      optionsEs: ["Gozo", "Fe", "Esperanza", "Paz"],
+      explanationEn: "Christ broke down the middle wall of separation between Jew and Gentile, making the two one new man (Ephesians 2).", explanationEs: "Cristo derribó la pared intermedia de separación entre judío y gentil, haciendo de los dos un solo hombre nuevo (Efesios 2).", correct: 0 },
+    { textEn: "7. Philippians 2:5-11 is famously known as:", textEs: "7. Filipenses 2:5-11 es famosamente conocido como:",
+      optionsEn: ["The love chapter", "The faith chapter", "The armor passage", "The kenosis hymn"],
+      optionsEs: ["El capítulo del amor", "El capítulo de la fe", "El pasaje de la armadura", "El himno de la kénosis"],
+      explanationEn: "Ephesians 6 gives the armor of God: belt, breastplate, shoes, shield, helmet, and the sword of the Spirit, the Word of God.", explanationEs: "Efesios 6 da la armadura de Dios: cinto, coraza, calzado, escudo, yelmo, y la espada del Espíritu, la Palabra de Dios.", correct: 3 },
+    { textEn: "8. 'For me to live is Christ, and to die is gain' is found in:", textEs: "8. 'Para mí el vivir es Cristo, y el morir es ganancia' se encuentra en:",
+      optionsEn: ["Ephesians 1:21", "Colossians 1:21", "Philippians 1:21", "Philemon 1:21"],
+      optionsEs: ["Efesios 1:21", "Colosenses 1:21", "Filipenses 1:21", "Filemón 1:21"],
+      explanationEn: "The sword of the Spirit, the Word of God, is the only offensive weapon in the armor of Ephesians 6.", explanationEs: "La espada del Espíritu, la Palabra de Dios, es la única arma ofensiva en la armadura de Efesios 6.", correct: 2 },
+    { textEn: "9. Paul founded the Philippian church on which missionary journey?", textEs: "9. Pablo fundó la iglesia de Filipos en cuál viaje misionero?",
+      optionsEn: ["Second missionary journey", "First missionary journey", "Third missionary journey", "Journey to Rome"],
+      optionsEs: ["Segundo viaje misionero", "Primer viaje misionero", "Tercer viaje misionero", "Viaje a Roma"],
+      explanationEn: "Philippians is the joy epistle, using 'joy' sixteen times, written from prison to the church Paul loved most.", explanationEs: "Filipenses es la epístola del gozo, usando 'gozo' dieciséis veces, escrita desde la prisión a la iglesia que Pablo más amaba.", correct: 0 },
+    { textEn: "10. The supreme Christological hymn affirming Christ as 'the image of the invisible God' is found in:", textEs: "10. El supremo himno cristológico afirmando a Cristo como 'la imagen del Dios invisible' se encuentra en:",
+      optionsEn: ["Ephesians 1:3-14", "Colossians 1:15-20", "Philippians 2:5-11", "Philemon 1:8-19"],
+      optionsEs: ["Efesios 1:3-14", "Colosenses 1:15-20", "Filipenses 2:5-11", "Filemón 1:8-19"],
+      explanationEn: "Paul learned to be content in whatever state he was (Philippians 4:11); the secret is the Person, not the circumstances.", explanationEs: "Pablo aprendió a contentarse en cualquier estado en que estuviera (Filipenses 4:11); el secreto es la Persona, no las circunstancias.", correct: 1 },
+    { textEn: "11. The Colossian heresy combined:", textEs: "11. La herejía colosense combinaba:",
+      optionsEn: ["Buddhism and Roman emperor worship", "Stoicism and Egyptian religion", "Greek philosophy, Jewish ritual, angel mysticism, and ascetic legalism", "Astrology and Greek mythology"],
+      optionsEs: ["Budismo y culto al emperador romano", "Estoicismo y religión egipcia", "Filosofía griega, ritual judío, misticismo angélico y legalismo ascético", "Astrología y mitología griega"],
+      explanationEn: "The kenosis hymn (Philippians 2) shows Christ, being in the form of God, making Himself nothing and taking the form of a servant.", explanationEs: "El himno de la kenosis (Filipenses 2) muestra a Cristo, siendo en forma de Dios, anonadándose y tomando forma de siervo.", correct: 2 },
+    { textEn: "12. The key verse of Colossians declaring 'in Him you are complete' is found at:", textEs: "12. El versículo clave de Colosenses declarando 'en él estáis cumplidos' se encuentra en:",
+      optionsEn: ["Colossians 1:15", "Colossians 1:27", "Colossians 3:1", "Colossians 2:9-10"],
+      optionsEs: ["Colosenses 1:15", "Colosenses 1:27", "Colosenses 3:1", "Colosenses 2:9-10"],
+      explanationEn: "Philippians 1:21 — 'to live is Christ, and to die is gain' — is the mind of Christ on living and dying.", explanationEs: "Filipenses 1:21 — 'para mí el vivir es Cristo, y el morir es ganancia' — es la mente de Cristo sobre vivir y morir.", correct: 3 },
+    { textEn: "13. The Colossian church was founded not by Paul but by:", textEs: "13. La iglesia de Colosas no fue fundada por Pablo sino por:",
+      optionsEn: ["Apollos", "Epaphras", "Silas", "Timothy"],
+      optionsEs: ["Apolos", "Epafras", "Silas", "Timoteo"],
+      explanationEn: "Colossians proclaims the supremacy of Christ the Head; 1:15–20 is the highest Christology Paul ever wrote.", explanationEs: "Colosenses proclama la supremacía de Cristo la Cabeza; 1:15–20 es la cristología más alta que Pablo jamás escribió.", correct: 1 },
+    { textEn: "14. The name 'Onesimus' literally means:", textEs: "14. El nombre 'Onésimo' literalmente significa:",
+      optionsEn: ["Useful", "Faithful", "Wanderer", "Servant"],
+      optionsEs: ["Útil", "Fiel", "Vagabundo", "Siervo"],
+      explanationEn: "Colossians 1:15 calls Christ the image of the invisible God, the firstborn over all creation, by whom all things were made.", explanationEs: "Colosenses 1:15 llama a Cristo la imagen del Dios invisible, el primogénito de toda creación, por quien todo fue hecho.", correct: 0 },
+    { textEn: "15. In Philemon, Paul asks Philemon to receive Onesimus back as:", textEs: "15. En Filemón, Pablo le pide a Filemón que reciba a Onésimo de vuelta como:",
+      optionsEn: ["A returned slave", "A repentant servant", "A free man", "A beloved brother"],
+      optionsEs: ["Un esclavo devuelto", "Un siervo arrepentido", "Un hombre libre", "Un hermano amado"],
+      explanationEn: "Colossians 2:9–10 says all the fullness of the Godhead dwells in Christ bodily, and you are complete in Him.", explanationEs: "Colosenses 2:9–10 dice que toda la plenitud de la Deidad habita en Cristo corporalmente, y vosotros estáis completos en Él.", correct: 3 },
+    { textEn: "16. Martin Luther famously declared regarding Philemon that:", textEs: "16. Martín Lutero famosamente declaró acerca de Filemón que:",
+      optionsEn: ["Onesimus represents Israel", "Philemon represents the Roman Empire", "All of us are God's Onesimus", "The slave trade was permanent"],
+      optionsEs: ["Onésimo representa a Israel", "Filemón representa al Imperio Romano", "Todos nosotros somos los Onésimos de Dios", "La trata de esclavos era permanente"],
+      explanationEn: "The Colossian heresy mixed philosophy, Jewish ritual, angel worship, and asceticism, denying that Christ alone is enough.", explanationEs: "La herejía colosense mezclaba filosofía, ritual judío, adoración de ángeles y ascetismo, negando que Cristo solo basta.", correct: 2 },
+    { textEn: "17. The British politician who labored 46 years to abolish slavery and was converted at age 23 was:", textEs: "17. El político británico que trabajó 46 años para abolir la esclavitud y se convirtió a los 23 años fue:",
+      optionsEn: ["William Wilberforce", "John Newton", "Charles Wesley", "George Whitefield"],
+      optionsEs: ["William Wilberforce", "John Newton", "Charles Wesley", "George Whitefield"],
+      explanationEn: "Philemon concerns Onesimus, a runaway slave converted under Paul, sent back to his master no longer a slave but a beloved brother.", explanationEs: "Filemón trata de Onésimo, un esclavo fugitivo convertido bajo Pablo, enviado de vuelta a su amo ya no como esclavo sino como hermano amado.", correct: 0 },
+    { textEn: "18. The British Slavery Abolition Act passed in 1833, how many days before Wilberforce died?", textEs: "18. La Ley de Abolición de la Esclavitud Británica pasó en 1833, ¿cuántos días antes de la muerte de Wilberforce?",
+      optionsEn: ["One day", "Three days", "One week", "One month"],
+      optionsEs: ["Un día", "Tres días", "Una semana", "Un mes"],
+      explanationEn: "In Philemon Paul offers substitution: if Onesimus owes anything, put it on my account, I will repay (1:18).", explanationEs: "En Filemón Pablo ofrece sustitución: si Onésimo debe algo, ponlo a mi cuenta, yo lo pagaré (1:18).", correct: 1 },
+    { textEn: "19. The unifying theme of the four prison epistles is best summarized as:", textEs: "19. El tema unificador de las cuatro epístolas de la prisión se resume mejor como:",
+      optionsEn: ["The end times", "The fruit of the Spirit", "The Body of Christ", "Suffering and persecution"],
+      optionsEs: ["Los tiempos finales", "El fruto del Espíritu", "El Cuerpo de Cristo", "El sufrimiento y la persecución"],
+      explanationEn: "The Colossian church was founded not by Paul but by Epaphras, one of Paul's converts from Ephesus.", explanationEs: "La iglesia colosense fue fundada no por Pablo sino por Epafras, uno de los convertidos de Pablo en Éfeso.", correct: 2 },
+    { textEn: "20. The summary of the four prison epistles matches each book to its unique aspect of the Body of Christ as follows:", textEs: "20. El resumen de las cuatro epístolas de la prisión asocia cada libro a su aspecto único del Cuerpo de Cristo así:",
+      optionsEn: ["Ephesians-suffering, Philippians-doctrine, Colossians-grace, Philemon-evangelism", "Ephesians-mission, Philippians-discipline, Colossians-warning, Philemon-charity", "Ephesians-prophecy, Philippians-fasting, Colossians-prayer, Philemon-tithing", "Ephesians-wealth, Philippians-joy, Colossians-Head, Philemon-fellowship"],
+      optionsEs: ["Efesios-sufrimiento, Filipenses-doctrina, Colosenses-gracia, Filemón-evangelismo", "Efesios-misión, Filipenses-disciplina, Colosenses-advertencia, Filemón-caridad", "Efesios-profecía, Filipenses-ayuno, Colosenses-oración, Filemón-diezmo", "Efesios-riqueza, Filipenses-gozo, Colosenses-Cabeza, Filemón-comunión"],
+      explanationEn: "Across the prison epistles the Body of Christ image reaches full development: Christ the Head, believers the members.", explanationEs: "A través de las epístolas de la prisión la imagen del Cuerpo de Cristo alcanza pleno desarrollo: Cristo la Cabeza, los creyentes los miembros.", correct: 3 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Explain the historical setting of the four prison epistles. Why does that setting matter for interpretation?", textEs: "21. Explique el contexto histórico de las cuatro epístolas de la prisión. ¿Por qué importa ese contexto para la interpretación?",
+      kw_en: ["rome", "prison", "house arrest", "chained", "60-62", "paul"], kw_es: ["roma", "prision", "arresto domiciliario", "encadenado", "60-62", "pablo"],
+      modelEn: "The four prison epistles were written by Paul during his first imprisonment in Rome, around AD 60 to 62, while under house arrest with a soldier chained to his wrist. Unable to preach in synagogues or travel, Paul wrote instead, and the chains shaped the letters: from confinement came some of the richest theology in the New Testament. The setting matters because it shows joy and doctrine flowing from a prison.", modelEs: "Las cuatro epístolas de la prisión fueron escritas por Pablo durante su primer encarcelamiento en Roma, cerca del año 60 al 62, mientras estaba bajo arresto domiciliario con un soldado encadenado a su muñeca. Incapaz de predicar en sinagogas o viajar, Pablo escribió en cambio, y las cadenas formaron las cartas: del confinamiento vino parte de la teología más rica del Nuevo Testamento. El entorno importa porque muestra gozo y doctrina brotando de una prisión." },
+    { textEn: "22. Trace the structure of Ephesians (doctrine in 1-3, duty in 4-6). How do the two halves relate to each other?", textEs: "22. Trace la estructura de Efesios (doctrina en 1-3, deber en 4-6). ¿Cómo se relacionan ambas mitades?",
+      kw_en: ["doctrine", "duty", "in christ", "therefore", "walk", "blessings"], kw_es: ["doctrina", "deber", "en cristo", "por tanto", "andar", "bendiciones"],
+      modelEn: "Ephesians divides cleanly into doctrine and duty. Chapters 1–3 spread the table of doctrine, listing the believer's blessings in Christ; chapters 4–6 serve the meal of duty, telling how to walk. The two halves are joined by the word therefore: every command in the second half depends on every blessing in the first. You walk worthy because you are already rich in Christ.", modelEs: "Efesios se divide claramente en doctrina y deber. Los capítulos 1–3 tienden la mesa de la doctrina, enumerando las bendiciones del creyente en Cristo; los capítulos 4–6 sirven la comida del deber, diciendo cómo andar. Las dos mitades se unen por la palabra así que: cada mandato de la segunda mitad depende de cada bendición de la primera. Uno anda dignamente porque ya es rico en Cristo." },
+    { textEn: "23. Discuss the spiritual blessings of Ephesians 1:3-14 in terms of the three Persons of the Trinity.", textEs: "23. Discuta las bendiciones espirituales de Efesios 1:3-14 en términos de las tres Personas de la Trinidad.",
+      kw_en: ["father", "son", "spirit", "chose", "redeemed", "sealed"], kw_es: ["padre", "hijo", "espiritu", "escogio", "redimio", "sello"],
+      modelEn: "Ephesians 1:3–14 lists the believer's blessings in three movements matching the Trinity. The Father chose us before the foundation of the world; the Son redeemed us through His blood and forgave our trespasses; and the Spirit sealed us as the guarantee of our inheritance. Every blessing the soul needs is already in the account, given by Father, Son, and Spirit together.", modelEs: "Efesios 1:3–14 enumera las bendiciones del creyente en tres movimientos que corresponden a la Trinidad. El Padre nos escogió antes de la fundación del mundo; el Hijo nos redimió por Su sangre y perdonó nuestras transgresiones; y el Espíritu nos selló como garantía de nuestra herencia. Cada bendición que el alma necesita ya está en la cuenta, dada por el Padre, el Hijo y el Espíritu juntos." },
+    { textEn: "24. Apply the armor of God passage (Ephesians 6) to the daily life of the believer. What does each piece protect?", textEs: "24. Aplique el pasaje de la armadura de Dios (Efesios 6) a la vida diaria del creyente. ¿Qué protege cada pieza?",
+      kw_en: ["belt", "breastplate", "shoes", "shield", "helmet", "sword"], kw_es: ["cinto", "coraza", "calzado", "escudo", "yelmo", "espada"],
+      modelEn: "The armor of God in Ephesians 6 is the believer's daily wardrobe for spiritual war. The belt of truth holds it together, the breastplate of righteousness guards the heart, the shoes of the gospel of peace steady the steps, the shield of faith quenches the fiery darts, the helmet of salvation protects the mind, and the sword of the Spirit is the Word of God. The believer does not achieve the armor but puts it on each day.", modelEs: "La armadura de Dios en Efesios 6 es el vestuario diario del creyente para la guerra espiritual. El cinto de la verdad lo sostiene todo, la coraza de justicia guarda el corazón, el calzado del evangelio de la paz afirma los pasos, el escudo de la fe apaga los dardos de fuego, el yelmo de la salvación protege la mente, y la espada del Espíritu es la Palabra de Dios. El creyente no logra la armadura sino que se la pone cada día." },
+    { textEn: "25. Explain why Philippians is called the joy epistle. How can Paul write about joy from a Roman prison?", textEs: "25. Explique por qué Filipenses se llama la epístola del gozo. ¿Cómo puede Pablo escribir sobre el gozo desde una prisión romana?",
+      kw_en: ["joy", "prison", "christ", "content", "circumstances", "rejoice"], kw_es: ["gozo", "prision", "cristo", "contento", "circunstancias", "regocijo"],
+      modelEn: "Philippians is the joy epistle, using joy sixteen times, yet Paul wrote it from prison facing possible execution. He can rejoice because he has learned to be content in any circumstances; the secret is not what surrounds him but the Christ within him. So he can say rejoice always, for his joy rests on a Person the prison cannot touch.", modelEs: "Filipenses es la epístola del gozo, usando gozo dieciséis veces, y sin embargo Pablo la escribió desde la prisión enfrentando posible ejecución. Puede regocijarse porque ha aprendido a contentarse en cualquier circunstancia; el secreto no es lo que lo rodea sino el Cristo dentro de él. Así que puede decir regocijaos siempre, pues su gozo descansa en una Persona que la prisión no puede tocar." },
+    { textEn: "26. Discuss the kenosis hymn (Philippians 2:5-11). What does it teach about the mind of Christ?", textEs: "26. Discuta el himno de la kénosis (Filipenses 2:5-11). ¿Qué enseña sobre la mente de Cristo?",
+      kw_en: ["kenosis", "humility", "form of god", "servant", "exalted", "name"], kw_es: ["kenosis", "humildad", "forma de dios", "siervo", "exaltado", "nombre"],
+      modelEn: "The kenosis hymn of Philippians 2 teaches humility by Christ's example. Being in the form of God, He made Himself nothing, taking the form of a servant and humbling Himself to death on a cross. Therefore God exalted Him and gave Him the name above every name. Paul holds up that downward path of the Son as the mind believers are to have toward one another.", modelEs: "El himno de la kenosis de Filipenses 2 enseña la humildad por el ejemplo de Cristo. Siendo en forma de Dios, se anonadó, tomando forma de siervo y humillándose hasta la muerte de cruz. Por eso Dios lo exaltó y le dio el nombre sobre todo nombre. Pablo levanta ese camino descendente del Hijo como la mente que los creyentes han de tener unos hacia otros." },
+    { textEn: "27. Explain the supremacy of Christ in Colossians 1:15-20. Why is this the highest Christology in Paul?", textEs: "27. Explique la supremacía de Cristo en Colosenses 1:15-20. ¿Por qué es esta la cristología más alta de Pablo?",
+      kw_en: ["image", "firstborn", "creation", "head", "fullness", "supremacy"], kw_es: ["imagen", "primogenito", "creacion", "cabeza", "plenitud", "supremacia"],
+      modelEn: "Colossians 1:15–20 proclaims the supremacy of Christ. He is the image of the invisible God and the firstborn over all creation, the one by whom and for whom all things were made, in whom the fullness dwells. He is the Head over every power. It is the highest Christology in Paul because it answers the Colossian error by showing Christ greater than every rival.", modelEs: "Colosenses 1:15–20 proclama la supremacía de Cristo. Él es la imagen del Dios invisible y el primogénito de toda la creación, aquel por quien y para quien todo fue hecho, en quien habita la plenitud. Él es la Cabeza sobre todo poder. Es la cristología más alta de Pablo porque responde al error colosense mostrando a Cristo mayor que todo rival." },
+    { textEn: "28. Trace the four threats addressed in Colossians (philosophy, ritual, angel-worship, asceticism). How does Paul answer each?", textEs: "28. Trace las cuatro amenazas tratadas en Colosenses (filosofía, ritual, adoración de ángeles, ascetismo). ¿Cómo responde Pablo a cada una?",
+      kw_en: ["philosophy", "ritual", "angel", "asceticism", "complete", "heresy"], kw_es: ["filosofia", "ritual", "angel", "ascetismo", "completo", "herejia"],
+      modelEn: "The Colossian heresy was a hybrid that threatened the gospel from four directions: Greek philosophy, Jewish ritual, angel worship or mysticism, and ascetic legalism. Each added something to Christ. Paul answers them all with one wall of defense — you are complete in Him — for if all the fullness of God dwells in Christ, then the believer needs no supplement to the all-sufficient Savior.", modelEs: "La herejía colosense era un híbrido que amenazaba el evangelio desde cuatro direcciones: la filosofía griega, el ritual judío, la adoración de ángeles o el misticismo, y el legalismo ascético. Cada uno añadía algo a Cristo. Pablo los responde a todos con un muro de defensa — estáis completos en Él — pues si toda la plenitud de Dios habita en Cristo, el creyente no necesita suplemento al Salvador todo-suficiente." },
+    { textEn: "29. Discuss the substitutionary love of Paul in Philemon 1:17-19. How does it picture the work of Christ?", textEs: "29. Discuta el amor sustitutivo de Pablo en Filemón 1:17-19. ¿Cómo representa la obra de Cristo?",
+      kw_en: ["substitution", "account", "repay", "onesimus", "christ", "luther"], kw_es: ["sustitucion", "cuenta", "pagar", "onesimo", "cristo", "lutero"],
+      modelEn: "In Philemon 1:17–19 Paul offers substitution for the runaway Onesimus: receive him as you would me, and if he owes anything, put it on my account, I will repay. Luther saw the gospel in it, saying we are all God's Onesimus. We were the runaway who wronged the Father, and Christ stepped in to say put it on My account, signing the bill with His pierced hand.", modelEs: "En Filemón 1:17–19 Pablo ofrece sustitución por el fugitivo Onésimo: recíbelo como a mí mismo, y si debe algo, ponlo a mi cuenta, yo lo pagaré. Lutero vio el evangelio en ello, diciendo que todos somos el Onésimo de Dios. Nosotros éramos el fugitivo que agravió al Padre, y Cristo intervino para decir ponlo a Mi cuenta, firmando la deuda con Su mano traspasada." },
+    { textEn: "30. Synthesize: Explain the image of the prison epistles as four windows of a single house. What single theme unifies all four?", textEs: "30. Sintetice: Explique la imagen de las epístolas de la prisión como cuatro ventanas de una sola casa. ¿Qué tema único unifica las cuatro?",
+      kw_en: ["body", "head", "wealth", "joy", "fellowship", "christ"], kw_es: ["cuerpo", "cabeza", "riqueza", "gozo", "comunion", "cristo"],
+      modelEn: "The prison epistles can be pictured as four windows on one house, the Body of Christ. Ephesians shows the wealth the Body has in Christ; Philippians shows the joy the Body feels; Colossians shows the Head the Body is joined to; and Philemon shows the fellowship the Body lives out when a fallen member is restored. Four windows, one house, one Christ, one Body.", modelEs: "Las epístolas de la prisión pueden imaginarse como cuatro ventanas de una sola casa, el Cuerpo de Cristo. Efesios muestra la riqueza que el Cuerpo tiene en Cristo; Filipenses muestra el gozo que el Cuerpo siente; Colosenses muestra la Cabeza a la que el Cuerpo está unido; y Filemón muestra la comunión que el Cuerpo vive cuando un miembro caído es restaurado. Cuatro ventanas, una casa, un Cristo, un Cuerpo." }
+];
+
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = `cts_nt_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY = `cts_nt_u${UNIT}_sa_lockout`;
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0')
+        : parseInt(localStorage.getItem(`cts_nt_u${UNIT}_lockout`) || '0');
+}
+let lockUntil = activeLockUntil();
+let unitPassed = progress[`unit${UNIT}`] || false;
+
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function isEs() { return document.body.classList.contains('lang-es'); }
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer as left-boundary prefix.
+// Pass standard is >=3 hits (NOT all keywords).
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function kwHitCount(normAns, keys) { return keys.filter(function(k){ return kwHit(normAns, k); }).length; }
+
+function checkAllUnitsPassed() {
+    for (let i = 1; i <= TOTAL_UNITS; i++) { if (!progress[`unit${i}`]) return false; }
+    return true;
+}
+
+function syncTrackUI() {
+    document.querySelectorAll('input[name="ctsTrack"]').forEach(r => { r.checked = (r.value === currentTrack); });
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = isEs() ? 'Opción Múltiple (Preguntas 1–20)' : 'Multiple Choice (Questions 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (!isEs()) ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (!isEs()) ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (!isEs()) ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((!isEs()) ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = isEs() ? 'Respuesta Corta (Preguntas 21–30) — Pista Maestría en Divinidad' : 'Short Answer (Questions 21–30) — Master of Divinity Track';
+    container.appendChild(kwTitle);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = isEs() ? q.textEs : q.textEn;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = isEs() ? 'Escriba su respuesta aquí...' : 'Type your answer here...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = isEs() ? 'Verificar Respuesta' : 'Check Answer';
+        const fb = document.createElement('div');
+        fb.className = 'feedback-text';
+        fb.style.marginTop = '8px';
+        const model = document.createElement('div');
+        model.className = 'model-answer';
+        model.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ansRaw = ta.value.trim();
+            const ans = normalize(ansRaw);
+            const keys = isEs() ? q.kw_es : q.kw_en;
+            const hits = kwHitCount(ans, keys);
+            if (ansRaw.length < 100) {
+                fb.innerHTML = isEs() ? 'Escriba una respuesta más completa (al menos una oración).' : 'Please write a more complete answer (at least a sentence).';
+                fb.className = 'feedback-text incorrect';
+            } else if (hits >= 3) {
+                fb.innerHTML = isEs() ? `✓ ¡Bien! Su respuesta toca ${hits} conceptos clave.` : `✓ Good! Your answer touches ${hits} key concepts.`;
+                fb.className = 'feedback-text correct';
+                kwAnswers[idx] = ansRaw;
+            } else {
+                fb.innerHTML = isEs() ? `Va bien — toca ${hits}. Apunte a al menos 3 conceptos clave; revise la lección y vuelva a intentarlo.` : `Good start — you touched ${hits}. Aim for at least 3 key concepts; review the lesson and try again.`;
+                fb.className = 'feedback-text incorrect';
+            }
+            const mk = isEs() ? q.modelEs : q.modelEn;
+            if (mk) {
+                model.innerHTML = (isEs() ? '<strong>Respuesta modelo — estúdiela:</strong> ' : '<strong>Model answer — study this:</strong> ') + mk;
+                model.style.display = 'block';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(model);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+}
+
+function triggerRedirect() {
+    const target = checkAllUnitsPassed() ? 'CTSNTCertificate.html' : NEXT_URL;
+    const result = document.getElementById('examResult');
+    let seconds = 3;
+    function tick() {
+        const msg = isEs()
+            ? `Redirigiendo a la siguiente unidad en ${seconds}...`
+            : `Redirecting to the next unit in ${seconds}...`;
+        result.innerHTML = `<div class='redirect-notice'>✅ ${isEs() ? '¡APROBADO!' : 'PASSED!'} ${msg}</div>`;
+        if (seconds <= 0) { location.href = target; return; }
+        seconds--;
+        setTimeout(tick, 1000);
+    }
+    tick();
+}
+
+function submitExam() {
+    const result = document.getElementById('examResult');
+    if (unitPassed) {
+        result.innerHTML = `<span style='color:green'>${isEs() ? '✅ Unidad ya aprobada.' : '✅ Unit already passed!'}</span>`;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        result.innerHTML = `<span style='color:red'>${isEs() ? `⏰ Bloqueado por ${wait} minutos más.` : `⏰ Locked for ${wait} more minutes.`}</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) { promptName(); return; }
+
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    let advCorrect = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = normalize(kwAnswers[i] || '');
+        const keys = isEs() ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        if (kwHitCount(ans, keys) >= 3 && ans.length >= 100) advCorrect++;
+    }
+
+    const mcPct = correctMC / 20;
+    const saPct = advCorrect / 10;
+    const mcPass = mcPct >= PASS_THRESHOLD;
+    const saPass = saPct >= PASS_THRESHOLD;
+
+    function passUnit() {
+        unitPassed = true;
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem('cts_nt_progress', JSON.stringify(progress));
+        localStorage.setItem(`nt_unit${UNIT}_passed`, 'true');
+        localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+        localStorage.removeItem(SA_LOCK_KEY);
+        updateProgressGrid();
+        triggerRedirect();
+    }
+
+    if (!isMastersLevel()) {
+        if (mcPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Necesita 18/20 para Certificado.`
+                : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Need 18/20 for Certificate.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        if (saPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ✓ ya guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+                : `MC: ✓ already banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Su opción múltiple está a salvo. Puede reintentar la sección de respuesta corta en ${mins} min.` : `Your multiple-choice pass is safe. You can retry the short-answer section in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPass && saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit();
+    } else if (mcPass && !saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ aprobado y guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ passed and banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Al reintentar en ${mins} min, solo necesitará la sección de respuesta corta — el OM permanece aprobado.` : `When you retry in ${mins} min, you'll only need the short-answer section — MC stays passed.`}</span>`;
+    } else {
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 18/20 Y 9/10 para M.Div.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 18/20 AND 9/10 for M.Div.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+    }
+}
+
+function resetExam() {
+    const msg = isEs()
+        ? '¿Restablecer el examen? Esto borrará sus respuestas en pantalla y eliminará el bloqueo de 15 minutos. Las unidades ya aprobadas no se afectan.'
+        : 'Reset the exam? This will clear your on-screen answers and remove the 15-minute lockout. Already-passed units are not affected.';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill('');
+    lockUntil = 0;
+    mcPreviouslyPassed = false;
+    localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+document.querySelectorAll('input[name="ctsTrack"]').forEach(r => {
+    r.addEventListener('change', e => {
+        currentTrack = e.target.value;
+        localStorage.setItem('cts_track', currentTrack);
+    });
+});
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.className = 'lang-es';
+        this.textContent = 'English';
+    } else {
+        document.body.className = 'lang-en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+syncTrackUI();
+renderQuestions();
+if (unitPassed) document.getElementById('examResult').innerHTML = `<span style='color:green'>${isEs() ? `✅ Unidad ${UNIT} ya aprobada.` : `✅ Unit ${UNIT} already passed.`}</span>`;
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSNTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

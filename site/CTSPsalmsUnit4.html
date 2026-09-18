@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Psalms — Unit 4: Psalm 51, The Penitential Psalm</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 5 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 The Book of Psalms — Unit 4: Psalm 51, The Penitential Psalm</span><span class="lang-es">📖 El Libro de los Salmos — Unidad 4: Salmo 51, El Salmo Penitencial</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Have mercy upon me, O God, according to Your lovingkindness; according to the multitude of Your tender mercies, blot out my transgressions." — Psalm 51:1 (NKJV)</span><span class="lang-es">"Ten piedad de mí, oh Dios, conforme a tu misericordia; conforme a la multitud de tus piedades borra mis rebeliones." — Salmo 51:1 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to The Book of Psalms. Please register before beginning Unit 4.</span><span class="lang-es">Bienvenido a El Libro de los Salmos. Por favor regístrese antes de comenzar la Unidad 4.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+            <h3>1. A Sickness No Doctor Can Cure</h3>
+            <p>There is a kind of sickness for which doctors have no cure. It is spiritual sickness, and it was the sickness King David carried for more than a year. David had sinned with Bathsheba and then had her husband Uriah killed to cover it up. For an entire year he was separated from God, and you can imagine how miserable he was during that time. He broke up a home; he committed adultery and murder. And yet this same man is called one of the greatest who ever lived &mdash; a man after God's own heart. How can both things be true? Because the story of Psalm 51 is not finally about a man's sin; it is about how a sinner finds his way home to God.</p>
+            <p>One day David's preacher came to see him. His name was Nathan, a prophet of God &mdash; the kind of pastor who visited his members. The 51st Psalm is the prayer David wrote out of that visit. In it we can watch, step by step, exactly how a guilty man returns to the God he has wronged. There are four steps, and they are the same four steps every one of us must take.</p>
+
+            <h3>2. David Was Confronted with His Sin</h3>
+            <div class="scripture">
+                <strong>Psalm 51:1-2 (NKJV):</strong> "Have mercy upon me, O God, according to Your lovingkindness; according to the multitude of Your tender mercies, blot out my transgressions. Wash me thoroughly from my iniquity, and cleanse me from my sin."
+            </div>
+            <p>The prophet had probably known about the sin for some time, but he said nothing until God sent him. Nathan understood the danger; throughout history messengers who brought bad news were often killed, and David held the power of life and death over him. So the man of God came and told a story: a rich man with many flocks took the one little ewe lamb of a poor man and killed it for a guest. David was furious. "Such a man should be put to death!" Then Nathan looked at his king and said, <em>"You are the man."</em> David, the rich king with many wives, had taken Uriah's wife and then had Uriah murdered. He had condemned himself.</p>
+            <p>God is always working to confront us with our sin. Sometimes the Holy Spirit speaks through our conscience, sometimes through the hardships of life, sometimes through a Christian friend. In the parable of the prodigal son, the young man "came to himself" while starving among the pigs, and only then turned home. The first step toward being forgiven is simply to realize that we need forgiveness.</p>
+
+            <h3>3. David Admitted His Sin</h3>
+            <p>David cried out, "I have sinned against the LORD." Even though he had wronged Bathsheba and Uriah and the nation, he understood that ultimately he had sinned against God. How differently we usually react when we are told we are sinners, for it is always hard to accept personal responsibility. Consider the easier roads David did not take.</p>
+            <p>He could have <em>lied</em>: "You have no proof; you don't know what I've done." A small child quickly learns that lying is easier than telling the truth. He could have <em>blamed someone else</em>: that Bathsheba enticed him. That is the oldest excuse there is &mdash; when God confronted Adam, his first defense was, "This woman You gave me caused me to do it." He could have <em>made excuses</em>: that he was distracted running the government, or that he had a hard boyhood. He could even have <em>grown angry</em> and had Nathan killed for his insolence.</p>
+            <p>Instead of all these, David admitted his sin, because no excuse could suffice. The all-knowing God looks directly into a man's heart and cannot be deceived. He knows our open sins and our secret sins, our sins of commission and our sins of omission. The One who counts the hairs of our head knows about our sins. David was helpless and knew it. The heart that had been frozen for a year was finally thawed, and with a broken spirit he confessed.</p>
+
+            <h3>4. David Was Sorry for His Sin</h3>
+            <p>The 51st Psalm begins with David begging God to turn his life around. For too long he had been separated from God; for too long he had struggled in guilt and shame; for too long he had been the most miserable of men. It is a sad fact that as long as our lives are caught up in willful sin, we cut ourselves off from God's presence. One of the chief reasons for unanswered prayer is unconfessed sin. Rebellion against God never makes us happy. As long as we know what is right and refuse to do it, we manufacture our own grief.</p>
+            <p>Perhaps the teenage years are the classic years of rebellion. I remember reaching that age and thinking I could make all my own decisions &mdash; I did not want anyone telling me when to study, when to come home, or what to choose. Eventually I rebelled against God too, and decided the church was not all that important to me. It took several years to learn that doing whatever I wanted was not as good as it was supposed to be; in fact it was the most miserable time of my life. Perhaps God allows us to hit rock bottom so that we will have nowhere else to look but up. And then He stands waiting for us with open arms.</p>
+
+            <h3>5. David Turned from His Sin</h3>
+            <p>The 51st Psalm makes clear that David vowed to commit his life to the Lord. Some people think the past, once done, can never be addressed &mdash; "what I have written, I have written." It is true we cannot change the past. There is no time machine to undo our mistakes; the record of our lives is written in indelible ink. Lady Macbeth tried in vain to wash the bloodstain from her hands, but the spot remained. And it is true that we can never clear our own consciences. Every sin is ultimately against God, so if we are to be forgiven, God must forgive us.</p>
+            <p>Here is the good news: the Bible is the only book of religion that says God completely forgives. When we ask humbly, "Lord, have mercy on me, a sinner," His reply is, "I will remember your sins no more." Yet turning is more than feeling sorry. Zacchaeus the tax collector, when he met Jesus, did not merely confess; he paid back four times what he had stolen. Part of true repentance is the positive act of trying to make our wrongs right. And there is one more thing we can do: we can change the future. There is no real repentance if we are content to keep sinning. At this very moment you are becoming the person you will be in a year; we never stand still &mdash; we are always moving toward God or away from Him.</p>
+
+            <h3>6. The Father Who Runs to Meet Us</h3>
+            <div class="illustration">
+                <strong>Flora Campbell Comes Home:</strong> Ian Maclaren tells of Lachlan Campbell, a stern, cold man who loved his daughter Flora, though her mother had died. Because her father lacked all compassion, Flora ran away from home. Rumors came back of the sinful life she had fallen into, and one day Lachlan struck her name from the family Bible and moved at church that it be dropped from the roll. The congregation refused to act without further study. The next week a kind woman, Margie Howe, went to see him, told him the story of the prodigal son, and finally persuaded him to write to Flora: "Lassie, come home, for your old father is grieving for you. Come home for your sake, for your father's sake, and for the dear Lord's sake." Flora, sick in body and heart, came at once. The next week Margie found written in the family Bible, in the trembling hand of an old man: "Flora Campbell &mdash; she went away in May, but she came back in December, and her father fell upon her neck and kissed her." How much more gladly will God receive us back.
+            </div>
+
+            <h3>7. The Slate Wiped Clean</h3>
+            <div class="scripture">
+                <strong>1 John 1:9 (NKJV):</strong> "If we confess our sins, He is faithful and just to forgive us our sins and to cleanse us from all unrighteousness."
+            </div>
+            <p>David's life was spared through his repentance, but Nathan warned him that "the sword shall never depart from your house." The sin was forgiven, yet consequences remained; any sin leaves certain scars. But here we have an advantage David did not fully see: Christ bore the pain of our sin on the cross.</p>
+            <div class="illustration">
+                <strong>"He Doesn't Remember":</strong> A pastor had sinned badly, and even though he had confessed it, he never felt forgiven. A woman in his church was always saying, "The Lord said to me &hellip;" She was usually right, but it irked him. One day he challenged her: "If God is really speaking to you, ask Him to tell you what sin I committed years ago." A few days later she returned. "Did you ask Him?" he demanded. "Yes," she said. "And what did He say?" The woman answered, "He said He doesn't remember." That is what it means to be forgiven: God blots out the transgression and remembers it no more.
+            </div>
+
+            <h3>8. The Disease and the Only Cure</h3>
+            <p>All through the Bible, sin is pictured as a disease &mdash; a terrible disease that is always fatal, and every one of us carries it. As Romans 3:23 says, "all have sinned and fall short of the glory of God." The disease is fatal, but there is one cure: Jesus died on the cross to forgive our sins. No matter what they are, we can be forgiven; we are given a second chance.</p>
+            <p>A small boy came through a delicate emergency operation and was breathing freely, but late that night a frightened nurse neglected her duty, and the boy died. The doctor decided she could not be trusted and wrote a letter to end her career. He called her in and read it; she listened in shame and misery. "Have you nothing to say?" he asked. She shook her head, and when she finally spoke she said only, "Give me another chance." That is the cry of every sinner, and the wonder of the gospel is that God grants it. David was confronted, he admitted, he was sorry, and he turned &mdash; and instead of punishment he received the forgiveness of God. The same mercy waits for you. Have mercy upon me, O God; blot out my transgressions.</p>
+</div>
+
+<div class="lang-es">
+            <h3>1. Una Enfermedad que Ningún Médico Puede Curar</h3>
+            <p>Hay una clase de enfermedad para la cual los médicos no tienen cura. Es la enfermedad espiritual, y fue la enfermedad que el rey David cargó por más de un año. David había pecado con Betsabé y luego hizo matar a su esposo Urías para encubrirlo. Por un año entero estuvo separado de Dios, y puede imaginar cuán miserable fue durante ese tiempo. Destruyó un hogar; cometió adulterio y homicidio. Y sin embargo a este mismo hombre se le llama uno de los más grandes que jamás vivieron &mdash; un hombre conforme al corazón de Dios. ¿Cómo pueden ser ciertas ambas cosas? Porque la historia del Salmo 51 no trata al final del pecado de un hombre; trata de cómo un pecador halla el camino de regreso a Dios.</p>
+            <p>Un día el predicador de David vino a verlo. Su nombre era Natán, un profeta de Dios &mdash; de esos pastores que visitan a sus miembros. El Salmo 51 es la oración que David escribió a raíz de esa visita. En él podemos observar, paso a paso, exactamente cómo un hombre culpable regresa al Dios a quien ha agraviado. Hay cuatro pasos, y son los mismos cuatro pasos que cada uno de nosotros debe dar.</p>
+
+            <h3>2. David Fue Confrontado con su Pecado</h3>
+            <div class="scripture">
+                <strong>Salmo 51:1-2 (RVG):</strong> "Ten piedad de mí, oh Dios, conforme a tu misericordia; conforme a la multitud de tus piedades borra mis rebeliones. Lávame más y más de mi maldad, y límpiame de mi pecado."
+            </div>
+            <p>El profeta probablemente había sabido del pecado por algún tiempo, pero no dijo nada hasta que Dios lo envió. Natán comprendía el peligro; a lo largo de la historia los mensajeros que traían malas noticias a menudo eran matados, y David tenía poder de vida y muerte sobre él. Así que el hombre de Dios vino y contó una historia: un hombre rico con muchos rebaños tomó la única corderita de un hombre pobre y la mató para un huésped. David se enfureció. "¡Tal hombre debe morir!" Entonces Natán miró a su rey y dijo: <em>"Tú eres aquel hombre."</em> David, el rey rico con muchas esposas, había tomado a la esposa de Urías y luego había hecho matar a Urías. Se había condenado a sí mismo.</p>
+            <p>Dios siempre está obrando para confrontarnos con nuestro pecado. A veces el Espíritu Santo habla por medio de nuestra conciencia, a veces por las dificultades de la vida, a veces por un amigo cristiano. En la parábola del hijo pródigo, el joven "volvió en sí" mientras se moría de hambre entre los cerdos, y solo entonces regresó a casa. El primer paso hacia el perdón es simplemente darnos cuenta de que necesitamos perdón.</p>
+
+            <h3>3. David Admitió su Pecado</h3>
+            <p>David clamó: "Contra Jehová he pecado." Aunque había agraviado a Betsabé, a Urías y a la nación, comprendió que en última instancia había pecado contra Dios. Cuán diferente solemos reaccionar cuando se nos dice que somos pecadores, pues siempre es difícil aceptar la responsabilidad personal. Considere los caminos más fáciles que David no tomó.</p>
+            <p>Pudo haber <em>mentido</em>: "No tienes pruebas; no sabes lo que he hecho." Un niño pequeño aprende pronto que mentir es más fácil que decir la verdad. Pudo haber <em>culpado a otro</em>: que Betsabé lo sedujo. Esa es la excusa más antigua que existe &mdash; cuando Dios confrontó a Adán, su primera defensa fue: "Esta mujer que me diste me hizo hacerlo." Pudo haber <em>puesto excusas</em>: que estaba distraído gobernando, o que tuvo una niñez difícil. Pudo incluso haberse <em>enojado</em> y mandado matar a Natán por su insolencia.</p>
+            <p>En lugar de todo esto, David admitió su pecado, porque ninguna excusa podía bastar. El Dios que todo lo sabe mira directamente al corazón del hombre y no puede ser engañado. Conoce nuestros pecados abiertos y nuestros pecados secretos, nuestros pecados de comisión y nuestros pecados de omisión. Aquel que cuenta los cabellos de nuestra cabeza sabe de nuestros pecados. David estaba indefenso y lo sabía. El corazón que había estado congelado por un año al fin se deshizo, y con espíritu quebrantado confesó.</p>
+
+            <h3>4. David Tuvo Tristeza por su Pecado</h3>
+            <p>El Salmo 51 comienza con David rogando a Dios que cambie su vida. Por demasiado tiempo había estado separado de Dios; por demasiado tiempo había luchado en culpa y vergüenza; por demasiado tiempo había sido el más miserable de los hombres. Es un hecho triste que mientras nuestras vidas estén atrapadas en el pecado voluntario, nos apartamos de la presencia de Dios. Una de las principales razones de la oración sin respuesta es el pecado no confesado. La rebelión contra Dios nunca nos hace felices. Mientras sepamos lo que es correcto y rehusemos hacerlo, fabricamos nuestra propia aflicción.</p>
+            <p>Quizá los años de la adolescencia son los años clásicos de la rebelión. Recuerdo llegar a esa edad y pensar que podía tomar todas mis propias decisiones &mdash; no quería que nadie me dijera cuándo estudiar, cuándo volver a casa, o qué escoger. Con el tiempo me rebelé también contra Dios, y decidí que la iglesia no era tan importante para mí. Me tomó varios años aprender que hacer lo que yo quería no era tan bueno como se suponía; de hecho fue la época más miserable de mi vida. Quizá Dios permite que toquemos fondo para que no tengamos a dónde mirar sino hacia arriba. Y entonces &Eacute;l nos espera con los brazos abiertos.</p>
+
+            <h3>5. David se Apartó de su Pecado</h3>
+            <p>El Salmo 51 deja claro que David prometió consagrar su vida al Señor. Algunos piensan que el pasado, una vez hecho, jamás puede tratarse &mdash; "lo que he escrito, escrito está." Es cierto que no podemos cambiar el pasado. No hay máquina del tiempo para deshacer nuestros errores; el registro de nuestra vida está escrito con tinta indeleble. Lady Macbeth intentó en vano lavar la mancha de sangre de sus manos, pero la mancha permaneció. Y es cierto que nunca podemos limpiar nuestra propia conciencia. Todo pecado es en última instancia contra Dios, así que si hemos de ser perdonados, Dios debe perdonarnos.</p>
+            <p>Aquí están las buenas nuevas: la Biblia es el único libro de religión que dice que Dios perdona por completo. Cuando pedimos con humildad: "Señor, ten misericordia de mí, pecador," Su respuesta es: "Nunca más me acordaré de tus pecados." Pero apartarse es más que sentir tristeza. Zaqueo el publicano, al encontrarse con Jesús, no solo confesó; devolvió cuatro veces lo que había robado. Parte del verdadero arrepentimiento es el acto positivo de tratar de enmendar nuestros males. Y hay algo más que podemos hacer: podemos cambiar el futuro. No hay verdadero arrepentimiento si nos contentamos con seguir pecando. En este mismo momento usted se está convirtiendo en la persona que será dentro de un año; nunca estamos quietos &mdash; siempre nos movemos hacia Dios o nos alejamos de &Eacute;l.</p>
+
+            <h3>6. El Padre que Corre a Recibirnos</h3>
+            <div class="illustration">
+                <strong>Flora Campbell Vuelve a Casa:</strong> Ian Maclaren cuenta de Lachlan Campbell, un hombre severo y frío que amaba a su hija Flora, aunque la madre de ella había muerto. Porque su padre carecía de toda compasión, Flora huyó de casa. Llegaron rumores de la vida pecaminosa en que había caído, y un día Lachlan borró su nombre de la Biblia familiar y propuso en la iglesia que se quitara del registro. La congregación se negó a actuar sin más estudio. La semana siguiente una mujer bondadosa, Margie Howe, fue a verlo, le contó la historia del hijo pródigo, y al fin lo persuadió de escribir a Flora: "Muchacha, vuelve a casa, porque tu viejo padre está afligido por ti. Vuelve por tu bien, por el bien de tu padre, y por el bien del Señor amado." Flora, enferma de cuerpo y de corazón, vino enseguida. La semana siguiente Margie halló escrito en la Biblia familiar, con la mano temblorosa de un anciano: "Flora Campbell &mdash; se fue en mayo, pero volvió en diciembre, y su padre se echó sobre su cuello y la besó." Cuánto más gozoso nos recibirá Dios de regreso.
+            </div>
+
+            <h3>7. La Cuenta Borrada</h3>
+            <div class="scripture">
+                <strong>1 Juan 1:9 (RVG):</strong> "Si confesamos nuestros pecados, &eacute;l es fiel y justo para perdonar nuestros pecados, y limpiarnos de toda maldad."
+            </div>
+            <p>La vida de David fue perdonada por su arrepentimiento, pero Natán le advirtió que "la espada no se apartará jamás de tu casa." El pecado fue perdonado, pero las consecuencias permanecieron; todo pecado deja ciertas cicatrices. Pero aquí tenemos una ventaja que David no vio del todo: Cristo llevó el dolor de nuestro pecado en la cruz.</p>
+            <div class="illustration">
+                <strong>"&Eacute;l No lo Recuerda":</strong> Un pastor había pecado gravemente, y aunque lo había confesado, nunca se sintió perdonado. Una mujer en su iglesia siempre decía: "El Señor me dijo &hellip;" Por lo general acertaba, pero a él le molestaba. Un día la desafió: "Si Dios de veras te habla, pídele que te diga qué pecado cometí hace años." Días después ella regresó. "¿Le preguntaste?" exigió él. "Sí," dijo ella. "¿Y qué dijo?" La mujer respondió: "Dijo que no lo recuerda." Eso es lo que significa ser perdonado: Dios borra la transgresión y no la recuerda más.
+            </div>
+
+            <h3>8. La Enfermedad y la Única Cura</h3>
+            <p>Por toda la Biblia, el pecado se presenta como una enfermedad &mdash; una enfermedad terrible que siempre es mortal, y cada uno de nosotros la lleva. Como dice Romanos 3:23: "por cuanto todos pecaron, y están destituidos de la gloria de Dios." La enfermedad es mortal, pero hay una cura: Jesús murió en la cruz para perdonar nuestros pecados. No importa cuáles sean, podemos ser perdonados; se nos da una segunda oportunidad.</p>
+            <p>Un niño pequeño salió de una delicada operación de emergencia y respiraba con normalidad, pero ya entrada la noche una enfermera asustada descuidó su deber, y el niño murió. El médico decidió que no se podía confiar en ella y escribió una carta para terminar su carrera. La llamó y se la leyó; ella escuchó con vergüenza y angustia. "¿No tienes nada que decir?" preguntó él. Ella negó con la cabeza, y cuando al fin habló solo dijo: "Deme otra oportunidad." Ese es el clamor de todo pecador, y la maravilla del evangelio es que Dios lo concede. David fue confrontado, admitió, tuvo tristeza, y se apartó &mdash; y en lugar de castigo recibió el perdón de Dios. La misma misericordia le espera a usted. Ten piedad de mí, oh Dios; borra mis rebeliones.</p>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 4 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 4 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Psalms — Unit 4 (Josh engine, Psalm 51)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 4;
+const COURSE = 'psalms';
+const NEXT_UNIT_URL = 'CTSPsalmsUnit5.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Psalm 1 - The Two Ways",
+    "Psalm 23 - The Shepherd",
+    "Psalm 24 - The King of Glory",
+    "Psalm 51 - The Penitential Psalm",
+    "Psalm 119 - The Word of God",
+    "Psalm 22 - The Forsaken / Messianic Psalm",
+    "Psalm 56 - When I Am Afraid",
+    "Psalm 28 - When God Is Silent",
+    "Psalm 103 - Count Your Blessings",
+    "Psalm 55 - Casting Your Burden",
+    "The Psalms in Ministry I - Capstone",
+    "The Psalms in Ministry II - Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPsalmsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// MC answer key: A=B=C=D=5; all 20 verified against Psalm 51
+const mcQuestions = [
+    { textEn: "1. According to the lesson, what kind of sickness did David carry for more than a year, and which no doctor can cure?", textEs: "1. Según la lección, ¿qué clase de enfermedad cargó David por más de un año, y que ningún médico puede curar?",
+      optionsEn: ["Spiritual sickness", "A fever from battle", "A disease of the lungs", "Old age"],
+      optionsEs: ["Enfermedad espiritual", "Una fiebre de batalla", "Una enfermedad de los pulmones", "La vejez"], explanationEn: "David carried a spiritual sickness — the weight of unconfessed sin — that no doctor and no medicine can cure.", explanationEs: "David cargaba una enfermedad espiritual — el peso del pecado no confesado — que ningún médico ni medicina puede curar.", correct: 0 },
+    { textEn: "2. What two grievous sins had David committed that lie behind Psalm 51?", textEs: "2. ¿Qué dos pecados graves había cometido David que están detrás del Salmo 51?",
+      optionsEn: ["Idolatry and theft", "Adultery with Bathsheba and the murder of Uriah", "Lying and pride", "Rebellion and sorcery"],
+      optionsEs: ["Idolatría y robo", "Adulterio con Betsabé y el homicidio de Urías", "Mentira y orgullo", "Rebelión y hechicería"], explanationEn: "Psalm 51 was written after David's two great sins: adultery with Bathsheba and the murder of her husband Uriah.", explanationEs: "El Salmo 51 fue escrito tras los dos grandes pecados de David: adulterio con Betsabé y el asesinato de su esposo Urías.", correct: 1 },
+    { textEn: "3. Despite his sin, what is David remarkably called in Scripture?", textEs: "3. A pesar de su pecado, ¿cómo se le llama notablemente a David en la Escritura?",
+      optionsEn: ["A fool in his folly", "The least of the kings", "A man after God's own heart", "An enemy of the prophets"],
+      optionsEs: ["Un necio en su locura", "El menor de los reyes", "Un hombre conforme al corazón de Dios", "Un enemigo de los profetas"], explanationEn: "Remarkably, even after such sin, David is called a man after God's own heart — because he truly repented.", explanationEs: "Notablemente, aun tras tal pecado, David es llamado varón conforme al corazón de Dios — porque se arrepintió de veras.", correct: 2 },
+    { textEn: "4. Who was Nathan, and how does the lesson describe his role?", textEs: "4. ¿Quién era Natán, y cómo describe la lección su papel?",
+      optionsEn: ["A rival king", "A prophet of God and David's preacher who visited him", "David's general", "A temple musician"],
+      optionsEs: ["Un rey rival", "Un profeta de Dios y predicador de David que lo visitó", "El general de David", "Un músico del templo"], explanationEn: "Nathan was God's prophet and David's preacher, sent to confront the king with his sin.", explanationEs: "Natán era profeta de Dios y predicador de David, enviado a confrontar al rey con su pecado.", correct: 1 },
+    { textEn: "5. What are the four steps of David's return to God that structure the lesson?", textEs: "5. ¿Cuáles son los cuatro pasos del regreso de David a Dios que estructuran la lección?",
+      optionsEn: ["Confronted, admitted, sorry, and turned from his sin", "Prayed, fasted, gave, and rested", "Fled, hid, fought, and surrendered", "Doubted, questioned, argued, and believed"],
+      optionsEs: ["Confrontado, admitió, tuvo tristeza, y se apartó de su pecado", "Oró, ayunó, dio, y descansó", "Huyó, se escondió, peleó, y se rindió", "Dudó, cuestionó, discutió, y creyó"], explanationEn: "The lesson follows David's return in four steps: he was confronted, he admitted, he was sorry, and he turned from his sin.", explanationEs: "La lección sigue el regreso de David en cuatro pasos: fue confrontado, admitió, se entristeció, y se apartó de su pecado.", correct: 0 },
+    { textEn: "6. What story did Nathan tell to confront David, and how did it end?", textEs: "6. ¿Qué historia contó Natán para confrontar a David, y cómo terminó?",
+      optionsEn: ["A story of two builders; David praised the wise one", "A story of a rich man who took a poor man's lamb; Nathan said, \"You are the man\"", "A story of a lost coin; David rejoiced", "A story of a vineyard; David wept"],
+      optionsEs: ["Una historia de dos constructores; David alabó al sabio", "Una historia de un rico que tomó el cordero de un pobre; Natán dijo: \"Tú eres aquel hombre\"", "Una historia de una moneda perdida; David se alegró", "Una historia de una viña; David lloró"], explanationEn: "Nathan told of a rich man who stole a poor man's lamb, then said, 'You are the man' — and David's guilt was exposed.", explanationEs: "Natán contó de un rico que robó la oveja de un pobre, y luego dijo: 'Tú eres ese hombre' — y la culpa de David quedó al descubierto.", correct: 1 },
+    { textEn: "7. According to the lesson, through what means does God confront us with our sin?", textEs: "7. Según la lección, ¿por qué medios nos confronta Dios con nuestro pecado?",
+      optionsEn: ["Only through dramatic visions", "Only through public exposure", "Through conscience, the hardships of life, and Christian friends", "Through financial loss alone"],
+      optionsEs: ["Solo por visiones dramáticas", "Solo por exposición pública", "Por la conciencia, las dificultades de la vida, y amigos cristianos", "Solo por pérdida financiera"], explanationEn: "God confronts us with our sin through conscience, the hardships of life, and the words of Christian friends.", explanationEs: "Dios nos confronta con nuestro pecado por la conciencia, las dificultades de la vida, y las palabras de amigos cristianos.", correct: 2 },
+    { textEn: "8. In the parable of the prodigal son, used in the lesson, what was the first step toward the young man's return?", textEs: "8. En la parábola del hijo pródigo, usada en la lección, ¿cuál fue el primer paso hacia el regreso del joven?",
+      optionsEn: ["His father came looking for him", "His brother forgave him", "The famine ended", "He \"came to himself\" and realized his miserable state"],
+      optionsEs: ["Su padre vino a buscarlo", "Su hermano lo perdonó", "Terminó la hambruna", "\"Volvió en sí\" y reconoció su estado miserable"], explanationEn: "The prodigal's return began when he 'came to himself' and honestly faced his miserable state.", explanationEs: "El regreso del pródigo comenzó cuando 'volvió en sí' y enfrentó con honestidad su miserable estado.", correct: 3 },
+    { textEn: "9. When David admitted his sin, what did he cry out?", textEs: "9. Cuando David admitió su pecado, ¿qué clamó?",
+      optionsEn: ["\"I have sinned against the LORD\"", "\"It was not my fault\"", "\"Bathsheba enticed me\"", "\"I was only human\""],
+      optionsEs: ["\"Contra Jehová he pecado\"", "\"No fue mi culpa\"", "\"Betsabé me sedujo\"", "\"Solo soy humano\""], explanationEn: "David did not make excuses; he simply cried, 'I have sinned against the LORD' — the heart of true confession.", explanationEs: "David no puso excusas; simplemente clamó: 'Pequé contra Jehová' — el corazón de la verdadera confesión.", correct: 0 },
+    { textEn: "10. The lesson lists easier roads David did NOT take. Which is one of them?", textEs: "10. La lección enumera caminos más fáciles que David NO tomó. ¿Cuál es uno de ellos?",
+      optionsEn: ["He could have written a new psalm of praise", "He could have blamed Bathsheba or made excuses", "He could have fasted for forty days", "He could have offered a larger sacrifice"],
+      optionsEs: ["Pudo haber escrito un nuevo salmo de alabanza", "Pudo haber culpado a Betsabé o puesto excusas", "Pudo haber ayunado cuarenta días", "Pudo haber ofrecido un sacrificio mayor"], explanationEn: "David could have blamed Bathsheba or made excuses, but he refused the easier roads and owned his sin.", explanationEs: "David pudo culpar a Betsabé o poner excusas, pero rechazó los caminos más fáciles y asumió su pecado.", correct: 1 },
+    { textEn: "11. When God confronted Adam in the garden, what was Adam's first defense — cited as the oldest excuse?", textEs: "11. Cuando Dios confrontó a Adán en el huerto, ¿cuál fue la primera defensa de Adán, citada como la excusa más antigua?",
+      optionsEn: ["\"I did not eat the fruit\"", "\"The serpent forced me\"", "\"This woman You gave me caused me to do it\"", "\"I was hungry\""],
+      optionsEs: ["\"No comí el fruto\"", "\"La serpiente me obligó\"", "\"Esta mujer que me diste me hizo hacerlo\"", "\"Tenía hambre\""], explanationEn: "Adam's 'this woman You gave me' is the oldest excuse of all — shifting the blame instead of confessing.", explanationEs: "El 'esta mujer que me diste' de Adán es la excusa más antigua — pasar la culpa en vez de confesar.", correct: 2 },
+    { textEn: "12. Why does the lesson say no excuse could stand before God?", textEs: "12. ¿Por qué dice la lección que ninguna excusa podía sostenerse delante de Dios?",
+      optionsEn: ["Because David was a king", "Because Nathan was watching", "Because the people already knew", "Because the all-knowing God looks into the heart and cannot be deceived"],
+      optionsEs: ["Porque David era rey", "Porque Natán observaba", "Porque el pueblo ya lo sabía", "Porque el Dios que todo lo sabe mira el corazón y no puede ser engañado"], explanationEn: "No excuse can stand because the all-knowing God looks into the heart and cannot be deceived.", explanationEs: "Ninguna excusa se sostiene porque el Dios que todo lo sabe mira el corazón y no puede ser engañado.", correct: 3 },
+    { textEn: "13. According to the lesson, what is one of the chief reasons for unanswered prayer?", textEs: "13. Según la lección, ¿cuál es una de las principales razones de la oración sin respuesta?",
+      optionsEn: ["Unconfessed sin", "Praying too quietly", "Praying at the wrong time", "Not fasting enough"],
+      optionsEs: ["El pecado no confesado", "Orar muy bajo", "Orar a la hora equivocada", "No ayunar lo suficiente"], explanationEn: "One chief reason for unanswered prayer is unconfessed sin standing between us and God.", explanationEs: "Una razón principal de la oración no respondida es el pecado no confesado que se interpone entre nosotros y Dios.", correct: 0 },
+    { textEn: "14. In the pastor's personal testimony, what did he learn from his years of rebellion?", textEs: "14. En el testimonio personal del pastor, ¿qué aprendió de sus años de rebelión?",
+      optionsEn: ["That rules do not matter", "That doing whatever he wanted was the most miserable time of his life", "That the church was unnecessary", "That God had abandoned him"],
+      optionsEs: ["Que las reglas no importan", "Que hacer lo que quería fue la época más miserable de su vida", "Que la iglesia era innecesaria", "Que Dios lo había abandonado"], explanationEn: "The pastor learned from his years of rebellion that doing whatever he wanted was the most miserable time of his life.", explanationEs: "El pastor aprendió de sus años de rebeldía que hacer lo que quería fue el tiempo más miserable de su vida.", correct: 1 },
+    { textEn: "15. The lesson says turning from sin involves more than feeling sorry. What example shows making wrongs right?", textEs: "15. La lección dice que apartarse del pecado implica más que sentir tristeza. ¿Qué ejemplo muestra enmendar los males?",
+      optionsEn: ["Peter weeping after his denial", "Thomas touching the wounds", "Zacchaeus paying back four times what he had stolen", "The thief on the cross believing"],
+      optionsEs: ["Pedro llorando tras su negación", "Tomás tocando las heridas", "Zaqueo devolviendo cuatro veces lo que había robado", "El ladrón en la cruz creyendo"], explanationEn: "Turning from sin means more than feeling sorry; like Zacchaeus repaying fourfold, it makes wrongs right where it can.", explanationEs: "Apartarse del pecado es más que sentir tristeza; como Zaqueo que devolvió el cuádruple, endereza los males donde puede.", correct: 2 },
+    { textEn: "16. What does the lesson say about our ability to change the past versus the future?", textEs: "16. ¿Qué dice la lección sobre nuestra capacidad de cambiar el pasado frente al futuro?",
+      optionsEn: ["We can change both freely", "We can change the past but not the future", "Neither can ever be changed", "We cannot change the past, but we can change the future"],
+      optionsEs: ["Podemos cambiar ambos libremente", "Podemos cambiar el pasado pero no el futuro", "Ninguno puede cambiarse jamás", "No podemos cambiar el pasado, pero podemos cambiar el futuro"], explanationEn: "We cannot change the past, but by God's grace we can change the future — repentance looks forward.", explanationEs: "No podemos cambiar el pasado, pero por la gracia de Dios podemos cambiar el futuro — el arrepentimiento mira adelante.", correct: 3 },
+    { textEn: "17. In Ian Maclaren's story, why did Flora Campbell run away from home?", textEs: "17. En la historia de Ian Maclaren, ¿por qué huyó Flora Campbell de su casa?",
+      optionsEn: ["Because her father lacked all compassion and understanding", "Because she sought adventure abroad", "Because of a famine in the land", "Because she was sent away to study"],
+      optionsEs: ["Porque su padre carecía de toda compasión y comprensión", "Porque buscaba aventura en el extranjero", "Por una hambruna en la tierra", "Porque fue enviada a estudiar"], explanationEn: "Flora ran away because her father lacked all compassion — a picture of how hardness drives the wandering heart away.", explanationEs: "Flora huyó porque su padre carecía de toda compasión — un retrato de cómo la dureza aleja al corazón descarriado.", correct: 0 },
+    { textEn: "18. Flora Campbell's return to her father is used in the lesson to picture what?", textEs: "18. El regreso de Flora Campbell a su padre se usa en la lección para representar ¿qué?",
+      optionsEn: ["That some sins are too great to forgive", "That God forgives only after long punishment", "That a wandering child should not expect a welcome", "The Father's joyful welcome of the repentant sinner who comes home"],
+      optionsEs: ["Que algunos pecados son demasiado grandes para perdonar", "Que Dios perdona solo después de un largo castigo", "Que un hijo descarriado no debe esperar bienvenida", "La gozosa bienvenida del Padre al pecador arrepentido que vuelve a casa"], explanationEn: "Flora's return pictures the Father's joyful welcome of the repentant sinner who comes home.", explanationEs: "El regreso de Flora representa la gozosa bienvenida del Padre al pecador arrepentido que vuelve a casa.", correct: 3 },
+    { textEn: "19. In the story of the pastor and the woman who heard from God, what did God reportedly say about the pastor's old sin?", textEs: "19. En la historia del pastor y la mujer que oía de Dios, ¿qué dijo Dios, según se cuenta, sobre el viejo pecado del pastor?",
+      optionsEn: ["That it was unforgivable", "That it would be revealed publicly", "\"He doesn't remember\"", "That the pastor must confess again"],
+      optionsEs: ["Que era imperdonable", "Que sería revelado públicamente", "\"No lo recuerda\"", "Que el pastor debía confesar de nuevo"], explanationEn: "'He doesn't remember' shows the wonder of forgiveness: God removes the confessed sin and remembers it no more.", explanationEs: "'&Eacute;l no lo recuerda' muestra la maravilla del perdón: Dios quita el pecado confesado y no lo recuerda más.", correct: 2 },
+    { textEn: "20. According to the lesson's close, sin is pictured as a fatal disease — and what is the one cure?", textEs: "20. Según el cierre de la lección, el pecado se presenta como una enfermedad mortal, ¿y cuál es la única cura?",
+      optionsEn: ["Greater personal effort", "Religious ritual and ceremony", "The passing of time", "Jesus dying on the cross to forgive our sins"],
+      optionsEs: ["Mayor esfuerzo personal", "Ritual y ceremonia religiosa", "El paso del tiempo", "Jesús muriendo en la cruz para perdonar nuestros pecados"], explanationEn: "Sin is a fatal disease, and there is only one cure: Jesus dying on the cross to forgive our sins.", explanationEs: "El pecado es una enfermedad mortal, y hay una sola cura: Jesús muriendo en la cruz para perdonar nuestros pecados.", correct: 3 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "21. Explain the \"spiritual sickness\" David carried, and how it shows that Psalm 51 is finally about more than one man's sin.",
+      textEs: "21. Explique la \"enfermedad espiritual\" que cargó David, y cómo muestra que el Salmo 51 trata al final de más que el pecado de un hombre.",
+      kw_en: ["spiritual sickness", "sin", "Bathsheba", "guilt", "disease", "repentance", "cleansing", "all of us"],
+      kw_es: ["enfermedad espiritual", "pecado", "Betsabé", "culpa", "enfermedad", "arrepentimiento", "limpieza", "todos nosotros"],
+      modelEn: "David's \"spiritual sickness\" was the inner ruin of unconfessed sin: for nearly a year after his sin with Bathsheba he carried guilt that no physician could cure, and it drained the life and joy out of him. Psalm 51 is his cry for healing of the soul. But it is finally about more than one man's failure, because David's sin exposes what is true of us all. Every person carries this same disease of sin and needs the same cleansing. So the psalm becomes a model of repentance for everyone who has ever sinned against God, which is to say, for all of us.",
+      modelEs: "La \"enfermedad espiritual\" de David era la ruina interior del pecado no confesado: por casi un año tras su pecado con Betsabé cargó una culpa que ningún médico podía curar, y le drenaba la vida y el gozo. El Salmo 51 es su clamor por sanidad del alma. Pero al fin trata de más que el fracaso de un hombre, porque el pecado de David expone lo que es cierto de todos nosotros. Cada persona carga esta misma enfermedad del pecado y necesita la misma limpieza. Así el salmo llega a ser un modelo de arrepentimiento para todo el que haya pecado contra Dios, es decir, para todos nosotros." },
+    { textEn: "22. List and briefly explain the four steps of David's return to God that structure this lesson.",
+      textEs: "22. Enumere y explique brevemente los cuatro pasos del regreso de David a Dios que estructuran esta lección.",
+      kw_en: ["confronted", "admitted", "sorry", "turned", "Nathan", "sin", "repentance", "return"],
+      kw_es: ["confrontado", "admitió", "tristeza", "apartó", "Natán", "pecado", "arrepentimiento", "regreso"],
+      modelEn: "The lesson traces David's return to God in four steps. First, he was confronted: God sent Nathan to expose the sin David was hiding. Second, he admitted it, saying plainly, \"I have sinned against the LORD,\" without excuse. Third, he was truly sorry, broken with godly sorrow rather than mere regret at being caught. Fourth, he turned from his sin, seeking to make wrongs right and to live differently going forward. Together these four, confronted, admitted, sorry, and turned, map the path of all genuine repentance.",
+      modelEs: "La lección traza el regreso de David a Dios en cuatro pasos. Primero, fue confrontado: Dios envió a Natán a exponer el pecado que David escondía. Segundo, lo admitió, diciendo claramente: \"Pequé contra Jehová,\" sin excusa. Tercero, se entristeció de veras, quebrantado con tristeza piadosa y no mero pesar por ser descubierto. Cuarto, se apartó de su pecado, buscando enderezar lo malo y vivir de otra manera en adelante. Juntos estos cuatro, confrontado, admitió, entristecido y apartado, trazan el camino de todo arrepentimiento genuino." },
+    { textEn: "23. How did Nathan confront David, and what does his method teach about how God brings a person to see his own sin?",
+      textEs: "23. ¿Cómo confrontó Natán a David, y qué enseña su método sobre cómo Dios lleva a una persona a ver su propio pecado?",
+      kw_en: ["Nathan", "parable", "lamb", "rich man", "you are the man", "conscience", "condemned", "sin"],
+      kw_es: ["Natán", "parábola", "oveja", "rico", "tú eres ese hombre", "conciencia", "condenó", "pecado"],
+      modelEn: "Nathan did not accuse David directly at first; he told a story about a rich man with many flocks who stole and killed a poor man's single beloved lamb. David burned with anger and condemned the rich man to death, at which Nathan said, \"You are the man.\" David had pronounced judgment on himself before he realized it. The method teaches how God brings us to see our own sin: He gets past our defenses, often through conscience, Scripture, or a faithful friend, until we condemn in ourselves what we so easily condemn in others, and the truth finally breaks through.",
+      modelEs: "Natán no acusó a David directamente al principio; contó una historia de un rico con muchos rebaños que robó y mató la única oveja amada de un pobre. David ardió en ira y condenó a muerte al rico, ante lo cual Natán dijo: \"Tú eres ese hombre.\" David había pronunciado juicio sobre sí mismo antes de darse cuenta. El método enseña cómo Dios nos lleva a ver nuestro propio pecado: traspasa nuestras defensas, a menudo por la conciencia, la Escritura, o un amigo fiel, hasta que condenamos en nosotros lo que tan fácilmente condenamos en otros, y la verdad al fin penetra." },
+    { textEn: "24. According to the lesson, how does God confront us with our sin today? Give the means mentioned.",
+      textEs: "24. Según la lección, ¿cómo nos confronta Dios con nuestro pecado hoy? Dé los medios mencionados.",
+      kw_en: ["conscience", "hardships", "Christian friends", "Holy Spirit", "prodigal", "came to himself", "need", "forgiveness"],
+      kw_es: ["conciencia", "dificultades", "amigos cristianos", "Espíritu Santo", "pródigo", "volvió en sí", "necesidad", "perdón"],
+      modelEn: "According to the lesson, God confronts us with our sin through several means. He uses our conscience, that inner voice that will not let us rest in wrongdoing. He uses the hardships of life, which can break through our self-satisfaction and turn us back to Him. And He uses Christian friends, who love us enough to speak the truth as Nathan did to David. God is not content to leave us in our sin; in mercy He arranges to confront us, so that we may be brought to repentance and restored before the damage grows worse.",
+      modelEs: "Según la lección, Dios nos confronta con nuestro pecado por varios medios. Usa nuestra conciencia, esa voz interior que no nos deja descansar en la maldad. Usa las dificultades de la vida, que pueden romper nuestra autosuficiencia y volvernos a &Eacute;l. Y usa a los amigos cristianos, que nos aman lo suficiente para decir la verdad como Natán a David. Dios no se contenta con dejarnos en nuestro pecado; en misericordia dispone confrontarnos, para que seamos llevados al arrepentimiento y restaurados antes de que el daño crezca más." },
+    { textEn: "25. Describe the easier roads David could have taken instead of admitting his sin, and what he did instead.",
+      textEs: "25. Describa los caminos más fáciles que David pudo haber tomado en lugar de admitir su pecado, y qué hizo en su lugar.",
+      kw_en: ["lied", "blamed", "excuses", "angry", "Adam", "admitted", "broken spirit", "I have sinned"],
+      kw_es: ["culpar", "excus", "encubrir", "silenciar", "asumió", "clamando", "arrepentimiento", "confesión"],
+      modelEn: "David could have taken several easier roads. He could have blamed Bathsheba, or made excuses, or covered the sin more deeply as he had already tried to do, or simply used his power as king to silence the matter. Instead he took the hard, honest road: he owned his sin completely, crying, \"I have sinned against the LORD,\" and pleaded for mercy and cleansing. That refusal to excuse himself is the heart of true repentance. The way back to God always runs through honest confession, not through blame-shifting or self-justification.",
+      modelEs: "David pudo tomar varios caminos más fáciles. Pudo culpar a Betsabé, o poner excusas, o encubrir el pecado más a fondo como ya había intentado, o simplemente usar su poder de rey para silenciar el asunto. En cambio tomó el camino difícil y honesto: asumió su pecado por completo, clamando: \"Pequé contra Jehová,\" y suplicó misericordia y limpieza. Esa negativa a excusarse es el corazón del verdadero arrepentimiento. El camino de regreso a Dios siempre pasa por la confesión honesta, no por pasar la culpa ni por justificarse." },
+    { textEn: "26. Why does willful sin make a person miserable, and how does it relate to unanswered prayer? Use the pastor's testimony.",
+      textEs: "26. ¿Por qué el pecado voluntario hace miserable a una persona, y cómo se relaciona con la oración sin respuesta? Use el testimonio del pastor.",
+      kw_en: ["willful sin", "separated", "guilt", "unanswered prayer", "rebellion", "miserable", "rock bottom", "open arms"],
+      kw_es: ["pecado", "miser", "testimonio", "bloquea", "comunión", "oración", "confesión", "silencio"],
+      modelEn: "Willful sin makes a person miserable because it sets us against God and against the way we were made to live; the pastor's testimony was that doing whatever he wanted turned out to be the most miserable time of his life. Sin also blocks our fellowship with God, and the lesson notes that unconfessed sin is one of the chief reasons for unanswered prayer; it stands like a wall between us and the Father. The misery and the silence are mercies in disguise, for they drive us back to confession, where joy and answered prayer are restored.",
+      modelEs: "El pecado voluntario hace miserable a una persona porque nos pone contra Dios y contra la manera en que fuimos hechos para vivir; el testimonio del pastor fue que hacer lo que quería resultó ser el tiempo más miserable de su vida. El pecado también bloquea nuestra comunión con Dios, y la lección señala que el pecado no confesado es una de las principales razones de la oración no respondida; se levanta como un muro entre nosotros y el Padre. La miseria y el silencio son misericordias disfrazadas, pues nos devuelven a la confesión, donde el gozo y la oración respondida son restaurados." },
+    { textEn: "27. Explain what it means that David \"turned\" from his sin, including restitution and changing the future.",
+      textEs: "27. Explique qué significa que David se \"apartó\" de su pecado, incluyendo la restitución y cambiar el futuro.",
+      kw_en: ["turned", "vowed", "Zacchaeus", "paid back", "restitution", "change the future", "moving toward God", "repentance"],
+      kw_es: ["apartó", "prometió", "Zaqueo", "devolvió", "restitución", "cambiar el futuro", "moverse hacia Dios", "arrepentimiento"],
+      modelEn: "To say David \"turned\" from his sin means his repentance was more than feeling sorry; it changed his direction. Turning includes making wrongs right where we can, as Zacchaeus repaid fourfold what he had taken, and it includes a real change in how we live going forward. We cannot undo the past, but by God's grace we can change the future. True repentance is not just grief over yesterday's sin but a deliberate turning of the will toward God for tomorrow, walking a new way rather than the old.",
+      modelEs: "Decir que David se \"apartó\" de su pecado significa que su arrepentimiento fue más que sentir tristeza; cambió su dirección. Apartarse incluye enderezar lo malo donde podemos, como Zaqueo devolvió el cuádruple de lo que había tomado, e incluye un cambio real en cómo vivimos en adelante. No podemos deshacer el pasado, pero por la gracia de Dios podemos cambiar el futuro. El verdadero arrepentimiento no es solo dolor por el pecado de ayer sino un giro deliberado de la voluntad hacia Dios para el mañana, andando un camino nuevo en vez del viejo." },
+    { textEn: "28. What does the homecoming of Lachlan and Flora Campbell teach about how God receives the repentant sinner who returns to Him?",
+      textEs: "28. ¿Qué enseña el regreso de Lachlan y Flora Campbell sobre cómo Dios recibe al pecador arrepentido que vuelve a &Eacute;l?",
+      kw_en: ["Flora", "ran away", "father", "returned", "welcome", "forgiven", "ran to meet", "grace"],
+      kw_es: ["Flora", "huyó", "padre", "regresó", "bienvenida", "perdonado", "corrió", "gracia"],
+      modelEn: "In Ian Maclaren's story, Flora Campbell ran away from a father who lacked compassion, and for a long time her name was a wound in the home. But when at last she returned, broken, her father ran to meet her, fell on her neck, and received her with joy. It pictures how God receives the repentant sinner who comes home: not with cold reproach but with a Father who runs to welcome us. However far we have wandered, the way back is open, and the Father's heart is set on receiving, forgiving, and restoring the child who returns.",
+      modelEs: "En la historia de Ian Maclaren, Flora Campbell huyó de un padre que carecía de compasión, y por mucho tiempo su nombre fue una herida en el hogar. Pero cuando al fin regresó, quebrantada, su padre corrió a su encuentro, se echó sobre su cuello, y la recibió con gozo. Representa cómo Dios recibe al pecador arrepentido que vuelve a casa: no con reproche frío sino con un Padre que corre a darnos la bienvenida. Por lejos que hayamos vagado, el camino de regreso está abierto, y el corazón del Padre está puesto en recibir, perdonar y restaurar al hijo que vuelve." },
+    { textEn: "29. Using the story of the pastor and the woman who heard from God, explain what it means to be truly forgiven.",
+      textEs: "29. Usando la historia del pastor y la mujer que oía de Dios, explique qué significa ser verdaderamente perdonado.",
+      kw_en: ["pastor", "confessed", "never felt forgiven", "doesn't remember", "blots out", "remember no more", "forgiven", "guilt"],
+      kw_es: ["pastor", "confesó", "nunca se sintió perdonado", "no lo recuerda", "borra", "no me acordaré", "perdonado", "culpa"],
+      modelEn: "The story of the pastor and the woman who claimed to hear from God turns on her report of what God said about the pastor's old, confessed sin: \"He doesn't remember.\" That is the wonder of being truly forgiven. When God forgives a confessed sin, He removes it and remembers it against us no more; it no longer stands between us and Him. To be forgiven is not merely to be let off a penalty but to have the sin truly put away, so that the guilt that haunted us is gone. We may remember our sin to stay humble, but God has chosen to forget it.",
+      modelEs: "La historia del pastor y la mujer que afirmaba oír de Dios gira en torno a lo que ella reportó que Dios dijo sobre el viejo pecado confesado del pastor: \"&Eacute;l no lo recuerda.\" Esa es la maravilla de ser verdaderamente perdonado. Cuando Dios perdona un pecado confesado, lo quita y no lo recuerda más contra nosotros; ya no se interpone entre nosotros y &Eacute;l. Ser perdonado no es meramente librarse de un castigo sino tener el pecado verdaderamente quitado, de modo que la culpa que nos atormentaba se ha ido. Podemos recordar nuestro pecado para permanecer humildes, pero Dios ha elegido olvidarlo." },
+    { textEn: "30. The lesson pictures sin as a fatal disease with one cure. Explain the picture and use the \"give me another chance\" story.",
+      textEs: "30. La lección presenta el pecado como una enfermedad mortal con una sola cura. Explique la imagen y use la historia de \"deme otra oportunidad.\"",
+      kw_en: ["disease", "fatal", "all have sinned", "cross", "cure", "second chance", "another chance", "forgiven"],
+      kw_es: ["enfermedad", "mortal", "todos pecaron", "cruz", "cura", "segunda oportunidad", "otra oportunidad", "perdonado"],
+      modelEn: "The lesson pictures sin as a fatal disease that every person carries and that no human remedy can cure; left untreated it ends in death. There is only one cure: Jesus dying on the cross to take the penalty of our sin and forgive us. The \"give me another chance\" story shows the heart that finds this cure, the sinner who stops making excuses and pleads for mercy, and receives it. The good news of Psalm 51 is that the disease, though always fatal, is not untreatable; the cross is the cure, and it is offered freely to all who will come.",
+      modelEs: "La lección presenta el pecado como una enfermedad mortal que cada persona carga y que ningún remedio humano puede curar; sin tratar termina en muerte. Hay una sola cura: Jesús muriendo en la cruz para tomar el castigo de nuestro pecado y perdonarnos. La historia de \"deme otra oportunidad\" muestra el corazón que halla esta cura, el pecador que deja de poner excusas y suplica misericordia, y la recibe. La buena nueva del Salmo 51 es que la enfermedad, aunque siempre mortal, no es incurable; la cruz es la cura, y se ofrece gratuitamente a todos los que quieran venir." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 5 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 5 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPsalmsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

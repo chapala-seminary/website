@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Old Testament Survey — Unit 10: The Major Prophets – Part 2 (Jeremiah & Lamentations)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .action-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.action-btn.reset { background: #8a5a2f; }
+.action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+p { margin-bottom: 12px; }
+ul { margin: 10px 0 14px 24px; }
+li { margin-bottom: 8px; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 0; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.track-banner { background: #fffaf0; border-left: 4px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin-bottom: 15px; font-size: 0.95rem; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.locked { cursor: default; }
+.option.locked:hover { background: #fcfbf8; }
+.option.locked.correct:hover { background: #e8f5ea; }
+.option.locked.wrong:hover { background: #fae8e8; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.exam-result { margin-top: 15px; padding: 12px 18px; border-radius: 12px; font-size: 1.05rem; }
+.exam-result.pass { background: #e8f5ea; color: #1f6b3b; border: 1px solid #b9dfc2; }
+.exam-result.fail { background: #fae8e8; color: #8a1f1f; border: 1px solid #efc2c2; }
+.exam-result.locked { background: #fff4d6; color: #6b4f1f; border: 1px solid #e8d28a; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en .block-en { display: block; }
+body.lang-en .block-es { display: none; }
+body.lang-es .block-en { display: none; }
+body.lang-es .block-es { display: block; }
+@media print {
+    body { background: white; font-size: 12pt; padding: 0; }
+    .nav-bar, .toggle-btn, .action-btn, button.small, .registration-panel { display: none !important; }
+    .card { box-shadow: none; border: none; padding: 10pt 0; margin-bottom: 8pt; page-break-inside: avoid; }
+    .question { page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .option.correct { background: white; border: 1px solid #888; }
+    .option.wrong { background: white; border: 1px solid #888; }
+}
+.reg-readout { font-size: 0.95rem; }
+.reg-readout-grid { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.reg-readout-grid > div { min-width: 180px; }
+.reg-readout-note { margin-top: 8px; font-size: 0.82rem; color: #6b6256; }
+.reg-readout.missing { color: #8a1f1f; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Old Testament Survey — Unit 10: The Major Prophets – Part 2 (Jeremiah & Lamentations)</span><span class="lang-es">📖 Estudio del Antiguo Testamento — Unidad 10: Los Profetas Mayores – Parte 2 (Jeremías y Lamentaciones)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="registration-panel" id="regPanel">
+    <h3><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h3>
+    <div id="regReadout" class="reg-readout"></div>
+    <!-- Hidden fields preserve the IDs used by grading/loadReg; registration is edited on Unit 1. -->
+    <input type="hidden" id="studentName">
+    <input type="hidden" id="studentEmail">
+    <input type="hidden" id="studentCountry">
+    <input type="hidden" id="studentProgram">
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="block-en">
+        <h2>I. A Profile of Courage</h2>
+        <p>Imagine a preacher in our own day who stood in his pulpit week after week and told his people that God was no longer on their side — that the very things they loved most, the country they were proud of, the comfortable religion they had always known, were now an offense to heaven. Imagine he kept saying it, even when no one listened. Imagine that he was beaten in public, dropped through a trap door into a pit of mud, threatened by kings, abandoned by friends. And imagine that when he finally tried to quit, he could not — because, as he put it, the word of God was like a fire shut up in his bones, and he was weary of holding it in.</p>
+
+        <p>That is something like the man we meet in the book of Jeremiah. He is not the most famous of the prophets, and he was not, in his own lifetime, the most successful. Isaiah saw the Messiah more gloriously. Daniel watched empires rise and fall. But for sheer, grinding, lonely courage, Jeremiah stands by himself. He preached for forty years (c. 627–586 BC) under five kings — Josiah, Jehoahaz, Jehoiakim, Jehoiachin, and Zedekiah — and never once saw a revival. The nation he loved went down in front of his eyes, and he kept on saying the same hard thing until the city burned. And yet later generations called him perhaps the greatest of all the prophets. He is often called simply <em>the weeping prophet</em>, and that title has stuck for two thousand years.</p>
+
+        <p>You and I are tempted to measure a ministry by what we can see — by buildings, by numbers, by visible fruit. Jeremiah will not let us. He stands as a long, patient rebuke to anyone who has decided that faithfulness must look like success.</p>
+
+        <h2>II. The Message of Jeremiah</h2>
+
+        <h3>A. The Reluctant Call (Jeremiah 1)</h3>
+        <p>Jeremiah was a young priest from the village of Anathoth, a few miles north of Jerusalem, when the word of the Lord first came to him. He could not have been more than seventeen or eighteen years old. The word was startling: <em>"Before I formed you in the womb I knew you, and before you were born I consecrated you; I appointed you a prophet to the nations"</em> (Jeremiah 1:5). His life had been God's project before his life had been his own. So has yours, if you belong to Christ.</p>
+
+        <p>Jeremiah's first response was the response most of us would give. <em>"Ah, Lord God! Behold, I do not know how to speak, for I am only a youth"</em> (1:6). He was too young, too inexperienced, too unimportant. But the Lord touched his mouth and said, <em>"I have put my words in your mouth"</em> (1:9). Two visions sealed the call. An almond rod — the early-blooming tree, the watchman of the trees — taught Jeremiah that the Lord watches to perform His word. A boiling pot, tilted toward the south, warned that judgment was about to spill out of the north. From that moment Jeremiah's life had only one direction. He could not finally refuse, because the path of duty is always the path of safety, and to go on refusing the call of God is to lose your soul.</p>
+
+        <h3>B. Sermons of Judgment and the Object Lessons (chapters 2–29)</h3>
+        <p>The bulk of Jeremiah is one long, anguished sermon. The prophet diagnoses his nation in two sharp lines: <em>"My people have committed two evils: they have forsaken me, the fountain of living waters, and hewed out cisterns for themselves, broken cisterns that can hold no water"</em> (Jeremiah 2:13). Notice the picture. God offers a clear stream that never stops flowing; the people choose, instead, to chip out their own holding tanks in the rock — tanks that crack and leak and leave them thirsty. Every generation does this. Every heart does this. We trade the fountain for the cistern, and then we wonder why we are dry.</p>
+
+        <p>Jeremiah preached the famous Temple Sermon (chapter 7), standing in the gate of the Lord's house and telling worshipers that the temple itself would not save them; God did not need their building. He acted out his message in object lesson after object lesson — a marred linen sash, a smashed clay jar, two baskets of figs, a wooden yoke worn around his neck, a scroll thrown into the Euphrates. The most famous is the visit to the potter's house in chapter 18. The prophet watched a clay vessel come apart on the wheel; then he watched the potter press the spoiled clay back into a lump and shape it again, "as it seemed good to the potter to do." That, said the Lord, is what I am about to do with this nation. And that is what He is willing to do with any broken life that will stay on the wheel.</p>
+
+        <p>I have a neighbor — call him Mr. Cooper — who has more broken tools than anyone I have ever met. His tractor never starts without a battery on the charger. His truck spends most of its days in the driveway. His weed-sprayer leaks. But Mr. Cooper has a knack the rest of us do not have: he can take any flawed tool and coax it back to life. He soaks the gasket. He sprays a shot of ether into the carburetor. The thing puts along long enough to do a job. The trouble is that not just anybody can use flawed tools the way Mr. Cooper can. I borrow them and they die ten feet from the property line. Friend, God is the kind of Worker who can use flawed tools — and that is a very good thing for you and me, because we are the only kind of tool He has to work with.</p>
+
+        <p>There is an old story of a water-bearer in India who carried two large pots, one on each end of a pole across his shoulders. One pot was perfect; it delivered a full portion of water at the end of the long walk from the stream to the master's house. The other pot was cracked, and arrived only half full. After two years of what it perceived to be bitter failure, the cracked pot apologized to the bearer for its flaw. The bearer answered, <em>"Did you notice that there are flowers only on your side of the path? That is because I have always known about your flaw, and I took advantage of it. I planted flower seeds along your side of the path, and every day, while we walked back from the stream, you watered them. For two years I have picked these flowers to decorate my master's table. Without you being just the way you are, my master would not have this beauty to grace his house."</em> Each of us is a cracked pot. Each of us has a flaw. The Master Potter is not embarrassed by it. He uses it. He plants flowers along the path of every life that will let Him carry it.</p>
+
+        <h3>C. The Book of Comfort and the New Covenant (chapters 30–33)</h3>
+        <p>In the very middle of this dark book, while Jeremiah was sitting in a prison cell, the Lord opened heaven over his head. Chapters 30–33 are called the Book of Comfort, and they are like a window of light cut into a black wall. The captivity will not be the last word. God will gather His scattered people. The land will be replanted. And — most wonderful of all — God will make a <strong>New Covenant</strong> with His people: <em>"I will put my law within them, and I will write it on their hearts; and I will be their God, and they shall be my people… I will forgive their iniquity, and I will remember their sin no more"</em> (Jeremiah 31:33–34).</p>
+
+        <p>It is one of the great peaks of the Old Testament. The writer of Hebrews quotes the entire passage to prove that Christ has already inaugurated this covenant (Hebrews 8:8–12). On the night of His betrayal, when Jesus lifted the cup and said <em>"this is my blood of the new covenant,"</em> He was reaching back six hundred years and laying His hand on Jeremiah 31. Every time we come to the Lord's Table, we are drinking from a promise first given to a broken prisoner. The covenant was signed in blood — His blood — and dated on the night before the cross. Jeremiah also predicted that the captivity would last seventy years (Jeremiah 25:11) — the exact number Daniel later read in his own exile (Daniel 9:2). God's word does not miss by a year.</p>
+
+        <h3>D. The Fall of Jerusalem and the Last Days of the Prophet (chapters 34–52)</h3>
+        <p>The closing chapters tell the story Jeremiah had been warning about for forty years. Nebuchadnezzar besieges the city. The walls come down. The temple of Solomon is burned. The people are dragged in chains toward Babylon. A small remnant flees south to Egypt, against the prophet's clear word, and they take Jeremiah and his faithful scribe Baruch with them. Even there, in a foreign land, the old prophet keeps speaking. The book ends without a victory parade — only with the quiet, stubborn faithfulness of a man who would not stop saying what the Lord had told him to say. There is no biography of his death. He simply finishes his course.</p>
+
+        <p>How long has it been since you wept over a friend who is far from God? How long since you spoke a hard word in love because someone you cared about was walking toward judgment? Jeremiah teaches us that real ministry costs the messenger something, and that a tearless faith is usually a fruitless one.</p>
+
+        <h2>III. Lamentations: The Therapy of Trouble</h2>
+        <p>Tradition tells us that after Jerusalem fell, Jeremiah climbed a hillside outside the smoking city and sat there alone. What he wrote on that hill became the book of Lamentations — five short chapters of poetry that have been called <em>the wailing wall of the Bible</em>. It is a small book, barely five pages in most Bibles, and most of us hurry past it. We should not. There are seasons in every life when Lamentations is the only book in Scripture that knows how we feel.</p>
+
+        <p>Look first at the structure, because grief in this book has been carefully shaped. Chapters 1, 2, and 4 are each acrostic poems of twenty-two verses — one verse for each letter of the Hebrew alphabet, from <em>aleph</em> to <em>tau</em>, A to Z. Chapter 3, the longest, is sixty-six verses arranged in twenty-two triads, three verses for each Hebrew letter. Chapter 5 has the same twenty-two verses but without the acrostic pattern. Even sorrow, you see, has been ordered. Even tears can be poured into a vessel. Jeremiah is showing us that lament is not a loss of faith; it is one of the languages of faith.</p>
+
+        <p>Each of the five chapters records a different layer of sorrow, and each one is interrupted by a flash of insight — a lesson the prophet would never have learned in any other school:</p>
+        <ul>
+            <li><strong>Chapter 1 — Desolation.</strong> The prophet feels utterly abandoned. Then comes the lesson: <em>"The Lord is in the right, for I have rebelled against his word"</em> (1:18). Most of us, when trouble strikes, look up and silently accuse God. Jeremiah looks up and says: God is right; I am the one who rebelled. That is a hard sentence to learn, and you only learn it in the dark.</li>
+            <li><strong>Chapter 2 — Thoroughness of judgment.</strong> Jeremiah looks past the Babylonian armies to the Lord behind them. The lesson: God is faithful. He has done exactly what He said He would do (2:17). When God promises a blessing, He keeps it; when God promises a judgment, He keeps that too.</li>
+            <li><strong>Chapter 3 — Personal pain, and the heart of the book.</strong> Out of the deepest darkness rises the most-loved verse in Lamentations: <em>"Because of the Lord's great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness"</em> (3:22–23). Notice where this is said. It is not said on a sunny morning by a comfortable man. It is said by a prophet sitting in the ashes of his hometown. Hope of that quality is only ever forged in furnaces.</li>
+            <li><strong>Chapter 4 — The incredibility of judgment.</strong> The prophet records horrors so unthinkable that he can hardly believe them — and yet he names them. Faith does not pretend.</li>
+            <li><strong>Chapter 5 — Humiliation.</strong> The book ends with a final lesson: <em>"But thou, O Lord, dost reign for ever; thy throne endures to all generations"</em> (5:19). Men perish in their sorrow. God does not. And because He endures, the lessons He teaches in our grief endure with Him.</li>
+        </ul>
+
+        <p>This is what Lamentations does for the church: it gives us a vocabulary for suffering. The book is a long, beautiful, painful demonstration that God uses trouble as therapy. The Letter to the Hebrews tells us that even our Lord Jesus, though He was a Son, <em>"learned obedience through what he suffered"</em> (Hebrews 5:8). If the sinless Son of God was schooled by sorrow, why should you and I expect to graduate without the same coursework? Lamentations refuses to give us a tidy ending. The questions remain. The tears keep falling. To find the rest of the story, you have to turn the page and look toward the cross.</p>
+
+        <h2>IV. Christ in Jeremiah and Lamentations — and the Two Convictions We Carry Away</h2>
+        <p>You cannot read these two books carefully without seeing Jesus on nearly every page. In Jeremiah, He is the <strong>Fountain of Living Waters</strong> the people forsook (2:13). He is the <strong>Great Physician</strong> who makes Jeremiah cry out, <em>"Is there no balm in Gilead? Is there no physician there?"</em> (8:22). He is the <strong>Good Shepherd</strong> who gathers the scattered flock (23:4; 31:10). He is the <strong>Righteous Branch</strong> from the line of David (23:5). He is <strong>The LORD Our Righteousness</strong> (23:6) — the very name we cannot earn but receive only by faith. The New Covenant of Jeremiah 31 is signed in His blood and dated on the night before the cross.</p>
+
+        <p>In Lamentations, the parallel is almost unbearable. Jeremiah weeps over Jerusalem in 586 BC. More than six hundred years later, another Prophet stands on the Mount of Olives and weeps over the same stones: <em>"O Jerusalem, Jerusalem… how often would I have gathered your children together as a hen gathers her brood under her wings, and you would not!"</em> (Matthew 23:37). The line <em>"Let him give his cheek to the smiter"</em> (Lamentations 3:30) is fulfilled when Roman soldiers strike the face of the Son of God before Pilate. Lamentations is not just an ancient elegy; it is a foreshadow of Calvary. It earns Jesus the title Isaiah had already given Him: <em>"a man of sorrows, and acquainted with grief"</em> (Isaiah 53:3).</p>
+
+        <p>So what do we carry away from this unit? Two convictions. <strong>First</strong>, that faithfulness in ministry is not measured by visible success. The Lord rewards endurance, not popularity, and many of His best servants — Jeremiah among them — die without ever seeing the harvest. If you are tired tonight from work that no one notices, you are in good company. <strong>Second</strong>, that there is a kind of hope only the brokenhearted ever discover — a steadfast love that is new every morning, a faithfulness that is great enough to be sung over the ashes of a ruined city. That hope was first written down by a weeping prophet on a hillside. It is still being sung by the church today. And it will be sung in the new Jerusalem when there are no more lamentations at all.</p>
+    </div>
+
+    <div class="block-es">
+        <h2>I. Un perfil de valentía</h2>
+        <p>Imagine a un predicador en nuestros días que se levantara cada semana en su púlpito y dijera a su gente que Dios ya no estaba de su lado — que las cosas mismas que más amaban, el país del que se enorgullecían, la religión cómoda que siempre habían conocido, eran ahora una ofensa al cielo. Imagine que siguiera diciéndolo, aunque nadie lo escuchara. Imagine que fuera golpeado en público, arrojado por una trampa a un pozo de lodo, amenazado por reyes, abandonado por sus amigos. Y cuando finalmente tratara de callar, no pudiera — porque, como él mismo dijo, la palabra de Dios era como un fuego encerrado en sus huesos, y se cansaba de contenerla.</p>
+
+        <p>Algo así es el hombre que encontramos en el libro de Jeremías. No es el más famoso de los profetas, y en su tiempo no fue el más exitoso. Isaías vio al Mesías con más gloria. Daniel vio levantarse y caer imperios. Pero por pura, áspera, solitaria valentía, Jeremías está solo. Predicó cuarenta años (c. 627–586 a.C.) bajo cinco reyes — Josías, Joacaz, Joacim, Joaquín y Sedequías — y nunca vio un avivamiento. La nación que amaba se hundió ante sus ojos, y siguió diciendo lo mismo hasta que la ciudad ardió. Y, sin embargo, las generaciones posteriores lo llamaron quizás el más grande de todos los profetas. Se le llama sencillamente <em>el profeta llorón</em>, y ese título le ha quedado por dos mil años.</p>
+
+        <p>Usted y yo tenemos la tentación de medir el ministerio por lo que se ve — edificios, números, fruto visible. Jeremías no nos lo permite. Está como una larga y paciente reprensión a quien haya decidido que la fidelidad debe parecerse al éxito.</p>
+
+        <h2>II. El mensaje de Jeremías</h2>
+
+        <h3>A. El llamado reluctante (Jeremías 1)</h3>
+        <p>Jeremías era un joven sacerdote de la aldea de Anatot, unas pocas millas al norte de Jerusalén, cuando vino a él por primera vez la palabra del Señor. No podría haber tenido más de diecisiete o dieciocho años. La palabra fue sorprendente: <em>"Antes que te formase en el vientre te conocí, y antes que nacieses te santifiqué, te di por profeta a las naciones"</em> (Jeremías 1:5). Su vida había sido proyecto de Dios antes de ser suya. Así también la de usted, si pertenece a Cristo.</p>
+
+        <p>La primera respuesta de Jeremías fue la que la mayoría de nosotros daríamos: <em>"¡Ah! ¡ah, Señor Jehová! He aquí, no sé hablar, porque soy niño"</em> (1:6). Era demasiado joven, sin experiencia, sin importancia. Pero el Señor tocó su boca y dijo: <em>"He puesto mis palabras en tu boca"</em> (1:9). Dos visiones sellaron el llamado. Una vara de almendro — el árbol que florece primero, el vigía de los árboles — enseñó a Jeremías que el Señor vela sobre Su palabra para cumplirla. Una olla hirviente, inclinada hacia el sur, advirtió que el juicio se derramaría desde el norte. Desde ese momento la vida de Jeremías tuvo una sola dirección. No pudo finalmente negarse, porque el camino del deber siempre es el camino de la seguridad, y seguir rechazando el llamado de Dios es perder el alma.</p>
+
+        <h3>B. Sermones de juicio y lecciones objetivas (capítulos 2–29)</h3>
+        <p>La mayor parte de Jeremías es un largo sermón angustiado. El profeta diagnostica a su nación en dos líneas filosas: <em>"Dos males ha hecho mi pueblo: me dejaron a mí, fuente de agua viva, y cavaron para sí cisternas, cisternas rotas que no retienen agua"</em> (Jeremías 2:13). Note la imagen. Dios ofrece una corriente clara que nunca cesa; el pueblo prefiere picar sus propios depósitos en la roca — depósitos que se rajan y gotean y los dejan sedientos. Cada generación lo hace. Cada corazón lo hace. Cambiamos la fuente por la cisterna, y luego nos preguntamos por qué estamos secos.</p>
+
+        <p>Jeremías predicó el famoso Sermón del Templo (capítulo 7), parado en la puerta de la casa del Señor y advirtiéndoles a los adoradores que el templo mismo no los salvaría; Dios no necesitaba su edificio. Actuó su mensaje en lección objetiva tras lección objetiva — un cinto de lino arruinado, una vasija quebrada, dos canastas de higos, un yugo de madera sobre su cuello, un rollo arrojado al Éufrates. La más famosa es la visita a la casa del alfarero, en el capítulo 18. El profeta vio una vasija deshacerse en la rueda; luego vio al alfarero presionar el barro arruinado y formarlo de nuevo, <em>"como le pareció mejor al alfarero hacerlo"</em>. Eso, dijo el Señor, es lo que estoy a punto de hacer con esta nación. Y eso es lo que está dispuesto a hacer con cualquier vida quebrada que se quede en la rueda.</p>
+
+        <p>Tengo un vecino — llamémosle el señor Cooper — que tiene más herramientas dañadas que ningún otro hombre que conozco. Su tractor nunca arranca sin la batería al cargador. Su camión pasa la mayoría de los días en la entrada. Su rociador gotea. Pero el señor Cooper tiene una destreza que el resto de nosotros no tenemos: puede tomar cualquier herramienta defectuosa y devolverla a la vida. Remoja la junta. Le da un golpe de éter al carburador. La cosa avanza traqueteando lo suficiente para hacer un trabajo. El problema es que no cualquiera sabe usar herramientas defectuosas como el señor Cooper. Yo se las pido prestadas y se mueren a diez metros de la calle. Amigo, Dios es la clase de Obrero que sabe usar herramientas defectuosas — y eso es muy buena cosa para usted y para mí, porque somos la única clase de herramienta que tiene a Su disposición.</p>
+
+        <p>Hay una vieja historia de un aguador en la India que llevaba dos cántaros grandes, uno en cada extremo de un palo cruzado sobre los hombros. Un cántaro era perfecto y entregaba toda su carga al final del largo camino desde el arroyo hasta la casa del amo. El otro estaba rajado y llegaba solo medio lleno. Después de dos años de lo que percibía como amargo fracaso, el cántaro rajado se disculpó con el aguador por su defecto. El aguador respondió: <em>"¿Notaste que solo hay flores de tu lado del camino? Eso es porque siempre supe de tu defecto, y aproveché. Sembré semillas de flores en tu lado, y cada día, mientras volvíamos del arroyo, tú las regabas. Por dos años he recogido estas flores para adornar la mesa de mi amo. Sin que tú fueras como eres, mi amo no tendría esta belleza para adornar su casa."</em> Cada uno de nosotros es un cántaro rajado. Cada uno tiene una falla. El Maestro Alfarero no se avergüenza de ella. La usa. Siembra flores a lo largo del camino de cada vida que le permita cargarla.</p>
+
+        <h3>C. El Libro de Consuelo y el Nuevo Pacto (capítulos 30–33)</h3>
+        <p>En medio mismo de este libro oscuro, mientras Jeremías estaba sentado en una celda de prisión, el Señor abrió el cielo sobre su cabeza. Los capítulos 30–33 se llaman el Libro de Consuelo, y son como una ventana de luz abierta en una pared negra. El cautiverio no será la última palabra. Dios reunirá a Su pueblo disperso. La tierra será replantada. Y — lo más maravilloso de todo — Dios hará un <strong>Nuevo Pacto</strong> con Su pueblo: <em>"Daré mi ley en su mente, y la escribiré en su corazón; y yo seré su Dios, y ellos serán mi pueblo… perdonaré la maldad de ellos, y no me acordaré más de su pecado"</em> (Jeremías 31:33–34).</p>
+
+        <p>Es una de las grandes cumbres del Antiguo Testamento. El escritor de Hebreos cita el pasaje entero para probar que Cristo ya ha inaugurado este pacto (Hebreos 8:8–12). En la noche de Su traición, cuando Jesús alzó la copa diciendo <em>"esta es mi sangre del nuevo pacto,"</em> alargaba Su mano a través de seiscientos años y la ponía sobre Jeremías 31. Cada vez que venimos a la Mesa del Señor, estamos bebiendo de una promesa dada primero a un prisionero quebrantado. El pacto fue firmado en sangre — Su sangre — y fechado en la noche antes de la cruz. Jeremías también predijo que el cautiverio duraría setenta años (Jeremías 25:11) — el número exacto que Daniel leyó después en su propio exilio (Daniel 9:2). La palabra de Dios no falla por un año.</p>
+
+        <h3>D. La caída de Jerusalén y los últimos días del profeta (capítulos 34–52)</h3>
+        <p>Los capítulos finales cuentan la historia que Jeremías había advertido por cuarenta años. Nabucodonosor sitia la ciudad. Los muros caen. El templo de Salomón es quemado. El pueblo es llevado encadenado hacia Babilonia. Un pequeño remanente huye al sur, a Egipto, contra la palabra clara del profeta, y se llevan con ellos a Jeremías y a su escriba fiel Baruc. Aun allí, en tierra extranjera, el viejo profeta sigue hablando. El libro termina sin desfile de victoria — solo con la fidelidad silenciosa y terca de un hombre que no dejó de decir lo que el Señor le había mandado decir. No hay biografía de su muerte. Sencillamente termina su carrera.</p>
+
+        <p>¿Cuánto hace que usted no llora por un amigo que está lejos de Dios? ¿Cuánto hace que no habló una palabra dura en amor porque alguien que le importaba iba caminando hacia el juicio? Jeremías nos enseña que el ministerio verdadero le cuesta algo al mensajero, y que una fe sin lágrimas suele ser una fe sin fruto.</p>
+
+        <h2>III. Lamentaciones: la terapia del dolor</h2>
+        <p>La tradición nos dice que después de la caída de Jerusalén, Jeremías subió a una colina fuera de la ciudad humeante y se sentó allí solo. Lo que escribió en aquella colina se convirtió en el libro de Lamentaciones — cinco breves capítulos de poesía que han sido llamados <em>el muro de los lamentos de la Biblia</em>. Es un libro pequeño, apenas cinco páginas en la mayoría de las Biblias, y la mayoría de nosotros lo pasamos por alto. No deberíamos. Hay temporadas en cada vida cuando Lamentaciones es el único libro de la Escritura que sabe cómo nos sentimos.</p>
+
+        <p>Mire primero la estructura, porque el dolor en este libro ha sido cuidadosamente formado. Los capítulos 1, 2 y 4 son cada uno poemas acrósticos de veintidós versos — un verso por cada letra del alfabeto hebreo, desde <em>álef</em> hasta <em>tav</em>, de la A a la Z. El capítulo 3, el más largo, son sesenta y seis versos arreglados en veintidós tríadas, tres versos por cada letra hebrea. El capítulo 5 tiene los mismos veintidós versos pero sin el patrón acróstico. Aun el dolor, ve usted, ha sido ordenado. Aun las lágrimas pueden verterse en un vaso. Jeremías nos está mostrando que el lamento no es pérdida de fe; es uno de los lenguajes de la fe.</p>
+
+        <p>Cada uno de los cinco capítulos registra una capa distinta de dolor, y cada uno es interrumpido por un destello de comprensión — una lección que el profeta jamás habría aprendido en ninguna otra escuela:</p>
+        <ul>
+            <li><strong>Capítulo 1 — Desolación.</strong> El profeta se siente totalmente abandonado. Luego viene la lección: <em>"Jehová es justo, pues yo contra su palabra me rebelé"</em> (1:18). La mayoría de nosotros, cuando golpea la angustia, miramos hacia arriba y acusamos a Dios en silencio. Jeremías mira hacia arriba y dice: Dios tiene razón; yo soy el que se rebeló. Esa es una frase difícil de aprender, y solo se aprende en la oscuridad.</li>
+            <li><strong>Capítulo 2 — La minuciosidad del juicio.</strong> Jeremías mira más allá de los ejércitos babilonios al Señor detrás de ellos. La lección: Dios es fiel. Ha hecho exactamente lo que dijo que haría (2:17). Cuando Dios promete una bendición, la cumple; cuando Dios promete un juicio, lo cumple también.</li>
+            <li><strong>Capítulo 3 — El dolor personal, y el corazón del libro.</strong> De la oscuridad más profunda surge el verso más amado de Lamentaciones: <em>"Por la misericordia de Jehová no hemos sido consumidos, porque nunca decayeron sus misericordias. Nuevas son cada mañana; grande es tu fidelidad"</em> (3:22–23). Note dónde se dice esto. No se dice en una mañana soleada por un hombre cómodo. Se dice por un profeta sentado en las cenizas de su pueblo natal. La esperanza de esa calidad solo se forja en los hornos.</li>
+            <li><strong>Capítulo 4 — La increíbilidad del juicio.</strong> El profeta registra horrores tan impensables que apenas puede creerlos — y aun así los nombra. La fe no finge.</li>
+            <li><strong>Capítulo 5 — Humillación.</strong> El libro termina con una lección final: <em>"Mas tú, Jehová, permanecerás para siempre; tu trono de generación en generación"</em> (5:19). Los hombres mueren en su dolor. Dios no. Y porque Él permanece, las lecciones que enseña en nuestro dolor permanecen con Él.</li>
+        </ul>
+
+        <p>Esto es lo que Lamentaciones hace por la iglesia: nos da un vocabulario para el sufrimiento. El libro es una larga, hermosa y dolorosa demostración de que Dios usa la angustia como terapia. La Carta a los Hebreos nos dice que aun nuestro Señor Jesús, aunque era Hijo, <em>"por lo que padeció aprendió la obediencia"</em> (Hebreos 5:8). Si el Hijo sin pecado de Dios fue educado por el dolor, ¿por qué esperaríamos usted y yo graduarnos sin el mismo curso? Lamentaciones se niega a darnos un final ordenado. Las preguntas permanecen. Las lágrimas siguen cayendo. Para encontrar el resto de la historia, hay que pasar la página y mirar hacia la cruz.</p>
+
+        <h2>IV. Cristo en Jeremías y Lamentaciones — y las dos convicciones que llevamos</h2>
+        <p>No se pueden leer estos dos libros con cuidado sin ver a Jesús en casi cada página. En Jeremías, Él es la <strong>Fuente de aguas vivas</strong> que el pueblo abandonó (2:13). Es el <strong>Gran Médico</strong> que hace gritar a Jeremías: <em>"¿No hay bálsamo en Galaad? ¿No hay allí médico?"</em> (8:22). Es el <strong>Buen Pastor</strong> que reúne al rebaño disperso (23:4; 31:10). Es el <strong>Renuevo justo</strong> de la línea de David (23:5). Es <strong>Jehová Justicia Nuestra</strong> (23:6) — el nombre mismo que no podemos ganar, sino que solo recibimos por fe. El Nuevo Pacto de Jeremías 31 está firmado en Su sangre y fechado en la noche antes de la cruz.</p>
+
+        <p>En Lamentaciones, el paralelo es casi insoportable. Jeremías llora sobre Jerusalén en 586 a.C. Más de seiscientos años después, otro Profeta se detiene en el Monte de los Olivos y llora sobre las mismas piedras: <em>"¡Jerusalén, Jerusalén… cuántas veces quise juntar a tus hijos, como la gallina junta sus polluelos debajo de las alas, y no quisiste!"</em> (Mateo 23:37). La línea <em>"Dará la mejilla al que le hiere"</em> (Lamentaciones 3:30) se cumple cuando los soldados romanos golpean el rostro del Hijo de Dios delante de Pilato. Lamentaciones no es solo una antigua elegía; es un anticipo del Calvario. Le gana a Jesús el título que Isaías ya le había dado: <em>"Varón de dolores, experimentado en quebranto"</em> (Isaías 53:3).</p>
+
+        <p>Entonces, ¿qué nos llevamos de esta unidad? Dos convicciones. <strong>Primera</strong>, que la fidelidad en el ministerio no se mide por el éxito visible. El Señor recompensa la perseverancia, no la popularidad, y muchos de Sus mejores siervos — Jeremías entre ellos — mueren sin ver jamás la cosecha. Si está cansado esta noche de un trabajo que nadie nota, está en buena compañía. <strong>Segunda</strong>, que hay una clase de esperanza que solo los de corazón quebrantado descubren — una misericordia firme que es nueva cada mañana, una fidelidad lo bastante grande como para cantarse sobre las cenizas de una ciudad arruinada. Esa esperanza fue escrita por primera vez por un profeta llorando en una colina. Sigue cantándose hoy por la iglesia. Y se cantará en la nueva Jerusalén cuando ya no haya más lamentaciones en absoluto.</p>
+    </div>
+</div>
+
+<!-- TRACK BANNER + EXAM -->
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <div class="track-banner" id="trackBanner"></div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button class="action-btn" id="submitExamBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="action-btn reset" id="resetExamBtn"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+    </div>
+    <div id="examResult" class="exam-result" style="display:none;"></div>
+</div>
+
+</div>
+
+<script>
+const COURSE_KEY = 'cts_ots_progress';
+const STUDENT_KEY = 'cts_student';
+const UNIT_NUM = 10;
+const TOTAL_UNITS = 13;
+const NEXT_UNIT_HREF = 'CTSUnit11.html';
+const PREV_UNIT_HREF = 'CTSUnit9.html';
+const UNIT_PASSED_KEY = 'cts_ots_unit10_passed';
+const UNIT_STATE_KEY = 'cts_ots_unit10_state';
+const LOCKOUT_KEY = 'cts_ots_unit10_lockout';
+const PASS_THRESHOLD_MC = 18;
+const PASS_THRESHOLD_SA = 9;
+const LOCKOUT_MS = 15 * 60 * 1000; // legacy ceiling (Masters); see lockMinutes()
+// Track-aware review wait: gentle 2-min pause for lay/Certificate, full 15 min for Masters.
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+function lockoutMs() { return lockMinutes() * 60 * 1000; }
+const REDIRECT_MS = 3000;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_ots_unit10_mc_passed';
+const SA_LOCK_KEY = 'cts_ots_unit10_sa_lockout';
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = new Array(20).fill(false);
+let unitPassed = localStorage.getItem(UNIT_PASSED_KEY) === 'true';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10)
+        : parseInt(localStorage.getItem(LOCKOUT_KEY) || '0', 10);
+}
+let lockUntil = activeLockUntil();
+let progress = JSON.parse(localStorage.getItem(COURSE_KEY) || '{}');
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+
+function getTrack() { if (student.program === 'Master of Divinity') return 'mdiv';
+    if (student.program === 'Master of Theology') return 'thm';
+    return 'cert'; }
+function isMDiv() { return getTrack() === 'mdiv'; }
+function isMastersLevel() { const t = getTrack(); return t === 'mdiv' || t === 'thm'; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(`cts_ots_unit${i}_passed`) === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (unitPassed) location.href = NEXT_UNIT_HREF;
+    else alert(currentLang === 'en' ? 'Please pass Unit 10 first.' : 'Por favor apruebe la Unidad 10 primero.');
+};
+document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_UNIT_HREF; };
+
+function loadReg() {
+    let saved = localStorage.getItem(STUDENT_KEY);
+    if (saved) {
+        student = JSON.parse(saved);
+        document.getElementById('studentName').value = student.name || '';
+        document.getElementById('studentEmail').value = student.email || '';
+        document.getElementById('studentCountry').value = student.country || '';
+        document.getElementById('studentProgram').value = student.program || 'Certificate of Ministry';
+    }
+}
+function saveReg() {
+    student.name = document.getElementById('studentName').value.trim();
+    student.email = document.getElementById('studentEmail').value.trim();
+    student.country = document.getElementById('studentCountry').value.trim();
+    student.program = document.getElementById('studentProgram').value;
+    if (student.name && student.email) localStorage.setItem(STUDENT_KEY, JSON.stringify(student));
+}
+['studentName','studentEmail','studentCountry'].forEach(id => {
+    document.getElementById(id).addEventListener('change', saveReg);
+});
+document.getElementById('studentProgram').addEventListener('change', () => {
+    saveReg(); renderTrackBanner(); renderQuestions();
+});
+
+function renderTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    if (!banner) return;
+    if (isMastersLevel()) {
+        banner.innerHTML = currentLang === 'en'
+            ? ('<strong>' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ' Track:</strong> Answer all 30 questions. To pass you need <strong>18/20</strong> multiple choice <em>and</em> <strong>9/10</strong> short answer, judged independently. Short answers may be written in English or Spanish.')
+            : ('<strong>Pista ' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ':</strong> Responda las 30 preguntas. Para aprobar necesita <strong>18/20</strong> en opción múltiple <em>y</em> <strong>9/10</strong> en respuesta corta, evaluadas independientemente. Las respuestas cortas pueden escribirse en inglés o español.');
+    } else {
+        banner.innerHTML = currentLang === 'en'
+            ? '<strong>Certificate Track:</strong> Answer questions 1–20 (multiple choice). To pass you need <strong>18/20</strong> (90%). Short-answer questions are optional practice and not graded.'
+            : '<strong>Pista Certificado:</strong> Responda las preguntas 1–20 (opción múltiple). Para aprobar necesita <strong>18/20</strong> (90%). Las preguntas de respuesta corta son práctica opcional y no se califican.';
+    }
+}
+
+function saveState() {
+    localStorage.setItem(UNIT_STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers, mcRevealed }));
+}
+function loadState() {
+    const raw = localStorage.getItem(UNIT_STATE_KEY);
+    if (!raw) return;
+    try {
+        const s = JSON.parse(raw);
+        if (Array.isArray(s.mcAnswers)) mcAnswers = s.mcAnswers;
+        if (Array.isArray(s.kwAnswers)) kwAnswers = s.kwAnswers;
+        if (Array.isArray(s.mcRevealed)) mcRevealed = s.mcRevealed;
+    } catch (e) {}
+}
+
+const mcQuestions = [
+    { id:1, en:"1. How long did Jeremiah preach, and under how many kings?", es:"1. ¿Cuánto tiempo predicó Jeremías, y bajo cuántos reyes?",
+      optionsEn:["40 years under 5 kings","20 years under 3 kings","60 years under 7 kings","10 years under 2 kings"],
+      optionsEs:["40 años bajo 5 reyes","20 años bajo 3 reyes","60 años bajo 7 reyes","10 años bajo 2 reyes"], correct:"A",
+      fcEn:"Correct. Forty years (c. 627–586 BC) under Josiah, Jehoahaz, Jehoiakim, Jehoiachin, and Zedekiah — without ever seeing a revival.",
+      fcEs:"Correcto. Cuarenta años (c. 627–586 a.C.) bajo Josías, Joacaz, Joacim, Joaquín y Sedequías — sin ver jamás un avivamiento.",
+      fiEn:"Jeremiah preached for 40 years under 5 kings, never once seeing a revival — and yet was called the greatest of the prophets.",
+      fiEs:"Jeremías predicó 40 años bajo 5 reyes, sin ver jamás un avivamiento — y aun así fue llamado el más grande de los profetas." },
+    { id:2, en:"2. The famous title for Jeremiah is:", es:"2. El famoso título dado a Jeremías es:",
+      optionsEn:["The fire prophet","The weeping prophet","The desert prophet","The silent prophet"],
+      optionsEs:["El profeta del fuego","El profeta llorón","El profeta del desierto","El profeta silencioso"], correct:"B",
+      fcEn:"Correct. <em>The weeping prophet</em> — the title has stuck for two thousand years.",
+      fcEs:"Correcto. <em>El profeta llorón</em> — el título le ha quedado por dos mil años.",
+      fiEn:"He is called simply <em>the weeping prophet</em> — a title that has stuck for two thousand years.",
+      fiEs:"Se le llama sencillamente <em>el profeta llorón</em> — un título que le ha quedado por dos mil años." },
+    { id:3, en:"3. Jeremiah's hometown was:", es:"3. El pueblo natal de Jeremías era:",
+      optionsEn:["Bethlehem","Nazareth","Anathoth","Jericho"],
+      optionsEs:["Belén","Nazaret","Anatot","Jericó"], correct:"C",
+      fcEn:"Correct. A priestly village a few miles north of Jerusalem. He could not have been more than seventeen or eighteen when the call came.",
+      fcEs:"Correcto. Una aldea sacerdotal a pocas millas al norte de Jerusalén. No podría haber tenido más de diecisiete o dieciocho años cuando vino el llamado.",
+      fiEn:"Jeremiah was a young priest from the village of Anathoth, just north of Jerusalem (Jeremiah 1:1).",
+      fiEs:"Jeremías era un joven sacerdote de la aldea de Anatot, justo al norte de Jerusalén (Jeremías 1:1)." },
+    { id:4, en:"4. Jeremiah 1:5 — 'Before I formed you in the womb I knew you' — teaches that:", es:"4. Jeremías 1:5 — 'Antes que te formase en el vientre te conocí' — enseña que:",
+      optionsEn:["Jeremiah was unusually gifted","Priests are pre-selected","God's call preceded Jeremiah's existence","Prophets choose themselves"],
+      optionsEs:["Jeremías tenía un talento poco común","Los sacerdotes son preseleccionados","El llamado de Dios precedió a la existencia de Jeremías","Los profetas se escogen a sí mismos"], correct:"C",
+      fcEn:"Correct. His life had been God's project before his life had been his own. So has yours, if you belong to Christ.",
+      fcEs:"Correcto. Su vida había sido proyecto de Dios antes de ser suya. Así también la suya, si pertenece a Cristo.",
+      fiEn:"Jeremiah 1:5 grounds the prophet's calling in God's pre-conception sovereignty over his life.",
+      fiEs:"Jeremías 1:5 ancla el llamado del profeta en la soberanía de Dios sobre su vida antes de su concepción." },
+    { id:5, en:"5. The two visions that sealed Jeremiah's call were:", es:"5. Las dos visiones que sellaron el llamado de Jeremías fueron:",
+      optionsEn:["An almond rod and a boiling pot","A burning bush and a rod","A wheel and a fiery furnace","A scroll and a stone"],
+      optionsEs:["Una vara de almendro y una olla hirviente","Una zarza ardiente y una vara","Una rueda y un horno de fuego","Un rollo y una piedra"], correct:"A",
+      fcEn:"Correct. The almond — early-blooming, the watchman of the trees — taught that God watches to perform His word. The pot warned of judgment from the north.",
+      fcEs:"Correcto. El almendro — temprano para florecer, el vigía de los árboles — enseñó que Dios vela sobre Su palabra. La olla advirtió juicio desde el norte.",
+      fiEn:"Jeremiah 1:11–14 — the almond rod (God watching to perform His word) and the boiling pot tilted from the north (coming judgment).",
+      fiEs:"Jeremías 1:11–14 — la vara de almendro (Dios velando para cumplir Su palabra) y la olla hirviente inclinada desde el norte (juicio venidero)." },
+    { id:6, en:"6. Jeremiah's diagnosis of the nation's two evils (Jer 2:13) is:", es:"6. El diagnóstico de Jeremías de los dos males de la nación (Jer 2:13) es:",
+      optionsEn:["Idolatry and adultery","Greed and pride","Forsaking the fountain of living waters and digging broken cisterns","Murder and theft"],
+      optionsEs:["Idolatría y adulterio","Codicia y soberbia","Abandonar la fuente de aguas vivas y cavar cisternas rotas","Asesinato y robo"], correct:"C",
+      fcEn:"Correct. The picture: a clear stream forsaken for cracked rock-cut tanks. We trade the fountain for the cistern, and then wonder why we are dry.",
+      fcEs:"Correcto. La imagen: una corriente clara abandonada por depósitos rotos cavados en la roca. Cambiamos la fuente por la cisterna, y nos preguntamos por qué estamos secos.",
+      fiEn:"Jeremiah 2:13 — God offers running water; the people prefer their own cracked cisterns. Every heart still does this.",
+      fiEs:"Jeremías 2:13 — Dios ofrece agua corriente; el pueblo prefiere sus propias cisternas rotas. Cada corazón sigue haciéndolo." },
+    { id:7, en:"7. Jeremiah's famous Temple Sermon (chapter 7) declared:", es:"7. El famoso Sermón del Templo de Jeremías (capítulo 7) declaró:",
+      optionsEn:["The temple itself would not save the people","The temple should be enlarged","Sacrifice was unnecessary","Only priests could approach God"],
+      optionsEs:["El templo mismo no salvaría al pueblo","El templo debía ampliarse","El sacrificio era innecesario","Solo los sacerdotes podían acercarse a Dios"], correct:"A",
+      fcEn:"Correct. God did not need their building. Religious externals without obedience are not refuge.",
+      fcEs:"Correcto. Dios no necesitaba su edificio. Los externos religiosos sin obediencia no son refugio.",
+      fiEn:"Jeremiah 7 — standing in the gate of the temple, Jeremiah told worshipers the building would not save them; only repentance would.",
+      fiEs:"Jeremías 7 — parado en la puerta del templo, Jeremías les dijo a los adoradores que el edificio no los salvaría; solo el arrepentimiento." },
+    { id:8, en:"8. The potter's house illustration (Jeremiah 18) teaches that:", es:"8. La ilustración de la casa del alfarero (Jeremías 18) enseña que:",
+      optionsEn:["God breaks every vessel","Pottery is a parable for kings only","Clay is worthless","God will reshape any clay that stays on the wheel"],
+      optionsEs:["Dios rompe toda vasija","La cerámica es solo una parábola para reyes","El barro no tiene valor","Dios formará de nuevo cualquier barro que se quede en la rueda"], correct:"D",
+      fcEn:"Correct. The clay does not have to be promising. It only has to stay on the wheel.",
+      fcEs:"Correcto. El barro no tiene que ser prometedor. Solo tiene que quedarse en la rueda.",
+      fiEn:"Jeremiah 18 — the potter pressed the spoiled clay back into a lump and shaped it again. God's willingness to reshape any willing life.",
+      fiEs:"Jeremías 18 — el alfarero presionó el barro arruinado y lo formó de nuevo. La disposición de Dios para reformar cualquier vida dispuesta." },
+    { id:9, en:"9. The Book of Comfort in Jeremiah consists of chapters:", es:"9. El Libro de Consuelo en Jeremías son los capítulos:",
+      optionsEn:["1–4","30–33","45–48","50–52"],
+      optionsEs:["1–4","30–33","45–48","50–52"], correct:"B",
+      fcEn:"Correct. A window of light cut into a black wall. Written while Jeremiah was in prison and the city was about to fall.",
+      fcEs:"Correcto. Una ventana de luz abierta en una pared negra. Escrita mientras Jeremías estaba en prisión y la ciudad por caer.",
+      fiEn:"Jeremiah 30–33 contain the promises of restoration and the New Covenant — written in prison as judgment fell.",
+      fiEs:"Jeremías 30–33 contienen las promesas de restauración y el Nuevo Pacto — escritos en prisión mientras caía el juicio." },
+    { id:10, en:"10. The New Covenant of Jeremiah 31:33–34 promises that God will:", es:"10. El Nuevo Pacto de Jeremías 31:33–34 promete que Dios:",
+      optionsEn:["Write His law on stone tablets","Multiply the priesthood","Restore the temple","Write His law on human hearts and forgive sin"],
+      optionsEs:["Escribirá Su ley en tablas de piedra","Multiplicará el sacerdocio","Restaurará el templo","Escribirá Su ley en los corazones humanos y perdonará el pecado"], correct:"D",
+      fcEn:"Correct. Christ inaugurated this covenant in the upper room: 'This is my blood of the new covenant.' Hebrews 8 quotes the whole passage.",
+      fcEs:"Correcto. Cristo inauguró este pacto en el aposento alto: 'Esta es mi sangre del nuevo pacto.' Hebreos 8 cita todo el pasaje.",
+      fiEn:"Jeremiah 31:33–34, fulfilled in Christ (Hebrews 8:8–12), is the high peak of OT covenant theology.",
+      fiEs:"Jeremías 31:33–34, cumplido en Cristo (Hebreos 8:8–12), es la cumbre de la teología del pacto en el AT." },
+    { id:11, en:"11. Jeremiah predicted the captivity would last:", es:"11. Jeremías predijo que el cautiverio duraría:",
+      optionsEn:["7 years","40 years","70 years","100 years"],
+      optionsEs:["7 años","40 años","70 años","100 años"], correct:"C",
+      fcEn:"Correct. Seventy years (Jer 25:11) — the exact number Daniel later read in his own exile (Dan 9:2). God's word does not miss by a year.",
+      fcEs:"Correcto. Setenta años (Jer 25:11) — el número exacto que Daniel leyó después en su propio exilio (Dan 9:2). La palabra de Dios no falla por un año.",
+      fiEn:"Jeremiah 25:11 — the 70-year exile that Daniel discovered in Daniel 9:2 and began praying it forward to its end.",
+      fiEs:"Jeremías 25:11 — los 70 años de exilio que Daniel descubrió en Daniel 9:2 y comenzó a orar para que llegaran a su fin." },
+    { id:12, en:"12. Jeremiah's faithful scribe was:", es:"12. El escriba fiel de Jeremías era:",
+      optionsEn:["Baruch","Ezra","Nehemiah","Habakkuk"],
+      optionsEs:["Baruc","Esdras","Nehemías","Habacuc"], correct:"A",
+      fcEn:"Correct. Baruch — the man who wrote down Jeremiah's words and went with him into Egyptian exile.",
+      fcEs:"Correcto. Baruc — el hombre que escribió las palabras de Jeremías y fue con él al exilio en Egipto.",
+      fiEn:"Baruch ben Neriah served as Jeremiah's scribe and shared his exile (Jeremiah 36; 45).",
+      fiEs:"Baruc, hijo de Nerías, sirvió como escriba de Jeremías y compartió su exilio (Jeremías 36; 45)." },
+    { id:13, en:"13. The structure of Lamentations is:", es:"13. La estructura de Lamentaciones es:",
+      optionsEn:["Five acrostic-style chapters; ch. 3 is a triple acrostic; ch. 5 has 22 verses but no acrostic","Free verse throughout","Three chapters in prose","Hymns of pure praise"],
+      optionsEs:["Cinco capítulos acrósticos; cap. 3 es triple acróstico; cap. 5 tiene 22 versos sin acróstico","Verso libre en todo el libro","Tres capítulos en prosa","Himnos de pura alabanza"], correct:"A",
+      fcEn:"Correct. Even sorrow has been ordered. The poetic shape itself says: lament is not a loss of faith; it is one of the languages of faith.",
+      fcEs:"Correcto. Aun el dolor ha sido ordenado. La forma poética misma dice: el lamento no es pérdida de fe; es uno de los lenguajes de la fe.",
+      fiEn:"Chapters 1, 2, 4 are 22-verse acrostics (aleph to tav); ch. 3 has 66 verses in 22 triads; ch. 5 has 22 verses with no acrostic.",
+      fiEs:"Los capítulos 1, 2, 4 son acrósticos de 22 versos (álef a tav); cap. 3 tiene 66 versos en 22 tríadas; cap. 5 tiene 22 versos sin acróstico." },
+    { id:14, en:"14. The most-loved verse in Lamentations is:", es:"14. El verso más amado de Lamentaciones es:",
+      optionsEn:["'The Lord is my shepherd'","'Trust in the Lord with all your heart'","'Be still and know that I am God'","'His compassions never fail; they are new every morning'"],
+      optionsEs:["'Jehová es mi pastor'","'Confía en Jehová de todo tu corazón'","'Estad quietos, y conoced que yo soy Dios'","'Nunca decayeron sus misericordias; nuevas son cada mañana'"], correct:"D",
+      fcEn:"Correct. Lamentations 3:22–23. Said not in sunshine by a comfortable man but by a prophet sitting in the ashes of his hometown.",
+      fcEs:"Correcto. Lamentaciones 3:22–23. Dicho no en sol por un hombre cómodo sino por un profeta sentado en las cenizas de su pueblo natal.",
+      fiEn:"Lamentations 3:22–23 — hope of this quality is only ever forged in furnaces.",
+      fiEs:"Lamentaciones 3:22–23 — la esperanza de esa calidad solo se forja en los hornos." },
+    { id:15, en:"15. The 'flash of insight' that closes Lamentations 1 is:", es:"15. El 'destello de comprensión' que cierra Lamentaciones 1 es:",
+      optionsEn:["'God is silent'","'Babylon will fall'","'Israel will be restored'","'The Lord is in the right, for I have rebelled'"],
+      optionsEs:["'Dios calla'","'Babilonia caerá'","'Israel será restaurado'","'Jehová es justo, pues yo contra Su palabra me rebelé'"], correct:"D",
+      fcEn:"Correct. Most of us look up and accuse God. Jeremiah looks up and says: God is right; I am the one who rebelled. A hard sentence — only learned in the dark.",
+      fcEs:"Correcto. La mayoría miramos arriba y acusamos a Dios. Jeremías mira arriba y dice: Dios tiene razón; yo soy el que se rebeló. Una frase dura — solo se aprende en la oscuridad.",
+      fiEn:"Lamentations 1:18 — the prophet vindicates God before lamenting his own loss.",
+      fiEs:"Lamentaciones 1:18 — el profeta vindica a Dios antes de lamentar su propia pérdida." },
+    { id:16, en:"16. Jesus's weeping over Jerusalem (Matthew 23:37) parallels:", es:"16. El llanto de Jesús sobre Jerusalén (Mateo 23:37) hace paralelo con:",
+      optionsEn:["David weeping for Absalom","Jeremiah weeping over Jerusalem in Lamentations","Joseph weeping over his brothers","Job weeping in his suffering"],
+      optionsEs:["David llorando por Absalón","Jeremías llorando sobre Jerusalén en Lamentaciones","José llorando sobre sus hermanos","Job llorando en su sufrimiento"], correct:"B",
+      fcEn:"Correct. Six hundred years apart, two prophets weep over the same stones. Lamentations is a foreshadow of Calvary.",
+      fcEs:"Correcto. Con seiscientos años de distancia, dos profetas lloran sobre las mismas piedras. Lamentaciones es un anticipo del Calvario.",
+      fiEn:"Jeremiah (586 BC) and Jesus (c. AD 33) both wept over Jerusalem; both warned of judgment; both saw the city fall.",
+      fiEs:"Jeremías (586 a.C.) y Jesús (c. 33 d.C.) ambos lloraron sobre Jerusalén; ambos advirtieron del juicio; ambos vieron caer la ciudad." },
+    { id:17, en:"17. The line 'Let him give his cheek to the smiter' (Lamentations 3:30) is fulfilled when:", es:"17. La línea 'Dará la mejilla al que le hiere' (Lamentaciones 3:30) se cumple cuando:",
+      optionsEn:["David is struck by Shimei","Roman soldiers strike the face of the Son of God before Pilate","Stephen is stoned","Paul is beaten in Philippi"],
+      optionsEs:["David es golpeado por Simei","Los soldados romanos golpean el rostro del Hijo de Dios delante de Pilato","Esteban es apedreado","Pablo es golpeado en Filipos"], correct:"B",
+      fcEn:"Correct. The line that earns Jesus the title Isaiah had already given Him: 'a man of sorrows, and acquainted with grief' (Isaiah 53:3).",
+      fcEs:"Correcto. La línea que le gana a Jesús el título que Isaías ya le había dado: 'Varón de dolores, experimentado en quebranto' (Isaías 53:3).",
+      fiEn:"Lamentations 3:30 → fulfilled in the passion narratives where Christ is struck on the face before His crucifixion.",
+      fiEs:"Lamentaciones 3:30 → cumplido en los relatos de la pasión donde Cristo es golpeado en el rostro antes de Su crucifixión." },
+    { id:18, en:"18. In Jeremiah, Christ is portrayed as all of the following EXCEPT:", es:"18. En Jeremías, Cristo es presentado como todos los siguientes EXCEPTO:",
+      optionsEn:["Fountain of living waters","Righteous Branch","Good Shepherd","The Suffering Servant by name"],
+      optionsEs:["Fuente de aguas vivas","Renuevo justo","Buen Pastor","El Siervo Sufriente por nombre"], correct:"D",
+      fcEn:"Correct. The 'Suffering Servant' is Isaiah's title (Isaiah 53), not Jeremiah's. Jeremiah's titles are Fountain, Branch, Shepherd, Physician, and 'The LORD Our Righteousness.'",
+      fcEs:"Correcto. El 'Siervo Sufriente' es el título de Isaías (Isaías 53), no de Jeremías. Los títulos de Jeremías son Fuente, Renuevo, Pastor, Médico, y 'Jehová Justicia Nuestra.'",
+      fiEn:"Jeremiah's Christological titles: Fountain (2:13), Physician (8:22), Shepherd (23:4), Branch (23:5), 'The LORD Our Righteousness' (23:6).",
+      fiEs:"Títulos cristológicos de Jeremías: Fuente (2:13), Médico (8:22), Pastor (23:4), Renuevo (23:5), 'Jehová Justicia Nuestra' (23:6)." },
+    { id:19, en:"19. The first conviction we carry away from this unit is:", es:"19. La primera convicción que llevamos de esta unidad es:",
+      optionsEn:["Hardship guarantees fruit","Every prophet sees revival","Faithfulness in ministry is not measured by visible success","Crowds prove a call"],
+      optionsEs:["La dificultad garantiza fruto","Cada profeta ve avivamiento","La fidelidad en el ministerio no se mide por el éxito visible","Las multitudes prueban un llamado"], correct:"C",
+      fcEn:"Correct. The Lord rewards endurance, not popularity. Many of His best servants — Jeremiah among them — die without seeing the harvest.",
+      fcEs:"Correcto. El Señor recompensa la perseverancia, no la popularidad. Muchos de Sus mejores siervos — Jeremías entre ellos — mueren sin ver la cosecha.",
+      fiEn:"Jeremiah preached 40 years and saw no revival — and was still called the greatest of the prophets.",
+      fiEs:"Jeremías predicó 40 años y no vio avivamiento — y aun así fue llamado el más grande de los profetas." },
+    { id:20, en:"20. The second conviction we carry away is:", es:"20. La segunda convicción que llevamos es:",
+      optionsEn:["Suffering should be avoided at all costs","Hope only the brokenhearted discover — a faithfulness great enough to sing over ruined cities","Lament is unbelief","Joy alone honors God"],
+      optionsEs:["El sufrimiento debe evitarse a toda costa","Una esperanza que solo descubren los de corazón quebrantado — una fidelidad lo bastante grande como para cantarse sobre ciudades arruinadas","El lamento es incredulidad","Solo el gozo honra a Dios"], correct:"B",
+      fcEn:"Correct. A mercy new every morning, a faithfulness that can be sung over the ashes of a ruined city — and that will be sung in the new Jerusalem.",
+      fcEs:"Correcto. Una misericordia nueva cada mañana, una fidelidad que puede cantarse sobre las cenizas de una ciudad arruinada — y que se cantará en la nueva Jerusalén.",
+      fiEn:"Lamentations 3:22–23 — the great hope only forged in furnaces.",
+      fiEs:"Lamentaciones 3:22–23 — la gran esperanza solo forjada en hornos." }
+];
+
+const kwQuestions = [
+    { id:21, en:"21. Describe Jeremiah's profile of courage — the costs of his forty-year ministry and what makes him called 'the weeping prophet.'",
+      es:"21. Describa el perfil de valentía de Jeremías — los costos de su ministerio de cuarenta años y por qué se le llama 'el profeta llorón.'",
+      kw_en:[["forty", "forty years", "40 years"], ["years", "ministry", "preached"], ["kings", "five kings", "under kings"], ["weeping", "weeping prophet", "tears", "wept"], ["prophet", "jeremiah"], ["mears", "henrietta mears"], ["faithful", "faithfulness", "not success", "endurance", "cost him"]],
+      kw_es:[["cuarenta", "cuarenta años", "40 años"], ["años", "ministerio", "predicó"], ["reyes", "cinco reyes", "bajo reyes"], ["llorón", "profeta llorón", "lágrimas", "lloró"], ["profeta", "jeremías"], ["mears", "henrietta mears"], ["fiel", "fidelidad", "no éxito", "perseverancia", "le costó"]],
+      modelEn:"Jeremiah's ministry was a profile of courage that cost him dearly. He preached for about forty years (627-586 B.C.) under five kings and never once saw a revival; the nation he loved went down in front of his eyes while he kept saying the same hard thing until the city burned. He was beaten in public, dropped into a pit of mud, threatened by kings, and abandoned by friends, yet he could not quit because the word of God was like a fire shut up in his bones. He is called simply the weeping prophet. His life is a long rebuke to anyone who measures ministry by visible success: faithfulness, not popularity, is what the Lord rewards.",
+      modelEs:"El ministerio de Jeremías fue un perfil de valentía que le costó caro. Predicó por unos cuarenta años (627-586 a.C.) bajo cinco reyes y nunca vio un avivamiento; la nación que amaba cayó ante sus ojos mientras él seguía diciendo lo mismo hasta que la ciudad ardió. Fue golpeado en público, echado a un pozo de lodo, amenazado por reyes, y abandonado por amigos, pero no pudo renunciar porque la palabra de Dios era como fuego encerrado en sus huesos. Se le llama simplemente el profeta llorón. Su vida es un largo reproche a quien mide el ministerio por el éxito visible: la fidelidad, no la popularidad, es lo que el Señor recompensa." },
+    { id:22, en:"22. Explain Jeremiah's reluctant call (Jeremiah 1) and what the two visions (almond rod, boiling pot) taught him.",
+      es:"22. Explique el llamado reluctante de Jeremías (Jeremías 1) y lo que las dos visiones (vara de almendro, olla hirviente) le enseñaron.",
+      kw_en:[["youth", "young", "only a youth", "too young"], ["womb", "before you were born", "before i formed you", "consecrated"], ["almond", "almond rod", "almond branch"], ["boiling pot", "seething pot", "pot tilted", "cauldron"], ["watching", "watches to perform", "lord watches"], ["north", "from the north", "judgment from north"], ["word", "put my words", "touched his mouth"]],
+      kw_es:[["niño", "joven", "soy un niño", "demasiado joven"], ["vientre", "antes que nacieras", "antes que te formase", "consagré"], ["almendro", "vara de almendro", "rama de almendro"], ["olla hirviente", "olla", "olla inclinada", "caldera"], ["velar", "vela para cumplir", "el señor vela"], ["norte", "del norte", "juicio del norte"], ["palabra", "puse mis palabras", "tocó su boca"]],
+      modelEn:"Jeremiah's call came when he was a young priest, no more than seventeen or eighteen, and he responded reluctantly: 'Ah, Lord God! I do not know how to speak, for I am only a youth.' But God answered that He had known and consecrated Jeremiah before he was born and had appointed him a prophet, then touched his mouth and put His words in it. Two visions sealed the call. The almond rod — the early-blooming watchman of the trees — taught that the Lord watches to perform His word. The boiling pot tilted toward the south warned that judgment was about to spill out of the north. From that moment Jeremiah's life had only one direction.",
+      modelEs:"El llamado de Jeremías vino cuando era un joven sacerdote, no más de diecisiete o dieciocho, y respondió con renuencia: '¡Ah, Señor DIOS! No sé hablar, porque soy un niño.' Pero Dios respondió que lo había conocido y consagrado antes de que naciera y lo había constituido profeta, y luego tocó su boca y puso Sus palabras en ella. Dos visiones sellaron el llamado. La vara de almendro — el vigilante de los árboles que florece temprano — enseñó que el Señor vela para cumplir Su palabra. La olla hirviente inclinada hacia el sur advirtió que el juicio estaba por derramarse desde el norte. Desde ese momento la vida de Jeremías tuvo una sola dirección." },
+    { id:23, en:"23. Unpack the 'two evils' of Jeremiah 2:13 (fountain and cisterns) — what does the image mean for every human heart?",
+      es:"23. Desarrolle los 'dos males' de Jeremías 2:13 (fuente y cisternas) — ¿qué significa la imagen para cada corazón humano?",
+      kw_en:[["forsaken", "forsook", "abandoned god", "left me"], ["fountain", "fountain of living waters", "living water", "stream"], ["living waters", "clear stream", "never stops flowing"], ["cisterns", "cistern", "holding tank", "own tanks"], ["broken", "cracked", "leak", "hold no water"], ["thirsty", "dry", "cannot satisfy", "leave them dry"]],
+      kw_es:[["dejaron", "abandonaron", "abandonaron a dios", "me dejaron"], ["fuente", "fuente de agua viva", "agua viva", "arroyo"], ["agua viva", "arroyo claro", "nunca deja de fluir"], ["cisternas", "cisterna", "depósito", "propios depósitos"], ["rotas", "agrietadas", "gotean", "no retienen agua"], ["sediento", "seco", "no satisface", "los deja secos"]],
+      modelEn:"Jeremiah diagnosed the nation's sin in two evils (Jeremiah 2:13): 'they have forsaken me, the fountain of living waters, and hewed out cisterns for themselves, broken cisterns that can hold no water.' The picture is vivid: God offers a clear stream that never stops flowing, but the people choose instead to chip out their own holding tanks in the rock — tanks that crack and leak and leave them thirsty. The first evil is forsaking the fountain, God Himself; the second is the futile self-made substitute, the broken cistern. Every generation and every heart does this — trading the fountain for the cistern, then wondering why they are dry. It pictures the folly of abandoning God for substitutes that cannot satisfy.",
+      modelEs:"Jeremías diagnosticó el pecado de la nación en dos males (Jeremías 2:13): 'me dejaron a mí, fuente de agua viva, y cavaron para sí cisternas, cisternas rotas que no retienen agua.' La imagen es vívida: Dios ofrece un arroyo claro que nunca deja de fluir, pero el pueblo escoge en cambio labrar sus propios depósitos en la roca — depósitos que se agrietan y gotean y los dejan sedientos. El primer mal es abandonar la fuente, Dios mismo; el segundo es el inútil sustituto hecho a mano, la cisterna rota. Cada generación y cada corazón hace esto — cambiar la fuente por la cisterna, y luego preguntarse por qué están secos. Retrata la insensatez de abandonar a Dios por sustitutos que no pueden satisfacer." },
+    { id:24, en:"24. Explain the potter's house illustration (Jeremiah 18) and its application to broken lives.",
+      es:"24. Explique la ilustración de la casa del alfarero (Jeremías 18) y su aplicación a las vidas quebradas.",
+      kw_en:[["potter", "the potter", "potter's house"], ["wheel", "potter's wheel", "on the wheel"], ["clay", "vessel", "lump", "pot"], ["spoiled", "marred", "came apart", "ruined", "broken"], ["reshape", "remake", "shape again", "form again", "remold"], ["willing", "stays on the wheel", "stay soft", "let him"]],
+      kw_es:[["alfarero", "el alfarero", "casa del alfarero"], ["rueda", "rueda del alfarero", "en la rueda"], ["barro", "vasija", "masa", "vaso"], ["estropeado", "echado a perder", "se deshizo", "arruinado", "quebrado"], ["remodelar", "rehacer", "formar de nuevo", "moldear otra vez"], ["dispuesto", "se queda en la rueda", "mantenerse blando", "dejarlo"]],
+      modelEn:"In Jeremiah 18 the prophet watched a clay vessel come apart on the potter's wheel; then he watched the potter press the spoiled clay back into a lump and shape it again, as it seemed good to him to do. The Lord said that is what He is about to do with the nation — and what He is willing to do with any broken life that will stay on the wheel. The illustration applies to broken lives because God is the kind of Worker who can use flawed tools and reshape spoiled clay rather than throwing it away. As long as the clay stays soft and on the wheel, the Potter can remake it into something useful, which is good news, because flawed, broken vessels are the only kind of material He has to work with.",
+      modelEs:"En Jeremías 18 el profeta vio cómo una vasija de barro se deshacía en la rueda del alfarero; luego vio cómo el alfarero presionaba el barro estropeado de nuevo en una masa y lo formaba otra vez, como le pareció bien hacerlo. El Señor dijo que eso es lo que está por hacer con la nación — y lo que está dispuesto a hacer con cualquier vida quebrada que se quede en la rueda. La ilustración se aplica a las vidas quebradas porque Dios es el tipo de Obrero que puede usar herramientas defectuosas y remodelar el barro estropeado en vez de desecharlo. Mientras el barro se mantenga blando y en la rueda, el Alfarero puede rehacerlo en algo útil, lo cual es buena noticia, porque las vasijas defectuosas y quebradas son el único material con el que Él tiene que trabajar." },
+    { id:25, en:"25. Describe the New Covenant of Jeremiah 31:33–34 and how Christ inaugurated it.",
+      es:"25. Describa el Nuevo Pacto de Jeremías 31:33–34 y cómo Cristo lo inauguró.",
+      kw_en:[["new covenant", "jeremiah 31", "new testament"], ["law", "my law", "law within", "write the law"], ["heart", "on their hearts", "write it on hearts"], ["forgive", "remember sin no more", "forgive iniquity"], ["blood", "my blood", "cup", "blood of the covenant"], ["hebrews", "inaugurated", "christ inaugurated", "lord's table"]],
+      kw_es:[["nuevo pacto", "jeremías 31", "nuevo testamento"], ["ley", "mi ley", "ley dentro", "escribir la ley"], ["corazón", "en su corazón", "escribir en el corazón"], ["perdonar", "no me acordaré del pecado", "perdonar la maldad"], ["sangre", "mi sangre", "copa", "sangre del pacto"], ["hebreos", "inaugurado", "cristo inauguró", "mesa del señor"]],
+      modelEn:"The New Covenant of Jeremiah 31:33-34 was given in the middle of a dark book while Jeremiah sat in prison: 'I will put my law within them, and I will write it on their hearts; and I will be their God, and they shall be my people... I will forgive their iniquity, and I will remember their sin no more.' It is one of the great peaks of the Old Testament. The writer of Hebrews quotes the whole passage to prove Christ has already inaugurated it. On the night of His betrayal, when Jesus lifted the cup and said 'this is my blood of the new covenant,' He was reaching back six hundred years to Jeremiah 31. Every time believers come to the Lord's Table, they drink from a promise first given to a broken prisoner, signed in Christ's blood.",
+      modelEs:"El Nuevo Pacto de Jeremías 31:33-34 fue dado en medio de un libro oscuro mientras Jeremías estaba en prisión: 'Daré mi ley en su mente, y la escribiré en su corazón; y yo seré a ellos por Dios, y ellos me serán por pueblo... perdonaré la maldad de ellos, y no me acordaré más de su pecado.' Es uno de los grandes picos del Antiguo Testamento. El escritor de Hebreos cita todo el pasaje para probar que Cristo ya lo ha inaugurado. La noche de Su traición, cuando Jesús alzó la copa y dijo 'esta es mi sangre del nuevo pacto,' alcanzaba seiscientos años atrás hasta Jeremías 31. Cada vez que los creyentes vienen a la Mesa del Señor, beben de una promesa dada primero a un prisionero quebrantado, sellada en la sangre de Cristo." },
+    { id:26, en:"26. Explain the connection between Jeremiah 25:11 (seventy-year captivity) and Daniel 9:2.",
+      es:"26. Explique la conexión entre Jeremías 25:11 (cautiverio de setenta años) y Daniel 9:2.",
+      kw_en:[["seventy", "seventy years", "70 years"], ["years", "number of years"], ["captivity", "exile", "babylon", "desolate"], ["daniel", "daniel 9", "daniel read"], ["prayer", "confession", "daniel prayed", "intercession"], ["exact", "precise", "does not miss", "exactly fulfilled"]],
+      kw_es:[["setenta", "setenta años", "70 años"], ["años", "número de años"], ["cautiverio", "exilio", "babilonia", "desolada"], ["daniel", "daniel 9", "daniel leyó"], ["oración", "confesión", "daniel oró", "intercesión"], ["exacto", "preciso", "no falla", "cumplido exactamente"]],
+      modelEn:"Jeremiah 25:11 predicted that the Babylonian captivity would last seventy years, an exact and specific number. Generations later, during the exile itself, the prophet Daniel was reading the Scriptures and in Daniel 9:2 he understood from the books, from Jeremiah's prophecy, the number of years that Jerusalem would lie desolate — seventy. This moved Daniel to his great prayer of confession and intercession for his people. The connection shows that God's written word does not miss by a year: the seventy years Jeremiah foretold were precisely the seventy Daniel counted, and the prophecy's exact fulfillment confirms the reliability and precision of God's promises.",
+      modelEs:"Jeremías 25:11 predijo que el cautiverio babilónico duraría setenta años, un número exacto y específico. Generaciones después, durante el exilio mismo, el profeta Daniel leía las Escrituras y en Daniel 9:2 entendió por los libros, por la profecía de Jeremías, el número de años que Jerusalén estaría desolada — setenta. Esto movió a Daniel a su gran oración de confesión e intercesión por su pueblo. La conexión muestra que la palabra escrita de Dios no falla ni por un año: los setenta años que Jeremías predijo fueron precisamente los setenta que Daniel contó, y el cumplimiento exacto de la profecía confirma la fiabilidad y precisión de las promesas de Dios." },
+    { id:27, en:"27. Describe the structure of Lamentations and what it shows about the nature of biblical lament.",
+      es:"27. Describa la estructura de Lamentaciones y lo que muestra acerca de la naturaleza del lamento bíblico.",
+      kw_en:[["acrostic", "alphabet poem", "alphabetic"], ["twenty-two", "22 verses", "22 letters", "aleph to tau"], ["alphabet", "hebrew alphabet", "aleph to tau", "a to z"], ["triads", "three verses", "chapter 3", "sixty-six verses"], ["ordered", "shaped", "structured", "even sorrow ordered"], ["faith", "language of faith", "not loss of faith", "lament is faith"]],
+      kw_es:[["acróstico", "poema alfabético", "alfabético"], ["veintidós", "22 versículos", "22 letras", "alef a tav"], ["alfabeto", "alfabeto hebreo", "alef hasta tav", "a a la z"], ["tríadas", "tres versículos", "capítulo 3", "sesenta y seis versículos"], ["ordenado", "moldeado", "estructurado", "aun el dolor ordenado"], ["fe", "lenguaje de fe", "no pérdida de fe", "el lamento es fe"]],
+      modelEn:"Lamentations is carefully structured to show that even sorrow is ordered. Chapters 1, 2, and 4 are each acrostic poems of twenty-two verses, one verse for each letter of the Hebrew alphabet from aleph to tau. Chapter 3, the longest, has sixty-six verses arranged in twenty-two triads, three verses for each Hebrew letter. Chapter 5 also has twenty-two verses but without the acrostic pattern. This deliberate ordering shows that biblical lament is not a loss of faith but one of the languages of faith: grief has been carefully shaped, and even tears can be poured into a vessel. The structure teaches that lament is an ordered, faithful way of bringing pain honestly before God.",
+      modelEs:"Lamentaciones está cuidadosamente estructurado para mostrar que aun el dolor tiene orden. Los capítulos 1, 2 y 4 son cada uno poemas acrósticos de veintidós versículos, un versículo por cada letra del alfabeto hebreo desde alef hasta tav. El capítulo 3, el más largo, tiene sesenta y seis versículos dispuestos en veintidós tríadas, tres versículos por cada letra hebrea. El capítulo 5 también tiene veintidós versículos pero sin el patrón acróstico. Este ordenamiento deliberado muestra que el lamento bíblico no es pérdida de fe sino uno de los lenguajes de la fe: el dolor ha sido cuidadosamente moldeado, y aun las lágrimas pueden verterse en una vasija. La estructura enseña que el lamento es una manera ordenada y fiel de llevar el dolor con sinceridad ante Dios." },
+    { id:28, en:"28. Explain why Lamentations 3:22–23 is considered the heart of the book and where it must be read from.",
+      es:"28. Explique por qué Lamentaciones 3:22–23 se considera el corazón del libro y desde dónde debe leerse.",
+      kw_en:[["mercy", "mercies", "great love", "steadfast love", "compassion"], ["compassion", "compassions never fail", "compassions"], ["new", "new every morning"], ["morning", "every morning"], ["faithfulness", "great is your faithfulness", "faithful"], ["ashes", "ruined city", "rubble", "burned jerusalem", "in the ashes"], ["hope", "forged in furnaces", "heart of the book"]],
+      kw_es:[["misericordia", "misericordias", "gran amor", "amor firme", "compasión"], ["compasión", "misericordias nunca decaen", "compasiones"], ["nuevas", "nuevas cada mañana"], ["mañana", "cada mañana"], ["fidelidad", "grande es tu fidelidad", "fiel"], ["cenizas", "ciudad arruinada", "escombros", "jerusalén quemada", "en las cenizas"], ["esperanza", "forjada en hornos", "corazón del libro"]],
+      modelEn:"Lamentations 3:22-23 is considered the heart of the book: 'Because of the LORD's great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness.' It must be read in light of where it is spoken. This is not said on a sunny morning by a comfortable man; it is spoken by a prophet sitting in the ashes of his ruined hometown, surrounded by the smoking rubble of Jerusalem. Hope of that quality is only ever forged in furnaces. The verse stands at the center of the central chapter, a flash of light breaking out of the deepest darkness, teaching that God's steadfast mercy is new every morning even when everything else has been lost.",
+      modelEs:"Lamentaciones 3:22-23 se considera el corazón del libro: 'Por la misericordia del SEÑOR no hemos sido consumidos, porque nunca decayeron sus misericordias. Nuevas son cada mañana; grande es tu fidelidad.' Debe leerse a la luz de dónde se dice. Esto no se dice en una mañana soleada por un hombre cómodo; lo dice un profeta sentado en las cenizas de su ciudad natal arruinada, rodeado de los escombros humeantes de Jerusalén. La esperanza de esa calidad solo se forja en hornos. El versículo está en el centro del capítulo central, un destello de luz que irrumpe desde la más profunda oscuridad, enseñando que la misericordia firme de Dios es nueva cada mañana aun cuando todo lo demás se ha perdido." },
+    { id:29, en:"29. Trace the parallels between Jeremiah weeping over Jerusalem and Jesus weeping over Jerusalem six hundred years later.",
+      es:"29. Trace los paralelos entre Jeremías llorando sobre Jerusalén y Jesús llorando sobre Jerusalén seiscientos años después.",
+      kw_en:[["weeping", "wept", "weep over jerusalem"], ["jerusalem", "the city", "same stones"], ["jesus", "christ", "another prophet"], ["matthew", "matthew 23", "o jerusalem", "hen and brood"], ["cheek", "give his cheek", "smiter", "struck the face"], ["smiter", "struck", "soldiers struck"], ["sorrows", "man of sorrows", "acquainted with grief"]],
+      kw_es:[["llorar", "lloró", "llorar sobre jerusalén"], ["jerusalén", "la ciudad", "mismas piedras"], ["jesús", "cristo", "otro profeta"], ["mateo", "mateo 23", "jerusalén jerusalén", "gallina y polluelos"], ["mejilla", "dar la mejilla", "al que hiere", "golpearon el rostro"], ["hiere", "golpeó", "los soldados golpearon"], ["dolores", "varón de dolores", "experimentado en quebranto"]],
+      modelEn:"There is a striking parallel between Jeremiah weeping over Jerusalem and Jesus weeping over the same city. Jeremiah, the weeping prophet, wept over Jerusalem as it fell in 586 B.C. More than six hundred years later, another Prophet stood on the Mount of Olives and wept over the same stones, crying, 'O Jerusalem, Jerusalem... how often would I have gathered your children together as a hen gathers her brood under her wings, and you would not!' (Matthew 23:37). Lamentations 3:30, 'Let him give his cheek to the smiter,' was fulfilled when Roman soldiers struck the face of the Son of God before Pilate. So Lamentations foreshadows Calvary and earns Jesus the title Isaiah gave Him: a man of sorrows, acquainted with grief.",
+      modelEs:"Hay un paralelo asombroso entre Jeremías llorando sobre Jerusalén y Jesús llorando sobre la misma ciudad. Jeremías, el profeta llorón, lloró sobre Jerusalén mientras caía en el 586 a.C. Más de seiscientos años después, otro Profeta se paró en el Monte de los Olivos y lloró sobre las mismas piedras, clamando: '¡Jerusalén, Jerusalén... cuántas veces quise juntar a tus hijos, como la gallina junta sus polluelos bajo las alas, y no quisiste!' (Mateo 23:37). Lamentaciones 3:30, 'Dé la mejilla al que le hiere,' se cumplió cuando los soldados romanos golpearon el rostro del Hijo de Dios ante Pilato. Así Lamentaciones prefigura el Calvario y le gana a Jesús el título que Isaías le dio: varón de dolores, experimentado en quebranto." },
+    { id:30, en:"30. State and explain the two convictions we carry away from this unit and how they shape Christian ministry today.",
+      es:"30. Indique y explique las dos convicciones que llevamos de esta unidad y cómo dan forma al ministerio cristiano hoy.",
+      kw_en:[["faithfulness", "faithful", "endurance"], ["success", "not visible success", "not popularity", "not numbers"], ["endurance", "perseverance", "keep going", "without the harvest"], ["hope", "steadfast love", "mercy new", "new every morning"], ["brokenhearted", "broken", "grief", "the brokenhearted discover"], ["mercy", "steadfast love", "great is faithfulness"], ["new", "new every morning", "fresh"]],
+      kw_es:[["fidelidad", "fiel", "perseverancia"], ["éxito", "no éxito visible", "no popularidad", "no números"], ["perseverancia", "resistencia", "seguir adelante", "sin la cosecha"], ["esperanza", "amor firme", "misericordia nueva", "nueva cada mañana"], ["quebrantado", "quebrado", "dolor", "los quebrantados descubren"], ["misericordia", "amor firme", "grande es la fidelidad"], ["nueva", "nueva cada mañana", "fresca"]],
+      modelEn:"Two convictions are carried away from this unit. First, faithfulness in ministry is not measured by visible success: the Lord rewards endurance, not popularity, and many of His best servants — Jeremiah among them — die without ever seeing the harvest. If you are tired from work no one notices, you are in good company. Second, there is a kind of hope only the brokenhearted ever discover — a steadfast love that is new every morning, a faithfulness great enough to be sung over the ashes of a ruined city. That hope was first written down by a weeping prophet on a hillside. Together these convictions shape ministry by freeing us to be faithful without needing visible results, and to find unshakable hope in God's mercy even in the deepest grief.",
+      modelEs:"Dos convicciones se llevan de esta unidad. Primera, la fidelidad en el ministerio no se mide por el éxito visible: el Señor recompensa la perseverancia, no la popularidad, y muchos de Sus mejores siervos — Jeremías entre ellos — mueren sin ver jamás la cosecha. Si estás cansado de una obra que nadie nota, estás en buena compañía. Segunda, hay una clase de esperanza que solo los quebrantados de corazón descubren — un amor firme que es nuevo cada mañana, una fidelidad lo bastante grande para cantarse sobre las cenizas de una ciudad arruinada. Esa esperanza fue escrita primero por un profeta llorón en una ladera. Juntas estas convicciones moldean el ministerio al liberarnos para ser fieles sin necesitar resultados visibles, y para hallar esperanza inquebrantable en la misericordia de Dios aun en el dolor más profundo." }
+];
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed[idx]) {
+                btn.classList.add('locked');
+                if (letter === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2'; btn.style.borderColor = '#d4af37'; btn.style.fontWeight = '600';
+            }
+            btn.onclick = function() {
+                if (mcRevealed[idx] || unitPassed) return;
+                mcAnswers[idx] = letter;
+                mcRevealed[idx] = true;
+                saveState();
+                renderQuestions();
+            };
+            div.appendChild(btn);
+        });
+
+        if (mcRevealed[idx]) renderMCFeedback(div, q, idx, true);
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMastersLevel() ? ('Short Answer (Questions 21–30) — ' + (getTrack()==='thm' ? 'Master of Theology' : 'Master of Divinity') + ' (graded, 9/10 to pass)') : 'Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMastersLevel() ? ('Respuesta Corta (Preguntas 21–30) — ' + (getTrack()==='thm' ? 'Maestría en Teología' : 'Maestría en Divinidad') + ' (calificado, 9/10 para aprobar)') : 'Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here...' : 'Escriba su respuesta aquí...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.addEventListener('input', (e) => { kwAnswers[idx] = e.target.value; saveState(); });
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+
+        checkBtn.onclick = function() {
+            const result = gradeSA(q, textarea.value);
+            if (result.tooShort) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a sentence).' : 'Escriba una respuesta más completa (al menos una oración).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else if (result.pass) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? '✓ Your answer includes the key concepts.' : '✓ Su respuesta incluye los conceptos clave.';
+                feedbackDiv.className = 'feedback-text correct';
+            } else {
+                feedbackDiv.innerHTML = currentLang === 'en' ? `✗ Try to include more of: ${result.missing.join(', ')}.` : `✗ Intente incluir más de: ${result.missing.join(', ')}.`;
+                feedbackDiv.className = 'feedback-text incorrect';
+            }
+        };
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.cssText = 'display:none;margin-top:10px;padding:12px 14px;border-left:4px solid #c9a961;background:#fdf9ed;border-radius:3px;font-size:.92rem;line-height:1.5;';
+        const modelBtn = document.createElement('button');
+        modelBtn.className = 'small';
+        modelBtn.style.marginLeft = '6px';
+        modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+        modelBtn.onclick = function() {
+            if ((textarea.value || '').trim().length < 100) {
+                feedbackDiv.className = 'feedback-text incorrect';
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a sentence) — then you can compare it with the model.' : 'Escriba primero su propia respuesta (al menos una oración) — luego podrá compararla con el modelo.';
+                return;
+            }
+            if (modelBox.style.display === 'none') {
+                modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estúdiela:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+                modelBox.style.display = 'block';
+                modelBtn.textContent = currentLang === 'en' ? 'Hide model answer' : 'Ocultar respuesta modelo';
+            } else {
+                modelBox.style.display = 'none';
+                modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(modelBtn);
+        div.appendChild(feedbackDiv);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+    });
+}
+
+function renderMCFeedback(div, q, idx, skipRedraw) {
+    if (!skipRedraw) {
+        const buttons = div.querySelectorAll('.option');
+        buttons.forEach(btn => {
+            const letter = btn.textContent.charAt(0);
+            btn.classList.add('locked');
+            btn.classList.remove('correct', 'wrong');
+            if (letter === q.correct) btn.classList.add('correct');
+            else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+        });
+    }
+    let existing = div.querySelector('.feedback-text');
+    if (existing) existing.remove();
+    const fb = document.createElement('div');
+    const correct = (mcAnswers[idx] === q.correct);
+    fb.className = 'feedback-text ' + (correct ? 'correct' : 'incorrect');
+    if (correct) {
+        fb.innerHTML = '✓ ' + (currentLang === 'en' ? q.fcEn : q.fcEs);
+    } else {
+        const correctLetter = q.correct;
+        fb.innerHTML = (currentLang === 'en' ? `✗ Correct answer: ${correctLetter}. ` : `✗ Respuesta correcta: ${correctLetter}. `) + (currentLang === 'en' ? q.fiEn : q.fiEs);
+    }
+    div.appendChild(fb);
+}
+
+function gradeSA(q, answer) {
+    const text = (answer || '').toLowerCase().trim();
+    if (text.length < 100) return { tooShort: true, pass: false, missing: [] };
+    const isEs = document.body.classList.contains('lang-es');
+    const groups = isEs ? q.kw_es : q.kw_en;
+    const missing = [];
+    let matched = 0;
+    groups.forEach(group => {
+        const hit = group.some(term => text.includes(term.toLowerCase()));
+        if (hit) matched++;
+        else missing.push(group[0]);
+    });
+    const need = Math.max(2, Math.ceil(groups.length * 0.4));
+    return { tooShort: false, pass: matched >= need, missing };
+}
+
+function submitExam() {
+    saveReg();
+    if (!student.name || !student.email) {
+        alert(currentLang === 'en' ? 'Please fill in your registration first.' : 'Por favor complete su registro primero.');
+        return;
+    }
+    if (unitPassed) {
+        showResult('pass', currentLang === 'en' ? '✅ Unit 10 already passed. You may proceed.' : '✅ Unidad 10 ya aprobada. Puede continuar.');
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        showResult('locked', currentLang === 'en' ? `⏰ Locked for ${wait} more minute(s).` : `⏰ Bloqueado por ${wait} minuto(s) más.`);
+        return;
+    }
+
+    for (let i = 0; i < mcRevealed.length; i++) mcRevealed[i] = true;
+    renderQuestions();
+    let mcCorrect = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === mcQuestions[i].correct) mcCorrect++;
+    }
+
+    let saCorrect = 0;
+    if (isMastersLevel()) {
+        for (let i = 0; i < 10; i++) {
+            const r = gradeSA(kwQuestions[i], kwAnswers[i]);
+            if (!r.tooShort && r.pass) saCorrect++;
+        }
+    }
+    const mcOk = mcCorrect >= PASS_THRESHOLD_MC;
+    const saOk = saCorrect >= PASS_THRESHOLD_SA;
+
+    function passUnit(detail) {
+        unitPassed = true;
+        localStorage.setItem(UNIT_PASSED_KEY, 'true');
+        progress[`unit${UNIT_NUM}`] = true;
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(SA_LOCK_KEY);
+        const msg = currentLang === 'en'
+            ? `✅ PASSED. ${detail}. Unit 10 complete! Your answers are marked below. Review them, then continue when ready.`
+            : `✅ APROBADO. ${detail}. ¡Unidad 10 completa! Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.`;
+        showResult('pass', msg);
+        updateProgressGrid();
+    }
+
+    if (!isMastersLevel()) {
+        const detail = currentLang === 'en' ? `MC: ${mcCorrect}/20 (need 18)` : `OM: ${mcCorrect}/20 (necesita 18)`;
+        if (mcOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+                : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        const detail = currentLang === 'en'
+            ? `MC: ✓ banked · SA: ${saCorrect}/10 (need 9)`
+            : `OM: ✓ en banco · RC: ${saCorrect}/10 (necesita 9)`;
+        if (saOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Your multiple-choice pass is safe. ${detail}. Review the lesson and try the short-answer section again in ${lockMinutes()} minute(s).`
+                : `Su aprobación de opción múltiple está a salvo. ${detail}. Repase la lección y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    const detail = currentLang === 'en'
+        ? `MC: ${mcCorrect}/20 (need 18) · SA: ${saCorrect}/10 (need 9)`
+        : `OM: ${mcCorrect}/20 (necesita 18) · RC: ${saCorrect}/10 (necesita 9)`;
+    if (mcOk && saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit(detail);
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `MC ${mcCorrect}/20 ✓ passed and banked. SA ${saCorrect}/10 (need 9). When you try again in ${lockMinutes()} minute(s), you'll only need to resubmit the short answers — MC stays passed.`
+            : `OM ${mcCorrect}/20 ✓ aprobado y guardado. RC ${saCorrect}/10 (necesita 9). Al reintentar en ${lockMinutes()} minuto(s), solo necesitará reenviar las respuestas cortas — el OM permanece aprobado.`;
+        showResult('fail', msg);
+        startLockTimer();
+    } else {
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+            : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+        showResult('fail', msg);
+        startLockTimer();
+    }
+}
+
+function showResult(cls, html) {
+    const r = document.getElementById('examResult');
+    r.style.display = 'block';
+    r.className = 'exam-result ' + cls;
+    r.innerHTML = html;
+}
+
+function startLockTimer() {
+    const r = document.getElementById('examResult');
+    const interval = setInterval(() => {
+        const remaining = lockUntil - Date.now();
+        if (remaining <= 0) { clearInterval(interval); r.innerHTML += currentLang === 'en' ? '<br><em>Lockout ended. You may retry.</em>' : '<br><em>Bloqueo terminado. Puede reintentar.</em>'; return; }
+        const m = Math.floor(remaining / 60000);
+        const s = Math.floor((remaining % 60000) / 1000);
+        const note = currentLang === 'en' ? `<br>⏱️ Locked: ${m}:${String(s).padStart(2,'0')}` : `<br>⏱️ Bloqueado: ${m}:${String(s).padStart(2,'0')}`;
+        const base = r.innerHTML.split('<br>⏱️')[0];
+        r.innerHTML = base + note;
+    }, 1000);
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? 'Reset this unit? All your answers and pass status for Unit 10 will be cleared. (Your name, email, and other units are not affected.)'
+        : '¿Reiniciar esta unidad? Todas sus respuestas y el estado de aprobación para la Unidad 10 se borrarán. (Su nombre, correo y otras unidades no se afectan.)';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcRevealed = new Array(20).fill(false);
+    unitPassed = false;
+    mcPreviouslyPassed = false;
+    lockUntil = 0;
+    localStorage.removeItem(UNIT_STATE_KEY);
+    localStorage.removeItem(UNIT_PASSED_KEY);
+    localStorage.removeItem(LOCKOUT_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    if (progress[`unit${UNIT_NUM}`]) {
+        delete progress[`unit${UNIT_NUM}`];
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+    }
+    document.getElementById('examResult').style.display = 'none';
+    renderQuestions();
+    updateProgressGrid();
+}
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') { currentLang = 'es'; document.body.className = 'lang-es'; this.textContent = 'English'; }
+    else { currentLang = 'en'; document.body.className = 'lang-en'; this.textContent = 'Español'; }
+    renderTrackBanner(); renderReadout(); renderQuestions();
+};
+
+// ========== REGISTRATION READOUT (read-only on Units 2-13) ==========
+function renderReadout() {
+    const el = document.getElementById('regReadout');
+    if (!el) return;
+    const saved = localStorage.getItem(STUDENT_KEY);
+    const en = (currentLang !== 'es');
+    if (!saved) {
+        el.innerHTML = en
+            ? 'No registration found. Please <a href="CTSUnit1.html">register on Unit 1</a> before taking this exam.'
+            : 'No se encontr\u00f3 registro. Por favor <a href="CTSUnit1.html">reg\u00edstrese en la Unidad 1</a> antes de tomar este examen.';
+        el.className = 'reg-readout missing';
+        return;
+    }
+    const st = JSON.parse(saved);
+    const progLabel = st.program || 'Certificate of Ministry';
+    const lblName = en ? 'Name' : 'Nombre';
+    const lblEmail = en ? 'Email' : 'Correo';
+    const lblCountry = en ? 'Country' : 'Pa\u00eds';
+    const lblProg = en ? 'Program' : 'Programa';
+    const note = en
+        ? 'Registered on Unit 1. To change your details, return to Unit 1.'
+        : 'Registrado en la Unidad 1. Para cambiar sus datos, vuelva a la Unidad 1.';
+    el.innerHTML =
+        '<div class="reg-readout-grid">' +
+        '<div><strong>' + lblName + ':</strong> ' + (st.name||'') + '</div>' +
+        '<div><strong>' + lblEmail + ':</strong> ' + (st.email||'') + '</div>' +
+        '<div><strong>' + lblCountry + ':</strong> ' + (st.country||'') + '</div>' +
+        '<div><strong>' + lblProg + ':</strong> ' + progLabel + '</div>' +
+        '</div><div class="reg-readout-note">' + note + '</div>';
+    el.className = 'reg-readout';
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+loadReg();
+renderReadout();
+loadState();
+updateProgressGrid();
+renderTrackBanner();
+renderQuestions();
+if (unitPassed) showResult('pass', currentLang === 'en' ? '✅ Unit 10 already passed.' : '✅ Unidad 10 ya aprobada.');
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSOTSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

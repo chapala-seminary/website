@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How We Got the Bible — Unit 5: The Manuscripts</title>
+<style>
+  :root{
+    --green:#2c5f2d; --green-d:#1f4420; --gold:#d4af37; --cream:#faf7f0;
+    --parch:#f3ecdd; --ink:#2b2721; --muted:#6b6355; --line:#e2d9c4;
+    --hl:#efe7d2; --ok:#2c5f2d; --no:#a23b32;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:Georgia,'Times New Roman',serif; color:var(--ink);
+    background:var(--cream); line-height:1.6;
+  }
+  body.lang-en .lang-es{display:none;}
+  body.lang-es .lang-en{display:none;}
+  .wrap{max-width:820px; margin:0 auto; padding:0 18px 60px;}
+  header.masthead{
+    background:linear-gradient(135deg,var(--green),var(--green-d));
+    color:#fff; padding:26px 18px 22px; text-align:center;
+    border-bottom:4px solid var(--gold);
+  }
+  header.masthead .course{font-size:.82rem; letter-spacing:2px; text-transform:uppercase; opacity:.9;}
+  header.masthead h1{margin:6px 0 2px; font-size:1.5rem;}
+  header.masthead .unit{font-size:1rem; color:#f1e6bf; margin-top:4px;}
+  .toolbar{
+    display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+    background:var(--parch); padding:10px; border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:5;
+  }
+  .toggle-btn{
+    background:var(--green); color:#fff; border:none; padding:8px 14px;
+    border-radius:6px; font-family:inherit; font-size:.9rem; cursor:pointer; font-weight:600;
+  }
+  .toggle-btn:hover{background:var(--green-d);}
+  .amber-note{
+    background:#fff6df; border:1px solid var(--gold); color:#7a5c12;
+    padding:8px 12px; border-radius:6px; font-size:.82rem; margin:14px 0;
+  }
+  .track-select{
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+    background:#fff; border:1px solid var(--line); border-radius:8px;
+    padding:12px 14px; margin:16px 0; font-size:.95rem;
+  }
+  .track-select > span{font-weight:bold; color:var(--muted); margin-right:4px;}
+  .track-btn{
+    background:#efe9db; color:var(--ink); border:1px solid var(--line);
+    padding:6px 12px; border-radius:20px; font-family:inherit; cursor:pointer; font-size:.88rem;
+  }
+  .track-btn.active{background:var(--green); color:#fff; border-color:var(--green);}
+  h3{
+    color:var(--green-d); font-size:1.18rem; margin:30px 0 8px;
+    border-bottom:2px solid var(--gold); padding-bottom:5px;
+  }
+  section.teach p{margin:10px 0;}
+  blockquote.verse{
+    margin:14px 0; padding:10px 16px; border-left:4px solid var(--gold);
+    background:var(--parch); font-style:italic; color:#4a4335;
+  }
+  .aside{
+    margin:16px 0; padding:14px 18px; background:var(--green);
+    color:#fff; border-radius:8px; font-size:1.05rem; text-align:center;
+    font-style:italic;
+  }
+  .exam{background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px; margin:26px 0;}
+  .exam h2{color:var(--green-d); font-size:1.25rem; margin:0 0 4px; border-bottom:2px solid var(--gold); padding-bottom:6px;}
+  .exam .lead{font-size:.9rem; color:var(--muted); margin:6px 0 14px;}
+  .question{margin:0 0 18px; padding-bottom:6px; border-bottom:1px dashed var(--line);}
+  .qtext{font-weight:bold; margin:0 0 8px;}
+  .option{
+    display:block; width:100%; text-align:left; margin:5px 0; padding:9px 12px;
+    background:#fbf9f3; border:1px solid var(--line); border-radius:6px;
+    font-family:inherit; font-size:.95rem; cursor:pointer; color:var(--ink);
+  }
+  .option:hover{background:var(--hl);}
+  .option.correct{background:#e4f0e0; border-color:var(--ok); color:#1f4420; font-weight:600;}
+  .option.wrong{background:#f6e2df; border-color:var(--no); color:#7a2a23;}
+  .feedback-text{margin:8px 0 2px; padding:8px 10px; border-radius:6px; font-size:.9rem;}
+  .feedback-text.correct{background:#e4f0e0; color:#1f4420;}
+  .feedback-text.incorrect{background:#f6e2df; color:#7a2a23;}
+  textarea{
+    width:100%; font-family:inherit; font-size:.95rem; padding:10px;
+    border:1px solid var(--line); border-radius:6px; resize:vertical; background:#fbf9f3;
+  }
+  .sa-note{font-size:.85rem; color:var(--muted); margin:2px 0 14px;}
+  .btn-primary{
+    background:var(--gold); color:#3a2f0a; border:none; padding:11px 20px;
+    border-radius:6px; font-family:inherit; font-weight:bold; font-size:1rem; cursor:pointer;
+  }
+  .btn-primary:hover{filter:brightness(1.05);}
+  .result{display:none; margin-top:14px; padding:12px 14px; border-radius:8px; font-weight:600;}
+  .result.pass{background:#e4f0e0; color:#1f4420; border:1px solid var(--ok);}
+  .result.fail{background:#f6e2df; color:#7a2a23; border:1px solid var(--no);}
+  .result.progress{display:block; background:#f3ecdd; color:#5c5443; border:1px solid var(--line); font-weight:600;}
+  .completion{
+    display:none; margin:22px 0; padding:16px; background:var(--green);
+    color:#fff; border-radius:10px; text-align:center; font-size:1.05rem; font-weight:600;
+  }
+  .foot-nav{display:flex; justify-content:center; gap:10px; margin:30px 0 0; flex-wrap:wrap;}
+  .foot-nav a{
+    background:var(--green); color:#fff; text-decoration:none; padding:10px 18px;
+    border-radius:6px; font-weight:600; font-size:.95rem;
+  }
+</style>
+</head>
+<body class="lang-en">
+
+
+<header class="masthead">
+  <div class="course"><span class="lang-en">How We Got the Bible</span><span class="lang-es">Cómo Obtuvimos la Biblia</span></div>
+  <h1><span class="lang-en">The Witnesses Themselves: The Manuscript Gallery</span><span class="lang-es">Los Testigos Mismos: La Galería de Manuscritos</span></h1>
+  <div class="unit"><span class="lang-en">Unit 5 — The Manuscripts</span><span class="lang-es">Unidad 5 — Los Manuscritos</span></div>
+</header>
+
+<div class="toolbar">
+  <button class="toggle-btn" id="langToggleBtn" onclick="toggleLang()">Español</button>
+  <a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+</div>
+
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSBibleUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSBibleUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSBibleUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSBibleUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSBibleUnit5.html" title="Unit 5 · Unidad 5" class="active">5</a><a href="CTSBibleUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSBibleUnit7.html" title="Unit 7 · Unidad 7">7</a><a href="CTSBibleUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSBibleUnit9.html" title="Unit 9 · Unidad 9">9</a><a href="CTSBibleUnit10.html" title="Unit 10 · Unidad 10">10</a></nav>
+
+
+  <div class="track-select">
+    <span class="lang-en">Your track:</span><span class="lang-es">Tu vía:</span>
+    <button id="track-cert" class="track-btn" onclick="setTrack('cert')"><span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></button><button id="track-assoc" class="track-btn" onclick="setTrack('assoc')"><span class="lang-en">Associate</span><span class="lang-es">Asociado</span></button>
+    <button id="track-thm" class="track-btn" onclick="setTrack('thm')">Th.M.</button>
+    <button id="track-mdiv" class="track-btn" onclick="setTrack('mdiv')">M.Div.</button>
+  </div>
+
+  <!-- ===================== TEACHING ===================== -->
+
+  <section class="teach">
+    <h3><span class="lang-en">1. Meeting the Witnesses One by One</span><span class="lang-es">1. Conociendo a los Testigos Uno por Uno</span></h3>
+    <div class="lang-en"><p>In the last unit we met the witnesses only as a crowd — a number, five thousand strong. That number answered the skeptic, but numbers can feel abstract. So let us now walk the gallery and meet the witnesses one by one: the actual manuscripts, some no larger than a bank card, some great volumes of fine parchment, and one collection of scrolls hidden in a desert cave for nearly two thousand years. Remember what kind of evidence they give. As Unit 1 taught, they do not offer proof in the strict sense, and they cannot hand us inspiration; what they offer is corroboration — the honest confirming of a claim — and they offer it powerfully. Each of these witnesses does two things. It confirms that the text we hold was carried down faithfully and from an early date. And it answers, quietly and concretely, some specific charge that skeptics have made against the Bible. We will walk first among the New Testament witnesses — the early papyri, then the two great codices of the fourth century — and then cross to the Old Testament and its single most dramatic confirmation, the Dead Sea Scrolls. Let the witnesses speak for themselves.</p></div>
+    <div class="lang-es"><p>En la última unidad conocimos a los testigos solo como una multitud — un número, cinco mil en total. Ese número respondió al escéptico, pero los números pueden sentirse abstractos. Así que caminemos ahora por la galería y conozcamos a los testigos uno por uno: los manuscritos mismos, algunos no más grandes que una tarjeta bancaria, algunos grandes volúmenes de pergamino fino, y una colección de rollos escondidos en una cueva del desierto por casi dos mil años. Recuerda qué clase de evidencia dan. Como enseñó la Unidad 1, no ofrecen prueba en sentido estricto, y no pueden entregarnos la inspiración; lo que ofrecen es corroboración — la confirmación honesta de una afirmación — y la ofrecen con fuerza. Cada uno de estos testigos hace dos cosas. Confirma que el texto que tenemos fue llevado fielmente y desde una fecha temprana. Y responde, callada y concretamente, a alguna acusación específica que los escépticos han hecho contra la Biblia. Caminaremos primero entre los testigos del Nuevo Testamento — los papiros tempranos, luego los dos grandes códices del siglo cuarto — y luego cruzaremos al Antiguo Testamento y a su confirmación más dramática, los Rollos del Mar Muerto. Que los testigos hablen por sí mismos.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">2. P52: The Smallest Witness, the Largest Answer</span><span class="lang-es">2. P52: El Testigo Más Pequeño, la Respuesta Más Grande</span></h3>
+    <div class="aside"><span class="lang-en">The smallest manuscript answers one of the largest claims.</span><span class="lang-es">El manuscrito más pequeño responde a una de las afirmaciones más grandes.</span></div>
+    <div class="lang-en"><p>Our first witness is also our smallest: a fragment of papyrus no larger than the palm of your hand, known as P52 or the Rylands fragment, now kept in Manchester. On it are a few verses of the Gospel of John, from the trial before Pilate. It is dated by the shape of its letters to about the first half of the second century — and it was found in Egypt, far from where John wrote. That small fact carries great weight. A school of skeptics had long taught that the Gospel of John was written late, well into the second century, too late to rest on the apostle's own testimony. But if a copy of John was already being read in Egypt by around AD 125, the original cannot have been written in the 160s; it must go back into the first century, within living memory of the events. The dating of the fragment is approximate, and scholars still debate the exact decade. But the point stands: the smallest manuscript in the gallery answers one of the largest claims ever made against the Gospels.</p></div>
+    <div class="lang-es"><p>Nuestro primer testigo es también el más pequeño: un fragmento de papiro no más grande que la palma de tu mano, conocido como P52 o el fragmento Rylands, hoy guardado en Manchester. En él hay unos pocos versículos del Evangelio de Juan, del juicio ante Pilato. Se fecha, por la forma de sus letras, hacia la primera mitad del siglo segundo — y fue hallado en Egipto, lejos de donde Juan escribió. Ese pequeño hecho lleva gran peso. Una escuela de escépticos había enseñado por mucho tiempo que el Evangelio de Juan se escribió tarde, bien entrado el siglo segundo, demasiado tarde para descansar en el propio testimonio del apóstol. Pero si una copia de Juan ya se leía en Egipto hacia el año 125, el original no pudo haberse escrito en los años 160; debe remontarse al siglo primero, dentro de la memoria viva de los hechos. La datación del fragmento es aproximada, y los eruditos aún debaten la década exacta. Pero el punto se mantiene: el manuscrito más pequeño de la galería responde a una de las afirmaciones más grandes jamás hechas contra los Evangelios.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">3. P46 and the Gathered Letters of Paul</span><span class="lang-es">3. P46 y las Cartas Reunidas de Pablo</span></h3>
+    <div class="lang-en"><p>Our next witness is a book of Paul. P46, part of the Chester Beatty collection, dates from about the year 200, and it is the earliest substantial copy we have of the letters of Paul gathered together. In its surviving leaves it carries most of the Pauline corpus — Romans, the Corinthian letters, Galatians, Ephesians, Philippians, Colossians, Thessalonians — and Hebrews among them. Think about what that means. Within roughly a hundred and fifty years of Paul's own hand, his letters were not scattered and half-forgotten; they had been gathered into a collection, copied as a set, and were circulating among the churches as a treasured body of Scripture. The words the apostle wrote to Rome and Corinth were valued and guarded and passed on early, not composed or corrupted in some later age. P46 lets us hold, in effect, the church's own working copy of Paul from a time close to the source.</p></div>
+    <div class="lang-es"><p>Nuestro siguiente testigo es un libro de Pablo. P46, parte de la colección Chester Beatty, data de alrededor del año 200, y es la copia sustancial más antigua que tenemos de las cartas de Pablo reunidas. En sus hojas que sobreviven lleva la mayor parte del corpus paulino — Romanos, las cartas a los corintios, Gálatas, Efesios, Filipenses, Colosenses, Tesalonicenses — y Hebreos entre ellas. Piensa en lo que eso significa. Dentro de unos ciento cincuenta años de la propia mano de Pablo, sus cartas no estaban dispersas y medio olvidadas; habían sido reunidas en una colección, copiadas como un conjunto, y circulaban entre las iglesias como un cuerpo atesorado de Escritura. Las palabras que el apóstol escribió a Roma y a Corinto fueron valoradas y guardadas y transmitidas temprano, no compuestas ni corrompidas en alguna época posterior. P46 nos deja sostener, en efecto, la copia de trabajo de la iglesia de Pablo de un tiempo cercano a la fuente.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">4. P66, P75, and the Text That Did Not Drift</span><span class="lang-es">4. P66, P75, y el Texto que No se Desvió</span></h3>
+    <div class="lang-en"><p>Two more papyri, from the Bodmer collection, carry perhaps the most important lesson in the gallery. P66, from about the year 200, preserves nearly the whole Gospel of John. P75, a little earlier, preserves large portions of Luke and John. And here is the striking thing about P75: when scholars compared its text with that of Codex Vaticanus, one of the great manuscripts of the fourth century, they found the two remarkably close. Before this discovery, some had theorized that the careful text of Vaticanus was a polished creation of the fourth century, a scholarly edition made long after the fact. P75 dissolved that theory. The very same text was already there in the second century, reaching down to the fourth almost unchanged. This is the argument of Unit 4 made concrete and visible: across a hundred and fifty years of copying, the text did not drift. What a fourth-century scribe wrote, a second-century scribe had written before him. The Word was being preserved, and here we can watch it happen.</p></div>
+    <div class="lang-es"><p>Dos papiros más, de la colección Bodmer, llevan quizá la lección más importante de la galería. P66, de alrededor del año 200, preserva casi todo el Evangelio de Juan. P75, un poco anterior, preserva grandes porciones de Lucas y Juan. Y aquí está lo asombroso de P75: cuando los eruditos compararon su texto con el del Códice Vaticano, uno de los grandes manuscritos del siglo cuarto, hallaron los dos notablemente cercanos. Antes de este descubrimiento, algunos habían teorizado que el texto cuidadoso del Vaticano era una creación pulida del siglo cuarto, una edición erudita hecha mucho después. P75 disolvió esa teoría. El mismísimo texto ya estaba allí en el siglo segundo, llegando hasta el cuarto casi sin cambios. Este es el argumento de la Unidad 4 hecho concreto y visible: a través de ciento cincuenta años de copia, el texto no se desvió. Lo que un escriba del siglo cuarto escribió, un escriba del siglo segundo lo había escrito antes que él. La Palabra estaba siendo preservada, y aquí podemos verlo suceder.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">5. The Great Codices: Sinaiticus and Vaticanus</span><span class="lang-es">5. Los Grandes Códices: Sinaítico y Vaticano</span></h3>
+    <div class="lang-en"><p>Now to the two crowns of the gallery, the great codices of the fourth century, written not on fragile papyrus but on fine treated parchment, each once containing a whole Bible in Greek. Codex Vaticanus has been housed for centuries in the library of the Vatican, from which it takes its name; it is among the most carefully written manuscripts we possess. Codex Sinaiticus has a story worthy of a novel: it was found in the eighteen-hundreds by the scholar Constantin von Tischendorf at the ancient monastery of Saint Catherine, at the foot of Mount Sinai, its leaves nearly lost before he recognized their worth. Together these two are complete, early, and magnificent witnesses to the whole New Testament and to the Greek Old Testament. One honest note belongs here. These early manuscripts sometimes differ, in small ways, from the later Received Text that stands behind the King James Version and the Reina-Valera. How to weigh that difference is a real and worthy question — and it is precisely the question of our next unit. Here we simply let these great witnesses stand and be seen for what they are.</p></div>
+    <div class="lang-es"><p>Ahora a las dos coronas de la galería, los grandes códices del siglo cuarto, escritos no en papiro frágil sino en pergamino fino tratado, cada uno conteniendo alguna vez una Biblia entera en griego. El Códice Vaticano ha estado alojado por siglos en la biblioteca del Vaticano, de la cual toma su nombre; está entre los manuscritos más cuidadosamente escritos que poseemos. El Códice Sinaítico tiene una historia digna de una novela: fue hallado en el siglo diecinueve por el erudito Constantin von Tischendorf en el antiguo monasterio de Santa Catalina, al pie del Monte Sinaí, sus hojas casi perdidas antes de que él reconociera su valor. Juntos estos dos son testigos completos, tempranos y magníficos de todo el Nuevo Testamento y del Antiguo Testamento griego. Una nota honesta pertenece aquí. Estos manuscritos antiguos a veces difieren, de maneras pequeñas, del Texto Recibido posterior que está detrás de la Versión King James y la Reina-Valera. Cómo pesar esa diferencia es una pregunta real y digna — y es precisamente la pregunta de nuestra próxima unidad. Aquí simplemente dejamos que estos grandes testigos estén de pie y sean vistos por lo que son.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">6. The Dead Sea Scrolls: A Thousand-Year Test</span><span class="lang-es">6. Los Rollos del Mar Muerto: Una Prueba de Mil Años</span></h3>
+    <div class="aside"><span class="lang-en">A thousand years of copying — and the text held.</span><span class="lang-es">Mil años de copia — y el texto se mantuvo.</span></div>
+    <div class="lang-en"><p>We cross now to the Old Testament, and to the most dramatic confirmation in the whole gallery. In 1947 a Bedouin shepherd, searching for a lost goat among the cliffs near the Dead Sea at a place called Qumran, stumbled into a cave of clay jars — and inside them, scrolls that had lain hidden since the first century. More caves and more scrolls followed. Among them were portions of every book of the Old Testament but one, the book of Esther. And these copies were roughly a thousand years older than the oldest Hebrew manuscripts anyone had possessed before. The showpiece is the Great Isaiah Scroll, a complete copy of Isaiah from about 125 years before Christ. Now came the test that no one could have arranged: set that Isaiah beside the Masoretic Isaiah, copied a thousand years later, and compare them line by line. The result astonished the world. They are substantially identical. A thousand years of hand-copying had passed, and the text had held. The scribes of Unit 4 had done their work.</p></div>
+    <div class="lang-es"><p>Cruzamos ahora al Antiguo Testamento, y a la confirmación más dramática de toda la galería. En 1947 un pastor beduino, buscando una cabra perdida entre los acantilados cerca del Mar Muerto en un lugar llamado Qumrán, tropezó con una cueva de vasijas de barro — y dentro de ellas, rollos que habían yacido escondidos desde el siglo primero. Siguieron más cuevas y más rollos. Entre ellos había porciones de cada libro del Antiguo Testamento menos uno, el libro de Ester. Y estas copias eran unos mil años más antiguas que los manuscritos hebreos más antiguos que alguien había poseído antes. La pieza estelar es el Gran Rollo de Isaías, una copia completa de Isaías de unos 125 años antes de Cristo. Ahora vino la prueba que nadie pudo haber arreglado: pon ese Isaías al lado del Isaías masorético, copiado mil años después, y compáralos línea por línea. El resultado asombró al mundo. Son sustancialmente idénticos. Habían pasado mil años de copia a mano, y el texto se había mantenido. Los escribas de la Unidad 4 habían hecho su trabajo.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">7. What the Gallery Proves — and What It Does Not</span><span class="lang-es">7. Lo que la Galería Prueba — y lo que No</span></h3>
+    <div class="lang-en"><p>Let us now be honest about what the gallery has and has not shown, holding the discipline of Unit 1. What these manuscripts do not do: they do not hand us the autographs, the lost originals themselves, and they do not prove that the Bible is the inspired Word of God. Inspiration is confessed on other grounds; it is not dug out of the sand. To claim these manuscripts prove more than they do would be to strain a gnat and to promise what we cannot deliver. But see what they do, and it is a very great deal. They corroborate, with the weight of real evidence, that the text we hold is early and was faithfully preserved. They answer specific and famous charges — that John was written too late, that the fourth-century text was a late invention, that the Old Testament drifted across the centuries — and they answer each one. And they turn the number of Unit 4 into faces we can name. We refuse the skeptic's camel, that the manuscripts undermine the Word; we refuse the overclaim, that they prove all things; and we stand exactly where they stand.</p></div>
+    <div class="lang-es"><p>Seamos ahora honestos sobre lo que la galería ha mostrado y no ha mostrado, guardando la disciplina de la Unidad 1. Lo que estos manuscritos no hacen: no nos entregan los autógrafos, los originales perdidos mismos, y no prueban que la Biblia sea la Palabra inspirada de Dios. La inspiración se confiesa sobre otras bases; no se desentierra de la arena. Afirmar que estos manuscritos prueban más de lo que hacen sería colar un mosquito y prometer lo que no podemos cumplir. Pero mira lo que sí hacen, y es muchísimo. Corroboran, con el peso de evidencia real, que el texto que tenemos es temprano y fue preservado fielmente. Responden a acusaciones específicas y famosas — que Juan se escribió demasiado tarde, que el texto del siglo cuarto fue una invención tardía, que el Antiguo Testamento se desvió a través de los siglos — y responden a cada una. Y convierten el número de la Unidad 4 en rostros que podemos nombrar. Rechazamos el camello del escéptico, que los manuscritos socavan la Palabra; rechazamos la exageración, que prueban todas las cosas; y nos mantenemos exactamente donde ellos se mantienen.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">8. The Witnesses Have Spoken</span><span class="lang-es">8. Los Testigos Han Hablado</span></h3>
+    <div class="lang-en"><p>So the second witness has finished its testimony, given now both in the mass and one by one, and the testimony is consistent: the words you read were carried faithfully down the long centuries and are, in substance and in overwhelming detail, the words that were written. Yet along the way we have glimpsed one honest, unfinished question. The great early manuscripts we have just met sometimes differ, in a handful of places, from the later Received Text that underlies the King James and the Reina-Valera. That difference is real, and thoughtful, faithful Christians have weighed it in different ways. In the next unit we take it up directly — the Received Text and the Critical Text, what each is and how they differ — and we will find that even this in-house debate rests on solid ground. The question there is never whether we possess the Word of God. It is only, in a few places, which faithful reading to set upon the page.</p></div>
+    <div class="lang-es"><p>Así, el segundo testigo ha terminado su testimonio, dado ahora tanto en masa como uno por uno, y el testimonio es consistente: las palabras que lees fueron llevadas fielmente a través de los largos siglos y son, en sustancia y en abrumador detalle, las palabras que se escribieron. Sin embargo, en el camino hemos vislumbrado una pregunta honesta y sin terminar. Los grandes manuscritos antiguos que acabamos de conocer a veces difieren, en un puñado de lugares, del Texto Recibido posterior que subyace a la King James y a la Reina-Valera. Esa diferencia es real, y cristianos reflexivos y fieles la han pesado de maneras distintas. En la próxima unidad la tomamos directamente — el Texto Recibido y el Texto Crítico, qué es cada uno y cómo difieren — y hallaremos que aun este debate entre hermanos descansa sobre terreno firme. La pregunta allí nunca es si poseemos la Palabra de Dios. Es solo, en unos pocos lugares, cuál lectura fiel poner sobre la página.</p></div>
+  </section>
+
+  <!-- ===================== MULTIPLE CHOICE ===================== -->
+  <div class="exam">
+    <h2><span class="lang-en">Review — Multiple Choice</span><span class="lang-es">Repaso — Opción Múltiple</span></h2>
+    <div class="lead"><span class="lang-en">20 questions. Tap an answer and you will see at once whether it is right — with the correct answer and a short explanation. A score of 18 is required to pass.</span><span class="lang-es">20 preguntas. Toca una respuesta y verás de inmediato si es correcta — con la respuesta correcta y una breve explicación. Se requieren 18 para aprobar.</span></div>
+    <div id="mcContainer"></div>
+    <div id="mcResult" class="result"></div>
+    <button class="btn-primary" onclick="resetMC()" style="margin-top:12px;"><span class="lang-en">Reset Exam</span><span class="lang-es">Reiniciar Examen</span></button>
+  </div>
+
+  <!-- ===================== SHORT ANSWER ===================== -->
+  <div class="exam">
+    <h2><span class="lang-en">Written Work — Short Answer</span><span class="lang-es">Trabajo Escrito — Respuesta Corta</span></h2>
+    <div class="sa-note"><span class="lang-en">Required for the Th.M. and M.Div. tracks; optional (but encouraged) for the Certificate track. Write a few sentences; the model answer appears after a real attempt.</span><span class="lang-es">Requerido para las vías Th.M. y M.Div.; opcional (pero recomendado) para la vía de Certificado. Escribe unas cuantas oraciones; la respuesta modelo aparece tras un intento real.</span></div>
+    <div id="saContainer"></div>
+    <button class="btn-primary" onclick="gradeSA()"><span class="lang-en">Check My Answers</span><span class="lang-es">Revisar Mis Respuestas</span></button>
+  </div>
+
+  <div id="completionBanner" class="completion"></div>
+
+  <div class="foot-nav">
+    <a href="CTSBibleUnit4.html">← <span class="lang-en">Previous: Unit 4</span><span class="lang-es">Anterior: Unidad 4</span></a>
+    <a href="index.html"><span class="lang-en">📚 Return to Catalog</span><span class="lang-es">📚 Volver al Catálogo</span></a>
+    <a href="CTSBibleUnit6.html"><span class="lang-en">Next: Unit 6</span><span class="lang-es">Siguiente: Unidad 6</span> →</a>
+  </div>
+
+</div>
+
+<script>
+/* ===== CTS "How We Got the Bible" — Unit 5 — immediate-feedback engine ===== */
+const COURSE_PREFIX = 'cts_bible_u5_';
+function K(s){ return COURSE_PREFIX + s; }
+
+let currentLang = localStorage.getItem('cts_lang') || 'en';
+let track = localStorage.getItem('cts_track') || 'cert';
+let mcAnswers = new Array(20).fill('');
+let kwAnswers = new Array(10).fill('');
+let mcPreviouslyPassed = false;
+let unitPassed = false;
+
+const mcQuestions = [
+  { textEn:`Unit 4 met the manuscripts "in the mass, as a number." Unit 5 meets them:`, textEs:`La Unidad 4 conoció los manuscritos "en masa, como un número". La Unidad 5 los conoce:`,
+    optionsEn:[`Only through translations`,`One by one, as individual witnesses`,`As archaeology`,`As geography`],
+    optionsEs:[`Solo por medio de traducciones`,`Uno por uno, como testigos individuales`,`Como arqueología`,`Como geografía`],
+    correct:1, explanationEn:`Unit 5 is a gallery: the witnesses meet us one by one.`, explanationEs:`La Unidad 5 es una galería: los testigos nos salen al encuentro uno por uno.` },
+
+  { textEn:`What kind of evidence do the manuscripts primarily give, in the course's terms?`, textEs:`¿Qué clase de evidencia dan principalmente los manuscritos, en los términos del curso?`,
+    optionsEn:[`Corroboration of faithful transmission`,`Proof of inspiration`,`Nothing useful`,`Contradiction`],
+    optionsEs:[`Corroboración de la transmisión fiel`,`Prueba de la inspiración`,`Nada útil`,`Contradicción`],
+    correct:0, explanationEn:`They corroborate faithful transmission — corroboration, not proof.`, explanationEs:`Corroboran la transmisión fiel — corroboración, no prueba.` },
+
+  { textEn:`P52 (the Rylands fragment) is a small scrap of which book?`, textEs:`P52 (el fragmento Rylands) es un pequeño pedazo de cuál libro?`,
+    optionsEn:[`Romans`,`Isaiah`,`The Gospel of John`,`Genesis`],
+    optionsEs:[`Romanos`,`Isaías`,`El Evangelio de Juan`,`Génesis`],
+    correct:2, explanationEn:`P52 preserves a few verses of the Gospel of John.`, explanationEs:`P52 preserva unos pocos versículos del Evangelio de Juan.` },
+
+  { textEn:`P52, dated to about the first half of the second century, is significant because it:`, textEs:`P52, fechado hacia la primera mitad del siglo segundo, es significativo porque:`,
+    optionsEn:[`Proves the Bible is inspired`,`Shows John's Gospel was circulating early, answering the claim it was written too late`,`Contains the whole New Testament`,`Was written by John himself`],
+    optionsEs:[`Prueba que la Biblia es inspirada`,`Muestra que el Evangelio de Juan circulaba temprano, respondiendo a la afirmación de que se escribió demasiado tarde`,`Contiene todo el Nuevo Testamento`,`Fue escrito por Juan mismo`],
+    correct:1, explanationEn:`An early copy in Egypt means John was written in the first century.`, explanationEs:`Una copia temprana en Egipto significa que Juan se escribió en el siglo primero.` },
+
+  { textEn:`The skeptical claim that P52 answers is that:`, textEs:`La afirmación escéptica que P52 responde es que:`,
+    optionsEn:[`John was written in the first century`,`John never existed`,`John was written in Latin`,`The Gospel of John was a late second-century composition, too late to be apostolic`],
+    optionsEs:[`Juan se escribió en el siglo primero`,`Juan nunca existió`,`Juan se escribió en latín`,`El Evangelio de Juan fue una composición tardía del siglo segundo, demasiado tarde para ser apostólica`],
+    correct:3, explanationEn:`P52 answers the claim that John was a late, non-apostolic composition.`, explanationEs:`P52 responde a la afirmación de que Juan fue una composición tardía y no apostólica.` },
+
+  { textEn:`P46 (Chester Beatty) is the earliest substantial collection of:`, textEs:`P46 (Chester Beatty) es la colección sustancial más antigua de:`,
+    optionsEn:[`The Gospels`,`The Old Testament`,`Paul's epistles`,`The Apocrypha`],
+    optionsEs:[`Los Evangelios`,`El Antiguo Testamento`,`Las epístolas de Pablo`,`Los apócrifos`],
+    correct:2, explanationEn:`P46 is the earliest substantial copy of Paul's letters gathered.`, explanationEs:`P46 es la copia sustancial más antigua de las cartas de Pablo reunidas.` },
+
+  { textEn:`P46, from about AD 200, shows that Paul's letters were:`, textEs:`P46, de alrededor del año 200, muestra que las cartas de Pablo fueron:`,
+    optionsEn:[`Gathered and copied as a collection early`,`Invented in the Middle Ages`,`Never copied`,`Written by Peter`],
+    optionsEs:[`Reunidas y copiadas como colección temprano`,`Inventadas en la Edad Media`,`Nunca copiadas`,`Escritas por Pedro`],
+    correct:0, explanationEn:`Paul's letters were gathered and circulating early, not invented late.`, explanationEs:`Las cartas de Pablo fueron reunidas y circulaban temprano, no inventadas tarde.` },
+
+  { textEn:`The Bodmer papyrus P75 contains portions of:`, textEs:`El papiro Bodmer P75 contiene porciones de:`,
+    optionsEn:[`Luke and John`,`Genesis and Exodus`,`Revelation only`,`The Apocrypha`],
+    optionsEs:[`Lucas y Juan`,`Génesis y Éxodo`,`Solo Apocalipsis`,`Los apócrifos`],
+    correct:0, explanationEn:`P75 preserves large portions of Luke and John.`, explanationEs:`P75 preserva grandes porciones de Lucas y Juan.` },
+
+  { textEn:`The great importance of P75 is that its text is remarkably close to:`, textEs:`La gran importancia de P75 es que su texto es notablemente cercano a:`,
+    optionsEn:[`The Dead Sea Scrolls`,`Codex Vaticanus (4th century)`,`The Latin Vulgate`,`The King James Bible`],
+    optionsEs:[`Los Rollos del Mar Muerto`,`El Códice Vaticano (siglo cuarto)`,`La Vulgata latina`,`La Biblia King James`],
+    correct:1, explanationEn:`P75's text is very close to fourth-century Codex Vaticanus.`, explanationEs:`El texto de P75 es muy cercano al Códice Vaticano del siglo cuarto.` },
+
+  { textEn:`P75's closeness to Vaticanus overturned the theory that Vaticanus's text was:`, textEs:`La cercanía de P75 al Vaticano derribó la teoría de que el texto del Vaticano era:`,
+    optionsEn:[`A faithful copy`,`Written in Hebrew`,`Lost`,`A late fourth-century invention`],
+    optionsEs:[`Una copia fiel`,`Escrito en hebreo`,`Perdido`,`Una invención tardía del siglo cuarto`],
+    correct:3, explanationEn:`It disproved the idea that Vaticanus's text was a 4th-century invention.`, explanationEs:`Refutó la idea de que el texto del Vaticano era una invención del siglo cuarto.` },
+
+  { textEn:`What does the P75–Vaticanus agreement demonstrate?`, textEs:`¿Qué demuestra la concordancia entre P75 y el Vaticano?`,
+    optionsEn:[`The text drifted greatly over time`,`The autographs survive`,`The text was faithfully preserved across about 150 years, not drifting`,`Vaticanus is a forgery`],
+    optionsEs:[`El texto se desvió mucho con el tiempo`,`Los autógrafos sobreviven`,`El texto fue preservado fielmente a través de unos 150 años, sin desviarse`,`El Vaticano es una falsificación`],
+    correct:2, explanationEn:`It shows the text was faithfully preserved across ~150 years.`, explanationEs:`Muestra que el texto fue preservado fielmente a través de ~150 años.` },
+
+  { textEn:`Codex Sinaiticus and Codex Vaticanus both date from the:`, textEs:`El Códice Sinaítico y el Códice Vaticano datan ambos del:`,
+    optionsEn:[`First century`,`Fourth century`,`Tenth century`,`Sixteenth century`],
+    optionsEs:[`Siglo primero`,`Siglo cuarto`,`Siglo décimo`,`Siglo dieciséis`],
+    correct:1, explanationEn:`Both are fourth-century codices.`, explanationEs:`Ambos son códices del siglo cuarto.` },
+
+  { textEn:`Codex Sinaiticus was discovered by Constantin von Tischendorf at:`, textEs:`El Códice Sinaítico fue descubierto por Constantin von Tischendorf en:`,
+    optionsEn:[`St. Catherine's Monastery on Mount Sinai`,`The Vatican`,`Qumran`,`Rylands Library`],
+    optionsEs:[`El Monasterio de Santa Catalina en el Monte Sinaí`,`El Vaticano`,`Qumrán`,`La Biblioteca Rylands`],
+    correct:0, explanationEn:`Tischendorf found it at St. Catherine's Monastery, Mount Sinai.`, explanationEs:`Tischendorf lo halló en el Monasterio de Santa Catalina, Monte Sinaí.` },
+
+  { textEn:`The great codices (Sinaiticus, Vaticanus) are described in the unit as:`, textEs:`Los grandes códices (Sinaítico, Vaticano) se describen en la unidad como:`,
+    optionsEn:[`Forgeries`,`Medieval copies`,`The autographs`,`Complete, early, magnificent witnesses to the whole New Testament`],
+    optionsEs:[`Falsificaciones`,`Copias medievales`,`Los autógrafos`,`Testigos completos, tempranos y magníficos de todo el Nuevo Testamento`],
+    correct:3, explanationEn:`They are complete, early, magnificent witnesses to the whole NT.`, explanationEs:`Son testigos completos, tempranos y magníficos de todo el NT.` },
+
+  { textEn:`The unit notes these early manuscripts sometimes differ from the later Received Text, and that how to weigh this is:`, textEs:`La unidad nota que estos manuscritos antiguos a veces difieren del Texto Recibido posterior, y que cómo pesarlo es:`,
+    optionsEn:[`A settled question`,`The subject of Unit 6 (Received Text vs Critical Text)`,`Proof the Bible is false`,`Never discussed`],
+    optionsEs:[`Una cuestión zanjada`,`El tema de la Unidad 6 (Texto Recibido vs Texto Crítico)`,`Prueba de que la Biblia es falsa`,`Nunca discutido`],
+    correct:1, explanationEn:`How to weigh the difference is the subject of Unit 6.`, explanationEs:`Cómo pesar la diferencia es el tema de la Unidad 6.` },
+
+  { textEn:`The Dead Sea Scrolls were discovered in 1947 at:`, textEs:`Los Rollos del Mar Muerto fueron descubiertos en 1947 en:`,
+    optionsEn:[`Rome`,`Mount Sinai`,`Alexandria`,`Qumran, near the Dead Sea`],
+    optionsEs:[`Roma`,`El Monte Sinaí`,`Alejandría`,`Qumrán, cerca del Mar Muerto`],
+    correct:3, explanationEn:`They were found at Qumran near the Dead Sea in 1947.`, explanationEs:`Fueron hallados en Qumrán cerca del Mar Muerto en 1947.` },
+
+  { textEn:`The Dead Sea Scrolls contain portions of every Old Testament book except:`, textEs:`Los Rollos del Mar Muerto contienen porciones de cada libro del Antiguo Testamento excepto:`,
+    optionsEn:[`Genesis`,`Isaiah`,`Esther`,`Psalms`],
+    optionsEs:[`Génesis`,`Isaías`,`Ester`,`Salmos`],
+    correct:2, explanationEn:`Every OT book but Esther is represented among the scrolls.`, explanationEs:`Todo libro del AT menos Ester está representado entre los rollos.` },
+
+  { textEn:`The Great Isaiah Scroll is roughly ______ older than the previously-oldest Hebrew manuscripts.`, textEs:`El Gran Rollo de Isaías es aproximadamente ______ más antiguo que los manuscritos hebreos previamente más antiguos.`,
+    optionsEn:[`ten years`,`one hundred years`,`a thousand years`,`two years`],
+    optionsEs:[`diez años`,`cien años`,`mil años`,`dos años`],
+    correct:2, explanationEn:`The scrolls are about a thousand years older than the prior oldest.`, explanationEs:`Los rollos son unos mil años más antiguos que los anteriores más antiguos.` },
+
+  { textEn:`When the Isaiah Scroll is compared to the Masoretic text copied a thousand years later, it is:`, textEs:`Cuando el Rollo de Isaías se compara con el texto masorético copiado mil años después, es:`,
+    optionsEn:[`Substantially identical`,`Completely different`,`Written in Greek`,`A forgery`],
+    optionsEs:[`Sustancialmente idéntico`,`Completamente diferente`,`Escrito en griego`,`Una falsificación`],
+    correct:0, explanationEn:`They are substantially identical — a millennium, and the text held.`, explanationEs:`Son sustancialmente idénticos — un milenio, y el texto se mantuvo.` },
+
+  { textEn:`What do the manuscripts NOT do, according to the unit's honest accounting?`, textEs:`¿Qué NO hacen los manuscritos, según el recuento honesto de la unidad?`,
+    optionsEn:[`Corroborate faithful transmission`,`Answer specific skeptical claims`,`Turn a number into faces`,`Hand us the autographs or prove inspiration by themselves`],
+    optionsEs:[`Corroborar la transmisión fiel`,`Responder a afirmaciones escépticas específicas`,`Convertir un número en rostros`,`Entregarnos los autógrafos o probar la inspiración por sí solos`],
+    correct:3, explanationEn:`They do not give the autographs or prove inspiration by themselves.`, explanationEs:`No dan los autógrafos ni prueban la inspiración por sí solos.` }
+];
+
+const saQuestions = [
+  { promptEn:`What does the "gallery" of manuscripts give us, and what does it not give us, in the course's terms of evidence?`,
+    promptEs:`¿Qué nos da la "galería" de manuscritos, y qué no nos da, en los términos de evidencia del curso?`,
+    keywords:[`corrobor`,`proof`,`prueb`,`preserv`,`manuscript`,`manuscrit`,`inspir`,`testig`],
+    modelEn:`The manuscripts give us corroboration, not proof: they confirm that the text was faithfully preserved and early, but they do not by themselves prove the Bible is inspired, and they do not hand us the lost autographs. As Unit 1 taught, corroboration is the honest workhorse of evidence, and these witnesses corroborate powerfully, turning the abundance of Unit 4 from a number into faces.`,
+    modelEs:`Los manuscritos nos dan corroboración, no prueba: confirman que el texto fue preservado fielmente y temprano, pero no prueban por sí solos que la Biblia es inspirada, ni nos entregan los autógrafos perdidos. Como enseñó la Unidad 1, la corroboración es la herramienta honesta de la evidencia, y estos testigos corroboran con fuerza, convirtiendo la abundancia de la Unidad 4 de un número en rostros.` },
+
+  { promptEn:`Describe P52 and explain the skeptical claim it answers.`,
+    promptEs:`Describe P52 y explica la afirmación escéptica que responde.`,
+    keywords:[`john`,`juan`,`fragment`,`egypt`,`egipt`,`centur`,`siglo`,`tard`],
+    modelEn:`P52, the Rylands fragment, is a tiny scrap of the Gospel of John, dated to about the first half of the second century and found in Egypt. Skeptics had claimed John was a late second-century composition, too late to be apostolic. But a copy circulating in Egypt by around AD 125 means the original was written decades earlier, in the first century. The smallest manuscript answers one of the largest claims.`,
+    modelEs:`P52, el fragmento Rylands, es un pedacito del Evangelio de Juan, fechado hacia la primera mitad del siglo segundo y hallado en Egipto. Los escépticos habían afirmado que Juan era una composición tardía del siglo segundo, demasiado tarde para ser apostólica. Pero una copia circulando en Egipto hacia el año 125 significa que el original se escribió décadas antes, en el siglo primero. El manuscrito más pequeño responde a una de las afirmaciones más grandes.` },
+
+  { promptEn:`What does P46 show about the letters of Paul?`,
+    promptEs:`¿Qué muestra P46 sobre las cartas de Pablo?`,
+    keywords:[`paul`,`pablo`,`letter`,`carta`,`collect`,`colecc`,`transmit`,`tempran`],
+    modelEn:`P46, the Chester Beatty papyrus from about AD 200, is the earliest substantial collection of Paul's epistles, containing most of the Pauline corpus. It shows that within roughly 150 years of Paul, his letters were already gathered and copied as a collection and circulating widely. The apostle's words were treasured and transmitted early, not invented late.`,
+    modelEs:`P46, el papiro Chester Beatty de alrededor del año 200, es la colección sustancial más antigua de las epístolas de Pablo, que contiene la mayor parte del corpus paulino. Muestra que dentro de unos 150 años de Pablo, sus cartas ya estaban reunidas y copiadas como colección y circulando ampliamente. Las palabras del apóstol fueron atesoradas y transmitidas temprano, no inventadas tarde.` },
+
+  { promptEn:`Explain the importance of the agreement between P75 and Codex Vaticanus.`,
+    promptEs:`Explica la importancia de la concordancia entre P75 y el Códice Vaticano.`,
+    keywords:[`vatican`,`text`,`preserv`,`invent`,`invenc`,`drift`,`theor`,`teor`],
+    modelEn:`P75, a Bodmer papyrus from about AD 175 to 225, has a text remarkably close to the fourth-century Codex Vaticanus. This overturned the theory that Vaticanus's careful text was a late fourth-century invention; instead, that text reached back nearly unchanged into the second century. It shows concretely that the text was faithfully preserved across about a hundred and fifty years, not drifting.`,
+    modelEs:`P75, un papiro Bodmer de alrededor del año 175 al 225, tiene un texto notablemente cercano al Códice Vaticano del siglo cuarto. Esto derribó la teoría de que el texto cuidadoso del Vaticano era una invención tardía del siglo cuarto; más bien, ese texto se remontaba casi sin cambios al siglo segundo. Muestra de forma concreta que el texto fue preservado fielmente a través de unos ciento cincuenta años, sin desviarse.` },
+
+  { promptEn:`Describe Codex Sinaiticus and Codex Vaticanus.`,
+    promptEs:`Describe el Códice Sinaítico y el Códice Vaticano.`,
+    keywords:[`tischendorf`,`vatican`,`parchment`,`pergamin`,`fourth`,`cuart`,`monaster`,`greek`],
+    modelEn:`Sinaiticus and Vaticanus are the two great fourth-century codices, written on fine parchment and containing whole Bibles in Greek. Vaticanus is kept in the Vatican Library, and Sinaiticus was discovered by Tischendorf at St. Catherine's Monastery on Mount Sinai. They are complete, early, and magnificent witnesses to the whole New Testament and the Greek Old Testament.`,
+    modelEs:`Sinaítico y Vaticano son los dos grandes códices del siglo cuarto, escritos en pergamino fino y que contienen Biblias enteras en griego. El Vaticano se guarda en la Biblioteca Vaticana, y el Sinaítico fue descubierto por Tischendorf en el Monasterio de Santa Catalina en el Monte Sinaí. Son testigos completos, tempranos y magníficos de todo el Nuevo Testamento y del Antiguo Testamento griego.` },
+
+  { promptEn:`What honest point does the unit make about the great codices and the Received Text?`,
+    promptEs:`¿Qué punto honesto hace la unidad sobre los grandes códices y el Texto Recibido?`,
+    keywords:[`receiv`,`recib`,`differ`,`difer`,`manuscript`,`manuscrit`,`witness`,`testig`],
+    modelEn:`The unit notes honestly that these early manuscripts, Sinaiticus and Vaticanus, sometimes differ from the later Received Text that underlies the King James and the Reina-Valera. It does not settle which reading is right; it simply presents them as the great early witnesses they are, and leaves how to weigh the difference to Unit 6, the question of the Received and Critical Texts.`,
+    modelEs:`La unidad nota con honestidad que estos manuscritos antiguos, el Sinaítico y el Vaticano, a veces difieren del Texto Recibido posterior que subyace a la King James y a la Reina-Valera. No zanja cuál lectura es la correcta; simplemente los presenta como los grandes testigos antiguos que son, y deja cómo pesar la diferencia para la Unidad 6, la cuestión del Texto Recibido y el Crítico.` },
+
+  { promptEn:`Describe the Dead Sea Scrolls and their significance for the Old Testament.`,
+    promptEs:`Describe los Rollos del Mar Muerto y su importancia para el Antiguo Testamento.`,
+    keywords:[`scroll`,`rollo`,`esther`,`ester`,`masoret`,`confirm`,`thousand`,`transmis`],
+    modelEn:`The Dead Sea Scrolls were discovered in 1947 at Qumran, hidden in desert caves since the first century. They contain portions of every Old Testament book except Esther and are about a thousand years older than the previously-oldest Hebrew manuscripts. The Great Isaiah Scroll, from about 125 BC, when compared to the Masoretic text a thousand years later, is substantially identical — a stunning confirmation of faithful transmission.`,
+    modelEs:`Los Rollos del Mar Muerto fueron descubiertos en 1947 en Qumrán, escondidos en cuevas del desierto desde el siglo primero. Contienen porciones de cada libro del Antiguo Testamento excepto Ester y son unos mil años más antiguos que los manuscritos hebreos previamente más antiguos. El Gran Rollo de Isaías, de alrededor del 125 a.C., comparado con el texto masorético mil años después, es sustancialmente idéntico — una asombrosa confirmación de la transmisión fiel.` },
+
+  { promptEn:`What do the manuscripts NOT do, and what do they do?`,
+    promptEs:`¿Qué NO hacen los manuscritos, y qué sí hacen?`,
+    keywords:[`inspir`,`corrobor`,`preserv`,`prove`,`prueb`,`john`,`juan`,`invent`],
+    modelEn:`They do not hand us the lost autographs, and they do not prove the Bible is inspired by themselves — inspiration is confessed, not excavated. What they do, powerfully, is corroborate that the text is early and faithfully preserved, and answer specific skeptical claims, such as that John was written too late or that the text was a late invention. They turn Unit 4's number into faces.`,
+    modelEs:`No nos entregan los autógrafos perdidos, y no prueban por sí solos que la Biblia es inspirada — la inspiración se confiesa, no se excava. Lo que sí hacen, con fuerza, es corroborar que el texto es temprano y fielmente preservado, y responder a afirmaciones escépticas específicas, como que Juan se escribió demasiado tarde o que el texto fue una invención tardía. Convierten el número de la Unidad 4 en rostros.` },
+
+  { promptEn:`How does the gallery apply the course's method (concede, refuse, stand)?`,
+    promptEs:`¿Cómo aplica la galería el método del curso (conceder, rechazar, mantenerse)?`,
+    keywords:[`conced`,`refus`,`rechaz`,`camel`,`confirm`,`attest`,`atestigu`,`abundan`],
+    modelEn:`We concede honestly what the manuscripts do not do — they are not the autographs and do not prove inspiration. We refuse the skeptic's camel that the manuscripts undermine the text; in fact they confirm it. And we stand where the evidence stands: on faithful, abundant, early attestation of the Word. This is exactly the discipline of Unit 1, applied to real manuscripts.`,
+    modelEs:`Concedemos con honestidad lo que los manuscritos no hacen — no son los autógrafos ni prueban la inspiración. Rechazamos el camello del escéptico de que los manuscritos socavan el texto; de hecho lo confirman. Y nos mantenemos donde la evidencia se mantiene: en una atestiguación fiel, abundante y temprana de la Palabra. Esta es exactamente la disciplina de la Unidad 1, aplicada a manuscritos reales.` },
+
+  { promptEn:`In your own words, summarize the second witness's testimony and what remains for Unit 6.`,
+    promptEs:`Con tus palabras, resume el testimonio del segundo testigo y lo que queda para la Unidad 6.`,
+    keywords:[`witness`,`testig`,`faithful`,`fiel`,`receiv`,`recib`,`preserv`,`differ`],
+    modelEn:`The second witness testifies, both in the mass and one by one, that the words we read were faithfully carried down the centuries. But it has also shown that the great early manuscripts sometimes differ from the later Received Text behind the King James and the Reina-Valera. How thoughtful Christians weigh that difference is the subject of Unit 6, where even this debate rests on a Word so preserved that the question is never whether we have it, but only which reading to print in a few places.`,
+    modelEs:`El segundo testigo testifica, tanto en masa como uno por uno, que las palabras que leemos fueron llevadas fielmente a través de los siglos. Pero también ha mostrado que los grandes manuscritos antiguos a veces difieren del Texto Recibido posterior detrás de la King James y la Reina-Valera. Cómo pesan los cristianos reflexivos esa diferencia es el tema de la Unidad 6, donde aun este debate descansa sobre una Palabra tan preservada que la pregunta nunca es si la tenemos, sino solo cuál lectura imprimir en unos pocos lugares.` }
+];
+
+function saveState(){
+  try{
+    localStorage.setItem(K('mc'), JSON.stringify(mcAnswers));
+    localStorage.setItem(K('sa'), JSON.stringify(kwAnswers));
+    localStorage.setItem(K('mcpass'), mcPreviouslyPassed ? '1' : '0');
+    localStorage.setItem('cts_track', track);
+    localStorage.setItem('cts_lang', currentLang);
+  }catch(e){}
+}
+function restoreState(){
+  try{ const a = JSON.parse(localStorage.getItem(K('mc'))); if(Array.isArray(a) && a.length===20) mcAnswers = a; }catch(e){}
+  try{ const b = JSON.parse(localStorage.getItem(K('sa'))); if(Array.isArray(b) && b.length===10) kwAnswers = b; }catch(e){}
+  mcPreviouslyPassed = localStorage.getItem(K('mcpass')) === '1';
+}
+
+function applyLang(){
+  document.body.className = 'lang-' + currentLang;
+  document.getElementById('langToggleBtn').textContent = currentLang === 'en' ? 'Español' : 'English';
+}
+function toggleLang(){
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  applyLang(); renderMC(); updateMCResult(); renderSA(); saveState();
+}
+
+function setTrack(t){ track = t; saveState(); updateTrackUI(); updateCompletion(); }
+function updateTrackUI(){
+  ['cert','assoc','thm','mdiv'].forEach(function(t){
+    const el = document.getElementById('track-' + t);
+    if(el) el.classList.toggle('active', track === t);
+  });
+}
+
+/* Immediate-feedback MC: the first tap on a question locks it, shows right/wrong,
+   the correct answer, and a short explanation at once. A running score is shown
+   below; when all 20 are answered a pass/fail verdict appears. Reset starts over. */
+function renderMC(){
+  const container = document.getElementById('mcContainer');
+  container.innerHTML = '';
+  const allAnswered = mcAnswers.filter(function(a){ return !!a; }).length === 20;
+  mcQuestions.forEach(function(q, idx){
+    const answered = !!mcAnswers[idx];
+    const div = document.createElement('div'); div.className = 'question';
+    const p = document.createElement('p'); p.className = 'qtext';
+    p.textContent = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+    div.appendChild(p);
+    const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+    const correctLetter = String.fromCharCode(65 + q.correct);
+    options.forEach(function(opt, optIdx){
+      const letter = String.fromCharCode(65 + optIdx);
+      const btn = document.createElement('button'); btn.className = 'option';
+      btn.textContent = letter + '. ' + opt;
+      if(answered){
+        if(optIdx === q.correct) btn.classList.add('correct');
+        else if(mcAnswers[idx] === letter) btn.classList.add('wrong');
+        btn.disabled = true; btn.style.cursor = 'default';
+      } else {
+        if(mcAnswers[idx] === letter){ btn.style.background = '#efe7d2'; btn.style.borderColor = '#d4af37'; btn.style.fontWeight = '600'; }
+        btn.onclick = function(){
+          mcAnswers[idx] = letter;
+          saveState();
+          renderMC();
+          updateMCResult();
+        };
+      }
+      div.appendChild(btn);
+    });
+    if(answered){
+      const fb = document.createElement('div');
+      const exp = currentLang === 'en' ? q.explanationEn : q.explanationEs;
+      if(mcAnswers[idx] === correctLetter){
+        fb.className = 'feedback-text correct';
+        fb.textContent = (currentLang === 'en' ? '\u2713 Correct! ' : '\u2713 \u00a1Correcto! ') + exp;
+      } else {
+        fb.className = 'feedback-text incorrect';
+        fb.textContent = (currentLang === 'en'
+          ? ('\u2717 Incorrect. Correct answer: ' + correctLetter + '. ')
+          : ('\u2717 Incorrecto. Respuesta correcta: ' + correctLetter + '. ')) + exp;
+      }
+      div.appendChild(fb);
+    }
+    container.appendChild(div);
+  });
+}
+
+function updateMCResult(){
+  let answered = 0, score = 0;
+  mcQuestions.forEach(function(q, idx){
+    if(mcAnswers[idx]){
+      answered++;
+      if(mcAnswers[idx] === String.fromCharCode(65 + q.correct)) score++;
+    }
+  });
+  const res = document.getElementById('mcResult');
+  if(answered === 0){ res.style.display = 'none'; res.className = 'result'; res.textContent = ''; updateCompletion(); return; }
+  if(answered < 20){
+    res.className = 'result progress';
+    res.textContent = currentLang === 'en'
+      ? ('Answered ' + answered + '/20 \u00b7 ' + score + ' correct so far.')
+      : ('Respondidas ' + answered + '/20 \u00b7 ' + score + ' correctas hasta ahora.');
+  } else {
+    const pass = score >= 18;
+    if(pass) mcPreviouslyPassed = true;
+    res.className = 'result ' + (pass ? 'pass' : 'fail');
+    res.textContent = currentLang === 'en'
+      ? ('You scored ' + score + '/20. ' + (pass ? 'Passed (18 required).' : 'Not yet \u2014 18 required. Tap "Reset Exam" to try again.'))
+      : ('Obtuviste ' + score + '/20. ' + (pass ? 'Aprobado (se requieren 18).' : 'A\u00fan no \u2014 se requieren 18. Toca "Reiniciar Examen" para intentarlo de nuevo.'));
+  }
+  saveState();
+  updateCompletion();
+}
+
+function resetMC(){
+  mcAnswers = new Array(20).fill('');
+  mcPreviouslyPassed = false;
+  saveState();
+  renderMC();
+  const res = document.getElementById('mcResult');
+  res.style.display = 'none'; res.className = 'result'; res.textContent = '';
+  updateCompletion();
+}
+
+function kwHit(answer, stem){
+  const norm = (answer || '').toLowerCase();
+  const tokens = norm.split(/[^a-z\u00e0-\u00ff]+/i).filter(Boolean);
+  return tokens.some(function(t){ return t.indexOf(stem) === 0; });
+}
+
+function saPassState(){
+  let allPass = true;
+  saQuestions.forEach(function(q, idx){
+    const ans = (kwAnswers[idx] || '').trim();
+    if(ans.length < 100){ allPass = false; return; }
+    let hits = 0;
+    q.keywords.forEach(function(k){ if(kwHit(ans, k)) hits++; });
+    if(hits < 3) allPass = false;
+  });
+  return allPass;
+}
+
+function gradeSA(){
+  saQuestions.forEach(function(q, idx){
+    const ans = (kwAnswers[idx] || '').trim();
+    const fb = document.getElementById('sa-fb-' + idx);
+    if(!fb) return;
+    fb.style.display = 'block';
+    if(ans.length < 100){
+      fb.className = 'feedback-text incorrect';
+      fb.textContent = currentLang === 'en'
+        ? 'Please write at least a few sentences (about 100 characters) before the model answer is shown.'
+        : 'Por favor escribe al menos unas cuantas oraciones (unos 100 caracteres) antes de mostrar la respuesta modelo.';
+      return;
+    }
+    let hits = 0;
+    q.keywords.forEach(function(k){ if(kwHit(ans, k)) hits++; });
+    const pass = hits >= 3;
+    fb.className = 'feedback-text ' + (pass ? 'correct' : 'incorrect');
+    const model = currentLang === 'en' ? q.modelEn : q.modelEs;
+    const label = pass
+      ? (currentLang === 'en' ? ('\u2713 Sufficient (' + hits + ' key ideas). ') : ('\u2713 Suficiente (' + hits + ' ideas clave). '))
+      : (currentLang === 'en' ? ('Keep developing (' + hits + '/3 key ideas). ') : ('Sigue desarrollando (' + hits + '/3 ideas clave). '));
+    const modelLabel = currentLang === 'en' ? 'Model answer: ' : 'Respuesta modelo: ';
+    fb.innerHTML = '<strong>' + label + '</strong><br><em>' + modelLabel + '</em>' + model;
+  });
+  saveState(); updateCompletion();
+}
+
+function renderSA(){
+  const c = document.getElementById('saContainer');
+  c.innerHTML = '';
+  saQuestions.forEach(function(q, idx){
+    const div = document.createElement('div'); div.className = 'question';
+    const p = document.createElement('p'); p.className = 'qtext';
+    p.textContent = (idx + 1) + '. ' + (currentLang === 'en' ? q.promptEn : q.promptEs);
+    div.appendChild(p);
+    const ta = document.createElement('textarea');
+    ta.id = 'sa-input-' + idx; ta.rows = 4; ta.value = kwAnswers[idx] || '';
+    ta.placeholder = currentLang === 'en' ? 'Write your answer...' : 'Escribe tu respuesta...';
+    ta.oninput = function(){ kwAnswers[idx] = ta.value; saveState(); };
+    div.appendChild(ta);
+    const fb = document.createElement('div');
+    fb.id = 'sa-fb-' + idx; fb.className = 'feedback-text'; fb.style.display = 'none';
+    div.appendChild(fb);
+    c.appendChild(div);
+  });
+}
+
+function updateCompletion(){
+  const complete = (track === 'cert' || track === 'assoc') ? mcPreviouslyPassed : (mcPreviouslyPassed && saPassState());
+  unitPassed = complete;
+  const banner = document.getElementById('completionBanner');
+  if(complete){
+    const trackName = track === 'cert' ? (currentLang === 'en' ? 'Certificate' : 'de Certificado')
+                    : track === 'assoc' ? (currentLang === 'en' ? 'Associate' : 'de Asociado')
+                    : track === 'thm'  ? 'Th.M.' : 'M.Div.';
+    banner.style.display = 'block';
+    banner.textContent = currentLang === 'en'
+      ? ('\u2705 Unit 5 complete on the ' + trackName + ' track. Well done.')
+      : ('\u2705 Unidad 5 completada en la v\u00eda ' + trackName + '. Bien hecho.');
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  restoreState();
+  applyLang();
+  updateTrackUI();
+  renderMC();
+  updateMCResult();
+  renderSA();
+  updateCompletion();
+});
+</script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

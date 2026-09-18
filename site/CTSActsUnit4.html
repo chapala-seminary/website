@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Acts Intensive — Unit 4: The Damascus Road (Acts 9:1–31)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+/* === Retrofit additions === */
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-bottom: 2px dashed #d7cec1; padding-bottom: 18px; margin-bottom: 18px; }
+.lang-toggle-group { display: inline-flex; gap: 4px; margin-bottom: 15px; }
+.lang-toggle-group button { background: #f4c542; color: #5b3a1f; border: 1px solid #c9a032; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+.lang-toggle-group button.active { background: #5b3a1f; color: white; border-color: #5b3a1f; }
+.track-badge { display: inline-block; background: #f4c542; color: #5b3a1f; padding: 4px 12px; border-radius: 30px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 12px; vertical-align: middle; }
+.exam-status { padding: 12px 16px; margin: 14px 0; border-radius: 8px; font-size: 0.95rem; font-weight: 600; }
+.exam-status.mc-passed { background: #d6e2f0; color: #2c3e6b; border-left: 5px solid #3f5a8a; }
+.exam-status.locked { background: #fae5e3; color: #8a1f1f; border-left: 5px solid #b03a2e; }
+.exam-status.hidden { display: none; }
+.mc-section, .sa-section { margin-top: 20px; }
+.sa-section h3, .mc-section h3 { color: #5b3a1f; border-bottom: 2px solid #f4c542; padding-bottom: 4px; margin-bottom: 12px; font-size: 1.1rem; }
+.sa-badge { display: inline-block; background: #f4c542; color: #5b3a1f; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; margin-left: 8px; vertical-align: middle; }
+.sa-note { margin: 0 0 14px; padding: 10px 14px; background: #f6f1e8; border-left: 3px solid #c9a032; color: #22201d; font-size: 0.9rem; font-style: italic; border-radius: 6px; }
+.question.review-locked { opacity: 0.7; background: #fbfaf6; border-left: 3px solid #f4c542; }
+.question.review-locked .option { pointer-events: none; }
+.question.review-locked .kw-answer, .question.review-locked .check-kw-btn { pointer-events: none; }
+.btn-reset { background: #8a6a4a; color: white; border: none; border-radius: 30px; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 0.88rem; margin-left: 8px; }
+.btn-reset:hover { background: #6b5236; }
+.reg-modal { position: fixed; inset: 0; background: rgba(40, 30, 20, 0.65); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.reg-modal.hidden { display: none; }
+.reg-modal-inner { background: #fffdfa; max-width: 520px; width: 100%; border-radius: 16px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 1px solid #d7cec1; }
+.reg-modal-inner h2 { color: #5b3a1f; margin: 0 0 10px; font-size: 1.4rem; }
+.reg-modal-inner p { margin: 10px 0; font-size: 0.95rem; }
+.reg-modal-inner label { display: block; margin: 12px 0 4px; font-weight: 700; font-size: 0.92rem; }
+.reg-modal-inner input[type="text"], .reg-modal-inner input[type="email"] { width: 100%; padding: 9px 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; background: #fcfbf8; }
+.reg-modal-inner .track-options { display: flex; gap: 10px; margin-top: 6px; }
+.reg-modal-inner .track-options label { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 12px; border: 1px solid #d7cec1; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.92rem; background: #fcfbf8; }
+.reg-modal-inner .track-options input[type="radio"] { margin: 0; }
+.reg-modal-inner .track-options label:has(input:checked) { background: #f4c542; border-color: #c9a032; }
+.reg-modal-inner button { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 9px 22px; cursor: pointer; font-family: inherit; font-size: 1rem; margin-top: 18px; }
+.reg-warn { background: #faecd0; border: 1px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; color: #5b3a1f; }
+.reg-warn.hidden { display: none; }
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .nav-bar, .toggle-btn, .lang-toggle-group, .btn-reset, button.small, .check-kw-btn, .reg-modal, .reg-warn, #submitExamBtn, .exam-status, .sa-badge, .track-badge { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+  body.lang-en .lang-es, body.lang-es .lang-en { display: none; }
+  body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+}
+
+.sa-model { margin-top: 8px; padding: 10px 14px; background:#fff8e1; color:#5d4a00; border-left:4px solid #d4af37; border-radius:6px; font-size:0.92rem; line-height:1.45; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" role="group" aria-label="Language">
+  <button data-lang="en" class="active">English</button>
+  <button data-lang="es">Español</button>
+  <button data-lang="both">Both / Ambos</button>
+</div>
+<span id="trackBadgeSlot"></span>
+
+<div id="regWarn" class="reg-warn hidden">
+  <span class="lang-en">⚠ Please register your name to receive credit for this unit. <button class="small" id="openRegBtn" type="button">Register</button></span>
+  <span class="lang-es">⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class="small" id="openRegBtn2" type="button">Registrar</button></span>
+</div>
+<div id="regModal" class="reg-modal hidden" role="dialog" aria-labelledby="regModalTitle">
+  <div class="reg-modal-inner">
+    <h2 id="regModalTitle"><span class="lang-en">Welcome to the Acts Intensive</span><span class="lang-es">Bienvenido al Intensivo de Hechos</span></h2>
+    <p><span class="lang-en">Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.</span><span class="lang-es">Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full name</span><span class="lang-es">Nombre completo</span></label>
+    <input type="text" id="regName" placeholder="" autocomplete="name" aria-label="regName">
+    <label><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span></label>
+    <input type="email" id="regEmail" placeholder="" autocomplete="email" aria-label="regEmail">
+    <label><span class="lang-en">Track</span><span class="lang-es">Vía</span></label>
+    <div class="track-options">
+      <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></label>
+      <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en">M.Div</span><span class="lang-es">M.Div</span></label>
+      <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en">Th.M.</span><span class="lang-es">Th.M.</span></label>
+    </div>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;">
+      <span class="lang-en"><strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.</span>
+      <span class="lang-es"><strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%.</span>
+    </p>
+    <button id="regSaveBtn" type="button"><span class="lang-en">Save and Continue</span><span class="lang-es">Guardar y Continuar</span></button>
+  </div>
+</div>
+<div class="card">
+    <h1><span class="lang-en">📖 Acts Intensive — Unit 4: The Damascus Road (Acts 9:1–31)</span><span class="lang-es">📖 Intensivo de Hechos — Unidad 4: El camino a Damasco (Hechos 9:1–31)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+<div class="lang-en">
+        <h2>I. The Man at the Cloak Pile</h2>
+        <p>Last unit we left a young man named Saul of Tarsus standing in a field outside the walls of Jerusalem with the cloaks of Stephen's executioners piled at his feet. Acts 8:1 makes him an accomplice with one cold sentence: <em>"Now Saul was consenting to his death."</em> By the time we open Acts 9, that consent has metastasized into a campaign. <em>"Then Saul, still breathing threats and murder against the disciples of the Lord, went to the high priest and asked letters from him to the synagogues of Damascus, so that if he found any who were of the Way, whether men or women, he might bring them bound to Jerusalem"</em> (Acts 9:1–2, NKJV).</p>
+
+        <p>Read the verb. Saul was <em>breathing</em> threats. The Greek picture is of a man for whom murder and intimidation were the very air he inhaled. He was not a casual opponent of the new movement; he was its self-appointed exterminator. And the man with that résumé was not a Roman thug. He was the rising star of first-century Judaism.</p>
+
+        <p>By his own later admission Saul of Tarsus was a Pharisee, the son of a Pharisee, born in Tarsus of Cilicia, brought up at the feet of the great Gamaliel — yes, the same Gamaliel whose caution we read in Acts 5. He had advanced in Judaism beyond many of his contemporaries. He was, as one preacher used to put it, the <em>Mr. Who's Who</em> of Pharisaic Judaism. He would later look back on this season of his life and say, <em>"I was a blasphemer, a persecutor, and an insolent man"</em> (1 Timothy 1:13, NKJV) — and, in the same breath, <em>"I obtained mercy because I did it ignorantly in unbelief."</em> Saul thought he was serving God. He was actually fighting against Him. He had walked right into the warning Gamaliel had pronounced in his own hearing two chapters earlier, and he had not heard a word of it.</p>
+
+        <h2>II. A Hunting Trip Cut Short</h2>
+        <p>Damascus was a hundred and thirty-five miles from Jerusalem. That is no day trip on foot or by donkey. Saul was not chasing a single suspect; he was leading what amounted to an international fugitive operation. He had letters from the high priest in his saddlebag granting him authority over Jewish synagogues in a foreign country to extradite the followers of Jesus back to Jerusalem in chains. Men and women, Luke notes carefully — Saul did not discriminate by sex. The Way was an infection, and Saul was the appointed surgeon.</p>
+
+        <p>And then came noon on the road outside Damascus. <em>"As he journeyed, he came near Damascus, and suddenly a light shone around him from heaven. Then he fell to the ground, and heard a voice saying to him, 'Saul, Saul, why are you persecuting Me?'"</em> (Acts 9:3–4, NKJV). The repetition of his name is the same gentle reduplication God used with Abraham at the binding of Isaac, with Moses at the burning bush, and with the boy Samuel in the temple. <em>Saul, Saul.</em> The voice did not say, "Why are you persecuting My church?" It said, "Why are you persecuting <em>Me</em>?" Christ was so identified with His battered followers that to lay a hand on them was to lay a hand on Him. Take that lesson home. The Lord still feels every blow.</p>
+
+        <p>Saul answered with the only honest word he had left. <em>"Who are You, Lord?"</em> The Lord identified Himself: <em>"I am Jesus, whom you are persecuting"</em> (Acts 9:5, NKJV). Three days of blindness, fasting, and dark-room thinking followed in the house of a man named Judas on a street called Straight. Notice the contrast Luke is setting up. Saul rode into Damascus with letters of arrest. He left Damascus with a mission to Gentiles. He came carrying papers that would put men in chains. He spent the rest of his life writing letters that would set men free. As one preacher put it, the persecutor of Christians became the proclaimer of Christ. The high priest's commission was canceled by a higher High Priest's call.</p>
+
+        <h2>III. Brother Saul</h2>
+        <p>Here Luke introduces one of the bravest men in the New Testament whose name almost nobody knows. Ananias of Damascus — not the dead Ananias of Acts 5; a different one entirely — was a disciple living quietly in the city. The Lord came to him in a vision and gave him an assignment: go to Straight Street, ask for a man named Saul of Tarsus, lay your hands on him, and pray for his sight to be restored.</p>
+
+        <p>Ananias's reply is one of the funniest moments in the New Testament. He effectively said, <em>"Lord, I think You may have the wrong file."</em> "Lord, I have heard from many about this man, how much harm he has done to Your saints in Jerusalem. And here he has authority from the chief priests to bind all who call on Your name" (Acts 9:13–14, NKJV). One can almost hear Ananias's voice rising. <em>This is the man, Lord, who came to put me in chains. And You want me to lay my hands on him and pray over him?</em></p>
+
+        <p>The Lord's answer is one of the most consequential sentences ever spoken to a Christian: <em>"Go, for he is a chosen vessel of Mine to bear My name before Gentiles, kings, and the children of Israel. For I will show him how many things he must suffer for My name's sake"</em> (Acts 9:15–16, NKJV). Two things to underline. First, before Saul has preached one sermon, he is called a chosen vessel. The man's calling was set before his career began. Second, the call comes with a price tag, and the Lord prints the price tag right on the receipt: <em>I will show him how many things he must suffer for My name's sake.</em> Christ does not promise Saul success. He promises Saul suffering. Years later when Paul writes the catalog of his beatings, shipwrecks, and stonings in 2 Corinthians 11, he is not complaining. He is accepting delivery of what was ordered the day Ananias prayed over him.</p>
+
+        <p>Ananias obeyed. He walked into the room of the man he had every reason to fear and addressed him with the sweetest two-word sermon in the New Testament: <em>"Brother Saul"</em> (Acts 9:17, NKJV). Read those two words carefully. Saul has not yet been baptized. Saul has not yet preached a sermon. Saul has not yet so much as opened his eyes since the road. And the first human voice he hears in his new life calls him <em>brother</em>. Christian fellowship, when it is real, can turn an enemy into a brother in the time it takes to say two syllables. <em>"Immediately there fell from his eyes something like scales, and he received his sight at once; and he arose and was baptized"</em> (Acts 9:18, NKJV).</p>
+
+        <h2>IV. The Bee in the Bonnet of Hellenized Damascus</h2>
+        <p>What happened next ought to be a model for every brand-new convert in every century since. Luke says, <em>"Immediately he preached the Christ in the synagogues, that He is the Son of God"</em> (Acts 9:20, NKJV). Saul did not go away to seminary first. He did not wait for a denominational license. He did not retire to a contemplative cottage to digest the experience. He walked into the very synagogues whose membership rolls he had brought letters to subpoena, opened the same Hebrew Scriptures he had been weaponizing against the Way for years, and proved from the prophets that Jesus is the Christ.</p>
+
+        <p>The Damascus synagogue was thrown into pandemonium. <em>"Then all who heard were amazed, and said, 'Is this not he who destroyed those who called on this name in Jerusalem, and has come here for that purpose, so that he might bring them bound to the chief priests?' But Saul increased all the more in strength, and confounded the Jews who dwelt in Damascus, proving that this Jesus is the Christ"</em> (Acts 9:21–22, NKJV). The man they had heard was coming to chain them was instead in their pulpit demolishing their objections.</p>
+
+        <p>The synagogue's reception swung from amazement to hostility within weeks. The Jews of Damascus plotted to kill him. They watched the city gates day and night. The new convert who had ridden into town with a Roman-style writ in his pocket was now reduced to sneaking out the way smugglers did. <em>"Then the disciples took him by night and let him down through the wall in a large basket"</em> (Acts 9:25, NKJV). The man who had come to drag others away in chains was lowered out of a city by his new friends in a fish-basket. Christ has a sense of humor, and He uses it on His servants. The future apostle to the Gentiles, the man who would write Romans, was unceremoniously reverse-fished out of Damascus.</p>
+
+        <h2>V. The Bridge No One Wanted to Cross</h2>
+        <p>From Damascus Saul made his way back to Jerusalem. Galatians 1 fills in some details Luke leaves out — Saul actually spent some time in Arabia first, perhaps three years of quiet recalibration before he set foot back in Jerusalem. But Luke focuses on what happened when Saul finally walked back into the holy city. <em>"And when Saul had come to Jerusalem, he tried to join the disciples; but they were all afraid of him, and did not believe that he was a disciple"</em> (Acts 9:26, NKJV). Of course they were. The last time the Jerusalem church had heard about Saul of Tarsus he was holding the cloaks while Stephen was being stoned. The story that he had been converted on the Damascus road sounded like exactly the kind of trick a man like that would pull to infiltrate the church.</p>
+
+        <p>Enter the second bravest man in the chapter. Barnabas — Joseph the Levite from Cyprus, the Son of Encouragement, the man we met selling his field in Acts 4 — <em>"took him and brought him to the apostles. And he declared to them how he had seen the Lord on the road, and that He had spoken to him, and how he had preached boldly at Damascus in the name of Jesus"</em> (Acts 9:27, NKJV). Barnabas vouched for Saul when nobody else would. He picked up the new convert and carried him into the room and stood up beside him while he told his story.</p>
+
+        <p>I want to stop and underline this. The book of Acts has its share of preachers, prophets, and apostles. But the church I know would die without its Barnabases. They are the people who walk up to the new believer everyone is whispering about and stand next to him in a way that says, <em>I'm with him.</em> They are the people who pick up the young pastor who failed his first church and walk him to a second pulpit. They are the people who write the recommendation letter for the felon-turned-disciple. Without Barnabas there is no Paul. Without Paul there is no New Testament epistles. Without the New Testament epistles there is, frankly, no doctrinal Christianity. Be a Barnabas. The Holy Spirit will keep raising up Sauls; He needs Barnabases to receive them.</p>
+
+        <p>The apostles took Saul in on Barnabas's word. Saul preached boldly in Jerusalem too, and once again the Hellenistic Jews tried to kill him. The brethren got him to Caesarea and put him on a ship to Tarsus, his hometown. Then comes one of Luke's quietest, most beautiful summary verses. <em>"Then the churches throughout all Judea, Galilee, and Samaria had peace and were edified. And walking in the fear of the Lord and in the comfort of the Holy Spirit, they were multiplied"</em> (Acts 9:31, NKJV). The greatest persecutor of the church had become a member of the church, and the church got its first taste of peace in years. The dragon had been muzzled. The seed Stephen had planted with his blood was up.</p>
+
+        <h2>VI. What This Conversion Teaches Us</h2>
+        <p>Three lessons. First, <strong>nobody is too far gone</strong>. If you have a son you have given up on, a brother who hates the church, a former friend who mocks the gospel — read Acts 9 again. The Lord found Saul of Tarsus on the road outside Damascus. He can find your prodigal too. The same Christ who stopped a one-man inquisition with a flash of noonday light still walks the roads of this world looking for hardened persecutors. He has not lost the ability to make Pauls out of Sauls.</p>
+
+        <p>Second, <strong>conversion costs the convert</strong>. The Lord did not promise Saul comfort. He promised Saul suffering. Most of the Western church has lost the honesty to tell people this on the front end. We sell the gospel like a self-improvement plan and then act surprised when our converts fall away the first time the cost shows up. Read the price tag out loud the way the Lord did. <em>I will show him how many things he must suffer for My name's sake.</em> The gospel is the costliest free gift in the universe.</p>
+
+        <p>Third, and this is where most of you live, <strong>the church needs its Barnabases more than its Sauls</strong>. There are more Barnabas-shaped roles in any congregation than there will ever be Paul-shaped pulpits. The future of the gospel runs through the people who put their reputation on the line for a new believer who does not yet have one. Saul could not build the church alone. He had to be received. Somebody, somewhere, took the risk. Be that somebody. The Spirit who broke the persecutor on the Damascus road still uses ordinary disciples named Ananias and Barnabas to finish what He started.</p>
+
+        <p>The man who left Jerusalem in chapter 9 breathing threats came back to Jerusalem in chapter 9 a brother. The dragon had become a lamb. The persecutor had become a preacher. The destroyer of the church had become its greatest builder. The hand of the Lord is not shortened. He is still in the conversion business. And He will be until the last Saul on the road is found.</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>I. El hombre junto al montón de capas</h2>
+        <p>La unidad anterior dejó a un joven llamado Saulo de Tarso parado en un campo a las afueras de los muros de Jerusalén con las capas de los verdugos de Esteban amontonadas a sus pies. Hechos 8:1 lo hace cómplice con una sola frase fría: <em>"Y Saulo consentía en su muerte."</em> Para cuando abrimos Hechos 9, ese consentimiento se ha convertido en una campaña. <em>"Y Saulo, respirando aún amenazas y muerte contra los discípulos del Señor, vino al sumo sacerdote, y demandó de él cartas para Damasco a las sinagogas, para que si hallase algunos hombres o mujeres de este camino, los trajese presos a Jerusalén"</em> (Hechos 9:1–2, RVG).</p>
+
+        <p>Lea el verbo. Saulo <em>respiraba</em> amenazas. La imagen griega es de un hombre para quien el asesinato y la intimidación eran el mismo aire que inhalaba. No era un opositor casual del nuevo movimiento; era su exterminador autoproclamado. Y el hombre con ese currículo no era un matón romano. Era la estrella en ascenso del judaísmo del primer siglo.</p>
+
+        <p>Por su propia confesión posterior, Saulo de Tarso era fariseo, hijo de fariseo, nacido en Tarso de Cilicia, criado a los pies del gran Gamaliel — sí, el mismo Gamaliel cuya cautela leímos en Hechos 5. Había avanzado en el judaísmo más allá que muchos de sus contemporáneos. Era, como solía decir un predicador, el <em>quién es quién</em> del judaísmo fariseo. Más tarde miraría hacia atrás esta temporada de su vida y diría: <em>"Habiendo yo sido antes blasfemo, y perseguidor, e injuriador"</em> (1 Timoteo 1:13, RVG) — y, en el mismo aliento, <em>"alcancé misericordia, porque lo hice por ignorancia, en incredulidad."</em> Saulo creía estar sirviendo a Dios. En realidad estaba peleando contra Él. Había caminado directamente hacia la advertencia que Gamaliel había pronunciado en su propia presencia dos capítulos antes, y no había oído una palabra de ella.</p>
+
+        <h2>II. Una expedición de caza interrumpida</h2>
+        <p>Damasco quedaba a doscientos diez kilómetros de Jerusalén. Eso no es un viaje de un día a pie ni en burro. Saulo no perseguía a un solo sospechoso; estaba dirigiendo lo que equivalía a una operación internacional contra fugitivos. Tenía cartas del sumo sacerdote en su alforja que le otorgaban autoridad sobre las sinagogas judías en un país extranjero para extraditar a los seguidores de Jesús de regreso a Jerusalén encadenados. Hombres y mujeres, anota Lucas con cuidado — Saulo no discriminaba por sexo. El Camino era una infección, y Saulo era el cirujano designado.</p>
+
+        <p>Y entonces vino el mediodía en el camino a las afueras de Damasco. <em>"Y yendo por el camino, aconteció que llegando cerca de Damasco, súbitamente le cercó un resplandor de luz del cielo. Y cayendo en tierra, oyó una voz que le decía: Saulo, Saulo, ¿por qué me persigues?"</em> (Hechos 9:3–4, RVG). La repetición de su nombre es la misma reduplicación amable que Dios usó con Abraham en el sacrificio de Isaac, con Moisés en la zarza ardiente y con el niño Samuel en el templo. <em>Saulo, Saulo.</em> La voz no dijo: "¿Por qué persigues a mi iglesia?" Dijo: "¿Por qué me persigues a <em>Mí</em>?" Cristo estaba tan identificado con Sus seguidores golpeados que poner una mano sobre ellos era ponerla sobre Él. Llévese esa lección a casa. El Señor todavía siente cada golpe.</p>
+
+        <p>Saulo respondió con la única palabra honrada que le quedaba. <em>"¿Quién eres, Señor?"</em> El Señor se identificó: <em>"Yo soy Jesús a quien tú persigues"</em> (Hechos 9:5, RVG). Siguieron tres días de ceguera, ayuno y reflexión a oscuras en la casa de un hombre llamado Judas en una calle que se llamaba Derecha. Note el contraste que Lucas está estableciendo. Saulo entró a Damasco con cartas de arresto. Saulo salió de Damasco con una misión a los gentiles. Llegó cargando papeles que pondrían a hombres en cadenas. Pasó el resto de su vida escribiendo cartas que liberarían a los hombres. Como dijo un predicador, el perseguidor de los cristianos se hizo proclamador de Cristo. La comisión del sumo sacerdote fue cancelada por el llamado de un Sumo Sacerdote más alto.</p>
+
+        <h2>III. Hermano Saulo</h2>
+        <p>Aquí Lucas presenta a uno de los hombres más valientes del Nuevo Testamento, cuyo nombre casi nadie conoce. Ananías de Damasco — no el Ananías muerto de Hechos 5; otro completamente distinto — era un discípulo que vivía tranquilamente en la ciudad. El Señor vino a él en una visión y le dio una asignación: ve a la calle Derecha, pregunta por un hombre llamado Saulo de Tarso, ponle las manos encima y ora para que recobre la vista.</p>
+
+        <p>La respuesta de Ananías es uno de los momentos más graciosos del Nuevo Testamento. Efectivamente dijo: <em>"Señor, creo que tienes el archivo equivocado."</em> "Señor, he oído de muchos acerca de este hombre, cuántos males ha hecho a tus santos en Jerusalén; y aun aquí tiene autoridad de los príncipes de los sacerdotes para prender a todos los que invocan tu nombre" (Hechos 9:13–14, RVG). Casi se puede oír la voz de Ananías subiendo. <em>Este es el hombre, Señor, que vino para ponerme en cadenas. ¿Y quieres que le imponga las manos y ore por él?</em></p>
+
+        <p>La respuesta del Señor es una de las frases más trascendentales jamás dichas a un cristiano: <em>"Ve, porque vaso escogido me es éste, para que lleve mi nombre en presencia de los gentiles, y de reyes, y de los hijos de Israel; porque yo le mostraré cuánto le es necesario padecer por mi nombre"</em> (Hechos 9:15–16, RVG). Dos cosas para subrayar. Primera, antes de que Saulo haya predicado un sermón, ya es llamado un vaso escogido. El llamado del hombre estaba puesto antes de que su carrera comenzara. Segunda, el llamado viene con una etiqueta de precio, y el Señor imprime la etiqueta de precio justo en el recibo: <em>yo le mostraré cuánto le es necesario padecer por mi nombre.</em> Cristo no le promete éxito a Saulo. Le promete sufrimiento. Años después, cuando Pablo escribe el catálogo de sus golpes, naufragios y apedreamientos en 2 Corintios 11, no se está quejando. Está aceptando la entrega de lo que se ordenó el día que Ananías oró por él.</p>
+
+        <p>Ananías obedeció. Caminó hacia el cuarto del hombre a quien tenía toda razón de temer y se dirigió a él con el sermón de dos palabras más dulce del Nuevo Testamento: <em>"Hermano Saulo"</em> (Hechos 9:17, RVG). Lea esas dos palabras con cuidado. Saulo todavía no ha sido bautizado. Saulo todavía no ha predicado un sermón. Saulo ni siquiera ha abierto los ojos desde el camino. Y la primera voz humana que oye en su nueva vida lo llama <em>hermano</em>. La comunión cristiana, cuando es real, puede convertir a un enemigo en hermano en el tiempo que toma decir tres sílabas. <em>"Y al instante le cayeron de los ojos como escamas, y recibió al instante la vista; y levantándose, fue bautizado"</em> (Hechos 9:18, RVG).</p>
+
+        <h2>IV. La piedra en el zapato del Damasco helenizado</h2>
+        <p>Lo que pasó después debería ser modelo para cada nuevo convertido de cada siglo desde entonces. Lucas dice: <em>"Y luego en las sinagogas predicaba a Cristo, diciendo que Él es el Hijo de Dios"</em> (Hechos 9:20, RVG). Saulo no se fue primero al seminario. No esperó una licencia denominacional. No se retiró a una cabaña contemplativa para digerir la experiencia. Caminó hacia las mismas sinagogas cuyos registros de membresía había traído cartas para citar, abrió las mismas Escrituras hebreas que había estado armando contra el Camino por años, y demostró desde los profetas que Jesús es el Cristo.</p>
+
+        <p>La sinagoga de Damasco quedó en pandemonio. <em>"Y todos los que le oían estaban atónitos, y decían: ¿No es éste el que asolaba en Jerusalén a los que invocaban este nombre, y a eso vino acá, para llevarlos presos a los príncipes de los sacerdotes? Pero Saulo mucho más se esforzaba, y confundía a los judíos que moraban en Damasco, afirmando que éste es el Cristo"</em> (Hechos 9:21–22, RVG). El hombre que habían oído que venía a encadenarlos estaba en cambio en su púlpito demoliendo sus objeciones.</p>
+
+        <p>La recepción de la sinagoga pasó del asombro a la hostilidad en semanas. Los judíos de Damasco conspiraron para matarlo. Vigilaban las puertas de la ciudad día y noche. El nuevo convertido que había entrado a la ciudad con un mandamiento al estilo romano en el bolsillo ahora se reducía a salir a escondidas como hacían los contrabandistas. <em>"Entonces los discípulos, tomándole de noche, le bajaron por el muro en una canasta"</em> (Hechos 9:25, RVG). El hombre que había venido a llevarse a otros encadenados era ahora bajado de la ciudad por sus nuevos amigos en una canasta de pesca. Cristo tiene sentido del humor, y lo usa con Sus siervos. El futuro apóstol a los gentiles, el hombre que escribiría Romanos, fue sacado sin ceremonia, en reversa, de Damasco.</p>
+
+        <h2>V. El puente que nadie quería cruzar</h2>
+        <p>Desde Damasco Saulo regresó a Jerusalén. Gálatas 1 llena algunos detalles que Lucas omite — Saulo en realidad pasó algún tiempo en Arabia primero, quizás tres años de recalibración tranquila antes de poner pie de regreso en Jerusalén. Pero Lucas se enfoca en lo que pasó cuando Saulo finalmente entró de regreso a la ciudad santa. <em>"Y como Saulo vino a Jerusalén, trataba de juntarse con los discípulos; pero todos tenían miedo de él, no creyendo que era discípulo"</em> (Hechos 9:26, RVG). Por supuesto que tenían miedo. La última vez que la iglesia de Jerusalén había oído sobre Saulo de Tarso él estaba sosteniendo las capas mientras Esteban era apedreado. La historia de que se había convertido en el camino a Damasco sonaba exactamente al tipo de truco que un hombre como ese haría para infiltrarse en la iglesia.</p>
+
+        <p>Entra el segundo hombre más valiente del capítulo. Bernabé — José el levita de Chipre, el Hijo de Consolación, el hombre que conocimos vendiendo su campo en Hechos 4 — <em>"tomándole, le trajo a los apóstoles, y les contó cómo había visto al Señor en el camino, y que le había hablado, y cómo en Damasco había predicado con denuedo en el nombre de Jesús"</em> (Hechos 9:27, RVG). Bernabé respondió por Saulo cuando nadie más quería hacerlo. Recogió al nuevo convertido y lo llevó al cuarto y se paró a su lado mientras este contaba su historia.</p>
+
+        <p>Quiero detenerme y subrayar esto. El libro de Hechos tiene su cuota de predicadores, profetas y apóstoles. Pero la iglesia que conozco moriría sin sus Bernabés. Son las personas que se acercan al nuevo creyente del que todos murmuran y se paran junto a él de una manera que dice: <em>Estoy con él.</em> Son las personas que recogen al joven pastor que fracasó en su primera iglesia y lo acompañan a un segundo púlpito. Son las personas que escriben la carta de recomendación para el delincuente convertido en discípulo. Sin Bernabé no hay Pablo. Sin Pablo no hay epístolas del Nuevo Testamento. Sin las epístolas del Nuevo Testamento, francamente, no hay cristianismo doctrinal. Sea un Bernabé. El Espíritu Santo seguirá levantando Saulos; necesita Bernabés que los reciban.</p>
+
+        <p>Los apóstoles recibieron a Saulo por la palabra de Bernabé. Saulo predicó con denuedo en Jerusalén también, y otra vez los judíos helenistas trataron de matarlo. Los hermanos lo llevaron a Cesarea y lo embarcaron a Tarso, su ciudad natal. Entonces viene uno de los versículos resumen más callados y hermosos de Lucas. <em>"Entonces las iglesias tenían paz por toda Judea y Galilea y Samaria, y eran edificadas, andando en el temor del Señor; y llenas de la consolación del Espíritu Santo, eran multiplicadas"</em> (Hechos 9:31, RVG). El más grande perseguidor de la iglesia se había convertido en miembro de la iglesia, y la iglesia tuvo su primer sabor de paz en años. El dragón había sido amordazado. La semilla que Esteban había plantado con su sangre había brotado.</p>
+
+        <h2>VI. Lo que esta conversión nos enseña</h2>
+        <p>Tres lecciones. Primera, <strong>nadie está demasiado lejos</strong>. Si tiene un hijo al que ha dado por perdido, un hermano que odia la iglesia, un antiguo amigo que se burla del evangelio — lea Hechos 9 otra vez. El Señor encontró a Saulo de Tarso en el camino a las afueras de Damasco. También puede encontrar a su pródigo. El mismo Cristo que detuvo una inquisición de un solo hombre con un destello de luz del mediodía todavía camina por los caminos de este mundo buscando perseguidores endurecidos. No ha perdido la habilidad de hacer Pablos de los Saulos.</p>
+
+        <p>Segunda, <strong>la conversión le cuesta al convertido</strong>. El Señor no le prometió a Saulo comodidad. Le prometió a Saulo sufrimiento. La mayor parte de la iglesia occidental ha perdido la honradez para decirle esto a la gente desde el principio. Vendemos el evangelio como un plan de superación personal y luego nos sorprendemos cuando nuestros convertidos caen la primera vez que aparece el costo. Lea la etiqueta de precio en voz alta como lo hizo el Señor. <em>Yo le mostraré cuánto le es necesario padecer por mi nombre.</em> El evangelio es el regalo gratuito más costoso del universo.</p>
+
+        <p>Tercera, y aquí es donde vive la mayoría de ustedes, <strong>la iglesia necesita a sus Bernabés más que a sus Saulos</strong>. Hay más papeles con forma de Bernabé en cualquier congregación de los que jamás habrá púlpitos con forma de Pablo. El futuro del evangelio corre a través de las personas que ponen su reputación en la línea por un nuevo creyente que aún no tiene reputación. Saulo no podía edificar la iglesia solo. Tenía que ser recibido. Alguien, en algún lugar, asumió el riesgo. Sea ese alguien. El Espíritu que quebró al perseguidor en el camino a Damasco todavía usa discípulos ordinarios llamados Ananías y Bernabé para terminar lo que Él comenzó.</p>
+
+        <p>El hombre que salió de Jerusalén en el capítulo 9 respirando amenazas regresó a Jerusalén en el capítulo 9 como un hermano. El dragón se había convertido en cordero. El perseguidor se había convertido en predicador. El destructor de la iglesia se había convertido en su mayor edificador. La mano del Señor no se ha acortado. Él sigue en el negocio de la conversión. Y lo seguirá hasta que el último Saulo del camino sea hallado.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 4 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 4 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></span><span class="lang-es"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></span></p>
+    <div class="exam-status hidden" id="examStatus"></div>
+<div class="mc-section" id="mcSection">
+  <h3><span class="lang-en">Multiple Choice &mdash; 20 Questions</span><span class="lang-es">Opción Múltiple &mdash; 20 Preguntas</span></h3>
+  <div id="mcContainer"></div>
+</div>
+<div class="sa-section" id="saSection">
+  <h3><span class="lang-en">Short Answer &mdash; 10 Questions <span class="sa-badge" id="saBadgeEn"></span></span><span class="lang-es">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="saBadgeEs"></span></span></h3>
+  <p class="sa-note"><span class="lang-en" id="saNoteEn"></span><span class="lang-es" id="saNoteEs"></span></p>
+  <div id="kwContainer"></div>
+</div>
+<div style="margin-top: 20px;">
+  <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+  <button id="resetExamBtn" class="btn-reset" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+  <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+</div>
+</div>
+
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+
+const TOTAL_UNITS = 11;
+const CURRENT_UNIT = 4;
+const NEXT_URL = 'CTSActsUnit5.html';
+
+// === MC + SA data (preserved verbatim from upstream) ===
+const mcQuestions = [
+    { textEn: "1. The Greek of Acts 9:1 describes Saul as one who was 'breathing' threats and murder. The image is of a man for whom intimidation was:", textEs: "1. El griego de Hechos 9:1 describe a Saulo como uno que 'respiraba' amenazas y muerte. La imagen es la de un hombre para quien la intimidación era:", optionsEn: ["A passing whim", "The very air he inhaled", "An unwelcome duty", "A political strategy only"], optionsEs: ["Un capricho pasajero", "El mismo aire que inhalaba", "Un deber no deseado", "Solo una estrategia política"], correct: 1 },
+    { textEn: "2. Saul of Tarsus had been trained at the feet of:", textEs: "2. Saulo de Tarso había sido entrenado a los pies de:", optionsEn: ["Annas", "Caiaphas", "Gamaliel", "Hillel the Younger"], optionsEs: ["Anás", "Caifás", "Gamaliel", "Hilel el Joven"], correct: 2 },
+    { textEn: "3. The distance from Jerusalem to Damascus was approximately:", textEs: "3. La distancia de Jerusalén a Damasco era aproximadamente:", optionsEn: ["35 miles", "75 miles", "135 miles", "300 miles"], optionsEs: ["55 km", "120 km", "210 km", "480 km"], correct: 2 },
+    { textEn: "4. Saul's letters from the high priest authorized him to:", textEs: "4. Las cartas de Saulo del sumo sacerdote lo autorizaban a:", optionsEn: ["Bring followers of the Way bound to Jerusalem", "Establish new synagogues", "Collect the temple tax", "Negotiate with Rome"], optionsEs: ["Traer presos a Jerusalén a los del Camino", "Establecer nuevas sinagogas", "Recoger el impuesto del templo", "Negociar con Roma"], correct: 0 },
+    { textEn: "5. Christ's words on the road were 'Saul, Saul, why are you persecuting Me?' This identifies Christ with:", textEs: "5. Las palabras de Cristo en el camino fueron '¿Saulo, Saulo, por qué me persigues?' Esto identifica a Cristo con:", optionsEn: ["The Roman government", "The Jerusalem temple", "Saul's own conscience", "His suffering followers — to strike them is to strike Him"], optionsEs: ["El gobierno romano", "El templo de Jerusalén", "La propia conciencia de Saulo", "Sus seguidores que sufren — golpearlos es golpearlo a Él"], correct: 3 },
+    { textEn: "6. After the encounter, Saul was led blind into Damascus and stayed how long?", textEs: "6. Después del encuentro, Saulo fue llevado ciego a Damasco y permaneció ¿cuánto tiempo?", optionsEn: ["One day", "Three days, neither eating nor drinking", "Seven days", "Forty days"], optionsEs: ["Un día", "Tres días, sin comer ni beber", "Siete días", "Cuarenta días"], correct: 1 },
+    { textEn: "7. The Damascus disciple sent to lay hands on Saul was named:", textEs: "7. El discípulo de Damasco enviado a poner las manos sobre Saulo se llamaba:", optionsEn: ["Stephen", "Barnabas", "Ananias (a different man from the one in Acts 5)", "Simon"], optionsEs: ["Esteban", "Bernabé", "Ananías (un hombre distinto del de Hechos 5)", "Simón"], correct: 2 },
+    { textEn: "8. Christ's purpose for Saul, as told to Ananias, included bearing His name before:", textEs: "8. El propósito de Cristo para Saulo, según le fue dicho a Ananías, incluía llevar Su nombre delante de:", optionsEn: ["Only the Jews", "Only philosophers", "Gentiles, kings, and the children of Israel", "Only Roman officials"], optionsEs: ["Solo los judíos", "Solo filósofos", "Gentiles, reyes y los hijos de Israel", "Solo funcionarios romanos"], correct: 2 },
+    { textEn: "9. Christ also told Ananias He would show Saul:", textEs: "9. Cristo también le dijo a Ananías que le mostraría a Saulo:", optionsEn: ["Great wealth", "Many languages", "Long life", "How many things he must suffer for His name's sake"], optionsEs: ["Gran riqueza", "Muchos idiomas", "Larga vida", "Cuánto le es necesario padecer por Su nombre"], correct: 3 },
+    { textEn: "10. Ananias's first words to Saul were:", textEs: "10. Las primeras palabras de Ananías a Saulo fueron:", optionsEn: ["Brother Saul", "Repent and be baptized", "Persecutor of the church", "Welcome to Damascus"], optionsEs: ["Hermano Saulo", "Arrepiéntete y bautízate", "Perseguidor de la iglesia", "Bienvenido a Damasco"], correct: 0 },
+    { textEn: "11. Immediately after his sight was restored and he was baptized, Saul:", textEs: "11. Inmediatamente después de recobrar la vista y ser bautizado, Saulo:", optionsEn: ["Returned to Jerusalem to apologize", "Went to seminary for training", "Began preaching in the synagogues that Jesus is the Son of God", "Withdrew into solitude for years"], optionsEs: ["Volvió a Jerusalén a disculparse", "Se fue al seminario a estudiar", "Comenzó a predicar en las sinagogas que Jesús es el Hijo de Dios", "Se retiró a la soledad por años"], correct: 2 },
+    { textEn: "12. The reaction in the Damascus synagogues to Saul's preaching was:", textEs: "12. La reacción en las sinagogas de Damasco a la predicación de Saulo fue:", optionsEn: ["Quiet acceptance", "Immediate mass conversion", "Indifference", "Astonishment, then a plot to kill him"], optionsEs: ["Aceptación callada", "Conversión masiva inmediata", "Indiferencia", "Asombro, luego un complot para matarlo"], correct: 3 },
+    { textEn: "13. To escape the murder plot at Damascus, Saul was:", textEs: "13. Para escapar del complot de muerte en Damasco, Saulo fue:", optionsEn: ["Ferried out by ship", "Lowered through the city wall in a basket", "Smuggled out in a cart", "Hidden in a cave for weeks"], optionsEs: ["Sacado en barco", "Bajado por el muro de la ciudad en una canasta", "Sacado a escondidas en un carro", "Escondido en una cueva por semanas"], correct: 1 },
+    { textEn: "14. When Saul tried to join the disciples in Jerusalem, their initial response was:", textEs: "14. Cuando Saulo trató de juntarse con los discípulos en Jerusalén, su respuesta inicial fue:", optionsEn: ["Fear and disbelief that he was really a disciple", "Joyful welcome", "Indifference", "Immediate ordination"], optionsEs: ["Miedo e incredulidad de que en verdad fuera discípulo", "Bienvenida gozosa", "Indiferencia", "Ordenación inmediata"], correct: 0 },
+    { textEn: "15. The man who vouched for Saul to the apostles in Jerusalem was:", textEs: "15. El hombre que respondió por Saulo ante los apóstoles en Jerusalén fue:", optionsEn: ["Peter", "Barnabas (the Son of Encouragement)", "James", "John"], optionsEs: ["Pedro", "Bernabé (el Hijo de Consolación)", "Jacobo", "Juan"], correct: 1 },
+    { textEn: "16. After plots arose in Jerusalem against Saul, the brethren took him to:", textEs: "16. Después de que surgieron complots en Jerusalén contra Saulo, los hermanos lo llevaron a:", optionsEn: ["Antioch", "Galilee", "Caesarea, then sent him on to Tarsus, his hometown", "Cyprus"], optionsEs: ["Antioquía", "Galilea", "Cesarea, y de allí lo enviaron a Tarso, su ciudad natal", "Chipre"], correct: 2 },
+    { textEn: "17. Acts 9:31 reports that with Saul's removal from Jerusalem, the churches throughout Judea, Galilee, and Samaria:", textEs: "17. Hechos 9:31 informa que con la salida de Saulo de Jerusalén, las iglesias por toda Judea, Galilea y Samaria:", optionsEn: ["Were divided", "Had peace and were edified, walking in the fear of the Lord", "Faced new persecution", "Lost members"], optionsEs: ["Estaban divididas", "Tenían paz y eran edificadas, andando en el temor del Señor", "Enfrentaban nueva persecución", "Perdían miembros"], correct: 1 },
+    { textEn: "18. The phrase 'breathing threats and murder' (Acts 9:1) is meant to convey that Saul:", textEs: "18. La frase 'respirando amenazas y muerte' (Hechos 9:1) tiene como propósito transmitir que Saulo:", optionsEn: ["Was angry only occasionally", "Was carrying weapons", "Had a respiratory illness", "Lived and breathed in an atmosphere of intimidation against the church"], optionsEs: ["Estaba enojado solo ocasionalmente", "Llevaba armas", "Tenía una enfermedad respiratoria", "Vivía y respiraba en una atmósfera de intimidación contra la iglesia"], correct: 3 },
+    { textEn: "19. Saul's conversion shows that conversion costs the convert because:", textEs: "19. La conversión de Saulo muestra que la conversión le cuesta al convertido porque:", optionsEn: ["Christ promises only ease and prosperity", "The church demanded a tithe", "The Jews would no longer trade with him", "Christ promised Saul beforehand how much he must suffer for the name"], optionsEs: ["Cristo promete solo facilidad y prosperidad", "La iglesia exigía un diezmo", "Los judíos ya no comerciarían con él", "Cristo le prometió a Saulo de antemano cuánto debía padecer por el nombre"], correct: 3 },
+    { textEn: "20. The overarching lesson of Acts 9:1–31 is that:", textEs: "20. La lección general de Hechos 9:1–31 es que:", optionsEn: ["Gentiles can never be converted", "Christ can convert the most hardened persecutor and the church needs Barnabases to receive new converts", "Saul was always secretly a Christian", "Conversion happens without cost"], optionsEs: ["Los gentiles nunca pueden ser convertidos", "Cristo puede convertir al perseguidor más endurecido y la iglesia necesita Bernabés que reciban a los nuevos convertidos", "Saulo siempre fue secretamente cristiano", "La conversión ocurre sin costo"], correct: 1 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Saul thought he was serving God when he was actually fighting against God. How does this connect with Gamaliel's warning in Acts 5:39, and what does it teach about religious sincerity that is misdirected?", textEs: "21. Saulo creía estar sirviendo a Dios cuando en realidad estaba peleando contra Dios. ¿Cómo se conecta esto con la advertencia de Gamaliel en Hechos 5:39, y qué enseña sobre la sinceridad religiosa mal dirigida?", kwEn: ["fight", "against", "god", "gamal", "sincer", "misdir", "religio", "zeal"], kwEs: ["pele", "contra", "dios", "gamal", "sincer", "mal", "religio", "celo"] , modelEn: "Saul was a sincere, zealous Pharisee who believed he was serving God while he was actually fighting against God, walking straight into Gamaliel's own warning in Acts 5:39 that opposing this movement might mean fighting against God. The irony is sharp: Gamaliel had been Saul's own teacher, yet Saul never heard the warning. It teaches that religious sincerity is not enough — sincere zeal can be badly misdirected, and a heart can be fervent for God yet aimed against Him until Christ redirects it.", modelEs: "Saulo era un fariseo sincero y lleno de celo que creía estar sirviendo a Dios mientras en realidad peleaba contra Dios, entrando directamente en la advertencia de Gamaliel en Hechos 5:39 de que oponerse a este movimiento podría ser pelear contra Dios. La ironía es aguda: Gamaliel había sido su propio maestro, y aun así Saulo no escuchó la advertencia. Enseña que la sinceridad religiosa no basta — el celo sincero puede estar muy mal dirigido, y un corazón puede arder por Dios y sin embargo apuntar contra Él hasta que Cristo lo redirige." },
+    { textEn: "22. Discuss the significance of Christ saying 'why are you persecuting Me' rather than 'why are you persecuting My church.' What does this tell us about union with Christ?", textEs: "22. Discuta el significado de que Cristo dijera '¿por qué me persigues a Mí?' en vez de '¿por qué persigues a Mi iglesia?' ¿Qué nos dice esto sobre la unión con Cristo?", kwEn: ["persec", "me", "union", "body", "christ", "ident", "head", "church"], kwEs: ["persig", "me", "unión", "cuerpo", "cristo", "ident", "cabeza", "iglesia"] , modelEn: "Christ asked 'why are you persecuting Me,' not 'why are you persecuting My church,' revealing how completely He identifies with His people. To lay a hand on His battered followers was to lay a hand on Him. This teaches the union of Christ with His body: He is the Head, the church is His body, and an attack on the members is felt by the Lord Himself. The same union means He still feels every blow His people take, and their very identity is bound up in Him.", modelEs: "Cristo preguntó '¿por qué me persigues a Mí?', no '¿por qué persigues a Mi iglesia?', revelando cuán completamente se identifica con Su pueblo. Poner una mano sobre Sus seguidores golpeados era ponerla sobre Él. Esto enseña la unión de Cristo con Su cuerpo: Él es la Cabeza, la iglesia es Su cuerpo, y un ataque a los miembros lo siente el Señor mismo. Esa misma unión significa que todavía siente cada golpe que recibe Su pueblo, cuya identidad está ligada a Él." },
+    { textEn: "23. Why is Ananias of Damascus one of the bravest men in the New Testament? What did obedience cost him, and what did it gain the church?", textEs: "23. ¿Por qué es Ananías de Damasco uno de los hombres más valientes del Nuevo Testamento? ¿Qué le costó la obediencia, y qué ganó la iglesia con ella?", kwEn: ["anan", "damasc", "obey", "risk", "brother", "brave", "fear", "lay"], kwEs: ["anan", "damasc", "obed", "riesgo", "hermano", "valien", "temor", "imp"] , modelEn: "Ananias of Damascus was one of the bravest men in the New Testament because the Lord told him to go lay hands on the very man who had come with authority to arrest believers like him. Obedience cost him real risk — he had every reason to fear Saul as the church's exterminator — yet he went, and his first words were 'Brother Saul.' His courage gained the church its greatest missionary: by obeying despite fear, this obscure disciple laid hands on the future apostle Paul, and the body of Christ was changed forever.", modelEs: "Ananías de Damasco fue uno de los hombres más valientes del Nuevo Testamento porque el Señor le dijo que fuera a imponer las manos sobre el mismo hombre que había venido con autoridad para arrestar a creyentes como él. La obediencia le costó un riesgo real — tenía toda razón para temer a Saulo, el exterminador de la iglesia — pero fue, y sus primeras palabras fueron 'Hermano Saulo'. Su valor le ganó a la iglesia su mayor misionero: al obedecer a pesar del temor, este discípulo oscuro impuso las manos sobre el futuro apóstol Pablo." },
+    { textEn: "24. Christ told Ananias upfront that Saul was a 'chosen vessel' who would 'suffer many things' for His name. How should this reality of preordained suffering shape our understanding of calling?", textEs: "24. Cristo le dijo a Ananías de antemano que Saulo era un 'vaso escogido' que 'padecería muchas cosas' por Su nombre. ¿Cómo debería esta realidad del sufrimiento preordenado moldear nuestra comprensión del llamado?", kwEn: ["chosen", "vessel", "suffer", "call", "cost", "minis", "name", "show"], kwEs: ["escog", "vaso", "padec", "llam", "costo", "minis", "nombre", "mostr"] , modelEn: "Before Saul had preached a single sermon, Christ called him a chosen vessel to bear His name, yet in the same breath said, 'I will show him how many things he must suffer for My name's sake.' The calling came with a price tag printed on the receipt. This should shape how we understand calling: Christ does not promise His servants success but suffering, and a genuine call to ministry includes its cost. Paul's later catalog of beatings and shipwrecks was simply delivery of what was ordered the day Ananias prayed over him.", modelEs: "Antes de que Saulo predicara un solo sermón, Cristo lo llamó vaso escogido para llevar Su nombre, pero en el mismo aliento dijo: 'le mostraré cuánto le es necesario padecer por Mi nombre'. El llamado vino con un precio impreso en el recibo. Esto debe moldear cómo entendemos el llamado: Cristo no promete a Sus siervos éxito sino sufrimiento, y un llamado genuino al ministerio incluye su costo. El catálogo posterior de azotes y naufragios de Pablo fue simplemente la entrega de lo encargado el día que Ananías oró por él." },
+    { textEn: "25. Discuss the significance of Ananias's first words: 'Brother Saul.' What does this teach about Christian fellowship and reconciliation?", textEs: "25. Discuta el significado de las primeras palabras de Ananías: 'Hermano Saulo.' ¿Qué enseña esto sobre la comunión cristiana y la reconciliación?", kwEn: ["brother", "saul", "fellow", "reconcil", "enemy", "family", "first", "word"], kwEs: ["hermano", "saulo", "comuni", "reconcil", "enem", "familia", "primer", "palab"] , modelEn: "Ananias's first words to the blinded persecutor were the sweetest two-word sermon in the New Testament: 'Brother Saul.' Saul had not yet been baptized or preached, and the first human voice in his new life called him brother. It teaches that real Christian fellowship can turn an enemy into family in the time it takes to say two syllables. Reconciliation in Christ is that immediate and that complete — the man who had come to imprison Ananias was received as a brother.", modelEs: "Las primeras palabras de Ananías al perseguidor cegado fueron el sermón de dos palabras más dulce del Nuevo Testamento: 'Hermano Saulo'. Saulo aún no había sido bautizado ni predicado, y la primera voz humana de su nueva vida lo llamó hermano. Enseña que la verdadera comunión cristiana puede convertir a un enemigo en familia en el tiempo que toma decir dos sílabas. La reconciliación en Cristo es así de inmediata y completa: el hombre que había venido a encarcelar a Ananías fue recibido como hermano." },
+    { textEn: "26. The roles of Ananias of Damascus and Barnabas in Saul's early discipleship are often overlooked. What pastoral lessons emerge from how each man received the new convert?", textEs: "26. Los papeles de Ananías de Damasco y Bernabé en el discipulado temprano de Saulo a menudo son pasados por alto. ¿Qué lecciones pastorales surgen de cómo cada hombre recibió al nuevo convertido?", kwEn: ["anan", "barnab", "receiv", "pastor", "convert", "welcom", "trust", "early"], kwEs: ["anan", "bernab", "recib", "pastor", "convert", "acoger", "confi", "temprano"] , modelEn: "Ananias and Barnabas both received the new convert when it was risky to do so, and their example yields rich pastoral lessons. Ananias welcomed Saul with 'Brother' and laid hands on him; Barnabas later vouched for him before a frightened Jerusalem church that would not trust him. Each man extended trust to a new convert in the early days, before it was safe or popular — the unglamorous pastoral work of acoger, believing in, and standing beside someone the rest of the church still feared. Ministry often depends on such people more than on the gifted preacher.", modelEs: "Ananías y Bernabé recibieron al nuevo convertido cuando era arriesgado hacerlo, y su ejemplo ofrece ricas lecciones pastorales. Ananías acogió a Saulo con 'Hermano' e impuso las manos sobre él; Bernabé luego lo respaldó ante una iglesia de Jerusalén asustada que no confiaba en él. Cada hombre extendió confianza a un nuevo convertido en los días tempranos, antes de que fuera seguro o popular — la labor pastoral poco vistosa de acoger, creer y estar al lado de alguien a quien el resto de la iglesia aún temía." },
+    { textEn: "27. The persecutor became the persecuted within weeks of his conversion. What does this teach about the costs of identifying with Christ?", textEs: "27. El perseguidor se convirtió en perseguido a las pocas semanas de su conversión. ¿Qué enseña esto sobre los costos de identificarse con Cristo?", kwEn: ["persec", "cost", "ident", "suffer", "christ", "convert", "flee", "basket"], kwEs: ["persegu", "costo", "ident", "padec", "cristo", "convert", "huir", "canast"] , modelEn: "Within weeks of his conversion Saul the persecutor had become the persecuted: the Damascus Jews plotted to kill him, and he had to flee, lowered down the city wall in a basket. The man who rode in with arrest warrants snuck out like a smuggler. It teaches that identifying with Christ carries a cost the convert begins to pay almost immediately — the suffering Christ had promised began at once. To take Christ's name is to take His reproach, and the basket over the wall was Saul's first installment.", modelEs: "A las pocas semanas de su conversión, Saulo el perseguidor se había vuelto el perseguido: los judíos de Damasco tramaron matarlo, y tuvo que huir, descolgado por el muro en una canasta. El hombre que entró con órdenes de arresto salió a escondidas como un contrabandista. Enseña que identificarse con Cristo lleva un costo que el convertido empieza a pagar casi de inmediato — el sufrimiento, el padecer que Cristo había prometido, comenzó enseguida. Tomar el nombre de Cristo es tomar Su oprobio, y la canasta sobre el muro fue el primer pago de Saulo." },
+    { textEn: "28. Why is Barnabas, more than the apostles, the unsung hero of Saul's reception in Jerusalem? Discuss the role of 'the church's Barnabases' in modern congregational life.", textEs: "28. ¿Por qué es Bernabé, más que los apóstoles, el héroe no reconocido de la recepción de Saulo en Jerusalén? Discuta el papel de los 'Bernabés de la iglesia' en la vida congregacional moderna.", kwEn: ["barnab", "vouch", "encourag", "reput", "modern", "introduc", "trust", "bridge"], kwEs: ["bernab", "respald", "consol", "reput", "moderna", "presen", "confi", "puente"] , modelEn: "When the Jerusalem church was too afraid to believe Saul was truly converted, Barnabas, the Son of Encouragement, took him, introduced him to the apostles, and vouched for his story. More than the apostles, he was the bridge: he put his own reputation on the line for a man no one else would trust. The church still needs its Barnabases, the modern members who walk up to the new believer everyone is whispering about and stand beside him. Without a Barnabas to vouch for him there is no Paul, and without Paul, no epistles.", modelEs: "Cuando la iglesia de Jerusalén tenía demasiado miedo para creer que Saulo se había convertido de verdad, Bernabé, el Hijo de Consolación, lo tomó, lo presentó a los apóstoles y respaldó su testimonio. Más que los apóstoles, él fue el puente: puso su propia reputación en juego por un hombre en quien nadie más confiaba. La iglesia todavía necesita a sus Bernabés en la congregación moderna, los miembros que se acercan al nuevo creyente del que todos cuchichean y se paran a su lado. Sin un Bernabé que lo respalde no hay Pablo, y sin Pablo, no hay epístolas." },
+    { textEn: "29. Acts 9:31 reports that with Saul's conversion the churches finally had peace. Discuss this irony and what it teaches about the Lord's sovereignty over persecution.", textEs: "29. Hechos 9:31 informa que con la conversión de Saulo las iglesias finalmente tuvieron paz. Discuta esta ironía y lo que enseña sobre la soberanía del Señor sobre la persecución.", kwEn: ["peace", "iron", "sover", "persec", "saul", "conver", "church", "rest"], kwEs: ["paz", "iron", "sober", "persec", "saulo", "convers", "iglesia", "descans"] , modelEn: "The great irony of Acts 9:31 is that the churches finally had peace precisely when their fiercest persecutor, Saul, was converted — the dragon that had hunted them became a brother. It teaches the Lord's sovereignty over persecution: He did not merely protect the church from Saul, He converted Saul, turning the chief threat into the chief builder. The rest the church enjoyed was not won by strategy but granted by the God who rules even over those who rage against Him.", modelEs: "La gran ironía de Hechos 9:31 es que las iglesias por fin tuvieron paz precisamente con la conversión de su más feroz perseguidor, Saulo — el dragón que las había cazado se volvió hermano. Enseña la soberanía del Señor sobre la persecución: no solo protegió a la iglesia de Saulo, sino que lo convirtió, tornando la principal amenaza en el principal edificador. El descanso que disfrutó la iglesia no se ganó con estrategia sino que lo concedió el Dios que reina aun sobre quienes braman contra Él." },
+    { textEn: "30. Synthesize the message of Acts 9:1–31 for a modern congregation: who are the Sauls in our streets, who are the Ananiases and Barnabases who must receive them, and what is the Lord still doing on the road to Damascus?", textEs: "30. Sintetice el mensaje de Hechos 9:1–31 para una congregación moderna: ¿quiénes son los Saulos en nuestras calles, quiénes son los Ananías y los Bernabés que deben recibirlos, y qué sigue haciendo el Señor en el camino a Damasco?", kwEn: ["saul", "anan", "barnab", "receiv", "evang", "modern", "street", "today"], kwEs: ["saulo", "anan", "bernab", "recib", "evang", "moderna", "calle", "hoy"] , modelEn: "Acts 9:1–31 calls a modern congregation to three roles. There are still Sauls in our streets — the hardened opponent, the mocking former friend, the prodigal everyone has given up on — and the Lord is still stopping them on their own roads to Damascus. There are still Ananiases who must obey and receive them, and Barnabases who must vouch for them when the church is afraid. The evangelistic lesson for today is that no one is too far gone, and that the Lord finishes His conversions through ordinary disciples willing to welcome the convert.", modelEs: "Hechos 9:1–31 llama a una congregación moderna a tres papeles. Todavía hay Saulos en nuestras calles — el opositor endurecido, el antiguo amigo burlón, el pródigo que todos han dado por perdido — y el Señor todavía los detiene en su propio camino a Damasco. Todavía hay Ananías que deben obedecer y recibirlos, y Bernabés que deben respaldarlos cuando la iglesia tiene miedo. La lección evangelística para hoy es que nadie está demasiado perdido, y que el Señor termina sus conversiones mediante discípulos ordinarios dispuestos a recibir al convertido en la iglesia moderna." }
+];
+
+// === Language toggle (3-button group) ===
+const langButtons = document.querySelectorAll('.lang-toggle-group button');
+function setLang(lang) {
+  document.body.classList.remove('lang-en','lang-es','lang-both');
+  document.body.classList.add('lang-' + lang);
+  langButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-lang') === lang));
+}
+langButtons.forEach(btn => btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang'))));
+
+// === Student + Track ===
+function readStudent() {
+  try { return JSON.parse(lsGet('cts_student') || 'null'); } catch(e) { return null; }
+}
+function readTrack() {
+  const t = lsGet('cts_track');
+  if (t === 'cert' || t === 'mdiv' || t === 'thm') return t;
+  const st = readStudent();
+  if (st && st.track) return st.track;
+  return 'cert';
+}
+function isMdiv() { const t = readTrack(); return t === 'mdiv' || t === 'thm'; }
+
+// === Greeting + track badge ===
+function applyStudentUI() {
+  const student = readStudent();
+  const isEs = document.body.classList.contains('lang-es');
+  const greetEl = document.getElementById('studentGreeting');
+  const warn = document.getElementById('regWarn');
+  const slot = document.getElementById('trackBadgeSlot');
+  if (student && student.name) {
+    greetEl.innerHTML = '👋 ' + student.name;
+    if (warn) warn.classList.add('hidden');
+    const track = readTrack();
+    const label = track === 'thm' ? 'Th.M.' : (track === 'mdiv' ? 'M.Div' : (isEs ? 'Certificado' : 'Certificate'));
+    if (slot) slot.innerHTML = '<span class="track-badge">' + label + '</span>';
+  } else {
+    greetEl.innerHTML = '<span style="color:#5b3a1f;">' + (isEs ? 'Bienvenido al Intensivo de Hechos' : 'Welcome to the Acts Intensive') + '</span>';
+    if (warn) warn.classList.remove('hidden');
+    if (slot) slot.innerHTML = '';
+  }
+}
+
+// === Registration modal (U1 only) ===
+
+function showRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.remove('hidden');
+}
+function hideRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.add('hidden');
+}
+const regModal = document.getElementById('regModal');
+const openBtn = document.getElementById('openRegBtn');
+const openBtn2 = document.getElementById('openRegBtn2');
+const saveBtn = document.getElementById('regSaveBtn');
+if (openBtn) openBtn.addEventListener('click', showRegModal);
+if (openBtn2) openBtn2.addEventListener('click', showRegModal);
+if (saveBtn) saveBtn.addEventListener('click', () => {
+  const name = (document.getElementById('regName').value || '').trim();
+  const email = (document.getElementById('regEmail').value || '').trim();
+  const track = (document.querySelector('input[name="regTrack"]:checked') || {}).value || 'cert';
+  const isEs = document.body.classList.contains('lang-es');
+  if (!name) {
+    alert(isEs ? 'Por favor ingrese su nombre completo.' : 'Please enter your full name.');
+    return;
+  }
+  const rec = { name: name, email: email, track: track };
+  try {
+    lsSet('cts_student', JSON.stringify(rec));
+    lsSet('cts_track', track);
+  } catch(e) {}
+  hideRegModal();
+  applyStudentUI();
+  applyExamState();
+});
+// Auto-open modal on U1 if no cts_student present
+if (CURRENT_UNIT === 1 && !readStudent()) {
+  showRegModal();
+}
+
+
+// === Progress grid ===
+let progress = {};
+try { progress = JSON.parse(lsGet('cts_acts_progress')) || {}; } catch(e) { progress = {}; }
+function updateProgressGrid() {
+  const grid = document.getElementById('progressGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 1; i <= TOTAL_UNITS; i++) {
+    let cls = '';
+    if (progress['unit' + i]) cls = 'completed';
+    if (i === CURRENT_UNIT) cls += ' active';
+    grid.innerHTML += '<a href="CTSActsUnit' + i + '.html" class="' + cls + '">' + i + '</a>';
+  }
+}
+updateProgressGrid();
+document.getElementById('prevUnitBtn').onclick = () => {};
+document.getElementById('nextUnitBtn').onclick = () => { window.location.href = NEXT_URL; };
+
+// === Per-unit state keys ===
+const MC_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_passed';
+const SA_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_passed';
+const MC_SCORE_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_score';
+const LOCK_MC_KEY = 'cts_acts_u' + CURRENT_UNIT + '_lockout';
+const LOCK_SA_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_lockout';
+
+function mcPassed() { return lsGet(MC_PASSED_KEY) === '1'; }
+function saPassed() { return lsGet(SA_PASSED_KEY) === '1'; }
+function activeLock() {
+  const now = Date.now();
+  const mc = parseInt(lsGet(LOCK_MC_KEY) || '0', 10);
+  const sa = parseInt(lsGet(LOCK_SA_KEY) || '0', 10);
+  if (mcPassed()) { if (now < sa) return { until: sa, scope: 'sa' }; }
+  else { if (now < mc) return { until: mc, scope: 'mc' }; }
+  return null;
+}
+
+// === Render MC ===
+const mcContainer = document.getElementById('mcContainer');
+mcQuestions.forEach((q, idx) => {
+    /* CTS answer-shuffle (anti-gaming): randomize option order on each render */
+    (function(){var _o=q.optionsEn,_s=q.optionsEs,_n=_o.length,_p=[],_k,_i,_j,_t;for(_k=0;_k<_n;_k++){_p.push(_k);}for(_i=_n-1;_i>0;_i--){_j=Math.floor(Math.random()*(_i+1));_t=_p[_i];_p[_i]=_p[_j];_p[_j]=_t;}q.optionsEn=_p.map(function(x){return _o[x];});q.optionsEs=_p.map(function(x){return _s[x];});q.correct=_p.indexOf(q.correct);})();
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'mcq' + (idx + 1);
+  let h = '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>';
+  for (let i = 0; i < q.optionsEn.length; i++) {
+    const letter = 'ABCDEFGHIJ'[i];
+    h += '<button class="option" data-mc="' + idx + '" data-opt="' + i + '" type="button">' +
+         '<strong>' + letter + '.</strong> ' +
+         '<span class="lang-en">' + q.optionsEn[i] + '</span><span class="lang-es">' + q.optionsEs[i] + '</span>' +
+         '</button>';
+  }
+  mcContainer.appendChild(qDiv);
+  qDiv.innerHTML = h;
+  // Click handler on each option
+  qDiv.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (mcPassed()) return;
+      if (qDiv.dataset.answered !== undefined && qDiv.dataset.answered !== '') return;
+      const isEs = document.body.classList.contains('lang-es');
+      const chosen = parseInt(btn.getAttribute('data-opt'), 10);
+      const correct = q.correct;
+      qDiv.dataset.answered = String(chosen);
+      qDiv.querySelectorAll('.option').forEach(b => {
+        const oi = parseInt(b.getAttribute('data-opt'), 10);
+        b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+        if (oi === correct) b.classList.add('correct');
+        else if (oi === chosen) b.classList.add('wrong');
+      });
+      const oldfb = qDiv.querySelector('.feedback-text'); if (oldfb) oldfb.remove();
+      const fb = document.createElement('div');
+      if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+      else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+      qDiv.appendChild(fb);
+    });
+  });
+});
+
+// === Smart keyword matcher (word-boundary, like the other CTS courses) ===
+function kwHit(answer, kw){
+  if(!kw) return false;
+  var a=(answer||'').toLowerCase();
+  var k=String(kw).toLowerCase().trim();
+  if(!k) return false;
+  var esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var L='0-9a-zA-Z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1';
+  var re = k.length<=4 ? new RegExp('(?:^|[^'+L+'])'+esc+'(?!['+L+'])') : new RegExp('(?:^|[^'+L+'])'+esc);
+  return re.test(a);
+}
+function saHits(idx){
+  var ta=document.querySelector('.kw-answer[data-sa="'+idx+'"]');
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var kws=isEs?(q.kwEs||[]):(q.kwEn||[]);
+  var ans=(ta&&ta.value)||'';
+  var n=0; kws.forEach(function(k){ if(kwHit(ans,k)) n++; });
+  return n;
+}
+function revealSAModel(idx){
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var box=document.getElementById('saModel'+idx);
+  if(!box) return;
+  var head=isEs?'Respuesta modelo \u2014 est\u00fadiela':'Model answer \u2014 study this';
+  box.innerHTML='<strong>'+head+':</strong><br>'+(isEs?(q.modelEs||''):(q.modelEn||''));
+  box.style.display='block';
+}
+
+// === Render SA ===
+const kwContainer = document.getElementById('kwContainer');
+kwQuestions.forEach((q, idx) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'saq' + (idx + 1);
+  qDiv.innerHTML =
+    '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>' +
+    '<textarea class="kw-answer" data-sa="' + idx + '" placeholder=""></textarea>' +
+    '<button class="small check-kw-btn" type="button"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>' +
+    '<div class="feedback-text" id="saFb' + idx + '" style="display:none"></div>' +
+    '<div class="sa-model" id="saModel' + idx + '" style="display:none"></div>';
+  kwContainer.appendChild(qDiv);
+  const btn = qDiv.querySelector('.check-kw-btn');
+  const ta = qDiv.querySelector('.kw-answer');
+  btn.addEventListener('click', () => {
+    const isEs = document.body.classList.contains('lang-es');
+    const fb = document.getElementById('saFb' + idx);
+    const ans = (ta.value || '').trim();
+    if(!ans){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba su respuesta primero, luego verifique.' : 'Write your answer first, then check.';
+      var mb=document.getElementById('saModel'+idx); if(mb) mb.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    if(ans.length < 100){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.';
+      var mb2=document.getElementById('saModel'+idx); if(mb2) mb2.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    const hits = saHits(idx);
+    const ok = hits >= 3;
+    qDiv.dataset.answered = ok ? '1' : '0';
+    fb.className = 'feedback-text ' + (ok ? 'correct' : 'incorrect');
+    fb.style.display = 'block';
+    fb.textContent = ok
+      ? (isEs ? ('\u2713 Suficientes palabras clave (' + hits + ').') : ('\u2713 Sufficient keywords (' + hits + ').'))
+      : (isEs ? ('\u2717 A\u00fan no acreditada. Encontr\u00f3 ' + hits + ' de 3.') : ('\u2717 Not yet credited. Found ' + hits + ' of 3.'));
+    revealSAModel(idx);
+  });
+});
+
+// === UI state machine ===
+const mcSection = document.getElementById('mcSection');
+const saSection = document.getElementById('saSection');
+const statusEl = document.getElementById('examStatus');
+const submitBtn = document.getElementById('submitExamBtn');
+const resetBtn = document.getElementById('resetExamBtn');
+const resultEl = document.getElementById('examResult');
+
+function setStatus(cls, en, es) {
+  statusEl.className = 'exam-status ' + cls;
+  statusEl.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function clearStatus() { statusEl.className = 'exam-status hidden'; statusEl.innerHTML = ''; }
+function lockMcAsReview() {
+  document.querySelectorAll('#mcContainer .question').forEach(q => {
+    q.classList.add('review-locked');
+    q.querySelectorAll('.option').forEach(b => { b.disabled = true; });
+  });
+}
+
+function revealMC() {
+  const isEs = document.body.classList.contains('lang-es');
+  for (let i = 0; i < mcQuestions.length; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (!qd) continue;
+    const correct = mcQuestions[i].correct;
+    const chosen = (qd.dataset.answered !== undefined && qd.dataset.answered !== '') ? parseInt(qd.dataset.answered, 10) : -1;
+    qd.querySelectorAll('.option').forEach(b => {
+      const oi = parseInt(b.getAttribute('data-opt'), 10);
+      b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+      if (oi === correct) b.classList.add('correct');
+      else if (oi === chosen) b.classList.add('wrong');
+    });
+    let fb = qd.querySelector('.feedback-text');
+    if (!fb) { fb = document.createElement('div'); qd.appendChild(fb); }
+    if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+    else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+  }
+}
+
+
+function applyExamState() {
+  const isEs = document.body.classList.contains('lang-es');
+  // SA section is ALWAYS visible
+  saSection.style.display = '';
+  const badgeEn = document.getElementById('saBadgeEn');
+  const badgeEs = document.getElementById('saBadgeEs');
+  const noteEn = document.getElementById('saNoteEn');
+  const noteEs = document.getElementById('saNoteEs');
+  if (isMdiv()) {
+    badgeEn.textContent = 'Required for M.Div';
+    badgeEs.textContent = 'Requerido para M.Div';
+    noteEn.textContent = 'These 10 short-answer questions are required to complete Unit ' + CURRENT_UNIT + ' on the M.Div track. You must pass at 9 of 10.';
+    noteEs.textContent = 'Estas 10 preguntas de respuesta corta son requeridas para completar la Unidad ' + CURRENT_UNIT + ' en la vía M.Div. Debe aprobar con 9 de 10.';
+  } else {
+    badgeEn.textContent = 'Self-study — not graded for Certificate';
+    badgeEs.textContent = 'Auto-estudio — no cuenta para Certificado';
+    noteEn.textContent = 'These are the M.Div-level questions. Certificate students are welcome to attempt them for self-check; your answers will not affect your Unit ' + CURRENT_UNIT + ' pass status.';
+    noteEs.textContent = 'Estas son las preguntas de nivel M.Div. Los estudiantes de Certificado pueden intentarlas para auto-evaluarse; sus respuestas no afectarán el estado de aprobación de la Unidad ' + CURRENT_UNIT + '.';
+  }
+  const lock = activeLock();
+  if (lock) {
+    const minsLeft = Math.ceil((lock.until - Date.now()) / 60000);
+    submitBtn.disabled = true;
+    if (lock.scope === 'mc') {
+      setStatus('locked',
+        'Exam locked. Try again in ' + minsLeft + ' minute(s). The full exam will reset.',
+        'Examen bloqueado. Intente de nuevo en ' + minsLeft + ' minuto(s). El examen completo se reiniciará.');
+    } else {
+      setStatus('locked',
+        'Short-answer section locked. Try again in ' + minsLeft + ' minute(s). Multiple-choice pass is preserved.',
+        'Sección de respuesta corta bloqueada. Intente de nuevo en ' + minsLeft + ' minuto(s). Su aprobación de opción múltiple se conserva.');
+      lockMcAsReview();
+    }
+    setTimeout(applyExamState, 30000);
+    return;
+  }
+  submitBtn.disabled = false;
+  if (mcPassed()) {
+    lockMcAsReview();
+    if (isMdiv() && !saPassed()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed (saved). Complete the 10 short-answer questions to finish Unit ' + CURRENT_UNIT + '.',
+        'Opción múltiple aprobada (guardada). Complete las 10 preguntas de respuesta corta para terminar la Unidad ' + CURRENT_UNIT + '.');
+    } else if (!isMdiv()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed. Unit ' + CURRENT_UNIT + ' complete for Certificate track.',
+        'Opción múltiple aprobada. Unidad ' + CURRENT_UNIT + ' completa para la vía Certificado.');
+    } else {
+      clearStatus();
+    }
+  } else {
+    clearStatus();
+  }
+}
+
+submitBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const lock = activeLock();
+  if (lock) { applyExamState(); return; }
+
+  // Score MC
+  let mc = 0;
+  for (let i = 0; i < 20; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (qd && qd.dataset.answered !== undefined && parseInt(qd.dataset.answered, 10) === mcQuestions[i].correct) mc++;
+  }
+  if (mcPassed()) {
+    mc = parseInt(lsGet(MC_SCORE_KEY) || '18', 10);
+  }
+  const mcPass = mc >= 18;
+  revealMC();
+
+  // Score SA (recompute with the smart matcher; reveal models on masters submit)
+  let sa = 0;
+  for (let i = 0; i < 10; i++) {
+    if (saHits(i) >= 3) sa++;
+    if (isMdiv()) revealSAModel(i);
+  }
+  const saPass = sa >= 9;
+
+  if (!isMdiv()) {
+    // Certificate track — only MC matters
+    if (mcPass) {
+      lsSet(MC_PASSED_KEY, '1');
+      lsSet(MC_SCORE_KEY, String(mc));
+      progress['unit' + CURRENT_UNIT] = true;
+      lsSet('cts_acts_progress', JSON.stringify(progress));
+      resultEl.style.color = '#1f6b3b';
+      resultEl.textContent = (isEs
+        ? '¡Aprobado! OM ' + mc + '/20. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+        : 'Passed! MC ' + mc + '/20. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+    } else {
+      lsSet(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+    }
+    return;
+  }
+
+  // M.Div track
+  if (!mcPassed()) {
+    if (!mcPass) {
+      lsSet(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min. Examen completo se reiniciará.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min. Full exam will reset.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+      return;
+    }
+    lsSet(MC_PASSED_KEY, '1');
+    lsSet(MC_SCORE_KEY, String(mc));
+  }
+  if (saPass) {
+    lsSet(SA_PASSED_KEY, '1');
+    progress['unit' + CURRENT_UNIT] = true;
+    lsSet('cts_acts_progress', JSON.stringify(progress));
+    const finalMc = parseInt(lsGet(MC_SCORE_KEY) || '18', 10);
+    resultEl.style.color = '#1f6b3b';
+    resultEl.textContent = (isEs
+      ? '¡Aprobado! OM ' + finalMc + '/20, RC ' + sa + '/10. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+      : 'Passed! MC ' + finalMc + '/20, SA ' + sa + '/10. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+  } else {
+    lsSet(LOCK_SA_KEY, String(Date.now() + 15 * 60 * 1000));
+    resultEl.style.color = '#8a1f1f';
+    resultEl.textContent = (isEs
+      ? 'RC ' + sa + '/10. Necesita 9. Sección RC bloqueada 15 min. OM permanece aprobada.'
+      : 'SA ' + sa + '/10. Need 9. SA section locked 15 min. MC pass preserved.');
+    submitBtn.disabled = true;
+    setTimeout(applyExamState, 30000);
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar la Unidad ' + CURRENT_UNIT + '? Esto borrará sus respuestas y el estado de aprobación de OM/RC para esta unidad. (Esto no borra su registro.)'
+    : 'Reset Unit ' + CURRENT_UNIT + '? This will clear your answers and MC/SA pass state for this unit. (Does not clear your registration.)';
+  if (!window.confirm(msg)) return;
+  [MC_PASSED_KEY, SA_PASSED_KEY, LOCK_MC_KEY, LOCK_SA_KEY, MC_SCORE_KEY].forEach(k => lsDel(k));
+  if (progress['unit' + CURRENT_UNIT]) {
+    delete progress['unit' + CURRENT_UNIT];
+    lsSet('cts_acts_progress', JSON.stringify(progress));
+  }
+  window.location.reload();
+});
+
+// Initial render
+applyStudentUI();
+langButtons.forEach(b => b.addEventListener('click', applyStudentUI));
+applyExamState();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSActsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

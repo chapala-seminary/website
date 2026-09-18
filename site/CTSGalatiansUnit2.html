@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Galatians Intensive — Unit 2</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 3 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Galatians Intensive — Unit 2: Paul Defends the Gospel</span><span class="lang-es">📖 Gálatas Intensivo — Unidad 2: Pablo Defiende el Evangelio</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But I make known to you, brethren, that the gospel which was preached by me is not according to man... it came through the revelation of Jesus Christ." — Galatians 1:11-12 (NKJV)</span><span class="lang-es">"Mas os hago saber, hermanos, que el evangelio que fue predicado por mí, no es según hombre... sino por revelación de Jesucristo." — Gálatas 1:11-12 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Galatians Intensive. Please register before beginning Unit 2.</span><span class="lang-es">Bienvenido al Intensivo de Gálatas. Por favor regístrese antes de comenzar la Unidad 2.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="cert">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Galatians 1:11-2:10</strong></p>
+<div class="scripture">"But I make known to you, brethren, that the gospel which was preached by me is not according to man. For I neither received it from man, nor was I taught it, but it came through the revelation of Jesus Christ." &mdash; Galatians 1:11-12 (NKJV)</div>
+
+<p>In Unit 1 Paul defined the gospel &mdash; the gospel of grace &mdash; and pronounced a curse on anyone who would preach another. But the troublemakers in Galatia had a reply ready. They whispered that Paul's gospel was secondhand: that he had learned it from the apostles in Jerusalem and then softened it for the Gentiles, quietly leaving out the law. If that were true, Paul's gospel could be "corrected" by appealing to the real authorities. So in this long section Paul defends not the content of his gospel but its <em>source</em>. His argument is simple and powerful: my gospel came by revelation from Jesus Christ Himself, not from any man; and when I finally did meet the Jerusalem apostles, they added nothing to it &mdash; they recognized it and shook my hand. The gospel of grace stands on God's own authority, and the apostles confirmed it rather than corrected it.</p>
+
+<h3>Not According to Man</h3>
+<p>Paul states his case plainly: "the gospel which was preached by me is not according to man. For I neither received it from man, nor was I taught it, but it came through the revelation of Jesus Christ" (Galatians 1:11-12). He did not pick it up from a teacher, a school, or a council; the risen Christ revealed it to him directly. This matters for everything in the letter and for our whole course. A gospel that came down from God cannot be edited by men. If even Paul <em>received</em> it rather than invented it, then no later teacher, prophet, or church has the right to add to it or take from it. The message has one Author, and He has already spoken.</p>
+
+<h3>From Persecutor to Preacher</h3>
+<p>To prove his gospel was no human invention, Paul points to his own past: "you have heard of my former conduct in Judaism, how I persecuted the church of God beyond measure and tried to destroy it. And I advanced in Judaism beyond many of my contemporaries... being more exceedingly zealous for the traditions of my fathers" (Galatians 1:13-14). Here is the last man on earth who would have dreamed up a gospel of grace apart from the law. He had been the law's fiercest champion and the church's fiercest enemy. Something happened to him that he did not manufacture. "But when it pleased God, who separated me from my mother's womb and called me through His grace, to reveal His Son in me, that I might preach Him among the Gentiles..." (Galatians 1:15-16). Mark the words: God <em>separated</em> him, <em>called</em> him <em>through His grace</em>, and <em>revealed His Son in</em> him. Paul's apostleship, like his salvation, was a gift of grace, not a reward for zeal. The persecutor became a preacher only because grace laid hold of him.</p>
+
+<h3>Not From the Other Apostles</h3>
+<p>Paul then traces his movements to show he did not run to Jerusalem to be trained: "I did not immediately confer with flesh and blood, nor did I go up to Jerusalem to those who were apostles before me; but I went to Arabia, and returned again to Damascus" (Galatians 1:16-17). Only after three years did he go up to Jerusalem, and even then briefly: "I went up to Jerusalem to see Peter, and remained with him fifteen days. But I saw none of the other apostles except James, the Lord's brother" (Galatians 1:18-19). Fifteen days with Peter is a visit, not a seminary. The churches of Judea did not even know his face; "they were hearing only, 'He who formerly persecuted us now preaches the faith which he once tried to destroy.' And they glorified God in me" (Galatians 1:23-24). Paul's point is not that he despised the other apostles &mdash; far from it &mdash; but that his gospel did not come from them. It came from Christ, independently, and yet it was the very same gospel they preached.</p>
+
+<p class="pull-quote">The gospel of grace came to Paul by revelation, not by committee. What God gave from heaven, no council on earth may amend.</p>
+
+<h3>The Gospel Confirmed at Jerusalem</h3>
+<p>Fourteen years later Paul did go up to Jerusalem, by revelation, and laid before the leaders the gospel he preached among the Gentiles (Galatians 2:1-2). What happened there settled the matter. First, a test case: "not even Titus who was with me, being a Greek, was compelled to be circumcised" (Galatians 2:3). Titus was an uncircumcised Gentile believer, and the leaders did not require him to be circumcised in order to be accepted. Grace, not circumcision, was enough.</p>
+
+<p>But there was opposition: "false brethren secretly brought in (who came in by stealth to spy out our liberty which we have in Christ Jesus, that they might bring us into bondage), to whom we did not yield submission even for an hour, that the truth of the gospel might continue with you" (Galatians 2:4-5). Here are the Judaizers again, wanting to add the law to grace and so drag free people back into slavery. Paul would not give in &mdash; not for a single hour &mdash; because the truth of the gospel itself was on the line. This is the Unit 1 principle in action: where grace alone is at stake, there is no room for compromise.</p>
+
+<h3>They Added Nothing</h3>
+<p>And what did the great men of Jerusalem do? "Those who seemed to be something added nothing to me" (Galatians 2:6). They did not correct Paul's gospel or fasten requirements onto it. Instead, seeing the grace that was given to him, the pillars &mdash; James, Cephas (Peter), and John &mdash; "gave me and Barnabas the right hand of fellowship, that we should go to the Gentiles and they to the circumcised" (Galatians 2:9). One gospel, recognized by all; only the mission fields were divided. Their single request was tender and telling: "that we should remember the poor, the very thing which I also was eager to do" (Galatians 2:10). The apostles added nothing to the gospel because the gospel of grace needs nothing added. To add to it is not to improve it but to destroy it.</p>
+
+<p>So Unit 2 plants a second post beside the first. In Unit 1 we learned <em>what</em> the gospel is and that it must not be changed. Here we learn <em>where</em> it comes from: not from men, but from God by revelation, and confirmed &mdash; not corrected &mdash; by the apostles themselves. This is why the gospel of grace stands above every teacher, every council, and every age. When we carry the test of Galatians 1 into the units ahead, we are not holding up a standard of our own making. We are holding up the gospel God gave from heaven and the apostles received with the right hand of fellowship.</p>
+<div class="scripture">"...to whom we did not yield submission even for an hour, that the truth of the gospel might continue with you." &mdash; Galatians 2:5 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Gálatas 1:11-2:10 (RVG)</strong></p>
+<div class="scripture">"Mas os hago saber, hermanos, que el evangelio que fue predicado por mí, no es según hombre; pues yo ni lo recibí ni lo aprendí de hombre alguno, sino por revelación de Jesucristo." &mdash; Gálatas 1:11-12 (RVG)</div>
+
+<p>En la Unidad 1 Pablo definió el evangelio &mdash; el evangelio de la gracia &mdash; y pronunció una maldición sobre cualquiera que predicara otro. Pero los perturbadores en Galacia tenían una respuesta lista. Susurraban que el evangelio de Pablo era de segunda mano: que lo había aprendido de los apóstoles en Jerusalén y luego lo había suavizado para los gentiles, dejando calladamente fuera la ley. Si eso fuera cierto, el evangelio de Pablo podría "corregirse" apelando a las verdaderas autoridades. Así que en esta larga sección Pablo defiende no el contenido de su evangelio sino su <em>origen</em>. Su argumento es sencillo y poderoso: mi evangelio vino por revelación de Jesucristo mismo, no de hombre alguno; y cuando por fin conocí a los apóstoles de Jerusalén, nada le añadieron &mdash; lo reconocieron y me dieron la mano. El evangelio de la gracia descansa sobre la autoridad propia de Dios, y los apóstoles lo confirmaron en lugar de corregirlo.</p>
+
+<h3>No Según Hombre</h3>
+<p>Pablo expone su caso claramente: "el evangelio que fue predicado por mí, no es según hombre; pues yo ni lo recibí ni lo aprendí de hombre alguno, sino por revelación de Jesucristo" (Gálatas 1:11-12). No lo tomó de un maestro, una escuela, ni un concilio; el Cristo resucitado se lo reveló directamente. Esto importa para todo lo que sigue en la carta y para todo nuestro curso. Un evangelio que descendió de Dios no puede ser editado por hombres. Si aun Pablo lo <em>recibió</em> en lugar de inventarlo, entonces ningún maestro, profeta, o iglesia posterior tiene el derecho de añadirle o quitarle. El mensaje tiene un solo Autor, y Él ya ha hablado.</p>
+
+<h3>De Perseguidor a Predicador</h3>
+<p>Para probar que su evangelio no era invención humana, Pablo señala su propio pasado: "ya habéis oído acerca de mi conducta en otro tiempo en el judaismo, que perseguía sobremanera la iglesia de Dios, y la asolaba; y en el judaismo aventajaba a muchos de mis contemporáneos... siendo mucho más celoso de las tradiciones de mis padres" (Gálatas 1:13-14). Aquí está el último hombre en la tierra que habría inventado un evangelio de gracia aparte de la ley. Había sido el más feroz campeón de la ley y el más feroz enemigo de la iglesia. Algo le sucedió que él no fabricó. "Mas cuando plugo a Dios, que me apartó desde el vientre de mi madre, y me llamó por su gracia, revelar a su Hijo en mí, para que le predicase entre los gentiles..." (Gálatas 1:15-16). Note las palabras: Dios lo <em>apartó</em>, lo <em>llamó</em> <em>por su gracia</em>, y <em>reveló a su Hijo en</em> él. El apostolado de Pablo, como su salvación, fue un don de gracia, no una recompensa por su celo. El perseguidor se hizo predicador solo porque la gracia se apoderó de él.</p>
+
+<h3>No de los Otros Apóstoles</h3>
+<p>Pablo entonces traza sus movimientos para mostrar que no corrió a Jerusalén a ser entrenado: "no consulté en seguida con carne y sangre; ni subí a Jerusalén a los que eran apóstoles antes que yo; sino que fui a Arabia, y volví de nuevo a Damasco" (Gálatas 1:16-17). Solo después de tres años subió a Jerusalén, y aun entonces brevemente: "subí a Jerusalén para ver a Pedro, y permanecí con él quince días. Pero no vi a ningún otro de los apóstoles, sino a Jacobo el hermano del Señor" (Gálatas 1:18-19). Quince días con Pedro es una visita, no un seminario. Las iglesias de Judea ni siquiera conocían su rostro; "solamente habían oído decir: Aquel que en otro tiempo nos perseguía, ahora predica la fe que en otro tiempo asolaba. Y glorificaban a Dios en mí" (Gálatas 1:23-24). El punto de Pablo no es que despreciara a los otros apóstoles &mdash; lejos de eso &mdash; sino que su evangelio no vino de ellos. Vino de Cristo, de manera independiente, y aun así era el mismísimo evangelio que ellos predicaban.</p>
+
+<p class="pull-quote">El evangelio de la gracia vino a Pablo por revelación, no por comité. Lo que Dios dio desde el cielo, ningún concilio en la tierra puede enmendar.</p>
+
+<h3>El Evangelio Confirmado en Jerusalén</h3>
+<p>Catorce años después Pablo sí subió a Jerusalén, por revelación, y expuso ante los líderes el evangelio que predicaba entre los gentiles (Gálatas 2:1-2). Lo que sucedió allí zanjó el asunto. Primero, un caso de prueba: "ni aun Tito, que estaba conmigo, siendo griego, fue obligado a circuncidarse" (Gálatas 2:3). Tito era un creyente gentil incircunciso, y los líderes no exigieron que se circuncidara para ser aceptado. La gracia, no la circuncisión, era suficiente.</p>
+
+<p>Pero hubo oposición: "los falsos hermanos introducidos a escondidas, que entraban secretamente para espiar nuestra libertad que tenemos en Cristo Jesús, para reducirnos a esclavitud; a los cuales ni por una hora cedimos en sujeción, para que la verdad del evangelio permaneciese con vosotros" (Gálatas 2:4-5). Aquí están de nuevo los judaizantes, queriendo añadir la ley a la gracia y así arrastrar a gente libre de vuelta a la esclavitud. Pablo no cedería &mdash; ni por una sola hora &mdash; porque la verdad del evangelio mismo estaba en juego. Esto es el principio de la Unidad 1 en acción: donde la gracia sola está en juego, no hay lugar para el compromiso.</p>
+
+<h3>Nada Añadieron</h3>
+<p>¿Y qué hicieron los grandes hombres de Jerusalén? "Los que parecían ser algo... nada nuevo me comunicaron" (Gálatas 2:6). No corrigieron el evangelio de Pablo ni le sujetaron requisitos. Más bien, viendo la gracia que le había sido dada, los pilares &mdash; Jacobo, Cefas (Pedro), y Juan &mdash; "nos dieron a mí y a Bernabé la diestra de compañerismo, para que nosotros fuésemos a los gentiles, y ellos a la circuncisión" (Gálatas 2:9). Un solo evangelio, reconocido por todos; solo los campos de misión fueron divididos. Su única petición fue tierna y reveladora: "que nos acordásemos de los pobres; lo mismo que yo también procuré con diligencia hacer" (Gálatas 2:10). Los apóstoles nada añadieron al evangelio porque el evangelio de la gracia no necesita que se le añada nada. Añadirle no es mejorarlo sino destruirlo.</p>
+
+<p>Así que la Unidad 2 planta un segundo poste junto al primero. En la Unidad 1 aprendimos <em>qué</em> es el evangelio y que no debe cambiarse. Aquí aprendemos <em>de dónde</em> viene: no de hombres, sino de Dios por revelación, y confirmado &mdash; no corregido &mdash; por los apóstoles mismos. Por eso el evangelio de la gracia está por encima de todo maestro, todo concilio, y toda época. Cuando llevemos la prueba de Gálatas 1 a las unidades por venir, no estamos levantando una norma de nuestra propia hechura. Estamos levantando el evangelio que Dios dio desde el cielo y que los apóstoles recibieron con la diestra de compañerismo.</p>
+<div class="scripture">"...a los cuales ni por una hora cedimos en sujeción, para que la verdad del evangelio permaneciese con vosotros." &mdash; Gálatas 2:5 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 2 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 2 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Galatians Intensive — Unit 2 (Paul Defends the Gospel, Galatians 1:11-2:10)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 2;
+const COURSE = 'gal';
+const NEXT_UNIT_URL = 'CTSGalatiansUnit3.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - No Other Gospel (Galatians 1:1-10)", "Unit 2 - Paul Defends the Gospel (Galatians 1:11-2:10)", "Unit 3 - I Do Not Set Aside Grace (Galatians 2:11-21)", "Unit 4 - Faith, Not Works of the Law (Galatians 3:1-29)", "Unit 5 - From Slaves to Sons (Galatians 4:1-31)", "Unit 6 - Freedom and the Fruit of the Spirit (Galatians 5:1-26)", "Unit 7 - Glory Only in the Cross (Galatians 6:1-18)", "Unit 8 - The Whole of Grace: Root and Fruit", "Unit 9 - Another Gospel: Jehovah's Witnesses", "Unit 10 - Another Gospel: The Latter-day Saints", "Unit 11 - Another Gospel: The Prosperity Gospel", "Unit 12 - Brothers in the Core: Seventh-day Adventists"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSGalatiansUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. Paul says the gospel he preached is 'not according to man' but came:", "textEs": "1. Pablo dice que el evangelio que predicó 'no es según hombre' sino que vino:", "optionsEn": ["From his teacher Gamaliel", "From the apostles in Jerusalem", "Through the revelation of Jesus Christ", "From the synagogue"], "optionsEs": ["De su maestro Gamaliel", "De los apóstoles en Jerusalén", "Por revelación de Jesucristo", "De la sinagoga"], "explanationEn": "Galatians 1:12 — it came through the revelation of Jesus Christ.", "explanationEs": "Gálatas 1:12 — vino por revelación de Jesucristo.", "correct": 2}, {"textEn": "2. Paul insists he did not ___ the gospel from any man:", "textEs": "2. Pablo insiste en que no ___ el evangelio de hombre alguno:", "optionsEn": ["Hear", "Receive or learn", "Translate", "Preach"], "optionsEs": ["Oyó", "Recibió ni aprendió", "Tradujo", "Predicó"], "explanationEn": "He neither received it from man nor was taught it (1:12).", "explanationEs": "Ni lo recibió de hombre ni lo aprendió (1:12).", "correct": 1}, {"textEn": "3. Before his conversion, Paul's 'former conduct in Judaism' was that he:", "textEs": "3. Antes de su conversión, la 'conducta en otro tiempo en el judaismo' de Pablo era que él:", "optionsEn": ["Defended the church", "Ignored religion", "Followed the apostles", "Persecuted the church of God and tried to destroy it"], "optionsEs": ["Defendía la iglesia", "Ignoraba la religión", "Seguía a los apóstoles", "Perseguía la iglesia de Dios y trataba de asolarla"], "explanationEn": "Galatians 1:13 — he persecuted the church beyond measure.", "explanationEs": "Gálatas 1:13 — perseguía la iglesia sobremanera.", "correct": 3}, {"textEn": "4. Paul had advanced in Judaism beyond his peers, being exceedingly zealous for:", "textEs": "4. Pablo aventajaba en el judaismo a sus contemporáneos, siendo muy celoso de:", "optionsEn": ["The traditions of his fathers", "Greek philosophy", "The prophets only", "Roman law"], "optionsEs": ["Las tradiciones de sus padres", "La filosofía griega", "Solo los profetas", "La ley romana"], "explanationEn": "Galatians 1:14 — zealous for the traditions of his fathers.", "explanationEs": "Gálatas 1:14 — celoso de las tradiciones de sus padres.", "correct": 0}, {"textEn": "5. Paul says God 'separated me from my mother's womb and called me through':", "textEs": "5. Pablo dice que Dios 'me apartó desde el vientre de mi madre, y me llamó por':", "optionsEn": ["The law", "My own merit", "His grace", "The apostles"], "optionsEs": ["La ley", "Mi propio mérito", "Su gracia", "Los apóstoles"], "explanationEn": "Galatians 1:15 — called through His grace.", "explanationEs": "Gálatas 1:15 — llamado por su gracia.", "correct": 2}, {"textEn": "6. God was pleased 'to reveal His Son in me, that I might preach Him among':", "textEs": "6. Plugo a Dios 'revelar a su Hijo en mí, para que le predicase entre':", "optionsEn": ["The Jews only", "The Gentiles", "The Romans", "The Pharisees"], "optionsEs": ["Solo los judíos", "Los gentiles", "Los romanos", "Los fariseos"], "explanationEn": "Galatians 1:16 — that he might preach Him among the Gentiles.", "explanationEs": "Gálatas 1:16 — para predicarle entre los gentiles.", "correct": 1}, {"textEn": "7. Immediately after his calling, Paul says he did NOT:", "textEs": "7. Inmediatamente después de su llamamiento, Pablo dice que NO:", "optionsEn": ["Confer with flesh and blood", "Preach Christ", "Go to Arabia", "Return to Damascus"], "optionsEs": ["Consultó con carne y sangre", "Predicó a Cristo", "Fue a Arabia", "Volvió a Damasco"], "explanationEn": "Galatians 1:16 — he did not confer with flesh and blood.", "explanationEs": "Gálatas 1:16 — no consultó con carne y sangre.", "correct": 0}, {"textEn": "8. Instead of going first to the Jerusalem apostles, Paul:", "textEs": "8. En lugar de ir primero a los apóstoles de Jerusalén, Pablo:", "optionsEn": ["Went to Rome", "Stayed in Jerusalem three years", "Gave up preaching", "Went to Arabia and returned to Damascus"], "optionsEs": ["Fue a Roma", "Se quedó en Jerusalén tres años", "Dejó de predicar", "Fue a Arabia y volvió a Damasco"], "explanationEn": "Galatians 1:17 — he went to Arabia and returned to Damascus.", "explanationEs": "Gálatas 1:17 — fue a Arabia y volvió a Damasco.", "correct": 3}, {"textEn": "9. When Paul finally went to Jerusalem after three years, he stayed with Peter for:", "textEs": "9. Cuando Pablo por fin subió a Jerusalén tras tres años, permaneció con Pedro:", "optionsEn": ["Three years", "Fifteen days", "One year", "A single day"], "optionsEs": ["Tres años", "Quince días", "Un año", "Un solo día"], "explanationEn": "Galatians 1:18 — he remained with Peter fifteen days.", "explanationEs": "Gálatas 1:18 — permaneció con Pedro quince días.", "correct": 1}, {"textEn": "10. Besides Peter, the only other apostle Paul saw on that visit was:", "textEs": "10. Además de Pedro, el único otro apóstol que Pablo vio en esa visita fue:", "optionsEn": ["John", "Andrew", "James, the Lord's brother", "Thomas"], "optionsEs": ["Juan", "Andrés", "Jacobo, el hermano del Señor", "Tomás"], "explanationEn": "Galatians 1:19 — only James, the Lord's brother.", "explanationEs": "Gálatas 1:19 — solo Jacobo, el hermano del Señor.", "correct": 2}, {"textEn": "11. The churches of Judea knew Paul only by report, hearing that:", "textEs": "11. Las iglesias de Judea conocían a Pablo solo de oídas, oyendo que:", "optionsEn": ["He had abandoned the faith", "He was a false teacher", "He had gone to Rome", "He who once persecuted them now preaches the faith"], "optionsEs": ["Había abandonado la fe", "Era un falso maestro", "Se había ido a Roma", "Aquel que antes los perseguía ahora predica la fe"], "explanationEn": "Galatians 1:23 — the persecutor now preaches the faith.", "explanationEs": "Gálatas 1:23 — el perseguidor ahora predica la fe.", "correct": 3}, {"textEn": "12. The response of the Judean churches to news of Paul was that they:", "textEs": "12. La respuesta de las iglesias de Judea a las noticias de Pablo fue que:", "optionsEn": ["Glorified God in him", "Demanded he be circumcised", "Ignored him", "Rejected him"], "optionsEs": ["Glorificaban a Dios en él", "Exigieron que se circuncidara", "Lo ignoraron", "Lo rechazaron"], "explanationEn": "Galatians 1:24 — they glorified God in him.", "explanationEs": "Gálatas 1:24 — glorificaban a Dios en él.", "correct": 0}, {"textEn": "13. Paul says the point of all this history is that his gospel:", "textEs": "13. Pablo dice que el punto de toda esta historia es que su evangelio:", "optionsEn": ["Was different from the apostles' gospel", "Was learned from the apostles", "Did not come from men but from Christ, yet agreed with the apostles'", "Was never tested"], "optionsEs": ["Era diferente del evangelio de los apóstoles", "Fue aprendido de los apóstoles", "No vino de hombres sino de Cristo, y aun así concordaba con el de los apóstoles", "Nunca fue probado"], "explanationEn": "His gospel came independently from Christ, yet matched the apostles' gospel.", "explanationEs": "Su evangelio vino independientemente de Cristo, y aun así concordaba con el de los apóstoles.", "correct": 2}, {"textEn": "14. Fourteen years later Paul went up to Jerusalem and took along Barnabas and:", "textEs": "14. Catorce años después Pablo subió a Jerusalén y llevó consigo a Bernabé y a:", "optionsEn": ["Timothy", "Titus", "Silas", "Luke"], "optionsEs": ["Timoteo", "Tito", "Silas", "Lucas"], "explanationEn": "Galatians 2:1 — he took Barnabas and Titus.", "explanationEs": "Gálatas 2:1 — llevó a Bernabé y a Tito.", "correct": 1}, {"textEn": "15. Titus, who was a Greek, was:", "textEs": "15. Tito, que era griego, fue:", "optionsEn": ["Forced to be circumcised", "Sent away", "Made an apostle", "Not compelled to be circumcised"], "optionsEs": ["Obligado a circuncidarse", "Despedido", "Hecho apóstol", "No obligado a circuncidarse"], "explanationEn": "Galatians 2:3 — not even Titus was compelled to be circumcised.", "explanationEs": "Gálatas 2:3 — ni aun Tito fue obligado a circuncidarse.", "correct": 3}, {"textEn": "16. The 'false brethren secretly brought in' wanted to spy out the believers' liberty in order to:", "textEs": "16. Los 'falsos hermanos introducidos a escondidas' querían espiar la libertad de los creyentes para:", "optionsEn": ["Bring them into bondage", "Teach them grace", "Send them to the Gentiles", "Encourage them"], "optionsEs": ["Reducirlos a esclavitud", "Enseñarles la gracia", "Enviarlos a los gentiles", "Animarlos"], "explanationEn": "Galatians 2:4 — they came to bring believers into bondage.", "explanationEs": "Gálatas 2:4 — vinieron para reducir a los creyentes a esclavitud.", "correct": 0}, {"textEn": "17. To these false brethren Paul 'did not yield submission even for an hour,' so that:", "textEs": "17. A estos falsos hermanos Pablo 'ni por una hora cedió en sujeción,' para que:", "optionsEn": ["Titus could be circumcised", "He could win the argument", "The truth of the gospel might continue", "The apostles would be pleased"], "optionsEs": ["Tito pudiera ser circuncidado", "Pudiera ganar la discusión", "La verdad del evangelio permaneciese", "Los apóstoles quedaran complacidos"], "explanationEn": "Galatians 2:5 — that the truth of the gospel might continue.", "explanationEs": "Gálatas 2:5 — para que la verdad del evangelio permaneciese.", "correct": 2}, {"textEn": "18. When Paul laid his gospel before the leaders, 'those who seemed to be something':", "textEs": "18. Cuando Pablo expuso su evangelio ante los líderes, 'los que parecían ser algo':", "optionsEn": ["Added nothing to him", "Corrected him", "Rejected him", "Rewrote his message"], "optionsEs": ["Nada le añadieron", "Lo corrigieron", "Lo rechazaron", "Reescribieron su mensaje"], "explanationEn": "Galatians 2:6 — they added nothing to him.", "explanationEs": "Gálatas 2:6 — nada le añadieron.", "correct": 0}, {"textEn": "19. The pillars — James, Cephas, and John — gave Paul and Barnabas the right hand of fellowship, agreeing that Paul would go to the Gentiles and they to:", "textEs": "19. Los pilares — Jacobo, Cefas y Juan — dieron a Pablo y Bernabé la diestra de compañerismo, acordando que Pablo iría a los gentiles y ellos a:", "optionsEn": ["The Romans", "The circumcised", "Arabia", "The poor only"], "optionsEs": ["Los romanos", "La circuncisión", "Arabia", "Solo los pobres"], "explanationEn": "Galatians 2:9 — Paul to the Gentiles, they to the circumcised.", "explanationEs": "Gálatas 2:9 — Pablo a los gentiles, ellos a la circuncisión.", "correct": 1}, {"textEn": "20. That the apostles 'added nothing' to Paul's gospel shows that the gospel of grace:", "textEs": "20. Que los apóstoles 'nada añadieran' al evangelio de Pablo muestra que el evangelio de la gracia:", "optionsEn": ["Needs improvement", "Was incomplete", "Belonged only to Paul", "Needs nothing added, and to add to it is to destroy it"], "optionsEs": ["Necesita mejora", "Estaba incompleto", "Pertenecía solo a Pablo", "No necesita que se le añada nada, y añadirle es destruirlo"], "explanationEn": "Grace needs nothing added; to add to it is to destroy it.", "explanationEs": "La gracia no necesita añadidura; añadirle es destruirla.", "correct": 3}];
+
+const kwQuestions = [{"textEn": "21. What does Paul say is the source of his gospel, and why does this matter?", "textEs": "21. ¿Cuál dice Pablo que es el origen de su evangelio, y por qué importa esto?", "kw_en": ["revel", "christ", "gospel", "man", "receiv", "author", "taught", "heaven"], "kw_es": ["revel", "cristo", "evangelio", "hombre", "recib", "autorid", "aprend", "cielo"], "modelEn": "Paul says his gospel is not according to man; he neither received it from man nor was taught it, but it came through the revelation of Jesus Christ. This matters because a gospel that came down from God cannot be edited by men. If even Paul received it rather than invented it, then no later teacher, prophet, council, or church has the authority to add to it or take from it. The message has one Author, Christ Himself, and He has already spoken. This is the foundation for the whole course: we test every teaching by the God-given gospel, not by human authority.", "modelEs": "Pablo dice que su evangelio no es según hombre; ni lo recibió de hombre ni lo aprendió, sino que vino por revelación de Jesucristo. Esto importa porque un evangelio que descendió de Dios no puede ser editado por hombres. Si aun Pablo lo recibió en lugar de inventarlo, entonces ningún maestro, profeta, concilio, o iglesia posterior tiene la autoridad de añadirle o quitarle. El mensaje tiene un solo Autor, Cristo mismo, y Él ya ha hablado. Esta es la base de todo el curso: probamos toda enseñanza por el evangelio dado por Dios, no por la autoridad humana."}, {"textEn": "22. How does Paul's former life prove his gospel was not a human invention, and what made him an apostle?", "textEs": "22. ¿Cómo prueba la vida anterior de Pablo que su evangelio no fue invención humana, y qué lo hizo apóstol?", "kw_en": ["persecut", "judaism", "zealous", "grace", "separat", "call", "christ", "merit"], "kw_es": ["persegu", "judaism", "celoso", "gracia", "apart", "llam", "cristo", "mérito"], "modelEn": "Paul points to his past: he persecuted the church beyond measure and was more zealous than his peers for the traditions of his fathers. This is the last man who would have invented a gospel of grace apart from the law; he was the law's fiercest champion and the church's fiercest enemy. So his message was not something he devised. It pleased God, who separated him from his mother's womb and called him through His grace, to reveal His Son in him. Paul's apostleship, like his salvation, was a gift of grace, not a reward for zeal. The persecutor became a preacher only because grace laid hold of him.", "modelEs": "Pablo señala su pasado: perseguía la iglesia sobremanera y era más celoso que sus contemporáneos de las tradiciones de sus padres. Este es el último hombre que habría inventado un evangelio de gracia aparte de la ley; era el más feroz campeón de la ley y el más feroz enemigo de la iglesia. Así que su mensaje no fue algo que él ideó. Plugo a Dios, que lo apartó desde el vientre de su madre y lo llamó por su gracia, revelar a su Hijo en él. El apostolado de Pablo, como su salvación, fue un don de gracia, no recompensa por su celo. El perseguidor se hizo predicador solo porque la gracia se apoderó de él."}, {"textEn": "23. Why does Paul stress that he did not receive his gospel from the Jerusalem apostles?", "textEs": "23. ¿Por qué recalca Pablo que no recibió su evangelio de los apóstoles de Jerusalén?", "kw_en": ["jerusalem", "apostl", "arabia", "confer", "peter", "fifteen", "independ", "revel"], "kw_es": ["jerusalén", "apóstol", "arabia", "consult", "pedro", "quince", "independ", "revel"], "modelEn": "The troublers claimed Paul got his gospel secondhand from Jerusalem and softened it. So Paul traces his movements: he did not confer with flesh and blood, did not run up to Jerusalem to the older apostles, but went to Arabia and back to Damascus. Only after three years did he visit Jerusalem, staying with Peter just fifteen days and seeing only James besides. Fifteen days is a visit, not a seminary, and the Judean churches did not even know his face. His point is not that he despised the apostles, but that his gospel came independently, straight from Christ — and yet it proved to be the very same gospel they preached.", "modelEs": "Los perturbadores afirmaban que Pablo obtuvo su evangelio de segunda mano de Jerusalén y lo suavizó. Así que Pablo traza sus movimientos: no consultó con carne y sangre, no corrió a Jerusalén a los apóstoles mayores, sino que fue a Arabia y de vuelta a Damasco. Solo tras tres años visitó Jerusalén, permaneciendo con Pedro solo quince días y viendo además solo a Jacobo. Quince días es una visita, no un seminario, y las iglesias de Judea ni conocían su rostro. Su punto no es que despreciara a los apóstoles, sino que su evangelio vino independientemente, directo de Cristo — y aun así resultó ser el mismísimo evangelio que ellos predicaban."}, {"textEn": "24. Explain the episode with Titus and what it tested.", "textEs": "24. Explique el episodio con Tito y qué puso a prueba.", "kw_en": ["titus", "greek", "circumcis", "compel", "grace", "gentile", "libert", "gospel"], "kw_es": ["tito", "griego", "circuncis", "oblig", "gracia", "gentil", "libert", "evangelio"], "modelEn": "When Paul went up to Jerusalem he took Titus, an uncircumcised Gentile believer. Titus became a living test case: not even he was compelled to be circumcised. The Judaizers wanted Gentile converts to be circumcised and keep the law in order to be saved — grace plus works. By refusing to circumcise Titus, the leaders showed that grace, not circumcision, was enough, and that a Gentile is accepted in Christ without becoming a Jew. The episode tested whether the gospel was grace alone or grace plus the law, and grace alone won. It is the Unit 1 principle made visible: the truth of the gospel was at stake, so there could be no compromise.", "modelEs": "Cuando Pablo subió a Jerusalén llevó a Tito, un creyente gentil incircunciso. Tito se volvió un caso de prueba viviente: ni aun él fue obligado a circuncidarse. Los judaizantes querían que los convertidos gentiles se circuncidaran y guardaran la ley para ser salvos — gracia más obras. Al negarse a circuncidar a Tito, los líderes mostraron que la gracia, no la circuncisión, bastaba, y que un gentil es aceptado en Cristo sin volverse judío. El episodio probó si el evangelio era gracia sola o gracia más la ley, y la gracia sola venció. Es el principio de la Unidad 1 hecho visible: la verdad del evangelio estaba en juego, así que no podía haber compromiso."}, {"textEn": "25. Who were the 'false brethren,' and what bondage did they want?", "textEs": "25. ¿Quiénes eran los 'falsos hermanos,' y qué esclavitud querían?", "kw_en": ["false", "brethr", "bondage", "law", "libert", "spy", "circumcis", "judaiz"], "kw_es": ["falso", "herman", "esclav", "ley", "libert", "espi", "circuncis", "judaiz"], "modelEn": "The false brethren were Judaizers secretly brought in, who came by stealth to spy out the liberty believers have in Christ Jesus. Their aim was to bring the free people of God back into bondage — the bondage of trying to be justified by keeping the law. They wanted to add circumcision and law-keeping to faith in Christ, which is grace plus works. Paul calls this slavery because a person who must earn acceptance by the law is never free and never finished; he is enslaved to a debt he cannot pay. The liberty of the gospel is precisely freedom from that yoke, and the false brethren wanted to take it away.", "modelEs": "Los falsos hermanos eran judaizantes introducidos a escondidas, que entraron secretamente para espiar la libertad que los creyentes tienen en Cristo Jesús. Su meta era reducir al pueblo libre de Dios de vuelta a la esclavitud — la esclavitud de tratar de ser justificado guardando la ley. Querían añadir la circuncisión y el guardar la ley a la fe en Cristo, lo cual es gracia más obras. Pablo llama a esto esclavitud porque quien debe ganar la aceptación por la ley nunca es libre ni termina; está esclavizado a una deuda que no puede pagar. La libertad del evangelio es precisamente la libertad de ese yugo, y los falsos hermanos querían quitarla."}, {"textEn": "26. Why did Paul 'not yield even for an hour'?", "textEs": "26. ¿Por qué Pablo 'ni por una hora cedió'?", "kw_en": ["yield", "hour", "truth", "gospel", "grace", "compromis", "continu", "stake"], "kw_es": ["ceder", "hora", "verdad", "evangelio", "gracia", "comprom", "permanec", "juego"], "modelEn": "Paul says he did not yield submission to the false brethren even for an hour, so that the truth of the gospel might continue with the Galatians. The issue was not a minor preference but the gospel itself: whether a sinner is saved by grace alone or by grace plus the law. On a matter like that there is no room for compromise, not even briefly, because to give an inch is to surrender the gospel. Paul could be gentle and flexible on many things, but on the truth of grace he was immovable. His firmness was not stubbornness; it was love for the churches, guarding for them the only message that can save.", "modelEs": "Pablo dice que no cedió en sujeción a los falsos hermanos ni por una hora, para que la verdad del evangelio permaneciese con los gálatas. El asunto no era una preferencia menor sino el evangelio mismo: si un pecador es salvo por gracia sola o por gracia más la ley. En un asunto así no hay lugar para el compromiso, ni siquiera brevemente, porque ceder una pulgada es entregar el evangelio. Pablo podía ser amable y flexible en muchas cosas, pero en la verdad de la gracia era inamovible. Su firmeza no era terquedad; era amor por las iglesias, guardando para ellas el único mensaje que puede salvar."}, {"textEn": "27. What does it mean that the Jerusalem leaders 'added nothing' to Paul's gospel?", "textEs": "27. ¿Qué significa que los líderes de Jerusalén 'nada añadieran' al evangelio de Pablo?", "kw_en": ["add", "nothing", "gospel", "grace", "pillar", "confirm", "complet", "destroy"], "kw_es": ["añad", "nada", "evangelio", "gracia", "pilar", "confirm", "complet", "destru"], "modelEn": "When Paul set his gospel before the great men of Jerusalem, those who seemed to be something added nothing to him. They did not correct his message or fasten extra requirements onto it; they confirmed it. This shows that the gospel of grace is complete in itself and needs nothing added. To add the law, or works, or any human requirement, would not improve the gospel but destroy it, for grace plus anything is no longer grace. The leaders' silence on additions, and their right hand of fellowship, is a powerful witness that there is one gospel, finished and sufficient, recognized by all the apostles alike.", "modelEs": "Cuando Pablo expuso su evangelio ante los grandes hombres de Jerusalén, los que parecían ser algo nada le añadieron. No corrigieron su mensaje ni le sujetaron requisitos adicionales; lo confirmaron. Esto muestra que el evangelio de la gracia es completo en sí mismo y no necesita que se le añada nada. Añadir la ley, o las obras, o cualquier requisito humano, no mejoraría el evangelio sino que lo destruiría, pues la gracia más cualquier cosa ya no es gracia. El silencio de los líderes en cuanto a añadiduras, y su diestra de compañerismo, es un poderoso testimonio de que hay un solo evangelio, terminado y suficiente, reconocido por todos los apóstoles por igual."}, {"textEn": "28. Describe the right hand of fellowship and the division of mission.", "textEs": "28. Describa la diestra de compañerismo y la división de la misión.", "kw_en": ["fellowship", "hand", "gentile", "circumcis", "paul", "barnab", "pillar", "poor"], "kw_es": ["compañerismo", "diestra", "gentil", "circuncis", "pablo", "bernabé", "pilar", "pobre"], "modelEn": "Seeing the grace given to Paul, the pillars — James, Cephas, and John — gave Paul and Barnabas the right hand of fellowship. This handshake meant full recognition: they were partners in one and the same gospel. The only thing divided was the mission field, not the message. Paul and Barnabas would carry the gospel to the Gentiles, while the Jerusalem apostles would carry it to the circumcised, the Jews. One gospel, two fields. Their single request was that Paul remember the poor, which he was already eager to do. So the meeting ended not in correction or rivalry but in glad fellowship around the one gospel of grace.", "modelEs": "Viendo la gracia dada a Pablo, los pilares — Jacobo, Cefas y Juan — dieron a Pablo y Bernabé la diestra de compañerismo. Este apretón de manos significaba pleno reconocimiento: eran compañeros en un solo y mismo evangelio. Lo único dividido era el campo de misión, no el mensaje. Pablo y Bernabé llevarían el evangelio a los gentiles, mientras los apóstoles de Jerusalén lo llevarían a la circuncisión, los judíos. Un solo evangelio, dos campos. Su única petición fue que Pablo se acordara de los pobres, lo cual él ya procuraba con diligencia. Así que la reunión terminó no en corrección ni rivalidad sino en gozoso compañerismo en torno al único evangelio de la gracia."}, {"textEn": "29. How does this passage defend the grace test from Unit 1?", "textEs": "29. ¿Cómo defiende este pasaje la prueba de la gracia de la Unidad 1?", "kw_en": ["revel", "gospel", "grace", "apostl", "confirm", "author", "test", "unchang"], "kw_es": ["revel", "evangelio", "gracia", "apóstol", "confirm", "autorid", "prueba", "cambi"], "modelEn": "Unit 1 set up the test: any message that adds to, subtracts from, or trades away the grace of Christ is another gospel. Unit 2 shows where that gospel comes from, and so why the test has authority. Paul's gospel was not invented by men; it came by revelation from Christ. And when the apostles examined it, they added nothing but recognized it with the right hand of fellowship. So the standard we hold up against every teaching is not Paul's private opinion, nor a tradition of our own; it is the gospel God gave from heaven, unchanged and confirmed by the apostles. Because the gospel came from God and was confirmed by His apostles, it stands above every teacher and council — and that is exactly what makes the test of Galatians 1 binding.", "modelEs": "La Unidad 1 estableció la prueba: cualquier mensaje que añada, quite, o cambie la gracia de Cristo es otro evangelio. La Unidad 2 muestra de dónde viene ese evangelio, y por tanto por qué la prueba tiene autoridad. El evangelio de Pablo no fue inventado por hombres; vino por revelación de Cristo. Y cuando los apóstoles lo examinaron, nada le añadieron sino que lo reconocieron con la diestra de compañerismo. Así que la norma que levantamos contra toda enseñanza no es la opinión privada de Pablo, ni una tradición nuestra; es el evangelio que Dios dio desde el cielo, sin cambios y confirmado por los apóstoles. Porque el evangelio vino de Dios y fue confirmado por sus apóstoles, está por encima de todo maestro y concilio — y eso es exactamente lo que hace obligatoria la prueba de Gálatas 1."}, {"textEn": "30. Summarize the central truth of Unit 2.", "textEs": "30. Resuma la verdad central de la Unidad 2.", "kw_en": ["gospel", "revel", "man", "apostl", "confirm", "grace", "author", "source"], "kw_es": ["evangelio", "revel", "hombre", "apóstol", "confirm", "gracia", "autorid", "origen"], "modelEn": "Unit 1 told us what the gospel is; Unit 2 tells us where it comes from. Paul defends the source of his message: it is not according to man, for he neither received it nor learned it from men, but by revelation from Jesus Christ. His own history proves it — the persecutor turned preacher by grace, who did not run to Jerusalem to be trained. And when he finally laid his gospel before the leaders, they added nothing but confirmed it, giving him the right hand of fellowship, while the Titus episode showed grace, not circumcision, is enough. The central truth is that the gospel of grace came from God by revelation and was confirmed, not corrected, by the apostles. Therefore it stands above every man, council, and age, and it is by this God-given gospel that we test all teaching.", "modelEs": "La Unidad 1 nos dijo qué es el evangelio; la Unidad 2 nos dice de dónde viene. Pablo defiende el origen de su mensaje: no es según hombre, pues ni lo recibió ni lo aprendió de hombres, sino por revelación de Jesucristo. Su propia historia lo prueba — el perseguidor vuelto predicador por gracia, que no corrió a Jerusalén a ser entrenado. Y cuando por fin expuso su evangelio ante los líderes, nada le añadieron sino que lo confirmaron, dándole la diestra de compañerismo, mientras el episodio de Tito mostró que la gracia, no la circuncisión, basta. La verdad central es que el evangelio de la gracia vino de Dios por revelación y fue confirmado, no corregido, por los apóstoles. Por tanto está por encima de todo hombre, concilio, y época, y es por este evangelio dado por Dios que probamos toda enseñanza."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 3 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 3 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '\u2713 Correct! ' : '\u2713 \u00a1Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `\u2717 Incorrect. Correct answer: ${correctLetter}. ` : `\u2717 Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a few sentences (about 100 characters)), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos unas cuantas oraciones (unos 100 caracteres)), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'cert';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            renderQuestions();
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        renderQuestions();
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSGalatiansReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

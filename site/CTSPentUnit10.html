@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pentateuch | Unit 10: Deuteronomy — Covenant Renewal</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', Times, serif; line-height: 1.6; background: #f9f7f3; color: #1a2a1f; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+.course-header { background: #2c3e36; color: white; padding: 1.5rem 2rem; text-align: center; }
+.course-header h1 { font-size: 2rem; letter-spacing: 2px; margin-bottom: 0.25rem; }
+.course-header h2 { font-size: 1.2rem; font-weight: normal; opacity: 0.9; }
+.unit-badge { display: inline-block; background: #f4c542; color: #2c3e36; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-top: 0.5rem; }
+.course-author { font-size: 0.8rem; opacity: 0.85; margin-top: 0.4rem; font-style: italic; }
+.controls-bar { background: #e8e4d8; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #cbc3ae; }
+.lang-buttons { display: flex; gap: 10px; }
+.lang-btn { background: white; border: 1px solid #2c3e36; padding: 0.4rem 1rem; cursor: pointer; font-weight: bold; transition: 0.2s; border-radius: 4px; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-indicator { background: #2c3e36; color: #f4c542; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+body.lang-en .lang-es { display: none; }
+body.lang-en .lang-both { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-both { display: none; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 900px) {
+    body.lang-both .lesson-grid { grid-template-columns: 1fr; }
+    body.lang-both .lang-es { border-top: 2px dashed #cbc3ae; padding-top: 1rem; margin-top: 1rem; }
+}
+.lesson-section { padding: 2rem; }
+.lesson-section h3 { color: #2c3e36; border-left: 4px solid #f4c542; padding-left: 1rem; margin: 1.5rem 0 1rem 0; }
+.lesson-section h3:first-of-type { margin-top: 0; }
+.scripture { background: #f0ede5; padding: 1rem 1.5rem; border-left: 4px solid #f4c542; font-style: italic; margin: 1rem 0; font-family: 'Courier New', monospace; }
+.illustration { background: #e8f0e5; padding: 1rem 1.5rem; border-radius: 8px; margin: 1rem 0; }
+.exam-section { background: #fefaf0; border-top: 3px solid #2c3e36; padding: 2rem; page-break-before: always; }
+.exam-header { text-align: center; margin-bottom: 2rem; }
+.question-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; page-break-inside: avoid; }
+.question-text { font-weight: bold; margin-bottom: 0.75rem; }
+.options { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+.options label { display: block; margin: 0.4rem 0; cursor: pointer; }
+.feedback { margin-top: 0.75rem; padding: 0.5rem; border-radius: 4px; font-size: 0.9rem; }
+.feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+.model-answer { background: #fff8e1; border-left: 4px solid #f4c542; color: #4a3c10; padding: 0.6rem 0.8rem; margin-top: 0.6rem; border-radius: 4px; font-style: normal; }
+.essay-question textarea { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+.action-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+.action-buttons button { background: #2c3e36; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+.action-buttons button:hover { background: #1e2d26; }
+.action-buttons button.reset-btn { background: #8b6b3d; }
+.lockout-timer { text-align: center; padding: 1rem; background: #f8d7da; color: #721c24; margin: 1rem; border-radius: 8px; font-weight: bold; }
+.nav-links { display: flex; justify-content: space-between; padding: 1rem 2rem; background: #e8e4d8; }
+.nav-links a { color: #2c3e36; text-decoration: none; font-weight: bold; }
+@media print {
+    .controls-bar, .action-buttons, .nav-links, .lockout-timer { display: none !important; }
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; margin: 0; }
+    .course-header { background: #2c3e36; color: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .question-card { border: 1px solid #ccc; page-break-inside: avoid; }
+    .exam-section { page-break-before: always; }
+    .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.lang-both .lesson-grid { display: block; }
+}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 2px;font-family:'Georgia',serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#2c3e36;margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid #cdbf9d;color:#2c3e36;text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:#2c3e36;}
+.unitnav a.active{background:#2c3e36;color:#fff;border-color:#2c3e36;}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+    <div class="course-header">
+        <h1>Πεντάτευχος</h1>
+        <h2><span class="lang-en">The Pentateuch</span><span class="lang-es">El Pentateuco</span></h2>
+        <div class="course-author"><span class="lang-en">Dr. Ted Rogers · Seminary Director</span><span class="lang-es">Dr. Ted Rogers · Director del Seminario</span></div>
+        <div class="unit-badge"><span class="lang-en">Unit 10 · Deuteronomy — Covenant Renewal</span><span class="lang-es">Unidad 10 · Deuteronomio — Renovación del Pacto</span></div>
+    </div>
+
+    <div class="controls-bar">
+        <div class="lang-buttons">
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="es">Español</button>
+            <button class="lang-btn" data-lang="both">Both</button>
+        </div>
+        <div class="track-indicator" id="trackIndicator">Loading...</div>
+    </div>
+
+    <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+      <span class="nl"><span class="lang-en">Units</span><span class="lang-es">Unidades</span></span>
+      <a href="CTSPentUnit1.html">1</a>
+      <a href="CTSPentUnit2.html">2</a>
+      <a href="CTSPentUnit3.html">3</a>
+      <a href="CTSPentUnit4.html">4</a>
+      <a href="CTSPentUnit5.html">5</a>
+      <a href="CTSPentUnit6.html">6</a>
+      <a href="CTSPentUnit7.html">7</a>
+      <a href="CTSPentUnit8.html">8</a>
+      <a href="CTSPentUnit9.html">9</a>
+      <a href="CTSPentUnit10.html" class="active">10</a>
+      <a href="CTSPentUnit11.html">11</a>
+      <a href="CTSPentUnit12.html">12</a>
+    </nav>
+
+    <div class="lesson-section">
+        <div class="lesson-grid">
+            <div class="lang-en">
+                <h3>1. Deuteronomy: The Second Giving of the Law</h3>
+                <p>The English title "Deuteronomy" comes from the Greek <em>Deuteronomion</em>, meaning "second law" or "repetition of the law." But the Hebrew title is <em>Devarim</em> — "words" — taken from the opening phrase: "These are the words which Moses spoke to all Israel." After forty years of wandering, Israel is camped on the plains of Moab, across the Jordan from Jericho. The faithless generation has died. A new generation stands ready to enter the land. Before they cross, Moses — now 120 years old — delivers three long farewell addresses, summarizing the law, renewing the covenant, and warning them of the consequences of obedience and disobedience. Deuteronomy is Moses' final sermon. It is the most quoted Old Testament book in the New Testament, cited by Jesus more than any other. If you want to understand the heart of the Old Testament covenant, you must study Deuteronomy.</p>
+
+                <div class="scripture">
+                    <strong>Deuteronomy 1:1-3 (NKJV):</strong> "These are the words which Moses spoke to all Israel on this side of the Jordan in the wilderness... It is eleven days' journey from Horeb by way of Mount Seir to Kadesh Barnea. Now it came to pass in the fortieth year, in the eleventh month, on the first day of the month, that Moses spoke to the children of Israel according to all that the Lord had given him as commandments to them."
+                </div>
+
+                <h3>2. The Shema: The Heart of Covenant Faithfulness</h3>
+                <p>Deuteronomy 6 contains the most important confession of faith in the Old Testament. The Shema (from the Hebrew word for "hear") begins: "Hear, O Israel: The Lord our God, the Lord is one! You shall love the Lord your God with all your heart, with all your soul, and with all your strength." This is not merely a theological statement about monotheism — though it is that. It is a call to exclusive, total, passionate loyalty to Yahweh. The Shema demands that God's words be in the heart, taught diligently to children, talked about at home and on the road, when lying down and rising up. They were to bind them as a sign on their hands and foreheads (phylacteries) and write them on doorposts (mezuzahs). For the pastor, the Shema is the antidote to compartmentalized religion. You cannot love God on Sunday and ignore Him the rest of the week. The love of God must saturate every area of life.</p>
+
+                <div class="scripture">
+                    <strong>Deuteronomy 6:4-9 (NKJV):</strong> "Hear, O Israel: The Lord our God, the Lord is one! You shall love the Lord your God with all your heart, with all your soul, and with all your strength. And these words which I command you today shall be in your heart. You shall teach them diligently to your children, and shall talk of them when you sit in your house, when you walk by the way, when you lie down, and when you rise up."
+                </div>
+
+                <h3>3. Remember and Do Not Forget</h3>
+                <p>Deuteronomy repeatedly commands Israel to remember. Remember the wilderness. Remember the manna. Remember how God led them. Remember the golden calf and God's anger. Remember that you were slaves in Egypt. Memory is the foundation of faithfulness. When Israel forgot what God had done, they turned to idols. The same is true for the pastor and the congregation. Why do we take communion? "Do this in remembrance of Me." Why do we read the Old Testament? To remember the story of redemption. Why do we tell testimonies? To remember what God has done. A forgetful people is a faithless people. Deuteronomy calls us to build memorials — not of stone, but of repeated teaching, of songs, of feasts, of the Lord's Supper — so that we do not forget.</p>
+
+                <h3>4. A Warning Against Prosperity and Pride</h3>
+                <p>In Deuteronomy 8, Moses warns that when Israel enters the good land — with its abundant water, wheat, barley, vines, fig trees, pomegranates, olive oil, and honey — they will eat and be satisfied. And then, the danger: "Beware that you do not forget the Lord your God by not keeping His commandments... lest when you have eaten and are full, and have built beautiful houses... and your silver and gold are multiplied... your heart be lifted up, and you forget the Lord your God." Prosperity is spiritually dangerous. It creates the illusion of self-sufficiency. The wilderness was hard, but it kept Israel dependent on God. The land would be easy, and it would tempt them to forget. Pastors, this is a direct warning for Western Christianity. Wealth is not a sign of blessing — it is a test. The question is not whether you have money, but whether your heart remains humble and dependent on God.</p>
+
+                <div class="illustration">
+                    <strong>Pastoral Note:</strong> "You shall remember the Lord your God, for it is He who gives you power to get wealth" (Deuteronomy 8:18). Every dollar in your church's bank account came from God. Every building was built by His provision. Do not let success make you arrogant. Stay on your knees.
+                </div>
+
+                <h3>5. The Blessings and the Curses (Deuteronomy 27-28)</h3>
+                <p>Deuteronomy 27-28 presents a stark choice. On Mount Gerizim, half the tribes were to pronounce blessings for obedience. On Mount Ebal, the other half would pronounce curses for disobedience. The blessings include agricultural abundance, victory over enemies, rain in season, and national prominence. The curses are detailed and terrifying: defeat, disease, drought, madness, blindness, oppression, and finally exile from the land. The purpose of the blessings and curses was not to make Israel earn salvation — they were already redeemed from Egypt. Rather, the covenant was a national constitution: obey and thrive in the land; disobey and be expelled. For Christians, we are not under the Old Covenant but the New. Christ became a curse for us (Galatians 3:13) to redeem us from the curse of the law. Yet the principle remains: obedience brings life; disobedience brings death. Pastors should preach both grace and the serious consequences of sin.</p>
+
+                <div class="scripture">
+                    <strong>Deuteronomy 28:1-2 (NKJV):</strong> "Now it shall come to pass, if you diligently obey the voice of the Lord your God, to observe carefully all His commandments... that the Lord your God will set you high above all nations of the earth. And all these blessings shall come upon you and overtake you, because you obey the voice of the Lord your God."
+                </div>
+
+                <h3>6. The Prophet Like Moses (Deuteronomy 18)</h3>
+                <p>In Deuteronomy 18, Moses promises that God will raise up another prophet like him: "I will raise up for them a Prophet like you from among their brethren, and will put My words in His mouth, and He shall speak to them all that I command Him." This prophecy found its ultimate fulfillment in Jesus Christ. Peter quoted it in Acts 3:22-23. Stephen cited it in Acts 7:37. Moses was a prophet, lawgiver, mediator, and deliverer. Jesus is all of these — and infinitely more. The people recognized Jesus as "the Prophet" (John 6:14; 7:40). But unlike Moses, who saw God's back, Jesus is the Word made flesh. Unlike Moses, who struck the rock twice, Jesus is the Rock. Unlike Moses, who died outside the land, Jesus rose from the dead and leads us into the true promised land.</p>
+
+                <h3>7. The Song of Moses (Deuteronomy 32)</h3>
+                <p>God commanded Moses to write a song as a witness against Israel — because God knew that after they entered the land and grew prosperous, they would forsake Him. The song is a courtroom indictment. It rehearses God's faithfulness and Israel's rebellion. It warns of coming judgment but ends with hope of redemption. The purpose of the song was not to condemn but to call back. When disaster struck, the song would remind them why. For the pastor, this is a model: tell the truth about sin — not to destroy, but to restore. Warning is an act of love.</p>
+
+                <div class="illustration">
+                    <strong>Application:</strong> The song of Moses is Israel's "national anthem of accountability." What songs does your congregation sing? Do they only sing happy, victorious songs? Or do you also sing lament, confession, and warning? The Psalms give us all of these. Don't let your worship become one-dimensional.
+                </div>
+
+                <h3>8. The Death of Moses (Deuteronomy 34)</h3>
+                <p>Moses went up from the plains of Moab to Mount Nebo, to the top of Pisgah, across from Jericho. There the Lord showed him the whole land — from Gilead to Dan, all of Naphtali, Ephraim, Manasseh, Judah as far as the Western Sea, the Negev, the Valley of Jericho, even to Zoar. Then the Lord said, "This is the land which I swore to Abraham, Isaac, and Jacob, saying, 'I will give it to your descendants.' I have caused you to see it with your eyes, but you shall not cross over there." Moses died there in the land of Moab, and the Lord buried him in a valley — but no one knows his grave to this day. He was 120 years old; his eyes were not dim nor his natural vigor diminished. The people wept for him thirty days. Then Joshua, the son of Nun, was full of the spirit of wisdom, for Moses had laid his hands on him. Israel obeyed Joshua. Moses — the greatest prophet of the Old Testament — died outside the land because of his sin at Meribah. But God's promise did not die. Joshua would lead them in. And one greater than Joshua — Jesus — would lead His people into the true rest.</p>
+
+                <div class="scripture">
+                    <strong>Deuteronomy 34:10-12 (NKJV):</strong> "But since then there has not arisen in Israel a prophet like Moses, whom the Lord knew face to face, in all the signs and wonders which the Lord sent him to do in the land of Egypt, before Pharaoh, before all his servants, and in all that mighty power which Moses performed in the sight of all Israel."
+                </div>
+
+                <h3>9. The Purpose of the Law: A Tutor to Lead Us to Christ</h3>
+                <p>Deuteronomy is not a contract to earn salvation. The law was given to a people already redeemed. Its purpose was to show them how to live as God's covenant people — and to show them their inability to keep it perfectly. Paul explains in Galatians 3:24 that the law was our "tutor to bring us to Christ." The law exposes sin, drives us to despair of self-righteousness, and points us to the One who kept it perfectly. Jesus summarized the entire law in two commandments: love God with everything, and love your neighbor as yourself. He lived that perfect love. Then He died for those who failed. That is the gospel. Deuteronomy is not obsolete — it is the foundation that makes the New Testament glorious. Preach it. Teach it. But always point to Christ as the fulfillment of every word.</p>
+
+                <h3>10. A Charge to the Next Generation</h3>
+                <p>Deuteronomy is Moses' final charge to the next generation. He would not cross over, but they would. He had seen the glory of God; they would see the walls of Jericho fall. The book ends with a note of hope. The people are not left leaderless; Joshua is ready. The law is not forgotten; it is written down. The covenant is not broken; it is renewed. For the pastor, Deuteronomy asks: what are you leaving to the next generation? Will they know the Lord? Will they have the words of life? Will they be warned and encouraged? Moses could not finish the journey, but he finished his race. You will not finish all your ministry dreams. But you can hand the baton to faithful people who will carry on. That is Deuteronomy's message: faithful leadership passes the torch.</p>
+            </div>
+
+            <div class="lang-es">
+                <h3>1. Deuteronomio: La Segunda Entrega de la Ley</h3>
+                <p>El título en inglés "Deuteronomy" viene del griego <em>Deuteronomion</em>, que significa "segunda ley" o "repetición de la ley". Pero el título hebreo es <em>Devarim</em> — "palabras" — tomado de la frase inicial: "Estas son las palabras que habló Moisés a todo Israel". Después de cuarenta años de peregrinación, Israel está acampado en las llanuras de Moab, al otro lado del Jordán de Jericó. La generación infiel ha muerto. Una nueva generación está lista para entrar en la tierra. Antes de cruzar, Moisés — ahora de 120 años — pronuncia tres largos discursos de despedida, resumiendo la ley, renovando el pacto y advirtiéndoles de las consecuencias de la obediencia y la desobediencia. Deuteronomio es el sermón final de Moisés. Es el libro del Antiguo Testamento más citado en el Nuevo Testamento, citado por Jesús más que cualquier otro. Si quieres entender el corazón del pacto del Antiguo Testamento, debes estudiar Deuteronomio.</p>
+
+                <div class="scripture">
+                    <strong>Deuteronomio 1:1-3 (RVG):</strong> "Estas son las palabras que habló Moisés a todo Israel al otro lado del Jordán en el desierto... Once días hay desde Horeb, camino del monte de Seir, hasta Cades-barnea. Y aconteció que a los cuarenta años, en el mes undécimo, al primero del mes, Moisés habló a los hijos de Israel conforme a todas las cosas que Jehová le había mandado acerca de ellos."
+                </div>
+
+                <h3>2. El Shemá: El Corazón de la Fidelidad al Pacto</h3>
+                <p>Deuteronomio 6 contiene la confesión de fe más importante del Antiguo Testamento. El Shemá (de la palabra hebrea para "oye") comienza: "Oye, Israel: Jehová nuestro Dios, Jehová uno es. Y amarás a Jehová tu Dios de todo tu corazón, y de toda tu alma, y con todas tus fuerzas". Esto no es meramente una declaración teológica sobre el monoteísmo — aunque lo es. Es un llamado a la lealtad exclusiva, total y apasionada a Yahvéh. El Shemá exige que las palabras de Dios estén en el corazón, se enseñen diligentemente a los hijos, se hablen en casa y en el camino, al acostarse y al levantarse. Debían atarlas como una señal en sus manos y frentes (filacterias) y escribirlas en los postes de las puertas (mezuzahs). Para el pastor, el Shemá es el antídoto contra la religión compartimentada. No puedes amar a Dios el domingo e ignorarlo el resto de la semana. El amor de Dios debe saturar cada área de la vida.</p>
+
+                <div class="scripture">
+                    <strong>Deuteronomio 6:4-9 (RVG):</strong> "Oye, Israel: Jehová nuestro Dios, Jehová uno es. Y amarás a Jehová tu Dios de todo tu corazón, y de toda tu alma, y con todas tus fuerzas. Y estas palabras que yo te mando hoy, estarán sobre tu corazón; y las repetirás a tus hijos, y hablarás de ellas estando en tu casa, y andando por el camino, y al acostarte, y cuando te levantes."
+                </div>
+
+                <h3>3. Recuerda y No Olvides</h3>
+                <p>Deuteronomio ordena repetidamente a Israel que recuerde. Recuerda el desierto. Recuerda el maná. Recuerda cómo Dios los guio. Recuerda el becerro de oro y la ira de Dios. Recuerda que fuiste esclavo en Egipto. La memoria es el fundamento de la fidelidad. Cuando Israel olvidó lo que Dios había hecho, se volvió a los ídolos. Lo mismo es cierto para el pastor y la congregación. ¿Por qué tomamos la comunión? "Haced esto en memoria de mí". ¿Por qué leemos el Antiguo Testamento? Para recordar la historia de la redención. ¿Por qué contamos testimonios? Para recordar lo que Dios ha hecho. Un pueblo olvidadizo es un pueblo infiel. Deuteronomio nos llama a construir monumentos — no de piedra, sino de enseñanza repetida, de canciones, de fiestas, de la Cena del Señor — para que no olvidemos.</p>
+
+                <h3>4. Una Advertencia Contra la Prosperidad y el Orgullo</h3>
+                <p>En Deuteronomio 8, Moisés advierte que cuando Israel entre en la buena tierra — con su abundante agua, trigo, cebada, vides, higueras, granadas, aceite de oliva y miel — comerán y se saciarán. Y entonces, el peligro: "Cuídate de no olvidarte de Jehová tu Dios, para dejar de guardar sus mandamientos... no sea que comas y te sacies, y edifiques buenas casas... y tu plata y tu oro se multipliquen... se eleve tu corazón, y te olvides de Jehová tu Dios". La prosperidad es espiritualmente peligrosa. Crea la ilusión de autosuficiencia. El desierto fue difícil, pero mantuvo a Israel dependiente de Dios. La tierra sería fácil, y los tentaría a olvidar. Pastores, esta es una advertencia directa para el cristianismo occidental. La riqueza no es una señal de bendición — es una prueba. La pregunta no es si tienes dinero, sino si tu corazón permanece humilde y dependiente de Dios.</p>
+
+                <div class="illustration">
+                    <strong>Nota Pastoral:</strong> "Acuérdate de Jehová tu Dios, porque él te da el poder para hacer las riquezas" (Deuteronomio 8:18). Cada dólar en la cuenta bancaria de tu iglesia vino de Dios. Cada edificio fue construido por Su provisión. No dejes que el éxito te haga arrogante. Permanece de rodillas.
+                </div>
+
+                <h3>5. Las Bendiciones y las Maldiciones (Deuteronomio 27-28)</h3>
+                <p>Deuteronomio 27-28 presenta una opción clara. En el Monte Gerizim, la mitad de las tribus pronunciarían bendiciones por la obediencia. En el Monte Ebal, la otra mitad pronunciaría maldiciones por la desobediencia. Las bendiciones incluyen abundancia agrícola, victoria sobre enemigos, lluvia en su temporada y prominencia nacional. Las maldiciones son detalladas y aterradoras: derrota, enfermedad, sequía, locura, ceguera, opresión y finalmente exilio de la tierra. El propósito de las bendiciones y maldiciones no era hacer que Israel ganara la salvación — ya estaban redimidos de Egipto. Más bien, el pacto era una constitución nacional: obedece y prospera en la tierra; desobedece y sé expulsado. Para los cristianos, no estamos bajo el Antiguo Pacto sino bajo el Nuevo. Cristo se hizo maldición por nosotros (Gálatas 3:13) para redimirnos de la maldición de la ley. Sin embargo, el principio permanece: la obediencia trae vida; la desobediencia trae muerte. Los pastores deben predicar tanto la gracia como las serias consecuencias del pecado.</p>
+
+                <div class="scripture">
+                    <strong>Deuteronomio 28:1-2 (RVG):</strong> "Y será que, si oyeres atentamente la voz de Jehová tu Dios, para guardar y poner por obra todos sus mandamientos... Jehová tu Dios te exaltará sobre todas las naciones de la tierra. Y vendrán sobre ti todas estas bendiciones, y te alcanzarán, si oyeres la voz de Jehová tu Dios."
+                </div>
+
+                <h3>6. El Profeta Como Moisés (Deuteronomio 18)</h3>
+                <p>En Deuteronomio 18, Moisés promete que Dios levantará otro profeta como él: "Profeta les levantaré de en medio de sus hermanos, como tú; y pondré mis palabras en su boca, y él les hablará todo lo que yo le mandare". Esta profecía encontró su cumplimiento final en Jesucristo. Pedro la citó en Hechos 3:22-23. Esteban la citó en Hechos 7:37. Moisés fue profeta, legislador, mediador y libertador. Jesús es todo esto — e infinitamente más. El pueblo reconoció a Jesús como "el Profeta" (Juan 6:14; 7:40). Pero a diferencia de Moisés, que vio la espalda de Dios, Jesús es el Verbo hecho carne. A diferencia de Moisés, que golpeó la roca dos veces, Jesús es la Roca. A diferencia de Moisés, que murió fuera de la tierra, Jesús resucitó de los muertos y nos guía a la verdadera tierra prometida.</p>
+
+                <h3>7. El Cántico de Moisés (Deuteronomio 32)</h3>
+                <p>Dios ordenó a Moisés que escribiera un cántico como testigo contra Israel — porque Dios sabía que después de que entraran en la tierra y prosperaran, lo abandonarían. El cántico es una acusación judicial. Repasa la fidelidad de Dios y la rebelión de Israel. Advierte del juicio venidero pero termina con la esperanza de redención. El propósito del cántico no era condenar sino llamar de vuelta. Cuando el desastre golpeara, el cántico les recordaría por qué. Para el pastor, este es un modelo: di la verdad sobre el pecado — no para destruir, sino para restaurar. La advertencia es un acto de amor.</p>
+
+                <div class="illustration">
+                    <strong>Aplicación:</strong> El cántico de Moisés es el "himno nacional de responsabilidad" de Israel. ¿Qué canciones canta tu congregación? ¿Cantan solo canciones felices y victoriosas? ¿O también cantan lamentación, confesión y advertencia? Los Salmos nos dan todo esto. No dejes que tu adoración se vuelva unidimensional.
+                </div>
+
+                <h3>8. La Muerte de Moisés (Deuteronomio 34)</h3>
+                <p>Moisés subió de las llanuras de Moab al Monte Nebo, a la cima del Pisga, frente a Jericó. Allí el Señor le mostró toda la tierra — desde Galaad hasta Dan, todo Neftalí, Efraín, Manasés, Judá hasta el Mar Occidental, el Neguev, el Valle de Jericó, hasta Zoar. Entonces el Señor dijo: "Esta es la tierra que juré a Abraham, Isaac y Jacob, diciendo: A tu descendencia la daré. Te la he hecho ver con tus ojos, mas no pasarás allá". Moisés murió allí en la tierra de Moab, y el Señor lo enterró en un valle — pero nadie sabe su sepulcro hasta hoy. Tenía 120 años; sus ojos nunca se oscurecieron, ni su vigor natural disminuyó. El pueblo lo lloró treinta días. Entonces Josué, hijo de Nun, estaba lleno del espíritu de sabiduría, porque Moisés había puesto sus manos sobre él. Israel obedeció a Josué. Moisés — el más grande profeta del Antiguo Testamento — murió fuera de la tierra por su pecado en Meriba. Pero la promesa de Dios no murió. Josué los guiaría. Y uno más grande que Josué — Jesús — guiaría a Su pueblo al verdadero reposo.</p>
+
+                <div class="scripture">
+                    <strong>Deuteronomio 34:10-12 (RVG):</strong> "Y nunca más se levantó en Israel profeta como Moisés, a quien haya conocido Jehová cara a cara; en todas las señales y prodigios que le envió Jehová para hacer en tierra de Egipto a Faraón, a todos sus siervos, y a toda su tierra; y en toda la mano poderosa, y en todo el espanto grande que Moisés ejecutó ante los ojos de todo Israel."
+                </div>
+
+                <h3>9. El Propósito de la Ley: Un Ayo para Llevarnos a Cristo</h3>
+                <p>Deuteronomio no es un contrato para ganar la salvación. La ley fue dada a un pueblo ya redimido. Su propósito era mostrarles cómo vivir como pueblo del pacto de Dios — y mostrarles su incapacidad para guardarla perfectamente. Pablo explica en Gálatas 3:24 que la ley fue nuestro "ayo para llevarnos a Cristo". La ley expone el pecado, nos lleva a la desesperación de la justicia propia, y nos señala al Único que la cumplió perfectamente. Jesús resumió toda la ley en dos mandamientos: ama a Dios con todo, y ama a tu prójimo como a ti mismo. Él vivió ese amor perfecto. Luego murió por los que fracasaron. Ese es el evangelio. Deuteronomio no está obsoleto — es el fundamento que hace glorioso el Nuevo Testamento. Predícalo. Enséñalo. Pero siempre señala a Cristo como el cumplimiento de cada palabra.</p>
+
+                <h3>10. Un Encargo a la Próxima Generación</h3>
+                <p>Deuteronomio es el encargo final de Moisés a la próxima generación. Él no cruzaría, pero ellos cruzarían. Él había visto la gloria de Dios; ellos verían caer los muros de Jericó. El libro termina con una nota de esperanza. El pueblo no queda sin líder; Josué está listo. La ley no está olvidada; está escrita. El pacto no está roto; es renovado. Para el pastor, Deuteronomio pregunta: ¿qué estás dejando a la próxima generación? ¿Conocerán al Señor? ¿Tendrán las palabras de vida? ¿Serán advertidos y animados? Moisés no pudo terminar el viaje, pero terminó su carrera. Tú no terminarás todos tus sueños ministeriales. Pero puedes pasar el testigo a personas fieles que continuarán. Ese es el mensaje de Deuteronomio: el liderazgo fiel pasa la antorcha.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="exam-section" id="examSection">
+        <div class="exam-header">
+            <h2><span class="lang-en">Unit 10 Examination</span><span class="lang-es">Examen de la Unidad 10</span></h2>
+            <p><span class="lang-en">20 multiple choice questions + 10 short answer questions (essays required for Th.M. and M.Div. only)</span><span class="lang-es">20 preguntas de opción múltiple + 10 preguntas de desarrollo (requeridas solo para Th.M. y M.Div.)</span></p>
+        </div>
+        <div id="mcQuestions"></div>
+        <div id="saQuestions"></div>
+        <div class="action-buttons">
+            <button id="submitBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Entregar Examen</span></button>
+            <button id="resetBtn" class="reset-btn"><span class="lang-en">Reset Exam</span><span class="lang-es">Reiniciar Examen</span></button>
+        </div>
+        <div id="lockoutTimer" class="lockout-timer" style="display:none;"></div>
+    </div>
+
+    <div class="nav-links">
+        <a href="CTSPentUnit9.html"><span class="lang-en">← Previous Unit</span><span class="lang-es">← Unidad Anterior</span></a>
+        <a href="CTSPentUnit11.html" id="nextLink" style="display:none;"><span class="lang-en">Next Unit →</span><span class="lang-es">Siguiente Unidad →</span></a>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// PER-UNIT CONSTANTS
+// ============================================================
+const UNIT = 10;
+const COURSE_PREFIX = "pent";
+const NEXT_URL = "CTSPentUnit11.html";
+const PREV_URL = "CTSPentUnit9.html";
+const IS_LAST_UNIT = false;
+const SHOW_REGISTRATION_CARD = false;
+const CERT_URL = "CTSPentCertificate.html";
+
+// ============================================================
+// MULTIPLE CHOICE QUESTIONS (20) — Distribution: A=5, B=5, C=5, D=5
+// ============================================================
+const mcQuestions = [
+    { textEn: "1. What is the meaning of the Hebrew title 'Devarim'?", textEs: "1. ¿Cuál es el significado del título hebreo 'Devarim'?", optionsEn: ["A. 'Words'", "B. 'The Second Law'", "C. 'Wanderings'", "D. 'Covenant'"], optionsEs: ["A. 'Palabras'", "B. 'La Segunda Ley'", "C. 'Peregrinaciones'", "D. 'Pacto'"], correct: 0, correctFeedbackEn: "Correct! 'Devarim' means 'words' — the opening phrase is 'These are the words which Moses spoke.'", correctFeedbackEs: "¡Correcto! 'Devarim' significa 'palabras' — la frase inicial es 'Estas son las palabras que habló Moisés.'", incorrectFeedbackEn: "Devarim means 'words' — the book is Moses' farewell speeches.", incorrectFeedbackEs: "Devarim significa 'palabras' — el libro son los discursos de despedida de Moisés." },
+    { textEn: "2. Where was Israel camped when Moses delivered Deuteronomy?", textEs: "2. ¿Dónde estaba acampado Israel cuando Moisés pronunció Deuteronomio?", optionsEn: ["A. At Mount Sinai", "B. In the wilderness of Sin", "C. On the plains of Moab, across from Jericho", "D. At Kadesh Barnea"], optionsEs: ["A. En el monte Sinaí", "B. En el desierto de Sin", "C. En las llanuras de Moab, frente a Jericó", "D. En Cades-barnea"], correct: 2, correctFeedbackEn: "Yes. They were on the plains of Moab, ready to cross the Jordan into Canaan.", correctFeedbackEs: "Sí. Estaban en las llanuras de Moab, listos para cruzar el Jordán hacia Canaán.", incorrectFeedbackEn: "Deuteronomy 1:1 — 'on this side of the Jordan' — the plains of Moab.", incorrectFeedbackEs: "Deuteronomio 1:1 — 'a este lado del Jordán' — las llanuras de Moab." },
+    { textEn: "3. How old was Moses when he delivered his farewell addresses?", textEs: "3. ¿Qué edad tenía Moisés cuando pronunció sus discursos de despedida?", optionsEn: ["A. 80 years old", "B. 100 years old", "C. 120 years old", "D. 140 years old"], optionsEs: ["A. 80 años", "B. 100 años", "C. 120 años", "D. 140 años"], correct: 2, correctFeedbackEn: "Correct. Moses was 120 years old — his strength still undiminished.", correctFeedbackEs: "Correcto. Moisés tenía 120 años — su vigor aún no había disminuido.", incorrectFeedbackEn: "Deuteronomy 34:7 — Moses was 120 years old when he died.", incorrectFeedbackEs: "Deuteronomio 34:7 — Moisés tenía 120 años cuando murió." },
+    { textEn: "4. The Shema (Deuteronomy 6:4-5) commands Israel to do what?", textEs: "4. El Shemá (Deuteronomio 6:4-5) manda a Israel a hacer qué?", optionsEn: ["A. Love the Lord with all heart, soul, and strength", "B. Build a temple", "C. Offer sacrifices daily", "D. Keep the feasts"], optionsEs: ["A. Amar a Jehová con todo el corazón, el alma y las fuerzas", "B. Edificar un templo", "C. Ofrecer sacrificios diariamente", "D. Guardar las fiestas"], correct: 0, correctFeedbackEn: "Yes. The Shema is the great commandment to love God totally and exclusively.", correctFeedbackEs: "Sí. El Shemá es el gran mandamiento de amar a Dios total y exclusivamente.", incorrectFeedbackEn: "Deuteronomy 6:5 — 'You shall love the Lord your God with all your heart, soul, and strength.'", incorrectFeedbackEs: "Deuteronomio 6:5 — 'Amarás a Jehová tu Dios de todo tu corazón, y de toda tu alma, y con todas tus fuerzas.'" },
+    { textEn: "5. According to Deuteronomy 6, when should parents teach God's commandments to their children?", textEs: "5. Según Deuteronomio 6, ¿cuándo deben los padres enseñar los mandamientos de Dios a sus hijos?", optionsEn: ["A. Only on the Sabbath", "B. Only in school", "C. Constantly — at home, on the road, lying down, rising up", "D. Once a year at Passover"], optionsEs: ["A. Solo en el sábado", "B. Solo en la escuela", "C. Constantemente — en casa, en el camino, al acostarse, al levantarse", "D. Una vez al año en la Pascua"], correct: 2, correctFeedbackEn: "Correct. Faith is to be taught in the daily rhythms of life, not just in formal settings.", correctFeedbackEs: "Correcto. La fe se ha de enseñar en los ritmos diarios de la vida, no solo en contextos formales.", incorrectFeedbackEn: "Deuteronomy 6:7 — 'talk of them when you sit in your house, when you walk by the way...'", incorrectFeedbackEs: "Deuteronomio 6:7 — 'hablarás de ellas estando en tu casa, y andando por el camino...'" },
+    { textEn: "6. What danger did Moses warn about when Israel became prosperous in the land?", textEs: "6. ¿Contra qué peligro advirtió Moisés cuando Israel prosperara en la tierra?", optionsEn: ["A. They would forget God and become proud", "B. They would build too many cities", "C. They would fight too many wars", "D. They would neglect agriculture"], optionsEs: ["A. Olvidarían a Dios y se volverían orgullosos", "B. Edificarían demasiadas ciudades", "C. Pelearían demasiadas guerras", "D. Descuidarían la agricultura"], correct: 0, correctFeedbackEn: "Yes. Prosperity creates the illusion of self-sufficiency and leads to forgetting God.", correctFeedbackEs: "Sí. La prosperidad crea la ilusión de autosuficiencia y lleva a olvidar a Dios.", incorrectFeedbackEn: "Deuteronomy 8:11-14 — 'Beware that you do not forget the Lord... when your heart is lifted up.'", incorrectFeedbackEs: "Deuteronomio 8:11-14 — 'Guárdate de olvidar a Jehová... cuando tu corazón se enaltezca.'" },
+    { textEn: "7. On which mountains were the blessings and curses pronounced?", textEs: "7. ¿Sobre cuáles montes se pronunciaron las bendiciones y las maldiciones?", optionsEn: ["A. Gerizim (blessings) and Ebal (curses)", "B. Sinai and Horeb", "C. Zion and Olivet", "D. Nebo and Pisgah"], optionsEs: ["A. Gerizim (bendiciones) y Ebal (maldiciones)", "B. Sinaí y Horeb", "C. Sion y el Olivar", "D. Nebo y Pisga"], correct: 0, correctFeedbackEn: "Correct. Gerizim for blessings, Ebal for curses — a visual sermon for Israel.", correctFeedbackEs: "Correcto. Gerizim para las bendiciones, Ebal para las maldiciones — un sermón visual para Israel.", incorrectFeedbackEn: "Deuteronomy 27:12-13 — Gerizim for blessings, Ebal for curses.", incorrectFeedbackEs: "Deuteronomio 27:12-13 — Gerizim para las bendiciones, Ebal para las maldiciones." },
+    { textEn: "8. According to Deuteronomy 28, what would happen if Israel disobeyed the covenant?", textEs: "8. Según Deuteronomio 28, ¿qué sucedería si Israel desobedecía el pacto?", optionsEn: ["A. They would become the greatest nation", "B. They would be blessed with rain and harvest", "C. They would be cursed with disease, defeat, drought, and eventually exile", "D. Nothing would change"], optionsEs: ["A. Se convertirían en la nación más grande", "B. Serían bendecidos con lluvia y cosecha", "C. Serían malditos con enfermedad, derrota, sequía y finalmente exilio", "D. Nada cambiaría"], correct: 2, correctFeedbackEn: "Yes. The curses are detailed and severe — culminating in exile from the land.", correctFeedbackEs: "Sí. Las maldiciones son detalladas y severas — culminando en el exilio de la tierra.", incorrectFeedbackEn: "Deuteronomy 28:15-68 — detailed curses including disease, defeat, madness, and exile.", incorrectFeedbackEs: "Deuteronomio 28:15-68 — maldiciones detalladas que incluyen enfermedad, derrota, locura y exilio." },
+    { textEn: "9. What did God promise in Deuteronomy 18 about a future prophet?", textEs: "9. ¿Qué prometió Dios en Deuteronomio 18 acerca de un profeta futuro?", optionsEn: ["A. 'I will raise up a prophet like Moses'", "B. 'Elijah will return'", "C. 'Prophecy will cease'", "D. 'You will have no prophets'"], optionsEs: ["A. 'Levantaré un profeta como Moisés'", "B. 'Elías volverá'", "C. 'La profecía cesará'", "D. 'No tendrán profetas'"], correct: 0, correctFeedbackEn: "Yes. This prophecy is fulfilled in Jesus Christ (Acts 3:22-23).", correctFeedbackEs: "Sí. Esta profecía se cumple en Jesucristo (Hechos 3:22-23).", incorrectFeedbackEn: "Deuteronomy 18:18 — 'I will raise up for them a Prophet like you from among their brethren.'", incorrectFeedbackEs: "Deuteronomio 18:18 — 'Profeta les levantaré de en medio de sus hermanos, como tú.'" },
+    { textEn: "10. Who quoted Deuteronomy 18 in the New Testament to identify Jesus as that Prophet?", textEs: "10. ¿Quién citó Deuteronomio 18 en el Nuevo Testamento para identificar a Jesús como aquel Profeta?", optionsEn: ["A. Paul", "B. Peter (Acts 3)", "C. John the Baptist", "D. Stephen"], optionsEs: ["A. Pablo", "B. Pedro (Hechos 3)", "C. Juan el Bautista", "D. Esteban"], correct: 1, correctFeedbackEn: "Yes. Peter explicitly applied this prophecy to Jesus at Solomon's Porch.", correctFeedbackEs: "Sí. Pedro aplicó explícitamente esta profecía a Jesús en el Pórtico de Salomón.", incorrectFeedbackEn: "Acts 3:22-23 — Peter quotes Deuteronomy 18 about Jesus.", incorrectFeedbackEs: "Hechos 3:22-23 — Pedro cita Deuteronomio 18 acerca de Jesús." },
+    { textEn: "11. Why did God command Moses to write a song (Deuteronomy 32)?", textEs: "11. ¿Por qué mandó Dios a Moisés que escribiera un cántico (Deuteronomio 32)?", optionsEn: ["A. For entertainment", "B. As a witness against Israel — so when they rebelled, the song would testify", "C. To teach music", "D. To celebrate victory"], optionsEs: ["A. Para entretenimiento", "B. Como testigo contra Israel — para que cuando se rebelaran, el cántico testificara", "C. Para enseñar música", "D. Para celebrar una victoria"], correct: 1, correctFeedbackEn: "Correct. The song was a courtroom witness that God had warned them.", correctFeedbackEs: "Correcto. El cántico era un testigo judicial de que Dios les había advertido.", incorrectFeedbackEn: "Deuteronomy 31:19 — 'this song shall be a witness for Me against the children of Israel.'", incorrectFeedbackEs: "Deuteronomio 31:19 — 'este cántico me sea por testigo contra los hijos de Israel.'" },
+    { textEn: "12. What does Deuteronomy 8:18 say about wealth?", textEs: "12. ¿Qué dice Deuteronomio 8:18 acerca de la riqueza?", optionsEn: ["A. Wealth is a sign of sin", "B. Wealth should be given away", "C. Wealth is evil", "D. 'You shall remember the Lord your God, for it is He who gives you power to get wealth'"], optionsEs: ["A. La riqueza es señal de pecado", "B. La riqueza debe regalarse", "C. La riqueza es mala", "D. 'Acuérdate de Jehová tu Dios, porque él te da el poder para hacer riquezas'"], correct: 3, correctFeedbackEn: "Yes. God is the source of all wealth — never forget that.", correctFeedbackEs: "Sí. Dios es la fuente de toda riqueza — nunca lo olvides.", incorrectFeedbackEn: "Deuteronomy 8:18 — 'You shall remember the Lord your God, for it is He who gives you power to get wealth.'", incorrectFeedbackEs: "Deuteronomio 8:18 — 'Acuérdate de Jehová tu Dios, porque él te da el poder para hacer las riquezas.'" },
+    { textEn: "13. From where did Moses view the Promised Land before he died?", textEs: "13. ¿Desde dónde vio Moisés la Tierra Prometida antes de morir?", optionsEn: ["A. Mount Sinai", "B. Mount Nebo (Pisgah)", "C. Mount Gerizim", "D. Mount Ebal"], optionsEs: ["A. El monte Sinaí", "B. El monte Nebo (Pisga)", "C. El monte Gerizim", "D. El monte Ebal"], correct: 1, correctFeedbackEn: "Correct. Mount Nebo, across from Jericho. He saw the land but did not enter.", correctFeedbackEs: "Correcto. El monte Nebo, frente a Jericó. Vio la tierra pero no entró.", incorrectFeedbackEn: "Deuteronomy 34:1 — Mount Nebo, to the top of Pisgah.", incorrectFeedbackEs: "Deuteronomio 34:1 — el monte Nebo, a la cumbre del Pisga." },
+    { textEn: "14. Why was Moses not allowed to enter the Promised Land?", textEs: "14. ¿Por qué no se le permitió a Moisés entrar en la Tierra Prometida?", optionsEn: ["A. He was too old", "B. He committed adultery", "C. He refused to go", "D. He struck the rock twice at Meribah instead of speaking to it"], optionsEs: ["A. Era demasiado viejo", "B. Cometió adulterio", "C. Se negó a ir", "D. Golpeó la roca dos veces en Meriba en lugar de hablarle"], correct: 3, correctFeedbackEn: "Correct. Moses' disobedience at Meribah disqualified him from entering.", correctFeedbackEs: "Correcto. La desobediencia de Moisés en Meriba lo descalificó de entrar.", incorrectFeedbackEn: "Numbers 20:7-13 — Moses struck the rock twice, failing to honor God's holiness.", incorrectFeedbackEs: "Números 20:7-13 — Moisés golpeó la roca dos veces, sin honrar la santidad de Dios." },
+    { textEn: "15. Who succeeded Moses as leader of Israel?", textEs: "15. ¿Quién sucedió a Moisés como líder de Israel?", optionsEn: ["A. Caleb", "B. Joshua", "C. Aaron", "D. Phinehas"], optionsEs: ["A. Caleb", "B. Josué", "C. Aarón", "D. Finees"], correct: 1, correctFeedbackEn: "Yes. Joshua, the son of Nun, was filled with the spirit of wisdom and led Israel across the Jordan.", correctFeedbackEs: "Sí. Josué, hijo de Nun, fue lleno del espíritu de sabiduría y guió a Israel a cruzar el Jordán.", incorrectFeedbackEn: "Deuteronomy 34:9 — Joshua the son of Nun was full of the spirit of wisdom.", incorrectFeedbackEs: "Deuteronomio 34:9 — Josué hijo de Nun fue lleno del espíritu de sabiduría." },
+    { textEn: "16. How does the New Testament describe the law's purpose (Galatians 3:24)?", textEs: "16. ¿Cómo describe el Nuevo Testamento el propósito de la ley (Gálatas 3:24)?", optionsEn: ["A. A way to earn salvation", "B. An obsolete document", "C. A burden to be ignored", "D. A tutor to bring us to Christ"], optionsEs: ["A. Una manera de ganar la salvación", "B. Un documento obsoleto", "C. Una carga que ignorar", "D. Un ayo para llevarnos a Cristo"], correct: 3, correctFeedbackEn: "Yes. The law exposes sin and drives us to Christ, who kept it perfectly for us.", correctFeedbackEs: "Sí. La ley expone el pecado y nos lleva a Cristo, quien la guardó perfectamente por nosotros.", incorrectFeedbackEn: "Galatians 3:24 — 'the law was our tutor to bring us to Christ, that we might be justified by faith.'", incorrectFeedbackEs: "Gálatas 3:24 — 'la ley ha sido nuestro ayo para llevarnos a Cristo, a fin de que fuésemos justificados por la fe.'" },
+    { textEn: "17. Jesus summarized the entire law with two commandments. Which ones?", textEs: "17. Jesús resumió toda la ley con dos mandamientos. ¿Cuáles?", optionsEn: ["A. Keep the Sabbath and honor parents", "B. Love God with everything and love your neighbor as yourself", "C. Do not murder and do not steal", "D. Worship only God and do not make idols"], optionsEs: ["A. Guardar el sábado y honrar a los padres", "B. Amar a Dios con todo y amar a tu prójimo como a ti mismo", "C. No matar y no robar", "D. Adorar solo a Dios y no hacer ídolos"], correct: 1, correctFeedbackEn: "Yes. Jesus quoted Deuteronomy 6:5 and Leviticus 19:18 as the summary of the law.", correctFeedbackEs: "Sí. Jesús citó Deuteronomio 6:5 y Levítico 19:18 como el resumen de la ley.", incorrectFeedbackEn: "Matthew 22:37-40 — love God and love neighbor.", incorrectFeedbackEs: "Mateo 22:37-40 — amar a Dios y amar al prójimo." },
+    { textEn: "18. What happened to Moses' body after death?", textEs: "18. ¿Qué le sucedió al cuerpo de Moisés después de su muerte?", optionsEn: ["A. It was placed in a tomb in Egypt", "B. It was cremated", "C. It was taken to heaven", "D. The Lord buried him in a valley, but no one knows the location"], optionsEs: ["A. Fue puesto en una tumba en Egipto", "B. Fue cremado", "C. Fue llevado al cielo", "D. Jehová lo sepultó en un valle, pero nadie sabe el lugar"], correct: 3, correctFeedbackEn: "Correct. Deuteronomy 34:6 says God buried Moses, and no one knows the grave.", correctFeedbackEs: "Correcto. Deuteronomio 34:6 dice que Dios sepultó a Moisés, y nadie sabe dónde está su sepultura.", incorrectFeedbackEn: "Deuteronomy 34:6 — 'He buried him in a valley... but no one knows his grave to this day.'", incorrectFeedbackEs: "Deuteronomio 34:6 — 'lo enterró en el valle... y ninguno sabe su sepultura hasta hoy.'" },
+    { textEn: "19. What unique description is given of Moses in Deuteronomy 34:10?", textEs: "19. ¿Qué descripción única se da de Moisés en Deuteronomio 34:10?", optionsEn: ["A. 'A great warrior'", "B. 'A mighty king'", "C. 'Whom the Lord knew face to face'", "D. 'A builder of cities'"], optionsEs: ["A. 'Un gran guerrero'", "B. 'Un rey poderoso'", "C. 'A quien Jehová conoció cara a cara'", "D. 'Un edificador de ciudades'"], correct: 2, correctFeedbackEn: "Yes. No prophet in Israel arose like Moses, whom the Lord knew face to face.", correctFeedbackEs: "Sí. No se levantó en Israel profeta como Moisés, a quien Jehová conoció cara a cara.", incorrectFeedbackEn: "Deuteronomy 34:10 — 'there has not arisen in Israel a prophet like Moses, whom the Lord knew face to face.'", incorrectFeedbackEs: "Deuteronomio 34:10 — 'nunca más se levantó profeta en Israel como Moisés, a quien haya conocido Jehová cara a cara.'" },
+    { textEn: "20. According to the lesson, what is Deuteronomy's message for pastors about leadership transition?", textEs: "20. Según la lección, ¿cuál es el mensaje de Deuteronomio para los pastores sobre la transición del liderazgo?", optionsEn: ["A. Never retire", "B. Hold on to power as long as possible", "C. Leave nothing behind", "D. Faithful leadership passes the torch to the next generation"], optionsEs: ["A. Nunca jubilarse", "B. Aferrarse al poder el mayor tiempo posible", "C. No dejar nada atrás", "D. El liderazgo fiel pasa la antorcha a la siguiente generación"], correct: 3, correctFeedbackEn: "Yes. Moses could not finish the journey, but he handed the baton to Joshua. You will do the same.", correctFeedbackEs: "Sí. Moisés no pudo terminar el viaje, pero entregó el relevo a Josué. Tú harás lo mismo.", incorrectFeedbackEn: "Deuteronomy models how to prepare the next generation for leadership.", incorrectFeedbackEs: "Deuteronomio modela cómo preparar a la siguiente generación para el liderazgo." }
+];
+
+// ============================================================
+// SHORT ANSWER QUESTIONS (10) — split kw_en / kw_es
+// ============================================================
+const saQuestions = [
+    { id: "sa_u10_1", textEn: "What does the Shema (Deuteronomy 6:4-5) require of God's people, and why is it central to the covenant?", textEs: "¿Qué requiere el Shemá (Deuteronomio 6:4-5) del pueblo de Dios, y por qué es central para el pacto?", kw_en: ["shema", "demands", "love", "heart", "soul", "strengt", "total", "loyalty"], kw_es: ["shemá", "exige", "amor", "corazón", "alma", "fuerzas", "lealtad", "total"], explanationEn: "The Shema demands exclusive, total, passionate love for Yahweh — the foundation of covenant faithfulness.", explanationEs: "El Shemá exige amor exclusivo, total y apasionado a Yahvéh — el fundamento de la fidelidad al pacto." },
+    { id: "sa_u10_2", textEn: "Why did Moses warn Israel about the dangers of prosperity (Deuteronomy 8)?", textEs: "¿Por qué advirtió Moisés a Israel sobre los peligros de la prosperidad (Deuteronomio 8)?", kw_en: ["prosper", "forget", "pride", "creates", "suffici", "heart", "lifted", "warning"], kw_es: ["prosper", "olvidar", "orgullo", "autosuf", "corazón", "elevado", "adverte", "prueba"], explanationEn: "Prosperity creates the illusion that we provided for ourselves, leading to forgetting God and pride. It is a test, not just a blessing.", explanationEs: "La prosperidad crea la ilusión de que nos proveemos a nosotros mismos, llevando a olvidar a Dios y al orgullo. Es una prueba, no solo una bendición." },
+    { id: "sa_u10_3", textEn: "Explain the purpose of the blessings and curses in Deuteronomy 27-28.", textEs: "Explique el propósito de las bendiciones y maldiciones en Deuteronomio 27-28.", kw_en: ["blessin", "brings", "life", "disobed", "curse", "nationa", "constit", "salvati"], kw_es: ["obedien", "trae", "vida", "desobed", "maldici", "constit", "naciona", "salvaci"], explanationEn: "The blessings and curses were the terms of the covenant: obey and thrive in the land, disobey and be expelled. They were not to earn salvation but to govern life in the land.", explanationEs: "Las bendiciones y maldiciones eran los términos del pacto: obedece y prospera en la tierra, desobedece y sé expulsado. No eran para ganar la salvación sino para gobernar la vida en la tierra." },
+    { id: "sa_u10_4", textEn: "How does the 'prophet like Moses' (Deuteronomy 18) point to Jesus?", textEs: "¿Cómo apunta el 'profeta como Moisés' (Deuteronomio 18) a Jesús?", kw_en: ["prophet", "like", "moses", "jesus", "acts", "peter", "mediato", "lawgive"], kw_es: ["profeta", "moisés", "jesús", "hechos", "pedro", "mediado", "legisla", "cumplim"], explanationEn: "Jesus is the ultimate Prophet like Moses — but greater. Moses spoke God's words; Jesus is the Word. Moses saw God's back; Jesus is God. Peter applied this prophecy to Jesus in Acts 3.", explanationEs: "Jesús es el Profeta supremo como Moisés — pero mayor. Moisés habló las palabras de Dios; Jesús es la Palabra. Moisés vio la espalda de Dios; Jesús es Dios. Pedro aplicó esta profecía a Jesús en Hechos 3." },
+    { id: "sa_u10_5", textEn: "What was the purpose of the Song of Moses (Deuteronomy 32)?", textEs: "¿Cuál fue el propósito del Cántico de Moisés (Deuteronomio 32)?", kw_en: ["witness", "song", "against", "faithfu", "rebelli", "judgmen", "hope", "reminde"], kw_es: ["testigo", "cántico", "repasar", "fidelid", "rebelió", "juicio", "esperan", "recorda"], explanationEn: "The song was a witness against Israel — when they rebelled, it would remind them of God's faithfulness and their own sin, calling them back.", explanationEs: "El cántico era un testigo contra Israel — cuando se rebelaran, les recordaría la fidelidad de Dios y su propio pecado, llamándolos de vuelta." },
+    { id: "sa_u10_6", textEn: "Why did Moses not enter the Promised Land, and what does this teach about leadership?", textEs: "¿Por qué no entró Moisés en la Tierra Prometida, y qué enseña esto sobre el liderazgo?", kw_en: ["meribah", "struck", "rock", "twice", "disobed", "consequ", "leaders", "held"], kw_es: ["moisés", "golpeó", "roca", "dos", "veces", "desobed", "consecu", "líderes"], explanationEn: "Moses struck the rock in anger instead of speaking to it, dishonoring God's holiness. Leaders are held to a higher standard, but God's work continues through others.", explanationEs: "Moisés golpeó la roca con ira en lugar de hablarle, deshonrando la santidad de Dios. Los líderes son juzgados con mayor responsabilidad, pero la obra de Dios continúa a través de otros." },
+    { id: "sa_u10_7", textEn: "What does Deuteronomy 8:18 teach about the source of wealth, and why is that important for pastors?", textEs: "¿Qué enseña Deuteronomio 8:18 sobre la fuente de la riqueza, y por qué es importante para los pastores?", kw_en: ["every", "dollar", "comes", "wealth", "self", "humilit", "depende", "warning"], kw_es: ["cada", "dólar", "viene", "riqueza", "uno", "humil", "depende", "adverte"], explanationEn: "Every dollar comes from God. Pastors must preach that wealth is not a sign of personal merit but a trust from God to be used for His glory.", explanationEs: "Cada dólar viene de Dios. Los pastores deben predicar que la riqueza no es una señal de mérito personal sino un fideicomiso de Dios para ser usado para Su gloria." },
+    { id: "sa_u10_8", textEn: "How is the law described in Galatians 3:24, and how does that relate to Deuteronomy?", textEs: "¿Cómo se describe la ley en Gálatas 3:24, y cómo se relaciona eso con Deuteronomio?", kw_en: ["tutor", "law", "lead", "christ", "expose", "sin", "impossi", "keep"], kw_es: ["ayo", "ley", "llevar", "cristo", "exponer", "pecado", "imposib", "guardar"], explanationEn: "The law is a tutor that shows us our sin and drives us to Christ. Deuteronomy gives the law, but its purpose is to make us desperate for grace.", explanationEs: "La ley es un ayo que nos muestra nuestro pecado y nos lleva a Cristo. Deuteronomio da la ley, pero su propósito es hacernos desesperados por la gracia." },
+    { id: "sa_u10_9", textEn: "What happened on Mount Gerizim and Mount Ebal, and what did it symbolize?", textEs: "¿Qué sucedió en el Monte Gerizim y el Monte Ebal, y qué simbolizaba?", kw_en: ["gerizim", "blessin", "ebal", "curses", "choice", "life", "death", "visual"], kw_es: ["gerizim", "bendici", "ebal", "maldici", "elecció", "vida", "muerte", "sermón"], explanationEn: "Half the tribes stood on Gerizim to pronounce blessings for obedience; half on Ebal for curses. It was a dramatic enactment of the choice set before Israel.", explanationEs: "La mitad de las tribus estaban en Gerizim para pronunciar bendiciones por la obediencia; la mitad en Ebal para maldiciones. Fue una representación dramática de la elección puesta delante de Israel." },
+    { id: "sa_u10_10", textEn: "What is the central message of Deuteronomy for pastors and church leaders today?", textEs: "¿Cuál es el mensaje central de Deuteronomio para pastores y líderes eclesiásticos hoy?", kw_en: ["remembe", "obey", "love", "teach", "next", "generat", "warning", "against"], kw_es: ["recorda", "obedece", "amar", "enseñar", "próxima", "generac", "adverte", "contra"], explanationEn: "Deuteronomy calls leaders to remember God's faithfulness, love Him totally, teach the next generation, guard against pride in prosperity, and faithfully pass the leadership baton.", explanationEs: "Deuteronomio llama a los líderes a recordar la fidelidad de Dios, amarlo totalmente, enseñar a la próxima generación, guardarse del orgullo en la prosperidad, y pasar fielmente el testigo del liderazgo." }
+];
+
+// ============================================================
+// GLOBAL STATE
+// ============================================================
+let studentTrack = "cert";
+let studentName = "";
+let lockoutEnd = null;
+let examPassed = false;
+const PASS_MC = 18;
+const PASS_SA = 9;
+
+function getStorageKey(key) { return `cts_${COURSE_PREFIX}_${key}`; }
+
+function loadState() {
+    const student = localStorage.getItem("cts_student");
+    if (student) {
+        try {
+            const s = JSON.parse(student);
+            studentName = s.name || "";
+            studentTrack = s.track || "cert";
+        } catch(e) {}
+    }
+    const trackOverride = localStorage.getItem("cts_track");
+    if (trackOverride && ["cert","thm","mdiv"].includes(trackOverride)) studentTrack = trackOverride;
+
+    const lock = localStorage.getItem(getStorageKey(`unit${UNIT}_lockout`));
+    if (lock && parseInt(lock) > Date.now()) lockoutEnd = parseInt(lock);
+
+    const passedFlag = localStorage.getItem(getStorageKey(`unit${UNIT}_passed`));
+    if (passedFlag === "true") examPassed = true;
+
+    const lang = localStorage.getItem(getStorageKey(`unit${UNIT}_lang`)) || "en";
+    document.body.className = `lang-${lang}`;
+
+    updateTrackDisplay();
+    if (examPassed && !IS_LAST_UNIT) { var nl = document.getElementById("nextLink"); nl.href = NEXT_URL; nl.style.display = "block"; }
+    else if (examPassed && IS_LAST_UNIT) window.location.href = CERT_URL;
+}
+
+function updateTrackDisplay() {
+    const trackMap = { cert: "Certificate", thm: "Th.M.", mdiv: "M.Div." };
+    document.getElementById("trackIndicator").innerHTML = `<span class="lang-en">Track: ${trackMap[studentTrack]}</span><span class="lang-es">Vía: ${trackMap[studentTrack]}</span>`;
+}
+
+function saveLanguage(lang) {
+    localStorage.setItem(getStorageKey(`unit${UNIT}_lang`), lang);
+    document.body.className = `lang-${lang}`;
+}
+
+function renderQuestions() {
+    const mcContainer = document.getElementById("mcQuestions");
+    mcContainer.innerHTML = "";
+    mcQuestions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.textEn}</span><span class="lang-es">${q.textEs}</span></div>
+            <div class="options" id="mc-${idx}-opts">
+                ${q.optionsEn.map((opt, optIdx) => `<label><input type="radio" name="mc${idx}" value="${optIdx}"><span class="lang-en"> ${q.optionsEn[optIdx]}</span><span class="lang-es"> ${q.optionsEs[optIdx]}</span></label>`).join('')}
+            </div>
+            <div class="feedback" id="mc-${idx}-fb"></div>
+        `;
+        mcContainer.appendChild(card);
+    });
+
+    const saContainer = document.getElementById("saQuestions");
+    saContainer.innerHTML = "";
+    saQuestions.forEach((q, idx) => {
+        const isCert = studentTrack === "cert";
+        const card = document.createElement("div");
+        card.className = "question-card essay-question";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.textEn}</span><span class="lang-es">${q.textEs}</span></div>
+            <textarea rows="3" id="sa-${idx}" placeholder='${isCert ? "Optional for Certificate track / Opcional para Certificado" : "Type your answer here... / Escriba su respuesta aquí..."}' ></textarea>
+            <div class="feedback" id="sa-${idx}-fb"></div>
+        `;
+        saContainer.appendChild(card);
+    });
+
+    attachAutoScore();
+    attachSAAutoSave();
+    restoreAnswers();
+}
+
+function attachAutoScore() {
+    mcQuestions.forEach((q, idx) => {
+        const radios = document.querySelectorAll(`input[name="mc${idx}"]`);
+        radios.forEach(r => {
+            r.addEventListener("change", () => {
+                const selected = document.querySelector(`input[name="mc${idx}"]:checked`);
+                const fbDiv = document.getElementById(`mc-${idx}-fb`);
+                if (selected) {
+                    localStorage.setItem(getStorageKey(`unit${UNIT}_mc${idx}`), selected.value);
+                    const isCorr = parseInt(selected.value) === q.correct;
+                    if (fbDiv) {
+                        fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+                        fbDiv.innerHTML = isCorr ? `<span class="lang-en">${q.correctFeedbackEn}</span><span class="lang-es">${q.correctFeedbackEs}</span>` : `<span class="lang-en">${q.incorrectFeedbackEn}</span><span class="lang-es">${q.incorrectFeedbackEs}</span>`;
+                    }
+                    document.querySelectorAll(`input[name="mc${idx}"]`).forEach(x => { x.disabled = true; });
+                }
+            });
+        });
+    });
+}
+
+function attachSAAutoSave() {
+    saQuestions.forEach((q, idx) => {
+        const ta = document.getElementById(`sa-${idx}`);
+        if (ta) {
+            ta.addEventListener("input", () => {
+                localStorage.setItem(getStorageKey(`unit${UNIT}_sa${idx}`), ta.value);
+            });
+        }
+    });
+}
+
+function restoreAnswers() {
+    mcQuestions.forEach((q, idx) => {
+        const saved = localStorage.getItem(getStorageKey(`unit${UNIT}_mc${idx}`));
+        if (saved !== null) {
+            const radio = document.querySelector(`input[name="mc${idx}"][value="${saved}"]`);
+            if (radio) {
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change'));
+            }
+        }
+    });
+    saQuestions.forEach((q, idx) => {
+        const saved = localStorage.getItem(getStorageKey(`unit${UNIT}_sa${idx}`));
+        if (saved !== null) {
+            const ta = document.getElementById(`sa-${idx}`);
+            if (ta) ta.value = saved;
+        }
+    });
+}
+
+// ============================================================
+// SMART KEYWORD MATCHER (word-boundary; Q24 fairness standard)
+//   keywords <=4 chars  -> whole-word match
+//   keywords  >4 chars  -> left-anchored prefix (catches inflections)
+//   Unicode-aware boundaries incl. Spanish accents
+// ============================================================
+function kwHit(answer, kw) {
+    const a = (answer || "").toLowerCase();
+    const k = (kw || "").toLowerCase().trim();
+    if (!k) return false;
+    const L = "a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1";
+    const esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const pat = k.length <= 4
+        ? new RegExp(`(^|[^${L}])${esc}([^${L}]|$)`, "i")
+        : new RegExp(`(^|[^${L}])${esc}`, "i");
+    return pat.test(a);
+}
+
+function gradeExam() {
+    if (lockoutEnd && lockoutEnd > Date.now()) {
+        const min = Math.ceil((lockoutEnd - Date.now()) / 60000);
+        alert(`Lockout active. Please wait ${min} minutes. / Bloqueo activo. Espere ${min} minutos.`);
+        return false;
+    }
+
+    let mcCorrect = 0;
+    for (let i = 0; i < mcQuestions.length; i++) {
+        const selected = document.querySelector(`input[name="mc${i}"]:checked`);
+        const fbDiv = document.getElementById(`mc-${i}-fb`);
+        if (selected) {
+            const isCorr = parseInt(selected.value) === mcQuestions[i].correct;
+            if (isCorr) mcCorrect++;
+            fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+            fbDiv.innerHTML = isCorr ? `<span class="lang-en">${mcQuestions[i].correctFeedbackEn}</span><span class="lang-es">${mcQuestions[i].correctFeedbackEs}</span>` : `<span class="lang-en">${mcQuestions[i].incorrectFeedbackEn}</span><span class="lang-es">${mcQuestions[i].incorrectFeedbackEs}</span>`;
+        } else {
+            fbDiv.className = "feedback incorrect";
+            fbDiv.innerHTML = "No answer selected. / No seleccionó respuesta.";
+        }
+    }
+
+    let saPass = true;
+    let saCorrectCount = 0;
+    if (studentTrack !== "cert") {
+        for (let i = 0; i < saQuestions.length; i++) {
+            const answer = document.getElementById(`sa-${i}`).value.trim();
+            const lang = document.body.className.replace("lang-", "");
+            let keywords = lang === "es" ? saQuestions[i].kw_es : saQuestions[i].kw_en;
+            if (lang === "both") keywords = [...saQuestions[i].kw_en, ...saQuestions[i].kw_es];
+            const hits = keywords.filter(kw => kwHit(answer, kw)).length;
+            const passed = hits >= 3 && answer.length >= 100;
+            if (passed) saCorrectCount++;
+            const fbDiv = document.getElementById(`sa-${i}-fb`);
+            const verdict = passed
+                ? `<span class="lang-en">✓ Passed — ${hits} key concepts recognized.</span><span class="lang-es">✓ Aprobado — ${hits} conceptos clave reconocidos.</span>`
+                : `<span class="lang-en">Not enough yet — ${hits} of 3 key concepts matched (answer must also be ≥100 characters). Compare your answer with the model below.</span><span class="lang-es">Aún insuficiente — ${hits} de 3 conceptos clave (la respuesta también debe tener ≥100 caracteres). Compare su respuesta con el modelo.</span>`;
+            const model = `<div class="model-answer"><strong><span class="lang-en">Model answer — study this:</span><span class="lang-es">Respuesta modelo — estúdiela:</span></strong> <span class="lang-en">${saQuestions[i].explanationEn}</span><span class="lang-es">${saQuestions[i].explanationEs}</span></div>`;
+            fbDiv.className = `feedback ${passed ? "correct" : "incorrect"}`;
+            fbDiv.innerHTML = (answer.length >= 100)
+                ? (verdict + model)
+                : `<span class="lang-en">Please write your own answer first \u2014 at least a few sentences (30+ characters) \u2014 then submit to compare it with the model answer.</span><span class="lang-es">Escriba primero su propia respuesta \u2014 al menos unas cuantas oraciones (30+ caracteres) \u2014 luego env\u00EDe para compararla con la respuesta modelo.</span>`;
+        }
+        saPass = saCorrectCount >= PASS_SA;
+    }
+
+    const mcPass = mcCorrect >= PASS_MC;
+    const overallPass = studentTrack === "cert" ? mcPass : (mcPass && saPass);
+
+    if (overallPass) {
+        localStorage.setItem(getStorageKey(`unit${UNIT}_passed`), "true");
+        examPassed = true;
+        const msg = document.body.className.includes("lang-es") ? `¡Aprobado! Sus respuestas están marcadas abajo. Repáselas, luego use el enlace para continuar.` : `Passed! Your answers are marked below. Review them, then use the link to continue.`;
+        alert(msg);
+        if (IS_LAST_UNIT) window.location.href = CERT_URL;
+        else { var nl = document.getElementById("nextLink"); nl.href = NEXT_URL; nl.style.display = "block"; }
+    } else {
+        const lockMinutes = (studentTrack === "cert") ? 2 : 15;
+        const lockoutTime = Date.now() + lockMinutes * 60 * 1000;
+        localStorage.setItem(getStorageKey(`unit${UNIT}_lockout`), lockoutTime);
+        lockoutEnd = lockoutTime;
+        showLockoutTimer();
+        const failMsg = document.body.className.includes("lang-es") ? `No aprobado. Bloqueo de ${lockMinutes} minutos iniciado. (MC: ${mcCorrect}/20${studentTrack !== "cert" ? `, SA: ${saCorrectCount}/10` : ""})` : `Failed. ${lockMinutes}-minute lockout started. (MC: ${mcCorrect}/20${studentTrack !== "cert" ? `, SA: ${saCorrectCount}/10` : ""})`;
+        alert(failMsg);
+    }
+    return overallPass;
+}
+
+function showLockoutTimer() {
+    const timerDiv = document.getElementById("lockoutTimer");
+    if (!lockoutEnd || lockoutEnd <= Date.now()) { timerDiv.style.display = "none"; return; }
+    timerDiv.style.display = "block";
+    const update = () => {
+        const remaining = Math.max(0, Math.ceil((lockoutEnd - Date.now()) / 1000));
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        timerDiv.innerHTML = `<span class="lang-en">Lockout: ${minutes}:${seconds.toString().padStart(2,'0')} remaining</span><span class="lang-es">Bloqueo: ${minutes}:${seconds.toString().padStart(2,'0')} restantes</span>`;
+        if (remaining <= 0) { timerDiv.style.display = "none"; lockoutEnd = null; }
+        else setTimeout(update, 1000);
+    };
+    update();
+}
+
+function resetExam() {
+    const isEs = document.body.className.includes("lang-es");
+    const msg = isEs ? "¿Reiniciar todas las respuestas? Esto no se puede deshacer." : "Reset all answers? This cannot be undone.";
+    if (confirm(msg)) {
+        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        document.querySelectorAll('textarea').forEach(t => t.value = "");
+        document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+        mcQuestions.forEach((q, idx) => localStorage.removeItem(getStorageKey(`unit${UNIT}_mc${idx}`)));
+        saQuestions.forEach((q, idx) => localStorage.removeItem(getStorageKey(`unit${UNIT}_sa${idx}`)));
+    }
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => saveLanguage(btn.dataset.lang));
+});
+document.getElementById("submitBtn").addEventListener("click", gradeExam);
+document.getElementById("resetBtn").addEventListener("click", resetExam);
+
+loadState();
+renderQuestions();
+if (lockoutEnd) showLockoutTimer();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPentReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

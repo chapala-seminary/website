@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Unit 1 — Why Study the Movement? / ¿Por qué estudiar el movimiento?</title>
+<style>
+  :root{
+    --ink:#22303b; --ink-soft:#465562; --paper:#f5f3ec; --surface:#ffffff;
+    --brass:#b08324; --brass-soft:#e8dcc0; --rule:#ddd6c6;
+    --good:#2f6f4f; --good-bg:#e8f1eb; --bad:#9b3d3d; --bad-bg:#f3e6e4;
+    --gold-box:#fbf3dd; --gold-border:#d9b45b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    font-size:18px; line-height:1.72;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 80px;}
+  .topbar{
+    position:sticky; top:0; z-index:20; background:var(--ink); color:#f5f3ec;
+    display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center; justify-content:space-between;
+    padding:10px 20px; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  .topbar .brand{font-weight:600; font-size:15px; letter-spacing:.02em;}
+  .topbar .brand small{opacity:.7; font-weight:400;}
+  .switches{display:flex; gap:16px; align-items:center; flex-wrap:wrap;}
+  .switch{display:flex; align-items:center; gap:4px;}
+  .switch span.lbl{font-size:11px; text-transform:uppercase; letter-spacing:.08em; opacity:.65;}
+  .switch button{
+    font:inherit; font-size:13px; cursor:pointer; border:1px solid #45596a; background:transparent;
+    color:#dfe6ec; padding:5px 11px; border-radius:999px; line-height:1;
+  }
+  .switch button[aria-pressed="true"]{background:var(--brass); border-color:var(--brass); color:#241a05; font-weight:600;}
+  .switch button:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+  header.unit{padding:38px 0 6px; border-bottom:1px solid var(--rule);}
+  .eyebrow{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  h1{font-family:Georgia,serif; font-size:2rem; line-height:1.18; margin:.35rem 0 .1rem; font-weight:700;}
+  .course-tag{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft);}
+  .banner{margin:26px 0 8px; padding:20px 22px; background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--brass); border-radius:4px;}
+  .banner .verse{font-size:1.12rem; font-style:italic; line-height:1.6;}
+  .banner .ref{display:block; margin-top:8px; font-family:system-ui,sans-serif; font-style:normal; font-size:13px; letter-spacing:.05em; color:var(--brass); font-weight:600;}
+  h2{font-family:Georgia,serif; font-size:1.42rem; margin:2.2em 0 .5em; line-height:1.25; padding-bottom:.18em; border-bottom:2px solid var(--brass-soft);}
+  h3{font-family:Georgia,serif; font-size:1.14rem; margin:1.6em 0 .3em; color:var(--ink);}
+  p{margin:0 0 1.05em;}
+  .lead{font-size:1.06rem;}
+  blockquote.scripture{margin:1.2em 0; padding:2px 0 2px 20px; border-left:3px solid var(--gold-border); font-style:italic; color:#3a4650;}
+  blockquote.scripture .ref{display:block; font-style:normal; font-family:system-ui,sans-serif; font-size:12.5px; letter-spacing:.04em; color:var(--brass); font-weight:600; margin-top:5px;}
+  .objectives{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 22px 6px; margin:24px 0;}
+  .objectives h2{margin:0 0 .4em; border:0; font-size:1.15rem;}
+  .objectives ol{margin:0 0 12px; padding-left:1.25em;}
+  .objectives li{margin:0 0 .55em;}
+  /* comparative VIEWS block (reusable multi-view template) */
+  .views{margin:24px 0; display:grid; gap:14px;}
+  .view{background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--accent,#888); border-radius:6px; padding:16px 20px;}
+  .view.v1{--accent:#3f6d7a;} .view.v2{--accent:#9a7b2e;} .view.v3{--accent:#5f7052;} .view.v4{--accent:#7a5566;}
+  .vhead{font-family:Georgia,serif; font-weight:700; font-size:1.1rem; margin-bottom:.55em; line-height:1.3;}
+  .vtag{display:inline-block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:#fff; background:var(--accent,#888); padding:3px 8px; border-radius:999px; vertical-align:middle; margin-right:8px; font-weight:700;}
+  .view p{font-size:.97rem; margin:0 0 .5em;} .view p:last-child{margin-bottom:0;}
+  .view p b{color:var(--ink);}
+  /* two-questions split (signature) */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:0; margin:26px 0; border:1px solid var(--rule); border-radius:6px; overflow:hidden;}
+  .split .col{padding:20px 22px; background:var(--surface);}
+  .split .col:first-child{border-right:3px solid var(--brass);}
+  .split .col h4{margin:0 0 .5em; font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .split .col .verdict{font-family:Georgia,serif; font-size:1.12rem; font-weight:700; margin:0 0 .4em; line-height:1.3;}
+  .split .col p{font-size:.96rem; margin:0;}
+  .split .col.affirm .verdict{color:var(--good);}
+  .split .col.decline .verdict{color:var(--ink);}
+  @media(max-width:560px){ .split{grid-template-columns:1fr;} .split .col:first-child{border-right:0; border-bottom:3px solid var(--brass);} }
+  .callout{background:#fdfcf8; border:1px solid var(--rule); border-left:4px solid var(--ink-soft); border-radius:4px; padding:14px 18px; margin:22px 0; font-size:.98rem;}
+  ul.q-list{padding-left:1.2em;} ul.q-list li{margin:0 0 .6em;}
+  section.assess{margin-top:16px;}
+  .qcard{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 20px; margin:16px 0;}
+  .qnum{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .qstem{font-weight:600; margin:.3em 0 .8em;}
+  .opt{display:block; margin:0 0 .5em; padding:10px 12px; border:1px solid var(--rule); border-radius:5px; cursor:pointer; font-size:.98rem; transition:background .12s,border-color .12s;}
+  .opt:hover{background:#faf7ef;}
+  .opt input{margin-right:9px;}
+  .opt.correct{background:var(--good-bg); border-color:var(--good);}
+  .opt.wrong{background:var(--bad-bg); border-color:var(--bad);}
+  .btn{font-family:system-ui,sans-serif; font-size:14px; font-weight:600; cursor:pointer; border:0; background:var(--ink); color:#fff; padding:9px 18px; border-radius:5px;}
+  .btn:hover{background:#334452;} .btn:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--ink);}
+  .fb{margin-top:12px; font-size:.95rem; padding:10px 12px; border-radius:5px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:var(--good-bg); color:#1f5138; border:1px solid #bcd8c8;}
+  .fb.no{background:var(--bad-bg); color:#7a2f2f; border:1px solid #e0c4c0;}
+  .scorebar{font-family:system-ui,sans-serif; font-size:14px; background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:12px 16px; margin:14px 0; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;}
+  .scorebar strong{color:var(--brass); font-size:16px;}
+  textarea{width:100%; min-height:118px; font-family:inherit; font-size:1rem; padding:12px; border:1px solid var(--rule); border-radius:5px; resize:vertical; background:#fffef9;}
+  textarea:focus-visible{outline:2px solid var(--brass); outline-offset:1px;}
+  .hitline{font-family:system-ui,sans-serif; font-size:13px; margin:10px 0; display:none;}
+  .hitline.show{display:block;}
+  .hitline b{color:var(--brass);}
+  .model{display:none; margin-top:12px; background:var(--gold-box); border:1px solid var(--gold-border); border-radius:5px; padding:14px 16px; font-size:.97rem;}
+  .model.show{display:block;}
+  .model .mh{font-family:system-ui,sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8a6d1f; font-weight:700; margin-bottom:6px;}
+  .track-note{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft); background:#fdfcf8; border:1px dashed var(--rule); border-radius:5px; padding:10px 14px; margin:10px 0;}
+  #masters-block{display:none;}
+  html.track-masters #masters-block{display:block;}
+  html.track-cert #cert-only-note{display:block;}
+  #cert-only-note{display:none;}
+  footer{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-family:system-ui,sans-serif; font-size:12.5px; color:var(--ink-soft);}
+  .pane.es{display:none;} .seg.es{display:none;}
+  html.lang-es .pane.en{display:none;} html.lang-es .seg.en{display:none;}
+  html.lang-es .pane.es{display:block;} html.lang-es .seg.es{display:inline;}
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">Chapala Theological Seminary <small>&middot; Seminario Teológico de Chapala</small></div>
+  <div class="switches">
+    <div class="switch" role="group" aria-label="Language / Idioma">
+      <span class="lbl">Lang</span>
+      <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+      <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+    </div>
+    <div class="switch" role="group" aria-label="Track / Programa">
+      <span class="lbl seg en">Track</span><span class="lbl seg es">Programa</span>
+      <button id="btn-cert" aria-pressed="true" onclick="setTrack('cert')"><span class="seg en">Certificate</span><span class="seg es">Certificado</span></button>
+      <button id="btn-mast" aria-pressed="false" onclick="setTrack('masters')"><span class="seg en">Master's</span><span class="seg es">Maestría</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSPentecostalUnit1.html" title="Unit 1 · Unidad 1" class="active">1</a><a href="CTSPentecostalUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSPentecostalUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSPentecostalUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSPentecostalUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSPentecostalUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSPentecostalUnit7.html" title="Unit 7 · Unidad 7">7</a><a href="CTSPentecostalUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSPentecostalUnit9.html" title="Unit 9 · Unidad 9">9</a><a href="CTSPentecostalUnit10.html" title="Unit 10 · Unidad 10">10</a><a href="CTSPentecostalUnit11.html" title="Unit 11 · Unidad 11">11</a><a href="CTSPentecostalUnit12.html" title="Unit 12 · Unidad 12">12</a></nav><script>(function(){try{var p=JSON.parse(localStorage.getItem('cts_pentecostal_progress')||'{}');document.querySelectorAll('.cts-unitnav a').forEach(function(a,i){if(p['unit'+(i+1)])a.classList.add('completed');});}catch(e){}})();</script>
+
+  <header class="unit">
+    <div class="pane en">
+      <div class="eyebrow">Pentecostalism &amp; the Charismatic Movement · Unit 1</div>
+      <h1>Why Study the Movement?</h1>
+      <div class="course-tag">A Biblical Study · New King James Version</div>
+    </div>
+    <div class="pane es">
+      <div class="eyebrow">El pentecostalismo y el movimiento carismático · Unidad 1</div>
+      <h1>¿Por qué estudiar el movimiento?</h1>
+      <div class="course-tag">Un estudio bíblico · Reina-Valera Gómez</div>
+    </div>
+  </header>
+
+  <div class="banner">
+    <div class="pane en"><span class="verse">"…they received the word with all readiness, and searched the Scriptures daily to find out whether these things were so."<span class="ref">Acts 17:11 (NKJV)</span></span></div>
+    <div class="pane es"><span class="verse">"…recibieron la palabra con toda solicitud, escudriñando cada día las Escrituras para ver si estas cosas eran así."<span class="ref">Hechos 17:11 (RVG)</span></span></div>
+  </div>
+
+  <div class="objectives">
+    <div class="pane en">
+      <h2>Learning Objectives</h2>
+      <ol>
+        <li>Explain why the Pentecostal and charismatic movement is worth studying, and state its approximate scale in the world and in Latin America.</li>
+        <li>Define the key terms the course uses: Pentecostal, charismatic, the movement, spiritual gifts, baptism in the Spirit, tongues, and cessationism/continuationism.</li>
+        <li>State the two questions the course keeps apart throughout.</li>
+        <li>Describe the even-handed, Scripture-measured method the course follows on disputed questions.</li>
+        <li>Adopt a charitable posture toward the movement, holding truth and love together, and understand what the course will and will not settle.</li>
+      </ol>
+    </div>
+    <div class="pane es">
+      <h2>Objetivos de aprendizaje</h2>
+      <ol>
+        <li>Explicar por qué vale la pena estudiar el movimiento pentecostal y carismático, y exponer su escala aproximada en el mundo y en América Latina.</li>
+        <li>Definir los términos clave que usa el curso: pentecostal, carismático, el movimiento, dones espirituales, bautismo en el Espíritu, lenguas, y cesacionismo/continuismo.</li>
+        <li>Exponer las dos preguntas que el curso mantiene separadas en todo momento.</li>
+        <li>Describir el método equilibrado y medido por la Escritura que el curso sigue en las preguntas disputadas.</li>
+        <li>Adoptar una postura caritativa hacia el movimiento, sosteniendo juntas la verdad y el amor, y entender lo que el curso resolverá y lo que no.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!--WC:EN:START-->
+  <div class="pane en">
+
+    <h2>Why This Course?</h2>
+    <p class="lead">Welcome to the study of the Pentecostal and charismatic movement. It is one of the largest and fastest-growing streams of Christianity in the world today, and it is especially strong in Latin America, where many who read this course live and serve. Its congregations fill our cities and villages; its worship, its emphases, and its questions touch nearly every church around it. Whether you belong to this movement, minister alongside it, or simply meet its influence on every side, you have good reason to understand it — its beliefs, its history, the gifts it prizes, and the distortions that have grown up within it — and to weigh all of it, carefully and honestly, by the Word of God.</p>
+    <p>This opening unit sets the stage for everything that follows. It will explain why the movement is worth our attention and how large it has become. It will define the terms we will use throughout, some of which are themselves debated. And, most importantly, it will lay out the posture this course takes toward its subject — a posture that is at once biblical, fair-minded, and charitable. Before we can weigh the movement well, we must be clear about what we are studying and how we mean to study it.</p>
+
+    <h2>A Movement Worth Understanding</h2>
+    <p>Consider first the sheer scale of what we are studying. By careful estimate, the Pentecostal and charismatic family now numbers near six hundred and forty-four million people — roughly a quarter of all the Christians in the world. In little more than a single century it has grown from a mere handful of believers to this vast multitude, spread across every inhabited continent. Few movements in the whole history of the church have grown so fast or reached so far.</p>
+    <p>Nor has this growth been idle. For a hundred years the movement has stood near the forefront of world evangelism, carrying the gospel of Christ to the poor, the remote, and the unreached across Africa, Latin America, and Asia. Especially in the lands where this course is read — in Mexico, in Cuba, throughout Latin America — its churches are everywhere, and its influence reaches far beyond its own membership. A movement this large, this active, and this near cannot responsibly be ignored. It must be understood — and understood not by rumor or caricature, but by Scripture.</p>
+    <p>For the pastor and the lay leader especially, this is not a distant academic matter. Many in your own congregation may have come out of a Pentecostal church, or have relatives who worship in one; some may bring its questions and expectations with them into your services. To shepherd such people wisely — to affirm what is good, gently correct what is not, and guard the peace of the church — you must first understand what they have been taught and why. A shepherd who does not know the ground his sheep graze on cannot lead them well.</p>
+
+    <h2>Defining the Terms</h2>
+    <p>Before going further, we should define the words this course will use, for clear terms prevent much confusion. The word Pentecostal names the movement that arose in the early twentieth century, which we will trace in a later unit; it emphasized the baptism in the Holy Spirit and the exercise of spiritual gifts, classically pointing to speaking in tongues as the sign of that baptism, and it formed its own new denominations. The word charismatic comes from the Greek charisma, meaning a gift of grace; broadly it describes Christians within the historic Protestant and Catholic churches, and beyond, who came to embrace the same gifts and experience without necessarily leaving their own traditions. When this course speaks simply of the movement, it means the whole family together — classical Pentecostals, charismatics in the historic churches, later evangelical currents, and the great host of independent churches that fit none of the older labels.</p>
+    <p>A few more terms will recur. Spiritual gifts, or charismata, are the abilities the Holy Spirit distributes to believers for the building up of the church:</p>
+    <blockquote class="scripture">"But the manifestation of the Spirit is given to each one for the profit of all."<span class="ref">1 Corinthians 12:7 (NKJV)</span></blockquote>
+    <p>The phrase the baptism in the Holy Spirit is used in different ways by different Christians, and its very meaning is one of the questions this course will weigh; so too is the nature of tongues — speaking in a language one has not learned, whether a known human language or otherwise. Finally, the words cessationism and continuationism name the two positions on whether the miraculous sign-gifts have ceased with the age of the apostles or continue in the church today. Where a term is itself contested, we will say so plainly and take up the question in the unit devoted to it, rather than settling it quietly by a definition.</p>
+
+    <h2>Two Questions Kept Apart</h2>
+    <p>There is one distinction so important to this whole study that we must introduce it at the very outset, for we will return to it again and again. A great deal of the confusion and heat around this subject comes from running together two questions that are really quite different. The first is whether a gift is real — whether the Holy Spirit still gives it to the church. The second is whether a particular experience is required of every believer — whether every Christian must, for example, speak in tongues to prove that he has received the Spirit.</p>
+    <p>These two questions are not the same, and the answer to one does not decide the other. A person may believe that the gift of tongues is entirely real and still deny that every believer must speak in tongues; the two convictions sit together without contradiction. Much needless division has arisen from treating them as a single question. Throughout this course we will keep them carefully apart, and you will find that many disputes grow smaller, and much clearer, once they are separated.</p>
+
+    <h2>How This Course Approaches the Subject</h2>
+    <p>How, then, will this course weigh so large and so disputed a subject? First and above all, we measure everything by Scripture, which is our final authority. We come to this study as the noble Bereans came to Paul's preaching — not with closed minds, and not with credulous ones, but receiving the word readily and then searching the Scriptures to see whether these things are so. No experience, however powerful, and no teacher, however admired, stands above the written Word of God.</p>
+    <p>Second, on the questions that faithful Christians genuinely dispute — whether the sign-gifts continue, what the baptism in the Spirit is, what Paul means by "that which is perfect" — we will do what this seminary does with the millennium. We will set out each faithful position at its strongest, presenting the best case its defenders would make, and we will impose no verdict of our own, leaving you to weigh the Scriptures and come to your own settled conviction. This is not weakness or indecision; it is the fairness that truth requires when godly people who love the same Bible read it differently.</p>
+    <p>Third, we will judge a teaching on its own terms, by the Word, and we will judge a movement by its Scriptures and its faithful — never by its worst and most visible preachers, nor by its distortions. And through all of it we will keep Christ at the center, remembering the Lord's own words that the Spirit was given to glorify Him. These four commitments — Scripture as the measure, fairness on the open questions, judgment by the faithful rather than the worst, and Christ at the center — will guide every unit that follows.</p>
+
+    <h2>A Charitable Posture</h2>
+    <p>It follows from all this that we must approach the movement, and the people in it, with charity. The hundreds of millions who belong to this family are, in the great majority, our brothers and sisters in Christ — fellow members of His body, many of them prayerful, faithful, and zealous for the gospel, some of them poorer and more persecuted than we are, and no less dear to their Savior. We come to them not as enemies to be refuted but as family to be understood.</p>
+    <blockquote class="scripture">"but, speaking the truth in love, may grow up in all things into Him who is the head—Christ."<span class="ref">Ephesians 4:15 (NKJV)</span></blockquote>
+    <p>This does not mean pretending that all is well where it is not. We will be honest about real errors — the prosperity gospel, certain excesses that dishonor the Spirit's name — and where Scripture requires it, we will lovingly decline what is taught. But we will not slander the many for the faults of a few, nor allow honest disagreement to curdle into contempt. Truth and love are not rivals; Scripture binds them together, and so must we, speaking the truth in love toward those with whom we share one Lord.</p>
+
+    <h2>What We Will and Will Not Settle</h2>
+    <p>It may help to say clearly what to expect from this course, so that no one is disappointed for the wrong reasons. Some things it will settle plainly, because Scripture settles them plainly: that the Holy Spirit is God and truly at work, that the prosperity gospel is a distortion of the gospel, that the suffering must never be blamed for their suffering. Where the Bible speaks with one clear voice, we will not pretend to hesitate.</p>
+    <p>Other things it will deliberately leave open, because Scripture itself leaves them open: whether the miraculous sign-gifts continue today, and what precisely the baptism in the Spirit is. On these, do not expect the course to hand you a verdict. Expect instead a fair hearing of the strongest arguments on each side, and the tools to weigh them yourself before God. To force a certainty where Scripture is quiet would be to add to the Word, not to honor it.</p>
+    <p>You may fairly ask where the writer of this course himself stands. Like any teacher, he holds his own settled convictions, reached over years of study; but on the open questions he will not press them upon you as though they were the plain command of Scripture. His task here is not to make you agree with him, but to set the Scriptures and the strongest arguments before you clearly, and to trust the Spirit and the Word to do their work in your own conscience. Where the Bible binds, he will bind; where it leaves liberty, he will leave you free.</p>
+
+    <h2>The Journey Ahead</h2>
+    <p>With the terms defined and the posture set, we can sketch the path before us. We will begin by considering the Holy Spirit as the whole of Scripture presents Him, and then the day of Pentecost, when the Spirit was poured out and the church was born. We will study the gift of tongues in the book of Acts and in Paul's letters, and the much-debated baptism in the Holy Spirit. We will trace the movement's history — its birth in the early twentieth century, and its later spread into the historic churches through the charismatic renewal.</p>
+    <p>From there we will take up the exercise of the gifts today — healing, miracles, prophecy, and tongues — and the reality of spiritual warfare. We will face honestly the distortions that have grown up alongside the movement, chief among them the prosperity gospel. And we will end with a whole biblical assessment, drawing every thread together. Along the way you will meet the great questions and the strongest cases on each side. Come to them, then, as the Bereans did — ready to receive, and diligent to search the Scriptures.</p>
+
+    <h2>A Word Before We Begin</h2>
+    <p>One last word before we begin. Whatever you come to conclude on the questions this course leaves open, let the study itself do a deeper work in you than the settling of any single argument. Let it drive you nearer to Christ, deepen your love for His Word, sharpen your discernment, and enlarge your charity toward His people in all their variety. These are worth more than winning a debate.</p>
+    <blockquote class="scripture">"He will glorify Me, for He will take of what is Mine and declare it to you."<span class="ref">John 16:14 (NKJV)</span></blockquote>
+    <p>For that, in the end, is the measure of everything we will study: whether it lifts up Jesus Christ and makes His people more like Him. The Spirit was given to glorify the Son; may this course, in its own small way, do the same. So let us begin — with open Bibles, humble hearts, and our eyes on the Savior.</p>
+
+  </div>
+  <!--WC:EN:END-->
+
+  <!--WC:ES:START-->
+  <div class="pane es">
+
+    <h2>¿Por qué este curso?</h2>
+    <p class="lead">Bienvenido al estudio del movimiento pentecostal y carismático. Es una de las corrientes más grandes y de más rápido crecimiento del cristianismo en el mundo hoy, y es especialmente fuerte en América Latina, donde muchos de los que leen este curso viven y sirven. Sus congregaciones llenan nuestras ciudades y aldeas; su adoración, sus énfasis y sus preguntas tocan casi toda iglesia a su alrededor. Ya sea que usted pertenezca a este movimiento, ministre junto a él, o simplemente encuentre su influencia por todos lados, tiene buena razón para entenderlo — sus creencias, su historia, los dones que aprecia, y las distorsiones que han crecido dentro de él — y para sopesarlo todo, con cuidado y honestidad, por la Palabra de Dios.</p>
+    <p>Esta unidad de apertura prepara el escenario para todo lo que sigue. Explicará por qué el movimiento es digno de nuestra atención y cuán grande ha llegado a ser. Definirá los términos que usaremos a lo largo de todo, algunos de los cuales son ellos mismos debatidos. Y, más importante aún, expondrá la postura que este curso toma hacia su tema — una postura que es a la vez bíblica, imparcial y caritativa. Antes de poder sopesar bien el movimiento, debemos tener claro qué estamos estudiando y cómo pensamos estudiarlo.</p>
+
+    <h2>Un movimiento digno de entenderse</h2>
+    <p>Considere primero la sola escala de lo que estudiamos. Por estimación cuidadosa, la familia pentecostal y carismática cuenta ahora cerca de seiscientos cuarenta y cuatro millones de personas — aproximadamente una cuarta parte de todos los cristianos del mundo. En poco más de un solo siglo ha crecido de un mero puñado de creyentes a esta vasta multitud, extendida por todos los continentes habitados. Pocos movimientos en toda la historia de la iglesia han crecido tan rápido ni alcanzado tan lejos.</p>
+    <p>Ni ha sido ocioso este crecimiento. Por cien años el movimiento ha estado cerca de la vanguardia de la evangelización mundial, llevando el evangelio de Cristo a los pobres, los remotos y los no alcanzados por toda África, América Latina y Asia. Especialmente en las tierras donde se lee este curso — en México, en Cuba, por toda América Latina — sus iglesias están por todas partes, y su influencia llega mucho más allá de su propia membresía. Un movimiento tan grande, tan activo y tan cercano no puede ignorarse responsablemente. Debe entenderse — y entenderse no por rumor ni caricatura, sino por la Escritura.</p>
+    <p>Para el pastor y el líder laico especialmente, esto no es un asunto académico lejano. Muchos en su propia congregación pueden haber salido de una iglesia pentecostal, o tener parientes que adoran en una; algunos pueden traer sus preguntas y expectativas consigo a sus cultos. Para pastorear a tales personas con sabiduría — afirmar lo bueno, corregir con suavidad lo que no lo es, y guardar la paz de la iglesia — usted debe primero entender lo que se les ha enseñado y por qué. Un pastor que no conoce el terreno donde pacen sus ovejas no puede guiarlas bien.</p>
+
+    <h2>Definiendo los términos</h2>
+    <p>Antes de seguir adelante, deberíamos definir las palabras que usará este curso, pues los términos claros previenen mucha confusión. La palabra pentecostal nombra el movimiento que surgió a principios del siglo veinte, que trazaremos en una unidad posterior; recalcó el bautismo en el Espíritu Santo y el ejercicio de los dones espirituales, señalando clásicamente el hablar en lenguas como la señal de ese bautismo, y formó sus propias nuevas denominaciones. La palabra carismático viene del griego charisma, que significa un don de gracia; ampliamente describe a los cristianos dentro de las iglesias históricas protestantes y católicas, y más allá, que llegaron a abrazar los mismos dones y experiencia sin necesariamente dejar sus propias tradiciones. Cuando este curso habla simplemente del movimiento, se refiere a toda la familia junta — pentecostales clásicos, carismáticos en las iglesias históricas, corrientes evangélicas posteriores, y la gran hueste de iglesias independientes que no encajan en ninguna de las etiquetas más antiguas.</p>
+    <p>Unos pocos términos más se repetirán. Los dones espirituales, o carismas, son las capacidades que el Espíritu Santo reparte a los creyentes para la edificación de la iglesia:</p>
+    <blockquote class="scripture">"Pero a cada uno le es dada la manifestación del Espíritu para provecho."<span class="ref">1 Corintios 12:7 (RVG)</span></blockquote>
+    <p>La frase el bautismo en el Espíritu Santo se usa de maneras diferentes por diferentes cristianos, y su mismo significado es una de las preguntas que este curso sopesará; así también la naturaleza de las lenguas — el hablar en una lengua que uno no ha aprendido, sea un idioma humano conocido o de otra clase. Finalmente, las palabras cesacionismo y continuismo nombran las dos posturas sobre si los dones de señal milagrosos han cesado con la era de los apóstoles o continúan en la iglesia hoy. Donde un término es él mismo disputado, lo diremos con claridad y tomaremos la pregunta en la unidad dedicada a ella, en vez de resolverla calladamente por una definición.</p>
+
+    <h2>Dos preguntas mantenidas aparte</h2>
+    <p>Hay una distinción tan importante para todo este estudio que debemos introducirla desde el mismo comienzo, pues volveremos a ella una y otra vez. Gran parte de la confusión y el calor en torno a este tema viene de mezclar dos preguntas que son en realidad muy diferentes. La primera es si un don es real — si el Espíritu Santo todavía lo da a la iglesia. La segunda es si una experiencia particular se requiere de todo creyente — si todo cristiano debe, por ejemplo, hablar en lenguas para probar que ha recibido el Espíritu.</p>
+    <p>Estas dos preguntas no son la misma, y la respuesta a una no decide la otra. Una persona puede creer que el don de lenguas es enteramente real y aun negar que todo creyente deba hablar en lenguas; las dos convicciones se sostienen juntas sin contradicción. Mucha división innecesaria ha surgido de tratarlas como una sola pregunta. A lo largo de este curso las mantendremos cuidadosamente separadas, y usted hallará que muchas disputas se hacen más pequeñas, y mucho más claras, una vez que se separan.</p>
+
+    <h2>Cómo aborda el tema este curso</h2>
+    <p>¿Cómo, entonces, sopesará este curso un tema tan grande y tan disputado? Primero y sobre todo, medimos todo por la Escritura, que es nuestra autoridad final. Venimos a este estudio como los nobles bereanos vinieron a la predicación de Pablo — no con mentes cerradas, ni con mentes crédulas, sino recibiendo la palabra prontamente y luego escudriñando las Escrituras para ver si estas cosas son así. Ninguna experiencia, por poderosa que sea, y ningún maestro, por admirado que sea, está por encima de la Palabra escrita de Dios.</p>
+    <p>Segundo, en las preguntas que los cristianos fieles genuinamente disputan — si los dones de señal continúan, qué es el bautismo en el Espíritu, qué quiere decir Pablo con "lo que es perfecto" — haremos lo que este seminario hace con el milenio. Expondremos cada postura fiel en su forma más fuerte, presentando el mejor caso que harían sus defensores, y no impondremos veredicto propio, dejándole sopesar las Escrituras y llegar a su propia convicción firme. Esto no es debilidad ni indecisión; es la equidad que la verdad exige cuando personas piadosas que aman la misma Biblia la leen de manera diferente.</p>
+    <p>Tercero, juzgaremos una enseñanza por sí misma, por la Palabra, y juzgaremos un movimiento por sus Escrituras y sus fieles — nunca por sus peores y más visibles predicadores, ni por sus distorsiones. Y a través de todo ello mantendremos a Cristo en el centro, recordando las propias palabras del Señor de que el Espíritu fue dado para glorificarlo. Estos cuatro compromisos — la Escritura como la medida, la equidad en las preguntas abiertas, el juicio por los fieles en vez de por los peores, y Cristo en el centro — guiarán cada unidad que sigue.</p>
+
+    <h2>Una postura caritativa</h2>
+    <p>De todo esto se sigue que debemos acercarnos al movimiento, y a las personas en él, con caridad. Los cientos de millones que pertenecen a esta familia son, en la gran mayoría, nuestros hermanos y hermanas en Cristo — miembros del mismo cuerpo de Él, muchos de ellos dados a la oración, fieles y celosos por el evangelio, algunos de ellos más pobres y más perseguidos que nosotros, y no menos queridos por su Salvador. Venimos a ellos no como enemigos para ser refutados, sino como familia para ser entendida.</p>
+    <blockquote class="scripture">"sino que siguiendo la verdad en amor, crezcamos en todo en aquel que es la cabeza, en Cristo."<span class="ref">Efesios 4:15 (RVG)</span></blockquote>
+    <p>Esto no significa fingir que todo está bien donde no lo está. Seremos honestos sobre los errores reales — el evangelio de la prosperidad, ciertos excesos que deshonran el nombre del Espíritu — y donde la Escritura lo requiera, declinaremos con amor lo que se enseña. Pero no calumniaremos a los muchos por las faltas de unos pocos, ni permitiremos que el desacuerdo honesto se agríe en desprecio. La verdad y el amor no son rivales; la Escritura los une, y así debemos hacer nosotros, siguiendo la verdad en amor hacia aquellos con quienes compartimos un solo Señor.</p>
+
+    <h2>Lo que resolveremos y lo que no</h2>
+    <p>Puede ayudar decir con claridad qué esperar de este curso, para que nadie quede decepcionado por las razones equivocadas. Algunas cosas las resolverá con claridad, porque la Escritura las resuelve con claridad: que el Espíritu Santo es Dios y verdaderamente está obrando, que el evangelio de la prosperidad es una distorsión del evangelio, que al que sufre nunca se le debe culpar por su sufrimiento. Donde la Biblia habla con una sola voz clara, no fingiremos vacilar.</p>
+    <p>Otras cosas las dejará deliberadamente abiertas, porque la Escritura misma las deja abiertas: si los dones de señal milagrosos continúan hoy, y qué es precisamente el bautismo en el Espíritu. En estas, no espere que el curso le entregue un veredicto. Espere en cambio una audiencia justa de los argumentos más fuertes de cada lado, y las herramientas para sopesarlos usted mismo ante Dios. Forzar una certeza donde la Escritura calla sería añadir a la Palabra, no honrarla.</p>
+    <p>Puede usted preguntar con justicia dónde se sitúa el propio autor de este curso. Como cualquier maestro, sostiene sus propias convicciones firmes, alcanzadas por años de estudio; pero en las preguntas abiertas no las impondrá sobre usted como si fueran el claro mandato de la Escritura. Su tarea aquí no es hacerle estar de acuerdo con él, sino poner las Escrituras y los argumentos más fuertes ante usted con claridad, y confiar en que el Espíritu y la Palabra hagan su obra en su propia conciencia. Donde la Biblia ata, él atará; donde deja libertad, le dejará libre.</p>
+
+    <h2>El camino por delante</h2>
+    <p>Con los términos definidos y la postura establecida, podemos bosquejar el camino ante nosotros. Comenzaremos considerando al Espíritu Santo tal como lo presenta la totalidad de la Escritura, y luego el día de Pentecostés, cuando el Espíritu fue derramado y la iglesia nació. Estudiaremos el don de lenguas en el libro de los Hechos y en las cartas de Pablo, y el muy debatido bautismo en el Espíritu Santo. Trazaremos la historia del movimiento — su nacimiento a principios del siglo veinte, y su posterior expansión a las iglesias históricas a través de la renovación carismática.</p>
+    <p>De allí tomaremos el ejercicio de los dones hoy — la sanidad, los milagros, la profecía y las lenguas — y la realidad de la guerra espiritual. Enfrentaremos con honestidad las distorsiones que han crecido junto al movimiento, principal entre ellas el evangelio de la prosperidad. Y terminaremos con una evaluación bíblica completa, uniendo cada hilo. En el camino se encontrará con las grandes preguntas y los casos más fuertes de cada lado. Venga a ellos, entonces, como lo hicieron los bereanos — dispuesto a recibir, y diligente para escudriñar las Escrituras.</p>
+
+    <h2>Una palabra antes de comenzar</h2>
+    <p>Una última palabra antes de comenzar. Cualquiera que sea la conclusión a la que llegue en las preguntas que este curso deja abiertas, deje que el estudio mismo haga en usted una obra más profunda que el resolver cualquier argumento particular. Deje que le acerque más a Cristo, ahonde su amor por su Palabra, agudice su discernimiento, y ensanche su caridad hacia su pueblo en toda su variedad. Estas cosas valen más que ganar un debate.</p>
+    <blockquote class="scripture">"Él me glorificará; porque tomará de lo mío, y os lo hará saber."<span class="ref">Juan 16:14 (RVG)</span></blockquote>
+    <p>Pues eso, al fin, es la medida de todo lo que estudiaremos: si levanta a Jesucristo y hace a su pueblo más semejante a Él. El Espíritu fue dado para glorificar al Hijo; que este curso, a su manera pequeña, haga lo mismo. Así que comencemos — con las Biblias abiertas, corazones humildes, y nuestros ojos en el Salvador.</p>
+
+  </div>
+  <!--WC:ES:END-->
+
+  <!-- DISCUSSION -->
+  <div class="pane en">
+    <h2>Discussion Questions</h2>
+    <ul class="q-list">
+      <li>Why might it matter for a pastor or lay leader in Latin America to understand the Pentecostal and charismatic movement well?</li>
+      <li>In your own words, what are the two questions this course keeps apart, and why does confusing them cause trouble?</li>
+      <li>What does it look like to hold truth and love together when we disagree with fellow believers?</li>
+      <li>Why is it wise to leave some questions open rather than forcing a verdict Scripture does not give?</li>
+    </ul>
+    <h3>Ministry Application</h3>
+    <p>Write two or three sentences describing how you would explain to a friend the difference between honoring a genuine work of God and testing every teaching by Scripture.</p>
+  </div>
+  <div class="pane es">
+    <h2>Preguntas para discusión</h2>
+    <ul class="q-list">
+      <li>¿Por qué podría importar a un pastor o líder laico en América Latina entender bien el movimiento pentecostal y carismático?</li>
+      <li>En sus propias palabras, ¿cuáles son las dos preguntas que este curso mantiene separadas, y por qué confundirlas causa problemas?</li>
+      <li>¿Cómo se ve sostener juntas la verdad y el amor cuando estamos en desacuerdo con hermanos creyentes?</li>
+      <li>¿Por qué es sabio dejar algunas preguntas abiertas en vez de forzar un veredicto que la Escritura no da?</li>
+    </ul>
+    <h3>Aplicación ministerial</h3>
+    <p>Escriba dos o tres frases que describan cómo explicaría a un amigo la diferencia entre honrar una obra genuina de Dios y probar toda enseñanza por la Escritura.</p>
+  </div>
+
+  <!-- ASSESSMENT -->
+  <section class="assess">
+    <div class="pane en"><h2>Self-Check &mdash; Multiple Choice</h2><p style="font-size:.97rem;color:var(--ink-soft);">Choose the best answer, then press <em>Check</em>. Feedback and a short explanation appear for each question.</p></div>
+    <div class="pane es"><h2>Autoevaluación &mdash; Opción múltiple</h2><p style="font-size:.97rem;color:var(--ink-soft);">Elija la mejor respuesta y presione <em>Comprobar</em>. Para cada pregunta aparecen la respuesta y una breve explicación.</p></div>
+
+    <div id="mcq"></div>
+
+    <div class="scorebar">
+      <span><span class="seg en">Score:</span><span class="seg es">Puntuación:</span> <strong id="score">0 / 7</strong></span>
+      <button class="btn ghost" onclick="resetMcq()"><span class="seg en">Reset answers</span><span class="seg es">Reiniciar respuestas</span></button>
+    </div>
+  </section>
+
+  <div id="cert-only-note" class="track-note">
+    <span class="seg en">You are on the <strong>Certificate</strong> track. The written short-answer section is required only for the Master's track — switch tracks at the top if you are completing written work.</span>
+    <span class="seg es">Usted está en el programa de <strong>Certificado</strong>. La sección escrita de respuesta corta se requiere sólo para el programa de Maestría; cambie de programa arriba si va a realizar el trabajo escrito.</span>
+  </div>
+
+  <div id="masters-block">
+    <section class="assess">
+      <div class="pane en"><h2>Written Work &mdash; Master's Track</h2><p style="font-size:.97rem;color:var(--ink-soft);">Answer in a few sentences of your own. Your response is checked for key concepts (any three of eight is a pass), then the model answer is revealed for comparison.</p></div>
+      <div class="pane es"><h2>Trabajo escrito &mdash; Programa de Maestría</h2><p style="font-size:.97rem;color:var(--ink-soft);">Responda con sus propias palabras en unas frases. Su respuesta se evalúa por conceptos clave (tres de ocho es aprobado); luego se revela la respuesta modelo para comparar.</p></div>
+      <div id="sa"></div>
+    </section>
+  </div>
+
+  <nav style="margin:1.7rem 0 .3rem;padding-top:1rem;border-top:1px solid #d9d2c2;">
+  <div class="pane en"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><span></span><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Course Home</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Reading Room</a><a href="CTSPentecostalUnit2.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Next &rsaquo;</a></div></div>
+  <div class="pane es"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><span></span><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Inicio del curso</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Sala de Lecturas</a><a href="CTSPentecostalUnit2.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Siguiente &rsaquo;</a></div></div>
+</nav>
+
+<footer>
+    <div class="pane en">Chapala Theological Seminary &middot; Unit 1 of the course <em>Pentecostalism &amp; the Charismatic Movement</em>. Scripture in English from the New King James Version; Spanish from the Reina-Valera Gómez. This unit is designed for offline use — no internet connection is required.</div>
+    <div class="pane es">Seminario Teológico de Chapala &middot; Unidad 1 del curso <em>El pentecostalismo y el movimiento carismático</em>. Escrituras en inglés de la New King James Version; en español de la Reina-Valera Gómez. Esta unidad está diseñada para uso sin conexión: no se requiere internet.</div>
+  </footer>
+
+</div>
+
+<script>
+/* ---------- hardened storage (Android content:// fallback) ---------- */
+var _ctsMem = {};
+function lsGet(k){ try{ var v = window.localStorage.getItem(k); return v===null ? (k in _ctsMem ? _ctsMem[k] : null) : v; }catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try{ window.localStorage.setItem(k,v); }catch(e){ _ctsMem[k]=String(v); } _ctsMem[k]=String(v); }
+function lsDel(k){ try{ window.localStorage.removeItem(k); }catch(e){} delete _ctsMem[k]; }
+var SKEY = 'cts_u01_intro';
+var saPassed = {};
+
+/* ---------- language + track ---------- */
+function setLang(l){
+  document.documentElement.classList.toggle('lang-es', l==='es');
+  document.documentElement.classList.toggle('lang-en', l==='en');
+  document.documentElement.setAttribute('lang', l);
+  document.getElementById('btn-en').setAttribute('aria-pressed', l==='en');
+  document.getElementById('btn-es').setAttribute('aria-pressed', l==='es');
+  lsSet(SKEY+'_lang', l);
+  renderMcqText(); renderSaText(); refreshScore();
+}
+function setTrack(t){
+  document.documentElement.classList.toggle('track-masters', t==='masters');
+  document.documentElement.classList.toggle('track-cert', t==='cert');
+  document.getElementById('btn-cert').setAttribute('aria-pressed', t==='cert');
+  document.getElementById('btn-mast').setAttribute('aria-pressed', t==='masters');
+  lsSet(SKEY+'_track', t);
+}
+
+/* ---------- MCQ data (correct positions varied: A,B,D,A,C,B,D) ---------- */
+var MCQ = [
+ { correct:3,
+   q:{en:"This course studies the Pentecostal and charismatic movement because —",
+      es:"Este curso estudia el movimiento pentecostal y carismático porque —"},
+   opts:[
+     {en:"it is small and unimportant", es:"es pequeño y sin importancia"},
+     {en:"Scripture never mentions the Holy Spirit", es:"la Escritura nunca menciona al Espíritu Santo"},
+     {en:"it has no bearing on Latin America", es:"no tiene relación con América Latina"},
+     {en:"it is one of the largest and fastest-growing streams of Christianity, especially strong where this course is read", es:"es una de las corrientes más grandes y de más rápido crecimiento del cristianismo, especialmente fuerte donde se lee este curso"} ],
+   exp:{en:"By careful estimate the movement numbers near 644 million — roughly a quarter of the world's Christians — and its congregations are everywhere in Latin America.",
+        es:"Por estimación cuidadosa el movimiento cuenta cerca de 644 millones — aproximadamente una cuarta parte de los cristianos del mundo — y sus congregaciones están por todas partes en América Latina."} },
+ { correct:1,
+   q:{en:"The word “charismatic” comes from a Greek word meaning —",
+      es:"La palabra “carismático” viene de una palabra griega que significa —"},
+   opts:[
+     {en:"tongues", es:"lenguas"},
+     {en:"gift of grace, and broadly describes Christians in the historic churches and beyond who embrace the same gifts without necessarily leaving their traditions", es:"don de gracia, y describe ampliamente a los cristianos de las iglesias históricas y más allá que abrazan los mismos dones sin necesariamente dejar sus tradiciones"},
+     {en:"denomination", es:"denominación"},
+     {en:"prophecy", es:"profecía"} ],
+   exp:{en:"From charisma, a gift of grace; the charismatic renewal carried the Pentecostal experience into the historic Protestant and Catholic churches.",
+        es:"De charisma, un don de gracia; la renovación carismática llevó la experiencia pentecostal a las iglesias históricas protestantes y católicas."} },
+ { correct:0,
+   q:{en:"The two questions this course is careful to keep apart are —",
+      es:"Las dos preguntas que este curso tiene cuidado de mantener separadas son —"},
+   opts:[
+     {en:"whether a gift is real, and whether a particular experience is required of every believer", es:"si un don es real, y si una experiencia particular se requiere de todo creyente"},
+     {en:"whether God exists, and whether the Bible is true", es:"si Dios existe, y si la Biblia es verdadera"},
+     {en:"whether to pray, and whether to read Scripture", es:"si orar, y si leer la Escritura"},
+     {en:"whether the church should meet, and whether to sing", es:"si la iglesia debe reunirse, y si cantar"} ],
+   exp:{en:"The reality of a gift and the requiring of an experience are different questions; the answer to one does not settle the other.",
+        es:"La realidad de un don y el requerir una experiencia son preguntas diferentes; la respuesta a una no resuelve la otra."} },
+ { correct:2,
+   q:{en:"On genuinely disputed questions, this course —",
+      es:"En las preguntas genuinamente disputadas, este curso —"},
+   opts:[
+     {en:"always declares one side simply right", es:"siempre declara a un lado simplemente correcto"},
+     {en:"refuses to mention them", es:"rehúsa mencionarlas"},
+     {en:"sets out each faithful position at its strongest and imposes no verdict, as the seminary does with the millennium", es:"expone cada postura fiel en su forma más fuerte y no impone veredicto, como el seminario lo hace con el milenio"},
+     {en:"says Scripture gives no guidance at all", es:"dice que la Escritura no da ninguna guía"} ],
+   exp:{en:"Where faithful, Bible-loving Christians differ, the course gives a fair hearing to each and leaves the reader to weigh them before God.",
+        es:"Donde cristianos fieles que aman la Biblia difieren, el curso da una audiencia justa a cada uno y deja al lector sopesarlas ante Dios."} },
+ { correct:3,
+   q:{en:"This course judges a movement —",
+      es:"Este curso juzga un movimiento —"},
+   opts:[
+     {en:"by its worst and most famous preachers", es:"por sus peores y más famosos predicadores"},
+     {en:"by its television programs", es:"por sus programas de televisión"},
+     {en:"by its size alone", es:"por su tamaño solamente"},
+     {en:"by its Scriptures and its faithful, while judging a teaching on its own terms by the Word", es:"por sus Escrituras y sus fieles, mientras juzga una enseñanza por sí misma según la Palabra"} ],
+   exp:{en:"A teaching is weighed by Scripture; a movement by its Scriptures and its faithful, not by its distortions.",
+        es:"Una enseñanza se sopesa por la Escritura; un movimiento por sus Escrituras y sus fieles, no por sus distorsiones."} },
+ { correct:2,
+   q:{en:"Toward the hundreds of millions in the movement, this course takes the posture of —",
+      es:"Hacia los cientos de millones en el movimiento, este curso toma la postura de —"},
+   opts:[
+     {en:"enemies to be refuted", es:"enemigos para ser refutados"},
+     {en:"strangers to be ignored", es:"extraños para ser ignorados"},
+     {en:"family to be understood, holding truth and love together even where something must be lovingly declined", es:"familia para ser entendida, sosteniendo juntas la verdad y el amor aun donde algo deba declinarse con amor"},
+     {en:"rivals to be defeated", es:"rivales para ser derrotados"} ],
+   exp:{en:"The great majority are brothers and sisters in Christ; the course is honest about real errors without slandering the many for the faults of a few.",
+        es:"La gran mayoría son hermanos y hermanas en Cristo; el curso es honesto sobre los errores reales sin calumniar a los muchos por las faltas de unos pocos."} },
+ { correct:1,
+   q:{en:"Regarding what it will settle, this course —",
+      es:"En cuanto a lo que resolverá, este curso —"},
+   opts:[
+     {en:"promises a verdict on every question", es:"promete un veredicto sobre cada pregunta"},
+     {en:"settles what Scripture settles and deliberately leaves open what Scripture leaves open, giving tools to weigh the rest", es:"resuelve lo que la Escritura resuelve y deja abierto deliberadamente lo que la Escritura deja abierto, dando herramientas para sopesar el resto"},
+     {en:"settles nothing at all", es:"no resuelve nada en absoluto"},
+     {en:"avoids Scripture entirely", es:"evita la Escritura por completo"} ],
+   exp:{en:"Some things are plain in Scripture and are stated plainly; others are genuinely disputed and are left open, with the strongest cases set side by side.",
+        es:"Algunas cosas son claras en la Escritura y se declaran con claridad; otras son genuinamente disputadas y se dejan abiertas, con los casos más fuertes puestos lado a lado."} }
+];
+
+var answered = {};
+
+function buildMcq(){
+  var host = document.getElementById('mcq'); host.innerHTML='';
+  MCQ.forEach(function(item, qi){
+    var card = document.createElement('div'); card.className='qcard'; card.id='q'+qi;
+    var num = document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Question '+(qi+1)+'</span><span class="seg es">Pregunta '+(qi+1)+'</span>';
+    var stem = document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    card.appendChild(num); card.appendChild(stem);
+    item.opts.forEach(function(o, oi){
+      var lab = document.createElement('label'); lab.className='opt'; lab.setAttribute('data-oi',oi);
+      var inp = document.createElement('input'); inp.type='radio'; inp.name='q'+qi; inp.value=oi;
+      inp.onchange=function(){ answered[qi]=oi; };
+      var txt = document.createElement('span'); txt.setAttribute('data-role','opttext');
+      lab.appendChild(inp); lab.appendChild(txt); card.appendChild(lab);
+    });
+    var btn = document.createElement('button'); btn.className='btn'; btn.setAttribute('data-role','checkbtn');
+    btn.onclick=function(){ checkOne(qi); };
+    var fb = document.createElement('div'); fb.className='fb'; fb.id='fb'+qi;
+    card.appendChild(btn); card.appendChild(fb);
+    host.appendChild(card);
+  });
+  renderMcqText();
+}
+function renderMcqText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  MCQ.forEach(function(item, qi){
+    var card = document.getElementById('q'+qi);
+    card.querySelector('[data-role="stem"]').textContent = item.q[l];
+    card.querySelectorAll('.opt').forEach(function(lab){
+      var oi = +lab.getAttribute('data-oi');
+      lab.querySelector('[data-role="opttext"]').textContent = item.opts[oi][l];
+    });
+    card.querySelector('[data-role="checkbtn"]').textContent = (l==='es'?'Comprobar':'Check');
+    if(card.getAttribute('data-checked')==='1'){ paintFeedback(qi, l); }
+  });
+}
+function checkOne(qi){
+  if(!(qi in answered)){
+    var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+    var fb = document.getElementById('fb'+qi); fb.className='fb no show';
+    fb.textContent = (l==='es'?'Elija una respuesta primero.':'Please choose an answer first.');
+    return;
+  }
+  document.getElementById('q'+qi).setAttribute('data-checked','1');
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  paintFeedback(qi, l); refreshScore(); saveState();
+}
+function paintFeedback(qi, l){
+  var item = MCQ[qi]; var card = document.getElementById('q'+qi); var chosen = answered[qi];
+  card.querySelectorAll('.opt').forEach(function(lab){
+    var oi = +lab.getAttribute('data-oi'); lab.classList.remove('correct','wrong');
+    if(oi===item.correct) lab.classList.add('correct');
+    else if(oi===chosen) lab.classList.add('wrong');
+    var r = lab.querySelector('input'); if(r) r.checked = (oi===chosen);
+  });
+  var fb = document.getElementById('fb'+qi); var ok = (chosen===item.correct);
+  fb.className = 'fb show ' + (ok?'ok':'no');
+  var head = ok ? (l==='es'?'Correcto. ':'Correct. ') : (l==='es'?'No exactamente. ':'Not quite. ');
+  fb.textContent = head + item.exp[l];
+}
+function refreshScore(){
+  var n=0; MCQ.forEach(function(item,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct) n++; });
+  document.getElementById('score').textContent = n + ' / ' + MCQ.length;
+  updatePentProgress();
+}
+function updatePentProgress(){
+  var mcAll = MCQ.every(function(item,qi){ return document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct; });
+  var track = lsGet(SKEY+'_track') || 'cert';
+  var saOk = true;
+  if(track === 'masters'){
+    saOk = SA.every(function(item, si){ return saPassed[si] === true; });
+  }
+  if(mcAll && saOk){
+    try{var _pp=JSON.parse(lsGet('cts_pentecostal_progress')||'{}');_pp['unit'+1]=true;lsSet('cts_pentecostal_progress',JSON.stringify(_pp));}catch(e){}
+  }
+}
+function resetMcq(){
+  answered = {};
+  MCQ.forEach(function(item,qi){
+    var card=document.getElementById('q'+qi); card.setAttribute('data-checked','0');
+    card.querySelectorAll('.opt').forEach(function(l){ l.classList.remove('correct','wrong'); var r=l.querySelector('input'); if(r) r.checked=false; });
+    var fb=document.getElementById('fb'+qi); fb.className='fb';
+  });
+  refreshScore(); lsDel(SKEY+'_mcq');
+}
+
+/* ---------- short answer (Q24 fairness: 8 single-concept keywords, 3 = pass, word-boundary matcher) ---------- */
+function normalize(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+}
+function kwHit(answer, kw){
+  var toks = normalize(answer).split(' ');
+  var k = normalize(kw);
+  for(var i=0;i<toks.length;i++){ if(toks[i]===k || toks[i].indexOf(k)===0) return true; }
+  return false;
+}
+function countHits(answer, kws){ var n=0; kws.forEach(function(k){ if(kwHit(answer,k)) n++; }); return n; }
+
+var SA = [
+ { kw:{ en:["pentecostal","charismatic","grace","gifts","historic","denominations","movement","family"],
+        es:["pentecostal","carismatico","gracia","dones","historicas","denominaciones","movimiento","familia"] },
+   q:{en:"Define the terms Pentecostal and charismatic, and explain what this course means by the movement.",
+      es:"Defina los términos pentecostal y carismático, y explique qué entiende este curso por el movimiento."},
+   model:{en:"Pentecostal names the movement that began in the early twentieth century, emphasizing the baptism in the Holy Spirit and the gifts, classically with tongues as its sign, and forming its own denominations. Charismatic comes from the Greek word for a gift of grace and broadly describes Christians in the historic Protestant and Catholic churches, and beyond, who embrace the same gifts without necessarily leaving their traditions. By the movement this course means the whole family together: classical Pentecostals, charismatics in the historic churches, third-wave evangelicals, and the vast independent churches.",
+          es:"Pentecostal nombra el movimiento que comenzó a principios del siglo veinte, recalcando el bautismo en el Espíritu Santo y los dones, clásicamente con las lenguas como su señal, y formando sus propias denominaciones. Carismático viene de la palabra griega para un don de gracia y describe ampliamente a los cristianos de las iglesias históricas protestantes y católicas, y más allá, que abrazan los mismos dones sin necesariamente dejar sus tradiciones. Por el movimiento este curso entiende toda la familia junta: pentecostales clásicos, carismáticos en las iglesias históricas, evangélicos de la tercera ola, y las vastas iglesias independientes."} },
+ { kw:{ en:["gift","real","required","experience","disputed","strongest","verdict","scripture"],
+        es:["don","real","requiere","experiencia","disputadas","fuerte","veredicto","escritura"] },
+   q:{en:"State the two questions this course keeps apart, and describe how it approaches genuinely disputed questions.",
+      es:"Exponga las dos preguntas que este curso mantiene separadas, y describa cómo aborda las preguntas genuinamente disputadas."},
+   model:{en:"The course keeps apart two questions: whether a gift is real — whether the Spirit still gives it — and whether a particular experience is required of every believer. These are different, and the answer to one does not settle the other. On genuinely disputed questions, the course does not declare one side simply right; instead it sets out each faithful position at its strongest and imposes no verdict, as the seminary does with the millennium, leaving the reader to weigh them before God. Through it all, everything is measured by Scripture as the final authority.",
+          es:"El curso mantiene separadas dos preguntas: si un don es real — si el Espíritu todavía lo da — y si una experiencia particular se requiere de todo creyente. Estas son diferentes, y la respuesta a una no resuelve la otra. En las preguntas genuinamente disputadas, el curso no declara a un lado simplemente correcto; en cambio expone cada postura fiel en su forma más fuerte y no impone veredicto, como el seminario lo hace con el milenio, dejando al lector sopesarlas ante Dios. A través de todo, todo se mide por la Escritura como la autoridad final."} },
+ { kw:{ en:["brothers","family","honest","errors","slander","settle","open","scripture"],
+        es:["hermanos","familia","honesto","errores","calumniar","resuelve","abierto","escritura"] },
+   q:{en:"Describe the charitable posture this course takes toward the movement, and what it will and will not settle.",
+      es:"Describa la postura caritativa que este curso toma hacia el movimiento, y lo que resolverá y lo que no."},
+   model:{en:"The course takes the posture of charity: the great majority in the movement are our brothers and sisters in Christ, family to be understood rather than enemies to be refuted. It is honest about real errors, such as the prosperity gospel and certain excesses, yet it refuses to slander the many for the faults of a few, holding truth and love together. As for its conclusions, it settles what Scripture plainly settles and deliberately leaves open what Scripture leaves open, giving the reader a fair hearing of the strongest cases and the tools to weigh the rest before God.",
+          es:"El curso toma la postura de la caridad: la gran mayoría en el movimiento son nuestros hermanos y hermanas en Cristo, familia para ser entendida en vez de enemigos para ser refutados. Es honesto sobre los errores reales, como el evangelio de la prosperidad y ciertos excesos, pero rehúsa calumniar a los muchos por las faltas de unos pocos, sosteniendo juntas la verdad y el amor. En cuanto a sus conclusiones, resuelve lo que la Escritura resuelve claramente y deja abierto deliberadamente lo que la Escritura deja abierto, dando al lector una audiencia justa de los casos más fuertes y las herramientas para sopesar el resto ante Dios."} }
+];
+
+function buildSa(){
+  var host=document.getElementById('sa'); host.innerHTML='';
+  SA.forEach(function(item, si){
+    var card=document.createElement('div'); card.className='qcard'; card.id='sa'+si;
+    var num=document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Written '+(si+1)+'</span><span class="seg es">Escrita '+(si+1)+'</span>';
+    var stem=document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    var ta=document.createElement('textarea'); ta.id='ta'+si; ta.setAttribute('aria-label','answer');
+    var btnrow=document.createElement('div'); btnrow.style.marginTop='10px'; btnrow.style.display='flex'; btnrow.style.gap='10px'; btnrow.style.flexWrap='wrap';
+    var chk=document.createElement('button'); chk.className='btn'; chk.setAttribute('data-role','chk'); chk.onclick=function(){ checkSa(si); };
+    var rev=document.createElement('button'); rev.className='btn ghost'; rev.setAttribute('data-role','rev'); rev.onclick=function(){ revealModel(si); };
+    btnrow.appendChild(chk); btnrow.appendChild(rev);
+    var hit=document.createElement('div'); hit.className='hitline'; hit.id='hit'+si;
+    var mod=document.createElement('div'); mod.className='model'; mod.id='mod'+si;
+    mod.innerHTML='<div class="mh" data-role="mh"></div><div data-role="mtext"></div>';
+    card.appendChild(num); card.appendChild(stem); card.appendChild(ta); card.appendChild(btnrow); card.appendChild(hit); card.appendChild(mod);
+    host.appendChild(card);
+  });
+  renderSaText();
+}
+function renderSaText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  SA.forEach(function(item, si){
+    var card=document.getElementById('sa'+si);
+    card.querySelector('[data-role="stem"]').textContent=item.q[l];
+    card.querySelector('[data-role="chk"]').textContent=(l==='es'?'Comprobar mi respuesta':'Check my answer');
+    card.querySelector('[data-role="rev"]').textContent=(l==='es'?'Ver respuesta modelo':'Reveal model answer');
+    card.querySelector('[data-role="mh"]').textContent=(l==='es'?'Respuesta modelo':'Model answer');
+    card.querySelector('[data-role="mtext"]').textContent=item.model[l];
+    if(card.getAttribute('data-checked')==='1') paintHits(si, l);
+  });
+}
+function checkSa(si){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  var ans = document.getElementById('ta'+si).value.trim();
+  if(ans.length < 100){
+    var hit=document.getElementById('hit'+si); hit.className='hitline show';
+    hit.innerHTML = (l==='es' ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.');
+    return;
+  }
+  document.getElementById('sa'+si).setAttribute('data-checked','1');
+  paintHits(si, l);
+  revealModel(si);
+  saPassed[si] = countHits(ans, SA[si].kw[l]) >= 3;
+  updatePentProgress();
+}
+function paintHits(si, l){
+  var item=SA[si]; var ans=document.getElementById('ta'+si).value;
+  var n=countHits(ans, item.kw[l]); var pass = n>=3;
+  var hit=document.getElementById('hit'+si); hit.className='hitline show';
+  if(l==='es'){
+    hit.innerHTML = 'Conceptos clave encontrados: <b>'+n+' de 8</b> &mdash; '+(pass?'aprobado (mínimo 3). Compare con la respuesta modelo abajo.':'aún no (se necesitan 3). Revise su respuesta y la modelo abajo.');
+  } else {
+    hit.innerHTML = 'Key concepts found: <b>'+n+' of 8</b> &mdash; '+(pass?'pass (minimum 3). Compare with the model answer below.':'not yet (3 needed). Review your answer and the model below.');
+  }
+}
+function revealModel(si){ document.getElementById('mod'+si).classList.add('show'); }
+
+/* ---------- persistence ---------- */
+function saveState(){
+  try{
+    var mcqState={}; MCQ.forEach(function(it,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1'){ mcqState[qi]=answered[qi]; } });
+    lsSet(SKEY+'_mcq', JSON.stringify(mcqState));
+  }catch(e){}
+}
+function restoreState(){
+  var l = lsGet(SKEY+'_lang'); if(l) setLang(l);
+  var t = lsGet(SKEY+'_track');
+  if(!t){
+    // No local choice yet on this page -- default from the site-wide track
+    // (set at the seminary's main registration) so a Masters-track student
+    // is graded at the correct rigor here without re-selecting it locally.
+    try{
+      var shared = JSON.parse(lsGet('cts_student') || 'null');
+      var sharedTrack = String(lsGet('cts_track') || (shared && (shared.track||shared.program)) || '').toLowerCase();
+      if(sharedTrack === 'mdiv' || sharedTrack === 'thm' || sharedTrack === 'mth' ||
+         /master of divinity|m\.div|master of theology|m\.th|th\.m/.test(sharedTrack)) t = 'masters';
+    }catch(e){}
+  }
+  setTrack(t||'cert');
+  try{
+    var raw = lsGet(SKEY+'_mcq');
+    if(raw){ var st=JSON.parse(raw); var lg=document.documentElement.classList.contains('lang-es')?'es':'en';
+      Object.keys(st).forEach(function(qi){ answered[qi]=st[qi]; document.getElementById('q'+qi).setAttribute('data-checked','1'); paintFeedback(+qi, lg); });
+      refreshScore();
+    }
+  }catch(e){}
+}
+
+/* ---------- init ---------- */
+buildMcq(); buildSa();
+restoreState();
+</script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPentecostalReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+</body>
+</html>

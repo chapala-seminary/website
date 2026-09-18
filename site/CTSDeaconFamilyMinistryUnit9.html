@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deacon Family Ministry Plan — Unit 9</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<!-- CTS Deacon Family Ministry Plan — Unit 9. Built on Cook's validated Q24 masters engine (ported from Bible Characters Unit 3). Bilingual EN (NKJV) / ES (RVG). Author: Dr. Wayne Cook. Spanish + SA keywords/models pending native RVG / author spot-check. -->
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 10 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Deacon Family Ministry Plan — Unit 9: Deacon Meetings, Reporting, and Pastor Relations</span><span class="lang-es">📖 Plan de Ministerio Familiar del Diácono — Unidad 9: Reuniones de Diáconos, Informes y Relaciones con el Pastor</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Behold, how good and how pleasant it is for brethren to dwell together in unity!" — Psalm 133:1 (NKJV)</span><span class="lang-es">«¡Mirad cuán bueno y cuán delicioso es habitar los hermanos juntos en armonía!» — Salmo 133:1 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="cert">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>So far we have watched the deacon at work largely as an individual &mdash; caring for his own families, visiting, praying, discipling, and ministering in crisis. But the deacon never labors in isolation. He is one of a band of deacons, all serving under one pastor, and the strength of the whole Plan depends on how well that band works together, and how well it works with its pastor. This unit takes up the supporting structure of the Plan itself: how the deacons meet, how they report their work, and how they relate to their pastor.</p>
+<p><strong>Subject:</strong> the deacons meeting together, reporting their work, and relating to their pastor.</p>
+<p><strong>Proposition:</strong> The Plan is held together and held up by deacons who meet as a spiritual body, faithfully report the care of their families, and stand with their pastor as his servants and helpers, in unity.</p>
+<p>We will consider the deacons' meeting and its conduct, the ministry of reporting, and then the deacon's partnership with his pastor and his duty to uphold him.</p>
+<h2>I. The Deacons Together: The Purpose of the Meeting</h2>
+<p>The deacons meet regularly as a body, for the care of a whole congregation can never be coordinated by men who never confer. The meeting is the heartbeat of the Plan &mdash; the place where the work is reviewed, the needs are shared, the condition of the families is taken, and the men encourage and pray for one another. But it is vital to see what the meeting is <em>not</em>. It is not chiefly a business session, and the deacons are not a board of directors running the church. Above all else, their meeting is a report on souls.</p>
+<div class="illustration"><strong>Illustration.</strong> Picture two deacon meetings. In the first, the whole hour is spent debating the color of the new carpet and the setting of the thermostat. In the second, the men go around the table, and one says, &ldquo;The Hendersons buried their father this week&rdquo;; another, &ldquo;Young Tommy has stopped coming&rdquo;; a third, &ldquo;The Garcias are out of work.&rdquo; And at each name they stop and pray. The second is what a deacon meeting under this Plan is meant to be. The carpet has its place, but souls come first.</div>
+<p>Gathered together, the deacons see what no single one of them could see alone, for &ldquo;in the multitude of counselors&rdquo; plans are established (Proverbs 15:22). It is in the meeting that the whole flock is surveyed, and the body makes sure that not one family has been left without care.</p>
+<h2>II. The Conduct of the Meeting</h2>
+<p>A deacon meeting should bear the marks of a spiritual gathering and not merely those of a committee. It is bathed in prayer, opened with it and saturated by it, as the men pray for their families by name, for their pastor, and for their church. It is orderly, so that all things are done decently and in order (1 Corinthians 14:40) and the time is spent well rather than wasted. Its true agenda is the families: each deacon's report, the needs that have arisen, and the plans to meet them. Business matters are handled in their place, but they must never be allowed to crowd out the care of souls.</p>
+<p>The meeting is also a place of mutual encouragement, where the deacons strengthen one another, bear one another's burdens, and hold one another accountable in love. The work is hard and sometimes discouraging, and the meeting is where the men are refreshed and steadied for it. And throughout, the meeting observes confidentiality. What is shared there is shared for the sake of care and prayer, never as gossip, and the deepest confidences entrusted to a deacon are guarded even among his brothers.</p>
+<p>How often the deacons meet will vary from church to church, but the meeting must be regular, not occasional. A body that gathers only when a crisis forces it will always be behind the need; one that meets faithfully stays ahead of it, catching small troubles before they grow large. The regular meeting is to the deacon body what the regular visit is to the single family &mdash; the steady rhythm that keeps the care alive.</p>
+<h2>III. The Ministry of Reporting</h2>
+<p>At the center of the meeting is reporting: each deacon gives an account of the families in his care. This is the great safeguard of the Plan's central promise &mdash; that no family is forgotten. When each man reports, the body can see at a glance whether every family is truly being cared for, and can catch in time the one who has begun to slip through the cracks.</p>
+<p>What does the deacon report? The condition and needs of his families &mdash; who is sick, who is grieving, who has been absent, who is in need, who has a joy to share &mdash; so that the care can be coordinated and the pastor informed of what requires him. And how does he report? Faithfully and honestly, yet always within the bounds of confidentiality. He reports what is needed for care and prayer &mdash; &ldquo;Mrs. Allen is in the hospital; let us pray and send help&rdquo; &mdash; and not the private confidences trusted to him alone. There is a world of difference between sharing a need and betraying a secret.</p>
+<p>Good reporting rests upon faithful work. A deacon who has kept current records, as Unit 5 urged, and who has actually visited his families, as Unit 6 required, will have something true to report; a deacon who has done neither will have nothing, and his families will quietly suffer. Reporting, then, is not mere paperwork but loving accountability &mdash; the gentle, brotherly pressure that keeps every deacon actually doing the work he promised. And it keeps the pastor informed, for he cannot possibly know every need in a large congregation; through his deacons' reports, he learns where his own shepherding is most needed.</p>
+<p>Honest reporting also means a deacon must be willing to admit when he has fallen behind. It is tempting to report only successes and to hide the family one has neglected; but the whole point of reporting is to catch exactly such gaps. A deacon who can humbly say, &lsquo;I have not reached the Watsons this month; I need help,&rsquo; serves his families far better than one who covers his failures with a good report. The meeting is not a place to look good, but a place to make sure no one is missed.</p>
+<h2>IV. The Deacon and His Pastor: A Partnership</h2>
+<p>All of this &mdash; the meeting, the reporting, the care &mdash; exists in relationship to the pastor, and the deacon-pastor relationship is the keystone of the whole Plan. At its heart it is the partnership of Acts 6, where the seven took up the practical care so that the apostles could give themselves to prayer and the ministry of the word. The deacon's very reason for being is to free and to support his pastor in the work God has given him. He is the pastor's helper, never his rival and never his boss; he extends the pastor's care into homes the pastor could never reach alone, carries to the pastor the needs that require him, and lightens the pastor's heavy load.</p>
+<div class="scripture">Obey those who rule over you, and be submissive, for they watch out for your souls, as those who must give account. Let them do so with joy and not with grief, for that would be unprofitable for you. (Hebrews 13:17, NKJV)</div>
+<p>The deacon, of all the people in the church, should be the one who makes his pastor's work a joy and not a grief. Churches differ in how they assign authority among the pastor, the deacons, and the congregation; but whatever the structure, the biblical posture of a deacon toward his pastor is always that of a servant and a supporter, not a ruler. And the two must walk together, for as the prophet asked, &ldquo;Can two walk together, unless they are agreed?&rdquo; (Amos 3:3). Where pastor and deacons are agreed and united, the church is strong; where they are at war, the church is torn.</p>
+<p>This does not mean a deacon may never disagree with his pastor. Honest counsel is part of his service, and a wise pastor welcomes it. But there is a vast difference between a deacon who brings his concerns privately, humbly, and directly to his pastor, and one who spreads them through the congregation to gather a faction. The first strengthens the church; the second wounds it. Disagreement voiced in love and in private is a gift; dissent sown in secret is a poison.</p>
+<h2>V. Supporting and Protecting the Pastor</h2>
+<p>This leads to the deacon's special and sacred duty: to support and protect his pastor. The Scripture gives a beautiful picture of it.</p>
+<div class="scripture">But Moses' hands became heavy; so they took a stone and put it under him, and he sat on it. And Aaron and Hur supported his hands, one on one side, and the other on the other side; and his hands were steady until the going down of the sun. (Exodus 17:12, NKJV)</div>
+<p>As Aaron and Hur held up the arms of Moses, one on each side, until the battle was won, so the deacons are to hold up the hands of their pastor. They do this in several ways. They hold him up by <strong>encouragement</strong>, for the pastor's work is lonely and often thankless, and a deacon's word of cheer and his faithful prayer can sustain a weary man. They hold him up by <strong>sharing his burdens</strong>, taking practical loads from his shoulders, standing beside him in hard decisions, and praying for him without fail. They hold him up by <strong>defending him</strong>, for a pastor is frequently the target of unjust criticism, and the deacon does not join the grumblers but stands up for his pastor and refuses to carry a single tale against him. And they hold him up by <strong>guarding the unity</strong> of the church, working as peacemakers to keep the unity of the Spirit in the bond of peace (Ephesians 4:3), quenching gossip and division before they can spread.</p>
+<p>The gravest danger to a church is often a deacon body that turns against its own pastor, becoming a center of opposition and control rather than of support &mdash; the very drift from servanthood that we warned of long ago. The faithful deacon will be the last man to oppose his pastor and the first to uphold him. When the deacons hold up the pastor's hands, the whole church prevails.</p>
+<p>Few things so gladden a faithful pastor's heart as a band of deacons he can trust at his back. Many a discouraged minister has been kept in the ministry, and many a struggling church turned toward health, simply because a handful of deacons quietly decided to hold up their pastor's hands instead of weighing them down. It is a hidden ministry, but its fruit is everywhere visible in a happy, peaceful, growing church.</p>
+<h2>Conclusion</h2>
+<p>The Plan is not a collection of lone deacons working in their separate corners; it is a body of servants, laboring together and laboring under one pastor, in unity. The meeting binds them together, the reporting keeps them faithful, and the partnership with the pastor gives the whole its strength and its order. Take away any one of these and the Plan begins to fail; hold all three together, and it stands.</p>
+<p>And these three are finally one, for they are all the work of love &mdash; love among the deacons, love toward the families reported on, and love toward the pastor upheld. The structure exists only to serve the care, and the care exists only to carry the love of Christ to His people.</p>
+<p>&ldquo;Behold, how good and how pleasant it is for brethren to dwell together in unity!&rdquo; A church in which pastor and deacons dwell and labor together in such unity is a church where the Plan &mdash; and far more than the Plan &mdash; will flourish. One unit now remains. Every good work meets challenges and must be evaluated and renewed if it is to last, and so in our final unit we ask how the Plan can be sustained through the years.</p></div>
+<div class="lang-es"><p>Hasta ahora hemos observado al di&aacute;cono trabajar mayormente como un individuo &mdash; cuidando de sus propias familias, visitando, orando, discipulando, y ministrando en la crisis. Pero el di&aacute;cono nunca labora en aislamiento. Es uno de una banda de di&aacute;conos, todos sirviendo bajo un pastor, y la fuerza de todo el Plan depende de cu&aacute;n bien trabaja junta esa banda, y cu&aacute;n bien trabaja con su pastor. Esta unidad toma la estructura de apoyo del Plan mismo: c&oacute;mo se re&uacute;nen los di&aacute;conos, c&oacute;mo informan de su obra, y c&oacute;mo se relacionan con su pastor.</p>
+<p><strong>Tema:</strong> los di&aacute;conos reuni&eacute;ndose, informando de su obra, y relacion&aacute;ndose con su pastor.</p>
+<p><strong>Proposici&oacute;n:</strong> El Plan es mantenido unido y sostenido por di&aacute;conos que se re&uacute;nen como un cuerpo espiritual, informan fielmente del cuidado de sus familias, y est&aacute;n con su pastor como sus siervos y ayudadores, en unidad.</p>
+<p>Consideraremos la reuni&oacute;n de los di&aacute;conos y su conducta, el ministerio de informar, y luego la sociedad del di&aacute;cono con su pastor y su deber de sostenerlo.</p>
+<h2>I. Los Di&aacute;conos Juntos: el Prop&oacute;sito de la Reuni&oacute;n</h2>
+<p>Los di&aacute;conos se re&uacute;nen regularmente como un cuerpo, porque el cuidado de toda una congregaci&oacute;n nunca puede ser coordinado por hombres que jam&aacute;s conversan. La reuni&oacute;n es el latido del Plan &mdash; el lugar donde se revisa la obra, se comparten las necesidades, se toma la condici&oacute;n de las familias, y los hombres se animan y oran unos por otros. Pero es vital ver lo que la reuni&oacute;n <em>no</em> es. No es principalmente una sesi&oacute;n de negocios, y los di&aacute;conos no son una junta de directores que dirige la iglesia. Por encima de todo, su reuni&oacute;n es un informe sobre almas.</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> Imagine dos reuniones de di&aacute;conos. En la primera, toda la hora se gasta debatiendo el color de la alfombra nueva y el ajuste del termostato. En la segunda, los hombres van alrededor de la mesa, y uno dice: &laquo;Los Henderson enterraron a su padre esta semana&raquo;; otro: &laquo;El joven Tom&aacute;s ha dejado de venir&raquo;; un tercero: &laquo;Los Garc&iacute;a est&aacute;n sin trabajo.&raquo; Y ante cada nombre se detienen y oran. La segunda es lo que una reuni&oacute;n de di&aacute;conos bajo este Plan ha de ser. La alfombra tiene su lugar, pero las almas van primero.</div>
+<p>Reunidos, los di&aacute;conos ven lo que ninguno de ellos podr&iacute;a ver solo, porque &laquo;en la multitud de consejeros&raquo; se afirman los planes (Proverbios 15:22). Es en la reuni&oacute;n donde se examina todo el reba&ntilde;o, y el cuerpo se asegura de que ni una sola familia haya quedado sin cuidado.</p>
+<h2>II. La Conducta de la Reuni&oacute;n</h2>
+<p>Una reuni&oacute;n de di&aacute;conos debe llevar las marcas de una asamblea espiritual y no meramente las de un comit&eacute;. Est&aacute; ba&ntilde;ada en oraci&oacute;n, abierta con ella y saturada por ella, mientras los hombres oran por sus familias por nombre, por su pastor, y por su iglesia. Es ordenada, de modo que todo se haga decentemente y con orden (1 Corintios 14:40) y el tiempo se gaste bien en lugar de desperdiciarse. Su verdadera agenda son las familias: el informe de cada di&aacute;cono, las necesidades que han surgido, y los planes para suplirlas. Los asuntos de negocios se manejan en su lugar, pero nunca se les debe permitir desplazar el cuidado de las almas.</p>
+<p>La reuni&oacute;n es tambi&eacute;n un lugar de aliento mutuo, donde los di&aacute;conos se fortalecen unos a otros, sobrellevan las cargas unos de otros, y se piden cuentas unos a otros en amor. La obra es dura y a veces desalentadora, y la reuni&oacute;n es donde los hombres son refrescados y afirmados para ella. Y en todo momento, la reuni&oacute;n observa la confidencialidad. Lo que all&iacute; se comparte se comparte por causa del cuidado y la oraci&oacute;n, nunca como chisme, y las confidencias m&aacute;s profundas confiadas a un di&aacute;cono se guardan aun entre sus hermanos.</p>
+<p>Con cu&aacute;nta frecuencia se re&uacute;nen los di&aacute;conos variar&aacute; de iglesia en iglesia, pero la reuni&oacute;n debe ser regular, no ocasional. Un cuerpo que se re&uacute;ne solo cuando una crisis lo obliga estar&aacute; siempre detr&aacute;s de la necesidad; uno que se re&uacute;ne fielmente se mantiene adelante de ella, atrapando los peque&ntilde;os problemas antes de que se vuelvan grandes. La reuni&oacute;n regular es para el cuerpo de di&aacute;conos lo que la visita regular es para la sola familia &mdash; el ritmo constante que mantiene vivo el cuidado.</p>
+<h2>III. El Ministerio de Informar</h2>
+<p>En el centro de la reuni&oacute;n est&aacute; el informar: cada di&aacute;cono da cuenta de las familias a su cuidado. Esta es la gran salvaguarda de la promesa central del Plan &mdash; que ninguna familia es olvidada. Cuando cada hombre informa, el cuerpo puede ver de un vistazo si cada familia est&aacute; siendo de veras cuidada, y puede atrapar a tiempo a la que ha comenzado a perderse por las grietas.</p>
+<p>&iquest;Qu&eacute; informa el di&aacute;cono? La condici&oacute;n y las necesidades de sus familias &mdash; qui&eacute;n est&aacute; enfermo, qui&eacute;n sufre, qui&eacute;n ha estado ausente, qui&eacute;n tiene necesidad, qui&eacute;n tiene un gozo que compartir &mdash; para que el cuidado pueda coordinarse y el pastor sea informado de lo que lo requiere. &iquest;Y c&oacute;mo informa? Fiel y honestamente, pero siempre dentro de los l&iacute;mites de la confidencialidad. Informa lo que es necesario para el cuidado y la oraci&oacute;n &mdash; &laquo;La se&ntilde;ora All&eacute;n est&aacute; en el hospital; oremos y enviemos ayuda&raquo; &mdash; y no las confidencias privadas confiadas solo a &eacute;l. Hay un mundo de diferencia entre compartir una necesidad y traicionar un secreto.</p>
+<p>El buen informar descansa sobre la obra fiel. Un di&aacute;cono que ha mantenido registros al d&iacute;a, como la Unidad 5 urgi&oacute;, y que de veras ha visitado a sus familias, como la Unidad 6 requiri&oacute;, tendr&aacute; algo verdadero que informar; un di&aacute;cono que no ha hecho ninguna de las dos cosas no tendr&aacute; nada, y sus familias sufrir&aacute;n calladamente. Informar, pues, no es mero papeleo sino amorosa rendici&oacute;n de cuentas &mdash; la suave y fraternal presi&oacute;n que mantiene a cada di&aacute;cono de veras haciendo la obra que prometi&oacute;. Y mantiene informado al pastor, porque &eacute;l no puede posiblemente conocer cada necesidad en una congregaci&oacute;n grande; por medio de los informes de sus di&aacute;conos, aprende d&oacute;nde su propio pastoreo es m&aacute;s necesario.</p>
+<p>El informar honesto tambi&eacute;n significa que un di&aacute;cono debe estar dispuesto a admitir cuando se ha atrasado. Es tentador informar solo los &eacute;xitos y esconder la familia que uno ha descuidado; pero todo el prop&oacute;sito de informar es atrapar precisamente tales vac&iacute;os. Un di&aacute;cono que puede humildemente decir: &laquo;No he alcanzado a los Watson este mes; necesito ayuda,&raquo; sirve a sus familias mucho mejor que el que cubre sus fallas con un buen informe. La reuni&oacute;n no es un lugar para quedar bien, sino un lugar para asegurar que nadie sea pasado por alto.</p>
+<h2>IV. El Di&aacute;cono y su Pastor: una Sociedad</h2>
+<p>Todo esto &mdash; la reuni&oacute;n, el informar, el cuidado &mdash; existe en relaci&oacute;n con el pastor, y la relaci&oacute;n di&aacute;cono-pastor es la clave de todo el Plan. En su coraz&oacute;n es la sociedad de Hechos 6, donde los siete tomaron el cuidado pr&aacute;ctico para que los ap&oacute;stoles pudieran darse a la oraci&oacute;n y al ministerio de la palabra. La raz&oacute;n misma de ser del di&aacute;cono es liberar y apoyar a su pastor en la obra que Dios le ha dado. Es el ayudador del pastor, nunca su rival y nunca su jefe; extiende el cuidado del pastor a hogares que el pastor nunca podr&iacute;a alcanzar solo, lleva al pastor las necesidades que lo requieren, y aligera la pesada carga del pastor.</p>
+<div class="scripture">Obedeced a vuestros pastores, y sujetaos a ellos; porque ellos velan por vuestras almas, como quienes han de dar cuenta; para que lo hagan con alegr&iacute;a, y no quej&aacute;ndose; porque esto no os es provechoso. (Hebreos 13:17, RVG)</div>
+<p>El di&aacute;cono, de todas las personas en la iglesia, deber&iacute;a ser el que hace de la obra de su pastor un gozo y no una queja. Las iglesias difieren en c&oacute;mo asignan la autoridad entre el pastor, los di&aacute;conos, y la congregaci&oacute;n; pero cualquiera que sea la estructura, la postura b&iacute;blica de un di&aacute;cono hacia su pastor es siempre la de un siervo y un sostenedor, no la de un gobernante. Y los dos deben caminar juntos, porque como pregunt&oacute; el profeta: &laquo;&iquest;Andar&aacute;n dos juntos, si no estuvieren de acuerdo?&raquo; (Am&oacute;s 3:3). Donde el pastor y los di&aacute;conos est&aacute;n de acuerdo y unidos, la iglesia es fuerte; donde est&aacute;n en guerra, la iglesia es despedazada.</p>
+<p>Esto no significa que un di&aacute;cono nunca pueda estar en desacuerdo con su pastor. El consejo honesto es parte de su servicio, y un pastor sabio lo recibe con agrado. Pero hay una vasta diferencia entre un di&aacute;cono que lleva sus inquietudes privada, humilde y directamente a su pastor, y uno que las difunde por la congregaci&oacute;n para juntar una facci&oacute;n. El primero fortalece la iglesia; el segundo la hiere. El desacuerdo expresado en amor y en privado es un regalo; la disensi&oacute;n sembrada en secreto es un veneno.</p>
+<h2>V. Apoyando y Protegiendo al Pastor</h2>
+<p>Esto conduce al deber especial y sagrado del di&aacute;cono: apoyar y proteger a su pastor. La Escritura da un hermoso cuadro de ello.</p>
+<div class="scripture">Y las manos de Mois&eacute;s estaban pesadas; por lo que tomaron una piedra, y la pusieron debajo de &eacute;l, y se sent&oacute; sobre ella; y Aar&oacute;n y Hur sosten&iacute;an sus manos, el uno de un lado y el otro de otro; as&iacute; hubo en sus manos firmeza hasta que se puso el sol. (&Eacute;xodo 17:12, RVG)</div>
+<p>Como Aar&oacute;n y Hur sostuvieron los brazos de Mois&eacute;s, uno de cada lado, hasta que la batalla fue ganada, as&iacute; los di&aacute;conos han de sostener las manos de su pastor. Lo hacen de varias maneras. Lo sostienen con <strong>aliento</strong>, porque la obra del pastor es solitaria y a menudo ingrata, y la palabra de &aacute;nimo de un di&aacute;cono y su oraci&oacute;n fiel pueden sostener a un hombre cansado. Lo sostienen <strong>compartiendo sus cargas</strong>, quitando cargas pr&aacute;cticas de sus hombros, estando a su lado en las decisiones dif&iacute;ciles, y orando por &eacute;l sin falta. Lo sostienen <strong>defendi&eacute;ndolo</strong>, porque un pastor es con frecuencia el blanco de la cr&iacute;tica injusta, y el di&aacute;cono no se une a los murmuradores sino que da la cara por su pastor y rehusa llevar un solo cuento contra &eacute;l. Y lo sostienen <strong>guardando la unidad</strong> de la iglesia, trabajando como pacificadores para guardar la unidad del Esp&iacute;ritu en el v&iacute;nculo de la paz (Efesios 4:3), apagando el chisme y la divisi&oacute;n antes de que puedan extenderse.</p>
+<p>El peligro m&aacute;s grave para una iglesia es a menudo un cuerpo de di&aacute;conos que se vuelve contra su propio pastor, llegando a ser un centro de oposici&oacute;n y control en lugar de apoyo &mdash; la misma desviaci&oacute;n del servicio de la que advertimos hace tiempo. El di&aacute;cono fiel ser&aacute; el &uacute;ltimo hombre en oponerse a su pastor y el primero en sostenerlo. Cuando los di&aacute;conos sostienen las manos del pastor, toda la iglesia prevalece.</p>
+<p>Pocas cosas alegran tanto el coraz&oacute;n de un pastor fiel como una banda de di&aacute;conos en quienes puede confiar a sus espaldas. Muchos ministros desanimados han sido guardados en el ministerio, y muchas iglesias en apuros han sido vueltas hacia la salud, sencillamente porque un pu&ntilde;ado de di&aacute;conos calladamente decidieron sostener las manos de su pastor en lugar de hacerlas m&aacute;s pesadas. Es un ministerio escondido, pero su fruto es visible por todas partes en una iglesia feliz, pac&iacute;fica y creciente.</p>
+<h2>Conclusi&oacute;n</h2>
+<p>El Plan no es una colecci&oacute;n de di&aacute;conos solitarios trabajando en sus rincones separados; es un cuerpo de siervos, laborando juntos y laborando bajo un pastor, en unidad. La reuni&oacute;n los une, el informar los mantiene fieles, y la sociedad con el pastor da a todo su fuerza y su orden. Quite cualquiera de estos y el Plan comienza a fallar; sostenga los tres juntos, y se mantiene en pie.</p>
+<p>Y estos tres son al final uno, porque todos son la obra del amor &mdash; amor entre los di&aacute;conos, amor hacia las familias de las que se informa, y amor hacia el pastor sostenido. La estructura existe solo para servir al cuidado, y el cuidado existe solo para llevar el amor de Cristo a su pueblo.</p>
+<p>&laquo;&iexcl;Mirad cu&aacute;n bueno y cu&aacute;n delicioso es habitar los hermanos juntos en armon&iacute;a!&raquo; Una iglesia en la que el pastor y los di&aacute;conos habitan y laboran juntos en tal unidad es una iglesia donde el Plan &mdash; y mucho m&aacute;s que el Plan &mdash; florecer&aacute;. Una unidad queda ahora. Toda buena obra encuentra desaf&iacute;os y debe ser evaluada y renovada si ha de durar, y as&iacute; en nuestra unidad final preguntamos c&oacute;mo puede sostenerse el Plan a trav&eacute;s de los a&ntilde;os.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 9 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 9 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 9;
+const COURSE = 'CTSDFM';
+const FILE_PREFIX = 'CTSDeaconFamilyMinistry';
+const NEXT_UNIT_URL = 'CTSDeaconFamilyMinistryUnit10.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 — Biblical Foundations of the Diaconate","Unit 2 — Qualifications and Character of Deacons","Unit 3 — Historical Development in Southern Baptist Life","Unit 4 — The Deacon Family Ministry Plan: Vision and Definition","Unit 5 — Organizing the Plan: Assigning Families","Unit 6 — Ongoing Care: Visitation and Prayer","Unit 7 — Discipleship and Evangelism within Assigned Families","Unit 8 — Crisis Ministry, Confidentiality, and Referral","Unit 9 — Deacon Meetings, Reporting, and Pastor Relations","Unit 10 — Sustaining the Plan: Challenges and Evaluation"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [
+{"textEn":"1. The deacon's work is best described as:","textEs":"1. La obra del diácono se describe mejor como:","optionsEn":["entirely independent", "never done in isolation, but as one of a band under one pastor", "done only with the pastor absent", "a solo effort"],"optionsEs":["enteramente independiente", "nunca hecha en aislamiento, sino como uno de una banda bajo un pastor", "hecha solo con el pastor ausente", "un esfuerzo solitario"],"explanationEn":"The deacon is one of a band of deacons serving under one pastor.","explanationEs":"El diácono es uno de una banda de diáconos sirviendo bajo un pastor.","correct":1},
+{"textEn":"2. The deacon meeting is chiefly:","textEs":"2. La reunión de diáconos es principalmente:","optionsEn":["a business session", "an election", "a budget review", "a report on souls"],"optionsEs":["una sesión de negocios", "una elección", "una revisión del presupuesto", "un informe sobre almas"],"explanationEn":"Above all, the meeting is a report on souls.","explanationEs":"Por encima de todo, la reunión es un informe sobre almas.","correct":3},
+{"textEn":"3. The deacons are NOT:","textEs":"3. Los diáconos NO son:","optionsEn":["servants of the church", "a praying body", "a board of directors running the church", "helpers of the pastor"],"optionsEs":["siervos de la iglesia", "un cuerpo que ora", "una junta de directores que dirige la iglesia", "ayudadores del pastor"],"explanationEn":"They are not a board of directors running the church.","explanationEs":"No son una junta de directores que dirige la iglesia.","correct":2},
+{"textEn":"4. In the 'two meetings' illustration, the better meeting spent its time:","textEs":"4. En la ilustración de las 'dos reuniones', la mejor reunión pasó su tiempo:","optionsEn":["reporting on families and praying for each", "setting the thermostat", "reviewing the budget", "choosing carpet color"],"optionsEs":["informando sobre las familias y orando por cada una", "ajustando el termostato", "revisando el presupuesto", "escogiendo el color de la alfombra"],"explanationEn":"The better meeting reported on souls and prayed for each.","explanationEs":"La mejor reunión informó sobre almas y oró por cada una.","correct":0},
+{"textEn":"5. 'In the multitude of counselors plans are established' (Proverbs 15:22) shows that gathered deacons:","textEs":"5. 'En la multitud de consejeros se afirman los planes' (Proverbios 15:22) muestra que los diáconos reunidos:","optionsEn":["should meet less", "waste time", "need no pastor", "see what no one of them could see alone"],"optionsEs":["deberían reunirse menos", "pierden el tiempo", "no necesitan pastor", "ven lo que ninguno de ellos podría ver solo"],"explanationEn":"Together they see what no single deacon could see alone.","explanationEs":"Juntos ven lo que ningún diácono podría ver solo.","correct":3},
+{"textEn":"6. A deacon meeting should be opened and saturated with:","textEs":"6. Una reunión de diáconos debe abrirse y saturarse con:","optionsEn":["debate", "reports only", "prayer", "refreshments"],"optionsEs":["el debate", "solo informes", "la oración", "refrigerios"],"explanationEn":"The meeting is bathed in prayer.","explanationEs":"La reunión está bañada en oración.","correct":2},
+{"textEn":"7. The true agenda of the deacon meeting is:","textEs":"7. La verdadera agenda de la reunión de diáconos es:","optionsEn":["the families and their needs", "the finances", "the building", "the calendar"],"optionsEs":["las familias y sus necesidades", "las finanzas", "el edificio", "el calendario"],"explanationEn":"Its true agenda is the families and their needs.","explanationEs":"Su verdadera agenda son las familias y sus necesidades.","correct":0},
+{"textEn":"8. The deacon meeting should be:","textEs":"8. La reunión de diáconos debe ser:","optionsEn":["rare", "regular, not occasional", "yearly", "held only in crisis"],"optionsEs":["rara", "regular, no ocasional", "anual", "tenida solo en crisis"],"explanationEn":"A regular meeting is the steady rhythm that keeps care alive.","explanationEs":"Una reunión regular es el ritmo constante que mantiene vivo el cuidado.","correct":1},
+{"textEn":"9. Even among his fellow deacons, the deacon must observe:","textEs":"9. Aun entre sus compañeros diáconos, el diácono debe observar:","optionsEn":["confidentiality", "silence always", "secrecy from the pastor", "mere formality"],"optionsEs":["la confidencialidad", "el silencio siempre", "el secreto del pastor", "mera formalidad"],"explanationEn":"Confidentiality is observed even among the brothers.","explanationEs":"La confidencialidad se observa aun entre los hermanos.","correct":0},
+{"textEn":"10. The great safeguard that 'no family is forgotten' is:","textEs":"10. La gran salvaguarda de que 'ninguna familia es olvidada' es:","optionsEn":["the church directory", "the pastor's memory", "each deacon's reporting", "the bulletin"],"optionsEs":["el directorio de la iglesia", "la memoria del pastor", "el informe de cada diácono", "el boletín"],"explanationEn":"Reporting lets the body catch the family slipping through.","explanationEs":"El informar permite al cuerpo atrapar a la familia que se pierde.","correct":2},
+{"textEn":"11. When reporting, the deacon shares a need but never:","textEs":"11. Al informar, el diácono comparte una necesidad pero nunca:","optionsEn":["prays aloud", "names the family", "asks for help", "betrays a private secret"],"optionsEs":["ora en voz alta", "nombra a la familia", "pide ayuda", "traiciona un secreto privado"],"explanationEn":"There is a world of difference between sharing a need and betraying a secret.","explanationEs":"Hay un mundo de diferencia entre compartir una necesidad y traicionar un secreto.","correct":3},
+{"textEn":"12. Good reporting rests upon:","textEs":"12. El buen informar descansa sobre:","optionsEn":["a good memory", "faithful records and actual visiting", "long meetings", "clever speech"],"optionsEs":["una buena memoria", "registros fieles y la visita verdadera", "reuniones largas", "el habla ingeniosa"],"explanationEn":"A deacon who keeps records and visits has something true to report.","explanationEs":"Un diácono que lleva registros y visita tiene algo verdadero que informar.","correct":1},
+{"textEn":"13. Honest reporting means a deacon must be willing to:","textEs":"13. El informar honesto significa que un diácono debe estar dispuesto a:","optionsEn":["admit when he has fallen behind", "report only successes", "hide his failures", "exaggerate his work"],"optionsEs":["admitir cuando se ha atrasado", "informar solo los éxitos", "esconder sus fallas", "exagerar su obra"],"explanationEn":"The meeting is not a place to look good but to catch the gaps.","explanationEs":"La reunión no es para quedar bien sino para atrapar los vacíos.","correct":0},
+{"textEn":"14. The deacon-pastor relationship is rooted in the partnership of:","textEs":"14. La relación diácono-pastor está arraigada en la sociedad de:","optionsEn":["the monarchy", "the temple priesthood", "Acts 6", "modern business"],"optionsEs":["la monarquía", "el sacerdocio del templo", "Hechos 6", "los negocios modernos"],"explanationEn":"It is the Acts 6 partnership of service and the word.","explanationEs":"Es la sociedad de Hechos 6 del servicio y la palabra.","correct":2},
+{"textEn":"15. The deacon is the pastor's:","textEs":"15. El diácono es del pastor su:","optionsEn":["supervisor", "employer", "competitor", "helper, not his rival or boss"],"optionsEs":["supervisor", "empleador", "competidor", "ayudador, no su rival ni su jefe"],"explanationEn":"He is the pastor's helper, never his rival or boss.","explanationEs":"Es el ayudador del pastor, nunca su rival ni su jefe.","correct":3},
+{"textEn":"16. Hebrews 13:17 says the people should let their leaders watch for souls:","textEs":"16. Hebreos 13:17 dice que el pueblo debe dejar que sus líderes velen por las almas:","optionsEn":["reluctantly", "with joy and not with grief", "under protest", "for pay"],"optionsEs":["de mala gana", "con alegría y no quejándose", "bajo protesta", "por paga"],"explanationEn":"The deacon should make his pastor's work a joy, not a grief.","explanationEs":"El diácono debe hacer de la obra de su pastor un gozo, no una queja.","correct":1},
+{"textEn":"17. Amos 3:3 ('Can two walk together unless they are agreed?') teaches that pastor and deacons must:","textEs":"17. Amós 3:3 ('¿Andarán dos juntos, si no estuvieren de acuerdo?') enseña que el pastor y los diáconos deben:","optionsEn":["be agreed and walk together", "go separate ways", "compete", "stay apart"],"optionsEs":["estar de acuerdo y caminar juntos", "ir por caminos separados", "competir", "mantenerse aparte"],"explanationEn":"Where they are agreed, the church is strong.","explanationEs":"Donde están de acuerdo, la iglesia es fuerte.","correct":0},
+{"textEn":"18. Aaron and Hur holding up Moses' hands (Exodus 17:12) pictures the deacons':","textEs":"18. Aarón y Hur sosteniendo las manos de Moisés (Éxodo 17:12) representa de los diáconos:","optionsEn":["ruling the church", "replacing the pastor", "supporting and upholding the pastor", "resting from work"],"optionsEs":["el gobernar la iglesia", "el reemplazar al pastor", "el apoyar y sostener al pastor", "el descansar de la obra"],"explanationEn":"As Aaron and Hur upheld Moses, deacons uphold the pastor.","explanationEs":"Como Aarón y Hur sostuvieron a Moisés, los diáconos sostienen al pastor.","correct":2},
+{"textEn":"19. When a deacon disagrees with his pastor, he should:","textEs":"19. Cuando un diácono está en desacuerdo con su pastor, debe:","optionsEn":["tell the whole congregation", "start a faction", "say nothing ever", "bring it privately and humbly to the pastor"],"optionsEs":["decirlo a toda la congregación", "iniciar una facción", "no decir nada jamás", "llevarlo privada y humildemente al pastor"],"explanationEn":"Disagreement in private is a gift; dissent sown in secret is poison.","explanationEs":"El desacuerdo en privado es un regalo; la disensión en secreto es veneno.","correct":3},
+{"textEn":"20. The gravest danger to a church is often a deacon body that:","textEs":"20. El peligro más grave para una iglesia es a menudo un cuerpo de diáconos que:","optionsEn":["prays too much", "turns against its pastor in opposition and control", "meets regularly", "visits too often"],"optionsEs":["ora demasiado", "se vuelve contra su pastor en oposición y control", "se reúne regularmente", "visita con demasiada frecuencia"],"explanationEn":"The drift from servanthood is a deacon body that fights its pastor.","explanationEs":"La desviación del servicio es un cuerpo de diáconos que pelea con su pastor.","correct":1}
+];
+const kwQuestions = [
+{"textEn":"21. Why do the deacons meet as a body, and what is the true purpose of the meeting?","textEs":"21. ¿Por qué se reúnen los diáconos como un cuerpo, y cuál es el verdadero propósito de la reunión?","kw_en":["deacons","congregation","heartbeat","needs","business","souls","flock","care"],"kw_es":["cuerpo","congregac","latido","necesidades","negocios","almas","familias","cuidado"],"modelEn":"The deacons meet as a body because the care of a whole congregation can never be coordinated by men who never confer. The meeting is the heartbeat of the Plan, where the work is reviewed, needs are shared, the condition of the families is taken, and the men pray for one another. But its true purpose is not business; the deacons are not a board of directors running the church. Above all, the meeting is a report on souls. Gathered together, the deacons see what no one of them could see alone, and the whole flock is surveyed so that not one family is left without care.","modelEs":"Los diáconos se reúnen como un cuerpo porque el cuidado de toda una congregación nunca puede ser coordinado por hombres que jamás conversan. La reunión es el latido del Plan, donde se revisa la obra, se comparten las necesidades, se toma la condición de las familias, y los hombres oran unos por otros. Pero su verdadero propósito no es de negocios; los diáconos no son una junta de directores que dirige la iglesia. Por encima de todo, la reunión es un informe sobre almas. Reunidos, los diáconos ven lo que ninguno de ellos podría ver solo, y todo el rebaño es examinado para que ni una sola familia quede sin cuidado."},
+{"textEn":"22. What marks should the conduct of a deacon meeting have?","textEs":"22. ¿Qué marcas debe tener la conducta de una reunión de diáconos?","kw_en":["spiritual","prayer","orderly","agenda","encouragement","confidentiality","regular","committee"],"kw_es":["espiritual","oraci","ordenada","agenda","aliento","confidencialidad","regular","comit"],"modelEn":"A deacon meeting should bear the marks of a spiritual gathering, not merely a committee. It is bathed in prayer, opened with it and saturated by it, as the men pray for their families, their pastor, and their church. It is orderly, so all things are done decently and in order and the time is used well. Its true agenda is the families and their needs, not business that crowds out souls. It is a place of mutual encouragement, where deacons strengthen one another and bear one another's burdens. It observes confidentiality even among brothers. And it is regular, not occasional, the steady rhythm that keeps the care alive.","modelEs":"Una reunión de diáconos debe llevar las marcas de una asamblea espiritual, no meramente las de un comité. Está bañada en oración, abierta con ella y saturada por ella, mientras los hombres oran por sus familias, su pastor, y su iglesia. Es ordenada, de modo que todo se haga decentemente y con orden y el tiempo se use bien. Su verdadera agenda son las familias y sus necesidades, no negocios que desplacen las almas. Es un lugar de aliento mutuo, donde los diáconos se fortalecen unos a otros y sobrellevan las cargas unos de otros. Observa la confidencialidad aun entre hermanos. Y es regular, no ocasional, el ritmo constante que mantiene vivo el cuidado."},
+{"textEn":"23. Explain the ministry of reporting and how it guards the Plan's promise.","textEs":"23. Explique el ministerio de informar y cómo guarda la promesa del Plan.","kw_en":["reporting","account","families","safeguard","forgotten","needs","accountability","paperwork"],"kw_es":["informar","cuenta","familias","salvaguarda","olvidada","necesidades","papeleo","presi"],"modelEn":"The ministry of reporting is each deacon giving an account of the families in his care, and it is the great safeguard of the Plan's central promise that no family is forgotten. When each man reports, the body can see at a glance whether every family is being cared for, and can catch in time the one who has begun to slip through the cracks. The deacon reports the condition and needs of his families, who is sick, grieving, absent, or in need, so that care can be coordinated and the pastor informed. Reporting is not mere paperwork but loving accountability, the gentle pressure that keeps every deacon actually doing the work.","modelEs":"El ministerio de informar es cada diácono dando cuenta de las familias a su cuidado, y es la gran salvaguarda de la promesa central del Plan de que ninguna familia es olvidada. Cuando cada hombre informa, el cuerpo puede ver de un vistazo si cada familia está siendo cuidada, y puede atrapar a tiempo a la que ha comenzado a perderse por las grietas. El diácono informa la condición y las necesidades de sus familias, quién está enfermo, sufriendo, ausente, o en necesidad, para que el cuidado pueda coordinarse y el pastor sea informado. Informar no es mero papeleo sino amorosa rendición de cuentas, la suave presión que mantiene a cada diácono de veras haciendo la obra."},
+{"textEn":"24. How must reporting respect confidentiality, and why must it be honest?","textEs":"24. ¿Cómo debe el informar respetar la confidencialidad, y por qué debe ser honesto?","kw_en":["confidentiality","sharing","secret","prayer","confidences","honest","behind","neglected"],"kw_es":["confidencialidad","compartir","secreto","hospital","confidencias","honesto","atrasado","descuidado"],"modelEn":"Reporting must respect confidentiality, for there is a world of difference between sharing a need and betraying a secret. The deacon reports what is needed for care and prayer, such as that a member is in the hospital and needs help, but he never reveals the private confidences trusted to him alone. At the same time, reporting must be honest. A deacon must be willing to admit when he has fallen behind, rather than reporting only his successes and hiding the family he has neglected. The whole point of reporting is to catch exactly such gaps, so the meeting is not a place to look good but a place to make sure no one is missed.","modelEs":"El informar debe respetar la confidencialidad, porque hay un mundo de diferencia entre compartir una necesidad y traicionar un secreto. El diácono informa lo que es necesario para el cuidado y la oración, como que un miembro está en el hospital y necesita ayuda, pero nunca revela las confidencias privadas confiadas solo a él. Al mismo tiempo, el informar debe ser honesto. Un diácono debe estar dispuesto a admitir cuando se ha atrasado, en lugar de informar solo sus éxitos y esconder la familia que ha descuidado. Todo el propósito de informar es atrapar precisamente tales vacíos, así que la reunión no es un lugar para quedar bien sino para asegurar que nadie sea pasado por alto."},
+{"textEn":"25. How is the deacon-pastor relationship a partnership rooted in Acts 6?","textEs":"25. ¿Cómo es la relación diácono-pastor una sociedad arraigada en Hechos 6?","kw_en":["keystone","partnership","apostles","prayer","helper","rival","extends","servant"],"kw_es":["sociedad","clave","oraci","ayudador","rival","extiende","siervo","gobernante"],"modelEn":"The deacon-pastor relationship is the keystone of the Plan, and at its heart it is the partnership of Acts 6, where the seven took up the practical care so that the apostles could give themselves to prayer and the ministry of the word. The deacon's very reason for being is to free and support his pastor in the work God has given him. He is the pastor's helper, never his rival and never his boss; he extends the pastor's care into homes the pastor could never reach alone, carries to the pastor the needs that require him, and lightens his heavy load. Whatever a church's structure, the deacon's posture toward his pastor is that of a servant and supporter, not a ruler.","modelEs":"La relación diácono-pastor es la clave del Plan, y en su corazón es la sociedad de Hechos 6, donde los siete tomaron el cuidado práctico para que los apóstoles pudieran darse a la oración y al ministerio de la palabra. La razón misma de ser del diácono es liberar y apoyar a su pastor en la obra que Dios le ha dado. Es el ayudador del pastor, nunca su rival y nunca su jefe; extiende el cuidado del pastor a hogares que el pastor nunca podría alcanzar solo, lleva al pastor las necesidades que lo requieren, y aligera su pesada carga. Cualquiera que sea la estructura de una iglesia, la postura del diácono hacia su pastor es la de un siervo y sostenedor, no la de un gobernante."},
+{"textEn":"26. How should a deacon handle disagreement with his pastor?","textEs":"26. ¿Cómo debe un diácono manejar el desacuerdo con su pastor?","kw_en":["disagree","counsel","privately","humbly","faction","disagreement","dissent","tales"],"kw_es":["desacuerdo","consejo","privada","humilde","facci","disensi","veneno","cuentos"],"modelEn":"A deacon may disagree with his pastor, for honest counsel is part of his service and a wise pastor welcomes it. But there is a vast difference between a deacon who brings his concerns privately, humbly, and directly to his pastor, and one who spreads them through the congregation to gather a faction. The first strengthens the church; the second wounds it. Disagreement voiced in love and in private is a gift, but dissent sown in secret is a poison. So the faithful deacon takes his honest concerns straight to his pastor, and refuses to carry tales or build a party against him.","modelEs":"Un diácono puede estar en desacuerdo con su pastor, porque el consejo honesto es parte de su servicio y un pastor sabio lo recibe con agrado. Pero hay una vasta diferencia entre un diácono que lleva sus inquietudes privada, humilde y directamente a su pastor, y uno que las difunde por la congregación para juntar una facción. El primero fortalece la iglesia; el segundo la hiere. El desacuerdo expresado en amor y en privado es un regalo, pero la disensión sembrada en secreto es un veneno. Así que el diácono fiel lleva sus inquietudes honestas directamente a su pastor, y rehúsa llevar cuentos o construir un partido contra él."},
+{"textEn":"27. What does Exodus 17:12 (Aaron and Hur) teach about supporting the pastor?","textEs":"27. ¿Qué enseña Éxodo 17:12 (Aarón y Hur) acerca de apoyar al pastor?","kw_en":["exodus","moses","heavy","aaron","supported","steady","deacons","uphold"],"kw_es":["pesadas","batalla","sostuvieron","firmeza","manos","pastor","prevalece","apoyar"],"modelEn":"Exodus 17:12 gives a beautiful picture of supporting the pastor. When Moses' hands became heavy in the battle, Aaron and Hur supported his hands, one on one side and the other on the other, so that his hands were steady until the going down of the sun and the battle was won. In the same way, the deacons are to hold up the hands of their pastor. The pastor's work is often heavy and wearying, and he cannot hold up his own arms forever; but a band of faithful deacons, standing on either side, can steady him until the victory is won. When the deacons uphold the pastor's hands, the whole church prevails.","modelEs":"Éxodo 17:12 da un hermoso cuadro de apoyar al pastor. Cuando las manos de Moisés se pusieron pesadas en la batalla, Aarón y Hur sostuvieron sus manos, uno de un lado y el otro del otro, de modo que sus manos tuvieron firmeza hasta que se puso el sol y la batalla fue ganada. De la misma manera, los diáconos han de sostener las manos de su pastor. La obra del pastor es a menudo pesada y agotadora, y no puede sostener sus propios brazos para siempre; pero una banda de diáconos fieles, de pie a cada lado, pueden afirmarlo hasta que la victoria sea ganada. Cuando los diáconos sostienen las manos del pastor, toda la iglesia prevalece."},
+{"textEn":"28. In what ways does the deacon support and protect his pastor?","textEs":"28. ¿De qué maneras apoya y protege el diácono a su pastor?","kw_en":["supports","encouragement","prayer","burdens","defending","grumblers","unity","peacemaker"],"kw_es":["apoya","aliento","oraci","cargas","defendi","murmuradores","unidad","pacificador"],"modelEn":"The deacon supports and protects his pastor in several ways. He holds him up by encouragement, for the pastor's work is lonely and often thankless, and a word of cheer and faithful prayer can sustain a weary man. He holds him up by sharing his burdens, taking practical loads from his shoulders and standing beside him in hard decisions. He holds him up by defending him, refusing to join the grumblers or carry tales when his pastor is unjustly criticized. And he holds him up by guarding the unity of the church, working as a peacemaker to keep the unity of the Spirit and to quench gossip and division before they spread.","modelEs":"El diácono apoya y protege a su pastor de varias maneras. Lo sostiene con aliento, porque la obra del pastor es solitaria y a menudo ingrata, y una palabra de ánimo y la oración fiel pueden sostener a un hombre cansado. Lo sostiene compartiendo sus cargas, quitando cargas prácticas de sus hombros y estando a su lado en las decisiones difíciles. Lo sostiene defendiéndolo, rehusando unirse a los murmuradores o llevar cuentos cuando su pastor es criticado injustamente. Y lo sostiene guardando la unidad de la iglesia, trabajando como pacificador para guardar la unidad del Espíritu y apagar el chisme y la división antes de que se extiendan."},
+{"textEn":"29. What is the gravest danger to a church regarding its deacons, and what is the faithful deacon's posture?","textEs":"29. ¿Cuál es el peligro más grave para una iglesia respecto a sus diáconos, y cuál es la postura del diácono fiel?","kw_en":["danger","pastor","opposition","control","servanthood","oppose","uphold","unity"],"kw_es":["peligro","pastor","oposici","control","servicio","oponerse","unidad","prevalece"],"modelEn":"The gravest danger to a church is often a deacon body that turns against its own pastor, becoming a center of opposition and control rather than of support, which is the very drift from servanthood that the office can suffer. Against this, the faithful deacon takes the opposite posture: he will be the last man to oppose his pastor and the first to uphold him. He guards the church's unity, refuses faction and gossip, and stands at his pastor's side. When the deacons hold up the pastor's hands instead of weighing them down, the whole church prevails, and many a discouraged minister has been kept in the ministry by such faithful men.","modelEs":"El peligro más grave para una iglesia es a menudo un cuerpo de diáconos que se vuelve contra su propio pastor, llegando a ser un centro de oposición y control en lugar de apoyo, que es la misma desviación del servicio que el oficio puede sufrir. Contra esto, el diácono fiel toma la postura opuesta: será el último hombre en oponerse a su pastor y el primero en sostenerlo. Guarda la unidad de la iglesia, rehúsa la facción y el chisme, y está al lado de su pastor. Cuando los diáconos sostienen las manos del pastor en lugar de hacerlas más pesadas, toda la iglesia prevalece, y muchos ministros desanimados han sido guardados en el ministerio por tales hombres fieles."},
+{"textEn":"30. Summarize the supporting structure of the Plan (meeting, reporting, pastor relations).","textEs":"30. Resuma la estructura de apoyo del Plan (reunión, informar, relaciones con el pastor).","kw_en":["structure","meeting","souls","reporting","forgotten","partnership","supporting","unity"],"kw_es":["estructura","reuni","almas","informar","olvidada","sociedad","confidencialidad","unidad"],"modelEn":"The supporting structure of the Plan has three parts, held together by unity. First, the deacons meet as a spiritual body, where the meeting is a report on souls bathed in prayer. Second, they practice the ministry of reporting, each giving account of his families so that no one is forgotten, honestly and within confidentiality. Third, they stand in partnership with their pastor as his helpers, supporting and protecting him, holding up his hands as Aaron and Hur held up Moses. Take away any one of these and the Plan begins to fail; hold all three together in love, and the church dwells together in unity and flourishes.","modelEs":"La estructura de apoyo del Plan tiene tres partes, mantenidas unidas por la unidad. Primero, los diáconos se reúnen como un cuerpo espiritual, donde la reunión es un informe sobre almas bañado en oración. Segundo, practican el ministerio de informar, cada uno dando cuenta de sus familias para que ninguna sea olvidada, honestamente y dentro de la confidencialidad. Tercero, están en sociedad con su pastor como sus ayudadores, apoyándolo y protegiéndolo, sosteniendo sus manos como Aarón y Hur sostuvieron las de Moisés. Quite cualquiera de estos y el Plan comienza a fallar; sostenga los tres juntos en amor, y la iglesia habita junta en unidad y florece."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'cert';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSDeaconFamilyMinistryReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS New Testament Survey — Unit 9: 1–2 Thessalonians: The Day of the Lord</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+.track-bar { background: #f6f1e8; border: 1px solid #d7cec1; border-radius: 12px; padding: 12px 16px; margin: 15px 0; }
+.track-bar label { margin-right: 18px; cursor: pointer; font-size: 0.95rem; }
+.track-bar input[type=radio] { margin-right: 6px; vertical-align: middle; }
+.reset-btn { background: #8a5a3a; color: white; border: none; border-radius: 30px; padding: 8px 18px; cursor: pointer; font-family: inherit; margin-left: 10px; font-size: 0.9rem; }
+.reset-btn:hover { background: #6e4528; }
+.redirect-notice { background: #e8f5ea; border: 1px solid #b9dfc2; color: #1f6b3b; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-weight: bold; }
+@media print {
+  @page { margin: 0.5in; }
+  body { background: white; color: black; font-size: 12pt; padding: 0; }
+  .nav-bar, .toggle-btn, #submitExamBtn, .reset-btn, #examResult, .track-bar, button.small { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; padding: 12px; margin-bottom: 12px; }
+  .question { page-break-inside: avoid; }
+  h1, h2, h3 { color: black; page-break-after: avoid; }
+  .option { background: white; border-color: #999; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" >← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 New Testament Survey — Unit 9: 1–2 Thessalonians: The Day of the Lord</span><span class="lang-es">📖 Estudio del Nuevo Testamento — Unidad 9: 1–2 Tesalonicenses: El Día del Señor</span></h1>
+    <p><span class="lang-en"><strong>Course Author:</strong> Dr. Wayne Cook | <strong>Seminary Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Autor del Curso:</strong> Dr. Wayne Cook | <strong>Director del Seminario:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic;"></p>
+</div>
+
+<div class="card" id="teachingContent">
+<div class="lang-en">
+        <h2>I. Two Letters to a Young Church</h2>
+        <p>Paul, Silas, and Timothy founded the church at Thessalonica during Paul's second missionary journey (Acts 17). Paul had preached in the synagogue for only a few Sabbaths before opposition drove him out of the city, leaving behind a young congregation under real pressure. Both of Paul's letters to the Thessalonians were written soon afterward, close together in time, to a church that was suffering for its faith and unsettled about the future. First Thessalonians steadies a grieving, persecuted church with the hope of Christ's return; Second Thessalonians corrects the confusion and idleness that an over-heated expectation of that return had produced. Together they are letters about living faithfully with your eyes on the horizon and your hands at work.</p>
+        <h2>II. Salvation of the Whole Man — Turned from Idols</h2>
+        <p>The Lord Jesus Christ died on a Roman cross between two thieves. One of them looked up to Christ in faith and cried out, "Lord, remember me when You come into Your kingdom," and Jesus answered, "Today you will be with Me in Paradise" (Luke 23:43). That man was saved in the last moments of life — but that is the salvation of the soul only. It is not the salvation of the whole man. He was saved — but think of what he missed: a whole life that could have been poured out in service to Christ. He gained heaven, yet forfeited the abundant life on earth. That is the difference between the salvation of the soul and the salvation of the whole man. Salvation of the whole man includes the salvation of the life as well as the soul, and that is why we plead with people to give themselves to Christ early. In writing to the Thessalonians, Paul describes three stages of a complete salvation: they turned to God from idols, they served the living and true God, and they waited for His Son from heaven.</p>
+        <p>Turning is the beginning of salvation. Everyone who wants to be saved must make a turn — from self and sin to the Savior. The Thessalonians had turned from idols to God. Now, none of us has bowed to the kind of idols they worshiped, but an idol is anything chosen above God. You can never be saved until you have turned that thing down and chosen God instead. Some worship the idol of beauty or pleasure; some the idol of money and security; some bow at the shrine of power. If some idol holds your heart today, turn from it and come to God through faith in Jesus Christ. A "turning from" is the first point in salvation.</p>
+        <h2>III. Salvation of the Whole Man — Serving the Living God</h2>
+        <p>Our works do not save us, but if we are truly saved we will serve the Lord — "by their fruits you shall know them" (Matthew 7:20). Service is one of the fruits of salvation. How can we serve Him best? First, by the way we live. The best service you can render God is a consecrated Christian life; no one can fully measure the influence of a good life. The early Christians lived so wonderfully that their neighbors said, "These people have been with Jesus." Second, by giving Him our time. Too many say they have no time for the things of Christ, while giving their hours and energy to the things of the world that will die with the setting sun. Third, by giving Him our talents. God gives every talent we have, and every talent ought to be used for Him; if you cannot speak or sing, you can still be faithful.</p>
+        <p>Fourth, we serve God by telling others about Christ. The greatest trust God has placed in our hands is the gospel of salvation — the old, old story that transforms lives. We can tell it at home in person, and around the world through our gifts and our prayers. Fifth, we serve God by the right use of our money. The least any Christian ought to give is the tithe, given through the local church, and when you give God His tenth the other nine-tenths goes farther. Think of what the church has done for you — it taught you the Bible, brought you the message of salvation, prays for you when you are sick, and comforts you in sorrow. Every other institution asks what you have to offer; the church opens wide its arms and says, "No matter who you are, come in and let us help you." </p>
+        <h2>IV. Salvation of the Whole Man — Waiting for His Son</h2>
+        <p>We are to turn from idols, serve the living God, and wait for His Son from heaven. One day we will face Christ, and when we meet Him face to face we want to be able to say, "Lord, I did my best for You." The people of Martinique once sent representatives to the smoldering volcano Mount Pelée; the reports came back false, the city slept on in its vice, and when the mountain finally erupted some forty thousand people perished. They heard the warning too late. There are those today who give false reports about Christ's coming — some say He will never come, others that He will come only after the world reforms itself. These are false reports. Christ said, "Watch therefore, for you know neither the day nor the hour" (Matthew 25:13). Do not be caught unready. Be ready when the trumpet shall sound.</p>
+        <h2>V. Facts on the Second Coming — The Cemetery</h2>
+        <p>A great deal of excitement has been stirred up through history over the end times. Amid all the difficulty, one certainty is that the coming of Jesus is not for us to schedule or even to read from signs, for it will take place "in the twinkling of an eye" (1 Corinthians 15:52). Everyone who has predicted a date has been wrong. Christopher Columbus predicted a date for the end of the world, and he, like all the date-setters, was mistaken. The Thessalonians had a problem with the Second Coming: expecting Jesus at any moment, they worried about fellow believers who had already died, fearing they would miss the glory of that day.</p>
+        <p>Men have always wondered about life beyond the grave. In the pagan world, people faced death with despair — one ancient writer said, "Once a man dies, there is no resurrection"; a grim epitaph read, "I was not; I became; I am not; I care not." But the early Christians adopted a beautiful word for the burying place of their dead. Our word "cemetery" comes from it, and it means a resting place, a sleeping place. When I must be away from home and stay in a distant city, my family does not grieve, for they know that in a little while I will leave that sleeping place and come home. Paul says we do not grieve as others grieve, because our loved ones in Christ are only asleep in a resting place.</p>
+        <h2>VI. Facts on the Second Coming — The Coming</h2>
+        <p>Again and again the Bible tells us that Jesus is coming back. There are those who would explain away the Second Coming just as others explain away the resurrection or the virgin birth — some say it is only a "spiritual" coming. But in Acts 1:11 we are told that He will come back in the same way He ascended into heaven (Acts 1:11): personally, visibly, actually. His coming will be in the air, accompanied by many sounds — the Lord's shout, the kind of shout of command He gave outside the tomb of Lazarus; the sound of a trumpet, which in the Roman world announced the arrival of a great person; and the voice of the archangel, as even the angelic hosts share in the victory.</p>
+        <p>And His coming will be sudden and unexpected — Paul says the day of the Lord comes "as a thief in the night" (1 Thessalonians 5:2). Years ago, when President Eisenhower was vacationing in Denver, he read of a dying boy who wished to meet the President, and he decided on the spot to grant the request. The big limousine pulled up outside the home, and the boy's father answered the door in old work clothes and a day's growth of beard, amazed to see the President so unexpectedly. He never forgot how unprepared he was when the great man arrived. So it will be when Jesus comes again — many will be caught with their lives out of order and their souls unready.</p>
+        <h2>VII. Facts on the Second Coming — The Change</h2>
+        <p>The Second Coming will be so revolutionary that it will change everything on this planet. One of those changes will be in the bodies of those who have fallen asleep. This world is called the land of the living, but it might better be called the land of the dying. Yet Paul makes it clear that our consciousness does not sleep — the soul goes immediately to be with the Lord. Jesus told the thief, "Today you will be with Me in Paradise," and Paul said, "absent from the body, present with the Lord." God will bring with Him those who have fallen asleep; He cannot bring them unless they are already with Him. It is not the soul that sleeps, but the body.</p>
+        <p>When Jesus returns He will bring the soul with Him, and "the dead in Christ will rise first" (1 Thessalonians 4:16). This does not mean the old body is reassembled — some believers were buried at sea, some dissolved to dust — but that we receive new, glorified bodies like the resurrected body of Christ, who ate, passed through walls, and appeared and disappeared. This taking up of believers is sometimes called the Rapture, and on that day there will be a great separation: only those who belong to Christ will be taken. There will be many left behind — many who never heard, many who heard but delayed their decision, and many who were members of churches but did not truly belong to Him. When He comes, it will be too late to repent. Let that sink in, and be ready.</p>
+        <h2>VIII. Quench Not the Spirit</h2>
+        <p>All Christians have felt the difficulty of trying to understand the Holy Spirit. We cannot describe Him fully from human experience, because He is pure spirit and we are not — it is like trying to draw a picture of the soul or give shape to an emotion. When the Bible speaks of the Spirit, it often describes His work: to tell us about Jesus, to bring us to maturity, to comfort us, and to give us spiritual gifts. But today we consider one of the most serious ideas in the Bible — sins against the Holy Spirit. The first is quenching the Spirit. In 1 Thessalonians 5:19 Paul says, "Quench not the Spirit" (1 Thessalonians 5:19). To quench means to put out, to dampen, to extinguish. The Spirit is often pictured as a fire, and when we quench Him we put that fire out. Paul was writing against a church losing its enthusiasm, its joy, and its spirit. D. L. Moody once said he had attended a church so cold you could skate down the aisles. When the Spirit is quenched the church is dead — the funeral may not have been held, but the body is surely lying in state.</p>
+        <p>There are two ways to put out a fire. The first is to take away the fuel: the church exists to serve God, and when we begin to think of it as ours instead, we cut off the fuel. The second is to throw water or dirt on it: willful sin can smother a growing church. Now look at the opposite — the marks of a Spirit-filled church in verses 16 to 19. It is a happy church, full of joy, for God has promised abundant life now and life with Him forever. It is a thankful church — "in everything give thanks" (1 Thessalonians 5:18) — for even on the darkest days there are blessings to count; if we face the sun, the shadows fall behind us. It is a praying church, never ceasing in prayer. And it is a preaching church that does not despise the gift of prophecy — those who forth-tell God's message, the teachers and preachers who interpret the Scriptures. Two extremes must be avoided: some undermine preaching and put the fire out, while others grow fanatical and let the fire burn everything up. Jim Jones had fire, but it led to destruction. Fire without light is dangerous. "Prove all things" (1 Thessalonians 5:21) — let everything a preacher says be tested by the Scriptures.</p>
+        <h2>IX. 2 Thessalonians 1 — He Is With Us in the Storm</h2>
+        <p>The first thing Paul does in the second letter is comfort a persecuted people. This is, in fact, the same message that runs through the book of Revelation. The believers there were facing severe persecution for their faith, and they wondered when it would all end. John himself was imprisoned on the Isle of Patmos. His message was not that the suffering was small, but that Christ was with them in it — and that the persecution would not last forever.</p>
+        <p>Remember the day the disciples were caught in the storm while Jesus slept in the boat. They were terrified, and they cried out, "Master, do You not care that we are perishing?" He rose and said, "Peace, be still" (Mark 4:39). For the early Christians, and for us, the comfort of this chapter is not a promise that He will always still the storm the moment we ask. The comfort is that He is with us in the storm. God has not lost control, and He will set all things right.</p>
+        <h2>X. 2 Thessalonians 2 — God Is Still in Control of the Timeline</h2>
+        <p>Some in Thessalonica had been shaken by a report that the Day of the Lord had already come. Paul's answer is steadying: do not be deceived. God is still in control of the timeline. The events of the end will unfold on God's schedule, not according to anyone's panic or any forged letter. Paul speaks of a coming "man of lawlessness," and we should be careful here. John reminds us that "even now there are many antichrists" (1 John 2:18). Across the centuries many figures have been confidently identified as the Antichrist — popes, Hitler, and many others — and the confident identifiers have generally been proven wrong, just as every person who has set a date for the end has been wrong. The spirit of lawlessness is real and recurring; our task is not to pin a name on it but to stay faithful.</p>
+        <p>Behind this chapter lies the Old Testament expectation of the Day of the Lord — God's decisive intervention in history, bringing both judgment and salvation. It is a theme that runs through the prophets. The Jews saw their present as an evil age without hope, and they looked for the coming Day of the Lord as a golden age. The deepest message is this: we humans cannot correct the evil of this world ourselves. God must intervene. Think of the rise of Hitler. As that evil gathered, most of the religious leaders of the day — both Lutheran and Catholic — remained silent. Dietrich Bonhoeffer spoke up, and it cost him his life. The world's injustices often go unanswered in our lifetimes, and that is precisely why there must be a Day of the Lord. God will not leave the books unbalanced forever.</p>
+        <h2>XI. 2 Thessalonians 3 — Be Ready, Not Idle</h2>
+        <p>There have always been sincere people who were sure they knew when the Lord would return. Some pastors have been so certain that they led their congregations to sell their possessions and sit down to wait. They were sincere — and they were wrong. When Jesus Himself was asked when He would come back, He said that He did not know the day; only the Father knows. The lesson is plain: we are called to be prepared, not to schedule the Second Coming.</p>
+        <p>And being prepared does not mean sitting idle. Mankind was created for work. Before the Fall, Adam already had a job — to tend the garden. After the Fall, his labor lost its sheer joy; now he worked among thorns and thistles (Genesis 3:18). But work itself never stopped being a noble thing. "Six days you shall labor" (Exodus 20:9), God said, and the honest work we do is offered up to Him. The believer who truly expects the Lord's return is not the one who quits and waits, but the one found faithfully at work.</p>
+    </div>
+<div class="lang-es">
+        <h2>I. Dos Cartas a una Iglesia Joven</h2>
+        <p>Pablo, Silas y Timoteo fundaron la iglesia en Tesalónica durante el segundo viaje misionero de Pablo (Hechos 17). Pablo había predicado en la sinagoga solo unos pocos días de reposo antes de que la oposición lo expulsara de la ciudad, dejando atrás una congregación joven bajo verdadera presión. Ambas cartas de Pablo a los tesalonicenses fueron escritas poco después, muy cercanas en el tiempo, a una iglesia que sufría por su fe y estaba inquieta acerca del futuro. Primera de Tesalonicenses afirma a una iglesia afligida y perseguida con la esperanza del regreso de Cristo; Segunda de Tesalonicenses corrige la confusión y la ociosidad que había producido una expectativa exagerada de ese regreso. Juntas son cartas acerca de vivir fielmente con los ojos en el horizonte y las manos en la obra.</p>
+        <h2>II. La Salvación del Hombre Completo — Convertidos de los Ídolos</h2>
+        <p>El Señor Jesucristo murió en una cruz romana entre dos ladrones. Uno de ellos miró a Cristo con fe y clamó: "Señor, acuérdate de mí cuando vengas en tu reino", y Jesús le respondió: "Hoy estarás conmigo en el paraíso" (Lucas 23:43). Aquel hombre fue salvo en los últimos momentos de su vida, pero esa es la salvación del alma solamente. No es la salvación del hombre completo. La salvación del hombre completo incluye la salvación de la vida tanto como del alma, y por eso rogamos a las personas que se entreguen a Cristo temprano. Él fue salvo, pero piense en lo que perdió: toda una vida que pudo haber sido derramada en el servicio a Cristo. Ganó el cielo, pero renunció a la vida abundante en la tierra. Esa es la diferencia entre la salvación del alma y la salvación del hombre completo. Al escribir a los tesalonicenses, Pablo describe tres etapas de una salvación completa: se convirtieron de los ídolos a Dios, sirvieron al Dios vivo y verdadero, y esperaron a su Hijo de los cielos.</p>
+        <p>Convertirse es el comienzo de la salvación. Todo el que quiere ser salvo debe dar la vuelta: de sí mismo y del pecado al Salvador. Los tesalonicenses se habían convertido de los ídolos a Dios. Ahora bien, ninguno de nosotros se ha inclinado ante la clase de ídolos que ellos adoraban, pero un ídolo es cualquier cosa que se escoge por encima de Dios. Nunca podrá ser salvo hasta que haya rechazado esa cosa y escogido a Dios en su lugar. Algunos adoran el ídolo de la belleza o del placer; algunos el ídolo del dinero y la seguridad; algunos se postran en el altar del poder. Si algún ídolo retiene su corazón hoy, conviértase de él y venga a Dios por la fe en Jesucristo. Un "convertirse de" es el primer punto de la salvación.</p>
+        <h2>III. La Salvación del Hombre Completo — Sirviendo al Dios Vivo</h2>
+        <p>Nuestras obras no nos salvan, pero si somos verdaderamente salvos serviremos al Señor: "por sus frutos los conoceréis" (Mateo 7:20). El servicio es uno de los frutos de la salvación. ¿Cómo podemos servirle mejor? Primero, por la manera en que vivimos. El mejor servicio que usted puede rendir a Dios es una vida cristiana consagrada; nadie puede medir plenamente la influencia de una buena vida. Los primeros cristianos vivían de manera tan admirable que sus vecinos decían: "Esta gente ha estado con Jesús". Segundo, dándole nuestro tiempo. Demasiados dicen que no tienen tiempo para las cosas de Cristo, mientras dan sus horas y energías a las cosas del mundo que morirán con el sol que se pone. Tercero, dándole nuestros talentos. Dios da cada talento que tenemos, y cada talento debe usarse para Él; si no puede hablar ni cantar, todavía puede ser fiel.</p>
+        <p>Cuarto, servimos a Dios hablándoles a otros de Cristo. La mayor confianza que Dios ha puesto en nuestras manos es el evangelio de la salvación, la vieja y conocida historia que transforma vidas. Podemos contarla en casa en persona, y por todo el mundo mediante nuestras ofrendas y nuestras oraciones. Quinto, servimos a Dios con el uso correcto de nuestro dinero. Lo menos que cualquier cristiano debe dar es el diezmo, entregado por medio de la iglesia local, y cuando usted le da a Dios su décima parte, las otras nueve partes rinden más. Piense en lo que la iglesia ha hecho por usted: le enseñó la Biblia, le trajo el mensaje de salvación, ora por usted cuando está enfermo y lo consuela en la tristeza. Toda otra institución pregunta qué tiene usted para ofrecer; la iglesia abre de par en par sus brazos y dice: "No importa quién seas, entra y déjanos ayudarte".</p>
+        <h2>IV. La Salvación del Hombre Completo — Esperando a su Hijo</h2>
+        <p>Hemos de convertirnos de los ídolos, servir al Dios vivo y esperar a su Hijo de los cielos. Un día estaremos delante de Cristo, y cuando lo veamos cara a cara queremos poder decir: "Señor, hice lo mejor para Ti". El pueblo de Martinica una vez envió representantes al humeante volcán Monte Pelée; los informes regresaron falsos, la ciudad siguió durmiendo en su vicio, y cuando la montaña por fin hizo erupción perecieron unas cuarenta mil personas. Oyeron la advertencia demasiado tarde. Hay quienes hoy dan informes falsos acerca de la venida de Cristo: algunos dicen que nunca vendrá, otros que vendrá solo después de que el mundo se reforme a sí mismo. Estos son informes falsos. Cristo dijo: "Velad, pues, porque no sabéis el día ni la hora" (Mateo 25:13). No se deje sorprender desprevenido. Esté listo cuando suene la trompeta.</p>
+        <h2>V. Datos sobre la Segunda Venida — El Cementerio</h2>
+        <p>A lo largo de la historia se ha despertado mucha emoción acerca del fin de los tiempos. En medio de toda la dificultad, una certeza es que la venida de Jesús no es para que la programemos ni siquiera para leerla de las señales, porque sucederá "en un abrir y cerrar de ojos" (1 Corintios 15:52). Todo el que ha predicho una fecha se ha equivocado. Cristóbal Colón predijo una fecha para el fin del mundo, y él, como todos los que fijan fechas, se equivocó. Los tesalonicenses tenían un problema con la Segunda Venida: esperando a Jesús en cualquier momento, se preocupaban por los hermanos creyentes que ya habían muerto, temiendo que se perdieran la gloria de aquel día.</p>
+        <p>Los hombres siempre se han preguntado por la vida más allá de la tumba. En el mundo pagano, la gente enfrentaba la muerte con desesperación: un escritor antiguo dijo: "Una vez que un hombre muere, no hay resurrección"; un sombrío epitafio decía: "No era; llegué a ser; ya no soy; no me importa". Pero los primeros cristianos adoptaron una palabra hermosa para el lugar donde sepultaban a sus muertos. Nuestra palabra "cementerio" viene de ella, y significa un lugar de descanso, un lugar para dormir. Cuando tengo que estar lejos de casa y quedarme en una ciudad distante, mi familia no se aflige, porque sabe que en poco tiempo dejaré ese lugar de descanso y volveré a casa. Pablo dice que no nos afligimos como los demás, porque nuestros seres queridos en Cristo solo duermen en un lugar de reposo.</p>
+        <h2>VI. Datos sobre la Segunda Venida — La Venida</h2>
+        <p>Una y otra vez la Biblia nos dice que Jesús vuelve. Hay quienes querrían explicar y descartar la Segunda Venida así como otros descartan la resurrección o el nacimiento virginal; algunos dicen que es solo una venida "espiritual". Pero en Hechos 1:11 se nos dice que Él volverá de la misma manera en que ascendió al cielo: personal, visible y realmente. Su venida será en el aire, acompañada de muchos sonidos: la voz de mando del Señor, la clase de voz que dio fuera de la tumba de Lázaro; el sonido de una trompeta, que en el mundo romano anunciaba la llegada de un gran personaje; y la voz del arcángel, pues aun las huestes angélicas comparten la victoria.</p>
+        <p>Y su venida será repentina e inesperada: Pablo dice que el día del Señor vendrá "como ladrón en la noche" (1 Tesalonicenses 5:2). Hace años, cuando el presidente Eisenhower estaba de vacaciones en Denver, leyó acerca de un niño moribundo que deseaba conocer al presidente, y decidió en el acto conceder la petición. La gran limusina se detuvo frente a la casa, y el padre del niño abrió la puerta con ropa de trabajo vieja y la barba de un día sin afeitar, asombrado de ver al presidente tan inesperadamente. Nunca olvidó lo desprevenido que estaba cuando llegó aquel gran hombre. Así será cuando Jesús venga otra vez: muchos serán sorprendidos con sus vidas en desorden y sus almas sin estar listas.</p>
+        <h2>VII. Datos sobre la Segunda Venida — El Cambio</h2>
+        <p>La Segunda Venida será tan revolucionaria que cambiará todo en este planeta. Uno de esos cambios será en los cuerpos de los que se han dormido. A este mundo se le llama la tierra de los vivos, pero mejor podría llamarse la tierra de los que mueren. Sin embargo, Pablo deja claro que nuestra conciencia no duerme: el alma va de inmediato a estar con el Señor. Jesús le dijo al ladrón: "Hoy estarás conmigo en el paraíso", y Pablo dijo: "ausentes del cuerpo, presentes al Señor". Dios traerá consigo a los que durmieron; no puede traerlos a menos que ya estén con Él. No es el alma la que duerme, sino el cuerpo.</p>
+        <p>Cuando Jesús regrese traerá el alma consigo, y "los muertos en Cristo resucitarán primero" (1 Tesalonicenses 4:16). Esto no significa que el cuerpo antiguo se vuelva a armar —algunos creyentes fueron sepultados en el mar, otros se disolvieron en polvo— sino que recibimos cuerpos nuevos y glorificados como el cuerpo resucitado de Cristo, quien comió, atravesó paredes y apareció y desapareció. Este arrebatamiento de los creyentes a veces se llama el Rapto, y en aquel día habrá una gran separación: solo los que pertenecen a Cristo serán tomados. Habrá muchos que quedarán atrás: muchos que nunca oyeron, muchos que oyeron pero demoraron su decisión, y muchos que eran miembros de iglesias pero no le pertenecían verdaderamente. Cuando Él venga, será demasiado tarde para arrepentirse. Que esto penetre en su mente, y esté listo.</p>
+        <h2>VIII. No Apaguéis el Espíritu</h2>
+        <p>Todos los cristianos han sentido la dificultad de tratar de entender al Espíritu Santo. No podemos describirlo plenamente desde la experiencia humana, porque Él es puro espíritu y nosotros no lo somos; es como tratar de dibujar el alma o dar forma a una emoción. Cuando la Biblia habla del Espíritu, a menudo describe su obra: hablarnos de Jesús, llevarnos a la madurez, consolarnos y darnos dones espirituales. Pero hoy consideramos una de las ideas más serias de la Biblia: los pecados contra el Espíritu Santo. El primero es apagar al Espíritu. En 1 Tesalonicenses 5:19 Pablo dice: "No apaguéis el Espíritu" (1 Tesalonicenses 5:19). Apagar significa extinguir, sofocar, apagar el fuego. Al Espíritu se le representa a menudo como un fuego, y cuando lo apagamos, apagamos ese fuego. Pablo escribía contra una iglesia que perdía su entusiasmo, su gozo y su espíritu. D. L. Moody dijo una vez que había asistido a una iglesia tan fría que se podía patinar por los pasillos. Cuando el Espíritu es apagado, la iglesia está muerta; quizá no se haya hecho el funeral, pero el cuerpo ciertamente yace de cuerpo presente.</p>
+        <p>Hay dos maneras de apagar un fuego. La primera es quitarle el combustible: la iglesia existe para servir a Dios, y cuando empezamos a pensar que es nuestra en lugar de suya, le cortamos el combustible. La segunda es echarle agua o tierra encima: el pecado voluntario puede sofocar a una iglesia que crece. Ahora mire lo opuesto: las marcas de una iglesia llena del Espíritu en los versículos 16 al 19. Es una iglesia gozosa, llena de alegría, porque Dios ha prometido vida abundante ahora y vida con Él para siempre. Es una iglesia agradecida —"dad gracias en todo" (1 Tesalonicenses 5:18)— porque aun en los días más oscuros hay bendiciones que contar; si miramos al sol, las sombras caen detrás de nosotros. Es una iglesia que ora, que nunca cesa de orar. Y es una iglesia que predica, que no menosprecia el don de profecía: los que proclaman el mensaje de Dios, los maestros y predicadores que interpretan las Escrituras. Hay que evitar dos extremos: algunos socavan la predicación y apagan el fuego, mientras que otros se vuelven fanáticos y dejan que el fuego lo queme todo. Jim Jones tenía fuego, pero condujo a la destrucción. El fuego sin luz es peligroso. "Examinadlo todo" (1 Tesalonicenses 5:21): que todo lo que diga un predicador sea probado por las Escrituras.</p>
+        <h2>IX. 2 Tesalonicenses 1 — Él Está con Nosotros en la Tormenta</h2>
+        <p>Lo primero que hace Pablo en la segunda carta es consolar a un pueblo perseguido. Este es, de hecho, el mismo mensaje que recorre el libro de Apocalipsis. Los creyentes allí enfrentaban severa persecución por su fe, y se preguntaban cuándo terminaría todo. El mismo Juan estaba preso en la isla de Patmos. Su mensaje no era que el sufrimiento fuera pequeño, sino que Cristo estaba con ellos en él, y que la persecución no duraría para siempre.</p>
+        <p>Recuerde el día en que los discípulos quedaron atrapados en la tormenta mientras Jesús dormía en la barca. Estaban aterrorizados, y clamaron: "Maestro, ¿no tienes cuidado que perecemos?" Él se levantó y dijo: "Calla, enmudece" (Marcos 4:39). Para los primeros cristianos, y para nosotros, el consuelo de este capítulo no es la promesa de que Él siempre calmará la tormenta en el momento en que se lo pidamos. El consuelo es que Él está con nosotros en la tormenta. Dios no ha perdido el control, y Él enderezará todas las cosas.</p>
+        <h2>X. 2 Tesalonicenses 2 — Dios Sigue Teniendo el Control del Tiempo</h2>
+        <p>Algunos en Tesalónica habían sido perturbados por un informe de que el Día del Señor ya había llegado. La respuesta de Pablo es firme: no se dejen engañar. Dios sigue teniendo el control del calendario. Los acontecimientos del fin se desarrollarán según el horario de Dios, no según el pánico de nadie ni ninguna carta falsificada. Pablo habla de un "hombre de pecado" venidero, y aquí debemos tener cuidado. Juan nos recuerda que "ahora han surgido muchos anticristos" (1 Juan 2:18). A lo largo de los siglos muchas figuras han sido identificadas con confianza como el Anticristo —papas, Hitler y muchos otros— y los que los identificaron con confianza generalmente resultaron equivocados, así como toda persona que ha fijado una fecha para el fin se ha equivocado. El espíritu de iniquidad es real y recurrente; nuestra tarea no es ponerle un nombre, sino permanecer fieles.</p>
+        <p>Detrás de este capítulo está la expectativa del Antiguo Testamento del Día del Señor: la intervención decisiva de Dios en la historia, que trae tanto juicio como salvación. Es un tema que recorre a los profetas. Los judíos veían su presente como una era malvada sin esperanza, y esperaban el Día del Señor venidero como una era dorada. El mensaje más profundo es este: nosotros los humanos no podemos corregir el mal de este mundo por nosotros mismos. Dios debe intervenir. Piense en el ascenso de Hitler. Mientras ese mal crecía, la mayoría de los líderes religiosos de la época —tanto luteranos como católicos— permanecieron en silencio. Dietrich Bonhoeffer alzó la voz, y le costó la vida. Las injusticias del mundo a menudo quedan sin respuesta en nuestra vida, y por eso precisamente debe haber un Día del Señor. Dios no dejará los libros sin cuadrar para siempre.</p>
+        <h2>XI. 2 Tesalonicenses 3 — Listos, No Ociosos</h2>
+        <p>Siempre ha habido personas sinceras que estaban seguras de saber cuándo regresaría el Señor. Algunos pastores han estado tan seguros que llevaron a sus congregaciones a vender sus posesiones y sentarse a esperar. Eran sinceros, y estaban equivocados. Cuando al mismo Jesús le preguntaron cuándo volvería, dijo que no sabía el día; solo el Padre lo sabe. La lección es clara: estamos llamados a estar preparados, no a programar la Segunda Venida.</p>
+        <p>Y estar preparados no significa quedarse ocioso. La humanidad fue creada para el trabajo. Antes de la caída, Adán ya tenía un trabajo: cuidar el huerto. Después de la caída, su labor perdió su gozo puro; ahora trabajaba entre espinos y cardos (Génesis 3:18). Pero el trabajo mismo nunca dejó de ser algo noble. "Seis días trabajarás" (Éxodo 20:9), dijo Dios, y el trabajo honesto que hacemos se ofrece a Él. El creyente que verdaderamente espera el regreso del Señor no es el que renuncia y espera, sino el que es hallado fielmente trabajando.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 9 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 9 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer questions 1–20 (multiple choice). You must achieve 90% (18/20) on the multiple-choice section to pass. <strong>M.Div. / Th.M. students:</strong> Answer all 30 questions. You must achieve 90% on both sections independently — 18/20 multiple choice AND 9/10 short answer. Click an answer for immediate feedback. <strong>Once all 12 units are passed, you will be redirected to your certificate.</strong></span><span class="lang-es"><strong>Estudiantes de certificado:</strong> Respondan las preguntas 1–20 (opción múltiple). Debe alcanzar el 90% (18/20) en la sección de opción múltiple para aprobar. <strong>Estudiantes de M.Div. / Th.M.:</strong> Respondan las 30 preguntas. Debe alcanzar el 90% en ambas secciones de manera independiente — 18/20 opción múltiple Y 9/10 respuesta corta. Haga clic en una respuesta para retroalimentación inmediata. <strong>Una vez aprobadas las 12 unidades, será redirigido a su certificado.</strong></span></p>
+    <div class="track-bar">
+        <strong><span class="lang-en">Your Track:</span><span class="lang-es">Su Modalidad:</span></strong>
+        <span style="margin-left:14px;">
+            <label><input type="radio" name="ctsTrack" value="cert"><span class="lang-en">Certificate (MC only)</span><span class="lang-es">Certificado (solo opción múltiple)</span></label>
+            <label><input type="radio" name="ctsTrack" value="mdiv"><span class="lang-en">Master of Divinity (MC + SA)</span><span class="lang-es">Maestría en Divinidad (MC + RC)</span></label>
+            <label><input type="radio" name="ctsTrack" value="thm"><span class="lang-en">Master of Theology (Th.M.) Track</span><span class="lang-es">Maestría en Teología (Th.M.)</span></label>
+        </span>
+    </div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar Aprobación</span></button>
+        <button id="resetExamBtn" class="reset-btn"><span class="lang-en">↺ Reset Exam</span><span class="lang-es">↺ Restablecer Examen</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ===== PER-UNIT CONFIG =====
+const UNIT = 9;
+const TOTAL_UNITS = 12;
+const NEXT_URL = 'CTSNTUnit10.html';
+const PREV_URL = 'CTSNTUnit8.html';
+const PASS_THRESHOLD = 0.90;
+
+let progress = JSON.parse(localStorage.getItem('cts_nt_progress')) || {};
+let currentTrack = localStorage.getItem('cts_track') || 'cert';
+
+function isMastersLevel() { return currentTrack === 'mdiv' || currentTrack === 'thm'; }
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === UNIT) cls += ' active';
+        grid.innerHTML += `<a href="CTSNTUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+if (PREV_URL) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_URL; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="#" onclick="promptName(); return false;" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+    }
+}
+function promptName() {
+    const name = prompt("Welcome to CTS New Testament Survey! Please enter your full name as you'd like it to appear on your certificate:");
+    if (name && name.trim().length > 1) {
+        localStorage.setItem('cts_student', JSON.stringify({name: name.trim()}));
+        displayStudentGreeting();
+    }
+}
+displayStudentGreeting();
+
+const mcQuestions = [
+    { textEn: "1. Who founded the church at Thessalonica?", textEs: "1. ¿Quién fundó la iglesia en Tesalónica?",
+      optionsEn: ["Barnabas and Mark", "Peter and John", "Paul, Silas, and Timothy", "Apollos alone"],
+      optionsEs: ["Bernabé y Marcos", "Pedro y Juan", "Pablo, Silas y Timoteo", "Apolos solo"],
+      explanationEn: "Paul, Silas, and Timothy founded the Thessalonian church on Paul's second missionary journey (Acts 17).", explanationEs: "Pablo, Silas y Timoteo fundaron la iglesia tesalonicense en el segundo viaje misionero de Pablo (Hechos 17).", correct: 2 },
+    { textEn: "2. According to the unit, how long did Paul preach in the Thessalonian synagogue before opposition drove him out?", textEs: "2. Según la unidad, ¿cuánto tiempo predicó Pablo en la sinagoga de Tesalónica antes de que la oposición lo expulsara?",
+      optionsEn: ["Three years", "Only a few Sabbaths", "A single day", "Forty days"],
+      optionsEs: ["Tres años", "Solo unos pocos días de reposo", "Un solo día", "Cuarenta días"],
+      explanationEn: "Paul preached only a few Sabbaths in the synagogue before opposition drove him out, leaving a young church under pressure.", explanationEs: "Pablo predicó solo unos pocos días de reposo en la sinagoga antes de que la oposición lo expulsara, dejando una iglesia joven bajo presión.", correct: 1 },
+    { textEn: "3. In 'Salvation of the Whole Man,' the thief on the cross illustrates the salvation of the:", textEs: "3. En 'La Salvación del Hombre Completo', el ladrón en la cruz ilustra la salvación del:",
+      optionsEn: ["Whole man", "Body only", "Nation", "Soul only"],
+      optionsEs: ["Hombre completo", "Cuerpo solamente", "Nación", "Alma solamente"],
+      explanationEn: "The Thessalonians' complete salvation had three stages: they turned from idols, served the living God, and waited for His Son.", explanationEs: "La salvación completa de los tesalonicenses tuvo tres etapas: se convirtieron de los ídolos, sirvieron al Dios vivo y esperaron a Su Hijo.", correct: 3 },
+    { textEn: "4. The unit defines an idol as:", textEs: "4. La unidad define un ídolo como:",
+      optionsEn: ["Anything chosen above God", "A foreign religion", "A pagan temple", "Only a carved statue"],
+      optionsEs: ["Cualquier cosa escogida por encima de Dios", "Una religión extranjera", "Un templo pagano", "Solo una estatua tallada"],
+      explanationEn: "The unit defines an idol as anything chosen above God, whether beauty, money, or power.", explanationEs: "La unidad define un ídolo como cualquier cosa escogida por encima de Dios, sea belleza, dinero o poder.", correct: 0 },
+    { textEn: "5. The three stages of complete salvation in 1 Thessalonians 1 are: turned from idols, served the living God, and:", textEs: "5. Las tres etapas de la salvación completa en 1 Tesalonicenses 1 son: convertirse de los ídolos, servir al Dios vivo y:",
+      optionsEn: ["Wrote the epistles", "Built a temple", "Paid the tithe", "Waited for His Son from heaven"],
+      optionsEs: ["Escribir las epístolas", "Construir un templo", "Pagar el diezmo", "Esperar a su Hijo de los cielos"],
+      explanationEn: "The thief on the cross was saved in his soul but missed a whole life of service — salvation of the soul, not the whole man.", explanationEs: "El ladrón en la cruz fue salvo en su alma pero perdió toda una vida de servicio — salvación del alma, no del hombre completo.", correct: 3 },
+    { textEn: "6. Which is NOT named in the unit as a way to serve God?", textEs: "6. ¿Cuál NO se menciona en la unidad como una manera de servir a Dios?",
+      optionsEn: ["By the way we live", "By accumulating wealth for ourselves", "By giving our time", "By the right use of our money"],
+      optionsEs: ["Por la manera en que vivimos", "Acumulando riqueza para nosotros mismos", "Dándole nuestro tiempo", "Con el uso correcto de nuestro dinero"],
+      explanationEn: "Works do not save, but the truly saved serve the Lord, for by their fruits you shall know them (Matthew 7:20).", explanationEs: "Las obras no salvan, pero el verdaderamente salvo sirve al Señor, pues por sus frutos los conoceréis (Mateo 7:20).", correct: 1 },
+    { textEn: "7. The word 'cemetery,' the unit explains, originally means a:", textEs: "7. La palabra 'cementerio', explica la unidad, originalmente significa un:",
+      optionsEn: ["Place of mourning", "Field of the dead", "Resting or sleeping place", "City of tombs"],
+      optionsEs: ["Lugar de luto", "Campo de los muertos", "Lugar de descanso o para dormir", "Ciudad de tumbas"],
+      explanationEn: "Early Christians called the burial place a cemetery, meaning a resting or sleeping place, because death for the believer is sleep.", explanationEs: "Los primeros cristianos llamaron al lugar de sepultura un cementerio, que significa un lugar de descanso o sueño, porque la muerte para el creyente es sueño.", correct: 2 },
+    { textEn: "8. The unit says the pagan world faced death with:", textEs: "8. La unidad dice que el mundo pagano enfrentaba la muerte con:",
+      optionsEn: ["Despair", "Indifference to the body", "Confidence in reincarnation", "Joyful hope"],
+      optionsEs: ["Desesperación", "Indiferencia hacia el cuerpo", "Confianza en la reencarnación", "Esperanza gozosa"],
+      explanationEn: "Christians do not grieve as others grieve because loved ones in Christ are only asleep, awaiting the resurrection.", explanationEs: "Los cristianos no se afligen como los demás porque los seres queridos en Cristo solo duermen, esperando la resurrección.", correct: 0 },
+    { textEn: "9. Acts 1:11 is cited to show that Jesus will return:", textEs: "9. Se cita Hechos 1:11 para mostrar que Jesús volverá:",
+      optionsEn: ["After the world reforms", "Only spiritually", "In the same way He ascended", "At a date we can calculate"],
+      optionsEs: ["Después de que el mundo se reforme", "Solo espiritualmente", "De la misma manera en que ascendió", "En una fecha que podemos calcular"],
+      explanationEn: "The unit says the coming cannot be scheduled or read from signs, for it comes in the twinkling of an eye.", explanationEs: "La unidad dice que la venida no puede programarse ni leerse de las señales, porque viene en un abrir y cerrar de ojos.", correct: 2 },
+    { textEn: "10. The Eisenhower/dying-boy story illustrates that the Lord's coming will be:", textEs: "10. La historia de Eisenhower y el niño moribundo ilustra que la venida del Señor será:",
+      optionsEn: ["Sudden and unexpected", "Long delayed", "Announced years ahead", "Visible only to pastors"],
+      optionsEs: ["Repentina e inesperada", "Muy demorada", "Anunciada con años de anticipación", "Visible solo para los pastores"],
+      explanationEn: "Everyone who has set a date for the end has been wrong, including Christopher Columbus.", explanationEs: "Todo el que ha fijado una fecha para el fin se ha equivocado, incluyendo a Cristóbal Colón.", correct: 0 },
+    { textEn: "11. 'The dead in Christ will rise first' means believers receive:", textEs: "11. 'Los muertos en Cristo resucitarán primero' significa que los creyentes reciben:",
+      optionsEn: ["Their same earthly bodies reassembled", "New, glorified bodies like Christ's", "Only a spiritual existence", "No body at all"],
+      optionsEs: ["Sus mismos cuerpos terrenales rearmados", "Cuerpos nuevos y glorificados como el de Cristo", "Solo una existencia espiritual", "Ningún cuerpo en absoluto"],
+      explanationEn: "Acts 1:11 teaches that Christ will return the same way He ascended — personally, visibly, and actually, not merely spiritually.", explanationEs: "Hechos 1:11 enseña que Cristo volverá de la misma manera que ascendió — personal, visible y realmente, no solo espiritualmente.", correct: 1 },
+    { textEn: "12. In 1 Thessalonians 5:19, to 'quench' the Spirit means to:", textEs: "12. En 1 Tesalonicenses 5:19, 'apagar' el Espíritu significa:",
+      optionsEn: ["Multiply the fire", "Hide the fire", "Worship the fire", "Extinguish or put out the fire"],
+      optionsEs: ["Multiplicar el fuego", "Esconder el fuego", "Adorar el fuego", "Extinguir o apagar el fuego"],
+      explanationEn: "His coming will be in the air with the Lord's shout, the trumpet, and the voice of the archangel.", explanationEs: "Su venida será en el aire con la voz de mando del Señor, la trompeta y la voz del arcángel.", correct: 3 },
+    { textEn: "13. The unit lists the marks of a Spirit-filled church as happy, thankful, praying, and:", textEs: "13. La unidad enumera las marcas de una iglesia llena del Espíritu como gozosa, agradecida, que ora y:",
+      optionsEn: ["Large", "Wealthy", "Preaching", "Ancient"],
+      optionsEs: ["Grande", "Rica", "Que predica", "Antigua"],
+      explanationEn: "Paul says the Day of the Lord comes as a thief in the night — sudden and unexpected (1 Thessalonians 5:2).", explanationEs: "Pablo dice que el día del Señor viene como ladrón en la noche — repentino e inesperado (1 Tesalonicenses 5:2).", correct: 2 },
+    { textEn: "14. 'Jim Jones had fire, but it led to destruction' warns against:", textEs: "14. 'Jim Jones tenía fuego, pero condujo a la destrucción' advierte contra:",
+      optionsEn: ["Cold, dead churches", "Fanaticism / fire without light", "Tithing", "Prophecy of any kind"],
+      optionsEs: ["Iglesias frías y muertas", "El fanatismo / el fuego sin luz", "El diezmo", "La profecía de cualquier tipo"],
+      explanationEn: "At death the soul goes immediately to be with the Lord; it is the body, not the soul, that sleeps.", explanationEs: "Al morir el alma va de inmediato a estar con el Señor; es el cuerpo, no el alma, lo que duerme.", correct: 1 },
+    { textEn: "15. The main comfort of 2 Thessalonians 1 for the persecuted is that:", textEs: "15. El consuelo principal de 2 Tesalonicenses 1 para los perseguidos es que:",
+      optionsEn: ["Suffering is an illusion", "The storm is always stilled at once", "Persecution proves God is absent", "Christ is with us in the storm"],
+      optionsEs: ["El sufrimiento es una ilusión", "La tormenta siempre se calma de inmediato", "La persecución prueba que Dios está ausente", "Cristo está con nosotros en la tormenta"],
+      explanationEn: "At the return the dead in Christ rise first, receiving new glorified bodies like the resurrected body of Christ.", explanationEs: "En el regreso los muertos en Cristo resucitan primero, recibiendo nuevos cuerpos glorificados como el cuerpo resucitado de Cristo.", correct: 3 },
+    { textEn: "16. The book of Revelation is described in the unit as sharing what main message with 2 Thessalonians?", textEs: "16. El libro de Apocalipsis se describe en la unidad como compartiendo qué mensaje principal con 2 Tesalonicenses?",
+      optionsEn: ["Comfort for the persecuted", "Rules for worship", "Church organization", "Detailed end-time dates"],
+      optionsEs: ["Consuelo para los perseguidos", "Reglas para la adoración", "Organización de la iglesia", "Fechas detalladas del fin"],
+      explanationEn: "To quench the Spirit means to put out His fire; Paul commands 'Quench not the Spirit' (1 Thessalonians 5:19).", explanationEs: "Apagar el Espíritu significa apagar Su fuego; Pablo manda 'No apaguéis el Espíritu' (1 Tesalonicenses 5:19).", correct: 0 },
+    { textEn: "17. On the 'man of lawlessness,' the unit (citing 1 John) emphasizes that:", textEs: "17. Sobre el 'hombre de pecado', la unidad (citando a 1 Juan) enfatiza que:",
+      optionsEn: ["He is purely symbolic", "He is a known living person", "He has already been defeated", "There are many antichrists; don't fixate on one name"],
+      optionsEs: ["Es puramente simbólico", "Es una persona viva conocida", "Ya ha sido derrotado", "Hay muchos anticristos; no fijarse en un nombre"],
+      explanationEn: "A church quenches the Spirit by removing the fuel (treating the church as ours) or smothering the fire with willful sin.", explanationEs: "Una iglesia apaga el Espíritu quitando el combustible (tratando la iglesia como nuestra) o sofocando el fuego con pecado voluntario.", correct: 3 },
+    { textEn: "18. The Old Testament 'Day of the Lord' refers to God's decisive intervention in both:", textEs: "18. El 'Día del Señor' del Antiguo Testamento se refiere a la intervención decisiva de Dios en ambos:",
+      optionsEn: ["Law and sacrifice", "Judgment and salvation", "Israel and Egypt", "Temple and tabernacle"],
+      optionsEs: ["Ley y sacrificio", "Juicio y salvación", "Israel y Egipto", "Templo y tabernáculo"],
+      explanationEn: "Second Thessalonians 1 comforts a persecuted people: Christ is with them in the storm and the suffering will not last forever.", explanationEs: "Segunda de Tesalonicenses 1 consuela a un pueblo perseguido: Cristo está con ellos en la tormenta y el sufrimiento no durará para siempre.", correct: 1 },
+    { textEn: "19. Dietrich Bonhoeffer is used to illustrate that:", textEs: "19. Dietrich Bonhoeffer se usa para ilustrar que:",
+      optionsEn: ["One who spoke up against evil paid with his life", "Silence is always wise", "Most leaders spoke out against Hitler", "The church controlled the state"],
+      optionsEs: ["Quien alzó la voz contra el mal lo pagó con su vida", "El silencio siempre es sabio", "La mayoría de los líderes hablaron contra Hitler", "La iglesia controlaba al estado"],
+      explanationEn: "The unit urges restraint on the man of lawlessness: many antichrists exist, confident identifiers have been wrong, and our task is to stay faithful.", explanationEs: "La unidad insta a la cautela sobre el hombre de pecado: existen muchos anticristos, los que han identificado con confianza se han equivocado, y nuestra tarea es permanecer fieles.", correct: 0 },
+    { textEn: "20. The main correction of 2 Thessalonians 3 is that believers should be:", textEs: "20. La corrección principal de 2 Tesalonicenses 3 es que los creyentes deben estar:",
+      optionsEn: ["Scheduling the exact date", "Selling all and waiting", "Prepared and faithfully working, not idle", "Withdrawing from society"],
+      optionsEs: ["Programando la fecha exacta", "Vendiendo todo y esperando", "Preparados y trabajando fielmente, no ociosos", "Retirándose de la sociedad"],
+      explanationEn: "Second Thessalonians 3 corrects idleness: the believer who truly expects the Lord is found faithfully at work, not waiting idle.", explanationEs: "Segunda de Tesalonicenses 3 corrige la ociosidad: el creyente que verdaderamente espera al Señor es hallado fielmente en la obra, no esperando ocioso.", correct: 2 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Explain the difference between 'salvation of the soul' and 'salvation of the whole man.'", textEs: "21. Explique la diferencia entre la 'salvación del alma' y la 'salvación del hombre completo'.",
+      kw_en: ["soul", "life", "whole", "early", "serve", "thief"], kw_es: ["alma", "vida", "completo", "temprano", "servir", "ladron"],
+      modelEn: "Salvation of the soul rescues a person for eternity, as with the thief on the cross who was saved in his last moments. But salvation of the whole man saves the life as well as the soul, the years that can be poured out in service to Christ. The thief gained heaven yet forfeited a whole life of service, which is why we plead with people to come to Christ early and serve Him.", modelEs: "La salvación del alma rescata a una persona para la eternidad, como con el ladrón en la cruz que fue salvo en sus últimos momentos. Pero la salvación del hombre completo salva la vida tanto como el alma, los años que pueden derramarse en servicio a Cristo. El ladrón ganó el cielo pero perdió toda una vida de servicio, por lo cual rogamos a las personas que vengan a Cristo temprano y le sirvan." },
+    { textEn: "22. The unit says an idol is 'anything chosen above God.' Give an example and explain the principle.", textEs: "22. La unidad dice que un ídolo es 'cualquier cosa escogida por encima de Dios'. Dé un ejemplo y explique el principio.",
+      kw_en: ["above god", "money", "power", "pleasure", "turn", "first"], kw_es: ["por encima de dios", "dinero", "poder", "placer", "convertir", "primero"],
+      modelEn: "The unit defines an idol as anything chosen above God. It may be money and security, pleasure, or power, rather than a carved image. No one can be saved until he turns from that idol and chooses God in its place, for turning is the first point of salvation. Whatever holds the heart first, before God, is the idol that must be surrendered.", modelEs: "La unidad define un ídolo como cualquier cosa escogida por encima de Dios. Puede ser el dinero y la seguridad, el placer o el poder, en vez de una imagen tallada. Nadie puede ser salvo hasta que se convierta de ese ídolo y escoja a Dios en su lugar, pues convertirse es el primer punto de la salvación. Lo que retiene el corazón primero, antes que Dios, es el ídolo que debe entregarse." },
+    { textEn: "23. List several ways the unit says we can serve the living God.", textEs: "23. Enumere varias maneras en que la unidad dice que podemos servir al Dios vivo.",
+      kw_en: ["live", "time", "talents", "witness", "tell others", "money", "tithe"], kw_es: ["vivir", "tiempo", "talentos", "testificar", "hablar a otros", "dinero", "diezmo"],
+      modelEn: "The unit lists several ways to serve the living God. We serve by the way we live, a consecrated life whose influence cannot be measured; by giving Him our time rather than spending it all on the world; by using our talents for Him; by telling others the gospel, the greatest trust placed in our hands; and by the right use of our money, giving at least the tithe through the local church.", modelEs: "La unidad enumera varias maneras de servir al Dios vivo. Servimos por la manera en que vivimos, una vida consagrada cuya influencia no puede medirse; dándole nuestro tiempo en vez de gastarlo todo en el mundo; usando nuestros talentos para Él; hablándoles a otros el evangelio, la mayor confianza puesta en nuestras manos; y con el uso correcto de nuestro dinero, dando al menos el diezmo por medio de la iglesia local." },
+    { textEn: "24. Why does Paul say Christians do not grieve as others grieve? Use the meaning of 'cemetery.'", textEs: "24. ¿Por qué dice Pablo que los cristianos no se afligen como los demás? Use el significado de 'cementerio'.",
+      kw_en: ["sleep", "resting place", "hope", "asleep", "reunion", "return"], kw_es: ["dormir", "lugar de descanso", "esperanza", "dormidos", "reunion", "regreso"],
+      modelEn: "Christians do not grieve as others grieve because death for the believer is only sleep. The word cemetery means a resting place, a sleeping place, and a believer who has died is asleep there awaiting the Lord's return. Like a family that does not mourn a member away in a distant city, we hold the hope of reunion, for those asleep in Christ will rise when He comes.", modelEs: "Los cristianos no se afligen como los demás porque la muerte para el creyente es solo sueño. La palabra cementerio significa un lugar de descanso, un lugar para dormir, y un creyente que ha muerto está allí dormido esperando el regreso del Señor. Como una familia que no se lamenta por un miembro lejos en una ciudad distante, sostenemos la esperanza del reencuentro, pues los que duermen en Cristo resucitarán cuando Él venga." },
+    { textEn: "25. What does Acts 1:11 teach about the manner of Christ's return?", textEs: "25. ¿Qué enseña Hechos 1:11 sobre la manera del regreso de Cristo?",
+      kw_en: ["same way", "ascended", "personally", "visibly", "actually", "air"], kw_es: ["misma manera", "ascendio", "personalmente", "visiblemente", "realmente", "aire"],
+      modelEn: "Acts 1:11 teaches that Christ will return the same way He ascended into heaven: personally, visibly, and actually, not merely as a spiritual influence. His coming will be in the air, announced by the Lord's shout, a trumpet, and the voice of the archangel. The manner of His return is as real and bodily as His departure was.", modelEs: "Hechos 1:11 enseña que Cristo volverá de la misma manera que ascendió al cielo: personal, visible y realmente, no meramente como una influencia espiritual. Su venida será en el aire, anunciada por la voz de mando del Señor, una trompeta y la voz del arcángel. La manera de Su regreso es tan real y corporal como lo fue Su partida." },
+    { textEn: "26. Describe what happens to the body and the soul at death and at the resurrection, according to the unit.", textEs: "26. Describa lo que sucede con el cuerpo y el alma en la muerte y en la resurrección, según la unidad.",
+      kw_en: ["soul", "with the lord", "body sleeps", "rise first", "glorified body", "absent"], kw_es: ["alma", "con el señor", "cuerpo duerme", "resucitan primero", "cuerpo glorificado", "ausentes"],
+      modelEn: "At death the soul goes immediately to be with the Lord, for to be absent from the body is to be present with the Lord; it is the body that sleeps, not the soul. At the resurrection the dead in Christ rise first and receive a new glorified body like the risen body of Christ. God brings the waiting souls with Him, and they are reunited with transformed bodies.", modelEs: "Al morir el alma va de inmediato a estar con el Señor, pues estar ausentes del cuerpo es estar presentes al Señor; es el cuerpo el que duerme, no el alma. En la resurrección los muertos en Cristo resucitan primero y reciben un nuevo cuerpo glorificado como el cuerpo resucitado de Cristo. Dios trae consigo a las almas que esperan, y son reunidas con cuerpos transformados." },
+    { textEn: "27. What does it mean to 'quench the Spirit,' and how can a church do it?", textEs: "27. ¿Qué significa 'apagar el Espíritu' y cómo puede una iglesia hacerlo?",
+      kw_en: ["extinguish", "fire", "fuel", "willful sin", "enthusiasm", "dead church"], kw_es: ["extinguir", "fuego", "combustible", "pecado voluntario", "entusiasmo", "iglesia muerta"],
+      modelEn: "To quench the Spirit means to extinguish His fire, for the Spirit is pictured as a fire that can be put out. A church quenches Him in two ways: by removing the fuel, treating the church as its own rather than God's, or by throwing willful sin on the flame. A church that has lost its enthusiasm and joy becomes a dead church, where the fire has gone out.", modelEs: "Apagar el Espíritu significa extinguir Su fuego, pues el Espíritu se representa como un fuego que puede apagarse. Una iglesia lo apaga de dos maneras: quitando el combustible, tratando la iglesia como propia en vez de de Dios, o echando pecado voluntario sobre la llama. Una iglesia que ha perdido su entusiasmo y su gozo se vuelve una iglesia muerta, donde el fuego se ha apagado." },
+    { textEn: "28. State the main message of 2 Thessalonians 1 and the storm illustration that supports it.", textEs: "28. Exprese el mensaje principal de 2 Tesalonicenses 1 y la ilustración de la tormenta que lo respalda.",
+      kw_en: ["comfort", "persecution", "with us", "storm", "peace be still", "revelation", "patmos"], kw_es: ["consuelo", "persecucion", "con nosotros", "tormenta", "calla enmudece", "apocalipsis", "patmos"],
+      modelEn: "Second Thessalonians 1 comforts a church under persecution, the same comfort that runs through Revelation, where John was imprisoned on Patmos. The message is not that the suffering is small but that Christ is with His people in it. Like the storm on the lake when Jesus said Peace be still, the comfort is not always a calmed storm on demand but His presence within it; God has not lost control.", modelEs: "Segunda de Tesalonicenses 1 consuela a una iglesia bajo persecución, el mismo consuelo que recorre Apocalipsis, donde Juan estuvo preso en Patmos. El mensaje no es que el sufrimiento sea pequeño sino que Cristo está con Su pueblo en él. Como la tormenta en el lago cuando Jesús dijo Calla, enmudece, el consuelo no siempre es una tormenta calmada a petición sino Su presencia dentro de ella; Dios no ha perdido el control." },
+    { textEn: "29. How does the unit teach the 'man of lawlessness' and the Day of the Lord? Why caution against naming the Antichrist?", textEs: "29. ¿Cómo enseña la unidad el 'hombre de pecado' y el Día del Señor? ¿Por qué advertir contra nombrar al Anticristo?",
+      kw_en: ["many antichrists", "timeline", "god in control", "intervene", "judgment", "salvation", "wrong"], kw_es: ["muchos anticristos", "calendario", "dios en control", "intervenir", "juicio", "salvacion", "equivocado"],
+      modelEn: "On the man of lawlessness the unit teaches restraint. John says there are already many antichrists, and across the centuries confident identifiers have generally been proven wrong, like every date-setter. God remains in control of the timeline, and behind the chapter lies the Day of the Lord, God's decisive intervention bringing both judgment and salvation. Our task is not to pin a name on the lawlessness but to stay faithful, because God must intervene to set the world right.", modelEs: "Sobre el hombre de pecado la unidad enseña cautela. Juan dice que ya hay muchos anticristos, y a lo largo de los siglos los que identifican con confianza generalmente han resultado equivocados, como todo el que fija fechas. Dios permanece en control de la línea de tiempo, y tras el capítulo está el Día del Señor, la intervención decisiva de Dios que trae a la vez juicio y salvación. Nuestra tarea no es ponerle un nombre a la maldad sino permanecer fieles, porque Dios debe intervenir para enderezar el mundo." },
+    { textEn: "30. Why does 2 Thessalonians correct idleness, and how does the unit use Adam to show the dignity of work?", textEs: "30. ¿Por qué corrige 2 Tesalonicenses la ociosidad, y cómo usa la unidad a Adán para mostrar la dignidad del trabajo?",
+      kw_en: ["prepared", "not schedule", "work", "adam", "garden", "thorns", "noble", "six days"], kw_es: ["preparados", "no programar", "trabajo", "adan", "huerto", "espinos", "noble", "seis dias"],
+      modelEn: "Second Thessalonians 3 corrects idleness because some, expecting the Lord at any moment, had stopped working. We are called to be prepared, not to schedule the return, which even the Son left to the Father. And being prepared does not mean idleness: man was made for work. Before the Fall Adam tended the garden; after it he labored among thorns, yet work stayed noble, for God said six days you shall labor. The faithful believer is found at work.", modelEs: "Segunda de Tesalonicenses 3 corrige la ociosidad porque algunos, esperando al Señor en cualquier momento, habían dejado de trabajar. Somos llamados a estar preparados, no a programar el regreso, que aun el Hijo dejó al Padre. Y estar preparados no significa ociosidad: el hombre fue hecho para trabajar. Antes de la Caída Adán cuidaba el huerto; después trabajó entre espinos, pero el trabajo siguió siendo noble, pues Dios dijo seis días trabajarás. El creyente fiel es hallado en la obra." }
+];
+
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = `cts_nt_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY = `cts_nt_u${UNIT}_sa_lockout`;
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0')
+        : parseInt(localStorage.getItem(`cts_nt_u${UNIT}_lockout`) || '0');
+}
+let lockUntil = activeLockUntil();
+let unitPassed = progress[`unit${UNIT}`] || false;
+
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function isEs() { return document.body.classList.contains('lang-es'); }
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer as left-boundary prefix.
+// Pass standard is >=3 hits (NOT all keywords).
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function kwHitCount(normAns, keys) { return keys.filter(function(k){ return kwHit(normAns, k); }).length; }
+
+function checkAllUnitsPassed() {
+    for (let i = 1; i <= TOTAL_UNITS; i++) { if (!progress[`unit${i}`]) return false; }
+    return true;
+}
+
+function syncTrackUI() {
+    document.querySelectorAll('input[name="ctsTrack"]').forEach(r => { r.checked = (r.value === currentTrack); });
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = isEs() ? 'Opción Múltiple (Preguntas 1–20)' : 'Multiple Choice (Questions 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (!isEs()) ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (!isEs()) ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (!isEs()) ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((!isEs()) ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = isEs() ? 'Respuesta Corta (Preguntas 21–30) — Pista Maestría en Divinidad' : 'Short Answer (Questions 21–30) — Master of Divinity Track';
+    container.appendChild(kwTitle);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = isEs() ? q.textEs : q.textEn;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = isEs() ? 'Escriba su respuesta aquí...' : 'Type your answer here...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = isEs() ? 'Verificar Respuesta' : 'Check Answer';
+        const fb = document.createElement('div');
+        fb.className = 'feedback-text';
+        fb.style.marginTop = '8px';
+        const model = document.createElement('div');
+        model.className = 'model-answer';
+        model.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ansRaw = ta.value.trim();
+            const ans = normalize(ansRaw);
+            const keys = isEs() ? q.kw_es : q.kw_en;
+            const hits = kwHitCount(ans, keys);
+            if (ansRaw.length < 100) {
+                fb.innerHTML = isEs() ? 'Escriba una respuesta más completa (al menos una oración).' : 'Please write a more complete answer (at least a sentence).';
+                fb.className = 'feedback-text incorrect';
+            } else if (hits >= 3) {
+                fb.innerHTML = isEs() ? `✓ ¡Bien! Su respuesta toca ${hits} conceptos clave.` : `✓ Good! Your answer touches ${hits} key concepts.`;
+                fb.className = 'feedback-text correct';
+                kwAnswers[idx] = ansRaw;
+            } else {
+                fb.innerHTML = isEs() ? `Va bien — toca ${hits}. Apunte a al menos 3 conceptos clave; revise la lección y vuelva a intentarlo.` : `Good start — you touched ${hits}. Aim for at least 3 key concepts; review the lesson and try again.`;
+                fb.className = 'feedback-text incorrect';
+            }
+            const mk = isEs() ? q.modelEs : q.modelEn;
+            if (mk) {
+                model.innerHTML = (isEs() ? '<strong>Respuesta modelo — estúdiela:</strong> ' : '<strong>Model answer — study this:</strong> ') + mk;
+                model.style.display = 'block';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(model);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+}
+
+function triggerRedirect() {
+    const target = checkAllUnitsPassed() ? 'CTSNTCertificate.html' : NEXT_URL;
+    const result = document.getElementById('examResult');
+    let seconds = 3;
+    function tick() {
+        const msg = isEs()
+            ? `Redirigiendo a la siguiente unidad en ${seconds}...`
+            : `Redirecting to the next unit in ${seconds}...`;
+        result.innerHTML = `<div class='redirect-notice'>✅ ${isEs() ? '¡APROBADO!' : 'PASSED!'} ${msg}</div>`;
+        if (seconds <= 0) { location.href = target; return; }
+        seconds--;
+        setTimeout(tick, 1000);
+    }
+    tick();
+}
+
+function submitExam() {
+    const result = document.getElementById('examResult');
+    if (unitPassed) {
+        result.innerHTML = `<span style='color:green'>${isEs() ? '✅ Unidad ya aprobada.' : '✅ Unit already passed!'}</span>`;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        result.innerHTML = `<span style='color:red'>${isEs() ? `⏰ Bloqueado por ${wait} minutos más.` : `⏰ Locked for ${wait} more minutes.`}</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) { promptName(); return; }
+
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    let advCorrect = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = normalize(kwAnswers[i] || '');
+        const keys = isEs() ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        if (kwHitCount(ans, keys) >= 3 && ans.length >= 100) advCorrect++;
+    }
+
+    const mcPct = correctMC / 20;
+    const saPct = advCorrect / 10;
+    const mcPass = mcPct >= PASS_THRESHOLD;
+    const saPass = saPct >= PASS_THRESHOLD;
+
+    function passUnit() {
+        unitPassed = true;
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem('cts_nt_progress', JSON.stringify(progress));
+        localStorage.setItem(`nt_unit${UNIT}_passed`, 'true');
+        localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+        localStorage.removeItem(SA_LOCK_KEY);
+        updateProgressGrid();
+        triggerRedirect();
+    }
+
+    if (!isMastersLevel()) {
+        if (mcPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Necesita 18/20 para Certificado.`
+                : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Need 18/20 for Certificate.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        if (saPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ✓ ya guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+                : `MC: ✓ already banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Su opción múltiple está a salvo. Puede reintentar la sección de respuesta corta en ${mins} min.` : `Your multiple-choice pass is safe. You can retry the short-answer section in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPass && saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit();
+    } else if (mcPass && !saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ aprobado y guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ passed and banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Al reintentar en ${mins} min, solo necesitará la sección de respuesta corta — el OM permanece aprobado.` : `When you retry in ${mins} min, you'll only need the short-answer section — MC stays passed.`}</span>`;
+    } else {
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 18/20 Y 9/10 para M.Div.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 18/20 AND 9/10 for M.Div.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+    }
+}
+
+function resetExam() {
+    const msg = isEs()
+        ? '¿Restablecer el examen? Esto borrará sus respuestas en pantalla y eliminará el bloqueo de 15 minutos. Las unidades ya aprobadas no se afectan.'
+        : 'Reset the exam? This will clear your on-screen answers and remove the 15-minute lockout. Already-passed units are not affected.';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill('');
+    lockUntil = 0;
+    mcPreviouslyPassed = false;
+    localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+document.querySelectorAll('input[name="ctsTrack"]').forEach(r => {
+    r.addEventListener('change', e => {
+        currentTrack = e.target.value;
+        localStorage.setItem('cts_track', currentTrack);
+    });
+});
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.className = 'lang-es';
+        this.textContent = 'English';
+    } else {
+        document.body.className = 'lang-en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+syncTrackUI();
+renderQuestions();
+if (unitPassed) document.getElementById('examResult').innerHTML = `<span style='color:green'>${isEs() ? `✅ Unidad ${UNIT} ya aprobada.` : `✅ Unit ${UNIT} already passed.`}</span>`;
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSNTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

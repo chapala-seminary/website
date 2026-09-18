@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Radical Christianity — Unit 5: Be Holy</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffcf8; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d8cdd5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #4a1e3a; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e7dde3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d8cdd5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #4a1e3a; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #4a1e3a; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #4a1e3a; }
+.scripture { background: #f4ecf1; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #4a1e3a; }
+.illustration { background: #f7f0e6; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #4a1e3a; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d8cdd5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d8cdd5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fbf8f4; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1e9ee; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d8cdd5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #4a1e3a; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f3ecdf; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #f7eede; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #d8cdd5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f3ecdf; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #4a1e3a; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 6 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Radical Christianity: The Ten Commandments of Jesus — Unit 5: Be Holy</span><span class="lang-es">📖 Cristianismo Radical: Los Diez Mandamientos de Jesús — Unidad 5: Sed Santos</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #4a1e3a;"><span class="lang-en">"but as He who called you is holy, you also be holy in all your conduct, because it is written, 'Be holy, for I am holy.'" — 1 Peter 1:15-16 (NKJV)</span><span class="lang-es">"sino, como aquel que os ha llamado es santo, sed también vosotros santos en toda vuestra manera de vivir; porque escrito está: Sed santos, porque yo soy santo." — 1 Pedro 1:15-16 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Radical Christianity: The Ten Commandments of Jesus. Please register before beginning Unit 5.</span><span class="lang-es">Bienvenido a Cristianismo Radical: Los Diez Mandamientos de Jesús. Por favor regístrese antes de comenzar la Unidad 5.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+            <h3>1. Be Holy, For I Am Holy</h3>
+            <div class="scripture">
+                <strong>1 Peter 1:15-16 (NKJV):</strong> "but as He who called you is holy, you also be holy in all your conduct, because it is written, 'Be holy, for I am holy.'"</div>
+            <p>Of all the commands of Jesus, this one can sound the most intimidating, because it seems to set the standard impossibly high: be holy, as God Himself is holy. Yet Peter does not present it as a crushing burden but as the natural calling of those whom God has called. The reason given is not our ability but God's character: <em>because</em> He who called us is holy, we are to be holy too. Holiness is not first something we generate; it is something we are summoned into by the One who is already holy and who has claimed us as His own.</p>
+            <p>So before we can obey this command, we have to understand it. What does it actually mean to be holy? The word carries a great deal of fear and confusion, and many people hear it as a demand to be flawless or grimly religious. Scripture means something both simpler and deeper, and getting it right changes everything about how we pursue it.</p>
+
+            <h3>2. Holy Means Different</h3>
+            <p>At its root, the word <em>holy</em> means to be <strong>different</strong> &mdash; set apart, distinct, not like the common run of things. That is why so many things in Scripture can be called holy. God Himself is holy because He is different from every other object that men have ever worshiped; He is in a category entirely His own, unlike every idol and every rival god. The Bible is called holy because it stands apart from all other books, set apart by God for His purposes. A day, a place, a vessel could be called holy in Israel for the same reason: it had been set apart from ordinary use and devoted to God.</p>
+            <p>This is the key that unlocks the whole command. To be holy is not first to be sinless or perfect; it is to be <em>set apart</em> &mdash; different from the world, marked out as belonging to God. Paul says the same thing in different words: do not be conformed to this world, but be transformed, presenting yourselves as a living sacrifice, holy and acceptable to God (Romans 12:1-2). Holiness is the quality of a life that no longer simply blends in with everything around it, because it has been claimed by a God who is Himself unlike anything around it.</p>
+
+            <h3>3. Holiness Seen: The Vision of Isaiah</h3>
+            <div class="scripture">
+                <strong>Isaiah 6:1-3 (NKJV):</strong> "In the year that King Uzziah died, I saw the Lord sitting on a throne, high and lifted up, and the train of His robe filled the temple. Above it stood seraphim... And one cried to another and said: 'Holy, holy, holy is the LORD of hosts; the whole earth is full of His glory!'"</div>
+            <p>The great illustration of holiness in all of Scripture is the vision Isaiah was given. He saw the Lord seated on a throne, high and lifted up, and the seraphim around Him were calling out to one another, "Holy, holy, holy is the LORD of hosts; the whole earth is full of His glory." In Hebrew, to say a thing three times is to raise it to the highest possible degree; the angels do not merely call God holy, they name Him holy beyond all measure. This is holiness no longer merely defined but <em>seen</em> &mdash; the blazing otherness of God filling the temple.</p>
+            <p>And notice what the sight does to Isaiah. He does not feel inspired or comforted; he is undone. "Woe is me, for I am undone! Because I am a man of unclean lips," he cries, for to stand before the holy God is to know at once how unholy we are. The same truth meets us from the other side in Moses. When Moses asked to see God's glory, the answer was that he could not see God's face and live, for no one can; God hid him in the cleft of the rock and covered him with His hand, letting only His goodness pass by. In the presence of the absolute holiness of God, sinful man cannot stand &mdash; he is undone, even destroyed. To ask to see the glory is to ask to see the holiness, and unshielded, it would consume us.</p>
+            <p>Yet neither vision ends in destruction. For Moses, God Himself provides the shielding rock and the covering hand; for Isaiah, a seraph takes a live coal from the altar and touches his lips, and his guilt is taken away, his sin purged. In both, the rescue comes from God's side &mdash; the rock, the hand, the altar, the coal &mdash; never from anything the man summons in himself. The best we can hope for today is to see the backside of God, as Moses did: a real but shielded and partial sight, never yet the full, unveiled blaze of His face. The whole arc of this unit is already present here: the set-apart holiness of God, our uncleanness exposed by it, and a cleansing we receive rather than achieve. As one way of putting it has it, <strong>glory is the holiness of God revealed, and holiness is the glory of God concealed</strong> &mdash; the same divine perfection, now blazing out to fill the earth, now hidden in the quiet set-apartness of God's own character.</p>
+            <p>And yet, even now, we are not left without sight of Him. We do not see God with physical eyes &mdash; no one can, and live &mdash; but we truly see Him with the eyes of the heart, the inner sight God enlightens in those who are His. This is no faint or unreal seeing. A church member once told me that God had become more real to him than the wife he had been married to for many years. That is the kind of sight the holy God grants His people even here: not yet His face, but Himself made more real to the heart than the things we touch with our hands. The backside of God now, with the eyes of the heart; His unveiled face one day, when we shall see Him as He is.</p>
+
+            <h3>4. A Holy Nation</h3>
+            <div class="scripture">
+                <strong>1 Peter 2:9 (NKJV):</strong> "But you are a chosen generation, a royal priesthood, a holy nation, His own special people, that you may proclaim the praises of Him who called you out of darkness into His marvelous light."</div>
+            <p>Peter goes on to apply this to the whole people of God. We are called a <em>holy nation</em> &mdash; a people set apart, His own special possession. The very phrase means a community that is different, called out of the darkness that everyone else takes for normal and into God's marvelous light. Holiness, then, is not the private project of a few unusually spiritual individuals; it is the calling of the entire people of God together. To belong to Christ is to belong to a set-apart people.</p>
+            <p>This rescues holiness from being a lonely, anxious striving. We are not each trying single-handedly to manufacture a flawless life. We have been brought into a people God has already declared to be His own and set apart for Himself, and our calling is to live in a way that matches what God has already said we are. The command "be holy" is, in large part, the call to become in practice what God has already made us in fact.</p>
+
+            <h3>5. The Honest Truth About Perfection</h3>
+            <p>Here we must be honest, because this is where much confusion and discouragement enters. There are groups within the church that go by the name "holiness," and some have even taught that it is possible to reach sinless perfection in this life. But the Bible never actually says that. Scripture calls us to holiness, commands us to pursue it with everything in us, and takes our sin with deadly seriousness &mdash; but it nowhere promises that we will fully arrive in this world. The honest testimony of every saint, and of Scripture itself, is that we press toward holiness while still confessing sin and depending on grace.</p>
+            <p>This is not an excuse for spiritual laziness; it is a guard against two opposite errors. On one side is the despair of those who, measuring themselves against perfection, conclude they have failed and give up. On the other is the pride of those who imagine they have already arrived and so stop growing. The truth keeps us humble and hopeful at once: we are genuinely called to be different, set apart, increasingly like our God &mdash; and we are honest that in this life the pursuit is never finished.</p>
+
+            <h3>6. One Day We Shall Be Like Him</h3>
+            <div class="scripture">
+                <strong>1 John 3:2 (NKJV):</strong> "Beloved, now we are children of God; and it has not yet been revealed what we shall be, but we know that when He is revealed, we shall be like Him, for we shall see Him as He is."</div>
+            <p>If we never fully arrive here, where does the pursuit of holiness lead? Scripture gives a breathtaking answer: one day we shall see Him as He is, and we shall be like Him. The holiness we reach for now in part will one day be ours completely, not by our own achievement but by the transforming sight of Christ Himself. What we cannot finish, He will finish in us. The very next verse adds that everyone who has this hope in Him purifies himself, just as He is pure &mdash; so the certainty of future holiness is not an excuse to coast now but the great motive to keep pursuing it.</p>
+            <p>This is the hope that makes the honest admission of section four bearable. We do not pursue holiness in despair, as if everything depended on our reaching perfection by our own strength. We pursue it in confidence, knowing the One who called us holy will one day make us fully like Himself.</p>
+
+            <h3>7. Saints: Declared Holy in God's Courtroom</h3>
+            <p>This is also why the New Testament can call ordinary believers "saints" &mdash; literally, "holy ones." The saints of Scripture were not a special class of people canonized by the church for extraordinary lives. They were ordinary believers who had been <em>declared</em> holy because Jesus had died for their sins. Every Christian, however weak, is a saint in this sense, because holiness in its first and deepest sense is a gift God grants, not a status we earn.</p>
+            <p>The legal word for this is justification, and it helps to picture a courtroom. To be justified is to be declared free before God's bar of judgment. But notice carefully <em>why</em> the verdict is "free." It is not because we are found innocent &mdash; we are not innocent, and God does not pretend otherwise. It is because the penalty for our guilt has already been paid in full by Christ. The Judge can righteously declare us free because justice has been satisfied at the cross. So we begin the Christian life already declared holy in Christ, and only then are we summoned to live out, day by day, the holiness that has been credited to us.</p>
+
+            <h3>8. The Goal Is a Person, Not an Action</h3>
+            <p>This brings us to the heart of the matter, and it is easy to miss. When we hear "be holy," we instinctively turn it into a checklist of actions to perform and sins to avoid. But the goal of holiness is not finally an action at all. The goal is a <em>Person</em>, and the Person is Jesus Christ. We strive to be holy as He was holy; holiness is, at bottom, Christlikeness &mdash; being conformed to Him. There is a well-loved worship chorus built entirely around a single cry for holiness, and that longing, rightly understood, is a longing for Christ Himself.</p>
+            <p>This changes the whole character of the pursuit. If holiness were a list of actions, we would either grow proud at keeping it or despair at breaking it. But because the goal is a Person, the pursuit of holiness becomes the pursuit of Jesus &mdash; loving Him, beholding Him, growing to resemble Him. We do not chase an abstract standard; we follow a Savior, and as we look to Him, we are changed into His likeness. Holiness is not less than moral seriousness, but it is much more: it is becoming like the One we love.</p>
+
+            <h3>9. Set Apart in This World</h3>
+            <p>What does such holiness look like in everyday life? It looks like being genuinely different &mdash; set apart unto God, with no appetite for the distractions that consume everyone else. Consider John the Baptist, who lived in the wilderness, refused to look or sound like his world, and was wholly set apart unto God, wanting nothing that would pull him from his calling. His life was strange to his neighbors precisely because it was devoted; he was a man marked out for God, and his very difference was his message.</p>
+            <div class="illustration"><strong>Two warnings from the radical life:</strong> First, holiness costs the daily death of self. As Paul said, "I die daily" &mdash; the old nature is crucified afresh each morning, and that ongoing dying to self is how a set-apart life is actually lived. Second, beware of counterfeit holiness. It is possible to build comfortable "holy clubs and temples of comfort" that look religious while remaining utterly conformed to the world's love of ease. True holiness is not religious comfort; it is wholehearted, set-apart devotion to a holy God.</div>
+            <p>So the command stands, and it is not as crushing as it first sounded. To be holy is to be different because God is different; to be set apart because He has set us apart; to be honest that we have not yet arrived, and hopeful because one day we shall be like Him; to rest in the holiness already declared ours in Christ, and to spend our days pursuing the One who is our holiness. And so the deepest longing of the believer, the longing that chorus puts into song, turns out to be a longing for a Person &mdash; and His name is Jesus.</p>
+        </div>
+
+<div class="lang-es">
+            <h3>1. Sed Santos, Porque Yo Soy Santo</h3>
+            <div class="scripture">
+                <strong>1 Pedro 1:15-16 (RVG):</strong> "sino, como aquel que os ha llamado es santo, sed también vosotros santos en toda vuestra manera de vivir; porque escrito está: Sed santos, porque yo soy santo."</div>
+            <p>De todos los mandamientos de Jesús, éste puede sonar el más intimidante, porque parece poner la norma imposiblemente alta: sed santos, como Dios mismo es santo. Sin embargo, Pedro no lo presenta como una carga aplastante sino como el llamado natural de aquellos a quienes Dios ha llamado. La razón que se da no es nuestra capacidad sino el carácter de Dios: <em>porque</em> aquel que nos llamó es santo, hemos de ser santos también. La santidad no es primero algo que generamos; es algo a lo cual nos convoca Aquel que ya es santo y que nos ha reclamado como suyos.</p>
+            <p>Así que antes de poder obedecer este mandamiento, tenemos que entenderlo. ¿Qué significa de veras ser santo? La palabra carga mucho temor y confusión, y muchos la oyen como una exigencia de ser impecables o sombríamente religiosos. La Escritura quiere decir algo a la vez más sencillo y más profundo, y entenderlo bien lo cambia todo en cómo lo buscamos.</p>
+
+            <h3>2. Santo Significa Diferente</h3>
+            <p>En su raíz, la palabra <em>santo</em> significa ser <strong>diferente</strong> &mdash; apartado, distinto, no como lo común de las cosas. Por eso tantas cosas en la Escritura pueden llamarse santas. Dios mismo es santo porque es diferente de todo otro objeto que los hombres hayan adorado jamás; está en una categoría enteramente suya, distinto de todo ídolo y de todo dios rival. La Biblia se llama santa porque está apartada de todos los demás libros, separada por Dios para sus propósitos. Un día, un lugar, un vaso podían llamarse santos en Israel por la misma razón: habían sido apartados del uso ordinario y dedicados a Dios.</p>
+            <p>Ésta es la clave que abre todo el mandamiento. Ser santo no es primero ser impecable o perfecto; es estar <em>apartado</em> &mdash; diferente del mundo, marcado como perteneciente a Dios. Pablo dice lo mismo con otras palabras: no os conforméis a este mundo, sino transformaos, presentándoos como sacrificio vivo, santo y agradable a Dios (Romanos 12:1-2). La santidad es la cualidad de una vida que ya no se mezcla sin más con todo lo que la rodea, porque ha sido reclamada por un Dios que Él mismo es distinto de todo lo que la rodea.</p>
+
+            <h3>3. La Santidad Vista: La Visión de Isaías</h3>
+            <div class="scripture">
+                <strong>Isaías 6:1-3 (RVG):</strong> "En el año que murió el rey Uzías vi yo al Señor sentado sobre un trono alto y sublime, y sus faldas llenaban el templo. Por encima de él había serafines... Y el uno al otro daba voces, diciendo: Santo, santo, santo, Jehová de los ejércitos; toda la tierra está llena de su gloria."</div>
+            <p>La gran ilustración de la santidad en toda la Escritura es la visión que le fue dada a Isaías. Vio al Señor sentado sobre un trono, alto y sublime, y los serafines a su alrededor se daban voces el uno al otro: "Santo, santo, santo, Jehová de los ejércitos; toda la tierra está llena de su gloria." En hebreo, decir algo tres veces es elevarlo al grado más alto posible; los ángeles no llaman a Dios meramente santo, lo nombran santo más allá de toda medida. Ésta es la santidad ya no solo definida sino <em>vista</em> &mdash; la ardiente alteridad de Dios llenando el templo.</p>
+            <p>Y note lo que la visión le hace a Isaías. No se siente inspirado ni consolado; queda deshecho. "¡Ay de mí! que soy muerto; porque siendo hombre inmundo de labios," clama, pues estar ante el Dios santo es saber al instante cuán inmundos somos. La misma verdad nos sale al encuentro por el otro lado en Moisés. Cuando Moisés pidió ver la gloria de Dios, la respuesta fue que no podía ver el rostro de Dios y vivir, pues nadie puede; Dios lo escondió en la hendidura de la peña y lo cubrió con su mano, dejando pasar solo su bondad. En la presencia de la absoluta santidad de Dios, el hombre pecador no puede sostenerse en pie &mdash; queda deshecho, hasta destruido. Pedir ver la gloria es pedir ver la santidad, y sin protección, nos consumiría.</p>
+            <p>Pero ninguna de las dos visiones termina en destrucción. Para Moisés, Dios mismo provee la peña que protege y la mano que cubre; para Isaías, un serafín toma un carbón encendido del altar y toca sus labios, y su culpa es quitada, su pecado purgado. En ambos, el rescate viene del lado de Dios &mdash; la peña, la mano, el altar, el carbón &mdash; nunca de algo que el hombre convoque en sí mismo. Lo mejor que podemos esperar hoy es ver la espalda de Dios, como Moisés: una vista real pero protegida y parcial, nunca todavía el pleno resplandor descubierto de su rostro. Todo el arco de esta unidad ya está presente aquí: la santidad apartada de Dios, nuestra inmundicia expuesta por ella, y una limpieza que recibimos en vez de lograr. Como se ha dicho de una manera, <strong>la gloria es la santidad de Dios revelada, y la santidad es la gloria de Dios oculta</strong> &mdash; la misma perfección divina, ahora resplandeciendo para llenar la tierra, ahora escondida en la callada alteridad del propio carácter de Dios.</p>
+            <p>Y sin embargo, aun ahora, no quedamos sin verle. No vemos a Dios con ojos físicos &mdash; nadie puede, y vivir &mdash; pero de veras le vemos con los ojos del corazón, la vista interior que Dios ilumina en los que son suyos. Ésta no es una visión tenue ni irreal. Un miembro de la iglesia me dijo una vez que Dios se le había vuelto más real que la esposa con quien había estado casado por muchos años. Ésa es la clase de vista que el Dios santo concede a su pueblo aun aquí: todavía no su rostro, sino Él mismo hecho más real al corazón que las cosas que tocamos con las manos. La espalda de Dios ahora, con los ojos del corazón; su rostro descubierto un día, cuando le veremos como Él es.</p>
+
+            <h3>4. Una Nación Santa</h3>
+            <div class="scripture">
+                <strong>1 Pedro 2:9 (RVG):</strong> "Mas vosotros sois linaje escogido, real sacerdocio, nación santa, pueblo adquirido; para que anunciéis las virtudes de aquel que os llamó de las tinieblas a su luz admirable."</div>
+            <p>Pedro pasa a aplicar esto a todo el pueblo de Dios. Somos llamados una <em>nación santa</em> &mdash; un pueblo apartado, su propia posesión especial. La frase misma significa una comunidad que es diferente, llamada fuera de las tinieblas que todos los demás dan por normales y traída a la luz admirable de Dios. La santidad, pues, no es el proyecto privado de unos pocos individuos inusualmente espirituales; es el llamado de todo el pueblo de Dios en conjunto. Pertenecer a Cristo es pertenecer a un pueblo apartado.</p>
+            <p>Esto rescata la santidad de ser un esfuerzo solitario y ansioso. No estamos cada uno tratando de fabricar a solas una vida impecable. Hemos sido traídos a un pueblo que Dios ya ha declarado suyo y apartado para sí mismo, y nuestro llamado es vivir de un modo que corresponda a lo que Dios ya ha dicho que somos. El mandamiento "sed santos" es, en gran medida, el llamado a llegar a ser en la práctica lo que Dios ya nos ha hecho de hecho.</p>
+
+            <h3>5. La Verdad Honesta Sobre la Perfección</h3>
+            <p>Aquí debemos ser honestos, porque es donde entra mucha confusión y desánimo. Hay grupos dentro de la iglesia que llevan el nombre de "santidad," y algunos hasta han enseñado que es posible alcanzar la perfección sin pecado en esta vida. Pero la Biblia en realidad nunca dice eso. La Escritura nos llama a la santidad, nos manda buscarla con todo lo que hay en nosotros, y toma nuestro pecado con mortal seriedad &mdash; pero en ninguna parte promete que llegaremos plenamente en este mundo. El testimonio honesto de todo santo, y de la Escritura misma, es que avanzamos hacia la santidad mientras todavía confesamos pecado y dependemos de la gracia.</p>
+            <p>Esto no es excusa para la pereza espiritual; es una guarda contra dos errores opuestos. De un lado está la desesperación de los que, midiéndose contra la perfección, concluyen que han fracasado y se rinden. Del otro está el orgullo de los que imaginan que ya han llegado y por eso dejan de crecer. La verdad nos mantiene humildes y esperanzados a la vez: somos de veras llamados a ser diferentes, apartados, cada vez más semejantes a nuestro Dios &mdash; y somos honestos en que en esta vida la búsqueda nunca termina.</p>
+
+            <h3>6. Un Día Seremos Semejantes a Él</h3>
+            <div class="scripture">
+                <strong>1 Juan 3:2 (RVG):</strong> "Amados, ahora somos hijos de Dios, y aún no se ha manifestado lo que hemos de ser; pero sabemos que cuando él apareciere, seremos semejantes a él, porque le veremos como él es."</div>
+            <p>Si nunca llegamos plenamente aquí, ¿a dónde lleva la búsqueda de la santidad? La Escritura da una respuesta asombrosa: un día le veremos como Él es, y seremos semejantes a Él. La santidad que ahora alcanzamos en parte un día será nuestra por completo, no por nuestro propio logro sino por la vista transformadora de Cristo mismo. Lo que no podemos terminar, Él lo terminará en nosotros. El versículo siguiente añade que todo aquel que tiene esta esperanza en Él se purifica a sí mismo, así como Él es puro &mdash; de modo que la certeza de la santidad futura no es excusa para holgazanear ahora sino el gran motivo para seguir buscándola.</p>
+            <p>Ésta es la esperanza que hace soportable la admisión honesta de la sección cuatro. No buscamos la santidad en desesperación, como si todo dependiera de que alcancemos la perfección por nuestra propia fuerza. La buscamos con confianza, sabiendo que Aquel que nos llamó santos un día nos hará plenamente semejantes a Él mismo.</p>
+
+            <h3>7. Santos: Declarados Santos en el Tribunal de Dios</h3>
+            <p>Por esto también el Nuevo Testamento puede llamar "santos" a creyentes ordinarios &mdash; literalmente, "los santos." Los santos de la Escritura no eran una clase especial de personas canonizadas por la iglesia por vidas extraordinarias. Eran creyentes ordinarios que habían sido <em>declarados</em> santos porque Jesús había muerto por sus pecados. Todo cristiano, por débil que sea, es un santo en este sentido, porque la santidad en su primer y más hondo sentido es un don que Dios concede, no un estatus que ganamos.</p>
+            <p>La palabra legal para esto es justificación, y ayuda imaginar un tribunal. Ser justificado es ser declarado libre ante el banquillo del juicio de Dios. Pero note con cuidado <em>por qué</em> el veredicto es "libre." No es porque se nos halle inocentes &mdash; no somos inocentes, y Dios no finge lo contrario. Es porque la pena por nuestra culpa ya ha sido pagada por completo por Cristo. El Juez puede declararnos libres con justicia porque la justicia ha sido satisfecha en la cruz. Así que comenzamos la vida cristiana ya declarados santos en Cristo, y solo entonces somos convocados a vivir, día tras día, la santidad que se nos ha acreditado.</p>
+
+            <h3>8. La Meta Es una Persona, No una Acción</h3>
+            <p>Esto nos lleva al corazón del asunto, y es fácil pasarlo por alto. Cuando oímos "sed santos," instintivamente lo convertimos en una lista de acciones que realizar y pecados que evitar. Pero la meta de la santidad no es al final una acción en absoluto. La meta es una <em>Persona</em>, y la Persona es Jesucristo. Nos esforzamos por ser santos como Él fue santo; la santidad es, en el fondo, la semejanza a Cristo &mdash; ser conformados a Él. Hay un querido coro de adoración construido enteramente en torno a un solo clamor por la santidad, y ese anhelo, bien entendido, es un anhelo de Cristo mismo.</p>
+            <p>Esto cambia todo el carácter de la búsqueda. Si la santidad fuera una lista de acciones, o nos enorgulleceríamos al guardarla o nos desesperaríamos al quebrantarla. Pero como la meta es una Persona, la búsqueda de la santidad se vuelve la búsqueda de Jesús &mdash; amarlo, contemplarlo, crecer hasta parecernos a Él. No perseguimos una norma abstracta; seguimos a un Salvador, y al mirarlo a Él, somos transformados a su semejanza. La santidad no es menos que seriedad moral, pero es mucho más: es llegar a ser como Aquel a quien amamos.</p>
+
+            <h3>9. Apartados en Este Mundo</h3>
+            <p>¿Cómo se ve tal santidad en la vida diaria? Se ve como ser genuinamente diferente &mdash; apartado para Dios, sin apetito por las distracciones que consumen a todos los demás. Considere a Juan el Bautista, que vivió en el desierto, se negó a verse o sonar como su mundo, y estaba enteramente apartado para Dios, sin querer nada que lo apartara de su llamado. Su vida era extraña a sus vecinos precisamente porque era consagrada; era un hombre marcado para Dios, y su misma diferencia era su mensaje.</p>
+            <div class="illustration"><strong>Dos advertencias de la vida radical:</strong> Primera, la santidad cuesta la muerte diaria del yo. Como dijo Pablo: "cada día muero" &mdash; la vieja naturaleza es crucificada de nuevo cada mañana, y ese morir continuo al yo es como se vive de veras una vida apartada. Segunda, cuídese de la santidad falsificada. Es posible construir cómodos "clubes santos y templos de comodidad" que parecen religiosos mientras siguen enteramente conformados al amor del mundo por la comodidad. La verdadera santidad no es comodidad religiosa; es devoción apartada y de todo corazón a un Dios santo.</div>
+            <p>Así que el mandamiento permanece, y no es tan aplastante como sonó al principio. Ser santo es ser diferente porque Dios es diferente; ser apartado porque Él nos ha apartado; ser honestos en que aún no hemos llegado, y esperanzados porque un día seremos semejantes a Él; descansar en la santidad ya declarada nuestra en Cristo, y pasar nuestros días buscando a Aquel que es nuestra santidad. Y así el anhelo más profundo del creyente, el anhelo que ese coro pone en canto, resulta ser un anhelo de una Persona &mdash; y su nombre es Jesús.</p>
+        </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="mcBankedNotice" class="feedback-text correct" style="display:none;"></div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 15px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+    </div>
+    <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+
+</div>
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+// =====================================================================
+// CTS Radical Christianity — Unit 5 (Psalms engine; Be Holy)
+// cts_radical_ namespace; three-track grading (Cert / M.Div. / Th.M.);
+// MC-pass persists; SA-only lockout on partial fail; split kw_en/kw_es;
+// per-question model-answer reveal; Reset; 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 5;
+const COURSE = 'radical';
+const NEXT_UNIT_URL = 'CTSRadicalUnit6.html';
+const totalUnits = 13;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(lsGet('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - Foundation: Old Wineskins, New Wine",
+    "Unit 2 - What Jesus Did With the Law",
+    "Unit 3 - Love God",
+    "Unit 4 - Love Neighbor",
+    "Unit 5 - Be Holy",
+    "Unit 6 - Be Forgiving",
+    "Unit 7 - Be Humble",
+    "Unit 8 - Be Generous",
+    "Unit 9 - Trust God",
+    "Unit 10 - Be Prayerful",
+    "Unit 11 - Be Kind",
+    "Unit 12 - Be a Disciplemaker",
+    "Unit 13 - Capstone: Turning the World Upside Down"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSRadicalUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    lsSet('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+
+// MC answer key distribution audited: A=B=C=D=5 (cycle 0,1,2,3 x5)
+// MC + SA verified against Unit 5 (Be Holy)
+const mcQuestions = [
+    { textEn: "1. In 1 Peter 1:15-16, on what basis are we commanded to be holy?", textEs: "1. En 1 Pedro 1:15-16, ¿sobre qué base se nos manda ser santos?",
+      optionsEn: ["To earn our salvation", "On our own ability to keep the law", "Because the church requires it", "Because He who called us is holy"],
+      optionsEs: ["Para ganar nuestra salvación", "Sobre nuestra propia capacidad de guardar la ley", "Porque la iglesia lo exige", "Porque aquel que nos llamó es santo"],
+      explanationEn: "The reason given is God's character, not our ability: because He who called us is holy, we are to be holy too.", explanationEs: "La razón dada es el carácter de Dios, no nuestra capacidad: porque aquel que nos llamó es santo, hemos de ser santos también.", correct: 3 },
+    { textEn: "2. According to the lesson, what does the word 'holy' mean at its root?", textEs: "2. Según la lección, ¿qué significa la palabra 'santo' en su raíz?",
+      optionsEn: ["Flawless and sinless", "Religious and serious", "Different — set apart, distinct", "Ancient and sacred"],
+      optionsEs: ["Impecable y sin pecado", "Religioso y serio", "Diferente — apartado, distinto", "Antiguo y sagrado"],
+      explanationEn: "At root, holy means to be different — set apart, distinct, not like the common run of things.", explanationEs: "En su raíz, santo significa ser diferente — apartado, distinto, no como lo común de las cosas.", correct: 2 },
+    { textEn: "3. Why is God said to be holy?", textEs: "3. ¿Por qué se dice que Dios es santo?",
+      optionsEn: ["Because He is very old", "Because He is different from every other object men have worshiped", "Because He lives in heaven", "Because He made many rules"],
+      optionsEs: ["Porque es muy antiguo", "Porque es diferente de todo otro objeto que los hombres han adorado", "Porque vive en el cielo", "Porque hizo muchas reglas"],
+      explanationEn: "God is holy because He is different from every other object of worship — in a category entirely His own, unlike every idol.", explanationEs: "Dios es santo porque es diferente de todo otro objeto de adoración — en una categoría enteramente suya, distinto de todo ídolo.", correct: 1 },
+    { textEn: "4. Why is the Bible called holy, according to the lesson?", textEs: "4. ¿Por qué se llama santa la Biblia, según la lección?",
+      optionsEn: ["Because it stands apart from all other books, set apart by God", "Because it is hard to read", "Because priests wrote it", "Because it is very long"],
+      optionsEs: ["Porque está apartada de todos los demás libros, separada por Dios", "Porque es difícil de leer", "Porque la escribieron sacerdotes", "Porque es muy larga"],
+      explanationEn: "The Bible is holy because it stands apart from all other books, set apart by God for His purposes.", explanationEs: "La Biblia es santa porque está apartada de todos los demás libros, separada por Dios para sus propósitos.", correct: 0 },
+    { textEn: "5. How does Romans 12:1-2 express the same idea of holiness?", textEs: "5. ¿Cómo expresa Romanos 12:1-2 la misma idea de santidad?",
+      optionsEn: ["Attend worship weekly", "Keep all 613 commandments", "Do not be conformed to this world, but be transformed — a living sacrifice", "Give a tithe of everything"],
+      optionsEs: ["Asistir al culto cada semana", "Guardar los 613 mandamientos", "No conformarse a este mundo, sino transformarse — un sacrificio vivo", "Dar el diezmo de todo"],
+      explanationEn: "Paul says do not be conformed to this world but be transformed, presenting yourselves a living sacrifice — holiness as being set apart.", explanationEs: "Pablo dice no os conforméis a este mundo sino transformaos, presentándoos sacrificio vivo — la santidad como estar apartado.", correct: 2 },
+    { textEn: "6. What does it mean that we are called a 'holy nation' (1 Peter 2:9)?", textEs: "6. ¿Qué significa que somos llamados una 'nación santa' (1 Pedro 2:9)?",
+      optionsEn: ["The whole people of God is set apart, called out of darkness into light", "Only a few spiritual individuals are holy", "Holiness is a private project", "Only clergy are holy"],
+      optionsEs: ["Todo el pueblo de Dios está apartado, llamado de las tinieblas a la luz", "Solo unos pocos individuos espirituales son santos", "La santidad es un proyecto privado", "Solo el clero es santo"],
+      explanationEn: "Holiness is the calling of the whole people of God together — a set-apart nation called out of darkness into His marvelous light.", explanationEs: "La santidad es el llamado de todo el pueblo de Dios en conjunto — una nación apartada llamada de las tinieblas a su luz admirable.", correct: 0 },
+    { textEn: "7. The lesson says the command 'be holy' is largely a call to do what?", textEs: "7. La lección dice que el mandamiento 'sed santos' es en gran medida un llamado a ¿qué?",
+      optionsEn: ["Earn a status we do not yet have", "Become in practice what God has already made us in fact", "Separate from all other believers", "Achieve sinless perfection"],
+      optionsEs: ["Ganar un estatus que aún no tenemos", "Llegar a ser en la práctica lo que Dios ya nos ha hecho de hecho", "Separarnos de todos los demás creyentes", "Alcanzar la perfección sin pecado"],
+      explanationEn: "We live out what God has already declared us to be: the command is to become in practice the set-apart people God has already made us.", explanationEs: "Vivimos lo que Dios ya ha declarado que somos: el mandamiento es llegar a ser en la práctica el pueblo apartado que Dios ya nos ha hecho.", correct: 1 },
+    { textEn: "8. What does the lesson say about reaching sinless perfection in this life?", textEs: "8. ¿Qué dice la lección sobre alcanzar la perfección sin pecado en esta vida?",
+      optionsEn: ["The Bible promises it to the faithful", "It is easy for mature believers", "It happens at baptism", "The Bible never says we fully arrive in this world"],
+      optionsEs: ["La Biblia se la promete a los fieles", "Es fácil para los creyentes maduros", "Sucede en el bautismo", "La Biblia nunca dice que llegamos plenamente en este mundo"],
+      explanationEn: "Some 'holiness' groups teach sinless perfection, but the Bible never says we fully arrive here; we pursue holiness while still confessing sin.", explanationEs: "Algunos grupos de 'santidad' enseñan la perfección sin pecado, pero la Biblia nunca dice que llegamos plenamente aquí; la buscamos mientras confesamos pecado.", correct: 3 },
+    { textEn: "9. The honest truth about perfection guards against which two errors?", textEs: "9. La verdad honesta sobre la perfección protege contra ¿cuáles dos errores?",
+      optionsEn: ["Despair at failing, and pride at imagining one has arrived", "Wealth and poverty", "Fasting and feasting", "Silence and noise"],
+      optionsEs: ["La desesperación por fracasar, y el orgullo de creer que uno ha llegado", "Riqueza y pobreza", "Ayunar y festejar", "Silencio y ruido"],
+      explanationEn: "It guards against despair (giving up because we fall short of perfection) and pride (imagining we have arrived and ceasing to grow).", explanationEs: "Protege contra la desesperación (rendirse por no alcanzar la perfección) y el orgullo (creer que hemos llegado y dejar de crecer).", correct: 0 },
+    { textEn: "10. According to 1 John 3:2, what is the future hope of holiness?", textEs: "10. Según 1 Juan 3:2, ¿cuál es la esperanza futura de la santidad?",
+      optionsEn: ["We will earn perfection by effort", "We will forget our past sins", "We shall see Him as He is and shall be like Him", "We will judge the world"],
+      optionsEs: ["Ganaremos la perfección con esfuerzo", "Olvidaremos nuestros pecados pasados", "Le veremos como Él es y seremos semejantes a Él", "Juzgaremos al mundo"],
+      explanationEn: "One day we shall see Him as He is and be like Him — the holiness we reach for in part will be ours completely, by His transforming work.", explanationEs: "Un día le veremos como Él es y seremos semejantes a Él — la santidad que alcanzamos en parte será nuestra por completo, por su obra transformadora.", correct: 2 },
+    { textEn: "11. In Isaiah's vision (Isaiah 6), what did the seraphim cry, and what did the sight do to Isaiah?", textEs: "11. En la visión de Isaías (Isaías 6), ¿qué clamaban los serafines, y qué le hizo a Isaías ver aquello?",
+      optionsEn: ["'Glory to the King' — and Isaiah rejoiced", "'Peace, peace' — and Isaiah slept", "'Mercy, mercy' — and Isaiah fled", "'Holy, holy, holy' — and Isaiah was undone, crying he was a man of unclean lips"],
+      optionsEs: ["'Gloria al Rey' — e Isaías se regocijó", "'Paz, paz' — e Isaías durmió", "'Misericordia, misericordia' — e Isaías huyó", "'Santo, santo, santo' — e Isaías quedó deshecho, clamando que era hombre inmundo de labios"],
+      explanationEn: "The seraphim cried 'Holy, holy, holy,' and seeing the holy God, Isaiah was undone — 'Woe is me, I am a man of unclean lips' — then cleansed by a coal from the altar.", explanationEs: "Los serafines clamaban 'Santo, santo, santo,' y al ver al Dios santo, Isaías quedó deshecho — '¡Ay de mí! soy hombre inmundo de labios' — luego limpiado por un carbón del altar.", correct: 3 },
+    { textEn: "12. In the New Testament, who are the 'saints'?", textEs: "12. En el Nuevo Testamento, ¿quiénes son los 'santos'?",
+      optionsEn: ["People canonized by the church for extraordinary lives", "Ordinary believers declared holy because Jesus died for their sins", "Those who reached perfection", "Only the apostles"],
+      optionsEs: ["Personas canonizadas por la iglesia por vidas extraordinarias", "Creyentes ordinarios declarados santos porque Jesús murió por sus pecados", "Los que alcanzaron la perfección", "Solo los apóstoles"],
+      explanationEn: "Saints are not a canonized elite but ordinary believers declared holy because Jesus died for their sins — every Christian is a saint.", explanationEs: "Los santos no son una élite canonizada sino creyentes ordinarios declarados santos porque Jesús murió por sus pecados — todo cristiano es santo.", correct: 1 },
+    { textEn: "13. In the courtroom picture, why does God declare the believer 'free'?", textEs: "13. En la imagen del tribunal, ¿por qué declara Dios 'libre' al creyente?",
+      optionsEn: ["Because the believer promised to do better", "Because the believer is found innocent", "Because God overlooks sin", "Because the penalty for our guilt has already been paid by Christ"],
+      optionsEs: ["Porque el creyente prometió mejorar", "Porque se halla inocente al creyente", "Porque Dios pasa por alto el pecado", "Porque la pena por nuestra culpa ya fue pagada por Cristo"],
+      explanationEn: "We are declared free not because we are innocent — we are not — but because Christ has already paid the penalty; justice was satisfied at the cross.", explanationEs: "Somos declarados libres no porque seamos inocentes — no lo somos — sino porque Cristo ya pagó la pena; la justicia fue satisfecha en la cruz.", correct: 3 },
+    { textEn: "14. What is the relationship between justification and living a holy life?", textEs: "14. ¿Cuál es la relación entre la justificación y vivir una vida santa?",
+      optionsEn: ["We earn justification by living holy first", "They are unrelated", "We begin already declared holy in Christ, then live out that holiness day by day", "Holiness replaces justification"],
+      optionsEs: ["Ganamos la justificación viviendo santos primero", "No tienen relación", "Comenzamos ya declarados santos en Cristo, luego vivimos esa santidad día a día", "La santidad reemplaza la justificación"],
+      explanationEn: "Holiness is first a gift: we begin already declared holy in Christ, and only then are summoned to live out that holiness day by day.", explanationEs: "La santidad es primero un don: comenzamos ya declarados santos en Cristo, y solo entonces somos convocados a vivir esa santidad día a día.", correct: 2 },
+    { textEn: "15. According to the lesson, what is the real goal of holiness?", textEs: "15. Según la lección, ¿cuál es la verdadera meta de la santidad?",
+      optionsEn: ["A checklist of actions to perform", "A Person — Jesus Christ; holiness is Christlikeness", "A feeling of peace", "A reputation in the church"],
+      optionsEs: ["Una lista de acciones que realizar", "Una Persona — Jesucristo; la santidad es semejanza a Cristo", "Un sentimiento de paz", "Una reputación en la iglesia"],
+      explanationEn: "The goal of holiness is not finally an action but a Person, Jesus Christ; holiness is at bottom Christlikeness, being conformed to Him.", explanationEs: "La meta de la santidad no es al final una acción sino una Persona, Jesucristo; la santidad es en el fondo semejanza a Cristo, ser conformados a Él.", correct: 1 },
+    { textEn: "16. Why does it matter that the goal is a Person rather than a list of actions?", textEs: "16. ¿Por qué importa que la meta sea una Persona y no una lista de acciones?",
+      optionsEn: ["The pursuit becomes following Jesus and being changed into His likeness, not pride or despair over a checklist", "It removes all moral seriousness", "It means effort is useless", "It makes holiness optional"],
+      optionsEs: ["La búsqueda se vuelve seguir a Jesús y ser transformado a su semejanza, no orgullo ni desesperación por una lista", "Quita toda seriedad moral", "Significa que el esfuerzo es inútil", "Hace la santidad opcional"],
+      explanationEn: "Because the goal is a Person, pursuing holiness means pursuing Jesus — loving and beholding Him until we resemble Him — not proud or despairing list-keeping.", explanationEs: "Como la meta es una Persona, buscar la santidad es buscar a Jesús — amarlo y contemplarlo hasta parecernos a Él — no guardar una lista con orgullo o desesperación.", correct: 0 },
+    { textEn: "17. How does John the Baptist illustrate holiness as being 'set apart'?", textEs: "17. ¿Cómo ilustra Juan el Bautista la santidad como estar 'apartado'?",
+      optionsEn: ["He blended in with his world", "He lived wholly set apart unto God, wanting no distractions, and his difference was his message", "He sought comfort and ease", "He avoided all preaching"],
+      optionsEs: ["Se mezclaba con su mundo", "Vivió enteramente apartado para Dios, sin querer distracciones, y su diferencia era su mensaje", "Buscaba comodidad y descanso", "Evitaba toda predicación"],
+      explanationEn: "John lived in the wilderness, refused to look or sound like his world, and was wholly set apart unto God — his very difference was his message.", explanationEs: "Juan vivió en el desierto, se negó a verse o sonar como su mundo, y estaba enteramente apartado para Dios — su misma diferencia era su mensaje.", correct: 1 },
+    { textEn: "18. What does the lesson mean by holiness costing 'the daily death of self'?", textEs: "18. ¿Qué quiere decir la lección con que la santidad cuesta 'la muerte diaria del yo'?",
+      optionsEn: ["A one-time decision at conversion", "Withdrawing from society", "Physical fasting only", "The old nature is crucified afresh each day, as Paul said 'I die daily'"],
+      optionsEs: ["Una decisión única en la conversión", "Retirarse de la sociedad", "Solo ayuno físico", "La vieja naturaleza es crucificada de nuevo cada día, como dijo Pablo 'cada día muero'"],
+      explanationEn: "Holiness involves daily dying to self: as Paul said, 'I die daily' — the old nature is crucified afresh each morning.", explanationEs: "La santidad implica morir diariamente al yo: como dijo Pablo, 'cada día muero' — la vieja naturaleza es crucificada de nuevo cada mañana.", correct: 3 },
+    { textEn: "19. What is the 'counterfeit holiness' the lesson warns against?", textEs: "19. ¿Cuál es la 'santidad falsificada' contra la que advierte la lección?",
+      optionsEn: ["Comfortable 'holy clubs and temples of comfort' that look religious but stay conformed to the world's love of ease", "Praying too long", "Helping the poor too much", "Reading too much Scripture"],
+      optionsEs: ["Cómodos 'clubes santos y templos de comodidad' que parecen religiosos pero siguen conformados al amor del mundo por la comodidad", "Orar demasiado", "Ayudar demasiado a los pobres", "Leer demasiado la Escritura"],
+      explanationEn: "Counterfeit holiness builds comfortable 'holy clubs and temples of comfort' that look religious while remaining conformed to the world's love of ease.", explanationEs: "La santidad falsificada construye cómodos 'clubes santos y templos de comodidad' que parecen religiosos pero siguen conformados al amor del mundo por la comodidad.", correct: 0 },
+    { textEn: "20. How does the lesson finally make the command 'be holy' less crushing?", textEs: "20. ¿Cómo hace la lección que el mandamiento 'sed santos' sea finalmente menos aplastante?",
+      optionsEn: ["By lowering God's standard", "By making it optional", "By grounding it in God's character, future likeness, holiness already declared in Christ, and pursuit of a Person", "By removing the command entirely"],
+      optionsEs: ["Bajando la norma de Dios", "Haciéndolo opcional", "Fundándolo en el carácter de Dios, la semejanza futura, la santidad ya declarada en Cristo, y la búsqueda de una Persona", "Quitando el mandamiento por completo"],
+      explanationEn: "Be holy because God is different, He set us apart, one day we shall be like Him, holiness is already declared ours in Christ, and we pursue the Person who is our holiness.", explanationEs: "Sed santos porque Dios es diferente, Él nos apartó, un día seremos como Él, la santidad ya es nuestra en Cristo, y buscamos a la Persona que es nuestra santidad.", correct: 2 }
+];
+
+const kwQuestions = [
+    { textEn: "21. On what basis does 1 Peter 1:15-16 command us to be holy, and why is that significant?",
+      textEs: "21. ¿Sobre qué base nos manda 1 Pedro 1:15-16 ser santos, y por qué es significativo?",
+      kw_en: ["called", "holy", "character", "God", "ability", "summoned", "conduct", "His own"],
+      kw_es: ["llamó", "santo", "carácter", "Dios", "capacidad", "convoca", "conducta", "suyos"],
+      modelEn: "Peter commands us to be holy in all our conduct, and the basis he gives is not our own ability but the character of God: because He who called us is holy, we are to be holy too. This is significant because it means holiness is not first something we generate by effort. It is something we are summoned into by the One who is already holy and who has claimed us as His own. The command flows from God's nature and His prior call, so it comes to us as the natural calling of those God has called, not as a crushing burden we must somehow shoulder alone. Holiness begins with who God is and what He has already made us.",
+      modelEs: "Pedro nos manda ser santos en toda nuestra manera de vivir, y la base que da no es nuestra propia capacidad sino el carácter de Dios: porque aquel que nos llamó es santo, hemos de ser santos también. Esto es significativo porque significa que la santidad no es primero algo que generamos con esfuerzo. Es algo a lo cual nos convoca Aquel que ya es santo y que nos ha reclamado como suyos. El mandamiento brota de la naturaleza de Dios y de su llamado previo, así que nos llega como el llamado natural de los que Dios ha llamado, no como una carga aplastante que debamos cargar solos. La santidad comienza con quién es Dios y con lo que Él ya nos ha hecho." },
+    { textEn: "22. What does the word 'holy' mean at its root, and how do God and the Bible illustrate it?",
+      textEs: "22. ¿Qué significa la palabra 'santo' en su raíz, y cómo lo ilustran Dios y la Biblia?",
+      kw_en: ["different", "set apart", "distinct", "God", "worshiped", "Bible", "books", "conformed"],
+      kw_es: ["diferente", "apartado", "distinto", "Dios", "adorado", "Biblia", "libros", "conforméis"],
+      modelEn: "At its root the word holy means to be different, set apart, distinct, not like the common run of things. God Himself is holy because He is different from every other object men have ever worshiped, in a category entirely His own, unlike every idol and rival god. The Bible is called holy because it stands apart from all other books, set apart by God for His purposes, and a day or place or vessel could be holy in the same way, set apart from ordinary use and devoted to God. So to be holy is not first to be sinless but to be set apart, marked out as belonging to God. Paul says the same when he tells us not to be conformed to this world but transformed, a living sacrifice holy and acceptable to God.",
+      modelEs: "En su raíz la palabra santo significa ser diferente, apartado, distinto, no como lo común de las cosas. Dios mismo es santo porque es diferente de todo otro objeto que los hombres han adorado, en una categoría enteramente suya, distinto de todo ídolo y dios rival. La Biblia se llama santa porque está apartada de todos los demás libros, separada por Dios para sus propósitos, y un día o lugar o vaso podía ser santo del mismo modo, apartado del uso ordinario y dedicado a Dios. Así que ser santo no es primero ser impecable sino estar apartado, marcado como perteneciente a Dios. Pablo dice lo mismo cuando nos dice que no nos conformemos a este mundo sino que nos transformemos, un sacrificio vivo santo y agradable a Dios." },
+    { textEn: "23. Explain the vision of Isaiah 6 and what it reveals about holiness and our condition.",
+      textEs: "23. Explique la visión de Isaías 6 y qué revela sobre la santidad y nuestra condición.",
+      kw_en: ["Isaiah", "throne", "seraphim", "holy", "undone", "unclean", "coal", "altar"],
+      kw_es: ["Isaías", "trono", "serafines", "santo", "deshecho", "inmundo", "carbón", "altar"],
+      modelEn: "The great illustration of holiness is Isaiah's vision. He saw the Lord on a throne, high and lifted up, and the seraphim cried to one another, Holy, holy, holy is the LORD of hosts, the whole earth is full of His glory. Saying a thing three times in Hebrew raises it to the highest degree, so the angels name God holy beyond all measure. This is holiness not merely defined but seen, and the sight undoes Isaiah: Woe is me, for I am undone, because I am a man of unclean lips, for to stand before the holy God is to know how unholy we are. Yet the vision does not end in despair, for a seraph takes a live coal from the altar and touches his lips, and his guilt is taken away. The cleansing comes from God's side, not from anything Isaiah summons in himself.",
+      modelEs: "La gran ilustración de la santidad es la visión de Isaías. Vio al Señor sobre un trono, alto y sublime, y los serafines se daban voces el uno al otro, Santo, santo, santo, Jehová de los ejércitos, toda la tierra está llena de su gloria. Decir algo tres veces en hebreo lo eleva al grado más alto, así que los ángeles nombran a Dios santo más allá de toda medida. Ésta es la santidad no solo definida sino vista, y la vista deshace a Isaías: Ay de mí, que soy muerto, porque siendo hombre inmundo de labios, pues estar ante el Dios santo es saber cuán inmundos somos. Pero la visión no termina en desesperación, pues un serafín toma un carbón encendido del altar y toca sus labios, y su culpa es quitada. La limpieza viene del lado de Dios, no de algo que Isaías convoque en sí mismo." },
+    { textEn: "24. How does Moses asking to see God's glory deepen the lesson, and what can we see today?",
+      textEs: "24. ¿Cómo profundiza la lección que Moisés pidiera ver la gloria de Dios, y qué podemos ver hoy?",
+      kw_en: ["Moses", "glory", "face", "destroyed", "rock", "backside", "eyes of the heart", "real"],
+      kw_es: ["Moisés", "gloria", "rostro", "destruido", "peña", "espalda", "ojos del corazón", "real"],
+      modelEn: "The same truth meets us in Moses, who asked to see God's glory and was told he could not see God's face and live, for in the presence of the absolute holiness of God sinful man is destroyed. God hid Moses in the cleft of the rock and covered him with His hand, letting only His goodness pass, so that the best Moses could see was the backside of God, a real but shielded and partial sight. To ask to see the glory is to ask to see the holiness, which unshielded would consume us. Yet we are not left without sight of Him, for we see God now with the eyes of the heart rather than physical eyes. This is no faint seeing; a church member once told the pastor that God had become more real to him than the wife he had been married to for many years.",
+      modelEs: "La misma verdad nos sale al encuentro en Moisés, que pidió ver la gloria de Dios y se le dijo que no podía ver el rostro de Dios y vivir, pues en la presencia de la absoluta santidad de Dios el hombre pecador es destruido. Dios escondió a Moisés en la hendidura de la peña y lo cubrió con su mano, dejando pasar solo su bondad, de modo que lo mejor que Moisés pudo ver fue la espalda de Dios, una vista real pero protegida y parcial. Pedir ver la gloria es pedir ver la santidad, que sin protección nos consumiría. Pero no quedamos sin verle, pues vemos a Dios ahora con los ojos del corazón y no con ojos físicos. Ésta no es una visión tenue; un miembro de la iglesia le dijo una vez al pastor que Dios se le había vuelto más real que la esposa con quien había estado casado por muchos años." },
+    { textEn: "25. What does it mean that we are a 'holy nation' (1 Peter 2:9), and how does that rescue holiness from anxious striving?",
+      textEs: "25. ¿Qué significa que somos una 'nación santa' (1 Pedro 2:9), y cómo rescata eso la santidad del esfuerzo ansioso?",
+      kw_en: ["holy nation", "set apart", "darkness", "light", "people", "together", "declared", "practice"],
+      kw_es: ["nación santa", "apartado", "tinieblas", "luz", "pueblo", "conjunto", "declarado", "práctica"],
+      modelEn: "Peter calls the whole people of God a holy nation, His own special possession, a community set apart and called out of the darkness everyone else takes for normal into God's marvelous light. This means holiness is not the private project of a few unusually spiritual individuals but the calling of the entire people of God together. That rescues holiness from being a lonely, anxious striving, because we are not each trying single-handedly to manufacture a flawless life. We have already been brought into a people God has declared His own and set apart for Himself, and our task is to live in a way that matches what God has already said we are. The command to be holy is largely the call to become in practice what God has already made us in fact.",
+      modelEs: "Pedro llama a todo el pueblo de Dios una nación santa, su propia posesión especial, una comunidad apartada y llamada fuera de las tinieblas que todos los demás dan por normales a la luz admirable de Dios. Esto significa que la santidad no es el proyecto privado de unos pocos individuos inusualmente espirituales sino el llamado de todo el pueblo de Dios en conjunto. Eso rescata la santidad de ser un esfuerzo solitario y ansioso, porque no estamos cada uno tratando de fabricar a solas una vida impecable. Ya hemos sido traídos a un pueblo que Dios ha declarado suyo y apartado para sí mismo, y nuestra tarea es vivir de un modo que corresponda a lo que Dios ya ha dicho que somos. El mandamiento de ser santos es en gran medida el llamado a llegar a ser en la práctica lo que Dios ya nos ha hecho de hecho." },
+    { textEn: "26. What does the lesson say honestly about sinless perfection, and what two errors does that guard against?",
+      textEs: "26. ¿Qué dice honestamente la lección sobre la perfección sin pecado, y contra qué dos errores protege eso?",
+      kw_en: ["perfection", "never", "arrive", "confessing", "despair", "pride", "humble", "hopeful"],
+      kw_es: ["perfección", "nunca", "llegar", "confesar", "desesperación", "orgullo", "humilde", "esperanzado"],
+      modelEn: "Some groups in the church are called holiness groups, and some have taught that sinless perfection is possible in this life, but the Bible never actually says that. Scripture calls us to holiness and takes sin with deadly seriousness, yet nowhere promises we fully arrive in this world; the honest testimony is that we press toward holiness while still confessing sin and depending on grace. This truth guards against two opposite errors. On one side is the despair of those who measure themselves against perfection, conclude they have failed, and give up. On the other is the pride of those who imagine they have already arrived and so stop growing. The truth keeps us both humble and hopeful, genuinely called to be set apart and increasingly like God, while honest that the pursuit is never finished here.",
+      modelEs: "Algunos grupos en la iglesia se llaman grupos de santidad, y algunos han enseñado que la perfección sin pecado es posible en esta vida, pero la Biblia en realidad nunca dice eso. La Escritura nos llama a la santidad y toma el pecado con mortal seriedad, pero en ninguna parte promete que llegamos plenamente en este mundo; el testimonio honesto es que avanzamos hacia la santidad mientras todavía confesamos pecado y dependemos de la gracia. Esta verdad protege contra dos errores opuestos. De un lado está la desesperación de los que se miden contra la perfección, concluyen que han fracasado, y se rinden. Del otro está el orgullo de los que imaginan que ya han llegado y por eso dejan de crecer. La verdad nos mantiene humildes y esperanzados a la vez, de veras llamados a ser apartados y cada vez más semejantes a Dios, pero honestos en que la búsqueda nunca termina aquí." },
+    { textEn: "27. According to 1 John 3:2-3, what is the future hope of holiness, and how should it affect us now?",
+      textEs: "27. Según 1 Juan 3:2-3, ¿cuál es la esperanza futura de la santidad, y cómo debe afectarnos ahora?",
+      kw_en: ["see Him", "like Him", "future", "transforming", "purifies", "hope", "confidence", "pursue"],
+      kw_es: ["verle", "semejantes", "futura", "transformadora", "purifica", "esperanza", "confianza", "buscar"],
+      modelEn: "If we never fully arrive here, Scripture still gives a breathtaking answer about where the pursuit leads: one day we shall see Him as He is, and we shall be like Him. The holiness we reach for now in part will one day be ours completely, not by our own achievement but by the transforming sight of Christ Himself; what we cannot finish, He will finish in us. The very next verse adds that everyone who has this hope in Him purifies himself, just as He is pure, so the certainty of future holiness is not an excuse to coast but the great motive to pursue it now. This hope lets us pursue holiness in confidence rather than despair, knowing the One who called us holy will one day make us fully like Himself.",
+      modelEs: "Si nunca llegamos plenamente aquí, la Escritura aún da una respuesta asombrosa sobre a dónde lleva la búsqueda: un día le veremos como Él es, y seremos semejantes a Él. La santidad que ahora alcanzamos en parte un día será nuestra por completo, no por nuestro propio logro sino por la vista transformadora de Cristo mismo; lo que no podemos terminar, Él lo terminará en nosotros. El versículo siguiente añade que todo el que tiene esta esperanza en Él se purifica a sí mismo, así como Él es puro, de modo que la certeza de la santidad futura no es excusa para holgazanear sino el gran motivo para buscarla ahora. Esta esperanza nos deja buscar la santidad con confianza en vez de desesperación, sabiendo que Aquel que nos llamó santos un día nos hará plenamente semejantes a Él." },
+    { textEn: "28. Who are the 'saints,' and how does the courtroom picture of justification explain our holiness?",
+      textEs: "28. ¿Quiénes son los 'santos,' y cómo explica la imagen del tribunal de la justificación nuestra santidad?",
+      kw_en: ["saints", "declared", "canonized", "justified", "courtroom", "innocent", "penalty", "paid"],
+      kw_es: ["santos", "declarados", "canonizados", "justificado", "tribunal", "inocentes", "pena", "pagada"],
+      modelEn: "The New Testament calls ordinary believers saints, literally holy ones. They were not a special class canonized by the church for extraordinary lives but ordinary believers declared holy because Jesus had died for their sins, so every Christian, however weak, is a saint, since holiness in its deepest sense is a gift God grants rather than a status we earn. The legal word is justification, best pictured as a courtroom. To be justified is to be declared free before God's bar of judgment, but the verdict is free not because we are found innocent, for we are not, but because the penalty for our guilt has already been paid in full by Christ. The Judge can righteously declare us free because justice was satisfied at the cross, so we begin already declared holy in Christ and only then live it out day by day.",
+      modelEs: "El Nuevo Testamento llama santos a creyentes ordinarios, literalmente los santos. No eran una clase especial canonizada por la iglesia por vidas extraordinarias sino creyentes ordinarios declarados santos porque Jesús había muerto por sus pecados, así que todo cristiano, por débil que sea, es un santo, pues la santidad en su sentido más hondo es un don que Dios concede y no un estatus que ganamos. La palabra legal es justificación, mejor representada como un tribunal. Ser justificado es ser declarado libre ante el banquillo del juicio de Dios, pero el veredicto es libre no porque se nos halle inocentes, pues no lo somos, sino porque la pena por nuestra culpa ya ha sido pagada por completo por Cristo. El Juez puede declararnos libres con justicia porque la justicia fue satisfecha en la cruz, así que comenzamos ya declarados santos en Cristo y solo entonces lo vivimos día a día." },
+    { textEn: "29. Explain why the goal of holiness is a Person rather than an action, and how that changes the pursuit.",
+      textEs: "29. Explique por qué la meta de la santidad es una Persona y no una acción, y cómo eso cambia la búsqueda.",
+      kw_en: ["goal", "Person", "Jesus", "Christlikeness", "checklist", "following", "likeness", "love"],
+      kw_es: ["meta", "Persona", "Jesús", "semejanza a Cristo", "lista", "seguir", "semejanza", "amar"],
+      modelEn: "When we hear be holy we instinctively turn it into a checklist of actions to perform and sins to avoid, but the goal of holiness is not finally an action at all. The goal is a Person, and the Person is Jesus Christ; we strive to be holy as He was holy, so holiness is at bottom Christlikeness, being conformed to Him. There is a well-loved worship chorus built entirely around a single cry for holiness, and rightly understood that is a longing for Christ Himself. This changes the whole character of the pursuit, because if holiness were a list of actions we would grow proud at keeping it or despair at breaking it. Since the goal is a Person, pursuing holiness becomes pursuing Jesus, loving and beholding Him until we resemble Him, so we follow a Savior rather than chasing an abstract standard.",
+      modelEs: "Cuando oímos sed santos instintivamente lo convertimos en una lista de acciones que realizar y pecados que evitar, pero la meta de la santidad no es al final una acción en absoluto. La meta es una Persona, y la Persona es Jesucristo; nos esforzamos por ser santos como Él fue santo, así que la santidad es en el fondo la semejanza a Cristo, ser conformados a Él. Hay un querido coro de adoración construido enteramente en torno a un solo clamor por la santidad, y bien entendido eso es un anhelo de Cristo mismo. Esto cambia todo el carácter de la búsqueda, porque si la santidad fuera una lista de acciones o nos enorgulleceríamos al guardarla o nos desesperaríamos al quebrantarla. Como la meta es una Persona, buscar la santidad se vuelve buscar a Jesús, amarlo y contemplarlo hasta parecernos a Él, así que seguimos a un Salvador en vez de perseguir una norma abstracta." },
+    { textEn: "30. Using John the Baptist and the two warnings, describe what set-apart holiness looks like in daily life.",
+      textEs: "30. Usando a Juan el Bautista y las dos advertencias, describa cómo se ve la santidad apartada en la vida diaria.",
+      kw_en: ["John the Baptist", "set apart", "distractions", "die daily", "self", "counterfeit", "comfort", "devotion"],
+      kw_es: ["Juan el Bautista", "apartado", "distracciones", "morir", "yo", "falsificada", "comodidad", "devoción"],
+      modelEn: "Set-apart holiness looks like being genuinely different, devoted to God with no appetite for the distractions that consume everyone else. John the Baptist is the picture: he lived in the wilderness, refused to look or sound like his world, and was wholly set apart unto God, wanting nothing that would pull him from his calling, so that his very difference was his message. Two warnings follow. First, holiness costs the daily death of self, for as Paul said, I die daily, and the old nature is crucified afresh each morning. Second, beware of counterfeit holiness, the comfortable holy clubs and temples of comfort that look religious while staying conformed to the world's love of ease. True holiness is not religious comfort but wholehearted, set-apart devotion to a holy God.",
+      modelEs: "La santidad apartada se ve como ser genuinamente diferente, consagrado a Dios sin apetito por las distracciones que consumen a todos los demás. Juan el Bautista es la imagen: vivió en el desierto, se negó a verse o sonar como su mundo, y estaba enteramente apartado para Dios, sin querer nada que lo apartara de su llamado, de modo que su misma diferencia era su mensaje. Siguen dos advertencias. Primera, la santidad cuesta la muerte diaria del yo, pues como dijo Pablo, cada día muero, y la vieja naturaleza es crucificada de nuevo cada mañana. Segunda, cuídese de la santidad falsificada, los cómodos clubes santos y templos de comodidad que parecen religiosos mientras siguen conformados al amor del mundo por la comodidad. La verdadera santidad no es comodidad religiosa sino devoción apartada y de todo corazón a un Dios santo." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 6 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 6 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            lsSet(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSRadicalReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

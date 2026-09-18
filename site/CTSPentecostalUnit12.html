@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Unit 12 — A Biblical Assessment of the Movement / Una evaluación bíblica del movimiento</title>
+<style>
+  :root{
+    --ink:#22303b; --ink-soft:#465562; --paper:#f5f3ec; --surface:#ffffff;
+    --brass:#b08324; --brass-soft:#e8dcc0; --rule:#ddd6c6;
+    --good:#2f6f4f; --good-bg:#e8f1eb; --bad:#9b3d3d; --bad-bg:#f3e6e4;
+    --gold-box:#fbf3dd; --gold-border:#d9b45b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    font-size:18px; line-height:1.72;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 80px;}
+  .topbar{
+    position:sticky; top:0; z-index:20; background:var(--ink); color:#f5f3ec;
+    display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center; justify-content:space-between;
+    padding:10px 20px; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  .topbar .brand{font-weight:600; font-size:15px; letter-spacing:.02em;}
+  .topbar .brand small{opacity:.7; font-weight:400;}
+  .switches{display:flex; gap:16px; align-items:center; flex-wrap:wrap;}
+  .switch{display:flex; align-items:center; gap:4px;}
+  .switch span.lbl{font-size:11px; text-transform:uppercase; letter-spacing:.08em; opacity:.65;}
+  .switch button{
+    font:inherit; font-size:13px; cursor:pointer; border:1px solid #45596a; background:transparent;
+    color:#dfe6ec; padding:5px 11px; border-radius:999px; line-height:1;
+  }
+  .switch button[aria-pressed="true"]{background:var(--brass); border-color:var(--brass); color:#241a05; font-weight:600;}
+  .switch button:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+  header.unit{padding:38px 0 6px; border-bottom:1px solid var(--rule);}
+  .eyebrow{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  h1{font-family:Georgia,serif; font-size:2rem; line-height:1.18; margin:.35rem 0 .1rem; font-weight:700;}
+  .course-tag{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft);}
+  .banner{margin:26px 0 8px; padding:20px 22px; background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--brass); border-radius:4px;}
+  .banner .verse{font-size:1.12rem; font-style:italic; line-height:1.6;}
+  .banner .ref{display:block; margin-top:8px; font-family:system-ui,sans-serif; font-style:normal; font-size:13px; letter-spacing:.05em; color:var(--brass); font-weight:600;}
+  h2{font-family:Georgia,serif; font-size:1.42rem; margin:2.2em 0 .5em; line-height:1.25; padding-bottom:.18em; border-bottom:2px solid var(--brass-soft);}
+  h3{font-family:Georgia,serif; font-size:1.14rem; margin:1.6em 0 .3em; color:var(--ink);}
+  p{margin:0 0 1.05em;}
+  .lead{font-size:1.06rem;}
+  blockquote.scripture{margin:1.2em 0; padding:2px 0 2px 20px; border-left:3px solid var(--gold-border); font-style:italic; color:#3a4650;}
+  blockquote.scripture .ref{display:block; font-style:normal; font-family:system-ui,sans-serif; font-size:12.5px; letter-spacing:.04em; color:var(--brass); font-weight:600; margin-top:5px;}
+  .objectives{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 22px 6px; margin:24px 0;}
+  .objectives h2{margin:0 0 .4em; border:0; font-size:1.15rem;}
+  .objectives ol{margin:0 0 12px; padding-left:1.25em;}
+  .objectives li{margin:0 0 .55em;}
+  /* comparative VIEWS block (reusable multi-view template) */
+  .views{margin:24px 0; display:grid; gap:14px;}
+  .view{background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--accent,#888); border-radius:6px; padding:16px 20px;}
+  .view.v1{--accent:#3f6d7a;} .view.v2{--accent:#9a7b2e;} .view.v3{--accent:#5f7052;} .view.v4{--accent:#7a5566;}
+  .vhead{font-family:Georgia,serif; font-weight:700; font-size:1.1rem; margin-bottom:.55em; line-height:1.3;}
+  .vtag{display:inline-block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:#fff; background:var(--accent,#888); padding:3px 8px; border-radius:999px; vertical-align:middle; margin-right:8px; font-weight:700;}
+  .view p{font-size:.97rem; margin:0 0 .5em;} .view p:last-child{margin-bottom:0;}
+  .view p b{color:var(--ink);}
+  /* two-questions split (signature) */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:0; margin:26px 0; border:1px solid var(--rule); border-radius:6px; overflow:hidden;}
+  .split .col{padding:20px 22px; background:var(--surface);}
+  .split .col:first-child{border-right:3px solid var(--brass);}
+  .split .col h4{margin:0 0 .5em; font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .split .col .verdict{font-family:Georgia,serif; font-size:1.12rem; font-weight:700; margin:0 0 .4em; line-height:1.3;}
+  .split .col p{font-size:.96rem; margin:0;}
+  .split .col.affirm .verdict{color:var(--good);}
+  .split .col.decline .verdict{color:var(--ink);}
+  @media(max-width:560px){ .split{grid-template-columns:1fr;} .split .col:first-child{border-right:0; border-bottom:3px solid var(--brass);} }
+  .callout{background:#fdfcf8; border:1px solid var(--rule); border-left:4px solid var(--ink-soft); border-radius:4px; padding:14px 18px; margin:22px 0; font-size:.98rem;}
+  ul.q-list{padding-left:1.2em;} ul.q-list li{margin:0 0 .6em;}
+  section.assess{margin-top:16px;}
+  .qcard{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 20px; margin:16px 0;}
+  .qnum{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .qstem{font-weight:600; margin:.3em 0 .8em;}
+  .opt{display:block; margin:0 0 .5em; padding:10px 12px; border:1px solid var(--rule); border-radius:5px; cursor:pointer; font-size:.98rem; transition:background .12s,border-color .12s;}
+  .opt:hover{background:#faf7ef;}
+  .opt input{margin-right:9px;}
+  .opt.correct{background:var(--good-bg); border-color:var(--good);}
+  .opt.wrong{background:var(--bad-bg); border-color:var(--bad);}
+  .btn{font-family:system-ui,sans-serif; font-size:14px; font-weight:600; cursor:pointer; border:0; background:var(--ink); color:#fff; padding:9px 18px; border-radius:5px;}
+  .btn:hover{background:#334452;} .btn:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--ink);}
+  .fb{margin-top:12px; font-size:.95rem; padding:10px 12px; border-radius:5px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:var(--good-bg); color:#1f5138; border:1px solid #bcd8c8;}
+  .fb.no{background:var(--bad-bg); color:#7a2f2f; border:1px solid #e0c4c0;}
+  .scorebar{font-family:system-ui,sans-serif; font-size:14px; background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:12px 16px; margin:14px 0; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;}
+  .scorebar strong{color:var(--brass); font-size:16px;}
+  textarea{width:100%; min-height:118px; font-family:inherit; font-size:1rem; padding:12px; border:1px solid var(--rule); border-radius:5px; resize:vertical; background:#fffef9;}
+  textarea:focus-visible{outline:2px solid var(--brass); outline-offset:1px;}
+  .hitline{font-family:system-ui,sans-serif; font-size:13px; margin:10px 0; display:none;}
+  .hitline.show{display:block;}
+  .hitline b{color:var(--brass);}
+  .model{display:none; margin-top:12px; background:var(--gold-box); border:1px solid var(--gold-border); border-radius:5px; padding:14px 16px; font-size:.97rem;}
+  .model.show{display:block;}
+  .model .mh{font-family:system-ui,sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8a6d1f; font-weight:700; margin-bottom:6px;}
+  .track-note{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft); background:#fdfcf8; border:1px dashed var(--rule); border-radius:5px; padding:10px 14px; margin:10px 0;}
+  #masters-block{display:none;}
+  html.track-masters #masters-block{display:block;}
+  html.track-cert #cert-only-note{display:block;}
+  #cert-only-note{display:none;}
+  footer{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-family:system-ui,sans-serif; font-size:12.5px; color:var(--ink-soft);}
+  .pane.es{display:none;} .seg.es{display:none;}
+  html.lang-es .pane.en{display:none;} html.lang-es .seg.en{display:none;}
+  html.lang-es .pane.es{display:block;} html.lang-es .seg.es{display:inline;}
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">Chapala Theological Seminary <small>&middot; Seminario Teológico de Chapala</small></div>
+  <div class="switches">
+    <div class="switch" role="group" aria-label="Language / Idioma">
+      <span class="lbl">Lang</span>
+      <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+      <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+    </div>
+    <div class="switch" role="group" aria-label="Track / Programa">
+      <span class="lbl seg en">Track</span><span class="lbl seg es">Programa</span>
+      <button id="btn-cert" aria-pressed="true" onclick="setTrack('cert')"><span class="seg en">Certificate</span><span class="seg es">Certificado</span></button>
+      <button id="btn-mast" aria-pressed="false" onclick="setTrack('masters')"><span class="seg en">Master's</span><span class="seg es">Maestría</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSPentecostalUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSPentecostalUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSPentecostalUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSPentecostalUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSPentecostalUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSPentecostalUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSPentecostalUnit7.html" title="Unit 7 · Unidad 7">7</a><a href="CTSPentecostalUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSPentecostalUnit9.html" title="Unit 9 · Unidad 9">9</a><a href="CTSPentecostalUnit10.html" title="Unit 10 · Unidad 10">10</a><a href="CTSPentecostalUnit11.html" title="Unit 11 · Unidad 11">11</a><a href="CTSPentecostalUnit12.html" title="Unit 12 · Unidad 12" class="active">12</a></nav><script>(function(){try{var p=JSON.parse(localStorage.getItem('cts_pentecostal_progress')||'{}');document.querySelectorAll('.cts-unitnav a').forEach(function(a,i){if(p['unit'+(i+1)])a.classList.add('completed');});}catch(e){}})();</script>
+
+  <header class="unit">
+    <div class="pane en">
+      <div class="eyebrow">Pentecostalism &amp; the Charismatic Movement · Unit 12</div>
+      <h1>A Biblical Assessment of the Movement</h1>
+      <div class="course-tag">A Biblical Study · New King James Version</div>
+    </div>
+    <div class="pane es">
+      <div class="eyebrow">El pentecostalismo y el movimiento carismático · Unidad 12</div>
+      <h1>Una evaluación bíblica del movimiento</h1>
+      <div class="course-tag">Un estudio bíblico · Reina-Valera Gómez</div>
+    </div>
+  </header>
+
+  <div class="banner">
+    <div class="pane en"><span class="verse">"He will glorify Me, for He will take of what is Mine and declare it to you."<span class="ref">John 16:14 (NKJV)</span></span></div>
+    <div class="pane es"><span class="verse">"Él me glorificará; porque tomará de lo mío, y os lo hará saber."<span class="ref">Juan 16:14 (RVG)</span></span></div>
+  </div>
+
+  <div class="objectives">
+    <div class="pane en">
+      <h2>Learning Objectives</h2>
+      <ol>
+        <li>Summarize the threefold task of a biblical assessment: to affirm, to decline, and to leave open, without collapsing into a single verdict.</li>
+        <li>Recall the method used throughout the course: keeping two questions apart, weighing open questions even-handedly, measuring all by Scripture, and keeping Christ central.</li>
+        <li>State the main things the course affirms and the main things it declines.</li>
+        <li>Identify the questions the course deliberately leaves open, and explain why leaving them open is faithful.</li>
+        <li>Apply the central test — whether a work glorifies Christ — to any gift, teacher, or claim.</li>
+      </ol>
+    </div>
+    <div class="pane es">
+      <h2>Objetivos de aprendizaje</h2>
+      <ol>
+        <li>Resumir la tarea triple de una evaluación bíblica: afirmar, declinar y dejar abierto, sin reducirla a un solo veredicto.</li>
+        <li>Recordar el método usado a lo largo del curso: mantener dos preguntas separadas, sopesar con equidad las preguntas abiertas, medir todo por la Escritura, y mantener a Cristo en el centro.</li>
+        <li>Exponer las principales cosas que el curso afirma y las principales que declina.</li>
+        <li>Identificar las preguntas que el curso deja abiertas deliberadamente, y explicar por qué dejarlas abiertas es fiel.</li>
+        <li>Aplicar la prueba central — si una obra glorifica a Cristo — a cualquier don, maestro o afirmación.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!--WC:EN:START-->
+  <div class="pane en">
+
+    <h2>Drawing the Threads Together</h2>
+    <p class="lead">We come now to the last unit, and to the task the whole course has been preparing. Over these lessons we have studied the Holy Spirit in the Scriptures, the birth of the Spirit-empowered church at Pentecost, the gift of tongues in the book of Acts and in Paul's letters, the meaning of the baptism in the Spirit, the rise and renewal of the modern movement, the exercise of the gifts today, and the distortions that have grown up alongside. Now we must gather all of it into a single biblical assessment of the movement as a whole. That assessment is threefold, and its first discipline is to resist being collapsed into one word. We are to affirm what is true and good, to decline what fails the test of Scripture, and to separate the questions Scripture leaves open from those it settles. The constant temptation is to reach for a verdict — to declare the movement simply right, or simply wrong — and we will not yield to it, because the movement is not a single thing and its questions are not all of one kind.</p>
+    <p>This is not an evasion but the shape the subject itself requires. A living movement of hundreds of millions contains, like the visible church in every age, both the wheat and the tares; and the questions it raises range from the plainly settled to the honestly disputed. An assessment that flattened all of this into a single yes or no would be neither honest nor useful. So we will take the movement as it actually is — mixed, large, and still growing — and weigh its parts with the care each deserves, letting Scripture, not our preference, set the terms.</p>
+
+    <h2>The Method We Have Used</h2>
+    <p>Before we state the assessment, it is worth naming the discipline that has shaped every unit, for the method is itself part of the conclusion. First, we have kept two questions apart wherever they arose: whether a gift is real is one question, and whether a particular experience is required of every believer is another; much confusion dissolves the moment these are separated. Second, we have handled the genuinely open questions the way the seminary handles the millennium — setting out each faithful position at its strongest and imposing no verdict of our own. Third, we have measured everything by Scripture, and we have judged a movement not by its worst and most visible preachers but by its Scriptures and its faithful. Fourth, through all of it we have kept Christ at the center, remembering that the Spirit was given to glorify Him. This is not the indecision of a mind that cannot make itself up; it is the fairness that truth demands when godly people who love the same Bible read it differently.</p>
+    <p>It is worth adding why such fairness is not weakness. On the great essentials of the faith — the deity of Christ, His atoning death and resurrection, salvation by grace through faith, the authority of Scripture — the Bible speaks with a clarity that leaves no room for a shrug, and on these the course has never wavered. It is precisely because those foundations are firm that we can afford to be patient on the secondary questions, where sincere believers differ. To confuse the two — treating a disputed matter as though it were a creed, or a creed as though it were disputable — is one of the surest ways to divide the church and misrepresent the Scriptures at once.</p>
+
+    <h2>What We Affirm</h2>
+    <p>Begin with the affirmations, for they are many and they come first. We affirm that the Holy Spirit is fully God, personally and powerfully at work in the church today — convicting the world of sin, granting the new birth, indwelling every believer from the moment of faith, and conforming the saints to the image of Christ. We affirm that God still saves, still sanctifies, and still hears and answers the prayers of His people.</p>
+    <blockquote class="scripture">"But the manifestation of the Spirit is given to each one for the profit of all."<span class="ref">1 Corinthians 12:7 (NKJV)</span></blockquote>
+    <p>We affirm that the gifts of the Spirit described in the New Testament are real, distributed by the Spirit as He wills for the building up of the whole body, and that the ordered desire for them is something Scripture commands rather than forbids. We affirm that God still heals, though never on demand and never as a wage owed to sufficient faith. And we affirm the fruit the movement has borne across a little more than a century: a place at the very forefront of world evangelism, the gospel carried to the poor, the remote, and the unreached, and hundreds of millions of people — by careful estimate approaching six hundred and forty-four million — brought to name the Lord Jesus Christ. Wherever the Spirit is exalting Christ, converting sinners, and building holiness, we give thanks without reservation and without suspicion.</p>
+    <p>We affirm, too, the healthy experiential dimension the movement has often recovered for the wider church: the assurance of God's love poured into the heart, the inward witness of the Spirit that we are children of God (Rom 8:16), the joy and boldness that mark lives genuinely touched by grace, and a hunger for God's presence that no dead formality can satisfy. Christianity is not mere assent to true propositions; it is life in the Spirit, and a movement that has pressed this upon a sometimes cold and comfortable church has done it a service worth acknowledging.</p>
+
+    <h2>What We Decline</h2>
+    <p>With the same honesty, we decline whatever does not survive the testing of the Word. We decline the teaching that speaking in tongues is the required and universal evidence of the baptism in the Spirit, for Scripture lays down no such rule and describes the Spirit's coming in more ways than one. We decline the prosperity gospel, which turns a generous Father into a machine that dispenses health and wealth to the right technique, and which cruelly reads a believer's suffering as the verdict of his unbelief.</p>
+    <blockquote class="scripture">"Test all things; hold fast what is good."<span class="ref">1 Thessalonians 5:21 (NKJV)</span></blockquote>
+    <p>We decline the excesses examined in the previous unit — the manipulation of emotion and of the offering, leaders gathered beyond all accountability, prophecies that fail and are never honestly owned, and the mistaking of noise and excitement for the moving of God. And we decline, in whatever quarter it appears, any spirit that lifts experience above Scripture, or a gift above the Giver, or a man above the Lord. To decline these things is not contempt for the movement; it is love for it — love that cares enough to hold it to the standard of its own Book, as the movement's own faithful people do.</p>
+    <p>Yet let it be clearly said what we do not decline. We do not decline the supernatural itself, nor the possibility that God still gives every gift named in the New Testament; that larger question we have deliberately left open. What we decline are the specific distortions — the false rule, the false promise, the unaccountable practice — not the Spirit's freedom to work as He wills. It would be a poor cure for one error to fall into its opposite, quenching the Spirit in the very act of guarding the Word. We reject the counterfeit precisely in order to honor the genuine.</p>
+
+    <h2>What We Leave Open</h2>
+    <p>Now the assessment does something a mere verdict never could: it lets the open questions remain open, and it does so on purpose. Some matters Scripture does not close, and honesty forbids us to close them in its name. Whether the revelatory gifts continue in the church or ceased with the apostolic age; whether "that which is perfect" in First Corinthians thirteen is the completed canon or the return of Christ; whether the baptism in the Spirit is best understood as conversion itself or as a distinct and later empowering; whether the tongues of Acts ten and nineteen were known human languages or a prayer language the text does not define — on each of these, careful and faithful Christians have stood on different ground for generations, and each can open the Bible to make his case. We have set out the strongest form of each position and left it with the reader to weigh before God. To manufacture certainty where the Scriptures are quiet would not be faithfulness; it would be trading the discipline of fair reading for the false comfort of a settled score.</p>
+    <p>Someone may object that leaving such questions open is a failure of nerve. But consider the alternative. To bind every conscience to one answer where Scripture has not bound it is to add to the Word, the very fault we warned against when we spoke of the closed canon. The apostle Paul himself taught the churches to bear with one another on disputable matters, each fully persuaded in his own mind, without despising or judging a brother who saw things differently (Rom 14). The open questions of this movement belong to that category. We hold our own convictions, and we hold them honestly; but we do not press them as terms of fellowship, and we grant to others the same liberty of conscience we claim for ourselves.</p>
+
+    <h2>How to Hold It All</h2>
+    <p>How, then, is a pastor or an ordinary believer to carry an assessment so deliberately mixed? The answer is the one the last unit gave: hold truth and charity together, and refuse to let go of either. Be clear and firm where Scripture is clear, and genuinely humble where it is not. Test all things and hold fast what is good; do not despise prophecies, and do not swallow every claim made in the Spirit's name.</p>
+    <p>Receive as brothers and sisters those who have weighed the same texts and come to rest on different ground, and save your sharp words for real errors rather than for honest differences among the faithful. Guard the flock diligently from every distortion, yet never by slandering the great many who are faithful. This posture is harder to keep than any slogan, and it will satisfy neither the party that wants everything embraced nor the party that wants everything condemned; but it is the only stance worthy of the truth and of the people it is meant to serve.</p>
+
+    <h2>Christ at the Center</h2>
+    <p>Every strand of this assessment runs back at last to a single test, and it is the test the Lord Himself supplied. The Spirit of truth, He told His disciples, does not come to advertise Himself or to draw attention to His own gifts, but to glorify the Son:</p>
+    <blockquote class="scripture">"He will glorify Me, for He will take of what is Mine and declare it to you."<span class="ref">John 16:14 (NKJV)</span></blockquote>
+    <p>So the surest measure of any work that claims to be the Spirit's is not its volume, its crowds, or its wonders, but whether it lifts up Jesus Christ — His cross, His gospel, and His lordship — and whether it makes His people more like Him. A movement is as healthy as it is Christ-centered, and no healthier; the same is true of a congregation, a ministry, and a single teacher. Where Christ is exalted and His people are sanctified, the Spirit is surely at work; where He is eclipsed by a gift, a technique, or a personality, something has gone wrong however impressive the display. Judge every gift, every teacher, and every claim by that one steady light.</p>
+
+    <h2>A Closing Word</h2>
+    <p>We have studied this movement not as outsiders looking down upon it, but as members of one body examining a large and living part of itself. Much within it is the genuine work of God, some within it is the corruption of that work by human hands, and some of its questions remain honestly open for faithful minds to weigh. Affirm the true, decline the false, keep the open questions open, and hold every part of it up to Christ:</p>
+    <blockquote class="scripture">"…endeavoring to keep the unity of the Spirit in the bond of peace."<span class="ref">Ephesians 4:3 (NKJV)</span></blockquote>
+    <p>That is the whole of a biblical assessment, and it is enough. With this the course is complete. May the Lord grant you a discerning mind that tests all things by His Word, a charitable heart that loves the brethren across every honest difference, and above all a deepening love for the Christ whom the Spirit came to glorify. To God, who pours out His Spirit and exalts His Son, be all the glory.</p>
+
+  </div>
+  <!--WC:EN:END-->
+
+  <!--WC:ES:START-->
+  <div class="pane es">
+
+    <h2>Uniendo los hilos</h2>
+    <p class="lead">Llegamos ahora a la última unidad, y a la tarea para la cual todo el curso ha estado preparando. A lo largo de estas lecciones hemos estudiado al Espíritu Santo en las Escrituras, el nacimiento de la iglesia empoderada por el Espíritu en Pentecostés, el don de lenguas en el libro de los Hechos y en las cartas de Pablo, el sentido del bautismo en el Espíritu, el surgimiento y la renovación del movimiento moderno, el ejercicio de los dones hoy, y las distorsiones que han crecido a su lado. Ahora debemos reunir todo ello en una sola evaluación bíblica del movimiento como un todo. Esa evaluación es triple, y su primera disciplina es resistir ser reducida a una sola palabra. Hemos de afirmar lo que es verdadero y bueno, declinar lo que no pasa la prueba de la Escritura, y separar las preguntas que la Escritura deja abiertas de las que resuelve. La tentación constante es alcanzar un veredicto — declarar el movimiento simplemente correcto, o simplemente equivocado — y no cederemos a ella, porque el movimiento no es una sola cosa y sus preguntas no son todas de una misma clase.</p>
+    <p>Esto no es una evasión, sino la forma que el tema mismo requiere. Un movimiento vivo de cientos de millones contiene, como la iglesia visible en toda época, tanto el trigo como la cizaña; y las preguntas que suscita van desde lo claramente resuelto hasta lo honestamente disputado. Una evaluación que aplanara todo esto en un solo sí o no no sería ni honesta ni útil. Así que tomaremos el movimiento tal como realmente es — mixto, grande, y aún creciendo — y sopesaremos sus partes con el cuidado que cada una merece, dejando que la Escritura, y no nuestra preferencia, ponga los términos.</p>
+
+    <h2>El método que hemos usado</h2>
+    <p>Antes de exponer la evaluación, vale la pena nombrar la disciplina que ha dado forma a cada unidad, pues el método mismo es parte de la conclusión. Primero, hemos mantenido dos preguntas separadas dondequiera que surgieron: si un don es real es una pregunta, y si una experiencia particular se requiere de todo creyente es otra; mucha confusión se disuelve en el momento en que estas se separan. Segundo, hemos tratado las preguntas genuinamente abiertas como el seminario trata el milenio — exponiendo cada postura fiel en su forma más fuerte y sin imponer un veredicto propio. Tercero, hemos medido todo por la Escritura, y hemos juzgado un movimiento no por sus peores y más visibles predicadores, sino por sus Escrituras y sus fieles. Cuarto, a través de todo ello hemos mantenido a Cristo en el centro, recordando que el Espíritu fue dado para glorificarlo. Esto no es la indecisión de una mente que no puede resolverse; es la equidad que la verdad exige cuando personas piadosas que aman la misma Biblia la leen de manera diferente.</p>
+    <p>Vale la pena añadir por qué tal equidad no es debilidad. En los grandes fundamentos de la fe — la deidad de Cristo, su muerte expiatoria y resurrección, la salvación por gracia mediante la fe, la autoridad de la Escritura — la Biblia habla con una claridad que no deja lugar a un encogimiento de hombros, y en estos el curso jamás ha vacilado. Es precisamente porque esos fundamentos son firmes que podemos permitirnos ser pacientes en las preguntas secundarias, donde creyentes sinceros difieren. Confundir las dos — tratando un asunto disputado como si fuera un credo, o un credo como si fuera disputable — es una de las maneras más seguras de dividir la iglesia y tergiversar las Escrituras a la vez.</p>
+
+    <h2>Lo que afirmamos</h2>
+    <p>Comencemos con las afirmaciones, pues son muchas y vienen primero. Afirmamos que el Espíritu Santo es plenamente Dios, personal y poderosamente obrando en la iglesia hoy — convenciendo al mundo de pecado, otorgando el nuevo nacimiento, morando en cada creyente desde el momento de la fe, y conformando a los santos a la imagen de Cristo. Afirmamos que Dios todavía salva, todavía santifica, y todavía oye y responde las oraciones de su pueblo.</p>
+    <blockquote class="scripture">"Pero a cada uno le es dada la manifestación del Espíritu para provecho."<span class="ref">1 Corintios 12:7 (RVG)</span></blockquote>
+    <p>Afirmamos que los dones del Espíritu descritos en el Nuevo Testamento son reales, repartidos por el Espíritu como Él quiere para la edificación de todo el cuerpo, y que el deseo ordenado de ellos es algo que la Escritura manda en vez de prohibir. Afirmamos que Dios todavía sana, aunque nunca a demanda ni como un salario debido a fe suficiente. Y afirmamos el fruto que el movimiento ha dado a lo largo de poco más de un siglo: un lugar en la vanguardia misma de la evangelización mundial, el evangelio llevado a los pobres, los remotos y los no alcanzados, y cientos de millones de personas — por estimación cuidadosa cerca de seiscientos cuarenta y cuatro millones — llevadas a invocar el nombre del Señor Jesucristo. Dondequiera que el Espíritu está exaltando a Cristo, convirtiendo pecadores y edificando santidad, damos gracias sin reserva y sin sospecha.</p>
+    <p>Afirmamos, también, la sana dimensión experiencial que el movimiento a menudo ha recuperado para la iglesia más amplia: la seguridad del amor de Dios derramado en el corazón, el testimonio interior del Espíritu de que somos hijos de Dios (Ro 8:16), el gozo y la osadía que marcan las vidas genuinamente tocadas por la gracia, y un hambre de la presencia de Dios que ninguna formalidad muerta puede satisfacer. El cristianismo no es mero asentimiento a proposiciones verdaderas; es vida en el Espíritu, y un movimiento que ha urgido esto sobre una iglesia a veces fría y cómoda le ha hecho un servicio digno de reconocerse.</p>
+
+    <h2>Lo que declinamos</h2>
+    <p>Con la misma honestidad, declinamos todo lo que no sobrevive la prueba de la Palabra. Declinamos la enseñanza de que hablar en lenguas es la evidencia requerida y universal del bautismo en el Espíritu, pues la Escritura no establece tal regla y describe la venida del Espíritu de más de una manera. Declinamos el evangelio de la prosperidad, que convierte a un Padre generoso en una máquina que dispensa salud y riqueza a la técnica correcta, y que cruelmente lee el sufrimiento de un creyente como el veredicto de su incredulidad.</p>
+    <blockquote class="scripture">"Examinadlo todo; retened lo bueno."<span class="ref">1 Tesalonicenses 5:21 (RVG)</span></blockquote>
+    <p>Declinamos los excesos examinados en la unidad anterior — la manipulación de la emoción y de la ofrenda, líderes reunidos más allá de toda rendición de cuentas, profecías que fallan y nunca se reconocen con honestidad, y el confundir el ruido y la excitación con el mover de Dios. Y declinamos, en cualquier lugar que aparezca, todo espíritu que levante la experiencia por encima de la Escritura, o un don por encima del Dador, o un hombre por encima del Señor. Declinar estas cosas no es desprecio por el movimiento; es amor por él — un amor que se preocupa lo suficiente para sostenerlo al estándar de su propio Libro, como lo hace la propia gente fiel del movimiento.</p>
+    <p>Sin embargo, dígase claramente lo que no declinamos. No declinamos lo sobrenatural mismo, ni la posibilidad de que Dios todavía dé cada don nombrado en el Nuevo Testamento; esa pregunta mayor la hemos dejado deliberadamente abierta. Lo que declinamos son las distorsiones específicas — la regla falsa, la promesa falsa, la práctica sin rendición de cuentas — no la libertad del Espíritu de obrar como quiere. Sería un pobre remedio para un error caer en su opuesto, apagando al Espíritu en el acto mismo de guardar la Palabra. Rechazamos la falsificación precisamente para honrar lo genuino.</p>
+
+    <h2>Lo que dejamos abierto</h2>
+    <p>Ahora la evaluación hace algo que un mero veredicto nunca podría: deja abiertas las preguntas abiertas, y lo hace a propósito. Algunos asuntos la Escritura no los cierra, y la honestidad nos prohíbe cerrarlos en su nombre. Si los dones revelatorios continúan en la iglesia o cesaron con la era apostólica; si "lo que es perfecto" en Primera de Corintios trece es el canon completo o el regreso de Cristo; si el bautismo en el Espíritu se entiende mejor como la conversión misma o como un empoderamiento distinto y posterior; si las lenguas de Hechos diez y diecinueve eran idiomas humanos conocidos o un lenguaje de oración que el texto no define — en cada una de estas, cristianos cuidadosos y fieles han estado en terreno diferente por generaciones, y cada uno puede abrir la Biblia para hacer su caso. Hemos expuesto la forma más fuerte de cada postura y la hemos dejado con el lector para sopesarla ante Dios. Fabricar certeza donde las Escrituras callan no sería fidelidad; sería cambiar la disciplina de la lectura justa por el falso consuelo de un marcador resuelto.</p>
+    <p>Alguien podrá objetar que dejar tales preguntas abiertas es una falta de valor. Pero considere la alternativa. Atar cada conciencia a una respuesta donde la Escritura no la ha atado es añadir a la Palabra, la falta misma contra la que advertimos al hablar del canon cerrado. El apóstol Pablo mismo enseñó a las iglesias a soportarse unas a otras en asuntos disputables, cada cual plenamente convencido en su propia mente, sin despreciar ni juzgar al hermano que veía las cosas de otro modo (Ro 14). Las preguntas abiertas de este movimiento pertenecen a esa categoría. Sostenemos nuestras propias convicciones, y las sostenemos con honestidad; pero no las imponemos como términos de comunión, y concedemos a otros la misma libertad de conciencia que reclamamos para nosotros.</p>
+
+    <h2>Cómo sostenerlo todo</h2>
+    <p>¿Cómo, entonces, ha de llevar un pastor o un creyente ordinario una evaluación tan deliberadamente mixta? La respuesta es la que dio la unidad anterior: sostener juntas la verdad y la caridad, y rehusar soltar cualquiera de las dos. Sea claro y firme donde la Escritura es clara, y genuinamente humilde donde no lo es. Examine todas las cosas y retenga lo bueno; no menosprecie las profecías, y no se trague toda afirmación hecha en el nombre del Espíritu.</p>
+    <p>Reciba como hermanos y hermanas a quienes han sopesado los mismos textos y han llegado a reposar en terreno diferente, y guarde sus palabras cortantes para errores reales en vez de para diferencias honestas entre los fieles. Guarde al rebaño diligentemente de toda distorsión, pero nunca calumniando a los muchos que son fieles. Esta postura es más difícil de mantener que cualquier lema, y no satisfará ni al bando que quiere que todo se abrace ni al bando que quiere que todo se condene; pero es la única postura digna de la verdad y del pueblo al que la verdad ha de servir.</p>
+
+    <h2>Cristo en el centro</h2>
+    <p>Cada hebra de esta evaluación corre al fin de vuelta a una sola prueba, y es la prueba que el Señor mismo proveyó. El Espíritu de verdad, dijo a sus discípulos, no viene a anunciarse a sí mismo ni a llamar la atención sobre sus propios dones, sino a glorificar al Hijo:</p>
+    <blockquote class="scripture">"Él me glorificará; porque tomará de lo mío, y os lo hará saber."<span class="ref">Juan 16:14 (RVG)</span></blockquote>
+    <p>Así que la medida más segura de cualquier obra que dice ser del Espíritu no es su volumen, sus multitudes, ni sus prodigios, sino si levanta a Jesucristo — su cruz, su evangelio y su señorío — y si hace a su pueblo más semejante a Él. Un movimiento es tan sano como es centrado en Cristo, y no más sano; lo mismo vale para una congregación, un ministerio y un solo maestro. Donde Cristo es exaltado y su pueblo santificado, el Espíritu de seguro está obrando; donde Él es eclipsado por un don, una técnica o una personalidad, algo ha salido mal por impresionante que sea el despliegue. Juzgue cada don, cada maestro y cada afirmación por esa única luz constante.</p>
+
+    <h2>Una palabra final</h2>
+    <p>Hemos estudiado este movimiento no como forasteros mirándolo desde arriba, sino como miembros de un solo cuerpo examinando una parte grande y viva de sí mismo. Mucho dentro de él es la obra genuina de Dios, algo dentro de él es la corrupción de esa obra por manos humanas, y algunas de sus preguntas permanecen honestamente abiertas para que mentes fieles las sopesen. Afirme lo verdadero, decline lo falso, mantenga abiertas las preguntas abiertas, y sostenga cada parte de él ante Cristo:</p>
+    <blockquote class="scripture">"…solícitos en guardar la unidad del Espíritu en el vínculo de la paz."<span class="ref">Efesios 4:3 (RVG)</span></blockquote>
+    <p>Eso es la totalidad de una evaluación bíblica, y basta. Con esto el curso queda completo. Que el Señor le conceda una mente discernidora que pruebe todas las cosas por su Palabra, un corazón caritativo que ame a los hermanos a través de toda diferencia honesta, y sobre todo un amor creciente por el Cristo a quien el Espíritu vino a glorificar. A Dios, que derrama su Espíritu y exalta a su Hijo, sea toda la gloria.</p>
+
+  </div>
+  <!--WC:ES:END-->
+
+  <!-- DISCUSSION -->
+  <div class="pane en">
+    <h2>Discussion Questions</h2>
+    <ul class="q-list">
+      <li>Why does a faithful assessment of this movement resist a single "right or wrong" verdict?</li>
+      <li>Which affirmations in this unit did you find most important, and which declinings most necessary?</li>
+      <li>Choose one of the "open" questions. Why do you think Scripture leaves it genuinely disputable, and how should believers treat one another across that difference?</li>
+      <li>How would you use the test of John 16:14 to weigh a teacher, a meeting, or a ministry you encounter?</li>
+    </ul>
+    <h3>Ministry Application</h3>
+    <p>Write a short paragraph you could share with your congregation summarizing how to receive the good in this movement, refuse its distortions, and keep Christ at the center.</p>
+  </div>
+  <div class="pane es">
+    <h2>Preguntas para discusión</h2>
+    <ul class="q-list">
+      <li>¿Por qué una evaluación fiel de este movimiento resiste un solo veredicto de "correcto o incorrecto"?</li>
+      <li>¿Cuáles afirmaciones de esta unidad le parecieron más importantes, y cuáles rechazos más necesarios?</li>
+      <li>Elija una de las preguntas "abiertas". ¿Por qué cree que la Escritura la deja genuinamente disputable, y cómo deben tratarse los creyentes a través de esa diferencia?</li>
+      <li>¿Cómo usaría la prueba de Juan 16:14 para sopesar a un maestro, una reunión o un ministerio que encuentre?</li>
+    </ul>
+    <h3>Aplicación ministerial</h3>
+    <p>Escriba un párrafo breve que pudiera compartir con su congregación resumiendo cómo recibir lo bueno en este movimiento, rehusar sus distorsiones, y mantener a Cristo en el centro.</p>
+  </div>
+
+  <!-- ASSESSMENT -->
+  <section class="assess">
+    <div class="pane en"><h2>Self-Check &mdash; Multiple Choice</h2><p style="font-size:.97rem;color:var(--ink-soft);">Choose the best answer, then press <em>Check</em>. Feedback and a short explanation appear for each question.</p></div>
+    <div class="pane es"><h2>Autoevaluación &mdash; Opción múltiple</h2><p style="font-size:.97rem;color:var(--ink-soft);">Elija la mejor respuesta y presione <em>Comprobar</em>. Para cada pregunta aparecen la respuesta y una breve explicación.</p></div>
+
+    <div id="mcq"></div>
+
+    <div class="scorebar">
+      <span><span class="seg en">Score:</span><span class="seg es">Puntuación:</span> <strong id="score">0 / 7</strong></span>
+      <button class="btn ghost" onclick="resetMcq()"><span class="seg en">Reset answers</span><span class="seg es">Reiniciar respuestas</span></button>
+    </div>
+  </section>
+
+  <div id="cert-only-note" class="track-note">
+    <span class="seg en">You are on the <strong>Certificate</strong> track. The written short-answer section is required only for the Master's track — switch tracks at the top if you are completing written work.</span>
+    <span class="seg es">Usted está en el programa de <strong>Certificado</strong>. La sección escrita de respuesta corta se requiere sólo para el programa de Maestría; cambie de programa arriba si va a realizar el trabajo escrito.</span>
+  </div>
+
+  <div id="masters-block">
+    <section class="assess">
+      <div class="pane en"><h2>Written Work &mdash; Master's Track</h2><p style="font-size:.97rem;color:var(--ink-soft);">Answer in a few sentences of your own. Your response is checked for key concepts (any three of eight is a pass), then the model answer is revealed for comparison.</p></div>
+      <div class="pane es"><h2>Trabajo escrito &mdash; Programa de Maestría</h2><p style="font-size:.97rem;color:var(--ink-soft);">Responda con sus propias palabras en unas frases. Su respuesta se evalúa por conceptos clave (tres de ocho es aprobado); luego se revela la respuesta modelo para comparar.</p></div>
+      <div id="sa"></div>
+    </section>
+  </div>
+
+  <nav style="margin:1.7rem 0 .3rem;padding-top:1rem;border-top:1px solid #d9d2c2;">
+  <div class="pane en"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><a href="CTSPentecostalUnit11.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">&lsaquo; Previous</a><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Course Home</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Reading Room</a><a href="CTSPentecostalCertificate.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Certificate &rsaquo;</a></div></div>
+  <div class="pane es"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><a href="CTSPentecostalUnit11.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">&lsaquo; Anterior</a><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Inicio del curso</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Sala de Lecturas</a><a href="CTSPentecostalCertificate.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Certificado &rsaquo;</a></div></div>
+</nav>
+
+<footer>
+    <div class="pane en">Chapala Theological Seminary &middot; Unit 12 of the course <em>Pentecostalism &amp; the Charismatic Movement</em>. Scripture in English from the New King James Version; Spanish from the Reina-Valera Gómez. This unit is designed for offline use — no internet connection is required.</div>
+    <div class="pane es">Seminario Teológico de Chapala &middot; Unidad 12 del curso <em>El pentecostalismo y el movimiento carismático</em>. Escrituras en inglés de la New King James Version; en español de la Reina-Valera Gómez. Esta unidad está diseñada para uso sin conexión: no se requiere internet.</div>
+  </footer>
+
+</div>
+
+<script>
+/* ---------- hardened storage (Android content:// fallback) ---------- */
+var _ctsMem = {};
+function lsGet(k){ try{ var v = window.localStorage.getItem(k); return v===null ? (k in _ctsMem ? _ctsMem[k] : null) : v; }catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try{ window.localStorage.setItem(k,v); }catch(e){ _ctsMem[k]=String(v); } _ctsMem[k]=String(v); }
+function lsDel(k){ try{ window.localStorage.removeItem(k); }catch(e){} delete _ctsMem[k]; }
+var SKEY = 'cts_u12_assessment';
+var saPassed = {};
+
+/* ---------- language + track ---------- */
+function setLang(l){
+  document.documentElement.classList.toggle('lang-es', l==='es');
+  document.documentElement.classList.toggle('lang-en', l==='en');
+  document.documentElement.setAttribute('lang', l);
+  document.getElementById('btn-en').setAttribute('aria-pressed', l==='en');
+  document.getElementById('btn-es').setAttribute('aria-pressed', l==='es');
+  lsSet(SKEY+'_lang', l);
+  renderMcqText(); renderSaText(); refreshScore();
+}
+function setTrack(t){
+  document.documentElement.classList.toggle('track-masters', t==='masters');
+  document.documentElement.classList.toggle('track-cert', t==='cert');
+  document.getElementById('btn-cert').setAttribute('aria-pressed', t==='cert');
+  document.getElementById('btn-mast').setAttribute('aria-pressed', t==='masters');
+  lsSet(SKEY+'_track', t);
+}
+
+/* ---------- MCQ data (correct positions varied: A,B,D,A,C,B,D) ---------- */
+var MCQ = [
+ { correct:3,
+   q:{en:"The task of this capstone unit is threefold, and it deliberately refuses to —",
+      es:"La tarea de esta unidad final es triple, y rehúsa deliberadamente —"},
+   opts:[
+     {en:"affirm anything that is good", es:"afirmar cualquier cosa que sea buena"},
+     {en:"quote Scripture at all", es:"citar la Escritura en absoluto"},
+     {en:"discuss the movement's history", es:"tratar la historia del movimiento"},
+     {en:"collapse the assessment into a single verdict that the movement is simply right or simply wrong", es:"reducir la evaluación a un solo veredicto de que el movimiento es simplemente correcto o simplemente equivocado"} ],
+   exp:{en:"The movement is not one thing and its questions are not all of one kind, so the unit affirms, declines, and leaves open rather than reaching for one verdict.",
+        es:"El movimiento no es una sola cosa y sus preguntas no son todas de una misma clase, así que la unidad afirma, declina y deja abierto en vez de alcanzar un solo veredicto."} },
+ { correct:0,
+   q:{en:"The method that guided the whole course keeps two questions apart, namely —",
+      es:"El método que guió todo el curso mantiene dos preguntas separadas, a saber —"},
+   opts:[
+     {en:"whether a gift is real is one question; whether an experience is required of every believer is another", es:"si un don es real es una pregunta; si una experiencia se requiere de todo creyente es otra"},
+     {en:"whether Scripture is inspired", es:"si la Escritura es inspirada"},
+     {en:"whether the church should exist", es:"si la iglesia debe existir"},
+     {en:"whether God answers prayer at all", es:"si Dios responde la oración en absoluto"} ],
+   exp:{en:"Throughout the course, the reality of a gift and the requiring of an experience were kept distinct, and much confusion dissolved.",
+        es:"A lo largo del curso, la realidad de un don y el requerir una experiencia se mantuvieron distintos, y mucha confusión se disolvió."} },
+ { correct:2,
+   q:{en:"Among the things this unit affirms is that —",
+      es:"Entre las cosas que esta unidad afirma está que —"},
+   opts:[
+     {en:"tongues are required of every believer", es:"las lenguas se requieren de todo creyente"},
+     {en:"wealth proves God's favor", es:"la riqueza prueba el favor de Dios"},
+     {en:"the Holy Spirit is God, personally at work today, and the New Testament gifts are real", es:"el Espíritu Santo es Dios, personalmente obrando hoy, y los dones del Nuevo Testamento son reales"},
+     {en:"experience outranks Scripture", es:"la experiencia supera a la Escritura"} ],
+   exp:{en:"The affirmations come first and are many: the Spirit's deity and work, the reality of the gifts, and the movement's evangelistic fruit.",
+        es:"Las afirmaciones vienen primero y son muchas: la deidad y obra del Espíritu, la realidad de los dones, y el fruto evangelístico del movimiento."} },
+ { correct:1,
+   q:{en:"Among the things this unit declines is —",
+      es:"Entre las cosas que esta unidad declina está —"},
+   opts:[
+     {en:"that God still heals", es:"que Dios todavía sana"},
+     {en:"the teaching that speaking in tongues is the required, universal evidence of the Spirit's baptism", es:"la enseñanza de que hablar en lenguas es la evidencia requerida y universal del bautismo del Espíritu"},
+     {en:"the reality of the Spirit's gifts", es:"la realidad de los dones del Espíritu"},
+     {en:"world evangelism", es:"la evangelización mundial"} ],
+   exp:{en:"Scripture makes no rule that tongues must accompany every Spirit-baptism, so the unit declines that teaching, along with the prosperity gospel and the excesses.",
+        es:"La Escritura no hace ninguna regla de que las lenguas deban acompañar todo bautismo del Espíritu, así que la unidad declina esa enseñanza, junto con el evangelio de la prosperidad y los excesos."} },
+ { correct:0,
+   q:{en:"The questions the unit deliberately leaves open include —",
+      es:"Las preguntas que la unidad deja abiertas deliberadamente incluyen —"},
+   opts:[
+     {en:"whether the revelatory gifts continue or ceased, and whether “the perfect” is the canon or Christ's return", es:"si los dones revelatorios continúan o cesaron, y si “lo perfecto” es el canon o el regreso de Cristo"},
+     {en:"whether the Holy Spirit is a person", es:"si el Espíritu Santo es una persona"},
+     {en:"whether Christ rose from the dead", es:"si Cristo resucitó de los muertos"},
+     {en:"whether the prosperity gospel is biblical", es:"si el evangelio de la prosperidad es bíblico"} ],
+   exp:{en:"On genuinely disputed questions, faithful Christians differ with Scripture in hand, so the unit sets out each case and imposes no verdict.",
+        es:"En preguntas genuinamente disputadas, cristianos fieles difieren con la Escritura en la mano, así que la unidad expone cada caso y no impone veredicto."} },
+ { correct:3,
+   q:{en:"The surest measure of any work claiming to be the Spirit's is —",
+      es:"La medida más segura de cualquier obra que dice ser del Espíritu es —"},
+   opts:[
+     {en:"its noise and excitement", es:"su ruido y excitación"},
+     {en:"the size of its crowds", es:"el tamaño de sus multitudes"},
+     {en:"the number of its wonders", es:"el número de sus prodigios"},
+     {en:"whether it glorifies Jesus Christ and makes His people more like Him", es:"si glorifica a Jesucristo y hace a su pueblo más semejante a Él"} ],
+   exp:{en:"The Lord said the Spirit came to glorify the Son (John 16:14); Christ-centeredness is the test.",
+        es:"El Señor dijo que el Espíritu vino a glorificar al Hijo (Juan 16:14); el estar centrado en Cristo es la prueba."} },
+ { correct:1,
+   q:{en:"Toward Christians who have weighed the same texts and reached different conclusions, the unit counsels —",
+      es:"Hacia los cristianos que han sopesado los mismos textos y llegado a conclusiones diferentes, la unidad aconseja —"},
+   opts:[
+     {en:"sharp condemnation", es:"condenación cortante"},
+     {en:"receiving them as brothers and sisters, reserving sharp words for real errors, not honest differences", es:"recibirlos como hermanos y hermanas, reservando las palabras cortantes para errores reales, no para diferencias honestas"},
+     {en:"ending all fellowship", es:"terminar toda comunión"},
+     {en:"ignoring Scripture", es:"ignorar la Escritura"} ],
+   exp:{en:"Charity holds with truth: be clear where Scripture is clear, humble where it is not, and gracious toward honest difference.",
+        es:"La caridad se sostiene con la verdad: sea claro donde la Escritura es clara, humilde donde no lo es, y amable hacia la diferencia honesta."} }
+];
+
+var answered = {};
+
+function buildMcq(){
+  var host = document.getElementById('mcq'); host.innerHTML='';
+  MCQ.forEach(function(item, qi){
+    var card = document.createElement('div'); card.className='qcard'; card.id='q'+qi;
+    var num = document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Question '+(qi+1)+'</span><span class="seg es">Pregunta '+(qi+1)+'</span>';
+    var stem = document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    card.appendChild(num); card.appendChild(stem);
+    item.opts.forEach(function(o, oi){
+      var lab = document.createElement('label'); lab.className='opt'; lab.setAttribute('data-oi',oi);
+      var inp = document.createElement('input'); inp.type='radio'; inp.name='q'+qi; inp.value=oi;
+      inp.onchange=function(){ answered[qi]=oi; };
+      var txt = document.createElement('span'); txt.setAttribute('data-role','opttext');
+      lab.appendChild(inp); lab.appendChild(txt); card.appendChild(lab);
+    });
+    var btn = document.createElement('button'); btn.className='btn'; btn.setAttribute('data-role','checkbtn');
+    btn.onclick=function(){ checkOne(qi); };
+    var fb = document.createElement('div'); fb.className='fb'; fb.id='fb'+qi;
+    card.appendChild(btn); card.appendChild(fb);
+    host.appendChild(card);
+  });
+  renderMcqText();
+}
+function renderMcqText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  MCQ.forEach(function(item, qi){
+    var card = document.getElementById('q'+qi);
+    card.querySelector('[data-role="stem"]').textContent = item.q[l];
+    card.querySelectorAll('.opt').forEach(function(lab){
+      var oi = +lab.getAttribute('data-oi');
+      lab.querySelector('[data-role="opttext"]').textContent = item.opts[oi][l];
+    });
+    card.querySelector('[data-role="checkbtn"]').textContent = (l==='es'?'Comprobar':'Check');
+    if(card.getAttribute('data-checked')==='1'){ paintFeedback(qi, l); }
+  });
+}
+function checkOne(qi){
+  if(!(qi in answered)){
+    var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+    var fb = document.getElementById('fb'+qi); fb.className='fb no show';
+    fb.textContent = (l==='es'?'Elija una respuesta primero.':'Please choose an answer first.');
+    return;
+  }
+  document.getElementById('q'+qi).setAttribute('data-checked','1');
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  paintFeedback(qi, l); refreshScore(); saveState();
+}
+function paintFeedback(qi, l){
+  var item = MCQ[qi]; var card = document.getElementById('q'+qi); var chosen = answered[qi];
+  card.querySelectorAll('.opt').forEach(function(lab){
+    var oi = +lab.getAttribute('data-oi'); lab.classList.remove('correct','wrong');
+    if(oi===item.correct) lab.classList.add('correct');
+    else if(oi===chosen) lab.classList.add('wrong');
+    var r = lab.querySelector('input'); if(r) r.checked = (oi===chosen);
+  });
+  var fb = document.getElementById('fb'+qi); var ok = (chosen===item.correct);
+  fb.className = 'fb show ' + (ok?'ok':'no');
+  var head = ok ? (l==='es'?'Correcto. ':'Correct. ') : (l==='es'?'No exactamente. ':'Not quite. ');
+  fb.textContent = head + item.exp[l];
+}
+function refreshScore(){
+  var n=0; MCQ.forEach(function(item,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct) n++; });
+  document.getElementById('score').textContent = n + ' / ' + MCQ.length;
+  updatePentProgress();
+}
+function updatePentProgress(){
+  var mcAll = MCQ.every(function(item,qi){ return document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct; });
+  var track = lsGet(SKEY+'_track') || 'cert';
+  var saOk = true;
+  if(track === 'masters'){
+    saOk = SA.every(function(item, si){ return saPassed[si] === true; });
+  }
+  if(mcAll && saOk){
+    try{var _pp=JSON.parse(lsGet('cts_pentecostal_progress')||'{}');_pp['unit'+12]=true;lsSet('cts_pentecostal_progress',JSON.stringify(_pp));}catch(e){}
+  }
+}
+function resetMcq(){
+  answered = {};
+  MCQ.forEach(function(item,qi){
+    var card=document.getElementById('q'+qi); card.setAttribute('data-checked','0');
+    card.querySelectorAll('.opt').forEach(function(l){ l.classList.remove('correct','wrong'); var r=l.querySelector('input'); if(r) r.checked=false; });
+    var fb=document.getElementById('fb'+qi); fb.className='fb';
+  });
+  refreshScore(); lsDel(SKEY+'_mcq');
+}
+
+/* ---------- short answer (Q24 fairness: 8 single-concept keywords, 3 = pass, word-boundary matcher) ---------- */
+function normalize(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+}
+function kwHit(answer, kw){
+  var toks = normalize(answer).split(' ');
+  var k = normalize(kw);
+  for(var i=0;i<toks.length;i++){ if(toks[i]===k || toks[i].indexOf(k)===0) return true; }
+  return false;
+}
+function countHits(answer, kws){ var n=0; kws.forEach(function(k){ if(kwHit(answer,k)) n++; }); return n; }
+
+var SA = [
+ { kw:{ en:["affirm","decline","open","verdict","movement","scripture","questions","refuse"],
+        es:["afirmar","declinar","abiertas","veredicto","movimiento","escritura","preguntas","rehusa"] },
+   q:{en:"State the three parts of this unit's biblical assessment and why it refuses to reduce them to a single verdict.",
+      es:"Exponga las tres partes de la evaluación bíblica de esta unidad y por qué rehúsa reducirlas a un solo veredicto."},
+   model:{en:"The assessment has three parts: to affirm what is true and good, to decline what fails the test of Scripture, and to leave open the questions Scripture does not settle. It refuses to reduce these to a single verdict because the movement is not one thing and its questions are not all of one kind; to call it simply right or simply wrong would flatten real distinctions. So the unit affirms the shared core, declines the genuine errors, and keeps the open questions open, measuring every part by Scripture.",
+          es:"La evaluación tiene tres partes: afirmar lo que es verdadero y bueno, declinar lo que no pasa la prueba de la Escritura, y dejar abiertas las preguntas que la Escritura no resuelve. Rehúsa reducirlas a un solo veredicto porque el movimiento no es una sola cosa y sus preguntas no son todas de una misma clase; llamarlo simplemente correcto o simplemente equivocado aplanaría distinciones reales. Así la unidad afirma el núcleo compartido, declina los errores genuinos, y mantiene abiertas las preguntas abiertas, midiendo cada parte por la Escritura."} },
+ { kw:{ en:["affirm","spirit","gifts","evangelism","decline","prosperity","experience","required"],
+        es:["afirma","espiritu","dones","evangelismo","declina","prosperidad","experiencia","requerida"] },
+   q:{en:"List three things this unit affirms and three it declines.",
+      es:"Enumere tres cosas que esta unidad afirma y tres que declina."},
+   model:{en:"The unit affirms that the Holy Spirit is God at work today, that the New Testament gifts are real and the desire for them is commanded, and that the movement has borne great evangelism fruit in carrying the gospel to the world. It declines the teaching that tongues are the required evidence of Spirit-baptism, the prosperity gospel that promises guaranteed wealth, and any spirit that exalts experience above Scripture or a gift above the Giver. In short, it affirms the Spirit's genuine work and declines the distortions of it.",
+          es:"La unidad afirma que el Espíritu Santo es Dios obrando hoy, que los dones del Nuevo Testamento son reales y que el deseo de ellos es mandado, y que el movimiento ha dado gran fruto de evangelismo al llevar el evangelio al mundo. Declina la enseñanza de que las lenguas son la evidencia requerida del bautismo del Espíritu, el evangelio de la prosperidad que promete riqueza garantizada, y todo espíritu que exalta la experiencia por encima de la Escritura o un don por encima del Dador. En resumen, afirma la obra genuina del Espíritu y declina las distorsiones de ella."} },
+ { kw:{ en:["open","continue","perfect","baptism","judged","glorify","christ","scripture"],
+        es:["abiertas","continuan","perfecto","bautismo","juzga","glorifica","cristo","escritura"] },
+   q:{en:"Give the questions this unit leaves open, and state the single test by which every gift and claim is finally judged.",
+      es:"Dé las preguntas que esta unidad deja abiertas, y exponga la única prueba por la cual todo don y afirmación se juzga finalmente."},
+   model:{en:"The unit leaves open whether the revelatory gifts continue or have ceased, whether the perfect of First Corinthians is the completed canon or the return of Christ, whether the baptism in the Spirit is conversion itself or a later empowering, and whether the tongues of Acts ten and nineteen were known languages. It imposes no verdict on these, since faithful people differ with Scripture in hand. The single test by which every gift and claim is finally judged is whether it glorifies Jesus Christ and makes His people more like Him, for the Spirit was given to glorify the Son.",
+          es:"La unidad deja abiertas si los dones revelatorios continúan o han cesado, si lo perfecto de Primera de Corintios es el canon completo o el regreso de Cristo, si el bautismo en el Espíritu es la conversión misma o un empoderamiento posterior, y si las lenguas de Hechos diez y diecinueve eran idiomas conocidos. No impone veredicto sobre estas, pues gente fiel difiere con la Escritura en la mano. La única prueba por la cual todo don y toda afirmación se juzga finalmente es si glorifica a Jesucristo y hace a su pueblo más semejante a Él, pues el Espíritu fue dado para glorificar al Hijo."} }
+];
+
+function buildSa(){
+  var host=document.getElementById('sa'); host.innerHTML='';
+  SA.forEach(function(item, si){
+    var card=document.createElement('div'); card.className='qcard'; card.id='sa'+si;
+    var num=document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Written '+(si+1)+'</span><span class="seg es">Escrita '+(si+1)+'</span>';
+    var stem=document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    var ta=document.createElement('textarea'); ta.id='ta'+si; ta.setAttribute('aria-label','answer');
+    var btnrow=document.createElement('div'); btnrow.style.marginTop='10px'; btnrow.style.display='flex'; btnrow.style.gap='10px'; btnrow.style.flexWrap='wrap';
+    var chk=document.createElement('button'); chk.className='btn'; chk.setAttribute('data-role','chk'); chk.onclick=function(){ checkSa(si); };
+    var rev=document.createElement('button'); rev.className='btn ghost'; rev.setAttribute('data-role','rev'); rev.onclick=function(){ revealModel(si); };
+    btnrow.appendChild(chk); btnrow.appendChild(rev);
+    var hit=document.createElement('div'); hit.className='hitline'; hit.id='hit'+si;
+    var mod=document.createElement('div'); mod.className='model'; mod.id='mod'+si;
+    mod.innerHTML='<div class="mh" data-role="mh"></div><div data-role="mtext"></div>';
+    card.appendChild(num); card.appendChild(stem); card.appendChild(ta); card.appendChild(btnrow); card.appendChild(hit); card.appendChild(mod);
+    host.appendChild(card);
+  });
+  renderSaText();
+}
+function renderSaText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  SA.forEach(function(item, si){
+    var card=document.getElementById('sa'+si);
+    card.querySelector('[data-role="stem"]').textContent=item.q[l];
+    card.querySelector('[data-role="chk"]').textContent=(l==='es'?'Comprobar mi respuesta':'Check my answer');
+    card.querySelector('[data-role="rev"]').textContent=(l==='es'?'Ver respuesta modelo':'Reveal model answer');
+    card.querySelector('[data-role="mh"]').textContent=(l==='es'?'Respuesta modelo':'Model answer');
+    card.querySelector('[data-role="mtext"]').textContent=item.model[l];
+    if(card.getAttribute('data-checked')==='1') paintHits(si, l);
+  });
+}
+function checkSa(si){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  var ans = document.getElementById('ta'+si).value.trim();
+  if(ans.length < 100){
+    var hit=document.getElementById('hit'+si); hit.className='hitline show';
+    hit.innerHTML = (l==='es' ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.');
+    return;
+  }
+  document.getElementById('sa'+si).setAttribute('data-checked','1');
+  paintHits(si, l);
+  revealModel(si);
+  saPassed[si] = countHits(ans, SA[si].kw[l]) >= 3;
+  updatePentProgress();
+}
+function paintHits(si, l){
+  var item=SA[si]; var ans=document.getElementById('ta'+si).value;
+  var n=countHits(ans, item.kw[l]); var pass = n>=3;
+  var hit=document.getElementById('hit'+si); hit.className='hitline show';
+  if(l==='es'){
+    hit.innerHTML = 'Conceptos clave encontrados: <b>'+n+' de 8</b> &mdash; '+(pass?'aprobado (mínimo 3). Compare con la respuesta modelo abajo.':'aún no (se necesitan 3). Revise su respuesta y la modelo abajo.');
+  } else {
+    hit.innerHTML = 'Key concepts found: <b>'+n+' of 8</b> &mdash; '+(pass?'pass (minimum 3). Compare with the model answer below.':'not yet (3 needed). Review your answer and the model below.');
+  }
+}
+function revealModel(si){ document.getElementById('mod'+si).classList.add('show'); }
+
+/* ---------- persistence ---------- */
+function saveState(){
+  try{
+    var mcqState={}; MCQ.forEach(function(it,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1'){ mcqState[qi]=answered[qi]; } });
+    lsSet(SKEY+'_mcq', JSON.stringify(mcqState));
+  }catch(e){}
+}
+function restoreState(){
+  var l = lsGet(SKEY+'_lang'); if(l) setLang(l);
+  var t = lsGet(SKEY+'_track');
+  if(!t){
+    // No local choice yet on this page -- default from the site-wide track
+    // (set at the seminary's main registration) so a Masters-track student
+    // is graded at the correct rigor here without re-selecting it locally.
+    try{
+      var shared = JSON.parse(lsGet('cts_student') || 'null');
+      var sharedTrack = String(lsGet('cts_track') || (shared && (shared.track||shared.program)) || '').toLowerCase();
+      if(sharedTrack === 'mdiv' || sharedTrack === 'thm' || sharedTrack === 'mth' ||
+         /master of divinity|m\.div|master of theology|m\.th|th\.m/.test(sharedTrack)) t = 'masters';
+    }catch(e){}
+  }
+  setTrack(t||'cert');
+  try{
+    var raw = lsGet(SKEY+'_mcq');
+    if(raw){ var st=JSON.parse(raw); var lg=document.documentElement.classList.contains('lang-es')?'es':'en';
+      Object.keys(st).forEach(function(qi){ answered[qi]=st[qi]; document.getElementById('q'+qi).setAttribute('data-checked','1'); paintFeedback(+qi, lg); });
+      refreshScore();
+    }
+  }catch(e){}
+}
+
+/* ---------- init ---------- */
+buildMcq(); buildSa();
+restoreState();
+</script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPentecostalReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+</body>
+</html>

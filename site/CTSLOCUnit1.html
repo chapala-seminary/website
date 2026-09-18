@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Life of Christ &mdash; Unit 1</title>
+<style>
+:root{
+  --ink:#241c12; --paper:#f7f1e4; --card:#fffdf8; --line:#d8ccb2;
+  --accent:#7a3b1e; --accent2:#9c6b2f; --gold:#fbf3d6; --goldln:#caa94e;
+  --good:#2f6b3a; --bad:#9b2c2c; --muted:#6c6150;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;line-height:1.6;}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+header.site{background:var(--accent);color:#f6ecd8;padding:18px 0;border-bottom:4px solid var(--goldln);}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:0;}
+header.site h1{font-size:1.15rem;margin:0;font-weight:600;letter-spacing:.2px;}
+header.site .sub{font-size:.78rem;opacity:.85;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+.langbtn{font-family:system-ui,sans-serif;font-size:.8rem;background:#f6ecd8;color:var(--accent);
+  border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600;}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 4px;
+  font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);}
+.badge{background:var(--gold);border:1px solid var(--goldln);border-radius:14px;padding:3px 10px;color:#6a531c;}
+.epigraph{font-style:italic;color:var(--accent2);border-left:3px solid var(--goldln);
+  padding:6px 0 6px 14px;margin:16px 0;font-size:.98rem;}
+h2.sec{font-size:1.25rem;color:var(--accent);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin:34px 0 14px;}
+article p{margin:0 0 14px;}
+article b{color:var(--accent);}
+.v{color:#3a4a2c;}
+.illo{background:#fbf6ea;border-left:3px solid var(--goldln);padding:10px 14px;border-radius:4px;}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:14px 0;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);}
+.qn{font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;color:var(--accent2);
+  text-transform:uppercase;letter-spacing:.6px;}
+.qp{margin:6px 0 10px;font-weight:600;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:9px 12px;margin:6px 0;cursor:pointer;font:inherit;color:inherit;}
+.opt:hover{border-color:var(--accent2);}
+.opt .lt{font-weight:700;color:var(--accent2);margin-right:8px;}
+.opt.correct{background:#e9f3e8;border-color:var(--good);}
+.opt.wrong{background:#f6e6e4;border-color:var(--bad);}
+.opt:disabled{cursor:default;opacity:1;}
+.expl{font-size:.9rem;color:var(--muted);margin:8px 2px 0;display:none;}
+.expl.show{display:block;}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:6px;padding:10px;
+  font:inherit;background:#fff;resize:vertical;}
+.btn{font-family:system-ui,sans-serif;font-weight:600;border:none;border-radius:6px;padding:9px 16px;
+  cursor:pointer;font-size:.9rem;}
+.btn.primary{background:var(--accent);color:#f6ecd8;}
+.btn.ghost{background:#efe6d2;color:var(--accent);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.sa-res{margin-top:10px;font-family:system-ui,sans-serif;font-size:.88rem;display:none;}
+.sa-res.show{display:block;}
+.sa-verdict{font-weight:700;}
+.sa-verdict.pass{color:var(--good);} .sa-verdict.soft{color:var(--accent2);}
+.model{background:var(--gold);border:1px solid var(--goldln);border-radius:6px;padding:10px 12px;margin-top:8px;}
+.model .ml{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:#6a531c;}
+.foot{margin-top:30px;border-top:2px solid var(--line);padding-top:18px;}
+.status{font-family:system-ui,sans-serif;font-size:.9rem;margin:10px 0;}
+.status.ok{color:var(--good);} .status.warn{color:var(--accent2);} .status.lock{color:var(--bad);}
+.modal{position:fixed;inset:0;background:rgba(36,28,18,.62);display:flex;align-items:center;
+  justify-content:center;padding:18px;z-index:50;}
+.modal .box{background:var(--card);border-radius:10px;max-width:420px;width:100%;padding:22px;
+  border-top:5px solid var(--goldln);}
+.modal h3{margin:0 0 6px;color:var(--accent);}
+.modal label{display:block;font-family:system-ui,sans-serif;font-size:.82rem;margin:12px 0 4px;color:var(--muted);}
+.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit;}
+.hide{display:none !important;}
+.next{display:inline-block;margin-top:12px;background:var(--good);color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:6px;font-family:system-ui,sans-serif;font-weight:600;}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:2px 0 18px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);margin-right:3px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:var(--card);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600;line-height:1;}
+.unitnav a:hover{border-color:var(--accent2);color:var(--accent2);}
+.unitnav a.active{background:var(--accent);color:#f6ecd8;border-color:var(--accent);}
+.unitnav a.done{background:var(--gold);border-color:var(--goldln);color:#6a531c;}
+.unitnav a.cert{min-width:auto;padding:0 12px;background:#efe6d2;}
+html[lang="es"] .en-lbl{display:none}html[lang="en"] .es-lbl{display:none}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site">
+  <div class="wrap">
+    <div><h1 id="t-title">The Life of Christ</h1><div class="sub" id="t-unit">Unit 1 &middot; The Word Became Flesh</div></div>
+    <button class="langbtn" id="langBtn" type="button">Espa&ntilde;ol</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <span id="t-greet"></span>
+    <span class="badge" id="t-track"></span>
+  </div>
+
+     <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+     <span class="nl"><span class="en-lbl">Units</span><span class="es-lbl">Unidades</span></span>
+     <a data-u="1" href="CTSLOCUnit1.html" class="active">1</a>
+     <a data-u="2" href="CTSLOCUnit2.html">2</a>
+     <a data-u="3" href="CTSLOCUnit3.html">3</a>
+     <a data-u="4" href="CTSLOCUnit4.html">4</a>
+     <a data-u="5" href="CTSLOCUnit5.html">5</a>
+     <a data-u="6" href="CTSLOCUnit6.html">6</a>
+     <a data-u="7" href="CTSLOCUnit7.html">7</a>
+     <a data-u="8" href="CTSLOCUnit8.html">8</a>
+     <a data-u="9" href="CTSLOCUnit9.html">9</a>
+     <a data-u="10" href="CTSLOCUnit10.html">10</a>
+     <a class="cert" href="CTSLOCCertificate.html"><span class="en-lbl">Certificate</span><span class="es-lbl">Certificado</span></a>
+   </nav>
+   <script>(function(){try{var raw=localStorage.getItem("cts_loc_progress")||"{}";var done=JSON.parse(raw);var nav=document.getElementById("unitnav");if(!nav)return;var a=nav.querySelectorAll("a[data-u]");for(var i=0;i<a.length;i++){var u=a[i].getAttribute("data-u");if(done[u]&&a[i].className.indexOf("active")<0){a[i].className=(a[i].className+" done").trim();}}}catch(e){}})();</script>
+
+   <div class="epigraph" id="epigraph"></div>
+
+  <article>
+    <div id="teach-en"><h3 style="color:var(--accent);margin:0 0 4px">The Word Became Flesh</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">The Preexistence, Incarnation, and Hidden Years of the Lord Jesus Christ</p>
+
+<p><b>1. The Word Who Already Was</b></p>
+<p>We are tempted to begin the life of Christ at the manger. But the manger is not the beginning. Before Bethlehem, before Mary, before there was a single night for a star to shine over &mdash; He already was. <span class="v">&ldquo;In the beginning was the Word, and the Word was with God, and the Word was God&rdquo; (John 1:1).</span> John does not say the Word <i>began</i> in the beginning; he says that when the beginning began, the Word already <b>was</b>. Genesis opens, <span class="v">&ldquo;In the beginning God created&rdquo; (Genesis 1:1);</span> John reaches back behind that opening and tells us Who was already there.</p>
+<p>Mark how carefully John guards the mystery. The Word was <i>with</i> God &mdash; distinct, face to face, in fellowship. And the Word <i>was</i> God &mdash; not a lesser god, not a made thing, but God of very God. By Him <span class="v">&ldquo;all things were made, and without Him nothing was made that was made&rdquo; (John 1:3).</span> Paul says the same: <span class="v">&ldquo;by Him all things were created,&rdquo;</span> and <span class="v">&ldquo;He is before all things, and in Him all things consist&rdquo; (Colossians 1:16&ndash;17).</span> The hands that would one day be pierced are the hands that flung the stars into space.</p>
+<p>And He knew His own eternity. <span class="v">&ldquo;Before Abraham was, I AM,&rdquo;</span> He said (John 8:58) &mdash; and they took up stones, because every man in that courtyard understood He had just spoken the name of God (Exodus 3:14). In His last prayer He asked the Father to restore <span class="v">&ldquo;the glory which I had with You before the world was&rdquo; (John 17:5).</span> He had a glory before the world. Hold that, and the manger will never again look small.</p>
+
+<p><b>2. And the Word Became Flesh</b></p>
+<p>Now comes the sentence that ought to stop our breath: <span class="v">&ldquo;And the Word became flesh and dwelt among us&rdquo; (John 1:14).</span> The eternal One entered time. The Maker of the body took a body. The One who <span class="v">&ldquo;upholds all things by the word of His power&rdquo; (Hebrews 1:3)</span> became a nursing infant who had to be upheld in His mother&rsquo;s arms.</p>
+<p>This is the heart of the whole course, so let us say it in the form that preaches. As God He was from everlasting, but as man He was <span class="v">&ldquo;born of a woman&rdquo; (Galatians 4:4).</span> As God the heavens cannot contain Him, but as man He was <span class="v">&ldquo;wrapped in swaddling cloths, lying in a manger&rdquo; (Luke 2:12).</span> As God He is the great I AM, but as man He <span class="v">&ldquo;increased in wisdom and stature&rdquo; (Luke 2:52).</span> As God He gives life to all things, but as man He would one day lay His own life down (John 10:18). He did not stop being God to become man; He <span class="v">&ldquo;made Himself of no reputation, taking the form of a bondservant, and coming in the likeness of men&rdquo; (Philippians 2:7).</span> He added our nature; He did not subtract His own. And so Matthew gives Him the name <span class="v">Emmanuel, &ldquo;God with us&rdquo; (Matthew 1:23, citing Isaiah 7:14)</span> &mdash; not God <i>near</i> us, not God <i>over</i> us, but God <b>with</b> us, in our skin, in our weakness, in our world.</p>
+<p class="illo">Let me give you a picture &mdash; only a picture, for nothing on earth is large enough to hold this. Imagine the author of a great story, a man who has filled a thousand pages with kingdoms and people he has come to love. He knows every character better than they know themselves; he holds their whole world in his mind. Suppose he longed so to be among them that he did the one impossible thing &mdash; he wrote himself onto the page, not as the towering author, but as a child born in the poorest corner of his own story, subject to its dangers, able to bleed in its wars. He would not stop being the author; the whole tale would still rest in his hand. But now he would be <i>in</i> it, where his characters could touch him &mdash; and where, if the story turned cruel, it could kill him. That is only a shadow, and a small one: the Word is no fiction, and we are not ink. But it lets us feel the wonder &mdash; the One who wrote the world wrote Himself into it, <span class="v">&ldquo;made Himself of no reputation&rdquo; (Philippians 2:7),</span> so that He could be touched, and so that He could die. That is condescension. That is love.</p>
+
+<p><b>3. Two Genealogies, One Savior</b></p>
+<p>Two of the Gospels open His life with a list of names, and the two lists are not the same. Honest study faces that plainly. Matthew begins, <span class="v">&ldquo;The book of the genealogy of Jesus Christ, the Son of David, the Son of Abraham&rdquo; (Matthew 1:1),</span> and traces the royal line <i>down</i> through Solomon and the kings of Judah (Matthew 1:6&ndash;7) to Joseph. Luke runs the other direction &mdash; <i>up</i> from Jesus through a different branch, by way of Nathan rather than Solomon (Luke 3:31), past Abraham, all the way to <span class="v">&ldquo;Adam, the son of God&rdquo; (Luke 3:38).</span></p>
+<p>The names between David and Joseph differ. The most widely held evangelical harmonization is that Matthew gives Joseph&rsquo;s <b>legal, royal</b> line &mdash; Jesus&rsquo; lawful claim to David&rsquo;s throne (fulfilling 2 Samuel 7:12&ndash;13) &mdash; while Luke gives the <b>natural</b> line, most likely through Mary.</p>
+<p>But do not lose the doctrine in the puzzle. The two lists are saying two true things at once. Matthew makes Him <b>Israel&rsquo;s King</b> &mdash; Son of David, Son of Abraham (Matthew 1:1) &mdash; the One in whom every promise to the fathers comes due. Luke makes Him <b>humanity&rsquo;s Kinsman</b> &mdash; Son of Adam, Son of God (Luke 3:38) &mdash; bone of our bone, joined to the whole race He came to save. He is the King of the Jews and the Brother of every sinner who will have Him.</p>
+
+<p><b>4. King and Savior: The Nativity in Two Portraits</b></p>
+<p>The Gospels do not flatten His birth into one account; they give it to us in complementary portraits, and we should let each speak. Gabriel told Mary, <span class="v">&ldquo;He will be great&hellip; and the Lord God will give Him the throne of His father David&rdquo; (Luke 1:32&ndash;33).</span> He was born in Bethlehem, exactly where Micah had said the Ruler would come from (Micah 5:2; Luke 2:4&ndash;7).</p>
+<p>Then watch <i>who</i> is told. Luke&rsquo;s angel goes first to <b>shepherds</b> keeping watch by night: <span class="v">&ldquo;There is born to you this day in the city of David a Savior, who is Christ the Lord&rdquo; (Luke 2:11).</span> The gospel&rsquo;s first hearers are the poor and the watching. Matthew&rsquo;s portrait turns outward: <b>wise men from the East</b> arrive asking, <span class="v">&ldquo;Where is He who has been born King of the Jews?&rdquo; (Matthew 2:2)</span> &mdash; Gentiles drawn to the King, a first taste of the day all nations will come (Matthew 28:19). Luke shows the Savior welcomed by the lowly of Israel; Matthew shows the King sought by the Gentile world. Put the two portraits side by side and you have the whole gospel in miniature: a Savior for all.</p>
+<p>And already the shadow of the cross falls across the cradle. Herod <span class="v">&ldquo;was exceedingly angry&rdquo;</span> and slaughtered the children of Bethlehem (Matthew 2:16), and the family fled into Egypt, <span class="v">&ldquo;that it might be fulfilled&hellip; &lsquo;Out of Egypt I called My Son&rsquo;&rdquo; (Matthew 2:15; Hosea 11:1).</span> The world was hostile to Him from His first breath.</p>
+
+<p><b>5. The Hidden Years and the Boy in the Temple</b></p>
+<p>Then the curtain nearly closes. Of some thirty years, the Gospels give us one scene. At twelve, Jesus stayed behind in the temple, and when His mother found Him He answered, <span class="v">&ldquo;Why did you seek Me? Did you not know that I must be about My Father&rsquo;s business?&rdquo; (Luke 2:49).</span> At twelve He already knew Whose Son He was. Yet in the very next verse He <span class="v">&ldquo;was subject to&rdquo;</span> Joseph and Mary (Luke 2:51) &mdash; real obedience, real boyhood. And Luke seals the hidden years with a sentence we must not rush past: <span class="v">&ldquo;And Jesus increased in wisdom and stature, and in favor with God and men&rdquo; (Luke 2:52).</span></p>
+<p>Sit with the wonder of that before you tidy it. How does the One who knows all things <i>increase</i> in wisdom? Scripture does not explain it away; it lets both stand &mdash; fully God, and a truly growing boy who learned to walk, to read the Scriptures, to work the wood under Joseph&rsquo;s hand. The silence over those years is itself a lesson: where curiosity shouts, Scripture is sparing. The later apocryphal &ldquo;infancy gospels&rdquo; rushed in to fill the quiet with sensational miracles; the Holy Spirit gave us instead only what we need <span class="v">&ldquo;that you may believe&rdquo; (John 20:31),</span> not all we crave to know.</p>
+
+<p><b>6. Why It Had to Be So</b></p>
+<p>The Incarnation is not a curiosity at the front of the story; it is the foundation of the gospel. <span class="v">&ldquo;Inasmuch then as the children have partaken of flesh and blood, He Himself likewise shared in the same, that through death He might destroy him who had the power of death&rdquo; (Hebrews 2:14),</span> becoming <span class="v">&ldquo;a merciful and faithful High Priest&rdquo; (Hebrews 2:17).</span> Only One who is truly God could save; only One who is truly man could stand in our place. <span class="v">&ldquo;For there is one God and one Mediator between God and men, the Man Christ Jesus&rdquo; (1 Timothy 2:5).</span></p>
+<p>So we begin where the whole course will walk: with both hands on Him. Everything ahead &mdash; His words, His works, His cross, His rising &mdash; is the life of the <b>God-Man</b>. Never make Him so divine that He cannot weep at a grave (John 11:35); never make Him so human that He cannot still a sea (Mark 4:39). The Word became flesh &mdash; and dwelt among us.</p>
+</div>
+    <div id="teach-es" class="hide"><h3 style="color:var(--accent);margin:0 0 4px">El Verbo se hizo carne</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">La preexistencia, la encarnaci&oacute;n y los a&ntilde;os ocultos del Se&ntilde;or Jesucristo</p>
+
+<p><b>1. El Verbo que ya era</b></p>
+<p>Nos sentimos tentados a comenzar la vida de Cristo en el pesebre. Pero el pesebre no es el comienzo. Antes de Bel&eacute;n, antes de Mar&iacute;a, antes de que hubiera una sola noche sobre la cual brillara una estrella &mdash; &Eacute;l ya era. <span class="v">&ldquo;En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios&rdquo; (Juan 1:1).</span> Juan no dice que el Verbo <i>comenz&oacute;</i> en el principio; dice que cuando el principio comenz&oacute;, el Verbo ya <b>era</b>. G&eacute;nesis abre: <span class="v">&ldquo;En el principio cre&oacute; Dios&rdquo; (G&eacute;nesis 1:1);</span> Juan se remonta m&aacute;s atr&aacute;s de esa apertura y nos dice Qui&eacute;n ya estaba all&iacute;.</p>
+<p>Note con cu&aacute;nto cuidado Juan guarda el misterio. El Verbo estaba <i>con</i> Dios &mdash; distinto, cara a cara, en comuni&oacute;n. Y el Verbo <i>era</i> Dios &mdash; no un dios menor, no una cosa hecha, sino Dios verdadero de Dios verdadero. Por &Eacute;l <span class="v">&ldquo;todas las cosas por &eacute;l fueron hechas, y sin &eacute;l nada de lo que ha sido hecho, fue hecho&rdquo; (Juan 1:3).</span> Pablo dice lo mismo: <span class="v">&ldquo;por &eacute;l fueron creadas todas las cosas&rdquo;</span> y <span class="v">&ldquo;&eacute;l es antes de todas las cosas, y todas las cosas en &eacute;l subsisten&rdquo; (Colosenses 1:16&ndash;17).</span> Las manos que un d&iacute;a ser&iacute;an traspasadas son las manos que lanzaron las estrellas al espacio.</p>
+<p>Y &Eacute;l conoc&iacute;a su propia eternidad. <span class="v">&ldquo;Antes que Abraham fuese, yo soy&rdquo;,</span> dijo (Juan 8:58) &mdash; y tomaron piedras, porque todo hombre en aquel atrio entendi&oacute; que acababa de pronunciar el nombre de Dios (&Eacute;xodo 3:14). En su &uacute;ltima oraci&oacute;n pidi&oacute; al Padre que le restaurara <span class="v">&ldquo;la gloria que tuve contigo antes que el mundo fuese&rdquo; (Juan 17:5).</span> Ten&iacute;a una gloria antes del mundo. Sostenga eso, y el pesebre nunca volver&aacute; a parecer peque&ntilde;o.</p>
+
+<p><b>2. Y el Verbo se hizo carne</b></p>
+<p>Ahora viene la frase que deber&iacute;a detenernos la respiraci&oacute;n: <span class="v">&ldquo;Y aquel Verbo fue hecho carne, y habit&oacute; entre nosotros&rdquo; (Juan 1:14).</span> El Eterno entr&oacute; en el tiempo. El Hacedor del cuerpo tom&oacute; un cuerpo. Aquel que <span class="v">&ldquo;sustenta todas las cosas con la palabra de su poder&rdquo; (Hebreos 1:3)</span> se hizo un ni&ntilde;o de pecho que ten&iacute;a que ser sostenido en los brazos de su madre.</p>
+<p>Este es el coraz&oacute;n de todo el curso, as&iacute; que dig&aacute;moslo en la forma que predica. Como Dios era desde la eternidad, pero como hombre <span class="v">&ldquo;naci&oacute; de mujer&rdquo; (G&aacute;latas 4:4).</span> Como Dios los cielos no pueden contenerlo, pero como hombre fue <span class="v">&ldquo;envuelto en pa&ntilde;ales, acostado en un pesebre&rdquo; (Lucas 2:12).</span> Como Dios es el gran Yo Soy, pero como hombre <span class="v">&ldquo;crec&iacute;a en sabidur&iacute;a y en estatura&rdquo; (Lucas 2:52).</span> Como Dios da vida a todas las cosas, pero como hombre un d&iacute;a pondr&iacute;a su propia vida (Juan 10:18). No dej&oacute; de ser Dios para hacerse hombre; <span class="v">&ldquo;se despoj&oacute; a s&iacute; mismo, tomando forma de siervo, hecho semejante a los hombres&rdquo; (Filipenses 2:7).</span> A&ntilde;adi&oacute; nuestra naturaleza; no rest&oacute; la suya. Y por eso Mateo le da el nombre <span class="v">Emanuel, &ldquo;Dios con nosotros&rdquo; (Mateo 1:23, citando Isa&iacute;as 7:14)</span> &mdash; no Dios <i>cerca</i> de nosotros, no Dios <i>sobre</i> nosotros, sino Dios <b>con</b> nosotros, en nuestra piel, en nuestra debilidad, en nuestro mundo.</p>
+<p class="illo">Perm&iacute;tame darle una imagen &mdash; solo una imagen, porque nada en la tierra es bastante grande para contener esto. Imagine al autor de una gran historia, un hombre que ha llenado mil p&aacute;ginas con reinos y personas que ha llegado a amar. Conoce a cada personaje mejor de lo que ellos se conocen a s&iacute; mismos; sostiene todo su mundo en su mente. Suponga que anhel&oacute; tanto estar entre ellos que hizo lo &uacute;nico imposible &mdash; se escribi&oacute; a s&iacute; mismo en la p&aacute;gina, no como el autor que todo lo domina, sino como un ni&ntilde;o nacido en el rinc&oacute;n m&aacute;s pobre de su propia historia, sujeto a sus peligros, capaz de sangrar en sus guerras. No dejar&iacute;a de ser el autor; todo el relato seguir&iacute;a descansando en su mano. Pero ahora estar&iacute;a <i>dentro</i> de &eacute;l, donde sus personajes podr&iacute;an tocarlo &mdash; y donde, si la historia se volviera cruel, podr&iacute;a matarlo. Eso es solo una sombra, y peque&ntilde;a: el Verbo no es ficci&oacute;n, y nosotros no somos tinta. Pero nos deja sentir la maravilla &mdash; Aquel que escribi&oacute; el mundo se escribi&oacute; a s&iacute; mismo dentro de &eacute;l, <span class="v">&ldquo;se despoj&oacute; a s&iacute; mismo&rdquo; (Filipenses 2:7),</span> para poder ser tocado, y para poder morir. Eso es condescendencia. Eso es amor.</p>
+
+<p><b>3. Dos genealog&iacute;as, un Salvador</b></p>
+<p>Dos de los Evangelios abren su vida con una lista de nombres, y las dos listas no son iguales. El estudio honesto lo enfrenta sin rodeos. Mateo comienza: <span class="v">&ldquo;Libro de la generaci&oacute;n de Jesucristo, hijo de David, hijo de Abraham&rdquo; (Mateo 1:1),</span> y traza la l&iacute;nea real hacia abajo por Salom&oacute;n y los reyes de Jud&aacute; (Mateo 1:6&ndash;7) hasta Jos&eacute;. Lucas corre en direcci&oacute;n contraria &mdash; hacia arriba desde Jes&uacute;s por una rama distinta, por la v&iacute;a de Nat&aacute;n y no de Salom&oacute;n (Lucas 3:31), pasando a Abraham, hasta <span class="v">&ldquo;Ad&aacute;n, hijo de Dios&rdquo; (Lucas 3:38).</span></p>
+<p>Los nombres entre David y Jos&eacute; difieren. La armonizaci&oacute;n evang&eacute;lica m&aacute;s sostenida es que Mateo da la l&iacute;nea <b>legal y real</b> de Jos&eacute; &mdash; el derecho leg&iacute;timo de Jes&uacute;s al trono de David (cumpliendo 2 Samuel 7:12&ndash;13) &mdash; mientras que Lucas da la l&iacute;nea <b>natural</b>, muy probablemente por Mar&iacute;a.</p>
+<p>Pero no perdamos la doctrina en el rompecabezas. Las dos listas dicen dos verdades a la vez. Mateo lo hace <b>Rey de Israel</b> &mdash; Hijo de David, Hijo de Abraham (Mateo 1:1) &mdash; Aquel en quien toda promesa a los padres se cumple. Lucas lo hace <b>Pariente de la humanidad</b> &mdash; Hijo de Ad&aacute;n, Hijo de Dios (Lucas 3:38) &mdash; hueso de nuestros huesos, unido a toda la raza que vino a salvar. Es el Rey de los jud&iacute;os y el Hermano de todo pecador que lo reciba.</p>
+
+<p><b>4. Rey y Salvador: el nacimiento en dos retratos</b></p>
+<p>Los Evangelios no aplanan su nacimiento en un solo relato; nos lo dan en retratos complementarios, y debemos dejar hablar a cada uno. Gabriel dijo a Mar&iacute;a: <span class="v">&ldquo;Este ser&aacute; grande&hellip; y le dar&aacute; el Se&ntilde;or Dios el trono de David su padre&rdquo; (Lucas 1:32&ndash;33).</span> Naci&oacute; en Bel&eacute;n, exactamente donde Miqueas hab&iacute;a dicho que vendr&iacute;a el Gobernante (Miqueas 5:2; Lucas 2:4&ndash;7).</p>
+<p>Observe luego a qui&eacute;n se le anuncia. El &aacute;ngel de Lucas va primero a los <b>pastores</b> que velaban de noche: <span class="v">&ldquo;que os ha nacido hoy, en la ciudad de David, un Salvador, que es CRISTO el Se&ntilde;or&rdquo; (Lucas 2:11).</span> Los primeros que oyen el evangelio son los pobres y los que velan. El retrato de Mateo se vuelve hacia afuera: <b>magos del oriente</b> llegan preguntando: <span class="v">&ldquo;&iquest;D&oacute;nde est&aacute; el rey de los jud&iacute;os, que ha nacido?&rdquo; (Mateo 2:2)</span> &mdash; gentiles atra&iacute;dos al Rey, un primer anticipo del d&iacute;a en que vendr&aacute;n todas las naciones (Mateo 28:19). Lucas muestra al Salvador recibido por los humildes de Israel; Mateo muestra al Rey buscado por el mundo gentil. Ponga los dos retratos lado a lado y tiene todo el evangelio en miniatura: un Salvador para todos.</p>
+<p>Y ya la sombra de la cruz cae sobre la cuna. Herodes <span class="v">&ldquo;se enoj&oacute; mucho&rdquo;</span> y mat&oacute; a los ni&ntilde;os de Bel&eacute;n (Mateo 2:16), y la familia huy&oacute; a Egipto, <span class="v">&ldquo;para que se cumpliese&hellip; De Egipto llam&eacute; a mi Hijo&rdquo; (Mateo 2:15; Oseas 11:1).</span> El mundo le fue hostil desde su primer aliento.</p>
+
+<p><b>5. Los a&ntilde;os ocultos y el ni&ntilde;o en el templo</b></p>
+<p>Entonces el tel&oacute;n casi se cierra. De unos treinta a&ntilde;os, los Evangelios nos dan una sola escena. A los doce, Jes&uacute;s se qued&oacute; en el templo, y cuando su madre lo hall&oacute;, respondi&oacute;: <span class="v">&ldquo;&iquest;Por qu&eacute; me buscabais? &iquest;No sab&iacute;ais que en los negocios de mi Padre me es necesario estar?&rdquo; (Lucas 2:49).</span> A los doce ya sab&iacute;a de qui&eacute;n era Hijo. Y sin embargo, en el vers&iacute;culo siguiente <span class="v">&ldquo;estaba sujeto a ellos&rdquo;</span> (Lucas 2:51) &mdash; verdadera obediencia, verdadera ni&ntilde;ez. Y Lucas sella los a&ntilde;os ocultos con una frase que no debemos pasar de prisa: <span class="v">&ldquo;Y Jes&uacute;s crec&iacute;a en sabidur&iacute;a y en estatura, y en gracia para con Dios y los hombres&rdquo; (Lucas 2:52).</span></p>
+<p>Det&eacute;ngase en la maravilla de eso antes de ordenarla. &iquest;C&oacute;mo crece en sabidur&iacute;a Aquel que conoce todas las cosas? La Escritura no lo explica para quitarlo; deja que ambos permanezcan &mdash; plenamente Dios, y un ni&ntilde;o que verdaderamente crec&iacute;a, que aprendi&oacute; a caminar, a leer las Escrituras, a trabajar la madera bajo la mano de Jos&eacute;. El silencio sobre esos a&ntilde;os es en s&iacute; una lecci&oacute;n: donde la curiosidad grita, la Escritura es parca. Los posteriores &ldquo;evangelios de la infancia&rdquo; ap&oacute;crifos se apresuraron a llenar el silencio con prodigios sensacionales; el Esp&iacute;ritu Santo nos dio en cambio solo lo que necesitamos <span class="v">&ldquo;para que cre&aacute;is&rdquo; (Juan 20:31),</span> no todo lo que ansiamos saber.</p>
+
+<p><b>6. Por qu&eacute; ten&iacute;a que ser as&iacute;</b></p>
+<p>La encarnaci&oacute;n no es una curiosidad al frente de la historia; es el fundamento del evangelio. <span class="v">&ldquo;As&iacute; que, por cuanto los hijos participaron de carne y sangre, &eacute;l tambi&eacute;n particip&oacute; de lo mismo, para destruir por la muerte al que ten&iacute;a el imperio de la muerte&rdquo; (Hebreos 2:14),</span> llegando a ser <span class="v">&ldquo;misericordioso y fiel sumo sacerdote&rdquo; (Hebreos 2:17).</span> Solo Aquel que es verdaderamente Dios pod&iacute;a salvar; solo Aquel que es verdaderamente hombre pod&iacute;a ocupar nuestro lugar. <span class="v">&ldquo;Porque hay un solo Dios, y un solo mediador entre Dios y los hombres, Jesucristo hombre&rdquo; (1 Timoteo 2:5).</span></p>
+<p>As&iacute; que comenzamos donde caminar&aacute; todo el curso: con ambas manos sobre &Eacute;l. Todo lo que sigue &mdash; sus palabras, sus obras, su cruz, su resurrecci&oacute;n &mdash; es la vida del <b>Dios-Hombre</b>. Nunca lo haga tan divino que no pueda llorar ante una tumba (Juan 11:35); nunca tan humano que no pueda calmar un mar (Marcos 4:39). El Verbo se hizo carne &mdash; y habit&oacute; entre nosotros.</p>
+</div>
+  </article>
+
+  
+<figure class="cts-figure" style="margin:30px auto;max-width:1000px;text-align:center;">
+<svg style="width:100%;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1420 660" role="img" aria-label="The New Testament — A Survey Timeline">
+<defs>
+  <radialGradient id="vig" cx="50%" cy="42%" r="75%">
+    <stop offset="0%" stop-color="#f3ead0"/>
+    <stop offset="100%" stop-color="#efe4c4"/>
+  </radialGradient>
+  <marker id="arr" markerWidth="13" markerHeight="13" refX="8.5" refY="5" orient="auto">
+    <path d="M0.5,0.5 L10,5 L0.5,9.5 Z" fill="#7c2a2f"/>
+  </marker>
+</defs>
+<rect x="0" y="0" width="1420" height="660" fill="#f3ead0"/>
+<rect x="0" y="0" width="1420" height="660" fill="url(#vig)"/>
+<rect x="14" y="14" width="1392" height="632" fill="none" stroke="#b08a2e" stroke-width="6"/>
+<rect x="26" y="26" width="1368" height="608" fill="none" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="710.0" y="84" font-size="36" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.5">The New Testament — A Survey Timeline</text>
+<text x="710.0" y="114" font-size="21" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El Nuevo Testamento — Cronología Panorámica</text>
+<line x1="490.0" y1="134" x2="930.0" y2="134" stroke="#b08a2e" stroke-width="1.6"/>
+<line x1="120" y1="348" x2="1300" y2="348" stroke="#7c2a2f" stroke-width="3"/>
+<circle cx="120" cy="348" r="6.5" fill="#7c2a2f"/>
+<path d="M1298,341 L1316,348 L1298,355 Z" fill="#7c2a2f"/>
+<circle cx="120.0" cy="348" r="7" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.8"/>
+<line x1="120.0" y1="341" x2="120.0" y2="302" stroke="#8a661c" stroke-width="1.4"/>
+<text x="120.0" y="244" font-size="16.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">c. 5–4 BC</text>
+<text x="120.0" y="266" font-size="15.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Birth of Christ</text>
+<text x="120.0" y="286" font-size="14" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Nacimiento de Cristo</text>
+<circle cx="264.75" cy="348" r="7" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.8"/>
+<line x1="264.75" y1="355" x2="264.75" y2="394" stroke="#8a661c" stroke-width="1.4"/>
+<text x="264.75" y="420" font-size="16.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">c. AD 26</text>
+<text x="264.75" y="440" font-size="15.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Ministry Begins</text>
+<text x="264.75" y="460" font-size="14" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Comienza el Ministerio</text>
+<circle cx="409.5" cy="348" r="7" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.8"/>
+<line x1="409.5" y1="341" x2="409.5" y2="302" stroke="#8a661c" stroke-width="1.4"/>
+<text x="409.5" y="244" font-size="16.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">c. AD 30</text>
+<text x="409.5" y="266" font-size="15.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Cross &amp; Resurrection</text>
+<text x="409.5" y="286" font-size="14" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Cruz y Resurrección</text>
+<circle cx="554.25" cy="348" r="7" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.8"/>
+<line x1="554.25" y1="355" x2="554.25" y2="394" stroke="#8a661c" stroke-width="1.4"/>
+<text x="554.25" y="420" font-size="16.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">c. AD 30</text>
+<text x="554.25" y="440" font-size="15.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Pentecost</text>
+<text x="554.25" y="460" font-size="14" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Pentecostés</text>
+<circle cx="699.0" cy="348" r="7" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.8"/>
+<line x1="699.0" y1="341" x2="699.0" y2="302" stroke="#8a661c" stroke-width="1.4"/>
+<text x="699.0" y="244" font-size="16.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">c. AD 34</text>
+<text x="699.0" y="266" font-size="15.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Paul Converted</text>
+<text x="699.0" y="286" font-size="14" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Conversión de Pablo</text>
+<circle cx="843.75" cy="348" r="7" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.8"/>
+<line x1="843.75" y1="355" x2="843.75" y2="394" stroke="#8a661c" stroke-width="1.4"/>
+<text x="843.75" y="420" font-size="16.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">c. AD 47–57</text>
+<text x="843.75" y="440" font-size="15.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Missionary Journeys</text>
+<text x="843.75" y="460" font-size="14" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Viajes Misioneros</text>
+<circle cx="988.5" cy="348" r="7" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.8"/>
+<line x1="988.5" y1="341" x2="988.5" y2="302" stroke="#8a661c" stroke-width="1.4"/>
+<text x="988.5" y="244" font-size="16.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">c. AD 48–67</text>
+<text x="988.5" y="266" font-size="15.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">The Epistles</text>
+<text x="988.5" y="286" font-size="14" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Las Epístolas</text>
+<circle cx="1133.25" cy="348" r="7" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.8"/>
+<line x1="1133.25" y1="355" x2="1133.25" y2="394" stroke="#8a661c" stroke-width="1.4"/>
+<text x="1133.25" y="420" font-size="16.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">AD 70</text>
+<text x="1133.25" y="440" font-size="15.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Jerusalem Falls</text>
+<text x="1133.25" y="460" font-size="14" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Cae Jerusalén</text>
+<circle cx="1278.0" cy="348" r="7" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.8"/>
+<line x1="1278.0" y1="341" x2="1278.0" y2="302" stroke="#8a661c" stroke-width="1.4"/>
+<text x="1278.0" y="244" font-size="16.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">c. AD 95</text>
+<text x="1278.0" y="266" font-size="15.5" fill="#3b2f23" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Revelation</text>
+<text x="1278.0" y="286" font-size="14" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El Apocalipsis</text>
+<text x="1294" y="332" font-size="12.5" fill="#3b2f23" font-weight="normal" text-anchor="end" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.8">→ the apostolic age closes</text>
+<text x="1294" y="378" font-size="12" fill="#8a661c" font-weight="normal" text-anchor="end" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.85">→ se cierra la era apostólica</text>
+<text x="710.0" y="616" font-size="13" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.5">Chapala Theological Seminary  ·  Seminario Teológico de Chapala</text>
+<text x="710.0" y="634" font-size="11.5" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.75">Dates are approximate (c. = circa).  /  Las fechas son aproximadas (c. = circa).</text>
+</svg>
+<figcaption style="font-family:Georgia,'Times New Roman',serif;font-size:0.9em;line-height:1.5;margin-top:10px;color:#561c20;"><span style="font-weight:bold;">Where the life of Christ sits in the New Testament story (dates approximate).</span><br><span style="font-style:italic;color:#8a661c;">Dónde se sitúa la vida de Cristo en la historia del Nuevo Testamento (fechas aproximadas).</span></figcaption>
+</figure>
+<h2 class="sec" id="t-mc">Multiple Choice</h2>
+  <div id="mcWrap"></div>
+
+  <h2 class="sec" id="t-sa">Short Answer</h2>
+  <p class="status" id="t-saNote"></p>
+  <div id="saWrap"></div>
+
+  <div class="foot">
+    <button class="btn primary" id="completeBtn" type="button"></button>
+    <div class="status" id="statusMsg"></div>
+    <a class="next hide" id="nextLink" href="CTSLOCUnit2.html"></a>
+  </div>
+</div>
+
+<div class="modal" id="reg">
+  <div class="box">
+    <h3 id="m-h">Welcome</h3>
+    <p id="m-p" style="font-size:.9rem;color:var(--muted);margin:0"></p>
+    <label id="m-nl">Your name</label>
+    <input id="m-name" type="text" autocomplete="name" aria-label="m name">
+    <label id="m-tl">Track</label>
+    <select id="m-track" aria-label="m track">
+      <option value="cert">Certificate</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div style="margin-top:16px"><button class="btn primary" id="m-go" type="button">Begin</button></div>
+  </div>
+</div>
+
+<script>
+var CFG={course:'loc',unit:1,totalUnits:10,progressKey:'cts_loc_progress',
+  next:'CTSLOCUnit2.html',cert:'CTSLOCCertificate.html',lockKey:'cts_loc_u1_lock'};
+var DATA={"mc": [{"en": "In the beginning was the Word—what does John 1:1 teach about the Word and the beginning?", "es": "En el principio era el Verbo—¿qué enseña Juan 1:1 sobre el Verbo y el principio?", "oen": ["The Word already existed when the beginning began", "The Word was created at the beginning", "The Word began after creation", "The Word is just another name for the beginning"], "oes": ["El Verbo ya existía cuando comenzó el principio", "El Verbo fue creado en el principio", "El Verbo comenzó después de la creación", "El Verbo es solo otro nombre del principio"], "c": 21, "xen": "John 1:1 places the Word before the beginning—He did not begin; He already was.", "xes": "Juan 1:1 sitúa al Verbo antes del principio: no comenzó, ya era."}, {"en": "John 1:1 says the Word was 'with God' and 'was God.' Together these guard which truth?", "es": "Juan 1:1 dice que el Verbo estaba 'con Dios' y 'era Dios.' Juntas, ¿qué verdad protegen?", "oen": ["The Word is a lesser, created god", "The Word is distinct from the Father yet fully God", "The Word is only a title for the Father", "The Word became God at the incarnation"], "oes": ["El Verbo es un dios menor y creado", "El Verbo es distinto del Padre y a la vez plenamente Dios", "El Verbo es solo un título del Padre", "El Verbo se hizo Dios en la encarnación"], "c": 29, "xen": "'With God' guards distinction; 'was God' guards full deity.", "xes": "'Con Dios' protege la distinción; 'era Dios' protege la plena deidad."}, {"en": "According to John 1:3 and Colossians 1:16, the Word's role in creation was that…", "es": "Según Juan 1:3 y Colosenses 1:16, el papel del Verbo en la creación fue que…", "oen": ["He was the first creature God made", "He shaped matter that already existed", "He created only the spiritual realm", "all things were made through Him"], "oes": ["fue la primera criatura que Dios hizo", "dio forma a la materia que ya existía", "creó solo el reino espiritual", "todas las cosas fueron hechas por medio de Él"], "c": 38, "xen": "All things were made through Him; nothing made was made without Him.", "xes": "Todas las cosas fueron hechas por medio de Él; nada de lo hecho se hizo sin Él."}, {"en": "When Jesus said 'Before Abraham was, I AM' (John 8:58), why did His hearers take up stones?", "es": "Cuando Jesús dijo 'Antes que Abraham fuese, yo soy' (Juan 8:58), ¿por qué tomaron piedras?", "oen": ["They thought He insulted Abraham", "They disliked His grammar", "They heard Him claim the divine name of God", "They believed Abraham was still alive"], "oes": ["Pensaron que insultaba a Abraham", "No les gustó su gramática", "Oyeron que reclamaba el nombre divino de Dios", "Creían que Abraham seguía vivo"], "c": 44, "xen": "'I AM' is the divine name of Exodus 3:14; they judged it blasphemy.", "xes": "'Yo soy' es el nombre divino de Éxodo 3:14; lo juzgaron blasfemia."}, {"en": "In John 17:5 Jesus prays to be restored to the glory He had 'before the world was.' This shows…", "es": "En Juan 17:5 Jesús ora por la gloria que tuvo 'antes que el mundo fuese.' Esto muestra…", "oen": ["He earned glory by His miracles", "He possessed divine glory before creation", "He hoped to become glorious later", "His glory was only human honor"], "oes": ["ganó gloria por sus milagros", "poseía gloria divina antes de la creación", "esperaba llegar a ser glorioso más tarde", "su gloria era solo honra humana"], "c": 50, "xen": "He asks for the restoration of a glory He already had before the world—pre-existent deity.", "xes": "Pide la restauración de una gloria que ya tenía antes del mundo: deidad preexistente."}, {"en": "'The Word became flesh and dwelt among us' (John 1:14) means the eternal Son…", "es": "'El Verbo se hizo carne y habitó entre nosotros' (Juan 1:14) significa que el Hijo eterno…", "oen": ["only appeared to have a body", "was adopted as God's Son at birth", "stopped being God to be man", "truly took to Himself real human nature"], "oes": ["solo aparentaba tener un cuerpo", "fue adoptado como Hijo de Dios al nacer", "dejó de ser Dios para ser hombre", "tomó verdaderamente para sí una naturaleza humana real"], "c": 59, "xen": "The incarnation is a real assumption of human nature, not mere appearance.", "xes": "La encarnación es una verdadera asunción de la naturaleza humana, no mera apariencia."}, {"en": "Philippians 2:7 says Christ 'made Himself of no reputation.' This describes…", "es": "Filipenses 2:7 dice que Cristo 'se despojó a sí mismo.' Esto describe…", "oen": ["the Son subtracting His deity", "the Son losing His memory of heaven", "the Son's humble self-emptying while remaining God", "a title given to Him by angels"], "oes": ["que el Hijo restó su deidad", "que el Hijo perdió la memoria del cielo", "el humilde anonadamiento del Hijo sin dejar de ser Dios", "un título que le dieron los ángeles"], "c": 65, "xen": "He emptied Himself by adding humanity and humbling Himself—not by ceasing to be God.", "xes": "Se anonadó añadiendo humanidad y humillándose, no dejando de ser Dios."}, {"en": "The name 'Emmanuel' (Matthew 1:23) means…", "es": "El nombre 'Emanuel' (Mateo 1:23) significa…", "oen": ["God with us", "God near us", "God for us", "God over us"], "oes": ["Dios con nosotros", "Dios cerca de nosotros", "Dios por nosotros", "Dios sobre nosotros"], "c": 70, "xen": "Matthew 1:23 (Isaiah 7:14): God truly with us, in our nature.", "xes": "Mateo 1:23 (Isaías 7:14): Dios verdaderamente con nosotros, en nuestra naturaleza."}, {"en": "Galatians 4:4 says God's Son was 'born of a woman.' This safeguards…", "es": "Gálatas 4:4 dice que el Hijo de Dios 'nació de mujer.' Esto salvaguarda…", "oen": ["the exact date of His birth", "only Jesus' sinlessness", "Mary's perpetual virginity", "Jesus' true and full humanity"], "oes": ["la fecha exacta de su nacimiento", "solo la impecabilidad de Jesús", "la virginidad perpetua de María", "la verdadera y plena humanidad de Jesús"], "c": 80, "xen": "Born of a woman = genuinely, fully human, entering the human family.", "xes": "Nacido de mujer = verdadera y plenamente humano, entrando en la familia humana."}, {"en": "Matthew 1:1 calls Jesus 'the Son of David, the Son of Abraham.' This emphasizes Jesus as…", "es": "Mateo 1:1 llama a Jesús 'Hijo de David, Hijo de Abraham.' Esto subraya a Jesús como…", "oen": ["the Savior of all the nations", "a Galilean carpenter", "Israel's promised King", "the son of Adam"], "oes": ["el Salvador de todas las naciones", "un carpintero galileo", "el Rey prometido de Israel", "el hijo de Adán"], "c": 86, "xen": "Son of David, son of Abraham—Matthew presents Jesus as Israel's royal King.", "xes": "Hijo de David, hijo de Abraham: Mateo presenta a Jesús como el Rey real de Israel."}, {"en": "Luke traces Jesus' line back to 'Adam, the son of God' (Luke 3:38). Luke's emphasis is that Jesus is…", "es": "Lucas traza el linaje de Jesús hasta 'Adán, hijo de Dios' (Lucas 3:38). Lucas subraya que Jesús es…", "oen": ["the Kinsman of the whole human race", "descended from the priests", "only a king for the Jews", "older than Adam himself"], "oes": ["el pariente de toda la raza humana", "descendiente de los sacerdotes", "solo un rey para los judíos", "más antiguo que el propio Adán"], "c": 91, "xen": "Reaching to Adam shows Jesus joined to the entire human family He came to save.", "xes": "Llegar hasta Adán muestra a Jesús unido a toda la familia humana que vino a salvar."}, {"en": "A common evangelical harmonization of the two genealogies holds that…", "es": "Una armonización evangélica común de las dos genealogías sostiene que…", "oen": ["one of them is fictional", "both are Joseph's identical list", "Luke copied Matthew with errors", "Matthew gives a legal/royal line and Luke the natural line"], "oes": ["una de ellas es ficticia", "ambas son la lista idéntica de José", "Lucas copió a Mateo con errores", "Mateo da la línea legal/real y Lucas la línea natural"], "c": 101, "xen": "A leading view: Matthew = Joseph's legal/royal line; Luke = the natural line (often through Mary).", "xes": "Una postura principal: Mateo = línea legal/real de José; Lucas = línea natural (a menudo por María)."}, {"en": "The prophet who foretold the Messiah's birthplace as Bethlehem was…", "es": "El profeta que anunció a Belén como lugar de nacimiento del Mesías fue…", "oen": ["Isaiah", "Micah", "Hosea", "Malachi"], "oes": ["Isaías", "Miqueas", "Oseas", "Malaquías"], "c": 106, "xen": "Micah 5:2 named Bethlehem; Luke 2:4-7 records its fulfillment.", "xes": "Miqueas 5:2 nombró a Belén; Lucas 2:4-7 registra su cumplimiento."}, {"en": "In Luke's account, the birth of the Savior was first announced to…", "es": "En el relato de Lucas, el nacimiento del Salvador se anunció primero a…", "oen": ["kings in their palaces", "the priests in Jerusalem", "shepherds keeping watch by night", "wise men from the East"], "oes": ["reyes en sus palacios", "los sacerdotes en Jerusalén", "pastores que velaban de noche", "magos del oriente"], "c": 114, "xen": "Luke 2:11: the angel announces the Savior first to lowly shepherds.", "xes": "Lucas 2:11: el ángel anuncia al Salvador primero a humildes pastores."}, {"en": "In Matthew's account, the wise men from the East came seeking…", "es": "En el relato de Mateo, los magos del oriente vinieron buscando…", "oen": ["the King of the Jews", "a teacher of the law", "a new prophet", "the high priest"], "oes": ["al Rey de los judíos", "a un maestro de la ley", "a un nuevo profeta", "al sumo sacerdote"], "c": 119, "xen": "Matthew 2:2: Gentile seekers come to the newborn King of the Jews.", "xes": "Mateo 2:2: buscadores gentiles vienen al recén nacido Rey de los judíos."}, {"en": "Herod's slaughter of the children and the flight to Egypt show that…", "es": "La matanza de los niños por Herodes y la huida a Egipto muestran que…", "oen": ["Jesus was safe from all danger", "the world was hostile to Christ from the start", "Herod welcomed the newborn King", "Egypt rejected the Messiah"], "oes": ["Jesús estaba a salvo de todo peligro", "el mundo fue hostil a Cristo desde el principio", "Herodes recibió al recén nacido Rey", "Egipto rechazó al Mesías"], "c": 127, "xen": "From His first days the world opposed Him; the cross's shadow fell on the cradle.", "xes": "Desde sus primeros días el mundo se le opuso; la sombra de la cruz cayó sobre la cuna."}, {"en": "Matthew quotes 'Out of Egypt I called My Son' from the prophet…", "es": "Mateo cita 'De Egipto llamé a mi Hijo' del profeta…", "oen": ["Hosea", "Jeremiah", "Isaiah", "Amos"], "oes": ["Oseas", "Jeremías", "Isaías", "Amós"], "c": 133, "xen": "Matthew 2:15 cites Hosea 11:1.", "xes": "Mateo 2:15 cita Oseas 11:1."}, {"en": "At twelve in the temple Jesus said He 'must be about My Father's business' (Luke 2:49). This reveals…", "es": "A los doce años en el templo Jesús dijo que 'le era necesario estar en los negocios de su Padre' (Lucas 2:49). Esto revela…", "oen": ["that He was disobedient to His parents", "His early awareness of His unique Sonship", "that He had forgotten His family", "that He was training to be a priest"], "oes": ["que era desobediente a sus padres", "su temprana conciencia de su Filiación única", "que había olvidado a su familia", "que se preparaba para ser sacerdote"], "c": 141, "xen": "Even at twelve He knew the Father as His own in a unique way.", "xes": "Aun a los doce conocía al Padre como suyo de un modo único."}, {"en": "'Jesus increased in wisdom and stature' (Luke 2:52) teaches us that Jesus…", "es": "'Jesús crecía en sabiduría y estatura' (Lucas 2:52) nos enseña que Jesús…", "oen": ["only seemed to grow", "was therefore not truly divine", "knew nothing at all as a child", "experienced real human growth and development"], "oes": ["solo aparentaba crecer", "por tanto no era verdaderamente divino", "no sabía nada en absoluto de niño", "experimentó verdadero crecimiento y desarrollo humano"], "c": 150, "xen": "He truly grew as a human being while remaining fully God.", "xes": "Creció de verdad como ser humano sin dejar de ser plenamente Dios."}, {"en": "According to Hebrews 2:14-17, why did the Son share in 'flesh and blood'?", "es": "Según Hebreos 2:14-17, ¿por qué participó el Hijo de 'carne y sangre'?", "oen": ["To set a moral example only", "To prove that He could suffer", "So that through death He might destroy the devil and be a merciful High Priest", "Because He had no other choice"], "oes": ["Solo para dar un ejemplo moral", "Para probar que podía sufrir", "Para que por la muerte destruyera al diablo y fuera un sumo sacerdote misericordioso", "Porque no tenía otra opción"], "c": 156, "xen": "He took our nature to defeat death and stand as our merciful, faithful High Priest.", "xes": "Tomó nuestra naturaleza para vencer la muerte y ser nuestro sumo sacerdote fiel y misericordioso."}], "sa": [{"en": "Explain what John 1:1 teaches about the Word's eternal existence and deity, and why this matters for where we begin the life of Christ.", "es": "Explique qué enseña Juan 1:1 sobre la existencia eterna y la deidad del Verbo, y por qué importa para dónde comenzamos la vida de Cristo.", "men": "John 1:1 says that in the beginning the Word already was—He did not begin, He already existed. He was with God, distinct and in fellowship with the Father, and He was God, fully divine and not a created being. This matters because the life of Christ does not start at the manger; the eternal Son existed before creation and stepped into time in the incarnation.", "mes": "Juan 1:1 dice que en el principio el Verbo ya era; no comenzó, sino que ya existía. Estaba con Dios, distinto y en comunión con el Padre, y era Dios, plenamente divino y no un ser creado. Esto importa porque la vida de Cristo no empieza en el pesebre: el Hijo eterno existía antes de la creación y entró en el tiempo en la encarnación.", "ken": ["etern", "exist", "divin", "creat", "fellow", "befor", "fath", "made"], "kes": ["etern", "exist", "divin", "crea", "comuni", "antes", "padre", "hech"]}, {"en": "From John 1:3 and Colossians 1:16-17, describe the Word's role in creation, and what that tells us about who He is.", "es": "A partir de Juan 1:3 y Colosenses 1:16-17, describa el papel del Verbo en la creación y qué nos dice sobre quién es Él.", "men": "According to John 1:3 all things were made through the Word, and without Him nothing was made that was made. Paul agrees in Colossians: by Him all things were created and in Him all things hold together. The same hands that would be pierced on the cross are the hands that made and sustain the universe; only God can do this.", "mes": "Según Juan 1:3 todas las cosas fueron hechas por medio del Verbo, y sin Él nada de lo que ha sido hecho fue hecho. Pablo concuerda en Colosenses: por Él fueron creadas todas las cosas y en Él todas las cosas subsisten. Las mismas manos que serían traspasadas en la cruz son las manos que hicieron y sostienen el universo; solo Dios puede hacer esto.", "ken": ["creat", "made", "through", "sustain", "univ", "hold", "things", "pierc"], "kes": ["crea", "cosa", "subsist", "univers", "sosten", "traspas", "medio", "mano"]}, {"en": "What did Jesus claim in John 8:58 ('Before Abraham was, I AM'), and why did His hearers respond as they did?", "es": "¿Qué reclamó Jesús en Juan 8:58 ('Antes que Abraham fuese, yo soy'), y por qué reaccionaron así sus oyentes?", "men": "When Jesus said, 'Before Abraham was, I AM,' He claimed both eternal existence and the divine name God revealed to Moses. His hearers took up stones because they understood He was claiming to be God. The statement shows Jesus knew His own deity and eternity.", "mes": "Cuando Jesús dijo: 'Antes que Abraham fuese, yo soy', afirmó a la vez su existencia eterna y el nombre divino que Dios reveló a Moisés. Sus oyentes tomaron piedras porque entendieron que se proclamaba Dios. La frase muestra que Jesús conocía su propia deidad y eternidad.", "ken": ["abraham", "exist", "divin", "name", "stone", "deity", "etern", "claim"], "kes": ["abraham", "exist", "etern", "nombre", "piedra", "deidad", "divin", "afirm"]}, {"en": "Explain the meaning of John 1:14 and Philippians 2:7: what happened in the incarnation, and what did NOT happen?", "es": "Explique el significado de Juan 1:14 y Filipenses 2:7: ¿qué ocurrió en la encarnación y qué NO ocurrió?", "men": "John 1:14 says the Word became flesh and dwelt among us. The eternal Son took real human nature without ceasing to be God; Philippians 2:7 calls this making Himself of no reputation, taking the form of a servant. He added our humanity; He did not subtract His deity. He is fully God and fully man.", "mes": "Juan 1:14 dice que el Verbo se hizo carne y habitó entre nosotros. El Hijo eterno tomó verdadera naturaleza humana sin dejar de ser Dios; Filipenses 2:7 lo llama despojarse a sí mismo, tomando forma de siervo. Añadió nuestra humanidad; no restó su deidad. Es plenamente Dios y plenamente hombre.", "ken": ["flesh", "dwelt", "human", "natur", "deity", "reput", "servant", "fully"], "kes": ["carne", "habit", "human", "naturalez", "deidad", "despoj", "siervo", "plenament"]}, {"en": "What does the name Emmanuel (Matthew 1:23, citing Isaiah 7:14) mean, and how does it capture the wonder of the incarnation?", "es": "¿Qué significa el nombre Emanuel (Mateo 1:23, citando Isaías 7:14), y cómo capta la maravilla de la encarnación?", "men": "Matthew 1:23 gives Jesus the name Emmanuel, which means 'God with us,' fulfilling Isaiah 7:14. It is not merely God near us or over us, but God truly with us—sharing our nature and dwelling in our world. The incarnation brings God into the closest possible nearness to His people.", "mes": "Mateo 1:23 da a Jesús el nombre Emanuel, que significa 'Dios con nosotros', cumpliendo Isaías 7:14. No es meramente Dios cerca de nosotros ni sobre nosotros, sino Dios verdaderamente con nosotros, compartiendo nuestra naturaleza y habitando en nuestro mundo. La encarnación acerca a Dios a su pueblo del modo más íntimo posible.", "ken": ["emmanuel", "with", "fulfil", "isaiah", "near", "dwell", "natur", "name"], "kes": ["emanuel", "nombre", "cumpl", "isaias", "cerca", "habit", "naturalez", "con"]}, {"en": "Compare what Matthew's and Luke's genealogies each emphasize about Jesus, and give the common way their differences are harmonized.", "es": "Compare lo que cada genealogía (Mateo y Lucas) subraya sobre Jesús, y dé la manera común de armonizar sus diferencias.", "men": "Matthew calls Jesus the Son of David and Son of Abraham, presenting Him as Israel's promised King through the royal line. Luke traces His line back to Adam, the son of God, presenting Him as the kinsman of the whole human race. The differing lists are commonly harmonized as Matthew giving the legal royal line and Luke the natural line through Mary. Together they show Jesus is both King of Israel and Savior of all.", "mes": "Mateo llama a Jesús Hijo de David e Hijo de Abraham, presentándolo como el Rey prometido de Israel por la línea real. Lucas traza su linaje hasta Adán, el hijo de Dios, presentándolo como pariente de toda la raza humana. Las listas distintas suelen armonizarse así: Mateo da la línea legal y real, y Lucas la línea natural por medio de María. Juntas muestran que Jesús es Rey de Israel y Salvador de todos.", "ken": ["david", "abraham", "king", "adam", "royal", "legal", "kinsman", "race"], "kes": ["david", "abraham", "rey", "adan", "real", "legal", "pariente", "raza"]}, {"en": "Bethlehem, the shepherds, and the wise men: how do Luke's and Matthew's nativity portraits together present Jesus?", "es": "Belén, los pastores y los magos: ¿cómo presentan juntos a Jesús los retratos del nacimiento de Lucas y Mateo?", "men": "Jesus was born in Bethlehem, just as Micah 5:2 foretold. Luke's portrait announces the Savior first to lowly shepherds—'a Savior, who is Christ the Lord.' Matthew's portrait shows Gentile wise men seeking the newborn King of the Jews. Side by side, the lowly of Israel and the nations both come to Him: a Savior for all.", "mes": "Jesús nació en Belén, tal como lo anunció Miqueas 5:2. El retrato de Lucas proclama al Salvador primero a humildes pastores: 'un Salvador, que es Cristo el Señor'. El retrato de Mateo muestra a los magos gentiles buscando al recén nacido Rey de los judíos. Lado a lado, los humildes de Israel y las naciones vienen a Él: un Salvador para todos.", "ken": ["bethlehem", "micah", "shepherd", "savior", "wise", "gentil", "king", "nation"], "kes": ["belen", "miqueas", "pastor", "salvador", "mago", "gentil", "rey", "nacion"]}, {"en": "How do Herod's response and the flight to Egypt (Matthew 2:13-16; Hosea 11:1) show the world's reception of Christ?", "es": "¿Cómo muestran la reacción de Herodes y la huida a Egipto (Mateo 2:13-16; Oseas 11:1) la recepción que el mundo dio a Cristo?", "men": "Herod was enraged and slaughtered the children of Bethlehem, and the family fled into Egypt, fulfilling Hosea's word, 'Out of Egypt I called My Son.' From His first days the world was hostile to Christ. The shadow of the cross already fell across the cradle.", "mes": "Herodes se enfureció y mató a los niños de Belén, y la familia huyó a Egipto, cumpliendo la palabra de Oseas: 'De Egipto llamé a mi Hijo'. Desde sus primeros días el mundo fue hostil a Cristo. La sombra de la cruz ya caía sobre la cuna.", "ken": ["herod", "egypt", "hosea", "hostil", "shadow", "slaught", "cross", "cradle"], "kes": ["herodes", "egipto", "oseas", "hostil", "sombra", "mato", "cruz", "cuna"]}, {"en": "Explain what the boy Jesus in the temple (Luke 2:49) and Luke 2:52 together teach about His person.", "es": "Explique qué enseñan juntos el niño Jesús en el templo (Lucas 2:49) y Lucas 2:52 sobre su persona.", "men": "At twelve in the temple Jesus said He must be about His Father's business, showing His early awareness that He was the unique Son of God. Yet He was subject to Joseph and Mary, living in real obedience. Luke says He increased in wisdom and stature—He truly grew as a human being, fully God and yet a genuinely growing boy.", "mes": "A los doce años en el templo Jesús dijo que le era necesario estar en los negocios de su Padre, mostrando su temprana conciencia de ser el Hijo único de Dios. Sin embargo, estaba sujeto a José y María, viviendo en verdadera obediencia. Lucas dice que crecía en sabiduría y estatura: creció de verdad como ser humano, plenamente Dios y a la vez un niño que verdaderamente crecía.", "ken": ["temple", "father", "subject", "obedien", "increas", "wisdom", "stature", "grew"], "kes": ["templo", "padre", "sujeto", "obedien", "crec", "sabidur", "estatura", "nino"]}, {"en": "Using Hebrews 2:14-17 and 1 Timothy 2:5, explain why the incarnation was necessary for our salvation.", "es": "Usando Hebreos 2:14-17 y 1 Timoteo 2:5, explique por qué la encarnación era necesaria para nuestra salvación.", "men": "Hebrews 2:14-17 says the Son shared in flesh and blood so that through death He might destroy the devil and become a merciful and faithful High Priest. Only One who is truly God could save, and only One who is truly man could stand in our place. As 1 Timothy 2:5 says, there is one Mediator between God and men, the Man Christ Jesus. The incarnation is the foundation of the gospel.", "mes": "Hebreos 2:14-17 dice que el Hijo participó de carne y sangre para que, por medio de la muerte, destruyera al diablo y llegara a ser un sumo sacerdote misericordioso y fiel. Solo Aquel que es verdaderamente Dios podía salvar, y solo Aquel que es verdaderamente hombre podía ocupar nuestro lugar. Como dice 1 Timoteo 2:5, hay un solo Mediador entre Dios y los hombres, Jesucristo hombre. La encarnación es el fundamento del evangelio.", "ken": ["flesh", "death", "devil", "priest", "mediat", "man", "save", "gospel"], "kes": ["carne", "muerte", "diablo", "sacerdote", "mediador", "hombre", "salv", "evangelio"]}]};
+
+/* ---- storage hardening (Android content:// safe) ---- */
+var _ctsMem={};
+function lsGet(k){try{var v=localStorage.getItem(k);return v===null?(k in _ctsMem?_ctsMem[k]:null):v;}catch(e){return k in _ctsMem?_ctsMem[k]:null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}_ctsMem[k]=v;}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}delete _ctsMem[k];}
+
+/* ---- helpers ---- */
+function fold(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function kwHit(ans,kw){var a=fold(ans),k=fold(kw);if(!k)return false;
+  if(k.length<=3){return new RegExp('(^|[^a-z0-9])'+reEsc(k)+'([^a-z0-9]|$)').test(a);}
+  return new RegExp('(^|[^a-z0-9])'+reEsc(k)).test(a);}
+function saScore(ans,kws){var n=0;for(var i=0;i<kws.length;i++){if(kwHit(ans,kws[i]))n++;}return n;}
+function mcCorrectIdx(code,qpos){return(((code-7*(qpos+3))%251)+251)%251;}
+
+var LET=['A','B','C','D'];
+var STATE={lang:'en',track:'cert',name:'',mc:[],sa:[],revealed:false};
+for(var i=0;i<DATA.mc.length;i++)STATE.mc.push({answered:false,chosen:-1});
+for(var j=0;j<DATA.sa.length;j++)STATE.sa.push({checked:false,text:'',hits:0});
+
+var I18N={
+ en:{title:'The Life of Christ',unit:'Unit 1 \u00b7 The Word Became Flesh',lang:'Espa\u00f1ol',
+   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
+   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
+   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
+   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
+   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
+   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
+   complete:'Complete Unit 1',
+   epigraph:'\u201cBut these are written that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name.\u201d (John 20:31)',
+   mGood:'\u2713 Unit complete. You may continue to Unit 2.',
+   mShort:'Keep going \u2014 review the material and try again.',
+   nextTxt:'Next: Unit 2 \u2192',
+   mh:'Welcome to The Life of Christ',mp:'Please register once. Your name and track carry across every CTS course on this site.',
+   mnl:'Your name',mtl:'Track',mgo:'Begin',
+   hitFmt:function(h){return h+' of 8 keywords';},
+   passV:'Pass',softV:'Practice noted'},
+ es:{title:'La Vida de Cristo',unit:'Unidad 1 \u00b7 El Verbo se hizo carne',lang:'English',
+   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
+   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
+   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
+   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
+   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
+   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
+   complete:'Completar la Unidad 1',
+   epigraph:'\u201cPero \u00e9stas se han escrito para que cre\u00e1is que Jes\u00fas es el Cristo, el Hijo de Dios, y para que creyendo, teng\u00e1is vida en su nombre.\u201d (Juan 20:31)',
+   mGood:'\u2713 Unidad completa. Puede continuar a la Unidad 2.',
+   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
+   nextTxt:'Siguiente: Unidad 2 \u2192',
+   mh:'Bienvenido a La Vida de Cristo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
+   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
+   hitFmt:function(h){return h+' de 8 palabras clave';},
+   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+};
+function T(){return I18N[STATE.lang];}
+function isMasters(){return STATE.track==='mdiv'||STATE.track==='thm';}
+function lockMin(){return isMasters()?15:2;}
+
+function $(id){return document.getElementById(id);}
+
+/* ---------- rendering ---------- */
+function renderTeaching(){
+  $('teach-en').className=STATE.lang==='en'?'':'hide';
+  $('teach-es').className=STATE.lang==='es'?'':'hide';
+}
+function renderChrome(){
+  var t=T();
+  document.documentElement.lang=STATE.lang;
+  $('t-title').textContent=t.title;$('t-unit').innerHTML=t.unit;
+  $('langBtn').textContent=t.lang;
+  $('t-greet').textContent=t.greet(STATE.name);
+  $('t-track').textContent=t.track(STATE.track);
+  $('epigraph').textContent=t.epigraph;
+  $('t-mc').textContent=t.mc;$('t-sa').textContent=t.sa;
+  $('t-saNote').textContent=isMasters()?t.saNoteMast:t.saNoteCert;
+  $('completeBtn').textContent=t.complete;
+  $('m-h').textContent=t.mh;$('m-p').textContent=t.mp;$('m-nl').textContent=t.mnl;
+  $('m-tl').textContent=t.mtl;$('m-go').textContent=t.mgo;
+}
+function renderMC(){
+  var wrap=$('mcWrap');wrap.innerHTML='';
+  for(var i=0;i<DATA.mc.length;i++){
+    (function(i){
+      var q=DATA.mc[i],st=STATE.mc[i];
+      var opts=STATE.lang==='en'?q.oen:q.oes;
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var expl=STATE.lang==='en'?q.xen:q.xes;
+      var correct=mcCorrectIdx(q.c,i);
+      var div=document.createElement('div');div.className='q';
+      var h='<div class="qn">'+(i+1)+'</div><div class="qp">'+prompt+'</div>';
+      div.innerHTML=h;
+      for(var o=0;o<4;o++){
+        (function(o){
+          var b=document.createElement('button');b.type='button';b.className='opt';
+          b.innerHTML='<span class="lt">'+LET[o]+'</span>'+opts[o];
+          if(st.answered){b.disabled=true;
+            if(o===correct)b.className='opt correct';
+            else if(o===st.chosen)b.className='opt wrong';}
+          else if(st.answered&&o===st.chosen){b.style.background='#efe7d2';b.style.borderColor='#d4af37';b.style.fontWeight='600';}
+          b.onclick=function(){if(st.answered)return;
+            STATE.mc[i].answered=true;STATE.mc[i].chosen=o;renderMC();};
+          div.appendChild(b);
+        })(o);
+      }
+      var e=document.createElement('div');e.className='expl'+(st.answered?' show':'');
+      e.textContent=expl;div.appendChild(e);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderSA(){
+  var wrap=$('saWrap');wrap.innerHTML='';var t=T();
+  for(var i=0;i<DATA.sa.length;i++){
+    (function(i){
+      var q=DATA.sa[i],st=STATE.sa[i];
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var model=STATE.lang==='en'?q.men:q.mes;
+      var div=document.createElement('div');div.className='q';
+      div.innerHTML='<div class="qn">'+(21+i)+'</div><div class="qp">'+prompt+'</div>';
+      var ta=document.createElement('textarea');ta.value=st.text;
+      ta.oninput=function(){STATE.sa[i].text=ta.value;};
+      div.appendChild(ta);
+      var btn=document.createElement('button');btn.type='button';btn.className='btn ghost';
+      btn.style.marginTop='8px';btn.textContent=t.check;
+      var res=document.createElement('div');res.className='sa-res'+(st.checked?' show':'');
+      function paint(){
+        var kws=STATE.lang==='en'?q.ken:q.kes;
+        var txt=STATE.sa[i].text||'';
+        if(txt.trim().length<100){
+          STATE.sa[i].hits=0;
+          res.innerHTML='<span class="sa-verdict soft">'+(STATE.lang==='en'?'Write a fuller answer (100 characters minimum).':'Escriba una respuesta m\u00e1s completa (m\u00ednimo 100 caracteres).')+'</span>';
+          res.classList.add('show');
+          return;
+        }
+        var hits=saScore(txt,kws);STATE.sa[i].hits=hits;
+        var pass=hits>=3;
+        var verdict=pass?('<span class="sa-verdict pass">'+t.passV+'</span>'):('<span class="sa-verdict soft">'+t.softV+'</span>');
+        res.innerHTML=verdict+' &middot; '+t.hitFmt(hits)+
+          '<div class="model"><div class="ml">'+t.model+'</div>'+model+'</div>';
+        res.className='sa-res show';STATE.sa[i].checked=true;
+      }
+      btn.onclick=function(){
+        if(!STATE.sa[i].text.trim()){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.blank+'</span>';return;}
+        if(STATE.sa[i].text.trim().length<100){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.minLen+'</span>';return;}
+        paint();
+      };
+      if(st.checked&&st.text.trim())paint();
+      div.appendChild(btn);div.appendChild(res);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderAll(){renderChrome();renderTeaching();renderMC();renderSA();refreshLock();}
+
+/* ---------- completion + lockout ---------- */
+function lockedUntil(){var v=lsGet(CFG.lockKey);return v?parseInt(v,10):0;}
+function refreshLock(){
+  var until=lockedUntil(),now=Date.now();
+  var btn=$('completeBtn');
+  if(until>now){
+    btn.disabled=true;
+    var mins=Math.ceil((until-now)/60000);
+    $('statusMsg').className='status lock';
+    $('statusMsg').textContent=(STATE.lang==='en'?'Locked. Try again in ':'Bloqueado. Reintente en ')+mins+(STATE.lang==='en'?' min.':' min.');
+  }else{btn.disabled=false;}
+}
+function markComplete(){
+  var p={};try{p=JSON.parse(lsGet(CFG.progressKey)||'{}');}catch(e){p={};}
+  p[CFG.unit]=true;lsSet(CFG.progressKey,JSON.stringify(p));
+  var t=T();
+  $('statusMsg').className='status ok';$('statusMsg').textContent=t.mGood;
+  var nl=$('nextLink');nl.href=CFG.next;nl.textContent=t.nextTxt;nl.className='next';
+  $('completeBtn').disabled=true;
+}
+function onComplete(){
+  var t=T();
+  var mcCorrect=0,mcAnswered=0;
+  for(var i=0;i<DATA.mc.length;i++){if(STATE.mc[i].answered){mcAnswered++;
+    if(STATE.mc[i].chosen===mcCorrectIdx(DATA.mc[i].c,i))mcCorrect++;}}
+  var saPass=0;for(var j=0;j<DATA.sa.length;j++){if(STATE.sa[j].hits>=3)saPass++;}
+  var needMC=18,needSA=9;
+  if(mcAnswered<DATA.mc.length){
+    $('statusMsg').className='status warn';
+    $('statusMsg').textContent=(STATE.lang==='en'
+      ?'Answer all multiple-choice questions first ('+mcAnswered+'/20).'
+      :'Responda primero todas las preguntas de opci\u00f3n m\u00faltiple ('+mcAnswered+'/20).');
+    return;
+  }
+  STATE.revealed=true;renderMC();
+  var saOk = isMasters() ? (saPass>=needSA) : true;
+  if(mcCorrect>=needMC&&saOk){markComplete();return;}
+  // genuine fail -> lockout
+  lsSet(CFG.lockKey,String(Date.now()+lockMin()*60000));
+  $('statusMsg').className='status lock';
+  $('statusMsg').textContent=(STATE.lang==='en'
+    ?('Not yet: MC '+mcCorrect+'/20 (need 18), SA '+saPass+'/10 (need 7). '+t.mShort)
+    :('A\u00fan no: OM '+mcCorrect+'/20 (necesita 18), RB '+saPass+'/10 (necesita 7). '+t.mShort));
+  refreshLock();
+}
+
+/* ---------- init ---------- */
+function startApp(){
+  STATE.lang=(lsGet('cts_lang')==='es')?'es':'en';
+  STATE.name=lsGet('cts_student')||'';
+  STATE.track=lsGet('cts_track')||'cert';
+  $('langBtn').onclick=function(){STATE.lang=STATE.lang==='en'?'es':'en';
+    lsSet('cts_lang',STATE.lang);renderAll();};
+  $('completeBtn').onclick=onComplete;
+  $('m-go').onclick=function(){
+    var nm=$('m-name').value.trim();var tk=$('m-track').value;
+    if(!nm){$('m-name').focus();return;}
+    STATE.name=nm;STATE.track=tk;
+    lsSet('cts_student',nm);lsSet('cts_track',tk);
+    $('reg').className='modal hide';renderAll();
+  };
+  if(!STATE.name||!lsGet('cts_track')){
+    $('m-track').value=STATE.track;renderChrome();
+  }else{$('reg').className='modal hide';}
+  renderAll();
+  setInterval(refreshLock,30000);
+}
+if(typeof document!=='undefined'){
+  if(document.readyState!=='loading')startApp();
+  else document.addEventListener('DOMContentLoaded',startApp);
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSLOCReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

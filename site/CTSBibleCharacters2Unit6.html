@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Characters II — Unit 6</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 7 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Bible Characters II — Unit 6: John the Baptist — The Forerunner Who Doubted in the Dark</span><span class="lang-es">📖 Personajes de la Biblia II — Unidad 6: Juan el Bautista — El Precursor que Dudó en la Oscuridad</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"He must increase, but I must decrease." — John 3:30 (NKJV)</span><span class="lang-es">«A él conviene crecer, mas a mí menguar.» — Juan 3:30 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>Of John the Baptist the Lord Jesus said that among those born of women there had not risen anyone greater. He was the forerunner of the Messiah, a preacher who moved multitudes and turned a nation toward repentance. And yet this giant of faith, shut up in a dungeon, was shaken by doubt. His story is a comfort to every believer who has ever wondered in the dark, because it shows us that Christ answers honest doubt not with a rebuke but with evidence.</p><p><strong>Subject:</strong> John the Baptist — the forerunner who doubted in the dark.</p><p><strong>Proposition:</strong> Even the greatest born of women can be shaken in the prison of discouragement, and Christ answers honest doubt with evidence, not rebuke.</p><p>We will follow three movements in his life.</p><h2>I. The Forerunner</h2><p>John's life was a miracle from the start. He was born to Zacharias the priest and his wife Elizabeth in their old age, long past the years of childbearing, his birth announced beforehand by the angel Gabriel (Luke 1). He grew up to become the wilderness preacher of repentance, a rugged figure in camel's hair crying, "Prepare the way of the LORD." Crowds streamed out to hear him and to be baptized, confessing their sins. His was a baptism of repentance, a public turning from sin to make ready for the Lord. He feared no one. When the proud religious leaders came out to him, he called them a brood of vipers and warned them not to trust in their ancestry, for "the axe is laid to the root of the trees." Yet for all his fire he never drew attention to himself. "One mightier than I is coming," he said, "whose sandal strap I am not worthy to loose; He will baptize you with the Holy Spirit and fire." He knew he was only the herald of a greater King. Then one day his own cousin came to him at the Jordan, and John baptized Jesus, and saw the Spirit descend on Him like a dove. From that moment John pointed every eye away from himself and toward Christ:</p><div class="scripture">Behold! The Lamb of God who takes away the sin of the world! (John 1:29, NKJV)</div><p>That was the whole purpose of his life. When his own disciples grew jealous that the crowds were now going to Jesus, John gave one of the noblest answers in all of Scripture:</p><div class="scripture">He must increase, but I must decrease. (John 3:30, NKJV)</div><p>Here was a great man content to grow smaller so that Christ might grow greater. He knew he was only the friend of the Bridegroom, only the voice, only the one who came before. There is no truer mark of greatness than that.</p><h2>II. The Doubt in Prison</h2><p>But the story takes a dark turn. John had fearlessly rebuked Herod for taking his brother's wife, and for speaking that truth he was thrown into prison. There, in the damp and the silence, cut off from the open sky and the rushing river and the crowds, the great preacher grew discouraged. And as discouragement settled over him, doubt crept in. He who had baptized the Messiah, who had heard the voice from heaven and seen the descending dove, now sent his disciples to ask a question that must have cost him dearly:</p><div class="scripture">Are You the Coming One, or do we look for another? (Matthew 11:3, NKJV)</div><p>It is a stunning thing that John, of all people, could come to such a question. What had shaken him? Most likely it was the gap between what he had expected of the Messiah and what he now heard. John had preached a Christ who would come with fire and judgment, whose winnowing fan was in His hand to clear the threshing floor. But the reports drifting into his cell told of a gentle Healer who preached good news to the poor and left the wicked Herod on his throne — and left John himself in chains. If Jesus was truly the Coming One, John may have wondered, why am I still here in the dark? But discouragement does that to the soul; in the prison of the dark, we forget what we knew so clearly in the light. Notice how the Lord Jesus answered him. He did not scold John, did not shame him, did not strip him of his calling. He simply pointed to the evidence:</p><div class="scripture">Go and tell John the things which you hear and see: The blind see and the lame walk; the lepers are cleansed and the deaf hear; the dead are raised up and the poor have the gospel preached to them. And blessed is he who is not offended because of Me. (Matthew 11:4-6, NKJV)</div><p>In other words: John, you already know. You have already seen the proof; go back to it. The works of the Christ were being done in plain sight, exactly as the prophets had foretold. John's problem was not a lack of evidence; he had seen the evidence with his own eyes. His problem was that in the prison of discouragement he had forgotten it. And then, the moment John's disciples had gone, Jesus turned to the crowd and honored the very man who had just doubted Him: "Among those born of women there has not risen one greater than John the Baptist" (Matthew 11:11). The Lord did not love John any less for his dark hour.</p><h2>III. The Remedy — Go Back to Christ</h2><p>This is a particular kind of doubt: not the doubt of whether God exists, but the doubt of one's own standing — the question that whispers in the dark, "Am I really His at all?" I remember when my own wife asked me one day how I dealt with doubt. I began to explain the old questions I had wrestled with about whether God was even there, but she stopped me. "No," she said, "I have never doubted that God is there. I have been doubting whether I am really a Christian." That is the John the Baptist doubt, and many of God's dearest children pass through it. John was not the first giant brought low this way. Elijah, fresh from calling down fire on Mount Carmel, fled into the wilderness, sat down under a juniper tree, and asked God to let him die. And how did the Lord answer His discouraged prophet? Not with a scolding, but with sleep, and food, and a gentle voice. God deals tenderly with weary saints. He knows our frame; He remembers that we are dust. Discouragement is not the same as unbelief, and the Lord does not break the bruised reed.</p><p>The cure is not to chase a feeling. Feelings rise and fall; we have good days and bad days, and a person may even be weighed down by a chemical imbalance that has nothing to do with faith at all. If our assurance rests on how we feel, it will blow away with the next cold wind. Assurance must rest on Christ and on His promises. John wrote his letter for exactly this reason:</p><div class="scripture">These things I have written to you who believe in the name of the Son of God, that you may know that you have eternal life. (1 John 5:13, NKJV)</div><p>God means for His children to know. And the Lord Himself has given the promise that holds us when every feeling fails:</p><div class="scripture">I will never leave you nor forsake you. (Hebrews 13:5, NKJV)</div><p>When doubt creeps in, the remedy is not to look inward at our wavering hearts but to look back to what Christ has shown us and outward to what He has promised. We go back to the cross, back to the empty tomb, back to the sure Word, and we rest there. Doubt is not always sin, and it is not the end of faith. Often it is simply the soul's exhaustion crying out in the dark, and the answer is not to despair but to look again at the One who has never failed. The same Christ who sent word to John in his prison sends His Word to us in ours, and that Word is enough.</p><p>John never came out of that prison. Herod, trapped by a rash oath made at a banquet, had him beheaded to please a dancing girl and her vengeful mother (Mark 6). The greatest man born of women died in a cell for telling the truth. But he died the Lord's, and his dark hour of doubt did not undo him, because his standing never rested on his feelings in the first place; it rested on the Christ he had pointed others to all along.</p><p>So take heart, you who serve God and yet sometimes wonder in the night. Discouragement can shake even a giant of faith. But the answer is always the same: go back to Christ. Return to what He has shown you and to what He has promised, for your assurance rests on Him, and "He must increase" while every doubt grows small in His light.</p></div>
+<div class="lang-es"><p>De Juan el Bautista dijo el Señor Jesús que entre los que nacen de mujer no se había levantado ninguno mayor. Era el precursor del Mesías, un predicador que conmovía multitudes y volvía a una nación hacia el arrepentimiento. Y sin embargo este gigante de la fe, encerrado en un calabozo, fue sacudido por la duda. Su historia es un consuelo para todo creyente que alguna vez ha dudado en la oscuridad, porque nos muestra que Cristo responde a la duda honesta no con una reprensión sino con evidencia.</p><p><strong>Tema:</strong> Juan el Bautista — el precursor que dudó en la oscuridad.</p><p><strong>Proposición:</strong> Aun el mayor de los nacidos de mujer puede ser sacudido en la prisión del desánimo, y Cristo responde a la duda honesta con evidencia, no con reprensión.</p><p>Seguiremos tres movimientos en su vida.</p><h2>I. El Precursor</h2><p>La vida de Juan fue un milagro desde el comienzo. Nació de Zacarías el sacerdote y su esposa Elisabet en su vejez, mucho después de los años de tener hijos, y su nacimiento fue anunciado de antemano por el ángel Gabriel (Lucas 1). Creció hasta llegar a ser el predicador del arrepentimiento en el desierto, una figura ruda vestida de pelo de camello que clamaba: «Preparad el camino del Señor». Las multitudes salían a oírlo y a ser bautizadas, confesando sus pecados. La suya era un bautismo de arrepentimiento, un volverse públicamente del pecado para prepararse para el Señor. No temía a nadie. Cuando los orgullosos líderes religiosos salieron a él, los llamó generación de víboras y les advirtió que no confiaran en su linaje, porque «el hacha está puesta a la raíz de los árboles». Y sin embargo, con todo su fuego, nunca atrajo la atención a sí mismo. «Viene uno más poderoso que yo», dijo, «la correa de cuyo calzado no soy digno de desatar; Él os bautizará con el Espíritu Santo y fuego». Sabía que era solo el heraldo de un Rey mayor. Entonces un día su propio primo vino a él al Jordán, y Juan bautizó a Jesús, y vio al Espíritu descender sobre Él como una paloma. Desde aquel momento Juan apartó todo ojo de sí mismo y lo dirigió hacia Cristo:</p><div class="scripture">¡He aquí el Cordero de Dios, que quita el pecado del mundo! (Juan 1:29, RVG)</div><p>Ese era todo el propósito de su vida. Cuando sus propios discípulos se pusieron celosos de que las multitudes ahora iban a Jesús, Juan dio una de las respuestas más nobles de toda la Escritura:</p><div class="scripture">A él conviene crecer, mas a mí menguar. (Juan 3:30, RVG)</div><p>Aquí había un gran hombre contento de hacerse más pequeño para que Cristo se hiciera más grande. Sabía que era solo el amigo del Esposo, solo la voz, solo el que venía antes. No hay marca más verdadera de grandeza que esa.</p><h2>II. La Duda en la Prisión</h2><p>Pero la historia da un giro oscuro. Juan había reprendido sin temor a Herodes por tomar la mujer de su hermano, y por decir esa verdad fue echado en prisión. Allí, en la humedad y el silencio, apartado del cielo abierto y del río que corría y de las multitudes, el gran predicador se desanimó. Y al asentarse el desánimo sobre él, la duda se coló dentro. Él, que había bautizado al Mesías, que había oído la voz del cielo y visto la paloma descender, ahora envió a sus discípulos a hacer una pregunta que debió costarle muy caro:</p><div class="scripture">¿Eres tú aquél que había de venir, o esperaremos a otro? (Mateo 11:3, RVG)</div><p>Es algo asombroso que Juan, de entre todos, pudiera llegar a tal pregunta. ¿Qué lo había sacudido? Lo más probable es que fuera la distancia entre lo que había esperado del Mesías y lo que ahora oía. Juan había predicado un Cristo que vendría con fuego y juicio, cuyo aventador estaba en su mano para limpiar la era. Pero los reportes que llegaban a su celda hablaban de un Sanador apacible que predicaba buenas nuevas a los pobres y dejaba al malvado Herodes en su trono —y dejaba al propio Juan en cadenas—. Si Jesús era de veras Aquél que había de venir, pudo preguntarse Juan, ¿por qué sigo aquí en la oscuridad? Pero el desánimo hace eso al alma; en la prisión de la oscuridad, olvidamos lo que conocíamos tan claramente en la luz. Note cómo le respondió el Señor Jesús. No regañó a Juan, no lo avergonzó, no le quitó su llamado. Simplemente señaló la evidencia:</p><div class="scripture">Id, y haced saber a Juan las cosas que oís y veis. Los ciegos ven, y los cojos andan; los leprosos son limpiados, y los sordos oyen; los muertos son resucitados, y a los pobres es predicado el evangelio. Y bienaventurado es el que no fuere escandalizado en mí. (Mateo 11:4-6, RVG)</div><p>En otras palabras: Juan, tú ya sabes. Ya has visto la prueba; vuelve a ella. Las obras del Cristo se hacían a plena vista, exactamente como los profetas habían predicho. El problema de Juan no era falta de evidencia; había visto la evidencia con sus propios ojos. Su problema era que en la prisión del desánimo la había olvidado. Y entonces, en el momento en que los discípulos de Juan se hubieron ido, Jesús se volvió a la multitud y honró al mismo hombre que acababa de dudar de Él: «entre los que nacen de mujer no se levantó otro mayor que Juan el Bautista» (Mateo 11:11). El Señor no amó a Juan ni un poco menos por su hora oscura.</p><h2>III. El Remedio — Volver a Cristo</h2><p>Esta es una clase particular de duda: no la duda de si Dios existe, sino la duda del propio estado —la pregunta que susurra en la oscuridad: «¿Soy realmente suyo?»—. Recuerdo cuando mi propia esposa me preguntó un día cómo lidiaba yo con la duda. Comencé a explicar las viejas preguntas con las que había luchado sobre si Dios estaba siquiera ahí, pero ella me detuvo. «No», dijo, «yo nunca he dudado de que Dios está ahí. He estado dudando si soy realmente cristiana». Esa es la duda de Juan el Bautista, y muchos de los hijos más amados de Dios pasan por ella. Juan no fue el primer gigante abatido de esta manera. Elías, recién salido de hacer descender fuego en el monte Carmelo, huyó al desierto, se sentó bajo un enebro, y pidió a Dios que lo dejara morir. ¿Y cómo respondió el Señor a su profeta desanimado? No con un regaño, sino con sueño, y comida, y una voz apacible. Dios trata con ternura a los santos cansados. Conoce nuestra condición; se acuerda de que somos polvo. El desánimo no es lo mismo que la incredulidad, y el Señor no quiebra la caña cascada.</p><p>La cura no es perseguir un sentimiento. Los sentimientos suben y bajan; tenemos días buenos y días malos, y una persona puede incluso estar abatida por un desequilibrio químico que no tiene nada que ver con la fe. Si nuestra seguridad descansa en cómo nos sentimos, se la llevará el próximo viento frío. La seguridad debe descansar en Cristo y en sus promesas. Juan escribió su carta por exactamente esta razón:</p><div class="scripture">Estas cosas he escrito a vosotros los que creéis en el nombre del Hijo de Dios; para que sepáis que tenéis vida eterna. (1 Juan 5:13, RVG)</div><p>Dios quiere que sus hijos sepan. Y el Señor mismo ha dado la promesa que nos sostiene cuando todo sentimiento falla:</p><div class="scripture">No te desampararé, ni te dejaré. (Hebreos 13:5, RVG)</div><p>Cuando la duda se cuela, el remedio no es mirar hacia adentro a nuestro corazón vacilante sino mirar atrás a lo que Cristo nos ha mostrado y afuera a lo que ha prometido. Volvemos a la cruz, volvemos a la tumba vacía, volvemos a la Palabra segura, y allí descansamos. La duda no siempre es pecado, y no es el fin de la fe. A menudo es simplemente el agotamiento del alma que clama en la oscuridad, y la respuesta no es desesperar sino mirar de nuevo a Aquél que nunca ha fallado. El mismo Cristo que envió aviso a Juan en su prisión nos envía su Palabra en la nuestra, y esa Palabra es suficiente.</p><p>Juan nunca salió de aquella prisión. Herodes, atrapado por un juramento imprudente hecho en un banquete, lo hizo decapitar para complacer a una muchacha que danzaba y a su vengativa madre (Marcos 6). El hombre más grande nacido de mujer murió en una celda por decir la verdad. Pero murió siendo del Señor, y su hora oscura de duda no lo deshizo, porque su estado nunca descansó en sus sentimientos en primer lugar; descansaba en el Cristo a quien había señalado a otros todo el tiempo.</p><p>Así que ten ánimo, tú que sirves a Dios y sin embargo a veces dudas en la noche. El desánimo puede sacudir aun a un gigante de la fe. Pero la respuesta es siempre la misma: vuelve a Cristo. Regresa a lo que Él te ha mostrado y a lo que ha prometido, porque tu seguridad descansa en Él, y «a él conviene crecer» mientras toda duda se hace pequeña en su luz.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 6 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 6;
+const COURSE = 'CTSBC2';
+const FILE_PREFIX = 'CTSBibleCharacters2';
+const NEXT_UNIT_URL = 'CTSBibleCharacters2Unit7.html';
+const totalUnits = 11;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - Jonah — The Prophet Who Ran from God", "Unit 2 - Hosea — The Prophet Who Loved an Unfaithful Wife", "Unit 3 - Jeremiah — The Weeping Prophet Who Stayed Faithful", "Unit 4 - Esther — For Such a Time as This: The Hidden Providence of God", "Unit 5 - Ezra — A Fresh New Start, the Scribe Who Restored God’s Word", "Unit 6 - John the Baptist — The Forerunner Who Doubted in the Dark", "Unit 7 - Peter — From Fisherman to the Rock Who Feeds the Sheep", "Unit 8 - Thomas — The Doubter Who Made the Great Confession", "Unit 9 - Lazarus — The Dead Man Jesus Called Back to Life", "Unit 10 - Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ", "Unit 11 - Paul — From Persecutor to Apostle of Grace"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [{"textEn":"1. What was John the Baptist's role?","textEs":"1. ¿Cuál era el papel de Juan el Bautista?","optionsEn":["The forerunner who prepared the way for Christ", "A king of Israel", "A Roman governor", "One of the twelve apostles"],"optionsEs":["El precursor que preparó el camino para Cristo", "Un rey de Israel", "Un gobernador romano", "Uno de los doce apóstoles"],"explanationEn":"John came before the Messiah to prepare His way.","explanationEs":"Juan vino antes del Mesías para preparar su camino.","correct":0},{"textEn":"2. What was remarkable about John's birth (Luke 1)?","textEs":"2. ¿Qué tuvo de notable el nacimiento de Juan (Lucas 1)?","optionsEn":["He was born in a palace", "He had no parents", "He was born to Zacharias and Elizabeth in their old age, his birth foretold by an angel", "He was born in Egypt"],"optionsEs":["Nació en un palacio", "No tenía padres", "Nació de Zacarías y Elisabet en su vejez, su nacimiento anunciado por un ángel", "Nació en Egipto"],"explanationEn":"Gabriel announced his birth to his aged father Zacharias.","explanationEs":"Gabriel anunció su nacimiento a su anciano padre Zacarías.","correct":2},{"textEn":"3. What was John's message in the wilderness?","textEs":"3. ¿Cuál era el mensaje de Juan en el desierto?","optionsEn":["Wealth and comfort", "Repentance — \"Prepare the way of the LORD\"", "Rebellion against Rome", "That he himself was the Messiah"],"optionsEs":["Riqueza y comodidad", "Arrepentimiento — «Preparad el camino del Señor»", "Rebelión contra Roma", "Que él mismo era el Mesías"],"explanationEn":"He called the nation to repent and make ready for the Lord.","explanationEs":"Llamó a la nación a arrepentirse y prepararse para el Señor.","correct":1},{"textEn":"4. Whom did John baptize in the Jordan?","textEs":"4. ¿A quién bautizó Juan en el Jordán?","optionsEn":["Herod", "Caesar", "Pilate", "Jesus, his own cousin"],"optionsEs":["A Herodes", "A César", "A Pilato", "A Jesús, su propio primo"],"explanationEn":"John baptized Jesus and saw the Spirit descend like a dove.","explanationEs":"Juan bautizó a Jesús y vio al Espíritu descender como paloma.","correct":3},{"textEn":"5. What did John cry when he saw Jesus (John 1:29)?","textEs":"5. ¿Qué clamó Juan cuando vio a Jesús (Juan 1:29)?","optionsEn":["\"He is only a teacher\"", "\"Follow me\"", "\"Behold the Lamb of God who takes away the sin of the world!\"", "\"I am the Christ\""],"optionsEs":["«Es solo un maestro»", "«Seguidme»", "«¡He aquí el Cordero de Dios, que quita el pecado del mundo!»", "«Yo soy el Cristo»"],"explanationEn":"John pointed every eye away from himself and toward Christ.","explanationEs":"Juan apartó todo ojo de sí mismo y lo dirigió hacia Cristo.","correct":2},{"textEn":"6. What did John say in John 3:30, showing his humility?","textEs":"6. ¿Qué dijo Juan en Juan 3:30, mostrando su humildad?","optionsEn":["\"I am the greatest\"", "\"He must increase, but I must decrease\"", "\"I will rule\"", "\"Stay with me\""],"optionsEs":["«Yo soy el más grande»", "«A él conviene crecer, mas a mí menguar»", "«Yo reinaré»", "«Quedaos conmigo»"],"explanationEn":"He was content to grow smaller so that Christ might grow greater.","explanationEs":"Estaba contento de hacerse más pequeño para que Cristo creciera.","correct":1},{"textEn":"7. Why was John thrown into prison?","textEs":"7. ¿Por qué fue echado Juan en prisión?","optionsEn":["He had stolen from the temple", "He had committed a crime", "He had denied Christ", "Herod imprisoned him for speaking the truth"],"optionsEs":["Había robado del templo", "Había cometido un crimen", "Había negado a Cristo", "Herodes lo encarceló por decir la verdad"],"explanationEn":"John had rebuked Herod for taking his brother's wife.","explanationEs":"Juan había reprendido a Herodes por tomar la mujer de su hermano.","correct":3},{"textEn":"8. What happened to John in prison?","textEs":"8. ¿Qué le sucedió a Juan en la prisión?","optionsEn":["He grew discouraged, and doubt crept in", "He renounced his faith", "He escaped", "He was immediately freed"],"optionsEs":["Se desanimó, y la duda se coló dentro", "Renunció a su fe", "Escapó", "Fue liberado de inmediato"],"explanationEn":"Discouragement settled over him, and doubt followed.","explanationEs":"El desánimo se asentó sobre él, y la duda siguió.","correct":0},{"textEn":"9. What question did John send to Jesus by his disciples?","textEs":"9. ¿Qué pregunta envió Juan a Jesús por sus discípulos?","optionsEn":["\"When will You set up Your kingdom?\"", "\"Are You the Coming One, or do we look for another?\"", "\"Will You free me from prison?\"", "\"Who is the greatest?\""],"optionsEs":["«¿Cuándo establecerás tu reino?»", "«¿Eres tú aquél que había de venir, o esperaremos a otro?»", "«¿Me librarás de la prisión?»", "«¿Quién es el mayor?»"],"explanationEn":"The man who had baptized the Messiah now wondered in the dark.","explanationEs":"El hombre que había bautizado al Mesías ahora dudaba en la oscuridad.","correct":1},{"textEn":"10. What is \"the John the Baptist Doubt\"?","textEs":"10. ¿Qué es «la Duda de Juan el Bautista»?","optionsEn":["Doubting other people", "Doubting one's own strength", "Doubting the weather", "The doubt that creeps in through discouragement — the doubt of one's standing in the dark"],"optionsEs":["Dudar de otras personas", "Dudar de la propia fuerza", "Dudar del clima", "La duda que se cuela por el desánimo — la duda del propio estado en la oscuridad"],"explanationEn":"In the prison of the dark, we forget what we knew clearly in the light.","explanationEs":"En la prisión de la oscuridad, olvidamos lo que conocíamos claramente en la luz.","correct":3},{"textEn":"11. How did Jesus answer John's question?","textEs":"11. ¿Cómo respondió Jesús a la pregunta de Juan?","optionsEn":["With evidence, not rebuke — \"the blind see, the lame walk, the gospel is preached to the poor\"", "By scolding John", "By ignoring him", "By freeing him at once"],"optionsEs":["Con evidencia, no con reprensión — «los ciegos ven, los cojos andan, a los pobres se predica el evangelio»", "Regañando a Juan", "Ignorándolo", "Liberándolo de inmediato"],"explanationEn":"The works of the Christ were being done in plain sight, as foretold.","explanationEs":"Las obras del Cristo se hacían a plena vista, como fue predicho.","correct":0},{"textEn":"12. What did Jesus add at the end of His answer?","textEs":"12. ¿Qué añadió Jesús al final de su respuesta?","optionsEn":["\"John has failed Me\"", "\"Doubt is unforgivable\"", "\"Blessed is he who is not offended because of Me\"", "\"You must see Me to believe\""],"optionsEs":["«Juan me ha fallado»", "«La duda es imperdonable»", "«Bienaventurado es el que no fuere escandalizado en mí»", "«Debes verme para creer»"],"explanationEn":"A gentle word of blessing, not a rebuke.","explanationEs":"Una tierna palabra de bendición, no una reprensión.","correct":2},{"textEn":"13. What was the heart of John's problem?","textEs":"13. ¿Cuál era el centro del problema de Juan?","optionsEn":["He had never seen any evidence", "He had already seen the evidence, but in the prison of discouragement he forgot it", "He had never believed at all", "Jesus had deceived him"],"optionsEs":["Nunca había visto evidencia", "Ya había visto la evidencia, pero en la prisión del desánimo la olvidó", "Nunca había creído", "Jesús lo había engañado"],"explanationEn":"His problem was not lack of proof but discouragement.","explanationEs":"Su problema no era falta de prueba sino desánimo.","correct":1},{"textEn":"14. How did Jesus honor John even then?","textEs":"14. ¿Cómo honró Jesús a Juan aun entonces?","optionsEn":["He said, \"Among those born of women there has not risen one greater than John the Baptist\"", "He said nothing about John", "He rebuked John publicly", "He said John was the least"],"optionsEs":["Dijo: «entre los que nacen de mujer no se levantó otro mayor que Juan el Bautista»", "No dijo nada de Juan", "Reprendió a Juan públicamente", "Dijo que Juan era el menor"],"explanationEn":"The Lord did not love John any less for his dark hour.","explanationEs":"El Señor no amó a Juan ni un poco menos por su hora oscura.","correct":0},{"textEn":"15. What is the remedy for the doubt of discouragement?","textEs":"15. ¿Cuál es el remedio para la duda del desánimo?","optionsEn":["To wait for the doubt to pass on its own", "To rely on good feelings", "To go back to Christ — to what He has shown and what He has promised", "To stop praying"],"optionsEs":["Esperar a que la duda pase sola", "Confiar en los buenos sentimientos", "Volver a Cristo — a lo que Él ha mostrado y a lo que ha prometido", "Dejar de orar"],"explanationEn":"We look back to what Christ has shown and outward to His promise.","explanationEs":"Miramos atrás a lo que Cristo ha mostrado y afuera a su promesa.","correct":2},{"textEn":"16. What did Wayne's wife confess about her own doubt?","textEs":"16. ¿Qué confesó la esposa de Wayne acerca de su propia duda?","optionsEn":["That she doubted the Bible", "That she had stopped believing entirely", "That she doubted the church", "That she had never doubted God is there, but doubted whether she was really a Christian"],"optionsEs":["Que dudaba de la Biblia", "Que había dejado de creer por completo", "Que dudaba de la iglesia", "Que nunca había dudado de que Dios está ahí, pero dudaba si era realmente cristiana"],"explanationEn":"That is the doubt of one's standing — the John the Baptist doubt.","explanationEs":"Esa es la duda del propio estado — la duda de Juan el Bautista.","correct":3},{"textEn":"17. What does assurance NOT rest on?","textEs":"17. ¿En qué NO descansa la seguridad?","optionsEn":["The promises of Christ", "Our feelings — good days, bad days, even a chemical imbalance", "The finished work of Christ", "The Word of God"],"optionsEs":["Las promesas de Cristo", "Nuestros sentimientos — días buenos, días malos, hasta un desequilibrio químico", "La obra consumada de Cristo", "La Palabra de Dios"],"explanationEn":"Feelings rise and fall; assurance must rest on Christ.","explanationEs":"Los sentimientos suben y bajan; la seguridad debe descansar en Cristo.","correct":1},{"textEn":"18. What does 1 John 5:13 say God has given us?","textEs":"18. ¿Qué dice 1 Juan 5:13 que Dios nos ha dado?","optionsEn":["Assurance — \"that you may know that you have eternal life\"", "Uncertainty about salvation", "A list of rules", "A reason to doubt"],"optionsEs":["Seguridad — «para que sepáis que tenéis vida eterna»", "Incertidumbre sobre la salvación", "Una lista de reglas", "Una razón para dudar"],"explanationEn":"God means for His children to know they are saved.","explanationEs":"Dios quiere que sus hijos sepan que son salvos.","correct":0},{"textEn":"19. What promise does Hebrews 13:5 give?","textEs":"19. ¿Qué promesa da Hebreos 13:5?","optionsEn":["\"I will leave you to yourself\"", "\"You will never struggle\"", "\"You must earn My favor\"", "\"I will never leave you nor forsake you\""],"optionsEs":["«Te dejaré a ti mismo»", "«Nunca lucharás»", "«Debes ganar mi favor»", "«No te desampararé, ni te dejaré»"],"explanationEn":"This word holds us fast when every feeling fails.","explanationEs":"Esta palabra nos sostiene firmes cuando todo sentimiento falla.","correct":3},{"textEn":"20. What is the central theme of John the Baptist's life?","textEs":"20. ¿Cuál es el tema central de la vida de Juan el Bautista?","optionsEn":["Great men never doubt", "Doubt always ends in unbelief", "Discouragement can shake even a giant of faith; the cure is to return to what Christ has shown and promised — assurance rests on Him, not our feelings", "Feelings are the surest guide to faith"],"optionsEs":["Los grandes hombres nunca dudan", "La duda siempre termina en incredulidad", "El desánimo puede sacudir aun a un gigante de la fe; la cura es volver a lo que Cristo ha mostrado y prometido — la seguridad descansa en Él, no en los sentimientos", "Los sentimientos son la guía más segura para la fe"],"explanationEn":"Take your wavering heart back to Christ, and find Him faithful.","explanationEs":"Lleva tu corazón vacilante de vuelta a Cristo, y hállalo fiel.","correct":2}];
+const kwQuestions = [{"textEn":"21. Describe John as the forerunner.","textEs":"21. Describe a Juan como el precursor.","kw_en":["forerunner","prepare","repentance","baptize","jesus","lamb","decrease","point"],"kw_es":["precursor","prepar","arrepentimiento","bautiz","jesus","cordero","menguar","senal"],"modelEn":"John was the forerunner who prepared the way for Christ. Born to Zacharias and Elizabeth in their old age, he became the wilderness preacher of repentance, crying, \"Prepare the way of the LORD.\" He baptized his own cousin Jesus and pointed every eye away from himself: \"Behold the Lamb of God who takes away the sin of the world!\" When his disciples grew jealous, he answered with noble humility, \"He must increase, but I must decrease.\" His whole purpose was to magnify Christ.","modelEs":"Juan era el precursor que preparó el camino para Cristo. Nacido de Zacarías y Elisabet en su vejez, llegó a ser el predicador del arrepentimiento en el desierto, clamando: \"Preparad el camino del Señor\". Bautizó a su propio primo Jesús y apartó todo ojo de sí mismo: \"¡He aquí el Cordero de Dios, que quita el pecado del mundo!\". Cuando sus discípulos se pusieron celosos, respondió con noble humildad: \"A él conviene crecer, mas a mí menguar\". Todo su propósito era engrandecer a Cristo."},{"textEn":"22. What happened to John in prison, and what question did he send?","textEs":"22. ¿Qué le sucedió a Juan en la prisión, y qué pregunta envió?","kw_en":["herod","prison","truth","discourage","doubt","coming","another","disciples"],"kw_es":["herodes","prision","verdad","desanim","duda","venir","otro","discipulos"],"modelEn":"John had fearlessly rebuked Herod for taking his brother's wife, and for that truth he was thrown into prison. There, cut off from the open sky and the crowds, the great preacher grew discouraged, and doubt crept in. He sent his disciples to ask Jesus a question that must have cost him dearly: \"Are You the Coming One, or do we look for another?\" The man who had baptized the Messiah now wondered in the dark of his cell.","modelEs":"Juan había reprendido sin temor a Herodes por tomar la mujer de su hermano, y por esa verdad fue echado en prisión. Allí, apartado del cielo abierto y de las multitudes, el gran predicador se desanimó, y la duda se coló dentro. Envió a sus discípulos a hacerle a Jesús una pregunta que debió costarle muy caro: \"¿Eres tú aquél que había de venir, o esperaremos a otro?\". El hombre que había bautizado al Mesías ahora dudaba en la oscuridad de su celda."},{"textEn":"23. What is the John the Baptist Doubt?","textEs":"23. ¿Qué es la Duda de Juan el Bautista?","kw_en":["doubt","discouragement","standing","dark","prison","evidence","forgot","giant"],"kw_es":["duda","desanimo","estado","oscuridad","prision","evidencia","olvid","gigante"],"modelEn":"The John the Baptist doubt is the doubt that creeps in through discouragement, when a believer in the dark of his trial begins to question what he once knew clearly in the light. It is the doubt of one's own standing. John's problem was not a lack of evidence; he had seen the Messiah's works with his own eyes. His problem was that in the prison of discouragement he had forgotten it. Even a giant of faith can be shaken this way.","modelEs":"La duda de Juan el Bautista es la duda que se cuela por el desánimo, cuando un creyente en la oscuridad de su prueba comienza a cuestionar lo que una vez conoció claramente en la luz. Es la duda del propio estado. El problema de Juan no era falta de evidencia; había visto las obras del Mesías con sus propios ojos. Su problema era que en la prisión del desánimo la había olvidado. Aun un gigante de la fe puede ser sacudido así."},{"textEn":"24. How did Jesus answer, and what did He add?","textEs":"24. ¿Cómo respondió Jesús, y qué añadió?","kw_en":["evidence","blind","lame","poor","rebuke","blessed","offended","gospel"],"kw_es":["evidencia","ciegos","cojos","pobres","reprension","bienaventurado","escandaliz","evangelio"],"modelEn":"Jesus answered not with a rebuke but with evidence. He told John's disciples to report what they saw and heard: the blind see, the lame walk, the lepers are cleansed, the deaf hear, the dead are raised, and the poor have the gospel preached to them. Then He added, \"Blessed is he who is not offended because of Me.\" In effect He said, John, you already know; go back to the proof you have seen. He met honest doubt with patience.","modelEs":"Jesús respondió no con una reprensión sino con evidencia. Dijo a los discípulos de Juan que reportaran lo que veían y oían: los ciegos ven, los cojos andan, los leprosos son limpiados, los sordos oyen, los muertos son resucitados, y a los pobres es predicado el evangelio. Luego añadió: \"Bienaventurado es el que no fuere escandalizado en mí\". En efecto dijo: Juan, tú ya sabes; vuelve a la prueba que has visto. Enfrentó la duda honesta con paciencia."},{"textEn":"25. How did Jesus honor John even in his doubt?","textEs":"25. ¿Cómo honró Jesús a Juan aun en su duda?","kw_en":["greater","born","women","honor","john","greatest","christ","esteem"],"kw_es":["mayor","nacen","mujer","honr","juan","grande","cristo","estim"],"modelEn":"The moment John's disciples had gone, Jesus turned to the crowd and honored the very man who had just doubted Him, saying, \"Among those born of women there has not risen one greater than John the Baptist.\" The Lord did not love John any less for his dark hour, nor strip him of his honor. This shows the tenderness of Christ toward a struggling saint: He answers the doubt and still esteems the doubter.","modelEs":"En el momento en que los discípulos de Juan se hubieron ido, Jesús se volvió a la multitud y honró al mismo hombre que acababa de dudar de Él, diciendo: \"entre los que nacen de mujer no se levantó otro mayor que Juan el Bautista\". El Señor no amó a Juan ni un poco menos por su hora oscura, ni le quitó su honra. Esto muestra la ternura de Cristo hacia un santo que lucha: responde la duda y aun estima al que duda."},{"textEn":"26. What is the remedy for this kind of doubt?","textEs":"26. ¿Cuál es el remedio para esta clase de duda?","kw_en":["christ","return","shown","promised","feelings","assurance","back","rest"],"kw_es":["cristo","volver","mostrado","prometido","sentimientos","seguridad","atras","descans"],"modelEn":"The remedy for this kind of doubt is to go back to Christ. We do not look inward at our wavering hearts but back to what He has shown us and outward to what He has promised. We return to the cross, the empty tomb, and the sure Word, and we rest there. Assurance must not rest on our feelings, which rise and fall, but on Christ Himself, who does not change and cannot lie.","modelEs":"El remedio para esta clase de duda es volver a Cristo. No miramos hacia adentro a nuestro corazón vacilante sino atrás a lo que Él nos ha mostrado y afuera a lo que ha prometido. Volvemos a la cruz, a la tumba vacía, y a la Palabra segura, y allí descansamos. La seguridad no debe descansar en nuestros sentimientos, que suben y bajan, sino en Cristo mismo, que no cambia y no puede mentir."},{"textEn":"27. What did Wayne's wife confess, and what kind of doubt is it?","textEs":"27. ¿Qué confesó la esposa de Wayne, y qué clase de duda es?","kw_en":["wife","god","there","christian","standing","feelings","doubt","real"],"kw_es":["esposa","dios","ahi","cristiana","estado","sentimientos","duda","real"],"modelEn":"When my wife was asked how she dealt with doubt, she made a striking confession. I began to explain my own old questions about whether God exists, but she stopped me: \"No, I have never doubted that God is there. I have been doubting whether I am really a Christian.\" That is the John the Baptist doubt — not the doubt of God's existence but the doubt of one's own standing. Many of God's dearest children pass through it.","modelEs":"Cuando a mi esposa le preguntaron cómo lidiaba con la duda, hizo una confesión sorprendente. Comencé a explicar mis propias viejas preguntas sobre si Dios existe, pero ella me detuvo: \"No, yo nunca he dudado de que Dios está ahí. He estado dudando si soy realmente cristiana\". Esa es la duda de Juan el Bautista — no la duda de la existencia de Dios sino la duda del propio estado. Muchos de los hijos más amados de Dios pasan por ella."},{"textEn":"28. What does assurance rest on, and not rest on?","textEs":"28. ¿En qué descansa la seguridad, y en qué no descansa?","kw_en":["feelings","christ","promise","know","eternal","leave","forsake","assurance"],"kw_es":["sentimientos","cristo","promesa","saber","eterna","desampar","dejar","seguridad"],"modelEn":"Assurance does not rest on feelings, for we have good days and bad days, and a person may even be weighed down by a chemical imbalance that has nothing to do with faith. It rests on Christ and His promises. John wrote, \"These things I have written... that you may know that you have eternal life\" (1 John 5:13); God means for His children to know. And the Lord promised, \"I will never leave you nor forsake you\" (Hebrews 13:5), a word that holds when every feeling fails.","modelEs":"La seguridad no descansa en los sentimientos, porque tenemos días buenos y días malos, y una persona puede incluso estar abatida por un desequilibrio químico que no tiene nada que ver con la fe. Descansa en Cristo y en sus promesas. Juan escribió: \"Estas cosas he escrito... para que sepáis que tenéis vida eterna\" (1 Juan 5:13); Dios quiere que sus hijos sepan. Y el Señor prometió: \"No te desampararé, ni te dejaré\" (Hebreos 13:5), una palabra que sostiene cuando todo sentimiento falla."},{"textEn":"29. How did John remain faithful to the end?","textEs":"29. ¿Cómo permaneció Juan fiel hasta el fin?","kw_en":["martyr","beheaded","herod","faithful","truth","death","end","oath"],"kw_es":["martir","decapit","herodes","fiel","verdad","muerte","fin","juramento"],"modelEn":"John never came out of that prison. Herod, trapped by a rash oath made at a banquet, had him beheaded to please a dancing girl and her vengeful mother (Mark 6). The greatest man born of women died in a cell for telling the truth. Yet he died the Lord's, and his dark hour of doubt did not undo him, because his standing never rested on his feelings; it rested on the Christ he had pointed others to all along. He was faithful to the end.","modelEs":"Juan nunca salió de aquella prisión. Herodes, atrapado por un juramento imprudente hecho en un banquete, lo hizo decapitar para complacer a una muchacha que danzaba y a su vengativa madre (Marcos 6). El hombre más grande nacido de mujer murió en una celda por decir la verdad. Y sin embargo murió siendo del Señor, y su hora oscura de duda no lo deshizo, porque su estado nunca descansó en sus sentimientos; descansaba en el Cristo a quien había señalado a otros todo el tiempo. Fue fiel hasta el fin."},{"textEn":"30. State the theme — assurance rests on Christ, not feelings.","textEs":"30. Expresa el tema — la seguridad descansa en Cristo, no en los sentimientos.","kw_en":["discouragement","giant","return","shown","promised","assurance","christ","feelings"],"kw_es":["desanimo","gigante","volver","mostrado","prometido","seguridad","cristo","sentimientos"],"modelEn":"The theme of John the Baptist is that discouragement can shake even a giant of faith, but the cure is always to return to Christ — to what He has shown us and to what He has promised. Assurance rests on Him, not on our feelings. If even the greatest born of women doubted in the dark and was met by Christ with evidence and not rebuke, then we too can take our wavering hearts back to the same Lord, and find Him faithful.","modelEs":"El tema de Juan el Bautista es que el desánimo puede sacudir aun a un gigante de la fe, pero la cura es siempre volver a Cristo — a lo que Él nos ha mostrado y a lo que ha prometido. La seguridad descansa en Él, no en nuestros sentimientos. Si aun el mayor de los nacidos de mujer dudó en la oscuridad y fue recibido por Cristo con evidencia y no con reprensión, entonces nosotros también podemos llevar nuestro corazón vacilante de vuelta al mismo Señor, y hallarlo fiel."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleCharacters2Readings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

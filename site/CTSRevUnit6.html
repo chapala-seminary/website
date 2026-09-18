@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Revelation Intensive — Unit 6</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 7 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Revelation Intensive — Unit 6: The Seven Seals</span><span class="lang-es">📖 Apocalipsis Intensivo — Unidad 6: Los Siete Sellos</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"The great day of His wrath has come, and who is able to stand?" — Revelation 6:17 (NKJV)</span><span class="lang-es">"El gran día de su ira ha venido; ¿y quién podrá estar en pie?" — Apocalipsis 6:17 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Revelation Intensive. Please register before beginning Unit 6.</span><span class="lang-es">Bienvenido al Intensivo de Apocalipsis. Por favor regístrese antes de comenzar la Unidad 6.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Revelation 6:1-8:1</strong></p>
+<div class="scripture">"'For the great day of His wrath has come, and who is able to stand?'... After these things I looked, and behold, a great multitude which no one could number, of all nations... standing before the throne and before the Lamb." &mdash; Revelation 6:17; 7:9 (NKJV)</div>
+
+<h3>The Lamb Opens the Seals</h3>
+<p>Chapter five ended with the Lamb taking the sealed scroll from the hand of God; now He begins to open it. This is the first thing to notice, and it governs the whole chapter: it is the Lamb who breaks the seals. The judgments that follow are not the work of blind fate or of an enemy out of control, but unfold only as the slain and risen Lamb opens them, one by one, under His sovereign hand. Christians have read the seals in different ways &mdash; some seeing them fulfilled in the first centuries, some across the long span of history, some as describing a final period still to come, and some as a picture of the recurring troubles of every age. The course has set those approaches side by side already and will not press one here. What every faithful reading shares is the comfort that nothing breaks loose upon the world except by the hand of the Lamb who loves His people and was found worthy to open the scroll of history.</p>
+
+<h3>The Four Horsemen: Conquest, War, Famine, Death</h3>
+<p>As the first four seals are opened, four horses and their riders ride out. The first is a white horse whose rider holds a bow, is given a crown, and goes out "conquering and to conquer" (Revelation 6:2). This rider has been understood in two main ways: some take him as Christ or the advance of the gospel going out in triumph, while others take him as a spirit of conquest or a false christ, and the course leaves the matter open. The second is a red horse, whose rider is granted power to "take peace from the earth, and that people should kill one another," and is given a great sword (Revelation 6:4) &mdash; this is war and slaughter. The third is a black horse, whose rider holds a pair of scales, and a voice prices a day's wheat at a day's wage &mdash; this is famine and crushing scarcity, while the oil and the wine are spared. The fourth is a pale, ashen horse, "and the name of him who sat on it was Death, and Hades followed with him" (Revelation 6:8). It is a haunting picture: Death rides the pale horse, and the grave comes close behind like a hearse, given power over a fourth of the earth to kill with sword, with hunger, with plague, and by the beasts of the earth. The four horsemen gather up the great recurring woes of a fallen world under the judgment of God.</p>
+
+<h3>The Fifth Seal: The Cry of the Martyrs</h3>
+<p>When the Lamb opens the fifth seal, the scene shifts from earth to the altar in heaven. "I saw under the altar the souls of those who had been slain for the word of God and for the testimony which they held" (Revelation 6:9). These are the martyrs, those put to death for their faithfulness to Christ, and they cry out with a loud voice, "How long, O Lord, holy and true, until You judge and avenge our blood on those who dwell on the earth?" (Revelation 6:10). It is not a cry of personal revenge but a longing that God would set the world right and vindicate His own. They are given white robes, the dress of purity and acceptance, and they are told to "rest a little longer, until both the number of their fellow servants and their brethren, who would be killed as they were, was completed" (Revelation 6:11). The answer is tender but sobering: justice is certain, but not yet; more of God's servants will yet suffer, and the martyrs are to rest in God's timing until the full number is gathered.</p>
+
+<h3>The Sixth Seal: The Great Day of Wrath</h3>
+<p>The sixth seal brings a violent shaking of the whole created order. There is a great earthquake; "the sun became black as sackcloth of hair, and the moon became like blood"; the stars of heaven fall like late figs shaken from a tree; the sky recedes "as a scroll when it is rolled up"; and every mountain and island is moved out of its place (Revelation 6:12-14). The reaction on earth is universal terror. Kings, great men, commanders, the rich and the mighty, and every slave and free man hide themselves in caves and among the rocks, and they cry to the mountains and rocks, "Fall on us and hide us from the face of Him who sits on the throne and from the wrath of the Lamb! For the great day of His wrath has come, and who is able to stand?" (Revelation 6:16-17). Notice that even the wrath is the wrath of the Lamb; the same gentle Lamb who was slain is also the holy Judge whose day no sinner can face. The chapter ends on that desperate question, "Who is able to stand?" &mdash; and it is exactly that question that chapter seven steps in to answer.</p>
+
+<h3>The Interlude: The 144,000 Sealed</h3>
+<p>Between the sixth seal and the seventh comes a pause, and in it John sees two scenes of God's protected people. In the first, four angels hold back the four winds of judgment until the servants of God are sealed. "And I heard the number of those who were sealed. One hundred and forty-four thousand of all the tribes of the children of Israel were sealed" (Revelation 7:4), twelve thousand from each of twelve tribes. To be sealed on the forehead is to be marked as God's own and kept safe through what is coming, just as Israel was marked before the plagues fell on Egypt. Who exactly the 144,000 are has been understood in several ways &mdash; some take them as literal Israel, some as the church as the true Israel of God, and some as a faithful remnant &mdash; and the number itself is read by some as exact and by others as a symbol of completeness, twelve times twelve times a thousand. The course presents these views fairly. The point all share is clear and comforting: before the storm of judgment fully breaks, God sets His seal upon His servants, and not one of them is overlooked.</p>
+
+<h3>The Interlude: The Great Multitude</h3>
+<p>The second scene lifts John's eyes from the sealed servants on earth to a vast throng in heaven. "After these things I looked, and behold, a great multitude which no one could number, of all nations, tribes, peoples, and tongues, standing before the throne and before the Lamb, clothed with white robes, with palm branches in their hands" (Revelation 7:9). They cry out, "Salvation belongs to our God who sits on the throne, and to the Lamb!" (Revelation 7:10). When John asks who they are, an elder tells him, "These are the ones who come out of the great tribulation, and washed their robes and made them white in the blood of the Lamb" (Revelation 7:14). Their robes are white not by their own effort but by the blood of the Lamb that cleanses from sin. And their future is glorious: they serve God day and night in His temple; they hunger and thirst no more; the Lamb who is in the midst of the throne will shepherd them and lead them to living fountains of waters; and God will wipe away every tear from their eyes (Revelation 7:15-17). This is the answer to the sixth seal's question. Who is able to stand? These are: the countless redeemed of every nation, washed in the blood of the Lamb, standing before the throne.</p>
+
+<h3>The Seventh Seal: Silence in Heaven</h3>
+<p>After the long interlude, the Lamb opens the last seal. "When He opened the seventh seal, there was silence in heaven for about half an hour" (Revelation 8:1). After the thunder of the horsemen, the cry of the martyrs, the shaking of the sixth seal, and the great shouts of the multitude, heaven falls utterly still. The silence is full of awe and expectation, the hush before God's purposes move forward into the next great cycle of visions, for in that silence seven angels are given seven trumpets, which the next unit will take up. Read together, the seven seals teach a steadying truth. The judgments of history fall only as the Lamb opens them; the martyrs are heard and will be vindicated in God's time; God seals and secures His own before the storm; and the redeemed of every nation, washed in the Lamb's blood, stand at last before the throne. The world may be shaken to its foundations, but the Lamb holds the scroll, and His people are safe in His hand.</p>
+<div class="scripture">"These are the ones who come out of the great tribulation, and washed their robes and made them white in the blood of the Lamb." &mdash; Revelation 7:14 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Apocalipsis 6:1-8:1</strong></p>
+<div class="scripture">"'El gran día de su ira ha venido; ¿y quién podrá estar en pie?'... Después de estas cosas miré, y he aquí una gran multitud, la cual ninguno podía contar, de todas naciones... que estaban delante del trono y en la presencia del Cordero." &mdash; Apocalipsis 6:17; 7:9 (RVG)</div>
+
+<h3>El Cordero Abre los Sellos</h3>
+<p>El capítulo cinco terminó con el Cordero tomando el libro sellado de la mano de Dios; ahora comienza a abrirlo. Esto es lo primero que hay que notar, y gobierna todo el capítulo: es el Cordero quien rompe los sellos. Los juicios que siguen no son obra de un destino ciego ni de un enemigo fuera de control, sino que se despliegan solo a medida que el Cordero inmolado y resucitado los abre, uno por uno, bajo su mano soberana. Los cristianos han leído los sellos de diferentes maneras &mdash; viendo algunos su cumplimiento en los primeros siglos, algunos a lo largo de la historia, algunos como descripción de un período final aún por venir, y algunos como una imagen de los problemas recurrentes de cada época. El curso ya ha puesto esos enfoques lado a lado y no insistirá en uno aquí. Lo que toda lectura fiel comparte es el consuelo de que nada se desata sobre el mundo sino por la mano del Cordero que ama a su pueblo y fue hallado digno de abrir el libro de la historia.</p>
+
+<h3>Los Cuatro Jinetes: Conquista, Guerra, Hambre, Muerte</h3>
+<p>Al abrirse los primeros cuatro sellos, salen cuatro caballos y sus jinetes. El primero es un caballo blanco cuyo jinete tiene un arco, recibe una corona, y sale "venciendo, y para vencer" (Apocalipsis 6:2). Este jinete se ha entendido de dos maneras principales: algunos lo toman como Cristo o el avance del evangelio que sale en triunfo, mientras que otros lo toman como un espíritu de conquista o un falso cristo, y el curso deja el asunto abierto. El segundo es un caballo bermejo, cuyo jinete recibe poder para "quitar la paz de la tierra, y que se maten unos a otros," y se le da una gran espada (Apocalipsis 6:4) &mdash; esto es guerra y matanza. El tercero es un caballo negro, cuyo jinete tiene una balanza en su mano, y una voz pone el precio de un día de trigo en un día de salario &mdash; esto es hambre y escasez aplastante, mientras que el aceite y el vino se libran. El cuarto es un caballo amarillo y pálido, "y el que estaba sentado sobre él tenía por nombre Muerte; y el infierno le seguía" (Apocalipsis 6:8). Es una imagen estremecedora: la Muerte cabalga el caballo pálido, y la tumba viene cerca detrás como un coche fúnebre, con poder sobre la cuarta parte de la tierra para matar con espada, con hambre, con mortandad, y por las fieras de la tierra. Los cuatro jinetes reúnen las grandes calamidades recurrentes de un mundo caído bajo el juicio de Dios.</p>
+
+<h3>El Quinto Sello: El Clamor de los Mártires</h3>
+<p>Cuando el Cordero abre el quinto sello, la escena cambia de la tierra al altar en el cielo. "Vi debajo del altar las almas de los que habían sido muertos por causa de la palabra de Dios, y por el testimonio que ellos tenían" (Apocalipsis 6:9). Estos son los mártires, los que fueron muertos por su fidelidad a Cristo, y claman a gran voz: "¿Hasta cuándo, Señor, santo y verdadero, no juzgas y vengas nuestra sangre de los que moran en la tierra?" (Apocalipsis 6:10). No es un clamor de venganza personal sino un anhelo de que Dios enderece el mundo y vindique a los suyos. Se les dan ropas blancas, el vestido de la pureza y la aceptación, y se les dice que "reposasen todavía un poco de tiempo, hasta que se completara el número de sus consiervos y de sus hermanos, que también habían de ser muertos como ellos" (Apocalipsis 6:11). La respuesta es tierna pero seria: la justicia es cierta, pero no todavía; más de los siervos de Dios aún sufrirán, y los mártires han de reposar en el tiempo de Dios hasta que se reúna el número completo.</p>
+
+<h3>El Sexto Sello: El Gran Día de la Ira</h3>
+<p>El sexto sello trae una violenta sacudida de todo el orden creado. Hay un gran terremoto; "el sol se puso negro como un saco de cilicio, y la luna se volvió toda como sangre"; las estrellas del cielo caen como higos tardíos sacudidos de un árbol; el cielo se retira "como un pergamino que se enrolla"; y todo monte e isla es removido de su lugar (Apocalipsis 6:12-14). La reacción en la tierra es de terror universal. Los reyes, los grandes, los capitanes, los ricos y los poderosos, y todo siervo y libre se esconden en cuevas y entre las rocas, y claman a los montes y a las rocas: "Caed sobre nosotros, y escondednos del rostro de aquel que está sentado sobre el trono, y de la ira del Cordero; porque el gran día de su ira ha venido; ¿y quién podrá estar en pie?" (Apocalipsis 6:16-17). Nótese que aun la ira es la ira del Cordero; el mismo Cordero manso que fue inmolado es también el Juez santo cuyo día ningún pecador puede enfrentar. El capítulo termina con esa pregunta desesperada, "¿quién podrá estar en pie?" &mdash; y es exactamente esa pregunta la que el capítulo siete entra a responder.</p>
+
+<h3>El Interludio: Los Ciento Cuarenta y Cuatro Mil Sellados</h3>
+<p>Entre el sexto sello y el séptimo viene una pausa, y en ella Juan ve dos escenas del pueblo protegido de Dios. En la primera, cuatro ángeles detienen los cuatro vientos del juicio hasta que los siervos de Dios sean sellados. "Y oí el número de los que fueron sellados: ciento cuarenta y cuatro mil sellados de todas las tribus de los hijos de Israel" (Apocalipsis 7:4), doce mil de cada una de las doce tribus. Ser sellado en la frente es ser marcado como propiedad de Dios y guardado a salvo a través de lo que viene, así como Israel fue marcado antes de que las plagas cayeran sobre Egipto. Quiénes son exactamente los ciento cuarenta y cuatro mil se ha entendido de varias maneras &mdash; algunos los toman como el Israel literal, algunos como la iglesia como el verdadero Israel de Dios, y algunos como un remanente fiel &mdash; y el número mismo lo leen unos como exacto y otros como un símbolo de plenitud, doce por doce por mil. El curso presenta estas visiones con justicia. El punto que todas comparten es claro y consolador: antes de que la tormenta del juicio estalle del todo, Dios pone su sello sobre sus siervos, y ninguno de ellos es pasado por alto.</p>
+
+<h3>El Interludio: La Gran Multitud</h3>
+<p>La segunda escena levanta los ojos de Juan de los siervos sellados en la tierra a una vasta muchedumbre en el cielo. "Después de estas cosas miré, y he aquí una gran multitud, la cual ninguno podía contar, de todas naciones y tribus y pueblos y lenguas, que estaban delante del trono y en la presencia del Cordero, vestidos de ropas blancas, y con palmas en sus manos" (Apocalipsis 7:9). Claman: "Salvación a nuestro Dios que está sentado sobre el trono, y al Cordero" (Apocalipsis 7:10). Cuando Juan pregunta quiénes son, un anciano le dice: "Estos son los que han salido de la gran tribulación, y han lavado sus ropas, y las han blanqueado en la sangre del Cordero" (Apocalipsis 7:14). Sus ropas son blancas no por su propio esfuerzo sino por la sangre del Cordero que limpia del pecado. Y su futuro es glorioso: sirven a Dios día y noche en su templo; no tienen más hambre ni sed; el Cordero que está en medio del trono los pastoreará y los guiará a fuentes vivas de aguas; y Dios enjugará toda lágrima de los ojos de ellos (Apocalipsis 7:15-17). Esta es la respuesta a la pregunta del sexto sello. ¿Quién podrá estar en pie? Estos pueden: los incontables redimidos de toda nación, lavados en la sangre del Cordero, en pie delante del trono.</p>
+
+<h3>El Séptimo Sello: Silencio en el Cielo</h3>
+<p>Después del largo interludio, el Cordero abre el último sello. "Cuando él abrió el séptimo sello, fue hecho silencio en el cielo como por media hora" (Apocalipsis 8:1). Después del trueno de los jinetes, el clamor de los mártires, la sacudida del sexto sello, y las grandes voces de la multitud, el cielo queda completamente quieto. El silencio está lleno de asombro y expectación, la pausa antes de que los propósitos de Dios avancen al siguiente gran ciclo de visiones, pues en ese silencio se dan a siete ángeles siete trompetas, que la siguiente unidad tomará. Leídos juntos, los siete sellos enseñan una verdad que afirma. Los juicios de la historia caen solo a medida que el Cordero los abre; los mártires son oídos y serán vindicados en el tiempo de Dios; Dios sella y asegura a los suyos antes de la tormenta; y los redimidos de toda nación, lavados en la sangre del Cordero, están al fin delante del trono. El mundo puede ser sacudido hasta sus cimientos, pero el Cordero tiene el libro, y su pueblo está seguro en su mano.</p>
+<div class="scripture">"Estos son los que han salido de la gran tribulación, y han lavado sus ropas, y las han blanqueado en la sangre del Cordero." &mdash; Apocalipsis 7:14 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 6 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Revelation Intensive — Unit 6 (The Seven Seals, Revelation 6:1-8:1)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 6;
+const COURSE = 'rev';
+const NEXT_UNIT_URL = 'CTSRevUnit7.html';
+const totalUnits = 15;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - How to Read Revelation (Revelation 1:1-8)", "Unit 2 - Son of Man Among the Lampstands (Revelation 1:9-20)", "Unit 3 - Seven Churches I: Ephesus to Thyatira (Revelation 2)", "Unit 4 - Seven Churches II: Sardis to Laodicea (Revelation 3)", "Unit 5 - The Throne and the Lamb (Revelation 4-5)", "Unit 6 - The Seven Seals (Revelation 6:1-8:1)", "Unit 7 - The Seven Trumpets (Revelation 8:2-11:19)", "Unit 8 - The Woman, the Dragon, and the Beasts (Revelation 12-13)", "Unit 9 - The Harvest and the Seven Bowls (Revelation 14-16)", "Unit 10 - The Fall of Babylon (Revelation 17-18)", "Unit 11 - The Return of Christ, the Millennium, and Judgment (Revelation 19-20)", "Unit 12 - The Millennial Views: Postmillennialism (Revelation 20)", "Unit 13 - The Millennial Views: Premillennialism (Revelation 20)", "Unit 14 - The Millennial Views: Amillennialism (Revelation 20)", "Unit 15 - The New Heaven and the New Earth (Revelation 21-22)"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSRevUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. The seven seals on the scroll are opened by:", "textEs": "1. Los siete sellos del libro son abiertos por:", "optionsEn": ["A mighty angel", "The Lamb", "The twenty-four elders", "One of the living creatures"], "optionsEs": ["Un ángel poderoso", "El Cordero", "Los veinticuatro ancianos", "Uno de los animales"], "explanationEn": "The Lamb, found worthy in chapter 5, opens the seals (6:1).", "explanationEs": "El Cordero, hallado digno en el capítulo 5, abre los sellos (6:1).", "correct": 1}, {"textEn": "2. The fact that the Lamb opens the seals teaches that the judgments:", "textEs": "2. El hecho de que el Cordero abra los sellos enseña que los juicios:", "optionsEn": ["Are the work of blind fate", "Surprise even God", "Unfold only as the Lamb opens them, under His control", "Cannot be stopped by anyone, including God"], "optionsEs": ["Son obra de un destino ciego", "Sorprenden aun a Dios", "Se despliegan solo a medida que el Cordero los abre, bajo su control", "No pueden ser detenidos por nadie, ni siquiera Dios"], "explanationEn": "Nothing breaks loose except by the hand of the Lamb (6:1).", "explanationEs": "Nada se desata sino por la mano del Cordero (6:1).", "correct": 2}, {"textEn": "3. The rider on the white horse (first seal) carried a bow and was given:", "textEs": "3. El jinete del caballo blanco (primer sello) tenía un arco y recibió:", "optionsEn": ["A great sword", "A pair of scales", "A trumpet", "A crown, going out conquering"], "optionsEs": ["Una gran espada", "Una balanza", "Una trompeta", "Una corona, saliendo a vencer"], "explanationEn": "He was given a crown and went out conquering and to conquer (6:2).", "explanationEs": "Recibió una corona y salió venciendo y para vencer (6:2).", "correct": 3}, {"textEn": "4. The rider on the red horse (second seal) was given power to:", "textEs": "4. El jinete del caballo bermejo (segundo sello) recibió poder para:", "optionsEn": ["Take peace from the earth, with a great sword", "Seal the saints", "Darken the sun", "Bring famine"], "optionsEs": ["Quitar la paz de la tierra, con una gran espada", "Sellar a los santos", "Oscurecer el sol", "Traer hambre"], "explanationEn": "He takes peace from the earth so people kill one another — war (6:4).", "explanationEs": "Quita la paz de la tierra para que se maten unos a otros — guerra (6:4).", "correct": 0}, {"textEn": "5. The black horse and its rider's pair of scales picture:", "textEs": "5. El caballo negro y la balanza de su jinete representan:", "optionsEn": ["Peace and plenty", "Famine and crushing scarcity", "A wedding feast", "The resurrection"], "optionsEs": ["Paz y abundancia", "Hambre y escasez aplastante", "Un banquete de bodas", "La resurrección"], "explanationEn": "The scales and the priced grain picture famine and scarcity (6:5-6).", "explanationEs": "La balanza y el grano con precio representan hambre y escasez (6:5-6).", "correct": 1}, {"textEn": "6. The rider on the pale horse is named ___, and ___ followed close behind:", "textEs": "6. El jinete del caballo pálido tiene por nombre ___, y ___ le seguía de cerca:", "optionsEn": ["War; Famine", "Sin; Death", "Death; Hades (the grave)", "Famine; War"], "optionsEs": ["Guerra; Hambre", "Pecado; Muerte", "Muerte; el infierno (la tumba)", "Hambre; Guerra"], "explanationEn": "\"His name was Death, and Hades followed with him\" (6:8).", "explanationEs": "\"Tenía por nombre Muerte; y el infierno le seguía\" (6:8).", "correct": 2}, {"textEn": "7. The four horsemen were given power over what portion of the earth?", "textEs": "7. ¿Sobre qué porción de la tierra recibieron poder los cuatro jinetes?", "optionsEn": ["A fourth of the earth", "Half the earth", "The whole earth", "A tenth of the earth"], "optionsEs": ["La cuarta parte de la tierra", "La mitad de la tierra", "Toda la tierra", "La décima parte de la tierra"], "explanationEn": "Power was given over a fourth of the earth to kill (6:8).", "explanationEs": "Se les dio poder sobre la cuarta parte de la tierra para matar (6:8).", "correct": 0}, {"textEn": "8. When the Lamb opened the fifth seal, under the altar John saw:", "textEs": "8. Cuando el Cordero abrió el quinto sello, debajo del altar Juan vio:", "optionsEn": ["A golden lampstand", "A scroll of names", "Seven angels", "The souls of those slain for the word of God"], "optionsEs": ["Un candelero de oro", "Un libro de nombres", "Siete ángeles", "Las almas de los muertos por causa de la palabra de Dios"], "explanationEn": "The souls of the martyrs, slain for the word of God (6:9).", "explanationEs": "Las almas de los mártires, muertos por la palabra de Dios (6:9).", "correct": 3}, {"textEn": "9. The martyrs under the altar cried out, asking God:", "textEs": "9. Los mártires debajo del altar clamaron, preguntando a Dios:", "optionsEn": ["To send them back to earth", "How long until You judge and avenge our blood", "To end the world at once", "To spare their persecutors"], "optionsEs": ["Que los enviara de vuelta a la tierra", "Hasta cuándo juzgas y vengas nuestra sangre", "Que terminara el mundo de inmediato", "Que perdonara a sus perseguidores"], "explanationEn": "\"How long... until You judge and avenge our blood?\" (6:10).", "explanationEs": "\"¿Hasta cuándo... no juzgas y vengas nuestra sangre?\" (6:10).", "correct": 1}, {"textEn": "10. The martyrs were given white robes and told to:", "textEs": "10. A los mártires se les dieron ropas blancas y se les dijo que:", "optionsEn": ["Return to the earth", "Sound a trumpet", "Open the next seal", "Rest a little longer, until the full number was complete"], "optionsEs": ["Volvieran a la tierra", "Tocaran una trompeta", "Abrieran el siguiente sello", "Reposasen un poco más, hasta completarse el número"], "explanationEn": "Rest a little longer until the number of fellow servants is complete (6:11).", "explanationEs": "Reposar un poco más hasta completarse el número de consiervos (6:11).", "correct": 3}, {"textEn": "11. The sixth seal brought:", "textEs": "11. El sexto sello trajo:", "optionsEn": ["A wedding feast", "A thousand years of peace", "A great earthquake, a blackened sun, a blood-red moon, falling stars", "The marriage of the Lamb"], "optionsEs": ["Un banquete de bodas", "Mil años de paz", "Un gran terremoto, un sol oscurecido, una luna roja, estrellas que caen", "Las bodas del Cordero"], "explanationEn": "A violent cosmic upheaval shakes the whole created order (6:12-14).", "explanationEs": "Una violenta sacudida cósmica conmueve todo el orden creado (6:12-14).", "correct": 2}, {"textEn": "12. At the sixth seal, kings and all people hid and begged the mountains to hide them from:", "textEs": "12. En el sexto sello, los reyes y todos se escondieron y rogaron a los montes que los escondieran de:", "optionsEn": ["The face of Him on the throne and the wrath of the Lamb", "A coming famine", "A great flood", "The armies of the east"], "optionsEs": ["El rostro del que está en el trono y la ira del Cordero", "Un hambre venidera", "Un gran diluvio", "Los ejércitos del oriente"], "explanationEn": "They hid from Him on the throne and from the wrath of the Lamb (6:16).", "explanationEs": "Se escondieron del que está en el trono y de la ira del Cordero (6:16).", "correct": 0}, {"textEn": "13. The desperate question that ends the sixth seal is:", "textEs": "13. La pregunta desesperada que termina el sexto sello es:", "optionsEn": ["When will He come?", "Where is the Lamb?", "Who is able to stand?", "Why has God forgotten us?"], "optionsEs": ["¿Cuándo vendrá?", "¿Dónde está el Cordero?", "¿Quién podrá estar en pie?", "¿Por qué nos ha olvidado Dios?"], "explanationEn": "\"The great day of His wrath has come, and who is able to stand?\" (6:17).", "explanationEs": "\"El gran día de su ira ha venido; ¿y quién podrá estar en pie?\" (6:17).", "correct": 2}, {"textEn": "14. Between the sixth and seventh seals, the interlude of chapter 7 shows God:", "textEs": "14. Entre el sexto y el séptimo sello, el interludio del capítulo 7 muestra a Dios:", "optionsEn": ["Sealing and securing His servants before judgment", "Destroying the earth completely", "Ending the book", "Crowning the martyrs as kings"], "optionsEs": ["Sellando y asegurando a sus siervos antes del juicio", "Destruyendo la tierra por completo", "Terminando el libro", "Coronando a los mártires como reyes"], "explanationEn": "The winds are held back while God's servants are sealed (7:1-3).", "explanationEs": "Los vientos se detienen mientras los siervos de Dios son sellados (7:1-3).", "correct": 0}, {"textEn": "15. The 144,000 were sealed from:", "textEs": "15. Los ciento cuarenta y cuatro mil fueron sellados de:", "optionsEn": ["The seven churches", "All the Gentile nations", "The city of Jerusalem only", "The twelve tribes of the children of Israel"], "optionsEs": ["Las siete iglesias", "Todas las naciones gentiles", "Solo la ciudad de Jerusalén", "Las doce tribus de los hijos de Israel"], "explanationEn": "144,000, twelve thousand from each of the twelve tribes of Israel (7:4).", "explanationEs": "144,000, doce mil de cada una de las doce tribus de Israel (7:4).", "correct": 3}, {"textEn": "16. The lesson presents the identity of the 144,000 as understood in several ways. Which is NOT one of them?", "textEs": "16. La lección presenta la identidad de los 144,000 como entendida de varias maneras. ¿Cuál NO es una de ellas?", "optionsEn": ["Literal Israel", "A meaningless number invented at random", "A faithful remnant", "The church as the true Israel of God"], "optionsEs": ["El Israel literal", "Un número sin sentido inventado al azar", "Un remanente fiel", "La iglesia como el verdadero Israel de Dios"], "explanationEn": "The three readings are real; the random/meaningless option is not (7:4).", "explanationEs": "Las tres lecturas son reales; la opción del número sin sentido no lo es (7:4).", "correct": 1}, {"textEn": "17. The great multitude that no one could number came from:", "textEs": "17. La gran multitud que ninguno podía contar venía de:", "optionsEn": ["The seven churches only", "Israel alone", "All nations, tribes, peoples, and tongues", "The ranks of the angels"], "optionsEs": ["Solo las siete iglesias", "Solo Israel", "Todas naciones, tribus, pueblos y lenguas", "Las filas de los ángeles"], "explanationEn": "A multitude from every nation, tribe, people, and tongue (7:9).", "explanationEs": "Una multitud de toda nación, tribu, pueblo y lengua (7:9).", "correct": 2}, {"textEn": "18. The great multitude had come out of the great tribulation and had washed their robes white in:", "textEs": "18. La gran multitud había salido de la gran tribulación y había blanqueado sus ropas en:", "optionsEn": ["The waters of baptism", "The blood of the Lamb", "Their own good works", "The river of life"], "optionsEs": ["Las aguas del bautismo", "La sangre del Cordero", "Sus propias buenas obras", "El río de la vida"], "explanationEn": "They washed their robes white in the blood of the Lamb (7:14).", "explanationEs": "Blanquearon sus ropas en la sangre del Cordero (7:14).", "correct": 1}, {"textEn": "19. When the Lamb opened the seventh seal, there was:", "textEs": "19. Cuando el Cordero abrió el séptimo sello, hubo:", "optionsEn": ["Silence in heaven for about half an hour", "A new song", "A great shout", "A peal of thunder only"], "optionsEs": ["Silencio en el cielo como por media hora", "Un nuevo cántico", "Un gran clamor", "Solo un trueno"], "explanationEn": "Silence in heaven for about half an hour (8:1).", "explanationEs": "Silencio en el cielo como por media hora (8:1).", "correct": 0}, {"textEn": "20. The central comfort of the interlude, answering \"who is able to stand?\", is that:", "textEs": "20. El consuelo central del interludio, que responde \"¿quién podrá estar en pie?\", es que:", "optionsEn": ["No one will survive", "Only the strong will stand", "The wrath will be cancelled", "God's redeemed, sealed and washed in the Lamb's blood, stand before the throne"], "optionsEs": ["Nadie sobrevivirá", "Solo los fuertes estarán en pie", "La ira será cancelada", "Los redimidos de Dios, sellados y lavados en la sangre del Cordero, están en pie delante del trono"], "explanationEn": "The sealed, blood-washed redeemed are the ones who can stand (7:9-17).", "explanationEs": "Los redimidos sellados y lavados en la sangre son los que pueden estar en pie (7:9-17).", "correct": 3}];
+
+const kwQuestions = [{"textEn": "21. Why is it significant that the Lamb is the One who opens the seals?", "textEs": "21. ¿Por qué es significativo que el Cordero sea quien abre los sellos?", "kw_en": ["lamb", "seals", "open", "control", "sovereign", "judgment", "worthy", "comfort"], "kw_es": ["cordero", "sellos", "abre", "control", "soberan", "juicio", "digno", "consuelo"], "modelEn": "It is the Lamb, found worthy in chapter five, who opens the seven seals, and this governs how the whole chapter is read. The judgments that follow are not the work of blind fate, nor of an enemy out of control, nor a sign that history has slipped from God's hand. They unfold only as the slain and risen Lamb opens them, one by one, under His sovereign control. This is a deep comfort to a suffering church, for it means that nothing breaks loose upon the world except by the hand of the Lamb who loves His people and was found worthy to open the scroll of history. Christians have read the seals in different ways, some seeing them in the first centuries, some across all history, some as a final period, and some as the recurring troubles of every age, and the course does not press one. What every faithful reading shares is the assurance that the Lamb, not chaos, holds the scroll and directs the judgments of God.", "modelEs": "Es el Cordero, hallado digno en el capítulo cinco, quien abre los siete sellos, y esto gobierna cómo se lee todo el capítulo. Los juicios que siguen no son obra de un destino ciego, ni de un enemigo fuera de control, ni señal de que la historia se ha escapado de la mano de Dios. Se despliegan solo a medida que el Cordero inmolado y resucitado los abre, uno por uno, bajo su control soberano. Esto es un hondo consuelo para una iglesia que sufre, pues significa que nada se desata sobre el mundo sino por la mano del Cordero que ama a su pueblo y fue hallado digno de abrir el libro de la historia. Los cristianos han leído los sellos de diferentes maneras, viendo algunos su cumplimiento en los primeros siglos, algunos a lo largo de la historia, algunos como un período final, y algunos como los problemas recurrentes de cada época, y el curso no insiste en uno. Lo que toda lectura fiel comparte es la certeza de que el Cordero, no el caos, tiene el libro y dirige los juicios de Dios."}, {"textEn": "22. Describe the four horsemen of the first four seals and what each represents.", "textEs": "22. Describa a los cuatro jinetes de los primeros cuatro sellos y lo que cada uno representa.", "kw_en": ["white", "red", "black", "pale", "conquer", "sword", "famine", "death"], "kw_es": ["blanco", "bermejo", "negro", "amarillo", "venc", "espada", "hambre", "muerte"], "modelEn": "As the first four seals are opened, four horses ride out. The first is a white horse whose rider holds a bow and is given a crown and goes out conquering; some take this rider as Christ or the advancing gospel and others as a spirit of conquest or a false christ, and the course leaves it open. The second is a red horse whose rider takes peace from the earth so that people kill one another and is given a great sword, which is war and slaughter. The third is a black horse whose rider holds a pair of scales while a voice prices grain at a day's wage, which is famine and crushing scarcity. The fourth is a pale, ashen horse whose rider is named Death, with Hades following close behind like a hearse, given power over a fourth of the earth to kill by sword, famine, plague, and wild beasts. Together the four horsemen gather up the great recurring woes of a fallen world under the judgment of God.", "modelEs": "Al abrirse los primeros cuatro sellos, salen cuatro caballos. El primero es un caballo blanco cuyo jinete tiene un arco y recibe una corona y sale venciendo; algunos toman a este jinete como Cristo o el evangelio que avanza y otros como un espíritu de conquista o un falso cristo, y el curso lo deja abierto. El segundo es un caballo bermejo cuyo jinete quita la paz de la tierra para que se maten unos a otros y recibe una gran espada, lo cual es guerra y matanza. El tercero es un caballo negro cuyo jinete tiene una balanza mientras una voz pone precio al grano por un día de salario, lo cual es hambre y escasez aplastante. El cuarto es un caballo amarillo y pálido cuyo jinete tiene por nombre Muerte, con el infierno siguiendo de cerca como un coche fúnebre, con poder sobre la cuarta parte de la tierra para matar con espada, hambre, mortandad, y fieras. Juntos los cuatro jinetes reúnen las grandes calamidades recurrentes de un mundo caído bajo el juicio de Dios."}, {"textEn": "23. Describe the fifth seal: the martyrs under the altar, their cry, and the answer they were given.", "textEs": "23. Describa el quinto sello: los mártires debajo del altar, su clamor, y la respuesta que se les dio.", "kw_en": ["altar", "souls", "martyr", "word", "vindicate", "robes", "rest", "number"], "kw_es": ["altar", "almas", "mártir", "palabra", "vindic", "blanc", "repos", "número"], "modelEn": "At the fifth seal the scene shifts to the altar in heaven, where John sees under the altar the souls of those who had been slain for the word of God and for their testimony. These are the martyrs, put to death for their faithfulness to Christ. They cry with a loud voice, How long, O Lord, holy and true, until You judge and avenge our blood on those who dwell on the earth. It is not a cry of personal revenge but a longing that God would set the world right and vindicate His own. Each of them is given a white robe, the dress of purity and acceptance, and they are told to rest a little longer, until the number of their fellow servants and brethren who would also be killed was complete. The answer is tender but sobering: their vindication is certain, but not yet, for more of God's servants will still suffer, and the martyrs are to rest in God's perfect timing until the full number of the redeemed is gathered.", "modelEs": "En el quinto sello la escena cambia al altar en el cielo, donde Juan ve debajo del altar las almas de los que habían sido muertos por causa de la palabra de Dios y por su testimonio. Estos son los mártires, muertos por su fidelidad a Cristo. Claman a gran voz: ¿Hasta cuándo, Señor, santo y verdadero, no juzgas y vengas nuestra sangre de los que moran en la tierra? No es un clamor de venganza personal sino un anhelo de que Dios enderece el mundo y vindique a los suyos. A cada uno se le da una ropa blanca, el vestido de la pureza y la aceptación, y se les dice que reposen un poco más, hasta que se complete el número de sus consiervos y hermanos que también habían de ser muertos. La respuesta es tierna pero seria: su vindicación es cierta, pero no todavía, pues más de los siervos de Dios aún sufrirán, y los mártires han de reposar en el tiempo perfecto de Dios hasta que se reúna el número completo de los redimidos."}, {"textEn": "24. Describe the sixth seal and explain the question \"who is able to stand?\"", "textEs": "24. Describa el sexto sello y explique la pregunta \"¿quién podrá estar en pie?\"", "kw_en": ["earthquake", "sun", "moon", "stars", "wrath", "hide", "stand", "throne"], "kw_es": ["terremoto", "sol", "luna", "estrella", "ira", "escond", "pie", "trono"], "modelEn": "The sixth seal brings a violent shaking of the whole created order. There is a great earthquake, the sun turns black as sackcloth, the moon becomes like blood, the stars fall like figs shaken from a tree, the sky recedes like a rolled-up scroll, and every mountain and island is moved from its place. The reaction on earth is universal terror. Kings, great men, commanders, the rich, the mighty, and every slave and free man hide in caves and among the rocks and beg the mountains to fall on them and hide them from the face of Him who sits on the throne and from the wrath of the Lamb. It is striking that even the wrath is called the wrath of the Lamb, for the same gentle Lamb who was slain is also the holy Judge whose day no sinner can face. The seal ends with the desperate question, the great day of His wrath has come, and who is able to stand. The question hangs unanswered until chapter seven steps in to answer it with the picture of God's sealed and redeemed people.", "modelEs": "El sexto sello trae una violenta sacudida de todo el orden creado. Hay un gran terremoto, el sol se pone negro como cilicio, la luna se vuelve como sangre, las estrellas caen como higos sacudidos de un árbol, el cielo se retira como un pergamino que se enrolla, y todo monte e isla es removido de su lugar. La reacción en la tierra es de terror universal. Los reyes, los grandes, los capitanes, los ricos, los poderosos, y todo siervo y libre se esconden en cuevas y entre las rocas y ruegan a los montes que caigan sobre ellos y los escondan del rostro del que está sentado sobre el trono y de la ira del Cordero. Es impactante que aun la ira se llame la ira del Cordero, pues el mismo Cordero manso que fue inmolado es también el Juez santo cuyo día ningún pecador puede enfrentar. El sello termina con la pregunta desesperada, el gran día de su ira ha venido, y quién podrá estar en pie. La pregunta queda sin responder hasta que el capítulo siete entra a responderla con la imagen del pueblo sellado y redimido de Dios."}, {"textEn": "25. Explain the sealing of the 144,000 in the interlude, including the ways their identity has been understood.", "textEs": "25. Explique el sellamiento de los ciento cuarenta y cuatro mil en el interludio, incluyendo las maneras en que se ha entendido su identidad.", "kw_en": ["sealed", "forehead", "tribes", "israel", "servants", "protect", "remnant", "views"], "kw_es": ["sellad", "frente", "tribus", "israel", "siervos", "proteg", "remanente", "vista"], "modelEn": "In the first scene of the interlude, four angels hold back the four winds of judgment until the servants of God are sealed. John hears the number of those sealed: one hundred forty-four thousand from all the tribes of the children of Israel, twelve thousand from each of twelve tribes. To be sealed on the forehead is to be marked as God's own and kept safe through what is coming, much as Israel was marked before the plagues fell on Egypt. Who exactly the 144,000 are has been understood in several ways: some take them as literal Israel, some as the church as the true Israel of God, and some as a faithful remnant, while the number itself is read by some as exact and by others as a symbol of completeness, twelve times twelve times a thousand. The course presents these views fairly without insisting on one. The point they all share is clear and comforting: before the storm of judgment fully breaks, God sets His seal upon His servants to protect them, and not one of them is overlooked or lost.", "modelEs": "En la primera escena del interludio, cuatro ángeles detienen los cuatro vientos del juicio hasta que los siervos de Dios sean sellados. Juan oye el número de los sellados: ciento cuarenta y cuatro mil de todas las tribus de los hijos de Israel, doce mil de cada una de las doce tribus. Ser sellado en la frente es ser marcado como propiedad de Dios y guardado a salvo a través de lo que viene, como Israel fue marcado antes de que las plagas cayeran sobre Egipto. Quiénes son exactamente los 144,000 se ha entendido de varias maneras: algunos los toman como el Israel literal, algunos como la iglesia como el verdadero Israel de Dios, y algunos como un remanente fiel, mientras que el número mismo lo leen unos como exacto y otros como un símbolo de plenitud, doce por doce por mil. El curso presenta estas vistas con justicia sin insistir en una. El punto que todas comparten es claro y consolador: antes de que la tormenta del juicio estalle del todo, Dios pone su sello sobre sus siervos para protegerlos, y ninguno de ellos es pasado por alto ni perdido."}, {"textEn": "26. Describe the great multitude of Revelation 7: where they came from and what had been done for them.", "textEs": "26. Describa la gran multitud de Apocalipsis 7: de dónde vinieron y lo que se hizo por ellos.", "kw_en": ["multitude", "nation", "white", "palm", "tribulation", "washed", "blood", "salvation"], "kw_es": ["multitud", "nación", "blanc", "palmas", "tribulaci", "lavado", "sangre", "salvaci"], "modelEn": "The second scene of the interlude lifts John's eyes to a great multitude which no one could number, drawn from all nations, tribes, peoples, and tongues, standing before the throne and before the Lamb, clothed in white robes and holding palm branches. They cry out, Salvation belongs to our God who sits on the throne, and to the Lamb. When John asks who they are, an elder tells him these are the ones who came out of the great tribulation and washed their robes and made them white in the blood of the Lamb. Their robes are white not by their own effort or merit but by the cleansing blood of the Lamb, which alone takes away sin. They are a worldwide family, gathered from every people on earth, the fruit of the Lamb's redemption. This great multitude is the answer to the sixth seal's question, who is able to stand: these can, the countless redeemed of every nation, washed in the Lamb's blood and standing secure before the throne of God.", "modelEs": "La segunda escena del interludio levanta los ojos de Juan a una gran multitud que ninguno podía contar, tomada de todas naciones, tribus, pueblos y lenguas, en pie delante del trono y del Cordero, vestidos de ropas blancas y con palmas en sus manos. Claman: Salvación a nuestro Dios que está sentado sobre el trono, y al Cordero. Cuando Juan pregunta quiénes son, un anciano le dice que estos son los que salieron de la gran tribulación y lavaron sus ropas y las blanquearon en la sangre del Cordero. Sus ropas son blancas no por su propio esfuerzo o mérito sino por la sangre limpiadora del Cordero, que es la única que quita el pecado. Son una familia mundial, reunida de todo pueblo de la tierra, el fruto de la redención del Cordero. Esta gran multitud es la respuesta a la pregunta del sexto sello, quién podrá estar en pie: estos pueden, los incontables redimidos de toda nación, lavados en la sangre del Cordero y en pie seguros delante del trono de Dios."}, {"textEn": "27. What is promised to the great multitude before the throne (Revelation 7:15-17)?", "textEs": "27. ¿Qué se promete a la gran multitud delante del trono (Apocalipsis 7:15-17)?", "kw_en": ["serve", "temple", "hunger", "shepherd", "fountains", "living", "tears", "wipe"], "kw_es": ["sirven", "templo", "hambre", "pastor", "fuentes", "vivas", "lágrima", "enjug"], "modelEn": "The future promised to the great multitude is glorious. They stand before the throne of God and serve Him day and night in His temple, and the One on the throne will dwell among them. They will hunger no more and thirst no more, and the sun will not strike them nor any scorching heat. The reason is tender and surprising: the Lamb who is in the midst of the throne will be their shepherd. The slain Lamb who redeemed them now leads them like a flock, guiding them to living fountains of waters that never run dry. And God Himself will wipe away every tear from their eyes, a promise of comfort so complete that all the sorrow of their tribulation is gone forever. This same promise of no more tears reappears at the very end of the book, in the new heaven and new earth. So the redeemed who came through great tribulation are not merely spared; they are brought into endless joy, fed and led and comforted by the Lamb in the presence of God.", "modelEs": "El futuro prometido a la gran multitud es glorioso. Están delante del trono de Dios y le sirven día y noche en su templo, y el que está sobre el trono morará entre ellos. No tendrán más hambre ni más sed, y el sol no caerá sobre ellos ni calor alguno. La razón es tierna y sorprendente: el Cordero que está en medio del trono será su pastor. El Cordero inmolado que los redimió ahora los guía como a un rebaño, llevándolos a fuentes vivas de aguas que nunca se secan. Y Dios mismo enjugará toda lágrima de sus ojos, una promesa de consuelo tan completa que toda la tristeza de su tribulación se va para siempre. Esta misma promesa de no más lágrimas reaparece al final mismo del libro, en el cielo nuevo y la tierra nueva. Así los redimidos que pasaron por gran tribulación no solo son librados; son llevados a un gozo sin fin, alimentados y guiados y consolados por el Cordero en la presencia de Dios."}, {"textEn": "28. What happens when the Lamb opens the seventh seal, and what does the silence suggest?", "textEs": "28. ¿Qué sucede cuando el Cordero abre el séptimo sello, y qué sugiere el silencio?", "kw_en": ["seventh", "silence", "heaven", "half", "awe", "trumpets", "pause", "next"], "kw_es": ["séptimo", "silencio", "cielo", "media", "asombro", "trompetas", "pausa", "siguiente"], "modelEn": "After the long interlude, the Lamb opens the last seal, and the result is unexpected: there was silence in heaven for about half an hour. After the thunder of the four horsemen, the cry of the martyrs, the shaking of the sixth seal, and the great shouts of the multitude, heaven falls utterly still. The silence is full of awe and expectation. It is the hush before God's purposes move forward into the next great cycle of visions, for in that silence seven angels are given seven trumpets, which the following unit will take up. The half hour of silence marks a solemn pause, as if all heaven holds its breath before the next stage of judgment. So the seventh seal does not so much end the sequence as open onto the trumpets, joining the seals to what comes next. The silence reminds the reader that these visions move forward only at God's measured pace, under the hand of the Lamb who opened the scroll.", "modelEs": "Después del largo interludio, el Cordero abre el último sello, y el resultado es inesperado: hubo silencio en el cielo como por media hora. Después del trueno de los cuatro jinetes, el clamor de los mártires, la sacudida del sexto sello, y las grandes voces de la multitud, el cielo queda completamente quieto. El silencio está lleno de asombro y expectación. Es la pausa antes de que los propósitos de Dios avancen al siguiente gran ciclo de visiones, pues en ese silencio se dan a siete ángeles siete trompetas, que la siguiente unidad tomará. La media hora de silencio marca una pausa solemne, como si todo el cielo contuviera el aliento antes de la siguiente etapa del juicio. Así el séptimo sello no termina tanto la secuencia como abre a las trompetas, uniendo los sellos a lo que sigue. El silencio recuerda al lector que estas visiones avanzan solo al paso medido de Dios, bajo la mano del Cordero que abrió el libro."}, {"textEn": "29. How does the interlude of chapter 7 answer the terror of the sixth seal?", "textEs": "29. ¿Cómo responde el interludio del capítulo 7 al terror del sexto sello?", "kw_en": ["stand", "sealed", "secure", "multitude", "blood", "throne", "redeem", "protect"], "kw_es": ["pie", "sellad", "segur", "multitud", "sangre", "trono", "redimi", "proteg"], "modelEn": "The sixth seal ends with a terrified world hiding from the wrath of the Lamb and crying, who is able to stand. Chapter seven answers that very question. First it shows God sealing the 144,000 of His servants on their foreheads, marking them as His own and securing them before the winds of judgment are loosed, so that His people are protected and not one is overlooked. Then it shows the great multitude that no one could number, drawn from every nation, standing before the throne in white robes, having come out of great tribulation with their robes washed white in the blood of the Lamb. Together the two scenes give the answer: those who can stand are the redeemed people of God, sealed and kept by Him and cleansed by the blood of the Lamb. The unsaved cannot face the day of wrath, but God's own are secure. So the interlude turns the terror of the sixth seal into comfort, assuring the church that judgment falling on the world will not sweep away those who belong to the Lamb.", "modelEs": "El sexto sello termina con un mundo aterrado escondiéndose de la ira del Cordero y clamando, quién podrá estar en pie. El capítulo siete responde esa misma pregunta. Primero muestra a Dios sellando a los 144,000 de sus siervos en sus frentes, marcándolos como suyos y asegurándolos antes de que los vientos del juicio se suelten, de modo que su pueblo está protegido y ninguno es pasado por alto. Luego muestra la gran multitud que ninguno podía contar, tomada de toda nación, en pie delante del trono en ropas blancas, habiendo salido de la gran tribulación con sus ropas blanqueadas en la sangre del Cordero. Juntas las dos escenas dan la respuesta: los que pueden estar en pie son el pueblo redimido de Dios, sellado y guardado por él y limpiado por la sangre del Cordero. Los no salvos no pueden enfrentar el día de la ira, pero los suyos están seguros. Así el interludio convierte el terror del sexto sello en consuelo, asegurando a la iglesia que el juicio que cae sobre el mundo no arrastrará a los que pertenecen al Cordero."}, {"textEn": "30. Summarize the central truth of Unit 6: what do the seven seals teach the church?", "textEs": "30. Resuma la verdad central de la Unidad 6: ¿qué enseñan los siete sellos a la iglesia?", "kw_en": ["lamb", "seals", "judgment", "martyr", "sealed", "redeem", "throne", "safe"], "kw_es": ["cordero", "sellos", "juicio", "mártir", "sellad", "redimi", "trono", "segura"], "modelEn": "The central truth of Unit 6 is a steadying one for a church that suffers. The seven seals teach, first, that the judgments of history fall only as the Lamb opens them, so that conquest, war, famine, and death, terrible as they are, remain under the sovereign hand of the One who was slain. Second, the martyrs under the altar are heard and will be vindicated in God's perfect time, even though more of His servants will yet suffer. Third, when the sixth seal shows the great day of wrath and asks who is able to stand, the interlude answers that God seals and secures His own before the storm, marking His servants and gathering a countless multitude from every nation. Those who stand are the redeemed, washed white in the blood of the Lamb. And the seventh seal opens in silence onto the trumpets to come. The world may be shaken to its foundations, but the Lamb holds the scroll of history, His people are sealed and safe in His hand, and the redeemed of every nation will stand before the throne.", "modelEs": "La verdad central de la Unidad 6 afirma a una iglesia que sufre. Los siete sellos enseñan, primero, que los juicios de la historia caen solo a medida que el Cordero los abre, de modo que la conquista, la guerra, el hambre y la muerte, por terribles que sean, permanecen bajo la mano soberana del que fue inmolado. Segundo, los mártires debajo del altar son oídos y serán vindicados en el tiempo perfecto de Dios, aunque más de sus siervos aún sufrirán. Tercero, cuando el sexto sello muestra el gran día de la ira y pregunta quién podrá estar en pie, el interludio responde que Dios sella y asegura a los suyos antes de la tormenta, marcando a sus siervos y reuniendo una multitud incontable de toda nación. Los que están en pie son los redimidos, blanqueados en la sangre del Cordero. Y el séptimo sello abre en silencio a las trompetas por venir. El mundo puede ser sacudido hasta sus cimientos, pero el Cordero tiene el libro de la historia, su pueblo está sellado y seguro en su mano, y los redimidos de toda nación estarán en pie delante del trono."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 7 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 7 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSRevReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

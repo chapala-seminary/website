@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Cults & World Religions — Unit 1</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 2 →</span><span class="lang-es">Unidad 2 →</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Cults &amp; World Religions — Unit 1: What Is a Cult? The Biblical Test</span><span class="lang-es">📖 Las Sectas y las Religiones del Mundo — Unidad 1: ¿Qué Es una Secta? La Prueba Bíblica</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed." — Galatians 1:8 (NKJV)</span><span class="lang-es">"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema." — Gálatas 1:8 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Cults &amp; World Religions. Please register before beginning Unit 1.</span><span class="lang-es">Bienvenido a Las Sectas y las Religiones del Mundo. Por favor regístrese antes de comenzar la Unidad 1.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Anchor: Galatians 1:6-9 — with 2 Corinthians 11:3-4; 1 John 4:1-3; Jude 3 (NKJV)</strong></p>
+<div class="scripture">"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed." &mdash; Galatians 1:8 (NKJV)</div>
+
+<h3>A Word Before We Begin</h3>
+<p>This course examines groups whose teaching departs from the gospel of Jesus Christ &mdash; some that call themselves Christian, and some that belong to the great religions of the world. Its method is simple, and it will not change: we take each group's teaching as it actually is, and we test it by the Word of God, and where it departs from the gospel we say so plainly. That is not unkindness; it is the one thing love truly requires, for every person we study is made in God's image and is someone for whom Christ died, and the most loving thing we can do for anyone is to tell them the truth about Christ. So we set our course by a single verse, and need not repeat the sentiment in every unit that follows: we speak "the truth in love" (Ephesians 4:15) &mdash; all the truth, and in love. What remains is to learn what a cult actually is, and how to tell one.</p>
+
+<h3>What Do We Mean by "Cult"?</h3>
+<p>The word "cult" is easily misused, so we must define it with care. In this course a cult is a group that claims to hold the truth about God &mdash; often claiming to be the true form of Christianity &mdash; yet denies one or more essentials of the biblical gospel, especially who Jesus Christ is and how a person is saved. A cult is not simply a group we dislike, and the word is not an insult hurled at people. It is a careful description of a teaching's relationship to the gospel.</p>
+<p>We must keep three things distinct. A <strong>cult</strong> claims Christ but denies an essential of the faith &mdash; as we will see with the Jehovah's Witnesses and the Latter-day Saints. A <strong>world religion</strong>, such as Islam, Hinduism, or Buddhism, is a wholly separate faith that does not claim to be Christianity at all. And a <strong>Christian tradition</strong> &mdash; a genuine denomination &mdash; agrees on the essentials (the Trinity, the full deity of Christ, salvation by grace through faith) while differing on secondary matters such as the mode of baptism or the form of church government. Those who agree on the gospel but differ on lesser things are brothers, not a cult. To confuse these three is to be unfair to some and careless with others.</p>
+
+<h3>The Marks of a Cult</h3>
+<p>Cults differ from one another, and no single group shows every mark. But certain features appear again and again, and learning to recognize them helps us test wisely. The first and gravest is <strong>a different Christ</strong>: the group denies His full deity, or His true humanity, and gives us a Jesus who is less than the eternal Son of God. The second is <strong>a different gospel</strong>: salvation is made to rest, in whole or in part, on works and performance rather than on the grace of God received by faith. A third is <strong>an added authority</strong>: a new book, a living prophet, or an organization is placed alongside or above the Scriptures. Often there follows <strong>an exclusive claim</strong> &mdash; that only this group is saved &mdash; and with it a measure of <strong>control</strong>, so that to leave the group is made to feel like leaving God. Behind all of these lies a single pattern: something has been added to, or taken from, the finished work of Christ.</p>
+
+<h3>The Biblical Tests</h3>
+<p>We do not test these groups by our own opinions, but by Scripture, which teaches us plainly how to test. Paul writes that if anyone preaches "any other gospel" than the true one, even "an angel from heaven," he is to be accursed (Galatians 1:6-9): the gospel of grace may not be added to or subtracted from. He warns the Corinthians that a deceiver comes preaching "another Jesus," "a different spirit," and "a different gospel" (2 Corinthians 11:3-4) &mdash; a counterfeit can look very much like the real thing. John commands us not to "believe every spirit, but test the spirits" (1 John 4:1), and the test he gives centers on Christ: whether one confesses that "Jesus Christ has come in the flesh" (1 John 4:2), truly God and truly man. And Jude urges us to "contend earnestly for the faith which was once for all delivered to the saints" (Jude 3) &mdash; there is a fixed apostolic gospel, and later "revelations" that change it are to be rejected.</p>
+<p>All of these come down to two questions we will call the <strong>root-test</strong>, for the whole tree of faith grows from them. First: <em>Who is Jesus?</em> Is He the eternal God the Son, truly God and truly man? Second: <em>How is a person saved?</em> By grace alone, through faith alone, in Christ alone &mdash; or by works? Get these two right, and the tree is sound; get either one wrong at the root, and it is another tree and another gospel, however much of the bark may look the same.</p>
+
+<h3>How We Will Study Them</h3>
+<p>Our method in every unit will be the same, and it is a method of both honesty and love. <strong>First, we will state each group's beliefs fairly, in their own words and from their own sources</strong>, not from caricatures or rumors. This is simply the Golden Rule applied to disagreement: we describe others as we would want to be described. <strong>Second, we will test the root by Scripture</strong> &mdash; asking the two questions and letting the Word of God render the verdict. <strong>Third, we will aim at the person redemptively.</strong> When Paul stood among the idols and philosophers of Athens, he did not simply denounce them; he reasoned with them, quoted their own poets, and pointed them to the risen Christ (Acts 17:22-31). That is our aim too: not merely to refute an error, but to win a person.</p>
+
+<h3>A Redemptive Aim</h3>
+<p>So this is not a course in suspicion, and still less in pride. If we come to it looking down on others, we have already failed. The same grace that found us is the grace we long for them to find. Many who are caught in cults are sincere, moral, and devout &mdash; often more zealous than we are &mdash; and many who follow the world's religions are seeking God as best they know how. Our task is twofold, and we must hold both parts together: to hold fast the true gospel without compromise, and to reach out to every person with genuine love. We mark the error precisely so that we may reclaim the people. As we begin, let us fix our aim on that goal: to know the truth, to speak it in love, and to see men and women brought home to the true and living Christ.</p>
+<div class="scripture">"...contend earnestly for the faith which was once for all delivered to the saints." &mdash; Jude 3 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto base: Gálatas 1:6-9 — con 2 Corintios 11:3-4; 1 Juan 4:1-3; Judas 3 (RVG)</strong></p>
+<div class="scripture">"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema." &mdash; Gálatas 1:8 (RVG)</div>
+
+<h3>Una Palabra Antes de Comenzar</h3>
+<p>Este curso examina grupos cuya enseñanza se aparta del evangelio de Jesucristo &mdash; algunos que se llaman cristianos, y algunos que pertenecen a las grandes religiones del mundo. Su método es sencillo, y no cambiará: tomamos la enseñanza de cada grupo tal como realmente es, y la probamos por la Palabra de Dios, y donde se aparta del evangelio lo decimos con claridad. Eso no es falta de bondad; es lo único que el amor verdaderamente requiere, pues cada persona que estudiamos está hecha a imagen de Dios y es alguien por quien Cristo murió, y lo más bondadoso que podemos hacer por cualquiera es decirle la verdad acerca de Cristo. Así que fijamos nuestro rumbo por un solo versículo, y no necesitamos repetir el sentimiento en cada unidad que sigue: hablamos "la verdad en amor" (Efesios 4:15) &mdash; toda la verdad, y en amor. Lo que queda es aprender qué es realmente una secta, y cómo reconocerla.</p>
+
+<h3>¿Qué Queremos Decir con "Secta"?</h3>
+<p>La palabra "secta" se usa mal con facilidad, así que debemos definirla con cuidado. En este curso, una secta es un grupo que afirma poseer la verdad acerca de Dios &mdash; a menudo afirmando ser la forma verdadera del cristianismo &mdash; pero niega uno o más elementos esenciales del evangelio bíblico, especialmente quién es Jesucristo y cómo es salva una persona. Una secta no es simplemente un grupo que nos desagrada, y la palabra no es un insulto lanzado contra las personas. Es una descripción cuidadosa de la relación de una enseñanza con el evangelio.</p>
+<p>Debemos mantener tres cosas distintas. Una <strong>secta</strong> afirma a Cristo pero niega un elemento esencial de la fe &mdash; como veremos con los Testigos de Jehová y los Santos de los Últimos Días. Una <strong>religión del mundo</strong>, como el islam, el hinduismo o el budismo, es una fe totalmente separada que no afirma ser cristianismo en absoluto. Y una <strong>tradición cristiana</strong> &mdash; una denominación genuina &mdash; concuerda en lo esencial (la Trinidad, la plena deidad de Cristo, la salvación por gracia mediante la fe) mientras difiere en asuntos secundarios como el modo del bautismo o la forma del gobierno de la iglesia. Los que concuerdan en el evangelio pero difieren en cosas menores son hermanos, no una secta. Confundir estas tres cosas es ser injusto con unos y descuidado con otros.</p>
+
+<h3>Las Marcas de una Secta</h3>
+<p>Las sectas difieren entre sí, y ningún grupo muestra todas las marcas. Pero ciertos rasgos aparecen una y otra vez, y aprender a reconocerlos nos ayuda a probar con sabiduría. La primera y más grave es <strong>un Cristo diferente</strong>: el grupo niega su plena deidad, o su verdadera humanidad, y nos da un Jesús que es menos que el eterno Hijo de Dios. La segunda es <strong>un evangelio diferente</strong>: la salvación se hace descansar, en todo o en parte, sobre las obras y el desempeño en lugar de sobre la gracia de Dios recibida por la fe. Una tercera es <strong>una autoridad añadida</strong>: un libro nuevo, un profeta viviente, o una organización se coloca junto a las Escrituras o por encima de ellas. A menudo sigue <strong>una pretensión exclusiva</strong> &mdash; que solo este grupo es salvo &mdash; y con ella cierto <strong>control</strong>, de modo que dejar el grupo se hace sentir como dejar a Dios. Detrás de todo esto hay un solo patrón: algo se ha añadido, o se ha quitado, a la obra consumada de Cristo.</p>
+
+<h3>Las Pruebas Bíblicas</h3>
+<p>No probamos a estos grupos por nuestras propias opiniones, sino por la Escritura, que nos enseña claramente cómo probar. Pablo escribe que si alguno predica "otro evangelio" diferente del verdadero, aunque sea "un ángel del cielo", sea anatema (Gálatas 1:6-9): al evangelio de la gracia no se le puede añadir ni quitar. Advierte a los corintios que un engañador viene predicando "otro Jesús", "otro espíritu" y "otro evangelio" (2 Corintios 11:3-4) &mdash; una falsificación puede parecerse mucho a lo verdadero. Juan nos manda no "creáis a todo espíritu, sino probad los espíritus" (1 Juan 4:1), y la prueba que da se centra en Cristo: si uno confiesa que "Jesucristo ha venido en carne" (1 Juan 4:2), verdaderamente Dios y verdaderamente hombre. Y Judas nos exhorta a "contender ardientemente por la fe que ha sido una vez dada a los santos" (Judas 3) &mdash; hay un evangelio apostólico fijo, y las "revelaciones" posteriores que lo cambian han de ser rechazadas.</p>
+<p>Todo esto se reduce a dos preguntas que llamaremos la <strong>prueba de la raíz</strong>, pues todo el árbol de la fe crece de ellas. Primera: <em>¿Quién es Jesús?</em> ¿Es el eterno Dios el Hijo, verdaderamente Dios y verdaderamente hombre? Segunda: <em>¿Cómo es salva una persona?</em> ¿Por gracia sola, mediante la fe sola, en Cristo solo &mdash; o por obras? Acierte en estas dos, y el árbol es sano; yerre en cualquiera de las dos en la raíz, y es otro árbol y otro evangelio, por mucho que la corteza parezca la misma.</p>
+
+<h3>Cómo los Estudiaremos</h3>
+<p>Nuestro método en cada unidad será el mismo, y es un método de honestidad y de amor a la vez. <strong>Primero, expondremos las creencias de cada grupo justamente, en sus propias palabras y desde sus propias fuentes</strong>, no desde caricaturas ni rumores. Esto es sencillamente la Regla de Oro aplicada al desacuerdo: describimos a otros como quisiéramos ser descritos. <strong>Segundo, probaremos la raíz por la Escritura</strong> &mdash; haciendo las dos preguntas y dejando que la Palabra de Dios dé el veredicto. <strong>Tercero, apuntaremos a la persona de manera redentora.</strong> Cuando Pablo estuvo entre los ídolos y los filósofos de Atenas, no se limitó a denunciarlos; razonó con ellos, citó a sus propios poetas, y los señaló al Cristo resucitado (Hechos 17:22-31). Ese es también nuestro fin: no meramente refutar un error, sino ganar a una persona.</p>
+
+<h3>Un Fin Redentor</h3>
+<p>Así que este no es un curso de sospecha, y mucho menos de orgullo. Si venimos a él menospreciando a otros, ya hemos fracasado. La misma gracia que nos halló es la gracia que anhelamos que ellos hallen. Muchos de los que están atrapados en sectas son sinceros, morales y devotos &mdash; a menudo más celosos que nosotros &mdash; y muchos de los que siguen las religiones del mundo buscan a Dios lo mejor que saben. Nuestra tarea es doble, y debemos sostener ambas partes juntas: sostener firmemente el verdadero evangelio sin transigir, y acercarnos a cada persona con amor genuino. Marcamos el error precisamente para poder recuperar a las personas. Al comenzar, fijemos nuestro fin en esa meta: conocer la verdad, hablarla en amor, y ver a hombres y mujeres traídos a casa al Cristo verdadero y vivo.</p>
+<div class="scripture">"...que contendáis ardientemente por la fe que ha sido una vez dada a los santos." &mdash; Judas 3 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 1 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Cults & World Religions — Unit 1 (What Is a Cult? The Biblical Test)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 1;
+const COURSE = 'cults';
+const NEXT_UNIT_URL = 'CTSCultsUnit2.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - What Is a Cult? The Biblical Test", "Unit 2 - The Trinity and the Deity of Christ", "Unit 3 - Jehovah's Witnesses", "Unit 4 - The Latter-day Saints", "Unit 5 - The Prosperity Gospel", "Unit 6 - Progressive Revelation: Islam and Baha'i", "Unit 7 - Eastern Religions: Hinduism and Buddhism", "Unit 8 - Roman Catholicism", "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism", "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCultsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. In this course, the word 'cult' is used to describe:", "textEs": "1. En este curso, la palabra 'secta' se usa para describir:", "optionsEn": ["A group claiming Christian or biblical truth that denies an essential of the gospel (especially who Christ is and how we are saved)", "A group that simply worships in a different style", "Any non-Christian religion in the world", "Any small or new church"], "optionsEs": ["Un grupo que afirma la verdad cristiana o bíblica pero niega un elemento esencial del evangelio (especialmente quién es Cristo y cómo somos salvos)", "Un grupo que simplemente adora en un estilo diferente", "Cualquier religión no cristiana del mundo", "Cualquier iglesia pequeña o nueva"], "explanationEn": "A cult claims the truth about God yet denies an essential of the gospel — above all, who Christ is and how a person is saved.", "explanationEs": "Una secta afirma la verdad acerca de Dios pero niega un elemento esencial del evangelio — sobre todo, quién es Cristo y cómo es salva una persona.", "correct": 0}, {"textEn": "2. Which best distinguishes a 'world religion' from a 'cult' as defined here?", "textEs": "2. ¿Qué distingue mejor una 'religión del mundo' de una 'secta' según se define aquí?", "optionsEn": ["A world religion is a wholly separate faith (such as Islam or Hinduism), not a claimed form of Christianity", "A world religion is always older than a cult", "There is no real difference between them", "A world religion simply has more members"], "optionsEs": ["Una religión del mundo es una fe totalmente separada (como el islam o el hinduismo), no una forma que dice ser cristianismo", "Una religión del mundo siempre es más antigua que una secta", "No hay diferencia real entre ellas", "Una religión del mundo simplemente tiene más miembros"], "explanationEn": "A world religion does not claim to be Christianity at all; a cult claims Christ while denying an essential.", "explanationEs": "Una religión del mundo no afirma ser cristianismo en absoluto; una secta afirma a Cristo mientras niega un elemento esencial.", "correct": 0}, {"textEn": "3. A group that affirms the Trinity, the full deity of Christ, and salvation by grace, but differs on the mode of baptism, is best regarded as:", "textEs": "3. Un grupo que afirma la Trinidad, la plena deidad de Cristo y la salvación por gracia, pero difiere en el modo del bautismo, se considera mejor como:", "optionsEn": ["A cult to be opposed", "A separate world religion", "A Christian tradition — brothers, not a cult", "A false gospel"], "optionsEs": ["Una secta a la que hay que oponerse", "Una religión del mundo separada", "Una tradición cristiana — hermanos, no una secta", "Un evangelio falso"], "explanationEn": "Agreement on the essentials makes such a group brothers who differ on secondary matters, not a cult.", "explanationEs": "El acuerdo en lo esencial hace de tal grupo hermanos que difieren en asuntos secundarios, no una secta.", "correct": 2}, {"textEn": "4. In this course, calling a teaching a 'cult' is meant to be:", "textEs": "4. En este curso, llamar 'secta' a una enseñanza pretende ser:", "optionsEn": ["A personal insult against its members", "A political label", "A claim that its members are wicked people", "A careful description of the teaching's relationship to the gospel"], "optionsEs": ["Un insulto personal contra sus miembros", "Una etiqueta política", "Una afirmación de que sus miembros son personas malvadas", "Una descripción cuidadosa de la relación de la enseñanza con el evangelio"], "explanationEn": "The term describes how a teaching relates to the gospel; it is not an insult aimed at people.", "explanationEs": "El término describe cómo se relaciona una enseñanza con el evangelio; no es un insulto dirigido a las personas.", "correct": 3}, {"textEn": "5. The two 'root' questions that decide everything are:", "textEs": "5. Las dos preguntas de la 'raíz' que lo deciden todo son:", "optionsEn": ["Which holidays and which hymns the group keeps", "How old the group is and how large", "Who Jesus is, and how a person is saved", "Which Bible translation and which prayers it uses"], "optionsEs": ["Qué fiestas y qué himnos guarda el grupo", "Cuán antiguo es el grupo y cuán grande", "Quién es Jesús, y cómo es salva una persona", "Qué traducción de la Biblia y qué oraciones usa"], "explanationEn": "The root-test asks who Christ is and how salvation comes; these two decide whether the gospel stands.", "explanationEs": "La prueba de la raíz pregunta quién es Cristo y cómo viene la salvación; estas dos deciden si el evangelio se sostiene.", "correct": 2}, {"textEn": "6. Galatians 1:8 warns that if anyone — even an angel from heaven — preaches another gospel, he is:", "textEs": "6. Gálatas 1:8 advierte que si alguno — aun un ángel del cielo — predica otro evangelio, sea:", "optionsEn": ["To be quietly ignored", "To be accursed", "To be admired for his zeal", "A minor concern"], "optionsEs": ["Ignorado en silencio", "Anatema", "Admirado por su celo", "Una preocupación menor"], "explanationEn": "Paul pronounces a curse on any other gospel, even one preached by an angel — the gospel may not be changed.", "explanationEs": "Pablo pronuncia maldición sobre todo otro evangelio, aun predicado por un ángel — el evangelio no se puede cambiar.", "correct": 1}, {"textEn": "7. In 2 Corinthians 11:3-4, Paul warns that a deceiver may bring:", "textEs": "7. En 2 Corintios 11:3-4, Pablo advierte que un engañador puede traer:", "optionsEn": ["Another Jesus, a different spirit, and a different gospel", "Better music and larger crowds", "A new language", "A more modern building"], "optionsEs": ["Otro Jesús, otro espíritu y otro evangelio", "Mejor música y multitudes más grandes", "Un idioma nuevo", "Un edificio más moderno"], "explanationEn": "Paul warns of a counterfeit — another Jesus, another spirit, another gospel — that can look like the real thing.", "explanationEs": "Pablo advierte de una falsificación — otro Jesús, otro espíritu, otro evangelio — que puede parecer lo verdadero.", "correct": 0}, {"textEn": "8. According to 1 John 4:1-3, believers are told to:", "textEs": "8. Según 1 Juan 4:1-3, a los creyentes se les manda:", "optionsEn": ["Accept every spirit and teaching", "Test the spirits, whether they are of God", "Avoid all religious teaching", "Trust a teacher's sincerity alone"], "optionsEs": ["Aceptar todo espíritu y enseñanza", "Probar los espíritus, si son de Dios", "Evitar toda enseñanza religiosa", "Confiar solo en la sinceridad de un maestro"], "explanationEn": "John commands us not to believe every spirit, but to test the spirits by the truth about Christ.", "explanationEs": "Juan nos manda no creer a todo espíritu, sino probar los espíritus por la verdad acerca de Cristo.", "correct": 1}, {"textEn": "9. The test John gives in 1 John 4 centers on the confession that:", "textEs": "9. La prueba que Juan da en 1 Juan 4 se centra en la confesión de que:", "optionsEn": ["Jesus was a good moral teacher", "Jesus is one prophet among many", "Jesus Christ has come in the flesh — true God and true man", "Jesus existed only as a spirit"], "optionsEs": ["Jesús fue un buen maestro moral", "Jesús es un profeta entre muchos", "Jesucristo ha venido en carne — verdadero Dios y verdadero hombre", "Jesús existió solo como espíritu"], "explanationEn": "The test is whether one confesses that Jesus Christ has truly come in the flesh — genuinely God and man.", "explanationEs": "La prueba es si uno confiesa que Jesucristo ha venido verdaderamente en carne — genuinamente Dios y hombre.", "correct": 2}, {"textEn": "10. Jude 3 calls believers to contend for 'the faith once for all delivered,' which teaches that:", "textEs": "10. Judas 3 llama a los creyentes a contender por 'la fe una vez dada a los santos', que enseña que:", "optionsEn": ["The gospel keeps changing with each age", "New revelations may replace the apostolic gospel", "There is a fixed apostolic gospel that must not be altered", "Every generation needs a new gospel"], "optionsEs": ["El evangelio sigue cambiando con cada época", "Nuevas revelaciones pueden reemplazar el evangelio apostólico", "Hay un evangelio apostólico fijo que no se debe alterar", "Cada generación necesita un evangelio nuevo"], "explanationEn": "Jude teaches that the gospel was delivered once for all; later 'revelations' that change it are to be rejected.", "explanationEs": "Judas enseña que el evangelio fue dado una vez para siempre; las 'revelaciones' posteriores que lo cambian han de ser rechazadas.", "correct": 2}, {"textEn": "11. A common mark of a cult is 'a different Christ,' meaning it:", "textEs": "11. Una marca común de una secta es 'un Cristo diferente', que significa que:", "optionsEn": ["Sings different songs about Him", "Denies His full deity or His true humanity", "Meets on a different day of the week", "Uses a different kind of building"], "optionsEs": ["Canta canciones diferentes acerca de Él", "Niega su plena deidad o su verdadera humanidad", "Se reúne en un día diferente de la semana", "Usa un tipo de edificio diferente"], "explanationEn": "A different Christ denies either His full deity or His true humanity, giving a Jesus less than the eternal Son.", "explanationEs": "Un Cristo diferente niega su plena deidad o su verdadera humanidad, dando un Jesús menor que el eterno Hijo.", "correct": 1}, {"textEn": "12. Another common mark is 'a different gospel,' meaning salvation is made to rest on:", "textEs": "12. Otra marca común es 'un evangelio diferente', que significa que la salvación se hace descansar sobre:", "optionsEn": ["Grace alone", "Faith alone", "Christ alone", "Works and performance added to grace"], "optionsEs": ["La gracia sola", "La fe sola", "Cristo solo", "Las obras y el desempeño añadidos a la gracia"], "explanationEn": "A different gospel adds works and performance to grace, so salvation no longer rests on Christ alone.", "explanationEs": "Un evangelio diferente añade obras y desempeño a la gracia, de modo que la salvación ya no descansa en Cristo solo.", "correct": 3}, {"textEn": "13. A frequent mark of a cult is 'an added authority,' such as:", "textEs": "13. Una marca frecuente de una secta es 'una autoridad añadida', como:", "optionsEn": ["The same Scriptures alone", "A new book, prophet, or organization placed alongside or above the Bible", "The historic Christian creeds", "A regular habit of prayer"], "optionsEs": ["Solo las mismas Escrituras", "Un libro nuevo, profeta u organización colocado junto a la Biblia o por encima de ella", "Los credos cristianos históricos", "Un hábito regular de oración"], "explanationEn": "An added authority sets a new book, prophet, or organization beside or above the Scriptures.", "explanationEs": "Una autoridad añadida coloca un libro nuevo, profeta u organización junto a las Escrituras o por encima de ellas.", "correct": 1}, {"textEn": "14. When we study each group, we will first state its beliefs:", "textEs": "14. Cuando estudiemos cada grupo, expondremos primero sus creencias:", "optionsEn": ["From its critics only", "From caricatures and rumors", "Fairly, from the group's own sources", "From vague memory"], "optionsEs": ["Solo desde sus críticos", "Desde caricaturas y rumores", "Justamente, desde las propias fuentes del grupo", "Desde una memoria vaga"], "explanationEn": "We state each group's beliefs fairly, from their own sources — never from caricatures.", "explanationEs": "Exponemos las creencias de cada grupo justamente, desde sus propias fuentes — nunca desde caricaturas.", "correct": 2}, {"textEn": "15. Stating a group's beliefs fairly, from its own sources, is an application of:", "textEs": "15. Exponer las creencias de un grupo justamente, desde sus propias fuentes, es una aplicación de:", "optionsEn": ["The Golden Rule applied to disagreement", "A clever debating trick", "Indifference to the truth", "Flattery"], "optionsEs": ["La Regla de Oro aplicada al desacuerdo", "Un truco astuto de debate", "La indiferencia a la verdad", "La adulación"], "explanationEn": "Describing others as we would want to be described is the Golden Rule applied to disagreement.", "explanationEs": "Describir a otros como quisiéramos ser descritos es la Regla de Oro aplicada al desacuerdo.", "correct": 0}, {"textEn": "16. Our aim toward the members of these groups is:", "textEs": "16. Nuestro fin hacia los miembros de estos grupos es:", "optionsEn": ["To win an argument", "To feel superior to them", "To avoid them entirely", "Redemptive — to win them to the true Christ"], "optionsEs": ["Ganar una discusión", "Sentirnos superiores a ellos", "Evitarlos por completo", "Redentor — ganarlos para el Cristo verdadero"], "explanationEn": "The aim is not merely to refute an error but to win the person to the true Christ.", "explanationEs": "El fin no es meramente refutar un error sino ganar a la persona para el Cristo verdadero.", "correct": 3}, {"textEn": "17. Ephesians 4:15 calls us to speak:", "textEs": "17. Efesios 4:15 nos llama a hablar:", "optionsEn": ["The truth in love", "Truth without any love", "Love without any truth", "Neither truth nor love"], "optionsEs": ["La verdad en amor", "La verdad sin amor alguno", "El amor sin verdad alguna", "Ni verdad ni amor"], "explanationEn": "We are to speak the truth in love — holding both together, not one without the other.", "explanationEs": "Hemos de hablar la verdad en amor — sosteniendo ambas cosas juntas, no una sin la otra.", "correct": 0}, {"textEn": "18. First Peter 3:15 says to give a reason for our hope with:", "textEs": "18. 1 Pedro 3:15 dice que demos razón de nuestra esperanza con:", "optionsEn": ["Harshness and force", "Meekness (gentleness) and respect", "Silence", "Anger"], "optionsEs": ["Dureza y fuerza", "Mansedumbre y reverencia", "Silencio", "Enojo"], "explanationEn": "We give the reason for our hope with meekness and respect, never with harshness.", "explanationEs": "Damos razón de nuestra esperanza con mansedumbre y reverencia, nunca con dureza.", "correct": 1}, {"textEn": "19. Paul's engagement with the philosophers in Athens (Acts 17) models:", "textEs": "19. La manera en que Pablo trató con los filósofos en Atenas (Hechos 17) es un modelo de:", "optionsEn": ["Mocking their beliefs", "Ignoring them altogether", "Refusing to speak with them", "Thoughtful, respectful witness that points to the risen Christ"], "optionsEs": ["Burlarse de sus creencias", "Ignorarlos por completo", "Negarse a hablar con ellos", "Testimonio reflexivo y respetuoso que señala al Cristo resucitado"], "explanationEn": "In Athens Paul reasoned respectfully, even citing their poets, and pointed them to the risen Christ.", "explanationEs": "En Atenas Pablo razonó con respeto, aun citando a sus poetas, y los señaló al Cristo resucitado.", "correct": 3}, {"textEn": "20. The overall posture of this course toward people in cults and other religions is:", "textEs": "20. La postura general de este curso hacia las personas en sectas y otras religiones es:", "optionsEn": ["Suspicion and pride", "Contempt", "Fear", "Firm truth held together with genuine love"], "optionsEs": ["Sospecha y orgullo", "Desprecio", "Temor", "Verdad firme sostenida junto con amor genuino"], "explanationEn": "We hold the true gospel firmly and reach out to every person with genuine love — truth and love together.", "explanationEs": "Sostenemos firmemente el verdadero evangelio y nos acercamos a cada persona con amor genuino — verdad y amor juntos.", "correct": 3}];
+
+const kwQuestions = [{"textEn": "21. Define what this course means by a 'cult,' and explain how it differs from a world religion.", "textEs": "21. Defina lo que este curso entiende por 'secta', y explique en qué difiere de una religión del mundo.", "kw_en": ["cult", "claim", "christ", "essential", "gospel", "deny", "religion", "separate"], "kw_es": ["secta", "afirma", "cristo", "esencial", "evangelio", "niega", "religi", "separada"], "modelEn": "In this course a cult is a group that claims to hold the truth about God, often claiming to be true Christianity, yet denies an essential of the biblical gospel, especially who Christ is and how a person is saved. It is not merely a group we dislike, but a teaching that departs from the gospel at an essential point. A world religion is different: it is a wholly separate faith, such as Islam or Hinduism, that does not claim to be Christianity at all. So a cult claims Christ while denying an essential, whereas a world religion stands outside the Christian claim entirely.", "modelEs": "En este curso una secta es un grupo que afirma poseer la verdad acerca de Dios, a menudo afirmando ser el cristianismo verdadero, pero niega un elemento esencial del evangelio bíblico, especialmente quién es Cristo y cómo es salva una persona. No es meramente un grupo que nos desagrada, sino una enseñanza que se aparta del evangelio en un punto esencial. Una religión del mundo es diferente: es una fe totalmente separada, como el islam o el hinduismo, que no afirma ser cristianismo en absoluto. Así que una secta afirma a Cristo mientras niega un elemento esencial, mientras que una religión del mundo queda enteramente fuera de la pretensión cristiana."}, {"textEn": "22. Explain the difference between a cult and a Christian tradition (denomination), and why differing on baptism is not the same as denying the gospel.", "textEs": "22. Explique la diferencia entre una secta y una tradición cristiana (denominación), y por qué diferir sobre el bautismo no es lo mismo que negar el evangelio.", "kw_en": ["tradition", "essential", "trinity", "deity", "grace", "secondary", "baptism", "brother"], "kw_es": ["tradici", "esencial", "trinidad", "deidad", "gracia", "secundario", "bautismo", "hermano"], "modelEn": "A Christian tradition, or denomination, agrees with us on the essentials of the faith: the Trinity, the full deity of Christ, and salvation by grace through faith. It differs only on secondary matters, such as the mode of baptism or the form of church government. A cult, by contrast, denies one of those essentials. This is why differing over baptism is not the same as denying the gospel: baptism is a real and important question, but it is a secondary one, and those who hold the same gospel while differing on it are brothers, not a cult. To treat a fellow believer who differs on baptism as though he denied Christ would be both unfair and untrue.", "modelEs": "Una tradición cristiana, o denominación, concuerda con nosotros en lo esencial de la fe: la Trinidad, la plena deidad de Cristo, y la salvación por gracia mediante la fe. Difiere solo en asuntos secundarios, como el modo del bautismo o la forma del gobierno de la iglesia. Una secta, en cambio, niega uno de esos elementos esenciales. Por eso diferir sobre el bautismo no es lo mismo que negar el evangelio: el bautismo es una cuestión real e importante, pero es secundaria, y los que sostienen el mismo evangelio aunque difieran en ella son hermanos, no una secta. Tratar a un hermano creyente que difiere sobre el bautismo como si negara a Cristo sería injusto y falso."}, {"textEn": "23. State the two 'root' questions and explain why they decide whether a group holds the true gospel.", "textEs": "23. Exponga las dos preguntas de la 'raíz' y explique por qué deciden si un grupo sostiene el verdadero evangelio.", "kw_en": ["root", "jesus", "saved", "deity", "grace", "faith", "christ", "tree"], "kw_es": ["fundamento", "hombre", "salva", "deidad", "gracia", "fe", "cristo", "verdadero"], "modelEn": "The two root questions are these: first, Who is Jesus? Is he the eternal God the Son, truly God and truly man? Second, How is a person saved? By grace alone, through faith alone, in Christ alone, or by works? They are called root questions because the whole tree of faith grows from them. If a group answers rightly about the deity of Christ and about salvation by grace through faith, the root is sound and the gospel stands. But if it gets either one wrong, denying the deity of Christ or adding works to grace, then it is a different root, and a different root makes a different tree, however similar the branches may appear.", "modelEs": "Las dos preguntas de la raíz son estas: primera, ¿Quién es Jesús? ¿Es el eterno Dios el Hijo, verdaderamente Dios y verdaderamente hombre? Segunda, ¿Cómo es salva una persona? ¿Por gracia sola, mediante la fe sola, en Cristo solo, o por obras? Se llaman preguntas de la raíz o del fundamento porque todo el árbol de la fe crece de ellas. Si un grupo responde correctamente acerca de la deidad de Cristo y acerca de la salvación por gracia mediante la fe, el fundamento es sano y el evangelio se sostiene. Pero si yerra en cualquiera de las dos, negando la deidad de Cristo o añadiendo obras a la gracia, entonces es un fundamento diferente, y un fundamento diferente produce un árbol diferente, por muy parecidas que parezcan las ramas. Así se discierne el verdadero evangelio."}, {"textEn": "24. From Galatians 1:6-9, explain what makes a message 'another gospel' and the force of 'even an angel from heaven.'", "textEs": "24. Desde Gálatas 1:6-9, explique qué hace que un mensaje sea 'otro evangelio' y la fuerza de 'aun un ángel del cielo'.", "kw_en": ["gospel", "another", "angel", "accursed", "grace", "preach", "pervert", "christ"], "kw_es": ["evangelio", "otro", "anatema", "gracia", "predica", "pervierte", "cristo", "verdadero"], "modelEn": "A message becomes another gospel when it changes the true gospel of grace, whether by adding to it or taking from it. Paul says that even if he himself, or an angel from heaven, should preach any other gospel than the one already preached, let him be accursed. The force of even an angel from heaven is to show that no messenger, however exalted, and no human teacher, however sincere, has the right to alter the gospel. The authority of the message does not rest on the impressiveness of the messenger but on its faithfulness to what God has revealed. So any teaching that perverts the gospel at its root, changing who Christ is or how we are saved, falls under this solemn curse, no matter who brings it.", "modelEs": "Un mensaje llega a ser otro evangelio cuando cambia el verdadero evangelio de la gracia, sea añadiéndole o quitándole. Pablo dice que aunque él mismo, o un ángel del cielo, predicare otro evangelio diferente del ya predicado, sea anatema. La fuerza de aun un ángel del cielo es mostrar que ningún mensajero, por exaltado que sea, y ningún maestro humano, por sincero que sea, tiene derecho a alterar el evangelio. La autoridad del mensaje no descansa en lo impresionante del mensajero sino en su fidelidad a lo que Dios ha revelado. Así que toda enseñanza que pervierte el evangelio en su raíz, cambiando quién es Cristo o cómo somos salvos, cae bajo esta solemne maldición, sin importar quién la traiga. Es otro evangelio y no el verdadero."}, {"textEn": "25. From 1 John 4:1-3, explain the test of the spirits and what confession it centers on.", "textEs": "25. Desde 1 Juan 4:1-3, explique la prueba de los espíritus y en qué confesión se centra.", "kw_en": ["test", "spirit", "believe", "confess", "flesh", "christ", "god", "true"], "kw_es": ["prueba", "creer", "confesar", "carne", "cristo", "dios", "verdadero", "venido"], "modelEn": "John tells us not to believe every spirit, but to test the spirits to see whether they are of God, because many false prophets have gone out into the world. The test he gives is not sincerity or success, but a confession about Christ. Every spirit that confesses that Jesus Christ has come in the flesh is of God, and every spirit that does not confess this is not of God. So the test centers on the true Christ: whether one confesses him as genuinely come in the flesh, truly God and truly man. This is why the person of Christ is the first thing we examine in any teaching, for the truth about him is the dividing line between what is of God and what is not.", "modelEs": "Juan nos dice que no creamos a todo espíritu, sino que probemos los espíritus para ver si son de Dios, porque muchos falsos profetas han salido por el mundo. La prueba que da no es la sinceridad ni el éxito, sino una confesión acerca de Cristo. Todo espíritu que confiesa que Jesucristo ha venido en carne es de Dios, y todo espíritu que no confiesa esto no es de Dios. Así que la prueba se centra en el Cristo verdadero: si uno lo confiesa como genuinamente venido en carne, verdaderamente Dios y verdaderamente hombre. Por eso la persona de Cristo es lo primero que examinamos en cualquier enseñanza, pues la verdad acerca de él es la línea divisoria entre lo que es de Dios y lo que no lo es."}, {"textEn": "26. Name several marks of a cult and explain how they relate to the gospel.", "textEs": "26. Nombre varias marcas de una secta y explique cómo se relacionan con el evangelio.", "kw_en": ["christ", "deity", "gospel", "works", "authority", "scripture", "exclusive", "control"], "kw_es": ["cristo", "deidad", "evangelio", "obras", "autoridad", "escritura", "exclusiva", "control"], "modelEn": "Cults show certain marks again and again, though not every group shows all of them. The first is a different Christ, denying his full deity or true humanity. The second is a different gospel, resting salvation on works and performance rather than on grace received by faith. A third is an added authority, placing a new book, prophet, or organization alongside or above the Scriptures. Often there is an exclusive claim, that only this group is saved, and a measure of control, so that leaving the group feels like leaving God. Each mark relates to the gospel in the same way: something has been added to, or taken from, the finished work of Christ, so that the true gospel of grace is compromised at its root.", "modelEs": "Las sectas muestran ciertas marcas una y otra vez, aunque no todo grupo las muestra todas. La primera es un Cristo diferente, negando su plena deidad o su verdadera humanidad. La segunda es un evangelio diferente, que hace descansar la salvación sobre las obras y el desempeño en lugar de sobre la gracia recibida por la fe. Una tercera es una autoridad añadida, que coloca un libro nuevo, profeta u organización junto a las Escrituras o por encima de ellas. A menudo hay una pretensión exclusiva, de que solo este grupo es salvo, y cierto control, de modo que dejar el grupo se siente como dejar a Dios. Cada marca se relaciona con el evangelio de la misma manera: algo se ha añadido, o se ha quitado, a la obra consumada de Cristo, de modo que el verdadero evangelio de la gracia queda comprometido en su raíz."}, {"textEn": "27. Explain the three-step method this course uses to study each group.", "textEs": "27. Explique el método de tres pasos que este curso usa para estudiar cada grupo.", "kw_en": ["fairly", "source", "test", "scripture", "root", "redemptive", "person", "love"], "kw_es": ["justamente", "fuente", "prueba", "escritura", "fundamento", "redentor", "persona", "amor"], "modelEn": "The method has three steps, joining honesty and love. First, we state each group's beliefs fairly, in their own words and from their own sources, not from caricatures. This is the Golden Rule applied to disagreement. Second, we test the root by Scripture, asking the two questions about Christ and salvation and letting the Word of God give the verdict. Third, we aim at the person redemptively, following Paul in Athens, who reasoned respectfully and pointed people to the risen Christ. So we do not merely refute an error; we seek to win a person, holding the true gospel firmly while treating every individual with genuine love and respect.", "modelEs": "El método tiene tres pasos, uniendo la honestidad y el amor. Primero, exponemos las creencias de cada grupo justamente, en sus propias palabras y desde sus propias fuentes, no desde caricaturas. Esta es la Regla de Oro aplicada al desacuerdo. Segundo, probamos el fundamento por la Escritura, haciendo las dos preguntas acerca de Cristo y de la salvación y dejando que la Palabra de Dios dé el veredicto. Tercero, apuntamos a la persona de manera redentora, siguiendo a Pablo en Atenas, que razonó con respeto y señaló a las personas al Cristo resucitado. Así que no meramente refutamos un error; buscamos ganar a una persona, sosteniendo firmemente el verdadero evangelio mientras tratamos a cada individuo con amor genuino y respeto."}, {"textEn": "28. Explain why we must speak 'the truth in love' and with 'gentleness and respect' toward people in cults and other religions.", "textEs": "28. Explique por qué debemos hablar 'la verdad en amor' y con 'mansedumbre y respeto' hacia las personas en sectas y otras religiones.", "kw_en": ["truth", "love", "respect", "person", "image", "kind", "christ", "witness"], "kw_es": ["verdad", "amor", "respeto", "persona", "imagen", "bondad", "cristo", "testimonio"], "modelEn": "We speak the truth in love because both are commanded and neither may be dropped. Truth without love becomes harsh and drives people away; love without truth becomes flattery and leaves them in error. Peter says to give a reason for our hope with gentleness and respect, and Paul says to speak the truth in love. Every person in a cult or another religion is made in the image of God and is someone for whom Christ died, so they deserve kindness, patience, and honest respect. In fact, real love is what compels us to tell them the truth rather than to leave them comfortable in a false gospel. So our witness must always join a firm holding of the truth with genuine, respectful love for the person.", "modelEs": "Hablamos la verdad en amor porque ambas cosas son mandadas y ninguna se puede dejar. La verdad sin amor se vuelve dura y aleja a las personas; el amor sin verdad se vuelve adulación y las deja en el error. Pedro dice que demos razón de nuestra esperanza con mansedumbre y respeto, y Pablo dice que hablemos la verdad en amor. Cada persona en una secta u otra religión está hecha a imagen de Dios y es alguien por quien Cristo murió, así que merece bondad, paciencia y respeto honesto. De hecho, el amor verdadero es lo que nos obliga a decirles la verdad en lugar de dejarlas cómodas en un evangelio falso. Así que nuestro testimonio siempre debe unir un firme sostener de la verdad con un amor genuino y respetuoso por la persona."}, {"textEn": "29. Using Acts 17 (Paul in Athens), describe the posture we should take toward people of other faiths.", "textEs": "29. Usando Hechos 17 (Pablo en Atenas), describa la postura que debemos tomar hacia las personas de otras religiones.", "kw_en": ["athens", "paul", "reason", "respect", "poets", "christ", "risen", "witness"], "kw_es": ["atenas", "pablo", "respeto", "poetas", "cristo", "resucitado", "testimonio", "persona"], "modelEn": "In Athens Paul gives us a model for meeting people of other faiths. He was grieved by their idols, yet he did not simply denounce them. He reasoned with them in the synagogue and the marketplace, he observed their altars and even quoted their own poets, and he used what he found as a bridge to the truth. Then he pointed them clearly to the living God and to the risen Christ, calling all people everywhere to repent. So our posture is neither to mock nor to stay silent, but to engage thoughtfully and with respect, listening and reasoning, and always aiming our witness at the person, that we might point them to the risen Christ.", "modelEs": "En Atenas Pablo nos da un modelo para encontrarnos con personas de otras religiones. Se entristeció por sus ídolos, pero no se limitó a denunciarlos. Razonó con ellos en la sinagoga y en la plaza, observó sus altares y aun citó a sus propios poetas, y usó lo que halló como un puente hacia la verdad. Luego los señaló claramente al Dios vivo y al Cristo resucitado, llamando a todas las personas en todo lugar a arrepentirse. Así que nuestra postura no es ni burlarnos ni quedarnos callados, sino tratar con la persona de manera reflexiva y con respeto, escuchando y razonando, y apuntando siempre nuestro testimonio a la persona, para poder señalarla al Cristo resucitado."}, {"textEn": "30. Summarize Unit 1: what a cult is, the biblical tests for discerning one, and the redemptive aim of the course.", "textEs": "30. Resuma la Unidad 1: qué es una secta, las pruebas bíblicas para discernirla, y el fin redentor del curso.", "kw_en": ["cult", "gospel", "test", "christ", "grace", "scripture", "redemptive", "love"], "kw_es": ["secta", "evangelio", "prueba", "cristo", "gracia", "escritura", "redentor", "amor"], "modelEn": "Unit 1 lays the foundation for the whole course. A cult is a group that claims the truth about God, often claiming to be Christian, yet denies an essential of the gospel, especially who Christ is and how a person is saved; it differs from a world religion, which is a separate faith, and from a Christian tradition, which agrees on the essentials. Scripture teaches us to test such teaching: Paul warns of another gospel and another Jesus, John tells us to test the spirits by the confession of Christ, and Jude bids us contend for the faith once delivered. It all comes down to two root questions, about the person of Christ and about salvation by grace. And the aim of the course is redemptive: to hold the true gospel firmly and to reach every person with genuine love, marking the error in order to reclaim the people for the true and living Christ.", "modelEs": "La Unidad 1 pone el fundamento para todo el curso. Una secta es un grupo que afirma la verdad acerca de Dios, a menudo afirmando ser cristiano, pero niega un elemento esencial del evangelio, especialmente quién es Cristo y cómo es salva una persona; se diferencia de una religión del mundo, que es una fe separada, y de una tradición cristiana, que concuerda en lo esencial. La Escritura nos enseña a probar tal enseñanza: Pablo advierte de otro evangelio y otro Jesús, Juan nos dice que probemos los espíritus por la confesión de Cristo, y Judas nos exhorta a contender por la fe una vez dada. Todo se reduce a dos preguntas de la raíz, acerca de la persona de Cristo y acerca de la salvación por gracia. Y el fin del curso es redentor: sostener firmemente el verdadero evangelio y alcanzar a cada persona con amor genuino, marcando el error para poder recuperar a las personas para el Cristo verdadero y vivo."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en el botón de arriba para continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click the button above to continue.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '\u2713 Correct! ' : '\u2713 \u00a1Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `\u2717 Incorrect. Correct answer: ${correctLetter}. ` : `\u2717 Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a few sentences (about 100 characters)), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos unas cuantas oraciones (unos 100 caracteres)), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            renderQuestions();
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        renderQuestions();
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCultsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

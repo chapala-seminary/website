@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How We Got the Bible — Unit 6: The Received Text and the Critical Text</title>
+<style>
+  :root{
+    --green:#2c5f2d; --green-d:#1f4420; --gold:#d4af37; --cream:#faf7f0;
+    --parch:#f3ecdd; --ink:#2b2721; --muted:#6b6355; --line:#e2d9c4;
+    --hl:#efe7d2; --ok:#2c5f2d; --no:#a23b32;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:Georgia,'Times New Roman',serif; color:var(--ink);
+    background:var(--cream); line-height:1.6;
+  }
+  body.lang-en .lang-es{display:none;}
+  body.lang-es .lang-en{display:none;}
+  .wrap{max-width:820px; margin:0 auto; padding:0 18px 60px;}
+  header.masthead{
+    background:linear-gradient(135deg,var(--green),var(--green-d));
+    color:#fff; padding:26px 18px 22px; text-align:center;
+    border-bottom:4px solid var(--gold);
+  }
+  header.masthead .course{font-size:.82rem; letter-spacing:2px; text-transform:uppercase; opacity:.9;}
+  header.masthead h1{margin:6px 0 2px; font-size:1.5rem;}
+  header.masthead .unit{font-size:1rem; color:#f1e6bf; margin-top:4px;}
+  .toolbar{
+    display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+    background:var(--parch); padding:10px; border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:5;
+  }
+  .toggle-btn{
+    background:var(--green); color:#fff; border:none; padding:8px 14px;
+    border-radius:6px; font-family:inherit; font-size:.9rem; cursor:pointer; font-weight:600;
+  }
+  .toggle-btn:hover{background:var(--green-d);}
+  .amber-note{
+    background:#fff6df; border:1px solid var(--gold); color:#7a5c12;
+    padding:8px 12px; border-radius:6px; font-size:.82rem; margin:14px 0;
+  }
+  .track-select{
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+    background:#fff; border:1px solid var(--line); border-radius:8px;
+    padding:12px 14px; margin:16px 0; font-size:.95rem;
+  }
+  .track-select > span{font-weight:bold; color:var(--muted); margin-right:4px;}
+  .track-btn{
+    background:#efe9db; color:var(--ink); border:1px solid var(--line);
+    padding:6px 12px; border-radius:20px; font-family:inherit; cursor:pointer; font-size:.88rem;
+  }
+  .track-btn.active{background:var(--green); color:#fff; border-color:var(--green);}
+  h3{
+    color:var(--green-d); font-size:1.18rem; margin:30px 0 8px;
+    border-bottom:2px solid var(--gold); padding-bottom:5px;
+  }
+  section.teach p{margin:10px 0;}
+  blockquote.verse{
+    margin:14px 0; padding:10px 16px; border-left:4px solid var(--gold);
+    background:var(--parch); font-style:italic; color:#4a4335;
+  }
+  .aside{
+    margin:16px 0; padding:14px 18px; background:var(--green);
+    color:#fff; border-radius:8px; font-size:1.05rem; text-align:center;
+    font-style:italic;
+  }
+  .exam{background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px; margin:26px 0;}
+  .exam h2{color:var(--green-d); font-size:1.25rem; margin:0 0 4px; border-bottom:2px solid var(--gold); padding-bottom:6px;}
+  .exam .lead{font-size:.9rem; color:var(--muted); margin:6px 0 14px;}
+  .question{margin:0 0 18px; padding-bottom:6px; border-bottom:1px dashed var(--line);}
+  .qtext{font-weight:bold; margin:0 0 8px;}
+  .option{
+    display:block; width:100%; text-align:left; margin:5px 0; padding:9px 12px;
+    background:#fbf9f3; border:1px solid var(--line); border-radius:6px;
+    font-family:inherit; font-size:.95rem; cursor:pointer; color:var(--ink);
+  }
+  .option:hover{background:var(--hl);}
+  .option.correct{background:#e4f0e0; border-color:var(--ok); color:#1f4420; font-weight:600;}
+  .option.wrong{background:#f6e2df; border-color:var(--no); color:#7a2a23;}
+  .feedback-text{margin:8px 0 2px; padding:8px 10px; border-radius:6px; font-size:.9rem;}
+  .feedback-text.correct{background:#e4f0e0; color:#1f4420;}
+  .feedback-text.incorrect{background:#f6e2df; color:#7a2a23;}
+  textarea{
+    width:100%; font-family:inherit; font-size:.95rem; padding:10px;
+    border:1px solid var(--line); border-radius:6px; resize:vertical; background:#fbf9f3;
+  }
+  .sa-note{font-size:.85rem; color:var(--muted); margin:2px 0 14px;}
+  .btn-primary{
+    background:var(--gold); color:#3a2f0a; border:none; padding:11px 20px;
+    border-radius:6px; font-family:inherit; font-weight:bold; font-size:1rem; cursor:pointer;
+  }
+  .btn-primary:hover{filter:brightness(1.05);}
+  .result{display:none; margin-top:14px; padding:12px 14px; border-radius:8px; font-weight:600;}
+  .result.pass{background:#e4f0e0; color:#1f4420; border:1px solid var(--ok);}
+  .result.fail{background:#f6e2df; color:#7a2a23; border:1px solid var(--no);}
+  .result.progress{display:block; background:#f3ecdd; color:#5c5443; border:1px solid var(--line); font-weight:600;}
+  .completion{
+    display:none; margin:22px 0; padding:16px; background:var(--green);
+    color:#fff; border-radius:10px; text-align:center; font-size:1.05rem; font-weight:600;
+  }
+  .foot-nav{display:flex; justify-content:center; gap:10px; margin:30px 0 0; flex-wrap:wrap;}
+  .foot-nav a{
+    background:var(--green); color:#fff; text-decoration:none; padding:10px 18px;
+    border-radius:6px; font-weight:600; font-size:.95rem;
+  }
+</style>
+</head>
+<body class="lang-en">
+
+
+<header class="masthead">
+  <div class="course"><span class="lang-en">How We Got the Bible</span><span class="lang-es">Cómo Obtuvimos la Biblia</span></div>
+  <h1><span class="lang-en">One Word, Two Printed Texts</span><span class="lang-es">Una Palabra, Dos Textos Impresos</span></h1>
+  <div class="unit"><span class="lang-en">Unit 6 — The Received Text and the Critical Text</span><span class="lang-es">Unidad 6 — El Texto Recibido y el Texto Crítico</span></div>
+</header>
+
+<div class="toolbar">
+  <button class="toggle-btn" id="langToggleBtn" onclick="toggleLang()">Español</button>
+  <a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+</div>
+
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSBibleUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSBibleUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSBibleUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSBibleUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSBibleUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSBibleUnit6.html" title="Unit 6 · Unidad 6" class="active">6</a><a href="CTSBibleUnit7.html" title="Unit 7 · Unidad 7">7</a><a href="CTSBibleUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSBibleUnit9.html" title="Unit 9 · Unidad 9">9</a><a href="CTSBibleUnit10.html" title="Unit 10 · Unidad 10">10</a></nav>
+
+
+  <div class="track-select">
+    <span class="lang-en">Your track:</span><span class="lang-es">Tu vía:</span>
+    <button id="track-cert" class="track-btn" onclick="setTrack('cert')"><span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></button><button id="track-assoc" class="track-btn" onclick="setTrack('assoc')"><span class="lang-en">Associate</span><span class="lang-es">Asociado</span></button>
+    <button id="track-thm" class="track-btn" onclick="setTrack('thm')">Th.M.</button>
+    <button id="track-mdiv" class="track-btn" onclick="setTrack('mdiv')">M.Div.</button>
+  </div>
+
+  <!-- ===================== TEACHING ===================== -->
+
+  <section class="teach">
+    <h3><span class="lang-en">1. The One Honest Question That Remains</span><span class="lang-es">1. La Única Pregunta Honesta que Queda</span></h3>
+    <div class="lang-en"><p>In the last two units the second witness gave a clear testimony: the New Testament comes to us in an abundance of manuscripts, faithfully copied and reaching back to within a generation of the apostles. Yet as we walked the gallery we saw one honest thing we did not stop to settle. The great early manuscripts — Sinaiticus, Vaticanus, the papyri — sometimes differ, in a handful of places, from the later Received Text that stands behind the King James Version and the Reina-Valera. This unit takes that difference up directly, for it is the one live question left in the study of the text. Let us set the frame carefully before we begin, because much confusion and not a little unkindness have grown up here. This is a genuine disagreement among Christians who love the Bible and want nothing but the true Word of God. It is an in-house question, a family matter — and it is not, in any way, a question of whether we possess the Word of God. We do. Both of the great printed texts carry the whole gospel of Jesus Christ. So we will do here what this course has done throughout: present both positions as their best and most faithful defenders hold them, stand on the doctrine that God has preserved His Word, and refuse the overclaims that have been made on either side.</p></div>
+    <div class="lang-es"><p>En las dos últimas unidades el segundo testigo dio un testimonio claro: el Nuevo Testamento nos llega en una abundancia de manuscritos, copiados fielmente y que se remontan a una generación de los apóstoles. Sin embargo, al caminar por la galería vimos una cosa honesta que no nos detuvimos a resolver. Los grandes manuscritos antiguos — Sinaítico, Vaticano, los papiros — a veces difieren, en un puñado de lugares, del Texto Recibido posterior que está detrás de la Versión King James y la Reina-Valera. Esta unidad toma esa diferencia directamente, pues es la única pregunta viva que queda en el estudio del texto. Fijemos el marco con cuidado antes de comenzar, porque aquí ha crecido mucha confusión y no poca falta de bondad. Este es un desacuerdo genuino entre cristianos que aman la Biblia y no quieren sino la verdadera Palabra de Dios. Es una pregunta entre hermanos, un asunto de familia — y no es, de ninguna manera, una pregunta de si poseemos la Palabra de Dios. La poseemos. Ambos de los grandes textos impresos llevan todo el evangelio de Jesucristo. Así que haremos aquí lo que este curso ha hecho por todas partes: presentar ambas posiciones como las sostienen sus mejores y más fieles defensores, mantenernos en la doctrina de que Dios ha preservado su Palabra, y rechazar las exageraciones que se han hecho de cada lado.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">2. How We Got Two Printed Texts</span><span class="lang-es">2. Cómo Obtuvimos Dos Textos Impresos</span></h3>
+    <div class="lang-en"><p>How did we come to have two printed Greek texts in the first place? For some fourteen centuries the New Testament was copied by hand, and the great majority of the copies that survive carry what is called the Byzantine text — the form used continuously by the Greek-speaking church. When printing arrived, the Dutch scholar Erasmus published the first printed Greek New Testament in 1516, working from a small number of late manuscripts he had at hand. His text was refined over the next century by Stephanus, Beza, and the Elzevir printers, whose edition advertised itself as the text "now received by all" — and so it gained the name Textus Receptus, the Received Text. This is the text underlying the King James Version, the New King James, and the Reina-Valera — including the Reina-Valera Gómez, the Spanish Bible this course uses. Then, in the eighteen-hundreds, the recovery of the great early manuscripts changed the landscape. Scholars such as Westcott and Hort argued that these older witnesses should carry the most weight, and built from them a different printed text — the Critical or Eclectic Text, refined today in the Nestle-Aland edition. This text underlies most modern translations, such as the English ESV and NIV and the Spanish NVI. Two printed Greek texts; two families of translation flowing from them.</p></div>
+    <div class="lang-es"><p>¿Cómo llegamos a tener dos textos griegos impresos en primer lugar? Por unos catorce siglos el Nuevo Testamento se copió a mano, y la gran mayoría de las copias que sobreviven llevan lo que se llama el texto bizantino — la forma usada continuamente por la iglesia de habla griega. Cuando llegó la imprenta, el erudito holandés Erasmo publicó el primer Nuevo Testamento griego impreso en 1516, trabajando de un pequeño número de manuscritos tardíos que tenía a mano. Su texto fue refinado durante el siglo siguiente por Stephanus, Beza y los impresores Elzevir, cuya edición se anunciaba como el texto "ahora recibido por todos" — y así ganó el nombre de Textus Receptus, el Texto Recibido. Este es el texto que subyace a la Versión King James, la Nueva King James, y la Reina-Valera — incluyendo la Reina-Valera Gómez, la Biblia en español que este curso usa. Luego, en el siglo diecinueve, la recuperación de los grandes manuscritos antiguos cambió el panorama. Eruditos como Westcott y Hort argumentaron que estos testigos más antiguos debían llevar el mayor peso, y construyeron de ellos un texto impreso diferente — el Texto Crítico o Ecléctico, refinado hoy en la edición Nestle-Aland. Este texto subyace a la mayoría de las traducciones modernas, como la ESV y la NIV en inglés y la NVI en español. Dos textos griegos impresos; dos familias de traducción que fluyen de ellos.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">3. Where They Agree — and Where They Differ</span><span class="lang-es">3. Dónde Concuerdan — y Dónde Difieren</span></h3>
+    <div class="aside"><span class="lang-en">The question is never whether we have the Word — only which reading to print in a few places.</span><span class="lang-es">La pregunta nunca es si tenemos la Palabra — solo cuál lectura imprimir en unos pocos lugares.</span></div>
+    <div class="lang-en"><p>Before we compare the two positions, we must get the proportion right, because almost every fear in this area comes from getting it wrong. The Received Text and the Critical Text agree across the overwhelming majority of the New Testament. In verse after verse, chapter after chapter, the wording is simply the same. The differences are real, but they gather in a relatively small number of places. The best known are the longer ending of Mark, chapter sixteen, and the account of the woman caught in adultery in John chapter eight; beyond those, a scattering of verses that stand fuller in the Received Text and are footnoted in the modern versions, and a handful of single-word differences such as 1 Timothy 3:16. Now hold this fast, for it is the anchor of the whole unit: not one cardinal doctrine of the Christian faith rises or falls on any of these differences. The deity of Christ, the Holy Trinity, the bodily resurrection, salvation by grace through faith — every one of these is taught many times over, in passages that both texts share word for word. The debate concerns the wording of certain verses. It has never been a debate about the gospel.</p></div>
+    <div class="lang-es"><p>Antes de comparar las dos posiciones, debemos entender bien la proporción, porque casi todo temor en esta área viene de entenderla mal. El Texto Recibido y el Texto Crítico concuerdan en la abrumadora mayoría del Nuevo Testamento. Versículo tras versículo, capítulo tras capítulo, la redacción es sencillamente la misma. Las diferencias son reales, pero se agrupan en un número relativamente pequeño de lugares. Las más conocidas son el final más largo de Marcos, capítulo dieciséis, y el relato de la mujer sorprendida en adulterio en Juan capítulo ocho; más allá de esas, una dispersión de versículos que están más completos en el Texto Recibido y llevan una nota en las versiones modernas, y un puñado de diferencias de una sola palabra como 1 Timoteo 3:16. Ahora sostén esto con firmeza, pues es el ancla de toda la unidad: ni una sola doctrina cardinal de la fe cristiana se levanta ni cae sobre ninguna de estas diferencias. La deidad de Cristo, la Santa Trinidad, la resurrección corporal, la salvación por gracia mediante la fe — cada una de estas se enseña muchas veces, en pasajes que ambos textos comparten palabra por palabra. El debate concierne la redacción de ciertos versículos. Nunca ha sido un debate sobre el evangelio.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">4. The Case for the Critical Text (Fairly Stated)</span><span class="lang-es">4. El Caso del Texto Crítico (Expuesto con Justicia)</span></h3>
+    <div class="lang-en"><p>Let us hear the case for the Critical Text first, at its strongest, as its faithful defenders make it. Its single aim is to recover, as nearly as the evidence allows, the exact words the apostles first wrote. Its guiding conviction is this: the earliest manuscripts, standing fewer copies away from the originals, are generally the most trustworthy witnesses to those words. And it observes a pattern in how scribes worked — that over the centuries they were far more likely to add than to leave out, to smooth a rough phrase, to harmonize one Gospel with another, to fill in a familiar title. If that is so, then where the oldest copies are shorter, or read more roughly, they are often preserving the original, and the fuller, smoother reading of the later manuscripts is a well-meant growth. On this reasoning, the fourth-century codices and the still older papyri should outweigh the sheer number of the later medieval copies, because age lies closer to the source. This is the majority position in scholarship today, and it is held by a great many Christians who believe every word of the Bible and want only the apostles' own.</p></div>
+    <div class="lang-es"><p>Oigamos primero el caso del Texto Crítico, en su punto más fuerte, como lo hacen sus fieles defensores. Su único objetivo es recuperar, tan cerca como la evidencia lo permita, las palabras exactas que los apóstoles escribieron primero. Su convicción rectora es esta: los manuscritos más antiguos, al estar a menos copias de los originales, son generalmente los testigos más confiables de esas palabras. Y observa un patrón en cómo trabajaron los escribas — que a lo largo de los siglos eran mucho más propensos a añadir que a omitir, a suavizar una frase áspera, a armonizar un Evangelio con otro, a completar un título familiar. Si es así, entonces donde las copias más antiguas son más cortas, o se leen de forma más áspera, a menudo preservan lo original, y la lectura más completa y suave de los manuscritos posteriores es un crecimiento bien intencionado. Con este razonamiento, los códices del siglo cuarto y los papiros aún más antiguos deberían pesar más que el mero número de las copias medievales posteriores, porque la antigüedad está más cerca de la fuente. Esta es la posición mayoritaria en la erudición hoy, y la sostienen muchísimos cristianos que creen cada palabra de la Biblia y no quieren sino las de los apóstoles.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">5. The Case for the Received and Majority Text (Fairly Stated)</span><span class="lang-es">5. El Caso del Texto Recibido y Mayoritario (Expuesto con Justicia)</span></h3>
+    <div class="lang-en"><p>Now let us hear the case for the Received and Majority Text, also at its strongest, also from faithful hands. It comes in two strands. The first is the argument from the majority itself: the reading found in the great mass of the manuscripts — the text the whole church copied and read, Sunday after Sunday, for a thousand years — is the more likely to be original. Why, this position asks, should two manuscripts from the sands of Egypt outweigh the thousands the living church actually used? Manuscripts that survived in a monastery drawer or on a Vatican shelf may have survived precisely because they were set aside and little read. The second strand is the argument from preservation: God promised that His Word would not pass away, and it would be a strange providence indeed if the true text were lost to His church for fifteen hundred years, only to be recovered from a wastebasket and a library in the modern age. The Received Text is the text of the Reformation, the text that fed the churches through the great awakenings, the text of the King James and the Reina-Valera — and the Reina-Valera Gómez was made expressly to bring the Spanish Scriptures into fuller agreement with it. This position, too, is held by serious and believing men.</p></div>
+    <div class="lang-es"><p>Ahora oigamos el caso del Texto Recibido y Mayoritario, también en su punto más fuerte, también de manos fieles. Viene en dos vertientes. La primera es el argumento de la mayoría misma: la lectura hallada en la gran masa de los manuscritos — el texto que toda la iglesia copió y leyó, domingo tras domingo, por mil años — es la más probable de ser original. ¿Por qué, pregunta esta posición, deberían dos manuscritos de las arenas de Egipto pesar más que los miles que la iglesia viva en verdad usó? Manuscritos que sobrevivieron en el cajón de un monasterio o en un estante del Vaticano pueden haber sobrevivido precisamente porque fueron apartados y poco leídos. La segunda vertiente es el argumento de la preservación: Dios prometió que su Palabra no pasaría, y sería una providencia extraña en verdad si el texto verdadero se perdiera para su iglesia por mil quinientos años, solo para ser recuperado de un cesto de basura y de una biblioteca en la era moderna. El Texto Recibido es el texto de la Reforma, el texto que alimentó a las iglesias a través de los grandes avivamientos, el texto de la King James y de la Reina-Valera — y la Reina-Valera Gómez fue hecha expresamente para llevar las Escrituras en español a un acuerdo más pleno con él. Esta posición, también, la sostienen hombres serios y creyentes.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">6. A Case Study: The Comma and the Ending of Mark</span><span class="lang-es">6. Un Caso de Estudio: La Coma y el Final de Marcos</span></h3>
+    <div class="lang-en"><p>Let us see how the two ways of reasoning meet the actual examples, taking the sharpest ones honestly. The longer ending of Mark stands in the Received Text and is printed in full in the King James and the Reina-Valera; it is absent from the two great early codices, and so the modern versions set it apart with a note. Sharper still is the passage called the Comma Johanneum, in First John chapter five, the single clearest sentence in all the Bible naming the Father, the Word, and the Spirit as three who are one. It stands in the Received Text, the King James, and the Reina-Valera — yet it is found in only a very few, very late Greek manuscripts, and Erasmus himself included it only in a later edition, under pressure, when a single Greek copy of it was produced. This is the example the Critical Text side presses hardest. And here is the anchor once more: the truth of the Holy Trinity is woven through the whole of the Scriptures that both texts share — the baptism into Father, Son, and Spirit in Matthew twenty-eight, the eternal Word of John chapter one, the grace and love and fellowship of Second Corinthians thirteen. Print the Comma or footnote it: the doctrine stands unmoved. So it is everywhere. The differences touch the wording of a verse; they never touch the teaching of the whole.</p></div>
+    <div class="lang-es"><p>Veamos cómo las dos maneras de razonar se encuentran con los ejemplos reales, tomando los más agudos con honestidad. El final más largo de Marcos está en el Texto Recibido y se imprime completo en la King James y la Reina-Valera; está ausente de los dos grandes códices antiguos, y por eso las versiones modernas lo apartan con una nota. Más agudo aún es el pasaje llamado la Coma Juanina, en Primera de Juan capítulo cinco, la sentencia más clara en toda la Biblia que nombra al Padre, al Verbo y al Espíritu como tres que son uno. Está en el Texto Recibido, la King James y la Reina-Valera — sin embargo se halla en solo unos muy pocos manuscritos griegos muy tardíos, y el mismo Erasmo la incluyó solo en una edición posterior, bajo presión, cuando se produjo una sola copia griega de ella. Este es el ejemplo que el lado del Texto Crítico presiona con más fuerza. Y aquí está el ancla una vez más: la verdad de la Santa Trinidad está entretejida por toda la Escritura que ambos textos comparten — el bautismo en el Padre, el Hijo y el Espíritu en Mateo veintiocho, el Verbo eterno de Juan capítulo uno, la gracia y el amor y la comunión de Segunda de Corintios trece. Imprime la Coma o ponle una nota: la doctrina permanece inconmovible. Así es en todas partes. Las diferencias tocan la redacción de un versículo; nunca tocan la enseñanza del todo.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">7. What CTS Uses, and Why We Refuse the Two Extremes</span><span class="lang-es">7. Lo que CTS Usa, y Por Qué Rechazamos los Dos Extremos</span></h3>
+    <div class="aside"><span class="lang-en">Standing warmly in our own tradition, without unchurching the brothers who stand in another.</span><span class="lang-es">Mantenernos con cariño en nuestra propia tradición, sin descomulgar a los hermanos que están en otra.</span></div>
+    <div class="lang-en"><p>Where, then, does this course stand? Plainly: our own Bibles, the New King James and the Reina-Valera Gómez, stand in the Received Text tradition, and we hold that tradition dear and find its argument from preservation weighty. But we will not make a man's choice of text into a test of his faith, and we refuse the two extremes that have done such harm. We refuse the claim, sometimes made, that the Received Text and the King James are corrupt or the refuge of the ignorant; they are the tried and honored Word that carried the church for centuries. And we refuse, just as firmly, the opposite claim — that the modern versions are a deliberate, satanic corruption that "deletes" verses to undermine the faith. That charge takes an honest scholarly disagreement and dresses it as a conspiracy, and it wounds sincere believers who read faithful modern Bibles and love the Lord with all their hearts. A brother with an ESV or an NVI holds the Word of God in his hands. A brother with a King James or a Reina-Valera holds the Word of God in his hands. Conservative candor means standing warmly and without apology in our own tradition, while refusing to unchurch the brothers who stand in another.</p></div>
+    <div class="lang-es"><p>¿Dónde, entonces, se para este curso? Con claridad: nuestras propias Biblias, la Nueva King James y la Reina-Valera Gómez, están en la tradición del Texto Recibido, y sostenemos esa tradición con cariño y hallamos de peso su argumento de la preservación. Pero no haremos de la elección de texto de un hombre una prueba de su fe, y rechazamos los dos extremos que han hecho tanto daño. Rechazamos la afirmación, que a veces se hace, de que el Texto Recibido y la King James son corruptos o el refugio de los ignorantes; son la Palabra probada y honrada que llevó a la iglesia por siglos. Y rechazamos, con igual firmeza, la afirmación opuesta — que las versiones modernas son una corrupción satánica deliberada que "borra" versículos para socavar la fe. Esa acusación toma un desacuerdo erudito honesto y lo viste de conspiración, y hiere a creyentes sinceros que leen Biblias modernas fieles y aman al Señor con todo su corazón. Un hermano con una ESV o una NVI tiene la Palabra de Dios en sus manos. Un hermano con una King James o una Reina-Valera tiene la Palabra de Dios en sus manos. La franqueza conservadora significa mantenerse con cariño y sin disculpa en nuestra propia tradición, mientras rehusamos descomulgar a los hermanos que están en otra.</p></div>
+  </section>
+
+  <section class="teach">
+    <h3><span class="lang-en">8. The Word You Can Trust</span><span class="lang-es">8. La Palabra en que Puedes Confiar</span></h3>
+    <div class="lang-en"><p>And so the second witness rests. Whatever faithful text and translation you hold, you hold the Word of God. The differences between the Received Text and the Critical Text are real, and they reward the careful study of those who are called to that work; but they are few, they are well known, they are printed openly in the margins of our own Bibles, and not one of them lays a finger on the gospel by which you were saved. This is what the preservation of Scripture has always meant — not that God handed down a single, perfect, unquestionable copy, but that He kept His Word so abundantly and so publicly, in so many hands across so many centuries, that His truth could never be lost or buried. The right books. The right words. The second witness is complete. Now a third witness rises to testify — and this one does not speak in ink at all. It speaks in stone and potsherd and buried wall: the world of the Bible, lifted out of the ground. We turn to the evidence of archaeology.</p></div>
+    <div class="lang-es"><p>Y así, el segundo testigo descansa. Cualquiera que sea el texto y la traducción fiel que tengas, tienes la Palabra de Dios. Las diferencias entre el Texto Recibido y el Texto Crítico son reales, y recompensan el estudio cuidadoso de quienes son llamados a esa obra; pero son pocas, son bien conocidas, están impresas abiertamente en los márgenes de nuestras propias Biblias, y ni una sola de ellas pone un dedo sobre el evangelio por el cual fuiste salvo. Esto es lo que la preservación de la Escritura siempre ha significado — no que Dios entregara una sola copia perfecta e incuestionable, sino que guardó su Palabra tan abundante y tan públicamente, en tantas manos a través de tantos siglos, que su verdad nunca podría perderse ni sepultarse. Los libros correctos. Las palabras correctas. El segundo testigo está completo. Ahora un tercer testigo se levanta a testificar — y este no habla en tinta en absoluto. Habla en piedra y en tiesto y en muro sepultado: el mundo de la Biblia, levantado de la tierra. Pasamos a la evidencia de la arqueología.</p></div>
+  </section>
+
+  <!-- ===================== MULTIPLE CHOICE ===================== -->
+  <div class="exam">
+    <h2><span class="lang-en">Review — Multiple Choice</span><span class="lang-es">Repaso — Opción Múltiple</span></h2>
+    <div class="lead"><span class="lang-en">20 questions. Tap an answer and you will see at once whether it is right — with the correct answer and a short explanation. A score of 18 is required to pass.</span><span class="lang-es">20 preguntas. Toca una respuesta y verás de inmediato si es correcta — con la respuesta correcta y una breve explicación. Se requieren 18 para aprobar.</span></div>
+    <div id="mcContainer"></div>
+    <div id="mcResult" class="result"></div>
+    <button class="btn-primary" onclick="resetMC()" style="margin-top:12px;"><span class="lang-en">Reset Exam</span><span class="lang-es">Reiniciar Examen</span></button>
+  </div>
+
+  <!-- ===================== SHORT ANSWER ===================== -->
+  <div class="exam">
+    <h2><span class="lang-en">Written Work — Short Answer</span><span class="lang-es">Trabajo Escrito — Respuesta Corta</span></h2>
+    <div class="sa-note"><span class="lang-en">Required for the Th.M. and M.Div. tracks; optional (but encouraged) for the Certificate track. Write a few sentences; the model answer appears after a real attempt.</span><span class="lang-es">Requerido para las vías Th.M. y M.Div.; opcional (pero recomendado) para la vía de Certificado. Escribe unas cuantas oraciones; la respuesta modelo aparece tras un intento real.</span></div>
+    <div id="saContainer"></div>
+    <button class="btn-primary" onclick="gradeSA()"><span class="lang-en">Check My Answers</span><span class="lang-es">Revisar Mis Respuestas</span></button>
+  </div>
+
+  <div id="completionBanner" class="completion"></div>
+
+  <div class="foot-nav">
+    <a href="CTSBibleUnit5.html">← <span class="lang-en">Previous: Unit 5</span><span class="lang-es">Anterior: Unidad 5</span></a>
+    <a href="index.html"><span class="lang-en">📚 Return to Catalog</span><span class="lang-es">📚 Volver al Catálogo</span></a>
+    <a href="CTSBibleUnit7.html"><span class="lang-en">Next: Unit 7</span><span class="lang-es">Siguiente: Unidad 7</span> →</a>
+  </div>
+
+</div>
+
+<script>
+/* ===== CTS "How We Got the Bible" — Unit 6 — immediate-feedback engine ===== */
+const COURSE_PREFIX = 'cts_bible_u6_';
+function K(s){ return COURSE_PREFIX + s; }
+
+let currentLang = localStorage.getItem('cts_lang') || 'en';
+let track = localStorage.getItem('cts_track') || 'cert';
+let mcAnswers = new Array(20).fill('');
+let kwAnswers = new Array(10).fill('');
+let mcPreviouslyPassed = false;
+let unitPassed = false;
+
+const mcQuestions = [
+  { textEn:`The honest question Unit 6 takes up is:`, textEs:`La pregunta honesta que la Unidad 6 aborda es:`,
+    optionsEn:[`Where the great early manuscripts differ from the later Received Text`,`Whether we have the Word of God at all`,`Whether the Bible was copied`,`The date of the Gospels`],
+    optionsEs:[`Dónde los grandes manuscritos antiguos difieren del Texto Recibido posterior`,`Si tenemos la Palabra de Dios en absoluto`,`Si la Biblia fue copiada`,`La fecha de los Evangelios`],
+    correct:0, explanationEn:`The live question is where the early manuscripts differ from the Received Text.`, explanationEs:`La pregunta viva es dónde los manuscritos antiguos difieren del Texto Recibido.` },
+
+  { textEn:`This question is, in the course's terms:`, textEs:`Esta pregunta es, en los términos del curso:`,
+    optionsEn:[`A test of whether someone is truly saved`,`A settled doctrine`,`A genuine in-house disagreement among Bible-believing Christians`,`A modern invention`],
+    optionsEs:[`Una prueba de si alguien es verdaderamente salvo`,`Una doctrina establecida`,`Un desacuerdo genuino entre cristianos que creen en la Biblia`,`Un invento moderno`],
+    correct:2, explanationEn:`It is a real in-house disagreement, not a test of faith.`, explanationEs:`Es un desacuerdo real entre hermanos, no una prueba de fe.` },
+
+  { textEn:`The first published Greek New Testament (1516) was produced by:`, textEs:`El primer Nuevo Testamento griego publicado (1516) fue producido por:`,
+    optionsEn:[`Westcott and Hort`,`Tischendorf`,`Jerome`,`Erasmus`],
+    optionsEs:[`Westcott y Hort`,`Tischendorf`,`Jerónimo`,`Erasmo`],
+    correct:3, explanationEn:`Erasmus published the first printed Greek NT in 1516.`, explanationEs:`Erasmo publicó el primer NT griego impreso en 1516.` },
+
+  { textEn:`The Greek text refined from Erasmus (by Stephanus, Beza, the Elzevirs) became known as:`, textEs:`El texto griego refinado de Erasmo (por Stephanus, Beza, los Elzevir) llegó a conocerse como:`,
+    optionsEn:[`The Received Text (Textus Receptus)`,`The Critical Text`,`The Dead Sea Scrolls`,`The Vulgate`],
+    optionsEs:[`El Texto Recibido (Textus Receptus)`,`El Texto Crítico`,`Los Rollos del Mar Muerto`,`La Vulgata`],
+    correct:0, explanationEn:`It became the Textus Receptus, the "Received Text."`, explanationEs:`Llegó a ser el Textus Receptus, el "Texto Recibido".` },
+
+  { textEn:`Which translations stand in the Received Text tradition?`, textEs:`¿Cuáles traducciones están en la tradición del Texto Recibido?`,
+    optionsEn:[`The ESV and NIV`,`The King James, the NKJV, and the Reina-Valera (including RVG)`,`Only Catholic Bibles`,`None`],
+    optionsEs:[`La ESV y la NIV`,`La King James, la NKJV, y la Reina-Valera (incluyendo la RVG)`,`Solo las Biblias católicas`,`Ninguna`],
+    correct:1, explanationEn:`The KJV, NKJV, and Reina-Valera (incl. RVG) follow the Received Text.`, explanationEs:`La KJV, NKJV, y Reina-Valera (incl. RVG) siguen el Texto Recibido.` },
+
+  { textEn:`The Reina-Valera Gómez (RVG), this course's Spanish Bible, was made specifically to:`, textEs:`La Reina-Valera Gómez (RVG), la Biblia en español de este curso, fue hecha específicamente para:`,
+    optionsEn:[`Follow the Critical Text`,`Remove the Old Testament`,`Bring the Spanish Bible into fuller agreement with the Received Text tradition`,`Add the Apocrypha`],
+    optionsEs:[`Seguir el Texto Crítico`,`Quitar el Antiguo Testamento`,`Llevar la Biblia en español a un acuerdo más pleno con la tradición del Texto Recibido`,`Añadir los apócrifos`],
+    correct:2, explanationEn:`The RVG was made to align the Spanish Bible with the Received Text.`, explanationEs:`La RVG fue hecha para alinear la Biblia en español con el Texto Recibido.` },
+
+  { textEn:`The Critical (Eclectic) Text, built in the 1800s and after, gives heaviest weight to:`, textEs:`El Texto Crítico (Ecléctico), construido en el siglo XIX y después, da el mayor peso a:`,
+    optionsEn:[`The latest medieval copies`,`The Latin Vulgate`,`The King James`,`The earliest manuscripts (papyri and the great codices)`],
+    optionsEs:[`Las copias medievales más tardías`,`La Vulgata latina`,`La King James`,`Los manuscritos más antiguos (papiros y los grandes códices)`],
+    correct:3, explanationEn:`The Critical Text weights the earliest manuscripts most heavily.`, explanationEs:`El Texto Crítico da el mayor peso a los manuscritos más antiguos.` },
+
+  { textEn:`Most modern versions (ESV, NIV, NVI) are based on:`, textEs:`La mayoría de las versiones modernas (ESV, NIV, NVI) se basan en:`,
+    optionsEn:[`The Received Text`,`The Critical Text`,`The Apocrypha`,`The Majority Text only`],
+    optionsEs:[`El Texto Recibido`,`El Texto Crítico`,`Los apócrifos`,`Solo el Texto Mayoritario`],
+    correct:1, explanationEn:`Most modern versions follow the Critical Text.`, explanationEs:`La mayoría de las versiones modernas siguen el Texto Crítico.` },
+
+  { textEn:`How much of the New Testament do the two texts agree on?`, textEs:`¿En cuánto del Nuevo Testamento concuerdan los dos textos?`,
+    optionsEn:[`About half`,`Almost none`,`The overwhelming majority`,`Only the Gospels`],
+    optionsEs:[`Cerca de la mitad`,`Casi nada`,`La abrumadora mayoría`,`Solo los Evangelios`],
+    correct:2, explanationEn:`The two texts agree across the overwhelming majority of the NT.`, explanationEs:`Los dos textos concuerdan en la abrumadora mayoría del NT.` },
+
+  { textEn:`The differences between the two texts:`, textEs:`Las diferencias entre los dos textos:`,
+    optionsEn:[`Cluster in a relatively small number of places`,`Change the whole gospel`,`Affect every verse`,`Concern only spelling`],
+    optionsEs:[`Se agrupan en un número relativamente pequeño de lugares`,`Cambian todo el evangelio`,`Afectan cada versículo`,`Conciernen solo la ortografía`],
+    correct:0, explanationEn:`The differences gather in a relatively small number of places.`, explanationEs:`Las diferencias se agrupan en un número relativamente pequeño de lugares.` },
+
+  { textEn:`Which cardinal doctrine stands or falls on the textual differences?`, textEs:`¿Cuál doctrina cardinal se levanta o cae sobre las diferencias textuales?`,
+    optionsEn:[`The deity of Christ`,`The Trinity`,`The resurrection`,`None of them`],
+    optionsEs:[`La deidad de Cristo`,`La Trinidad`,`La resurrección`,`Ninguna de ellas`],
+    correct:3, explanationEn:`No cardinal doctrine depends on any disputed reading.`, explanationEs:`Ninguna doctrina cardinal depende de ninguna lectura disputada.` },
+
+  { textEn:`The Critical Text position reasons that, over time, scribes tended to:`, textEs:`La posición del Texto Crítico razona que, con el tiempo, los escribas tendían a:`,
+    optionsEn:[`Add, harmonize, and smooth — rarely to omit`,`Only delete`,`Never change anything`,`Rewrite whole books`],
+    optionsEs:[`Añadir, armonizar y suavizar — rara vez omitir`,`Solo borrar`,`Nunca cambiar nada`,`Reescribir libros enteros`],
+    correct:0, explanationEn:`Scribes tended to add and harmonize more than to omit.`, explanationEs:`Los escribas tendían a añadir y armonizar más que a omitir.` },
+
+  { textEn:`A central Majority Text argument is that the original reading is likely found in:`, textEs:`Un argumento central del Texto Mayoritario es que la lectura original probablemente se halla en:`,
+    optionsEn:[`A few Egyptian manuscripts`,`The great majority of manuscripts the church continuously used`,`The Apocrypha`,`The Latin only`],
+    optionsEs:[`Unos pocos manuscritos egipcios`,`La gran mayoría de los manuscritos que la iglesia usó continuamente`,`Los apócrifos`,`Solo el latín`],
+    correct:1, explanationEn:`The Majority Text argues from the mass of manuscripts the church used.`, explanationEs:`El Texto Mayoritario argumenta desde la masa de manuscritos que la iglesia usó.` },
+
+  { textEn:`A central preservation argument of the Received Text tradition is that:`, textEs:`Un argumento central de preservación de la tradición del Texto Recibido es que:`,
+    optionsEn:[`The true text was lost for 1,500 years`,`Only Egypt preserved the text`,`God would not let the true text be lost to the church until a few copies were recovered`,`The church never had the Word`],
+    optionsEs:[`El texto verdadero se perdió por 1,500 años`,`Solo Egipto preservó el texto`,`Dios no dejaría que el texto verdadero se perdiera para la iglesia hasta que unas pocas copias fueran recuperadas`,`La iglesia nunca tuvo la Palabra`],
+    correct:2, explanationEn:`Preservation: God would not lose the true text to His church for centuries.`, explanationEs:`Preservación: Dios no perdería el texto verdadero para su iglesia por siglos.` },
+
+  { textEn:`The longer ending of Mark (16:9-20) is:`, textEs:`El final más largo de Marcos (16:9-20) está:`,
+    optionsEn:[`Absent from the King James`,`In the Received Text (printed in the KJV and Reina-Valera), footnoted in modern versions`,`In no Bible`,`Part of the Old Testament`],
+    optionsEs:[`Ausente de la King James`,`En el Texto Recibido (impreso en la KJV y la Reina-Valera), con nota en las versiones modernas`,`En ninguna Biblia`,`Parte del Antiguo Testamento`],
+    correct:1, explanationEn:`It is in the Received Text (KJV, Reina-Valera); modern versions footnote it.`, explanationEs:`Está en el Texto Recibido (KJV, Reina-Valera); las versiones modernas lo anotan.` },
+
+  { textEn:`The Comma Johanneum (1 John 5:7-8) is textually notable because it:`, textEs:`La Coma Juanina (1 Juan 5:7-8) es notable textualmente porque:`,
+    optionsEn:[`Appears in every early manuscript`,`Was written by Erasmus`,`Denies the Trinity`,`Stands in the Received Text/KJV/Reina-Valera but is found in only a very few, very late Greek manuscripts`],
+    optionsEs:[`Aparece en cada manuscrito antiguo`,`Fue escrita por Erasmo`,`Niega la Trinidad`,`Está en el Texto Recibido/KJV/Reina-Valera pero se halla en solo unos muy pocos manuscritos griegos muy tardíos`],
+    correct:3, explanationEn:`It is in the Received Text but found in very few, very late Greek copies.`, explanationEs:`Está en el Texto Recibido pero se halla en muy pocas copias griegas muy tardías.` },
+
+  { textEn:`The truth of the Trinity, the unit stresses, rests on:`, textEs:`La verdad de la Trinidad, subraya la unidad, descansa en:`,
+    optionsEn:[`The Comma alone`,`The whole of Scripture that both texts share`,`No verses`,`The Apocrypha`],
+    optionsEs:[`La Coma sola`,`Toda la Escritura que ambos textos comparten`,`Ningún versículo`,`Los apócrifos`],
+    correct:1, explanationEn:`The Trinity is taught throughout the Scriptures both texts share.`, explanationEs:`La Trinidad se enseña por toda la Escritura que ambos textos comparten.` },
+
+  { textEn:`The course's own Bibles (NKJV, RVG) stand in the ______ tradition.`, textEs:`Las propias Biblias del curso (NKJV, RVG) están en la tradición ______.`,
+    optionsEn:[`Received Text`,`Critical Text`,`Vulgate`,`Septuagint`],
+    optionsEs:[`del Texto Recibido`,`del Texto Crítico`,`de la Vulgata`,`de la Septuaginta`],
+    correct:0, explanationEn:`CTS's Bibles (NKJV, RVG) stand in the Received Text tradition.`, explanationEs:`Las Biblias de CTS (NKJV, RVG) están en la tradición del Texto Recibido.` },
+
+  { textEn:`The unit refuses the extreme claim that:`, textEs:`La unidad rechaza la afirmación extrema de que:`,
+    optionsEn:[`The Received Text fed the church for centuries`,`Both texts carry the gospel`,`The differences are few`,`Modern versions are a deliberate satanic corruption that "deletes" verses`],
+    optionsEs:[`El Texto Recibido alimentó a la iglesia por siglos`,`Ambos textos llevan el evangelio`,`Las diferencias son pocas`,`Las versiones modernas son una corrupción satánica deliberada que "borra" versículos`],
+    correct:3, explanationEn:`The unit refuses the conspiracy charge against modern versions.`, explanationEs:`La unidad rechaza la acusación de conspiración contra las versiones modernas.` },
+
+  { textEn:`According to the unit, a believer with an ESV or NVI, and a believer with a KJV or Reina-Valera:`, textEs:`Según la unidad, un creyente con una ESV o NVI, y un creyente con una KJV o Reina-Valera:`,
+    optionsEn:[`Cannot both be saved`,`Hold different gospels`,`Both hold the Word of God`,`Must switch Bibles`],
+    optionsEs:[`No pueden ambos ser salvos`,`Sostienen evangelios diferentes`,`Ambos tienen la Palabra de Dios`,`Deben cambiar de Biblia`],
+    correct:2, explanationEn:`Either faithful translation is the Word of God.`, explanationEs:`Cualquiera de las dos traducciones fieles es la Palabra de Dios.` }
+];
+
+const saQuestions = [
+  { promptEn:`What is the honest question Unit 6 takes up, and how does the unit frame its importance?`,
+    promptEs:`¿Cuál es la pregunta honesta que la Unidad 6 aborda, y cómo enmarca la unidad su importancia?`,
+    keywords:[`receiv`,`recib`,`differ`,`difer`,`disagree`,`desacuerd`,`gospel`,`evangel`],
+    modelEn:`The unit takes up the difference between the later Received Text, behind the King James and the Reina-Valera, and the earlier manuscripts favored by the Critical Text. It frames this as a genuine in-house disagreement among Bible-believing Christians, not a question of whether we have the Word of God. Both texts carry the whole gospel, so the question is real but never touches salvation.`,
+    modelEs:`La unidad toma la diferencia entre el Texto Recibido posterior, detrás de la King James y la Reina-Valera, y los manuscritos más antiguos que favorece el Texto Crítico. La enmarca como un desacuerdo genuino entre cristianos que creen en la Biblia, no como una pregunta de si tenemos la Palabra de Dios. Ambos textos llevan todo el evangelio, así que la pregunta es real pero nunca toca la salvación.` },
+
+  { promptEn:`Trace how we came to have two printed Greek texts.`,
+    promptEs:`Traza cómo llegamos a tener dos textos griegos impresos.`,
+    keywords:[`erasm`,`receiv`,`recib`,`print`,`imprent`,`byzantine`,`bizantin`,`modern`],
+    modelEn:`For centuries the New Testament was hand-copied, and most surviving copies are Byzantine. When printing came, Erasmus produced the first published Greek New Testament in 1516, refined by others into the Received Text behind the King James and the Reina-Valera. Later, the discovery of the great early manuscripts led scholars like Westcott and Hort to build the Critical Text, giving weight to the earliest witnesses, which underlies most modern versions.`,
+    modelEs:`Por siglos el Nuevo Testamento se copió a mano, y la mayoría de las copias que sobreviven son bizantinas. Cuando llegó la imprenta, Erasmo produjo el primer Nuevo Testamento griego publicado en 1516, refinado por otros en el Texto Recibido detrás de la King James y la Reina-Valera. Después, el descubrimiento de los grandes manuscritos antiguos llevó a eruditos como Westcott y Hort a construir el Texto Crítico, dando peso a los testigos más antiguos, que subyace a la mayoría de las versiones modernas.` },
+
+  { promptEn:`Where do the two texts agree, and where do they differ? Why does the difference not threaten the gospel?`,
+    promptEs:`¿Dónde concuerdan los dos textos, y dónde difieren? ¿Por qué la diferencia no amenaza el evangelio?`,
+    keywords:[`agree`,`concuerd`,`differ`,`difer`,`doctrin`,`deity`,`deidad`,`resurrec`],
+    modelEn:`The two texts agree in the overwhelming majority of the New Testament; the differences cluster in a relatively small number of places, such as the longer ending of Mark, the woman caught in adultery, and some fuller verses in the Received Text. Not one cardinal doctrine — the deity of Christ, the Trinity, the resurrection, salvation by grace — depends on any of these, since each is taught many times in passages both texts share.`,
+    modelEs:`Los dos textos concuerdan en la abrumadora mayoría del Nuevo Testamento; las diferencias se agrupan en un número relativamente pequeño de lugares, como el final más largo de Marcos, la mujer sorprendida en adulterio, y algunos versículos más completos en el Texto Recibido. Ni una sola doctrina cardinal — la deidad de Cristo, la Trinidad, la resurrección, la salvación por gracia — depende de ninguna de estas, pues cada una se enseña muchas veces en pasajes que ambos textos comparten.` },
+
+  { promptEn:`State the case for the Critical Text as its defenders make it.`,
+    promptEs:`Expón el caso del Texto Crítico como lo hacen sus defensores.`,
+    keywords:[`earli`,`antigu`,`manuscript`,`manuscrit`,`harmoniz`,`armoniz`,`scrib`,`escrib`],
+    modelEn:`Its aim is to recover as closely as possible the exact wording the apostles wrote. Its guiding conviction is that the earliest manuscripts, being fewer copies removed from the originals, are generally the most reliable. Scribes over time tended to add, harmonize, and smooth rather than omit, so where the earliest copies are shorter or harder, that is often the original. This is the majority view in scholarship, held by many Bible-believing Christians.`,
+    modelEs:`Su meta es recuperar lo más cercanamente posible la redacción exacta que escribieron los apóstoles. Su convicción rectora es que los manuscritos más antiguos, al estar a menos copias de los originales, son generalmente los más confiables. Los escribas con el tiempo tendían a añadir, armonizar y suavizar en vez de omitir, así que donde las copias más antiguas son más cortas o más difíciles, eso a menudo es lo original. Esta es la visión mayoritaria en la erudición, sostenida por muchos cristianos que creen en la Biblia.` },
+
+  { promptEn:`State the case for the Received/Majority Text as its defenders make it.`,
+    promptEs:`Expón el caso del Texto Recibido/Mayoritario como lo hacen sus defensores.`,
+    keywords:[`majorit`,`mayorit`,`preserv`,`manuscript`,`manuscrit`,`church`,`iglesia`,`original`],
+    modelEn:`There are two strands. The Majority Text argument is that the reading found in the great majority of manuscripts, which the church continuously used, is likely original — why trust a few Egyptian copies over the thousands the church actually read? The preservation argument is that God promised to preserve His Word, so it would be strange if the true text were lost to the church for 1,500 years until a few copies were recovered. This too is held by serious believing Christians.`,
+    modelEs:`Hay dos vertientes. El argumento del Texto Mayoritario es que la lectura hallada en la gran mayoría de los manuscritos, que la iglesia usó continuamente, es probablemente la original — ¿por qué confiar en unas pocas copias egipcias sobre los miles que la iglesia en verdad leyó? El argumento de la preservación es que Dios prometió preservar su Palabra, así que sería extraño que el texto verdadero se perdiera para la iglesia por 1,500 años hasta que unas pocas copias fueran recuperadas. Esto también lo sostienen cristianos serios que creen.` },
+
+  { promptEn:`Using the Comma Johanneum or the ending of Mark, show how the two approaches reason — and why the doctrine is secure.`,
+    promptEs:`Usando la Coma Juanina o el final de Marcos, muestra cómo razonan los dos enfoques — y por qué la doctrina está segura.`,
+    keywords:[`comma`,`coma`,`trinit`,`trinid`,`mark`,`marc`,`doctrin`,`receiv`],
+    modelEn:`The longer ending of Mark and the Comma Johanneum (1 John 5:7-8) stand in the Received Text, the King James, and the Reina-Valera, but the Comma is found in only a very few late Greek manuscripts, which is why the Critical Text omits it. Yet the truth of the Trinity is taught throughout the Scriptures both texts share — Matthew 28:19, John 1, 2 Corinthians 13:14 — so the doctrine loses nothing whichever reading is printed.`,
+    modelEs:`El final más largo de Marcos y la Coma Juanina (1 Juan 5:7-8) están en el Texto Recibido, la King James y la Reina-Valera, pero la Coma se halla en solo unos muy pocos manuscritos griegos tardíos, por lo cual el Texto Crítico la omite. Sin embargo, la verdad de la Trinidad se enseña por toda la Escritura que ambos textos comparten — Mateo 28:19, Juan 1, 2 Corintios 13:14 — así que la doctrina no pierde nada cualquiera que sea la lectura impresa.` },
+
+  { promptEn:`What text tradition does CTS use, and what two extremes does the unit refuse?`,
+    promptEs:`¿Qué tradición textual usa CTS, y qué dos extremos rechaza la unidad?`,
+    keywords:[`receiv`,`recib`,`refus`,`rechaz`,`extrem`,`corrupt`,`modern`,`preserv`],
+    modelEn:`CTS's own Bibles, the New King James and the Reina-Valera Gómez, stand in the Received Text tradition, whose preservation argument the course finds weighty. But the unit refuses two extremes: the claim that the Received Text and King James tradition are corrupt or ignorant, and the opposite claim that modern versions are a deliberate satanic corruption that deletes verses. Both charges mistake an honest disagreement for something worse.`,
+    modelEs:`Las propias Biblias de CTS, la Nueva King James y la Reina-Valera Gómez, están en la tradición del Texto Recibido, cuyo argumento de preservación el curso considera de peso. Pero la unidad rechaza dos extremos: la afirmación de que el Texto Recibido y la tradición King James son corruptos o ignorantes, y la afirmación opuesta de que las versiones modernas son una corrupción satánica deliberada que borra versículos. Ambas acusaciones confunden un desacuerdo honesto con algo peor.` },
+
+  { promptEn:`Explain the unit's pastoral conclusion about believers who use different Bibles.`,
+    promptEs:`Explica la conclusión pastoral de la unidad sobre los creyentes que usan Biblias diferentes.`,
+    keywords:[`believ`,`creyent`,`word`,`palabra`,`tradition`,`tradic`,`modern`,`recib`],
+    modelEn:`The unit teaches that a believer with an ESV or an NVI holds the Word of God, and a believer with a King James or a Reina-Valera holds the Word of God. The choice of text is not a test of a person's faith. Conservative candor means standing warmly in our own Received Text tradition without unchurching brothers who read faithful modern Bibles.`,
+    modelEs:`La unidad enseña que un creyente con una ESV o una NVI tiene la Palabra de Dios, y un creyente con una King James o una Reina-Valera tiene la Palabra de Dios. La elección del texto no es una prueba de la fe de una persona. La franqueza conservadora significa mantenerse con cariño en nuestra propia tradición del Texto Recibido sin descomulgar a los hermanos que leen Biblias modernas fieles.` },
+
+  { promptEn:`Summarize the anchor doctrine that holds through this entire debate.`,
+    promptEs:`Resume la doctrina ancla que se mantiene a través de todo este debate.`,
+    keywords:[`preserv`,`word`,`palabra`,`gospel`,`evangel`,`faithful`,`fiel`,`differ`],
+    modelEn:`The anchor is that God preserved His Word — not by handing us a single flawless manuscript, but so richly and so publicly that His truth could never be lost. Whichever faithful text and translation one holds, one holds the Word of God, and not one of the textual differences touches the gospel by which we are saved. The question is never whether we have the Word, only which reading to print in a few places.`,
+    modelEs:`El ancla es que Dios preservó su Palabra — no entregándonos un solo manuscrito sin falla, sino tan rica y tan públicamente que su verdad nunca podría perderse. Cualquiera que sea el texto y la traducción fiel que uno tenga, uno tiene la Palabra de Dios, y ni una sola de las diferencias textuales toca el evangelio por el cual somos salvos. La pregunta nunca es si tenemos la Palabra, solo cuál lectura imprimir en unos pocos lugares.` },
+
+  { promptEn:`In your own words, how should this unit shape the way you speak about Bible translations with other Christians?`,
+    promptEs:`Con tus palabras, ¿cómo debe esta unidad formar la manera en que hablas sobre las traducciones de la Biblia con otros cristianos?`,
+    keywords:[`charit`,`carid`,`receiv`,`recib`,`convict`,`convicc`,`corrupt`,`modern`],
+    modelEn:`I should speak with both conviction and charity: holding my own Received Text Bible with confidence while treating the text question as a real but in-house matter, not a test of faith. I should refuse both the claim that the King James tradition is corrupt and the claim that modern versions are a satanic plot, and I should assure any believer that a faithful translation, whichever family it follows, is the preserved Word of God.`,
+    modelEs:`Debo hablar con convicción y con caridad: sosteniendo con confianza mi propia Biblia del Texto Recibido, mientras trato la cuestión del texto como un asunto real pero entre hermanos, no como una prueba de fe. Debo rechazar tanto la afirmación de que la tradición King James es corrupta como la afirmación de que las versiones modernas son un complot satánico, y debo asegurar a todo creyente que una traducción fiel, cualquiera que sea la familia que siga, es la Palabra de Dios preservada.` }
+];
+
+function saveState(){
+  try{
+    localStorage.setItem(K('mc'), JSON.stringify(mcAnswers));
+    localStorage.setItem(K('sa'), JSON.stringify(kwAnswers));
+    localStorage.setItem(K('mcpass'), mcPreviouslyPassed ? '1' : '0');
+    localStorage.setItem('cts_track', track);
+    localStorage.setItem('cts_lang', currentLang);
+  }catch(e){}
+}
+function restoreState(){
+  try{ const a = JSON.parse(localStorage.getItem(K('mc'))); if(Array.isArray(a) && a.length===20) mcAnswers = a; }catch(e){}
+  try{ const b = JSON.parse(localStorage.getItem(K('sa'))); if(Array.isArray(b) && b.length===10) kwAnswers = b; }catch(e){}
+  mcPreviouslyPassed = localStorage.getItem(K('mcpass')) === '1';
+}
+
+function applyLang(){
+  document.body.className = 'lang-' + currentLang;
+  document.getElementById('langToggleBtn').textContent = currentLang === 'en' ? 'Español' : 'English';
+}
+function toggleLang(){
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  applyLang(); renderMC(); updateMCResult(); renderSA(); saveState();
+}
+
+function setTrack(t){ track = t; saveState(); updateTrackUI(); updateCompletion(); }
+function updateTrackUI(){
+  ['cert','assoc','thm','mdiv'].forEach(function(t){
+    const el = document.getElementById('track-' + t);
+    if(el) el.classList.toggle('active', track === t);
+  });
+}
+
+/* Immediate-feedback MC: the first tap on a question locks it, shows right/wrong,
+   the correct answer, and a short explanation at once. A running score is shown
+   below; when all 20 are answered a pass/fail verdict appears. Reset starts over. */
+function renderMC(){
+  const container = document.getElementById('mcContainer');
+  container.innerHTML = '';
+  const allAnswered = mcAnswers.filter(function(a){ return !!a; }).length === 20;
+  mcQuestions.forEach(function(q, idx){
+    const answered = !!mcAnswers[idx];
+    const div = document.createElement('div'); div.className = 'question';
+    const p = document.createElement('p'); p.className = 'qtext';
+    p.textContent = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+    div.appendChild(p);
+    const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+    const correctLetter = String.fromCharCode(65 + q.correct);
+    options.forEach(function(opt, optIdx){
+      const letter = String.fromCharCode(65 + optIdx);
+      const btn = document.createElement('button'); btn.className = 'option';
+      btn.textContent = letter + '. ' + opt;
+      if(answered){
+        if(optIdx === q.correct) btn.classList.add('correct');
+        else if(mcAnswers[idx] === letter) btn.classList.add('wrong');
+        btn.disabled = true; btn.style.cursor = 'default';
+      } else {
+        if(mcAnswers[idx] === letter){ btn.style.background = '#efe7d2'; btn.style.borderColor = '#d4af37'; btn.style.fontWeight = '600'; }
+        btn.onclick = function(){
+          mcAnswers[idx] = letter;
+          saveState();
+          renderMC();
+          updateMCResult();
+        };
+      }
+      div.appendChild(btn);
+    });
+    if(answered){
+      const fb = document.createElement('div');
+      const exp = currentLang === 'en' ? q.explanationEn : q.explanationEs;
+      if(mcAnswers[idx] === correctLetter){
+        fb.className = 'feedback-text correct';
+        fb.textContent = (currentLang === 'en' ? '\u2713 Correct! ' : '\u2713 \u00a1Correcto! ') + exp;
+      } else {
+        fb.className = 'feedback-text incorrect';
+        fb.textContent = (currentLang === 'en'
+          ? ('\u2717 Incorrect. Correct answer: ' + correctLetter + '. ')
+          : ('\u2717 Incorrecto. Respuesta correcta: ' + correctLetter + '. ')) + exp;
+      }
+      div.appendChild(fb);
+    }
+    container.appendChild(div);
+  });
+}
+
+function updateMCResult(){
+  let answered = 0, score = 0;
+  mcQuestions.forEach(function(q, idx){
+    if(mcAnswers[idx]){
+      answered++;
+      if(mcAnswers[idx] === String.fromCharCode(65 + q.correct)) score++;
+    }
+  });
+  const res = document.getElementById('mcResult');
+  if(answered === 0){ res.style.display = 'none'; res.className = 'result'; res.textContent = ''; updateCompletion(); return; }
+  if(answered < 20){
+    res.className = 'result progress';
+    res.textContent = currentLang === 'en'
+      ? ('Answered ' + answered + '/20 \u00b7 ' + score + ' correct so far.')
+      : ('Respondidas ' + answered + '/20 \u00b7 ' + score + ' correctas hasta ahora.');
+  } else {
+    const pass = score >= 18;
+    if(pass) mcPreviouslyPassed = true;
+    res.className = 'result ' + (pass ? 'pass' : 'fail');
+    res.textContent = currentLang === 'en'
+      ? ('You scored ' + score + '/20. ' + (pass ? 'Passed (18 required).' : 'Not yet \u2014 18 required. Tap "Reset Exam" to try again.'))
+      : ('Obtuviste ' + score + '/20. ' + (pass ? 'Aprobado (se requieren 18).' : 'A\u00fan no \u2014 se requieren 18. Toca "Reiniciar Examen" para intentarlo de nuevo.'));
+  }
+  saveState();
+  updateCompletion();
+}
+
+function resetMC(){
+  mcAnswers = new Array(20).fill('');
+  mcPreviouslyPassed = false;
+  saveState();
+  renderMC();
+  const res = document.getElementById('mcResult');
+  res.style.display = 'none'; res.className = 'result'; res.textContent = '';
+  updateCompletion();
+}
+
+function kwHit(answer, stem){
+  const norm = (answer || '').toLowerCase();
+  const tokens = norm.split(/[^a-z\u00e0-\u00ff]+/i).filter(Boolean);
+  return tokens.some(function(t){ return t.indexOf(stem) === 0; });
+}
+
+function saPassState(){
+  let allPass = true;
+  saQuestions.forEach(function(q, idx){
+    const ans = (kwAnswers[idx] || '').trim();
+    if(ans.length < 100){ allPass = false; return; }
+    let hits = 0;
+    q.keywords.forEach(function(k){ if(kwHit(ans, k)) hits++; });
+    if(hits < 3) allPass = false;
+  });
+  return allPass;
+}
+
+function gradeSA(){
+  saQuestions.forEach(function(q, idx){
+    const ans = (kwAnswers[idx] || '').trim();
+    const fb = document.getElementById('sa-fb-' + idx);
+    if(!fb) return;
+    fb.style.display = 'block';
+    if(ans.length < 100){
+      fb.className = 'feedback-text incorrect';
+      fb.textContent = currentLang === 'en'
+        ? 'Please write at least a few sentences (about 100 characters) before the model answer is shown.'
+        : 'Por favor escribe al menos unas cuantas oraciones (unos 100 caracteres) antes de mostrar la respuesta modelo.';
+      return;
+    }
+    let hits = 0;
+    q.keywords.forEach(function(k){ if(kwHit(ans, k)) hits++; });
+    const pass = hits >= 3;
+    fb.className = 'feedback-text ' + (pass ? 'correct' : 'incorrect');
+    const model = currentLang === 'en' ? q.modelEn : q.modelEs;
+    const label = pass
+      ? (currentLang === 'en' ? ('\u2713 Sufficient (' + hits + ' key ideas). ') : ('\u2713 Suficiente (' + hits + ' ideas clave). '))
+      : (currentLang === 'en' ? ('Keep developing (' + hits + '/3 key ideas). ') : ('Sigue desarrollando (' + hits + '/3 ideas clave). '));
+    const modelLabel = currentLang === 'en' ? 'Model answer: ' : 'Respuesta modelo: ';
+    fb.innerHTML = '<strong>' + label + '</strong><br><em>' + modelLabel + '</em>' + model;
+  });
+  saveState(); updateCompletion();
+}
+
+function renderSA(){
+  const c = document.getElementById('saContainer');
+  c.innerHTML = '';
+  saQuestions.forEach(function(q, idx){
+    const div = document.createElement('div'); div.className = 'question';
+    const p = document.createElement('p'); p.className = 'qtext';
+    p.textContent = (idx + 1) + '. ' + (currentLang === 'en' ? q.promptEn : q.promptEs);
+    div.appendChild(p);
+    const ta = document.createElement('textarea');
+    ta.id = 'sa-input-' + idx; ta.rows = 4; ta.value = kwAnswers[idx] || '';
+    ta.placeholder = currentLang === 'en' ? 'Write your answer...' : 'Escribe tu respuesta...';
+    ta.oninput = function(){ kwAnswers[idx] = ta.value; saveState(); };
+    div.appendChild(ta);
+    const fb = document.createElement('div');
+    fb.id = 'sa-fb-' + idx; fb.className = 'feedback-text'; fb.style.display = 'none';
+    div.appendChild(fb);
+    c.appendChild(div);
+  });
+}
+
+function updateCompletion(){
+  const complete = (track === 'cert' || track === 'assoc') ? mcPreviouslyPassed : (mcPreviouslyPassed && saPassState());
+  unitPassed = complete;
+  const banner = document.getElementById('completionBanner');
+  if(complete){
+    const trackName = track === 'cert' ? (currentLang === 'en' ? 'Certificate' : 'de Certificado')
+                    : track === 'assoc' ? (currentLang === 'en' ? 'Associate' : 'de Asociado')
+                    : track === 'thm'  ? 'Th.M.' : 'M.Div.';
+    banner.style.display = 'block';
+    banner.textContent = currentLang === 'en'
+      ? ('\u2705 Unit 6 complete on the ' + trackName + ' track. Well done.')
+      : ('\u2705 Unidad 6 completada en la v\u00eda ' + trackName + '. Bien hecho.');
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  restoreState();
+  applyLang();
+  updateTrackUI();
+  renderMC();
+  updateMCResult();
+  renderSA();
+  updateCompletion();
+});
+</script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

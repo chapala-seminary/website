@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deacon Family Ministry Plan — Unit 10</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<!-- CTS Deacon Family Ministry Plan — Unit 10 (final). Built on Cook's validated Q24 masters engine (ported from Bible Characters Unit 3). Bilingual EN (NKJV) / ES (RVG). Author: Dr. Wayne Cook. Spanish + SA keywords/models pending native RVG / author spot-check. -->
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>View Certificate →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Deacon Family Ministry Plan — Unit 10: Sustaining the Plan — Challenges and Evaluation</span><span class="lang-es">📖 Plan de Ministerio Familiar del Diácono — Unidad 10: Sosteniendo el Plan — Desafíos y Evaluación</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Therefore, my beloved brethren, be steadfast, immovable, always abounding in the work of the Lord, knowing that your labor is not in vain in the Lord." — 1 Corinthians 15:58 (NKJV)</span><span class="lang-es">«Así que, hermanos míos amados, estad firmes y constantes, creciendo en la obra del Señor siempre, sabiendo que vuestro trabajo en el Señor no es en vano.» — 1 Corintios 15:58 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="cert">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>We have come a long way. We began with the biblical foundations of the diaconate and the character a deacon must have; we saw the vision and definition of the Deacon Family Ministry Plan, and how a church organizes it; and we followed the deacon through his ongoing care, his ministry of discipleship and evangelism, his work in times of crisis, and the meetings and the partnership with the pastor that support him. Now, in this final unit, we come to the last and most practical question of all: how is such a Plan to be sustained? For it is one thing to begin a good work, and quite another to keep it alive through the years.</p>
+<p><strong>Subject:</strong> sustaining the Deacon Family Ministry Plan through the years &mdash; its challenges and its evaluation.</p>
+<p><strong>Proposition:</strong> The Plan endures only when a church honestly faces the challenges that erode it, takes deliberate steps to sustain it, evaluates it faithfully, and presses on in the assurance that such labor is never in vain.</p>
+<p>We will look at why good plans fade, the challenges that threaten this one, how to sustain it, how to evaluate and renew it, and the reward that makes the whole labor worthwhile.</p>
+<h2>I. Why Good Plans Fade</h2>
+<p>Good plans rarely fail at their birth; they fail by fading. A plan is launched with enthusiasm, but enthusiasm cools. The founding deacons grow tired or move away; new members and new deacons arrive who never caught the original fire; and slowly, almost without anyone deciding it, the Plan becomes a name on paper that no longer touches lives. The great enemy of the Plan, then, is not usually open opposition but quiet neglect. Nothing dramatic kills it; it simply erodes.</p>
+<div class="illustration"><strong>Illustration.</strong> A fire that is not tended will go out, however brightly it once burned; a garden left to itself is soon lost to weeds. So it is with this Plan. It must be tended, or it will quietly die. To sustain it is not some optional extra but the very condition of its survival. A church that wants the Plan to last must therefore give thought, from the very beginning, not only to starting it but to keeping it alive.</div>
+<p>This is no reason for discouragement; it is simply realism. The same is true of every living thing &mdash; a marriage, a friendship, a church itself. What is alive must be fed, or it dies. The deacons who understand this from the outset will not be surprised when the Plan needs renewing, but will renew it as a matter of course.</p>
+<h2>II. The Common Challenges</h2>
+<p>Several challenges threaten the Plan over the years, and simply to name them is the first step toward meeting them. The first is <strong>neglect and drift</strong>, as deacons grow slack and visits grow rare until families are forgotten again. The second is <strong>lost vision</strong>, as newer deacons and members who never grasped the <em>why</em> come to treat the Plan as mere routine without heart &mdash; much like the church that left its first love (Revelation 2:4). The third is <strong>overload and burnout</strong>, when too many families are laid on too few deacons, and good men wear out and quit. The fourth is <strong>untrained deacons</strong>, new men set to the work without being taught how, who then do it badly. The fifth is <strong>discouragement</strong>, for the work is hard, often unseen, and sometimes unthanked, and a deacon can lose heart. The sixth is <strong>turnover</strong>, as deacons rotate off and pastors change, and the Plan loses its memory and continuity. And the seventh, the deadliest of all, is <strong>cold formalism</strong> &mdash; when the Plan is still carried out, but the love has gone out of it, and it becomes a system instead of a ministry.</p>
+<p>Notice that nearly all of these challenges share a single root: they are failures not of structure but of heart and attention. The Plan does not usually collapse because its design was faulty, but because the people running it slowly stopped caring as they once did. That is good news, in a way, for a failure of heart can be repented of and a lapse of attention can be corrected. The remedies, therefore, are less about machinery than about renewal.</p>
+<h2>III. Sustaining the Plan: Meeting the Challenges</h2>
+<p>Against each of these challenges there is a remedy, and a wise church applies them steadily. It must <strong>keep casting the vision</strong>, teaching and re-teaching the <em>why</em> to every new deacon and to the whole church, again and again; this very course is one such re-casting, and a Plan whose vision is kept fresh will not drift into empty routine. It must <strong>train new deacons</strong>, passing the work on deliberately, so that new men are taught, mentored, and brought alongside the experienced, and the Plan's skill and heart are handed down. It must <strong>keep the loads manageable</strong>, enlisting and training more deacons as the church grows and adjusting assignments, so that no deacon is crushed and no family is dropped.</p>
+<p>This passing-on is best done not in a classroom only but shoulder to shoulder. A seasoned deacon who takes a younger man with him on his visits teaches more in a month than a manual could in a year. The new deacon sees how it is done &mdash; the gentleness, the listening, the prayer at the bedside &mdash; and catches not only the method but the spirit. In this way the heart of the Plan, and not merely its mechanics, passes from one generation of deacons to the next.</p>
+<p>It must <strong>encourage and refresh the deacons</strong>, for the meeting is the place where weary men are strengthened, where fruit is celebrated and burdens shared, and where discouragement is met with brotherly support; &ldquo;let us not grow weary while doing good, for in due season we shall reap if we do not lose heart&rdquo; (Galatians 6:9). It must <strong>lead the Plan faithfully</strong>, the pastor and a faithful head deacon keeping watch that it does not quietly lapse. And it must <strong>undergird the whole thing with prayer</strong>, for a Plan sustained by human effort alone will fail, while one bathed in prayer and carried by the Spirit of God will endure.</p>
+<p>None of these remedies is complicated, and that is the point. Sustaining the Plan does not call for clever new programs but for the same humble faithfulness that built it &mdash; vision kept warm, men kept trained and encouraged, loads kept fair, and the whole thing kept under prayer. A church that simply keeps doing these things will find the Plan still alive and still blessing its people a generation from now.</p>
+<h2>IV. Evaluating and Renewing the Plan</h2>
+<p>To sustain the Plan, a church must also evaluate it honestly and regularly, for what is never measured is soon neglected. The Scripture commends exactly this watchfulness over those in our care.</p>
+<div class="scripture">Be diligent to know the state of your flocks, and attend to your herds. (Proverbs 27:23, NKJV)</div>
+<p>The good shepherd checks the condition of his flock; just so, the church must regularly check the condition of its care.</p>
+<div class="illustration"><strong>Illustration.</strong> A man who feels fine may skip his checkups for years; but the doctor who examines him regularly catches the silent trouble while it can still be cured, whereas the man who waits until he feels the pain has often waited too long. A church that never evaluates its Plan is like that man, with the trouble growing unseen until it is advanced. Regular evaluation is the checkup that keeps the Plan healthy.</div>
+<p>Such evaluation must be done in honesty but also in grace. Its purpose is never to shame a struggling deacon or to keep a scorecard of failures, but to find the gaps and fill them, so that no family is lost. Handled in that spirit, evaluation is not a threat the deacons dread but a help they welcome &mdash; the means by which the whole body keeps its promise that no one will be forgotten.</p>
+<p>What does a church ask when it evaluates? The honest questions: Is every family still assigned? Is each one actually being contacted and visited? Are real needs being met? Are any deacons overloaded, or any grown slack? Are new members assigned promptly? Are the pastor and deacons still working together well? And by what standard does it measure the answers? Not by activity alone &mdash; not merely how many visits were logged &mdash; but by fruit: are people actually being loved and cared for? A thick stack of reports is not the goal; cared-for souls are. With the evaluation done, the church renews: assignments are redrawn, deacons are added or retrained, and the whole body recommits. Wise churches make this a regular practice, for an honest yearly review and rededication will keep the Plan from ever drifting far.</p>
+<h2>V. The Reward of Faithfulness</h2>
+<p>All of this &mdash; the sustaining, the evaluating, the pressing on &mdash; asks much of a church and of its deacons. Is it worth it? It is, beyond all measure. It is worth it, first, because souls are worth it. Every family kept from slipping away, every burden carried, every soul won and discipled, is of infinite worth to God; and the Plan is, in the end, simply the love of Christ organized so that none of His people is forgotten. And it is worth it, second, because the labor is not in vain, for the deacon labors not for the praise of men but for the eye of his Master.</p>
+<p>And the fruit of such faithfulness reaches further than any deacon will see in his lifetime. The lonely widow who was visited, the wandering young man who was sought, the family that was carried through its darkest week &mdash; these are touched in ways that ripple on for generations, into children and grandchildren who grew up knowing that the church loved them. A deacon plants trees under whose shade he may never sit; but they grow, and they bless, long after he is gone.</p>
+<div class="scripture">Well done, good and faithful servant; you were faithful over a few things, I will make you ruler over many things. Enter into the joy of your lord. (Matthew 25:21, NKJV)</div>
+<p>This is the word that every faithful deacon longs one day to hear. He may labor here unseen and unthanked, but he labors for his Master, and when the Chief Shepherd appears he will receive the crown of glory that does not fade away (1 Peter 5:4). Let no deacon, then, grow weary. The work is hard, but it is holy; it is often hidden, but it is never wasted; and its reward, in the joy of the Lord, is sure.</p>
+<h2>Conclusion</h2>
+<p>We have reached the end of our journey together. We have seen what a deacon is and what he must be; we have traced the vision, the definition, and the building of the Plan; we have followed the deacon into homes and hospitals, into discipleship and evangelism, into crisis and confidence; we have watched the deacons gather and uphold their pastor; and we have learned, at the last, how to keep it all alive. Yet all of it comes down to one thing. The Deacon Family Ministry Plan is not, finally, a program or a system. It is love &mdash; the love of Christ, who came not to be served but to serve, carried through His servants into every family of His church, so that no one is forgotten and no one is left alone.</p>
+<p>If you are a deacon, or one day will be, let this be your aim: not to fill an office, but to love a people; not to hold a title, but to wash feet; not merely to run a plan, but to be, to a handful of families, the very hands of Christ. Do that, faithfully and to the end, and you will have done something that will outlast every building and budget &mdash; you will have loved as your Lord loved.</p>
+<p>&ldquo;Therefore, my beloved brethren, be steadfast, immovable, always abounding in the work of the Lord, knowing that your labor is not in vain in the Lord.&rdquo; May God raise up faithful deacons who will take up this towel, this Plan, this love, and carry it well &mdash; until the Chief Shepherd comes.</p></div>
+<div class="lang-es"><p>Hemos recorrido un largo camino. Comenzamos con los fundamentos b&iacute;blicos del diaconado y el car&aacute;cter que un di&aacute;cono debe tener; vimos la visi&oacute;n y la definici&oacute;n del Plan de Ministerio Familiar del Di&aacute;cono, y c&oacute;mo una iglesia lo organiza; y seguimos al di&aacute;cono a trav&eacute;s de su cuidado continuo, su ministerio de discipulado y evangelismo, su obra en tiempos de crisis, y las reuniones y la sociedad con el pastor que lo sostienen. Ahora, en esta unidad final, llegamos a la &uacute;ltima y m&aacute;s pr&aacute;ctica pregunta de todas: &iquest;c&oacute;mo se ha de sostener tal Plan? Porque una cosa es comenzar una buena obra, y otra muy distinta mantenerla viva a trav&eacute;s de los a&ntilde;os.</p>
+<p><strong>Tema:</strong> sostener el Plan de Ministerio Familiar del Di&aacute;cono a trav&eacute;s de los a&ntilde;os &mdash; sus desaf&iacute;os y su evaluaci&oacute;n.</p>
+<p><strong>Proposici&oacute;n:</strong> El Plan perdura solo cuando una iglesia enfrenta honestamente los desaf&iacute;os que lo erosionan, toma pasos deliberados para sostenerlo, lo eval&uacute;a fielmente, y sigue adelante en la certeza de que tal labor nunca es en vano.</p>
+<p>Veremos por qu&eacute; se desvanecen los buenos planes, los desaf&iacute;os que amenazan a este, c&oacute;mo sostenerlo, c&oacute;mo evaluarlo y renovarlo, y la recompensa que hace que toda la labor valga la pena.</p>
+<h2>I. Por Qu&eacute; se Desvanecen los Buenos Planes</h2>
+<p>Los buenos planes rara vez fallan en su nacimiento; fallan desvaneci&eacute;ndose. Un plan se lanza con entusiasmo, pero el entusiasmo se enfr&iacute;a. Los di&aacute;conos fundadores se cansan o se mudan; llegan miembros nuevos y di&aacute;conos nuevos que nunca captaron el fuego original; y lentamente, casi sin que nadie lo decida, el Plan se convierte en un nombre en el papel que ya no toca vidas. El gran enemigo del Plan, pues, no es usualmente la oposici&oacute;n abierta sino el callado descuido. Nada dram&aacute;tico lo mata; sencillamente se erosiona.</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> Un fuego que no se atiza se apagar&aacute;, por brillante que haya ardido alguna vez; un jard&iacute;n dejado a s&iacute; mismo pronto se pierde entre la maleza. As&iacute; es con este Plan. Debe ser atendido, o morir&aacute; calladamente. Sostenerlo no es alg&uacute;n extra opcional sino la condici&oacute;n misma de su supervivencia. Una iglesia que quiere que el Plan dure debe, por tanto, dar consideraci&oacute;n, desde el mismo comienzo, no solo a empezarlo sino a mantenerlo vivo.</div>
+<p>Esto no es raz&oacute;n para el desaliento; es sencillamente realismo. Lo mismo es cierto de toda cosa viva &mdash; un matrimonio, una amistad, la iglesia misma. Lo que est&aacute; vivo debe ser alimentado, o muere. Los di&aacute;conos que entienden esto desde el principio no se sorprender&aacute;n cuando el Plan necesite renovaci&oacute;n, sino que lo renovar&aacute;n como cosa natural.</p>
+<h2>II. Los Desaf&iacute;os Comunes</h2>
+<p>Varios desaf&iacute;os amenazan al Plan a trav&eacute;s de los a&ntilde;os, y sencillamente nombrarlos es el primer paso para enfrentarlos. El primero es el <strong>descuido y la deriva</strong>, cuando los di&aacute;conos se vuelven flojos y las visitas se vuelven raras hasta que las familias son olvidadas de nuevo. El segundo es la <strong>visi&oacute;n perdida</strong>, cuando di&aacute;conos y miembros m&aacute;s nuevos que nunca captaron el <em>porqu&eacute;</em> llegan a tratar el Plan como mera rutina sin coraz&oacute;n &mdash; muy parecido a la iglesia que dej&oacute; su primer amor (Apocalipsis 2:4). El tercero es la <strong>sobrecarga y el agotamiento</strong>, cuando se ponen demasiadas familias sobre demasiado pocos di&aacute;conos, y los hombres buenos se desgastan y renuncian. El cuarto son los <strong>di&aacute;conos sin entrenar</strong>, hombres nuevos puestos a la obra sin que se les ense&ntilde;e c&oacute;mo, que luego la hacen mal. El quinto es el <strong>desaliento</strong>, porque la obra es dura, a menudo invisible, y a veces ingrata, y un di&aacute;cono puede perder el &aacute;nimo. El sexto es la <strong>rotaci&oacute;n</strong>, cuando los di&aacute;conos salen y los pastores cambian, y el Plan pierde su memoria y su continuidad. Y el s&eacute;ptimo, el m&aacute;s mortal de todos, es el <strong>fr&iacute;o formalismo</strong> &mdash; cuando el Plan todav&iacute;a se lleva a cabo, pero el amor se ha ido de &eacute;l, y se convierte en un sistema en lugar de un ministerio.</p>
+<p>Note que casi todos estos desaf&iacute;os comparten una sola ra&iacute;z: son fallas no de estructura sino de coraz&oacute;n y de atenci&oacute;n. El Plan no suele derrumbarse porque su dise&ntilde;o fuera defectuoso, sino porque las personas que lo dirigen lentamente dejaron de preocuparse como antes lo hac&iacute;an. Eso es, en cierto modo, buena noticia, porque una falla del coraz&oacute;n puede arrepentirse y un descuido de la atenci&oacute;n puede corregirse. Los remedios, por tanto, tienen menos que ver con la maquinaria que con la renovaci&oacute;n.</p>
+<h2>III. Sosteniendo el Plan: Enfrentando los Desaf&iacute;os</h2>
+<p>Contra cada uno de estos desaf&iacute;os hay un remedio, y una iglesia sabia los aplica constantemente. Debe <strong>seguir presentando la visi&oacute;n</strong>, ense&ntilde;ando y volviendo a ense&ntilde;ar el <em>porqu&eacute;</em> a cada di&aacute;cono nuevo y a toda la iglesia, una y otra vez; este mismo curso es una de tales repeticiones, y un Plan cuya visi&oacute;n se mantiene fresca no se desviar&aacute; hacia la rutina vac&iacute;a. Debe <strong>entrenar a nuevos di&aacute;conos</strong>, pasando la obra deliberadamente, de modo que los hombres nuevos sean ense&ntilde;ados, guiados, y tra&iacute;dos al lado de los experimentados, y la destreza y el coraz&oacute;n del Plan sean transmitidos. Debe <strong>mantener manejables las cargas</strong>, reclutando y entrenando a m&aacute;s di&aacute;conos conforme la iglesia crece y ajustando las asignaciones, de modo que ning&uacute;n di&aacute;cono sea aplastado y ninguna familia sea abandonada.</p>
+<p>Este pasar la obra se hace mejor no solo en un aula sino hombro con hombro. Un di&aacute;cono experimentado que lleva consigo a un hombre m&aacute;s joven en sus visitas ense&ntilde;a m&aacute;s en un mes que un manual en un a&ntilde;o. El nuevo di&aacute;cono ve c&oacute;mo se hace &mdash; la gentileza, el escuchar, la oraci&oacute;n junto a la cama &mdash; y capta no solo el m&eacute;todo sino el esp&iacute;ritu. De esta manera el coraz&oacute;n del Plan, y no meramente su mec&aacute;nica, pasa de una generaci&oacute;n de di&aacute;conos a la siguiente.</p>
+<p>Debe <strong>animar y refrescar a los di&aacute;conos</strong>, porque la reuni&oacute;n es el lugar donde los hombres cansados son fortalecidos, donde el fruto se celebra y las cargas se comparten, y donde el desaliento es enfrentado con apoyo fraternal; &laquo;no nos cansemos, pues, de hacer bien; porque a su tiempo segaremos, si no desmayamos&raquo; (G&aacute;latas 6:9). Debe <strong>dirigir el Plan fielmente</strong>, el pastor y un di&aacute;cono principal fiel velando que no decaiga calladamente. Y debe <strong>sostener todo el asunto con oraci&oacute;n</strong>, porque un Plan sostenido por el esfuerzo humano solo fallar&aacute;, mientras que uno ba&ntilde;ado en oraci&oacute;n y llevado por el Esp&iacute;ritu de Dios perdurar&aacute;.</p>
+<p>Ninguno de estos remedios es complicado, y ese es el punto. Sostener el Plan no requiere ingeniosos programas nuevos sino la misma humilde fidelidad que lo edific&oacute; &mdash; la visi&oacute;n mantenida c&aacute;lida, los hombres mantenidos entrenados y animados, las cargas mantenidas justas, y todo el asunto mantenido bajo oraci&oacute;n. Una iglesia que sencillamente siga haciendo estas cosas hallar&aacute; el Plan todav&iacute;a vivo y todav&iacute;a bendiciendo a su pueblo dentro de una generaci&oacute;n.</p>
+<h2>IV. Evaluando y Renovando el Plan</h2>
+<p>Para sostener el Plan, una iglesia tambi&eacute;n debe evaluarlo honesta y regularmente, porque lo que nunca se mide pronto se descuida. La Escritura encomienda exactamente esta vigilancia sobre los que est&aacute;n a nuestro cuidado.</p>
+<div class="scripture">S&eacute; diligente en conocer el estado de tus ovejas, y mira con cuidado por tus reba&ntilde;os. (Proverbios 27:23, RVG)</div>
+<p>El buen pastor revisa la condici&oacute;n de su reba&ntilde;o; justamente as&iacute;, la iglesia debe revisar regularmente la condici&oacute;n de su cuidado.</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> Un hombre que se siente bien puede saltarse sus chequeos por a&ntilde;os; pero el m&eacute;dico que lo examina regularmente atrapa el mal silencioso mientras todav&iacute;a puede curarse, mientras que el hombre que espera hasta sentir el dolor a menudo ha esperado demasiado. Una iglesia que nunca eval&uacute;a su Plan es como ese hombre, con el problema creciendo sin ser visto hasta que est&aacute; avanzado. La evaluaci&oacute;n regular es el chequeo que mantiene sano el Plan.</div>
+<p>Tal evaluaci&oacute;n debe hacerse con honestidad pero tambi&eacute;n con gracia. Su prop&oacute;sito nunca es avergonzar a un di&aacute;cono que batalla ni llevar un marcador de fracasos, sino hallar los vac&iacute;os y llenarlos, para que ninguna familia se pierda. Manejada en ese esp&iacute;ritu, la evaluaci&oacute;n no es una amenaza que los di&aacute;conos temen sino una ayuda que reciben con gusto &mdash; el medio por el cual todo el cuerpo guarda su promesa de que nadie ser&aacute; olvidado.</p>
+<p>&iquest;Qu&eacute; pregunta una iglesia cuando eval&uacute;a? Las preguntas honestas: &iquest;Est&aacute; cada familia todav&iacute;a asignada? &iquest;Est&aacute; cada una siendo de veras contactada y visitada? &iquest;Se est&aacute;n supliendo las necesidades reales? &iquest;Hay di&aacute;conos sobrecargados, o alguno que se ha vuelto flojo? &iquest;Se asignan pronto los miembros nuevos? &iquest;Todav&iacute;a trabajan bien juntos el pastor y los di&aacute;conos? &iquest;Y por cu&aacute;l norma mide las respuestas? No por la actividad sola &mdash; no meramente cu&aacute;ntas visitas se registraron &mdash; sino por el fruto: &iquest;est&aacute; la gente siendo de veras amada y cuidada? Un grueso mont&oacute;n de informes no es la meta; las almas cuidadas lo son. Hecha la evaluaci&oacute;n, la iglesia renueva: las asignaciones se vuelven a trazar, se a&ntilde;aden o se vuelven a entrenar di&aacute;conos, y todo el cuerpo se vuelve a comprometer. Las iglesias sabias hacen de esto una pr&aacute;ctica regular, porque una honesta revisi&oacute;n y rededicaci&oacute;n anual evitar&aacute; que el Plan se desv&iacute;e jam&aacute;s muy lejos.</p>
+<h2>V. La Recompensa de la Fidelidad</h2>
+<p>Todo esto &mdash; el sostener, el evaluar, el seguir adelante &mdash; pide mucho de una iglesia y de sus di&aacute;conos. &iquest;Vale la pena? Lo vale, m&aacute;s all&aacute; de toda medida. Lo vale, primero, porque las almas lo valen. Cada familia guardada de perderse, cada carga llevada, cada alma ganada y discipulada, es de infinito valor para Dios; y el Plan es, al final, sencillamente el amor de Cristo organizado para que ninguno de su pueblo sea olvidado. Y lo vale, segundo, porque la labor no es en vano, porque el di&aacute;cono labora no por la alabanza de los hombres sino para el ojo de su Maestro.</p>
+<p>Y el fruto de tal fidelidad alcanza m&aacute;s lejos de lo que ning&uacute;n di&aacute;cono ver&aacute; en su vida. La viuda solitaria que fue visitada, el joven errante que fue buscado, la familia que fue llevada a trav&eacute;s de su semana m&aacute;s oscura &mdash; estos son tocados de maneras que se extienden por generaciones, hacia hijos y nietos que crecieron sabiendo que la iglesia los amaba. Un di&aacute;cono planta &aacute;rboles bajo cuya sombra quiz&aacute; nunca se siente; pero crecen, y bendicen, mucho despu&eacute;s de que &eacute;l se ha ido.</p>
+<div class="scripture">Bien, buen siervo y fiel; sobre poco has sido fiel, sobre mucho te pondr&eacute;; entra en el gozo de tu se&ntilde;or. (Mateo 25:21, RVG)</div>
+<p>Esta es la palabra que todo di&aacute;cono fiel anhela un d&iacute;a o&iacute;r. Puede laborar aqu&iacute; sin ser visto y sin ser agradecido, pero labora para su Maestro, y cuando aparezca el Pr&iacute;ncipe de los pastores recibir&aacute; la corona incorruptible de gloria (1 Pedro 5:4). Que ning&uacute;n di&aacute;cono, pues, se canse. La obra es dura, pero es santa; es a menudo escondida, pero nunca es desperdiciada; y su recompensa, en el gozo del Se&ntilde;or, es segura.</p>
+<h2>Conclusi&oacute;n</h2>
+<p>Hemos llegado al final de nuestro camino juntos. Hemos visto qu&eacute; es un di&aacute;cono y qu&eacute; debe ser; hemos trazado la visi&oacute;n, la definici&oacute;n, y la construcci&oacute;n del Plan; hemos seguido al di&aacute;cono a los hogares y los hospitales, al discipulado y el evangelismo, a la crisis y la confianza; hemos observado a los di&aacute;conos reunirse y sostener a su pastor; y hemos aprendido, al fin, c&oacute;mo mantenerlo todo vivo. Sin embargo, todo se reduce a una sola cosa. El Plan de Ministerio Familiar del Di&aacute;cono no es, finalmente, un programa ni un sistema. Es amor &mdash; el amor de Cristo, que no vino para ser servido sino para servir, llevado por medio de sus siervos a cada familia de su iglesia, para que nadie sea olvidado y nadie quede solo.</p>
+<p>Si usted es un di&aacute;cono, o un d&iacute;a lo ser&aacute;, sea este su prop&oacute;sito: no llenar un oficio, sino amar a un pueblo; no ostentar un t&iacute;tulo, sino lavar pies; no meramente operar un plan, sino ser, para un pu&ntilde;ado de familias, las manos mismas de Cristo. Haga eso, fielmente y hasta el fin, y habr&aacute; hecho algo que sobrevivir&aacute; a todo edificio y presupuesto &mdash; habr&aacute; amado como su Se&ntilde;or am&oacute;.</p>
+<p>&laquo;As&iacute; que, hermanos m&iacute;os amados, estad firmes y constantes, creciendo en la obra del Se&ntilde;or siempre, sabiendo que vuestro trabajo en el Se&ntilde;or no es en vano.&raquo; Que Dios levante di&aacute;conos fieles que tomen esta toalla, este Plan, este amor, y lo lleven bien &mdash; hasta que venga el Pr&iacute;ncipe de los pastores.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 10;
+const COURSE = 'CTSDFM';
+const FILE_PREFIX = 'CTSDeaconFamilyMinistry';
+const NEXT_UNIT_URL = 'CTSDeaconFamilyMinistryCertificate.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 — Biblical Foundations of the Diaconate","Unit 2 — Qualifications and Character of Deacons","Unit 3 — Historical Development in Southern Baptist Life","Unit 4 — The Deacon Family Ministry Plan: Vision and Definition","Unit 5 — Organizing the Plan: Assigning Families","Unit 6 — Ongoing Care: Visitation and Prayer","Unit 7 — Discipleship and Evangelism within Assigned Families","Unit 8 — Crisis Ministry, Confidentiality, and Referral","Unit 9 — Deacon Meetings, Reporting, and Pastor Relations","Unit 10 — Sustaining the Plan: Challenges and Evaluation"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [
+{"textEn":"1. Good plans usually fail by:","textEs":"1. Los buenos planes usualmente fallan por:","optionsEn":["being too well designed", "sudden collapse at the start", "fading slowly, not at their birth", "external attack alone"],"optionsEs":["estar demasiado bien diseñados", "el colapso repentino al principio", "desvanecerse lentamente, no en su nacimiento", "el ataque externo solamente"],"explanationEn":"Plans fail not at birth but by slowly fading.","explanationEs":"Los planes fallan no en su nacimiento sino desvaneciéndose lentamente.","correct":2},
+{"textEn":"2. The great enemy of the Plan is usually:","textEs":"2. El gran enemigo del Plan es usualmente:","optionsEn":["quiet neglect", "open opposition", "too much money", "too many deacons"],"optionsEs":["el callado descuido", "la oposición abierta", "demasiado dinero", "demasiados diáconos"],"explanationEn":"Not open opposition but quiet neglect erodes the Plan.","explanationEs":"No la oposición abierta sino el callado descuido erosiona el Plan.","correct":0},
+{"textEn":"3. The fire-and-garden illustration teaches that the Plan:","textEs":"3. La ilustración del fuego y el jardín enseña que el Plan:","optionsEn":["runs itself", "needs no attention", "is impossible to keep", "must be tended or it will quietly die"],"optionsEs":["se opera solo", "no necesita atención", "es imposible de mantener", "debe ser atendido o morirá calladamente"],"explanationEn":"Like a fire or a garden, the Plan must be tended.","explanationEs":"Como un fuego o un jardín, el Plan debe ser atendido.","correct":3},
+{"textEn":"4. Nearly all the challenges to the Plan share a root that is a failure of:","textEs":"4. Casi todos los desafíos al Plan comparten una raíz que es una falla de:","optionsEn":["money", "heart and attention, not structure", "buildings", "design"],"optionsEs":["dinero", "corazón y atención, no de estructura", "edificios", "diseño"],"explanationEn":"The challenges are failures of heart and attention, not structure.","explanationEs":"Los desafíos son fallas de corazón y atención, no de estructura.","correct":1},
+{"textEn":"5. A church that treats the Plan as routine without heart resembles:","textEs":"5. Una iglesia que trata el Plan como rutina sin corazón se parece a:","optionsEn":["a praying church", "a growing church", "the early church in Acts", "the church that left its first love"],"optionsEs":["una iglesia que ora", "una iglesia que crece", "la iglesia primitiva en Hechos", "la iglesia que dejó su primer amor"],"explanationEn":"It resembles the church that left its first love (Revelation 2:4).","explanationEs":"Se parece a la iglesia que dejó su primer amor (Apocalipsis 2:4).","correct":3},
+{"textEn":"6. The deadliest challenge of all is:","textEs":"6. El desafío más mortal de todos es:","optionsEn":["overload", "cold formalism — a system without love", "turnover", "untrained deacons"],"optionsEs":["la sobrecarga", "el frío formalismo — un sistema sin amor", "la rotación", "los diáconos sin entrenar"],"explanationEn":"Cold formalism — the Plan carried out without love.","explanationEs":"El frío formalismo — el Plan llevado a cabo sin amor.","correct":1},
+{"textEn":"7. To keep the Plan's vision alive, a church must:","textEs":"7. Para mantener viva la visión del Plan, una iglesia debe:","optionsEn":["change it often", "stop teaching it", "teach and re-teach the 'why'", "keep it secret"],"optionsEs":["cambiarlo a menudo", "dejar de enseñarlo", "enseñar y volver a enseñar el 'porqué'", "mantenerlo en secreto"],"explanationEn":"The 'why' must be taught and re-taught, again and again.","explanationEs":"El 'porqué' debe enseñarse y volverse a enseñar, una y otra vez.","correct":2},
+{"textEn":"8. New deacons are best trained:","textEs":"8. Los nuevos diáconos se entrenan mejor:","optionsEn":["shoulder to shoulder, by mentoring on visits", "by a single lecture", "not at all", "by a book alone"],"optionsEs":["hombro con hombro, guiándolos en las visitas", "por una sola conferencia", "de ninguna manera", "por un libro solamente"],"explanationEn":"A seasoned deacon teaches more on the visits than a manual could.","explanationEs":"Un diácono experimentado enseña más en las visitas que un manual.","correct":0},
+{"textEn":"9. To keep loads manageable as the church grows, a church should:","textEs":"9. Para mantener manejables las cargas conforme la iglesia crece, una iglesia debe:","optionsEn":["stop adding members", "pile more families on each deacon", "enlist and train more deacons, adjusting assignments", "drop the Plan"],"optionsEs":["dejar de añadir miembros", "poner más familias sobre cada diácono", "reclutar y entrenar a más diáconos, ajustando las asignaciones", "abandonar el Plan"],"explanationEn":"More deacons are enlisted so no one is crushed or dropped.","explanationEs":"Se reclutan más diáconos para que nadie sea aplastado ni abandonado.","correct":2},
+{"textEn":"10. 'Let us not grow weary while doing good' (Galatians 6:9) addresses the challenge of:","textEs":"10. 'No nos cansemos de hacer bien' (Gálatas 6:9) aborda el desafío de:","optionsEn":["overload", "discouragement", "turnover", "formalism"],"optionsEs":["la sobrecarga", "el desaliento", "la rotación", "el formalismo"],"explanationEn":"It meets discouragement with the promise of reaping.","explanationEs":"Enfrenta el desaliento con la promesa de segar.","correct":1},
+{"textEn":"11. The whole Plan must finally be undergirded with:","textEs":"11. Todo el Plan debe finalmente ser sostenido con:","optionsEn":["money", "clever programs", "strict rules", "prayer"],"optionsEs":["dinero", "programas ingeniosos", "reglas estrictas", "oración"],"explanationEn":"A Plan sustained by human effort alone will fail; prayer sustains it.","explanationEs":"Un Plan sostenido por el esfuerzo humano solo fallará; la oración lo sostiene.","correct":3},
+{"textEn":"12. The remedies for sustaining the Plan are:","textEs":"12. Los remedios para sostener el Plan son:","optionsEn":["humble and not complicated", "brand-new each year", "beyond most churches", "complex and costly"],"optionsEs":["humildes y no complicados", "completamente nuevos cada año", "más allá de la mayoría de las iglesias", "complejos y costosos"],"explanationEn":"They are the same humble faithfulness that built the Plan.","explanationEs":"Son la misma humilde fidelidad que edificó el Plan.","correct":0},
+{"textEn":"13. Evaluation matters because:","textEs":"13. La evaluación importa porque:","optionsEn":["deacons enjoy it", "it impresses visitors", "the law requires it", "what is never measured is soon neglected"],"optionsEs":["a los diáconos les gusta", "impresiona a los visitantes", "la ley lo exige", "lo que nunca se mide pronto se descuida"],"explanationEn":"What is never measured is soon neglected.","explanationEs":"Lo que nunca se mide pronto se descuida.","correct":3},
+{"textEn":"14. 'Be diligent to know the state of your flocks' (Proverbs 27:23) calls the church to:","textEs":"14. 'Sé diligente en conocer el estado de tus ovejas' (Proverbios 27:23) llama a la iglesia a:","optionsEn":["regularly check the condition of its care", "count its money", "grow larger", "build bigger"],"optionsEs":["revisar regularmente la condición de su cuidado", "contar su dinero", "crecer más", "construir más grande"],"explanationEn":"The church must regularly check the condition of its care.","explanationEs":"La iglesia debe revisar regularmente la condición de su cuidado.","correct":0},
+{"textEn":"15. The 'checkup' illustration teaches that regular evaluation:","textEs":"15. La ilustración del 'chequeo' enseña que la evaluación regular:","optionsEn":["is a waste of time", "catches trouble early, before it is advanced", "makes people sick", "should be avoided"],"optionsEs":["es una pérdida de tiempo", "atrapa el problema temprano, antes de que esté avanzado", "enferma a las personas", "debe evitarse"],"explanationEn":"Like a checkup, evaluation catches the silent trouble early.","explanationEs":"Como un chequeo, la evaluación atrapa temprano el mal silencioso.","correct":1},
+{"textEn":"16. The right standard for measuring the Plan is:","textEs":"16. La norma correcta para medir el Plan es:","optionsEn":["the number of meetings", "the size of the budget", "fruit — cared-for souls, not activity alone", "the length of reports"],"optionsEs":["el número de reuniones", "el tamaño del presupuesto", "el fruto — almas cuidadas, no la actividad sola", "la longitud de los informes"],"explanationEn":"Measure by fruit — cared-for souls — not activity alone.","explanationEs":"Mídase por el fruto — almas cuidadas — no por la actividad sola.","correct":2},
+{"textEn":"17. Evaluation should be done in:","textEs":"17. La evaluación debe hacerse con:","optionsEn":["harsh blame", "honesty but also grace, to fill gaps not to shame", "secrecy", "indifference"],"optionsEs":["culpa dura", "honestidad pero también gracia, para llenar vacíos no para avergonzar", "secreto", "indiferencia"],"explanationEn":"Its purpose is to fill the gaps, not to shame the struggling.","explanationEs":"Su propósito es llenar los vacíos, no avergonzar al que batalla.","correct":1},
+{"textEn":"18. The Plan is worth sustaining because:","textEs":"18. El Plan vale la pena sostenerlo porque:","optionsEn":["it looks good", "it is required", "souls are worth it — it is the love of Christ organized", "it is easy"],"optionsEs":["se ve bien", "es requerido", "las almas lo valen — es el amor de Cristo organizado", "es fácil"],"explanationEn":"Souls are worth it; the Plan is the love of Christ organized.","explanationEs":"Las almas lo valen; el Plan es el amor de Cristo organizado.","correct":2},
+{"textEn":"19. The word every faithful deacon longs to hear (Matthew 25:21) is:","textEs":"19. La palabra que todo diácono fiel anhela oír (Mateo 25:21) es:","optionsEn":["'You did enough'", "'Try harder'", "'Rest now'", "'Well done, good and faithful servant'"],"optionsEs":["'Hiciste suficiente'", "'Esfuérzate más'", "'Descansa ahora'", "'Bien, buen siervo y fiel'"],"explanationEn":"'Well done, good and faithful servant... enter into the joy of your lord.'","explanationEs":"'Bien, buen siervo y fiel... entra en el gozo de tu señor.'","correct":3},
+{"textEn":"20. The deacon's faithfulness bears fruit that:","textEs":"20. La fidelidad del diácono da fruto que:","optionsEn":["reaches further than he will see, into generations", "helps only himself", "ends at his retirement", "is quickly forgotten"],"optionsEs":["alcanza más lejos de lo que verá, hacia generaciones", "solo le ayuda a él", "termina en su jubilación", "se olvida pronto"],"explanationEn":"He plants trees under whose shade he may never sit.","explanationEs":"Planta árboles bajo cuya sombra quizá nunca se siente.","correct":0}
+];
+const kwQuestions = [
+{"textEn":"21. Why do good plans usually fail, and what does this mean for sustaining the Plan?","textEs":"21. ¿Por qué fallan usualmente los buenos planes, y qué significa esto para sostener el Plan?","kw_en":["fail","fading","enthusiasm","neglect","opposition","sustaining","survival","tended"],"kw_es":["fallan","entusiasmo","fuego","oposici","descuido","sostener","supervivencia","atizarse"],"modelEn":"Good plans usually fail not at their birth but by slowly fading. A plan is launched with enthusiasm, but the enthusiasm cools, the founding deacons tire or move away, new members arrive who never caught the original fire, and the Plan becomes a name on paper that no longer touches lives. The great enemy is therefore not open opposition but quiet neglect. This means that sustaining the Plan is not optional maintenance but the very condition of its survival. Like a fire that must be tended or a garden that must be weeded, the Plan must be deliberately kept alive, or it will quietly die.","modelEs":"Los buenos planes usualmente fallan no en su nacimiento sino desvaneciéndose lentamente. Un plan se lanza con entusiasmo, pero el entusiasmo se enfría, los diáconos fundadores se cansan o se mudan, llegan miembros nuevos que nunca captaron el fuego original, y el Plan se convierte en un nombre en el papel que ya no toca vidas. El gran enemigo es por tanto no la oposición abierta sino el callado descuido. Esto significa que sostener el Plan no es mantenimiento opcional sino la condición misma de su supervivencia. Como un fuego que debe atizarse o un jardín que debe desyerbarse, el Plan debe ser mantenido vivo deliberadamente, o morirá calladamente."},
+{"textEn":"22. What are the common challenges that threaten the Plan over the years?","textEs":"22. ¿Cuáles son los desafíos comunes que amenazan al Plan a través de los años?","kw_en":["challenges","neglect","vision","overload","untrained","discouragement","turnover","formalism"],"kw_es":["desaf","descuido","sobrecarga","agotamiento","desaliento","rotaci","formalismo","entrenar"],"modelEn":"Several challenges threaten the Plan over the years. There is neglect and drift, as deacons grow slack and families are forgotten again. There is lost vision, as newer deacons treat the Plan as mere routine without heart. There is overload and burnout, when too many families are laid on too few deacons. There is the problem of untrained deacons who do the work badly. There is discouragement, since the work is hard and often unthanked. There is turnover, as deacons rotate off and pastors change. And the deadliest of all is cold formalism, when the Plan is still carried out but the love has gone out of it and it becomes a system instead of a ministry.","modelEs":"Varios desafíos amenazan al Plan a través de los años. Hay descuido y deriva, cuando los diáconos se vuelven flojos y las familias son olvidadas de nuevo. Hay visión perdida, cuando diáconos más nuevos tratan el Plan como mera rutina sin corazón. Hay sobrecarga y agotamiento, cuando se ponen demasiadas familias sobre demasiado pocos diáconos. Está el problema de diáconos sin entrenar que hacen la obra mal. Hay desaliento, ya que la obra es dura y a menudo ingrata. Hay rotación, cuando los diáconos salen y los pastores cambian. Y el más mortal de todos es el frío formalismo, cuando el Plan todavía se lleva a cabo pero el amor se ha ido de él y se convierte en un sistema en lugar de un ministerio."},
+{"textEn":"23. How does a church sustain the Plan and meet its challenges?","textEs":"23. ¿Cómo sostiene una iglesia el Plan y enfrenta sus desafíos?","kw_en":["sustains","vision","trains","manageable","encourages","faithfully","prayer","humble"],"kw_es":["sostiene","presentando","entrena","manejables","anima","fielmente","oraci","humilde"],"modelEn":"A church sustains the Plan by applying steady remedies to each challenge. It keeps casting the vision, teaching and re-teaching the why to every new deacon and to the whole church. It trains new deacons deliberately, best of all shoulder to shoulder, so the heart and not just the method is handed down. It keeps the loads manageable, enlisting more deacons as the church grows. It encourages and refreshes the deacons in the meeting, so the weary do not lose heart. It leads the Plan faithfully through the pastor and a head deacon, and it undergirds the whole thing with prayer. None of these remedies is complicated; they are simply the same humble faithfulness that built the Plan.","modelEs":"Una iglesia sostiene el Plan aplicando remedios constantes a cada desafío. Sigue presentando la visión, enseñando y volviendo a enseñar el porqué a cada diácono nuevo y a toda la iglesia. Entrena a nuevos diáconos deliberadamente, mejor que todo hombro con hombro, para que el corazón y no solo el método sea transmitido. Mantiene manejables las cargas, reclutando más diáconos conforme la iglesia crece. Anima y refresca a los diáconos en la reunión, para que los cansados no pierdan el ánimo. Dirige el Plan fielmente por medio del pastor y un diácono principal, y sostiene todo el asunto con oración. Ninguno de estos remedios es complicado; son sencillamente la misma humilde fidelidad que edificó el Plan."},
+{"textEn":"24. Why and how must a church evaluate the Plan?","textEs":"24. ¿Por qué y cómo debe una iglesia evaluar el Plan?","kw_en":["evaluate","measured","neglected","flocks","checkup","questions","assigned","renews"],"kw_es":["evaluar","descuida","ovejas","chequeo","evaluaci","preguntas","asignada","renueva"],"modelEn":"A church must evaluate the Plan because what is never measured is soon neglected. Scripture commands this watchfulness, telling us to be diligent to know the state of our flocks; the good shepherd checks his flock, and the church must check its care. Like a regular medical checkup that catches silent trouble early, evaluation finds problems before they grow advanced. In evaluating, the church asks honest questions: is every family still assigned, contacted, and visited; are real needs being met; are any deacons overloaded or slack; are new members assigned promptly; do the pastor and deacons still work well together. Then it renews, redrawing assignments and recommitting.","modelEs":"Una iglesia debe evaluar el Plan porque lo que nunca se mide pronto se descuida. La Escritura ordena esta vigilancia, diciéndonos que seamos diligentes en conocer el estado de nuestras ovejas; el buen pastor revisa su rebaño, y la iglesia debe revisar su cuidado. Como un chequeo médico regular que atrapa temprano el mal silencioso, la evaluación halla los problemas antes de que crezcan avanzados. Al evaluar, la iglesia hace preguntas honestas: está cada familia todavía asignada, contactada y visitada; se están supliendo las necesidades reales; hay diáconos sobrecargados o flojos; se asignan pronto los miembros nuevos; trabajan todavía bien juntos el pastor y los diáconos. Luego renueva, volviendo a trazar las asignaciones y comprometiéndose de nuevo."},
+{"textEn":"25. By what standard should the Plan be measured, and in what spirit should evaluation be done?","textEs":"25. ¿Por cuál norma debe medirse el Plan, y con qué espíritu debe hacerse la evaluación?","kw_en":["measured","activity","fruit","reports","souls","grace","shame","gaps"],"kw_es":["actividad","fruto","informes","almas","prueba","gracia","avergonzar","evaluaci"],"modelEn":"The Plan should be measured not by activity alone, such as how many visits were logged, but by fruit: whether people are actually being loved and cared for. A thick stack of reports is not the goal; cared-for souls are. The real test is whether the love is reaching the people. And the evaluation must be done in honesty but also in grace. Its purpose is never to shame a struggling deacon or to keep a scorecard of failures, but to find the gaps and fill them, so that no family is lost. Handled in that spirit, evaluation is not a threat the deacons dread but a help they welcome.","modelEs":"El Plan debe medirse no por la actividad sola, como cuántas visitas se registraron, sino por el fruto: si la gente está siendo de veras amada y cuidada. Un grueso montón de informes no es la meta; las almas cuidadas lo son. La verdadera prueba es si el amor está llegando a la gente. Y la evaluación debe hacerse con honestidad pero también con gracia. Su propósito nunca es avergonzar a un diácono que batalla ni llevar un marcador de fracasos, sino hallar los vacíos y llenarlos, para que ninguna familia se pierda. Manejada en ese espíritu, la evaluación no es una amenaza que los diáconos temen sino una ayuda que reciben con gusto."},
+{"textEn":"26. Why is the labor of the Plan worth it, even when it is hard?","textEs":"26. ¿Por qué vale la pena la labor del Plan, aun cuando es dura?","kw_en":["labor","worth","souls","burden","love","organized","vain","weary"],"kw_es":["labor","almas","carga","organizado","vano","maestro","cansarse","desperdiciada"],"modelEn":"The labor of the Plan is worth it beyond all measure, for two reasons. First, because souls are worth it. Every family kept from slipping away, every burden carried, every soul won and discipled, is of infinite worth to God, and the Plan is finally just the love of Christ organized so that none of His people is forgotten. Second, because the labor is not in vain. The deacon labors not for the praise of men but for the eye of his Master, who has promised that our labor in the Lord is never in vain. So the deacon should not grow weary, for the work is hard but holy, often hidden but never wasted.","modelEs":"La labor del Plan vale la pena más allá de toda medida, por dos razones. Primero, porque las almas lo valen. Cada familia guardada de perderse, cada carga llevada, cada alma ganada y discipulada, es de infinito valor para Dios, y el Plan es al final sencillamente el amor de Cristo organizado para que ninguno de su pueblo sea olvidado. Segundo, porque la labor no es en vano. El diácono labora no por la alabanza de los hombres sino para el ojo de su Maestro, que ha prometido que nuestra labor en el Señor nunca es en vano. Así que el diácono no debe cansarse, porque la obra es dura pero santa, a menudo escondida pero nunca desperdiciada."},
+{"textEn":"27. What reward does the faithful deacon have, according to Matthew 25:21 and 1 Peter 5:4?","textEs":"27. ¿Qué recompensa tiene el diácono fiel, según Mateo 25:21 y 1 Pedro 5:4?","kw_en":["matthew","faithful","servant","joy","shepherd","crown","glory","reward"],"kw_es":["recompensa","maestro","siervo","gozo","pastores","corona","gloria","fiel"],"modelEn":"According to Matthew 25:21, the faithful deacon's reward is to hear his Master say, Well done, good and faithful servant; you were faithful over a few things, I will make you ruler over many things, enter into the joy of your lord. This is the word every faithful deacon longs one day to hear. And according to 1 Peter 5:4, when the Chief Shepherd appears, he will receive the crown of glory that does not fade away. He may labor here unseen and unthanked, but he labors for his Master and not for the praise of men, and his reward in the joy of the Lord is sure.","modelEs":"Según Mateo 25:21, la recompensa del diácono fiel es oír a su Maestro decir: Bien, buen siervo y fiel; sobre poco has sido fiel, sobre mucho te pondré; entra en el gozo de tu señor. Esta es la palabra que todo diácono fiel anhela un día oír. Y según 1 Pedro 5:4, cuando aparezca el Príncipe de los pastores, recibirá la corona incorruptible de gloria. Puede laborar aquí sin ser visto y sin ser agradecido, pero labora para su Maestro y no por la alabanza de los hombres, y su recompensa en el gozo del Señor es segura."},
+{"textEn":"28. How far does the fruit of a deacon's faithfulness reach?","textEs":"28. ¿Hasta dónde alcanza el fruto de la fidelidad de un diácono?","kw_en":["fruit","faithfulness","lifetime","visited","generations","children","trees","love"],"kw_es":["fruto","fidelidad","visitada","generaciones","hijos","nietos","sombra","amor"],"modelEn":"The fruit of a deacon's faithfulness reaches far further than he will ever see in his own lifetime. The lonely widow who was visited, the wandering young man who was sought, the family that was carried through its darkest week, are touched in ways that ripple on for generations, into children and grandchildren who grow up knowing that the church loved them. In this way a deacon plants trees under whose shade he may never sit, but which grow and bless long after he is gone. His hidden, faithful labor outlasts him, because love, once given in Christ's name, never truly dies.","modelEs":"El fruto de la fidelidad de un diácono alcanza mucho más lejos de lo que jamás verá en su propia vida. La viuda solitaria que fue visitada, el joven errante que fue buscado, la familia que fue llevada a través de su semana más oscura, son tocados de maneras que se extienden por generaciones, hacia hijos y nietos que crecen sabiendo que la iglesia los amaba. De esta manera un diácono planta árboles bajo cuya sombra quizá nunca se siente, pero que crecen y bendicen mucho después de que él se ha ido. Su labor escondida y fiel le sobrevive, porque el amor, una vez dado en el nombre de Cristo, nunca muere de veras."},
+{"textEn":"29. What is the Deacon Family Ministry Plan, finally, when all is said?","textEs":"29. ¿Qué es, finalmente, el Plan de Ministerio Familiar del Diácono, cuando todo está dicho?","kw_en":["plan","program","love","christ","serve","servants","forgotten","soul"],"kw_es":["programa","amor","cristo","servir","siervos","olvidado","estructura","alma"],"modelEn":"When all is said, the Deacon Family Ministry Plan is not finally a program or a system. It is love. It is the love of Christ, who came not to be served but to serve and to give His life a ransom for many, carried through His servants into every family of His church, so that no one is forgotten and no one is left alone. All the structure, the assigning, the visiting, the reporting, exists only to serve that love, and the love exists only to carry Christ Himself to His people. The Plan is simply a way of making sure that the love which the church professes actually reaches every single soul.","modelEs":"Cuando todo está dicho, el Plan de Ministerio Familiar del Diácono no es finalmente un programa ni un sistema. Es amor. Es el amor de Cristo, que no vino para ser servido sino para servir y para dar su vida en rescate por muchos, llevado por medio de sus siervos a cada familia de su iglesia, para que nadie sea olvidado y nadie quede solo. Toda la estructura, la asignación, la visitación, el informar, existe solo para servir ese amor, y el amor existe solo para llevar a Cristo mismo a su pueblo. El Plan es sencillamente una manera de asegurar que el amor que la iglesia profesa de veras llegue a cada alma."},
+{"textEn":"30. Summarize how the Plan is to be sustained through the years.","textEs":"30. Resuma cómo se ha de sostener el Plan a través de los años.","kw_en":["sustained","faithfulness","challenges","vision","prayer","evaluates","fruit","vain"],"kw_es":["sostiene","fidelidad","desaf","descuido","oraci","fruto","vano","almas"],"modelEn":"The Plan is sustained through the years by honest, steady faithfulness. A church faces the challenges that erode it, such as neglect, lost vision, overload, and cold formalism, and it meets them by keeping the vision warm, training new deacons, keeping loads manageable, encouraging the deacons, leading faithfully, and undergirding all with prayer. It evaluates the Plan regularly and honestly, measuring by fruit rather than mere activity, and renews it as needed. And it presses on in the assurance that the labor is not in vain, that souls are worth it, and that the faithful deacon will one day hear his Master say, Well done. So sustained, the Plan keeps the love of Christ reaching every family for generations.","modelEs":"El Plan se sostiene a través de los años por una fidelidad honesta y constante. Una iglesia enfrenta los desafíos que lo erosionan, como el descuido, la visión perdida, la sobrecarga, y el frío formalismo, y los enfrenta manteniendo la visión cálida, entrenando a nuevos diáconos, manteniendo manejables las cargas, animando a los diáconos, dirigiendo fielmente, y sosteniendo todo con oración. Evalúa el Plan regular y honestamente, midiendo por el fruto más bien que por la mera actividad, y lo renueva según sea necesario. Y sigue adelante en la certeza de que la labor no es en vano, de que las almas lo valen, y de que el diácono fiel un día oirá a su Maestro decir: Bien hecho. Así sostenido, el Plan mantiene el amor de Cristo llegando a cada familia por generaciones."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'cert';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSDeaconFamilyMinistryReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

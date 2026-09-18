@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Characters II — Unit 4</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 5 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Bible Characters II — Unit 4: Esther — For Such a Time as This: The Hidden Providence of God</span><span class="lang-es">📖 Personajes de la Biblia II — Unidad 4: Ester — Para Esta Hora: La Providencia Oculta de Dios</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Who knows whether you have come to the kingdom for such a time as this?" — Esther 4:14 (NKJV)</span><span class="lang-es">«¿Y quién sabe si para esta hora has llegado al reino?» — Ester 4:14 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>Of all the books in the Bible, Esther is the strangest in one respect: the name of God is never once mentioned in it. From the first verse to the last, He is never named — and yet He is on every page. It is one of only two books in all of Scripture named for a woman, Ruth being the other. And it tells of a time when the whole people of God stood on the edge of destruction, and the unseen hand of God placed one young woman exactly where she was needed "for such a time as this."</p><p><strong>Subject:</strong> Esther — "for such a time as this": the hidden providence of God.</p><p><strong>Proposition:</strong> Though God's name is never once mentioned, His unseen hand places His people exactly where He needs them, and calls them to courageous faith.</p><p>The story is set not in Babylon but in Persia, modern Iran, under the great King Xerxes, also called Ahasuerus. We will watch four figures move through the drama.</p><h2>I. A Fearful Queen</h2><p>It began at a royal feast. The king, drunk with wine, commanded Queen Vashti to come and display her beauty before his guests. She refused, and for her refusal she was banished from the throne. So began an empire-wide search for a new queen: officers were sent to gather the beautiful young women of every province into the king's harem, and among them, taken like the others, was Mordecai's young cousin Esther, whom he had raised as his own daughter. Neither Esther nor Mordecai appears to have had much real choice once the king's decree went out — this was less an ordinary marriage than an imperial conscription. At Mordecai's instruction, Esther kept her Jewish identity hidden, a caution understandable for a young woman navigating a dangerous and thoroughly pagan court. God can work through hard, morally complicated circumstances His people did not choose, weaving them into His own purposes. Esther was chosen and crowned queen of Persia. Then came the crisis: when the lives of her people hung in the balance, the only way to plead for them was to approach the king uninvited, and to approach the king uninvited was to risk death.</p><p>Like Esther, we all face fearful situations. But the Word of God speaks to our fear again and again. "Whenever I am afraid," said David, "I will trust in You" (Psalm 56:3). "There is no fear in love," wrote John, "but perfect love casts out fear" (1 John 4:18). Of the roughly one hundred and twenty-five commands the Lord Jesus gave, twenty-one of them are some form of "do not be afraid" or "take heart." Fear is a thief. Black Bart, the famous stagecoach robber, paralyzed twenty-nine stagecoach crews by fear alone and never once fired a shot; the fear of him did all his work for him. A study from Johns Hopkins observed that worriers tend to die sooner, and concluded that we are built, in nerve and tissue and cell, for faith and not for fear. We were made to trust. There was a young batter who stepped up to face the blazing fastball of the great Walter Johnson. He took one called strike, then a second, then turned and walked back to the dugout. When the umpire reminded him that he still had another strike coming, he called over his shoulder, "You can keep that third strike — I've seen enough." Fear had beaten him before he ever swung the bat, and fear will do the same to us if we let it.</p><h2>II. A Vile Tempter</h2><p>The second figure is Haman, a descendant of the Amalekites, the ancient enemies of Israel. Promoted to high office, Haman was enraged that one man, Mordecai, would not bow down to him. His wounded pride swelled into a monstrous plot: he would not be content to kill Mordecai, but would destroy every Jew in all one hundred and twenty-seven provinces of the empire. He bought the king's favor with silver, received the royal signet ring, and issued a decree making the murder of an entire people legal. Behind that decree stood something older and darker than one man's pride. It was Satan's age-old aim to destroy the people of God, the same hatred we see running all through the Bible and still screaming in today's headlines. Our trials and temptations come from Satan and from people doing his work, just as the Lord Jesus Himself was tempted in the wilderness. Yet the believer can say with James, "Count it all joy when you fall into various trials, knowing that the testing of your faith produces patience" (James 1:2-3). God uses even the assaults of the enemy to refine and strengthen His own.</p><h2>III. A Wise Counselor</h2><p>The third figure is Mordecai, the wise counselor. Sitting at the king's gate, he had already overheard and exposed a plot against the king's life. Now, when the death decree fell on his people, he sent an urgent message to Esther in the palace: "Do not think in your heart that you will escape in the king's palace any more than all the other Jews. For if you remain completely silent at this time, relief and deliverance will arise for the Jews from another place, but you and your father's house will perish. Yet who knows whether you have come to the kingdom for such a time as this?" (Esther 4:13-14). It is one of the great challenges in all of Scripture. Esther weighed it, and her answer is what makes her a heroine: she called for a three-day fast, and resolved, "If I perish, I perish!" (Esther 4:16). She would do the right thing whatever it cost her. Notice that her courage was a praying courage. She did not rush in on her own nerve, but asked all the Jews of the city to fast with her for three days and nights, leaning on the unseen God before she dared approach the throne. True boldness is not the absence of fear but faith that acts in spite of it.</p><p>There is a moment in Tolkien's tale when Frodo wishes the dangerous task had never come to him, and Gandalf answers that none of us choose our times, but "you have been chosen, and you must therefore use such strength and heart and wits as you have." So must we. And we have a Counselor greater than Mordecai, for the Lord Jesus is named "Wonderful, Counselor, Mighty God" (Isaiah 9:6). A Christian doctor I once supervised in a prison put the whole matter simply: "Regardless of the consequences, I will always try to do the right thing." That is Esther's spirit, and it should be ours.</p><h2>IV. A Silent God</h2><p>The fourth figure is the one never named: God Himself. Why is God so often silent? Scripture suggests at least three reasons. First, His silence requires faith rather than sight, and "blessed are those who have not seen and yet have believed." Second, His silence makes us struggle to find His will, and it is in that very struggle that the deepest lessons are learned. Third, His silence produces maturity, opening what Paul called "the eyes of the heart" (Ephesians 1:18). But we must be clear: silence is not the same as absence. What looks like silence is in fact providence, for Christ is even now "upholding all things by the word of His power" (Hebrews 1:3).</p><p>See how it works out in Esther. On a certain night the king cannot sleep, and to pass the hours he has the royal chronicles read aloud, and in them he hears how Mordecai once saved his life and was never rewarded. The very next morning Haman arrives to ask permission to hang Mordecai on the gallows he has built — and instead is ordered to honor him. In the end the gallows Haman built for Mordecai becomes the gallows on which Haman himself is hanged. It is the great reversal, and not one detail of it is labeled a miracle. We see only the lower story of sleepless nights and palace intrigue; God is at work in the upper story, for "we are His workmanship, created in Christ Jesus for good works, which God prepared beforehand" (Ephesians 2:10).</p><p>As God once placed Joseph in Egypt, and placed Daniel and his three friends in Babylon, so He placed Mordecai and Esther in Persia at the very hour they were needed. This is why the book can tell its whole story without ever naming God: He needs no mention, for His fingerprints are pressed into every page. And so He has placed you. Behind every so-called coincidence is the hand of a God who is never truly absent. He positions His people exactly where He needs them and calls them to step out in courageous faith. The God who seems silent has been writing the upper story all along, and He can be trusted to finish it — for "all things work together for good to those who love God." When your own hour comes, remember Esther, and remember that you may have come to your place in this world "for such a time as this."</p></div>
+<div class="lang-es"><p>De todos los libros de la Biblia, Ester es el más extraño en un aspecto: el nombre de Dios no se menciona ni una sola vez en él. Desde el primer versículo hasta el último, Él nunca es nombrado —y sin embargo está en cada página—. Es uno de solo dos libros en toda la Escritura que llevan el nombre de una mujer, siendo Rut el otro. Y relata un tiempo en que todo el pueblo de Dios estuvo al borde de la destrucción, y la mano invisible de Dios colocó a una joven mujer exactamente donde se la necesitaba «para esta hora».</p><p><strong>Tema:</strong> Ester — «para esta hora»: la providencia oculta de Dios.</p><p><strong>Proposición:</strong> Aunque el nombre de Dios nunca se menciona, su mano invisible coloca a su pueblo exactamente donde Él lo necesita, y lo llama a una fe valiente.</p><p>La historia se sitúa no en Babilonia sino en Persia, el Irán moderno, bajo el gran rey Asuero, también llamado Jerjes. Veremos moverse cuatro figuras a través del drama.</p><h2>I. Una Reina Temerosa</h2><p>Comenzó en un banquete real. El rey, embriagado de vino, ordenó a la reina Vasti que viniera a mostrar su belleza ante sus invitados. Ella se negó, y por su negativa fue desterrada del trono. Así comenzó una búsqueda por todo el imperio de una nueva reina, y en esa búsqueda Mardoqueo, un judío de la cautividad, presentó a su hermosa joven prima Ester, a quien había criado como hija propia. Debemos ser honestos sobre esto: al hacerlo, Mardoqueo quebrantaba el mandamiento de Dios contra el matrimonio con los paganos. Vio una oportunidad y la tomó, y estaba desobedeciendo —y sin embargo, como veremos, Dios puede tejer aun nuestras decisiones torcidas en su propósito recto—. Ester fue escogida y coronada reina de Persia. Entonces vino la crisis: cuando la vida de su pueblo pendía de un hilo, la única manera de interceder por ellos era acercarse al rey sin ser invitada, y acercarse al rey sin ser invitada era arriesgar la muerte.</p><p>Como Ester, todos enfrentamos situaciones temibles. Pero la Palabra de Dios habla a nuestro temor una y otra vez. «En el día que temo», dijo David, «yo en ti confío» (Salmo 56:3). «En el amor no hay temor», escribió Juan, «mas el perfecto amor echa fuera el temor» (1 Juan 4:18). De los aproximadamente ciento veinticinco mandatos que dio el Señor Jesús, veintiuno son alguna forma de «no temáis» o «tened ánimo». El temor es un ladrón. Black Bart, el famoso asaltante de diligencias, paralizó a veintinueve tripulaciones de diligencias por el puro temor y nunca disparó un solo tiro; el miedo a él hizo todo su trabajo. Un estudio de Johns Hopkins observó que los que se angustian tienden a morir más pronto, y concluyó que estamos hechos, en nervio y tejido y célula, para la fe y no para el temor. Fuimos hechos para confiar. Hubo un joven bateador que se paró a enfrentar la veloz bola rápida del gran Walter Johnson. Recibió un primer strike cantado, luego un segundo, y entonces se dio vuelta y caminó de regreso a la banca. Cuando el árbitro le recordó que aún le quedaba otro strike, contestó por encima del hombro: «Puedes quedarte ese tercer strike —ya he visto suficiente—». El temor lo había vencido antes de que jamás moviera el bate, y el temor hará lo mismo con nosotros si se lo permitimos.</p><h2>II. Un Tentador Vil</h2><p>La segunda figura es Amán, descendiente de los amalecitas, los antiguos enemigos de Israel. Ascendido a alto cargo, Amán se enfureció de que un solo hombre, Mardoqueo, no se inclinara ante él. Su orgullo herido creció hasta convertirse en un complot monstruoso: no se contentaría con matar a Mardoqueo, sino que destruiría a todo judío en las ciento veintisiete provincias del imperio. Compró el favor del rey con plata, recibió el anillo real con el sello, y emitió un decreto que hacía legal el asesinato de todo un pueblo. Detrás de aquel decreto había algo más antiguo y más oscuro que el orgullo de un hombre. Era el propósito milenario de Satanás de destruir al pueblo de Dios, el mismo odio que vemos correr por toda la Biblia y que aún grita en los titulares de hoy. Nuestras pruebas y tentaciones vienen de Satanás y de personas que hacen su obra, así como el mismo Señor Jesús fue tentado en el desierto. Y sin embargo el creyente puede decir con Santiago: «Tened por sumo gozo cuando cayereis en diversas pruebas; sabiendo que la prueba de vuestra fe obra paciencia» (Santiago 1:2-3). Dios usa aun los ataques del enemigo para refinar y fortalecer a los suyos.</p><h2>III. Un Consejero Sabio</h2><p>La tercera figura es Mardoqueo, el consejero sabio. Sentado a la puerta del rey, ya había oído y denunciado un complot contra la vida del rey. Ahora, cuando el decreto de muerte cayó sobre su pueblo, envió un mensaje urgente a Ester en el palacio: «No pienses en tu alma, que escaparás en la casa del rey más que todos los judíos. Porque si absolutamente callares en este tiempo, respiro y liberación tendrán los judíos de otra parte; mas tú y la casa de tu padre pereceréis. ¿Y quién sabe si para esta hora has llegado al reino?» (Ester 4:13-14). Es uno de los grandes desafíos de toda la Escritura. Ester lo sopesó, y su respuesta es lo que la hace una heroína: convocó un ayuno de tres días, y resolvió: «Y si perezco, que perezca» (Ester 4:16). Haría lo correcto costara lo que costara. Note que su valor era un valor que oraba. No se lanzó por su propia osadía, sino que pidió a todos los judíos de la ciudad que ayunaran con ella tres días y tres noches, apoyándose en el Dios invisible antes de atreverse a acercarse al trono. La verdadera valentía no es la ausencia de temor sino la fe que actúa a pesar de él.</p><p>Hay un momento en el relato de Tolkien en que Frodo desearía que la peligrosa tarea nunca le hubiera llegado, y Gandalf responde que ninguno de nosotros escoge sus tiempos, pero «has sido escogido, y debes por tanto usar la fuerza y el corazón y el ingenio que tengas». Así debemos hacer nosotros. Y tenemos un Consejero mayor que Mardoqueo, porque el Señor Jesús es llamado «Admirable, Consejero, Dios Fuerte» (Isaías 9:6). Un médico cristiano que una vez supervisé en una prisión expresó todo el asunto con sencillez: «Sin importar las consecuencias, siempre trataré de hacer lo correcto». Ese es el espíritu de Ester, y debería ser el nuestro.</p><h2>IV. Un Dios Silencioso</h2><p>La cuarta figura es la que nunca se nombra: Dios mismo. ¿Por qué está Dios tan a menudo en silencio? La Escritura sugiere al menos tres razones. Primera, su silencio requiere fe en lugar de vista, y «bienaventurados los que no vieron, y creyeron». Segunda, su silencio nos hace luchar por hallar su voluntad, y es en esa misma lucha donde se aprenden las lecciones más profundas. Tercera, su silencio produce madurez, abriendo lo que Pablo llamó «los ojos del entendimiento» (Efesios 1:18). Pero debemos tener claro: el silencio no es lo mismo que la ausencia. Lo que parece silencio es en realidad providencia, porque Cristo aun ahora está «sustentando todas las cosas con la palabra de su poder» (Hebreos 1:3).</p><p>Vea cómo se desenvuelve en Ester. En cierta noche el rey no puede dormir, y para pasar las horas hace que se lean en voz alta las crónicas reales, y en ellas oye cómo Mardoqueo una vez le salvó la vida y nunca fue recompensado. A la mañana siguiente Amán llega para pedir permiso de colgar a Mardoqueo en la horca que ha construido —y en cambio se le ordena honrarlo—. Al final la horca que Amán construyó para Mardoqueo se vuelve la horca en que el propio Amán es colgado. Es el gran giro, y ni un solo detalle de él lleva la etiqueta de milagro. Vemos solo la historia inferior de noches de insomnio e intrigas palaciegas; Dios obra en la historia superior, porque «somos hechura suya, creados en Cristo Jesús para buenas obras, las cuales Dios preparó de antemano» (Efesios 2:10).</p><p>Como Dios una vez colocó a José en Egipto, y colocó a Daniel y a sus tres amigos en Babilonia, así colocó a Mardoqueo y a Ester en Persia a la hora misma en que se los necesitaba. Por eso el libro puede contar toda su historia sin nombrar jamás a Dios: no necesita mención, porque sus huellas están impresas en cada página. Y así te ha colocado a ti. Detrás de cada supuesta coincidencia está la mano de un Dios que nunca está verdaderamente ausente. Coloca a su pueblo exactamente donde lo necesita y lo llama a salir con fe valiente. El Dios que parece silencioso ha estado escribiendo la historia superior todo el tiempo, y se le puede confiar que la termine —porque «todas las cosas les ayudan a bien, a los que aman a Dios»—. Cuando llegue tu propia hora, recuerda a Ester, y recuerda que tal vez has llegado a tu lugar en este mundo «para esta hora».</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 4 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 4 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 4;
+const COURSE = 'CTSBC2';
+const FILE_PREFIX = 'CTSBibleCharacters2';
+const NEXT_UNIT_URL = 'CTSBibleCharacters2Unit5.html';
+const totalUnits = 11;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - Jonah — The Prophet Who Ran from God", "Unit 2 - Hosea — The Prophet Who Loved an Unfaithful Wife", "Unit 3 - Jeremiah — The Weeping Prophet Who Stayed Faithful", "Unit 4 - Esther — For Such a Time as This: The Hidden Providence of God", "Unit 5 - Ezra — A Fresh New Start, the Scribe Who Restored God’s Word", "Unit 6 - John the Baptist — The Forerunner Who Doubted in the Dark", "Unit 7 - Peter — From Fisherman to the Rock Who Feeds the Sheep", "Unit 8 - Thomas — The Doubter Who Made the Great Confession", "Unit 9 - Lazarus — The Dead Man Jesus Called Back to Life", "Unit 10 - Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ", "Unit 11 - Paul — From Persecutor to Apostle of Grace"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [{"textEn":"1. What is unique about the book of Esther?","textEs":"1. ¿Qué tiene de único el libro de Ester?","optionsEn":["It was written in Greek", "It is the longest book in the Bible", "It contains no people", "God's name is never once mentioned in it"],"optionsEs":["Fue escrito en griego", "Es el libro más largo de la Biblia", "No contiene personas", "El nombre de Dios nunca se menciona ni una vez en él"],"explanationEn":"God is never named, yet He is on every page — the hidden providence of God.","explanationEs":"Dios nunca es nombrado, y sin embargo está en cada página — la providencia oculta de Dios.","correct":3},{"textEn":"2. Where and under which king is the book of Esther set?","textEs":"2. ¿Dónde y bajo qué rey se sitúa el libro de Ester?","optionsEn":["In Rome, under Caesar", "In Egypt, under Pharaoh", "In Persia, under King Xerxes (Ahasuerus)", "In Babylon, under Nebuchadnezzar"],"optionsEs":["En Roma, bajo César", "En Egipto, bajo Faraón", "En Persia, bajo el rey Jerjes (Asuero)", "En Babilonia, bajo Nabucodonosor"],"explanationEn":"The story is set in Persia, modern Iran, not Babylon.","explanationEs":"La historia se sitúa en Persia, el Irán moderno, no en Babilonia.","correct":2},{"textEn":"3. What happened to Queen Vashti?","textEs":"3. ¿Qué le sucedió a la reina Vasti?","optionsEn":["She became Esther's servant", "She refused the drunken king's command to display her beauty, and was banished", "She was crowned a second time", "She led Israel to victory"],"optionsEs":["Se hizo sierva de Ester", "Se negó a la orden del rey ebrio de mostrar su belleza, y fue desterrada", "Fue coronada una segunda vez", "Llevó a Israel a la victoria"],"explanationEn":"Her banishment opened the way for the search for a new queen.","explanationEs":"Su destierro abrió el camino para la búsqueda de una nueva reina.","correct":1},{"textEn":"4. How did Esther become queen?","textEs":"4. ¿Cómo llegó Ester a ser reina?","optionsEn":["In the search for a new queen, Mordecai entered his young cousin Esther", "She inherited the throne", "She bought the crown", "She was appointed by the priests"],"optionsEs":["En la búsqueda de una nueva reina, Mardoqueo presentó a su joven prima Ester", "Heredó el trono", "Compró la corona", "Fue nombrada por los sacerdotes"],"explanationEn":"Mordecai had raised Esther as his own daughter.","explanationEs":"Mardoqueo había criado a Ester como hija propia.","correct":0},{"textEn":"5. What candid point does the lesson make about Mordecai entering Esther?","textEs":"5. ¿Qué punto franco hace la lección sobre Mardoqueo al presentar a Ester?","optionsEn":["He acted on a prophet's word", "In doing so he broke God's command against intermarriage with the heathen — he \"saw an opportunity\" and was disobeying", "He was commanded by God to do it", "He had no choice at all"],"optionsEs":["Actuó por la palabra de un profeta", "Al hacerlo quebrantó el mandamiento de Dios contra el matrimonio con paganos — \"vio una oportunidad\" y estaba desobedeciendo", "Dios le ordenó hacerlo", "No tenía ninguna opción"],"explanationEn":"Yet God can weave even our crooked choices into His straight purpose.","explanationEs":"Y sin embargo Dios puede tejer aun nuestras decisiones torcidas en su propósito recto.","correct":1},{"textEn":"6. What was the crisis Esther faced?","textEs":"6. ¿Cuál fue la crisis que enfrentó Ester?","optionsEn":["She was exiled to Egypt", "She had lost her crown", "To approach the king uninvited was to risk death", "She had forgotten her people"],"optionsEs":["Fue desterrada a Egipto", "Había perdido su corona", "Acercarse al rey sin ser invitada era arriesgar la muerte", "Había olvidado a su pueblo"],"explanationEn":"Only by risking her life could she plead for her people.","explanationEs":"Solo arriesgando su vida podía interceder por su pueblo.","correct":2},{"textEn":"7. What does Psalm 56:3 say?","textEs":"7. ¿Qué dice el Salmo 56:3?","optionsEn":["\"Whenever I am afraid, I will trust in You\"", "\"Fear is wisdom\"", "\"The strong have no fear\"", "\"I will never be afraid\""],"optionsEs":["«En el día que temo, yo en ti confío»", "«El temor es sabiduría»", "«Los fuertes no tienen temor»", "«Nunca tendré temor»"],"explanationEn":"The answer to fear is trust in God.","explanationEs":"La respuesta al temor es la confianza en Dios.","correct":0},{"textEn":"8. What does 1 John 4:18 teach about fear?","textEs":"8. ¿Qué enseña 1 Juan 4:18 acerca del temor?","optionsEn":["Fear protects us from harm", "Love increases fear", "Fear and love are the same", "\"Perfect love casts out fear\""],"optionsEs":["El temor nos protege del daño", "El amor aumenta el temor", "El temor y el amor son lo mismo", "«El perfecto amor echa fuera el temor»"],"explanationEn":"God's perfect love drives out our fear.","explanationEs":"El amor perfecto de Dios expulsa nuestro temor.","correct":3},{"textEn":"9. What does the example of Black Bart illustrate?","textEs":"9. ¿Qué ilustra el ejemplo de Black Bart?","optionsEn":["The paralyzing power of fear — he stopped 29 stagecoach crews by fear alone and never fired a shot", "That stagecoaches were unsafe", "That crime always pays", "That outlaws are brave"],"optionsEs":["El poder paralizante del temor — paralizó a 29 tripulaciones por el puro miedo y nunca disparó un tiro", "Que las diligencias eran inseguras", "Que el crimen siempre paga", "Que los bandidos son valientes"],"explanationEn":"Fear can do all the enemy's work without a single blow.","explanationEs":"El temor puede hacer toda la obra del enemigo sin un solo golpe.","correct":0},{"textEn":"10. What was the point of the Johns Hopkins observation?","textEs":"10. ¿Cuál fue el punto de la observación de Johns Hopkins?","optionsEn":["Worry lengthens life", "We are built in nerve and tissue for faith, not for fear — worriers die sooner", "Fear has no effect on the body", "Faith and fear are equally healthy"],"optionsEs":["La angustia alarga la vida", "Estamos hechos en nervio y tejido para la fe, no para el temor — los que se angustian mueren más pronto", "El temor no tiene efecto en el cuerpo", "La fe y el temor son igualmente saludables"],"explanationEn":"We were made to trust, not to be ruled by fear.","explanationEs":"Fuimos hechos para confiar, no para ser gobernados por el temor.","correct":1},{"textEn":"11. Who was Haman, and why was he enraged?","textEs":"11. ¿Quién era Amán, y por qué estaba enfurecido?","optionsEn":["A faithful Jew who loved Mordecai", "A Persian priest", "Esther's brother", "A descendant of the Amalekites, enraged that Mordecai alone would not bow to him"],"optionsEs":["Un judío fiel que amaba a Mardoqueo", "Un sacerdote persa", "El hermano de Ester", "Un descendiente de los amalecitas, enfurecido de que solo Mardoqueo no se inclinara ante él"],"explanationEn":"The Amalekites were Israel's ancient enemies.","explanationEs":"Los amalecitas eran los antiguos enemigos de Israel.","correct":3},{"textEn":"12. What was Haman's plot?","textEs":"12. ¿Cuál fue el complot de Amán?","optionsEn":["To rob the temple", "To exile Esther", "To make the murder of every Jew in all 127 provinces legal, having received the king's signet ring", "To burn the chronicles"],"optionsEs":["Robar el templo", "Desterrar a Ester", "Hacer legal el asesinato de todo judío en las 127 provincias, habiendo recibido el anillo con el sello del rey", "Quemar las crónicas"],"explanationEn":"He bought the king's favor and issued a decree of genocide.","explanationEs":"Compró el favor del rey y emitió un decreto de genocidio.","correct":2},{"textEn":"13. What is behind a scheme like Haman's?","textEs":"13. ¿Qué hay detrás de un plan como el de Amán?","optionsEn":["Mere politics", "Satan's age-old aim to destroy the people of God", "Random chance", "A misunderstanding"],"optionsEs":["Mera política", "El propósito milenario de Satanás de destruir al pueblo de Dios", "Pura casualidad", "Un malentendido"],"explanationEn":"The same hatred runs through the Bible and through today's headlines.","explanationEs":"El mismo odio corre por la Biblia y por los titulares de hoy.","correct":1},{"textEn":"14. What does James 1:2-3 say about trials?","textEs":"14. ¿Qué dice Santiago 1:2-3 acerca de las pruebas?","optionsEn":["Trials are meaningless", "Trials prove God's absence", "Avoid all trials", "\"Count it all joy... the testing of your faith produces patience\""],"optionsEs":["Las pruebas no tienen sentido", "Las pruebas demuestran la ausencia de Dios", "Evita toda prueba", "«Tened por sumo gozo... la prueba de vuestra fe obra paciencia»"],"explanationEn":"God uses even the enemy's assaults to strengthen His own.","explanationEs":"Dios usa aun los ataques del enemigo para fortalecer a los suyos.","correct":3},{"textEn":"15. What word did Mordecai send to Esther (Esther 4:13-14)?","textEs":"15. ¿Qué aviso envió Mardoqueo a Ester (Ester 4:13-14)?","optionsEn":["\"Flee the palace at once\"", "\"Say nothing and you will be safe\"", "\"Who knows whether you have come to the kingdom for such a time as this?\"", "\"The king will surely spare you\""],"optionsEs":["«Huye del palacio de inmediato»", "«No digas nada y estarás a salvo»", "«¿Quién sabe si para esta hora has llegado al reino?»", "«El rey ciertamente te perdonará»"],"explanationEn":"Esther would not escape merely by being in the palace.","explanationEs":"Ester no escaparía solo por estar en el palacio.","correct":2},{"textEn":"16. What was Esther's resolve?","textEs":"16. ¿Cuál fue la resolución de Ester?","optionsEn":["To fast three days and go to the king — \"If I perish, I perish\"", "To run away by night", "To deny she was a Jew", "To bribe Haman"],"optionsEs":["Ayunar tres días e ir al rey — «Y si perezco, que perezca»", "Huir de noche", "Negar que era judía", "Sobornar a Amán"],"explanationEn":"Her courage to do right whatever the cost makes her a heroine.","explanationEs":"Su valor de hacer lo correcto costara lo que costara la hace una heroína.","correct":0},{"textEn":"17. What does the picture of Frodo and Gandalf illustrate?","textEs":"17. ¿Qué ilustra la imagen de Frodo y Gandalf?","optionsEn":["That magic saves us", "That we are chosen and must use such strength and heart and wits as we have", "That small people cannot help", "That danger should be avoided"],"optionsEs":["Que la magia nos salva", "Que somos escogidos y debemos usar la fuerza y el corazón y el ingenio que tengamos", "Que la gente pequeña no puede ayudar", "Que el peligro debe evitarse"],"explanationEn":"We do not choose our times, but we are called to act faithfully in them.","explanationEs":"No escogemos nuestros tiempos, pero somos llamados a actuar fielmente en ellos.","correct":1},{"textEn":"18. Who is our Wonderful Counselor (Isaiah 9:6), and what resolve did the Christian doctor express?","textEs":"18. ¿Quién es nuestro Admirable Consejero (Isaías 9:6), y qué resolución expresó el médico cristiano?","optionsEn":["Haman — and the doctor stayed silent", "Mordecai — and the doctor refused to help", "Jesus Christ — and the doctor said, \"Regardless of the consequences, I will always try to do the right thing\"", "The king — and the doctor fled"],"optionsEs":["Amán — y el médico calló", "Mardoqueo — y el médico se negó a ayudar", "Jesucristo — y el médico dijo: \"Sin importar las consecuencias, siempre trataré de hacer lo correcto\"", "El rey — y el médico huyó"],"explanationEn":"That spirit of doing right whatever the cost is Esther's spirit.","explanationEs":"Ese espíritu de hacer lo correcto a cualquier costo es el espíritu de Ester.","correct":2},{"textEn":"19. Why is God often silent (as in Esther)?","textEs":"19. ¿Por qué está Dios a menudo en silencio (como en Ester)?","optionsEn":["Because He is absent", "Because He does not care", "Because He is powerless", "Because silence requires faith not sight, makes us seek His will, and produces maturity — yet it is providence, not absence"],"optionsEs":["Porque está ausente", "Porque no le importa", "Porque no tiene poder", "Porque el silencio requiere fe no vista, nos hace buscar su voluntad, y produce madurez — y sin embargo es providencia, no ausencia"],"explanationEn":"Silence is not absence; Christ upholds all things by the word of His power.","explanationEs":"El silencio no es ausencia; Cristo sustenta todas las cosas con la palabra de su poder.","correct":3},{"textEn":"20. What is \"the great reversal,\" and the theme of the book?","textEs":"20. ¿Qué es «el gran giro», y el tema del libro?","optionsEn":["The gallows Haman built for Mordecai became his own — God's unseen hand positions His people \"for such a time as this,\" writing the upper story all along", "Esther lost everything", "The Jews were destroyed", "The king never acted"],"optionsEs":["La horca que Amán construyó para Mardoqueo se volvió la suya — la mano invisible de Dios coloca a su pueblo \"para esta hora\", escribiendo la historia superior todo el tiempo", "Ester lo perdió todo", "Los judíos fueron destruidos", "El rey nunca actuó"],"explanationEn":"We see the lower story; God works the upper story all along.","explanationEs":"Vemos la historia inferior; Dios obra la historia superior todo el tiempo.","correct":0}];
+const kwQuestions = [{"textEn":"21. What is unique about the book of Esther, and where is it set?","textEs":"21. ¿Qué tiene de único el libro de Ester, y dónde se sitúa?","kw_en":["god","named","persia","xerxes","women","ruth","book","providence"],"kw_es":["dios","nombr","persia","jerjes","mujer","rut","libro","providencia"],"modelEn":"The book of Esther is unique because the name of God is never once mentioned in it, from the first verse to the last, and yet He is on every page. It is one of only two books in all of Scripture named for a woman, Ruth being the other. It is set not in Babylon but in Persia, modern Iran, under King Xerxes (Ahasuerus). The whole book is a study in the hidden providence of God.","modelEs":"El libro de Ester es único porque el nombre de Dios nunca se menciona ni una sola vez en él, desde el primer versículo hasta el último, y sin embargo Él está en cada página. Es uno de solo dos libros en toda la Escritura que llevan el nombre de una mujer, siendo Rut el otro. Se sitúa no en Babilonia sino en Persia, el Irán moderno, bajo el rey Jerjes (Asuero). Todo el libro es un estudio de la providencia oculta de Dios."},{"textEn":"22. Describe the fearful queen — how Esther came to the throne.","textEs":"22. Describe la reina temerosa — cómo llegó Ester al trono.","kw_en":["vashti","banished","search","mordecai","esther","queen","harem","choice"],"kw_es":["vasti","desterr","busqueda","mardoqueo","ester","reina","haren","eleccion"],"modelEn":"At a royal feast the drunken king commanded Queen Vashti to display her beauty; she refused and was banished. In the empire-wide search for a new queen, officers gathered the beautiful young women of every province into the king's harem, and among them, taken like the others, was Mordecai's young cousin Esther, whom he had raised. Neither of them appears to have had much real choice once the decree went out; this was closer to imperial conscription than an ordinary marriage. God can work through such hard, complicated circumstances, and Esther was crowned queen of Persia.","modelEs":"En un banquete real el rey embriagado ordenó a la reina Vasti que mostrara su belleza; ella se negó y fue desterrada. En la búsqueda imperial de una nueva reina, los oficiales reunieron a las jóvenes hermosas de cada provincia en el harén del rey, y entre ellas, tomada como las demás, estaba la joven prima de Mardoqueo, Ester, a quien él había criado. Ninguno de los dos parece haber tenido mucha elección real una vez emitido el decreto; esto se parecía más a una conscripción imperial que a un matrimonio ordinario. Dios puede obrar a través de circunstancias tan difíciles y complicadas, y Ester fue coronada reina de Persia."},{"textEn":"23. What was Esther's crisis, and what does Scripture say about fear?","textEs":"23. ¿Cuál fue la crisis de Ester, y qué dice la Escritura acerca del temor?","kw_en":["uninvited","death","fear","trust","psalm","love","casts","john"],"kw_es":["invitada","muerte","temor","confi","salmo","amor","echa","juan"],"modelEn":"The crisis was that to approach the king uninvited was to risk death, yet only so could Esther plead for her people. Like Esther, we all face fearful situations, but the Word speaks to our fear. \"Whenever I am afraid, I will trust in You,\" said David (Psalm 56:3), and \"perfect love casts out fear,\" wrote John (1 John 4:18). Of the Lord's roughly 125 commands, twenty-one are some form of \"do not be afraid.\" We were built for faith, not for fear.","modelEs":"La crisis era que acercarse al rey sin ser invitada era arriesgar la muerte, y sin embargo solo así podía Ester interceder por su pueblo. Como Ester, todos enfrentamos situaciones temibles, pero la Palabra habla a nuestro temor. \"En el día que temo, yo en ti confío\", dijo David (Salmo 56:3), y \"el perfecto amor echa fuera el temor\", escribió Juan (1 Juan 4:18). De los aproximadamente 125 mandatos del Señor, veintiuno son alguna forma de \"no temáis\". Fuimos hechos para la fe, no para el temor."},{"textEn":"24. Who was Haman, what was his plot, and what lies behind it?","textEs":"24. ¿Quién era Amán, cuál fue su complot, y qué hay detrás de él?","kw_en":["haman","amalekite","bow","plot","provinces","signet","satan","destroy"],"kw_es":["aman","amalecita","inclin","complot","provincias","sello","satanas","destruir"],"modelEn":"Haman was a descendant of the Amalekites, the ancient enemies of Israel, enraged that Mordecai alone would not bow to him. His wounded pride swelled into a plot to destroy every Jew in all 127 provinces; he bought the king's favor, received the royal signet ring, and made the murder of a whole people legal. Behind it stood Satan's age-old aim to destroy the people of God, the same hatred seen throughout the Bible and in today's headlines.","modelEs":"Amán era descendiente de los amalecitas, los antiguos enemigos de Israel, enfurecido de que solo Mardoqueo no se inclinara ante él. Su orgullo herido creció en un complot para destruir a todo judío en las 127 provincias; compró el favor del rey, recibió el anillo real con el sello, e hizo legal el asesinato de todo un pueblo. Detrás de ello estaba el propósito milenario de Satanás de destruir al pueblo de Dios, el mismo odio visto por toda la Biblia y en los titulares de hoy."},{"textEn":"25. What message did Mordecai send, and what was Esther's resolve?","textEs":"25. ¿Qué mensaje envió Mardoqueo, y cuál fue la resolución de Ester?","kw_en":["mordecai","silent","perish","time","kingdom","fast","courage","deliverance"],"kw_es":["mardoqueo","callar","perezca","hora","reino","ayuno","valor","liberacion"],"modelEn":"Mordecai sent word that Esther would not escape merely by being in the palace: if she remained silent, deliverance would arise for the Jews from another place, but she and her father's house would perish — \"who knows whether you have come to the kingdom for such a time as this?\" Esther weighed it and answered with courage, calling for a three-day fast and resolving, \"If I perish, I perish.\" That resolve to do right whatever the cost is what makes her a heroine.","modelEs":"Mardoqueo envió aviso de que Ester no escaparía solo por estar en el palacio: si callaba, la liberación de los judíos vendría de otra parte, pero ella y la casa de su padre perecerían — \"¿quién sabe si para esta hora has llegado al reino?\". Ester lo sopesó y respondió con valor, convocando un ayuno de tres días y resolviendo: \"Y si perezco, que perezca\". Esa resolución de hacer lo correcto costara lo que costara es lo que la hace una heroína."},{"textEn":"26. Who is our Wonderful Counselor, and what resolve did the prison doctor express?","textEs":"26. ¿Quién es nuestro Admirable Consejero, y qué resolución expresó el médico de la prisión?","kw_en":["jesus","counselor","isaiah","right","consequences","doctor","wise","christ"],"kw_es":["jesus","consejero","isaias","correcto","consecuencias","medico","sabio","cristo"],"modelEn":"We have a Counselor greater than Mordecai, for the Lord Jesus is named \"Wonderful, Counselor, Mighty God\" (Isaiah 9:6). As Gandalf told Frodo, none of us choose our times, but we are chosen and must use such strength and heart and wits as we have. A Christian doctor once supervised in a prison summed up the whole matter: \"Regardless of the consequences, I will always try to do the right thing.\" That is Esther's spirit, and it should be ours.","modelEs":"Tenemos un Consejero mayor que Mardoqueo, porque el Señor Jesús es llamado \"Admirable, Consejero, Dios Fuerte\" (Isaías 9:6). Como Gandalf dijo a Frodo, ninguno de nosotros escoge sus tiempos, pero somos escogidos y debemos usar la fuerza y el corazón y el ingenio que tengamos. Un médico cristiano supervisado una vez en una prisión resumió todo el asunto: \"Sin importar las consecuencias, siempre trataré de hacer lo correcto\". Ese es el espíritu de Ester, y debería ser el nuestro."},{"textEn":"27. Why is God often silent? Give the reasons.","textEs":"27. ¿Por qué está Dios a menudo en silencio? Da las razones.","kw_en":["silent","faith","sight","will","maturity","providence","absence","uphold"],"kw_es":["silencio","fe","vista","voluntad","madurez","providencia","ausencia","susten"],"modelEn":"God is often silent for at least three reasons. First, His silence requires faith rather than sight, for blessed are those who have not seen and yet have believed. Second, it makes us struggle to find His will, and in that struggle the deepest lessons are learned. Third, it produces maturity, opening the eyes of the heart. But silence is not absence; what looks like silence is providence, for Christ is even now upholding all things by the word of His power.","modelEs":"Dios está a menudo en silencio por al menos tres razones. Primera, su silencio requiere fe en lugar de vista, porque bienaventurados los que no vieron y creyeron. Segunda, nos hace luchar por hallar su voluntad, y en esa lucha se aprenden las lecciones más profundas. Tercera, produce madurez, abriendo los ojos del corazón. Pero el silencio no es ausencia; lo que parece silencio es providencia, porque Cristo aun ahora sustenta todas las cosas con la palabra de su poder."},{"textEn":"28. Describe the great reversal.","textEs":"28. Describe el gran giro.","kw_en":["sleepless","chronicle","gallows","haman","mordecai","reversal","upper","story"],"kw_es":["insomnio","cronica","horca","aman","mardoqueo","giro","superior","historia"],"modelEn":"One night the king could not sleep, so he had the royal chronicles read aloud, and heard how Mordecai had once saved his life and was never rewarded. The next morning Haman came to ask to hang Mordecai, but was ordered to honor him instead. In the end the gallows Haman built for Mordecai became the gallows on which Haman himself was hanged. It is the great reversal, and no detail is labeled a miracle: we see the lower story while God works the upper story.","modelEs":"Una noche el rey no podía dormir, así que hizo leer en voz alta las crónicas reales, y oyó cómo Mardoqueo una vez le había salvado la vida y nunca fue recompensado. A la mañana siguiente Amán vino a pedir colgar a Mardoqueo, pero se le ordenó honrarlo en cambio. Al final la horca que Amán construyó para Mardoqueo se volvió la horca en que el propio Amán fue colgado. Es el gran giro, y ningún detalle lleva la etiqueta de milagro: vemos la historia inferior mientras Dios obra la historia superior."},{"textEn":"29. How does Esther's placement compare with Joseph and Daniel?","textEs":"29. ¿Cómo se compara la colocación de Ester con la de José y Daniel?","kw_en":["joseph","egypt","daniel","babylon","placed","position","providence","people"],"kw_es":["jose","egipto","daniel","babilonia","coloc","posicion","providencia","pueblo"],"modelEn":"Esther's placement is part of a pattern. As God once placed Joseph in Egypt, and placed Daniel and his three friends in Babylon, so He placed Mordecai and Esther in Persia at the very hour they were needed. And so He has placed you. Behind every so-called coincidence is the hand of a God who positions His people exactly where He needs them and calls them to courageous faith. The same providence that guarded Israel guards His people still.","modelEs":"La colocación de Ester es parte de un patrón. Como Dios una vez colocó a José en Egipto, y colocó a Daniel y a sus tres amigos en Babilonia, así colocó a Mardoqueo y a Ester en Persia a la hora misma en que se los necesitaba. Y así te ha colocado a ti. Detrás de cada supuesta coincidencia está la mano de un Dios que coloca a su pueblo exactamente donde lo necesita y lo llama a una fe valiente. La misma providencia que guardó a Israel guarda a su pueblo todavía."},{"textEn":"30. State the theme of Esther — the providence of the unseen God.","textEs":"30. Expresa el tema de Ester — la providencia del Dios invisible.","kw_en":["providence","unseen","hand","coincidence","time","courageous","upper","silent"],"kw_es":["providencia","invisible","mano","coincidencia","hora","valiente","superior","silencioso"],"modelEn":"The theme of Esther is the providence of the unseen God. Though His name is never mentioned, His unseen hand is behind every so-called coincidence, positioning His people \"for such a time as this\" and calling them to step out in courageous faith. The God who seems silent is writing the upper story all along, and He can be trusted to finish it. When our own hour comes, we may have been brought to our place for such a time as this.","modelEs":"El tema de Ester es la providencia del Dios invisible. Aunque su nombre nunca se menciona, su mano invisible está detrás de cada supuesta coincidencia, colocando a su pueblo \"para esta hora\" y llamándolo a salir con fe valiente. El Dios que parece silencioso está escribiendo la historia superior todo el tiempo, y se le puede confiar que la termine. Cuando llegue nuestra propia hora, tal vez fuimos traídos a nuestro lugar para esta hora."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleCharacters2Readings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

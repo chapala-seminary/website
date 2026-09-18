@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Psalms — Unit 5: Psalm 119, The Word of God</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 6 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 The Book of Psalms — Unit 5: Psalm 119, The Word of God</span><span class="lang-es">📖 El Libro de los Salmos — Unidad 5: Salmo 119, La Palabra de Dios</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Your word is a lamp to my feet and a light to my path." — Psalm 119:105 (NKJV)</span><span class="lang-es">"Lámpara es a mis pies tu palabra, y lumbrera a mi camino." — Salmo 119:105 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to The Book of Psalms. Please register before beginning Unit 5.</span><span class="lang-es">Bienvenido a El Libro de los Salmos. Por favor regístrese antes de comenzar la Unidad 5.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+            <h3>1. The Psalm of the Word</h3>
+            <p>Psalm 119 is the longest chapter in the Bible &mdash; one hundred and seventy-six verses, arranged as an acrostic poem in twenty-two sections, one for each letter of the Hebrew alphabet. And almost every single verse mentions the Word of God under one of its many names: the law, the testimonies, the precepts, the statutes, the commandments, the judgments, the word. There are two psalms that are devoted entirely to the Word of God, Psalm 19 and Psalm 119, and this one is the great anthem of a believer who has fallen in love with the Scriptures. We live in a confusing world, and sometimes we do not know which way to turn. The good news of Psalm 119 is that God has answers, and they are often found in His Word.</p>
+            <p>When we speak of the "Word of God," we should remember that the phrase carries more than one meaning. There is the <strong>prophetic Word of God</strong> &mdash; the message God spoke through His prophets. There is the <strong>living Word of God</strong> &mdash; the Lord Jesus Christ Himself, who is called the Word made flesh. And there is the <strong>written Word of God</strong> &mdash; the Bible, the book we hold in our hands. All three are God speaking, and Psalm 119 teaches us to treasure that speaking with our whole heart.</p>
+
+            <h3>2. Where Wisdom Is Found</h3>
+            <p>King Solomon, when God offered him anything he wished, asked for wisdom &mdash; wisdom that came from God. That is still the great need. And there are three places where God's wisdom comes to us. The first is through <strong>prayer</strong>. James 1:5 says, "If any of you lacks wisdom, let him ask of God, who gives to all liberally and without reproach, and it will be given to him." Many times when we pray, God grants a quiet sense of rightness about the way forward.</p>
+            <p>The second place wisdom comes is through godly counsel. We see this when Moses' father-in-law, Jethro, watched Moses judging the people who came to him all day long &mdash; alone &mdash; until he was overwhelmed by the needs of others. Jethro gave him wise counsel: appoint God-honoring men as judges to help carry the load (Exodus 18:13-27). That counsel let Moses use the gifts of others for the service of many, rather than trying to manage everything himself. Many times in life we seek wisdom from godly men and women, and almost immediately we know when it is coming from the Lord &mdash; because it sounds like Jesus. The third and most critical place, as we will see, is the written Word itself.</p>
+
+            <h3>3. The Lamp and the Light</h3>
+            <div class="scripture">
+                <strong>Psalm 119:105 (NKJV):</strong> "Your word is a lamp to my feet and a light to my path."
+            </div>
+            <p>But the most critical piece of wisdom comes from the written Word of God, the Bible. It is a lamp to our feet and a light to our path &mdash; light enough for the next step, and light enough for the whole journey. The world tries every other path to satisfaction and comes up empty, but the Word of God has guided pilgrims home for thousands of years.</p>
+            <p>Consider the ward sister in a children's hospital in England who had found life, as she herself said, futile and meaningless. She had waded through book after book and labored through philosophy after philosophy trying to find satisfaction. She had never tried the Bible, because a friend had convinced her with subtle arguments that it could not be true. One day a visitor came to the ward and left a supply of Gospels. She read a copy of John's Gospel, and she believed. "I listened to that voice," she said, "and heard the truth, and found my Savior." The lamp had been within her reach the whole time.</p>
+
+            <h3>4. Hidden in the Heart</h3>
+            <div class="scripture">
+                <strong>Psalm 119:11 (NKJV):</strong> "Your word I have hidden in my heart, that I might not sin against You."
+            </div>
+            <p>Notice where the Word is stored: not merely on a shelf, but in the heart. When the Word is hidden in the heart, it becomes a guard against sin and a treasure that no enemy can confiscate. People may take away your Bible, but they cannot reach into your heart and remove what you have hidden there.</p>
+            <div class="illustration">
+                <strong>The Bible That Could Not Be Burned:</strong> A boy was ordered by his father to stop reading his Bible, but he slipped it aside and read it anyway despite his father's objections. One day the father caught him, snatched the Bible away, and threw it into the fire. But he noticed the boy was smiling. "Why are you smiling?" he demanded. The boy answered, "I was just thinking that you cannot burn this in here" &mdash; and he pointed to his heart. That is the one place the Word is truly safe.
+            </div>
+
+            <h3>5. The Word That Outlasts Its Enemies</h3>
+            <div class="scripture">
+                <strong>Psalm 119:89 (NKJV):</strong> "Forever, O LORD, Your word is settled in heaven."
+            </div>
+            <p>The Word of God has outlasted every ruler who ever tried to destroy it. Henry V of England once considered Bible reading a crime and passed a law that threatened death or loss of property to anyone caught reading a Bible. But his decrees could not shorten the life of the Scriptures by one minute or lighten their weight by one ounce. The Bible has traveled more roads, been spoken in more languages, and knocked at more doors than any other book ever written. The Scripture is holy; it is altogether different from any other book, because it is the living Word of the living God, and it is settled forever in heaven.</p>
+
+            <h3>6. The Word That Will Not Be Silenced</h3>
+            <div class="illustration">
+                <strong>Two Men and One Book:</strong> A man in Brazil bought a New Testament and took it home to burn. He found the fire had gone out, so he deliberately lit it again and flung the New Testament on the flames. It would not burn. He opened the pages to make it catch more easily, and it fell open to the Sermon on the Mount. He glanced at the words as the flames worked at the edges &mdash; and his mind was caught. He took the book back out, read on through the night, forgetting all time until the dawn broke, and then stood up and declared, "I believe." Another man, in Chile, found a few water-stained pages of a book washed up on the seashore after an earthquake and tidal wave. He read them and never rested until he had obtained the rest of the Bible. He not only became a Christian; he devoted the rest of his life to carrying the Scriptures into the forgotten villages of northern Chile.
+            </div>
+            <p>You cannot burn this Book out of the world, and you cannot wash it away. It has a life of its own, because it is the Word of the One who lives forever.</p>
+
+            <h3>7. The Love of the Law</h3>
+            <div class="scripture">
+                <strong>Psalm 119:97 (NKJV):</strong> "Oh, how I love Your law! It is my meditation all the day."
+            </div>
+            <p>The psalmist does not merely study the Word or obey it from duty &mdash; he loves it. It is his meditation all the day, the thing his mind returns to when it is free to go where it pleases. This is the difference between religion as a burden and religion as a delight. When you truly love someone, you want to hear their voice, you turn their words over in your mind, you keep their letters. The believer who loves God loves to hear Him speak, and God speaks in His Word. To meditate on the law all the day is simply to keep company with the God who wrote it.</p>
+
+            <h3>8. Honest Before God</h3>
+            <p>All the psalms are designed to teach us to do one thing: to worship. They reflect every human emotion, but they do so in a distinct and important way &mdash; they are emotions seen in relationship to God. Every psalm is written in the presence of God, and so this whole book teaches us how to be honest before Him. If you have a problem, tell God about it. Do not hide it, do not cover it up, and above all do not get pious and try to smooth it over. If you are angry, say so. If you are resentful, bring it out. If you are happy, express it. That is what worship is: a heart's honesty in the presence of God. As Jesus told the woman at the well, "The true worshipers will worship the Father in spirit and truth," and that is the kind of worshiper God is seeking.</p>
+            <p>Think of the old story of a converted miser, long known as a stingy man. After his conversion a neighbor suffered a serious loss, and the former miser's first thought was, "They need help; I will take them a ham from my smokehouse." But on the way his old nature whispered, "Why a whole ham? Half a ham will be plenty." He debated it the whole way. Then he remembered what he had resolved in the presence of God &mdash; that by grace he would stand against the old evil whenever it asserted itself. When the tempter kept whispering, "Give him half," the old man finally said, "Look, Satan, if you don't pipe down, I'll give him the whole smokehouse." That is what grace does. Where sin abounds, grace abounds much more &mdash; and that is the purpose of the psalms: to bring us to grace, and to teach us to love the God who speaks to us in His Word.</p>
+</div>
+
+<div class="lang-es">
+            <h3>1. El Salmo de la Palabra</h3>
+            <p>El Salmo 119 es el capítulo más largo de la Biblia &mdash; ciento setenta y seis versículos, dispuestos como un poema acróstico en veintidós secciones, una por cada letra del alfabeto hebreo. Y casi cada versículo menciona la Palabra de Dios bajo uno de sus muchos nombres: la ley, los testimonios, los preceptos, los estatutos, los mandamientos, los juicios, la palabra. Hay dos salmos dedicados enteramente a la Palabra de Dios, el Salmo 19 y el Salmo 119, y este es el gran himno de un creyente que se ha enamorado de las Escrituras. Vivimos en un mundo confuso, y a veces no sabemos hacia dónde volvernos. La buena noticia del Salmo 119 es que Dios tiene respuestas, y a menudo se hallan en Su Palabra.</p>
+            <p>Cuando hablamos de la "Palabra de Dios," debemos recordar que la frase tiene más de un significado. Está la <strong>Palabra profética de Dios</strong> &mdash; el mensaje que Dios habló por medio de Sus profetas. Está la <strong>Palabra viva de Dios</strong> &mdash; el Señor Jesucristo mismo, que es llamado el Verbo hecho carne. Y está la <strong>Palabra escrita de Dios</strong> &mdash; la Biblia, el libro que tenemos en las manos. Las tres son Dios hablando, y el Salmo 119 nos enseña a atesorar ese hablar con todo el corazón.</p>
+
+            <h3>2. Dónde se Halla la Sabiduría</h3>
+            <p>El rey Salomón, cuando Dios le ofreció cualquier cosa que deseara, pidió sabiduría &mdash; sabiduría que venía de Dios. Esa sigue siendo la gran necesidad. Y hay tres lugares donde la sabiduría de Dios nos llega. El primero es por medio de la <strong>oración</strong>. Santiago 1:5 dice: "Y si alguno de vosotros tiene falta de sabiduría, pídala a Dios, el cual da a todos abundantemente y sin reproche, y le será dada." Muchas veces cuando oramos, Dios concede un sereno sentido de rectitud sobre el camino a seguir.</p>
+            <p>El segundo lugar de donde viene la sabiduría es el consejo piadoso. Lo vemos cuando Jetro, el suegro de Moisés, observó a Moisés juzgando todo el día &mdash; solo &mdash; a la gente que venía a él, hasta quedar abrumado por las necesidades de otros. Jetro le dio un consejo sabio: nombrar hombres temerosos de Dios como jueces para ayudar a llevar la carga (Éxodo 18:13-27). Aquel consejo permitió a Moisés usar los dones de otros para el servicio de muchos, en lugar de tratar de manejarlo todo él mismo. Muchas veces en la vida buscamos sabiduría de hombres y mujeres piadosos, y casi de inmediato sabemos cuándo viene del Señor &mdash; porque suena como Jesús. El tercer lugar, y el más crítico, como veremos, es la Palabra escrita misma.</p>
+
+            <h3>3. La Lámpara y la Lumbrera</h3>
+            <div class="scripture">
+                <strong>Salmo 119:105 (RVG):</strong> "Lámpara es a mis pies tu palabra, y lumbrera a mi camino."
+            </div>
+            <p>Pero la pieza más crítica de sabiduría viene de la Palabra escrita de Dios, la Biblia. Es lámpara a nuestros pies y lumbrera a nuestro camino &mdash; luz suficiente para el próximo paso, y luz suficiente para todo el viaje. El mundo prueba todos los demás caminos hacia la satisfacción y queda vacío, pero la Palabra de Dios ha guiado a los peregrinos a casa por miles de años.</p>
+            <p>Considere a la enfermera de sala en un hospital de niños en Inglaterra que hallaba la vida, como ella misma decía, fútil y sin sentido. Había recorrido libro tras libro y batallado con filosofía tras filosofía tratando de hallar satisfacción. Nunca había probado la Biblia, porque un amigo la había convencido con argumentos sutiles de que no podía ser verdad. Un día un visitante vino a la sala y dejó unos Evangelios. Ella leyó un ejemplar del Evangelio de Juan, y creyó. "Escuché aquella voz," dijo, "y oí la verdad, y hallé a mi Salvador." La lámpara había estado a su alcance todo el tiempo.</p>
+
+            <h3>4. Guardada en el Corazón</h3>
+            <div class="scripture">
+                <strong>Salmo 119:11 (RVG):</strong> "En mi corazón he guardado tus dichos, para no pecar contra ti."
+            </div>
+            <p>Note dónde se guarda la Palabra: no meramente en un estante, sino en el corazón. Cuando la Palabra está guardada en el corazón, se vuelve una defensa contra el pecado y un tesoro que ningún enemigo puede confiscar. Puede que la gente le quite su Biblia, pero no puede meter la mano en su corazón y quitar lo que usted ha guardado allí.</p>
+            <div class="illustration">
+                <strong>La Biblia que No se Pudo Quemar:</strong> A un niño su padre le ordenó dejar de leer su Biblia, pero él la guardaba a un lado y la leía de todos modos a pesar de las objeciones de su padre. Un día el padre lo sorprendió, le arrebató la Biblia y la arrojó al fuego. Pero notó que el niño sonreía. "¿Por qué sonríes?" exigió. El niño respondió: "Solo estaba pensando que esto no lo puede quemar aquí dentro" &mdash; y señaló su corazón. Ese es el único lugar donde la Palabra está verdaderamente segura.
+            </div>
+
+            <h3>5. La Palabra que Sobrevive a sus Enemigos</h3>
+            <div class="scripture">
+                <strong>Salmo 119:89 (RVG):</strong> "Para siempre, oh Jehová, permanece tu palabra en los cielos."
+            </div>
+            <p>La Palabra de Dios ha sobrevivido a todo gobernante que jamás intentó destruirla. Enrique V de Inglaterra una vez consideró la lectura de la Biblia un crimen y aprobó una ley que amenazaba con la muerte o la pérdida de bienes a quien fuera sorprendido leyendo una Biblia. Pero sus decretos no pudieron acortar la vida de las Escrituras ni un minuto, ni aligerar su peso ni una onza. La Biblia ha viajado por más caminos, se ha hablado en más idiomas, y ha tocado a más puertas que cualquier otro libro jamás escrito. La Escritura es santa; es completamente distinta de cualquier otro libro, porque es la Palabra viva del Dios vivo, y permanece para siempre en los cielos.</p>
+
+            <h3>6. La Palabra que No Será Silenciada</h3>
+            <div class="illustration">
+                <strong>Dos Hombres y un Libro:</strong> Un hombre en Brasil compró un Nuevo Testamento y lo llevó a casa para quemarlo. Halló que el fuego se había apagado, así que deliberadamente lo encendió de nuevo y arrojó el Nuevo Testamento a las llamas. No ardía. Abrió las páginas para que prendiera más fácilmente, y se abrió en el Sermón del Monte. Echó un vistazo a las palabras mientras las llamas trabajaban los bordes &mdash; y su mente quedó cautivada. Sacó el libro, leyó toda la noche, olvidando el tiempo hasta que rompió el alba, y entonces se puso de pie y declaró: "Creo." Otro hombre, en Chile, halló unas páginas manchadas de agua de un libro arrastradas a la orilla del mar tras un terremoto y un maremoto. Las leyó y no descansó hasta obtener el resto de la Biblia. No solo llegó a ser cristiano; dedicó el resto de su vida a llevar las Escrituras a las aldeas olvidadas del norte de Chile.
+            </div>
+            <p>No se puede quemar este Libro para sacarlo del mundo, ni se le puede arrastrar con el agua. Tiene vida propia, porque es la Palabra de Aquel que vive para siempre.</p>
+
+            <h3>7. El Amor a la Ley</h3>
+            <div class="scripture">
+                <strong>Salmo 119:97 (RVG):</strong> "¡Oh, cuánto amo yo tu ley! Todo el día es ella mi meditación."
+            </div>
+            <p>El salmista no solo estudia la Palabra ni la obedece por deber &mdash; la ama. Es su meditación todo el día, aquello a lo que su mente regresa cuando queda libre para ir a donde quiera. Esta es la diferencia entre la religión como carga y la religión como deleite. Cuando uno verdaderamente ama a alguien, quiere oír su voz, repasa sus palabras en la mente, guarda sus cartas. El creyente que ama a Dios ama oírle hablar, y Dios habla en Su Palabra. Meditar en la ley todo el día es sencillamente estar en compañía del Dios que la escribió.</p>
+
+            <h3>8. Honestos Delante de Dios</h3>
+            <p>Todos los salmos están diseñados para enseñarnos a hacer una cosa: adorar. Reflejan toda emoción humana, pero lo hacen de una manera distinta e importante &mdash; son emociones vistas en relación con Dios. Cada salmo está escrito en la presencia de Dios, y por eso todo este libro nos enseña a ser honestos delante de &Eacute;l. Si tiene un problema, dígaselo a Dios. No lo esconda, no lo encubra, y sobre todo no se ponga piadoso tratando de disimularlo. Si está enojado, dígalo. Si está resentido, sáquelo. Si está feliz, exprésela. Eso es la adoración: la honestidad del corazón en la presencia de Dios. Como Jesús dijo a la mujer junto al pozo: "Los verdaderos adoradores adorarán al Padre en espíritu y en verdad," y esa es la clase de adorador que Dios busca.</p>
+            <p>Piense en la vieja historia de un avaro convertido, conocido por mucho tiempo como un hombre tacaño. Después de su conversión un vecino sufrió una pérdida seria, y el primer pensamiento del antiguo avaro fue: "Necesitan ayuda; les llevaré un jamón de mi ahumadero." Pero en el camino su vieja naturaleza susurró: "¿Por qué un jamón entero? Medio jamón será suficiente." Lo debatió todo el camino. Entonces recordó lo que había resuelto en la presencia de Dios &mdash; que por gracia se opondría al viejo mal cada vez que se asomara. Cuando el tentador seguía susurrando: "Dale la mitad," el anciano al fin dijo: "Mira, Satanás, si no te callas, le daré todo el ahumadero." Eso es lo que hace la gracia. Donde el pecado abundó, sobreabundó la gracia &mdash; y ese es el propósito de los salmos: traernos a la gracia, y enseñarnos a amar al Dios que nos habla en Su Palabra.</p>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Psalms — Unit 5 (Josh engine, Psalm 119)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 5;
+const COURSE = 'psalms';
+const NEXT_UNIT_URL = 'CTSPsalmsUnit6.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Psalm 1 - The Two Ways",
+    "Psalm 23 - The Shepherd",
+    "Psalm 24 - The King of Glory",
+    "Psalm 51 - The Penitential Psalm",
+    "Psalm 119 - The Word of God",
+    "Psalm 22 - The Forsaken / Messianic Psalm",
+    "Psalm 56 - When I Am Afraid",
+    "Psalm 28 - When God Is Silent",
+    "Psalm 103 - Count Your Blessings",
+    "Psalm 55 - Casting Your Burden",
+    "The Psalms in Ministry I - Capstone",
+    "The Psalms in Ministry II - Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPsalmsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// MC answer key: A=B=C=D=5; all 20 verified against Psalm 119
+const mcQuestions = [
+    { textEn: "1. What distinction does Psalm 119 hold among the chapters of the Bible?", textEs: "1. ¿Qué distinción tiene el Salmo 119 entre los capítulos de la Biblia?",
+      optionsEn: ["It is the longest chapter in the Bible", "It is the shortest psalm", "It is the only psalm by Moses", "It contains no mention of the law"],
+      optionsEs: ["Es el capítulo más largo de la Biblia", "Es el salmo más corto", "Es el único salmo de Moisés", "No menciona la ley"], explanationEn: "Psalm 119 is the longest chapter in the Bible — 176 verses — and nearly every one exalts the Word of God.", explanationEs: "El Salmo 119 es el capítulo más largo de la Biblia — 176 versículos — y casi cada uno exalta la Palabra de Dios.", correct: 0 },
+    { textEn: "2. How is Psalm 119 structured as a poem?", textEs: "2. ¿Cómo está estructurado el Salmo 119 como poema?",
+      optionsEn: ["As a single unbroken prayer", "As a song with a repeating chorus", "As a dialogue between two voices", "As an acrostic in 22 sections, one for each Hebrew letter"],
+      optionsEs: ["Como una sola oración ininterrumpida", "Como un canto con coro repetido", "Como un diálogo entre dos voces", "Como un acróstico en 22 secciones, una por cada letra hebrea"], explanationEn: "It is an acrostic of 22 sections, one for each Hebrew letter — a carefully crafted anthem to Scripture.", explanationEs: "Es un acróstico de 22 secciones, una por cada letra hebrea — un himno cuidadosamente elaborado a la Escritura.", correct: 3 },
+    { textEn: "3. According to the lesson, which two psalms are devoted entirely to the Word of God?", textEs: "3. Según la lección, ¿qué dos salmos están dedicados enteramente a la Palabra de Dios?",
+      optionsEn: ["Psalms 1 and 23", "Psalms 22 and 24", "Psalms 19 and 119", "Psalms 51 and 103"],
+      optionsEs: ["Salmos 1 y 23", "Salmos 22 y 24", "Salmos 19 y 119", "Salmos 51 y 103"], explanationEn: "Two psalms are devoted wholly to the Word of God: Psalm 19 and Psalm 119.", explanationEs: "Dos salmos están dedicados por entero a la Palabra de Dios: el Salmo 19 y el Salmo 119.", correct: 2 },
+    { textEn: "4. The lesson describes three meanings of \"the Word of God.\" Which set is correct?", textEs: "4. La lección describe tres significados de \"la Palabra de Dios.\" ¿Cuál conjunto es correcto?",
+      optionsEn: ["Spoken, sung, and remembered", "Old, New, and apocryphal", "Hebrew, Greek, and Latin", "Prophetic, living (Jesus), and written (the Bible)"],
+      optionsEs: ["Hablada, cantada y recordada", "Antiguo, Nuevo y apócrifo", "Hebreo, griego y latín", "Profética, viva (Jesús) y escrita (la Biblia)"], explanationEn: "'Word of God' carries three meanings: the prophetic word, the living Word (Jesus), and the written Word (the Bible).", explanationEs: "'Palabra de Dios' lleva tres sentidos: la palabra profética, la Palabra viva (Jesús), y la Palabra escrita (la Biblia).", correct: 3 },
+    { textEn: "5. What did King Solomon ask God for when offered anything he wished?", textEs: "5. ¿Qué pidió el rey Salomón a Dios cuando se le ofreció cualquier cosa que deseara?",
+      optionsEn: ["Wisdom that came from God", "Long life and riches", "Victory over his enemies", "A great name among the nations"],
+      optionsEs: ["Sabiduría que venía de Dios", "Larga vida y riquezas", "Victoria sobre sus enemigos", "Un gran nombre entre las naciones"], explanationEn: "Offered anything, Solomon asked for wisdom from God — still the greatest need we can bring to Him.", explanationEs: "Cuando se le ofreció cualquier cosa, Salomón pidió sabiduría de Dios — todavía la mayor necesidad que podemos traerle.", correct: 0 },
+    { textEn: "6. According to the lesson, what is the FIRST place God's wisdom comes to us, per James 1:5?", textEs: "6. Según la lección, ¿cuál es el PRIMER lugar de donde nos llega la sabiduría de Dios, según Santiago 1:5?",
+      optionsEn: ["Through dreams", "Through prayer — asking God, who gives liberally", "Through study of philosophy", "Through the counsel of kings"],
+      optionsEs: ["Por sueños", "Por la oración — pidiendo a Dios, que da abundantemente", "Por el estudio de la filosofía", "Por el consejo de reyes"], explanationEn: "The first place wisdom comes is prayer: James 1:5 says God gives liberally to all who ask Him.", explanationEs: "El primer lugar de donde viene la sabiduría es la oración: Santiago 1:5 dice que Dios da generosamente a todo el que le pide.", correct: 1 },
+    { textEn: "7. In the lesson, who gave Moses the wise counsel to appoint judges to share the load?", textEs: "7. En la lección, ¿quién dio a Moisés el sabio consejo de nombrar jueces para compartir la carga?",
+      optionsEn: ["Aaron his brother", "Joshua his successor", "Jethro his father-in-law", "Caleb the spy"],
+      optionsEs: ["Aarón su hermano", "Josué su sucesor", "Jetro su suegro", "Caleb el espía"], explanationEn: "Godly counsel is a second source of wisdom; Jethro counseled Moses to appoint judges to share the load.", explanationEs: "El consejo piadoso es una segunda fuente de sabiduría; Jetro aconsejó a Moisés nombrar jueces para compartir la carga.", correct: 2 },
+    { textEn: "8. How does the lesson say we recognize when counsel truly comes from the Lord?", textEs: "8. ¿Cómo dice la lección que reconocemos cuando el consejo viene verdaderamente del Señor?",
+      optionsEn: ["It always agrees with our wishes", "It comes only from ordained ministers", "It is confirmed by signs", "It \"sounds like Jesus\""],
+      optionsEs: ["Siempre concuerda con nuestros deseos", "Viene solo de ministros ordenados", "Se confirma con señales", "\"Suena como Jesús\""], explanationEn: "We know counsel is from the Lord when it 'sounds like Jesus' — agreeing with His character and His Word.", explanationEs: "Sabemos que el consejo es del Señor cuando 'suena como Jesús' — concordando con Su carácter y Su Palabra.", correct: 3 },
+    { textEn: "9. According to Psalm 119:105, what is God's word to our feet and path?", textEs: "9. Según el Salmo 119:105, ¿qué es la palabra de Dios para nuestros pies y camino?",
+      optionsEn: ["A lamp to the feet and a light to the path", "A sword and a shield", "A rod and a staff", "A rock and a fortress"],
+      optionsEs: ["Lámpara a los pies y lumbrera al camino", "Espada y escudo", "Vara y cayado", "Roca y fortaleza"], explanationEn: "Psalm 119:105 calls God's Word a lamp to the feet and a light to the path — guidance for the next step and the whole journey.", explanationEs: "El Salmo 119:105 llama a la Palabra lámpara a los pies y lumbrera al camino — guía para el siguiente paso y para todo el camino.", correct: 0 },
+    { textEn: "10. In the story of the ward sister in England, what finally brought her to faith?", textEs: "10. En la historia de la enfermera de sala en Inglaterra, ¿qué finalmente la llevó a la fe?",
+      optionsEn: ["A sermon she heard on the radio", "Reading a copy of John's Gospel left on the ward", "A vision during an illness", "The death of a patient"],
+      optionsEs: ["Un sermón que oyó por la radio", "Leer un ejemplar del Evangelio de Juan dejado en la sala", "Una visión durante una enfermedad", "La muerte de un paciente"], explanationEn: "The ward sister found faith by simply reading John's Gospel — the Word itself brought her to the Savior.", explanationEs: "La enfermera de sala halló la fe simplemente leyendo el Evangelio de Juan — la Palabra misma la llevó al Salvador.", correct: 1 },
+    { textEn: "11. According to Psalm 119:11, why does the psalmist hide God's word in his heart?", textEs: "11. Según el Salmo 119:11, ¿por qué guarda el salmista la palabra de Dios en su corazón?",
+      optionsEn: ["To recite it in public", "To win debates with unbelievers", "That he might not sin against God", "To earn a reward"],
+      optionsEs: ["Para recitarla en público", "Para ganar debates con incrédulos", "Para no pecar contra Dios", "Para ganar una recompensa"], explanationEn: "Psalm 119:11 says the Word is hidden in the heart so that we might not sin against God — it guards from within.", explanationEs: "El Salmo 119:11 dice que la Palabra se atesora en el corazón para no pecar contra Dios — guarda desde adentro.", correct: 2 },
+    { textEn: "12. In the story of the boy whose Bible was thrown into the fire, why was he smiling?", textEs: "12. En la historia del niño cuya Biblia fue arrojada al fuego, ¿por qué sonreía?",
+      optionsEn: ["He had another Bible hidden away", "He knew his father would relent", "The fire had gone out", "The word was hidden in his heart, which could not be burned"],
+      optionsEs: ["Tenía otra Biblia escondida", "Sabía que su padre cedería", "El fuego se había apagado", "La palabra estaba guardada en su corazón, que no podía quemarse"], explanationEn: "The boy smiled because the Word hidden in his heart could not be burned — what is treasured within is beyond reach.", explanationEs: "El niño sonrió porque la Palabra atesorada en su corazón no podía ser quemada — lo guardado dentro está fuera de alcance.", correct: 3 },
+    { textEn: "13. According to Psalm 119:89, where is God's word settled forever?", textEs: "13. Según el Salmo 119:89, ¿dónde permanece para siempre la palabra de Dios?",
+      optionsEn: ["Settled forever in heaven", "Hidden in the temple", "Written on the hearts of kings", "Sealed in a scroll"],
+      optionsEs: ["Permanece para siempre en los cielos", "Escondida en el templo", "Escrita en el corazón de los reyes", "Sellada en un rollo"], explanationEn: "Psalm 119:89 declares God's Word is settled forever in heaven — fixed and unchanging beyond every earthly power.", explanationEs: "El Salmo 119:89 declara que la Palabra de Dios permanece para siempre en los cielos — fija e inmutable más allá de todo poder terrenal.", correct: 0 },
+    { textEn: "14. What did Henry V of England do regarding the Bible, according to the lesson?", textEs: "14. ¿Qué hizo Enrique V de Inglaterra respecto a la Biblia, según la lección?",
+      optionsEn: ["He had it translated into English", "He passed a law threatening death or loss of property for reading a Bible", "He gave a Bible to every household", "He built a great library of Scriptures"],
+      optionsEs: ["La mandó traducir al inglés", "Aprobó una ley que amenazaba con muerte o pérdida de bienes por leer una Biblia", "Dio una Biblia a cada hogar", "Construyó una gran biblioteca de Escrituras"], explanationEn: "Henry V passed a law threatening death or loss of property for reading a Bible — yet the Word outlived his decree.", explanationEs: "Enrique V aprobó una ley que amenazaba con muerte o pérdida de bienes por leer una Biblia — pero la Palabra sobrevivió su decreto.", correct: 1 },
+    { textEn: "15. What point does the lesson make about Henry V's decrees against the Bible?", textEs: "15. ¿Qué punto señala la lección sobre los decretos de Enrique V contra la Biblia?",
+      optionsEn: ["They succeeded for a generation", "They were never actually enforced", "They could not shorten its life by a minute or lighten its weight by an ounce", "They caused the Bible to be lost for centuries"],
+      optionsEs: ["Tuvieron éxito por una generación", "Nunca se aplicaron en realidad", "No pudieron acortar su vida ni un minuto ni aligerar su peso ni una onza", "Hicieron que la Biblia se perdiera por siglos"], explanationEn: "No ruler's decree could shorten the Bible's life by a minute or lighten its weight by an ounce — it cannot be destroyed.", explanationEs: "Ningún decreto de gobernante pudo acortar la vida de la Biblia ni un minuto ni aligerar su peso ni una onza — no puede ser destruida.", correct: 2 },
+    { textEn: "16. The stories of the New Testament that would not burn in Brazil and the Bible pages that survived in Chile together teach what?", textEs: "16. Las historias del Nuevo Testamento que no ardía en Brasil y las páginas de la Biblia que sobrevivieron en Chile enseñan juntas ¿qué?",
+      optionsEn: ["That paper is fireproof", "That the Word of God has a living power and outlasts every attempt to destroy it", "That only printed Bibles matter", "That accidents are good luck"],
+      optionsEs: ["Que el papel es a prueba de fuego", "Que la Palabra de Dios tiene un poder vivo y sobrevive a todo intento de destruirla", "Que solo importan las Biblias impresas", "Que los accidentes son buena suerte"], explanationEn: "The Bibles that would not burn in Brazil and survived in Chile show the Word has a living power that outlasts its enemies.", explanationEs: "Las Biblias que no ardían en Brasil y sobrevivieron en Chile muestran que la Palabra tiene un poder vivo que sobrevive a sus enemigos.", correct: 1 },
+    { textEn: "17. In both the Brazil and Chile accounts, what did the men do once they had read the Scriptures?", textEs: "17. En los relatos de Brasil y Chile, ¿qué hicieron los hombres una vez que leyeron las Escrituras?",
+      optionsEn: ["They came to faith — and one gave his life to carry the Scriptures to others", "They sold the pages for profit", "They forgot what they read", "They warned others against the Bible"],
+      optionsEs: ["Llegaron a la fe — y uno dio su vida para llevar las Escrituras a otros", "Vendieron las páginas por ganancia", "Olvidaron lo que leyeron", "Advirtieron a otros contra la Biblia"], explanationEn: "Once they read the Scriptures, the men came to faith — and one gave his life to carry the Word to others.", explanationEs: "Una vez que leyeron las Escrituras, los hombres llegaron a la fe — y uno dio su vida para llevar la Palabra a otros.", correct: 0 },
+    { textEn: "18. According to Psalm 119:97, what is the psalmist's relationship to God's law?", textEs: "18. Según el Salmo 119:97, ¿cuál es la relación del salmista con la ley de Dios?",
+      optionsEn: ["He fears it as a heavy burden", "He loves it; it is his meditation all the day", "He studies it only on the Sabbath", "He has forgotten most of it"],
+      optionsEs: ["La teme como una carga pesada", "La ama; es su meditación todo el día", "La estudia solo en el día de reposo", "Ha olvidado la mayor parte"], explanationEn: "Psalm 119:97 shows the goal: not duty but love — 'Oh, how I love Your law! It is my meditation all the day.'", explanationEs: "El Salmo 119:97 muestra la meta: no el deber sino el amor — '¡Cuánto amo yo tu ley! Todo el día es ella mi meditación.'", correct: 1 },
+    { textEn: "19. According to the lesson, all the psalms are designed to teach us to do what one thing?", textEs: "19. Según la lección, ¿todos los salmos están diseñados para enseñarnos a hacer qué única cosa?",
+      optionsEn: ["To memorize Scripture", "To debate doctrine", "To worship", "To keep the festivals"],
+      optionsEs: ["A memorizar la Escritura", "A debatir doctrina", "A adorar", "A guardar las fiestas"], explanationEn: "All the psalms are finally designed to teach us one thing: to worship God honestly in His presence.", explanationEs: "Todos los salmos están al fin diseñados para enseñarnos una cosa: a adorar a Dios honestamente en Su presencia.", correct: 2 },
+    { textEn: "20. What does the story of the converted miser and the smokehouse illustrate about grace?", textEs: "20. ¿Qué ilustra la historia del avaro convertido y el ahumadero sobre la gracia?",
+      optionsEn: ["That the rich cannot be saved", "That generosity earns salvation", "That old habits can never change", "That where sin abounds, grace abounds much more"],
+      optionsEs: ["Que los ricos no pueden ser salvos", "Que la generosidad gana la salvación", "Que los viejos hábitos nunca cambian", "Que donde el pecado abundó, sobreabundó la gracia"], explanationEn: "The converted miser and the smokehouse show that where sin abounds, grace abounds much more.", explanationEs: "El avaro convertido y el ahumadero muestran que donde el pecado abundó, sobreabundó la gracia.", correct: 3 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "21. Describe what makes Psalm 119 unique among the chapters of the Bible, in both its length and its structure.",
+      textEs: "21. Describa qué hace único al Salmo 119 entre los capítulos de la Biblia, tanto en su longitud como en su estructura.",
+      kw_en: ["longest", "chapter", "acrostic", "Hebrew", "sections", "word", "law", "alphabet"],
+      kw_es: ["más largo", "capítulo", "acróstico", "hebreo", "secciones", "palabra", "ley", "alfabeto"],
+      modelEn: "Psalm 119 is unique among the chapters of the Bible in both its length and its structure. It is the longest chapter in the whole Bible, with 176 verses. And it is a carefully crafted acrostic poem of twenty-two sections, one for each letter of the Hebrew alphabet, with every verse in a section beginning with that letter. Almost every single verse exalts the Word of God under one of its many names, law, testimonies, precepts, statutes, commandments. It is the great sustained anthem of a believer who has fallen in love with the Scriptures.",
+      modelEs: "El Salmo 119 es único entre los capítulos de la Biblia tanto en su longitud como en su estructura. Es el capítulo más largo de toda la Biblia, con 176 versículos. Y es un acróstico cuidadosamente elaborado de veintidós secciones, una por cada letra del alfabeto hebreo, comenzando cada versículo de una sección con esa letra. Casi cada versículo exalta la Palabra de Dios bajo uno de sus muchos nombres: ley, testimonios, preceptos, estatutos, mandamientos. Es el gran himno sostenido de un creyente que se ha enamorado de las Escrituras." },
+    { textEn: "22. Explain the three meanings of \"the Word of God\" given in the lesson.",
+      textEs: "22. Explique los tres significados de \"la Palabra de Dios\" dados en la lección.",
+      kw_en: ["prophetic", "living", "Jesus", "written", "Bible", "prophets", "Word", "speaking"],
+      kw_es: ["profética", "viva", "Jesús", "escrita", "Biblia", "profetas", "Verbo", "hablar"],
+      modelEn: "The lesson gives three meanings of \"the Word of God.\" First, the prophetic Word, the message God spoke through His prophets. Second, the living Word, the Lord Jesus Christ Himself, who is called the Word made flesh. Third, the written Word, the Bible, the book we hold in our hands. All three are God speaking to us. Psalm 119 is chiefly about the written Word, but it teaches us to treasure all of God's speaking with the whole heart, since each one is a way the living God makes Himself known.",
+      modelEs: "La lección da tres significados de \"la Palabra de Dios.\" Primero, la Palabra profética, el mensaje que Dios habló por Sus profetas. Segundo, la Palabra viva, el Señor Jesucristo mismo, llamado el Verbo hecho carne. Tercero, la Palabra escrita, la Biblia, el libro que tenemos en las manos. Las tres son Dios hablándonos. El Salmo 119 trata principalmente de la Palabra escrita, pero nos enseña a atesorar todo el hablar de Dios con todo el corazón, pues cada uno es una manera en que el Dios vivo se da a conocer." },
+    { textEn: "23. According to the lesson, what are the three places God's wisdom comes to us? Explain each.",
+      textEs: "23. Según la lección, ¿cuáles son los tres lugares de donde nos llega la sabiduría de Dios? Explique cada uno.",
+      kw_en: ["prayer", "ask God", "counsel", "godly", "written word", "Bible", "wisdom", "Solomon"],
+      kw_es: ["oración", "pedir a Dios", "consejo", "piadoso", "palabra escrita", "Biblia", "sabiduría", "Salomón"],
+      modelEn: "The lesson names three places God's wisdom comes to us. First, through prayer: James 1:5 promises that if we lack wisdom and ask God, who gives liberally, it will be given. Second, through godly counsel, the wise words of mature believers who help us see our way, as Jethro counseled Moses. Third, and most importantly, through the written Word of God, the Bible, which is a lamp to our feet and a light to our path. Prayer, counsel, and Scripture work together, and Scripture is the surest of the three because it is God's own settled Word.",
+      modelEs: "La lección nombra tres lugares de donde viene la sabiduría de Dios. Primero, por la oración: Santiago 1:5 promete que si nos falta sabiduría y la pedimos a Dios, que da generosamente, nos será dada. Segundo, por el consejo piadoso, las palabras sabias de creyentes maduros que nos ayudan a ver nuestro camino, como Jetro aconsejó a Moisés. Tercero, y lo más importante, por la Palabra escrita de Dios, la Biblia, que es lámpara a nuestros pies y lumbrera a nuestro camino. La oración, el consejo y la Escritura obran juntos, y la Escritura es la más segura de las tres porque es la Palabra firme de Dios mismo." },
+    { textEn: "24. What does the account of Jethro and Moses (Exodus 18) teach about seeking godly counsel as one of the places God's wisdom comes to us?",
+      textEs: "24. ¿Qué enseña el relato de Jetro y Moisés (&Eacute;xodo 18) sobre buscar consejo piadoso como uno de los lugares de donde viene la sabiduría de Dios?",
+      kw_en: ["Jethro", "Moses", "counsel", "judges", "share", "burden", "wisdom", "godly"],
+      kw_es: ["Jetro", "Moisés", "consejo", "jueces", "compartir", "carga", "sabiduría", "piadoso"],
+      modelEn: "When Moses tried to judge all the people's disputes alone, he was overwhelmed, until his father-in-law Jethro gave him wise counsel: appoint God-honoring men to share the load and judge the smaller matters. Moses listened, and the burden was shared so that many were served. The account teaches that godly counsel is one of the real ways God's wisdom reaches us. We are not meant to figure out everything alone; God often speaks through the wise, godly people He places around us, and we recognize true counsel because it agrees with His character and His Word.",
+      modelEs: "Cuando Moisés trató de juzgar solo todos los pleitos del pueblo, quedó abrumado, hasta que su suegro Jetro le dio sabio consejo: nombrar hombres temerosos de Dios para compartir la carga y juzgar los asuntos menores. Moisés escuchó, y la carga se compartió de modo que muchos fueron servidos. El relato enseña que el consejo piadoso es una de las maneras reales en que la sabiduría de Dios nos alcanza. No estamos hechos para resolverlo todo solos; Dios a menudo habla por las personas sabias y piadosas que pone a nuestro alrededor, y reconocemos el consejo verdadero porque concuerda con Su carácter y Su Palabra." },
+    { textEn: "25. Explain Psalm 119:105 (\"a lamp to my feet\"). How does the account of the ward sister show the Word guiding a lost person to the Savior?",
+      textEs: "25. Explique el Salmo 119:105 (\"lámpara a mis pies\"). ¿Cómo muestra el relato de la enfermera de sala que la Palabra guía a una persona perdida al Salvador?",
+      kw_en: ["lamp", "feet", "light", "path", "guide", "Gospel", "believed", "Savior"],
+      kw_es: ["lámpara", "pies", "luz", "camino", "guía", "Evangelio", "creyó", "Salvador"],
+      modelEn: "Psalm 119:105 says God's Word is \"a lamp to my feet and a light to my path\", giving light enough for the next step and light enough for the whole journey. The world tries every other path to satisfaction and comes up empty, but the Word guides pilgrims home. The ward sister had waded through book after book and philosophy after philosophy and found life meaningless, having been argued out of trusting the Bible. When she finally read John's Gospel, she believed, saying she heard the truth and found her Savior. The lamp had been within her reach the whole time; the Word itself led her home.",
+      modelEs: "El Salmo 119:105 dice que la Palabra de Dios es \"lámpara a mis pies y lumbrera a mi camino\", dando luz suficiente para el siguiente paso y para todo el viaje. El mundo prueba todo otro camino a la satisfacción y queda vacío, pero la Palabra guía a los peregrinos a casa. La enfermera de sala había recorrido libro tras libro y filosofía tras filosofía y hallado la vida sin sentido, tras ser disuadida de confiar en la Biblia. Cuando al fin leyó el Evangelio de Juan, creyó, diciendo que oyó la verdad y halló a su Salvador. La lámpara había estado a su alcance todo el tiempo; la Palabra misma la llevó a casa." },
+    { textEn: "26. Explain Psalm 119:11 (hiding the word in the heart). How does the account of the boy whose Bible was burned show why this matters?",
+      textEs: "26. Explique el Salmo 119:11 (atesorar la palabra en el corazón). ¿Cómo muestra el relato del niño cuya Biblia fue quemada por qué esto importa?",
+      kw_en: ["hidden", "heart", "sin", "treasure", "burned", "cannot", "memorize", "guard"],
+      kw_es: ["atesorar", "corazón", "pecar", "tesoro", "quemar", "no puede", "memorizar", "guardar"],
+      modelEn: "Psalm 119:11 says, \"Your word I have hidden in my heart, that I might not sin against You.\" The Word is not merely kept on a shelf but treasured within, where it becomes a guard against sin. The boy whose father snatched his Bible and threw it into the fire was found smiling, because, he said, \"you cannot burn this in here,\" pointing to his heart. People may take away the printed page, but they cannot reach what is hidden in the heart. That is why memorizing and treasuring Scripture matters so deeply: what is stored within is both a defense against temptation and a possession no enemy can confiscate.",
+      modelEs: "El Salmo 119:11 dice: \"En mi corazón he guardado tus dichos, para no pecar contra ti.\" La Palabra no solo se guarda en un estante sino que se atesora dentro, donde llega a ser una guardia contra el pecado. El niño cuyo padre le arrebató la Biblia y la echó al fuego fue hallado sonriendo, porque, dijo, \"esto no lo puedes quemar aquí dentro,\" señalando su corazón. Las personas pueden quitar la página impresa, pero no pueden alcanzar lo que está atesorado en el corazón. Por eso memorizar y atesorar la Escritura importa tan hondamente: lo guardado dentro es a la vez defensa contra la tentación y posesión que ningún enemigo puede confiscar." },
+    { textEn: "27. Using Psalm 119:89 and the example of Henry V, explain how God's word outlasts its enemies.",
+      textEs: "27. Usando el Salmo 119:89 y el ejemplo de Enrique V, explique cómo la Palabra de Dios sobrevive a sus enemigos.",
+      kw_en: ["settled", "heaven", "forever", "Henry", "law", "death", "decrees", "outlast"],
+      kw_es: ["permanece", "cielos", "para siempre", "Enrique", "ley", "muerte", "decretos", "sobrevive"],
+      modelEn: "Psalm 119:89 declares, \"Forever, O LORD, Your word is settled in heaven.\" God's Word has outlasted every ruler who tried to destroy it. Henry V of England once made Bible reading a crime, threatening death or loss of property to anyone caught reading one. Yet his decree could not shorten the life of the Scriptures by a single minute or lighten their weight by an ounce. The Bible has traveled more roads and outlived more enemies than any book ever written. Because it is the living Word of the living God, settled in heaven itself, no earthly power can ever abolish it.",
+      modelEs: "El Salmo 119:89 declara: \"Para siempre, oh Jehová, permanece tu palabra en los cielos.\" La Palabra de Dios ha sobrevivido a todo gobernante que trató de destruirla. Enrique V de Inglaterra una vez hizo de la lectura de la Biblia un crimen, amenazando con muerte o pérdida de bienes a quien fuera sorprendido leyéndola. Sin embargo su decreto no pudo acortar la vida de las Escrituras ni un solo minuto ni aligerar su peso ni una onza. La Biblia ha recorrido más caminos y sobrevivido a más enemigos que cualquier libro jamás escrito. Porque es la Palabra viva del Dios vivo, asentada en los cielos mismos, ningún poder terrenal puede jamás abolirla." },
+    { textEn: "28. What do the accounts from Brazil and Chile show about the living power of the Scriptures to reach and change people?",
+      textEs: "28. ¿Qué muestran los relatos de Brasil y Chile sobre el poder vivo de las Escrituras para alcanzar y cambiar a las personas?",
+      kw_en: ["Brazil", "Chile", "burn", "survive", "read", "believed", "living power", "Word"],
+      kw_es: ["Brasil", "Chile", "quemar", "sobrevivir", "leer", "creyó", "poder vivo", "Palabra"],
+      modelEn: "In Brazil a man tried twice to burn a New Testament, but it would not burn; it fell open to the Sermon on the Mount, his mind was caught, and by dawn he declared, \"I believe.\" In Chile a man found a few water-stained Bible pages washed up after an earthquake, read them, and never rested until he had the whole Bible, then gave his life to carrying the Scriptures to forgotten villages. Both accounts show the living power of the Word: you cannot burn it out of the world or wash it away. It has a life of its own and reaches, converts, and transforms those who encounter it.",
+      modelEs: "En Brasil un hombre trató dos veces de quemar un Nuevo Testamento, pero no ardía; se abrió en el Sermón del Monte, su mente quedó cautivada, y al amanecer declaró: \"Creo.\" En Chile un hombre halló unas páginas manchadas de agua de la Biblia arrastradas tras un terremoto, las leyó, y no descansó hasta tener toda la Biblia, y luego dio su vida a llevar las Escrituras a aldeas olvidadas. Ambos relatos muestran el poder vivo de la Palabra: no se puede quemar fuera del mundo ni arrastrar lejos. Tiene vida propia y alcanza, convierte y transforma a quienes la encuentran." },
+    { textEn: "29. Explain Psalm 119:97 and the difference between religion as a burden and religion as a delight.",
+      textEs: "29. Explique el Salmo 119:97 y la diferencia entre la religión como carga y la religión como deleite.",
+      kw_en: ["love", "law", "meditation", "all the day", "delight", "burden", "voice", "company"],
+      kw_es: ["amar", "ley", "meditación", "todo el día", "deleite", "carga", "voz", "compañía"],
+      modelEn: "Psalm 119:97 says, \"Oh, how I love Your law! It is my meditation all the day.\" This marks the difference between religion as a burden and religion as a delight. The psalmist does not merely study or obey the Word from duty; he loves it, and his mind returns to it freely whenever it can. When we truly love someone, we long to hear their voice and treasure their words; so the believer who loves God loves to hear Him speak in His Word. To meditate on it all the day is simply to keep glad company with the God who wrote it.",
+      modelEs: "El Salmo 119:97 dice: \"¡Cuánto amo yo tu ley! Todo el día es ella mi meditación.\" Esto marca la diferencia entre la religión como carga y la religión como deleite. El salmista no solo estudia u obedece la Palabra por deber; la ama, y su mente vuelve a ella libremente cada vez que puede. Cuando amamos de veras a alguien, anhelamos oír su voz y atesoramos sus palabras; así el creyente que ama a Dios ama oírle hablar en Su Palabra. Meditar en ella todo el día es sencillamente acompañar con gozo al Dios que la escribió." },
+    { textEn: "30. According to the lesson, what is the great purpose of all the psalms, and what does it mean to be honest before God? Use the smokehouse story.",
+      textEs: "30. Según la lección, ¿cuál es el gran propósito de todos los salmos, y qué significa ser honesto delante de Dios? Use la historia del ahumadero.",
+      kw_en: ["worship", "honest", "presence of God", "grace", "miser", "ham", "smokehouse", "Satan"],
+      kw_es: ["adorar", "honesto", "presencia de Dios", "gracia", "avaro", "jamón", "ahumadero", "Satanás"],
+      modelEn: "According to the lesson, the great purpose of all the psalms is to teach us to worship, and at the heart of worship is honesty before God. The psalms reflect every human emotion, but always in relationship to God and in His presence. So they teach us to bring Him everything: if we have a problem, to tell Him; if we are angry or resentful or glad, to say so honestly rather than putting on a pious mask. The smokehouse story, where a converted miser fought his old stinginess out loud before God, shows this honesty, and shows that where sin abounds, grace abounds much more.",
+      modelEs: "Según la lección, el gran propósito de todos los salmos es enseñarnos a adorar, y en el corazón de la adoración está la honestidad ante Dios. Los salmos reflejan toda emoción humana, pero siempre en relación con Dios y en Su presencia. Así nos enseñan a traerle todo: si tenemos un problema, a decírselo; si estamos enojados o resentidos o alegres, a decirlo con honestidad en vez de ponernos una máscara piadosa. La historia del ahumadero, donde un avaro convertido luchó en voz alta contra su vieja tacañería ante Dios, muestra esta honestidad, y muestra que donde el pecado abundó, sobreabundó la gracia." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 6 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 6 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPsalmsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

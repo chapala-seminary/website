@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Practical Theology — Unit 4: Prayer I — What Prayer Is</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.sa-model { margin-top: 8px; padding: 10px 14px; background:#fff8e1; color:#5d4a00; border-left:4px solid #d4af37; border-radius:6px; font-size:0.92rem; line-height:1.45; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+/* === Retrofit additions === */
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-bottom: 2px dashed #d7cec1; padding-bottom: 18px; margin-bottom: 18px; }
+.lang-toggle-group { display: inline-flex; gap: 4px; margin-bottom: 15px; }
+.lang-toggle-group button { background: #f4c542; color: #5b3a1f; border: 1px solid #c9a032; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+.lang-toggle-group button.active { background: #5b3a1f; color: white; border-color: #5b3a1f; }
+.track-badge { display: inline-block; background: #f4c542; color: #5b3a1f; padding: 4px 12px; border-radius: 30px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 12px; vertical-align: middle; }
+.exam-status { padding: 12px 16px; margin: 14px 0; border-radius: 8px; font-size: 0.95rem; font-weight: 600; }
+.exam-status.mc-passed { background: #d6e2f0; color: #2c3e6b; border-left: 5px solid #3f5a8a; }
+.exam-status.locked { background: #fae5e3; color: #8a1f1f; border-left: 5px solid #b03a2e; }
+.exam-status.hidden { display: none; }
+.mc-section, .sa-section { margin-top: 20px; }
+.sa-section h3, .mc-section h3 { color: #5b3a1f; border-bottom: 2px solid #f4c542; padding-bottom: 4px; margin-bottom: 12px; font-size: 1.1rem; }
+.sa-badge { display: inline-block; background: #f4c542; color: #5b3a1f; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; margin-left: 8px; vertical-align: middle; }
+.sa-note { margin: 0 0 14px; padding: 10px 14px; background: #f6f1e8; border-left: 3px solid #c9a032; color: #22201d; font-size: 0.9rem; font-style: italic; border-radius: 6px; }
+.question.review-locked { opacity: 0.7; background: #fbfaf6; border-left: 3px solid #f4c542; }
+.question.review-locked .option { pointer-events: none; }
+.question.review-locked .kw-answer, .question.review-locked .check-kw-btn { pointer-events: none; }
+.btn-reset { background: #8a6a4a; color: white; border: none; border-radius: 30px; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 0.88rem; margin-left: 8px; }
+.btn-reset:hover { background: #6b5236; }
+.reg-modal { position: fixed; inset: 0; background: rgba(40, 30, 20, 0.65); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.reg-modal.hidden { display: none; }
+.reg-modal-inner { background: #fffdfa; max-width: 520px; width: 100%; border-radius: 16px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 1px solid #d7cec1; }
+.reg-modal-inner h2 { color: #5b3a1f; margin: 0 0 10px; font-size: 1.4rem; }
+.reg-modal-inner p { margin: 10px 0; font-size: 0.95rem; }
+.reg-modal-inner label { display: block; margin: 12px 0 4px; font-weight: 700; font-size: 0.92rem; }
+.reg-modal-inner input[type="text"], .reg-modal-inner input[type="email"] { width: 100%; padding: 9px 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; background: #fcfbf8; }
+.reg-modal-inner .track-options { display: flex; gap: 10px; margin-top: 6px; }
+.reg-modal-inner .track-options label { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 12px; border: 1px solid #d7cec1; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.92rem; background: #fcfbf8; }
+.reg-modal-inner .track-options input[type="radio"] { margin: 0; }
+.reg-modal-inner .track-options label:has(input:checked) { background: #f4c542; border-color: #c9a032; }
+.reg-modal-inner button { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 9px 22px; cursor: pointer; font-family: inherit; font-size: 1rem; margin-top: 18px; }
+.reg-warn { background: #faecd0; border: 1px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; color: #5b3a1f; }
+.reg-warn.hidden { display: none; }
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .nav-bar, .toggle-btn, .lang-toggle-group, .btn-reset, button.small, .check-kw-btn, .reg-modal, .reg-warn, #submitExamBtn, .exam-status, .sa-badge, .track-badge { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+  body.lang-en .lang-es, body.lang-es .lang-en { display: none; }
+  body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+}
+
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" role="group" aria-label="Language">
+  <button data-lang="en" class="active">English</button>
+  <button data-lang="es">Español</button>
+  <button data-lang="both">Both / Ambos</button>
+</div>
+<span id="trackBadgeSlot"></span>
+
+<div id="regWarn" class="reg-warn hidden">
+  <span class="lang-en">⚠ Please register your name to receive credit for this unit. <button class="small" id="openRegBtn" type="button">Register</button></span>
+  <span class="lang-es">⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class="small" id="openRegBtn2" type="button">Registrar</button></span>
+</div>
+<div id="regModal" class="reg-modal hidden" role="dialog" aria-labelledby="regModalTitle">
+  <div class="reg-modal-inner">
+    <h2 id="regModalTitle"><span class="lang-en">Welcome to Practical Theology</span><span class="lang-es">Bienvenido a la Teología Práctica</span></h2>
+    <p><span class="lang-en">Before you begin this unit, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.</span><span class="lang-es">Antes de comenzar esta unidad, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full name</span><span class="lang-es">Nombre completo</span></label>
+    <input type="text" id="regName" placeholder="" autocomplete="name" aria-label="regName">
+    <label><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span></label>
+    <input type="email" id="regEmail" placeholder="" autocomplete="email" aria-label="regEmail">
+    <label><span class="lang-en">Track</span><span class="lang-es">Vía</span></label>
+    <div class="track-options">
+      <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></label>
+      <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en">M.Div</span><span class="lang-es">M.Div</span></label>
+      <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en">Th.M.</span><span class="lang-es">Th.M.</span></label>
+    </div>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;">
+      <span class="lang-en"><strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.</span>
+      <span class="lang-es"><strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%.</span>
+    </p>
+    <button id="regSaveBtn" type="button"><span class="lang-en">Save and Continue</span><span class="lang-es">Guardar y Continuar</span></button>
+  </div>
+</div>
+<div class="card">
+    <h1><span class="lang-en">🌱 Practical Theology — Unit 4: Prayer I — What Prayer Is</span><span class="lang-es">🌱 Teología Práctica — Unidad 4: La Oración I — Qué Es la Oración</span></h1>
+    <p><span class="lang-en"><strong>Professors:</strong> Dr. Wayne Cook &amp; Dr. Ted Rogers</span><span class="lang-es"><strong>Profesores:</strong> Dr. Wayne Cook y Dr. Ted Rogers</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Introduction: At the Center of Our Time with God</h2>
+        <p>We have learned to walk with God and to keep a daily time with Him. At the center of that time is prayer. But what is prayer, really? Many think of it as simply asking God for things, and others as the saying of certain religious words. It is far more than either. In this unit we ask three questions: what is prayer, how did the Lord Jesus teach us to pray, and what kinds of prayer does the Bible give us? The next unit will carry us further &mdash; into prayer in Scripture, praying together as a church, and fasting.</p>
+
+        <h2>I. What Prayer Is &mdash; More Than a Conversation, Yet Like One</h2>
+        <p>Some say prayer is simply a conversation. It is much more than that. Dr. Ted Rogers, who teaches a course on prayer at our church, offers this careful definition: prayer is <em>to initiate communication with God for the purpose of intercession, supplication, praise, confession, and thanksgiving, with worshipful intent</em> &mdash; communication that draws us closer to God and, for that moment, even sets us in the place of one who stands before Him for others. Notice three things in that definition. Prayer is <em>initiated by us toward God</em>: it is not chanting, nor thanking "the universe," nor speaking to any created thing, for the universe is made but God is self-existent. Already in the days of Enosh <em>"men began to call on the name of the Lord"</em> (Genesis 4:26, NKJV). Prayer is directed <em>to God, with worshipful intent</em>. And prayer <em>changes us</em> as we pray.</p>
+        <p>Yet though prayer is far more than mere conversation, it is meant to be carried on like one &mdash; like a conversation between friends. If we pictured the Lord Jesus sitting in a chair before us, we would not reach for stiff, artificial words; we would speak to Him plainly, as to a friend who loves us. (It is worth remembering that when the King James Bible was written, "thee, thy, and thou" were the everyday, informal words, while "you" was the formal speech of royalty. Today that is reversed &mdash; yet many of us still reach for old, formal-sounding words when we pray, as though God preferred a special religious language. He does not. Speak to Him honestly, in your own words.) And because prayer is a kind of conversation, we must also listen. <em>"Be still, and know that I am God"</em> (Psalm 46:10, NKJV). Do not be afraid of silence in prayer; God Himself may at that moment be speaking to you.</p>
+
+        <h2>II. How Jesus Taught Us to Pray: The Lord's Prayer</h2>
+        <p>When His disciples wanted to learn to pray, Jesus gave them a model. He had just warned, <em>"when you pray, do not use vain repetitions as the heathen do"</em> (Matthew 6:7, NKJV) &mdash; so the Lord's Prayer is not a set of magic words to be repeated mechanically, but a pattern to follow. <em>"In this manner, therefore, pray: Our Father in heaven, hallowed be Your name. Your kingdom come. Your will be done on earth as it is in heaven. Give us this day our daily bread. And forgive us our debts, as we forgive our debtors. And do not lead us into temptation, but deliver us from the evil one"</em> (Matthew 6:9&ndash;13, NKJV).</p>
+        <p>Walk slowly through it. <em>"Our Father"</em> uses the word <em>abba</em>, the most intimate family word of that day &mdash; we come as a trusting child to a loving father; yet <em>"hallowed be Your name"</em> reminds us He is holy, set apart, utterly unique. Intimacy and reverence held together. <em>"Your kingdom come, Your will be done"</em> &mdash; before we ask anything for ourselves, we put God's kingdom and will first. <em>"Give us this day our daily bread"</em> &mdash; only now, halfway through, comes the first request for ourselves, and even it teaches us to depend on God as our Provider day by day. <em>"Forgive us our debts, as we forgive our debtors"</em> &mdash; our debts are our sins, and our being forgiven is tied to our forgiving others. <em>"Do not lead us into temptation, but deliver us"</em> &mdash; a plea that God would keep us and rescue us. Notice the order, for it is the opposite of how many are taught: adoration and God's will come first; our own needs and our confession come after. We do not begin with our shopping list, but with our God.</p>
+
+        <h2>III. The Many Kinds of Prayer</h2>
+        <p>The Bible shows that prayer is not one single thing but many. There is <em>praise and adoration</em>, telling God how great and holy He is. There is <em>thanksgiving</em>, thanking Him for what He has done. There is <em>confession</em>: the Greek word means literally "to say the same thing" &mdash; in confession we agree with God about our sin, as the tax collector who cried, <em>"God, be merciful to me a sinner!"</em> (Luke 18:13, NKJV). There is <em>supplication</em>, which asks God to change our circumstances, yet even more to change our hearts, as the Lord Himself prayed in the garden, <em>"not as I will, but as You will"</em> (Matthew 26:39, NKJV). There is <em>intercession</em>, standing between God and others to pray for their needs &mdash; as Jesus prayed even for those who crucified Him, <em>"Father, forgive them, for they do not know what they do"</em> (Luke 23:34, NKJV). We may also <em>ask for ourselves</em>; this is not a lack of faith but obedience, for Scripture says plainly, <em>"you do not have because you do not ask"</em> (James 4:2, NKJV). We may bring our honest <em>questions</em> to God, who is patient with all who sincerely seek to understand Him. And when we are so overwhelmed that we do not know what to pray, there is the prayer of <em>groanings</em>: <em>"the Spirit Himself makes intercession for us with groanings which cannot be uttered"</em> (Romans 8:26, NKJV). After all our words, there remains the prayer of <em>listening</em> &mdash; being still before God.</p>
+
+        <h2>Conclusion</h2>
+        <p>Prayer, then, is not a religious form but a living communication with a holy and loving Father &mdash; far more than conversation, yet carried on like one; ordered as the Lord taught us, with God first and our needs after; and rich in its many kinds, from praise to groaning to silent listening. In the next unit we will see how the saints and the Psalms prayed, how the church prays together, and how prayer is joined to fasting &mdash; and we will learn to pray expecting that our God hears and answers.</p>
+    </div>
+    <div class="lang-es">
+        <h2>Introducción: En el Centro de Nuestro Tiempo con Dios</h2>
+        <p>Hemos aprendido a andar con Dios y a guardar un tiempo diario con Él. En el centro de ese tiempo está la oración. Pero ¿qué es la oración, en realidad? Muchos la piensan como sencillamente pedirle cosas a Dios, y otros como el decir ciertas palabras religiosas. Es mucho más que cualquiera de las dos. En esta unidad hacemos tres preguntas: ¿qué es la oración, cómo nos enseñó a orar el Señor Jesús, y qué clases de oración nos da la Biblia? La unidad siguiente nos llevará más adelante &mdash; a la oración en la Escritura, a orar juntos como iglesia, y al ayuno.</p>
+
+        <h2>I. Qué Es la Oración &mdash; Más Que una Conversación, y Sin Embargo Como Una</h2>
+        <p>Algunos dicen que la oración es sencillamente una conversación. Es mucho más que eso. El Dr. Ted Rogers, quien enseña un curso sobre la oración en nuestra iglesia, ofrece esta definición cuidadosa: la oración es <em>iniciar comunicación con Dios con el propósito de intercesión, súplica, alabanza, confesión y gratitud, con intención de adoración</em> &mdash; comunicación que nos acerca más a Dios y, por ese momento, hasta nos pone en el lugar de quien se presenta delante de Él por otros. Note tres cosas en esa definición. La oración es <em>iniciada por nosotros hacia Dios</em>: no es repetir cánticos, ni dar gracias al "universo", ni hablarle a cosa creada alguna, pues el universo es hecho, mas Dios es el que existe por sí mismo. Ya en los días de Enós <em>"los hombres comenzaron a invocar el nombre de Jehová"</em> (Génesis 4:26, RVG). La oración se dirige <em>a Dios, con intención de adoración</em>. Y la oración <em>nos cambia</em> al orar.</p>
+        <p>Sin embargo, aunque la oración es mucho más que mera conversación, está destinada a llevarse a cabo como una &mdash; como una conversación entre amigos. Si imagináramos al Señor Jesús sentado en una silla delante de nosotros, no buscaríamos palabras rígidas y artificiales; le hablaríamos con sencillez, como a un amigo que nos ama. Muchas veces usamos con Dios palabras rígidas y "religiosas", como si Él prefiriera un lenguaje especial. No es así. Háblele con honestidad, en sus propias palabras. Y puesto que la oración es una especie de conversación, también debemos escuchar. <em>"Estad quietos, y conoced que yo soy Dios"</em> (Salmos 46:10, RVG). No tema al silencio en la oración; Dios mismo podría en ese momento estar hablándole.</p>
+
+        <h2>II. Cómo Nos Enseñó Jesús a Orar: El Padre Nuestro</h2>
+        <p>Cuando sus discípulos quisieron aprender a orar, Jesús les dio un modelo. Acababa de advertir: <em>"orando, no uséis vanas repeticiones, como los gentiles"</em> (Mateo 6:7, RVG) &mdash; así que el Padre Nuestro no es un conjunto de palabras mágicas que se repiten mecánicamente, sino un patrón a seguir. <em>"Vosotros, pues, oraréis así: Padre nuestro que estás en el cielo, santificado sea tu nombre. Venga tu reino. Hágase tu voluntad, como en el cielo, así también en la tierra. El pan nuestro de cada día, dánoslo hoy. Y perdónanos nuestras deudas, como también nosotros perdonamos a nuestros deudores. Y no nos metas en tentación, mas líbranos del mal"</em> (Mateo 6:9&ndash;13, RVG).</p>
+        <p>Recórralo despacio. <em>"Padre nuestro"</em> usa la palabra <em>abba</em>, la palabra familiar más íntima de aquel día &mdash; venimos como un hijo que confía a un padre que ama; sin embargo, <em>"santificado sea tu nombre"</em> nos recuerda que Él es santo, apartado, completamente único. Intimidad y reverencia unidas. <em>"Venga tu reino, hágase tu voluntad"</em> &mdash; antes de pedir algo para nosotros, ponemos primero el reino y la voluntad de Dios. <em>"El pan nuestro de cada día, dánoslo hoy"</em> &mdash; solo ahora, a la mitad, viene la primera petición para nosotros, y aun ella nos enseña a depender de Dios como nuestro Proveedor día tras día. <em>"Perdónanos nuestras deudas, como también nosotros perdonamos"</em> &mdash; nuestras deudas son nuestros pecados, y el ser perdonados está ligado a que perdonemos a otros. <em>"No nos metas en tentación, mas líbranos"</em> &mdash; una súplica de que Dios nos guarde y nos rescate. Note el orden, porque es lo opuesto de como a muchos se les enseña: la adoración y la voluntad de Dios vienen primero; nuestras propias necesidades y nuestra confesión vienen después. No comenzamos con nuestra lista de peticiones, sino con nuestro Dios.</p>
+
+        <h2>III. Las Muchas Clases de Oración</h2>
+        <p>La Biblia muestra que la oración no es una sola cosa, sino muchas. Está la <em>alabanza y adoración</em>, decirle a Dios cuán grande y santo es. Está la <em>gratitud</em>, darle gracias por lo que ha hecho. Está la <em>confesión</em>: la palabra griega significa literalmente "decir lo mismo" &mdash; en la confesión estamos de acuerdo con Dios acerca de nuestro pecado, como el publicano que clamó: <em>"Dios, sé propicio a mí, pecador"</em> (Lucas 18:13, RVG). Está la <em>súplica</em>, que pide a Dios que cambie nuestras circunstancias, pero aún más que cambie nuestro corazón, como el Señor mismo oró en el huerto: <em>"no sea como yo quiero, sino como tú"</em> (Mateo 26:39, RVG). Está la <em>intercesión</em>, ponerse entre Dios y otros para orar por sus necesidades &mdash; como Jesús oró aun por los que lo crucificaban: <em>"Padre, perdónalos, porque no saben lo que hacen"</em> (Lucas 23:34, RVG). También podemos <em>pedir para nosotros mismos</em>; esto no es falta de fe sino obediencia, pues la Escritura dice claramente: <em>"no tenéis, porque no pedís"</em> (Santiago 4:2, RVG). Podemos traer a Dios nuestras honestas <em>preguntas</em>, pues Él es paciente con todos los que sinceramente buscan entenderlo. Y cuando estamos tan abrumados que no sabemos qué orar, está la oración de <em>gemidos</em>: <em>"el Espíritu mismo intercede por nosotros con gemidos indecibles"</em> (Romanos 8:26, RVG). Después de todas nuestras palabras, queda la oración de <em>escuchar</em> &mdash; estar quietos delante de Dios.</p>
+
+        <h2>Conclusión</h2>
+        <p>La oración, entonces, no es una forma religiosa sino una comunicación viva con un Padre santo y amoroso &mdash; mucho más que una conversación, y sin embargo llevada a cabo como una; ordenada como el Señor nos enseñó, con Dios primero y nuestras necesidades después; y rica en sus muchas clases, desde la alabanza hasta el gemido y el escuchar en silencio. En la unidad siguiente veremos cómo oraron los santos y los Salmos, cómo ora junta la iglesia, y cómo se une la oración al ayuno &mdash; y aprenderemos a orar esperando que nuestro Dios oye y responde.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 4 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 4 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></span><span class="lang-es"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></span></p>
+    <div class="exam-status hidden" id="examStatus"></div>
+<div class="mc-section" id="mcSection">
+  <h3><span class="lang-en">Multiple Choice &mdash; 20 Questions</span><span class="lang-es">Opción Múltiple &mdash; 20 Preguntas</span></h3>
+  <div id="mcContainer"></div>
+</div>
+<div class="sa-section" id="saSection">
+  <h3><span class="lang-en">Short Answer &mdash; 10 Questions <span class="sa-badge" id="saBadgeEn"></span></span><span class="lang-es">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="saBadgeEs"></span></span></h3>
+  <p class="sa-note"><span class="lang-en" id="saNoteEn"></span><span class="lang-es" id="saNoteEs"></span></p>
+  <div id="kwContainer"></div>
+</div>
+<div style="margin-top: 20px;">
+  <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+  <button id="resetExamBtn" class="btn-reset" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+  <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+</div>
+</div>
+
+<script>
+
+const TOTAL_UNITS = 10;
+const CURRENT_UNIT = 4;
+const NEXT_URL = 'CTSPTUnit5.html';
+const PREV_URL = 'CTSPTUnit3.html';
+
+// === MC + SA data ===
+const mcQuestions = [
+    { textEn: "1. Dr. Ted Rogers defines prayer as more than a conversation; it is to initiate communication with God for the purpose of:", textEs: "1. El Dr. Ted Rogers define la oración como más que una conversación; es iniciar comunicación con Dios con el propósito de:", optionsEn: ["impressing others", "gaining wealth", "intercession, supplication, praise, confession, and thanksgiving", "reciting words"], optionsEs: ["impresionar a otros", "ganar riqueza", "intercesión, súplica, alabanza, confesión y gratitud", "recitar palabras"], correct: 2 },
+    { textEn: "2. True prayer is directed:", textEs: "2. La verdadera oración se dirige:", optionsEn: ["to God, not to created things", "to the universe", "to nature", "to ourselves"], optionsEs: ["a Dios, no a cosas creadas", "al universo", "a la naturaleza", "a nosotros mismos"], correct: 0 },
+    { textEn: "3. Genesis 4:26 says that in the days of Enosh, men began to:", textEs: "3. Génesis 4:26 dice que en los días de Enós, los hombres comenzaron a:", optionsEn: ["build cities", "call on the name of the LORD", "sin greatly", "forget God"], optionsEs: ["edificar ciudades", "invocar el nombre de Jehová", "pecar grandemente", "olvidar a Dios"], correct: 1 },
+    { textEn: "4. Although prayer is more than mere conversation, the lesson says it should be carried on:", textEs: "4. Aunque la oración es más que mera conversación, la lección dice que debe llevarse a cabo:", optionsEn: ["in stiff, formal words", "only in silence", "only by pastors", "like a real conversation between friends"], optionsEs: ["en palabras rígidas y formales", "solo en silencio", "solo por pastores", "como una verdadera conversación entre amigos"], correct: 3 },
+    { textEn: "5. The lesson says that when we pray we should use:", textEs: "5. La lección dice que cuando oramos debemos usar:", optionsEn: ["honest, plain words, as to a friend", "only old religious language", "many repeated words", "no words at all"], optionsEs: ["palabras honestas y sencillas, como a un amigo", "solo lenguaje religioso antiguo", "muchas palabras repetidas", "ninguna palabra"], correct: 0 },
+    { textEn: "6. In Matthew 6:7 Jesus warned against:", textEs: "6. En Mateo 6:7 Jesús advirtió contra:", optionsEn: ["praying aloud", "praying with others", "praying in the morning", "vain (meaningless) repetitions"], optionsEs: ["orar en voz alta", "orar con otros", "orar de mañana", "vanas repeticiones (sin sentido)"], correct: 3 },
+    { textEn: "7. The Lord's Prayer is best understood as:", textEs: "7. El Padre Nuestro se entiende mejor como:", optionsEn: ["magic words", "a model or pattern to follow, not words to repeat mechanically", "a prayer only for priests", "a song"], optionsEs: ["palabras mágicas", "un modelo o patrón a seguir, no palabras para repetir mecánicamente", "una oración solo para sacerdotes", "un canto"], correct: 1 },
+    { textEn: "8. 'Our Father' uses the intimate word abba, while 'hallowed be Your name' shows that God is:", textEs: "8. 'Padre nuestro' usa la palabra íntima abba, mientras 'santificado sea tu nombre' muestra que Dios es:", optionsEn: ["distant", "unknowable", "holy, set apart, and unique", "only a judge"], optionsEs: ["distante", "incognoscible", "santo, apartado y único", "solo un juez"], correct: 2 },
+    { textEn: "9. In the Lord's Prayer, before we ask anything for ourselves, we pray:", textEs: "9. En el Padre Nuestro, antes de pedir algo para nosotros, oramos:", optionsEn: ["for fame", "for wealth", "for revenge", "'Your kingdom come, Your will be done'"], optionsEs: ["por fama", "por riqueza", "por venganza", "'Venga tu reino, hágase tu voluntad'"], correct: 3 },
+    { textEn: "10. 'Give us this day our daily bread' teaches us to:", textEs: "10. 'El pan nuestro de cada día, dánoslo hoy' nos enseña a:", optionsEn: ["ask for a year's supply at once", "depend on God daily as our Provider", "never ask for needs", "trust ourselves"], optionsEs: ["pedir de una vez la provisión de un año", "depender de Dios a diario como nuestro Proveedor", "nunca pedir por necesidades", "confiar en nosotros mismos"], correct: 1 },
+    { textEn: "11. 'Forgive us our debts, as we forgive our debtors' ties God's forgiveness to:", textEs: "11. 'Perdónanos nuestras deudas, como también nosotros perdonamos' liga el perdón de Dios a:", optionsEn: ["our forgiving others", "our knowledge", "our wealth", "our church attendance"], optionsEs: ["que nosotros perdonemos a otros", "nuestro conocimiento", "nuestra riqueza", "nuestra asistencia a la iglesia"], correct: 0 },
+    { textEn: "12. The order of the Lord's Prayer is striking because:", textEs: "12. El orden del Padre Nuestro es notable porque:", optionsEn: ["it asks for money first", "it never mentions God", "adoration and God's will come first, and our needs and confession come after", "it has no order"], optionsEs: ["pide dinero primero", "nunca menciona a Dios", "la adoración y la voluntad de Dios vienen primero, y nuestras necesidades y confesión después", "no tiene orden"], correct: 2 },
+    { textEn: "13. The word translated 'confess' means literally:", textEs: "13. La palabra traducida 'confesar' significa literalmente:", optionsEn: ["'to say the same thing' (agreeing with God about our sin)", "'to hide'", "'to excuse'", "'to forget'"], optionsEs: ["'decir lo mismo' (estar de acuerdo con Dios acerca de nuestro pecado)", "'esconder'", "'excusar'", "'olvidar'"], correct: 0 },
+    { textEn: "14. Supplication, as shown in Gethsemane, is willing to pray:", textEs: "14. La súplica, como se ve en Getsemaní, está dispuesta a orar:", optionsEn: ["'my will be done'", "'leave me alone'", "'not as I will, but as You will'", "'I need nothing'"], optionsEs: ["'hágase mi voluntad'", "'déjame solo'", "'no sea como yo quiero, sino como tú'", "'no necesito nada'"], correct: 2 },
+    { textEn: "15. Intercession means:", textEs: "15. La intercesión significa:", optionsEn: ["praying only for ourselves", "standing between God and others, praying for their needs", "refusing to pray", "reciting Psalms"], optionsEs: ["orar solo por nosotros mismos", "ponerse entre Dios y otros, orando por sus necesidades", "negarse a orar", "recitar Salmos"], correct: 1 },
+    { textEn: "16. From the cross, Jesus interceded for His enemies, praying:", textEs: "16. Desde la cruz, Jesús intercedió por sus enemigos, orando:", optionsEn: ["'Destroy them'", "'Forget them'", "'Reward Me'", "'Father, forgive them, for they do not know what they do'"], optionsEs: ["'Destrúyelos'", "'Olvídalos'", "'Recompénsame'", "'Padre, perdónalos, porque no saben lo que hacen'"], correct: 3 },
+    { textEn: "17. James 4:2 teaches that one reason we lack is:", textEs: "17. Santiago 4:2 enseña que una razón por la que nos falta es:", optionsEn: ["prayer is useless", "God is unkind", "we do not have because we do not ask", "we ask too much"], optionsEs: ["la oración es inútil", "Dios es cruel", "no tenemos porque no pedimos", "pedimos demasiado"], correct: 2 },
+    { textEn: "18. Asking God for our own needs is:", textEs: "18. Pedir a Dios por nuestras propias necesidades es:", optionsEn: ["permitted and commanded — even the persistent widow kept asking", "always wrong", "a sign of no faith", "only for emergencies"], optionsEs: ["permitido y mandado — aun la viuda persistente siguió pidiendo", "siempre malo", "señal de falta de fe", "solo para emergencias"], correct: 0 },
+    { textEn: "19. Romans 8:26 says that when we do not know what to pray:", textEs: "19. Romanos 8:26 dice que cuando no sabemos qué orar:", optionsEn: ["we should give up", "the Spirit Himself intercedes for us with groanings", "we should stay silent forever", "we have failed"], optionsEs: ["debemos rendirnos", "el Espíritu mismo intercede por nosotros con gemidos", "debemos callar para siempre", "hemos fracasado"], correct: 1 },
+    { textEn: "20. After all our words, the lesson says prayer also includes:", textEs: "20. Después de todas nuestras palabras, la lección dice que la oración también incluye:", optionsEn: ["boasting", "hurrying away", "demanding answers", "being still to listen"], optionsEs: ["jactarse", "irse de prisa", "exigir respuestas", "estar quietos para escuchar"], correct: 3 }
+];
+
+const kwQuestions = [
+    { textEn: "21. How does Dr. Ted Rogers define prayer, and why is it more than 'simply a conversation'?", textEs: "21. ¿Cómo define la oración el Dr. Ted Rogers, y por qué es más que 'sencillamente una conversación'?", kwEn: ["communication", "god", "worship", "intercession", "supplication", "praise", "confession", "thanksgiving"], kwEs: ["comunicación", "dios", "adoración", "interces", "suplic", "alaba", "confes", "gracias"],
+      modelEn: 'Dr. Ted Rogers defines prayer as initiating communication with God for the purpose of intercession, supplication, praise, confession, and thanksgiving, with worshipful intent. It is more than \'simply a conversation\' because it is initiated by us toward God alone (not the universe or created things), it is directed to Him with worshipful intent, and it changes us as we pray.',
+      modelEs: 'El Dr. Ted Rogers define la oración como iniciar comunicación con Dios con el propósito de intercesión, súplica, alabanza, confesión y gratitud, con intención de adoración. Es más que \'sencillamente una conversación\' porque es iniciada por nosotros hacia Dios solamente (no el universo ni cosas creadas), se dirige a Él con intención de adoración, y nos cambia al orar.' },
+    { textEn: "22. Why must prayer be directed to God and not to 'the universe' or created things? (Use Genesis 4:26.)", textEs: "22. ¿Por qué la oración debe dirigirse a Dios y no al 'universo' o cosas creadas? (Use Génesis 4:26.)", kwEn: ["god", "universe", "created", "call", "name", "direct", "worship", "lord"], kwEs: ["dios", "universo", "creado", "invocar", "nombre", "dirig", "adoración", "jehová"],
+      modelEn: 'Prayer must be directed to God because the universe is made, but God is self-existent — praying to a created thing confuses the Creator with the creation. Already in the days of Enosh, men began to call on the name of the Lord (Genesis 4:26), showing that true prayer has always been directed to the one true God by name, with worshipful intent, not to any created thing.',
+      modelEs: 'La oración debe dirigirse a Dios porque el universo es hecho, mas Dios es el que existe por sí mismo — orar a una cosa creada confunde al Creador con la creación. Ya en los días de Enós, los hombres comenzaron a invocar el nombre de Jehová (Génesis 4:26), mostrando que la verdadera oración siempre se ha dirigido al único Dios verdadero por su nombre, con intención de adoración, no a ninguna cosa creada.' },
+    { textEn: "23. Although prayer is more than a conversation, how should we actually speak to God, and why?", textEs: "23. Aunque la oración es más que una conversación, ¿cómo debemos en realidad hablarle a Dios, y por qué?", kwEn: ["friend", "honest", "plain", "conversation", "natural", "word", "talk", "stiff"], kwEs: ["amigo", "honest", "sencill", "conversación", "natural", "palabra", "hablar", "rígid"],
+      modelEn: 'Though prayer is more than a mere conversation, it should be carried on like one — speaking to God plainly and honestly, as to a friend who loves us, rather than reaching for stiff, artificial, or overly formal words. God does not prefer a special religious language; He wants our natural, honest words.',
+      modelEs: 'Aunque la oración es más que una mera conversación, debe llevarse a cabo como una — hablándole a Dios con sencillez y honestidad, como a un amigo que nos ama, en lugar de buscar palabras rígidas y artificiales o demasiado formales. Dios no prefiere un lenguaje religioso especial; quiere nuestras palabras naturales y honestas.' },
+    { textEn: "24. Why is the Lord's Prayer a model rather than words to repeat? (Use Matthew 6:7.)", textEs: "24. ¿Por qué el Padre Nuestro es un modelo y no palabras para repetir? (Use Mateo 6:7.)", kwEn: ["model", "pattern", "repetition", "vain", "repeat", "manner", "method", "example"], kwEs: ["modelo", "patrón", "repetición", "vana", "repetir", "manera", "método", "ejemplo"],
+      modelEn: 'The Lord\'s Prayer is a model rather than words to repeat because Jesus had just warned, \'when you pray, do not use vain repetitions as the heathen do\' (Matthew 6:7). He said \'in this manner, therefore, pray\' — giving a pattern to follow, not a magic formula to recite mechanically.',
+      modelEs: 'El Padre Nuestro es un modelo y no palabras para repetir porque Jesús acababa de advertir: \'orando, no useís vanas repeticiones, como los gentiles\' (Mateo 6:7). Él dijo \'vosotros, pues, oraréis así\' — dando un patrón a seguir, no una fórmula mágica para recitar mecánicamente.' },
+    { textEn: "25. Explain 'Our Father' (abba) and 'hallowed be Your name.' What two things do they hold together?", textEs: "25. Explique 'Padre nuestro' (abba) y 'santificado sea tu nombre.' ¿Qué dos cosas mantienen unidas?", kwEn: ["father", "abba", "intimate", "hallowed", "holy", "reverence", "unique", "set"], kwEs: ["padre", "abba", "íntimo", "santificado", "santo", "reverencia", "único", "apart"],
+      modelEn: '\'Our Father\' uses abba, the most intimate family word of that day, so we come as a trusting child to a loving father. Yet \'hallowed be Your name\' reminds us He is holy, set apart, utterly unique. Together they hold intimacy and reverence — closeness to God without losing awe of His holiness.',
+      modelEs: '\'Padre nuestro\' usa la palabra abba, la palabra familiar más íntima de aquel día, así que venimos como un hijo que confía a un padre que ama. Sin embargo, \'santificado sea tu nombre\' nos recuerda que Él es santo, apartado, completamente único. Juntas mantienen intimidad y reverencia — cercanía a Dios sin perder el asombro ante su santidad.' },
+    { textEn: "26. What is striking about the ORDER of the Lord's Prayer?", textEs: "26. ¿Qué es notable acerca del ORDEN del Padre Nuestro?", kwEn: ["order", "kingdom", "will", "first", "bread", "forgive", "needs", "after"], kwEs: ["orden", "reino", "voluntad", "primer", "pan", "perdón", "necesidad", "después"],
+      modelEn: 'What is striking about the order of the Lord\'s Prayer is that God\'s kingdom and will come first — before any request for ourselves. Only halfway through do we ask for daily bread, and our own needs and confession come after adoration, which is the opposite of how many are taught to pray, starting with their own requests.',
+      modelEs: 'Lo notable acerca del orden del Padre Nuestro es que el reino y la voluntad de Dios vienen primero — antes de cualquier petición para nosotros mismos. Solo a la mitad pedimos el pan de cada día, y nuestras propias necesidades y confesión vienen después de la adoración, lo cual es lo opuesto de cómo a muchos se les enseña a orar, comenzando con sus propias peticiones.' },
+    { textEn: "27. Explain confession: what does the word mean, and what is required along with it?", textEs: "27. Explique la confesión: ¿qué significa la palabra, y qué se requiere junto con ella?", kwEn: ["confess", "same", "agree", "sin", "forgive", "others", "honest", "god"], kwEs: ["confes", "mismo", "acuerdo", "pecado", "perdón", "otros", "honest", "dios"],
+      modelEn: 'Confession literally means \'to say the same thing\' — in confession we agree with God about our sin, as the tax collector who cried, \'God, be merciful to me a sinner!\' (Luke 18:13). Along with confessing our own sin, Scripture ties our being forgiven to our forgiving others, as in the Lord\'s Prayer: \'forgive us our debts, as we forgive our debtors.\'',
+      modelEs: 'Confesión significa literalmente \'decir lo mismo\' — en la confesión estamos de acuerdo con Dios acerca de nuestro pecado, como el publicano que clamó: \'Dios, sé propicio a mí, pecador\' (Lucas 18:13). Junto con confesar nuestro propio pecado, la Escritura liga el ser perdonados con que perdonemos a otros, como en el Padre Nuestro: \'perdónanos nuestras deudas, como también nosotros perdonamos a nuestros deudores.\'' },
+    { textEn: "28. What is the difference between supplication and intercession? Give an example of each.", textEs: "28. ¿Cuál es la diferencia entre súplica e intercesión? Dé un ejemplo de cada una.", kwEn: ["supplication", "heart", "will", "intercession", "others", "moses", "stephen", "jesus"], kwEs: ["suplic", "corazón", "voluntad", "interces", "otros", "moisés", "esteban", "jesús"],
+      modelEn: 'Supplication asks God to change our circumstances, yet even more to change our own heart, as Jesus prayed in the garden, \'not as I will, but as You will\' (Matthew 26:39). Intercession stands between God and others, praying for their needs, as Jesus prayed even for those crucifying Him, \'Father, forgive them, for they do not know what they do\' (Luke 23:34) — supplication centers on our own heart and circumstances, intercession on others.',
+      modelEs: 'La súplica pide a Dios que cambie nuestras circunstancias, pero aún más que cambie nuestro propio corazón, como Jesús oró en el huerto: \'no sea como yo quiero, sino como tú\' (Mateo 26:39). La intercesión se pone entre Dios y otros, orando por sus necesidades, como Jesús oró aun por quienes lo crucificaban: \'Padre, perdónalos, porque no saben lo que hacen\' (Lucas 23:34) — la súplica se centra en nuestro propio corazón y circunstancias, la intercesión en otros.' },
+    { textEn: "29. Is it right to ask God for our own needs? Why? (Use James 4:2 and the persistent widow.)", textEs: "29. ¿Es correcto pedir a Dios por nuestras propias necesidades? ¿Por qué? (Use Santiago 4:2 y la viuda persistente.)", kwEn: ["ask", "self", "need", "widow", "persistent", "james", "provider", "faith"], kwEs: ["pedir", "propio", "necesidad", "viuda", "persist", "santiago", "proveedor", "fe"],
+      modelEn: 'Yes, it is right to ask God for our own needs; this is not a lack of faith but obedience, for Scripture says plainly, \'you do not have because you do not ask\' (James 4:2). Jesus\' parable of the persistent widow teaches the same lesson — that we should ask, and keep asking, trusting God as our faithful Provider rather than holding back out of false humility.',
+      modelEs: 'Sí, es correcto pedir a Dios por nuestras propias necesidades; esto no es falta de fe sino obediencia, pues la Escritura dice claramente: \'no tenéis, porque no pedís\' (Santiago 4:2). La parábola de Jesús de la viuda persistente enseña la misma lección — que debemos pedir, y seguir pidiendo, confiando en Dios como nuestro Proveedor fiel en lugar de contenernos por falsa humildad.' },
+    { textEn: "30. Which kind of prayer (praise, confession, supplication, intercession, questions, groanings, listening) do you most need to grow in, and why?", textEs: "30. ¿En qué clase de oración (alabanza, confesión, súplica, intercesión, preguntas, gemidos, escuchar) necesita usted más crecer, y por qué?", kwEn: ["praise", "confession", "supplication", "intercession", "listen", "groaning", "grow", "pray"], kwEs: ["alaba", "confes", "suplic", "interces", "escuch", "gemido", "crece", "orar"],
+      modelEn: 'This is a personal reflection question inviting the student to consider which kind of prayer — praise, confession, supplication, intercession, honest questions, groanings, or listening — they most need to grow in. A thoughtful answer names a specific kind and explains why, based on their own walk with God and where it currently feels thin or underdeveloped.',
+      modelEs: 'Esta es una pregunta de reflexión personal que invita al estudiante a considerar en qué clase de oración — alabanza, confesión, súplica, intercesión, preguntas honestas, gemidos, o escuchar — necesita crecer más. Una respuesta reflexiva nombra una clase específica y explica por qué, basándose en su propio caminar con Dios y en dónde actualmente se siente débil o poco desarrollado.' }
+
+];
+
+// === Language toggle (3-button group) ===
+const langButtons = document.querySelectorAll('.lang-toggle-group button');
+function setLang(lang) {
+  document.body.classList.remove('lang-en','lang-es','lang-both');
+  document.body.classList.add('lang-' + lang);
+  langButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-lang') === lang));
+}
+langButtons.forEach(btn => btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang'))));
+
+// === Student + Track ===
+function readStudent() {
+  try { return JSON.parse(localStorage.getItem('cts_student') || 'null'); } catch(e) { return null; }
+}
+function readTrack() {
+  const t = localStorage.getItem('cts_track');
+  if (t === 'cert' || t === 'mdiv' || t === 'thm') return t;
+  const st = readStudent();
+  if (st && st.track) return st.track;
+  return 'cert';
+}
+function isMdiv() { const t = readTrack(); return t === 'mdiv' || t === 'thm'; }
+
+// === Greeting + track badge ===
+function applyStudentUI() {
+  const student = readStudent();
+  const isEs = document.body.classList.contains('lang-es');
+  const greetEl = document.getElementById('studentGreeting');
+  const warn = document.getElementById('regWarn');
+  const slot = document.getElementById('trackBadgeSlot');
+  if (student && student.name) {
+    greetEl.innerHTML = '👋 ' + student.name;
+    if (warn) warn.classList.add('hidden');
+    const track = readTrack();
+    const label = track === 'thm' ? 'Th.M.' : (track === 'mdiv' ? 'M.Div' : (isEs ? 'Certificado' : 'Certificate'));
+    if (slot) slot.innerHTML = '<span class="track-badge">' + label + '</span>';
+  } else {
+    greetEl.innerHTML = '<span style="color:#5b3a1f;">' + (isEs ? 'Bienvenido a la Teología Práctica' : 'Welcome to Practical Theology') + '</span>';
+    if (warn) warn.classList.remove('hidden');
+    if (slot) slot.innerHTML = '';
+  }
+}
+
+// === Registration modal (U1 only) ===
+
+function showRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.remove('hidden');
+}
+function hideRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.add('hidden');
+}
+const regModal = document.getElementById('regModal');
+const openBtn = document.getElementById('openRegBtn');
+const openBtn2 = document.getElementById('openRegBtn2');
+const saveBtn = document.getElementById('regSaveBtn');
+if (openBtn) openBtn.addEventListener('click', showRegModal);
+if (openBtn2) openBtn2.addEventListener('click', showRegModal);
+if (saveBtn) saveBtn.addEventListener('click', () => {
+  const name = (document.getElementById('regName').value || '').trim();
+  const email = (document.getElementById('regEmail').value || '').trim();
+  const track = (document.querySelector('input[name="regTrack"]:checked') || {}).value || 'cert';
+  const isEs = document.body.classList.contains('lang-es');
+  if (!name) {
+    alert(isEs ? 'Por favor ingrese su nombre completo.' : 'Please enter your full name.');
+    return;
+  }
+  const rec = { name: name, email: email, track: track };
+  try {
+    localStorage.setItem('cts_student', JSON.stringify(rec));
+    localStorage.setItem('cts_track', track);
+  } catch(e) {
+    alert(isEs
+      ? 'No se pudo guardar su registro. Su navegador puede estar bloqueando el almacenamiento (por ejemplo, en modo privado). Su progreso no se guardar\u00e1 hasta que esto se resuelva.'
+      : 'Your registration could not be saved. Your browser may be blocking storage (for example, in private browsing mode). Your progress will not be saved until this is resolved.');
+  }
+  hideRegModal();
+  applyStudentUI();
+  applyExamState();
+});
+// Auto-open modal on U1 if no cts_student present
+if (CURRENT_UNIT === 1 && !readStudent()) {
+  showRegModal();
+}
+
+
+// === Progress grid ===
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem('cts_pt_progress')) || {}; } catch(e) { progress = {}; }
+function updateProgressGrid() {
+  const grid = document.getElementById('progressGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 1; i <= TOTAL_UNITS; i++) {
+    let cls = '';
+    if (progress['unit' + i]) cls = 'completed';
+    if (i === CURRENT_UNIT) cls += ' active';
+    grid.innerHTML += '<a href="CTSPTUnit' + i + '.html" class="' + cls + '">' + i + '</a>';
+  }
+}
+updateProgressGrid();
+document.getElementById('prevUnitBtn').onclick = () => { window.location.href = PREV_URL; };
+document.getElementById('nextUnitBtn').onclick = () => { window.location.href = NEXT_URL; };
+
+// === Per-unit state keys ===
+const MC_PASSED_KEY = 'cts_pt_u' + CURRENT_UNIT + '_mc_passed';
+const SA_PASSED_KEY = 'cts_pt_u' + CURRENT_UNIT + '_sa_passed';
+const MC_SCORE_KEY = 'cts_pt_u' + CURRENT_UNIT + '_mc_score';
+const LOCK_MC_KEY = 'cts_pt_u' + CURRENT_UNIT + '_lockout';
+const LOCK_SA_KEY = 'cts_pt_u' + CURRENT_UNIT + '_sa_lockout';
+
+function mcPassed() { return localStorage.getItem(MC_PASSED_KEY) === '1'; }
+function saPassed() { return localStorage.getItem(SA_PASSED_KEY) === '1'; }
+function activeLock() {
+  const now = Date.now();
+  const mc = parseInt(localStorage.getItem(LOCK_MC_KEY) || '0', 10);
+  const sa = parseInt(localStorage.getItem(LOCK_SA_KEY) || '0', 10);
+  if (mcPassed()) { if (now < sa) return { until: sa, scope: 'sa' }; }
+  else { if (now < mc) return { until: mc, scope: 'mc' }; }
+  return null;
+}
+
+// === Render MC ===
+const mcContainer = document.getElementById('mcContainer');
+mcQuestions.forEach((q, idx) => {
+    /* CTS answer-shuffle (anti-gaming): randomize option order on each render */
+    (function(){var _o=q.optionsEn,_s=q.optionsEs,_n=_o.length,_p=[],_k,_i,_j,_t;for(_k=0;_k<_n;_k++){_p.push(_k);}for(_i=_n-1;_i>0;_i--){_j=Math.floor(Math.random()*(_i+1));_t=_p[_i];_p[_i]=_p[_j];_p[_j]=_t;}q.optionsEn=_p.map(function(x){return _o[x];});q.optionsEs=_p.map(function(x){return _s[x];});q.correct=_p.indexOf(q.correct);})();
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'mcq' + (idx + 1);
+  let h = '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>';
+  for (let i = 0; i < 4; i++) {
+    const letter = 'ABCD'[i];
+    h += '<button class="option" data-mc="' + idx + '" data-opt="' + i + '" type="button">' +
+         '<strong>' + letter + '.</strong> ' +
+         '<span class="lang-en">' + q.optionsEn[i] + '</span><span class="lang-es">' + q.optionsEs[i] + '</span>' +
+         '</button>';
+  }
+  mcContainer.appendChild(qDiv);
+  qDiv.innerHTML = h;
+  // Click handler on each option
+  qDiv.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (mcPassed()) return;
+      if (qDiv.dataset.answered !== undefined && qDiv.dataset.answered !== '') return;
+      const isEs = document.body.classList.contains('lang-es');
+      const chosen = parseInt(btn.getAttribute('data-opt'), 10);
+      const correct = q.correct;
+      qDiv.dataset.answered = String(chosen);
+      qDiv.querySelectorAll('.option').forEach(b => {
+        const oi = parseInt(b.getAttribute('data-opt'), 10);
+        b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+        if (oi === correct) b.classList.add('correct');
+        else if (oi === chosen) b.classList.add('wrong');
+      });
+      const oldfb = qDiv.querySelector('.feedback-text'); if (oldfb) oldfb.remove();
+      const fb = document.createElement('div');
+      if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+      else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+      qDiv.appendChild(fb);
+    });
+  });
+});
+
+// === Smart keyword matcher (word-boundary, like the other CTS courses) ===
+function kwHit(answer, kw){
+  if(!kw) return false;
+  var a=(answer||'').toLowerCase();
+  var k=String(kw).toLowerCase().trim();
+  if(!k) return false;
+  var esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var L='0-9a-zA-Z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1';
+  var re = k.length<=3 ? new RegExp('(?:^|[^'+L+'])'+esc+'(?!['+L+'])') : new RegExp('(?:^|[^'+L+'])'+esc);
+  return re.test(a);
+}
+function revealSAModel(idx){
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var box=document.getElementById('saModel'+idx);
+  if(!box) return;
+  var head=isEs?'Respuesta modelo \u2014 est\u00fadiela':'Model answer \u2014 study this';
+  box.innerHTML='<strong>'+head+':</strong><br>'+(isEs?(q.modelEs||''):(q.modelEn||''));
+  box.style.display='block';
+}
+
+// === Render SA ===
+const kwContainer = document.getElementById('kwContainer');
+kwQuestions.forEach((q, idx) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'saq' + (idx + 1);
+  qDiv.innerHTML =
+    '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>' +
+    '<textarea class="kw-answer" data-sa="' + idx + '" placeholder=""></textarea>' +
+    '<button class="small check-kw-btn" type="button"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>' +
+    '<div class="feedback-text" id="saFb' + idx + '" style="display:none"></div>' +
+    '<div class="sa-model" id="saModel' + idx + '" style="display:none"></div>';
+  kwContainer.appendChild(qDiv);
+  const btn = qDiv.querySelector('.check-kw-btn');
+  const ta = qDiv.querySelector('.kw-answer');
+  btn.addEventListener('click', () => {
+    const isEs = document.body.classList.contains('lang-es');
+    const fb = document.getElementById('saFb' + idx);
+    const ans = (ta.value || '').trim();
+    if(!ans){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba su respuesta primero, luego verifique.' : 'Write your answer first, then check.';
+      var mb=document.getElementById('saModel'+idx); if(mb) mb.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    if(ans.length < 100){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba una respuesta m\u00e1s completa (m\u00ednimo 100 caracteres) antes de verificar.' : 'Write a fuller answer (100 characters minimum) before checking.';
+      var mb2=document.getElementById('saModel'+idx); if(mb2) mb2.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    const kws = isEs ? (q.kwEs || []) : (q.kwEn || []);
+    let hits = 0;
+    kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+    const ok = hits >= 3;
+    qDiv.dataset.answered = ok ? '1' : '0';
+    fb.className = 'feedback-text ' + (ok ? 'correct' : 'incorrect');
+    fb.style.display = 'block';
+    fb.textContent = ok
+      ? (isEs ? ('\u2713 Suficientes palabras clave (' + hits + ').') : ('\u2713 Sufficient keywords (' + hits + ').'))
+      : (isEs ? ('\u2717 A\u00fan no acreditada. Encontr\u00f3 ' + hits + ' de 3.') : ('\u2717 Not yet credited. Found ' + hits + ' of 3.'));
+    revealSAModel(idx);
+  });
+});
+
+// === UI state machine ===
+const mcSection = document.getElementById('mcSection');
+const saSection = document.getElementById('saSection');
+const statusEl = document.getElementById('examStatus');
+const submitBtn = document.getElementById('submitExamBtn');
+const resetBtn = document.getElementById('resetExamBtn');
+const resultEl = document.getElementById('examResult');
+
+function setStatus(cls, en, es) {
+  statusEl.className = 'exam-status ' + cls;
+  statusEl.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function clearStatus() { statusEl.className = 'exam-status hidden'; statusEl.innerHTML = ''; }
+function lockMcAsReview() {
+  document.querySelectorAll('#mcContainer .question').forEach(q => {
+    q.classList.add('review-locked');
+    q.querySelectorAll('.option').forEach(b => { b.disabled = true; });
+  });
+}
+
+function revealMC() {
+  const isEs = document.body.classList.contains('lang-es');
+  for (let i = 0; i < mcQuestions.length; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (!qd) continue;
+    const correct = mcQuestions[i].correct;
+    const chosen = (qd.dataset.answered !== undefined && qd.dataset.answered !== '') ? parseInt(qd.dataset.answered, 10) : -1;
+    qd.querySelectorAll('.option').forEach(b => {
+      const oi = parseInt(b.getAttribute('data-opt'), 10);
+      b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+      if (oi === correct) b.classList.add('correct');
+      else if (oi === chosen) b.classList.add('wrong');
+    });
+    let fb = qd.querySelector('.feedback-text');
+    if (!fb) { fb = document.createElement('div'); qd.appendChild(fb); }
+    if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+    else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+  }
+}
+
+
+function applyExamState() {
+  const isEs = document.body.classList.contains('lang-es');
+  // SA section is ALWAYS visible
+  saSection.style.display = '';
+  const badgeEn = document.getElementById('saBadgeEn');
+  const badgeEs = document.getElementById('saBadgeEs');
+  const noteEn = document.getElementById('saNoteEn');
+  const noteEs = document.getElementById('saNoteEs');
+  if (isMdiv()) {
+    badgeEn.textContent = 'Required for M.Div';
+    badgeEs.textContent = 'Requerido para M.Div';
+    noteEn.textContent = 'These 10 short-answer questions are required to complete Unit ' + CURRENT_UNIT + ' on the M.Div track. You must pass at 9 of 10.';
+    noteEs.textContent = 'Estas 10 preguntas de respuesta corta son requeridas para completar la Unidad ' + CURRENT_UNIT + ' en la vía M.Div. Debe aprobar con 9 de 10.';
+  } else {
+    badgeEn.textContent = 'Self-study — not graded for Certificate';
+    badgeEs.textContent = 'Auto-estudio — no cuenta para Certificado';
+    noteEn.textContent = 'These are the M.Div-level questions. Certificate students are welcome to attempt them for self-check; your answers will not affect your Unit ' + CURRENT_UNIT + ' pass status.';
+    noteEs.textContent = 'Estas son las preguntas de nivel M.Div. Los estudiantes de Certificado pueden intentarlas para auto-evaluarse; sus respuestas no afectarán el estado de aprobación de la Unidad ' + CURRENT_UNIT + '.';
+  }
+  const lock = activeLock();
+  if (lock) {
+    const minsLeft = Math.ceil((lock.until - Date.now()) / 60000);
+    submitBtn.disabled = true;
+    if (lock.scope === 'mc') {
+      setStatus('locked',
+        'Exam locked. Try again in ' + minsLeft + ' minute(s). The full exam will reset.',
+        'Examen bloqueado. Intente de nuevo en ' + minsLeft + ' minuto(s). El examen completo se reiniciará.');
+    } else {
+      setStatus('locked',
+        'Short-answer section locked. Try again in ' + minsLeft + ' minute(s). Multiple-choice pass is preserved.',
+        'Sección de respuesta corta bloqueada. Intente de nuevo en ' + minsLeft + ' minuto(s). Su aprobación de opción múltiple se conserva.');
+      lockMcAsReview();
+    }
+    setTimeout(applyExamState, 30000);
+    return;
+  }
+  submitBtn.disabled = false;
+  if (mcPassed()) {
+    lockMcAsReview();
+    if (isMdiv() && !saPassed()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed (saved). Complete the 10 short-answer questions to finish Unit ' + CURRENT_UNIT + '.',
+        'Opción múltiple aprobada (guardada). Complete las 10 preguntas de respuesta corta para terminar la Unidad ' + CURRENT_UNIT + '.');
+    } else if (!isMdiv()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed. Unit ' + CURRENT_UNIT + ' complete for Certificate track.',
+        'Opción múltiple aprobada. Unidad ' + CURRENT_UNIT + ' completa para la vía Certificado.');
+    } else {
+      clearStatus();
+    }
+  } else {
+    clearStatus();
+  }
+}
+
+function revealAllMC(){
+  const isEs = document.body.classList.contains('lang-es');
+  mcQuestions.forEach((q, i) => {
+    const qDiv = document.getElementById('mcq' + (i + 1));
+    if (!qDiv) return;
+    if (qDiv.querySelector('.feedback-text')) return;
+    const chosen = (qDiv.dataset.answered !== undefined && qDiv.dataset.answered !== '') ? parseInt(qDiv.dataset.answered, 10) : -1;
+    const correct = q.correct;
+    qDiv.querySelectorAll('.option').forEach(b => {
+      const oi = parseInt(b.getAttribute('data-opt'), 10);
+      b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+      if (oi === correct) b.classList.add('correct');
+      else if (oi === chosen) b.classList.add('wrong');
+    });
+    const fb = document.createElement('div');
+    if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '\u2713 \u00a1Correcto!' : '\u2713 Correct!'; }
+    else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '\u2717 Incorrecto. Respuesta correcta: ' : '\u2717 Incorrect. Correct answer: ') + cL; }
+    qDiv.appendChild(fb);
+  });
+}
+submitBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const lock = activeLock();
+  if (lock) { applyExamState(); return; }
+  revealAllMC();
+
+  // Score MC
+  let mc = 0;
+  for (let i = 0; i < 20; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (qd && qd.dataset.answered !== undefined && parseInt(qd.dataset.answered, 10) === mcQuestions[i].correct) mc++;
+  }
+  if (mcPassed()) {
+    mc = parseInt(localStorage.getItem(MC_SCORE_KEY) || '18', 10);
+  }
+  const mcPass = mc >= 18;
+  revealMC();
+
+  // Score SA
+  let sa = 0;
+  for (let i = 0; i < 10; i++) {
+    const qd = document.getElementById('saq' + (i + 1));
+    if (qd && qd.dataset.answered === '1') sa++;
+  }
+  const saPass = sa >= 9;
+
+  if (!isMdiv()) {
+    // Certificate track — only MC matters
+    if (mcPass) {
+      localStorage.setItem(MC_PASSED_KEY, '1');
+      localStorage.setItem(MC_SCORE_KEY, String(mc));
+      progress['unit' + CURRENT_UNIT] = true;
+      localStorage.setItem('cts_pt_progress', JSON.stringify(progress));
+      resultEl.style.color = '#1f6b3b';
+      resultEl.textContent = (isEs
+        ? '¡Aprobado! OM ' + mc + '/20. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+        : 'Passed! MC ' + mc + '/20. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+    } else {
+      localStorage.setItem(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+    }
+    return;
+  }
+
+  // M.Div track
+  if (!mcPassed()) {
+    if (!mcPass) {
+      localStorage.setItem(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min. Examen completo se reiniciará.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min. Full exam will reset.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+      return;
+    }
+    localStorage.setItem(MC_PASSED_KEY, '1');
+    localStorage.setItem(MC_SCORE_KEY, String(mc));
+  }
+  if (saPass) {
+    localStorage.setItem(SA_PASSED_KEY, '1');
+    progress['unit' + CURRENT_UNIT] = true;
+    localStorage.setItem('cts_pt_progress', JSON.stringify(progress));
+    const finalMc = parseInt(localStorage.getItem(MC_SCORE_KEY) || '18', 10);
+    resultEl.style.color = '#1f6b3b';
+    resultEl.textContent = (isEs
+      ? '¡Aprobado! OM ' + finalMc + '/20, RC ' + sa + '/10. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+      : 'Passed! MC ' + finalMc + '/20, SA ' + sa + '/10. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+  } else {
+    localStorage.setItem(LOCK_SA_KEY, String(Date.now() + 15 * 60 * 1000));
+    resultEl.style.color = '#8a1f1f';
+    resultEl.textContent = (isEs
+      ? 'RC ' + sa + '/10. Necesita 9. Sección RC bloqueada 15 min. OM permanece aprobada.'
+      : 'SA ' + sa + '/10. Need 9. SA section locked 15 min. MC pass preserved.');
+    submitBtn.disabled = true;
+    setTimeout(applyExamState, 30000);
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar la Unidad ' + CURRENT_UNIT + '? Esto borrará sus respuestas y el estado de aprobación de OM/RC para esta unidad. (Esto no borra su registro.)'
+    : 'Reset Unit ' + CURRENT_UNIT + '? This will clear your answers and MC/SA pass state for this unit. (Does not clear your registration.)';
+  if (!window.confirm(msg)) return;
+  [MC_PASSED_KEY, SA_PASSED_KEY, LOCK_MC_KEY, LOCK_SA_KEY, MC_SCORE_KEY].forEach(k => localStorage.removeItem(k));
+  if (progress['unit' + CURRENT_UNIT]) {
+    delete progress['unit' + CURRENT_UNIT];
+    localStorage.setItem('cts_pt_progress', JSON.stringify(progress));
+  }
+  window.location.reload();
+});
+
+// Initial render
+applyStudentUI();
+langButtons.forEach(b => b.addEventListener('click', applyStudentUI));
+applyExamState();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

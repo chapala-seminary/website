@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Church Growth — Unit 1: Introduction</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 2 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📈 Church Growth — Unit 1: Introduction</span><span class="lang-es">📈 Crecimiento de la Iglesia — Unidad 1: Introducción</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"I will build My church, and the gates of Hades shall not prevail against it." — Matthew 16:18 (NKJV)</span><span class="lang-es">"Edificaré mi iglesia, y las puertas del infierno no prevalecerán contra ella." — Mateo 16:18 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Church Growth course. Please register before beginning Unit 1.</span><span class="lang-es">Bienvenido al curso Crecimiento de la Iglesia. Por favor regístrese antes de comenzar la Unidad 1.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h2>Course Orientation</h2>
+<p>Welcome to <strong>Church Growth</strong> — a twelve-unit study, first taught a generation ago and now refreshed for our own day. Each unit preserves the original teaching and then adds a section, <em>"Where We Are Now,"</em> that folds in what the last thirty years have taught the church about its own growth and decline. Each unit ends with a thirty-question exam and requires 90% to pass. A failed multiple-choice section locks for two minutes; for master's-level students, a failed short-answer section locks for fifteen minutes. The course awards a certificate of completion upon finishing all twelve units.</p>
+<p><em>Reflect before you begin: find a Scripture on why church growth ought to take place, and on a sheet of paper draw a picture of a church.</em></p>
+
+<h2>I. The 1950s and the Franchise Model</h2>
+<p>During the 1950s Southern Baptists seemed to have the pulse of North America. In 1950 the denomination recorded a 4.7% increase for the year. That seemed to be our time. We were a rural, Southern, Bible-belt people; we had a high birth rate; and we seemed to be doing everything right. We used decisional preaching, personal evangelism, Sunday School, and revivals to record tremendous growth.</p>
+<p>The model we used was the industrial, or franchise, model. You know what a franchise is. You go to a McDonald's, perhaps the world's largest franchise, and in any city you get pretty much the same thing; the local branches are not allowed to experiment very much. Every hamburger is standard the world over. Likewise, a Southern Baptist church in one place looked pretty much like one anywhere else. The strength of that model was consistency. Its weakness was that a uniform model cannot adapt when the world changes — and the world has not stood still.</p>
+
+<h2>II. Plateau and Decline</h2>
+<p>By definition, a growing church shows more than a 10% increase in membership over a five-year period; a declining church shows more than a 10% decrease over five years; and a plateaued church shows neither. By the 1990 figures, 35% of all churches were plateaued or declining. Among Southern Baptists, 52% were plateaued, 18% declining, and 30% growing. Like most of its churches, the denomination had plateaued; without its ethnic growth it would have been in decline like the other major denominations of North America. A plateaued denomination is simply a reflection of plateaued churches. The question on the table was, and still is: do we try harder, or try doing things differently?</p>
+
+<h2>III. Where We Are Now (2026): The Great Dechurching</h2>
+<p>A quarter-century into the twenty-first century, the verdict is in. The plateau deepened into something with a name: the Great Dechurching. About forty million American adults — roughly one in six — once attended church and no longer do, and most of that leaving came in the last twenty-five years, accelerating in the very years this course was first taught. That is more people than were gathered in by the First and Second Great Awakenings and all the Billy Graham crusades combined. For the first time in the eighty years it has been measured, more American adults stay home on Sunday than go.</p>
+<p>But hear the good news. Most of the forty million did not leave in a crisis of faith. They left for ordinary reasons — they moved, the drive got long, a season of life changed — and no one came after them. About half of those who left say they would consider coming back. And the newest figures show the first uptick in in-person attendance in decades. The back door, which we will visit at the end of this course, turns out to swing both ways.</p>
+
+<h2>IV. A Global Picture, and a Posture</h2>
+<p>We must also lift our eyes from North America. While the church in the West has thinned, the church in the world has multiplied. Two of every three Christians now live in the Global South — in Africa, Latin America, and Asia — and the engine of that growth is not Baptist and not Western, but Pentecostal and charismatic. From fewer than a million believers in 1900, that renewal movement is now counted in the hundreds of millions and may pass a billion before 2050. The center of gravity of the faith has moved south, and across our old denominational lines. This course was first taught in a Southern Baptist seminary; its 1990 figures are kept as the historical snapshot they now are. But it now serves the whole church, and its lessons are meant to reach across denominations.</p>
+
+<h2>V. Pentecost and the Pattern of Awakening</h2>
+<p>We dare not speak of that Spirit-borne movement as one more method. Behind it stands not a technique but a Person. The growth of the church has always traced back to Pentecost. Three signs marked that day: a sound like a rushing wind, tongues as of fire resting on each of them, and speech in other tongues. But mark what kind of speech — it was a miracle of <em>hearing</em>. People from every nation heard the wonders of God in their own language, with no interpreter. It was Babel run backward: at the tower God scattered a proud people by confusing their speech; at Pentecost He gathered a people of every language and made them understand.</p>
+<p>The Great Awakenings have often been partial recreations of Pentecost, and that same Spirit can fall on any church that will seek Him. The outward signs have varied — some wept, some fell, some spoke in tongues and many did not — but the constant was never a phenomenon; it was a Presence. The revival historian J. Edwin Orr traced these movements and found they all ran one road: first concerted, united prayer; then an outpouring of the Holy Spirit; and then — only then — people repented and believed.</p>
+
+<h2>VI. Korea, 1907</h2>
+<p>Around the turn of the twentieth century there were only a few hundred believers in all of Korea. When word reached the missionaries of what God was doing in Wales, they wished for revival and then talked themselves out of it: <em>it would be too hard.</em> But hearing that revival had broken out in India, they did the one thing the pattern requires — they redoubled their prayers, and turned the bitterest weeks of winter into a Bible school.</p>
+<p>One evening a man leading some fifteen hundred suggested a short time of prayer first, and asked them not to take too long. One man prayed, and six rose to their feet. A second prayed, and a dozen stood. At last the leader gave up trying to manage it: "Apparently you want to pray. Well — go ahead and pray." And heaven opened. All fifteen hundred rose at once and prayed aloud together, each so lost in God he never noticed the man beside him. An Englishman present wrote to the London <em>Times</em> of a sound like a rushing wind and a power that the frightened missionaries could not control. When it had passed, nearly eighty thousand Koreans had come to Christ in that single year — and Korea has been a land of revival ever since. That little praying band in the Korean winter is one taproot of the very growth we now watch rising out of the Global South.</p>
+
+<h2>VII. The Third Answer</h2>
+<p>So the old question — try harder, or try differently? — is the right one, but it has never been the whole question. Orr would press a third answer no spreadsheet can give: fall to your knees and ask the Lord of the harvest to pour out His Spirit again. The methods will keep changing, as this whole course will show. The Spirit does not change — and neither does the way He has always come: prayer, then the outpouring, then repentance and faith.</p>
+
+</div>
+<div class="lang-es">
+
+<h2>Orientación del Curso</h2>
+<p>Bienvenido a <strong>Crecimiento de la Iglesia</strong> — un estudio de doce unidades, enseñado por primera vez hace una generación y ahora renovado para nuestros días. Cada unidad conserva la enseñanza original y luego añade una sección, <em>"Dónde Estamos Ahora,"</em> que incorpora lo que los últimos treinta años le han enseñado a la iglesia sobre su propio crecimiento y declive. Cada unidad termina con un examen de treinta preguntas y requiere 90% para aprobar. Una sección de opción múltiple reprobada se bloquea por dos minutos; para los estudiantes de nivel de maestría, una sección de respuesta corta reprobada se bloquea por quince minutos. El curso otorga un certificado de finalización al terminar las doce unidades.</p>
+<p><em>Reflexione antes de comenzar: busque una Escritura sobre por qué debe darse el crecimiento de la iglesia, y en una hoja de papel dibuje una iglesia.</em></p>
+
+<h2>I. Los años 1950 y el modelo de franquicia</h2>
+<p>Durante los años 1950 los bautistas del sur parecían tener el pulso de Norteamérica. En 1950 la denominación registró un aumento del 4.7% en el año. Parecía ser nuestro tiempo. Éramos un pueblo rural, del sur, del cinturón bíblico; teníamos una alta tasa de natalidad; y parecía que hacíamos todo bien. Usábamos la predicación de decisión, el evangelismo personal, la Escuela Dominical y los avivamientos para registrar un crecimiento tremendo.</p>
+<p>El modelo que usábamos era el modelo industrial, o de franquicia. Usted sabe lo que es una franquicia. Va a un McDonald's, quizá la franquicia más grande del mundo, y en cualquier ciudad recibe básicamente lo mismo; a las sucursales locales no se les permite experimentar mucho. Cada hamburguesa es estándar en todo el mundo. Del mismo modo, una iglesia bautista del sur en un lugar se veía básicamente igual a otra en cualquier parte. La fuerza de ese modelo era la consistencia. Su debilidad era que un modelo uniforme no puede adaptarse cuando el mundo cambia — y el mundo no se ha quedado quieto.</p>
+
+<h2>II. Meseta y declive</h2>
+<p>Por definición, una iglesia en crecimiento muestra más del 10% de aumento en membresía durante cinco años; una iglesia en declive muestra más del 10% de disminución en cinco años; y una iglesia en meseta no muestra ninguna de las dos. Según las cifras de 1990, el 35% de todas las iglesias estaban en meseta o en declive. Entre los bautistas del sur, el 52% estaban en meseta, el 18% en declive y el 30% en crecimiento. Como la mayoría de sus iglesias, la denominación se había estancado; sin su crecimiento étnico habría estado en declive como las otras grandes denominaciones de Norteamérica. Una denominación en meseta es simplemente un reflejo de iglesias en meseta. La pregunta sobre la mesa era, y sigue siendo: ¿nos esforzamos más, o intentamos hacer las cosas de otra manera?</p>
+
+<h2>III. Dónde Estamos Ahora (2026): El Gran Abandono</h2>
+<p>A un cuarto de siglo del siglo veintiuno, el veredicto está dado. La meseta se profundizó en algo con nombre: el Gran Abandono de la iglesia. Cerca de cuarenta millones de adultos estadounidenses — más o menos uno de cada seis — antes asistían a la iglesia y ya no; y la mayor parte de esa partida ocurrió en los últimos veinticinco años, acelerandose en los mismos años en que se enseñó este curso por primera vez. Es más gente que la recogida por el Primer y Segundo Gran Despertar y todas las cruzadas de Billy Graham juntas. Por primera vez en los ochenta años que se ha medido, más adultos se quedan en casa el domingo que los que asisten.</p>
+<p>Pero oiga la buena noticia. La mayoría de esos cuarenta millones no se fue por una crisis de fe. Se fueron por razones ordinarias — una mudanza, un trayecto largo, un cambio de etapa de la vida — y nadie fue tras ellos. Cerca de la mitad de los que se fueron dice que consideraría regresar. Y las cifras más recientes muestran el primer repunte de asistencia presencial en décadas. La puerta de atrás, que visitaremos al final de este curso, resulta abrirse en ambos sentidos.</p>
+
+<h2>IV. Un panorama global, y una postura</h2>
+<p>También debemos levantar los ojos más allá de Norteamérica. Mientras la iglesia en Occidente ha menguado, la iglesia en el mundo se ha multiplicado. Dos de cada tres cristianos viven ahora en el Sur Global — en África, América Latina y Asia — y el motor de ese crecimiento no es bautista ni occidental, sino pentecostal y carismático. De menos de un millón de creyentes en 1900, ese movimiento de renovación se cuenta ahora en cientos de millones y puede pasar de mil millones antes de 2050. El centro de gravedad de la fe se ha movido al sur, y a través de nuestras viejas líneas denominacionales. Este curso se enseñó por primera vez en un seminario bautista del sur; sus cifras de 1990 se conservan como la fotografía histórica que ahora son. Pero ahora sirve a toda la iglesia, y sus lecciones buscan alcanzar a través de las denominaciones.</p>
+
+<h2>V. Pentecostés y el patrón del avivamiento</h2>
+<p>No nos atrevamos a hablar de ese movimiento nacido del Espíritu como un método más. Detrás de él no está una técnica sino una Persona. El crecimiento de la iglesia siempre se ha remontado a Pentecostés. Tres señales marcaron aquel día: un sonido como de viento recio, lenguas como de fuego sobre cada uno de ellos, y habla en otras lenguas. Pero note qué clase de habla — fue un milagro de <em>oír</em>. Gente de toda nación oyó las maravillas de Dios en su propia lengua, sin intérprete. Fue Babel al revés: en la torre Dios dispersó a un pueblo orgulloso confundiendo su habla; en Pentecostés reunió a un pueblo de toda lengua y los hizo comprender.</p>
+<p>Los Grandes Despertares han sido a menudo recreaciones parciales de Pentecostés, y ese mismo Espíritu puede caer sobre cualquier iglesia que lo busque. Las señales externas han variado — algunos lloraron, algunos cayeron, algunos hablaron en lenguas y muchos no — pero la constante nunca fue un fenómeno; fue una Presencia. El historiador de avivamientos J. Edwin Orr siguió estos movimientos y halló que todos recorrían un mismo camino: primero oración unida y concertada; luego un derramamiento del Espíritu Santo; y entonces — solo entonces — la gente se arrepentia y creía.</p>
+
+<h2>VI. Corea, 1907</h2>
+<p>Hacia el cambio del siglo veinte había solo unos pocos cientos de creyentes en toda Corea. Cuando llegó a los misioneros la noticia de lo que Dios hacía en Gales, anhelaron un avivamiento y luego se convencieron de lo contrario: <em>seria demasiado difícil.</em> Pero al oír que el avivamiento había estallado en India, hicieron lo único que el patrón requiere — redoblaron sus oraciones, y convirtieron las semanas más crudas del invierno en una escuela bíblica.</p>
+<p>Una noche un hombre que dirigía a unos mil quinientos sugirió un breve tiempo de oración primero, y les pidió no tardar mucho. Un hombre oró, y seis se pusieron de pie. Un segundo oró, y una docena se levantó. Al fin el líder dejó de tratar de controlarlo: "Al parecer quieren orar. Pues — adelante, oren." Y el cielo se abrió. Los mil quinientos se levantaron a la vez y oraron en voz alta juntos, cada uno tan absorto en Dios que no notaba al hombre a su lado. Un inglés presente escribió al <em>Times</em> de Londres sobre un sonido como de viento recio y un poder que los asustados misioneros no podían controlar. Cuando pasó, casi ochenta mil coreanos habían venido a Cristo en ese solo año — y Corea ha sido tierra de avivamiento desde entonces. Aquella pequeña banda orante en el invierno coreano es una de las raíces del mismo crecimiento que ahora vemos surgir del Sur Global.</p>
+
+<h2>VII. La tercera respuesta</h2>
+<p>Así que la vieja pregunta — ¿esforzarse más, o intentar de otra manera? — es la correcta, pero nunca ha sido toda la pregunta. Orr insistiria en una tercera respuesta que ninguna hoja de calculo puede dar: caer de rodillas y pedir al Señor de la mies que derrame de nuevo Su Espíritu. Los métodos seguiran cambiando, como mostrara todo este curso. El Espíritu no cambia — ni tampoco la manera en que siempre ha venido: oración, luego el derramamiento, luego arrepentimiento y fe.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam — 30 Questions</span><span class="lang-es">Examen Final — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>Fail the multiple-choice (1–20) and it locks for 2 minutes; fail the master's-level short answer (21–30) and it locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba la opción múltiple (1–20), se bloquea por 2 minutos; si reprueba la respuesta corta de nivel de maestría (21–30), se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Joshua — Unit 1 (retrofit to CTS pattern, 2026-05-16)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 1;
+const COURSE = 'cg';
+const NEXT_UNIT_URL = 'CTSCGUnit2.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 — Introduction",
+    "Unit 2 — Biblical Background",
+    "Unit 3 — Terms and History",
+    "Unit 4 — Principles",
+    "Unit 5 — Change and the Generations",
+    "Unit 6 — Diagnosing Your Church",
+    "Unit 7 — Pastoral Leadership",
+    "Unit 8 — Worship",
+    "Unit 9 — Digital and Online Ministry",
+    "Unit 10 — Sunday School and Small Groups",
+    "Unit 11 — Discipleship",
+    "Unit 12 — Retention"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCGUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// L3 semantic audit: all 20 verified against options and Joshua 1
+const mcQuestions = [
+    { textEn: "1. In 1950 the Southern Baptist Convention recorded an annual increase of about:", textEs: "1. En 1950 la Convención Bautista del Sur registró un aumento anual de cerca de:",
+      optionsEn: ["4.7%", "2.7%", "7.4%", "10%"],
+      optionsEs: ["4.7%", "2.7%", "7.4%", "10%"], correct: 0 },
+    { textEn: "2. The growth model Southern Baptists used in the 1950s is best described as:", textEs: "2. El modelo de crecimiento que usaron los bautistas del sur en los años 1950 se describe mejor como:",
+      optionsEn: ["the cell model", "the franchise (industrial) model", "the seeker model", "the missional model"],
+      optionsEs: ["el modelo de celulas", "el modelo de franquicia (industrial)", "el modelo sensible al buscador", "el modelo misional"], correct: 1 },
+    { textEn: "3. By definition, a growing church shows a membership increase of:", textEs: "3. Por definición, una iglesia en crecimiento muestra un aumento de membresía de:",
+      optionsEn: ["5% over 3 years", "2% per year", "25% over ten years", "more than 10% over five years"],
+      optionsEs: ["5% en 3 años", "2% por año", "25% en diez años", "más del 10% en cinco años"], correct: 3 },
+    { textEn: "4. A plateaued church is one that shows:", textEs: "4. Una iglesia en meseta es una que muestra:",
+      optionsEn: ["more than 10% growth", "more than 10% decline", "neither a 10% increase nor a 10% decrease over five years", "rapid collapse"],
+      optionsEs: ["más del 10% de crecimiento", "más del 10% de declive", "ni un aumento ni una disminución del 10% en cinco años", "colapso rápido"], correct: 2 },
+    { textEn: "5. Among the 1990 figures, the share of Southern Baptist churches that were plateaued was about:", textEs: "5. Según las cifras de 1990, la proporción de iglesias bautistas del sur en meseta era cerca de:",
+      optionsEn: ["30%", "52%", "18%", "80%"],
+      optionsEs: ["30%", "52%", "18%", "80%"], correct: 1 },
+    { textEn: "6. What kept the denomination from outright decline, according to the original lecture?", textEs: "6. ¿Qué evitó el declive total de la denominación, según la lección original?",
+      optionsEn: ["ethnic growth", "television ministry", "telemarketing", "church mergers"],
+      optionsEs: ["el crecimiento étnico", "el ministerio televisivo", "el telemercadeo", "las fusiones de iglesias"], correct: 0 },
+    { textEn: "7. The 'Great Dechurching' refers to roughly how many American adults who once attended and no longer do?", textEs: "7. El 'Gran Abandono' se refiere aproximadamente a cuántos adultos estadounidenses que antes asistían y ya no:",
+      optionsEn: ["about 4 million", "about 14 million", "about 40 million", "about 100 million"],
+      optionsEs: ["unos 4 millones", "unos 14 millones", "unos 40 millones", "unos 100 millones"], correct: 2 },
+    { textEn: "8. The dechurching most sharply accelerated beginning in:", textEs: "8. El abandono de la iglesia se aceleró más marcadamente a partir de:",
+      optionsEn: ["the 1950s", "the 2010s", "the year 2020", "the mid-1990s"],
+      optionsEs: ["los años 1950", "los años 2010", "el año 2020", "mediados de los años 1990"], correct: 3 },
+    { textEn: "9. Most of the dechurched left primarily because of:", textEs: "9. La mayoría de los que abandonaron la iglesia se fueron principalmente por:",
+      optionsEn: ["a loss of faith", "ordinary life reasons such as moving", "doctrinal disputes", "persecution"],
+      optionsEs: ["una perdida de fe", "razones ordinarias como una mudanza", "disputas doctrinales", "persecución"], correct: 1 },
+    { textEn: "10. Roughly what fraction of dechurched evangelicals say they would consider returning?", textEs: "10. ¿Aproximadamente qué fracción de evangélicos que abandonaron dice que consideraría regresar?",
+      optionsEn: ["about half", "about one tenth", "nearly all", "almost none"],
+      optionsEs: ["cerca de la mitad", "cerca de una decima parte", "casi todos", "casi ninguno"], correct: 0 },
+    { textEn: "11. About what share of the world's Christians now live in the Global South?", textEs: "11. ¿Cerca de qué proporción de los cristianos del mundo vive ahora en el Sur Global?",
+      optionsEn: ["one tenth", "one half", "two thirds", "one quarter"],
+      optionsEs: ["una decima parte", "la mitad", "dos tercios", "una cuarta parte"], correct: 2 },
+    { textEn: "12. The engine of the church's growth in the world today is largely:", textEs: "12. El motor del crecimiento de la iglesia en el mundo hoy es en gran parte:",
+      optionsEn: ["Baptist", "mainline Protestant", "Roman Catholic", "Pentecostal and charismatic"],
+      optionsEs: ["bautista", "protestante histórico", "católico romano", "pentecostal y carismático"], correct: 3 },
+    { textEn: "13. This unit describes Pentecost primarily as a miracle of:", textEs: "13. Esta unidad describe Pentecostés principalmente como un milagro de:",
+      optionsEn: ["healing", "speaking", "hearing", "prophecy"],
+      optionsEs: ["sanidad", "hablar", "oír", "profecía"], correct: 2 },
+    { textEn: "14. Pentecost is portrayed as the reversal of:", textEs: "14. Pentecostés se presenta como la reversión de:",
+      optionsEn: ["the Exodus", "the Fall", "the Flood", "the Tower of Babel"],
+      optionsEs: ["el Exodo", "la Caída", "el Diluvio", "la Torre de Babel"], correct: 3 },
+    { textEn: "15. According to J. Edwin Orr, every great awakening followed which sequence?", textEs: "15. Según J. Edwin Orr, ¿qué secuencia siguió cada gran avivamiento?",
+      optionsEn: ["prayer, then an outpouring of the Spirit, then repentance and faith", "organization, then advertising, then crowds", "preaching, then giving, then growth", "revival, then prayer, then decline"],
+      optionsEs: ["oración, luego un derramamiento del Espíritu, luego arrepentimiento y fe", "organización, luego publicidad, luego multitudes", "predicación, luego ofrenda, luego crecimiento", "avivamiento, luego oración, luego declive"], correct: 0 },
+    { textEn: "16. In the 1907 Korean revival, the outpouring came during:", textEs: "16. En el avivamiento coreano de 1907, el derramamiento vino durante:",
+      optionsEn: ["a building campaign", "a men's prayer meeting where all prayed aloud at once", "a denominational vote", "a televised crusade"],
+      optionsEs: ["una campana de construcción", "una reunión de oración de hombres donde todos oraron en voz alta a la vez", "una votación denominacional", "una cruzada televisada"], correct: 1 },
+    { textEn: "17. About how many Koreans came to Christ in that revival year?", textEs: "17. ¿Aproximadamente cuántos coreanos vinieron a Cristo en ese año de avivamiento?",
+      optionsEn: ["about 800,000", "about 8,000", "nearly 80,000", "about 8 million"],
+      optionsEs: ["unos 800,000", "unos 8,000", "casi 80,000", "unos 8 millones"], correct: 2 },
+    { textEn: "18. In the Welsh revival, Evan Roberts often said simply:", textEs: "18. En el avivamiento de Gales, Evan Roberts a menudo decía simplemente:",
+      optionsEn: ["'Repent now'", "'Give generously'", "'Come forward'", "'Let us pray'"],
+      optionsEs: ["'Arrepientanse ahora'", "'Den generosamente'", "'Pasen al frente'", "'Oremos'"], correct: 3 },
+    { textEn: "19. Besides 'try harder' or 'try differently,' the unit's third answer to the church-growth question is to:", textEs: "19. Además de 'esforzarse más' o 'intentar de otra manera,' la tercera respuesta de la unidad a la pregunta del crecimiento es:",
+      optionsEn: ["spend more money", "pray for a fresh outpouring of the Spirit", "hire consultants", "merge with another church"],
+      optionsEs: ["gastar más dinero", "orar por un nuevo derramamiento del Espíritu", "contratar consultores", "fusionarse con otra iglesia"], correct: 1 },
+    { textEn: "20. The newest figures show U.S. in-person attendance has:", textEs: "20. Las cifras más recientes muestran que la asistencia presencial en EE.UU. ha:",
+      optionsEn: ["ticked up for the first time in decades", "stayed exactly flat", "become impossible to measure", "collapsed entirely"],
+      optionsEs: ["subido por primera vez en décadas", "quedado totalmente plana", "vuelto imposible de medir", "colapsado por completo"], correct: 0 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "21. Describe the franchise (industrial) model of church growth. What did it mean in practice, and what was its built-in weakness?",
+      textEs: "21. Describa el modelo de franquicia (industrial) del crecimiento de la iglesia. ¿Qué significaba en la práctica y cuál era su debilidad inherente?",
+      kw_en: ["franchis", "standard", "same", "mcdonald", "experiment", "model", "local", "uniform"],
+      kw_es: ["franquici", "estandar", "igual", "mcdonald", "experiment", "modelo", "local", "uniform"],
+      modelEn: "The franchise or industrial model meant every Southern Baptist church looked basically the same, standardized everywhere like a McDonald's, where the local congregation was not free to experiment. The strength was consistency; the weakness was that a uniform model cannot adapt when the world changes.",
+      modelEs: "El modelo de franquicia o industrial significaba que cada iglesia bautista del sur se veía básicamente igual, estandarizada en todas partes como un McDonald's, donde la congregación local no era libre de experimentar. La fuerza era la consistencia; la debilidad, que un modelo uniforme no puede adaptarse cuando el mundo cambia." },
+    { textEn: "22. Define a growing, a plateaued, and a declining church by the numerical standard given in this unit.",
+      textEs: "22. Defina una iglesia en crecimiento, en meseta y en declive según el estándar numérico dado en esta unidad.",
+      kw_en: ["plateau", "declin", "percent", "increas", "decreas", "member", "five", "grow"],
+      kw_es: ["meset", "decliv", "ciento", "aument", "dismin", "membres", "cinco", "crecim"],
+      modelEn: "A growing church increases more than ten percent over five years; a declining church decreases more than ten percent over the same five-year span; a plateaued church does neither, its membership essentially flat.",
+      modelEs: "Una iglesia en crecimiento aumenta más del diez por ciento en cinco años; una iglesia en declive disminuye más del diez por ciento en el mismo lapso; una iglesia en meseta no hace ninguna de las dos, su membresía esencialmente plana." },
+    { textEn: "23. What is the Great Dechurching, roughly how large is it, and why is its main cause a hopeful sign?",
+      textEs: "23. ¿Qué es el Gran Abandono de la iglesia, qué tan grande es aproximadamente, y por qué su causa principal es una señal esperanzadora?",
+      kw_en: ["dechurch", "million", "attend", "depart", "drift", "return", "never", "faith"],
+      kw_es: ["millon", "abandon", "iglesi", "asist", "decliv", "regres", "nunca", "alej"],
+      modelEn: "The Great Dechurching describes about forty million adults who once attended and have departed; most did not leave over doctrine but simply drifted, and about half would return, never having truly lost their faith.",
+      modelEs: "El Gran Abandono de la iglesia describe los cerca de cuarenta millones que antes asistían y ya no; la mayoría no se fue por doctrina sino que se alejó, y cerca de la mitad regresarían, sin haber perdido de veras su fe." },
+    { textEn: "24. State the pattern J. Edwin Orr found in every great awakening, in order, and explain why it rebukes a purely method-driven view of growth.",
+      textEs: "24. Exponga el patrón que J. Edwin Orr halló en cada gran avivamiento, en orden, y explique por qué reprende una visión del crecimiento puramente basada en métodos.",
+      kw_en: ["pray", "outpour", "spirit", "repent", "believ", "unite", "revival", "awaken"],
+      kw_es: ["oraci", "derram", "espirit", "arrepent", "avivam", "despert", "unid", "creer"],
+      modelEn: "Orr found every awakening follows one road: united prayer, then an outpouring of the Spirit, then people repent and believe. The pattern never changes, only the setting.",
+      modelEs: "Orr halló que todo avivamiento sigue un mismo camino: oración unida, luego un derramamiento del Espíritu, y entonces la gente se arrepiente y cree. El patrón nunca cambia, solo el escenario; el que despierta es el Espíritu." },
+    { textEn: "25. Explain why Pentecost is called a miracle of hearing rather than of speaking, and how it reverses Babel.",
+      textEs: "25. Explique por qué Pentecostés se llama un milagro de oír y no de hablar, y cómo revierte a Babel.",
+      kw_en: ["hear", "languag", "understand", "nation", "interpret", "speak", "tongue", "babel"],
+      kw_es: ["oir", "lengua", "entend", "nacion", "interpret", "hablar", "babel", "comprend"],
+      modelEn: "At Pentecost each person from every nation heard the gospel in his own language and understood without an interpreter, so it was a miracle of hearing more than of speaking, a reversal of Babel where tongues were once confused.",
+      modelEs: "En Pentecostés cada persona de toda nación oyó el evangelio en su propia lengua y comprendió sin intérprete, así que fue un milagro de oír más que de hablar, una reversión de Babel donde las lenguas antes fueron confundidas." },
+    { textEn: "26. Recount the 1907 Korean revival. What did it begin with, what happened, and what was the result?",
+      textEs: "26. Relate el avivamiento coreano de 1907. ¿Con qué comenzó, qué sucedió y cuál fue el resultado?",
+      kw_en: ["korea", "pray", "spirit", "repent", "thousand", "revival", "outpour", "missionar"],
+      kw_es: ["corea", "oraci", "espirit", "arrepent", "mil", "avivam", "derram", "misioner"],
+      modelEn: "In Korea in 1907 the missionaries redoubled their prayer; as the men prayed aloud the Spirit was poured out, people repented in agony, and nearly eighty thousand were saved that year, a revival still felt today.",
+      modelEs: "En Corea en 1907 los misioneros redoblaron su oración; mientras los hombres oraban en voz alta el Espíritu fue derramado, la gente se arrepintió con agonía, y casi ochenta mil fueron salvos ese año, un avivamiento aún vivo." },
+    { textEn: "27. Explain the statement that 'a plateaued denomination is simply a reflection of plateaued churches.'",
+      textEs: "27. Explique la afirmación de que 'una denominación en meseta es simplemente un reflejo de iglesias en meseta.'",
+      kw_en: ["denomin", "plateau", "church", "reflect", "local", "member", "sum", "declin"],
+      kw_es: ["denomin", "meset", "iglesi", "reflej", "local", "membres", "suma", "decliv"],
+      modelEn: "A denomination is only the sum of its churches, so a plateaued denomination simply reflects many local plateaued churches; the decline of the whole is the decline of its members added up.",
+      modelEs: "Una denominación es solo la suma de sus iglesias, así que una denominación en meseta simplemente refleja muchas iglesias locales en meseta; el declive del todo es el declive de sus miembros sumados." },
+    { textEn: "28. Where is the church growing most in the world today, and what is the engine of that growth?",
+      textEs: "28. ¿Dónde crece más la iglesia en el mundo hoy, y cuál es el motor de ese crecimiento?",
+      kw_en: ["global", "south", "pentecost", "charismat", "africa", "renewal", "spirit", "grow"],
+      kw_es: ["global", "pentecost", "carismat", "africa", "renov", "espirit", "crecim", "movimi"],
+      modelEn: "The church is growing most in the Global South, in Africa, Latin America, and Asia, and the engine of that growth is Pentecostal and charismatic renewal, the work of the Spirit, not the old Western Baptist model.",
+      modelEs: "La iglesia crece más en el Sur Global, en África, América Latina y Asia, y el motor de ese crecimiento es la renovación pentecostal y carismática, la obra del Espíritu, un movimiento, no el viejo modelo bautista occidental." },
+    { textEn: "29. Beyond 'try harder' and 'try differently,' what third answer does this unit give to the church-growth question, and why?",
+      textEs: "29. Más allá de 'esforzarse más' y 'intentar de otra manera,' ¿qué tercera respuesta da esta unidad a la pregunta del crecimiento, y por qué?",
+      kw_en: ["prayer", "spirit", "outpour", "harvest", "revival", "third", "knee", "ask"],
+      kw_es: ["oraci", "espirit", "derram", "mies", "avivam", "tercer", "rodill", "pedir"],
+      modelEn: "Beyond trying harder or trying differently, the third answer is prayer, to fall on our knees and ask the Lord of the harvest to pour out His Spirit again, for revival is His work and not our technique.",
+      modelEs: "Más allá de esforzarse más o de otra manera, la tercera respuesta es la oración, caer de rodillas y pedir al Señor de la mies que derrame de nuevo Su Espíritu, pues el avivamiento es Su obra y no nuestra técnica." },
+    { textEn: "30. Synthesis: Why did most of the dechurched leave, and how do their reasons point to the way they might be reached again?",
+      textEs: "30. Síntesis: ¿Por qué se fue la mayoría de los que abandonaron la iglesia, y cómo señalan sus razones la manera de volver a alcanzarlos?",
+      kw_en: ["ordinary", "drift", "faith", "return", "invit", "friend", "reach", "move"],
+      kw_es: ["ordinari", "alej", "regres", "invit", "amig", "buscar", "mudan", "mitad"],
+      modelEn: "Most did not lose their faith; they drifted for ordinary reasons like moving, and no one reached for them, which is hopeful, because about half would return if a friend offered an honest invitation home.",
+      modelEs: "La mayoría no perdió su fe; se alejaron por razones ordinarias como una mudanza, y nadie los buscó, lo cual es esperanzador, porque cerca de la mitad regresarían si un amigo ofreciera una invitación sincera; volvería la mitad." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 2 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 2 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ Bloqueado. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ Locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ MC ✓ aprobado. Sección SA bloqueada. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ MC ✓ passed. SA section locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const mb = document.createElement('div');
+        mb.className = 'js-model-box';
+        mb.style.cssText = 'display:none;margin-top:10px;padding:10px 12px;background:#fbf3d5;border:1px solid #d4af37;border-radius:8px;';
+        mb.innerHTML = (currentLang === 'en'
+            ? '<strong>Model answer — study this</strong><br>' + q.modelEn
+            : '<strong>Respuesta modelo — estúdiela</strong><br>' + q.modelEs);
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                return;
+            }
+            // Smart matcher (kwHit) — matches the official grade, not raw indexOf.
+            const hitList = kws.filter(kw => kwHit(ans, kw));
+            const hits = hitList.length;
+            if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? `✓ Solid answer (${hits}/${kws.length} key concepts referenced).` : `✓ Respuesta sólida (${hits}/${kws.length} conceptos clave referenciados).`;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en'
+                    ? `✗ Need at least 3 key concepts; got ${hits}/${kws.length}. Compare your answer with the model below.`
+                    : `✗ Necesita al menos 3 conceptos clave; obtuvo ${hits}/${kws.length}. Compare su respuesta con el modelo abajo.`;
+            }
+            mb.style.display = 'block'; // reveal model answer after every check, pass or fail
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(mb);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    // Reveal every model answer after submit — the teaching is the comparison.
+    document.querySelectorAll('.js-model-box').forEach(function(e){ e.style.display = 'block'; });
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ Reprobado: ${mcScore}/20 (se requiere 18). Bloqueado 2 minutos.</span>`
+                : `<span style='color:#8a1f1f'>✗ Failed: ${mcScore}/20 (need 18). Locked 2 minutes.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ MC ✓ permanece aprobado. SA reprobada: ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min.</span>`
+                : `<span style='color:#8a1f1f'>✗ MC ✓ stays passed. SA failed: ${saScore}/10 (need 9). SA section locked 15 min.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 2 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 2 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    location.reload();
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCGReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deacon Family Ministry Plan — Unit 4</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<!-- CTS Deacon Family Ministry Plan — Unit 4. Built on Cook's validated Q24 masters engine (ported from Bible Characters Unit 3). Bilingual EN (NKJV) / ES (RVG). Author: Dr. Wayne Cook. Spanish + SA keywords/models pending native RVG / author spot-check. -->
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 5 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Deacon Family Ministry Plan — Unit 4: Vision and Definition of the Plan</span><span class="lang-es">📖 Plan de Ministerio Familiar del Diácono — Unidad 4: Visión y Definición del Plan</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"I will seek what was lost and bring back what was driven away, bind up the broken and strengthen what was sick." — Ezekiel 34:16 (NKJV)</span><span class="lang-es">«Buscaré la perdida, y haré volver la descarriada, y vendaré la perniquebrada, y fortaleceré la enferma.» — Ezequiel 34:16 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="cert">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>We have spent three units laying the foundation. We learned what a deacon is &mdash; a servant; what kind of man he must be &mdash; one proven in character; and how the office, lost for a season and then recovered, gave rise in Baptist life to the Deacon Family Ministry Plan. Now, beginning with this unit, we take up the Plan itself. And we begin where every good work must begin: with its vision and its definition &mdash; the dream that drives it, and the plain statement of what it is.</p>
+<p><strong>Subject:</strong> the vision and definition of the Deacon Family Ministry Plan.</p>
+<p><strong>Proposition:</strong> The Plan is a vision of a congregation in which no one is forgotten, carried out by assigning every family to a deacon for personal, caring ministry under the pastor.</p>
+<p>We will look first at the vision behind the Plan, and then define the Plan by its <strong>four marks</strong>.</p>
+<h2>I. The Vision Behind the Plan</h2>
+<p>The vision of the Plan is of a church in which no single soul is forgotten. That sounds simple until you stand in a growing congregation and watch how easily the opposite happens. The larger a church becomes, the easier it is for a person to slip in and slip out unnoticed, and for a whole family to pass through grief, sickness, or quiet wandering without anyone ever knowing.</p>
+<div class="illustration"><strong>Illustration.</strong> Every pastor knows the sorrow of the &ldquo;back door.&rdquo; A family that once came faithfully begins to miss a Sunday, then two, then a month. No one calls, because in the rush of a busy church no one is quite sure whose place it was to call. By the time anyone notices, they are gone, and no one can say exactly when it happened or why. Multiply that one family across a congregation of hundreds, and you see the very thing the Plan exists to prevent: not cruelty, but the slow neglect that comes simply because no one was assigned to care.</div>
+<p>Scripture knew this danger long before our crowded churches did. Through Ezekiel, God rebuked the shepherds of Israel who fed themselves but did not feed the flock: &ldquo;The weak you have not strengthened, nor have you healed those who were sick... nor brought back what was driven away, nor sought what was lost; but with force and cruelty you have ruled them. So they were scattered because there was no shepherd&rdquo; (Ezekiel 34:4&ndash;5). A flock with no one to seek it is a scattered flock. The Plan exists so that this never need be said of a church &mdash; so that every weak, sick, straying, and discouraged member has someone appointed to seek them out.</p>
+<p>The vision answers that danger directly: every member known, every family watched over, every need met by someone whose appointed task is to care. This is nothing more than the body of Christ working the way God designed it to work:</p>
+<div class="scripture">that there should be no schism in the body, but that the members should have the same care for one another. And if one member suffers, all the members suffer with it; or if one member is honored, all the members rejoice with it. (1 Corinthians 12:25&ndash;26, NKJV)</div>
+<p>God's design is a body whose members truly care for one another, in which no one is overlooked and the suffering of one is felt by all. But in a congregation too large for the pastor to reach alone, that mutual care does not happen by accident; it must be organized. The Deacon Family Ministry Plan is simply the shepherd's heart &mdash; the heart that knows its sheep (John 10:14) and goes after the one that strays &mdash; turned into a workable plan, so that the care God commands actually reaches every home.</p>
+<div class="pull-quote">The Deacon Family Ministry Plan is a way of organizing the care of an entire congregation by assigning every family and individual to a deacon, who is responsible to know them, pray for them, keep in regular contact, and minister to them in every time of need &mdash; all under the leadership of the pastor.</div>
+<p>Let us unfold that definition by its four marks.</p>
+<h2>II. A Plan of Total Coverage</h2>
+<p>The first mark of the Plan is total coverage: every family is assigned, and no one is left out. The resident membership of the church is divided up so that each person and each household belongs to some deacon's list. This is precisely what makes it a <em>plan</em> and not merely a good intention.</p>
+<p>Good intentions always cover the squeaky wheel &mdash; the people who speak up, who ask for help, who are easy to see. The Plan covers everyone: the quiet and the shy, the elderly shut-in, the discouraged member who has begun to drift, the family that would never in a hundred years pick up the phone and ask. This was the very point of Acts 6, where the seven were appointed so that not one widow would be overlooked in the daily distribution. The Plan's first commitment is completeness &mdash; not most of the families, but all of them. A church operating this Plan can say of every member, &ldquo;Someone is responsible for you. You will not be forgotten.&rdquo;</p>
+<p>There is a quiet dignity in that promise. Many a faithful believer has sat in a large church for years feeling that if they vanished, no one would notice. Total coverage answers that fear at the root. It does not wait for a member to fall before it acts; it assigns care in advance, so that the watching is already in place when trouble comes. A church that covers everyone has decided, before any crisis, that not one of its people is expendable.</p>
+<h2>III. A Plan of Personal Ministry</h2>
+<p>The second mark is that the ministry is personal. Each family is given not to a committee or a program but to a particular deacon &mdash; a man with a name and a face, who knows this family and whom this family knows in return. Care is personal, or it is not really care at all.</p>
+<p>This is the heart of the Good Shepherd, who says, &ldquo;I am the good shepherd; and I know My sheep, and am known by My own&rdquo; (John 10:14). A hurting family does not need a system; it needs a person &mdash; someone who will remember their names, notice when they are absent, and come and sit beside them in the hospital. This is also why the Plan gives each deacon only a manageable number of families. A man cannot truly know two hundred households, but he can know ten or twelve. The numbers are kept small on purpose, so that the ministry can be personal and real rather than a name on a roster and a duty never done.</p>
+<p>Numbers, in this Plan, are a spiritual matter and not merely a practical one. Give a man too many families and you have all but guaranteed that most of them will be names he never truly meets; give him a few, and you have made real knowledge possible. The Plan would rather a deacon know ten families well than carry fifty he can only count.</p>
+<h2>IV. A Plan of Caring Service</h2>
+<p>The third mark is that the work itself is care, not governance. Here the lessons of our earlier units come home. The deacon under this Plan is not a manager of the institution; he is a servant of the families entrusted to him, and his whole task toward them is to care.</p>
+<p>What does that care look like? He gets acquainted with his families and earns their trust. He prays for them by name. He keeps in regular contact, so that the relationship is alive before the crisis comes. He visits in times of sickness and sorrow, goes to the hospital and the funeral home, and stands beside them when trouble strikes. He helps meet real needs, whether physical, spiritual, or emotional, and draws on the wider church when the need is greater than he can carry alone. He rejoices with them in their joys and weeps with them in their griefs. This is ministry that goes to where people actually live, as Paul taught not only publicly but &ldquo;from house to house&rdquo; (Acts 20:20). It is the towel, not the gavel. Under such a plan, when the deacons gather, their meeting is not chiefly a business session but a report on souls &mdash; who is sick, who is hurting, who has begun to wander, and how each one is being cared for.</p>
+<p>In all of this the deacon becomes a living bridge between the family and the church. Through him the lonely are drawn back into fellowship, the needs of the home reach the wider body, and the love of the whole congregation is carried to one doorstep at a time. The care is not a program the church runs; it is the church being the church, one family and one deacon at a time.</p>
+<h2>V. A Plan Under the Pastor's Shepherding</h2>
+<p>The fourth mark is that the whole Plan operates under and alongside the pastor. It does not replace the pastor's care; it extends it. The deacon becomes the pastor's helper, his hands and feet reaching into homes that the pastor, by himself, could never reach.</p>
+<div class="scripture">Therefore take heed to yourselves and to all the flock, among which the Holy Spirit has made you overseers, to shepherd the church of God which He purchased with His own blood. (Acts 20:28, NKJV)</div>
+<p>The shepherding of the flock belongs first to the overseers, the pastors; but the Plan lets that shepherding be carried, in practical care, to every family in the church. The deacon keeps watch over his families and brings their deeper needs to the pastor, so that the pastor is freed to give himself to prayer and the Word and to the cases that require him &mdash; while no family, in the meantime, goes unwatched. This is partnership, not competition. It is exactly the pattern of Acts 6, where the seven took up the practical care so that the apostles could give themselves to prayer and the ministry of the word. The pastor cannot be in every home at once; through his deacons, the care of the church can be.</p>
+<p>This guards the Plan from two opposite errors. It is not the deacons quietly taking the church out of the pastor's hands, for they serve under him and bring their families' deeper needs to him. Nor is it the pastor left to carry alone a load no one man can bear, for the daily watching is shared among many faithful servants. Each does what he is fitted to do: the pastor gives himself to the Word and to the cases that require him, and the deacons see to it that no family is left unseen.</p>
+<h2>Conclusion</h2>
+<p>Gather the four marks together &mdash; total coverage, personal ministry, caring service, and all of it under the pastor &mdash; and you have the Deacon Family Ministry Plan. The vision is a church in which no one falls through the cracks, in which every family has a shepherd's helper who knows them, prays for them, and stands by them. The definition is simply the plan that makes that vision real and lasting, rather than leaving it to chance and good will.</p>
+<p>This is not a heavy machine bolted onto a church; it is the oldest work of the people of God, given a shape that can actually be carried out. When it is working well, a visitor can scarcely tell where the pastor's care ends and the deacons' begins, because the whole church has become, in truth, a body that cares for its own.</p>
+<p>Now that we know what the Plan is and why it exists, the next questions are practical ones. How does a church actually divide its families among its deacons? How are the assignments made and kept? That is the work we take up in Unit 5, as we move from the vision of the Plan to the building of it.</p></div>
+<div class="lang-es"><p>Hemos dedicado tres unidades a poner el fundamento. Aprendimos qu&eacute; es un di&aacute;cono &mdash; un siervo; qu&eacute; clase de hombre debe ser &mdash; uno probado en car&aacute;cter; y c&oacute;mo el oficio, perdido por una temporada y luego recuperado, dio origen en la vida bautista al Plan de Ministerio Familiar del Di&aacute;cono. Ahora, comenzando con esta unidad, tomamos el Plan mismo. Y comenzamos donde toda buena obra debe comenzar: con su visi&oacute;n y su definici&oacute;n &mdash; el sue&ntilde;o que la impulsa, y la declaraci&oacute;n sencilla de lo que es.</p>
+<p><strong>Tema:</strong> la visi&oacute;n y la definici&oacute;n del Plan de Ministerio Familiar del Di&aacute;cono.</p>
+<p><strong>Proposici&oacute;n:</strong> El Plan es una visi&oacute;n de una congregaci&oacute;n en la que nadie es olvidado, llevada a cabo asignando cada familia a un di&aacute;cono para un ministerio personal y solícito bajo el pastor.</p>
+<p>Veremos primero la visi&oacute;n detr&aacute;s del Plan, y luego definiremos el Plan por sus <strong>cuatro marcas</strong>.</p>
+<h2>I. La Visi&oacute;n Detr&aacute;s del Plan</h2>
+<p>La visi&oacute;n del Plan es la de una iglesia en la que ni una sola alma es olvidada. Eso suena sencillo hasta que usted se para en una congregaci&oacute;n que crece y observa con cu&aacute;nta facilidad ocurre lo contrario. Cuanto m&aacute;s grande se vuelve una iglesia, m&aacute;s f&aacute;cil es que una persona entre y salga sin ser notada, y que toda una familia pase por el dolor, la enfermedad o un callado descarrío sin que nadie lo sepa jam&aacute;s.</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> Todo pastor conoce la tristeza de la &laquo;puerta trasera.&raquo; Una familia que antes ven&iacute;a fielmente comienza a faltar un domingo, luego dos, luego un mes. Nadie llama, porque en el ajetreo de una iglesia ocupada nadie est&aacute; muy seguro de a qui&eacute;n le tocaba llamar. Para cuando alguien lo nota, ya se han ido, y nadie puede decir exactamente cu&aacute;ndo sucedi&oacute; ni por qu&eacute;. Multiplique esa sola familia por una congregaci&oacute;n de cientos, y ver&aacute; precisamente aquello que el Plan existe para evitar: no la crueldad, sino el lento descuido que viene sencillamente porque nadie fue asignado para cuidar.</div>
+<p>La Escritura conoci&oacute; este peligro mucho antes que nuestras iglesias atestadas. Por medio de Ezequiel, Dios reprendi&oacute; a los pastores de Israel que se apacentaban a s&iacute; mismos pero no apacentaban al reba&ntilde;o: &laquo;No corroborasteis las d&eacute;biles, ni curasteis la enferma... ni volvisteis al redil la descarriada, ni buscasteis la perdida; sino que os hab&eacute;is ense&ntilde;oreado de ellas con dureza y con violencia. Y est&aacute;n derramadas por falta de pastor&raquo; (Ezequiel 34:4&ndash;5). Un reba&ntilde;o sin nadie que lo busque es un reba&ntilde;o disperso. El Plan existe para que esto nunca tenga que decirse de una iglesia &mdash; para que cada miembro d&eacute;bil, enfermo, descarriado y desanimado tenga a alguien asignado para buscarlo.</p>
+<p>La visi&oacute;n responde a ese peligro directamente: cada miembro conocido, cada familia vigilada, cada necesidad suplida por alguien cuya tarea asignada es cuidar. Esto no es m&aacute;s que el cuerpo de Cristo funcionando como Dios lo dise&ntilde;&oacute;:</p>
+<div class="scripture">para que no haya desavenencia en el cuerpo, sino que los miembros todos se preocupen los unos por los otros. De manera que si un miembro padece, todos los miembros se duelen con &eacute;l; y si un miembro recibe honra, todos los miembros con &eacute;l se gozan. (1 Corintios 12:25&ndash;26, RVG)</div>
+<p>El dise&ntilde;o de Dios es un cuerpo cuyos miembros verdaderamente se cuidan unos a otros, en el que nadie es pasado por alto y el sufrimiento de uno es sentido por todos. Pero en una congregaci&oacute;n demasiado grande para que el pastor la alcance solo, ese cuidado mutuo no ocurre por accidente; debe ser organizado. El Plan de Ministerio Familiar del Di&aacute;cono es sencillamente el coraz&oacute;n del pastor &mdash; el coraz&oacute;n que conoce a sus ovejas (Juan 10:14) y va tras la que se descarría &mdash; convertido en un plan realizable, para que el cuidado que Dios ordena de veras llegue a cada hogar.</p>
+<div class="pull-quote">El Plan de Ministerio Familiar del Di&aacute;cono es una manera de organizar el cuidado de toda una congregaci&oacute;n asignando cada familia e individuo a un di&aacute;cono, quien es responsable de conocerlos, orar por ellos, mantener contacto regular, y ministrarles en todo tiempo de necesidad &mdash; todo bajo la direcci&oacute;n del pastor.</div>
+<p>Desplegamos esa definici&oacute;n por sus cuatro marcas.</p>
+<h2>II. Un Plan de Cobertura Total</h2>
+<p>La primera marca del Plan es la cobertura total: cada familia es asignada, y nadie queda fuera. La membres&iacute;a residente de la iglesia se divide de modo que cada persona y cada hogar pertenezca a la lista de alg&uacute;n di&aacute;cono. Esto es precisamente lo que lo hace un <em>plan</em> y no meramente una buena intenci&oacute;n.</p>
+<p>Las buenas intenciones siempre cubren a la rueda que chilla &mdash; las personas que hablan, que piden ayuda, que son f&aacute;ciles de ver. El Plan cubre a todos: a los callados y a los t&iacute;midos, al anciano recluido en casa, al miembro desanimado que ha comenzado a alejarse, a la familia que nunca en cien a&ntilde;os tomar&iacute;a el tel&eacute;fono para pedir ayuda. Este fue el punto mismo de Hechos 6, donde los siete fueron nombrados para que ni una sola viuda fuera pasada por alto en el reparto diario. El primer compromiso del Plan es la totalidad &mdash; no la mayor&iacute;a de las familias, sino todas ellas. Una iglesia que opera este Plan puede decir de cada miembro: &laquo;Alguien es responsable de ti. No ser&aacute;s olvidado.&raquo;</p>
+<p>Hay una callada dignidad en esa promesa. Muchos creyentes fieles han estado sentados en una iglesia grande por a&ntilde;os sintiendo que si desaparecieran, nadie lo notar&iacute;a. La cobertura total responde a ese temor de ra&iacute;z. No espera a que un miembro caiga antes de actuar; asigna el cuidado de antemano, de modo que la vigilancia ya est&eacute; en su lugar cuando llegue la dificultad. Una iglesia que cubre a todos ha decidido, antes de cualquier crisis, que ni una sola de sus personas es prescindible.</p>
+<h2>III. Un Plan de Ministerio Personal</h2>
+<p>La segunda marca es que el ministerio es personal. Cada familia es entregada no a un comit&eacute; ni a un programa, sino a un di&aacute;cono particular &mdash; un hombre con un nombre y un rostro, que conoce a esta familia y a quien esta familia conoce a su vez. El cuidado es personal, o no es realmente cuidado en absoluto.</p>
+<p>Este es el coraz&oacute;n del Buen Pastor, que dice: &laquo;Yo soy el buen pastor; y conozco mis ovejas, y las m&iacute;as me conocen&raquo; (Juan 10:14). Una familia que sufre no necesita un sistema; necesita una persona &mdash; alguien que recuerde sus nombres, note cuando est&aacute;n ausentes, y venga y se siente a su lado en el hospital. Por esto tambi&eacute;n el Plan da a cada di&aacute;cono solo un n&uacute;mero manejable de familias. Un hombre no puede verdaderamente conocer doscientos hogares, pero puede conocer diez o doce. Los n&uacute;meros se mantienen peque&ntilde;os a prop&oacute;sito, para que el ministerio pueda ser personal y real en lugar de un nombre en una lista y un deber nunca cumplido.</p>
+<p>Los n&uacute;meros, en este Plan, son un asunto espiritual y no meramente pr&aacute;ctico. D&eacute; a un hombre demasiadas familias y casi ha garantizado que la mayor&iacute;a de ellas ser&aacute;n nombres que nunca conoce de veras; d&eacute;le unas pocas, y ha hecho posible el conocimiento real. El Plan prefiere que un di&aacute;cono conozca bien a diez familias antes que cargue cincuenta que solo puede contar.</p>
+<h2>IV. Un Plan de Servicio Solícito</h2>
+<p>La tercera marca es que la obra misma es cuidado, no gobierno. Aqu&iacute; las lecciones de nuestras unidades anteriores llegan a casa. El di&aacute;cono bajo este Plan no es un administrador de la instituci&oacute;n; es un siervo de las familias que se le confían, y toda su tarea hacia ellas es cuidar.</p>
+<p>&iquest;C&oacute;mo se ve ese cuidado? Se familiariza con sus familias y se gana su confianza. Ora por ellas por nombre. Mantiene contacto regular, de modo que la relaci&oacute;n est&eacute; viva antes de que venga la crisis. Visita en tiempos de enfermedad y dolor, va al hospital y a la funeraria, y est&aacute; a su lado cuando golpea la aflicci&oacute;n. Ayuda a suplir necesidades reales, sean f&iacute;sicas, espirituales o emocionales, y recurre a la iglesia m&aacute;s amplia cuando la necesidad es mayor de lo que &eacute;l puede cargar solo. Se goza con ellas en sus gozos y llora con ellas en sus dolores. Este es un ministerio que va a donde la gente realmente vive, como Pablo ense&ntilde;&oacute; no solo p&uacute;blicamente sino &laquo;por las casas&raquo; (Hechos 20:20). Es la toalla, no el mazo. Bajo tal plan, cuando los di&aacute;conos se re&uacute;nen, su reuni&oacute;n no es principalmente una sesi&oacute;n de negocios, sino un informe sobre almas &mdash; qui&eacute;n est&aacute; enfermo, qui&eacute;n sufre, qui&eacute;n ha comenzado a alejarse, y c&oacute;mo se est&aacute; cuidando a cada uno.</p>
+<p>En todo esto el di&aacute;cono llega a ser un puente vivo entre la familia y la iglesia. Por medio de &eacute;l los solitarios son atra&iacute;dos de regreso a la comuni&oacute;n, las necesidades del hogar llegan al cuerpo m&aacute;s amplio, y el amor de toda la congregaci&oacute;n es llevado a un umbral a la vez. El cuidado no es un programa que la iglesia administra; es la iglesia siendo la iglesia, una familia y un di&aacute;cono a la vez.</p>
+<h2>V. Un Plan Bajo el Pastoreo del Pastor</h2>
+<p>La cuarta marca es que todo el Plan opera bajo y junto al pastor. No reemplaza el cuidado del pastor; lo extiende. El di&aacute;cono llega a ser el ayudador del pastor, sus manos y sus pies que alcanzan hogares que el pastor, por s&iacute; solo, nunca podr&iacute;a alcanzar.</p>
+<div class="scripture">Por tanto, mirad por vosotros, y por todo el reba&ntilde;o en que el Esp&iacute;ritu Santo os ha puesto por obispos, para apacentar la iglesia de Dios, la cual &eacute;l compr&oacute; por su propia sangre. (Hechos 20:28, RVG)</div>
+<p>El pastoreo del reba&ntilde;o pertenece primero a los obispos, los pastores; pero el Plan permite que ese pastoreo sea llevado, en cuidado pr&aacute;ctico, a cada familia de la iglesia. El di&aacute;cono vela por sus familias y lleva sus necesidades m&aacute;s profundas al pastor, de modo que el pastor sea liberado para darse a la oraci&oacute;n y la Palabra y a los casos que lo requieren &mdash; mientras que, entretanto, ninguna familia queda sin vigilancia. Esto es sociedad, no competencia. Es exactamente el patr&oacute;n de Hechos 6, donde los siete tomaron el cuidado pr&aacute;ctico para que los ap&oacute;stoles pudieran darse a la oraci&oacute;n y al ministerio de la palabra. El pastor no puede estar en cada hogar a la vez; por medio de sus di&aacute;conos, el cuidado de la iglesia s&iacute; puede.</p>
+<p>Esto guarda al Plan de dos errores opuestos. No es que los di&aacute;conos calladamente tomen la iglesia de las manos del pastor, porque sirven bajo &eacute;l y le llevan las necesidades m&aacute;s profundas de sus familias. Ni tampoco es que el pastor quede a cargar solo una carga que ning&uacute;n hombre puede llevar, porque la vigilancia diaria se reparte entre muchos siervos fieles. Cada uno hace aquello para lo cual est&aacute; capacitado: el pastor se da a la Palabra y a los casos que lo requieren, y los di&aacute;conos se aseguran de que ninguna familia quede sin ser vista.</p>
+<h2>Conclusi&oacute;n</h2>
+<p>Re&uacute;na las cuatro marcas &mdash; cobertura total, ministerio personal, servicio solícito, y todo ello bajo el pastor &mdash; y tiene el Plan de Ministerio Familiar del Di&aacute;cono. La visi&oacute;n es una iglesia en la que nadie se pierde por las grietas, en la que cada familia tiene un ayudador del pastor que la conoce, ora por ella y est&aacute; a su lado. La definici&oacute;n es sencillamente el plan que hace esa visi&oacute;n real y duradera, en lugar de dejarla al azar y a la buena voluntad.</p>
+<p>Esto no es una m&aacute;quina pesada atornillada a una iglesia; es la obra m&aacute;s antigua del pueblo de Dios, a la que se le ha dado una forma que de veras puede llevarse a cabo. Cuando funciona bien, un visitante apenas puede decir d&oacute;nde termina el cuidado del pastor y comienza el de los di&aacute;conos, porque toda la iglesia ha llegado a ser, en verdad, un cuerpo que cuida de los suyos.</p>
+<p>Ahora que sabemos qu&eacute; es el Plan y por qu&eacute; existe, las pr&oacute;ximas preguntas son pr&aacute;cticas. &iquest;C&oacute;mo divide una iglesia realmente sus familias entre sus di&aacute;conos? &iquest;C&oacute;mo se hacen y se mantienen las asignaciones? Esa es la obra que tomamos en la Unidad 5, al pasar de la visi&oacute;n del Plan a la construcci&oacute;n de &eacute;l.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 4 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 4 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 4;
+const COURSE = 'CTSDFM';
+const FILE_PREFIX = 'CTSDeaconFamilyMinistry';
+const NEXT_UNIT_URL = 'CTSDeaconFamilyMinistryUnit5.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 — Biblical Foundations of the Diaconate","Unit 2 — Qualifications and Character of Deacons","Unit 3 — Historical Development in Southern Baptist Life","Unit 4 — The Deacon Family Ministry Plan: Vision and Definition","Unit 5 — Organizing the Plan: Assigning Families","Unit 6 — Ongoing Care: Visitation and Prayer","Unit 7 — Discipleship and Evangelism within Assigned Families","Unit 8 — Crisis Ministry, Confidentiality, and Referral","Unit 9 — Deacon Meetings, Reporting, and Pastor Relations","Unit 10 — Sustaining the Plan: Challenges and Evaluation"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [
+{"textEn":"1. The vision behind the Deacon Family Ministry Plan is a church in which:","textEs":"1. La visión detrás del Plan de Ministerio Familiar del Diácono es una iglesia en la que:","optionsEn":["the building is always full", "the deacons hold authority", "the budget is well managed", "no single soul is forgotten"],"optionsEs":["el edificio siempre está lleno", "los diáconos tienen autoridad", "el presupuesto está bien manejado", "ni una sola alma es olvidada"],"explanationEn":"The vision is a congregation in which no one is forgotten.","explanationEs":"La visión es una congregación en la que nadie es olvidado.","correct":3},
+{"textEn":"2. The 'back door' of a church refers to:","textEs":"2. La 'puerta trasera' de una iglesia se refiere a:","optionsEn":["the deacons' meeting room", "members who quietly drift away unnoticed", "the pastor's study", "the benevolence fund"],"optionsEs":["la sala de reuniones de los diáconos", "los miembros que se alejan calladamente sin ser notados", "el estudio del pastor", "el fondo de beneficencia"],"explanationEn":"The 'back door' is the quiet loss of members who drift away unnoticed.","explanationEs":"La 'puerta trasera' es la pérdida callada de miembros que se alejan sin ser notados.","correct":1},
+{"textEn":"3. First Corinthians 12:25-26 teaches that in the body of Christ:","textEs":"3. Primera de Corintios 12:25-26 enseña que en el cuerpo de Cristo:","optionsEn":["the strongest member rules", "only the leaders matter", "the members should have the same care for one another", "each part works alone"],"optionsEs":["el miembro más fuerte gobierna", "solo importan los líderes", "los miembros deben preocuparse los unos por los otros", "cada parte trabaja sola"],"explanationEn":"1 Cor 12:25-26 — no schism; the members care for one another.","explanationEs":"1 Co 12:25-26 — sin desavenencia; los miembros se cuidan unos a otros.","correct":2},
+{"textEn":"4. The Plan is defined as organizing a congregation's care by:","textEs":"4. El Plan se define como organizar el cuidado de una congregación al:","optionsEn":["assigning every family to a deacon", "hiring more staff", "holding more meetings", "forming a deacon board"],"optionsEs":["asignar cada familia a un diácono", "contratar más personal", "tener más reuniones", "formar una junta de diáconos"],"explanationEn":"It assigns every family and individual to a deacon for care.","explanationEs":"Asigna cada familia e individuo a un diácono para su cuidado.","correct":0},
+{"textEn":"5. The first mark of the Plan, total coverage, means:","textEs":"5. La primera marca del Plan, la cobertura total, significa:","optionsEn":["the largest families come first", "only active members are visited", "the deacons govern the church", "every family is assigned and no one is left out"],"optionsEs":["las familias más grandes van primero", "solo se visita a los miembros activos", "los diáconos gobiernan la iglesia", "cada familia es asignada y nadie queda fuera"],"explanationEn":"Total coverage — every family assigned, no one left out.","explanationEs":"Cobertura total — cada familia asignada, nadie queda fuera.","correct":3},
+{"textEn":"6. Total coverage is what makes the Plan:","textEs":"6. La cobertura total es lo que hace al Plan:","optionsEn":["a plan rather than a good intention", "expensive to run", "a committee", "optional"],"optionsEs":["un plan y no meramente una buena intención", "costoso de operar", "un comité", "opcional"],"explanationEn":"Good intentions cover the few; the Plan covers everyone.","explanationEs":"Las buenas intenciones cubren a pocos; el Plan cubre a todos.","correct":0},
+{"textEn":"7. Without a plan, good intentions tend to cover only:","textEs":"7. Sin un plan, las buenas intenciones tienden a cubrir solo a:","optionsEn":["the wealthy", "the squeaky wheel — those who ask", "the newest members", "the deacons' relatives"],"optionsEs":["los ricos", "la rueda que chilla — los que piden", "los miembros más nuevos", "los parientes de los diáconos"],"explanationEn":"Good intentions reach only those who speak up and ask.","explanationEs":"Las buenas intenciones alcanzan solo a los que hablan y piden.","correct":1},
+{"textEn":"8. Like Acts 6, the Plan's first commitment is that:","textEs":"8. Como en Hechos 6, el primer compromiso del Plan es que:","optionsEn":["the apostles stop preaching", "money is shared equally", "no one is overlooked", "deacons gain authority"],"optionsEs":["los apóstoles dejen de predicar", "el dinero se reparta por igual", "nadie sea pasado por alto", "los diáconos ganen autoridad"],"explanationEn":"As in Acts 6, no widow — no one — is to be overlooked.","explanationEs":"Como en Hechos 6, ninguna viuda — nadie — ha de ser pasado por alto.","correct":2},
+{"textEn":"9. The second mark, personal ministry, means each family is given to:","textEs":"9. La segunda marca, el ministerio personal, significa que cada familia es entregada a:","optionsEn":["an outside agency", "a rotating schedule", "the whole diaconate at once", "a particular deacon, not a committee"],"optionsEs":["una agencia externa", "un horario rotativo", "todo el diaconado a la vez", "un diácono particular, no a un comité"],"explanationEn":"Each family is given to a particular deacon who knows them.","explanationEs":"Cada familia es entregada a un diácono particular que la conoce.","correct":3},
+{"textEn":"10. John 10:14, 'I know My sheep,' supports the principle that care must be:","textEs":"10. Juan 10:14, 'conozco mis ovejas', apoya el principio de que el cuidado debe ser:","optionsEn":["efficient", "brief", "personal", "public"],"optionsEs":["eficiente", "breve", "personal", "público"],"explanationEn":"The Good Shepherd knows His sheep; care must be personal.","explanationEs":"El Buen Pastor conoce sus ovejas; el cuidado debe ser personal.","correct":2},
+{"textEn":"11. Each deacon is given only a manageable number of families so that:","textEs":"11. A cada diácono se le da solo un número manejable de familias para que:","optionsEn":["the ministry can be personal and real", "the meetings are shorter", "the church saves money", "the pastor is not needed"],"optionsEs":["el ministerio pueda ser personal y real", "las reuniones sean más cortas", "la iglesia ahorre dinero", "el pastor no sea necesario"],"explanationEn":"Small numbers make personal, real ministry possible.","explanationEs":"Los números pequeños hacen posible un ministerio personal y real.","correct":0},
+{"textEn":"12. The Plan keeps each deacon's list small because a man can truly know:","textEs":"12. El Plan mantiene pequeña la lista de cada diácono porque un hombre puede verdaderamente conocer:","optionsEn":["several hundred households", "only about ten or twelve households", "no families at all", "an unlimited number"],"optionsEs":["varios cientos de hogares", "solo unos diez o doce hogares", "ninguna familia en absoluto", "un número ilimitado"],"explanationEn":"A man cannot know hundreds, but he can know ten or twelve.","explanationEs":"Un hombre no puede conocer cientos, pero puede conocer diez o doce.","correct":1},
+{"textEn":"13. The third mark, caring service, means the deacon's work is:","textEs":"13. La tercera marca, el servicio solícito, significa que la obra del diácono es:","optionsEn":["record-keeping", "preaching, not visiting", "fundraising", "care, not governance"],"optionsEs":["llevar registros", "predicar, no visitar", "recaudar fondos", "cuidar, no gobernar"],"explanationEn":"The deacon's work toward his families is care, not governance.","explanationEs":"La obra del diácono hacia sus familias es cuidar, no gobernar.","correct":3},
+{"textEn":"14. Under the Plan, when the deacons gather, their meeting is chiefly:","textEs":"14. Bajo el Plan, cuando los diáconos se reúnen, su reunión es principalmente:","optionsEn":["a business session", "an election", "a report on souls — who is sick or hurting", "a budget review"],"optionsEs":["una sesión de negocios", "una elección", "un informe sobre almas — quién está enfermo o sufre", "una revisión del presupuesto"],"explanationEn":"Their meeting is a report on souls, not a business session.","explanationEs":"Su reunión es un informe sobre almas, no una sesión de negocios.","correct":2},
+{"textEn":"15. 'From house to house' (Acts 20:20) shows that the ministry of care:","textEs":"15. 'Por las casas' (Hechos 20:20) muestra que el ministerio de cuidado:","optionsEn":["goes to where people actually live", "is done by mail", "happens only at church", "is the pastor's alone"],"optionsEs":["va a donde la gente realmente vive", "se hace por correo", "ocurre solo en la iglesia", "es solo del pastor"],"explanationEn":"Care goes to where people live — house to house.","explanationEs":"El cuidado va a donde la gente vive — de casa en casa.","correct":0},
+{"textEn":"16. The fourth mark is that the whole Plan operates:","textEs":"16. La cuarta marca es que todo el Plan opera:","optionsEn":["independently of the pastor", "under and alongside the pastor", "by majority vote", "above the pastor"],"optionsEs":["independientemente del pastor", "bajo y junto al pastor", "por voto mayoritario", "por encima del pastor"],"explanationEn":"The Plan operates under and alongside the pastor.","explanationEs":"El Plan opera bajo y junto al pastor.","correct":1},
+{"textEn":"17. The Plan relates to the pastor's care by:","textEs":"17. El Plan se relaciona con el cuidado del pastor al:","optionsEn":["competing with it", "replacing it entirely", "extending it, not replacing it", "ignoring it"],"optionsEs":["competir con él", "reemplazarlo por completo", "extenderlo, no reemplazarlo", "ignorarlo"],"explanationEn":"The Plan extends the pastor's care; it does not replace it.","explanationEs":"El Plan extiende el cuidado del pastor; no lo reemplaza.","correct":2},
+{"textEn":"18. Under the Plan, the deacon brings his families' deeper needs to:","textEs":"18. Bajo el Plan, el diácono lleva las necesidades más profundas de sus familias a:","optionsEn":["a vote of the church", "no one", "the newspaper", "the pastor"],"optionsEs":["un voto de la iglesia", "nadie", "el periódico", "el pastor"],"explanationEn":"The deacon brings deeper needs to the pastor.","explanationEs":"El diácono lleva las necesidades más profundas al pastor.","correct":3},
+{"textEn":"19. The partnership of pastor and deacons follows the pattern of:","textEs":"19. La sociedad del pastor y los diáconos sigue el patrón de:","optionsEn":["Acts 6, where the seven served so the apostles could pray and preach", "modern corporations", "the Old Testament priesthood", "the monastic orders"],"optionsEs":["Hechos 6, donde los siete sirvieron para que los apóstoles oraran y predicaran", "las corporaciones modernas", "el sacerdocio del Antiguo Testamento", "las órdenes monásticas"],"explanationEn":"It is the Acts 6 pattern — service freeing the leaders for the Word.","explanationEs":"Es el patrón de Hechos 6 — el servicio liberando a los líderes para la Palabra.","correct":0},
+{"textEn":"20. Ezekiel 34 warns that a flock with no shepherd to seek it becomes:","textEs":"20. Ezequiel 34 advierte que un rebaño sin pastor que lo busque queda:","optionsEn":["wealthy", "scattered", "content", "numerous"],"optionsEs":["rico", "disperso", "contento", "numeroso"],"explanationEn":"Ezekiel 34 — 'they were scattered because there was no shepherd.'","explanationEs":"Ezequiel 34 — 'están derramadas por falta de pastor.'","correct":1}
+];
+const kwQuestions = [
+{"textEn":"21. Describe the vision behind the Deacon Family Ministry Plan.","textEs":"21. Describa la visión detrás del Plan de Ministerio Familiar del Diácono.","kw_en":["vision","congregation","forgotten","unnoticed","member","watched","overlooked","design"],"kw_es":["congregac","olvidada","familia","notada","miembro","vigilada","necesidad","cuidar"],"modelEn":"The vision behind the Deacon Family Ministry Plan is a congregation in which no single soul is forgotten. In a growing church it is fearfully easy for a person to slip in and out unnoticed, and for a family to pass through grief or sickness with no one aware. The vision answers this: every member known, every family watched over, and every need met by someone whose appointed task is to care. It is the body of Christ working as God designed, where the members truly care for one another and no one is overlooked.","modelEs":"La visión detrás del Plan de Ministerio Familiar del Diácono es una congregación en la que ni una sola alma es olvidada. En una iglesia que crece es terriblemente fácil que una persona entre y salga sin ser notada, y que una familia pase por el dolor o la enfermedad sin que nadie lo sepa. La visión responde a esto: cada miembro conocido, cada familia vigilada, y cada necesidad suplida por alguien cuya tarea asignada es cuidar. Es el cuerpo de Cristo funcionando como Dios lo diseñó, donde los miembros verdaderamente se cuidan unos a otros y nadie es pasado por alto."},
+{"textEn":"22. What is the 'back door' problem, and how does the Plan address it?","textEs":"22. ¿Cuál es el problema de la 'puerta trasera', y cómo lo aborda el Plan?","kw_en":["member","drift","unnoticed","congregation","neglect","assigning","deacon","sought"],"kw_es":["miembros","alejan","notados","congregac","descuido","asignando","familia","buscado"],"modelEn":"The back door problem is the slow, quiet loss of members who drift away from a church unnoticed. A family begins to miss a Sunday, then a month, and no one calls because no one is sure whose place it was to call; by the time anyone notices, they are gone. Multiplied across a large congregation, this is the neglect the Plan exists to prevent. The Plan addresses it by assigning every family to a deacon in advance, so that someone is always watching and no one slips away without being sought.","modelEs":"El problema de la puerta trasera es la lenta y callada pérdida de miembros que se alejan de una iglesia sin ser notados. Una familia comienza a faltar un domingo, luego un mes, y nadie llama porque nadie está seguro de a quién le tocaba llamar; para cuando alguien lo nota, ya se han ido. Multiplicado por una congregación grande, este es el descuido que el Plan existe para evitar. El Plan lo aborda asignando cada familia a un diácono de antemano, de modo que alguien siempre esté vigilando y nadie se aleje sin ser buscado."},
+{"textEn":"23. State the definition of the Deacon Family Ministry Plan.","textEs":"23. Exprese la definición del Plan de Ministerio Familiar del Diácono.","kw_en":["organizing","congregation","assigning","individual","responsible","contact","minister","pastor"],"kw_es":["organizar","congregac","asignando","individuo","responsable","contacto","ministrar","pastor"],"modelEn":"The Deacon Family Ministry Plan is a way of organizing the care of an entire congregation by assigning every family and individual to a deacon. That deacon is responsible to know them, to pray for them, to keep in regular contact, and to minister to them in every time of need. And all of it is carried out under the leadership of the pastor. In short, it divides the whole church among its deacons so that every household has someone appointed to care for it.","modelEs":"El Plan de Ministerio Familiar del Diácono es una manera de organizar el cuidado de toda una congregación asignando cada familia e individuo a un diácono. Ese diácono es responsable de conocerlos, de orar por ellos, de mantener contacto regular, y de ministrarles en todo tiempo de necesidad. Y todo ello se lleva a cabo bajo la dirección del pastor. En resumen, divide toda la iglesia entre sus diáconos de modo que cada hogar tenga a alguien asignado para cuidarlo."},
+{"textEn":"24. Explain the first mark of the Plan: total coverage.","textEs":"24. Explique la primera marca del Plan: la cobertura total.","kw_en":["coverage","assigned","household","membership","intention","everyone","overlooked","completeness"],"kw_es":["cobertura","asignada","hogar","membres","intenci","compromiso","totalidad","desanimados"],"modelEn":"The first mark is total coverage: every family in the church is assigned, and no one is left out. The membership is divided so that each person and each household belongs to some deacon's list. This is what makes it a plan and not merely a good intention, for good intentions cover only the people who speak up and ask, while the Plan covers everyone, including the quiet, the shy, and the discouraged who would never ask. Like Acts 6, where no widow was to be overlooked, its first commitment is completeness.","modelEs":"La primera marca es la cobertura total: cada familia en la iglesia es asignada, y nadie queda fuera. La membresía se divide de modo que cada persona y cada hogar pertenezca a la lista de algún diácono. Esto es lo que lo hace un plan y no meramente una buena intención, porque las buenas intenciones cubren solo a las personas que hablan y piden, mientras que el Plan cubre a todos, incluyendo a los callados, los tímidos y los desanimados que nunca pedirían. Como en Hechos 6, donde ninguna viuda debía ser pasada por alto, su primer compromiso es la totalidad."},
+{"textEn":"25. Explain the second mark: personal ministry, and why deacons are given small numbers of families.","textEs":"25. Explique la segunda marca: el ministerio personal, y por qué a los diáconos se les dan números pequeños de familias.","kw_en":["personal","committee","deacon","shepherd","manageable","households","numbers","family"],"kw_es":["personal","comit","familia","pastor","manejable","hogares","ovejas","conocer"],"modelEn":"The second mark is that the ministry is personal: each family is given not to a committee or a program but to a particular deacon, a man with a name and a face who knows the family and is known by them. Care is personal or it is not really care, just as the Good Shepherd says he knows his sheep. This is why the Plan gives each deacon only a small, manageable number of families. A man cannot truly know hundreds of households, but he can know ten or twelve, so the numbers are kept small on purpose, that the ministry may be real.","modelEs":"La segunda marca es que el ministerio es personal: cada familia es entregada no a un comité ni a un programa, sino a un diácono particular, un hombre con un nombre y un rostro que conoce a la familia y es conocido por ella. El cuidado es personal o no es realmente cuidado, así como el Buen Pastor dice que conoce a sus ovejas. Por esto el Plan da a cada diácono solo un número pequeño y manejable de familias. Un hombre no puede verdaderamente conocer cientos de hogares, pero puede conocer diez o doce, así que los números se mantienen pequeños a propósito, para que el ministerio sea real."},
+{"textEn":"26. Explain the third mark: caring service. What does the deacon do for his families?","textEs":"26. Explique la tercera marca: el servicio solícito. ¿Qué hace el diácono por sus familias?","kw_en":["service","acquainted","contact","visits","hospital","needs","rejoices","towel"],"kw_es":["servicio","confianza","contacto","visita","hospital","necesidades","enfermedad","toalla"],"modelEn":"The third mark is caring service: the deacon's whole task toward his families is to care, not to govern. He gets acquainted with them and earns their trust. He prays for them by name. He keeps in regular contact so the relationship is alive before any crisis comes. He visits in times of sickness and sorrow, goes to the hospital and the funeral home, and helps meet real needs, whether physical, spiritual, or emotional. He rejoices with them and weeps with them. This is the towel, not the gavel, and it goes from house to house to where people actually live.","modelEs":"La tercera marca es el servicio solícito: toda la tarea del diácono hacia sus familias es cuidar, no gobernar. Se familiariza con ellas y se gana su confianza. Ora por ellas por nombre. Mantiene contacto regular para que la relación esté viva antes de que venga cualquier crisis. Visita en tiempos de enfermedad y dolor, va al hospital y a la funeraria, y ayuda a suplir necesidades reales, sean físicas, espirituales o emocionales. Se goza con ellas y llora con ellas. Esta es la toalla, no el mazo, y va de casa en casa a donde la gente realmente vive."},
+{"textEn":"27. Explain the fourth mark: the Plan under the pastor's shepherding.","textEs":"27. Explique la cuarta marca: el Plan bajo el pastoreo del pastor.","kw_en":["pastor","replace","extends","helper","shepherding","overseers","watch","unwatched"],"kw_es":["pastor","reemplaza","extiende","ayudador","pastoreo","obispos","familia","vigilancia"],"modelEn":"The fourth mark is that the Plan operates under and alongside the pastor; it does not replace the pastor's care but extends it. The deacon becomes the pastor's helper, his hands and feet reaching into homes the pastor by himself could never reach. The shepherding of the flock belongs first to the overseers, but the Plan carries that shepherding in practical care to every family. The deacon keeps watch over his families and brings their deeper needs to the pastor, so that the pastor is freed for the Word while no family goes unwatched.","modelEs":"La cuarta marca es que el Plan opera bajo y junto al pastor; no reemplaza el cuidado del pastor sino que lo extiende. El diácono llega a ser el ayudador del pastor, sus manos y sus pies que alcanzan hogares que el pastor por sí solo nunca podría alcanzar. El pastoreo del rebaño pertenece primero a los obispos, pero el Plan lleva ese pastoreo en cuidado práctico a cada familia. El diácono vela por sus familias y lleva sus necesidades más profundas al pastor, de modo que el pastor sea liberado para la Palabra mientras ninguna familia queda sin vigilancia."},
+{"textEn":"28. How does 1 Corinthians 12:25-26 ground the vision of the Plan?","textEs":"28. ¿Cómo fundamenta 1 Corintios 12:25-26 la visión del Plan?","kw_en":["corinthians","schism","members","suffer","honored","rejoice","congregation","overlooked"],"kw_es":["corintios","desavenencia","miembros","padece","gozan","congregac","sufrimiento","cuerpo"],"modelEn":"First Corinthians 12:25-26 grounds the vision of the Plan in the very design of the body of Christ. Paul writes that there should be no schism in the body, but that the members should have the same care for one another, so that if one member suffers, all suffer, and if one is honored, all rejoice. This is exactly what the Plan tries to make real: a congregation whose members genuinely care for one another, where no one is overlooked and the suffering of one is felt and shared by the whole body.","modelEs":"Primera de Corintios 12:25-26 fundamenta la visión del Plan en el diseño mismo del cuerpo de Cristo. Pablo escribe que no haya desavenencia en el cuerpo, sino que los miembros se preocupen los unos por los otros, de modo que si un miembro padece, todos padecen, y si uno recibe honra, todos se gozan. Esto es exactamente lo que el Plan trata de hacer real: una congregación cuyos miembros verdaderamente se cuidan unos a otros, donde nadie es pasado por alto y el sufrimiento de uno es sentido y compartido por todo el cuerpo."},
+{"textEn":"29. Why is the Plan a partnership and not a competition between pastor and deacons?","textEs":"29. ¿Por qué es el Plan una sociedad y no una competencia entre el pastor y los diáconos?","kw_en":["partnership","competition","pastor","deacons","servants","watching","apostles","prayer"],"kw_es":["sociedad","competencia","pastor","siervos","necesidades","vigilancia","oraci","reparte"],"modelEn":"The Plan is a partnership and not a competition because the pastor and the deacons each do the work for which they are fitted, and they do it together. It is not the deacons taking the church out of the pastor's hands, for they serve under him and bring their families' deeper needs to him. Nor is it the pastor left to carry alone a load no one man can bear, for the daily watching is shared among many faithful servants. This is the very pattern of Acts 6, where the seven served so the apostles could give themselves to prayer and the word.","modelEs":"El Plan es una sociedad y no una competencia porque el pastor y los diáconos cada uno hacen la obra para la cual están capacitados, y la hacen juntos. No es que los diáconos tomen la iglesia de las manos del pastor, porque sirven bajo él y le llevan las necesidades más profundas de sus familias. Ni tampoco es que el pastor quede a cargar solo una carga que ningún hombre puede llevar, porque la vigilancia diaria se reparte entre muchos siervos fieles. Este es el patrón mismo de Hechos 6, donde los siete sirvieron para que los apóstoles pudieran darse a la oración y a la palabra."},
+{"textEn":"30. Summarize the four marks of the Deacon Family Ministry Plan.","textEs":"30. Resuma las cuatro marcas del Plan de Ministerio Familiar del Diácono.","kw_en":["coverage","personal","deacon","service","govern","pastor","shepherding","forgotten"],"kw_es":["cobertura","personal","servicio","gobernar","pastor","pastoreo","olvidado","necesidades"],"modelEn":"The Deacon Family Ministry Plan can be summed up in four marks. First, total coverage: every family is assigned, and no one is left out. Second, personal ministry: each family is given to a particular deacon who knows them by name. Third, caring service: the deacon's work is to care, not to govern, praying, contacting, visiting, and meeting needs. Fourth, under the pastor: the Plan extends the pastor's shepherding rather than replacing it. Together these four marks make a church in which no one is forgotten.","modelEs":"El Plan de Ministerio Familiar del Diácono puede resumirse en cuatro marcas. Primera, cobertura total: cada familia es asignada, y nadie queda fuera. Segunda, ministerio personal: cada familia es entregada a un diácono particular que la conoce por nombre. Tercera, servicio solícito: la obra del diácono es cuidar, no gobernar, orando, contactando, visitando y supliendo necesidades. Cuarta, bajo el pastor: el Plan extiende el pastoreo del pastor en lugar de reemplazarlo. Juntas estas cuatro marcas hacen una iglesia en la que nadie es olvidado."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'cert';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSDeaconFamilyMinistryReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

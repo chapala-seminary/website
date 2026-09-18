@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Psalms — Unit 11: The Psalms in Ministry I (Capstone)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 12 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 The Book of Psalms — Unit 11: The Psalms in Ministry I (Capstone)</span><span class="lang-es">📖 El Libro de los Salmos — Unidad 11: Los Salmos en el Ministerio I (Proyecto Final)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Let the words of my mouth and the meditation of my heart be acceptable in Your sight." — Psalm 19:14 (NKJV)</span><span class="lang-es">"Sean gratos los dichos de mi boca y la meditación de mi corazón delante de ti." — Salmo 19:14 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to The Book of Psalms. Please register before beginning Unit 11.</span><span class="lang-es">Bienvenido a El Libro de los Salmos. Por favor regístrese antes de comenzar la Unidad 11.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+            <h3>1. From Study to Ministry</h3>
+            <p>For ten units we have studied the Psalms one at a time &mdash; the two ways of Psalm 1, the Shepherd of Psalm 23, the King of glory in Psalm 24, the penitence of Psalm 51, the Word in Psalm 119, the cross in Psalm 22, the fearless trust of Psalm 56, the silence of God in Psalm 28, the blessings of Psalm 103, and the cast burden of Psalm 55. In these final two units we turn a corner. The question is no longer only "What does this psalm mean?" but "How do I now carry these psalms into the work of ministry?" The Psalms were never meant to stay on the study desk. They were Israel's hymnbook and prayer book, sung in the temple and whispered in exile, and they remain the most usable book in all of Scripture for the practical work of caring for souls.</p>
+            <div class="scripture">
+                <strong>Psalm 19:14 (NKJV):</strong> "Let the words of my mouth and the meditation of my heart be acceptable in Your sight, O LORD, my strength and my Redeemer."
+            </div>
+            <p>There is a reason ministers have always reached for the Psalms first. Every other part of the Bible speaks to us &mdash; the Law commands, the Gospels narrate, the Epistles instruct. But the Psalms speak <em>for</em> us. They put words in the mouth of the grieving, the guilty, the frightened, the thankful, and the lost. When a person in your care cannot find words for what they feel, the Psalms have already written them. This unit considers four arenas where that gift becomes ministry: preaching, pastoral care, public worship, and the leading of others in prayer.</p>
+
+            <h3>2. Preaching the Psalms</h3>
+            <p>The Psalms preach differently from other texts, and the wise preacher honors the difference. A psalm is not an argument to be outlined like one of Paul's letters; it is a piece of inspired poetry meant to move the heart as it teaches the mind. To preach a psalm well, begin by finding its single dominant emotion or claim &mdash; trust, repentance, awe, lament, praise &mdash; and let that become the center of gravity for the whole message. Psalm 23 is not six unrelated points about sheep; it is one great assurance: the LORD is my shepherd, and therefore I shall not want. Psalm 51 is not a lecture on sin; it is the cry of a broken man finding his way home.</p>
+            <p>Notice, too, how often the Psalms preach Christ. We saw it most plainly in Psalm 22, where the cross is described a thousand years before it happened, but it runs everywhere: the blessed Man of Psalm 1 is fulfilled in Jesus, the King of glory of Psalm 24 enters as our Redeemer, and the Shepherd of Psalm 23 lays down His life in John 10. The preacher who handles a psalm faithfully will, like Philip with the Ethiopian, begin at the psalm and preach Jesus. And because the Psalms are so honest about human emotion, they give the preacher permission to address what people actually feel on Monday morning &mdash; fear, guilt, grief, doubt &mdash; rather than only what they are supposed to feel.</p>
+
+            <h3>3. The Psalms in Pastoral Care</h3>
+            <p>If the Psalms are powerful in the pulpit, they are indispensable at the bedside. There is a reason a pastor reads Psalm 23 at gravesides "countless times over the years," as one of our lessons put it. In a moment when fresh words fail and well-meant explanations only irritate, the ancient cadences of "Yea, though I walk through the valley of the shadow of death, I will fear no evil, for Thou art with me" reach a grieving heart in a way no original sermon can. The Psalms are tested words. They have comforted the dying for three thousand years, and they carry an authority and a familiarity that homemade comfort cannot match.</p>
+            <p>But using the Psalms in pastoral care is an art, not a formula. We learned from Joe Bayly's two visitors that the grieving usually need presence more than paragraphs; the Psalms are meant to be offered gently, in small doses, often simply read aloud and left to do their own work. Match the psalm to the wound. For the guilt-stricken, Psalm 51 and Psalm 103 speak of a God who forgives all our iniquities. For the frightened, Psalm 56 and Psalm 46 speak of a refuge. For the one crushed by loss, Psalm 55 invites the casting of the burden, and Psalm 42 gives honest words to a soul that thirsts and is downcast. Part of pastoral wisdom is knowing which psalm to open, and when simply to sit and let it be read.</p>
+
+            <h3>4. The Psalms in Public Worship</h3>
+            <p>The Psalms were Israel's songbook, and they remain a deep well for the worship of the church. They were written to be sung, and across the centuries the church has sung them, chanted them, paraphrased them into hymns, and prayed them responsively. To build worship around a psalm is to let Scripture itself set the agenda of praise &mdash; its words become our words, its God-centered honesty corrects our self-centered moods, and its sweep from lament to praise teaches a congregation the full range of the life of faith.</p>
+            <p>A psalm can shape an entire service: a call to worship drawn from its opening, a confession from its middle, an assurance from its turn toward hope, and a benediction from its close. The worship planner who learns to read a psalm this way will never run short of material, for the Psalter holds a song for every season of the soul &mdash; morning and evening, festival and funeral, triumph and tears.</p>
+            <div class="illustration">
+                <strong>Application Exercise &mdash; Plan a Worship Experience:</strong> Take Psalm 19 and plan an innovative worship experience built around it. Include the music you would use, a brief discourse topic and outline, the Scripture you would read, and a complete, written-out invitation. The discourse need not be a traditional sermon. Then plan how that same psalm would shape worship in four very different settings: a campfire at a retreat; a Sunday morning service at First Baptist Church, Anywhere; a youth lock-in at midnight; and a Sunday-afternoon service in a prison. Notice how the unchanging psalm must be carried differently into each room &mdash; the same truth, freshly delivered to a different people.
+            </div>
+
+            <h3>5. The Psalms in Personal Devotion</h3>
+            <p>Before the Psalms can be ministered to others, they must be lived by the minister. The danger of seminary study is that the Psalms become only texts to be analyzed, not prayers to be prayed. But these songs were given first for the closet, not the classroom.</p>
+            <div class="scripture">
+                <strong>Psalm 1:2-3 (NKJV):</strong> "His delight is in the law of the LORD, and in His law he meditates day and night. He shall be like a tree planted by the rivers of water…"
+            </div>
+            <p>Psalm 1 commends the man who meditates on God's law day and night, like a cow chewing the cud &mdash; turning the Word over and over until it nourishes the soul. Psalm 119, the longest chapter in the Bible, is one long love song to the Word hidden in the heart.</p>
+            <p>The Psalms teach us that the heart of devotion is honesty before God. As one of our lessons put it, this book teaches us to be honest with God: if you are angry, say so; if you are afraid, bring it; if you are glad, express it. Every emotion a human being can feel is somewhere in the Psalms, brought openly into the presence of God. The minister who prays the Psalms daily will find his own heart kept tender, his fears stilled, his sins confessed, and his praise enlarged &mdash; and only out of that fullness can he truly feed others.</p>
+
+            <h3>6. Reading the Psalms Rightly</h3>
+            <p>Because the Psalms are poetry, they must be read as poetry, and a few simple skills protect us from misusing them. First, watch for Hebrew parallelism &mdash; the way the second line of a verse echoes, intensifies, or contrasts the first. "The earth is the LORD's, and all its fullness" is answered by "the world and those who dwell therein"; the two lines say one thing twice for emphasis. Reading the lines together, rather than mining each for a separate point, keeps us close to the writer's meaning.</p>
+            <p>Second, respect the kind of psalm before you. A lament like Psalm 22 or Psalm 42 moves through honest complaint toward renewed trust, and we must not rush it to the happy ending. A psalm of thanksgiving like Psalm 103 counts concrete benefits. A royal or messianic psalm like Psalm 24 points beyond its first occasion to Christ. Third, read every psalm in light of the whole of Scripture and ultimately in light of Jesus, in whom the deepest promises and the darkest cries alike find their answer. These are not academic niceties; they are the difference between feeding people the true sense of the text and feeding them our own invention.</p>
+
+            <h3>7. A Word of Caution and Care</h3>
+            <p>The very power of the Psalms calls for care in handling them. Their honesty can be misread: the angry and vengeful lines of some psalms are the raw prayers of sufferers handing their rage to God, not models for our own grudges, and they must be taught as such. Their comfort can be cheapened: to toss "all things work together for good" at a person in fresh grief, without presence and patience, can wound rather than heal. And their promises must be read truly &mdash; Psalm 23 does not promise a life without valleys, only a Shepherd within them; Psalm 103 does not promise that every disease is healed in this life, for some of God's choicest servants, like Paul, were left with their thorn.</p>
+            <p>The minister of the Psalms, then, must be both bold and humble: bold to bring these tested words into every situation, and humble enough to let them say what they actually say. Handled rightly, the Psalms will never run dry. They will preach, comfort, lead worship, and feed the soul long after our own clever words are forgotten.</p>
+
+            <h3>8. Carrying the Songs Forward</h3>
+            <p>We began this course by calling the Psalms the folk songs of the Bible &mdash; the people's songs, sung in every key of human experience and always in the presence of God. The aim of all our study has been not merely to understand these songs but to be able to sing them with others and for others: to put their words in the mouths of the grieving, to lift them over a congregation, to whisper them at a deathbed, and to pray them in the secret place. That is the Psalms in ministry.</p>
+            <p>In our final unit we will draw the whole course together and consider what it means to carry these songs through a lifetime of service &mdash; how the Psalms accompany the believer from the morning of faith to its evening, and how the minister who has lived in them becomes, like the tree of Psalm 1, planted by the rivers of water, bringing forth fruit in season for the good of God's people. For now, take up the Psalms not only as a book you have studied, but as a ministry you have been given.</p>
+</div>
+
+<div class="lang-es">
+            <h3>1. Del Estudio al Ministerio</h3>
+            <p>Por diez unidades hemos estudiado los Salmos uno por uno &mdash; los dos caminos del Salmo 1, el Pastor del Salmo 23, el Rey de gloria del Salmo 24, la penitencia del Salmo 51, la Palabra del Salmo 119, la cruz del Salmo 22, la confianza sin temor del Salmo 56, el silencio de Dios del Salmo 28, las bendiciones del Salmo 103, y la carga echada del Salmo 55. En estas dos unidades finales doblamos una esquina. La pregunta ya no es solo "¿Qué significa este salmo?" sino "¿Cómo llevo ahora estos salmos a la obra del ministerio?" Los Salmos nunca fueron destinados a quedarse en el escritorio de estudio. Fueron el himnario y el libro de oración de Israel, cantados en el templo y susurrados en el exilio, y siguen siendo el libro más utilizable de toda la Escritura para la obra práctica de cuidar las almas.</p>
+            <div class="scripture">
+                <strong>Salmo 19:14 (RVG):</strong> "Sean gratos los dichos de mi boca y la meditación de mi corazón delante de ti, oh Jehová, roca mía, y redentor mío."
+            </div>
+            <p>Hay una razón por la que los ministros siempre han recurrido primero a los Salmos. Toda otra parte de la Biblia nos habla a nosotros &mdash; la Ley manda, los Evangelios narran, las Epístolas instruyen. Pero los Salmos hablan <em>por</em> nosotros. Ponen palabras en la boca del afligido, del culpable, del atemorizado, del agradecido y del perdido. Cuando una persona a su cuidado no halla palabras para lo que siente, los Salmos ya las han escrito. Esta unidad considera cuatro campos donde ese don se vuelve ministerio: la predicación, el cuidado pastoral, la adoración pública, y guiar a otros en oración.</p>
+
+            <h3>2. Predicar los Salmos</h3>
+            <p>Los Salmos predican de manera distinta a otros textos, y el predicador sabio honra la diferencia. Un salmo no es un argumento para bosquejar como una de las cartas de Pablo; es una pieza de poesía inspirada destinada a mover el corazón mientras enseña la mente. Para predicar bien un salmo, comience por hallar su única emoción o afirmación dominante &mdash; confianza, arrepentimiento, asombro, lamento, alabanza &mdash; y deje que eso sea el centro de gravedad de todo el mensaje. El Salmo 23 no son seis puntos inconexos sobre ovejas; es una gran seguridad: Jehová es mi pastor, y por tanto nada me faltará. El Salmo 51 no es una conferencia sobre el pecado; es el clamor de un hombre quebrantado hallando su camino a casa.</p>
+            <p>Note, también, con cuánta frecuencia los Salmos predican a Cristo. Lo vimos más claramente en el Salmo 22, donde la cruz se describe mil años antes de que ocurriera, pero corre por todas partes: el Hombre bienaventurado del Salmo 1 se cumple en Jesús, el Rey de gloria del Salmo 24 entra como nuestro Redentor, y el Pastor del Salmo 23 da Su vida en Juan 10. El predicador que maneja un salmo con fidelidad, como Felipe con el etíope, comenzará desde el salmo y predicará a Jesús. Y porque los Salmos son tan honestos acerca de la emoción humana, dan al predicador permiso de abordar lo que la gente realmente siente el lunes por la mañana &mdash; temor, culpa, dolor, duda &mdash; y no solo lo que se supone que debe sentir.</p>
+
+            <h3>3. Los Salmos en el Cuidado Pastoral</h3>
+            <p>Si los Salmos son poderosos en el púlpito, son indispensables junto al lecho. Hay una razón por la que un pastor lee el Salmo 23 junto a las tumbas "incontables veces a lo largo de los años," como lo expresó una de nuestras lecciones. En un momento en que las palabras nuevas fallan y las explicaciones bien intencionadas solo irritan, las antiguas cadencias de "Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo" alcanzan un corazón afligido de una manera que ningún sermón original puede. Los Salmos son palabras probadas. Han consolado a los moribundos por tres mil años, y llevan una autoridad y una familiaridad que el consuelo casero no puede igualar.</p>
+            <p>Pero usar los Salmos en el cuidado pastoral es un arte, no una fórmula. Aprendimos de los dos visitantes de Joe Bayly que el afligido suele necesitar presencia más que párrafos; los Salmos deben ofrecerse con suavidad, en pequeñas dosis, a menudo sencillamente leídos en voz alta y dejados a hacer su propia obra. Haga coincidir el salmo con la herida. Para el agobiado por la culpa, el Salmo 51 y el Salmo 103 hablan de un Dios que perdona todas nuestras iniquidades. Para el atemorizado, el Salmo 56 y el Salmo 46 hablan de un refugio. Para el aplastado por la pérdida, el Salmo 55 invita a echar la carga, y el Salmo 42 da palabras honestas a un alma que tiene sed y está abatida. Parte de la sabiduría pastoral es saber cuál salmo abrir, y cuándo simplemente sentarse y dejar que sea leído.</p>
+
+            <h3>4. Los Salmos en la Adoración Pública</h3>
+            <p>Los Salmos fueron el cancionero de Israel, y siguen siendo un pozo profundo para la adoración de la iglesia. Fueron escritos para ser cantados, y a través de los siglos la iglesia los ha cantado, entonado, parafraseado en himnos, y orado de forma responsiva. Edificar la adoración en torno a un salmo es dejar que la Escritura misma fije la agenda de la alabanza &mdash; sus palabras se vuelven nuestras palabras, su honestidad centrada en Dios corrige nuestros estados de ánimo centrados en nosotros mismos, y su recorrido del lamento a la alabanza enseña a una congregación todo el rango de la vida de fe.</p>
+            <p>Un salmo puede dar forma a todo un culto: un llamado a la adoración tomado de su apertura, una confesión de su parte media, una seguridad de su giro hacia la esperanza, y una bendición de su cierre. El que planifica la adoración y aprende a leer un salmo así nunca se quedará sin material, pues el Salterio guarda un canto para cada estación del alma &mdash; mañana y tarde, fiesta y funeral, triunfo y lágrimas.</p>
+            <div class="illustration">
+                <strong>Ejercicio de Aplicación &mdash; Planifique una Experiencia de Adoración:</strong> Tome el Salmo 19 y planifique una experiencia de adoración innovadora construida en torno a él. Incluya la música que usaría, un breve tema y bosquejo de discurso, la Escritura que leería, y una invitación completa, escrita por entero. El discurso no tiene que ser un sermón tradicional. Luego planifique cómo ese mismo salmo daría forma a la adoración en cuatro escenarios muy distintos: una fogata en un retiro; un culto dominical en la Primera Iglesia Bautista de Cualquier Lugar; un encierro juvenil a medianoche; y un culto de domingo por la tarde en una prisión. Note cómo el salmo inmutable debe llevarse de manera distinta a cada sala &mdash; la misma verdad, entregada de nuevo a un pueblo diferente.
+            </div>
+
+            <h3>5. Los Salmos en la Devoción Personal</h3>
+            <p>Antes de que los Salmos puedan ministrarse a otros, deben ser vividos por el ministro. El peligro del estudio del seminario es que los Salmos se vuelvan solo textos para analizar, no oraciones para orar. Pero estos cantos fueron dados primero para el aposento, no para el aula.</p>
+            <div class="scripture">
+                <strong>Salmo 1:2-3 (RVG):</strong> "En la ley de Jehová está su delicia, y en su ley medita de día y de noche. Será como árbol plantado junto a corrientes de aguas…"
+            </div>
+            <p>El Salmo 1 elogia al hombre que medita en la ley de Dios día y noche, como una vaca que rumia &mdash; dando vueltas a la Palabra una y otra vez hasta que nutre el alma. El Salmo 119, el capítulo más largo de la Biblia, es una larga canción de amor a la Palabra guardada en el corazón.</p>
+            <p>Los Salmos nos enseñan que el corazón de la devoción es la honestidad delante de Dios. Como lo expresó una de nuestras lecciones, este libro nos enseña a ser honestos con Dios: si está enojado, dígalo; si tiene miedo, tráigalo; si está alegre, exprésela. Toda emoción que un ser humano pueda sentir está en algún lugar de los Salmos, traída abiertamente a la presencia de Dios. El ministro que ora los Salmos a diario hallará su propio corazón mantenido tierno, sus temores aquietados, sus pecados confesados, y su alabanza ampliada &mdash; y solo de esa plenitud puede alimentar verdaderamente a otros.</p>
+
+            <h3>6. Leer los Salmos Correctamente</h3>
+            <p>Porque los Salmos son poesía, deben leerse como poesía, y unas pocas habilidades sencillas nos protegen de usarlos mal. Primero, observe el paralelismo hebreo &mdash; la manera en que la segunda línea de un versículo hace eco, intensifica o contrasta la primera. "De Jehová es la tierra y su plenitud" es respondido por "el mundo, y los que en él habitan"; las dos líneas dicen una cosa dos veces para énfasis. Leer las líneas juntas, en lugar de extraer de cada una un punto separado, nos mantiene cerca del significado del escritor.</p>
+            <p>Segundo, respete la clase de salmo que tiene delante. Un lamento como el Salmo 22 o el Salmo 42 avanza por la queja honesta hacia la confianza renovada, y no debemos apresurarlo al final feliz. Un salmo de acción de gracias como el Salmo 103 cuenta beneficios concretos. Un salmo real o mesiánico como el Salmo 24 apunta más allá de su primera ocasión a Cristo. Tercero, lea cada salmo a la luz de toda la Escritura y, en última instancia, a la luz de Jesús, en quien tanto las promesas más profundas como los clamores más oscuros hallan su respuesta. Estas no son sutilezas académicas; son la diferencia entre alimentar a la gente con el verdadero sentido del texto y alimentarla con nuestra propia invención.</p>
+
+            <h3>7. Una Palabra de Cautela y Cuidado</h3>
+            <p>El poder mismo de los Salmos exige cuidado en su manejo. Su honestidad puede malinterpretarse: las líneas airadas y vengativas de algunos salmos son las oraciones crudas de los que sufren entregando su ira a Dios, no modelos para nuestros propios rencores, y deben enseñarse como tales. Su consuelo puede abaratarse: arrojar "todas las cosas ayudan a bien" a una persona en duelo reciente, sin presencia ni paciencia, puede herir en lugar de sanar. Y sus promesas deben leerse con verdad &mdash; el Salmo 23 no promete una vida sin valles, solo un Pastor dentro de ellos; el Salmo 103 no promete que toda enfermedad sea sanada en esta vida, pues algunos de los siervos más escogidos de Dios, como Pablo, quedaron con su aguijón.</p>
+            <p>El ministro de los Salmos, entonces, debe ser a la vez audaz y humilde: audaz para traer estas palabras probadas a cada situación, y bastante humilde para dejar que digan lo que en realidad dicen. Manejados correctamente, los Salmos nunca se secarán. Predicarán, consolarán, guiarán la adoración, y alimentarán el alma mucho después de que nuestras propias palabras ingeniosas sean olvidadas.</p>
+
+            <h3>8. Llevar los Cantos Adelante</h3>
+            <p>Comenzamos este curso llamando a los Salmos las canciones del pueblo de la Biblia &mdash; los cantos del pueblo, cantados en cada tono de la experiencia humana y siempre en la presencia de Dios. El propósito de todo nuestro estudio no ha sido meramente entender estos cantos, sino poder cantarlos con otros y para otros: poner sus palabras en la boca del afligido, elevarlos sobre una congregación, susurrarlos junto a un lecho de muerte, y orarlos en el lugar secreto. Eso es los Salmos en el ministerio.</p>
+            <p>En nuestra unidad final reuniremos todo el curso y consideraremos qué significa llevar estos cantos a través de toda una vida de servicio &mdash; cómo los Salmos acompañan al creyente desde la mañana de la fe hasta su atardecer, y cómo el ministro que ha vivido en ellos llega a ser, como el árbol del Salmo 1, plantado junto a corrientes de aguas, dando fruto en su tiempo para el bien del pueblo de Dios. Por ahora, tome los Salmos no solo como un libro que ha estudiado, sino como un ministerio que se le ha dado.</p>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 11 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 11 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Psalms — Unit 11 (Josh engine, Capstone I — The Psalms in Ministry)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 11;
+const COURSE = 'psalms';
+const NEXT_UNIT_URL = 'CTSPsalmsUnit12.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Psalm 1 - The Two Ways",
+    "Psalm 23 - The Shepherd",
+    "Psalm 24 - The King of Glory",
+    "Psalm 51 - The Penitential Psalm",
+    "Psalm 119 - The Word of God",
+    "Psalm 22 - The Forsaken / Messianic Psalm",
+    "Psalm 56 - When I Am Afraid",
+    "Psalm 28 - When God Is Silent",
+    "Psalm 103 - Count Your Blessings",
+    "Psalm 55 - Casting Your Burden",
+    "The Psalms in Ministry I - Capstone",
+    "The Psalms in Ministry II - Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPsalmsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// MC answer key: A=B=C=D=5; all 20 verified against Capstone I content
+const mcQuestions = [
+    { textEn: "1. According to the lesson, what is the central shift in these final two capstone units?", textEs: "1. Según la lección, ¿cuál es el cambio central en estas dos unidades finales de cúspide?",
+      optionsEn: ["From asking what a psalm means to how to carry the psalms into ministry", "From the Old Testament to the New Testament", "From poetry to prose", "From study to memorization"],
+      optionsEs: ["De preguntar qué significa un salmo a cómo llevar los salmos al ministerio", "Del Antiguo Testamento al Nuevo Testamento", "De la poesía a la prosa", "Del estudio a la memorización"], explanationEn: "The capstone shifts from asking what a psalm means to how we carry the Psalms into actual ministry.", explanationEs: "El capstone cambia de preguntar qué significa un salmo a cómo llevamos los Salmos al ministerio real.", correct: 0 },
+    { textEn: "2. The lesson says that while other parts of the Bible speak TO us, the Psalms uniquely do what?", textEs: "2. La lección dice que mientras otras partes de la Biblia nos hablan A nosotros, los Salmos singularmente ¿qué hacen?",
+      optionsEn: ["They command us", "They narrate history", "They speak FOR us, putting words in the mouth of the grieving and thankful", "They list genealogies"],
+      optionsEs: ["Nos mandan", "Narran historia", "Hablan POR nosotros, poniendo palabras en la boca del afligido y el agradecido", "Enumeran genealogías"], explanationEn: "Other parts of the Bible speak TO us, but the Psalms uniquely speak FOR us, giving words to the grieving and thankful.", explanationEs: "Otras partes de la Biblia nos hablan A nosotros, pero los Salmos hablan POR nosotros, dando palabras al afligido y al agradecido.", correct: 2 },
+    { textEn: "3. Which four arenas of ministry does this unit identify for using the Psalms?", textEs: "3. ¿Qué cuatro campos del ministerio identifica esta unidad para usar los Salmos?",
+      optionsEn: ["Teaching, baptizing, giving, fasting", "Preaching, pastoral care, public worship, and leading others in prayer", "Music, drama, art, dance", "Evangelism, missions, administration, finance"],
+      optionsEs: ["Enseñar, bautizar, dar, ayunar", "Predicación, cuidado pastoral, adoración pública, y guiar a otros en oración", "Música, drama, arte, danza", "Evangelismo, misiones, administración, finanzas"], explanationEn: "The unit names four arenas for the Psalms: preaching, pastoral care, public worship, and leading others in prayer.", explanationEs: "La unidad nombra cuatro ámbitos para los Salmos: predicación, cuidado pastoral, adoración pública, y guiar a otros en oración.", correct: 1 },
+    { textEn: "4. How does the lesson say a psalm should be preached, differing from a letter of Paul?", textEs: "4. ¿Cómo dice la lección que debe predicarse un salmo, a diferencia de una carta de Pablo?",
+      optionsEn: ["By ignoring its emotion", "By outlining it as a logical argument", "By reading it as history", "By finding its single dominant emotion or claim and making that the center"],
+      optionsEs: ["Ignorando su emoción", "Bosquejándolo como argumento lógico", "Leyéndolo como historia", "Hallando su única emoción o afirmación dominante y haciéndola el centro"], explanationEn: "A psalm is preached by finding its single dominant emotion or claim and making that the center, unlike a logical letter of Paul.", explanationEs: "Un salmo se predica hallando su única emoción o afirmación dominante y haciéndola el centro, a diferencia de una carta lógica de Pablo.", correct: 3 },
+    { textEn: "5. The lesson says Psalm 23 is not six unrelated points about sheep, but what?", textEs: "5. La lección dice que el Salmo 23 no son seis puntos inconexos sobre ovejas, sino ¿qué?",
+      optionsEn: ["A guide to farming", "One great assurance: the LORD is my shepherd, therefore I shall not want", "A history of David's youth", "A set of moral rules"],
+      optionsEs: ["Una guía de agricultura", "Una gran seguridad: Jehová es mi pastor, por tanto nada me faltará", "Una historia de la juventud de David", "Un conjunto de reglas morales"], explanationEn: "Psalm 23 is not six unrelated points about sheep but one great assurance: the LORD is my shepherd, therefore I shall not want.", explanationEs: "El Salmo 23 no es seis puntos sin relación sobre ovejas sino una gran seguridad: Jehová es mi pastor, por tanto nada me faltará.", correct: 1 },
+    { textEn: "6. Like whom does the faithful preacher of a psalm begin at the text and preach Jesus?", textEs: "6. ¿Como quién el predicador fiel de un salmo comienza desde el texto y predica a Jesús?",
+      optionsEn: ["Like Philip with the Ethiopian", "Like Moses at the bush", "Like Jonah at Nineveh", "Like Elijah on Carmel"],
+      optionsEs: ["Como Felipe con el etíope", "Como Moisés en la zarza", "Como Jonás en Nínive", "Como Elías en el Carmelo"], explanationEn: "Like Philip with the Ethiopian, the faithful preacher begins at the psalm's text and preaches Jesus from it.", explanationEs: "Como Felipe con el etíope, el predicador fiel comienza en el texto del salmo y predica a Jesús desde él.", correct: 0 },
+    { textEn: "7. Why does the lesson call the Psalms 'tested words' for pastoral care at the bedside?", textEs: "7. ¿Por qué llama la lección a los Salmos 'palabras probadas' para el cuidado pastoral junto al lecho?",
+      optionsEn: ["They are short and easy to read", "They rhyme in every language", "They were written by pastors", "They have comforted the dying for three thousand years, with an authority homemade comfort lacks"],
+      optionsEs: ["Son cortos y fáciles de leer", "Riman en todo idioma", "Fueron escritos por pastores", "Han consolado a los moribundos por tres mil años, con una autoridad que el consuelo casero no tiene"], explanationEn: "The Psalms are 'tested words' for the bedside: they have comforted the dying for three thousand years with an authority our own words lack.", explanationEs: "Los Salmos son 'palabras probadas' para el lecho: han consolado a los moribundos por tres mil años con una autoridad que nuestras palabras no tienen.", correct: 3 },
+    { textEn: "8. What lesson from Joe Bayly's two visitors applies to using the Psalms in grief?", textEs: "8. ¿Qué lección de los dos visitantes de Joe Bayly se aplica al uso de los Salmos en el dolor?",
+      optionsEn: ["Always explain the theology of suffering at length", "Read the entire Psalter aloud", "The grieving need presence more than paragraphs; offer the Psalms gently, in small doses", "Avoid the grieving until they recover"],
+      optionsEs: ["Siempre explicar largamente la teología del sufrimiento", "Leer todo el Salterio en voz alta", "El afligido necesita presencia más que párrafos; ofrezca los Salmos con suavidad, en pequeñas dosis", "Evitar al afligido hasta que se recupere"], explanationEn: "As with Bayly's visitors, the grieving need presence more than paragraphs; offer the Psalms gently, in small doses.", explanationEs: "Como con los visitantes de Bayly, los que sufren necesitan presencia más que párrafos; ofrezca los Salmos con suavidad, en pequeñas dosis.", correct: 2 },
+    { textEn: "9. Which psalm does the lesson match to the guilt-stricken?", textEs: "9. ¿Qué salmo hace coincidir la lección con el agobiado por la culpa?",
+      optionsEn: ["Psalm 51 and Psalm 103, on a God who forgives all our iniquities", "Psalm 24, on the King of glory", "Psalm 1, on the two ways", "Psalm 119, on the Word"],
+      optionsEs: ["Salmo 51 y Salmo 103, sobre un Dios que perdona todas nuestras iniquidades", "Salmo 24, sobre el Rey de gloria", "Salmo 1, sobre los dos caminos", "Salmo 119, sobre la Palabra"], explanationEn: "For the guilt-stricken, match Psalm 51 and Psalm 103 — psalms of a God who forgives all our iniquities.", explanationEs: "Para el agobiado por la culpa, use el Salmo 51 y el Salmo 103 — salmos de un Dios que perdona todas nuestras iniquidades.", correct: 0 },
+    { textEn: "10. What does it mean to 'match the psalm to the wound' in pastoral care?", textEs: "10. ¿Qué significa 'hacer coincidir el salmo con la herida' en el cuidado pastoral?",
+      optionsEn: ["Always use the same psalm for everyone", "Reading psalms in numerical order", "Choosing the psalm whose theme fits the person's need — refuge for the fearful, casting the burden for the crushed", "Avoiding the Psalms with hard people"],
+      optionsEs: ["Usar siempre el mismo salmo para todos", "Leer los salmos en orden numérico", "Escoger el salmo cuyo tema se ajuste a la necesidad — refugio para el temeroso, echar la carga para el aplastado", "Evitar los Salmos con personas difíciles"], explanationEn: "'Matching the psalm to the wound' means choosing the psalm whose theme fits the person's need — refuge for the fearful, casting the burden for the crushed.", explanationEs: "'Ajustar el salmo a la herida' significa escoger el salmo cuyo tema encaja con la necesidad — refugio para el temeroso, echar la carga para el agobiado.", correct: 2 },
+    { textEn: "11. According to the lesson, what does building worship around a psalm accomplish?", textEs: "11. Según la lección, ¿qué logra edificar la adoración en torno a un salmo?",
+      optionsEn: ["It shortens the service", "It lets Scripture itself set the agenda of praise, correcting our self-centered moods", "It entertains the congregation", "It replaces preaching"],
+      optionsEs: ["Acorta el culto", "Deja que la Escritura misma fije la agenda de la alabanza, corrigiendo nuestros ánimos egocéntricos", "Entretiene a la congregación", "Reemplaza la predicación"], explanationEn: "Building worship around a psalm lets Scripture itself set the agenda of praise, correcting our self-centered moods.", explanationEs: "Edificar la adoración en torno a un salmo deja que la Escritura misma fije la agenda de la alabanza, corrigiendo nuestros estados de ánimo egocéntricos.", correct: 1 },
+    { textEn: "12. The lesson says a single psalm can shape an entire service. Which sequence does it give?", textEs: "12. La lección dice que un solo salmo puede dar forma a todo un culto. ¿Qué secuencia da?",
+      optionsEn: ["Offering, announcements, sermon, dismissal", "Hymn, hymn, hymn, prayer", "Reading, silence, reading, silence", "Call to worship, confession, assurance, and benediction drawn from the psalm"],
+      optionsEs: ["Ofrenda, anuncios, sermón, despedida", "Himno, himno, himno, oración", "Lectura, silencio, lectura, silencio", "Llamado a la adoración, confesión, seguridad, y bendición tomados del salmo"], explanationEn: "A single psalm can shape a whole service: a call to worship, confession, assurance, and benediction all drawn from it.", explanationEs: "Un solo salmo puede dar forma a todo un culto: llamado a la adoración, confesión, seguridad y bendición, todo sacado de él.", correct: 3 },
+    { textEn: "13. In the application exercise, which psalm are students asked to build a worship experience around?", textEs: "13. En el ejercicio de aplicación, ¿en torno a qué salmo se pide a los estudiantes construir una experiencia de adoración?",
+      optionsEn: ["Psalm 100", "Psalm 23", "Psalm 19", "Psalm 150"],
+      optionsEs: ["Salmo 100", "Salmo 23", "Salmo 19", "Salmo 150"], explanationEn: "The application exercise asks students to build an entire worship experience around Psalm 19.", explanationEs: "El ejercicio de aplicación pide a los estudiantes edificar toda una experiencia de adoración en torno al Salmo 19.", correct: 2 },
+    { textEn: "14. The worship exercise asks students to plan that psalm for four settings. Which set is correct?", textEs: "14. El ejercicio de adoración pide planificar ese salmo para cuatro escenarios. ¿Cuál conjunto es correcto?",
+      optionsEn: ["A wedding, a baptism, a graduation, a funeral", "A choir, a band, an orchestra, a solo", "A radio show, a podcast, a TV program, a website", "A retreat campfire, a Sunday morning service, a midnight youth lock-in, and a prison service"],
+      optionsEs: ["Una boda, un bautismo, una graduación, un funeral", "Un coro, una banda, una orquesta, un solo", "Un programa de radio, un pódcast, un programa de TV, un sitio web", "Una fogata de retiro, un culto dominical, un encierro juvenil a medianoche, y un culto en una prisión"], explanationEn: "The exercise plans that psalm for four very different settings: a retreat campfire, a Sunday service, a midnight youth lock-in, and a prison.", explanationEs: "El ejercicio planifica ese salmo para cuatro escenarios muy distintos: una fogata de retiro, un culto dominical, una vigilia juvenil de medianoche, y una prisión.", correct: 3 },
+    { textEn: "15. What danger does the lesson warn about regarding the Psalms in personal devotion?", textEs: "15. ¿Qué peligro advierte la lección respecto a los Salmos en la devoción personal?",
+      optionsEn: ["Praying them too often", "That seminary study can make them only texts to analyze, not prayers to pray", "Memorizing too many", "Singing them off-key"],
+      optionsEs: ["Orarlos demasiado a menudo", "Que el estudio del seminario puede volverlos solo textos para analizar, no oraciones para orar", "Memorizar demasiados", "Cantarlos desafinados"], explanationEn: "The danger in devotion is that seminary study can make the Psalms only texts to analyze, not prayers to pray.", explanationEs: "El peligro en la devoción es que el estudio del seminario puede hacer de los Salmos solo textos para analizar, no oraciones para orar.", correct: 1 },
+    { textEn: "16. According to the lesson, what is the heart of devotion that the Psalms teach?", textEs: "16. Según la lección, ¿cuál es el corazón de la devoción que enseñan los Salmos?",
+      optionsEn: ["Honesty before God — bringing every emotion openly into His presence", "Long prayers", "Strict routine", "Eloquent language"],
+      optionsEs: ["Honestidad delante de Dios — traer toda emoción abiertamente a Su presencia", "Oraciones largas", "Rutina estricta", "Lenguaje elocuente"], explanationEn: "The heart of devotion the Psalms teach is honesty before God — bringing every emotion openly into His presence.", explanationEs: "El corazón de la devoción que enseñan los Salmos es la honestidad ante Dios — traer toda emoción abiertamente a Su presencia.", correct: 0 },
+    { textEn: "17. What is Hebrew parallelism, which the lesson says we must watch for when reading the Psalms?", textEs: "17. ¿Qué es el paralelismo hebreo, que la lección dice que debemos observar al leer los Salmos?",
+      optionsEn: ["The repetition of whole psalms", "A rhyme scheme at the end of lines", "A hidden numerical code", "The way a second line echoes, intensifies, or contrasts the first"],
+      optionsEs: ["La repetición de salmos enteros", "Un esquema de rima al final de las líneas", "Un código numérico oculto", "La manera en que una segunda línea hace eco, intensifica o contrasta la primera"], explanationEn: "Hebrew parallelism is the way a psalm's second line echoes, intensifies, or contrasts the first — the basic music of the Psalms.", explanationEs: "El paralelismo hebreo es la manera en que la segunda línea de un salmo hace eco, intensifica o contrasta la primera — la música básica de los Salmos.", correct: 3 },
+    { textEn: "18. Why does the lesson say we must not rush a lament psalm like Psalm 22 or 42 to its happy ending?", textEs: "18. ¿Por qué dice la lección que no debemos apresurar un salmo de lamento como el 22 o el 42 a su final feliz?",
+      optionsEn: ["Because the ending is unimportant", "Because a lament moves honestly through complaint toward renewed trust, and that movement must be respected", "Because laments have no hope", "Because they are too long to finish"],
+      optionsEs: ["Porque el final no importa", "Porque un lamento avanza honestamente por la queja hacia la confianza renovada, y ese movimiento debe respetarse", "Porque los lamentos no tienen esperanza", "Porque son demasiado largos para terminar"], explanationEn: "We must not rush a lament like Psalm 22 or 42 to its happy ending, because the honest movement from complaint to trust must be respected.", explanationEs: "No debemos apresurar un lamento como el Salmo 22 o 42 a su final feliz, porque el movimiento honesto de la queja a la confianza debe respetarse.", correct: 1 },
+    { textEn: "19. How does the lesson say the angry, vengeful lines of some psalms should be taught?", textEs: "19. ¿Cómo dice la lección que deben enseñarse las líneas airadas y vengativas de algunos salmos?",
+      optionsEn: ["As models for our own grudges", "As errors in the text", "As the raw prayers of sufferers handing their rage to God, not models for our grudges", "As reasons to skip those psalms"],
+      optionsEs: ["Como modelos para nuestros propios rencores", "Como errores en el texto", "Como las oraciones crudas de los que sufren entregando su ira a Dios, no modelos para nuestros rencores", "Como razones para saltar esos salmos"], explanationEn: "The angry, vengeful lines of some psalms are taught as the raw prayers of sufferers handing their rage to God, not models for our grudges.", explanationEs: "Las líneas airadas y vengativas de algunos salmos se enseñan como las oraciones crudas de los que sufren entregando su ira a Dios, no como modelos para nuestros rencores.", correct: 2 },
+    { textEn: "20. The lesson cautions that the Psalms' promises must be read truly. Which example does it give?", textEs: "20. La lección advierte que las promesas de los Salmos deben leerse con verdad. ¿Qué ejemplo da?",
+      optionsEn: ["Psalm 23 promises not a life without valleys, but a Shepherd within them", "Psalm 119 promises a long life to all", "Psalm 24 promises an earthly throne", "Psalm 1 promises instant wealth"],
+      optionsEs: ["El Salmo 23 no promete una vida sin valles, sino un Pastor dentro de ellos", "El Salmo 119 promete larga vida a todos", "El Salmo 24 promete un trono terrenal", "El Salmo 1 promete riqueza instantánea"], explanationEn: "Read the promises truly: Psalm 23 promises not a life without valleys, but a Shepherd within them.", explanationEs: "Lea las promesas con verdad: el Salmo 23 no promete una vida sin valles, sino un Pastor dentro de ellos.", correct: 0 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "21. Explain the shift these capstone units make, and why the lesson says the Psalms uniquely speak FOR us.",
+      textEs: "21. Explique el cambio que hacen estas unidades de cúspide, y por qué dice la lección que los Salmos singularmente hablan POR nosotros.",
+      kw_en: ["study", "ministry", "carry", "speak for us", "words", "grieving", "thankful", "usable"],
+      kw_es: ["estudio", "ministerio", "llevar", "hablan por nosotros", "palabras", "afligido", "agradecido", "utilizable"],
+      modelEn: "These final two capstone units make a shift from asking what a psalm means to asking how to carry the Psalms into ministry and life. The earlier units interpreted; these units put the Psalms to work. The lesson says the Psalms uniquely speak FOR us: while most of Scripture is God speaking to us, the Psalms are largely words addressed to God, and so they put language in our mouths when we have none of our own. They give the grieving words for grief, the thankful words for praise, and the frightened words for trust. That is why they are such a gift for ministry, for they voice the cry of the human heart before God.",
+      modelEs: "Estas dos unidades finales de capstone hacen un cambio de preguntar qué significa un salmo a cómo llevar los Salmos al ministerio y a la vida. Las unidades anteriores interpretaban; estas unidades ponen los Salmos a trabajar. La lección dice que los Salmos hablan singularmente POR nosotros: mientras la mayor parte de la Escritura es Dios hablándonos, los Salmos son en gran parte palabras dirigidas a Dios, y así ponen lenguaje en nuestra boca cuando no tenemos el propio. Dan al afligido palabras para el dolor, al agradecido palabras para la alabanza, y al temeroso palabras para la confianza. Por eso son un don tan grande para el ministerio, pues dan voz al clamor del corazón humano ante Dios." },
+    { textEn: "22. Explain how a psalm should be preached, including finding its dominant emotion and preaching Christ.",
+      textEs: "22. Explique cómo debe predicarse un salmo, incluyendo hallar su emoción dominante y predicar a Cristo.",
+      kw_en: ["poetry", "emotion", "center", "outline", "Christ", "Philip", "honest", "trust"],
+      kw_es: ["poesía", "emoción", "centro", "bosquejo", "Cristo", "Felipe", "honesto", "confianza"],
+      modelEn: "A psalm should be preached differently from a logical letter of Paul. Rather than tracing a tight argument, the preacher finds the psalm's single dominant emotion or claim and makes that the center, letting the message carry the same feeling the psalm carries. Psalm 23 is not six unrelated points about sheep but one great assurance: the LORD is my shepherd, therefore I shall not want. And like Philip beginning at Isaiah and preaching Jesus to the Ethiopian, the faithful preacher begins at the psalm's text and preaches Christ from it, showing how the psalm finally points to Him. Preach the psalm's heart, and preach it toward Jesus.",
+      modelEs: "Un salmo debe predicarse de manera distinta a una carta lógica de Pablo. En vez de trazar un argumento apretado, el predicador halla la única emoción o afirmación dominante del salmo y la hace el centro, dejando que el mensaje lleve el mismo sentir que el salmo lleva. El Salmo 23 no son seis puntos sin relación sobre ovejas sino una gran seguridad: Jehová es mi pastor, por tanto nada me faltará. Y como Felipe que comenzó en Isaías y predicó a Jesús al etíope, el predicador fiel comienza en el texto del salmo y predica a Cristo desde él, mostrando cómo el salmo al fin señala a &Eacute;l. Predica el corazón del salmo, y predícalo hacia Jesús." },
+    { textEn: "23. Explain why the Psalms are indispensable in pastoral care and how Psalm 23 functions at gravesides.",
+      textEs: "23. Explique por qué los Salmos son indispensables en el cuidado pastoral y cómo funciona el Salmo 23 junto a las tumbas.",
+      kw_en: ["bedside", "shepherd", "graveside", "tested", "ancient", "comfort", "present", "read"],
+      kw_es: ["lecho", "pastor", "tumba", "probadas", "antiguas", "consuelo", "presente", "leer"],
+      modelEn: "The Psalms are indispensable in pastoral care because they are tested words, having comforted the dying and the grieving for three thousand years. They carry an authority and a depth that our own improvised comfort lacks. Psalm 23 in particular functions at gravesides as almost no other words can: its ancient cadences reach the dying and the bereaved when fresh words fail, speaking peace into the very valley of the shadow of death. When a minister has nothing adequate of his own to say, he can open the Psalms and let words proven over millennia do what his own cannot, carrying God's comfort into the hardest moments of life.",
+      modelEs: "Los Salmos son indispensables en el cuidado pastoral porque son palabras probadas, que han consolado a los moribundos y a los afligidos por tres mil años. Llevan una autoridad y una profundidad que nuestro consuelo improvisado no tiene. El Salmo 23 en particular funciona junto a las tumbas como casi ningunas otras palabras: sus antiguas cadencias alcanzan al moribundo y al doliente cuando las palabras nuevas fallan, hablando paz al valle mismo de sombra de muerte. Cuando un ministro no tiene nada adecuado propio que decir, puede abrir los Salmos y dejar que palabras probadas por milenios hagan lo que las suyas no pueden, llevando el consuelo de Dios a los momentos más duros de la vida." },
+    { textEn: "24. Explain what it means to 'match the psalm to the wound,' giving examples from the lesson.",
+      textEs: "24. Explique qué significa 'hacer coincidir el salmo con la herida,' dando ejemplos de la lección.",
+      kw_en: ["match", "wound", "guilt", "Psalm 51", "fear", "refuge", "loss", "burden"],
+      kw_es: ["coincidir", "herida", "culpa", "Salmo 51", "temor", "refugio", "pérdida", "carga"],
+      modelEn: "To \"match the psalm to the wound\" is to choose the psalm whose theme fits the particular need of the person before us, rather than offering the same words for every situation. The lesson gives examples: for the fearful, a psalm of refuge like Psalm 56; for the crushed and overwhelmed, Psalm 55 with its call to cast the burden; for the guilt-stricken, Psalm 51 and Psalm 103 on the God who forgives all our iniquities. Just as a physician matches the remedy to the ailment, the wise minister knows the Psalms well enough to bring the right one to the right wound, so that Scripture speaks directly to the person's real need.",
+      modelEs: "\"Ajustar el salmo a la herida\" es escoger el salmo cuyo tema encaja con la necesidad particular de la persona ante nosotros, en vez de ofrecer las mismas palabras para toda situación. La lección da ejemplos: para el temeroso, un salmo de refugio como el 56; para el agobiado y abrumado, el Salmo 55 con su llamado a echar la carga; para el agobiado por la culpa, el Salmo 51 y el Salmo 103 sobre el Dios que perdona todas nuestras iniquidades. Así como un médico ajusta el remedio a la dolencia, el ministro sabio conoce los Salmos lo bastante bien para llevar el correcto a la herida correcta, de modo que la Escritura hable directamente a la necesidad real de la persona." },
+    { textEn: "25. Explain how the Psalms serve public worship and how a single psalm can shape a whole service.",
+      textEs: "25. Explique cómo sirven los Salmos a la adoración pública y cómo un solo salmo puede dar forma a todo un culto.",
+      kw_en: ["songbook", "sung", "Scripture sets agenda", "call to worship", "confession", "assurance", "benediction", "season"],
+      kw_es: ["cancionero", "cantados", "Escritura fija agenda", "llamado a la adoración", "confesión", "seguridad", "bendición", "estación"],
+      modelEn: "The Psalms serve public worship by giving the congregation God-given words of praise, confession, and trust, and by letting Scripture itself set the agenda of worship rather than our shifting moods. A single psalm can shape an entire service: the lesson shows how its parts can supply a call to worship, a confession of sin, an assurance of pardon, and a benediction, all drawn from the one psalm. Built this way, worship is corrected and deepened, because the psalm leads the people to praise God for who He truly is rather than merely expressing how they happen to feel that day.",
+      modelEs: "Los Salmos sirven a la adoración pública dando a la congregación palabras de alabanza, confesión y confianza dadas por Dios, y dejando que la Escritura misma fije la agenda de la adoración en vez de nuestros estados de ánimo cambiantes. Un solo salmo puede dar forma a todo un culto: la lección muestra cómo sus partes pueden proveer un llamado a la adoración, una confesión de pecado, una seguridad de perdón, y una bendición, todo sacado del mismo salmo. Edificada así, la adoración es corregida y profundizada, porque el salmo lleva al pueblo a alabar a Dios por quien verdaderamente es en vez de solo expresar cómo se sienten ese día." },
+    { textEn: "26. Describe the Psalm 19 worship-planning exercise, including the four settings students must plan for.",
+      textEs: "26. Describa el ejercicio de planificación de adoración del Salmo 19, incluyendo los cuatro escenarios que los estudiantes deben planificar.",
+      kw_en: ["Psalm 19", "music", "Scripture", "invitation", "campfire", "Sunday morning", "youth lock-in", "prison"],
+      kw_es: ["Salmo 19", "música", "Escritura", "invitación", "fogata", "domingo por la mañana", "encierro juvenil", "prisión"],
+      modelEn: "The Psalm 19 worship-planning exercise asks the student to take that one psalm and design a worship experience around it, then plan how it would work in four very different settings: a retreat campfire, a Sunday morning service, a midnight youth lock-in, and a prison service. The point is to learn that the same psalm can be brought faithfully to vastly different people and places, with the form adjusted while the truth stays the same. It trains the minister to think practically about leading worship from the Psalms, shaping the setting, tone, and presentation to the congregation while letting the psalm itself carry the message.",
+      modelEs: "El ejercicio de planificación de adoración del Salmo 19 pide al estudiante tomar ese único salmo y diseñar una experiencia de adoración en torno a él, y luego planear cómo funcionaría en cuatro escenarios muy distintos: una fogata de retiro, un culto dominical, una vigilia juvenil de medianoche, y un culto en una prisión. El punto es aprender que el mismo salmo puede llevarse con fidelidad a personas y lugares muy diferentes, ajustando la forma mientras la verdad permanece igual. Entrena al ministro a pensar de manera práctica sobre dirigir la adoración desde los Salmos, moldeando el escenario, el tono y la presentación a la congregación mientras deja que el salmo mismo lleve el mensaje." },
+    { textEn: "27. Explain the danger and the goal of the Psalms in the minister's personal devotion.",
+      textEs: "27. Explique el peligro y la meta de los Salmos en la devoción personal del ministro.",
+      kw_en: ["lived", "danger", "texts", "prayers", "meditate", "honesty", "tender", "feed"],
+      kw_es: ["vivir", "peligro", "textos", "oraciones", "meditar", "honestidad", "tierno", "alimentar"],
+      modelEn: "The danger in a minister's personal devotion is that seminary study can turn the Psalms into mere texts to analyze rather than prayers to pray; the very training that equips him can quietly starve his own soul if the Psalms become only professional material. The goal is the opposite: that the Psalms remain his own prayers, the language of his personal walk with God. He must keep praying them, not only studying them, bringing his own heart honestly before God in their words. The lesson warns that handling holy things for others is no substitute for being fed by them oneself; the Psalms must stay devotional, not just academic.",
+      modelEs: "El peligro en la devoción personal de un ministro es que el estudio del seminario puede convertir los Salmos en meros textos para analizar en vez de oraciones para orar; la misma formación que lo equipa puede en silencio matar de hambre su propia alma si los Salmos llegan a ser solo material profesional. La meta es lo opuesto: que los Salmos sigan siendo sus propias oraciones, el lenguaje de su andar personal con Dios. Debe seguir orándolos, no solo estudiándolos, trayendo su propio corazón con honestidad ante Dios en sus palabras. La lección advierte que manejar cosas santas para otros no sustituye el ser alimentado por ellas uno mismo; los Salmos deben permanecer devocionales, no solo académicos." },
+    { textEn: "28. Explain the reading skills the lesson gives: parallelism, respecting the psalm type, and reading via Christ.",
+      textEs: "28. Explique las habilidades de lectura que da la lección: el paralelismo, respetar el tipo de salmo, y leer por medio de Cristo.",
+      kw_en: ["parallelism", "second", "type", "lament", "thanksgiving", "Scripture", "Christ", "meaning"],
+      kw_es: ["paralelismo", "segunda", "tipo", "lamento", "gracias", "Escritura", "Cristo", "significado"],
+      modelEn: "The lesson gives several reading skills. First, watch for Hebrew parallelism, the way a psalm's second line echoes, intensifies, or contrasts the first, which is the basic music of Hebrew poetry and often carries the meaning. Second, respect the psalm's type: a lament moves differently from a hymn of praise, and we must read each according to its kind. Third, read every psalm finally through Christ, since the Psalms point to Him and find their fullest meaning in Him. Together these skills keep us from misreading the Psalms and help us hear what each one is actually saying and where it ultimately leads.",
+      modelEs: "La lección da varias habilidades de lectura. Primero, observar el paralelismo hebreo, la manera en que la segunda línea de un salmo hace eco, intensifica o contrasta la primera, que es la música básica de la poesía hebrea y a menudo lleva el significado. Segundo, respetar el tipo del salmo: un lamento se mueve distinto de un himno de alabanza, y debemos leer cada uno según su clase. Tercero, leer cada salmo al fin a través de Cristo, ya que los Salmos señalan a &Eacute;l y hallan su sentido más pleno en &Eacute;l. Juntas estas habilidades nos guardan de malinterpretar los Salmos y nos ayudan a oír lo que cada uno dice de veras y a dónde lleva al final." },
+    { textEn: "29. Explain the cautions the lesson gives: misreading honesty, cheapening comfort, and reading promises truly.",
+      textEs: "29. Explique las cautelas que da la lección: malinterpretar la honestidad, abaratar el consuelo, y leer las promesas con verdad.",
+      kw_en: ["caution", "angry", "grudges", "cheapen", "grief", "promises", "valley", "thorn"],
+      kw_es: ["cautela", "airadas", "rencores", "abaratar", "duelo", "promesas", "valle", "aguijón"],
+      modelEn: "The lesson gives three cautions. First, do not misread the Psalms' honesty: their raw, even angry words are the prayers of sufferers handing their rage to God, not models licensing our own grudges. Second, do not cheapen their comfort: we must not rush a lament like Psalm 22 or 42 to its happy ending, but respect the honest movement through complaint toward renewed trust. Third, read the promises truly: Psalm 23 promises not a life without valleys but a Shepherd within them. Each caution guards against twisting the Psalms into something easier or more comfortable than what they actually say, so we handle them with integrity.",
+      modelEs: "La lección da tres precauciones. Primera, no malinterpretar la honestidad de los Salmos: sus palabras crudas, aun airadas, son las oraciones de los que sufren entregando su ira a Dios, no modelos que autoricen nuestros propios rencores. Segunda, no abaratar su consuelo: no debemos apresurar un lamento como el Salmo 22 o 42 a su final feliz, sino respetar el movimiento honesto a través de la queja hacia la confianza renovada. Tercera, leer las promesas con verdad: el Salmo 23 no promete una vida sin valles sino un Pastor dentro de ellos. Cada precaución guarda contra torcer los Salmos en algo más fácil o más cómodo de lo que en realidad dicen, para que los manejemos con integridad." },
+    { textEn: "30. According to the close, what has been the aim of the whole course, and what does it mean to carry the songs forward?",
+      textEs: "30. Según el cierre, ¿cuál ha sido el propósito de todo el curso, y qué significa llevar los cantos adelante?",
+      kw_en: ["songs", "understand", "sing", "others", "grieving", "congregation", "ministry", "carry"],
+      kw_es: ["canciones", "entender", "cantar", "otros", "afligido", "congregación", "ministerio", "llevar"],
+      modelEn: "According to the close, the aim of the whole course has been not merely to study the Psalms but to learn to carry them into a life of ministry and faith. To carry the songs forward means to take these psalms we have studied and use them: to preach them, to bring them to the bedside and the graveside, to build worship around them, and to pray them as our own. They are not a subject we finish and set aside but a lifelong companion and tool for serving others and walking with God. The course ends by sending the student out to keep these songs alive in real ministry.",
+      modelEs: "Según el cierre, el objetivo de todo el curso no ha sido meramente estudiar los Salmos sino aprender a llevarlos a una vida de ministerio y fe. Llevar los cantos adelante significa tomar estos salmos que hemos estudiado y usarlos: predicarlos, llevarlos al lecho y a la tumba, edificar la adoración en torno a ellos, y orarlos como propios. No son un tema que terminamos y dejamos de lado sino un compañero y una herramienta de por vida para servir a otros y andar con Dios. El curso termina enviando al estudiante a mantener vivos estos cantos en el ministerio real." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 12 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 12 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPsalmsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Acts Intensive — Unit 9: Arrest in Jerusalem (Acts 21:17–23:35)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.sa-model { margin-top: 8px; padding: 10px 14px; background:#fff8e1; color:#5d4a00; border-left:4px solid #d4af37; border-radius:6px; font-size:0.92rem; line-height:1.45; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+/* === Retrofit additions === */
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-bottom: 2px dashed #d7cec1; padding-bottom: 18px; margin-bottom: 18px; }
+.lang-toggle-group { display: inline-flex; gap: 4px; margin-bottom: 15px; }
+.lang-toggle-group button { background: #f4c542; color: #5b3a1f; border: 1px solid #c9a032; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+.lang-toggle-group button.active { background: #5b3a1f; color: white; border-color: #5b3a1f; }
+.track-badge { display: inline-block; background: #f4c542; color: #5b3a1f; padding: 4px 12px; border-radius: 30px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 12px; vertical-align: middle; }
+.exam-status { padding: 12px 16px; margin: 14px 0; border-radius: 8px; font-size: 0.95rem; font-weight: 600; }
+.exam-status.mc-passed { background: #d6e2f0; color: #2c3e6b; border-left: 5px solid #3f5a8a; }
+.exam-status.locked { background: #fae5e3; color: #8a1f1f; border-left: 5px solid #b03a2e; }
+.exam-status.hidden { display: none; }
+.mc-section, .sa-section { margin-top: 20px; }
+.sa-section h3, .mc-section h3 { color: #5b3a1f; border-bottom: 2px solid #f4c542; padding-bottom: 4px; margin-bottom: 12px; font-size: 1.1rem; }
+.sa-badge { display: inline-block; background: #f4c542; color: #5b3a1f; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; margin-left: 8px; vertical-align: middle; }
+.sa-note { margin: 0 0 14px; padding: 10px 14px; background: #f6f1e8; border-left: 3px solid #c9a032; color: #22201d; font-size: 0.9rem; font-style: italic; border-radius: 6px; }
+.question.review-locked { opacity: 0.7; background: #fbfaf6; border-left: 3px solid #f4c542; }
+.question.review-locked .option { pointer-events: none; }
+.question.review-locked .kw-answer, .question.review-locked .check-kw-btn { pointer-events: none; }
+.btn-reset { background: #8a6a4a; color: white; border: none; border-radius: 30px; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 0.88rem; margin-left: 8px; }
+.btn-reset:hover { background: #6b5236; }
+.reg-modal { position: fixed; inset: 0; background: rgba(40, 30, 20, 0.65); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.reg-modal.hidden { display: none; }
+.reg-modal-inner { background: #fffdfa; max-width: 520px; width: 100%; border-radius: 16px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 1px solid #d7cec1; }
+.reg-modal-inner h2 { color: #5b3a1f; margin: 0 0 10px; font-size: 1.4rem; }
+.reg-modal-inner p { margin: 10px 0; font-size: 0.95rem; }
+.reg-modal-inner label { display: block; margin: 12px 0 4px; font-weight: 700; font-size: 0.92rem; }
+.reg-modal-inner input[type="text"], .reg-modal-inner input[type="email"] { width: 100%; padding: 9px 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; background: #fcfbf8; }
+.reg-modal-inner .track-options { display: flex; gap: 10px; margin-top: 6px; }
+.reg-modal-inner .track-options label { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 12px; border: 1px solid #d7cec1; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.92rem; background: #fcfbf8; }
+.reg-modal-inner .track-options input[type="radio"] { margin: 0; }
+.reg-modal-inner .track-options label:has(input:checked) { background: #f4c542; border-color: #c9a032; }
+.reg-modal-inner button { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 9px 22px; cursor: pointer; font-family: inherit; font-size: 1rem; margin-top: 18px; }
+.reg-warn { background: #faecd0; border: 1px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; color: #5b3a1f; }
+.reg-warn.hidden { display: none; }
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .nav-bar, .toggle-btn, .lang-toggle-group, .btn-reset, button.small, .check-kw-btn, .reg-modal, .reg-warn, #submitExamBtn, .exam-status, .sa-badge, .track-badge { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+  body.lang-en .lang-es, body.lang-es .lang-en { display: none; }
+  body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+}
+
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" role="group" aria-label="Language">
+  <button data-lang="en" class="active">English</button>
+  <button data-lang="es">Español</button>
+  <button data-lang="both">Both / Ambos</button>
+</div>
+<span id="trackBadgeSlot"></span>
+
+<div id="regWarn" class="reg-warn hidden">
+  <span class="lang-en">⚠ Please register your name to receive credit for this unit. <button class="small" id="openRegBtn" type="button">Register</button></span>
+  <span class="lang-es">⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class="small" id="openRegBtn2" type="button">Registrar</button></span>
+</div>
+<div id="regModal" class="reg-modal hidden" role="dialog" aria-labelledby="regModalTitle">
+  <div class="reg-modal-inner">
+    <h2 id="regModalTitle"><span class="lang-en">Welcome to the Acts Intensive</span><span class="lang-es">Bienvenido al Intensivo de Hechos</span></h2>
+    <p><span class="lang-en">Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.</span><span class="lang-es">Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full name</span><span class="lang-es">Nombre completo</span></label>
+    <input type="text" id="regName" placeholder="" autocomplete="name" aria-label="regName">
+    <label><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span></label>
+    <input type="email" id="regEmail" placeholder="" autocomplete="email" aria-label="regEmail">
+    <label><span class="lang-en">Track</span><span class="lang-es">Vía</span></label>
+    <div class="track-options">
+      <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></label>
+      <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en">M.Div</span><span class="lang-es">M.Div</span></label>
+      <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en">Th.M.</span><span class="lang-es">Th.M.</span></label>
+    </div>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;">
+      <span class="lang-en"><strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.</span>
+      <span class="lang-es"><strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%.</span>
+    </p>
+    <button id="regSaveBtn" type="button"><span class="lang-en">Save and Continue</span><span class="lang-es">Guardar y Continuar</span></button>
+  </div>
+</div>
+<div class="card">
+    <h1><span class="lang-en">📖 Acts Intensive — Unit 9: Arrest in Jerusalem (Acts 21:17–23:35)</span><span class="lang-es">📖 Intensivo de Hechos — Unidad 9: Arresto en Jerusalén (Hechos 21:17–23:35)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>I. The Welcome and the Warning</h2>
+        <p>Paul finally arrived in Jerusalem with the relief offering he had collected from the Gentile churches across Macedonia, Achaia, and Asia. The brothers received them gladly. The next day Paul went in to see James — the Lord's brother, the senior pastor of the Jerusalem church — and all the elders. Paul reported in detail everything God had done among the Gentiles through his ministry. The room glorified God. And then James said something that should have warned Paul. <em>"You see, brother, how many myriads of Jews there are who have believed, and they are all zealous for the law"</em> (Acts 21:20, NKJV). The Greek word translated <em>myriads</em> means tens of thousands. The Jerusalem church was now massive. And it was massively Jewish. And it was nervous about Paul.</p>
+
+        <p>Rumors had reached Jerusalem that Paul was teaching Jewish believers in the Diaspora to forsake Moses, abandon circumcision, and walk away from the Mosaic customs. The rumors were not accurate. Paul had circumcised Timothy on missionary grounds. Paul had taken Nazirite vows in Cenchrea. Paul had repeatedly insisted that Jewish believers were free to keep the customs of the fathers if they wanted to. But the rumors were spreading anyway. James proposed a compromise. There were four men in the church who had taken a Nazirite vow that was about to expire. The expiration required a temple ceremony and a payment of sacrifices. James suggested that Paul join them, pay the bills, and visibly demonstrate that he himself was a Torah-faithful Jew. Paul agreed. He was the man who had written, <em>"To the Jews I became as a Jew, that I might win Jews"</em> (1 Corinthians 9:20, NKJV). He was willing to walk into the temple and pay for four other men's sacrifices to keep the peace.</p>
+
+        <p>I want to stop and acknowledge that good men have argued for two thousand years about whether Paul was right to take James's advice. Some say it was wise diplomacy that bought another generation of Jewish-Christian fellowship. Some say it was a compromise that the Lord overruled by allowing the riot that followed. The text of Acts does not tell us. What the text does tell us is that the Lord turned the consequences of that compromise into the very chain that brought Paul to Rome. Whether Paul made a mistake or not, the Lord was driving a chariot.</p>
+
+        <h2>II. The Riot in the Outer Court</h2>
+        <p>Toward the end of the seven-day purification period, while Paul was in the temple courts with the four Nazirites, some Jews from the province of Asia recognized him. These were the Ephesian-region Jews who had hated Paul's gospel work in their synagogues, and they were in Jerusalem for the feast of Pentecost. They saw Paul. They lost their minds. They started shouting at the top of their lungs to draw a crowd. <em>"Men of Israel, help! This is the man who teaches all men everywhere against the people, the law, and this place; and furthermore he also brought Greeks into the temple and has defiled this holy place"</em> (Acts 21:28, NKJV).</p>
+
+        <p>The second charge was a flat lie. Paul had not brought any Greek into the inner courts. But Luke notes carefully what had given the rumor its handle. <em>"For they had previously seen Trophimus the Ephesian with him in the city, whom they supposed that Paul had brought into the temple"</em> (Acts 21:29, NKJV). Trophimus was one of the Gentile delegates who had carried the relief offering with Paul. The Asian Jews had seen them walking together in the city. They jumped to a conclusion. They turned their conclusion into a pulpit. The mob went berserk.</p>
+
+        <p>The penalty for a Gentile crossing the inner-temple barrier was death. Archaeologists have actually recovered one of the warning stones that stood between the Court of the Gentiles and the inner courts. It read in Greek: <em>No foreigner is to enter within the balustrade and embankment around the sanctuary. Whoever is caught will himself be responsible for his ensuing death.</em> The Romans had granted the Sanhedrin authority to execute Gentile violators on the spot, even Roman citizens. So the Asian Jews seized Paul, dragged him out of the inner courts so they would not pollute the holy ground with his blood, slammed the temple gates behind them so the violence would not spill back inside, and began to beat him to death.</p>
+
+        <h2>III. The Roman Officer on the Stairs</h2>
+        <p>Adjacent to the temple complex, on the northwest corner, stood the Antonia Fortress — a Roman barracks named after Mark Antony, garrisoned with one cohort of soldiers (about a thousand men), specifically because the temple courts during Jewish festivals were a known riot zone. The Roman commander on duty that afternoon was a man named Claudius Lysias. He looked down from the fortress, saw the mob beating someone to death in the temple court, took two centurions and a flying squad of soldiers, and ran down the steps. The crowd, seeing the Romans coming, stopped beating Paul. Lysias took Paul into custody, ordered him bound with two chains, and asked the crowd who he was and what he had done. The crowd was incoherent. Lysias gave up trying to get a story out of them and ordered Paul carried up the steps to the barracks. The crowd surged so violently that the soldiers literally had to lift Paul off the ground and carry him up the stairs to keep him alive, while the mob behind shouted, <em>"Away with him!"</em> (Acts 21:36, NKJV) — the very same cry the Jerusalem mob had shouted thirty years earlier at Pilate's palace, about Christ.</p>
+
+        <p>That parallel is not an accident. Paul is being treated, in the providence of God, the way his Master had been treated. The disciple is not above his Lord. The pattern of Christ's last hours is now overlaid on the pattern of Paul's first arrest. The mob shouting <em>away with him</em>. The Roman authority taking custody. The flogging coming. The trial before the Jewish council coming. The trial before the Roman governor coming. The trial before a Herod king coming. Acts 21–26 is going to walk Paul through the same stations Christ walked through, at almost the same locations, often in front of the descendants of the same families. The Lord is not done writing the gospel of Luke when Luke ends his Gospel. He is finishing it through the life of Paul.</p>
+
+        <p>At the top of the stairs, just before the soldiers carried him into the barracks, Paul addressed Lysias in Greek. The commander was startled. <em>"Can you speak Greek? Are you not the Egyptian who some time ago stirred up a rebellion and led the four thousand assassins out into the wilderness?"</em> (Acts 21:37–38, NKJV). Lysias had assumed he had captured a notorious Egyptian terrorist, the leader of the <em>Sicarii</em> (the dagger-men) who had brought four thousand armed Jews to the Mount of Olives expecting Jerusalem's walls to fall down at his command. Paul corrected him. <em>"I am a Jew from Tarsus, in Cilicia, a citizen of no mean city; and I implore you, permit me to speak to the people"</em> (Acts 21:39, NKJV). Lysias, perhaps just curious enough now, granted permission. Paul stood on the stairs of the Antonia Fortress, motioned with his hand, and the riot fell silent.</p>
+
+        <h2>IV. The Hebrew Speech on the Barracks Stairs</h2>
+        <p>And then Paul did one of the most courageous things in the New Testament. He addressed the same mob that had just been beating him to death. He addressed them in Hebrew — actually Aramaic, the everyday language of Judean Jews — which got their attention even more. The mob expected another tirade in Greek, a foreign language, the language of compromisers. Instead they got the rabbinical mother tongue, perfectly accented, of a man who had been trained in the schools of Jerusalem itself.</p>
+
+        <p>Paul's speech, recorded in Acts 22, is structured exactly like a courtroom defense. He told them his pedigree. <em>"I am indeed a Jew, born in Tarsus of Cilicia, but brought up in this city at the feet of Gamaliel, taught according to the strictness of our fathers' law, and was zealous toward God as you all are today"</em> (Acts 22:3, NKJV). Identification with the audience. <em>You all are zealous toward God as I once was.</em> He told them his persecuting career. He told them, in the most personal first-person account in the New Testament, the story of the Damascus road — the noonday light, the voice, the question, his blindness, Ananias, the words <em>"Brother Saul, receive your sight"</em> (Acts 22:13, NKJV).</p>
+
+        <p>The crowd listened in stunned silence. They were following him. They were tracking with him. He had them. Then Paul made his pivot. He told them that years later, while praying in the temple, the Lord had appeared to him and said, <em>"Depart, for I will send you far from here to the Gentiles"</em> (Acts 22:21, NKJV). At the word <em>Gentiles</em> the crowd exploded. <em>"Away with such a fellow from the earth, for he is not fit to live!"</em> They threw their cloaks in the air, threw dust into the air, screamed that he was a blasphemer. Lysias, watching from the barracks door, decided he had heard enough Aramaic. He ordered Paul taken inside and examined under scourging — the standard Roman interrogation method — to find out what he had said that had so enraged the crowd. The Romans tied Paul up for flogging.</p>
+
+        <h2>V. The Citizenship Card</h2>
+        <p>Paul had let the day get this far without playing his Roman citizenship. He let the Asian Jews arrest him. He let the mob beat him. He let the Romans bind him with two chains. But he was not going to let them flog him. As the centurion bent down with the leather strips to begin, Paul asked quietly, <em>"Is it lawful for you to scourge a man who is a Roman, and uncondemned?"</em> (Acts 22:25, NKJV).</p>
+
+        <p>The centurion blanched. The Roman law, going back to the Lex Porcia of 195 BC, made it a capital crime to scourge a Roman citizen. The centurion ran to Lysias. Lysias came running. The conversation that followed is one of Luke's quietest comedies. <em>"Tell me, are you a Roman?" "Yes." "I obtained this citizenship with a large sum of money." "But I was born a citizen"</em> (Acts 22:27–28, NKJV). Lysias had bought his citizenship in the Roman market, probably in the late reign of Claudius. Paul had inherited his — his father had been granted citizenship for some service to Rome, probably back in Pompey's day. The captain of a thousand Roman soldiers had paid for what the Christian preacher had been born with. The centurions backed away. Lysias was suddenly afraid. He had bound a Roman citizen.</p>
+
+        <p>Brothers, take a lesson from Paul's use of his citizenship. He did not flaunt it for personal advantage all day. He let the gospel run its course at the cost of beatings and rope. But when due process was about to be violated and the law of the empire was being broken on his back, he claimed his rights. The Christian who refuses ever to use the legal protections God has given him is not more spiritual than Paul. The Christian who uses his rights only to escape suffering for Christ is a coward. Paul drew the line in the right place — and the right place was where Roman law itself was being broken.</p>
+
+        <h2>VI. Before the Sanhedrin</h2>
+        <p>Lysias, still trying to figure out the actual charge against Paul, ordered the Sanhedrin assembled and brought Paul before them in the morning. Paul opened with a sentence that was either the most poorly chosen first words in apostolic history or the boldest declaration any prisoner ever gave a religious court. <em>"Men and brethren, I have lived in all good conscience before God until this day"</em> (Acts 23:1, NKJV).</p>
+
+        <p>The high priest Ananias, sitting in the chairman's seat, ordered the man standing next to Paul to slap him on the mouth for impudence. Paul retorted, <em>"God will strike you, you whitewashed wall! For you sit to judge me according to the law, and do you command me to be struck contrary to the law?"</em> (Acts 23:3, NKJV). Then someone whispered to Paul that he had just rebuked the high priest. Paul, perhaps because the high priest had been seated out of his usual robes that day, perhaps because Paul's eyesight had been poor since Damascus, said, <em>"I did not know, brethren, that he was the high priest"</em> (Acts 23:5, NKJV). And he quoted Exodus 22:28 — <em>"You shall not speak evil of a ruler of your people."</em> Paul corrected himself the moment he was told. That is the mark of a man who actually has lived in good conscience.</p>
+
+        <p>Then Paul did something brilliant. He took one quick look around the council chamber and noticed that the Sanhedrin contained both Pharisees and Sadducees. He said in a loud voice, <em>"Men and brethren, I am a Pharisee, the son of a Pharisee; concerning the hope and resurrection of the dead I am being judged!"</em> (Acts 23:6, NKJV). The chamber broke into a brawl. The Pharisees believed in the resurrection. The Sadducees did not. Half the room jumped to Paul's defense; half jumped to attack. Some of the Pharisee scribes stood up and cried, <em>"We find no evil in this man; but if a spirit or an angel has spoken to him, let us not fight against God"</em> (Acts 23:9, NKJV). Notice the echo. Gamaliel's old phrase — <em>fighting against God</em> — has come full circle, now applied by the Pharisees to defending Saul of Tarsus, the Pharisee's most famous student. The riot in the council got so dangerous that Lysias ordered the soldiers down to extract Paul forcibly and take him back up to the barracks.</p>
+
+        <h2>VII. Be of Good Cheer</h2>
+        <p>That night in the Antonia barracks Paul lay alone. The mob had wanted his blood. The Sanhedrin had degenerated into a brawl. James and the Jerusalem elders had not been able to keep him out of trouble. The Romans were holding him in chains. Forty-eight hours earlier he had been worshiping with the Pentecost crowd. Now he was a chained prisoner with no idea what tomorrow held.</p>
+
+        <p>And the Lord visited him. <em>"But the following night the Lord stood by him and said, 'Be of good cheer, Paul; for as you have testified for Me in Jerusalem, so you must also bear witness at Rome'"</em> (Acts 23:11, NKJV). Read those words slowly. <em>Be of good cheer.</em> The Lord did not say, <em>I am sorry your day went so badly.</em> He did not say, <em>I will get you out of this.</em> He said, <em>Take heart. The witness you bore in Jerusalem accomplished exactly what I sent you here to accomplish, and you will bear that same witness at Rome.</em> The chains around Paul's wrists were now part of his itinerary. The Lord had a travel plan, and the chains were the boarding pass. Friends, every chain a Christian wears in providence is a boarding pass to a destination the Lord has already arranged. Be of good cheer.</p>
+
+        <h2>VIII. The Forty-Man Oath and the Nephew</h2>
+        <p>The next morning more than forty Jewish men bound themselves under a curse. They swore not to eat or drink until they had killed Paul. They went to the chief priests and elders with a plan. The priests would request that the Sanhedrin reconvene and ask Lysias to bring Paul down again to the council for further questioning. Somewhere on the road between the barracks and the council chamber the forty would ambush the escort and kill Paul. It was a competent plan. It would have worked.</p>
+
+        <p>But Paul had a sister in Jerusalem, and his sister had a son. Luke does not tell us the boy's name or his age. He calls him simply <em>Paul's sister's son</em>. The boy heard about the ambush — perhaps he knew one of the conspirators, perhaps the chief priests' household had servants who talked. He went straight to the Antonia barracks, was taken to his uncle, told him the plot. Paul called a centurion. <em>"Take this young man to the commander, for he has something to tell him"</em> (Acts 23:17, NKJV). The centurion took the boy upstairs. Lysias took the boy by the hand, walked aside with him privately, and said, <em>"What is it that you have to tell me?"</em> (Acts 23:19, NKJV). Imagine Lysias, the captain of a thousand Roman soldiers, taking a Jewish teenager by the hand and walking him aside in private. The Lord's protection comes through unlikely couriers. The plot was foiled by a boy nobody else thought to brief.</p>
+
+        <p>I want to say this loudly, because we forget it. The Lord uses children. The Lord uses unnamed teenagers. The Lord uses the youngest member of your church to deliver the message you most need. Lysias listened to the boy. Lysias acted. Within hours the plan was made.</p>
+
+        <h2>IX. The Midnight Cavalry to Caesarea</h2>
+        <p>Lysias's response was massive. He summoned two centurions and ordered them to assemble two hundred soldiers, seventy horsemen, and two hundred spearmen — four hundred and seventy men, almost half the Jerusalem garrison — to leave at the third hour of the night, that is, nine o'clock, to escort one Roman citizen named Paul down to Caesarea, sixty miles to the northwest. Lysias also ordered horses readied for Paul himself and wrote a letter to the governor Felix explaining the case.</p>
+
+        <p>The letter Luke records is a masterpiece of Roman administrative spin. Lysias does not mention that he had bound Paul illegally. He paints himself as the rescuer who, on learning Paul was a Roman, had gallantly intervened. He describes the case as a Jewish theological dispute. He commends Paul to the governor's judgment. The Lord turned even Lysias's bureaucratic self-protection into Paul's free passage to Caesarea.</p>
+
+        <p>At nine that night the convoy left Jerusalem under cover of darkness. The forty-man oath party was waiting for an early-morning escort along the road to the council chamber. They never saw Paul leave. By the time the sun rose, Paul was forty miles up the coastal plain at Antipatris — out of reach of any Jerusalem mob. The horsemen continued on with him to Caesarea while the foot soldiers returned. Paul was delivered to the governor Felix, the letter was read, Felix ordered him kept in Herod's Praetorium until the accusers should arrive, and the second of Paul's four trials began.</p>
+
+        <p>Acts 21–23 ends with Paul standing in the same Caesarea where Cornelius had been converted, where Philip the evangelist still lived, in the same Herod's palace where Herod Agrippa I had been struck down by an angel for taking the worship of men. The geography of Acts is its own theology. The Lord brings His servants back through the rooms where He has worked before, to remind them that the same God who acted in Caesarea fifteen years earlier is acting in Caesarea now.</p>
+
+        <h2>X. Three Lessons Home</h2>
+        <p>First, <strong>compromise to keep peace can be costly, but the Lord rules the consequences</strong>. Whether or not Paul should have agreed to James's plan in the temple, the riot that followed became the chariot that took him to Rome. The Lord overrules even our questionable judgment. Trust Him on the days you suspect you were not at your wisest.</p>
+
+        <p>Second, <strong>be of good cheer</strong>. Paul's lowest night in Jerusalem was the night Christ stood by him in the cell. The Christian's lowest hours are usually the hours when the Master is closest. The chains you wear in providence are travel papers. Where the Lord is sending you, the chains will not stop you from arriving.</p>
+
+        <p>Third, <strong>the Lord uses unnamed couriers</strong>. A Jewish teenager nobody bothered to name in the New Testament saved the apostle Paul's life. The next deliverance in your church may come through a child, a quiet member, a forgotten friend. Do not despise the small faces. The Lord conducts His rescue operations through the people the proud overlook.</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>I. La bienvenida y la advertencia</h2>
+        <p>Pablo finalmente llegó a Jerusalén con la ofrenda de socorro que había recogido de las iglesias gentiles a través de Macedonia, Acaya y Asia. Los hermanos los recibieron con gozo. Al día siguiente Pablo entró a ver a Jacobo — el hermano del Señor, el pastor principal de la iglesia de Jerusalén — y a todos los ancianos. Pablo reportó en detalle todo lo que Dios había hecho entre los gentiles a través de su ministerio. La sala glorificó a Dios. Y entonces Jacobo dijo algo que debió haber advertido a Pablo. <em>"Ya ves, hermano, cuántos millares de judíos hay que han creído; y todos son celosos por la ley"</em> (Hechos 21:20, RVG). La palabra griega traducida <em>millares</em> significa decenas de miles. La iglesia de Jerusalén era ahora masiva. Y era masivamente judía. Y estaba nerviosa por Pablo.</p>
+
+        <p>Habían llegado a Jerusalén rumores de que Pablo estaba enseñando a los creyentes judíos en la Diáspora a apostatar de Moisés, abandonar la circuncisión y alejarse de las costumbres mosaicas. Los rumores no eran exactos. Pablo había circuncidado a Timoteo por motivos misioneros. Pablo había tomado votos nazareos en Cencreas. Pablo había insistido repetidamente en que los creyentes judíos eran libres de guardar las costumbres de los padres si querían. Pero los rumores se esparcían de todas maneras. Jacobo propuso un acuerdo. Había cuatro hombres en la iglesia que habían tomado un voto nazareo a punto de expirar. La expiración requería una ceremonia en el templo y el pago de sacrificios. Jacobo sugirió que Pablo se uniera a ellos, pagara las cuentas, y demostrara visiblemente que él mismo era un judío fiel a la Torá. Pablo aceptó. Era el hombre que había escrito: <em>"A los judíos me hice como judío, para ganar a los judíos"</em> (1 Corintios 9:20, RVG). Estaba dispuesto a entrar al templo y pagar por los sacrificios de otros cuatro hombres para mantener la paz.</p>
+
+        <p>Quiero detenerme y reconocer que hombres buenos han discutido durante dos mil años sobre si Pablo hizo bien en tomar el consejo de Jacobo. Algunos dicen que fue una diplomacia sabia que compró otra generación de comunión judeo-cristiana. Algunos dicen que fue un compromiso que el Señor anuló al permitir el tumulto que siguió. El texto de Hechos no nos lo dice. Lo que el texto sí nos dice es que el Señor convirtió las consecuencias de aquel compromiso en la cadena misma que llevó a Pablo a Roma. Hiciera Pablo un error o no, el Señor manejaba el carro.</p>
+
+        <h2>II. El motín en el atrio exterior</h2>
+        <p>Hacia el final del período de purificación de siete días, mientras Pablo estaba en los atrios del templo con los cuatro nazareos, algunos judíos de la provincia de Asia lo reconocieron. Estos eran los judíos de la región efesia que habían odiado la obra evangelística de Pablo en sus sinagogas, y estaban en Jerusalén para la fiesta de Pentecostés. Vieron a Pablo. Perdieron la cabeza. Comenzaron a gritar a todo pulmón para juntar una multitud. <em>"¡Varones israelitas, ayudad! Éste es el hombre que por todas partes enseña a todos contra el pueblo, y la ley, y este lugar; y además de esto, ha metido a griegos en el templo, y ha contaminado este santo lugar"</em> (Hechos 21:28, RVG).</p>
+
+        <p>El segundo cargo era una mentira descarada. Pablo no había llevado a ningún griego al atrio interior. Pero Lucas anota cuidadosamente lo que le había dado al rumor su asidero. <em>"Porque antes habían visto con él en la ciudad a Trófimo, efesio, al cual pensaban que Pablo había metido en el templo"</em> (Hechos 21:29, RVG). Trófimo era uno de los delegados gentiles que había llevado la ofrenda de socorro con Pablo. Los judíos de Asia los habían visto caminando juntos en la ciudad. Saltaron a una conclusión. Convirtieron su conclusión en un púlpito. La multitud se enloqueció.</p>
+
+        <p>La pena por que un gentil cruzara la barrera del templo interior era la muerte. Los arqueólogos han recuperado realmente una de las piedras de advertencia que estaban entre el atrio de los gentiles y los atrios interiores. Decía en griego: <em>Ningún extranjero debe entrar dentro de la balaustrada y el terraplén alrededor del santuario. Quienquiera que sea capturado será él mismo responsable de la muerte que le sigue.</em> Los romanos habían concedido al Sanedrín autoridad para ejecutar a los violadores gentiles en el lugar, aun a los ciudadanos romanos. Así que los judíos asianos agarraron a Pablo, lo arrastraron fuera de los atrios interiores para no contaminar el suelo santo con su sangre, cerraron de golpe las puertas del templo detrás de ellos para que la violencia no se derramara de regreso adentro, y comenzaron a golpearlo hasta la muerte.</p>
+
+        <h2>III. El oficial romano en las gradas</h2>
+        <p>Adyacente al complejo del templo, en la esquina noroeste, estaba la Fortaleza Antonia — un cuartel romano nombrado en honor a Marco Antonio, guarnecido con una cohorte de soldados (cerca de mil hombres), específicamente porque los atrios del templo durante las festividades judías eran una conocida zona de motines. El comandante romano de turno aquella tarde era un hombre llamado Claudio Lisias. Miró desde la fortaleza, vio a la multitud golpeando hasta la muerte a alguien en el atrio del templo, tomó dos centuriones y un escuadrón volante de soldados, y bajó corriendo las gradas. La multitud, viendo venir a los romanos, dejó de golpear a Pablo. Lisias detuvo a Pablo, ordenó que lo ataran con dos cadenas, y preguntó a la multitud quién era y qué había hecho. La multitud era incoherente. Lisias se rindió tratando de sacar una historia y ordenó que llevaran a Pablo cargado por las gradas hacia el cuartel. La multitud arremetió tan violentamente que los soldados literalmente tuvieron que levantar a Pablo del suelo y cargarlo gradas arriba para mantenerlo con vida, mientras la turba detrás gritaba: <em>"¡Quítale!"</em> (Hechos 21:36, RVG) — el mismo grito que la multitud de Jerusalén había gritado treinta años antes en el palacio de Pilato, sobre Cristo.</p>
+
+        <p>Ese paralelo no es un accidente. Pablo está siendo tratado, en la providencia de Dios, como su Maestro había sido tratado. El discípulo no es mayor que su Señor. El patrón de las últimas horas de Cristo está ahora sobrepuesto al patrón del primer arresto de Pablo. La multitud gritando <em>quítale</em>. La autoridad romana tomando custodia. La flagelación que viene. El juicio ante el concilio judío que viene. El juicio ante el gobernador romano que viene. El juicio ante un rey Herodes que viene. Hechos 21–26 va a llevar a Pablo a través de las mismas estaciones por las que Cristo caminó, casi en las mismas localidades, frecuentemente frente a los descendientes de las mismas familias. El Señor no termina de escribir el Evangelio de Lucas cuando Lucas termina su Evangelio. Lo está terminando a través de la vida de Pablo.</p>
+
+        <p>En lo alto de las gradas, justo antes de que los soldados lo metieran al cuartel, Pablo se dirigió a Lisias en griego. El comandante se sorprendió. <em>"¿Sabes griego? ¿No eres tú aquel egipcio que levantaste una sedición antes de estos días, y sacaste al desierto cuatro mil hombres asesinos?"</em> (Hechos 21:37–38, RVG). Lisias había asumido que había capturado a un notorio terrorista egipcio, el líder de los <em>sicarios</em> (los hombres del puñal) que habían llevado a cuatro mil judíos armados al monte de los Olivos esperando que las murallas de Jerusalén cayeran a su orden. Pablo lo corrigió. <em>"Yo de cierto soy hombre judío de Tarso, ciudadano de una ciudad no insignificante de Cilicia; mas te ruego que me permitas hablar al pueblo"</em> (Hechos 21:39, RVG). Lisias, quizás bastante curioso ahora, concedió permiso. Pablo se paró en las gradas de la Fortaleza Antonia, hizo señal con la mano, y el motín cayó en silencio.</p>
+
+        <h2>IV. El discurso en hebreo en las gradas del cuartel</h2>
+        <p>Y entonces Pablo hizo una de las cosas más valientes del Nuevo Testamento. Se dirigió a la misma multitud que acababa de estar golpeándolo hasta la muerte. Se dirigió a ellos en hebreo — en realidad arameo, el lenguaje cotidiano de los judíos de Judea — lo cual capturó su atención aún más. La multitud esperaba otra arenga en griego, una lengua extranjera, la lengua de los componedores. En cambio recibieron la lengua materna rabínica, perfectamente acentuada, de un hombre que había sido entrenado en las escuelas de Jerusalén misma.</p>
+
+        <p>El discurso de Pablo, registrado en Hechos 22, está estructurado exactamente como una defensa en juicio. Les dijo su pedigrí. <em>"Yo de cierto soy judío, nacido en Tarso de Cilicia, mas criado en esta ciudad a los pies de Gamaliel, instruido conforme a la verdad de la ley de los padres, celoso de Dios, como todos vosotros sois hoy"</em> (Hechos 22:3, RVG). Identificación con el público. <em>Vosotros sois celosos de Dios como yo lo era.</em> Les contó su carrera persecutoria. Les contó, en el relato más personal en primera persona del Nuevo Testamento, la historia del camino a Damasco — la luz del mediodía, la voz, la pregunta, su ceguera, Ananías, las palabras <em>"Hermano Saulo, recibe la vista"</em> (Hechos 22:13, RVG).</p>
+
+        <p>La multitud escuchó en silencio sorprendido. Lo seguían. Iban con él. Los tenía. Entonces Pablo hizo su giro. Les dijo que años después, mientras oraba en el templo, el Señor se le había aparecido y le había dicho: <em>"Date prisa, y sal prestamente de Jerusalén; porque no recibirán tu testimonio acerca de mí... Yo te enviaré lejos a los gentiles"</em> (Hechos 22:18, 21, RVG). Ante la palabra <em>gentiles</em> la multitud explotó. <em>"¡Quita de la tierra a un tal hombre! Porque no conviene que viva!"</em> Lanzaron sus capas al aire, lanzaron polvo al aire, gritaron que era un blasfemo. Lisias, observando desde la puerta del cuartel, decidió que había oído suficiente arameo. Ordenó que Pablo fuera llevado adentro y examinado bajo flagelación — el método estándar romano de interrogación — para descubrir qué había dicho que había enfurecido tanto a la multitud. Los romanos ataron a Pablo para ser azotado.</p>
+
+        <h2>V. La carta de la ciudadanía</h2>
+        <p>Pablo había dejado que el día llegara hasta este punto sin jugar su ciudadanía romana. Había dejado que los judíos asianos lo arrestaran. Había dejado que la multitud lo golpeara. Había dejado que los romanos lo ataran con dos cadenas. Pero no iba a dejar que lo azotaran. Cuando el centurión se inclinaba con las correas de cuero para comenzar, Pablo preguntó en voz baja: <em>"¿Os es lícito azotar a un hombre romano sin haber sido condenado?"</em> (Hechos 22:25, RVG).</p>
+
+        <p>El centurión palideció. La ley romana, que se remontaba a la Lex Porcia del 195 a.C., hacía un delito capital azotar a un ciudadano romano. El centurión corrió a Lisias. Lisias vino corriendo. La conversación que siguió es una de las comedias más tranquilas de Lucas. <em>"Dime, ¿eres tú romano?" "Sí." "Yo con grande suma alcancé esta ciudadanía." "Pero yo lo soy de nacimiento"</em> (Hechos 22:27–28, RVG). Lisias había comprado su ciudadanía en el mercado romano, probablemente al final del reinado de Claudio. Pablo había heredado la suya — su padre había recibido la ciudadanía por algún servicio a Roma, probablemente desde los días de Pompeyo. El capitán de mil soldados romanos había pagado por lo que el predicador cristiano había recibido por nacimiento. Los centuriones retrocedieron. Lisias estaba de pronto temeroso. Había atado a un ciudadano romano.</p>
+
+        <p>Hermanos, tomen una lección del uso que hace Pablo de su ciudadanía. No la presumió todo el día para ventaja personal. Dejó que el evangelio corriera su curso al costo de golpes y cuerda. Pero cuando el debido proceso estaba a punto de ser violado y la ley del imperio estaba siendo quebrada en su espalda, reclamó sus derechos. El cristiano que se niega a usar las protecciones legales que Dios le ha dado no es más espiritual que Pablo. El cristiano que usa sus derechos solo para escapar del sufrimiento por Cristo es un cobarde. Pablo trazó la línea en el lugar correcto — y el lugar correcto era donde la ley romana misma estaba siendo quebrada.</p>
+
+        <h2>VI. Ante el Sanedrín</h2>
+        <p>Lisias, todavía tratando de descubrir el cargo real contra Pablo, ordenó que el Sanedrín se reuniera y trajo a Pablo ante ellos en la mañana. Pablo abrió con una frase que fue o las primeras palabras peor escogidas en la historia apostólica o la declaración más audaz que un prisionero haya jamás dado a una corte religiosa. <em>"Varones hermanos, yo con toda buena conciencia he vivido delante de Dios hasta el día de hoy"</em> (Hechos 23:1, RVG).</p>
+
+        <p>El sumo sacerdote Ananías, sentado en el asiento del presidente, ordenó al hombre que estaba al lado de Pablo que le golpeara en la boca por insolencia. Pablo replicó: <em>"¡Dios te herirá a ti, pared blanqueada! Pues, ¿estás tú sentado para juzgarme conforme a la ley, y contra la ley me mandas herir?"</em> (Hechos 23:3, RVG). Entonces alguien le susurró a Pablo que acababa de reprender al sumo sacerdote. Pablo, quizás porque el sumo sacerdote había estado sentado fuera de sus vestiduras habituales aquel día, quizás porque la vista de Pablo había sido pobre desde Damasco, dijo: <em>"No sabía, hermanos, que era el sumo sacerdote"</em> (Hechos 23:5, RVG). Y citó Éxodo 22:28: <em>"No maldecirás al príncipe de tu pueblo."</em> Pablo se corrigió en el momento que se le dijo. Esa es la marca de un hombre que verdaderamente ha vivido en buena conciencia.</p>
+
+        <p>Entonces Pablo hizo algo brillante. Echó una rápida mirada alrededor de la cámara del concilio y notó que el Sanedrín contenía tanto fariseos como saduceos. Dijo en voz alta: <em>"Varones hermanos, yo soy fariseo, hijo de fariseo; de la esperanza y de la resurrección de los muertos soy yo juzgado"</em> (Hechos 23:6, RVG). La cámara estalló en pelea. Los fariseos creían en la resurrección. Los saduceos no. La mitad de la sala saltó a defender a Pablo; la mitad saltó a atacarlo. Algunos de los escribas fariseos se levantaron y gritaron: <em>"Ningún mal hallamos en este hombre; que si un espíritu le ha hablado, o un ángel, no resistamos a Dios"</em> (Hechos 23:9, RVG). Note el eco. La vieja frase de Gamaliel — <em>luchar contra Dios</em> — ha completado el círculo, ahora aplicada por los fariseos a defender a Saulo de Tarso, el alumno más famoso de los fariseos. El motín en el concilio se hizo tan peligroso que Lisias ordenó a los soldados bajar a sacar a Pablo a la fuerza y llevarlo de regreso al cuartel.</p>
+
+        <h2>VII. Ten ánimo</h2>
+        <p>Aquella noche en el cuartel de Antonia Pablo yacía solo. La multitud había querido su sangre. El Sanedrín había degenerado en una pelea. Jacobo y los ancianos de Jerusalén no habían podido mantenerlo fuera de problemas. Los romanos lo tenían en cadenas. Cuarenta y ocho horas antes había estado adorando con la multitud de Pentecostés. Ahora era un prisionero encadenado sin idea de lo que mañana traería.</p>
+
+        <p>Y el Señor lo visitó. <em>"Y la noche siguiente, presentándose a él el Señor, le dijo: Pablo, ten ánimo; pues como has testificado de mí en Jerusalén, así te conviene testificar también en Roma"</em> (Hechos 23:11, RVG). Lea esas palabras lentamente. <em>Ten ánimo.</em> El Señor no dijo: <em>Lamento que tu día haya ido tan mal.</em> No dijo: <em>Te sacaré de esto.</em> Dijo: <em>Anímate. El testimonio que diste en Jerusalén logró exactamente lo que te envié aquí a lograr, y darás ese mismo testimonio en Roma.</em> Las cadenas alrededor de las muñecas de Pablo eran ahora parte de su itinerario. El Señor tenía un plan de viaje, y las cadenas eran el pase de abordar. Amigos, cada cadena que un cristiano lleva en la providencia es un pase de abordar a un destino que el Señor ya ha arreglado. Tengan ánimo.</p>
+
+        <h2>VIII. El juramento de los cuarenta hombres y el sobrino</h2>
+        <p>A la mañana siguiente más de cuarenta judíos se conjuraron bajo maldición. Juraron no comer ni beber hasta haber matado a Pablo. Fueron a los principales sacerdotes y ancianos con un plan. Los sacerdotes pedirían que el Sanedrín se reuniera de nuevo y le pedirían a Lisias que trajera de nuevo a Pablo al concilio para más interrogación. En algún punto del camino entre el cuartel y la cámara del concilio los cuarenta tenderían una emboscada a la escolta y matarían a Pablo. Era un plan competente. Habría funcionado.</p>
+
+        <p>Pero Pablo tenía una hermana en Jerusalén, y su hermana tenía un hijo. Lucas no nos dice el nombre del muchacho ni su edad. Lo llama simplemente <em>el hijo de la hermana de Pablo</em>. El muchacho oyó sobre la emboscada — quizás conocía a uno de los conspiradores, quizás la casa de los principales sacerdotes tenía sirvientes que hablaban. Fue directamente al cuartel de Antonia, fue llevado a su tío, le contó el complot. Pablo llamó a un centurión. <em>"Lleva a este joven al tribuno, porque tiene cierto aviso que darle"</em> (Hechos 23:17, RVG). El centurión llevó al muchacho arriba. Lisias tomó al muchacho de la mano, se apartó con él en privado, y dijo: <em>"¿Qué es lo que tienes que decirme?"</em> (Hechos 23:19, RVG). Imaginen a Lisias, el capitán de mil soldados romanos, tomando a un adolescente judío de la mano y apartándose con él en privado. La protección del Señor viene a través de mensajeros improbables. El complot fue frustrado por un muchacho a quien nadie más pensó en informar.</p>
+
+        <p>Quiero decir esto fuerte, porque lo olvidamos. El Señor usa niños. El Señor usa adolescentes sin nombre. El Señor usa al miembro más joven de su iglesia para entregar el mensaje que más necesita. Lisias escuchó al muchacho. Lisias actuó. Dentro de horas el plan estaba hecho.</p>
+
+        <h2>IX. La caballería de medianoche a Cesarea</h2>
+        <p>La respuesta de Lisias fue masiva. Convocó a dos centuriones y les ordenó armar doscientos soldados, setenta jinetes, y doscientos lanceros — cuatrocientos setenta hombres, casi la mitad de la guarnición de Jerusalén — para salir a la hora tercera de la noche, es decir las nueve, para escoltar a un ciudadano romano llamado Pablo a Cesarea, a noventa y siete kilómetros al noroeste. Lisias también ordenó que se prepararan caballos para Pablo mismo y escribió una carta al gobernador Félix explicando el caso.</p>
+
+        <p>La carta que Lucas registra es una obra maestra de presentación administrativa romana. Lisias no menciona que había atado a Pablo ilegalmente. Se pinta como el rescatador que, al saber que Pablo era romano, había intervenido galantemente. Describe el caso como una disputa teológica judía. Encomienda a Pablo al juicio del gobernador. El Señor convirtió aun la auto-protección burocrática de Lisias en el pasaje gratuito de Pablo a Cesarea.</p>
+
+        <p>A las nueve de aquella noche el convoy salió de Jerusalén bajo cobertura de la oscuridad. La partida del juramento de cuarenta hombres estaba esperando una escolta temprano por la mañana en el camino a la cámara del concilio. Nunca vieron a Pablo salir. Para cuando salió el sol, Pablo estaba a sesenta y cuatro kilómetros adelante por la llanura costera, en Antípatris — fuera del alcance de cualquier multitud de Jerusalén. Los jinetes continuaron con él a Cesarea mientras los soldados de a pie regresaron. Pablo fue entregado al gobernador Félix, la carta fue leída, Félix ordenó que se le mantuviera en el Pretorio de Herodes hasta que llegaran los acusadores, y el segundo de los cuatro juicios de Pablo comenzó.</p>
+
+        <p>Hechos 21–23 termina con Pablo parado en la misma Cesarea donde Cornelio había sido convertido, donde Felipe el evangelista todavía vivía, en el mismo palacio de Herodes donde Herodes Agripa I había sido herido por un ángel por aceptar la adoración de los hombres. La geografía de Hechos es su propia teología. El Señor lleva a Sus siervos de regreso a través de los cuartos donde ha trabajado antes, para recordarles que el mismo Dios que actuó en Cesarea quince años antes está actuando en Cesarea ahora.</p>
+
+        <h2>X. Tres lecciones a casa</h2>
+        <p>Primero, <strong>el compromiso para mantener la paz puede ser costoso, pero el Señor gobierna las consecuencias</strong>. Si Pablo debió haber aceptado el plan de Jacobo en el templo o no, el motín que siguió se convirtió en el carro que lo llevó a Roma. El Señor anula aun nuestro juicio cuestionable. Confíen en Él en los días que sospechan que no estuvieron en su mejor momento.</p>
+
+        <p>Segundo, <strong>tengan ánimo</strong>. La noche más baja de Pablo en Jerusalén fue la noche en que Cristo se paró junto a él en la celda. Las horas más bajas del cristiano son usualmente las horas en que el Maestro está más cerca. Las cadenas que lleva en la providencia son papeles de viaje. A donde el Señor le envía, las cadenas no impedirán que llegue.</p>
+
+        <p>Tercero, <strong>el Señor usa mensajeros sin nombre</strong>. Un adolescente judío a quien nadie se molestó en nombrar en el Nuevo Testamento le salvó la vida al apóstol Pablo. La próxima liberación en su iglesia puede venir a través de un niño, un miembro callado, un amigo olvidado. No desprecien las caras pequeñas. El Señor conduce Sus operaciones de rescate a través de las personas que el orgulloso pasa por alto.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 9 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 9 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></span><span class="lang-es"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></span></p>
+    <div class="exam-status hidden" id="examStatus"></div>
+<div class="mc-section" id="mcSection">
+  <h3><span class="lang-en">Multiple Choice &mdash; 20 Questions</span><span class="lang-es">Opción Múltiple &mdash; 20 Preguntas</span></h3>
+  <div id="mcContainer"></div>
+</div>
+<div class="sa-section" id="saSection">
+  <h3><span class="lang-en">Short Answer &mdash; 10 Questions <span class="sa-badge" id="saBadgeEn"></span></span><span class="lang-es">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="saBadgeEs"></span></span></h3>
+  <p class="sa-note"><span class="lang-en" id="saNoteEn"></span><span class="lang-es" id="saNoteEs"></span></p>
+  <div id="kwContainer"></div>
+</div>
+<div style="margin-top: 20px;">
+  <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+  <button id="resetExamBtn" class="btn-reset" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+  <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+</div>
+</div>
+
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+
+const TOTAL_UNITS = 11;
+const CURRENT_UNIT = 9;
+const NEXT_URL = 'CTSActsUnit10.html';
+
+// === MC + SA data (preserved verbatim from upstream) ===
+const mcQuestions = [
+    { textEn: "1. James and the Jerusalem elders told Paul that the Jerusalem church now contained:", textEs: "1. Jacobo y los ancianos de Jerusalén le dijeron a Pablo que la iglesia de Jerusalén ahora contenía:", optionsEn: ["Myriads (tens of thousands) of Jewish believers, all zealous for the law", "A handful of believers", "Mostly Gentiles", "About one thousand believers"], optionsEs: ["Millares (decenas de miles) de creyentes judíos, todos celosos por la ley", "Un puñado de creyentes", "Mayormente gentiles", "Cerca de mil creyentes"], correct: 0 },
+    { textEn: "2. James proposed that Paul demonstrate his Torah-faithfulness by:", textEs: "2. Jacobo propuso que Pablo demostrara su fidelidad a la Torá:", optionsEn: ["Preaching against the law publicly", "Leaving the city immediately", "Joining four men under a Nazirite vow and paying the temple sacrifices", "Holding a public debate"], optionsEs: ["Predicando contra la ley públicamente", "Dejando la ciudad inmediatamente", "Uniéndose a cuatro hombres bajo voto nazareo y pagando los sacrificios del templo", "Sosteniendo un debate público"], correct: 2 },
+    { textEn: "3. The Jews from Asia accused Paul of bringing into the temple:", textEs: "3. Los judíos de Asia acusaron a Pablo de haber metido en el templo:", optionsEn: ["Roman soldiers", "Trophimus the Ephesian (a Gentile companion they had seen Paul with)", "Pagan idols", "Other apostles"], optionsEs: ["Soldados romanos", "A Trófimo el efesio (un compañero gentil que habían visto con Pablo)", "Ídolos paganos", "A otros apóstoles"], correct: 1 },
+    { textEn: "4. The Roman fortress adjacent to the temple where the cohort was garrisoned was named:", textEs: "4. La fortaleza romana adyacente al templo donde la cohorte estaba guarnecida se llamaba:", optionsEn: ["Caesarea Praetorium", "The Citadel of David", "The Antonia Fortress (named after Mark Antony)", "The Tower of Phasael"], optionsEs: ["Pretorio de Cesarea", "La Ciudadela de David", "La Fortaleza Antonia (nombrada por Marco Antonio)", "La Torre de Fasael"], correct: 2 },
+    { textEn: "5. The Roman commander who arrested Paul was named:", textEs: "5. El comandante romano que arrestó a Pablo se llamaba:", optionsEn: ["Claudius Lysias", "Cornelius", "Felix", "Festus"], optionsEs: ["Claudio Lisias", "Cornelio", "Félix", "Festo"], correct: 0 },
+    { textEn: "6. The mob's chant as Paul was carried up the barracks stairs was:", textEs: "6. El grito de la multitud mientras llevaban a Pablo cargado por las gradas del cuartel fue:", optionsEn: ["Crucify him", "Caesar is Lord", "Free Barabbas", "Away with him! (the same cry the Jerusalem mob had used about Christ)"], optionsEs: ["Crucifícale", "César es Señor", "Libera a Barrabás", "¡Quítale! (el mismo grito que la multitud de Jerusalén había usado sobre Cristo)"], correct: 3 },
+    { textEn: "7. Lysias initially mistook Paul for:", textEs: "7. Lisias inicialmente confundió a Pablo con:", optionsEn: ["A Greek philosopher", "A Roman senator in disguise", "A notorious Egyptian terrorist who had led 4,000 assassins out into the wilderness", "A Samaritan rebel"], optionsEs: ["Un filósofo griego", "Un senador romano disfrazado", "Un notorio terrorista egipcio que había llevado a 4,000 asesinos al desierto", "Un rebelde samaritano"], correct: 2 },
+    { textEn: "8. Paul addressed the Jerusalem mob from the barracks stairs in:", textEs: "8. Pablo se dirigió a la multitud de Jerusalén desde las gradas del cuartel en:", optionsEn: ["Latin", "Hebrew (more precisely, Aramaic — the everyday language of Judean Jews)", "Greek", "Arabic"], optionsEs: ["Latín", "Hebreo (más precisamente, arameo — el lenguaje cotidiano de los judíos de Judea)", "Griego", "Árabe"], correct: 1 },
+    { textEn: "9. In his speech Paul recounted his training in Jerusalem at the feet of:", textEs: "9. En su discurso Pablo relató su entrenamiento en Jerusalén a los pies de:", optionsEn: ["Hillel", "Annas", "Caiaphas", "Gamaliel"], optionsEs: ["Hilel", "Anás", "Caifás", "Gamaliel"], correct: 3 },
+    { textEn: "10. The crowd listened to Paul until he mentioned:", textEs: "10. La multitud escuchó a Pablo hasta que mencionó:", optionsEn: ["The temple", "His commission to the Gentiles", "His Roman citizenship", "Caesar"], optionsEs: ["El templo", "Su comisión a los gentiles", "Su ciudadanía romana", "A César"], correct: 1 },
+    { textEn: "11. Paul stopped a Roman scourging by asking:", textEs: "11. Pablo detuvo una flagelación romana preguntando:", optionsEn: ["Will the high priest hear me?", "Where is the governor?", "Is it lawful for you to scourge a man who is a Roman, and uncondemned?", "Have I broken the Sabbath?"], optionsEs: ["¿Me oirá el sumo sacerdote?", "¿Dónde está el gobernador?", "¿Os es lícito azotar a un hombre romano sin haber sido condenado?", "¿He quebrado el día de reposo?"], correct: 2 },
+    { textEn: "12. The difference between Lysias's citizenship and Paul's was that:", textEs: "12. La diferencia entre la ciudadanía de Lisias y la de Pablo era que:", optionsEn: ["Lysias was Greek and Paul was Roman", "Lysias was an officer and Paul a soldier", "Lysias was a freedman and Paul was nobility", "Lysias had purchased his citizenship with a large sum; Paul had been born a citizen"], optionsEs: ["Lisias era griego y Pablo romano", "Lisias era oficial y Pablo soldado", "Lisias era liberto y Pablo nobleza", "Lisias había comprado su ciudadanía con grande suma; Pablo era ciudadano de nacimiento"], correct: 3 },
+    { textEn: "13. Paul opened his Sanhedrin defense by saying:", textEs: "13. Pablo abrió su defensa ante el Sanedrín diciendo:", optionsEn: ["I have lived in all good conscience before God until this day", "I am a Roman citizen", "Forgive me, brethren", "Bring forth witnesses"], optionsEs: ["Yo con toda buena conciencia he vivido delante de Dios hasta el día de hoy", "Soy ciudadano romano", "Perdónenme, hermanos", "Traigan testigos"], correct: 0 },
+    { textEn: "14. The high priest who ordered Paul struck on the mouth was:", textEs: "14. El sumo sacerdote que ordenó que golpearan a Pablo en la boca era:", optionsEn: ["Ananias", "Caiaphas", "Annas", "Sceva"], optionsEs: ["Ananías", "Caifás", "Anás", "Esceva"], correct: 0 },
+    { textEn: "15. Paul called the high priest a:", textEs: "15. Pablo llamó al sumo sacerdote:", optionsEn: ["False shepherd", "Whitewashed wall", "Son of perdition", "Hireling"], optionsEs: ["Falso pastor", "Pared blanqueada", "Hijo de perdición", "Asalariado"], correct: 1 },
+    { textEn: "16. Paul divided the Sanhedrin chamber by declaring himself a:", textEs: "16. Pablo dividió la cámara del Sanedrín declarándose:", optionsEn: ["Christian", "Roman", "Pharisee, the son of a Pharisee, judged for the hope of the resurrection", "Disciple of Gamaliel"], optionsEs: ["Cristiano", "Romano", "Fariseo, hijo de fariseo, juzgado por la esperanza de la resurrección", "Discípulo de Gamaliel"], correct: 2 },
+    { textEn: "17. The Lord appeared to Paul that night in the barracks and said:", textEs: "17. El Señor se apareció a Pablo aquella noche en el cuartel y dijo:", optionsEn: ["Return to Antioch", "Forgive Ananias", "Sail for Cyprus", "Be of good cheer; as you have testified for Me in Jerusalem, so you must bear witness at Rome"], optionsEs: ["Regresa a Antioquía", "Perdona a Ananías", "Navega a Chipre", "Ten ánimo; como has testificado de mí en Jerusalén, así debes testificar también en Roma"], correct: 3 },
+    { textEn: "18. The forty-man oath plot to kill Paul was foiled by:", textEs: "18. El complot del juramento de cuarenta hombres para matar a Pablo fue frustrado por:", optionsEn: ["A Roman spy", "Paul's nephew (his sister's son), who overheard the plot and reported it", "An angel", "James the Lord's brother"], optionsEs: ["Un espía romano", "El sobrino de Pablo (el hijo de su hermana), que oyó el complot y lo reportó", "Un ángel", "Jacobo el hermano del Señor"], correct: 1 },
+    { textEn: "19. Lysias's escort of Paul to Caesarea consisted of:", textEs: "19. La escolta de Lisias para llevar a Pablo a Cesarea consistía de:", optionsEn: ["Twelve soldiers", "A small civilian guard", "Only the centurion's bodyguard", "Two hundred soldiers, seventy horsemen, and two hundred spearmen (470 men)"], optionsEs: ["Doce soldados", "Una pequeña guardia civil", "Solo la guardia personal del centurión", "Doscientos soldados, setenta jinetes, y doscientos lanceros (470 hombres)"], correct: 3 },
+    { textEn: "20. Paul was delivered at Caesarea to:", textEs: "20. Pablo fue entregado en Cesarea a:", optionsEn: ["The governor Felix", "Pilate", "Festus", "King Herod Agrippa II"], optionsEs: ["El gobernador Félix", "Pilato", "Festo", "El rey Herodes Agripa II"], correct: 0 }
+];
+
+const kwQuestions = [
+    { textEn: "21. James proposed Paul demonstrate his Jewish faithfulness by paying for four men's Nazirite sacrifices. Discuss the wisdom and risks of this advice (Acts 21:17-26).", textEs: "21. Jacobo propuso que Pablo demostrara su fidelidad judía pagando los sacrificios nazareos de cuatro hombres. Discuta la sabiduría y los riesgos de este consejo (Hechos 21:17-26).", kwEn: ["james", "nazir", "compromis", "myriad", "diplomac", "vow", "advice", "risk"], kwEs: ["jacobo", "nazare", "transig", "millar", "diplomac", "voto", "consejo", "riesgo"], modelEn: "James's advice carried real wisdom and real risk: having Paul pay for four men's Nazirite vow sacrifices publicly demonstrated to a myriad of zealous Jewish believers that Paul still walked orderly, keeping the law, rather than teaching Jews to forsake Moses. The wisdom was diplomacy and compromise, meeting a legitimate concern with a legitimate cultural gesture rather than dismissing it; the risk was that this same public visibility in the temple is exactly what triggered the riot and arrest that followed, showing that even wise, well-intentioned advice can carry consequences no one fully controls.", modelEs: "El consejo de Jacobo llevaba sabidur\u00eda real y riesgo real: hacer que Pablo pagara los sacrificios del voto nazareo de cuatro hombres demostraba p\u00fablicamente a un millar de creyentes jud\u00edos celosos que Pablo todav\u00eda andaba ordenadamente, guardando la ley, en lugar de ense\u00f1ar a los jud\u00edos a abandonar a Mois\u00e9s. La sabidur\u00eda fue una forma de diplomacia y transigencia, atendiendo una preocupaci\u00f3n leg\u00edtima con un gesto cultural leg\u00edtimo en lugar de descartarla; el riesgo fue que esa misma visibilidad p\u00fablica en el templo fue exactamente lo que provoc\u00f3 el mot\u00edn y el arresto que siguieron, mostrando que hasta un consejo sabio y bien intencionado puede acarrear consecuencias que nadie controla del todo." },
+    { textEn: "22. Discuss the parallels between Paul's arrest in Jerusalem and Christ's last hours. Why does Luke embed these parallels into the narrative of Acts 21-26?", textEs: "22. Discuta los paralelos entre el arresto de Pablo en Jerusalén y las últimas horas de Cristo. ¿Por qué Lucas incrusta estos paralelos en la narración de Hechos 21-26?", kwEn: ["away", "him", "parallel", "christ", "trial", "discip", "luke", "embed"], kwEs: ["fuera", "él", "paralel", "cristo", "juicio", "discíp", "lucas", "inserta"], modelEn: "Luke draws deliberate parallels between Paul's arrest in Jerusalem and Christ's last hours: a mob seizes him and drags him away, false accusations are made, he stands trial before both religious and civil authorities, and his disciples fear for him just as the disciples once feared for Christ. Luke embeds these parallels into the narrative of Acts 21-26 because he wants readers to see that the disciple's path mirrors the Master's path \u2014 suffering unjustly for righteousness is not an accident that happens to some believers but the pattern Christ Himself walked and called His followers to expect.", modelEs: "Lucas traza paralelos deliberados entre el arresto de Pablo en Jerusal\u00e9n y las \u00faltimas horas de Cristo: una turba lo agarra a \u00e9l y lo arrastra fuera, se hacen falsas acusaciones, \u00e9l enfrenta juicio ante autoridades tanto religiosas como civiles, y sus disc\u00edpulos temen por \u00e9l tal como los disc\u00edpulos una vez temieron por Cristo. Lucas inserta estos paralelos en la narraci\u00f3n de Hechos 21-26 porque quiere que los lectores vean que el camino del disc\u00edpulo refleja el camino del Maestro \u2014 sufrir injustamente por causa de la justicia no es un accidente que le ocurre a algunos creyentes sino el patr\u00f3n que Cristo mismo recorri\u00f3 y llam\u00f3 a sus seguidores a esperar." },
+    { textEn: "23. Paul's Hebrew (Aramaic) speech on the barracks stairs (Acts 22) is a model of contextualized witness. Discuss how he identifies with his hearers before challenging them.", textEs: "23. El discurso de Pablo en hebreo (arameo) en las gradas del cuartel (Hechos 22) es un modelo de testimonio contextualizado. Discuta cómo se identifica con sus oyentes antes de retarlos.", kwEn: ["hebrew", "aramaic", "ident", "gamal", "damasc", "speak", "background", "stair"], kwEs: ["hebreo", "arame", "ident", "gamal", "damasc", "habl", "trasfondo", "grada"], modelEn: "Standing on the barracks stairs, Paul begins speaking in Hebrew, the Aramaic dialect the Jerusalem crowd knew best, immediately silencing their fury and signaling shared identity rather than foreign threat. He then identifies with his hearers' background before challenging them: he names his birthplace, his training under Gamaliel, and his zealous former life persecuting the Way, exactly like theirs, before recounting his Damascus road conversion. This is contextualized witness at its best \u2014 Paul builds a bridge of shared identity and background first, and only once he has genuinely been heard does he move to the truth that will offend.", modelEs: "De pie en las gradas del cuartel, Pablo comienza a hablar en hebreo, el dialecto arameo que la multitud de Jerusal\u00e9n conoc\u00eda mejor, silenciando de inmediato su furia y se\u00f1alando identidad compartida en lugar de amenaza extranjera. Luego se identifica con el trasfondo de sus oyentes antes de retarlos: nombra su lugar de nacimiento, su formaci\u00f3n bajo Gamaliel, y su antigua vida celosa persiguiendo el Camino, exactamente como la de ellos, antes de narrar su conversi\u00f3n en el camino a Damasco. Este es el testimonio contextualizado en su mejor forma \u2014 Pablo construye primero un puente de identidad y trasfondo compartidos, y solo una vez que verdaderamente ha sido escuchado pasa a la verdad que ofender\u00e1." },
+    { textEn: "24. The crowd listened to Paul until he mentioned the Gentiles. Discuss why ethnic and religious pride often shipwrecks the gospel and how to navigate it.", textEs: "24. La multitud escuchó a Pablo hasta que mencionó a los gentiles. Discuta por qué el orgullo étnico y religioso a menudo naufraga el evangelio y cómo navegarlo.", kwEn: ["gentil", "pride", "ethnic", "reject", "convers", "wreck", "audience", "boundar"], kwEs: ["gentil", "orgull", "étnic", "rechaz", "convers", "naufrag", "audien", "front"], modelEn: "The crowd listened attentively to Paul's conversion story until he quoted the Lord saying He would send him far away to the Gentiles \u2014 at that single word the audience erupted, tearing their clothes and demanding his death. Ethnic and religious pride so often wrecks and shipwrecks the gospel because it converts a message of grace into a competition over boundary lines, treating God's favor as a possession to be guarded from outsiders rather than a gift to be shared; a hearer who has followed along cheerfully will reject the same gospel the moment it threatens their sense of ethnic superiority. Navigating it requires the same patience Paul showed: build genuine common ground first, and expect the boundary-crossing implications of the gospel to be the hardest part for any proud audience to receive.", modelEs: "La multitud escuch\u00f3 atentamente la historia de conversi\u00f3n de Pablo hasta que cit\u00f3 al Se\u00f1or diciendo que lo enviar\u00eda lejos a los gentiles \u2014 ante esa sola palabra la audiencia estall\u00f3, rasgando sus vestidos y exigiendo su muerte. El orgullo \u00e9tnico y religioso tan a menudo naufraga el evangelio porque convierte un mensaje de gracia en una competencia por fronteras, tratando el favor de Dios como una posesi\u00f3n que hay que proteger de los de afuera en lugar de un regalo para compartir; un oyente que ha seguido con gusto rechazar\u00e1 el mismo evangelio en el momento en que amenace su sentido de superioridad \u00e9tnica. Navegarlo requiere la misma paciencia que mostr\u00f3 Pablo: construir primero un terreno com\u00fan gen\u00faino, y esperar que las implicaciones del evangelio que cruzan fronteras sean la parte m\u00e1s dif\u00edcil de recibir para cualquier audiencia orgullosa." },
+    { textEn: "25. Discuss Paul's strategic use of his Roman citizenship (Acts 22:25). When should Christians invoke legal protections, and when should they not?", textEs: "25. Discuta el uso estratégico que hace Pablo de su ciudadanía romana (Hechos 22:25). ¿Cuándo deben los cristianos invocar protecciones legales, y cuándo no?", kwEn: ["citizen", "right", "scourg", "legal", "wisdom", "roman", "law", "use"], kwEs: ["ciudad", "derech", "azot", "legal", "sabid", "romano", "ley", "usar"], modelEn: "Paul strategically invoked his Roman citizenship right at the moment the soldiers stretched him out to be scourged, asking whether it was lawful to whip a Roman citizen uncondemned \u2014 timing that immediately stopped the illegal punishment and forced the centurion to answer to Roman law. This shows wisdom in the use of legal protections: Christians should feel free to use legitimate legal rights to prevent injustice or protect their ability to keep serving, as Paul did here, but should not use those same rights merely to avoid suffering for the gospel itself, since elsewhere Paul willingly embraced beatings and imprisonment when his citizenship right was not the issue at stake.", modelEs: "Pablo invoc\u00f3 estrat\u00e9gicamente su ciudadan\u00eda romana justo en el momento en que los soldados lo estiraban para azotarlo, preguntando si era l\u00edcito azotar a un ciudadano romano sin condena \u2014 un momento que detuvo de inmediato el castigo ilegal y oblig\u00f3 al centuri\u00f3n a responder ante la ley romana. Esto muestra sabidur\u00eda en el uso de las protecciones legales: los cristianos deben sentirse libres de usar derechos legales leg\u00edtimos para prevenir la injusticia o proteger su capacidad de seguir sirviendo, como hizo Pablo aqu\u00ed, pero no deben usar esos mismos derechos meramente para evitar sufrir por causa del evangelio, ya que en otras ocasiones Pablo abraz\u00f3 voluntariamente los azotes y la prisi\u00f3n cuando su derecho de ciudadan\u00eda no era lo que estaba en juego." },
+    { textEn: "26. Paul rebuked the high priest Ananias as a 'whitewashed wall' but immediately corrected himself when told who he was (Acts 23:3-5). What does this teach about pastoral self-correction?", textEs: "26. Pablo reprendió al sumo sacerdote Ananías como 'pared blanqueada' pero se corrigió inmediatamente cuando le dijeron quién era (Hechos 23:3-5). ¿Qué enseña esto sobre la auto-corrección pastoral?", kwEn: ["whitewash", "high", "priest", "rebuke", "correct", "humil", "self", "wall"], kwEs: ["blanq", "sumo", "sacerdote", "reprend", "correg", "humild", "mismo", "pared"], modelEn: "Paul rebuked Ananias as a 'whitewashed wall,' not knowing he was speaking to the high priest, but the instant bystanders told him whom he had addressed, Paul immediately corrected himself, acknowledging he should not speak evil of a ruler of his people. This teaches humility in pastoral self-correction: even a passionate, righteous rebuke can be delivered in ignorance of the full situation, and a mature leader does not defend his own words out of pride once he learns he was wrong, but corrects himself quickly and publicly, showing that submission to proper authority matters more than saving face.", modelEs: "Pablo reprendi\u00f3 a Anan\u00edas llam\u00e1ndolo 'pared blanqueada', sin saber que hablaba con el sumo sacerdote, pero en cuanto los que estaban cerca le dijeron a qui\u00e9n hab\u00eda hablado, Pablo decide corregirse a s\u00ed mismo, r\u00e1pida y p\u00fablicamente, reconociendo que no deb\u00eda hablar mal de un gobernante de su pueblo. Esto ense\u00f1a humildad en la auto-correcci\u00f3n pastoral: incluso una reprensi\u00f3n apasionada y justa puede darse en ignorancia de la situaci\u00f3n completa, y un l\u00edder maduro no defiende sus propias palabras por orgullo una vez que sabe que se equivoc\u00f3, sino que se corrige, mostrando que la sumisi\u00f3n a la autoridad debida importa m\u00e1s que salvar las apariencias." },
+    { textEn: "27. Discuss Paul's strategic declaration before the Sanhedrin: 'I am a Pharisee... judged for the resurrection' (Acts 23:6). Was this manipulation, witness, or both?", textEs: "27. Discuta la declaración estratégica de Pablo ante el Sanedrín: 'Soy fariseo... juzgado por la resurrección' (Hechos 23:6). ¿Fue manipulación, testimonio, o ambos?", kwEn: ["pharis", "resurrec", "sanhe", "strateg", "divis", "manipul", "witness", "split"], kwEs: ["fariseo", "resurrec", "concili", "estrate", "divis", "manipul", "testi", "divid"], modelEn: "Paul's declaration 'I am a Pharisee... judged for the resurrection' before the Sanhedrin was strategic, since he knew Pharisees and Sadducees disagreed sharply about the resurrection, and the statement produced an immediate division that split the council and stopped them from uniting against him. Whether this was manipulation or witness depends on the motive and the truth of the claim: since Paul genuinely was a Pharisee on trial precisely because of his hope in the resurrection of the dead, the statement was fully true testimony that also happened to be strategically timed, showing that faithful witness and wise strategy are not mutually exclusive when the words spoken remain honest.", modelEs: "La declaraci\u00f3n de Pablo 'Soy fariseo... juzgado por la resurrecci\u00f3n' ante el Sanedr\u00edn fue estrat\u00e9gica, ya que sab\u00eda que fariseos y saduceos discrepaban fuertemente sobre la resurrecci\u00f3n, y la afirmaci\u00f3n produjo una divisi\u00f3n inmediata que dividi\u00f3 al concilio y les impidi\u00f3 unirse en su contra. Si fue manipulaci\u00f3n o testimonio depende del motivo y de la verdad de la afirmaci\u00f3n: como Pablo verdaderamente era fariseo, juzgado precisamente por su esperanza en la resurrecci\u00f3n de los muertos, la declaraci\u00f3n fue testimonio plenamente verdadero que adem\u00e1s result\u00f3 estar estrat\u00e9gicamente calculado, mostrando que el testimonio fiel y la estrategia sabia no son mutuamente excluyentes cuando las palabras dichas siguen siendo honestas." },
+    { textEn: "28. Acts 23:11: 'Be of good cheer, Paul; as you have testified for Me in Jerusalem, so you must bear witness at Rome.' Discuss this verse as a theological summary of providence in suffering.", textEs: "28. Hechos 23:11: 'Pablo, ten ánimo; como has testificado de mí en Jerusalén, así debes testificar también en Roma.' Discuta este versículo como resumen teológico de la providencia en el sufrimiento.", kwEn: ["good", "cheer", "rome", "provid", "witness", "chain", "lord", "testif"], kwEs: ["ánimo", "roma", "provid", "testi", "cadena", "señor", "testific", "alient"], modelEn: "The Lord's words 'be of good cheer, Paul... you must bear witness at Rome' come the night after Paul narrowly escaped a mob and a forty-man murder plot, showing that providence does not mean the absence of danger but the Lord's sovereign guarantee that Paul would testify and his witness would reach its appointed destination no matter what chains or conspiracies stood in the way. This verse functions as a theological summary of providence in suffering: the Lord does not promise Paul comfort but does promise purpose, assuring him that the same faithfulness that carried his testimony through Jerusalem would carry it all the way to Rome, so present suffering is never outside the Lord's larger plan.", modelEs: "Las palabras del Se\u00f1or 'ten \u00e1nimo, Pablo... debes testificar tambi\u00e9n en Roma' llegan la noche despu\u00e9s de que Pablo escapara por poco de una turba y un complot de asesinato de cuarenta hombres, mostrando que la providencia no significa ausencia de peligro sino la garant\u00eda soberana del Se\u00f1or de que el testimonio de Pablo llegar\u00eda a su destino se\u00f1alado sin importar qu\u00e9 cadenas o conspiraciones se interpusieran. Este vers\u00edculo funciona como un resumen teol\u00f3gico de la providencia en el sufrimiento: el Se\u00f1or no le promete a Pablo comodidad pero s\u00ed le promete prop\u00f3sito, d\u00e1ndole aliento de que la misma fidelidad que llev\u00f3 su testimonio por Jerusal\u00e9n lo llevar\u00eda hasta Roma, de modo que el sufrimiento presente nunca est\u00e1 fuera del plan mayor del Se\u00f1or." },
+    { textEn: "29. The forty-man oath plot was foiled by Paul's unnamed nephew (Acts 23:16). Discuss what this story teaches about the Lord's use of the overlooked and the young.", textEs: "29. El complot del juramento de cuarenta hombres fue frustrado por el sobrino sin nombre de Pablo (Hechos 23:16). Discuta lo que esta historia enseña sobre el uso que hace el Señor de los pasados por alto y los jóvenes.", kwEn: ["nephew", "young", "unnamed", "provid", "deliver", "small", "lord", "use"], kwEs: ["sobrino", "joven", "nombre", "provid", "libera", "pequeñ", "señor", "usar"], modelEn: "The forty-man oath plot to assassinate Paul was foiled not by an angel or a dramatic miracle but by Paul's unnamed young nephew, who overheard the conspiracy and delivered the warning to the commander \u2014 Luke never even gives the young man's name, letting his obscurity speak for itself. This teaches that the Lord regularly uses the small, the overlooked, and the young to accomplish His deliverance; providence does not always announce itself through famous instruments, and a believer should never assume that being unnoticed or unnamed means being of no use to the Lord, since the most obscure person in a room can be exactly the one God has positioned to save the day.", modelEs: "El complot del juramento de cuarenta hombres para asesinar a Pablo fue frustrado no por un \u00e1ngel ni por un milagro dram\u00e1tico sino por el sobrino joven y sin nombre de Pablo, quien escuch\u00f3 la conspiraci\u00f3n y llev\u00f3 la advertencia al comandante \u2014 Lucas ni siquiera da el nombre del joven, dejando que su anonimato hable por s\u00ed mismo. Esto ense\u00f1a que el Se\u00f1or suele usar a los peque\u00f1os, a los pasados por alto, y a los j\u00f3venes para lograr su liberaci\u00f3n; la providencia no siempre se anuncia mediante instrumentos famosos, y un creyente nunca debe suponer que ser desapercibido o sin nombre significa ser in\u00fatil para el Se\u00f1or, ya que la persona m\u00e1s ordinaria de un cuarto puede ser exactamente la que Dios ha posicionado para salvar el d\u00eda." },
+    { textEn: "30. Synthesize Acts 21:17–23:35 as the beginning of Paul's journey to Rome. How does the Lord weave hostile politics, mob violence, and bureaucratic protection into one missionary itinerary?", textEs: "30. Sintetice Hechos 21:17–23:35 como el comienzo del viaje de Pablo a Roma. ¿Cómo entreteje el Señor la política hostil, la violencia de la turba y la protección burocrática en un solo itinerario misionero?", kwEn: ["jerusal", "rome", "provid", "chain", "miss", "politic", "mob", "protect"], kwEs: ["jerusal", "roma", "provid", "cadena", "misión", "polít", "turba", "protec"], modelEn: "Acts 21:17\u201323:35 marks the true beginning of Paul's journey to Rome: what starts as a temple riot and near-lynching by a mob in Jerusalem becomes, through hostile Sanhedrin politics, a providentially engineered path where Roman bureaucratic protection \u2014 a tribune, a night escort, a governor's court \u2014 keeps Paul alive precisely so he can eventually appeal to Caesar and reach Rome in chains. The Lord weaves mob violence, political maneuvering, and imperial legal protection into a single missionary itinerary, showing that providence does not need friendly circumstances to accomplish its purpose; it can use a riot, a conspiracy, and a courtroom as equally effective vehicles carrying the same missionary forward toward the same divinely appointed city.", modelEs: "Hechos 21:17\u201323:35 marca el verdadero comienzo del viaje de Pablo a Roma: lo que empieza como un mot\u00edn en el templo y un casi linchamiento por una turba en Jerusal\u00e9n se convierte, a trav\u00e9s de la pol\u00edtica hostil del Sanedr\u00edn, en un camino dise\u00f1ado providencialmente donde la protecci\u00f3n burocr\u00e1tica romana \u2014 un tribuno, una escolta nocturna, la corte de un gobernador \u2014 mantiene a Pablo con vida precisamente para que finalmente pueda apelar al C\u00e9sar y llegar a Roma en cadenas, encadenado. El Se\u00f1or entreteje la violencia de la turba, la maniobra pol\u00edtica y la protecci\u00f3n legal imperial en una sola misi\u00f3n, un solo itinerario misionero, mostrando que la providencia no necesita circunstancias amigables para cumplir su prop\u00f3sito; puede usar un mot\u00edn, una conspiraci\u00f3n y una sala de tribunal como veh\u00edculos igualmente eficaces que llevan al mismo misionero hacia la misma ciudad divinamente se\u00f1alada." }
+];
+
+// === Language toggle (3-button group) ===
+const langButtons = document.querySelectorAll('.lang-toggle-group button');
+function setLang(lang) {
+  document.body.classList.remove('lang-en','lang-es','lang-both');
+  document.body.classList.add('lang-' + lang);
+  langButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-lang') === lang));
+}
+langButtons.forEach(btn => btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang'))));
+
+// === Student + Track ===
+function readStudent() {
+  try { return JSON.parse(lsGet('cts_student') || 'null'); } catch(e) { return null; }
+}
+function readTrack() {
+  const t = lsGet('cts_track');
+  if (t === 'cert' || t === 'mdiv' || t === 'thm') return t;
+  const st = readStudent();
+  if (st && st.track) return st.track;
+  return 'cert';
+}
+function isMdiv() { const t = readTrack(); return t === 'mdiv' || t === 'thm'; }
+
+// === Greeting + track badge ===
+function applyStudentUI() {
+  const student = readStudent();
+  const isEs = document.body.classList.contains('lang-es');
+  const greetEl = document.getElementById('studentGreeting');
+  const warn = document.getElementById('regWarn');
+  const slot = document.getElementById('trackBadgeSlot');
+  if (student && student.name) {
+    greetEl.innerHTML = '👋 ' + student.name;
+    if (warn) warn.classList.add('hidden');
+    const track = readTrack();
+    const label = track === 'thm' ? 'Th.M.' : (track === 'mdiv' ? 'M.Div' : (isEs ? 'Certificado' : 'Certificate'));
+    if (slot) slot.innerHTML = '<span class="track-badge">' + label + '</span>';
+  } else {
+    greetEl.innerHTML = '<span style="color:#5b3a1f;">' + (isEs ? 'Bienvenido al Intensivo de Hechos' : 'Welcome to the Acts Intensive') + '</span>';
+    if (warn) warn.classList.remove('hidden');
+    if (slot) slot.innerHTML = '';
+  }
+}
+
+// === Registration modal (U1 only) ===
+
+function showRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.remove('hidden');
+}
+function hideRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.add('hidden');
+}
+const regModal = document.getElementById('regModal');
+const openBtn = document.getElementById('openRegBtn');
+const openBtn2 = document.getElementById('openRegBtn2');
+const saveBtn = document.getElementById('regSaveBtn');
+if (openBtn) openBtn.addEventListener('click', showRegModal);
+if (openBtn2) openBtn2.addEventListener('click', showRegModal);
+if (saveBtn) saveBtn.addEventListener('click', () => {
+  const name = (document.getElementById('regName').value || '').trim();
+  const email = (document.getElementById('regEmail').value || '').trim();
+  const track = (document.querySelector('input[name="regTrack"]:checked') || {}).value || 'cert';
+  const isEs = document.body.classList.contains('lang-es');
+  if (!name) {
+    alert(isEs ? 'Por favor ingrese su nombre completo.' : 'Please enter your full name.');
+    return;
+  }
+  const rec = { name: name, email: email, track: track };
+  try {
+    lsSet('cts_student', JSON.stringify(rec));
+    lsSet('cts_track', track);
+  } catch(e) {}
+  hideRegModal();
+  applyStudentUI();
+  applyExamState();
+});
+// Auto-open modal on U1 if no cts_student present
+if (CURRENT_UNIT === 1 && !readStudent()) {
+  showRegModal();
+}
+
+
+// === Progress grid ===
+let progress = {};
+try { progress = JSON.parse(lsGet('cts_acts_progress')) || {}; } catch(e) { progress = {}; }
+function updateProgressGrid() {
+  const grid = document.getElementById('progressGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 1; i <= TOTAL_UNITS; i++) {
+    let cls = '';
+    if (progress['unit' + i]) cls = 'completed';
+    if (i === CURRENT_UNIT) cls += ' active';
+    grid.innerHTML += '<a href="CTSActsUnit' + i + '.html" class="' + cls + '">' + i + '</a>';
+  }
+}
+updateProgressGrid();
+document.getElementById('prevUnitBtn').onclick = () => {};
+document.getElementById('nextUnitBtn').onclick = () => { window.location.href = NEXT_URL; };
+
+// === Per-unit state keys ===
+const MC_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_passed';
+const SA_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_passed';
+const MC_SCORE_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_score';
+const LOCK_MC_KEY = 'cts_acts_u' + CURRENT_UNIT + '_lockout';
+const LOCK_SA_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_lockout';
+
+function mcPassed() { return lsGet(MC_PASSED_KEY) === '1'; }
+function saPassed() { return lsGet(SA_PASSED_KEY) === '1'; }
+function activeLock() {
+  const now = Date.now();
+  const mc = parseInt(lsGet(LOCK_MC_KEY) || '0', 10);
+  const sa = parseInt(lsGet(LOCK_SA_KEY) || '0', 10);
+  if (mcPassed()) { if (now < sa) return { until: sa, scope: 'sa' }; }
+  else { if (now < mc) return { until: mc, scope: 'mc' }; }
+  return null;
+}
+
+// === Render MC ===
+const mcContainer = document.getElementById('mcContainer');
+mcQuestions.forEach((q, idx) => {
+    /* CTS answer-shuffle (anti-gaming): randomize option order on each render */
+    (function(){var _o=q.optionsEn,_s=q.optionsEs,_n=_o.length,_p=[],_k,_i,_j,_t;for(_k=0;_k<_n;_k++){_p.push(_k);}for(_i=_n-1;_i>0;_i--){_j=Math.floor(Math.random()*(_i+1));_t=_p[_i];_p[_i]=_p[_j];_p[_j]=_t;}q.optionsEn=_p.map(function(x){return _o[x];});q.optionsEs=_p.map(function(x){return _s[x];});q.correct=_p.indexOf(q.correct);})();
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'mcq' + (idx + 1);
+  let h = '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>';
+  for (let i = 0; i < q.optionsEn.length; i++) {
+    const letter = 'ABCDEFGHIJ'[i];
+    h += '<button class="option" data-mc="' + idx + '" data-opt="' + i + '" type="button">' +
+         '<strong>' + letter + '.</strong> ' +
+         '<span class="lang-en">' + q.optionsEn[i] + '</span><span class="lang-es">' + q.optionsEs[i] + '</span>' +
+         '</button>';
+  }
+  mcContainer.appendChild(qDiv);
+  qDiv.innerHTML = h;
+  // Click handler on each option
+  qDiv.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (mcPassed()) return;
+      if (qDiv.dataset.answered !== undefined && qDiv.dataset.answered !== '') return;
+      const isEs = document.body.classList.contains('lang-es');
+      const chosen = parseInt(btn.getAttribute('data-opt'), 10);
+      const correct = q.correct;
+      qDiv.dataset.answered = String(chosen);
+      qDiv.querySelectorAll('.option').forEach(b => {
+        const oi = parseInt(b.getAttribute('data-opt'), 10);
+        b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+        if (oi === correct) b.classList.add('correct');
+        else if (oi === chosen) b.classList.add('wrong');
+      });
+      const oldfb = qDiv.querySelector('.feedback-text'); if (oldfb) oldfb.remove();
+      const fb = document.createElement('div');
+      if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+      else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+      qDiv.appendChild(fb);
+    });
+  });
+});
+
+// === Smart keyword matcher (word-boundary, like the other CTS courses) ===
+function kwHit(answer, kw){
+  if(!kw) return false;
+  var a=(answer||'').toLowerCase();
+  var k=String(kw).toLowerCase().trim();
+  if(!k) return false;
+  var esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var L='0-9a-zA-Z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1';
+  var re = k.length<=3 ? new RegExp('(?:^|[^'+L+'])'+esc+'(?!['+L+'])') : new RegExp('(?:^|[^'+L+'])'+esc);
+  return re.test(a);
+}
+function saHits(idx){
+  var ta=document.querySelector('.kw-answer[data-sa="'+idx+'"]');
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var kws=isEs?(q.kwEs||[]):(q.kwEn||[]);
+  var ans=(ta&&ta.value)||'';
+  var n=0; kws.forEach(function(k){ if(kwHit(ans,k)) n++; });
+  return n;
+}
+
+function revealSAModel(idx){
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var box=document.getElementById('saModel'+idx);
+  if(!box) return;
+  var head=isEs?'Respuesta modelo \u2014 est\u00fadiela':'Model answer \u2014 study this';
+  box.innerHTML='<strong>'+head+':</strong><br>'+(isEs?(q.modelEs||''):(q.modelEn||''));
+  box.style.display='block';
+}
+
+// === Render SA ===
+const kwContainer = document.getElementById('kwContainer');
+kwQuestions.forEach((q, idx) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'saq' + (idx + 1);
+  qDiv.innerHTML =
+    '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>' +
+    '<textarea class="kw-answer" data-sa="' + idx + '" placeholder=""></textarea>' +
+    '<button class="small check-kw-btn" type="button"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>' +
+    '<div class="feedback-text" id="saFb' + idx + '" style="display:none"></div>' +
+    '<div class="sa-model" id="saModel' + idx + '" style="display:none"></div>';
+  kwContainer.appendChild(qDiv);
+  const btn = qDiv.querySelector('.check-kw-btn');
+  const ta = qDiv.querySelector('.kw-answer');
+  btn.addEventListener('click', () => {
+    const isEs = document.body.classList.contains('lang-es');
+    const fb = document.getElementById('saFb' + idx);
+    const ans = (ta.value || '').trim();
+    if(!ans){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba su respuesta primero, luego verifique.' : 'Write your answer first, then check.';
+      var mb=document.getElementById('saModel'+idx); if(mb) mb.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    if(ans.length < 100){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.';
+      var mb2=document.getElementById('saModel'+idx); if(mb2) mb2.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    const hits = saHits(idx);
+    const ok = hits >= 3;
+    qDiv.dataset.answered = ok ? '1' : '0';
+    fb.className = 'feedback-text ' + (ok ? 'correct' : 'incorrect');
+    fb.style.display = 'block';
+    fb.textContent = ok
+      ? (isEs ? ('\u2713 Suficientes palabras clave (' + hits + ').') : ('\u2713 Sufficient keywords (' + hits + ').'))
+      : (isEs ? ('\u2717 A\u00fan no acreditada. Encontr\u00f3 ' + hits + ' de 3.') : ('\u2717 Not yet credited. Found ' + hits + ' of 3.'));
+    revealSAModel(idx);
+  });
+});
+
+// === UI state machine ===
+const mcSection = document.getElementById('mcSection');
+const saSection = document.getElementById('saSection');
+const statusEl = document.getElementById('examStatus');
+const submitBtn = document.getElementById('submitExamBtn');
+const resetBtn = document.getElementById('resetExamBtn');
+const resultEl = document.getElementById('examResult');
+
+function setStatus(cls, en, es) {
+  statusEl.className = 'exam-status ' + cls;
+  statusEl.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function clearStatus() { statusEl.className = 'exam-status hidden'; statusEl.innerHTML = ''; }
+function lockMcAsReview() {
+  document.querySelectorAll('#mcContainer .question').forEach(q => {
+    q.classList.add('review-locked');
+    q.querySelectorAll('.option').forEach(b => { b.disabled = true; });
+  });
+}
+
+function revealMC() {
+  const isEs = document.body.classList.contains('lang-es');
+  for (let i = 0; i < mcQuestions.length; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (!qd) continue;
+    const correct = mcQuestions[i].correct;
+    const chosen = (qd.dataset.answered !== undefined && qd.dataset.answered !== '') ? parseInt(qd.dataset.answered, 10) : -1;
+    qd.querySelectorAll('.option').forEach(b => {
+      const oi = parseInt(b.getAttribute('data-opt'), 10);
+      b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+      if (oi === correct) b.classList.add('correct');
+      else if (oi === chosen) b.classList.add('wrong');
+    });
+    let fb = qd.querySelector('.feedback-text');
+    if (!fb) { fb = document.createElement('div'); qd.appendChild(fb); }
+    if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+    else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+  }
+}
+
+
+function applyExamState() {
+  const isEs = document.body.classList.contains('lang-es');
+  // SA section is ALWAYS visible
+  saSection.style.display = '';
+  const badgeEn = document.getElementById('saBadgeEn');
+  const badgeEs = document.getElementById('saBadgeEs');
+  const noteEn = document.getElementById('saNoteEn');
+  const noteEs = document.getElementById('saNoteEs');
+  if (isMdiv()) {
+    badgeEn.textContent = 'Required for M.Div';
+    badgeEs.textContent = 'Requerido para M.Div';
+    noteEn.textContent = 'These 10 short-answer questions are required to complete Unit ' + CURRENT_UNIT + ' on the M.Div track. You must pass at 9 of 10.';
+    noteEs.textContent = 'Estas 10 preguntas de respuesta corta son requeridas para completar la Unidad ' + CURRENT_UNIT + ' en la vía M.Div. Debe aprobar con 9 de 10.';
+  } else {
+    badgeEn.textContent = 'Self-study — not graded for Certificate';
+    badgeEs.textContent = 'Auto-estudio — no cuenta para Certificado';
+    noteEn.textContent = 'These are the M.Div-level questions. Certificate students are welcome to attempt them for self-check; your answers will not affect your Unit ' + CURRENT_UNIT + ' pass status.';
+    noteEs.textContent = 'Estas son las preguntas de nivel M.Div. Los estudiantes de Certificado pueden intentarlas para auto-evaluarse; sus respuestas no afectarán el estado de aprobación de la Unidad ' + CURRENT_UNIT + '.';
+  }
+  const lock = activeLock();
+  if (lock) {
+    const minsLeft = Math.ceil((lock.until - Date.now()) / 60000);
+    submitBtn.disabled = true;
+    if (lock.scope === 'mc') {
+      setStatus('locked',
+        'Exam locked. Try again in ' + minsLeft + ' minute(s). The full exam will reset.',
+        'Examen bloqueado. Intente de nuevo en ' + minsLeft + ' minuto(s). El examen completo se reiniciará.');
+    } else {
+      setStatus('locked',
+        'Short-answer section locked. Try again in ' + minsLeft + ' minute(s). Multiple-choice pass is preserved.',
+        'Sección de respuesta corta bloqueada. Intente de nuevo en ' + minsLeft + ' minuto(s). Su aprobación de opción múltiple se conserva.');
+      lockMcAsReview();
+    }
+    setTimeout(applyExamState, 30000);
+    return;
+  }
+  submitBtn.disabled = false;
+  if (mcPassed()) {
+    lockMcAsReview();
+    if (isMdiv() && !saPassed()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed (saved). Complete the 10 short-answer questions to finish Unit ' + CURRENT_UNIT + '.',
+        'Opción múltiple aprobada (guardada). Complete las 10 preguntas de respuesta corta para terminar la Unidad ' + CURRENT_UNIT + '.');
+    } else if (!isMdiv()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed. Unit ' + CURRENT_UNIT + ' complete for Certificate track.',
+        'Opción múltiple aprobada. Unidad ' + CURRENT_UNIT + ' completa para la vía Certificado.');
+    } else {
+      clearStatus();
+    }
+  } else {
+    clearStatus();
+  }
+}
+
+submitBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const lock = activeLock();
+  if (lock) { applyExamState(); return; }
+
+  // Score MC
+  let mc = 0;
+  for (let i = 0; i < 20; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (qd && qd.dataset.answered !== undefined && parseInt(qd.dataset.answered, 10) === mcQuestions[i].correct) mc++;
+  }
+  if (mcPassed()) {
+    mc = parseInt(lsGet(MC_SCORE_KEY) || '18', 10);
+  }
+  const mcPass = mc >= 18;
+  revealMC();
+
+  // Score SA (recompute with the smart matcher)
+  let sa = 0;
+  for (let i = 0; i < 10; i++) {
+    if (saHits(i) >= 3) sa++;
+  }
+  const saPass = sa >= 9;
+
+  if (!isMdiv()) {
+    // Certificate track — only MC matters
+    if (mcPass) {
+      lsSet(MC_PASSED_KEY, '1');
+      lsSet(MC_SCORE_KEY, String(mc));
+      progress['unit' + CURRENT_UNIT] = true;
+      lsSet('cts_acts_progress', JSON.stringify(progress));
+      resultEl.style.color = '#1f6b3b';
+      resultEl.textContent = (isEs
+        ? '¡Aprobado! OM ' + mc + '/20. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+        : 'Passed! MC ' + mc + '/20. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+    } else {
+      lsSet(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+    }
+    return;
+  }
+
+  // M.Div track
+  if (!mcPassed()) {
+    if (!mcPass) {
+      lsSet(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min. Examen completo se reiniciará.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min. Full exam will reset.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+      return;
+    }
+    lsSet(MC_PASSED_KEY, '1');
+    lsSet(MC_SCORE_KEY, String(mc));
+  }
+  if (saPass) {
+    lsSet(SA_PASSED_KEY, '1');
+    progress['unit' + CURRENT_UNIT] = true;
+    lsSet('cts_acts_progress', JSON.stringify(progress));
+    const finalMc = parseInt(lsGet(MC_SCORE_KEY) || '18', 10);
+    resultEl.style.color = '#1f6b3b';
+    resultEl.textContent = (isEs
+      ? '¡Aprobado! OM ' + finalMc + '/20, RC ' + sa + '/10. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+      : 'Passed! MC ' + finalMc + '/20, SA ' + sa + '/10. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+  } else {
+    lsSet(LOCK_SA_KEY, String(Date.now() + 15 * 60 * 1000));
+    resultEl.style.color = '#8a1f1f';
+    resultEl.textContent = (isEs
+      ? 'RC ' + sa + '/10. Necesita 9. Sección RC bloqueada 15 min. OM permanece aprobada.'
+      : 'SA ' + sa + '/10. Need 9. SA section locked 15 min. MC pass preserved.');
+    submitBtn.disabled = true;
+    setTimeout(applyExamState, 30000);
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar la Unidad ' + CURRENT_UNIT + '? Esto borrará sus respuestas y el estado de aprobación de OM/RC para esta unidad. (Esto no borra su registro.)'
+    : 'Reset Unit ' + CURRENT_UNIT + '? This will clear your answers and MC/SA pass state for this unit. (Does not clear your registration.)';
+  if (!window.confirm(msg)) return;
+  [MC_PASSED_KEY, SA_PASSED_KEY, LOCK_MC_KEY, LOCK_SA_KEY, MC_SCORE_KEY].forEach(k => lsDel(k));
+  if (progress['unit' + CURRENT_UNIT]) {
+    delete progress['unit' + CURRENT_UNIT];
+    lsSet('cts_acts_progress', JSON.stringify(progress));
+  }
+  window.location.reload();
+});
+
+// Initial render
+applyStudentUI();
+langButtons.forEach(b => b.addEventListener('click', applyStudentUI));
+applyExamState();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSActsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

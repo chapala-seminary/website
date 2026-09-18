@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapala Theological Seminary — Counseling Situations · Unit 7: Grief &amp; Bereavement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f7f3ea;--ink:#23201b;--teal:#1f5e5b;--teal-d:#16403e;--gold:#c2922f;--crimson:#9b3127;--line:#e0d7c4;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Crimson Pro",Georgia,serif;font-size:1.12rem;line-height:1.7;}
+.seminary-header{background:var(--teal-d);color:#f7f3ea;padding:1.6rem 1.2rem 1.2rem;text-align:center;}
+.seminary-header h1{font-family:"Cormorant Garamond",serif;font-weight:700;margin:0;font-size:1.9rem;line-height:1.2;}
+.seminary-header h1 small{display:block;font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;}
+.course-title{margin:.5rem 0 0;font-style:italic;color:#e9e0cf;font-size:1.05rem;}
+.instructors{background:var(--teal);color:#eafaf7;text-align:center;padding:.5rem;font-size:.95rem;}
+.registration-bar{background:#efe7d6;border-bottom:1px solid var(--line);padding:.7rem 1rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center;}
+.registration-fields{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;}
+.registration-bar input,.registration-bar select{font-family:inherit;font-size:.95rem;padding:.4rem .5rem;border:1px solid #cdbf9f;border-radius:5px;background:#fff;}
+.registration-bar button,button{font-family:inherit;cursor:pointer;border:none;border-radius:6px;background:var(--teal);color:#fff;padding:.5rem .9rem;font-size:.95rem;}
+.lang-toggle{background:var(--gold);color:var(--ink);font-weight:600;}
+.registered-info{font-size:.9rem;font-style:italic;color:var(--teal-d);}
+.container{max-width:820px;margin:0 auto;padding:1.4rem 1.2rem 4rem;}
+.translation-note{background:#fbf6e9;border:1px solid var(--line);border-left:4px solid var(--gold);padding:.7rem .9rem;font-size:.9rem;border-radius:6px;margin-bottom:1.3rem;}
+.progress-section{background:#fff;border:1px solid var(--line);border-radius:8px;padding:1rem;margin-bottom:1.4rem;}
+.progress-section h3{margin:.1rem 0 .6rem;font-family:"Cormorant Garamond",serif;}
+.progress-bar{background:#e6ddca;border-radius:20px;height:24px;overflow:hidden;}
+.progress-bar-fill{background:linear-gradient(90deg,var(--teal),var(--gold));height:100%;width:0;color:#fff;font-size:.8rem;display:flex;align-items:center;justify-content:center;transition:width .4s;}
+.course-complete{display:none;margin-top:.7rem;padding:.6rem;background:#eafaf0;border:1px solid #9cc7a8;border-radius:6px;color:var(--teal-d);font-weight:600;text-align:center;}
+.unit-nav{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.4rem;}
+.unit-nav a{font-size:.82rem;text-decoration:none;padding:.3rem .55rem;border:1px solid var(--line);border-radius:5px;color:var(--teal-d);background:#fff;}
+.unit-nav a.current{background:var(--teal);color:#fff;border-color:var(--teal);}
+.unit-nav a.done{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+.teaching-block{background:#fff;border:1px solid var(--line);border-radius:8px;padding:1.3rem 1.4rem;}
+.unit-meta{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+.teaching-block h2{font-family:"Cormorant Garamond",serif;font-size:1.8rem;margin:.2rem 0 .4rem;color:var(--teal-d);}
+.teaching-block h3{font-family:"Cormorant Garamond",serif;font-size:1.3rem;color:var(--teal-d);margin:1.4rem 0 .3rem;}
+.focus-line{font-style:italic;color:var(--teal);margin:.2rem 0 .8rem;}
+.em,.teaching-block .em{font-size:.92rem;color:#6b6253;font-style:italic;}
+.safeguard-note{background:#fbf6e9;border:1px solid var(--line);border-left:4px solid var(--crimson);padding:.8rem 1rem;border-radius:6px;margin:1rem 0;}
+.story-note{background:#f4f1e6;border:1px solid var(--line);border-left:4px solid var(--teal);padding:.8rem 1rem;border-radius:6px;margin:1rem 0;font-style:italic;}
+.question-card{background:#fbf9f3;border:1px solid var(--line);border-radius:8px;padding:1rem;margin:1rem 0;}
+.question-card p{margin:.2rem 0 .7rem;font-weight:600;}
+.option{display:block;padding:.55rem .7rem;margin:.35rem 0;background:#fff;border:1px solid #d9cdb2;border-radius:6px;cursor:pointer;}
+.option:hover{background:#f3ecda;}
+.option.selected{background:#dbeeec;border-color:var(--teal);}
+.option.correct{background:#d8f0dd;border-color:#3c8a52;}
+.option.incorrect{background:#f6dcd8;border-color:var(--crimson);}
+.feedback{font-size:.95rem;margin-top:.5rem;padding:.5rem .7rem;border-radius:6px;display:none;}
+.feedback.show{display:block;}
+.feedback.ok{background:#e6f4ea;color:#205a32;}
+.feedback.no{background:#f8e3e0;color:#7e2a22;}
+.essay-card{background:#fbf9f3;border:1px solid var(--line);border-radius:8px;padding:1rem;margin:1rem 0;}
+.essay-card textarea{width:100%;font-family:inherit;font-size:1rem;padding:.6rem;border:1px solid #cdbf9f;border-radius:6px;min-height:90px;}
+.essay-hint{font-size:.9rem;color:#6b6253;font-style:italic;margin:.3rem 0;}
+.small-check-btn{background:var(--teal);font-size:.85rem;padding:.4rem .7rem;margin-top:.5rem;}
+.model-answer{display:none;margin-top:.6rem;padding:.7rem .9rem;background:#fbf3d9;border:1px solid var(--gold);border-radius:6px;font-size:.96rem;}
+.model-answer.show{display:block;}
+.unit-result{margin-top:1rem;padding:.8rem;border-radius:8px;font-weight:600;text-align:center;display:none;}
+.unit-result.show{display:block;}
+.unit-result.pass{background:#e6f4ea;color:#205a32;}
+.unit-result.fail{background:#f8e3e0;color:#7e2a22;}
+body.spanish .lang-en{display:none;}
+body:not(.spanish) .lang-es{display:none;}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<!-- Counseling Situations · Unit 7 of 13 · Grief & Bereavement. Short answers are SELF-REVEAL. Masters pass rests on MC. Built from Dr. Cook's grief_counseling.doc (five stages; Joe Bayly; CB-radio trucker; weekly-breakfast dying man; 7 DO's / 6 DON'Ts). THIS_UNIT=7. Keys cts_cs_state / cts_cs_reg / cts_lang. Craft notes applied: stories developed; wonder allowed to stand. Spanish awaits native review; content awaits author/theology review. -->
+<div class="seminary-header">
+  <h1><small>Chapala Theological Seminary</small>
+    <span class="lang-en">Counseling Situations</span><span class="lang-es">Situaciones de Consejería</span></h1>
+  <p class="course-title"><span class="lang-en">Applying Drakeford's Ten-Step Model to Real Situations — Unit 7: Grief &amp; Bereavement</span><span class="lang-es">Aplicando el Modelo de Diez Pasos de Drakeford a Situaciones Reales — Unidad 7: El Duelo y la Pérdida</span></p>
+</div>
+<div class="instructors"><span class="lang-en">Professor: Dr. Wayne Cook &nbsp;·&nbsp; Seminary Director: Dr. Ted Rogers</span><span class="lang-es">Profesor: Dr. Wayne Cook &nbsp;·&nbsp; Director del Seminario: Dr. Ted Rogers</span></div>
+<div class="registration-bar" id="registrationBar">
+  <div class="registration-fields" id="regFields">
+    <input type="text" id="studentName" placeholder="Full Name / Nombre Completo" aria-label="Full Name / Nombre Completo">
+    <input type="email" id="studentEmail" placeholder="Email" aria-label="Email">
+    <input type="text" id="studentCountry" placeholder="Country / País" aria-label="Country / País">
+    <select id="programTrack" aria-label="programTrack"><option value="cert">Certificate of Ministry</option><option value="thm">Master of Theology</option><option value="mdiv">Master of Divinity</option></select>
+    <button id="saveRegBtn"><span class="lang-en">Save</span><span class="lang-es">Guardar</span></button>
+  </div>
+  <div id="regStatus" class="registered-info"><span class="lang-en">Please register above to begin</span><span class="lang-es">Por favor regístrese arriba para comenzar</span></div>
+  <button class="lang-toggle" id="langToggle">🇪🇸 Español</button>
+</div>
+<div class="container">
+<div class="translation-note"><span class="lang-en"><strong>Note on Spanish translation:</strong> Spanish text is provided for accessibility. A native-speaker theological review is recommended before publication.</span><span class="lang-es"><strong>Nota sobre la traducción:</strong> El texto en español se proporciona para accesibilidad. Se recomienda revisión teológica por hablante nativo antes de publicar.</span></div>
+<div class="progress-section">
+  <h3><span class="lang-en">Course Progress</span><span class="lang-es">Progreso del Curso</span></h3>
+  <div class="progress-bar"><div class="progress-bar-fill" id="progressFill">0%</div></div>
+  <div id="progressText"><span class="lang-en">0 of 13 situations completed</span><span class="lang-es">0 de 13 situaciones completadas</span></div>
+  <div class="course-complete" id="courseComplete"><span class="lang-en">🎓 You have completed all thirteen situations of Counseling Situations.</span><span class="lang-es">🎓 Ha completado las trece situaciones de Situaciones de Consejería.</span></div>
+</div>
+<div class="unit-nav" id="unitNav"></div>
+
+<div id="unit7" class="teaching-block">
+<div class="unit-meta"><span class="lang-en">Counseling Situations · Unit 7 · Grief &amp; Bereavement</span><span class="lang-es">Situaciones de Consejería · Unidad 7 · El Duelo y la Pérdida</span></div>
+<h2><span class="lang-en">Grief &amp; Bereavement</span><span class="lang-es">El Duelo y la Pérdida</span></h2>
+<p class="focus-line"><span class="lang-en">"Rejoice with those who rejoice, and weep with those who weep" (Romans 12:15). Much of what the grieving need, a pastor gives not by speaking but by being present.</span><span class="lang-es">"Gozaos con los que se gozan; llorad con los que lloran" (Romanos 12:15). Mucho de lo que los que sufren necesitan, el pastor lo da no al hablar sino al estar presente.</span></p>
+
+<h3><span class="lang-en">The Situation</span><span class="lang-es">La Situación</span></h3>
+<p class="lang-en">The phone rings late, or a member meets the pastor at the door with a face he already understands. Someone has died — a husband of fifty years, a parent, a friend, and hardest of all, sometimes a child. Of all the moments a pastor is called into, this is among the most sacred and the most frightening, because here words are so weak and presence is so strong. The grieving person does not need the pastor to explain death, to defend God, or to make the pain reasonable. Most of the harm done at gravesides is done by good people who could not bear the silence and filled it with explanations. Jesus Himself, standing at the tomb of a friend He was about to raise, wept (John 11) — He did not hurry past the grief He was moments from undoing. The pastor's first work is not to fix but to come close, to weep with those who weep, and to stay. Grief is not a problem to be solved; it is a road to be walked, and the counselor's calling is to walk it alongside the bereaved without rushing them down it.</p>
+<p class="lang-es">El teléfono suena tarde, o un miembro recibe al pastor en la puerta con un rostro que él ya comprende. Alguien ha muerto — un esposo de cincuenta años, un padre, un amigo, y lo más duro de todo, a veces un hijo. De todos los momentos a los que un pastor es llamado, este es de los más sagrados y de los más temibles, porque aquí las palabras son tan débiles y la presencia tan fuerte. La persona en duelo no necesita que el pastor explique la muerte, ni que defienda a Dios, ni que haga razonable el dolor. La mayor parte del daño que se hace junto a una tumba lo hacen personas buenas que no pudieron soportar el silencio y lo llenaron de explicaciones. Jesús mismo, de pie ante la tumba de un amigo a quien estaba por resucitar, lloró (Juan 11) — no pasó de prisa por el dolor que estaba a momentos de deshacer. La primera obra del pastor no es arreglar sino acercarse, llorar con los que lloran, y quedarse. El duelo no es un problema que resolver; es un camino que recorrer, y el llamado del consejero es recorrerlo junto al doliente sin apresurarlo por él.</p>
+
+<div class="story-note">
+<p class="lang-en">Joe Bayly, who buried three of his own children, wrote in <em>The View From a Hearse</em> of two visitors. One came and talked — he explained, he quoted Scripture, he reasoned about why it had happened, and Bayly wished he would leave. The other came, sat with him, said little, and when he rose to go, Bayly was sorry to see him leave. "An arm about the shoulder, a firm grip of the hand, a kiss" — these, Bayly said, are the proofs grief needs, far more than the well-meant sermon at the wrong hour.</span></p>
+<p class="lang-es">Joe Bayly, que sepultó a tres de sus propios hijos, escribió en <em>The View From a Hearse</em> sobre dos visitantes. Uno vino y habló — explicó, citó la Escritura, razonó sobre por qué había sucedido, y Bayly deseaba que se fuera. El otro vino, se sentó con él, dijo poco, y cuando se levantó para irse, a Bayly le dolió verlo partir. "Un brazo sobre el hombro, un firme apretón de la mano, un beso" — estas, dijo Bayly, son las pruebas que el duelo necesita, mucho más que el sermón bien intencionado a la hora equivocada.</p>
+</div>
+
+<h3><span class="lang-en">The Stages of Grief</span><span class="lang-es">Las Etapas del Duelo</span></h3>
+<p class="lang-en">Grief is not one feeling but a passage through several, and it helps the counselor to recognize them — not so he can grade the bereaved against a schedule, but so he is not alarmed by what he sees and does not mistake a normal stage for a crisis. These stages do not march in a tidy line; a person may circle back, skip one, or sit in another for a long time. <strong>First comes shock</strong> — denial, disbelief, the numb "this cannot be happening" that mercifully cushions the first blow. <strong>Then anger</strong> — at the doctors, at oneself, at the one who died for leaving, and often at God. The counselor must not be scandalized by this: it is permitted to be angry at God, who is large enough to hold our fury, and the anger spoken honestly to Him is closer to faith than the polite distance that will not address Him at all. <strong>Then bargaining</strong>, tangled with guilt and the painful "if only I had..." — and here a person needs to release what has been held in; the unburdening itself, the speaking aloud of the regret, is part of the healing. <strong>Then depression</strong> — the low valley, the long "U" through which the full weight of the loss is finally felt. This is not the absence of healing but part of it, and it must not be hurried. <strong>And finally acceptance</strong> — not forgetting, not the end of love or even of all sorrow, but the day the bereaved can live again with the loss woven into life rather than crushing it. The pastor's task is not to push a person from one stage to the next, but to stay with them in whichever one they are in.</p>
+<p class="lang-es">El duelo no es un solo sentimiento sino un paso por varios, y le ayuda al consejero reconocerlos — no para calificar al doliente contra un calendario, sino para no alarmarse por lo que ve y no confundir una etapa normal con una crisis. Estas etapas no marchan en una línea ordenada; una persona puede volver atrás, saltarse una, o quedarse mucho tiempo en otra. <strong>Primero viene el shock</strong> — negación, incredulidad, el entumecido "esto no puede estar pasando" que misericordiosamente amortigua el primer golpe. <strong>Luego la ira</strong> — contra los médicos, contra uno mismo, contra el que murió por haberse ido, y a menudo contra Dios. El consejero no debe escandalizarse por esto: es permitido estar enojado con Dios, que es lo bastante grande para sostener nuestra furia, y la ira dicha con honestidad a Él está más cerca de la fe que la distancia cortés que no se dirige a Él en absoluto. <strong>Luego el regateo</strong>, enredado con la culpa y el doloroso "si tan solo hubiera..." — y aquí una persona necesita soltar lo que ha retenido; el desahogo mismo, el decir en voz alta el remordimiento, es parte de la sanación. <strong>Luego la depresión</strong> — el valle hondo, la larga "U" por la que al fin se siente todo el peso de la pérdida. Esto no es la ausencia de sanación sino parte de ella, y no se debe apresurar. <strong>Y por fin la aceptación</strong> — no el olvido, ni el fin del amor ni siquiera de toda la tristeza, sino el día en que el doliente puede vivir de nuevo con la pérdida entretejida en la vida en lugar de aplastándola. La tarea del pastor no es empujar a una persona de una etapa a la siguiente, sino quedarse con ella en cualquiera en que se encuentre.</p>
+
+<h3><span class="lang-en">The Ten Steps, Applied to Grief</span><span class="lang-es">Los Diez Pasos, Aplicados al Duelo</span></h3>
+
+<h3><span class="lang-en">Step One · Stage 1</span><span class="lang-es">Paso Uno · Etapa 1</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Determine the Time and the Place</em></span><span class="lang-es"><em>Determinar el Tiempo y el Lugar</em></span></p>
+<p class="lang-en">With grief, the time and place often choose themselves — the hospital room, the kitchen the morning after, the graveside. The counselor's discipline is to <em>go</em>, and to go promptly, rather than waiting to be invited or for the "right words" to arrive. He should also know that grief keeps its own calendar: the casseroles and cards come the first week and then stop, and the loneliest stretch is often weeks later when everyone else has returned to normal life. So part of determining the time is determining to come <em>back</em> — to mark the hard anniversaries, the first Christmas, the birthday — when the rest of the world has moved on and the bereaved has not.</p>
+<p class="lang-es">Con el duelo, el tiempo y el lugar a menudo se eligen solos — la habitación del hospital, la cocina la mañana siguiente, la tumba. La disciplina del consejero es <em>ir</em>, e ir pronto, en lugar de esperar a ser invitado o a que lleguen las "palabras correctas". También debe saber que el duelo lleva su propio calendario: las comidas y las tarjetas llegan la primera semana y luego cesan, y el tramo más solitario suele ser semanas después, cuando todos los demás han vuelto a la vida normal. Así que parte de determinar el tiempo es determinar <em>volver</em> — marcar los aniversarios difíciles, la primera Navidad, el cumpleaños — cuando el resto del mundo ha seguido adelante y el doliente no.</p>
+
+<h3><span class="lang-en">Step Two · Stage 1</span><span class="lang-es">Paso Dos · Etapa 1</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Listen — and Often, Simply Be Present</em></span><span class="lang-es"><em>Escuchar — y a Menudo, Simplemente Estar Presente</em></span></p>
+<p class="lang-en">Here listening is the whole ministry, and presence is its deepest form. The grieving need to tell the story — how it happened, what the last words were, what they wish they had said — and they need to tell it more than once. The counselor lets them, without steering them toward composure. And he learns the hardest skill of all: to be comfortable with silence, to sit with someone in their pain without needing to relieve his <em>own</em> discomfort by talking.</p>
+<p class="lang-es">Aquí escuchar es todo el ministerio, y la presencia es su forma más honda. Los que sufren necesitan contar la historia — cómo sucedió, cuáles fueron las últimas palabras, qué desearían haber dicho — y necesitan contarla más de una vez. El consejero se los permite, sin dirigirlos hacia la compostura. Y aprende la destreza más difícil de todas: estar cómodo con el silencio, sentarse con alguien en su dolor sin necesitar aliviar su <em>propia</em> incomodidad hablando.</p>
+
+<div class="story-note">
+<p class="lang-en">A pastor told of driving the long interstate at night, heavyhearted, when a trucker's voice came over the CB radio into the dark of his cab — a stranger, unseen, simply talking with him mile after mile so he would not be alone on the road. That, the pastor said, is a picture of the ministry of presence: not solving anything, not even being seen, just a voice in the dark that says <em>you are not alone</em>. Much of grief ministry is exactly that.</span></p>
+<p class="lang-es">Un pastor contó de manejar la larga autopista de noche, con el corazón apesadumbrado, cuando la voz de un camionero llegó por el radio CB a la oscuridad de su cabina — un desconocido, no visto, simplemente hablando con él milla tras milla para que no estuviera solo en el camino. Eso, dijo el pastor, es una imagen del ministerio de la presencia: no resolver nada, ni siquiera ser visto, solo una voz en la oscuridad que dice <em>no estás solo</em>. Mucho del ministerio del duelo es exactamente eso.</p>
+</div>
+
+<h3><span class="lang-en">Step Three · Stage 1</span><span class="lang-es">Paso Tres · Etapa 1</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Clarify the Situation</em></span><span class="lang-es"><em>Aclarar la Situación</em></span></p>
+<p class="lang-en">Gently, over time, the counselor comes to understand the particular shape of this grief, for no two are the same. The loss of an aged parent after a long life is real grief, but it is not the disordering earthquake of losing a child or a spouse in their prime. A sudden death gives no time to prepare; a long illness exhausts the survivor before the loss even comes. There may be complicating threads — a strained relationship with the one who died, words never said or never taken back, or a death by suicide or accident that carries its own special anguish. Clarifying means listening long enough to grieve <em>this</em> loss with <em>this</em> person, rather than offering a generic comfort that fits no one.</p>
+<p class="lang-es">Con suavidad, con el tiempo, el consejero llega a entender la forma particular de este duelo, pues no hay dos iguales. La pérdida de un padre anciano tras una larga vida es duelo real, pero no es el terremoto que desordena todo como perder a un hijo o a un cónyuge en la flor de la vida. Una muerte súbita no da tiempo de prepararse; una larga enfermedad agota al sobreviviente antes de que llegue siquiera la pérdida. Puede haber hilos que complican — una relación tensa con el que murió, palabras nunca dichas o nunca retiradas, o una muerte por suicidio o accidente que lleva su propia angustia especial. Aclarar significa escuchar lo suficiente para llorar <em>esta</em> pérdida con <em>esta</em> persona, en lugar de ofrecer un consuelo genérico que no le queda a nadie.</p>
+
+<h3><span class="lang-en">Step Four · Stage 1</span><span class="lang-es">Paso Cuatro · Etapa 1</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Investigate Previous Counseling</em></span><span class="lang-es"><em>Investigar la Consejería Previa</em></span></p>
+<p class="lang-en">The counselor learns what supports already stand and where this grief may run deeper than ordinary mourning. Has the person walked through loss before, and what carried them then? Is there family and church around them, or are they utterly alone? And he watches for the danger signs that grief has turned into something that needs more than a pastor's care: a depression that does not lift at all over many months, a person who cannot function or care for themselves, talk of not wanting to live, or a refusal to accept the death long after the fact. Normal grief is painful but it moves; grief that is frozen, or that turns toward self-destruction, calls for professional help alongside the pastor's continued presence.</p>
+<p class="lang-es">El consejero averigua qué apoyos ya existen y dónde este duelo puede correr más hondo que el luto ordinario. ¿Ha atravesado la persona una pérdida antes, y qué la sostuvo entonces? ¿Hay familia e iglesia a su alrededor, o está completamente sola? Y vigila las señales de peligro de que el duelo se ha vuelto algo que necesita más que el cuidado de un pastor: una depresión que no cede en absoluto durante muchos meses, una persona que no puede funcionar ni cuidarse, hablar de no querer vivir, o un rechazo a aceptar la muerte mucho después del hecho. El duelo normal es doloroso pero avanza; el duelo congelado, o el que se vuelve hacia la autodestrucción, exige ayuda profesional junto a la presencia continua del pastor.</p>
+
+<h3><span class="lang-en">Step Five · Stage 2</span><span class="lang-es">Paso Cinco · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Responsibility — Helping with Guilt, True and False</em></span><span class="lang-es"><em>Responsabilidad — Ayudar con la Culpa, Verdadera y Falsa</em></span></p>
+<p class="lang-en">In grief, Step Five is never "where have you failed?" — the bereaved has not failed by losing someone. But guilt is one of grief's most common companions, and the counselor must handle it with care, because there are two kinds. Most grief-guilt is <em>neurotic</em> or false — the "I should have called more," "I should have seen the signs," the endless replaying of a death no one could have stopped. This guilt is not to be confirmed but gently dissolved: the counselor helps the person see they did not, and could not, hold another's life in their hands. But sometimes the guilt is <em>true</em> — there was real wrong, real sin, words or deeds that genuinely wounded the one now gone. This guilt must not be explained away, for to wave off real guilt is to deny the person the one thing that heals it: the counselor names it honestly and leads the person to the forgiveness of God, and to the peace that confession and grace alone can give. The skill is in telling the two apart, and treating each as what it is.</p>
+<p class="lang-es">En el duelo, el Paso Cinco nunca es "¿en qué has fallado?" — el doliente no ha fallado por perder a alguien. Pero la culpa es una de las compañeras más comunes del duelo, y el consejero debe manejarla con cuidado, porque hay dos clases. La mayor parte de la culpa del duelo es <em>neurótica</em> o falsa — el "debí llamar más", "debí ver las señales", el repaso interminable de una muerte que nadie pudo evitar. Esta culpa no se ha de confirmar sino disolver con suavidad: el consejero ayuda a la persona a ver que no tenía, ni podía tener, la vida de otro en sus manos. Pero a veces la culpa es <em>verdadera</em> — hubo un mal real, un pecado real, palabras o hechos que de veras hirieron al que ya no está. Esta culpa no se debe explicar para quitarla, pues descartar la culpa real es negarle a la persona lo único que la sana: el consejero la nombra con honestidad y lleva a la persona al perdón de Dios, y a la paz que solo la confesión y la gracia pueden dar. La destreza está en distinguir las dos, y tratar cada una como lo que es.</p>
+
+<h3><span class="lang-en">Step Six · Stage 2</span><span class="lang-es">Paso Seis · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Model the Role</em></span><span class="lang-es"><em>Modelar el Papel</em></span></p>
+<p class="lang-en">The counselor models grief done in hope rather than grief done in despair — "that you may not grieve as others do who have no hope" (1 Thessalonians 4:13). Notice Paul does not say <em>do not grieve</em>; he says do not grieve <em>as those without hope</em>. The Christian still weeps — Jesus wept — but not as one for whom death has the last word. By his own steadiness, his honest tears that are not hopeless tears, and his unhurried trust, the pastor shows the bereaved that one can walk straight into this valley and not be destroyed, because the Shepherd walks through it too.</p>
+<p class="lang-es">El consejero modela el duelo vivido en esperanza en lugar del duelo vivido en desesperación — "para que no os entristezcáis como los otros que no tienen esperanza" (1 Tesalonicenses 4:13). Note que Pablo no dice <em>no os entristezcáis</em>; dice no os entristezcáis <em>como los que no tienen esperanza</em>. El cristiano aún llora — Jesús lloró — pero no como aquel para quien la muerte tiene la última palabra. Con su propia firmeza, sus lágrimas honestas que no son lágrimas sin esperanza, y su confianza sin prisa, el pastor muestra al doliente que uno puede entrar de lleno en este valle y no ser destruido, porque el Pastor también lo atraviesa.</p>
+
+<div class="story-note">
+<p class="lang-en">A pastor met weekly for breakfast with a man who was dying. Week by week they talked, and read together the Twenty-Third Psalm, until the man could say it himself. Near the end the pastor reminded him of the words: "Yea, though I walk through the valley of the shadow of death, I will fear no evil — for Thou art with me." It is a <em>valley</em>, the man came to see, not a wall; and it is a valley one walks <em>through</em>. And one is not alone in it. That is the hope the pastor carries into every house of grief.</span></p>
+<p class="lang-es">Un pastor se reunía cada semana a desayunar con un hombre que se moría. Semana tras semana conversaban, y leían juntos el Salmo Veintitrés, hasta que el hombre podía decirlo por sí mismo. Cerca del final el pastor le recordó las palabras: "Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo." Es un <em>valle</em>, llegó a ver el hombre, no un muro; y es un valle que uno atraviesa <em>de lado a lado</em>. Y uno no está solo en él. Esa es la esperanza que el pastor lleva a cada casa de duelo.</p>
+</div>
+
+<h3><span class="lang-en">Step Seven · Stage 2</span><span class="lang-es">Paso Siete · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Review the Alternatives — the DO's and DON'Ts of Helping</em></span><span class="lang-es"><em>Repasar las Alternativas — los SÍ y los NO de Ayudar</em></span></p>
+<p class="lang-en">The counselor weighs how to help, and grief ministry has some hard-won wisdom about what helps and what wounds. <strong>Do</strong> agree that it is painful, rather than minimizing it; help the person face the reality of the loss rather than flee it; let them talk about the one who died, and use the person's name; assure them of your ongoing support; help them with both true and false guilt; and, in time, help them form new relationships and a new shape of life. <strong>Do not</strong> say "everything will be all right" or "I know just how you feel"; do not divert them from the reality of the death with distractions; do not avoid mentioning the one who died for fear of upsetting them — the silence wounds more than the name; do not leave the person to grieve alone; do not rationalize away genuine guilt; and do not let the bereaved cut off the relationships that will carry them. Reviewing these with care keeps the counselor from the well-meant blunders that good people make at gravesides.</p>
+<p class="lang-es">El consejero pondera cómo ayudar, y el ministerio del duelo tiene una sabiduría ganada con esfuerzo sobre lo que ayuda y lo que hiere. <strong>Sí</strong> coincida en que es doloroso, en vez de minimizarlo; ayude a la persona a enfrentar la realidad de la pérdida en lugar de huir de ella; déjela hablar del que murió, y use su nombre; asegúrele su apoyo continuo; ayúdela con la culpa verdadera y la falsa; y, con el tiempo, ayúdela a formar nuevas relaciones y una nueva forma de vida. <strong>No</strong> diga "todo va a estar bien" o "sé exactamente cómo te sientes"; no la distraiga de la realidad de la muerte; no evite mencionar al que murió por miedo a alterarla — el silencio hiere más que el nombre; no deje a la persona a solas en su duelo; no racionalice para quitar la culpa genuina; y no deje que el doliente corte las relaciones que lo sostendrán. Repasar esto con cuidado guarda al consejero de los errores bien intencionados que las personas buenas cometen junto a las tumbas.</p>
+
+<h3><span class="lang-en">Step Eight · Stage 2</span><span class="lang-es">Paso Ocho · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Explore the Outcomes</em></span><span class="lang-es"><em>Explorar los Resultados</em></span></p>
+<p class="lang-en">Without rushing the valley, the counselor holds out the truth that grief walked rightly leads somewhere. The path of avoidance — refusing to face the loss, numbing it, fleeing every reminder — leads to a grief that festers and reappears years later, unhealed. The path of honest mourning, painful as it is, leads through the long "U" of depression and out the far side to acceptance, where the person can carry the loss without being crushed by it and can love again. The counselor does not promise this will be quick or that the ache will fully vanish, but he assures the bereaved that the valley has a far side, and that countless others have walked through it and lived.</p>
+<p class="lang-es">Sin apresurar el valle, el consejero sostiene la verdad de que el duelo recorrido correctamente lleva a alguna parte. El camino de la evitación — negarse a enfrentar la pérdida, adormecerla, huir de cada recuerdo — lleva a un duelo que se enquista y reaparece años después, sin sanar. El camino del luto honesto, por doloroso que sea, lleva a través de la larga "U" de la depresión y sale por el otro lado a la aceptación, donde la persona puede llevar la pérdida sin ser aplastada por ella y puede amar de nuevo. El consejero no promete que esto será rápido ni que el dolor desaparecerá del todo, pero asegura al doliente que el valle tiene un otro lado, y que innumerables otros lo han atravesado y han vivido.</p>
+
+<h3><span class="lang-en">Step Nine · Stage 2</span><span class="lang-es">Paso Nueve · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Supply Information — the Hope of the Gospel</em></span><span class="lang-es"><em>Proveer Información — la Esperanza del Evangelio</em></span></p>
+<p class="lang-en">When the time is right — and timing is everything, for the truths that comfort later only wound if rushed in too soon — the counselor brings the great hope. Christ has died and risen, and "because I live, you also will live" (John 14:19). The dead in Christ will rise; we shall see them again; God Himself will wipe away every tear, and death itself will be no more (Revelation 21:4). This is not offered as an argument to win or a lid to clamp down on the grief, but as the solid ground beneath the grieving feet. And here the counselor must let the wonder stand: he does not have an answer for <em>why this person, why now</em>, and he should not pretend to. He can sit honestly inside the ache and the not-knowing, and still hold out the one thing he is sure of — that the God who wept at a grave, and then walked out of His own, has not abandoned them to the dark.</p>
+<p class="lang-es">Cuando el momento es propicio — y el momento lo es todo, pues las verdades que consuelan más tarde solo hieren si se meten de prisa demasiado pronto — el consejero trae la gran esperanza. Cristo ha muerto y resucitado, y "porque yo vivo, vosotros también viviréis" (Juan 14:19). Los muertos en Cristo resucitarán; los volveremos a ver; Dios mismo enjugará toda lágrima, y la muerte misma no existirá más (Apocalipsis 21:4). Esto no se ofrece como un argumento para ganar ni como una tapa para sofocar el duelo, sino como el suelo firme bajo los pies dolientes. Y aquí el consejero debe dejar que el asombro permanezca: no tiene una respuesta para <em>por qué esta persona, por qué ahora</em>, y no debe fingirla. Puede sentarse con honestidad dentro del dolor y del no-saber, y aun así sostener lo único de lo que está seguro — que el Dios que lloró ante una tumba, y luego salió de la suya propia, no los ha abandonado a la oscuridad.</p>
+
+<h3><span class="lang-en">Step Ten · Stage 2</span><span class="lang-es">Paso Diez · Etapa 2</span></h3>
+<p class="focus-line"><span class="lang-en"><em>Provide Closure</em></span><span class="lang-es"><em>Proveer Cierre</em></span></p>
+<p class="lang-en">Grief has no neat closure, and the counselor must never imply it does — there is no day the loss is "finished." Closure here means the opposite of a closed door: it means the promise to keep coming. The funeral ends and the crowd disperses; the counselor stays, and circles back in the long months after, when the lasagna has stopped arriving and the silence in the house is loudest. He marks the anniversaries. He keeps using the name of the one who died. He watches, quietly, for grief that is not moving and gently brings further help if it is needed. Closure, in grief, is simply faithful, patient presence over time — the steady proof that the bereaved has not been left alone on the road.</p>
+<p class="lang-es">El duelo no tiene un cierre ordenado, y el consejero nunca debe insinuar que lo tiene — no hay un día en que la pérdida quede "terminada". El cierre aquí significa lo contrario de una puerta cerrada: significa la promesa de seguir viniendo. El funeral termina y la multitud se dispersa; el consejero se queda, y vuelve en los largos meses posteriores, cuando la comida ha dejado de llegar y el silencio en la casa es más fuerte. Marca los aniversarios. Sigue usando el nombre del que murió. Vigila, en silencio, el duelo que no avanza y con suavidad trae más ayuda si se necesita. El cierre, en el duelo, es simplemente la presencia fiel y paciente a lo largo del tiempo — la prueba constante de que el doliente no ha sido dejado solo en el camino.</p>
+
+<div class="safeguard-note">
+<p class="lang-en"><strong>⚠ Standing Safeguard.</strong> Grief ministry often means visiting a recently widowed person of the opposite gender, frequently alone in their home. The course-wide rule still holds: do not visit alone behind closed doors. Bring your spouse or another mature believer, visit where others are present, or keep the visit in open view. This protects the grieving person in a vulnerable hour, guards the pastor, and keeps his ministry above reproach.</span></p>
+<p class="lang-es"><strong>⚠ Salvaguarda Permanente.</strong> El ministerio del duelo a menudo significa visitar a una persona del sexo opuesto recién enviudada, con frecuencia sola en su hogar. La regla de todo el curso sigue vigente: no visite a solas tras puertas cerradas. Lleve a su cónyuge o a otro creyente maduro, visite donde otros estén presentes, o mantenga la visita a la vista de todos. Esto protege a la persona en duelo en una hora vulnerable, guarda al pastor, y mantiene su ministerio irreprensible.</p>
+</div>
+
+<div class="quiz-header" style="margin-top:2rem"><h3><span class="lang-en">Unit 7 — Assessment</span><span class="lang-es">Unidad 7 — Evaluación</span></h3></div>
+<p class="essay-hint"><span class="lang-en">The short-answer questions are for your own reflection: write your answer, then press <strong>Reveal model answer</strong> to compare. Unit completion is based on the multiple-choice questions.</span><span class="lang-es">Las preguntas de respuesta corta son para su propia reflexión: escriba su respuesta, luego presione <strong>Mostrar respuesta modelo</strong> para comparar. La finalización de la unidad se basa en las preguntas de opción múltiple.</span></p>
+<div id="mcq_7"></div>
+<div id="essay_7"></div>
+<div style="margin-top:1.2rem;display:flex;gap:.6rem;flex-wrap:wrap">
+  <button onclick="submitUnit(7)"><span class="lang-en">Submit Unit 7</span><span class="lang-es">Enviar Unidad 7</span></button>
+  <button onclick="resetUnit(7)" style="background:var(--crimson)"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+  <button onclick="location.href='CTSCSUnit8.html'" style="background:var(--gold);color:var(--ink)"><span class="lang-en">Next Situation →</span><span class="lang-es">Siguiente Situación →</span></button>
+</div>
+<div class="unit-result" id="result_7"></div>
+</div>
+
+</div>
+<script>
+const THIS_UNIT = 7;
+const TOTAL_UNITS = 13;
+const UNIT_LABELS = ["0 · Foundation","1 · The Dying","2 · Surgery","3 · The Abused","4 · Forced Termination","5 · Conflict Resolution","6 · Depression","7 · Grief","8 · Anxiety & Fear","9 · Anger & Forgiveness","10 · Addiction","11 · General Distress","12 · When to Refer"];
+function fileFor(u){ return "CTSCSUnit"+u+".html"; }
+
+const UNITS = {"7": {"mcq": [{"textEn": "According to this unit, the grieving person most needs the pastor to:", "textEs": "Según esta unidad, la persona en duelo necesita sobre todo que el pastor:", "options": [{"en": "Explain why the death happened", "es": "Explique por qué ocurrió la muerte"}, {"en": "Defend God's justice", "es": "Defienda la justicia de Dios"}, {"en": "Come close, weep with them, and stay present", "es": "Se acerque, llore con ellos, y permanezca presente"}, {"en": "Quickly move them past the pain", "es": "Los lleve rápido más allá del dolor"}], "correct": 2, "explainEn": "Words are weak and presence is strong; the first work is not to fix but to come close and stay (Romans 12:15).", "explainEs": "Las palabras son débiles y la presencia es fuerte; la primera obra no es arreglar sino acercarse y quedarse (Romanos 12:15)."}, {"textEn": "Joe Bayly's account of his two visitors teaches that:", "textEs": "El relato de Joe Bayly sobre sus dos visitantes enseña que:", "options": [{"en": "The visitor who said little and simply sat with him was the true comfort", "es": "El visitante que dijo poco y simplemente se sentó con él fue el verdadero consuelo"}, {"en": "The visitor who explained and reasoned brought the most comfort", "es": "El visitante que explicó y razonó trajo más consuelo"}, {"en": "Grief is best handled with Scripture quotations", "es": "El duelo se maneja mejor con citas bíblicas"}, {"en": "Visitors should stay away", "es": "Los visitantes deben mantenerse alejados"}], "correct": 0, "explainEn": "Bayly wished the talking visitor would leave and was sorry to see the quiet one go: an arm, a grip, a kiss are the proofs grief needs.", "explainEs": "Bayly deseaba que el visitante hablador se fuera y lamentó ver partir al callado: un brazo, un apretón, un beso son las pruebas que el duelo necesita."}, {"textEn": "The unit describes the stages of grief as:", "textEs": "La unidad describe las etapas del duelo como:", "options": [{"en": "A fixed schedule everyone follows in order", "es": "Un calendario fijo que todos siguen en orden"}, {"en": "Something to push the person through quickly", "es": "Algo por lo que apresurar a la persona"}, {"en": "Proof of weak faith", "es": "Prueba de fe débil"}, {"en": "A map, not a schedule — a person may circle back or linger", "es": "Un mapa, no un calendario — una persona puede volver atrás o demorarse"}], "correct": 3, "explainEn": "The stages (shock, anger, bargaining, depression, acceptance) do not march in a tidy line; the pastor stays with the person in whichever stage they are in.", "explainEs": "Las etapas (shock, ira, regateo, depresión, aceptación) no marchan en línea ordenada; el pastor se queda con la persona en cualquier etapa en que esté."}, {"textEn": "On anger at God in grief, the unit teaches that:", "textEs": "Sobre la ira contra Dios en el duelo, la unidad enseña que:", "options": [{"en": "It is sin to be avoided at all costs", "es": "Es pecado que se debe evitar a toda costa"}, {"en": "It is permitted; God is large enough to hold it, and honest anger to Him is nearer faith than polite distance", "es": "Es permitida; Dios es lo bastante grande para sostenerla, y la ira honesta hacia Él está más cerca de la fe que la distancia cortés"}, {"en": "It means the person has lost their salvation", "es": "Significa que la persona ha perdido su salvación"}, {"en": "The pastor should rebuke it immediately", "es": "El pastor debe reprenderla de inmediato"}], "correct": 1, "explainEn": "The counselor must not be scandalized by anger at God; spoken honestly to Him, it is closer to faith than a distance that will not address Him at all.", "explainEs": "El consejero no debe escandalizarse por la ira contra Dios; dicha con honestidad a Él, está más cerca de la fe que una distancia que no se dirige a Él."}, {"textEn": "In grief, Step Five (Responsibility) is handled by:", "textEs": "En el duelo, el Paso Cinco (Responsabilidad) se maneja al:", "options": [{"en": "Asking the bereaved where they failed", "es": "Preguntar al doliente en qué falló"}, {"en": "Ignoring guilt entirely", "es": "Ignorar la culpa por completo"}, {"en": "Confirming all the person's guilt feelings", "es": "Confirmar todos los sentimientos de culpa de la persona"}, {"en": "Distinguishing false (neurotic) guilt, to be dissolved, from true guilt, to be brought to God's forgiveness", "es": "Distinguir la culpa falsa (neurótica), que se disuelve, de la culpa verdadera, que se lleva al perdón de Dios"}], "correct": 3, "explainEn": "It is never 'where have you failed?'; most grief-guilt is false and gently dissolved, but true guilt must not be waved off — it is named and led to forgiveness.", "explainEs": "Nunca es '¿en qué fallaste?'; la mayor parte de la culpa del duelo es falsa y se disuelve con suavidad, pero la culpa verdadera no se descarta — se nombra y se lleva al perdón."}, {"textEn": "The pastor models grief 'in hope' by remembering that 1 Thessalonians 4:13 says:", "textEs": "El pastor modela el duelo 'en esperanza' al recordar que 1 Tesalonicenses 4:13 dice:", "options": [{"en": "Do not grieve as those who have no hope — not that we do not grieve, but how", "es": "No os entristezcáis como los que no tienen esperanza — no que no nos entristezcamos, sino cómo"}, {"en": "Do not grieve at all", "es": "No os entristezcáis en absoluto"}, {"en": "Grief is a sign of unbelief", "es": "El duelo es señal de incredulidad"}, {"en": "Christians should hide their tears", "es": "Los cristianos deben ocultar sus lágrimas"}], "correct": 0, "explainEn": "Paul does not forbid grief; he forbids hopeless grief. The Christian weeps — Jesus wept — but not as one for whom death has the last word.", "explainEs": "Pablo no prohíbe el duelo; prohíbe el duelo sin esperanza. El cristiano llora — Jesús lloró — pero no como aquel para quien la muerte tiene la última palabra."}, {"textEn": "Which is one of the DON'Ts of helping the grieving?", "textEs": "¿Cuál es uno de los NO de ayudar al que sufre?", "options": [{"en": "Let them talk about the one who died", "es": "Dejarlos hablar del que murió"}, {"en": "Assure them of ongoing support", "es": "Asegurarles apoyo continuo"}, {"en": "Say 'everything will be all right' or 'I know just how you feel'", "es": "Decir 'todo va a estar bien' o 'sé exactamente cómo te sientes'"}, {"en": "Agree that it is painful", "es": "Coincidir en que es doloroso"}], "correct": 2, "explainEn": "Do not minimize with 'everything will be all right' or claim to know exactly how they feel; do not avoid the dead person's name — the silence wounds more.", "explainEs": "No minimice con 'todo va a estar bien' ni afirme saber exactamente cómo se sienten; no evite el nombre del difunto — el silencio hiere más."}, {"textEn": "Regarding the dead person's name, the unit advises the counselor to:", "textEs": "Respecto al nombre del difunto, la unidad aconseja al consejero:", "options": [{"en": "Avoid it so as not to upset the grieving", "es": "Evitarlo para no alterar al doliente"}, {"en": "Use it and let the person talk about the one who died", "es": "Usarlo y dejar que la persona hable del que murió"}, {"en": "Only mention it at the funeral", "es": "Mencionarlo solo en el funeral"}, {"en": "Replace it with 'the deceased'", "es": "Reemplazarlo por 'el difunto'"}], "correct": 1, "explainEn": "Do not avoid mentioning the one who died for fear of upsetting them; the silence wounds more than the name. Let them talk and use the name.", "explainEs": "No evite mencionar al que murió por miedo a alterarlos; el silencio hiere más que el nombre. Déjelos hablar y use el nombre."}, {"textEn": "When supplying the hope of the gospel (Step Nine), timing matters because:", "textEs": "Al proveer la esperanza del evangelio (Paso Nueve), el momento importa porque:", "options": [{"en": "There is a deadline for comforting people", "es": "Hay una fecha límite para consolar a la gente"}, {"en": "The gospel changes depending on the day", "es": "El evangelio cambia según el día"}, {"en": "Truths that comfort later only wound if rushed in too soon", "es": "Las verdades que consuelan más tarde solo hieren si se meten de prisa demasiado pronto"}, {"en": "Scripture should never be mentioned in grief", "es": "La Escritura nunca debe mencionarse en el duelo"}], "correct": 2, "explainEn": "The same true comfort offered too soon becomes a wound; the counselor brings the hope when the time is right, not as a lid clamped on the grief.", "explainEs": "El mismo consuelo verdadero ofrecido demasiado pronto se vuelve una herida; el consejero trae la esperanza cuando el momento es propicio, no como una tapa puesta sobre el duelo."}, {"textEn": "Closure in grief, according to the unit, means:", "textEs": "El cierre en el duelo, según la unidad, significa:", "options": [{"en": "A clear day when the loss is finished", "es": "Un día claro en que la pérdida queda terminada"}, {"en": "Telling the person to move on", "es": "Decirle a la persona que siga adelante"}, {"en": "Ending contact after the funeral", "es": "Terminar el contacto tras el funeral"}, {"en": "The opposite of a closed door — the promise to keep coming back over the long months", "es": "Lo contrario de una puerta cerrada — la promesa de seguir volviendo en los largos meses"}], "correct": 3, "explainEn": "Grief has no neat closure; closure here is faithful, patient presence over time — circling back when the world has moved on and the bereaved has not.", "explainEs": "El duelo no tiene cierre ordenado; el cierre aquí es la presencia fiel y paciente en el tiempo — volver cuando el mundo ha seguido adelante y el doliente no."}], "shortAnswer": [{"textEn": "Using Joe Bayly's two visitors and the ministry of presence, explain why 'being there' often helps the grieving more than words.", "textEs": "Usando los dos visitantes de Joe Bayly y el ministerio de la presencia, explique por qué 'estar ahí' a menudo ayuda al doliente más que las palabras.", "modelEn": "In grief, words are weak and presence is strong. Joe Bayly, who buried three children, found that the visitor who came to explain, quote Scripture, and reason about the death only made him wish the man would leave; while the visitor who sat with him, said little, and simply shared his sorrow was the one he was sorry to see go. An arm about the shoulder, a firm grip of the hand, a kiss — these are the proofs grief needs. Most harm at gravesides is done by good people who cannot bear the silence and fill it with explanations. The pastor's calling is to come close and stay, weeping with those who weep, not to fix or explain the loss. Presence says 'you are not alone' without claiming to make the pain reasonable.", "modelEs": "En el duelo, las palabras son débiles y la presencia es fuerte. Joe Bayly, que sepultó a tres hijos, halló que el visitante que vino a explicar, citar la Escritura y razonar sobre la muerte solo lo hizo desear que el hombre se fuera; mientras que el visitante que se sentó con él, dijo poco, y simplemente compartió su dolor fue al que lamentó ver partir. Un brazo sobre el hombro, un firme apretón de la mano, un beso — estas son las pruebas que el duelo necesita. La mayor parte del daño junto a las tumbas lo hacen personas buenas que no soportan el silencio y lo llenan de explicaciones. El llamado del pastor es acercarse y quedarse, llorando con los que lloran, no arreglar ni explicar la pérdida. La presencia dice 'no estás solo' sin pretender hacer razonable el dolor.", "kw_en": ["grief", "words", "weak", "presen", "strong", "bayly", "buried", "three"], "kw_es": ["duelo", "palabr", "débile", "presen", "fuerte", "bayly", "sepult", "tres"]}, {"textEn": "Name the five stages of grief and explain why they should be treated as a map and not a schedule.", "textEs": "Nombre las cinco etapas del duelo y explique por qué deben tratarse como un mapa y no como un calendario.", "modelEn": "The five stages are shock/denial, anger, bargaining (tangled with guilt), depression (the long 'U'), and acceptance. They are a map and not a schedule because grief does not march in a tidy line: a person may circle back to an earlier stage, skip one, or linger in another for a long time. The counselor learns them not to grade the bereaved against a timetable or push them from one to the next, but so he is not alarmed by what he sees and does not mistake a normal stage — such as anger or the valley of depression — for a crisis. His task is to stay with the person in whichever stage they are in. Acceptance is not forgetting or the end of love, but the day the person can live again with the loss woven into life rather than crushing it.", "modelEs": "Las cinco etapas son shock/negación, ira, regateo (enredado con la culpa), depresión (la larga 'U') y aceptación. Son un mapa y no un calendario porque el duelo no marcha en línea ordenada: una persona puede volver a una etapa anterior, saltarse una, o demorarse mucho en otra. El consejero las aprende no para calificar al doliente contra un horario ni para empujarlo de una a la siguiente, sino para no alarmarse por lo que ve y no confundir una etapa normal — como la ira o el valle de la depresión — con una crisis. Su tarea es quedarse con la persona en cualquier etapa en que esté. La aceptación no es el olvido ni el fin del amor, sino el día en que la persona puede vivir de nuevo con la pérdida entretejida en la vida en lugar de aplastándola.", "kw_en": ["five", "stages", "shock", "denial", "anger", "bargai", "tangle", "guilt"], "kw_es": ["cinco", "etapas", "shock", "negaci", "regate", "enreda", "culpa", "depres"]}, {"textEn": "Distinguish true guilt from false (neurotic) guilt in grief, and explain how the counselor should handle each.", "textEs": "Distinga la culpa verdadera de la culpa falsa (neurótica) en el duelo, y explique cómo debe manejar el consejero cada una.", "modelEn": "False or neurotic guilt is the common 'I should have called more,' 'I should have seen the signs,' the endless replaying of a death no one could have prevented. It is not to be confirmed but gently dissolved: the counselor helps the person see they did not, and could not, hold another's life in their hands. True guilt is different — there was real wrong, real sin, words or deeds that genuinely wounded the one now gone. This must not be explained away, because to wave off real guilt denies the person the one thing that heals it. The counselor names it honestly and leads the person to the forgiveness of God and the peace that confession and grace alone give. The skill lies in telling the two apart and treating each as what it is. In grief, Step Five is never 'where did you fail?' — the bereaved has not failed by losing someone.", "modelEs": "La culpa falsa o neurótica es el común 'debí llamar más', 'debí ver las señales', el repaso interminable de una muerte que nadie pudo evitar. No se ha de confirmar sino disolver con suavidad: el consejero ayuda a la persona a ver que no tenía, ni podía tener, la vida de otro en sus manos. La culpa verdadera es distinta — hubo un mal real, un pecado real, palabras o hechos que de veras hirieron al que ya no está. Esta no se debe explicar para quitarla, porque descartar la culpa real le niega a la persona lo único que la sana. El consejero la nombra con honestidad y lleva a la persona al perdón de Dios y a la paz que solo la confesión y la gracia dan. La destreza está en distinguir las dos y tratar cada una como lo que es. En el duelo, el Paso Cinco nunca es '¿en qué fallaste?' — el doliente no ha fallado por perder a alguien.", "kw_en": ["false", "neurot", "guilt", "common", "called", "seen", "signs", "endles"], "kw_es": ["culpa", "falsa", "neurót", "común", "debí", "llamar", "señale", "repaso"]}, {"textEn": "List several DO's and DON'Ts of helping the grieving, and explain the caution about timing when bringing the hope of the gospel.", "textEs": "Enumere varios SÍ y NO de ayudar al doliente, y explique la advertencia sobre el momento al traer la esperanza del evangelio.", "modelEn": "DO's: agree that it is painful rather than minimizing it; help the person face the reality of the loss; let them talk about the one who died and use that person's name; assure them of ongoing support; help with both true and false guilt; and in time help them form new relationships. DON'Ts: do not say 'everything will be all right' or 'I know just how you feel'; do not divert them from the reality of the death; do not avoid mentioning the one who died (the silence wounds more than the name); do not leave them to grieve alone; do not rationalize away genuine guilt; and do not let them cut off the relationships that will carry them. On timing: the truths that comfort later only wound if rushed in too soon. The gospel hope — Christ risen, the dead in Christ raised, every tear wiped away — is brought when the time is right, as solid ground beneath grieving feet, never as an argument to win or a lid clamped down on the grief.", "modelEs": "SÍ: coincidir en que es doloroso en vez de minimizarlo; ayudar a la persona a enfrentar la realidad de la pérdida; dejarla hablar del que murió y usar su nombre; asegurarle apoyo continuo; ayudar con la culpa verdadera y la falsa; y con el tiempo ayudarla a formar nuevas relaciones. NO: no decir 'todo va a estar bien' ni 'sé exactamente cómo te sientes'; no distraerla de la realidad de la muerte; no evitar mencionar al que murió (el silencio hiere más que el nombre); no dejarla a solas en su duelo; no racionalizar para quitar la culpa genuina; y no dejar que corte las relaciones que la sostendrán. Sobre el momento: las verdades que consuelan más tarde solo hieren si se meten de prisa demasiado pronto. La esperanza del evangelio — Cristo resucitado, los muertos en Cristo resucitados, toda lágrima enjugada — se trae cuando el momento es propicio, como suelo firme bajo los pies dolientes, nunca como un argumento para ganar ni una tapa puesta sobre el duelo.", "kw_en": ["agree", "painfu", "rather", "minimi", "help", "person", "face", "realit"], "kw_es": ["coinci", "doloro", "minimi", "ayudar", "person", "enfren", "realid", "pérdid"]}, {"textEn": "Why does grief have no neat 'closure,' and what does faithful closure actually look like in this unit — including the standing safeguard?", "textEs": "¿Por qué el duelo no tiene un 'cierre' ordenado, y cómo se ve el cierre fiel en esta unidad — incluyendo la salvaguarda permanente?", "modelEn": "Grief has no neat closure because there is no day the loss is simply 'finished'; to imply otherwise wounds the bereaved. Faithful closure is the opposite of a closed door — it is the promise to keep coming. The funeral ends and the crowd disperses, but the counselor stays and circles back in the long months afterward, when the meals have stopped arriving and the silence in the house is loudest. He marks the hard anniversaries, keeps using the name of the one who died, and watches quietly for grief that is not moving, bringing further help if needed. Closure is faithful, patient presence over time. The standing safeguard applies because grief ministry often means visiting a recently widowed person of the opposite gender alone in their home: do not visit alone behind closed doors — bring your spouse or another mature believer, or keep the visit in open view. This protects the grieving person in a vulnerable hour and keeps the pastor's ministry above reproach.", "modelEs": "El duelo no tiene cierre ordenado porque no hay un día en que la pérdida quede simplemente 'terminada'; insinuar lo contrario hiere al doliente. El cierre fiel es lo contrario de una puerta cerrada — es la promesa de seguir viniendo. El funeral termina y la multitud se dispersa, pero el consejero se queda y vuelve en los largos meses posteriores, cuando las comidas han dejado de llegar y el silencio en la casa es más fuerte. Marca los aniversarios difíciles, sigue usando el nombre del que murió, y vigila en silencio el duelo que no avanza, trayendo más ayuda si se necesita. El cierre es la presencia fiel y paciente en el tiempo. La salvaguarda permanente aplica porque el ministerio del duelo a menudo significa visitar a solas en su hogar a una persona del sexo opuesto recién enviudada: no visite a solas tras puertas cerradas — lleve a su cónyuge o a otro creyente maduro, o mantenga la visita a la vista de todos. Esto protege a la persona en duelo en una hora vulnerable y mantiene irreprensible el ministerio del pastor.", "kw_en": ["grief", "neat", "closur", "becaus", "loss", "simply", "finish", "imply"], "kw_es": ["duelo", "tiene", "cierre", "ordena", "porque", "pérdid", "quede", "simple"]}]}};
+
+let STATE = loadState();
+let STATE_SA = loadStateSA();
+function loadState(){ try{ return JSON.parse(localStorage.getItem("cts_cs_state")||"{}"); }catch(e){ return {}; } }
+function loadStateSA(){ try{ return JSON.parse(localStorage.getItem("cts_cs_state_sa")||"{}"); }catch(e){ return {}; } }
+function saveStateSA(){ localStorage.setItem("cts_cs_state_sa", JSON.stringify(STATE_SA)); }
+function saveState(){ localStorage.setItem("cts_cs_state", JSON.stringify(STATE)); }
+
+function loadReg(){
+  try{
+    const r = JSON.parse(localStorage.getItem("cts_cs_reg")||"null");
+    if (r) return r;
+    // No local registration yet -- auto-fill from the site-wide student record
+    // (set at the seminary's main registration) so a Masters-track student is
+    // graded at the correct rigor here without re-registering on this page.
+    const shared = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if(shared && shared.name && shared.email){
+      const sharedTrack = String(localStorage.getItem('cts_track') || shared.track || shared.program || '').toLowerCase();
+      let track = 'cert';
+      if(sharedTrack === 'mdiv' || /master of divinity|m\.div/.test(sharedTrack)) track = 'mdiv';
+      else if(sharedTrack === 'thm' || sharedTrack === 'mth' || /master of theology|m\.th|th\.m/.test(sharedTrack)) track = 'thm';
+      const reg = { name: shared.name, email: shared.email, country: shared.country || '', track };
+      saveReg(reg);
+      return reg;
+    }
+    return null;
+  }catch(e){ return null; }
+}
+function saveReg(r){ localStorage.setItem("cts_cs_reg", JSON.stringify(r)); }
+
+function applyLang(){ const es = localStorage.getItem("cts_lang")==="es"; document.body.classList.toggle("spanish", es); const b=document.getElementById("langToggle"); if(b) b.textContent = es ? "🇺🇸 English" : "🇪🇸 Español"; }
+document.getElementById("langToggle").addEventListener("click", function(){ const es = localStorage.getItem("cts_lang")==="es"; localStorage.setItem("cts_lang", es?"en":"es"); applyLang(); });
+
+function renderReg(){
+  const r = loadReg(); const status=document.getElementById("regStatus"); const fields=document.getElementById("regFields");
+  if(r && r.name){
+    status.innerHTML = "<span class='lang-en'>Registered: </span><span class='lang-es'>Registrado: </span>" + r.name + " · " + r.track;
+    fields.style.display="none";
+  }
+}
+document.getElementById("saveRegBtn").addEventListener("click", function(){
+  const r = { name:document.getElementById("studentName").value.trim(), email:document.getElementById("studentEmail").value.trim(), country:document.getElementById("studentCountry").value.trim(), track:document.getElementById("programTrack").value };
+  if(!r.name){ alert("Please enter your name / Por favor ingrese su nombre"); return; }
+  saveReg(r); renderReg();
+});
+
+function renderNav(){
+  const nav=document.getElementById("unitNav");
+  let h="";
+  for(let u=0; u<TOTAL_UNITS; u++){
+    const st = STATE[u];
+    let cls = u===THIS_UNIT ? "current" : (st && st.passed ? "done" : "");
+    h += "<a class='"+cls+"' href='"+fileFor(u)+"'>"+UNIT_LABELS[u]+"</a>";
+  }
+  nav.innerHTML=h;
+}
+
+function renderProgress(){
+  let done=0; for(let u=0; u<TOTAL_UNITS; u++){ if(STATE[u] && STATE[u].passed) done++; }
+  const pct = Math.round(100*done/TOTAL_UNITS);
+  const fill=document.getElementById("progressFill"); fill.style.width=pct+"%"; fill.textContent=pct+"%";
+  const pt=document.getElementById("progressText");
+  pt.innerHTML = "<span class='lang-en'>"+done+" of "+TOTAL_UNITS+" situations completed</span><span class='lang-es'>"+done+" de "+TOTAL_UNITS+" situaciones completadas</span>";
+  if(done===TOTAL_UNITS){ document.getElementById("courseComplete").style.display="block"; }
+}
+
+function renderQuiz(){
+  const u = UNITS[THIS_UNIT]; if(!u) return;
+  const mcWrap=document.getElementById("mcq_"+THIS_UNIT);
+  let mh="";
+  u.mcq.forEach(function(q,qi){
+    mh += "<div class='question-card'><p><span class='lang-en'>"+(qi+1)+". "+q.textEn+"</span><span class='lang-es'>"+(qi+1)+". "+q.textEs+"</span></p>";
+    q.options.forEach(function(o,oi){
+      mh += "<label class='option' data-q='"+qi+"' data-o='"+oi+"'><span class='lang-en'>"+o.en+"</span><span class='lang-es'>"+o.es+"</span></label>";
+    });
+    mh += "<div class='feedback' id='fb_"+qi+"'></div></div>";
+  });
+  mcWrap.innerHTML=mh;
+  mcWrap.querySelectorAll(".option").forEach(function(el){
+    el.addEventListener("click", function(){
+      const qi=this.getAttribute("data-q");
+      const already=mcWrap.querySelector(".option[data-q='"+qi+"'].correct, .option[data-q='"+qi+"'].incorrect");
+      if(already) return;
+      const q=u.mcq[qi];
+      const oi=parseInt(this.getAttribute("data-o"),10);
+      const fb=document.getElementById("fb_"+qi);
+      mcWrap.querySelectorAll(".option[data-q='"+qi+"']").forEach(function(s){ s.classList.remove("selected"); });
+      this.classList.add("selected");
+      if(oi===q.correct){ this.classList.add("correct"); fb.className="feedback show ok"; fb.innerHTML="<span class='lang-en'>Correct. "+q.explainEn+"</span><span class='lang-es'>Correcto. "+q.explainEs+"</span>"; }
+      else { this.classList.add("incorrect"); const corr=mcWrap.querySelector(".option[data-q='"+qi+"'][data-o='"+q.correct+"']"); if(corr) corr.classList.add("correct"); fb.className="feedback show no"; fb.innerHTML="<span class='lang-en'>Not quite. "+q.explainEn+"</span><span class='lang-es'>No exactamente. "+q.explainEs+"</span>"; }
+    });
+  });
+  const esWrap=document.getElementById("essay_"+THIS_UNIT);
+  let eh="";
+  u.shortAnswer.forEach(function(q,qi){
+    eh += "<div class='essay-card'><p><span class='lang-en'>"+(u.mcq.length+qi+1)+". "+q.textEn+"</span><span class='lang-es'>"+(u.mcq.length+qi+1)+". "+q.textEs+"</span></p>";
+    eh += "<textarea id='sa_"+qi+"' placeholder='Your answer / Su respuesta' aria-label='Your answer / Su respuesta'></textarea>";
+    eh += "<button class='small-check-btn' onclick='revealModel("+qi+")'><span class=\"lang-en\">Reveal model answer</span><span class=\"lang-es\">Mostrar respuesta modelo</span></button>";
+    eh += "<div class='model-answer' id='model_"+qi+"'><strong><span class=\"lang-en\">Model answer:</span><span class=\"lang-es\">Respuesta modelo:</span></strong><br><span class='lang-en'>"+q.modelEn+"</span><span class='lang-es'>"+q.modelEs+"</span></div></div>";
+  });
+  esWrap.innerHTML=eh;
+}
+
+function revealModel(qi){
+  const model=document.getElementById("model_"+qi); if(model) model.classList.add("show");
+}
+
+function submitUnit(n){
+  const u=UNITS[n]; const reg=loadReg();
+  let mcCorrect=0;
+  u.mcq.forEach(function(q,qi){
+    const sel=document.querySelector("#mcq_"+n+" .option[data-q='"+qi+"'].selected");
+    const fb=document.getElementById("fb_"+qi);
+    document.querySelectorAll("#mcq_"+n+" .option[data-q='"+qi+"']").forEach(function(el){ el.classList.remove("correct","incorrect"); });
+    if(sel){
+      const oi=parseInt(sel.getAttribute("data-o"),10);
+      if(oi===q.correct){ mcCorrect++; sel.classList.add("correct"); fb.className="feedback show ok"; fb.innerHTML="<span class='lang-en'>Correct. "+q.explainEn+"</span><span class='lang-es'>Correcto. "+q.explainEs+"</span>"; }
+      else { sel.classList.add("incorrect"); const corr=document.querySelector("#mcq_"+n+" .option[data-q='"+qi+"'][data-o='"+q.correct+"']"); if(corr) corr.classList.add("correct"); fb.className="feedback show no"; fb.innerHTML="<span class='lang-en'>Not quite. "+q.explainEn+"</span><span class='lang-es'>No exactamente. "+q.explainEs+"</span>"; }
+    } else {
+      const corr=document.querySelector("#mcq_"+n+" .option[data-q='"+qi+"'][data-o='"+q.correct+"']"); if(corr) corr.classList.add("correct");
+      fb.className="feedback show no"; fb.innerHTML="<span class='lang-en'>No answer selected. "+q.explainEn+"</span><span class='lang-es'>No se seleccionó respuesta. "+q.explainEs+"</span>";
+    }
+  });
+  u.shortAnswer.forEach(function(q,qi){ const m=document.getElementById("model_"+qi); if(m) m.classList.add("show"); });
+  const mcPct = Math.round(100*mcCorrect/u.mcq.length);
+  let passed, msgEn, msgEs, saPct=null;
+  if(reg && reg.track!=="cert" && u.shortAnswer.length){
+    let saCorrect=0;
+    u.shortAnswer.forEach(function(q,qi){
+      if(!(STATE_SA[n]&&STATE_SA[n][qi])){
+        const ta=document.getElementById("sa_"+qi); const ans=(ta?ta.value:"").trim().toLowerCase();
+        if(ans.length>=100){ const matched=saKeywords(q).filter(function(kw){ return kwHit(ans,kw); }); STATE_SA[n]=STATE_SA[n]||{}; STATE_SA[n][qi]=matched.length>=SA_MIN_HITS; }
+      }
+      if(STATE_SA[n]&&STATE_SA[n][qi]) saCorrect++;
+    });
+    saPct = Math.round(100*saCorrect/u.shortAnswer.length);
+    passed = (mcPct>=90) && (saPct>=90);
+    msgEn = "Multiple choice: "+mcPct+"%. Written: "+saCorrect+"/"+u.shortAnswer.length+" ("+saPct+"%).";
+    msgEs = "Opción múltiple: "+mcPct+"%. Escritas: "+saCorrect+"/"+u.shortAnswer.length+" ("+saPct+"%).";
+  } else {
+    passed = mcPct>=90;
+    msgEn = "Multiple choice: "+mcPct+"%. Short-answer model answers are shown for your reflection.";
+    msgEs = "Opción múltiple: "+mcPct+"%. Las respuestas modelo se muestran para su reflexión.";
+  }
+  STATE[n] = { passed:passed, mc:mcPct, sa:saPct };
+  saveState(); renderNav(); renderProgress();
+  const res=document.getElementById("result_"+n);
+  res.className = "unit-result show " + (passed?"pass":"fail");
+  res.innerHTML = (passed ? "<span class='lang-en'>✓ Unit passed. </span><span class='lang-es'>✓ Unidad aprobada. </span>" : "<span class='lang-en'>Not yet passed (90% needed). </span><span class='lang-es'>Aún no aprobada (se necesita 90%). </span>") + "<span class='lang-en'>"+msgEn+"</span><span class='lang-es'>"+msgEs+"</span>";
+}
+
+function resetUnit(n){
+  document.querySelectorAll("#mcq_"+n+" .option").forEach(function(el){ el.classList.remove("selected","correct","incorrect"); });
+  document.querySelectorAll("#mcq_"+n+" .feedback").forEach(function(el){ el.className="feedback"; el.innerHTML=""; });
+  const u=UNITS[n]; u.shortAnswer.forEach(function(q,qi){ const t=document.getElementById("sa_"+qi); if(t) t.value=""; const m=document.getElementById("model_"+qi); if(m) m.classList.remove("show"); });
+  delete STATE[n]; saveState(); renderNav(); renderProgress();
+  const res=document.getElementById("result_"+n); res.className="unit-result"; res.innerHTML="";
+}
+
+applyLang(); renderReg(); renderNav(); renderProgress(); renderQuiz();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Evangelism — Unit 6: Methods, Styles, and Misunderstandings in Evangelism (Bilingual)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .clear-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.clear-btn { background: #a0512a; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.attribution { font-size: 0.95rem; color: #6b5840; font-style: italic; margin-bottom: 16px; }
+blockquote { margin: 14px 0; padding: 10px 14px; border-left: 4px solid #5b3a1f; background: #f4ede2; font-style: italic; }
+.track-banner { background: #5b3a1f; color: white; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-weight: bold; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+.kw-answer:disabled { background: #f5f0e8; cursor: not-allowed; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.small:disabled { background: #aaa; cursor: not-allowed; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.lockout-banner { background: #f8d7da; color: #721c24; padding: 12px 16px; border-radius: 12px; margin-bottom: 15px; font-weight: bold; border: 1px solid #f5c6cb; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en div.lang-en { display: block; }
+body.lang-es div.lang-es { display: block; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.cwt-box { background: #fefcf5; border: 1px solid #d7cec1; border-radius: 16px; padding: 20px; margin: 20px 0; }
+.cwt-box h4 { color: #5b3a1f; margin-top: 0; }
+.cwt-box ul { margin-left: 1.2rem; }
+.cwt-box .prayer { background: #f4ede2; padding: 12px; border-radius: 10px; font-style: italic; }
+.style-box { background: #fdfaf3; border-left: 4px solid #8b6f3f; border-radius: 6px; padding: 12px 16px; margin: 10px 0; }
+.style-box strong.style-name { color: #5b3a1f; font-size: 1.05rem; }
+@media print {
+  .toggle-btn, .clear-btn, .nav-bar, .registration-panel, button, .question input[type="radio"], textarea, .lockout-banner { display: none !important; }
+  body { background: white; }
+  .card { box-shadow: none; border: none; }
+}
+.model-answer-box { margin-top: 12px; padding: 12px 14px; background: #fbf3d9; border: 1px solid #e4c95b; border-left: 5px solid #c9a227; border-radius: 8px; color: #4a3c10; font-size: 0.95em; line-height: 1.5; }
+.model-answer-box strong { color: #7a5c00; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span></button>
+        <button class="nav-btn" id="nextUnitBtn"><span class="lang-en">Next</span><span class="lang-es">Siguiente</span> →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+<button class="clear-btn" id="clearDataBtn">🗑 <span class="lang-en">Clear Saved Data</span><span class="lang-es">Borrar Datos Guardados</span></button>
+
+<div class="card">
+    <h1>
+        <span class="lang-en">📖 Evangelism — Unit 6: Methods, Styles, and Misunderstandings in Evangelism</span>
+        <span class="lang-es">📖 Evangelismo — Unidad 6: Métodos, Estilos y Malentendidos en el Evangelismo</span>
+    </h1>
+    <p class="attribution">
+        <span class="lang-en">Chapala Theological Seminary · Dr. Wayne Cook, Author and Professor · Dr. Ted Rogers, Seminary Director</span>
+        <span class="lang-es">Seminario Teológico de Chapala · Dr. Wayne Cook, Autor y Profesor · Dr. Ted Rogers, Director del Seminario</span>
+    </p>
+    <div id="trackBanner" class="track-banner" style="display:none;"></div>
+</div>
+
+<!-- CTS audit 2026-05-23: registration panel removed. Registration happens once on Unit 1.
+     Later units read the saved student/track from localStorage (cts_student / cts_track).
+     If none is saved, the student silently defaults to the Certificate track (per Wayne). -->
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation: Tools, Not the Message</h2>
+        <p>Throughout church history, believers have developed many methods to communicate the gospel. Some have proven helpful; others have produced confusion or superficial response. Methods are tools — not the message. The gospel does not change, but the way it is presented may vary with the situation, the individual, and the leading of the Spirit. This unit examines a primary structured method (CWT), the seven styles by which different believers naturally witness, and the common misunderstandings that turn methods into masters.</p>
+
+        <h3>I. The Proper Place of Methods</h3>
+        <p>Paul demonstrated flexibility in approach while maintaining consistency in message: "I have become all things to all men, that I might by all means save some" (1 Corinthians 9:22, NKJV). The message is fixed; the method may vary. Reliance must always be on God: "our sufficiency is from God" (2 Corinthians 3:5, NKJV). Methods serve the message; they do not replace it. A well-crafted presentation can help a new believer share his faith clearly. A structured approach can prevent awkwardness or omission. But when the method becomes the focus, the evangelist trusts the tool rather than the Spirit.</p>
+
+        <h3>II. Structured Evangelism: An Introduction to CWT</h3>
+        <p>Structure does not replace the Spirit; it gives the believer a reliable path from ordinary conversation to a clear presentation. The most complete and time-tested structure in our tradition is Continuous Witness Training (CWT). The outline below has been used effectively by thousands of believers around the world.</p>
+
+        <div class="cwt-box">
+        <h3>III. Continuous Witness Training (CWT) — A Complete Gospel Presentation</h3>
+
+        <h4>Two Questions</h4>
+        <p><strong>➤ Have you come to a place in your life that you know for certain you have eternal life and will go to heaven when you die?</strong></p>
+        <p><strong>➤ Suppose you were standing before God right now and He asked you, "Why should I let you into my heaven?" What would you say?</strong></p>
+
+        <h4>God's Purpose</h4>
+        <p>God loves us and has a purpose for our lives. The Bible states it this way: "For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life" (John 3:16, NKJV). God's purpose is that we have eternal life.</p>
+        <ul>
+        <li>God gives eternal life as a gift. "…the gift of God is eternal life in Christ Jesus our Lord." (Rom. 6:23, NKJV)</li>
+        <li>We can live a full and meaningful life right now. "I have come that they may have life, and that they may have it more abundantly." (John 10:10, NKJV)</li>
+        <li>We will spend eternity with Jesus in heaven. "…I go to prepare a place for you… I will come again and receive you to Myself; that where I am, there you may be also." (John 14:3, NKJV)</li>
+        </ul>
+
+        <h4>Our Need</h4>
+        <p>As we search for meaning in life, we discover that our sinful nature keeps us from fulfilling God's purpose for our lives.</p>
+        <ul>
+        <li>We are all sinners by nature and by choice. "for all have sinned and fall short of the glory of God" (Rom. 3:23, NKJV).</li>
+        <li>We cannot save ourselves. "For by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast" (Eph. 2:8–9, NKJV).</li>
+        <li>We deserve death and hell. "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord." (Rom. 6:23, NKJV)</li>
+        </ul>
+
+        <h4>God's Provision</h4>
+        <p>God is holy and just and must punish sin. Yet He loves us and provides forgiveness for our sin. Jesus said, "I am the way, the truth, and the life. No one comes to the Father except through Me" (John 14:6, NKJV).</p>
+        <ul>
+        <li>Jesus is God and became man. "In the beginning was the Word, and the Word was with God, and the Word was God" (John 1:1, NKJV). "And the Word became flesh and dwelt among us" (John 1:14, NKJV).</li>
+        <li>Jesus died for us on the cross. "For Christ also suffered once for sins, the just for the unjust, that He might bring us to God" (1 Pet. 3:18, NKJV).</li>
+        <li>Jesus was resurrected (arose) from the dead and is alive today. "who was delivered up because of our offenses, and was raised because of our justification" (Romans 4:25, NKJV). "For the death that He died, He died to sin once for all; but the life that He lives, He lives to God" (Romans 6:10, NKJV).</li>
+        <li>God, through His Holy Spirit, calls us to Himself. "No one can come to Me unless the Father who sent Me draws him; and I will raise him up at the last day" (John 6:44, NKJV).</li>
+        </ul>
+
+        <h4>Our Response</h4>
+        <p>The only way Jesus can affect our lives is for us to receive Him. The Bible says, "But as many as received Him, to them He gave the right to become children of God, to those who believe in His name" (John 1:12, NKJV).</p>
+        <ul>
+        <li>We must repent of our sin. "Repent therefore and be converted, that your sins may be blotted out" (Acts 3:19, NKJV).<br>
+        ‣ Repentance is not just feeling sorry for our sin. Paul said, "…that they should repent, turn to God, and do works befitting repentance" (Acts 26:20, NKJV).<br>
+        ‣ Repentance is turning away from our sin and turning to God through Jesus.</li>
+        <li>We must place our faith in Jesus. "For by grace you have been saved through faith, and that not of yourselves; it is the gift of God" (Eph. 2:8, NKJV).<br>
+        ‣ Faith is not just believing facts about Jesus. "You believe that there is one God. You do well. Even the demons believe—and tremble!" (Jas. 2:19, NKJV).<br>
+        ‣ Faith is trusting in Jesus. "For the Scripture says, 'Whoever believes on Him will not be put to shame'" (Rom. 10:11, NKJV).</li>
+        <li>We must surrender to Jesus as Lord. "that if you confess with your mouth the Lord Jesus and believe in your heart that God has raised Him from the dead, you will be saved. For with the heart one believes unto righteousness, and with the mouth confession is made unto salvation" (Rom. 10:9–10, NKJV).<br>
+        ‣ Surrendering to Jesus as Lord is not just saying we give our lives to Jesus (Matt. 7:21, NKJV).<br>
+        ‣ Surrendering to Jesus as Lord is giving Jesus control of our lives.</li>
+        </ul>
+
+        <h4>My Commitment</h4>
+        <p>Giving Jesus control is something each person must do for himself or herself. No one else can make this decision for you. Jesus says, "Behold, I stand at the door and knock. If anyone hears My voice and opens the door, I will come in to him and dine with him, and he with Me" (Rev. 3:20, NKJV).</p>
+        <ul>
+        <li>Does what we have been discussing make sense to you?</li>
+        <li>Is there any reason you would not be willing to receive God's gift of eternal life?</li>
+        <li>Are you willing to turn from your sin, place your faith in Jesus, and give Him control of your life right now?</li>
+        </ul>
+        <p>If you are willing to receive Jesus into your life now, you can invite Him in by prayer. You may use the following prayer or a similar one using your own words:</p>
+        <div class="prayer">
+        "Dear Lord Jesus, I believe You are the Son of God and died to forgive me of my sins. I know I have sinned. I ask You to forgive me. I turn from my sins, and I receive You as my Lord and Savior. Thank You for saving me. I want to live for You the rest of my life. Amen."
+        </div>
+        </div>
+
+        <h3>IV. The Seven Styles of Evangelism</h3>
+        <p>While CWT gives a structure, the New Testament shows that the Spirit equips different believers in different ways. Not every Christian will witness the same way. Seven recognizable styles emerge from Scripture, each with its own biblical model and its own gift. The wise believer identifies the style that fits the temperament God gave him while learning from the others.</p>
+
+        <div class="style-box"><strong class="style-name">1. The Harvesting Evangelist.</strong> The Spirit-gifted preacher who calls clearly and directly for decision. Most pastors and itinerant evangelists serve here. The danger is two distortions: the "Salesman" who pressures, and the "Grim Reaper" who threatens. Done rightly, harvesting is the bold, clear public invitation to receive Christ.</div>
+
+        <div class="style-box"><strong class="style-name">2. The Confrontational Style.</strong> Peter at Pentecost: "Men of Israel, hear these words… Him, being delivered by the determined purpose and foreknowledge of God, you have taken by lawless hands, have crucified, and put to death" (Acts 2:22–23, NKJV). Three thousand were cut to the heart. Chuck Colson later said it was "high time some of you faced the music." This style speaks the hard truth in love and refuses to soften the offense of the cross. Its danger is harshness; its strength is candor.</div>
+
+        <div class="style-box"><strong class="style-name">3. The Apologist (Intellectual) Style.</strong> Apollos "vigorously refuted the Jews publicly, showing from the Scriptures that Jesus is the Christ" (Acts 18:28, NKJV). Paul reasoned on Mars Hill (Acts 17). Josh McDowell, an atheist who set out to disprove Christianity, became a believer and wrote <em>Evidence That Demands a Verdict</em>. The Apologist meets the skeptic with answers. Its strength is reasoned defense; its danger is winning the argument and losing the soul.</div>
+
+        <div class="style-box"><strong class="style-name">4. The Testimonial Style.</strong> The blind man in John 9, examined by hostile theologians, said, "One thing I know: that though I was blind, now I see" (John 9:25, NKJV). He could not debate; he could only testify. Personal story is its own evidence. Every believer has a testimony; this style simply tells it.</div>
+
+        <div class="style-box"><strong class="style-name">5. The Relational Style.</strong> The Gerasene demoniac, after deliverance, was sent home: "Go home to your friends, and tell them what great things the Lord has done for you, and how He has had compassion on you" (Mark 5:19, NKJV). Most evangelism still happens this way — across the dinner table, the cubicle wall, the family room. Trust precedes truth; relationship opens the door for the gospel.</div>
+
+        <div class="style-box"><strong class="style-name">6. The Invitational Style.</strong> The Samaritan woman left her waterpot, ran to the city, and said, "Come, see a Man who told me all things that I ever did. Could this be the Christ?" (John 4:29, NKJV). She did not preach; she invited. "Come and see." Many believers who feel unequipped to explain can still invite — to a service, a Bible study, a meal with a pastor, a moment of investigation.</div>
+
+        <div class="style-box"><strong class="style-name">7. The Serving Style.</strong> Dorcas "was full of good works and charitable deeds" (Acts 9:36, NKJV), making garments for widows. Barnabas — the Son of Encouragement — went looking for needs and met them. Service preaches when words cannot. Its question is, "How can I help?" — and the help becomes the platform from which the gospel is finally heard.</div>
+
+        <p>These seven are not rivals. They are complementary. A church needs all seven, and most believers find themselves naturally drawn to two or three. The Spirit gifts differently; the gospel is one.</p>
+
+        <h3>V. The Danger of Mechanical Evangelism</h3>
+        <p>When method becomes rigid, evangelism loses sensitivity. A believer may follow a script so closely that he fails to listen to the person in front of him. Jesus did not follow a fixed script; He adapted to each individual. Mechanical evangelism treats people as projects rather than image-bearers. The solution is not to abandon structure but to hold it loosely, allowing the Spirit to guide the conversation.</p>
+
+        <h3>VI. Tract Evangelism — The Philip Model</h3>
+        <p>A tract can be a helpful tool when used properly. Philip and the Ethiopian eunuch provide the model: Philip ran to him, heard him reading Isaiah, and then "preached Jesus to him" (Acts 8:35, NKJV). The eunuch had Scripture but needed a teacher. A tract should be used in conversation, not merely dropped like an anonymous leaflet. The believer should offer to read it together, explain the verses, and answer questions. Used this way, a tract becomes an extension of personal witness, not a substitute for it.</p>
+
+        <h3>VII. The Misunderstanding of Results</h3>
+        <p>Pressure leads to superficial response. Jesus warned, "Not everyone who says to Me, 'Lord, Lord,' shall enter the kingdom of heaven" (Matthew 7:21, NKJV). A decision made under emotional pressure may not be a genuine conversion. Methods that count professions without examining fruit mislead. Faithful evangelism aims for conversion, not merely profession. The evangelist must be willing to let a person walk away rather than press him into a false assurance.</p>
+
+        <h3>VIII. Conclusion: Methods as Servants — The Carpenter and His Tools</h3>
+        <p>A carpenter has many tools — hammers, saws, levels, squares. Each tool serves a purpose. But the carpenter does not praise the tools; he uses them. If he becomes enamored with his hammer and forgets the design of the house, the house will be poorly built. The tools are servants, not masters. So it is with evangelistic methods and styles. They are useful servants, but they must never become the object of confidence. The skill belongs to the Spirit; the design belongs to God. The evangelist simply takes up the tools and works, trusting the Master Builder for the result. As Paul concluded, "I planted, Apollos watered, but God gave the increase" (1 Corinthians 3:6, NKJV).</p>
+
+        <p><em>Prayer: Lord, teach us to use methods as tools, not idols, and styles as gifts, not boundaries. Give us wisdom to know when to speak and when to listen, when to confront and when to serve, when to reason and when to testify. Free us from manipulation and superficiality. May the gospel itself remain Your power unto salvation. In Jesus' name, Amen.</em></p>
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación: Herramientas, No el Mensaje</h2>
+        <p>A lo largo de la historia de la iglesia, los creyentes han desarrollado muchos métodos para comunicar el evangelio. Algunos han resultado útiles; otros han producido confusión o respuestas superficiales. Los métodos son herramientas — no el mensaje. El evangelio no cambia, pero la manera de presentarlo puede variar según la situación, el individuo y la dirección del Espíritu. Esta unidad examina un método estructurado principal (CWT), los siete estilos por los cuales diferentes creyentes testifican naturalmente, y los malentendidos comunes que convierten los métodos en amos.</p>
+
+        <h3>I. El Lugar Propio de los Métodos</h3>
+        <p>Pablo demostró flexibilidad en su enfoque manteniendo consistencia en el mensaje: "A todos me he hecho de todo, para que de todos modos salve a algunos" (1 Corintios 9:22, RVG). El mensaje es fijo; el método puede variar. La confianza debe estar siempre en Dios: "Nuestra suficiencia es de Dios" (2 Corintios 3:5, RVG). Los métodos sirven al mensaje; no lo reemplazan. Una presentación bien elaborada puede ayudar a un nuevo creyente a compartir su fe con claridad. Un enfoque estructurado puede prevenir la torpeza o la omisión. Pero cuando el método se convierte en el centro, el evangelista confía en la herramienta en vez del Espíritu.</p>
+
+        <h3>II. Evangelismo Estructurado: Una Introducción al CWT</h3>
+        <p>La estructura no reemplaza al Espíritu; le da al creyente un camino confiable desde la conversación ordinaria hasta una presentación clara. La estructura más completa y probada por el tiempo en nuestra tradición es el Entrenamiento de Testimonio Continuo (CWT). El siguiente bosquejo ha sido usado eficazmente por miles de creyentes alrededor del mundo.</p>
+
+        <div class="cwt-box">
+        <h3>III. Entrenamiento de Testimonio Continuo (CWT) — Una Presentación Completa del Evangelio</h3>
+
+        <h4>Dos Preguntas</h4>
+        <p><strong>➤ ¿Ha llegado usted a un punto en su vida en que sabe con certeza que tiene vida eterna e irá al cielo cuando muera?</strong></p>
+        <p><strong>➤ Suponga que estuviera de pie ante Dios ahora mismo y Él le preguntara: "¿Por qué debería dejarte entrar en mi cielo?" ¿Qué le respondería?</strong></p>
+
+        <h4>El Propósito de Dios</h4>
+        <p>Dios nos ama y tiene un propósito para nuestras vidas. La Biblia lo expresa así: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna" (Juan 3:16, RVG). El propósito de Dios es que tengamos vida eterna.</p>
+        <ul>
+        <li>Dios da la vida eterna como regalo. "…la dádiva de Dios es vida eterna en Cristo Jesús Señor nuestro" (Rom. 6:23, RVG).</li>
+        <li>Podemos vivir una vida plena y significativa ahora mismo. "Yo he venido para que tengan vida, y para que la tengan en abundancia" (Juan 10:10, RVG).</li>
+        <li>Pasaremos la eternidad con Jesús en el cielo. "Voy, pues, a preparar lugar para vosotros… vendré otra vez, y os tomaré a mí mismo, para que donde yo estoy, vosotros también estéis" (Juan 14:3, RVG).</li>
+        </ul>
+
+        <h4>Nuestra Necesidad</h4>
+        <p>Al buscar sentido en la vida, descubrimos que nuestra naturaleza pecaminosa nos impide cumplir el propósito de Dios para nuestras vidas.</p>
+        <ul>
+        <li>Todos somos pecadores por naturaleza y por elección. "Por cuanto todos pecaron, y están destituidos de la gloria de Dios" (Rom. 3:23, RVG).</li>
+        <li>No podemos salvarnos a nosotros mismos. "Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se gloríe" (Ef. 2:8–9, RVG).</li>
+        <li>Merecemos la muerte y el infierno. "La paga del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús Señor nuestro" (Rom. 6:23, RVG).</li>
+        </ul>
+
+        <h4>La Provisión de Dios</h4>
+        <p>Dios es santo y justo y debe castigar el pecado. Sin embargo, nos ama y provee perdón por nuestro pecado. Jesús dijo: "Yo soy el camino, la verdad, y la vida; nadie viene al Padre, sino por mí" (Juan 14:6, RVG).</p>
+        <ul>
+        <li>Jesús es Dios y se hizo hombre. "En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios" (Juan 1:1, RVG). "Y aquel Verbo fue hecho carne, y habitó entre nosotros" (Juan 1:14, RVG).</li>
+        <li>Jesús murió por nosotros en la cruz. "Porque también Cristo padeció una sola vez por los pecados, el justo por los injustos, para llevarnos a Dios" (1 Ped. 3:18, RVG).</li>
+        <li>Jesús resucitó de los muertos y vive hoy. "El cual fue entregado por nuestras transgresiones, y resucitado para nuestra justificación" (Romanos 4:25, RVG). "Porque en cuanto murió, al pecado murió una vez por todas; mas en cuanto vive, para Dios vive" (Romanos 6:10, RVG).</li>
+        <li>Dios, mediante Su Espíritu Santo, nos llama a Sí mismo. "Ninguno puede venir a mí, si el Padre que me envió no le trajere; y yo le resucitaré en el día postrero" (Juan 6:44, RVG).</li>
+        </ul>
+
+        <h4>Nuestra Respuesta</h4>
+        <p>La única manera en que Jesús puede afectar nuestras vidas es que lo recibamos. La Biblia dice: "Mas a todos los que le recibieron, a los que creen en su nombre, les dio potestad de ser hechos hijos de Dios" (Juan 1:12, RVG).</p>
+        <ul>
+        <li>Debemos arrepentirnos de nuestro pecado. "Así que, arrepentíos y convertíos, para que sean borrados vuestros pecados" (Hechos 3:19, RVG).<br>
+        ‣ El arrepentimiento no es solo sentir tristeza por nuestro pecado. Pablo dijo: "…anunciando primeramente… que se arrepintiesen y se convirtiesen a Dios, haciendo obras dignas de arrepentimiento" (Hechos 26:20, RVG).<br>
+        ‣ El arrepentimiento es apartarse del pecado y volverse a Dios por medio de Jesús.</li>
+        <li>Debemos poner nuestra fe en Jesús. "Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios" (Ef. 2:8, RVG).<br>
+        ‣ La fe no es solo creer datos acerca de Jesús. "Tú crees que Dios es uno; bien haces. También los demonios creen, y tiemblan" (Stg. 2:19, RVG).<br>
+        ‣ La fe es confiar en Jesús. "Pues la Escritura dice: Todo aquel que en él creyere, no será avergonzado" (Rom. 10:11, RVG).</li>
+        <li>Debemos rendirnos a Jesús como Señor. "Que si confesares con tu boca que Jesús es el Señor, y creyeres en tu corazón que Dios le levantó de los muertos, serás salvo. Porque con el corazón se cree para justicia, pero con la boca se confiesa para salvación" (Rom. 10:9–10, RVG).<br>
+        ‣ Rendirse a Jesús como Señor no es solo decir que le entregamos nuestras vidas (Mateo 7:21, RVG).<br>
+        ‣ Rendirse a Jesús como Señor es darle a Jesús el control de nuestras vidas.</li>
+        </ul>
+
+        <h4>Mi Compromiso</h4>
+        <p>Dar a Jesús el control es algo que cada persona debe hacer por sí misma. Nadie más puede tomar esta decisión por usted. Jesús dice: "He aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él, y cenaré con él, y él conmigo" (Apoc. 3:20, RVG).</p>
+        <ul>
+        <li>¿Tiene sentido para usted lo que hemos estado discutiendo?</li>
+        <li>¿Hay alguna razón por la cual usted no estaría dispuesto a recibir el regalo de Dios de la vida eterna?</li>
+        <li>¿Está dispuesto a apartarse del pecado, poner su fe en Jesús, y darle a Él el control de su vida ahora mismo?</li>
+        </ul>
+        <p>Si está dispuesto a recibir a Jesús en su vida ahora, puede invitarlo por medio de la oración. Puede usar la siguiente oración o una similar con sus propias palabras:</p>
+        <div class="prayer">
+        "Querido Señor Jesús, creo que Tú eres el Hijo de Dios y moriste para perdonar mis pecados. Sé que he pecado. Te pido que me perdones. Me aparto de mis pecados y Te recibo como mi Señor y Salvador. Gracias por salvarme. Quiero vivir para Ti el resto de mi vida. Amén."
+        </div>
+        </div>
+
+        <h3>IV. Los Siete Estilos de Evangelismo</h3>
+        <p>Aunque el CWT da una estructura, el Nuevo Testamento muestra que el Espíritu Santo capacita a diferentes creyentes de diferentes maneras. No todo cristiano testificará de la misma forma. De la Escritura emergen siete estilos reconocibles, cada uno con su modelo bíblico y su don. El creyente sabio identifica el estilo que se ajusta al temperamento que Dios le dio mientras aprende de los demás.</p>
+
+        <div class="style-box"><strong class="style-name">1. El Evangelista de Cosecha.</strong> El predicador con el don del Espíritu Santo que llama clara y directamente a la decisión. La mayoría de los pastores y evangelistas itinerantes sirven aquí. El peligro es de dos distorsiones: el "Vendedor" que presiona, y el "Segador Sombrío" que amenaza. Hecho correctamente, la cosecha es la invitación pública audaz y clara a recibir a Cristo.</div>
+
+        <div class="style-box"><strong class="style-name">2. El Estilo Confrontacional.</strong> Pedro en Pentecostés: "Varones israelitas, oíd estas palabras… a éste, entregado por el determinado consejo y anticipado conocimiento de Dios, prendisteis y matasteis por manos de inicuos, crucificándole" (Hechos 2:22–23, RVG). Tres mil fueron compungidos de corazón. Chuck Colson dijo después que era "hora de que algunos de ustedes enfrenten la música". Este estilo dice la verdad dura con amor y se niega a suavizar la ofensa de la cruz. Su peligro es la dureza; su fuerza es la franqueza.</div>
+
+        <div class="style-box"><strong class="style-name">3. El Estilo del Apologista (Intelectual).</strong> Apolos "con gran vehemencia refutaba públicamente a los judíos, demostrando por las Escrituras que Jesús era el Cristo" (Hechos 18:28, RVG). Pablo razonó en el Areópago (Hechos 17). Josh McDowell, un ateo que se propuso desmentir el cristianismo, se convirtió y escribió <em>Evidencia que Exige un Veredicto</em>. El Apologista enfrenta al escéptico con respuestas. Su fuerza es la defensa razonada; su peligro es ganar el argumento y perder el alma.</div>
+
+        <div class="style-box"><strong class="style-name">4. El Estilo Testimonial.</strong> El ciego de Juan 9, examinado por teólogos hostiles, dijo: "Una cosa sé, que habiendo yo sido ciego, ahora veo" (Juan 9:25, RVG). No podía debatir; solo podía testificar. La historia personal es su propia evidencia. Cada creyente tiene un testimonio; este estilo simplemente lo cuenta.</div>
+
+        <div class="style-box"><strong class="style-name">5. El Estilo Relacional.</strong> El endemoniado gadareno, después de su liberación, fue enviado a casa: "Vete a tu casa, a los tuyos, y cuéntales cuán grandes cosas el Señor ha hecho contigo, y cómo ha tenido misericordia de ti" (Marcos 5:19, RVG). La mayoría del evangelismo aún sucede así — en la mesa, en la oficina, en la sala familiar. La confianza precede a la verdad; la relación abre la puerta al evangelio.</div>
+
+        <div class="style-box"><strong class="style-name">6. El Estilo Invitacional.</strong> La mujer samaritana dejó su cántaro, corrió a la ciudad y dijo: "Venid, ved a un hombre que me ha dicho todo cuanto he hecho. ¿No será éste el Cristo?" (Juan 4:29, RVG). No predicó; invitó. "Venid y ved." Muchos creyentes que no se sienten capacitados para explicar pueden invitar — a un culto, a un estudio bíblico, a una comida con el pastor, a un momento de investigación.</div>
+
+        <div class="style-box"><strong class="style-name">7. El Estilo de Servicio.</strong> Dorcas "abundaba en buenas obras y en limosnas que hacía" (Hechos 9:36, RVG), haciendo vestidos para las viudas. Bernabé — el Hijo de Consolación — buscaba necesidades y las atendía. El servicio predica cuando las palabras no pueden. Su pregunta es: "¿Cómo puedo ayudar?" — y la ayuda se convierte en la plataforma desde la cual finalmente se escucha el evangelio.</div>
+
+        <p>Estos siete no son rivales. Son complementarios. Una iglesia necesita los siete, y la mayoría de los creyentes se sienten naturalmente atraídos por dos o tres. El Espíritu da dones diferentes; el evangelio es uno.</p>
+
+        <h3>V. El Peligro del Evangelismo Mecánico</h3>
+        <p>Cuando el método se vuelve rígido, el evangelismo pierde sensibilidad. Un creyente puede seguir un guion tan de cerca que no escucha a la persona frente a él. Jesús no siguió un guion fijo; se adaptó a cada individuo. El evangelismo mecánico trata a las personas como proyectos en lugar de portadores de la imagen de Dios. La solución no es abandonar la estructura sino sostenerla con flexibilidad, permitiendo que el Espíritu Santo guíe la conversación.</p>
+
+        <h3>VI. Evangelismo con Tratados — El Modelo de Felipe</h3>
+        <p>Un tratado puede ser una herramienta útil cuando se usa correctamente. Felipe y el eunuco etíope proveen el modelo: Felipe corrió a él, lo oyó leyendo a Isaías, y entonces "le anunció el evangelio de Jesús" (Hechos 8:35, RVG). El eunuco tenía la Escritura, pero necesitaba un maestro. Un tratado debe usarse en conversación, no simplemente dejarse como un folleto anónimo. El creyente debe ofrecerse a leerlo juntos, explicar los versículos y responder preguntas. Usado así, un tratado se convierte en una extensión del testimonio personal, no en un sustituto.</p>
+
+        <h3>VII. El Malentendido sobre los Resultados</h3>
+        <p>La presión produce respuestas superficiales. Jesús advirtió: "No todo el que me dice: Señor, Señor, entrará en el reino de los cielos" (Mateo 7:21, RVG). Una decisión tomada bajo presión emocional puede no ser una conversión genuina. Los métodos que cuentan profesiones sin examinar el fruto engañan. El evangelismo fiel busca conversión, no meramente profesión. El evangelista debe estar dispuesto a dejar que una persona se aleje en vez de presionarla a una falsa seguridad.</p>
+
+        <h3>VIII. Conclusión: Los Métodos como Siervos — El Carpintero y Sus Herramientas</h3>
+        <p>Un carpintero tiene muchas herramientas — martillos, sierras, niveles, escuadras. Cada herramienta sirve a un propósito. Pero el carpintero no alaba las herramientas; las usa. Si se enamora de su martillo y olvida el diseño de la casa, la casa quedará mal construida. Las herramientas son siervas, no amas. Así sucede con los métodos y estilos evangelísticos. Son siervos útiles, pero nunca deben convertirse en el objeto de confianza. La destreza pertenece al Espíritu Santo; el diseño pertenece a Dios. El evangelista simplemente toma las herramientas y trabaja, confiando en el Maestro Constructor por el resultado. Como concluyó Pablo: "Yo planté, Apolos regó; pero el crecimiento lo ha dado Dios" (1 Corintios 3:6, RVG).</p>
+
+        <p><em>Oración: Señor, enséñanos a usar los métodos como herramientas, no como ídolos, y los estilos como dones, no como límites. Danos sabiduría para saber cuándo hablar y cuándo escuchar, cuándo confrontar y cuándo servir, cuándo razonar y cuándo testificar. Líbranos de la manipulación y la superficialidad. Que el evangelio mismo siga siendo Tu poder para salvación. En el nombre de Jesús, Amén.</em></p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 6 — 30 Preguntas</span></h2>
+    <p>
+        <span class="lang-en"><strong>Certificate track:</strong> Section A (multiple choice) required at 90%. Section B (short answer) optional.</span>
+        <span class="lang-es"><strong>Pista de Certificado:</strong> Sección A (opción múltiple) obligatoria al 90%. Sección B (respuesta corta) opcional.</span>
+    </p>
+    <p>
+        <span class="lang-en"><strong>M.Div./Th.M. track:</strong> Both sections required at 90% each, independently.</span>
+        <span class="lang-es"><strong>Pista de M.Div./Th.M.:</strong> Ambas secciones obligatorias al 90% cada una, independientemente.</span>
+    </p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="clearExamDataBtn" class="small" style="background:#a0512a;">🗑 <span class="lang-en">Clear My Answers</span><span class="lang-es">Borrar Mis Respuestas</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;" aria-live="polite"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ======================== CONFIG ========================
+const UNIT_NUM = 6;
+const TOTAL_UNITS = 13; /* CTS Q24 audit 2026-05-28: normalized to 13. */
+const PASS_THRESHOLD = 0.90;
+const NS = 'cts_ev_';
+const UNIT_KEY = NS + 'unit' + UNIT_NUM;
+const PROGRESS_KEY = NS + 'progress';
+const PASSED_KEY = NS + 'unit' + UNIT_NUM + '_passed';
+const MC_PASSED_KEY = NS + 'u' + UNIT_NUM + '_mc_passed';
+const LOCKOUT_KEY = NS + 'unit' + UNIT_NUM + '_sa_lockout';
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch(e) { progress = {}; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(NS + 'unit' + i + '_passed') === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSEvangelismUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSEvangelismUnit5.html"; };
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (localStorage.getItem(PASSED_KEY) === 'true') location.href = "CTSEvangelismUnit7.html";
+    else alert(currentLang === 'es' ? "Por favor apruebe la Unidad 6 primero." : "Please pass Unit 6 first.");
+};
+updateProgressGrid();
+
+// ======================== REGISTRATION ========================
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+/* CTS audit 2026-05-23: registration is collected only on Unit 1. This unit reads the saved
+   student from localStorage. If nothing is saved, default silently to the Certificate track. */
+function loadReg() {
+    let saved = localStorage.getItem('cts_student');
+    if (saved) {
+        try { student = JSON.parse(saved); } catch(e) { student = { name: '', email: '', country: '', program: 'Certificate of Ministry' }; }
+    }
+    if (!student || !student.program) { student = student || {}; student.program = 'Certificate of Ministry'; }
+    /* Keep cts_track in sync from the saved program (defaults to cert when absent). */
+    if (!localStorage.getItem('cts_track')) {
+        localStorage.setItem('cts_track', student.program === 'Master of Divinity' ? 'mdiv' : (student.program === 'Master of Theology' ? 'thm' : 'cert'));
+    }
+    applyTrackBanner();
+}
+function applyTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    const track = localStorage.getItem('cts_track') || 'cert';
+    banner.style.display = 'block';
+    /* CTS audit 2026-05-23: added Th.M. banner branch; both Masters tracks require both sections. */
+    if (track === 'thm') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Theology — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Teología — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else if (track === 'mdiv') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Divinity — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Divinidad — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else {
+        banner.innerHTML = '<span class="lang-en">Track: Certificate — Section A required (90%). Section B optional.</span><span class="lang-es">Pista: Certificado — Sección A obligatoria (90%). Sección B opcional.</span>';
+    }
+}
+/* CTS audit 2026-05-23: registration listeners removed (no reg form on this unit). */
+loadReg();
+applyTrackBanner();
+
+// ======================== QUESTIONS — MC distribution A=B=C=D=5 ========================
+const mcQuestions = [
+    { textEn: "1. Methods in evangelism are best understood as:", textEs: "1. Los métodos en el evangelismo se entienden mejor como:", optionsEn: ["The message itself", "Tools that serve the message", "Optional luxuries", "Equal in authority to Scripture"], optionsEs: ["El mensaje mismo", "Herramientas que sirven al mensaje", "Lujos opcionales", "Iguales en autoridad a las Escrituras"], correct: 1, explanationEn: "Methods serve the message; they are useful tools but never the message itself.", explanationEs: "Los métodos sirven al mensaje; son herramientas útiles pero nunca el mensaje mismo." },
+    { textEn: "2. Paul's statement 'I have become all things to all men' (1 Cor 9:22) demonstrates:", textEs: "2. La declaración de Pablo 'A todos me he hecho de todo' (1 Cor 9:22) demuestra:", optionsEn: ["Flexibility in method while message stays fixed", "Compromise of the gospel for culture", "Rigid uniformity of approach", "Loss of personal identity"], optionsEs: ["Flexibilidad en el método mientras el mensaje permanece fijo", "Compromiso del evangelio por la cultura", "Uniformidad rígida del enfoque", "Pérdida de identidad personal"], correct: 0, explanationEn: "Paul flexed his approach to reach different audiences while never altering the gospel itself.", explanationEs: "Pablo flexibilizó su enfoque para alcanzar diferentes audiencias sin alterar el evangelio mismo." },
+    { textEn: "3. The CWT presentation begins with:", textEs: "3. La presentación del CWT comienza con:", optionsEn: ["A long testimony", "A scripture reading", "Two diagnostic questions", "A formal prayer"], optionsEs: ["Un testimonio largo", "Una lectura de Escritura", "Dos preguntas de diagnóstico", "Una oración formal"], correct: 2, explanationEn: "CWT opens with two questions: certainty of eternal life, and what one would say to God.", explanationEs: "El CWT abre con dos preguntas: certeza de vida eterna, y qué diría uno a Dios." },
+    { textEn: "4. According to CWT, God's purpose for our lives is:", textEs: "4. Según el CWT, el propósito de Dios para nuestras vidas es:", optionsEn: ["Material prosperity", "Eternal life with Him", "Religious activity", "Moral improvement"], optionsEs: ["Prosperidad material", "Vida eterna con Él", "Actividad religiosa", "Mejora moral"], correct: 1, explanationEn: "John 3:16 — God gave His Son so that we 'should not perish but have everlasting life.'", explanationEs: "Juan 3:16 — Dios dio a Su Hijo para que 'no se pierda, mas tenga vida eterna'." },
+    { textEn: "5. Romans 3:23 teaches that:", textEs: "5. Romanos 3:23 enseña que:", optionsEn: ["Some have sinned", "Mostly outsiders have sinned", "Only unbelievers sin", "All have sinned"], optionsEs: ["Algunos han pecado", "Principalmente los de afuera han pecado", "Solo los incrédulos pecan", "Todos han pecado"], correct: 3, explanationEn: "'For all have sinned and fall short of the glory of God.'", explanationEs: "'Por cuanto todos pecaron, y están destituidos de la gloria de Dios.'" },
+    { textEn: "6. In CWT, God's provision for our sin is:", textEs: "6. En el CWT, la provisión de Dios para nuestro pecado es:", optionsEn: ["Religious rituals", "Jesus Christ", "Church membership", "Sincere effort"], optionsEs: ["Rituales religiosos", "Jesucristo", "Membresía de iglesia", "Esfuerzo sincero"], correct: 1, explanationEn: "Jesus is the way, the truth, and the life — God's only provision for sin.", explanationEs: "Jesús es el camino, la verdad y la vida — la única provisión de Dios para el pecado." },
+    { textEn: "7. The biblical response required in CWT is:", textEs: "7. La respuesta bíblica requerida en el CWT es:", optionsEn: ["Church attendance", "A signed card", "Repentance, faith, and surrender", "Baptism alone"], optionsEs: ["Asistencia a la iglesia", "Una tarjeta firmada", "Arrepentimiento, fe y rendición", "Solo el bautismo"], correct: 2, explanationEn: "CWT calls for repentance from sin, faith in Christ, and surrender to Him as Lord.", explanationEs: "El CWT llama al arrepentimiento del pecado, la fe en Cristo y la rendición a Él como Señor." },
+    { textEn: "8. The Harvesting Evangelist's primary gift is:", textEs: "8. El don principal del Evangelista de Cosecha es:", optionsEn: ["Counseling", "Apologetic argument", "Calling clearly for decision", "Quiet hospitality"], optionsEs: ["Consejería", "Argumento apologético", "Llamar claramente a la decisión", "Hospitalidad tranquila"], correct: 2, explanationEn: "The Harvesting Evangelist gifts the call for clear, public decision for Christ.", explanationEs: "El Evangelista de Cosecha tiene el don de llamar clara y públicamente a la decisión por Cristo." },
+    { textEn: "9. Peter on the Day of Pentecost ('you have crucified and put to death') exemplifies which style?", textEs: "9. Pedro el día de Pentecostés ('habéis crucificado y matado') ejemplifica ¿qué estilo?", optionsEn: ["Relational", "Testimonial", "Confrontational", "Serving"], optionsEs: ["Relacional", "Testimonial", "Confrontacional", "Servicio"], correct: 2, explanationEn: "Peter's pointed indictment is the classic Confrontational style — truth spoken without softening.", explanationEs: "La acusación directa de Pedro es el estilo Confrontacional clásico — verdad dicha sin suavizar." },
+    { textEn: "10. The Apologist (Intellectual) style is exemplified by:", textEs: "10. El estilo del Apologista (Intelectual) es ejemplificado por:", optionsEn: ["Apollos in Acts 18:28", "Peter at Pentecost", "Dorcas in Acts 9", "The Samaritan woman"], optionsEs: ["Apolos en Hechos 18:28", "Pedro en Pentecostés", "Dorcas en Hechos 9", "La mujer samaritana"], correct: 0, explanationEn: "Apollos 'vigorously refuted the Jews… from the Scriptures.'", explanationEs: "Apolos 'con gran vehemencia refutaba públicamente a los judíos… por las Escrituras'." },
+    { textEn: "11. The blind man of John 9 ('one thing I know') exemplifies which style?", textEs: "11. El ciego de Juan 9 ('una cosa sé') ejemplifica ¿qué estilo?", optionsEn: ["Serving", "Apologist", "Testimonial", "Confrontational"], optionsEs: ["Servicio", "Apologista", "Testimonial", "Confrontacional"], correct: 2, explanationEn: "He could not debate; he could only tell his story — the Testimonial style.", explanationEs: "No podía debatir; solo podía contar su historia — el estilo Testimonial." },
+    { textEn: "12. The Gerasene demoniac, sent home to tell his friends, exemplifies which style?", textEs: "12. El endemoniado gadareno, enviado a casa para contar a sus amigos, ejemplifica ¿qué estilo?", optionsEn: ["Confrontational", "Apologist", "Invitational", "Relational"], optionsEs: ["Confrontacional", "Apologista", "Invitacional", "Relacional"], correct: 3, explanationEn: "Mark 5:19 — 'Go home to your friends, and tell them what great things the Lord has done.' Relational style.", explanationEs: "Marcos 5:19 — 'Vete a tu casa, a los tuyos, y cuéntales cuán grandes cosas el Señor ha hecho contigo.' Estilo Relacional." },
+    { textEn: "13. The Samaritan woman's 'come and see' exemplifies which style?", textEs: "13. El 'venid y ved' de la mujer samaritana ejemplifica ¿qué estilo?", optionsEn: ["Serving", "Invitational", "Harvesting", "Apologist"], optionsEs: ["Servicio", "Invitacional", "Cosecha", "Apologista"], correct: 1, explanationEn: "She did not preach — she invited. 'Come, see a Man…' is the Invitational style.", explanationEs: "No predicó — invitó. 'Venid, ved a un hombre…' es el estilo Invitacional." },
+    { textEn: "14. Dorcas (Acts 9) and Barnabas exemplify which style?", textEs: "14. Dorcas (Hechos 9) y Bernabé ejemplifican ¿qué estilo?", optionsEn: ["Confrontational", "Testimonial", "Apologist", "Serving"], optionsEs: ["Confrontacional", "Testimonial", "Apologista", "Servicio"], correct: 3, explanationEn: "Dorcas made garments for widows; Barnabas met needs. Service preached for them — the Serving style.", explanationEs: "Dorcas hacía vestidos para viudas; Bernabé atendía necesidades. El servicio predicó por ellos — el estilo de Servicio." },
+    { textEn: "15. Mechanical evangelism is characterized by:", textEs: "15. El evangelismo mecánico se caracteriza por:", optionsEn: ["Careful listening", "Rigid script that ignores the hearer", "Adaptation to each person", "Dependence on the Spirit"], optionsEs: ["Escucha cuidadosa", "Guion rígido que ignora al oyente", "Adaptación a cada persona", "Dependencia del Espíritu"], correct: 1, explanationEn: "Mechanical evangelism follows a script so rigidly that it stops listening to the actual person.", explanationEs: "El evangelismo mecánico sigue un guion tan rígidamente que deja de escuchar a la persona real." },
+    { textEn: "16. Matthew 7:21 warns that:", textEs: "16. Mateo 7:21 advierte que:", optionsEn: ["All who say 'Lord, Lord' are saved", "Emotion is required for salvation", "Works save", "Profession alone may be false assurance"], optionsEs: ["Todos los que dicen 'Señor, Señor' son salvos", "La emoción es requerida para la salvación", "Las obras salvan", "La profesión sola puede ser falsa seguridad"], correct: 3, explanationEn: "Not everyone who says 'Lord, Lord' enters the kingdom — profession without genuine surrender is empty.", explanationEs: "No todo el que dice 'Señor, Señor' entra en el reino — la profesión sin rendición genuina es vacía." },
+    { textEn: "17. A tract is used faithfully when:", textEs: "17. Un tratado se usa fielmente cuando:", optionsEn: ["Read together and explained — the Philip/eunuch model", "Dropped anonymously in mailboxes", "Substituted for personal witness", "Mass-mailed without follow-up"], optionsEs: ["Leído juntos y explicado — el modelo de Felipe/eunuco", "Dejado anónimamente en buzones", "Sustituido por el testimonio personal", "Enviado masivamente sin seguimiento"], correct: 0, explanationEn: "Philip read Isaiah with the eunuch and 'preached Jesus to him' — the tract serves personal witness.", explanationEs: "Felipe leyó Isaías con el eunuco y 'le anunció el evangelio de Jesús' — el tratado sirve al testimonio personal." },
+    { textEn: "18. The misunderstanding of results occurs when:", textEs: "18. El malentendido sobre los resultados ocurre cuando:", optionsEn: ["We count professions without examining fruit", "We patiently follow up converts", "We trust the Spirit for the harvest", "We pray and plant faithfully"], optionsEs: ["Contamos profesiones sin examinar el fruto", "Damos seguimiento paciente a los conversos", "Confiamos en el Espíritu para la cosecha", "Oramos y plantamos fielmente"], correct: 0, explanationEn: "Counting raised hands or signed cards without verifying conversion produces false assurance.", explanationEs: "Contar manos levantadas o tarjetas firmadas sin verificar la conversión produce falsa seguridad." },
+    { textEn: "19. 1 Corinthians 3:6 reminds the evangelist that:", textEs: "19. 1 Corintios 3:6 recuerda al evangelista que:", optionsEn: ["Personality is decisive", "Methods produce growth", "Effort guarantees results", "God gives the increase"], optionsEs: ["La personalidad es decisiva", "Los métodos producen crecimiento", "El esfuerzo garantiza resultados", "Dios da el crecimiento"], correct: 3, explanationEn: "'I planted, Apollos watered, but God gave the increase.' Faithfulness in planting; God provides the harvest.", explanationEs: "'Yo planté, Apolos regó; pero el crecimiento lo ha dado Dios.' Fidelidad al plantar; Dios provee la cosecha." },
+    { textEn: "20. The carpenter-and-tools illustration teaches that methods are:", textEs: "20. La ilustración del carpintero y las herramientas enseña que los métodos son:", optionsEn: ["Useless", "The source of skill", "The object of confidence", "Servants, not masters"], optionsEs: ["Inútiles", "La fuente de habilidad", "El objeto de confianza", "Siervos, no amos"], correct: 3, explanationEn: "Like a carpenter's tools, methods serve the workman; they must never become the object of confidence.", explanationEs: "Como las herramientas del carpintero, los métodos sirven al trabajador; nunca deben convertirse en el objeto de confianza." }
+];
+
+const kwQuestions = [
+    { textEn: "21. List the two diagnostic questions used in CWT and explain their purpose in opening a gospel conversation.", textEs: "21. Enumere las dos preguntas de diagnóstico utilizadas en el CWT y explique su propósito para abrir una conversación del evangelio.", kw_en: ["diagnostic", "question", "open", "conversation", "heaven", "certain", "purpose", "gospel"], kw_es: ["diagnóstic", "diagnostic", "pregunta", "abrir", "conversación", "conversacion", "cielo", "certez"], modelEn: "CWT uses two diagnostic questions: first, whether the person has come to the place of certainty that he would go to heaven if he died, and second, if God asked why He should let him in, what he would say. Their purpose is to open a gospel conversation by revealing where the person is resting his hope — in himself or in Christ — so the witness knows where to begin.", modelEs: "El CWT usa dos preguntas de diagnóstico: primero, si la persona ha llegado al punto de certeza de que iría al cielo si muriera, y segundo, si Dios le preguntara por qué debería dejarlo entrar, qué diría. Su propósito es abrir una conversación del evangelio revelando dónde descansa la persona su esperanza — en sí misma o en Cristo — para que el testigo sepa dónde empezar.", authorDraft: true },
+    { textEn: "22. Explain CWT's four-point spine — God's Purpose, Our Need, God's Provision, Our Response — and identify the key Scripture for each.", textEs: "22. Explique la columna vertebral de cuatro puntos del CWT — El Propósito de Dios, Nuestra Necesidad, La Provisión de Dios, Nuestra Respuesta — e identifique la Escritura clave para cada uno.", kw_en: ["purpose", "need", "provision", "response", "scriptur", "spine", "four", "point"], kw_es: ["propósit", "proposit", "necesidad", "provisión", "provision", "respuesta", "columna", "cuatro"], modelEn: "CWT's four-point spine is God's Purpose, that He created us for relationship and offers eternal life; Our Need, that sin separates us and we cannot save ourselves (Romans 3:23, 6:23); God's Provision, that Christ died and rose to pay sin's penalty (Romans 5:8); and Our Response, that we must repent and receive Christ by faith (John 1:12). Each point carries its key Scripture, giving the gospel a clear, memorable structure.", modelEs: "La columna vertebral de cuatro puntos del CWT es el Propósito de Dios, que nos creó para relación y ofrece vida eterna; Nuestra Necesidad, que el pecado nos separa y no podemos salvarnos (Romanos 3:23, 6:23); la Provisión de Dios, que Cristo murió y resucitó para pagar la pena del pecado (Romanos 5:8); y Nuestra Respuesta, que debemos arrepentirnos y recibir a Cristo por fe (Juan 1:12). Cada punto lleva su Escritura clave, dando al evangelio una estructura clara y memorable.", authorDraft: true },
+    { textEn: "23. According to CWT, what does true repentance mean? Distinguish it from merely feeling sorry, using Acts 3:19 and Acts 26:20.", textEs: "23. Según el CWT, ¿qué significa el verdadero arrepentimiento? Distíngalo de simplemente sentir tristeza, usando Hechos 3:19 y Hechos 26:20.", kw_en: ["repent", "turn", "sorry", "deed", "change", "acts", "mere", "genuine"], kw_es: ["arrepent", "girar", "volv", "tristeza", "hechos", "cambi", "mer", "genuin"], modelEn: "According to CWT, true repentance is a change of mind that turns from sin to God and shows itself in changed deeds (Acts 26:20), not merely feeling sorry. Acts 3:19 calls people to repent and turn so that sins may be blotted out. Mere sorrow may regret consequences yet never turn; genuine repentance actually forsakes sin and turns toward Christ, proving itself by a changed life.", modelEs: "Según el CWT, el verdadero arrepentimiento es un cambio de mente que se aparta del pecado hacia Dios y se muestra en hechos cambiados (Hechos 26:20), no meramente sentir tristeza. Hechos 3:19 llama a las personas a arrepentirse y convertirse para que sus pecados sean borrados. La mera tristeza puede lamentar las consecuencias pero nunca girar; el arrepentimiento genuino realmente abandona el pecado y se vuelve a Cristo, probándose por una vida cambiada.", authorDraft: true },
+    { textEn: "24. Describe the danger of mechanical evangelism. How does it differ from Spirit-led witness?", textEs: "24. Describa el peligro del evangelismo mecánico. ¿En qué se diferencia del testimonio guiado por el Espíritu?", kw_en: ["mechanic", "rigid", "script", "spirit", "adapt", "led", "danger", "listen"], kw_es: ["mecánic", "mecanic", "rígid", "rigid", "guion", "espíritu", "espiritu", "adapt"], modelEn: "Mechanical evangelism treats a method as a rigid script to be recited the same way to everyone, regardless of the person in front of you. Its danger is that it stops listening and stops depending on the Spirit, turning a living conversation into a sales pitch. Spirit-led witness uses a method as a servant — adapting to the hearer, responding to real questions, and following the Spirit's leading rather than a fixed formula.", modelEs: "El evangelismo mecánico trata un método como un guion rígido que se recita de la misma manera a todos, sin importar la persona frente a ti. Su peligro es que deja de escuchar y deja de depender del Espíritu, convirtiendo una conversación viva en un discurso de ventas. El testimonio guiado por el Espíritu usa un método como siervo — adaptándose al oyente, respondiendo a preguntas reales y siguiendo la dirección del Espíritu en vez de una fórmula fija.", authorDraft: true },
+    { textEn: "25. Describe the Harvesting Evangelist style and its two possible distortions, and explain when this style is most appropriate.", textEs: "25. Describa el estilo del Evangelista de Cosecha y sus dos posibles distorsiones, y explique cuándo es más apropiado este estilo.", kw_en: ["harvest", "decision", "pressure", "grim", "distort", "appropriate", "ready", "style"], kw_es: ["cosech", "decisión", "decision", "presión", "presion", "sombrí", "sombri", "distorsi"], modelEn: "The Harvesting Evangelist style presses for a decision, calling the ready to commit now. Its two distortions are the high-pressure salesman, who manipulates a verbal decision, and the grim reaper, who pushes through fear rather than love. This style is most appropriate when the Spirit has already prepared the heart and the person is ripe — ready to respond — so that calling for commitment gathers fruit rather than forcing it.", modelEs: "El estilo del Evangelista de Cosecha presiona por una decisión, llamando a los listos a comprometerse ahora. Sus dos distorsiones son el vendedor de alta presión, que manipula una decisión verbal, y el segador sombrío, que empuja mediante el miedo en vez del amor. Este estilo es más apropiado cuando el Espíritu ya ha preparado el corazón y la persona está madura — lista para responder — de modo que llamar al compromiso recoge fruto en vez de forzarlo.", authorDraft: true },
+    { textEn: "26. Name Wayne's seven styles of evangelism and identify one biblical example for each.", textEs: "26. Nombre los siete estilos de evangelismo de Wayne e identifique un ejemplo bíblico para cada uno.", kw_en: ["harvest", "confront", "apolog", "testimon", "relation", "invit", "serv", "style"], kw_es: ["cosech", "confront", "apolog", "testimon", "relacion", "invit", "servir", "sirv"], modelEn: "Wayne's seven styles, each with a biblical example, are: the Harvesting/confrontational style (Peter at Pentecost, Acts 2); the apologetic style, reasoning with skeptics (Paul at Athens, Acts 17); the testimonial style, telling one's story (the blind man, John 9); the relational style, witnessing through friendship (Matthew the tax collector inviting friends, Luke 5); the invitational style, bringing others to see (Andrew bringing Peter, John 1); and the serving style, witness through deeds of love (Dorcas, Acts 9). Each suits a different person and gifting.", modelEs: "Los siete estilos de Wayne, cada uno con un ejemplo bíblico, son: el estilo de Cosecha/confrontacional (Pedro en Pentecostés, Hechos 2); el estilo apologético, razonando con escépticos (Pablo en Atenas, Hechos 17); el estilo testimonial, contando la propia historia (el ciego, Juan 9); el estilo relacional, testificando mediante la amistad (Mateo el publicano invitando a amigos, Lucas 5); el estilo de invitación, trayendo a otros a ver (Andrés trayendo a Pedro, Juan 1); y el estilo de servicio, testimonio mediante obras de amor (Dorcas, Hechos 9). Cada uno se adapta a una persona y un don diferentes.", authorDraft: true },
+    { textEn: "27. Why does Matthew 7:21 warn against superficial decisions? How should the evangelist guard against producing false assurance?", textEs: "27. ¿Por qué Mateo 7:21 advierte contra las decisiones superficiales? ¿Cómo debe el evangelista protegerse contra la producción de falsa seguridad?", kw_en: ["superficial", "false", "assur", "fruit", "matthew", "decision", "guard", "profess"], kw_es: ["superficial", "fals", "segurid", "fruto", "mateo", "decisión", "decision", "profesi"], modelEn: "Matthew 7:21 warns that not everyone who says 'Lord, Lord' will enter the kingdom, only those who do the Father's will — so a verbal profession is not proof of salvation. Superficial decisions can produce false assurance, leaving someone confident yet lost. The evangelist guards against this by not rushing for a quick prayer, by explaining the cost of following Christ, and by looking for fruit and genuine repentance rather than mere words.", modelEs: "Mateo 7:21 advierte que no todo el que dice 'Señor, Señor' entrará en el reino, sino solo los que hacen la voluntad del Padre — así que una profesión verbal no es prueba de salvación. Las decisiones superficiales pueden producir falsa seguridad, dejando a alguien confiado pero perdido. El evangelista se protege de esto no apresurando una oración rápida, explicando el costo de seguir a Cristo y buscando fruto y arrepentimiento genuino en vez de meras palabras.", authorDraft: true },
+    { textEn: "28. Discuss the proper use of tracts in evangelism. Why is Philip and the Ethiopian eunuch (Acts 8:35) the model, and what is the danger of substitution?", textEs: "28. Discuta el uso apropiado de los tratados en el evangelismo. ¿Por qué Felipe y el eunuco etíope (Hechos 8:35) son el modelo, y cuál es el peligro de la sustitución?", kw_en: ["tract", "philip", "eunuch", "explain", "personal", "substitut", "model", "danger"], kw_es: ["tratad", "felipe", "eunuc", "explic", "personal", "sustitu", "model", "peligr"], modelEn: "Philip and the Ethiopian eunuch (Acts 8:35) is the model for tract use: Philip began where the man was reading and explained the Scripture personally. A tract rightly used opens or supports a personal conversation. The danger of substitution is handing someone a tract instead of engaging them — letting paper replace the personal witness. A tract should serve the conversation, never stand in for the witness's own explanation and care.", modelEs: "Felipe y el eunuco etíope (Hechos 8:35) son el modelo para el uso de tratados: Felipe comenzó donde el hombre estaba leyendo y le explicó la Escritura personalmente. Un tratado bien usado abre o apoya una conversación personal. El peligro de la sustitución es darle a alguien un tratado en vez de involucrarse con él — dejar que el papel reemplace el testimonio personal. Un tratado debe servir a la conversación, nunca sustituir la explicación y el cuidado del testigo mismo.", authorDraft: true },
+    { textEn: "29. Explain Paul's statement 'I have become all things to all men' (1 Cor 9:22). What does it teach about flexibility in method while the message remains fixed?", textEs: "29. Explique la declaración de Pablo 'A todos me he hecho de todo' (1 Corintios 9:22). ¿Qué enseña sobre la flexibilidad en el método mientras el mensaje permanece fijo?", kw_en: ["things", "flexib", "method", "message", "fixed", "save", "adapt", "paul"], kw_es: ["todo", "flexib", "método", "metodo", "mensaj", "fij", "salv", "adapt"], modelEn: "When Paul said 'I have become all things to all men' (1 Cor 9:22), he meant he adapted his manner and approach to reach different people — that some might be saved. It teaches flexibility in method while the message stays fixed: the gospel never changes, but how we present it should fit the hearer. Paul changed his methods, not his message; the goal of saving some governed how far he would adapt.", modelEs: "Cuando Pablo dijo 'A todos me he hecho de todo' (1 Corintios 9:22), quiso decir que adaptó su manera y enfoque para alcanzar a diferentes personas — para que algunos fueran salvos. Enseña flexibilidad en el método mientras el mensaje permanece fijo: el evangelio nunca cambia, pero cómo lo presentamos debe ajustarse al oyente. Pablo cambió sus métodos, no su mensaje; la meta de salvar a algunos gobernaba cuánto adaptaría.", authorDraft: true },
+    { textEn: "30. Synthesize the unit using the carpenter-and-tools illustration. How do methods, styles, and CWT all relate as servants rather than masters?", textEs: "30. Sintetice la unidad utilizando la ilustración del carpintero y las herramientas. ¿Cómo se relacionan los métodos, los estilos y el CWT como siervos más que como amos?", kw_en: ["carpenter", "tool", "method", "servant", "master", "spirit", "style", "serve"], kw_es: ["carpinter", "herramient", "método", "metodo", "siervo", "sirv", "amo", "espíritu"], modelEn: "The carpenter-and-tools illustration ties the unit together: methods, styles, and CWT are tools in the carpenter's hand, not masters over him. A skilled carpenter chooses the right tool for the work and never lets a tool dictate the job. So methods serve the gospel and the Spirit's leading; they must never become rigid masters. The witness wields them under the Spirit, choosing what fits each person, so that the tools serve the message rather than rule it.", modelEs: "La ilustración del carpintero y las herramientas une la unidad: los métodos, los estilos y el CWT son herramientas en la mano del carpintero, no amos sobre él. Un carpintero hábil escoge la herramienta correcta para el trabajo y nunca deja que una herramienta dicte la obra. Así los métodos sirven al evangelio y a la dirección del Espíritu; nunca deben volverse amos rígidos. El testigo los maneja bajo el Espíritu, escogiendo lo que se ajusta a cada persona, para que las herramientas sirvan al mensaje en vez de gobernarlo.", authorDraft: true }
+];
+
+// ======================== STATE ========================
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+let unitPassed = localStorage.getItem(PASSED_KEY) === 'true';
+let mcPassed = localStorage.getItem(MC_PASSED_KEY) === 'true';
+
+function kwHit(answer, kw) {
+    if (!answer) return false;
+    var a = answer.toLowerCase();
+    var k = kw.toLowerCase();
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    var re = (k.length <= 4)
+        ? new RegExp("(^|[^\\p{L}])" + esc + "($|[^\\p{L}])", "u")
+        : new RegExp("(^|[^\\p{L}])" + esc, "u");
+    return re.test(a);
+}
+function essayPartialMatch(answer, keywords) {
+    if (!answer || answer.trim().length < 100) return false;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched >= 3;
+}
+function kwHitCount(answer, keywords) {
+    if (!answer) return 0;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched;
+}
+
+function saveUnitState() {
+    localStorage.setItem(UNIT_KEY + '_mc', JSON.stringify(mcAnswers));
+    localStorage.setItem(UNIT_KEY + '_kw', JSON.stringify(kwAnswers));
+}
+function loadSavedAnswers() {
+    const savedMC = localStorage.getItem(UNIT_KEY + '_mc');
+    if (savedMC) { try { let p = JSON.parse(savedMC); if (Array.isArray(p) && p.length === 20) mcAnswers = p; } catch(e) {} }
+    const savedKW = localStorage.getItem(UNIT_KEY + '_kw');
+    if (savedKW) { try { let p = JSON.parse(savedKW); if (Array.isArray(p) && p.length === 10) kwAnswers = p; } catch(e) {} }
+}
+
+function clearAllLocal() {
+    if (confirm(currentLang === 'es' ? '⚠️ Esto borrará todas sus respuestas, estado de bloqueo y progreso de esta unidad. ¿Está seguro?' : '⚠️ This will erase all your answers, lockout status, and progress for this unit. Are you sure?')) {
+        localStorage.removeItem(UNIT_KEY + '_mc');
+        localStorage.removeItem(UNIT_KEY + '_kw');
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(PASSED_KEY);
+        localStorage.removeItem(MC_PASSED_KEY);
+        lockUntil = 0;
+        unitPassed = false;
+        mcPassed = false;
+        progress['unit' + UNIT_NUM] = false;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+        updateProgressGrid();
+    }
+}
+
+function clearExamAnswersOnly() {
+    if (confirm(currentLang === 'es' ? '⚠️ ¿Borrar todas sus respuestas para esta unidad? (El estado de aprobación de la unidad permanecerá si ya aprobó.)' : '⚠️ Clear all your answers for this unit? (Unit pass status will remain if already passed.)')) {
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        saveUnitState();
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+    }
+}
+
+function setSAOnlyLockout(disable) {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    const allTextareas = container.querySelectorAll('.kw-answer');
+    const allCheckBtns = container.querySelectorAll('button.small');
+    allTextareas.forEach(ta => ta.disabled = disable);
+    allCheckBtns.forEach(btn => {
+        if (btn.id !== 'submitExamBtn' && btn.id !== 'clearExamDataBtn' && btn.id !== 'clearDataBtn') btn.disabled = disable;
+    });
+}
+
+let lockoutInterval = null;
+function startLockoutTimer() {
+    if (lockoutInterval) clearInterval(lockoutInterval);
+    if (lockUntil > Date.now()) {
+        let banner = document.getElementById('lockoutBanner');
+        if (!banner) {
+            banner = document.createElement('div');
+            banner.id = 'lockoutBanner';
+            banner.className = 'lockout-banner';
+            const examResult = document.getElementById('examResult');
+            examResult.parentNode.insertBefore(banner, examResult);
+        }
+        setSAOnlyLockout(true);
+        const tick = () => {
+            if (lockUntil <= Date.now() || unitPassed) {
+                clearInterval(lockoutInterval);
+                setSAOnlyLockout(false);
+                if (banner) banner.remove();
+                return;
+            }
+            const rem = lockUntil - Date.now();
+            const mins = Math.floor(rem / 60000);
+            const secs = Math.floor((rem % 60000) / 1000);
+            banner.innerText = (currentLang === 'en'
+                ? `⏰ Section B locked for ${mins}:${secs.toString().padStart(2,'0')} (15-min retake lockout after failed submission)`
+                : `⏰ Sección B bloqueada por ${mins}:${secs.toString().padStart(2,'0')} (bloqueo de 15 min tras envío fallido)`);
+        };
+        tick();
+        lockoutInterval = setInterval(tick, 1000);
+    } else {
+        setSAOnlyLockout(false);
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+    }
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Section A — Multiple Choice (Questions 1–20)' : 'Sección A — Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const mcReveal = mcRevealed || mcPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMDiv ? 'Section B — Short Answer (Questions 21–30) — Masters Track (M.Div./Th.M.)' : 'Section B — Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMDiv ? 'Sección B — Respuesta Corta (Preguntas 21–30) — Pista de Maestría (M.Div./Th.M.)' : 'Sección B — Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here (minimum 20 characters)...' : 'Escriba su respuesta aquí (mínimo 20 caracteres)...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.disabled = (lockUntil > Date.now() || unitPassed);
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            if (lockUntil > Date.now() || unitPassed) return;
+            const answer = textarea.value.trim().toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? q.kw_es : q.kw_en;
+            if (answer.length < 100) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else {
+                var hc = kwHitCount(answer, keywords);
+                var passed = hc >= 3;
+                if (passed) {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('✓ Correct! (' + hc + ' key concepts found) Your answer includes the key ideas.') : ('✓ ¡Correcto! (' + hc + ' conceptos clave encontrados) Su respuesta incluye las ideas clave.');
+                    feedbackDiv.className = 'feedback-text correct';
+                    kwAnswers[idx] = textarea.value;
+                    saveUnitState();
+                } else {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('Not yet — ' + hc + ' of 3 needed key concepts found. Compare your answer with the model below, then revise.') : ('Todavía no — ' + hc + ' de 3 conceptos clave necesarios encontrados. Compare su respuesta con el modelo de abajo y revise.');
+                    feedbackDiv.className = 'feedback-text incorrect';
+                }
+                // Gold model-answer reveal box — shown after every check, pass or fail (Q24 standard rule 4)
+                var modelBox = div.querySelector('.model-answer-box');
+                if (!modelBox) {
+                    modelBox = document.createElement('div');
+                    modelBox.className = 'model-answer-box';
+                    div.appendChild(modelBox);
+                }
+                var label = currentLang === 'en' ? 'Model answer — study this' : 'Respuesta modelo — estudie esto';
+                var modelText = currentLang === 'en' ? q.modelEn : q.modelEs;
+                var draftFlag = q.authorDraft ? '<!--AUTHOR_DRAFT: model answer not yet voiced by author-->' : '';
+                modelBox.innerHTML = draftFlag + '<strong>' + label + '</strong><br>' + modelText;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(feedbackDiv);
+        container.appendChild(div);
+        textarea.addEventListener('input', (e) => { if (!(lockUntil > Date.now() || unitPassed)) { kwAnswers[idx] = e.target.value; saveUnitState(); } });
+    });
+    startLockoutTimer();
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? "<span style='color:green'>✓ ¡Unidad ya aprobada! Puede continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! You may proceed.</span>";
+        return;
+    }
+    if (Date.now() < lockUntil) {
+        let wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? `<span style='color:red'>⏰ Bloqueado ${wait} minutos más.</span>`
+            : `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    /* CTS audit 2026-05-23: no reg form here; student/track already loaded from localStorage (defaults to Certificate). */
+
+    let correctMC = 0;
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    const mcPercent = correctMC / 20;
+    if (!unitPassed) { mcRevealed = true; renderQuestions(); }
+
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    let saCorrect = 0;
+    if (isMDiv) {
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || '').toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+            if (essayPartialMatch(ans, keywords)) saCorrect++;
+        }
+    }
+    const saPercent = saCorrect / 10;
+
+    const mcPass = mcPercent >= PASS_THRESHOLD;
+    const saPass = saPercent >= PASS_THRESHOLD;
+    const overallPass = isMDiv ? (mcPass && saPass) : mcPass;
+
+    if (mcPass) {
+        mcPassed = true;
+        localStorage.setItem(MC_PASSED_KEY, 'true');
+    }
+
+    if (overallPass) {
+        unitPassed = true;
+        progress['unit' + UNIT_NUM] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(PASSED_KEY, 'true');
+        const msg = isMDiv
+            ? (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unidad 6 completada. Puede continuar a la Unidad 7.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unit 6 completed. You may proceed to Unit 7.</span>`)
+            : (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unidad 6 completada. Puede continuar a la Unidad 7.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unit 6 completed. You may proceed to Unit 7.</span>`);
+        document.getElementById('examResult').innerHTML = msg;
+        updateProgressGrid();
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+        if (lockoutInterval) clearInterval(lockoutInterval);
+    } else {
+        if (isMDiv && mcPass && !saPass) {
+            lockUntil = Date.now() + 15 * 60 * 1000;
+            localStorage.setItem(LOCKOUT_KEY, lockUntil);
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ Sección A APROBADA (${Math.round(mcPercent*100)}%). Sección B no aprobada (${Math.round(saPercent*100)}% &lt; 90%). Sección B bloqueada 15 minutos.</span>`
+                : `<span style='color:red'>❌ Section A PASSED (${Math.round(mcPercent*100)}%). Section B not yet passing (${Math.round(saPercent*100)}% &lt; 90%). Section B locked for 15 minutes.</span>`;
+            startLockoutTimer();
+            renderQuestions();
+        } else {
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ NO APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. Se requiere 90% en cada sección requerida. Revise sus respuestas e inténtelo de nuevo.</span>`
+                : `<span style='color:red'>❌ NOT PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. 90% required on each required section. Review your answers and try again.</span>`;
+        }
+    }
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('clearExamDataBtn').addEventListener('click', clearExamAnswersOnly);
+document.getElementById('clearDataBtn').addEventListener('click', clearAllLocal);
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') {
+        currentLang = 'es';
+        document.body.className = 'lang-es';
+        document.documentElement.lang = 'es';
+        this.textContent = 'English';
+    } else {
+        currentLang = 'en';
+        document.body.className = 'lang-en';
+        document.documentElement.lang = 'en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+loadSavedAnswers();
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = currentLang === 'es'
+        ? "<span style='color:green'>✅ Unidad 6 ya aprobada.</span>"
+        : "<span style='color:green'>✅ Unit 6 already passed.</span>";
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEvangelismReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Church Growth — Unit 10: Sunday School and Small Groups</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 11 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📈 Church Growth — Unit 10: Sunday School and Small Groups</span><span class="lang-es">📈 Crecimiento de la Iglesia — Unidad 10: Escuela Dominical y Grupos Pequeños</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"And daily in the temple, and in every house, they did not cease teaching and preaching Jesus." — Acts 5:42 (NKJV)</span><span class="lang-es">"Y todos los días, en el templo y por las casas, no cesaban de enseñar y predicar a Jesucristo." — Hechos 5:42 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Church Growth course. Please register before beginning Unit 10.</span><span class="lang-es">Bienvenido al curso Crecimiento de la Iglesia. Por favor registrese antes de comenzar la Unidad 10.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<p><em>See the handouts.</em></p>
+<p>One of the distinctive marks of the way many of our churches were
+built is the idea of growing a church <em>through the Sunday
+School.</em> A good many church-growth specialists have said flatly that
+it cannot be done — but they have not really studied the churches that
+did it. What follows is less a system than a testimony, drawn from years
+of watching it work.</p>
+<p><strong>1. Open enrollment.</strong> On any given Sunday, only forty
+to sixty percent of those enrolled in Sunday School will actually
+attend. So stop fretting over attendance and work instead on
+<em>enrollment</em> — anywhere, anytime, any place. In some churches it
+is harder to get on the Sunday School roll than to join the church
+itself, and that is exactly backward. I carried enrollment cards with me
+everywhere, and would simply say, “We believe everyone ought to be
+enrolled in Bible study somewhere. Would you mind if we enrolled you in
+one of our classes?” One year in South Dakota, that single question
+added a hundred to our enrollment.</p>
+<p><strong>2. No pruning.</strong> Once a person is enrolled, his name
+stays — until he dies, moves away, or asks to be removed. The roll is
+not a brag sheet of who attends; it is the <em>prospect list</em> of who
+can be reached, and the moment you strike a name you lose touch with
+that soul. At my first church the Sunday School director felt names had
+to be pruned when people missed a few weeks. He was busy and said he
+didn’t think he’d serve as director the next year. I accepted his
+resignation — with regret — and we put in a director who would not prune
+the rolls. By the time I left, average Sunday School attendance had
+climbed from about thirty-five to over ninety, and worship and giving
+rose right along with it.</p>
+<p><strong>3. Contacts.</strong> This is the key to the whole thing. We
+tried to contact <em>every</em> person enrolled, <em>every</em> week — a
+visit, a card, or a phone call — and not only the absent but the present
+too. Without contacts, open enrollment is meaningless; the roll just
+gathers dust. The contacting need not all fall on the teacher; it can be
+shared by the class, and every class should have an outreach leader to
+see that it happens. People do not drift from a church that keeps
+reaching for them.</p>
+<p><strong>4. Inspiration.</strong> People have to <em>believe</em>
+something can happen. Part of the pastor’s task is to help the teachers
+catch a vision, for almost any method has merit once the people are sold
+on it — and none works while they are not.</p>
+<p>So Sunday School, rightly run, is not merely a teaching hour; it is a
+<em>growth engine</em> — a structure of small classes, each one
+enrolling widely, pruning no one, and contacting everyone. And that
+points to the deeper principle beneath it, the one this unit is really
+about.</p>
+<p><strong>The cell, the small group, the church grown small.</strong>
+The genius of Sunday School was never the curriculum; it was the
+<em>small group</em> — a circle small enough that a person could be
+known, enrolled, missed, and reached. That same insight runs underneath
+every healthy church: the church must live at every size at once, the
+great <em>celebration</em> of corporate worship and the intimate
+<em>cell</em> where life is actually shared. In the cell the key number
+is not the hundreds in the auditorium but the ten or twelve around the
+room — and on that small base a church’s growth becomes, in principle,
+unlimited, because you can always start one more group. The crowd can
+only grow so large in a room; the number of small circles can grow
+without end.</p>
+<h2 id="where-we-are-now-2026">Where We Are Now (2026)</h2>
+<p>In many churches the Sunday School hour itself has given way to the
+small group meeting in homes through the week — but make no mistake, the
+<em>principle</em> did not change; only the room did. And here is a
+quiet irony worth seeing: the open-enrollment, never-prune,
+contact-everyone discipline that built those old Sunday Schools is
+almost exactly what the dechurching crisis now cries out for. We learned
+that most of the great company who left did not storm out over doctrine;
+they <em>drifted</em> — they moved, life shifted, the drive got long —
+and no one reached for them. A church that had kept the old rule —
+<em>keep the name on the roll, and contact every soul every week</em> —
+would have caught many of them before they were ever gone. What looked
+like an old-fashioned Sunday School method turns out to have been a
+re-churching strategy invented decades ahead of its time. The tools have
+multiplied — a church can now track every member and automate the
+reminder to reach the one who has slipped from view — but the discipline
+is the same, and the discipline is everything.</p>
+<p>The cell, meanwhile, has grown all the way up into its own movement.
+The small group that was once a <em>department</em> of the church has,
+in many places, become the church itself — the house church, the dinner
+church, the micro-church, a congregation of ten or twenty around a
+living room or a supper table, often gathered in a network of such cells
+rather than under one large roof. This is the old metachurch vision come
+of age, and it has two great strengths for our moment. It is the <em>New
+Unit Principle</em> set loose — for it is far easier to start a new
+circle than to build a new building, and new units tend to grow faster
+than old ones, so a church that multiplies cells multiplies endlessly at
+the tips. And it proved <em>resilient</em> exactly when the large
+gatherings could not meet: when the doors of the auditoriums were shut,
+the churches that survived were the ones that had never neglected the
+small, the simple, and the personal. The largest congregations on earth,
+in fact, are built this way — vast not because the room is vast but
+because they are honeycombed with tens of thousands of small praying
+cells.</p>
+<p>One caution, carried over from our principles. Growing small is not
+magic, and a <em>new site</em> is no cure for a sick church. The point
+is never bigness or smallness for its own sake; it is that <em>life is
+shared in the small and celebrated in the large,</em> and a church needs
+both. But if you must choose where to begin in a wary, scattered,
+dechurching age, begin small — for it is in the small circle that a
+stranger is enrolled, that an absent one is missed, that a name becomes
+a face and a face becomes a friend, and that a spectator is at last
+formed into a disciple. The church grows small in order to grow large.
+That has always been true. It has never been more true than now.</p>
+
+</div>
+<div class="lang-es">
+
+<p><em>Vea las hojas.</em></p>
+
+<p>Una de las marcas distintivas de la manera en que se edificaron muchas de nuestras iglesias es la idea de hacer crecer una iglesia <em>por medio de la Escuela Dominical.</em> Un buen número de especialistas en crecimiento de la iglesia han dicho rotundamente que no se puede hacer — pero no han estudiado de veras las iglesias que lo hicieron. Lo que sigue es menos un sistema que un testimonio, sacado de años de verlo funcionar.</p>
+
+<p><strong>1. Inscripción abierta.</strong> En un domingo dado, solo del cuarenta al sesenta por ciento de los inscritos en la Escuela Dominical asistirá de veras. Así que deje de afligirse por la asistencia y trabaje en cambio la <em>inscripción</em> — en cualquier lugar, en cualquier momento, en cualquier sitio. En algunas iglesias es más difícil entrar en la lista de la Escuela Dominical que unirse a la iglesia misma, y eso está exactamente al revés. Yo llevaba tarjetas de inscripción conmigo a todas partes, y sencillamente decía: "Creemos que todos deberían estar inscritos en el estudio bíblico en alguna parte. ¿Le importaría si lo inscribimos en una de nuestras clases?" Un año en Dakota del Sur, esa sola pregunta añadió cien a nuestra inscripción.</p>
+
+<p><strong>2. Nada de podar.</strong> Una vez que una persona está inscrita, su nombre se queda — hasta que muera, se mude, o pida ser removido. La lista no es una hoja de presumir de quién asiste; es la <em>lista de prospectos</em> de quién puede ser alcanzado, y en el momento en que tacha un nombre pierde contacto con esa alma. En mi primera iglesia el director de la Escuela Dominical sentía que había que podar los nombres cuando la gente faltaba unas semanas. Estaba ocupado y dijo que no creía que serviría como director el año siguiente. Acepte su renuncia — con pesar — y pusimos a un director que no podaría las listas. Para cuando me fui, la asistencia promedio de la Escuela Dominical había subido de unos treinta y cinco a más de noventa, y la adoración y la ofrenda subieron junto con ella.</p>
+
+<p><strong>3. Contactos.</strong> Esta es la llave de todo el asunto. Tratábamos de contactar a <em>cada</em> persona inscrita, <em>cada</em> semana — una visita, una tarjeta o una llamada — y no solo a los ausentes sino también a los presentes. Sin contactos, la inscripción abierta no significa nada; la lista solo junta polvo. El contactar no tiene que recaer todo sobre el maestro; puede compartirlo la clase, y cada clase debe tener un líder de alcance que vele por que ocurra. La gente no se aleja de una iglesia que sigue alcanzándola.</p>
+
+<p><strong>4. Inspiración.</strong> La gente tiene que <em>creer</em> que algo puede pasar. Parte de la tarea del pastor es ayudar a los maestros a captar una visión, pues casi cualquier método tiene mérito una vez que la gente está convencida de él — y ninguno funciona mientras no lo esté.</p>
+
+<p>Así que la Escuela Dominical, bien llevada, no es meramente una hora de enseñanza; es un <em>motor de crecimiento</em> — una estructura de clases pequeñas, cada una inscribiendo ampliamente, sin podar a nadie, y contactando a todos. Y eso señala el principio más profundo debajo de ella, del que esta unidad de veras trata.</p>
+
+<p><strong>La célula, el grupo pequeño, la iglesia hecha pequeña.</strong> El genio de la Escuela Dominical nunca fue el currículo; fue el <em>grupo pequeño</em> — un círculo lo bastante pequeño para que una persona pudiera ser conocida, inscrita, extrañada y alcanzada. Esa misma intuición corre debajo de toda iglesia sana: la iglesia debe vivir en todos los tamaños a la vez, la gran <em>celebración</em> de la adoración corporativa y la <em>célula</em> íntima donde la vida de veras se comparte. En la célula el número clave no son los cientos del auditorio sino los diez o doce alrededor del salón — y sobre esa base pequeña el crecimiento de una iglesia se vuelve, en principio, ilimitado, porque siempre se puede iniciar un grupo más. La multitud solo puede crecer hasta cierto punto en un salón; el número de círculos pequeños puede crecer sin fin.</p>
+
+<h2>Dónde Estamos Ahora (2026)</h2>
+
+<p>En muchas iglesias la hora de la Escuela Dominical misma ha cedido al grupo pequeño que se reúne en casas durante la semana — pero no se equivoque, el <em>principio</em> no cambió; solo cambió el salón. Y aquí hay una callada ironía que vale la pena ver: la disciplina de inscripción abierta, nunca podar, contactar a todos que edificó aquellas viejas Escuelas Dominicales es casi exactamente lo que la crisis del abandono ahora reclama a gritos. Aprendimos que la mayoría de la gran compañía que se fue no salió en tromba por doctrina; se <em>alejó</em> — se mudaron, la vida cambió, el trayecto se hizo largo — y nadie los alcanzó. Una iglesia que hubiera guardado la vieja regla — <em>conserve el nombre en la lista, y contacte a cada alma cada semana</em> — habría atrapado a muchos de ellos antes de que se fueran. Lo que parecía un método anticuado de Escuela Dominical resulta haber sido una estrategia de re-iglesia inventada décadas adelantada a su tiempo. Las herramientas se han multiplicado — una iglesia ahora puede rastrear a cada miembro y automatizar el recordatorio para alcanzar al que ha desaparecido de la vista — pero la disciplina es la misma, y la disciplina lo es todo.</p>
+
+<p>La célula, mientras tanto, ha crecido del todo hasta su propio movimiento. El grupo pequeño que antes era un <em>departamento</em> de la iglesia se ha vuelto, en muchos lugares, la iglesia misma — la iglesia en casa, la iglesia de cena, la microiglesia, una congregación de diez o veinte alrededor de una sala o una mesa de cena, a menudo reunida en una red de tales células en vez de bajo un solo techo grande. Esta es la vieja visión de la metaiglesia llegada a su madurez, y tiene dos grandes fuerzas para nuestro momento. Es el <em>Principio de la Nueva Unidad</em> suelto — pues es mucho más fácil iniciar un nuevo círculo que edificar un nuevo edificio, y las nuevas unidades tienden a crecer más rápido que las viejas, así que una iglesia que multiplica células se multiplica sin fin en las puntas. Y probó ser <em>resiliente</em> justo cuando las reuniones grandes no podían reunirse: cuando las puertas de los auditorios fueron cerradas, las iglesias que sobrevivieron fueron las que nunca habían descuidado lo pequeño, lo simple y lo personal. Las congregaciones más grandes de la tierra, de hecho, se edifican así — vastas no porque el salón sea vasto sino porque están llenas, como un panal, de decenas de miles de pequeñas células que oran.</p>
+
+<p>Una advertencia, traída de nuestros principios. Crecer pequeño no es magia, y un <em>nuevo local</em> no es cura para una iglesia enferma. El punto nunca es la grandeza o la pequeñez en sí misma; es que <em>la vida se comparte en lo pequeño y se celebra en lo grande,</em> y una iglesia necesita ambas. Pero si debe escoger por dónde empezar en una era recelosa, dispersa y de abandono, empiece pequeño — pues es en el círculo pequeño donde un extraño es inscrito, donde un ausente es extrañado, donde un nombre se vuelve un rostro y un rostro se vuelve un amigo, y donde un espectador es al fin formado en discípulo. La iglesia crece pequeña para crecer grande. Eso siempre ha sido cierto. Nunca ha sido más cierto que ahora.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>Fail the multiple-choice (1–20) and it locks for 2 minutes; fail the master's-level short answer (21–30) and it locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba la opción múltiple (1–20), se bloquea por 2 minutos; si reprueba la respuesta corta de nivel de maestría (21–30), se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Joshua — Unit 1 (retrofit to CTS pattern, 2026-05-16)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 10;
+const COURSE = 'cg';
+const NEXT_UNIT_URL = 'CTSCGUnit11.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 — Introduction",
+    "Unit 2 — Biblical Background",
+    "Unit 3 — Terms and History",
+    "Unit 4 — Principles",
+    "Unit 5 — Change and the Generations",
+    "Unit 6 — Diagnosing Your Church",
+    "Unit 7 — Pastoral Leadership",
+    "Unit 8 — Worship",
+    "Unit 9 — Digital and Online Ministry",
+    "Unit 10 — Sunday School and Small Groups",
+    "Unit 11 — Discipleship",
+    "Unit 12 — Retention"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCGUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// L3 semantic audit: all 20 verified against options and Joshua 1
+const mcQuestions = [
+    { textEn: "1. A historic engine for growing a church has been the:", textEs: "1. Un motor histórico para hacer crecer una iglesia ha sido la:",
+      optionsEn: ["newsletter", "building fund", "parking lot", "Sunday School"],
+      optionsEs: ["boletin", "fondo de construcción", "estacionamiento", "Escuela Dominical"], correct: 3 },
+    { textEn: "2. 'Open enrollment' recognizes that of those enrolled, the share attending each week is about:", textEs: "2. La 'inscripción abierta' reconoce que de los inscritos, la porción que asiste cada semana es cerca de:",
+      optionsEn: ["all of them", "40 to 60 percent", "none", "ten percent"],
+      optionsEs: ["todos", "del 40 al 60 por ciento", "ninguno", "el diez por ciento"], correct: 1 },
+    { textEn: "3. With open enrollment, you work primarily the:", textEs: "3. Con la inscripción abierta, se trabaja principalmente la:",
+      optionsEn: ["attendance", "building", "enrollment", "budget"],
+      optionsEs: ["asistencia", "edificio", "inscripción", "presupuesto"], correct: 2 },
+    { textEn: "4. The rule 'never prune the roll' treats the roll as a:", textEs: "4. La regla 'nunca podar la lista' trata la lista como una:",
+      optionsEn: ["prospect and ministry list", "burden", "formality", "dead list"],
+      optionsEs: ["lista de prospectos y de ministerio", "carga", "formalidad", "lista muerta"], correct: 0 },
+    { textEn: "5. The contact principle says to reach out to every enrolled person:", textEs: "5. El principio del contacto dice alcanzar a cada persona inscrita:",
+      optionsEn: ["once a year", "every week", "never", "only when sick"],
+      optionsEs: ["una vez al año", "cada semana", "nunca", "solo cuando está enferma"], correct: 1 },
+    { textEn: "6. To drive growth, a class or group should have a designated:", textEs: "6. Para impulsar el crecimiento, una clase o grupo debe tener un designado:",
+      optionsEn: ["treasurer", "lawyer", "outreach leader", "architect"],
+      optionsEs: ["tesorero", "abogado", "líder de alcance", "arquitecto"], correct: 2 },
+    { textEn: "7. For a class to grow, the teacher must first:", textEs: "7. Para que una clase crezca, el maestro primero debe:",
+      optionsEn: ["raise money", "change rooms", "shorten the lesson", "catch the vision"],
+      optionsEs: ["recaudar dinero", "cambiar de salón", "acortar la lección", "captar la visión"], correct: 3 },
+    { textEn: "8. The Sunday School anecdote tells of a class that grew from 35 to about:", textEs: "8. La anécdota de la Escuela Dominical cuenta de una clase que creció de 35 a cerca de:",
+      optionsEn: ["90", "50", "60", "40"],
+      optionsEs: ["90", "50", "60", "40"], correct: 0 },
+    { textEn: "9. The genius of the small group or cell is that a person can be:", textEs: "9. El genio del grupo pequeño o célula es que una persona puede ser:",
+      optionsEn: ["anonymous", "entertained", "truly known", "unchallenged"],
+      optionsEs: ["anonima", "entretenida", "verdaderamente conocida", "sin desafío"], correct: 2 },
+    { textEn: "10. A healthy church lives at two sizes at once: celebration and:", textEs: "10. Una iglesia sana vive en dos tamaños a la vez: la celebración y la:",
+      optionsEn: ["committee", "staff", "choir", "cell"],
+      optionsEs: ["comite", "personal", "coro", "célula"], correct: 3 },
+    { textEn: "11. The 'key number' for unlimited growth through groups is:", textEs: "11. El 'número clave' para el crecimiento ilimitado por grupos es:",
+      optionsEn: ["10", "50", "100", "500"],
+      optionsEs: ["10", "50", "100", "500"], correct: 0 },
+    { textEn: "12. Because you can always start one more group, group-based growth is in principle:", textEs: "12. Porque siempre se puede iniciar un grupo más, el crecimiento por grupos es en principio:",
+      optionsEn: ["finished", "unlimited", "fixed", "limited"],
+      optionsEs: ["terminado", "ilimitado", "fijo", "limitado"], correct: 1 },
+    { textEn: "13. In our day, the Sunday School has largely migrated to:", textEs: "13. En nuestros días, la Escuela Dominical ha migrado en gran parte a:",
+      optionsEn: ["the parking lot", "the sanctuary", "online only", "home small groups"],
+      optionsEs: ["el estacionamiento", "el santuario", "solo en línea", "los grupos pequeños en casas"], correct: 3 },
+    { textEn: "14. The underlying principles of Sunday School growth, in the new setting, are:", textEs: "14. Los principios subyacentes del crecimiento de la Escuela Dominical, en el nuevo entorno, son:",
+      optionsEn: ["obsolete", "reversed", "unchanged", "forgotten"],
+      optionsEs: ["obsoletos", "invertidos", "sin cambio", "olvidados"], correct: 2 },
+    { textEn: "15. 'Never prune, contact everyone' now looks like a strategy aimed, ahead of its time, at:", textEs: "15. 'Nunca podar, contactar a todos' ahora parece una estrategia dirigida, adelantada a su tiempo, a:",
+      optionsEn: ["fundraising", "re-churching people", "entertainment", "building projects"],
+      optionsEs: ["la recaudación", "volver a la iglesia a la gente", "el entretenimiento", "proyectos de construcción"], correct: 1 },
+    { textEn: "16. The grown-up form of the cell today includes the house church, the dinner church, and the:", textEs: "16. La forma adulta de la célula hoy incluye la iglesia en casa, la iglesia de cena, y la:",
+      optionsEn: ["micro church", "cathedral", "stadium", "megachurch"],
+      optionsEs: ["microiglesia", "catedral", "estadio", "megaiglesia"], correct: 0 },
+    { textEn: "17. Starting new groups rather than only enlarging old ones applies which principle?", textEs: "17. Iniciar nuevos grupos en vez de solo agrandar los viejos aplica qué principio?",
+      optionsEn: ["the Pyramid Principle", "the New Unit Principle", "the budget principle", "the building principle"],
+      optionsEs: ["el Principio de la Pirámide", "el Principio de la Nueva Unidad", "el principio del presupuesto", "el principio del edificio"], correct: 1 },
+    { textEn: "18. During 2020 the most resilient churches were often those built on:", textEs: "18. Durante 2020 las iglesias más resilientes fueron a menudo las edificadas sobre:",
+      optionsEn: ["large auditoriums", "famous preachers", "big budgets", "small groups"],
+      optionsEs: ["grandes auditorios", "predicadores famosos", "grandes presupuestos", "grupos pequeños"], correct: 3 },
+    { textEn: "19. 'Work the enrollment, not the attendance' means growth comes from:", textEs: "19. 'Trabajar la inscripción, no la asistencia' significa que el crecimiento viene de:",
+      optionsEn: ["widening the enrolled circle and caring for it", "fancier rooms", "counting Sunday heads", "shorter lessons"],
+      optionsEs: ["ensanchar el círculo de inscritos y cuidarlo", "salones más lujosos", "contar cabezas el domingo", "lecciones más cortas"], correct: 0 },
+    { textEn: "20. The paradoxical strategy of this unit is summed up as:", textEs: "20. La estrategia paradójica de esta unidad se resume como:",
+      optionsEn: ["grow large to grow small", "spend to grow", "grow small to grow large", "advertise to grow"],
+      optionsEs: ["crecer grande para crecer pequeño", "gastar para crecer", "crecer pequeño para crecer grande", "anunciar para crecer"], correct: 2 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "Explain the principle of 'open enrollment' in Sunday School. What does it assume about attendance, and what do you actually work?",
+      textEs: "Explique el principio de la 'inscripción abierta' en la Escuela Dominical. Qué supone sobre la asistencia, y qué se trabaja en realidad?",
+      kw_en: ["enroll", "open", "attend", "percent", "work", "grow", "anywhere", "circle"],
+      kw_es: ["inscrip", "abiert", "asist", "porcent", "trabaj", "crec", "cualquier", "circul"],
+      modelEn: "Open enrollment assumes that only forty to sixty percent of those enrolled will attend on a given week, so you do not measure success by attendance but by enrollment. You enroll people anywhere, anytime, widening the enrolled circle, because the enrolled who are absent are the very people the class exists to reach. Work the enrollment and attendance follows.",
+      modelEs: "La inscripción abierta supone que solo del cuarenta al sesenta por ciento de los inscritos asistirá en una semana dada, así que no se mide el éxito por la asistencia sino por la inscripción. Se inscribe a la gente en cualquier lugar y momento, ensanchando el círculo de inscritos, porque los inscritos ausentes son justo las personas que la clase existe para alcanzar. Trabaje la inscripción y la asistencia sigue." },
+    { textEn: "Why does this unit say 'never prune the roll'? What is the roll really for?",
+      textEs: "Por qué dice esta unidad 'nunca podar la lista'? Para qué sirve realmente la lista?",
+      kw_en: ["prune", "roll", "prospect", "ministry", "list", "keep", "contact", "name"],
+      kw_es: ["pod", "lista", "prospect", "ministeri", "listad", "manten", "contact", "nombr"],
+      modelEn: "Never prune the roll, because the roll is not a record of the faithful but a prospect and ministry list. Every name on it, even the long-absent, is a person to be contacted and reached. To prune the roll for tidiness is to erase the very prospects the class is meant to win back; keep the names and keep contacting them.",
+      modelEs: "Nunca pode la lista, porque la lista no es un registro de los fieles sino una lista de prospectos y de ministerio. Cada nombre en ella, aun el largamente ausente, es una persona a contactar y alcanzar. Podar la lista por orden es borrar los mismos prospectos que la clase debe recuperar; conserve los nombres y siga contactándolos." },
+    { textEn: "Explain the contact principle and the role of the outreach leader.",
+      textEs: "Explique el principio del contacto y el papel del líder de alcance.",
+      kw_en: ["contact", "every", "week", "enroll", "outreach", "leader", "care", "reach"],
+      kw_es: ["contact", "cada", "seman", "inscrit", "alcance", "lider", "cuidad", "alcanz"],
+      modelEn: "The contact principle is simple and relentless: every enrolled person is contacted every week, present or absent, by a call, a visit, or a note. To carry it, each class needs a designated outreach leader who owns the list and keeps the contacts going. Consistent, caring contact is what turns an enrollment on paper into a growing, gathered class.",
+      modelEs: "El principio del contacto es simple e incansable: cada persona inscrita es contactada cada semana, presente o ausente, con una llamada, una visita o una nota. Para llevarlo, cada clase necesita un líder de alcance designado que se adueñe de la lista y mantenga los contactos. El contacto constante y cariñoso es lo que convierte una inscripción en papel en una clase que crece y se reúne." },
+    { textEn: "Why must the teacher 'catch the vision' first, and what happens in a class when the teacher does?",
+      textEs: "Por qué debe el maestro 'captar la visión' primero, y qué pasa en una clase cuando lo hace?",
+      kw_en: ["teacher", "vision", "catch", "inspir", "grow", "lead", "class", "contagi"],
+      kw_es: ["maestr", "vision", "capt", "inspir", "crec", "dirig", "clas", "contagi"],
+      modelEn: "A class will not grow beyond the vision of its teacher; people follow a leader who believes the class can grow and who works the enrollment and contacts. So the teacher must catch the vision first, because vision is contagious. Where a teacher inspires the class to see itself as a mission rather than a meeting, the class begins to reach and grow.",
+      modelEs: "Una clase no crecerá más allá de la visión de su maestro; la gente sigue a un líder que cree que la clase puede crecer y que trabaja la inscripción y los contactos. Así que el maestro debe captar la visión primero, porque la visión es contagiosa. Donde un maestro inspira a la clase a verse como una misión en vez de una reunión, la clase comienza a alcanzar y a crecer." },
+    { textEn: "Explain the genius of the small group or cell, and how it fits with the larger celebration.",
+      textEs: "Explique el genio del grupo pequeño o célula, y cómo encaja con la celebración más grande.",
+      kw_en: ["cell", "group", "known", "intimate", "small", "share", "belong", "celebrat"],
+      kw_es: ["celula", "grupo", "conoc", "intim", "pequen", "compart", "pertenec", "celebrac"],
+      modelEn: "The genius of the cell is that in a small group a person can be truly known, missed when absent, and carried in trouble, which the crowd can never do. A healthy church lives at two sizes at once: the celebration, the joyful corporate worship, and the cell, the intimate circle where life is shared. People come for the celebration but stay for the cell.",
+      modelEs: "El genio de la célula es que en un grupo pequeño una persona puede ser verdaderamente conocida, extrañada cuando falta, y sostenida en la dificultad, lo que la multitud nunca puede hacer. Una iglesia sana vive en dos tamaños a la vez: la celebración, la gozosa adoración corporativa, y la célula, el círculo íntimo donde se comparte la vida. La gente viene por la celebración pero se queda por la célula." },
+    { textEn: "Explain why the 'key number' of ten makes group-based growth unlimited.",
+      textEs: "Explique por qué el 'número clave' de diez hace ilimitado el crecimiento por grupos.",
+      kw_en: ["ten", "number", "group", "unlimit", "start", "cell", "multipli", "small"],
+      kw_es: ["diez", "numero", "grupo", "ilimit", "inici", "celula", "multiplic", "pequen"],
+      modelEn: "Because pastoral care is carried by the groups, the key number is not the hundreds in the auditorium but the ten in a cell. A building and a single pastor have a ceiling, but you can always start one more group of ten, and then another. Since the unit of growth is small and endlessly reproducible, group-based growth is in principle unlimited.",
+      modelEs: "Como el cuidado pastoral lo llevan los grupos, el número clave no son los cientos del auditorio sino los diez de una célula. Un edificio y un solo pastor tienen un techo, pero siempre se puede iniciar un grupo más de diez, y luego otro. Como la unidad de crecimiento es pequeña e infinitamente reproducible, el crecimiento por grupos es en principio ilimitado." },
+    { textEn: "How has the Sunday School 'migrated' in our day, and why do its principles still hold?",
+      textEs: "Cómo ha 'migrado' la Escuela Dominical en nuestros días, y por qué siguen vigentes sus principios?",
+      kw_en: ["sunday", "school", "group", "home", "migrat", "principle", "unchang", "small"],
+      kw_es: ["domini", "escuela", "grupo", "cas", "migr", "principi", "sincambi", "pequen"],
+      modelEn: "The Sunday School has largely migrated from classrooms before the service to home small groups during the week, but the principles are unchanged: open enrollment, never prune the roll, contact everyone, and let leaders catch the vision. The container moved from a classroom to a living room; the engine, an enrolled circle worked and cared for, runs exactly the same.",
+      modelEs: "La Escuela Dominical ha migrado en gran parte de las aulas antes del servicio a los grupos pequeños en casas durante la semana, pero los principios son los mismos: inscripción abierta, nunca podar la lista, contactar a todos, y dejar que los líderes capten la visión. El recipiente pasó de un aula a una sala; el motor, un círculo inscrito trabajado y cuidado, corre exactamente igual." },
+    { textEn: "Why does 'never prune, contact everyone' now look like a re-churching strategy ahead of its time?",
+      textEs: "Por qué 'nunca podar, contactar a todos' ahora parece una estrategia de volver a la iglesia adelantada a su tiempo?",
+      kw_en: ["prune", "contact", "rechurch", "prospect", "strategy", "ahead", "reach", "roll"],
+      kw_es: ["pod", "contact", "reiglesi", "prospect", "estrateg", "adelant", "alcanz", "lista"],
+      modelEn: "In an age of mass dechurching, the old rule, keep every name and contact the absent, turns out to be exactly a re-churching strategy: it treats the long-absent not as gone but as prospects to be lovingly pursued. What once kept a class roll full now does the very work the moment demands, reaching back for the drifted. It was a re-churching method decades ahead of its time.",
+      modelEs: "En una era de abandono masivo de la iglesia, la vieja regla, conserve cada nombre y contacte al ausente, resulta ser exactamente una estrategia de volver a la iglesia: trata al largamente ausente no como ido sino como prospecto a perseguir con amor. Lo que antes mantenía llena una lista de clase ahora hace la obra misma que el momento exige, alcanzar de nuevo a los alejados. Fue un método de re-iglesia décadas adelantado a su tiempo." },
+    { textEn: "Apply the New Unit Principle to small groups. Why start new groups rather than only growing existing ones?",
+      textEs: "Aplique el Principio de la Nueva Unidad a los grupos pequeños. Por qué iniciar nuevos grupos en vez de solo agrandar los existentes?",
+      kw_en: ["newunit", "start", "new", "group", "faster", "multipli", "plant", "grow"],
+      kw_es: ["nuevaunid", "inici", "nuev", "grupo", "rapid", "multiplic", "plant", "crec"],
+      modelEn: "By the New Unit Principle, new groups grow faster than old ones and have room for newcomers that settled groups have closed. So a growing church keeps starting new groups rather than only enlarging existing ones, which tend to harden into closed circles of friends. Multiplying small units, not merely swelling old ones, is the reliable engine of group-based growth.",
+      modelEs: "Por el Principio de la Nueva Unidad, los grupos nuevos crecen más rápido que los viejos y tienen lugar para los recién llegados que los grupos asentados han cerrado. Así que una iglesia en crecimiento sigue iniciando nuevos grupos en vez de solo agrandar los existentes, que tienden a endurecerse en círculos cerrados de amigos. Multiplicar unidades pequeñas, no solo hinchar las viejas, es el motor confiable del crecimiento por grupos." },
+    { textEn: "Synthesis: Explain the paradox 'grow small to grow large.' How do small groups grow a large church?",
+      textEs: "Síntesis: Explique la paradoja 'crecer pequeño para crecer grande.' Cómo hacen los grupos pequeños crecer a una iglesia grande?",
+      kw_en: ["small", "large", "group", "cell", "known", "multipli", "start", "grow"],
+      kw_es: ["pequen", "grand", "grupo", "celula", "conoc", "multiplic", "inici", "crec"],
+      modelEn: "A church grows large precisely by growing small: the more small groups where people are known, cared for, and held, the more newcomers can be folded in and kept. Crowds gather and scatter, but groups assimilate and retain. By multiplying cells where life is shared, a church keeps what it wins, and the steady multiplying of the small produces the large.",
+      modelEs: "Una iglesia crece grande precisamente al crecer pequeña: cuantos más grupos pequeños donde la gente es conocida, cuidada y sostenida, más recién llegados pueden ser integrados y retenidos. Las multitudes se reúnen y se dispersan, pero los grupos asimilan y retienen. Al multiplicar células donde se comparte la vida, una iglesia conserva lo que gana, y el constante multiplicar de lo pequeño produce lo grande." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 11 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 11 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ Bloqueado. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ Locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ MC ✓ aprobado. Sección SA bloqueada. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ MC ✓ passed. SA section locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const mb = document.createElement('div');
+        mb.className = 'js-model-box';
+        mb.style.cssText = 'display:none;margin-top:10px;padding:10px 12px;background:#fbf3d5;border:1px solid #d4af37;border-radius:8px;';
+        mb.innerHTML = (currentLang === 'en'
+            ? '<strong>Model answer — study this</strong><br>' + q.modelEn
+            : '<strong>Respuesta modelo — estúdiela</strong><br>' + q.modelEs);
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                return;
+            }
+            // Smart matcher (kwHit) — matches the official grade, not raw indexOf.
+            const hitList = kws.filter(kw => kwHit(ans, kw));
+            const hits = hitList.length;
+            if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? `✓ Solid answer (${hits}/${kws.length} key concepts referenced).` : `✓ Respuesta sólida (${hits}/${kws.length} conceptos clave referenciados).`;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en'
+                    ? `✗ Need at least 3 key concepts; got ${hits}/${kws.length}. Compare your answer with the model below.`
+                    : `✗ Necesita al menos 3 conceptos clave; obtuvo ${hits}/${kws.length}. Compare su respuesta con el modelo abajo.`;
+            }
+            mb.style.display = 'block'; // reveal model answer after every check, pass or fail
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(mb);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    // Reveal every model answer after submit — the teaching is the comparison.
+    document.querySelectorAll('.js-model-box').forEach(function(e){ e.style.display = 'block'; });
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ Reprobado: ${mcScore}/20 (se requiere 18). Bloqueado 2 minutos.</span>`
+                : `<span style='color:#8a1f1f'>✗ Failed: ${mcScore}/20 (need 18). Locked 2 minutes.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ MC ✓ permanece aprobado. SA reprobada: ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min.</span>`
+                : `<span style='color:#8a1f1f'>✗ MC ✓ stays passed. SA failed: ${saScore}/10 (need 9). SA section locked 15 min.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 2 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 2 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    location.reload();
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCGReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

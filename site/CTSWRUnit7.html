@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS World Religions — Unit 7: Sikhism</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #f8f4e8; border: 1px solid #e8d9b8; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 10px; margin: 6px 0 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; }
+.reg-form label { font-weight: bold; display: block; margin-top: 10px; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-form { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 8 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">🌍 World Religions — Unit 7: Sikhism</span><span class="lang-es">🌍 Religiones del Mundo — Unidad 7: El Sijismo</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"For there is no partiality with God." — Romans 2:11 (NKJV)</span><span class="lang-es">"Porque no hay acepción de personas para con Dios." — Romanos 2:11 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="registrationCard">
+    <h2><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit. Your registration is saved on this device and used across all CTS courses.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full Name</span><span class="lang-es">Nombre Completo</span></label>
+    <input type="text" id="regName" placeholder="" />
+    <label><span class="lang-en">Email</span><span class="lang-es">Correo Electrónico</span></label>
+    <input type="email" id="regEmail" placeholder="" />
+    <label><span class="lang-en">Country</span><span class="lang-es">País</span></label>
+    <input type="text" id="regCountry" placeholder="" />
+    <label><span class="lang-en">Program Track</span><span class="lang-es">Programa</span></label>
+    <input type="hidden" id="regTrack" value="certificate" />
+    <div id="trackButtons" style="display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;">
+        <button type="button" class="track-opt" data-track="certificate"><span class="lang-en">Certificate of Ministry</span><span class="lang-es">Certificado de Ministerio</span></button>
+        <button type="button" class="track-opt" data-track="mdiv"><span class="lang-en">Master of Divinity (M.Div.)</span><span class="lang-es">Maestría en Divinidad (M.Div.)</span></button>
+        <button type="button" class="track-opt" data-track="thm"><span class="lang-en">Master of Theology (Th.M.)</span><span class="lang-es">Maestría en Teología (Th.M.)</span></button>
+    </div>
+    <button class="small" id="saveRegBtn" style="margin-top: 10px;"><span class="lang-en">Save Registration</span><span class="lang-es">Guardar Registro</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>With roughly thirty million adherents worldwide as of recent estimates, Sikhism is smaller than any religion this course has studied so far, yet it holds real significance for this survey for two reasons. First, unlike Hinduism and Buddhism, which developed gradually over centuries with no single identifiable founder in the way this course could name for Islam or Buddhism, Sikh tradition traces its origin to a specific historical figure, Guru Nanak, whose teaching arose in direct, conscious response to the religious tensions between Hinduism and Islam in the region where he lived, even as the tradition itself continued to take shape through the nine Gurus who followed him and the community's later history — making it, in a sense, this course's clearest case study in a founder whose followers understood him as pointing beyond, rather than simply reforming, two existing traditions. Second, Sikh communities have spread through immigration to nearly every part of the world, including a real and growing presence in Latin America, meaning a pastor is more likely to encounter an actual Sikh neighbor, easily recognizable by the turban many Sikh men wear, than he might expect given the religion's relatively modest global numbers.</p>
+
+        <p>This unit will trace Sikhism's origin in the teaching of Guru Nanak and the line of Gurus who followed him, examine its core theological convictions and its central scripture, describe the distinctive markers of Sikh identity known as the Five Ks, outline the practice of the Sikh community centered on the gurdwara, and close with guidance for gospel engagement with Sikh neighbors, following the pattern this course has applied consistently since Paul at the Areopagus in Unit 1.</p>
+
+        <h2>I. Guru Nanak and the Founding of Sikhism</h2>
+        <p>Guru Nanak was born in 1469 in the Punjab region of what is now Pakistan and northern India, a region where Hindu and Muslim populations lived in close proximity, often in tension, each holding the other's core convictions to be false. According to Sikh tradition, Nanak, raised in a Hindu family but exposed from childhood to Muslim thought and community, underwent a profound spiritual experience around age thirty in which he disappeared into a river for three days and emerged declaring, "There is no Hindu, there is no Muslim," a statement Sikh tradition understands not as declaring both religions equally true, but as pointing beyond the sectarian divide itself toward a single, formless God who transcends the particular rituals, scriptures, and social divisions both communities had built up around Him. Nanak spent the following decades traveling widely, by traditional account as far as Mecca and possibly beyond, teaching a message centered on the oneness of God, the equality of all people regardless of caste or gender, and the rejection of empty ritual in favor of sincere inward devotion and honest living.</p>
+
+        <p>Nanak was the first of ten human Gurus recognized in the Sikh tradition, a line of succession lasting roughly two hundred years, each Guru understood to carry forward and develop the same essential teaching and spiritual authority Nanak first received. The tenth and final human Guru, Guru Gobind Singh, made two decisions of lasting consequence for Sikhism shortly before his death in 1708: he formally established the Khalsa, a disciplined order of committed Sikhs marked by the Five Ks discussed in Unit III below, and he declared that after his death, the line of human Gurus would end, with spiritual authority passing permanently to the Sikh scripture itself, thereafter called the Guru Granth Sahib — meaning Sikhism today recognizes no living human religious authority above the community and its sacred text, a structural feature that distinguishes it sharply from the papal or caliphal authority structures found in some other traditions this course has studied.</p>
+
+        <p>The historical context of Guru Nanak's ministry deserves a pastor's attention, since it shapes how Sikhism has understood its own relationship to both Hinduism and Islam ever since. Sixteenth-century Punjab sat under the rule of the Muslim Mughal Empire while remaining home to a large Hindu population, and relations between the two communities were often marked by mutual suspicion, occasional violent conflict, and firm theological rejection of the other's core claims. Nanak's teaching was received by many of his earliest followers, drawn from both Hindu and Muslim backgrounds, as offering a genuine third way — not a synthesis that affirmed both traditions equally, and not a rejection of everything either tradition taught, but a distinct new revelation that Sikhs believe corrected and completed what both earlier traditions had gotten partly right and partly wrong. This self-understanding as neither Hindu nor Muslim, but a fresh disclosure of the one God to a divided region, remains central to how Sikhs understand their own identity today.</p>
+
+        <h2>II. Core Beliefs: One God, the Guru Granth Sahib, and the Path to Liberation</h2>
+        <p>Sikh theology centers on an uncompromising monotheism captured in the opening words of the Guru Granth Sahib, the Mul Mantar, beginning with the phrase <em>Ik Onkar</em>, "There is one God." This God is understood as formless, eternal, uncreated, self-existent, and beyond full human comprehension or representation in any image or idol — a conviction that leads Sikhism to reject idol worship as firmly as Islam does, even though Sikhism arose in a Hindu cultural context where image worship was common. Unlike the impersonal Brahman of Hindu philosophy studied in Unit 4, however, Sikh theology describes God in terms that carry real personal warmth: God is often addressed as loving, gracious, and near to those who seek Him sincerely, knowable through devotion even while remaining formless and beyond full comprehension.</p>
+
+        <p>The Guru Granth Sahib, the central Sikh scripture, is a large collection of hymns and poetic compositions, composed by Guru Nanak and several of his successor Gurus along with a smaller number of respected Hindu and Muslim devotional poets whose writings the Sikh Gurus judged to be in harmony with their own teaching — itself a striking editorial decision that embodies Sikhism's founding conviction that genuine devotion to the one God can be found, in some measure, outside the boundaries of any single religious community. Since Guru Gobind Singh's declaration in 1708, the Guru Granth Sahib is treated with the reverence a living Guru would receive: installed on a throne-like platform in every gurdwara, ceremonially opened each morning and closed each night, and approached by worshipers with the same physical gestures of respect — bowing, offerings — that would be shown to a living spiritual teacher.</p>
+
+        <p>Sikhism shares with Hinduism, studied in Unit 4, the concepts of karma and samsara, the cycle of rebirth governed by one's accumulated moral actions, and understands the goal of spiritual life, called <em>mukti</em>, as liberation from this cycle. Where Sikh teaching diverges most sharply from both Hindu and Buddhist paths to liberation studied in Units 4 and 5, however, is in its account of how liberation is achieved: not primarily through ascetic renunciation of ordinary life, philosophical meditation on impersonal ultimate reality, or monastic withdrawal, but through sincere remembrance of God's name, called <em>simran</em>, combined with honest work, generous sharing with others, and wholehearted engagement in ordinary family and community life — Sikhism explicitly rejects the value of celibate monasticism and ascetic withdrawal that both Hinduism and Buddhism, in their more rigorous forms, have historically prized.</p>
+
+        <h2>III. The Five Ks and Sikh Identity</h2>
+        <p>When Guru Gobind Singh formally established the Khalsa in 1699, he instituted five visible articles of faith, known as the Five Ks because each begins with that letter in Punjabi, that committed Sikh men and women who join the Khalsa are expected to wear at all times as a public, unmistakable declaration of their faith and their commitment to its ethical demands. <em>Kesh</em> is uncut hair, understood as accepting God's creation as given rather than altering it, and is the reason many Sikh men wear the turban, which serves to contain and dignify the uncut hair rather than being, itself, one of the Five Ks. <em>Kangha</em> is a wooden comb, worn in the hair, symbolizing cleanliness and discipline. <em>Kara</em> is a steel bracelet worn on the wrist, symbolizing restraint from wrongdoing and the unbroken, eternal nature of God. <em>Kachera</em> are cotton undergarments, symbolizing modesty and self-control. <em>Kirpan</em> is a small ceremonial sword or dagger, symbolizing the Khalsa's commitment to defend the defenseless, resist injustice, and protect religious freedom — a striking and, to many outsiders, surprising element of Sikh identity that a pastor should understand accurately rather than misreading as an endorsement of casual violence; Sikh teaching frames the kirpan strictly as a last-resort instrument of protection and justice, not aggression.</p>
+
+        <p>Not every person who identifies as Sikh has formally joined the Khalsa or maintains all Five Ks, much as this course found with the internal diversity of practice within Islam, Hinduism, and Buddhism in earlier units — but the Khalsa Sikh, visibly marked by the turban and the other Five Ks, represents the tradition's most complete, publicly committed expression of Sikh identity and remains the figure most immediately recognizable to a pastor meeting a Sikh neighbor for the first time.</p>
+
+        <p>A pastor should also understand the surnames many Sikhs carry as a further expression of the tradition's founding rejection of caste. Guru Gobind Singh instructed male members of the Khalsa to adopt the surname Singh, meaning "lion," and female members to adopt Kaur, meaning "princess," in place of family surnames that in the surrounding Hindu culture typically signaled caste status. This deliberate erasure of caste markers from personal names was a concrete, lasting institutional expression of Sikhism's theological conviction that caste distinctions have no standing before God — a conviction a pastor should recognize as a genuine point of moral seriousness worth acknowledging before turning to points of theological difference.</p>
+
+        <h2>IV. Sikh Practice and Community</h2>
+        <p>The Sikh place of worship is called the <em>gurdwara</em>, literally "the door of the Guru," referring to the Guru Granth Sahib enthroned within. Congregational worship centers on the singing of hymns from the scripture, called <em>kirtan</em>, and readings from the text, with no ordained priesthood in the formal sense; any respected member of the community, male or female, may lead worship or read from the scripture, reflecting Sikhism's founding commitment to equality that rejected the caste-based religious authority structures common in the Hindu context from which it emerged.</p>
+
+        <p>Perhaps the most distinctive and widely admired Sikh institution is <em>langar</em>, the free communal kitchen maintained at every gurdwara worldwide, where volunteers prepare and serve a simple vegetarian meal to absolutely anyone who wishes to eat, regardless of religion, caste, wealth, or social status, with everyone seated together on the floor at the same level as an intentional, embodied statement of human equality before God. This institution, dating back to Guru Nanak himself, expresses concretely the Sikh principle of <em>seva</em>, selfless service to others, alongside <em>naam japna</em>, remembrance of God's name, and <em>vand chakna</em>, sharing what one has honestly earned — three pillars Sikh teaching holds together as inseparable, refusing any split between devotion to God and practical service to fellow human beings.</p>
+
+        <h2>V. Engaging Sikh Neighbors and Friends with the Gospel</h2>
+        <p>Following the pattern this course has applied consistently since Unit 1, a pastor should begin engagement with a Sikh neighbor by honoring substantial genuine common ground. Sikhism's uncompromising monotheism, its rejection of idol worship, and its conviction that God is not merely an abstract philosophical concept but can be known personally through sincere devotion all resonate closely with the biblical picture of God, considerably more closely than the impersonal Brahman of Hindu philosophy or the largely silent question of ultimate reality in classical Buddhism. Sikhism's radical commitment to human equality, embodied so concretely in the langar kitchen, echoes Scripture's own insistence that "there is no partiality with God" (Romans 2:11) and that "there is neither Jew nor Greek, there is neither slave nor free, there is neither male nor female; for you are all one in Christ Jesus" (Galatians 3:28) — a pastor can affirm wholeheartedly that Sikhism has grasped something real and important about human dignity and equality before God, however differently the two traditions ground that conviction theologically.</p>
+
+        <p>From that foundation, the gospel offers what Sikhism, for all its genuine insight, structurally cannot. Where Sikh theology, like the Hindu and Buddhist traditions studied earlier, ultimately grounds liberation in the individual's own sincere devotion, honest living, and simran, offered across however many lifetimes karma requires, the gospel offers liberation as a finished gift, received by faith rather than achieved by accumulated merit: "by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast" (Ephesians 2:8-9). Where the Guru Granth Sahib, whatever its genuine spiritual insight, remains a book — however reverently enthroned, read, and approached — the gospel proclaims a living Person, God Himself become flesh, who did not merely teach the way to God but declared Himself to be "the way, the truth, and the life" (John 14:6), able not merely to instruct sincere seekers but actually to save them. A pastor who can affirm Sikhism's genuine grasp of God's oneness and human equality while clearly proclaiming the living Christ, rather than a book however sacred, as the true and final Guru, will be well equipped for this conversation.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>Con aproximadamente treinta millones de adherentes en todo el mundo según estimaciones recientes, el sijismo es más pequeño que cualquier religión que este curso haya estudiado hasta ahora, pero tiene una significación real para este estudio por dos razones. Primero, a diferencia del hinduismo y el budismo, que se desarrollaron gradualmente a lo largo de siglos sin un solo fundador identificable de la manera en que este curso pudo nombrar para el islam o el budismo, la tradición sij traza su origen a una figura histórica específica, el Gurú Nanak, cuya enseñanza surgió en respuesta directa y consciente a las tensiones religiosas entre el hinduismo y el islam en la región donde vivía, aun cuando la tradición misma siguió tomando forma a través de los nueve Gurús que lo siguieron y la historia posterior de la comunidad — haciéndolo, en cierto sentido, el estudio de caso más claro de este curso de un fundador cuyos seguidores lo entendieron como quien apuntaba más allá, en lugar de simplemente reformar, dos tradiciones existentes. Segundo, las comunidades sijes se han extendido a través de la inmigración a casi todas las partes del mundo, incluyendo una presencia real y creciente en América Latina, lo que significa que un pastor tiene más probabilidad de encontrarse con un vecino sij real, fácilmente reconocible por el turbante que muchos hombres sijes usan, de lo que podría esperar dados los números globales relativamente modestos de la religión.</p>
+
+        <p>Esta unidad rastreará el origen del sijismo en la enseñanza del Gurú Nanak y la línea de Gurús que lo siguieron, examinará sus convicciones teológicas centrales y su escritura central, describirá los marcadores distintivos de la identidad sij conocidos como las Cinco Kas, delineará la práctica de la comunidad sij centrada en el gurdwara, y cerrará con orientación para el acercamiento evangelístico con vecinos sijes, siguiendo el patrón que este curso ha aplicado consistentemente desde Pablo en el Areópago en la Unidad 1.</p>
+
+        <h2>I. El Gurú Nanak y la fundación del sijismo</h2>
+        <p>El Gurú Nanak nació en 1469 en la región del Punjab de lo que hoy es Pakistán y el norte de la India, una región donde las poblaciones hindúes y musulmanas vivían en proximidad cercana, a menudo en tensión, cada una considerando falsas las convicciones centrales de la otra. Según la tradición sij, Nanak, criado en una familia hindú pero expuesto desde la infancia al pensamiento y comunidad musulmanes, experimentó una profunda experiencia espiritual alrededor de los treinta años en la cual desapareció en un río durante tres días y emergió declarando: "No hay hindú, no hay musulmán," una declaración que la tradición sij entiende no como declarando ambas religiones igualmente verdaderas, sino como señalando más allá de la división sectaria misma hacia un único Dios sin forma que trasciende los rituales particulares, escrituras, y divisiones sociales que ambas comunidades habían construido en torno a Él. Nanak pasó las siguientes décadas viajando ampliamente, según relato tradicional hasta La Meca y posiblemente más allá, enseñando un mensaje centrado en la unicidad de Dios, la igualdad de todas las personas sin importar casta o género, y el rechazo del ritual vacío en favor de la devoción interior sincera y la vida honesta.</p>
+
+        <p>Nanak fue el primero de diez Gurús humanos reconocidos en la tradición sij, una línea de sucesión que duró aproximadamente doscientos años, cada Gurú entendido como llevando adelante y desarrollando la misma enseñanza esencial y autoridad espiritual que Nanak recibió primero. El décimo y último Gurú humano, el Gurú Gobind Singh, tomó dos decisiones de consecuencia duradera para el sijismo poco antes de su muerte en 1708: estableció formalmente el Khalsa, una orden disciplinada de sijes comprometidos marcados por las Cinco Kas discutidas en la Unidad III más abajo, y declaró que después de su muerte, la línea de Gurús humanos terminaría, con la autoridad espiritual pasando permanentemente a la escritura sij misma, en adelante llamada el Guru Granth Sahib — lo que significa que el sijismo hoy no reconoce ninguna autoridad religiosa humana viviente por encima de la comunidad y su texto sagrado, una característica estructural que lo distingue agudamente de las estructuras de autoridad papal o califal encontradas en algunas otras tradiciones que este curso ha estudiado.</p>
+
+        <p>El contexto histórico del ministerio del Gurú Nanak merece la atención de un pastor, ya que da forma a cómo el sijismo ha entendido su propia relación tanto con el hinduismo como con el islam desde entonces. El Punjab del siglo dieciséis estaba bajo el gobierno del Imperio Mogol musulmán mientras seguía siendo hogar de una gran población hindú, y las relaciones entre las dos comunidades a menudo estaban marcadas por sospecha mutua, conflicto violento ocasional, y firme rechazo teológico de las afirmaciones centrales de la otra. La enseñanza de Nanak fue recibida por muchos de sus primeros seguidores, provenientes de trasfondos tanto hindúes como musulmanes, como ofreciendo una genuina tercera vía — no una síntesis que afirmaba ambas tradiciones por igual, y no un rechazo de todo lo que ambas tradiciones enseñaban, sino una nueva revelación distinta que los sijes creen corrigió y completó lo que ambas tradiciones anteriores habían acertado en parte y errado en parte. Este autoentendimiento como ni hindú ni musulmán, sino una revelación fresca del único Dios a una región dividida, sigue siendo central para cómo los sijes entienden su propia identidad hoy.</p>
+
+        <h2>II. Creencias centrales: Un Dios, el Guru Granth Sahib, y el camino a la liberación</h2>
+        <p>La teología sij se centra en un monoteísmo intransigente capturado en las palabras iniciales del Guru Granth Sahib, el Mul Mantar, comenzando con la frase <em>Ik Onkar</em>, "Hay un Dios." Este Dios se entiende como sin forma, eterno, increado, autoexistente, y más allá de la plena comprensión o representación humana en cualquier imagen o ídolo — una convicción que lleva al sijismo a rechazar la adoración de ídolos tan firmemente como lo hace el islam, aunque el sijismo surgió en un contexto cultural hindú donde la adoración de imágenes era común. A diferencia del Brahman impersonal de la filosofía hindú estudiada en la Unidad 4, sin embargo, la teología sij describe a Dios en términos que llevan calidez personal real: Dios a menudo se dirige como amoroso, misericordioso, y cercano a quienes lo buscan sinceramente, cognoscible a través de la devoción incluso mientras permanece sin forma y más allá de la plena comprensión.</p>
+
+        <p>El Guru Granth Sahib, la escritura sij central, es una gran colección de himnos y composiciones poéticas, compuesta por el Gurú Nanak y varios de sus Gurús sucesores junto con un número menor de respetados poetas devocionales hindúes y musulmanes cuyos escritos los Gurús sijes juzgaron estar en armonía con su propia enseñanza — en sí misma una decisión editorial sorprendente que encarna la convicción fundacional del sijismo de que la devoción genuina al único Dios puede encontrarse, en alguna medida, fuera de los límites de cualquier comunidad religiosa única. Desde la declaración del Gurú Gobind Singh en 1708, el Guru Granth Sahib se trata con la reverencia que recibiría un Gurú viviente: instalado en una plataforma tipo trono en cada gurdwara, abierto ceremonialmente cada mañana y cerrado cada noche, y abordado por los adoradores con los mismos gestos físicos de respeto — inclinarse, ofrendas — que se mostrarían a un maestro espiritual viviente.</p>
+
+        <p>El sijismo comparte con el hinduismo, estudiado en la Unidad 4, los conceptos de karma y samsara, el ciclo de renacimiento gobernado por las acciones morales acumuladas de uno, y entiende la meta de la vida espiritual, llamada <em>mukti</em>, como liberación de este ciclo. Sin embargo, donde la enseñanza sij diverge más agudamente tanto de los caminos hindú como budista hacia la liberación estudiados en las Unidades 4 y 5, es en su relato de cómo se logra la liberación: no principalmente a través de la renuncia ascética a la vida ordinaria, la meditación filosófica sobre la realidad última impersonal, o el retiro monástico, sino a través del recuerdo sincero del nombre de Dios, llamado <em>simran</em>, combinado con trabajo honesto, compartir generosamente con otros, y compromiso pleno con la vida familiar y comunitaria ordinaria — el sijismo rechaza explícitamente el valor del monasticismo célibe y el retiro ascético que tanto el hinduismo como el budismo, en sus formas más rigurosas, históricamente han apreciado.</p>
+
+        <h2>III. Las Cinco Kas y la identidad sij</h2>
+        <p>Cuando el Gurú Gobind Singh estableció formalmente el Khalsa en 1699, instituyó cinco artículos visibles de fe, conocidos como las Cinco Kas porque cada uno comienza con esa letra en panyabí, que se espera que los hombres y mujeres sijes comprometidos que se unen al Khalsa usen en todo momento como una declaración pública e inconfundible de su fe y su compromiso con sus exigencias éticas. <em>Kesh</em> es el cabello sin cortar, entendido como aceptar la creación de Dios tal como se da en lugar de alterarla, y es la razón por la cual muchos hombres sijes usan el turbante, que sirve para contener y dignificar el cabello sin cortar en lugar de ser, en sí mismo, una de las Cinco Kas. <em>Kangha</em> es un peine de madera, usado en el cabello, simbolizando la limpieza y la disciplina. <em>Kara</em> es un brazalete de acero usado en la muñeca, simbolizando la restricción de hacer el mal y la naturaleza ininterrumpida y eterna de Dios. <em>Kachera</em> son prendas interiores de algodón, simbolizando la modestia y el autocontrol. <em>Kirpan</em> es una pequeña espada o daga ceremonial, simbolizando el compromiso del Khalsa de defender a los indefensos, resistir la injusticia, y proteger la libertad religiosa — un elemento sorprendente y, para muchos extraños, inesperado de la identidad sij que un pastor debe entender con precisión en lugar de malinterpretarlo como un respaldo a la violencia casual; la enseñanza sij enmarca el kirpan estrictamente como un instrumento de último recurso de protección y justicia, no de agresión.</p>
+
+        <p>No toda persona que se identifica como sij se ha unido formalmente al Khalsa o mantiene las cinco Kas, tal como este curso encontró con la diversidad interna de práctica dentro del islam, el hinduismo y el budismo en unidades anteriores — pero el sij Khalsa, visiblemente marcado por el turbante y las otras Cinco Kas, representa la expresión más completa y públicamente comprometida de la identidad sij de la tradición y sigue siendo la figura más inmediatamente reconocible para un pastor que conoce a un vecino sij por primera vez.</p>
+
+        <p>Un pastor también debe entender los apellidos que muchos sijes llevan como una expresión adicional del rechazo fundacional de la tradición a la casta. El Gurú Gobind Singh instruyó a los miembros masculinos del Khalsa a adoptar el apellido Singh, que significa "león," y a las miembros femeninas a adoptar Kaur, que significa "princesa," en lugar de los apellidos familiares que en la cultura hindú circundante típicamente señalaban el estatus de casta. Esta borradura deliberada de los marcadores de casta de los nombres personales fue una expresión institucional concreta y duradera de la convicción teológica del sijismo de que las distinciones de casta no tienen validez delante de Dios — una convicción que un pastor debe reconocer como un punto genuino de seriedad moral que vale la pena reconocer antes de pasar a los puntos de diferencia teológica.</p>
+
+        <h2>IV. Práctica y comunidad sij</h2>
+        <p>El lugar de adoración sij se llama el <em>gurdwara</em>, literalmente "la puerta del Gurú," refiriéndose al Guru Granth Sahib entronizado dentro. La adoración congregacional se centra en el canto de himnos de la escritura, llamado <em>kirtan</em>, y lecturas del texto, sin sacerdocio ordenado en el sentido formal; cualquier miembro respetado de la comunidad, hombre o mujer, puede dirigir la adoración o leer de la escritura, reflejando el compromiso fundacional del sijismo con la igualdad que rechazó las estructuras de autoridad religiosa basadas en castas comunes en el contexto hindú del cual surgió.</p>
+
+        <p>Quizás la institución sij más distintiva y ampliamente admirada es el <em>langar</em>, la cocina comunitaria gratuita mantenida en cada gurdwara en todo el mundo, donde voluntarios preparan y sirven una comida vegetariana simple a absolutamente cualquiera que desee comer, sin importar religión, casta, riqueza, o estatus social, con todos sentados juntos en el suelo al mismo nivel como una declaración intencional y encarnada de la igualdad humana delante de Dios. Esta institución, que se remonta al propio Gurú Nanak, expresa concretamente el principio sij de <em>seva</em>, el servicio desinteresado a otros, junto con <em>naam japna</em>, el recuerdo del nombre de Dios, y <em>vand chakna</em>, compartir lo que uno ha ganado honestamente — tres pilares que la enseñanza sij mantiene juntos como inseparables, rechazando cualquier separación entre la devoción a Dios y el servicio práctico a los semejantes.</p>
+
+        <h2>V. Acercándose a vecinos y amigos sijes con el evangelio</h2>
+        <p>Siguiendo el patrón que este curso ha aplicado consistentemente desde la Unidad 1, un pastor debe comenzar el acercamiento a un vecino sij honrando un terreno común genuino y sustancial. El monoteísmo intransigente del sijismo, su rechazo de la adoración de ídolos, y su convicción de que Dios no es meramente un concepto filosófico abstracto sino que puede conocerse personalmente a través de la devoción sincera resuenan estrechamente con el cuadro bíblico de Dios, considerablemente más de cerca que el Brahman impersonal de la filosofía hindú o la pregunta en gran medida silenciada de la realidad última en el budismo clásico. El compromiso radical del sijismo con la igualdad humana, encarnado tan concretamente en la cocina langar, hace eco de la propia insistencia de la Escritura de que "no hay acepción de personas para con Dios" (Romanos 2:11) y que "no hay judío ni griego; no hay esclavo ni libre; no hay varón ni mujer; porque todos vosotros sois uno en Cristo Jesús" (Gálatas 3:28) — un pastor puede afirmar de todo corazón que el sijismo ha captado algo real e importante acerca de la dignidad humana y la igualdad delante de Dios, aunque las dos tradiciones fundamenten esa convicción teológicamente de manera muy diferente.</p>
+
+        <p>Desde ese fundamento, el evangelio ofrece lo que el sijismo, a pesar de toda su intuición genuina, no puede ofrecer estructuralmente. Donde la teología sij, como las tradiciones hindú y budista estudiadas anteriormente, en última instancia fundamenta la liberación en la propia devoción sincera del individuo, la vida honesta, y el simran, ofrecidos a lo largo de tantas vidas como el karma requiera, el evangelio ofrece la liberación como un regalo terminado, recibido por fe en lugar de logrado por mérito acumulado: "por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se gloríe" (Efesios 2:8-9). Donde el Guru Granth Sahib, cualquiera que sea su genuina intuición espiritual, sigue siendo un libro — por más reverentemente entronizado, leído, y abordado que sea — el evangelio proclama una Persona viviente, Dios mismo hecho carne, quien no meramente enseñó el camino a Dios sino que se declaró a sí mismo ser "el camino, y la verdad, y la vida" (Juan 14:6), capaz no meramente de instruir a buscadores sinceros sino realmente de salvarlos. Un pastor que pueda afirmar la genuina comprensión del sijismo de la unicidad de Dios y la igualdad humana mientras proclama claramente a Cristo viviente, en lugar de un libro por sagrado que sea, como el verdadero y final Gurú, estará bien equipado para esta conversación.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 7 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 7 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 7;
+let progress = JSON.parse(localStorage.getItem('cts_wr_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSWRUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit7) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSWRUnit6.html"; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSWRUnit8.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        const trackLabel = student.track === 'mdiv' ? 'M.Div.' : (student.track === 'thm' ? 'Th.M.' : 'Certificate');
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name} <span style="font-weight:normal;font-size:0.85rem;">(${trackLabel})</span> &nbsp;<a href="#" id="changeTrackLink" style="font-size:0.8rem;color:#5b3a1f;">Change track</a>`;
+        document.getElementById('registrationCard').style.display = 'none';
+        const link = document.getElementById('changeTrackLink');
+        if (link) link.onclick = function(e) {
+            e.preventDefault();
+            const card = document.getElementById('registrationCard');
+            card.style.display = 'block';
+            if (student.name) document.getElementById('regName').value = student.name;
+            if (student.email) document.getElementById('regEmail').value = student.email;
+            if (student.country) document.getElementById('regCountry').value = student.country;
+            if (student.track && typeof setTrack === 'function') setTrack(student.track);
+            card.scrollIntoView({ behavior: 'smooth' });
+        };
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<span style="color:#5b3a1f;">⚠️ Please register</span>`;
+    }
+}
+displayStudentGreeting();
+
+
+function setTrack(t) {
+    document.getElementById('regTrack').value = t;
+    document.querySelectorAll('.track-opt').forEach(b => { b.classList.toggle('selected', b.getAttribute('data-track') === t); });
+}
+document.querySelectorAll('.track-opt').forEach(b => { b.onclick = function() { setTrack(this.getAttribute('data-track')); }; });
+setTrack('certificate');
+document.getElementById('saveRegBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const country = document.getElementById('regCountry').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = `<span style="color:red;">⚠️ Name and email are required.</span>`;
+        return;
+    }
+    localStorage.setItem('cts_student', JSON.stringify({ name, email, country, track }));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = `<span style="color:green;">✓ Saved! Welcome, ${name}.</span>`;
+    setTimeout(() => { displayStudentGreeting(); }, 1000);
+    renderQuestions();
+};
+
+// Q3 reshuffled (Psalm 23 author) to move David from C to B for 5/5/5/5 balance.
+const mcQuestions = [
+  {
+    "textEn": "1. Unlike Hinduism and Buddhism, Sikhism is distinctive in this course because it:",
+    "textEs": "1. A diferencia del hinduismo y el budismo, el sijismo es distintivo en este curso porque:",
+    "optionsEn": [
+      "Was founded by a specific historical figure at a datable moment",
+      "Has no founder at all",
+      "Developed only after Islam disappeared",
+      "Rejects the existence of any God"
+    ],
+    "optionsEs": [
+      "Fue fundado por una figura histórica específica en un momento fechable",
+      "No tiene fundador en absoluto",
+      "Se desarrolló solo después de que el islam desapareciera",
+      "Rechaza la existencia de cualquier Dios"
+    ],
+    "c": 21,
+    "explEn": "Unlike Hinduism and Buddhism, Sikhism traces its origin to a specific historical figure, Guru Nanak, though the tradition continued developing through the Gurus who followed him.",
+    "explEs": "A diferencia del hinduismo y el budismo, el sijismo traza su origen a una figura histórica específica, el Gurú Nanak, aunque la tradición siguió desarrollándose a través de los Gurús que lo siguieron."
+  },
+  {
+    "textEn": "2. Guru Nanak was born in 1469 in the region of:",
+    "textEs": "2. El Gurú Nanak nació en 1469 en la región de:",
+    "optionsEn": [
+      "Bengal",
+      "Punjab",
+      "Tibet",
+      "Kerala"
+    ],
+    "optionsEs": [
+      "Bengala",
+      "Punjab",
+      "Tíbet",
+      "Kerala"
+    ],
+    "c": 29,
+    "explEn": "Guru Nanak was born in 1469 in the Punjab region of what is now Pakistan and northern India.",
+    "explEs": "El Gurú Nanak nació en 1469 en la región del Punjab de lo que hoy es Pakistán y el norte de la India."
+  },
+  {
+    "textEn": "3. Nanak's declaration 'There is no Hindu, there is no Muslim' is understood by Sikh tradition to mean:",
+    "textEs": "3. La declaración de Nanak 'No hay hindú, no hay musulmán' se entiende por la tradición sij que significa:",
+    "optionsEn": [
+      "Both religions are completely false",
+      "Both religions are equally and fully true",
+      "A single formless God transcends the sectarian divide both communities built",
+      "Only Sikhs will be saved"
+    ],
+    "optionsEs": [
+      "Ambas religiones son completamente falsas",
+      "Ambas religiones son igual y plenamente verdaderas",
+      "Un único Dios sin forma trasciende la división sectaria que ambas comunidades construyeron",
+      "Solo los sijes se salvarán"
+    ],
+    "c": 37,
+    "explEn": "This declaration is understood as pointing beyond the sectarian divide toward a single, formless God who transcends the divisions both communities had built around Him.",
+    "explEs": "Esta declaración se entiende como señalando más allá de la división sectaria hacia un único Dios sin forma que trasciende las divisiones que ambas comunidades habían construido en torno a Él."
+  },
+  {
+    "textEn": "4. According to this unit, many of Nanak's earliest followers understood his teaching as offering:",
+    "textEs": "4. Según esta unidad, muchos de los primeros seguidores de Nanak entendieron su enseñanza como ofreciendo:",
+    "optionsEn": [
+      "A synthesis affirming Hinduism and Islam equally",
+      "A return to pure Hinduism",
+      "A rejection of all religion entirely",
+      "A genuine third way, a fresh revelation correcting both traditions"
+    ],
+    "optionsEs": [
+      "Una síntesis que afirmaba al hinduismo y al islam por igual",
+      "Un regreso al hinduismo puro",
+      "Un rechazo total de toda religión",
+      "Una genuina tercera vía, una revelación fresca que corregía ambas tradiciones"
+    ],
+    "c": 45,
+    "explEn": "Nanak's teaching was received as a genuine third way, a distinct new revelation that Sikhs believe corrected and completed what both earlier traditions had gotten partly right and wrong.",
+    "explEs": "La enseñanza de Nanak fue recibida como una genuina tercera vía, una nueva revelación distinta que los sijes creen corrigió y completó lo que ambas tradiciones anteriores habían acertado y errado en parte."
+  },
+  {
+    "textEn": "5. Guru Gobind Singh, shortly before his death in 1708, declared that spiritual authority would pass to:",
+    "textEs": "5. El Gurú Gobind Singh, poco antes de su muerte en 1708, declaró que la autoridad espiritual pasaría a:",
+    "optionsEn": [
+      "The Sikh scripture itself, the Guru Granth Sahib",
+      "A new eleventh human Guru",
+      "The Mughal emperor",
+      "A council of Hindu priests"
+    ],
+    "optionsEs": [
+      "La escritura sij misma, el Guru Granth Sahib",
+      "Un nuevo undécimo Gurú humano",
+      "El emperador mogol",
+      "Un consejo de sacerdotes hindúes"
+    ],
+    "c": 49,
+    "explEn": "Guru Gobind Singh declared that after his death the line of human Gurus would end, with spiritual authority passing permanently to the Guru Granth Sahib.",
+    "explEs": "El Gurú Gobind Singh declaró que después de su muerte la línea de Gurús humanos terminaría, con la autoridad espiritual pasando permanentemente al Guru Granth Sahib."
+  },
+  {
+    "textEn": "6. The Mul Mantar, the opening words of the Guru Granth Sahib, begins with the phrase:",
+    "textEs": "6. El Mul Mantar, las palabras iniciales del Guru Granth Sahib, comienza con la frase:",
+    "optionsEn": [
+      "Om Namah Shivaya",
+      "Ik Onkar, 'There is one God'",
+      "Allahu Akbar",
+      "Namu Amida Butsu"
+    ],
+    "optionsEs": [
+      "Om Namah Shivaya",
+      "Ik Onkar, 'Hay un Dios'",
+      "Allahu Akbar",
+      "Namu Amida Butsu"
+    ],
+    "c": 57,
+    "explEn": "The Mul Mantar begins with Ik Onkar, 'There is one God,' capturing Sikh theology's uncompromising monotheism.",
+    "explEs": "El Mul Mantar comienza con Ik Onkar, 'Hay un Dios,' capturando el monoteísmo intransigente de la teología sij."
+  },
+  {
+    "textEn": "7. Unlike the impersonal Brahman of Hindu philosophy, Sikh theology describes God as:",
+    "textEs": "7. A diferencia del Brahman impersonal de la filosofía hindú, la teología sij describe a Dios como:",
+    "optionsEn": [
+      "Completely unknowable in any sense",
+      "Identical to Vishnu",
+      "Loving, gracious, and near to those who seek Him sincerely",
+      "A collection of many separate gods"
+    ],
+    "optionsEs": [
+      "Completamente incognoscible en cualquier sentido",
+      "Idéntico a Vishnu",
+      "Amoroso, misericordioso, y cercano a quienes lo buscan sinceramente",
+      "Una colección de muchos dioses separados"
+    ],
+    "c": 65,
+    "explEn": "Sikh theology describes God in terms carrying real personal warmth, often addressed as loving, gracious, and near to sincere seekers.",
+    "explEs": "La teología sij describe a Dios en términos que llevan calidez personal real, a menudo dirigido como amoroso, misericordioso, y cercano a los buscadores sinceros."
+  },
+  {
+    "textEn": "8. The Guru Granth Sahib includes writings by Sikh Gurus and also by:",
+    "textEs": "8. El Guru Granth Sahib incluye escritos de los Gurús sijes y también de:",
+    "optionsEn": [
+      "Only Sikh women",
+      "Roman Catholic priests",
+      "Buddhist monks exclusively",
+      "Respected Hindu and Muslim devotional poets"
+    ],
+    "optionsEs": [
+      "Solo mujeres sijes",
+      "Sacerdotes católicos romanos",
+      "Exclusivamente monjes budistas",
+      "Respetados poetas devocionales hindúes y musulmanes"
+    ],
+    "c": 73,
+    "explEn": "The Guru Granth Sahib includes a smaller number of respected Hindu and Muslim devotional poets whose writings the Sikh Gurus judged to be in harmony with their teaching.",
+    "explEs": "El Guru Granth Sahib incluye un número menor de respetados poetas devocionales hindúes y musulmanes cuyos escritos los Gurús sijes juzgaron estar en armonía con su enseñanza."
+  },
+  {
+    "textEn": "9. Since 1708, the Guru Granth Sahib is treated in gurdwaras with:",
+    "textEs": "9. Desde 1708, el Guru Granth Sahib se trata en los gurdwaras con:",
+    "optionsEn": [
+      "The reverence a living Guru would receive",
+      "No particular reverence",
+      "Complete indifference",
+      "Reverence lower than any human teacher"
+    ],
+    "optionsEs": [
+      "La reverencia que recibiría un Gurú viviente",
+      "Ninguna reverencia particular",
+      "Indiferencia total",
+      "Reverencia menor que cualquier maestro humano"
+    ],
+    "c": 77,
+    "explEn": "Since Guru Gobind Singh's declaration, the Guru Granth Sahib is treated with the reverence a living Guru would receive, enthroned and approached with gestures of respect.",
+    "explEs": "Desde la declaración del Gurú Gobind Singh, el Guru Granth Sahib se trata con la reverencia que recibiría un Gurú viviente, entronizado y abordado con gestos de respeto."
+  },
+  {
+    "textEn": "10. Mukti, the Sikh goal of spiritual life, refers to:",
+    "textEs": "10. El mukti, la meta sij de la vida espiritual, se refiere a:",
+    "optionsEn": [
+      "Political independence for Punjab",
+      "Liberation from the cycle of karma and samsara",
+      "The Sikh dietary code",
+      "A form of ritual sacrifice"
+    ],
+    "optionsEs": [
+      "Independencia política para el Punjab",
+      "Liberación del ciclo de karma y samsara",
+      "El código dietético sij",
+      "Una forma de sacrificio ritual"
+    ],
+    "c": 85,
+    "explEn": "Mukti is liberation from the cycle of karma and samsara, the Sikh goal shared conceptually with Hindu tradition though achieved differently.",
+    "explEs": "El mukti es la liberación del ciclo de karma y samsara, la meta sij compartida conceptualmente con la tradición hindú aunque lograda de manera diferente."
+  },
+  {
+    "textEn": "11. According to this unit, Sikh teaching on achieving liberation diverges from Hindu and Buddhist paths by:",
+    "textEs": "11. Según esta unidad, la enseñanza sij sobre lograr la liberación diverge de los caminos hindú y budista al:",
+    "optionsEn": [
+      "Requiring celibate monasticism",
+      "Denying that liberation is possible at all",
+      "Rejecting ascetic withdrawal in favor of honest work and family life",
+      "Requiring pilgrimage to Mecca"
+    ],
+    "optionsEs": [
+      "Requerir monasticismo célibe",
+      "Negar que la liberación sea posible en absoluto",
+      "Rechazar el retiro ascético en favor del trabajo honesto y la vida familiar",
+      "Requerir peregrinación a La Meca"
+    ],
+    "c": 93,
+    "explEn": "Sikhism explicitly rejects celibate monasticism and ascetic withdrawal, achieving liberation instead through sincere remembrance of God's name combined with honest work and family engagement.",
+    "explEs": "El sijismo rechaza explícitamente el monasticismo célibe y el retiro ascético, logrando la liberación en cambio a través del recuerdo sincero del nombre de Dios combinado con trabajo honesto y compromiso familiar."
+  },
+  {
+    "textEn": "12. Guru Gobind Singh formally established the Khalsa in the year:",
+    "textEs": "12. El Gurú Gobind Singh estableció formalmente el Khalsa en el año:",
+    "optionsEn": [
+      "1469",
+      "1708 only",
+      "2000",
+      "1699"
+    ],
+    "optionsEs": [
+      "1469",
+      "Solo 1708",
+      "2000",
+      "1699"
+    ],
+    "c": 101,
+    "explEn": "Guru Gobind Singh formally established the Khalsa in 1699, instituting the Five Ks as visible articles of faith.",
+    "explEs": "El Gurú Gobind Singh estableció formalmente el Khalsa en 1699, instituyendo las Cinco Kas como artículos visibles de fe."
+  },
+  {
+    "textEn": "13. Kesh, one of the Five Ks, refers to:",
+    "textEs": "13. El Kesh, una de las Cinco Kas, se refiere a:",
+    "optionsEn": [
+      "Uncut hair",
+      "A steel bracelet",
+      "A ceremonial dagger",
+      "Cotton undergarments"
+    ],
+    "optionsEs": [
+      "El cabello sin cortar",
+      "Un brazalete de acero",
+      "Una daga ceremonial",
+      "Prendas interiores de algodón"
+    ],
+    "c": 105,
+    "explEn": "Kesh is uncut hair, understood as accepting God's creation as given, and is the reason many Sikh men wear a turban.",
+    "explEs": "El Kesh es el cabello sin cortar, entendido como aceptar la creación de Dios tal como se da, y es la razón por la cual muchos hombres sijes usan turbante."
+  },
+  {
+    "textEn": "14. This unit specifically clarifies that the kirpan, the ceremonial sword, is understood in Sikh teaching as:",
+    "textEs": "14. Esta unidad aclara específicamente que el kirpan, la espada ceremonial, se entiende en la enseñanza sij como:",
+    "optionsEn": [
+      "An endorsement of casual violence",
+      "A last-resort instrument of protection and justice, not aggression",
+      "A purely decorative item with no meaning",
+      "Reserved only for Sikh priests"
+    ],
+    "optionsEs": [
+      "Un respaldo a la violencia casual",
+      "Un instrumento de último recurso de protección y justicia, no de agresión",
+      "Un elemento puramente decorativo sin significado",
+      "Reservado solo para sacerdotes sijes"
+    ],
+    "c": 113,
+    "explEn": "Sikh teaching frames the kirpan strictly as a last-resort instrument of protection and justice, symbolizing the Khalsa's commitment to defend the defenseless, not aggression.",
+    "explEs": "La enseñanza sij enmarca el kirpan estrictamente como un instrumento de último recurso de protección y justicia, simbolizando el compromiso del Khalsa de defender a los indefensos, no la agresión."
+  },
+  {
+    "textEn": "15. Guru Gobind Singh instructed Khalsa men and women to adopt the surnames Singh and Kaur in order to:",
+    "textEs": "15. El Gurú Gobind Singh instruyó a los hombres y mujeres del Khalsa a adoptar los apellidos Singh y Kaur para:",
+    "optionsEn": [
+      "Signal high caste status",
+      "Honor the Mughal emperor",
+      "Erase caste markers traditionally signaled by family surnames",
+      "Distinguish Khalsa members from all other Sikhs permanently"
+    ],
+    "optionsEs": [
+      "Señalar un estatus de casta alta",
+      "Honrar al emperador mogol",
+      "Borrar los marcadores de casta tradicionalmente señalados por los apellidos familiares",
+      "Distinguir a los miembros del Khalsa de todos los demás sijes permanentemente"
+    ],
+    "c": 121,
+    "explEn": "This deliberate erasure of caste markers from personal names expressed Sikhism's theological conviction that caste distinctions have no standing before God.",
+    "explEs": "Esta borradura deliberada de los marcadores de casta de los nombres personales expresó la convicción teológica del sijismo de que las distinciones de casta no tienen validez delante de Dios."
+  },
+  {
+    "textEn": "16. The Sikh place of worship, meaning 'the door of the Guru,' is called the:",
+    "textEs": "16. El lugar de adoración sij, que significa 'la puerta del Gurú,' se llama el:",
+    "optionsEn": [
+      "Mosque",
+      "Synagogue",
+      "Pagoda",
+      "Gurdwara"
+    ],
+    "optionsEs": [
+      "Mezquita",
+      "Sinagoga",
+      "Pagoda",
+      "Gurdwara"
+    ],
+    "c": 129,
+    "explEn": "The gurdwara, literally 'the door of the Guru,' refers to the Guru Granth Sahib enthroned within.",
+    "explEs": "El gurdwara, literalmente 'la puerta del Gurú,' se refiere al Guru Granth Sahib entronizado dentro."
+  },
+  {
+    "textEn": "17. Langar, the free communal kitchen at every gurdwara, serves food to:",
+    "textEs": "17. El langar, la cocina comunitaria gratuita en cada gurdwara, sirve comida a:",
+    "optionsEn": [
+      "Absolutely anyone, regardless of religion, caste, or status",
+      "Only Khalsa Sikhs",
+      "Only the poor",
+      "Only men"
+    ],
+    "optionsEs": [
+      "Absolutamente cualquiera, sin importar religión, casta, o estatus",
+      "Solo a los sijes Khalsa",
+      "Solo a los pobres",
+      "Solo a los hombres"
+    ],
+    "c": 133,
+    "explEn": "Langar serves a simple vegetarian meal to absolutely anyone who wishes to eat, regardless of religion, caste, wealth, or social status, seated together as an equality statement.",
+    "explEs": "El langar sirve una comida vegetariana simple a absolutamente cualquiera que desee comer, sin importar religión, casta, riqueza, o estatus social, sentados juntos como declaración de igualdad."
+  },
+  {
+    "textEn": "18. According to this unit, langar, naam japna, and vand chakna together express the Sikh refusal to separate:",
+    "textEs": "18. Según esta unidad, el langar, naam japna y vand chakna juntos expresan el rechazo sij a separar:",
+    "optionsEn": [
+      "Confucianism and Taoism",
+      "Devotion to God and practical service to others",
+      "The Five Ks from the Khalsa",
+      "Hindu and Muslim scripture"
+    ],
+    "optionsEs": [
+      "El confucianismo y el taoísmo",
+      "La devoción a Dios y el servicio práctico a otros",
+      "Las Cinco Kas del Khalsa",
+      "La escritura hindú y musulmana"
+    ],
+    "c": 141,
+    "explEn": "Sikh teaching holds naam japna (remembrance of God), seva (selfless service), and vand chakna (sharing) together as inseparable, refusing any split between devotion and practical service.",
+    "explEs": "La enseñanza sij mantiene juntos el naam japna (recuerdo de Dios), el seva (servicio desinteresado), y el vand chakna (compartir) como inseparables, rechazando cualquier separación entre devoción y servicio práctico."
+  },
+  {
+    "textEn": "19. According to Romans 2:11 and Galatians 3:28, cited in this unit, what genuine common ground exists between Sikhism and Scripture?",
+    "textEs": "19. Según Romanos 2:11 y Gálatas 3:28, citados en esta unidad, ¿qué terreno común genuino existe entre el sijismo y la Escritura?",
+    "optionsEn": [
+      "Rejection of any moral law",
+      "Agreement that karma determines salvation",
+      "The conviction that there is no partiality with God and all are one in Christ",
+      "Rejection of the Guru Granth Sahib entirely"
+    ],
+    "optionsEs": [
+      "El rechazo de cualquier ley moral",
+      "El acuerdo de que el karma determina la salvación",
+      "La convicción de que no hay acepción de personas con Dios y todos son uno en Cristo",
+      "El rechazo total del Guru Granth Sahib"
+    ],
+    "c": 149,
+    "explEn": "Romans 2:11 and Galatians 3:28 affirm no partiality with God and unity in Christ, echoing Sikhism's radical commitment to human equality embodied in langar.",
+    "explEs": "Romanos 2:11 y Gálatas 3:28 afirman que no hay acepción de personas con Dios y unidad en Cristo, haciendo eco del compromiso radical del sijismo con la igualdad humana encarnada en el langar."
+  },
+  {
+    "textEn": "20. According to this unit, using Ephesians 2:8-9 and John 14:6, what does the gospel offer that Sikhism structurally cannot?",
+    "textEs": "20. Según esta unidad, usando Efesios 2:8-9 y Juan 14:6, ¿qué ofrece el evangelio que el sijismo no puede ofrecer estructuralmente?",
+    "optionsEn": [
+      "A book of sacred hymns",
+      "A community meal",
+      "Rejection of caste",
+      "Liberation as a finished gift by faith, and a living Person who is the way, not merely a book"
+    ],
+    "optionsEs": [
+      "Un libro de himnos sagrados",
+      "Una comida comunitaria",
+      "El rechazo de la casta",
+      "La liberación como un regalo terminado por fe, y una Persona viviente que es el camino, no meramente un libro"
+    ],
+    "c": 157,
+    "explEn": "Ephesians 2:8-9 offers liberation as a finished gift received by faith rather than accumulated merit, and John 14:6 proclaims a living Person as the way, not merely a sacred book like the Guru Granth Sahib.",
+    "explEs": "Efesios 2:8-9 ofrece la liberación como un regalo terminado recibido por fe en lugar de mérito acumulado, y Juan 14:6 proclama a una Persona viviente como el camino, no meramente un libro sagrado como el Guru Granth Sahib."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Explain why this unit calls Sikhism a 'clear case study' for how a religious founder can deliberately set out to transcend, rather than reform, two existing traditions.",
+    "textEs": "21. Explique por qué esta unidad llama al sijismo un 'claro estudio de caso' de cómo un fundador religioso puede deliberadamente proponerse trascender, en lugar de reformar, dos tradiciones existentes.",
+    "kw_en": ["nanak", "transcend", "hindu", "muslim", "inadequate", "founder", "specific", "datable"],
+    "kw_es": ["nanak", "trascend", "hindú", "musulmán", "inadecuad", "fundador", "específic", "fechable"],
+    "modelEn": "Unlike Hinduism and Buddhism, which developed gradually with no single identifiable founder, Sikh tradition traces its origin to Guru Nanak, whose teaching arose in direct, conscious response to tensions between Hinduism and Islam in Punjab, even as the tradition continued to take shape through the Gurus who followed him. Sikh tradition understands Nanak as pointing beyond the sectarian divide toward a fresh revelation, rather than merely reforming either tradition from within.",
+    "modelEs": "A diferencia del hinduismo y el budismo, que se desarrollaron gradualmente sin un solo fundador identificable, la tradición sij traza su origen al Gurú Nanak, cuya enseñanza surgió en respuesta directa y consciente a las tensiones entre el hinduismo y el islam en el Punjab, aun cuando la tradición siguió tomando forma a través de los Gurús que lo siguieron. La tradición sij entiende que Nanak apuntaba más allá de la división sectaria hacia una revelación fresca, en lugar de meramente reformar cualquiera de las tradiciones desde dentro."
+  },
+  {
+    "textEn": "22. Describe the historical and religious context of sixteenth-century Punjab and how it shaped Guru Nanak's message.",
+    "textEs": "22. Describa el contexto histórico y religioso del Punjab del siglo dieciséis y cómo dio forma al mensaje del Gurú Nanak.",
+    "kw_en": ["mughal", "hindu", "muslim", "tension", "suspicion", "conflict", "third way", "divided"],
+    "kw_es": ["mogol", "hindú", "musulmán", "tensión", "sospecha", "conflicto", "tercera vía", "dividida"],
+    "modelEn": "Sixteenth-century Punjab sat under Muslim Mughal rule while remaining home to a large Hindu population, with relations marked by mutual suspicion and occasional conflict. Nanak's teaching was received by followers from both backgrounds as a genuine third way, a fresh disclosure of the one God to a religiously divided region, rather than a synthesis affirming both traditions equally or a rejection of everything either taught.",
+    "modelEs": "El Punjab del siglo dieciséis estaba bajo el gobierno mogol musulmán mientras seguía siendo hogar de una gran población hindú, con relaciones marcadas por sospecha mutua y conflicto ocasional. La enseñanza de Nanak fue recibida por seguidores de ambos trasfondos como una genuina tercera vía, una revelación fresca del único Dios a una región religiosamente dividida, en lugar de una síntesis que afirmaba ambas tradiciones por igual o un rechazo de todo lo que ambas enseñaban."
+  },
+  {
+    "textEn": "23. Explain the significance of Guru Gobind Singh's decision in 1708 regarding the succession of Gurus, and how this distinguishes Sikhism structurally from some other religions studied in this course.",
+    "textEs": "23. Explique la significación de la decisión del Gurú Gobind Singh en 1708 respecto a la sucesión de Gurús, y cómo esto distingue estructuralmente al sijismo de algunas otras religiones estudiadas en este curso.",
+    "kw_en": ["tenth", "guru granth sahib", "authority", "living", "human", "papal", "caliphal", "scripture"],
+    "kw_es": ["décimo", "guru granth sahib", "autoridad", "viviente", "humano", "papal", "califal", "escritura"],
+    "modelEn": "Guru Gobind Singh, the tenth and final human Guru, declared shortly before his death in 1708 that the line of human Gurus would end, with spiritual authority passing permanently to the Guru Granth Sahib. This means Sikhism recognizes no living human religious authority above the community and its text, distinguishing it structurally from the papal or caliphal authority structures found in some other traditions this course has studied.",
+    "modelEs": "El Gurú Gobind Singh, el décimo y último Gurú humano, declaró poco antes de su muerte en 1708 que la línea de Gurús humanos terminaría, con la autoridad espiritual pasando permanentemente al Guru Granth Sahib. Esto significa que el sijismo no reconoce ninguna autoridad religiosa humana viviente por encima de la comunidad y su texto, distinguiéndolo estructuralmente de las estructuras de autoridad papal o califal encontradas en algunas otras tradiciones que este curso ha estudiado."
+  },
+  {
+    "textEn": "24. Describe Ik Onkar and explain how Sikh theology's description of God differs from the Hindu Brahman studied in Unit 4.",
+    "textEs": "24. Describa el Ik Onkar y explique en qué difiere la descripción de Dios de la teología sij del Brahman hindú estudiado en la Unidad 4.",
+    "kw_en": ["ik onkar", "mul mantar", "one god", "formless", "personal", "loving", "brahman", "impersonal"],
+    "kw_es": ["ik onkar", "mul mantar", "un dios", "sin forma", "personal", "amoroso", "brahman", "impersonal"],
+    "modelEn": "Ik Onkar, 'There is one God,' opens the Mul Mantar and captures Sikh theology's uncompromising monotheism, describing God as formless, eternal, uncreated, and self-existent. Unlike the impersonal Brahman of Hindu philosophy, Sikh theology describes God with real personal warmth, often addressed as loving, gracious, and near to sincere seekers, knowable through devotion even while remaining formless.",
+    "modelEs": "Ik Onkar, 'Hay un Dios,' abre el Mul Mantar y captura el monoteísmo intransigente de la teología sij, describiendo a Dios como sin forma, eterno, increado, y autoexistente. A diferencia del Brahman impersonal de la filosofía hindú, la teología sij describe a Dios con calidez personal real, a menudo dirigido como amoroso, misericordioso, y cercano a los buscadores sinceros, cognoscible a través de la devoción incluso mientras permanece sin forma."
+  },
+  {
+    "textEn": "25. How does Sikh teaching on achieving mukti differ from the Hindu and Buddhist paths to liberation studied in Units 4 and 5?",
+    "textEs": "25. ¿En qué difiere la enseñanza sij sobre lograr el mukti de los caminos hindú y budista hacia la liberación estudiados en las Unidades 4 y 5?",
+    "kw_en": ["mukti", "simran", "reject", "celibate", "monasticism", "honest work", "family", "ascetic"],
+    "kw_es": ["mukti", "simran", "rechaz", "célibe", "monasticismo", "trabajo honesto", "familia", "ascétic"],
+    "modelEn": "Sikhism shares the goal of mukti, liberation from karma and samsara, but explicitly rejects celibate monasticism and ascetic withdrawal that Hinduism and Buddhism in their rigorous forms have historically prized. Instead, liberation is achieved through simran, sincere remembrance of God's name, combined with honest work, generous sharing, and full engagement in ordinary family and community life.",
+    "modelEs": "El sijismo comparte la meta del mukti, la liberación del karma y el samsara, pero rechaza explícitamente el monasticismo célibe y el retiro ascético que el hinduismo y el budismo en sus formas rigurosas históricamente han apreciado. En cambio, la liberación se logra a través del simran, el recuerdo sincero del nombre de Dios, combinado con trabajo honesto, compartir generoso, y pleno compromiso con la vida familiar y comunitaria ordinaria."
+  },
+  {
+    "textEn": "26. List and briefly explain the Five Ks, and explain the correct understanding of the kirpan this unit insists on.",
+    "textEs": "26. Enumere y explique brevemente las Cinco Kas, y explique el entendimiento correcto del kirpan en el que insiste esta unidad.",
+    "kw_en": ["kesh", "kangha", "kara", "kachera", "kirpan", "last resort", "defenseless", "aggression"],
+    "kw_es": ["kesh", "kangha", "kara", "kachera", "kirpan", "último recurso", "indefensos", "agresión"],
+    "modelEn": "The Five Ks are: Kesh, uncut hair, accepting creation as given; Kangha, a wooden comb, symbolizing cleanliness; Kara, a steel bracelet, symbolizing restraint and God's eternal nature; Kachera, cotton undergarments, symbolizing modesty; and Kirpan, a ceremonial sword symbolizing commitment to defend the defenseless. This unit insists the kirpan must be understood strictly as a last-resort instrument of protection and justice, not an endorsement of casual violence or aggression.",
+    "modelEs": "Las Cinco Kas son: Kesh, cabello sin cortar, aceptando la creación tal como se da; Kangha, un peine de madera, simbolizando limpieza; Kara, un brazalete de acero, simbolizando restricción y la naturaleza eterna de Dios; Kachera, prendas interiores de algodón, simbolizando modestia; y Kirpan, una espada ceremonial simbolizando el compromiso de defender a los indefensos. Esta unidad insiste en que el kirpan debe entenderse estrictamente como un instrumento de último recurso de protección y justicia, no un respaldo a la violencia casual o la agresión."
+  },
+  {
+    "textEn": "27. Explain the significance of the surnames Singh and Kaur, and what this practice reveals about Sikhism's founding convictions.",
+    "textEs": "27. Explique la significación de los apellidos Singh y Kaur, y qué revela esta práctica acerca de las convicciones fundacionales del sijismo.",
+    "kw_en": ["singh", "kaur", "lion", "princess", "caste", "erase", "surname", "standing"],
+    "kw_es": ["singh", "kaur", "león", "princesa", "casta", "borr", "apellido", "validez"],
+    "modelEn": "Guru Gobind Singh instructed Khalsa men to adopt Singh, 'lion,' and women to adopt Kaur, 'princess,' replacing family surnames that in Hindu culture signaled caste status. This deliberate erasure of caste markers from personal names was a concrete, lasting expression of Sikhism's theological conviction that caste distinctions have no standing before God.",
+    "modelEs": "El Gurú Gobind Singh instruyó a los hombres del Khalsa a adoptar Singh, 'león,' y a las mujeres a adoptar Kaur, 'princesa,' reemplazando los apellidos familiares que en la cultura hindú señalaban el estatus de casta. Esta borradura deliberada de los marcadores de casta de los nombres personales fue una expresión concreta y duradera de la convicción teológica del sijismo de que las distinciones de casta no tienen validez delante de Dios."
+  },
+  {
+    "textEn": "28. Describe langar and explain the three pillars it embodies alongside seva.",
+    "textEs": "28. Describa el langar y explique los tres pilares que encarna junto al seva.",
+    "kw_en": ["langar", "free", "vegetarian", "equality", "seva", "naam japna", "vand chakna", "inseparable"],
+    "kw_es": ["langar", "gratuit", "vegetarian", "igualdad", "seva", "naam japna", "vand chakna", "inseparable"],
+    "modelEn": "Langar is the free communal kitchen at every gurdwara, serving a simple vegetarian meal to anyone regardless of religion, caste, or status, seated together as a statement of equality before God. It embodies seva, selfless service, alongside naam japna, remembrance of God's name, and vand chakna, sharing honestly earned goods — three pillars Sikh teaching holds as inseparable, refusing any split between devotion to God and service to others.",
+    "modelEs": "El langar es la cocina comunitaria gratuita en cada gurdwara, sirviendo una comida vegetariana simple a cualquiera sin importar religión, casta, o estatus, sentados juntos como declaración de igualdad delante de Dios. Encarna el seva, el servicio desinteresado, junto con el naam japna, el recuerdo del nombre de Dios, y el vand chakna, compartir bienes honestamente ganados — tres pilares que la enseñanza sij mantiene como inseparables, rechazando cualquier separación entre la devoción a Dios y el servicio a otros."
+  },
+  {
+    "textEn": "29. Using Romans 2:11 and Galatians 3:28, explain the genuine common ground this unit identifies between Sikhism and Scripture regarding equality.",
+    "textEs": "29. Usando Romanos 2:11 y Gálatas 3:28, explique el terreno común genuino que identifica esta unidad entre el sijismo y la Escritura respecto a la igualdad.",
+    "kw_en": ["partiality", "one in christ", "equality", "dignity", "langar", "affirm", "resonate", "grasped"],
+    "kw_es": ["acepción", "uno en cristo", "igualdad", "dignidad", "langar", "afirm", "resuena", "capt"],
+    "modelEn": "Romans 2:11 says there is no partiality with God, and Galatians 3:28 says there is neither slave nor free, male nor female, for all are one in Christ. These affirmations resonate closely with Sikhism's radical commitment to human equality embodied in langar, allowing a pastor to affirm wholeheartedly that Sikhism has grasped something real about human dignity and equality before God, however differently grounded theologically.",
+    "modelEs": "Romanos 2:11 dice que no hay acepción de personas con Dios, y Gálatas 3:28 dice que no hay esclavo ni libre, varón ni mujer, porque todos son uno en Cristo. Estas afirmaciones resuenan estrechamente con el compromiso radical del sijismo con la igualdad humana encarnada en el langar, permitiendo a un pastor afirmar de todo corazón que el sijismo ha captado algo real acerca de la dignidad humana y la igualdad delante de Dios, aunque fundamentada teológicamente de manera diferente."
+  },
+  {
+    "textEn": "30. Synthesize this unit: using Ephesians 2:8-9 and John 14:6, explain what the gospel offers that Sikhism, for all its genuine insight, cannot offer structurally.",
+    "textEs": "30. Sintetice esta unidad: usando Efesios 2:8-9 y Juan 14:6, explique qué ofrece el evangelio que el sijismo, a pesar de toda su intuición genuina, no puede ofrecer estructuralmente.",
+    "kw_en": ["finished gift", "faith", "merit", "book", "living person", "way truth life", "guru", "save"],
+    "kw_es": ["regalo terminado", "fe", "mérito", "libro", "persona viviente", "camino verdad vida", "gurú", "salvar"],
+    "modelEn": "Where Sikh theology grounds liberation in sincere devotion and honest living offered across many lifetimes as karma requires, Ephesians 2:8-9 offers liberation as a finished gift received by faith, not of works, so no one can boast. Where the Guru Granth Sahib remains a book however reverently enthroned, John 14:6 proclaims a living Person, God become flesh, who declared Himself the way, the truth, and the life, able not merely to instruct sincere seekers but actually to save them as the true and final Guru.",
+    "modelEs": "Donde la teología sij fundamenta la liberación en la devoción sincera y la vida honesta ofrecidas a lo largo de muchas vidas según requiera el karma, Efesios 2:8-9 ofrece la liberación como un regalo terminado recibido por fe, no por obras, para que nadie se gloríe. Donde el Guru Granth Sahib sigue siendo un libro por más reverentemente entronizado que esté, Juan 14:6 proclama a una Persona viviente, Dios hecho carne, que se declaró a sí mismo el camino, la verdad, y la vida, capaz no meramente de instruir a buscadores sinceros sino realmente de salvarlos como el verdadero y final Gurú."
+  }
+];
+
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit7 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_wr_u7_mc_passed';
+const SA_LOCK_KEY = 'cts_wr_u7_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_wr_u7_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function kwHit(ans, kw) {
+  kw = (kw||'').toLowerCase(); if (!kw) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (kw.length <= 4) ? '(?:^|[^'+WC+'])'+esc+'(?!['+WC+'])' : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); } catch(e) { return ans.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read the student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(ans, kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 8 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first." : "Por favor regístrese primero.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'certificate';
+    let total, score, required, mcGatePass, saGatePass, correctKW = 0;
+    const mcPct2 = correctMC;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW; required = null;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit7 = true;
+                localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_wr_u7_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit7 = true;
+        localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_wr_u7_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_wr_u7_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        renderQuestions();
+    };
+});
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 7 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSWRReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

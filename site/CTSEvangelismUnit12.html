@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Evangelism — Unit 12: Integrated Practice of Evangelism (Bilingual)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .clear-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.clear-btn { background: #a0512a; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.attribution { font-size: 0.95rem; color: #6b5840; font-style: italic; margin-bottom: 16px; }
+blockquote { margin: 14px 0; padding: 10px 14px; border-left: 4px solid #5b3a1f; background: #f4ede2; font-style: italic; }
+.track-banner { background: #5b3a1f; color: white; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-weight: bold; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+.kw-answer:disabled { background: #f5f0e8; cursor: not-allowed; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; margin-top: 5px; }
+button.small:disabled { background: #aaa; cursor: not-allowed; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.lockout-banner { background: #f8d7da; color: #721c24; padding: 12px 16px; border-radius: 12px; margin-bottom: 15px; font-weight: bold; border: 1px solid #f5c6cb; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en div.lang-en { display: block; }
+body.lang-es div.lang-es { display: block; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.scale-box { background: #fdfaf3; border: 1px solid #d7cec1; border-radius: 10px; padding: 14px 18px; margin: 14px 0; }
+.scale-box h4 { color: #5b3a1f; margin-top: 0; }
+.scale-box ol { margin-left: 1.4rem; }
+.scale-box ol li { margin-bottom: 6px; }
+@media print {
+  .toggle-btn, .clear-btn, .nav-bar, .registration-panel, button, .question input[type="radio"], textarea, .lockout-banner { display: none !important; }
+  body { background: white; }
+  .card { box-shadow: none; border: none; }
+}
+.model-answer-box { margin-top: 12px; padding: 12px 14px; background: #fbf3d9; border: 1px solid #e4c95b; border-left: 5px solid #c9a227; border-radius: 8px; color: #4a3c10; font-size: 0.95em; line-height: 1.5; }
+.model-answer-box strong { color: #7a5c00; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span></button>
+        <button class="nav-btn" id="nextUnitBtn"><span class="lang-en">Next</span><span class="lang-es">Siguiente</span> →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+<button class="clear-btn" id="clearDataBtn">🗑 <span class="lang-en">Clear Saved Data</span><span class="lang-es">Borrar Datos Guardados</span></button>
+
+<div class="card">
+    <h1>
+        <span class="lang-en">📖 Evangelism — Unit 12: Integrated Practice of Evangelism</span>
+        <span class="lang-es">📖 Evangelismo — Unidad 12: Práctica Integrada del Evangelismo</span>
+    </h1>
+    <p class="attribution">
+        <span class="lang-en">Chapala Theological Seminary · Dr. Wayne Cook, Author and Professor · Dr. Ted Rogers, Seminary Director</span>
+        <span class="lang-es">Seminario Teológico de Chapala · Dr. Wayne Cook, Autor y Profesor · Dr. Ted Rogers, Director del Seminario</span>
+    </p>
+    <div id="trackBanner" class="track-banner" style="display:none;"></div>
+</div>
+
+<!-- CTS audit 2026-05-23: registration panel removed. Registration happens once on Unit 1.
+     Later units read the saved student/track from localStorage (cts_student / cts_track).
+     If none is saved, the student silently defaults to the Certificate track (per Wayne). -->
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        
+        <h2>Orientation</h2>
+        <p>Having examined the biblical foundation, the content of the gospel, the role of the Holy Spirit, the responsibility of the believer, various methods, obstacles, and different approaches, it is now necessary to bring all of these elements together into a unified practice. Evangelism is not a collection of isolated ideas. It is a coherent, lived-out reality. The believer must learn to integrate truth, dependence on God, clarity of message, and practical wisdom into everyday life.</p>
+
+        <h3>I. Evangelism as a Way of Life</h3>
+        <p>Evangelism is not confined to special events or organized programs. It is a continual expression of the Christian life. Jesus said:</p>
+        <blockquote>"Follow Me, and I will make you fishers of men." (Matthew 4:19, NKJV)</blockquote>
+        <p>Following Christ naturally leads to involvement in reaching others. Evangelism is not an addition to the Christian life—it is part of it.</p>
+
+        <h3>II. Integrating Message and Method</h3>
+        <p>The believer must maintain the balance between message and method. The message must remain clear, complete, and faithful to Scripture. Methods must remain flexible, appropriate, and secondary to the message.</p>
+        <blockquote>"Hold fast the pattern of sound words which you have heard from me, in faith and love which are in Christ Jesus." (2 Timothy 1:13, NKJV)</blockquote>
+        <p>The message governs the method, not the other way around. When method is allowed to reshape the message, the gospel is compromised.</p>
+
+        <h3>III. Living in Dependence on the Holy Spirit</h3>
+        <p>All aspects of evangelism must be carried out in dependence on God.</p>
+        <blockquote>"Not that we are sufficient of ourselves to think of anything as being from ourselves, but our sufficiency is from God." (2 Corinthians 3:5, NKJV)</blockquote>
+        <p>This dependence includes prayer, sensitivity, and trust. Without the Spirit, evangelism becomes mere effort. With the Spirit, it becomes effective.</p>
+
+        <h3>IV. Recognizing and Responding to Opportunities</h3>
+        <p>Opportunities for evangelism arise in daily life.</p>
+        <blockquote>"Walk in wisdom toward those who are outside, redeeming the time." (Colossians 4:5, NKJV)</blockquote>
+        <p>The believer must be aware, ready, and willing. Not every opportunity will be the same, but each must be approached with faithfulness.</p>
+
+        <h3>V. Balancing Boldness and Wisdom</h3>
+        <p>Evangelism requires both courage and discernment. Paul asked for prayer:</p>
+        <blockquote>"that I may open my mouth boldly to make known the mystery of the gospel." (Ephesians 6:19, NKJV)</blockquote>
+        <p>Yet he also urged believers to "walk in wisdom" (Colossians 4:5). Boldness without wisdom can be harsh. Wisdom without boldness can be silent. Both are necessary.</p>
+
+        <h3>VI. Perseverance in Evangelism</h3>
+        <p>Evangelism is not always immediately fruitful.</p>
+        <blockquote>"And let us not grow weary while doing good, for in due season we shall reap if we do not lose heart." (Galatians 6:9, NKJV)</blockquote>
+        <p>Some seeds take time. Some conversations must be repeated. Some individuals require ongoing engagement. Faithfulness over time is essential.</p>
+
+        <h3>VII. Maintaining the Correct Perspective</h3>
+        <p>The believer must remember that God is at work, the gospel is powerful, and results belong to God.</p>
+        <blockquote>"So then neither he who plants is anything, nor he who waters, but God who gives the increase." (1 Corinthians 3:7, NKJV)</blockquote>
+        <p>This perspective guards against both discouragement and pride.</p>
+
+        <h3>VIII. The Role of the Church</h3>
+        <p>Evangelism is both personal and corporate. The church provides teaching, support, and accountability.</p>
+        <blockquote>"And the Lord added to the church daily those who were being saved." (Acts 2:47, NKJV)</blockquote>
+        <p>A healthy church encourages and strengthens evangelism rather than leaving it to isolated individuals.</p>
+
+        <h3>IX. Reproducing Evangelism in Others</h3>
+        <p>Evangelism is not complete until it is reproduced.</p>
+        <blockquote>"And the things that you have heard from me among many witnesses, commit these to faithful men who will be able to teach others also." (2 Timothy 2:2, NKJV)</blockquote>
+        <p>Believers should train others, encourage others, and model evangelism. This ensures continued growth and impact across generations.</p>
+
+        <h3>X. Illustration and Application</h3>
+        <p>Consider a believer who understands all the principles but never applies them. Knowledge without action produces no fruit. Consider another who applies these truths imperfectly but faithfully. Over time, fruit is produced. The difference is not perfection, but practice.</p>
+
+        <h3>Conclusion</h3>
+        <p>Evangelism must be lived out in a balanced and integrated way. It involves truth, dependence, clarity, courage, wisdom, and perseverance. When these elements come together, evangelism becomes not a burden, but a natural and faithful expression of the Christian life.</p>
+        <blockquote>"Therefore, my beloved brethren, be steadfast, immovable, always abounding in the work of the Lord, knowing that your labor is not in vain in the Lord." (1 Corinthians 15:58, NKJV)</blockquote>
+    </div>
+
+    <div class="lang-es">
+        <!-- CTS audit 2026-05-23: Spanish developed by CTS faculty. RVG verses flagged for human proofread. -->
+        <h2>Orientación</h2>
+        <p>Habiendo examinado el fundamento bíblico, el contenido del evangelio, el papel del Espíritu Santo, la responsabilidad del creyente, varios métodos, obstáculos y diferentes enfoques, ahora es necesario reunir todos estos elementos en una práctica unificada. El evangelismo no es una colección de ideas aisladas. Es una realidad coherente y vivida. El creyente debe aprender a integrar la verdad, la dependencia de Dios, la claridad del mensaje y la sabiduría práctica en la vida cotidiana.</p>
+
+        <h3>I. El Evangelismo como un Estilo de Vida</h3>
+        <p>El evangelismo no se limita a eventos especiales o programas organizados. Es una expresión continua de la vida cristiana. Jesús dijo:</p>
+        <blockquote>"Seguidme, y yo os haré pescadores de hombres." (Mateo 4:19, RVG)</blockquote>
+        <p>Seguir a Cristo conduce naturalmente a la participación en alcanzar a otros. El evangelismo no es una adición a la vida cristiana—es parte de ella.</p>
+
+        <h3>II. Integrar Mensaje y Método</h3>
+        <p>El creyente debe mantener el equilibrio entre mensaje y método. El mensaje debe permanecer claro, completo y fiel a las Escrituras. Los métodos deben permanecer flexibles, apropiados y secundarios al mensaje.</p>
+        <blockquote>"Retén la forma de las sanas palabras que de mí oíste, en fe y amor que es en Cristo Jesús." (2 Timoteo 1:13, RVG)</blockquote>
+        <p>El mensaje gobierna el método, no al revés. Cuando se permite que el método remodele el mensaje, el evangelio se ve comprometido.</p>
+
+        <h3>III. Vivir en Dependencia del Espíritu Santo</h3>
+        <p>Todos los aspectos del evangelismo deben llevarse a cabo en dependencia de Dios.</p>
+        <blockquote>"no que seamos suficientes por nosotros mismos para pensar algo como de nosotros mismos, sino que nuestra suficiencia proviene de Dios." (2 Corintios 3:5, RVG)</blockquote>
+        <p>Esta dependencia incluye la oración, la sensibilidad y la confianza. Sin el Espíritu, el evangelismo se convierte en mero esfuerzo. Con el Espíritu, se vuelve eficaz.</p>
+
+        <h3>IV. Reconocer y Responder a las Oportunidades</h3>
+        <p>Las oportunidades para el evangelismo surgen en la vida diaria.</p>
+        <blockquote>"Andad sabiamente para con los de afuera, redimiendo el tiempo." (Colosenses 4:5, RVG)</blockquote>
+        <p>El creyente debe estar consciente, preparado y dispuesto. No toda oportunidad será igual, pero cada una debe ser abordada con fidelidad.</p>
+
+        <h3>V. Equilibrar la Valentía y la Sabiduría</h3>
+        <p>El evangelismo requiere tanto valor como discernimiento. Pablo pidió oración:</p>
+        <blockquote>"para que al abrir mi boca me sea dada palabra para dar a conocer con denuedo el misterio del evangelio." (Efesios 6:19, RVG)</blockquote>
+        <p>Sin embargo, también exhortó a los creyentes a "andar sabiamente" (Colosenses 4:5). La valentía sin sabiduría puede ser áspera. La sabiduría sin valentía puede ser silenciosa. Ambas son necesarias.</p>
+
+        <h3>VI. Perseverancia en el Evangelismo</h3>
+        <p>El evangelismo no siempre es inmediatamente fructífero.</p>
+        <blockquote>"No nos cansemos, pues, de hacer bien; porque a su tiempo segaremos, si no desmayamos." (Gálatas 6:9, RVG)</blockquote>
+        <p>Algunas semillas toman tiempo. Algunas conversaciones deben repetirse. Algunas personas requieren un compromiso continuo. La fidelidad a lo largo del tiempo es esencial.</p>
+
+        <h3>VII. Mantener la Perspectiva Correcta</h3>
+        <p>El creyente debe recordar que Dios está obrando, el evangelio es poderoso, y los resultados pertenecen a Dios.</p>
+        <blockquote>"Así que, ni el que planta es algo, ni el que riega, sino Dios, que da el crecimiento." (1 Corintios 3:7, RVG)</blockquote>
+        <p>Esta perspectiva protege tanto contra el desánimo como contra el orgullo.</p>
+
+        <h3>VIII. El Papel de la Iglesia</h3>
+        <p>El evangelismo es tanto personal como corporativo. La iglesia provee enseñanza, apoyo y rendición de cuentas.</p>
+        <blockquote>"Y el Señor añadía cada día a la iglesia los que habían de ser salvos." (Hechos 2:47, RVG)</blockquote>
+        <p>Una iglesia sana fomenta y fortalece el evangelismo en lugar de dejarlo a individuos aislados.</p>
+
+        <h3>IX. Reproducir el Evangelismo en Otros</h3>
+        <p>El evangelismo no está completo hasta que se reproduce.</p>
+        <blockquote>"Y lo que has oído de mí entre muchos testigos, esto encarga a hombres fieles que sean idóneos para enseñar también a otros." (2 Timoteo 2:2, RVG)</blockquote>
+        <p>Los creyentes deben entrenar a otros, animar a otros y modelar el evangelismo. Esto asegura un crecimiento e impacto continuos a través de las generaciones.</p>
+
+        <h3>X. Ilustración y Aplicación</h3>
+        <p>Considere a un creyente que comprende todos los principios pero nunca los aplica. El conocimiento sin acción no produce fruto. Considere a otro que aplica estas verdades de manera imperfecta pero fiel. Con el tiempo, se produce fruto. La diferencia no es la perfección, sino la práctica.</p>
+
+        <h3>Conclusión</h3>
+        <p>El evangelismo debe vivirse de manera equilibrada e integrada. Involucra verdad, dependencia, claridad, valor, sabiduría y perseverancia. Cuando estos elementos se unen, el evangelismo se convierte no en una carga, sino en una expresión natural y fiel de la vida cristiana.</p>
+        <blockquote>"Así que, hermanos míos amados, estad firmes y constantes, creciendo en la obra del Señor siempre, sabiendo que vuestro trabajo en el Señor no es en vano." (1 Corintios 15:58, RVG)</blockquote>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 12 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 12 — 30 Preguntas</span></h2>
+    <p>
+        <span class="lang-en"><strong>Certificate track:</strong> Section A (multiple choice) required at 90%. Section B (short answer) optional.</span>
+        <span class="lang-es"><strong>Pista de Certificado:</strong> Sección A (opción múltiple) obligatoria al 90%. Sección B (respuesta corta) opcional.</span>
+    </p>
+    <p>
+        <span class="lang-en"><strong>M.Div./Th.M. track:</strong> Both sections required at 90% each, independently.</span>
+        <span class="lang-es"><strong>Pista de M.Div./Th.M.:</strong> Ambas secciones obligatorias al 90% cada una, independientemente.</span>
+    </p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="clearExamDataBtn" class="small" style="background:#a0512a;">🗑 <span class="lang-en">Clear My Answers</span><span class="lang-es">Borrar Mis Respuestas</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;" aria-live="polite"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ======================== CONFIG ========================
+const UNIT_NUM = 12;
+const TOTAL_UNITS = 13; /* CTS audit 2026-05-23: course confirmed to 13 units (Wayne). */
+const PASS_THRESHOLD = 0.90;
+const NS = 'cts_ev_';
+const UNIT_KEY = NS + 'unit' + UNIT_NUM;
+const PROGRESS_KEY = NS + 'progress';
+const PASSED_KEY = NS + 'unit' + UNIT_NUM + '_passed';
+const MC_PASSED_KEY = NS + 'u' + UNIT_NUM + '_mc_passed';
+const LOCKOUT_KEY = NS + 'unit' + UNIT_NUM + '_sa_lockout';
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch(e) { progress = {}; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(NS + 'unit' + i + '_passed') === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSEvangelismUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSEvangelismUnit11.html"; };
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (localStorage.getItem(PASSED_KEY) === 'true') location.href = "CTSEvangelismUnit13.html";
+    else alert(currentLang === 'es' ? "Por favor apruebe la Unidad 12 primero." : "Please pass Unit 12 first.");
+};
+updateProgressGrid();
+
+// ======================== REGISTRATION ========================
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+/* CTS audit 2026-05-23: registration is collected only on Unit 1. This unit reads the saved
+   student from localStorage. If nothing is saved, default silently to the Certificate track. */
+function loadReg() {
+    let saved = localStorage.getItem('cts_student');
+    if (saved) {
+        try { student = JSON.parse(saved); } catch(e) { student = { name: '', email: '', country: '', program: 'Certificate of Ministry' }; }
+    }
+    if (!student || !student.program) { student = student || {}; student.program = 'Certificate of Ministry'; }
+    if (!localStorage.getItem('cts_track')) {
+        localStorage.setItem('cts_track', student.program === 'Master of Divinity' ? 'mdiv' : (student.program === 'Master of Theology' ? 'thm' : 'cert'));
+    }
+    applyTrackBanner();
+}
+function applyTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    const track = localStorage.getItem('cts_track') || 'cert';
+    banner.style.display = 'block';
+    /* CTS audit 2026-05-23: added Th.M. banner branch; both Masters tracks require both sections. */
+    if (track === 'thm') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Theology — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Teología — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else if (track === 'mdiv') {
+        banner.innerHTML = '<span class="lang-en">Track: Master of Divinity — Both sections required (90% each, independently)</span><span class="lang-es">Pista: Maestría en Divinidad — Ambas secciones obligatorias (90% cada una, independientemente)</span>';
+    } else {
+        banner.innerHTML = '<span class="lang-en">Track: Certificate — Section A required (90%). Section B optional.</span><span class="lang-es">Pista: Certificado — Sección A obligatoria (90%). Sección B opcional.</span>';
+    }
+}
+/* CTS audit 2026-05-23: registration listeners removed (no reg form on this unit). */
+loadReg();
+applyTrackBanner();
+
+// ======================== QUESTIONS — MC distribution already A=B=C=D=5 ========================
+/* CTS audit 2026-05-23: Unit 12 MC. Stems from Wayne's draft (Unit12_Evangelism.txt). Draft's AI key put the
+   correct answer in option B on all 20; answers set from the teaching text and POSITIONS rebalanced to 5/5/5/5. */
+const mcQuestions = [
+    { textEn: "1. Evangelism is best understood as:", textEs: "1. El evangelismo se entiende mejor como:", optionsEn: ["A way of life", "Occasional activity", "Optional ministry", "A program only"], optionsEs: ["Un estilo de vida", "Actividad ocasional", "Ministerio opcional", "Solo un programa"], correct: 0, explanationEn: "Evangelism is a continual expression of the Christian life, not an occasional program.", explanationEs: "El evangelismo es una expresión continua de la vida cristiana, no un programa ocasional." },
+    { textEn: "2. Matthew 4:19 teaches that:", textEs: "2. Mateo 4:19 enseña que:", optionsEn: ["Silence is best", "Following Christ leads to fishing for men", "Evangelism is to be avoided", "Debate is central"], optionsEs: ["El silencio es lo mejor", "Seguir a Cristo conduce a pescar hombres", "El evangelismo debe evitarse", "El debate es central"], correct: 1, explanationEn: "'Follow Me, and I will make you fishers of men'—following leads to reaching others.", explanationEs: "'Seguidme, y yo os haré pescadores de hombres'—seguir conduce a alcanzar a otros." },
+    { textEn: "3. In evangelism, the message must remain:", textEs: "3. En el evangelismo, el mensaje debe permanecer:", optionsEn: ["Flexible", "Cultural", "Clear and faithful to Scripture", "Optional"], optionsEs: ["Flexible", "Cultural", "Claro y fiel a las Escrituras", "Opcional"], correct: 2, explanationEn: "The message must remain clear, complete, and faithful to Scripture.", explanationEs: "El mensaje debe permanecer claro, completo y fiel a las Escrituras." },
+    { textEn: "4. In evangelism, methods should be:", textEs: "4. En el evangelismo, los métodos deben ser:", optionsEn: ["Fixed", "Primary", "Unnecessary", "Flexible and secondary to the message"], optionsEs: ["Fijos", "Primarios", "Innecesarios", "Flexibles y secundarios al mensaje"], correct: 3, explanationEn: "Methods are flexible and secondary; the message governs the method.", explanationEs: "Los métodos son flexibles y secundarios; el mensaje gobierna el método." },
+    { textEn: "5. 2 Timothy 1:13 instructs believers to:", textEs: "5. 2 Timoteo 1:13 instruye a los creyentes a:", optionsEn: ["Hold fast sound words", "Change the message", "Stay silent", "Avoid teaching"], optionsEs: ["Retener las sanas palabras", "Cambiar el mensaje", "Permanecer en silencio", "Evitar enseñar"], correct: 0, explanationEn: "'Hold fast the pattern of sound words'—the message is not to be altered.", explanationEs: "'Retén la forma de las sanas palabras'—el mensaje no debe ser alterado." },
+    { textEn: "6. Dependence on God in evangelism involves:", textEs: "6. La dependencia de Dios en el evangelismo involucra:", optionsEn: ["Effort only", "Prayer, sensitivity, and trust", "Silence", "Avoidance"], optionsEs: ["Solo esfuerzo", "Oración, sensibilidad y confianza", "Silencio", "Evitación"], correct: 1, explanationEn: "Dependence includes prayer, sensitivity, and trust in God.", explanationEs: "La dependencia incluye oración, sensibilidad y confianza en Dios." },
+    { textEn: "7. 2 Corinthians 3:5 teaches that:", textEs: "7. 2 Corintios 3:5 enseña que:", optionsEn: ["We are self-sufficient", "Effort saves", "Our sufficiency is from God", "Silence is best"], optionsEs: ["Somos autosuficientes", "El esfuerzo salva", "Nuestra suficiencia proviene de Dios", "El silencio es lo mejor"], correct: 2, explanationEn: "'Our sufficiency is from God'—not from ourselves.", explanationEs: "'Nuestra suficiencia proviene de Dios'—no de nosotros mismos." },
+    { textEn: "8. Opportunities for evangelism must be:", textEs: "8. Las oportunidades para el evangelismo deben ser:", optionsEn: ["Ignored", "Avoided", "Delayed", "Recognized and seized"], optionsEs: ["Ignoradas", "Evitadas", "Demoradas", "Reconocidas y aprovechadas"], correct: 3, explanationEn: "The believer must be aware, ready, and willing to seize opportunities.", explanationEs: "El creyente debe estar consciente, preparado y dispuesto a aprovechar las oportunidades." },
+    { textEn: "9. Colossians 4:5 instructs believers to:", textEs: "9. Colosenses 4:5 instruye a los creyentes a:", optionsEn: ["Walk in wisdom, redeeming the time", "Delay", "Avoid outsiders", "Wait passively"], optionsEs: ["Andar sabiamente, redimiendo el tiempo", "Demorar", "Evitar a los de afuera", "Esperar pasivamente"], correct: 0, explanationEn: "'Walk in wisdom toward those who are outside, redeeming the time.'", explanationEs: "'Andad sabiamente para con los de afuera, redimiendo el tiempo.'" },
+    { textEn: "10. Boldness in evangelism must be balanced with:", textEs: "10. La valentía en el evangelismo debe equilibrarse con:", optionsEn: ["Fear", "Wisdom", "Silence", "Delay"], optionsEs: ["Temor", "Sabiduría", "Silencio", "Demora"], correct: 1, explanationEn: "Boldness without wisdom can be harsh; wisdom without boldness can be silent.", explanationEs: "La valentía sin sabiduría puede ser áspera; la sabiduría sin valentía puede ser silenciosa." },
+    { textEn: "11. Ephesians 6:19 records Paul's request for:", textEs: "11. Efesios 6:19 registra la petición de Pablo de:", optionsEn: ["Silence", "Fear", "Avoidance", "Bold speech to make known the gospel"], optionsEs: ["Silencio", "Temor", "Evitación", "Hablar con denuedo para dar a conocer el evangelio"], correct: 3, explanationEn: "Paul asked for prayer 'that I may open my mouth boldly.'", explanationEs: "Pablo pidió oración 'para que al abrir mi boca me sea dada palabra... con denuedo.'" },
+    { textEn: "12. Perseverance in evangelism is necessary because:", textEs: "12. La perseverancia en el evangelismo es necesaria porque:", optionsEn: ["Results are always immediate", "Effort is unnecessary", "Results often take time", "Silence is better"], optionsEs: ["Los resultados son siempre inmediatos", "El esfuerzo es innecesario", "Los resultados a menudo toman tiempo", "El silencio es mejor"], correct: 2, explanationEn: "Some seeds take time; faithfulness over time is essential.", explanationEs: "Algunas semillas toman tiempo; la fidelidad a lo largo del tiempo es esencial." },
+    { textEn: "13. Galatians 6:9 encourages believers to:", textEs: "13. Gálatas 6:9 anima a los creyentes a:", optionsEn: ["Quit", "Avoid the work", "Delay", "Not grow weary in doing good"], optionsEs: ["Renunciar", "Evitar la obra", "Demorar", "No cansarse de hacer el bien"], correct: 3, explanationEn: "'Let us not grow weary while doing good, for in due season we shall reap.'", explanationEs: "'No nos cansemos de hacer bien; porque a su tiempo segaremos.'" },
+    { textEn: "14. The correct perspective in evangelism is that:", textEs: "14. La perspectiva correcta en el evangelismo es que:", optionsEn: ["God gives the increase", "Man controls results", "Methods save", "Effort saves"], optionsEs: ["Dios da el crecimiento", "El hombre controla los resultados", "Los métodos salvan", "El esfuerzo salva"], correct: 0, explanationEn: "Results belong to God, who gives the increase—guarding against pride and despair.", explanationEs: "Los resultados pertenecen a Dios, que da el crecimiento—protegiendo del orgullo y la desesperación." },
+    { textEn: "15. 1 Corinthians 3:7 teaches that:", textEs: "15. 1 Corintios 3:7 enseña que:", optionsEn: ["Man saves", "God gives the increase", "Effort saves", "Silence saves"], optionsEs: ["El hombre salva", "Dios da el crecimiento", "El esfuerzo salva", "El silencio salva"], correct: 1, explanationEn: "Neither planter nor waterer is anything, 'but God who gives the increase.'", explanationEs: "Ni el que planta ni el que riega es algo, 'sino Dios, que da el crecimiento.'" },
+    { textEn: "16. In evangelism, the church provides:", textEs: "16. En el evangelismo, la iglesia provee:", optionsEn: ["Isolation", "Confusion", "Teaching, support, and accountability", "Delay"], optionsEs: ["Aislamiento", "Confusión", "Enseñanza, apoyo y rendición de cuentas", "Demora"], correct: 2, explanationEn: "Evangelism is personal and corporate; the church supports and strengthens it.", explanationEs: "El evangelismo es personal y corporativo; la iglesia lo apoya y fortalece." },
+    { textEn: "17. Acts 2:47 shows the early church:", textEs: "17. Hechos 2:47 muestra a la iglesia primitiva:", optionsEn: ["In decline", "Silent", "Avoiding others", "Growing as the Lord added daily"], optionsEs: ["En declive", "Silenciosa", "Evitando a otros", "Creciendo mientras el Señor añadía cada día"], correct: 3, explanationEn: "'The Lord added to the church daily those who were being saved.'", explanationEs: "'El Señor añadía cada día a la iglesia los que habían de ser salvos.'" },
+    { textEn: "18. Evangelism is not complete until it is:", textEs: "18. El evangelismo no está completo hasta que es:", optionsEn: ["Reproduced in others", "Hidden", "Avoided", "Delayed"], optionsEs: ["Reproducido en otros", "Escondido", "Evitado", "Demorado"], correct: 0, explanationEn: "Believers train and model so evangelism reproduces in faithful others.", explanationEs: "Los creyentes entrenan y modelan para que el evangelismo se reproduzca en otros fieles." },
+    { textEn: "19. 2 Timothy 2:2 instructs believers to:", textEs: "19. 2 Timoteo 2:2 instruye a los creyentes a:", optionsEn: ["Hide truth", "Pass truth on to faithful men", "Avoid truth", "Keep truth to themselves"], optionsEs: ["Esconder la verdad", "Pasar la verdad a hombres fieles", "Evitar la verdad", "Guardar la verdad para sí"], correct: 1, explanationEn: "Commit what you have heard 'to faithful men who will be able to teach others also.'", explanationEs: "Encarga lo que has oído 'a hombres fieles que sean idóneos para enseñar también a otros.'" },
+    { textEn: "20. When integrated and faithful, evangelism becomes:", textEs: "20. Cuando es integrado y fiel, el evangelismo se vuelve:", optionsEn: ["A burden", "Confusion", "A natural expression of the Christian life", "Something to avoid"], optionsEs: ["Una carga", "Confusión", "Una expresión natural de la vida cristiana", "Algo que evitar"], correct: 2, explanationEn: "Integrated faithfully, evangelism is not a burden but a natural part of the Christian life.", explanationEs: "Integrado fielmente, el evangelismo no es una carga sino una parte natural de la vida cristiana." }
+];
+
+/* CTS audit 2026-05-23: Unit 12 Section B developed by CTS faculty from the teaching content. 10 keyword-graded items, EN+ES. */
+const kwQuestions = [
+    { textEn: "21. Explain what it means that evangelism is 'a way of life' rather than an occasional program (Matthew 4:19).", textEs: "21. Explique qué significa que el evangelismo es 'un estilo de vida' en lugar de un programa ocasional (Mateo 4:19).", kw_en: ["life", "way", "follow", "natural", "matthew", "program", "occasion", "ongoing"], kw_es: ["vida", "estilo", "segui", "natural", "mateo", "programa", "ocasion", "continu"], modelEn: "Matthew 4:19 records Jesus' call to follow Him and become fishers of men — witness flows naturally from following Christ. Evangelism as a way of life rather than an occasional program means it is woven into ordinary, everyday living rather than confined to scheduled events. The believer is always a witness, alert to opportunities in normal relationships and routines. It is not a task to perform now and then but an ongoing identity: following Christ makes one a fisher of men continually.", modelEs: "Mateo 4:19 registra el llamado de Jesús a seguirle y llegar a ser pescadores de hombres — el testimonio fluye naturalmente del seguir a Cristo. El evangelismo como estilo de vida en lugar de un programa ocasional significa que está entretejido en el vivir cotidiano y ordinario en vez de confinado a eventos programados. El creyente es siempre un testigo, atento a las oportunidades en las relaciones y rutinas normales. No es una tarea que se realiza de vez en cuando sino una identidad continua: seguir a Cristo lo hace a uno pescador de hombres de continuo.", authorDraft: true },
+    { textEn: "22. Explain the relationship between message and method in evangelism. Why must the message govern the method (2 Timothy 1:13)?", textEs: "22. Explique la relación entre mensaje y método en el evangelismo. ¿Por qué debe el mensaje gobernar el método (2 Timoteo 1:13)?", kw_en: ["message", "method", "govern", "timothy", "pattern", "sound", "fixed", "serve"], kw_es: ["mensaj", "método", "metodo", "gobern", "timoteo", "patrón", "patron", "fij"], modelEn: "2 Timothy 1:13 calls Timothy to hold fast the pattern of sound words. The message must govern the method because the gospel is fixed and authoritative while methods are merely tools to deliver it. When the method governs the message, the gospel gets bent to fit a technique or audience and is compromised. When the message governs the method, the unchanging truth decides which methods are acceptable, and any method that distorts the gospel is rejected. The method serves the message, never the reverse.", modelEs: "2 Timoteo 1:13 llama a Timoteo a retener la forma de las sanas palabras. El mensaje debe gobernar el método porque el evangelio es fijo y autoritativo mientras los métodos son meras herramientas para entregarlo. Cuando el método gobierna el mensaje, el evangelio se dobla para ajustarse a una técnica o audiencia y queda comprometido. Cuando el mensaje gobierna el método, la verdad inmutable decide cuáles métodos son aceptables, y cualquier método que distorsione el evangelio se rechaza. El método sirve al mensaje, nunca al revés.", authorDraft: true },
+    { textEn: "23. Using 2 Corinthians 3:5, explain why dependence on the Holy Spirit is essential and what that dependence includes.", textEs: "23. Usando 2 Corintios 3:5, explique por qué la dependencia del Espíritu Santo es esencial y qué incluye esa dependencia.", kw_en: ["depend", "spirit", "sufficien", "corinth", "prayer", "own", "include", "trust"], kw_es: ["depend", "espíritu", "espiritu", "suficien", "corint", "oración", "oracion", "confi"], modelEn: "2 Corinthians 3:5 says our sufficiency is from God, not from ourselves. Dependence on the Holy Spirit is essential because evangelism is a spiritual work beyond human ability — only God can convict and convert. That dependence includes prayer before, during, and after witnessing; trusting the Spirit rather than technique to produce results; relying on Him for boldness and the right words; and resting in His power instead of one's own sufficiency. The believer works, but leans wholly on God for what only God can do.", modelEs: "2 Corintios 3:5 dice que nuestra suficiencia proviene de Dios, no de nosotros mismos. La dependencia del Espíritu Santo es esencial porque el evangelismo es una obra espiritual más allá de la capacidad humana — solo Dios puede convencer y convertir. Esa dependencia incluye la oración antes, durante y después de testificar; confiar en el Espíritu en vez de la técnica para producir resultados; apoyarse en Él para la valentía y las palabras correctas; y descansar en su poder en vez de la suficiencia propia. El creyente trabaja, pero se apoya totalmente en Dios para lo que solo Dios puede hacer.", authorDraft: true },
+    { textEn: "24. Explain how the believer should recognize and respond to opportunities, using Colossians 4:5.", textEs: "24. Explique cómo el creyente debe reconocer y responder a las oportunidades, usando Colosenses 4:5.", kw_en: ["opportun", "recogn", "respond", "coloss", "wisdom", "ready", "alert", "time"], kw_es: ["oportun", "reconoc", "respond", "colosen", "sabidur", "list", "alert", "tiemp"], modelEn: "Colossians 4:5 says to walk in wisdom toward outsiders, redeeming the time. The believer should recognize opportunities by staying alert to the openings God provides — a question asked, a hardship shared, a natural turn in conversation — and respond by wisely seizing them rather than letting them pass. Recognizing means being spiritually attentive; responding means having the readiness and courage to speak when the moment comes. Walking in wisdom turns ordinary encounters into redeemed opportunities for the gospel.", modelEs: "Colosenses 4:5 dice andar en sabiduría para con los de afuera, redimiendo el tiempo. El creyente debe reconocer las oportunidades manteniéndose alerta a las aperturas que Dios provee — una pregunta hecha, una dificultad compartida, un giro natural en la conversación — y responder aprovechándolas sabiamente en vez de dejarlas pasar. Reconocer significa estar espiritualmente atento; responder significa tener la disposición y el valor de hablar cuando llega el momento. Andar en sabiduría convierte los encuentros ordinarios en oportunidades redimidas para el evangelio.", authorDraft: true },
+    { textEn: "25. Why must boldness and wisdom be held together in evangelism (Ephesians 6:19; Colossians 4:5)? Describe the danger of each without the other.", textEs: "25. ¿Por qué deben mantenerse juntas la valentía y la sabiduría en el evangelismo (Efesios 6:19; Colosenses 4:5)? Describa el peligro de cada una sin la otra.", kw_en: ["bold", "wisdom", "togeth", "ephesian", "danger", "each", "balance", "without"], kw_es: ["valent", "valien", "sabidur", "junt", "efesios", "peligr", "cada", "equilibri"], modelEn: "Ephesians 6:19 asks for boldness to make the gospel known, and Colossians 4:5 calls for wisdom toward outsiders; the two must be held together. Boldness without wisdom blurts the gospel insensitively, at the wrong time or in a harsh way, and drives people off. Wisdom without boldness grows so cautious it never actually speaks, always waiting for a perfect moment that never comes. Held together, wisdom guides when and how to speak while boldness ensures the believer actually does speak — courageous and discerning at once.", modelEs: "Efesios 6:19 pide valentía para dar a conocer el evangelio, y Colosenses 4:5 llama a la sabiduría para con los de afuera; las dos deben mantenerse juntas. La valentía sin sabiduría suelta el evangelio insensiblemente, en el momento equivocado o de manera dura, y aleja a las personas. La sabiduría sin valentía se vuelve tan cautelosa que nunca habla de hecho, siempre esperando un momento perfecto que nunca llega. Juntas, la sabiduría guía cuándo y cómo hablar mientras la valentía asegura que el creyente realmente hable — valiente y discernidor a la vez.", authorDraft: true },
+    { textEn: "26. Explain why perseverance is necessary in evangelism, using Galatians 6:9.", textEs: "26. Explique por qué la perseverancia es necesaria en el evangelismo, usando Gálatas 6:9.", kw_en: ["persever", "weary", "time", "galat", "season", "reap", "faint", "continue"], kw_es: ["persever", "cansad", "tiemp", "gálat", "galat", "temporada", "seg", "desmay"], modelEn: "Galatians 6:9 says let us not grow weary in well-doing, for in due season we shall reap if we do not faint. Perseverance is necessary in evangelism because fruit often comes slowly: people may hear many times before responding, and discouragement tempts the witness to give up. The harvest comes in God's season, not on our schedule. The believer is called to keep sowing faithfully over the long haul, trusting that persistent, unwearied witness will, in due time, reap a harvest.", modelEs: "Gálatas 6:9 dice no nos cansemos de hacer el bien, porque a su tiempo segaremos si no desmayamos. La perseverancia es necesaria en el evangelismo porque el fruto a menudo llega despacio: las personas pueden oír muchas veces antes de responder, y el desánimo tienta al testigo a rendirse. La cosecha llega en la temporada de Dios, no en nuestro horario. El creyente es llamado a seguir sembrando fielmente a largo plazo, confiando en que el testimonio persistente y sin desmayo, a su debido tiempo, segará una cosecha.", authorDraft: true },
+    { textEn: "27. Using 1 Corinthians 3:7, explain how the correct perspective on results guards against both pride and discouragement.", textEs: "27. Usando 1 Corintios 3:7, explique cómo la perspectiva correcta sobre los resultados protege tanto del orgullo como del desánimo.", kw_en: ["result", "god", "increase", "pride", "discourag", "corinth", "perspect", "guard"], kw_es: ["result", "dios", "crecimi", "orgull", "desánim", "desanim", "corint", "perspect"], modelEn: "1 Corinthians 3:7 says neither he who plants nor he who waters is anything, but God who gives the increase. The correct perspective on results guards against pride because if God gives the increase, no witness can boast in conversions as his own achievement. And it guards against discouragement because if results are God's to give, the witness is not a failure when none appear — he is only responsible to plant and water faithfully. Keeping results in God's hands frees the believer from both self-exaltation and despair.", modelEs: "1 Corintios 3:7 dice que ni el que planta ni el que riega es algo, sino Dios que da el crecimiento. La perspectiva correcta sobre los resultados protege del orgullo porque si Dios da el crecimiento, ningún testigo puede jactarse de las conversiones como logro propio. Y protege del desánimo porque si los resultados son de Dios para darlos, el testigo no es un fracaso cuando ninguno aparece — solo es responsable de plantar y regar fielmente. Mantener los resultados en las manos de Dios libra al creyente tanto de la autoexaltación como de la desesperación.", authorDraft: true },
+    { textEn: "28. Describe the role of the church in evangelism (Acts 2:47). Why is evangelism both personal and corporate?", textEs: "28. Describa el papel de la iglesia en el evangelismo (Hechos 2:47). ¿Por qué es el evangelismo tanto personal como corporativo?", kw_en: ["church", "corporate", "personal", "acts", "support", "both", "body", "togeth"], kw_es: ["iglesia", "corporativ", "personal", "hechos", "apoy", "ambos", "cuerpo", "junt"], modelEn: "Acts 2:47 shows the Lord adding to the church daily those being saved — evangelism happened in and through the church community. The church's role is to support, equip, and gather the fruit of evangelism, providing teaching, fellowship, and a home for new believers. Evangelism is both personal and corporate because individual believers witness one to one, yet they do so as part of a body that prays, sends, supports, and receives. Personal witness and the church's corporate life work together; neither replaces the other.", modelEs: "Hechos 2:47 muestra al Señor añadiendo a la iglesia cada día a los que eran salvos — el evangelismo ocurría en y a través de la comunidad de la iglesia. El papel de la iglesia es apoyar, equipar y recoger el fruto del evangelismo, proveyendo enseñanza, comunión y un hogar para los nuevos creyentes. El evangelismo es tanto personal como corporativo porque los creyentes individuales testifican uno a uno, pero lo hacen como parte de un cuerpo que ora, envía, apoya y recibe. El testimonio personal y la vida corporativa de la iglesia obran juntos; ninguno reemplaza al otro.", authorDraft: true },
+    { textEn: "29. Explain why evangelism is 'not complete until it is reproduced' (2 Timothy 2:2).", textEs: "29. Explique por qué el evangelismo 'no está completo hasta que se reproduce' (2 Timoteo 2:2).", kw_en: ["reproduc", "complet", "timothy", "multipl", "disciple", "teach", "others", "not"], kw_es: ["reproduc", "complet", "timoteo", "multiplic", "discípul", "discipul", "enseñ", "otros"], modelEn: "2 Timothy 2:2 commits the truth to faithful men who will teach others also. Evangelism is not complete until it is reproduced because the goal is not merely to win individuals but to make disciples who in turn make disciples. A convert who never reproduces leaves the chain unbroken at one link; the work continues only when each believer passes the gospel on. Reproduction multiplies the witness across generations, so evangelism reaches its full purpose when those won become those who win and teach others.", modelEs: "2 Timoteo 2:2 encarga la verdad a hombres fieles que enseñarán también a otros. El evangelismo no está completo hasta que se reproduce porque la meta no es meramente ganar individuos sino hacer discípulos que a su vez hagan discípulos. Un converso que nunca se reproduce deja la cadena detenida en un solo eslabón; la obra continúa solo cuando cada creyente transmite el evangelio. La reproducción multiplica el testimonio a través de las generaciones, así que el evangelismo alcanza su pleno propósito cuando los ganados llegan a ser quienes ganan y enseñan a otros.", authorDraft: true },
+    { textEn: "30. Synthesize the unit: name the elements of integrated evangelism and explain how, together, they make evangelism a natural expression of the Christian life (1 Corinthians 15:58).", textEs: "30. Sintetice la unidad: nombre los elementos del evangelismo integrado y explique cómo, juntos, hacen del evangelismo una expresión natural de la vida cristiana (1 Corintios 15:58).", kw_en: ["integrat", "message", "spirit", "persever", "reproduc", "life", "natural", "togeth"], kw_es: ["integr", "mensaj", "espíritu", "espiritu", "persever", "reproduc", "vida", "natural"], modelEn: "Integrated evangelism brings together several elements: a fixed gospel message governing the method, dependence on the Holy Spirit, recognizing and seizing opportunities, boldness joined with wisdom, perseverance through slow results, a right perspective that leaves results to God, the support of the church, and the goal of reproduction. 1 Corinthians 15:58 calls us to be steadfast, always abounding in the Lord's work, knowing it is not in vain. Together these make evangelism not an occasional task but a natural, ongoing expression of the whole Christian life.", modelEs: "El evangelismo integrado reúne varios elementos: un mensaje del evangelio fijo que gobierna el método, dependencia del Espíritu Santo, reconocer y aprovechar las oportunidades, valentía unida a la sabiduría, perseverancia a través de resultados lentos, una perspectiva correcta que deja los resultados a Dios, el apoyo de la iglesia y la meta de la reproducción. 1 Corintios 15:58 nos llama a estar firmes, abundando siempre en la obra del Señor, sabiendo que no es en vano. Juntos hacen del evangelismo no una tarea ocasional sino una expresión natural y continua de toda la vida cristiana.", authorDraft: true }
+];
+
+// ======================== STATE ========================
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = parseInt(localStorage.getItem(LOCKOUT_KEY)) || 0;
+let unitPassed = localStorage.getItem(PASSED_KEY) === 'true';
+let mcPassed = localStorage.getItem(MC_PASSED_KEY) === 'true';
+
+function kwHit(answer, kw) {
+    if (!answer) return false;
+    var a = answer.toLowerCase();
+    var k = kw.toLowerCase();
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    var re = (k.length <= 4)
+        ? new RegExp("(^|[^\\p{L}])" + esc + "($|[^\\p{L}])", "u")
+        : new RegExp("(^|[^\\p{L}])" + esc, "u");
+    return re.test(a);
+}
+function essayPartialMatch(answer, keywords) {
+    if (!answer || answer.trim().length < 100) return false;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched >= 3;
+}
+function kwHitCount(answer, keywords) {
+    if (!answer) return 0;
+    var matched = 0;
+    for (var i = 0; i < keywords.length; i++) if (kwHit(answer, keywords[i])) matched++;
+    return matched;
+}
+
+function saveUnitState() {
+    localStorage.setItem(UNIT_KEY + '_mc', JSON.stringify(mcAnswers));
+    localStorage.setItem(UNIT_KEY + '_kw', JSON.stringify(kwAnswers));
+}
+function loadSavedAnswers() {
+    const savedMC = localStorage.getItem(UNIT_KEY + '_mc');
+    if (savedMC) { try { let p = JSON.parse(savedMC); if (Array.isArray(p) && p.length === 20) mcAnswers = p; } catch(e) {} }
+    const savedKW = localStorage.getItem(UNIT_KEY + '_kw');
+    if (savedKW) { try { let p = JSON.parse(savedKW); if (Array.isArray(p) && p.length === 10) kwAnswers = p; } catch(e) {} }
+}
+
+function clearAllLocal() {
+    if (confirm(currentLang === 'es' ? '⚠️ Esto borrará todas sus respuestas, estado de bloqueo y progreso de esta unidad. ¿Está seguro?' : '⚠️ This will erase all your answers, lockout status, and progress for this unit. Are you sure?')) {
+        localStorage.removeItem(UNIT_KEY + '_mc');
+        localStorage.removeItem(UNIT_KEY + '_kw');
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(PASSED_KEY);
+        localStorage.removeItem(MC_PASSED_KEY);
+        lockUntil = 0;
+        unitPassed = false;
+        mcPassed = false;
+        progress['unit' + UNIT_NUM] = false;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+        updateProgressGrid();
+    }
+}
+
+function clearExamAnswersOnly() {
+    if (confirm(currentLang === 'es' ? '⚠️ ¿Borrar todas sus respuestas para esta unidad? (El estado de aprobación de la unidad permanecerá si ya aprobó.)' : '⚠️ Clear all your answers for this unit? (Unit pass status will remain if already passed.)')) {
+        mcAnswers = new Array(20).fill(null);
+        kwAnswers = new Array(10).fill("");
+        saveUnitState();
+        renderQuestions();
+        document.getElementById('examResult').innerHTML = '';
+    }
+}
+
+function setSAOnlyLockout(disable) {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    const allTextareas = container.querySelectorAll('.kw-answer');
+    const allCheckBtns = container.querySelectorAll('button.small');
+    allTextareas.forEach(ta => ta.disabled = disable);
+    allCheckBtns.forEach(btn => {
+        if (btn.id !== 'submitExamBtn' && btn.id !== 'clearExamDataBtn' && btn.id !== 'clearDataBtn') btn.disabled = disable;
+    });
+}
+
+let lockoutInterval = null;
+function startLockoutTimer() {
+    if (lockoutInterval) clearInterval(lockoutInterval);
+    if (lockUntil > Date.now()) {
+        let banner = document.getElementById('lockoutBanner');
+        if (!banner) {
+            banner = document.createElement('div');
+            banner.id = 'lockoutBanner';
+            banner.className = 'lockout-banner';
+            const examResult = document.getElementById('examResult');
+            examResult.parentNode.insertBefore(banner, examResult);
+        }
+        setSAOnlyLockout(true);
+        const tick = () => {
+            if (lockUntil <= Date.now() || unitPassed) {
+                clearInterval(lockoutInterval);
+                setSAOnlyLockout(false);
+                if (banner) banner.remove();
+                return;
+            }
+            const rem = lockUntil - Date.now();
+            const mins = Math.floor(rem / 60000);
+            const secs = Math.floor((rem % 60000) / 1000);
+            banner.innerText = (currentLang === 'en'
+                ? `⏰ Section B locked for ${mins}:${secs.toString().padStart(2,'0')} (15-min retake lockout after failed submission)`
+                : `⏰ Sección B bloqueada por ${mins}:${secs.toString().padStart(2,'0')} (bloqueo de 15 min tras envío fallido)`);
+        };
+        tick();
+        lockoutInterval = setInterval(tick, 1000);
+    } else {
+        setSAOnlyLockout(false);
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+    }
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Section A — Multiple Choice (Questions 1–20)' : 'Sección A — Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const mcReveal = mcRevealed || mcPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMDiv ? 'Section B — Short Answer (Questions 21–30) — Masters Track (M.Div./Th.M.)' : 'Section B — Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMDiv ? 'Sección B — Respuesta Corta (Preguntas 21–30) — Pista de Maestría (M.Div./Th.M.)' : 'Sección B — Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here (minimum 20 characters)...' : 'Escriba su respuesta aquí (mínimo 20 caracteres)...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.disabled = (lockUntil > Date.now() || unitPassed);
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            if (lockUntil > Date.now() || unitPassed) return;
+            const answer = textarea.value.trim().toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? q.kw_es : q.kw_en;
+            if (answer.length < 100) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else {
+                var hc = kwHitCount(answer, keywords);
+                var passed = hc >= 3;
+                if (passed) {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('✓ Correct! (' + hc + ' key concepts found) Your answer includes the key ideas.') : ('✓ ¡Correcto! (' + hc + ' conceptos clave encontrados) Su respuesta incluye las ideas clave.');
+                    feedbackDiv.className = 'feedback-text correct';
+                    kwAnswers[idx] = textarea.value;
+                    saveUnitState();
+                } else {
+                    feedbackDiv.innerHTML = currentLang === 'en' ? ('Not yet — ' + hc + ' of 3 needed key concepts found. Compare your answer with the model below, then revise.') : ('Todavía no — ' + hc + ' de 3 conceptos clave necesarios encontrados. Compare su respuesta con el modelo de abajo y revise.');
+                    feedbackDiv.className = 'feedback-text incorrect';
+                }
+                // Gold model-answer reveal box — shown after every check, pass or fail (Q24 standard rule 4)
+                var modelBox = div.querySelector('.model-answer-box');
+                if (!modelBox) {
+                    modelBox = document.createElement('div');
+                    modelBox.className = 'model-answer-box';
+                    div.appendChild(modelBox);
+                }
+                var label = currentLang === 'en' ? 'Model answer — study this' : 'Respuesta modelo — estudie esto';
+                var modelText = currentLang === 'en' ? q.modelEn : q.modelEs;
+                var draftFlag = q.authorDraft ? '<!--AUTHOR_DRAFT: model answer not yet voiced by author-->' : '';
+                modelBox.innerHTML = draftFlag + '<strong>' + label + '</strong><br>' + modelText;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(feedbackDiv);
+        container.appendChild(div);
+        textarea.addEventListener('input', (e) => { if (!(lockUntil > Date.now() || unitPassed)) { kwAnswers[idx] = e.target.value; saveUnitState(); } });
+    });
+    startLockoutTimer();
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? "<span style='color:green'>✓ ¡Unidad ya aprobada! Puede continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! You may proceed.</span>";
+        return;
+    }
+    if (Date.now() < lockUntil) {
+        let wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        document.getElementById('examResult').innerHTML = currentLang === 'es'
+            ? `<span style='color:red'>⏰ Bloqueado ${wait} minutos más.</span>`
+            : `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    /* CTS audit 2026-05-23: no reg form here; student/track already loaded from localStorage (defaults to Certificate). */
+
+    let correctMC = 0;
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    const mcPercent = correctMC / 20;
+    if (!unitPassed) { mcRevealed = true; renderQuestions(); }
+
+    /* CTS audit 2026-05-23: isMDiv now means 'is a Masters track' (M.Div OR M.Th). Prior: program==='Master of Divinity'. */
+    const isMDiv = (student.program === 'Master of Divinity' || student.program === 'Master of Theology');
+    let saCorrect = 0;
+    if (isMDiv) {
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || '').toLowerCase();
+            const isBodyEs = document.body.classList.contains('lang-es');
+            const keywords = isBodyEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+            if (essayPartialMatch(ans, keywords)) saCorrect++;
+        }
+    }
+    const saPercent = saCorrect / 10;
+
+    const mcPass = mcPercent >= PASS_THRESHOLD;
+    const saPass = saPercent >= PASS_THRESHOLD;
+    const overallPass = isMDiv ? (mcPass && saPass) : mcPass;
+
+    if (mcPass) {
+        mcPassed = true;
+        localStorage.setItem(MC_PASSED_KEY, 'true');
+    }
+
+    if (overallPass) {
+        unitPassed = true;
+        progress['unit' + UNIT_NUM] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(PASSED_KEY, 'true');
+        const msg = isMDiv
+            ? (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unidad 7 completada. Puede continuar a la Unidad 8.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%) · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%). Unit 7 completed. You may proceed to Unit 8.</span>`)
+            : (currentLang === 'es'
+                ? `<span style='color:green'>✅ APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unidad 7 completada. Puede continuar a la Unidad 8.</span>`
+                : `<span style='color:green'>✅ PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%). Unit 7 completed. You may proceed to Unit 8.</span>`);
+        document.getElementById('examResult').innerHTML = msg;
+        updateProgressGrid();
+        const banner = document.getElementById('lockoutBanner');
+        if (banner) banner.remove();
+        if (lockoutInterval) clearInterval(lockoutInterval);
+    } else {
+        if (isMDiv && mcPass && !saPass) {
+            lockUntil = Date.now() + 15 * 60 * 1000;
+            localStorage.setItem(LOCKOUT_KEY, lockUntil);
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ Sección A APROBADA (${Math.round(mcPercent*100)}%). Sección B no aprobada (${Math.round(saPercent*100)}% &lt; 90%). Sección B bloqueada 15 minutos.</span>`
+                : `<span style='color:red'>❌ Section A PASSED (${Math.round(mcPercent*100)}%). Section B not yet passing (${Math.round(saPercent*100)}% &lt; 90%). Section B locked for 15 minutes.</span>`;
+            startLockoutTimer();
+            renderQuestions();
+        } else {
+            document.getElementById('examResult').innerHTML = currentLang === 'es'
+                ? `<span style='color:red'>❌ NO APROBADO. Sección A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Sección B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. Se requiere 90% en cada sección requerida. Revise sus respuestas e inténtelo de nuevo.</span>`
+                : `<span style='color:red'>❌ NOT PASSED. Section A: ${correctMC}/20 (${Math.round(mcPercent*100)}%)${isMDiv ? ` · Section B: ${saCorrect}/10 (${Math.round(saPercent*100)}%)` : ''}. 90% required on each required section. Review your answers and try again.</span>`;
+        }
+    }
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('clearExamDataBtn').addEventListener('click', clearExamAnswersOnly);
+document.getElementById('clearDataBtn').addEventListener('click', clearAllLocal);
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') {
+        currentLang = 'es';
+        document.body.className = 'lang-es';
+        document.documentElement.lang = 'es';
+        this.textContent = 'English';
+    } else {
+        currentLang = 'en';
+        document.body.className = 'lang-en';
+        document.documentElement.lang = 'en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+loadSavedAnswers();
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = currentLang === 'es'
+        ? "<span style='color:green'>✅ Unidad 7 ya aprobada.</span>"
+        : "<span style='color:green'>✅ Unit 7 already passed.</span>";
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEvangelismReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

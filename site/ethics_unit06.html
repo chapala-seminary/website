@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pastoral &amp; Christian Ethics — Unit 6: Ethics in Preaching, Leadership &amp; Speech</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.pending-es { background: #fff4f4; border: 1px dashed #c98a8a; padding: 12px 18px; margin: 14px 0; border-radius: 6px; color: #8a1f1f; font-style: italic; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; } body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; } body.lang-es .lang-es { display: inline; }
+@media print { .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small, #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+ body { background: #fff; padding: 10px; font-size: 12pt; } .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; } h1, h2, h3 { color: #000; } .pull-quote { background: #fff; border-left: 2px solid #888; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 7 &#8594;</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">&#128214; Pastoral &amp; Christian Ethics &mdash; Unit 6: Ethics in Preaching, Leadership &amp; Speech</span><span class="lang-es">&#128214; &Eacute;tica Pastoral y Cristiana &mdash; Unidad 6: &Eacute;tica en la Predicaci&oacute;n, el Liderazgo y el Habla</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Yet it shall not be so among you." &mdash; Mark 10:43 (NKJV)</span><span class="lang-es">&laquo;Mas no ser&aacute; as&iacute; entre vosotros.&raquo; &mdash; Marcos 10:43 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">&#128221; Course Registration</span><span class="lang-es">&#128221; Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Pastoral &amp; Christian Ethics. Please register before beginning Unit 6.</span><span class="lang-es">Bienvenido a &Eacute;tica Pastoral y Cristiana. Por favor reg&iacute;strese antes de comenzar la Unidad 6.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+
+<div class="card">
+<div class="lang-en">
+<h3>Section 6.1 &mdash; The Ethics of the Pulpit: Faithful Exposition and Honest Speech</h3>
+    <p>A pulpit is a position of enormous trust, and like every position of trust it can be abused. We have already learned, in Unit 2, how to handle the Word honestly &mdash; reading each text in its context and submitting to what the author actually meant. Here we press that into a matter of ethics, for to twist the Scriptures to say what we want them to say, to make a text serve our agenda rather than God's, is not merely poor exegesis; it is a kind of lying in God's name, and there is scarcely a graver sin a preacher can commit. The man in the pulpit speaks as though he speaks the words of God. If he bends those words to his own purposes, he has made the Almighty the endorser of his private opinions, and the people, trusting him, will never know the difference.</p>
+    <p>From this flows a whole cluster of pulpit sins to be named and shunned. There is manipulation &mdash; the working of the congregation's emotions for effect, the engineered tears, the pressure tactics that bypass the mind and the conscience to extract a response the truth itself did not produce. There is the use of the pulpit as a weapon, the preacher who, too cowardly to confront a man privately, instead aims his sermon at him from the safety of the platform where the target cannot answer. And there is plagiarism, which our age has made easy and common: the preaching of another man's labor as though it were your own. To stand and deliver a sermon you did not study, prayed over by someone else, and let your people believe it came from your own communion with God, is theft and deceit braided together. Use the labors of other men, by all means &mdash; no preacher is an island &mdash; but use them honestly, and let your preaching be the overflow of your own walk with God and your own wrestling with the text.</p>
+    <p>Behind all of this stands a conviction I have taught for many years: you do not give a sermon, you preach from the soul. Preaching is not a performance to be admired but a man set on fire by the truth, occupying the space God has given him and speaking what he himself has first been gripped by. The pulpit is not a stage, and the preacher who learns to play it as one &mdash; preaching for the applause, the reputation, the effect &mdash; has traded a holy calling for a cheap one.</p>
+    <div class="illustration"><strong>Cross-Reference &middot; Doctrinal Preaching</strong>The convictions behind this section &mdash; &ldquo;occupy the space,&rdquo; &ldquo;preach from the soul,&rdquo; preaching as something you are rather than something you do &mdash; are developed in the Doctrinal Preaching course (especially Unit 1, What Is Doctrinal Preaching?).</div>
+<h3>Section 6.2 &mdash; Servant Leadership: Authority, Submission, and Impartiality</h3>
+    <p>The pastor genuinely holds authority in the church; Scripture does not pretend otherwise, and the congregation is called to submit to its faithful leaders. But the manner in which that authority is held is everything, and here our Lord drew the sharpest possible line. <em class="ref">"You know that those who are considered rulers over the Gentiles lord it over them... Yet it shall not be so among you"</em> (Mark 10:42&ndash;43). Not so among you. The world's pattern of leadership &mdash; the strong commanding, the great being served &mdash; is precisely the pattern Christ forbids to His undershepherds. Peter echoes it exactly: elders are to lead <em class="ref">"not as being lords over those entrusted to you, but being examples to the flock"</em> (1 Peter 5:3). The model is the towel and the basin, the King who knelt to wash the feet of men He could have commanded.</p>
+    <p>Let me put it in a homely picture. I have a big metal yardstick in my shop. When I am working on a large project I do not reach for a retractable tape or a cloth measure; I lay that yardstick down and I know at once what size a thing is. The trouble is that my yardstick reads in feet and inches. I lived years in Canada and now in Mexico, where everything is measured in meters, but my mind is still stuck in the measure I grew up with. We all carry a measuring stick for success, and most of us inherited the world&rsquo;s. We say a man has done well if he is clever, or good-looking, or a leader, or makes a great deal of money, or is known. We would not likely brag, &ldquo;My son has become a wonderful servant.&rdquo; But God&rsquo;s ruler is a different ruler altogether. On the night before His death, with His disciples still arguing over which of them was greatest, the Lord of glory rose from supper, wrapped a towel around His waist, took a basin, and washed their feet &mdash; the task of the lowest servant in the house. Then He said, <em class="ref">"If I then, your Lord and Teacher, have washed your feet, you also ought to wash one another&rsquo;s feet"</em> (John 13:14). That is the measure. The world asks, &ldquo;How many people work for you?&rdquo; The Lord asks, &ldquo;For how many people do you work?&rdquo; A man called to lead in Christ&rsquo;s church is called first to kneel in it.</p>
+    <p>So the pastor's authority is real but inverted from the world's: it is the authority of a servant, exercised for the good of those served and never for the comfort or aggrandizement of the one who holds it. And the submission Scripture asks of the congregation is the glad following of a shepherd who plainly loves them and points them to Christ &mdash; not the cowed obedience extracted by a domineering man who has confused his own will with the will of God. A leader who must demand submission has usually already forfeited the right to it.</p>
+    <p>One more mark belongs to godly leadership: impartiality. The church is the one place on earth where the distinctions the world lives by are to mean nothing. <em class="ref">"My brethren, do not hold the faith of our Lord Jesus Christ, the Lord of glory, with partiality"</em> (James 2:1). The pastor who fawns over the wealthy donor and overlooks the poor widow, who bends the rules for his friends and applies them strictly to those he dislikes, has betrayed the gospel of a God who shows no favoritism. Justice in the church must be blind to wealth, to status, to friendship, and to the leader's own preferences. The same standard, the same patience, and the same grace must reach the influential man and the inconvenient one alike.</p>
+<h3>Section 6.3 &mdash; Biblical Church Discipline &mdash; and Its Misuse</h3>
+    <p>Few subjects are more neglected, and few more easily mishandled, than the discipline of the church. Our Lord laid out the process Himself with great care. <em class="ref">"If your brother sins against you, go and tell him his fault between you and him alone"</em> (Matthew 18:15). That is the first step and the one most often skipped: a private word, between the two, aimed at winning the brother. If he will not hear, the second step is to take one or two others, that every word may be established by witnesses. If he still refuses, the matter comes before the church. And only if he will not hear even the church is he finally to be treated as one outside it. Note the patient escalation, each stage giving room for repentance, each stage widening the circle only as far as the brother's hardness requires and no farther.</p>
+    <p>Alongside Matthew 18 stands the graver case of 1 Corinthians 5, where a notorious, unrepented, public sin in the church demanded decisive action for the sake of the whole body. From these passages we draw the three purposes of all discipline, and they must be held in this order: first, the <em>restoration</em> of the sinning brother, which is always the goal; second, the <em>purity</em> of the church, that a little leaven not corrupt the whole lump; and third, the <em>honor</em> of Christ's name before a watching world. A useful distinction governs the process: private sins are dealt with privately and need never become public if repentance comes early, while sins that are public or that harden into open defiance may require the wider steps.</p>
+    <p>Now I must speak plainly about something the manuals too often leave unsaid, because nothing in pastoral ministry is more easily turned into a weapon than discipline. The same process our Lord gave for healing can be perverted into an instrument of control, and a great deal of spiritual abuse has been committed under its banner. Discipline is misused when a leader skips the patient private steps and escalates straight to public exposure, satisfying his anger rather than seeking the brother. It is misused when its true engine is the leader's wounded pride and not the sinner's good. It is misused when it becomes a tool for silencing those who question the leadership, or for crushing rather than restoring. Hear me on this: a discipline that has lost the goal of restoration has ceased to be biblical discipline and has become something else, something cruel. Paul fixes the spirit forever: <em class="ref">"if a man is overtaken in any trespass, you who are spiritual restore such a one in a spirit of gentleness, considering yourself lest you also be tempted"</em> (Galatians 6:1). Restore &mdash; not destroy. In gentleness &mdash; not in fury. And considering yourself &mdash; for the man who corrects another while forgetting his own capacity for the very same sin is the likeliest of all to become a tyrant in God's name. Discipline must always sharpen the leader's own self-examination at least as much as it confronts the offender.</p>
+<h3>Section 6.4 &mdash; The Tongue: Gossip, Destructive Speech, and a Vital Distinction</h3>
+    <p>If the pulpit can be abused and authority can be abused, so above all can the simple human tongue, and Scripture treats it with a seriousness we rarely match. James calls it a fire, <em class="ref">"a world of iniquity"</em> set among our members (James 3:6). Solomon warns that <em class="ref">"a whisperer separates the best of friends"</em> (Proverbs 16:28). And Paul, listing the sins he feared to find festering in a church, names alongside the grosser vices the quieter killers: <em class="ref">"backbitings, whisperings"</em> (2 Corinthians 12:20). We are slow to see gossip as the church-destroyer it is, precisely because it feels so small, so natural, so easily disguised as concern or prayer request. But it is among the chief solvents of Christian unity, and a congregation given to it will be eaten hollow from within while everyone professes love.</p>
+    <p>The pastor bears a double responsibility here. He must refuse to traffic in it himself &mdash; never repeating what he need not repeat, never being the source or the eager hearer of a tale &mdash; and he must have the courage to confront it in the flock, gently stopping the whisper at his own door and teaching his people to do the same. A man cannot lead a pure-tongued church while indulging an impure tongue in private.</p>
+    <p>And now the distinction this unit has been building toward, because it is the one most often abused in both directions. What separates sinful gossip from the legitimate confrontation of sin? Not the subject matter, for both may concern another person's fault. The difference lies in direction, motive, and goal. Gossip talks <em>about</em> a person to those who are neither part of the problem nor part of the solution; biblical confrontation goes <em>to</em> the person, through the very channels our Lord laid out in Matthew 18. Gossip aims to wound, to vent, or to elevate the teller by lowering the subject; discipline aims at the offender's restoration. To carry a brother's sin privately to him, or through the proper steps to those charged with helping, is not gossip &mdash; it is obedience. To carry that same sin sideways, into idle conversation with those who can do nothing but think less of him, is gossip however piously it is framed. Learn to tell the two apart, and teach your people to, and you will have done much to guard both the holiness and the unity of the church at once.</p>
+    <div class="illustration"><strong>Cross-Reference &middot; This Course</strong>The confidentiality this section assumes was treated in Unit 5; the full process of restoring a disciplined member &mdash; evaluating repentance, the 2 Corinthians 2 model, reintegration &mdash; is developed in Unit 10.</div>
+</div>
+<div class="lang-es">
+
+<h3>Secci&oacute;n 6.1 &mdash; La &eacute;tica del p&uacute;lpito: exposici&oacute;n fiel y palabra honesta</h3>
+    <p>Un p&uacute;lpito es una posici&oacute;n de enorme confianza, y como toda posici&oacute;n de confianza puede ser abusada. Ya aprendimos, en la Unidad 2, c&oacute;mo manejar la Palabra honestamente &mdash; leyendo cada texto en su contexto y someti&eacute;ndonos a lo que el autor realmente quiso decir. Aqu&iacute; lo llevamos a un asunto de &eacute;tica, pues torcer las Escrituras para que digan lo que queremos que digan, hacer que un texto sirva a nuestra agenda en vez de a la de Dios, no es meramente mala ex&eacute;gesis; es una especie de mentira en el nombre de Dios, y apenas hay pecado m&aacute;s grave que un predicador pueda cometer. El hombre en el p&uacute;lpito habla como si hablara las palabras de Dios. Si tuerce esas palabras hacia sus propios prop&oacute;sitos, ha hecho del Todopoderoso el respaldo de sus opiniones privadas, y la gente, confiando en &eacute;l, nunca conocer&aacute; la diferencia.</p>
+    <p>De esto fluye todo un racimo de pecados del p&uacute;lpito que han de ser nombrados y rehuidos. Est&aacute; la manipulaci&oacute;n &mdash; el trabajar las emociones de la congregaci&oacute;n para lograr un efecto, las l&aacute;grimas fabricadas, las t&aacute;cticas de presi&oacute;n que esquivan la mente y la conciencia para extraer una respuesta que la verdad misma no produjo. Est&aacute; el uso del p&uacute;lpito como arma, el predicador que, demasiado cobarde para confrontar a un hombre en privado, en cambio apunta su serm&oacute;n contra &eacute;l desde la seguridad de la plataforma donde el blanco no puede responder. Y est&aacute; el plagio, que nuestra &eacute;poca ha hecho f&aacute;cil y com&uacute;n: la predicaci&oacute;n del trabajo de otro hombre como si fuera el suyo propio. Pararse y entregar un serm&oacute;n que usted no estudi&oacute;, orado por otra persona, y dejar que su gente crea que vino de su propia comuni&oacute;n con Dios, es robo y enga&ntilde;o trenzados juntos. Use las labores de otros hombres, por supuesto &mdash; ning&uacute;n predicador es una isla &mdash; pero &uacute;selas honestamente, y deje que su predicaci&oacute;n sea el desbordamiento de su propio andar con Dios y su propia lucha con el texto.</p>
+    <p>Detr&aacute;s de todo esto est&aacute; una convicci&oacute;n que he ense&ntilde;ado por muchos a&ntilde;os: usted no da un serm&oacute;n, predica desde el alma. La predicaci&oacute;n no es una actuaci&oacute;n para ser admirada sino un hombre encendido por la verdad, ocupando el espacio que Dios le ha dado y hablando lo que &eacute;l mismo ha sido primero asido. El p&uacute;lpito no es un escenario, y el predicador que aprende a tocarlo como uno &mdash; predicando por el aplauso, la reputaci&oacute;n, el efecto &mdash; ha cambiado un llamamiento santo por uno barato.</p>
+    <div class="illustration"><strong>Referencia cruzada &middot; Predicaci&oacute;n Doctrinal</strong>Las convicciones tras esta secci&oacute;n &mdash; &laquo;ocupa el espacio&raquo;, &laquo;predica desde el alma&raquo;, la predicaci&oacute;n como algo que usted es y no algo que hace &mdash; se desarrollan en el curso de Predicaci&oacute;n Doctrinal (especialmente Unidad 1, &iquest;Qu&eacute; es la predicaci&oacute;n doctrinal?).</div>
+<h3>Secci&oacute;n 6.2 &mdash; El liderazgo de siervo: autoridad, sumisi&oacute;n e imparcialidad</h3>
+    <p>El pastor genuinamente tiene autoridad en la iglesia; la Escritura no finge lo contrario, y la congregaci&oacute;n es llamada a someterse a sus l&iacute;deres fieles. Pero la manera en que se tiene esa autoridad lo es todo, y aqu&iacute; nuestro Se&ntilde;or traz&oacute; la l&iacute;nea m&aacute;s aguda posible. <em class="ref">&laquo;Sab&eacute;is que los que son tenidos por gobernantes de los gentiles se ense&ntilde;orean de ellos... Mas no ser&aacute; as&iacute; entre vosotros&raquo;</em> (Marcos 10:42&ndash;43). No as&iacute; entre vosotros. El patr&oacute;n de liderazgo del mundo &mdash; el fuerte mandando, el grande siendo servido &mdash; es precisamente el patr&oacute;n que Cristo proh&iacute;be a sus subpastores. Pedro lo repite exactamente: los ancianos han de dirigir <em class="ref">&laquo;no como teniendo se&ntilde;or&iacute;o sobre los que est&aacute;n a vuestro cuidado, sino siendo ejemplos de la grey&raquo;</em> (1 Pedro 5:3). El modelo es la toalla y la palangana, el Rey que se arrodill&oacute; para lavar los pies de hombres a quienes pudo haber mandado.</p>
+    <p>Perm&iacute;tame ponerlo en una imagen sencilla. Tengo una gran regla de metal en mi taller. Cuando trabajo en un proyecto grande no echo mano de una cinta retr&aacute;ctil ni de un metro de tela; pongo esa regla y s&eacute; al instante de qu&eacute; tama&ntilde;o es una cosa. El problema es que mi regla mide en pies y pulgadas. Viv&iacute; a&ntilde;os en Canad&aacute; y ahora en M&eacute;xico, donde todo se mide en metros, pero mi mente sigue atascada en la medida con la que crec&iacute;. Todos llevamos una vara de medir para el &eacute;xito, y la mayor&iacute;a heredamos la del mundo. Decimos que a un hombre le ha ido bien si es listo, o bien parecido, o un l&iacute;der, o gana mucho dinero, o es conocido. No es probable que presumi&eacute;ramos: &laquo;Mi hijo se ha vuelto un siervo maravilloso&raquo;. Pero la vara de Dios es una vara completamente distinta. La noche antes de su muerte, con sus disc&iacute;pulos todav&iacute;a discutiendo cu&aacute;l de ellos era el mayor, el Se&ntilde;or de gloria se levant&oacute; de la cena, se ci&ntilde;&oacute; una toalla a la cintura, tom&oacute; una palangana, y lav&oacute; sus pies &mdash; la tarea del siervo m&aacute;s bajo de la casa. Luego dijo: <em class="ref">&laquo;Pues si yo, el Se&ntilde;or y el Maestro, he lavado vuestros pies, vosotros tambi&eacute;n deb&eacute;is lavaros los pies los unos a los otros&raquo;</em> (Juan 13:14). Esa es la medida. El mundo pregunta: &laquo;&iquest;Cu&aacute;ntas personas trabajan para ti?&raquo;. El Se&ntilde;or pregunta: &laquo;&iquest;Para cu&aacute;ntas personas trabajas t&uacute;?&raquo;. Un hombre llamado a dirigir en la iglesia de Cristo es llamado primero a arrodillarse en ella.</p>
+    <p>As&iacute; que la autoridad del pastor es real pero invertida de la del mundo: es la autoridad de un siervo, ejercida para el bien de aquellos a quienes sirve y nunca para la comodidad o el engrandecimiento del que la tiene. Y la sumisi&oacute;n que la Escritura pide de la congregaci&oacute;n es el gozoso seguir a un pastor que claramente los ama y los se&ntilde;ala a Cristo &mdash; no la obediencia acobardada extra&iacute;da por un hombre dominante que ha confundido su propia voluntad con la voluntad de Dios. Un l&iacute;der que debe exigir sumisi&oacute;n usualmente ya ha perdido el derecho a ella.</p>
+    <p>Una marca m&aacute;s pertenece al liderazgo piadoso: la imparcialidad. La iglesia es el &uacute;nico lugar en la tierra donde las distinciones por las que el mundo vive han de no significar nada. <em class="ref">&laquo;Hermanos m&iacute;os, no teng&aacute;is la fe de nuestro Se&ntilde;or Jesucristo, el Se&ntilde;or de gloria, en acepci&oacute;n de personas&raquo;</em> (Santiago 2:1). El pastor que adula al donante rico y pasa por alto a la viuda pobre, que dobla las reglas para sus amigos y las aplica con rigor a los que le disgustan, ha traicionado el evangelio de un Dios que no hace acepci&oacute;n de personas. La justicia en la iglesia debe ser ciega a la riqueza, al estatus, a la amistad, y a las preferencias propias del l&iacute;der. La misma norma, la misma paciencia, y la misma gracia deben alcanzar al hombre influyente y al inconveniente por igual.</p>
+<h3>Secci&oacute;n 6.3 &mdash; La disciplina b&iacute;blica de la iglesia &mdash; y su mal uso</h3>
+    <p>Pocos temas est&aacute;n m&aacute;s descuidados, y pocos se manejan mal m&aacute;s f&aacute;cilmente, que la disciplina de la iglesia. Nuestro Se&ntilde;or expuso el proceso &Eacute;l mismo con gran cuidado. <em class="ref">&laquo;Por tanto, si tu hermano peca contra ti, ve y repr&eacute;ndele entre ti y &eacute;l solo&raquo;</em> (Mateo 18:15). Ese es el primer paso y el que m&aacute;s a menudo se omite: una palabra privada, entre los dos, dirigida a ganar al hermano. Si no quiere o&iacute;r, el segundo paso es tomar a uno o dos m&aacute;s, para que toda palabra sea establecida por testigos. Si a&uacute;n reh&uacute;sa, el asunto viene ante la iglesia. Y solo si no quiere o&iacute;r ni siquiera a la iglesia ha de ser finalmente tratado como uno fuera de ella. Note la paciente escalada, cada etapa dando lugar al arrepentimiento, cada etapa ampliando el c&iacute;rculo solo hasta donde la dureza del hermano lo requiere y no m&aacute;s.</p>
+    <p>Junto a Mateo 18 est&aacute; el caso m&aacute;s grave de 1 Corintios 5, donde un pecado notorio, no arrepentido y p&uacute;blico en la iglesia exigi&oacute; acci&oacute;n decisiva por el bien de todo el cuerpo. De estos pasajes sacamos los tres prop&oacute;sitos de toda disciplina, y deben sostenerse en este orden: primero, la <em>restauraci&oacute;n</em> del hermano que peca, que es siempre la meta; segundo, la <em>pureza</em> de la iglesia, para que un poco de levadura no corrompa toda la masa; y tercero, la <em>honra</em> del nombre de Cristo ante un mundo que observa. Una distinci&oacute;n &uacute;til rige el proceso: los pecados privados se tratan en privado y nunca necesitan hacerse p&uacute;blicos si el arrepentimiento llega temprano, mientras que los pecados que son p&uacute;blicos o que se endurecen en abierto desaf&iacute;o pueden requerir los pasos m&aacute;s amplios.</p>
+    <p>Ahora debo hablar con claridad de algo que los manuales demasiado a menudo dejan sin decir, porque nada en el ministerio pastoral se convierte m&aacute;s f&aacute;cilmente en un arma que la disciplina. El mismo proceso que nuestro Se&ntilde;or dio para sanar puede ser pervertido en un instrumento de control, y mucho abuso espiritual se ha cometido bajo su estandarte. La disciplina se mal usa cuando un l&iacute;der omite los pacientes pasos privados y escala directo a la exposici&oacute;n p&uacute;blica, satisfaciendo su ira en vez de buscar al hermano. Se mal usa cuando su verdadero motor es el orgullo herido del l&iacute;der y no el bien del pecador. Se mal usa cuando se vuelve una herramienta para silenciar a los que cuestionan el liderazgo, o para aplastar en vez de restaurar. &Oacute;igame en esto: una disciplina que ha perdido la meta de la restauraci&oacute;n ha dejado de ser disciplina b&iacute;blica y se ha vuelto otra cosa, algo cruel. Pablo fija el esp&iacute;ritu para siempre: <em class="ref">&laquo;si alguno fuere tomado en alguna falta, vosotros que sois espirituales, restaurad al tal con esp&iacute;ritu de mansedumbre, consider&aacute;ndote a ti mismo, no sea que t&uacute; tambi&eacute;n seas tentado&raquo;</em> (G&aacute;latas 6:1). Restaurad &mdash; no destruir. En mansedumbre &mdash; no en furia. Y consider&aacute;ndote a ti mismo &mdash; pues el hombre que corrige a otro olvidando su propia capacidad para ese mismo pecado es el m&aacute;s propenso de todos a volverse un tirano en el nombre de Dios. La disciplina debe siempre afilar el propio examen del l&iacute;der al menos tanto como confronta al ofensor.</p>
+<h3>Secci&oacute;n 6.4 &mdash; La lengua: el chisme, la palabra destructiva y una distinci&oacute;n vital</h3>
+    <p>Si el p&uacute;lpito puede ser abusado y la autoridad puede ser abusada, as&iacute; tambi&eacute;n sobre todo puede serlo la simple lengua humana, y la Escritura la trata con una seriedad que rara vez igualamos. Santiago la llama un fuego, <em class="ref">&laquo;un mundo de maldad&raquo;</em> puesto entre nuestros miembros (Santiago 3:6). Salom&oacute;n advierte que <em class="ref">&laquo;el chismoso aparta los mejores amigos&raquo;</em> (Proverbios 16:28). Y Pablo, enumerando los pecados que tem&iacute;a hallar fermentando en una iglesia, nombra junto a los vicios m&aacute;s burdos a los asesinos m&aacute;s silenciosos: <em class="ref">&laquo;detracciones, murmuraciones&raquo;</em> (2 Corintios 12:20). Somos lentos para ver el chisme como el destructor de la iglesia que es, precisamente porque se siente tan peque&ntilde;o, tan natural, tan f&aacute;cilmente disfrazado de preocupaci&oacute;n o petici&oacute;n de oraci&oacute;n. Pero est&aacute; entre los principales disolventes de la unidad cristiana, y una congregaci&oacute;n entregada a &eacute;l ser&aacute; comida por dentro hasta quedar hueca mientras todos profesan amor.</p>
+    <p>El pastor lleva aqu&iacute; una doble responsabilidad. Debe rehusar traficar con &eacute;l &eacute;l mismo &mdash; nunca repitiendo lo que no necesita repetir, nunca siendo la fuente o el oidor ansioso de un cuento &mdash; y debe tener el valor de confrontarlo en la grey, deteniendo con suavidad el susurro en su propia puerta y ense&ntilde;ando a su gente a hacer lo mismo. Un hombre no puede dirigir una iglesia de lengua pura mientras consiente una lengua impura en privado.</p>
+    <p>Y ahora la distinci&oacute;n hacia la que esta unidad ha estado construyendo, porque es la que m&aacute;s a menudo se abusa en ambas direcciones. &iquest;Qu&eacute; separa el chisme pecaminoso de la confrontaci&oacute;n leg&iacute;tima del pecado? No el tema, pues ambos pueden tratar de la falta de otra persona. La diferencia yace en la direcci&oacute;n, el motivo y la meta. El chisme habla <em>acerca de</em> una persona a quienes no son ni parte del problema ni parte de la soluci&oacute;n; la confrontaci&oacute;n b&iacute;blica va <em>a</em> la persona, por los mismos canales que nuestro Se&ntilde;or expuso en Mateo 18. El chisme busca herir, desahogarse, o elevar al que habla rebajando al sujeto; la disciplina busca la restauraci&oacute;n del ofensor. Llevar el pecado de un hermano en privado a &eacute;l, o por los pasos debidos a quienes est&aacute;n encargados de ayudar, no es chisme &mdash; es obediencia. Llevar ese mismo pecado de lado, a la conversaci&oacute;n ociosa con quienes no pueden hacer nada sino pensar menos de &eacute;l, es chisme por piadosamente que se enmarque. Aprenda a distinguir los dos, y ense&ntilde;e a su gente a hacerlo, y habr&aacute; hecho mucho para guardar a la vez la santidad y la unidad de la iglesia.</p>
+    <div class="illustration"><strong>Referencia cruzada &middot; Este curso</strong>La confidencialidad que esta secci&oacute;n supone se trat&oacute; en la Unidad 5; el proceso completo de restaurar a un miembro disciplinado &mdash; evaluar el arrepentimiento, el modelo de 2 Corintios 2, la reintegraci&oacute;n &mdash; se desarrolla en la Unidad 10.</div>
+
+</div>
+</div>
+
+
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 6 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lecci&oacute;n y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ============================================================
+// CTS Pastoral & Christian Ethics — Unit 6 — ST/DP house engine
+// English complete; Spanish draft filled (lang-es / textEs / kw_es / modelEs).
+// Spanish + RVG citations are a Gate-1 draft pending native review.
+// Navigation uses the deployed Ethics filename scheme: ethics_unit0N.html
+// (two-digit, zero-padded), matching the other nine units.
+// ============================================================
+
+const UNIT = 6;
+const COURSE = 'ethics';
+const NEXT_UNIT_URL = 'ethics_unit07.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - Introduction to Christian Ethics",
+    "Unit 2 - Biblical and Theological Foundations",
+    "Unit 3 - Pastoral Vocation: Calling and Character",
+    "Unit 4 - Family Responsibilities and Personal Integrity",
+    "Unit 5 - Professional Ethics and Boundaries",
+    "Unit 6 - Ethics in Preaching, Leadership, and Speech",
+    "Unit 7 - Sanctity of Life and Bioethics",
+    "Unit 8 - Sexual Ethics, Purity, and Gender",
+    "Unit 9 - Money, Stewardship, and the Poor",
+    "Unit 10 - Judgment, Restoration, and Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="ethics_unit${String(i).padStart(2,'0')}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+// MC answer key audited. Spanish: Gate-1 draft.
+const mcQuestions = [
+    { textEn: "1. To twist the Scriptures to serve our own agenda rather than God\u2019s is described in the unit as:", textEs: "1. Torcer las Escrituras para servir a nuestra propia agenda en vez de a la de Dios se describe en la unidad como:",
+      optionsEn: ["a kind of lying in God\u2019s name", "an honest mistake", "a matter of style", "acceptable if well-intentioned"], optionsEs: ["una especie de mentira en el nombre de Dios", "un error honesto", "un asunto de estilo", "aceptable si es bienintencionado"],
+      explanationEn: "To twist Scripture to serve our agenda rather than God's is a kind of lying in God's name.", explanationEs: "Torcer la Escritura para servir a nuestra agenda en vez de a la de Dios es una especie de mentira en el nombre de Dios.", correct: 0 },
+    { textEn: "2. When a preacher bends God\u2019s words to his own purposes, the unit says he makes the Almighty:", textEs: "2. Cuando un predicador tuerce las palabras de Dios hacia sus propios prop\u00f3sitos, la unidad dice que hace al Todopoderoso:",
+      optionsEn: ["irrelevant to the sermon", "the endorser of his private opinions", "a distant figure", "the subject of debate"], optionsEs: ["irrelevante para el serm\u00f3n", "el respaldo de sus opiniones privadas", "una figura distante", "el tema del debate"],
+      explanationEn: "The preacher who bends God's words to his purposes makes the Almighty the endorser of his private opinions.", explanationEs: "El predicador que tuerce las palabras de Dios hacia sus prop\u00f3sitos hace al Todopoderoso el respaldo de sus opiniones privadas.", correct: 1 },
+    { textEn: "3. \u201cManipulation\u201d in preaching is defined as working the congregation\u2019s emotions in a way that:", textEs: "3. La \u00abmanipulaci\u00f3n\u00bb en la predicaci\u00f3n se define como trabajar las emociones de la congregaci\u00f3n de un modo que:",
+      optionsEn: ["honors the text", "builds genuine conviction", "bypasses the mind and conscience for effect", "explains doctrine clearly"], optionsEs: ["honra el texto", "construye convicci\u00f3n genuina", "esquiva la mente y la conciencia para lograr un efecto", "explica la doctrina con claridad"],
+      explanationEn: "Manipulation works the congregation's emotions to bypass the mind and conscience for effect.", explanationEs: "La manipulaci\u00f3n trabaja las emociones de la congregaci\u00f3n para esquivar la mente y la conciencia y lograr un efecto.", correct: 2 },
+    { textEn: "4. Plagiarism in preaching is defined as delivering another man\u2019s labor:", textEs: "4. El plagio en la predicaci\u00f3n se define como entregar el trabajo de otro hombre:",
+      optionsEn: ["as though it were your own", "with full attribution", "for a single occasion", "after careful study"], optionsEs: ["como si fuera el suyo propio", "con plena atribuci\u00f3n", "por una sola ocasi\u00f3n", "tras cuidadoso estudio"],
+      explanationEn: "Plagiarism is delivering another man's labor as though it were your own.", explanationEs: "El plagio es entregar el trabajo de otro hombre como si fuera el suyo propio.", correct: 0 },
+    { textEn: "5. In Mark 10:42\u201343, Jesus says that the Gentile pattern of lording authority over others shall:", textEs: "5. En Marcos 10:42\u201343, Jes\u00fas dice que el patr\u00f3n gentil de se\u00f1orear autoridad sobre otros ha de:",
+      optionsEn: ["not be so among you", "be reformed gradually", "apply only to rulers", "be permitted in emergencies"], optionsEs: ["no ser as\u00ed entre vosotros", "reformarse gradualmente", "aplicarse solo a los gobernantes", "permitirse en emergencias"],
+      explanationEn: "In Mark 10:42-43 Jesus says the Gentile pattern of lording authority 'shall not be so among you.'", explanationEs: "En Marcos 10:42-43 Jes\u00fas dice que el patr\u00f3n gentil de se\u00f1orear autoridad \u00abno ser\u00e1 as\u00ed entre vosotros\u00bb.", correct: 0 },
+    { textEn: "6. 1 Peter 5:3 charges elders to lead not as lords over those entrusted to them, but as:", textEs: "6. 1 Pedro 5:3 encarga a los ancianos dirigir no como se\u00f1ores sobre los que les son confiados, sino como:",
+      optionsEn: ["distant overseers", "strict judges", "careful managers", "examples to the flock"], optionsEs: ["supervisores distantes", "jueces estrictos", "gerentes cuidadosos", "ejemplos de la grey"],
+      explanationEn: "1 Peter 5:3 charges elders to lead not as lords but as examples to the flock.", explanationEs: "1 Pedro 5:3 encarga a los ancianos dirigir no como se\u00f1ores sino como ejemplos de la grey.", correct: 3 },
+    { textEn: "7. The biblical model of leadership is summarized by the image of:", textEs: "7. El modelo b\u00edblico de liderazgo se resume con la imagen de:",
+      optionsEn: ["a throne and scepter", "the towel and the basin", "a sword and shield", "a crown of gold"], optionsEs: ["un trono y un cetro", "la toalla y la palangana", "una espada y un escudo", "una corona de oro"],
+      explanationEn: "The biblical model of leadership is the towel and the basin\u2014the King who knelt to wash feet.", explanationEs: "El modelo b\u00edblico de liderazgo es la toalla y la palangana \u2014 el Rey que se arrodill\u00f3 para lavar los pies.", correct: 1 },
+    { textEn: "8. The pastor\u2019s authority is real but, the unit says, is:", textEs: "8. La autoridad del pastor es real pero, dice la unidad, es:",
+      optionsEn: ["unlimited in scope", "equal to a king\u2019s", "the authority of a servant", "derived from the congregation"], optionsEs: ["ilimitada en alcance", "igual a la de un rey", "la autoridad de un siervo", "derivada de la congregaci\u00f3n"],
+      explanationEn: "The pastor's authority is real but inverted: it is the authority of a servant.", explanationEs: "La autoridad del pastor es real pero invertida: es la autoridad de un siervo.", correct: 2 },
+    { textEn: "9. James 2:1 forbids holding the faith of Christ with:", textEs: "9. Santiago 2:1 proh\u00edbe sostener la fe de Cristo con:",
+      optionsEn: ["uncertainty", "fear", "doubt", "partiality"], optionsEs: ["incertidumbre", "temor", "duda", "acepci\u00f3n de personas"],
+      explanationEn: "James 2:1 forbids holding the faith of Christ with partiality.", explanationEs: "Santiago 2:1 proh\u00edbe sostener la fe de Cristo con acepci\u00f3n de personas.", correct: 3 },
+    { textEn: "10. The pastor who fawns over the wealthy donor and overlooks the poor widow has:", textEs: "10. El pastor que adula al donante rico y pasa por alto a la viuda pobre ha:",
+      optionsEn: ["shown good judgment", "betrayed the gospel of a God who shows no favoritism", "acted prudently", "followed church custom"], optionsEs: ["mostrado buen juicio", "traicionado el evangelio de un Dios que no hace acepci\u00f3n de personas", "actuado con prudencia", "seguido la costumbre de la iglesia"],
+      explanationEn: "The pastor who fawns over the donor and overlooks the widow betrays the gospel of a God who shows no favoritism.", explanationEs: "El pastor que adula al donante y pasa por alto a la viuda traiciona el evangelio de un Dios que no hace acepci\u00f3n de personas.", correct: 1 },
+    { textEn: "11. The first step of Matthew 18 discipline, and the one most often skipped, is:", textEs: "11. El primer paso de la disciplina de Mateo 18, y el que m\u00e1s a menudo se omite, es:",
+      optionsEn: ["a private word between the two alone", "an announcement to the church", "a meeting of the elders", "public rebuke"], optionsEs: ["una palabra privada entre los dos a solas", "un anuncio a la iglesia", "una reuni\u00f3n de los ancianos", "la reprensi\u00f3n p\u00fablica"],
+      explanationEn: "The first and most-skipped step of Matthew 18 is a private word between the two alone.", explanationEs: "El primer paso, y el m\u00e1s omitido, de Mateo 18 es una palabra privada entre los dos a solas.", correct: 0 },
+    { textEn: "12. If the brother will not hear the private word, the second step is to:", textEs: "12. Si el hermano no quiere o\u00edr la palabra privada, el segundo paso es:",
+      optionsEn: ["remove him at once", "take one or two others as witnesses", "tell the congregation", "wait indefinitely"], optionsEs: ["removerlo de inmediato", "tomar a uno o dos m\u00e1s como testigos", "decirlo a la congregaci\u00f3n", "esperar indefinidamente"],
+      explanationEn: "If he will not hear, the second step is to take one or two others as witnesses.", explanationEs: "Si no quiere o\u00edr, el segundo paso es tomar a uno o dos m\u00e1s como testigos.", correct: 1 },
+    { textEn: "13. Only if the brother refuses even the church is he finally to be treated as:", textEs: "13. Solo si el hermano reh\u00fasa aun a la iglesia ha de ser finalmente tratado como:",
+      optionsEn: ["a weaker brother", "a new convert", "one outside the church", "a guest"], optionsEs: ["un hermano m\u00e1s d\u00e9bil", "un nuevo convertido", "uno fuera de la iglesia", "un invitado"],
+      explanationEn: "Only if he refuses even the church is he finally treated as one outside it.", explanationEs: "Solo si reh\u00fasa aun a la iglesia es finalmente tratado como uno fuera de ella.", correct: 2 },
+    { textEn: "14. The three purposes of discipline, held in order, are restoration of the sinner, purity of the church, and:", textEs: "14. Los tres prop\u00f3sitos de la disciplina, sostenidos en orden, son la restauraci\u00f3n del pecador, la pureza de la iglesia, y:",
+      optionsEn: ["the honor of Christ\u2019s name", "the leader\u2019s vindication", "the growth of attendance", "the satisfaction of the offended"], optionsEs: ["la honra del nombre de Cristo", "la vindicaci\u00f3n del l\u00edder", "el aumento de la asistencia", "la satisfacci\u00f3n del ofendido"],
+      explanationEn: "The three purposes of discipline, in order, are restoration, the church's purity, and the honor of Christ's name.", explanationEs: "Los tres prop\u00f3sitos, en orden, son la restauraci\u00f3n, la pureza de la iglesia, y la honra del nombre de Cristo.", correct: 0 },
+    { textEn: "15. Discipline is misused, the unit warns, when a leader skips the private steps and:", textEs: "15. La disciplina se mal usa, advierte la unidad, cuando un l\u00edder omite los pasos privados y:",
+      optionsEn: ["consults the elders first", "escalates straight to public exposure", "prays for the offender", "waits too long"], optionsEs: ["consulta primero a los ancianos", "escala directo a la exposici\u00f3n p\u00fablica", "ora por el ofensor", "espera demasiado"],
+      explanationEn: "Discipline is misused when a leader skips the private steps and escalates straight to public exposure.", explanationEs: "La disciplina se mal usa cuando un l\u00edder omite los pasos privados y escala directo a la exposici\u00f3n p\u00fablica.", correct: 1 },
+    { textEn: "16. Galatians 6:1 commands that one overtaken in a trespass be restored in a spirit of:", textEs: "16. G\u00e1latas 6:1 manda que el que es tomado en una falta sea restaurado con esp\u00edritu de:",
+      optionsEn: ["gentleness, considering oneself", "firmness and resolve", "public accountability", "strict justice"], optionsEs: ["mansedumbre, consider\u00e1ndose a s\u00ed mismo", "firmeza y resoluci\u00f3n", "rendici\u00f3n de cuentas p\u00fablica", "justicia estricta"],
+      explanationEn: "Galatians 6:1 commands restoring the fallen in a spirit of gentleness, considering oneself.", explanationEs: "G\u00e1latas 6:1 manda restaurar al ca\u00eddo con esp\u00edritu de mansedumbre, consider\u00e1ndose a s\u00ed mismo.", correct: 0 },
+    { textEn: "17. James 3:6 calls the tongue:", textEs: "17. Santiago 3:6 llama a la lengua:",
+      optionsEn: ["a small and harmless thing", "a tool for good only", "a fire, a world of iniquity", "easily tamed"], optionsEs: ["una cosa peque\u00f1a e inofensiva", "una herramienta solo para el bien", "un fuego, un mundo de maldad", "f\u00e1cilmente domada"],
+      explanationEn: "James 3:6 calls the tongue a fire, a world of iniquity set among our members.", explanationEs: "Santiago 3:6 llama a la lengua un fuego, un mundo de maldad puesto entre nuestros miembros.", correct: 2 },
+    { textEn: "18. Proverbs 16:28 warns that a whisperer:", textEs: "18. Proverbios 16:28 advierte que el chismoso:",
+      optionsEn: ["builds up the church", "separates the best of friends", "speaks the truth boldly", "strengthens unity"], optionsEs: ["edifica la iglesia", "aparta los mejores amigos", "habla la verdad con audacia", "fortalece la unidad"],
+      explanationEn: "Proverbs 16:28 warns that a whisperer separates the best of friends.", explanationEs: "Proverbios 16:28 advierte que el chismoso aparta los mejores amigos.", correct: 1 },
+    { textEn: "19. What chiefly separates sinful gossip from legitimate confrontation is NOT the subject matter but the:", textEs: "19. Lo que separa principalmente el chisme pecaminoso de la confrontaci\u00f3n leg\u00edtima NO es el tema sino:",
+      optionsEn: ["time of day", "setting", "direction, motive, and goal", "number of people involved"], optionsEs: ["la hora del d\u00eda", "el lugar", "la direcci\u00f3n, el motivo y la meta", "el n\u00famero de personas involucradas"],
+      explanationEn: "What separates gossip from confrontation is not the subject but the direction, motive, and goal.", explanationEs: "Lo que separa el chisme de la confrontaci\u00f3n no es el tema sino la direcci\u00f3n, el motivo y la meta.", correct: 2 },
+    { textEn: "20. To carry a brother\u2019s sin sideways into idle conversation with those who can do nothing but think less of him is:", textEs: "20. Llevar el pecado de un hermano de lado, a la conversaci\u00f3n ociosa con quienes no pueden sino pensar menos de \u00e9l, es:",
+      optionsEn: ["wise counsel", "acceptable venting", "a prayer request", "gossip, however piously framed"], optionsEs: ["sabio consejo", "desahogo aceptable", "una petici\u00f3n de oraci\u00f3n", "chisme, por piadosamente que se enmarque"],
+      explanationEn: "To carry a brother's sin sideways to those who can only think less of him is gossip, however piously framed.", explanationEs: "Llevar el pecado de un hermano de lado a quienes solo pueden pensar menos de \u00e9l es chisme, por piadosamente que se enmarque.", correct: 3 },
+];
+
+// Short-answer (21-30). English complete; Spanish: Gate-1 draft (kw_es + modelEs filled).
+const kwQuestions = [
+    { textEn: "21. Name the pulpit sins the unit warns against and the conviction behind them.", textEs: "21. Nombre los pecados del p\u00falpito contra los que advierte la unidad y la convicci\u00f3n tras ellos.",
+      kw_en: ["twist", "lying", "manipulation", "weapon", "plagiarism", "conscience", "honest", "overflow"], kw_es: ["torcer", "mentira", "manipulacion", "arma", "plagio", "conciencia", "honestamente", "desbordamiento"],
+      modelEn: "To twist the Scriptures to serve our agenda rather than God's is a kind of lying in God's name, for the preacher speaks as though he speaks the words of God. The unit names a cluster of pulpit sins: manipulation that works the emotions to bypass the mind and conscience; using the pulpit as a weapon to attack a man who cannot answer; and plagiarism, preaching another man's labor as though it were your own. Other men's labors may be used, but honestly, as the overflow of one's own walk with God.", modelEs: "Torcer las Escrituras para servir a nuestra agenda en vez de a la de Dios es una especie de mentira en el nombre de Dios, pues el predicador habla como si hablara las palabras de Dios. La unidad nombra un racimo de pecados del p\u00falpito: la manipulaci\u00f3n que trabaja las emociones para esquivar la mente y la conciencia; el uso del p\u00falpito como arma para atacar a un hombre que no puede responder; y el plagio, predicar el trabajo de otro hombre como si fuera el suyo propio. Las labores de otros pueden usarse, pero honestamente, como el desbordamiento del propio andar con Dios." },
+    { textEn: "22. Explain 'you do not give a sermon, you preach from the soul.'", textEs: "22. Explique \u00abusted no da un serm\u00f3n, predica desde el alma\u00bb.",
+      kw_en: ["sermon", "soul", "performance", "stage", "applause", "fire", "gripped", "worship"], kw_es: ["sermon", "alma", "actuacion", "escenario", "aplauso", "encendido", "verdad", "barato"],
+      modelEn: "Preaching is not a performance to be admired but a man set on fire by the truth, occupying the space God has given him and speaking what he himself has first been gripped by. You do not give a sermon; you preach from the soul. The pulpit is not a stage, and the preacher who plays it for applause, reputation, or effect has traded a holy calling for a cheap one.", modelEs: "La predicaci\u00f3n no es una actuaci\u00f3n para ser admirada sino un hombre encendido por la verdad, ocupando el espacio que Dios le ha dado y hablando lo que \u00e9l mismo ha sido primero asido. Usted no da un serm\u00f3n; predica desde el alma. El p\u00falpito no es un escenario, y el predicador que lo toca por el aplauso, la reputaci\u00f3n o el efecto ha cambiado un llamamiento santo por uno barato." },
+    { textEn: "23. How does the unit define servant leadership, drawing on Mark 10 and the towel and basin?", textEs: "23. \u00bfC\u00f3mo define la unidad el liderazgo de siervo, apoy\u00e1ndose en Marcos 10 y la toalla y la palangana?",
+      kw_en: ["lord", "not so", "towel", "basin", "servant", "authority", "kneel", "serve"], kw_es: ["toalla", "palangana", "siervo", "autoridad", "arrodillo", "lavar", "ejemplos", "invertida"],
+      modelEn: "Jesus drew the sharpest line: the Gentiles lord authority over others, 'yet it shall not be so among you' (Mark 10:42-43), and Peter echoes it, leading not as lords but as examples (1 Peter 5:3). The model is the towel and the basin, the King who knelt to wash the feet of men He could have commanded. The pastor's authority is real but inverted from the world's: it is the authority of a servant, exercised for the good of those served. The world asks how many work for you; the Lord asks for how many you work.", modelEs: "Jes\u00fas traz\u00f3 la l\u00ednea m\u00e1s aguda: los gentiles se\u00f1orean autoridad sobre otros, \u00abmas no ser\u00e1 as\u00ed entre vosotros\u00bb (Marcos 10:42-43), y Pedro lo repite, dirigiendo no como se\u00f1ores sino como ejemplos (1 Pedro 5:3). El modelo es la toalla y la palangana, el Rey que se arrodill\u00f3 para lavar los pies de hombres a quienes pudo haber mandado. La autoridad del pastor es real pero invertida de la del mundo: es la autoridad de un siervo, ejercida para el bien de aquellos a quienes sirve. El mundo pregunta cu\u00e1ntos trabajan para ti; el Se\u00f1or pregunta para cu\u00e1ntos trabajas t\u00fa." },
+    { textEn: "24. What does impartiality require of a leader, and what does James 2:1 forbid?", textEs: "24. \u00bfQu\u00e9 exige la imparcialidad de un l\u00edder, y qu\u00e9 proh\u00edbe Santiago 2:1?",
+      kw_en: ["partiality", "favoritism", "wealthy", "widow", "justice", "blind", "status", "preference"], kw_es: ["acepcion", "personas", "adula", "viuda", "justicia", "ciega", "estatus", "preferencias"],
+      modelEn: "James 2:1 forbids holding the faith of Christ with partiality. The pastor who fawns over the wealthy donor and overlooks the poor widow, who bends the rules for friends and applies them strictly to those he dislikes, has betrayed the gospel of a God who shows no favoritism. Justice in the church must be blind to wealth, status, friendship, and the leader's own preferences. The same standard, patience, and grace must reach the influential and the inconvenient alike.", modelEs: "Santiago 2:1 proh\u00edbe sostener la fe de Cristo con acepci\u00f3n de personas. El pastor que adula al donante rico y pasa por alto a la viuda pobre, que dobla las reglas para sus amigos y las aplica con rigor a los que le disgustan, ha traicionado el evangelio de un Dios que no hace acepci\u00f3n de personas. La justicia en la iglesia debe ser ciega a la riqueza, el estatus, la amistad, y las preferencias propias del l\u00edder. La misma norma, paciencia y gracia deben alcanzar al influyente y al inconveniente por igual." },
+    { textEn: "25. Lay out the steps of Matthew 18 and the wisdom of its patient escalation.", textEs: "25. Exponga los pasos de Mateo 18 y la sabidur\u00eda de su paciente escalada.",
+      kw_en: ["private", "alone", "witnesses", "church", "escalation", "repentance", "circle", "outside"], kw_es: ["privada", "solas", "testigos", "iglesia", "escalada", "arrepentimiento", "circulo", "fuera"],
+      modelEn: "The Lord gave a precise, escalating process. First, a private word between the two alone, aimed at winning the brother\u2014the step most often skipped. If he will not hear, take one or two others as witnesses. If he still refuses, bring it to the church; and only if he refuses even the church is he treated as one outside it. Each stage gives room for repentance and widens the circle only as far as the brother's hardness requires, no farther.", modelEs: "El Se\u00f1or dio un proceso preciso y escalonado. Primero, una palabra privada entre los dos a solas, dirigida a ganar al hermano \u2014 el paso m\u00e1s a menudo omitido. Si no quiere o\u00edr, tome a uno o dos m\u00e1s como testigos. Si a\u00fan reh\u00fasa, ll\u00e9velo a la iglesia; y solo si reh\u00fasa aun a la iglesia es tratado como uno fuera de ella. Cada etapa da lugar al arrepentimiento y ampl\u00eda el c\u00edrculo solo hasta donde la dureza del hermano lo requiere, no m\u00e1s." },
+    { textEn: "26. State the three purposes of church discipline in their proper order.", textEs: "26. Exponga los tres prop\u00f3sitos de la disciplina de la iglesia en su orden propio.",
+      kw_en: ["restoration", "sinner", "purity", "leaven", "honor", "christ", "order", "goal"], kw_es: ["restauracion", "hermano", "pureza", "levadura", "honra", "cristo", "orden", "meta"],
+      modelEn: "From Matthew 18 and 1 Corinthians 5 the unit draws three purposes, to be held in this order: first, the restoration of the sinning brother, which is always the goal; second, the purity of the church, that a little leaven not corrupt the whole lump; and third, the honor of Christ's name before a watching world. A useful distinction governs the process: private sins are dealt with privately, while public or defiant sins may require the wider steps.", modelEs: "De Mateo 18 y 1 Corintios 5 la unidad saca tres prop\u00f3sitos, que han de sostenerse en este orden: primero, la restauraci\u00f3n del hermano que peca, que es siempre la meta; segundo, la pureza de la iglesia, para que un poco de levadura no corrompa toda la masa; y tercero, la honra del nombre de Cristo ante un mundo que observa. Una distinci\u00f3n \u00fatil rige el proceso: los pecados privados se tratan en privado, mientras que los p\u00fablicos o desafiantes pueden requerir los pasos m\u00e1s amplios." },
+    { textEn: "27. How is church discipline misused, and what spirit does Galatians 6:1 require?", textEs: "27. \u00bfC\u00f3mo se mal usa la disciplina de la iglesia, y qu\u00e9 esp\u00edritu exige G\u00e1latas 6:1?",
+      kw_en: ["misused", "weapon", "public", "pride", "control", "gentleness", "restore", "considering"], kw_es: ["arma", "publica", "orgullo", "silencia", "mansedumbre", "restaurad", "considerandote", "restauracion"],
+      modelEn: "Nothing in ministry is more easily turned into a weapon than discipline. It is misused when a leader skips the patient private steps and escalates straight to public exposure, when its engine is wounded pride rather than the sinner's good, or when it silences those who question leadership. A discipline that has lost the goal of restoration has ceased to be biblical discipline. Galatians 6:1 fixes the spirit forever: restore such a one in gentleness, considering yourself lest you also be tempted.", modelEs: "Nada en el ministerio se convierte m\u00e1s f\u00e1cilmente en un arma que la disciplina. Se mal usa cuando un l\u00edder omite los pacientes pasos privados y escala directo a la exposici\u00f3n p\u00fablica, cuando su motor es el orgullo herido en vez del bien del pecador, o cuando silencia a los que cuestionan el liderazgo. Una disciplina que ha perdido la meta de la restauraci\u00f3n ha dejado de ser disciplina b\u00edblica. G\u00e1latas 6:1 fija el esp\u00edritu para siempre: restaurad al tal con mansedumbre, consider\u00e1ndote a ti mismo, no sea que t\u00fa tambi\u00e9n seas tentado." },
+    { textEn: "28. Why does the unit treat gossip as a serious church-destroyer?", textEs: "28. \u00bfPor qu\u00e9 trata la unidad el chisme como un grave destructor de la iglesia?",
+      kw_en: ["tongue", "fire", "whisperer", "gossip", "unity", "small", "disguised", "concern"], kw_es: ["lengua", "fuego", "chismoso", "chisme", "unidad", "disolventes", "disfraza", "preocupacion"],
+      modelEn: "Scripture treats the tongue with a seriousness we rarely match: James calls it a fire, a world of iniquity, and Proverbs warns that a whisperer separates the best of friends. Gossip is among the chief solvents of Christian unity, and a congregation given to it will be eaten hollow from within while everyone professes love. It goes unrecognized precisely because it feels so small and is easily disguised as concern or a prayer request.", modelEs: "La Escritura trata la lengua con una seriedad que rara vez igualamos: Santiago la llama un fuego, un mundo de maldad, y Proverbios advierte que el chismoso aparta los mejores amigos. El chisme est\u00e1 entre los principales disolventes de la unidad cristiana, y una congregaci\u00f3n entregada a \u00e9l ser\u00e1 comida por dentro hasta quedar hueca mientras todos profesan amor. Pasa desapercibido precisamente porque se siente tan peque\u00f1o y se disfraza f\u00e1cilmente de preocupaci\u00f3n o petici\u00f3n de oraci\u00f3n." },
+    { textEn: "29. What is the pastor's double responsibility regarding the tongue?", textEs: "29. \u00bfCu\u00e1l es la doble responsabilidad del pastor respecto a la lengua?",
+      kw_en: ["traffic", "repeat", "source", "hearer", "confront", "flock", "pure", "door"], kw_es: ["traficar", "repetir", "fuente", "oidor", "confrontarlo", "grey", "pura", "puerta"],
+      modelEn: "The pastor bears a double responsibility. He must refuse to traffic in gossip himself\u2014never repeating what he need not repeat, never being the source or the eager hearer of a tale. And he must have the courage to confront it in the flock, gently stopping the whisper at his own door and teaching his people to do the same. A man cannot lead a pure-tongued church while indulging an impure tongue in private.", modelEs: "El pastor lleva una doble responsabilidad. Debe rehusar traficar con el chisme \u00e9l mismo \u2014 nunca repitiendo lo que no necesita repetir, nunca siendo la fuente o el oidor ansioso de un cuento. Y debe tener el valor de confrontarlo en la grey, deteniendo con suavidad el susurro en su propia puerta y ense\u00f1ando a su gente a hacer lo mismo. Un hombre no puede dirigir una iglesia de lengua pura mientras consiente una lengua impura en privado." },
+    { textEn: "30. Explain the vital distinction between sinful gossip and legitimate confrontation of sin.", textEs: "30. Explique la distinci\u00f3n vital entre el chisme pecaminoso y la confrontaci\u00f3n leg\u00edtima del pecado.",
+      kw_en: ["direction", "motive", "goal", "about", "to", "matthew", "restore", "wound"], kw_es: ["direccion", "motivo", "meta", "acerca", "persona", "canales", "restauracion", "obediencia"],
+      modelEn: "The difference is not the subject matter, for both may concern another's fault; it lies in direction, motive, and goal. Gossip talks about a person to those who are neither part of the problem nor the solution; biblical confrontation goes to the person, through the channels of Matthew 18. Gossip aims to wound or to elevate the teller; discipline aims at the offender's restoration. To carry a sin to the person, or through the proper steps, is obedience; to carry it sideways into idle conversation is gossip, however piously framed.", modelEs: "La diferencia no es el tema, pues ambos pueden tratar de la falta de otro; yace en la direcci\u00f3n, el motivo y la meta. El chisme habla acerca de una persona a quienes no son ni parte del problema ni de la soluci\u00f3n; la confrontaci\u00f3n b\u00edblica va a la persona, por los canales de Mateo 18. El chisme busca herir o elevar al que habla; la disciplina busca la restauraci\u00f3n del ofensor. Llevar el pecado a la persona, o por los pasos debidos, es obediencia; llevarlo de lado a la conversaci\u00f3n ociosa es chisme, por piadosamente que se enmarque." },
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 7 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 7 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y vuelva a intentar la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEthicsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

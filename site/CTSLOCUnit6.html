@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Life of Christ &mdash; Unit 6</title>
+<style>
+:root{
+  --ink:#241c12; --paper:#f7f1e4; --card:#fffdf8; --line:#d8ccb2;
+  --accent:#7a3b1e; --accent2:#9c6b2f; --gold:#fbf3d6; --goldln:#caa94e;
+  --good:#2f6b3a; --bad:#9b2c2c; --muted:#6c6150;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;line-height:1.6;}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+header.site{background:var(--accent);color:#f6ecd8;padding:18px 0;border-bottom:4px solid var(--goldln);}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:0;}
+header.site h1{font-size:1.15rem;margin:0;font-weight:600;letter-spacing:.2px;}
+header.site .sub{font-size:.78rem;opacity:.85;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+.langbtn{font-family:system-ui,sans-serif;font-size:.8rem;background:#f6ecd8;color:var(--accent);
+  border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600;}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 4px;
+  font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);}
+.badge{background:var(--gold);border:1px solid var(--goldln);border-radius:14px;padding:3px 10px;color:#6a531c;}
+.epigraph{font-style:italic;color:var(--accent2);border-left:3px solid var(--goldln);
+  padding:6px 0 6px 14px;margin:16px 0;font-size:.98rem;}
+h2.sec{font-size:1.25rem;color:var(--accent);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin:34px 0 14px;}
+article p{margin:0 0 14px;}
+article b{color:var(--accent);}
+.v{color:#3a4a2c;}
+.illo{background:#fbf6ea;border-left:3px solid var(--goldln);padding:10px 14px;border-radius:4px;}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:14px 0;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);}
+.qn{font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;color:var(--accent2);
+  text-transform:uppercase;letter-spacing:.6px;}
+.qp{margin:6px 0 10px;font-weight:600;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:9px 12px;margin:6px 0;cursor:pointer;font:inherit;color:inherit;}
+.opt:hover{border-color:var(--accent2);}
+.opt .lt{font-weight:700;color:var(--accent2);margin-right:8px;}
+.opt.correct{background:#e9f3e8;border-color:var(--good);}
+.opt.wrong{background:#f6e6e4;border-color:var(--bad);}
+.opt:disabled{cursor:default;opacity:1;}
+.expl{font-size:.9rem;color:var(--muted);margin:8px 2px 0;display:none;}
+.expl.show{display:block;}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:6px;padding:10px;
+  font:inherit;background:#fff;resize:vertical;}
+.btn{font-family:system-ui,sans-serif;font-weight:600;border:none;border-radius:6px;padding:9px 16px;
+  cursor:pointer;font-size:.9rem;}
+.btn.primary{background:var(--accent);color:#f6ecd8;}
+.btn.ghost{background:#efe6d2;color:var(--accent);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.sa-res{margin-top:10px;font-family:system-ui,sans-serif;font-size:.88rem;display:none;}
+.sa-res.show{display:block;}
+.sa-verdict{font-weight:700;}
+.sa-verdict.pass{color:var(--good);} .sa-verdict.soft{color:var(--accent2);}
+.model{background:var(--gold);border:1px solid var(--goldln);border-radius:6px;padding:10px 12px;margin-top:8px;}
+.model .ml{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:#6a531c;}
+.foot{margin-top:30px;border-top:2px solid var(--line);padding-top:18px;}
+.status{font-family:system-ui,sans-serif;font-size:.9rem;margin:10px 0;}
+.status.ok{color:var(--good);} .status.warn{color:var(--accent2);} .status.lock{color:var(--bad);}
+.modal{position:fixed;inset:0;background:rgba(36,28,18,.62);display:flex;align-items:center;
+  justify-content:center;padding:18px;z-index:50;}
+.modal .box{background:var(--card);border-radius:10px;max-width:420px;width:100%;padding:22px;
+  border-top:5px solid var(--goldln);}
+.modal h3{margin:0 0 6px;color:var(--accent);}
+.modal label{display:block;font-family:system-ui,sans-serif;font-size:.82rem;margin:12px 0 4px;color:var(--muted);}
+.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit;}
+.hide{display:none !important;}
+.next{display:inline-block;margin-top:12px;background:var(--good);color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:6px;font-family:system-ui,sans-serif;font-weight:600;}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:2px 0 18px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);margin-right:3px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:var(--card);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600;line-height:1;}
+.unitnav a:hover{border-color:var(--accent2);color:var(--accent2);}
+.unitnav a.active{background:var(--accent);color:#f6ecd8;border-color:var(--accent);}
+.unitnav a.done{background:var(--gold);border-color:var(--goldln);color:#6a531c;}
+.unitnav a.cert{min-width:auto;padding:0 12px;background:#efe6d2;}
+html[lang="es"] .en-lbl{display:none}html[lang="en"] .es-lbl{display:none}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site">
+  <div class="wrap">
+    <div><h1 id="t-title">The Life of Christ</h1><div class="sub" id="t-unit">Unit 6 · The Road to Jerusalem</div></div>
+    <button class="langbtn" id="langBtn" type="button">Espa&ntilde;ol</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <span id="t-greet"></span>
+    <span class="badge" id="t-track"></span>
+  </div>
+
+     <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+     <span class="nl"><span class="en-lbl">Units</span><span class="es-lbl">Unidades</span></span>
+     <a data-u="1" href="CTSLOCUnit1.html">1</a>
+     <a data-u="2" href="CTSLOCUnit2.html">2</a>
+     <a data-u="3" href="CTSLOCUnit3.html">3</a>
+     <a data-u="4" href="CTSLOCUnit4.html">4</a>
+     <a data-u="5" href="CTSLOCUnit5.html">5</a>
+     <a data-u="6" href="CTSLOCUnit6.html" class="active">6</a>
+     <a data-u="7" href="CTSLOCUnit7.html">7</a>
+     <a data-u="8" href="CTSLOCUnit8.html">8</a>
+     <a data-u="9" href="CTSLOCUnit9.html">9</a>
+     <a data-u="10" href="CTSLOCUnit10.html">10</a>
+     <a class="cert" href="CTSLOCCertificate.html"><span class="en-lbl">Certificate</span><span class="es-lbl">Certificado</span></a>
+   </nav>
+   <script>(function(){try{var raw=localStorage.getItem("cts_loc_progress")||"{}";var done=JSON.parse(raw);var nav=document.getElementById("unitnav");if(!nav)return;var a=nav.querySelectorAll("a[data-u]");for(var i=0;i<a.length;i++){var u=a[i].getAttribute("data-u");if(done[u]&&a[i].className.indexOf("active")<0){a[i].className=(a[i].className+" done").trim();}}}catch(e){}})();</script>
+
+   <div class="epigraph" id="epigraph"></div>
+
+  <article>
+    <div id="teach-en"><h3 style="color:var(--accent);margin:0 0 4px">The Road to Jerusalem: Grace and the Greater Sign</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">Setting His Face to Jerusalem, the Parables of Grace, and the Raising of Lazarus</p>
+<p><b>1. He Set His Face to Jerusalem</b></p>
+<p>The turning point of Unit 5 now becomes a journey. Luke marks it with a solemn sentence: <span class="v">"when the time had come for Him to be received up, He steadfastly set His face to go to Jerusalem"</span> (Luke 9:51). He did not drift toward the cross; He walked toward it with open eyes, deliberately, knowing what waited. From here the long road of Luke's travel narrative unfolds, and along it Jesus teaches the heart of the gospel.</p>
+<p>He also made plain that this road is no easy one. To a man who said he would follow Him anywhere, Jesus answered, <span class="v">"Foxes have holes and birds of the air have nests, but the Son of Man has nowhere to lay His head"</span> (Luke 9:58). To another He said, <span class="v">"Let the dead bury their own dead, but you go and preach the kingdom of God"</span> (Luke 9:60). And to a third: <span class="v">"No one, having put his hand to the plow, and looking back, is fit for the kingdom of God"</span> (Luke 9:62). To follow the One who is going to a cross is no light thing; it asks the whole man, and it does not look back.</p>
+<p>The journey's very first step taught mercy. A Samaritan village would not receive Him, and James and John wanted to call down fire from heaven to consume it; but He turned and rebuked them, for the Son of Man <span class="v">"did not come to destroy men's lives but to save them"</span> (Luke 9:55–56). The road to the cross is paved with mercy, not vengeance.</p>
+<p><b>2. Who Is My Neighbor? The Good Samaritan</b></p>
+<p>A lawyer stood up to test Him: <span class="v">"Teacher, what shall I do to inherit eternal life?"</span> (Luke 10:25). Jesus turned him to the law, and the man recited it well — love God with all your heart, and your neighbor as yourself. But then, <span class="v">"wanting to justify himself,"</span> he asked, <span class="v">"And who is my neighbor?"</span> (Luke 10:29). It is the question of a man looking for the edge of his duty — how few may I love and still be safe?</p>
+<p>So Jesus told of a man beaten by robbers and left half dead on the Jericho road. A priest saw him and passed by on the other side; a Levite did the same. Then a Samaritan — the despised half-breed, the very last man a Jewish lawyer would have chosen — came, <span class="v">"and when he saw him, he had compassion"</span> (Luke 10:33). He bound the wounds, carried the man to an inn, and paid for his care. Then Jesus turned the lawyer's question inside out. The man had asked, <span class="v">"Who is my neighbor?"</span> — whom am I obliged to love? Jesus asked instead, <span class="v">"Which of these three do you think was neighbor to him who fell among the thieves?"</span> (Luke 10:36). The answer could only be, <span class="v">"He who showed mercy."</span> — <span class="v">"Go and do likewise"</span> (Luke 10:37). Do not ask who qualifies as your neighbor; be a neighbor, and let your mercy cross every line, as the Samaritan crossed the deepest line of all.</p>
+<p>Yet love for the neighbor must spring from love for the Lord. In the very next scene Martha was <span class="v">"distracted with much serving"</span> while her sister Mary sat at Jesus' feet to hear His word. Martha complained, but Jesus answered, <span class="v">"Martha, Martha, you are worried and troubled about many things. But one thing is needed,"</span> and said Mary had chosen <span class="v">"that good part, which will not be taken away from her"</span> (Luke 10:41–42). The mercy of the Samaritan and the stillness of Mary belong together: true service flows from sitting at the feet of Jesus.</p>
+<p><b>3. Lost and Found: The Heart of Grace</b></p>
+<p>The Pharisees grumbled: <span class="v">"This Man receives sinners and eats with them"</span> (Luke 15:2). In answer Jesus told three parables of the lost being found. A shepherd leaves the ninety-nine and goes after the one lost sheep <span class="v">"until he finds it,"</span> and comes home rejoicing (Luke 15:4–6). A woman sweeps the house and searches until she finds her one lost coin, and calls her friends to rejoice (Luke 15:8–9). And the point of both: <span class="v">"there is joy in the presence of the angels of God over one sinner who repents"</span> (Luke 15:10).</p>
+<p>Then comes the crown of the three. A younger son demanded his inheritance, went to a far country, and wasted it all, until he was feeding pigs and longing for their food. <span class="v">"But when he came to himself"</span> (Luke 15:17) he resolved, <span class="v">"I will arise and go to my father,"</span> rehearsing his confession. And here the parable breaks every expectation: <span class="v">"when he was still a great way off, his father saw him and had compassion, and ran and fell on his neck and kissed him"</span> (Luke 15:20). In that world a grown man of standing did not run; the father's running is undignified, scandalous grace. Before the boy could finish his speech the father called for the best robe, a ring, sandals, the fatted calf — not a hired servant's place, but a son's. Grace does not wait at the door with folded arms; it runs to meet the returning sinner.</p>
+<p>But the story does not end there. The elder brother, dutiful and cold, refused to go in: <span class="v">"these many years I have been serving you... yet you never gave me a young goat"</span> (Luke 15:29). He had stayed home and still missed the father's heart, resenting the grace shown to his brother. He is the grumbling Pharisee, and the parable is left open — the father pleads with him, but we never learn whether he came in. The same heart appears in another parable: a Pharisee thanked God he was not like other men, while a tax collector beat his breast and cried, <span class="v">"God, be merciful to me a sinner!"</span> Jesus said <i>this</i> man went home justified rather than the other, <span class="v">"for everyone who exalts himself will be humbled, and he who humbles himself will be exalted"</span> (Luke 18:13–14).</p>
+<p><b>4. I Am the Resurrection and the Life</b></p>
+<p>Then, in Bethany, came the greatest sign of all. Lazarus, whom Jesus loved, fell sick; yet when word came, Jesus stayed two more days where He was (John 11:6), so that by the time He arrived Lazarus had been four days dead. Martha met Him: <span class="v">"Lord, if You had been here, my brother would not have died."</span> Jesus answered with the fifth great I AM: <span class="v">"I am the resurrection and the life. He who believes in Me, though he may die, he shall live"</span> (John 11:25). He does not merely grant resurrection; He is it. Martha answered with her own confession: <span class="v">"Yes, Lord, I believe that You are the Christ, the Son of God"</span> (John 11:27). He had let Lazarus die on purpose, He told the disciples, <span class="v">"that you may believe"</span> (John 11:15); and at the tomb He reminded Martha, <span class="v">"Did I not say to you that if you would believe you would see the glory of God?"</span> (John 11:40).</p>
+<p>At the tomb came the shortest verse in Scripture: <span class="v">"Jesus wept"</span> (John 11:35). He knew He would raise Lazarus within the hour, and still He wept — real tears at a real grave. As God He is the resurrection; as man He weeps with the grieving. Then He cried with a loud voice, <span class="v">"Lazarus, come forth!"</span> (John 11:43), and the dead man came out, still bound in his graveclothes. <span class="v">"Loose him, and let him go."</span></p>
+<p>And here is the terrible irony. Many who saw it believed; but the chief priests and Pharisees, more alarmed than ever, <span class="v">"plotted from that day on to put Him to death"</span> (John 11:53) — and even planned to kill Lazarus too (John 12:10). The greatest sign of life became the trigger of the plot of death. The One who raises the dead walked on, steadily, toward His own grave.</p>
+<p><b>5. The Heart of God on the Road to a Cross</b></p>
+<p>The road to Jerusalem reveals two things at once. It shows the heart of God — a grace that seeks the lost sheep, sweeps for the lost coin, and runs down the road to a returning son, and that justifies the tax collector who cries for mercy. And it shows the power of the Son — the resurrection and the life, who calls the dead from the tomb. Both press straight toward the cross: the grace will be bought there, and the sign of Lazarus's life will seal the decision to kill Him.</p>
+<p>And the divine/human pattern stands plain. He who is the resurrection wept at a grave; He who receives sinners set His face to die for them. So the road asks of us what it asked then: come home like the prodigal, cry for mercy like the tax collector, and believe in the One who is the resurrection and the life. The road runs toward a grave, but it is the road of life.</p></div>
+    <div id="teach-es" class="hide"><h3 style="color:var(--accent);margin:0 0 4px">El camino a Jerusal&eacute;n: la gracia y la se&ntilde;al mayor</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">Afirmar el rostro hacia Jerusal&eacute;n, las par&aacute;bolas de la gracia y la resurrecci&oacute;n de L&aacute;zaro</p>
+
+<p><b>1. Afirm&oacute; su rostro hacia Jerusal&eacute;n</b></p>
+<p>El punto de giro de la Unidad 5 ahora se vuelve un viaje. Lucas lo marca con una frase solemne: <span class="v">&ldquo;cuando se cumpli&oacute; el tiempo en que hab&iacute;a de ser recibido arriba, afirm&oacute; su rostro para ir a Jerusal&eacute;n&rdquo; (Lucas 9:51).</span> No fue a la deriva hacia la cruz; camin&oacute; hacia ella con los ojos abiertos, deliberadamente, sabiendo lo que le esperaba. Desde aqu&iacute; se despliega el largo camino del relato del viaje de Lucas, y por &eacute;l Jes&uacute;s ense&ntilde;a el coraz&oacute;n del evangelio.</p>
+<p>Tambi&eacute;n dej&oacute; claro que este camino no es f&aacute;cil. A uno que dijo que le seguir&iacute;a a dondequiera, Jes&uacute;s respondi&oacute;: <span class="v">&ldquo;Las zorras tienen guaridas, y las aves de los cielos nidos; mas el Hijo del Hombre no tiene d&oacute;nde recostar su cabeza&rdquo; (Lucas 9:58).</span> A otro le dijo: <span class="v">&ldquo;Deja que los muertos entierren a sus muertos; y t&uacute; ve, anuncia el reino de Dios&rdquo; (Lucas 9:60).</span> Y a un tercero: <span class="v">&ldquo;Ninguno que poniendo su mano en el arado mira hacia atr&aacute;s, es apto para el reino de Dios&rdquo; (Lucas 9:62).</span> Seguir al que va a una cruz no es cosa ligera; pide al hombre entero, y no mira atr&aacute;s.</p>
+<p>El primer paso mismo del viaje ense&ntilde;&oacute; misericordia. Una aldea de samaritanos no quiso recibirle, y Jacobo y Juan quer&iacute;an hacer descender fuego del cielo para consumirla; pero &Eacute;l se volvi&oacute; y los reprendi&oacute;, porque el Hijo del Hombre <span class="v">&ldquo;no ha venido para perder las almas de los hombres, sino para salvarlas&rdquo; (Lucas 9:55&ndash;56).</span> El camino a la cruz est&aacute; empedrado de misericordia, no de venganza.</p>
+
+<p><b>2. &iquest;Qui&eacute;n es mi pr&oacute;jimo? El buen samaritano</b></p>
+<p>Un int&eacute;rprete de la ley se levant&oacute; para probarle: <span class="v">&ldquo;Maestro, &iquest;haciendo qu&eacute; cosa heredar&eacute; la vida eterna?&rdquo; (Lucas 10:25).</span> Jes&uacute;s lo remiti&oacute; a la ley, y el hombre la recit&oacute; bien &mdash; amar a Dios con todo el coraz&oacute;n, y al pr&oacute;jimo como a s&iacute; mismo. Pero entonces, <span class="v">&ldquo;queriendo justificarse a s&iacute; mismo,&rdquo;</span> pregunt&oacute;: <span class="v">&ldquo;&iquest;Y qui&eacute;n es mi pr&oacute;jimo?&rdquo; (Lucas 10:29).</span> Es la pregunta de quien busca el l&iacute;mite de su deber &mdash; &iquest;a cu&aacute;n pocos puedo amar y a&uacute;n estar a salvo?</p>
+<p>As&iacute; que Jes&uacute;s habl&oacute; de un hombre asaltado por ladrones y dejado medio muerto en el camino de Jeric&oacute;. Un sacerdote lo vio y pas&oacute; de largo por el otro lado; un levita hizo lo mismo. Entonces un samaritano &mdash; el mestizo despreciado, el &uacute;ltimo hombre que un int&eacute;rprete jud&iacute;o habr&iacute;a escogido &mdash; vino, <span class="v">&ldquo;y vi&eacute;ndole, fue movido a misericordia&rdquo; (Lucas 10:33).</span> Vend&oacute; sus heridas, lo llev&oacute; a un mes&oacute;n y pag&oacute; su cuidado. Luego Jes&uacute;s volvi&oacute; la pregunta del rev&eacute;s. El hombre hab&iacute;a preguntado: <span class="v">&ldquo;&iquest;Qui&eacute;n es mi pr&oacute;jimo?&rdquo;</span> &mdash; &iquest;a qui&eacute;n estoy obligado a amar? Jes&uacute;s pregunt&oacute; en cambio: <span class="v">&ldquo;&iquest;Qui&eacute;n, pues, de estos tres te parece que fue el pr&oacute;jimo del que cay&oacute; en manos de los ladrones?&rdquo; (Lucas 10:36).</span> La respuesta solo pod&iacute;a ser: <span class="v">&ldquo;El que us&oacute; de misericordia.&rdquo;</span> &mdash; <span class="v">&ldquo;Ve, y haz t&uacute; lo mismo&rdquo; (Lucas 10:37).</span> No preguntes qui&eacute;n califica como tu pr&oacute;jimo; s&eacute; un pr&oacute;jimo, y deja que tu misericordia cruce toda l&iacute;nea, como el samaritano cruz&oacute; la m&aacute;s honda de todas.</p>
+<p>Sin embargo, el amor al pr&oacute;jimo debe brotar del amor al Se&ntilde;or. En la escena siguiente Marta estaba <span class="v">&ldquo;distra&iacute;da con muchos quehaceres&rdquo;</span> mientras su hermana Mar&iacute;a se sentaba a los pies de Jes&uacute;s a o&iacute;r su palabra. Marta se quej&oacute;, pero Jes&uacute;s respondi&oacute;: <span class="v">&ldquo;Marta, Marta, afanada y turbada est&aacute;s con muchas cosas; pero una cosa es necesaria,&rdquo;</span> y dijo que Mar&iacute;a hab&iacute;a escogido <span class="v">&ldquo;la buena parte, la cual no le ser&aacute; quitada&rdquo; (Lucas 10:41&ndash;42).</span> La misericordia del samaritano y la quietud de Mar&iacute;a van juntas: el verdadero servicio brota de sentarse a los pies de Jes&uacute;s.</p>
+
+<p><b>3. Perdido y hallado: el coraz&oacute;n de la gracia</b></p>
+<p>Los fariseos murmuraban: <span class="v">&ldquo;Este a los pecadores recibe, y con ellos come&rdquo; (Lucas 15:2).</span> En respuesta, Jes&uacute;s cont&oacute; tres par&aacute;bolas de lo perdido que es hallado. Un pastor deja las noventa y nueve y va tras la oveja perdida <span class="v">&ldquo;hasta encontrarla,&rdquo;</span> y vuelve gozoso (Lucas 15:4&ndash;6). Una mujer barre la casa y busca hasta hallar su moneda perdida, y llama a sus amigas para gozarse (Lucas 15:8&ndash;9). Y el punto de ambas: <span class="v">&ldquo;hay gozo delante de los &aacute;ngeles de Dios por un pecador que se arrepiente&rdquo; (Lucas 15:10).</span></p>
+<p>Luego viene la corona de las tres. Un hijo menor exigi&oacute; su herencia, se fue a una provincia apartada y lo malgast&oacute; todo, hasta que apacentaba cerdos y anhelaba su comida. <span class="v">&ldquo;Y volviendo en s&iacute;&rdquo; (Lucas 15:17),</span> resolvi&oacute;: <span class="v">&ldquo;Me levantar&eacute; e ir&eacute; a mi padre,&rdquo;</span> ensayando su confesi&oacute;n. Y aqu&iacute; la par&aacute;bola rompe toda expectativa: <span class="v">&ldquo;cuando a&uacute;n estaba lejos, lo vio su padre, y fue movido a misericordia, y corri&oacute;, y se ech&oacute; sobre su cuello, y le bes&oacute;&rdquo; (Lucas 15:20).</span> En aquel mundo un hombre adulto de posici&oacute;n no corr&iacute;a; el correr del padre es gracia indigna, escandalosa. Antes de que el muchacho terminara su discurso, el padre mand&oacute; traer el mejor vestido, un anillo, calzado, el becerro gordo &mdash; no el lugar de un jornalero, sino el de un hijo. La gracia no espera en la puerta con los brazos cruzados; corre al encuentro del pecador que vuelve.</p>
+<p>Pero la historia no termina ah&iacute;. El hermano mayor, cumplidor y fr&iacute;o, no quiso entrar: <span class="v">&ldquo;He aqu&iacute;, tantos a&ntilde;os te sirvo... y nunca me has dado un cabrito&rdquo; (Lucas 15:29).</span> Se hab&iacute;a quedado en casa y aun as&iacute; perdi&oacute; el coraz&oacute;n del padre, resintiendo la gracia mostrada a su hermano. Es el fariseo que murmura, y la par&aacute;bola queda abierta &mdash; el padre le ruega, pero nunca sabemos si entr&oacute;. El mismo coraz&oacute;n aparece en otra par&aacute;bola: un fariseo daba gracias a Dios de no ser como los dem&aacute;s, mientras un publicano se golpeaba el pecho y clamaba: <span class="v">&ldquo;Dios, s&eacute; propicio a m&iacute;, pecador.&rdquo;</span> Jes&uacute;s dijo que este descendi&oacute; justificado antes que el otro, <span class="v">&ldquo;porque cualquiera que se enaltece, ser&aacute; humillado; y el que se humilla, ser&aacute; enaltecido&rdquo; (Lucas 18:13&ndash;14).</span></p>
+
+<p><b>4. Yo soy la resurrecci&oacute;n y la vida</b></p>
+<p>Entonces, en Betania, vino la mayor se&ntilde;al de todas. L&aacute;zaro, a quien Jes&uacute;s amaba, enferm&oacute;; pero cuando lleg&oacute; el aviso, Jes&uacute;s se qued&oacute; dos d&iacute;as m&aacute;s donde estaba (Juan 11:6), de modo que al llegar, L&aacute;zaro llevaba cuatro d&iacute;as muerto. Marta sali&oacute; a su encuentro: <span class="v">&ldquo;Se&ntilde;or, si hubieses estado aqu&iacute;, mi hermano no habr&iacute;a muerto.&rdquo;</span> Jes&uacute;s respondi&oacute; con el quinto gran YO SOY: <span class="v">&ldquo;Yo soy la resurrecci&oacute;n y la vida; el que cree en m&iacute;, aunque est&eacute; muerto, vivir&aacute;&rdquo; (Juan 11:25).</span> No solo concede la resurrecci&oacute;n; &Eacute;l es la resurrecci&oacute;n. Marta respondi&oacute; con su propia confesi&oacute;n: <span class="v">&ldquo;S&iacute;, Se&ntilde;or; yo he cre&iacute;do que t&uacute; eres el Cristo, el Hijo de Dios&rdquo; (Juan 11:27).</span> Hab&iacute;a dejado morir a L&aacute;zaro a prop&oacute;sito, dijo a los disc&iacute;pulos, <span class="v">&ldquo;para que cre&aacute;is&rdquo; (Juan 11:15);</span> y junto al sepulcro record&oacute; a Marta: <span class="v">&ldquo;&iquest;No te he dicho que si crees, ver&aacute;s la gloria de Dios?&rdquo; (Juan 11:40).</span></p>
+<p>Junto al sepulcro vino el vers&iacute;culo m&aacute;s corto de la Escritura: <span class="v">&ldquo;Jes&uacute;s llor&oacute;&rdquo; (Juan 11:35).</span> Sab&iacute;a que levantar&iacute;a a L&aacute;zaro dentro de una hora, y aun as&iacute; llor&oacute; &mdash; l&aacute;grimas reales ante una tumba real. Como Dios es la resurrecci&oacute;n; como hombre llora con los que lloran. Entonces clam&oacute; a gran voz: <span class="v">&ldquo;&iexcl;L&aacute;zaro, ven fuera!&rdquo; (Juan 11:43),</span> y el muerto sali&oacute;, a&uacute;n atado en sus vendas. <span class="v">&ldquo;Desatadle, y dejadle ir.&rdquo;</span></p>
+<p>Y aqu&iacute; est&aacute; la iron&iacute;a terrible. Muchos que lo vieron creyeron; pero los principales sacerdotes y los fariseos, m&aacute;s alarmados que nunca, <span class="v">&ldquo;desde aquel d&iacute;a acordaron matarle&rdquo; (Juan 11:53)</span> &mdash; y aun pensaron matar tambi&eacute;n a L&aacute;zaro (Juan 12:10). La mayor se&ntilde;al de vida se volvi&oacute; el detonante del complot de muerte. El que levanta a los muertos sigui&oacute; caminando, firme, hacia su propia tumba.</p>
+
+<p><b>5. El coraz&oacute;n de Dios camino de una cruz</b></p>
+<p>El camino a Jerusal&eacute;n revela dos cosas a la vez. Muestra el coraz&oacute;n de Dios &mdash; una gracia que busca la oveja perdida, barre por la moneda perdida y corre camino abajo hacia el hijo que vuelve, y que justifica al publicano que clama por misericordia. Y muestra el poder del Hijo &mdash; la resurrecci&oacute;n y la vida, que llama a los muertos de la tumba. Ambas cosas empujan derecho hacia la cruz: la gracia ser&aacute; comprada all&iacute;, y la se&ntilde;al de la vida de L&aacute;zaro sellar&aacute; la decisi&oacute;n de matarle.</p>
+<p>Y el patr&oacute;n divino/humano est&aacute; claro. El que es la resurrecci&oacute;n llor&oacute; ante una tumba; el que recibe a los pecadores puso su rostro para morir por ellos. As&iacute; que el camino nos pide lo que pidi&oacute; entonces: vuelve a casa como el hijo pr&oacute;digo, clama por misericordia como el publicano, y cree en el que es la resurrecci&oacute;n y la vida. El camino lleva a una tumba, pero es el camino de la vida.</p>
+</div>
+  </article>
+
+  <h2 class="sec" id="t-mc">Multiple Choice</h2>
+  <div id="mcWrap"></div>
+
+  <h2 class="sec" id="t-sa">Short Answer</h2>
+  <p class="status" id="t-saNote"></p>
+  <div id="saWrap"></div>
+
+  <div class="foot">
+    <button class="btn primary" id="completeBtn" type="button"></button>
+    <div class="status" id="statusMsg"></div>
+    <a class="next hide" id="nextLink" href="CTSLOCUnit7.html"></a>
+  </div>
+</div>
+
+<div class="modal hide" id="reg">
+  <div class="box">
+    <h3 id="m-h">Welcome</h3>
+    <p id="m-p" style="font-size:.9rem;color:var(--muted);margin:0"></p>
+    <label id="m-nl">Your name</label>
+    <input id="m-name" type="text" autocomplete="name" aria-label="m name">
+    <label id="m-tl">Track</label>
+    <select id="m-track" aria-label="m track">
+      <option value="cert">Certificate</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div style="margin-top:16px"><button class="btn primary" id="m-go" type="button">Begin</button></div>
+  </div>
+</div>
+
+<script>
+var CFG={course:'loc',unit:6,totalUnits:10,progressKey:'cts_loc_progress',
+  next:'CTSLOCUnit7.html',cert:'CTSLOCCertificate.html',lockKey:'cts_loc_u6_lock',showReg:false};
+var DATA={"mc": [{"en": "Luke marks the start of the journey: “He steadfastly set His face to go to...”", "es": "Lucas marca el inicio del viaje: “afirmó su rostro para ir a...”", "oen": ["Egypt", "Galilee", "Jerusalem", "the wilderness"], "oes": ["Egipto", "Galilea", "Jerusalén", "el desierto"], "c": 23, "xen": "Luke 9:51.", "xes": "Lucas 9:51."}, {"en": "To a would-be follower Jesus said, “Foxes have holes... but the Son of Man has...”", "es": "A uno que quería seguirle Jesús dijo: “Las zorras tienen guaridas... mas el Hijo del Hombre...”", "oen": ["nowhere to lay His head", "a great house", "many servants", "a throne in Galilee"], "oes": ["no tiene dónde recostar su cabeza", "una gran casa", "muchos siervos", "un trono en Galilea"], "c": 28, "xen": "Luke 9:58 — following Him is costly.", "xes": "Lucas 9:58 — seguirle es costoso."}, {"en": "When a Samaritan village rejected Him and James and John wanted fire from heaven, Jesus:", "es": "Cuando una aldea samaritana lo rechazó y Jacobo y Juan querían fuego del cielo, Jesús:", "oen": ["praised their zeal", "sent the fire", "wept and left", "rebuked them — He came to save lives, not destroy them"], "oes": ["alabó su celo", "envió el fuego", "lloró y se fue", "los reprendió — vino a salvar vidas, no a destruirlas"], "c": 38, "xen": "Luke 9:55–56 — mercy, not vengeance.", "xes": "Lucas 9:55–56 — misericordia, no venganza."}, {"en": "The lawyer's question that prompted the Good Samaritan was:", "es": "La pregunta del intérprete que provocó al buen samaritano fue:", "oen": ["“How shall I pray?”", "“And who is my neighbor?”", "“When is the kingdom?”", "“Who is greatest?”"], "oes": ["“¿Cómo he de orar?”", "“¿Y quién es mi prójimo?”", "“¿Cuándo es el reino?”", "“¿Quién es el mayor?”"], "c": 43, "xen": "Luke 10:29 — he wanted to justify himself.", "xes": "Lucas 10:29 — quería justificarse."}, {"en": "In the parable, the ones who passed by the wounded man were:", "es": "En la parábola, los que pasaron de largo junto al herido fueron:", "oen": ["a priest and a Levite", "a Pharisee and a scribe", "two soldiers", "two merchants"], "oes": ["un sacerdote y un levita", "un fariseo y un escriba", "dos soldados", "dos mercaderes"], "c": 49, "xen": "Luke 10:31–32.", "xes": "Lucas 10:31–32."}, {"en": "The one who helped the wounded man was:", "es": "El que ayudó al herido fue:", "oen": ["a fellow Jew", "a Samaritan, moved with compassion", "a Roman", "the innkeeper"], "oes": ["un compatriota judío", "un samaritano, movido a misericordia", "un romano", "el mesonero"], "c": 57, "xen": "Luke 10:33.", "xes": "Lucas 10:33."}, {"en": "Jesus reframed the lawyer's question to ask:", "es": "Jesús replanteó la pregunta del intérprete para preguntar:", "oen": ["who deserves help", "who is righteous", "which one proved to be a neighbor", "who broke the law"], "oes": ["quién merece ayuda", "quién es justo", "cuál de ellos resultó ser el prójimo", "quién quebrantó la ley"], "c": 65, "xen": "Luke 10:36 — be a neighbor, do likewise.", "xes": "Lucas 10:36 — sé prójimo, haz lo mismo."}, {"en": "While Martha was distracted with serving, the one needful thing was chosen by:", "es": "Mientras Marta se distraía sirviendo, la única cosa necesaria fue escogida por:", "oen": ["Martha", "the disciples", "no one", "Mary, who sat at His feet to hear His word"], "oes": ["Marta", "los discípulos", "nadie", "María, que se sentó a sus pies a oír su palabra"], "c": 73, "xen": "Luke 10:42.", "xes": "Lucas 10:42."}, {"en": "The Pharisees complained about Jesus, saying:", "es": "Los fariseos se quejaban de Jesús, diciendo:", "oen": ["“This Man receives sinners and eats with them”", "“He breaks the Sabbath”", "“He blasphemes”", "“He fears Rome”"], "oes": ["“Este a los pecadores recibe, y con ellos come”", "“Quebranta el sábado”", "“Blasfema”", "“Teme a Roma”"], "c": 77, "xen": "Luke 15:2 — the complaint that drew the three parables.", "xes": "Lucas 15:2 — la queja que provocó las tres parábolas."}, {"en": "In the parable of the lost sheep, the shepherd:", "es": "En la parábola de la oveja perdida, el pastor:", "oen": ["counts the loss and moves on", "leaves the ninety-nine and seeks the one until he finds it", "sends a servant", "waits at home"], "oes": ["cuenta la pérdida y sigue", "deja las noventa y nueve y busca la una hasta hallarla", "envía un siervo", "espera en casa"], "c": 85, "xen": "Luke 15:4.", "xes": "Lucas 15:4."}, {"en": "When the prodigal son was still far off, the father:", "es": "Cuando el hijo pródigo aún estaba lejos, el padre:", "oen": ["waited sternly", "sent a servant", "demanded repayment", "ran, fell on his neck, and kissed him"], "oes": ["esperó con severidad", "envió un siervo", "exigió el pago", "corrió, se echó sobre su cuello y le besó"], "c": 94, "xen": "Luke 15:20 — scandalous, running grace.", "xes": "Lucas 15:20 — gracia escandalosa que corre."}, {"en": "The elder brother in the parable represents:", "es": "El hermano mayor en la parábola representa:", "oen": ["the Romans", "the tax collectors", "the grumbling, self-righteous Pharisees", "the disciples"], "oes": ["los romanos", "los publicanos", "a los fariseos murmuradores y justos en su propia opinión", "los discípulos"], "c": 100, "xen": "Luke 15:29–30 — near the house, far from the heart.", "xes": "Lucas 15:29–30 — cerca de la casa, lejos del corazón."}, {"en": "In Luke 18, the man who went home justified was:", "es": "En Lucas 18, el hombre que descendió justificado fue:", "oen": ["the tax collector who cried for mercy", "the Pharisee", "the lawyer", "the rich young ruler"], "oes": ["el publicano que clamó por misericordia", "el fariseo", "el intérprete", "el joven rico"], "c": 105, "xen": "Luke 18:14 — the humble are exalted.", "xes": "Lucas 18:14 — los humildes son enaltecidos."}, {"en": "When word came that Lazarus was sick, Jesus:", "es": "Cuando llegó el aviso de que Lázaro estaba enfermo, Jesús:", "oen": ["went at once", "stayed two more days where He was", "sent Peter ahead", "did nothing"], "oes": ["fue de inmediato", "se quedó dos días más donde estaba", "envió a Pedro", "no hizo nada"], "c": 113, "xen": "John 11:6 — deliberately, that God be glorified.", "xes": "Juan 11:6 — a propósito, para que Dios fuese glorificado."}, {"en": "To Martha, Jesus declared:", "es": "A Marta, Jesús declaró:", "oen": ["“I am the door”", "“I am the vine”", "“I am the light”", "“I am the resurrection and the life”"], "oes": ["“Yo soy la puerta”", "“Yo soy la vid”", "“Yo soy la luz”", "“Yo soy la resurrección y la vida”"], "c": 122, "xen": "John 11:25 — the fifth great “I AM.”", "xes": "Juan 11:25 — el quinto gran “YO SOY.”"}, {"en": "“Jesus wept” (John 11:35) shows:", "es": "“Jesús lloró” (Juan 11:35) muestra:", "oen": ["that He doubted", "that He could not raise him", "His true humanity — real grief at the grave", "that He was angry"], "oes": ["que dudaba", "que no podía resucitarlo", "su verdadera humanidad — dolor real ante la tumba", "que estaba airado"], "c": 128, "xen": "Even knowing He would raise him, He wept.", "xes": "Aun sabiendo que lo levantaría, lloró."}, {"en": "At the tomb Jesus cried:", "es": "Junto al sepulcro Jesús clamó:", "oen": ["“It is finished”", "“Peace, be still”", "“Talitha cumi”", "“Lazarus, come forth!” and the dead man came out"], "oes": ["“Consumado es”", "“Calla, enmudece”", "“Talita cumi”", "“¡Lázaro, ven fuera!” y el muerto salió"], "c": 136, "xen": "John 11:43.", "xes": "Juan 11:43."}, {"en": "The result of raising Lazarus was that the chief priests and Pharisees:", "es": "El resultado de resucitar a Lázaro fue que los principales sacerdotes y fariseos:", "oen": ["plotted from that day to put Him to death", "believed and followed", "left Him alone", "crowned Him"], "oes": ["acordaron desde aquel día matarle", "creyeron y le siguieron", "lo dejaron en paz", "lo coronaron"], "c": 140, "xen": "John 11:53 — the sign of life triggered the plot of death.", "xes": "Juan 11:53 — la señal de vida desató el complot de muerte."}, {"en": "Lazarus had been in the tomb for:", "es": "Lázaro había estado en el sepulcro por:", "oen": ["one day", "four days", "three days", "a week"], "oes": ["un día", "cuatro días", "tres días", "una semana"], "c": 148, "xen": "John 11:17 — truly, undeniably dead.", "xes": "Juan 11:17 — verdadera, innegablemente muerto."}, {"en": "The road to Jerusalem reveals the heart of God in grace and the power of the Son as:", "es": "El camino a Jerusalén revela el corazón de Dios en la gracia y el poder del Hijo como:", "oen": ["a political king", "a military leader", "the resurrection and the life", "a temple priest"], "oes": ["un rey político", "un líder militar", "la resurrección y la vida", "un sacerdote del templo"], "c": 156, "xen": "John 11:25 — grace and power, both toward the cross.", "xes": "Juan 11:25 — gracia y poder, ambos hacia la cruz."}], "sa": [{"en": "Explain “He set His face to go to Jerusalem” (Luke 9:51) and what Jesus taught about the cost of following.", "es": "Explique “afirmó su rostro para ir a Jerusalén” (Lucas 9:51) y qué enseñó Jesús sobre el costo de seguirle.", "men": "Luke says that when the time came, Jesus steadfastly set His face to go to Jerusalem. He did not drift toward the cross but walked toward it deliberately, knowing what waited. He also taught that following Him is costly: the Son of Man had nowhere to lay His head, and no one who puts his hand to the plow and looks back is fit for the kingdom. The journey to the cross asks the whole person.", "mes": "Lucas dice que cuando se cumplió el tiempo, Jesús afirmó su rostro para ir a Jerusalén. No fue a la deriva hacia la cruz, sino que caminó hacia ella deliberadamente, sabiendo lo que le esperaba. También enseñó que seguirle es costoso: el Hijo del Hombre no tenía dónde recostar la cabeza, y ninguno que pone la mano en el arado y mira atrás es apto para el reino. El viaje a la cruz pide a la persona entera.", "ken": ["jerusalem", "face", "cross", "follow", "cost", "plow", "kingdom", "journey"], "kes": ["jerusalen", "rostro", "cruz", "seguir", "costo", "arado", "reino", "viaje"]}, {"en": "Retell the parable of the Good Samaritan and explain how Jesus reframed the lawyer's question (Luke 10:25-37).", "es": "Recuente la parábola del buen samaritano y explique cómo Jesús replanteó la pregunta del intérprete (Lucas 10:25-37).", "men": "A lawyer, wanting to justify himself, asked “who is my neighbor?” Jesus told of a man left half dead, passed by a priest and a Levite, but helped by a despised Samaritan who had compassion, bound his wounds, and paid for his care. Then Jesus reframed the question: not “who is my neighbor?” but “which one proved to be a neighbor?” The answer was the one who showed mercy. “Go and do likewise.”", "mes": "Un intérprete de la ley, queriendo justificarse, preguntó: “¿quién es mi prójimo?” Jesús habló de un hombre dejado medio muerto, ante quien pasaron de largo un sacerdote y un levita, pero a quien ayudó un samaritano despreciado que fue movido a misericordia, vendó sus heridas y pagó su cuidado. Luego Jesús replanteó la pregunta: no “¿quién es mi prójimo?” sino “¿quién fue el prójimo?” La respuesta fue el que usó de misericordia. “Ve, y haz tú lo mismo.”", "ken": ["samaritan", "neighbor", "priest", "levite", "mercy", "compassion", "wound", "likewise"], "kes": ["samaritano", "projimo", "sacerdote", "levita", "misericord", "herid", "pago", "mismo"]}, {"en": "What does the scene of Mary and Martha (Luke 10:38-42) teach about the one needful thing?", "es": "¿Qué enseña la escena de María y Marta (Lucas 10:38-42) sobre la única cosa necesaria?", "men": "While Martha was distracted with much serving, her sister Mary sat at Jesus' feet to hear His word. When Martha complained, Jesus said she was worried about many things, but one thing is needed, and Mary had chosen the good part, which would not be taken from her. Love for the neighbor must spring from love for the Lord; true service flows from sitting at His feet.", "mes": "Mientras Marta estaba distraída con muchos quehaceres, su hermana María se sentaba a los pies de Jesús a oír su palabra. Cuando Marta se quejó, Jesús dijo que estaba afanada por muchas cosas, pero una cosa es necesaria, y María había escogido la buena parte, que no le sería quitada. El amor al prójimo debe brotar del amor al Señor; el verdadero servicio brota de sentarse a sus pies.", "ken": ["martha", "mary", "serving", "feet", "word", "needed", "good", "love"], "kes": ["marta", "maria", "quehacer", "pies", "palabra", "necesaria", "buena", "amor"]}, {"en": "Explain the heart of grace in the lost sheep, lost coin, and prodigal son (Luke 15).", "es": "Explique el corazón de la gracia en la oveja perdida, la moneda perdida y el hijo pródigo (Lucas 15).", "men": "When the Pharisees grumbled that He received sinners, Jesus told of the lost sheep, the lost coin, and the prodigal son, all sought and found with joy. The crown is the father who, while the son was still far off, ran and fell on his neck and kissed him, restoring him as a son with robe, ring, and feast. Grace does not wait at the door; it runs to meet the returning sinner.", "mes": "Cuando los fariseos murmuraron que recibía a los pecadores, Jesús habló de la oveja perdida, la moneda perdida y el hijo pródigo, todos buscados y hallados con gozo. La corona es el padre que, cuando el hijo aún estaba lejos, corrió y se echó sobre su cuello y le besó, restaurándolo como hijo con vestido, anillo y fiesta. La gracia no espera en la puerta; corre al encuentro del pecador que vuelve.", "ken": ["sheep", "coin", "prodigal", "father", "ran", "grace", "sinner", "joy"], "kes": ["oveja", "moneda", "prodigo", "padre", "corri", "gracia", "pecador", "gozo"]}, {"en": "What do the elder brother and the Pharisee-and-tax-collector teach about self-righteousness and mercy?", "es": "¿Qué enseñan el hermano mayor y el fariseo-y-publicano sobre la justicia propia y la misericordia?", "men": "The elder brother, dutiful and cold, refused to go in and resented the grace shown to his brother; he pictures the grumbling Pharisees, near the father's house but far from his heart. The same heart appears in the Pharisee who thanked God he was not like others, while the tax collector beat his breast and cried for mercy. Jesus said the tax collector, not the Pharisee, went home justified, for whoever humbles himself will be exalted.", "mes": "El hermano mayor, cumplidor y frío, no quiso entrar y resintió la gracia mostrada a su hermano; retrata a los fariseos que murmuran, cerca de la casa del padre pero lejos de su corazón. El mismo corazón aparece en el fariseo que daba gracias de no ser como los demás, mientras el publicano se golpeaba el pecho y clamaba por misericordia. Jesús dijo que el publicano, no el fariseo, descendió justificado, porque el que se humilla será enaltecido.", "ken": ["elder", "brother", "pharisee", "mercy", "justif", "humble", "tax", "exalt"], "kes": ["hermano", "mayor", "fariseo", "misericord", "justific", "humil", "publicano", "enaltec"]}, {"en": "What did Jesus claim to Martha in “I am the resurrection and the life” (John 11:25-27)?", "es": "¿Qué reclamó Jesús a Marta en “Yo soy la resurrección y la vida” (Juan 11:25-27)?", "men": "When Lazarus died, Martha said if Jesus had been there her brother would not have died. Jesus answered, “I am the resurrection and the life; he who believes in Me, though he may die, he shall live.” He does not merely grant resurrection — He is it. Martha confessed He is the Christ, the Son of God. The claim and her faith meet at the grave.", "mes": "Cuando Lázaro murió, Marta dijo que si Jesús hubiese estado allí su hermano no habría muerto. Jesús respondió: “Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá.” No solo concede la resurrección: Él la es. Marta confesó que él es el Cristo, el Hijo de Dios. La afirmación y su fe se encuentran junto a la tumba.", "ken": ["resurrection", "life", "lazarus", "martha", "believ", "christ", "die", "grave"], "kes": ["resurreccion", "vida", "lazaro", "marta", "cree", "cristo", "muerto", "tumba"]}, {"en": "Explain “Jesus wept” and “Lazarus, come forth” — the divine/human pattern at the tomb (John 11:35-44).", "es": "Explique “Jesús lloró” y “Lázaro, ven fuera” — el patrón divino/humano junto a la tumba (Juan 11:35-44).", "men": "At the tomb Jesus wept, the shortest verse in Scripture, though He knew He would raise Lazarus within the hour — real tears at a real grave. As God He is the resurrection; as man He weeps with the grieving. Then He cried, “Lazarus, come forth!” and the dead man came out, still bound, and Jesus said, “Loose him, and let him go.”", "mes": "Junto a la tumba Jesús lloró, el versículo más corto de la Escritura, aunque sabía que levantaría a Lázaro dentro de una hora — lágrimas reales ante una tumba real. Como Dios es la resurrección; como hombre llora con los que lloran. Entonces clamó: “¡Lázaro, ven fuera!” y el muerto salió, aún atado, y Jesús dijo: “Desatadle, y dejadle ir.”", "ken": ["wept", "tomb", "lazarus", "raise", "griev", "forth", "bound", "resurrection"], "kes": ["lloro", "tumba", "lazaro", "levant", "lagrima", "fuera", "atado", "resurreccion"]}, {"en": "Explain the irony of the raising of Lazarus (John 11:45-53; 12:10).", "es": "Explique la ironía de la resurrección de Lázaro (Juan 11:45-53; 12:10).", "men": "Raising Lazarus was the greatest sign, and many who saw it believed. But the chief priests and Pharisees, more alarmed than ever, plotted from that day to put Jesus to death, and even planned to kill Lazarus. The greatest sign of life became the trigger of the plot of death. The One who raises the dead walked on toward His own grave.", "mes": "Resucitar a Lázaro fue la mayor señal, y muchos que lo vieron creyeron. Pero los principales sacerdotes y los fariseos, más alarmados que nunca, acordaron desde aquel día matar a Jesús, y aun pensaron matar a Lázaro. La mayor señal de vida se volvió el detonante del complot de muerte. El que levanta a los muertos siguió caminando hacia su propia tumba.", "ken": ["lazarus", "sign", "believ", "priest", "plot", "death", "kill", "grave"], "kes": ["lazaro", "senal", "crey", "sacerdote", "complot", "muerte", "matar", "tumba"]}, {"en": "What two things does the road to Jerusalem reveal (the heart of God and the power of the Son)?", "es": "¿Qué dos cosas revela el camino a Jerusalén (el corazón de Dios y el poder del Hijo)?", "men": "The road to Jerusalem reveals two things at once: the heart of God in a grace that seeks the lost sheep, runs to the prodigal, and justifies the humble; and the power of the Son, the resurrection and the life who calls the dead from the tomb. Both press toward the cross, where grace is bought and where the sign of Lazarus seals the plot to kill Him.", "mes": "El camino a Jerusalén revela dos cosas a la vez: el corazón de Dios en una gracia que busca la oveja perdida, corre al hijo pródigo y justifica al humilde; y el poder del Hijo, la resurrección y la vida que llama a los muertos de la tumba. Ambas empujan hacia la cruz, donde la gracia es comprada y donde la señal de Lázaro sella el complot para matarle.", "ken": ["jerusalem", "grace", "lost", "prodigal", "resurrection", "cross", "power", "sign"], "kes": ["jerusalen", "gracia", "perdid", "prodigo", "resurreccion", "cruz", "poder", "senal"]}, {"en": "What does the road to Jerusalem ask of us?", "es": "¿Qué nos pide el camino a Jerusalén?", "men": "The road to Jerusalem asks of us what it asked then. We are to come home like the prodigal son, cry for mercy like the tax collector rather than boast like the Pharisee, and believe in the One who is the resurrection and the life. As God He wept at a grave; as man He set His face to die for sinners. The road runs toward a grave, but it is the road of life.", "mes": "El camino a Jerusalén nos pide lo que pidió entonces. Hemos de volver a casa como el hijo pródigo, clamar por misericordia como el publicano en vez de jactarnos como el fariseo, y creer en el que es la resurrección y la vida. Como Dios lloró ante una tumba; como hombre puso su rostro para morir por los pecadores. El camino lleva a una tumba, pero es el camino de la vida.", "ken": ["prodigal", "mercy", "tax", "believ", "resurrection", "grave", "sinner", "life"], "kes": ["prodigo", "misericord", "publicano", "creer", "resurreccion", "tumba", "pecador", "vida"]}]};
+
+/* ---- storage hardening (Android content:// safe) ---- */
+var _ctsMem={};
+function lsGet(k){try{var v=localStorage.getItem(k);return v===null?(k in _ctsMem?_ctsMem[k]:null):v;}catch(e){return k in _ctsMem?_ctsMem[k]:null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}_ctsMem[k]=v;}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}delete _ctsMem[k];}
+
+/* ---- helpers ---- */
+function fold(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function kwHit(ans,kw){var a=fold(ans),k=fold(kw);if(!k)return false;
+  if(k.length<=3){return new RegExp('(^|[^a-z0-9])'+reEsc(k)+'([^a-z0-9]|$)').test(a);}
+  return new RegExp('(^|[^a-z0-9])'+reEsc(k)).test(a);}
+function saScore(ans,kws){var n=0;for(var i=0;i<kws.length;i++){if(kwHit(ans,kws[i]))n++;}return n;}
+function mcCorrectIdx(code,qpos){return(((code-7*(qpos+3))%251)+251)%251;}
+
+var LET=['A','B','C','D'];
+var STATE={lang:'en',track:'cert',name:'',mc:[],sa:[],revealed:false};
+for(var i=0;i<DATA.mc.length;i++)STATE.mc.push({answered:false,chosen:-1});
+for(var j=0;j<DATA.sa.length;j++)STATE.sa.push({checked:false,text:'',hits:0});
+
+var I18N={
+ en:{title:'The Life of Christ',unit:'Unit 6 · The Road to Jerusalem',lang:'Espa\u00f1ol',
+   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
+   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
+   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
+   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
+   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
+   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
+   complete:'Complete Unit 6',
+   epigraph:'“I am the resurrection and the life. He who believes in Me, though he may die, he shall live.” (John 11:25)',
+   mGood:'✓ Unit complete. You may continue to Unit 7.',
+   mShort:'Keep going \u2014 review the material and try again.',
+   nextTxt:'Next: Unit 7 →',
+   mh:'Welcome to The Life of Christ',mp:'Please register once. Your name and track carry across every CTS course on this site.',
+   mnl:'Your name',mtl:'Track',mgo:'Begin',
+   hitFmt:function(h){return h+' of 8 keywords';},
+   passV:'Pass',softV:'Practice noted'},
+ es:{title:'La Vida de Cristo',unit:'Unidad 6 · El camino a Jerusalén',lang:'English',
+   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
+   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
+   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
+   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
+   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
+   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
+   complete:'Completar la Unidad 6',
+   epigraph:'“Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá.” (Juan 11:25)',
+   mGood:'✓ Unidad completa. Puede continuar a la Unidad 7.',
+   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
+   nextTxt:'Siguiente: Unidad 7 →',
+   mh:'Bienvenido a La Vida de Cristo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
+   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
+   hitFmt:function(h){return h+' de 8 palabras clave';},
+   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+};
+function T(){return I18N[STATE.lang];}
+function isMasters(){return STATE.track==='mdiv'||STATE.track==='thm';}
+function lockMin(){return isMasters()?15:2;}
+
+function $(id){return document.getElementById(id);}
+
+/* ---------- rendering ---------- */
+function renderTeaching(){
+  $('teach-en').className=STATE.lang==='en'?'':'hide';
+  $('teach-es').className=STATE.lang==='es'?'':'hide';
+}
+function renderChrome(){
+  var t=T();
+  document.documentElement.lang=STATE.lang;
+  $('t-title').textContent=t.title;$('t-unit').innerHTML=t.unit;
+  $('langBtn').textContent=t.lang;
+  $('t-greet').textContent=t.greet(STATE.name);
+  $('t-track').textContent=t.track(STATE.track);
+  $('epigraph').textContent=t.epigraph;
+  $('t-mc').textContent=t.mc;$('t-sa').textContent=t.sa;
+  $('t-saNote').textContent=isMasters()?t.saNoteMast:t.saNoteCert;
+  $('completeBtn').textContent=t.complete;
+  $('m-h').textContent=t.mh;$('m-p').textContent=t.mp;$('m-nl').textContent=t.mnl;
+  $('m-tl').textContent=t.mtl;$('m-go').textContent=t.mgo;
+}
+function renderMC(){
+  var wrap=$('mcWrap');wrap.innerHTML='';
+  for(var i=0;i<DATA.mc.length;i++){
+    (function(i){
+      var q=DATA.mc[i],st=STATE.mc[i];
+      var opts=STATE.lang==='en'?q.oen:q.oes;
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var expl=STATE.lang==='en'?q.xen:q.xes;
+      var correct=mcCorrectIdx(q.c,i);
+      var div=document.createElement('div');div.className='q';
+      var h='<div class="qn">'+(i+1)+'</div><div class="qp">'+prompt+'</div>';
+      div.innerHTML=h;
+      for(var o=0;o<4;o++){
+        (function(o){
+          var b=document.createElement('button');b.type='button';b.className='opt';
+          b.innerHTML='<span class="lt">'+LET[o]+'</span>'+opts[o];
+          if(st.answered){b.disabled=true;
+            if(o===correct)b.className='opt correct';
+            else if(o===st.chosen)b.className='opt wrong';}
+          else if(st.answered&&o===st.chosen){b.style.background='#efe7d2';b.style.borderColor='#d4af37';b.style.fontWeight='600';}
+          b.onclick=function(){if(st.answered)return;
+            STATE.mc[i].answered=true;STATE.mc[i].chosen=o;renderMC();};
+          div.appendChild(b);
+        })(o);
+      }
+      var e=document.createElement('div');e.className='expl'+(st.answered?' show':'');
+      e.textContent=expl;div.appendChild(e);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderSA(){
+  var wrap=$('saWrap');wrap.innerHTML='';var t=T();
+  for(var i=0;i<DATA.sa.length;i++){
+    (function(i){
+      var q=DATA.sa[i],st=STATE.sa[i];
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var model=STATE.lang==='en'?q.men:q.mes;
+      var div=document.createElement('div');div.className='q';
+      div.innerHTML='<div class="qn">'+(21+i)+'</div><div class="qp">'+prompt+'</div>';
+      var ta=document.createElement('textarea');ta.value=st.text;
+      ta.oninput=function(){STATE.sa[i].text=ta.value;};
+      div.appendChild(ta);
+      var btn=document.createElement('button');btn.type='button';btn.className='btn ghost';
+      btn.style.marginTop='8px';btn.textContent=t.check;
+      var res=document.createElement('div');res.className='sa-res'+(st.checked?' show':'');
+      function paint(){
+        var kws=STATE.lang==='en'?q.ken:q.kes;
+        var txt=STATE.sa[i].text||'';
+        if(txt.trim().length<100){
+          STATE.sa[i].hits=0;
+          res.innerHTML='<span class="sa-verdict soft">'+(STATE.lang==='en'?'Write a fuller answer (100 characters minimum).':'Escriba una respuesta m\u00e1s completa (m\u00ednimo 100 caracteres).')+'</span>';
+          res.classList.add('show');
+          return;
+        }
+        var hits=saScore(txt,kws);STATE.sa[i].hits=hits;
+        var pass=hits>=3;
+        var verdict=pass?('<span class="sa-verdict pass">'+t.passV+'</span>'):('<span class="sa-verdict soft">'+t.softV+'</span>');
+        res.innerHTML=verdict+' &middot; '+t.hitFmt(hits)+
+          '<div class="model"><div class="ml">'+t.model+'</div>'+model+'</div>';
+        res.className='sa-res show';STATE.sa[i].checked=true;
+      }
+      btn.onclick=function(){
+        if(!STATE.sa[i].text.trim()){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.blank+'</span>';return;}
+        if(STATE.sa[i].text.trim().length<100){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.minLen+'</span>';return;}
+        paint();
+      };
+      if(st.checked&&st.text.trim())paint();
+      div.appendChild(btn);div.appendChild(res);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderAll(){renderChrome();renderTeaching();renderMC();renderSA();refreshLock();}
+
+/* ---------- completion + lockout ---------- */
+function lockedUntil(){var v=lsGet(CFG.lockKey);return v?parseInt(v,10):0;}
+function refreshLock(){
+  var until=lockedUntil(),now=Date.now();
+  var btn=$('completeBtn');
+  if(until>now){
+    btn.disabled=true;
+    var mins=Math.ceil((until-now)/60000);
+    $('statusMsg').className='status lock';
+    $('statusMsg').textContent=(STATE.lang==='en'?'Locked. Try again in ':'Bloqueado. Reintente en ')+mins+(STATE.lang==='en'?' min.':' min.');
+  }else{btn.disabled=false;}
+}
+function markComplete(){
+  var p={};try{p=JSON.parse(lsGet(CFG.progressKey)||'{}');}catch(e){p={};}
+  p[CFG.unit]=true;lsSet(CFG.progressKey,JSON.stringify(p));
+  var t=T();
+  $('statusMsg').className='status ok';$('statusMsg').textContent=t.mGood;
+  var nl=$('nextLink');nl.href=CFG.next;nl.textContent=t.nextTxt;nl.className='next';
+  $('completeBtn').disabled=true;
+}
+function onComplete(){
+  var t=T();
+  var mcCorrect=0,mcAnswered=0;
+  for(var i=0;i<DATA.mc.length;i++){if(STATE.mc[i].answered){mcAnswered++;
+    if(STATE.mc[i].chosen===mcCorrectIdx(DATA.mc[i].c,i))mcCorrect++;}}
+  var saPass=0;for(var j=0;j<DATA.sa.length;j++){if(STATE.sa[j].hits>=3)saPass++;}
+  var needMC=18,needSA=9;
+  if(mcAnswered<DATA.mc.length){
+    $('statusMsg').className='status warn';
+    $('statusMsg').textContent=(STATE.lang==='en'
+      ?'Answer all multiple-choice questions first ('+mcAnswered+'/20).'
+      :'Responda primero todas las preguntas de opci\u00f3n m\u00faltiple ('+mcAnswered+'/20).');
+    return;
+  }
+  STATE.revealed=true;renderMC();
+  var saOk = isMasters() ? (saPass>=needSA) : true;
+  if(mcCorrect>=needMC&&saOk){markComplete();return;}
+  // genuine fail -> lockout
+  lsSet(CFG.lockKey,String(Date.now()+lockMin()*60000));
+  $('statusMsg').className='status lock';
+  $('statusMsg').textContent=(STATE.lang==='en'
+    ?('Not yet: MC '+mcCorrect+'/20 (need 18), SA '+saPass+'/10 (need 7). '+t.mShort)
+    :('A\u00fan no: OM '+mcCorrect+'/20 (necesita 18), RB '+saPass+'/10 (necesita 7). '+t.mShort));
+  refreshLock();
+}
+
+/* ---------- init ---------- */
+function startApp(){
+  STATE.lang=(lsGet('cts_lang')==='es')?'es':'en';
+  STATE.name=lsGet('cts_student')||'';
+  STATE.track=lsGet('cts_track')||'cert';
+  $('langBtn').onclick=function(){STATE.lang=STATE.lang==='en'?'es':'en';
+    lsSet('cts_lang',STATE.lang);renderAll();};
+  $('completeBtn').onclick=onComplete;
+  $('m-go').onclick=function(){
+    var nm=$('m-name').value.trim();var tk=$('m-track').value;
+    if(!nm){$('m-name').focus();return;}
+    STATE.name=nm;STATE.track=tk;
+    lsSet('cts_student',nm);lsSet('cts_track',tk);
+    $('reg').className='modal hide';renderAll();
+  };
+  if(CFG.showReg&&(!STATE.name||!lsGet('cts_track'))){
+    $('reg').className='modal';$('m-track').value=STATE.track;renderChrome();
+  }else{$('reg').className='modal hide';}
+  renderAll();
+  setInterval(refreshLock,30000);
+}
+if(typeof document!=='undefined'){
+  if(document.readyState!=='loading')startApp();
+  else document.addEventListener('DOMContentLoaded',startApp);
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSLOCReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

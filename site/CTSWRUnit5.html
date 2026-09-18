@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS World Religions — Unit 5: Buddhism</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #f8f4e8; border: 1px solid #e8d9b8; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 10px; margin: 6px 0 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; }
+.reg-form label { font-weight: bold; display: block; margin-top: 10px; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-form { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 6 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">🌍 World Religions — Unit 5: Buddhism</span><span class="lang-es">🌍 Religiones del Mundo — Unidad 5: El Budismo</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"Come to Me, all you who labor and are heavy laden, and I will give you rest." — Matthew 11:28 (NKJV)</span><span class="lang-es">"Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar." — Mateo 11:28 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="registrationCard">
+    <h2><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit. Your registration is saved on this device and used across all CTS courses.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full Name</span><span class="lang-es">Nombre Completo</span></label>
+    <input type="text" id="regName" placeholder="" />
+    <label><span class="lang-en">Email</span><span class="lang-es">Correo Electrónico</span></label>
+    <input type="email" id="regEmail" placeholder="" />
+    <label><span class="lang-en">Country</span><span class="lang-es">País</span></label>
+    <input type="text" id="regCountry" placeholder="" />
+    <label><span class="lang-en">Program Track</span><span class="lang-es">Programa</span></label>
+    <input type="hidden" id="regTrack" value="certificate" />
+    <div id="trackButtons" style="display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;">
+        <button type="button" class="track-opt" data-track="certificate"><span class="lang-en">Certificate of Ministry</span><span class="lang-es">Certificado de Ministerio</span></button>
+        <button type="button" class="track-opt" data-track="mdiv"><span class="lang-en">Master of Divinity (M.Div.)</span><span class="lang-es">Maestría en Divinidad (M.Div.)</span></button>
+        <button type="button" class="track-opt" data-track="thm"><span class="lang-en">Master of Theology (Th.M.)</span><span class="lang-es">Maestría en Teología (Th.M.)</span></button>
+    </div>
+    <button class="small" id="saveRegBtn" style="margin-top: 10px;"><span class="lang-en">Save Registration</span><span class="lang-es">Guardar Registro</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>Buddhism presents a pastor with a genuinely unusual challenge among the world's major religions: it is, in its classical and philosophically strict form, a religion without a Creator God at all. Where Judaism, Islam, and Christianity center on a personal Deity who speaks and acts, and where Hinduism, which we studied in Unit 4, centers on an impersonal ultimate reality called Brahman underlying all things, classical Buddhism largely declines to answer the question of a Creator God one way or the other, treating it as a distraction from its actual concern: diagnosing and curing the universal problem of human suffering. Buddhism arose directly out of the same religious and philosophical world as Hinduism, in the same region of northern India, sharing many of its vocabulary and concepts — karma, samsara, moksha, though Buddhism generally prefers the term nirvana — while reaching startlingly different conclusions about the self, the soul, and the path to liberation.</p>
+
+        <p>With roughly half a billion adherents worldwide, concentrated especially in East and Southeast Asia but increasingly present in the West through both immigrant communities and a substantial convert movement drawn to Buddhist meditation practice, Buddhism has become, like several Hindu concepts studied last unit, a source of ideas and practices — mindfulness, meditation, detachment from desire — that circulate far beyond anyone who would call himself a Buddhist. A pastor equipped to understand Buddhism accurately will be equipped to recognize both the formal religion when he meets it directly, and its diffuse influence when a counselee mentions a meditation app or a "mindfulness" seminar at work without any awareness of the philosophical claims those practices were originally built to teach.</p>
+
+        <p>This diffusion poses a subtler version of the same challenge this course noted with Hindu concepts in Unit 4. A stress-management program at a Cuban workplace or a Mexican school may teach breathing exercises and present-moment awareness techniques drawn directly from Buddhist meditation, marketed as religiously neutral wellness practice. There is nothing inherently wrong with attention to one's breathing or present awareness as such, but a pastor should recognize that the full Buddhist framework these techniques were built within makes specific claims — about the illusory nature of the self, about desire itself as the root problem to be extinguished — that a Christian counselee adopting the technique uncritically may absorb without ever examining, simply because the seminar never mentioned where the technique came from or what it was originally designed to accomplish.</p>
+
+        <h2>I. Siddhartha Gautama and the Quest for Enlightenment</h2>
+        <p>Buddhism traces its origin to a single historical founder, Siddhartha Gautama, born around the fifth or sixth century B.C. as a prince in a small kingdom in what is now Nepal, near the Indian border. According to Buddhist tradition, Siddhartha was raised in wealth and luxury, deliberately shielded by his father from any exposure to suffering, until, as a young man, a series of chariot rides outside the palace walls exposed him to what tradition calls the Four Sights: an old man bent by age, a diseased man, a corpse being carried to cremation, and finally a wandering ascetic who had renounced ordinary life in search of release from suffering. Confronted for the first time with the universal realities of aging, sickness, and death, and struck by the ascetic's evident peace in the face of them, Siddhartha renounced his position, his wife and infant son, and his inheritance, and set out on a spiritual quest that would occupy the rest of his life.</p>
+
+        <p>For several years Siddhartha pursued severe ascetic practices, fasting and self-denial taken to extremes, but found this path did not produce the liberation he sought. Rejecting both the luxury of his former life and the extreme asceticism he had since practiced, he settled on what Buddhist tradition calls the Middle Way, and, according to tradition, achieved enlightenment while meditating beneath a fig tree, later called the Bodhi Tree ("tree of awakening"), near the town of Bodh Gaya. From that point he was known as the Buddha, meaning simply "the Awakened One," and he spent the following decades traveling and teaching throughout northern India, gathering a community of monastic followers, until his death around age eighty. Unlike Muhammad, whom this course studied in Unit 3, the Buddha never claimed to be a prophet receiving revelation from a deity, and unlike Jesus, the Buddha never claimed any unique divine identity; Buddhist tradition presents him instead as an ordinary human being who, through his own effort and insight, discovered a path to liberation available, in principle, to any person willing to walk it.</p>
+
+        <p>This point of comparison is worth pausing over, since it marks one of the sharpest differences between Buddhism and Christianity from the very start. Where the entire logic of the gospel depends on Jesus being who He uniquely claimed to be — God incarnate, able to accomplish for sinners what they could not accomplish for themselves — the entire logic of classical Buddhism depends on the Buddha being an ordinary man, since his usefulness to his followers lies precisely in having discovered, through ordinary human effort, a path any other ordinary human being can in principle also walk. A Christian pastor should understand that Buddhism does not merely lack a doctrine of divine grace; its founder's own self-understanding structurally excludes the possibility, since a path discovered and walked by an unaided human being is, by definition, not a gift received from outside the self.</p>
+
+        <h2>II. The Four Noble Truths and the Eightfold Path</h2>
+        <p>The Buddha's core teaching, delivered in his first sermon after enlightenment, is traditionally summarized as the Four Noble Truths. The first truth, <em>dukkha</em>, usually translated "suffering" though the concept is broader, encompassing dissatisfaction, impermanence, and the basic unsatisfactoriness of existence, declares that suffering is a universal and inescapable feature of ordinary life — birth, aging, sickness, death, separation from what one loves, and union with what one dislikes are all dukkha, and even ordinary pleasures are dukkha because they are impermanent and cannot ultimately satisfy. The second truth identifies the cause of this suffering as <em>tanha</em>, usually translated "craving" or "desire" — not desire in every sense, but the grasping, clinging attachment to things, experiences, and even to the idea of a permanent self, that inevitably produces suffering when those things change or pass away, as everything eventually does. The third truth, called <em>nirodha</em>, declares that the cessation of suffering is genuinely possible, because if suffering arises from craving, then the elimination of craving eliminates suffering — this cessation is what Buddhism calls <em>nirvana</em>. The fourth truth prescribes the method: the Eightfold Path, comprising right view, right intention, right speech, right action, right livelihood, right effort, right mindfulness, and right concentration, traditionally grouped into three broader categories of wisdom, ethical conduct, and mental discipline.</p>
+
+        <p>This diagnosis-and-cure structure — suffering exists, suffering has an identifiable cause, the cause can be removed, here is the method for removing it — gives Buddhism much of its characteristic tone: less a system of worship directed toward a deity, and more a therapeutic and philosophical program aimed at transforming the practitioner's own mind and perception. This is precisely why many Westerners today, including some who identify as Christian, feel comfortable adopting Buddhist meditation techniques while denying any interest in Buddhism as a religion — the Eightfold Path was designed, from the beginning, to function as a practical technology of the mind, even though, in its full traditional context, it is inseparable from Buddhist claims about karma, rebirth, and the nature of the self that a Christian cannot adopt without contradiction.</p>
+
+        <h2>III. Core Concepts: Anatta, Anicca, and Nirvana</h2>
+        <p>Two philosophical claims distinguish Buddhism most sharply from Hinduism, despite their shared vocabulary. <em>Anicca</em>, impermanence, holds that absolutely everything in existence, without exception, is in constant flux, arising and passing away, with nothing possessing any fixed, unchanging essence. <em>Anatta</em>, "no-self," extends this claim to the human person: where Hindu Advaita Vedanta, studied in Unit 4, taught that the individual Atman is ultimately identical with the universal Brahman, classical Buddhism denies that there is any permanent, unified self or soul at all, in any sense — what we call "the self" is, in Buddhist analysis, simply a constantly changing bundle of physical and mental processes, none of which persists unchanged from moment to moment, let alone from one life to the next. This is a genuinely radical claim, and it means that when Buddhism speaks of rebirth, it cannot mean, strictly speaking, that the same soul migrates from one body to the next, the way Hindu thought understands samsara; Buddhist philosophy instead describes something more like a causal chain of connected processes, likened by some traditional teachers to one candle lighting another — a real continuity of cause and effect, but without any single unchanging thing that travels from the old candle to the new one.</p>
+
+        <p><em>Nirvana</em>, the goal of Buddhist practice, is notoriously difficult to define positively, since Buddhist texts most often describe it by negation — the extinguishing of craving, the extinguishing of the fires of greed, hatred, and delusion that produce suffering, sometimes likened to the extinguishing of a flame when its fuel is exhausted. Because Buddhism denies any permanent self to begin with, nirvana cannot straightforwardly be described as that self achieving a blissful destination, the way Christianity describes eternal life or Hindu bhakti devotion describes union with a personal deity; the most that can be said, within strict traditional Buddhist philosophy, is that the causal processes generating suffering and further rebirth are brought to a final end. This point deserves careful attention from a pastor, because it means Buddhism's ultimate goal is considerably harder to translate into terms a Christian congregation will intuitively grasp than Hinduism's moksha was in Unit 4 — nirvana is not a Buddhist word for heaven, and treating it as though it were will genuinely mislead both the pastor and anyone he is trying to understand.</p>
+
+        <h2>IV. Major Branches: Theravada, Mahayana, and Vajrayana</h2>
+        <p>Buddhism, like Islam and Hinduism before it in this course, developed real internal diversity over its long history. <em>Theravada</em> Buddhism, meaning "the teaching of the elders," predominant today in Sri Lanka, Thailand, Myanmar, and Cambodia, considers itself the tradition most faithful to the earliest teachings and monastic discipline of the historical Buddha, emphasizing the monastic life as the most direct path to nirvana and generally regarding the Buddha as a supremely wise teacher rather than any kind of ongoing object of worship. <em>Mahayana</em> Buddhism, meaning "the great vehicle," predominant in China, Japan, Korea, Vietnam, and Tibet, developed a broader and, in many respects, more devotional tradition, introducing the figure of the <em>bodhisattva</em> — a being who has achieved the insight necessary for nirvana but voluntarily delays final entry into it out of compassion, remaining to help all other suffering beings toward liberation first — and, in many popular Mahayana traditions, venerating Buddhas and bodhisattvas in ways that function, in practice, very much like devotional worship of a deity, even though strict philosophy maintains these figures are not gods in the way monotheistic traditions understand the term. <em>Vajrayana</em> Buddhism, sometimes called Tibetan Buddhism, developed as an esoteric offshoot of Mahayana, incorporating elaborate ritual, visualization practice, and the guidance of a teacher called a lama, most widely known in the West through the figure of the Dalai Lama.</p>
+
+        <p>This diversity matters practically for a pastor exactly as the corresponding diversity mattered in Units 2 through 4: a Theravada monk in meditation retreat, a Mahayana devotee praying before a statue of the compassionate bodhisattva Avalokiteshvara, and a Western convert attending a secular-framed mindfulness class derived loosely from Buddhist technique may all identify with some form of Buddhism, or with none at all, while holding pictures of the spiritual life that differ from one another almost as much as they differ from Christianity.</p>
+
+        <h2>V. Engaging Buddhist Neighbors and Friends with the Gospel</h2>
+        <p>Following the pattern established with Paul at the Areopagus in Unit 1, a pastor should begin engagement with a Buddhist neighbor by honoring real common ground. Buddhism takes human suffering with total seriousness, refusing the easy denial that so much of modern secular culture prefers, and its ethical teaching — compassion, right speech, right action, the restraint of greed and hatred — overlaps substantially with the moral vision of Scripture, even where the underlying explanation for why these things matter differs. A Christian can affirm, wholeheartedly, that the Buddha correctly diagnosed something real: the world is full of suffering, and much of that suffering does flow from disordered craving and attachment, points Scripture itself makes in passages like James 4:1-2 tracing conflict and suffering to desires warring within us.</p>
+
+        <p>From that foundation, the gospel offers Buddhism something it structurally cannot offer itself. Where Buddhism diagnoses suffering as flowing from craving and prescribes the extinguishing of desire and, ultimately, of the very self that desires, Jesus diagnoses the deeper problem as sin against a personal, holy God, and offers not the extinguishing of the self but its redemption and restoration — "Come to Me, all you who labor and are heavy laden, and I will give you rest" (Matthew 11:28), an invitation addressed to a real person, by a real Person, promising real rest rather than the dissolution of personal identity altogether. Where nirvana can only be described negatively, as an ending, the gospel describes eternal life positively, as a Person to be known: "this is eternal life, that they may know You, the only true God, and Jesus Christ whom You have sent" (John 17:3) — knowledge of and relationship with a personal God, not the extinguishing of the self that would know Him. And where the Buddha, however wise, remains simply a man who died and whose location Buddhist tradition itself will not claim to know with certainty, Christians proclaim a Savior who died and rose bodily, conquering the very suffering, sickness, and death that first sent Siddhartha Gautama on his quest — not merely teaching a technique for enduring suffering, but actually defeating it. A pastor able to hold together genuine respect for Buddhism's honest diagnosis of suffering with a clear proclamation of the only cure Scripture actually offers will be well equipped for this conversation.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>El budismo presenta a un pastor un desafío genuinamente inusual entre las religiones principales del mundo: es, en su forma clásica y filosóficamente estricta, una religión sin ningún Dios Creador en absoluto. Donde el judaísmo, el islam y el cristianismo se centran en una Deidad personal que habla y actúa, y donde el hinduismo, que estudiamos en la Unidad 4, se centra en una realidad última impersonal llamada Brahman que subyace a todas las cosas, el budismo clásico en gran medida declina responder la pregunta de un Dios Creador de una manera u otra, tratándola como una distracción de su verdadera preocupación: diagnosticar y curar el problema universal del sufrimiento humano. El budismo surgió directamente del mismo mundo religioso y filosófico que el hinduismo, en la misma región del norte de la India, compartiendo gran parte de su vocabulario y conceptos — karma, samsara, moksha, aunque el budismo generalmente prefiere el término nirvana — mientras llegaba a conclusiones sorprendentemente diferentes acerca del yo, el alma y el camino hacia la liberación.</p>
+
+        <p>Con aproximadamente quinientos millones de adherentes en todo el mundo, concentrados especialmente en Asia oriental y sudoriental pero cada vez más presentes en Occidente tanto a través de comunidades inmigrantes como de un considerable movimiento de conversos atraídos por la práctica de meditación budista, el budismo se ha convertido, como varios conceptos hindúes estudiados en la unidad anterior, en una fuente de ideas y prácticas — la atención plena, la meditación, el desapego del deseo — que circulan mucho más allá de cualquiera que se llamaría a sí mismo budista. Un pastor equipado para entender el budismo con precisión estará equipado para reconocer tanto la religión formal cuando la encuentre directamente, como su influencia difusa cuando un aconsejado mencione una aplicación de meditación o un seminario de "atención plena" en el trabajo sin ninguna conciencia de las afirmaciones filosóficas que esas prácticas fueron originalmente construidas para enseñar.</p>
+
+        <p>Esta difusión plantea una versión más sutil del mismo desafío que este curso señaló con los conceptos hindúes en la Unidad 4. Un programa de manejo del estrés en un lugar de trabajo cubano o una escuela mexicana puede enseñar ejercicios de respiración y técnicas de conciencia del momento presente extraídas directamente de la meditación budista, comercializadas como práctica de bienestar religiosamente neutral. No hay nada inherentemente malo en la atención a la propia respiración o la conciencia presente como tal, pero un pastor debe reconocer que el marco budista completo dentro del cual se construyeron estas técnicas hace afirmaciones específicas — acerca de la naturaleza ilusoria del yo, acerca del deseo mismo como el problema raíz que debe extinguirse — que un aconsejado cristiano que adopta la técnica sin crítica puede absorber sin examinarlas jamás, simplemente porque el seminario nunca mencionó de dónde vino la técnica o qué fue diseñada originalmente para lograr.</p>
+
+        <h2>I. Siddhartha Gautama y la búsqueda de la iluminación</h2>
+        <p>El budismo rastrea su origen a un solo fundador histórico, Siddhartha Gautama, nacido alrededor del siglo quinto o sexto a.C. como príncipe en un pequeño reino en lo que hoy es Nepal, cerca de la frontera india. Según la tradición budista, Siddhartha fue criado en riqueza y lujo, deliberadamente protegido por su padre de cualquier exposición al sufrimiento, hasta que, siendo joven, una serie de paseos en carroza fuera de los muros del palacio lo expusieron a lo que la tradición llama las Cuatro Vistas: un anciano encorvado por la edad, un hombre enfermo, un cadáver siendo llevado a la cremación, y finalmente un asceta errante que había renunciado a la vida ordinaria en busca de liberación del sufrimiento. Enfrentado por primera vez con las realidades universales del envejecimiento, la enfermedad y la muerte, y sorprendido por la evidente paz del asceta frente a ellas, Siddhartha renunció a su posición, a su esposa e hijo pequeño, y a su herencia, y emprendió una búsqueda espiritual que ocuparía el resto de su vida.</p>
+
+        <p>Durante varios años Siddhartha practicó severas disciplinas ascéticas, ayuno y autonegación llevados a extremos, pero descubrió que este camino no producía la liberación que buscaba. Rechazando tanto el lujo de su vida anterior como el ascetismo extremo que había practicado desde entonces, se estableció en lo que la tradición budista llama el Camino Medio, y, según la tradición, alcanzó la iluminación mientras meditaba bajo una higuera, luego llamada el Árbol Bodhi ("árbol del despertar"), cerca del pueblo de Bodh Gaya. Desde ese momento fue conocido como el Buda, que significa simplemente "el Despierto," y pasó las siguientes décadas viajando y enseñando por el norte de la India, reuniendo una comunidad de seguidores monásticos, hasta su muerte alrededor de los ochenta años. A diferencia de Mahoma, a quien este curso estudió en la Unidad 3, el Buda nunca afirmó ser un profeta que recibía revelación de una deidad, y a diferencia de Jesús, el Buda nunca afirmó ninguna identidad divina única; la tradición budista lo presenta en cambio como un ser humano ordinario que, a través de su propio esfuerzo e intuición, descubrió un camino hacia la liberación disponible, en principio, para cualquier persona dispuesta a recorrerlo.</p>
+
+        <p>Este punto de comparación vale la pena considerarlo, ya que marca una de las diferencias más agudas entre el budismo y el cristianismo desde el principio mismo. Donde toda la lógica del evangelio depende de que Jesús sea quien únicamente afirmó ser — Dios encarnado, capaz de lograr para los pecadores lo que ellos no podían lograr por sí mismos — toda la lógica del budismo clásico depende de que el Buda sea un hombre ordinario, ya que su utilidad para sus seguidores radica precisamente en haber descubierto, a través del esfuerzo humano ordinario, un camino que cualquier otro ser humano ordinario puede en principio también recorrer. Un pastor cristiano debe entender que el budismo no simplemente carece de una doctrina de gracia divina; el propio entendimiento de sí mismo de su fundador excluye estructuralmente esa posibilidad, ya que un camino descubierto y recorrido por un ser humano sin ayuda es, por definición, no un regalo recibido desde fuera del yo.</p>
+
+        <h2>II. Las Cuatro Nobles Verdades y el Óctuple Sendero</h2>
+        <p>La enseñanza central del Buda, entregada en su primer sermón después de la iluminación, se resume tradicionalmente como las Cuatro Nobles Verdades. La primera verdad, <em>dukkha</em>, usualmente traducida "sufrimiento" aunque el concepto es más amplio, abarcando la insatisfacción, la impermanencia y la insatisfactoriedad básica de la existencia, declara que el sufrimiento es un rasgo universal e ineludible de la vida ordinaria — el nacimiento, el envejecimiento, la enfermedad, la muerte, la separación de lo que uno ama, y la unión con lo que a uno le disgusta son todos dukkha, e incluso los placeres ordinarios son dukkha porque son impermanentes y no pueden en última instancia satisfacer. La segunda verdad identifica la causa de este sufrimiento como <em>tanha</em>, usualmente traducida "anhelo" o "deseo" — no el deseo en todo sentido, sino el apego aferrado a las cosas, experiencias, e incluso a la idea de un yo permanente, que inevitablemente produce sufrimiento cuando esas cosas cambian o desaparecen, como eventualmente lo hace todo. La tercera verdad, llamada <em>nirodha</em>, declara que el cese del sufrimiento es genuinamente posible, porque si el sufrimiento surge del anhelo, entonces la eliminación del anhelo elimina el sufrimiento — este cese es lo que el budismo llama <em>nirvana</em>. La cuarta verdad prescribe el método: el Óctuple Sendero, que comprende visión correcta, intención correcta, habla correcta, acción correcta, modo de vida correcto, esfuerzo correcto, atención correcta, y concentración correcta, tradicionalmente agrupados en tres categorías más amplias de sabiduría, conducta ética, y disciplina mental.</p>
+
+        <p>Esta estructura de diagnóstico y cura — el sufrimiento existe, el sufrimiento tiene una causa identificable, la causa puede ser eliminada, aquí está el método para eliminarla — le da al budismo gran parte de su tono característico: menos un sistema de adoración dirigido hacia una deidad, y más un programa terapéutico y filosófico dirigido a transformar la propia mente y percepción del practicante. Esto es precisamente por qué muchos occidentales hoy, incluyendo algunos que se identifican como cristianos, se sienten cómodos adoptando técnicas de meditación budista mientras niegan cualquier interés en el budismo como religión — el Óctuple Sendero fue diseñado, desde el principio, para funcionar como una tecnología práctica de la mente, aunque, en su pleno contexto tradicional, es inseparable de las afirmaciones budistas acerca del karma, el renacimiento, y la naturaleza del yo que un cristiano no puede adoptar sin contradicción.</p>
+
+        <h2>III. Conceptos centrales: Anatta, Anicca y Nirvana</h2>
+        <p>Dos afirmaciones filosóficas distinguen al budismo más agudamente del hinduismo, a pesar de su vocabulario compartido. <em>Anicca</em>, la impermanencia, sostiene que absolutamente todo lo que existe, sin excepción, está en constante flujo, surgiendo y desapareciendo, sin que nada posea ninguna esencia fija e inmutable. <em>Anatta</em>, "no-yo," extiende esta afirmación a la persona humana: donde el Advaita Vedanta hindú, estudiado en la Unidad 4, enseñaba que el Atman individual es en última instancia idéntico al Brahman universal, el budismo clásico niega que exista ningún yo o alma permanente y unificado en absoluto, en ningún sentido — lo que llamamos "el yo" es, en el análisis budista, simplemente un conjunto en constante cambio de procesos físicos y mentales, ninguno de los cuales persiste sin cambiar de un momento a otro, mucho menos de una vida a la siguiente. Esta es una afirmación genuinamente radical, y significa que cuando el budismo habla de renacimiento, no puede significar, estrictamente hablando, que la misma alma migre de un cuerpo al siguiente, de la manera en que el pensamiento hindú entiende el samsara; la filosofía budista describe en cambio algo más parecido a una cadena causal de procesos conectados, comparada por algunos maestros tradicionales con una vela que enciende a otra — una continuidad real de causa y efecto, pero sin ninguna cosa única e inmutable que viaje de la vela vieja a la nueva.</p>
+
+        <p>El <em>nirvana</em>, la meta de la práctica budista, es notoriamente difícil de definir positivamente, ya que los textos budistas lo describen con mayor frecuencia por negación — la extinción del anhelo, la extinción de los fuegos de la codicia, el odio y el engaño que producen el sufrimiento, a veces comparado con la extinción de una llama cuando su combustible se agota. Debido a que el budismo niega cualquier yo permanente desde el principio, el nirvana no puede describirse sencillamente como ese yo alcanzando un destino dichoso, de la manera en que el cristianismo describe la vida eterna o la devoción bhakti hindú describe la unión con una deidad personal; lo más que puede decirse, dentro de la filosofía budista tradicional estricta, es que los procesos causales que generan el sufrimiento y el renacimiento adicional llegan a un fin definitivo. Este punto merece atención cuidadosa de un pastor, porque significa que la meta última del budismo es considerablemente más difícil de traducir a términos que una congregación cristiana captará intuitivamente de lo que lo fue el moksha hindú en la Unidad 4 — el nirvana no es una palabra budista para el cielo, y tratarlo como si lo fuera engañará genuinamente tanto al pastor como a cualquiera a quien esté tratando de entender.</p>
+
+        <h2>IV. Ramas principales: Theravada, Mahayana y Vajrayana</h2>
+        <p>El budismo, como el islam y el hinduismo antes que él en este curso, desarrolló verdadera diversidad interna a lo largo de su larga historia. El budismo <em>Theravada</em>, que significa "la enseñanza de los ancianos," predominante hoy en Sri Lanka, Tailandia, Myanmar y Camboya, se considera a sí mismo la tradición más fiel a las enseñanzas y disciplina monástica más tempranas del Buda histórico, enfatizando la vida monástica como el camino más directo al nirvana y generalmente considerando al Buda como un maestro supremamente sabio en lugar de algún tipo de objeto continuo de adoración. El budismo <em>Mahayana</em>, que significa "el gran vehículo," predominante en China, Japón, Corea, Vietnam y Tíbet, desarrolló una tradición más amplia y, en muchos aspectos, más devocional, introduciendo la figura del <em>bodhisattva</em> — un ser que ha alcanzado la comprensión necesaria para el nirvana pero voluntariamente retrasa su entrada final en él por compasión, permaneciendo para ayudar primero a todos los demás seres que sufren hacia la liberación — y, en muchas tradiciones Mahayana populares, venerando a Budas y bodhisattvas de maneras que funcionan, en la práctica, muy parecido a la adoración devocional de una deidad, aunque la filosofía estricta sostiene que estas figuras no son dioses de la manera en que las tradiciones monoteístas entienden el término. El budismo <em>Vajrayana</em>, a veces llamado budismo tibetano, se desarrolló como una rama esotérica del Mahayana, incorporando ritual elaborado, práctica de visualización, y la guía de un maestro llamado lama, más ampliamente conocido en Occidente a través de la figura del Dalai Lama.</p>
+
+        <p>Esta diversidad importa prácticamente para un pastor exactamente como la diversidad correspondiente importó en las Unidades 2 a 4: un monje Theravada en retiro de meditación, un devoto Mahayana orando ante una estatua del compasivo bodhisattva Avalokiteshvara, y un converso occidental que asiste a una clase de atención plena enmarcada seculamente derivada libremente de la técnica budista pueden todos identificarse con alguna forma de budismo, o con ninguna en absoluto, mientras sostienen cuadros de la vida espiritual que difieren entre sí casi tanto como difieren del cristianismo.</p>
+
+        <h2>V. Acercándose a vecinos y amigos budistas con el evangelio</h2>
+        <p>Siguiendo el patrón establecido con Pablo en el Areópago en la Unidad 1, un pastor debe comenzar el acercamiento a un vecino budista honrando el terreno común real. El budismo toma el sufrimiento humano con total seriedad, rechazando la fácil negación que gran parte de la cultura secular moderna prefiere, y su enseñanza ética — la compasión, el habla correcta, la acción correcta, la restricción de la codicia y el odio — se superpone sustancialmente con la visión moral de la Escritura, incluso donde la explicación subyacente de por qué estas cosas importan difiere. Un cristiano puede afirmar, de todo corazón, que el Buda diagnosticó correctamente algo real: el mundo está lleno de sufrimiento, y gran parte de ese sufrimiento sí fluye del anhelo y el apego desordenados, puntos que la Escritura misma señala en pasajes como Santiago 4:1-2, que rastrea el conflicto y el sufrimiento hasta las pasiones que combaten dentro de nosotros.</p>
+
+        <p>Desde ese fundamento, el evangelio ofrece al budismo algo que este no puede ofrecerse estructuralmente a sí mismo. Donde el budismo diagnostica el sufrimiento como fluyendo del anhelo y prescribe la extinción del deseo y, en última instancia, del yo mismo que desea, Jesús diagnostica el problema más profundo como pecado contra un Dios personal y santo, y ofrece no la extinción del yo sino su redención y restauración — "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar" (Mateo 11:28), una invitación dirigida a una persona real, por una Persona real, prometiendo descanso real en lugar de la disolución completa de la identidad personal. Donde el nirvana solo puede describirse negativamente, como un final, el evangelio describe la vida eterna positivamente, como una Persona a quien conocer: "esta es la vida eterna: que te conozcan a ti, el único Dios verdadero, y a Jesucristo, a quien has enviado" (Juan 17:3) — conocimiento de y relación con un Dios personal, no la extinción del yo que lo conocería. Y donde el Buda, por sabio que fuera, sigue siendo simplemente un hombre que murió y cuyo paradero la propia tradición budista no pretende conocer con certeza, los cristianos proclaman un Salvador que murió y resucitó corporalmente, venciendo el mismo sufrimiento, la enfermedad y la muerte que originalmente enviaron a Siddhartha Gautama en su búsqueda — no meramente enseñando una técnica para soportar el sufrimiento, sino realmente derrotándolo. Un pastor capaz de sostener juntos el respeto genuino por el diagnóstico honesto del sufrimiento que hace el budismo con una proclamación clara de la única cura que la Escritura realmente ofrece estará bien equipado para esta conversación.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 5;
+let progress = JSON.parse(localStorage.getItem('cts_wr_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSWRUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit5) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSWRUnit4.html"; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSWRUnit6.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        const trackLabel = student.track === 'mdiv' ? 'M.Div.' : (student.track === 'thm' ? 'Th.M.' : 'Certificate');
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name} <span style="font-weight:normal;font-size:0.85rem;">(${trackLabel})</span> &nbsp;<a href="#" id="changeTrackLink" style="font-size:0.8rem;color:#5b3a1f;">Change track</a>`;
+        document.getElementById('registrationCard').style.display = 'none';
+        const link = document.getElementById('changeTrackLink');
+        if (link) link.onclick = function(e) {
+            e.preventDefault();
+            const card = document.getElementById('registrationCard');
+            card.style.display = 'block';
+            if (student.name) document.getElementById('regName').value = student.name;
+            if (student.email) document.getElementById('regEmail').value = student.email;
+            if (student.country) document.getElementById('regCountry').value = student.country;
+            if (student.track && typeof setTrack === 'function') setTrack(student.track);
+            card.scrollIntoView({ behavior: 'smooth' });
+        };
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<span style="color:#5b3a1f;">⚠️ Please register</span>`;
+    }
+}
+displayStudentGreeting();
+
+
+function setTrack(t) {
+    document.getElementById('regTrack').value = t;
+    document.querySelectorAll('.track-opt').forEach(b => { b.classList.toggle('selected', b.getAttribute('data-track') === t); });
+}
+document.querySelectorAll('.track-opt').forEach(b => { b.onclick = function() { setTrack(this.getAttribute('data-track')); }; });
+setTrack('certificate');
+document.getElementById('saveRegBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const country = document.getElementById('regCountry').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = `<span style="color:red;">⚠️ Name and email are required.</span>`;
+        return;
+    }
+    localStorage.setItem('cts_student', JSON.stringify({ name, email, country, track }));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = `<span style="color:green;">✓ Saved! Welcome, ${name}.</span>`;
+    setTimeout(() => { displayStudentGreeting(); }, 1000);
+    renderQuestions();
+};
+
+// Q3 reshuffled (Psalm 23 author) to move David from C to B for 5/5/5/5 balance.
+const mcQuestions = [
+  {
+    "textEn": "1. Unlike the other religions studied in this course so far, classical Buddhism:",
+    "textEs": "1. A diferencia de las otras religiones estudiadas en este curso hasta ahora, el budismo clásico:",
+    "optionsEn": [
+      "Largely declines to answer the question of a Creator God",
+      "Centers entirely on a Creator God",
+      "Was founded by multiple prophets",
+      "Rejects the concept of suffering"
+    ],
+    "optionsEs": [
+      "En gran medida declina responder la pregunta de un Dios Creador",
+      "Se centra por completo en un Dios Creador",
+      "Fue fundado por múltiples profetas",
+      "Rechaza el concepto del sufrimiento"
+    ],
+    "c": 21,
+    "explEn": "Classical Buddhism largely declines to answer the question of a Creator God, treating it as a distraction from its actual concern: diagnosing and curing suffering.",
+    "explEs": "El budismo clásico en gran medida declina responder la pregunta de un Dios Creador, tratándola como una distracción de su verdadera preocupación: diagnosticar y curar el sufrimiento."
+  },
+  {
+    "textEn": "2. According to Buddhist tradition, Siddhartha Gautama was exposed to the Four Sights, which included an old man, a diseased man, a corpse, and:",
+    "textEs": "2. Según la tradición budista, Siddhartha Gautama fue expuesto a las Cuatro Vistas, que incluían un anciano, un hombre enfermo, un cadáver, y:",
+    "optionsEn": [
+      "A king",
+      "A wandering ascetic",
+      "A wealthy merchant",
+      "A soldier"
+    ],
+    "optionsEs": [
+      "Un rey",
+      "Un asceta errante",
+      "Un comerciante rico",
+      "Un soldado"
+    ],
+    "c": 29,
+    "explEn": "The Four Sights were an old man, a diseased man, a corpse, and a wandering ascetic who had renounced ordinary life in search of release from suffering.",
+    "explEs": "Las Cuatro Vistas fueron un anciano, un hombre enfermo, un cadáver, y un asceta errante que había renunciado a la vida ordinaria en busca de liberación del sufrimiento."
+  },
+  {
+    "textEn": "3. Siddhartha achieved enlightenment while meditating beneath a fig tree near the town of:",
+    "textEs": "3. Siddhartha alcanzó la iluminación mientras meditaba bajo una higuera cerca del pueblo de:",
+    "optionsEn": [
+      "Mecca",
+      "Jerusalem",
+      "Bodh Gaya",
+      "Varanasi"
+    ],
+    "optionsEs": [
+      "La Meca",
+      "Jerusalén",
+      "Bodh Gaya",
+      "Varanasi"
+    ],
+    "c": 37,
+    "explEn": "Siddhartha achieved enlightenment while meditating beneath the Bodhi Tree near the town of Bodh Gaya.",
+    "explEs": "Siddhartha alcanzó la iluminación mientras meditaba bajo el Árbol Bodhi cerca del pueblo de Bodh Gaya."
+  },
+  {
+    "textEn": "4. According to this unit, why does the Buddha's identity as an ordinary man matter to Buddhism's entire logic?",
+    "textEs": "4. Según esta unidad, ¿por qué importa la identidad del Buda como hombre ordinario para toda la lógica del budismo?",
+    "optionsEn": [
+      "It proves he was actually divine",
+      "It has no theological significance at all",
+      "It means Buddhism requires a mediator like Christianity",
+      "His path is only useful if any ordinary person can also walk it"
+    ],
+    "optionsEs": [
+      "Prueba que en realidad era divino",
+      "No tiene ninguna significación teológica en absoluto",
+      "Significa que el budismo requiere un mediador como el cristianismo",
+      "Su camino solo es útil si cualquier persona ordinaria también puede recorrerlo"
+    ],
+    "c": 45,
+    "explEn": "The Buddha's usefulness to followers lies in having discovered, through ordinary human effort, a path any other ordinary human being can in principle also walk.",
+    "explEs": "La utilidad del Buda para sus seguidores radica en haber descubierto, a través del esfuerzo humano ordinario, un camino que cualquier otro ser humano ordinario puede en principio también recorrer."
+  },
+  {
+    "textEn": "5. The first of the Four Noble Truths, dukkha, declares that:",
+    "textEs": "5. La primera de las Cuatro Nobles Verdades, dukkha, declara que:",
+    "optionsEn": [
+      "Suffering is a universal and inescapable feature of ordinary life",
+      "Suffering is rare and avoidable",
+      "Only evil people suffer",
+      "Suffering does not really exist"
+    ],
+    "optionsEs": [
+      "El sufrimiento es un rasgo universal e ineludible de la vida ordinaria",
+      "El sufrimiento es raro y evitable",
+      "Solo las personas malas sufren",
+      "El sufrimiento realmente no existe"
+    ],
+    "c": 49,
+    "explEn": "The first Noble Truth declares suffering (dukkha) is a universal and inescapable feature of ordinary life, including birth, aging, sickness, and death.",
+    "explEs": "La primera Noble Verdad declara que el sufrimiento (dukkha) es un rasgo universal e ineludible de la vida ordinaria, incluyendo el nacimiento, el envejecimiento, la enfermedad y la muerte."
+  },
+  {
+    "textEn": "6. The second Noble Truth identifies the cause of suffering as:",
+    "textEs": "6. La segunda Noble Verdad identifica la causa del sufrimiento como:",
+    "optionsEn": [
+      "Original sin",
+      "Tanha, craving or desire",
+      "Bad luck",
+      "The actions of evil spirits"
+    ],
+    "optionsEs": [
+      "El pecado original",
+      "Tanha, el anhelo o deseo",
+      "La mala suerte",
+      "Las acciones de espíritus malignos"
+    ],
+    "c": 57,
+    "explEn": "The second Noble Truth identifies tanha, craving or grasping attachment, as the cause of suffering.",
+    "explEs": "La segunda Noble Verdad identifica el tanha, el anhelo o apego aferrado, como la causa del sufrimiento."
+  },
+  {
+    "textEn": "7. The fourth Noble Truth prescribes the method for ending suffering, called:",
+    "textEs": "7. La cuarta Noble Verdad prescribe el método para terminar el sufrimiento, llamado:",
+    "optionsEn": [
+      "The Five Pillars",
+      "The Ten Commandments",
+      "The Eightfold Path",
+      "The Middle Way alone"
+    ],
+    "optionsEs": [
+      "Los Cinco Pilares",
+      "Los Diez Mandamientos",
+      "El Óctuple Sendero",
+      "El Camino Medio solo"
+    ],
+    "c": 65,
+    "explEn": "The fourth Noble Truth prescribes the Eightfold Path as the method for ending suffering.",
+    "explEs": "La cuarta Noble Verdad prescribe el Óctuple Sendero como el método para terminar el sufrimiento."
+  },
+  {
+    "textEn": "8. This unit warns pastors that Buddhist meditation techniques adopted as 'secular wellness practice' often carry:",
+    "textEs": "8. Esta unidad advierte a los pastores que las técnicas de meditación budista adoptadas como 'práctica de bienestar secular' a menudo conllevan:",
+    "optionsEn": [
+      "No philosophical assumptions at all",
+      "Explicit Christian theology",
+      "Only physical exercise value",
+      "Specific claims about the illusory self and desire as the root problem"
+    ],
+    "optionsEs": [
+      "Ninguna suposición filosófica en absoluto",
+      "Teología cristiana explícita",
+      "Solo valor de ejercicio físico",
+      "Afirmaciones específicas acerca del yo ilusorio y el deseo como problema raíz"
+    ],
+    "c": 73,
+    "explEn": "Techniques marketed as secular wellness practice still carry the full Buddhist framework's claims about the illusory nature of the self and desire as the root problem.",
+    "explEs": "Las técnicas comercializadas como práctica de bienestar secular todavía conllevan las afirmaciones del marco budista completo acerca de la naturaleza ilusoria del yo y el deseo como problema raíz."
+  },
+  {
+    "textEn": "9. Anicca is the Buddhist doctrine that:",
+    "textEs": "9. Anicca es la doctrina budista de que:",
+    "optionsEn": [
+      "Everything in existence is in constant flux, without fixed essence",
+      "The self is eternal",
+      "Only humans experience suffering",
+      "Karma does not apply to rebirth"
+    ],
+    "optionsEs": [
+      "Todo lo que existe está en constante flujo, sin esencia fija",
+      "El yo es eterno",
+      "Solo los humanos experimentan sufrimiento",
+      "El karma no se aplica al renacimiento"
+    ],
+    "c": 77,
+    "explEn": "Anicca, impermanence, holds that everything in existence is in constant flux, arising and passing away, with nothing possessing a fixed, unchanging essence.",
+    "explEs": "Anicca, la impermanencia, sostiene que todo lo que existe está en constante flujo, surgiendo y desapareciendo, sin que nada posea una esencia fija e inmutable."
+  },
+  {
+    "textEn": "10. Anatta, 'no-self,' distinguishes Buddhism from Hindu Advaita Vedanta by denying:",
+    "textEs": "10. Anatta, 'no-yo,' distingue al budismo del Advaita Vedanta hindú al negar:",
+    "optionsEn": [
+      "That Brahman exists",
+      "That there is any permanent, unified self or soul at all",
+      "That suffering exists",
+      "That the Buddha ever lived"
+    ],
+    "optionsEs": [
+      "Que Brahman existe",
+      "Que exista ningún yo o alma permanente y unificado en absoluto",
+      "Que el sufrimiento existe",
+      "Que el Buda alguna vez vivió"
+    ],
+    "c": 85,
+    "explEn": "Anatta denies that there is any permanent, unified self or soul at all, unlike Hindu Advaita Vedanta which taught the individual Atman is identical with Brahman.",
+    "explEs": "Anatta niega que exista ningún yo o alma permanente y unificado en absoluto, a diferencia del Advaita Vedanta hindú que enseñaba que el Atman individual es idéntico con Brahman."
+  },
+  {
+    "textEn": "11. This unit describes Buddhist rebirth, given the doctrine of anatta, as more like:",
+    "textEs": "11. Esta unidad describe el renacimiento budista, dada la doctrina de anatta, como más parecido a:",
+    "optionsEn": [
+      "The same soul migrating unchanged from body to body",
+      "Complete annihilation with no continuity at all",
+      "One candle lighting another, a causal chain without a single unchanging thing",
+      "Identical to Christian resurrection"
+    ],
+    "optionsEs": [
+      "La misma alma migrando sin cambios de cuerpo en cuerpo",
+      "Aniquilación completa sin ninguna continuidad en absoluto",
+      "Una vela que enciende a otra, una cadena causal sin ninguna cosa inmutable",
+      "Idéntico a la resurrección cristiana"
+    ],
+    "c": 93,
+    "explEn": "Buddhist philosophy describes rebirth as something like one candle lighting another — a real continuity of cause and effect without a single unchanging soul that travels.",
+    "explEs": "La filosofía budista describe el renacimiento como algo parecido a una vela que enciende a otra — una continuidad real de causa y efecto sin ninguna alma inmutable única que viaje."
+  },
+  {
+    "textEn": "12. According to this unit, nirvana is most often described in Buddhist texts through:",
+    "textEs": "12. Según esta unidad, el nirvana se describe con mayor frecuencia en los textos budistas mediante:",
+    "optionsEn": [
+      "Detailed positive descriptions of heaven",
+      "Descriptions of a personal deity",
+      "Comparisons to the Christian concept of grace",
+      "Negation, such as the extinguishing of craving"
+    ],
+    "optionsEs": [
+      "Descripciones positivas detalladas del cielo",
+      "Descripciones de una deidad personal",
+      "Comparaciones con el concepto cristiano de gracia",
+      "La negación, como la extinción del anhelo"
+    ],
+    "c": 101,
+    "explEn": "Buddhist texts most often describe nirvana by negation — the extinguishing of craving and the fires of greed, hatred, and delusion.",
+    "explEs": "Los textos budistas describen el nirvana con mayor frecuencia por negación — la extinción del anhelo y los fuegos de la codicia, el odio y el engaño."
+  },
+  {
+    "textEn": "13. This unit specifically warns pastors that nirvana should NOT be treated as:",
+    "textEs": "13. Esta unidad advierte específicamente a los pastores que el nirvana NO debe tratarse como:",
+    "optionsEn": [
+      "A Buddhist word for heaven",
+      "The cessation of suffering",
+      "A goal of Buddhist practice",
+      "Difficult to define positively"
+    ],
+    "optionsEs": [
+      "Una palabra budista para el cielo",
+      "El cese del sufrimiento",
+      "Una meta de la práctica budista",
+      "Difícil de definir positivamente"
+    ],
+    "c": 105,
+    "explEn": "This unit warns that nirvana is not a Buddhist word for heaven, and treating it as though it were will genuinely mislead both pastor and listener.",
+    "explEs": "Esta unidad advierte que el nirvana no es una palabra budista para el cielo, y tratarlo como si lo fuera engañará genuinamente tanto al pastor como al oyente."
+  },
+  {
+    "textEn": "14. Theravada Buddhism, predominant in Sri Lanka and Thailand, emphasizes:",
+    "textEs": "14. El budismo Theravada, predominante en Sri Lanka y Tailandia, enfatiza:",
+    "optionsEn": [
+      "Devotional worship of many bodhisattvas",
+      "Monastic life as the most direct path to nirvana",
+      "Esoteric ritual guided by a lama",
+      "Rejection of the Four Noble Truths"
+    ],
+    "optionsEs": [
+      "La adoración devocional de muchos bodhisattvas",
+      "La vida monástica como el camino más directo al nirvana",
+      "El ritual esotérico guiado por un lama",
+      "El rechazo de las Cuatro Nobles Verdades"
+    ],
+    "c": 113,
+    "explEn": "Theravada Buddhism emphasizes the monastic life as the most direct path to nirvana, generally regarding the Buddha as a wise teacher rather than an object of worship.",
+    "explEs": "El budismo Theravada enfatiza la vida monástica como el camino más directo al nirvana, generalmente considerando al Buda como un maestro sabio en lugar de un objeto de adoración."
+  },
+  {
+    "textEn": "15. A bodhisattva, in Mahayana Buddhism, is a being who:",
+    "textEs": "15. Un bodhisattva, en el budismo Mahayana, es un ser que:",
+    "optionsEn": [
+      "Has never sought enlightenment",
+      "Rejects the concept of nirvana entirely",
+      "Delays entry into nirvana out of compassion to help other suffering beings",
+      "Is identical to the historical Buddha"
+    ],
+    "optionsEs": [
+      "Nunca ha buscado la iluminación",
+      "Rechaza el concepto de nirvana por completo",
+      "Retrasa la entrada al nirvana por compasión para ayudar a otros seres que sufren",
+      "Es idéntico al Buda histórico"
+    ],
+    "c": 121,
+    "explEn": "A bodhisattva has achieved the insight necessary for nirvana but voluntarily delays final entry into it out of compassion, to help other suffering beings first.",
+    "explEs": "Un bodhisattva ha alcanzado la comprensión necesaria para el nirvana pero voluntariamente retrasa su entrada final en él por compasión, para ayudar primero a otros seres que sufren."
+  },
+  {
+    "textEn": "16. Vajrayana Buddhism, sometimes called Tibetan Buddhism, is most widely known in the West through the figure of:",
+    "textEs": "16. El budismo Vajrayana, a veces llamado budismo tibetano, es más ampliamente conocido en Occidente a través de la figura de:",
+    "optionsEn": [
+      "Confucius",
+      "Krishna",
+      "Muhammad",
+      "The Dalai Lama"
+    ],
+    "optionsEs": [
+      "Confucio",
+      "Krishna",
+      "Mahoma",
+      "El Dalai Lama"
+    ],
+    "c": 129,
+    "explEn": "Vajrayana Buddhism is most widely known in the West through the figure of the Dalai Lama.",
+    "explEs": "El budismo Vajrayana es más ampliamente conocido en Occidente a través de la figura del Dalai Lama."
+  },
+  {
+    "textEn": "17. According to this unit, James 4:1-2 supports which point of common ground with Buddhism?",
+    "textEs": "17. Según esta unidad, ¿qué punto de terreno común con el budismo apoya Santiago 4:1-2?",
+    "optionsEn": [
+      "That conflict and suffering flow from desires warring within us",
+      "That the Buddha was divine",
+      "That nirvana and heaven are identical",
+      "That karma determines salvation"
+    ],
+    "optionsEs": [
+      "Que el conflicto y el sufrimiento fluyen de las pasiones que combaten dentro de nosotros",
+      "Que el Buda era divino",
+      "Que el nirvana y el cielo son idénticos",
+      "Que el karma determina la salvación"
+    ],
+    "c": 133,
+    "explEn": "James 4:1-2 traces conflict and suffering to desires warring within us, echoing Buddhism's diagnosis that craving produces suffering.",
+    "explEs": "Santiago 4:1-2 rastrea el conflicto y el sufrimiento hasta las pasiones que combaten dentro de nosotros, haciendo eco del diagnóstico budista de que el anhelo produce sufrimiento."
+  },
+  {
+    "textEn": "18. According to Matthew 11:28, cited in this unit, Jesus offers rest to those who:",
+    "textEs": "18. Según Mateo 11:28, citado en esta unidad, Jesús ofrece descanso a los que:",
+    "optionsEn": [
+      "Achieve enlightenment through meditation",
+      "Labor and are heavy laden",
+      "Extinguish all desire first",
+      "Belong to a particular caste"
+    ],
+    "optionsEs": [
+      "Alcanzan la iluminación mediante la meditación",
+      "Están trabajados y cargados",
+      "Extinguen todo deseo primero",
+      "Pertenecen a una casta particular"
+    ],
+    "c": 141,
+    "explEn": "Matthew 11:28 says, 'Come to Me, all you who labor and are heavy laden, and I will give you rest' — an invitation to real rest from a real Person.",
+    "explEs": "Mateo 11:28 dice: 'Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar' — una invitación a un descanso real de una Persona real."
+  },
+  {
+    "textEn": "19. According to John 17:3, cited in this unit, eternal life consists of:",
+    "textEs": "19. Según Juan 17:3, citado en esta unidad, la vida eterna consiste en:",
+    "optionsEn": [
+      "The extinguishing of the self",
+      "Achieving nirvana through the Eightfold Path",
+      "Knowing the only true God and Jesus Christ whom He sent",
+      "Escaping the cycle of samsara alone"
+    ],
+    "optionsEs": [
+      "La extinción del yo",
+      "Alcanzar el nirvana a través del Óctuple Sendero",
+      "Conocer al único Dios verdadero y a Jesucristo, a quien Él envió",
+      "Escapar del ciclo del samsara solamente"
+    ],
+    "c": 149,
+    "explEn": "John 17:3 describes eternal life as knowing the only true God and Jesus Christ whom He sent — relationship with a personal God, not the extinguishing of the self.",
+    "explEs": "Juan 17:3 describe la vida eterna como conocer al único Dios verdadero y a Jesucristo, a quien Él envió — relación con un Dios personal, no la extinción del yo."
+  },
+  {
+    "textEn": "20. This unit contrasts the Buddha, who died and remains simply a man, with Jesus, who:",
+    "textEs": "20. Esta unidad contrasta al Buda, que murió y sigue siendo simplemente un hombre, con Jesús, que:",
+    "optionsEn": [
+      "Only taught a technique for enduring suffering",
+      "Never claimed any unique identity",
+      "Taught the same Eightfold Path as the Buddha",
+      "Died and rose bodily, actually defeating suffering, sickness, and death"
+    ],
+    "optionsEs": [
+      "Solo enseñó una técnica para soportar el sufrimiento",
+      "Nunca afirmó ninguna identidad única",
+      "Enseñó el mismo Óctuple Sendero que el Buda",
+      "Murió y resucitó corporalmente, derrotando realmente el sufrimiento, la enfermedad y la muerte"
+    ],
+    "c": 157,
+    "explEn": "Christians proclaim a Savior who died and rose bodily, actually defeating the suffering, sickness, and death that first sent Siddhartha on his quest, not merely teaching a technique to endure it.",
+    "explEs": "Los cristianos proclaman un Salvador que murió y resucitó corporalmente, derrotando realmente el sufrimiento, la enfermedad y la muerte que originalmente enviaron a Siddhartha en su búsqueda, no meramente enseñando una técnica para soportarlo."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Explain why this unit calls Buddhism 'a religion without a Creator God' and how this differs from every religion studied so far in this course.",
+    "textEs": "21. Explique por qué esta unidad llama al budismo 'una religión sin ningún Dios Creador' y en qué difiere esto de cada religión estudiada hasta ahora en este curso.",
+    "kw_en": ["creator", "declines", "personal", "brahman", "diagnose", "cure", "suffering", "distraction"],
+    "kw_es": ["creador", "declina", "personal", "brahman", "diagnostic", "cura", "sufrimiento", "distracción"],
+    "modelEn": "Classical Buddhism largely declines to answer the question of a Creator God, treating it as a distraction from its actual concern of diagnosing and curing suffering. This differs from Judaism, Islam, and Christianity, which center on a personal Deity, and from Hinduism, which centers on the impersonal ultimate reality Brahman; Buddhism instead focuses almost entirely on the practical problem of suffering and its cure, without settling the question of ultimate divine reality one way or the other.",
+    "modelEs": "El budismo clásico en gran medida declina responder la pregunta de un Dios Creador, tratándola como una distracción de su verdadera preocupación de diagnosticar y curar el sufrimiento. Esto difiere del judaísmo, el islam y el cristianismo, que se centran en una Deidad personal, y del hinduismo, que se centra en la realidad última impersonal Brahman; el budismo en cambio se enfoca casi por completo en el problema práctico del sufrimiento y su cura, sin resolver la pregunta de la realidad divina última de una manera u otra."
+  },
+  {
+    "textEn": "22. Describe the Four Sights that led Siddhartha to renounce his royal life, and explain their significance in the Buddhist account of his quest.",
+    "textEs": "22. Describa las Cuatro Vistas que llevaron a Siddhartha a renunciar a su vida real, y explique su significado en el relato budista de su búsqueda.",
+    "kw_en": ["old man", "diseased", "corpse", "ascetic", "renounce", "shielded", "aging", "confronted"],
+    "kw_es": ["anciano", "enfermo", "cadáver", "asceta", "renunci", "protegido", "envejec", "enfrentado"],
+    "modelEn": "The Four Sights were an old man bent by age, a diseased man, a corpse being carried to cremation, and a wandering ascetic at peace despite renouncing ordinary life. Having been shielded by his father from suffering, Siddhartha was confronted for the first time with the universal realities of aging, sickness, and death, and struck by the ascetic's peace, which led him to renounce his position, family, and inheritance to seek liberation from suffering.",
+    "modelEs": "Las Cuatro Vistas fueron un anciano encorvado por la edad, un hombre enfermo, un cadáver siendo llevado a la cremación, y un asceta errante en paz a pesar de haber renunciado a la vida ordinaria. Habiendo sido protegido por su padre del sufrimiento, Siddhartha se enfrentó por primera vez con las realidades universales del envejecimiento, la enfermedad y la muerte, y sorprendido por la paz del asceta, lo cual lo llevó a renunciar a su posición, familia y herencia para buscar liberación del sufrimiento."
+  },
+  {
+    "textEn": "23. List and briefly explain the Four Noble Truths.",
+    "textEs": "23. Enumere y explique brevemente las Cuatro Nobles Verdades.",
+    "kw_en": ["dukkha", "tanha", "nirodha", "eightfold", "suffering", "craving", "cessation", "path"],
+    "kw_es": ["dukkha", "tanha", "nirodha", "óctuple", "sufrimiento", "anhelo", "cese", "sendero"],
+    "modelEn": "The first Noble Truth, dukkha, declares suffering is universal and inescapable in ordinary life. The second identifies tanha, craving or grasping attachment, as suffering's cause. The third, nirodha, declares the cessation of suffering possible by eliminating craving, which is nirvana. The fourth prescribes the method, the Eightfold Path, comprising right view, intention, speech, action, livelihood, effort, mindfulness, and concentration.",
+    "modelEs": "La primera Noble Verdad, dukkha, declara que el sufrimiento es universal e ineludible en la vida ordinaria. La segunda identifica el tanha, el anhelo o apego aferrado, como la causa del sufrimiento. La tercera, nirodha, declara que el cese del sufrimiento es posible al eliminar el anhelo, lo cual es el nirvana. La cuarta prescribe el método, el Óctuple Sendero, que comprende visión, intención, habla, acción, modo de vida, esfuerzo, atención y concentración correctos."
+  },
+  {
+    "textEn": "24. Why does this unit say many Westerners adopt Buddhist meditation techniques while denying interest in Buddhism as a religion, and what tension does this create?",
+    "textEs": "24. ¿Por qué dice esta unidad que muchos occidentales adoptan técnicas de meditación budista mientras niegan interés en el budismo como religión, y qué tensión crea esto?",
+    "kw_en": ["technology", "mind", "practical", "inseparable", "karma", "rebirth", "contradiction", "framework"],
+    "kw_es": ["tecnología", "mente", "práctic", "inseparable", "karma", "renacimiento", "contradicción", "marco"],
+    "modelEn": "The Eightfold Path was designed from the beginning to function as a practical technology of the mind, which is why many adopt its techniques as therapeutic tools while denying religious interest. The tension this creates is that, in its full traditional context, this technique is inseparable from Buddhist claims about karma, rebirth, and the nature of the self, claims a Christian cannot adopt without contradiction, even while using the technique itself.",
+    "modelEs": "El Óctuple Sendero fue diseñado desde el principio para funcionar como una tecnología práctica de la mente, por lo cual muchos adoptan sus técnicas como herramientas terapéuticas mientras niegan interés religioso. La tensión que esto crea es que, en su pleno contexto tradicional, esta técnica es inseparable de las afirmaciones budistas acerca del karma, el renacimiento y la naturaleza del yo, afirmaciones que un cristiano no puede adoptar sin contradicción, incluso al usar la técnica misma."
+  },
+  {
+    "textEn": "25. Distinguish anicca and anatta, and explain how anatta differs from the Hindu Advaita Vedanta view of Atman studied in Unit 4.",
+    "textEs": "25. Distinga anicca y anatta, y explique en qué difiere anatta de la visión hindú Advaita Vedanta del Atman estudiada en la Unidad 4.",
+    "kw_en": ["anicca", "anatta", "impermanence", "no-self", "advaita", "atman", "brahman", "deny"],
+    "kw_es": ["anicca", "anatta", "impermanencia", "no-yo", "advaita", "atman", "brahman", "nieg"],
+    "modelEn": "Anicca, impermanence, holds that everything in existence is in constant flux with no fixed essence. Anatta, no-self, extends this to deny any permanent, unified self or soul at all. This differs sharply from Hindu Advaita Vedanta, which taught the individual Atman is ultimately identical with the universal Brahman; classical Buddhism instead denies there is any permanent self to be identical with anything.",
+    "modelEs": "Anicca, la impermanencia, sostiene que todo lo que existe está en constante flujo sin esencia fija. Anatta, el no-yo, extiende esto para negar cualquier yo o alma permanente y unificado en absoluto. Esto difiere agudamente del Advaita Vedanta hindú, que enseñaba que el Atman individual es en última instancia idéntico al Brahman universal; el budismo clásico en cambio niega que exista ningún yo permanente que pueda ser idéntico a nada."
+  },
+  {
+    "textEn": "26. Why is nirvana difficult to define positively, and why does this unit warn against calling it 'a Buddhist word for heaven'?",
+    "textEs": "26. ¿Por qué es difícil definir positivamente el nirvana, y por qué advierte esta unidad contra llamarlo 'una palabra budista para el cielo'?",
+    "kw_en": ["negation", "extinguish", "flame", "permanent self", "mislead", "cessation", "destination", "heaven"],
+    "kw_es": ["negación", "extingu", "llama", "yo permanente", "engaña", "cese", "destino", "cielo"],
+    "modelEn": "Nirvana is difficult to define positively because Buddhist texts most often describe it by negation, as the extinguishing of craving, likened to a flame going out. Because Buddhism denies any permanent self to begin with, nirvana cannot be described as that self reaching a blissful destination the way Christianity describes heaven; this unit warns that treating nirvana as a Buddhist word for heaven will genuinely mislead both pastor and listener.",
+    "modelEs": "El nirvana es difícil de definir positivamente porque los textos budistas lo describen con mayor frecuencia por negación, como la extinción del anhelo, comparado con una llama que se apaga. Debido a que el budismo niega cualquier yo permanente desde el principio, el nirvana no puede describirse como ese yo alcanzando un destino dichoso de la manera en que el cristianismo describe el cielo; esta unidad advierte que tratar el nirvana como una palabra budista para el cielo engañará genuinamente tanto al pastor como al oyente."
+  },
+  {
+    "textEn": "27. Compare Theravada and Mahayana Buddhism, including the concept of the bodhisattva.",
+    "textEs": "27. Compare el budismo Theravada y el Mahayana, incluyendo el concepto del bodhisattva.",
+    "kw_en": ["theravada", "elders", "monastic", "mahayana", "bodhisattva", "compassion", "devotional", "delay"],
+    "kw_es": ["theravada", "ancianos", "monástic", "mahayana", "bodhisattva", "compasión", "devocional", "retras"],
+    "modelEn": "Theravada Buddhism, 'the teaching of the elders,' emphasizes monastic life as the most direct path to nirvana and regards the Buddha as a wise teacher rather than an object of worship. Mahayana Buddhism, 'the great vehicle,' developed a broader, more devotional tradition, introducing the bodhisattva, a being who delays entry into nirvana out of compassion to help other suffering beings first, and venerating Buddhas and bodhisattvas in ways resembling devotional worship.",
+    "modelEs": "El budismo Theravada, 'la enseñanza de los ancianos,' enfatiza la vida monástica como el camino más directo al nirvana y considera al Buda como un maestro sabio en lugar de un objeto de adoración. El budismo Mahayana, 'el gran vehículo,' desarrolló una tradición más amplia y devocional, introduciendo el bodhisattva, un ser que retrasa su entrada al nirvana por compasión para ayudar primero a otros seres que sufren, y venerando a Budas y bodhisattvas de maneras parecidas a la adoración devocional."
+  },
+  {
+    "textEn": "28. According to this unit, what common ground can a pastor honor with a Buddhist neighbor, and what verse supports this?",
+    "textEs": "28. Según esta unidad, ¿qué terreno común puede honrar un pastor con un vecino budista, y qué versículo apoya esto?",
+    "kw_en": ["suffering", "seriousness", "compassion", "ethical", "james", "desire", "diagnose", "craving"],
+    "kw_es": ["sufrimiento", "seriedad", "compasión", "ético", "santiago", "deseo", "diagnostic", "anhelo"],
+    "modelEn": "A pastor can honor Buddhism's total seriousness about human suffering and its ethical teaching of compassion and restraint of greed and hatred, which overlaps with Scripture's moral vision. James 4:1-2 traces conflict and suffering to desires warring within us, supporting the affirmation that the Buddha correctly diagnosed something real: much suffering flows from disordered craving and attachment.",
+    "modelEs": "Un pastor puede honrar la total seriedad del budismo acerca del sufrimiento humano y su enseñanza ética de compasión y restricción de la codicia y el odio, que se superpone con la visión moral de la Escritura. Santiago 4:1-2 rastrea el conflicto y el sufrimiento hasta las pasiones que combaten dentro de nosotros, apoyando la afirmación de que el Buda diagnosticó correctamente algo real: gran parte del sufrimiento fluye del anhelo y el apego desordenados."
+  },
+  {
+    "textEn": "29. Using Matthew 11:28 and John 17:3, explain what the gospel offers that Buddhism cannot offer, according to this unit.",
+    "textEs": "29. Usando Mateo 11:28 y Juan 17:3, explique qué ofrece el evangelio que el budismo no puede ofrecer, según esta unidad.",
+    "kw_en": ["rest", "invitation", "person", "redemption", "extinguish", "eternal life", "know", "relationship"],
+    "kw_es": ["descanso", "invitación", "persona", "redención", "extingu", "vida eterna", "conoc", "relación"],
+    "modelEn": "Where Buddhism prescribes extinguishing desire and ultimately the self, Matthew 11:28 offers rest through an invitation from a real Person to a real person, promising redemption and restoration rather than dissolution. Where nirvana can only be described negatively, John 17:3 describes eternal life positively as knowing the only true God and Jesus Christ — relationship with a personal God, not the extinguishing of the self that would know Him.",
+    "modelEs": "Donde el budismo prescribe extinguir el deseo y en última instancia el yo, Mateo 11:28 ofrece descanso a través de una invitación de una Persona real a una persona real, prometiendo redención y restauración en lugar de disolución. Donde el nirvana solo puede describirse negativamente, Juan 17:3 describe la vida eterna positivamente como conocer al único Dios verdadero y a Jesucristo — relación con un Dios personal, no la extinción del yo que lo conocería."
+  },
+  {
+    "textEn": "30. Synthesize this unit: contrast the Buddha's death with the resurrection of Christ, and explain why this unit calls this 'not merely teaching a technique for enduring suffering, but actually defeating it.'",
+    "textEs": "30. Sintetice esta unidad: contraste la muerte del Buda con la resurrección de Cristo, y explique por qué esta unidad llama a esto 'no meramente enseñando una técnica para soportar el sufrimiento, sino realmente derrotándolo.'",
+    "kw_en": ["buddha", "died", "location", "risen", "bodily", "conquer", "defeat", "sickness"],
+    "kw_es": ["buda", "murió", "paradero", "resucit", "corporal", "vence", "derrota", "enfermedad"],
+    "modelEn": "The Buddha, however wise, remains simply a man who died, and Buddhist tradition itself does not claim to know his location with certainty. Christians proclaim a Savior who died and rose bodily, conquering the very suffering, sickness, and death that first sent Siddhartha on his quest. This unit calls this actually defeating suffering rather than merely teaching a technique for enduring it, because the resurrection is a historical victory over death itself, not a mental technique for coping with it while death remains undefeated.",
+    "modelEs": "El Buda, por sabio que fuera, sigue siendo simplemente un hombre que murió, y la propia tradición budista no pretende conocer su paradero con certeza. Los cristianos proclaman un Salvador que murió y resucitó corporalmente, venciendo el mismo sufrimiento, la enfermedad y la muerte que originalmente enviaron a Siddhartha en su búsqueda. Esta unidad llama a esto realmente derrotar el sufrimiento en lugar de meramente enseñar una técnica para soportarlo, porque la resurrección es una victoria histórica sobre la muerte misma, no una técnica mental para sobrellevarla mientras la muerte permanece invicta."
+  }
+];
+
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit5 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_wr_u5_mc_passed';
+const SA_LOCK_KEY = 'cts_wr_u5_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_wr_u5_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function kwHit(ans, kw) {
+  kw = (kw||'').toLowerCase(); if (!kw) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (kw.length <= 4) ? '(?:^|[^'+WC+'])'+esc+'(?!['+WC+'])' : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); } catch(e) { return ans.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read the student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(ans, kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 6 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first." : "Por favor regístrese primero.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'certificate';
+    let total, score, required, mcGatePass, saGatePass, correctKW = 0;
+    const mcPct2 = correctMC;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW; required = null;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit5 = true;
+                localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_wr_u5_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit5 = true;
+        localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_wr_u5_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_wr_u5_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        renderQuestions();
+    };
+});
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 5 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSWRReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

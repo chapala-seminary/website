@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Doctrinal Preaching — Unit 1: What Is Doctrinal Preaching?</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 2 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Doctrinal Preaching — Unit 1: What Is Doctrinal Preaching?</span><span class="lang-es">📖 Predicación Doctrinal — Unidad 1: ¿Qué es la Predicación Doctrinal?</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"But as for you, speak the things which are proper for sound doctrine." — Titus 2:1 (NKJV)</span><span class="lang-es">"Pero tú habla lo que está de acuerdo con la sana doctrina." — Tito 2:1 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Doctrinal Preaching. Please register before beginning Unit 1.</span><span class="lang-es">Bienvenido a Predicación Doctrinal. Por favor regístrese antes de comenzar la Unidad 1.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top:10px; font-weight:bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<h3>Day 1 — What Doctrinal Preaching Is</h3>
+<p>The word <em>doctrine</em> simply means <strong>teaching</strong>. Doctrinal or theological preaching, then, is the preaching of what the Bible teaches — taking a basic Christian belief and expounding it so that the hearer comes to understand it and to accept it. But it does not stop at the mind. A doctrinal sermon takes that belief and applies it to life. It aims past the intellect at the heart and the will.</p>
+<p>This is the first thing to settle, because doctrinal preaching is easily mistaken for a lecture. A lecture informs; a sermon proclaims. The goal is not that the congregation should know more <em>about</em> God, but that they should know God, trust Him, and obey Him. Doctrine is the fuel; worship and obedience are the fire.</p>
+<div class="scripture">"But as for you, speak the things which are proper for sound doctrine." — Titus 2:1 (NKJV)</div>
+<p>So the theological message has two movements: it expounds a belief to gain understanding and acceptance, and it applies that belief to life. Hold both together and you have doctrinal preaching. Drop the first and you have mere exhortation; drop the second and you have a classroom.</p>
+
+<h3>Day 2 — Why We Preach Doctrine</h3>
+<p>There are three reasons to preach a theological sermon. <strong>First, to lay a foundation.</strong> The church is built on the <em>kerygma</em>, the core gospel message, and a congregation grounded in that message will stand when shallow teaching fails elsewhere. <strong>Second, to educate.</strong> God's people are to be built up in the faith, not left to live on milk. <strong>Third, to develop your own position.</strong> Preparing doctrinal sermons forces the preacher into real study, and he comes out with convictions he did not have before.</p>
+<p>This is no novelty. The preaching of the New Testament was doctrinal. The apostles preached the kerygma, the cross, judgment, and the love of God; they preached boldly, in the power of the Spirit, and everywhere they went. Doctrinal preaching is not a departure from biblical preaching — it is a return to it.</p>
+<div class="scripture">"Till I come, give attention to reading, to exhortation, to doctrine... Take heed to yourself and to the doctrine." — 1 Timothy 4:13,16 (NKJV)</div>
+
+<h3>Day 3 — Is Topical Preaching Biblical?</h3>
+<p>Here is the objection every doctrinal preacher must answer. Sermons fall along a spectrum. In the <strong>textual</strong> sermon the divisions come from the text and the explanation from the preacher. In the <strong>expository</strong> sermon both the divisions and the explanation come from the text; it is the most closely tied to the passage. In the <strong>topical</strong> sermon the idea comes from the text, but the preacher arranges the points himself by deduction. The topical sermon is therefore analytically the <em>least</em> tied to the text — and that is why people suspect it is just the preacher's ideas with verses bolted on afterward.</p>
+<p>The answer is simple and strict: <strong>to keep a topical sermon biblical, every point must rest on, and quote, its own verse of Scripture.</strong> When each point stands on a text, the sermon is the teaching of Scripture even though the preacher arranged it. Deduction moves from the general to the specific (topical); induction moves from the specific to the general (textual and expository). Either road is biblical, so long as the text governs the idea and not the reverse.</p>
+<p>And the reverse must be said too. A preacher may take an expository or textual structure \u2014 divisions drawn straight from the text \u2014 and still develop them in a way that is not biblical at all, reading his own ideas into the words instead of drawing God's meaning out of them. So structure, by itself, neither makes a sermon biblical nor makes it less biblical. <strong>A biblical sermon is one whose content is truly derived from the Word of God.</strong></p>
+<p>This is why a doctrinal sermon commonly takes a topical or synthetic form &mdash; though it can also be strongly expository while still synthesizing doctrine, when a single passage sustains the weight of the point. The great Christian doctrines are not laid out complete in any single passage; Scripture reveals them a little here and a little there. So the preacher must go to several places, gather what each one says, and put the whole together \u2014 <em>letting Scripture explain itself</em>. There is always danger in building a theology on one or two verses; if those verses seem to contradict what the Bible teaches generally, it is our interpretation of them that must be corrected, not the rest of Scripture.</p>
+<p>Two convictions guard this work. The first is <strong>sola scriptura</strong> \u2014 Scripture alone. If a thing is not in the Bible, we have no business preaching it as God's truth; and if it is in the Bible, we must handle it with great care. The second is the <strong>priesthood of all believers</strong>: God gives His people the ability to read and interpret His Word, for we are a kingdom of priests (1 Peter 2:9), each able to come to the Scriptures himself.</p>
+<p>And there is a safeguard the preacher must never forget: God holds teachers to a stricter standard. <em>"My brethren, let not many of you become teachers, knowing that we shall receive a stricter judgment"</em> (James 3:1, NKJV). The preacher is accountable to God in a heavier way than others, precisely because his error can lead others astray. That accountability is not meant to silence him but to make him careful \u2014 to send him back to the text again and again before he dares to say, "Thus says the Lord."</p>
+<div class="pull-quote">"If you cannot find a text to preach the idea, then it may be your idea and not the Lord's."</div>
+
+<h3>Day 4 — The Four Ingredients of Successful Preaching</h3>
+<p><strong>1. Interpretation.</strong> This is harder than it looks. It calls for knowledge of the history, geography, theology, and setting of Scripture, and ideally its languages. The governing rule is one to write on the wall of the study: the subject of the sermon must be the subject of the text. Where the two part company, the preacher has stopped interpreting and started inventing — the words of Scripture may still be on his lips, but the meaning is now his own. Sound interpretation is simply the discipline of drawing God’s meaning <em>out</em> of the text rather than reading the preacher’s meaning <em>into</em> it. <strong>2. Knowledge of people.</strong> This is not an academic degree in psychology but a sensitivity to the real concerns and needs of the listeners — the griefs they carry in unseen, the fears they will not name aloud, the questions they are actually asking. A sermon perfectly true and perfectly aimed at no one will land on no one. The preacher who knows his people preaches the same doctrine differently to the grieving widow and the careless young man, because he is aiming the one truth at two different hearts. <strong>3. Arrangement and style.</strong> The style should be simple, clear, and pictorial; good illustrations can make a sermon. Five marks tell a good outline from a poor one, and they work together — weakness in any one weakens the whole. <em>Unity:</em> the sermon is about one thing, not three or five; this is the most important mark, for without it nothing else will hold, and the keyword is your chief tool for it, since every division must be a particular instance of the keyword. <em>Order:</em> each division is distinct, and they fall in a sequence that makes sense. <em>Movement:</em> the sermon progresses and peaks, usually at the invitation, rather than circling in place. <em>Parallel:</em> the points are worded alike where possible, so the ear can hold them. <em>Proportion:</em> the points are balanced in length and weight, none swallowing the others. <strong>4. Delivery.</strong> A sermon is not a sermon until it has been heard, and there is no single right method — some men read a full manuscript, as Jonathan Edwards did, while others preach extemporaneously with few notes or none; each preacher must find the way that fits his own gifts. But two things rise above method. The first is to <strong>occupy the space</strong>. Whatever the size of the room, project and preach as though you have gathered everyone into one bubble with you; the preacher takes responsibility for the whole room and fills it with his presence, not merely his volume. The second is harder to put into words, and it is the deepest thing in this lesson: <strong>preaching is not something you do, but something you are.</strong> The sermon is not a parcel you hand across a counter; it comes up out of the soul, and you cannot finally separate the message from the man. This is why the one trait the great preachers share is enthusiasm — not volume, not oratory, not technique, none of which can manufacture it — but the overflow of a man who so believes what he is saying that it has become part of him. You do not give a sermon. You preach from the soul.</p>
+
+<h3>Day 5 — Handling the Doctrinal Sermon Well (Summary)</h3>
+<p>Three counsels guide the doctrinal preacher over a lifetime. <strong>Be comprehensive:</strong> over time, preach across the whole range of doctrine, not only your favorites. <strong>Be positive</strong> in tone, most of the time. <strong>Be clear:</strong> avoid theological jargon and use everyday language, so that ordinary believers are trained to be theologians themselves — which matters all the more for the lone student far from a seminary.</p>
+<p>So Unit 1 has set the vision: doctrine must be preached, for understanding and for life; and a sermon can be topical and deductive yet fully biblical, because every point rests on its own text and the whole moves toward a response. Unit 2 puts the tools in your hand — text, idea, interrogative, keyword, and subject — and Units 3 through 10 run that method across the great doctrines one by one.</p>
+<div class="scripture">"Preach the word! Be ready in season and out of season." — 2 Timothy 4:2 (NKJV)</div>
+</div>
+<div class="lang-es">
+<h3>Día 1 — Qué es la predicación doctrinal</h3>
+<p>La palabra <em>doctrina</em> significa sencillamente <strong>enseñanza</strong>. La predicación doctrinal o teológica es, pues, la predicación de lo que la Biblia enseña — tomar una creencia cristiana básica y exponerla para que el oyente llegue a entenderla y a aceptarla. Pero no se detiene en la mente. El sermón doctrinal toma esa creencia y la aplica a la vida. Apunta más allá del intelecto, al corazón y a la voluntad.</p>
+<p>Esto hay que resolverlo primero, porque la predicación doctrinal se confunde fácilmente con una clase. La clase informa; el sermón proclama. La meta no es que la congregación sepa más <em>acerca de</em> Dios, sino que conozca a Dios, confíe en Él y le obedezca. La doctrina es el combustible; la adoración y la obediencia son el fuego.</p>
+<div class="scripture">"Pero tú habla lo que está de acuerdo con la sana doctrina." — Tito 2:1 (RVG)</div>
+<p>Así que el mensaje teológico tiene dos movimientos: expone una creencia para ganar entendimiento y aceptación, y aplica esa creencia a la vida. Sostenga ambos y tiene predicación doctrinal. Quite el primero y tiene mera exhortación; quite el segundo y tiene un aula.</p>
+
+<h3>Día 2 — Por qué predicamos la doctrina</h3>
+<p>Hay tres razones para predicar un sermón teológico. <strong>Primera, poner un fundamento.</strong> La iglesia se edifica sobre el <em>kerigma</em>, el mensaje central del evangelio, y una congregación cimentada en ese mensaje se mantendrá firme cuando la enseñanza superficial falle en otros lugares. <strong>Segunda, educar.</strong> El pueblo de Dios ha de ser edificado en la fe, no dejado a vivir de leche. <strong>Tercera, desarrollar la propia posición.</strong> Preparar sermones doctrinales obliga al predicador a un estudio verdadero, y sale de él con convicciones que antes no tenía.</p>
+<p>Esto no es ninguna novedad. La predicación del Nuevo Testamento era doctrinal. Los apóstoles predicaron el kerigma, la cruz, el juicio y el amor de Dios; predicaron con denuedo, en el poder del Espíritu, y por todas partes. La predicación doctrinal no es una desviación de la predicación bíblica — es un regreso a ella.</p>
+<div class="scripture">"Entre tanto que voy, ocúpate en la lectura, la exhortación y la enseñanza... Ten cuidado de ti mismo y de la doctrina." — 1 Timoteo 4:13,16 (RVG)</div>
+
+<h3>Día 3 — ¿Es bíblica la predicación tópica?</h3>
+<p>He aquí la objeción que todo predicador doctrinal debe responder. Los sermones se ubican en un espectro. En el sermón <strong>textual</strong> las divisiones vienen del texto y la explicación del predicador. En el sermón <strong>expositivo</strong> tanto las divisiones como la explicación vienen del texto; es el más ligado al pasaje. En el sermón <strong>tópico</strong> la idea viene del texto, pero el predicador ordena los puntos él mismo por deducción. El sermón tópico es, por tanto, analíticamente el <em>menos</em> ligado al texto — y por eso se sospecha que es solo las ideas del predicador con versículos añadidos después.</p>
+<p>La respuesta es sencilla y estricta: <strong>para mantener bíblico un sermón tópico, cada punto debe descansar en su propio versículo de la Escritura, y citarlo.</strong> Cuando cada punto se apoya en un texto, el sermón es la enseñanza de la Escritura aunque el predicador lo haya ordenado. La deducción va de lo general a lo específico (tópico); la inducción va de lo específico a lo general (textual y expositivo). Cualquiera de los dos caminos es bíblico, mientras el texto gobierne la idea y no al revés.</p>
+<p>Y hay que decir también lo contrario. Un predicador puede tomar una estructura expositiva o textual \u2014 divisiones sacadas directamente del texto \u2014 y aun as\u00ed desarrollarlas de una manera que no es b\u00edblica en absoluto, leyendo sus propias ideas en las palabras en lugar de sacar de ellas el sentido de Dios. As\u00ed que la estructura, por s\u00ed sola, ni hace b\u00edblico un serm\u00f3n ni lo hace menos b\u00edblico. <strong>Un serm\u00f3n b\u00edblico es aquel cuyo contenido se deriva verdaderamente de la Palabra de Dios.</strong></p>
+<p>Por eso un serm\u00f3n doctrinal com\u00fanmente toma una forma t\u00f3pica o sint\u00e9tica &mdash; aunque tambi\u00e9n puede ser fuertemente expositivo mientras a\u00fan sintetiza doctrina, cuando un solo pasaje sostiene el peso del punto. Las grandes doctrinas cristianas no se hallan expuestas por completo en un solo pasaje; la Escritura las revela un poco aqu\u00ed y un poco all\u00e1. Por eso el predicador debe ir a varios lugares, reunir lo que cada uno dice, y juntar el todo \u2014 <em>dejando que la Escritura se explique a s\u00ed misma</em>. Siempre hay peligro en edificar una teolog\u00eda sobre uno o dos vers\u00edculos; si esos vers\u00edculos parecen contradecir lo que la Biblia ense\u00f1a en general, es nuestra interpretaci\u00f3n de ellos la que debe corregirse, no el resto de la Escritura.</p>
+<p>Dos convicciones guardan esta obra. La primera es <strong>sola scriptura</strong> \u2014 la Escritura sola. Si algo no est\u00e1 en la Biblia, no tenemos por qu\u00e9 predicarlo como verdad de Dios; y si est\u00e1 en la Biblia, debemos tratarlo con gran cuidado. La segunda es el <strong>sacerdocio de todos los creyentes</strong>: Dios da a su pueblo la capacidad de leer e interpretar su Palabra, porque somos un reino de sacerdotes (1 Pedro 2:9), cada uno capaz de acercarse \u00e9l mismo a las Escrituras.</p>
+<p>Y hay una salvaguarda que el predicador nunca debe olvidar: Dios juzga a los maestros con un criterio m\u00e1s estricto. <em>"Hermanos m\u00edos, no os hag\u00e1is muchos maestros, sabiendo que recibiremos mayor condenaci\u00f3n"</em> (Santiago 3:1, RVG). El predicador es responsable ante Dios de un modo m\u00e1s pesado que los dem\u00e1s, precisamente porque su error puede llevar a otros por mal camino. Esa responsabilidad no busca callarlo sino hacerlo cuidadoso \u2014 enviarlo al texto una y otra vez antes de atreverse a decir: "As\u00ed dice el Se\u00f1or."</p>
+<div class="pull-quote">"Si no puedes hallar un texto para predicar la idea, entonces puede ser tu idea y no la del Señor."</div>
+
+<h3>Día 4 — Los cuatro ingredientes de la predicación exitosa</h3>
+<p><strong>1. La interpretación.</strong> Es más difícil de lo que parece. Exige conocimiento de la historia, la geografía, la teología y el entorno de la Escritura, e idealmente de sus idiomas. La regla que gobierna es una para escribir en la pared del estudio: el tema del sermón debe ser el tema del texto. Donde los dos se separan, el predicador ha dejado de interpretar y ha comenzado a inventar — las palabras de la Escritura pueden seguir en sus labios, pero el significado ahora es suyo. La interpretación sana es sencillamente la disciplina de sacar el significado de Dios <em>del</em> texto en vez de leer el significado del predicador <em>dentro</em> de él. <strong>2. El conocimiento de la gente.</strong> No es un título académico en psicología, sino una sensibilidad a las preocupaciones y necesidades reales de los oyentes — los duelos que cargan sin que se vean, los temores que no nombran en voz alta, las preguntas que de veras se hacen. Un sermón perfectamente verdadero y perfectamente dirigido a nadie caerá sobre nadie. El predicador que conoce a su gente predica la misma doctrina de modo distinto a la viuda que llora y al joven descuidado, porque apunta la única verdad a dos corazones diferentes. <strong>3. El arreglo y el estilo.</strong> El estilo debe ser sencillo, claro y pictórico; las buenas ilustraciones pueden hacer un sermón. Cinco marcas distinguen un buen bosquejo de uno deficiente, y funcionan juntas — la debilidad en cualquiera debilita el todo. <em>Unidad:</em> el sermón trata de una sola cosa, no de tres ni de cinco; es la marca más importante, pues sin ella nada más se sostiene, y la palabra clave es su herramienta principal, ya que cada división debe ser un caso particular de la palabra clave. <em>Orden:</em> cada división es distinta, y caen en una secuencia que tiene sentido. <em>Movimiento:</em> el sermón progresa y culmina, normalmente en la invitación, en vez de dar vueltas en el mismo sitio. <em>Paralelo:</em> los puntos se redactan igual donde sea posible, para que el oído los retenga. <em>Proporción:</em> los puntos están equilibrados en extensión y peso, sin que uno se trague a los demás. <strong>4. La entrega.</strong> Un sermón no es sermón hasta que ha sido oído, y no hay un solo método correcto — unos leen un manuscrito completo, como hacía Jonathan Edwards, mientras otros predican de modo extemporáneo con pocas notas o ninguna; cada predicador debe hallar la manera que se ajuste a sus propios dones. Pero dos cosas se elevan por encima del método. La primera es <strong>ocupar el espacio</strong>. Sea cual sea el tamaño del recinto, proyecte y predique como si hubiera reunido a todos en una sola burbuja con usted; el predicador se hace responsable de toda la sala y la llena con su presencia, no solo con su volumen. La segunda es más difícil de expresar, y es lo más profundo de esta lección: <strong>la predicación no es algo que usted hace, sino algo que usted es.</strong> El sermón no es un paquete que se entrega sobre un mostrador; brota del alma, y no se puede al fin separar el mensaje del hombre. Por eso el único rasgo que comparten los grandes predicadores es el entusiasmo — ni el volumen, ni la oratoria, ni la técnica, ninguno de los cuales puede fabricarlo — sino el desbordamiento de un hombre que cree tanto lo que dice que se ha vuelto parte de él. Usted no da un sermón. Usted predica desde el alma.</p>
+
+<h3>Día 5 — Cómo manejar bien el sermón doctrinal (Resumen)</h3>
+<p>Tres consejos guían al predicador doctrinal a lo largo de la vida. <strong>Sé comprensivo:</strong> con el tiempo, predica por toda la gama de la doctrina, no solo tus favoritas. <strong>Sé positivo</strong> en el tono, la mayor parte del tiempo. <strong>Sé claro:</strong> evita la jerga teológica y usa lenguaje cotidiano, para que los creyentes comunes sean entrenados a ser teólogos ellos mismos — lo cual importa aún más para el estudiante solitario, lejos de un seminario.</p>
+<p>Así que la Unidad 1 ha fijado la visión: la doctrina debe predicarse, para el entendimiento y para la vida; y un sermón puede ser tópico y deductivo y a la vez plenamente bíblico, porque cada punto descansa en su propio texto y el conjunto avanza hacia una respuesta. La Unidad 2 pone las herramientas en tu mano — texto, idea, interrogativo, palabra clave y tema — y las Unidades 3 a 10 corren ese método por las grandes doctrinas una por una.</p>
+<div class="scripture">"Predica la palabra; instá a tiempo y fuera de tiempo." — 2 Timoteo 4:2 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 1 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 1;
+const COURSE = 'dp';
+const NEXT_UNIT_URL = 'CTSDPUnit2.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - What Is Doctrinal Preaching?", "Unit 2 - The Method: Text, Interrogative, Keyword", "Unit 3 - Preaching the Doctrine of Revelation", "Unit 4 - Preaching the Doctrine of God", "Unit 5 - Preaching the Doctrine of Man", "Unit 6 - Preaching the Life and Work of Christ", "Unit 7 - Preaching the Holy Spirit", "Unit 8 - Preaching the Doctrine of Salvation", "Unit 9 - Preaching the Doctrine of the Church", "Unit 10 - Preaching the Doctrine of Last Things"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSDPUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\U0001F44B ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "1. What does the word “doctrine” most basically mean?", "textEs": "1. ¿Qué significa básicamente la palabra “doctrina”?", "optionsEn": ["A ritual", "A denomination", "Teaching", "A style of music"], "optionsEs": ["Un ritual", "Una denominación", "Enseñanza", "Un estilo de música"], "explanationEn": "“Doctrine” simply means teaching; doctrinal preaching is the preaching of what the Bible teaches.", "explanationEs": "“Doctrina” significa simplemente enseñanza; la predicación doctrinal predica lo que la Biblia enseña.", "correct": 2}, {"textEn": "2. What does a doctrinal (theological) sermon aim to do with a Christian belief?", "textEs": "2. ¿Qué busca hacer un sermón doctrinal (teológico) con una creencia cristiana?", "optionsEn": ["Merely entertain the listeners", "Gain understanding and acceptance, and apply it to life", "Display the preacher’s learning", "Win a public debate"], "optionsEs": ["Solo entretener a los oyentes", "Ganar entendimiento y aceptación, y aplicarla a la vida", "Exhibir el saber del predicador", "Ganar un debate público"], "explanationEn": "A theological sermon expounds a belief to gain understanding and acceptance, and then applies it to life.", "explanationEs": "Un sermón teológico expone una creencia para ganar entendimiento y aceptación, y luego la aplica a la vida.", "correct": 1}, {"textEn": "3. Doctrinal preaching is best described as:", "textEs": "3. La predicación doctrinal se describe mejor como:", "optionsEn": ["Reading the creeds aloud", "Proclamation aimed at the heart and will, not a mere lecture", "A debate between scholars", "A purely academic lecture"], "optionsEs": ["Leer los credos en voz alta", "Proclamación dirigida al corazón y la voluntad, no una mera clase", "Un debate entre eruditos", "Una clase puramente académica"], "explanationEn": "Doctrine must never remain abstract; preaching aims past the mind at the heart and will.", "explanationEs": "La doctrina nunca debe quedarse abstracta; la predicación apunta más allá de la mente, al corazón y la voluntad.", "correct": 1}, {"textEn": "4. Which is NOT one of the three reasons given for preaching a theological sermon?", "textEs": "4. ¿Cuál NO es una de las tres razones dadas para predicar un sermón teológico?", "optionsEn": ["To develop one’s own theological position", "To educate people", "To lay a foundation", "To entertain the congregation"], "optionsEs": ["Desarrollar la propia posición teológica", "Educar al pueblo", "Poner un fundamento", "Entretener a la congregación"], "explanationEn": "The three reasons are to lay a foundation, to educate, and to develop one’s theological position—not entertainment.", "explanationEs": "Las tres razones son poner un fundamento, educar y desarrollar la posición teológica—no entretener.", "correct": 3}, {"textEn": "5. “Laying a foundation” in doctrinal preaching refers to preaching the:", "textEs": "5. “Poner un fundamento” en la predicación doctrinal se refiere a predicar el:", "optionsEn": ["Pastor’s biography", "Church budget", "Kerygma, the core gospel message", "Denomination’s bylaws"], "optionsEs": ["Biografía del pastor", "Presupuesto de la iglesia", "Kerigma, el mensaje central del evangelio", "Reglamento de la denominación"], "explanationEn": "The foundation is the kerygma, the core gospel proclamation on which the church is built.", "explanationEs": "El fundamento es el kerigma, la proclamación central del evangelio sobre la cual se edifica la iglesia.", "correct": 2}, {"textEn": "6. The preaching of the New Testament apostles was characteristically:", "textEs": "6. La predicación de los apóstoles del Nuevo Testamento era característicamente:", "optionsEn": ["Doctrinal", "Purely for entertainment", "Never about the cross", "Mostly silent"], "optionsEs": ["Doctrinal", "Puramente para entretener", "Nunca acerca de la cruz", "Mayormente silenciosa"], "explanationEn": "New Testament preaching was doctrinal—the kerygma, the cross, judgment, and the love of God.", "explanationEs": "La predicación del Nuevo Testamento era doctrinal—el kerigma, la cruz, el juicio y el amor de Dios.", "correct": 0}, {"textEn": "7. In a TEXTUAL sermon, the divisions come from ___ and the explanation from ___.", "textEs": "7. En un sermón TEXTUAL, las divisiones vienen de ___ y la explicación de ___.", "optionsEn": ["the preacher; the text", "the text; the preacher", "tradition; the text", "the text; the text"], "optionsEs": ["el predicador; el texto", "el texto; el predicador", "la tradición; el texto", "el texto; el texto"], "explanationEn": "In a textual sermon the divisions arise from the text, while the explanation is supplied by the preacher.", "explanationEs": "En el sermón textual las divisiones surgen del texto, mientras que la explicación la aporta el predicador.", "correct": 1}, {"textEn": "8. In an EXPOSITORY sermon, the divisions and the explanation both come from:", "textEs": "8. En un sermón EXPOSITIVO, tanto las divisiones como la explicación vienen de:", "optionsEn": ["a hymnal", "tradition", "the preacher", "the text"], "optionsEs": ["un himnario", "la tradición", "el predicador", "el texto"], "explanationEn": "The expository sermon draws both divisions and explanation from the text; it is most tied to the passage.", "explanationEs": "El sermón expositivo saca del texto tanto las divisiones como la explicación; es el más ligado al pasaje.", "correct": 3}, {"textEn": "9. In a TOPICAL sermon, the idea comes from the text, but the arrangement of points is:", "textEs": "9. En un sermón TÓPICO, la idea viene del texto, pero la disposición de los puntos es:", "optionsEn": ["supplied (deduced) by the preacher", "dictated by the text alone", "chosen at random", "taken from a creed"], "optionsEs": ["aportada (deducida) por el predicador", "dictada solo por el texto", "escogida al azar", "tomada de un credo"], "explanationEn": "The topical sermon takes its idea from the text but the preacher arranges the points by deduction.", "explanationEs": "El sermón tópico toma su idea del texto, pero el predicador ordena los puntos por deducción.", "correct": 0}, {"textEn": "10. Which kind of sermon is analytically least tied to the text, yet may still be biblical?", "textEs": "10. ¿Qué tipo de sermón está analíticamente menos ligado al texto, pero aún puede ser bíblico?", "optionsEn": ["None can be biblical", "Textual", "Expository", "Topical"], "optionsEs": ["Ninguno puede ser bíblico", "Textual", "Expositivo", "Tópico"], "explanationEn": "The topical sermon is least tied to the text analytically, yet stays biblical when each point rests on a verse.", "explanationEs": "El sermón tópico es el menos ligado al texto, pero sigue siendo bíblico cuando cada punto descansa en un versículo.", "correct": 3}, {"textEn": "11. What single safeguard keeps a topical sermon biblical?", "textEs": "11. ¿Qué única salvaguarda mantiene bíblico a un sermón tópico?", "optionsEn": ["A long introduction", "Alliterated points", "Every point rests on its own verse of Scripture", "A famous illustration"], "optionsEs": ["Una larga introducción", "Puntos aliterados", "Cada punto descansa en su propio versículo de la Escritura", "Una ilustración famosa"], "explanationEn": "To keep a topical sermon biblical, every point should quote and rest on a verse of Scripture.", "explanationEs": "Para mantener bíblico un sermón tópico, cada punto debe citar y descansar en un versículo de la Escritura.", "correct": 2}, {"textEn": "12. “If you cannot find a text to preach the idea, then it may be ___.”", "textEs": "12. “Si no puedes hallar un texto para predicar la idea, entonces puede ser ___.”", "optionsEn": ["a better sermon", "your idea and not the Lord’s", "acceptable anyway", "more original"], "optionsEs": ["un mejor sermón", "tu idea y no la del Señor", "aceptable de todos modos", "más original"], "explanationEn": "If no text actually teaches the idea, that is a warning the idea may be the preacher’s, not the Lord’s.", "explanationEs": "Si ningún texto enseña de veras la idea, es una advertencia de que la idea puede ser del predicador, no del Señor.", "correct": 1}, {"textEn": "13. The principle of sola scriptura means that in preaching:", "textEs": "13. El principio de sola scriptura significa que en la predicación:", "optionsEn": ["If a teaching is not found in the Bible, we should not preach it as God's truth", "Tradition outranks Scripture", "Only ordained clergy may interpret the Bible", "Scripture must always be read in Latin"], "optionsEs": ["Si una enseñanza no se halla en la Biblia, no debemos predicarla como verdad de Dios", "La tradición está por encima de la Escritura", "Solo el clero ordenado puede interpretar la Biblia", "La Escritura siempre debe leerse en latín"], "explanationEn": "Sola scriptura means Scripture alone is our authority: if it is not in the Bible, we do not preach it as God's truth.", "explanationEs": "Sola scriptura significa que la Escritura sola es nuestra autoridad: si no está en la Biblia, no la predicamos como verdad de Dios.", "correct": 0}, {"textEn": "14. According to James 3:1, those who teach should know that they:", "textEs": "14. Según Santiago 3:1, los que enseñan deben saber que:", "optionsEn": ["Are exempt from criticism", "Will be paid more", "Need no preparation", "Will receive a stricter judgment"], "optionsEs": ["Están exentos de crítica", "Recibirán más paga", "No necesitan preparación", "Recibirán mayor condenación"], "explanationEn": "James 3:1 warns that teachers will receive a stricter judgment; the preacher is held to a heavier accountability.", "explanationEs": "Santiago 3:1 advierte que los maestros recibirán mayor condenación; el predicador es responsable de un modo más pesado.", "correct": 3}, {"textEn": "15. Which is the FIRST of the four ingredients of successful preaching?", "textEs": "15. ¿Cuál es el PRIMERO de los cuatro ingredientes de la predicación exitosa?", "optionsEn": ["Interpretation", "Delivery", "Knowledge of people", "Arrangement"], "optionsEs": ["La interpretación", "La entrega", "El conocimiento de la gente", "El arreglo"], "explanationEn": "Interpretation is first: the subject of the sermon must be the subject of the text it is based on.", "explanationEs": "La interpretación es lo primero: el tema del sermón debe ser el tema del texto en que se basa.", "correct": 0}, {"textEn": "16. “Knowledge of people” as an ingredient means mainly:", "textEs": "16. “El conocimiento de la gente” como ingrediente significa principalmente:", "optionsEn": ["clever speech", "sensitivity to people’s concerns and needs", "memorizing many names", "an advanced psychology degree"], "optionsEs": ["un hablar ingenioso", "sensibilidad a las preocupaciones y necesidades de la gente", "memorizar muchos nombres", "un título avanzado en psicología"], "explanationEn": "It is not academic psychology but a sensitivity to the real concerns and needs of people.", "explanationEs": "No es la psicología académica, sino una sensibilidad a las preocupaciones y necesidades reales de la gente.", "correct": 1}, {"textEn": "17. Among the marks of a good outline, “movement” means:", "textEs": "17. Entre las marcas de un buen bosquejo, “movimiento” significa:", "optionsEn": ["the sermon has a single focus", "every point is the same length", "the sermon progresses and peaks, often at the invitation", "the points are worded alike"], "optionsEs": ["el sermón tiene un solo enfoque", "cada punto tiene la misma extensión", "el sermón progresa y culmina, a menudo en la invitación", "los puntos se redactan igual"], "explanationEn": "Movement means the sermon goes somewhere and builds to a peak, usually the invitation.", "explanationEs": "El movimiento significa que el sermón avanza y construye hacia un punto culminante, normalmente la invitación.", "correct": 2}, {"textEn": "18. The mark “unity” in an outline means:", "textEs": "18. La marca “unidad” en un bosquejo significa:", "optionsEn": ["building to a peak", "parallel wording", "one sermon, not many—a single focus", "points of equal length"], "optionsEs": ["construir hacia un clímax", "redacción paralela", "un solo sermón, no muchos—un solo enfoque", "puntos de igual extensión"], "explanationEn": "Unity means having one sermon and one focus, not many; a poor outline lacks focus.", "explanationEs": "La unidad significa tener un solo sermón y un solo enfoque, no muchos; un mal bosquejo carece de enfoque.", "correct": 2}, {"textEn": "19. The chief trait the great preachers share in delivery is:", "textEs": "19. El rasgo principal que los grandes predicadores comparten en la entrega es:", "optionsEn": ["Oratory", "Raw energy", "Volume", "Enthusiasm"], "optionsEs": ["La oratoria", "La energía en bruto", "El volumen", "El entusiasmo"], "explanationEn": "Enthusiasm is the common trait—and it is not the same as volume, oratory, or sheer energy.", "explanationEs": "El entusiasmo es el rasgo común—y no es lo mismo que el volumen, la oratoria o la mera energía.", "correct": 3}, {"textEn": "20. To keep doctrinal preaching clear, the preacher should:", "textEs": "20. Para mantener clara la predicación doctrinal, el predicador debe:", "optionsEn": ["avoid jargon and use everyday language so ordinary people become theologians", "use as many theological terms as possible", "preach only to scholars", "keep the sermon abstract"], "optionsEs": ["evitar la jerga y usar lenguaje cotidiano para que la gente común llegue a ser teóloga", "usar tantos términos teológicos como sea posible", "predicar solo a eruditos", "mantener el sermón abstracto"], "explanationEn": "Be clear: avoid theological jargon and use everyday language to train all people to be theologians.", "explanationEs": "Sé claro: evita la jerga teológica y usa lenguaje cotidiano para entrenar a todos a ser teólogos.", "correct": 0}];
+const kwQuestions = [{"textEn": "21. Define doctrinal (theological) preaching in your own words. What two things does it aim to do with a belief?", "textEs": "21. Defina la predicación doctrinal (teológica) con sus propias palabras. ¿Qué dos cosas busca hacer con una creencia?", "kw_en": ["doctrin", "preach", "teach", "understand", "accept", "belief", "truth", "life"], "kw_es": ["doctrina", "predic", "enseñ", "entend", "acept", "creencia", "verdad", "vida"], "modelEn": "Doctrinal or theological preaching takes a basic Christian belief, or doctrine, and expounds it so the people both understand it and accept it. But it does not stop at the mind: it then applies that truth to life. So it is not a lecture that only informs; it is proclamation that aims at understanding, acceptance, and a changed life. The preacher teaches the doctrine in order to move the hearer toward trust and obedience.", "modelEs": "La predicación doctrinal o teológica toma una creencia cristiana básica, una doctrina, y la expone para que el pueblo la entienda y la acepte. Pero no se detiene en la mente: luego aplica esa verdad a la vida. Así que no es una clase que solo informa; es proclamación que busca el entendimiento, la aceptación y una vida cambiada. El predicador enseña la doctrina para mover al oyente a la confianza y la obediencia."}, {"textEn": "22. Give the three reasons for preaching a theological sermon, and explain one of them.", "textEs": "22. Dé las tres razones para predicar un sermón teológico, y explique una de ellas.", "kw_en": ["foundation", "kerygma", "educate", "develop", "position", "theolog", "reason", "ground"], "kw_es": ["fundament", "educ", "desarroll", "posici", "teolog", "razon", "predic", "mensaje"], "modelEn": "The course gives three reasons for preaching a theological sermon. First, to lay a foundation, preaching the kerygma, the core gospel message on which everything rests. Second, to educate people, building them up in the faith. Third, to develop the preacher’s own theological position, since preparing such sermons forces real study. For example, laying a foundation matters because a church grounded in the gospel can stand firm when teaching grows shallow elsewhere.", "modelEs": "El curso da tres razones para predicar un sermón teológico. Primera, poner un fundamento, predicando el kerigma, el mensaje central del evangelio sobre el cual descansa todo. Segunda, educar al pueblo, edificándolo en la fe. Tercera, desarrollar la propia posición teológica del predicador, pues preparar tales sermones obliga a un estudio verdadero. Por ejemplo, poner un fundamento importa porque una iglesia basada en el evangelio puede mantenerse firme cuando la enseñanza se vuelve superficial en otros lugares."}, {"textEn": "23. Explain the difference between deduction and induction in preaching.", "textEs": "23. Explique la diferencia entre deducción e inducción en la predicación.", "kw_en": ["deduct", "induct", "general", "specific", "topical", "textual", "point", "subject"], "kw_es": ["deducc", "inducc", "general", "específic", "tópic", "textual", "punto", "tema"], "modelEn": "Deduction moves from the general to the specific: the preacher begins with a large subject and divides it into its parts, which is how the topical sermon works. Induction moves the other way, from the specific to the general: the preacher begins with the particular points found in the text and lets them build to the subject, which is how textual and expository sermons work. So deduction arranges the points under a chosen subject, while induction draws the subject out of the points the text supplies.", "modelEs": "La deducción va de lo general a lo específico: el predicador comienza con un tema amplio y lo divide en sus partes, que es como funciona el sermón tópico. La inducción va al revés, de lo específico a lo general: el predicador comienza con los puntos particulares que halla en el texto y deja que formen el tema, que es como funcionan los sermones textual y expositivo. Así que la deducción ordena los puntos bajo un tema escogido, mientras que la inducción saca el tema de los puntos que el texto provee."}, {"textEn": "24. Distinguish the textual, topical, and expository sermon by where the divisions and the explanation come from.", "textEs": "24. Distinga el sermón textual, tópico y expositivo por dónde vienen las divisiones y la explicación.", "kw_en": ["textual", "topical", "exposit", "division", "explanation", "text", "preacher", "arrange"], "kw_es": ["textual", "tópic", "exposit", "divis", "explic", "texto", "predicador", "disposici"], "modelEn": "These three are distinguished by where the divisions and the explanation come from. In the textual sermon the divisions come from the text, but the explanation is supplied by the preacher. In the expository sermon both the divisions and the explanation come from the text, so it is the most closely tied to the passage. In the topical sermon the idea comes from the text but the arrangement of the points is deduced by the preacher, so it is the least tied to the text analytically, though it is still biblical when each point rests on a verse.", "modelEs": "Estos tres se distinguen por dónde vienen las divisiones y la explicación. En el sermón textual las divisiones vienen del texto, pero la explicación la aporta el predicador. En el sermón expositivo tanto las divisiones como la explicación vienen del texto, por lo que es el más ligado al pasaje. En el sermón tópico la idea viene del texto, pero la disposición de los puntos la deduce el predicador, así que es el menos ligado al texto analíticamente, aunque sigue siendo bíblico cuando cada punto descansa en un versículo."}, {"textEn": "25. The objection to topical preaching is that it is “only the preacher’s ideas.” How does doctrinal preaching answer that objection?", "textEs": "25. La objeción a la predicación tópica es que es “solo las ideas del predicador.” ¿Cómo responde la predicación doctrinal a esa objeción?", "kw_en": ["point", "text", "structure", "develop", "derived", "biblical", "priest", "interpret"], "kw_es": ["punto", "texto", "estructura", "desarroll", "deriva", "bíblic", "sacerd", "interpret"], "modelEn": "The objection is that topical preaching is only the preacher’s own ideas with a few verses attached. Doctrinal preaching answers it by insisting that every point rests on, and quotes, its own text, so the points are not the preacher’s notions but the teaching of Scripture. But the deeper answer is that structure by itself settles nothing: a preacher can take an expository or textual structure straight from the text and still develop it in an unbiblical way, while a well-built topical sermon whose points are each derived from the Word is fully biblical. What makes a sermon biblical is that its content is truly derived from the Word of God, not the shape of its outline. God gives His people, a kingdom of priests, the ability to interpret Scripture, and the faithful preacher lets the text govern the idea rather than imposing his idea on the text.", "modelEs": "La objeción es que la predicación tópica es solo las ideas propias del predicador con unos versículos añadidos. La predicación doctrinal la responde insistiendo en que cada punto descansa en su propio texto y lo cita, de modo que los puntos no son ocurrencias del predicador sino la enseñanza de la Escritura. Pero la respuesta más honda es que la estructura por sí sola no decide nada: un predicador puede tomar una estructura expositiva o textual sacada directamente del texto y aun así desarrollarla de modo no bíblico, mientras que un sermón tópico bien hecho cuyos puntos se derivan cada uno de la Palabra es plenamente bíblico. Lo que hace bíblico un sermón es que su contenido se derive verdaderamente de la Palabra de Dios, no la forma de su bosquejo. Dios da a su pueblo, un reino de sacerdotes, la capacidad de interpretar la Escritura, y el predicador fiel deja que el texto gobierne la idea en lugar de imponer su idea sobre el texto."}, {"textEn": "26. Why does the course say, “If you cannot find a text to preach the idea, it may be your idea and not the Lord’s”?", "textEs": "26. ¿Por qué dice el curso: “Si no puedes hallar un texto para predicar la idea, puede ser tu idea y no la del Señor”?", "kw_en": ["text", "idea", "scripture", "whole", "contradict", "sola", "Bible", "accountable"], "kw_es": ["texto", "idea", "escritura", "todo", "contradic", "sola", "Biblia", "responsab"], "modelEn": "The saying expresses the principle of sola scriptura: Scripture alone is our authority, so if a thing is not in the Bible we should not preach it as God’s truth. If the preacher searches and can find no text that actually teaches the idea, that is a warning that the idea may be his own and not the Lord’s. It also guards us from building a theology on one or two verses: when a doctrine is gathered, we let Scripture explain itself and read each verse in light of the whole, so that if our reading of a verse seems to contradict what the Bible teaches generally, it is our interpretation that must be corrected. And because the preacher is held accountable to God by a stricter standard, he handles the Word with care, letting the text govern the idea rather than the other way around.", "modelEs": "El dicho expresa el principio de sola scriptura: la Escritura sola es nuestra autoridad, así que si algo no está en la Biblia no debemos predicarlo como verdad de Dios. Si el predicador busca y no halla ningún texto que de veras enseñe la idea, eso advierte que la idea puede ser suya y no del Señor. También nos guarda de edificar una teología sobre uno o dos versículos: cuando se reúne una doctrina, dejamos que la Escritura se explique a sí misma y leemos cada versículo a la luz del todo, de modo que si nuestra lectura de un versículo parece contradecir lo que la Biblia enseña en general, es nuestra interpretación la que debe corregirse. Y porque el predicador es responsable ante Dios bajo un criterio más estricto, maneja la Palabra con cuidado, dejando que el texto gobierne la idea y no al revés."}, {"textEn": "27. Name and briefly explain the four ingredients of successful preaching.", "textEs": "27. Nombre y explique brevemente los cuatro ingredientes de la predicación exitosa.", "kw_en": ["interpret", "people", "arrange", "deliver", "style", "knowledge", "outline", "enthusiasm"], "kw_es": ["interpret", "gente", "arregl", "entrega", "estilo", "conocim", "bosquej", "entusiasm"], "modelEn": "The four ingredients of successful preaching are interpretation, knowledge of people, arrangement and style, and delivery. Interpretation is the careful study that makes the sermon’s subject the text’s subject. Knowledge of people is sensitivity to the listeners’ real concerns and needs. Arrangement and style give the sermon a clear, simple, pictorial outline that people can follow. Delivery carries it home, and its chief mark is enthusiasm. A preacher needs all four; strength in one cannot replace weakness in another.", "modelEs": "Los cuatro ingredientes de la predicación exitosa son la interpretación, el conocimiento de la gente, el arreglo y el estilo, y la entrega. La interpretación es el estudio cuidadoso que hace que el tema del sermón sea el tema del texto. El conocimiento de la gente es la sensibilidad a las preocupaciones y necesidades reales de los oyentes. El arreglo y el estilo dan al sermón un bosquejo claro, sencillo y pictórico que la gente puede seguir. La entrega lo lleva al corazón, y su marca principal es el entusiasmo. El predicador necesita los cuatro; la fuerza en uno no reemplaza la debilidad en otro."}, {"textEn": "28. List the marks of a good outline, and explain why “movement” matters.", "textEs": "28. Enumere las marcas de un buen bosquejo, y explique por qué importa el “movimiento.”", "kw_en": ["unity", "order", "movement", "parallel", "proportion", "peak", "invitation", "progress"], "kw_es": ["unidad", "orden", "movimient", "paralel", "proporci", "culmin", "invitaci", "progres"], "modelEn": "The marks of a good outline are unity, order, movement, parallel structure, and proportion. Unity means one sermon and one focus, not many. Order means each division is distinct and purposeful. Parallel means the points are worded alike as far as possible, and proportion means they are balanced in length and weight. Movement matters most because the sermon must progress and go somewhere: the preacher builds toward a peak, usually at the invitation, so the last point is the most powerful and the hearer is carried to a response.", "modelEs": "Las marcas de un buen bosquejo son la unidad, el orden, el movimiento, la estructura paralela y la proporción. La unidad significa un solo sermón y un solo enfoque, no muchos. El orden significa que cada división es distinta y tiene un propósito. Lo paralelo significa que los puntos se redactan de forma semejante en lo posible, y la proporción significa que están equilibrados en extensión y peso. El movimiento importa más porque el sermón debe progresar e ir a algún lugar: el predicador avanza hacia un punto culminante, normalmente en la invitación, de modo que el último punto es el más poderoso y el oyente es llevado a una respuesta."}, {"textEn": "29. What does “knowledge of people” add to a preacher who already knows his theology?", "textEs": "29. ¿Qué añade “el conocimiento de la gente” a un predicador que ya conoce su teología?", "kw_en": ["people", "needs", "concern", "sensit", "heart", "listener", "connect", "theolog"], "kw_es": ["gente", "necesidad", "preocupac", "sensib", "coraz", "oyente", "conect", "teolog"], "modelEn": "Knowledge of people adds the human sensitivity that pure theology cannot supply. A preacher may know doctrine deeply and still miss the listeners if he is not aware of their real concerns and needs. This knowledge is not an academic degree in psychology but a sensitivity of heart that lets the preacher connect doctrine to the people in front of him. Without it, true theology can still leave the congregation untouched; with it, the same truth reaches the heart.", "modelEs": "El conocimiento de la gente añade la sensibilidad humana que la pura teología no puede dar. Un predicador puede conocer la doctrina a fondo y aun así no alcanzar a los oyentes si no percibe sus preocupaciones y necesidades reales. Este conocimiento no es un título académico en psicología, sino una sensibilidad del corazón que permite al predicador conectar la doctrina con la gente que tiene delante. Sin ella, la teología verdadera puede dejar intacta a la congregación; con ella, la misma verdad llega al corazón."}, {"textEn": "30. Summarize the main point of Unit 1: why preach doctrine, and how can it be topical yet still biblical?", "textEs": "30. Resuma el punto principal de la Unidad 1: ¿por qué predicar la doctrina, y cómo puede ser tópica y aún bíblica?", "kw_en": ["doctrine", "preach", "topical", "biblical", "text", "point", "understand", "apply"], "kw_es": ["doctrina", "predic", "tópic", "bíblic", "texto", "punto", "entend", "aplic"], "modelEn": "Unit 1 teaches why doctrine must be preached and how it can be preached topically yet remain biblical. We preach doctrine to lay a foundation, to educate the people, and to apply Christian belief to life, so the congregation both understands the truth and lives by it. Doctrinal preaching is by nature topical, since a doctrine must be gathered from the whole of Scripture rather than one passage, yet it is biblical because every point rests on its own text and its content is truly derived from the Word of God, not from the mere shape of the outline. Held by sola scriptura and a stricter accountability before God, the preacher lets the text govern the idea. The aim is not a lecture but understanding that moves to acceptance and obedience, with the sermon peaking at the call to respond.", "modelEs": "La Unidad 1 enseña por qué se debe predicar la doctrina y cómo puede predicarse de forma tópica y seguir siendo bíblica. Predicamos la doctrina para poner un fundamento, para educar al pueblo y para aplicar la creencia cristiana a la vida, de modo que la congregación entienda la verdad y viva conforme a ella. La predicación doctrinal es por naturaleza tópica, pues una doctrina debe reunirse del todo de la Escritura y no de un solo pasaje, y sin embargo es bíblica porque cada punto descansa en su propio texto y su contenido se deriva verdaderamente de la Palabra de Dios, no de la mera forma del bosquejo. Sostenido por la sola scriptura y por una responsabilidad más estricta ante Dios, el predicador deja que el texto gobierne la idea. La meta no es una clase, sino el entendimiento que lleva a la aceptación y la obediencia, con el sermón culminando en el llamado a responder."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 2 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 2 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\U0001F4D6 Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\U0001F4D6 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\U0001F4D6 Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s). \u00a1Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>\U0001F4D6 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y vuelva a intentar la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSDPReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

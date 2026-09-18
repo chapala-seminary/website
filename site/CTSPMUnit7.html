@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pastoral Ministries — Unit 7: Discipleship and Equipping the Saints</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-warning { background: #fae8e8; border: 1px solid #efc2c2; border-radius: 12px; padding: 15px; margin-bottom: 20px; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-warning { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Unit 6</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 8 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Pastoral Ministries — Unit 7: Discipleship and Equipping the Saints</span><span class="lang-es">📖 Ministerios Pastorales — Unidad 7: Discipulado y Equipando a los Santos</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"And the things that you have heard from me among many witnesses, commit these to faithful men who will be able to teach others also." — 2 Timothy 2:2 (NKJV)</span><span class="lang-es">"Y lo que has oído de mí ante muchos testigos, esto encarga a hombres fieles que sean idóneos para enseñar también a otros." — 2 Timoteo 2:2 (RVG)</span></p>
+</div>
+
+<div id="regWarning" class="reg-warning" style="display:none;">
+    <span class="lang-en">⚠️ You have not yet registered. Please <a href="CTSPMUnit1.html" style="color:#5b3a1f;">return to Unit 1</a> to register before continuing.</span>
+    <span class="lang-es">⚠️ Aún no se ha registrado. Por favor <a href="CTSPMUnit1.html" style="color:#5b3a1f;">regrese a la Unidad 1</a> para registrarse antes de continuar.</span>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>The faithful pastor will eventually leave his church. He will retire, move, fall sick, or die. The question is not whether he will leave, but what he will leave behind. A pastor who only preached great sermons leaves a congregation that misses his voice. A pastor who built a strong administration leaves a church that misses his organization. But a pastor who discipled — who poured his life into a handful of growing believers, who raised up teachers and deacons and elders and young men called to the ministry — leaves a church that is stronger after he is gone than it was while he was there.</p>
+
+        <p>This unit examines the pastor's teaching ministry beyond the pulpit. We will look at the biblical mandate of disciple-making, the Pauline pattern of Paul and Timothy, the levels at which a pastor teaches, the long view of generations, and the pastor's own continued growth as a learner.</p>
+
+        <h2>I. The Pastor as Teacher</h2>
+        <p>Paul's list of the gifts Christ gave the church in Ephesians 4:11 contains a phrase that often gets overlooked: <em>"And He Himself gave some to be apostles, some prophets, some evangelists, and some pastors and teachers."</em> Notice that pastor and teacher are joined under one article in the Greek. Many scholars believe Paul is describing one combined office — the pastor-teacher. The man who shepherds is also the man who teaches. You cannot truly do one without the other.</p>
+
+        <p>The purpose of this gift, Paul says in the next verse, is <em>"for the equipping of the saints for the work of ministry, for the edifying of the body of Christ"</em> (Ephesians 4:12). The pastor's job is not to do all the ministry himself. His job is to equip the saints to do the ministry. A pastor who runs himself ragged trying to do everything has misread his job description. The pastor is a coach, not a one-man team. He teaches, trains, models, sends, and sends again. The work of the church is supposed to be done by the saints. The pastor's job is to equip them to do it.</p>
+
+        <p>I served as a seminary professor for about eleven years. That season taught me something I had only partly learned in pastoral ministry: teaching done well multiplies. A good lecture does not just inform a class — it shapes a future pastor, who will shape a congregation, which will shape a community. I have watched students from my classroom go out to plant churches, lead missions, write books, and teach the next generation of students. The teacher who teaches faithfully is not pouring his life into a single audience. He is pouring it into every audience that those students will ever stand before. That same multiplication is available to the pastor in his local church, if he will see his work as teaching ministry rather than as performance.</p>
+
+        <h2>II. The Discipleship Mandate</h2>
+        <p>The Great Commission is not a call to evangelism alone. It is a call to disciple-making. <em>"Go therefore and make disciples of all the nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all things that I have commanded you"</em> (Matthew 28:19–20). Notice the verbs. <em>Make disciples.</em> <em>Baptize.</em> <em>Teach.</em> The Great Commission has three movements, and the third — <em>teaching them to observe all things I have commanded you</em> — is where most churches stop short.</p>
+
+        <p>Evangelism brings a person to Christ. Baptism marks the public profession of that faith. But discipleship is what happens for the next forty years. It is the slow, patient, week-after-week work of forming a believer into a mature follower of Jesus Christ. The pastor who only evangelizes leaves spiritual infants behind. The pastor who disciples leaves men and women who can stand on their own two feet, hold their own families, lead in their own contexts, and disciple the next generation themselves.</p>
+
+        <h2>III. The Pauline Pattern</h2>
+        <p>The clearest model of disciple-making in the New Testament is the relationship between Paul and Timothy. Paul did not just preach to Timothy. He took Timothy with him on his missionary journeys. He let Timothy watch him handle conflict. He let Timothy see him pray. He let Timothy fail, and he picked Timothy up. He wrote letters to Timothy when they were apart. He worried about Timothy's health. He treated Timothy as a son.</p>
+
+        <p>The single sentence in 2 Timothy 2:2 has shaped more disciple-making ministries than perhaps any other verse in the Bible: <em>"And the things that you have heard from me among many witnesses, commit these to faithful men who will be able to teach others also."</em> Read that carefully. Four generations are present in one verse. Paul is the first generation. Timothy is the second. The faithful men are the third. The others Timothy's disciples will teach are the fourth. The pastor who lives by this verse is not just trying to grow his church. He is trying to set in motion a multiplication that will outlive him by a hundred years.</p>
+
+        <p>The Paul-Timothy relationship had four elements that every modern pastor can practice. <em>Time together.</em> Paul and Timothy traveled together for years. <em>Shared ministry.</em> Timothy was not a spectator; he was given assignments. <em>Honest correction.</em> Paul's letters are not flattery. <em>"Be diligent,"</em> he writes Timothy. <em>"Endure hardship. Do the work of an evangelist. Fulfill your ministry"</em> (2 Timothy 4:5). And finally, <em>spiritual succession.</em> Paul saw Timothy not as an assistant but as the man who would carry the gospel after Paul was gone.</p>
+
+        <h2>IV. Multi-Level Teaching</h2>
+        <p>The pastor teaches at many levels at once. Each level is essential, and each requires a different posture.</p>
+
+        <p>The <em>pulpit</em> is one level. The pastor preaches to the gathered congregation. We have already devoted an entire unit of this course to that work. But the pulpit alone cannot disciple a person.</p>
+
+        <p>The <em>Bible study or Sunday school class</em> is another level. Here the pastor teaches a smaller group, where there is room for questions and discussion. The Sunday school class is one of the most underestimated discipleship tools in the modern church. Generations of believers were grounded in their faith through faithful Sunday school teachers — many of them not pastors at all, but laypeople who had themselves been taught well.</p>
+
+        <p>The <em>small group in a home</em> is another level. Here a half-dozen or a dozen believers gather for prayer, Scripture, and life-on-life sharing. The pastor cannot lead all the small groups in his church, and he should not try. But he should be in one — both to model what a small group looks like and to disciple the small-group leaders.</p>
+
+        <p>The <em>one-on-one conversation</em> is the deepest level. Coffee with a young man wrestling with a call to ministry. Lunch with a deacon facing a hard decision at home. A long walk with a woman whose marriage is fraying. The Bible study guide on the table, the Bible open between you, prayer at the end. This is where pastors are made. This is where deacons are formed. This is where future missionaries are sent.</p>
+
+        <p>A pastor must be deliberate about all four levels. The temptation is to live only in the pulpit. The temptation is real because the pulpit is visible, measurable, and praised. But the pastor whose teaching ministry is only the pulpit produces hearers who have never been disciples.</p>
+
+        <h2>V. Raising Up Leaders</h2>
+        <p>Every congregation has, somewhere in it, the next generation of its leaders. The pastor's job is to find them and form them.</p>
+
+        <p>The Bible has clear qualifications for the men who serve in the offices of pastor, deacon, and elder (1 Timothy 3; Titus 1). The faithful pastor uses these qualifications not as a checklist for hiring but as a curriculum for forming. He looks at his congregation and asks: <em>Who could become this kind of man? What would it take?</em> Then he begins the slow, patient work of teaching, modeling, correcting, encouraging, and sending.</p>
+
+        <p>Some of the most fruitful disciple-making I have ever seen happened in a place no one expected. I worked in a Louisiana prison for many years. One of the inmates who became a believer there was a man named Arthur. At one time he had been considered an outlaw at Angola — what some have called the bloodiest prison in America — and he once told me that he had even thought about throwing himself over a wall to end his life. But Arthur came to Christ inside those walls. The transformation was complete. He poured himself into ministry to other inmates, and he did it with a humility I have rarely seen in any pastor outside the prison. I used to tell people he was the greatest pastor I had ever met. When Arthur was eventually released, he kept right on serving. Not long ago he called me to tell me that he had become the head chaplain at Parchman Prison in Mississippi, the largest prison in the state. The Lord made that man into a leader of leaders.</p>
+
+        <p>That is what discipleship can do. The pastor who looks past surface appearances and sees what God can build out of an ordinary man, or out of a broken man, will end his ministry surrounded by leaders who never would have stood up if he had not invested in them.</p>
+
+        <h2>VI. The Long View — Generations</h2>
+        <p>A pastor must learn to think in generations. The young man you disciple this year will, in twenty years, be discipling young men who are not yet born. The young woman you teach now to study her Bible will, by the time you are old, be teaching her grandchildren the same way. The seminarian you mentor will, in a faraway city, build a congregation you will never visit. The pastor who only thinks one Sunday at a time will burn out by his fifth year. The pastor who thinks in generations will keep going for forty.</p>
+
+        <p>This long view changes how the pastor handles the slow growth of his disciples. He does not give up on the man who is still wrestling with the same sin three years later, because he understands that sanctification is a long road. He does not write off the deacon who is still rough around the edges, because he remembers that he himself was rougher at that age. He stays patient. He stays present. He keeps teaching, week after week, year after year, knowing that the harvest is not always in his lifetime.</p>
+
+        <p>Paul never met most of the people whose lives his ministry would touch. Neither will the pastor reading this. The pastor's job is not to see the harvest. The pastor's job is to plant, water, and trust the Lord of the harvest to do what only He can do. <em>"I planted, Apollos watered, but God gave the increase"</em> (1 Corinthians 3:6).</p>
+
+        <h2>VII. The Pastor's Own Continued Learning</h2>
+        <p>A pastor cannot give what he does not have. The teacher who has stopped learning is a teacher with nothing fresh to teach. The pastor who finished his last serious book the year he graduated from seminary will, by his fifteenth year of ministry, be repeating himself. His sermons will sound the same. His counseling will rehearse the same advice. His teaching will go shallow. His own soul will dry up.</p>
+
+        <p>The faithful pastor reads. He studies. He attends conferences when he can, sits under preachers better than himself, learns from theologians ahead of him, and is willing to be a student again at fifty as easily as he was at twenty-five. There is a kind of pride that thinks a pastor has nothing more to learn. That pride kills ministries.</p>
+
+        <p>I have lived enough years now to know this from the inside. I served in pastoral ministry. I served as a prison chaplain and warden. I served as a seminary professor for about eleven years. I now serve in another season of teaching at Chapala Theological Seminary. Every one of those seasons taught me things the previous seasons had not. The Lord is still teaching me. He will be teaching me until I see Him face to face.</p>
+
+        <p>Let me give you a small picture of how this works in practice. In my counseling classes I have been incorporating the methodology of John Drakeford, who taught for many years at Southwestern Baptist Theological Seminary. Drakeford himself studied under O. Hobart Mowrer, the psychologist whose work on integrity, confession, and personal responsibility shaped a whole generation of pastoral counselors. Trace the line out loud: Mowrer taught Drakeford. Drakeford taught me. I am now teaching the next generation of pastors. That is exactly the chain Paul described to Timothy — <em>the things you have heard from me, commit to faithful men who will be able to teach others also.</em> Four generations of teaching, woven into one classroom on the shores of Lake Chapala. The pastor who keeps learning keeps teaching with freshness. And the church that is taught with freshness keeps growing too.</p>
+
+        <h2>Closing</h2>
+        <p>The pastor's teaching ministry is the slowest of all his ministries. The pulpit gives him a thirty-minute response from the congregation every Sunday. The wedding gives him a single afternoon. The funeral gives him a single morning. But discipleship gives him decades. Decades to invest. Decades to wait. Decades to watch a young believer grow into a strong leader.</p>
+
+        <p>It is also the most lasting of all his ministries. When the pastor is gone, the sermons are forgotten and the wedding photographs fade and the funeral programs end up in a drawer. But the disciples remain. They are still teaching their families. They are still leading their churches. They are still raising up the next generation. The faithful pastor's voice does not stop when his pulpit ministry ends. It keeps speaking through every man and woman he ever discipled, and through every man and woman they go on to disciple after him.</p>
+
+        <p><em>"And the things that you have heard from me among many witnesses, commit these to faithful men who will be able to teach others also"</em> (2 Timothy 2:2). May every pastor reading this take that verse to heart, find his Timothys, pour his life into them, and trust the Lord to multiply what he could never multiply on his own.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>El pastor fiel eventualmente dejará su iglesia. Se jubilará, se mudará, se enfermará o morirá. La pregunta no es si se irá, sino qué dejará atrás. Un pastor que solo predicó grandes sermones deja una congregación que extraña su voz. Un pastor que construyó una administración fuerte deja una iglesia que extraña su organización. Pero un pastor que discipuló — que derramó su vida en un puñado de creyentes en crecimiento, que levantó maestros y diáconos y ancianos y jóvenes llamados al ministerio — deja una iglesia que es más fuerte después de irse de lo que era mientras él estaba allí.</p>
+
+        <p>Esta unidad examina el ministerio de enseñanza del pastor más allá del púlpito. Veremos el mandato bíblico de hacer discípulos, el patrón paulino de Pablo y Timoteo, los niveles en los cuales un pastor enseña, la visión a largo plazo de generaciones, y el propio crecimiento continuo del pastor como aprendiz.</p>
+
+        <h2>I. El pastor como maestro</h2>
+        <p>La lista de Pablo de los dones que Cristo dio a la iglesia en Efesios 4:11 contiene una frase que a menudo se pasa por alto: <em>"Y él mismo dio a unos, ser apóstoles; y a otros, profetas; y a otros, evangelistas; y a otros, pastores y maestros."</em> Note que pastor y maestro están unidos bajo un mismo artículo en el griego. Muchos eruditos creen que Pablo está describiendo un solo oficio combinado — el pastor-maestro. El hombre que pastorea es también el hombre que enseña. No se puede verdaderamente hacer uno sin el otro.</p>
+
+        <p>El propósito de este don, dice Pablo en el siguiente versículo, es <em>"a fin de perfeccionar a los santos para la obra del ministerio, para la edificación del cuerpo de Cristo"</em> (Efesios 4:12). El trabajo del pastor no es hacer todo el ministerio él mismo. Su trabajo es equipar a los santos para hacer el ministerio. Un pastor que se agota tratando de hacer todo ha leído mal su descripción de trabajo. El pastor es un entrenador, no un equipo de un solo hombre. Enseña, entrena, modela, envía, y vuelve a enviar. Se supone que la obra de la iglesia debe ser hecha por los santos. El trabajo del pastor es equiparlos para hacerla.</p>
+
+        <p>Serví como profesor de seminario por unos once años. Esa temporada me enseñó algo que solo había aprendido parcialmente en el ministerio pastoral: la enseñanza bien hecha se multiplica. Una buena conferencia no solo informa a una clase — moldea a un futuro pastor, quien moldeará a una congregación, la cual moldeará a una comunidad. He visto a estudiantes de mi salón de clase salir a plantar iglesias, dirigir misiones, escribir libros, y enseñar a la siguiente generación de estudiantes. El maestro que enseña fielmente no está derramando su vida en una sola audiencia. Está derramándola en cada audiencia ante la cual esos estudiantes alguna vez se pararán. Esa misma multiplicación está disponible para el pastor en su iglesia local, si verá su trabajo como ministerio de enseñanza en lugar de como actuación.</p>
+
+        <h2>II. El mandato del discipulado</h2>
+        <p>La Gran Comisión no es un llamado solo al evangelismo. Es un llamado a hacer discípulos. <em>"Por tanto, id, y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo; enseñándoles que guarden todas las cosas que os he mandado"</em> (Mateo 28:19–20). Note los verbos. <em>Hacer discípulos.</em> <em>Bautizar.</em> <em>Enseñar.</em> La Gran Comisión tiene tres movimientos, y el tercero — <em>enseñándoles que guarden todas las cosas que os he mandado</em> — es donde la mayoría de las iglesias se queda corta.</p>
+
+        <p>El evangelismo trae a una persona a Cristo. El bautismo marca la profesión pública de esa fe. Pero el discipulado es lo que sucede durante los siguientes cuarenta años. Es la lenta, paciente, semana-tras-semana obra de formar a un creyente en un seguidor maduro de Jesucristo. El pastor que solo evangeliza deja infantes espirituales atrás. El pastor que discipula deja hombres y mujeres que pueden pararse en sus propios dos pies, sostener sus propias familias, dirigir en sus propios contextos, y discipular a la siguiente generación ellos mismos.</p>
+
+        <h2>III. El patrón paulino</h2>
+        <p>El modelo más claro de hacer discípulos en el Nuevo Testamento es la relación entre Pablo y Timoteo. Pablo no solo le predicó a Timoteo. Llevó a Timoteo con él en sus viajes misioneros. Dejó que Timoteo lo viera manejar el conflicto. Dejó que Timoteo lo viera orar. Dejó que Timoteo fallara, y levantó a Timoteo. Le escribió cartas a Timoteo cuando estaban separados. Se preocupaba por la salud de Timoteo. Trataba a Timoteo como un hijo.</p>
+
+        <p>La sola oración en 2 Timoteo 2:2 ha moldeado más ministerios de hacer discípulos que tal vez cualquier otro versículo en la Biblia: <em>"Y lo que has oído de mí ante muchos testigos, esto encarga a hombres fieles que sean idóneos para enseñar también a otros."</em> Léalo cuidadosamente. Cuatro generaciones están presentes en un versículo. Pablo es la primera generación. Timoteo es la segunda. Los hombres fieles son la tercera. Los otros a quienes los discípulos de Timoteo enseñarán son la cuarta. El pastor que vive por este versículo no solo está tratando de hacer crecer su iglesia. Está tratando de poner en marcha una multiplicación que lo sobrevivirá por cien años.</p>
+
+        <p>La relación Pablo-Timoteo tenía cuatro elementos que cada pastor moderno puede practicar. <em>Tiempo juntos.</em> Pablo y Timoteo viajaron juntos por años. <em>Ministerio compartido.</em> Timoteo no era un espectador; le daban asignaciones. <em>Corrección honesta.</em> Las cartas de Pablo no son lisonja. <em>"Sé sobrio,"</em> le escribe a Timoteo. <em>"Soporta las aflicciones, haz obra de evangelista, cumple tu ministerio"</em> (2 Timoteo 4:5). Y finalmente, <em>sucesión espiritual.</em> Pablo veía a Timoteo no como un asistente sino como el hombre que llevaría el evangelio después de que Pablo se fuera.</p>
+
+        <h2>IV. Enseñanza en múltiples niveles</h2>
+        <p>El pastor enseña en muchos niveles a la vez. Cada nivel es esencial, y cada uno requiere una postura diferente.</p>
+
+        <p>El <em>púlpito</em> es un nivel. El pastor predica a la congregación reunida. Ya hemos dedicado una unidad entera de este curso a esa obra. Pero el púlpito solo no puede discipular a una persona.</p>
+
+        <p>La <em>clase de estudio bíblico o escuela dominical</em> es otro nivel. Aquí el pastor enseña a un grupo más pequeño, donde hay espacio para preguntas y discusión. La clase de escuela dominical es una de las herramientas de discipulado más subestimadas en la iglesia moderna. Generaciones de creyentes fueron fundamentadas en su fe a través de fieles maestros de escuela dominical — muchos de ellos no pastores en absoluto, sino laicos que ellos mismos habían sido bien enseñados.</p>
+
+        <p>El <em>grupo pequeño en un hogar</em> es otro nivel. Aquí media docena o una docena de creyentes se reúnen para oración, Escritura, y compartir vida con vida. El pastor no puede dirigir todos los grupos pequeños en su iglesia, y no debe intentarlo. Pero debe estar en uno — tanto para modelar cómo se ve un grupo pequeño como para discipular a los líderes de los grupos pequeños.</p>
+
+        <p>La <em>conversación uno a uno</em> es el nivel más profundo. Café con un joven que lucha con un llamado al ministerio. Almuerzo con un diácono que enfrenta una decisión difícil en casa. Una caminata larga con una mujer cuyo matrimonio se está deshaciendo. La guía de estudio bíblico sobre la mesa, la Biblia abierta entre ustedes, la oración al final. Aquí es donde se hacen los pastores. Aquí es donde se forman los diáconos. Aquí es donde se envían los futuros misioneros.</p>
+
+        <p>Un pastor debe ser deliberado en los cuatro niveles. La tentación es vivir solo en el púlpito. La tentación es real porque el púlpito es visible, medible, y elogiado. Pero el pastor cuyo ministerio de enseñanza es solo el púlpito produce oyentes que nunca han sido discípulos.</p>
+
+        <h2>V. Levantando líderes</h2>
+        <p>Cada congregación tiene, en algún lugar de ella, la próxima generación de sus líderes. El trabajo del pastor es encontrarlos y formarlos.</p>
+
+        <p>La Biblia tiene calificaciones claras para los hombres que sirven en los oficios de pastor, diácono y anciano (1 Timoteo 3; Tito 1). El pastor fiel usa estas calificaciones no como una lista de verificación para contratar sino como un currículum para formar. Mira a su congregación y pregunta: <em>¿Quién podría llegar a ser esta clase de hombre? ¿Qué se necesitaría?</em> Luego comienza la lenta, paciente obra de enseñar, modelar, corregir, alentar y enviar.</p>
+
+        <p>Algunas de las obras de hacer discípulos más fructíferas que jamás he visto sucedieron en un lugar que nadie esperaba. Trabajé en una prisión de Luisiana por muchos años. Uno de los reclusos que se convirtió en creyente allí fue un hombre llamado Arthur. En un tiempo había sido considerado un forajido en Angola — lo que algunos han llamado la prisión más sangrienta de América — y una vez me dijo que incluso había pensado en arrojarse por encima de un muro para terminar con su vida. Pero Arthur vino a Cristo dentro de esos muros. La transformación fue completa. Se derramó en el ministerio a otros reclusos, y lo hizo con una humildad que rara vez he visto en cualquier pastor fuera de la prisión. Solía decirle a la gente que él era el más grande pastor que jamás había conocido. Cuando Arthur fue eventualmente liberado, siguió sirviendo. No hace mucho me llamó para decirme que se había convertido en el capellán principal de la Prisión de Parchman en Mississippi, la prisión más grande del estado. El Señor hizo de ese hombre un líder de líderes.</p>
+
+        <p>Eso es lo que el discipulado puede hacer. El pastor que mira más allá de las apariencias superficiales y ve lo que Dios puede edificar a partir de un hombre ordinario, o a partir de un hombre quebrantado, terminará su ministerio rodeado de líderes que nunca se habrían levantado si él no hubiera invertido en ellos.</p>
+
+        <h2>VI. La visión a largo plazo — Generaciones</h2>
+        <p>Un pastor debe aprender a pensar en generaciones. El joven que usted discipula este año estará, en veinte años, discipulando a jóvenes que aún no han nacido. La joven a quien le enseña ahora a estudiar su Biblia estará, para cuando usted sea anciano, enseñando a sus nietos de la misma manera. El seminarista a quien usted asesora construirá, en una ciudad lejana, una congregación que usted nunca visitará. El pastor que solo piensa en un domingo a la vez se quemará en su quinto año. El pastor que piensa en generaciones seguirá adelante por cuarenta.</p>
+
+        <p>Esta visión a largo plazo cambia cómo el pastor maneja el lento crecimiento de sus discípulos. No abandona al hombre que todavía está luchando con el mismo pecado tres años después, porque entiende que la santificación es un camino largo. No descarta al diácono que todavía está áspero en los bordes, porque recuerda que él mismo era más áspero a esa edad. Permanece paciente. Permanece presente. Sigue enseñando, semana tras semana, año tras año, sabiendo que la cosecha no siempre es en su tiempo de vida.</p>
+
+        <p>Pablo nunca conoció a la mayoría de las personas cuyas vidas tocaría su ministerio. Tampoco lo hará el pastor que lee esto. El trabajo del pastor no es ver la cosecha. El trabajo del pastor es plantar, regar, y confiar en el Señor de la cosecha para hacer lo que solo Él puede hacer. <em>"Yo planté, Apolos regó; mas Dios ha dado el crecimiento"</em> (1 Corintios 3:6).</p>
+
+        <h2>VII. El propio aprendizaje continuo del pastor</h2>
+        <p>Un pastor no puede dar lo que no tiene. El maestro que ha dejado de aprender es un maestro sin nada nuevo que enseñar. El pastor que terminó su último libro serio el año en que se graduó del seminario estará, para su decimoquinto año de ministerio, repitiéndose. Sus sermones sonarán igual. Su consejería repetirá los mismos consejos. Su enseñanza se volverá superficial. Su propia alma se secará.</p>
+
+        <p>El pastor fiel lee. Estudia. Asiste a conferencias cuando puede, se sienta bajo predicadores mejores que él mismo, aprende de teólogos por delante de él, y está dispuesto a ser estudiante de nuevo a los cincuenta tan fácilmente como lo era a los veinticinco. Hay una clase de orgullo que piensa que un pastor no tiene nada más que aprender. Ese orgullo mata ministerios.</p>
+
+        <p>He vivido suficientes años ahora para saber esto desde adentro. Serví en el ministerio pastoral. Serví como capellán de prisión y vice-director. Serví como profesor de seminario por unos once años. Ahora sirvo en otra temporada de enseñanza en el Seminario Teológico Chapala. Cada una de esas temporadas me enseñó cosas que las temporadas anteriores no me habían enseñado. El Señor todavía me está enseñando. Me estará enseñando hasta que Lo vea cara a cara.</p>
+
+        <p>Permítame darle una pequeña imagen de cómo funciona esto en la práctica. En mis clases de consejería he estado incorporando la metodología de John Drakeford, quien enseñó por muchos años en el Seminario Teológico Bautista del Suroeste. El propio Drakeford estudió bajo O. Hobart Mowrer, el psicólogo cuya obra sobre integridad, confesión y responsabilidad personal moldeó a toda una generación de consejeros pastorales. Trace la línea en voz alta: Mowrer enseñó a Drakeford. Drakeford me enseñó a mí. Yo ahora estoy enseñando a la próxima generación de pastores. Esa es exactamente la cadena que Pablo describió a Timoteo — <em>lo que has oído de mí, encarga a hombres fieles que sean idóneos para enseñar también a otros.</em> Cuatro generaciones de enseñanza, entretejidas en un salón de clases en las orillas del Lago de Chapala. El pastor que sigue aprendiendo sigue enseñando con frescura. Y la iglesia que es enseñada con frescura sigue creciendo también.</p>
+
+        <h2>Cierre</h2>
+        <p>El ministerio de enseñanza del pastor es el más lento de todos sus ministerios. El púlpito le da una respuesta de treinta minutos de la congregación cada domingo. La boda le da una sola tarde. El funeral le da una sola mañana. Pero el discipulado le da décadas. Décadas para invertir. Décadas para esperar. Décadas para ver a un creyente joven crecer hasta convertirse en un líder fuerte.</p>
+
+        <p>También es el más duradero de todos sus ministerios. Cuando el pastor se ha ido, los sermones se olvidan y las fotografías de bodas se desvanecen y los programas funerarios terminan en un cajón. Pero los discípulos permanecen. Todavía están enseñando a sus familias. Todavía están dirigiendo sus iglesias. Todavía están levantando a la siguiente generación. La voz del pastor fiel no se detiene cuando termina su ministerio del púlpito. Sigue hablando a través de cada hombre y mujer en quien jamás derramó su vida, y a través de cada hombre y mujer que ellos sigan discipulando después de él.</p>
+
+        <p><em>"Y lo que has oído de mí ante muchos testigos, esto encarga a hombres fieles que sean idóneos para enseñar también a otros"</em> (2 Timoteo 2:2). Que cada pastor que lea esto tome ese versículo a corazón, encuentre a sus Timoteos, derrame su vida en ellos, y confíe en el Señor para multiplicar lo que él nunca podría multiplicar por su cuenta.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 7 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 7 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 7;
+let progress = JSON.parse(localStorage.getItem('cts_pm_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPMUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit7) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSPMUnit6.html"; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSPMUnit8.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="CTSPMUnit1.html" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+        document.getElementById('regWarning').style.display = 'block';
+    }
+}
+displayStudentGreeting();
+
+// Q2 reshuffled (A↔B swap: "One combined office — the pastor-teacher" moved B→A)
+// Rebalanced from A=4/B=6/C=5/D=5 to 5/5/5/5
+// NOTE: pre-existing DCBA cycle at Q6-Q9 (D,C,B,A) is intrinsic to prose ordering;
+// unable to break without unbalancing distribution or violating semantic correctness
+const mcQuestions = [
+  {
+    "textEn": "1. The pastor's most lasting ministry, according to this unit, is:",
+    "textEs": "1. El ministerio más duradero del pastor, según esta unidad, es:",
+    "optionsEn": [
+      "The pulpit",
+      "The wedding",
+      "The funeral",
+      "Discipleship"
+    ],
+    "optionsEs": [
+      "El púlpito",
+      "La boda",
+      "El funeral",
+      "El discipulado"
+    ],
+    "c": 24,
+    "explEn": "The pastor's most lasting ministry is discipleship — multiplying himself into others.",
+    "explEs": "El ministerio más duradero del pastor es el discipulado — multiplicarse en otros."
+  },
+  {
+    "textEn": "2. Ephesians 4:11 likely describes pastor and teacher as:",
+    "textEs": "2. Efesios 4:11 probablemente describe pastor y maestro como:",
+    "optionsEn": [
+      "One combined office — the pastor-teacher",
+      "Two completely separate offices",
+      "The same as evangelist",
+      "An optional gift"
+    ],
+    "optionsEs": [
+      "Un oficio combinado — el pastor-maestro",
+      "Dos oficios completamente separados",
+      "Lo mismo que evangelista",
+      "Un don opcional"
+    ],
+    "c": 28,
+    "explEn": "Ephesians 4:11 likely describes one combined office — the pastor-teacher.",
+    "explEs": "Efesios 4:11 probablemente describe un oficio combinado — el pastor-maestro."
+  },
+  {
+    "textEn": "3. The purpose of pastors and teachers, per Ephesians 4:12, is:",
+    "textEs": "3. El propósito de pastores y maestros, según Efesios 4:12, es:",
+    "optionsEn": [
+      "To do all the ministry themselves",
+      "To replace the saints",
+      "To equip the saints for the work of ministry",
+      "To run programs"
+    ],
+    "optionsEs": [
+      "Hacer todo el ministerio ellos mismos",
+      "Reemplazar a los santos",
+      "Equipar a los santos para la obra del ministerio",
+      "Dirigir programas"
+    ],
+    "c": 37,
+    "explEn": "The purpose of pastors and teachers is to equip the saints for the work of ministry.",
+    "explEs": "El propósito de pastores y maestros es equipar a los santos para la obra del ministerio."
+  },
+  {
+    "textEn": "4. The professor served as a seminary professor for approximately:",
+    "textEs": "4. El profesor sirvió como profesor de seminario por aproximadamente:",
+    "optionsEn": [
+      "Eleven years",
+      "Five years",
+      "Twenty years",
+      "Three years"
+    ],
+    "optionsEs": [
+      "Once años",
+      "Cinco años",
+      "Veinte años",
+      "Tres años"
+    ],
+    "c": 42,
+    "explEn": "The professor served as a seminary professor for approximately eleven years.",
+    "explEs": "El profesor sirvió como profesor de seminario por aproximadamente once años."
+  },
+  {
+    "textEn": "5. The Great Commission's third movement, often neglected, is:",
+    "textEs": "5. El tercer movimiento de la Gran Comisión, a menudo descuidado, es:",
+    "optionsEn": [
+      "Going",
+      "Teaching them to observe all things Christ commanded",
+      "Baptizing",
+      "Praying"
+    ],
+    "optionsEs": [
+      "Ir",
+      "Enseñándoles a guardar todas las cosas que Cristo mandó",
+      "Bautizar",
+      "Orar"
+    ],
+    "c": 50,
+    "explEn": "The neglected third movement of the Great Commission is teaching them to observe all Christ commanded.",
+    "explEs": "El tercer movimiento descuidado de la Gran Comisión es enseñarles a guardar todo lo que Cristo mandó."
+  },
+  {
+    "textEn": "6. 2 Timothy 2:2 describes how many generations of teaching?",
+    "textEs": "6. 2 Timoteo 2:2 describe ¿cuántas generaciones de enseñanza?",
+    "optionsEn": [
+      "One",
+      "Two",
+      "Three",
+      "Four"
+    ],
+    "optionsEs": [
+      "Una",
+      "Dos",
+      "Tres",
+      "Cuatro"
+    ],
+    "c": 59,
+    "explEn": "2 Timothy 2:2 describes four generations of teaching.",
+    "explEs": "2 Timoteo 2:2 describe cuatro generaciones de enseñanza."
+  },
+  {
+    "textEn": "7. In 2 Timothy 2:2, the four generations are:",
+    "textEs": "7. En 2 Timoteo 2:2, las cuatro generaciones son:",
+    "optionsEn": [
+      "Paul, Peter, Timothy, Titus",
+      "Christ, Paul, Timothy, others",
+      "Paul, Timothy, faithful men, others also",
+      "Father, Son, Spirit, church"
+    ],
+    "optionsEs": [
+      "Pablo, Pedro, Timoteo, Tito",
+      "Cristo, Pablo, Timoteo, otros",
+      "Pablo, Timoteo, hombres fieles, otros también",
+      "Padre, Hijo, Espíritu, iglesia"
+    ],
+    "c": 65,
+    "explEn": "The four generations are Paul, Timothy, faithful men, and others also.",
+    "explEs": "Las cuatro generaciones son Pablo, Timoteo, hombres fieles y también otros."
+  },
+  {
+    "textEn": "8. The four elements of the Paul-Timothy relationship include all EXCEPT:",
+    "textEs": "8. Los cuatro elementos de la relación Pablo-Timoteo incluyen todos EXCEPTO:",
+    "optionsEn": [
+      "Time together",
+      "Financial support contracts",
+      "Honest correction",
+      "Spiritual succession"
+    ],
+    "optionsEs": [
+      "Tiempo juntos",
+      "Contratos de apoyo financiero",
+      "Corrección honesta",
+      "Sucesión espiritual"
+    ],
+    "c": 71,
+    "explEn": "Financial support contracts is NOT one of the four Paul-Timothy mentoring elements.",
+    "explEs": "Los contratos de apoyo financiero NO son uno de los cuatro elementos de mentoría de Pablo-Timoteo."
+  },
+  {
+    "textEn": "9. The four levels at which a pastor teaches are:",
+    "textEs": "9. Los cuatro niveles en los cuales un pastor enseña son:",
+    "optionsEn": [
+      "Pulpit, Bible study/Sunday school, small group, one-on-one",
+      "Sermon, prayer, fasting, fellowship",
+      "Preaching, evangelism, missions, prayer",
+      "Sunday morning, Sunday evening, Wednesday, Saturday"
+    ],
+    "optionsEs": [
+      "Púlpito, estudio bíblico/escuela dominical, grupo pequeño, uno a uno",
+      "Sermón, oración, ayuno, comunión",
+      "Predicación, evangelismo, misiones, oración",
+      "Domingo en la mañana, domingo en la tarde, miércoles, sábado"
+    ],
+    "c": 77,
+    "explEn": "The four teaching levels are pulpit, Bible study, small group, and one-on-one.",
+    "explEs": "Los cuatro niveles de enseñanza son púlpito, estudio bíblico, grupo pequeño e individual."
+  },
+  {
+    "textEn": "10. The deepest level of pastoral teaching is:",
+    "textEs": "10. El nivel más profundo de enseñanza pastoral es:",
+    "optionsEn": [
+      "The pulpit",
+      "The Sunday school class",
+      "The one-on-one conversation",
+      "The small group"
+    ],
+    "optionsEs": [
+      "El púlpito",
+      "La clase de escuela dominical",
+      "La conversación uno a uno",
+      "El grupo pequeño"
+    ],
+    "c": 86,
+    "explEn": "The deepest level of pastoral teaching is the one-on-one conversation.",
+    "explEs": "El nivel más profundo de enseñanza pastoral es la conversación individual."
+  },
+  {
+    "textEn": "11. The pastor uses 1 Timothy 3 / Titus 1 qualifications best as:",
+    "textEs": "11. El pastor usa las calificaciones de 1 Timoteo 3 / Tito 1 mejor como:",
+    "optionsEn": [
+      "A hiring checklist only",
+      "Optional guidelines",
+      "A historical curiosity",
+      "A curriculum for forming the next generation of leaders"
+    ],
+    "optionsEs": [
+      "Solo una lista de verificación para contratar",
+      "Pautas opcionales",
+      "Una curiosidad histórica",
+      "Un currículum para formar la próxima generación de líderes"
+    ],
+    "c": 94,
+    "explEn": "The elder qualifications work best as a curriculum for forming the next generation of leaders.",
+    "explEs": "Las cualificaciones del anciano sirven mejor como currículo para formar la próxima generación de líderes."
+  },
+  {
+    "textEn": "12. Arthur, the inmate the professor knew, became:",
+    "textEs": "12. Arthur, el recluso que el profesor conoció, se convirtió en:",
+    "optionsEn": [
+      "A pastor in Texas",
+      "Head chaplain at Parchman Prison in Mississippi",
+      "A theologian in California",
+      "A missionary to Africa"
+    ],
+    "optionsEs": [
+      "Un pastor en Texas",
+      "Capellán principal en la Prisión de Parchman en Mississippi",
+      "Un teólogo en California",
+      "Un misionero a África"
+    ],
+    "c": 99,
+    "explEn": "Arthur became head chaplain at Parchman Prison in Mississippi.",
+    "explEs": "Arthur llegó a ser capellán principal de la prisión de Parchman en Misisipi."
+  },
+  {
+    "textEn": "13. Arthur came to Christ:",
+    "textEs": "13. Arthur vino a Cristo:",
+    "optionsEn": [
+      "Inside Angola Prison after considering taking his life",
+      "At a youth camp",
+      "Through his family",
+      "After his release"
+    ],
+    "optionsEs": [
+      "Dentro de la Prisión de Angola después de considerar quitarse la vida",
+      "En un campamento juvenil",
+      "A través de su familia",
+      "Después de su liberación"
+    ],
+    "c": 105,
+    "explEn": "Arthur came to Christ inside Angola Prison after considering taking his life.",
+    "explEs": "Arthur vino a Cristo dentro de la prisión de Angola tras considerar quitarse la vida."
+  },
+  {
+    "textEn": "14. The pastor who only thinks one Sunday at a time will likely:",
+    "textEs": "14. El pastor que solo piensa en un domingo a la vez probablemente:",
+    "optionsEn": [
+      "Build the strongest church",
+      "Earn the most respect",
+      "Burn out by his fifth year",
+      "Stay productive for life"
+    ],
+    "optionsEs": [
+      "Edificará la iglesia más fuerte",
+      "Ganará el mayor respeto",
+      "Se quemará para su quinto año",
+      "Permanecerá productivo de por vida"
+    ],
+    "c": 114,
+    "explEn": "The pastor who only thinks one Sunday at a time will likely burn out by his fifth year.",
+    "explEs": "El pastor que solo piensa un domingo a la vez probablemente se agotará para su quinto año."
+  },
+  {
+    "textEn": "15. 1 Corinthians 3:6 teaches that:",
+    "textEs": "15. 1 Corintios 3:6 enseña que:",
+    "optionsEn": [
+      "The pastor sees all the harvest",
+      "Paul plants, Apollos waters, but God gives the increase",
+      "Only the gifted disciple",
+      "The pastor must labor alone"
+    ],
+    "optionsEs": [
+      "El pastor ve toda la cosecha",
+      "Pablo planta, Apolos riega, pero Dios da el crecimiento",
+      "Solo los talentosos discipulan",
+      "El pastor debe trabajar solo"
+    ],
+    "c": 120,
+    "explEn": "1 Corinthians 3:6 teaches Paul plants, Apollos waters, but God gives the increase.",
+    "explEs": "1 Corintios 3:6 enseña que Pablo planta, Apolos riega, pero Dios da el crecimiento."
+  },
+  {
+    "textEn": "16. A pastor who has stopped learning will, by his fifteenth year:",
+    "textEs": "16. Un pastor que ha dejado de aprender, para su decimoquinto año:",
+    "optionsEn": [
+      "Have his deepest ministry",
+      "Be at peak power",
+      "Have grown wiser",
+      "Be repeating himself with shallow teaching"
+    ],
+    "optionsEs": [
+      "Tendrá su ministerio más profundo",
+      "Estará en el pico de su poder",
+      "Habrá crecido más sabio",
+      "Se estará repitiendo con enseñanza superficial"
+    ],
+    "c": 129,
+    "explEn": "A pastor who stops learning will, by his fifteenth year, be repeating himself with shallow teaching.",
+    "explEs": "Un pastor que deja de aprender, para su decimoquinto año, se repetirá con enseñanza superficial."
+  },
+  {
+    "textEn": "17. John Drakeford, whose counseling methodology the professor incorporates, taught at:",
+    "textEs": "17. John Drakeford, cuya metodología de consejería incorpora el profesor, enseñó en:",
+    "optionsEn": [
+      "Dallas Theological Seminary",
+      "Southwestern Baptist Theological Seminary",
+      "Princeton Seminary",
+      "Fuller Seminary"
+    ],
+    "optionsEs": [
+      "Seminario Teológico de Dallas",
+      "Seminario Teológico Bautista del Suroeste",
+      "Seminario de Princeton",
+      "Seminario Fuller"
+    ],
+    "c": 134,
+    "explEn": "John Drakeford taught at Southwestern Baptist Theological Seminary.",
+    "explEs": "John Drakeford enseñó en el Seminario Teológico Bautista del Suroeste."
+  },
+  {
+    "textEn": "18. John Drakeford himself studied under:",
+    "textEs": "18. El propio John Drakeford estudió bajo:",
+    "optionsEn": [
+      "Carl Rogers",
+      "B. F. Skinner",
+      "O. Hobart Mowrer",
+      "Paul Tournier"
+    ],
+    "optionsEs": [
+      "Carl Rogers",
+      "B. F. Skinner",
+      "O. Hobart Mowrer",
+      "Paul Tournier"
+    ],
+    "c": 142,
+    "explEn": "John Drakeford himself studied under O. Hobart Mowrer.",
+    "explEs": "John Drakeford mismo estudió bajo O. Hobart Mowrer."
+  },
+  {
+    "textEn": "19. The Mowrer → Drakeford → Wayne → next generation chain illustrates:",
+    "textEs": "19. La cadena Mowrer → Drakeford → Wayne → próxima generación ilustra:",
+    "optionsEn": [
+      "2 Timothy 2:2 lived out across academic generations",
+      "The danger of secular psychology",
+      "The need for credentials",
+      "Modern pastoral fads"
+    ],
+    "optionsEs": [
+      "2 Timoteo 2:2 vivido a través de generaciones académicas",
+      "El peligro de la psicología secular",
+      "La necesidad de credenciales",
+      "Modas pastorales modernas"
+    ],
+    "c": 147,
+    "explEn": "The Mowrer-Drakeford-Wayne chain illustrates 2 Timothy 2:2 lived out across generations.",
+    "explEs": "La cadena Mowrer-Drakeford-Wayne ilustra 2 Timoteo 2:2 vivido a través de generaciones."
+  },
+  {
+    "textEn": "20. The faithful pastor's voice, after his pulpit ministry ends, continues:",
+    "textEs": "20. La voz del pastor fiel, después de que termina su ministerio del púlpito, continúa:",
+    "optionsEn": [
+      "Only in recordings",
+      "Only in his books",
+      "Only in memory",
+      "Through every disciple he ever poured his life into"
+    ],
+    "optionsEs": [
+      "Solo en grabaciones",
+      "Solo en sus libros",
+      "Solo en la memoria",
+      "A través de cada discípulo en quien jamás derramó su vida"
+    ],
+    "c": 157,
+    "explEn": "The faithful pastor's voice continues through every disciple he ever poured his life into.",
+    "explEs": "La voz del pastor fiel continúa a través de cada discípulo en quien derramó su vida."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Explain why the pastor's primary job, per Ephesians 4:11-12, is to equip the saints rather than to do all the ministry himself. Apply this to a typical local church.",
+    "textEs": "21. Explique por qué el trabajo principal del pastor, según Efesios 4:11-12, es equipar a los santos en lugar de hacer todo el ministerio él mismo. Aplique esto a una iglesia local típica.",
+    "kw_en": [
+      "equip",
+      "ephesians",
+      "saint",
+      "ministry",
+      "multiply",
+      "delegate",
+      "body",
+      "pastor"
+    ],
+    "kw_es": [
+      "equip",
+      "efesios",
+      "santo",
+      "ministerio",
+      "multiplic",
+      "delegar",
+      "cuerpo",
+      "pastor"
+    ],
+    "modelEn": "Ephesians 4:11-12 says the pastor's primary job is to equip the saints for the work of ministry, not to do all the ministry himself. The pastor is not the only minister in the church; he is the equipper of ministers, the one who trains and releases the body to serve. Applied to a typical local church, this means the pastor who tries to do every visit, every class, every counseling session, and every program himself produces a dependent congregation and an exhausted shepherd. The biblical model is multiplication: the pastor equips others, delegates real ministry to them, and watches the body grow as every member shares the work. A church where only the pastor ministers is sub-biblical; a church where the saints are equipped to minister is the New Testament pattern. The measure of success is not how much the pastor does but how many he has raised up.",
+    "modelEs": "Efesios 4:11-12 dice que el trabajo principal del pastor es equipar a los santos para la obra del ministerio, no hacer todo el ministerio él mismo. El pastor no es el único ministro en la iglesia; es el equipador de ministros, el que entrena y libera al cuerpo para servir. Aplicado a una iglesia local típica, esto significa que el pastor que intenta hacer cada visita, cada clase, cada sesión de consejería y cada programa él mismo produce una congregación dependiente y un pastor agotado. El modelo bíblico es la multiplicación: el pastor equipa a otros, delega ministerio real en ellos, y ve crecer al cuerpo mientras cada miembro comparte la obra. Una iglesia donde solo el pastor ministra es subbíblica; una iglesia donde los santos son equipados para ministrar es el patrón del Nuevo Testamento. La medida del éxito no es cuánto hace el pastor sino a cuántos ha levantado."
+  },
+  {
+    "textEn": "22. Discuss why most churches stop short at the third movement of the Great Commission ('teaching them to observe all things'). What is lost when discipleship is neglected?",
+    "textEs": "22. Discuta por qué la mayoría de las iglesias se queda corta en el tercer movimiento de la Gran Comisión ('enseñándoles que guarden todas las cosas'). ¿Qué se pierde cuando se descuida el discipulado?",
+    "kw_en": [
+      "commission",
+      "teach",
+      "observe",
+      "disciple",
+      "convert",
+      "neglect",
+      "depth",
+      "obey"
+    ],
+    "kw_es": [
+      "comisión",
+      "enseñar",
+      "guardar",
+      "discípulo",
+      "convertir",
+      "descuid",
+      "profundidad",
+      "obedecer"
+    ],
+    "modelEn": "Most churches stop short at the third movement of the Great Commission — 'teaching them to observe all things I have commanded you.' They evangelize (go) and they baptize, but they neglect the long, slow work of teaching new believers to actually obey everything Christ taught. When discipleship is neglected, the church fills with converts who never mature, baptized believers who remain spiritual infants, knowing the gospel's entry point but never its depths. The result is a wide but shallow church, full of decisions but empty of disciples. Jesus did not commission us to make converts but disciples — and a disciple is one taught to observe, not merely to believe. The pastor who skips the third movement builds a nursery that never grows up; the pastor who embraces it builds mature saints who can in turn teach others.",
+    "modelEs": "La mayoría de las iglesias se quedan cortas en el tercer movimiento de la Gran Comisión — 'enseñándoles que guarden todas las cosas que os he mandado.' Evangelizan (id) y bautizan, pero descuidan la obra larga y lenta de enseñar a los nuevos creyentes a obedecer realmente todo lo que Cristo enseñó. Cuando se descuida el discipulado, la iglesia se llena de convertidos que nunca maduran, creyentes bautizados que permanecen como infantes espirituales, conociendo el punto de entrada del evangelio pero nunca sus profundidades. El resultado es una iglesia ancha pero superficial, llena de decisiones pero vacía de discípulos. Jesús no nos comisionó a hacer convertidos sino discípulos — y un discípulo es uno enseñado a guardar, no meramente a creer. El pastor que se salta el tercer movimiento construye una guardería que nunca crece; el pastor que lo abraza construye santos maduros que a su vez pueden enseñar a otros."
+  },
+  {
+    "textEn": "23. Outline the four generations described in 2 Timothy 2:2. Why is this verse the foundational text for Christian disciple-making across centuries?",
+    "textEs": "23. Bosqueje las cuatro generaciones descritas en 2 Timoteo 2:2. ¿Por qué es este versículo el texto fundacional para hacer discípulos cristianos a través de los siglos?",
+    "kw_en": [
+      "timothy",
+      "generation",
+      "paul",
+      "faithful",
+      "others",
+      "entrust",
+      "teach",
+      "chain"
+    ],
+    "kw_es": [
+      "timoteo",
+      "generación",
+      "pablo",
+      "fieles",
+      "otros",
+      "encargar",
+      "enseñar",
+      "cadena"
+    ],
+    "modelEn": "2 Timothy 2:2 describes four generations of teaching in a single verse: 'the things you have heard from me (Paul), commit these to faithful men (Timothy), who will be able to teach others also.' That is Paul to Timothy to faithful men to others also — four links in a chain. This verse is the foundational text for Christian disciple-making across centuries because it shows the gospel advancing not by programs but by faithful men entrusting truth to faithful men, generation after generation. Paul did not tell Timothy to reach the masses but to invest deeply in reliable people who would carry it on. The genius of the verse is its built-in multiplication: each generation is responsible to reach the next, so that the chain never depends on one star teacher but on faithful transmission. This is how the faith has survived two thousand years.",
+    "modelEs": "2 Timoteo 2:2 describe cuatro generaciones de enseñanza en un solo versículo: 'lo que has oído de mí (Pablo), esto encarga a hombres fieles (Timoteo), que sean idóneos para enseñar también a otros.' Eso es Pablo a Timoteo a hombres fieles a otros también — cuatro eslabones en una cadena. Este versículo es el texto fundamental para el hacer discípulos cristianos a través de los siglos porque muestra el evangelio avanzando no por programas sino por hombres fieles encargando la verdad a hombres fieles, generación tras generación. Pablo no le dijo a Timoteo que alcanzara a las masas sino que invirtiera profundamente en personas confiables que lo llevarían adelante. El genio del versículo es su multiplicación incorporada: cada generación es responsable de alcanzar la siguiente, de modo que la cadena nunca depende de un maestro estrella sino de la transmisión fiel. Así ha sobrevivido la fe dos mil años."
+  },
+  {
+    "textEn": "24. Identify the four elements of the Paul-Timothy mentoring pattern (time, shared ministry, correction, succession). How does each translate to modern pastoral practice?",
+    "textEs": "24. Identifique los cuatro elementos del patrón de mentoría Pablo-Timoteo (tiempo, ministerio compartido, corrección, sucesión). ¿Cómo se traduce cada uno a la práctica pastoral moderna?",
+    "kw_en": [
+      "time",
+      "ministry",
+      "correct",
+      "succession",
+      "mentor",
+      "shared",
+      "invest",
+      "model"
+    ],
+    "kw_es": [
+      "tiempo",
+      "ministerio",
+      "corregir",
+      "sucesión",
+      "mentor",
+      "compartido",
+      "invertir",
+      "modelo"
+    ],
+    "modelEn": "The Paul-Timothy mentoring pattern had four elements. First, time — Paul spent years with Timothy, not a weekend seminar, because disciples are made slowly. Second, shared ministry — Timothy traveled with Paul, watched him work, and did ministry alongside him, learning by doing rather than only by lecture. Third, correction — Paul corrected Timothy honestly, urging him to fan his gift into flame and not to be timid, because a mentor who never corrects does not truly disciple. Fourth, succession — Paul aimed at Timothy carrying on after he was gone, so that the ministry would outlive the mentor. Translated to modern pastoral practice, this means a pastor who disciples will give a few men real time, bring them into ministry beside him, speak hard truth to them in love, and aim from the start at releasing them to lead. Mentoring is not a class; it is a shared life with a goal.",
+    "modelEs": "El patrón de mentoría de Pablo y Timoteo tuvo cuatro elementos. Primero, tiempo — Pablo pasó años con Timoteo, no un seminario de fin de semana, porque los discípulos se hacen lentamente. Segundo, ministerio compartido — Timoteo viajó con Pablo, lo vio trabajar e hizo ministerio junto a él, aprendiendo haciendo en vez de solo por conferencia. Tercero, corrección — Pablo corrigió a Timoteo honestamente, instándolo a avivar su don y a no ser tímido, porque un mentor que nunca corrige no discipula de verdad. Cuarto, sucesión — Pablo apuntó a que Timoteo continuara después de que él se fuera, para que el ministerio sobreviviera al mentor. Traducido a la práctica pastoral moderna, esto significa que un pastor que discipula dará a unos pocos hombres tiempo real, los traerá al ministerio junto a él, les hablará verdad dura en amor, y apuntará desde el inicio a liberarlos para dirigir. La mentoría no es una clase; es una vida compartida con una meta."
+  },
+  {
+    "textEn": "25. Outline the four levels at which a pastor teaches. Which level is most easily neglected, and why?",
+    "textEs": "25. Bosqueje los cuatro niveles en los cuales un pastor enseña. ¿Cuál nivel es más fácilmente descuidado, y por qué?",
+    "kw_en": [
+      "pulpit",
+      "study",
+      "group",
+      "one-on-one",
+      "level",
+      "personal",
+      "neglect",
+      "teach"
+    ],
+    "kw_es": [
+      "púlpito",
+      "estudio",
+      "grupo",
+      "individual",
+      "nivel",
+      "personal",
+      "descuid",
+      "enseñar"
+    ],
+    "modelEn": "A pastor teaches at four levels. The first is the pulpit — the Sunday sermon to the whole congregation. The second is the Bible study or Sunday school — a smaller, more interactive setting. The third is the small group — fewer people, deeper conversation, real relationship. The fourth and deepest is the one-on-one conversation, where a man's life is actually shaped face to face. The most easily neglected is the one-on-one, because it does not scale, produces no visible crowd, and demands the pastor's personal time. Yet it is precisely here that disciples are truly made, as Jesus made the Twelve and Paul made Timothy. Pulpit ministry reaches many shallowly; one-on-one reaches few deeply. The pastor who only preaches will inform a crowd but disciple no one; the pastor who also invests personally will raise up leaders.",
+    "modelEs": "Un pastor enseña en cuatro niveles. El primero es el púlpito — el sermón dominical a toda la congregación. El segundo es el estudio bíblico o la escuela dominical — un entorno más pequeño y más interactivo. El tercero es el grupo pequeño — menos personas, conversación más profunda, relación real. El cuarto y más profundo es la conversación individual, donde la vida de un hombre realmente se forma cara a cara. El más fácilmente descuidado es el individual, porque no escala, no produce multitud visible y exige el tiempo personal del pastor. Sin embargo es precisamente aquí donde los discípulos se hacen de verdad, como Jesús hizo a los Doce y Pablo hizo a Timoteo. El ministerio del púlpito alcanza a muchos superficialmente; el individual alcanza a pocos profundamente. El pastor que solo predica informará a una multitud pero no discipulará a nadie; el pastor que también invierte personalmente levantará líderes."
+  },
+  {
+    "textEn": "26. Apply Arthur's transformation from Angola inmate to Parchman head chaplain as a case study in disciple-making. What does this teach about who can become a leader?",
+    "textEs": "26. Aplique la transformación de Arthur de recluso de Angola a capellán principal de Parchman como un caso de estudio en hacer discípulos. ¿Qué enseña esto sobre quién puede llegar a ser un líder?",
+    "kw_en": [
+      "arthur",
+      "inmate",
+      "transform",
+      "leader",
+      "angola",
+      "chaplain",
+      "grace",
+      "anyone"
+    ],
+    "kw_es": [
+      "arthur",
+      "recluso",
+      "transform",
+      "líder",
+      "angola",
+      "capellán",
+      "gracia",
+      "cualquiera"
+    ],
+    "modelEn": "Arthur came to Christ inside Angola Prison after considering taking his own life, and was so transformed that he eventually became head chaplain at Parchman Prison in Mississippi. His story is a case study in disciple-making that teaches who can become a leader: not the polished and credentialed only, but anyone in whom the grace of God is at work. Arthur was an inmate — by the world's reckoning a write-off — yet God took him, others discipled him, and he became a shepherd of other prisoners. This teaches the pastor never to despise the raw material God brings him, because the next leader may be the most unlikely person in the room. Disciple-making believes that grace can transform anyone into a faithful man able to teach others, even a man the world has thrown away. The pastor looks at people the way God does, seeing not only what they are but what grace can make them.",
+    "modelEs": "Arthur vino a Cristo dentro de la prisión de Angola tras considerar quitarse la vida, y fue tan transformado que con el tiempo llegó a ser capellán principal de la prisión de Parchman en Misisipi. Su historia es un caso de estudio en el hacer discípulos que enseña quién puede llegar a ser líder: no solo los pulidos y acreditados, sino cualquiera en quien la gracia de Dios está obrando. Arthur era un recluso — según el cálculo del mundo un caso perdido — sin embargo Dios lo tomó, otros lo discipularon, y llegó a ser pastor de otros prisioneros. Esto enseña al pastor a nunca despreciar la materia prima que Dios le trae, porque el próximo líder puede ser la persona más inverosímil del salón. El hacer discípulos cree que la gracia puede transformar a cualquiera en un hombre fiel capaz de enseñar a otros, aun a un hombre que el mundo ha desechado. El pastor mira a la gente como lo hace Dios, viendo no solo lo que son sino lo que la gracia puede hacerlos."
+  },
+  {
+    "textEn": "27. Defend the discipline of thinking in generations rather than weeks. How does the long view change the way a pastor handles slow growth in his disciples?",
+    "textEs": "27. Defienda la disciplina de pensar en generaciones en lugar de semanas. ¿Cómo cambia la visión a largo plazo la manera en que un pastor maneja el crecimiento lento en sus discípulos?",
+    "kw_en": [
+      "generation",
+      "long",
+      "slow",
+      "patient",
+      "plant",
+      "grow",
+      "view",
+      "fruit"
+    ],
+    "kw_es": [
+      "generación",
+      "largo",
+      "lento",
+      "paciente",
+      "plantar",
+      "crecer",
+      "visión",
+      "fruto"
+    ],
+    "modelEn": "The discipline of thinking in generations rather than weeks changes the way a pastor handles slow growth in his disciples. 1 Corinthians 3:6 teaches that Paul plants, Apollos waters, but God gives the increase — growth is God's work on God's timetable, not the pastor's. A man who thinks only one Sunday at a time will burn out by his fifth year, frustrated by people who change slowly; but the man who thinks in generations is patient, knowing he may not see the fruit of his discipling for decades. He plants seeds in a young believer that will bear fruit in that believer's children and disciples long after the pastor is gone. The long view frees him from demanding instant maturity and lets him invest faithfully in slow soil. He measures his ministry not by this year's visible results but by the chain of faithful men stretching into a future he will never see.",
+    "modelEs": "La disciplina de pensar en generaciones en vez de semanas cambia la manera en que un pastor maneja el crecimiento lento en sus discípulos. 1 Corintios 3:6 enseña que Pablo planta, Apolos riega, pero Dios da el crecimiento — el crecimiento es obra de Dios en el calendario de Dios, no del pastor. Un hombre que piensa solo un domingo a la vez se agotará para su quinto año, frustrado por gente que cambia lentamente; pero el hombre que piensa en generaciones es paciente, sabiendo que tal vez no vea el fruto de su discipulado por décadas. Planta semillas en un joven creyente que darán fruto en los hijos y discípulos de ese creyente mucho después de que el pastor se haya ido. La visión larga lo libera de exigir madurez instantánea y le permite invertir fielmente en tierra lenta. Mide su ministerio no por los resultados visibles de este año sino por la cadena de hombres fieles que se extiende hacia un futuro que nunca verá."
+  },
+  {
+    "textEn": "28. Why must a pastor remain a learner throughout his ministry? What happens to a pastor who stops studying after seminary?",
+    "textEs": "28. ¿Por qué debe un pastor permanecer un aprendiz a lo largo de su ministerio? ¿Qué le sucede a un pastor que deja de estudiar después del seminario?",
+    "kw_en": [
+      "learn",
+      "study",
+      "grow",
+      "shallow",
+      "repeat",
+      "stale",
+      "humble",
+      "continue"
+    ],
+    "kw_es": [
+      "aprender",
+      "estudiar",
+      "crecer",
+      "superficial",
+      "repetir",
+      "rancio",
+      "humilde",
+      "continuar"
+    ],
+    "modelEn": "A pastor must remain a learner throughout his ministry, because the man who stops studying after seminary will, by his fifteenth year, be repeating himself with shallow teaching. The well runs dry when nothing new is poured in; the congregation hears the same handful of sermons recycled, and the pastor's own soul grows stale. A pastor who keeps reading, studying Scripture freshly, and learning from others stays green and keeps feeding his people genuine food. Lifelong learning also keeps him humble, since the student posture resists the pride that destroys ministries. The teacher must never stop being taught. The pastor who treats his seminary diploma as the finish line will preach thin sermons to a starving flock, while the one who remains a learner to the end will have something fresh to give even in his fortieth year.",
+    "modelEs": "Un pastor debe permanecer un aprendiz a lo largo de su ministerio, porque el hombre que deja de estudiar después del seminario, para su decimoquinto año, estará repitiéndose con enseñanza superficial. El pozo se seca cuando no se vierte nada nuevo; la congregación oye el mismo puñado de sermones reciclados, y el alma misma del pastor se vuelve rancia. Un pastor que sigue leyendo, estudiando la Escritura con frescura y aprendiendo de otros se mantiene verde y sigue alimentando a su pueblo con comida genuina. El aprendizaje de por vida también lo mantiene humilde, pues la postura de estudiante resiste el orgullo que destruye los ministerios. El maestro nunca debe dejar de ser enseñado. El pastor que trata su diploma de seminario como la meta final predicará sermones delgados a un rebaño hambriento, mientras que el que permanece aprendiz hasta el fin tendrá algo fresco que dar aun en su cuadragésimo año."
+  },
+  {
+    "textEn": "29. Apply the Mowrer → Drakeford → Wayne → next generation chain as a real-life example of 2 Timothy 2:2. How does this show that the verse is not theoretical but historical?",
+    "textEs": "29. Aplique la cadena Mowrer → Drakeford → Wayne → próxima generación como un ejemplo real de 2 Timoteo 2:2. ¿Cómo muestra esto que el versículo no es teórico sino histórico?",
+    "kw_en": [
+      "chain",
+      "drakeford",
+      "mowrer",
+      "generation",
+      "historical",
+      "timothy",
+      "real",
+      "transmit"
+    ],
+    "kw_es": [
+      "cadena",
+      "drakeford",
+      "mowrer",
+      "generación",
+      "histórico",
+      "timoteo",
+      "real",
+      "transmitir"
+    ],
+    "modelEn": "The Mowrer → Drakeford → Wayne → next generation chain is a real-life example of 2 Timothy 2:2, showing the verse is not theoretical but historical. O. Hobart Mowrer taught John Drakeford, who taught at Southwestern Baptist Theological Seminary; Drakeford's methods passed to Wayne, who now passes them to the students of this very course, who will teach others also. That is four living generations of faithful transmission, exactly the pattern Paul described. The chain proves that disciple-making is not an abstract ideal but the actual mechanism by which knowledge and ministry are handed down through time. Each man received from the one before and gave to the ones after. This course itself is a link in such a chain — and every student who learns it and teaches another keeps 2 Timothy 2:2 alive in his own generation. The verse describes not history's exception but its ordinary means.",
+    "modelEs": "La cadena Mowrer → Drakeford → Wayne → próxima generación es un ejemplo de la vida real de 2 Timoteo 2:2, mostrando que el versículo no es teórico sino histórico. O. Hobart Mowrer enseñó a John Drakeford, que enseñó en el Seminario Teológico Bautista del Suroeste; los métodos de Drakeford pasaron a Wayne, quien ahora los pasa a los estudiantes de este mismo curso, que enseñarán también a otros. Esas son cuatro generaciones vivas de transmisión fiel, exactamente el patrón que Pablo describió. La cadena prueba que el hacer discípulos no es un ideal abstracto sino el mecanismo real por el cual el conocimiento y el ministerio se transmiten a través del tiempo. Cada hombre recibió del anterior y dio a los posteriores. Este curso mismo es un eslabón en tal cadena — y cada estudiante que lo aprende y enseña a otro mantiene vivo 2 Timoteo 2:2 en su propia generación. El versículo describe no la excepción de la historia sino su medio ordinario."
+  },
+  {
+    "textEn": "30. Synthesize the entire unit: How does the pastor's discipleship ministry, lived consistently over decades, build a church that is stronger after he is gone than it was while he was there?",
+    "textEs": "30. Sintetice toda la unidad: ¿Cómo el ministerio de discipulado del pastor, vivido consistentemente a lo largo de décadas, edifica una iglesia que es más fuerte después de que él se ha ido que cuando él estaba allí?",
+    "kw_en": [
+      "disciple",
+      "generation",
+      "multiply",
+      "stronger",
+      "equip",
+      "leader",
+      "endure",
+      "legacy"
+    ],
+    "kw_es": [
+      "discípulo",
+      "generación",
+      "multiplic",
+      "fuerte",
+      "equip",
+      "líder",
+      "perdura",
+      "legado"
+    ],
+    "modelEn": "The pastor's discipleship ministry, lived consistently over decades, builds a church that is stronger after he is gone than it was while he was there. By equipping the saints rather than doing all the ministry himself, teaching at every level but especially one on one, and thinking in generations rather than weeks, the pastor multiplies himself into faithful men who will teach others also. The fruit of discipleship is not a crowd dependent on one man but a body full of equipped, maturing ministers. When he dies or retires, the church does not collapse, because he poured his life into people who carry it forward — his voice continues through every disciple he ever invested in. This is the deepest legacy a pastor can leave: not a building or a budget, but a chain of faithful men stretching into a future he will never see. The undershepherd who disciples leaves the flock in the hands of shepherds he has raised.",
+    "modelEs": "El ministerio de discipulado del pastor, vivido consistentemente a lo largo de décadas, construye una iglesia que es más fuerte después de que él se va de lo que era mientras él estaba. Al equipar a los santos en vez de hacer todo el ministerio él mismo, enseñar en cada nivel pero especialmente uno a uno, y pensar en generaciones en vez de semanas, el pastor se multiplica en hombres fieles que enseñarán también a otros. El fruto del discipulado no es una multitud dependiente de un hombre sino un cuerpo lleno de ministros equipados que maduran. Cuando muere o se jubila, la iglesia no colapsa, porque derramó su vida en personas que lo llevan adelante — su voz continúa a través de cada discípulo en quien invirtió. Este es el legado más profundo que un pastor puede dejar: no un edificio o un presupuesto, sino una cadena de hombres fieles que se extiende hacia un futuro que nunca verá. El subpastor que discipula deja al rebaño en manos de pastores que ha levantado."
+  }
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit7 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_pm_u7_mc_passed';
+const SA_LOCK_KEY = 'cts_pm_u7_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_pm_u7_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(normalize(ans), kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 8 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first on Unit 1." : "Por favor regístrese primero en la Unidad 1.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'cert';
+    let total, score, required, mcGatePass, saGatePass;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let correctKW = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+        required = null;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit7 = true;
+                localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_pm_u7_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit7 = true;
+        localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_pm_u7_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_pm_u7_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        renderQuestions();
+    };
+});
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 7 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPMReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

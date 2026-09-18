@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Administration &amp; Leadership &mdash; Unit 8: Facilities, Legal Matters, and Risk Management</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 9 &rarr;</span><span class="lang-es">Unidad 9 &rarr;</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Administration &amp; Leadership &mdash; Unit 8: Facilities, Legal Matters, and Risk Management</span><span class="lang-es">📖 Administraci&oacute;n y Liderazgo &mdash; Unidad 8: Instalaciones, asuntos legales y gestión de riesgos</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"Let all things be done decently and in order." &mdash; 1 Corinthians 14:40 (NKJV)</span><span class="lang-es">⚑ "Hágase todo decentemente y con orden." &mdash; 1 Corintios 14:40 (RVG)</span></p>
+</div>
+
+<div id="regCard" style="display:none;">
+    <input type="text" id="regName" aria-label="regName"><input type="email" id="regEmail" aria-label="regEmail">
+    <select id="regTrack" aria-label="regTrack"><option value="certificate"></option></select>
+    <button id="regBtn"></button><div id="regStatus"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h3>Introduction &mdash; "Decently and in Order" Reaches the Building</h3>
+<p>Some pastors imagine that the spiritual part of ministry is the sermon and the prayer meeting, while the building, the paperwork, and the insurance are a lower and dirtier business, beneath a man of God. That instinct is a mistake, and a costly one. The same Spirit who inspired <em>"Let all things be done decently and in order"</em> (1 Corinthians 14:40) was not speaking only of the worship service. Order in the house of God reaches all the way to the roof that does not leak, the door that locks, the records that are honest, and the children who go home as safe as they came. A church can lose in a single afternoon &mdash; through a fire, a lawsuit, or a scandal of negligence &mdash; what it took a generation of faithful preaching to build. This unit is about guarding that. It is not worldly to be careful. It is faithful. The leader who despises these "small" things has not risen above administration; he has simply left the back door of the church standing wide open.</p>
+
+<h3>I. The House of God Deserves Care</h3>
+<p>Begin with a simple conviction: the place where God's people gather is not nothing. Under the old covenant, God gave page after page of detailed instruction for the care of the tabernacle and then the temple &mdash; who carried what, who cleaned what, who guarded the doors, how the furnishings were kept. The Levites had whole careers in what we would call facilities administration, and God counted it holy work. When the temple fell into disrepair, godly kings like Joash and Josiah made its repair a spiritual priority, gathering funds and hiring honest workmen to restore the house of the Lord.</p>
+<p>Now we must be careful here, because the building is not the church &mdash; the people are the temple of the Holy Spirit now, not the bricks. But the place where the flock gathers to worship, to learn, and to be cared for is a tool God has given for the work, and a steward does not let the Master's tools rust and rot. A roof that leaks over the heads of worshipers, a dirty nursery, a building falling apart from neglect &mdash; these preach a sermon of their own, and it is not a good one. To care for the place where the people gather is to honor the people who gather there and the God they gather to worship. Keep the house in good order. It is part of doing all things decently.</p>
+<div class="pull-quote">It is not worldly to be careful. It is faithful.</div>
+
+<h3>II. Render to Caesar: The Church and the Law</h3>
+<p>Now to a harder subject, where many sincere leaders stumble out of ignorance. The church does not exist in a legal vacuum. It sits inside a nation with laws, and the New Testament is unambiguous about the believer's posture toward those laws. <em>"Let every soul be subject to the governing authorities. For there is no authority except from God"</em> (Romans 13:1). And the Lord Himself: <em>"Render therefore to Caesar the things that are Caesar's, and to God the things that are God's"</em> (Matthew 22:21). Paul presses the practical edge: <em>"Render therefore to all their due: taxes to whom taxes are due, customs to whom customs"</em> (Romans 13:7).</p>
+<p>Hear this clearly, brother. Where the law of the land does not command you to sin nor forbid you to obey God, the church is to be the most law-abiding body in the community, not the most evasive. That means the church should be properly registered and recognized under the laws of its nation. It means the church keeps honest records and meets its legal obligations &mdash; the employment rules for those it pays, the permits for what it builds, whatever the civil authority justly requires. A church that cuts legal corners "to save money" or "because we are spiritual" is not being spiritual; it is disobeying a direct command of Scripture and setting a trap for its own future. Of course, when human law collides with the law of God &mdash; when Caesar demands what belongs to God alone &mdash; we must, with the apostles, <em>"obey God rather than men"</em> (Acts 5:29). But that line is crossed far more rarely than the lazy leader pretends. In all the ordinary business of legal compliance, render to Caesar what is Caesar's, and let the church's paperwork be as honest as its preaching.</p>
+<div class="scripture">"Render therefore to Caesar the things that are Caesar's, and to God the things that are God's." &mdash; Matthew 22:21 (NKJV)</div>
+
+<h3>III. A Good Testimony with Outsiders</h3>
+<p>There is a spiritual reason for this care that runs deeper than avoiding trouble. Paul lists the qualifications of an overseer and then adds one that surprises us: <em>"Moreover he must have a good testimony among those who are outside, lest he fall into reproach and the snare of the devil"</em> (1 Timothy 3:7). The reputation of the church and its leaders before the watching unbelieving community is a gospel matter. The neighbors, the officials, the businesses around the church &mdash; they are forming a judgment about Christ from how His people conduct their affairs.</p>
+<p>When a church pays its debts on time, honors its agreements, keeps its property in decent order, and deals with the authorities honestly, it adorns the gospel and removes an obstacle between its neighbors and Christ. When a church is known for unpaid bills, broken promises, a building in ruins, and corners cut with the law, it hangs a stumbling block in the doorway and hands the devil a snare. The world will forgive the church many things, but it will not fail to notice hypocrisy in the handling of money and obligations. So administer the church's external affairs the way a missionary administers his own &mdash; knowing the outsiders are always watching, and that a good testimony among them is worth guarding as carefully as any doctrine.</p>
+
+<h3>IV. The Prudent See Danger: Risk Management</h3>
+<p>Now to the discipline the world calls risk management, which Scripture simply calls prudence. <em>"A prudent man foresees evil and hides himself; but the simple pass on and are punished"</em> (Proverbs 22:3). The wise leader looks down the road and asks, before it happens, "What could go wrong here, and what would we do?" The foolish leader never asks until the disaster is already on top of him, and by then it is too late.</p>
+<p>This is not a lack of faith; it is the very wisdom God commends. <em>"Be diligent to know the state of your flocks, and attend to your herds"</em> (Proverbs 27:23) &mdash; the shepherd's careful, regular attention to the real condition of what is in his care. Remember Nehemiah from Unit 3: when the threat came, he did not only pray; he set a guard. Faith and a watch go together. So the prudent church looks ahead to foreseeable dangers and prepares: it carries the insurance a responsible steward would carry, so that an accident or fire does not destroy the work; it keeps its building genuinely safe &mdash; the wiring, the exits, the stairs, the kitchen; it sets aside money against the lean year instead of spending every peso as it comes. None of this betrays a lack of trust in God. The God who fed Joseph's Egypt through seven years of famine by means of seven years of storing grain is the same God who tells the prudent to see danger coming. Trust God fully &mdash; and check the smoke detectors.</p>
+<div class="scripture">"A prudent man foresees evil and hides himself; but the simple pass on and are punished." &mdash; Proverbs 22:3 (NKJV)</div>
+
+<h3>V. Guarding the Vulnerable</h3>
+<p>Of all the risks a church must manage, one rises so far above the rest that it deserves its own place, and I will speak of it without flinching: the protection of children and the vulnerable. Our Lord reserved some of His most terrible words for those who would harm a child: <em>"whoever causes one of these little ones who believe in Me to sin, it would be better for him if a millstone were hung around his neck, and he were drowned in the depth of the sea"</em> (Matthew 18:6). The church must be the safest place a child can be, never a place where a predator can hide behind a smile and a Bible.</p>
+<p>This is not cynicism about people; it is love for the lambs, and it is simple obedience to a Shepherd who counts them precious. So the wise church puts real protections in place and does not apologize for them: it screens those who work with children rather than handing access to anyone who volunteers; it follows sensible rules so that no worker is ever alone and unaccountable with a child, which protects the children and also protects the innocent worker from a false accusation; it takes any concern with complete seriousness. The leader who finds these measures "unspiritual" or "suspicious" has not understood what is at stake. A single predator admitted through carelessness can destroy children's lives and the church's testimony in one blow. Guard the vulnerable as the Chief Shepherd guards His lambs &mdash; deliberately, vigilantly, and without shame. This is one watch the leader must never relax.</p>
+
+<h3>VI. Wise as Serpents, Innocent as Doves</h3>
+<p>Perhaps you feel a tension in all of this, and it is worth naming. Does this careful, legal, insured, screened, locked-and-guarded way of operating sit uneasily beside a life of faith? Are we trusting God or trusting our precautions? The Lord Himself dissolved the tension in a single sentence when He sent His disciples into a dangerous world: <em>"be wise as serpents and harmless as doves"</em> (Matthew 10:16). Both at once. The dove's innocence without the serpent's prudence is naive, and it gets the flock hurt. The serpent's prudence without the dove's innocence is mere worldly cunning. The faithful leader holds both.</p>
+<p>So none of this prudence is permission for the church to become a cold, suspicious, lawyer-run institution that has lost its soul. The building serves the ministry; it is not the ministry. The policies protect the flock; they are not the flock. The goal is never to turn the house of God into a fortress of rules, but to remove every needless danger and reproach so that the real work &mdash; the preaching, the shepherding, the gospel &mdash; can go forward unhindered. Be innocent in heart and shrewd in practice. Trust God with everything, and also lock the door, pay the tax, insure the roof, screen the worker, and keep the records honest. That is not a smaller faith. It is faith doing all things decently and in order, down to the very foundations.</p>
+
+</div>
+<div class="lang-es">
+
+<h3>Introducción &mdash; "Decentemente y con orden" alcanza el edificio</h3>
+<p>Algunos pastores imaginan que la parte espiritual del ministerio es el sermón y la reunión de oración, mientras que el edificio, el papeleo y el seguro son un asunto inferior y más sucio, por debajo de un hombre de Dios. Ese instinto es un error, y uno costoso. El mismo Espíritu que inspiró ⚑ <em>"hágase todo decentemente y con orden"</em> (1 Corintios 14:40) no hablaba solo del culto. El orden en la casa de Dios alcanza hasta el techo que no gotea, la puerta que cierra con llave, los registros que son honestos, y los niños que vuelven a casa tan seguros como llegaron. Una iglesia puede perder en una sola tarde &mdash; por un incendio, una demanda o un escándalo de negligencia &mdash; lo que tomó una generación de predicación fiel construir. Esta unidad trata de guardar eso. No es mundano ser cuidadoso. Es fiel. El líder que desprecia estas cosas "pequeñas" no se ha elevado por encima de la administración; sencillamente ha dejado la puerta trasera de la iglesia abierta de par en par.</p>
+
+<h3>I. La casa de Dios merece cuidado</h3>
+<p>Comience con una convicción sencilla: el lugar donde el pueblo de Dios se reúne no es nada. Bajo el antiguo pacto, Dios dio página tras página de instrucción detallada para el cuidado del tabernáculo y luego del templo &mdash; quién cargaba qué, quién limpiaba qué, quién guardaba las puertas, cómo se mantenían los muebles. Los levitas tenían carreras enteras en lo que llamaríamos administración de instalaciones, y Dios lo contó obra santa. Cuando el templo cayó en mal estado, reyes piadosos como Joás y Josías hicieron de su reparación una prioridad espiritual, recogiendo fondos y contratando obreros honestos para restaurar la casa del Señor.</p>
+<p>Ahora debemos tener cuidado aquí, porque el edificio no es la iglesia &mdash; el pueblo es el templo del Espíritu Santo ahora, no los ladrillos. Pero el lugar donde la grey se reúne para adorar, para aprender y para ser cuidada es una herramienta que Dios ha dado para la obra, y un mayordomo no deja que las herramientas del Amo se oxiden y se pudran. Un techo que gotea sobre las cabezas de los adoradores, una cuna sucia, un edificio que se cae a pedazos por abandono &mdash; estos predican un sermón propio, y no es uno bueno. Cuidar el lugar donde el pueblo se reúne es honrar al pueblo que se reúne allí y al Dios que se reúnen a adorar. Mantenga la casa en buen orden. Es parte de hacer todo decentemente.</p>
+<div class="pull-quote">No es mundano ser cuidadoso. Es fiel.</div>
+
+<h3>II. Dad al César: la iglesia y la ley</h3>
+<p>Ahora a un tema más difícil, donde muchos líderes sinceros tropiezan por ignorancia. La iglesia no existe en un vacío legal. Está dentro de una nación con leyes, y el Nuevo Testamento es inequívoco sobre la postura del creyente hacia esas leyes. ⚑ <em>"Sométase toda persona a las potestades superiores; porque no hay potestad sino de Dios"</em> (Romanos 13:1). Y el Señor mismo: ⚑ <em>"Dad pues a César lo que es de César, y a Dios lo que es de Dios"</em> (Mateo 22:21). Pablo aprieta el filo práctico: ⚑ <em>"Pagad a todos lo que debéis: al que tributo, tributo; al que impuesto, impuesto"</em> (Romanos 13:7).</p>
+<p>Oiga esto con claridad, hermano. Donde la ley de la tierra no le ordena pecar ni le prohíbe obedecer a Dios, la iglesia ha de ser el cuerpo más cumplidor de la ley en la comunidad, no el más evasivo. Eso significa que la iglesia debe estar debidamente registrada y reconocida bajo las leyes de su nación. Significa que la iglesia lleva registros honestos y cumple sus obligaciones legales &mdash; las reglas de empleo para quienes paga, los permisos para lo que construye, lo que la autoridad civil justamente requiera. Una iglesia que recorta esquinas legales "para ahorrar dinero" o "porque somos espirituales" no está siendo espiritual; está desobedeciendo un mandato directo de la Escritura y poniéndose una trampa para su propio futuro. Por supuesto, cuando la ley humana choca con la ley de Dios &mdash; cuando el César exige lo que pertenece solo a Dios &mdash; debemos, con los apóstoles, ⚑ <em>"obedecer a Dios antes que a los hombres"</em> (Hechos 5:29). Pero esa línea se cruza mucho más rara vez de lo que finge el líder perezoso. En todo el asunto ordinario del cumplimiento legal, dad al César lo que es del César, y que el papeleo de la iglesia sea tan honesto como su predicación.</p>
+<div class="scripture">⚑ "Dad pues a César lo que es de César, y a Dios lo que es de Dios." &mdash; Mateo 22:21 (RVG)</div>
+
+<h3>III. Buen testimonio con los de afuera</h3>
+<p>Hay una razón espiritual para este cuidado que corre más hondo que evitar problemas. Pablo enumera las cualidades de un obispo y luego añade una que nos sorprende: ⚑ <em>"También es necesario que tenga buen testimonio de los de afuera, para que no caiga en descrédito y en lazo del diablo"</em> (1 Timoteo 3:7). La reputación de la iglesia y de sus líderes ante la comunidad incrédula que observa es un asunto del evangelio. Los vecinos, los funcionarios, los negocios alrededor de la iglesia &mdash; están formando un juicio acerca de Cristo a partir de cómo su pueblo conduce sus asuntos.</p>
+<p>Cuando una iglesia paga sus deudas a tiempo, honra sus acuerdos, mantiene su propiedad en orden decente, y trata con las autoridades honestamente, adorna el evangelio y quita un obstáculo entre sus vecinos y Cristo. Cuando una iglesia es conocida por cuentas sin pagar, promesas rotas, un edificio en ruinas y esquinas recortadas con la ley, cuelga un tropiezo en la entrada y le entrega al diablo un lazo. El mundo le perdonará a la iglesia muchas cosas, pero no dejará de notar la hipocresía en el manejo del dinero y las obligaciones. Así que administre los asuntos externos de la iglesia como un misionero administra los suyos &mdash; sabiendo que los de afuera siempre observan, y que un buen testimonio entre ellos vale la pena guardarse con tanto cuidado como cualquier doctrina.</p>
+
+<h3>IV. El prudente ve el peligro: la gestión de riesgos</h3>
+<p>Ahora a la disciplina que el mundo llama gestión de riesgos, que la Escritura sencillamente llama prudencia. ⚑ <em>"El avisado ve el mal, y se esconde; mas los simples pasan, y reciben el daño"</em> (Proverbios 22:3). El líder sabio mira camino abajo y pregunta, antes de que suceda: "¿Qué podría salir mal aquí, y qué haríamos?" El líder necio nunca pregunta hasta que el desastre le cae encima, y entonces ya es tarde.</p>
+<p>Esto no es falta de fe; es la misma sabiduría que Dios encomia. ⚑ <em>"Sé diligente en conocer el estado de tus ovejas, y mira con cuidado por tus rebaños"</em> (Proverbios 27:23) &mdash; la atención cuidadosa y regular del pastor a la condición real de lo que está a su cuidado. Recuerde a Nehemías de la Unidad 3: cuando vino la amenaza, no solo oró; puso guardia. La fe y una guardia van juntas. Así que la iglesia prudente mira hacia adelante a los peligros previsibles y se prepara: lleva el seguro que un mayordomo responsable llevaría, para que un accidente o incendio no destruya la obra; mantiene su edificio genuinamente seguro &mdash; la instalación eléctrica, las salidas, las escaleras, la cocina; aparta dinero contra el año de escasez en vez de gastar cada peso conforme llega. Nada de esto traiciona una falta de confianza en Dios. El Dios que alimentó el Egipto de José a través de siete años de escasez por medio de siete años de almacenar grano es el mismo Dios que dice al prudente que vea venir el peligro. Confíe en Dios plenamente &mdash; y revise los detectores de humo.</p>
+<div class="scripture">⚑ "El avisado ve el mal, y se esconde; mas los simples pasan, y reciben el daño." &mdash; Proverbios 22:3 (RVG)</div>
+
+<h3>V. Guardar a los vulnerables</h3>
+<p>De todos los riesgos que una iglesia debe gestionar, uno se eleva tan por encima del resto que merece su propio lugar, y hablaré de él sin titubear: la protección de los niños y los vulnerables. Nuestro Señor reservó algunas de sus palabras más terribles para quienes harían daño a un niño: ⚑ <em>"cualquiera que hiciere tropezar a alguno de estos pequeños que creen en mí, mejor le fuera que se le colgase al cuello una piedra de molino de asno, y que se le anegase en lo profundo del mar"</em> (Mateo 18:6). La iglesia debe ser el lugar más seguro donde un niño pueda estar, nunca un lugar donde un depredador pueda esconderse tras una sonrisa y una Biblia.</p>
+<p>Esto no es cinismo acerca de las personas; es amor por los corderos, y es simple obediencia a un Pastor que los cuenta preciosos. Así que la iglesia sabia pone protecciones reales en su lugar y no se disculpa por ellas: investiga a quienes trabajan con niños en vez de entregar el acceso a cualquiera que se ofrezca; sigue reglas sensatas para que ningún obrero esté jamás solo y sin rendición de cuentas con un niño, lo cual protege a los niños y también protege al obrero inocente de una acusación falsa; toma cualquier inquietud con completa seriedad. El líder que halla estas medidas "poco espirituales" o "sospechosas" no ha entendido lo que está en juego. Un solo depredador admitido por descuido puede destruir vidas de niños y el testimonio de la iglesia de un solo golpe. Guarde a los vulnerables como el Príncipe de los pastores guarda a sus corderos &mdash; deliberadamente, vigilantemente y sin vergüenza. Esta es una guardia que el líder nunca debe relajar.</p>
+
+<h3>VI. Prudentes como serpientes, sencillos como palomas</h3>
+<p>Quizá sienta una tensión en todo esto, y vale la pena nombrarla. ¿Acaso esta manera cuidadosa, legal, asegurada, investigada, con cerradura y guardia de operar se sienta de forma incómoda junto a una vida de fe? ¿Estamos confiando en Dios o confiando en nuestras precauciones? El Señor mismo disolvió la tensión en una sola oración cuando envió a sus discípulos a un mundo peligroso: ⚑ <em>"sed pues prudentes como serpientes, y sencillos como palomas"</em> (Mateo 10:16). Ambas a la vez. La inocencia de la paloma sin la prudencia de la serpiente es ingenua, y lastima a la grey. La prudencia de la serpiente sin la inocencia de la paloma es mera astucia mundana. El líder fiel sostiene ambas.</p>
+<p>Así que nada de esta prudencia es permiso para que la iglesia se vuelva una institución fría, sospechosa, manejada por abogados, que ha perdido su alma. El edificio sirve al ministerio; no es el ministerio. Las políticas protegen a la grey; no son la grey. La meta nunca es convertir la casa de Dios en una fortaleza de reglas, sino quitar todo peligro y oprobio innecesario para que la obra verdadera &mdash; la predicación, el pastoreo, el evangelio &mdash; pueda avanzar sin estorbo. Sea inocente de corazón y sagaz en la práctica. Confíe en Dios con todo, y también cierre la puerta con llave, pague el impuesto, asegure el techo, investigue al obrero, y mantenga honestos los registros. Eso no es una fe más pequeña. Es la fe haciendo todo decentemente y con orden, hasta los mismos cimientos.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 8 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 8 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lecci&oacute;n y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 8;
+const COURSE = 'al';
+const NEXT_UNIT_URL = 'CTSALUnit9.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Biblical Call to Lead God's House", "Unit 2 - The Pastor as Undershepherd & Steward", "Unit 3 - Vision, Calling & Strategic Planning", "Unit 4 - Organization, Structure & Delegation", "Unit 5 - Financial Stewardship and Budgeting", "Unit 6 - Personnel and Volunteer Management", "Unit 7 - Conflict Resolution and Church Discipline", "Unit 8 - Facilities, Legal Matters, and Risk Management", "Unit 9 - Multiplication, Church Planting, and Succession", "Unit 10 - The Leader's Heart: Integrity, Rest, and Finishing Well"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSALUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "According to the introduction, the instinct that treats buildings, paperwork, and insurance as 'beneath' a man of God is:", "textEs": "Según la introducción, el instinto que trata los edificios, el papeleo y el seguro como algo 'por debajo' de un hombre de Dios es:", "optionsEn": ["Required by Scripture", "Wise stewardship", "A healthy spiritual priority", "A mistake, and a costly one"], "optionsEs": ["Requerido por la Escritura", "Sabia mayordomía", "Una prioridad espiritual sana", "Un error, y uno costoso"], "explanationEn": "That instinct is a costly mistake; order in God's house reaches all the way to the roof, the locks, and the records.", "explanationEs": "Ese instinto es un error costoso; el orden en la casa de Dios alcanza hasta el techo, las cerraduras y los registros.", "correct": 3}, {"textEn": "The verse that frames the whole unit, showing order reaches beyond the worship service, is:", "textEs": "El versículo que enmarca toda la unidad, mostrando que el orden alcanza más allá del culto, es:", "optionsEn": ["Proverbs 22:3", "1 Corinthians 14:40", "Matthew 18:6", "Romans 13:1"], "optionsEs": ["Proverbios 22:3", "1 Corintios 14:40", "Mateo 18:6", "Romanos 13:1"], "explanationEn": "\"Let all things be done decently and in order\" (1 Cor 14:40) governs the building too, not only the service.", "explanationEs": "\"Hágase todo decentemente y con orden\" (1 Co 14:40) gobierna también el edificio, no solo el culto.", "correct": 1}, {"textEn": "How long can it take a church to lose what a generation of faithful preaching built?", "textEs": "¿En cuánto tiempo puede una iglesia perder lo que una generación de predicación fiel construyó?", "optionsEn": ["It cannot be lost", "A single afternoon", "A year", "A decade"], "optionsEs": ["No se puede perder", "Una sola tarde", "Un año", "Una década"], "explanationEn": "A fire, a lawsuit, or a scandal of negligence can undo in one afternoon what took a generation to build.", "explanationEs": "Un incendio, una demanda o un escándalo de negligencia puede deshacer en una tarde lo que tomó una generación construir.", "correct": 1}, {"textEn": "The relationship between the building and the church is best stated as:", "textEs": "La relación entre el edificio y la iglesia se expresa mejor como:", "optionsEn": ["The building is a God-given tool for the work, not the church itself", "The building is the church", "The building is more important than the people", "The building is irrelevant"], "optionsEs": ["El edificio es una herramienta dada por Dios para la obra, no la iglesia misma", "El edificio es la iglesia", "El edificio es más importante que el pueblo", "El edificio es irrelevante"], "explanationEn": "The people are the temple now; the building is a tool a steward keeps in good order, not the church itself.", "explanationEs": "El pueblo es el templo ahora; el edificio es una herramienta que el mayordomo mantiene en orden, no la iglesia misma.", "correct": 0}, {"textEn": "Joash and Josiah are cited as kings who:", "textEs": "Joás y Josías se citan como reyes que:", "optionsEn": ["Sold the temple furnishings", "Made repairing the house of the Lord a spiritual priority", "Built new temples", "Neglected the temple"], "optionsEs": ["Vendieron los muebles del templo", "Hicieron de la reparación de la casa del Señor una prioridad espiritual", "Construyeron nuevos templos", "Descuidaron el templo"], "explanationEn": "Godly kings treated repairing the disrepaired temple as spiritual work, gathering funds and honest workmen.", "explanationEs": "Reyes piadosos trataron la reparación del templo en mal estado como obra espiritual, recogiendo fondos y obreros honestos.", "correct": 1}, {"textEn": "Where human law does not command sin or forbid obedience to God, the church should be:", "textEs": "Donde la ley humana no ordena pecar ni prohíbe obedecer a Dios, la iglesia debe ser:", "optionsEn": ["Indifferent to the law", "Exempt from the law", "The most law-abiding body in the community", "The most evasive body in the community"], "optionsEs": ["Indiferente a la ley", "Exenta de la ley", "El cuerpo más cumplidor de la ley en la comunidad", "El cuerpo más evasivo de la comunidad"], "explanationEn": "Romans 13 and Matthew 22:21 require the church to be the most law-abiding body, not the most evasive.", "explanationEs": "Romanos 13 y Mateo 22:21 exigen que la iglesia sea el cuerpo más cumplidor de la ley, no el más evasivo.", "correct": 2}, {"textEn": "\"Render to Caesar the things that are Caesar's\" was spoken by:", "textEs": "\"Dad a César lo que es de César\" fue dicho por:", "optionsEn": ["The Lord Jesus", "Paul", "Peter", "Nehemiah"], "optionsEs": ["El Señor Jesús", "Pablo", "Pedro", "Nehemías"], "explanationEn": "Jesus Himself said it (Matthew 22:21); Paul presses the practical edge in Romans 13:7.", "explanationEs": "Jesús mismo lo dijo (Mateo 22:21); Pablo aprieta el filo práctico en Romanos 13:7.", "correct": 0}, {"textEn": "The only time the church should NOT comply with the civil authority is when:", "textEs": "El único momento en que la iglesia NO debe cumplir con la autoridad civil es cuando:", "optionsEn": ["The church is busy", "Compliance costs money", "The law collides with the law of God, commanding sin or forbidding obedience to God", "The leader disagrees with the law"], "optionsEs": ["La iglesia está ocupada", "El cumplimiento cuesta dinero", "La ley choca con la ley de Dios, ordenando pecar o prohibiendo obedecer a Dios", "El líder no está de acuerdo con la ley"], "explanationEn": "Only when Caesar demands what belongs to God alone do we 'obey God rather than men' (Acts 5:29) — rarely.", "explanationEs": "Solo cuando el César exige lo que pertenece solo a Dios 'obedecemos a Dios antes que a los hombres' (Hch 5:29) — rara vez.", "correct": 2}, {"textEn": "The surprising overseer qualification in 1 Timothy 3:7 is that he must have:", "textEs": "La sorprendente cualidad del obispo en 1 Timoteo 3:7 es que debe tener:", "optionsEn": ["A large salary", "A seminary degree", "A good testimony among those outside", "Many years of age"], "optionsEs": ["Un gran salario", "Un título de seminario", "Buen testimonio de los de afuera", "Muchos años de edad"], "explanationEn": "A leader must have a good testimony among outsiders, lest he fall into reproach and the snare of the devil.", "explanationEs": "Un líder debe tener buen testimonio de los de afuera, para no caer en descrédito y lazo del diablo.", "correct": 2}, {"textEn": "When a church pays debts late, breaks promises, and cuts corners with the law, it:", "textEs": "Cuando una iglesia paga tarde, rompe promesas y recorta esquinas con la ley, ella:", "optionsEn": ["Hangs a stumbling block in the doorway and hands the devil a snare", "Adorns the gospel", "Proves it is spiritual", "Saves money wisely"], "optionsEs": ["Cuelga un tropiezo en la entrada y le entrega al diablo un lazo", "Adorna el evangelio", "Prueba que es espiritual", "Ahorra dinero sabiamente"], "explanationEn": "Outsiders judge Christ by the church's conduct; hypocrisy in money and obligations becomes a stumbling block.", "explanationEs": "Los de afuera juzgan a Cristo por la conducta de la iglesia; la hipocresía en dinero y obligaciones es un tropiezo.", "correct": 0}, {"textEn": "Proverbs 22:3 says the prudent man, unlike the simple, will:", "textEs": "Proverbios 22:3 dice que el hombre prudente, a diferencia del simple:", "optionsEn": ["Pass on and be punished", "Trust without preparing", "Foresee evil and hide himself", "Ignore all danger"], "optionsEs": ["Pasa adelante y recibe daño", "Confía sin prepararse", "Ve el mal y se esconde", "Ignora todo peligro"], "explanationEn": "Risk management is biblical prudence: the prudent foresee evil and prepare; the simple pass on and are punished.", "explanationEs": "La gestión de riesgos es prudencia bíblica: el prudente ve el mal y se prepara; el simple pasa y recibe daño.", "correct": 2}, {"textEn": "The unit argues that carrying insurance and keeping the building safe:", "textEs": "La unidad argumenta que llevar seguro y mantener seguro el edificio:", "optionsEn": ["Is a waste of the Lord's money", "Betrays a lack of trust in God", "Does not betray a lack of trust in God, but is the prudence God commends", "Is forbidden for spiritual churches"], "optionsEs": ["Es un desperdicio del dinero del Señor", "Traiciona una falta de confianza en Dios", "No traiciona una falta de confianza en Dios, sino que es la prudencia que Dios encomia", "Está prohibido para iglesias espirituales"], "explanationEn": "The God who stored grain through Joseph for seven lean years commends seeing danger and preparing for it.", "explanationEs": "El Dios que almacenó grano por medio de José para siete años de escasez encomia ver el peligro y prepararse.", "correct": 2}, {"textEn": "The example of Nehemiah (Unit 3) shows that faith and a guard:", "textEs": "El ejemplo de Nehemías (Unidad 3) muestra que la fe y una guardia:", "optionsEn": ["Are both unspiritual", "Cannot coexist", "Are opposites", "Go together — he prayed and set a watch"], "optionsEs": ["Son ambas poco espirituales", "No pueden coexistir", "Son opuestos", "Van juntas — oró y puso guardia"], "explanationEn": "When threatened, Nehemiah did not only pray; he set a guard. Faith and a watch belong together.", "explanationEs": "Amenazado, Nehemías no solo oró; puso guardia. La fe y una guardia van juntas.", "correct": 3}, {"textEn": "Among all risks, the one the unit says rises so far above the rest it gets its own section is:", "textEs": "Entre todos los riesgos, el que la unidad dice que se eleva tanto que tiene su propia sección es:", "optionsEn": ["Tax compliance", "The protection of children and the vulnerable", "Roof maintenance", "Fire safety"], "optionsEs": ["Cumplimiento fiscal", "La protección de los niños y los vulnerables", "Mantenimiento del techo", "Seguridad contra incendios"], "explanationEn": "Christ's millstone warning (Matt 18:6) sets child protection above every other risk a church manages.", "explanationEs": "La advertencia de la piedra de molino (Mt 18:6) pone la protección de los niños por encima de todo otro riesgo.", "correct": 1}, {"textEn": "The 'two-adult' style rule (no worker alone and unaccountable with a child) protects:", "textEs": "La regla estilo 'dos adultos' (ningún obrero solo y sin rendición de cuentas con un niño) protege:", "optionsEn": ["Both the children and the innocent worker from false accusation", "Only the children", "Only the worker", "Only the church's budget"], "optionsEs": ["Tanto a los niños como al obrero inocente de una acusación falsa", "Solo a los niños", "Solo al obrero", "Solo el presupuesto de la iglesia"], "explanationEn": "Sensible rules guard the children and also shield the innocent worker from a false accusation.", "explanationEs": "Las reglas sensatas guardan a los niños y también protegen al obrero inocente de una acusación falsa.", "correct": 0}, {"textEn": "A leader who calls child-protection measures 'unspiritual' or 'suspicious' has:", "textEs": "Un líder que llama a las medidas de protección infantil 'poco espirituales' o 'sospechosas' ha:", "optionsEn": ["Saved the church time", "Protected the lambs", "Shown mature faith", "Not understood what is at stake"], "optionsEs": ["Ahorrado tiempo a la iglesia", "Protegido a los corderos", "Mostrado fe madura", "No entendido lo que está en juego"], "explanationEn": "A single predator admitted through carelessness can destroy children's lives and the testimony in one blow.", "explanationEs": "Un solo depredador admitido por descuido puede destruir vidas de niños y el testimonio de un golpe.", "correct": 3}, {"textEn": "Jesus' instruction in Matthew 10:16 to His sent disciples was to be:", "textEs": "La instrucción de Jesús en Mateo 10:16 a sus discípulos enviados fue ser:", "optionsEn": ["Wise as serpents and harmless as doves", "Wise as owls and gentle as sheep", "Bold as lions and meek as lambs", "Quick as deer and strong as oxen"], "optionsEs": ["Prudentes como serpientes y sencillos como palomas", "Sabios como búhos y mansos como ovejas", "Audaces como leones y mansos como corderos", "Rápidos como ciervos y fuertes como bueyes"], "explanationEn": "Both at once: dove-innocence without serpent-prudence is naive; serpent-prudence without dove-innocence is mere cunning.", "explanationEs": "Ambas a la vez: la inocencia sin prudencia es ingenua; la prudencia sin inocencia es mera astucia.", "correct": 0}, {"textEn": "The danger named if prudence is taken too far is that the church becomes:", "textEs": "El peligro nombrado si la prudencia se lleva demasiado lejos es que la iglesia se vuelva:", "optionsEn": ["Too welcoming", "Too generous", "Too prayerful", "A cold, suspicious, lawyer-run institution that has lost its soul"], "optionsEs": ["Demasiado acogedora", "Demasiado generosa", "Demasiado dedicada a la oración", "Una institución fría, sospechosa, manejada por abogados, que ha perdido su alma"], "explanationEn": "Policies protect the flock but are not the flock; the building serves the ministry but is not the ministry.", "explanationEs": "Las políticas protegen a la grey pero no son la grey; el edificio sirve al ministerio pero no es el ministerio.", "correct": 3}, {"textEn": "The proper purpose of all this prudence, the unit says, is to:", "textEs": "El propósito propio de toda esta prudencia, dice la unidad, es:", "optionsEn": ["Replace preaching with policy", "Remove needless danger and reproach so the real work can go forward unhindered", "Turn the house of God into a fortress of rules", "Impress the authorities"], "optionsEs": ["Reemplazar la predicación con políticas", "Quitar peligro y oprobio innecesario para que la obra verdadera avance sin estorbo", "Convertir la casa de Dios en una fortaleza de reglas", "Impresionar a las autoridades"], "explanationEn": "The goal is to clear away needless danger and reproach so preaching, shepherding, and the gospel go unhindered.", "explanationEs": "La meta es quitar peligro y oprobio innecesario para que la predicación, el pastoreo y el evangelio avancen sin estorbo.", "correct": 1}, {"textEn": "The closing summary of the unit's posture toward faith and precaution is:", "textEs": "El resumen final de la postura de la unidad hacia la fe y la precaución es:", "optionsEn": ["Take precautions instead of trusting God", "Trust God instead of taking precautions", "Avoid both faith and precaution", "Trust God with everything, and also lock the door, pay the tax, insure the roof, and screen the worker"], "optionsEs": ["Tomar precauciones en vez de confiar en Dios", "Confiar en Dios en vez de tomar precauciones", "Evitar tanto la fe como la precaución", "Confiar en Dios con todo, y también cerrar la puerta, pagar el impuesto, asegurar el techo e investigar al obrero"], "explanationEn": "It is not a smaller faith but faith doing all things decently and in order, down to the foundations.", "explanationEs": "No es una fe más pequeña sino la fe haciendo todo decentemente y con orden, hasta los cimientos.", "correct": 3}];
+const kwQuestions = [{"textEn": "Explain how 'let all things be done decently and in order' (1 Cor 14:40) applies beyond the worship service.", "textEs": "Explique cómo 'hágase todo decentemente y con orden' (1 Co 14:40) se aplica más allá del culto.", "kw_en": ["order", "build", "roof", "record", "safe", "faith", "careful", "house"], "kw_es": ["orden", "edificio", "techo", "registro", "segur", "fiel", "cuidad", "casa"], "modelEn": "Order in the house of God is not confined to the worship service; it reaches the building, the roof that does not leak, the locked door, the honest record, and the children who go home safe. To be careful about these things is not worldly but faithful, because a church can lose in one afternoon what a generation of faithful preaching built. The leader who keeps the house in good order is simply obeying the same command decently and in order down to the foundations.", "modelEs": "El orden en la casa de Dios no se limita al culto; alcanza el edificio, el techo que no gotea, la puerta cerrada, el registro honesto, y los niños que vuelven a casa seguros. Ser cuidadoso con estas cosas no es mundano sino fiel, porque una iglesia puede perder en una tarde lo que una generación de predicación fiel construyó. El líder que mantiene la casa en buen orden simplemente obedece el mismo mandato decentemente y con orden hasta los cimientos."}, {"textEn": "What is the right relationship between the church building and the church itself?", "textEs": "¿Cuál es la relación correcta entre el edificio de la iglesia y la iglesia misma?", "kw_en": ["build", "people", "temple", "tool", "steward", "work", "honor", "care"], "kw_es": ["edificio", "pueblo", "templo", "herramienta", "mayordom", "obra", "honra", "cuid"], "modelEn": "The building is not the church; the people are the temple of the Holy Spirit now, not the bricks. Yet the building is a God-given tool for the work, and a steward does not let the Master's tools rust and rot. To care for the place where the people gather is to honor both the people who gather and the God they worship, so the leader keeps the house in good order without ever confusing the tool with the church.", "modelEs": "El edificio no es la iglesia; el pueblo es el templo del Espíritu Santo ahora, no los ladrillos. Sin embargo el edificio es una herramienta dada por Dios para la obra, y un mayordomo no deja que las herramientas del Amo se oxiden y se pudran. Cuidar el lugar donde el pueblo se reúne es honrar tanto al pueblo que se reúne como al Dios que adoran, así que el líder mantiene la casa en buen orden sin confundir jamás la herramienta con la iglesia."}, {"textEn": "Summarize the New Testament teaching on the church's posture toward civil law, including its limit.", "textEs": "Resuma la enseñanza del NT sobre la postura de la iglesia hacia la ley civil, incluido su límite.", "kw_en": ["law", "subject", "Caesar", "register", "honest", "obey", "God", "comply"], "kw_es": ["ley", "sujet", "César", "registr", "honest", "obedec", "Dios", "cumpl"], "modelEn": "Scripture commands the church to be subject to the governing authorities and to render to Caesar what is Caesar's, paying taxes and customs honestly. Where the law does not command sin, the church should be the most law-abiding body in the community: properly registered, keeping honest records, and meeting its legal obligations. The single limit is that when human law collides with the law of God, commanding sin or forbidding obedience to God, we must obey God rather than men; but that line is crossed far more rarely than the lazy leader pretends, so we comply in all ordinary matters.", "modelEs": "La Escritura manda a la iglesia someterse a las potestades superiores y dar a César lo que es de César, pagando tributos e impuestos honestamente. Donde la ley no ordena pecar, la iglesia debe ser el cuerpo más cumplidor de la ley en la comunidad: debidamente registrada, llevando registros honestos, y cumpliendo sus obligaciones legales. El único límite es que cuando la ley humana choca con la ley de Dios, ordenando pecar o prohibiendo obedecer a Dios, debemos obedecer a Dios antes que a los hombres; pero esa línea se cruza rara vez, así que cumplimos en todo asunto ordinario."}, {"textEn": "Why does a church's reputation with outsiders matter, and what does 1 Timothy 3:7 add?", "textEs": "¿Por qué importa la reputación de la iglesia con los de afuera, y qué añade 1 Timoteo 3:7?", "kw_en": ["testimony", "outside", "gospel", "reputation", "snare", "adorn", "watch", "Christ"], "kw_es": ["testimonio", "afuera", "evangelio", "reputación", "lazo", "adorna", "observ", "Cristo"], "modelEn": "A leader must have a good testimony among those who are outside, lest he fall into reproach and the snare of the devil. The reputation of the church before the watching unbelieving community is a gospel matter, because outsiders form their judgment about Christ from how His people conduct their affairs. A church that pays its debts, honors agreements, and deals honestly adorns the gospel; one known for broken promises and cut corners hangs a stumbling block and hands the devil a snare.", "modelEs": "Un líder debe tener buen testimonio de los de afuera, para no caer en descrédito y en lazo del diablo. La reputación de la iglesia ante la comunidad incrédula que observa es un asunto del evangelio, porque los de afuera forman su juicio acerca de Cristo a partir de cómo su pueblo conduce sus asuntos. Una iglesia que paga sus deudas, honra acuerdos y trata honestamente adorna el evangelio; una conocida por promesas rotas y esquinas recortadas cuelga un tropiezo y le entrega al diablo un lazo."}, {"textEn": "Show how risk management is simply biblical prudence, using Proverbs 22:3 and 27:23.", "textEs": "Muestre cómo la gestión de riesgos es simplemente prudencia bíblica, usando Proverbios 22:3 y 27:23.", "kw_en": ["prudent", "foresee", "danger", "prepare", "diligent", "flock", "wisdom", "simple"], "kw_es": ["prudente", "prever", "peligro", "prepar", "diligente", "rebaño", "sabidur", "simple"], "modelEn": "Risk management is what the world calls a discipline but Scripture calls prudence. The prudent man foresees evil and hides himself, while the simple pass on and are punished; the wise leader asks ahead of time what could go wrong and prepares. This is the same wisdom as being diligent to know the state of your flocks, the shepherd's careful attention to the real condition of what he guards. Foreseeing danger and preparing for it is not a failure of faith but the very wisdom God commends.", "modelEs": "La gestión de riesgos es lo que el mundo llama una disciplina pero la Escritura llama prudencia. El hombre prudente prevé el peligro y se esconde, mientras los simples pasan y reciben daño; el líder sabio pregunta de antemano qué podría salir mal y se prepara. Esta es la misma sabiduría de ser diligente en conocer el estado de tus rebaños, la atención cuidadosa del pastor a la condición real de lo que guarda. Prever el peligro y prepararse no es una falta de fe sino la sabiduría que Dios encomia."}, {"textEn": "Explain why preparing (insurance, savings, safety) does not betray a lack of trust in God.", "textEs": "Explique por qué prepararse (seguro, ahorros, seguridad) no traiciona una falta de confianza en Dios.", "kw_en": ["trust", "prepare", "Joseph", "grain", "famine", "prudent", "faith", "God"], "kw_es": ["confia", "prepar", "José", "grano", "escasez", "prudente", "fe", "Dios"], "modelEn": "Preparing wisely does not betray a lack of trust in God; it is obedience to the God who commends prudence. The same God who fed Joseph's Egypt through seven years of famine by means of seven years of storing grain is the God who tells the prudent to see danger coming and prepare. So a church can trust God fully and still carry insurance, keep the building safe, and set aside savings against the lean year. Faith and faithful preparation are not rivals; trusting God and checking the smoke detectors belong together.", "modelEs": "Prepararse sabiamente no traiciona una falta de confianza en Dios; es obediencia al Dios que encomia la prudencia. El mismo Dios que alimentó el Egipto de José a través de siete años de escasez por medio de almacenar grano es el Dios que dice al prudente que vea venir el peligro y se prepare. Así que una iglesia puede confiar en Dios plenamente y aun así llevar seguro, mantener seguro el edificio, y apartar ahorros contra el año de escasez. La fe y la preparación fiel no son rivales; confiar en Dios y revisar los detectores de humo van juntos."}, {"textEn": "Why does the protection of children rise above every other risk, and what guards should a church put in place?", "textEs": "¿Por qué la protección de los niños se eleva por encima de todo otro riesgo, y qué guardas debe poner la iglesia?", "kw_en": ["children", "protect", "millstone", "screen", "alone", "predator", "safe", "vulnerable"], "kw_es": ["niños", "proteg", "molino", "investig", "solo", "depredador", "segur", "vulnerable"], "modelEn": "The protection of children and the vulnerable rises above every other risk because the Lord reserved His most terrible words — a millstone and the depth of the sea — for those who would harm a little one. The church must be the safest place a child can be, never a place where a predator hides behind a smile and a Bible. So the wise church screens those who work with children, follows rules so that no worker is ever alone and unaccountable with a child, and takes every concern seriously — guarding the vulnerable deliberately and without shame, a watch the leader must never relax.", "modelEs": "La protección de los niños y los vulnerables se eleva por encima de todo otro riesgo porque el Señor reservó sus palabras más terribles — una piedra de molino y lo profundo del mar — para quienes harían daño a un pequeño. La iglesia debe ser el lugar más seguro donde un niño pueda estar, nunca un lugar donde un depredador se esconda tras una sonrisa y una Biblia. Así que la iglesia sabia investiga a quienes trabajan con niños, sigue reglas para que ningún obrero esté solo y sin rendición de cuentas con un niño, y toma toda inquietud en serio — guardando a los vulnerables deliberadamente y sin vergüenza, una guardia que el líder nunca debe relajar."}, {"textEn": "How do the two-adult/screening rules protect the worker as well as the child?", "textEs": "¿Cómo protegen las reglas de dos adultos/investigación al obrero además del niño?", "kw_en": ["worker", "child", "alone", "accusation", "false", "protect", "rule", "innocent"], "kw_es": ["obrero", "niño", "solo", "acusación", "falsa", "proteg", "regla", "inocente"], "modelEn": "Sensible rules that keep no worker ever alone and unaccountable with a child do double duty: they protect the child from harm, and they also protect the innocent worker from a false accusation. When a worker is never isolated with a child, there is accountability that shields a good servant if his integrity is ever questioned. Far from insulting faithful workers, these rules guard them; the leader who calls such protection suspicious has not understood what is at stake for the child or the innocent worker.", "modelEs": "Las reglas sensatas que mantienen a ningún obrero solo y sin rendición de cuentas con un niño cumplen doble función: protegen al niño del daño, y también protegen al obrero inocente de una acusación falsa. Cuando un obrero nunca está aislado con un niño, hay una rendición de cuentas que protege a un buen siervo si alguna vez se cuestiona su integridad. Lejos de insultar a los obreros fieles, estas reglas los guardan; el líder que llama sospechosa tal protección no ha entendido lo que está en juego para el niño ni para el obrero inocente."}, {"textEn": "Explain 'wise as serpents and harmless as doves' (Matt 10:16) as it applies to church administration.", "textEs": "Explique 'prudentes como serpientes y sencillos como palomas' (Mt 10:16) aplicado a la administración.", "kw_en": ["wise", "serpent", "dove", "innocent", "prudent", "both", "naive", "cunning"], "kw_es": ["prudente", "serpiente", "paloma", "inocente", "sagaz", "ambas", "ingenu", "astucia"], "modelEn": "The Lord told His sent disciples to be wise as serpents and harmless as doves — both at once. The dove's innocence without the serpent's prudence is naive and gets the flock hurt; the serpent's prudence without the dove's innocence is mere worldly cunning. The faithful leader holds both: innocent in heart and shrewd in practice. He trusts God with everything and still locks the door, pays the tax, insures the roof, and screens the worker, refusing to choose between innocence and prudence.", "modelEs": "El Señor dijo a sus discípulos enviados que fueran prudentes como serpientes y sencillos como palomas — ambas a la vez. La inocencia de la paloma sin la prudencia de la serpiente es ingenua y lastima a la grey; la prudencia de la serpiente sin la inocencia de la paloma es mera astucia mundana. El líder fiel sostiene ambas: inocente de corazón y sagaz en la práctica. Confía en Dios con todo y aun así cierra la puerta, paga el impuesto, asegura el techo, e investiga al obrero, negándose a elegir entre inocencia y prudencia."}, {"textEn": "Guard against the misuse of prudence: what must facilities, policies, and law never become in the church?", "textEs": "Guarde contra el mal uso de la prudencia: ¿qué nunca deben llegar a ser las instalaciones, políticas y la ley en la iglesia?", "kw_en": ["building", "ministry", "policy", "flock", "fortress", "serve", "soul", "work"], "kw_es": ["edificio", "ministerio", "política", "grey", "fortaleza", "sirve", "alma", "obra"], "modelEn": "Prudence must never turn the church into a cold, suspicious, lawyer-run institution that has lost its soul. The building serves the ministry but is not the ministry; the policies protect the flock but are not the flock. The goal is never to make the house of God a fortress of rules, but to remove needless danger and reproach so the real work — preaching, shepherding, the gospel — can go forward unhindered. Keep prudence the servant of the work, never its master.", "modelEs": "La prudencia nunca debe convertir a la iglesia en una institución fría, sospechosa, manejada por abogados, que ha perdido su alma. El edificio sirve al ministerio pero no es el ministerio; las políticas protegen a la grey pero no son la grey. La meta nunca es hacer de la casa de Dios una fortaleza de reglas, sino quitar peligro y oprobio innecesario para que la obra verdadera — la predicación, el pastoreo, el evangelio — pueda avanzar sin estorbo. Mantenga la prudencia como sierva de la obra, nunca su ama."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 9 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 9 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s).</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (answered || mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (answered || mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (mcQuestions.length + idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 100 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 100 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y reintente la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSALReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

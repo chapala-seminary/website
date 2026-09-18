@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Psalms — Unit 10: Psalm 55, Casting Your Burden</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 11 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 The Book of Psalms — Unit 10: Psalm 55, Casting Your Burden</span><span class="lang-es">📖 El Libro de los Salmos — Unidad 10: Salmo 55, Echando Tu Carga</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Cast your burden on the Lord, and He shall sustain you; He shall never permit the righteous to be moved." — Psalm 55:22 (NKJV)</span><span class="lang-es">"Echa sobre Jehová tu carga, y él te sustentará; no dejará para siempre caído al justo." — Salmo 55:22 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to The Book of Psalms. Please register before beginning Unit 10.</span><span class="lang-es">Bienvenido a El Libro de los Salmos. Por favor regístrese antes de comenzar la Unidad 10.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+            <h3>1. The Abrasive Edge of a Fallen World</h3>
+            <p>Life is not all sunshine and ease. There are tough seasons when nothing flows as neatly as a seminar notebook would suggest, when the heavens seem to be brass and our prayers seem to fall back unanswered. Even the prophet Jeremiah cried out under the sheer weight of the bad news he was given to deliver. There is an abrasive edge to reality in a fallen world, and pretending otherwise helps no one. Part of the work of faith &mdash; and part of the work of every pastor &mdash; is learning to face that edge honestly, and to help others face it, rather than papering it over with easy words.</p>
+            <p>Psalm 55 is written from inside that hard place. David is overwhelmed; his heart is "severely pained within" him, and he longs for wings like a dove to fly away and be at rest. He does not pretend the burden is light. But at the center of the psalm he arrives at a single, steadying command, and it is the verse this lesson is built upon: "Cast your burden on the LORD, and He shall sustain you." The whole question of the Christian life under pressure is gathered into that one sentence. What do we do with a weight we did not choose and cannot lift? We give it to God.</p>
+
+            <h3>2. What It Means to Cast</h3>
+            <div class="scripture">
+                <strong>Psalm 55:22 (NKJV):</strong> "Cast your burden on the LORD, and He shall sustain you; He shall never permit the righteous to be moved."
+            </div>
+            <p>The word translated "cast" is forceful. It is not a gentle setting-down but a deliberate throwing &mdash; the same idea as flinging a heavy load off your own shoulders and onto someone else's. That matters, because a burden is not cast by merely worrying about it more religiously. To cast a burden is a decisive act of the will: we consciously transfer the weight from ourselves, who cannot bear it, to God, who can. Peter would later echo this very verse: "casting all your care upon Him, for He cares for you" (1 Peter 5:7).</p>
+            <p>Notice carefully what God promises in return. He does not promise to remove the burden; He promises to "sustain you." The Hebrew pictures God as the one who holds you up, who bears you so that you can bear the load. The second line says it again from the other side: "He shall never permit the righteous to be moved" &mdash; not that the righteous will never feel the weight, but that they will never be toppled by it. The believer under pressure is like a tree in a storm whose roots hold; the wind is real, the bending is real, but the falling never comes.</p>
+
+            <h3>3. When Life Tumbles In</h3>
+            <p>This is a truth that can only be tested where it costs something, and church history offers few clearer tests than Arthur John Gossip. He was a respected Scottish preacher whose wife died suddenly in her middle years, leaving him desolate. Friends told him not to try to preach so soon, but on the very next Sunday he climbed the pulpit stairs and preached a sermon some have called one of the greatest of the twentieth century: "But When Life Tumbles In, What Then?"</p>
+            <div class="illustration">
+                <strong>"Where Else Is There to Turn?":</strong> Gossip told his grieving congregation, "You people in the sunshine may believe the faith, but we in the shadow must believe it. We have nothing else." He admitted that some, in such sorrow, are tempted to turn away from God altogether &mdash; and then he asked the question that has no other answer: "Where else is there to turn?" He closed by imagining himself stepping into the cold, rushing river of death, and calling back to those who must one day cross it themselves, in the words of Hopeful in <em>Pilgrim's Progress</em>: "Be of good cheer, my brother, for I feel the bottom, and it is sound."
+            </div>
+            <p>That is the testimony of a man who actually cast his burden and found the promise true. The faith that feels optional in the sunshine becomes the only ground left to stand on in the shadow &mdash; and it holds. As the old Scottish saint Samuel Rutherford said, "Grace grows best in the winter."</p>
+
+            <h3>4. The Lord of Gethsemane Bears Burdens Too</h3>
+            <p>We are not asked to cast our burdens on a God who has never felt the weight of one. In the Garden of Gethsemane, Jesus prayed that the cup might pass from Him. He did not want the cross; the dread of it pressed sweat like blood from His brow. And yet the cup was not taken away, because bearing it was the very reason He had come into the world. Here is the part we must not miss: though the Father did not remove the burden, neither did He abandon His Son in it. He sent an angel to strengthen Him, and gave Him the settled peace to rise from His knees and finish what He was sent to do.</p>
+            <p>This reshapes what we expect when we cast our burden on the Lord. We often assume that casting a burden means the burden disappears. Sometimes God in mercy does lift it. But far more often He does for us what He did for His own Son: He leaves the weight on our shoulders and puts His strength underneath it. The sustaining is the answer to the prayer. With this in view, Psalm 55 invites three deliberate acts: giving God our thanks, giving Him our grief, and giving Him the burden itself.</p>
+
+            <h3>5. Give God Your Thanks</h3>
+            <div class="scripture">
+                <strong>1 Thessalonians 5:18 (NKJV):</strong> "In everything give thanks; for this is the will of God in Christ Jesus for you."
+            </div>
+            <p>The first response is the hardest, which is precisely why it must be commanded rather than left to feeling. Read the verse carefully: it does not say give thanks <em>for</em> everything, as though we should be glad a tragedy struck. It says give thanks <em>in</em> everything &mdash; that even in the middle of the burden there remains something for which God may be thanked. Thanksgiving here is not a denial of pain; it is a deliberate turning of the eyes away from the weight and toward the One who is still good, still present, still sovereign over the very trial we are walking through.</p>
+            <p>This is why thanksgiving steadies a sinking heart. Self-pity and bitterness both work by narrowing our vision until the burden fills the whole horizon and God disappears behind it. Thanksgiving pries that vision back open. It does not pretend the burden is small; it insists that the God who has given so many good gifts has not stopped being good now. Offered honestly &mdash; and never glibly to someone in fresh grief &mdash; gratitude becomes a kind of medicine, loosening the grip of despair and reminding us that this burden, heavy as it is, is not the whole of our story.</p>
+
+            <h3>6. Give God Your Grief</h3>
+            <div class="scripture">
+                <strong>Matthew 5:4 (NKJV):</strong> "Blessed are those who mourn, for they shall be comforted."
+            </div>
+            <p>The second response is to give God our grief &mdash; not to bury it or pretend it away, but to bring it to Him honestly. Grief is not a single moment but a passage, and it moves through recognizable seasons: the first numb shock and disbelief; then anger, and we may be honest with God about anger; then the bargaining and guilt, the endless "if only I had"; then the depression when reality finally settles its full weight; and at last, by grace, acceptance. There is no shortcut through these waters and no shame in passing through them. The Lord Jesus Himself wept at the tomb of Lazarus, though He knew He would raise him minutes later. To mourn is not a failure of faith. It is the honest heart carrying its sorrow to the only One who can truly comfort it, rather than to the lesser comforts that cannot hold its weight.</p>
+            <p>And we should learn from this how to comfort others, because much of pastoral ministry is simply being present in another's grief. Often the help a sufferer needs is not an explanation. Joe Bayly, who buried three of his own children, wrote of two visitors in his sorrow. One spoke constantly &mdash; of God's purposes, of hope beyond the grave; everything he said was true, and Bayly was unmoved and only wished he would leave. The other simply sat beside him, said little, listened, prayed briefly, and went. "I was comforted," Bayly wrote. "I hated to see him go." The grieving need our presence more than our paragraphs.</p>
+
+            <h3>7. Give God Your Burden</h3>
+            <p>The third response is the heart of the psalm: actually to hand God the burden, rolling it off our shoulders and onto His. Some griefs are so great they threaten to knock the props out from under us entirely, until we feel that life itself should simply stop. It is exactly there, at the breaking point, that the promise of verse 22 is meant to bear our weight: "He shall sustain you; He shall never permit the righteous to be moved."</p>
+            <p>What does it look like when a believer truly gives God the burden? It looks like a person living <em>above</em> their circumstances while the grief is still real. Consider the missionary Eric Barker, who sent his wife and eight children to safety by ship during the Second World War. The Sunday after they sailed he told his congregation, "I have just received word that all my family have arrived safely home," and went on with the service &mdash; for he had been handed a telegram minutes earlier saying the ship was torpedoed and all aboard had drowned. He could stand because he knew his family were believers safely with God, and that knowledge held him up above a grief that would otherwise have crushed him. To cast the burden is not to feel nothing; it is to stand on something deeper than the loss.</p>
+
+            <h3>8. A Why That Bears Any How</h3>
+            <p>Underneath all three responses lies one foundation: the believer has been given a reason to endure that the world can neither supply nor remove. When the burden is heaviest, what sustains us is not a technique but a Person, and the meaning He gives to our lives even in the dark.</p>
+            <div class="illustration">
+                <strong>"He Who Has a Why":</strong> The psychiatrist Viktor Frankl was stripped of everything at Auschwitz &mdash; his family, his property, even the manuscript of his life's work hidden in his coat. He wondered whether his life held any meaning at all. Then, forced to trade his clothes, he found in the pocket of a dead man's coat a single page torn from a Hebrew prayer book: the <em>Shema</em>, "Hear, O Israel: the LORD our God, the LORD is one&hellip; you shall love the LORD your God with all your heart." He took it as a summons to live his beliefs rather than merely write them, and later concluded, "He who has a 'why' to live for can bear almost any 'how.'"
+            </div>
+            <p>That is the final word of Psalm 55. The believer has a "why" the world cannot give and cannot take away &mdash; a God who sustains, a heaven that waits, and a love from which, as Paul wrote, not even death can separate us. So when life tumbles in, do not carry the burden alone, and do not turn for relief to comforts too small to hold you. Give God your thanks, give Him your grief, and give Him the burden itself. Cast it on the LORD, and He will sustain you; like Hopeful stepping into the cold river, you will find the bottom is sound.</p>
+</div>
+
+<div class="lang-es">
+            <h3>1. El Borde Áspero de un Mundo Caído</h3>
+            <p>La vida no es todo sol y comodidad. Hay temporadas difíciles en que nada fluye tan ordenadamente como sugeriría el cuaderno de un seminario, cuando el cielo parece de bronce y nuestras oraciones parecen caer sin respuesta. Aun el profeta Jeremías clamó bajo el puro peso de las malas noticias que le tocaba anunciar. Hay un borde áspero en la realidad de un mundo caído, y fingir lo contrario no ayuda a nadie. Parte de la obra de la fe &mdash; y parte de la obra de todo pastor &mdash; es aprender a enfrentar ese borde con honestidad, y ayudar a otros a enfrentarlo, en lugar de disimularlo con palabras fáciles.</p>
+            <p>El Salmo 55 está escrito desde dentro de ese lugar difícil. David está abrumado; su corazón está "dolorido dentro" de él, y anhela alas como de paloma para volar lejos y hallar descanso. No finge que la carga sea liviana. Pero en el centro del salmo llega a un solo mandato firme, y es el versículo sobre el cual se construye esta lección: "Echa sobre Jehová tu carga, y él te sustentará." Toda la cuestión de la vida cristiana bajo presión se reúne en esa sola frase. ¿Qué hacemos con un peso que no escogimos y no podemos levantar? Se lo damos a Dios.</p>
+
+            <h3>2. Qué Significa Echar</h3>
+            <div class="scripture">
+                <strong>Salmo 55:22 (RVG):</strong> "Echa sobre Jehová tu carga, y él te sustentará; no dejará para siempre caído al justo."
+            </div>
+            <p>La palabra traducida "echa" es enérgica. No es un suave depositar, sino un arrojar deliberado &mdash; la misma idea de lanzar una carga pesada de los propios hombros a los de otro. Eso importa, porque una carga no se echa simplemente preocupándose por ella de manera más religiosa. Echar una carga es un acto decisivo de la voluntad: trasladamos conscientemente el peso de nosotros mismos, que no podemos llevarlo, a Dios, que sí puede. Pedro haría eco de este mismo versículo: "echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros" (1 Pedro 5:7).</p>
+            <p>Note con cuidado lo que Dios promete a cambio. No promete quitar la carga; promete "sustentarte." El hebreo presenta a Dios como el que te sostiene, el que te lleva para que tú puedas llevar el peso. La segunda línea lo dice de nuevo desde el otro lado: "no dejará para siempre caído al justo" &mdash; no que el justo nunca sienta el peso, sino que nunca será derribado por él. El creyente bajo presión es como un árbol en la tormenta cuyas raíces resisten; el viento es real, la inclinación es real, pero la caída nunca llega.</p>
+
+            <h3>3. Cuando la Vida se Derrumba</h3>
+            <p>Esta es una verdad que solo puede probarse donde cuesta algo, y la historia de la iglesia ofrece pocas pruebas más claras que la de Arthur John Gossip. Era un respetado predicador escocés cuya esposa murió de repente en la mediana edad, dejándolo desolado. Los amigos le dijeron que no intentara predicar tan pronto, pero el domingo siguiente subió las escaleras del púlpito y predicó un sermón que algunos han llamado uno de los más grandes del siglo veinte: "Pero Cuando la Vida se Derrumba, ¿Qué Entonces?"</p>
+            <div class="illustration">
+                <strong>"¿A Dónde Más Hay que Ir?":</strong> Gossip dijo a su congregación afligida: "Ustedes los que están en la luz del sol pueden creer la fe, pero nosotros en la sombra debemos creerla. No tenemos nada más." Admitió que algunos, en tal dolor, son tentados a apartarse de Dios por completo &mdash; y luego hizo la pregunta que no tiene otra respuesta: "¿A dónde más hay que ir?" Cerró imaginándose entrar en el río frío e impetuoso de la muerte, y llamando a los que un día deberán cruzarlo, con las palabras de Esperanzado en <em>El Progreso del Peregrino</em>: "Ten ánimo, hermano mío, porque siento el fondo, y es firme."
+            </div>
+            <p>Ese es el testimonio de un hombre que de veras echó su carga y halló cierta la promesa. La fe que parece opcional bajo el sol llega a ser el único terreno que queda para estar de pie en la sombra &mdash; y sostiene. Como dijo el viejo santo escocés Samuel Rutherford: "La gracia crece mejor en el invierno."</p>
+
+            <h3>4. El Señor de Getsemaní También Lleva Cargas</h3>
+            <p>No se nos pide echar nuestras cargas sobre un Dios que jamás ha sentido el peso de una. En el huerto de Getsemaní, Jesús oró que pasara de &Eacute;l la copa. No quería la cruz; el pavor de ella le hizo sudar como gotas de sangre. Y sin embargo la copa no fue quitada, porque llevarla era la razón misma por la que había venido al mundo. Aquí está lo que no debemos pasar por alto: aunque el Padre no quitó la carga, tampoco abandonó a Su Hijo en ella. Envió un ángel para fortalecerle, y le dio la paz firme para levantarse de Sus rodillas y terminar aquello para lo cual fue enviado.</p>
+            <p>Esto reconfigura lo que esperamos cuando echamos nuestra carga sobre el Señor. Solemos suponer que echar una carga significa que la carga desaparece. A veces Dios en Su misericordia sí la levanta. Pero mucho más a menudo hace por nosotros lo que hizo por Su propio Hijo: deja el peso sobre nuestros hombros y pone Su fuerza debajo de él. El sustento es la respuesta a la oración. Con esto a la vista, el Salmo 55 invita a tres actos deliberados: dar a Dios nuestra gratitud, darle nuestro dolor, y darle la carga misma.</p>
+
+            <h3>5. Dé a Dios Su Gratitud</h3>
+            <div class="scripture">
+                <strong>1 Tesalonicenses 5:18 (RVG):</strong> "Dad gracias en todo; porque esta es la voluntad de Dios para con vosotros en Cristo Jesús."
+            </div>
+            <p>La primera respuesta es la más difícil, y por eso mismo debe ser mandada y no dejada al sentimiento. Lea el versículo con cuidado: no dice dad gracias <em>por</em> todo, como si debiéramos alegrarnos de que ocurriera una tragedia. Dice dad gracias <em>en</em> todo &mdash; que aun en medio de la carga queda algo por lo cual se puede dar gracias a Dios. La gratitud aquí no es una negación del dolor; es un deliberado volver los ojos del peso hacia Aquel que sigue siendo bueno, sigue presente, sigue soberano sobre la prueba misma que atravesamos.</p>
+            <p>Por eso la gratitud sostiene a un corazón que se hunde. La autocompasión y la amargura obran estrechando nuestra visión hasta que la carga llena todo el horizonte y Dios desaparece detrás de ella. La gratitud vuelve a abrir esa visión. No finge que la carga sea pequeña; insiste en que el Dios que ha dado tantos buenos regalos no ha dejado de ser bueno ahora. Ofrecida con honestidad &mdash; y nunca a la ligera a alguien en duelo reciente &mdash; la gratitud llega a ser una especie de medicina, que afloja el dominio de la desesperación y nos recuerda que esta carga, por pesada que sea, no es toda nuestra historia.</p>
+
+            <h3>6. Dé a Dios Su Dolor</h3>
+            <div class="scripture">
+                <strong>Mateo 5:4 (RVG):</strong> "Bienaventurados los que lloran, porque ellos recibirán consolación."
+            </div>
+            <p>La segunda respuesta es dar a Dios nuestro dolor &mdash; no enterrarlo ni fingir que no existe, sino traerlo a &Eacute;l honestamente. El dolor no es un solo momento sino un paso, y se mueve por etapas reconocibles: la primera conmoción entumecida y la incredulidad; luego la ira, y podemos ser honestos con Dios acerca de la ira; luego el regateo y la culpa, el interminable "si tan solo hubiera"; luego la depresión cuando la realidad al fin asienta todo su peso; y por último, por gracia, la aceptación. No hay atajo a través de estas aguas ni vergüenza en atravesarlas. El mismo Señor Jesús lloró ante la tumba de Lázaro, aunque sabía que lo resucitaría minutos después. Llorar no es un fracaso de la fe. Es el corazón honesto llevando su tristeza al único que puede consolarlo de veras, en lugar de a los consuelos menores que no pueden sostener su peso.</p>
+            <p>Y debemos aprender de esto cómo consolar a otros, porque gran parte del ministerio pastoral es sencillamente estar presente en el dolor ajeno. A menudo la ayuda que necesita el que sufre no es una explicación. Joe Bayly, que sepultó a tres de sus propios hijos, escribió de dos visitantes en su dolor. Uno habló sin cesar &mdash; de los propósitos de Dios, de la esperanza más allá de la tumba; todo lo que decía era cierto, y Bayly quedó indiferente y solo deseaba que se fuera. El otro simplemente se sentó a su lado, dijo poco, escuchó, oró brevemente, y se fue. "Fui consolado," escribió Bayly. "Lamenté verlo irse." Los que sufren necesitan nuestra presencia más que nuestros párrafos.</p>
+
+            <h3>7. Dé a Dios Su Carga</h3>
+            <p>La tercera respuesta es el corazón del salmo: entregar realmente a Dios la carga, quitándola de nuestros hombros y poniéndola sobre los Suyos. Algunos dolores son tan grandes que amenazan con derribar por completo los puntales de debajo de nosotros, hasta que sentimos que la vida misma debería sencillamente detenerse. Es exactamente allí, en el punto de quiebre, donde la promesa del versículo 22 está destinada a llevar nuestro peso: "&Eacute;l te sustentará; no dejará para siempre caído al justo."</p>
+            <p>¿Cómo se ve cuando un creyente de veras le da a Dios la carga? Se ve como una persona que vive <em>por encima</em> de sus circunstancias mientras el dolor sigue siendo real. Considere al misionero Eric Barker, que envió a su esposa y sus ocho hijos a un lugar seguro en barco durante la Segunda Guerra Mundial. El domingo después de que zarparon, dijo a su congregación: "Acabo de recibir noticia de que toda mi familia ha llegado a salvo a casa," y siguió con el culto &mdash; porque minutos antes le habían entregado un telegrama diciendo que el barco había sido torpedeado y que todos a bordo se habían ahogado. Pudo mantenerse de pie porque sabía que su familia eran creyentes, a salvo con Dios, y ese conocimiento lo sostuvo por encima de un dolor que de otro modo lo habría aplastado. Echar la carga no es no sentir nada; es estar de pie sobre algo más profundo que la pérdida.</p>
+
+            <h3>8. Un "Porqué" que Soporta Cualquier "Cómo"</h3>
+            <p>Debajo de las tres respuestas hay un solo fundamento: al creyente se le ha dado una razón para perseverar que el mundo no puede suministrar ni quitar. Cuando la carga es más pesada, lo que nos sostiene no es una técnica sino una Persona, y el sentido que &Eacute;l da a nuestra vida aun en la oscuridad.</p>
+            <div class="illustration">
+                <strong>"El que Tiene un Porqué":</strong> El psiquiatra Viktor Frankl fue despojado de todo en Auschwitz &mdash; su familia, sus bienes, hasta el manuscrito de la obra de su vida escondido en su abrigo. Se preguntó si su vida tenía algún sentido. Entonces, obligado a cambiar de ropa, halló en el bolsillo del abrigo de un hombre muerto una sola página arrancada de un libro de oración hebreo: el <em>Shemá</em>, "Oye, Israel: Jehová nuestro Dios, Jehová uno es&hellip; amarás a Jehová tu Dios de todo tu corazón." Lo tomó como un llamado a vivir sus creencias en lugar de solo escribirlas, y luego concluyó: "El que tiene un 'porqué' para vivir puede soportar casi cualquier 'cómo.'"
+            </div>
+            <p>Esa es la palabra final del Salmo 55. El creyente tiene un "porqué" que el mundo no puede dar ni quitar &mdash; un Dios que sustenta, un cielo que espera, y un amor del cual, como escribió Pablo, ni la muerte puede separarnos. Así que cuando la vida se derrumbe, no lleve la carga a solas, ni se vuelva por alivio a consuelos demasiado pequeños para sostenerle. Dé a Dios su gratitud, déle su dolor, y déle la carga misma. Échela sobre Jehová, y &Eacute;l le sustentará; como Esperanzado entrando en el río frío, hallará que el fondo es firme.</p>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Psalms — Unit 10 (Josh engine, Psalm 55)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 10;
+const COURSE = 'psalms';
+const NEXT_UNIT_URL = 'CTSPsalmsUnit11.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Psalm 1 - The Two Ways",
+    "Psalm 23 - The Shepherd",
+    "Psalm 24 - The King of Glory",
+    "Psalm 51 - The Penitential Psalm",
+    "Psalm 119 - The Word of God",
+    "Psalm 22 - The Forsaken / Messianic Psalm",
+    "Psalm 56 - When I Am Afraid",
+    "Psalm 28 - When God Is Silent",
+    "Psalm 103 - Count Your Blessings",
+    "Psalm 55 - Casting Your Burden",
+    "The Psalms in Ministry I - Capstone",
+    "The Psalms in Ministry II - Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPsalmsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// MC answer key: A=B=C=D=5; all 20 verified against Psalm 55
+const mcQuestions = [
+    { textEn: "1. What is the single steadying command at the center of Psalm 55, on which this lesson is built?", textEs: "1. ¿Cuál es el único mandato firme en el centro del Salmo 55, sobre el cual se construye esta lección?",
+      optionsEn: ["\"The LORD is my shepherd\"", "\"Be still, and know that I am God\"", "\"Cast your burden on the LORD, and He shall sustain you\"", "\"Create in me a clean heart\""],
+      optionsEs: ["\"Jehová es mi pastor\"", "\"Estad quietos, y conoced que yo soy Dios\"", "\"Echa sobre Jehová tu carga, y él te sustentará\"", "\"Crea en mí un corazón limpio\""], explanationEn: "The whole lesson rests on one command: 'Cast your burden on the LORD, and He shall sustain you.'", explanationEs: "Toda la lección descansa en un mandato: 'Echa sobre Jehová tu carga, y él te sustentará.'", correct: 2 },
+    { textEn: "2. How does David describe his own condition in Psalm 55, before he arrives at the command to cast his burden?", textEs: "2. ¿Cómo describe David su propia condición en el Salmo 55, antes de llegar al mandato de echar su carga?",
+      optionsEn: ["Calm and untroubled", "Overwhelmed, his heart severely pained, longing for wings to fly away", "Proud and self-sufficient", "Indifferent to his trouble"],
+      optionsEs: ["Tranquilo y sin problemas", "Abrumado, su corazón muy dolorido, anhelando alas para volar lejos", "Orgulloso y autosuficiente", "Indiferente a su aflicción"], explanationEn: "David begins overwhelmed, his heart severely pained, longing for wings to fly away — he does not pretend the burden is light.", explanationEs: "David comienza abrumado, su corazón muy dolorido, anhelando alas para volar lejos — no finge que la carga sea liviana.", correct: 1 },
+    { textEn: "3. According to the lesson, what does the word translated \"cast\" actually picture?", textEs: "3. Según la lección, ¿qué representa realmente la palabra traducida \"echa\"?",
+      optionsEn: ["A gentle, gradual setting-down", "Quietly worrying in a more religious way", "Ignoring the burden until it passes", "A deliberate throwing of a heavy load off oneself onto another"],
+      optionsEs: ["Un suave depositar gradual", "Preocuparse en silencio de manera más religiosa", "Ignorar la carga hasta que pase", "Un arrojar deliberado de una carga pesada de uno mismo a otro"], explanationEn: "'Cast' means a deliberate throwing of a heavy load off ourselves onto Another — an act of the will, not mere worry.", explanationEs: "'Echar' significa un arrojar deliberado de una carga pesada de nosotros a Otro — un acto de la voluntad, no mera preocupación.", correct: 3 },
+    { textEn: "4. Which New Testament verse echoes Psalm 55:22 about casting our care on God?", textEs: "4. ¿Qué versículo del Nuevo Testamento hace eco del Salmo 55:22 sobre echar nuestra ansiedad sobre Dios?",
+      optionsEn: ["1 Peter 5:7 — \"casting all your care upon Him, for He cares for you\"", "Romans 8:28", "Philippians 4:13", "John 3:16"],
+      optionsEs: ["1 Pedro 5:7 — \"echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros\"", "Romanos 8:28", "Filipenses 4:13", "Juan 3:16"], explanationEn: "Peter echoes this verse in 1 Peter 5:7: 'casting all your care upon Him, for He cares for you.'", explanationEs: "Pedro hace eco de este versículo en 1 Pedro 5:7: 'echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros.'", correct: 0 },
+    { textEn: "5. What exactly does God promise in return when we cast our burden, according to the lesson?", textEs: "5. ¿Qué promete Dios exactamente a cambio cuando echamos nuestra carga, según la lección?",
+      optionsEn: ["To remove every burden immediately", "To sustain us — to hold us up so we are not toppled, not necessarily to remove the burden", "To explain why the trial came", "To reward us with wealth"],
+      optionsEs: ["Quitar toda carga de inmediato", "Sustentarnos — sostenernos para que no seamos derribados, no necesariamente quitar la carga", "Explicar por qué vino la prueba", "Recompensarnos con riquezas"], explanationEn: "God promises to sustain us — to hold us up so we are not toppled — not necessarily to remove the burden itself.", explanationEs: "Dios promete sustentarnos — sostenernos para que no seamos derribados — no necesariamente quitar la carga misma.", correct: 1 },
+    { textEn: "6. The lesson likens the sustained believer to what image?", textEs: "6. La lección compara al creyente sostenido con ¿qué imagen?",
+      optionsEn: ["A ship without an anchor", "A candle in the wind", "A tree in a storm whose roots hold — it bends but never falls", "A house built on sand"],
+      optionsEs: ["Un barco sin ancla", "Una vela en el viento", "Un árbol en la tormenta cuyas raíces resisten — se inclina pero nunca cae", "Una casa edificada sobre la arena"], explanationEn: "The sustained believer is like a tree in a storm whose roots hold: it bends under the wind but never falls.", explanationEs: "El creyente sostenido es como un árbol en la tormenta cuyas raíces resisten: se inclina bajo el viento pero nunca cae.", correct: 2 },
+    { textEn: "7. Who was Arthur John Gossip, and what was the sermon he preached just after his wife's sudden death?", textEs: "7. ¿Quién fue Arthur John Gossip, y cuál fue el sermón que predicó justo después de la muerte repentina de su esposa?",
+      optionsEn: ["A Scottish preacher; \"But When Life Tumbles In, What Then?\"", "An English bishop; \"The Problem of Pain\"", "An American evangelist; \"Amazing Grace\"", "A missionary; \"The Cost of Discipleship\""],
+      optionsEs: ["Un predicador escocés; \"Pero Cuando la Vida se Derrumba, ¿Qué Entonces?\"", "Un obispo inglés; \"El problema del dolor\"", "Un evangelista estadounidense; \"Sublime gracia\"", "Un misionero; \"El precio del discipulado\""], explanationEn: "Arthur John Gossip, a Scottish preacher, preached 'But When Life Tumbles In, What Then?' just after his wife's sudden death.", explanationEs: "Arthur John Gossip, predicador escocés, predicó 'Pero Cuando la Vida se Derrumba, ¿Qué Entonces?' justo tras la muerte repentina de su esposa.", correct: 0 },
+    { textEn: "8. What question did Gossip ask those tempted to turn away from God in grief?", textEs: "8. ¿Qué pregunta hizo Gossip a los tentados a apartarse de Dios en el dolor?",
+      optionsEn: ["\"Why does God allow suffering?\"", "\"How long, O Lord?\"", "\"What have we done to deserve this?\"", "\"Where else is there to turn?\""],
+      optionsEs: ["\"¿Por qué permite Dios el sufrimiento?\"", "\"¿Hasta cuándo, oh Señor?\"", "\"¿Qué hemos hecho para merecer esto?\"", "\"¿A dónde más hay que ir?\""], explanationEn: "To those tempted to abandon God in grief, Gossip asked the question with no other answer: 'Where else is there to turn?'", explanationEs: "A los tentados a abandonar a Dios en el dolor, Gossip hizo la pregunta sin otra respuesta: '¿A dónde más hay que ir?'", correct: 3 },
+    { textEn: "9. In Gethsemane, what does the lesson highlight about how the Father answered Jesus' prayer?", textEs: "9. En Getsemaní, ¿qué destaca la lección sobre cómo respondió el Padre a la oración de Jesús?",
+      optionsEn: ["He remained silent and absent", "He removed the cup at once", "He did not remove the cup, but did not desert Him — He gave strength and peace to finish", "He sent the disciples to help"],
+      optionsEs: ["Permaneció en silencio y ausente", "Quitó la copa de inmediato", "No quitó la copa, pero no lo abandonó — le dio fuerza y paz para terminar", "Envió a los discípulos a ayudar"], explanationEn: "In Gethsemane the Father did not remove the cup, but did not desert His Son — He gave strength and peace to finish.", explanationEs: "En Getsemaní el Padre no quitó la copa, pero no abandonó a Su Hijo — le dio fuerza y paz para terminar.", correct: 2 },
+    { textEn: "10. How does Gethsemane reshape what we should expect when we cast a burden on God?", textEs: "10. ¿Cómo reconfigura Getsemaní lo que debemos esperar cuando echamos una carga sobre Dios?",
+      optionsEn: ["The burden always vanishes instantly", "God only helps with small troubles", "We should not pray about burdens at all", "Often He leaves the weight on us but puts His strength underneath it"],
+      optionsEs: ["La carga siempre desaparece al instante", "Dios solo ayuda con problemas pequeños", "No debemos orar por las cargas en absoluto", "A menudo deja el peso sobre nosotros pero pone Su fuerza debajo"], explanationEn: "Gethsemane reshapes our expectation: often God leaves the weight on us but puts His own strength underneath it.", explanationEs: "Getsemaní reconfigura nuestra expectativa: a menudo Dios deja el peso sobre nosotros pero pone Su propia fuerza debajo.", correct: 3 },
+    { textEn: "11. The first of the three responses to a burden is to give God your thanks. What does 1 Thessalonians 5:18 actually say?", textEs: "11. La primera de las tres respuestas a una carga es dar a Dios gratitud. ¿Qué dice realmente 1 Tesalonicenses 5:18?",
+      optionsEn: ["Give thanks only when things go well", "Give thanks IN everything (not necessarily FOR everything)", "Give thanks once a day", "Give thanks only in public worship"],
+      optionsEs: ["Dad gracias solo cuando las cosas van bien", "Dad gracias EN todo (no necesariamente POR todo)", "Dad gracias una vez al día", "Dad gracias solo en el culto público"], explanationEn: "1 Thessalonians 5:18 says give thanks IN everything, not necessarily FOR everything — gratitude even within the trial.", explanationEs: "1 Tesalonicenses 5:18 dice dad gracias EN todo, no necesariamente POR todo — gratitud aun dentro de la prueba.", correct: 1 },
+    { textEn: "12. According to the lesson, how do self-pity and bitterness work, and how does thanksgiving counter them?", textEs: "12. Según la lección, ¿cómo obran la autocompasión y la amargura, y cómo las contrarresta la gratitud?",
+      optionsEn: ["They narrow vision until the burden hides God; thanksgiving pries that vision back open", "They have no effect either way", "They help us grieve; thanksgiving prevents grief", "They strengthen faith; thanksgiving weakens it"],
+      optionsEs: ["Estrechan la visión hasta que la carga oculta a Dios; la gratitud vuelve a abrir esa visión", "No tienen ningún efecto", "Ayudan a llorar; la gratitud impide el duelo", "Fortalecen la fe; la gratitud la debilita"], explanationEn: "Self-pity and bitterness narrow our vision until the burden hides God; thanksgiving pries that vision back open.", explanationEs: "La autocompasión y la amargura estrechan la visión hasta que la carga oculta a Dios; la gratitud vuelve a abrir esa visión.", correct: 0 },
+    { textEn: "13. The second response is to give God your grief. What does the lesson say about Jesus and mourning?", textEs: "13. La segunda respuesta es dar a Dios el dolor. ¿Qué dice la lección sobre Jesús y el llanto?",
+      optionsEn: ["Mourning shows a lack of faith", "Jesus never wept", "Jesus Himself wept at the tomb of Lazarus; to mourn is not a failure of faith", "Only the weak grieve"],
+      optionsEs: ["El llanto muestra falta de fe", "Jesús nunca lloró", "El mismo Jesús lloró ante la tumba de Lázaro; llorar no es un fracaso de la fe", "Solo los débiles se afligen"], explanationEn: "Jesus Himself wept at the tomb of Lazarus — so to mourn honestly before God is not a failure of faith.", explanationEs: "El mismo Jesús lloró ante la tumba de Lázaro — así que llorar honestamente ante Dios no es un fracaso de la fe.", correct: 2 },
+    { textEn: "14. In Joe Bayly's account of two visitors in his grief, which one comforted him?", textEs: "14. En el relato de Joe Bayly de dos visitantes en su dolor, ¿cuál lo consoló?",
+      optionsEn: ["The one who simply sat with him, listened, and prayed briefly", "The one who explained God's purposes at length", "Neither visitor", "The one who told him to stop grieving"],
+      optionsEs: ["El que simplemente se sentó con él, escuchó, y oró brevemente", "El que explicó largamente los propósitos de Dios", "Ninguno de los dos", "El que le dijo que dejara de llorar"], explanationEn: "Of Joe Bayly's two visitors, the one who comforted him simply sat with him, listened, and prayed briefly.", explanationEs: "De los dos visitantes de Joe Bayly, el que lo consoló simplemente se sentó con él, escuchó, y oró brevemente.", correct: 0 },
+    { textEn: "15. What lesson about comforting the grieving does the lesson draw from Bayly's experience?", textEs: "15. ¿Qué lección sobre consolar a los afligidos saca la enseñanza de la experiencia de Bayly?",
+      optionsEn: ["Always have a theological explanation ready", "Avoid the grieving until they recover", "Comfort requires many words", "The grieving need our presence more than our paragraphs"],
+      optionsEs: ["Tener siempre lista una explicación teológica", "Evitar a los afligidos hasta que se recuperen", "El consuelo requiere muchas palabras", "Los que sufren necesitan nuestra presencia más que nuestros párrafos"], explanationEn: "The lesson for comforters is plain: the grieving need our presence more than our paragraphs.", explanationEs: "La lección para los que consuelan es clara: los que sufren necesitan nuestra presencia más que nuestros párrafos.", correct: 3 },
+    { textEn: "16. The third response is to give God the burden itself. What does verse 22 promise at the breaking point?", textEs: "16. La tercera respuesta es dar a Dios la carga misma. ¿Qué promete el versículo 22 en el punto de quiebre?",
+      optionsEn: ["That we will not feel the weight", "\"He shall sustain you; He shall never permit the righteous to be moved\"", "That trouble will never come to the righteous", "That the burden will be explained"],
+      optionsEs: ["Que no sentiremos el peso", "\"&Eacute;l te sustentará; no dejará para siempre caído al justo\"", "Que la aflicción nunca vendrá al justo", "Que la carga será explicada"], explanationEn: "At the breaking point verse 22 holds: 'He shall sustain you; He shall never permit the righteous to be moved.'", explanationEs: "En el punto de quiebre el versículo 22 sostiene: '&Eacute;l te sustentará; no dejará para siempre caído al justo.'", correct: 1 },
+    { textEn: "17. How does the missionary Eric Barker illustrate \"living above\" one's circumstances?", textEs: "17. ¿Cómo ilustra el misionero Eric Barker el \"vivir por encima\" de las circunstancias?",
+      optionsEn: ["He never faced any real loss", "He refused to preach after the news", "He learned his family had drowned at sea, yet stood and led the service, knowing they were safely home with God", "He blamed God publicly"],
+      optionsEs: ["Nunca enfrentó una pérdida real", "Se negó a predicar tras la noticia", "Supo que su familia se había ahogado en el mar, y aun así dirigió el culto, sabiendo que estaban a salvo en casa con Dios", "Culpó a Dios públicamente"], explanationEn: "Eric Barker learned his family had drowned, yet led the service knowing they were safely home — living above his grief.", explanationEs: "Eric Barker supo que su familia se había ahogado, y aun así dirigió el culto sabiendo que estaban a salvo en casa — viviendo por encima de su dolor.", correct: 2 },
+    { textEn: "18. What does the lesson say casting the burden does and does not mean, in light of Barker's example?", textEs: "18. ¿Qué dice la lección que sí y que no significa echar la carga, a la luz del ejemplo de Barker?",
+      optionsEn: ["It means pretending the loss never happened", "It means God always prevents loss", "It means grief is sinful", "It is not feeling nothing; it is standing on something deeper than the loss"],
+      optionsEs: ["Significa fingir que la pérdida nunca ocurrió", "Significa que Dios siempre impide la pérdida", "Significa que el dolor es pecado", "No es no sentir nada; es estar de pie sobre algo más profundo que la pérdida"], explanationEn: "Casting the burden is not feeling nothing; it is standing on something deeper than the loss.", explanationEs: "Echar la carga no es no sentir nada; es estar de pie sobre algo más profundo que la pérdida.", correct: 3 },
+    { textEn: "19. Finding a page of the Shema in Auschwitz became, for Viktor Frankl, a summons to do what?", textEs: "19. Hallar una página del Shemá en Auschwitz se convirtió, para Viktor Frankl, en un llamado a hacer ¿qué?",
+      optionsEn: ["To escape at any cost", "To live out his beliefs rather than merely write about them", "To abandon his beliefs as useless", "To hide the page from the guards"],
+      optionsEs: ["A escapar a toda costa", "A vivir sus creencias en lugar de solo escribir sobre ellas", "A abandonar sus creencias como inútiles", "A esconder la página de los guardias"], explanationEn: "Finding the Shema in Auschwitz summoned Frankl to live out his beliefs rather than merely write about them.", explanationEs: "Hallar el Shemá en Auschwitz llamó a Frankl a vivir sus creencias en lugar de solo escribir sobre ellas.", correct: 1 },
+    { textEn: "20. What is Frankl's conclusion, which the lesson applies as the final word of Psalm 55?", textEs: "20. ¿Cuál es la conclusión de Frankl, que la lección aplica como la palabra final del Salmo 55?",
+      optionsEn: ["\"He who has a 'why' to live for can bear almost any 'how'\"", "Only the strong survive", "Meaning is found only in success", "Suffering has no meaning"],
+      optionsEs: ["\"El que tiene un 'porqué' para vivir puede soportar casi cualquier 'cómo'\"", "Solo los fuertes sobreviven", "El sentido se halla solo en el éxito", "El sufrimiento no tiene sentido"], explanationEn: "Frankl concluded, and the lesson applies to Psalm 55: 'He who has a why to live for can bear almost any how.'", explanationEs: "Frankl concluyó, y la lección lo aplica al Salmo 55: 'El que tiene un porqué para vivir puede soportar casi cualquier cómo.'", correct: 0 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "21. Describe the situation from which Psalm 55 is written, and the single command at its center.",
+      textEs: "21. Describa la situación desde la cual se escribe el Salmo 55, y el único mandato en su centro.",
+      kw_en: ["overwhelmed", "pained", "fly away", "burden", "cast", "sustain", "fallen world", "command"],
+      kw_es: ["abrumado", "dolorido", "volar lejos", "carga", "echar", "sustentar", "mundo caído", "mandato"],
+      modelEn: "Psalm 55 is written from a place of crushing distress. David describes himself as overwhelmed, his heart severely pained within him, even longing for wings like a dove so he could fly away and be at rest. Part of his anguish is betrayal by a close friend. Out of that very real trouble comes the single steadying command at the center of the psalm: \"Cast your burden on the LORD, and He shall sustain you.\" The psalm is honest that the burden is heavy and the pain real; it does not pretend otherwise, but it points the troubled heart to the one place the load can be laid down.",
+      modelEs: "El Salmo 55 está escrito desde un lugar de angustia aplastante. David se describe abrumado, su corazón muy dolorido dentro de sí, anhelando incluso alas como de paloma para volar lejos y hallar reposo. Parte de su angustia es la traición de un amigo cercano. De esa aflicción tan real sale el único mandato firme en el centro del salmo: \"Echa sobre Jehová tu carga, y él te sustentará.\" El salmo es honesto en que la carga es pesada y el dolor real; no finge lo contrario, pero señala al corazón atribulado el único lugar donde la carga puede dejarse." },
+    { textEn: "22. Explain what the word \"cast\" means in Psalm 55:22 and what God promises in return.",
+      textEs: "22. Explique qué significa la palabra \"echa\" en el Salmo 55:22 y qué promete Dios a cambio.",
+      kw_en: ["cast", "throw", "deliberate", "transfer", "will", "sustain", "hold up", "not moved"],
+      kw_es: ["echar", "arrojar", "deliberado", "trasladar", "voluntad", "sustentar", "sostener", "no caído"],
+      modelEn: "The word \"cast\" in Psalm 55:22 pictures a deliberate, decisive act, throwing a heavy load off oneself and onto another, the way you would heave a weight off your shoulders. It is not vague worrying but an act of the will, handing the burden over to God. In return God promises to sustain us: \"He shall sustain you; He shall never permit the righteous to be moved.\" The promise is not necessarily that He will lift the trouble away, but that He will hold us up under it so we are not toppled. We do the casting; God does the sustaining.",
+      modelEs: "La palabra \"echar\" en el Salmo 55:22 representa un acto deliberado y decisivo, arrojar una carga pesada de uno mismo sobre otro, como quitarías un peso de tus hombros. No es una preocupación vaga sino un acto de la voluntad, entregar la carga a Dios. A cambio Dios promete sustentarnos: \"&Eacute;l te sustentará; no dejará para siempre caído al justo.\" La promesa no es necesariamente que quitará la aflicción, sino que nos sostendrá bajo ella para que no seamos derribados. Nosotros hacemos el echar; Dios hace el sustentar." },
+    { textEn: "23. The lesson says God promises to sustain rather than always remove the burden. Explain the difference and the tree image.",
+      textEs: "23. La lección dice que Dios promete sustentar en lugar de siempre quitar la carga. Explique la diferencia y la imagen del árbol.",
+      kw_en: ["sustain", "not remove", "hold up", "bear the load", "tree", "storm", "roots", "not toppled"],
+      kw_es: ["sustentar", "no quitar", "sostener", "llevar la carga", "árbol", "tormenta", "raíces", "no derribado"],
+      modelEn: "The lesson draws a careful distinction: God promises to sustain us, not always to remove the burden. We often want Him to take the trouble away, but His promise is to hold us up while we carry it, supplying strength underneath the weight. The tree image captures it: a tree in a storm is not spared the wind, but its roots hold, so that it bends without being uprooted. So the sustained believer may still feel the full force of the trial, yet is kept from falling because God is holding him. The burden may remain, but we are upheld in the midst of it.",
+      modelEs: "La lección hace una distinción cuidadosa: Dios promete sustentarnos, no siempre quitar la carga. A menudo queremos que se lleve la aflicción, pero Su promesa es sostenernos mientras la llevamos, dando fuerza debajo del peso. La imagen del árbol lo capta: un árbol en la tormenta no se libra del viento, pero sus raíces resisten, de modo que se inclina sin ser arrancado. Así el creyente sustentado puede aún sentir toda la fuerza de la prueba, y sin embargo es guardado de caer porque Dios lo sostiene. La carga puede permanecer, pero somos sostenidos en medio de ella." },
+    { textEn: "24. What does Arthur John Gossip's response after his wife's sudden death teach about faith when life tumbles in?",
+      textEs: "24. ¿Qué enseña la respuesta de Arthur John Gossip tras la muerte repentina de su esposa sobre la fe cuando la vida se derrumba?",
+      kw_en: ["Gossip", "wife", "death", "tumbles in", "where else", "turn", "faith", "God"],
+      kw_es: ["Gossip", "esposa", "muerte", "derrumba", "a dónde más", "ir", "fe", "Dios"],
+      modelEn: "Arthur John Gossip was a Scottish preacher whose wife died suddenly. Soon after, he preached a sermon titled \"But When Life Tumbles In, What Then?\" Out of his own raw grief he did not abandon his faith but pressed into it, asking those tempted to turn away from God in sorrow the question that has no other answer: \"Where else is there to turn?\" His response teaches that when life collapses, faith is not the denial of grief but the decision to keep holding to God because there is nowhere better to go. In the darkest hour, the believer casts himself on the only One who can sustain.",
+      modelEs: "Arthur John Gossip fue un predicador escocés cuya esposa murió de repente. Poco después, predicó un sermón titulado \"Pero Cuando la Vida se Derrumba, ¿Qué Entonces?\" De su propio dolor crudo no abandonó su fe sino que se afirmó en ella, haciendo a los tentados a apartarse de Dios en la tristeza la pregunta que no tiene otra respuesta: \"¿A dónde más hay que ir?\" Su respuesta enseña que cuando la vida se derrumba, la fe no es la negación del dolor sino la decisión de seguir aferrándose a Dios porque no hay mejor lugar a dónde ir. En la hora más oscura, el creyente se echa sobre el único que puede sustentar." },
+    { textEn: "25. Explain how Gethsemane shows the way God answers when we cast a burden on Him.",
+      textEs: "25. Explique cómo Getsemaní muestra la manera en que Dios responde cuando echamos una carga sobre &Eacute;l.",
+      kw_en: ["Gethsemane", "cup", "not removed", "not desert", "strength", "peace", "finish", "sustain"],
+      kw_es: ["Getsemaní", "copa", "no quitada", "no abandonó", "fuerza", "paz", "terminar", "sustentar"],
+      modelEn: "Gethsemane shows how God often answers when we cast a burden on Him. Jesus prayed that the cup might pass, yet the Father did not remove it; instead He did not desert His Son but strengthened Him to drink it and finish His work. So when we cast our burden on God, He frequently does not take the weight away but puts His own strength underneath us so we can bear it. This reshapes our expectation: the answer to \"cast your burden\" is not always relief from the trouble, but the sustaining grace and presence of God that carry us through it, as they carried Jesus through the cross.",
+      modelEs: "Getsemaní muestra cómo Dios a menudo responde cuando echamos una carga sobre &Eacute;l. Jesús oró que pasara la copa, pero el Padre no la quitó; en cambio no abandonó a Su Hijo sino que lo fortaleció para beberla y terminar Su obra. Así cuando echamos nuestra carga sobre Dios, con frecuencia no quita el peso sino que pone Su propia fuerza debajo de nosotros para que podamos llevarlo. Esto reconfigura nuestra expectativa: la respuesta a \"echa tu carga\" no siempre es alivio de la aflicción, sino la gracia sustentadora y la presencia de Dios que nos llevan a través de ella, como llevaron a Jesús a través de la cruz." },
+    { textEn: "26. Explain the first response, giving God your thanks, including what 1 Thessalonians 5:18 does and does not say.",
+      textEs: "26. Explique la primera respuesta, dar a Dios gratitud, incluyendo lo que 1 Tesalonicenses 5:18 sí y no dice.",
+      kw_en: ["thanks", "in everything", "not for everything", "still good", "present", "sovereign", "self-pity", "medicine"],
+      kw_es: ["gracias", "en todo", "no por todo", "sigue bueno", "presente", "soberano", "autocompasión", "medicina"],
+      modelEn: "The first response to a burden is to give God your thanks. The lesson is precise about what 1 Thessalonians 5:18 actually says: give thanks IN everything, not necessarily FOR everything. We are not told to be glad about the trouble itself, but to find reasons for gratitude even within it, remembering God's goodness in the midst of pain. This matters because self-pity and bitterness narrow our vision until the burden blots out God; thanksgiving pries that vision back open, helping us see that God is still present and still good even when the load is heavy. Gratitude reorders how we see the trial.",
+      modelEs: "La primera respuesta a una carga es dar gracias a Dios. La lección es precisa sobre lo que 1 Tesalonicenses 5:18 realmente dice: dad gracias EN todo, no necesariamente POR todo. No se nos manda alegrarnos por la aflicción misma, sino hallar razones de gratitud aun dentro de ella, recordando la bondad de Dios en medio del dolor. Esto importa porque la autocompasión y la amargura estrechan nuestra visión hasta que la carga borra a Dios; la gratitud vuelve a abrir esa visión, ayudándonos a ver que Dios sigue presente y sigue siendo bueno aun cuando la carga es pesada. La gratitud reordena cómo vemos la prueba." },
+    { textEn: "27. Explain the second response, giving God your grief, including the seasons grief moves through.",
+      textEs: "27. Explique la segunda respuesta, dar a Dios el dolor, incluyendo las etapas por las que pasa el duelo.",
+      kw_en: ["grief", "honest", "shock", "anger", "guilt", "depression", "acceptance", "Lazarus"],
+      kw_es: ["dolor", "honesto", "conmoción", "ira", "culpa", "depresión", "aceptación", "Lázaro"],
+      modelEn: "The second response is to give God your grief, bringing our sorrow honestly to Him rather than hiding it. The lesson reminds us that Jesus Himself wept at the tomb of Lazarus, so to mourn is not a failure of faith but a part of being human before God. Grief moves through seasons; it is not a single moment but a process of shock, sorrow, and slow healing, and God walks with us through all of it. We are not asked to pretend we feel nothing or to rush past the pain. Casting our grief on God means weeping in His presence, trusting that He receives our tears.",
+      modelEs: "La segunda respuesta es dar a Dios tu dolor, trayendo nuestra tristeza con honestidad a &Eacute;l en vez de esconderla. La lección nos recuerda que el mismo Jesús lloró ante la tumba de Lázaro, así que llorar no es un fracaso de la fe sino parte de ser humano ante Dios. El dolor se mueve por etapas; no es un solo momento sino un proceso de conmoción, tristeza y sanidad lenta, y Dios camina con nosotros por todo ello. No se nos pide fingir que no sentimos nada ni apresurarnos a pasar el dolor. Echar nuestro dolor sobre Dios significa llorar en Su presencia, confiando en que &Eacute;l recibe nuestras lágrimas." },
+    { textEn: "28. Using Joe Bayly's two visitors, explain how we should comfort those who grieve.",
+      textEs: "28. Usando los dos visitantes de Joe Bayly, explique cómo debemos consolar a los que sufren.",
+      kw_en: ["Bayly", "two visitors", "talked", "unmoved", "sat", "listened", "presence", "not paragraphs"],
+      kw_es: ["Bayly", "dos visitantes", "habló", "indiferente", "se sentó", "escuchó", "presencia", "no párrafos"],
+      modelEn: "Joe Bayly, who had lost children, recalled two visitors in his grief. One talked at length, offered explanations and arguments, and left him cold; the other simply sat with him, listened, said little, and prayed briefly, and that one brought comfort. The lesson draws a clear principle for comforting the grieving: they need our presence more than our paragraphs. Words, especially explanations and tidy answers, often wound rather than help; what heals is a quiet, loving presence that is willing to sit in the sorrow with the sufferer. To comfort well is to come close and stay near, not to fix it with speech.",
+      modelEs: "Joe Bayly, que había perdido hijos, recordó a dos visitantes en su dolor. Uno habló largamente, ofreció explicaciones y argumentos, y lo dejó frío; el otro simplemente se sentó con él, escuchó, dijo poco, y oró brevemente, y ese trajo consuelo. La lección saca un principio claro para consolar a los que sufren: necesitan nuestra presencia más que nuestros párrafos. Las palabras, en especial las explicaciones y respuestas ordenadas, a menudo hieren en vez de ayudar; lo que sana es una presencia callada y amorosa dispuesta a sentarse en la tristeza con el doliente. Consolar bien es acercarse y permanecer cerca, no arreglarlo con discursos." },
+    { textEn: "29. Explain the third response, giving God the burden, and how Eric Barker illustrates living above one's circumstances.",
+      textEs: "29. Explique la tercera respuesta, dar a Dios la carga, y cómo Eric Barker ilustra el vivir por encima de las circunstancias.",
+      kw_en: ["give burden", "breaking point", "Barker", "family", "drowned", "safely home", "above circumstances", "deeper"],
+      kw_es: ["dar carga", "punto de quiebre", "Barker", "familia", "ahogada", "a salvo en casa", "por encima", "más profundo"],
+      modelEn: "The third response is to give God the burden itself, the deliberate casting of Psalm 55:22, trusting His promise: \"He shall sustain you; He shall never permit the righteous to be moved.\" Eric Barker illustrates living above one's circumstances: a missionary who learned that his family had drowned at sea, yet stood up and led his congregation in worship that very hour, because he knew they were safely home with God. He did not feel nothing; he stood on something deeper than his loss. Casting the burden is not the absence of pain but the choice to rest the whole weight on God and remain standing in Him.",
+      modelEs: "La tercera respuesta es dar a Dios la carga misma, el echar deliberado del Salmo 55:22, confiando en Su promesa: \"&Eacute;l te sustentará; no dejará para siempre caído al justo.\" Eric Barker ilustra el vivir por encima de las circunstancias: un misionero que supo que su familia se había ahogado en el mar, y sin embargo se levantó y dirigió a su congregación en adoración esa misma hora, porque sabía que estaban a salvo en casa con Dios. No sintió nada; estuvo de pie sobre algo más profundo que su pérdida. Echar la carga no es la ausencia de dolor sino la decisión de reposar todo el peso en Dios y permanecer de pie en &Eacute;l." },
+    { textEn: "30. Explain the foundation under all three responses, using Frankl's conclusion about a why and a how.",
+      textEs: "30. Explique el fundamento debajo de las tres respuestas, usando la conclusión de Frankl sobre un porqué y un cómo.",
+      kw_en: ["foundation", "reason", "Person", "Frankl", "Shema", "why", "how", "love"],
+      kw_es: ["fundamento", "razón", "Persona", "Frankl", "Shemá", "porqué", "cómo", "amor"],
+      modelEn: "Under all three responses lies one foundation: a reason to trust God that is deeper than the trouble. Viktor Frankl, who survived the death camps, concluded that \"he who has a why to live for can bear almost any how.\" The lesson applies this to Psalm 55: when we know the why, that God is good, present, and working out His purpose, we can bear almost any how, any burden or sorrow. The foundation is not our circumstances or our feelings but the trustworthy character of God. Because He sustains the one who casts his burden on Him, we have a why strong enough to carry us through any how.",
+      modelEs: "Bajo las tres respuestas yace un fundamento: una razón para confiar en Dios más profunda que la aflicción. Viktor Frankl, que sobrevivió los campos de exterminio, concluyó que \"el que tiene un porqué para vivir puede soportar casi cualquier cómo.\" La lección aplica esto al Salmo 55: cuando conocemos el porqué, que Dios es bueno, está presente, y lleva a cabo Su propósito, podemos soportar casi cualquier cómo, cualquier carga o tristeza. El fundamento no son nuestras circunstancias ni nuestros sentimientos sino el carácter confiable de Dios. Porque &Eacute;l sustenta al que echa su carga sobre &Eacute;l, tenemos un porqué lo bastante fuerte para llevarnos a través de cualquier cómo." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 11 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 11 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPsalmsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

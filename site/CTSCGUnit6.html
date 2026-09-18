@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Church Growth — Unit 6: Diagnosing Your Church</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 7 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📈 Church Growth — Unit 6: Diagnosing Your Church</span><span class="lang-es">📈 Crecimiento de la Iglesia — Unidad 6: Diagnosticando Su Iglesia</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Examine yourselves as to whether you are in the faith." — 2 Corinthians 13:5 (NKJV)</span><span class="lang-es">"Examinaos a vosotros mismos si estais en la fe." — 2 Corintios 13:5 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Church Growth course. Please register before beginning Unit 6.</span><span class="lang-es">Bienvenido al curso Crecimiento de la Iglesia. Por favor registrese antes de comenzar la Unidad 6.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<p>A physician begins not with the cure but with the diagnosis. He takes
+the pulse, listens to the breath, reads the vital signs — because you
+cannot treat what you have not honestly examined. A church can be read
+the same way, and a wise leader learns to do it before he reaches for
+any remedy.</p>
+<p>Behind the whole exercise lie a few bedrock convictions. Growth
+matters to God; a church content to reach no one has drifted from the
+heart of a seeking Savior. But what God counts is <em>disciples,</em>
+not merely decisions — real, identifiable people brought into living
+fellowship with Christ and His body. And a church’s health can be
+honestly examined: the One who made human nature is not offended when we
+trouble ourselves to understand it, and the church that refuses to look
+squarely at itself is flying blind. One guard must stay in place: the
+measure of a servant is finally <em>faithfulness,</em> not yield, for
+the seed is ours to sow and the increase is God’s to give. With that
+held firmly, take up the stethoscope.</p>
+<p><strong>First, the vital signs of health — the pulse.</strong> Look
+for a pastor who genuinely wants to reach people, who leads, and who
+stays; vision pursued over years is what bears fruit. Look for a
+<em>mobilized laity</em> — a church convinced that every member has been
+gifted for ministry and actually puts those gifts to work, so that the
+people, not the professional alone, do the work of the body. And look
+for the right balance of three sizes at once: <em>celebration,</em> the
+whole body gathered in worship; <em>congregation,</em> groups small
+enough that people know one another; and <em>cell,</em> the intimate,
+almost family-sized circle where life is genuinely shared. A church that
+has only the big meeting and never the small one will gather a crowd but
+never make a family. Where these signs are present, life is present —
+and living things grow.</p>
+<p><strong>Second, the warning signs of a plateau — the symptoms of
+decline.</strong> Here are the questions that take a church’s
+temperature, and they are pointed on purpose:</p>
+<ul>
+<li><em>How long since this congregation adapted its space?</em> A
+church that has used the same rooms the same way for fifteen years and
+more is likely sliding toward decline — for growth forces a church to
+keep reshaping its space to meet new needs.</li>
+<li><em>When did you last start a new class, group, or ministry?</em> If
+you cannot remember, that is itself the diagnosis; a church too long
+without starting anything new has stopped growing at the tips.</li>
+<li><em>Are you accumulating capital, or consuming it?</em> A church
+living off the saved-up assets of a past generation is a church coasting
+downhill. A growing church adds to its assets each year.</li>
+<li><em>Is giving rising?</em> Real, growing churches see their members’
+giving climb year over year; a long flat line is a symptom.</li>
+<li>And the sharpest of all: <em>What is the most exciting thing that
+has ever happened in the life of this church?</em> If the honest answer
+lies fifteen years in the past, it is time to be afraid — for the church
+is now living on memory.</li>
+</ul>
+<p><strong>Third, the marks of a growing church — the signs of
+vigor.</strong> Growing churches share a family resemblance. They have a
+<em>clear, short vision</em> — a sentence a member can actually repeat,
+not a paragraph no one remembers. They have a <em>strong but humble
+pastor,</em> a team-builder rather than a domineering boss, energetic
+and bold yet authentic, and committed to stay. They put <em>people ahead
+of programs,</em> asking of every activity the one ruthless question —
+<em>how many lives has this actually changed?</em> — and treating the
+program as expendable when the honest answer is “none.” They
+<em>highlight prayer,</em> teaching it and modeling it rather than
+merely mentioning it. Their <em>evangelism is relational:</em> they have
+largely abandoned the cold methods — the unwanted knock at the door, the
+intrusive phone call — for the slower power of friendship and the open
+door of the well-planned event. And they carry a <em>sense of
+urgency,</em> working as though the harvest will not wait, because it
+will not.</p>
+<p>Set these three readings side by side and you will notice they are
+not three lists but one examination. The vital signs tell you whether
+there is life; the warning signs tell you whether that life is ebbing;
+the marks of vigor tell you what life looks like at full strength. Run
+them honestly on your own congregation — not on the church you wish you
+led, but the one you actually do — and you will know, as a physician
+knows, where to begin.</p>
+<h2 id="where-we-are-now-2026">Where We Are Now (2026)</h2>
+<p>The diagnosis still works, but a few of the instruments need
+recalibrating for our day. The old vital signs assumed a church measured
+by the seats filled on Sunday; now we must learn to count the
+<em>orbit</em> as well as the room — the people who watch, listen,
+serve, and belong through a screen as truly as through a pew. A
+congregation can be quietly reaching far more people than its sanctuary
+count suggests, and quietly losing them, too; the honest leader learns
+to read both.</p>
+<p>Two of the old tests have only sharpened with age. The question
+<em>when did you last start something new?</em> turns out to be the
+single most reliable sign of life there is — the church that keeps
+starting new groups, new classes, new congregations is the church that
+keeps growing. And the mark of <em>relational evangelism over the cold
+call</em> has been wholly vindicated; the entire movement has turned
+from dragging people into the building toward going out to meet them
+where they live. The day of the unwanted knock and the cold phone call
+is simply over.</p>
+<p>One test must be read in a new light. The old sign of health asked
+whether a church drew people <em>from outside its own denomination.</em>
+The deeper question now is whether a church is reaching anyone genuinely
+<em>new</em> at all, or merely trading sheep with the church down the
+road — and above all whether it is reaching back for the great company
+of the formerly churched, who are more open to a gracious invitation
+home than we feared. A church can post a healthy count and still be only
+rearranging the same believers; the truest sign of vigor is a name on
+the roll that belonged to no church at all a year ago.</p>
+<p>And here a hard word must be added to the diagnosis of decline. We
+have learned that a church can carry the vital sign of a strong,
+visionary, long-tenured pastor and still come crashing down — when gift
+is not matched by character. So a thorough examination now asks not only
+whether the leadership is <em>able</em> but whether it is
+<em>trustworthy,</em> and whether a healthy circle of accountability
+surrounds the leader. We will give that its due in the next unit. The
+most pointed diagnostic question of our moment, though, is the old
+targeting question turned to the mirror: <em>whom have we actually
+reached in the past twelve months?</em> If the answer is only people
+exactly like ourselves, only the already-churched, only the aging — then
+the warning light is on, however full the room. The good news worth
+ending on is that the patient is not as far gone as the headlines
+suggest: after a long decline, attendance has begun, in many places, to
+rise again. The diagnosis is sober. It is not hopeless. And no church
+was ever healed by refusing to be examined.</p>
+
+</div>
+<div class="lang-es">
+
+<p>Un médico comienza no con la cura sino con el diagnóstico. Toma el pulso, escucha la respiración, lee las señales vitales — porque no se puede tratar lo que no se ha examinado honestamente. Una iglesia puede leerse del mismo modo, y un líder sabio aprende a hacerlo antes de echar mano de cualquier remedio.</p>
+
+<p>Detrás de todo el ejercicio yacen unas pocas convicciones de roca firme. El crecimiento le importa a Dios; una iglesia contenta con no alcanzar a nadie se ha alejado del corazón de un Salvador que busca. Pero lo que Dios cuenta son <em>discípulos,</em> no meras decisiones — personas reales e identificables traídas a una comunión viva con Cristo y Su cuerpo. Y la salud de una iglesia puede examinarse honestamente: Aquel que hizo la naturaleza humana no se ofende cuando nos tomamos la molestia de entenderla, y la iglesia que se niega a mirarse de frente vuela a ciegas. Una guarda debe quedar en su lugar: la medida de un siervo es, al final, la <em>fidelidad,</em> no el rendimiento, pues la semilla es nuestra para sembrar y el aumento es de Dios para dar. Con eso sostenido con firmeza, tome el estetoscopio.</p>
+
+<p><strong>Primero, las señales vitales de salud — el pulso.</strong> Busque un pastor que de veras quiera alcanzar a la gente, que dirija, y que permanezca; la visión perseguida por años es lo que da fruto. Busque un <em>laicado movilizado</em> — una iglesia convencida de que cada miembro ha sido dotado para el ministerio y de veras pone esos dones a obrar, de modo que el pueblo, no solo el profesional, haga la obra del cuerpo. Y busque el equilibrio correcto de tres tamaños a la vez: <em>celebración,</em> todo el cuerpo reunido en adoración; <em>congregación,</em> grupos lo bastante pequeños para que la gente se conozca; y <em>célula,</em> el círculo íntimo, casi del tamaño de una familia, donde la vida se comparte de veras. Una iglesia que tiene solo la reunión grande y nunca la pequeña reunira una multitud pero nunca hará una familia. Donde están presentes estas señales, hay vida — y lo vivo crece.</p>
+
+<p><strong>Segundo, las señales de advertencia de una meseta — los síntomas del declive.</strong> Aquí están las preguntas que toman la temperatura de una iglesia, y son agudas a propósito:</p>
+<ul>
+<li><em>¿Cuánto hace que esta congregación adaptó su espacio?</em> Una iglesia que ha usado los mismos salones de la misma manera por quince años y más probablemente se desliza hacia el declive — pues el crecimiento obliga a una iglesia a seguir remodelando su espacio para satisfacer nuevas necesidades.</li>
+<li><em>¿Cuándo inició por última vez una nueva clase, grupo o ministerio?</em> Si no puede recordarlo, eso mismo es el diagnóstico; una iglesia demasiado tiempo sin iniciar algo nuevo ha dejado de crecer en las puntas.</li>
+<li><em>¿Está acumulando capital, o consumiéndolo?</em> Una iglesia que vive de los bienes ahorrados de una generación pasada es una iglesia que va cuesta abajo. Una iglesia en crecimiento añade a sus bienes cada año.</li>
+<li><em>¿Sube la ofrenda?</em> Las iglesias reales y en crecimiento ven la ofrenda de sus miembros subir año tras año; una larga línea plana es un síntoma.</li>
+<li>Y la más aguda de todas: <em>¿Qué es lo más emocionante que ha pasado jamás en la vida de esta iglesia?</em> Si la respuesta honesta está quince años en el pasado, es hora de temer — pues la iglesia ahora vive de la memoria.</li>
+</ul>
+
+<p><strong>Tercero, las marcas de una iglesia en crecimiento — las señales de vigor.</strong> Las iglesias en crecimiento comparten un aire de familia. Tienen una <em>visión clara y corta</em> — una frase que un miembro puede de veras repetir, no un párrafo que nadie recuerda. Tienen un <em>pastor fuerte pero humilde,</em> un constructor de equipo en vez de un jefe dominante, enérgico y audaz pero auténtico, y comprometido a permanecer. Ponen <em>las personas antes que los programas,</em> haciendo de cada actividad la única pregunta implacable — <em>¿cuántas vidas ha cambiado de veras esto?</em> — y tratando el programa como prescindible cuando la respuesta honesta es "ninguna." <em>Destacan la oración,</em> ensenándola y modelándola en vez de solo mencionarla. Su <em>evangelismo es relacional:</em> han abandonado en gran parte los métodos fríos — el golpe no deseado a la puerta, la llamada telefónica intrusiva — por el poder más lento de la amistad y la puerta abierta del evento bien planeado. Y cargan un <em>sentido de urgencia,</em> trabajando como si la mies no fuera a esperar, porque no esperará.</p>
+
+<p>Ponga estas tres lecturas lado a lado y notará que no son tres listas sino un examen. Las señales vitales le dicen si hay vida; las señales de advertencia le dicen si esa vida mengua; las marcas de vigor le dicen cómo se ve la vida en plena fuerza. Aplíquelas honestamente a su propia congregación — no a la iglesia que desearía dirigir, sino a la que de veras dirige — y sabrá, como sabe un médico, por dónde empezar.</p>
+
+<h2>Dónde Estamos Ahora (2026)</h2>
+
+<p>El diagnóstico aún funciona, pero algunos de los instrumentos necesitan recalibrarse para nuestros días. Las viejas señales vitales suponían una iglesia medida por los asientos llenos el domingo; ahora debemos aprender a contar la <em>órbita</em> además del salón — la gente que observa, escucha, sirve y pertenece por una pantalla tan de veras como por una banca. Una congregación puede estar alcanzando calladamente a mucha más gente de lo que sugiere el conteo de su santuario, y perdiéndola también calladamente; el líder honesto aprende a leer ambas.</p>
+
+<p>Dos de las viejas pruebas solo se han afilado con la edad. La pregunta <em>¿cuando inicio algo nuevo por última vez?</em> resulta ser la señal de vida más confiable que hay — la iglesia que sigue iniciando nuevos grupos, nuevas clases, nuevas congregaciones es la iglesia que sigue creciendo. Y la marca del <em>evangelismo relacional por encima de la llamada fría</em> ha sido vindicada del todo; todo el movimiento se ha vuelto de arrastrar a la gente al edificio hacia salir a encontrarla donde vive. El día del golpe no deseado y la llamada fría sencillamente terminó.</p>
+
+<p>Una prueba debe leerse a una nueva luz. La vieja señal de salud preguntaba si una iglesia atraía gente <em>de fuera de su propia denominación.</em> La pregunta más profunda ahora es si una iglesia está alcanzando a alguien genuinamente <em>nuevo</em> en absoluto, o solo intercambiando ovejas con la iglesia de al lado — y sobre todo si está alcanzando de vuelta a la gran compañía de los que antes asistían, más abiertos a una invitación bondadosa a volver de lo que temíamos. Una iglesia puede mostrar un conteo sano y aun así solo estar reacomodando a los mismos creyentes; la señal más verdadera de vigor es un nombre en la lista que hace un año no pertenecía a ninguna iglesia.</p>
+
+<p>Y aquí debe añadirse una palabra dura al diagnóstico del declive. Hemos aprendido que una iglesia puede portar la señal vital de un pastor fuerte, visionario y de larga estancia y aun venirse abajo estrepitosamente — cuando el don no está a la altura del carácter. Así que un examen minucioso ahora pregunta no solo si el liderazgo es <em>capaz</em> sino si es <em>confiable,</em> y si un círculo sano de rendición de cuentas rodea al líder. Le daremos su lugar en la siguiente unidad. La pregunta diagnóstica más aguda de nuestro momento, sin embargo, es la vieja pregunta del enfoque vuelta al espejo: <em>¿a quién hemos alcanzado de veras en los últimos doce meses?</em> Si la respuesta son solo personas exactamente como nosotros, solo los que ya asisten, solo los que envejecen — entonces la luz de advertencia está encendida, por lleno que esté el salón. La buena noticia con que vale la pena terminar es que el paciente no está tan grave como sugieren los titulares: tras un largo declive, la asistencia ha comenzado, en muchos lugares, a subir de nuevo. El diagnóstico es sobrio. No es desesperado. Y ninguna iglesia fue jamás sanada negándose a ser examinada.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam — 30 Questions</span><span class="lang-es">Examen Final — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>Fail the multiple-choice (1–20) and it locks for 2 minutes; fail the master's-level short answer (21–30) and it locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba la opción múltiple (1–20), se bloquea por 2 minutos; si reprueba la respuesta corta de nivel de maestría (21–30), se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Joshua — Unit 1 (retrofit to CTS pattern, 2026-05-16)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 6;
+const COURSE = 'cg';
+const NEXT_UNIT_URL = 'CTSCGUnit7.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 — Introduction",
+    "Unit 2 — Biblical Background",
+    "Unit 3 — Terms and History",
+    "Unit 4 — Principles",
+    "Unit 5 — Change and the Generations",
+    "Unit 6 — Diagnosing Your Church",
+    "Unit 7 — Pastoral Leadership",
+    "Unit 8 — Worship",
+    "Unit 9 — Digital and Online Ministry",
+    "Unit 10 — Sunday School and Small Groups",
+    "Unit 11 — Discipleship",
+    "Unit 12 — Retention"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCGUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// L3 semantic audit: all 20 verified against options and Joshua 1
+const mcQuestions = [
+    { textEn: "1. A wise leader, like a physician, begins not with the cure but with:", textEs: "1. Un líder sabio, como un médico, comienza no con la cura sino con:",
+      optionsEn: ["the advertising", "the budget", "the building", "the diagnosis"],
+      optionsEs: ["la publicidad", "el presupuesto", "el edificio", "el diagnóstico"], correct: 3 },
+    { textEn: "2. What God finally counts, this unit insists, is not decisions but:", textEs: "2. Lo que Dios finalmente cuenta, insiste esta unidad, no son decisiones sino:",
+      optionsEn: ["disciples", "donations", "programs", "attendance"],
+      optionsEs: ["discípulos", "donaciones", "programas", "asistencia"], correct: 0 },
+    { textEn: "3. A vital sign of health is a 'mobilized laity,' meaning a church convinced that:", textEs: "3. Una señal vital de salud es un 'laicado movilizado', es decir, una iglesia convencida de que:",
+      optionsEn: ["only clergy minister", "every member is gifted for ministry", "money solves all", "programs replace people"],
+      optionsEs: ["solo el clero ministra", "cada miembro está dotado para el ministerio", "el dinero resuelve todo", "los programas reemplazan a las personas"], correct: 1 },
+    { textEn: "4. The three sizes a healthy church lives at, all at once, are celebration, congregation, and:", textEs: "4. Los tres tamaños en que vive una iglesia sana, todos a la vez, son celebración, congregación y:",
+      optionsEn: ["committee", "choir", "cell", "staff"],
+      optionsEs: ["comite", "coro", "célula", "personal"], correct: 2 },
+    { textEn: "5. A sharp warning-sign question is: what is the most exciting thing that has ever happened here, and if the answer lies far in the past it is time to:", textEs: "5. Una pregunta aguda de advertencia es: que es lo más emocionante que ha pasado aquí, y si la respuesta está muy en el pasado es hora de:",
+      optionsEn: ["be concerned, for the church lives on memory", "celebrate", "relax", "raise the budget"],
+      optionsEs: ["preocuparse, pues la iglesia vive de la memoria", "celebrar", "descansar", "subir el presupuesto"], correct: 0 },
+    { textEn: "6. A growing church has a clear, short vision that:", textEs: "6. Una iglesia en crecimiento tiene una visión clara y corta que:",
+      optionsEn: ["fills a long paragraph", "changes weekly", "only the pastor knows", "a member can actually repeat"],
+      optionsEs: ["llena un párrafo largo", "cambia cada semana", "solo el pastor conoce", "un miembro puede repetir de veras"], correct: 3 },
+    { textEn: "7. Of every program, a growing church asks the ruthless question:", textEs: "7. De cada programa, una iglesia en crecimiento hace la pregunta implacable:",
+      optionsEn: ["does it cost money?", "how many lives has this actually changed?", "is it traditional?", "is it popular?"],
+      optionsEs: ["cuesta dinero?", "cuantas vidas ha cambiado realmente?", "es tradicional?", "es popular?"], correct: 1 },
+    { textEn: "8. Growing churches have largely abandoned cold evangelism methods in favor of:", textEs: "8. Las iglesias en crecimiento han abandonado en gran parte los métodos fríos de evangelismo a favor de:",
+      optionsEn: ["mass mailings", "television", "relationship and the well-planned event", "billboards"],
+      optionsEs: ["envios masivos", "la televisión", "la relación y el evento bien planeado", "las vallas"], correct: 2 },
+    { textEn: "9. The strong pastor of a growing church is described as:", textEs: "9. El pastor fuerte de una iglesia en crecimiento se describe como:",
+      optionsEn: ["a part-timer", "a distant administrator", "a celebrity", "a humble team-builder, not a domineering boss"],
+      optionsEs: ["un trabajador de medio tiempo", "un administrador distante", "una celebridad", "un constructor de equipo humilde, no un jefe dominante"], correct: 3 },
+    { textEn: "10. One warning sign is a church that has used the same space the same way for:", textEs: "10. Una señal de advertencia es una iglesia que ha usado el mismo espacio de la misma manera por:",
+      optionsEn: ["fifteen years and more", "one year", "one month", "a week"],
+      optionsEs: ["quince años y más", "un año", "un mes", "una semana"], correct: 0 },
+    { textEn: "11. A church living off the saved-up assets of a past generation is:", textEs: "11. Una iglesia que vive de los bienes acumulados de una generación pasada está:",
+      optionsEn: ["adding to its assets", "coasting downhill, consuming capital", "perfectly healthy", "growing fast"],
+      optionsEs: ["añadiendo a sus bienes", "yendo cuesta abajo, consumiendo capital", "perfectamente sana", "creciendo rápido"], correct: 1 },
+    { textEn: "12. A growing church treats prayer not as a passing mention but:", textEs: "12. Una iglesia en crecimiento trata la oración no como una mención pasajera sino:",
+      optionsEn: ["as optional", "as a formality", "teaching and modeling it, highlighting it", "as a duty for clergy only"],
+      optionsEs: ["como opcional", "como una formalidad", "ensenándola y modelándola, destacándola", "como deber solo del clero"], correct: 2 },
+    { textEn: "13. The guard this unit keeps in place is that the measure of a servant is finally:", textEs: "13. La guarda que esta unidad mantiene es que la medida de un siervo es, al final:",
+      optionsEn: ["crowd size", "faithfulness, not yield", "budget", "building size"],
+      optionsEs: ["el tamaño de la multitud", "la fidelidad, no el rendimiento", "el presupuesto", "el tamaño del edificio"], correct: 1 },
+    { textEn: "14. In our day, leaders must learn to count not only the room but also:", textEs: "14. En nuestros días, los líderes deben aprender a contar no solo el salón sino también:",
+      optionsEn: ["the parking lot", "the calendar", "the weather", "the orbit of those who watch and belong through a screen"],
+      optionsEs: ["el estacionamiento", "el calendario", "el clima", "la órbita de los que ven y pertenecen por una pantalla"], correct: 3 },
+    { textEn: "15. The single most reliable sign of life, the years have shown, is the question:", textEs: "15. La señal de vida más confiable, han mostrado los años, es la pregunta:",
+      optionsEn: ["how big is the budget?", "how old is the building?", "when did you last start something new?", "how many committees?"],
+      optionsEs: ["que tan grande es el presupuesto?", "que tan viejo es el edificio?", "cuando inicio algo nuevo por última vez?", "cuantos comites?"], correct: 2 },
+    { textEn: "16. A church can post a healthy count and still be merely:", textEs: "16. Una iglesia puede mostrar un conteo sano y aun así solo estar:",
+      optionsEn: ["trading sheep with the church down the road", "preaching too long", "singing too loud", "praying too much"],
+      optionsEs: ["intercambiando ovejas con la iglesia de al lado", "predicando muy largo", "cantando muy fuerte", "orando demasiado"], correct: 0 },
+    { textEn: "17. A hard new word in the diagnosis is that a church can have a gifted long-tenured pastor and still collapse when:", textEs: "17. Una palabra nueva y dura en el diagnóstico es que una iglesia puede tener un pastor dotado y de larga estancia y aun colapsar cuando:",
+      optionsEn: ["the music is loud", "the building is old", "the budget is small", "gift is not matched by character"],
+      optionsEs: ["la música es fuerte", "el edificio es viejo", "el presupuesto es pequeño", "el don no está a la altura del carácter"], correct: 3 },
+    { textEn: "18. The truest sign of vigor is a name on the roll that a year ago belonged to:", textEs: "18. La señal más verdadera de vigor es un nombre en la lista que hace un año pertenecía a:",
+      optionsEn: ["a wealthy family", "the choir", "no church at all", "the staff"],
+      optionsEs: ["una familia rica", "el coro", "ninguna iglesia", "el personal"], correct: 2 },
+    { textEn: "19. The most pointed diagnostic question of our moment is the targeting question turned to the mirror:", textEs: "19. La pregunta diagnóstica más aguda de nuestro momento es la pregunta de enfoque vuelta al espejo:",
+      optionsEn: ["whom have we actually reached in the past twelve months?", "what is our denomination?", "how much do we spend?", "how old is the pastor?"],
+      optionsEs: ["a quién hemos alcanzado de verdad en los últimos doce meses?", "cual es nuestra denominación?", "cuanto gastamos?", "que edad tiene el pastor?"], correct: 0 },
+    { textEn: "20. The good news to end the diagnosis is that after a long decline, attendance has, in many places:", textEs: "20. La buena noticia para cerrar el diagnóstico es que tras un largo declive, la asistencia ha, en muchos lugares:",
+      optionsEn: ["vanished", "begun to rise again", "frozen", "collapsed"],
+      optionsEs: ["desaparecido", "comenzado a subir de nuevo", "congelado", "colapsado"], correct: 1 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "Explain the diagnostic approach to a church using the physician image, and name the conviction that growth matters to God yet what He counts is disciples.",
+      textEs: "Explique el enfoque diagnóstico de una iglesia con la imagen del médico, y nombre la convicción de que el crecimiento le importa a Dios pero lo que Él cuenta son discípulos.",
+      kw_en: ["diagnos", "physician", "examine", "disciple", "decision", "health", "honest", "convict"],
+      kw_es: ["diagnost", "medic", "examin", "discipul", "decision", "salud", "honest", "conviccion"],
+      modelEn: "Like a physician, a wise leader begins with diagnosis, not cure, honestly examining the church before reaching for any remedy. Growth matters to God, but what He counts is disciples, not mere decisions, real people brought into living fellowship with Christ. A church that refuses to examine itself is flying blind.",
+      modelEs: "Como un médico, un líder sabio comienza con el diagnóstico, no con la cura, examinando honestamente la iglesia antes de tomar cualquier remedio. El crecimiento le importa a Dios, pero lo que Él cuenta son discípulos, no meras decisiones, personas reales traídas a una comunión viva con Cristo. Una iglesia que se niega a examinarse vuela a ciegas." },
+    { textEn: "List and explain the vital signs of a healthy church (the pulse).",
+      textEs: "Liste y explique las señales vitales de una iglesia sana (el pulso).",
+      kw_en: ["pastor", "laity", "mobiliz", "celebrat", "congregat", "cell", "gift", "vision"],
+      kw_es: ["pastor", "laic", "moviliz", "celebrac", "congregac", "celula", "don", "vision"],
+      modelEn: "The vital signs are a pastor who wants to reach people, leads, and stays; a mobilized laity convinced every member is gifted for ministry and putting those gifts to work; and the right balance of three sizes, celebration in corporate worship, congregation in mid-sized groups, and cell in the intimate circle where life is shared. Where these are present, life is present.",
+      modelEs: "Las señales vitales son un pastor que quiere alcanzar a la gente, dirige y permanece; un laicado movilizado convencido de que cada miembro está dotado para el ministerio y pone esos dones a obrar; y el equilibrio correcto de tres tamaños, celebración en la adoración corporativa, congregación en grupos medianos, y célula en el círculo íntimo donde se comparte la vida. Donde están presentes, hay vida." },
+    { textEn: "Give the warning signs of a plateau. State at least three of the pointed diagnostic questions.",
+      textEs: "Dé las señales de advertencia de una meseta. Exponga al menos tres de las preguntas diagnósticas agudas.",
+      kw_en: ["warning", "space", "newclass", "capital", "giving", "exciting", "plateau", "decline"],
+      kw_es: ["adverten", "espacio", "nuevaclas", "capital", "ofrend", "emocion", "meset", "declive"],
+      modelEn: "Warning signs include: how long since the church adapted its space, for fifteen years unchanged signals decline; when did you last start a new class, group, or ministry; are you accumulating capital or consuming it; is giving rising year over year; and the sharpest, what is the most exciting thing that has ever happened here, for if it lies fifteen years back the church lives on memory.",
+      modelEs: "Las señales de advertencia incluyen: cuánto hace que la iglesia adaptó su espacio, quince años sin cambio señala declive; cuándo inició por última vez una nueva clase, grupo o ministerio; está acumulando capital o consumiéndolo; sube la ofrenda año tras año; y la más aguda, qué es lo más emocionante que ha pasado aquí, pues si está quince años atrás la iglesia vive de la memoria." },
+    { textEn: "Describe the marks of a growing church (the signs of vigor). Name at least four.",
+      textEs: "Describa las marcas de una iglesia en crecimiento (las señales de vigor). Nombre al menos cuatro.",
+      kw_en: ["vision", "pastor", "program", "prayer", "relation", "urgenc", "humble", "people"],
+      kw_es: ["vision", "pastor", "programa", "oracion", "relacion", "urgenc", "humild", "person"],
+      modelEn: "Growing churches share a family resemblance: a clear short vision a member can repeat; a strong but humble pastor, a team-builder committed to stay; people ahead of programs, asking how many lives a program has changed; prayer taught and modeled, not merely mentioned; relational evangelism rather than cold calls; and a sense of urgency, working as though the harvest will not wait.",
+      modelEs: "Las iglesias en crecimiento comparten un aire de familia: una visión clara y corta que un miembro puede repetir; un pastor fuerte pero humilde, constructor de equipo comprometido a permanecer; personas antes que programas, preguntando cuántas vidas ha cambiado un programa; oración enseñada y modelada, no solo mencionada; evangelismo relacional en vez de llamadas frías; y un sentido de urgencia, trabajando como si la mies no fuera a esperar." },
+    { textEn: "Why must we now count the 'orbit' as well as the room? How does this change the old vital signs?",
+      textEs: "Por qué debemos ahora contar la 'órbita' además del salón? Cómo cambia esto las viejas señales vitales?",
+      kw_en: ["orbit", "room", "screen", "watch", "belong", "count", "reach", "online"],
+      kw_es: ["orbit", "salon", "pantalla", "observ", "pertenec", "cont", "alcanz", "linea"],
+      modelEn: "The old vital signs assumed a church measured by Sunday seats; now we must count the orbit too, the people who watch, serve, and belong through a screen as truly as through a pew. A congregation can be reaching far more than its sanctuary count suggests, and quietly losing them as well, so the honest leader learns to read both the room and the orbit.",
+      modelEs: "Las viejas señales vitales suponían una iglesia medida por los asientos del domingo; ahora debemos contar también la órbita, los que observan, sirven y pertenecen por una pantalla tan de veras como por una banca. Una congregación puede estar alcanzando mucho más de lo que sugiere el conteo del santuario, y perdiéndolos también en silencio, así que el líder honesto aprende a leer tanto el salón como la órbita." },
+    { textEn: "Why is 'when did you last start something new?' the single most reliable sign of life, and how has relational evangelism been vindicated?",
+      textEs: "Por qué es 'cuándo inició algo nuevo por última vez?' la señal de vida más confiable, y cómo ha sido vindicado el evangelismo relacional?",
+      kw_en: ["new", "start", "reliable", "relation", "cold", "vindicat", "grow", "life"],
+      kw_es: ["nuev", "inici", "confiabl", "relacion", "fri", "vindicad", "crec", "vida"],
+      modelEn: "The church that keeps starting new groups, classes, and congregations is the church that keeps growing, so when did you last start something new is the most reliable sign of life. And relational evangelism has been wholly vindicated; the whole movement has turned from dragging people into the building toward meeting them where they live. The day of the cold call is over.",
+      modelEs: "La iglesia que sigue iniciando nuevos grupos, clases y congregaciones es la que sigue creciendo, así que cuándo inició algo nuevo por última vez es la señal de vida más confiable. Y el evangelismo relacional ha sido vindicado del todo; todo el movimiento se ha vuelto de arrastrar a la gente al edificio hacia encontrarla donde vive. El día de la llamada fría terminó." },
+    { textEn: "Explain the deeper version of the old 'reaching outside your denomination' test for our day.",
+      textEs: "Explique la versión más profunda de la vieja prueba de 'alcanzar fuera de su denominación' para nuestros días.",
+      kw_en: ["denomin", "reach", "new", "swap", "sheep", "formerly", "churched", "truly"],
+      kw_es: ["denomin", "alcanz", "nuev", "intercamb", "oveja", "antes", "iglesi", "verdader"],
+      modelEn: "The old sign asked whether a church drew people from outside its denomination. The deeper question now is whether it reaches anyone genuinely new, or merely trades sheep with the church down the road, and above all whether it reaches the formerly churched, who are more open than we feared. A healthy count can be only rearranging the same believers.",
+      modelEs: "La vieja señal preguntaba si una iglesia atraía gente de fuera de su denominación. La pregunta más profunda ahora es si alcanza a alguien genuinamente nuevo, o solo intercambia ovejas con la iglesia de al lado, y sobre todo si alcanza a los que antes asistían, más abiertos de lo que temíamos. Un conteo sano puede ser solo reacomodar los mismos creyentes." },
+    { textEn: "Why must a thorough diagnosis now ask whether leadership is trustworthy, not only able? Connect to accountability.",
+      textEs: "Por qué debe un diagnóstico minucioso preguntar ahora si el liderazgo es confiable, no solo capaz? Conecte con la rendición de cuentas.",
+      kw_en: ["leader", "trustworth", "character", "collapse", "account", "gift", "able", "circle"],
+      kw_es: ["lider", "confiabl", "caracter", "colaps", "rendicion", "don", "capaz", "circulo"],
+      modelEn: "We have learned that a church can have a gifted, visionary, long-tenured pastor and still collapse when gift is not matched by character. So a thorough diagnosis asks not only whether leadership is able but whether it is trustworthy, and whether a healthy circle of accountability surrounds the leader. The lone, unaccountable leader is the figure the years have taught us to fear.",
+      modelEs: "Hemos aprendido que una iglesia puede tener un pastor dotado, visionario y de larga estancia y aun colapsar cuando el don no está a la altura del carácter. Así que un diagnóstico minucioso pregunta no solo si el liderazgo es capaz sino si es confiable, y si un círculo sano de rendición de cuentas rodea al líder. El líder solitario y sin rendir cuentas es la figura que los años nos han enseñado a temer." },
+    { textEn: "State the most pointed diagnostic question of our moment, and explain why a full room is not enough to answer it.",
+      textEs: "Exponga la pregunta diagnóstica más aguda de nuestro momento, y explique por qué un salón lleno no basta para responderla.",
+      kw_en: ["target", "mirror", "reach", "twelve", "month", "aging", "churched", "warning"],
+      kw_es: ["enfoc", "espejo", "alcanz", "doce", "mes", "enveje", "iglesi", "adverten"],
+      modelEn: "The sharpest question turns the targeting principle to the mirror: whom have we actually reached in the past twelve months? If the answer is only people exactly like ourselves, only the aging, only the already-churched, the warning light is on however full the room. A full room can be people simply staying or being swapped, not anyone genuinely new being reached.",
+      modelEs: "La pregunta más aguda vuelve el principio de enfoque al espejo: a quién hemos alcanzado de verdad en los últimos doce meses? Si la respuesta son solo personas exactamente como nosotros, solo los que envejecen, solo los que ya asisten, la luz de advertencia está encendida por lleno que esté el salón. Un salón lleno puede ser gente que solo permanece o que se intercambia, no alguien genuinamente nuevo alcanzado." },
+    { textEn: "Synthesis: Run the three readings (vital signs, warning signs, marks of vigor) on a church and show they form one examination, not three lists.",
+      textEs: "Síntesis: Aplique las tres lecturas (señales vitales, señales de advertencia, marcas de vigor) a una iglesia y muestre que forman un examen, no tres listas.",
+      kw_en: ["vital", "warning", "vigor", "examine", "life", "ebbing", "strength", "honest"],
+      kw_es: ["vital", "adverten", "vigor", "examin", "vida", "mengua", "fuerza", "honest"],
+      modelEn: "The vital signs tell whether there is life; the warning signs tell whether that life is ebbing; the marks of vigor tell what life looks like at full strength. Together they are one examination, not three lists. Run honestly on the church you actually lead, not the one you wish you led, they tell you, as a physician knows, exactly where to begin.",
+      modelEs: "Las señales vitales dicen si hay vida; las señales de advertencia dicen si esa vida mengua; las marcas de vigor dicen cómo se ve la vida en plena fuerza. Juntas son un examen, no tres listas. Aplicadas honestamente a la iglesia que realmente dirige, no a la que desearía dirigir, le dicen, como sabe un médico, exactamente por dónde empezar." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 7 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 7 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ Bloqueado. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ Locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ MC ✓ aprobado. Sección SA bloqueada. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ MC ✓ passed. SA section locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const mb = document.createElement('div');
+        mb.className = 'js-model-box';
+        mb.style.cssText = 'display:none;margin-top:10px;padding:10px 12px;background:#fbf3d5;border:1px solid #d4af37;border-radius:8px;';
+        mb.innerHTML = (currentLang === 'en'
+            ? '<strong>Model answer — study this</strong><br>' + q.modelEn
+            : '<strong>Respuesta modelo — estúdiela</strong><br>' + q.modelEs);
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                return;
+            }
+            // Smart matcher (kwHit) — matches the official grade, not raw indexOf.
+            const hitList = kws.filter(kw => kwHit(ans, kw));
+            const hits = hitList.length;
+            if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? `✓ Solid answer (${hits}/${kws.length} key concepts referenced).` : `✓ Respuesta sólida (${hits}/${kws.length} conceptos clave referenciados).`;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en'
+                    ? `✗ Need at least 3 key concepts; got ${hits}/${kws.length}. Compare your answer with the model below.`
+                    : `✗ Necesita al menos 3 conceptos clave; obtuvo ${hits}/${kws.length}. Compare su respuesta con el modelo abajo.`;
+            }
+            mb.style.display = 'block'; // reveal model answer after every check, pass or fail
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(mb);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    // Reveal every model answer after submit — the teaching is the comparison.
+    document.querySelectorAll('.js-model-box').forEach(function(e){ e.style.display = 'block'; });
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ Reprobado: ${mcScore}/20 (se requiere 18). Bloqueado 2 minutos.</span>`
+                : `<span style='color:#8a1f1f'>✗ Failed: ${mcScore}/20 (need 18). Locked 2 minutes.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ MC ✓ permanece aprobado. SA reprobada: ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min.</span>`
+                : `<span style='color:#8a1f1f'>✗ MC ✓ stays passed. SA failed: ${saScore}/10 (need 9). SA section locked 15 min.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 2 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 2 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    location.reload();
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCGReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

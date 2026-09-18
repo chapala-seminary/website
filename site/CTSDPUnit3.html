@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Doctrinal Preaching — Unit 3: Preaching the Doctrine of Revelation</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.eai { background:#eef2fa; border-left:4px solid #4f6fae; padding:12px 18px; margin:14px 0; border-radius:6px; }
+.eai strong.lbl { color:#2f3f6f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+table.method { width:100%; border-collapse:collapse; margin:18px 0; font-size:0.9rem; }
+table.method th,table.method td { border:1px solid #c5d0c5; padding:8px 10px; text-align:left; vertical-align:top; }
+table.method th { background:#e3ebe3; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 4 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Doctrinal Preaching — Unit 3: Preaching the Doctrine of Revelation</span><span class="lang-es">📖 Predicación Doctrinal — Unidad 3: Predicando la Doctrina de la Revelación</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"God... has in these last days spoken to us by His Son." — Hebrews 1:1–2 (NKJV)</span><span class="lang-es">"Dios... en estos postreros días nos ha hablado por el Hijo." — Hebreos 1:1–2 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard" style="display:none;">
+    <p><span class="lang-en">Registration carries over from Unit 1.</span><span class="lang-es">El registro se mantiene desde la Unidad 1.</span></p>
+    <input type="text" id="regName" style="display:none;" aria-label="regName"><input type="email" id="regEmail" style="display:none;" aria-label="regEmail">
+    <select id="regTrack" style="display:none;" aria-label="regTrack"><option value="certificate">c</option></select>
+    <button id="regBtn" style="display:none;"></button><div id="regStatus"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<h3>Day 1 — Why Preach Revelation First?</h3>
+<p>With Unit 3 the course turns from method to the doctrines themselves, and it begins where theology itself begins: with revelation. This order is deliberate. Before a preacher can say anything about <em>who God is</em> (Unit 4), he must settle <em>how anyone can know</em> — and the answer is that God has spoken. Revelation is the doctrine that makes every other sermon possible.</p>
+<p>So the preacher’s aim in this unit is pastoral before it is academic. The sermon on revelation must move the hearer from religion as a human search — man reaching up, guessing, hoping — to faith as a response to a God who has already spoken. The good news is not that we have found God; it is that God has made Himself known.</p>
+<div class="scripture">"God, who at various times and in various ways spoke in time past to the fathers by the prophets, has in these last days spoken to us by His Son." — Hebrews 1:1–2 (NKJV)</div>
+
+<h3>Day 2 — The Doctrinal Backbone (lean; full version in Systematic Theology Unit 1)</h3>
+<p>Hold the doctrine clearly before shaping it into a sermon. Keep it compressed — point students to ST Unit 1 for the full treatment — but they cannot preach what they cannot summarize:</p>
+<p><strong>God must take the initiative.</strong> The starting point of all theology is not man’s search for God but God’s decision to make Himself known. The finite cannot reach the Infinite; if God had stayed silent, He could not be known. <strong>General and special revelation.</strong> General revelation, through nature, history, and conscience, shows that God exists, that He is powerful, and that man is accountable — but it cannot save. So God gave special revelation: His direct, redemptive self-disclosure in the history of Israel, in Jesus Christ, and in the Bible. <strong>Scripture as Absolute Authority.</strong> Rather than only defending what the Bible is <em>not</em> (not errant, not fallible), we affirm what it <em>is</em>: the final, supreme standard for all faith and practice. Inspiration is God causing Scripture through human authors; illumination is the Spirit opening it to the believer; transmission is God preserving it through the centuries.</p>
+
+<h3>Day 3 — The Homiletical Move</h3>
+<p>Now turn the doctrine into a sermon by the method of Unit 2. <strong>Subject:</strong> the Word of God. <strong>Interrogative:</strong> “In what forms does God speak His Word?” <strong>Keyword:</strong> <em>forms</em> (a plural noun — the outline grows from it). The keyword yields five points, and — this is the whole thesis of the course — each one stands on its own text:</p>
+<table class="method">
+<tr><th>Point (keyword: <em>forms</em>)</th><th>Anchor text</th></tr>
+<tr><td><strong>1. The Living Word</strong> — Jesus Christ</td><td>John 1:14</td></tr>
+<tr><td><strong>2. The Preached (Prophetic) Word</strong> — proclamation</td><td>Romans 10:14–17</td></tr>
+<tr><td><strong>3. The Natural Word</strong> — creation</td><td>Psalm 19:1; Romans 1:19–20</td></tr>
+<tr><td><strong>4. The Written Word</strong> — the Bible</td><td>2 Timothy 3:16–17</td></tr>
+<tr><td><strong>5. The Enacted Word</strong> — baptism and the Lord’s Supper</td><td>1 Corinthians 11:26</td></tr>
+</table>
+<p>Five points, five texts, one subject. The preacher arranged them (topical, deductive), yet not one floats free of Scripture — which is exactly the answer to the charge that topical preaching is “just the preacher’s ideas.”</p>
+<p>Before fleshing out one point as a sermon, let each form be understood for what it is. These are not five competing words but five ways the one God makes Himself known.</p>
+<p><strong>1. The Living Word — Jesus Christ (John 1:14).</strong> Jesus is the living Word, the greatest revelation God ever gave of Himself. He is not one prophet among others but God’s own self-expression made flesh. Jesus said, <em>“He who has seen Me has seen the Father”</em> (John 14:9), and <em>“I and My Father are one”</em> (John 10:30). So the most perfect representation of God came into the world in the person of Jesus, the very Son of God. Every other form of the Word points to Him; He is the Word the others are about.</p>
+<p><strong>2. The Preached (Prophetic) Word — proclamation (Romans 10:14–17).</strong> God has chosen to make His Word travel through human voices. “Faith comes by hearing, and hearing by the word of God,” and “how shall they hear without a preacher?” The preacher does not invent the message; he carries it. When the Word of God is faithfully proclaimed, it is not merely a man speaking — God speaks through the proclamation, and faith is born in the hearer.</p>
+<p><strong>3. The Natural Word — creation (Psalm 19:1; Romans 1:19–20).</strong> “The heavens declare the glory of God.” Creation itself is a form of God’s Word, telling every person in every language that God is real, powerful, and worthy. This natural revelation is enough to leave the whole world <em>without excuse</em>, but it is not enough to save — it can show that God is, but it cannot, by itself, show the way to Christ. It raises the question that only special revelation answers.</p>
+<p><strong>4. The Written Word — the Bible (2 Timothy 3:16–17).</strong> “All Scripture is given by inspiration of God.” Here the revelation is fixed, permanent, and reliable; what God spoke through prophets and apostles is preserved so that every generation can return to it and find the same truth. The written Word is where we go to test every other claim, including our own preaching; it is the standard that does not move.</p>
+<p><strong>5. The Enacted Word — baptism and the Lord’s Supper (1 Corinthians 11:26).</strong> God also speaks in actions He commanded the church to perform. In baptism the gospel is pictured in water — death, burial, and resurrection; in the Lord’s Supper, “as often as you eat this bread and drink this cup, you proclaim the Lord’s death till He comes.” These are the Word made visible, preaching the same gospel to the eye that the other forms preach to the ear.</p>
+
+<h3>Day 4 — Developing a Point (E-A-I) and an Illustration Bank</h3>
+<p>A skeleton is not yet a sermon. Each point is fleshed out with <strong>Explanation</strong>, <strong>Application</strong>, and <strong>Illustration</strong>. Here is Point 1 (the Living Word, John 1:14) developed in full:</p>
+<div class="eai"><strong class="lbl">Explanation</strong> of the text. <em>“And the Word became flesh and dwelt among us.”</em> A word is how a mind expresses itself; to hear God’s Word is to meet God’s mind. And the highest form of that Word is not ink on a page but a Person: in Jesus, God’s self-expression became flesh and moved into the neighborhood.</div>
+<div class="eai"><strong class="lbl">Application</strong> of the text. So if you want to know what God is like, you look at Jesus. The hearer who finds God distant or frightening is invited to look at the face of Christ, for “he who has seen Me has seen the Father.” God is not hiding; He has come near.</div>
+<div class="eai"><strong class="lbl">Illustration.</strong> A letter can tell you a great deal about someone, but it is not the same as the person walking through the door. The other forms of the Word are God’s letters; the Living Word is God Himself walking in.</div>
+<p>The remaining four points are developed the same way. And revelation is unusually rich in illustration — use the bank:</p>
+<div class="illustration"><strong>💡 The Hotel Room:</strong> A traveler checks into a room at night; under the dim lamp it looks clean. Morning sunlight reveals the stains and dust. The room did not change — only the light did. God’s revelation does not create the truth about us; it shows what was always there. (From ST Unit 1.)</div>
+<div class="illustration"><strong>💡 The Letter and the Visit:</strong> see the Living-Word illustration above — the written word about a person versus the person arriving in the flesh.</div>
+<div class="illustration"><strong>💡 The Power of a Fragment — Dr. Nikolai Alexandrenko:</strong> At Louisiana College there was a professor I came to know, Dr. Nikolai Alexandrenko. He had grown up an atheist in the Soviet Union and served as a paratroop officer in the Russian Army in the Second World War. Captured, he was held in a Nazi prisoner-of-war camp near Munich — and it was there, in the suffering and isolation of that camp, that he came upon a scrap of paper with a passage of Scripture on it. That fragment was not enough, by itself, to make him a Christian then and there; but it was enough to move an atheist to start searching, and that search did not end until he found Christ. He gave the rest of his life to the Word that had found him — earning his doctorates, teaching Scripture for decades, and helping found a seminary in Odessa to carry it back to his own people. A single fragment of God’s Word, found in a prison camp, was enough to set a man on the road from atheism to salvation. That is the power of the Word — which is why even a portion of it must never be despised, and why the searching heart is finally satisfied only by the full revelation of God in Christ.</div>
+
+<h3>Day 5 — Craft Notes and Summary</h3>
+<p>Three cautions specific to preaching revelation. <strong>Do not preach a lecture on bibliology.</strong> The temptation is to spend the sermon on canon, manuscripts, and inspiration theories. Those belong in the lesson; the sermon aims at trust and obedience. <strong>Preach toward response.</strong> Let the doctrine’s own logic carry the arc: because God has spoken, He can be known; because He can be known, He can be trusted; because He can be trusted, He must be obeyed. That chain is the natural movement of the sermon toward the invitation. <strong>Preach it pictorially.</strong> Revelation is about a God who speaks and shows; the hotel room and the letter-versus-visit carry the truth into memory, which is the bridge to the narrative course.</p>
+<p>So Unit 3 has taken the first doctrine and run the whole method on it: a lean backbone from Systematic Theology, a subject and interrogative and keyword, five points each anchored to a text, one point developed by E-A-I, and an arc toward response. Unit 4 does the same with the doctrine of God.</p>
+<div class="scripture">"The entrance of Your words gives light." — Psalm 119:130 (NKJV)</div>
+</div>
+<div class="lang-es">
+<h3>Día 1 — ¿Por qué predicar primero la Revelación?</h3>
+<p>Con la Unidad 3 el curso pasa del método a las doctrinas mismas, y comienza donde comienza la teología misma: con la revelación. Este orden es deliberado. Antes de que un predicador pueda decir algo sobre <em>quién es Dios</em> (Unidad 4), debe resolver <em>cómo puede alguien conocerlo</em> — y la respuesta es que Dios ha hablado. La revelación es la doctrina que hace posible todo otro sermón.</p>
+<p>Así que el objetivo del predicador en esta unidad es pastoral antes que académico. El sermón sobre la revelación debe mover al oyente de la religión como búsqueda humana — el hombre estirando la mano, adivinando, esperando — a la fe como respuesta a un Dios que ya ha hablado. La buena nueva no es que hayamos encontrado a Dios; es que Dios se ha dado a conocer.</p>
+<div class="scripture">"Dios, habiendo hablado muchas veces y de muchas maneras en otro tiempo a los padres por los profetas, en estos postreros días nos ha hablado por el Hijo." — Hebreos 1:1–2 (RVG)</div>
+
+<h3>Día 2 — El fundamento doctrinal (breve; versión completa en Teología Sistemática, Unidad 1)</h3>
+<p>Sostenga la doctrina con claridad antes de darle forma de sermón. Manténgala comprimida — remita a los alumnos a la Unidad 1 de TS para el tratamiento completo — pero no pueden predicar lo que no pueden resumir:</p>
+<p><strong>Dios debe tomar la iniciativa.</strong> El punto de partida de toda teología no es la búsqueda del hombre por Dios, sino la decisión de Dios de darse a conocer. Lo finito no puede alcanzar al Infinito; si Dios hubiera callado, no podría ser conocido. <strong>Revelación general y especial.</strong> La revelación general, por la naturaleza, la historia y la conciencia, muestra que Dios existe, que es poderoso y que el hombre es responsable — pero no puede salvar. Por eso Dios dio la revelación especial: su auto-revelación directa y redentora en la historia de Israel, en Jesucristo y en la Biblia. <strong>La Escritura como Autoridad Absoluta.</strong> En lugar de solo defender lo que la Biblia <em>no</em> es (no errante, no falible), afirmamos lo que <em>es</em>: la norma final y suprema para toda fe y práctica. La inspiración es Dios causando la Escritura por medio de autores humanos; la iluminación es el Espíritu abriéndola al creyente; la transmisión es Dios preservándola a través de los siglos.</p>
+
+<h3>Día 3 — El movimiento homilético</h3>
+<p>Ahora convierta la doctrina en sermón por el método de la Unidad 2. <strong>Tema:</strong> la Palabra de Dios. <strong>Interrogativo:</strong> “¿En qué formas habla Dios su Palabra?” <strong>Palabra clave:</strong> <em>formas</em> (un sustantivo plural — de él crece el bosquejo). La palabra clave produce cinco puntos, y — esta es toda la tesis del curso — cada uno se apoya en su propio texto:</p>
+<table class="method">
+<tr><th>Punto (palabra clave: <em>formas</em>)</th><th>Texto base</th></tr>
+<tr><td><strong>1. La Palabra Viva</strong> — Jesucristo</td><td>Juan 1:14</td></tr>
+<tr><td><strong>2. La Palabra Predicada (Profética)</strong> — proclamación</td><td>Romanos 10:14–17</td></tr>
+<tr><td><strong>3. La Palabra Natural</strong> — la creación</td><td>Salmo 19:1; Romanos 1:19–20</td></tr>
+<tr><td><strong>4. La Palabra Escrita</strong> — la Biblia</td><td>2 Timoteo 3:16–17</td></tr>
+<tr><td><strong>5. La Palabra Actuada</strong> — el bautismo y la Cena del Señor</td><td>1 Corintios 11:26</td></tr>
+</table>
+<p>Cinco puntos, cinco textos, un tema. El predicador los ordenó (tópico, deductivo), y sin embargo ni uno flota libre de la Escritura — que es exactamente la respuesta a la acusación de que la predicación tópica es “solo las ideas del predicador.”</p>
+<p>Antes de desarrollar un punto como sermón, entienda cada forma por lo que es. No son cinco palabras que compiten, sino cinco maneras en que el único Dios se da a conocer.</p>
+<p><strong>1. La Palabra Viva — Jesucristo (Juan 1:14).</strong> Jesús es la Palabra viva, la mayor revelación que Dios dio jamás de Sí mismo. No es un profeta más entre otros, sino la propia expresión de Dios hecha carne. Jesús dijo: <em>“El que me ha visto a mí, ha visto al Padre”</em> (Juan 14:9), y <em>“Yo y el Padre uno somos”</em> (Juan 10:30). Así que la representación más perfecta de Dios vino al mundo en la persona de Jesús, el mismo Hijo de Dios. Toda otra forma de la Palabra apunta a Él; Él es la Palabra de la que tratan las demás.</p>
+<p><strong>2. La Palabra Predicada (Profética) — proclamación (Romanos 10:14–17).</strong> Dios ha escogido hacer viajar su Palabra por voces humanas. “La fe viene por el oír, y el oír por la palabra de Dios,” y “¿cómo oirán sin haber quién les predique?” El predicador no inventa el mensaje; lo lleva. Cuando la Palabra de Dios se proclama con fidelidad, no es solo un hombre hablando — Dios habla por medio de la proclamación, y la fe nace en el oyente.</p>
+<p><strong>3. La Palabra Natural — la creación (Salmo 19:1; Romanos 1:19–20).</strong> “Los cielos cuentan la gloria de Dios.” La creación misma es una forma de la Palabra de Dios, diciendo a cada persona en cada idioma que Dios es real, poderoso y digno. Esta revelación natural basta para dejar al mundo entero <em>sin excusa</em>, pero no basta para salvar — puede mostrar que Dios existe, pero no puede, por sí sola, mostrar el camino a Cristo. Plantea la pregunta que solo la revelación especial responde.</p>
+<p><strong>4. La Palabra Escrita — la Biblia (2 Timoteo 3:16–17).</strong> “Toda la Escritura es dada por inspiración de Dios.” Aquí la revelación es fija, permanente y confiable; lo que Dios habló por los profetas y los apóstoles se conserva para que cada generación vuelva a ella y halle la misma verdad. La Palabra escrita es a donde vamos para probar toda otra afirmación, incluida nuestra propia predicación; es la norma que no se mueve.</p>
+<p><strong>5. La Palabra Actuada — el bautismo y la Cena del Señor (1 Corintios 11:26).</strong> Dios habla también en acciones que mandó a la iglesia realizar. En el bautismo el evangelio se retrata en agua — muerte, sepultura y resurrección; en la Cena del Señor, “todas las veces que comiereis este pan, y bebiereis esta copa, la muerte del Señor anunciáis hasta que él venga.” Son la Palabra hecha visible, predicando al ojo el mismo evangelio que las otras formas predican al oído.</p>
+
+<h3>Día 4 — Desarrollando un punto (E-A-I) y un banco de ilustraciones</h3>
+<p>Un esqueleto no es aún un sermón. Cada punto se desarrolla con <strong>Explicación</strong>, <strong>Aplicación</strong> e <strong>Ilustración</strong>. He aquí el Punto 1 (la Palabra Viva, Juan 1:14) desarrollado por completo:</p>
+<div class="eai"><strong class="lbl">Explicación</strong> del texto. <em>“Y el Verbo se hizo carne y habitó entre nosotros.”</em> Una palabra es cómo una mente se expresa; oír la Palabra de Dios es encontrar la mente de Dios. Y la forma más alta de esa Palabra no es tinta sobre una página, sino una Persona: en Jesús, la auto-expresión de Dios se hizo carne y vino a vivir entre nosotros.</div>
+<div class="eai"><strong class="lbl">Aplicación</strong> del texto. Así que si quieres saber cómo es Dios, mira a Jesús. Al oyente que halla a Dios distante o temible se le invita a mirar el rostro de Cristo, porque “el que me ha visto a mí, ha visto al Padre.” Dios no se esconde; se ha acercado.</div>
+<div class="eai"><strong class="lbl">Ilustración.</strong> Una carta puede decirte mucho de alguien, pero no es lo mismo que la persona entrando por la puerta. Las otras formas de la Palabra son las cartas de Dios; la Palabra Viva es Dios mismo entrando.</div>
+<p>Los otros cuatro puntos se desarrollan igual. Y la revelación es inusualmente rica en ilustración — use el banco:</p>
+<div class="illustration"><strong>💡 La Habitación del Hotel:</strong> Un viajero se hospeda de noche; bajo la lámpara tenue la habitación parece limpia. La luz del sol por la mañana revela las manchas y el polvo. La habitación no cambió — solo cambió la luz. La revelación de Dios no crea la verdad sobre nosotros; muestra lo que siempre estuvo allí. (De la Unidad 1 de TS.)</div>
+<div class="illustration"><strong>💡 La Carta y la Visita:</strong> vea la ilustración de la Palabra Viva arriba — la palabra escrita sobre una persona frente a la persona que llega en carne.</div>
+<div class="illustration"><strong>💡 El Poder de un Fragmento — Dr. Nikolai Alexandrenko:</strong> En Louisiana College había un profesor que llegué a conocer, el Dr. Nikolai Alexandrenko. Se había criado ateo en la Unión Soviética y sirvió como oficial paracaidista en el Ejército Ruso en la Segunda Guerra Mundial. Capturado, fue recluido en un campo de prisioneros de guerra nazi cerca de Múnich — y fue allí, en el sufrimiento y el aislamiento de aquel campo, donde dio con un trozo de papel que tenía un pasaje de la Escritura. Ese fragmento no bastó, por sí solo, para hacerlo cristiano en aquel momento; pero bastó para mover a un ateo a comenzar a buscar, y esa búsqueda no terminó hasta que halló a Cristo. Dio el resto de su vida a la Palabra que lo había hallado — obteniendo sus doctorados, enseñando la Escritura por décadas, y ayudando a fundar un seminario en Odesa para llevarla de regreso a su propio pueblo. Un solo fragmento de la Palabra de Dios, hallado en un campo de prisioneros, bastó para poner a un hombre en el camino del ateísmo a la salvación. Ese es el poder de la Palabra — por lo cual ni siquiera una porción de ella debe despreciarse, y por lo cual el corazón que busca solo queda satisfecho con la revelación plena de Dios en Cristo.</div>
+
+<h3>Día 5 — Notas de oficio y resumen</h3>
+<p>Tres advertencias propias de predicar la revelación. <strong>No prediques una clase de bibliología.</strong> La tentación es gastar el sermón en el canon, los manuscritos y las teorías de inspiración. Eso pertenece a la lección; el sermón apunta a la confianza y la obediencia. <strong>Predica hacia la respuesta.</strong> Deja que la propia lógica de la doctrina lleve el arco: porque Dios ha hablado, puede ser conocido; porque puede ser conocido, puede confiarse en Él; porque puede confiarse en Él, debe ser obedecido. Esa cadena es el movimiento natural del sermón hacia la invitación. <strong>Predica de forma pictórica.</strong> La revelación trata de un Dios que habla y muestra; la habitación del hotel y la carta-frente-a-la-visita llevan la verdad a la memoria, que es el puente al curso narrativo.</p>
+<p>Así que la Unidad 3 ha tomado la primera doctrina y ha corrido todo el método sobre ella: un fundamento breve de la Teología Sistemática, un tema, un interrogativo y una palabra clave, cinco puntos cada uno anclado a un texto, un punto desarrollado por E-A-I, y un arco hacia la respuesta. La Unidad 4 hace lo mismo con la doctrina de Dios.</p>
+<div class="scripture">"La exposición de tus palabras alumbra." — Salmo 119:130 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 3 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 3 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 3;
+const COURSE = 'dp';
+const NEXT_UNIT_URL = 'CTSDPUnit4.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - What Is Doctrinal Preaching?", "Unit 2 - The Method: Text, Interrogative, Keyword", "Unit 3 - Preaching the Doctrine of Revelation", "Unit 4 - Preaching the Doctrine of God", "Unit 5 - Preaching the Doctrine of Man", "Unit 6 - Preaching the Life and Work of Christ", "Unit 7 - Preaching the Holy Spirit", "Unit 8 - Preaching the Doctrine of Salvation", "Unit 9 - Preaching the Doctrine of the Church", "Unit 10 - Preaching the Doctrine of Last Things"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSDPUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\U0001F44B ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+const regBtn = document.getElementById('regBtn');
+if (regBtn) regBtn.onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "1. Why does this course preach the doctrine of Revelation first?", "textEs": "1. ¿Por qué este curso predica primero la doctrina de la Revelación?", "optionsEn": ["Because it is the shortest doctrine", "Because tradition demands it", "Because it is the easiest doctrine", "Because how we know God must be settled before who God is"], "optionsEs": ["Porque es la doctrina más corta", "Porque la tradición lo exige", "Porque es la doctrina más fácil", "Porque cómo conocemos a Dios debe resolverse antes de quién es Dios"], "explanationEn": "Revelation comes first because it establishes how God can be known at all, the ground of every later doctrine.", "explanationEs": "La revelación va primero porque establece cómo se puede conocer a Dios, el fundamento de toda doctrina posterior.", "correct": 3}, {"textEn": "2. The preacher’s pastoral aim in a sermon on revelation is to move hearers:", "textEs": "2. El objetivo pastoral del predicador en un sermón sobre la revelación es mover a los oyentes:", "optionsEn": ["From religion as human searching to trusting a God who has spoken", "To admire the preacher’s learning", "To memorize the canon", "To win theological debates"], "optionsEs": ["De la religión como búsqueda humana a confiar en un Dios que ha hablado", "A admirar el saber del predicador", "A memorizar el canon", "A ganar debates teológicos"], "explanationEn": "The aim is to move hearers from reaching up to God toward responding to the God who has already spoken.", "explanationEs": "El objetivo es mover a los oyentes de estirarse hacia Dios a responder al Dios que ya ha hablado.", "correct": 0}, {"textEn": "3. A topical sermon on revelation remains biblical when:", "textEs": "3. Un sermón tópico sobre la revelación sigue siendo bíblico cuando:", "optionsEn": ["It is long enough", "It avoids doctrine", "It quotes the Greek", "Every point rests on its own text"], "optionsEs": ["Es bastante largo", "Evita la doctrina", "Cita el griego", "Cada punto descansa en su propio texto"], "explanationEn": "Each point standing on its own text is what keeps a topical sermon biblical.", "explanationEs": "Que cada punto descanse en su propio texto es lo que mantiene bíblico al sermón tópico.", "correct": 3}, {"textEn": "4. The subject “the Word of God” with the keyword “forms” produces a sermon that is:", "textEs": "4. El tema “la Palabra de Dios” con la palabra clave “formas” produce un sermón que es:", "optionsEn": ["Topical and deductive, yet biblical", "Textual only", "Neither biblical", "Expository and inductive"], "optionsEs": ["Tópico y deductivo, pero bíblico", "Solo textual", "Nada bíblico", "Expositivo e inductivo"], "explanationEn": "The preacher arranges the forms (topical, deductive), yet each rests on a text, so it stays biblical.", "explanationEs": "El predicador ordena las formas (tópico, deductivo), pero cada una se apoya en un texto, así que sigue bíblico.", "correct": 0}, {"textEn": "5. The Living Word is:", "textEs": "5. La Palabra Viva es:", "optionsEn": ["Creation", "Baptism", "The Bible", "Jesus Christ"], "optionsEs": ["La creación", "El bautismo", "La Biblia", "Jesucristo"], "explanationEn": "The Living Word is Jesus Christ, the Word who became flesh (John 1:14).", "explanationEs": "La Palabra Viva es Jesucristo, el Verbo que se hizo carne (Juan 1:14).", "correct": 3}, {"textEn": "6. The Written Word is:", "textEs": "6. La Palabra Escrita es:", "optionsEn": ["The Lord’s Supper", "Preaching", "The Bible", "Jesus Christ"], "optionsEs": ["La Cena del Señor", "La predicación", "La Biblia", "Jesucristo"], "explanationEn": "The Written Word is the Bible (2 Timothy 3:16–17).", "explanationEs": "La Palabra Escrita es la Biblia (2 Timoteo 3:16–17).", "correct": 2}, {"textEn": "7. The Natural Word is:", "textEs": "7. La Palabra Natural es:", "optionsEn": ["Jesus Christ", "The Bible", "God’s revelation through creation", "The sacraments"], "optionsEs": ["Jesucristo", "La Biblia", "La revelación de Dios por la creación", "Los sacramentos"], "explanationEn": "The Natural Word is God’s revelation through creation (Psalm 19:1; Romans 1:19–20).", "explanationEs": "La Palabra Natural es la revelación de Dios por la creación (Salmo 19:1; Romanos 1:19–20).", "correct": 2}, {"textEn": "8. The Enacted Word refers to:", "textEs": "8. La Palabra Actuada se refiere a:", "optionsEn": ["Creation", "The Bible", "Preaching", "Baptism and the Lord’s Supper"], "optionsEs": ["La creación", "La Biblia", "La predicación", "El bautismo y la Cena del Señor"], "explanationEn": "The Enacted Word is baptism and the Lord’s Supper, where the truth is acted out (1 Corinthians 11:26).", "explanationEs": "La Palabra Actuada es el bautismo y la Cena del Señor, donde la verdad se representa (1 Corintios 11:26).", "correct": 3}, {"textEn": "9. The Preached or Prophetic Word is:", "textEs": "9. La Palabra Predicada o Profética es:", "optionsEn": ["The Lord’s Supper", "The proclamation of God’s truth", "Creation", "The incarnation"], "optionsEs": ["La Cena del Señor", "La proclamación de la verdad de Dios", "La creación", "La encarnación"], "explanationEn": "The Preached Word is the proclamation of God’s truth (Romans 10:14–17).", "explanationEs": "La Palabra Predicada es la proclamación de la verdad de Dios (Romanos 10:14–17).", "correct": 1}, {"textEn": "10. General revelation reveals:", "textEs": "10. La revelación general revela:", "optionsEn": ["The New Testament canon", "That God exists, is powerful, and man is accountable", "The church ordinances", "The full plan of salvation"], "optionsEs": ["El canon del Nuevo Testamento", "Que Dios existe, es poderoso y el hombre es responsable", "Las ordenanzas de la iglesia", "El plan completo de salvación"], "explanationEn": "General revelation shows God exists, is powerful, and man is accountable — but not the way of salvation.", "explanationEs": "La revelación general muestra que Dios existe, es poderoso y el hombre es responsable — pero no el camino de salvación.", "correct": 1}, {"textEn": "11. General revelation gives awareness but cannot:", "textEs": "11. La revelación general da conciencia pero no puede:", "optionsEn": ["Save", "Speak through nature", "Show God’s power", "Reveal that God exists"], "optionsEs": ["Salvar", "Hablar por la naturaleza", "Mostrar el poder de Dios", "Revelar que Dios existe"], "explanationEn": "General revelation cannot save; that is why God gave special revelation.", "explanationEs": "La revelación general no puede salvar; por eso Dios dio la revelación especial.", "correct": 0}, {"textEn": "12. Special revelation is found in:", "textEs": "12. La revelación especial se encuentra en:", "optionsEn": ["Philosophy", "Nature alone", "Israel’s history, Jesus Christ, and the Bible", "Human reason"], "optionsEs": ["La filosofía", "Solo la naturaleza", "La historia de Israel, Jesucristo y la Biblia", "La razón humana"], "explanationEn": "Special revelation is God’s direct, redemptive disclosure in Israel, Christ, and Scripture.", "explanationEs": "La revelación especial es la revelación directa y redentora de Dios en Israel, Cristo y la Escritura.", "correct": 2}, {"textEn": "13. The starting point of all theology is:", "textEs": "13. El punto de partida de toda teología es:", "optionsEn": ["Philosophical proof", "God’s decision to make Himself known", "Church tradition", "Man’s search for God"], "optionsEs": ["La prueba filosófica", "La decisión de Dios de darse a conocer", "La tradición de la iglesia", "La búsqueda del hombre por Dios"], "explanationEn": "Theology begins with God’s initiative to reveal Himself, not man’s search.", "explanationEs": "La teología comienza con la iniciativa de Dios de revelarse, no con la búsqueda del hombre.", "correct": 1}, {"textEn": "14. Why must God reveal Himself for us to know Him?", "textEs": "14. ¿Por qué debe Dios revelarse para que lo conozcamos?", "optionsEn": ["Because we are too busy", "Because the finite cannot reach the Infinite", "Because God is hiding", "Because reason is enough"], "optionsEs": ["Porque estamos muy ocupados", "Porque lo finito no puede alcanzar al Infinito", "Porque Dios se esconde", "Porque la razón basta"], "explanationEn": "The finite cannot reach the Infinite; unless God speaks, He cannot be known.", "explanationEs": "Lo finito no puede alcanzar al Infinito; si Dios no habla, no puede ser conocido.", "correct": 1}, {"textEn": "15. Which term does this course prefer for Scripture’s authority?", "textEs": "15. ¿Qué término prefiere este curso para la autoridad de la Escritura?", "optionsEn": ["Inerrancy", "Tradition", "Absolute Authority", "Infallibility"], "optionsEs": ["Inerrancia", "Tradición", "Autoridad Absoluta", "Infalibilidad"], "explanationEn": "The course prefers “Absolute Authority” — a positive affirmation of what Scripture is.", "explanationEs": "El curso prefiere “Autoridad Absoluta” — una afirmación positiva de lo que la Escritura es.", "correct": 2}, {"textEn": "16. Inspiration means:", "textEs": "16. La inspiración significa:", "optionsEn": ["Scripture was copied perfectly", "The church chose the canon", "God caused Scripture while working through human authors", "The Spirit helps believers understand"], "optionsEs": ["La Escritura se copió perfectamente", "La iglesia eligió el canon", "Dios causó la Escritura obrando por medio de autores humanos", "El Espíritu ayuda a los creyentes a entender"], "explanationEn": "Inspiration is God causing Scripture while working through human authors.", "explanationEs": "La inspiración es Dios causando la Escritura mientras obra por medio de autores humanos.", "correct": 2}, {"textEn": "17. Illumination means:", "textEs": "17. La iluminación significa:", "optionsEn": ["The canon was closed", "Manuscripts were copied", "God dictated the Word", "The Holy Spirit helps believers understand the Word"], "optionsEs": ["El canon se cerró", "Se copiaron los manuscritos", "Dios dictó la Palabra", "El Espíritu Santo ayuda a los creyentes a entender la Palabra"], "explanationEn": "Illumination is the Spirit’s ongoing work helping believers understand Scripture.", "explanationEs": "La iluminación es la obra continua del Espíritu ayudando a los creyentes a entender la Escritura.", "correct": 3}, {"textEn": "18. The hotel-room illustration teaches that:", "textEs": "18. La ilustración de la habitación del hotel enseña que:", "optionsEn": ["We should travel less", "God’s light reveals what was always there; the room did not change", "Cleanliness is next to godliness", "Hotels are unclean"], "optionsEs": ["Deberíamos viajar menos", "La luz de Dios revela lo que siempre estuvo allí; la habitación no cambió", "La limpieza es casi santidad", "Los hoteles son sucios"], "explanationEn": "Like sunlight in the room, God’s revelation shows what was always true; it does not create it.", "explanationEs": "Como la luz del sol en la habitación, la revelación de Dios muestra lo que siempre fue verdad; no lo crea.", "correct": 1}, {"textEn": "19. The danger to avoid when preaching revelation is:", "textEs": "19. El peligro a evitar al predicar la revelación es:", "optionsEn": ["Turning the sermon into a lecture on bibliology", "Using any illustration", "Mentioning Jesus", "Quoting Scripture"], "optionsEs": ["Convertir el sermón en una clase de bibliología", "Usar cualquier ilustración", "Mencionar a Jesús", "Citar la Escritura"], "explanationEn": "Avoid spending the sermon on canon and inspiration theories; aim at trust and obedience.", "explanationEs": "Evita gastar el sermón en el canon y las teorías de inspiración; apunta a la confianza y la obediencia.", "correct": 0}, {"textEn": "20. The doctrine’s closing chain runs: because God has spoken, He can be known; because known, trusted; because trusted, He must be:", "textEs": "20. La cadena final de la doctrina dice: porque Dios ha hablado, puede ser conocido; conocido, se confía; y por confiarse, debe ser:", "optionsEn": ["Obeyed", "Debated", "Admired", "Studied"], "optionsEs": ["Obedecido", "Debatido", "Admirado", "Estudiado"], "explanationEn": "The chain ends in obedience: spoken → known → trusted → obeyed.", "explanationEs": "La cadena termina en obediencia: hablado → conocido → confiado → obedecido.", "correct": 0}];
+const kwQuestions = [{"textEn": "21. Why does the preacher set the doctrine of revelation before the doctrine of God? What does it establish?", "textEs": "21. ¿Por qué coloca el predicador la doctrina de la revelación antes de la doctrina de Dios? ¿Qué establece?", "kw_en": ["revelation", "first", "know", "God", "spoken", "foundation", "before", "ground"], "kw_es": ["revelaci", "primero", "conoc", "Dios", "hablado", "fundament", "antes", "base"], "modelEn": "The preacher sets revelation first because it establishes how God can be known at all, which must be settled before anything is said about who God is. The starting point of theology is not man’s search but God’s decision to make Himself known; the finite cannot reach the Infinite, so unless God has spoken, He cannot be known. Revelation is therefore the foundation and ground of every later doctrine, the reason any sermon on God, Christ, or salvation is possible. Establish that God has spoken, and every other doctrine has somewhere to stand.", "modelEs": "El predicador coloca la revelación primero porque establece cómo se puede conocer a Dios, lo cual debe resolverse antes de decir algo sobre quién es Dios. El punto de partida de la teología no es la búsqueda del hombre sino la decisión de Dios de darse a conocer; lo finito no puede alcanzar al Infinito, así que si Dios no ha hablado, no puede ser conocido. La revelación es por tanto el fundamento y la base de toda doctrina posterior, la razón de que sea posible cualquier sermón sobre Dios, Cristo o la salvación. Establece que Dios ha hablado, y toda otra doctrina tiene dónde apoyarse."}, {"textEn": "22. State the preacher’s pastoral aim in a sermon on revelation. What move should the hearer make?", "textEs": "22. Exprese el objetivo pastoral del predicador en un sermón sobre la revelación. ¿Qué movimiento debe hacer el oyente?", "kw_en": ["aim", "searching", "respond", "spoken", "trust", "faith", "hearer", "known"], "kw_es": ["objetivo", "búsqueda", "responder", "hablado", "confiar", "fe", "oyente", "conoc"], "modelEn": "The pastoral aim is to move the hearer from religion as a human search to faith as a response to a God who has already spoken. The sermon must not leave people reaching up, guessing and hoping to find God on their own; it must turn them toward the God who has taken the initiative and made Himself known. The good news the hearer should grasp is not that we have found God but that God has come near and spoken, and the right response is to trust Him. So the sermon ends not in information but in faith.", "modelEs": "El objetivo pastoral es mover al oyente de la religión como búsqueda humana a la fe como respuesta a un Dios que ya ha hablado. El sermón no debe dejar a la gente estirándose, adivinando y esperando hallar a Dios por su cuenta; debe volverla hacia el Dios que ha tomado la iniciativa y se ha dado a conocer. La buena nueva que el oyente debe captar no es que hayamos hallado a Dios, sino que Dios se ha acercado y ha hablado, y la respuesta correcta es confiar en Él. Así que el sermón termina no en información sino en fe."}, {"textEn": "23. Lay out the homiletical move for preaching revelation: subject, interrogative, keyword, and how the points stay biblical.", "textEs": "23. Exponga el movimiento homilético para predicar la revelación: tema, interrogativo, palabra clave, y cómo los puntos siguen siendo bíblicos.", "kw_en": ["subject", "interrogative", "keyword", "forms", "point", "text", "biblical", "Word"], "kw_es": ["tema", "interrogativo", "clave", "formas", "punto", "texto", "bíblic", "Palabra"], "modelEn": "The subject is the Word of God. The interrogative asked of it is, in what forms does God speak His Word? The keyword that answers is forms, a plural noun from which the outline grows. The keyword yields five points, the Living, Preached, Natural, Written, and Enacted Word, and the points stay biblical because each one rests on its own text rather than on the preacher’s opinion. The preacher arranged the forms, which makes the sermon topical and deductive, yet the sermon is still the teaching of Scripture because every point is anchored to a passage.", "modelEs": "El tema es la Palabra de Dios. El interrogativo que se le hace es: ¿en qué formas habla Dios su Palabra? La palabra clave que responde es formas, un sustantivo plural del que crece el bosquejo. La palabra clave produce cinco puntos, la Palabra Viva, Predicada, Natural, Escrita y Actuada, y los puntos siguen siendo bíblicos porque cada uno descansa en su propio texto y no en la opinión del predicador. El predicador ordenó las formas, lo que hace el sermón tópico y deductivo, y sin embargo el sermón sigue siendo la enseñanza de la Escritura porque cada punto está anclado a un pasaje."}, {"textEn": "24. Name the five forms of the Word of God and the text under each.", "textEs": "24. Nombre las cinco formas de la Palabra de Dios y el texto bajo cada una.", "kw_en": ["living", "preached", "natural", "written", "enacted", "Jesus", "creation", "Bible"], "kw_es": ["viva", "predicada", "natural", "escrita", "actuada", "Jesús", "creaci", "Biblia"], "modelEn": "The Word of God comes in five forms, each on its own text. The Living Word is Jesus Christ, who became flesh, on John 1:14. The Preached or Prophetic Word is the proclamation of God’s truth, on Romans 10:14–17. The Natural Word is God’s revelation through creation, on Psalm 19:1 and Romans 1:19–20. The Written Word is the Bible, on 2 Timothy 3:16–17. And the Enacted Word is baptism and the Lord’s Supper, where the truth is acted out, on 1 Corinthians 11:26. Five forms, five texts, one subject.", "modelEs": "La Palabra de Dios viene en cinco formas, cada una sobre su propio texto. La Palabra Viva es Jesucristo, que se hizo carne, en Juan 1:14. La Palabra Predicada o Profética es la proclamación de la verdad de Dios, en Romanos 10:14–17. La Palabra Natural es la revelación de Dios por la creación, en Salmo 19:1 y Romanos 1:19–20. La Palabra Escrita es la Biblia, en 2 Timoteo 3:16–17. Y la Palabra Actuada es el bautismo y la Cena del Señor, donde la verdad se representa, en 1 Corintios 11:26. Cinco formas, cinco textos, un tema."}, {"textEn": "25. Develop the Living Word (John 1:14) as a sermon point using Explanation, Application, and Illustration.", "textEs": "25. Desarrolle la Palabra Viva (Juan 1:14) como punto de sermón usando Explicación, Aplicación e Ilustración.", "kw_en": ["explanation", "application", "illustration", "flesh", "Jesus", "Father", "look", "near"], "kw_es": ["explicaci", "aplicaci", "ilustraci", "carne", "Jesús", "Padre", "mirar", "cerca"], "modelEn": "The Explanation of the text is that a word expresses a mind, and the Word became flesh, so in Jesus God’s own self-expression took on flesh and dwelt among us; the highest form of God’s Word is a Person. The Application is that if you want to know what God is like, you look at Jesus, for he who has seen Him has seen the Father; the hearer who finds God distant is invited to look at the face of Christ, because God has come near and is not hiding. The Illustration is that a letter tells you much about someone, but it is not the same as the person walking through the door; the other forms are God’s letters, and the Living Word is God Himself arriving in the flesh.", "modelEs": "La Explicación del texto es que una palabra expresa una mente, y el Verbo se hizo carne, así que en Jesús la propia auto-expresión de Dios tomó carne y habitó entre nosotros; la forma más alta de la Palabra de Dios es una Persona. La Aplicación es que si quieres saber cómo es Dios, miras a Jesús, porque el que lo ha visto ha visto al Padre; al oyente que halla a Dios distante se le invita a mirar el rostro de Cristo, porque Dios se ha acercado y no se esconde. La Ilustración es que una carta dice mucho de alguien, pero no es lo mismo que la persona entrando por la puerta; las otras formas son las cartas de Dios, y la Palabra Viva es Dios mismo llegando en carne."}, {"textEn": "26. Explain the difference between general and special revelation. What can each do, and what can general revelation NOT do?", "textEs": "26. Explique la diferencia entre la revelación general y la especial. ¿Qué puede hacer cada una, y qué NO puede hacer la general?", "kw_en": ["general", "special", "nature", "conscience", "save", "Christ", "accountable", "creation"], "kw_es": ["general", "especial", "naturaleza", "conciencia", "salvar", "Cristo", "responsable", "creaci"], "modelEn": "General revelation is God’s disclosure through nature, history, and conscience, available to all people; it shows that God exists, that He is powerful, and that man is accountable to Him. What it cannot do is save; it gives awareness but not the way of forgiveness. Special revelation is God’s direct, redemptive self-disclosure in the history of Israel, in the person and work of Jesus Christ, and in the Bible. Because general revelation can make people accountable but cannot bring them to salvation, God gave special revelation, which alone makes Christ and the gospel known.", "modelEs": "La revelación general es la revelación de Dios por la naturaleza, la historia y la conciencia, disponible para todos; muestra que Dios existe, que es poderoso y que el hombre es responsable ante Él. Lo que no puede hacer es salvar; da conciencia pero no el camino del perdón. La revelación especial es la auto-revelación directa y redentora de Dios en la historia de Israel, en la persona y obra de Jesucristo y en la Biblia. Porque la revelación general puede hacer responsable a la gente pero no puede llevarla a la salvación, Dios dio la revelación especial, que es la única que da a conocer a Cristo y el evangelio."}, {"textEn": "27. Why does the course prefer “Absolute Authority” over terms like inerrancy and infallibility?", "textEs": "27. ¿Por qué prefiere el curso “Autoridad Absoluta” sobre términos como inerrancia e infalibilidad?", "kw_en": ["absolute", "authority", "positive", "affirm", "negative", "standard", "practice", "submit"], "kw_es": ["absoluta", "autoridad", "positiva", "afirm", "negativo", "norma", "práctica", "somet"], "modelEn": "Terms like inerrancy and infallibility have value, but they are framed as negatives, telling us what the Bible is not, not errant and not fallible. The course prefers Absolute Authority because it is a positive affirmation of what Scripture is and how we live under it. It moves the conversation from technical debates about the mechanics of the text to the practical reality of submitting to God’s Word. To say the Bible has absolute authority is to confess that it is the final, supreme standard for all faith and practice, so that we do not stand in judgment of the Word; the Word stands in judgment of us.", "modelEs": "Términos como inerrancia e infalibilidad tienen valor, pero se expresan como negativos, diciéndonos lo que la Biblia no es, no errante y no falible. El curso prefiere Autoridad Absoluta porque es una afirmación positiva de lo que la Escritura es y de cómo vivimos bajo ella. Mueve la conversación de los debates técnicos sobre los mecanismos del texto a la realidad práctica de someterse a la Palabra de Dios. Decir que la Biblia tiene autoridad absoluta es confesar que es la norma final y suprema para toda fe y práctica, de modo que no nos paramos en juicio sobre la Palabra; la Palabra se para en juicio sobre nosotros."}, {"textEn": "28. Distinguish inspiration, illumination, and transmission.", "textEs": "28. Distinga la inspiración, la iluminación y la transmisión.", "kw_en": ["inspiration", "illumination", "transmission", "Spirit", "understand", "authors", "preserve", "canon"], "kw_es": ["inspiraci", "iluminaci", "transmisi", "Espíritu", "entender", "autores", "preserv", "canon"], "modelEn": "These three describe how God gave, opens, and keeps His Word. Inspiration is God causing Scripture to be written while working through human authors, so that the text itself is God-breathed. Illumination is the ongoing work of the Holy Spirit enabling the believer to understand and apply what was written, since knowledge alone is insufficient without the Spirit opening our eyes. Transmission is God’s preservation of His Word through the centuries by canonization, manuscript copying, and translation, so that what reaches us is reliably what He gave. Inspiration produced the Word, illumination opens it to the reader, and transmission has preserved it.", "modelEs": "Estos tres describen cómo Dios dio, abre y guarda su Palabra. La inspiración es Dios causando que la Escritura fuera escrita mientras obraba por medio de autores humanos, de modo que el texto mismo es inspirado por Dios. La iluminación es la obra continua del Espíritu Santo que capacita al creyente para entender y aplicar lo que fue escrito, pues el conocimiento por sí solo es insuficiente sin el Espíritu abriendo nuestros ojos. La transmisión es la preservación de la Palabra de Dios a través de los siglos por la canonización, la copia de manuscritos y la traducción, de modo que lo que nos llega es de fiar lo que Él dio. La inspiración produjo la Palabra, la iluminación la abre al lector, y la transmisión la ha preservado."}, {"textEn": "29. Give two cautions for preaching revelation well, and explain why the sermon should reach toward response.", "textEs": "29. Dé dos advertencias para predicar bien la revelación, y explique por qué el sermón debe alcanzar la respuesta.", "kw_en": ["lecture", "bibliology", "response", "obedience", "trust", "arc", "invitation", "pictorial"], "kw_es": ["clase", "bibliolog", "respuesta", "obediencia", "confiar", "arco", "invitaci", "pictóric"], "modelEn": "One caution is not to preach a lecture on bibliology, spending the whole sermon on canon, manuscripts, and inspiration theories; those belong in the lesson, while the sermon aims at trust and obedience. A second caution is to preach pictorially, using illustrations like the hotel room so the truth lodges in memory. The sermon should reach toward response because the doctrine’s own logic forms an arc: because God has spoken, He can be known; because known, trusted; because trusted, obeyed. That chain carries the hearer naturally to the invitation, so revelation is preached not for information but for a response of faith and obedience.", "modelEs": "Una advertencia es no predicar una clase de bibliología, gastando todo el sermón en el canon, los manuscritos y las teorías de inspiración; eso pertenece a la lección, mientras que el sermón apunta a la confianza y la obediencia. Una segunda advertencia es predicar de forma pictórica, usando ilustraciones como la habitación del hotel para que la verdad se aloje en la memoria. El sermón debe alcanzar la respuesta porque la propia lógica de la doctrina forma un arco: porque Dios ha hablado, puede ser conocido; conocido, se confía; confiado, se obedece. Esa cadena lleva al oyente naturalmente a la invitación, así que la revelación se predica no para información sino para una respuesta de fe y obediencia."}, {"textEn": "30. Summarize how Unit 3 turns the doctrine of revelation into a sermon, from backbone to arc.", "textEs": "30. Resuma cómo la Unidad 3 convierte la doctrina de la revelación en un sermón, del fundamento al arco.", "kw_en": ["backbone", "subject", "keyword", "forms", "text", "point", "response", "method"], "kw_es": ["fundament", "tema", "clave", "formas", "texto", "punto", "respuesta", "método"], "modelEn": "Unit 3 takes the first doctrine and runs the whole method on it. It begins with a lean doctrinal backbone drawn from Systematic Theology: God must take the initiative, general revelation cannot save, and Scripture is the absolute authority. Then it makes the homiletical move: the subject is the Word of God, the interrogative asks in what forms God speaks, and the keyword forms yields five points, each anchored to its own text. One point, the Living Word, is developed by Explanation, Application, and Illustration to show how flesh is put on the skeleton. Finally the sermon bends toward response along the chain spoken, known, trusted, obeyed. Backbone, method, worked example, and arc to the invitation: that is the template every doctrine unit follows.", "modelEs": "La Unidad 3 toma la primera doctrina y corre todo el método sobre ella. Comienza con un fundamento doctrinal breve sacado de la Teología Sistemática: Dios debe tomar la iniciativa, la revelación general no puede salvar, y la Escritura es la autoridad absoluta. Luego hace el movimiento homilético: el tema es la Palabra de Dios, el interrogativo pregunta en qué formas habla Dios, y la palabra clave formas produce cinco puntos, cada uno anclado a su propio texto. Un punto, la Palabra Viva, se desarrolla por Explicación, Aplicación e Ilustración para mostrar cómo se pone carne sobre el esqueleto. Finalmente el sermón se inclina hacia la respuesta por la cadena hablado, conocido, confiado, obedecido. Fundamento, método, ejemplo desarrollado y arco hacia la invitación: esa es la plantilla que sigue cada unidad de doctrina."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en la siguiente unidad arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click the next unit above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\U0001F4D6 Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\U0001F4D6 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\U0001F4D6 Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s). \u00a1Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>\U0001F4D6 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const h = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (h.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${h.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${h.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let h = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) h++; });
+        if (h >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then continue when ready.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y vuelva a intentar la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then continue when ready.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSDPReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

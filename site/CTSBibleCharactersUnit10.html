@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Characters — Unit 10</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 11 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Bible Characters — Unit 10: Samuel — The Boy Who Heard God, the Prophet Who Anointed Kings</span><span class="lang-es">📖 Personajes de la Biblia — Unidad 10: Samuel — El Niño que Oyó a Dios, el Profeta que Ungió Reyes</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Speak, for Your servant hears." — 1 Samuel 3:10 (NKJV)</span><span class="lang-es">«Habla, que tu siervo oye.» — 1 Samuel 3:10 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>When Hannah left her little son at the tabernacle in Shiloh, she could not have known what God would make of him. That boy, Samuel, would grow up to become one of the towering figures of the Old Testament — the last of the judges and the first of the great prophets, the man who would anoint Israel's first two kings, and the bridge between the chaotic days of the judges and the kingdom of David. But Samuel's greatness did not begin with power or position. It began on a quiet night, when a child answered God's call with a posture every believer must learn: "Speak, Lord, for Your servant hears." Samuel's own calling that night was a unique prophetic commission, given at a time when the word of the Lord was rare — but the humility behind his answer, a readiness to listen and obey rather than to tell God what we expect Him to say, is exactly the posture every believer needs toward the Word God has already given us.</p>
+<p><strong>Subject:</strong> Samuel — the boy who heard God, the prophet who served Him all his life.</p>
+<p><strong>Proposition:</strong> From the night God called a boy who answered "Speak, Lord," Samuel gave his whole life to hearing and obeying God's Word, calling Israel back in prayer, and anointing God's chosen kings — a prophet of integrity and obedience who bridges the judges and the kings, and whose anointing of David points to the true Anointed One, Jesus Christ.</p>
+<p>We will trace five movements in the life of Samuel.</p>
+<p>To feel the weight of Samuel's life, we must remember the times into which he was born. The book of Judges, which comes just before his story, ends with one of the saddest verses in the Bible: "everyone did what was right in his own eyes." Israel had no king, no settled leadership, and little sense of God's voice. Into that confusion and spiritual silence God placed a single boy, dedicated by a praying mother, to become the voice that would call a whole nation back. It is a pattern God loves to repeat — when things look darkest, He is often quietly preparing one faithful person through whom He will work. Samuel was that person for his generation.</p>
+<h2>I. The Boy Who Heard God</h2>
+<p>Samuel was still a boy, ministering before the Lord under old Eli, in a dark time when, the Scripture says, "the word of the LORD was rare; there was no widespread revelation." One night, as Samuel lay down, a voice called his name. Three times he ran to Eli, sure the old priest had called him; three times Eli sent him back. At last Eli perceived that it was the Lord, and he told the boy what to say.</p>
+<div class="scripture">Now the LORD came and stood and called as at other times, "Samuel! Samuel!" And Samuel answered, "Speak, for Your servant hears." (1 Samuel 3:10, NKJV)</div>
+<p>When the voice came again, Samuel answered — and God gave him his first message, a hard word of judgment against Eli's own house. Notice two things about this boy. First, he was willing to listen: he did not tell God what he wanted; he made himself a servant who would hear. And second, he was willing to obey even when the word was hard, faithfully delivering a message he would much rather not have given. Samuel's own calling that night was a unique prophetic commission; God does not call every believer to receive new revelation the way He called Samuel. But the posture behind Samuel's answer is exactly where a life with God begins for all of us — not in doing great things for Him, but in learning to be still before His written Word and say, "Speak, Lord, I am listening, and I will obey."</p>
+<p>There is something tender in the way God dealt with young Samuel. He did not overwhelm the boy with thunder; He simply called his name, the way a father wakes a child. And He was patient with Samuel's confusion, calling again and again until, with Eli's help, the boy understood. God still works this way with those who are young in the faith. He meets us where we are, speaks in ways we can begin to grasp, and is patient while we learn to recognize His voice. We need not be afraid that we are too young, too new, or too slow to hear from God. If we will simply make ourselves available and say, "Speak, Lord," He is more than willing to teach us to listen.</p>
+<h2>II. The Prophet Who Called Israel Back</h2>
+<p>Samuel grew, and all Israel from Dan to Beersheba knew that he was established as a prophet of the Lord. He found a people who had drifted into idolatry, and he called them home. "Put away the foreign gods," he said, "and prepare your hearts for the LORD and serve Him only." The people gathered at Mizpah, confessed their sin, and Samuel prayed for them; and when the Philistines attacked, God thundered against them and Israel was delivered.</p>
+<div class="scripture">Then Samuel took a stone and set it up... and called its name Ebenezer, saying, "Thus far the LORD has helped us." (1 Samuel 7:12, NKJV)</div>
+<p>Samuel named that stone Ebenezer — "stone of help" — saying, "Thus far the Lord has helped us." Samuel was a man of prayer above all else. Later he would tell the people, "Far be it from me that I should sin against the Lord in ceasing to pray for you." He understood that a leader's first work is done on his knees, and that revival comes when a people put away their idols and a man of God stands in the gap to intercede. Every believer needs an Ebenezer or two — a marked place in the memory where we can stop and say, "this far the Lord has brought me" — and the prayers of the faithful are still the engine of every true return to God.</p>
+<p>It is worth lingering on that word Ebenezer, because it captures something every believer needs. The Christian life is a long road, and it is easy to forget along the way how faithfully God has carried us. Samuel's stone was a deliberate act of memory — a way of freezing one moment of deliverance so the people would never forget it. We would do well to build a few Ebenezers of our own: to write down the answered prayer, to mark the anniversary of God's rescue, to tell our children the story of how the Lord helped us in a hard year. "Thus far the Lord has helped us" is not only a record of the past; it is fuel for faith in the present, for the God who has helped us thus far will not abandon us now.</p>
+<h2>III. The Kingmaker and the Lord's Anointed</h2>
+<p>In Samuel's old age the people came with a demand: "Give us a king to judge us like all the nations." It grieved Samuel deeply, but the Lord told him, "They have not rejected you, but they have rejected Me." So Samuel warned them of all that a king would cost them, and then, at God's direction, he anointed Saul — a tall and handsome man, every inch a king to the eye. But Saul's heart turned from obedience, and God rejected him from being king. Then God sent Samuel to Bethlehem, to the house of Jesse, to anoint a new king.</p>
+<div class="scripture">For the LORD does not see as man sees; for man looks at the outward appearance, but the LORD looks at the heart. (1 Samuel 16:7, NKJV)</div>
+<p>Jesse paraded his impressive older sons, but God chose none of them, teaching Samuel the lesson that lies at the heart of the whole Bible: the Lord does not see as man sees; man looks on the outward appearance, but the Lord looks on the heart. And so Samuel anointed the youngest, a shepherd boy named David. Samuel was the kingmaker, the prophet who poured the oil that set men apart as the Lord's anointed. So sacred was that anointing that David, even while Saul hunted him to kill him, would not lift his hand against the king, saying, "The LORD forbid that I should stretch out my hand against the LORD's anointed." What God sets apart we must learn to honor — and we must never forget that God's eyes are always on the heart, not on the appearance we work so hard to manage before men.</p>
+<p>The contrast between Saul and David is one of the great lessons of First Samuel, and Samuel stood at the center of it. Saul looked the part: he was tall, handsome, and impressive, the kind of leader people naturally follow. David, by contrast, was the forgotten youngest son, left in the fields with the sheep while his brothers were summoned. Yet God passed over the one the world admired and chose the one whose heart was right. This should both humble us and encourage us. It humbles the proud, who trust in their gifts and appearance; and it encourages the overlooked, who fear they are too ordinary to be used. God has never been limited by what impresses people. He looks past the surface to the heart, and from there He builds His kingdom.</p>
+<h2>IV. The Man of Integrity and Obedience</h2>
+<p>At the end of his life, Samuel stood before all Israel and did something few leaders would ever dare to do. He asked them to testify against him: "Whose ox have I taken? Whose donkey have I taken? Whom have I cheated? Whom have I oppressed? From whose hand have I received a bribe?" And the people answered, "You have not cheated us or oppressed us, nor have you taken anything from any man's hand." Here was a lifetime of clean hands — a man who had led a whole nation and grown rich in nothing but a clear conscience.</p>
+<div class="scripture">Behold, to obey is better than sacrifice, and to heed than the fat of rams. (1 Samuel 15:22, NKJV)</div>
+<p>And it was this same Samuel who had spoken God's piercing word to King Saul when Saul tried to cover his disobedience with religious sacrifice: "Has the LORD as great delight in burnt offerings and sacrifices, as in obeying the voice of the LORD? Behold, to obey is better than sacrifice." Samuel's whole life preached what his mouth declared — that God desires not the outward show of religion but the surrendered, obedient heart, and that those who lead His people must do so with clean hands. Integrity in his walk and obedience to God's voice: these were the marks of the man, and they are still the marks God looks for in His servants today.</p>
+<p>We should not pass over how rare and costly Samuel's integrity was. He lived in a corrupt age, surrounded by leaders who used their position for gain — even Eli's own sons had robbed the offerings and abused their office. It would have been easy for Samuel to do the same and to excuse it as the way things were done. Instead he kept his hands clean through a lifetime of public service, so that at the end he could ask a whole nation to find fault with him and hear only silence. That kind of integrity is built quietly, one honest choice at a time, long before it is ever tested in public. And it preaches a sermon all its own: a life that matches its message gives weight to every word the servant of God ever speaks.</p>
+<h2>V. The Prophet Points to the Anointed One</h2>
+<p>Samuel was prophet, judge, and intercessor, and in every one of those roles he points us beyond himself to Christ.</p>
+<div class="scripture">Yes, and all the prophets, from Samuel and those who follow, as many as have spoken, have also foretold these days. (Acts 3:24, NKJV)</div>
+<p>He spoke the word of God; Jesus is the living Word and the great Prophet to whom all the prophets pointed — indeed, the apostle Peter said that all the prophets "from Samuel" onward foretold the days of Christ. Samuel judged and delivered Israel; Jesus is the Judge and the Deliverer of all who trust Him. Samuel prayed for his people and would not cease; Jesus ever lives to make intercession for us. But the deepest connection is the oil in Samuel's hand. Samuel anointed kings, marking them as "the Lord's anointed" — yet Saul fell, and even David sinned, and every earthly anointed king proved unequal to the office. Samuel's anointing of David was a signpost pointing forward to David's greater Son, the true and final King. For the word "Messiah," and its Greek form "Christ," both mean "the Anointed One." Jesus was anointed not with a horn of oil but with the Holy Spirit — the King who never fails, the Prophet who is Himself the Word, the Priest who ever prays — and He reigns forever. So Samuel's life ends where ours must begin. The boy's posture in the night — a heart ready to hear and obey rather than to dictate what it wanted — is exactly what God still seeks from every one of us, not toward a new voice in the dark but toward the Word He has already spoken and the Anointed King He has already given. Hear His word, bow to His Anointed King, and give Him, as Samuel did, the whole of your life.</p></div>
+<div class="lang-es"><p>Cuando Ana dejó a su pequeño hijo en el tabernáculo en Silo, no pudo haber sabido lo que Dios haría de él. Aquel niño, Samuel, crecería para llegar a ser una de las figuras imponentes del Antiguo Testamento —el último de los jueces y el primero de los grandes profetas, el hombre que ungiría a los primeros dos reyes de Israel, y el puente entre los días caóticos de los jueces y el reino de David—. Pero la grandeza de Samuel no comenzó con poder ni posición. Comenzó en una noche callada, cuando un niño aprendió a decir las palabras que todo creyente debe aprender a decir: "Habla, Señor, que tu siervo oye."</p>
+<p><strong>Tema:</strong> Samuel — el niño que oyó a Dios, el profeta que le sirvió toda su vida.</p>
+<p><strong>Proposición:</strong> Desde la noche en que Dios llamó a un niño que respondió "Habla, Señor", Samuel dio toda su vida a oír la voz de Dios, llamar a Israel de vuelta en oración, y ungir a los reyes escogidos de Dios —un profeta de integridad y obediencia que une los jueces y los reyes, y cuyo ungimiento de David señala al verdadero Ungido, Jesucristo—.</p>
+<p>Trazaremos cinco movimientos en la vida de Samuel.</p>
+<p>Para sentir el peso de la vida de Samuel, debemos recordar los tiempos en que nació. El libro de los Jueces, que viene justo antes de su historia, termina con uno de los versículos más tristes de la Biblia: «cada uno hacía lo que bien le parecía.» Israel no tenía rey, ni liderazgo establecido, ni mucho sentido de la voz de Dios. En aquella confusión y silencio espiritual Dios colocó a un solo niño, dedicado por una madre que oraba, para llegar a ser la voz que llamaría a toda una nación de vuelta. Es un patrón que a Dios le encanta repetir —cuando las cosas se ven más oscuras, a menudo está preparando calladamente a una persona fiel por medio de la cual obrará—. Samuel fue esa persona para su generación.</p>
+<h2>I. El Niño que Oyó a Dios</h2>
+<p>Samuel era todavía un niño, ministrando delante de Jehová bajo el anciano Elí, en un tiempo oscuro cuando, dice la Escritura, "la palabra de Jehová escaseaba en aquellos días; no había visión con frecuencia." Una noche, mientras Samuel estaba acostado, una voz llamó su nombre. Tres veces corrió a Elí, seguro de que el anciano sacerdote lo había llamado; tres veces Elí lo devolvió. Al fin Elí entendió que era el Señor, y le dijo al niño qué responder.</p>
+<div class="scripture">Y vino Jehová y se paró, y llamó como las otras veces: ¡Samuel, Samuel! Entonces Samuel dijo: Habla, que tu siervo oye. (1 Samuel 3:10, RVG)</div>
+<p>Cuando la voz vino de nuevo, Samuel respondió —y Dios le dio su primer mensaje, una dura palabra de juicio contra la casa misma de Elí—. Note dos cosas acerca de este niño. Primero, estaba dispuesto a escuchar: no le dijo a Dios lo que él quería; se hizo un siervo que oiría. Y segundo, estaba dispuesto a obedecer aun cuando la palabra era dura, entregando fielmente un mensaje que mucho hubiera preferido no dar. El llamado propio de Samuel esa noche fue una comisión profética única; Dios no llama a cada creyente a recibir nueva revelación de la manera en que llamó a Samuel. Pero la postura detrás de la respuesta de Samuel es exactamente donde comienza una vida con Dios para todos nosotros —no en hacer grandes cosas para Él, sino en aprender a estar quieto delante de Su Palabra escrita y decir: "Habla, Señor, estoy escuchando, y obedeceré."</p>
+<p>Hay algo tierno en la manera en que Dios trató al joven Samuel. No abrumó al niño con truenos; simplemente llamó su nombre, como un padre despierta a un hijo. Y fue paciente con la confusión de Samuel, llamando una y otra vez hasta que, con la ayuda de Elí, el niño entendió. Dios todavía obra así con los que son jóvenes en la fe. Nos encuentra donde estamos, habla de maneras que podemos comenzar a captar, y es paciente mientras aprendemos a reconocer su voz. No debemos temer que somos demasiado jóvenes, demasiado nuevos o demasiado lentos para oír de Dios. Si simplemente nos ponemos a disposición y decimos: «Habla, Señor», Él está más que dispuesto a enseñarnos a escuchar.</p>
+<h2>II. El Profeta que Llamó a Israel de Vuelta</h2>
+<p>Samuel creció, y todo Israel desde Dan hasta Beerseba supo que estaba confirmado como profeta de Jehová. Halló a un pueblo que se había desviado a la idolatría, y lo llamó a casa. "Quitad los dioses ajenos," dijo, "y preparad vuestro corazón a Jehová, y servid a Él solo." El pueblo se reunió en Mizpa, confesó su pecado, y Samuel oró por ellos; y cuando los filisteos atacaron, Dios tronó contra ellos e Israel fue librado.</p>
+<div class="scripture">Tomó luego Samuel una piedra... y le puso por nombre Ebenezer, diciendo: Hasta aquí nos ayudó Jehová. (1 Samuel 7:12, RVG)</div>
+<p>Samuel llamó a aquella piedra Ebenezer —"piedra de ayuda"— diciendo: "Hasta aquí nos ayudó Jehová." Samuel era ante todo un hombre de oración. Después diría al pueblo: "Lejos sea de mí que peque contra Jehová cesando de orar por vosotros." Entendía que la primera obra de un líder se hace de rodillas, y que el avivamiento viene cuando un pueblo quita sus ídolos y un hombre de Dios se pone en la brecha para interceder. Todo creyente necesita un Ebenezer o dos —un lugar marcado en la memoria donde podamos detenernos y decir: "hasta aquí me ha traído el Señor"— y las oraciones de los fieles siguen siendo el motor de todo verdadero regreso a Dios.</p>
+<p>Vale la pena detenernos en esa palabra Ebenezer, porque capta algo que todo creyente necesita. La vida cristiana es un camino largo, y es fácil olvidar por el camino con cuánta fidelidad Dios nos ha llevado. La piedra de Samuel fue un acto deliberado de memoria —una manera de congelar un momento de liberación para que el pueblo nunca lo olvidara—. Haríamos bien en levantar algunos Ebenezer propios: escribir la oración respondida, marcar el aniversario del rescate de Dios, contar a nuestros hijos la historia de cómo el Señor nos ayudó en un año difícil. «Hasta aquí nos ayudó Jehová» no es solo un registro del pasado; es combustible para la fe en el presente, porque el Dios que nos ha ayudado hasta aquí no nos abandonará ahora.</p>
+<h2>III. El Hacedor de Reyes y el Ungido de Jehová</h2>
+<p>En la vejez de Samuel el pueblo vino con una exigencia: "Danos un rey que nos juzgue, como tienen todas las naciones." Esto entristeció profundamente a Samuel, pero Jehová le dijo: "No te han desechado a ti, sino a mí me han desechado." Así que Samuel les advirtió de todo lo que un rey les costaría, y luego, por dirección de Dios, ungió a Saúl —un hombre alto y hermoso, todo un rey a la vista—. Pero el corazón de Saúl se apartó de la obediencia, y Dios lo desechó de ser rey. Entonces Dios envió a Samuel a Belén, a la casa de Isaí, a ungir un nuevo rey.</p>
+<div class="scripture">Porque Jehová no mira lo que mira el hombre; pues el hombre mira lo que está delante de sus ojos, pero Jehová mira el corazón. (1 Samuel 16:7, RVG)</div>
+<p>Isaí hizo desfilar a sus impresionantes hijos mayores, pero Dios no escogió a ninguno de ellos, enseñándole a Samuel la lección que está en el corazón de toda la Biblia: Jehová no mira lo que mira el hombre; el hombre mira la apariencia exterior, pero Jehová mira el corazón. Y así Samuel ungió al menor, un pastor llamado David. Samuel fue el hacedor de reyes, el profeta que derramó el aceite que apartaba a los hombres como ungidos de Jehová. Tan sagrado era aquel ungimiento que David, aun mientras Saúl lo perseguía para matarlo, no levantaría su mano contra el rey, diciendo: "Guárdeme Jehová de extender mi mano contra el ungido de Jehová." Lo que Dios aparta debemos aprender a honrarlo —y nunca debemos olvidar que los ojos de Dios están siempre en el corazón, no en la apariencia que tanto nos esforzamos por manejar ante los hombres—.</p>
+<p>El contraste entre Saúl y David es una de las grandes lecciones de Primero de Samuel, y Samuel estaba en el centro de él. Saúl tenía la apariencia: era alto, hermoso e impresionante, la clase de líder que la gente naturalmente sigue. David, en cambio, era el olvidado hijo menor, dejado en el campo con las ovejas mientras sus hermanos eran convocados. Sin embargo, Dios pasó por alto al que el mundo admiraba y escogió al que tenía el corazón recto. Esto debe humillarnos y animarnos a la vez. Humilla al soberbio, que confía en sus dones y apariencia; y anima al olvidado, que teme ser demasiado común para ser usado. Dios nunca ha sido limitado por lo que impresiona a la gente. Mira más allá de la superficie al corazón, y desde allí edifica su reino.</p>
+<h2>IV. El Hombre de Integridad y Obediencia</h2>
+<p>Al final de su vida, Samuel se puso de pie delante de todo Israel e hizo algo que pocos líderes se atreverían a hacer. Les pidió que testificaran contra él: "¿De quién he tomado el buey? ¿De quién he tomado el asno? ¿A quién he calumniado? ¿A quién he agraviado? ¿De mano de quién he recibido soborno?" Y el pueblo respondió: "Nunca nos has calumniado ni agraviado, ni has tomado algo de mano de ningún hombre." Aquí había toda una vida de manos limpias —un hombre que había guiado a una nación entera y se había enriquecido en nada sino en una conciencia limpia—.</p>
+<div class="scripture">He aquí, el obedecer es mejor que los sacrificios, y el prestar atención que la grosura de los carneros. (1 Samuel 15:22, RVG)</div>
+<p>Y fue este mismo Samuel quien había dicho la penetrante palabra de Dios al rey Saúl cuando Saúl trató de cubrir su desobediencia con sacrificio religioso: "¿Se complace Jehová tanto en los holocaustos y víctimas, como en obedecer la voz de Jehová? He aquí, el obedecer es mejor que los sacrificios." Toda la vida de Samuel predicó lo que su boca declaró —que Dios no desea el espectáculo exterior de la religión sino el corazón rendido y obediente, y que los que guían a su pueblo deben hacerlo con manos limpias—. Integridad en su andar y obediencia a la voz de Dios: estas eran las marcas del hombre, y siguen siendo las marcas que Dios busca en sus siervos hoy.</p>
+<p>No debemos pasar por alto cuán rara y costosa era la integridad de Samuel. Vivió en una época corrupta, rodeado de líderes que usaban su posición para ganancia —aun los propios hijos de Elí habían robado las ofrendas y abusado de su oficio—. Le habría sido fácil a Samuel hacer lo mismo y excusarlo como la manera en que se hacían las cosas. En cambio mantuvo sus manos limpias durante toda una vida de servicio público, de modo que al final pudo pedir a una nación entera que hallara falta en él y oír solo silencio. Esa clase de integridad se edifica calladamente, una decisión honesta a la vez, mucho antes de ser probada en público. Y predica un sermón propio: una vida que concuerda con su mensaje da peso a cada palabra que el siervo de Dios pronuncia.</p>
+<h2>V. El Profeta Señala al Ungido</h2>
+<p>Samuel fue profeta, juez e intercesor, y en cada uno de esos papeles nos señala más allá de sí mismo a Cristo.</p>
+<div class="scripture">Y asimismo todos los profetas desde Samuel en adelante, cuantos han hablado, también han anunciado estos días. (Hechos 3:24, RVG)</div>
+<p>Habló la palabra de Dios; Jesús es la Palabra viva y el gran Profeta a quien todos los profetas señalaron —de hecho, el apóstol Pedro dijo que todos los profetas "desde Samuel" en adelante anunciaron los días de Cristo—. Samuel juzgó y libró a Israel; Jesús es el Juez y el Libertador de todos los que confían en Él. Samuel oró por su pueblo y no cesaría; Jesús vive siempre para interceder por nosotros. Pero la conexión más profunda es el aceite en la mano de Samuel. Samuel ungió reyes, marcándolos como "el ungido de Jehová" —pero Saúl cayó, y aun David pecó, y todo rey ungido terrenal resultó desigual al oficio—. El ungimiento de David por Samuel fue una señal que apuntaba hacia adelante al Hijo mayor de David, el verdadero y final Rey. Porque la palabra "Mesías," y su forma griega "Cristo," ambas significan "el Ungido." Jesús fue ungido no con un cuerno de aceite sino con el Espíritu Santo —el Rey que nunca falla, el Profeta que es Él mismo la Palabra, el Sacerdote que siempre ora— y Él reina para siempre. Así que la vida de Samuel termina donde la nuestra debe comenzar. La postura del niño en la noche —un corazón dispuesto a oír y obedecer en vez de dictar lo que quería— es exactamente lo que Dios todavía busca de cada uno de nosotros, no hacia una nueva voz en la oscuridad sino hacia la Palabra que Él ya ha hablado y el Rey Ungido que Él ya nos ha dado. Oye su palabra, inclínate ante su Rey Ungido, y dale, como Samuel lo hizo, la totalidad de tu vida.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 10;
+const COURSE = 'CTSBC';
+const FILE_PREFIX = 'CTSBibleCharacters';
+const NEXT_UNIT_URL = 'CTSBibleCharactersUnit11.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - Enoch — The Man Who Walked with God", "Unit 2 - Job — Faith That Holds When Everything Is Stripped Away", "Unit 3 - Abraham — Father of the Faithful, Friend of God", "Unit 4 - Rebekah — The Bride Who Said “I Will Go”", "Unit 5 - Joseph — From the Pit to the Palace, the Man Who Forgave", "Unit 6 - Moses — The Man Who Asked to See God’s Glory", "Unit 7 - Gideon — When God Wins With Few", "Unit 8 - Ruth — When Life Looks Hopeless, There Is Always Hope and God", "Unit 9 - Hannah — The Praying Mother Who Gave Her Son to God", "Unit 10 - Samuel — The Boy Who Heard God, the Prophet Who Anointed Kings", "Unit 11 - David — A Man After God's Own Heart", "Unit 12 - Elijah — The Prophet of Fire and the Still Small Voice"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [{"textEn":"1. As a boy, Samuel ministered before the Lord under the priest:","textEs":"1. De niño, Samuel ministraba delante de Jehová bajo el sacerdote:","optionsEn":["Aaron", "Eli", "Moses", "Nathan"],"optionsEs":["Aarón", "Elí", "Moisés", "Natán"],"explanationEn":"Samuel ministered before the Lord under old Eli (1 Samuel 3:1).","explanationEs":"Samuel ministraba delante de Jehová bajo el anciano Elí (1 Samuel 3:1).","correct":1},{"textEn":"2. In Samuel's day, the word of the Lord was:","textEs":"2. En los días de Samuel, la palabra de Jehová era:","optionsEn":["rare", "common", "written down", "forgotten"],"optionsEs":["escasa", "común", "escrita", "olvidada"],"explanationEn":"\"The word of the LORD was rare in those days\" (1 Samuel 3:1).","explanationEs":"«La palabra de Jehová escaseaba en aquellos días» (1 Samuel 3:1).","correct":0},{"textEn":"3. When God first called him in the night, Samuel ran to:","textEs":"3. Cuando Dios lo llamó por primera vez en la noche, Samuel corrió a:","optionsEn":["his mother", "the altar", "Eli", "the door"],"optionsEs":["su madre", "el altar", "Elí", "la puerta"],"explanationEn":"Samuel ran three times to Eli, thinking the priest had called (1 Samuel 3:5-8).","explanationEs":"Samuel corrió tres veces a Elí, pensando que el sacerdote lo había llamado (1 Samuel 3:5-8).","correct":2},{"textEn":"4. Eli taught Samuel to answer:","textEs":"4. Elí enseñó a Samuel a responder:","optionsEn":["\"Here I am\"", "\"Who is it?\"", "\"Let me sleep\"", "\"Speak, Lord, for Your servant hears\""],"optionsEs":["«Heme aquí»", "«¿Quién es?»", "«Déjame dormir»", "«Habla, Señor, que tu siervo oye»"],"explanationEn":"Eli told him to answer, \"Speak, LORD, for Your servant hears\" (1 Samuel 3:9).","explanationEs":"Elí le dijo que respondiera: «Habla, Jehová, porque tu siervo oye» (1 Samuel 3:9).","correct":3},{"textEn":"5. Samuel's first message from God was a word of judgment against:","textEs":"5. El primer mensaje de Samuel de parte de Dios fue una palabra de juicio contra:","optionsEn":["Saul", "the Philistines", "Eli's house", "Israel's army"],"optionsEs":["Saúl", "los filisteos", "la casa de Elí", "el ejército de Israel"],"explanationEn":"God's first word to Samuel was judgment on Eli's house (1 Samuel 3:11-14).","explanationEs":"La primera palabra de Dios a Samuel fue juicio sobre la casa de Elí (1 Samuel 3:11-14).","correct":2},{"textEn":"6. As a prophet, Samuel called Israel to put away their:","textEs":"6. Como profeta, Samuel llamó a Israel a quitar sus:","optionsEn":["idols (foreign gods)", "weapons", "riches", "robes"],"optionsEs":["ídolos (dioses ajenos)", "armas", "riquezas", "ropas"],"explanationEn":"\"Put away the foreign gods... and serve Him only\" (1 Samuel 7:3).","explanationEs":"«Quitad los dioses ajenos... y servid a Él solo» (1 Samuel 7:3).","correct":0},{"textEn":"7. The people gathered to repent at:","textEs":"7. El pueblo se reunió a arrepentirse en:","optionsEn":["Shiloh", "Bethel", "Gilgal", "Mizpah"],"optionsEs":["Silo", "Betel", "Gilgal", "Mizpa"],"explanationEn":"Israel gathered at Mizpah to confess and return to the Lord (1 Samuel 7:5-6).","explanationEs":"Israel se reunió en Mizpa para confesar y volver a Jehová (1 Samuel 7:5-6).","correct":3},{"textEn":"8. Samuel set up a stone named Ebenezer, meaning:","textEs":"8. Samuel levantó una piedra llamada Ebenezer, que significa:","optionsEn":["\"The Lord reigns\"", "\"Thus far the Lord has helped us\"", "\"Victory is near\"", "\"God is holy\""],"optionsEs":["«Jehová reina»", "«Hasta aquí nos ayudó Jehová»", "«La victoria está cerca»", "«Dios es santo»"],"explanationEn":"Ebenezer means \"stone of help\" — \"Thus far the LORD has helped us\" (1 Samuel 7:12).","explanationEs":"Ebenezer significa «piedra de ayuda» — «Hasta aquí nos ayudó Jehová» (1 Samuel 7:12).","correct":1},{"textEn":"9. Samuel said it would be sin for him to cease to:","textEs":"9. Samuel dijo que sería pecado para él cesar de:","optionsEn":["build the temple", "judge the people", "lead in battle", "pray for the people"],"optionsEs":["construir el templo", "juzgar al pueblo", "guiar en la batalla", "orar por el pueblo"],"explanationEn":"\"Far be it from me that I should sin... in ceasing to pray for you\" (1 Samuel 12:23).","explanationEs":"«Lejos sea de mí que peque... cesando de orar por vosotros» (1 Samuel 12:23).","correct":3},{"textEn":"10. The people demanded a king so they could be:","textEs":"10. El pueblo exigió un rey para poder ser:","optionsEn":["like all the nations", "richer", "free", "at peace"],"optionsEs":["como todas las naciones", "más ricos", "libres", "en paz"],"explanationEn":"\"Give us a king to judge us like all the nations\" (1 Samuel 8:5).","explanationEs":"«Danos un rey que nos juzgue, como todas las naciones» (1 Samuel 8:5).","correct":0},{"textEn":"11. God told Samuel that in demanding a king, the people had rejected:","textEs":"11. Dios le dijo a Samuel que al exigir un rey, el pueblo había desechado a:","optionsEn":["Samuel", "Saul", "God Himself", "the priests"],"optionsEs":["Samuel", "Saúl", "Dios mismo", "los sacerdotes"],"explanationEn":"\"They have not rejected you, but they have rejected Me\" (1 Samuel 8:7).","explanationEs":"«No te han desechado a ti, sino a mí me han desechado» (1 Samuel 8:7).","correct":2},{"textEn":"12. The first king Samuel anointed was:","textEs":"12. El primer rey que Samuel ungió fue:","optionsEn":["David", "Saul", "Jesse", "Jonathan"],"optionsEs":["David", "Saúl", "Isaí", "Jonatán"],"explanationEn":"Samuel anointed Saul as Israel's first king (1 Samuel 10:1).","explanationEs":"Samuel ungió a Saúl como el primer rey de Israel (1 Samuel 10:1).","correct":1},{"textEn":"13. When anointing the next king, Samuel learned that the Lord looks at the:","textEs":"13. Al ungir al siguiente rey, Samuel aprendió que Jehová mira el:","optionsEn":["face", "height", "heart", "hands"],"optionsEs":["rostro", "estatura", "corazón", "manos"],"explanationEn":"\"The LORD looks at the heart,\" not the outward appearance (1 Samuel 16:7).","explanationEs":"«Jehová mira el corazón», no la apariencia exterior (1 Samuel 16:7).","correct":2},{"textEn":"14. Samuel anointed as the second king a shepherd boy named:","textEs":"14. Samuel ungió como segundo rey a un pastor llamado:","optionsEn":["Solomon", "David", "Eliab", "Jonathan"],"optionsEs":["Salomón", "David", "Eliab", "Jonatán"],"explanationEn":"Samuel anointed David, the youngest son of Jesse (1 Samuel 16:12-13).","explanationEs":"Samuel ungió a David, el hijo menor de Isaí (1 Samuel 16:12-13).","correct":1},{"textEn":"15. David refused to harm Saul because Saul was the Lord's:","textEs":"15. David rehusó dañar a Saúl porque Saúl era el... de Jehová:","optionsEn":["anointed", "friend", "father", "king"],"optionsEs":["ungido", "amigo", "padre", "rey"],"explanationEn":"\"...the LORD's anointed\" — David would not lift his hand against him (1 Samuel 24:6).","explanationEs":"«...el ungido de Jehová» — David no levantaría su mano contra él (1 Samuel 24:6).","correct":0},{"textEn":"16. At the end of his life, Samuel asked whether he had ever taken a:","textEs":"16. Al final de su vida, Samuel preguntó si alguna vez había tomado un:","optionsEn":["donkey", "field", "robe", "bribe"],"optionsEs":["asno", "campo", "manto", "soborno"],"explanationEn":"\"From whose hand have I received a bribe?\" (1 Samuel 12:3).","explanationEs":"«¿De mano de quién he recibido soborno?» (1 Samuel 12:3).","correct":3},{"textEn":"17. The people testified that Samuel had:","textEs":"17. El pueblo testificó que Samuel había:","optionsEn":["grown rich", "failed them", "taken nothing (cheated no one)", "oppressed them"],"optionsEs":["se enriqueció", "les falló", "no tomado nada (a nadie defraudó)", "los oprimió"],"explanationEn":"\"You have... taken nothing from any man's hand\" (1 Samuel 12:4).","explanationEs":"«No has tomado algo de mano de ningún hombre» (1 Samuel 12:4).","correct":2},{"textEn":"18. Samuel told Saul that to obey is better than:","textEs":"18. Samuel le dijo a Saúl que obedecer es mejor que:","optionsEn":["fasting", "offerings", "prayer", "sacrifice"],"optionsEs":["ayunar", "las ofrendas", "la oración", "el sacrificio"],"explanationEn":"\"To obey is better than sacrifice\" (1 Samuel 15:22).","explanationEs":"«El obedecer es mejor que los sacrificios» (1 Samuel 15:22).","correct":3},{"textEn":"19. Samuel was the last of the judges and the first of the:","textEs":"19. Samuel fue el último de los jueces y el primero de los:","optionsEn":["kings", "prophets", "priests", "scribes"],"optionsEs":["reyes", "profetas", "sacerdotes", "escribas"],"explanationEn":"Samuel was the last judge and the first of the great prophets.","explanationEs":"Samuel fue el último juez y el primero de los grandes profetas.","correct":1},{"textEn":"20. The titles \"Messiah\" and \"Christ\" both mean:","textEs":"20. Los títulos «Mesías» y «Cristo» ambos significan:","optionsEn":["\"the Anointed One\"", "\"the Holy One\"", "\"the Son of David\"", "\"the Deliverer\""],"optionsEs":["«el Ungido»", "«el Santo»", "«el Hijo de David»", "«el Libertador»"],"explanationEn":"Both \"Messiah\" (Hebrew) and \"Christ\" (Greek) mean \"the Anointed One.\"","explanationEs":"Tanto «Mesías» (hebreo) como «Cristo» (griego) significan «el Ungido».","correct":0}];
+const kwQuestions = [{"textEn":"21. Trace the five movements of the life of Samuel.","textEs":"21. Trace los cinco movimientos de la vida de Samuel.","kw_en":["boy","voice","prophet","king","anoint","integrity","obey","christ"],"kw_es":["nino","voz","profeta","rey","ungid","integri","obedec","cristo"],"modelEn":"The life of Samuel moves through five movements. First he is the boy who heard God's voice in the night and answered, Speak, Lord. Second he is the prophet who called Israel back from idols and prayed for them at Mizpah. Third he is the kingmaker who anointed Saul and then David as the Lord's anointed. Fourth he is the man of integrity and obedience, with clean hands and a surrendered heart. And fifth, this prophet points beyond himself to Christ, the true Anointed One.","modelEs":"La vida de Samuel pasa por cinco movimientos. Primero es el niño que oyó la voz de Dios en la noche y respondió: Habla, Señor. Segundo es el profeta que llamó a Israel de vuelta de los ídolos y oró por ellos en Mizpa. Tercero es el hacedor de reyes que ungió a Saúl y luego a David como el ungido de Jehová. Cuarto es el hombre de integridad y obediencia, con manos limpias y un corazón rendido. Y quinto, este profeta señala más allá de sí mismo a Cristo, el verdadero Ungido."},{"textEn":"22. Describe how God called the boy Samuel, and what his answer teaches us.","textEs":"22. Describa cómo Dios llamó al niño Samuel, y qué nos enseña su respuesta.","kw_en":["boy","night","voice","speak","servant","hears","listen","obey"],"kw_es":["nino","noche","voz","habla","siervo","escuch","obedec","llama"],"modelEn":"God called the boy Samuel by name in the night while he ministered under Eli, at a time when God's word was rare. Three times Samuel ran to Eli, until Eli perceived it was the Lord and told him to answer. When the voice came again, Samuel said, Speak, for Your servant hears. His answer teaches us two things: to make ourselves servants who listen rather than telling God what we want, and to obey even a hard word. Samuel's calling that night was a unique prophetic commission, not a pattern of ongoing new revelation for every believer, but the posture behind it is exactly where a life with God begins: learning to be still before God's written Word and say, Speak, Lord, I am listening, and I will obey.","modelEs":"Dios llamó al niño Samuel por su nombre en la noche mientras ministraba bajo Elí, en un tiempo cuando la palabra de Dios escaseaba. Tres veces Samuel corrió a Elí, hasta que Elí entendió que era el Señor y le dijo que respondiera. Cuando la voz vino de nuevo, Samuel dijo: Habla, que tu siervo oye. Su respuesta nos enseña dos cosas: hacernos siervos que escuchan en vez de decirle a Dios lo que queremos, y obedecer aun una palabra dura. El llamado de Samuel esa noche fue una comisión profética única, no un patrón de nueva revelación continua para cada creyente, pero la postura detrás de ella es exactamente donde comienza una vida con Dios: aprender a estar quietos delante de la Palabra escrita de Dios y decir: Habla, Señor, estoy escuchando, y obedeceré."},{"textEn":"23. How did Samuel call Israel back to God, and what was the Ebenezer?","textEs":"23. ¿Cómo llamó Samuel a Israel de vuelta a Dios, y qué fue el Ebenezer?","kw_en":["idols","return","mizpah","repent","prayed","ebenezer","helped","deliver"],"kw_es":["idolatr","volver","mizpa","arrepent","interced","ebenezer","ayudado","victoria"],"modelEn":"Samuel called Israel back by telling them to put away their idols and serve the Lord only. The people gathered at Mizpah, confessed their sin, and returned, while Samuel prayed for them. When the Philistines attacked, God delivered Israel. Then Samuel set up a stone and named it Ebenezer, meaning stone of help, saying, Thus far the Lord has helped us. The Ebenezer was a marker of remembrance, a place to say that God had helped them to that point, and it reminds us that revival comes through repentance and a praying leader.","modelEs":"Samuel llamó a Israel de vuelta diciéndoles que quitaran su idolatría y sirvieran solo a Jehová. El pueblo se reunió en Mizpa, confesó su pecado y volvió, mientras Samuel intercedía por ellos. Cuando los filisteos atacaron, Dios dio la victoria a Israel. Entonces Samuel levantó una piedra y la llamó Ebenezer, que significa piedra de ayuda, diciendo: Hasta aquí nos ayudó Jehová. El Ebenezer era una señal de memoria, un lugar para decir que Dios los había ayudado hasta ese punto, y nos recuerda que el avivamiento viene por el arrepentimiento y un líder que ora."},{"textEn":"24. Why did the people want a king, and how did God respond?","textEs":"24. ¿Por qué quería el pueblo un rey, y cómo respondió Dios?","kw_en":["king","nations","demand","rejected","warned","samuel","anoint","saul"],"kw_es":["rey","naciones","exigi","rechaz","advirt","samuel","ungid","saul"],"modelEn":"The people demanded a king so they could be like all the nations around them. This grieved Samuel, but God told him that the people had not rejected Samuel but had rejected God Himself as their true King. God told Samuel to warn them of all that a king would cost them, and then to give them what they asked. So Samuel warned the people and then anointed Saul as the first king. It shows that God sometimes lets us have what we insist on, even when it is not His best for us.","modelEs":"El pueblo exigió un rey para poder ser como todas las naciones a su alrededor. Esto entristeció a Samuel, pero Dios le dijo que el pueblo no había desechado a Samuel sino que había desechado a Dios mismo como su verdadero Rey. Dios le dijo a Samuel que les advirtiera de todo lo que un rey les costaría, y luego que les diera lo que pedían. Así que Samuel advirtió al pueblo y luego ungió a Saúl como el primer rey. Muestra que Dios a veces nos deja tener lo que insistimos, aun cuando no es lo mejor de Él para nosotros."},{"textEn":"25. What did Samuel learn when he anointed David?","textEs":"25. ¿Qué aprendió Samuel cuando ungió a David?","kw_en":["bethlehem","heart","appearance","david","shepherd","chose","looks","outward"],"kw_es":["belen","corazon","apariencia","david","pastor","escog","mira","exterior"],"modelEn":"When Samuel went to Bethlehem to anoint a new king, Jesse paraded his impressive older sons, but God chose none of them. Samuel learned that the Lord does not see as man sees: man looks on the outward appearance, but the Lord looks on the heart. So Samuel anointed the youngest, a shepherd boy named David. This lesson lies at the heart of the whole Bible. God is not impressed by height or looks or the image we present; He sees and weighs the heart, and He chooses according to what He finds there.","modelEs":"Cuando Samuel fue a Belén a ungir un nuevo rey, Isaí hizo desfilar a sus impresionantes hijos mayores, pero Dios no escogió a ninguno. Samuel aprendió que Jehová no mira lo que mira el hombre: el hombre mira la apariencia exterior, pero Jehová mira el corazón. Así que Samuel ungió al menor, un pastor llamado David. Esta lección está en el corazón de toda la Biblia. Dios no se impresiona por la estatura ni el aspecto ni la imagen que presentamos; Él ve y pesa el corazón, y escoge según lo que halla allí."},{"textEn":"26. What does it mean that Samuel anointed \"the Lord's anointed\"?","textEs":"26. ¿Qué significa que Samuel ungió «al ungido de Jehová»?","kw_en":["anoint","oil","apart","sacred","david","saul","honor","hand"],"kw_es":["ungid","aceite","apartad","sagrado","david","saul","honrar","mano"],"modelEn":"Samuel poured oil on Saul and on David, marking them as the Lord's anointed, set apart by God for His purposes. This anointing was so sacred that David, even while Saul hunted him to kill him, would not lift his hand against the king, saying, The Lord forbid that I should stretch out my hand against the Lord's anointed. To be anointed was to be set apart by God, and what God sets apart we must learn to honor. The oil pointed beyond these kings to the One God would truly anoint.","modelEs":"Samuel derramó aceite sobre Saúl y sobre David, marcándolos como el ungido de Jehová, apartados por Dios para sus propósitos. Este ungimiento era tan sagrado que David, aun mientras Saúl lo perseguía para matarlo, no levantaría su mano contra el rey, diciendo: Guárdeme Jehová de extender mi mano contra el ungido de Jehová. Ser ungido era ser apartado por Dios, y lo que Dios aparta debemos aprender a honrarlo. El aceite señalaba más allá de estos reyes al Uno que Dios verdaderamente ungiría."},{"textEn":"27. How did Samuel show integrity at the end of his life?","textEs":"27. ¿Cómo mostró Samuel integridad al final de su vida?","kw_en":["integrity","ox","bribe","cheated","clean","conscience","nothing","hands"],"kw_es":["integri","buey","soborno","defraud","limpias","conciencia","nada","manos"],"modelEn":"At the end of his life Samuel stood before all Israel and asked them to testify against him: Whose ox have I taken? Whom have I cheated or oppressed? From whose hand have I taken a bribe? The people answered that he had taken nothing and cheated no one. Here was a lifetime of clean hands and a clear conscience, a man who had led a whole nation and grown rich in nothing dishonest. His integrity shows that those who lead God's people must do so with clean hands, free of greed and fraud.","modelEs":"Al final de su vida Samuel se puso delante de todo Israel y les pidió que testificaran contra él: ¿De quién he tomado el buey? ¿A quién he defraudado o agraviado? ¿De mano de quién he recibido soborno? El pueblo respondió que no había tomado nada ni defraudado a nadie. Aquí había toda una vida de manos limpias y una conciencia limpia, un hombre que había guiado a una nación entera y no se había enriquecido en nada deshonesto. Su integridad muestra que los que guían al pueblo de Dios deben hacerlo con manos limpias, libres de avaricia y fraude."},{"textEn":"28. What did Samuel mean by \"to obey is better than sacrifice\"?","textEs":"28. ¿Qué quiso decir Samuel con «obedecer es mejor que el sacrificio»?","kw_en":["obey","sacrifice","saul","disobey","religion","heart","voice","better"],"kw_es":["obedec","sacrificio","saul","desobedi","religi","corazon","voz","mejor"],"modelEn":"Samuel spoke these words to King Saul, who had disobeyed God and then tried to cover his disobedience with religious sacrifice. Samuel asked whether the Lord delights in burnt offerings as much as in obeying His voice, and declared that to obey is better than sacrifice. He meant that God desires not the outward show of religion but a surrendered, obedient heart. Going through religious motions can never make up for refusing to obey God. The Lord looks for obedience first, and obedience is the worship He truly wants.","modelEs":"Samuel dijo estas palabras al rey Saúl, que había desobedecido a Dios y luego trató de cubrir su desobediencia con sacrificio religioso. Samuel preguntó si Jehová se complace en los holocaustos tanto como en obedecer su voz, y declaró que obedecer es mejor que el sacrificio. Quiso decir que Dios no desea el espectáculo exterior de la religión sino un corazón rendido y obediente. Cumplir con los gestos religiosos nunca puede compensar el rehusar obedecer a Dios. El Señor busca primero la obediencia, y la obediencia es la adoración que verdaderamente quiere."},{"textEn":"29. Why is Samuel called the bridge from the judges to the kings?","textEs":"29. ¿Por qué se llama a Samuel el puente de los jueces a los reyes?","kw_en":["last","judges","first","prophet","anoint","kings","bridge","monarchy"],"kw_es":["samuel","jueces","primer","profeta","ungid","reyes","puente","monarqu"],"modelEn":"Samuel is called the bridge because he was the last of the judges and the first of the great prophets, standing at the turn from the days of the judges to the monarchy. He judged Israel, but it was also Samuel who anointed the kings: first Saul and then David. So he closed one era and opened another, joining the judges to the kings. He is the hinge of this part of the story, carrying God's people from the chaos of the judges into the kingdom that would lead to David and to Christ.","modelEs":"Samuel se llama el puente porque fue el último de los jueces y el primero de los grandes profetas, situado en el giro de los días de los jueces a la monarquía. Juzgó a Israel, pero también fue Samuel quien ungió a los reyes: primero a Saúl y luego a David. Así cerró una era y abrió otra, uniendo los jueces a los reyes. Es el gozne de esta parte de la historia, llevando al pueblo de Dios del caos de los jueces al reino que llevaría a David y a Cristo."},{"textEn":"30. How does Samuel point forward to Christ, the Anointed One?","textEs":"30. ¿Cómo señala Samuel hacia adelante a Cristo, el Ungido?","kw_en":["prophet","anointed","messiah","christ","king","david","word","forever"],"kw_es":["profeta","ungido","cristo","palabra","rey","david","eterno","santo"],"modelEn":"Samuel points to Christ in each of his roles. He spoke God's word, and Jesus is the living Word and the great Prophet all the prophets foretold. He judged and delivered Israel, and Jesus is the Judge and Deliverer. He prayed for his people, and Jesus ever lives to intercede. Above all, Samuel anointed kings, but every earthly anointed king failed. His anointing of David pointed to David's greater Son, for Messiah and Christ both mean the Anointed One. Jesus was anointed with the Spirit, the King who never fails and reigns forever.","modelEs":"Samuel señala a Cristo en cada uno de sus papeles. Habló la palabra de Dios, y Jesús es la Palabra viva y el gran Profeta que todos los profetas anunciaron. Juzgó y libró a Israel, y Jesús es el Juez y el Libertador. Oró por su pueblo, y Jesús vive siempre para interceder. Sobre todo, Samuel ungió reyes, pero todo rey ungido terrenal falló. Su ungimiento de David señaló al Hijo mayor de David, porque Mesías y Cristo ambos significan el Ungido. Jesús, el Santo, fue ungido con el Espíritu, el Rey que nunca falla y reina para siempre, eterno."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleCharactersReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

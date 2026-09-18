@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS The Gospel of John &mdash; Unit 5: The Light of the World</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form label { font-weight:bold; font-size:0.9rem; display:block; margin-top:8px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 6 &rarr;</span><span class="lang-es">Unidad 6 &rarr;</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">&#128214; The Gospel of John &mdash; Unit 5: The Light of the World</span><span class="lang-es">&#128214; El Evangelio de Juan &mdash; Unidad 5: La Luz del Mundo</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"I am the light of the world. He who follows Me shall not walk in darkness, but have the light of life." &mdash; John 8:12 (NKJV)</span><span class="lang-es">&#9889; "Yo soy la luz del mundo; el que me sigue, no andar&aacute; en tinieblas, mas tendr&aacute; la luz de la vida." &mdash; Juan 8:12 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard" style="display:none;">
+    <h3><span class="lang-en">Register to Begin</span><span class="lang-es">Reg&iacute;strese para comenzar</span></h3>
+    <p style="font-size:0.9rem;"><span class="lang-en">Your name and track are saved on this device and carry across every unit and every CTS course.</span><span class="lang-es">Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS.</span></p>
+    <label class="lang-en">Full name</label><label class="lang-es">Nombre completo</label>
+    <input type="text" id="regName" placeholder="..." aria-label="...">
+    <label class="lang-en">Email</label><label class="lang-es">Correo electr&oacute;nico</label>
+    <input type="email" id="regEmail" placeholder="..." aria-label="...">
+    <label class="lang-en">Track</label><label class="lang-es">Trayecto</label>
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate / Certificado</option>
+        <option value="mdiv">M.Div.</option>
+        <option value="thm">Th.M.</option>
+    </select>
+    <button id="regBtn" class="nav-btn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top:8px;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h3>Introduction &mdash; A Greater Light</h3>
+<p>The sun is one of God's great signs of His own power. It is so vast that more than a million earths could fit inside it; in its depths a furnace burns without ceasing, pouring out the energy that feeds every leaf and warms every living thing. We could not live a week without it. And yet there is a greater Light than the sun &mdash; found, if you will permit the play on the word, in another Son: the very Son of God, Jesus the Christ. He outshines the sun, for the sun lights only the world outside us, while He lights the depths of the soul. In the temple courts, with the great lamps of the Feast still in mind, He made one of the boldest claims that ever crossed human lips: <em>"I am the light of the world. He who follows Me shall not walk in darkness, but have the light of life"</em> (John 8:12). It is a claim of hope and a claim of judgment at once, and this unit traces what that Light does.</p>
+
+<h3>I. I Am the Light of the World</h3>
+<p>Notice that He does not say He will show us a light, or teach us about the light. He says, "I am the light," and then, "He who follows Me." Our Lord was never gathering a crowd of mere admirers; He was making disciples, and a disciple, by the very root of the word, is a learner, one under discipline, a student being trained in the truth by his Master. It is no accident that the first believers did not at first call themselves Christians; they called themselves followers of "the Way." They had fixed their eyes on one Light and meant to walk by it &mdash; the Light, the Way, the Truth, and the Life.</p>
+
+<h3>II. Light Dispels the Darkness</h3>
+<p>The first thing light does is expose. Light and darkness cannot share a room; strike a single match in a cellar and the dark gives way at once. So when the Light of the world walked among men, He exposed them &mdash; and they were not grateful for it. <em>"The light shines in the darkness, and the darkness did not comprehend it"</em> (John 1:5). And again: <em>"Men loved darkness rather than light, because their deeds were evil. For everyone practicing evil hates the light... lest his deeds should be exposed"</em> (John 3:19&ndash;20). The religious leaders had imagined they had God neatly figured out: keep the rules, tighten the rules, and you are righteous. But no list of rules can hold the whole will of God, and the Light revealed how far their hearts fell short. Jesus is the visible image of the invisible God; in Him the holiness we knew from the Old Testament is joined to a love and mercy we had scarcely dared to see, and He came not to abolish the Law but to fulfill it. The dark always hates that kind of exposure.</p>
+<div class="pull-quote">We do not make the light; like a mirror, we can only reflect it &mdash; yet a small reflected flame can be seen for miles.</div>
+<p>But the Light does more than expose; it also kindles. Once Christ shines into a heart, that heart becomes a reflector. On a lonely strip of sand in the Bahamas a lighthouse once burned with nothing but a small kerosene flame &mdash; yet set behind its mirrors and lenses, that little flame threw a beam twenty-five miles out to sea and steered ships safely past the reefs. We are like that. We make no light of our own; we only catch and throw back the light of Christ. So He says to those who follow Him, "You are the light of the world... let your light shine before men, that they may see your good works and glorify your Father in heaven" (Matthew 5:14&ndash;16). The disciple who walks in the Light becomes, in turn, a lamp for others still in the dark.</p>
+
+<h3>III. The Unique Son</h3>
+<p>When they objected that a man may not testify about himself, Jesus answered that He did not stand alone: He bore witness, and the Father who sent Him bore witness too, so the Law's requirement of two witnesses was met (we will meet that whole courtroom of witnesses in the next unit). For He is no ordinary son of God; He is the <em>monogenes</em>, the one unique Son. We may be adopted into God's family, but there is only one Son who shares the Father's very nature. Here is the pattern we have seen from the first chapter: from His mother He took a true humanity, and so He grew weary, He thirsted, He could die; from the Father He has wisdom and power no man ever had, so that as a boy He astonished the teachers, He knew the secret history of strangers, He healed and walked upon the sea and rose from the tomb. Fully God and fully man, in one Person. It was this claim &mdash; that He was equal with God &mdash; that turned their objection into murder in their hearts.</p>
+
+<h3>IV. Before Abraham Was, I AM</h3>
+<p>The argument rose until Jesus said the most staggering sentence in the chapter. They had boasted of Abraham; He answered that Abraham had rejoiced to see His day. "You are not yet fifty years old, and have You seen Abraham?" And then: <em>"Most assuredly, I say to you, before Abraham was, I AM"</em> (John 8:58). He did not say "before Abraham was, I was." He said <em>I AM</em> &mdash; the very name God gave Moses at the burning bush, the name of the eternal, self-existent God. In one breath He claimed to exist before Abraham and to bear the divine Name. The leaders understood Him perfectly; that is why they took up stones to throw at Him. They would not bow, so they would kill &mdash; for in their ears a carpenter had just called Himself God. They were right about the claim and wrong about the Man.</p>
+
+<h3>V. The Man Born Blind</h3>
+<p>Then John shows us the claim in action. Jesus passed a man blind from birth, and the disciples asked the question their whole world assumed: "Rabbi, who sinned, this man or his parents, that he was born blind?" They took it for granted that such suffering must be punishment for somebody's sin. Jesus swept that away: <em>"Neither this man nor his parents sinned, but that the works of God should be revealed in him"</em> (John 9:3). Not every sorrow is a sentence for sin; this blindness had been waiting all the man's life to become a stage for the works of God. "As long as I am in the world," Jesus said, "I am the light of the world" (John 9:5). Then He did a strange and tender thing: He spat on the ground, made clay, anointed the blind eyes, and sent him to wash in the pool of Siloam &mdash; a name that means <em>Sent</em>. The man went down in darkness and came up seeing. The Light of the world had given eyes to a man who had never seen, the way He had once said, "Let there be light."</p>
+
+<h3>VI. From Darkness to Light</h3>
+<p>What follows is one of the most human and almost comic scenes in the Gospel, and it traces a soul climbing out of darkness step by step. The neighbors argue over whether it is even the same man. Dragged before the Pharisees, the healed man keeps it simple: <em>"One thing I know: that though I was blind, now I see"</em> (John 9:25). They press him, and his confession grows as he speaks. First Jesus is "a man called Jesus." Then, "He is a prophet." Then, against all their threats, "If this Man were not from God, He could do nothing." They cast him out of the synagogue for it &mdash; and that is when Jesus found him and asked, "Do you believe in the Son of God?" The man answered, "Lord, I believe," <em>and he worshiped Him</em> (John 9:38). Notice the irony John builds: the man's eyes were opened in one instant at the pool, but his heart came into the light by degrees, until he fell down and worshiped. The experts, meanwhile, with two good eyes apiece, grew darker by the hour. True sight, in the end, is a matter of the heart, not the eyes.</p>
+
+<h3>VII. Those Who Say They See</h3>
+<p>Jesus drew the lesson Himself: <em>"For judgment I have come into this world, that those who do not see may see, and that those who see may be made blind"</em> (John 9:39). The Pharisees bristled: "Are we blind also?" And He gave them the most sobering word in the chapter: "If you were blind, you would have no sin; but now you say, 'We see.' Therefore your sin remains" (John 9:41). There is the whole tragedy. The beggar knew he was blind, and so he received his sight; the experts were sure they saw, and so they stayed in the dark. The Light of the world is still passing by, and the only people He cannot help are the ones who insist they need no help. So the question this unit leaves with you is simple and searching: which man are you &mdash; the one who admits his blindness and is given light, or the one who is certain he already sees? Follow the Light, and you will not walk in darkness.</p>
+
+</div>
+<div class="lang-es">
+
+<h3>Introducci&oacute;n &mdash; Una Luz mayor</h3>
+<p>El sol es una de las grandes se&ntilde;ales de Dios de su propio poder. Es tan vasto que m&aacute;s de un mill&oacute;n de tierras cabr&iacute;an dentro de &eacute;l; en sus profundidades arde un horno sin cesar, derramando la energ&iacute;a que alimenta cada hoja y calienta cada ser vivo. No podr&iacute;amos vivir una semana sin &eacute;l. Y sin embargo hay una Luz mayor que el sol &mdash; hallada, si me permite el juego de palabras, en otro Hijo: el Hijo mismo de Dios, Jes&uacute;s el Cristo. &Eacute;l supera al sol, pues el sol alumbra solo el mundo fuera de nosotros, mientras que &eacute;l alumbra lo hondo del alma. En los atrios del templo, con las grandes l&aacute;mparas de la Fiesta a&uacute;n en la mente, hizo una de las afirmaciones m&aacute;s audaces que jam&aacute;s cruzaron labios humanos: &#9889; <em>"Yo soy la luz del mundo; el que me sigue, no andar&aacute; en tinieblas, mas tendr&aacute; la luz de la vida"</em> (Juan 8:12). Es a la vez una afirmaci&oacute;n de esperanza y de juicio, y esta unidad sigue lo que esa Luz hace.</p>
+
+<h3>I. Yo soy la luz del mundo</h3>
+<p>Note que no dice que nos mostrar&aacute; una luz, ni que nos ense&ntilde;ar&aacute; acerca de la luz. Dice: "Yo soy la luz," y luego: "el que me sigue." Nuestro Se&ntilde;or nunca reun&iacute;a una multitud de meros admiradores; hac&iacute;a disc&iacute;pulos, y un disc&iacute;pulo, por la ra&iacute;z misma de la palabra, es un aprendiz, uno bajo disciplina, un estudiante entrenado en la verdad por su Maestro. No es casualidad que los primeros creyentes al principio no se llamaran cristianos; se llamaban seguidores del "Camino." Hab&iacute;an fijado los ojos en una sola Luz y se propon&iacute;an andar por ella &mdash; la Luz, el Camino, la Verdad y la Vida.</p>
+
+<h3>II. La luz disipa las tinieblas</h3>
+<p>Lo primero que hace la luz es exponer. La luz y las tinieblas no pueden compartir un cuarto; encienda un solo f&oacute;sforo en un s&oacute;tano y la oscuridad cede al instante. As&iacute; que cuando la Luz del mundo anduvo entre los hombres, los expuso &mdash; y no se lo agradecieron. &#9889; <em>"La luz resplandece en las tinieblas, y las tinieblas no la comprendieron"</em> (Juan 1:5). Y otra vez: &#9889; <em>"los hombres amaron m&aacute;s las tinieblas que la luz, porque sus obras eran malas. Porque todo aquel que hace lo malo, aborrece la luz... para que sus obras no sean reprendidas"</em> (Juan 3:19&ndash;20). Los l&iacute;deres religiosos hab&iacute;an imaginado que ten&iacute;an a Dios perfectamente entendido: guardar las reglas, apretar las reglas, y se es justo. Pero ninguna lista de reglas puede contener toda la voluntad de Dios, y la Luz revel&oacute; cu&aacute;n cortos quedaban sus corazones. Jes&uacute;s es la imagen visible del Dios invisible; en &eacute;l la santidad que conoc&iacute;amos del Antiguo Testamento se une a un amor y una misericordia que apenas hab&iacute;amos osado ver, y vino no para abolir la Ley sino para cumplirla. La oscuridad siempre odia esa clase de exposici&oacute;n.</p>
+<div class="pull-quote">No hacemos la luz; como un espejo, solo podemos reflejarla &mdash; y sin embargo una peque&ntilde;a llama reflejada puede verse a kil&oacute;metros.</div>
+<p>Pero la Luz hace m&aacute;s que exponer; tambi&eacute;n enciende. Una vez que Cristo brilla en un coraz&oacute;n, ese coraz&oacute;n se vuelve un reflector. En una solitaria franja de arena en las Bahamas un faro ard&iacute;a una vez con nada m&aacute;s que una peque&ntilde;a llama de queroseno &mdash; y sin embargo, puesta tras sus espejos y lentes, aquella llamita lanzaba un haz a cuarenta kil&oacute;metros mar adentro y gui&aacute;ba a los barcos a salvo entre los arrecifes. Nosotros somos as&iacute;. No hacemos luz propia; solo recibimos y devolvemos la luz de Cristo. Por eso dice a los que le siguen: "Vosotros sois la luz del mundo... alumbre vuestra luz delante de los hombres, para que vean vuestras buenas obras, y glorifiquen a vuestro Padre que est&aacute; en los cielos" (Mateo 5:14&ndash;16). El disc&iacute;pulo que anda en la Luz se vuelve, a su vez, una l&aacute;mpara para otros que siguen en las tinieblas.</p>
+
+<h3>III. El Hijo &uacute;nico</h3>
+<p>Cuando objetaron que un hombre no puede testificar de s&iacute; mismo, Jes&uacute;s respondi&oacute; que no estaba solo: &eacute;l daba testimonio, y el Padre que le envi&oacute; daba testimonio tambi&eacute;n, de modo que se cumpl&iacute;a el requisito de la Ley de dos testigos (encontraremos todo ese tribunal de testigos en la pr&oacute;xima unidad). Pues no es un hijo de Dios cualquiera; es el <em>monogenes</em>, el &uacute;nico Hijo. Nosotros podemos ser adoptados en la familia de Dios, pero hay un solo Hijo que comparte la naturaleza misma del Padre. Aqu&iacute; est&aacute; el patr&oacute;n que hemos visto desde el primer cap&iacute;tulo: de su madre tom&oacute; una verdadera humanidad, y as&iacute; se cans&oacute;, tuvo sed, pudo morir; del Padre tiene una sabidur&iacute;a y un poder que ning&uacute;n hombre tuvo, de modo que de ni&ntilde;o asombr&oacute; a los maestros, conoc&iacute;a la historia secreta de extra&ntilde;os, san&oacute; y camin&oacute; sobre el mar y resucit&oacute; de la tumba. Plenamente Dios y plenamente hombre, en una Persona. Fue esta afirmaci&oacute;n &mdash; que era igual a Dios &mdash; la que convirti&oacute; su objeci&oacute;n en homicidio en sus corazones.</p>
+
+<h3>IV. Antes que Abraham fuese, YO SOY</h3>
+<p>La discusi&oacute;n subi&oacute; hasta que Jes&uacute;s dijo la frase m&aacute;s asombrosa del cap&iacute;tulo. Ellos se hab&iacute;an jactado de Abraham; &eacute;l respondi&oacute; que Abraham se hab&iacute;a gozado de ver su d&iacute;a. "A&uacute;n no tienes cincuenta a&ntilde;os, &iquest;y has visto a Abraham?" Y entonces: &#9889; <em>"De cierto, de cierto os digo: Antes que Abraham fuese, yo soy"</em> (Juan 8:58). No dijo "antes que Abraham fuese, yo era." Dijo <em>YO SOY</em> &mdash; el nombre mismo que Dios dio a Mois&eacute;s en la zarza ardiente, el nombre del Dios eterno que existe por s&iacute; mismo. En un aliento afirm&oacute; existir antes de Abraham y llevar el Nombre divino. Los l&iacute;deres lo entendieron perfectamente; por eso tomaron piedras para arrojarle. No se inclinar&iacute;an, as&iacute; que matar&iacute;an &mdash; porque en sus o&iacute;dos un carpintero acababa de llamarse Dios. Acertaron en la afirmaci&oacute;n y se equivocaron en el Hombre.</p>
+
+<h3>V. El hombre ciego de nacimiento</h3>
+<p>Entonces Juan nos muestra la afirmaci&oacute;n en acci&oacute;n. Jes&uacute;s pas&oacute; junto a un hombre ciego de nacimiento, y los disc&iacute;pulos hicieron la pregunta que todo su mundo daba por sentada: "Rab&iacute;, &iquest;qui&eacute;n pec&oacute;, &eacute;ste o sus padres, para que naciese ciego?" Daban por hecho que tal sufrimiento deb&iacute;a ser castigo por el pecado de alguien. Jes&uacute;s lo barri&oacute;: &#9889; <em>"No es que pec&oacute; &eacute;ste, ni sus padres; sino para que las obras de Dios se manifiesten en &eacute;l"</em> (Juan 9:3). No todo dolor es sentencia por pecado; esta ceguera hab&iacute;a esperado toda la vida del hombre para volverse un escenario de las obras de Dios. "Entre tanto que estoy en el mundo," dijo Jes&uacute;s, "luz soy del mundo" (Juan 9:5). Luego hizo algo extra&ntilde;o y tierno: escupi&oacute; en tierra, hizo lodo, ungi&oacute; los ojos ciegos, y le envi&oacute; a lavarse al estanque de Silo&eacute; &mdash; nombre que significa <em>Enviado</em>. El hombre baj&oacute; en tinieblas y subi&oacute; viendo. La Luz del mundo hab&iacute;a dado ojos a un hombre que nunca hab&iacute;a visto, como una vez hab&iacute;a dicho: "Sea la luz."</p>
+
+<h3>VI. De las tinieblas a la luz</h3>
+<p>Lo que sigue es una de las escenas m&aacute;s humanas y casi c&oacute;micas del Evangelio, y traza un alma saliendo de las tinieblas paso a paso. Los vecinos discuten si es siquiera el mismo hombre. Llevado ante los fariseos, el sanado lo mantiene sencillo: &#9889; <em>"una cosa s&eacute;: que habiendo yo sido ciego, ahora veo"</em> (Juan 9:25). Le presionan, y su confesi&oacute;n crece mientras habla. Primero Jes&uacute;s es "un hombre llamado Jes&uacute;s." Luego, "es un profeta." Luego, contra todas sus amenazas, "si &eacute;ste no fuera de Dios, nada podr&iacute;a hacer." Le echaron de la sinagoga por ello &mdash; y entonces Jes&uacute;s lo hall&oacute; y le pregunt&oacute;: "&iquest;Crees t&uacute; en el Hijo de Dios?" El hombre respondi&oacute;: "Creo, Se&ntilde;or," <em>y le ador&oacute;</em> (Juan 9:38). Note la iron&iacute;a que Juan construye: los ojos del hombre se abrieron en un instante en el estanque, pero su coraz&oacute;n entr&oacute; en la luz por grados, hasta que cay&oacute; y le ador&oacute;. Los expertos, en cambio, con dos buenos ojos cada uno, se volv&iacute;an m&aacute;s oscuros a cada hora. La verdadera vista, al final, es cuesti&oacute;n del coraz&oacute;n, no de los ojos.</p>
+
+<h3>VII. Los que dicen que ven</h3>
+<p>Jes&uacute;s mismo sac&oacute; la lecci&oacute;n: &#9889; <em>"Para juicio he venido yo a este mundo; para que los que no ven, vean; y los que ven, sean cegados"</em> (Juan 9:39). Los fariseos se erizaron: "&iquest;Acaso nosotros somos tambi&eacute;n ciegos?" Y &eacute;l les dio la palabra m&aacute;s solemne del cap&iacute;tulo: "Si fuerais ciegos, no tendr&iacute;ais pecado; mas ahora, porque dec&iacute;s: Vemos, vuestro pecado permanece" (Juan 9:41). Ah&iacute; est&aacute; toda la tragedia. El mendigo sab&iacute;a que era ciego, y por eso recibi&oacute; la vista; los expertos estaban seguros de que ve&iacute;an, y por eso se quedaron en la oscuridad. La Luz del mundo sigue pasando, y las &uacute;nicas personas a quienes no puede ayudar son las que insisten en que no necesitan ayuda. As&iacute; que la pregunta que esta unidad le deja es sencilla y penetrante: &iquest;cu&aacute;l hombre es usted &mdash; el que admite su ceguera y recibe luz, o el que est&aacute; seguro de que ya ve? Siga la Luz, y no andar&aacute; en tinieblas.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La secci&oacute;n de respuesta corta es pr&aacute;ctica para el Certificado y no cuenta en su contra.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 5;
+const COURSE = 'john';
+const NEXT_UNIT_URL = 'CTSJohnUnit6.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Word Made Flesh", "Unit 2 - You Must Be Born Again", "Unit 3 - Living Water", "Unit 4 - The Bread of Life", "Unit 5 - The Light of the World", "Unit 6 - The Witnesses to Christ", "Unit 7 - The Door and the Good Shepherd", "Unit 8 - The Resurrection and the Life", "Unit 9 - The Hour of Glory", "Unit 10 - The Way, the Truth, and the Life", "Unit 11 - The Spirit and the High-Priestly Prayer", "Unit 12 - It Is Finished"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSJohnUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    } else {
+        document.getElementById('studentGreeting').innerHTML = '<a href="CTSJohnUnit1.html" style="color:#8a1f1f;">Please register on Unit 1 / Reg&iacute;strese en la Unidad 1</a>';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields. / Por favor complete todos los campos.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered! / \u00a1Registrado!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "Cook's opening sun illustration teaches that:", "textEs": "La ilustración inicial del sol de Cook enseña que:", "optionsEn": ["the sun is unimportant", "light is only physical", "the sun should be worshiped", "Jesus, the Son, is a greater Light than the sun, lighting the soul"], "optionsEs": ["el sol no tiene importancia", "la luz es solo física", "se debe adorar al sol", "Jesús, el Hijo, es una Luz mayor que el sol, que alumbra el alma"], "explanationEn": "The sun lights the world outside us; the Son lights the depths of the soul — a greater Light.", "explanationEs": "El sol alumbra el mundo fuera de nosotros; el Hijo alumbra lo hondo del alma — una Luz mayor.", "correct": 3}, {"textEn": "\"I am the light of the world. He who follows Me shall not walk in darkness, but have ___\" (John 8:12).", "textEs": "\"Yo soy la luz del mundo; el que me sigue, no andará en tinieblas, mas tendrá ___\" (Juan 8:12).", "optionsEn": ["the light of life", "an easy road", "the law", "great riches"], "optionsEs": ["la luz de la vida", "un camino fácil", "la ley", "grandes riquezas"], "explanationEn": "He does not merely show a light; He is the Light, and following Him is walking in life.", "explanationEs": "No solo muestra una luz; él es la Luz, y seguirle es andar en la vida.", "correct": 0}, {"textEn": "A \"disciple,\" by the root of the word, is:", "textEs": "Un \"discípulo,\" por la raíz de la palabra, es:", "optionsEn": ["a learner under discipline, trained by the Master", "a temple official", "a paid worker", "a casual admirer"], "optionsEs": ["un aprendiz bajo disciplina, entrenado por el Maestro", "un oficial del templo", "un trabajador pagado", "un admirador casual"], "explanationEn": "Jesus made disciples, not camp followers; the first believers called themselves followers of \"the Way.\"", "explanationEs": "Jesús hizo discípulos, no seguidores de ocasión; los primeros creyentes se llamaban del \"Camino.\"", "correct": 0}, {"textEn": "The first effect of the Light is that it:", "textEs": "El primer efecto de la Luz es que:", "optionsEn": ["hides our faults", "keeps us comfortable", "rewards the rich", "exposes the darkness"], "optionsEs": ["esconde nuestras faltas", "nos mantiene cómodos", "premia a los ricos", "expone las tinieblas"], "explanationEn": "Light and darkness cannot share a room; the Light exposed the leaders, and they hated it (John 3:19–20).", "explanationEs": "La luz y las tinieblas no comparten un cuarto; la Luz expuso a los líderes, y la odiaron (Juan 3:19–20).", "correct": 3}, {"textEn": "According to John 3:19–20, men loved darkness rather than light because:", "textEs": "Según Juan 3:19–20, los hombres amaron las tinieblas más que la luz porque:", "optionsEn": ["they preferred the night", "they were uneducated", "the light was too bright", "their deeds were evil and they feared exposure"], "optionsEs": ["preferían la noche", "eran ignorantes", "la luz era muy brillante", "sus obras eran malas y temían ser expuestos"], "explanationEn": "Everyone practicing evil hates the light lest his deeds be exposed.", "explanationEs": "Todo el que hace lo malo aborrece la luz para que sus obras no sean reprendidas.", "correct": 3}, {"textEn": "Cook says the religious leaders had reduced God to:", "textEs": "Cook dice que los líderes religiosos habían reducido a Dios a:", "optionsEn": ["a set of rules they could keep and tighten", "a national symbol", "a distant force", "an unknowable mystery"], "optionsEs": ["un conjunto de reglas que podían guardar y apretar", "un símbolo nacional", "una fuerza lejana", "un misterio incognoscible"], "explanationEn": "No list of rules can hold the whole will of God; the Light revealed how far their hearts fell short.", "explanationEs": "Ninguna lista de reglas contiene toda la voluntad de Dios; la Luz reveló cuán cortos quedaban sus corazones.", "correct": 0}, {"textEn": "When challenged that He testified about Himself, Jesus said His second witness was:", "textEs": "Cuando le objetaron que testificaba de sí mismo, Jesús dijo que su segundo testigo era:", "optionsEn": ["Moses", "the Pharisees", "the Father who sent Him", "the crowd"], "optionsEs": ["Moisés", "los fariseos", "el Padre que le envió", "la multitud"], "explanationEn": "He did not stand alone; the Law required two witnesses, and the Father testified with Him.", "explanationEs": "No estaba solo; la Ley requería dos testigos, y el Padre testificaba con él.", "correct": 2}, {"textEn": "To call Jesus the \"monogenes\" Son means He is:", "textEs": "Llamar a Jesús el Hijo \"monogenes\" significa que es:", "optionsEn": ["a created being", "the one unique Son who shares the Father's nature", "an adopted son", "one son among many"], "optionsEs": ["un ser creado", "el único Hijo que comparte la naturaleza del Padre", "un hijo adoptivo", "un hijo entre muchos"], "explanationEn": "We may be adopted into God's family, but there is only one unique Son who shares the Father's very nature.", "explanationEs": "Podemos ser adoptados en la familia de Dios, pero hay un solo Hijo único que comparte la naturaleza misma del Padre.", "correct": 1}, {"textEn": "From His mother Jesus took a true humanity, so that He:", "textEs": "De su madre Jesús tomó una verdadera humanidad, de modo que:", "optionsEn": ["could not be tempted", "grew weary, thirsted, and could die", "felt no pain", "never slept"], "optionsEs": ["no podía ser tentado", "se cansó, tuvo sed y podía morir", "no sentía dolor", "nunca dormía"], "explanationEn": "Fully man (weary, thirsty, mortal) and fully God (wisdom, knowledge, power) in one Person.", "explanationEs": "Plenamente hombre (cansado, sediento, mortal) y plenamente Dios (sabiduría, conocimiento, poder) en una Persona.", "correct": 1}, {"textEn": "\"Before Abraham was, ___\" (John 8:58).", "textEs": "\"Antes que Abraham fuese, ___\" (Juan 8:58).", "optionsEn": ["I AM", "I was born", "I was chosen", "I will come"], "optionsEs": ["yo soy", "yo nací", "yo fui escogido", "yo vendré"], "explanationEn": "Not 'I was' but 'I AM' — the divine name from the burning bush; He claimed eternal, self-existent deity.", "explanationEs": "No 'yo era' sino 'yo soy' — el nombre divino de la zarza; reclamó la deidad eterna que existe por sí misma.", "correct": 0}, {"textEn": "How did the leaders respond to \"before Abraham was, I AM\"?", "textEs": "¿Cómo respondieron los líderes a \"antes que Abraham fuese, yo soy\"?", "optionsEn": ["they took up stones to kill Him", "they asked for time", "they applauded", "they bowed"], "optionsEs": ["tomaron piedras para matarle", "pidieron tiempo", "aplaudieron", "se inclinaron"], "explanationEn": "They understood the claim perfectly — a man calling Himself God — and tried to stone Him for blasphemy.", "explanationEs": "Entendieron perfectamente la afirmación — un hombre llamándose Dios — e intentaron apedrearle por blasfemia.", "correct": 0}, {"textEn": "When the disciples asked \"who sinned, this man or his parents,\" Jesus answered:", "textEs": "Cuando los discípulos preguntaron \"¿quién pecó, éste o sus padres?\", Jesús respondió:", "optionsEn": ["the parents sinned", "it was hidden", "the man sinned", "neither, but that the works of God should be revealed in him"], "optionsEs": ["pecaron los padres", "estaba oculto", "pecó el hombre", "ni él ni sus padres, sino para que las obras de Dios se manifiesten en él"], "explanationEn": "Not every sorrow is a sentence for sin; this blindness became a stage for the works of God (John 9:3).", "explanationEs": "No todo dolor es sentencia por pecado; esta ceguera se volvió escenario de las obras de Dios (Juan 9:3).", "correct": 3}, {"textEn": "Jesus healed the blind man by anointing his eyes with clay and sending him to wash in:", "textEs": "Jesús sanó al ciego ungiendo sus ojos con lodo y enviándolo a lavarse en:", "optionsEn": ["the Sea of Galilee", "a temple basin", "the pool of Siloam, whose name means 'Sent'", "the Jordan River"], "optionsEs": ["el mar de Galilea", "una pila del templo", "el estanque de Siloé, cuyo nombre significa 'Enviado'", "el río Jordán"], "explanationEn": "He went down in darkness and came up seeing — the Light giving eyes as once He said, 'Let there be light.'", "explanationEs": "Bajó en tinieblas y subió viendo — la Luz dando ojos como una vez dijo: 'Sea la luz.'", "correct": 2}, {"textEn": "Before the Pharisees the healed man's simplest testimony was:", "textEs": "Ante los fariseos el testimonio más sencillo del sanado fue:", "optionsEn": ["\"I was never truly blind\"", "\"He is only a teacher\"", "\"One thing I know: though I was blind, now I see\"", "\"I do not know Him\""], "optionsEs": ["\"Nunca fui verdaderamente ciego\"", "\"Es solo un maestro\"", "\"Una cosa sé: que habiendo sido ciego, ahora veo\"", "\"No le conozco\""], "explanationEn": "He could not answer all their theology, but he could testify to what Christ had done (John 9:25).", "explanationEs": "No podía responder toda su teología, pero podía testificar lo que Cristo había hecho (Juan 9:25).", "correct": 2}, {"textEn": "The healed man's confession of Jesus grew in this order:", "textEs": "La confesión del sanado acerca de Jesús creció en este orden:", "optionsEn": ["King, then teacher, then Lord", "a man called Jesus, then a prophet, then from God, then 'Lord, I believe'", "stranger, then friend, then rabbi", "Lord, then prophet, then man"], "optionsEs": ["Rey, luego maestro, luego Señor", "un hombre llamado Jesús, luego profeta, luego de Dios, luego 'Creo, Señor'", "extraño, luego amigo, luego rabí", "Señor, luego profeta, luego hombre"], "explanationEn": "His eyes opened in an instant, but his heart came into the light by degrees, until he worshiped (John 9:38).", "explanationEs": "Sus ojos se abrieron al instante, pero su corazón entró en la luz por grados, hasta que adoró (Juan 9:38).", "correct": 1}, {"textEn": "When Jesus found the man who had been cast out, the man said \"Lord, I believe,\" and then:", "textEs": "Cuando Jesús halló al hombre que había sido expulsado, el hombre dijo \"Creo, Señor,\" y luego:", "optionsEn": ["went home", "argued further", "worshiped Him", "returned to the synagogue"], "optionsEs": ["se fue a casa", "siguió discutiendo", "le adoró", "volvió a la sinagoga"], "explanationEn": "He worshiped Jesus — the climax of his journey from darkness into the light (John 9:38).", "explanationEs": "Adoró a Jesús — el clímax de su camino de las tinieblas a la luz (Juan 9:38).", "correct": 2}, {"textEn": "Cook says that true sight is finally:", "textEs": "Cook dice que la verdadera vista es, al fin:", "optionsEn": ["reserved for the educated", "a matter of good doctors", "a matter of the heart, not the eyes", "impossible in this life"], "optionsEs": ["reservada para los educados", "cuestión de buenos médicos", "cuestión del corazón, no de los ojos", "imposible en esta vida"], "explanationEn": "The beggar with new eyes worshiped; the experts with two good eyes grew darker by the hour.", "explanationEs": "El mendigo con ojos nuevos adoró; los expertos con dos buenos ojos se volvieron más oscuros.", "correct": 2}, {"textEn": "\"For judgment I have come into this world, that those who do not see may see, and that those who see ___\" (John 9:39).", "textEs": "\"Para juicio he venido yo a este mundo; para que los que no ven, vean; y los que ven, ___\" (Juan 9:39).", "optionsEn": ["may rule", "may rejoice", "may rest", "may be made blind"], "optionsEs": ["gobiernen", "se gocen", "descansen", "sean cegados"], "explanationEn": "The beggar who admitted his blindness received sight; the sure-sighted experts stayed dark.", "explanationEs": "El mendigo que admitió su ceguera recibió vista; los expertos seguros de ver se quedaron oscuros.", "correct": 3}, {"textEn": "To the Pharisees who said \"We see,\" Jesus said:", "textEs": "A los fariseos que dijeron \"Vemos,\" Jesús dijo:", "optionsEn": ["\"Wait for the Messiah\"", "\"Therefore your sin remains\"", "\"Keep the law more closely\"", "\"You are forgiven\""], "optionsEs": ["\"Esperad al Mesías\"", "\"Vuestro pecado permanece\"", "\"Guardad mejor la ley\"", "\"Sois perdonados\""], "explanationEn": "The only ones the Light cannot help are those who insist they need no help (John 9:41).", "explanationEs": "Los únicos a quienes la Luz no puede ayudar son los que insisten en que no necesitan ayuda (Juan 9:41).", "correct": 1}, {"textEn": "\"I am the light of the world\" is one of how many great \"I AM\" sayings in John?", "textEs": "\"Yo soy la luz del mundo\" es una de cuántas grandes declaraciones \"YO SOY\" en Juan?", "optionsEn": ["five", "seven", "ten", "three"], "optionsEs": ["cinco", "siete", "diez", "tres"], "explanationEn": "Bread of life, light, the door, the good shepherd, the resurrection, the way/truth/life, and the true vine.", "explanationEs": "Pan de vida, luz, la puerta, el buen pastor, la resurrección, el camino/verdad/vida, y la vid verdadera.", "correct": 1}];
+const kwQuestions = [
+{"textEn":"Explain \"I am the light of the world\" (John 8:12) and what it means to follow Him.","textEs":"Explique \"Yo soy la luz del mundo\" (Juan 8:12) y qu\u00e9 significa seguirle.","kw_en":["light","world","follow","dark","disciple","walk","life","jesus"],"kw_es":["luz","mundo","sigue","tinieblas","discipul","anda","vida","jesus"],"modelEn":"Jesus did not say He would show a light or teach about light; He said I am the light of the world, claiming to be the very source of light for the soul. To follow Him means to be His disciple, a learner walking by His light rather than in darkness. He promised that whoever follows Him shall not walk in darkness but have the light of life. So the claim calls not for admirers but for followers who fix their eyes on Him as the Light, the Way, and the Truth.","modelEs":"Jes\u00fas no dijo que mostrar\u00eda una luz ni que ense\u00f1ar\u00eda acerca de la luz; dijo yo soy la luz del mundo, afirmando ser la fuente misma de luz para el alma. Seguirle significa ser su disc\u00edpulo, un aprendiz que anda por su luz y no en tinieblas. Prometi\u00f3 que el que le sigue no andar\u00e1 en tinieblas sino que tendr\u00e1 la luz de la vida. As\u00ed que la afirmaci\u00f3n no llama a admiradores sino a seguidores que fijan los ojos en \u00e9l como la Luz, el Camino y la Verdad."},
+{"textEn":"Explain how \"light dispels the darkness\" (John 1:5; 3:19\u201320).","textEs":"Explique c\u00f3mo \"la luz disipa las tinieblas\" (Juan 1:5; 3:19\u201320).","kw_en":["light","dark","expose","deed","evil","hate","hide","sin"],"kw_es":["luz","tinieblas","expon","obras","malas","aborrec","escond","pecado"],"modelEn":"The first thing light does is expose; light and darkness cannot share a room, and even a small flame overcomes the dark. When the Light of the world walked among men He exposed their hearts, and they were not grateful. John says men loved darkness rather than light because their deeds were evil, and everyone practicing evil hates the light lest his deeds be exposed. So the Light reveals sin and the pretense of those who think they are righteous, and the dark always hates that kind of exposure.","modelEs":"Lo primero que hace la luz es exponer; la luz y las tinieblas no comparten un cuarto, y aun una peque\u00f1a llama vence la oscuridad. Cuando la Luz del mundo anduvo entre los hombres expuso sus corazones, y no se lo agradecieron. Juan dice que los hombres amaron m\u00e1s las tinieblas que la luz porque sus obras eran malas, y todo el que hace lo malo aborrece la luz para que sus obras no sean expuestas. As\u00ed que la Luz revela el pecado y la pretensi\u00f3n de los que se creen justos, y la oscuridad siempre odia esa clase de exposici\u00f3n."},
+{"textEn":"How is Jesus the visible image of the invisible God, and how does He relate to the law?","textEs":"\u00bfC\u00f3mo es Jes\u00fas la imagen visible del Dios invisible, y c\u00f3mo se relaciona con la ley?","kw_en":["image","god","invisible","will","law","fulfill","reveal","jesus"],"kw_es":["imagen","dios","invisible","voluntad","ley","cumpl","revel","jesus"],"modelEn":"Jesus is the visible image of the invisible God; in Him we see the Father made known. From the Old Testament we knew God as holy, just, and almighty, but in Christ the love, kindness, and mercy that were always in God shine out clearly. The leaders had reduced God to a list of rules, but no rules can contain the whole will of God. Jesus revealed that will and said He came not to abolish the law but to fulfill it, so we no longer slavishly follow rules but seek to imitate the Light, who is a person.","modelEs":"Jes\u00fas es la imagen visible del Dios invisible; en \u00e9l vemos al Padre dado a conocer. Del Antiguo Testamento conoc\u00edamos a Dios como santo, justo y todopoderoso, pero en Cristo brillan claramente el amor, la bondad y la misericordia que siempre estuvieron en Dios. Los l\u00edderes hab\u00edan reducido a Dios a una lista de reglas, pero ninguna regla puede contener toda la voluntad de Dios. Jes\u00fas revel\u00f3 esa voluntad y dijo que vino no para abolir la ley sino para cumplirla, as\u00ed que ya no seguimos reglas servilmente sino que buscamos imitar a la Luz, que es una persona."},
+{"textEn":"Explain \"before Abraham was, I AM\" (John 8:58) and why the leaders reacted as they did.","textEs":"Explique \"antes que Abraham fuese, yo soy\" (Juan 8:58) y por qu\u00e9 los l\u00edderes reaccionaron como lo hicieron.","kw_en":["abraham","before","eternal","god","name","divine","stone","exist"],"kw_es":["abraham","antes","eterno","dios","nombre","divin","piedra","exist"],"modelEn":"When the leaders boasted of Abraham, Jesus said that before Abraham was, I AM. He did not say I was, but I AM, the very name God gave Moses at the burning bush, the name of the eternal, self-existent God. In one sentence He claimed both to exist before Abraham and to bear the divine Name. The leaders understood the claim perfectly, that a man was calling Himself God, so they took up stones to kill Him for blasphemy. They were right about what He claimed and wrong about who He was.","modelEs":"Cuando los l\u00edderes se jactaron de Abraham, Jes\u00fas dijo que antes que Abraham fuese, yo soy. No dijo yo era, sino yo soy, el nombre mismo que Dios dio a Mois\u00e9s en la zarza ardiente, el nombre del Dios eterno que existe por s\u00ed mismo. En una sola frase afirm\u00f3 existir antes de Abraham y llevar el Nombre divino. Los l\u00edderes entendieron perfectamente la afirmaci\u00f3n, que un hombre se llamaba Dios, as\u00ed que tomaron piedras para matarle por blasfemia. Acertaron en lo que \u00e9l afirmaba y se equivocaron en qui\u00e9n era."},
+{"textEn":"Explain how Jesus is fully God and fully man, drawing on John 8.","textEs":"Explique c\u00f3mo Jes\u00fas es plenamente Dios y plenamente hombre, bas\u00e1ndose en Juan 8.","kw_en":["god","man","fully","mary","father","weary","wisdom","person"],"kw_es":["dios","hombre","plenamente","maria","padre","cans","sabidur","persona"],"modelEn":"Jesus is the unique Son who is fully God and fully man in one Person. From His mother Mary He took a true humanity, so He grew weary, thirsted, and could die. From the Father He has a wisdom and power no mere man ever had, so He astonished the teachers as a boy, knew the secret history of strangers, healed the sick, walked on the sea, and rose from the tomb. He is not half of each but the whole of God and the whole of a man joined together, and it was His claim to be equal with God that enraged the leaders.","modelEs":"Jes\u00fas es el Hijo \u00fanico que es plenamente Dios y plenamente hombre en una Persona. De su madre Mar\u00eda tom\u00f3 una verdadera humanidad, as\u00ed que se cans\u00f3, tuvo sed y pudo morir. Del Padre tiene una sabidur\u00eda y un poder que ning\u00fan simple hombre tuvo, as\u00ed que de ni\u00f1o asombr\u00f3 a los maestros, conoc\u00eda la historia secreta de extra\u00f1os, san\u00f3 a los enfermos, camin\u00f3 sobre el mar y resucit\u00f3 de la tumba. No es mitad de cada uno sino todo Dios y todo un hombre unidos, y fue su afirmaci\u00f3n de ser igual a Dios la que enfureci\u00f3 a los l\u00edderes."},
+{"textEn":"Explain the disciples' \"who sinned?\" question and Jesus' answer about the man's blindness (John 9:1\u20133).","textEs":"Explique la pregunta de los disc\u00edpulos \"\u00bfqui\u00e9n pec\u00f3?\" y la respuesta de Jes\u00fas sobre la ceguera del hombre (Juan 9:1\u20133).","kw_en":["sin","blind","parent","punish","work","god","display","suffer"],"kw_es":["pec","ciego","padres","castig","obras","dios","manifiest","sufri"],"modelEn":"The disciples assumed, as their whole world did, that suffering must be punishment for sin, so they asked who sinned, this man or his parents, that he was born blind. Jesus rejected the assumption: neither this man nor his parents sinned, but the blindness was so that the works of God might be revealed in him. Not every sorrow is a sentence for sin; this man's blindness had waited all his life to become a stage on which God would display His works through the Light of the world.","modelEs":"Los disc\u00edpulos supon\u00edan, como todo su mundo, que el sufrimiento deb\u00eda ser castigo por el pecado, as\u00ed que preguntaron qui\u00e9n pec\u00f3, \u00e9ste o sus padres, para que naciera ciego. Jes\u00fas rechaz\u00f3 la suposici\u00f3n: ni \u00e9l ni sus padres pecaron, sino que la ceguera era para que las obras de Dios se manifestaran en \u00e9l. No todo dolor es sentencia por pecado; la ceguera de este hombre hab\u00eda esperado toda su vida para volverse un escenario donde Dios manifestar\u00eda sus obras por medio de la Luz del mundo."},
+{"textEn":"Describe the healing of the man born blind (clay, Siloam) as a sign of the Light.","textEs":"Describa la sanidad del hombre ciego de nacimiento (lodo, Silo\u00e9) como se\u00f1al de la Luz.","kw_en":["blind","clay","siloam","wash","sight","sent","light","sign"],"kw_es":["ciego","lodo","siloe","lav","vista","enviad","luz","senal"],"modelEn":"Jesus said that as long as He is in the world He is the light of the world, then spat on the ground, made clay, anointed the blind man's eyes, and sent him to wash in the pool of Siloam, a name that means Sent. The man went down in darkness and came up seeing. The sign embodies the claim: the Light of the world gave eyes to a man who had never seen, just as God once said, Let there be light. The physical healing pictures the greater gift of spiritual sight that Christ gives.","modelEs":"Jes\u00fas dijo que entre tanto que est\u00e1 en el mundo es la luz del mundo, luego escupi\u00f3 en tierra, hizo lodo, ungi\u00f3 los ojos del ciego y le envi\u00f3 a lavarse en el estanque de Silo\u00e9, nombre que significa Enviado. El hombre baj\u00f3 en tinieblas y subi\u00f3 viendo. La se\u00f1al encarna la afirmaci\u00f3n: la Luz del mundo dio ojos a un hombre que nunca hab\u00eda visto, como una vez dijo Dios: Sea la luz. La sanidad f\u00edsica representa el don mayor de la vista espiritual que Cristo da."},
+{"textEn":"Trace the man's progressive confession of who Jesus is.","textEs":"Trace la confesi\u00f3n progresiva del hombre acerca de qui\u00e9n es Jes\u00fas.","kw_en":["man","prophet","god","believ","worship","confess","grew","lord"],"kw_es":["hombre","profeta","dios","cree","adora","confes","crec","senor"],"modelEn":"As the man was questioned, his confession of Jesus grew step by step. First he called Him a man called Jesus, then he said He is a prophet, then he insisted that if this Man were not from God He could do nothing. For that the leaders cast him out, and then Jesus found him and asked if he believed in the Son of God. The man said, Lord, I believe, and he worshiped Him. His eyes were opened in an instant, but his heart came into the light by degrees until he bowed in worship.","modelEs":"Mientras interrogaban al hombre, su confesi\u00f3n de Jes\u00fas creci\u00f3 paso a paso. Primero le llam\u00f3 un hombre llamado Jes\u00fas, luego dijo que es un profeta, luego insisti\u00f3 en que si \u00e9ste no fuera de Dios, nada podr\u00eda hacer. Por eso los l\u00edderes lo expulsaron, y entonces Jes\u00fas lo hall\u00f3 y le pregunt\u00f3 si cre\u00eda en el Hijo de Dios. El hombre dijo: Creo, Se\u00f1or, y le ador\u00f3. Sus ojos se abrieron al instante, pero su coraz\u00f3n entr\u00f3 en la luz por grados hasta que se postr\u00f3 en adoraci\u00f3n."},
+{"textEn":"Explain \"true sight is a matter of the heart, not the eyes\" and the Pharisees' blindness (John 9:39\u201341).","textEs":"Explique \"la verdadera vista es cuesti\u00f3n del coraz\u00f3n, no de los ojos\" y la ceguera de los fariseos (Juan 9:39\u201341).","kw_en":["sight","heart","eye","blind","see","pharisee","sin","judgment"],"kw_es":["vista","corazon","ojo","ciego","ver","fariseo","pecado","juicio"],"modelEn":"Jesus said that for judgment He came into the world, that those who do not see may see and those who see may be made blind. The beggar knew he was blind and so received both his sight and a believing heart, while the Pharisees were sure they could see and so stayed in the dark. When they asked if they were blind, Jesus said that if they were blind they would have no sin, but because they say we see, their sin remains. True sight is finally a matter of the heart, not the eyes, and the Light cannot help those who insist they need no help.","modelEs":"Jes\u00fas dijo que para juicio vino al mundo, para que los que no ven vean y los que ven sean cegados. El mendigo sab\u00eda que era ciego y as\u00ed recibi\u00f3 tanto la vista como un coraz\u00f3n creyente, mientras que los fariseos estaban seguros de que ve\u00edan y as\u00ed se quedaron en la oscuridad. Cuando preguntaron si eran ciegos, Jes\u00fas dijo que si fueran ciegos no tendr\u00edan pecado, pero porque dicen vemos, su pecado permanece. La verdadera vista es al fin cuesti\u00f3n del coraz\u00f3n, no de los ojos, y la Luz no puede ayudar a quienes insisten en que no necesitan ayuda."},
+{"textEn":"What do the seven \"I AM\" sayings in John reveal about who Jesus is?","textEs":"\u00bfQu\u00e9 revelan las siete declaraciones \"YO SOY\" en Juan acerca de qui\u00e9n es Jes\u00fas?","kw_en":["seven","saying","jesus","god","bread","light","deity","reveal"],"kw_es":["siete","declaracion","jesus","dios","pan","luz","deidad","revel"],"modelEn":"John records seven great I AM sayings: the bread of life, the light of the world, the door, the good shepherd, the resurrection and the life, the way and the truth and the life, and the true vine. Each reveals a different facet of who Jesus is and what He gives, and together they unfold the riches of His person. The words I AM themselves echo the divine name, so the sayings reveal not only His work but His deity; He is God meeting every need of the soul, from hunger to darkness to death.","modelEs":"Juan registra siete grandes declaraciones YO SOY: el pan de vida, la luz del mundo, la puerta, el buen pastor, la resurrecci\u00f3n y la vida, el camino y la verdad y la vida, y la vid verdadera. Cada una revela una faceta distinta de qui\u00e9n es Jes\u00fas y de lo que da, y juntas despliegan las riquezas de su persona. Las palabras YO SOY mismas hacen eco del nombre divino, as\u00ed que las declaraciones revelan no solo su obra sino su deidad; \u00e9l es Dios supliendo toda necesidad del alma, desde el hambre hasta las tinieblas y la muerte."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 6 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 6 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s).</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (mcQuestions.length + idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register on Unit 1 first.' : 'Por favor reg\u00edstrese en la Unidad 1 primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y reintente la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSJohnReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

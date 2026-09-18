@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Life of Christ &mdash; Unit 3</title>
+<style>
+:root{
+  --ink:#241c12; --paper:#f7f1e4; --card:#fffdf8; --line:#d8ccb2;
+  --accent:#7a3b1e; --accent2:#9c6b2f; --gold:#fbf3d6; --goldln:#caa94e;
+  --good:#2f6b3a; --bad:#9b2c2c; --muted:#6c6150;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;line-height:1.6;}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+header.site{background:var(--accent);color:#f6ecd8;padding:18px 0;border-bottom:4px solid var(--goldln);}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:0;}
+header.site h1{font-size:1.15rem;margin:0;font-weight:600;letter-spacing:.2px;}
+header.site .sub{font-size:.78rem;opacity:.85;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+.langbtn{font-family:system-ui,sans-serif;font-size:.8rem;background:#f6ecd8;color:var(--accent);
+  border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600;}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 4px;
+  font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);}
+.badge{background:var(--gold);border:1px solid var(--goldln);border-radius:14px;padding:3px 10px;color:#6a531c;}
+.epigraph{font-style:italic;color:var(--accent2);border-left:3px solid var(--goldln);
+  padding:6px 0 6px 14px;margin:16px 0;font-size:.98rem;}
+h2.sec{font-size:1.25rem;color:var(--accent);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin:34px 0 14px;}
+article p{margin:0 0 14px;}
+article b{color:var(--accent);}
+.v{color:#3a4a2c;}
+.illo{background:#fbf6ea;border-left:3px solid var(--goldln);padding:10px 14px;border-radius:4px;}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:14px 0;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);}
+.qn{font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;color:var(--accent2);
+  text-transform:uppercase;letter-spacing:.6px;}
+.qp{margin:6px 0 10px;font-weight:600;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:9px 12px;margin:6px 0;cursor:pointer;font:inherit;color:inherit;}
+.opt:hover{border-color:var(--accent2);}
+.opt .lt{font-weight:700;color:var(--accent2);margin-right:8px;}
+.opt.correct{background:#e9f3e8;border-color:var(--good);}
+.opt.wrong{background:#f6e6e4;border-color:var(--bad);}
+.opt:disabled{cursor:default;opacity:1;}
+.expl{font-size:.9rem;color:var(--muted);margin:8px 2px 0;display:none;}
+.expl.show{display:block;}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:6px;padding:10px;
+  font:inherit;background:#fff;resize:vertical;}
+.btn{font-family:system-ui,sans-serif;font-weight:600;border:none;border-radius:6px;padding:9px 16px;
+  cursor:pointer;font-size:.9rem;}
+.btn.primary{background:var(--accent);color:#f6ecd8;}
+.btn.ghost{background:#efe6d2;color:var(--accent);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.sa-res{margin-top:10px;font-family:system-ui,sans-serif;font-size:.88rem;display:none;}
+.sa-res.show{display:block;}
+.sa-verdict{font-weight:700;}
+.sa-verdict.pass{color:var(--good);} .sa-verdict.soft{color:var(--accent2);}
+.model{background:var(--gold);border:1px solid var(--goldln);border-radius:6px;padding:10px 12px;margin-top:8px;}
+.model .ml{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:#6a531c;}
+.foot{margin-top:30px;border-top:2px solid var(--line);padding-top:18px;}
+.status{font-family:system-ui,sans-serif;font-size:.9rem;margin:10px 0;}
+.status.ok{color:var(--good);} .status.warn{color:var(--accent2);} .status.lock{color:var(--bad);}
+.modal{position:fixed;inset:0;background:rgba(36,28,18,.62);display:flex;align-items:center;
+  justify-content:center;padding:18px;z-index:50;}
+.modal .box{background:var(--card);border-radius:10px;max-width:420px;width:100%;padding:22px;
+  border-top:5px solid var(--goldln);}
+.modal h3{margin:0 0 6px;color:var(--accent);}
+.modal label{display:block;font-family:system-ui,sans-serif;font-size:.82rem;margin:12px 0 4px;color:var(--muted);}
+.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit;}
+.hide{display:none !important;}
+.next{display:inline-block;margin-top:12px;background:var(--good);color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:6px;font-family:system-ui,sans-serif;font-weight:600;}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:2px 0 18px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);margin-right:3px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:var(--card);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600;line-height:1;}
+.unitnav a:hover{border-color:var(--accent2);color:var(--accent2);}
+.unitnav a.active{background:var(--accent);color:#f6ecd8;border-color:var(--accent);}
+.unitnav a.done{background:var(--gold);border-color:var(--goldln);color:#6a531c;}
+.unitnav a.cert{min-width:auto;padding:0 12px;background:#efe6d2;}
+html[lang="es"] .en-lbl{display:none}html[lang="en"] .es-lbl{display:none}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site">
+  <div class="wrap">
+    <div><h1 id="t-title">The Life of Christ</h1><div class="sub" id="t-unit">Unit 3 · Glory Revealed</div></div>
+    <button class="langbtn" id="langBtn" type="button">Espa&ntilde;ol</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <span id="t-greet"></span>
+    <span class="badge" id="t-track"></span>
+  </div>
+
+     <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+     <span class="nl"><span class="en-lbl">Units</span><span class="es-lbl">Unidades</span></span>
+     <a data-u="1" href="CTSLOCUnit1.html">1</a>
+     <a data-u="2" href="CTSLOCUnit2.html">2</a>
+     <a data-u="3" href="CTSLOCUnit3.html" class="active">3</a>
+     <a data-u="4" href="CTSLOCUnit4.html">4</a>
+     <a data-u="5" href="CTSLOCUnit5.html">5</a>
+     <a data-u="6" href="CTSLOCUnit6.html">6</a>
+     <a data-u="7" href="CTSLOCUnit7.html">7</a>
+     <a data-u="8" href="CTSLOCUnit8.html">8</a>
+     <a data-u="9" href="CTSLOCUnit9.html">9</a>
+     <a data-u="10" href="CTSLOCUnit10.html">10</a>
+     <a class="cert" href="CTSLOCCertificate.html"><span class="en-lbl">Certificate</span><span class="es-lbl">Certificado</span></a>
+   </nav>
+   <script>(function(){try{var raw=localStorage.getItem("cts_loc_progress")||"{}";var done=JSON.parse(raw);var nav=document.getElementById("unitnav");if(!nav)return;var a=nav.querySelectorAll("a[data-u]");for(var i=0;i<a.length;i++){var u=a[i].getAttribute("data-u");if(done[u]&&a[i].className.indexOf("active")<0){a[i].className=(a[i].className+" done").trim();}}}catch(e){}})();</script>
+
+   <div class="epigraph" id="epigraph"></div>
+
+  <article>
+    <div id="teach-en"><h3 style="color:var(--accent);margin:0 0 4px">Glory Revealed: The Early Ministry</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">The First Disciples, the First Sign, the Ruler by Night, and the Woman at the Well</p>
+<p><b>1. "Come and See": The First Disciples</b></p>
+<p>The forerunner had one more thing to do: point. Standing with two of his own disciples, John saw Jesus walk by and said again, <span class="v">"Behold the Lamb of God!"</span> (John 1:36). And the two left their teacher to follow the One he named. Jesus turned and asked the first question of His ministry: <span class="v">"What do you seek?"</span> When they asked where He was staying, He answered with the invitation that would become the whole pattern of discipleship: <span class="v">"Come and see"</span> (John 1:39).</p>
+<p>It spread the way good news always spreads — one mouth at a time. Andrew went first to his own brother: <span class="v">"We have found the Messiah"</span> (John 1:41), and brought Simon to Jesus, who looked at him and gave him a new name, Cephas, a stone (John 1:42). Philip found Nathanael: <span class="v">"We have found Him of whom Moses in the law, and also the prophets, wrote"</span> (John 1:45). But Nathanael had a prejudice ready: <span class="v">"Can anything good come out of Nazareth?"</span> (John 1:46). Notice Philip's reply. He did not argue the point; he simply said, <span class="v">"Come and see."</span> The cure for honest doubt is not a better argument but a closer look at Christ. When Jesus told Nathanael He had seen him under the fig tree before Philip ever called him, the skeptic became a worshiper: <span class="v">"Rabbi, You are the Son of God! You are the King of Israel!"</span> (John 1:49). And Jesus promised more: <span class="v">"You shall see heaven open, and the angels of God ascending and descending upon the Son of Man"</span> (John 1:51) — Jacob's ladder (Genesis 28:12) made flesh. Jesus Himself is the stair between earth and heaven; in the God-Man, the two are joined.</p>
+<p><b>2. The First Sign: Water Into Wine</b></p>
+<p>The early ministry opens not with a sermon but with a sign, and not in a temple but at a wedding. At Cana the wine ran out — a small village shame — and Mary brought the need to her Son. <span class="v">"Woman, what does your concern have to do with Me? My hour has not yet come"</span> (John 2:4); yet she told the servants the wisest words any creature can say of Him: <span class="v">"Whatever He says to you, do it"</span> (John 2:5). Six stone waterpots stood ready for ceremonial washing; He had them filled to the brim, and what was drawn out was wine — and the best wine, served last, against all custom (John 2:9–10).</p>
+<p>John does not call it a miracle; he calls it a <i>sign</i>: <span class="v">"This beginning of signs Jesus did in Cana of Galilee, and manifested His glory; and His disciples believed in Him"</span> (John 2:11). That is the key to the whole Gospel. A sign is not a wonder for its own sake; it is a signpost, pointing past itself to the glory of the One who does it and calling for faith — the very purpose John states at the end: <span class="v">"these are written that you may believe"</span> (John 20:31).</p>
+<p>From the wedding He went up to Jerusalem and drove the traders from the temple: <span class="v">"Do not make My Father's house a house of merchandise!"</span> (John 2:16). When they demanded a sign for His authority, He answered, <span class="v">"Destroy this temple, and in three days I will raise it up"</span> — and John explains, <span class="v">"He was speaking of the temple of His body"</span> (John 2:19–21). Already, at the start, the resurrection is in view.</p>
+<p><b>3. The Ruler Who Came by Night</b></p>
+<p>Then came a man as respectable as the Samaritan woman would be despised. Nicodemus was a Pharisee and <span class="v">"a ruler of the Jews"</span> (John 3:1), and he came <span class="v">"by night"</span> (John 3:2) — cautious, hedging, half in the dark. Jesus cut past his flattery to his need: <span class="v">"unless one is born again, he cannot see the kingdom of God"</span> (John 3:3). The word means <i>born from above</i>. Nicodemus heard it woodenly — how can a grown man re-enter the womb? (John 3:4) — and Jesus answered that there are two births and two realms: <span class="v">"That which is born of the flesh is flesh, and that which is born of the Spirit is spirit"</span> (John 3:6). The new birth is not reform of the old life; it is the gift of a life the old man does not possess.</p>
+<p>No child ever arranged its own birth. It did not choose to be conceived, could not labor itself into the world, contributed nothing but the need to be born. So it is with the new birth: it is God's gift, worked by His Spirit, and no one can manufacture it by sheer effort or moral reform. Yet Scripture also calls us to respond to that gift: <span class="v">"as many as received Him, to them He gave the right to become children of God, to those who believe in His name"</span> (John 1:12). The new birth is God's sovereign work, received the moment genuine faith reaches out and takes hold of Christ &mdash; not a passive experience imposed on the unwilling, but new life given to the one who believes. That is why Jesus turned to the wind. <span class="v">"The wind blows where it wishes, and you hear the sound of it, but cannot tell where it comes from and where it goes. So is everyone who is born of the Spirit"</span> (John 3:8). You cannot command the wind, harness it, or watch it; you can only feel that it has come and see what it has moved. The Spirit is as sovereign and as real, and as little at our disposal.</p>
+<p>Then Jesus pointed Nicodemus to a bronze serpent on a pole in the wilderness, where dying Israelites looked and lived (Numbers 21:9): <span class="v">"so must the Son of Man be lifted up, that whoever believes in Him should not perish but have eternal life"</span> (John 3:14–15). The cross is already lifted on the horizon. And out of that comes the verse the whole Bible seems to press toward: <span class="v">"For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life"</span> (John 3:16). Nicodemus had come in the dark; but <span class="v">"he who does the truth comes to the light"</span> (John 3:21), and in time this night-comer would step into the day (John 19:39).</p>
+<p><b>4. The Woman at the Well</b></p>
+<p>If Nicodemus shows the gospel reaching the religious insider, the next chapter shows it reaching the outsider no rabbi would have touched. Jesus <span class="v">"needed to go through Samaria"</span> (John 4:4) — a road most Jews avoided and a people they despised. Wearied from the journey, He sat by Jacob's well at the sixth hour (John 4:6). Hold that: the One who made the fountains of the deep sat down thirsty by a well. As God He is the living water; as man He was too tired to draw it.</p>
+<p>She came at noon, in the heat, alone — not in the cool morning with the other women, for she had a history that made their company unbearable. To her, at the worst hour of her day, the Savior said, <span class="v">"Give Me a drink"</span> (John 4:7), and in one request crossed every wall at once — Jew to Samaritan, man to woman, the holy to the sinful. Then He offered her <span class="v">"living water,"</span> promising that whoever drank of it <span class="v">"will never thirst,"</span> for it would become <span class="v">"a fountain of water springing up into everlasting life"</span> (John 4:14). When she reached for it, He gently exposed the five husbands and the man who was not her husband (John 4:18) — not to shame her, but because the water cannot fill a life still pretending it is not empty.</p>
+<p>She tried to hide behind an old dispute — this mountain or Jerusalem? — and He lifted worship clean off the map: <span class="v">"God is Spirit, and those who worship Him must worship in spirit and truth"</span> (John 4:24). Then, to this woman, He said what He had told almost no one plainly: <span class="v">"I who speak to you am He"</span> (John 4:26). She left her waterpot and ran to the town she had been avoiding; and while she was gone, Jesus lifted His disciples' eyes from the food they fetched to the crowd already streaming out of the village: <span class="v">"Lift up your eyes and look at the fields, for they are already white for harvest"</span> (John 4:35). Many Samaritans believed, saying at last, <span class="v">"this is indeed the Christ, the Savior of the world"</span> (John 4:42).</p>
+<p><b>5. Night-Comer and Noon-Comer</b></p>
+<p>Set the two side by side, for John surely meant us to. Nicodemus: a man, a Jew, a ruler, religious, respectable, who came by night. The woman: a Samaritan, an outcast, a sinner, who met Him at noon. They could not be further apart — and they needed the very same thing. The ruler must be born from above; the outcast must drink the living water; and neither can produce it for himself. So the early ministry unveils His glory to insider and outsider alike (John 2:11), and the signs are written still for one reason: <span class="v">"that you may believe that Jesus is the Christ, the Son of God"</span> (John 20:31).</p></div>
+    <div id="teach-es" class="hide"><h3 style="color:var(--accent);margin:0 0 4px">Gloria revelada: el ministerio temprano</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">Los primeros disc&iacute;pulos, la primera se&ntilde;al, el principal de noche y la mujer junto al pozo</p>
+
+<p><b>1. &laquo;Venid y ved&raquo;: los primeros disc&iacute;pulos</b></p>
+<p>Al precursor le quedaba una cosa por hacer: se&ntilde;alar. De pie con dos de sus propios disc&iacute;pulos, Juan vio pasar a Jes&uacute;s y dijo otra vez: <span class="v">&ldquo;&iexcl;He aqu&iacute; el Cordero de Dios!&rdquo; (Juan 1:36).</span> Y los dos dejaron a su maestro para seguir a Aquel que &eacute;l nombr&oacute;. Jes&uacute;s se volvi&oacute; y formul&oacute; la primera pregunta de su ministerio: <span class="v">&ldquo;&iquest;Qu&eacute; busc&aacute;is?&rdquo;</span> Cuando preguntaron d&oacute;nde moraba, respondi&oacute; con la invitaci&oacute;n que ser&iacute;a el patr&oacute;n entero del discipulado: <span class="v">&ldquo;Venid y ved&rdquo; (Juan 1:39).</span></p>
+<p>Se difundi&oacute; como siempre se difunde la buena nueva: una boca a la vez. Andr&eacute;s fue primero a su propio hermano: <span class="v">&ldquo;Hemos hallado al Mes&iacute;as&rdquo; (Juan 1:41),</span> y trajo a Sim&oacute;n a Jes&uacute;s, quien lo mir&oacute; y le dio un nombre nuevo, Cefas, una piedra (Juan 1:42). Felipe hall&oacute; a Natanael: <span class="v">&ldquo;Hemos hallado a aquel de quien escribi&oacute; Mois&eacute;s en la ley, as&iacute; como los profetas&rdquo; (Juan 1:45).</span> Pero Natanael ten&iacute;a lista una preocupaci&oacute;n: <span class="v">&ldquo;&iquest;De Nazaret puede haber algo de bueno?&rdquo; (Juan 1:46).</span> Note la respuesta de Felipe. No discuti&oacute; el punto; simplemente dijo: <span class="v">&ldquo;Ven y ve.&rdquo;</span> El remedio para la duda honesta no es un mejor argumento, sino una mirada m&aacute;s cercana a Cristo. Cuando Jes&uacute;s le dijo a Natanael que lo hab&iacute;a visto bajo la higuera antes de que Felipe lo llamara, el esc&eacute;ptico se hizo adorador: <span class="v">&ldquo;Rab&iacute;, t&uacute; eres el Hijo de Dios; t&uacute; eres el Rey de Israel&rdquo; (Juan 1:49).</span> Y Jes&uacute;s prometi&oacute; m&aacute;s: <span class="v">&ldquo;Ver&eacute;is el cielo abierto, y a los &aacute;ngeles de Dios que suben y descienden sobre el Hijo del Hombre&rdquo; (Juan 1:51)</span> &mdash; la escalera de Jacob (G&eacute;nesis 28:12) hecha carne. Jes&uacute;s mismo es la escalera entre la tierra y el cielo; en el Dios-Hombre, los dos se unen.</p>
+
+<p><b>2. La primera se&ntilde;al: agua en vino</b></p>
+<p>El ministerio temprano no abre con un serm&oacute;n sino con una se&ntilde;al, y no en un templo sino en una boda. En Can&aacute; se acab&oacute; el vino &mdash; una peque&ntilde;a verg&uuml;enza de aldea &mdash; y Mar&iacute;a llev&oacute; la necesidad a su Hijo. <span class="v">&ldquo;&iquest;Qu&eacute; tienes conmigo, mujer? A&uacute;n no ha venido mi hora&rdquo; (Juan 2:4);</span> sin embargo, ella dijo a los siervos las palabras m&aacute;s sabias que criatura alguna puede decir de &Eacute;l: <span class="v">&ldquo;Haced todo lo que os dijere&rdquo; (Juan 2:5).</span> Hab&iacute;a seis tinajas de piedra para la purificaci&oacute;n; las mand&oacute; llenar hasta el borde, y lo que se sac&oacute; era vino &mdash; y el mejor vino, servido al final, contra toda costumbre (Juan 2:9&ndash;10).</p>
+<p>Juan no lo llama milagro; lo llama <i>se&ntilde;al</i>: <span class="v">&ldquo;Este principio de se&ntilde;ales hizo Jes&uacute;s en Can&aacute; de Galilea, y manifest&oacute; su gloria; y sus disc&iacute;pulos creyeron en &eacute;l&rdquo; (Juan 2:11).</span> Esa es la clave de todo el Evangelio. Una se&ntilde;al no es un prodigio por s&iacute; mismo; es un letrero que apunta m&aacute;s all&aacute; de s&iacute; a la gloria de Aquel que la hace, y llama a la fe &mdash; el prop&oacute;sito mismo que Juan declara al final: <span class="v">&ldquo;estas se han escrito para que cre&aacute;is&rdquo; (Juan 20:31).</span></p>
+<p>De la boda subi&oacute; a Jerusal&eacute;n y ech&oacute; del templo a los mercaderes: <span class="v">&ldquo;No hag&aacute;is de la casa de mi Padre casa de mercado&rdquo; (Juan 2:16).</span> Cuando le exigieron una se&ntilde;al de su autoridad, respondi&oacute;: <span class="v">&ldquo;Destruid este templo, y en tres d&iacute;as lo levantar&eacute;&rdquo;</span> &mdash; y Juan explica: <span class="v">&ldquo;hablaba del templo de su cuerpo&rdquo; (Juan 2:19&ndash;21).</span> Ya, desde el principio, la resurrecci&oacute;n est&aacute; a la vista.</p>
+
+<p><b>3. El principal que vino de noche</b></p>
+<p>Entonces vino un hombre tan respetable como despreciada ser&iacute;a la samaritana. Nicodemo era fariseo y <span class="v">&ldquo;un principal entre los jud&iacute;os&rdquo; (Juan 3:1),</span> y vino <span class="v">&ldquo;de noche&rdquo; (Juan 3:2)</span> &mdash; cauteloso, a medias en la oscuridad. Jes&uacute;s pas&oacute; por alto su halago y fue a su necesidad: <span class="v">&ldquo;el que no naciere otra vez, no puede ver el reino de Dios&rdquo; (Juan 3:3).</span> La palabra significa <i>nacer de lo alto</i>. Nicodemo lo oy&oacute; toscamente &mdash; &iquest;c&oacute;mo puede un hombre adulto volver al vientre? (Juan 3:4) &mdash; y Jes&uacute;s respondi&oacute; que hay dos nacimientos y dos reinos: <span class="v">&ldquo;Lo que es nacido de la carne, carne es; y lo que es nacido del Esp&iacute;ritu, esp&iacute;ritu es&rdquo; (Juan 3:6).</span> El nuevo nacimiento no es reforma de la vida vieja; es el don de una vida que el hombre viejo no posee.</p>
+<p>Ning&uacute;n ni&ntilde;o dispuso jam&aacute;s su propio nacimiento. No eligi&oacute; ser concebido, no pudo dar a luz a s&iacute; mismo, no aport&oacute; nada sino la necesidad de nacer. As&iacute; es con el nacimiento de lo alto: es algo hecho <i>a</i> nosotros y <i>por</i> nosotros, nunca <i>de</i> nosotros. Por eso Jes&uacute;s se volvi&oacute; al viento. <span class="v">&ldquo;El viento sopla de donde quiere, y oyes su sonido; mas ni sabes de d&oacute;nde viene, ni a d&oacute;nde va; as&iacute; es todo aquel que es nacido del Esp&iacute;ritu&rdquo; (Juan 3:8).</span> No puedes mandar al viento, ni atraparlo, ni verlo; solo puedes sentir que ha venido y ver lo que ha movido. As&iacute; de soberano y real es el Esp&iacute;ritu, y as&iacute; de poco a nuestra disposici&oacute;n.</p>
+<p>Luego Jes&uacute;s se&ntilde;al&oacute; a Nicodemo una serpiente de bronce sobre un asta en el desierto, donde los israelitas moribundos miraban y viv&iacute;an (N&uacute;meros 21:9): <span class="v">&ldquo;as&iacute; es necesario que el Hijo del Hombre sea levantado, para que todo aquel que en &eacute;l cree, no se pierda, mas tenga vida eterna&rdquo; (Juan 3:14&ndash;15).</span> La cruz ya se alza en el horizonte. Y de ah&iacute; brota el vers&iacute;culo hacia el cual parece tender toda la Biblia: <span class="v">&ldquo;Porque de tal manera am&oacute; Dios al mundo, que ha dado a su Hijo unig&eacute;nito, para que todo aquel que en &eacute;l cree, no se pierda, mas tenga vida eterna&rdquo; (Juan 3:16).</span> Nicodemo hab&iacute;a venido en la oscuridad; pero <span class="v">&ldquo;el que obra verdad, viene a la luz&rdquo; (Juan 3:21),</span> y con el tiempo este hombre de la noche saldr&iacute;a a la luz del d&iacute;a (Juan 19:39).</p>
+
+<p><b>4. La mujer junto al pozo</b></p>
+<p>Si Nicodemo muestra el evangelio alcanzando al religioso de dentro, el cap&iacute;tulo siguiente lo muestra alcanzando al de fuera que ning&uacute;n rabino habr&iacute;a tocado. Jes&uacute;s <span class="v">&ldquo;le era necesario pasar por Samaria&rdquo; (Juan 4:4)</span> &mdash; un camino que la mayor&iacute;a de los jud&iacute;os evitaba y un pueblo que despreciaban. Cansado del camino, se sent&oacute; junto al pozo de Jacob a la hora sexta (Juan 4:6). Sost&eacute;ngalo: Aquel que hizo las fuentes del abismo se sent&oacute; sediento junto a un pozo. Como Dios es el agua viva; como hombre estaba demasiado cansado para sacarla.</p>
+<p>Ella vino al mediod&iacute;a, en el calor, sola &mdash; no en la fresca ma&ntilde;ana con las otras mujeres, pues ten&iacute;a una historia que hac&iacute;a insoportable su compa&ntilde;&iacute;a. A ella, en la peor hora de su d&iacute;a, el Salvador dijo: <span class="v">&ldquo;Dame de beber&rdquo; (Juan 4:7),</span> y en una sola petici&oacute;n cruz&oacute; todo muro a la vez &mdash; jud&iacute;o y samaritano, var&oacute;n y mujer, lo santo y lo pecaminoso. Luego le ofreci&oacute; <span class="v">&ldquo;agua viva,&rdquo;</span> prometiendo que quien la bebiera <span class="v">&ldquo;no tendr&aacute; sed jam&aacute;s,&rdquo;</span> pues llegar&iacute;a a ser <span class="v">&ldquo;una fuente de agua que salte para vida eterna&rdquo; (Juan 4:14).</span> Cuando ella la pidi&oacute;, &Eacute;l expuso con ternura los cinco maridos y el que no era su marido (Juan 4:18) &mdash; no para avergonzarla, sino porque el agua no puede llenar una vida que a&uacute;n finge que no est&aacute; vac&iacute;a.</p>
+<p>Ella trat&oacute; de esconderse tras una vieja disputa &mdash; &iquest;este monte o Jerusal&eacute;n? &mdash; y &Eacute;l levant&oacute; la adoraci&oacute;n por encima del mapa: <span class="v">&ldquo;Dios es Esp&iacute;ritu; y los que le adoran, en esp&iacute;ritu y en verdad es necesario que adoren&rdquo; (Juan 4:24).</span> Entonces, a esta mujer, dijo lo que casi a nadie hab&iacute;a dicho con claridad: <span class="v">&ldquo;Yo soy, que hablo contigo&rdquo; (Juan 4:26).</span> Ella dej&oacute; su c&aacute;ntaro y corri&oacute; al pueblo que hab&iacute;a estado evitando; y mientras tanto, Jes&uacute;s levant&oacute; los ojos de sus disc&iacute;pulos de la comida que tra&iacute;an hacia la multitud que ya sal&iacute;a de la aldea: <span class="v">&ldquo;alzad vuestros ojos y mirad los campos, porque ya est&aacute;n blancos para la siega&rdquo; (Juan 4:35).</span> Muchos samaritanos creyeron, diciendo al fin: <span class="v">&ldquo;&eacute;ste es en verdad el Cristo, el Salvador del mundo&rdquo; (Juan 4:42).</span></p>
+
+<p><b>5. El de la noche y la del mediod&iacute;a</b></p>
+<p>Ponga a los dos lado a lado, pues Juan seguramente lo quiso as&iacute;. Nicodemo: un var&oacute;n, jud&iacute;o, principal, religioso, respetable, que vino de noche. La mujer: una samaritana, marginada, pecadora, que lo hall&oacute; al mediod&iacute;a. No podr&iacute;an estar m&aacute;s lejos &mdash; y necesitaban exactamente lo mismo. El principal debe nacer de lo alto; la marginada debe beber el agua viva; y ninguno puede producirla por s&iacute; mismo. As&iacute; el ministerio temprano revela su gloria por igual al de dentro y al de fuera (Juan 2:11), y las se&ntilde;ales se escriben todav&iacute;a por una raz&oacute;n: <span class="v">&ldquo;para que cre&aacute;is que Jes&uacute;s es el Cristo, el Hijo de Dios&rdquo; (Juan 20:31).</span></p>
+</div>
+  </article>
+
+  <h2 class="sec" id="t-mc">Multiple Choice</h2>
+  <div id="mcWrap"></div>
+
+  <h2 class="sec" id="t-sa">Short Answer</h2>
+  <p class="status" id="t-saNote"></p>
+  <div id="saWrap"></div>
+
+  <div class="foot">
+    <button class="btn primary" id="completeBtn" type="button"></button>
+    <div class="status" id="statusMsg"></div>
+    <a class="next hide" id="nextLink" href="CTSLOCUnit4.html"></a>
+  </div>
+</div>
+
+<div class="modal hide" id="reg">
+  <div class="box">
+    <h3 id="m-h">Welcome</h3>
+    <p id="m-p" style="font-size:.9rem;color:var(--muted);margin:0"></p>
+    <label id="m-nl">Your name</label>
+    <input id="m-name" type="text" autocomplete="name" aria-label="m name">
+    <label id="m-tl">Track</label>
+    <select id="m-track" aria-label="m track">
+      <option value="cert">Certificate</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div style="margin-top:16px"><button class="btn primary" id="m-go" type="button">Begin</button></div>
+  </div>
+</div>
+
+<script>
+var CFG={course:'loc',unit:3,totalUnits:10,progressKey:'cts_loc_progress',
+  next:'CTSLOCUnit4.html',cert:'CTSLOCCertificate.html',lockKey:'cts_loc_u3_lock',showReg:false};
+var DATA={"mc": [{"en": "Jesus' first recorded invitation to would-be disciples was:", "es": "La primera invitación registrada de Jesús a posibles discípulos fue:", "oen": ["“Go up to Jerusalem”", "“Keep the law”", "“Wait for a sign”", "“Come and see”"], "oes": ["“Subid a Jerusalén”", "“Guardad la ley”", "“Esperad una señal”", "“Venid y ved”"], "c": 24, "xen": "John 1:39 — the invitation that becomes the pattern of discipleship.", "xes": "Juan 1:39 — la invitación que se vuelve el patrón del discipulado."}, {"en": "After following Jesus, Andrew's first act was to:", "es": "Tras seguir a Jesús, el primer acto de Andrés fue:", "oen": ["bring his brother Simon, saying “We have found the Messiah”", "preach in the temple", "write a gospel", "return to John the Baptist"], "oes": ["traer a su hermano Simón, diciendo “Hemos hallado al Mesías”", "predicar en el templo", "escribir un evangelio", "volver a Juan el Bautista"], "c": 28, "xen": "John 1:41 — good news spreads one mouth at a time.", "xes": "Juan 1:41 — la buena nueva se difunde una boca a la vez."}, {"en": "When Jesus met Simon, He gave him the new name:", "es": "Cuando Jesús conoció a Simón, le dio el nuevo nombre:", "oen": ["Israel", "Barnabas", "Cephas, a stone (Peter)", "Didymus"], "oes": ["Israel", "Bernabé", "Cefas, una piedra (Pedro)", "Dídimo"], "c": 37, "xen": "John 1:42.", "xes": "Juan 1:42."}, {"en": "Nathanael's skeptical question was:", "es": "La pregunta escéptica de Natanael fue:", "oen": ["“Are You the Christ?”", "“Can anything good come out of Nazareth?”", "“Who is Your father?”", "“Where were You born?”"], "oes": ["“¿Eres tú el Cristo?”", "“¿De Nazaret puede haber algo de bueno?”", "“¿ Quién es tu padre?”", "“¿Dónde naciste?”"], "c": 43, "xen": "John 1:46 — Philip answered doubt with “Come and see.”", "xes": "Juan 1:46 — Felipe respondió a la duda con “Ven y ve.”"}, {"en": "Jesus promised Nathanael he would see heaven open and angels ascending and descending upon:", "es": "Jesús prometió a Natanael que vería el cielo abierto y ángeles subiendo y descendiendo sobre:", "oen": ["Mount Sinai", "the temple", "the Son of Man", "the prophets"], "oes": ["el monte Sinaí", "el templo", "el Hijo del Hombre", "los profetas"], "c": 51, "xen": "John 1:51 — echoing Jacob's ladder (Genesis 28:12).", "xes": "Juan 1:51 — evocando la escalera de Jacob (Génesis 28:12)."}, {"en": "The image of angels ascending and descending recalls which Old Testament account?", "es": "La imagen de ángeles subiendo y descendiendo evoca ¿qué relato del Antiguo Testamento?", "oen": ["Moses on Sinai", "Jacob's ladder", "Elijah's chariot", "Noah's ark"], "oes": ["Moisés en el Sinaí", "la escalera de Jacob", "el carro de Elías", "el arca de Noé"], "c": 57, "xen": "Genesis 28:12 — Jesus is the ladder joining earth and heaven.", "xes": "Génesis 28:12 — Jesús es la escalera que une tierra y cielo."}, {"en": "At the wedding in Cana, Mary instructed the servants:", "es": "En la boda de Caná, María instruyó a los siervos:", "oen": ["“Be patient”", "“Bring more wine”", "“Fetch the master”", "“Whatever He says to you, do it”"], "oes": ["“Tened paciencia”", "“Traed más vino”", "“Llamad al maestresala”", "“Haced todo lo que os dijere”"], "c": 66, "xen": "John 2:5 — the wisest response to Christ.", "xes": "Juan 2:5 — la respuesta más sabia ante Cristo."}, {"en": "Jesus' first sign was:", "es": "La primera señal de Jesús fue:", "oen": ["turning water into wine at Cana", "walking on water", "raising Lazarus", "healing a leper"], "oes": ["convertir el agua en vino en Caná", "andar sobre el agua", "resucitar a Lázaro", "sanar a un leproso"], "c": 70, "xen": "John 2:11 — the beginning of signs.", "xes": "Juan 2:11 — el principio de las señales."}, {"en": "John calls the Cana miracle a “sign” because it:", "es": "Juan llama “señal” al milagro de Caná porque:", "oen": ["proved He was a prophet", "was His only miracle", "pointed beyond itself and manifested His glory", "simply fed the poor"], "oes": ["probó que era profeta", "fue su único milagro", "apuntó más allá de sí y manifestó su gloria", "solo alimentó a los pobres"], "c": 79, "xen": "John 2:11 — a sign is a signpost to who He is.", "xes": "Juan 2:11 — una señal es un letrero hacia quién es Él."}, {"en": "“Destroy this temple, and in three days I will raise it up” — Jesus was speaking of:", "es": "“Destruid este templo, y en tres días lo levantaré” — Jesús hablaba de:", "oen": ["Herod's temple", "the law of Moses", "the city of Jerusalem", "His body"], "oes": ["el templo de Herodes", "la ley de Moisés", "la ciudad de Jerusalén", "su cuerpo"], "c": 87, "xen": "John 2:21 — His death and resurrection, in view from the start.", "xes": "Juan 2:21 — su muerte y resurrección, a la vista desde el principio."}, {"en": "Nicodemus, a Pharisee and ruler, came to Jesus:", "es": "Nicodemo, fariseo y principal, vino a Jesús:", "oen": ["by night", "on the Sabbath", "at dawn", "with the crowd"], "oes": ["de noche", "en el sábado", "al amanecer", "con la multitud"], "c": 91, "xen": "John 3:2 — cautious, half in the dark.", "xes": "Juan 3:2 — cauteloso, a medias en la oscuridad."}, {"en": "“Unless one is born again, he cannot see the kingdom of God” — “born again” means:", "es": "“El que no naciere otra vez, no puede ver el reino de Dios” — “nacer otra vez” significa:", "oen": ["re-entering the womb", "born from above, by the Spirit", "joining the Pharisees", "being circumcised"], "oes": ["volver a entrar al vientre", "nacer de lo alto, por el Espíritu", "unirse a los fariseos", "ser circuncidado"], "c": 99, "xen": "John 3:3,6 — a new life given by the Spirit, not reform of the old.", "xes": "Juan 3:3,6 — una vida nueva dada por el Espíritu, no reforma de la vieja."}, {"en": "Jesus compared the Spirit's work in the new birth to:", "es": "Jesús comparó la obra del Espíritu en el nuevo nacimiento con:", "oen": ["an earthquake", "a fire", "a river", "the wind, which blows where it wishes"], "oes": ["un terremoto", "un fuego", "un río", "el viento, que sopla de donde quiere"], "c": 108, "xen": "John 3:8 — sovereign, unseen, real.", "xes": "Juan 3:8 — soberano, invisible, real."}, {"en": "Jesus said the Son of Man must be “lifted up,” as Moses lifted up the:", "es": "Jesús dijo que el Hijo del Hombre debía ser “levantado,” como Moisés levantó:", "oen": ["tabernacle", "rod of Aaron", "serpent in the wilderness", "ark of the covenant"], "oes": ["el tabernáculo", "la vara de Aarón", "la serpiente en el desierto", "el arca del pacto"], "c": 114, "xen": "John 3:14; Numbers 21:9 — the cross foreshadowed.", "xes": "Juan 3:14; Números 21:9 — la cruz prefigurada."}, {"en": "“For God so loved the world that He gave His only begotten Son” is found in:", "es": "“Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito” se halla en:", "oen": ["John 3:16", "Romans 5:8", "John 1:1", "1 John 4:9"], "oes": ["Juan 3:16", "Romanos 5:8", "Juan 1:1", "1 Juan 4:9"], "c": 119, "xen": "John 3:16 — spoken to Nicodemus.", "xes": "Juan 3:16 — dicho a Nicodemo."}, {"en": "Jesus “needed to go through Samaria” — the “need” reflects:", "es": "Jesús “le era necesario pasar por Samaria” — la “necesidad” refleja:", "oen": ["the only available road", "a divine necessity in His mission to the despised", "that He had lost His way", "a Roman requirement"], "oes": ["el único camino disponible", "una necesidad divina en su misión hacia los despreciados", "que se había extraviado", "una exigencia romana"], "c": 127, "xen": "John 4:4 — He sought the outsider on purpose.", "xes": "Juan 4:4 — buscó al de fuera a propósito."}, {"en": "Jesus met the Samaritan woman at the well at:", "es": "Jesús se encontró con la samaritana junto al pozo a:", "oen": ["dawn", "midnight", "the sixth hour, about noon", "the third hour"], "oes": ["el amanecer", "la medianoche", "la hora sexta, cerca del mediodía", "la hora tercera"], "c": 135, "xen": "John 4:6 — she came alone at the hottest hour.", "xes": "Juan 4:6 — ella vino sola a la hora más calurosa."}, {"en": "The “living water” Jesus offered would:", "es": "El “agua viva” que Jesús ofreció:", "oen": ["heal her body", "replace the Jordan river", "fill the well forever", "become a fountain springing up to everlasting life"], "oes": ["sanaría su cuerpo", "reemplazaría el río Jordán", "llenaría el pozo para siempre", "sería una fuente que salta para vida eterna"], "c": 143, "xen": "John 4:14 — inner, eternal, never-failing.", "xes": "Juan 4:14 — interior, eterna, inagotable."}, {"en": "Jesus taught the Samaritan woman that true worshipers worship:", "es": "Jesús enseñó a la samaritana que los verdaderos adoradores adoran:", "oen": ["only in Jerusalem", "in spirit and truth", "only on the mountain", "with many sacrifices"], "oes": ["solo en Jerusalén", "en espíritu y en verdad", "solo en el monte", "con muchos sacrificios"], "c": 148, "xen": "John 4:24 — worship lifted off the map.", "xes": "Juan 4:24 — la adoración levantada del mapa."}, {"en": "The Samaritans finally confessed that Jesus is:", "es": "Los samaritanos confesaron al fin que Jesús es:", "oen": ["the Christ, the Savior of the world", "the son of Jacob", "a teacher from Galilee", "a great prophet"], "oes": ["el Cristo, el Salvador del mundo", "el hijo de Jacob", "un maestro de Galilea", "un gran profeta"], "c": 154, "xen": "John 4:42 — the outsider town believes.", "xes": "Juan 4:42 — el pueblo de fuera cree."}], "sa": [{"en": "How did the first disciples come to Jesus, and what does the “Come and see” pattern teach?", "es": "¿Cómo vinieron los primeros discípulos a Jesús, y qué enseña el patrón de “Venid y ved”?", "men": "Jesus invited the first seekers with “Come and see,” and they came by personal witness, one bringing another. Andrew found his brother Simon and said, “We have found the Messiah,” and Philip found Nathanael. When Nathanael doubted that anything good could come from Nazareth, Philip simply said, “Come and see” — the cure for doubt is a closer look at Christ, not an argument.", "mes": "Jesús invitó a los primeros buscadores con “Venid y ved,” y vinieron por testimonio personal, uno trayendo a otro. Andrés halló a su hermano Simón y dijo: “Hemos hallado al Mesías,” y Felipe halló a Natanael. Cuando Natanael dudó de que algo bueno pudiera venir de Nazaret, Felipe simplemente dijo: “Venid y ved” — el remedio para la duda es mirar más de cerca a Cristo, no un argumento.", "ken": ["come", "see", "andrew", "simon", "philip", "nathanael", "messiah", "witness"], "kes": ["venid", "ved", "andres", "simon", "felipe", "natanael", "mesias", "testimoni"]}, {"en": "What is a “sign” in John's Gospel, and what did the first sign at Cana accomplish?", "es": "¿Qué es una “señal” en el Evangelio de Juan, y qué logró la primera señal en Caná?", "men": "At Cana Jesus turned water into wine, His first sign. John calls it a sign, not merely a miracle, because it points beyond itself to who Jesus is: it manifested His glory, and His disciples believed in Him. Mary's word to the servants, “Whatever He says to you, do it,” models the right response, and the signs are written that we may believe.", "mes": "En Caná Jesús convirtió el agua en vino, su primera señal. Juan la llama señal, no solo milagro, porque apunta más allá de sí misma a quién es Jesús: manifestó su gloria, y sus discípulos creyeron en él. La palabra de María a los siervos, “Haced todo lo que os dijere,” modela la respuesta correcta, y las señales se escriben para que creamos.", "ken": ["cana", "sign", "water", "wine", "glory", "manifest", "first", "point"], "kes": ["cana", "senal", "agua", "vino", "gloria", "manifest", "primera", "discipul"]}, {"en": "What did Jesus require of Nicodemus, and what does the new birth mean?", "es": "¿Qué exigió Jesús a Nicodemo, y qué significa el nuevo nacimiento?", "men": "Jesus told Nicodemus, a ruler who came by night, that unless one is born again — born from above — he cannot see the kingdom of God. The new birth is not reform of the old life but the gift of a new life by the Spirit. As Jesus said, that which is born of the flesh is flesh, and that which is born of the Spirit is spirit; like the wind, the Spirit's work is sovereign and beyond our control.", "mes": "Jesús dijo a Nicodemo, un principal que vino de noche, que el que no naciere otra vez — de lo alto — no puede ver el reino de Dios. El nuevo nacimiento no es reforma de la vida vieja, sino el don de una vida nueva por el Espíritu. Como dijo Jesús, lo que es nacido de la carne, carne es, y lo que es nacido del Espíritu, espíritu es; como el viento, la obra del Espíritu es soberana y fuera de nuestro control.", "ken": ["nicodemus", "born", "above", "spirit", "flesh", "kingdom", "wind", "night"], "kes": ["nicodemo", "naci", "alto", "espiritu", "carne", "reino", "viento", "noche"]}, {"en": "How did Jesus point Nicodemus to the cross and to God's love (John 3:14-16)?", "es": "¿Cómo señaló Jesús a Nicodemo hacia la cruz y el amor de Dios (Juan 3:14-16)?", "men": "Jesus pointed to the bronze serpent Moses lifted up in the wilderness, where dying Israelites looked and lived, and said the Son of Man must likewise be lifted up so that whoever believes has eternal life. This is the cross foreshadowed. Then comes John 3:16: God so loved the world that He gave His only begotten Son, that whoever believes should not perish but have everlasting life.", "mes": "Jesús señaló la serpiente de bronce que Moisés levantó en el desierto, donde los israelitas moribundos miraban y vivían, y dijo que así debía ser levantado el Hijo del Hombre para que todo aquel que cree tenga vida eterna. Esto es la cruz prefigurada. Luego viene Juan 3:16: de tal manera amó Dios al mundo, que dio a su Hijo unigénito, para que todo aquel que cree no se pierda, mas tenga vida eterna.", "ken": ["serpent", "lifted", "moses", "believ", "eternal", "love", "perish", "son"], "kes": ["serpiente", "levant", "moises", "cree", "eterna", "amo", "pierda", "hijo"]}, {"en": "How did Jesus cross barriers with the Samaritan woman, and what did He offer her?", "es": "¿Cómo cruzó Jesús las barreras con la samaritana, y qué le ofreció?", "men": "Though wearied, Jesus sat at the well at noon and asked a Samaritan woman for a drink, crossing the walls between Jew and Samaritan, man and woman, holy and sinful. He offered her living water that would become a fountain springing up to everlasting life, so she would never thirst again. He gently exposed her five husbands, not to shame her but because the water cannot fill a life still pretending to be full.", "mes": "Aunque cansado, Jesús se sentó junto al pozo al mediodía y pidió de beber a una mujer samaritana, cruzando los muros entre judío y samaritano, varón y mujer, santo y pecador. Le ofreció agua viva que llegaría a ser una fuente que salta para vida eterna, para que nunca más tuviera sed. Con ternura expuso sus cinco maridos, no para avergonzarla, sino porque el agua no puede llenar una vida que aún finge estar llena.", "ken": ["samaritan", "well", "living", "water", "thirst", "husband", "woman", "fountain"], "kes": ["samaritan", "pozo", "viva", "agua", "sed", "marido", "mujer", "fuente"]}, {"en": "What did Jesus reveal about true worship and about Himself to the Samaritan woman?", "es": "¿Qué reveló Jesús sobre la verdadera adoración y sobre sí mismo a la samaritana?", "men": "When the woman raised the old dispute about the right place to worship, Jesus lifted worship off the map: God is Spirit, and those who worship Him must worship in spirit and truth. Then, to this outsider, He plainly disclosed Himself: “I who speak to you am He” — the Messiah. She left her waterpot and brought her town, and many believed that He is the Savior of the world.", "mes": "Cuando la mujer planteó la vieja disputa sobre el lugar correcto de adoración, Jesús levantó la adoración del mapa: Dios es Espíritu, y los que le adoran, en espíritu y en verdad deben adorarle. Luego, a esta extraña, se reveló con claridad: “Yo soy, el que habla contigo” — el Mesías. Ella dejó su cántaro y trajo a su pueblo, y muchos creyeron que él es el Salvador del mundo.", "ken": ["worship", "spirit", "truth", "messiah", "speak", "savior", "world", "believ"], "kes": ["adora", "espiritu", "verdad", "mesias", "habla", "salvador", "mundo", "revel"]}, {"en": "Compare the night-comer and the noon-comer. What does the contrast teach about the gospel?", "es": "Compare al que vino de noche y a la que vino al mediodía. ¿Qué enseña el contraste sobre el evangelio?", "men": "John sets Nicodemus and the Samaritan woman side by side. Nicodemus was a respectable Jewish ruler who came by night; the woman was a Samaritan outcast who met Jesus at noon. They could not be more different, yet both needed the same thing: the ruler must be born from above, the outcast must drink the living water, and neither could produce it for himself. The gospel reaches insider and outsider alike.", "mes": "Juan pone a Nicodemo y a la samaritana lado a lado. Nicodemo era un respetable principal judío que vino de noche; la mujer era una samaritana marginada que halló a Jesús al mediodía. No podían ser más distintos, y sin embargo ambos necesitaban lo mismo: el principal debía nacer de lo alto, la marginada debía beber el agua viva, y ninguno podía producirla por sí mismo. El evangelio alcanza por igual al de dentro y al de fuera.", "ken": ["nicodemus", "night", "samaritan", "noon", "outsider", "born", "water", "gospel"], "kes": ["nicodemo", "noche", "samaritan", "mediodia", "nacer", "agua", "evangelio", "fuera"]}, {"en": "At the temple, what did Jesus claim by “Destroy this temple, and in three days I will raise it up”?", "es": "En el templo, ¿qué reclamó Jesús con “Destruid este templo, y en tres días lo levantaré”?", "men": "Jesus drove the traders out, saying, “Do not make My Father's house a house of merchandise.” When asked for a sign of His authority, He answered, “Destroy this temple, and in three days I will raise it up.” John explains He was speaking of the temple of His body — so even at the start, His death and resurrection were in view.", "mes": "Jesús echó fuera a los mercaderes, diciendo: “No hagáis de la casa de mi Padre casa de mercado.” Cuando le pidieron una señal de su autoridad, respondió: “Destruid este templo, y en tres días lo levantaré.” Juan explica que hablaba del templo de su cuerpo — así que, aun al principio, su muerte y resurrección estaban a la vista.", "ken": ["temple", "father", "merchandise", "destroy", "three", "raise", "body", "resurrect"], "kes": ["templo", "padre", "mercado", "destru", "tres", "levant", "cuerpo", "resurrec"]}, {"en": "What did Jesus promise Nathanael (John 1:51), and what does the Jacob's-ladder image mean?", "es": "¿Qué prometió Jesús a Natanael (Juan 1:51), y qué significa la imagen de la escalera de Jacob?", "men": "Jesus promised Nathanael he would see heaven opened and the angels of God ascending and descending on the Son of Man. This recalls Jacob's ladder in Genesis 28, where the angels went up and down between earth and heaven. Jesus means that He Himself is the ladder, the meeting place of heaven and earth — in the God-Man, the two are joined.", "mes": "Jesús prometió a Natanael que vería el cielo abierto y a los ángeles de Dios subiendo y descendiendo sobre el Hijo del Hombre. Esto recuerda la escalera de Jacob en Génesis 28, donde los ángeles subían y bajaban entre la tierra y el cielo. Jesús quiere decir que Él mismo es la escalera, el lugar de encuentro del cielo y la tierra — en el Dios-Hombre, los dos se unen.", "ken": ["nathanael", "heaven", "angels", "jacob", "ladder", "ascend", "earth", "join"], "kes": ["natanael", "cielo", "angeles", "jacob", "escalera", "subi", "tierra", "unen"]}, {"en": "Why does John record these early signs and encounters (John 20:31)?", "es": "¿Por qué registra Juan estas señales y encuentros tempranos (Juan 20:31)?", "men": "John records the early signs and encounters so that the reader will believe. As he states, these are written that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name. The signs manifest His glory and call for faith; the goal is not amazement but trust that leads to life.", "mes": "Juan registra las señales y encuentros tempranos para que el lector crea. Como dice, estas cosas se han escrito para que creáis que Jesús es el Cristo, el Hijo de Dios, y para que creyendo tengáis vida en su nombre. Las señales manifiestan su gloria y llaman a la fe; la meta no es el asombro sino la confianza que lleva a la vida.", "ken": ["sign", "writ", "believ", "christ", "life", "glory", "faith", "name"], "kes": ["senal", "escrit", "crea", "cristo", "vida", "gloria", "fe", "nombre"]}]};
+
+/* ---- storage hardening (Android content:// safe) ---- */
+var _ctsMem={};
+function lsGet(k){try{var v=localStorage.getItem(k);return v===null?(k in _ctsMem?_ctsMem[k]:null):v;}catch(e){return k in _ctsMem?_ctsMem[k]:null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}_ctsMem[k]=v;}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}delete _ctsMem[k];}
+
+/* ---- helpers ---- */
+function fold(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function kwHit(ans,kw){var a=fold(ans),k=fold(kw);if(!k)return false;
+  if(k.length<=3){return new RegExp('(^|[^a-z0-9])'+reEsc(k)+'([^a-z0-9]|$)').test(a);}
+  return new RegExp('(^|[^a-z0-9])'+reEsc(k)).test(a);}
+function saScore(ans,kws){var n=0;for(var i=0;i<kws.length;i++){if(kwHit(ans,kws[i]))n++;}return n;}
+function mcCorrectIdx(code,qpos){return(((code-7*(qpos+3))%251)+251)%251;}
+
+var LET=['A','B','C','D'];
+var STATE={lang:'en',track:'cert',name:'',mc:[],sa:[],revealed:false};
+for(var i=0;i<DATA.mc.length;i++)STATE.mc.push({answered:false,chosen:-1});
+for(var j=0;j<DATA.sa.length;j++)STATE.sa.push({checked:false,text:'',hits:0});
+
+var I18N={
+ en:{title:'The Life of Christ',unit:'Unit 3 · Glory Revealed',lang:'Espa\u00f1ol',
+   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
+   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
+   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
+   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
+   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
+   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
+   complete:'Complete Unit 3',
+   epigraph:'“This beginning of signs Jesus did in Cana of Galilee, and manifested His glory; and His disciples believed in Him.” (John 2:11)',
+   mGood:'✓ Unit complete. You may continue to Unit 4.',
+   mShort:'Keep going \u2014 review the material and try again.',
+   nextTxt:'Next: Unit 4 →',
+   mh:'Welcome to The Life of Christ',mp:'Please register once. Your name and track carry across every CTS course on this site.',
+   mnl:'Your name',mtl:'Track',mgo:'Begin',
+   hitFmt:function(h){return h+' of 8 keywords';},
+   passV:'Pass',softV:'Practice noted'},
+ es:{title:'La Vida de Cristo',unit:'Unidad 3 · Gloria revelada',lang:'English',
+   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
+   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
+   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
+   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
+   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
+   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
+   complete:'Completar la Unidad 3',
+   epigraph:'“Este principio de señales hizo Jesús en Caná de Galilea, y manifestó su gloria; y sus discípulos creyeron en él.” (Juan 2:11)',
+   mGood:'✓ Unidad completa. Puede continuar a la Unidad 4.',
+   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
+   nextTxt:'Siguiente: Unidad 4 →',
+   mh:'Bienvenido a La Vida de Cristo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
+   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
+   hitFmt:function(h){return h+' de 8 palabras clave';},
+   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+};
+function T(){return I18N[STATE.lang];}
+function isMasters(){return STATE.track==='mdiv'||STATE.track==='thm';}
+function lockMin(){return isMasters()?15:2;}
+
+function $(id){return document.getElementById(id);}
+
+/* ---------- rendering ---------- */
+function renderTeaching(){
+  $('teach-en').className=STATE.lang==='en'?'':'hide';
+  $('teach-es').className=STATE.lang==='es'?'':'hide';
+}
+function renderChrome(){
+  var t=T();
+  document.documentElement.lang=STATE.lang;
+  $('t-title').textContent=t.title;$('t-unit').innerHTML=t.unit;
+  $('langBtn').textContent=t.lang;
+  $('t-greet').textContent=t.greet(STATE.name);
+  $('t-track').textContent=t.track(STATE.track);
+  $('epigraph').textContent=t.epigraph;
+  $('t-mc').textContent=t.mc;$('t-sa').textContent=t.sa;
+  $('t-saNote').textContent=isMasters()?t.saNoteMast:t.saNoteCert;
+  $('completeBtn').textContent=t.complete;
+  $('m-h').textContent=t.mh;$('m-p').textContent=t.mp;$('m-nl').textContent=t.mnl;
+  $('m-tl').textContent=t.mtl;$('m-go').textContent=t.mgo;
+}
+function renderMC(){
+  var wrap=$('mcWrap');wrap.innerHTML='';
+  for(var i=0;i<DATA.mc.length;i++){
+    (function(i){
+      var q=DATA.mc[i],st=STATE.mc[i];
+      var opts=STATE.lang==='en'?q.oen:q.oes;
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var expl=STATE.lang==='en'?q.xen:q.xes;
+      var correct=mcCorrectIdx(q.c,i);
+      var div=document.createElement('div');div.className='q';
+      var h='<div class="qn">'+(i+1)+'</div><div class="qp">'+prompt+'</div>';
+      div.innerHTML=h;
+      for(var o=0;o<4;o++){
+        (function(o){
+          var b=document.createElement('button');b.type='button';b.className='opt';
+          b.innerHTML='<span class="lt">'+LET[o]+'</span>'+opts[o];
+          if(st.answered){b.disabled=true;
+            if(o===correct)b.className='opt correct';
+            else if(o===st.chosen)b.className='opt wrong';}
+          else if(st.answered&&o===st.chosen){b.style.background='#efe7d2';b.style.borderColor='#d4af37';b.style.fontWeight='600';}
+          b.onclick=function(){if(st.answered)return;
+            STATE.mc[i].answered=true;STATE.mc[i].chosen=o;renderMC();};
+          div.appendChild(b);
+        })(o);
+      }
+      var e=document.createElement('div');e.className='expl'+(st.answered?' show':'');
+      e.textContent=expl;div.appendChild(e);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderSA(){
+  var wrap=$('saWrap');wrap.innerHTML='';var t=T();
+  for(var i=0;i<DATA.sa.length;i++){
+    (function(i){
+      var q=DATA.sa[i],st=STATE.sa[i];
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var model=STATE.lang==='en'?q.men:q.mes;
+      var div=document.createElement('div');div.className='q';
+      div.innerHTML='<div class="qn">'+(21+i)+'</div><div class="qp">'+prompt+'</div>';
+      var ta=document.createElement('textarea');ta.value=st.text;
+      ta.oninput=function(){STATE.sa[i].text=ta.value;};
+      div.appendChild(ta);
+      var btn=document.createElement('button');btn.type='button';btn.className='btn ghost';
+      btn.style.marginTop='8px';btn.textContent=t.check;
+      var res=document.createElement('div');res.className='sa-res'+(st.checked?' show':'');
+      function paint(){
+        var kws=STATE.lang==='en'?q.ken:q.kes;
+        var txt=STATE.sa[i].text||'';
+        if(txt.trim().length<100){
+          STATE.sa[i].hits=0;
+          res.innerHTML='<span class="sa-verdict soft">'+(STATE.lang==='en'?'Write a fuller answer (100 characters minimum).':'Escriba una respuesta m\u00e1s completa (m\u00ednimo 100 caracteres).')+'</span>';
+          res.classList.add('show');
+          return;
+        }
+        var hits=saScore(txt,kws);STATE.sa[i].hits=hits;
+        var pass=hits>=3;
+        var verdict=pass?('<span class="sa-verdict pass">'+t.passV+'</span>'):('<span class="sa-verdict soft">'+t.softV+'</span>');
+        res.innerHTML=verdict+' &middot; '+t.hitFmt(hits)+
+          '<div class="model"><div class="ml">'+t.model+'</div>'+model+'</div>';
+        res.className='sa-res show';STATE.sa[i].checked=true;
+      }
+      btn.onclick=function(){
+        if(!STATE.sa[i].text.trim()){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.blank+'</span>';return;}
+        if(STATE.sa[i].text.trim().length<100){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.minLen+'</span>';return;}
+        paint();
+      };
+      if(st.checked&&st.text.trim())paint();
+      div.appendChild(btn);div.appendChild(res);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderAll(){renderChrome();renderTeaching();renderMC();renderSA();refreshLock();}
+
+/* ---------- completion + lockout ---------- */
+function lockedUntil(){var v=lsGet(CFG.lockKey);return v?parseInt(v,10):0;}
+function refreshLock(){
+  var until=lockedUntil(),now=Date.now();
+  var btn=$('completeBtn');
+  if(until>now){
+    btn.disabled=true;
+    var mins=Math.ceil((until-now)/60000);
+    $('statusMsg').className='status lock';
+    $('statusMsg').textContent=(STATE.lang==='en'?'Locked. Try again in ':'Bloqueado. Reintente en ')+mins+(STATE.lang==='en'?' min.':' min.');
+  }else{btn.disabled=false;}
+}
+function markComplete(){
+  var p={};try{p=JSON.parse(lsGet(CFG.progressKey)||'{}');}catch(e){p={};}
+  p[CFG.unit]=true;lsSet(CFG.progressKey,JSON.stringify(p));
+  var t=T();
+  $('statusMsg').className='status ok';$('statusMsg').textContent=t.mGood;
+  var nl=$('nextLink');nl.href=CFG.next;nl.textContent=t.nextTxt;nl.className='next';
+  $('completeBtn').disabled=true;
+}
+function onComplete(){
+  var t=T();
+  var mcCorrect=0,mcAnswered=0;
+  for(var i=0;i<DATA.mc.length;i++){if(STATE.mc[i].answered){mcAnswered++;
+    if(STATE.mc[i].chosen===mcCorrectIdx(DATA.mc[i].c,i))mcCorrect++;}}
+  var saPass=0;for(var j=0;j<DATA.sa.length;j++){if(STATE.sa[j].hits>=3)saPass++;}
+  var needMC=18,needSA=9;
+  if(mcAnswered<DATA.mc.length){
+    $('statusMsg').className='status warn';
+    $('statusMsg').textContent=(STATE.lang==='en'
+      ?'Answer all multiple-choice questions first ('+mcAnswered+'/20).'
+      :'Responda primero todas las preguntas de opci\u00f3n m\u00faltiple ('+mcAnswered+'/20).');
+    return;
+  }
+  STATE.revealed=true;renderMC();
+  var saOk = isMasters() ? (saPass>=needSA) : true;
+  if(mcCorrect>=needMC&&saOk){markComplete();return;}
+  // genuine fail -> lockout
+  lsSet(CFG.lockKey,String(Date.now()+lockMin()*60000));
+  $('statusMsg').className='status lock';
+  $('statusMsg').textContent=(STATE.lang==='en'
+    ?('Not yet: MC '+mcCorrect+'/20 (need 18), SA '+saPass+'/10 (need 7). '+t.mShort)
+    :('A\u00fan no: OM '+mcCorrect+'/20 (necesita 18), RB '+saPass+'/10 (necesita 7). '+t.mShort));
+  refreshLock();
+}
+
+/* ---------- init ---------- */
+function startApp(){
+  STATE.lang=(lsGet('cts_lang')==='es')?'es':'en';
+  STATE.name=lsGet('cts_student')||'';
+  STATE.track=lsGet('cts_track')||'cert';
+  $('langBtn').onclick=function(){STATE.lang=STATE.lang==='en'?'es':'en';
+    lsSet('cts_lang',STATE.lang);renderAll();};
+  $('completeBtn').onclick=onComplete;
+  $('m-go').onclick=function(){
+    var nm=$('m-name').value.trim();var tk=$('m-track').value;
+    if(!nm){$('m-name').focus();return;}
+    STATE.name=nm;STATE.track=tk;
+    lsSet('cts_student',nm);lsSet('cts_track',tk);
+    $('reg').className='modal hide';renderAll();
+  };
+  if(CFG.showReg&&(!STATE.name||!lsGet('cts_track'))){
+    $('reg').className='modal';$('m-track').value=STATE.track;renderChrome();
+  }else{$('reg').className='modal hide';}
+  renderAll();
+  setInterval(refreshLock,30000);
+}
+if(typeof document!=='undefined'){
+  if(document.readyState!=='loading')startApp();
+  else document.addEventListener('DOMContentLoaded',startApp);
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSLOCReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

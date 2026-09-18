@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Romans | Unit 1: The Book That Shook the World</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', Times, serif; line-height: 1.6; background: #f9f7f3; color: #1a2a1f; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+.course-header { background: #5a1e1e; color: white; padding: 1.5rem 2rem; text-align: center; }
+.course-header h1 { font-size: 2rem; letter-spacing: 2px; margin-bottom: 0.25rem; }
+.course-header h2 { font-size: 1.2rem; font-weight: normal; opacity: 0.9; }
+.author-line { font-size: 0.95rem; color: #d4a64a; font-style: italic; margin-top: 0.35rem; letter-spacing: 0.5px; }
+.unit-badge { display: inline-block; background: #d4a64a; color: #5a1e1e; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-top: 0.5rem; }
+.controls-bar { background: #ede4d8; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #cbc3ae; }
+.lang-buttons { display: flex; gap: 10px; }
+.lang-btn { background: white; border: 1px solid #5a1e1e; padding: 0.4rem 1rem; cursor: pointer; font-weight: bold; transition: 0.2s; border-radius: 4px; }
+.lang-btn.active { background: #5a1e1e; color: white; }
+.track-indicator { background: #5a1e1e; color: #d4a64a; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+body.lang-en .lang-es { display: none; }
+body.lang-en .lang-both { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-both { display: none; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 900px) {
+    body.lang-both .lesson-grid { grid-template-columns: 1fr; }
+    body.lang-both .lang-es { border-top: 2px dashed #cbc3ae; padding-top: 1rem; margin-top: 1rem; }
+}
+.registration-section { background: #fef7e0; border-bottom: 3px solid #d4a64a; padding: 2rem; }
+.registration-section h3 { color: #5a1e1e; margin-bottom: 1rem; text-align: center; }
+.registration-form { max-width: 500px; margin: 0 auto; }
+.registration-form label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+.registration-form input[type="text"] { width: 100%; padding: 0.6rem; margin-bottom: 1rem; border: 1px solid #cbc3ae; border-radius: 4px; font-size: 1rem; font-family: inherit; }
+.registration-form .track-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+.registration-form .track-options label { font-weight: normal; cursor: pointer; padding: 0.5rem; border: 1px solid #cbc3ae; border-radius: 4px; background: white; }
+.registration-form .track-options input { margin-right: 0.5rem; }
+.registration-form button { background: #5a1e1e; color: white; border: none; padding: 0.75rem 2rem; font-size: 1rem; cursor: pointer; border-radius: 4px; width: 100%; }
+.registration-form button:hover { background: #401414; }
+.lesson-section { padding: 2rem; }
+.lesson-section h3 { color: #5a1e1e; border-left: 4px solid #d4a64a; padding-left: 1rem; margin: 1.5rem 0 1rem 0; }
+.lesson-section h3:first-of-type { margin-top: 0; }
+.lesson-section p { margin-bottom: 1rem; }
+.scripture { background: #f0ede5; padding: 1rem 1.5rem; border-left: 4px solid #d4a64a; font-style: italic; margin: 1rem 0; font-family: 'Courier New', monospace; }
+.illustration { background: #e8f0e5; padding: 1rem 1.5rem; border-radius: 8px; margin: 1rem 0; }
+.exam-section { background: #fefaf0; border-top: 3px solid #5a1e1e; padding: 2rem; page-break-before: always; }
+.exam-header { text-align: center; margin-bottom: 2rem; }
+.question-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; page-break-inside: avoid; }
+.question-text { font-weight: bold; margin-bottom: 0.75rem; }
+.options { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+.options label { display: block; margin: 0.4rem 0; cursor: pointer; }
+.feedback { margin-top: 0.75rem; padding: 0.5rem; border-radius: 4px; font-size: 0.9rem; }
+.feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+.modelbox { margin-top: 0.6rem; padding: 0.6rem 0.75rem; background: #fff8e1; color: #5d4a00; border-left: 4px solid #d4af37; border-radius: 4px; }
+
+.essay-question textarea { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+.action-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+.action-buttons button { background: #5a1e1e; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+.action-buttons button:hover { background: #401414; }
+.action-buttons button.reset-btn { background: #8b6b3d; }
+.lockout-timer { text-align: center; padding: 1rem; background: #f8d7da; color: #721c24; margin: 1rem; border-radius: 8px; font-weight: bold; }
+.nav-links { display: flex; justify-content: space-between; padding: 1rem 2rem; background: #ede4d8; }
+.nav-links a { color: #5a1e1e; text-decoration: none; font-weight: bold; }
+.exam-locked { background: #fff3cd; color: #856404; padding: 2rem; text-align: center; border-radius: 8px; font-weight: bold; }
+@media print {
+    .controls-bar, .action-buttons, .nav-links, .lockout-timer, .registration-section { display: none !important; }
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; margin: 0; }
+    .course-header { background: #5a1e1e; color: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .question-card { border: 1px solid #ccc; page-break-inside: avoid; }
+    .exam-section { page-break-before: always; }
+    .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.lang-both .lesson-grid { display: block; }
+}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 2px;font-family:'Georgia',serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#5a1e1e;margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid #cdbf9d;color:#5a1e1e;text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:#5a1e1e;}
+.unitnav a.active{background:#5a1e1e;color:#fff;border-color:#5a1e1e;}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+    <div class="course-header">
+        <h1>ΡΩΜΑΙΟΥΣ</h1>
+        <h2><span class="lang-en">The Book of Romans</span><span class="lang-es">El Libro de Romanos</span></h2>
+        <div class="author-line"><span class="lang-en">by Dr. Wayne Cook &amp; Dr. Ted Rogers</span><span class="lang-es">por el Dr. Wayne Cook y el Dr. Ted Rogers</span></div>
+        <div class="unit-badge"><span class="lang-en">Unit 1 · The Book That Shook the World</span><span class="lang-es">Unidad 1 · El Libro Que Sacudió al Mundo</span></div>
+    </div>
+
+    <div class="controls-bar">
+        <div class="lang-buttons">
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="es">Español</button>
+            <button class="lang-btn" data-lang="both">Both</button>
+        </div>
+        <div class="track-indicator" id="trackIndicator">Loading...</div>
+    </div>
+
+    <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+      <span class="nl"><span class="lang-en">Units</span><span class="lang-es">Unidades</span></span>
+      <a href="CTSRomansUnit1.html" class="active">1</a>
+      <a href="CTSRomansUnit2.html">2</a>
+      <a href="CTSRomansUnit3.html">3</a>
+      <a href="CTSRomansUnit4.html">4</a>
+      <a href="CTSRomansUnit5.html">5</a>
+      <a href="CTSRomansUnit6.html">6</a>
+      <a href="CTSRomansUnit7.html">7</a>
+      <a href="CTSRomansUnit8.html">8</a>
+      <a href="CTSRomansUnit9.html">9</a>
+      <a href="CTSRomansUnit10.html">10</a>
+    </nav>
+
+    <div class="registration-section" id="registrationSection" style="display:none;">
+        <h3><span class="lang-en">Register for CTS Romans</span><span class="lang-es">Regístrate en CTS Romanos</span></h3>
+        <div class="registration-form">
+            <p style="margin-bottom: 1rem;"><span class="lang-en">Welcome. Before beginning Unit 1, please enter your name (as you would like it to appear on your certificate) and select your study track.</span><span class="lang-es">Bienvenido. Antes de comenzar la Unidad 1, ingrese su nombre (como desea que aparezca en su certificado) y seleccione su vía de estudio.</span></p>
+            <label for="regName"><span class="lang-en">Full Name:</span><span class="lang-es">Nombre Completo:</span></label>
+            <input type="text" id="regName" placeholder="Jane Doe / María García">
+            <label><span class="lang-en">Study Track:</span><span class="lang-es">Vía de Estudio:</span></label>
+            <div class="track-options">
+                <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en"><strong>Certificate</strong> — 20 multiple choice per unit, 18/20 to pass</span><span class="lang-es"><strong>Certificado</strong> — 20 opción múltiple por unidad, 18/20 para aprobar</span></label>
+                <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en"><strong>Th.M.</strong> — 20 MC + 10 short answer, both 90%</span><span class="lang-es"><strong>Th.M.</strong> — 20 OM + 10 respuesta corta, ambos 90%</span></label>
+                <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en"><strong>M.Div.</strong> — 20 MC + 10 short answer, both 90% (advanced)</span><span class="lang-es"><strong>M.Div.</strong> — 20 OM + 10 respuesta corta, ambos 90% (avanzado)</span></label>
+            </div>
+            <button id="regSubmit"><span class="lang-en">Begin Course</span><span class="lang-es">Comenzar Curso</span></button>
+        </div>
+    </div>
+
+    <div class="lesson-section">
+        <div class="lesson-grid">
+            <div class="lang-en">
+                <h3>1. The Book That Inspired the Reformation</h3>
+                <p>Some months ago, in a sermon I have often returned to, I told the story of a German monk named Martin Luther. He had done everything religion told him to do — taken vows, fasted, prayed long hours, sought a doctoral degree in theology, even climbed the stairs of Pilate's Praetorium on his knees in Rome. And he was still terrified of God. Then, while teaching the book of Romans to his students at Wittenberg, he began to dwell on one short phrase from chapter 1, verse 17: "The just shall live by faith." Slowly the meaning broke over him. Salvation was not something he had to earn by his discipline. It was a gift, received by trusting Christ. That revelation in Luther's study cracked open the Protestant Reformation.</p>
+
+                <p>Two centuries later, on May 24, 1738, a discouraged Anglican missionary went "very unwillingly" to a small religious meeting on Aldersgate Street in London. He had spent two miserable years failing as a missionary in Georgia, asking himself in his journal, "Who shall convert me?" That night, someone read aloud from the preface to Luther's commentary on Romans. John Wesley wrote in his journal, "About a quarter before nine, I felt my heart strangely warmed. I felt I did trust in Christ, Christ alone, for salvation; and an assurance was given me that He had taken away my sins, even mine." From that night came the great Wesleyan Revival, and eventually the Methodist Church.</p>
+
+                <p>Both transformations — Luther's and Wesley's — came through the same little book. Augustine, much earlier, credited his own conversion to a verse from Romans 13. Across sixteen centuries Romans has been doing this. The reason Paul's letter keeps detonating in human hearts is that it does what no other book does quite the same way: it lays out the gospel, line by line, in a single sustained argument. If you understand Romans, you understand the heart of Christianity.</p>
+
+                <div class="scripture">
+                    <strong>Romans 1:16-17 (NKJV):</strong> "For I am not ashamed of the gospel of Christ, for it is the power of God to salvation for everyone who believes, for the Jew first and also for the Greek. For in it the righteousness of God is revealed from faith to faith; as it is written, 'The just shall live by faith.'"
+                </div>
+
+                <h3>2. The Man: Paul of Tarsus</h3>
+                <p>The letter was written by Paul the Apostle — the same Paul who once held the coats of the men stoning Stephen. He was born about AD 5 in Tarsus, a Roman city in modern-day Turkey, to Jewish parents who happened to possess Roman citizenship — a remarkable privilege that would later save his life. Around AD 10 the family moved to Jerusalem, and as a teenager Saul (his Hebrew name) was sent to study under Rabbi Gamaliel, the most respected teacher in Israel. Gamaliel was a moderate; Saul was not. Where his mentor counseled patience with the new Christian movement, Saul was rabid. He stood approvingly at Stephen's stoning. He went door to door dragging believers off to prison. He was, in his own words, "exceedingly zealous" — and convinced he was serving God.</p>
+
+                <p>Then on the Damascus road a light brighter than the noonday sun knocked him flat, and a voice said, "Saul, Saul, why are you persecuting Me?" When he asked who was speaking, the voice answered, "I am Jesus, whom you are persecuting." Three days later he was baptized, his eyes opened both physically and spiritually, and the most ferocious persecutor of the church became its most effective missionary.</p>
+
+                <p>Twenty-three years passed between his conversion and the writing of Romans. In those years Paul had crossed the Roman world three times, planted churches, suffered floggings, shipwrecks, and stonings, and developed his theology in the white heat of real ministry. By the time he wrote Romans, his thinking was fully matured. This is not the apostle's first attempt to explain the gospel. This is his crowning statement of it.</p>
+
+                <h3>3. When, Where, and to Whom</h3>
+                <p>Paul wrote Romans in the late winter or early spring of AD 57, from the Greek city of Corinth, near the end of his third missionary journey. He was about to sail east to Jerusalem with a relief offering he had collected for the poor saints there. Beyond Jerusalem he planned to sail west to Rome, and then on to Spain. That fourth journey never happened the way he planned it — he arrived in Rome in chains a few years later — but at the moment of writing, Paul was a free man hoping to meet the Roman believers face-to-face for the first time.</p>
+
+                <p>The letter was carried to Rome by a woman named Phoebe, a deaconess from the nearby seaport church of Cenchrea. She is named at the very end of the letter, in chapter 16, and Paul commends her warmly. It is worth pausing on the fact that the most important theological document in church history was hand-delivered by a woman entrusted with reading it aloud in the Roman house churches.</p>
+
+                <p>Those house churches are themselves unusual. Paul had not founded the Roman church. He had never been there. Unlike his letters to Corinth or Galatia or Thessalonica, Romans does not address specific scandals or schisms — it addresses what Paul wants every Christian everywhere to understand. The church in Rome had likely begun with Jews who came to faith at Pentecost in Acts 2 and then carried the gospel home with them. By Paul's day it was a network of small fellowships, both Jewish and Gentile, meeting in homes scattered across the imperial capital, and known throughout the world for the strength of their faith.</p>
+
+                <h3>4. The Salutation Unpacked (1:1-7)</h3>
+                <p>In the opening line Paul calls himself "a bondservant of Jesus Christ." The Greek word <em>doulos</em> means more than "employee" or "follower." A bondservant has been purchased outright. He owns nothing apart from what his master allows him. The most influential theologian in church history opens his masterpiece by identifying himself, first, as the legal property of Jesus Christ.</p>
+
+                <p>Notice the way Paul orders the names of his Master. At the beginning of the salutation he writes "Jesus Christ," leading with the human name and following it with the title. By the end of the salutation he flips it — "Christ Jesus" — leading with the divine title. The alpha and the omega. The complete man and the complete God, all in one Savior. He is "called to be an apostle, separated to the gospel of God." <em>Separated</em> means consecrated, set apart for a specific divine purpose. Paul did not volunteer for this. He was drafted.</p>
+
+                <h3>5. The Theme Verse: The Just Shall Live by Faith</h3>
+                <p>Then comes the verse the whole book hangs on. Paul is not ashamed of the gospel because it is the power of God to salvation for everyone who believes — for the Jew first, and also for the Greek. And in it, the righteousness of God is revealed from faith to faith.</p>
+
+                <p>Paul is quoting Habakkuk 2:4, written more than six hundred years earlier in a desperate moment of Israel's history. Habakkuk had asked God why the wicked seemed to prosper, and God answered, in part, "the just shall live by his faith." That little verse traveled forward through the centuries until Paul picked it up here in Romans, and Luther picked it up from Paul, and Wesley picked it up from Luther. One short prophetic line, lit on fire three different times in three different centuries, each time rearranging the spiritual map of the world.</p>
+
+                <p>The verse contains three claims that will shape the whole book. First, righteousness — being right with God — is not something we manufacture. It comes from God Himself. Second, that righteousness is received "from faith to faith." Faith is both the starting point and the finishing line, the means and the goal. Third, the result is life. Not just escape from condemnation, but life — a quality of existence God designed humans to enjoy with Him.</p>
+
+                <div class="illustration">
+                    <strong>Pastoral Reflection:</strong> Every denomination tends to drift back toward law. Grace seems too easy. We want a system we can master, a ladder we can climb. But Romans 1:17 puts the ladder away. The righteousness God requires is the righteousness God supplies. The faith that receives it is itself a gift. The life that follows is His life lived in us. The whole transaction is from Him, by Him, and to Him. Your job is to believe and to live.
+                </div>
+
+                <h3>6. Why Romans Still Speaks</h3>
+                <p>Almost two thousand years have passed since Phoebe carried this scroll into Rome. Augustine in the fourth century, Luther in the sixteenth, Wesley in the eighteenth — Romans has cracked them all open. In every generation God has used this one short letter to convert sinners, reform the church, and ignite revival. It still does.</p>
+
+                <p>The reason is simple. Romans does not assume you already believe. It does not start with ten steps to a better marriage or five keys to spiritual victory. It starts where every honest human heart starts — with the question of how a sinful person can possibly be right with a holy God. Paul will spend the next sixteen chapters answering that question. He will not flinch from the bad news, and he will not water down the good news. By the time you reach chapter 8, you will know the gospel from the inside. By chapter 12, you will know how to live it. By chapter 16, you will be ready to carry the same message into your own city.</p>
+
+                <p>Welcome to Romans. The journey ahead is long and bracing. Settle in.</p>
+            </div>
+
+            <div class="lang-es">
+                <h3>1. El Libro Que Inspiró la Reforma</h3>
+                <p>Hace algunos meses, en un sermón al que he regresado muchas veces, conté la historia de un monje alemán llamado Martín Lutero. Había hecho todo lo que la religión le decía que hiciera — tomó votos, ayunó, oró largas horas, buscó un doctorado en teología, incluso subió de rodillas las escaleras del Pretorio de Pilato en Roma. Y seguía aterrorizado de Dios. Luego, mientras enseñaba el libro de Romanos a sus estudiantes en Wittenberg, comenzó a meditar en una frase corta del capítulo 1, versículo 17: "El justo vivirá por la fe." Lentamente el significado se le abrió. La salvación no era algo que tuviera que ganar por su disciplina. Era un regalo, recibido al confiar en Cristo. Esa revelación en el estudio de Lutero abrió de par en par la Reforma Protestante.</p>
+
+                <p>Dos siglos después, el 24 de mayo de 1738, un misionero anglicano desanimado fue "muy a su pesar" a una pequeña reunión religiosa en la calle Aldersgate de Londres. Había pasado dos años miserables fracasando como misionero en Georgia, preguntándose en su diario: "¿Quién me convertirá a mí?" Esa noche, alguien leyó en voz alta el prefacio del comentario de Lutero sobre Romanos. Juan Wesley escribió en su diario: "Como un cuarto antes de las nueve, sentí mi corazón extrañamente ardiendo. Sentí que sí confiaba en Cristo, solo en Cristo, para la salvación; y se me dio la seguridad de que Él había quitado mis pecados, incluso los míos." De esa noche surgió el gran Avivamiento Wesleyano y, eventualmente, la Iglesia Metodista.</p>
+
+                <p>Ambas transformaciones — la de Lutero y la de Wesley — vinieron a través del mismo pequeño libro. Agustín, mucho antes, atribuyó su propia conversión a un versículo de Romanos 13. A lo largo de dieciséis siglos, Romanos ha estado haciendo esto. La razón por la que la carta de Pablo sigue detonando en los corazones humanos es que hace lo que ningún otro libro hace de la misma manera: expone el evangelio, línea por línea, en un solo argumento sostenido. Si entiendes Romanos, entiendes el corazón del cristianismo.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 1:16-17 (RVG):</strong> "Porque no me avergüenzo del evangelio de Cristo; porque es el poder de Dios para salvación a todo aquel que cree; al judío primeramente, y también al griego. Porque en el evangelio la justicia de Dios se revela por fe y para fe, como está escrito: Mas el justo por la fe vivirá."
+                </div>
+
+                <h3>2. El Hombre: Pablo de Tarso</h3>
+                <p>La carta fue escrita por el apóstol Pablo — el mismo Pablo que una vez sostuvo las ropas de los hombres que apedreaban a Esteban. Nació alrededor del año 5 d.C. en Tarso, una ciudad romana en lo que hoy es Turquía, de padres judíos que poseían ciudadanía romana — un privilegio notable que más tarde le salvaría la vida. Cerca del año 10 d.C. la familia se mudó a Jerusalén, y como adolescente, Saulo (su nombre hebreo) fue enviado a estudiar bajo el rabino Gamaliel, el maestro más respetado de Israel. Gamaliel era moderado; Saulo no. Donde su mentor aconsejaba paciencia con el nuevo movimiento cristiano, Saulo era rabioso. Estuvo aprobando el apedreamiento de Esteban. Iba de puerta en puerta arrastrando a los creyentes a la cárcel. Era, en sus propias palabras, "sumamente celoso" — y convencido de que servía a Dios.</p>
+
+                <p>Entonces, en el camino a Damasco, una luz más brillante que el sol del mediodía lo derribó, y una voz dijo: "Saulo, Saulo, ¿por qué me persigues?" Cuando preguntó quién hablaba, la voz respondió: "Yo soy Jesús, a quien tú persigues." Tres días después fue bautizado, sus ojos se abrieron física y espiritualmente, y el más feroz perseguidor de la iglesia se convirtió en su misionero más eficaz.</p>
+
+                <p>Pasaron veintitrés años entre su conversión y la escritura de Romanos. En esos años Pablo había cruzado el mundo romano tres veces, plantado iglesias, sufrido azotes, naufragios y apedreamientos, y desarrollado su teología en el calor blanco del ministerio real. Para cuando escribió Romanos, su pensamiento estaba plenamente maduro. Este no es el primer intento del apóstol de explicar el evangelio. Esta es su declaración cumbre de éste.</p>
+
+                <h3>3. Cuándo, Dónde y a Quién</h3>
+                <p>Pablo escribió Romanos a fines del invierno o principios de la primavera del año 57 d.C., desde la ciudad griega de Corinto, cerca del final de su tercer viaje misionero. Estaba a punto de navegar al este hacia Jerusalén con una ofrenda de socorro que había recolectado para los santos pobres allí. Más allá de Jerusalén planeaba navegar al oeste hacia Roma, y luego a España. Ese cuarto viaje nunca sucedió como lo planeó — llegó a Roma encadenado unos años después — pero en el momento de escribir, Pablo era un hombre libre que esperaba conocer a los creyentes romanos cara a cara por primera vez.</p>
+
+                <p>La carta fue llevada a Roma por una mujer llamada Febe, una diaconisa de la iglesia portuaria cercana de Cencrea. Se la nombra al final mismo de la carta, en el capítulo 16, y Pablo la encomienda calurosamente. Vale la pena detenerse en el hecho de que el documento teológico más importante de la historia de la iglesia fue entregado en mano por una mujer encargada de leerlo en voz alta en las iglesias domésticas romanas.</p>
+
+                <p>Esas iglesias domésticas son en sí mismas inusuales. Pablo no había fundado la iglesia romana. Nunca había estado allí. A diferencia de sus cartas a Corinto, Galacia o Tesalónica, Romanos no aborda escándalos o cismas específicos — aborda lo que Pablo quiere que todo cristiano en todas partes entienda. La iglesia en Roma probablemente comenzó con judíos que llegaron a la fe en Pentecostés en Hechos 2 y luego llevaron el evangelio a casa con ellos. Para los días de Pablo, era una red de pequeñas comunidades, tanto judías como gentiles, reuniéndose en hogares esparcidos por la capital imperial, y conocida en todo el mundo por la fuerza de su fe.</p>
+
+                <h3>4. El Saludo Desempaquetado (1:1-7)</h3>
+                <p>En la línea de apertura Pablo se llama a sí mismo "siervo de Jesucristo." La palabra griega <em>doulos</em> significa más que "empleado" o "seguidor." Un siervo (bondservant) ha sido comprado por completo. No posee nada aparte de lo que su amo le permite. El teólogo más influyente de la historia de la iglesia abre su obra maestra identificándose, primero, como propiedad legal de Jesucristo.</p>
+
+                <p>Note la manera en que Pablo ordena los nombres de su Maestro. Al principio del saludo escribe "Jesucristo," empezando con el nombre humano y siguiendo con el título. Al final del saludo lo invierte — "Cristo Jesús" — empezando con el título divino. El alfa y la omega. El hombre completo y el Dios completo, todo en un Salvador. Es "llamado a ser apóstol, apartado para el evangelio de Dios." <em>Apartado</em> significa consagrado, separado para un propósito divino específico. Pablo no se ofreció como voluntario para esto. Fue reclutado.</p>
+
+                <h3>5. El Versículo Tema: El Justo Vivirá por la Fe</h3>
+                <p>Luego viene el versículo del que cuelga todo el libro. Pablo no se avergüenza del evangelio porque es el poder de Dios para salvación a todo aquel que cree — al judío primero, y también al griego. Y en él, la justicia de Dios se revela de fe en fe.</p>
+
+                <p>Pablo está citando Habacuc 2:4, escrito más de seiscientos años antes en un momento desesperado de la historia de Israel. Habacuc le había preguntado a Dios por qué los malvados parecían prosperar, y Dios respondió, en parte: "el justo por su fe vivirá." Ese pequeño versículo viajó hacia adelante a través de los siglos hasta que Pablo lo recogió aquí en Romanos, y Lutero lo recogió de Pablo, y Wesley lo recogió de Lutero. Una breve línea profética, encendida tres veces diferentes en tres siglos diferentes, cada vez reorganizando el mapa espiritual del mundo.</p>
+
+                <p>El versículo contiene tres afirmaciones que darán forma a todo el libro. Primero, la justicia — estar bien con Dios — no es algo que fabricamos. Viene del mismo Dios. Segundo, esa justicia se recibe "de fe en fe." La fe es tanto el punto de partida como la línea de meta, el medio y el objetivo. Tercero, el resultado es vida. No solo escapar de la condenación, sino vida — una calidad de existencia que Dios diseñó para que los humanos disfruten con Él.</p>
+
+                <div class="illustration">
+                    <strong>Reflexión Pastoral:</strong> Toda denominación tiende a derivar de vuelta hacia la ley. La gracia parece demasiado fácil. Queremos un sistema que podamos dominar, una escalera que podamos subir. Pero Romanos 1:17 guarda la escalera. La justicia que Dios requiere es la justicia que Dios provee. La fe que la recibe es ella misma un regalo. La vida que sigue es Su vida vivida en nosotros. Toda la transacción es de Él, por Él y para Él. Tu trabajo es creer y vivir.
+                </div>
+
+                <h3>6. Por Qué Romanos Todavía Habla</h3>
+                <p>Casi dos mil años han pasado desde que Febe llevó este rollo a Roma. Agustín en el siglo cuarto, Lutero en el dieciséis, Wesley en el dieciocho — Romanos los ha abierto a todos. En cada generación Dios ha usado esta única carta corta para convertir a pecadores, reformar la iglesia y encender avivamiento. Todavía lo hace.</p>
+
+                <p>La razón es simple. Romanos no asume que ya crees. No comienza con diez pasos para un mejor matrimonio o cinco claves para la victoria espiritual. Comienza donde comienza todo corazón humano honesto — con la pregunta de cómo una persona pecadora puede posiblemente estar bien con un Dios santo. Pablo pasará los próximos dieciséis capítulos respondiendo esa pregunta. No se acobardará ante las malas noticias, y no diluirá las buenas noticias. Para cuando llegues al capítulo 8, conocerás el evangelio desde adentro. Para el capítulo 12, sabrás cómo vivirlo. Para el capítulo 16, estarás listo para llevar el mismo mensaje a tu propia ciudad.</p>
+
+                <p>Bienvenido a Romanos. El viaje por delante es largo y vigorizante. Acomódate.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="exam-section" id="examSection">
+        <div class="exam-header">
+            <h2><span class="lang-en">Unit 1 Examination — Romans 1:1-17</span><span class="lang-es">Examen de la Unidad 1 — Romanos 1:1-17</span></h2>
+            <p><span class="lang-en">20 multiple choice questions + 10 short answer questions (essays required for Th.M. and M.Div. only)</span><span class="lang-es">20 preguntas de opción múltiple + 10 preguntas de respuesta corta (requeridas solo para Th.M. y M.Div.)</span></p>
+        </div>
+        <div id="mcQuestions"></div>
+        <div id="saQuestions"></div>
+        <div class="action-buttons">
+            <button id="submitBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Entregar Examen</span></button>
+            <button id="resetBtn" class="reset-btn"><span class="lang-en">Reset Exam</span><span class="lang-es">Reiniciar Examen</span></button>
+        </div>
+        <div id="lockoutTimer" class="lockout-timer" style="display:none;"></div>
+    </div>
+
+    <div class="nav-links">
+        <span></span>
+        <a href="CTSRomansUnit2.html"><span class="lang-en">Next Unit →</span><span class="lang-es">Unidad Siguiente →</span></a>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// PER-UNIT CONSTANTS
+// ============================================================
+const UNIT = 1;
+const COURSE_PREFIX = "romans";
+const NEXT_URL = "CTSRomansUnit2.html";
+const PREV_URL = null;
+const IS_LAST_UNIT = false;
+const SHOW_REGISTRATION_CARD = true;
+const CERT_URL = "CTSRomansCertificate.html";
+
+// ============================================================
+// MULTIPLE CHOICE QUESTIONS (20) — Distribution A=5, B=5, C=5, D=5
+// ============================================================
+const mcQuestions = [{"text": "1. Who wrote the book of Romans?", "options": ["A. Paul the Apostle", "D. Apollos", "C. Luke", "B. Peter"], "correct": 0, "correctFeedback": "Correct. Paul identifies himself in 1:1 and the writing style matches his other letters.", "incorrectFeedback": "Paul wrote Romans, identifying himself in 1:1 as a bondservant of Christ Jesus, called to be an apostle.", "textEs": "1. ¿Quién escribió el libro de Romanos?", "optionsEs": ["A. Pablo el Apóstol", "D. Apolos", "C. Lucas", "B. Pedro"], "correctFeedbackEs": "Correcto. Pablo se identifica en 1:1 y el estilo de escritura coincide con el de sus otras cartas.", "incorrectFeedbackEs": "Pablo escribió Romanos, identificándose en 1:1 como siervo de Jesucristo, llamado a ser apóstol."}, {"text": "2. Approximately when was Romans written?", "options": ["D. AD 95", "A. AD 35", "B. AD 57", "C. AD 70"], "correct": 2, "correctFeedback": "Correct. Romans was written in late winter or early spring of AD 57.", "incorrectFeedback": "Romans dates to AD 57, near the end of Paul's third missionary journey, twenty-three years after his conversion.", "textEs": "2. ¿Aproximadamente cuándo se escribió Romanos?", "optionsEs": ["D. 95 d.C.", "A. 35 d.C.", "B. 57 d.C.", "C. 70 d.C."], "correctFeedbackEs": "Correcto. Romanos se escribió a finales del invierno o principios de la primavera del 57 d.C.", "incorrectFeedbackEs": "Romanos data del 57 d.C., cerca del final del tercer viaje misionero de Pablo, veintitrés años después de su conversión."}, {"text": "3. From which city did Paul write Romans?", "options": ["A. Ephesus", "C. Corinth", "B. Antioch", "D. Jerusalem"], "correct": 1, "correctFeedback": "Correct. Paul wrote from Corinth at the close of his third missionary journey.", "incorrectFeedback": "Romans was written from Corinth, Greece, just before Paul sailed east to Jerusalem with the relief offering.", "textEs": "3. ¿Desde qué ciudad escribió Pablo Romanos?", "optionsEs": ["A. Éfeso", "C. Corinto", "B. Antioquía", "D. Jerusalén"], "correctFeedbackEs": "Correcto. Pablo escribió desde Corinto al final de su tercer viaje misionero.", "incorrectFeedbackEs": "Romanos se escribió desde Corinto, Grecia, justo antes de que Pablo navegara al oriente hacia Jerusalén con la ofrenda."}, {"text": "4. Who carried the letter of Romans to the church in Rome?", "options": ["A. Timothy", "B. Silas", "C. Tertius", "D. Phoebe"], "correct": 3, "correctFeedback": "Correct. Phoebe, a deaconess from Cenchrea, hand-delivered the letter and likely read it aloud in the Roman house churches.", "incorrectFeedback": "Phoebe of Cenchrea carried Romans to Rome. Paul commends her at the very end of the letter in chapter 16.", "textEs": "4. ¿Quién llevó la carta de Romanos a la iglesia en Roma?", "optionsEs": ["A. Timoteo", "B. Silas", "C. Tercio", "D. Febe"], "correctFeedbackEs": "Correcto. Febe, diaconisa de Cencrea, entregó la carta en mano y probablemente la leyó en voz alta en las iglesias en las casas de Roma.", "incorrectFeedbackEs": "Febe de Cencrea llevó Romanos a Roma. Pablo la encomienda al final mismo de la carta, en el capítulo 16."}, {"text": "5. Who was Paul's teacher in Jerusalem during his rabbinic training?", "options": ["C. Shammai", "B. Hillel", "D. Annas", "A. Gamaliel"], "correct": 3, "correctFeedback": "Correct. Saul studied under Rabbi Gamaliel, the most respected teacher in Israel at the time.", "incorrectFeedback": "Gamaliel was Paul's teacher (Acts 22:3). Gamaliel was moderate toward the Christian movement; Saul was not.", "textEs": "5. ¿Quién fue el maestro de Pablo en Jerusalén durante su formación rabínica?", "optionsEs": ["C. Shammai", "B. Hillel", "D. Anás", "A. Gamaliel"], "correctFeedbackEs": "Correcto. Saulo estudió bajo el rabí Gamaliel, el maestro más respetado de Israel en aquel tiempo.", "incorrectFeedbackEs": "Gamaliel fue el maestro de Pablo (Hechos 22:3). Gamaliel era moderado hacia el movimiento cristiano; Saulo no lo era."}, {"text": "6. Where did Paul encounter the risen Christ?", "options": ["B. On the road to Damascus", "D. In Caesarea", "C. In Tarsus", "A. In the Jerusalem temple"], "correct": 0, "correctFeedback": "Correct. The Damascus Road encounter (Acts 9) reversed Saul's life and ministry.", "incorrectFeedback": "On the road to Damascus, a light from heaven knocked Saul down and the voice of Jesus said, 'Saul, Saul, why are you persecuting Me?'", "textEs": "6. ¿Dónde se encontró Pablo con el Cristo resucitado?", "optionsEs": ["B. En el camino a Damasco", "D. En Cesarea", "C. En Tarso", "A. En el templo de Jerusalén"], "correctFeedbackEs": "Correcto. El encuentro en el camino a Damasco (Hechos 9) transformó por completo la vida y el ministerio de Saulo.", "incorrectFeedbackEs": "En el camino a Damasco, una luz del cielo derribó a Saulo y la voz de Jesús dijo: 'Saulo, Saulo, ¿por qué me persigues?'"}, {"text": "7. Which verse serves as the theme verse of Romans?", "options": ["B. Romans 6:23", "D. Romans 8:28", "A. Romans 3:23", "C. Romans 1:17"], "correct": 3, "correctFeedback": "Correct. Romans 1:17 is the theme verse: 'The just shall live by faith.'", "incorrectFeedback": "Romans 1:17 is the theme verse: 'For in it the righteousness of God is revealed from faith to faith; as it is written, The just shall live by faith.'", "textEs": "7. ¿Qué versículo sirve como el versículo tema de Romanos?", "optionsEs": ["B. Romanos 6:23", "D. Romanos 8:28", "A. Romanos 3:23", "C. Romanos 1:17"], "correctFeedbackEs": "Correcto. Romanos 1:17 es el versículo tema: 'Mas el justo por la fe vivirá.'", "incorrectFeedbackEs": "Romanos 1:17 es el versículo tema: 'Porque en él la justicia de Dios se revela por fe y para fe, como está escrito: Mas el justo por la fe vivirá.'"}, {"text": "8. Romans 1:17 declares, 'The just shall live by ___.'", "options": ["C. love", "B. obedience", "D. faith", "A. works"], "correct": 2, "correctFeedback": "Correct. Faith — both as the means and the goal of righteousness.", "incorrectFeedback": "'The just shall live by faith.' This single phrase ignited Luther, Wesley, and the Reformation.", "textEs": "8. Romanos 1:17 declara: 'Mas el justo por la ___ vivirá.'", "optionsEs": ["C. amor", "B. obediencia", "D. fe", "A. obras"], "correctFeedbackEs": "Correcto. La fe — tanto el medio como la meta de la justicia.", "incorrectFeedbackEs": "'Mas el justo por la fe vivirá.' Esta sola frase encendió a Lutero, a Wesley y la Reforma."}, {"text": "9. What was Paul's name before his conversion?", "options": ["D. Silas", "B. Simon", "A. Saul", "C. Stephen"], "correct": 2, "correctFeedback": "Correct. Saul was his Hebrew name; Paul became his Greek/Roman name in mission to the Gentiles.", "incorrectFeedback": "Saul of Tarsus was his pre-conversion name. He kept it after conversion (Acts 9), but increasingly went by Paul as he ministered to Gentiles.", "textEs": "9. ¿Cuál era el nombre de Pablo antes de su conversión?", "optionsEs": ["D. Silas", "B. Simón", "A. Saulo", "C. Esteban"], "correctFeedbackEs": "Correcto. Saulo era su nombre hebreo; Pablo llegó a ser su nombre griego/romano en la misión a los gentiles.", "incorrectFeedbackEs": "Saulo de Tarso era su nombre antes de la conversión. Lo conservó después de convertirse (Hechos 9), pero cada vez más se le conoció como Pablo al ministrar a los gentiles."}, {"text": "10. In Romans 1:1, Paul calls himself a ___ of Christ Jesus.", "options": ["A. brother", "C. friend", "D. messenger", "B. bondservant (doulos)"], "correct": 3, "correctFeedback": "Correct. Doulos means 'bondservant' — one who has been purchased outright and owns nothing apart from his master.", "incorrectFeedback": "Paul calls himself doulos — bondservant. He identifies himself first as the legal property of Christ before anything else.", "textEs": "10. En Romanos 1:1, Pablo se llama a sí mismo ___ de Jesucristo.", "optionsEs": ["A. hermano", "C. amigo", "D. mensajero", "B. siervo (doulos)"], "correctFeedbackEs": "Correcto. Doulos significa 'siervo' — uno que ha sido comprado por completo y no posee nada aparte de su amo.", "incorrectFeedbackEs": "Pablo se llama a sí mismo doulos — siervo. Se identifica primero como propiedad legal de Cristo antes que cualquier otra cosa."}, {"text": "11. According to Romans 1:16, the gospel is the power of God for what?", "options": ["C. Salvation", "B. Comfort", "D. Healing", "A. Wisdom"], "correct": 0, "correctFeedback": "Correct. 'It is the power of God to salvation for everyone who believes.'", "incorrectFeedback": "Romans 1:16 — 'It is the power of God to salvation for everyone who believes, for the Jew first and also for the Greek.'", "textEs": "11. Según Romanos 1:16, el evangelio es el poder de Dios ¿para qué?", "optionsEs": ["C. Salvación", "B. Consuelo", "D. Sanidad", "A. Sabiduría"], "correctFeedbackEs": "Correcto. 'Es el poder de Dios para salvación a todo aquel que cree.'", "incorrectFeedbackEs": "Romanos 1:16 — 'Es el poder de Dios para salvación a todo aquel que cree; al judío primeramente, y también al griego.'"}, {"text": "12. Romans 1:16 says the gospel is for 'the Jew first and also for the ___.'", "options": ["D. Greek (Gentile)", "A. Roman", "C. faithful", "B. apostle"], "correct": 0, "correctFeedback": "Correct. The gospel goes to the Jew first historically, but extends to the Greek — meaning all Gentiles.", "incorrectFeedback": "'For the Jew first and also for the Greek' — the gospel goes to the covenant people first by chronological priority, then opens to all the nations.", "textEs": "12. Romanos 1:16 dice que el evangelio es 'al judío primeramente, y también al ___.'", "optionsEs": ["D. griego (gentil)", "A. romano", "C. fiel", "B. apóstol"], "correctFeedbackEs": "Correcto. El evangelio va al judío primero históricamente, pero se extiende al griego — es decir, a todos los gentiles.", "incorrectFeedbackEs": "'Al judío primeramente, y también al griego' — el evangelio va primero al pueblo del pacto por prioridad cronológica, y luego se abre a todas las naciones."}, {"text": "13. In Romans 1:17, Paul quotes which Old Testament prophet?", "options": ["C. Jeremiah", "A. Habakkuk", "D. Malachi", "B. Isaiah"], "correct": 1, "correctFeedback": "Correct. Habakkuk 2:4 — 'The just shall live by his faith' — written six centuries before Paul.", "incorrectFeedback": "Paul quotes Habakkuk 2:4. That single phrase traveled from Habakkuk to Paul to Luther to Wesley, reshaping the church three times.", "textEs": "13. En Romanos 1:17, ¿a cuál profeta del Antiguo Testamento cita Pablo?", "optionsEs": ["C. Jeremías", "A. Habacuc", "D. Malaquías", "B. Isaías"], "correctFeedbackEs": "Correcto. Habacuc 2:4 — 'mas el justo por su fe vivirá' — escrito seis siglos antes de Pablo.", "incorrectFeedbackEs": "Pablo cita Habacuc 2:4. Esa sola frase viajó de Habacuc a Pablo, a Lutero y a Wesley, reformando a la iglesia tres veces."}, {"text": "14. Martin Luther's breakthrough on justification by faith came while he was teaching which book?", "options": ["B. Romans", "C. Hebrews", "A. Galatians", "D. James"], "correct": 0, "correctFeedback": "Correct. Luther was lecturing through Romans at Wittenberg when the meaning of 1:17 broke over him.", "incorrectFeedback": "Luther was teaching Romans at Wittenberg when 'the just shall live by faith' transformed his understanding of salvation.", "textEs": "14. El gran avance de Martín Lutero sobre la justificación por la fe llegó mientras enseñaba ¿cuál libro?", "optionsEs": ["B. Romanos", "C. Hebreos", "A. Gálatas", "D. Santiago"], "correctFeedbackEs": "Correcto. Lutero enseñaba Romanos en Wittenberg cuando el significado de 1:17 se le abrió.", "incorrectFeedbackEs": "Lutero enseñaba Romanos en Wittenberg cuando 'el justo por la fe vivirá' transformó su entendimiento de la salvación."}, {"text": "15. The 'heart strangely warmed' moment that launched the Methodist movement belongs to whom?", "options": ["B. Jonathan Edwards", "C. John Wesley", "A. George Whitefield", "D. Charles Spurgeon"], "correct": 1, "correctFeedback": "Correct. John Wesley, May 24, 1738, Aldersgate Street, hearing the preface to Luther's commentary on Romans.", "incorrectFeedback": "John Wesley's Aldersgate experience on May 24, 1738 — while hearing Luther's preface to Romans read aloud — launched the Wesleyan revival.", "textEs": "15. El momento del 'corazón extrañamente ardiendo' que dio inicio al movimiento metodista, ¿a quién pertenece?", "optionsEs": ["B. Jonathan Edwards", "C. Juan Wesley", "A. George Whitefield", "D. Charles Spurgeon"], "correctFeedbackEs": "Correcto. Juan Wesley, el 24 de mayo de 1738, en la calle Aldersgate, al oír el prefacio del comentario de Lutero sobre Romanos.", "incorrectFeedbackEs": "La experiencia de Juan Wesley en Aldersgate, el 24 de mayo de 1738 — mientras se leía en voz alta el prefacio de Lutero a Romanos — dio inicio al avivamiento wesleyano."}, {"text": "16. In Romans 1:1, Paul says he is 'separated to the gospel of God.' Separated here means:", "options": ["B. selected", "C. cleansed", "D. consecrated / set apart for a specific divine purpose", "A. exiled"], "correct": 2, "correctFeedback": "Correct. To be 'separated' is to be consecrated, set apart for divine service. Paul was drafted, not a volunteer.", "incorrectFeedback": "Separated (aphorizo) means consecrated, set apart for a divine purpose. Paul did not volunteer for apostleship; he was set apart by God.", "textEs": "16. En Romanos 1:1, Pablo dice que es 'apartado para el evangelio de Dios.' Aquí 'apartado' significa:", "optionsEs": ["B. seleccionado", "C. limpiado", "D. consagrado / separado para un propósito divino específico", "A. desterrado"], "correctFeedbackEs": "Correcto. Ser 'apartado' es ser consagrado, separado para el servicio divino. Pablo fue reclutado, no fue voluntario.", "incorrectFeedbackEs": "Apartado (aphorizo) significa consagrado, separado para un propósito divino. Pablo no se ofreció de voluntario para el apostolado; fue apartado por Dios."}, {"text": "17. The church in Rome was most likely begun by:", "options": ["B. Peter on a missionary journey", "D. Roman soldiers converted under Cornelius", "A. Jewish believers who came to faith at Pentecost and returned home", "C. Paul on his second journey"], "correct": 2, "correctFeedback": "Correct. The Roman church had no apostolic founder; it likely began with Pentecost pilgrims (Acts 2:10) returning to Rome.", "incorrectFeedback": "The Roman church likely began with Jewish believers from Pentecost (Acts 2:10) who carried the gospel back to Rome — no single apostle founded it.", "textEs": "17. La iglesia en Roma muy probablemente fue iniciada por:", "optionsEs": ["B. Pedro en un viaje misionero", "D. soldados romanos convertidos bajo Cornelio", "A. creyentes judíos que vinieron a la fe en Pentecostés y regresaron a casa", "C. Pablo en su segundo viaje"], "correctFeedbackEs": "Correcto. La iglesia romana no tuvo fundador apostólico; probablemente comenzó con los peregrinos de Pentecostés (Hechos 2:10) que regresaron a Roma.", "incorrectFeedbackEs": "La iglesia romana probablemente comenzó con creyentes judíos de Pentecostés (Hechos 2:10) que llevaron el evangelio de vuelta a Roma — ningún apóstol la fundó."}, {"text": "18. Romans is unlike most of Paul's other letters because:", "options": ["C. It is shorter and more personal", "B. Paul had never been to Rome and was not addressing a specific crisis", "D. It was written to a single individual", "A. It addresses scandals in the church"], "correct": 1, "correctFeedback": "Correct. Romans is Paul's most general statement of the gospel because he had no firsthand history with the Roman church.", "incorrectFeedback": "Unlike Corinthians or Galatians, Romans does not address a local crisis. Paul had never been to Rome; he writes a general exposition of the gospel.", "textEs": "18. Romanos se distingue de la mayoría de las otras cartas de Pablo porque:", "optionsEs": ["C. Es más corta y más personal", "B. Pablo nunca había estado en Roma y no trataba una crisis específica", "D. Fue escrita a una sola persona", "A. Trata escándalos en la iglesia"], "correctFeedbackEs": "Correcto. Romanos es la exposición más general del evangelio por parte de Pablo, porque no tenía trato directo previo con la iglesia romana.", "incorrectFeedbackEs": "A diferencia de Corintios o Gálatas, Romanos no trata una crisis local. Pablo nunca había estado en Roma; escribe una exposición general del evangelio."}, {"text": "19. 'Called to be an apostle' (Romans 1:1) emphasizes that Paul's apostleship:", "options": ["A. is shared by all Christians", "C. is a divine commission, not a self-chosen role", "B. came by inheritance", "D. is provisional"], "correct": 1, "correctFeedback": "Correct. Apostleship is a calling, a divine commission. Paul did not choose this role — God called him.", "incorrectFeedback": "'Called' (kletos) emphasizes divine commission. Paul's apostleship is not self-appointed; it was given on the Damascus road.", "textEs": "19. 'Llamado a ser apóstol' (Romanos 1:1) recalca que el apostolado de Pablo:", "optionsEs": ["A. es compartido por todos los cristianos", "C. es una comisión divina, no un papel escogido por uno mismo", "B. vino por herencia", "D. es provisional"], "correctFeedbackEs": "Correcto. El apostolado es un llamamiento, una comisión divina. Pablo no escogió este papel — Dios lo llamó.", "incorrectFeedbackEs": "'Llamado' (kletos) recalca la comisión divina. El apostolado de Pablo no es autoproclamado; le fue dado en el camino a Damasco."}, {"text": "20. AD 57 places the writing of Romans during Paul's:", "options": ["A. first missionary journey", "C. early years in Tarsus", "B. imprisonment in Rome", "D. third missionary journey"], "correct": 3, "correctFeedback": "Correct. Romans was written from Corinth near the close of the third missionary journey, just before Paul went to Jerusalem.", "incorrectFeedback": "AD 57 places Romans at the end of Paul's third missionary journey, written from Corinth before sailing to Jerusalem with the relief offering.", "textEs": "20. El año 57 d.C. ubica la escritura de Romanos durante:", "optionsEs": ["A. el primer viaje misionero de Pablo", "C. sus primeros años en Tarso", "B. su encarcelamiento en Roma", "D. el tercer viaje misionero de Pablo"], "correctFeedbackEs": "Correcto. Romanos se escribió desde Corinto cerca del final del tercer viaje misionero, justo antes de que Pablo fuera a Jerusalén.", "incorrectFeedbackEs": "El año 57 d.C. ubica a Romanos al final del tercer viaje misionero de Pablo, escrito desde Corinto antes de navegar a Jerusalén con la ofrenda."}];
+
+// ============================================================
+// SHORT ANSWER QUESTIONS (10) — split kw_en / kw_es
+// ============================================================
+const saQuestions = [
+    { id: "sa_u1_1", textEn: "Who wrote Romans and what was his pre-conversion background?", textEs: "¿Quién escribió Romanos y cuál era su trasfondo previo a la conversión?", kw_en: ["Paul", "apostl", "Pharis", "Tars", "Gamaliel", "Damasc", "zeal", "Saul"], kw_es: ["Pablo", "apóstol", "farise", "Tarso", "Gamaliel", "Damasc", "celo", "Saulo"], explanationEn: "Paul, born Saul of Tarsus around AD 5, was raised in Jerusalem and trained under Gamaliel as a zealous Pharisee. He persecuted the church until his Damascus-road encounter with the risen Christ.", explanationEs: "Pablo, nacido Saulo de Tarso alrededor del año 5 d.C., fue criado en Jerusalén y entrenado bajo Gamaliel como un fariseo celoso. Persiguió a la iglesia hasta su encuentro en el camino a Damasco con Cristo resucitado." },
+    { id: "sa_u1_2", textEn: "When and from where was Romans written, and who delivered it?", textEs: "¿Cuándo y desde dónde se escribió Romanos, y quién lo entregó?", kw_en: ["57", "Corinth", "third", "mission", "Phoeb", "Cenchr", "deacon", "Rome"], kw_es: ["57", "Corinto", "tercer", "mision", "Febe", "Cencr", "diacon", "Roma"], explanationEn: "Romans was written in AD 57 from Corinth, near the end of Paul's third missionary journey. It was carried to Rome by Phoebe, a deaconess from the nearby church at Cenchrea.", explanationEs: "Romanos fue escrito en el 57 d.C. desde Corinto, cerca del final del tercer viaje misionero de Pablo. Fue llevado a Roma por Febe, una diaconisa de la iglesia cercana de Cencrea." },
+    { id: "sa_u1_3", textEn: "Explain Romans 1:17 as the theme verse of the entire book.", textEs: "Explique Romanos 1:17 como el versículo tema de todo el libro.", kw_en: ["faith", "believ", "just", "righteous", "gospel", "Habak", "trust", "reveal"], kw_es: ["fe", "cre", "just", "justicia", "evangel", "Habac", "confi", "revel"], explanationEn: "Romans 1:17 declares that God's righteousness is revealed in the gospel, received by faith from start to finish. Paul quotes Habakkuk 2:4 — 'the just shall live by faith' — as the foundation of the whole book.", explanationEs: "Romanos 1:17 declara que la justicia de Dios se revela en el evangelio, recibida por fe de principio a fin. Pablo cita Habacuc 2:4 — 'el justo por la fe vivirá' — como el fundamento de todo el libro." },
+    { id: "sa_u1_4", textEn: "Describe how Romans 1:17 transformed Martin Luther.", textEs: "Describa cómo Romanos 1:17 transformó a Martín Lutero.", kw_en: ["Luther", "monk", "Wittenb", "tower", "faith", "Reformat", "gift", "earn"], kw_es: ["Lutero", "monj", "Wittenb", "torre", "fe", "Reforma", "regalo", "gan"], explanationEn: "Luther had tried to earn salvation through monastic discipline, fasting, and self-denial. While teaching Romans at Wittenberg, he came to understand that righteousness is a gift received by faith, not earned by works. This triggered the Protestant Reformation.", explanationEs: "Lutero había intentado ganar la salvación a través de la disciplina monástica, el ayuno y la abnegación. Mientras enseñaba Romanos en Wittenberg, llegó a entender que la justicia es un regalo recibido por la fe, no ganado por obras. Esto desencadenó la Reforma Protestante." },
+    { id: "sa_u1_5", textEn: "Describe John Wesley's Aldersgate experience and its connection to Romans.", textEs: "Describa la experiencia de Juan Wesley en Aldersgate y su conexión con Romanos.", kw_en: ["Wesley", "Aldersg", "1738", "warm", "Luther", "Method", "reviv", "trust"], kw_es: ["Wesley", "Aldersg", "1738", "ard", "Lutero", "metod", "aviv", "confi"], explanationEn: "On May 24, 1738, Wesley reluctantly attended an Aldersgate meeting where Luther's preface to Romans was read aloud. He felt his heart 'strangely warmed' and received assurance of salvation through faith in Christ alone. This launched the Wesleyan revival and the Methodist movement.", explanationEs: "El 24 de mayo de 1738, Wesley asistió a regañadientes a una reunión en Aldersgate donde se leyó en voz alta el prefacio de Lutero sobre Romanos. Sintió su corazón 'extrañamente ardiendo' y recibió la seguridad de la salvación por fe solo en Cristo. Esto lanzó el avivamiento wesleyano y el movimiento metodista." },
+    { id: "sa_u1_6", textEn: "What was the composition of the Roman church when Paul wrote to it?", textEs: "¿Cuál era la composición de la iglesia romana cuando Pablo le escribió?", kw_en: ["Jew", "Gentil", "Pentec", "founder", "house", "imperial", "capital", "faith"], kw_es: ["judí", "gentil", "Pentec", "fundador", "doméstic", "imperial", "capital", "fe"], explanationEn: "The Roman church was a network of small Jewish and Gentile house churches across the imperial capital. It likely began with Jewish believers from Pentecost (Acts 2:10) returning home — no single apostle founded it. It was known throughout the world for the strength of its faith.", explanationEs: "La iglesia romana era una red de pequeñas iglesias domésticas judías y gentiles repartidas por la capital imperial. Probablemente comenzó con creyentes judíos de Pentecostés (Hechos 2:10) que regresaron a casa — ningún apóstol la fundó. Era conocida en todo el mundo por la fuerza de su fe." },
+    { id: "sa_u1_7", textEn: "What does Paul mean by calling himself a 'bondservant' (doulos) of Christ Jesus?", textEs: "¿Qué quiere decir Pablo al llamarse a sí mismo 'siervo' (doulos) de Jesucristo?", kw_en: ["doulos", "purchas", "ownership", "owns", "property", "submiss", "slave", "Christ"], kw_es: ["doulos", "compr", "propiedad", "posee", "legal", "sumis", "siervo", "Cristo"], explanationEn: "Doulos means more than 'servant' or 'employee.' A bondservant has been purchased outright and owns nothing apart from what his master allows. Paul identifies himself first as the legal property of Christ, in voluntary submission to Him.", explanationEs: "Doulos significa más que 'siervo' o 'empleado.' Un siervo ha sido comprado por completo y no posee nada aparte de lo que su amo le permite. Pablo se identifica primero como la propiedad legal de Cristo, en sumisión voluntaria a Él." },
+    { id: "sa_u1_8", textEn: "What does Romans 1:16 say the gospel is, and to whom is it directed?", textEs: "¿Qué dice Romanos 1:16 que es el evangelio, y a quién está dirigido?", kw_en: ["power", "salv", "believ", "Jew", "Greek", "Gentil", "asham", "everyone"], kw_es: ["poder", "salv", "cree", "judí", "griego", "gentil", "avergÜenz", "todo"], explanationEn: "Romans 1:16 declares the gospel is the power of God to salvation for everyone who believes — to the Jew first historically, and also to the Greek (Gentile). It is universal in scope but received only by faith.", explanationEs: "Romanos 1:16 declara que el evangelio es el poder de Dios para salvación a todo aquel que cree — al judío primeramente históricamente, y también al griego (gentil). Es universal en su alcance pero recibido solo por fe." },
+    { id: "sa_u1_9", textEn: "How does Paul use the two name orders 'Jesus Christ' and 'Christ Jesus' in the salutation?", textEs: "¿Cómo usa Pablo los dos órdenes de nombres 'Jesucristo' y 'Cristo Jesús' en el saludo?", kw_en: ["human", "deity", "alpha", "omega", "divine", "Savior", "name", "title"], kw_es: ["human", "deidad", "alfa", "omega", "divin", "Salvador", "nombre", "título"], explanationEn: "Paul opens with 'Jesus Christ' — leading with the human name. He closes with 'Christ Jesus' — leading with the divine title. Together they frame the salutation with the full identity of the Savior: alpha and omega, complete man and complete God.", explanationEs: "Pablo abre con 'Jesucristo' — comenzando con el nombre humano. Cierra con 'Cristo Jesús' — comenzando con el título divino. Juntos enmarcan el saludo con la identidad completa del Salvador: alfa y omega, hombre completo y Dios completo." },
+    { id: "sa_u1_10", textEn: "Why is Romans considered the most influential book in Christian theology?", textEs: "¿Por qué se considera Romanos el libro más influyente en la teología cristiana?", kw_en: ["Augustin", "Luther", "Wesley", "Reformat", "justif", "systemat", "centur", "transform"], kw_es: ["Agustín", "Lutero", "Wesley", "Reforma", "justif", "sistemát", "siglo", "transform"], explanationEn: "Romans presents the gospel as a sustained systematic argument from human guilt to God's righteousness to Christian life. It has transformed major figures across sixteen centuries — Augustine, Luther, Wesley — and continues to ignite revival wherever it is preached.", explanationEs: "Romanos presenta el evangelio como un argumento sistemático sostenido desde la culpa humana hasta la justicia de Dios y la vida cristiana. Ha transformado figuras importantes a lo largo de dieciséis siglos — Agustín, Lutero, Wesley — y continúa encendiendo avivamiento dondequiera que se predica." }
+];
+
+// ============================================================
+// GLOBAL STATE
+// ============================================================
+let studentTrack = "cert";
+let studentName = "";
+let lockoutEnd = null;
+let examPassed = false;
+const PASS_MC = 18;
+const PASS_SA = 9;
+
+function getStorageKey(key) { return `cts_${COURSE_PREFIX}_${key}`; }
+
+function loadState() {
+    const student = localStorage.getItem("cts_student");
+    if (student) {
+        try {
+            const s = JSON.parse(student);
+            studentName = s.name || "";
+            studentTrack = s.track || "cert";
+        } catch(e) {}
+    }
+    const trackOverride = localStorage.getItem("cts_track");
+    if (trackOverride && ["cert","thm","mdiv"].includes(trackOverride)) studentTrack = trackOverride;
+
+    const lock = localStorage.getItem(getStorageKey(`unit${UNIT}_lockout`));
+    if (lock && parseInt(lock) > Date.now()) lockoutEnd = parseInt(lock);
+
+    const passedFlag = localStorage.getItem(getStorageKey(`unit${UNIT}_passed`));
+    if (passedFlag === "true") examPassed = true;
+
+    const lang = localStorage.getItem(getStorageKey(`unit${UNIT}_lang`)) || "en";
+    document.body.className = `lang-${lang}`;
+
+    updateTrackDisplay();
+    handleRegistrationCard();
+}
+
+function handleRegistrationCard() {
+    const regSection = document.getElementById("registrationSection");
+    if (SHOW_REGISTRATION_CARD && !localStorage.getItem("cts_student")) {
+        regSection.style.display = "block";
+    } else {
+        regSection.style.display = "none";
+    }
+}
+
+function updateTrackDisplay() {
+    const trackMap = { cert: "Certificate", thm: "Th.M.", mdiv: "M.Div." };
+    document.getElementById("trackIndicator").innerHTML = `<span class="lang-en">Track: ${trackMap[studentTrack]}</span><span class="lang-es">Vía: ${trackMap[studentTrack]}</span>`;
+}
+
+function saveLanguage(lang) {
+    localStorage.setItem(getStorageKey(`unit${UNIT}_lang`), lang);
+    document.body.className = `lang-${lang}`;
+}
+
+function submitRegistration() {
+    const name = document.getElementById("regName").value.trim();
+    const trackEl = document.querySelector('input[name="regTrack"]:checked');
+    if (!name) {
+        const isEs = document.body.className.includes("lang-es");
+        alert(isEs ? "Por favor ingrese su nombre." : "Please enter your name.");
+        return;
+    }
+    const track = trackEl ? trackEl.value : "cert";
+    localStorage.setItem("cts_student", JSON.stringify({ name, track }));
+    localStorage.setItem("cts_track", track);
+    studentName = name;
+    studentTrack = track;
+    updateTrackDisplay();
+    document.getElementById("registrationSection").style.display = "none";
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const mcContainer = document.getElementById("mcQuestions");
+    mcContainer.innerHTML = "";
+    mcQuestions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.text}</span><span class="lang-es">${q.textEs}</span></div>
+            <div class="options" id="mc-${idx}-opts">
+                ${q.options.map((opt, optIdx) => `<label><input type="radio" name="mc${idx}" value="${optIdx}"> <span class="lang-en">${opt}</span><span class="lang-es">${q.optionsEs[optIdx]}</span></label>`).join('')}
+            </div>
+            <div class="feedback" id="mc-${idx}-fb"></div>
+        `;
+        mcContainer.appendChild(card);
+    });
+
+    const saContainer = document.getElementById("saQuestions");
+    saContainer.innerHTML = "";
+    saQuestions.forEach((q, idx) => {
+        const isCert = studentTrack === "cert";
+        const card = document.createElement("div");
+        card.className = "question-card essay-question";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.textEn}</span><span class="lang-es">${q.textEs}</span></div>
+            <textarea rows="3" id="sa-${idx}" placeholder='${isCert ? "Optional for Certificate track / Opcional para Certificado" : "Type your answer here... / Escriba su respuesta aquí..."}' ></textarea>
+            <div class="feedback" id="sa-${idx}-fb"></div>
+        `;
+        saContainer.appendChild(card);
+    });
+
+    attachAutoScore();
+    attachSAAutoSave();
+    restoreAnswers();
+}
+
+function attachAutoScore() {
+    mcQuestions.forEach((q, idx) => {
+        const radios = document.querySelectorAll(`input[name="mc${idx}"]`);
+        radios.forEach(r => {
+            r.addEventListener("change", () => {
+                const selected = document.querySelector(`input[name="mc${idx}"]:checked`);
+                const fbDiv = document.getElementById(`mc-${idx}-fb`);
+                if (selected) {
+                    localStorage.setItem(getStorageKey(`unit${UNIT}_mc${idx}`), selected.value);
+                    const isCorr = parseInt(selected.value) === q.correct;
+                    if (fbDiv) {
+                        fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+                        fbDiv.innerHTML = isCorr ? q.correctFeedback : q.incorrectFeedback;
+                    }
+                    document.querySelectorAll(`input[name="mc${idx}"]`).forEach(x => { x.disabled = true; });
+                }
+            });
+        });
+    });
+}
+
+function attachSAAutoSave() {
+    saQuestions.forEach((q, idx) => {
+        const ta = document.getElementById(`sa-${idx}`);
+        if (ta) {
+            ta.addEventListener("input", () => {
+                localStorage.setItem(getStorageKey(`unit${UNIT}_sa${idx}`), ta.value);
+            });
+        }
+    });
+}
+
+function restoreAnswers() {
+    mcQuestions.forEach((q, idx) => {
+        const saved = localStorage.getItem(getStorageKey(`unit${UNIT}_mc${idx}`));
+        if (saved !== null) {
+            const radio = document.querySelector(`input[name="mc${idx}"][value="${saved}"]`);
+            if (radio) {
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change'));
+            }
+        }
+    });
+    saQuestions.forEach((q, idx) => {
+        const saved = localStorage.getItem(getStorageKey(`unit${UNIT}_sa${idx}`));
+        if (saved !== null) {
+            const ta = document.getElementById(`sa-${idx}`);
+            if (ta) ta.value = saved;
+        }
+    });
+}
+
+
+// --- Q24 smart keyword matcher (word-boundary regex). Added by fairness pass. ---
+function kwHit(answer, kw) {
+    if (!kw) return false;
+    var a = (answer || "").toLowerCase();
+    var k = kw.toLowerCase().trim();
+    if (!k) return false;
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    // unicode-aware-ish boundary: not preceded/followed by a letter or digit
+    var L = "0-9a-zA-Záéíóúüñ";
+    var re;
+    if (k.length <= 4) {
+        re = new RegExp("(?:^|[^" + L + "])" + esc + "(?![" + L + "])");
+    } else {
+        re = new RegExp("(?:^|[^" + L + "])" + esc);
+    }
+    return re.test(a);
+}
+
+function gradeExam() {
+    if (lockoutEnd && lockoutEnd > Date.now()) {
+        const min = Math.ceil((lockoutEnd - Date.now()) / 60000);
+        alert(`Lockout active. Please wait ${min} minutes. / Bloqueo activo. Espere ${min} minutos.`);
+        return false;
+    }
+
+    let mcCorrect = 0;
+    for (let i = 0; i < mcQuestions.length; i++) {
+        const selected = document.querySelector(`input[name="mc${i}"]:checked`);
+        const fbDiv = document.getElementById(`mc-${i}-fb`);
+        if (selected) {
+            const isCorr = parseInt(selected.value) === mcQuestions[i].correct;
+            if (isCorr) mcCorrect++;
+            fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+            fbDiv.innerHTML = isCorr ? ('<span class="lang-en">'+mcQuestions[i].correctFeedback+'</span><span class="lang-es">'+mcQuestions[i].correctFeedbackEs+'</span>') : ('<span class="lang-en">'+mcQuestions[i].incorrectFeedback+'</span><span class="lang-es">'+mcQuestions[i].incorrectFeedbackEs+'</span>');
+        } else {
+            fbDiv.className = "feedback incorrect";
+            fbDiv.innerHTML = "No answer selected. / No seleccionó respuesta.";
+        }
+    }
+
+    let saPass = true;
+    let saCorrectCount = 0;
+    if (studentTrack !== "cert") {
+        for (let i = 0; i < saQuestions.length; i++) {
+            const answer = document.getElementById(`sa-${i}`).value.trim();
+            const lang = document.body.className.replace("lang-", "");
+            let keywords = lang === "es" ? saQuestions[i].kw_es : saQuestions[i].kw_en;
+            if (lang === "both") keywords = [...saQuestions[i].kw_en, ...saQuestions[i].kw_es];
+            const hits = keywords.filter(kw => kwHit(answer, kw)).length;
+            const passed = hits >= 3 && answer.length >= 100;
+            if (passed) saCorrectCount++;
+            const fbDiv = document.getElementById(`sa-${i}-fb`);
+            fbDiv.className = `feedback ${passed ? "correct" : "incorrect"}`;
+            const _model = (lang === "es" ? saQuestions[i].explanationEs : saQuestions[i].explanationEn);
+            const _hdr = (lang === "es" ? "Respuesta modelo — estúdiela" : "Model answer — study this");
+            const _verdict = passed ? (lang === "es" ? "Suficiente." : "Sufficient.") : (lang === "es" ? "Insuficiente — necesita ≥3 palabras clave y ≥100 caracteres." : "Insufficient — need ≥3 keywords and ≥100 chars.");
+            fbDiv.innerHTML = `<div>${_verdict}</div><div class="modelbox"><strong>${_hdr}:</strong><br>${_model}</div>`;
+        }
+        saPass = saCorrectCount >= PASS_SA;
+    }
+
+    const mcPass = mcCorrect >= PASS_MC;
+    const overallPass = studentTrack === "cert" ? mcPass : (mcPass && saPass);
+
+    if (overallPass) {
+        localStorage.setItem(getStorageKey(`unit${UNIT}_passed`), "true");
+        examPassed = true;
+        const msg = document.body.className.includes("lang-es") ? `¡Aprobado! Redirigiendo a la siguiente unidad...` : `Passed! Redirecting to the next unit...`;
+        alert(msg);
+    } else {
+        const lockoutTime = Date.now() + 15 * 60 * 1000;
+        localStorage.setItem(getStorageKey(`unit${UNIT}_lockout`), lockoutTime);
+        lockoutEnd = lockoutTime;
+        showLockoutTimer();
+        const failMsg = document.body.className.includes("lang-es") ? `No aprobado. Bloqueo de 15 minutos iniciado. (OM: ${mcCorrect}/20${studentTrack !== "cert" ? `, RC: ${saCorrectCount}/10` : ""})` : `Failed. 15-minute lockout started. (MC: ${mcCorrect}/20${studentTrack !== "cert" ? `, SA: ${saCorrectCount}/10` : ""})`;
+        alert(failMsg);
+    }
+    return overallPass;
+}
+
+function showLockoutTimer() {
+    const timerDiv = document.getElementById("lockoutTimer");
+    if (!lockoutEnd || lockoutEnd <= Date.now()) { timerDiv.style.display = "none"; return; }
+    timerDiv.style.display = "block";
+    const update = () => {
+        const remaining = Math.max(0, Math.ceil((lockoutEnd - Date.now()) / 1000));
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        timerDiv.innerHTML = `<span class="lang-en">Lockout: ${minutes}:${seconds.toString().padStart(2,'0')} remaining</span><span class="lang-es">Bloqueo: ${minutes}:${seconds.toString().padStart(2,'0')} restantes</span>`;
+        if (remaining <= 0) { timerDiv.style.display = "none"; lockoutEnd = null; }
+        else setTimeout(update, 1000);
+    };
+    update();
+}
+
+function resetExam() {
+    const isEs = document.body.className.includes("lang-es");
+    const msg = isEs ? "¿Reiniciar todas las respuestas? Esto no se puede deshacer." : "Reset all answers? This cannot be undone.";
+    if (confirm(msg)) {
+        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        document.querySelectorAll('textarea').forEach(t => t.value = "");
+        document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+        mcQuestions.forEach((q, idx) => localStorage.removeItem(getStorageKey(`unit${UNIT}_mc${idx}`)));
+        saQuestions.forEach((q, idx) => localStorage.removeItem(getStorageKey(`unit${UNIT}_sa${idx}`)));
+    }
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => saveLanguage(btn.dataset.lang));
+});
+document.getElementById("submitBtn").addEventListener("click", gradeExam);
+document.getElementById("resetBtn").addEventListener("click", resetExam);
+document.getElementById("regSubmit").addEventListener("click", submitRegistration);
+
+loadState();
+renderQuestions();
+if (lockoutEnd) showLockoutTimer();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSRomansReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

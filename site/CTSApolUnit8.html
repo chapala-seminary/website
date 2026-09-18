@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Apologetics — Unit 8</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 9 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Apologetics — Unit 8: Science, Chance, and the Limits of Naturalism</span><span class="lang-es">📖 Apologética — Unidad 8: La Ciencia, el Azar y los Límites del Naturalismo</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"And He is before all things, and in Him all things consist." — Colossians 1:17</span><span class="lang-es">"Y él es antes de todas las cosas, y todas las cosas en él subsisten." — Colosenses 1:17 (RVG)</span></p>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Colossians 1:17</strong></p><div class="scripture">"And He is before all things, and in Him all things consist." — Colossians 1:17</div>
+
+<h3>Is Faith the Enemy of Science?</h3>
+<p>A young believer is often told, with great confidence, that he must choose: either he can be a thinking person who trusts science, or he can be a Christian, but he cannot be both. The two are said to be at war, and faith is expected to surrender. I want to take that charge head on, and I want to begin by saying something that may surprise you: I love science, and so should you. The study of the natural world is one of the noblest things a human mind can do, and the Christian has every reason to honor it. Indeed, many of the founders of modern science — Kepler, Boyle, Newton among them — were believing men who expected the universe to be orderly precisely because they believed a reasonable God had made it, and historians of science recognize that theological conviction as a real motivating force in the Scientific Revolution, even though the full story of how modern science arose is historically complex and draws on many streams, including the mathematics and astronomy of earlier Greek, Islamic, and other civilizations. The quarrel is not between faith and science. The quarrel is between faith and a philosophy that has dressed itself in a lab coat and hopes you will not notice the difference.</p>
+
+<h3>The How and the Why</h3>
+<p>To see the trick, you must learn to separate two different kinds of questions that are forever being run together. Science is magnificent at investigating mechanisms and causes within nature — how a star burns, why a cell divides the way it does, why an illness spreads through a population. To these the laboratory speaks with marvelous authority, and we are all in its debt; science can and does investigate many causal "why" questions of this kind. But there is a different kind of question — the question of ultimate purpose, meaning, or value — and here empirical investigation, by its very method, cannot settle the matter one way or the other. Why is there a universe rather than nothing? Why is it lawful and beautiful instead of mere chaos? Why am I here, and what am I for? Consider a kettle boiling on the stove. A scientist can tell you, with perfect accuracy, that the water boils because heat is agitating the molecules until they escape as steam. That is a true causal explanation. But it is not the whole truth, for there is also a further question of purpose: the water is boiling because I want a cup of tea. The two answers do not compete; they belong to different orders. The man who insists that the molecules are the only real explanation, and that the tea is a fairy tale, has not been more scientific. He has merely gone deaf to half of reality.</p>
+
+<h3>The Naked Ape</h3>
+<p>Here is where the philosophy overreaches. It tells you that you are nothing but a naked ape, nothing but a robot built by your genes, nothing but a chance arrangement of atoms briefly holding together before it scatters. Notice that little word, <em>nothing but</em>; it is the most dishonest phrase in the whole debate. It is quite true that a man is, among other things, a remarkable animal, and that he is made of atoms obeying the laws of chemistry. The Christian need not flinch at any of that. But the leap from "a man is an animal" to "a man is nothing but an animal" is not a finding of science; it is a philosophy smuggled in under the cover of science. Consider a great cathedral. A chemist may analyze it and report, with complete accuracy, that it is nothing but a quantity of limestone and glass. He would be right about the stones and wrong about the cathedral, for he has described everything except the thing that makes it a cathedral. So it is with the man who tells you that love is nothing but chemistry, that thought is nothing but electricity, that you are nothing but an ape. He has weighed the stones and missed the building.</p>
+
+<h3>Even Evolution Needs the Goldilocks</h3>
+<p>"But surely," says the objector, "evolution has explained away the need for a Creator." Let us be careful and fair. Whatever one concludes about how living things have developed and changed over the ages, set that whole question to one side, for it does not touch the deeper point at all. Suppose, for the sake of argument, that life unfolded by gradual natural processes exactly as the textbooks say. You have still explained nothing about the real mystery, for every one of those processes was running inside a universe that was already, astonishingly, fine-tuned to allow it. Before a single cell could divide or a single creature adapt, the great dials we spoke of in Unit Two had already been set with breathtaking precision: the strength of gravity, the charge of the electron, the rate of cosmic expansion, the strange properties of water and carbon. Evolution, if it occurred, did not set those dials; it played the game on a board already laid out for life. To say "evolution did it" is like saying the game of chess explains the existence of the chessboard. The deepest question is not how the pieces moved, but who built the board, and lit the room, and wrote the rules.</p>
+
+<h3>The Watch on the Heath</h3>
+<div class="illustration"><strong>💡 Picture a man walking across an open moor.</strong> His foot strikes a stone, and if you ask him how it came to be there, he may reasonably say it had simply lain there forever; the stone demands no explanation. But suppose, a little farther on, his foot strikes a watch. He picks it up and opens the case, and there inside are springs and gears and a balance wheel, every part shaped for a purpose and all of them working together to mark the passing hours. He would never say of the watch what he said of the stone. The intricate fitting of means to an end cries out that somewhere there was a watchmaker, even if the man never sees him, even if the watch is old and worn. Now lift your eyes from the watch to the eye that is reading these words — a living lens, focusing light, adjusting to distance, wired to a brain that turns the light into sight. If a watch on the heath demands a watchmaker, what does the eye demand, and the cell, and the coded library of the DNA that builds them both?</p></div>
+
+<h3>The Crack at the Bottom of It All</h3>
+<p>But the most serious problem for the philosophy of pure matter is not in the stars or the cell. It is much closer to home; it is in the very thoughts by which the unbeliever argues his case. Follow the logic to its end. If my mind is only matter, only the random clattering of atoms in my skull that natural selection arranged for survival and not for truth, then why should I trust a single conclusion it reaches, including the conclusion that my mind is only matter? A man saws off the branch he is sitting on. The one who says "all thought is merely chemistry" has just made a thought, and is asking you to believe it is true and not merely chemical. He cannot have it both ways. The very act of reasoning, the very act of weighing evidence and calling something true, assumes that the mind is more than meat, that it can reach beyond the firing of nerves to touch what is really so. Reason itself is a witness against the creed that reduces reason to chemistry.</p>
+
+<h3>The Things That Will Not Reduce</h3>
+<p>And reason is not alone. There are whole regions of your daily experience that the philosophy of "nothing but" can describe but never explain away. There is the abstract thought that lets you do mathematics about infinities you will never see. There is your unshakable sense that some things are truly right and others truly wrong, not merely useful or unpleasant, but wrong — the moral law we met in Unit Two, which no amount of talk about survival has ever managed to dissolve. There is the strange persistent ache for beauty and for meaning, the homesickness for a country you have never visited. A purely material world has no business producing creatures who weep at music, who feel guilt, who ask what it all means and are not satisfied with "it means nothing." These things are not proof in the way a fingerprint is proof, but they are signposts, and they all point the same direction: that you are not an accident, and that the universe is not a closed box of matter, but the workmanship of a Mind.</p>
+<!-- APOL_ENRICHMENT_START U8 EN -->
+<div class="lang-en block">
+<h3>Is the Mind Only the Brain?</h3>
+<p>Modern neuroscience shows a powerful connection between the brain and our mental life. Damage to the brain can alter memory, personality, and reasoning. But that is not the same as proving that consciousness is nothing more than brain activity. Charles Murray points to the continuing mystery of consciousness and to unusual reports of terminal or paradoxical lucidity, in which some people with severe dementia unexpectedly regain coherent memory or communication, sometimes near death. Medical researchers have documented such episodes, although their cause is not yet understood. They do not prove that the mind exists independently of the brain or that consciousness survives death; neurological explanations remain possible. Their value for apologetics is more modest. They remind us that the relationship between brain and mind is not fully explained. Science can study the brain with extraordinary success without having demonstrated that the person — consciousness, reason, self-awareness, and moral experience — is merely a collection of brain cells.</p>
+</div>
+<!-- APOL_ENRICHMENT_END U8 EN -->
+
+
+<h3>The One in Whom It All Holds Together</h3>
+<p>So the Christian gives the universe back its second story. Science reads the lower floor and reads it well: the how, the mechanism, the law. But the law itself points upward, for a law implies a Lawgiver, and an orderly cosmos that the human mind can actually understand implies a Mind behind it kin to our own. Paul says it in a single breath: "in Him all things consist" — He holds them together. The very regularities that the scientist studies are the faithful habits of the God who upholds all things by the word of His power. Faith is not the retreat of a frightened mind from the advance of knowledge; it is the larger room in which the knowledge finally makes sense. The naturalist must believe that everything came from nothing, that order came from chaos, that mind came from mindless matter, and that reason can be trusted though it was built by an unreasoning process. Hold those up to the light and tell me honestly which takes the greater faith. I, for one, do not have enough faith to be an unbeliever.</p>
+<div class="scripture">"The fool has said in his heart, 'There is no God.'" — Psalm 14:1</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Colosenses 1:17</strong></p><div class="scripture">"Y él es antes de todas las cosas, y todas las cosas en él subsisten." — Colosenses 1:17 (RVG)</div>
+
+<h3>¿Es la Fe Enemiga de la Ciencia?</h3>
+<p>A un joven creyente a menudo se le dice, con gran seguridad, que debe escoger: o puede ser una persona pensante que confía en la ciencia, o puede ser cristiano, pero no puede ser ambas cosas. Se dice que las dos están en guerra, y se espera que la fe se rinda. Quiero enfrentar esa acusación de frente, y quiero comenzar diciendo algo que tal vez le sorprenda: yo amo la ciencia, y usted también debería. El estudio del mundo natural es una de las cosas más nobles que una mente humana puede hacer, y el cristiano tiene toda razón para honrarlo. De hecho, muchos de los fundadores de la ciencia moderna — Kepler, Boyle, Newton entre ellos — fueron hombres creyentes que esperaban que el universo fuera ordenado precisamente porque creían que un Dios razonable lo había hecho, y los historiadores de la ciencia reconocen esa convicción teológica como una fuerza motivadora real en la Revolución Científica, aunque la historia completa de cómo surgió la ciencia moderna es históricamente compleja y bebe de muchas corrientes, incluyendo las matemáticas y la astronomía de civilizaciones griegas, islámicas y otras anteriores. La disputa no es entre la fe y la ciencia. La disputa es entre la fe y una filosofía que se ha vestido con una bata de laboratorio y espera que usted no note la diferencia.</p>
+
+<h3>El Cómo y el Porqué</h3>
+<p>Para ver el truco, debe aprender a separar dos clases distintas de preguntas que constantemente se confunden. La ciencia es magnífica para investigar mecanismos y causas dentro de la naturaleza — cómo arde una estrella, por qué se divide una célula de cierta manera, por qué se propaga una enfermedad en una población. A estas el laboratorio habla con maravillosa autoridad, y todos estamos en deuda con él; la ciencia puede investigar, y de hecho investiga, muchas preguntas causales de "por qué" de este tipo. Pero hay una clase distinta de pregunta — la pregunta del propósito último, el significado o el valor — y aquí la investigación empírica, por su propio método, no puede resolver el asunto en un sentido u otro. ¿Por qué hay un universo en lugar de nada? ¿Por qué es ordenado y hermoso en lugar de puro caos? ¿Por qué estoy yo aquí, y para qué? Considere una tetera hirviendo en la estufa. Un científico puede decirle, con perfecta exactitud, que el agua hierve porque el calor agita las moléculas hasta que escapan como vapor. Esa es una verdadera explicación causal. Pero no es toda la verdad, pues hay también una pregunta adicional de propósito: el agua hierve porque yo quiero una taza de té. Las dos respuestas no compiten; pertenecen a órdenes distintos. El hombre que insiste en que las moléculas son la única explicación real, y que el té es un cuento de hadas, no ha sido más científico. Solo se ha vuelto sordo a la mitad de la realidad.</p>
+
+<h3>El Mono Desnudo</h3>
+<p>Aquí es donde la filosofía se excede. Le dice que usted no es más que un mono desnudo, no es más que un robot construido por sus genes, no es más que un arreglo casual de átomos que se sostiene brevemente antes de dispersarse. Note esa pequeña frase, <em>no es más que</em>; es la frase más deshonesta de todo el debate. Es muy cierto que un hombre es, entre otras cosas, un animal notable, y que está hecho de átomos que obedecen las leyes de la química. El cristiano no necesita estremecerse ante nada de eso. Pero el salto de "un hombre es un animal" a "un hombre no es más que un animal" no es un hallazgo de la ciencia; es una filosofía metida de contrabando bajo la cobertura de la ciencia. Considere una gran catedral. Un químico puede analizarla e informar, con completa exactitud, que no es más que una cantidad de piedra caliza y vidrio. Tendría razón sobre las piedras y se equivocaría sobre la catedral, pues ha descrito todo excepto aquello que la hace una catedral. Así es con el hombre que le dice que el amor no es más que química, que el pensamiento no es más que electricidad, que usted no es más que un mono. Ha pesado las piedras y ha pasado por alto el edificio.</p>
+
+<h3>Aun la Evolución Necesita el Goldilocks</h3>
+<p>"Pero seguramente", dice el objetor, "la evolución ha eliminado la necesidad de un Creador." Seamos cuidadosos y justos. Sea lo que sea que uno concluya sobre cómo los seres vivos se han desarrollado y cambiado a lo largo de las edades, ponga toda esa cuestión a un lado, pues no toca el punto más profundo en absoluto. Suponga, por amor al argumento, que la vida se desplegó por procesos naturales graduales exactamente como dicen los libros de texto. Usted todavía no ha explicado nada sobre el verdadero misterio, pues cada uno de esos procesos corría dentro de un universo que ya estaba, asombrosamente, afinado para permitirlo. Antes de que una sola célula pudiera dividirse o una sola criatura adaptarse, los grandes diales de los que hablamos en la Unidad Dos ya habían sido ajustados con precisión impresionante: la fuerza de la gravedad, la carga del electrón, la tasa de expansión cósmica, las extrañas propiedades del agua y del carbono. La evolución, si ocurrió, no ajustó esos diales; jugó el juego sobre un tablero ya dispuesto para la vida. Decir "la evolución lo hizo" es como decir que el juego de ajedrez explica la existencia del tablero. La pregunta más profunda no es cómo se movieron las piezas, sino quién construyó el tablero, y encendió la sala, y escribió las reglas.</p>
+
+<h3>El Reloj en el Páramo</h3>
+<div class="illustration"><strong>💡 Imagine a un hombre cruzando un páramo abierto.</strong> Su pie golpea una piedra, y si usted le pregunta cómo llegó a estar allí, puede razonablemente decir que simplemente había estado allí desde siempre; la piedra no exige explicación. Pero suponga que, un poco más adelante, su pie golpea un reloj. Lo recoge y abre la caja, y allí dentro hay resortes y engranajes y un volante, cada parte formada para un propósito y todas trabajando juntas para marcar las horas que pasan. Jamás diría del reloj lo que dijo de la piedra. El intrincado ajuste de los medios a un fin clama que en algún lugar hubo un relojero, aunque el hombre nunca lo vea, aunque el reloj sea viejo y gastado. Ahora levante los ojos del reloj al ojo que lee estas palabras — un lente vivo, enfocando la luz, ajustándose a la distancia, conectado a un cerebro que convierte la luz en visión. Si un reloj en el páramo exige un relojero, ¿qué exige el ojo, y la célula, y la biblioteca codificada del ADN que construye a ambos?</p></div>
+
+<h3>La Grieta en el Fondo de Todo</h3>
+<p>Pero el problema más serio para la filosofía de la pura materia no está en las estrellas ni en la célula. Está mucho más cerca de casa; está en los pensamientos mismos con los que el incrédulo argumenta su caso. Siga la lógica hasta el final. Si mi mente es solo materia, solo el traqueteo aleatorio de átomos en mi cráneo que la selección natural arregló para la supervivencia y no para la verdad, entonces ¿por qué debería confiar en una sola conclusión a la que llega, incluida la conclusión de que mi mente es solo materia? Un hombre sierra la rama sobre la que está sentado. El que dice "todo pensamiento es solo química" acaba de hacer un pensamiento, y le pide a usted que crea que es verdadero y no meramente químico. No puede tenerlo de las dos maneras. El acto mismo de razonar, el acto mismo de sopesar evidencia y llamar verdadero a algo, supone que la mente es más que carne, que puede alcanzar más allá del disparo de los nervios para tocar lo que realmente es. La razón misma es un testigo contra el credo que reduce la razón a química.</p>
+
+<h3>Las Cosas que No Se Reducen</h3>
+<p>Y la razón no está sola. Hay regiones enteras de su experiencia diaria que la filosofía del "no es más que" puede describir pero nunca explicar del todo. Está el pensamiento abstracto que le permite hacer matemáticas sobre infinitos que nunca verá. Está su inquebrantable sentido de que algunas cosas son verdaderamente correctas y otras verdaderamente malas, no meramente útiles o desagradables, sino malas — la ley moral que encontramos en la Unidad Dos, que ninguna cantidad de charla sobre la supervivencia ha logrado jamás disolver. Está el extraño y persistente anhelo de belleza y de significado, la nostalgia por un país que nunca ha visitado. Un mundo puramente material no tiene por qué producir criaturas que lloran ante la música, que sienten culpa, que preguntan qué significa todo y no se conforman con "no significa nada." Estas cosas no son prueba al modo en que una huella digital es prueba, pero son señales, y todas apuntan en la misma dirección: que usted no es un accidente, y que el universo no es una caja cerrada de materia, sino la obra de una Mente.</p>
+<!-- APOL_ENRICHMENT_START U8 ES -->
+<div class="lang-es block">
+<h3>¿Es la Mente Solamente el Cerebro?</h3>
+<p>La neurociencia moderna muestra una poderosa relación entre el cerebro y nuestra vida mental. El daño cerebral puede alterar la memoria, la personalidad y el razonamiento. Pero eso no equivale a demostrar que la conciencia no es nada más que actividad cerebral. Charles Murray señala el misterio continuo de la conciencia y los informes inusuales de lucidez terminal o paradójica, en los que algunas personas con demencia severa recuperan inesperadamente la memoria coherente o la capacidad de comunicarse, a veces cerca de la muerte. Investigadores médicos han documentado tales episodios, aunque todavía no se comprende su causa. No demuestran que la mente exista independientemente del cerebro ni que la conciencia sobreviva a la muerte; siguen siendo posibles explicaciones neurológicas. Su valor para la apologética es más modesto. Nos recuerdan que la relación entre cerebro y mente no está completamente explicada. La ciencia puede estudiar el cerebro con extraordinario éxito sin haber demostrado que la persona — la conciencia, la razón, la autoconciencia y la experiencia moral — sea meramente una colección de células cerebrales.</p>
+</div>
+<!-- APOL_ENRICHMENT_END U8 ES -->
+
+
+<h3>Aquel en Quien Todo Subsiste</h3>
+<p>Así que el cristiano le devuelve al universo su segundo piso. La ciencia lee el piso de abajo y lo lee bien: el cómo, el mecanismo, la ley. Pero la ley misma apunta hacia arriba, pues una ley implica un Legislador, y un cosmos ordenado que la mente humana realmente puede entender implica una Mente detrás de él, pariente de la nuestra. Pablo lo dice en un solo aliento: "todas las cosas en él subsisten" — Él las sostiene juntas. Las regularidades mismas que el científico estudia son los hábitos fieles del Dios que sustenta todas las cosas con la palabra de su poder. La fe no es la retirada de una mente asustada ante el avance del conocimiento; es la sala más amplia en la que el conocimiento al fin tiene sentido. El naturalista debe creer que todo vino de la nada, que el orden vino del caos, que la mente vino de la materia sin mente, y que se puede confiar en la razón aunque fue construida por un proceso sin razón. Ponga eso a la luz y dígame honestamente cuál requiere la mayor fe. Yo, por mi parte, no tengo suficiente fe para ser un incrédulo.</p>
+<div class="scripture">"Dijo el necio en su corazón: No hay Dios." — Salmo 14:1 (RVG)</div>
+</div>
+</div>
+
+
+<div class="card">
+    <h2><span class="lang-en">Unit 8 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 8 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Apologetics — Unit 8 (Science, Chance, and the Limits of Naturalism)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 8;
+const COURSE = 'apol';
+const NEXT_UNIT_URL = 'CTSApolUnit9.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - The Reason for the Hope",
+    "Unit 2 - The Design of the Heavens",
+    "Unit 3 - Revelation and the Witness Within",
+    "Unit 4 - The Problem of Evil and Suffering",
+    "Unit 5 - The Reliability of Scripture",
+    "Unit 6 - The Person and Claims of Christ",
+    "Unit 7 - The Resurrection and the Changed Skeptics",
+    "Unit 8 - Science, Chance, and the Limits of Naturalism",
+    "Unit 9 - Other Religions and Worldviews",
+    "Unit 10 - Apologetics in Practice"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSApolUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        var _rc = document.getElementById('regCard'); if (_rc) _rc.style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+// (registration handled on Unit 1 only)
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [
+    { textEn: "1. The unit says the real quarrel is not between faith and science, but between faith and:", textEs: "1. La unidad dice que la verdadera disputa no es entre la fe y la ciencia, sino entre la fe y:",
+      optionsEn: ["Mathematics", "A philosophy dressed in a lab coat", "The telescope", "Honest experiments"],
+      optionsEs: ["Las matemáticas", "Una filosofía vestida con bata de laboratorio", "El telescopio", "Los experimentos honestos"], explanationEn: "Naturalism is a philosophy disguised as science; true science is no enemy of faith.", explanationEs: "El naturalismo es una filosofía disfrazada de ciencia; la verdadera ciencia no es enemiga de la fe.", correct: 1 },
+    { textEn: "2. The unit notes that modern science was largely born among:", textEs: "2. La unidad nota que la ciencia moderna nació en gran parte entre:",
+      optionsEn: ["People who hated order", "Those who rejected all reason", "Believing men who expected an orderly universe", "Ancient myth-makers"],
+      optionsEs: ["Gente que odiaba el orden", "Quienes rechazaban toda razón", "Hombres creyentes que esperaban un universo ordenado", "Antiguos creadores de mitos"], explanationEn: "They expected order because they believed a reasonable God had made the world.", explanationEs: "Esperaban orden porque creían que un Dios razonable había hecho el mundo.", correct: 2 },
+    { textEn: "3. The unit says science is especially suited to investigate:", textEs: "3. La unidad dice que la ciencia es especialmente apta para investigar:",
+      optionsEn: ["Questions of ultimate purpose or meaning", "Whether God exists", "Mechanisms and causes within nature", "Moral obligation"],
+      optionsEs: ["Preguntas de propósito o significado último", "Si Dios existe", "Mecanismos y causas dentro de la naturaleza", "La obligación moral"], explanationEn: "Science investigates mechanisms and causes with great authority, but by its method cannot settle questions of ultimate purpose.", explanationEs: "La ciencia investiga mecanismos y causas con gran autoridad, pero por su método no puede resolver preguntas de propósito último.", correct: 2 },
+    { textEn: "4. In the boiling-kettle illustration, the two answers (molecules / wanting tea) show that:", textEs: "4. En la ilustración de la tetera hirviendo, las dos respuestas (moléculas / querer té) muestran que:",
+      optionsEn: ["Causal explanation and purpose belong to different orders and do not compete", "Only the molecules are real", "Tea is a fairy tale", "Science is always wrong"],
+      optionsEs: ["La explicación causal y el propósito pertenecen a órdenes distintos y no compiten", "Solo las moléculas son reales", "El té es un cuento de hadas", "La ciencia siempre se equivoca"], explanationEn: "The molecules (mechanism) and wanting tea (purpose) are both true at different levels.", explanationEs: "Las moléculas (mecanismo) y querer té (propósito) son ambas verdad en niveles distintos.", correct: 0 },
+    { textEn: "5. The unit calls which phrase 'the most dishonest phrase in the whole debate'?", textEs: "5. ¿Qué frase llama la unidad 'la frase más deshonesta de todo el debate'?",
+      optionsEn: ["'I think'", "'In the beginning'", "'It is written'", "'Nothing but'"],
+      optionsEs: ["'Yo pienso'", "'En el principio'", "'Escrito está'", "'No es más que'"], explanationEn: "Saying a man is 'nothing but' an animal smuggles philosophy in under science.", explanationEs: "Decir que un hombre 'no es más que' un animal mete la filosofía bajo la ciencia.", correct: 3 },
+    { textEn: "6. The cathedral illustration shows that a chemist who calls it 'nothing but limestone and glass':", textEs: "6. La ilustración de la catedral muestra que un químico que la llama 'no es más que piedra caliza y vidrio':",
+      optionsEn: ["Is right about the stones but wrong about the cathedral", "Has explained everything", "Has proven there is no architect", "Knows more than the builder"],
+      optionsEs: ["Tiene razón sobre las piedras pero se equivoca sobre la catedral", "Lo ha explicado todo", "Ha probado que no hay arquitecto", "Sabe más que el constructor"], explanationEn: "He describes everything except the thing that makes it a cathedral.", explanationEs: "Describe todo excepto lo que la hace una catedral.", correct: 0 },
+    { textEn: "7. About evolution, the unit argues that even if it occurred, it:", textEs: "7. Sobre la evolución, la unidad argumenta que aun si ocurrió:",
+      optionsEn: ["Disproves God entirely", "Did not set the fine-tuned dials; it played on a board already laid out for life", "Was impossible", "Explains why there is a universe"],
+      optionsEs: ["Refuta a Dios por completo", "No ajustó los diales afinados; jugó sobre un tablero ya dispuesto para la vida", "Era imposible", "Explica por qué hay un universo"], explanationEn: "Evolution presupposes the Goldilocks universe of Unit 2; it did not create it.", explanationEs: "La evolución presupone el universo Goldilocks de la Unidad 2; no lo creó.", correct: 1 },
+    { textEn: "8. The chessboard comparison says that to claim 'evolution did it' is like saying:", textEs: "8. La comparación del tablero de ajedrez dice que afirmar 'la evolución lo hizo' es como decir:",
+      optionsEn: ["Chess is too hard", "Pieces never move", "The game of chess explains the existence of the chessboard", "The board built itself overnight"],
+      optionsEs: ["El ajedrez es muy difícil", "Las piezas nunca se mueven", "El juego de ajedrez explica la existencia del tablero", "El tablero se construyó solo de la noche a la mañana"], explanationEn: "The deeper question is who built the board, lit the room, and wrote the rules.", explanationEs: "La pregunta más profunda es quién construyó el tablero, encendió la sala y escribió las reglas.", correct: 2 },
+    { textEn: "9. In the watch-on-the-heath illustration, the watch differs from the stone because it shows:", textEs: "9. En la ilustración del reloj en el páramo, el reloj difiere de la piedra porque muestra:",
+      optionsEn: ["An older age", "Greater weight", "A brighter color", "Intricate parts fitted together for a purpose"],
+      optionsEs: ["Una edad más antigua", "Mayor peso", "Un color más brillante", "Partes intrincadas ajustadas juntas para un propósito"], explanationEn: "The fitting of means to an end cries out for a watchmaker.", explanationEs: "El ajuste de los medios a un fin clama por un relojero.", correct: 3 },
+    { textEn: "10. The unit then turns from the watch to the human eye to ask:", textEs: "10. La unidad luego pasa del reloj al ojo humano para preguntar:",
+      optionsEn: ["Whether eyes are useful", "If a watch needs a maker, what does the eye and the cell demand?", "How old the eye is", "Why watches are expensive"],
+      optionsEs: ["Si los ojos son útiles", "Si un reloj necesita un hacedor, ¿qué exigen el ojo y la célula?", "Qué edad tiene el ojo", "Por qué los relojes son caros"], explanationEn: "If a watch demands a watchmaker, the far more intricate eye demands a Maker too.", explanationEs: "Si un reloj exige un relojero, el ojo mucho más intrincado también exige un Hacedor.", correct: 1 },
+    { textEn: "11. The deepest problem for pure materialism, the unit says, lies in:", textEs: "11. El problema más profundo para el materialismo puro, dice la unidad, yace en:",
+      optionsEn: ["The distant stars", "The size of cells", "The very thoughts by which the unbeliever argues", "The age of rocks"],
+      optionsEs: ["Las estrellas lejanas", "El tamaño de las células", "Los pensamientos mismos con que el incrédulo argumenta", "La edad de las rocas"], explanationEn: "If the mind is only matter arranged for survival, why trust its conclusions?", explanationEs: "Si la mente es solo materia arreglada para sobrevivir, ¿por qué confiar en sus conclusiones?", correct: 2 },
+    { textEn: "12. The 'sawing off the branch' image illustrates that the claim 'all thought is merely chemistry':", textEs: "12. La imagen de 'serrar la rama' ilustra que la afirmación 'todo pensamiento es solo química':",
+      optionsEn: ["Is itself a thought asking to be believed as true, not merely chemical", "Was proven in a lab", "Is humble and wise", "Is obviously true"],
+      optionsEs: ["Es ella misma un pensamiento que pide ser creído como verdadero, no meramente químico", "Fue probada en un laboratorio", "Es humilde y sabia", "Es obviamente verdad"], explanationEn: "The claim undercuts itself; reasoning assumes the mind reaches real truth.", explanationEs: "La afirmación se socava a sí misma; razonar supone que la mente alcanza la verdad real.", correct: 0 },
+    { textEn: "13. The unit lists which things that a 'nothing but' world cannot explain away?", textEs: "13. ¿Qué cosas enumera la unidad que un mundo de 'no es más que' no puede explicar del todo?",
+      optionsEn: ["Only digestion", "Only the weather", "Abstract thought, the moral law, and the ache for beauty and meaning", "Only sleep"],
+      optionsEs: ["Solo la digestión", "Solo el clima", "El pensamiento abstracto, la ley moral, y el anhelo de belleza y significado", "Solo el sueño"], explanationEn: "These regions of experience point beyond mere matter — signposts to a Mind.", explanationEs: "Estas regiones de la experiencia apuntan más allá de la mera materia — señales hacia una Mente.", correct: 2 },
+    { textEn: "14. The unit calls abstract thought, conscience, and longing for meaning not proofs but:", textEs: "14. La unidad llama al pensamiento abstracto, la conciencia y el anhelo de significado no pruebas sino:",
+      optionsEn: ["Illusions", "Signposts pointing the same direction", "Accidents", "Distractions"],
+      optionsEs: ["Ilusiones", "Señales que apuntan en la misma dirección", "Accidentes", "Distracciones"], explanationEn: "They are not fingerprint-proof, but they all point toward a Mind behind the world.", explanationEs: "No son prueba como una huella, pero todas apuntan hacia una Mente detrás del mundo.", correct: 1 },
+    { textEn: "15. Colossians 1:17 says that in Christ all things:", textEs: "15. Colosenses 1:17 dice que en Cristo todas las cosas:",
+      optionsEn: ["Are forgotten", "Came by chance", "Will decay", "Consist (hold together)"],
+      optionsEs: ["Son olvidadas", "Vinieron por azar", "Se descompondrán", "Subsisten (se sostienen juntas)"], explanationEn: "He holds all things together; the regularities are His faithful upholding.", explanationEs: "Él sostiene todas las cosas juntas; las regularidades son su fiel sustento.", correct: 3 },
+    { textEn: "16. According to the unit, a law in nature implies:", textEs: "16. Según la unidad, una ley en la naturaleza implica:",
+      optionsEn: ["A Lawgiver, and an understandable cosmos implies a Mind", "Random luck", "Nothing important", "No author"],
+      optionsEs: ["Un Legislador, y un cosmos comprensible implica una Mente", "Suerte aleatoria", "Nada importante", "Ningún autor"], explanationEn: "Order the human mind can grasp points to a Mind behind it kin to our own.", explanationEs: "El orden que la mente humana puede captar apunta a una Mente detrás, pariente de la nuestra.", correct: 0 },
+    { textEn: "17. The unit says faith is not the retreat of a frightened mind, but rather:", textEs: "17. La unidad dice que la fe no es la retirada de una mente asustada, sino más bien:",
+      optionsEn: ["An escape from thinking", "The larger room in which knowledge finally makes sense", "A rejection of science", "A private feeling only"],
+      optionsEs: ["Un escape del pensar", "La sala más amplia en la que el conocimiento al fin tiene sentido", "Un rechazo de la ciencia", "Solo un sentimiento privado"], explanationEn: "Faith is the larger framework in which the findings of science cohere.", explanationEs: "La fe es el marco más amplio en el que los hallazgos de la ciencia tienen coherencia.", correct: 1 },
+    { textEn: "18. The unit says the naturalist must believe that reason can be trusted even though it was:", textEs: "18. La unidad dice que el naturalista debe creer que se puede confiar en la razón aunque fue:",
+      optionsEn: ["Given by God", "Tested in a lab", "Taught in school", "Built by an unreasoning process"],
+      optionsEs: ["Dada por Dios", "Probada en un laboratorio", "Enseñada en la escuela", "Construida por un proceso sin razón"], explanationEn: "Trusting reason built by a mindless process is itself a large act of faith.", explanationEs: "Confiar en una razón construida por un proceso sin mente es en sí un gran acto de fe.", correct: 3 },
+    { textEn: "19. The unit summarizes the naturalist's creed as believing that everything came from:", textEs: "19. La unidad resume el credo del naturalista como creer que todo vino de:",
+      optionsEn: ["A wise Designer", "An orderly plan", "Nothing, with order from chaos and mind from mindless matter", "A living Word"],
+      optionsEs: ["Un Diseñador sabio", "Un plan ordenado", "La nada, con el orden del caos y la mente de la materia sin mente", "Una Palabra viva"], explanationEn: "The unit asks which view takes the greater faith.", explanationEs: "La unidad pregunta cuál postura requiere la mayor fe.", correct: 2 },
+    { textEn: "20. The unit closes the science question by echoing the course refrain:", textEs: "20. La unidad cierra la cuestión de la ciencia haciendo eco del estribillo del curso:",
+      optionsEn: ["I do not have enough faith to be an unbeliever", "Faith and reason are enemies", "We must stop asking questions", "Science has all the answers"],
+      optionsEs: ["No tengo suficiente fe para ser un incrédulo", "La fe y la razón son enemigas", "Debemos dejar de hacer preguntas", "La ciencia tiene todas las respuestas"], explanationEn: "Believing in nothing-from-nothing takes more faith than believing in the Creator.", explanationEs: "Creer en algo-de-la-nada requiere más fe que creer en el Creador.", correct: 0 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Explain why the unit says the real quarrel is not between faith and science.",
+      textEs: "21. Explique por qué la unidad dice que la verdadera disputa no es entre la fe y la ciencia.",
+      kw_en: ["science", "faith", "quarrel", "philosophy", "naturalism", "order", "honor", "born"],
+      kw_es: ["ciencia", "fe", "disputa", "filosofía", "naturalismo", "orden", "honrar", "nació"],
+      modelEn: "The unit insists that the quarrel is not between faith and science at all, but between faith and a philosophy that has dressed itself in a lab coat. True science, the study of how the natural world works, is a noble thing the Christian has every reason to honor; in fact many founders of modern science, men like Kepler, Boyle, and Newton, were believing men who expected the universe to be orderly because a reasonable God had made it, and historians recognize that conviction as a real motivating force, even though the fuller history of science's rise is complex and draws on many earlier civilizations as well. What actually opposes faith is naturalism, the philosophy that nothing exists beyond matter, which is smuggled in under the cover of science and presented as though it were a scientific finding. So the believer need not choose between being a thinking person and being a Christian. He simply learns to tell the difference between the genuine work of science and the philosophy that has borrowed its prestige.",
+      modelEs: "La unidad insiste en que la disputa no es entre la fe y la ciencia en absoluto, sino entre la fe y una filosofía que se ha vestido con una bata de laboratorio. La verdadera ciencia, el estudio de cómo funciona el mundo natural, es una cosa noble que el cristiano tiene toda razón para honrar; de hecho muchos fundadores de la ciencia moderna, hombres como Kepler, Boyle y Newton, fueron hombres creyentes que esperaban que el universo fuera ordenado porque un Dios razonable lo había hecho, y los historiadores reconocen esa convicción como una fuerza motivadora real, aunque la historia más completa del surgimiento de la ciencia es compleja y bebe también de civilizaciones anteriores. Lo que en realidad se opone a la fe es el naturalismo, la filosofía de que nada existe más allá de la materia, que se mete de contrabando bajo la cobertura de la ciencia y se presenta como si fuera un hallazgo científico. Así que el creyente no necesita escoger entre ser una persona pensante y ser cristiano. Simplemente aprende a notar la diferencia entre la obra genuina de la ciencia y la filosofía que ha tomado prestado su prestigio." },
+
+    { textEn: "22. Explain the difference between the 'how' question and the 'why' question, using the boiling-kettle illustration.",
+      textEs: "22. Explique la diferencia entre la pregunta del 'cómo' y la del 'por qué', usando la ilustración de la tetera hirviendo.",
+      kw_en: ["how", "why", "science", "kettle", "molecule", "tea", "order", "compete"],
+      kw_es: ["cómo", "porqué", "ciencia", "tetera", "molécula", "té", "orden", "compiten"],
+      modelEn: "The unit separates two different kinds of questions that are forever run together. Science is magnificent at investigating mechanisms and causes within nature: how a star burns, how a cell divides. But empirical investigation, by its method, cannot settle the question of ultimate purpose — why there is a universe at all, or what we are here for. The boiling kettle makes the point. A scientist truly explains how the water boils, that heat agitates the molecules until they escape as steam. Yet that is not the whole truth, for there is also a further question of purpose: the water boils because someone wants a cup of tea. The two answers do not compete; they belong to different orders of explanation. The man who insists the molecules are the only real answer and the tea is a fairy tale has not become more scientific; he has simply gone deaf to half of reality, treating the causal explanation as if it were the whole.",
+      modelEs: "La unidad separa dos clases distintas de preguntas que constantemente se confunden. La ciencia es magnífica para investigar mecanismos y causas dentro de la naturaleza: cómo arde una estrella, cómo se divide una célula. Pero la investigación empírica, por su método, no puede resolver la pregunta del propósito último — por qué hay un universo en absoluto, o para qué estamos aquí. La tetera hirviendo ilustra el punto. Un científico explica de verdad cómo hierve el agua, que el calor agita las moléculas hasta que escapan como vapor. Sin embargo eso no es toda la verdad, pues hay también una pregunta adicional de propósito: el agua hierve porque alguien quiere una taza de té. Las dos respuestas no compiten; pertenecen a órdenes distintos de explicación. El hombre que insiste en que las moléculas son la única respuesta real y que el té es un cuento de hadas no se ha vuelto más científico; simplemente se ha vuelto sordo a la mitad de la realidad, tratando la explicación causal como si fuera el todo." },
+
+    { textEn: "23. Explain the 'naked ape' / 'nothing but' problem, using the cathedral illustration.",
+      textEs: "23. Explique el problema del 'mono desnudo' / 'no es más que', usando la ilustración de la catedral.",
+      kw_en: ["nothing", "ape", "animal", "cathedral", "limestone", "describe", "smuggl", "building"],
+      kw_es: ["nada", "mono", "animal", "catedral", "caliza", "describ", "contrabando", "edificio"],
+      modelEn: "The unit warns about the little phrase nothing but, which it calls the most dishonest phrase in the debate. It is true that a man is an animal made of atoms obeying chemistry, and the Christian need not flinch at that. But the leap from a man is an animal to a man is nothing but an animal, a naked ape, is not science but a philosophy smuggled in under science. The cathedral makes it plain. A chemist may analyze a cathedral and report accurately that it is nothing but limestone and glass. He would be right about the stones and wrong about the cathedral, for he has described everything except the thing that makes it a cathedral. In the same way, to say love is nothing but chemistry or that you are nothing but an ape is to weigh the stones and miss the building entirely.",
+      modelEs: "La unidad advierte sobre la pequeña frase no es más que, que llama la frase más deshonesta del debate. Es verdad que un hombre es un animal hecho de átomos que obedecen la química, y el cristiano no necesita estremecerse ante eso. Pero el salto de un hombre es un animal a un hombre no es más que un animal, un mono desnudo, no es ciencia sino una filosofía metida de contrabando bajo la ciencia. La catedral lo deja claro. Un químico puede analizar una catedral e informar con exactitud que no es más que piedra caliza y vidrio. Tendría razón sobre las piedras y se equivocaría sobre la catedral, pues ha descrito todo excepto aquello que la hace una catedral. De la misma manera, decir que el amor no es más que química o que usted no es más que un mono es pesar las piedras y pasar por alto el edificio por completo." },
+
+    { textEn: "24. Why does the unit argue that evolution, even if true, does not remove the need for a Creator?",
+      textEs: "24. ¿Por qué argumenta la unidad que la evolución, aun si es verdad, no elimina la necesidad de un Creador?",
+      kw_en: ["evolution", "fine-tun", "universe", "dial", "chessboard", "process", "precision", "creator"],
+      kw_es: ["evolución", "afinado", "universo", "dial", "tablero", "proceso", "precisión", "creador"],
+      modelEn: "The unit is careful and fair: set aside the whole question of how living things developed, and suppose life unfolded by gradual natural processes exactly as the textbooks say. Even then you have explained nothing about the real mystery, because every one of those processes ran inside a universe that was already fine-tuned to allow it. Before a single cell could divide, the great dials of Unit Two, the strength of gravity, the charge of the electron, the rate of cosmic expansion, the properties of water and carbon, had already been set with breathtaking precision. Evolution, if it occurred, did not set those dials; it played the game on a board already laid out for life. To say evolution did it is like saying the game of chess explains the existence of the chessboard. The deeper question is not how the pieces moved but who built the board, and that still points to a Creator.",
+      modelEs: "La unidad es cuidadosa y justa: ponga a un lado toda la cuestión de cómo se desarrollaron los seres vivos, y suponga que la vida se desplegó por procesos naturales graduales exactamente como dicen los libros de texto. Aun entonces no ha explicado nada sobre el verdadero misterio, porque cada uno de esos procesos corría dentro de un universo que ya estaba afinado para permitirlo. Antes de que una sola célula pudiera dividirse, los grandes diales de la Unidad Dos, la fuerza de la gravedad, la carga del electrón, la tasa de expansión cósmica, las propiedades del agua y del carbono, ya habían sido ajustados con precisión impresionante. La evolución, si ocurrió, no ajustó esos diales; jugó el juego sobre un tablero ya dispuesto para la vida. Decir que la evolución lo hizo es como decir que el juego de ajedrez explica la existencia del tablero. La pregunta más profunda no es cómo se movieron las piezas sino quién construyó el tablero, y eso todavía apunta a un Creador." },
+
+    { textEn: "25. Explain the watch-on-the-heath illustration and how the unit applies it.",
+      textEs: "25. Explique la ilustración del reloj en el páramo y cómo la aplica la unidad.",
+      kw_en: ["watch", "stone", "heath", "purpose", "watchmaker", "eye", "design", "demand"],
+      kw_es: ["reloj", "piedra", "páramo", "propósito", "relojero", "ojo", "diseño", "exige"],
+      modelEn: "A man crossing a heath strikes a stone, and he may reasonably say the stone had simply lain there forever, needing no explanation. But a little farther on his foot strikes a watch, and when he opens it he finds springs and gears and a balance wheel, every part shaped for a purpose and all working together to mark the hours. He would never say of the watch what he said of the stone, because the intricate fitting of means to an end cries out for a watchmaker, even one he never sees. The unit then lifts our eyes from the watch to the human eye, a living lens that focuses light and is wired to a brain that turns light into sight. If a mere watch demands a watchmaker, the far more intricate eye, the cell, and the coded library of DNA demand a Designer all the more. The argument is that apparent design in nature points to a real Designer.",
+      modelEs: "Un hombre que cruza un páramo golpea una piedra, y puede razonablemente decir que la piedra simplemente había estado allí desde siempre, sin necesitar explicación. Pero un poco más adelante su pie golpea un reloj, y al abrirlo halla resortes y engranajes y un volante, cada parte formada para un propósito y todas trabajando juntas para marcar las horas. Jamás diría del reloj lo que dijo de la piedra, porque el intrincado ajuste de los medios a un fin clama por un relojero, aunque nunca lo vea. La unidad luego levanta nuestros ojos del reloj al ojo humano, un lente vivo que enfoca la luz y está conectado a un cerebro que convierte la luz en visión. Si un mero reloj exige un relojero, el ojo mucho más intrincado, la célula, y la biblioteca codificada del ADN exigen un Diseñador con mayor razón. El argumento es que el diseño aparente en la naturaleza apunta a un Diseñador real." },
+
+    { textEn: "26. Explain the unit's deepest objection: that pure materialism undercuts reason itself.",
+      textEs: "26. Explique la objeción más profunda de la unidad: que el materialismo puro socava la razón misma.",
+      kw_en: ["mind", "matter", "reason", "trust", "branch", "thought", "truth", "undercut"],
+      kw_es: ["mente", "materia", "razón", "confiar", "rama", "pensamiento", "verdad", "socava"],
+      modelEn: "The unit says the most serious problem for pure materialism is not in the stars but in the very thoughts by which the unbeliever argues. If my mind is only matter, only atoms clattering in my skull that natural selection arranged for survival and not for truth, then why should I trust any conclusion it reaches, including the conclusion that the mind is only matter? The man who says all thought is merely chemistry has just produced a thought and is asking you to accept it as true rather than merely chemical, which is to saw off the branch he is sitting on. The very act of reasoning, of weighing evidence and calling something true, assumes the mind is more than meat and can reach real truth. So reason itself becomes a witness against the creed that reduces reason to chemistry; materialism undercuts the very tool it uses to argue.",
+      modelEs: "La unidad dice que el problema más serio para el materialismo puro no está en las estrellas sino en los pensamientos mismos con que el incrédulo argumenta. Si mi mente es solo materia, solo átomos traqueteando en mi cráneo que la selección natural arregló para la supervivencia y no para la verdad, entonces ¿por qué debería confiar en cualquier conclusión a la que llega, incluida la conclusión de que la mente es solo materia? El hombre que dice que todo pensamiento es solo química acaba de producir un pensamiento y le pide que lo acepte como verdadero en lugar de meramente químico, lo cual es serrar la rama sobre la que está sentado. El acto mismo de razonar, de sopesar evidencia y llamar verdadero a algo, supone que la mente es más que carne y puede alcanzar la verdad real. Así que la razón misma se vuelve un testigo contra el credo que reduce la razón a química; el materialismo socava la herramienta misma que usa para argumentar." },
+
+    { textEn: "27. What things does the unit say a 'nothing but' world can describe but never explain away?",
+      textEs: "27. ¿Qué cosas dice la unidad que un mundo de 'no es más que' puede describir pero nunca explicar del todo?",
+      kw_en: ["abstract", "moral", "beauty", "meaning", "conscience", "signpost", "accident", "mind"],
+      kw_es: ["abstracto", "moral", "belleza", "significado", "conciencia", "señal", "accidente", "mente"],
+      modelEn: "The unit names several regions of experience that a purely material world can describe but never explain away. There is abstract thought, which lets us do mathematics about infinities we will never see. There is the moral law from Unit Two, the unshakable sense that some things are truly right and others truly wrong, not merely useful, which talk of survival has never dissolved. And there is the persistent ache for beauty and meaning, a homesickness for a country never visited, which leaves us unsatisfied with the answer that it all means nothing. A purely material world has no business producing creatures who weep at music, who feel guilt, and who refuse to accept meaninglessness. The unit calls these not proofs in the way a fingerprint is proof, but signposts that all point the same direction: that we are not an accident and that the universe is the workmanship of a Mind.",
+      modelEs: "La unidad nombra varias regiones de la experiencia que un mundo puramente material puede describir pero nunca explicar del todo. Está el pensamiento abstracto, que nos permite hacer matemáticas sobre infinitos que nunca veremos. Está la ley moral de la Unidad Dos, el sentido inquebrantable de que algunas cosas son verdaderamente correctas y otras verdaderamente malas, no meramente útiles, que la charla sobre la supervivencia nunca ha disuelto. Y está el persistente anhelo de belleza y significado, una nostalgia por un país nunca visitado, que nos deja insatisfechos con la respuesta de que todo no significa nada. Un mundo puramente material no tiene por qué producir criaturas que lloran ante la música, que sienten culpa, y que rehúsan aceptar la falta de sentido. La unidad llama a estas no pruebas al modo en que una huella es prueba, sino señales que todas apuntan en la misma dirección: que no somos un accidente y que el universo es la obra de una Mente." },
+
+    { textEn: "28. How does Colossians 1:17 frame the Christian answer about the order science studies?",
+      textEs: "28. ¿Cómo enmarca Colosenses 1:17 la respuesta cristiana sobre el orden que estudia la ciencia?",
+      kw_en: ["consist", "law", "lawgiver", "order", "mind", "uphold", "regularit", "christ"],
+      kw_es: ["subsisten", "ley", "legislador", "orden", "mente", "sostiene", "regularidad", "cristo"],
+      modelEn: "The unit gives the universe back its second story. Science reads the lower floor well, the how, the mechanism, the law, but the law itself points upward, because a law implies a Lawgiver, and an orderly cosmos that the human mind can actually understand implies a Mind behind it kin to our own. Colossians 1:17 says that in Christ all things consist, that is, He holds them together. The very regularities the scientist studies are the faithful habits of the God who upholds all things by the word of His power. So the order of nature is not a brute fact standing alone; it is the dependable working of the One who sustains it. This is why faith is not a retreat from knowledge but the larger room in which the findings of science finally make sense, resting on the Christ in whom all things hold together.",
+      modelEs: "La unidad le devuelve al universo su segundo piso. La ciencia lee bien el piso de abajo, el cómo, el mecanismo, la ley, pero la ley misma apunta hacia arriba, porque una ley implica un Legislador, y un cosmos ordenado que la mente humana realmente puede entender implica una Mente detrás de él, pariente de la nuestra. Colosenses 1:17 dice que en Cristo todas las cosas subsisten, es decir, Él las sostiene juntas. Las regularidades mismas que el científico estudia son los hábitos fieles del Dios que sustenta todas las cosas con la palabra de su poder. Así que el orden de la naturaleza no es un hecho bruto que está solo; es el obrar confiable de Aquel que lo sustenta. Por eso la fe no es una retirada del conocimiento sino la sala más amplia en la que los hallazgos de la ciencia al fin tienen sentido, descansando en el Cristo en quien todas las cosas subsisten." },
+
+    { textEn: "29. Why does the unit say the naturalist's creed actually takes more faith than belief in a Creator?",
+      textEs: "29. ¿Por qué dice la unidad que el credo del naturalista en realidad requiere más fe que la creencia en un Creador?",
+      kw_en: ["naturalist", "nothing", "chaos", "mindless", "reason", "trust", "faith", "creator"],
+      kw_es: ["naturalista", "nada", "caos", "materia", "razón", "confiar", "fe", "creador"],
+      modelEn: "The unit ends by turning the charge around. The naturalist must believe a chain of remarkable things: that everything came from nothing, that order arose from chaos, that mind came from mindless matter, and that reason can be trusted even though it was built by an unreasoning process aimed only at survival. Each of these is a large act of faith, and held together they are an enormous one. By contrast, the believer holds that a reasonable God made an orderly world and gave creatures minds able to know it, which actually accounts for the order, the reason, and the meaning that the naturalist must take on blind trust. So when the two views are held up to the light, belief in the Creator is the more reasonable, and the unit ends with the course refrain that the author does not have enough faith to be an unbeliever.",
+      modelEs: "La unidad termina dándole la vuelta a la acusación. El naturalista debe creer una cadena de cosas notables: que todo vino de la nada, que el orden surgió del caos, que la mente vino de la materia sin mente, y que se puede confiar en la razón aunque fue construida por un proceso sin razón dirigido solo a la supervivencia. Cada una de estas es un gran acto de fe, y juntas son una enorme. En contraste, el creyente sostiene que un Dios razonable hizo un mundo ordenado y dio a las criaturas mentes capaces de conocerlo, lo cual sí da cuenta del orden, la razón y el significado que el naturalista debe tomar por confianza ciega. Así que cuando las dos posturas se ponen a la luz, la creencia en el Creador es la más razonable, y la unidad termina con el estribillo del curso de que el autor no tiene suficiente fe para ser un incrédulo." },
+
+    { textEn: "30. How would you summarize the unit's overall case about science and the limits of naturalism?",
+      textEs: "30. ¿Cómo resumiría el caso general de la unidad sobre la ciencia y los límites del naturalismo?",
+      kw_en: ["science", "how", "why", "naturalism", "limit", "design", "mind", "faith"],
+      kw_es: ["ciencia", "cómo", "porqué", "naturalismo", "límite", "diseño", "mente", "fe"],
+      modelEn: "The unit's overall case is that science and faith are not enemies, but that naturalism, the philosophy that matter is all there is, has limits it hides. Science investigates mechanisms and causes within nature brilliantly, but empirical method by itself does not settle questions of ultimate purpose or meaning, and the phrase nothing but smuggles a philosophy in under that limit. Evolution, even if true, presupposes a fine-tuned universe it did not create, and apparent design like the eye points to a Designer as a watch points to a watchmaker. Most deeply, pure materialism undercuts reason itself, since a mind that is only matter could not be trusted to reach truth, and it cannot explain abstract thought, the moral law, or the ache for meaning. The Christian answer is that a Mind stands behind the order science studies, in whom all things hold together, so that faith is the larger room in which knowledge makes sense, and belief in the Creator takes less faith than unbelief.",
+      modelEs: "El caso general de la unidad es que la ciencia y la fe no son enemigas, sino que el naturalismo, la filosofía de que la materia es todo lo que hay, tiene límites que esconde. La ciencia investiga brillantemente mecanismos y causas dentro de la naturaleza, pero el método empírico por sí mismo no resuelve preguntas de propósito o significado último, y la frase no es más que mete una filosofía bajo ese límite. La evolución, aun si es verdad, presupone un universo afinado que no creó, y el diseño aparente como el ojo apunta a un Diseñador como un reloj apunta a un relojero. Más profundamente, el materialismo puro socava la razón misma, pues una mente que es solo materia no podría ser de fiar para alcanzar la verdad, y no puede explicar el pensamiento abstracto, la ley moral, ni el anhelo de significado. La respuesta cristiana es que una Mente está detrás del orden que la ciencia estudia, en quien todas las cosas se sostienen, de modo que la fe es la sala más amplia en la que el conocimiento tiene sentido, y creer en el Creador requiere menos fe que la incredulidad." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 9 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 9 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSApolReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

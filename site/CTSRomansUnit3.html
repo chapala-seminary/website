@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Romans | Unit 3: The Gospel Revealed — Justification by Faith</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', Times, serif; line-height: 1.6; background: #f9f7f3; color: #1a2a1f; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+.course-header { background: #5a1e1e; color: white; padding: 1.5rem 2rem; text-align: center; }
+.course-header h1 { font-size: 2rem; letter-spacing: 2px; margin-bottom: 0.25rem; }
+.course-header h2 { font-size: 1.2rem; font-weight: normal; opacity: 0.9; }
+.author-line { font-size: 0.95rem; color: #d4a64a; font-style: italic; margin-top: 0.35rem; letter-spacing: 0.5px; }
+.unit-badge { display: inline-block; background: #d4a64a; color: #5a1e1e; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-top: 0.5rem; }
+.controls-bar { background: #ede4d8; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #cbc3ae; }
+.lang-buttons { display: flex; gap: 10px; }
+.lang-btn { background: white; border: 1px solid #5a1e1e; padding: 0.4rem 1rem; cursor: pointer; font-weight: bold; transition: 0.2s; border-radius: 4px; }
+.lang-btn.active { background: #5a1e1e; color: white; }
+.track-indicator { background: #5a1e1e; color: #d4a64a; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+body.lang-en .lang-es { display: none; }
+body.lang-en .lang-both { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-both { display: none; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 900px) {
+    body.lang-both .lesson-grid { grid-template-columns: 1fr; }
+    body.lang-both .lang-es { border-top: 2px dashed #cbc3ae; padding-top: 1rem; margin-top: 1rem; }
+}
+.registration-section { background: #fef7e0; border-bottom: 3px solid #d4a64a; padding: 2rem; }
+.registration-section h3 { color: #5a1e1e; margin-bottom: 1rem; text-align: center; }
+.registration-form { max-width: 500px; margin: 0 auto; }
+.registration-form label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+.registration-form input[type="text"] { width: 100%; padding: 0.6rem; margin-bottom: 1rem; border: 1px solid #cbc3ae; border-radius: 4px; font-size: 1rem; font-family: inherit; }
+.registration-form .track-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+.registration-form .track-options label { font-weight: normal; cursor: pointer; padding: 0.5rem; border: 1px solid #cbc3ae; border-radius: 4px; background: white; }
+.registration-form .track-options input { margin-right: 0.5rem; }
+.registration-form button { background: #5a1e1e; color: white; border: none; padding: 0.75rem 2rem; font-size: 1rem; cursor: pointer; border-radius: 4px; width: 100%; }
+.registration-form button:hover { background: #401414; }
+.lesson-section { padding: 2rem; }
+.lesson-section h3 { color: #5a1e1e; border-left: 4px solid #d4a64a; padding-left: 1rem; margin: 1.5rem 0 1rem 0; }
+.lesson-section h3:first-of-type { margin-top: 0; }
+.lesson-section p { margin-bottom: 1rem; }
+.scripture { background: #f0ede5; padding: 1rem 1.5rem; border-left: 4px solid #d4a64a; font-style: italic; margin: 1rem 0; font-family: 'Courier New', monospace; }
+.illustration { background: #e8f0e5; padding: 1rem 1.5rem; border-radius: 8px; margin: 1rem 0; }
+.exam-section { background: #fefaf0; border-top: 3px solid #5a1e1e; padding: 2rem; page-break-before: always; }
+.exam-header { text-align: center; margin-bottom: 2rem; }
+.question-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; page-break-inside: avoid; }
+.question-text { font-weight: bold; margin-bottom: 0.75rem; }
+.options { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+.options label { display: block; margin: 0.4rem 0; cursor: pointer; }
+.feedback { margin-top: 0.75rem; padding: 0.5rem; border-radius: 4px; font-size: 0.9rem; }
+.feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+.modelbox { margin-top: 0.6rem; padding: 0.6rem 0.75rem; background: #fff8e1; color: #5d4a00; border-left: 4px solid #d4af37; border-radius: 4px; }
+
+.essay-question textarea { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+.action-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+.action-buttons button { background: #5a1e1e; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+.action-buttons button:hover { background: #401414; }
+.action-buttons button.reset-btn { background: #8b6b3d; }
+.lockout-timer { text-align: center; padding: 1rem; background: #f8d7da; color: #721c24; margin: 1rem; border-radius: 8px; font-weight: bold; }
+.nav-links { display: flex; justify-content: space-between; padding: 1rem 2rem; background: #ede4d8; }
+.nav-links a { color: #5a1e1e; text-decoration: none; font-weight: bold; }
+.exam-locked { background: #fff3cd; color: #856404; padding: 2rem; text-align: center; border-radius: 8px; font-weight: bold; }
+@media print {
+    .controls-bar, .action-buttons, .nav-links, .lockout-timer, .registration-section { display: none !important; }
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; margin: 0; }
+    .course-header { background: #5a1e1e; color: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .question-card { border: 1px solid #ccc; page-break-inside: avoid; }
+    .exam-section { page-break-before: always; }
+    .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.lang-both .lesson-grid { display: block; }
+}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 2px;font-family:'Georgia',serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#5a1e1e;margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid #cdbf9d;color:#5a1e1e;text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:#5a1e1e;}
+.unitnav a.active{background:#5a1e1e;color:#fff;border-color:#5a1e1e;}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+    <div class="course-header">
+        <h1>ΡΩΜΑΙΟΥΣ</h1>
+        <h2><span class="lang-en">The Book of Romans</span><span class="lang-es">El Libro de Romanos</span></h2>
+        <div class="author-line"><span class="lang-en">by Dr. Wayne Cook &amp; Dr. Ted Rogers</span><span class="lang-es">por el Dr. Wayne Cook y el Dr. Ted Rogers</span></div>
+        <div class="unit-badge"><span class="lang-en">Unit 3 · The Gospel Revealed — Justification by Faith</span><span class="lang-es">Unidad 3 · El Evangelio Revelado — Justificación por la Fe</span></div>
+    </div>
+
+    <div class="controls-bar">
+        <div class="lang-buttons">
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="es">Español</button>
+            <button class="lang-btn" data-lang="both">Both</button>
+        </div>
+        <div class="track-indicator" id="trackIndicator">Loading...</div>
+    </div>
+
+    <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+      <span class="nl"><span class="lang-en">Units</span><span class="lang-es">Unidades</span></span>
+      <a href="CTSRomansUnit1.html">1</a>
+      <a href="CTSRomansUnit2.html">2</a>
+      <a href="CTSRomansUnit3.html" class="active">3</a>
+      <a href="CTSRomansUnit4.html">4</a>
+      <a href="CTSRomansUnit5.html">5</a>
+      <a href="CTSRomansUnit6.html">6</a>
+      <a href="CTSRomansUnit7.html">7</a>
+      <a href="CTSRomansUnit8.html">8</a>
+      <a href="CTSRomansUnit9.html">9</a>
+      <a href="CTSRomansUnit10.html">10</a>
+    </nav>
+
+    <div class="registration-section" id="registrationSection" style="display:none;">
+        <h3><span class="lang-en">Register for CTS Romans</span><span class="lang-es">Regístrate en CTS Romanos</span></h3>
+        <div class="registration-form">
+            <p style="margin-bottom: 1rem;"><span class="lang-en">Welcome. Before beginning Unit 1, please enter your name (as you would like it to appear on your certificate) and select your study track.</span><span class="lang-es">Bienvenido. Antes de comenzar la Unidad 1, ingrese su nombre (como desea que aparezca en su certificado) y seleccione su vía de estudio.</span></p>
+            <label for="regName"><span class="lang-en">Full Name:</span><span class="lang-es">Nombre Completo:</span></label>
+            <input type="text" id="regName" placeholder="Jane Doe / María García">
+            <label><span class="lang-en">Study Track:</span><span class="lang-es">Vía de Estudio:</span></label>
+            <div class="track-options">
+                <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en"><strong>Certificate</strong> — 20 multiple choice per unit, 18/20 to pass</span><span class="lang-es"><strong>Certificado</strong> — 20 opción múltiple por unidad, 18/20 para aprobar</span></label>
+                <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en"><strong>Th.M.</strong> — 20 MC + 10 short answer, both 90%</span><span class="lang-es"><strong>Th.M.</strong> — 20 OM + 10 respuesta corta, ambos 90%</span></label>
+                <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en"><strong>M.Div.</strong> — 20 MC + 10 short answer, both 90% (advanced)</span><span class="lang-es"><strong>M.Div.</strong> — 20 OM + 10 respuesta corta, ambos 90% (avanzado)</span></label>
+            </div>
+            <button id="regSubmit"><span class="lang-en">Begin Course</span><span class="lang-es">Comenzar Curso</span></button>
+        </div>
+    </div>
+
+    <div class="lesson-section">
+        <div class="lesson-grid">
+            <div class="lang-en">
+                <h3>1. The Great Pivot: "But Now…"</h3>
+                <p>Two of the most important words in the entire New Testament are also two of the smallest. Romans 3:21 begins with the phrase "But now." After sixty-six verses of indictment, after every mouth has been stopped and the whole world declared guilty before God, Paul turns the corner. "But now apart from the law the righteousness of God has been revealed, being witnessed by the Law and the Prophets, even the righteousness of God which is by faith of Jesus Christ unto all and upon all them that believe."</p>
+
+                <p>The reformer Martin Luther, who spent years terrified of this very God, found his freedom on this paragraph. He called Romans the very heart of the New Testament and Romans 3:21-26 the chief place of the whole letter. Five hundred years later we are still standing in the light Luther saw.</p>
+
+                <p>So far in Romans Paul has functioned like a prosecutor laying out the case against humanity. Every defendant — the openly wicked, the comfortable moralist, the religious insider — has been examined, weighed, and found guilty. Every avenue of self-rescue has been closed. And now, into that silent courtroom, Paul announces an extraordinary verdict: God has provided a righteousness humans could never produce. He has provided it freely. And He has provided it to anyone who will believe.</p>
+
+                <div class="scripture">
+                    <strong>Romans 3:21-22 (NKJV):</strong> "But now the righteousness of God apart from the law is revealed, being witnessed by the Law and the Prophets, even the righteousness of God, through faith in Jesus Christ, to all and on all who believe. For there is no difference."
+                </div>
+
+                <h3>2. The Righteousness of God Revealed (3:21-22)</h3>
+                <p>The phrase "righteousness of God" runs throughout this passage. Paul does not mean God's personal moral excellence here — although that is also true. He means a righteousness <em>from</em> God, a righteousness God gives, a righteousness that becomes the property of the believer by gift. Luther called it "alien righteousness" — a righteousness that comes from outside ourselves. We do not generate it. We do not earn it. It is credited to our account from a source outside our own life.</p>
+
+                <p>Notice three things Paul says about this righteousness. First, it is <strong>apart from the law.</strong> The law could only diagnose; this righteousness cures. It does not come through Sinai. Second, it is <strong>witnessed by the Law and the Prophets.</strong> Although it does not come through the law, the Old Testament has been pointing to it all along — in every sacrifice that died in the worshipper's place, in every prophet who promised a coming Servant, in every covenant that depended on God's faithfulness rather than ours. Third, it is <strong>through faith in Jesus Christ, to all and on all who believe.</strong></p>
+
+                <p>"For there is no difference," Paul writes. That little phrase carries enormous weight. There is no difference between Jew and Gentile in their need. And there is no difference between Jew and Gentile in the offered solution. The same gospel reaches a Pharisee and a pagan. The same faith justifies a moralist and a murderer. The same blood was shed for all who would receive it.</p>
+
+                <h3>3. All Have Sinned, All May Be Justified (3:23-26)</h3>
+                <p>Now comes the verse most every Christian has memorized: "For all have sinned and fall short of the glory of God." This is the summary verdict of the courtroom scene. But Paul does not let the verdict stand without immediately announcing the rescue. The very next phrase begins, "being justified freely by His grace through the redemption that is in Christ Jesus, whom God set forth as a propitiation by His blood, through faith, to demonstrate His righteousness."</p>
+
+                <p>Read those phrases slowly. There are five hinges in them, and each one bears the weight of the gospel.</p>
+
+                <p><strong>Justified</strong> is a legal word. It does not mean "made righteous" in the sense of suddenly being morally perfect. It means "declared righteous" — pronounced not guilty in God's courtroom. It is a verdict, not a process. When God justifies a believing sinner, He does not say, "You are now a slightly better person." He says, "Your debt is paid in full. You stand acquitted before this court."</p>
+
+                <p><strong>Freely</strong> (Greek <em>dorean</em>) means "as a gift, without cause." It is the same word Jesus used in John 15:25 when His enemies hated Him "without a cause." We are justified without a cause in us. There is no merit, no contribution, no down payment from our side. The transaction is one-directional.</p>
+
+                <p><strong>Grace</strong> is God's unearned favor. Grace by definition is what we do not deserve. The moment we begin to feel we deserve it, it is no longer grace.</p>
+
+                <p><strong>Redemption</strong> is the marketplace word. It pictures a slave being purchased out of bondage. The price was Christ's blood. We were enslaved to sin; we have been bought.</p>
+
+                <p><strong>Propitiation</strong> is the temple word. The Greek <em>hilasterion</em> refers to the mercy seat — the gold cover of the Ark of the Covenant where the blood of atonement was sprinkled on the Day of Atonement. Paul says God set Christ forth as the mercy seat. The wrath of God against sin was real. The justice of God required satisfaction. On the cross, that wrath fell on Christ, and the believing sinner walks free.</p>
+
+                <div class="illustration">
+                    <strong>Pastoral Illustration:</strong> A young woman appeared in traffic court charged with speeding. The judge looked down from the bench, heard the evidence, and pronounced her guilty. He set the fine at one hundred dollars. Then he stood up, took off his judicial robe, walked around to the other side of the bench, took out his wallet, and paid the fine himself. The young woman was his daughter. The verdict had to be guilty — the law had been broken. The fine had to be paid — justice required it. But the judge himself satisfied the demand he had set, because love would not let him leave his daughter under condemnation. That is the gospel of Romans 3. The same God who pronounces the verdict provides the payment. The cross is the place where the justice of God and the love of God meet.
+                </div>
+
+                <p>Paul ends the paragraph with one of the most important sentences in Scripture: God did all this "to demonstrate at the present time His righteousness, that He might be just and the justifier of the one who has faith in Jesus." How does God forgive sinners without becoming unjust? How does the moral Governor of the universe acquit the guilty without compromising His own holiness? Only one way. He provides a substitute who absorbs the penalty. He is "just" — His justice is fully satisfied. And He is "the justifier" — He freely declares righteous those who trust in His substitute. The cross protects both halves at once.</p>
+
+                <h3>4. Boasting Excluded — Faith Establishes the Law (3:27-31)</h3>
+                <p>If salvation worked by performance, the saved would arrive in heaven boasting. Paul says no such boasting is possible. "Where then is the boasting? It is excluded. By what kind of law? Of works? No, but by the law of faith." Faith excludes boasting by definition, because faith looks outside itself for the rescue. The person who has been pulled from the ocean does not boast in his swimming ability; he is grateful to the one who reached down and grabbed him.</p>
+
+                <p>Then Paul anticipates a final objection. If we are justified by faith apart from the law, does that mean the law is now worthless? Should we throw it out? "Do we then make void the law through faith? Certainly not! On the contrary, we establish the law." The law is not abolished. It is honored. Christ fulfilled it perfectly on our behalf, then bore its full curse on the cross. The law has been more completely upheld in the gospel than it ever could have been by our incomplete attempts to keep it.</p>
+
+                <h3>5. Abraham, the Father of All Who Believe (4:1-12)</h3>
+                <p>For two thousand years before Paul wrote Romans, Abraham had been the central figure of the Jewish faith. He was the recipient of the covenant. He was the father of the nation. He was Exhibit A of righteousness. So Paul does something brilliant: he uses Abraham himself to prove that justification has always been by faith.</p>
+
+                <p>He reaches back to Genesis 15:6, written long before the law of Moses, long before circumcision, long before any system of sacrifice. The verse says simply: "Abraham believed God, and it was accounted to him for righteousness." Paul builds his entire argument on those words. "Accounted" is a bookkeeper's term — Greek <em>logizomai</em> — meaning to credit something to an account. God did not look at Abraham and find righteousness already there. God credited righteousness to a man who had none of his own. Abraham believed; God credited; the account was settled.</p>
+
+                <p>Then Paul pushes the point further. "Now to him who works, the wages are not counted as grace but as debt. But to him who does not work but believes on Him who justifies the ungodly, his faith is accounted for righteousness." Notice the phrase: "Him who justifies the ungodly." This is not the God who rewards the worthy. This is the God who declares righteous those who deserve the opposite. That is the only kind of God who could save anyone, because none of us is anything but ungodly when grace first finds us.</p>
+
+                <div class="scripture">
+                    <strong>Romans 4:4-5 (NKJV):</strong> "Now to him who works, the wages are not counted as grace but as debt. But to him who does not work but believes on Him who justifies the ungodly, his faith is accounted for righteousness."
+                </div>
+
+                <p>Paul then walks through the timing of Abraham's life. Genesis 15 records Abraham being credited with righteousness. Genesis 17 records the institution of circumcision — many years later. Paul's point is devastating. Abraham was justified by faith <em>while he was still uncircumcised</em>. The covenant sign came afterward as a confirmation of a righteousness that already existed by faith. The order matters. Faith first. Then the sign. Then the works. Always in that order, never reversed.</p>
+
+                <p>This means Abraham is the father not only of his physical descendants who carry the sign, but of every spiritual descendant who walks in the steps of his faith. Every Gentile believer, every former pagan, every modern-day convert who looks to Christ and is justified by trust is a child of Abraham by faith. The covenant always was big enough to include them.</p>
+
+                <h3>6. The Promise by Faith for All Time (4:13-25)</h3>
+                <p>Paul presses on. The promise to Abraham — that he would be the heir of the world — did not come through the law. It came through the righteousness of faith. If the inheritance depended on lawkeeping, then God's promise would be conditional on our performance, and Abraham would have nothing to inherit. Faith would be empty and the promise made of no effect.</p>
+
+                <p>Then Paul paints one of the most moving portraits in Scripture. Abraham believed God against impossible odds. He was nearly a hundred years old. Sarah's womb had been dead for decades. The natural circumstances pointed to nothing but failure. And yet, Paul writes, Abraham "contrary to hope, in hope believed… He did not waver at the promise of God through unbelief, but was strengthened in faith, giving glory to God, and being fully convinced that what He had promised He was also able to perform. And therefore it was accounted to him for righteousness."</p>
+
+                <p>Paul closes the chapter with the most pastoral sentence in the book so far. The story of Abraham was not written for Abraham's sake alone. It was written for us. "Now it was not written for his sake alone that it was imputed to him, but also for us. It shall be imputed to us who believe in Him who raised up Jesus our Lord from the dead, who was delivered up because of our offenses, and was raised because of our justification."</p>
+
+                <p>That last sentence is the gospel in miniature. Jesus was <em>delivered up</em> — handed over to crucifixion — because of our sins. Jesus was <em>raised</em> — vindicated by the Father — because of our justification. His death paid the penalty. His resurrection proved the payment was accepted. The Father's "amen" to the cross was the empty tomb. And the same righteousness God credited to Abraham four thousand years ago, He credits to every believing sinner who trusts in the risen Christ today.</p>
+
+                <p>The gospel has now been laid out plainly. The verdict of guilt has been overturned by the verdict of grace. Beginning in chapter five, Paul will start showing us what this verdict produces in the actual life of the believer — peace with God, hope that does not disappoint, and a love that pours through us by the Holy Spirit. But none of that follows unless this chapter is settled first. So settle it. You are not justified because of what you have done. You are justified because of what Christ has done, received by faith alone.</p>
+            </div>
+
+            <div class="lang-es">
+                <h3>1. El Gran Giro: "Pero Ahora…"</h3>
+                <p>Dos de las palabras más importantes en todo el Nuevo Testamento también son dos de las más pequeñas. Romanos 3:21 comienza con la frase "Pero ahora." Después de sesenta y seis versículos de acusación, después de que toda boca ha sido tapada y todo el mundo declarado culpable ante Dios, Pablo da la vuelta. "Pero ahora, aparte de la ley, se ha manifestado la justicia de Dios, atestiguada por la ley y por los profetas; la justicia de Dios que es por la fe de Jesucristo, para todos y sobre todos los que creen."</p>
+
+                <p>El reformador Martín Lutero, quien pasó años aterrorizado de este mismo Dios, encontró su libertad en este párrafo. Llamó a Romanos el corazón mismo del Nuevo Testamento y a Romanos 3:21-26 el lugar principal de toda la carta. Quinientos años después seguimos parados en la luz que Lutero vio.</p>
+
+                <p>Hasta este punto en Romanos, Pablo ha funcionado como un fiscal que expone el caso contra la humanidad. Cada acusado — el abiertamente malvado, el moralista cómodo, el insider religioso — ha sido examinado, pesado y hallado culpable. Toda avenida de auto-rescate ha sido cerrada. Y ahora, en ese tribunal silencioso, Pablo anuncia un veredicto extraordinario: Dios ha provisto una justicia que los humanos nunca podrían producir. La ha provisto gratuitamente. Y la ha provisto a cualquiera que crea.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 3:21-22 (RVG):</strong> "Pero ahora, aparte de la ley, se ha manifestado la justicia de Dios, atestiguada por la ley y por los profetas; la justicia de Dios que es por la fe de Jesucristo, para todos y sobre todos los que creen en Él; porque no hay diferencia."
+                </div>
+
+                <h3>2. La Justicia de Dios Revelada (3:21-22)</h3>
+                <p>La frase "justicia de Dios" recorre todo este pasaje. Pablo no se refiere aquí a la excelencia moral personal de Dios — aunque eso también es verdad. Se refiere a una justicia <em>de parte</em> de Dios, una justicia que Dios da, una justicia que se convierte en propiedad del creyente como regalo. Lutero la llamó "justicia ajena" — una justicia que viene desde fuera de nosotros mismos. No la generamos. No la ganamos. Se acredita a nuestra cuenta desde una fuente fuera de nuestra propia vida.</p>
+
+                <p>Note tres cosas que Pablo dice sobre esta justicia. Primero, es <strong>aparte de la ley.</strong> La ley solo podía diagnosticar; esta justicia cura. No viene por Sinaí. Segundo, es <strong>atestiguada por la Ley y los Profetas.</strong> Aunque no viene por la ley, el Antiguo Testamento ha estado apuntando hacia ella todo el tiempo — en cada sacrificio que murió en lugar del adorador, en cada profeta que prometió un Siervo venidero, en cada pacto que dependía de la fidelidad de Dios y no de la nuestra. Tercero, es <strong>por la fe de Jesucristo, para todos y sobre todos los que creen.</strong></p>
+
+                <p>"Porque no hay diferencia," escribe Pablo. Esa pequeña frase lleva un peso enorme. No hay diferencia entre judío y gentil en su necesidad. Y no hay diferencia entre judío y gentil en la solución ofrecida. El mismo evangelio alcanza a un fariseo y a un pagano. La misma fe justifica a un moralista y a un asesino. La misma sangre fue derramada por todos los que la recibieran.</p>
+
+                <h3>3. Todos Han Pecado, Todos Pueden Ser Justificados (3:23-26)</h3>
+                <p>Ahora viene el versículo que casi todo cristiano ha memorizado: "Por cuanto todos pecaron, y están destituidos de la gloria de Dios." Este es el veredicto resumen de la escena del tribunal. Pero Pablo no deja que el veredicto se quede sin inmediatamente anunciar el rescate. La frase siguiente comienza: "siendo justificados gratuitamente por su gracia, mediante la redención que es en Cristo Jesús; a quien Dios puso como propiciación por medio de la fe en su sangre, para manifestar su justicia."</p>
+
+                <p>Lea esas frases despacio. Hay cinco bisagras en ellas, y cada una lleva el peso del evangelio.</p>
+
+                <p><strong>Justificado</strong> es una palabra legal. No significa "hecho justo" en el sentido de ser repentinamente moralmente perfecto. Significa "declarado justo" — pronunciado no culpable en el tribunal de Dios. Es un veredicto, no un proceso. Cuando Dios justifica a un pecador creyente, no dice: "Ahora eres una persona ligeramente mejor." Dice: "Tu deuda está pagada por completo. Estás absuelto ante este tribunal."</p>
+
+                <p><strong>Gratuitamente</strong> (griego <em>dorean</em>) significa "como regalo, sin causa." Es la misma palabra que Jesús usó en Juan 15:25 cuando Sus enemigos lo aborrecieron "sin causa." Somos justificados sin causa alguna en nosotros. No hay mérito, no hay contribución, no hay pago inicial de nuestra parte. La transacción es unidireccional.</p>
+
+                <p><strong>Gracia</strong> es el favor inmerecido de Dios. La gracia por definición es lo que no merecemos. En el momento en que empezamos a sentir que la merecemos, ya no es gracia.</p>
+
+                <p><strong>Redención</strong> es la palabra del mercado. Pinta a un esclavo siendo comprado para sacarlo de la esclavitud. El precio fue la sangre de Cristo. Estábamos esclavizados al pecado; hemos sido comprados.</p>
+
+                <p><strong>Propiciación</strong> es la palabra del templo. El griego <em>hilasterion</em> se refiere al propiciatorio — la cubierta de oro del Arca del Pacto donde la sangre de la expiación era rociada en el Día de la Expiación. Pablo dice que Dios puso a Cristo como el propiciatorio. La ira de Dios contra el pecado era real. La justicia de Dios requería satisfacción. En la cruz, esa ira cayó sobre Cristo, y el pecador creyente camina libre.</p>
+
+                <div class="illustration">
+                    <strong>Ilustración Pastoral:</strong> Una joven compareció en un tribunal de tránsito acusada de exceso de velocidad. El juez miró desde el estrado, escuchó la evidencia, y la pronunció culpable. Fijó la multa en cien dólares. Luego se levantó, se quitó la toga judicial, caminó al otro lado del estrado, sacó su cartera y pagó la multa él mismo. La joven era su hija. El veredicto tenía que ser culpable — la ley había sido quebrantada. La multa tenía que ser pagada — la justicia lo requería. Pero el juez mismo satisfizo la demanda que él había puesto, porque el amor no le permitía dejar a su hija bajo condenación. Ese es el evangelio de Romanos 3. El mismo Dios que pronuncia el veredicto provee el pago. La cruz es el lugar donde la justicia de Dios y el amor de Dios se encuentran.
+                </div>
+
+                <p>Pablo termina el párrafo con una de las oraciones más importantes de la Escritura: Dios hizo todo esto "para manifestar en este tiempo su justicia, a fin de que él sea el justo, y el justificador del que cree en Jesús." ¿Cómo puede Dios perdonar a los pecadores sin volverse injusto? ¿Cómo puede el Gobernador moral del universo absolver al culpable sin comprometer Su propia santidad? Solo de una manera. Provee un sustituto que absorbe la pena. Él es "justo" — Su justicia queda plenamente satisfecha. Y Él es "el justificador" — gratuitamente declara justos a aquellos que confían en Su sustituto. La cruz protege ambas mitades a la vez.</p>
+
+                <h3>4. La Jactancia Excluida — La Fe Establece la Ley (3:27-31)</h3>
+                <p>Si la salvación funcionara por desempeño, los salvos llegarían al cielo jactándose. Pablo dice que tal jactancia no es posible. "¿Dónde, pues, está la jactancia? Queda excluida. ¿Por cuál ley? ¿Por la de las obras? No, sino por la ley de la fe." La fe excluye la jactancia por definición, porque la fe mira fuera de sí misma para el rescate. La persona que ha sido sacada del océano no se jacta de su habilidad para nadar; está agradecida con quien le bajó la mano y la agarró.</p>
+
+                <p>Luego Pablo anticipa una última objeción. Si somos justificados por fe aparte de la ley, ¿significa eso que la ley ahora carece de valor? ¿Deberíamos descartarla? "¿Anulamos, pues, la ley por la fe? En ninguna manera, antes establecemos la ley." La ley no es abolida. Es honrada. Cristo la cumplió perfectamente en nuestro lugar, luego cargó toda su maldición en la cruz. La ley ha sido más completamente sostenida en el evangelio de lo que jamás podría haber sido por nuestros intentos incompletos de guardarla.</p>
+
+                <h3>5. Abraham, el Padre de Todos los que Creen (4:1-12)</h3>
+                <p>Durante dos mil años antes de que Pablo escribiera Romanos, Abraham había sido la figura central de la fe judía. Era el receptor del pacto. Era el padre de la nación. Era la prueba A de la justicia. Así que Pablo hace algo brillante: usa al mismo Abraham para demostrar que la justificación siempre ha sido por la fe.</p>
+
+                <p>Recurre a Génesis 15:6, escrito mucho antes de la ley de Moisés, mucho antes de la circuncisión, mucho antes de cualquier sistema de sacrificio. El versículo dice simplemente: "Y creyó Abraham a Dios, y le fue contado por justicia." Pablo construye todo su argumento sobre esas palabras. "Contado" es un término de contabilidad — griego <em>logizomai</em> — que significa acreditar algo a una cuenta. Dios no miró a Abraham y encontró justicia ya allí. Dios acreditó justicia a un hombre que no tenía ninguna propia. Abraham creyó; Dios acreditó; la cuenta quedó saldada.</p>
+
+                <p>Luego Pablo lleva el punto más lejos. "Mas al que obra, no se le cuenta el salario como gracia, sino como deuda. Pero al que no obra, sino cree en aquel que justifica al impío, su fe le es contada por justicia." Note la frase: "Aquel que justifica al impío." Este no es el Dios que recompensa al merecedor. Este es el Dios que declara justos a quienes merecen lo contrario. Ese es el único tipo de Dios que podría salvar a alguien, porque ninguno de nosotros es otra cosa que impío cuando la gracia nos encuentra por primera vez.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 4:4-5 (RVG):</strong> "Mas al que obra, no se le cuenta el salario como gracia, sino como deuda. Pero al que no obra, sino cree en aquel que justifica al impío, su fe le es contada por justicia."
+                </div>
+
+                <p>Pablo entonces recorre la cronología de la vida de Abraham. Génesis 15 registra a Abraham siendo acreditado con justicia. Génesis 17 registra la institución de la circuncisión — muchos años después. El argumento de Pablo es devastador. Abraham fue justificado por la fe <em>mientras todavía estaba incircunciso</em>. La señal del pacto vino después como confirmación de una justicia que ya existía por la fe. El orden importa. Fe primero. Luego la señal. Luego las obras. Siempre en ese orden, nunca al revés.</p>
+
+                <p>Esto significa que Abraham es padre no solo de sus descendientes físicos que llevan la señal, sino de cada descendiente espiritual que anda en los pasos de su fe. Cada creyente gentil, cada antiguo pagano, cada converso de nuestros días que mira a Cristo y es justificado por la confianza es hijo de Abraham por la fe. El pacto siempre fue lo suficientemente grande para incluirlos.</p>
+
+                <h3>6. La Promesa por Fe para Todo Tiempo (4:13-25)</h3>
+                <p>Pablo presiona adelante. La promesa a Abraham — que sería heredero del mundo — no vino por medio de la ley. Vino por medio de la justicia de la fe. Si la herencia dependiera del cumplimiento de la ley, entonces la promesa de Dios sería condicional a nuestro desempeño, y Abraham no tendría nada que heredar. La fe sería vacía y la promesa hecha sin efecto.</p>
+
+                <p>Luego Pablo pinta uno de los retratos más conmovedores de la Escritura. Abraham creyó a Dios contra probabilidades imposibles. Tenía casi cien años. El vientre de Sara había estado muerto por décadas. Las circunstancias naturales no apuntaban más que al fracaso. Y sin embargo, escribe Pablo, Abraham "contra esperanza, creyó en esperanza… Tampoco dudó, por incredulidad, de la promesa de Dios, sino que se fortaleció en fe, dando gloria a Dios, plenamente convencido de que era también poderoso para hacer todo lo que había prometido. Por lo cual también su fe le fue contada por justicia."</p>
+
+                <p>Pablo cierra el capítulo con la oración más pastoral del libro hasta este punto. La historia de Abraham no fue escrita solo por causa de Abraham. Fue escrita por nosotros. "Y no solamente por causa de él se escribió que le fue imputado; sino también por causa de nosotros, a quienes ha de ser imputado, esto es, a los que creemos en el que levantó de los muertos a Jesús nuestro Señor, el cual fue entregado por causa de nuestras transgresiones, y resucitado para nuestra justificación."</p>
+
+                <p>Esa última oración es el evangelio en miniatura. Jesús fue <em>entregado</em> — entregado a la crucifixión — por causa de nuestros pecados. Jesús fue <em>resucitado</em> — vindicado por el Padre — para nuestra justificación. Su muerte pagó la pena. Su resurrección comprobó que el pago fue aceptado. El "amén" del Padre a la cruz fue la tumba vacía. Y la misma justicia que Dios acreditó a Abraham hace cuatro mil años, la acredita a cada pecador creyente que confía en el Cristo resucitado hoy.</p>
+
+                <p>El evangelio ahora ha sido expuesto con claridad. El veredicto de culpa ha sido revertido por el veredicto de gracia. A partir del capítulo cinco, Pablo comenzará a mostrarnos lo que este veredicto produce en la vida real del creyente — paz con Dios, esperanza que no defrauda, y un amor que se derrama a través de nosotros por el Espíritu Santo. Pero nada de eso sigue a menos que este capítulo esté resuelto primero. Así que resuélvalo. No estás justificado por lo que tú has hecho. Estás justificado por lo que Cristo ha hecho, recibido por fe solamente.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="exam-section" id="examSection">
+        <div class="exam-header">
+            <h2><span class="lang-en">Unit 3 Examination — Romans 3:21-4:25</span><span class="lang-es">Examen de la Unidad 3 — Romanos 3:21-4:25</span></h2>
+            <p><span class="lang-en">20 multiple choice questions + 10 short answer questions (essays required for Th.M. and M.Div. only)</span><span class="lang-es">20 preguntas de opción múltiple + 10 preguntas de respuesta corta (requeridas solo para Th.M. y M.Div.)</span></p>
+        </div>
+        <div id="mcQuestions"></div>
+        <div id="saQuestions"></div>
+        <div class="action-buttons">
+            <button id="submitBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Entregar Examen</span></button>
+            <button id="resetBtn" class="reset-btn"><span class="lang-en">Reset Exam</span><span class="lang-es">Reiniciar Examen</span></button>
+        </div>
+        <div id="lockoutTimer" class="lockout-timer" style="display:none;"></div>
+    </div>
+
+    <div class="nav-links">
+        <a href="CTSRomansUnit2.html"><span class="lang-en">← Previous Unit</span><span class="lang-es">← Unidad Anterior</span></a>
+        <a href="CTSRomansUnit4.html"><span class="lang-en">Next Unit →</span><span class="lang-es">Unidad Siguiente →</span></a>
+    </div>
+</div>
+
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+// ============================================================
+// PER-UNIT CONSTANTS
+// ============================================================
+const UNIT = 3;
+const COURSE_PREFIX = "romans";
+const NEXT_URL = "CTSRomansUnit4.html";
+const PREV_URL = "CTSRomansUnit2.html";
+const IS_LAST_UNIT = false;
+const SHOW_REGISTRATION_CARD = false;
+const CERT_URL = "CTSRomansCertificate.html";
+
+// ============================================================
+// MULTIPLE CHOICE QUESTIONS (20) — Distribution A=5, B=5, C=5, D=5
+// ============================================================
+const mcQuestions = [{"text": "1. The phrase 'But now' in Romans 3:21 marks what?", "options": ["C. The end of the letter", "B. A change in audience from Jews to Gentiles", "D. A request for prayer", "A. The great pivot from indictment to gospel — God's righteousness revealed apart from the law"], "correct": 3, "correctFeedback": "Correct. 'But now' is the great pivot of Romans — after three chapters of indictment, the gospel breaks through.", "incorrectFeedback": "Romans 3:21 is the great pivot. After every mouth is stopped and the world declared guilty, Paul announces a righteousness from God revealed apart from the law.", "textEs": "1. La frase 'Pero ahora' en Romanos 3:21 marca ¿qué?", "optionsEs": ["C. El final de la carta", "B. Un cambio de audiencia, de judíos a gentiles", "D. Una petición de oración", "A. El gran giro de la acusación al evangelio — la justicia de Dios revelada aparte de la ley"], "correctFeedbackEs": "Correcto. 'Pero ahora' es el gran giro de Romanos — tras tres capítulos de acusación, el evangelio irrumpe.", "incorrectFeedbackEs": "Romanos 3:21 es el gran giro. Después de que toda boca se cierra y el mundo es declarado culpable, Pablo anuncia una justicia de Dios revelada aparte de la ley."}, {"text": "2. According to Romans 3:21-22, the righteousness of God comes how?", "options": ["B. Through faith in Jesus Christ, to all who believe", "C. Through circumcision", "D. Through synagogue attendance", "A. Through keeping the law of Moses"], "correct": 0, "correctFeedback": "Correct. 'Through faith in Jesus Christ, to all and on all who believe.' Apart from law, on the same terms for everyone.", "incorrectFeedback": "Romans 3:22 — the righteousness of God is through faith in Jesus Christ, to all who believe. The same gospel reaches Jew and Gentile alike.", "textEs": "2. Según Romanos 3:21-22, ¿cómo viene la justicia de Dios?", "optionsEs": ["B. Por la fe en Jesucristo, para todos los que creen", "C. Por la circuncisión", "D. Por asistir a la sinagoga", "A. Por guardar la ley de Moisés"], "correctFeedbackEs": "Correcto. 'Por la fe en Jesucristo, para todos y sobre todos los que creen.' Aparte de la ley, en los mismos términos para todos.", "incorrectFeedbackEs": "Romanos 3:22 — la justicia de Dios es por la fe en Jesucristo, para todos los que creen. El mismo evangelio alcanza por igual al judío y al gentil."}, {"text": "3. Which verse declares, 'For all have sinned and fall short of the glory of God'?", "options": ["B. Romans 2:6", "C. Romans 3:23", "A. Romans 1:18", "D. Romans 4:25"], "correct": 1, "correctFeedback": "Correct. Romans 3:23 — the summary verdict of the courtroom, immediately followed by the rescue in 3:24.", "incorrectFeedback": "Romans 3:23 — 'For all have sinned and fall short of the glory of God.' This is the verdict; verses 24-26 announce the rescue.", "textEs": "3. ¿Cuál versículo declara: 'Por cuanto todos pecaron, y están destituidos de la gloria de Dios'?", "optionsEs": ["B. Romanos 2:6", "C. Romanos 3:23", "A. Romanos 1:18", "D. Romanos 4:25"], "correctFeedbackEs": "Correcto. Romanos 3:23 — el veredicto resumido del tribunal, seguido de inmediato por el rescate en 3:24.", "incorrectFeedbackEs": "Romanos 3:23 — 'Por cuanto todos pecaron, y están destituidos de la gloria de Dios.' Este es el veredicto; los versículos 24-26 anuncian el rescate."}, {"text": "4. 'Justified' (dikaioō) is primarily what kind of term?", "options": ["C. Agricultural", "B. Liturgical", "D. Legal / forensic — a courtroom verdict", "A. Emotional"], "correct": 2, "correctFeedback": "Correct. Justification is a legal verdict. God declares the believer righteous; it is not a moral process of improvement.", "incorrectFeedback": "Justification is legal/forensic. God 'declares righteous' — a verdict, not a process. The believing sinner stands acquitted in God's courtroom.", "textEs": "4. 'Justificado' (dikaioō) es principalmente ¿qué tipo de término?", "optionsEs": ["C. Agrícola", "B. Litúrgico", "D. Legal / forense — un veredicto del tribunal", "A. Emocional"], "correctFeedbackEs": "Correcto. La justificación es un veredicto legal. Dios declara justo al creyente; no es un proceso moral de mejoramiento.", "incorrectFeedbackEs": "La justificación es legal/forense. Dios 'declara justo' — un veredicto, no un proceso. El pecador que cree queda absuelto en el tribunal de Dios."}, {"text": "5. In Romans 3:25, 'propitiation' (Greek hilasterion) refers to:", "options": ["A. The mercy seat — the place where God's wrath is satisfied by atoning blood", "C. The bronze laver", "B. The altar of incense", "D. The lampstand"], "correct": 0, "correctFeedback": "Correct. Hilasterion = the mercy seat. Christ Himself is the place where God's wrath against sin is satisfied.", "incorrectFeedback": "Hilasterion refers to the mercy seat of the Ark, where atoning blood was sprinkled. Paul says God set Christ forth as the place where wrath is satisfied.", "textEs": "5. En Romanos 3:25, 'propiciación' (en griego hilasterion) se refiere a:", "optionsEs": ["A. El propiciatorio — el lugar donde la ira de Dios es satisfecha por la sangre expiatoria", "C. La fuente de bronce", "B. El altar del incienso", "D. El candelero"], "correctFeedbackEs": "Correcto. Hilasterion = el propiciatorio. Cristo mismo es el lugar donde la ira de Dios contra el pecado es satisfecha.", "incorrectFeedbackEs": "Hilasterion se refiere al propiciatorio del Arca, donde se rociaba la sangre expiatoria. Pablo dice que Dios puso a Cristo como el lugar donde la ira es satisfecha."}, {"text": "6. Justification means:", "options": ["D. To be ordained to ministry", "A. To be morally improved over time", "C. To be physically healed", "B. To be declared righteous — pronounced not guilty in God's courtroom"], "correct": 3, "correctFeedback": "Correct. Justification is the verdict of acquittal, not the process of moral improvement (which is sanctification).", "incorrectFeedback": "Justification = declared righteous, a courtroom verdict. It is distinct from sanctification, which is the ongoing process of moral transformation that follows.", "textEs": "6. Justificación significa:", "optionsEs": ["D. Ser ordenado al ministerio", "A. Ser mejorado moralmente con el tiempo", "C. Ser sanado físicamente", "B. Ser declarado justo — pronunciado no culpable en el tribunal de Dios"], "correctFeedbackEs": "Correcto. La justificación es el veredicto de absolución, no el proceso de mejoramiento moral (que es la santificación).", "incorrectFeedbackEs": "Justificación = declarado justo, un veredicto del tribunal. Se distingue de la santificación, que es el proceso continuo de transformación moral que sigue."}, {"text": "7. According to Romans 3:24, justification is by what?", "options": ["B. The works of the law", "C. Grace — through the redemption that is in Christ Jesus", "A. Personal effort", "D. Inherited covenant status"], "correct": 1, "correctFeedback": "Correct. 'Justified freely by His grace through the redemption that is in Christ Jesus.' Unearned, by gift, through Christ's purchase.", "incorrectFeedback": "Romans 3:24 — justified freely by His grace through the redemption that is in Christ Jesus. Grace is the source; redemption is the means.", "textEs": "7. Según Romanos 3:24, la justificación es ¿por qué?", "optionsEs": ["B. Las obras de la ley", "C. La gracia — mediante la redención que es en Cristo Jesús", "A. El esfuerzo personal", "D. El estatus de pacto heredado"], "correctFeedbackEs": "Correcto. 'Siendo justificados gratuitamente por su gracia, mediante la redención que es en Cristo Jesús.' No ganada, por don, mediante la compra de Cristo.", "incorrectFeedbackEs": "Romanos 3:24 — justificados gratuitamente por su gracia, mediante la redención que es en Cristo Jesús. La gracia es la fuente; la redención es el medio."}, {"text": "8. Through what does God demonstrate His righteousness while justifying sinners (Rom 3:25-26)?", "options": ["C. Through human conscience", "A. Through Israel's history", "B. Through giving more law", "D. Through the cross of Christ, who absorbs God's wrath as substitute"], "correct": 3, "correctFeedback": "Correct. The cross demonstrates God's righteousness — He remains just (justice satisfied) and the justifier (declaring the believer righteous).", "incorrectFeedback": "The cross is where God's righteousness is demonstrated. He is 'just and the justifier' — His justice fully satisfied in Christ, His mercy fully extended to the believer.", "textEs": "8. ¿Mediante qué demuestra Dios su justicia al justificar a los pecadores (Ro 3:25-26)?", "optionsEs": ["C. Mediante la conciencia humana", "A. Mediante la historia de Israel", "B. Mediante dar más ley", "D. Mediante la cruz de Cristo, quien absorbe la ira de Dios como sustituto"], "correctFeedbackEs": "Correcto. La cruz demuestra la justicia de Dios — Él permanece justo (la justicia satisfecha) y el que justifica (declarando justo al creyente).", "incorrectFeedbackEs": "La cruz es donde se demuestra la justicia de Dios. Él es 'el justo, y el que justifica' — su justicia plenamente satisfecha en Cristo, su misericordia plenamente extendida al creyente."}, {"text": "9. According to Romans 3:28, a person is justified by what?", "options": ["D. Sincerity in any religion", "B. Faith plus the deeds of the law", "A. Faith apart from the deeds of the law", "C. The deeds of the law alone"], "correct": 2, "correctFeedback": "Correct. 'A man is justified by faith apart from the deeds of the law.' This is the verse that anchored the Reformation.", "incorrectFeedback": "Romans 3:28 — justified by faith apart from the deeds of the law. Luther added 'alone' in his German translation to make the meaning unmistakable.", "textEs": "9. Según Romanos 3:28, una persona es justificada ¿por qué?", "optionsEs": ["D. Por la sinceridad en cualquier religión", "B. Por la fe más las obras de la ley", "A. Por la fe, aparte de las obras de la ley", "C. Por las obras de la ley solamente"], "correctFeedbackEs": "Correcto. 'El hombre es justificado por fe sin las obras de la ley.' Este es el versículo que ancló la Reforma.", "incorrectFeedbackEs": "Romanos 3:28 — justificado por fe sin las obras de la ley. Lutero añadió 'sola' en su traducción alemana para hacer el sentido inconfundible."}, {"text": "10. In Romans 4:3, what Old Testament verse does Paul cite as proof?", "options": ["B. Genesis 15:6 — Abraham believed God, and it was accounted to him for righteousness", "A. Deuteronomy 6:5", "C. Exodus 20:1", "D. Leviticus 19:18"], "correct": 0, "correctFeedback": "Correct. Genesis 15:6 is the bedrock of Paul's argument: Abraham was justified by faith long before circumcision or the law.", "incorrectFeedback": "Genesis 15:6 — 'Abraham believed God, and it was accounted to him for righteousness.' Paul builds his entire chapter 4 argument on this verse.", "textEs": "10. En Romanos 4:3, ¿qué versículo del Antiguo Testamento cita Pablo como prueba?", "optionsEs": ["B. Génesis 15:6 — Abraham creyó a Dios, y le fue contado por justicia", "A. Deuteronomio 6:5", "C. Éxodo 20:1", "D. Levítico 19:18"], "correctFeedbackEs": "Correcto. Génesis 15:6 es la base del argumento de Pablo: Abraham fue justificado por fe mucho antes de la circuncisión o de la ley.", "incorrectFeedbackEs": "Génesis 15:6 — 'Abraham creyó a Dios, y le fue contado por justicia.' Pablo construye todo su argumento del capítulo 4 sobre este versículo."}, {"text": "11. When in Abraham's life was righteousness credited to him?", "options": ["B. After he was circumcised", "C. While he was still uncircumcised — before any covenant sign", "A. After he offered Isaac", "D. After Moses received the law"], "correct": 1, "correctFeedback": "Correct. Genesis 15 (faith credited) came years before Genesis 17 (circumcision). Justification by faith preceded the sign.", "incorrectFeedback": "Abraham was justified by faith in Genesis 15 while still uncircumcised. Genesis 17 — the covenant sign — came years later as confirmation, not condition.", "textEs": "11. ¿En qué momento de la vida de Abraham le fue acreditada la justicia?", "optionsEs": ["B. Después de ser circuncidado", "C. Cuando aún estaba incircunciso — antes de cualquier señal del pacto", "A. Después de ofrecer a Isaac", "D. Después de que Moisés recibió la ley"], "correctFeedbackEs": "Correcto. Génesis 15 (la fe acreditada) ocurrió años antes de Génesis 17 (la circuncisión). La justificación por fe precedió a la señal.", "incorrectFeedbackEs": "Abraham fue justificado por fe en Génesis 15 cuando aún estaba incircunciso. Génesis 17 — la señal del pacto — vino años después como confirmación, no como condición."}, {"text": "12. Paul says Abraham is the father of whom?", "options": ["A. Only ethnic Jews", "C. Only those who keep the law of Moses", "D. All who believe — both Jewish and Gentile descendants by faith", "B. Only those circumcised in the flesh"], "correct": 2, "correctFeedback": "Correct. Abraham is the father of all who walk in the steps of his faith — Jew or Gentile, circumcised or not.", "incorrectFeedback": "Romans 4:11-12 — Abraham is the father of all who believe, both circumcised and uncircumcised. The covenant always included faith-children from every nation.", "textEs": "12. Pablo dice que Abraham es padre ¿de quiénes?", "optionsEs": ["A. Solo de los judíos étnicos", "C. Solo de los que guardan la ley de Moisés", "D. De todos los que creen — descendientes judíos y gentiles por la fe", "B. Solo de los circuncidados en la carne"], "correctFeedbackEs": "Correcto. Abraham es padre de todos los que andan en los pasos de su fe — judío o gentil, circuncidado o no.", "incorrectFeedbackEs": "Romanos 4:11-12 — Abraham es padre de todos los que creen, circuncidados e incircuncisos. El pacto siempre incluyó hijos de fe de toda nación."}, {"text": "13. Faith was credited (logizomai) to Abraham as what?", "options": ["A. Righteousness", "C. A debt", "D. A token offering", "B. Wages owed"], "correct": 0, "correctFeedback": "Correct. Genesis 15:6 — 'it was accounted to him for righteousness.' Faith credited as righteousness.", "incorrectFeedback": "Faith was credited as righteousness. The bookkeeping verb logizomai means 'to credit to an account' — God credits righteousness to the believer's account.", "textEs": "13. La fe le fue contada (logizomai) a Abraham como ¿qué?", "optionsEs": ["A. Justicia", "C. Una deuda", "D. Una ofrenda simbólica", "B. Salario debido"], "correctFeedbackEs": "Correcto. Génesis 15:6 — 'le fue contado por justicia.' La fe contada como justicia.", "incorrectFeedbackEs": "La fe fue contada como justicia. El verbo contable logizomai significa 'acreditar a una cuenta' — Dios acredita justicia a la cuenta del creyente."}, {"text": "14. According to Romans 4:5, God justifies whom?", "options": ["D. Only law-keeping Jews", "A. The morally upright who try their best", "C. Those who first prove themselves worthy", "B. The ungodly who believes in Him"], "correct": 3, "correctFeedback": "Correct. 'Him who justifies the ungodly.' God declares righteous those who deserve the opposite — through faith.", "incorrectFeedback": "Romans 4:5 — God 'justifies the ungodly.' This is the most scandalous and beautiful claim in the chapter. He saves those who deserve the opposite.", "textEs": "14. Según Romanos 4:5, ¿a quién justifica Dios?", "optionsEs": ["D. Solo a los judíos que guardan la ley", "A. Al moralmente recto que hace su mejor esfuerzo", "C. A los que primero se demuestran dignos", "B. Al impío que cree en Él"], "correctFeedbackEs": "Correcto. 'Al que justifica al impío.' Dios declara justos a los que merecen lo contrario — por medio de la fe.", "incorrectFeedbackEs": "Romanos 4:5 — Dios 'justifica al impío.' Esta es la afirmación más escandalosa y hermosa del capítulo. Él salva a los que merecen lo contrario."}, {"text": "15. Does faith establish or nullify the law (Rom 3:31)?", "options": ["D. It makes the law optional", "C. It establishes the law — Christ fulfilled it perfectly and bore its curse", "A. It nullifies the law completely", "B. It replaces the law with feelings"], "correct": 1, "correctFeedback": "Correct. Faith establishes the law. Christ fulfilled it on our behalf and bore its full curse on the cross.", "incorrectFeedback": "Romans 3:31 — 'we establish the law.' Christ perfectly kept the law for us and bore its curse. The law has been more fully honored in the gospel than by our incomplete obedience.", "textEs": "15. ¿La fe confirma o anula la ley (Ro 3:31)?", "optionsEs": ["D. La hace opcional", "C. La confirma — Cristo la cumplió perfectamente y llevó su maldición", "A. La anula por completo", "B. La reemplaza con sentimientos"], "correctFeedbackEs": "Correcto. La fe confirma la ley. Cristo la cumplió en nuestro lugar y llevó toda su maldición en la cruz.", "incorrectFeedbackEs": "Romanos 3:31 — 'confirmamos la ley.' Cristo guardó perfectamente la ley por nosotros y llevó su maldición. La ley ha sido más plenamente honrada en el evangelio que por nuestra obediencia incompleta."}, {"text": "16. According to Romans 4:25, why was Jesus raised from the dead?", "options": ["D. For our justification — vindicating that the penalty for our sins was paid in full", "A. To prove He was a prophet", "B. To inspire imitation", "C. To complete His earthly teaching"], "correct": 0, "correctFeedback": "Correct. 'Raised because of our justification.' The empty tomb is God's 'amen' to the cross.", "incorrectFeedback": "Romans 4:25 — He was 'delivered up because of our offenses, and was raised because of our justification.' The resurrection is the Father's vindication of the payment.", "textEs": "16. Según Romanos 4:25, ¿por qué fue resucitado Jesús de los muertos?", "optionsEs": ["D. Para nuestra justificación — confirmando que la pena por nuestros pecados fue pagada por completo", "A. Para probar que era profeta", "B. Para inspirar imitación", "C. Para completar su enseñanza terrenal"], "correctFeedbackEs": "Correcto. 'Resucitado para nuestra justificación.' La tumba vacía es el 'amén' de Dios a la cruz.", "incorrectFeedbackEs": "Romanos 4:25 — fue 'entregado por nuestras transgresiones, y resucitado para nuestra justificación.' La resurrección es la confirmación del pago por parte del Padre."}, {"text": "17. Abraham believed God 'against hope' in what specific situation?", "options": ["C. He had no flocks or herds", "B. He was being persecuted by Pharaoh", "A. He was near a hundred years old and Sarah's womb had long been barren", "D. He had no land"], "correct": 2, "correctFeedback": "Correct. Romans 4:18-19 — nearly a hundred years old, Sarah's body 'dead,' yet Abraham did not waver in believing God could perform what He had promised.", "incorrectFeedback": "Abraham believed against hope when his body and Sarah's were physically incapable of producing a child. He was strengthened in faith, fully convinced God could do what He promised.", "textEs": "17. Abraham creyó a Dios 'contra esperanza' ¿en qué situación específica?", "optionsEs": ["C. No tenía rebaños ni ganados", "B. Era perseguido por Faraón", "A. Tenía casi cien años y el vientre de Sara hacía mucho que era estéril", "D. No tenía tierra"], "correctFeedbackEs": "Correcto. Romanos 4:18-19 — con casi cien años, el cuerpo de Sara 'muerto,' y sin embargo Abraham no vaciló en creer que Dios podía cumplir lo que había prometido.", "incorrectFeedbackEs": "Abraham creyó contra esperanza cuando su cuerpo y el de Sara eran físicamente incapaces de tener un hijo. Fue fortalecido en la fe, plenamente convencido de que Dios podía hacer lo que prometió."}, {"text": "18. Imputation in Paul's argument means:", "options": ["A. Becoming ritually pure", "C. Earning a wage by work", "D. Being morally perfect", "B. Crediting something to a person's account that was not originally theirs"], "correct": 3, "correctFeedback": "Correct. Imputation = credited to account. Righteousness is reckoned to the believer's account even though it originated in Christ.", "incorrectFeedback": "Imputation is a bookkeeping image — God credits Christ's righteousness to the believer's account, even though it did not originate there. Faith receives what works could never produce.", "textEs": "18. La imputación, en el argumento de Pablo, significa:", "optionsEs": ["A. Llegar a ser ritualmente puro", "C. Ganar un salario por el trabajo", "D. Ser moralmente perfecto", "B. Acreditar a la cuenta de una persona algo que no era originalmente suyo"], "correctFeedbackEs": "Correcto. Imputación = acreditado a una cuenta. La justicia se cuenta a la cuenta del creyente aunque se originó en Cristo.", "incorrectFeedbackEs": "La imputación es una imagen contable — Dios acredita la justicia de Cristo a la cuenta del creyente, aunque no se originó allí. La fe recibe lo que las obras nunca podrían producir."}, {"text": "19. Why is boasting excluded from salvation (Rom 3:27)?", "options": ["D. Because boasting is a cultural taboo", "B. Because boasting offends God's pride", "C. Because justification is by the law of faith, not works — the rescued have nothing to boast about", "A. Because no one is ever saved"], "correct": 2, "correctFeedback": "Correct. Faith looks outside itself for rescue. The person pulled from the ocean does not boast in his swimming.", "incorrectFeedback": "Boasting is excluded by the law of faith. Faith excludes boasting by definition — it looks outside itself to Christ for rescue, so no one can claim credit.", "textEs": "19. ¿Por qué queda excluida la jactancia de la salvación (Ro 3:27)?", "optionsEs": ["D. Porque la jactancia es un tabú cultural", "B. Porque la jactancia ofende el orgullo de Dios", "C. Porque la justificación es por la ley de la fe, no por las obras — los rescatados no tienen de qué jactarse", "A. Porque nadie es salvo jamás"], "correctFeedbackEs": "Correcto. La fe mira fuera de sí misma en busca del rescate. El que es sacado del océano no se jacta de su nado.", "incorrectFeedbackEs": "La jactancia queda excluida por la ley de la fe. La fe excluye la jactancia por definición — mira fuera de sí misma, a Cristo, en busca del rescate, de modo que nadie puede atribuirse el mérito."}, {"text": "20. The great pivot of Romans is found at which verse?", "options": ["B. Romans 5:1", "D. Romans 3:21 — 'But now…'", "A. Romans 1:1", "C. Romans 8:1"], "correct": 1, "correctFeedback": "Correct. Romans 3:21 is the great hinge — the moment indictment turns to gospel.", "incorrectFeedback": "Romans 3:21 — 'But now apart from the law the righteousness of God has been revealed.' This is the hinge on which the entire letter turns.", "textEs": "20. ¿En cuál versículo se encuentra el gran giro de Romanos?", "optionsEs": ["B. Romanos 5:1", "D. Romanos 3:21 — 'Pero ahora…'", "A. Romanos 1:1", "C. Romanos 8:1"], "correctFeedbackEs": "Correcto. Romanos 3:21 es la gran bisagra — el momento en que la acusación se convierte en evangelio.", "incorrectFeedbackEs": "Romanos 3:21 — 'Pero ahora, aparte de la ley, se ha manifestado la justicia de Dios.' Esta es la bisagra sobre la que gira toda la carta."}];
+
+// ============================================================
+// SHORT ANSWER QUESTIONS (10) — split kw_en / kw_es
+// ============================================================
+const saQuestions = [
+    { id: "sa_u3_1", textEn: "Why is Romans 3:21 considered the great pivot of the entire book?", textEs: "¿Por qué se considera Romanos 3:21 el gran giro de todo el libro?", kw_en: ["now", "righteous", "reveal", "apart", "law", "gospel", "faith", "mouth"], kw_es: ["ahora", "justicia", "revel", "aparte", "ley", "evangel", "fe", "boca"], explanationEn: "After three chapters of indictment where every mouth was stopped, Romans 3:21 announces 'But now…' — God has revealed a righteousness apart from the law, through faith in Jesus Christ. This is the hinge on which the entire letter turns from bad news to good news.", explanationEs: "Después de tres capítulos de acusación donde toda boca fue tapada, Romanos 3:21 anuncia 'Pero ahora…' — Dios ha revelado una justicia aparte de la ley, por medio de la fe en Jesucristo. Esta es la bisagra sobre la cual toda la carta gira de malas noticias a buenas noticias." },
+    { id: "sa_u3_2", textEn: "Explain the meaning of justification (dikaioō) as Paul uses it in Romans 3-4.", textEs: "Explique el significado de justificación (dikaioō) como Pablo lo usa en Romanos 3-4.", kw_en: ["declar", "righteous", "verdict", "guilt", "court", "process", "imput", "forens"], kw_es: ["declar", "justo", "veredic", "culpab", "tribunal", "proceso", "imput", "forens"], explanationEn: "Justification is a legal/forensic term meaning 'declared righteous.' It is a verdict pronounced in God's courtroom, not a process of moral improvement. When God justifies a believing sinner, He declares the verdict 'not guilty' and credits Christ's righteousness to the believer's account.", explanationEs: "Justificación es un término legal/forense que significa 'declarado justo.' Es un veredicto pronunciado en el tribunal de Dios, no un proceso de mejora moral. Cuando Dios justifica a un pecador creyente, declara el veredicto 'no culpable' y acredita la justicia de Cristo a la cuenta del creyente." },
+    { id: "sa_u3_3", textEn: "Explain propitiation (hilasterion) in Romans 3:25 and its connection to the Old Testament.", textEs: "Explique la propiciación (hilasterion) en Romanos 3:25 y su conexión con el Antiguo Testamento.", kw_en: ["mercy", "seat", "ark", "atone", "blood", "wrath", "substit", "propit"], kw_es: ["propici", "arca", "expiaci", "sangre", "ira", "sustit", "aplac", "trono"], explanationEn: "Hilasterion refers to the mercy seat — the gold cover of the Ark of the Covenant where atoning blood was sprinkled on the Day of Atonement. Paul says God set Christ forth as the mercy seat: Christ is the place where God's wrath against sin is satisfied by His own blood. The cross is where justice and mercy meet.", explanationEs: "Hilasterion se refiere al propiciatorio — la cubierta de oro del Arca del Pacto donde la sangre expiatoria era rociada en el Día de la Expiación. Pablo dice que Dios puso a Cristo como el propiciatorio: Cristo es el lugar donde la ira de Dios contra el pecado es satisfecha por Su propia sangre. La cruz es donde la justicia y la misericordia se encuentran." },
+    { id: "sa_u3_4", textEn: "How do grace, redemption, and faith work together in Romans 3:24-25?", textEs: "¿Cómo trabajan juntas la gracia, la redención y la fe en Romanos 3:24-25?", kw_en: ["grace", "redempt", "faith", "free", "unearn", "purchas", "gift", "instrum"], kw_es: ["gracia", "redenci", "fe", "gratu", "gan", "compr", "don", "instrum"], explanationEn: "Grace is the source — God's unearned favor. Redemption is the means — Christ purchased us out of slavery to sin by His blood. Faith is the instrument by which the believer receives the gift. Justification is freely (dorean) given — no merit, no contribution from us; it is a one-directional transaction from God.", explanationEs: "La gracia es la fuente — el favor inmerecido de Dios. La redención es el medio — Cristo nos compró de la esclavitud al pecado por Su sangre. La fe es el instrumento por el cual el creyente recibe el regalo. La justificación se da gratuitamente (dorean) — sin mérito, sin contribución de nuestra parte; es una transacción unidireccional de Dios." },
+    { id: "sa_u3_5", textEn: "Why does Paul use Abraham as the proof case for justification by faith in Romans 4?", textEs: "¿Por qué usa Pablo a Abraham como el caso de prueba para la justificación por fe en Romanos 4?", kw_en: ["father", "Jewish", "law", "circumcis", "Genesis", "covenant", "faith", "Abraham"], kw_es: ["padre", "judí", "ley", "circuncis", "Génesis", "pacto", "fe", "Abraham"], explanationEn: "Abraham was the most authoritative figure in Jewish identity — recipient of the covenant, father of the nation, Exhibit A of righteousness. By proving Abraham himself was justified by faith long before circumcision or the law of Moses, Paul shows that justification has always been by faith and that no Jew can object to the same terms for Gentiles.", explanationEs: "Abraham era la figura más autoritativa de la identidad judía — receptor del pacto, padre de la nación, prueba A de la justicia. Al demostrar que el mismo Abraham fue justificado por fe mucho antes de la circuncisión o la ley de Moisés, Pablo muestra que la justificación siempre ha sido por fe y que ningún judío puede objetar a los mismos términos para los gentiles." },
+    { id: "sa_u3_6", textEn: "What is the significance of Genesis 15:6 in Paul's argument?", textEs: "¿Cuál es la significancia de Génesis 15:6 en el argumento de Pablo?", kw_en: ["believ", "count", "righteous", "logizo", "credit", "circumcis", "law", "faith"], kw_es: ["crey", "cont", "justicia", "logizo", "acredit", "circuncis", "ley", "fe"], explanationEn: "Genesis 15:6 — 'Abraham believed God, and it was accounted to him for righteousness' — is the foundation Paul builds on. The Greek logizomai means 'to credit to an account.' God did not find righteousness in Abraham; He credited righteousness to a man who had none. This proves justification has always been by faith, not by works of the law.", explanationEs: "Génesis 15:6 — 'Y creyó Abraham a Dios, y le fue contado por justicia' — es el fundamento sobre el cual Pablo construye. El griego logizomai significa 'acreditar a una cuenta.' Dios no encontró justicia en Abraham; acreditó justicia a un hombre que no tenía ninguna. Esto demuestra que la justificación siempre ha sido por fe, no por obras de la ley." },
+    { id: "sa_u3_7", textEn: "How does Paul use the timing of Abraham's circumcision to argue against works-righteousness?", textEs: "¿Cómo usa Pablo la cronología de la circuncisión de Abraham para argumentar contra la justicia por obras?", kw_en: ["Genesis", "faith", "sign", "circumcis", "confirm", "condit", "father", "believ"], kw_es: ["Génesis", "fe", "señal", "circuncis", "confirm", "condici", "padre", "cree"], explanationEn: "Genesis 15 records Abraham being credited with righteousness by faith. Genesis 17 records the institution of circumcision — years later. Abraham was therefore justified while still uncircumcised. The covenant sign came afterward as confirmation of an existing righteousness, not as the condition for receiving it. This makes Abraham the father of all who believe — Jew or Gentile, circumcised or not.", explanationEs: "Génesis 15 registra a Abraham siendo acreditado con justicia por fe. Génesis 17 registra la institución de la circuncisión — años después. Por lo tanto, Abraham fue justificado mientras aún estaba incircunciso. La señal del pacto vino después como confirmación de una justicia existente, no como condición para recibirla. Esto hace a Abraham el padre de todos los que creen — judío o gentil, circunciso o no." },
+    { id: "sa_u3_8", textEn: "What does it mean that righteousness is 'credited' or 'imputed' to the believer?", textEs: "¿Qué significa que la justicia es 'acreditada' o 'imputada' al creyente?", kw_en: ["imput", "logizo", "credit", "account", "Christ", "alien", "faith", "righteous"], kw_es: ["imput", "logizo", "acredit", "cuenta", "Cristo", "ajena", "fe", "justicia"], explanationEn: "Imputation is a bookkeeping image — God credits something to a person's account that was not originally theirs. The righteousness credited to the believer is not produced by the believer; it comes from Christ. Luther called it 'alien righteousness' because it originates outside us. Faith is the receiving instrument, not the productive source.", explanationEs: "Imputación es una imagen de contabilidad — Dios acredita a la cuenta de una persona algo que no era originalmente suyo. La justicia acreditada al creyente no es producida por el creyente; viene de Cristo. Lutero la llamó 'justicia ajena' porque se origina fuera de nosotros. La fe es el instrumento receptor, no la fuente productora." },
+    { id: "sa_u3_9", textEn: "How does Romans 4:25 summarize the gospel in a single verse?", textEs: "¿Cómo resume Romanos 4:25 el evangelio en un solo versículo?", kw_en: ["deliver", "offens", "raised", "justif", "death", "resurrect", "tomb", "gospel"], kw_es: ["entreg", "delito", "resucit", "justif", "muerte", "resurrecci", "tumba", "evangel"], explanationEn: "Jesus was 'delivered up because of our offenses' — His death paid the penalty for our sins. He was 'raised because of our justification' — the resurrection is the Father's vindication that the payment was accepted. The cross and the empty tomb form one indivisible gospel. The Father's 'amen' to the cross was the empty tomb.", explanationEs: "Jesús fue 'entregado por causa de nuestras transgresiones' — Su muerte pagó la pena por nuestros pecados. Fue 'resucitado para nuestra justificación' — la resurrección es la vindicación del Padre de que el pago fue aceptado. La cruz y la tumba vacía forman un evangelio indivisible. El 'amén' del Padre a la cruz fue la tumba vacía." },
+    { id: "sa_u3_10", textEn: "Why is justification by faith alone the foundation of Christian assurance?", textEs: "¿Por qué es la justificación por fe sola el fundamento de la seguridad cristiana?", kw_en: ["rest", "Christ", "perform", "complete", "boast", "earn", "verdict", "secure"], kw_es: ["descans", "Cristo", "desempeñ", "complet", "jact", "gan", "veredic", "segur"], explanationEn: "If justification depended on our performance, assurance would rise and fall with our daily faithfulness. But because justification is by faith in Christ's completed work, the believer's standing rests on something already finished and unchangeable. The verdict has been declared. The payment has been accepted. Assurance comes not from looking inward at our performance but outward to Christ.", explanationEs: "Si la justificación dependiera de nuestro desempeño, la seguridad subiría y bajaría con nuestra fidelidad diaria. Pero porque la justificación es por fe en la obra completada de Cristo, la posición del creyente descansa sobre algo ya terminado e inmutable. El veredicto ha sido declarado. El pago ha sido aceptado. La seguridad viene no de mirar hacia adentro a nuestro desempeño sino hacia afuera a Cristo." }
+];
+
+// ============================================================
+// GLOBAL STATE
+// ============================================================
+let studentTrack = "cert";
+let studentName = "";
+let lockoutEnd = null;
+let examPassed = false;
+const PASS_MC = 18;
+const PASS_SA = 9;
+
+function getStorageKey(key) { return `cts_${COURSE_PREFIX}_${key}`; }
+
+function loadState() {
+    const student = lsGet("cts_student");
+    if (student) {
+        try {
+            const s = JSON.parse(student);
+            studentName = s.name || "";
+            studentTrack = s.track || "cert";
+        } catch(e) {}
+    }
+    const trackOverride = lsGet("cts_track");
+    if (trackOverride && ["cert","thm","mdiv"].includes(trackOverride)) studentTrack = trackOverride;
+
+    const lock = lsGet(getStorageKey(`unit${UNIT}_lockout`));
+    if (lock && parseInt(lock) > Date.now()) lockoutEnd = parseInt(lock);
+
+    const passedFlag = lsGet(getStorageKey(`unit${UNIT}_passed`));
+    if (passedFlag === "true") examPassed = true;
+
+    const lang = lsGet(getStorageKey(`unit${UNIT}_lang`)) || "en";
+    document.body.className = `lang-${lang}`;
+
+    updateTrackDisplay();
+    handleRegistrationCard();
+}
+
+function handleRegistrationCard() {
+    const regSection = document.getElementById("registrationSection");
+    if (SHOW_REGISTRATION_CARD && !lsGet("cts_student")) {
+        regSection.style.display = "block";
+    } else {
+        regSection.style.display = "none";
+    }
+}
+
+function updateTrackDisplay() {
+    const trackMap = { cert: "Certificate", thm: "Th.M.", mdiv: "M.Div." };
+    document.getElementById("trackIndicator").innerHTML = `<span class="lang-en">Track: ${trackMap[studentTrack]}</span><span class="lang-es">Vía: ${trackMap[studentTrack]}</span>`;
+}
+
+function saveLanguage(lang) {
+    lsSet(getStorageKey(`unit${UNIT}_lang`), lang);
+    document.body.className = `lang-${lang}`;
+}
+
+function submitRegistration() {
+    const name = document.getElementById("regName").value.trim();
+    const trackEl = document.querySelector('input[name="regTrack"]:checked');
+    if (!name) {
+        const isEs = document.body.className.includes("lang-es");
+        alert(isEs ? "Por favor ingrese su nombre." : "Please enter your name.");
+        return;
+    }
+    const track = trackEl ? trackEl.value : "cert";
+    lsSet("cts_student", JSON.stringify({ name, track }));
+    lsSet("cts_track", track);
+    studentName = name;
+    studentTrack = track;
+    updateTrackDisplay();
+    document.getElementById("registrationSection").style.display = "none";
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const mcContainer = document.getElementById("mcQuestions");
+    mcContainer.innerHTML = "";
+    mcQuestions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.text}</span><span class="lang-es">${q.textEs}</span></div>
+            <div class="options" id="mc-${idx}-opts">
+                ${q.options.map((opt, optIdx) => `<label><input type="radio" name="mc${idx}" value="${optIdx}"> <span class="lang-en">${opt}</span><span class="lang-es">${q.optionsEs[optIdx]}</span></label>`).join('')}
+            </div>
+            <div class="feedback" id="mc-${idx}-fb"></div>
+        `;
+        mcContainer.appendChild(card);
+    });
+
+    const saContainer = document.getElementById("saQuestions");
+    saContainer.innerHTML = "";
+    saQuestions.forEach((q, idx) => {
+        const isCert = studentTrack === "cert";
+        const card = document.createElement("div");
+        card.className = "question-card essay-question";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${mcQuestions.length + idx + 1}. ${q.textEn}</span><span class="lang-es">${mcQuestions.length + idx + 1}. ${q.textEs}</span></div>
+            <textarea rows="3" id="sa-${idx}" placeholder='${isCert ? "Optional for Certificate track / Opcional para Certificado" : "Type your answer here... / Escriba su respuesta aquí..."}' ></textarea>
+            <button type="button" class="check-kw-btn" data-sa="${idx}"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>
+            <div class="feedback" id="sa-${idx}-fb"></div>
+        `;
+        saContainer.appendChild(card);
+    });
+
+    attachAutoScore();
+    attachSAAutoSave();
+    restoreAnswers();
+}
+
+function attachAutoScore() {
+    mcQuestions.forEach((q, idx) => {
+        const radios = document.querySelectorAll(`input[name="mc${idx}"]`);
+        radios.forEach(r => {
+            r.addEventListener("change", () => {
+                const selected = document.querySelector(`input[name="mc${idx}"]:checked`);
+                const fbDiv = document.getElementById(`mc-${idx}-fb`);
+                if (selected) {
+                    lsSet(getStorageKey(`unit${UNIT}_mc${idx}`), selected.value);
+                    const isCorr = parseInt(selected.value) === q.correct;
+                    if (fbDiv) {
+                        fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+                        fbDiv.innerHTML = isCorr ? q.correctFeedback : q.incorrectFeedback;
+                    }
+                    document.querySelectorAll(`input[name="mc${idx}"]`).forEach(x => { x.disabled = true; });
+                }
+            });
+        });
+    });
+}
+
+function attachSAAutoSave() {
+    saQuestions.forEach((q, idx) => {
+        const ta = document.getElementById(`sa-${idx}`);
+        if (ta) {
+            ta.addEventListener("input", () => {
+                lsSet(getStorageKey(`unit${UNIT}_sa${idx}`), ta.value);
+            });
+        }
+    });
+    document.querySelectorAll(".check-kw-btn").forEach(function(btn){
+        btn.addEventListener("click", function(){ checkSA(parseInt(btn.getAttribute("data-sa"), 10)); });
+    });
+}
+
+function restoreAnswers() {
+    mcQuestions.forEach((q, idx) => {
+        const saved = lsGet(getStorageKey(`unit${UNIT}_mc${idx}`));
+        if (saved !== null) {
+            const radio = document.querySelector(`input[name="mc${idx}"][value="${saved}"]`);
+            if (radio) {
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change'));
+            }
+        }
+    });
+    saQuestions.forEach((q, idx) => {
+        const saved = lsGet(getStorageKey(`unit${UNIT}_sa${idx}`));
+        if (saved !== null) {
+            const ta = document.getElementById(`sa-${idx}`);
+            if (ta) ta.value = saved;
+        }
+    });
+}
+
+
+// --- Q24 smart keyword matcher (word-boundary regex). Added by fairness pass. ---
+function kwHit(answer, kw) {
+    if (!kw) return false;
+    var a = (answer || "").toLowerCase();
+    var k = kw.toLowerCase().trim();
+    if (!k) return false;
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    // unicode-aware-ish boundary: not preceded/followed by a letter or digit
+    var L = "0-9a-zA-Záéíóúüñ";
+    var re;
+    if (k.length <= 4) {
+        re = new RegExp("(?:^|[^" + L + "])" + esc + "(?![" + L + "])");
+    } else {
+        re = new RegExp("(?:^|[^" + L + "])" + esc);
+    }
+    return re.test(a);
+}
+
+
+function checkSA(idx) {
+    var ta = document.getElementById("sa-" + idx);
+    var fbDiv = document.getElementById("sa-" + idx + "-fb");
+    if (!ta || !fbDiv) return;
+    var lang = document.body.className.replace("lang-", "");
+    var isEs = lang === "es";
+    var answer = (ta.value || "").trim();
+    if (!answer) {
+        fbDiv.className = "feedback";
+        fbDiv.innerHTML = isEs ? "Escriba su respuesta primero, luego verifique." : "Write your answer first, then check.";
+        return;
+    }
+    var keywords = isEs ? saQuestions[idx].kw_es : saQuestions[idx].kw_en;
+    if (lang === "both") keywords = [].concat(saQuestions[idx].kw_en, saQuestions[idx].kw_es);
+    var hits = keywords.filter(function(kw){ return kwHit(answer, kw); }).length;
+    var passed = hits >= 3 && answer.length >= 100;
+    fbDiv.className = "feedback " + (passed ? "correct" : "incorrect");
+    var _model = isEs ? saQuestions[idx].explanationEs : saQuestions[idx].explanationEn;
+    var _hdr = isEs ? "Respuesta modelo — estúdiela" : "Model answer — study this";
+    var _verdict = passed
+        ? (isEs ? "Suficiente." : "Sufficient.")
+        : (isEs ? ("Insuficiente — necesita ≥3 palabras clave y ≥100 caracteres. (" + hits + "/3)") : ("Insufficient — need ≥3 keywords and ≥100 chars. (" + hits + "/3)"));
+    fbDiv.innerHTML = "<div>" + _verdict + "</div><div class=\"modelbox\"><strong>" + _hdr + ":</strong><br>" + _model + "</div>";
+}
+
+function gradeExam() {
+    if (lockoutEnd && lockoutEnd > Date.now()) {
+        const min = Math.ceil((lockoutEnd - Date.now()) / 60000);
+        alert(`Lockout active. Please wait ${min} minutes. / Bloqueo activo. Espere ${min} minutos.`);
+        return false;
+    }
+
+    let mcCorrect = 0;
+    for (let i = 0; i < mcQuestions.length; i++) {
+        const selected = document.querySelector(`input[name="mc${i}"]:checked`);
+        const fbDiv = document.getElementById(`mc-${i}-fb`);
+        if (selected) {
+            const isCorr = parseInt(selected.value) === mcQuestions[i].correct;
+            if (isCorr) mcCorrect++;
+            fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+            fbDiv.innerHTML = isCorr ? ('<span class="lang-en">'+mcQuestions[i].correctFeedback+'</span><span class="lang-es">'+mcQuestions[i].correctFeedbackEs+'</span>') : ('<span class="lang-en">'+mcQuestions[i].incorrectFeedback+'</span><span class="lang-es">'+mcQuestions[i].incorrectFeedbackEs+'</span>');
+        } else {
+            fbDiv.className = "feedback incorrect";
+            fbDiv.innerHTML = "No answer selected. / No seleccionó respuesta.";
+        }
+    }
+
+    let saPass = true;
+    let saCorrectCount = 0;
+    if (studentTrack !== "cert") {
+        for (let i = 0; i < saQuestions.length; i++) {
+            const answer = document.getElementById(`sa-${i}`).value.trim();
+            const lang = document.body.className.replace("lang-", "");
+            let keywords = lang === "es" ? saQuestions[i].kw_es : saQuestions[i].kw_en;
+            if (lang === "both") keywords = [...saQuestions[i].kw_en, ...saQuestions[i].kw_es];
+            const hits = keywords.filter(kw => kwHit(answer, kw)).length;
+            const passed = hits >= 3 && answer.length >= 100;
+            if (passed) saCorrectCount++;
+            const fbDiv = document.getElementById(`sa-${i}-fb`);
+            fbDiv.className = `feedback ${passed ? "correct" : "incorrect"}`;
+            const _model = (lang === "es" ? saQuestions[i].explanationEs : saQuestions[i].explanationEn);
+            const _hdr = (lang === "es" ? "Respuesta modelo — estúdiela" : "Model answer — study this");
+            const _verdict = passed ? (lang === "es" ? "Suficiente." : "Sufficient.") : (lang === "es" ? "Insuficiente — necesita ≥3 palabras clave y ≥100 caracteres." : "Insufficient — need ≥3 keywords and ≥100 chars.");
+            fbDiv.innerHTML = `<div>${_verdict}</div><div class="modelbox"><strong>${_hdr}:</strong><br>${_model}</div>`;
+        }
+        saPass = saCorrectCount >= PASS_SA;
+    }
+
+    const mcPass = mcCorrect >= PASS_MC;
+    const overallPass = studentTrack === "cert" ? mcPass : (mcPass && saPass);
+
+    if (overallPass) {
+        lsSet(getStorageKey(`unit${UNIT}_passed`), "true");
+        examPassed = true;
+        const msg = document.body.className.includes("lang-es") ? `¡Aprobado! Redirigiendo a la siguiente unidad...` : `Passed! Redirecting to the next unit...`;
+        alert(msg);
+    } else {
+        const lockoutTime = Date.now() + 15 * 60 * 1000;
+        lsSet(getStorageKey(`unit${UNIT}_lockout`), lockoutTime);
+        lockoutEnd = lockoutTime;
+        showLockoutTimer();
+        const failMsg = document.body.className.includes("lang-es") ? `No aprobado. Bloqueo de 15 minutos iniciado. (OM: ${mcCorrect}/20${studentTrack !== "cert" ? `, RC: ${saCorrectCount}/10` : ""})` : `Failed. 15-minute lockout started. (MC: ${mcCorrect}/20${studentTrack !== "cert" ? `, SA: ${saCorrectCount}/10` : ""})`;
+        alert(failMsg);
+    }
+    return overallPass;
+}
+
+function showLockoutTimer() {
+    const timerDiv = document.getElementById("lockoutTimer");
+    if (!lockoutEnd || lockoutEnd <= Date.now()) { timerDiv.style.display = "none"; return; }
+    timerDiv.style.display = "block";
+    const update = () => {
+        const remaining = Math.max(0, Math.ceil((lockoutEnd - Date.now()) / 1000));
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        timerDiv.innerHTML = `<span class="lang-en">Lockout: ${minutes}:${seconds.toString().padStart(2,'0')} remaining</span><span class="lang-es">Bloqueo: ${minutes}:${seconds.toString().padStart(2,'0')} restantes</span>`;
+        if (remaining <= 0) { timerDiv.style.display = "none"; lockoutEnd = null; }
+        else setTimeout(update, 1000);
+    };
+    update();
+}
+
+function resetExam() {
+    const isEs = document.body.className.includes("lang-es");
+    const msg = isEs ? "¿Reiniciar todas las respuestas? Esto no se puede deshacer." : "Reset all answers? This cannot be undone.";
+    if (confirm(msg)) {
+        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        document.querySelectorAll('textarea').forEach(t => t.value = "");
+        document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+        mcQuestions.forEach((q, idx) => lsDel(getStorageKey(`unit${UNIT}_mc${idx}`)));
+        saQuestions.forEach((q, idx) => lsDel(getStorageKey(`unit${UNIT}_sa${idx}`)));
+    }
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => saveLanguage(btn.dataset.lang));
+});
+document.getElementById("submitBtn").addEventListener("click", gradeExam);
+document.getElementById("resetBtn").addEventListener("click", resetExam);
+document.getElementById("regSubmit").addEventListener("click", submitRegistration);
+
+loadState();
+renderQuestions();
+if (lockoutEnd) showLockoutTimer();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSRomansReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

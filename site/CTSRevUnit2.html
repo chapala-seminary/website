@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Revelation Intensive — Unit 2</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 3 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Revelation Intensive — Unit 2: Son of Man Among the Lampstands</span><span class="lang-es">📖 Apocalipsis Intensivo — Unidad 2: El Hijo del Hombre entre los Candeleros</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Do not be afraid; I am the First and the Last." — Revelation 1:17 (NKJV)</span><span class="lang-es">"No temas; yo soy el primero y el último." — Apocalipsis 1:17 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Revelation Intensive. Please register before beginning Unit 2.</span><span class="lang-es">Bienvenido al Intensivo de Apocalipsis. Por favor regístrese antes de comenzar la Unidad 2.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Revelation 1:9-20</strong></p>
+<div class="scripture">"I was in the Spirit on the Lord's Day, and I heard behind me a loud voice, as of a trumpet... 'I am the First and the Last. I am He who lives, and was dead, and behold, I am alive forevermore. Amen. And I have the keys of Hades and of Death.'" &mdash; Revelation 1:10, 17-18 (NKJV)</div>
+
+<h3>A Brother and Companion in Tribulation</h3>
+<p>John does not write as a lofty figure standing above the churches, but as one of them. "I, John, both your brother and companion in the tribulation and kingdom and patience of Jesus Christ, was on the island that is called Patmos for the word of God and for the testimony of Jesus Christ" (Revelation 1:9). He calls himself their brother and companion &mdash; their fellow-sharer &mdash; in three things at once: tribulation, kingdom, and patience. These belong together. The believer shares Christ's kingdom even now, yet he comes to it through tribulation, and the road is walked with patient endurance. Patmos was a small, rocky island in the Aegean Sea that Rome used as a place of exile. John was banished there for the word of God and for the testimony of Jesus Christ &mdash; that is, for preaching the gospel and bearing faithful witness to his Lord. So the book that unveils the final victory of Christ was written by a prisoner, on a prison island, to congregations about to suffer. From the very first verse the reader learns that the glory this book promises is reached by the path of faithful endurance, not around it.</p>
+
+<h3>In the Spirit on the Lord's Day</h3>
+<p>"I was in the Spirit on the Lord's Day, and I heard behind me a loud voice, as of a trumpet" (Revelation 1:10). The phrase "in the Spirit" is one to watch closely, for it marks the great visionary moments of the book; John will be "in the Spirit" again when he is caught up to the throne in chapter four. To be in the Spirit is to be lifted by the Holy Spirit into a state in which God grants what the natural eye could never see. This came to John on the Lord's Day, the first day of the week, the day of Christ's resurrection, on which the early church gathered to worship. Even in exile, cut off from the gathered congregation, John was worshiping, and it was then that heaven opened to him. The first thing he hears is a voice like a trumpet &mdash; loud, commanding, impossible to ignore &mdash; telling him to write what he sees and send it to seven churches, which are then named: Ephesus, Smyrna, Pergamos, Thyatira, Sardis, Philadelphia, and Laodicea. These were seven real congregations in the Roman province of Asia, and the Lord will address them one by one in the two chapters that follow.</p>
+
+<h3>The Seven Golden Lampstands</h3>
+<p>"Then I turned to see the voice that spoke with me. And having turned I saw seven golden lampstands, and in the midst of the seven lampstands One like the Son of Man" (Revelation 1:12-13). John turns toward the voice and sees first seven golden lampstands. Verse 20 will tell us plainly what they are: the seven lampstands are the seven churches. The image is rich. A lampstand does not make its own light; it holds up a light given to it, so that the light can be seen by all in the house. This is the calling of the church in the world &mdash; not to shine with its own glory, but to lift up the light of Christ. And the lampstands are golden, because the church is precious to God, costly in His sight. Most striking of all, the One like the Son of Man stands in the midst of them. The risen Christ is not far away in heaven, indifferent to His people; He walks in the midst of His churches, present with them, knowing each one intimately. That nearness is both a comfort and a warning, as the letters that follow will make plain.</p>
+
+<h3>One Like the Son of Man</h3>
+<p>John now describes the glorious figure, and every feature carries meaning. He is "One like the Son of Man," the very title the Lord Jesus used of Himself and the title given to the heavenly King in Daniel 7:13-14. He is clothed with a garment down to the feet and girded with a golden band about the chest, the dress of a priest and a king. His head and hair are white like wool, as white as snow &mdash; the same description Daniel gives of the Ancient of Days, marking out the eternity and spotless purity of Christ and pointing to His deity. His eyes are like a flame of fire, a searching, all-seeing gaze from which nothing can be hidden. His feet are like fine brass, refined in a furnace, speaking of strength and steadfast judgment. His voice is like the sound of many waters, overwhelming in majesty and authority. In His right hand He holds seven stars, and out of His mouth goes a sharp two-edged sword &mdash; the word of God that both saves and judges (Hebrews 4:12). His countenance is like the sun shining in its strength, unveiled glory too bright to gaze upon. This is no longer the lowly carpenter of Nazareth in His humility, but the risen, exalted Lord in His glory, standing among the lampstands and holding the stars.</p>
+
+<h3>Do Not Be Afraid: The First and the Last</h3>
+<p>"And when I saw Him, I fell at His feet as dead" (Revelation 1:17). The sight was more than any man could bear; even John, the beloved disciple who had once leaned on Jesus' breast, falls down as though lifeless. But then comes grace. "He laid His right hand on me, saying to me, 'Do not be afraid; I am the First and the Last. I am He who lives, and was dead, and behold, I am alive forevermore. Amen. And I have the keys of Hades and of Death'" (Revelation 1:17-18). The same hand that holds the seven stars reaches down to steady His frightened servant. He calls Himself the First and the Last, a title God claims for Himself in Isaiah, and the Living One who was dead and is now alive forevermore. And He holds the keys of Hades and of Death &mdash; full authority over the grave and the realm of the dead. To a church facing martyrdom, this is the deepest comfort imaginable. The One who speaks to them has Himself passed through death and conquered it, and He carries its keys on His belt. They need not be afraid of the worst their enemies can do.</p>
+
+<h3>Write the Vision: Past, Present, and What Is to Come</h3>
+<p>Christ then gives John the commission that shapes the whole book: "Write the things which you have seen, and the things which are, and the things which will take place after this" (Revelation 1:19). Many readers have seen in this single verse a simple threefold outline of the book. The things which John has seen are the vision of the living Christ just given in chapter one. The things which are describe the present state of the seven churches, addressed in chapters two and three. The things which will take place after this are the visions of chapters four through twenty-two. Not every interpreter presses the outline in exactly the same way, and the course does not insist on a rigid scheme; but this threefold division is a natural and helpful way to feel the shape of the whole book &mdash; the vision of the risen Lord, His word to His present churches, and the unveiling of things still future. It is worth adding that the great interpretive approaches all accept this threefold frame of what was, what is, and what is to come; where they differ is on which parts are which. Those who read the book against its first-century setting see most of what follows as the things that were then near, unfolding in an age when Christians were under heavy persecution, while those who read it as chiefly future place most of chapters four through twenty-two in the things which will take place after this, still ahead of us.</p>
+
+<h3>The Mystery of the Stars and the Lampstands</h3>
+<p>Finally Christ explains His own symbols, and the reader does well to listen, for here the book interprets itself: "The mystery of the seven stars which you saw in My right hand, and the seven golden lampstands: The seven stars are the angels of the seven churches, and the seven lampstands which you saw are the seven churches" (Revelation 1:20). The seven lampstands are plainly the seven churches. The seven stars are the angels of the seven churches. The word translated "angels" means "messengers," and Christians have understood it in two main ways. Some take it to mean heavenly angels appointed to watch over the churches. Others take it to mean the human messengers or leaders &mdash; the pastors &mdash; who carry Christ's word to each congregation. Either way, the great point stands: Christ holds these messengers in His own right hand, and He walks in the midst of the lampstands. He upholds and governs His church, and He sees it exactly as it truly is. The seven letters that follow flow directly out of this vision, for each one opens by recalling some feature of the glorious Christ who has just been revealed &mdash; the Lord who knows, judges, and pours out His love upon His church.</p>
+<div class="scripture">"The seven stars are the angels of the seven churches, and the seven lampstands which you saw are the seven churches." &mdash; Revelation 1:20 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Apocalipsis 1:9-20 (RVG)</strong></p>
+<div class="scripture">"Yo estaba en el Espíritu en el día del Señor, y oí detrás de mí una gran voz como de trompeta... yo soy el primero y el último; y el que vivo, y estuve muerto; mas he aquí que vivo por los siglos de los siglos, Amén. Y tengo las llaves del infierno y de la muerte." &mdash; Apocalipsis 1:10, 17-18 (RVG)</div>
+
+<h3>Un Hermano y Compañero en la Tribulación</h3>
+<p>Juan no escribe como una figura encumbrada que está por encima de las iglesias, sino como uno de ellas. "Yo Juan, vuestro hermano, y compañero en la tribulación, y en el reino, y en la paciencia de Jesucristo, estaba en la isla que es llamada Patmos, por la palabra de Dios y el testimonio de Jesucristo" (Apocalipsis 1:9). Se llama a sí mismo hermano y compañero &mdash; copartícipe &mdash; en tres cosas a la vez: la tribulación, el reino y la paciencia. Estas van juntas. El creyente comparte el reino de Cristo ya ahora, pero llega a él por medio de la tribulación, y el camino se recorre con paciencia. Patmos era una isla pequeña y rocosa en el mar Egeo que Roma usaba como lugar de destierro. Juan fue desterrado allí por la palabra de Dios y el testimonio de Jesucristo &mdash; es decir, por predicar el evangelio y dar fiel testimonio de su Señor. Así que el libro que desvela la victoria final de Cristo fue escrito por un prisionero, en una isla-prisión, a congregaciones que estaban por sufrir. Desde el primer versículo el lector aprende que la gloria que este libro promete se alcanza por el camino de la fiel paciencia, no rodeándolo.</p>
+
+<h3>En el Espíritu en el Día del Señor</h3>
+<p>"Yo estaba en el Espíritu en el día del Señor, y oí detrás de mí una gran voz como de trompeta" (Apocalipsis 1:10). La frase "en el Espíritu" es una que hay que observar de cerca, pues marca los grandes momentos visionarios del libro; Juan estará "en el Espíritu" otra vez cuando sea arrebatado al trono en el capítulo cuatro. Estar en el Espíritu es ser levantado por el Espíritu Santo a un estado en que Dios concede lo que el ojo natural jamás podría ver. Esto le vino a Juan en el día del Señor, el primer día de la semana, el día de la resurrección de Cristo, en el cual la iglesia primitiva se reunía para adorar. Aun en el destierro, apartado de la congregación reunida, Juan estaba adorando, y fue entonces que el cielo se le abrió. Lo primero que oye es una voz como de trompeta &mdash; fuerte, imperiosa, imposible de ignorar &mdash; que le dice que escriba lo que ve y lo envíe a siete iglesias, que luego son nombradas: Éfeso, Esmirna, Pérgamo, Tiatira, Sardis, Filadelfia y Laodicea. Estas eran siete congregaciones reales en la provincia romana de Asia, y el Señor las tratará una por una en los dos capítulos que siguen.</p>
+
+<h3>Los Siete Candeleros de Oro</h3>
+<p>"Y me volví para ver la voz que hablaba conmigo; y vuelto, vi siete candeleros de oro; y en medio de los siete candeleros, a uno semejante al Hijo del hombre" (Apocalipsis 1:12-13). Juan se vuelve hacia la voz y ve primero siete candeleros de oro. El versículo 20 nos dirá claramente lo que son: los siete candeleros son las siete iglesias. La imagen es rica. Un candelero no produce su propia luz; sostiene en alto una luz que se le ha dado, para que la luz pueda ser vista por todos en la casa. Este es el llamado de la iglesia en el mundo &mdash; no brillar con su propia gloria, sino levantar en alto la luz de Cristo. Y los candeleros son de oro, porque la iglesia es preciosa para Dios, de gran valor a su vista. Lo más asombroso de todo es que el que es semejante al Hijo del Hombre está en medio de ellos. El Cristo resucitado no está lejos en el cielo, indiferente a su pueblo; camina en medio de sus iglesias, presente con ellas, conociendo a cada una íntimamente. Esa cercanía es a la vez un consuelo y una advertencia, como dejarán claro las cartas que siguen.</p>
+
+<h3>Uno Semejante al Hijo del Hombre</h3>
+<p>Juan ahora describe la figura gloriosa, y cada rasgo lleva significado. Es "uno semejante al Hijo del hombre," el mismo título que el Señor Jesús usó de sí mismo y el título dado al Rey celestial en Daniel 7:13-14. Está vestido de una ropa que llega hasta los pies, y ceñido por el pecho con un cinto de oro, el vestido de un sacerdote y de un rey. Su cabeza y sus cabellos son blancos como la lana, tan blancos como la nieve &mdash; la misma descripción que Daniel da del Anciano de días, que marca la eternidad y la pureza sin mancha de Cristo y señala su deidad. Sus ojos son como llama de fuego, una mirada penetrante que todo lo ve y de la cual nada puede esconderse. Sus pies son como bronce fino, refinado en un horno, que habla de fuerza y de juicio firme. Su voz es como el estruendo de muchas aguas, abrumadora en majestad y autoridad. En su mano derecha tiene siete estrellas, y de su boca sale una espada aguda de dos filos &mdash; la palabra de Dios que salva y que juzga (Hebreos 4:12). Su rostro es como el sol cuando resplandece en su fuerza, gloria descubierta demasiado brillante para mirarla. Este ya no es el humilde carpintero de Nazaret en su humillación, sino el Señor resucitado y exaltado en su gloria, de pie en medio de los candeleros y sosteniendo las estrellas.</p>
+
+<h3>No Temas: El Primero y el Último</h3>
+<p>"Y cuando yo le vi, caí como muerto a sus pies" (Apocalipsis 1:17). La visión fue más de lo que cualquier hombre podía soportar; aun Juan, el discípulo amado que una vez se recostó sobre el pecho de Jesús, cae como sin vida. Pero entonces viene la gracia. "Y él puso su mano derecha sobre mí, diciéndome: No temas; yo soy el primero y el último; y el que vivo, y estuve muerto; mas he aquí que vivo por los siglos de los siglos, Amén. Y tengo las llaves del infierno y de la muerte" (Apocalipsis 1:17-18). La misma mano que sostiene las siete estrellas se extiende para afirmar a su siervo atemorizado. Se llama a sí mismo el primero y el último, título que Dios reclama para sí en Isaías, y el Viviente que estuvo muerto y ahora vive por los siglos de los siglos. Y tiene las llaves del infierno y de la muerte &mdash; plena autoridad sobre la tumba y el reino de los muertos. Para una iglesia que enfrenta el martirio, este es el consuelo más profundo que pueda imaginarse. El que les habla ha pasado él mismo por la muerte y la ha vencido, y lleva sus llaves consigo. No tienen por qué temer lo peor que sus enemigos puedan hacer.</p>
+
+<h3>Escribe la Visión: Pasado, Presente y lo que ha de Venir</h3>
+<p>Cristo entonces da a Juan la comisión que da forma a todo el libro: "Escribe las cosas que has visto, y las que son, y las que han de ser después de éstas" (Apocalipsis 1:19). Muchos lectores han visto en este solo versículo un sencillo bosquejo de tres partes del libro. Las cosas que Juan ha visto son la visión del Cristo viviente que se acaba de dar en el capítulo uno. Las cosas que son describen el estado presente de las siete iglesias, tratado en los capítulos dos y tres. Las cosas que han de ser después de éstas son las visiones de los capítulos cuatro al veintidós. No todo intérprete insiste en el bosquejo exactamente de la misma manera, y el curso no impone un esquema rígido; pero esta división en tres partes es una manera natural y útil de sentir la forma de todo el libro &mdash; la visión del Señor resucitado, su palabra a sus iglesias presentes, y el desvelamiento de cosas todavía futuras. Vale añadir que los grandes enfoques interpretativos aceptan todos este marco triple de lo que fue, lo que es, y lo que ha de ser; en lo que difieren es en cuáles partes son cuáles. Los que leen el libro frente a su entorno del primer siglo ven la mayoría de lo que sigue como las cosas que entonces estaban cercanas, desarrollándose en una edad en que los cristianos estaban bajo fuerte persecución, mientras que los que lo leen como principalmente futuro colocan la mayoría de los capítulos cuatro al veintidós en las cosas que han de ser después de éstas, todavía por delante.</p>
+
+<h3>El Misterio de las Estrellas y los Candeleros</h3>
+<p>Finalmente Cristo explica sus propios símbolos, y el lector hace bien en escuchar, pues aquí el libro se interpreta a sí mismo: "El misterio de las siete estrellas que has visto en mi mano derecha, y los siete candeleros de oro. Las siete estrellas son los ángeles de las siete iglesias; y los siete candeleros que has visto, son las siete iglesias" (Apocalipsis 1:20). Los siete candeleros son claramente las siete iglesias. Las siete estrellas son los ángeles de las siete iglesias. La palabra traducida "ángeles" significa "mensajeros," y los cristianos la han entendido de dos maneras principales. Algunos la toman como ángeles celestiales designados para velar por las iglesias. Otros la toman como los mensajeros humanos o líderes &mdash; los pastores &mdash; que llevan la palabra de Cristo a cada congregación. De cualquier modo, el gran punto se mantiene: Cristo sostiene a estos mensajeros en su propia mano derecha, y camina en medio de los candeleros. Sostiene y gobierna a su iglesia, y la ve exactamente como es en verdad. Las siete cartas que siguen brotan directamente de esta visión, pues cada una abre recordando algún rasgo del Cristo glorioso que se acaba de revelar &mdash; el Señor que conoce, juzga y derrama su amor sobre su iglesia.</p>
+<div class="scripture">"Las siete estrellas son los ángeles de las siete iglesias; y los siete candeleros que has visto, son las siete iglesias." &mdash; Apocalipsis 1:20 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 2 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 2 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Revelation Intensive — Unit 2 (Son of Man Among the Lampstands, Revelation 1:9-20)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 2;
+const COURSE = 'rev';
+const NEXT_UNIT_URL = 'CTSRevUnit3.html';
+const totalUnits = 15;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - How to Read Revelation (Revelation 1:1-8)", "Unit 2 - Son of Man Among the Lampstands (Revelation 1:9-20)", "Unit 3 - Seven Churches I: Ephesus to Thyatira (Revelation 2)", "Unit 4 - Seven Churches II: Sardis to Laodicea (Revelation 3)", "Unit 5 - The Throne and the Lamb (Revelation 4-5)", "Unit 6 - The Seven Seals (Revelation 6:1-8:1)", "Unit 7 - The Seven Trumpets (Revelation 8:2-11:19)", "Unit 8 - The Woman, the Dragon, and the Beasts (Revelation 12-13)", "Unit 9 - The Harvest and the Seven Bowls (Revelation 14-16)", "Unit 10 - The Fall of Babylon (Revelation 17-18)", "Unit 11 - The Return of Christ, the Millennium, and Judgment (Revelation 19-20)", "Unit 12 - The Millennial Views: Postmillennialism (Revelation 20)", "Unit 13 - The Millennial Views: Premillennialism (Revelation 20)", "Unit 14 - The Millennial Views: Amillennialism (Revelation 20)", "Unit 15 - The New Heaven and the New Earth (Revelation 21-22)"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSRevUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. In Revelation 1:9, John identifies himself to his readers as their:", "textEs": "1. En Apocalipsis 1:9, Juan se identifica ante sus lectores como su:", "optionsEn": ["Reigning high priest", "Ruler and judge", "Distant and unknown apostle", "Brother and companion in tribulation"], "optionsEs": ["Sumo sacerdote reinante", "Gobernante y juez", "Apóstol distante y desconocido", "Hermano y compañero en la tribulación"], "explanationEn": "John calls himself their brother and companion in tribulation.", "explanationEs": "Juan se llama su hermano y compañero en la tribulación.", "correct": 3}, {"textEn": "2. John received this vision while exiled on the island called:", "textEs": "2. Juan recibió esta visión mientras estaba desterrado en la isla llamada:", "optionsEn": ["Cyprus", "Crete", "Patmos", "Malta"], "optionsEs": ["Chipre", "Creta", "Patmos", "Malta"], "explanationEn": "John was on the island of Patmos, a Roman place of exile.", "explanationEs": "Juan estaba en la isla de Patmos, lugar romano de destierro.", "correct": 2}, {"textEn": "3. John says he was on Patmos for the word of God and for:", "textEs": "3. Juan dice que estaba en Patmos por la palabra de Dios y por:", "optionsEn": ["The sins of the people", "The testimony of Jesus Christ", "The sake of Rome", "The building of a temple"], "optionsEs": ["Los pecados del pueblo", "El testimonio de Jesucristo", "La causa de Roma", "La construcción de un templo"], "explanationEn": "He was exiled for the word of God and the testimony of Jesus Christ.", "explanationEs": "Fue desterrado por la palabra de Dios y el testimonio de Jesucristo.", "correct": 1}, {"textEn": "4. The three things John shares with his readers in 1:9 are tribulation, kingdom, and:", "textEs": "4. Las tres cosas que Juan comparte con sus lectores en 1:9 son tribulación, reino y:", "optionsEn": ["Patience (patient endurance)", "Political power", "Temple worship", "Wealth"], "optionsEs": ["Paciencia (firme perseverancia)", "Poder político", "Culto del templo", "Riqueza"], "explanationEn": "He shares the tribulation, kingdom, and patience of Jesus Christ.", "explanationEs": "Comparte la tribulación, el reino y la paciencia de Jesucristo.", "correct": 0}, {"textEn": "5. John says he received the vision while 'in the Spirit' on:", "textEs": "5. Juan dice que recibió la visión estando 'en el Espíritu' en:", "optionsEn": ["The Day of Atonement", "The Sabbath evening", "A pagan feast day", "The Lord's Day"], "optionsEs": ["El Día de la Expiación", "La tarde del sábado", "Un día de fiesta pagana", "El día del Señor"], "explanationEn": "It came on the Lord's Day, the first day of the week.", "explanationEs": "Vino en el día del Señor, el primer día de la semana.", "correct": 3}, {"textEn": "6. The lesson notes that the phrase 'in the Spirit' in Revelation marks:", "textEs": "6. La lección señala que la frase 'en el Espíritu' en el Apocalipsis marca:", "optionsEn": ["A sinful trance", "John's physical illness", "The great visionary moments of the book", "A pagan ritual"], "optionsEs": ["Un trance pecaminoso", "La enfermedad física de Juan", "Los grandes momentos visionarios del libro", "Un ritual pagano"], "explanationEn": "'In the Spirit' marks the great visionary moments (also 4:2).", "explanationEs": "'En el Espíritu' marca los grandes momentos visionarios (también 4:2).", "correct": 2}, {"textEn": "7. The first thing John heard behind him was a loud voice like a:", "textEs": "7. Lo primero que Juan oyó detrás de él fue una gran voz como de:", "optionsEn": ["Trumpet", "Thunderclap", "Whisper", "Bell"], "optionsEs": ["Trompeta", "Trueno", "Susurro", "Campana"], "explanationEn": "He heard a loud voice, as of a trumpet.", "explanationEs": "Oyó una gran voz, como de trompeta.", "correct": 0}, {"textEn": "8. Revelation 1:20 says the seven stars are 'the angels of the seven churches.' The lesson notes 'angels' has been understood as heavenly angels or:", "textEs": "8. Apocalipsis 1:20 dice que las siete estrellas son 'los ángeles de las siete iglesias.' La lección señala que 'ángeles' se ha entendido como ángeles celestiales o:", "optionsEn": ["False prophets", "The human messengers (pastors) of the churches", "Roman officials", "The seven seals"], "optionsEs": ["Falsos profetas", "Los mensajeros humanos (pastores) de las iglesias", "Funcionarios romanos", "Los siete sellos"], "explanationEn": "'Angels' means messengers; some read it as the churches' pastors.", "explanationEs": "'Ángeles' significa mensajeros; algunos lo leen como los pastores de las iglesias.", "correct": 1}, {"textEn": "9. In Revelation 1:19 Christ commands John to write the things he has seen, the things which are, and:", "textEs": "9. En Apocalipsis 1:19 Cristo manda a Juan escribir las cosas que ha visto, las que son, y:", "optionsEn": ["The laws of Rome", "The names of all the saved", "The things which will take place after this", "The exact date of the end"], "optionsEs": ["Las leyes de Roma", "Los nombres de todos los salvos", "Las cosas que han de ser después de éstas", "La fecha exacta del fin"], "explanationEn": "The threefold commission: things seen, things which are, things to come.", "explanationEs": "La comisión triple: lo visto, lo que es, lo que ha de venir.", "correct": 2}, {"textEn": "10. When John turned toward the voice, the first thing he saw was:", "textEs": "10. Cuando Juan se volvió hacia la voz, lo primero que vio fue:", "optionsEn": ["A great white throne", "A white horse", "An open scroll", "Seven golden lampstands"], "optionsEs": ["Un gran trono blanco", "Un caballo blanco", "Un rollo abierto", "Siete candeleros de oro"], "explanationEn": "He turned and saw seven golden lampstands.", "explanationEs": "Se volvió y vio siete candeleros de oro.", "correct": 3}, {"textEn": "11. According to Revelation 1:20, the seven golden lampstands are:", "textEs": "11. Según Apocalipsis 1:20, los siete candeleros de oro son:", "optionsEn": ["The seven churches", "Seven stars", "Seven angels", "The seven seals"], "optionsEs": ["Las siete iglesias", "Siete estrellas", "Siete ángeles", "Los siete sellos"], "explanationEn": "Christ says the seven lampstands are the seven churches.", "explanationEs": "Cristo dice que los siete candeleros son las siete iglesias.", "correct": 0}, {"textEn": "12. The lesson says a lampstand pictures the church's calling to:", "textEs": "12. La lección dice que un candelero representa el llamado de la iglesia a:", "optionsEn": ["Rule the nations", "Lift up the light of Christ, not its own", "Judge the world", "Store up treasure"], "optionsEs": ["Gobernar las naciones", "Levantar la luz de Cristo, no la suya propia", "Juzgar al mundo", "Atesorar riquezas"], "explanationEn": "A lampstand holds up a given light; the church lifts up Christ's light.", "explanationEs": "Un candelero sostiene una luz dada; la iglesia levanta la luz de Cristo.", "correct": 1}, {"textEn": "13. The figure John saw standing in the midst of the lampstands was:", "textEs": "13. La figura que Juan vio de pie en medio de los candeleros era:", "optionsEn": ["The prophet Elijah", "An angel of light", "One like the Son of Man", "A six-winged seraph"], "optionsEs": ["El profeta Elías", "Un ángel de luz", "Uno semejante al Hijo del Hombre", "Un serafín de seis alas"], "explanationEn": "He saw One like the Son of Man among the lampstands.", "explanationEs": "Vio a uno semejante al Hijo del Hombre entre los candeleros.", "correct": 2}, {"textEn": "14. The title 'Son of Man' and the white hair recall the vision of the Ancient of Days in the book of:", "textEs": "14. El título 'Hijo del Hombre' y los cabellos blancos recuerdan la visión del Anciano de días en el libro de:", "optionsEn": ["Daniel", "Ezekiel", "Isaiah", "Zechariah"], "optionsEs": ["Daniel", "Ezequiel", "Isaías", "Zacarías"], "explanationEn": "The imagery echoes the Ancient of Days in Daniel 7.", "explanationEs": "La imagen hace eco del Anciano de días en Daniel 7.", "correct": 0}, {"textEn": "15. Christ's eyes 'like a flame of fire' chiefly picture His:", "textEs": "15. Los ojos de Cristo 'como llama de fuego' representan principalmente su:", "optionsEn": ["Anger only", "Searching, all-seeing gaze", "Sorrow", "Physical beauty"], "optionsEs": ["Solo ira", "Mirada penetrante que todo lo ve", "Tristeza", "Belleza física"], "explanationEn": "The fiery eyes show His searching gaze from which nothing is hidden.", "explanationEs": "Los ojos de fuego muestran su mirada penetrante de la que nada se esconde.", "correct": 1}, {"textEn": "16. The sharp two-edged sword coming from Christ's mouth represents:", "textEs": "16. La espada aguda de dos filos que sale de la boca de Cristo representa:", "optionsEn": ["A literal weapon", "Human wisdom", "The Roman army", "The word of God that saves and judges"], "optionsEs": ["Un arma literal", "La sabiduría humana", "El ejército romano", "La palabra de Dios que salva y juzga"], "explanationEn": "The sword is the word of God, which saves and judges.", "explanationEs": "La espada es la palabra de Dios, que salva y juzga.", "correct": 3}, {"textEn": "17. When John saw the glorified Christ, he:", "textEs": "17. Cuando Juan vio al Cristo glorificado, él:", "optionsEn": ["Sang aloud for joy", "Ran to embrace Him", "Fell at His feet as dead", "Hid himself in a cave"], "optionsEs": ["Cantó en voz alta de gozo", "Corrió a abrazarlo", "Cayó como muerto a sus pies", "Se escondió en una cueva"], "explanationEn": "Overwhelmed, John fell at His feet as dead.", "explanationEs": "Abrumado, Juan cayó como muerto a sus pies.", "correct": 2}, {"textEn": "18. Christ laid His right hand on John and comforted him with the words:", "textEs": "18. Cristo puso su mano derecha sobre Juan y lo consoló con las palabras:", "optionsEn": ["\"Do not be afraid; I am the First and the Last\"", "\"Go and tell no one\"", "\"Your sins are forgiven you\"", "\"Come and follow Me\""], "optionsEs": ["\"No temas; yo soy el primero y el último\"", "\"Ve y no lo digas a nadie\"", "\"Tus pecados te son perdonados\"", "\"Ven y sígueme\""], "explanationEn": "He said, 'Do not be afraid; I am the First and the Last.'", "explanationEs": "Dijo: 'No temas; yo soy el primero y el último.'", "correct": 0}, {"textEn": "19. The risen Christ declares that He holds the keys of:", "textEs": "19. El Cristo resucitado declara que tiene las llaves de:", "optionsEn": ["Heaven and earth", "David's house", "The seven churches", "Hades and of Death"], "optionsEs": ["El cielo y la tierra", "La casa de David", "Las siete iglesias", "El infierno y de la muerte"], "explanationEn": "He holds the keys of Hades and of Death, having conquered the grave.", "explanationEs": "Tiene las llaves del infierno y de la muerte, habiendo vencido la tumba.", "correct": 3}, {"textEn": "20. Christ says He was dead, 'and behold, I am':", "textEs": "20. Cristo dice que estuvo muerto, 'mas he aquí que':", "optionsEn": ["\"Coming soon\"", "\"Alive forevermore\"", "\"The true vine\"", "\"The door\""], "optionsEs": ["\"Vengo pronto\"", "\"Vivo por los siglos de los siglos\"", "\"La vid verdadera\"", "\"La puerta\""], "explanationEn": "He is alive forevermore and holds death's keys.", "explanationEs": "Vive por los siglos de los siglos y tiene las llaves de la muerte.", "correct": 1}];
+
+const kwQuestions = [{"textEn": "21. Describe how John identifies himself in 1:9 and where and why he was when he received the vision.", "textEs": "21. Describa cómo se identifica Juan en 1:9 y dónde y por qué estaba cuando recibió la visión.", "kw_en": ["john", "patmos", "brother", "tribul", "kingdom", "patien", "exile", "testimon"], "kw_es": ["juan", "patmos", "hermano", "tribul", "reino", "pacien", "destierr", "testimon"], "modelEn": "John does not write as one above the churches but as their brother and companion in the tribulation and kingdom and patience of Jesus Christ. He shares all three at once: the believer enters the kingdom now, yet comes to it through tribulation, walking the road with patient endurance. When he received the vision he was on Patmos, a small rocky island that Rome used for exile. He had been banished there for the word of God and for the testimony of Jesus Christ, that is, for preaching the gospel and bearing faithful witness to his Lord. So the book that unveils Christ's final victory was written by a prisoner on a prison island, to churches about to suffer. From the start the reader learns that the glory promised is reached by the path of faithful endurance.", "modelEs": "Juan no escribe como uno por encima de las iglesias sino como su hermano y compañero en la tribulación, el reino y la paciencia de Jesucristo. Comparte las tres a la vez: el creyente entra en el reino ahora, pero llega a él por medio de la tribulación, recorriendo el camino con paciencia. Cuando recibió la visión estaba en Patmos, una isla pequeña y rocosa que Roma usaba para el destierro. Había sido desterrado allí por la palabra de Dios y el testimonio de Jesucristo, es decir, por predicar el evangelio y dar fiel testimonio de su Señor. Así que el libro que desvela la victoria final de Cristo fue escrito por un prisionero en una isla-prisión, a iglesias que estaban por sufrir. Desde el comienzo el lector aprende que la gloria prometida se alcanza por el camino de la fiel paciencia."}, {"textEn": "22. Explain what it means that John was 'in the Spirit on the Lord's Day,' and what he first heard.", "textEs": "22. Explique lo que significa que Juan estaba 'en el Espíritu en el día del Señor,' y lo que oyó primero.", "kw_en": ["spirit", "lord", "day", "trumpet", "voice", "seven", "church", "write"], "kw_es": ["espíritu", "señor", "día", "trompeta", "voz", "siete", "iglesia", "escrib"], "modelEn": "John says he was in the Spirit on the Lord's Day. The phrase in the Spirit marks the great visionary moments of the book; he is in the Spirit again at the throne in chapter four. It means being lifted by the Holy Spirit into a state where God grants what the natural eye cannot see. This came on the Lord's Day, the first day of the week, the day of Christ's resurrection, when the early church gathered to worship; even in exile John was worshiping. The first thing he heard was a loud voice like a trumpet, commanding and impossible to ignore, telling him to write what he saw and send it to seven churches. Those seven were then named, real congregations in the province of Asia, and the Lord would address each in turn.", "modelEs": "Juan dice que estaba en el Espíritu en el día del Señor. La frase en el Espíritu marca los grandes momentos visionarios del libro; está en el Espíritu otra vez ante el trono en el capítulo cuatro. Significa ser levantado por el Espíritu Santo a un estado donde Dios concede lo que el ojo natural no puede ver. Esto vino en el día del Señor, el primer día de la semana, el día de la resurrección de Cristo, cuando la iglesia primitiva se reunía para adorar; aun en el destierro Juan adoraba. Lo primero que oyó fue una gran voz como de trompeta, imperiosa e imposible de ignorar, que le decía que escribiera lo que veía y lo enviara a siete iglesias. Esas siete fueron luego nombradas, congregaciones reales en la provincia de Asia, y el Señor trataría a cada una por turno."}, {"textEn": "23. What are the seven golden lampstands, and what does the lampstand image teach about the church?", "textEs": "23. ¿Qué son los siete candeleros de oro, y qué enseña la imagen del candelero acerca de la iglesia?", "kw_en": ["lampstand", "golden", "seven", "church", "light", "midst", "christ", "preci"], "kw_es": ["candelero", "oro", "siete", "iglesia", "luz", "medio", "cristo", "precios"], "modelEn": "When John turned he first saw seven golden lampstands, and verse 20 tells us plainly that the seven lampstands are the seven churches. The image is rich. A lampstand does not make its own light; it holds up a light given to it so that the light can be seen by all in the house. This is the calling of the church: not to shine with its own glory but to lift up the light of Christ before the world. The lampstands are golden because the church is precious to God, costly in His sight. Most striking of all, the One like the Son of Man stands in the midst of the lampstands. The risen Christ is not far off and indifferent; He walks among His churches, present and knowing each one. That nearness is both a comfort and a warning for the church.", "modelEs": "Cuando Juan se volvió vio primero siete candeleros de oro, y el versículo 20 nos dice claramente que los siete candeleros son las siete iglesias. La imagen es rica. Un candelero no produce su propia luz; sostiene en alto una luz que se le ha dado para que la luz pueda ser vista por todos en la casa. Este es el llamado de la iglesia: no brillar con su propia gloria sino levantar la luz de Cristo ante el mundo. Los candeleros son de oro porque la iglesia es preciosa para Dios, de gran valor a su vista. Lo más asombroso es que el que es semejante al Hijo del Hombre está en medio de los candeleros. El Cristo resucitado no está lejos ni indiferente; camina en medio de sus iglesias, presente y conociendo a cada una. Esa cercanía es a la vez un consuelo y una advertencia para la iglesia."}, {"textEn": "24. Describe the glorious figure of the Son of Man and the meaning of his appearance (1:13-16).", "textEs": "24. Describa la figura gloriosa del Hijo del Hombre y el significado de su aparición (1:13-16).", "kw_en": ["son", "man", "glori", "eyes", "fire", "sword", "sun", "priest"], "kw_es": ["hijo", "hombre", "glori", "ojos", "fuego", "espada", "sol", "sacerdo"], "modelEn": "John describes One like the Son of Man, the title Jesus used of Himself and the title of the heavenly King in Daniel seven. Every feature carries meaning. His long robe and golden band are the dress of a priest and a king. His head and hair, white as snow, match Daniel's Ancient of Days and mark His eternity, purity, and deity. His eyes like a flame of fire are a searching gaze from which nothing is hidden. His feet like refined brass speak of strength and steadfast judgment, and His voice like many waters of overwhelming majesty. In His right hand are seven stars, and from His mouth comes a sharp two-edged sword, the word of God that saves and judges. His face shines like the sun in full strength, glory too bright to behold. This is not the lowly carpenter but the risen Lord in His glory.", "modelEs": "Juan describe a uno semejante al Hijo del Hombre, el título que Jesús usó de sí mismo y el título del Rey celestial en Daniel siete. Cada rasgo lleva significado. Su ropa larga y su cinto de oro son el vestido de un sacerdote y de un rey. Su cabeza y cabellos, blancos como la nieve, coinciden con el Anciano de días de Daniel y marcan su eternidad, pureza y deidad. Sus ojos como llama de fuego son una mirada penetrante de la que nada se esconde. Sus pies como bronce refinado hablan de fuerza y juicio firme, y su voz como muchas aguas de majestad abrumadora. En su mano derecha hay siete estrellas, y de su boca sale una espada aguda de dos filos, la palabra de Dios que salva y juzga. Su rostro resplandece como el sol en plena fuerza, gloria demasiado brillante para mirarla. Este no es el humilde carpintero sino el Señor resucitado en su gloria."}, {"textEn": "25. What happened when John saw Christ, and how did Christ comfort him (1:17-18)?", "textEs": "25. ¿Qué sucedió cuando Juan vio a Cristo, y cómo lo consoló Cristo (1:17-18)?", "kw_en": ["afraid", "first", "last", "dead", "alive", "keys", "hades", "death"], "kw_es": ["temas", "primero", "último", "muerto", "viviente", "llaves", "infierno", "muerte"], "modelEn": "When John saw the glorified Christ he fell at His feet as dead, for the sight was more than any man could bear. Then came grace: Christ laid His right hand on him and said, Do not be afraid. He called Himself the First and the Last, a title God claims in Isaiah, and the Living One who was dead and is now alive forevermore. And He declared that He holds the keys of Hades and of Death, full authority over the grave and the realm of the dead. The same hand that holds the seven stars reached down to steady His frightened servant. For a church facing martyrdom this is the deepest comfort, for the One who speaks to them has Himself passed through death and conquered it, and He carries its keys. They need not be afraid of the worst their enemies can do.", "modelEs": "Cuando Juan vio al Cristo glorificado cayó como muerto a sus pies, pues la visión fue más de lo que cualquier hombre podía soportar. Entonces vino la gracia: Cristo puso su mano derecha sobre él y dijo, No temas. Se llamó el primero y el último, título que Dios reclama en Isaías, y el Viviente que estuvo muerto y ahora vive por los siglos de los siglos. Y declaró que tiene las llaves del infierno y de la muerte, plena autoridad sobre la tumba y el reino de los muertos. La misma mano que sostiene las siete estrellas se extendió para afirmar a su siervo atemorizado. Para una iglesia que enfrenta el martirio este es el consuelo más profundo, pues el que les habla ha pasado él mismo por la muerte y la ha vencido, y lleva sus llaves. No tienen por qué temer lo peor que sus enemigos puedan hacer."}, {"textEn": "26. Explain the threefold commission of Revelation 1:19 and how some see it as an outline of the book.", "textEs": "26. Explique la comisión triple de Apocalipsis 1:19 y cómo algunos la ven como un bosquejo del libro.", "kw_en": ["write", "seen", "things", "present", "future", "church", "vision", "outline"], "kw_es": ["escrib", "visto", "cosas", "present", "futur", "iglesia", "visión", "bosquej"], "modelEn": "Christ commands John to write the things which he has seen, the things which are, and the things which will take place after this. Many readers see in this verse a simple threefold outline of the whole book. The things John has seen are the vision of the living Christ just given in chapter one. The things which are describe the present state of the seven churches, addressed in chapters two and three. The things which will take place after this are the visions from chapter four onward, things still future. Not every interpreter presses the outline in exactly the same way, and the course does not insist on a rigid scheme. Still, this threefold division is a natural and helpful way to feel the shape of the book: the vision of the risen Lord, His word to His present churches, and the unveiling of what is to come.", "modelEs": "Cristo manda a Juan escribir las cosas que ha visto, las que son, y las que han de ser después de éstas. Muchos lectores ven en este versículo un sencillo bosquejo de tres partes de todo el libro. Las cosas que Juan ha visto son la visión del Cristo viviente que se acaba de dar en el capítulo uno. Las cosas que son describen el estado presente de las siete iglesias, tratado en los capítulos dos y tres. Las cosas que han de ser después de éstas son las visiones desde el capítulo cuatro en adelante, cosas todavía futuras. No todo intérprete insiste en el bosquejo de la misma manera, y el curso no impone un esquema rígido. Aun así, esta división en tres partes es una manera natural y útil de sentir la forma del libro: la visión del Señor resucitado, su palabra a sus iglesias presentes, y el desvelamiento de lo que ha de venir."}, {"textEn": "27. What does Christ say the seven stars and seven lampstands are, and what are the two ways 'angels' is understood?", "textEs": "27. ¿Qué dice Cristo que son las siete estrellas y los siete candeleros, y cuáles son las dos maneras de entender 'ángeles'?", "kw_en": ["stars", "lampstand", "angel", "messeng", "church", "right", "hand", "pastor"], "kw_es": ["estrella", "candelero", "ángel", "mensajer", "iglesia", "derecha", "mano", "pastor"], "modelEn": "Christ explains His own symbols, so here the book interprets itself. The seven lampstands are the seven churches, and the seven stars are the angels of the seven churches. The word translated angels means messengers, and Christians have understood it in two main ways. Some take it to mean heavenly angels appointed to watch over the churches. Others take it to mean the human messengers or leaders, the pastors, who carry Christ's word to each congregation. Either reading leaves the great point untouched: Christ holds these messengers in His own right hand, and He walks in the midst of the lampstands. He upholds and governs His church and sees it exactly as it is. The seven letters that follow flow from this vision, for each opens by recalling a feature of the glorious Christ just revealed.", "modelEs": "Cristo explica sus propios símbolos, así que aquí el libro se interpreta a sí mismo. Los siete candeleros son las siete iglesias, y las siete estrellas son los ángeles de las siete iglesias. La palabra traducida ángeles significa mensajeros, y los cristianos la han entendido de dos maneras principales. Algunos la toman como ángeles celestiales designados para velar por las iglesias. Otros la toman como los mensajeros humanos o líderes, los pastores, que llevan la palabra de Cristo a cada congregación. Cualquiera de las dos lecturas deja intacto el gran punto: Cristo sostiene a estos mensajeros en su propia mano derecha, y camina en medio de los candeleros. Sostiene y gobierna a su iglesia y la ve exactamente como es. Las siete cartas que siguen brotan de esta visión, pues cada una abre recordando un rasgo del Cristo glorioso que se acaba de revelar."}, {"textEn": "28. Why does it matter that Christ stands 'in the midst' of the lampstands, present with His churches?", "textEs": "28. ¿Por qué importa que Cristo esté 'en medio' de los candeleros, presente con sus iglesias?", "kw_en": ["midst", "christ", "present", "church", "walki", "intimat", "comfort", "warni"], "kw_es": ["medio", "cristo", "present", "iglesia", "camina", "íntim", "consuelo", "advert"], "modelEn": "The vision shows Christ standing in the midst of the lampstands, which verse 20 identifies as the churches. This matters greatly. The risen Lord is not far off in heaven, indifferent to His people; He is present, walking among His churches and knowing each one intimately. For a faithful and struggling congregation this is profound comfort: Christ Himself is there, holding their messengers in His hand and aware of every trial. Yet the same nearness is also a warning, for the One who walks among them sees their sin and coldness as well as their love, and He will speak to each church accordingly in the letters that follow. So His presence in the midst is two-edged, both consoling and sobering. It assures the church that it is never abandoned, and it summons the church to live as those whose Lord is always near, seeing all.", "modelEs": "La visión muestra a Cristo de pie en medio de los candeleros, que el versículo 20 identifica como las iglesias. Esto importa grandemente. El Señor resucitado no está lejos en el cielo, indiferente a su pueblo; está presente, caminando en medio de sus iglesias y conociendo a cada una íntimamente. Para una congregación fiel que lucha esto es profundo consuelo: Cristo mismo está allí, sosteniendo a sus mensajeros en su mano y atento a cada prueba. Sin embargo la misma cercanía es también una advertencia, pues el que camina entre ellas ve su pecado y su frialdad tanto como su amor, y hablará a cada iglesia conforme a ello en las cartas que siguen. Así que su presencia en medio es de dos filos, a la vez consoladora y solemne. Asegura a la iglesia que nunca está abandonada, y la llama a vivir como aquellos cuyo Señor siempre está cerca, viéndolo todo."}, {"textEn": "29. How does this vision of the glorified Christ connect to the seven letters of chapters two and three?", "textEs": "29. ¿Cómo se conecta esta visión del Cristo glorificado con las siete cartas de los capítulos dos y tres?", "kw_en": ["vision", "letter", "church", "christ", "judge", "featur", "love", "glori"], "kw_es": ["visión", "carta", "iglesia", "cristo", "juzga", "caracter", "amor", "glori"], "modelEn": "This vision of the glorious Christ is the doorway into the seven letters that follow. Each letter to a church in chapters two and three opens by recalling some feature of the Christ just revealed in chapter one: the One who holds the stars, who has the sharp two-edged sword, whose eyes are like a flame of fire, who is the First and the Last. So the letters are not detached scoldings; they are the words of the very Lord John has seen, the One who walks in the midst of the lampstands. Because He sees each church truly, He can both judge what is wrong and commend what is right, and through it all He acts in love toward His church, calling each to repent and overcome. The glory of chapter one gives weight to every command in chapters two and three, for the same exalted Christ knows, judges, and loves each church.", "modelEs": "Esta visión del Cristo glorioso es la puerta a las siete cartas que siguen. Cada carta a una iglesia en los capítulos dos y tres abre recordando algún rasgo del Cristo que se acaba de revelar en el capítulo uno: el que sostiene las estrellas, el que tiene la espada aguda de dos filos, cuyos ojos son como llama de fuego, el que es el primero y el último. Así que las cartas no son regaños desligados; son las palabras del mismo Señor que Juan ha visto, el que camina en medio de los candeleros. Porque ve a cada iglesia en verdad, puede juzgar lo malo y elogiar lo bueno, y a través de todo actúa en amor hacia su iglesia, llamando a cada una a arrepentirse y vencer. La gloria del capítulo uno da peso a cada mandato de los capítulos dos y tres, pues el mismo Cristo exaltado conoce, juzga y ama a cada iglesia, con cada característica suya puesta delante de ellas."}, {"textEn": "30. Summarize the central message of Unit 2 (the vision of the Son of Man among the lampstands).", "textEs": "30. Resuma el mensaje central de la Unidad 2 (la visión del Hijo del Hombre entre los candeleros).", "kw_en": ["vision", "christ", "church", "lampstand", "glori", "death", "afraid", "midst"], "kw_es": ["visión", "cristo", "iglesia", "candelero", "glori", "muerte", "temas", "medio"], "modelEn": "Unit two opens the book proper with a vision of the risen Christ. Exiled on Patmos and in the Spirit on the Lord's Day, John hears a trumpet voice and turns to see seven golden lampstands, which are the seven churches, with One like the Son of Man standing in their midst. The description is overwhelming glory: white hair like the Ancient of Days, eyes like fire, a voice like many waters, a sword from His mouth, a face like the sun. John falls as dead, but Christ lifts him with the words, Do not be afraid, declaring Himself the First and the Last, alive forevermore, holding the keys of death and the grave. He commissions John to write what he has seen, what is, and what is to come, and explains that He holds the churches' messengers in His hand and walks in the midst of His churches. The central message is that the glorious, living Christ is present among His people, sovereign even over death, and worthy of their trust.", "modelEs": "La unidad dos abre el libro propiamente con una visión del Cristo resucitado. Desterrado en Patmos y en el Espíritu en el día del Señor, Juan oye una voz de trompeta y se vuelve para ver siete candeleros de oro, que son las siete iglesias, con uno semejante al Hijo del Hombre de pie en medio de ellas. La descripción es gloria abrumadora: cabellos blancos como el Anciano de días, ojos como fuego, voz como muchas aguas, una espada de su boca, un rostro como el sol. Juan cae como muerto, pero Cristo lo levanta con las palabras, No temas, declarándose el primero y el último, vivo por los siglos de los siglos, teniendo las llaves de la muerte y de la tumba. Comisiona a Juan a escribir lo que ha visto, lo que es, y lo que ha de venir, y explica que sostiene a los mensajeros de las iglesias en su mano y camina en medio de sus iglesias. El mensaje central es que el Cristo glorioso y viviente está presente entre su pueblo, soberano aun sobre la muerte, y digno de su confianza."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 3 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 3 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSRevReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

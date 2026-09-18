@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Life of Christ &mdash; Unit 5</title>
+<style>
+:root{
+  --ink:#241c12; --paper:#f7f1e4; --card:#fffdf8; --line:#d8ccb2;
+  --accent:#7a3b1e; --accent2:#9c6b2f; --gold:#fbf3d6; --goldln:#caa94e;
+  --good:#2f6b3a; --bad:#9b2c2c; --muted:#6c6150;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;line-height:1.6;}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+header.site{background:var(--accent);color:#f6ecd8;padding:18px 0;border-bottom:4px solid var(--goldln);}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:0;}
+header.site h1{font-size:1.15rem;margin:0;font-weight:600;letter-spacing:.2px;}
+header.site .sub{font-size:.78rem;opacity:.85;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+.langbtn{font-family:system-ui,sans-serif;font-size:.8rem;background:#f6ecd8;color:var(--accent);
+  border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600;}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 4px;
+  font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);}
+.badge{background:var(--gold);border:1px solid var(--goldln);border-radius:14px;padding:3px 10px;color:#6a531c;}
+.epigraph{font-style:italic;color:var(--accent2);border-left:3px solid var(--goldln);
+  padding:6px 0 6px 14px;margin:16px 0;font-size:.98rem;}
+h2.sec{font-size:1.25rem;color:var(--accent);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin:34px 0 14px;}
+article p{margin:0 0 14px;}
+article b{color:var(--accent);}
+.v{color:#3a4a2c;}
+.illo{background:#fbf6ea;border-left:3px solid var(--goldln);padding:10px 14px;border-radius:4px;}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:14px 0;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);}
+.qn{font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;color:var(--accent2);
+  text-transform:uppercase;letter-spacing:.6px;}
+.qp{margin:6px 0 10px;font-weight:600;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:9px 12px;margin:6px 0;cursor:pointer;font:inherit;color:inherit;}
+.opt:hover{border-color:var(--accent2);}
+.opt .lt{font-weight:700;color:var(--accent2);margin-right:8px;}
+.opt.correct{background:#e9f3e8;border-color:var(--good);}
+.opt.wrong{background:#f6e6e4;border-color:var(--bad);}
+.opt:disabled{cursor:default;opacity:1;}
+.expl{font-size:.9rem;color:var(--muted);margin:8px 2px 0;display:none;}
+.expl.show{display:block;}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:6px;padding:10px;
+  font:inherit;background:#fff;resize:vertical;}
+.btn{font-family:system-ui,sans-serif;font-weight:600;border:none;border-radius:6px;padding:9px 16px;
+  cursor:pointer;font-size:.9rem;}
+.btn.primary{background:var(--accent);color:#f6ecd8;}
+.btn.ghost{background:#efe6d2;color:var(--accent);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.sa-res{margin-top:10px;font-family:system-ui,sans-serif;font-size:.88rem;display:none;}
+.sa-res.show{display:block;}
+.sa-verdict{font-weight:700;}
+.sa-verdict.pass{color:var(--good);} .sa-verdict.soft{color:var(--accent2);}
+.model{background:var(--gold);border:1px solid var(--goldln);border-radius:6px;padding:10px 12px;margin-top:8px;}
+.model .ml{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:#6a531c;}
+.foot{margin-top:30px;border-top:2px solid var(--line);padding-top:18px;}
+.status{font-family:system-ui,sans-serif;font-size:.9rem;margin:10px 0;}
+.status.ok{color:var(--good);} .status.warn{color:var(--accent2);} .status.lock{color:var(--bad);}
+.modal{position:fixed;inset:0;background:rgba(36,28,18,.62);display:flex;align-items:center;
+  justify-content:center;padding:18px;z-index:50;}
+.modal .box{background:var(--card);border-radius:10px;max-width:420px;width:100%;padding:22px;
+  border-top:5px solid var(--goldln);}
+.modal h3{margin:0 0 6px;color:var(--accent);}
+.modal label{display:block;font-family:system-ui,sans-serif;font-size:.82rem;margin:12px 0 4px;color:var(--muted);}
+.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit;}
+.hide{display:none !important;}
+.next{display:inline-block;margin-top:12px;background:var(--good);color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:6px;font-family:system-ui,sans-serif;font-weight:600;}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:2px 0 18px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);margin-right:3px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:var(--card);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600;line-height:1;}
+.unitnav a:hover{border-color:var(--accent2);color:var(--accent2);}
+.unitnav a.active{background:var(--accent);color:#f6ecd8;border-color:var(--accent);}
+.unitnav a.done{background:var(--gold);border-color:var(--goldln);color:#6a531c;}
+.unitnav a.cert{min-width:auto;padding:0 12px;background:#efe6d2;}
+html[lang="es"] .en-lbl{display:none}html[lang="en"] .es-lbl{display:none}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site">
+  <div class="wrap">
+    <div><h1 id="t-title">The Life of Christ</h1><div class="sub" id="t-unit">Unit 5 · The Turning Point</div></div>
+    <button class="langbtn" id="langBtn" type="button">Espa&ntilde;ol</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <span id="t-greet"></span>
+    <span class="badge" id="t-track"></span>
+  </div>
+
+     <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+     <span class="nl"><span class="en-lbl">Units</span><span class="es-lbl">Unidades</span></span>
+     <a data-u="1" href="CTSLOCUnit1.html">1</a>
+     <a data-u="2" href="CTSLOCUnit2.html">2</a>
+     <a data-u="3" href="CTSLOCUnit3.html">3</a>
+     <a data-u="4" href="CTSLOCUnit4.html">4</a>
+     <a data-u="5" href="CTSLOCUnit5.html" class="active">5</a>
+     <a data-u="6" href="CTSLOCUnit6.html">6</a>
+     <a data-u="7" href="CTSLOCUnit7.html">7</a>
+     <a data-u="8" href="CTSLOCUnit8.html">8</a>
+     <a data-u="9" href="CTSLOCUnit9.html">9</a>
+     <a data-u="10" href="CTSLOCUnit10.html">10</a>
+     <a class="cert" href="CTSLOCCertificate.html"><span class="en-lbl">Certificate</span><span class="es-lbl">Certificado</span></a>
+   </nav>
+   <script>(function(){try{var raw=localStorage.getItem("cts_loc_progress")||"{}";var done=JSON.parse(raw);var nav=document.getElementById("unitnav");if(!nav)return;var a=nav.querySelectorAll("a[data-u]");for(var i=0;i<a.length;i++){var u=a[i].getAttribute("data-u");if(done[u]&&a[i].className.indexOf("active")<0){a[i].className=(a[i].className+" done").trim();}}}catch(e){}})();</script>
+
+   <div class="epigraph" id="epigraph"></div>
+
+  <article>
+    <div id="teach-en"><h3 style="color:var(--accent);margin:0 0 4px">The Turning Point: Bread, Confession, and Glory</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">The Feeding of the Five Thousand, the Bread of Life, Caesarea Philippi, and the Transfiguration</p>
+<p><b>1. The Bread That Multiplied</b></p>
+<p>A great crowd had followed Him into a lonely place, and as the day wore on they grew hungry. Jesus, who saw them with a shepherd's heart (Mark 6:34), would not send them away empty. A boy had five barley loaves and two small fish — <span class="v">"but what are they among so many?"</span> (John 6:9). He took the little that was offered, gave thanks, broke it, and gave; and <span class="v">"they all ate and were filled"</span> (Matthew 14:20). Twelve baskets of fragments were gathered up, more left over than they had begun with, and those who ate were about five thousand men besides women and children (Matthew 14:21). The little that is placed in His hands is never too little. It is the only miracle of His ministry told in all four Gospels — a sign too large to leave out.</p>
+<p>But watch what the crowd did with it. <span class="v">"This is truly the Prophet who is to come into the world,"</span> they said, and they were <span class="v">"about to come and take Him by force to make Him king"</span> (John 6:14–15). They wanted a bread-king — a Messiah of full stomachs and broken Roman chains. So He withdrew to the mountain alone. The sign was meant to point past the bread to the Bread; the crowd stopped at the loaves.</p>
+<p><b>2. The Bread of Life</b></p>
+<p>The next day they hunted Him down — for more bread. He named it plainly: <span class="v">"you seek Me, not because you saw the signs, but because you ate of the loaves and were filled"</span> (John 6:26). <span class="v">"Do not labor for the food which perishes,"</span> He told them, <span class="v">"but for the food which endures to everlasting life"</span> (John 6:27). And then He spoke the first of His great I AM words: <span class="v">"I am the bread of life. He who comes to Me shall never hunger, and he who believes in Me shall never thirst"</span> (John 6:35).</p>
+<p>They had reminded Him that Moses gave their fathers manna in the wilderness (John 6:31); He answered that the true bread comes down from heaven and gives life to the world (John 6:33). <span class="v">"Your fathers ate the manna in the wilderness, and are dead,"</span> He said; <span class="v">"this is the bread which comes down from heaven, that one may eat of it and not die... if anyone eats of this bread, he will live forever"</span> (John 6:49–51). The manna fed the body for a day; the living Bread feeds the soul forever.</p>
+<p>Here is a thing worth pausing over. It is possible to want what Jesus gives without wanting Jesus — to love the loaves and never love the Lord. A child may love a father only for the coins in his pocket, and feel nothing for the father himself; and the moment the coins stop, the affection stops. So it was with the crowd. They came for bread, and when the bread ran out and the words grew hard, they left.</p>
+<p>For the words did grow hard: <span class="v">"unless you eat the flesh of the Son of Man and drink His blood, you have no life in you"</span> (John 6:53). He did not mean a literal eating — He explained it Himself: <span class="v">"It is the Spirit who gives life; the flesh profits nothing. The words that I speak to you are spirit, and they are life"</span> (John 6:63). To eat and drink Him is to come to Him and believe on Him, to feed on Him by faith. But the saying was too much for the bread-seekers: <span class="v">"From that time many of His disciples went back and walked with Him no more"</span> (John 6:66). The crowd had thinned to the committed. Jesus turned to the Twelve: <span class="v">"Do you also want to go away?"</span> And Peter answered for them all: <span class="v">"Lord, to whom shall we go? You have the words of eternal life"</span> (John 6:67–68).</p>
+<p><b>3. Caesarea Philippi: The Great Confession</b></p>
+<p>Far to the north, He drew the question to a point. First the easy one: <span class="v">"Who do men say that I, the Son of Man, am?"</span> — and they reported the rumors: John the Baptist, Elijah, Jeremiah, one of the prophets (Matthew 16:13–14). Then the sharp one, the question every soul must finally answer: <span class="v">"But who do you say that I am?"</span> (Matthew 16:15).</p>
+<p>Peter spoke the confession at the heart of the faith: <span class="v">"You are the Christ, the Son of the living God"</span> (Matthew 16:16). Jesus called him blessed, for <span class="v">"flesh and blood has not revealed this to you, but My Father who is in heaven"</span> (Matthew 16:17), and said, <span class="v">"on this rock I will build My church, and the gates of Hades shall not prevail against it"</span> (Matthew 16:18) — the rock being this confessed truth of who He is, the foundation no power of death can overcome. To them He gave <span class="v">"the keys of the kingdom of heaven"</span> (Matthew 16:19) — the authority to open its door to the world by the gospel they would preach.</p>
+<p>And then, the moment the disciples knew who He was, He told them what He had come to do: <span class="v">"From that time Jesus began to show His disciples that He must go to Jerusalem, and suffer many things... and be killed, and be raised the third day"</span> (Matthew 16:21). It was the first plain word of the cross. Peter recoiled and rebuked Him — and drew the sharpest answer in the Gospels: <span class="v">"Get behind Me, Satan!... you are not mindful of the things of God but the things of men"</span> (Matthew 16:23). It was the wilderness temptation again, in a friend's voice: a crown without a cross. Then He laid the road before them all: <span class="v">"If anyone desires to come after Me, let him deny himself, and take up his cross, and follow Me"</span> (Matthew 16:24). For, He went on, <span class="v">"whoever desires to save his life will lose it, but whoever loses his life for My sake will find it. For what profit is it to a man if he gains the whole world, and loses his own soul?"</span> (Matthew 16:25–26). The way up is down; the way to keep your life is to spend it on Him.</p>
+<p><b>4. The Transfiguration</b></p>
+<p>Six days later He took Peter, James, and John up a high mountain, and <span class="v">"He was transfigured before them. His face shone like the sun, and His clothes became as white as the light"</span> (Matthew 17:1–2). For a moment the veil of His flesh was drawn back, and the glory of the eternal Word blazed through the man. Moses and Elijah appeared and spoke with Him (Matthew 17:3) — the Law and the Prophets, both bearing witness to Him; and Luke tells us they spoke of His <span class="v">"decease which He was about to accomplish at Jerusalem"</span> (Luke 9:31). Even on the mount of glory, the talk was of the cross.</p>
+<p>Peter, dazzled, wanted to build three tents and stay (Matthew 17:4). But a bright cloud overshadowed them, and the Father's voice came as it had at the Jordan: <span class="v">"This is My beloved Son, in whom I am well pleased. Hear Him!"</span> (Matthew 17:5). The Father confirmed the Son and added a command — <i>hear Him</i> — especially in the hard word about the cross that Peter had just tried to wave away. The disciples fell on their faces in terror; Jesus touched them and said, <span class="v">"Arise, and do not be afraid."</span> And when they looked up, they saw <span class="v">"no one but Jesus only"</span> (Matthew 17:7–8). Moses would die and Elijah had been carried to heaven, yet neither was the resting place: the voice did not say "hear Moses" or "hear Elijah," but <i>Hear Him.</i> When the cloud lifted, the Law and the Prophets had stepped back, and the disciples saw Jesus only — for to Him they had always pointed. The glory faded; the Son remained; and the road led back down the mountain, toward Jerusalem.</p>
+<p><b>5. The Hinge of the Gospel</b></p>
+<p>This is the great turning point. He had revealed Himself as the Bread of Life; the crowds had been sifted down to the few; the Twelve had confessed Him as the Christ; and the Father had confirmed Him in blazing glory. Yet through all of it the shadow lengthened: the talk now turned to suffering, to being killed, to the decease He would accomplish at Jerusalem. The mountaintop was real, but it was not the destination; the destination was a hill outside the city walls.</p>
+<p>And the divine/human pattern stands at its sharpest here. As God He multiplied bread for thousands and shone like the sun on the mountain; as man He was abandoned by the crowd and set His face toward death. The same Jesus is the Bread that is broken and the Glory that is veiled. He asks of us what He asked then: not to seek Him for the loaves, but to confess Him as the Christ and follow Him — down the mountain, and on to the cross.</p></div>
+    <div id="teach-es" class="hide"><h3 style="color:var(--accent);margin:0 0 4px">El punto de giro: pan, confesi&oacute;n y gloria</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">La alimentaci&oacute;n de los cinco mil, el Pan de vida, Cesarea de Filipo y la transfiguraci&oacute;n</p>
+
+<p><b>1. El pan que se multiplic&oacute;</b></p>
+<p>Una gran multitud lo hab&iacute;a seguido a un lugar apartado, y al avanzar el d&iacute;a tuvieron hambre. Jes&uacute;s, que los ve&iacute;a con coraz&oacute;n de pastor (Marcos 6:34), no quiso despedirlos vac&iacute;os. Un muchacho ten&iacute;a cinco panes de cebada y dos pececillos &mdash; <span class="v">&ldquo;mas &iquest;qu&eacute; es esto entre tantos?&rdquo; (Juan 6:9).</span> Tom&oacute; lo poco que se le ofreci&oacute;, dio gracias, lo parti&oacute; y lo dio; y <span class="v">&ldquo;comieron todos, y se saciaron&rdquo; (Mateo 14:20).</span> Se recogieron doce cestas de pedazos, m&aacute;s de lo que ten&iacute;an al comenzar, y los que comieron eran como cinco mil hombres, sin contar las mujeres y los ni&ntilde;os (Mateo 14:21). Lo poco que se pone en sus manos nunca es demasiado poco. Es el &uacute;nico milagro de su ministerio que cuentan los cuatro Evangelios &mdash; una se&ntilde;al demasiado grande para omitir.</p>
+<p>Pero observe lo que la multitud hizo con ella. <span class="v">&ldquo;Este verdaderamente es el Profeta que hab&iacute;a de venir al mundo,&rdquo;</span> dijeron, y estaban <span class="v">&ldquo;para venir y tomarle por fuerza para hacerle rey&rdquo; (Juan 6:14&ndash;15).</span> Quer&iacute;an un rey-pan &mdash; un Mes&iacute;as de est&oacute;magos llenos y cadenas romanas rotas. Por eso se retir&oacute; al monte, solo. La se&ntilde;al hab&iacute;a de apuntar m&aacute;s all&aacute; del pan al Pan; la multitud se detuvo en los panes.</p>
+
+<p><b>2. El Pan de vida</b></p>
+<p>Al d&iacute;a siguiente lo buscaron &mdash; por m&aacute;s pan. &Eacute;l lo dijo claramente: <span class="v">&ldquo;me busc&aacute;is... porque comisteis el pan y os saciasteis&rdquo; (Juan 6:26).</span> <span class="v">&ldquo;Trabajad,&rdquo;</span> les dijo, <span class="v">&ldquo;no por la comida que perece, sino por la comida que a vida eterna permanece&rdquo; (Juan 6:27).</span> Y entonces pronunci&oacute; la primera de sus grandes palabras YO SOY: <span class="v">&ldquo;Yo soy el pan de vida; el que a m&iacute; viene, nunca tendr&aacute; hambre; y el que en m&iacute; cree, no tendr&aacute; sed jam&aacute;s&rdquo; (Juan 6:35).</span></p>
+<p>Le hab&iacute;an recordado que Mois&eacute;s dio a sus padres el man&aacute; en el desierto (Juan 6:31); &Eacute;l respondi&oacute; que el verdadero pan desciende del cielo y da vida al mundo (Juan 6:33). <span class="v">&ldquo;Vuestros padres comieron el man&aacute; en el desierto, y murieron,&rdquo;</span> dijo; <span class="v">&ldquo;este es el pan que desciende del cielo, para que el que de &eacute;l comiere, no muera... si alguno comiere de este pan, vivir&aacute; para siempre&rdquo; (Juan 6:49&ndash;51).</span> El man&aacute; aliment&oacute; el cuerpo por un d&iacute;a; el Pan vivo alimenta el alma para siempre.</p>
+<p>He aqu&iacute; algo en que detenerse. Es posible querer lo que Jes&uacute;s da sin quererlo a &Eacute;l &mdash; amar los panes y nunca amar al Se&ntilde;or. Un hijo puede amar a su padre solo por las monedas de su bolsillo, sin sentir nada por el padre mismo; y en cuanto cesan las monedas, cesa el cari&ntilde;o. As&iacute; fue con la multitud. Vinieron por pan, y cuando el pan se acab&oacute; y las palabras se hicieron duras, se fueron.</p>
+<p>Porque las palabras s&iacute; se hicieron duras: <span class="v">&ldquo;si no com&eacute;is la carne del Hijo del Hombre, y beb&eacute;is su sangre, no ten&eacute;is vida en vosotros&rdquo; (Juan 6:53).</span> No quiso decir un comer literal &mdash; &Eacute;l mismo lo explic&oacute;: <span class="v">&ldquo;El esp&iacute;ritu es el que da vida; la carne para nada aprovecha; las palabras que yo os he hablado son esp&iacute;ritu y son vida&rdquo; (Juan 6:63).</span> Comerlo y beberlo es venir a &Eacute;l y creer en &Eacute;l, alimentarse de &Eacute;l por la fe. Pero el dicho fue demasiado para los buscadores de pan: <span class="v">&ldquo;Desde entonces muchos de sus disc&iacute;pulos volvieron atr&aacute;s, y ya no andaban con &eacute;l&rdquo; (Juan 6:66).</span> La multitud se hab&iacute;a reducido a los comprometidos. Jes&uacute;s se volvi&oacute; a los Doce: <span class="v">&ldquo;&iquest;Quer&eacute;is acaso iros tambi&eacute;n vosotros?&rdquo;</span> Y Pedro respondi&oacute; por todos: <span class="v">&ldquo;Se&ntilde;or, &iquest;a qui&eacute;n iremos? T&uacute; tienes palabras de vida eterna&rdquo; (Juan 6:67&ndash;68).</span></p>
+
+<p><b>3. Cesarea de Filipo: la gran confesi&oacute;n</b></p>
+<p>Lejos, al norte, llev&oacute; la pregunta a un punto. Primero la f&aacute;cil: <span class="v">&ldquo;&iquest;Qui&eacute;n dicen los hombres que es el Hijo del Hombre?&rdquo;</span> &mdash; y reportaron los rumores: Juan el Bautista, El&iacute;as, Jerem&iacute;as, alguno de los profetas (Mateo 16:13&ndash;14). Luego la aguda, la pregunta que toda alma debe al fin responder: <span class="v">&ldquo;Y vosotros, &iquest;qui&eacute;n dec&iacute;s que soy yo?&rdquo; (Mateo 16:15).</span></p>
+<p>Pedro pronunci&oacute; la confesi&oacute;n que est&aacute; en el coraz&oacute;n de la fe: <span class="v">&ldquo;T&uacute; eres el Cristo, el Hijo del Dios viviente&rdquo; (Mateo 16:16).</span> Jes&uacute;s lo llam&oacute; bienaventurado, porque <span class="v">&ldquo;no te lo revel&oacute; carne ni sangre, sino mi Padre que est&aacute; en los cielos&rdquo; (Mateo 16:17),</span> y dijo: <span class="v">&ldquo;sobre esta roca edificar&eacute; mi iglesia; y las puertas del infierno no prevalecer&aacute;n contra ella&rdquo; (Mateo 16:18)</span> &mdash; siendo la roca esta verdad confesada de qui&eacute;n es &Eacute;l, el fundamento que ning&uacute;n poder de muerte puede vencer. Les dio <span class="v">&ldquo;las llaves del reino de los cielos&rdquo; (Mateo 16:19)</span> &mdash; la autoridad de abrir su puerta al mundo por el evangelio que predicar&iacute;an.</p>
+<p>Y entonces, en el momento en que los disc&iacute;pulos supieron qui&eacute;n era, les dijo lo que hab&iacute;a venido a hacer: <span class="v">&ldquo;Desde entonces comenz&oacute; Jes&uacute;s a declarar a sus disc&iacute;pulos que le era necesario ir a Jerusal&eacute;n y padecer mucho... y ser muerto, y resucitar al tercer d&iacute;a&rdquo; (Mateo 16:21).</span> Fue la primera palabra clara de la cruz. Pedro retrocedi&oacute; y le reprendi&oacute; &mdash; y recibi&oacute; la respuesta m&aacute;s cortante de los Evangelios: <span class="v">&ldquo;&iexcl;Qu&iacute;tate de delante de m&iacute;, Satan&aacute;s!... no pones la mira en las cosas de Dios, sino en las de los hombres&rdquo; (Mateo 16:23).</span> Era la tentaci&oacute;n del desierto otra vez, en voz de un amigo: una corona sin cruz. Luego puso el camino delante de todos: <span class="v">&ldquo;Si alguno quiere venir en pos de m&iacute;, ni&eacute;guese a s&iacute; mismo, y tome su cruz, y s&iacute;game&rdquo; (Mateo 16:24).</span> Porque, prosigui&oacute;, <span class="v">&ldquo;todo el que quiera salvar su vida, la perder&aacute;; y todo el que pierda su vida por causa de m&iacute;, la hallar&aacute;. Porque &iquest;de qu&eacute; aprovecha al hombre, si ganare todo el mundo, y perdiere su alma?&rdquo; (Mateo 16:25&ndash;26).</span> El camino hacia arriba es hacia abajo; el modo de guardar la vida es gastarla en &Eacute;l.</p>
+
+<p><b>4. La transfiguraci&oacute;n</b></p>
+<p>Seis d&iacute;as despu&eacute;s tom&oacute; a Pedro, Jacobo y Juan a un monte alto, y <span class="v">&ldquo;se transfigur&oacute; delante de ellos; y resplandeci&oacute; su rostro como el sol, y sus vestidos se hicieron blancos como la luz&rdquo; (Mateo 17:1&ndash;2).</span> Por un momento se descorri&oacute; el velo de su carne, y la gloria del Verbo eterno resplandeci&oacute; a trav&eacute;s del hombre. Mois&eacute;s y El&iacute;as aparecieron hablando con &Eacute;l (Mateo 17:3) &mdash; la Ley y los Profetas, ambos dando testimonio de &Eacute;l; y Lucas nos dice que hablaban de su <span class="v">&ldquo;partida que iba Jes&uacute;s a cumplir en Jerusal&eacute;n&rdquo; (Lucas 9:31).</span> Aun en el monte de la gloria, se hablaba de la cruz.</p>
+<p>Pedro, deslumbrado, quer&iacute;a hacer tres enramadas y quedarse (Mateo 17:4). Pero una nube de luz los cubri&oacute;, y la voz del Padre vino como en el Jord&aacute;n: <span class="v">&ldquo;Este es mi Hijo amado, en quien tengo complacencia; a &eacute;l o&iacute;d&rdquo; (Mateo 17:5).</span> El Padre confirm&oacute; al Hijo y a&ntilde;adi&oacute; un mandato &mdash; <i>o&iacute;dle</i> &mdash; sobre todo en la palabra dura de la cruz que Pedro acababa de querer apartar. Los disc&iacute;pulos cayeron sobre sus rostros con terror; Jes&uacute;s los toc&oacute; y dijo: <span class="v">&ldquo;Levantaos, y no tem&aacute;is.&rdquo;</span> Y al alzar la vista, no vieron <span class="v">&ldquo;a nadie sino a Jes&uacute;s solo&rdquo; (Mateo 17:7&ndash;8).</span> Mois&eacute;s morir&iacute;a y El&iacute;as hab&iacute;a sido llevado al cielo, pero ninguno era el lugar de reposo: la voz no dijo &ldquo;o&iacute;d a Mois&eacute;s&rdquo; ni &ldquo;o&iacute;d a El&iacute;as,&rdquo; sino <i>a &eacute;l o&iacute;d.</i> Cuando la nube se levant&oacute;, la Ley y los Profetas se hab&iacute;an retirado, y los disc&iacute;pulos vieron a Jes&uacute;s solo &mdash; pues a &Eacute;l siempre hab&iacute;an apuntado. La gloria se desvaneci&oacute;; el Hijo permaneci&oacute;; y el camino bajaba del monte, hacia Jerusal&eacute;n.</p>
+
+<p><b>5. El gozne del evangelio</b></p>
+<p>Este es el gran punto de giro. Se hab&iacute;a revelado como el Pan de vida; las multitudes hab&iacute;an sido cribadas hasta los pocos; los Doce lo hab&iacute;an confesado como el Cristo; y el Padre lo hab&iacute;a confirmado en gloria resplandeciente. Y sin embargo, a trav&eacute;s de todo, la sombra se alargaba: ahora se hablaba de padecer, de ser muerto, de la partida que cumplir&iacute;a en Jerusal&eacute;n. El monte fue real, pero no era el destino; el destino era una colina fuera de los muros de la ciudad.</p>
+<p>Y el patr&oacute;n divino/humano est&aacute; aqu&iacute; en su punto m&aacute;s agudo. Como Dios multiplic&oacute; pan para miles y resplandeci&oacute; como el sol en el monte; como hombre fue abandonado por la multitud y puso su rostro hacia la muerte. El mismo Jes&uacute;s es el Pan que se parte y la Gloria que se vela. Nos pide lo que pidi&oacute; entonces: no buscarlo por los panes, sino confesarlo como el Cristo y seguirlo &mdash; monte abajo, y hacia la cruz.</p>
+</div>
+  </article>
+
+  <h2 class="sec" id="t-mc">Multiple Choice</h2>
+  <div id="mcWrap"></div>
+
+  <h2 class="sec" id="t-sa">Short Answer</h2>
+  <p class="status" id="t-saNote"></p>
+  <div id="saWrap"></div>
+
+  <div class="foot">
+    <button class="btn primary" id="completeBtn" type="button"></button>
+    <div class="status" id="statusMsg"></div>
+    <a class="next hide" id="nextLink" href="CTSLOCUnit6.html"></a>
+  </div>
+</div>
+
+<div class="modal hide" id="reg">
+  <div class="box">
+    <h3 id="m-h">Welcome</h3>
+    <p id="m-p" style="font-size:.9rem;color:var(--muted);margin:0"></p>
+    <label id="m-nl">Your name</label>
+    <input id="m-name" type="text" autocomplete="name" aria-label="m name">
+    <label id="m-tl">Track</label>
+    <select id="m-track" aria-label="m track">
+      <option value="cert">Certificate</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div style="margin-top:16px"><button class="btn primary" id="m-go" type="button">Begin</button></div>
+  </div>
+</div>
+
+<script>
+var CFG={course:'loc',unit:5,totalUnits:10,progressKey:'cts_loc_progress',
+  next:'CTSLOCUnit6.html',cert:'CTSLOCCertificate.html',lockKey:'cts_loc_u5_lock',showReg:false};
+var DATA={"mc": [{"en": "The feeding of the five thousand began with a boy's:", "es": "La alimentación de los cinco mil comenzó con los de un muchacho:", "oen": ["jar of oil", "basket of bread", "five barley loaves and two small fish", "single fish"], "oes": ["tinaja de aceite", "cesto de pan", "cinco panes de cebada y dos pececillos", "un solo pez"], "c": 23, "xen": "John 6:9.", "xes": "Juan 6:9."}, {"en": "After all ate and were filled, the fragments gathered numbered:", "es": "Después de que todos comieron y se saciaron, los pedazos recogidos fueron:", "oen": ["seven baskets", "none", "three baskets", "twelve baskets"], "oes": ["siete cestas", "ninguna", "tres cestas", "doce cestas"], "c": 31, "xen": "Matthew 14:20 — more left over than they began with.", "xes": "Mateo 14:20 — más de lo que tenían al comenzar."}, {"en": "The feeding of the five thousand is notable because it is:", "es": "La alimentación de los cinco mil es notable porque es:", "oen": ["His first miracle", "the only miracle told in all four Gospels", "His last miracle", "done in secret"], "oes": ["su primer milagro", "el único milagro contado en los cuatro Evangelios", "su último milagro", "hecho en secreto"], "c": 36, "xen": "A sign too large to leave out.", "xes": "Una señal demasiado grande para omitir."}, {"en": "After the feeding, the crowd tried to:", "es": "Después de la alimentación, la multitud intentó:", "oen": ["take Him by force to make Him king", "crown Him priest", "arrest Him", "stone Him"], "oes": ["tomarle por fuerza para hacerle rey", "coronarle sacerdote", "arrestarle", "apedrearle"], "c": 42, "xen": "John 6:15 — they wanted a bread-king.", "xes": "Juan 6:15 — querían un rey-pan."}, {"en": "“I am the bread of life” is significant as:", "es": "“Yo soy el pan de vida” es significativo como:", "oen": ["a parable", "the first of John's great “I AM” sayings", "a psalm quotation", "a rebuke to Moses"], "oes": ["una parábola", "la primera de las grandes palabras “YO SOY” de Juan", "una cita de un salmo", "una reprensión a Moisés"], "c": 50, "xen": "John 6:35.", "xes": "Juan 6:35."}, {"en": "Jesus said the crowd sought Him because they:", "es": "Jesús dijo que la multitud lo buscaba porque:", "oen": ["loved His teaching", "feared Rome", "ate of the loaves and were filled, not because of the signs", "wanted healing"], "oes": ["amaban su enseñanza", "temían a Roma", "comieron el pan y se saciaron, no por las señales", "querían sanidad"], "c": 58, "xen": "John 6:26.", "xes": "Juan 6:26."}, {"en": "Comparing Himself to the manna, Jesus said the living bread:", "es": "Comparándose con el maná, Jesús dijo que el pan vivo:", "oen": ["gives eternal life, while the manna's eaters died", "falls daily", "tastes better", "is only for Israel"], "oes": ["da vida eterna, mientras los que comieron el maná murieron", "cae cada día", "sabe mejor", "es solo para Israel"], "c": 63, "xen": "John 6:49–51.", "xes": "Juan 6:49–51."}, {"en": "When Jesus said to eat His flesh and drink His blood, He explained He meant:", "es": "Cuando Jesús dijo comer su carne y beber su sangre, explicó que se refería a:", "oen": ["a literal meal", "the Passover lamb", "a Roman custom", "coming and believing — “the words I speak are spirit and life”"], "oes": ["una comida literal", "el cordero de la Pascua", "una costumbre romana", "venir y creer — “las palabras que hablo son espíritu y vida”"], "c": 73, "xen": "John 6:63 — the flesh profits nothing.", "xes": "Juan 6:63 — la carne nada aprovecha."}, {"en": "After the hard saying, the response of many disciples was to:", "es": "Tras el dicho duro, la respuesta de muchos discípulos fue:", "oen": ["go back and walk with Him no more", "repent", "build an altar", "follow more closely"], "oes": ["volver atrás y ya no andar con él", "arrepentirse", "edificar un altar", "seguir más de cerca"], "c": 77, "xen": "John 6:66 — the crowd was sifted.", "xes": "Juan 6:66 — la multitud fue cribada."}, {"en": "When Jesus asked the Twelve if they would also leave, Peter said:", "es": "Cuando Jesús preguntó a los Doce si también se irían, Pedro dijo:", "oen": ["“We will think about it”", "“Lord, to whom shall we go? You have the words of eternal life”", "“Show us a sign”", "“Let us go home”"], "oes": ["“Lo pensaremos”", "“Señor, ¿a quién iremos? Tú tienes palabras de vida eterna”", "“Muéstranos una señal”", "“Volvamos a casa”"], "c": 85, "xen": "John 6:68.", "xes": "Juan 6:68."}, {"en": "At Caesarea Philippi, Jesus' decisive question was:", "es": "En Cesarea de Filipo, la pregunta decisiva de Jesús fue:", "oen": ["“Where is the kingdom?”", "“Will you fast?”", "“Who is greatest?”", "“But who do you say that I am?”"], "oes": ["“¿Dónde está el reino?”", "“¿Ayunaréis?”", "“¿Quién es el mayor?”", "“Y vosotros, ¿quién decís que soy yo?”"], "c": 94, "xen": "Matthew 16:15 — the question every soul must answer.", "xes": "Mateo 16:15 — la pregunta que toda alma debe responder."}, {"en": "Peter's great confession was:", "es": "La gran confesión de Pedro fue:", "oen": ["“You are a great prophet”", "“You are Elijah”", "“You are the Christ, the Son of the living God”", "“You are the son of Joseph”"], "oes": ["“Eres un gran profeta”", "“Eres Elías”", "“Tú eres el Cristo, el Hijo del Dios viviente”", "“Eres el hijo de José”"], "c": 100, "xen": "Matthew 16:16.", "xes": "Mateo 16:16."}, {"en": "Jesus said Peter's confession was revealed by:", "es": "Jesús dijo que la confesión de Pedro fue revelada por:", "oen": ["Peter's own wisdom", "the Scriptures alone", "John the Baptist", "the Father in heaven, not flesh and blood"], "oes": ["la sabiduría de Pedro", "las Escrituras solas", "Juan el Bautista", "el Padre en los cielos, no la carne ni la sangre"], "c": 108, "xen": "Matthew 16:17.", "xes": "Mateo 16:17."}, {"en": "When Peter rebuked Jesus for speaking of the cross, Jesus answered:", "es": "Cuando Pedro reprendió a Jesús por hablar de la cruz, Jesús respondió:", "oen": ["“Well said, Peter”", "“Get behind Me, Satan!”", "“Wait and see”", "“You are the rock”"], "oes": ["“Bien dicho, Pedro”", "“¡Quítate de delante de mí, Satanás!”", "“Espera y verás”", "“Tú eres la roca”"], "c": 113, "xen": "Matthew 16:23 — a crown without a cross.", "xes": "Mateo 16:23 — una corona sin cruz."}, {"en": "Jesus said that to come after Him one must:", "es": "Jesús dijo que para venir en pos de él uno debe:", "oen": ["keep the whole law", "give away all his money", "deny himself, take up his cross, and follow", "fast often"], "oes": ["guardar toda la ley", "dar todo su dinero", "negarse a sí mismo, tomar su cruz y seguir", "ayunar a menudo"], "c": 121, "xen": "Matthew 16:24 — discipleship is cruciform.", "xes": "Mateo 16:24 — el discipulado es cruciforme."}, {"en": "“What profit is it if a man gains the whole world and...”", "es": "“¿De qué aprovecha al hombre si gana todo el mundo y...”", "oen": ["loses his own soul", "leaves his family", "fears death", "forgets the law"], "oes": ["pierde su propia alma", "deja su familia", "teme la muerte", "olvida la ley"], "c": 126, "xen": "Matthew 16:26.", "xes": "Mateo 16:26."}, {"en": "At the Transfiguration, Jesus' appearance changed so that:", "es": "En la transfiguración, la apariencia de Jesús cambió de modo que:", "oen": ["He aged", "He became invisible", "He grew taller", "His face shone like the sun and His clothes became white as light"], "oes": ["envejeció", "se hizo invisible", "se hizo más alto", "su rostro resplandeció como el sol y sus vestidos se hicieron blancos como la luz"], "c": 136, "xen": "Matthew 17:2.", "xes": "Mateo 17:2."}, {"en": "The two who appeared with Jesus on the mountain were:", "es": "Los dos que aparecieron con Jesús en el monte fueron:", "oen": ["Abraham and David", "Moses and Elijah", "Peter and John", "two angels"], "oes": ["Abraham y David", "Moisés y Elías", "Pedro y Juan", "dos ángeles"], "c": 141, "xen": "Matthew 17:3 — the Law and the Prophets.", "xes": "Mateo 17:3 — la Ley y los Profetas."}, {"en": "According to Luke, Moses and Elijah spoke with Jesus about:", "es": "Según Lucas, Moisés y Elías hablaron con Jesús acerca de:", "oen": ["the law of Moses", "the end of the world", "His departure, to be accomplished at Jerusalem", "the temple"], "oes": ["la ley de Moisés", "el fin del mundo", "su partida, que iba a cumplir en Jerusalén", "el templo"], "c": 149, "xen": "Luke 9:31 — even glory spoke of the cross.", "xes": "Lucas 9:31 — aun la gloria hablaba de la cruz."}, {"en": "The Father's voice at the Transfiguration said:", "es": "La voz del Padre en la transfiguración dijo:", "oen": ["“This is My beloved Son... Hear Him!”", "“Peace, be still”", "“It is finished”", "“Behold the Lamb”"], "oes": ["“Este es mi Hijo amado... a él oíd!”", "“Calla, enmudece”", "“Consumado es”", "“He aquí el Cordero”"], "c": 154, "xen": "Matthew 17:5 — as at the baptism, now with “Hear Him.”", "xes": "Mateo 17:5 — como en el bautismo, ahora con “a él oíd.”"}], "sa": [{"en": "Describe the feeding of the five thousand and what the crowd misunderstood about it.", "es": "Describa la alimentación de los cinco mil y qué malentendió la multitud sobre ella.", "men": "From a boy's five loaves and two fish, Jesus fed about five thousand men, and twelve baskets of fragments were gathered, more than they began with. It is the only miracle in all four Gospels. But the crowd wanted to make Him a bread-king by force; they stopped at the loaves instead of seeing the sign point to the Bread. The little placed in His hands proved more than enough.", "mes": "De cinco panes y dos peces de un muchacho, Jesús alimentó a unos cinco mil hombres, y se recogieron doce cestas de pedazos, más de lo que tenían al comenzar. Es el único milagro en los cuatro Evangelios. Pero la multitud quiso hacerlo rey-pan por fuerza; se detuvieron en los panes en vez de ver que la señal apuntaba al Pan. Lo poco puesto en sus manos resultó más que suficiente.", "ken": ["loaves", "fish", "thousand", "basket", "sign", "king", "bread", "five"], "kes": ["pan", "peces", "mil", "cesta", "senal", "rey", "cinco", "multitud"]}, {"en": "Explain “I am the bread of life” and how Jesus contrasted Himself with the manna (John 6).", "es": "Explique “Yo soy el pan de vida” y cómo Jesús se contrastó con el maná (Juan 6).", "men": "Jesus declared, “I am the bread of life,” the first of His great I AM sayings; whoever comes to Him never hungers and whoever believes never thirsts. Unlike the manna their fathers ate in the wilderness and still died, this living bread comes down from heaven and gives eternal life, so that whoever eats of it will live forever. He is the food that endures, not the food that perishes.", "mes": "Jesús declaró: “Yo soy el pan de vida,” la primera de sus grandes palabras YO SOY; el que a él viene nunca tiene hambre y el que cree nunca tiene sed. A diferencia del maná que sus padres comieron en el desierto y murieron, este pan vivo desciende del cielo y da vida eterna, para que quien coma de él viva para siempre. Él es la comida que permanece, no la que perece.", "ken": ["bread", "life", "manna", "heaven", "eternal", "believ", "hunger", "forever"], "kes": ["pan", "vida", "mana", "cielo", "eterna", "cree", "hambre", "siempre"]}, {"en": "What did Jesus mean by “eat My flesh and drink My blood” (John 6:53-63)?", "es": "¿Qué quiso decir Jesús con “comer mi carne y beber mi sangre” (Juan 6:53-63)?", "men": "Jesus said unless one eats His flesh and drinks His blood he has no life, but He explained He did not mean literal eating: the Spirit gives life, the flesh profits nothing, and His words are spirit and life. To eat and drink Him is to come and believe, feeding on Him by faith. The hard saying sifted the crowd; many disciples turned back, but Peter said He has the words of eternal life.", "mes": "Jesús dijo que si uno no come su carne y bebe su sangre no tiene vida, pero explicó que no se refería a un comer literal: el espíritu da vida, la carne nada aprovecha, y sus palabras son espíritu y vida. Comerlo y beberlo es venir y creer, alimentándose de él por la fe. El dicho duro cribó a la multitud; muchos discípulos volvieron atrás, pero Pedro dijo que él tiene palabras de vida eterna.", "ken": ["flesh", "blood", "believ", "faith", "spirit", "sift", "life", "word"], "kes": ["carne", "sangre", "creer", "fe", "espiritu", "crib", "vida", "palabra"]}, {"en": "What does the sifting of the crowd (John 6:66-68) show about true discipleship?", "es": "¿Qué muestra la criba de la multitud (Juan 6:66-68) sobre el verdadero discipulado?", "men": "When the words grew hard, many who had followed for the loaves went back and walked with Him no more. The crowd was sifted down to the committed few. Jesus asked the Twelve, “Do you also want to go away?” and Peter answered, “Lord, to whom shall we go? You have the words of eternal life.” True discipleship clings to Christ for who He is, not merely for what He gives.", "mes": "Cuando las palabras se hicieron duras, muchos que habían seguido por los panes volvieron atrás y ya no andaban con él. La multitud fue cribada hasta los pocos comprometidos. Jesús preguntó a los Doce: “¿Queréis iros también vosotros?” y Pedro respondió: “Señor, ¿a quién iremos? Tú tienes palabras de vida eterna.” El verdadero discipulado se aferra a Cristo por quien él es, no solo por lo que da.", "ken": ["sift", "disciple", "follow", "peter", "eternal", "cling", "loaves", "committed"], "kes": ["crib", "discipul", "segui", "pedro", "eterna", "aferr", "multitud", "comprometi"]}, {"en": "What happened at Caesarea Philippi, and what did Peter confess (Matt 16:13-18)?", "es": "¿Qué ocurrió en Cesarea de Filipo, y qué confesó Pedro (Mateo 16:13-18)?", "men": "At Caesarea Philippi Jesus first asked who men said He was, then the sharper question: “But who do you say that I am?” Peter confessed, “You are the Christ, the Son of the living God.” Jesus said the Father had revealed this, not flesh and blood, and that on this rock — the confessed truth of who He is — He would build His church, which the gates of Hades could not overcome.", "mes": "En Cesarea de Filipo Jesús preguntó primero quién decían los hombres que era, luego la pregunta más aguda: “¿quién decís que soy yo?” Pedro confesó: “Tú eres el Cristo, el Hijo del Dios viviente.” Jesús dijo que el Padre lo había revelado, no la carne ni la sangre, y que sobre esta roca — la verdad confesada de quién es él — edificaría su iglesia, que las puertas del infierno no vencerían.", "ken": ["caesarea", "confess", "christ", "father", "rock", "church", "reveal", "question"], "kes": ["cesarea", "confes", "cristo", "padre", "roca", "iglesia", "revel", "pregunta"]}, {"en": "Explain the first passion prediction and Jesus' rebuke of Peter (Matt 16:21-23).", "es": "Explique la primera predicción de la pasión y la reprensión de Jesús a Pedro (Mateo 16:21-23).", "men": "As soon as the disciples knew who He was, Jesus began to tell them He must go to Jerusalem, suffer, be killed, and rise the third day — the first plain word of the cross. Peter rebuked Him, and Jesus answered, “Get behind Me, Satan,” because Peter was minding the things of men, not of God. It was the wilderness temptation again: a crown without a cross.", "mes": "En cuanto los discípulos supieron quién era, Jesús comenzó a decirles que le era necesario ir a Jerusalén, padecer, ser muerto y resucitar al tercer día — la primera palabra clara de la cruz. Pedro le reprendió, y Jesús respondió: “Quítate de delante de mí, Satanás,” porque Pedro ponía la mira en las cosas de los hombres, no de Dios. Era la tentación del desierto otra vez: una corona sin cruz.", "ken": ["jerusalem", "suffer", "killed", "cross", "peter", "satan", "third", "rebuke"], "kes": ["jerusalen", "padec", "muerto", "cruz", "pedro", "satanas", "tercer", "reprend"]}, {"en": "Explain the cost of discipleship in Matthew 16:24-26.", "es": "Explique el costo del discipulado en Mateo 16:24-26.", "men": "Jesus laid the road before all: whoever would come after Him must deny himself, take up his cross, and follow. Whoever tries to save his life will lose it, but whoever loses his life for His sake will find it; for what does it profit a man to gain the whole world and lose his soul? Discipleship is cruciform — the way up is down, and we keep our life by spending it on Him.", "mes": "Jesús puso el camino delante de todos: el que quiera venir en pos de él debe negarse a sí mismo, tomar su cruz y seguir. El que quiera salvar su vida la perderá, pero el que pierda su vida por causa de él la hallará; porque ¿de qué aprovecha al hombre ganar todo el mundo y perder su alma? El discipulado es cruciforme — el camino hacia arriba es hacia abajo, y guardamos la vida gastándola en él.", "ken": ["deny", "cross", "follow", "lose", "life", "save", "world", "soul"], "kes": ["negar", "cruz", "seguir", "perder", "vida", "salvar", "mundo", "alma"]}, {"en": "Describe the Transfiguration and what it confirmed (Matt 17:1-5).", "es": "Describa la transfiguración y qué confirmó (Mateo 17:1-5).", "men": "On a high mountain Jesus was transfigured: His face shone like the sun and His clothes became white as light, the glory of the eternal Word blazing through the man. Moses and Elijah, the Law and the Prophets, appeared and spoke of His coming death at Jerusalem. The Father's voice said, “This is My beloved Son... Hear Him,” confirming the Son and commanding obedience even in the hard word of the cross.", "mes": "En un monte alto Jesús se transfiguró: su rostro resplandeció como el sol y sus vestidos se hicieron blancos como la luz, la gloria del Verbo eterno resplandeciendo a través del hombre. Moisés y Elías, la Ley y los Profetas, aparecieron y hablaron de su muerte venidera en Jerusalén. La voz del Padre dijo: “Este es mi Hijo amado... a él oíd,” confirmando al Hijo y mandando obediencia aun en la palabra dura de la cruz.", "ken": ["transfigur", "shone", "moses", "elijah", "father", "glory", "hear", "mountain"], "kes": ["transfigur", "resplandec", "moises", "elias", "padre", "gloria", "oid", "monte"]}, {"en": "What did the Father's command “Hear Him” and “Jesus only” mean (Matt 17:5-8)?", "es": "¿Qué significaron el mandato del Padre “a él oíd” y “Jesús solo” (Mateo 17:5-8)?", "men": "Peter wanted to build three tents and stay, but the Father's voice commanded, “Hear Him.” The command was not to hear Moses or Elijah but Jesus, especially in the hard word about the cross Peter had resisted. When the cloud lifted they saw Jesus only — the Law and the Prophets had pointed to Him and now stepped back. The glory faded, but the Son remained, and the road led toward Jerusalem.", "mes": "Pedro quería hacer tres enramadas y quedarse, pero la voz del Padre mandó: “a él oíd.” El mandato no era oír a Moisés ni a Elías, sino a Jesús, sobre todo en la palabra dura de la cruz que Pedro había resistido. Cuando la nube se levantó vieron a Jesús solo — la Ley y los Profetas habían apuntado a él y ahora se retiraban. La gloria se desvaneció, pero el Hijo permaneció, y el camino llevaba hacia Jerusalén.", "ken": ["hear", "tent", "moses", "elijah", "jesus", "cloud", "cross", "only"], "kes": ["oid", "enramada", "moises", "elias", "jesus", "nube", "cruz", "solo"]}, {"en": "Why is this part of the ministry called the turning point of the Gospel?", "es": "¿Por qué se llama a esta parte del ministerio el punto de giro del Evangelio?", "men": "This is the hinge of the Gospel. Jesus revealed Himself as the Bread of Life, the crowds were sifted to the few, the Twelve confessed Him as the Christ, and the Father confirmed Him in glory — yet through it all the shadow of the cross lengthened, with talk of suffering and death at Jerusalem. As God He fed thousands and shone like the sun; as man He set His face to die. He asks us to confess Him and follow Him to the cross.", "mes": "Este es el gozne del evangelio. Jesús se reveló como el Pan de vida, las multitudes fueron cribadas hasta los pocos, los Doce lo confesaron como el Cristo, y el Padre lo confirmó en gloria — y sin embargo, a través de todo, la sombra de la cruz se alargaba, con palabras de padecer y morir en Jerusalén. Como Dios alimentó a miles y resplandeció como el sol; como hombre puso su rostro para morir. Nos pide confesarlo y seguirlo hasta la cruz.", "ken": ["turning", "bread", "sift", "confess", "christ", "glory", "cross", "jerusalem"], "kes": ["gozne", "pan", "crib", "confes", "cristo", "gloria", "cruz", "jerusalen"]}]};
+
+/* ---- storage hardening (Android content:// safe) ---- */
+var _ctsMem={};
+function lsGet(k){try{var v=localStorage.getItem(k);return v===null?(k in _ctsMem?_ctsMem[k]:null):v;}catch(e){return k in _ctsMem?_ctsMem[k]:null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}_ctsMem[k]=v;}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}delete _ctsMem[k];}
+
+/* ---- helpers ---- */
+function fold(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function kwHit(ans,kw){var a=fold(ans),k=fold(kw);if(!k)return false;
+  if(k.length<=3){return new RegExp('(^|[^a-z0-9])'+reEsc(k)+'([^a-z0-9]|$)').test(a);}
+  return new RegExp('(^|[^a-z0-9])'+reEsc(k)).test(a);}
+function saScore(ans,kws){var n=0;for(var i=0;i<kws.length;i++){if(kwHit(ans,kws[i]))n++;}return n;}
+function mcCorrectIdx(code,qpos){return(((code-7*(qpos+3))%251)+251)%251;}
+
+var LET=['A','B','C','D'];
+var STATE={lang:'en',track:'cert',name:'',mc:[],sa:[],revealed:false};
+for(var i=0;i<DATA.mc.length;i++)STATE.mc.push({answered:false,chosen:-1});
+for(var j=0;j<DATA.sa.length;j++)STATE.sa.push({checked:false,text:'',hits:0});
+
+var I18N={
+ en:{title:'The Life of Christ',unit:'Unit 5 · The Turning Point',lang:'Espa\u00f1ol',
+   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
+   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
+   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
+   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
+   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
+   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
+   complete:'Complete Unit 5',
+   epigraph:'“You are the Christ, the Son of the living God.” (Matthew 16:16)',
+   mGood:'✓ Unit complete. You may continue to Unit 6.',
+   mShort:'Keep going \u2014 review the material and try again.',
+   nextTxt:'Next: Unit 6 →',
+   mh:'Welcome to The Life of Christ',mp:'Please register once. Your name and track carry across every CTS course on this site.',
+   mnl:'Your name',mtl:'Track',mgo:'Begin',
+   hitFmt:function(h){return h+' of 8 keywords';},
+   passV:'Pass',softV:'Practice noted'},
+ es:{title:'La Vida de Cristo',unit:'Unidad 5 · El punto de giro',lang:'English',
+   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
+   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
+   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
+   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
+   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
+   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
+   complete:'Completar la Unidad 5',
+   epigraph:'“Tú eres el Cristo, el Hijo del Dios viviente.” (Mateo 16:16)',
+   mGood:'✓ Unidad completa. Puede continuar a la Unidad 6.',
+   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
+   nextTxt:'Siguiente: Unidad 6 →',
+   mh:'Bienvenido a La Vida de Cristo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
+   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
+   hitFmt:function(h){return h+' de 8 palabras clave';},
+   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+};
+function T(){return I18N[STATE.lang];}
+function isMasters(){return STATE.track==='mdiv'||STATE.track==='thm';}
+function lockMin(){return isMasters()?15:2;}
+
+function $(id){return document.getElementById(id);}
+
+/* ---------- rendering ---------- */
+function renderTeaching(){
+  $('teach-en').className=STATE.lang==='en'?'':'hide';
+  $('teach-es').className=STATE.lang==='es'?'':'hide';
+}
+function renderChrome(){
+  var t=T();
+  document.documentElement.lang=STATE.lang;
+  $('t-title').textContent=t.title;$('t-unit').innerHTML=t.unit;
+  $('langBtn').textContent=t.lang;
+  $('t-greet').textContent=t.greet(STATE.name);
+  $('t-track').textContent=t.track(STATE.track);
+  $('epigraph').textContent=t.epigraph;
+  $('t-mc').textContent=t.mc;$('t-sa').textContent=t.sa;
+  $('t-saNote').textContent=isMasters()?t.saNoteMast:t.saNoteCert;
+  $('completeBtn').textContent=t.complete;
+  $('m-h').textContent=t.mh;$('m-p').textContent=t.mp;$('m-nl').textContent=t.mnl;
+  $('m-tl').textContent=t.mtl;$('m-go').textContent=t.mgo;
+}
+function renderMC(){
+  var wrap=$('mcWrap');wrap.innerHTML='';
+  for(var i=0;i<DATA.mc.length;i++){
+    (function(i){
+      var q=DATA.mc[i],st=STATE.mc[i];
+      var opts=STATE.lang==='en'?q.oen:q.oes;
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var expl=STATE.lang==='en'?q.xen:q.xes;
+      var correct=mcCorrectIdx(q.c,i);
+      var div=document.createElement('div');div.className='q';
+      var h='<div class="qn">'+(i+1)+'</div><div class="qp">'+prompt+'</div>';
+      div.innerHTML=h;
+      for(var o=0;o<4;o++){
+        (function(o){
+          var b=document.createElement('button');b.type='button';b.className='opt';
+          b.innerHTML='<span class="lt">'+LET[o]+'</span>'+opts[o];
+          if(st.answered){b.disabled=true;
+            if(o===correct)b.className='opt correct';
+            else if(o===st.chosen)b.className='opt wrong';}
+          else if(st.answered&&o===st.chosen){b.style.background='#efe7d2';b.style.borderColor='#d4af37';b.style.fontWeight='600';}
+          b.onclick=function(){if(st.answered)return;
+            STATE.mc[i].answered=true;STATE.mc[i].chosen=o;renderMC();};
+          div.appendChild(b);
+        })(o);
+      }
+      var e=document.createElement('div');e.className='expl'+(st.answered?' show':'');
+      e.textContent=expl;div.appendChild(e);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderSA(){
+  var wrap=$('saWrap');wrap.innerHTML='';var t=T();
+  for(var i=0;i<DATA.sa.length;i++){
+    (function(i){
+      var q=DATA.sa[i],st=STATE.sa[i];
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var model=STATE.lang==='en'?q.men:q.mes;
+      var div=document.createElement('div');div.className='q';
+      div.innerHTML='<div class="qn">'+(21+i)+'</div><div class="qp">'+prompt+'</div>';
+      var ta=document.createElement('textarea');ta.value=st.text;
+      ta.oninput=function(){STATE.sa[i].text=ta.value;};
+      div.appendChild(ta);
+      var btn=document.createElement('button');btn.type='button';btn.className='btn ghost';
+      btn.style.marginTop='8px';btn.textContent=t.check;
+      var res=document.createElement('div');res.className='sa-res'+(st.checked?' show':'');
+      function paint(){
+        var kws=STATE.lang==='en'?q.ken:q.kes;
+        var txt=STATE.sa[i].text||'';
+        if(txt.trim().length<100){
+          STATE.sa[i].hits=0;
+          res.innerHTML='<span class="sa-verdict soft">'+(STATE.lang==='en'?'Write a fuller answer (100 characters minimum).':'Escriba una respuesta m\u00e1s completa (m\u00ednimo 100 caracteres).')+'</span>';
+          res.classList.add('show');
+          return;
+        }
+        var hits=saScore(txt,kws);STATE.sa[i].hits=hits;
+        var pass=hits>=3;
+        var verdict=pass?('<span class="sa-verdict pass">'+t.passV+'</span>'):('<span class="sa-verdict soft">'+t.softV+'</span>');
+        res.innerHTML=verdict+' &middot; '+t.hitFmt(hits)+
+          '<div class="model"><div class="ml">'+t.model+'</div>'+model+'</div>';
+        res.className='sa-res show';STATE.sa[i].checked=true;
+      }
+      btn.onclick=function(){
+        if(!STATE.sa[i].text.trim()){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.blank+'</span>';return;}
+        if(STATE.sa[i].text.trim().length<100){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.minLen+'</span>';return;}
+        paint();
+      };
+      if(st.checked&&st.text.trim())paint();
+      div.appendChild(btn);div.appendChild(res);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderAll(){renderChrome();renderTeaching();renderMC();renderSA();refreshLock();}
+
+/* ---------- completion + lockout ---------- */
+function lockedUntil(){var v=lsGet(CFG.lockKey);return v?parseInt(v,10):0;}
+function refreshLock(){
+  var until=lockedUntil(),now=Date.now();
+  var btn=$('completeBtn');
+  if(until>now){
+    btn.disabled=true;
+    var mins=Math.ceil((until-now)/60000);
+    $('statusMsg').className='status lock';
+    $('statusMsg').textContent=(STATE.lang==='en'?'Locked. Try again in ':'Bloqueado. Reintente en ')+mins+(STATE.lang==='en'?' min.':' min.');
+  }else{btn.disabled=false;}
+}
+function markComplete(){
+  var p={};try{p=JSON.parse(lsGet(CFG.progressKey)||'{}');}catch(e){p={};}
+  p[CFG.unit]=true;lsSet(CFG.progressKey,JSON.stringify(p));
+  var t=T();
+  $('statusMsg').className='status ok';$('statusMsg').textContent=t.mGood;
+  var nl=$('nextLink');nl.href=CFG.next;nl.textContent=t.nextTxt;nl.className='next';
+  $('completeBtn').disabled=true;
+}
+function onComplete(){
+  var t=T();
+  var mcCorrect=0,mcAnswered=0;
+  for(var i=0;i<DATA.mc.length;i++){if(STATE.mc[i].answered){mcAnswered++;
+    if(STATE.mc[i].chosen===mcCorrectIdx(DATA.mc[i].c,i))mcCorrect++;}}
+  var saPass=0;for(var j=0;j<DATA.sa.length;j++){if(STATE.sa[j].hits>=3)saPass++;}
+  var needMC=18,needSA=9;
+  if(mcAnswered<DATA.mc.length){
+    $('statusMsg').className='status warn';
+    $('statusMsg').textContent=(STATE.lang==='en'
+      ?'Answer all multiple-choice questions first ('+mcAnswered+'/20).'
+      :'Responda primero todas las preguntas de opci\u00f3n m\u00faltiple ('+mcAnswered+'/20).');
+    return;
+  }
+  STATE.revealed=true;renderMC();
+  var saOk = isMasters() ? (saPass>=needSA) : true;
+  if(mcCorrect>=needMC&&saOk){markComplete();return;}
+  // genuine fail -> lockout
+  lsSet(CFG.lockKey,String(Date.now()+lockMin()*60000));
+  $('statusMsg').className='status lock';
+  $('statusMsg').textContent=(STATE.lang==='en'
+    ?('Not yet: MC '+mcCorrect+'/20 (need 18), SA '+saPass+'/10 (need 7). '+t.mShort)
+    :('A\u00fan no: OM '+mcCorrect+'/20 (necesita 18), RB '+saPass+'/10 (necesita 7). '+t.mShort));
+  refreshLock();
+}
+
+/* ---------- init ---------- */
+function startApp(){
+  STATE.lang=(lsGet('cts_lang')==='es')?'es':'en';
+  STATE.name=lsGet('cts_student')||'';
+  STATE.track=lsGet('cts_track')||'cert';
+  $('langBtn').onclick=function(){STATE.lang=STATE.lang==='en'?'es':'en';
+    lsSet('cts_lang',STATE.lang);renderAll();};
+  $('completeBtn').onclick=onComplete;
+  $('m-go').onclick=function(){
+    var nm=$('m-name').value.trim();var tk=$('m-track').value;
+    if(!nm){$('m-name').focus();return;}
+    STATE.name=nm;STATE.track=tk;
+    lsSet('cts_student',nm);lsSet('cts_track',tk);
+    $('reg').className='modal hide';renderAll();
+  };
+  if(CFG.showReg&&(!STATE.name||!lsGet('cts_track'))){
+    $('reg').className='modal';$('m-track').value=STATE.track;renderChrome();
+  }else{$('reg').className='modal hide';}
+  renderAll();
+  setInterval(refreshLock,30000);
+}
+if(typeof document!=='undefined'){
+  if(document.readyState!=='loading')startApp();
+  else document.addEventListener('DOMContentLoaded',startApp);
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSLOCReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

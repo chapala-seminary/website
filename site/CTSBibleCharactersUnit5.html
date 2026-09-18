@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Characters — Unit 5</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 6 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Bible Characters — Unit 5: Joseph — From the Pit to the Palace, the Man Who Forgave</span><span class="lang-es">📖 Personajes de la Biblia — Unidad 5: José — Del Pozo al Palacio, el Hombre que Perdonó</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"You meant evil against me; but God meant it for good, in order to bring it about as it is this day, to save many people alive." — Genesis 50:20 (NKJV)</span><span class="lang-es">«Vosotros pensasteis mal contra mí, mas Dios lo encaminó a bien, para hacer lo que vemos hoy, para mantener en vida a mucho pueblo.» — Génesis 50:20 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>Few lives in Scripture show the hand of God more clearly than Joseph's. Sold by his own brothers, carried as a slave into a foreign land, falsely accused and locked in prison, he rose at last to stand second only to Pharaoh — and there, with the power to destroy the men who had wronged him, he forgave. Joseph's story is Romans 8:28 written as a life: "all things work together for good to those who love God." It is the story of a providence that no pit can stop and a forgiveness that flows from trusting that providence.</p><p><strong>Subject:</strong> Joseph — from the pit to the palace, the man who forgave.</p><p><strong>Proposition:</strong> What men intend for evil, God intends for good; His providence rules every step.</p><p>We will trace five movements in the life of Joseph.</p><h2>I. The Dreamer</h2><p>Joseph was the favored son of his father Jacob, and that favoritism bred trouble. Jacob gave him an ornate robe — traditionally rendered "a coat of many colors," though the rare Hebrew phrase may equally describe a long, sleeved garment reaching to the hands and feet — a mark of honor his brothers could not miss, and they hated him for it. Then came the dreams. In the first, the brothers' sheaves of grain bowed down to Joseph's sheaf; in the second, the sun, moon, and eleven stars bowed before him. The dreams were true, but they were not welcome.</p><div class="scripture">Look, this dreamer is coming! Come therefore, let us now kill him and cast him into some pit. (Genesis 37:19-20, NKJV)</div><p>Envy turned to hatred, and hatred to a plot. When Joseph came to them in the field, they stripped him of his coat and threw him into a pit. Reuben hoped to rescue him later, but while he was away the others sold Joseph to a passing caravan of traders bound for Egypt, for twenty pieces of silver. Then they dipped his coat in goat's blood and carried it to their father, who tore his clothes and mourned, refusing to be comforted. The dreamer was on his way down before he would ever go up, and his father believed him dead.</p><h2>II. The Slave</h2><p>Carried into Egypt and sold into the house of Potiphar, an officer of Pharaoh, Joseph might have seemed utterly forsaken. But Scripture says:</p><div class="scripture">The LORD was with Joseph, and he was a successful man... (Genesis 39:2, NKJV)</div><p>Here is the heart of Joseph's story in a single line: God knew his address. There is no pit so deep, no country so far, no circumstance so low that it lies outside the reach of God. Joseph served faithfully where God had placed him, and the Lord prospered everything in his hand, so that Potiphar set him over his entire household and entrusted everything to him. Joseph did not waste his years as a slave in self-pity; he worked, and God blessed his work.</p><h2>III. The Prisoner</h2><p>Joseph's integrity cost him. Day after day Potiphar's wife tried to seduce him, and day after day he refused. His answer reveals the root of his character: "How then can I do this great wickedness, and sin against God?" He saw that sin against his master would be, above all, sin against the Lord. At last she seized his garment; he fled and left it in her hand, and she used it to accuse him falsely. For his faithfulness Joseph was thrown into prison — punished for doing right.</p><p>Yet even there the same refrain follows him:</p><div class="scripture">But the LORD was with Joseph and showed him mercy... (Genesis 39:21, NKJV)</div><p>The keeper of the prison came to trust him and put everything under his care. In time Pharaoh's cupbearer and baker were thrown into the same prison, and each had a troubling dream on the same night. Joseph interpreted them: the cupbearer would be restored, the baker would be executed — and so it came to pass. Joseph asked only that the cupbearer remember him when he was free. But the cupbearer forgot him, and Joseph waited two more years. He was forgotten by men, but not by God. Joseph joins a long line of the falsely condemned who were yet held firmly in God's hand — Daniel in the lions' den, Jeremiah in the pit, Paul in his chains, and above all the Lord Jesus, condemned by men and vindicated by God.</p><p>Joseph's example confronts the lie that doing right always pays at once. He chose a clear conscience over a comfortable sin, and it cost him his freedom. Yet the LORD was with him even there, and the very prison became the place from which God would raise him up. Faithfulness is never wasted, even when its reward is long delayed.</p><h2>IV. The Ruler</h2><p>At last Pharaoh dreamed dreams that troubled him: seven fat cows swallowed by seven gaunt ones, seven full heads of grain swallowed by seven thin ones. None of the wise men of Egypt could interpret them. Then the cupbearer remembered the young Hebrew in the prison. In a single day Joseph was brought from the dungeon to the palace. When Pharaoh said he had heard that Joseph could interpret dreams, Joseph deflected the praise: "It is not in me; God will give Pharaoh an answer of peace." He read in Pharaoh's dreams seven years of plenty followed by seven years of famine, and he counseled Pharaoh to store grain through the years of plenty so the land could survive.</p><p>Pharaoh saw the Spirit of God in him and made him second only to Pharaoh over all Egypt, setting his own ring on Joseph's hand and clothing him in fine linen. Through the seven years of plenty Joseph gathered grain in such quantities that it could not be measured. When the famine came, there was bread in Egypt, and from many nations people came to buy. The wisdom God had given to one despised young Hebrew now kept whole nations alive. The forgotten prisoner had become the savior of his world — exactly as the dreams had said.</p><h2>V. The Forgiver</h2><p>Then the famine reached Canaan, and it drove Joseph's brothers to Egypt to buy grain. They bowed before the governor of the land, not knowing he was the brother they had sold — and the dreams of long ago came true before their eyes. Joseph recognized them but tested them, holding back his identity, watching to see whether their hearts had changed. He kept Simeon as a pledge and required them to bring Benjamin, his only full brother. Then he hid his own silver cup in Benjamin's sack, and when the cup was found and Benjamin was threatened with slavery, Judah — the very brother who had first proposed selling Joseph — stepped forward and offered himself in Benjamin's place. The brothers had indeed changed. At last Joseph could hold back no longer. Weeping so loudly that the Egyptians heard him, he said, "I am Joseph." His brothers were terrified, certain that the day of revenge had come. But he did not take revenge. He had learned to see God's hand even in their sin:</p><div class="scripture">But now, do not therefore be grieved or angry with yourselves because you sold me here; for God sent me before you to preserve life... So now it was not you who sent me here, but God. (Genesis 45:5, 8, NKJV)</div><p>Joseph brought his whole family to Egypt, was reunited with his aged father Jacob, and provided for them through the famine. But the deepest test of his forgiveness came later. When Jacob died, the brothers feared that Joseph had only restrained himself for their father's sake and would now repay them. They came trembling, and Joseph wept again and spoke the great word that crowns his life:</p><div class="scripture">You meant evil against me; but God meant it for good, in order to bring it about as it is this day, to save many people alive. (Genesis 50:20, NKJV)</div><p>This is the secret of Joseph's forgiveness: he saw a God who rules over evil and bends it to good. He did not pretend the wrong was not wrong; his brothers had truly meant evil. But he saw a greater hand at work behind theirs. The same truth is ours in one verse:</p><div class="scripture">And we know that all things work together for good to those who love God, to those who are the called according to His purpose. (Romans 8:28, NKJV)</div><p>Joseph could forgive because he believed that God had been at work the whole time — in the pit, in Potiphar's house, in the prison, and on the throne. None of it was wasted; none of it was outside God's plan. Joseph's life teaches us not to judge God's purposes only by what we can see in the moment; the pit and the prison looked like ruin, but they were the very road to a throne and to the saving of a nation. When we see that hand, we too can release the wrong others have done to us, leaving it in the keeping of a God who can bring good even out of evil. What men intend for evil, God intends for good.</p></div>
+<div class="lang-es"><p>Pocas vidas en la Escritura muestran la mano de Dios más claramente que la de José. Vendido por sus propios hermanos, llevado como esclavo a una tierra extraña, falsamente acusado y encerrado en la cárcel, se levantó al fin para estar segundo solo después de Faraón —y allí, con el poder de destruir a los hombres que le habían agraviado, perdonó—. La historia de José es Romanos 8:28 escrita como una vida: «todas las cosas les ayudan a bien, a los que aman a Dios». Es la historia de una providencia que ningún pozo puede detener y de un perdón que brota de confiar en esa providencia.</p><p><strong>Tema:</strong> José — del pozo al palacio, el hombre que perdonó.</p><p><strong>Proposición:</strong> Lo que los hombres piensan para mal, Dios lo encamina a bien; su providencia gobierna cada paso.</p><p>Trazaremos cinco movimientos en la vida de José.</p><h2>I. El Soñador</h2><p>José era el hijo favorito de su padre Jacob, y ese favoritismo trajo problemas. Jacob le dio una túnica ornamentada —tradicionalmente traducida «túnica de muchos colores», aunque la rara frase hebrea puede describir igualmente una prenda larga y con mangas que llegaba hasta las manos y los pies— una marca de honor que sus hermanos no podían pasar por alto, y lo odiaron por ella. Luego vinieron los sueños. En el primero, las gavillas de grano de sus hermanos se inclinaban ante la gavilla de José; en el segundo, el sol, la luna y once estrellas se inclinaban delante de él. Los sueños eran verdaderos, pero no bienvenidos.</p><div class="scripture">He aquí viene el soñador. Ahora pues, venid, y matémoslo y echémoslo en una cisterna. (Génesis 37:19-20, RVG)</div><p>La envidia se volvió odio, y el odio un complot. Cuando José vino a ellos en el campo, le quitaron su túnica y lo echaron en un pozo. Rubén esperaba rescatarlo después, pero mientras estaba ausente los otros vendieron a José a una caravana de mercaderes que pasaba rumbo a Egipto, por veinte piezas de plata. Luego mojaron su túnica en sangre de cabrito y la llevaron a su padre, quien rasgó sus vestidos y lloró, negándose a ser consolado. El soñador iba de bajada antes de poder subir, y su padre lo creía muerto.</p><h2>II. El Esclavo</h2><p>Llevado a Egipto y vendido en la casa de Potifar, un oficial de Faraón, José pudo haber parecido del todo abandonado. Pero la Escritura dice:</p><div class="scripture">Y Jehová estaba con José, y fue varón próspero... (Génesis 39:2, RVG)</div><p>Aquí está el corazón de la historia de José en una sola línea: Dios conocía su dirección. No hay pozo tan profundo, ni país tan lejano, ni circunstancia tan baja que quede fuera del alcance de Dios. José sirvió fielmente donde Dios lo había puesto, y el Señor prosperó todo lo que estaba en su mano, de modo que Potifar lo puso sobre toda su casa y le confió todo. José no desperdició sus años de esclavo en autocompasión; trabajó, y Dios bendijo su trabajo.</p><h2>III. El Prisionero</h2><p>La integridad le costó a José. Día tras día la esposa de Potifar trató de seducirlo, y día tras día él se negó. Su respuesta revela la raíz de su carácter: «¿cómo, pues, haría yo este grande mal, y pecaría contra Dios?». Vio que el pecado contra su amo sería, sobre todo, pecado contra el Señor. Al fin ella agarró su ropa; él huyó y la dejó en la mano de ella, y la usó para acusarlo falsamente. Por su fidelidad José fue echado en la cárcel —castigado por hacer lo recto—.</p><p>Pero aun allí lo sigue el mismo estribillo:</p><div class="scripture">Mas Jehová estaba con José, y le extendió su misericordia... (Génesis 39:21, RVG)</div><p>El carcelero llegó a confiar en él y puso todo bajo su cuidado. Con el tiempo el copero y el panadero de Faraón fueron echados en la misma cárcel, y cada uno tuvo un sueño inquietante la misma noche. José los interpretó: el copero sería restaurado, el panadero sería ejecutado —y así sucedió—. José pidió solo que el copero se acordara de él cuando fuera libre. Pero el copero lo olvidó, y José esperó dos años más. Fue olvidado por los hombres, pero no por Dios. José se une a una larga fila de los falsamente condenados que sin embargo estaban firmemente sostenidos en la mano de Dios —Daniel en el foso de los leones, Jeremías en la cisterna, Pablo en sus cadenas, y sobre todo el Señor Jesús, condenado por los hombres y vindicado por Dios—.</p><p>El ejemplo de José confronta la mentira de que hacer lo recto siempre paga de inmediato. Escogió una conciencia limpia en lugar de un pecado cómodo, y le costó su libertad. Pero Jehová estaba con él aun allí, y la cárcel misma se volvió el lugar desde el cual Dios lo levantaría. La fidelidad nunca se desperdicia, aunque su recompensa tarde mucho en llegar.</p><h2>IV. El Gobernante</h2><p>Al fin Faraón soñó sueños que lo turbaron: siete vacas gordas tragadas por siete flacas, siete espigas llenas tragadas por siete menudas. Ninguno de los sabios de Egipto pudo interpretarlos. Entonces el copero se acordó del joven hebreo en la cárcel. En un solo día José fue traído del calabozo al palacio. Cuando Faraón dijo que había oído que José podía interpretar sueños, José desvió la alabanza: «No está en mí; Dios será el que dé respuesta de paz a Faraón». Leyó en los sueños de Faraón siete años de abundancia seguidos de siete años de hambre, y aconsejó a Faraón almacenar grano durante los años de abundancia para que la tierra pudiera sobrevivir.</p><p>Faraón vio el Espíritu de Dios en él y lo hizo segundo solo después de Faraón sobre todo Egipto, poniendo su propio anillo en la mano de José y vistiéndolo de lino fino. Durante los siete años de abundancia José reunió grano en tales cantidades que no se podía medir. Cuando vino el hambre, había pan en Egipto, y de muchas naciones venía la gente a comprar. La sabiduría que Dios había dado a un joven hebreo despreciado ahora mantenía con vida a naciones enteras. El prisionero olvidado se había vuelto el salvador de su mundo —exactamente como los sueños habían dicho—.</p><h2>V. El Perdonador</h2><p>Entonces el hambre llegó a Canaán, y llevó a los hermanos de José a Egipto a comprar grano. Se inclinaron ante el gobernador de la tierra, sin saber que era el hermano que habían vendido —y los sueños de antaño se cumplieron ante sus ojos—. José los reconoció pero los probó, ocultando su identidad, observando si sus corazones habían cambiado. Retuvo a Simeón como prenda y les exigió que trajeran a Benjamín, su único hermano de padre y madre. Luego escondió su propia copa de plata en el costal de Benjamín, y cuando la copa fue hallada y Benjamín fue amenazado con la esclavitud, Judá —el mismo hermano que primero había propuesto vender a José— dio un paso adelante y se ofreció en lugar de Benjamín. Los hermanos en verdad habían cambiado. Al fin José no pudo contenerse más. Llorando tan fuerte que los egipcios lo oyeron, dijo: «Yo soy José». Sus hermanos quedaron aterrados, seguros de que había llegado el día de la venganza. Pero no tomó venganza. Había aprendido a ver la mano de Dios aun en el pecado de ellos:</p><div class="scripture">Ahora pues, no os entristezcáis, ni os pese de haberme vendido acá; porque para preservación de vida me envió Dios delante de vosotros... Así pues, no me enviasteis vosotros acá, sino Dios. (Génesis 45:5, 8, RVG)</div><p>José trajo a toda su familia a Egipto, se reunió con su anciano padre Jacob, y proveyó para ellos durante el hambre. Pero la prueba más profunda de su perdón vino después. Cuando Jacob murió, los hermanos temieron que José solo se hubiera contenido por causa de su padre y que ahora les pagaría. Vinieron temblando, y José lloró otra vez y habló la gran palabra que corona su vida:</p><div class="scripture">Vosotros pensasteis mal contra mí, mas Dios lo encaminó a bien, para hacer lo que vemos hoy, para mantener en vida a mucho pueblo. (Génesis 50:20, RVG)</div><p>Este es el secreto del perdón de José: vio a un Dios que gobierna sobre el mal y lo dobla para bien. No fingió que el mal no fuera mal; sus hermanos verdaderamente habían pensado mal. Pero vio una mano mayor obrando detrás de la de ellos. La misma verdad es nuestra en un versículo:</p><div class="scripture">Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su propósito son llamados. (Romanos 8:28, RVG)</div><p>José pudo perdonar porque creyó que Dios había estado obrando todo el tiempo —en el pozo, en la casa de Potifar, en la cárcel, y en el trono—. Nada de ello fue desperdiciado; nada estuvo fuera del plan de Dios. La vida de José nos enseña a no juzgar los propósitos de Dios solo por lo que podemos ver en el momento; el pozo y la cárcel parecían ruina, pero eran el camino mismo hacia un trono y hacia la salvación de una nación. Cuando vemos esa mano, también nosotros podemos soltar el agravio que otros nos han hecho, dejándolo en las manos de un Dios que puede traer bien aun del mal. Lo que los hombres piensan para mal, Dios lo encamina a bien.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 5;
+const COURSE = 'CTSBC';
+const FILE_PREFIX = 'CTSBibleCharacters';
+const NEXT_UNIT_URL = 'CTSBibleCharactersUnit6.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - Enoch — The Man Who Walked with God", "Unit 2 - Job — Faith That Holds When Everything Is Stripped Away", "Unit 3 - Abraham — Father of the Faithful, Friend of God", "Unit 4 - Rebekah — The Bride Who Said “I Will Go”", "Unit 5 - Joseph — From the Pit to the Palace, the Man Who Forgave", "Unit 6 - Moses — The Man Who Asked to See God’s Glory", "Unit 7 - Gideon — When God Wins With Few", "Unit 8 - Ruth — When Life Looks Hopeless, There Is Always Hope and God", "Unit 9 - Hannah — The Praying Mother Who Gave Her Son to God", "Unit 10 - Samuel — The Boy Who Heard God, the Prophet Who Anointed Kings", "Unit 11 - David — A Man After God's Own Heart", "Unit 12 - Elijah — The Prophet of Fire and the Still Small Voice"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [{"textEn":"1. Joseph was marked out as his father's favored son by:","textEs":"1. José fue señalado como el hijo favorito de su padre por:","optionsEn":["a signet ring","a coat of many colors","a double portion","a crown"],"optionsEs":["un anillo de sello","una túnica de muchos colores","una doble porción","una corona"],"explanationEn":"Jacob's special robe for Joseph, traditionally called the coat of many colors, marked him as his father's favorite (Genesis 37:3).","explanationEs":"La túnica especial que Jacob dio a José, tradicionalmente llamada la túnica de muchos colores, lo señaló como el favorito de su padre (Génesis 37:3).","correct":1},{"textEn":"2. In Joseph's dreams, what did his brothers' sheaves do?","textEs":"2. En los sueños de José, ¿qué hicieron las gavillas de sus hermanos?","optionsEn":["caught fire","withered","bowed down to his sheaf","scattered"],"optionsEs":["se incendiaron","se marchitaron","se inclinaron ante su gavilla","se dispersaron"],"explanationEn":"Their sheaves bowed to his — a dream that proved true (Genesis 37:7).","explanationEs":"Sus gavillas se inclinaron ante la suya —un sueño que resultó verdadero (Génesis 37:7).","correct":2},{"textEn":"3. What did the brothers' envy finally lead them to do with Joseph?","textEs":"3. ¿A qué llevó finalmente la envidia de los hermanos respecto a José?","optionsEn":["sell him to traders bound for Egypt","make him their leader","send him home","crown him king"],"optionsEs":["venderlo a mercaderes rumbo a Egipto","hacerlo su líder","enviarlo a casa","coronarlo rey"],"explanationEn":"They threw him in a pit and sold him to a caravan going to Egypt (Genesis 37:28).","explanationEs":"Lo echaron en un pozo y lo vendieron a una caravana que iba a Egipto (Génesis 37:28).","correct":0},{"textEn":"4. When Joseph was sold into Potiphar's house, Scripture says:","textEs":"4. Cuando José fue vendido a la casa de Potifar, la Escritura dice:","optionsEn":["the LORD was with Joseph","Joseph gave up in despair","Joseph fled","the LORD departed from him"],"optionsEs":["Jehová estaba con José","José se rindió en desesperación","José huyó","Jehová se apartó de él"],"explanationEn":"\"The LORD was with Joseph, and he was a successful man\" (Genesis 39:2).","explanationEs":"«Jehová estaba con José, y fue varón próspero» (Génesis 39:2).","correct":0},{"textEn":"5. Wayne's line \"God knew his address\" means:","textEs":"5. La frase de Wayne «Dios conocía su dirección» significa:","optionsEn":["Joseph had a map","Egypt was nearby","no pit or province lies outside God's reach","Joseph wrote letters home"],"optionsEs":["José tenía un mapa","Egipto estaba cerca","ningún pozo ni provincia queda fuera del alcance de Dios","José escribía cartas a casa"],"explanationEn":"No place is so low or far that it lies outside God's reach.","explanationEs":"Ningún lugar es tan bajo o lejano que quede fuera del alcance de Dios.","correct":2},{"textEn":"6. Why was Joseph thrown into prison in Egypt?","textEs":"6. ¿Por qué fue echado José en la cárcel en Egipto?","optionsEn":["for stealing grain","he was falsely accused after refusing Potiphar's wife","for interpreting dreams","for plotting against Pharaoh"],"optionsEs":["por robar grano","fue falsamente acusado tras negarse a la esposa de Potifar","por interpretar sueños","por conspirar contra Faraón"],"explanationEn":"He refused Potiphar's wife and was falsely accused (Genesis 39:12-20).","explanationEs":"Se negó a la esposa de Potifar y fue falsamente acusado (Génesis 39:12-20).","correct":1},{"textEn":"7. In prison, whose dreams did Joseph interpret?","textEs":"7. En la cárcel, ¿los sueños de quiénes interpretó José?","optionsEn":["Pharaoh's guards","other Hebrews","the magicians","Pharaoh's cupbearer and baker"],"optionsEs":["los guardias de Faraón","otros hebreos","los magos","el copero y el panadero de Faraón"],"explanationEn":"Joseph interpreted the dreams of the cupbearer and the baker (Genesis 40).","explanationEs":"José interpretó los sueños del copero y del panadero (Génesis 40).","correct":3},{"textEn":"8. After interpreting the cupbearer's dream, what happened to Joseph?","textEs":"8. Después de interpretar el sueño del copero, ¿qué le pasó a José?","optionsEn":["he was freed at once","he was executed","the cupbearer forgot him, and he waited two more years","he was made a priest"],"optionsEs":["fue liberado de inmediato","fue ejecutado","el copero lo olvidó, y esperó dos años más","fue hecho sacerdote"],"explanationEn":"The cupbearer forgot him, and Joseph remained two more years (Genesis 40:23; 41:1).","explanationEs":"El copero lo olvidó, y José permaneció dos años más (Génesis 40:23; 41:1).","correct":2},{"textEn":"9. Even in prison, the text says:","textEs":"9. Aun en la cárcel, el texto dice:","optionsEn":["the LORD was with Joseph and showed him mercy","Joseph lost his faith","Joseph escaped","God was silent forever"],"optionsEs":["Jehová estaba con José y le extendió su misericordia","José perdió su fe","José escapó","Dios calló para siempre"],"explanationEn":"\"But the LORD was with Joseph and showed him mercy\" (Genesis 39:21).","explanationEs":"«Mas Jehová estaba con José, y le extendió su misericordia» (Génesis 39:21).","correct":0},{"textEn":"10. The lesson lists Joseph among the falsely condemned who were still in God's hand, along with:","textEs":"10. La lección enumera a José entre los falsamente condenados que estaban aún en la mano de Dios, junto con:","optionsEn":["Adam and Cain","Daniel, Jeremiah, Paul, and Jesus","Saul and Solomon","the Pharisees"],"optionsEs":["Adán y Caín","Daniel, Jeremías, Pablo y Jesús","Saúl y Salomón","los fariseos"],"explanationEn":"Daniel, Jeremiah, Paul, and above all Jesus were condemned by men yet held by God.","explanationEs":"Daniel, Jeremías, Pablo, y sobre todo Jesús fueron condenados por los hombres pero sostenidos por Dios.","correct":1},{"textEn":"11. What finally brought Joseph out of prison?","textEs":"11. ¿Qué sacó finalmente a José de la cárcel?","optionsEn":["a bribe","an earthquake","Potiphar's apology","the cupbearer remembered him when Pharaoh dreamed"],"optionsEs":["un soborno","un terremoto","la disculpa de Potifar","el copero se acordó de él cuando Faraón soñó"],"explanationEn":"When Pharaoh dreamed, the cupbearer remembered Joseph (Genesis 41:9-14).","explanationEs":"Cuando Faraón soñó, el copero se acordó de José (Génesis 41:9-14).","correct":3},{"textEn":"12. To what position did Pharaoh raise Joseph?","textEs":"12. ¿A qué posición elevó Faraón a José?","optionsEn":["chief baker","captain of the guard","high priest","second only to Pharaoh over all Egypt"],"optionsEs":["panadero principal","capitán de la guardia","sumo sacerdote","segundo solo después de Faraón sobre todo Egipto"],"explanationEn":"Joseph was made second only to Pharaoh over all Egypt (Genesis 41:40-43).","explanationEs":"José fue hecho segundo solo después de Faraón sobre todo Egipto (Génesis 41:40-43).","correct":3},{"textEn":"13. Joseph interpreted Pharaoh's dreams to mean:","textEs":"13. José interpretó los sueños de Faraón en el sentido de:","optionsEn":["seven years of plenty, then seven of famine","a coming war","the fall of Egypt","a great flood"],"optionsEs":["siete años de abundancia, luego siete de hambre","una guerra venidera","la caída de Egipto","un gran diluvio"],"explanationEn":"Seven years of plenty would be followed by seven years of famine (Genesis 41:29-30).","explanationEs":"Siete años de abundancia serían seguidos de siete años de hambre (Génesis 41:29-30).","correct":0},{"textEn":"14. How did Joseph prepare Egypt for the famine?","textEs":"14. ¿Cómo preparó José a Egipto para el hambre?","optionsEn":["he built an army","he stored grain during the years of plenty","he raised taxes","he fled the land"],"optionsEs":["construyó un ejército","almacenó grano durante los años de abundancia","subió los impuestos","huyó de la tierra"],"explanationEn":"Joseph stored grain in the years of plenty so there was bread in the famine (Genesis 41:48-49).","explanationEs":"José almacenó grano en los años de abundancia para que hubiera pan en el hambre (Génesis 41:48-49).","correct":1},{"textEn":"15. When his brothers came to Egypt for grain, they:","textEs":"15. Cuando sus hermanos vinieron a Egipto por grano, ellos:","optionsEn":["recognized Joseph at once","refused to bow","bowed before a ruler they did not recognize","attacked the palace"],"optionsEs":["reconocieron a José de inmediato","se negaron a inclinarse","se inclinaron ante un gobernante que no reconocían","atacaron el palacio"],"explanationEn":"They bowed before Joseph without recognizing him — the dream fulfilled (Genesis 42:6).","explanationEs":"Se inclinaron ante José sin reconocerlo —el sueño cumplido (Génesis 42:6).","correct":2},{"textEn":"16. When Joseph revealed himself, his brothers were:","textEs":"16. Cuando José se dio a conocer, sus hermanos estaban:","optionsEn":["overjoyed immediately","terrified","angry","unmoved"],"optionsEs":["llenos de gozo de inmediato","aterrados","enojados","indiferentes"],"explanationEn":"They were terrified, fearing his revenge (Genesis 45:3).","explanationEs":"Estaban aterrados, temiendo su venganza (Génesis 45:3).","correct":1},{"textEn":"17. Joseph told his brothers, \"It was not you who sent me here, but ___.\"","textEs":"17. José dijo a sus hermanos: «No me enviasteis vosotros acá, sino ___».","optionsEn":["Pharaoh","fate","the caravan","God"],"optionsEs":["Faraón","el destino","la caravana","Dios"],"explanationEn":"\"So now it was not you who sent me here, but God\" (Genesis 45:8).","explanationEs":"«Así pues, no me enviasteis vosotros acá, sino Dios» (Génesis 45:8).","correct":3},{"textEn":"18. The crowning word of Joseph's life is: \"You meant evil against me; but God meant it for ___.\"","textEs":"18. La palabra que corona la vida de José es: «Vosotros pensasteis mal contra mí, mas Dios lo encaminó a ___».","optionsEn":["good","judgment","a sign","later"],"optionsEs":["bien","juicio","una señal","después"],"explanationEn":"\"But God meant it for good... to save many people alive\" (Genesis 50:20).","explanationEs":"«Mas Dios lo encaminó a bien... para mantener en vida a mucho pueblo» (Génesis 50:20).","correct":0},{"textEn":"19. The verse the lesson uses to summarize Joseph's life is:","textEs":"19. El versículo que la lección usa para resumir la vida de José es:","optionsEn":["John 3:16","Psalm 23","Romans 8:28","Genesis 1:1"],"optionsEs":["Juan 3:16","Salmo 23","Romanos 8:28","Génesis 1:1"],"explanationEn":"Romans 8:28 — \"all things work together for good to those who love God.\"","explanationEs":"Romanos 8:28 —«todas las cosas les ayudan a bien, a los que aman a Dios».","correct":2},{"textEn":"20. The secret of Joseph's forgiveness was that he:","textEs":"20. El secreto del perdón de José fue que él:","optionsEn":["forgot what happened","was naturally easygoing","feared his brothers","saw God's hand ruling even over the wrong done to him"],"optionsEs":["olvidó lo que pasó","era de carácter despreocupado","temía a sus hermanos","vio la mano de Dios gobernando aun sobre el mal que le hicieron"],"explanationEn":"Joseph forgave because he saw God's providence even in the evil done to him.","explanationEs":"José perdonó porque vio la providencia de Dios aun en el mal que le hicieron.","correct":3}];
+const kwQuestions = [{"textEn":"21. Trace the five movements of Joseph's life from the pit to the palace.","textEs":"21. Trace los cinco movimientos de la vida de José, del pozo al palacio.","kw_en":["dreamer","slave","prisoner","ruler","forgiv","pit","palace","egypt"],"kw_es":["soñad","esclavo","prisionero","gobernante","perdon","pozo","palacio","egipto"],"modelEn":"Joseph's life moves through five stages. As a dreamer he was the favored son whose dreams stirred his brothers' envy. As a slave he was sold into Potiphar's house in Egypt, yet the LORD was with him. As a prisoner he was falsely accused and forgotten, but God showed him mercy. As a ruler he interpreted Pharaoh's dreams and rose to be second over all Egypt, and as a forgiver he received his trembling brothers with grace, seeing that God had sent him ahead to save many lives.","modelEs":"La vida de José pasa por cinco etapas. Como soñador era el hijo favorito cuyos sueños despertaron la envidia de sus hermanos. Como esclavo fue vendido a la casa de Potifar en Egipto, pero Jehová estaba con él. Como prisionero fue falsamente acusado y olvidado, pero Dios le mostró misericordia. Como gobernante interpretó los sueños de Faraón y se elevó a segundo sobre todo Egipto, y como perdonador recibió a sus hermanos temblorosos con gracia, viendo que Dios lo había enviado adelante para salvar muchas vidas."},{"textEn":"22. What does Wayne's line \"God knew his address\" mean in Joseph's story?","textEs":"22. ¿Qué significa la frase de Wayne «Dios conocía su dirección» en la historia de José?","kw_en":["god","reach","pit","present","prosper","potiphar","provid","egypt"],"kw_es":["dios","alcance","pozo","present","prosper","potifar","providencia","egipto"],"modelEn":"The line means that no place is so deep, far, or low that it lies outside the reach of God. Even when Joseph was sold as a slave in a foreign land, the LORD was with him and prospered everything in his hand. God's providence followed him into Potiphar's house and even into prison. So wherever life takes us, God still knows exactly where we are and is at work.","modelEs":"La frase significa que ningún lugar es tan profundo, lejano o bajo que quede fuera del alcance de Dios. Aun cuando José fue vendido como esclavo en una tierra extraña, Jehová estaba con él y prosperó todo lo que estaba en su mano. La providencia de Dios lo siguió a la casa de Potifar y aun a la cárcel. Así que dondequiera que la vida nos lleve, Dios todavía sabe exactamente dónde estamos y está obrando."},{"textEn":"23. How did Joseph respond to Potiphar's wife, and what did it cost him?","textEs":"23. ¿Cómo respondió José a la esposa de Potifar, y qué le costó?","kw_en":["refus","sin","wicked","potiphar","accus","prison","integr","god"],"kw_es":["neg","pecado","maldad","potifar","acus","encarcel","integr","dios"],"modelEn":"When Potiphar's wife tried to seduce him, Joseph refused, asking how he could do such great wickedness and sin against God. His integrity, however, was not rewarded by men; she falsely accused him, and he was thrown into prison. So his faithfulness cost him his freedom for a time. Yet even there the LORD was with him, showing that doing right is worth more than escaping hardship.","modelEs":"Cuando la esposa de Potifar trató de seducirlo, José se negó, preguntando cómo podría hacer tan grande maldad y pecar contra Dios. Su integridad, sin embargo, no fue premiada por los hombres; ella lo acusó falsamente, y fue echado en la cárcel. Así que su fidelidad le costó su libertad por un tiempo. Pero aun allí Jehová estaba con él, mostrando que hacer lo recto vale más que escapar de la dificultad."},{"textEn":"24. Even when forgotten by men, what does the text say about God's presence with Joseph?","textEs":"24. Aun cuando fue olvidado por los hombres, ¿qué dice el texto sobre la presencia de Dios con José?","kw_en":["lord","joseph","mercy","present","prison","forgot","faith","god"],"kw_es":["jehov","jose","misericord","present","olvid","fiel","dios","prisionero"],"modelEn":"Although the cupbearer forgot Joseph and he waited two more years in prison, the text says the LORD was with Joseph and showed him mercy. He was forgotten by men but never by God. God's presence did not depend on Joseph's circumstances or on being remembered by others. This assures us that God stays near His people even in seasons of waiting and apparent neglect.","modelEs":"Aunque el copero olvidó a José y esperó dos años más en la cárcel, el texto dice que Jehová estaba con José y le extendió su misericordia. Fue olvidado por los hombres pero nunca por Dios. La presencia de Dios no dependía de las circunstancias de José ni de ser recordado por otros. Esto nos asegura que Dios permanece cerca de su pueblo aun en tiempos de espera y aparente abandono."},{"textEn":"25. Describe how Joseph went from prisoner to ruler.","textEs":"25. Describa cómo pasó José de prisionero a gobernante.","kw_en":["pharaoh","dream","interpret","prison","ruler","egypt","cupbear","second"],"kw_es":["farao","sueñ","interpret","calabozo","gobernante","egipto","copero","segundo"],"modelEn":"When Pharaoh dreamed dreams no one could interpret, the cupbearer finally remembered Joseph. In a single day Joseph was brought from the dungeon to the palace, where he interpreted the dreams as seven years of plenty followed by seven of famine. Pharaoh recognized God's wisdom in him and made him second only to Pharaoh over all Egypt. The forgotten prisoner became the ruler who would save many lives.","modelEs":"Cuando Faraón soñó sueños que nadie podía interpretar, el copero por fin se acordó de José. En un solo día José fue traído del calabozo al palacio, donde interpretó los sueños como siete años de abundancia seguidos de siete de hambre. Faraón reconoció la sabiduría de Dios en él y lo hizo segundo solo después de Faraón sobre todo Egipto. El prisionero olvidado se volvió el gobernante que salvaría muchas vidas."},{"textEn":"26. How did Joseph use the seven years of plenty?","textEs":"26. ¿Cómo usó José los siete años de abundancia?","kw_en":["plenty","famine","grain","store","seven","egypt","bread","save"],"kw_es":["abundancia","hambre","grano","almacen","siete","egipto","pan","salvar"],"modelEn":"During the seven years of plenty Joseph stored up great quantities of grain throughout Egypt. He prepared deliberately for the famine he knew was coming, gathering more than could be measured. When the seven years of famine arrived, Egypt and the surrounding nations had bread because of his foresight. In this way the wisdom God gave him preserved many people alive.","modelEs":"Durante los siete años de abundancia José almacenó grandes cantidades de grano por todo Egipto. Se preparó deliberadamente para el hambre que sabía que venía, reuniendo más de lo que se podía medir. Cuando llegaron los siete años de hambre, Egipto y las naciones vecinas tuvieron pan por su previsión. De esta manera la sabiduría que Dios le dio preservó en vida a mucha gente."},{"textEn":"27. What did Joseph say to his frightened brothers about who really sent him to Egypt?","textEs":"27. ¿Qué les dijo José a sus hermanos asustados sobre quién realmente lo envió a Egipto?","kw_en":["god","sent","brother","egypt","preserv","life","forgiv","grace"],"kw_es":["dios","envi","hermanos","egipto","preserv","vida","perdon","mantener"],"modelEn":"Joseph told his terrified brothers not to be grieved or angry with themselves for selling him, because God had sent him ahead of them to preserve life. He said plainly, \"It was not you who sent me here, but God.\" Instead of taking revenge, he interpreted their wrong through the lens of God's purpose. His forgiveness rested on the conviction that God had been guiding events for good all along.","modelEs":"José les dijo a sus hermanos aterrados que no se entristecieran ni se enojaran consigo mismos por haberlo vendido, porque Dios lo había enviado delante de ellos para preservar vida. Dijo claramente: «No me enviasteis vosotros acá, sino Dios». En lugar de tomar venganza, interpretó el mal de ellos a través del lente del propósito de Dios. Su perdón descansaba en la convicción de que Dios había estado guiando los acontecimientos para bien todo el tiempo."},{"textEn":"28. Explain the meaning of Genesis 50:20.","textEs":"28. Explique el significado de Génesis 50:20.","kw_en":["evil","good","god","mean","meant","intend","save","providence"],"kw_es":["mal","bien","dios","pensa","encamin","vida","salvar","providencia"],"modelEn":"Genesis 50:20 is Joseph's great summary of his life: \"You meant evil against me, but God meant it for good.\" His brothers acted out of envy and malice, truly intending harm. Yet God overruled their evil and used the very same events to preserve many lives, including theirs. The verse teaches that God's providence is so great that He can take the wrong others intend and bend it toward good.","modelEs":"Génesis 50:20 es el gran resumen de José sobre su vida: «Vosotros pensasteis mal contra mí, mas Dios lo encaminó a bien». Sus hermanos actuaron por envidia y malicia, verdaderamente con intención de dañar. Sin embargo Dios dominó su mal y usó esos mismos acontecimientos para preservar muchas vidas, incluida la de ellos. El versículo enseña que la providencia de Dios es tan grande que puede tomar el mal que otros pretenden y doblarlo hacia el bien."},{"textEn":"29. How does Romans 8:28 summarize Joseph's life?","textEs":"29. ¿Cómo resume Romanos 8:28 la vida de José?","kw_en":["all","things","work","good","love","god","purpose","call"],"kw_es":["todas","cosas","ayudan","bien","aman","dios","proposito","llamados"],"modelEn":"Romans 8:28 says that all things work together for good to those who love God, who are called according to His purpose. Joseph's life is this verse told as a story: the pit, the slavery, the false accusation, and the prison all worked together toward the saving of many lives. None of it was wasted, and none of it was outside God's plan. So Joseph shows that God can weave even painful events into a good and purposeful whole.","modelEs":"Romanos 8:28 dice que todas las cosas ayudan a bien a los que aman a Dios, que son llamados conforme a su propósito. La vida de José es este versículo contado como una historia: el pozo, la esclavitud, la falsa acusación y la cárcel obraron juntos para la salvación de muchas vidas. Nada de ello fue desperdiciado, y nada estuvo fuera del plan de Dios. Así que José muestra que Dios puede entretejer aun los acontecimientos dolorosos en un todo bueno y con propósito."},{"textEn":"30. What is the connection between seeing God's providence and being able to forgive?","textEs":"30. ¿Cuál es la conexión entre ver la providencia de Dios y poder perdonar?","kw_en":["providence","forgiv","god","hand","evil","good","trust","release"],"kw_es":["providencia","perdon","dios","mano","mal","bien","confi","soltar"],"modelEn":"Joseph could forgive because he saw God's hand ruling over everything, even the evil his brothers had done. Once he believed that God had used their wrong to accomplish good, the bitterness lost its grip. Seeing providence does not excuse the wrong, but it frees us to release it into God's hands rather than seeking revenge. When we trust that God can bring good even out of harm, we are able to forgive as Joseph forgave.","modelEs":"José pudo perdonar porque vio la mano de Dios gobernando sobre todo, aun el mal que sus hermanos habían hecho. Una vez que creyó que Dios había usado el mal de ellos para lograr el bien, la amargura perdió su poder. Ver la providencia no excusa el mal, pero nos libera para soltarlo en las manos de Dios en lugar de buscar venganza. Cuando confiamos en que Dios puede traer bien aun del daño, podemos perdonar como José perdonó."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleCharactersReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

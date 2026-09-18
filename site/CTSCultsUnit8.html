@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Cults & World Religions — Unit 8</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 9 →</span><span class="lang-es">Unidad 9 →</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Cults &amp; World Religions — Unit 8: Roman Catholicism</span><span class="lang-es">📖 Las Sectas y las Religiones del Mundo — Unidad 8: El Catolicismo Romano</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed." — Galatians 1:8 (NKJV)</span><span class="lang-es">"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema." — Gálatas 1:8 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Cults &amp; World Religions. Please register before beginning Unit 8.</span><span class="lang-es">Bienvenido a Las Sectas y las Religiones del Mundo. Por favor regístrese antes de comenzar la Unidad 8.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Anchor: Ephesians 2:8-9; Romans 3:28; Hebrews 10:14; 1 Timothy 2:5 (NKJV)</strong></p>
+<div class="scripture">"For by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast." &mdash; Ephesians 2:8-9 (NKJV)</div>
+
+<h3>A Word Before We Begin</h3>
+<p>This unit is different from every unit before it, and we must say so at the outset. The Roman Catholic Church is not a cult. It confesses the Trinity, the full deity of Christ, His virgin birth, His atoning death, and His bodily resurrection; it holds the ancient creeds that we ourselves hold; and within it are many millions who love the Lord Jesus and trust in Him. In this land above all, the Catholic Church is woven into the history, the family, and the heart of our people, and we do not speak of it lightly or from the outside. Many of us came from it; many of those we love remain in it. So we come to this subject not as strangers attacking a rival, but as members of the same family who long to see one another rest fully in Christ. Our aim is not to mock what is dear to our neighbors, nor to pretend the differences do not matter, but to honor what we share, to speak honestly and gently about where we differ, and to point everyone &mdash; Catholic and evangelical alike &mdash; to the finished work of Christ. (A word on what this unit is not: it treats the official teaching of the Catholic Church, not the folk practices that have grown up around it, which we will consider separately in the next unit.)</p>
+
+<h3>What We Share</h3>
+<p>Before we speak of any difference, we must say plainly how much we share, for it is a great deal, and honesty requires us to begin here. With Roman Catholics we confess one God eternally existing in three Persons, the Father, the Son, and the Holy Spirit. We confess that Jesus Christ is truly God and truly man, conceived by the Holy Spirit and born of the virgin Mary, that He died for our sins, rose bodily from the grave, ascended to the Father, and will come again. We hold the same Apostles' and Nicene Creeds, and we receive the same New Testament as the Word of God. We agree that all have sinned, that no one can be saved apart from the grace of God and the work of Christ, and that faith is necessary. These are not small things; they are the great things, the very heart of the Christian faith, and on them we stand together against every form of unbelief. Whatever we go on to say, let it never be forgotten that we say it to those who confess with us that Jesus is Lord.</p>
+
+<h3>Where We Differ, and Why It Matters</h3>
+<p>And yet there are real differences, and some of them touch the gospel itself, so that we cannot treat them as though they did not matter. They gather around a single question, the question that once divided the church in the Reformation and divides it still: how is a sinner made right with God, and where does he rest for his salvation? The Reformers did not doubt that Catholics believed in Christ and in grace; their concern was that certain teachings, however sincerely held, added to the finished work of Christ things that could only obscure it &mdash; human tradition alongside Scripture, human works alongside faith, and human and saintly merit alongside the merit of Christ. We take up four of these: the question of authority, the question of justification, the question of the finished work of Christ, and the place of Mary and the saints. We examine them not as a different religion, but as a family disagreement about how fully to rest in Christ alone.</p>
+
+<h3>Authority: Scripture, or Scripture and Tradition?</h3>
+<p>The first difference concerns authority: where do we finally hear the voice of God? The Catholic Church teaches that God's revelation comes to us through Scripture and through sacred Tradition together, interpreted authoritatively by the teaching office of the Church. The Reformation answered that Scripture alone is the final and unerring rule of faith &mdash; not because tradition and teaching are worthless, but because they must always be tested by the Word of God, and never set above it. Our concern is a biblical one. Jesus rebuked the leaders of His day for "laying aside the commandment of God" to "hold the tradition of men" (Mark 7:8), and warned that tradition can even make "the word of God of no effect" (Mark 7:13). Paul wrote that "all Scripture is given by inspiration of God" and is able to make the man of God "complete, thoroughly equipped for every good work" (2 Timothy 3:16-17) &mdash; complete, needing no further rule above it. And the noble Bereans were commended for testing even the apostle Paul's preaching by "search[ing] the Scriptures daily to find out whether these things were so" (Acts 17:11). We honor the great teachers of the church and learn much from them; but the Scriptures alone are the word that judges all others.</p>
+
+<h3>Justification: By Faith, or By Faith and Works?</h3>
+<p>The second difference is the deepest, for it is about the gospel itself: how is a sinner justified &mdash; declared righteous &mdash; before God? Here we must be fair. The Catholic Church does not teach that we are saved by our works apart from grace; it teaches that salvation begins with God's grace and is received through faith. But it does not teach that we are justified by faith alone. In its official teaching, justification involves grace working within us, our cooperation, the sacraments, and the good works that follow, and it can be lost by grave sin and regained through penance. The Reformation, returning to Paul, confessed that we are justified by grace through faith alone, resting on the finished work of Christ, received as a free gift and not earned by anything we do. This is not our invention; it is the plain teaching of Paul: "a man is justified by faith apart from the deeds of the law" (Romans 3:28); "to him who does not work but believes on Him who justifies the ungodly, his faith is accounted for righteousness" (Romans 4:5); "by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast" (Ephesians 2:8-9). Our Catholic friends will point to James, that "faith without works is dead" (James 2:26), and they are right that a living faith always bears the fruit of good works. But James speaks of the works that prove faith to be real, not of works that earn our standing before God; the root is faith, and the works are its fruit. To rest our acceptance on anything we add to Christ is to lose the freeness of the gift, and with it the peace it was meant to bring.</p>
+
+<h3>The Finished Work of Christ: The Mass, Purgatory, and Merit</h3>
+<p>The third difference follows closely, and concerns the sufficiency of what Christ has already done. From the one truth that Christ's sacrifice is complete flow several disagreements. In the Mass, the Catholic Church teaches that the one sacrifice of Christ is made present again upon the altar; Catholics are careful to say this is not a new sacrifice but the same one re-presented, yet our concern is that a sacrifice continually re-offered seems to dim the glory of a work already finished. For Scripture presses the word "once": Christ was offered "once to bear the sins of many" (Hebrews 9:28); "we have been sanctified through the offering of the body of Jesus Christ once for all" (Hebrews 10:10); "by one offering He has perfected forever those who are being sanctified" (Hebrews 10:14). From the cross He cried, "It is finished" (John 19:30). In the same way, the teaching of purgatory &mdash; a cleansing by suffering after death before one may enter heaven &mdash; seems to add to the cleansing that Christ's blood has already accomplished, for "the blood of Jesus Christ His Son cleanses us from all sin" (1 John 1:7), and Paul longed "to be absent from the body and to be present with the Lord" (2 Corinthians 5:8), with nothing in between. And the whole machinery of indulgences and merit, which once so troubled Martin Luther, adds human and saintly credit to an account that Christ has already paid in full. On each of these, our plea is not less honor to Christ but more: to let His finished work be truly finished.</p>
+
+<h3>Mary and the Saints</h3>
+<p>The fourth difference concerns Mary and the saints, and here especially we must be both truthful and gentle, for it touches what our people hold most tenderly. Let us be fair about what the Catholic Church actually teaches: it does not hold that Mary is God, nor that she is to be worshiped as God is worshiped. It honors her as the mother of the Lord, holds her to have been preserved from sin and taken up to heaven, and asks her and the saints to pray for us, as one might ask a living brother or sister to pray. We gladly honor Mary too: she was "blessed among women" (Luke 1:42), a woman of remarkable faith who said, "Let it be to me according to your word" (Luke 1:38), and all generations rightly call her blessed. But our concern is that devotion and prayer directed to Mary and the saints, however carefully distinguished from the worship of God, tend in practice to give to creatures what belongs to the Creator, and to place mediators between the soul and Christ where Scripture sets Christ alone: "there is one God and one Mediator between God and men, the Man Christ Jesus" (1 Timothy 2:5). We may go to Him directly, and we need no other to carry our prayers. In this land the devotion to Our Lady is bound up with the love of home and heritage, and we speak of it with all tenderness; but the greatest honor we can give the mother is to obey her own last recorded words: "Whatever He says to you, do it" (John 2:5) &mdash; that is, to go straight to her Son.</p>
+
+<h3>A Redemptive Aim</h3>
+<p>So we do not come to this church as to an enemy, but as to kindred with whom we share the great confession, and from whom we differ on how fully to rest in Christ. Our aim is redemptive, and it is the same for the Catholic who loves the Lord and for the many who are leaving that church for evangelical faith, as so many in our own congregations have done: that all of us would come to rest, wholly and restfully, on the finished work of Christ, and receive the righteousness of God as the free gift it is. To those who are troubled by an account never quite paid, by a heaven never quite certain, we hold out the word of the gospel: "having been justified by faith, we have peace with God through our Lord Jesus Christ" (Romans 5:1). We honor our Catholic neighbors, we rejoice in all that we share, we refuse to caricature or to scorn, and we long, in love, for every one of them to know the peace that comes from resting in Christ alone.</p>
+<div class="scripture">"Therefore, having been justified by faith, we have peace with God through our Lord Jesus Christ." &mdash; Romans 5:1 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto base: Efesios 2:8-9; Romanos 3:28; Hebreos 10:14; 1 Timoteo 2:5 (RVG)</strong></p>
+<div class="scripture">"Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se gloríe." &mdash; Efesios 2:8-9 (RVG)</div>
+
+<h3>Una Palabra Antes de Comenzar</h3>
+<p>Esta unidad es diferente de toda unidad anterior, y debemos decirlo desde el principio. La Iglesia Católica Romana no es una secta. Confiesa la Trinidad, la plena deidad de Cristo, su nacimiento virginal, su muerte expiatoria, y su resurrección corporal; sostiene los credos antiguos que nosotros mismos sostenemos; y dentro de ella hay muchos millones que aman al Señor Jesús y confían en Él. En esta tierra sobre todo, la Iglesia Católica está entretejida en la historia, la familia, y el corazón de nuestro pueblo, y no hablamos de ella a la ligera ni desde afuera. Muchos de nosotros venimos de ella; muchos de los que amamos permanecen en ella. Así que venimos a este tema no como extraños atacando a un rival, sino como miembros de la misma familia que anhelan verse unos a otros descansar plenamente en Cristo. Nuestro fin no es burlarnos de lo que es querido para nuestros prójimos, ni fingir que las diferencias no importan, sino honrar lo que compartimos, hablar honesta y suavemente acerca de dónde diferimos, y señalar a todos &mdash; católicos y evangélicos por igual &mdash; a la obra consumada de Cristo. (Una palabra sobre lo que esta unidad no es: trata la enseñanza oficial de la Iglesia Católica, no las prácticas populares que han crecido alrededor de ella, que consideraremos por separado en la próxima unidad.)</p>
+
+<h3>Lo Que Compartimos</h3>
+<p>Antes de hablar de cualquier diferencia, debemos decir claramente cuánto compartimos, pues es mucho, y la honestidad nos exige comenzar aquí. Con los católicos romanos confesamos un solo Dios que existe eternamente en tres Personas, el Padre, el Hijo, y el Espíritu Santo. Confesamos que Jesucristo es verdaderamente Dios y verdaderamente hombre, concebido por el Espíritu Santo y nacido de la virgen María, que murió por nuestros pecados, resucitó corporalmente de la tumba, ascendió al Padre, y vendrá otra vez. Sostenemos los mismos Credos de los Apóstoles y Niceno, y recibimos el mismo Nuevo Testamento como la Palabra de Dios. Concordamos en que todos han pecado, que nadie puede ser salvo aparte de la gracia de Dios y la obra de Cristo, y que la fe es necesaria. Estas no son cosas pequeñas; son las grandes cosas, el corazón mismo de la fe cristiana, y en ellas estamos juntos contra toda forma de incredulidad. Cualquier cosa que pasemos a decir, que nunca se olvide que la decimos a quienes confiesan con nosotros que Jesús es el Señor.</p>
+
+<h3>Dónde Diferimos, y Por Qué Importa</h3>
+<p>Y sin embargo hay diferencias reales, y algunas de ellas tocan el evangelio mismo, de modo que no podemos tratarlas como si no importaran. Se agrupan en torno a una sola pregunta, la pregunta que una vez dividió a la iglesia en la Reforma y la divide todavía: ¿cómo es hecho justo un pecador delante de Dios, y dónde descansa para su salvación? Los Reformadores no dudaron de que los católicos creían en Cristo y en la gracia; su preocupación era que ciertas enseñanzas, por sinceramente que se sostuvieran, añadían a la obra consumada de Cristo cosas que solo podían oscurecerla &mdash; tradición humana junto a la Escritura, obras humanas junto a la fe, y mérito humano y de los santos junto al mérito de Cristo. Tomamos cuatro de estas: la cuestión de la autoridad, la cuestión de la justificación, la cuestión de la obra consumada de Cristo, y el lugar de María y los santos. Las examinamos no como una religión diferente, sino como un desacuerdo de familia acerca de cuán plenamente descansar en Cristo solo.</p>
+
+<h3>La Autoridad: ¿La Escritura, o la Escritura y la Tradición?</h3>
+<p>La primera diferencia concierne a la autoridad: ¿dónde oímos finalmente la voz de Dios? La Iglesia Católica enseña que la revelación de Dios nos llega por medio de la Escritura y por medio de la Tradición sagrada juntas, interpretadas con autoridad por el oficio de enseñanza de la Iglesia. La Reforma respondió que la Escritura sola es la regla final e infalible de la fe &mdash; no porque la tradición y la enseñanza carezcan de valor, sino porque siempre deben ser probadas por la Palabra de Dios, y nunca puestas por encima de ella. Nuestra preocupación es bíblica. Jesús reprendió a los líderes de su día por "dejando el mandamiento de Dios" para "tener la tradición de los hombres" (Marcos 7:8), y advirtió que la tradición puede aun "invalidar la palabra de Dios" (Marcos 7:13). Pablo escribió que "toda Escritura es dada por inspiración de Dios" y puede hacer al hombre de Dios "perfecto, enteramente preparado para toda buena obra" (2 Timoteo 3:16-17) &mdash; perfecto, sin necesitar otra regla por encima de ella. Y los nobles bereanos fueron elogiados por probar aun la predicación del apóstol Pablo, "escudriñando cada día las Escrituras para ver si estas cosas eran así" (Hechos 17:11). Honramos a los grandes maestros de la iglesia y aprendemos mucho de ellos; pero las Escrituras solas son la palabra que juzga a todas las demás.</p>
+
+<h3>La Justificación: ¿Por Fe, o Por Fe y Obras?</h3>
+<p>La segunda diferencia es la más profunda, pues es acerca del evangelio mismo: ¿cómo es justificado &mdash; declarado justo &mdash; un pecador delante de Dios? Aquí debemos ser justos. La Iglesia Católica no enseña que somos salvos por nuestras obras aparte de la gracia; enseña que la salvación comienza con la gracia de Dios y se recibe por la fe. Pero no enseña que somos justificados por la fe sola. En su enseñanza oficial, la justificación involucra la gracia obrando dentro de nosotros, nuestra cooperación, los sacramentos, y las buenas obras que siguen, y puede perderse por pecado grave y recobrarse por la penitencia. La Reforma, volviendo a Pablo, confesó que somos justificados por gracia mediante la fe sola, descansando en la obra consumada de Cristo, recibida como don gratuito y no ganada por nada que hagamos. Esto no es invención nuestra; es la enseñanza clara de Pablo: "el hombre es justificado por fe, sin las obras de la ley" (Romanos 3:28); "al que no obra, sino cree en aquel que justifica al impío, su fe le es contada por justicia" (Romanos 4:5); "por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se gloríe" (Efesios 2:8-9). Nuestros amigos católicos señalarán a Santiago, que "la fe sin obras está muerta" (Santiago 2:26), y tienen razón en que una fe viva siempre lleva el fruto de buenas obras. Pero Santiago habla de las obras que prueban que la fe es real, no de obras que ganan nuestra posición delante de Dios; la raíz es la fe, y las obras son su fruto. Descansar nuestra aceptación en cualquier cosa que añadamos a Cristo es perder la gratuidad del don, y con ella la paz que estaba destinada a traer.</p>
+
+<h3>La Obra Consumada de Cristo: La Misa, el Purgatorio, y el Mérito</h3>
+<p>La tercera diferencia sigue de cerca, y concierne a la suficiencia de lo que Cristo ya ha hecho. De la única verdad de que el sacrificio de Cristo es completo fluyen varios desacuerdos. En la Misa, la Iglesia Católica enseña que el único sacrificio de Cristo se hace presente otra vez sobre el altar; los católicos tienen cuidado de decir que esto no es un nuevo sacrificio sino el mismo re-presentado, pero nuestra preocupación es que un sacrificio continuamente re-ofrecido parece atenuar la gloria de una obra ya consumada. Pues la Escritura recalca la palabra "una vez": Cristo fue ofrecido "una sola vez para llevar los pecados de muchos" (Hebreos 9:28); "somos santificados mediante la ofrenda del cuerpo de Jesucristo hecha una sola vez" (Hebreos 10:10); "con una sola ofrenda hizo perfectos para siempre a los santificados" (Hebreos 10:14). Desde la cruz clamó: "Consumado es" (Juan 19:30). De igual manera, la enseñanza del purgatorio &mdash; una limpieza por sufrimiento después de la muerte antes de poder entrar al cielo &mdash; parece añadir a la limpieza que la sangre de Cristo ya ha logrado, pues "la sangre de Jesucristo su Hijo nos limpia de todo pecado" (1 Juan 1:7), y Pablo anhelaba "estar ausentes del cuerpo, y presentes al Señor" (2 Corintios 5:8), sin nada en medio. Y toda la maquinaria de las indulgencias y los méritos, que una vez tanto turbó a Martín Lutero, añade crédito humano y de los santos a una cuenta que Cristo ya ha pagado por completo. En cada una de estas, nuestra súplica no es menos honra a Cristo sino más: dejar que su obra consumada esté verdaderamente consumada.</p>
+
+<h3>María y los Santos</h3>
+<p>La cuarta diferencia concierne a María y los santos, y aquí especialmente debemos ser a la vez veraces y suaves, pues toca lo que nuestro pueblo sostiene más tiernamente. Seamos justos acerca de lo que la Iglesia Católica realmente enseña: no sostiene que María sea Dios, ni que deba ser adorada como Dios es adorado. La honra como la madre del Señor, la sostiene haber sido preservada del pecado y llevada al cielo, y le pide a ella y a los santos que oren por nosotros, como uno podría pedir a un hermano o hermana vivo que ore. Con gusto honramos también a María: fue "bendita entre las mujeres" (Lucas 1:42), una mujer de fe notable que dijo: "Hágase conmigo conforme a tu palabra" (Lucas 1:38), y todas las generaciones con razón la llaman bienaventurada. Pero nuestra preocupación es que la devoción y la oración dirigidas a María y a los santos, por cuidadosamente que se distingan de la adoración de Dios, tienden en la práctica a dar a las criaturas lo que pertenece al Creador, y a colocar mediadores entre el alma y Cristo donde la Escritura pone a Cristo solo: "hay un solo Dios, y un solo mediador entre Dios y los hombres, Jesucristo hombre" (1 Timoteo 2:5). Podemos ir a Él directamente, y no necesitamos otro que lleve nuestras oraciones. En esta tierra la devoción a Nuestra Señora está ligada al amor del hogar y la herencia, y hablamos de ella con toda ternura; pero la mayor honra que podemos dar a la madre es obedecer sus propias últimas palabras registradas: "Haced todo lo que os dijere" (Juan 2:5) &mdash; es decir, ir directamente a su Hijo.</p>
+
+<h3>Un Fin Redentor</h3>
+<p>Así que no venimos a esta iglesia como a un enemigo, sino como a parientes con quienes compartimos la gran confesión, y de quienes diferimos en cuán plenamente descansar en Cristo. Nuestro fin es redentor, y es el mismo para el católico que ama al Señor y para los muchos que están dejando esa iglesia por la fe evangélica, como tantos en nuestras propias congregaciones lo han hecho: que todos nosotros lleguemos a descansar, entera y reposadamente, en la obra consumada de Cristo, y recibamos la justicia de Dios como el don gratuito que es. A los que están turbados por una cuenta nunca del todo pagada, por un cielo nunca del todo seguro, les extendemos la palabra del evangelio: "justificados, pues, por la fe, tenemos paz para con Dios por medio de nuestro Señor Jesucristo" (Romanos 5:1). Honramos a nuestros prójimos católicos, nos gozamos en todo lo que compartimos, rehusamos caricaturizar o despreciar, y anhelamos, en amor, que cada uno de ellos conozca la paz que viene de descansar en Cristo solo.</p>
+<div class="scripture">"Justificados, pues, por la fe, tenemos paz para con Dios por medio de nuestro Señor Jesucristo." &mdash; Romanos 5:1 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 8 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 8 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Cults & World Religions — Unit 8 (Roman Catholicism)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 8;
+const COURSE = 'cults';
+const NEXT_UNIT_URL = 'CTSCultsUnit9.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - What Is a Cult? The Biblical Test", "Unit 2 - The Trinity and the Deity of Christ", "Unit 3 - Jehovah's Witnesses", "Unit 4 - The Latter-day Saints", "Unit 5 - The Prosperity Gospel", "Unit 6 - Progressive Revelation: Islam and Baha'i", "Unit 7 - Eastern Religions: Hinduism and Buddhism", "Unit 8 - Roman Catholicism", "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism", "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCultsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. According to this unit, the Roman Catholic Church is:", "textEs": "1. Según esta unidad, la Iglesia Católica Romana es:", "optionsEn": ["A cult with a false Christ", "Not a cult; it confesses the Trinity, the deity of Christ, and the historic creeds", "A world religion like Islam", "Identical to evangelical churches in every way"], "optionsEs": ["Una secta con un Cristo falso", "No una secta; confiesa la Trinidad, la deidad de Cristo, y los credos históricos", "Una religión del mundo como el islam", "Idéntica a las iglesias evangélicas en todo"], "explanationEn": "Rome is not a cult; it holds the Trinity, the deity of Christ, and the historic creeds — so this unit is different.", "explanationEs": "Roma no es una secta; sostiene la Trinidad, la deidad de Cristo, y los credos históricos — por eso esta unidad es diferente.", "correct": 1}, {"textEn": "2. The right posture of this unit toward Catholics is:", "textEs": "2. La postura correcta de esta unidad hacia los católicos es:", "optionsEn": ["Mockery", "Suspicion", "To honor what we share and speak gently about where we differ", "To ignore the differences entirely"], "optionsEs": ["La burla", "La sospecha", "Honrar lo que compartimos y hablar suavemente de dónde diferimos", "Ignorar las diferencias por completo"], "explanationEn": "We honor the common ground and speak honestly but gently about real differences.", "explanationEs": "Honramos lo común y hablamos honesta pero suavemente de las diferencias reales.", "correct": 2}, {"textEn": "3. Which of these does this unit list as common ground shared with Catholics?", "textEs": "3. ¿Cuál de estas menciona esta unidad como terreno común compartido con los católicos?", "optionsEn": ["The Trinity, the deity of Christ, the bodily resurrection, and the creeds", "Purgatory", "Indulgences", "Prayer to the saints"], "optionsEs": ["La Trinidad, la deidad de Cristo, la resurrección corporal, y los credos", "El purgatorio", "Las indulgencias", "La oración a los santos"], "explanationEn": "On the great truths — the Trinity, the deity of Christ, the resurrection, the creeds — we stand together.", "explanationEs": "En las grandes verdades — la Trinidad, la deidad de Cristo, la resurrección, los credos — estamos juntos.", "correct": 0}, {"textEn": "4. The differences with Rome gather mainly around one question:", "textEs": "4. Las diferencias con Roma se agrupan principalmente en torno a una pregunta:", "optionsEn": ["Which language to worship in", "How a sinner is made right with God and where he rests for salvation", "The date of Easter", "Church architecture"], "optionsEs": ["En qué idioma adorar", "Cómo es hecho justo un pecador delante de Dios y dónde descansa para su salvación", "La fecha de la Pascua", "La arquitectura de la iglesia"], "explanationEn": "The differences gather around how a sinner is justified and where he rests for salvation.", "explanationEs": "Las diferencias se agrupan en torno a cómo es justificado un pecador y dónde descansa para su salvación.", "correct": 1}, {"textEn": "5. On authority, the Catholic Church teaches that God's revelation comes through:", "textEs": "5. Sobre la autoridad, la Iglesia Católica enseña que la revelación de Dios viene por medio de:", "optionsEn": ["Scripture alone", "Tradition alone", "Reason alone", "Scripture and sacred Tradition together, interpreted by the Church's teaching office"], "optionsEs": ["La Escritura sola", "La tradición sola", "La razón sola", "La Escritura y la Tradición sagrada juntas, interpretadas por el oficio de enseñanza de la Iglesia"], "explanationEn": "Rome holds Scripture and Tradition together, interpreted by the Church's teaching office.", "explanationEs": "Roma sostiene la Escritura y la Tradición juntas, interpretadas por el oficio de enseñanza de la Iglesia.", "correct": 3}, {"textEn": "6. The Reformation answered that the final, unerring rule of faith is:", "textEs": "6. La Reforma respondió que la regla final e infalible de la fe es:", "optionsEn": ["Scripture alone, by which all tradition must be tested", "The Pope", "Church councils", "Private feelings"], "optionsEs": ["La Escritura sola, por la cual toda tradición debe ser probada", "El Papa", "Los concilios de la iglesia", "Los sentimientos privados"], "explanationEn": "Scripture alone is the final rule, by which tradition and teaching must always be tested.", "explanationEs": "La Escritura sola es la regla final, por la cual la tradición y la enseñanza siempre deben ser probadas.", "correct": 0}, {"textEn": "7. Jesus warned in Mark 7 that human tradition can:", "textEs": "7. Jesús advirtió en Marcos 7 que la tradición humana puede:", "optionsEn": ["Improve the Scriptures", "Make 'the word of God of no effect'", "Replace the Sabbath", "Save us"], "optionsEs": ["Mejorar las Escrituras", "'Invalidar la palabra de Dios'", "Reemplazar el día de reposo", "Salvarnos"], "explanationEn": "Jesus warned that tradition can make the word of God of no effect (Mark 7:13).", "explanationEs": "Jesús advirtió que la tradición puede invalidar la palabra de Dios (Marcos 7:13).", "correct": 1}, {"textEn": "8. 2 Timothy 3:16-17 says Scripture is able to make the man of God:", "textEs": "8. 2 Timoteo 3:16-17 dice que la Escritura puede hacer al hombre de Dios:", "optionsEn": ["Complete, thoroughly equipped for every good work", "Wealthy", "Famous", "Sinless in himself"], "optionsEs": ["Perfecto, enteramente preparado para toda buena obra", "Rico", "Famoso", "Sin pecado en sí mismo"], "explanationEn": "Scripture makes the man of God complete and equipped — needing no further rule above it.", "explanationEs": "La Escritura hace al hombre de Dios perfecto y preparado — sin necesitar otra regla por encima.", "correct": 0}, {"textEn": "9. On justification, this unit states fairly that the Catholic Church:", "textEs": "9. Sobre la justificación, esta unidad expone justamente que la Iglesia Católica:", "optionsEn": ["Teaches salvation by works with no grace at all", "Denies that Jesus existed", "Teaches grace and faith, but not faith alone — justification also involves works and the sacraments and can be lost", "Agrees fully with the Reformation"], "optionsEs": ["Enseña la salvación por obras sin gracia alguna", "Niega que Jesús existiera", "Enseña gracia y fe, pero no la fe sola — la justificación también involucra obras y sacramentos y puede perderse", "Concuerda plenamente con la Reforma"], "explanationEn": "Fairly stated: Rome teaches grace and faith, but not faith alone; justification involves works and can be lost.", "explanationEs": "Justamente expuesto: Roma enseña gracia y fe, pero no la fe sola; la justificación involucra obras y puede perderse.", "correct": 2}, {"textEn": "10. The Reformation (and this course) confesses that we are justified:", "textEs": "10. La Reforma (y este curso) confiesa que somos justificados:", "optionsEn": ["By grace through faith alone, resting on the finished work of Christ, as a free gift", "By our works", "By the sacraments", "By our own merit"], "optionsEs": ["Por gracia mediante la fe sola, descansando en la obra consumada de Cristo, como don gratuito", "Por nuestras obras", "Por los sacramentos", "Por nuestro propio mérito"], "explanationEn": "We are justified by grace through faith alone, resting on Christ's finished work, as a free gift.", "explanationEs": "Somos justificados por gracia mediante la fe sola, descansando en la obra consumada de Cristo, como don gratuito.", "correct": 0}, {"textEn": "11. Romans 4:5 says that to the one who 'does not work but believes on Him who justifies the ungodly,' his faith is:", "textEs": "11. Romanos 4:5 dice que al que 'no obra, sino cree en aquel que justifica al impío', su fe le es:", "optionsEn": ["Rewarded only later", "Accounted for righteousness", "Incomplete without works", "Mixed with works"], "optionsEs": ["Recompensada solo después", "Contada por justicia", "Incompleta sin obras", "Mezclada con obras"], "explanationEn": "Faith is accounted for righteousness to the one who believes without working for it.", "explanationEs": "La fe le es contada por justicia al que cree sin obrar para ganarla.", "correct": 1}, {"textEn": "12. When Catholics cite James ('faith without works is dead'), this unit answers that James speaks of:", "textEs": "12. Cuando los católicos citan a Santiago ('la fe sin obras está muerta'), esta unidad responde que Santiago habla de:", "optionsEn": ["The works that prove faith is real — the fruit, not the root", "Works that earn salvation", "A different gospel", "The sacraments"], "optionsEs": ["Las obras que prueban que la fe es real — el fruto, no la raíz", "Obras que ganan la salvación", "Un evangelio diferente", "Los sacramentos"], "explanationEn": "James means the works that prove faith real; the root is faith, and works are its fruit.", "explanationEs": "Santiago se refiere a las obras que prueban que la fe es real; la raíz es la fe, y las obras son su fruto.", "correct": 0}, {"textEn": "13. In the Mass, the Catholic Church teaches that Christ's one sacrifice is:", "textEs": "13. En la Misa, la Iglesia Católica enseña que el único sacrificio de Cristo es:", "optionsEn": ["Repeated as a brand-new sacrifice each time", "Forgotten", "Merely symbolic with no meaning", "Made present again on the altar (they say re-presented, not a new sacrifice)"], "optionsEs": ["Repetido como un sacrificio totalmente nuevo cada vez", "Olvidado", "Meramente simbólico sin significado", "Hecho presente otra vez sobre el altar (dicen re-presentado, no un nuevo sacrificio)"], "explanationEn": "Fairly stated: Catholics say the one sacrifice is made present (re-presented), not a new sacrifice.", "explanationEs": "Justamente expuesto: los católicos dicen que el único sacrificio se hace presente (re-presentado), no un nuevo sacrificio.", "correct": 3}, {"textEn": "14. Against a continually re-offered sacrifice, Hebrews stresses the word:", "textEs": "14. Contra un sacrificio continuamente re-ofrecido, Hebreos recalca la palabra:", "optionsEn": ["'Many'", "'Once' — Christ was offered once for all", "'Weekly'", "'Almost'"], "optionsEs": ["'Muchas'", "'Una vez' — Cristo fue ofrecido una sola vez para siempre", "'Semanal'", "'Casi'"], "explanationEn": "Hebrews presses 'once': Christ was offered once for all (Hebrews 10:10).", "explanationEs": "Hebreos recalca 'una vez': Cristo fue ofrecido una sola vez para siempre (Hebreos 10:10).", "correct": 1}, {"textEn": "15. Hebrews 10:14 says that 'by one offering He has':", "textEs": "15. Hebreos 10:14 dice que 'con una sola ofrenda hizo':", "optionsEn": ["Begun a long process", "Purchased purgatory", "Perfected forever those who are being sanctified", "Failed"], "optionsEs": ["Comenzado un largo proceso", "Comprado el purgatorio", "Perfectos para siempre a los santificados", "Fracasado"], "explanationEn": "By one offering Christ has perfected forever those who are being sanctified.", "explanationEs": "Con una sola ofrenda Cristo hizo perfectos para siempre a los santificados.", "correct": 2}, {"textEn": "16. The teaching of purgatory seems to add to the cleansing Christ has already done, but 1 John 1:7 says:", "textEs": "16. La enseñanza del purgatorio parece añadir a la limpieza que Cristo ya ha hecho, pero 1 Juan 1:7 dice:", "optionsEn": ["We must suffer first", "The saints cleanse us", "Time cleanses us", "The blood of Jesus Christ cleanses us from all sin"], "optionsEs": ["Debemos sufrir primero", "Los santos nos limpian", "El tiempo nos limpia", "La sangre de Jesucristo nos limpia de todo pecado"], "explanationEn": "The blood of Christ cleanses us from all sin — a full cleansing, needing no purgatory.", "explanationEs": "La sangre de Cristo nos limpia de todo pecado — una limpieza plena, sin necesitar purgatorio.", "correct": 3}, {"textEn": "17. On Mary, this unit fairly notes that the Catholic Church:", "textEs": "17. Sobre María, esta unidad nota justamente que la Iglesia Católica:", "optionsEn": ["Says Mary is God", "Worships Mary exactly as God is worshiped", "Does not hold Mary to be God, but honors her and asks her to pray for us", "Ignores Mary entirely"], "optionsEs": ["Dice que María es Dios", "Adora a María exactamente como se adora a Dios", "No sostiene que María sea Dios, pero la honra y le pide que ore por nosotros", "Ignora a María por completo"], "explanationEn": "Fairly stated: Rome does not hold Mary to be God, but honors her and asks her intercession.", "explanationEs": "Justamente expuesto: Roma no sostiene que María sea Dios, pero la honra y pide su intercesión.", "correct": 2}, {"textEn": "18. The biblical concern about prayer to Mary and the saints is that Scripture sets Christ alone as:", "textEs": "18. La preocupación bíblica sobre la oración a María y los santos es que la Escritura pone a Cristo solo como:", "optionsEn": ["A good example only", "One mediator among several", "Someone unreachable without help", "The one Mediator between God and men (1 Timothy 2:5)"], "optionsEs": ["Solo un buen ejemplo", "Un mediador entre varios", "Alguien inalcanzable sin ayuda", "El único mediador entre Dios y los hombres (1 Timoteo 2:5)"], "explanationEn": "Scripture sets Christ alone as the one Mediator between God and men; we may go to Him directly.", "explanationEs": "La Escritura pone a Cristo solo como el único mediador entre Dios y los hombres; podemos ir a Él directamente.", "correct": 3}, {"textEn": "19. This unit says the greatest honor we can give Mary is to obey her own last recorded words (John 2:5):", "textEs": "19. Esta unidad dice que la mayor honra que podemos dar a María es obedecer sus propias últimas palabras registradas (Juan 2:5):", "optionsEn": ["'Pray to me'", "'Honor the saints'", "'Whatever He says to you, do it' — go straight to her Son", "'Keep the traditions'"], "optionsEs": ["'Orad a mí'", "'Honrad a los santos'", "'Haced todo lo que os dijere' — ir directamente a su Hijo", "'Guardad las tradiciones'"], "explanationEn": "Mary's own last recorded words point us to her Son: 'Whatever He says to you, do it.'", "explanationEs": "Las propias últimas palabras registradas de María nos señalan a su Hijo: 'Haced todo lo que os dijere.'", "correct": 2}, {"textEn": "20. The redemptive aim of the unit is that Catholics and evangelicals alike would:", "textEs": "20. El fin redentor de la unidad es que católicos y evangélicos por igual:", "optionsEn": ["Argue forever", "Merge into one institution", "Abandon all doctrine", "Rest wholly on the finished work of Christ and receive righteousness as a free gift by faith"], "optionsEs": ["Discutan para siempre", "Se fusionen en una sola institución", "Abandonen toda doctrina", "Descansen enteramente en la obra consumada de Cristo y reciban la justicia como don gratuito por la fe"], "explanationEn": "The aim is that all would rest wholly on Christ's finished work and receive righteousness by faith.", "explanationEs": "El fin es que todos descansen enteramente en la obra consumada de Cristo y reciban la justicia por la fe.", "correct": 3}];
+
+const kwQuestions = [{"textEn": "21. Explain why this unit treats the Roman Catholic Church differently from the cults, and name the common ground we share.", "textEs": "21. Explique por qué esta unidad trata a la Iglesia Católica Romana de manera diferente a las sectas, y nombre el terreno común que compartimos.", "kw_en": ["cult", "trinity", "deity", "creeds", "christ", "share", "common", "resurrection"], "kw_es": ["secta", "trinidad", "deidad", "credos", "cristo", "comparti", "juntos", "resurrecci"], "modelEn": "This unit treats the Roman Catholic Church differently from the cults because Rome is not a cult. Unlike the groups that give us a different Christ, the Catholic Church confesses the Trinity, the full deity of Christ, His virgin birth, His atoning death, and His bodily resurrection, and it holds the same ancient creeds we hold. We share a great deal: one God in three Persons, the true deity and humanity of Christ, the same New Testament as the Word of God, and the truth that all have sinned and none can be saved apart from grace. These are the great things, the heart of the faith, and on them we stand together. So we come not as strangers attacking a rival religion, but as family who share the core and differ on how fully to rest in Christ.", "modelEs": "Esta unidad trata a la Iglesia Católica Romana de manera diferente a las sectas porque Roma no es una secta. A diferencia de los grupos que nos dan un Cristo diferente, la Iglesia Católica confiesa la Trinidad, la plena deidad de Cristo, su nacimiento virginal, su muerte expiatoria, y su resurrección corporal, y sostiene los mismos credos antiguos que nosotros sostenemos. Compartimos mucho: un solo Dios en tres Personas, la verdadera deidad y humanidad de Cristo, el mismo Nuevo Testamento como la Palabra de Dios, y la verdad de que todos han pecado y nadie puede ser salvo aparte de la gracia. Estas son las grandes cosas, el corazón de la fe, y en ellas estamos juntos. Así que venimos no como extraños atacando una religión rival, sino como familia que comparte el núcleo y difiere en cuán plenamente descansar en Cristo."}, {"textEn": "22. State fairly the Catholic view of authority (Scripture and Tradition), and give the biblical case for Scripture as the final rule.", "textEs": "22. Exponga justamente la visión católica de la autoridad (la Escritura y la Tradición), y dé el caso bíblico para la Escritura como la regla final.", "kw_en": ["scripture", "tradition", "authority", "church", "final", "test", "complete", "word"], "kw_es": ["escritura", "tradici", "autoridad", "iglesia", "final", "probar", "completo", "palabra"], "modelEn": "The Catholic Church teaches that God's authority reaches us through Scripture and sacred Tradition together, interpreted authoritatively by the teaching office of the Church. We should state this fairly: Rome does not despise the Bible, but places Tradition and the Church's teaching alongside it. The Reformation answered that Scripture alone is the final and unerring rule, not because tradition is worthless, but because it must always be tested by the Word of God and never set above it. Jesus warned that human tradition can make the word of God of no effect, Paul said Scripture makes the man of God complete and equipped for every good work, and the Bereans tested even Paul's preaching by the Scriptures. So we honor teachers and tradition, yet the Scriptures alone are the final authority that judges all others.", "modelEs": "La Iglesia Católica enseña que la autoridad de Dios nos llega por medio de la Escritura y la Tradición sagrada juntas, interpretadas con autoridad por el oficio de enseñanza de la Iglesia. Debemos exponer esto justamente: Roma no desprecia la Biblia, sino que coloca la Tradición y la enseñanza de la Iglesia junto a ella. La Reforma respondió que la Escritura sola es la regla final e infalible, no porque la tradición carezca de valor, sino porque siempre debe ser probada por la Palabra de Dios y nunca puesta por encima. Jesús advirtió que la tradición humana puede invalidar la palabra de Dios, Pablo dijo que la Escritura hace al hombre de Dios completo y preparado para toda buena obra, y los bereanos probaron aun la predicación de Pablo por las Escrituras. Así que honramos a los maestros y la tradición, y sin embargo las Escrituras solas son la autoridad final que juzga a todas las demás."}, {"textEn": "23. State fairly the Catholic view of justification, and explain the biblical teaching of justification by faith alone.", "textEs": "23. Exponga justamente la visión católica de la justificación, y explique la enseñanza bíblica de la justificación por la fe sola.", "kw_en": ["justification", "faith", "works", "grace", "alone", "gift", "christ", "righteousness"], "kw_es": ["justificaci", "fe", "obras", "gracia", "sola", "don", "cristo", "justicia"], "modelEn": "We must be fair: the Catholic Church does not teach salvation by works apart from grace. It teaches that justification begins with God's grace and is received through faith, but not through faith alone; justification also involves grace working within us, our cooperation, the sacraments, and the good works that follow, and it can be lost by grave sin and regained through penance. The Reformation, returning to Paul, confessed justification by grace through faith alone, resting on the finished work of Christ and received as a free gift. Paul says a man is justified by faith apart from the deeds of the law, and that to the one who does not work but believes, his faith is accounted for righteousness. So the sinner is declared righteous not by works added to faith, but by grace through faith alone, receiving the righteousness of God as a gift in Christ.", "modelEs": "Debemos ser justos: la Iglesia Católica no enseña la salvación por obras aparte de la gracia. Enseña que la justificación comienza con la gracia de Dios y se recibe por la fe, pero no por la fe sola; la justificación también involucra la gracia obrando dentro de nosotros, nuestra cooperación, los sacramentos, y las buenas obras que siguen, y puede perderse por pecado grave y recobrarse por la penitencia. La Reforma, volviendo a Pablo, confesó la justificación por gracia mediante la fe sola, descansando en la obra consumada de Cristo y recibida como don gratuito. Pablo dice que el hombre es justificado por fe, sin las obras de la ley, y que al que no obra, sino cree, su fe le es contada por justicia. Así que el pecador es declarado justo no por obras añadidas a la fe, sino por gracia mediante la fe sola, recibiendo la justicia de Dios como don en Cristo."}, {"textEn": "24. Explain how we answer the appeal to James ('faith without works is dead') while holding to justification by faith alone.", "textEs": "24. Explique cómo respondemos a la apelación a Santiago ('la fe sin obras está muerta') mientras sostenemos la justificación por la fe sola.", "kw_en": ["james", "faith", "works", "dead", "fruit", "root", "real", "justify"], "kw_es": ["santiago", "fe", "obras", "muerta", "fruto", "fundamento", "real", "prueba"], "modelEn": "Our Catholic friends rightly point to James, that faith without works is dead, and we agree that a living faith always bears the fruit of good works. But James is speaking of the works that prove a faith to be real and alive, not of works that earn our standing before God. A faith that produces no works is shown to be dead, a mere claim; a true faith shows itself in obedience and love. So the works are the evidence and fruit of saving faith, not its foundation. The root is faith, resting on Christ, and the works grow from that root. To make the works the ground of our justification would be to add to Christ and lose the free gift; but to expect works as the fruit of true faith is exactly what Scripture teaches. So we hold faith alone at the root, and a working faith as its proof.", "modelEs": "Nuestros amigos católicos con razón señalan a Santiago, que la fe sin obras está muerta, y concordamos en que una fe viva siempre lleva el fruto de buenas obras. Pero Santiago habla de las obras que prueban que una fe es real y viva, no de obras que ganan nuestra posición delante de Dios. Una fe que no produce obras se muestra muerta, una mera declaración; una fe verdadera se muestra en obediencia y amor. Así que las obras son la evidencia y el fruto de la fe salvadora, no su fundamento. La raíz es la fe, descansando en Cristo, y las obras crecen de esa raíz. Hacer de las obras el fundamento de nuestra justificación sería añadir a Cristo y perder el don gratuito; pero esperar obras como el fruto de la fe verdadera es exactamente lo que la Escritura enseña. Así que sostenemos la fe sola en el fundamento, y una fe que obra como su prueba."}, {"textEn": "25. Explain the biblical concern about the Mass and purgatory, using the 'once for all' of Hebrews and 'it is finished.'", "textEs": "25. Explique la preocupación bíblica sobre la Misa y el purgatorio, usando el 'una vez para siempre' de Hebreos y 'consumado es.'", "kw_en": ["mass", "sacrifice", "once", "finished", "purgatory", "blood", "perfected", "christ"], "kw_es": ["misa", "sacrificio", "una", "consumado", "purgatorio", "sangre", "perfecto", "cristo"], "modelEn": "In the Mass, the Catholic Church teaches that the one sacrifice of Christ is made present again on the altar, and although Catholics say this is the same sacrifice re-presented and not a new one, our concern is that a sacrifice continually re-offered seems to dim the glory of a finished work. Hebrews presses the word once: Christ was offered once to bear the sins of many, and by one offering He has perfected forever those who are being sanctified. From the cross He cried, it is finished. In the same way, purgatory, a cleansing by suffering after death, seems to add to the cleansing Christ's blood has already accomplished, for the blood of Jesus Christ cleanses us from all sin, and to be absent from the body is to be present with the Lord. So our plea is not less honor to Christ but more: to let His finished sacrifice be truly finished, and His cleansing be truly complete.", "modelEs": "En la Misa, la Iglesia Católica enseña que el único sacrificio de Cristo se hace presente otra vez sobre el altar, y aunque los católicos dicen que es el mismo sacrificio re-presentado y no uno nuevo, nuestra preocupación es que un sacrificio continuamente re-ofrecido parece atenuar la gloria de una obra consumada. Hebreos recalca la palabra una vez: Cristo fue ofrecido una sola vez para llevar los pecados de muchos, y con una sola ofrenda hizo perfectos para siempre a los santificados. Desde la cruz clamó, consumado es. De igual manera, el purgatorio, una limpieza por sufrimiento después de la muerte, parece añadir a la limpieza que la sangre de Cristo ya ha logrado, pues la sangre de Jesucristo nos limpia de todo pecado, y estar ausentes del cuerpo es estar presentes al Señor. Así que nuestra súplica no es menos honra a Cristo sino más: dejar que su sacrificio consumado esté verdaderamente consumado, y su limpieza sea verdaderamente completa."}, {"textEn": "26. State fairly what the Catholic Church teaches about Mary and the saints, and give the biblical concern.", "textEs": "26. Exponga justamente lo que la Iglesia Católica enseña acerca de María y los santos, y dé la preocupación bíblica.", "kw_en": ["mary", "saints", "venerate", "worship", "mediator", "pray", "christ", "one"], "kw_es": ["maria", "santos", "venera", "adora", "mediador", "orar", "cristo", "uno"], "modelEn": "We must be fair about what the Catholic Church actually teaches. It does not hold that Mary is God, nor that she is worshiped as God is worshiped; it honors and venerates her as the mother of the Lord, holds her to have been preserved from sin and taken to heaven, and asks her and the saints to pray for us, as one might ask a living believer to pray. So Catholics distinguish veneration from worship. Our concern is that devotion and prayer directed to Mary and the saints, however carefully distinguished, tend in practice to give to creatures what belongs to the Creator, and to place mediators between the soul and Christ. But Scripture says there is one God and one Mediator between God and men, the Man Christ Jesus. We may go to Him directly and need no other to carry our prayers. So we honor the biblical Mary while directing worship and prayer to God alone through Christ.", "modelEs": "Debemos ser justos acerca de lo que la Iglesia Católica realmente enseña. No sostiene que María sea Dios, ni que sea adorada como se adora a Dios; la honra y venera como la madre del Señor, la sostiene preservada del pecado y llevada al cielo, y le pide a ella y a los santos que oren por nosotros, como uno podría pedir a un creyente vivo que ore. Así que los católicos distinguen la veneración de la adoración. Nuestra preocupación es que la devoción y la oración dirigidas a María y a los santos, por cuidadosamente que se distingan, tienden en la práctica a dar a las criaturas lo que pertenece al Creador, y a colocar mediadores entre el alma y Cristo. Pero la Escritura dice que hay un solo Dios y un solo mediador entre Dios y los hombres, Jesucristo hombre. Podemos ir a Él directamente y no necesitamos otro que lleve nuestras oraciones. Así que honramos a la María bíblica mientras dirigimos la adoración y la oración a Dios solo por medio de Cristo."}, {"textEn": "27. Show from Scripture that Christ alone is the one Mediator, and how we may honor the biblical Mary rightly.", "textEs": "27. Muestre desde la Escritura que Cristo solo es el único mediador, y cómo podemos honrar rectamente a la María bíblica.", "kw_en": ["mediator", "christ", "one", "mary", "blessed", "faith", "honor", "directly"], "kw_es": ["mediador", "cristo", "uno", "maria", "bendita", "fe", "honra", "directamente"], "modelEn": "Scripture teaches that there is one God and one Mediator between God and men, the Man Christ Jesus. Christ alone stands between us and God, and through Him we may come directly to the Father, needing no other to carry our prayers. This is why we do not pray to Mary or the saints as mediators; that place belongs to Christ alone. Yet we honor the biblical Mary rightly and warmly. She was blessed among women, a woman of remarkable faith who said, let it be to me according to your word, and all generations rightly call her blessed. We honor her as a model of humble faith and obedience. And the greatest honor we can give her is to obey her own last recorded words, whatever He says to you, do it, which point us straight to her Son. So we honor Mary and go directly to Christ, the one Mediator.", "modelEs": "La Escritura enseña que hay un solo Dios y un solo mediador entre Dios y los hombres, Jesucristo hombre. Cristo solo está entre nosotros y Dios, y por medio de Él podemos venir directamente al Padre, sin necesitar otro que lleve nuestras oraciones. Por eso no oramos a María ni a los santos como mediadores; ese lugar pertenece a Cristo solo. Sin embargo, honramos rectamente y con calidez a la María bíblica. Fue bendita entre las mujeres, una mujer de fe notable que dijo, hágase conmigo conforme a tu palabra, y todas las generaciones con razón la llaman bienaventurada. La honramos como un modelo de fe humilde y obediencia. Y la mayor honra que podemos darle es obedecer sus propias últimas palabras registradas, haced todo lo que os dijere, que nos señalan directamente a su Hijo. Así que honramos a María y vamos directamente a Cristo, el único mediador."}, {"textEn": "28. Explain why the differences with Rome, though real and touching the gospel, are examined as a 'family disagreement' rather than as a different religion.", "textEs": "28. Explique por qué las diferencias con Roma, aunque reales y que tocan el evangelio, se examinan como un 'desacuerdo de familia' en lugar de como una religión diferente.", "kw_en": ["family", "gospel", "christ", "share", "difference", "rest", "finished", "confess"], "kw_es": ["familia", "evangelio", "cristo", "comparti", "diferencia", "descansar", "consumada", "confiesa"], "modelEn": "The differences with Rome are real, and some touch the gospel itself, especially justification and the sufficiency of Christ's finished work, so we cannot pretend they do not matter. Yet we examine them as a family disagreement rather than as a different religion, because the Catholic Church confesses with us the Trinity, the deity of Christ, and the historic creeds. We share the core of the faith and the same Lord. The Reformers did not doubt that Catholics believed in Christ and in grace; their concern was that certain teachings added to the finished work of Christ things that obscured it. So the question is not whether Jesus is God or rose from the dead, on which we agree, but how fully a sinner rests in Christ alone. That is a disagreement within the family who confess Jesus as Lord, not the rejection of Christ found in a cult or another religion.", "modelEs": "Las diferencias con Roma son reales, y algunas tocan el evangelio mismo, especialmente la justificación y la suficiencia de la obra consumada de Cristo, así que no podemos fingir que no importan. Sin embargo, las examinamos como un desacuerdo de familia en lugar de como una religión diferente, porque la Iglesia Católica confiesa con nosotros la Trinidad, la deidad de Cristo, y los credos históricos. Compartimos el núcleo de la fe y el mismo Señor. Los Reformadores no dudaron de que los católicos creían en Cristo y en la gracia; su preocupación era que ciertas enseñanzas añadían a la obra consumada de Cristo cosas que la oscurecían. Así que la pregunta no es si Jesús es Dios o resucitó, en lo cual concordamos, sino cuán plenamente descansa un pecador en Cristo solo. Ese es un desacuerdo dentro de la familia que confiesa a Jesús como Señor, no el rechazo de Cristo que se halla en una secta o en otra religión."}, {"textEn": "29. Describe the redemptive aim toward Catholics, especially those leaving Catholicism for evangelical faith.", "textEs": "29. Describa el fin redentor hacia los católicos, especialmente los que dejan el catolicismo por la fe evangélica.", "kw_en": ["rest", "finished", "christ", "grace", "faith", "peace", "justified", "love"], "kw_es": ["descansar", "consumada", "cristo", "gracia", "fe", "paz", "justificados", "amor"], "modelEn": "The redemptive aim is that all of us, the Catholic who loves the Lord and the many who are leaving that church for evangelical faith, would come to rest wholly and restfully on the finished work of Christ, and receive the righteousness of God as the free gift it is. To those troubled by an account never quite paid and a heaven never quite certain, we hold out the gospel: having been justified by faith, we have peace with God through our Lord Jesus Christ. So we do not attack a neighbor's heritage; we invite everyone to the assurance and peace that come by grace through faith. We honor our Catholic neighbors, rejoice in all we share, refuse to caricature or scorn, and long in love for each one to rest in Christ alone and know the peace of justification by faith.", "modelEs": "El fin redentor es que todos nosotros, el católico que ama al Señor y los muchos que están dejando esa iglesia por la fe evangélica, lleguemos a descansar entera y reposadamente en la obra consumada de Cristo, y recibamos la justicia de Dios como el don gratuito que es. A los turbados por una cuenta nunca del todo pagada y un cielo nunca del todo seguro, les extendemos el evangelio: justificados por la fe, tenemos paz para con Dios por medio de nuestro Señor Jesucristo. Así que no atacamos la herencia de un prójimo; invitamos a todos a la seguridad y la paz que vienen por gracia mediante la fe. Honramos a nuestros prójimos católicos, nos gozamos en todo lo que compartimos, rehusamos caricaturizar o despreciar, y anhelamos en amor que cada uno descanse en Cristo solo y conozca la paz de la justificación por la fe."}, {"textEn": "30. Summarize Unit 8: the common ground, the four main differences, and the gracious aim.", "textEs": "30. Resuma la Unidad 8: el terreno común, las cuatro diferencias principales, y el fin bondadoso.", "kw_en": ["catholic", "trinity", "authority", "justification", "mass", "mary", "grace", "christ"], "kw_es": ["romana", "trinidad", "autoridad", "justificaci", "misa", "maria", "gracia", "cristo"], "modelEn": "Unit 8 treats the Roman Catholic Church, which is not a cult but a body that confesses the Trinity, the deity of Christ, and the historic creeds, so we begin by honoring the great common ground we share. Then we examine four real differences that touch the gospel: authority, where Rome joins Tradition to Scripture while we hold Scripture alone as the final rule; justification, where Rome teaches grace and faith but not faith alone while we hold justification by grace through faith alone; the finished work of Christ, where the Mass, purgatory, and merit seem to add to a work Scripture calls finished once for all; and Mary and the saints, where prayer and devotion are directed to them while Scripture sets Christ alone as the one Mediator. Throughout, the aim is gracious: not to scorn a neighbor but to invite all, Catholic and evangelical, to rest wholly on Christ and receive righteousness by faith.", "modelEs": "La Unidad 8 trata a la Iglesia Católica Romana, que no es una secta sino un cuerpo que confiesa la Trinidad, la deidad de Cristo, y los credos históricos, así que comenzamos honrando el gran terreno común que compartimos. Luego examinamos cuatro diferencias reales que tocan el evangelio: la autoridad, donde Roma une la Tradición a la Escritura mientras nosotros sostenemos la Escritura sola como la regla final; la justificación, donde Roma enseña gracia y fe pero no la fe sola mientras nosotros sostenemos la justificación por gracia mediante la fe sola; la obra consumada de Cristo, donde la Misa, el purgatorio, y el mérito parecen añadir a una obra que la Escritura llama consumada una vez para siempre; y María y los santos, donde la oración y la devoción se dirigen a ellos mientras la Escritura pone a Cristo solo como el único mediador. En todo, el fin es bondadoso: no despreciar a un prójimo sino invitar a todos, católicos y evangélicos, a descansar enteramente en Cristo y recibir la justicia por la fe."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en el botón de arriba para continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click the button above to continue.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '\u2713 Correct! ' : '\u2713 \u00a1Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `\u2717 Incorrect. Correct answer: ${correctLetter}. ` : `\u2717 Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a few sentences (about 100 characters)), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos unas cuantas oraciones (unos 100 caracteres)), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            renderQuestions();
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        renderQuestions();
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCultsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

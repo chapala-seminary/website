@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Acts Intensive — Unit 10: Storms and Shipwreck on the Way to Rome (Acts 24–28)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.sa-model { margin-top: 8px; padding: 10px 14px; background:#fff8e1; color:#5d4a00; border-left:4px solid #d4af37; border-radius:6px; font-size:0.92rem; line-height:1.45; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+/* === Retrofit additions === */
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-bottom: 2px dashed #d7cec1; padding-bottom: 18px; margin-bottom: 18px; }
+.lang-toggle-group { display: inline-flex; gap: 4px; margin-bottom: 15px; }
+.lang-toggle-group button { background: #f4c542; color: #5b3a1f; border: 1px solid #c9a032; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+.lang-toggle-group button.active { background: #5b3a1f; color: white; border-color: #5b3a1f; }
+.track-badge { display: inline-block; background: #f4c542; color: #5b3a1f; padding: 4px 12px; border-radius: 30px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 12px; vertical-align: middle; }
+.exam-status { padding: 12px 16px; margin: 14px 0; border-radius: 8px; font-size: 0.95rem; font-weight: 600; }
+.exam-status.mc-passed { background: #d6e2f0; color: #2c3e6b; border-left: 5px solid #3f5a8a; }
+.exam-status.locked { background: #fae5e3; color: #8a1f1f; border-left: 5px solid #b03a2e; }
+.exam-status.hidden { display: none; }
+.mc-section, .sa-section { margin-top: 20px; }
+.sa-section h3, .mc-section h3 { color: #5b3a1f; border-bottom: 2px solid #f4c542; padding-bottom: 4px; margin-bottom: 12px; font-size: 1.1rem; }
+.sa-badge { display: inline-block; background: #f4c542; color: #5b3a1f; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; margin-left: 8px; vertical-align: middle; }
+.sa-note { margin: 0 0 14px; padding: 10px 14px; background: #f6f1e8; border-left: 3px solid #c9a032; color: #22201d; font-size: 0.9rem; font-style: italic; border-radius: 6px; }
+.question.review-locked { opacity: 0.7; background: #fbfaf6; border-left: 3px solid #f4c542; }
+.question.review-locked .option { pointer-events: none; }
+.question.review-locked .kw-answer, .question.review-locked .check-kw-btn { pointer-events: none; }
+.btn-reset { background: #8a6a4a; color: white; border: none; border-radius: 30px; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 0.88rem; margin-left: 8px; }
+.btn-reset:hover { background: #6b5236; }
+.reg-modal { position: fixed; inset: 0; background: rgba(40, 30, 20, 0.65); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.reg-modal.hidden { display: none; }
+.reg-modal-inner { background: #fffdfa; max-width: 520px; width: 100%; border-radius: 16px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 1px solid #d7cec1; }
+.reg-modal-inner h2 { color: #5b3a1f; margin: 0 0 10px; font-size: 1.4rem; }
+.reg-modal-inner p { margin: 10px 0; font-size: 0.95rem; }
+.reg-modal-inner label { display: block; margin: 12px 0 4px; font-weight: 700; font-size: 0.92rem; }
+.reg-modal-inner input[type="text"], .reg-modal-inner input[type="email"] { width: 100%; padding: 9px 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; background: #fcfbf8; }
+.reg-modal-inner .track-options { display: flex; gap: 10px; margin-top: 6px; }
+.reg-modal-inner .track-options label { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 12px; border: 1px solid #d7cec1; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.92rem; background: #fcfbf8; }
+.reg-modal-inner .track-options input[type="radio"] { margin: 0; }
+.reg-modal-inner .track-options label:has(input:checked) { background: #f4c542; border-color: #c9a032; }
+.reg-modal-inner button { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 9px 22px; cursor: pointer; font-family: inherit; font-size: 1rem; margin-top: 18px; }
+.reg-warn { background: #faecd0; border: 1px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; color: #5b3a1f; }
+.reg-warn.hidden { display: none; }
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .nav-bar, .toggle-btn, .lang-toggle-group, .btn-reset, button.small, .check-kw-btn, .reg-modal, .reg-warn, #submitExamBtn, .exam-status, .sa-badge, .track-badge { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+  body.lang-en .lang-es, body.lang-es .lang-en { display: none; }
+  body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+}
+
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" role="group" aria-label="Language">
+  <button data-lang="en" class="active">English</button>
+  <button data-lang="es">Español</button>
+  <button data-lang="both">Both / Ambos</button>
+</div>
+<span id="trackBadgeSlot"></span>
+
+<div id="regWarn" class="reg-warn hidden">
+  <span class="lang-en">⚠ Please register your name to receive credit for this unit. <button class="small" id="openRegBtn" type="button">Register</button></span>
+  <span class="lang-es">⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class="small" id="openRegBtn2" type="button">Registrar</button></span>
+</div>
+<div id="regModal" class="reg-modal hidden" role="dialog" aria-labelledby="regModalTitle">
+  <div class="reg-modal-inner">
+    <h2 id="regModalTitle"><span class="lang-en">Welcome to the Acts Intensive</span><span class="lang-es">Bienvenido al Intensivo de Hechos</span></h2>
+    <p><span class="lang-en">Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.</span><span class="lang-es">Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full name</span><span class="lang-es">Nombre completo</span></label>
+    <input type="text" id="regName" placeholder="" autocomplete="name" aria-label="regName">
+    <label><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span></label>
+    <input type="email" id="regEmail" placeholder="" autocomplete="email" aria-label="regEmail">
+    <label><span class="lang-en">Track</span><span class="lang-es">Vía</span></label>
+    <div class="track-options">
+      <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></label>
+      <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en">M.Div</span><span class="lang-es">M.Div</span></label>
+      <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en">Th.M.</span><span class="lang-es">Th.M.</span></label>
+    </div>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;">
+      <span class="lang-en"><strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.</span>
+      <span class="lang-es"><strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%.</span>
+    </p>
+    <button id="regSaveBtn" type="button"><span class="lang-en">Save and Continue</span><span class="lang-es">Guardar y Continuar</span></button>
+  </div>
+</div>
+<div class="card">
+    <h1><span class="lang-en">📖 Acts Intensive — Unit 10: Storms and Shipwreck on the Way to Rome (Acts 24–28)</span><span class="lang-es">📖 Intensivo de Hechos — Unidad 10: Tormentas y naufragio camino a Roma (Hechos 24–28)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>I. Tertullus the Hired Mouth</h2>
+        <p>Five days after Paul arrived at Caesarea, the high priest Ananias came down from Jerusalem with the elders and a hired Roman lawyer named Tertullus. Tertullus stood up before the governor Felix and opened with the kind of flattery that always tells you the case is weak. <em>"Seeing that through you we enjoy great peace, and prosperity is being brought to this nation by your foresight, we accept it always and in all places, most noble Felix, with all thankfulness"</em> (Acts 24:2–3, NKJV). The historical record on Felix is the opposite of every word in that sentence. Felix was a freedman whose chief qualifications for the governorship were that his brother had been Nero's tutor and that he himself had stolen another man's wife. The Roman historian Tacitus wrote of him that he <em>exercised the power of a king with the spirit of a slave</em>. Felix had ruled Judea with bribery, brutality, and assassinations. Tertullus's flattery was a courtroom lubricant, not a description of reality.</p>
+
+        <p>The actual indictment came in three sentences. Paul was a pestilent fellow. Paul was a ringleader of the sect of the Nazarenes. Paul had tried to profane the temple. Tertullus had no witnesses for the third charge — the only one that was actually a crime — and no evidence for any of the three.</p>
+
+        <p>Paul gave a measured, point-by-point response. He had been in Jerusalem only twelve days. He had not been found arguing with anyone in the temple. The men who had actually accused him were not even in the courtroom — the Asian Jews who had started the temple riot had not bothered to travel to Caesarea to testify. <em>"They cannot prove the things of which they now accuse me"</em> (Acts 24:13, NKJV). Then Paul added the only confession the gospel ever requires of one of its preachers. <em>"This I confess to you, that according to the Way which they call a sect, so I worship the God of my fathers, believing all things which are written in the Law and in the Prophets. I have hope in God, which they themselves also accept, that there will be a resurrection of the dead, both of the just and the unjust"</em> (Acts 24:14–15, NKJV). The man on trial preached the resurrection from his own bench in the courtroom.</p>
+
+        <h2>II. Felix's Conscience and Felix's Calendar</h2>
+        <p>Felix dismissed the proceedings without ruling. Privately he wanted Paul kept around for two reasons. The first was political — he did not want to alienate either the Jewish leadership or the Roman bureaucracy. The second was financial — Luke notes bluntly that Felix <em>"hoped that money would be given him by Paul"</em> (Acts 24:26, NKJV). The governor of Judea was hoping the prisoner would offer a bribe.</p>
+
+        <p>But there was a third reason. Felix had a Jewish wife named Drusilla — the youngest daughter of the Herod Agrippa I who had been struck down by an angel for accepting the worship of men in Caesarea fifteen years earlier. Drusilla was sixteen years old and had been seduced away from her first marriage by Felix. Felix wanted to hear Paul preach. He sent for him often during the next two years. Luke gives us the headline of one of those interviews. <em>"Now as he reasoned about righteousness, self-control, and the judgment to come, Felix was afraid and answered, 'Go away for now; when I have a convenient time I will call for you'"</em> (Acts 24:25, NKJV).</p>
+
+        <p>Read those three subjects again. Righteousness. Self-control. The judgment to come. Paul was a master of audience. Felix had stolen Drusilla and the Roman governorship; Drusilla had committed adultery to be there. Paul preached righteousness, self-control, and the judgment to come. The arrows landed. Felix trembled. And Felix said the saddest sentence in Acts. <em>When I have a convenient time, I will call for you.</em> The convenient time never came. Felix kept Paul under house arrest for two years, kept hoping for a bribe, kept sending for Paul to talk again, never called for the convenient time. Felix was eventually recalled to Rome in disgrace for mishandling a riot in Caesarea. Paul outlived him in office. The man who had postponed his salvation for a convenient time died without it. <em>Behold, now is the accepted time. Behold, now is the day of salvation.</em></p>
+
+        <h2>III. Festus and the Appeal to Caesar</h2>
+        <p>Felix's successor was Porcius Festus. Three days after his arrival in Caesarea, Festus went up to Jerusalem to make courtesy calls. The Jewish leaders immediately re-pressed the case against Paul, asking the new governor to send Paul up to Jerusalem for trial. They were planning a fresh ambush along the road. Festus declined, but invited the accusers to come down to Caesarea.</p>
+
+        <p>The trial was a re-run. The accusations were the same. The evidence was still missing. Festus, looking for political points with the Jewish leadership, asked Paul whether he would be willing to go up to Jerusalem and stand trial there. Paul understood the question for what it was. He stood in the Roman courtroom and said the words that changed the geography of his life. <em>"I appeal to Caesar"</em> (Acts 25:11, NKJV).</p>
+
+        <p>The right of every Roman citizen to appeal a capital case to the emperor's own tribunal had been on the books since the founding of the republic. Once the words <em>provoco ad Caesarem</em> were spoken, no provincial governor had the authority to release the prisoner. Festus consulted his council. Festus turned back to Paul. <em>"You have appealed to Caesar? To Caesar you shall go"</em> (Acts 25:12, NKJV). Paul had taken his case out of the reach of the Jerusalem mob and out of the reach of any cooperative governor. The Lord had told him in the barracks at Jerusalem that he would bear witness in Rome. Paul had just bought his ticket.</p>
+
+        <h2>IV. Almost Persuaded</h2>
+        <p>While Paul was waiting for the next ship to Rome, King Herod Agrippa II — the great-grandson of Herod the Great, the last of the Herodian line to rule any part of Judea — came to Caesarea with his sister Bernice on a state visit. Festus, who was still puzzled about what to write Caesar concerning Paul (Roman procedure required a written charge to accompany a transferred prisoner), asked Agrippa to hear the case and help him compose the report. Agrippa, who had been raised on the Mosaic Scriptures and was the official Roman caretaker of the temple, was an ideal consultant.</p>
+
+        <p>The next day Paul was brought into the audience hall with great pomp. Agrippa and Bernice entered with their tribunes and the prominent men of the city. Paul stood up in chains and gave the longest single recorded speech of his life — a defense, a sermon, and a personal testimony all in one. He told Agrippa about his Pharisee upbringing, his persecuting career, the noonday light on the Damascus road, the words of the risen Christ, his commission to the Gentiles. He told Agrippa that the message he preached was nothing more than what Moses and the prophets had said would come to pass — that the Christ would suffer, that He would be the first to rise from the dead, and that He would proclaim light to the people and to the Gentiles.</p>
+
+        <p>Festus interrupted at this point. He could not stand it any longer. <em>"Paul, you are beside yourself! Much learning is driving you mad!"</em> (Acts 26:24, NKJV). Paul turned, addressed the governor with respect, and then turned back to Agrippa. <em>"For the king, before whom I also speak freely, knows these things; for I am convinced that none of these things escapes his attention, since this thing was not done in a corner. King Agrippa, do you believe the prophets? I know that you do believe"</em> (Acts 26:26–27, NKJV). Paul had pinned the king. Agrippa knew the prophets. Agrippa knew the recent history of Jerusalem — including the crucifixion of Jesus thirty years earlier. The arrow flew straight.</p>
+
+<!-- SERMON_ARCHIVE_ENRICHMENT_START ACTS10 EN -->
+<div class="note">
+<strong>Paul's testimony as apologetic.</strong> One of Dr. Cook's older Acts 26 sermons approaches this scene by asking, “Why am I a Christian?” That is exactly the kind of answer Paul gives Agrippa. He does not merely win an argument; he explains the road by which Christ laid hold of him. The sermon develops several personal reasons for Christian faith: the human longing for God, the moral perfection of Christ that exposes our own sin, the forgiveness available through Christ, the strength God gives for daily life and suffering, and the hope with which a believer faces death. The lesson for witnesses is important: a testimony should never replace the gospel facts, but the gospel facts become especially difficult to dismiss when they are joined to a credible changed life.</div>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END ACTS10 EN -->
+
+        <p>Agrippa's reply is one of the most famous half-sentences in the New Testament. <em>"You almost persuade me to become a Christian"</em> (Acts 26:28, NKJV). Almost. Almost converted. Almost the most consequential decision of his life. Almost in the kingdom. There is no sadder word in the language of salvation than <em>almost</em>. Felix postponed. Agrippa almost. Both of them died lost.</p>
+
+        <p>Paul gave one of the most beautiful answers ever given by a chained man to a crowned man. <em>"I would to God that not only you, but also all who hear me today, might become both almost and altogether such as I am, except for these chains"</em> (Acts 26:29, NKJV). Read that line slowly. Paul wished the most regal court in Judea would become exactly what he had become — minus the chains. He did not envy Agrippa his crown. He pitied Agrippa his lostness. The chained Christian on the floor of the audience hall was the freest man in the room.</p>
+
+        <p>Agrippa told Festus privately that Paul could have been released if he had not appealed to Caesar. The Lord had built the appeal into the chain of command on purpose. Agrippa's polite paralysis was not going to stop the gospel from getting to Rome.</p>
+
+        <h2>V. The Storm</h2>
+        <p>I want to take a long pause before we follow Paul onto the boat, because Acts 27 is one of the longest single narratives in the New Testament, and Luke gave us every detail for a reason. The Lord wants us to know how He gets His servants through storms.</p>
+
+        <p>If you feel like you have had a bad day, listen to this. It is reputedly an actual letter, written by a bricklayer, requesting sick leave. <em>When I got to the building site, I found that the hurricane had knocked off some bricks from around the top of the building. So I rigged up a beam with a pulley at the top and hoisted up a barrel full of bricks. When I had fixed the damaged area, there were a lot of bricks left over. I placed the extras in the barrel. I went to the bottom and began releasing the line. Unfortunately, the barrel of bricks was much heavier than I was. Before I knew what was happening, the barrel started coming down, jerking me up. Halfway up I met the barrel coming down fast. I received a hard blow to my shoulder. I continued to the top, banging my head against the beam. When the barrel hit the ground, it burst its bottom and the bricks spilled out. I was now heavier than the barrel. I started down again at high speed. Halfway down I met the barrel coming up fast. I received several injuries to my shins. When I hit the ground I landed on the pile of spilled bricks. At this point I must have lost my presence of mind. I let go of the line. The barrel came down fast, giving me another blow on my head and putting me in the hospital. Therefore, I respectfully request sick leave.</em> Brothers, that is the kind of bad day I am about to describe to you in Acts 27. Buckle your seat belt.</p>
+
+        <p>Christians have bad days too. The health-and-wealth preachers have built large empires on the lie that if you are really following the Lord, the storms will not come. I have read the Bible too many times to believe it. Daniel's faith got him out of the lions' den, but Daniel's faith also got him into the lions' den. Being saved is not the same thing as being safe. The Lord does not promise His servants storm-free voyages; He promises them storm-tested arrivals. Acts 27 is an exhibit on file in the public record.</p>
+
+        <p>Paul, with Luke and Aristarchus, was put aboard a coastal grain freighter at Caesarea under the custody of a Roman centurion named Julius. They sailed up the Phoenician coast to Sidon, then west under the lee of Cyprus, then across to the south coast of Asia Minor at Myra, where Julius transferred them to a larger Alexandrian grain freighter bound for Italy. By the time they reached Crete, the season was late — past the autumnal equinox, into the dangerous months when Roman maritime law forbade open-sea sailing. They put in at Fair Havens on the south coast of Crete. Paul, who had survived three previous shipwrecks during his missionary journeys, advised Julius to winter there. <em>"Men, I perceive that this voyage will end with disaster and much loss, not only of the cargo and ship, but also our lives"</em> (Acts 27:10, NKJV). The centurion listened to the captain and the ship's owner instead. The harbor at Fair Havens was uncomfortable and exposed. They wanted to make Phoenix, forty miles west on the same coast, where the harbor was better. A gentle south wind blew. They cast off.</p>
+
+        <p>Within hours the wind shifted. A typhonic northeaster — Luke calls it Euroclydon — slammed down off the mountains of Crete and drove the freighter out into the open Mediterranean. They could not turn into the wind. They could only run before it. They ran westward through the open sea, fourteen days and nights, with no sun, no stars, no chance to take a navigational reading. They threw the cargo overboard. They threw the ship's tackle overboard. The strongest sailors gave up. <em>"All hope that we would be saved was finally given up"</em> (Acts 27:20, NKJV).</p>
+
+        <h2>VI. Three Strings, Three Sermons in the Storm</h2>
+        <p>Paul stood up among them on the fourteenth night and gave the speech this lecture has been driving toward. <em>"And now I urge you to take heart, for there will be no loss of life among you, but only of the ship. For there stood by me this night an angel of the God to whom I belong and whom I serve, saying, 'Do not be afraid, Paul; you must be brought before Caesar; and indeed God has granted you all those who sail with you.' Therefore take heart, men, for I believe God that it will be just as it was told me. However, we must run aground on a certain island"</em> (Acts 27:22–26, NKJV). I want to lift three sermons out of those four verses, because they are the way every Christian survives a storm.</p>
+
+        <p>First, <strong>know in whom to believe</strong>. Paul did not say <em>I believe everything will work out</em>. Paul did not say <em>I believe the wind will die down</em>. Paul said, <em>I believe God</em>. Faith always has an object. The faith that survives the fourteenth night of a storm is faith in a Person, not faith in a hopeful outcome. Years ago a friend of mine, the senior pastor of First Presbyterian in Bethlehem, Pennsylvania, was at coffee hour after church and saw a man wearing a bulldog pin. Not knowing the man worked for Mack Truck — the bulldog is the Mack symbol — my friend asked, <em>What does that bulldog stand for?</em> The man got a twinkle in his eye and said, <em>It stands for the tenacity with which I hold onto Jesus Christ.</em> My friend smiled and said, <em>Wonderful symbol, terrible theology. It should stand for the tenacity with which Jesus Christ holds onto you.</em> The reason all 276 men on Paul's freighter survived was not that they had a strong grip on God. It was that God had a strong grip on them. The sailors did not believe. The captain did not believe. The owner did not believe. Paul believed God. And the angel of the God Paul served had drawn a circle around the freighter that included every soul on board.</p>
+
+        <p>Years ago, on a long uphill stretch of an interstate in Colorado, I overtook a freight train going the same direction at a slower speed. Two locomotives at the back were straining at full power, pushing the train uphill. I am a flatlander; I had never seen anything like it. As I drove on, I gradually came alongside the front of the nearly mile-long string of cars. There I found five more locomotives pulling the train. Seven engines in all. Where I come from, three is a lot. That train was a sermon for me that day. I was under serious strain in my own ministry. I was wondering whether I could keep pushing the load. The Lord said, in effect, <em>You are not pushing alone. There are five more engines pulling at the front that you cannot see from where you are sitting.</em> When you are climbing up out of the storm with all the engines you have, look up the mountain. The Lord has more pulling at the front than you have pushing at the back.</p>
+
+        <p>Second, <strong>know when to wait</strong>. Most of us pray and run. We say <em>Amen</em> and bolt for the door before the Lord can answer. There are three classical answers to prayer — <em>yes</em>, <em>no</em>, and <em>wait awhile</em> — and the third is the hardest. Paul had received the angel's message on the fourteenth night. The shipwreck did not happen until five or six days later. Paul did not jump overboard the moment the message came. He stayed on the freighter and ate breakfast with the sailors and waited. Job said, <em>"Though He slay me, yet will I trust Him"</em> (Job 13:15, NKJV). That is a waiting man's faith.</p>
+
+        <p>I had a friend, an old seminary janitor, who used to wait on the sidelines of the gym while the seminarians played basketball. He was always reading his Bible. One day I went up to him and asked what he was reading. He did not say <em>The Bible</em>. He said, <em>The book of Revelation.</em> I was surprised. <em>You understand the book of Revelation?</em> He said, <em>Oh, I understand it.</em> <em>Well, what does it mean?</em> He said quietly, <em>It means Jesus is gonna win.</em> Brothers, that is the whole sermon. The waiting Christian is the Christian who has read the last page of the book and knows the score before the storm starts. Wait. Jesus is gonna win.</p>
+
+        <p>Third, <strong>know when to walk away</strong>. Paul's third sermon on the freighter was the opposite of the second. As they neared the rocks of Malta, the sailors decided to lower the lifeboat and abandon the bigger ship. Paul told the centurion, <em>"Unless these men stay in the ship, you cannot be saved"</em> (Acts 27:31, NKJV). The soldiers cut the ropes. The lifeboat fell into the sea, empty. The crew stayed on the freighter until daylight. Then, on Paul's orders, when they finally saw the bay and the breakers on the rocks, they ran the freighter aground in the sand, broke up under the surf, and the crew went over the side. Some swam. Some grabbed pieces of broken planks and rode the waves in. <em>"And so it was that they all escaped safely to land"</em> (Acts 27:44, NKJV). All two hundred and seventy-six souls. Not one was lost.</p>
+
+        <p>There is a time to stay on the ship, and there is a time to jump off, and only the man who knows the Captain knows which time is which. The crew wanted to leave too soon and would have died. The Lord, through Paul, told them when. He still does. Some of you reading this are trying to bail out of a marriage, a ministry, a church, or a calling that the Lord has not yet released you from. Stay on the ship. Some of you reading this are clinging to a sorrow, a grievance, a past failure, a dead relationship that the Lord released you from a long time ago. There is a time to mount up and ride away from death, as old Gus said in <em>Lonesome Dove</em> on the bank of the Nueces River, after the boy had been killed by the water moccasins. The Lord enables both stayings and leavings. Cast your burden on Him. He will sustain you, and He will tell you when to swim.</p>
+
+        <p>Robert Louis Stevenson grew up in Scotland the son of an engineer who built lighthouses on the storm-battered coasts of England and Scotland. One day his father took young Robert with him on an inspection trip out to Bell Rock off the Irish coast. A gale blew up. It lasted twenty-five hours. The little ship rolled in the seas and Robert was terrified. His father went up on deck to find the captain. The captain had bound himself with a rope to the foremast to keep from being washed overboard. The senior Stevenson came back below to the cabin where his son was huddled. Robert asked, <em>Will the ship break up, Father? Will we drown?</em> His father answered, in calm assurance, <em>No, son. We will outride the storm. I looked into the pilot's face, and he smiled.</em> Friend, when the storms of life come on you, get close enough to Jesus — <em>the Captain of our salvation</em> (Hebrews 2:10) — to look into His face. He will smile. He has overcome the world.</p>
+
+        <h2>VII. Malta, the Viper, and Publius's Father</h2>
+        <p>The freighter beached on a small bay on the north shore of an island the locals called Melita — modern Malta. The natives, Luke says, showed no ordinary kindness. They built a fire and welcomed the soaked, freezing survivors. Paul was gathering wood for the fire — the apostle of the Gentiles never above hauling sticks — when a viper, dormant in the cold, fastened itself to his hand as he laid the wood on the flames. The Maltese watched. They knew Paul was a prisoner. They concluded that Justice — the Greek goddess Dike — had let him survive the sea only to die on the shore. He shook the snake into the fire and felt no harm. The Maltese watched him for a long time. When he did not swell up and die, they changed their minds and decided he was a god. The man Lystra had wanted to crown as Hermes was now being called a god by Maltese fishermen. Paul, of course, did not accept the worship of either crowd.</p>
+
+        <p>The chief man of the island was a Roman official named Publius. His father was sick with dysentery and a recurrent fever. Paul prayed over him, laid hands on him, and the man was healed. Word ran around the island. The rest of the diseased Maltese came, and Paul healed them. The three winter months of detention on Malta were three months of revival on Malta. The Lord lost nothing by the shipwreck. He gained an island.</p>
+
+        <h2>VIII. The Last Mile to Rome</h2>
+        <p>Three months later, in early spring, an Alexandrian grain freighter named the <em>Twin Brothers</em> — for Castor and Pollux, the patron deities of Roman sailors — wintered at Malta. Julius transferred his prisoners aboard. They sailed north to Syracuse on the east coast of Sicily for three days, then to Rhegium on the toe of Italy, then up the west coast of Italy to Puteoli on the bay of Naples. From Puteoli they walked the Appian Way north toward Rome.</p>
+
+        <p>Luke saves a single small detail for the road from Puteoli, and it is one of the most touching sentences in Acts. <em>"And from there, when the brethren heard about us, they came to meet us as far as Appii Forum and Three Inns. When Paul saw them, he thanked God and took courage"</em> (Acts 28:15, NKJV). The Roman believers — a church Paul had never visited, but had written his great letter to several years earlier — heard he was on the road. They walked out of Rome to greet him. The Forum of Appius was forty-three miles south of the city. Three Inns was thirty-three miles south. Paul saw them on the road and his strength returned. Brothers, never underestimate what a small welcoming party at a roadside inn can do for a tired servant of the Lord. The man who had survived the lions' den and the floor of the Mediterranean drew strength from a handful of believers walking out to meet him on the Appian Way.</p>
+
+        <p>At Rome, Paul was permitted to live by himself in rented quarters with a single Roman soldier chained to his wrist. Luke calls this his own hired house. For two years he received any who came to him. He preached the kingdom of God. He taught the things concerning the Lord Jesus Christ. He wrote letters from this house — Ephesians, Philippians, Colossians, Philemon — that have shaped every Christian century since. The chains never moved off his wrist, but the gospel walked into every household of Caesar's praetorian guard, four-hour shift by four-hour shift, soldier by soldier. Philippians later mentions the saints of Caesar's household sending greetings. The chain that the Lord had told Paul about in the Antonia barracks two years earlier had carried the gospel into Caesar's own palace.</p>
+
+        <p>Luke ends his book with one of the most deliberately open-ended sentences in literature. <em>"Then Paul dwelt two whole years in his own rented house, and received all who came to him, preaching the kingdom of God and teaching the things which concern the Lord Jesus Christ with all confidence, no one forbidding him"</em> (Acts 28:30–31, NKJV). No conclusion. No martyrdom. No ending. Luke does not tell us how Paul's case turned out. He does not tell us whether Paul stood before Nero. He does not tell us anything about the next twenty years of the church. He simply leaves the door open. <em>Preaching… teaching… no one forbidding him.</em> The book of Acts is the only book in the Bible that does not end. It just stops, mid-stride, with a participle. The story of Acts is still being written. Acts 29 is the chapter you and I are living right now.</p>
+
+        <h2>IX. Three Lessons Home</h2>
+        <p>First, <strong>almost is not enough</strong>. Felix said <em>when I have a convenient time.</em> Agrippa said <em>almost.</em> Both heard Paul preach. Both went away unconverted. The convenient time never arrives, and almost is exactly the same destination as not at all. Behold, now is the accepted time. Behold, now is the day of salvation.</p>
+
+        <p>Second, <strong>storms are part of the itinerary</strong>. The Lord told Paul in Jerusalem that he would bear witness in Rome. That promise included the typhoon, the fourteen days of darkness, the shipwreck, the viper, and three months on Malta. Storms are not detours from God's will; they are often the route by which He fulfills it. Trust Him in the storm. Wait until He shows the way. Walk away when He releases you. He has overcome the world.</p>
+
+        <p>Third, <strong>Acts 28 has no final chapter, because the final chapter is yours</strong>. Luke ends mid-sentence. The Lord finished the canon, but He did not finish the mission. The kingdom is still being preached, the things concerning the Lord Jesus Christ are still being taught, and no one — no Felix, no Agrippa, no chain, no fourteen-day storm — can stop the gospel from reaching the next person who will hear it. May the Lord write the next chapter through you.</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>I. Tértulo, la boca alquilada</h2>
+        <p>Cinco días después de que Pablo llegara a Cesarea, el sumo sacerdote Ananías bajó de Jerusalén con los ancianos y un abogado romano alquilado llamado Tértulo. Tértulo se levantó ante el gobernador Félix y abrió con la clase de adulación que siempre indica que el caso es débil. <em>"Que por ti gozamos de gran quietud, y que muchas cosas son bien gobernadas en el pueblo por tu prudencia, siempre y en todo lugar lo recibimos con todo agradecimiento, oh excelentísimo Félix"</em> (Hechos 24:2–3, RVG). El registro histórico de Félix es lo opuesto a cada palabra de esa frase. Félix era un liberto cuya principal calificación para el gobierno era que su hermano había sido tutor de Nerón y que él mismo había robado la esposa de otro hombre. El historiador romano Tácito escribió de él que <em>ejercía el poder de un rey con el espíritu de un esclavo</em>. Félix había gobernado Judea con sobornos, brutalidad y asesinatos. La adulación de Tértulo era lubricante de tribunal, no descripción de la realidad.</p>
+
+        <p>La acusación real vino en tres frases. Pablo era un hombre pestilente. Pablo era cabecilla de la secta de los nazarenos. Pablo había intentado profanar el templo. Tértulo no tenía testigos para el tercer cargo — el único que era realmente un crimen — y no tenía evidencia para ninguno de los tres.</p>
+
+        <p>Pablo dio una respuesta medida, punto por punto. Sólo había estado en Jerusalén doce días. No había sido hallado discutiendo con nadie en el templo. Los hombres que realmente lo habían acusado ni siquiera estaban en el tribunal — los judíos asianos que habían iniciado el motín del templo no se habían molestado en viajar a Cesarea para testificar. <em>"No pueden probar las cosas de que ahora me acusan"</em> (Hechos 24:13, RVG). Entonces Pablo agregó la única confesión que el evangelio jamás requiere de uno de sus predicadores. <em>"Esto te confieso, que conforme a aquel Camino que ellos llaman herejía, así sirvo al Dios de mis padres, creyendo todas las cosas que en la ley y en los profetas están escritas; teniendo esperanza en Dios, la cual ellos también esperan, que ha de haber resurrección de los muertos, así de los justos como de los injustos"</em> (Hechos 24:14–15, RVG). El hombre en juicio predicó la resurrección desde su propio banquillo en el tribunal.</p>
+
+        <h2>II. La conciencia de Félix y el calendario de Félix</h2>
+        <p>Félix despidió el procedimiento sin sentencia. En privado quería tener a Pablo cerca por dos razones. La primera era política — no quería enajenar ni a la dirigencia judía ni a la burocracia romana. La segunda era financiera — Lucas anota sin rodeos que Félix <em>"esperaba también que Pablo le diera dinero"</em> (Hechos 24:26, RVG). El gobernador de Judea esperaba que el prisionero le ofreciera un soborno.</p>
+
+        <p>Pero había una tercera razón. Félix tenía una esposa judía llamada Drusila — la hija menor del Herodes Agripa I que había sido herido por un ángel por aceptar la adoración de los hombres en Cesarea quince años antes. Drusila tenía dieciséis años y había sido seducida por Félix lejos de su primer matrimonio. Félix quería oír predicar a Pablo. Lo mandó llamar a menudo durante los siguientes dos años. Lucas nos da el titular de una de aquellas entrevistas. <em>"Y disertando él de la justicia, del dominio propio y del juicio venidero, Félix se espantó, y respondió: Vete por ahora; mas en teniendo oportunidad, te llamaré"</em> (Hechos 24:25, RVG).</p>
+
+        <p>Lea esos tres temas otra vez. Justicia. Dominio propio. El juicio venidero. Pablo era maestro del público. Félix había robado a Drusila y el gobierno romano; Drusila había cometido adulterio para estar allí. Pablo predicó justicia, dominio propio y el juicio venidero. Las flechas dieron en el blanco. Félix tembló. Y Félix dijo la frase más triste de Hechos. <em>En teniendo oportunidad, te llamaré.</em> La oportunidad nunca llegó. Félix mantuvo a Pablo en arresto domiciliario por dos años, siguió esperando un soborno, siguió mandando por Pablo para hablar de nuevo, nunca llamó por la oportunidad. Félix fue eventualmente llamado a Roma en desgracia por mal manejo de un motín en Cesarea. Pablo le sobrevivió en su cargo. El hombre que había pospuesto su salvación para una oportunidad murió sin ella. <em>He aquí, ahora es el tiempo aceptable. He aquí, ahora es el día de salvación.</em></p>
+
+        <h2>III. Festo y la apelación al César</h2>
+        <p>El sucesor de Félix fue Porcio Festo. Tres días después de su llegada a Cesarea, Festo subió a Jerusalén a hacer visitas de cortesía. Los líderes judíos inmediatamente reabrieron el caso contra Pablo, pidiendo al nuevo gobernador que enviara a Pablo a Jerusalén para juicio. Estaban planeando una nueva emboscada en el camino. Festo declinó, pero invitó a los acusadores a bajar a Cesarea.</p>
+
+        <p>El juicio fue una repetición. Las acusaciones eran las mismas. La evidencia seguía ausente. Festo, buscando puntos políticos con la dirigencia judía, le preguntó a Pablo si estaría dispuesto a subir a Jerusalén y ser juzgado allí. Pablo entendió la pregunta por lo que era. Se paró en el tribunal romano y dijo las palabras que cambiaron la geografía de su vida. <em>"A César apelo"</em> (Hechos 25:11, RVG).</p>
+
+        <p>El derecho de cada ciudadano romano a apelar un caso capital al tribunal del emperador mismo había estado en los libros desde la fundación de la república. Una vez dichas las palabras <em>provoco ad Caesarem</em>, ningún gobernador provincial tenía la autoridad para liberar al prisionero. Festo consultó con su consejo. Festo se volvió a Pablo. <em>"¿A César has apelado? A César irás"</em> (Hechos 25:12, RVG). Pablo había sacado su caso del alcance de la turba de Jerusalén y del alcance de cualquier gobernador colaboracionista. El Señor le había dicho en el cuartel de Jerusalén que daría testimonio en Roma. Pablo acababa de comprar su boleto.</p>
+
+        <h2>IV. Por poco persuadido</h2>
+        <p>Mientras Pablo esperaba el siguiente barco a Roma, el rey Herodes Agripa II — bisnieto de Herodes el Grande, el último de la línea herodiana en gobernar parte alguna de Judea — vino a Cesarea con su hermana Berenice en visita de estado. Festo, que aún estaba perplejo sobre qué escribirle al César concerniente a Pablo (el procedimiento romano requería un cargo escrito que acompañara al prisionero transferido), le pidió a Agripa que oyera el caso y le ayudara a componer el reporte. Agripa, que había sido criado en las Escrituras mosaicas y era el cuidador romano oficial del templo, era un consultor ideal.</p>
+
+        <p>Al día siguiente Pablo fue llevado al salón de audiencias con gran pompa. Agripa y Berenice entraron con sus tribunos y los hombres prominentes de la ciudad. Pablo se levantó en cadenas y dio el discurso individual más largo que se registra en su vida — una defensa, un sermón y un testimonio personal todo en uno. Le contó a Agripa de su crianza farisea, su carrera persecutoria, la luz del mediodía en el camino a Damasco, las palabras del Cristo resucitado, su comisión a los gentiles. Le dijo a Agripa que el mensaje que predicaba no era nada más que lo que Moisés y los profetas habían dicho que pasaría — que el Cristo padecería, que sería el primero en resucitar de los muertos, y que proclamaría luz al pueblo y a los gentiles.</p>
+
+        <p>Festo lo interrumpió en este punto. No pudo aguantar más. <em>"¡Estás loco, Pablo! Las muchas letras te vuelven loco"</em> (Hechos 26:24, RVG). Pablo se volvió, se dirigió al gobernador con respeto, y luego volvió a Agripa. <em>"El rey sabe estas cosas, delante del cual también hablo confiadamente. Pues no creo que ignora nada de esto; pues no se ha hecho esto en algún rincón. ¿Crees, oh rey Agripa, a los profetas? Yo sé que crees"</em> (Hechos 26:26–27, RVG). Pablo había acorralado al rey. Agripa conocía a los profetas. Agripa conocía la historia reciente de Jerusalén — incluyendo la crucifixión de Jesús treinta años antes. La flecha voló recta.</p>
+
+<!-- SERMON_ARCHIVE_ENRICHMENT_START ACTS10 ES -->
+<div class="note">
+<strong>El testimonio de Pablo como apologética.</strong> Uno de los sermones antiguos del Dr. Cook sobre Hechos 26 se acerca a esta escena preguntando: “¿Por qué soy cristiano?” Eso es precisamente el tipo de respuesta que Pablo da a Agripa. No se limita a ganar un argumento; explica el camino por el cual Cristo se apoderó de él. El sermón desarrolla varias razones personales para la fe cristiana: el anhelo humano de Dios, la perfección moral de Cristo que expone nuestro propio pecado, el perdón disponible por medio de Cristo, la fuerza que Dios da para la vida diaria y el sufrimiento, y la esperanza con la cual el creyente enfrenta la muerte. La lección para los testigos es importante: un testimonio nunca debe reemplazar los hechos del evangelio, pero los hechos del evangelio se vuelven especialmente difíciles de descartar cuando van unidos a una vida creíblemente transformada.</div>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END ACTS10 ES -->
+
+        <p>La respuesta de Agripa es una de las medias frases más famosas del Nuevo Testamento. <em>"Por poco me persuades a ser cristiano"</em> (Hechos 26:28, RVG). Por poco. Por poco convertido. Por poco la decisión más trascendente de su vida. Por poco en el reino. No hay palabra más triste en el lenguaje de la salvación que <em>por poco</em>. Félix pospuso. Agripa por poco. Los dos murieron perdidos.</p>
+
+        <p>Pablo dio una de las respuestas más bellas jamás dadas por un hombre encadenado a un hombre coronado. <em>"Pluguiese a Dios que por poco o por mucho, no solamente tú, sino también todos los que hoy me oyen, fueseis hechos tales cual yo soy, excepto estas cadenas"</em> (Hechos 26:29, RVG). Lea esa línea lentamente. Pablo deseaba que la corte más regia de Judea llegara a ser exactamente lo que él había llegado a ser — menos las cadenas. No envidiaba a Agripa su corona. Compadecía a Agripa por su perdición. El cristiano encadenado en el piso del salón de audiencias era el hombre más libre del cuarto.</p>
+
+        <p>Agripa le dijo a Festo en privado que Pablo podría haber sido liberado si no hubiera apelado al César. El Señor había construido la apelación dentro de la cadena de mando a propósito. La parálisis cortés de Agripa no iba a impedir que el evangelio llegara a Roma.</p>
+
+        <h2>V. La tormenta</h2>
+        <p>Quiero hacer una pausa larga antes de seguir a Pablo al barco, porque Hechos 27 es una de las narraciones individuales más largas del Nuevo Testamento, y Lucas nos dio cada detalle por una razón. El Señor quiere que sepamos cómo lleva a Sus siervos a través de las tormentas.</p>
+
+        <p>Si sienten que han tenido un mal día, escuchen esto. Es supuestamente una carta real, escrita por un albañil, pidiendo permiso por enfermedad. <em>Cuando llegué a la obra, encontré que el huracán había tirado unos ladrillos de lo alto del edificio. Aparejé una viga con una polea y subí un barril lleno de ladrillos. Cuando reparé el daño, sobraron muchos ladrillos. Los puse en el barril. Bajé a soltar la cuerda. Lamentablemente, el barril de ladrillos era mucho más pesado que yo. Antes de saber qué pasaba, el barril empezó a bajar, jalándome arriba. A medio camino me encontré con el barril que bajaba rápido. Recibí un fuerte golpe en el hombro. Seguí hasta arriba, golpeándome la cabeza con la viga. Cuando el barril dio en el suelo, se rompió por el fondo y los ladrillos se derramaron. Ahora yo era más pesado que el barril. Empecé a bajar a alta velocidad. A medio camino me encontré con el barril que subía rápido. Recibí varias heridas en las espinillas. Cuando llegué al suelo aterricé en el montón de ladrillos derramados. En este punto debo haber perdido la presencia de ánimo. Solté la cuerda. El barril bajó rápido, dándome otro golpe en la cabeza y mandándome al hospital. Por tanto, respetuosamente solicito permiso por enfermedad.</em> Hermanos, esa es la clase de mal día que voy a describirles en Hechos 27. Abróchense el cinturón.</p>
+
+        <p>Los cristianos también tienen malos días. Los predicadores de la salud-y-riqueza han construido grandes imperios sobre la mentira de que si uno realmente sigue al Señor, las tormentas no vendrán. He leído la Biblia demasiadas veces para creerlo. La fe de Daniel lo sacó del foso de los leones, pero la fe de Daniel también lo metió en el foso de los leones. Ser salvo no es lo mismo que estar a salvo. El Señor no promete a Sus siervos viajes sin tormentas; les promete arribos probados por tormentas. Hechos 27 es una exhibición archivada en el registro público.</p>
+
+        <p>Pablo, con Lucas y Aristarco, fue puesto a bordo de un carguero costero de grano en Cesarea bajo la custodia de un centurión romano llamado Julio. Navegaron por la costa fenicia hasta Sidón, luego al oeste por la sotavento de Chipre, luego al sur de Asia Menor en Mira, donde Julio los transfirió a un carguero alejandrino más grande de grano con destino a Italia. Para cuando llegaron a Creta, la temporada estaba avanzada — pasado el equinoccio de otoño, en los meses peligrosos cuando la ley marítima romana prohibía la navegación en mar abierto. Atracaron en Buenos Puertos, en la costa sur de Creta. Pablo, que había sobrevivido a tres naufragios anteriores en sus viajes misioneros, aconsejó a Julio invernar allí. <em>"Varones, veo que con perjuicio y mucho daño, no sólo de la cargazón y de la nave, mas aun de nuestras vidas, habrá de ser la navegación"</em> (Hechos 27:10, RVG). El centurión escuchó al capitán y al dueño del barco en lugar. El puerto de Buenos Puertos era incómodo y expuesto. Querían llegar a Fenice, sesenta y cinco kilómetros al oeste en la misma costa, donde el puerto era mejor. Sopló un suave viento del sur. Soltaron amarras.</p>
+
+        <p>En cuestión de horas el viento cambió. Un tifónico nordeste — Lucas lo llama Euroclidón — bajó violentamente de las montañas de Creta y empujó al carguero al Mediterráneo abierto. No podían girar contra el viento. Sólo podían correr delante de él. Corrieron hacia el oeste por el mar abierto, catorce días y noches, sin sol, sin estrellas, sin oportunidad de tomar lectura de navegación. Tiraron la carga por la borda. Tiraron los aparejos del barco por la borda. Los marineros más fuertes se rindieron. <em>"Toda esperanza de salvarnos era ya perdida"</em> (Hechos 27:20, RVG).</p>
+
+        <h2>VI. Tres cuerdas, tres sermones en la tormenta</h2>
+        <p>Pablo se levantó entre ellos en la decimocuarta noche y dio el discurso al que esta lección ha estado encaminándose. <em>"Mas ahora os exhorto a tener buen ánimo, porque ninguna pérdida habrá de persona entre vosotros, sino solamente de la nave. Porque esta noche ha estado conmigo el ángel del Dios de quien soy, y a quien sirvo, diciendo: Pablo, no temas; es necesario que comparezcas ante César; y he aquí, Dios te ha dado todos los que navegan contigo. Por tanto, oh varones, tened buen ánimo; porque yo confío en Dios que será así como me ha sido dicho. Si bien es necesario que demos en una isla"</em> (Hechos 27:22–26, RVG). Quiero sacar tres sermones de aquellos cuatro versículos, porque son la manera en que cada cristiano sobrevive una tormenta.</p>
+
+        <p>Primero, <strong>sepa en quién creer</strong>. Pablo no dijo <em>creo que todo saldrá bien</em>. Pablo no dijo <em>creo que el viento se calmará</em>. Pablo dijo: <em>Yo confío en Dios.</em> La fe siempre tiene un objeto. La fe que sobrevive la decimocuarta noche de una tormenta es fe en una Persona, no fe en un resultado esperanzado. Hace años un amigo mío, el pastor principal de la Primera Iglesia Presbiteriana de Belén, Pensilvania, estaba en la hora del café después del culto y vio a un hombre con un alfiler de bulldog. Sin saber que el hombre trabajaba para Mack Truck — el bulldog es el símbolo de Mack — mi amigo le preguntó: <em>¿Qué representa ese bulldog?</em> El hombre tuvo un brillo en los ojos y dijo: <em>Representa la tenacidad con la que me agarro de Jesucristo.</em> Mi amigo sonrió y dijo: <em>Hermoso símbolo, terrible teología. Debería representar la tenacidad con la que Jesucristo se agarra de ti.</em> La razón por la cual los 276 hombres del carguero de Pablo sobrevivieron no fue que tuvieran un agarre fuerte de Dios. Fue que Dios tenía un agarre fuerte de ellos. Los marineros no creían. El capitán no creía. El dueño no creía. Pablo creía a Dios. Y el ángel del Dios al que Pablo servía había dibujado un círculo alrededor del carguero que incluía a cada alma a bordo.</p>
+
+        <p>Hace años, en un largo tramo cuesta arriba de una autopista en Colorado, alcancé un tren de carga que iba en la misma dirección a velocidad menor. Dos locomotoras al final estaban a toda potencia, empujando el tren cuesta arriba. Soy de tierras planas; nunca había visto algo así. Mientras seguí manejando, gradualmente llegué junto al frente de la fila de carros de casi un kilómetro y medio de largo. Allí encontré cinco locomotoras más jalando el tren. Siete máquinas en total. De donde yo vengo, tres son muchas. Aquel tren fue un sermón para mí ese día. Estaba bajo seria tensión en mi propio ministerio. Me preguntaba si podría seguir empujando la carga. El Señor dijo, en efecto: <em>No estás empujando solo. Hay cinco máquinas más jalando al frente que no puedes ver desde donde estás sentado.</em> Cuando esté subiendo de la tormenta con todas las máquinas que tiene, mire hacia arriba de la montaña. El Señor tiene más jalando al frente de lo que usted tiene empujando atrás.</p>
+
+        <p>Segundo, <strong>sepa cuándo esperar</strong>. La mayoría de nosotros oramos y corremos. Decimos <em>Amén</em> y nos lanzamos a la puerta antes de que el Señor pueda contestar. Hay tres respuestas clásicas a la oración — <em>sí</em>, <em>no</em> y <em>espera un poco</em> — y la tercera es la más difícil. Pablo había recibido el mensaje del ángel en la decimocuarta noche. El naufragio no ocurrió hasta cinco o seis días después. Pablo no saltó al mar en el momento que llegó el mensaje. Se quedó en el carguero y desayunó con los marineros y esperó. Job dijo: <em>"Aunque Él me matare, en Él esperaré"</em> (Job 13:15, RVG). Esa es la fe del hombre que espera.</p>
+
+        <p>Tenía un amigo, un viejo conserje del seminario, que solía esperar en las bandas del gimnasio mientras los seminaristas jugaban baloncesto. Siempre estaba leyendo su Biblia. Un día me acerqué y le pregunté qué estaba leyendo. No dijo <em>La Biblia</em>. Dijo: <em>El libro de Apocalipsis.</em> Me sorprendí. <em>¿Entiende el libro de Apocalipsis?</em> Dijo: <em>Oh, lo entiendo.</em> <em>Bueno, ¿qué significa?</em> Dijo en voz baja: <em>Significa que Jesús va a ganar.</em> Hermanos, ese es el sermón entero. El cristiano que espera es el cristiano que ha leído la última página del libro y conoce el marcador antes de que comience la tormenta. Esperen. Jesús va a ganar.</p>
+
+        <p>Tercero, <strong>sepa cuándo alejarse</strong>. El tercer sermón de Pablo en el carguero fue el opuesto del segundo. Cuando se acercaron a las rocas de Malta, los marineros decidieron bajar el bote salvavidas y abandonar el barco mayor. Pablo le dijo al centurión: <em>"Si éstos no quedan en la nave, vosotros no podéis salvaros"</em> (Hechos 27:31, RVG). Los soldados cortaron las cuerdas. El bote salvavidas cayó al mar, vacío. La tripulación se quedó en el carguero hasta el amanecer. Entonces, por orden de Pablo, cuando finalmente vieron la bahía y los rompientes en las rocas, encallaron el carguero en la arena, se rompió bajo el oleaje, y la tripulación se lanzó por la borda. Algunos nadaron. Algunos agarraron pedazos de tablas rotas y montaron las olas hacia la orilla. <em>"Y así aconteció que todos se salvaron saliendo a tierra"</em> (Hechos 27:44, RVG). Las doscientas setenta y seis almas. Ni una se perdió.</p>
+
+        <p>Hay un tiempo de quedarse en el barco, y hay un tiempo de saltar, y sólo el hombre que conoce al Capitán sabe cuál tiempo es cuál. La tripulación quería dejarlo demasiado pronto y habría muerto. El Señor, a través de Pablo, les dijo cuándo. Todavía lo hace. Algunos de ustedes que leen esto están tratando de saltar de un matrimonio, un ministerio, una iglesia o un llamado del cual el Señor aún no los ha liberado. Quédense en el barco. Algunos de ustedes que leen esto están aferrados a una pena, un agravio, un fracaso pasado, una relación muerta de la cual el Señor los liberó hace mucho tiempo. Hay un tiempo de montar y alejarse de la muerte, como dijo el viejo Gus en <em>Lonesome Dove</em> en la orilla del río Nueces, después de que el muchacho había sido matado por las víboras de agua. El Señor habilita tanto las permanencias como las partidas. Echen su carga sobre Él. Él los sustentará, y les dirá cuándo nadar.</p>
+
+        <p>Robert Louis Stevenson creció en Escocia, hijo de un ingeniero que construía faros en las costas azotadas por tormentas de Inglaterra y Escocia. Un día su padre llevó al joven Robert con él en un viaje de inspección a Bell Rock frente a la costa irlandesa. Se levantó un vendaval. Duró veinticinco horas. El pequeño barco se mecía en el mar y Robert estaba aterrorizado. Su padre subió a cubierta a buscar al capitán. El capitán se había atado con una cuerda al palo mayor para no ser arrastrado por la borda. El padre Stevenson regresó abajo a la cabina donde su hijo estaba acurrucado. Robert preguntó: <em>¿Se romperá el barco, padre? ¿Nos ahogaremos?</em> Su padre contestó, en serena seguridad: <em>No, hijo. Cabalgaremos sobre la tormenta. Miré al rostro del piloto, y sonrió.</em> Amigo, cuando vengan las tormentas de la vida, acérquese suficiente a Jesús — <em>el Capitán de nuestra salvación</em> (Hebreos 2:10) — para mirar Su rostro. Sonreirá. Ha vencido al mundo.</p>
+
+        <h2>VII. Malta, la víbora y el padre de Publio</h2>
+        <p>El carguero encalló en una pequeña bahía en la costa norte de una isla que los locales llamaban Melita — la moderna Malta. Los nativos, dice Lucas, mostraron no poca humanidad. Encendieron una hoguera y dieron la bienvenida a los sobrevivientes empapados y congelados. Pablo estaba juntando leña para el fuego — el apóstol de los gentiles nunca por encima de cargar palos — cuando una víbora, aletargada por el frío, se prendió a su mano cuando puso la leña en las llamas. Los malteses observaron. Sabían que Pablo era prisionero. Concluyeron que la Justicia — la diosa griega Dike — le había permitido sobrevivir al mar sólo para morir en la orilla. Sacudió la víbora al fuego y no sintió daño. Los malteses lo miraron por largo rato. Cuando no se hinchó ni murió, cambiaron de parecer y decidieron que era un dios. El hombre a quien Listra había querido coronar como Hermes ahora era llamado dios por los pescadores malteses. Pablo, por supuesto, no aceptó la adoración de ninguna de las dos multitudes.</p>
+
+        <p>El principal de la isla era un oficial romano llamado Publio. Su padre estaba enfermo de disentería y fiebre recurrente. Pablo oró por él, le impuso las manos, y el hombre fue sanado. La noticia corrió por la isla. El resto de los enfermos malteses vinieron, y Pablo los sanó. Los tres meses de invierno de detención en Malta fueron tres meses de avivamiento en Malta. El Señor no perdió nada con el naufragio. Ganó una isla.</p>
+
+        <h2>VIII. La última milla a Roma</h2>
+        <p>Tres meses después, a comienzos de la primavera, un carguero alejandrino de grano llamado los <em>Hermanos Gemelos</em> — por Cástor y Pólux, las deidades patronas de los marineros romanos — había invernado en Malta. Julio transfirió a sus prisioneros a bordo. Navegaron al norte a Siracusa en la costa este de Sicilia por tres días, luego a Regio en la punta de Italia, luego subiendo por la costa oeste de Italia a Puteoli en la bahía de Nápoles. Desde Puteoli caminaron por la Vía Apia al norte hacia Roma.</p>
+
+        <p>Lucas guarda un solo pequeño detalle del camino desde Puteoli, y es una de las frases más conmovedoras de Hechos. <em>"De donde, oyéndonos los hermanos, nos salieron a recibir hasta el Foro de Apio, y las Tres Tabernas; a los cuales como Pablo vio, dio gracias a Dios, y tomó aliento"</em> (Hechos 28:15, RVG). Los creyentes romanos — una iglesia que Pablo nunca había visitado, pero a la que había escrito su gran carta varios años antes — oyeron que estaba en el camino. Salieron de Roma a recibirlo. El Foro de Apio estaba a sesenta y nueve kilómetros al sur de la ciudad. Tres Tabernas estaba a cincuenta y tres kilómetros al sur. Pablo los vio en el camino y le volvieron las fuerzas. Hermanos, nunca subestimen lo que un pequeño grupo de bienvenida en una posada del camino puede hacer por un siervo cansado del Señor. El hombre que había sobrevivido el foso de los leones y el piso del Mediterráneo sacó fuerzas de un puñado de creyentes que salieron a recibirlo en la Vía Apia.</p>
+
+        <p>En Roma, a Pablo se le permitió vivir solo en una casa rentada con un solo soldado romano encadenado a su muñeca. Lucas la llama su propia casa rentada. Por dos años recibió a quien viniera a él. Predicó el reino de Dios. Enseñó las cosas concernientes al Señor Jesucristo. Escribió cartas desde esta casa — Efesios, Filipenses, Colosenses, Filemón — que han dado forma a cada siglo cristiano desde entonces. Las cadenas nunca se quitaron de su muñeca, pero el evangelio entró a cada hogar de la guardia pretoriana del César, turno de cuatro horas tras turno de cuatro horas, soldado tras soldado. Filipenses menciona después a los santos de la casa del César enviando saludos. La cadena que el Señor le había dicho a Pablo en el cuartel de Antonia dos años antes había llevado al evangelio al palacio mismo del César.</p>
+
+        <p>Lucas termina su libro con una de las frases más deliberadamente abiertas de la literatura. <em>"Y Pablo se quedó dos años enteros en su propia casa rentada, y recibía a todos los que a él venían, predicando el reino de Dios, y enseñando las cosas concernientes al Señor Jesucristo, con toda confianza, sin impedimento"</em> (Hechos 28:30–31, RVG). Sin conclusión. Sin martirio. Sin final. Lucas no nos dice cómo resultó el caso de Pablo. No nos dice si Pablo se paró ante Nerón. No nos dice nada de los siguientes veinte años de la iglesia. Simplemente deja la puerta abierta. <em>Predicando… enseñando… sin impedimento.</em> El libro de Hechos es el único libro de la Biblia que no termina. Simplemente se detiene, a media zancada, con un participio. La historia de Hechos sigue siendo escrita. Hechos 29 es el capítulo que usted y yo estamos viviendo ahora mismo.</p>
+
+        <h2>IX. Tres lecciones a casa</h2>
+        <p>Primero, <strong>por poco no es suficiente</strong>. Félix dijo <em>en teniendo oportunidad.</em> Agripa dijo <em>por poco.</em> Los dos oyeron a Pablo predicar. Los dos se fueron sin convertirse. La oportunidad nunca llega, y por poco es exactamente el mismo destino que de ninguna manera. He aquí, ahora es el tiempo aceptable. He aquí, ahora es el día de salvación.</p>
+
+        <p>Segundo, <strong>las tormentas son parte del itinerario</strong>. El Señor le dijo a Pablo en Jerusalén que daría testimonio en Roma. Esa promesa incluía el tifón, los catorce días de oscuridad, el naufragio, la víbora y los tres meses en Malta. Las tormentas no son desvíos de la voluntad de Dios; a menudo son la ruta por la cual Él la cumple. Confíen en Él en la tormenta. Esperen hasta que les muestre el camino. Aléjense cuando los libere. Él ha vencido al mundo.</p>
+
+        <p>Tercero, <strong>Hechos 28 no tiene capítulo final, porque el capítulo final es el suyo</strong>. Lucas termina a media frase. El Señor terminó el canon, pero no terminó la misión. El reino sigue siendo predicado, las cosas concernientes al Señor Jesucristo siguen siendo enseñadas, y nadie — ni Félix, ni Agripa, ni cadena, ni tormenta de catorce días — puede impedir que el evangelio alcance a la siguiente persona que lo oirá. Que el Señor escriba el siguiente capítulo a través de usted.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></span><span class="lang-es"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></span></p>
+    <div class="exam-status hidden" id="examStatus"></div>
+<div class="mc-section" id="mcSection">
+  <h3><span class="lang-en">Multiple Choice &mdash; 20 Questions</span><span class="lang-es">Opción Múltiple &mdash; 20 Preguntas</span></h3>
+  <div id="mcContainer"></div>
+</div>
+<div class="sa-section" id="saSection">
+  <h3><span class="lang-en">Short Answer &mdash; 10 Questions <span class="sa-badge" id="saBadgeEn"></span></span><span class="lang-es">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="saBadgeEs"></span></span></h3>
+  <p class="sa-note"><span class="lang-en" id="saNoteEn"></span><span class="lang-es" id="saNoteEs"></span></p>
+  <div id="kwContainer"></div>
+</div>
+<div style="margin-top: 20px;">
+  <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+  <button id="resetExamBtn" class="btn-reset" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+  <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+</div>
+</div>
+
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+
+const TOTAL_UNITS = 11;
+const CURRENT_UNIT = 10;
+const NEXT_URL = 'CTSActsUnit11.html';
+
+// === MC + SA data (preserved verbatim from upstream) ===
+const mcQuestions = [
+    { textEn: "1. The lawyer hired by the Sanhedrin to prosecute Paul before Felix was named:", textEs: "1. El abogado contratado por el Sanedrín para acusar a Pablo ante Félix se llamaba:", optionsEn: ["Tertullus", "Gamaliel", "Apollos", "Ananias"], optionsEs: ["Tértulo", "Gamaliel", "Apolos", "Ananías"], correct: 0 },
+    { textEn: "2. The three charges Tertullus brought against Paul were that he was a pestilent fellow, a ringleader of the Nazarenes, and:", textEs: "2. Los tres cargos que Tértulo presentó contra Pablo eran que era un hombre pestilente, cabecilla de los nazarenos, y:", optionsEn: ["Had stolen temple offerings", "Had taught against Caesar", "Had tried to profane the temple", "Had murdered a priest"], optionsEs: ["Había robado ofrendas del templo", "Había enseñado contra el César", "Había intentado profanar el templo", "Había asesinado a un sacerdote"], correct: 2 },
+    { textEn: "3. Paul reasoned with Felix about righteousness, self-control, and:", textEs: "3. Pablo disertó con Félix sobre la justicia, el dominio propio, y:", optionsEn: ["Wealth distribution", "The judgment to come", "Imperial taxation", "Marriage law"], optionsEs: ["La distribución de riqueza", "El juicio venidero", "Los impuestos imperiales", "La ley del matrimonio"], correct: 1 },
+    { textEn: "4. Felix's response to Paul's preaching was:", textEs: "4. La respuesta de Félix a la predicación de Pablo fue:", optionsEn: ["Immediate conversion", "Anger and execution", "Public confession", "'Go away for now; when I have a convenient time I will call for you'"], optionsEs: ["Conversión inmediata", "Ira y ejecución", "Confesión pública", "'Vete por ahora; en teniendo oportunidad, te llamaré'"], correct: 3 },
+    { textEn: "5. Felix was hoping Paul would offer him:", textEs: "5. Félix esperaba que Pablo le ofreciera:", optionsEn: ["A position in Antioch", "An imperial appointment", "His daughter in marriage", "Money (a bribe)"], optionsEs: ["Un puesto en Antioquía", "Un nombramiento imperial", "Su hija en matrimonio", "Dinero (un soborno)"], correct: 3 },
+    { textEn: "6. Felix's Jewish wife, who was the youngest daughter of Herod Agrippa I, was named:", textEs: "6. La esposa judía de Félix, que era la hija menor de Herodes Agripa I, se llamaba:", optionsEn: ["Drusilla", "Bernice", "Salome", "Herodias"], optionsEs: ["Drusila", "Berenice", "Salomé", "Herodías"], correct: 0 },
+    { textEn: "7. Felix's successor as governor was:", textEs: "7. El sucesor de Félix como gobernador fue:", optionsEn: ["Pilate", "Quirinius", "Porcius Festus", "Albinus"], optionsEs: ["Pilato", "Cirenio", "Porcio Festo", "Albino"], correct: 2 },
+    { textEn: "8. To remove his case from the reach of the Jerusalem mob, Paul declared:", textEs: "8. Para sacar su caso del alcance de la turba de Jerusalén, Pablo declaró:", optionsEn: ["I am a Pharisee", "I am ready to die", "I will not be moved", "I appeal to Caesar"], optionsEs: ["Soy fariseo", "Estoy listo a morir", "No seré movido", "A César apelo"], correct: 3 },
+    { textEn: "9. The king who came to Caesarea with his sister Bernice was:", textEs: "9. El rey que vino a Cesarea con su hermana Berenice era:", optionsEn: ["Herod the Great", "Herod Agrippa II (great-grandson of Herod the Great)", "Herod Antipas", "Archelaus"], optionsEs: ["Herodes el Grande", "Herodes Agripa II (bisnieto de Herodes el Grande)", "Herodes Antipas", "Arquelao"], correct: 1 },
+    { textEn: "10. Festus interrupted Paul's defense before Agrippa by shouting:", textEs: "10. Festo interrumpió la defensa de Pablo ante Agripa gritando:", optionsEn: ["Paul, you are beside yourself! Much learning is driving you mad!", "Bring the witnesses", "He must die", "Stop the trial"], optionsEs: ["¡Estás loco, Pablo! Las muchas letras te vuelven loco", "Traigan los testigos", "Debe morir", "Detengan el juicio"], correct: 0 },
+    { textEn: "11. Agrippa II's famous reply to Paul was:", textEs: "11. La famosa respuesta de Agripa II a Pablo fue:", optionsEn: ["I deny everything", "You almost persuade me to become a Christian", "Take him to Caesar at once", "I will think it over"], optionsEs: ["Niego todo", "Por poco me persuades a ser cristiano", "Llévenlo al César de inmediato", "Lo pensaré"], correct: 1 },
+    { textEn: "12. Paul's reply to Agrippa was that he wished all who heard him would become 'almost and altogether such as I am, except for':", textEs: "12. La respuesta de Pablo a Agripa fue que deseaba que todos los que lo oían fueran 'tales cual yo soy, excepto':", optionsEn: ["My poverty", "My weakness", "My persecutors", "These chains"], optionsEs: ["Mi pobreza", "Mi debilidad", "Mis perseguidores", "Estas cadenas"], correct: 3 },
+    { textEn: "13. The northeaster wind that drove Paul's ship across the open Mediterranean was called:", textEs: "13. El viento del nordeste que empujó el barco de Pablo a través del Mediterráneo abierto se llamaba:", optionsEn: ["Sirocco", "Euroclydon", "Mistral", "Bora"], optionsEs: ["Siroco", "Euroclidón", "Mistral", "Bora"], correct: 1 },
+    { textEn: "14. The storm lasted approximately:", textEs: "14. La tormenta duró aproximadamente:", optionsEn: ["Three days", "Forty days", "Fourteen days and nights, with no sun or stars seen", "One night"], optionsEs: ["Tres días", "Cuarenta días", "Catorce días y noches, sin ver sol ni estrellas", "Una noche"], correct: 2 },
+    { textEn: "15. The angel of the Lord told Paul during the storm that:", textEs: "15. El ángel del Señor le dijo a Pablo durante la tormenta que:", optionsEn: ["He must be brought before Caesar, and God had granted him all who sailed with him", "The ship would be saved", "All would die", "Land was within reach"], optionsEs: ["Era necesario que compareciera ante César, y Dios le había dado todos los que navegaban con él", "El barco se salvaría", "Todos morirían", "La tierra estaba al alcance"], correct: 0 },
+    { textEn: "16. The total number of people on board the freighter who survived the shipwreck was:", textEs: "16. El número total de personas a bordo del carguero que sobrevivieron el naufragio fue:", optionsEn: ["276 souls (none lost)", "500 souls", "70 souls", "120 souls"], optionsEs: ["276 almas (ninguna perdida)", "500 almas", "70 almas", "120 almas"], correct: 0 },
+    { textEn: "17. The island where the survivors landed was called Melita, today known as:", textEs: "17. La isla donde llegaron los sobrevivientes se llamaba Melita, hoy conocida como:", optionsEn: ["Crete", "Sicily", "Malta", "Cyprus"], optionsEs: ["Creta", "Sicilia", "Malta", "Chipre"], correct: 2 },
+    { textEn: "18. While gathering wood for the fire, Paul was bitten by:", textEs: "18. Mientras juntaba leña para el fuego, Pablo fue mordido por:", optionsEn: ["A scorpion", "A viper that had been dormant in the cold", "A wild dog", "An eel"], optionsEs: ["Un escorpión", "Una víbora que había estado aletargada por el frío", "Un perro salvaje", "Una anguila"], correct: 1 },
+    { textEn: "19. The chief man of Malta whose father Paul healed was named:", textEs: "19. El principal de Malta cuyo padre Pablo sanó se llamaba:", optionsEn: ["Cornelius", "Sergius", "Publius", "Tertius"], optionsEs: ["Cornelio", "Sergio", "Publio", "Tercio"], correct: 2 },
+    { textEn: "20. Acts ends with Paul in Rome, in his own rented house for two years, preaching the kingdom of God and teaching the things concerning the Lord Jesus Christ:", textEs: "20. Hechos termina con Pablo en Roma, en su propia casa rentada por dos años, predicando el reino de Dios y enseñando las cosas concernientes al Señor Jesucristo:", optionsEn: ["With great difficulty", "Only in private", "Through interpreters", "With all confidence, no one forbidding him"], optionsEs: ["Con gran dificultad", "Sólo en privado", "Por intérpretes", "Con toda confianza, sin impedimento"], correct: 3 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Discuss the rhetorical strategy of Tertullus's flattery of Felix (Acts 24:2-4) compared to Paul's measured defense (Acts 24:10-21). What does this teach about courtroom integrity?", textEs: "21. Discuta la estrategia retórica de la adulación de Tértulo a Félix (Hechos 24:2-4) comparada con la defensa medida de Pablo (Hechos 24:10-21). ¿Qué enseña sobre la integridad en el tribunal?", kwEn: ["tertul", "flatter", "felix", "defen", "integ", "measur", "honest", "court"], kwEs: ["tértul", "adulac", "félix", "defen", "integ", "medid", "honest", "tribun"], modelEn: "Tertullus opens his prosecution not with facts but with flattery, praising Felix for peace and reforms he never actually brought, an obvious rhetorical strategy meant to win favor before a single true accusation is offered. Paul's measured defense stands in sharp contrast: he addresses Felix respectfully but without flattery, then moves immediately and honestly to verifiable facts, inviting cross-examination rather than avoiding it. This teaches courtroom integrity as a matter of what a person leans on for persuasion \u2014 flattery leans on emotional manipulation while honest testimony leans on truth that can withstand scrutiny, and a person defending Christ should always choose the second even when the first would be easier.", modelEs: "T\u00e9rtulo abre su acusaci\u00f3n no con hechos sino con adulaci\u00f3n, alabando a F\u00e9lix por una paz y reformas que en realidad nunca trajo, una estrategia ret\u00f3rica obvia para ganar favor antes de presentar una sola acusaci\u00f3n verdadera. La defensa medida de Pablo contrasta marcadamente: se dirige a F\u00e9lix con respeto pero sin adulaci\u00f3n, y luego pasa de inmediato y con honestidad a hechos verificables, invitando al examen en lugar de evitarlo. Esto ense\u00f1a la integridad en el tribunal como una cuesti\u00f3n de en qu\u00e9 se apoya la persuasi\u00f3n de alguien \u2014 la adulaci\u00f3n se apoya en la manipulaci\u00f3n emocional mientras que el testimonio honesto se apoya en la verdad que resiste el escrutinio, y quien defiende a Cristo siempre debe elegir lo segundo aunque lo primero sea m\u00e1s f\u00e1cil." },
+    { textEn: "22. Felix said, 'Go away for now; when I have a convenient time I will call for you' (Acts 24:25). Discuss why procrastination is one of the most dangerous responses to gospel preaching.", textEs: "22. Félix dijo: 'Vete por ahora; en teniendo oportunidad, te llamaré' (Hechos 24:25). Discuta por qué la procrastinación es una de las respuestas más peligrosas a la predicación del evangelio.", kwEn: ["felix", "conven", "procras", "delay", "salv", "later", "gospel", "now"], kwEs: ["félix", "oportun", "procras", "demor", "salv", "luego", "evangelio", "ahora"], modelEn: "Felix told Paul, 'go away for now; when I have a convenient time I will call for you,' postponing a decision he never actually made, since Luke tells us Felix kept sending for Paul later, hoping for a bribe but never received salvation or truly converted. Procrastination is one of the most dangerous responses to gospel preaching precisely because it disguises itself as openness rather than rejection; unlike outright mockery, delay never forces a crisis, so a person can feel spiritually engaged for years while never actually surrendering, and Felix's story warns that the convenient time so many people wait for often simply never comes.", modelEs: "F\u00e9lix le dijo a Pablo: 'vete por ahora; en teniendo oportunidad, te llamar\u00e9,' posponiendo una decisi\u00f3n que nunca tom\u00f3 en realidad, ya que Lucas nos dice que F\u00e9lix segu\u00eda mandando llamar a Pablo luego, esperando un soborno pero nunca recibi\u00f3 la salvaci\u00f3n ni se convirti\u00f3 de verdad. La procrastinaci\u00f3n es una de las respuestas m\u00e1s peligrosas a la predicaci\u00f3n del evangelio precisamente porque se disfraza de apertura en lugar de rechazo; a diferencia de la burla abierta, la demora nunca fuerza una crisis, as\u00ed que una persona puede sentirse espiritualmente comprometida por a\u00f1os sin rendirse jam\u00e1s realmente, y la historia de F\u00e9lix advierte que la oportunidad conveniente que tanta gente espera a menudo simplemente nunca llega." },
+    { textEn: "23. Discuss Paul's strategic use of his right to appeal to Caesar (Acts 25:11). How does this fit with the Lord's earlier promise that Paul would witness in Rome?", textEs: "23. Discuta el uso estratégico que hace Pablo de su derecho a apelar al César (Hechos 25:11). ¿Cómo encaja esto con la promesa anterior del Señor de que Pablo testificaría en Roma?", kwEn: ["appeal", "caesar", "rome", "provid", "citizen", "strateg", "lord", "promise"], kwEs: ["apel", "césar", "roma", "provid", "ciudad", "estrate", "señor", "promes"], modelEn: "Paul strategically appealed to Caesar (Acts 25:11) once he saw that Festus, seeking Jewish favor, might hand him over to a hostile Jerusalem trial, invoking his Roman citizen right to be judged by the emperor himself rather than risk assassination on the road. This fits perfectly with the Lord's earlier promise that Paul would witness in Rome, since the appeal to Caesar becomes God's providential mechanism for getting Paul there safely and at government expense, showing that Paul's strategic legal move and the Lord's sovereign promise were never in tension \u2014 God's providence often works precisely through a believer's wise, legal choices rather than around them.", modelEs: "Pablo apel\u00f3, con una estrategia clara, al C\u00e9sar (Hechos 25:11) al ver que Festo, buscando el favor de los jud\u00edos, pod\u00eda entregarlo a un juicio hostil en Jerusal\u00e9n, invocando su derecho de ciudadano romano a ser juzgado por el propio emperador en lugar de arriesgarse a ser asesinado en el camino. Esto encaja perfectamente con la promesa anterior del Se\u00f1or de que Pablo testificar\u00eda en Roma, ya que la apelaci\u00f3n al C\u00e9sar se convierte en el mecanismo providencial de Dios para llevar a Pablo all\u00e1 con seguridad y a costa del gobierno, mostrando que la jugada legal estrat\u00e9gica de Pablo y la promesa soberana del Se\u00f1or nunca estuvieron en tensi\u00f3n \u2014 la providencia de Dios a menudo obra precisamente a trav\u00e9s de las decisiones sabias y legales de un creyente y no a pesar de ellas." },
+    { textEn: "24. Agrippa II's reply, 'You almost persuade me to become a Christian' (Acts 26:28), is one of the saddest sentences in the New Testament. Discuss the danger of being 'almost' converted.", textEs: "24. La respuesta de Agripa II, 'Por poco me persuades a ser cristiano' (Hechos 26:28), es una de las frases más tristes del Nuevo Testamento. Discuta el peligro de ser 'por poco' convertido.", kwEn: ["agrippa", "almost", "persuad", "lost", "decision", "near", "convert", "tragic"], kwEs: ["agripa", "casi", "persuad", "perdid", "decisión", "cerca", "convert", "trágic"], modelEn: "Agrippa's reply, 'you almost persuade me to become a Christian,' is one of the saddest sentences in the New Testament because it shows a man who heard the clearest possible gospel appeal, felt its force, stood at the very threshold of decision, and then stepped back, choosing 'almost' over 'all.' The danger of being 'almost' converted is that near-conversion produces all the felt experience of nearness with none of the actual saving decision \u2014 a person can be intellectually persuaded, emotionally moved, and even close to tears, and still walk away lost, since the tragic gap between almost and actually converted is not measured in feeling but in a decision that was, in Agrippa's case, never actually made.", modelEs: "La respuesta de Agripa, 'por poco me persuades a ser cristiano,' es una de las frases m\u00e1s tristes del Nuevo Testamento porque muestra a un hombre que oy\u00f3 el llamado del evangelio m\u00e1s claro posible, sinti\u00f3 su fuerza, se par\u00f3 justo en el umbral de la decisi\u00f3n, y luego dio un paso atr\u00e1s, eligiendo 'casi' en lugar de 'todo'. El peligro de ser convertido 'por poco' es que la casi conversi\u00f3n produce toda la experiencia sentida de cercan\u00eda sin ninguna de las decisiones salvadoras reales \u2014 una persona puede estar intelectualmente persuadida, emocionalmente conmovida, e incluso cerca de las l\u00e1grimas, y a\u00fan as\u00ed alejarse perdida, ya que la brecha tr\u00e1gica entre casi convertido y realmente convertido no se mide en sentimiento sino en una decisi\u00f3n que, en el caso de Agripa, nunca se tom\u00f3 realmente." },
+    { textEn: "25. Paul's reply to Agrippa included 'except for these chains' (Acts 26:29). Discuss what this teaches about the freedom of the imprisoned Christian and the bondage of the unconverted king.", textEs: "25. La respuesta de Pablo a Agripa incluyó 'excepto estas cadenas' (Hechos 26:29). Discuta lo que esto enseña sobre la libertad del cristiano encarcelado y la esclavitud del rey no convertido.", kwEn: ["chain", "freedom", "agrippa", "paul", "bond", "prison", "true", "king"], kwEs: ["cadena", "libert", "agripa", "pablo", "atad", "prisión", "verdad", "rey"], modelEn: "Paul tells Agrippa he wishes everyone listening were as he is, 'except for these chains,' revealing a stunning reversal: the prisoner is the free man and the king on his throne is the one in bondage, since Paul's freedom in Christ was never dependent on physical circumstance while Agrippa's unbelief kept him chained to sin regardless of his crown. This teaches that true freedom and true bondage are spiritual realities that can run completely opposite to physical appearances \u2014 Paul in literal chains in a Roman prison was freer than the unconverted king judging him, because the chains that actually enslave a person are the ones sin puts on the soul, not the ones Rome puts on the wrists.", modelEs: "Pablo le dice a Agripa que desear\u00eda que todos los que lo escuchan fueran como \u00e9l, 'excepto estas cadenas,' revelando una sorprendente inversi\u00f3n: el prisionero es el hombre libre y el rey en su trono es el que est\u00e1 en esclavitud, ya que la libertad de Pablo en Cristo nunca dependi\u00f3 de las circunstancias f\u00edsicas mientras que la incredulidad de Agripa lo manten\u00eda atado al pecado sin importar su corona. Esto ense\u00f1a que la libertad verdadera y la esclavitud verdadera son realidades espirituales que pueden ir completamente opuestas a las apariencias f\u00edsicas \u2014 Pablo, en cadenas literales en una prisi\u00f3n romana, era m\u00e1s libre que el rey no convertido que lo juzgaba, porque las cadenas que realmente esclavizan a una persona son las que el pecado pone sobre el alma, no las que Roma pone sobre las mu\u00f1ecas." },
+    { textEn: "26. The first principle for surviving a storm is 'know in whom to believe.' Using Acts 27:25 ('I believe God'), discuss the difference between faith in an outcome and faith in a Person.", textEs: "26. El primer principio para sobrevivir una tormenta es 'sepa en quién creer'. Usando Hechos 27:25 ('confío en Dios'), discuta la diferencia entre la fe en un resultado y la fe en una Persona.", kwEn: ["believ", "god", "faith", "person", "storm", "object", "outcome", "trust"], kwEs: ["creer", "dios", "fe", "persona", "tempest", "objeto", "result", "confia"], modelEn: "Paul's declaration 'I believe God' (Acts 27:25) came in the middle of a raging storm before any outcome was visible \u2014 the ship was not yet saved, the shore not yet reached, but Paul's faith was already settled because it rested on the character of the God who spoke the promise, not on seeing the storm calm first. This is the difference between faith in an outcome and faith in a Person: faith in an outcome waits to believe until circumstances cooperate, but faith in a Person can say 'I believe God' while the waves are still crashing, because the object of trust is not the weather but the trustworthy One who gave His word.", modelEs: "La declaraci\u00f3n de Pablo 'confío en Dios' (Hechos 27:25) lleg\u00f3 en medio de una tempestad furiosa antes de que ning\u00fan resultado fuera visible \u2014 el barco a\u00fan no estaba a salvo, la costa a\u00fan no se alcanzaba, pero la fe de Pablo ya estaba firme porque descansaba en el car\u00e1cter del Dios que dio la promesa, no en ver la tempestad calmarse primero. Esta es la diferencia entre la fe en un resultado y la fe en una Persona: la fe en un resultado espera para creer hasta que las circunstancias cooperen, pero la fe en una Persona puede decir 'confío en Dios' mientras las olas todav\u00eda se estrellan, porque el objeto de la confianza no es el clima sino el Aquel digno de confianza que dio su palabra." },
+    { textEn: "27. The second principle for surviving a storm is 'know when to wait.' Discuss why waiting is the hardest discipline in the Christian life.", textEs: "27. El segundo principio para sobrevivir una tormenta es 'sepa cuándo esperar'. Discuta por qué esperar es la disciplina más difícil de la vida cristiana.", kwEn: ["wait", "patien", "storm", "discipl", "pray", "hard", "active", "stillness"], kwEs: ["esperar", "pacien", "tempest", "discipl", "oraci", "difíc", "activ", "quietud"], modelEn: "Waiting is the hardest discipline in the Christian life because our flesh treats motion as evidence of faith and stillness as evidence of doubt, so during a storm the instinct is to do something, anything, rather than patiently wait on God's timing. Yet Scripture consistently calls waiting an active discipline, not passive resignation: waiting well means continuing to pray, continuing to obey the last clear instruction, and continuing to trust even when nothing visibly changes, which is far harder than any single dramatic act of faith because it must be sustained hour after hour with no guaranteed relief in sight.", modelEs: "Esperar es la disciplina m\u00e1s dif\u00edcil de la vida cristiana porque nuestra carne trata el movimiento como evidencia de fe y la quietud como evidencia de duda, as\u00ed que durante una tempestad el instinto es hacer algo, lo que sea, en lugar de esperar pacientemente el tiempo de Dios. Sin embargo, la Escritura constantemente llama a esperar una disciplina activa, no una resignaci\u00f3n pasiva: esperar bien significa seguir en oraci\u00f3n, seguir obedeciendo la \u00faltima instrucci\u00f3n clara, y seguir confiando aunque nada cambie visiblemente, lo cual es mucho m\u00e1s dif\u00edcil que cualquier acto dram\u00e1tico \u00fanico de fe porque debe sostenerse hora tras hora sin alivio garantizado a la vista." },
+    { textEn: "28. The third principle for surviving a storm is 'know when to walk away' (Acts 27:31). Discuss how this principle applies to grief, dead relationships, and past failures.", textEs: "28. El tercer principio para sobrevivir una tormenta es 'sepa cuándo alejarse' (Hechos 27:31). Discuta cómo este principio se aplica al duelo, las relaciones muertas y los fracasos pasados.", kwEn: ["walk", "leave", "grief", "ride", "past", "let", "go", "storm"], kwEs: ["alej", "dejar", "duelo", "pasad", "solt", "ir", "tempest", "atrás"], modelEn: "The principle 'know when to walk away' comes from Acts 27:31-32, in the middle of the storm, where the sailors' ropes to the lifeboat are cut, forcing everyone to stay with the ship rather than ride out a false escape route that would only drain their real hope. Applied to grief, dead relationships, and past failures, this means there comes a point where continuing to grip what is already lost only bleeds strength from the present, and sometimes the wisest choice is to leave the wreckage behind. Walking away from a relationship that is dead, releasing grief's grip when mourning has done its necessary work, or refusing to keep re-litigating a past failure are all forms of the same discipline: knowing when to let go of a lifeboat that was never actually going to save you, so your remaining strength can go toward what still can be saved.", modelEs: "El principio 'sepa cu\u00e1ndo alejarse' viene de Hechos 27:31-32, en medio de la tempestad, donde se cortan las cuerdas del bote salvavidas, obligando a todos a quedarse con el barco en lugar de aferrarse a una falsa ruta de escape que solo drenar\u00eda su esperanza real. Aplicado al duelo, las relaciones muertas y los fracasos pasados, esto significa que llega un punto donde seguir aferr\u00e1ndose a lo que ya se perdi\u00f3 solo desangra la fuerza del presente, y a veces la decisi\u00f3n m\u00e1s sabia es soltar y dejar atr\u00e1s los restos. Alejarse de una relaci\u00f3n que est\u00e1 muerta, soltar el agarre del duelo cuando el luto ya cumpli\u00f3 su labor necesaria, o negarse a seguir relitigando un fracaso pasado son formas de la misma disciplina: saber cu\u00e1ndo soltar un bote salvavidas que nunca realmente iba a salvarte, para que tu fuerza restante pueda ir hacia lo que todav\u00eda se puede salvar." },
+    { textEn: "29. Acts 28:15 records that the Roman believers walked out to meet Paul on the Appian Way and 'Paul thanked God and took courage.' Discuss the importance of small welcomes in pastoral ministry.", textEs: "29. Hechos 28:15 registra que los creyentes romanos salieron a recibir a Pablo en la Vía Apia y 'Pablo dio gracias a Dios y tomó aliento.' Discuta la importancia de los pequeños recibimientos en el ministerio pastoral.", kwEn: ["appian", "way", "rome", "welcom", "courag", "fellow", "small", "thank"], kwEs: ["apia", "vía", "roma", "recib", "ánimo", "comun", "pequeñ", "gracias"], modelEn: "When the Roman believers in Rome walked the Appian Way to meet Paul, some coming as far as the Forum of Appius and others to Three Taverns, Luke records that seeing them Paul thanked God and took courage \u2014 a battle-hardened apostle who had survived shipwreck, snakebite, and years of imprisonment was refreshed simply by a small welcome and the fellowship of ordinary believers walking out to greet him. This teaches that small acts of welcome carry outsized pastoral weight: a tired minister does not always need a grand strategy session, sometimes he needs people to simply show up, and the fellowship of being met rather than left to arrive alone can restore courage that months of hardship could not extinguish.", modelEs: "Cuando los creyentes romanos caminaron por la V\u00eda Apia para recibir a Pablo, algunos llegando hasta el Foro de Apio y otros a Las Tres Tabernas, Lucas registra que al verlos Pablo dio gracias a Dios y tom\u00f3 \u00e1nimo \u2014 un ap\u00f3stol curtido en batallas que hab\u00eda sobrevivido un naufragio, una mordedura de serpiente, y a\u00f1os de prisi\u00f3n fue reanimado simplemente por un peque\u00f1o recibimiento y la comuni\u00f3n de creyentes comunes que salieron a saludarlo. Esto ense\u00f1a que los peque\u00f1os actos de bienvenida llevan un peso pastoral desproporcionado: un ministro cansado no siempre necesita una gran sesi\u00f3n de estrategia, a veces solo necesita que la gente aparezca, y la comuni\u00f3n de ser recibido en lugar de dejado para llegar solo puede restaurar un \u00e1nimo que meses de dificultad no pudieron extinguir." },
+    { textEn: "30. Acts 28:31 ends Luke's narrative mid-sentence with a participle ('preaching… teaching… no one forbidding him'). Discuss why the book of Acts has no formal ending and what this teaches about the ongoing mission.", textEs: "30. Hechos 28:31 termina la narrativa de Lucas a mitad de frase con un participio ('predicando… enseñando… sin impedimento'). Discuta por qué el libro de Hechos no tiene final formal y qué enseña esto sobre la misión continua.", kwEn: ["open", "ending", "preach", "teach", "29", "ongoing", "miss", "no"], kwEs: ["abiert", "final", "predic", "enseñ", "29", "continú", "misión", "sin"], modelEn: "Acts 28:31 ends mid-sentence with a participle, 'preaching the kingdom of God and teaching the things concerning the Lord Jesus Christ with all confidence, no one forbidding him' \u2014 Luke never tells us the outcome of Paul's trial, never gives a formal ending, because there is no chapter 29 that wraps up the story with a bow. This teaches that the book of Acts has an open ending on purpose: the mission of the church did not conclude when Luke stopped writing, and the missing conclusion is itself the message \u2014 the ongoing work of preaching and teaching the gospel continues past the last verse, into every generation that picks up where Luke's pen stopped, including this one.", modelEs: "Hechos 28:31 termina a mitad de frase con un participio, 'predicando el reino de Dios y ense\u00f1ando acerca del Se\u00f1or Jesucristo con toda confianza, sin impedimento' \u2014 Lucas nunca nos dice el resultado del juicio de Pablo, nunca da un final formal, porque no hay un cap\u00edtulo 29 que cierre la historia con un lazo. Esto ense\u00f1a que el libro de Hechos tiene un final abierto a prop\u00f3sito: la misi\u00f3n de la iglesia no concluy\u00f3 cuando Lucas dej\u00f3 de escribir, y la conclusi\u00f3n que falta es en s\u00ed misma el mensaje \u2014 la obra de predicar y ense\u00f1ar el evangelio contin\u00faa m\u00e1s all\u00e1 del \u00faltimo vers\u00edculo, en cada generaci\u00f3n que retoma donde la pluma de Lucas se detuvo, incluyendo esta." }
+];
+
+// === Language toggle (3-button group) ===
+const langButtons = document.querySelectorAll('.lang-toggle-group button');
+function setLang(lang) {
+  document.body.classList.remove('lang-en','lang-es','lang-both');
+  document.body.classList.add('lang-' + lang);
+  langButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-lang') === lang));
+}
+langButtons.forEach(btn => btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang'))));
+
+// === Student + Track ===
+function readStudent() {
+  try { return JSON.parse(lsGet('cts_student') || 'null'); } catch(e) { return null; }
+}
+function readTrack() {
+  const t = lsGet('cts_track');
+  if (t === 'cert' || t === 'mdiv' || t === 'thm') return t;
+  const st = readStudent();
+  if (st && st.track) return st.track;
+  return 'cert';
+}
+function isMdiv() { const t = readTrack(); return t === 'mdiv' || t === 'thm'; }
+
+// === Greeting + track badge ===
+function applyStudentUI() {
+  const student = readStudent();
+  const isEs = document.body.classList.contains('lang-es');
+  const greetEl = document.getElementById('studentGreeting');
+  const warn = document.getElementById('regWarn');
+  const slot = document.getElementById('trackBadgeSlot');
+  if (student && student.name) {
+    greetEl.innerHTML = '👋 ' + student.name;
+    if (warn) warn.classList.add('hidden');
+    const track = readTrack();
+    const label = track === 'thm' ? 'Th.M.' : (track === 'mdiv' ? 'M.Div' : (isEs ? 'Certificado' : 'Certificate'));
+    if (slot) slot.innerHTML = '<span class="track-badge">' + label + '</span>';
+  } else {
+    greetEl.innerHTML = '<span style="color:#5b3a1f;">' + (isEs ? 'Bienvenido al Intensivo de Hechos' : 'Welcome to the Acts Intensive') + '</span>';
+    if (warn) warn.classList.remove('hidden');
+    if (slot) slot.innerHTML = '';
+  }
+}
+
+// === Registration modal (U1 only) ===
+
+function showRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.remove('hidden');
+}
+function hideRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.add('hidden');
+}
+const regModal = document.getElementById('regModal');
+const openBtn = document.getElementById('openRegBtn');
+const openBtn2 = document.getElementById('openRegBtn2');
+const saveBtn = document.getElementById('regSaveBtn');
+if (openBtn) openBtn.addEventListener('click', showRegModal);
+if (openBtn2) openBtn2.addEventListener('click', showRegModal);
+if (saveBtn) saveBtn.addEventListener('click', () => {
+  const name = (document.getElementById('regName').value || '').trim();
+  const email = (document.getElementById('regEmail').value || '').trim();
+  const track = (document.querySelector('input[name="regTrack"]:checked') || {}).value || 'cert';
+  const isEs = document.body.classList.contains('lang-es');
+  if (!name) {
+    alert(isEs ? 'Por favor ingrese su nombre completo.' : 'Please enter your full name.');
+    return;
+  }
+  const rec = { name: name, email: email, track: track };
+  try {
+    lsSet('cts_student', JSON.stringify(rec));
+    lsSet('cts_track', track);
+  } catch(e) {}
+  hideRegModal();
+  applyStudentUI();
+  applyExamState();
+});
+// Auto-open modal on U1 if no cts_student present
+if (CURRENT_UNIT === 1 && !readStudent()) {
+  showRegModal();
+}
+
+
+// === Progress grid ===
+let progress = {};
+try { progress = JSON.parse(lsGet('cts_acts_progress')) || {}; } catch(e) { progress = {}; }
+function updateProgressGrid() {
+  const grid = document.getElementById('progressGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 1; i <= TOTAL_UNITS; i++) {
+    let cls = '';
+    if (progress['unit' + i]) cls = 'completed';
+    if (i === CURRENT_UNIT) cls += ' active';
+    grid.innerHTML += '<a href="CTSActsUnit' + i + '.html" class="' + cls + '">' + i + '</a>';
+  }
+}
+updateProgressGrid();
+document.getElementById('prevUnitBtn').onclick = () => {};
+document.getElementById('nextUnitBtn').onclick = () => { window.location.href = NEXT_URL; };
+
+// === Per-unit state keys ===
+const MC_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_passed';
+const SA_PASSED_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_passed';
+const MC_SCORE_KEY = 'cts_acts_u' + CURRENT_UNIT + '_mc_score';
+const LOCK_MC_KEY = 'cts_acts_u' + CURRENT_UNIT + '_lockout';
+const LOCK_SA_KEY = 'cts_acts_u' + CURRENT_UNIT + '_sa_lockout';
+
+function mcPassed() { return lsGet(MC_PASSED_KEY) === '1'; }
+function saPassed() { return lsGet(SA_PASSED_KEY) === '1'; }
+function activeLock() {
+  const now = Date.now();
+  const mc = parseInt(lsGet(LOCK_MC_KEY) || '0', 10);
+  const sa = parseInt(lsGet(LOCK_SA_KEY) || '0', 10);
+  if (mcPassed()) { if (now < sa) return { until: sa, scope: 'sa' }; }
+  else { if (now < mc) return { until: mc, scope: 'mc' }; }
+  return null;
+}
+
+// === Render MC ===
+const mcContainer = document.getElementById('mcContainer');
+mcQuestions.forEach((q, idx) => {
+    /* CTS answer-shuffle (anti-gaming): randomize option order on each render */
+    (function(){var _o=q.optionsEn,_s=q.optionsEs,_n=_o.length,_p=[],_k,_i,_j,_t;for(_k=0;_k<_n;_k++){_p.push(_k);}for(_i=_n-1;_i>0;_i--){_j=Math.floor(Math.random()*(_i+1));_t=_p[_i];_p[_i]=_p[_j];_p[_j]=_t;}q.optionsEn=_p.map(function(x){return _o[x];});q.optionsEs=_p.map(function(x){return _s[x];});q.correct=_p.indexOf(q.correct);})();
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'mcq' + (idx + 1);
+  let h = '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>';
+  for (let i = 0; i < q.optionsEn.length; i++) {
+    const letter = 'ABCDEFGHIJ'[i];
+    h += '<button class="option" data-mc="' + idx + '" data-opt="' + i + '" type="button">' +
+         '<strong>' + letter + '.</strong> ' +
+         '<span class="lang-en">' + q.optionsEn[i] + '</span><span class="lang-es">' + q.optionsEs[i] + '</span>' +
+         '</button>';
+  }
+  mcContainer.appendChild(qDiv);
+  qDiv.innerHTML = h;
+  // Click handler on each option
+  qDiv.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (mcPassed()) return;
+      if (qDiv.dataset.answered !== undefined && qDiv.dataset.answered !== '') return;
+      const isEs = document.body.classList.contains('lang-es');
+      const chosen = parseInt(btn.getAttribute('data-opt'), 10);
+      const correct = q.correct;
+      qDiv.dataset.answered = String(chosen);
+      qDiv.querySelectorAll('.option').forEach(b => {
+        const oi = parseInt(b.getAttribute('data-opt'), 10);
+        b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+        if (oi === correct) b.classList.add('correct');
+        else if (oi === chosen) b.classList.add('wrong');
+      });
+      const oldfb = qDiv.querySelector('.feedback-text'); if (oldfb) oldfb.remove();
+      const fb = document.createElement('div');
+      if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+      else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+      qDiv.appendChild(fb);
+    });
+  });
+});
+
+// === Smart keyword matcher (word-boundary, like the other CTS courses) ===
+function kwHit(answer, kw){
+  if(!kw) return false;
+  var a=(answer||'').toLowerCase();
+  var k=String(kw).toLowerCase().trim();
+  if(!k) return false;
+  var esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var L='0-9a-zA-Z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1';
+  var re = k.length<=3 ? new RegExp('(?:^|[^'+L+'])'+esc+'(?!['+L+'])') : new RegExp('(?:^|[^'+L+'])'+esc);
+  return re.test(a);
+}
+function saHits(idx){
+  var ta=document.querySelector('.kw-answer[data-sa="'+idx+'"]');
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var kws=isEs?(q.kwEs||[]):(q.kwEn||[]);
+  var ans=(ta&&ta.value)||'';
+  var n=0; kws.forEach(function(k){ if(kwHit(ans,k)) n++; });
+  return n;
+}
+
+function revealSAModel(idx){
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var box=document.getElementById('saModel'+idx);
+  if(!box) return;
+  var head=isEs?'Respuesta modelo \u2014 est\u00fadiela':'Model answer \u2014 study this';
+  box.innerHTML='<strong>'+head+':</strong><br>'+(isEs?(q.modelEs||''):(q.modelEn||''));
+  box.style.display='block';
+}
+
+// === Render SA ===
+const kwContainer = document.getElementById('kwContainer');
+kwQuestions.forEach((q, idx) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'saq' + (idx + 1);
+  qDiv.innerHTML =
+    '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>' +
+    '<textarea class="kw-answer" data-sa="' + idx + '" placeholder=""></textarea>' +
+    '<button class="small check-kw-btn" type="button"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>' +
+    '<div class="feedback-text" id="saFb' + idx + '" style="display:none"></div>' +
+    '<div class="sa-model" id="saModel' + idx + '" style="display:none"></div>';
+  kwContainer.appendChild(qDiv);
+  const btn = qDiv.querySelector('.check-kw-btn');
+  const ta = qDiv.querySelector('.kw-answer');
+  btn.addEventListener('click', () => {
+    const isEs = document.body.classList.contains('lang-es');
+    const fb = document.getElementById('saFb' + idx);
+    const ans = (ta.value || '').trim();
+    if(!ans){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba su respuesta primero, luego verifique.' : 'Write your answer first, then check.';
+      var mb=document.getElementById('saModel'+idx); if(mb) mb.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    if(ans.length < 100){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.';
+      var mb2=document.getElementById('saModel'+idx); if(mb2) mb2.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    const hits = saHits(idx);
+    const ok = hits >= 3;
+    qDiv.dataset.answered = ok ? '1' : '0';
+    fb.className = 'feedback-text ' + (ok ? 'correct' : 'incorrect');
+    fb.style.display = 'block';
+    fb.textContent = ok
+      ? (isEs ? ('\u2713 Suficientes palabras clave (' + hits + ').') : ('\u2713 Sufficient keywords (' + hits + ').'))
+      : (isEs ? ('\u2717 A\u00fan no acreditada. Encontr\u00f3 ' + hits + ' de 3.') : ('\u2717 Not yet credited. Found ' + hits + ' of 3.'));
+    revealSAModel(idx);
+  });
+});
+
+// === UI state machine ===
+const mcSection = document.getElementById('mcSection');
+const saSection = document.getElementById('saSection');
+const statusEl = document.getElementById('examStatus');
+const submitBtn = document.getElementById('submitExamBtn');
+const resetBtn = document.getElementById('resetExamBtn');
+const resultEl = document.getElementById('examResult');
+
+function setStatus(cls, en, es) {
+  statusEl.className = 'exam-status ' + cls;
+  statusEl.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function clearStatus() { statusEl.className = 'exam-status hidden'; statusEl.innerHTML = ''; }
+function lockMcAsReview() {
+  document.querySelectorAll('#mcContainer .question').forEach(q => {
+    q.classList.add('review-locked');
+    q.querySelectorAll('.option').forEach(b => { b.disabled = true; });
+  });
+}
+
+function revealMC() {
+  const isEs = document.body.classList.contains('lang-es');
+  for (let i = 0; i < mcQuestions.length; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (!qd) continue;
+    const correct = mcQuestions[i].correct;
+    const chosen = (qd.dataset.answered !== undefined && qd.dataset.answered !== '') ? parseInt(qd.dataset.answered, 10) : -1;
+    qd.querySelectorAll('.option').forEach(b => {
+      const oi = parseInt(b.getAttribute('data-opt'), 10);
+      b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+      if (oi === correct) b.classList.add('correct');
+      else if (oi === chosen) b.classList.add('wrong');
+    });
+    let fb = qd.querySelector('.feedback-text');
+    if (!fb) { fb = document.createElement('div'); qd.appendChild(fb); }
+    if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+    else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+  }
+}
+
+
+function applyExamState() {
+  const isEs = document.body.classList.contains('lang-es');
+  // SA section is ALWAYS visible
+  saSection.style.display = '';
+  const badgeEn = document.getElementById('saBadgeEn');
+  const badgeEs = document.getElementById('saBadgeEs');
+  const noteEn = document.getElementById('saNoteEn');
+  const noteEs = document.getElementById('saNoteEs');
+  if (isMdiv()) {
+    badgeEn.textContent = 'Required for M.Div';
+    badgeEs.textContent = 'Requerido para M.Div';
+    noteEn.textContent = 'These 10 short-answer questions are required to complete Unit ' + CURRENT_UNIT + ' on the M.Div track. You must pass at 9 of 10.';
+    noteEs.textContent = 'Estas 10 preguntas de respuesta corta son requeridas para completar la Unidad ' + CURRENT_UNIT + ' en la vía M.Div. Debe aprobar con 9 de 10.';
+  } else {
+    badgeEn.textContent = 'Self-study — not graded for Certificate';
+    badgeEs.textContent = 'Auto-estudio — no cuenta para Certificado';
+    noteEn.textContent = 'These are the M.Div-level questions. Certificate students are welcome to attempt them for self-check; your answers will not affect your Unit ' + CURRENT_UNIT + ' pass status.';
+    noteEs.textContent = 'Estas son las preguntas de nivel M.Div. Los estudiantes de Certificado pueden intentarlas para auto-evaluarse; sus respuestas no afectarán el estado de aprobación de la Unidad ' + CURRENT_UNIT + '.';
+  }
+  const lock = activeLock();
+  if (lock) {
+    const minsLeft = Math.ceil((lock.until - Date.now()) / 60000);
+    submitBtn.disabled = true;
+    if (lock.scope === 'mc') {
+      setStatus('locked',
+        'Exam locked. Try again in ' + minsLeft + ' minute(s). The full exam will reset.',
+        'Examen bloqueado. Intente de nuevo en ' + minsLeft + ' minuto(s). El examen completo se reiniciará.');
+    } else {
+      setStatus('locked',
+        'Short-answer section locked. Try again in ' + minsLeft + ' minute(s). Multiple-choice pass is preserved.',
+        'Sección de respuesta corta bloqueada. Intente de nuevo en ' + minsLeft + ' minuto(s). Su aprobación de opción múltiple se conserva.');
+      lockMcAsReview();
+    }
+    setTimeout(applyExamState, 30000);
+    return;
+  }
+  submitBtn.disabled = false;
+  if (mcPassed()) {
+    lockMcAsReview();
+    if (isMdiv() && !saPassed()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed (saved). Complete the 10 short-answer questions to finish Unit ' + CURRENT_UNIT + '.',
+        'Opción múltiple aprobada (guardada). Complete las 10 preguntas de respuesta corta para terminar la Unidad ' + CURRENT_UNIT + '.');
+    } else if (!isMdiv()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed. Unit ' + CURRENT_UNIT + ' complete for Certificate track.',
+        'Opción múltiple aprobada. Unidad ' + CURRENT_UNIT + ' completa para la vía Certificado.');
+    } else {
+      clearStatus();
+    }
+  } else {
+    clearStatus();
+  }
+}
+
+submitBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const lock = activeLock();
+  if (lock) { applyExamState(); return; }
+
+  // Score MC
+  let mc = 0;
+  for (let i = 0; i < 20; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (qd && qd.dataset.answered !== undefined && parseInt(qd.dataset.answered, 10) === mcQuestions[i].correct) mc++;
+  }
+  if (mcPassed()) {
+    mc = parseInt(lsGet(MC_SCORE_KEY) || '18', 10);
+  }
+  const mcPass = mc >= 18;
+  revealMC();
+
+  // Score SA (recompute with the smart matcher)
+  let sa = 0;
+  for (let i = 0; i < 10; i++) {
+    if (saHits(i) >= 3) sa++;
+  }
+  const saPass = sa >= 9;
+
+  if (!isMdiv()) {
+    // Certificate track — only MC matters
+    if (mcPass) {
+      lsSet(MC_PASSED_KEY, '1');
+      lsSet(MC_SCORE_KEY, String(mc));
+      progress['unit' + CURRENT_UNIT] = true;
+      lsSet('cts_acts_progress', JSON.stringify(progress));
+      resultEl.style.color = '#1f6b3b';
+      resultEl.textContent = (isEs
+        ? '¡Aprobado! OM ' + mc + '/20. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+        : 'Passed! MC ' + mc + '/20. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+    } else {
+      lsSet(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+    }
+    return;
+  }
+
+  // M.Div track
+  if (!mcPassed()) {
+    if (!mcPass) {
+      lsSet(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min. Examen completo se reiniciará.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min. Full exam will reset.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+      return;
+    }
+    lsSet(MC_PASSED_KEY, '1');
+    lsSet(MC_SCORE_KEY, String(mc));
+  }
+  if (saPass) {
+    lsSet(SA_PASSED_KEY, '1');
+    progress['unit' + CURRENT_UNIT] = true;
+    lsSet('cts_acts_progress', JSON.stringify(progress));
+    const finalMc = parseInt(lsGet(MC_SCORE_KEY) || '18', 10);
+    resultEl.style.color = '#1f6b3b';
+    resultEl.textContent = (isEs
+      ? '¡Aprobado! OM ' + finalMc + '/20, RC ' + sa + '/10. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+      : 'Passed! MC ' + finalMc + '/20, SA ' + sa + '/10. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+  } else {
+    lsSet(LOCK_SA_KEY, String(Date.now() + 15 * 60 * 1000));
+    resultEl.style.color = '#8a1f1f';
+    resultEl.textContent = (isEs
+      ? 'RC ' + sa + '/10. Necesita 9. Sección RC bloqueada 15 min. OM permanece aprobada.'
+      : 'SA ' + sa + '/10. Need 9. SA section locked 15 min. MC pass preserved.');
+    submitBtn.disabled = true;
+    setTimeout(applyExamState, 30000);
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar la Unidad ' + CURRENT_UNIT + '? Esto borrará sus respuestas y el estado de aprobación de OM/RC para esta unidad. (Esto no borra su registro.)'
+    : 'Reset Unit ' + CURRENT_UNIT + '? This will clear your answers and MC/SA pass state for this unit. (Does not clear your registration.)';
+  if (!window.confirm(msg)) return;
+  [MC_PASSED_KEY, SA_PASSED_KEY, LOCK_MC_KEY, LOCK_SA_KEY, MC_SCORE_KEY].forEach(k => lsDel(k));
+  if (progress['unit' + CURRENT_UNIT]) {
+    delete progress['unit' + CURRENT_UNIT];
+    lsSet('cts_acts_progress', JSON.stringify(progress));
+  }
+  window.location.reload();
+});
+
+// Initial render
+applyStudentUI();
+langButtons.forEach(b => b.addEventListener('click', applyStudentUI));
+applyExamState();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSActsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CTS The Gospel of Matthew — Supplemental Reading Room</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root{
+    --primary:#4d3170;
+    --primary-deep:#3a2456;
+    --gold:#c9a227;
+    --gold-deep:#98771d;
+    --paper:#efebf3;
+    --card:#fffdfb;
+    --border:#ddd3e6;
+    --ink:#1e1329;
+    --ink-soft:#5f5170;
+  }
+
+  body{
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 17px;
+    padding: 20px;
+  }
+  .container{ max-width: 900px; margin: 0 auto; }
+
+  /* ---------- language toggle mechanics (house pattern) ---------- */
+  body.lang-en .lang-es{ display:none; }
+  body.lang-en .lang-en{ display:inline; }
+  body.lang-es .lang-en{ display:none; }
+  body.lang-es .lang-es{ display:inline; }
+  .lang-en.block, .lang-es.block{ display:none; }
+  body.lang-en .lang-en.block{ display:block; }
+  body.lang-es .lang-es.block{ display:block; }
+  body.lang-both .lang-es.block{ display:block; }
+  body.lang-both .lang-en.block{ display:block; }
+  body.lang-both .lang-es:not(.block){ display:inline; }
+  body.lang-both .lang-en:not(.block){ display:inline; }
+  body.lang-both .lang-es.block{ opacity:.9; border-top:1px dashed var(--border); margin-top:8px; padding-top:8px; }
+
+  /* ---------- builder note (delete before publishing) ---------- */
+  .builder{
+    border:2px dashed #b23a3a; background:#fdf4f4; color:#5a2020;
+    border-radius:12px; padding:16px 18px; margin-bottom:26px; font-size:.92rem; line-height:1.5;
+  }
+  .builder strong{ display:block; margin-bottom:6px; color:#8f2a2a; letter-spacing:.02em; text-transform:uppercase; font-size:.78rem; }
+  .builder ol{ margin:6px 0 0 18px; } .builder li{ margin:4px 0; }
+
+  /* ---------- toggle bar ---------- */
+  .bar{
+    background:#e5dcef; border-radius:40px; padding:10px 14px;
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-bottom:26px;
+  }
+  .bar span.bar-label{ color:var(--ink-soft); font-size:.85rem; margin-right:4px; }
+  .toggle-btn{
+    background:var(--card); color:var(--primary); border:1px solid var(--border);
+    border-radius:30px; padding:7px 18px; cursor:pointer; font-family:inherit; font-size:.92rem;
+  }
+  .toggle-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary); }
+
+  /* ---------- masthead ---------- */
+  .mast{ text-align:center; padding:14px 0 6px; }
+  .mast .eyebrow{
+    letter-spacing:.3em; text-transform:uppercase; font-size:.72rem; color:var(--gold-deep); margin-bottom:12px;
+  }
+  .mast h1{ color:var(--primary); font-size:2.05rem; line-height:1.2; font-weight:normal; }
+  .mast .rule{ width:88px; height:2px; background:var(--gold); margin:18px auto 14px; }
+  .mast .sub{ color:var(--ink-soft); font-style:italic; font-size:1.02rem; }
+
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .card h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:12px;
+  }
+  .card p{ margin:9px 0; }
+  .card p.lead{ margin-top:2px; }
+
+  .honors{ border-left:none; border-top:4px solid var(--gold); }
+  .honors h2{ border-left:none; padding-left:0; }
+  .pill-note{ display:inline-block; background:#e9e1f1; border:1px solid var(--border); border-radius:20px; padding:3px 12px; font-size:.82rem; color:var(--primary); margin-top:4px; }
+
+  /* ---------- reading entries ---------- */
+  .shelf-head{ margin:34px 0 6px; text-align:center; }
+  .shelf-head h2{
+    color:var(--primary); font-weight:normal; font-size:1.4rem; border:none; padding:0; display:inline-block;
+  }
+  .shelf-head .rule{ width:60px; height:2px; background:var(--gold); margin:12px auto 0; }
+  .counter{
+    position:sticky; top:8px; z-index:5;
+    background:var(--primary); color:#fff; border-radius:30px;
+    padding:8px 18px; text-align:center; font-size:.95rem; margin:16px auto 6px; max-width:280px;
+    box-shadow:0 3px 10px rgba(0,0,0,.14);
+  }
+  .counter b{ color:var(--gold); }
+
+  .entry{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:20px 22px; margin:16px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+    transition:box-shadow .18s ease, border-color .18s ease;
+  }
+  .entry:hover{ box-shadow:0 7px 20px rgba(77,49,112,.15); }
+  .entry.chosen{ border-color:var(--primary); box-shadow:0 0 0 2px var(--primary) inset, 0 7px 20px rgba(77,49,112,.17); }
+  .entry .locus{
+    letter-spacing:.16em; text-transform:uppercase; font-size:.68rem; color:var(--gold-deep); margin-bottom:8px;
+  }
+  .entry .title{ font-size:1.14rem; color:var(--primary); margin-bottom:2px; }
+  .entry .title .num{
+    display:inline-block; min-width:1.7em; color:var(--gold-deep); font-style:italic;
+  }
+  .entry .byline{ color:var(--ink-soft); font-style:italic; font-size:.92rem; margin-bottom:10px; padding-left:1.7em; }
+  .entry .caption{ font-size:.98rem; }
+  .entry .foot{
+    display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center; justify-content:space-between;
+    margin-top:14px; padding-top:12px; border-top:1px solid var(--border);
+  }
+  .read-link{
+    color:var(--primary); text-decoration:none; font-size:.95rem; border-bottom:1.5px solid var(--gold); padding-bottom:1px;
+  }
+  .read-link:hover{ color:var(--gold-deep); }
+  .read-links{ display:flex; flex-wrap:wrap; gap:6px 16px; align-items:center; }
+  .read-link.mod{ border-bottom-color:var(--primary); }
+  .pick{ display:inline-flex; align-items:center; gap:9px; cursor:pointer; font-size:.92rem; color:var(--ink); user-select:none; }
+  .pick input{ width:19px; height:19px; accent-color:var(--primary); cursor:pointer; }
+  .pick.disabled{ opacity:.4; cursor:not-allowed; }
+
+  /* ---------- millennial views panel (unused in this course; retained for template parity) ---------- */
+  .millennial{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .millennial > h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:10px;
+  }
+  .millennial .intro{ margin:8px 0 6px; }
+  .mv-grid{ margin-top:14px; }
+  .entry.mv{ box-shadow:none; border:none; border-top:1px solid var(--border); border-radius:0; margin:0; padding:18px 0; }
+  .entry.mv:first-of-type{ border-top:none; padding-top:4px; }
+  .entry.mv:hover{ box-shadow:none; }
+  .entry.mv.chosen{ box-shadow:none; border-top:1px solid var(--border); background:#e9e1f1; border-radius:8px; padding:14px 12px; }
+  .entry.mv:first-of-type.chosen{ border-top:none; }
+  .view-badge{
+    display:inline-block; background:var(--gold); color:var(--primary-deep);
+    font-size:.72rem; font-weight:bold; letter-spacing:.11em; text-transform:uppercase;
+    padding:5px 14px; border-radius:20px; margin-bottom:10px;
+  }
+
+  .limit-note{ text-align:center; color:var(--gold-deep); font-size:.9rem; min-height:1.2em; margin:4px 0 0; }
+
+  /* ---------- attestation ---------- */
+  .attest label.field{ display:block; margin:14px 0 6px; font-size:.9rem; color:var(--ink-soft); }
+  .attest input[type=text]{
+    width:100%; font-family:inherit; font-size:1rem; padding:11px 14px;
+    border:1px solid var(--border); border-radius:10px; background:#fffef9; color:var(--ink);
+  }
+  .attest .oath{
+    display:flex; gap:11px; align-items:flex-start; margin:16px 0; font-size:.96rem; background:#efebf3;
+    border:1px solid var(--border); border-radius:10px; padding:12px 14px;
+  }
+  .attest .oath input{ width:20px; height:20px; margin-top:2px; accent-color:var(--primary); flex-shrink:0; }
+  .btn{
+    background:var(--primary); color:#fff; border:none; border-radius:30px;
+    padding:11px 26px; cursor:pointer; font-family:inherit; font-size:1rem; margin-top:6px;
+  }
+  .btn:hover{ background:var(--primary-deep); }
+  .btn.ghost{ background:transparent; color:var(--primary); border:1px solid var(--primary); }
+  .msg{ color:var(--gold-deep); font-size:.92rem; margin-top:12px; min-height:1.2em; }
+
+  .record{ display:none; }
+  .record.show{ display:block; }
+  .record .seal-line{ width:70px; height:2px; background:var(--gold); margin:6px 0 16px; }
+  .record h3{ color:var(--primary); font-weight:normal; font-size:1.3rem; margin-bottom:4px; }
+  .record .named{ font-size:1.5rem; color:var(--primary); border-bottom:1px solid var(--gold-deep); display:inline-block; padding:0 10px 4px; margin:6px 0 12px; }
+  .record ul{ margin:12px 0 12px 20px; } .record li{ margin:5px 0; }
+  .record .stamp{ font-style:italic; color:var(--ink-soft); font-size:.92rem; }
+
+  .footnote{ text-align:center; color:var(--ink-soft); font-size:.82rem; margin:30px 0 6px; }
+
+  a:focus-visible, input:focus-visible, button:focus-visible, label:focus-within{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+
+  @media (max-width:520px){
+    body{ font-size:16px; padding:14px; }
+    .mast h1{ font-size:1.7rem; }
+    .entry .foot{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  /* ---------- print: show only the record ---------- */
+  @media print{
+    body{ background:#fff; }
+    .builder, .bar, .no-print, .entry, .counter, .attest .oath, .attest input, .attest label.field, .attest .btn, .msg, .limit-note{ display:none !important; }
+    .card.attest{ border:none; box-shadow:none; }
+    .record{ display:block !important; }
+  }
+
+.assignment-note{background:#f7f3e7;border-left:4px solid var(--gold);padding:9px 11px;margin:10px 0;font-size:.95rem}
+</style>
+<style>
+.digest-inline{margin:12px 0 6px;border:1px solid var(--border,#e2d6c9);border-radius:9px;background:#fff;overflow:hidden}
+.digest-inline>summary{cursor:pointer;list-style:none;padding:11px 13px;font-family:Arial,Helvetica,sans-serif;font-weight:700;color:var(--primary,#33608f);display:flex;align-items:center;gap:9px}
+.digest-inline>summary::-webkit-details-marker{display:none}
+.digest-inline>summary::after{content:"\25B8";margin-left:auto;color:var(--gold-deep,#8a5a3c)}
+.digest-inline[open]>summary::after{content:"\25BE"}
+.dg-badge{flex:none;background:var(--primary,#33608f);color:#fff;font:800 .6rem/1 Arial,sans-serif;letter-spacing:.11em;padding:5px 8px;border-radius:5px}
+.dg-note-line{font-family:Arial,sans-serif;font-size:.82rem;color:var(--ink-soft,#6b5b4d);padding:0 15px 8px}
+.dg-scroll{padding:2px 15px 16px;border-top:1px solid var(--border,#eee)}
+.dg-block{max-width:none;margin:0}
+.dg-block .dg-doc{border-bottom:1.5px solid var(--border,#e2d6c9);padding-bottom:10px;margin:10px 0 12px}
+.dg-block h1{font-size:1.25rem;line-height:1.25;margin:.1rem 0 .4rem;color:var(--primary,#33608f)}
+.dg-block .dg-sub{color:var(--ink-soft,#6b5b4d);font-style:italic;margin:0 0 .5rem;font-size:.95rem}
+.dg-block .dg-src{font-size:.8rem;color:var(--ink-soft,#6b5b4d);margin:.2rem 0}
+.dg-block .dg-chips{margin:.5rem 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.35rem}
+.dg-block .dg-chips li{font:700 .66rem/1 Arial,sans-serif;background:var(--card,#eef2f6);color:var(--primary,#33608f);border:1px solid var(--border,#d5d5d5);border-radius:999px;padding:3px 8px}
+.dg-block .dg-note{background:var(--card,#eef2f6);border-left:3px solid var(--gold-deep,#8a5a3c);padding:.7rem .9rem;margin:1rem 0;font-size:.92rem;line-height:1.5}
+.dg-block h2{font-size:1.05rem;margin:1.3rem 0 .4rem;padding-top:.35rem;border-top:1px solid var(--border,#ece2d6);color:var(--primary,#33608f)}
+.dg-block h2 .dg-n{color:var(--gold-deep,#8a5a3c);font-weight:400;margin-right:.35rem}
+.dg-block p{margin:0 0 .8rem;font-size:.97rem;line-height:1.6}
+.dg-block blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--border,#e2d6c9);font-style:italic;color:#444}
+.dg-block .dg-reflect{background:var(--card,#eef2f6);padding:.7rem .9rem;border-radius:6px;margin:1rem 0}
+.dg-block footer{margin-top:1.4rem;padding-top:.8rem;border-top:1.5px solid var(--border,#e2d6c9);font-size:.8rem;color:var(--ink-soft,#6b5b4d);line-height:1.5}
+</style></head>
+<body class="lang-en">
+<div class="container">
+<!-- ===== HONORS PROMPT ===== -->
+<div class="bar no-print" style="background:#f6f0e2;border:1px solid #ddd3e6;">
+<span class="lang-en">✦ Pursuing a degree <b>With Honors</b>? Complete this class's reading below, then track your progress:</span>
+<span class="lang-es">✦ ¿Cursando un título <b>Con Honores</b>? Complete la lectura de esta clase abajo, luego siga su progreso:</span>
+<a class="toggle-btn" href="cts-honors.html" style="text-decoration:none;"><span class="lang-en">Honors page ↗</span><span class="lang-es">Página de Honores ↗</span></a>
+</div>
+<!-- ============ LANGUAGE TOGGLE ============ -->
+<div class="bar no-print">
+<span class="bar-label lang-en">Language:</span>
+<span class="bar-label lang-es">Idioma:</span>
+<button class="toggle-btn active" data-lang="en" onclick="setLang('en')">English</button>
+<button class="toggle-btn" data-lang="es" onclick="setLang('es')">Español</button>
+<button class="toggle-btn" data-lang="both" onclick="setLang('both')">Both / Ambos</button>
+</div>
+<!-- ============ MASTHEAD ============ -->
+<div class="mast">
+<div class="eyebrow">Chapala Theological Seminary · The Gospel of Matthew</div>
+<h1>
+<span class="lang-en">Supplemental Reading Room</span>
+<span class="lang-es">Sala de Lecturas Complementarias</span>
+</h1>
+<div class="rule"></div>
+<div class="sub">
+<span class="lang-en">Behold your King — choose any three</span>
+<span class="lang-es">He aquí tu Rey — elija tres cualesquiera</span>
+</div>
+</div>
+<!-- ============ FRAMING ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">How to read this shelf</span>
+<span class="lang-es">Cómo leer este estante</span>
+</h2>
+<p class="lead lang-en block">This intensive leads the student through the Gospel of Matthew — the Gospel of the King, which presents Jesus as the promised Messiah, the Son of David, the fulfillment of Israel’s hope and the King of the kingdom of heaven. These five readings are bilingual Chapala Theological Seminary digests, moving in turn through the movements of the Gospel — the King’s coming, the Sermon on the Mount, His mighty works and parables, the road to Jerusalem, and the cross, the empty tomb, and the Great Commission — and drawing on its classic public-domain expositors, from Ryle and Broadus to Spurgeon, Pink, Watson, Trench, Martin, Warfield, and Edersheim. Each is written to be read on its own, in English or Spanish, entirely offline. Choose any three, read them in full, and record your reading below.</p>
+<p class="lang-en block">These five readings draw on the great public-domain classics of Matthew — warm expository thoughts on the whole Gospel, commentary on its text, expositions of the Sermon on the Mount and the Beatitudes, the classic studies of the parables and miracles of our Lord, and the great works on the sufferings, the deity, and the messianic glory of Christ the King. Read these digests to walk with the King from Bethlehem to Galilee, and to bow before Him as He truly is.</p>
+<p class="lead lang-es block">Este curso intensivo lleva al estudiante a través del Evangelio de Mateo — el Evangelio del Rey, que presenta a Jesús como el Mesías prometido, el Hijo de David, el cumplimiento de la esperanza de Israel y el Rey del reino de los cielos. Estas cinco lecturas son resúmenes bilingües del Seminario Teológico de Chapala, que se mueven por turno por los movimientos del Evangelio — la venida del Rey, el Sermón del Monte, sus hechos poderosos y parábolas, el camino a Jerusalén, y la cruz, la tumba vacía, y la Gran Comisión — y se apoyan en sus expositores clásicos de dominio público, desde Ryle y Broadus hasta Spurgeon, Pink, Watson, Trench, Martin, Warfield, y Edersheim. Cada una está escrita para leerse por sí sola, en inglés o español, enteramente sin conexión. Elija tres cualesquiera, léalas por completo, y registre su lectura abajo.</p>
+<p class="lang-es block">Estas cinco lecturas se apoyan en los grandes clásicos de dominio público de Mateo — cálidos pensamientos expositivos sobre todo el Evangelio, comentario sobre su texto, exposiciones del Sermón del Monte y de las Bienaventuranzas, los estudios clásicos de las parábolas y los milagros de nuestro Señor, y las grandes obras sobre los sufrimientos, la deidad, y la gloria mesiánica de Cristo el Rey. Lea estos resúmenes para caminar con el Rey desde Belén hasta Galilea, y para postrarse ante Él como en verdad es.</p>
+</div>
+<!-- ============ HONORS ============ -->
+<div class="card honors">
+<h2>
+<span class="lang-en">With Honors — an invitation, not a requirement</span>
+<span class="lang-es">Con Honores — una invitación, no un requisito</span>
+</h2>
+<p class="lang-en block">Your degree is complete without these readings. Every CTS degree — the Certificate, the Associate of Divinity, the Th.M., and the M.Div. — is earned in full through the course units themselves, and no student is ever penalized for being unable to reach this material.</p>
+<p class="lang-en block">These supplemental readings are the path to one added distinction — your degree awarded <em>with honors</em>. Each class whose reading you complete counts toward it: twelve classes for the Certificate or the Th.M., twenty-five for the Associate, and thirty for the M.Div. Choose any three of the readings below, read them in full, and record your reading on your honor — then track your progress on the Honors page.</p>
+<p class="lang-es block">Su título está completo sin estas lecturas. Todo título de CTS — el Certificado, el Asociado en Divinidad, la Maestría en Teología, y la Maestría en Divinidad — se obtiene por completo mediante las unidades del curso mismo, y ningún estudiante es penalizado por no poder acceder a este material.</p>
+<p class="lang-es block">Estas lecturas complementarias son el camino hacia una distinción adicional — su título otorgado <em>con honores</em>. Cada clase cuya lectura complete cuenta para ella: doce clases para el Certificado o la Maestría en Teología, veinticinco para el Asociado o la Maestría en Divinidad. Elija tres cualesquiera de las lecturas de abajo, léalas por completo, y registre su lectura bajo su honor — luego siga su progreso en la página de Honores.</p>
+<span class="pill-note lang-en">No constant internet required — see below</span>
+<span class="pill-note lang-es">No se requiere internet constante — vea abajo</span>
+</div>
+<!-- ============ ACCESS / OFFLINE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading offline</span>
+<span class="lang-es">Leer sin conexión</span>
+</h2>
+<p class="lang-en block">Every one of these five readings is a Chapala Theological Seminary bilingual digest, written by CTS and included in your course download — so all of them open directly on your device, in English or Spanish, with no internet connection at all. Each digest walks through a portion of Matthew and rests on the classic public-domain expositions, but the digests themselves are CTS-authored teaching, not reproductions, and those classic works are freely available online for any who wish to read them in full.</p>
+<p class="lang-es block">Cada una de estas cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala, escrito por el STC e incluido en la descarga de su curso — de modo que todas se abren directamente en su dispositivo, en inglés o español, sin conexión alguna. Cada resumen recorre una porción de Mateo y se apoya en las exposiciones clásicas de dominio público, pero los resúmenes mismos son enseñanza de autoría del STC, no reproducciones, y esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</p>
+</div>
+<!-- ============ TRANSLATE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading in another language</span>
+<span class="lang-es">Leer en otro idioma</span>
+</h2>
+<p class="lang-en block">Most of these works are in English. If you would rather read in Spanish or another language, the Chrome browser can translate a whole page for you. On a computer, right-click anywhere on the opened reading and choose “Translate to…”. On an Android phone or tablet, tap the three-dot menu and choose “Translate”. On an iPhone or iPad, tap the translate icon in the address bar — or open the page in the Chrome app if you don't see it. Machine translation is not perfect, but it is enough to follow the argument.</p>
+<p class="lang-es block">La mayoría de estas obras están en inglés. Si prefiere leer en español u otro idioma, el navegador Chrome puede traducir una página entera por usted. En una computadora, haga clic derecho en cualquier parte de la lectura abierta y elija “Traducir a…”. En un teléfono o tableta Android, toque el menú de tres puntos y elija “Traducir”. En un iPhone o iPad, toque el ícono de traducción en la barra de direcciones — o abra la página en la aplicación Chrome si no lo ve. La traducción automática no es perfecta, pero basta para seguir el argumento.</p>
+</div>
+<!-- ============ THE SHELF ============ -->
+<div class="shelf-head">
+<h2>
+<span class="lang-en">The Five Readings</span>
+<span class="lang-es">Las Cinco Lecturas</span>
+</h2>
+<div class="rule"></div>
+</div>
+<div class="counter no-print">
+<span class="lang-en">Chosen: <b id="cnt-en">0</b> of 3</span>
+<span class="lang-es">Elegidas: <b id="cnt-es">0</b> de 3</span>
+</div>
+<p class="limit-note no-print" id="limitNote"></p>
+<!-- 1 -->
+<article class="entry" data-id="1" data-title-en="The King Has Come &mdash; CTS digest" data-title-es="El Rey Ha Venido &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Matthew 1&ndash;4 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Mateo 1&ndash;4 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">1.</span><span class="lang-en">The King Has Come</span><span class="lang-es">El Rey Ha Venido</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The Gospel of the King (Son of David, Son of Abraham); Immanuel, “God with us,” born to save His people, worshiped by Gentile Magi; the way prepared by John, and the King revealed at His baptism by the Father’s voice and the Spirit; the King tested and standing firm where Adam and Israel fell; and the kingdom proclaimed — “Repent... follow Me.”</p>
+<p class="caption lang-es block">El Evangelio del Rey (Hijo de David, Hijo de Abraham); Emanuel, “Dios con nosotros,” nacido para salvar a su pueblo, adorado por los magos gentiles; el camino preparado por Juan, y el Rey revelado en su bautismo por la voz del Padre y el Espíritu; el Rey probado y permaneciendo firme donde Adán e Israel cayeron; y el reino proclamado — “Arrepentíos... seguidme.”</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The King Has Come</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Matthew 1–4: the promised Messiah, Son of David, “God with us,” begins His reign</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Matthew (Ryle, Broadus, Edersheim, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Matthew</li>
+<li>The Promised King</li>
+<li>Kingdom of Heaven</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> Matthew opens the New Testament by presenting Jesus as the promised Messiah-King, the Son of David, the fulfillment of all Israel's hope. This first reading walks through Matthew 1–4: the King's birth and lineage, the prophecies He fulfills, and the beginning of His ministry — "Repent, for the kingdom of heaven is at hand."
+    </div>
+<h2><span class="dg-n">1.</span>The Gospel of the King</h2>
+<p>Matthew stands first in the New Testament, and it opens the whole story with a portrait of Jesus as the long-promised King. Writing with special care for readers who knew the Hebrew Scriptures, Matthew shows again and again that Jesus is the one to whom all the Law and the Prophets had been pointing; his favorite refrain is that this or that happened "that it might be fulfilled." His great theme is the kingdom of heaven and the King who has come to establish it. And he announces that theme in his very first line, in the way he names Jesus: "Jesus Christ, the Son of David, the Son of Abraham." Those two names are not chosen at random. Son of David marks Jesus out as the promised royal heir, the King in David's line; Son of Abraham roots Him in the ancient promise that in Abraham's seed all the families of the earth would be blessed. From the opening words, then, we are told who this is: the King of Israel, and the blessing of the world.</p>
+<h2><span class="dg-n">2.</span>Immanuel — God With Us</h2>
+<p>Then Matthew tells of the King's birth, and it is like no other birth in history. When Joseph learns that Mary is with child, an angel assures him that the child has been conceived by the Holy Spirit, and instructs him to give the boy the name Jesus — which means "the LORD saves" — "for He will save His people from their sins." And Matthew points to the ancient prophecy now coming true: "they shall call His name Immanuel, which is translated, God with us." Here is the staggering heart of it: this King is not merely a great man, but God Himself come down to dwell among us. And the very first people to seek Him out and bow before Him are not the rulers of Jerusalem, but wise men who come from the East, following a star, to worship the newborn King of the Jews — Gentiles from far away, a quiet sign that this King has come for all the nations. King Herod, hearing of a rival king, flies into a murderous rage, and the little family must flee to Egypt for safety. From His first days, the King enters a world that is hostile to His reign.</p>
+<h2><span class="dg-n">3.</span>The Way Prepared, the King Revealed</h2>
+<p>Years pass, and the King's public appearing draws near. First comes His herald, John the Baptist, out in the wilderness, preaching the very message the King will soon take up: "Repent, for the kingdom of heaven is at hand." John calls the people to turn from their sins and bring forth the fruit of true repentance, and to make themselves ready, for the King is coming. And then Jesus Himself comes to the Jordan to be baptized by John. John protests — surely it is the sinless One who should baptize him! — but Jesus insists, not because He had any sin to wash away, but in order to stand alongside the very people He came to save, "to fulfill all righteousness." And as He comes up from the water, heaven itself is torn open: the Spirit of God descends upon Him like a dove, and the voice of the Father is heard from heaven, saying, "This is My beloved Son, in whom I am well pleased." The King is now publicly revealed — owned by the Father, and anointed by the Spirit for His work.</p>
+<h2><span class="dg-n">4.</span>The King Tested</h2>
+<p>Yet before He takes up His throne of ministry, the King must first be tested. The same Spirit who had just descended on Him now leads Him out into the wilderness to be tempted by the devil. And here Matthew draws a deliberate contrast with the whole sad history that had gone before: where the first man, Adam, fell in a garden of plenty, and where Israel had failed again and again in the wilderness, this King stands firm. Weak with hunger after forty days of fasting, He refuses every temptation the devil sets before Him — He will not turn stones into bread to serve Himself, He will not fling Himself down to force God's hand, and He will not seize all the kingdoms of the world by bowing to Satan. To each assault He answers simply with Scripture: "It is written." The King overcomes the tempter at every point, and so proves Himself the faithful and obedient Son — the second Adam, the true Israel, the one who, unlike all before Him, will not fail.</p>
+<h2><span class="dg-n">5.</span>The Kingdom Proclaimed</h2>
+<p>Now, at last, the King begins His ministry in earnest. Taking up the very words His herald had used, He goes out preaching, "Repent, for the kingdom of heaven is at hand." He calls His first followers — ordinary fishermen at their work by the sea, who leave their nets at His word and follow Him, to be made, He says, "fishers of men." And He travels throughout the whole region, teaching in the synagogues, proclaiming the good news of the kingdom, and healing every kind of sickness and disease among the people, so that word of Him spreads far and wide and great crowds begin to follow Him. The King has come; and wherever He goes, His kingdom is breaking into the world.</p>
+<h2><span class="dg-n">6.</span>The King for Us</h2>
+<p>So Matthew's opening chapters ring out the great announcement: the King has come. He is the Son of David and the Son of God; He is Immanuel, God with us, who came for the express purpose of saving His people from their sins. He was sought out and worshiped by Gentiles from distant lands, openly acknowledged by the voice of the Father and the descent of the Spirit, and He proved Himself the faithful Son by standing firm against every temptation of the enemy. And this King calls us, exactly as He called those first fishermen by the sea, to repent of our sins and to follow Him into His kingdom. So hear His call for yourself. The King who has come is God with us, and He came to save. He is worthy of all our allegiance, and He bids us leave everything behind and follow Him. And here is the very best of the good news: this King came not to be served, but to save — and, true to His name Immanuel, He is with us still.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Do you know Jesus as your King — not only as Savior, but as the one who has the right to rule your whole life? When the King calls, "Follow Me," are you ready, like those fishermen, to leave your nets? And does it steady your heart to know that His name is Immanuel — that He is "God with us," and with you now?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Matthew 1–4, anchored in the classic public-domain expositions of Matthew (J. C. Ryle's <em>Expository Thoughts on the Gospels</em>, John A. Broadus's commentary, Alfred Edersheim on Messianic prophecy, B. B. Warfield's <em>The Lord of Glory</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This book study draws on a rich company of public-domain expositors of Matthew — among them J. C. Ryle, John A. Broadus, C. H. Spurgeon, and Alfred Edersheim — who do not all agree at every point; the seminary itself takes no partisan position, presenting the gospel of the kingdom on common ground.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>El Rey Ha Venido</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Mateo 1–4: el Mesías prometido, Hijo de David, “Dios con nosotros,” comienza su reinado</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Mateo (Ryle, Broadus, Edersheim, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Mateo</li>
+<li>El Rey prometido</li>
+<li>Reino de los cielos</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Mateo abre el Nuevo Testamento presentando a Jesús como el Mesías-Rey prometido, el Hijo de David, el cumplimiento de toda la esperanza de Israel. Esta primera lectura recorre Mateo 1–4: el nacimiento y el linaje del Rey, las profecías que cumple, y el comienzo de su ministerio — "Arrepentíos, porque el reino de los cielos se ha acercado."
+    </div>
+<h2><span class="dg-n">1.</span>El evangelio del Rey</h2>
+<p>Mateo está primero en el Nuevo Testamento, y abre toda la historia con un retrato de Jesús como el Rey largamente prometido. Escribiendo con especial cuidado por lectores que conocían las Escrituras hebreas, Mateo muestra una y otra vez que Jesús es aquel a quien toda la Ley y los Profetas habían estado señalando; su estribillo favorito es que esto o aquello sucedió "para que se cumpliese." Su gran tema es el reino de los cielos y el Rey que ha venido a establecerlo. Y anuncia ese tema en su mismísima primera línea, en la manera en que nombra a Jesús: "Jesucristo, hijo de David, hijo de Abraham." Esos dos nombres no se escogen al azar. Hijo de David marca a Jesús como el heredero real prometido, el Rey en la línea de David; Hijo de Abraham lo arraiga en la antigua promesa de que en la simiente de Abraham serían benditas todas las familias de la tierra. Desde las palabras iniciales, entonces, se nos dice quién es este: el Rey de Israel, y la bendición del mundo.</p>
+<h2><span class="dg-n">2.</span>Emanuel — Dios con nosotros</h2>
+<p>Luego Mateo cuenta del nacimiento del Rey, y es como ningún otro nacimiento en la historia. Cuando José se entera de que María está encinta, un ángel le asegura que el niño ha sido concebido por el Espíritu Santo, y le instruye dar al niño el nombre de Jesús — que significa "el SEÑOR salva" — "porque él salvará a su pueblo de sus pecados." Y Mateo señala la antigua profecía ahora cumpliéndose: "y llamarán su nombre Emanuel, que interpretado es: Dios con nosotros." He aquí el asombroso corazón de todo: este Rey no es meramente un gran hombre, sino Dios mismo descendido para morar entre nosotros. Y las primerísimas personas en buscarle y postrarse ante Él no son los gobernantes de Jerusalén, sino unos magos que vienen del oriente, siguiendo una estrella, para adorar al recién nacido Rey de los judíos — gentiles de lejos, una callada señal de que este Rey ha venido para todas las naciones. El rey Herodes, al oír de un rey rival, monta en cólera asesina, y la pequeña familia debe huir a Egipto para ponerse a salvo. Desde sus primeros días, el Rey entra en un mundo hostil a su reinado.</p>
+<h2><span class="dg-n">3.</span>El camino preparado, el Rey revelado</h2>
+<p>Pasan los años, y el aparecer público del Rey se acerca. Primero viene su heraldo, Juan el Bautista, allá en el desierto, predicando el mismísimo mensaje que el Rey pronto tomará: "Arrepentíos, porque el reino de los cielos se ha acercado." Juan llama al pueblo a volverse de sus pecados y a llevar el fruto del verdadero arrepentimiento, y a prepararse, porque el Rey viene. Y entonces Jesús mismo viene al Jordán para ser bautizado por Juan. Juan protesta — ¡seguramente es el Sin Pecado quien debería bautizarle a él! — pero Jesús insiste, no porque tuviera pecado alguno que lavar, sino a fin de ponerse al lado del mismísimo pueblo que vino a salvar, "para cumplir toda justicia." Y al subir Él del agua, el cielo mismo se abre: el Espíritu de Dios desciende sobre Él como una paloma, y la voz del Padre se oye desde el cielo, diciendo: "Este es mi Hijo amado, en quien tengo contentamiento." El Rey es ahora públicamente revelado — reconocido por el Padre, y ungido por el Espíritu para su obra.</p>
+<h2><span class="dg-n">4.</span>El Rey probado</h2>
+<p>Sin embargo, antes de tomar su trono de ministerio, el Rey primero debe ser probado. El mismo Espíritu que acababa de descender sobre Él ahora le lleva al desierto para ser tentado por el diablo. Y aquí Mateo traza un deliberado contraste con toda la triste historia que había pasado antes: donde el primer hombre, Adán, cayó en un huerto de abundancia, y donde Israel había fallado una y otra vez en el desierto, este Rey permanece firme. Débil de hambre tras cuarenta días de ayuno, rehúsa toda tentación que el diablo pone delante de Él — no convertirá las piedras en pan para servirse a sí mismo, no se lanzará abajo para forzar la mano de Dios, y no se apoderará de todos los reinos del mundo postrándose ante Satanás. A cada asalto responde sencillamente con la Escritura: "Escrito está." El Rey vence al tentador en cada punto, y así se prueba a sí mismo el Hijo fiel y obediente — el segundo Adán, el verdadero Israel, aquel que, a diferencia de todos antes de Él, no fallará.</p>
+<h2><span class="dg-n">5.</span>El reino proclamado</h2>
+<p>Ahora, al fin, el Rey comienza su ministerio en serio. Tomando las mismísimas palabras que su heraldo había usado, sale predicando: "Arrepentíos, porque el reino de los cielos se ha acercado." Llama a sus primeros seguidores — pescadores ordinarios en su trabajo junto al mar, que dejan sus redes a su palabra y le siguen, para ser hechos, dice Él, "pescadores de hombres." Y viaja por toda la región, enseñando en las sinagogas, proclamando la buena nueva del reino, y sanando toda clase de enfermedad y dolencia entre el pueblo, de modo que la noticia de Él se extiende por todas partes y grandes multitudes comienzan a seguirle. El Rey ha venido; y dondequiera que va, su reino irrumpe en el mundo.</p>
+<h2><span class="dg-n">6.</span>El Rey por nosotros</h2>
+<p>Así que los capítulos iniciales de Mateo proclaman el gran anuncio: el Rey ha venido. Es el Hijo de David y el Hijo de Dios; es Emanuel, Dios con nosotros, que vino con el expreso propósito de salvar a su pueblo de sus pecados. Fue buscado y adorado por gentiles de tierras lejanas, abiertamente reconocido por la voz del Padre y el descenso del Espíritu, y se probó a sí mismo el Hijo fiel permaneciendo firme contra toda tentación del enemigo. Y este Rey nos llama, exactamente como llamó a aquellos primeros pescadores junto al mar, a arrepentirnos de nuestros pecados y a seguirle a su reino. Así que oiga su llamado por usted mismo. El Rey que ha venido es Dios con nosotros, y vino para salvar. Es digno de toda nuestra lealtad, y nos manda dejarlo todo atrás y seguirle. Y he aquí lo mejor de la buena nueva: este Rey vino no para ser servido, sino para salvar — y, fiel a su nombre Emanuel, está con nosotros aún.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Conoce a Jesús como su Rey — no solo como Salvador, sino como aquel que tiene el derecho de gobernar toda su vida? Cuando el Rey llama: "Sígueme," ¿está listo, como aquellos pescadores, a dejar sus redes? Y ¿le afirma el corazón saber que su nombre es Emanuel — que Él es "Dios con nosotros," y está con usted ahora?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Mateo 1–4, anclado en las exposiciones clásicas de dominio público de Mateo (<em>Expository Thoughts on the Gospels</em> de J. C. Ryle, el comentario de John A. Broadus, Alfred Edersheim sobre la profecía mesiánica, <em>The Lord of Glory</em> de B. B. Warfield, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Este estudio del libro se apoya en una rica compañía de expositores de dominio público de Mateo — entre ellos J. C. Ryle, John A. Broadus, C. H. Spurgeon, y Alfred Edersheim — que no todos concuerdan en cada punto; el seminario mismo no toma posición partidista, presentando el evangelio del reino en terreno común.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="1" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 2 -->
+<article class="entry" data-id="2" data-title-en="The Sermon on the Mount &mdash; CTS digest" data-title-es="El Sermón del Monte &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Matthew 5&ndash;7 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Mateo 5&ndash;7 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">2.</span><span class="lang-en">The Sermon on the Mount</span><span class="lang-es">El Sermón del Monte</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The charter of the kingdom (not a ladder to climb, but the life grace produces); the Beatitudes beginning with the poor in spirit who know their need; salt and light for the Father’s glory; the deeper righteousness of the heart that drives us to grace; secret devotion, the Lord’s Prayer, treasure in heaven, and “seek first the kingdom” against anxiety; and hearing-and-doing — the wise builder on the rock.</p>
+<p class="caption lang-es block">La carta del reino (no una escalera que subir, sino la vida que la gracia produce); las Bienaventuranzas comenzando con los pobres en espíritu que conocen su necesidad; sal y luz para la gloria del Padre; la justicia más honda del corazón que nos lleva a la gracia; la devoción secreta, el Padrenuestro, el tesoro en el cielo, y “buscad primeramente el reino” contra la ansiedad; y oír y hacer — el edificador prudente sobre la roca.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Sermon on the Mount</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Matthew 5–7: the King's own portrait of life in His kingdom</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Matthew (Pink, Watson, Ryle, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Matthew</li>
+<li>The Kingdom's Charter</li>
+<li>The Beatitudes</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> Having announced that the King has come, Matthew now gives us the King's own description of life in His kingdom — the Sermon on the Mount, the most famous sermon ever preached. This reading walks through Matthew 5–7: the Beatitudes, the deeper righteousness of the heart, trusting devotion, and hearing and doing the King's word.
+    </div>
+<h2><span class="dg-n">1.</span>The Charter of the Kingdom</h2>
+<p>Having announced that the King has come and the kingdom is near, Matthew now sets before us, in chapters 5 through 7, the King's own description of what life in His kingdom looks like — the Sermon on the Mount, surely the most famous sermon ever preached. Seeing the great crowds, Jesus went up onto a mountainside, sat down in the posture of a teacher, and taught His disciples. It is important to understand what this Sermon is, and what it is not. It is not a new and heavier law by which we might earn our way into God's favor. It is, rather, a portrait — a description of the character and the life of those who have already entered the kingdom by grace. It shows us what the King's people are like, and how they are to live. And it is telling that it begins not with a single command, but with a string of blessings.</p>
+<h2><span class="dg-n">2.</span>The Beatitudes</h2>
+<p>The Sermon opens with the Beatitudes, a series of surprising pronouncements of blessing upon the King's people. And notice, above all, where it begins: "Blessed are the poor in spirit, for theirs is the kingdom of heaven." The kingdom belongs, first of all, to those who feel their own spiritual poverty — who know that they have nothing in themselves to offer God, and come with empty hands. From that foundation of humility the rest follow: blessed are those who mourn over their sin and sorrow, the meek, those who hunger and thirst for righteousness, the merciful, the pure in heart, the peacemakers, and those persecuted for righteousness' sake. Every one of these turns the values of the world upside down. The kingdom does not belong to the proud, the strong, and the self-sufficient, but to the humble, the hungry, and the merciful. And these Beatitudes are not a list of entrance requirements we must first achieve by our own effort; they are a description of the character that the King's own grace grows in His people — a character that begins, always, with the humility that knows its need.</p>
+<h2><span class="dg-n">3.</span>Salt and Light</h2>
+<p>Jesus then tells His disciples what they are to be out in the world. "You are the salt of the earth," He says, and "You are the light of the world." Salt, in that age, preserved food from decay and gave it flavor; light shines out and drives back the darkness. Just so, the King's people are to work quietly against the world's corruption and to shine with a goodness that others can see. But the aim, Jesus is careful to say, is not that they themselves would be admired: "Let your light so shine before men, that they may see your good works and glorify your Father in heaven." The good is to be visible, but the glory is to go to God. Those who belong to the King are not meant to hide away, but to make a real difference in the world around them, for their Father's honor.</p>
+<h2><span class="dg-n">4.</span>The Deeper Righteousness</h2>
+<p>Jesus is clear that He has not come to abolish the Law and the Prophets but to fulfill them; and He says something startling: that the righteousness of His people must actually surpass that of the scribes and Pharisees, the most scrupulous rule-keepers of the day. But He means a righteousness of a wholly different kind — not a matter of the outside, but of the heart. And so He takes one command after another and drives it inward, far deeper than the letter. It is not enough merely to refrain from murder, He says — you must not even nurse angry contempt in your heart against your brother. It is not enough to avoid the act of adultery — you must not even harbor lust. And you are to love not only your neighbor but your very enemies, praying for those who persecute you, so that you may show yourselves true children of your Father in heaven. Then He lays down the standard in a single breathtaking sentence: "Therefore you shall be perfect, just as your Father in heaven is perfect." This is a righteousness of the heart that no amount of careful rule-keeping could ever reach. And that is exactly the point. Who could possibly meet such a standard in his own strength? It is meant to strip away every last shred of our self-confidence, and to send us running to the King for the mercy and the new heart that He alone can give.</p>
+<h2><span class="dg-n">5.</span>True Devotion, and Treasure in Heaven</h2>
+<p>In chapter 6 the King turns to the life of devotion, and warns against a subtle danger: performing our religious acts — giving, praying, fasting — in order to be seen and admired by other people. No, He says; do these things quietly, in secret, before your Father who sees in secret, and it is enough. And He teaches His disciples how to pray, giving them the model we call the Lord's Prayer: "Our Father in heaven, hallowed be Your name. Your kingdom come..." — a pattern of trusting, unhurried, God-centered prayer, that puts His name and His kingdom before our own needs. He calls His people to lay up their treasures not on earth, where moth and rust destroy, but in heaven, adding this piercing word: "For where your treasure is, there your heart will be also." And He gives the great cure for anxiety. Your heavenly Father, He reminds us, feeds the birds of the air and clothes the lilies of the field in splendor, and He knows your every need. So do not be consumed with worry; instead, "seek first the kingdom of God and His righteousness, and all these things shall be added to you." Put the King and His kingdom first, and trust your Father for the rest.</p>
+<h2><span class="dg-n">6.</span>Hearing and Doing — the Two Builders</h2>
+<p>In the final chapter the King calls for a life that actually matches our profession. Do not set yourself up as a hypocritical judge of others, He warns; first take the great plank out of your own eye. Ask, seek, and knock, He urges, for your Father delights to give good things to those who ask Him. Do to others whatever you would have them do to you — the Golden Rule, in which the whole Law and the Prophets are summed up. And He sets two ways before every hearer: the narrow gate and hard road that lead to life, and the wide gate and broad road that lead to destruction. He warns of false prophets, who are to be known by their fruits, and gives a solemn word that not everyone who merely calls Him "Lord, Lord" will enter the kingdom, but only the one who actually does the will of His Father. And He closes the whole Sermon with the parable of the two builders. The one who hears these words of His and does them is like a wise man who built his house upon the rock; when the storm came, it stood firm. But the one who hears these same words and does not do them is like a foolish man who built upon the sand; when the storm came, it fell, and great was its fall. The crowds were left astonished, for He taught them not like their scribes, but as one who had authority in Himself. The King's word, in the end, is given not merely to be admired and heard, but to be obeyed. And here is the great encouragement of it all. The Sermon on the Mount is the King's own portrait of life in His kingdom: a life of humble dependence, of a righteousness that reaches down into the heart, of quiet devotion and childlike trust in the Father, and of hearing and doing the King's word. It holds up a standard so high that no one on earth can reach it by sheer willpower — and this, rightly seen, is part of its grace, for it drives us straight to the King for the mercy and the new heart He alone can give. So let this Sermon do its full work in you. Let it humble you, for not one of us measures up; let it send you to Christ for grace; and then, as His grace goes to work within you, let it shape your daily life — that you may be salt and light, seek first His kingdom, and build your house upon the rock of His words. Blessed, He says, are those who hear the King and do what He says.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Does the Sermon's standard humble you and send you to Christ for grace — or do you try to keep it in your own strength? Where is your treasure really — on earth, or in heaven? And are you a hearer only, or a doer — building your house on the rock of the King's words, or on the sand?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Matthew 5–7, anchored in the classic public-domain expositions of Matthew and the Sermon (Arthur W. Pink's <em>An Exposition of the Sermon on the Mount</em>, Thomas Watson's <em>The Beatitudes</em>, J. C. Ryle, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on Arthur W. Pink's <em>An Exposition of the Sermon on the Mount</em> and Thomas Watson's <em>The Beatitudes</em>, along with J. C. Ryle and others, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>El Sermón del Monte</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Mateo 5–7: el propio retrato del Rey de la vida en su reino</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Mateo (Pink, Watson, Ryle, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Mateo</li>
+<li>La carta del reino</li>
+<li>Las Bienaventuranzas</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Habiendo anunciado que el Rey ha venido, Mateo ahora nos da la propia descripción del Rey de la vida en su reino — el Sermón del Monte, el sermón más famoso jamás predicado. Esta lectura recorre Mateo 5–7: las Bienaventuranzas, la justicia más honda del corazón, la devoción confiada, y oír y hacer la palabra del Rey.
+    </div>
+<h2><span class="dg-n">1.</span>La carta del reino</h2>
+<p>Habiendo anunciado que el Rey ha venido y el reino está cerca, Mateo ahora pone delante de nosotros, en los capítulos 5 al 7, la propia descripción del Rey de cómo se ve la vida en su reino — el Sermón del Monte, con seguridad el sermón más famoso jamás predicado. Al ver las grandes multitudes, Jesús subió a un monte, se sentó en la postura de un maestro, y enseñó a sus discípulos. Es importante entender lo que este Sermón es, y lo que no es. No es una ley nueva y más pesada por la cual podríamos ganar nuestro camino al favor de Dios. Es, más bien, un retrato — una descripción del carácter y de la vida de los que ya han entrado en el reino por gracia. Nos muestra cómo son las personas del Rey, y cómo han de vivir. Y es revelador que comience no con un solo mandamiento, sino con una serie de bienaventuranzas.</p>
+<h2><span class="dg-n">2.</span>Las Bienaventuranzas</h2>
+<p>El Sermón abre con las Bienaventuranzas, una serie de sorprendentes pronunciamientos de bendición sobre las personas del Rey. Y note, sobre todo, dónde comienza: "Bienaventurados los pobres en espíritu, porque de ellos es el reino de los cielos." El reino pertenece, ante todo, a los que sienten su propia pobreza espiritual — que saben que no tienen nada en sí mismos que ofrecer a Dios, y vienen con las manos vacías. Desde ese fundamento de humildad siguen los demás: bienaventurados los que lloran por su pecado y su dolor, los mansos, los que tienen hambre y sed de justicia, los misericordiosos, los de limpio corazón, los pacificadores, y los perseguidos por causa de la justicia. Cada una de estas pone los valores del mundo de cabeza. El reino no pertenece a los orgullosos, los fuertes, y los autosuficientes, sino a los humildes, los hambrientos, y los misericordiosos. Y estas Bienaventuranzas no son una lista de requisitos de entrada que primero debemos lograr por nuestro propio esfuerzo; son una descripción del carácter que la propia gracia del Rey hace crecer en su pueblo — un carácter que comienza, siempre, con la humildad que conoce su necesidad.</p>
+<h2><span class="dg-n">3.</span>Sal y luz</h2>
+<p>Jesús luego dice a sus discípulos lo que han de ser allá en el mundo. "Vosotros sois la sal de la tierra," dice, y "Vosotros sois la luz del mundo." La sal, en aquella época, preservaba los alimentos de la corrupción y les daba sabor; la luz brilla y hace retroceder la oscuridad. Así también, las personas del Rey han de obrar calladamente contra la corrupción del mundo y brillar con una bondad que otros puedan ver. Pero el fin, Jesús tiene cuidado de decir, no es que ellos mismos sean admirados: "Así alumbre vuestra luz delante de los hombres, para que vean vuestras buenas obras, y glorifiquen a vuestro Padre que está en los cielos." El bien ha de ser visible, pero la gloria ha de ir a Dios. Los que pertenecen al Rey no están destinados a esconderse, sino a hacer una verdadera diferencia en el mundo en torno a ellos, para la honra de su Padre.</p>
+<h2><span class="dg-n">4.</span>La justicia más honda</h2>
+<p>Jesús es claro en que no ha venido a abolir la Ley y los Profetas sino a cumplirlos; y dice algo sorprendente: que la justicia de su pueblo debe en realidad sobrepasar la de los escribas y fariseos, los más escrupulosos guardadores de reglas de aquel día. Pero se refiere a una justicia de una clase enteramente distinta — no cuestión de lo de afuera, sino del corazón. Y así toma un mandamiento tras otro y lo lleva hacia adentro, mucho más hondo que la letra. No basta meramente con abstenerse del homicidio, dice — no debes ni siquiera alimentar el airado desprecio en tu corazón contra tu hermano. No basta con evitar el acto del adulterio — no debes ni siquiera abrigar la codicia. Y has de amar no solo a tu prójimo sino a tus mismísimos enemigos, orando por los que te persiguen, para que te muestres verdadero hijo de tu Padre que está en los cielos. Luego establece la norma en una sola oración impresionante: "Sed, pues, vosotros perfectos, como vuestro Padre que está en los cielos es perfecto." Esta es una justicia del corazón que ninguna cantidad de cuidadoso guardar de reglas podría jamás alcanzar. Y ese es exactamente el punto. ¿Quién podría posiblemente cumplir tal norma con su propia fuerza? Está destinada a despojarnos de hasta el último jirón de nuestra autoconfianza, y a enviarnos corriendo al Rey por la misericordia y el corazón nuevo que solo Él puede dar.</p>
+<h2><span class="dg-n">5.</span>La verdadera devoción, y el tesoro en el cielo</h2>
+<p>En el capítulo 6 el Rey se vuelve a la vida de devoción, y advierte contra un peligro sutil: realizar nuestros actos religiosos — dar, orar, ayunar — a fin de ser vistos y admirados por otras personas. No, dice; haz estas cosas calladamente, en secreto, delante de tu Padre que ve en lo secreto, y es suficiente. Y enseña a sus discípulos cómo orar, dándoles el modelo que llamamos el Padrenuestro: "Padre nuestro que estás en los cielos, santificado sea tu nombre. Venga tu reino..." — un patrón de oración confiada, sin prisa, centrada en Dios, que pone su nombre y su reino antes que nuestras propias necesidades. Llama a su pueblo a atesorar sus tesoros no en la tierra, donde la polilla y el orín corrompen, sino en el cielo, añadiendo esta penetrante palabra: "porque donde esté vuestro tesoro, allí estará también vuestro corazón." Y da la gran cura para la ansiedad. Su Padre celestial, nos recuerda, alimenta a las aves del cielo y viste a los lirios del campo con esplendor, y conoce cada necesidad suya. Así que no se consuma con la preocupación; en cambio, "buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas." Ponga al Rey y su reino primero, y confíe en su Padre para lo demás.</p>
+<h2><span class="dg-n">6.</span>Oír y hacer — los dos edificadores</h2>
+<p>En el capítulo final el Rey llama a una vida que de veras corresponda a nuestra profesión. No te erijas en juez hipócrita de los demás, advierte; primero saca la gran viga de tu propio ojo. Pedid, buscad, y llamad, insta, porque tu Padre se deleita en dar buenas cosas a los que le piden. Haz a los demás todo lo que quieras que ellos te hagan a ti — la Regla de Oro, en la cual se resumen toda la Ley y los Profetas. Y pone dos caminos delante de cada oyente: la puerta estrecha y el camino angosto que llevan a la vida, y la puerta ancha y el camino espacioso que llevan a la destrucción. Advierte de falsos profetas, que han de ser conocidos por sus frutos, y da una solemne palabra de que no todo el que meramente le llama "Señor, Señor" entrará en el reino, sino solo el que en realidad hace la voluntad de su Padre. Y cierra todo el Sermón con la parábola de los dos edificadores. El que oye estas palabras suyas y las hace es como un hombre prudente que edificó su casa sobre la roca; cuando vino la tormenta, permaneció firme. Pero el que oye estas mismas palabras y no las hace es como un hombre insensato que edificó sobre la arena; cuando vino la tormenta, cayó, y fue grande su ruina. Las multitudes quedaron atónitas, porque les enseñaba no como sus escribas, sino como quien tenía autoridad en sí mismo. La palabra del Rey, al final, es dada no meramente para ser admirada y oída, sino para ser obedecida. Y he aquí el gran ánimo de todo ello. El Sermón del Monte es el propio retrato del Rey de la vida en su reino: una vida de humilde dependencia, de una justicia que alcanza hasta el corazón, de callada devoción y confianza como de niño en el Padre, y de oír y hacer la palabra del Rey. Sostiene una norma tan alta que nadie en la tierra puede alcanzarla por pura fuerza de voluntad — y esto, rectamente visto, es parte de su gracia, porque nos lleva directamente al Rey por la misericordia y el corazón nuevo que solo Él puede dar. Así que deje que este Sermón haga su plena obra en usted. Deje que le humille, porque ni uno de nosotros da la talla; deje que le envíe a Cristo por gracia; y luego, al ponerse su gracia a obrar dentro de usted, deje que dé forma a su vida diaria — para que sea sal y luz, busque primeramente su reino, y edifique su casa sobre la roca de sus palabras. Bienaventurados, dice, los que oyen al Rey y hacen lo que Él dice.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Le humilla la norma del Sermón y le envía a Cristo por gracia — o trata de guardarla con su propia fuerza? ¿Dónde está en realidad su tesoro — en la tierra, o en el cielo? Y ¿es solo oidor, o hacedor — edificando su casa sobre la roca de las palabras del Rey, o sobre la arena?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Mateo 5–7, anclado en las exposiciones clásicas de dominio público de Mateo y del Sermón (<em>An Exposition of the Sermon on the Mount</em> de Arthur W. Pink, <em>The Beatitudes</em> de Thomas Watson, J. C. Ryle, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>An Exposition of the Sermon on the Mount</em> de Arthur W. Pink y <em>The Beatitudes</em> de Thomas Watson, junto con J. C. Ryle y otros, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="2" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 3 -->
+<article class="entry" data-id="3" data-title-en="The King’s Works: Miracles and Parables &mdash; CTS digest" data-title-es="Las Obras del Rey: Milagros y Parábolas &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Matthew 8&ndash;13 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Mateo 8&ndash;13 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">3.</span><span class="lang-en">The King’s Works: Miracles and Parables</span><span class="lang-es">Las Obras del Rey: Milagros y Parábolas</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The King’s authority over disease, demons, nature, and death (and to forgive sins); the sending of the twelve into a hostile world under the Father who counts the sparrows; the tender “Come to Me... and I will give you rest” alongside the Pharisees’ hardening; the parables of the kingdom (sower, wheat and tares, mustard seed, treasure and pearl); and the King dishonored at Nazareth.</p>
+<p class="caption lang-es block">La autoridad del Rey sobre la enfermedad, los demonios, la naturaleza, y la muerte (y para perdonar pecados); el envío de los doce a un mundo hostil bajo el Padre que cuenta los pajarillos; el tierno “Venid a mí... y yo os haré descansar” junto al endurecimiento de los fariseos; las parábolas del reino (sembrador, trigo y cizaña, semilla de mostaza, tesoro y perla); y el Rey deshonrado en Nazaret.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The King's Works: Miracles and Parables</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Matthew 8–13: the King's authority displayed, and the secrets of the kingdom revealed</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Matthew (Trench, Spurgeon, Ryle, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Matthew</li>
+<li>Miracles and Parables</li>
+<li>“Come to Me”</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> Having heard the King's <em>words</em> in the Sermon, we now see the King's <em>works</em>. This reading walks through Matthew 8–13: the mighty deeds that display His authority over disease, demons, nature, and death; the sending of His messengers; and His teaching of the kingdom in parables.
+    </div>
+<h2><span class="dg-n">1.</span>The King's Authority Displayed</h2>
+<p>In the Sermon on the Mount we heard the King teach with unmistakable authority. Now, in chapters 8 through 13, we watch that same authority break out in action. These chapters show us the King's power displayed in a great series of mighty deeds, the calling and sending out of His own messengers, the first stirrings of serious opposition against Him, and His teaching of the mysteries of the kingdom in parables. If the Sermon revealed His authority in the realm of teaching, these chapters reveal His authority over disease, over demons, over the forces of nature, and over death itself — and His authority, too, to unlock the hidden secrets of the kingdom of heaven.</p>
+<h2><span class="dg-n">2.</span>Authority over Disease, Demons, Nature, and Death</h2>
+<p>Matthew now gathers together a striking series of miracles, each one displaying the King's power over some enemy that afflicts us. He reaches out and cleanses a leper; He heals a Roman centurion's servant with a mere word, marveling aloud at the great faith of this Gentile soldier; He heals Peter's mother-in-law, and many others besides — and Matthew sees in it the fulfillment of Isaiah's prophecy, "He Himself took our infirmities and bore our sicknesses." Then, crossing the lake in a boat, He is asleep when a furious storm rises; He wakes, rebukes the wind and the waves with a word, and a great calm falls, so that the awestruck disciples ask one another, "Who can this be, that even the winds and the sea obey Him?" He casts out demons with a command. He heals a paralyzed man and, to prove that He also has authority on earth to forgive sins, tells the man his sins are forgiven. He even takes a dead girl by the hand and raises her to life again. Disease, demons, the raging storm, death itself — every one of them bows before the King. And through it all He is moved with deep compassion for the crowds, who seemed to Him "like sheep having no shepherd"; and He turns to His disciples and tells them to pray that the Lord of the harvest would send out laborers into His harvest.</p>
+<h2><span class="dg-n">3.</span>The King Sends His Messengers</h2>
+<p>That prayer is answered at once, in part, by the King Himself. He now sends out His twelve apostles to extend His own ministry, giving them authority to heal the sick and to preach the very message He preached: "The kingdom of heaven is at hand." But He does not hide from them the cost of the mission. He is sending them out, He says, as sheep in the midst of wolves; they will be persecuted, hated, and dragged before councils and rulers, all for His name's sake. And yet, three times over, He tells them not to be afraid. The same God who marks the falling of a single sparrow, He reminds them, has numbered the very hairs of their heads, and holds them of far greater worth than many sparrows. Whoever will confess Him openly before men, He promises, He will Himself confess before His Father in heaven; and whoever loses his life for His sake will, in the end, truly find it. The King's messengers are to go out bold and unafraid, resting in the Father's tender care, whatever the cost may be.</p>
+<h2><span class="dg-n">4.</span>Responses to the King</h2>
+<p>As the King goes on ministering, Matthew shows us the very different ways people respond to Him. John the Baptist, now languishing in Herod's prison, sends his disciples to ask whether Jesus is really the Coming One; and Jesus answers simply by pointing to His works — the blind see, the lame walk, the poor have the gospel preached to them. He pronounces sorrow over the towns that had seen His mighty works and still would not repent. And then He speaks one of the tenderest invitations in all of Scripture: "Come to Me, all you who labor and are heavy laden, and I will give you rest. Take My yoke upon you and learn from Me, for I am gentle and lowly in heart, and you will find rest for your souls." But at the very same time, the Pharisees are hardening into open hostility, quarreling with Him over the Sabbath and even daring to say that He casts out demons by the power of the devil — a charge against which Jesus gives a grave and solemn warning. The King divides all who meet Him: some come to Him, weary and burdened, and find rest; others harden their hearts and turn against Him.</p>
+<h2><span class="dg-n">5.</span>The Parables of the Kingdom</h2>
+<p>In chapter 13 the King begins to teach the crowds in parables — simple earthly stories carrying a heavenly meaning, which open up the truth of the kingdom to those whose hearts are ready to hear, while remaining a closed riddle to the hard and unwilling. The parable of the sower shows how the same word of the kingdom is received in four very different ways: like the hard path, the shallow rocky ground, the thorny soil, and, at last, the good soil that receives it and bears a rich harvest. The parable of the wheat and the weeds teaches that good and evil will grow up together in the world until the final harvest, when God Himself will separate them. The tiny mustard seed and the hidden leaven show how the kingdom, from the smallest and most unlikely beginnings, grows to a vast size and works quietly through everything. And the parables of the hidden treasure and the pearl of great price show the supreme, incomparable worth of the kingdom — a treasure worth selling everything one owns in order to possess it. The kingdom, then, is a present and growing reality, mixed for now with much that opposes it, and yet of infinite value — and it is received by the heart that truly hears.</p>
+<h2><span class="dg-n">6.</span>The King Rejected at Home, and the King for Us</h2>
+<p>The section closes on a sad and searching note. When Jesus comes to teach in Nazareth, His own hometown, the people there take offense at Him. "Is this not the carpenter's son?" they scoff — and, refusing to believe, they close their hearts, so that He does not do many mighty works among them, and Matthew tells us plainly it was because of their unbelief. Familiarity had bred contempt; the King was dishonored by the very people who imagined they knew all about Him. It is a sobering picture of how unbelief can slam the door shut on the blessing the King longs to give. And yet, taken all together, these chapters overflow with encouragement. They show us a King with authority over every single thing that afflicts and frightens us — disease, demons, the storm, and death — and with authority, besides, to forgive our sins and to reveal to us the secrets of His kingdom. He sends His messengers out into a hostile world, but tells them again and again not to fear, for the Father who watches the sparrows is watching over them. And He calls the weary and the burdened straight to Himself: "Come to Me, and I will give you rest." How we respond to this King is the one thing that matters most. Some harden their hearts against Him; but the good soil hears His word and bears fruit, and the wise gladly sell all they have for the one pearl of His kingdom. So come to this King, who holds all authority in His hands and yet is gentle and lowly in heart. Bring Him your heavy burdens, and find your rest in Him. And let the word of His kingdom sink down deep into the good soil of your heart, and bear its fruit — for the kingdom He brings is worth more than all the world besides.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Is there some burden you are carrying alone, that the King is inviting you to bring to Him for rest? Which soil does your heart most resemble when the word of the kingdom is sown — and what is choking or hardening it? And do you truly value the kingdom as the pearl of great price, worth more than everything else you own?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Matthew 8–13, anchored in the classic public-domain expositions of Matthew (Richard C. Trench's <em>Notes on the Parables</em> and <em>Notes on the Miracles of Our Lord</em>, C. H. Spurgeon's <em>The Gospel of the Kingdom</em>, J. C. Ryle, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on Richard C. Trench's <em>Notes on the Parables of Our Lord</em> and <em>Notes on the Miracles of Our Lord</em>, along with C. H. Spurgeon and J. C. Ryle, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Las Obras del Rey: Milagros y Parábolas</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Mateo 8–13: la autoridad del Rey desplegada, y los secretos del reino revelados</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Mateo (Trench, Spurgeon, Ryle, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Mateo</li>
+<li>Milagros y parábolas</li>
+<li>“Venid a mí”</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Habiendo oído las <em>palabras</em> del Rey en el Sermón, ahora vemos las <em>obras</em> del Rey. Esta lectura recorre Mateo 8–13: los hechos poderosos que despliegan su autoridad sobre la enfermedad, los demonios, la naturaleza, y la muerte; el envío de sus mensajeros; y su enseñanza del reino en parábolas.
+    </div>
+<h2><span class="dg-n">1.</span>La autoridad del Rey desplegada</h2>
+<p>En el Sermón del Monte oímos al Rey enseñar con inconfundible autoridad. Ahora, en los capítulos 8 al 13, vemos esa misma autoridad irrumpir en acción. Estos capítulos nos muestran el poder del Rey desplegado en una gran serie de hechos poderosos, el llamado y envío de sus propios mensajeros, los primeros indicios de seria oposición contra Él, y su enseñanza de los misterios del reino en parábolas. Si el Sermón reveló su autoridad en el terreno de la enseñanza, estos capítulos revelan su autoridad sobre la enfermedad, sobre los demonios, sobre las fuerzas de la naturaleza, y sobre la muerte misma — y su autoridad, también, para abrir los secretos escondidos del reino de los cielos.</p>
+<h2><span class="dg-n">2.</span>Autoridad sobre la enfermedad, los demonios, la naturaleza, y la muerte</h2>
+<p>Mateo ahora reúne una impresionante serie de milagros, cada uno desplegando el poder del Rey sobre algún enemigo que nos aflige. Extiende la mano y limpia a un leproso; sana al siervo de un centurión romano con una mera palabra, maravillándose en voz alta ante la gran fe de este soldado gentil; sana a la suegra de Pedro, y a muchos otros además — y Mateo ve en ello el cumplimiento de la profecía de Isaías: "Él mismo tomó nuestras enfermedades, y llevó nuestras dolencias." Luego, cruzando el lago en una barca, está dormido cuando se levanta una furiosa tormenta; despierta, reprende al viento y a las olas con una palabra, y sobreviene una gran calma, de modo que los asombrados discípulos se preguntan unos a otros: "¿Qué hombre es éste, que aun los vientos y el mar le obedecen?" Echa fuera demonios con una orden. Sana a un hombre paralítico y, para probar que también tiene autoridad en la tierra para perdonar pecados, le dice al hombre que sus pecados le son perdonados. Aun toma a una niña muerta de la mano y la levanta a la vida otra vez. La enfermedad, los demonios, la tormenta furiosa, la muerte misma — cada uno de ellos se postra ante el Rey. Y a través de todo ello está movido de honda compasión por las multitudes, que le parecían "como ovejas que no tienen pastor"; y se vuelve a sus discípulos y les dice que rueguen al Señor de la mies que envíe obreros a su mies.</p>
+<h2><span class="dg-n">3.</span>El Rey envía a sus mensajeros</h2>
+<p>Esa oración es contestada de inmediato, en parte, por el Rey mismo. Ahora envía a sus doce apóstoles a extender su propio ministerio, dándoles autoridad para sanar a los enfermos y para predicar el mismísimo mensaje que Él predicó: "El reino de los cielos se ha acercado." Pero no les esconde el costo de la misión. Los está enviando, dice, como ovejas en medio de lobos; serán perseguidos, aborrecidos, y arrastrados ante concilios y gobernantes, todo por causa de su nombre. Y sin embargo, tres veces, les dice que no tengan miedo. El mismo Dios que marca la caída de un solo pajarillo, les recuerda, ha contado los mismísimos cabellos de sus cabezas, y los tiene por de mucho mayor valor que muchos pajarillos. A todo el que le confiese abiertamente delante de los hombres, promete, Él mismo le confesará delante de su Padre que está en los cielos; y el que pierda su vida por causa de Él, al final, de veras la hallará. Los mensajeros del Rey han de salir audaces y sin temor, descansando en el tierno cuidado del Padre, cueste lo que cueste.</p>
+<h2><span class="dg-n">4.</span>Respuestas al Rey</h2>
+<p>Al seguir el Rey ministrando, Mateo nos muestra las muy distintas maneras en que la gente le responde. Juan el Bautista, ahora languideciendo en la cárcel de Herodes, envía a sus discípulos a preguntar si Jesús es en realidad el que había de venir; y Jesús responde sencillamente señalando sus obras — los ciegos ven, los cojos andan, a los pobres se les predica el evangelio. Pronuncia dolor sobre los pueblos que habían visto sus hechos poderosos y aún no se arrepentían. Y entonces habla una de las más tiernas invitaciones de toda la Escritura: "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar. Llevad mi yugo sobre vosotros, y aprended de mí, que soy manso y humilde de corazón; y hallaréis descanso para vuestras almas." Pero al mismísimo tiempo, los fariseos se endurecen en abierta hostilidad, riñendo con Él sobre el día de reposo y aun atreviéndose a decir que echa fuera demonios por el poder del diablo — una acusación contra la cual Jesús da una grave y solemne advertencia. El Rey divide a todos los que le encuentran: algunos vienen a Él, cansados y cargados, y hallan descanso; otros endurecen sus corazones y se vuelven contra Él.</p>
+<h2><span class="dg-n">5.</span>Las parábolas del reino</h2>
+<p>En el capítulo 13 el Rey comienza a enseñar a las multitudes en parábolas — sencillas historias terrenales que llevan un significado celestial, que abren la verdad del reino a aquellos cuyos corazones están listos para oír, mientras permanecen un enigma cerrado para los duros y renuentes. La parábola del sembrador muestra cómo la misma palabra del reino es recibida de cuatro maneras muy distintas: como el camino duro, la superficial tierra pedregosa, el suelo espinoso, y, al fin, la buena tierra que la recibe y lleva una rica cosecha. La parábola del trigo y la cizaña enseña que el bien y el mal crecerán juntos en el mundo hasta la cosecha final, cuando Dios mismo los separará. La diminuta semilla de mostaza y la levadura escondida muestran cómo el reino, desde los más pequeños y más improbables comienzos, crece a un tamaño vasto y obra calladamente a través de todo. Y las parábolas del tesoro escondido y la perla de gran precio muestran el supremo e incomparable valor del reino — un tesoro digno de vender todo lo que uno posee a fin de poseerlo. El reino, pues, es una realidad presente y creciente, mezclada por ahora con mucho que se le opone, y sin embargo de valor infinito — y es recibido por el corazón que de veras oye.</p>
+<h2><span class="dg-n">6.</span>El Rey rechazado en casa, y el Rey por nosotros</h2>
+<p>La sección cierra en una nota triste y penetrante. Cuando Jesús viene a enseñar en Nazaret, su propia ciudad, la gente de allí se ofende de Él. "¿No es éste el hijo del carpintero?" se burlan — y, rehusando creer, cierran sus corazones, de modo que Él no hace muchos hechos poderosos entre ellos, y Mateo nos dice claramente que fue a causa de su incredulidad. La familiaridad había engendrado desprecio; el Rey fue deshonrado por la mismísima gente que imaginaba saberlo todo acerca de Él. Es un cuadro sobrio de cómo la incredulidad puede cerrar de golpe la puerta a la bendición que el Rey anhela dar. Y sin embargo, tomados todos juntos, estos capítulos rebosan de ánimo. Nos muestran un Rey con autoridad sobre absolutamente todo lo que nos aflige y nos atemoriza — la enfermedad, los demonios, la tormenta, y la muerte — y con autoridad, además, para perdonar nuestros pecados y para revelarnos los secretos de su reino. Envía a sus mensajeros a un mundo hostil, pero les dice una y otra vez que no teman, porque el Padre que observa a los pajarillos vela por ellos. Y llama a los cansados y cargados directamente a sí mismo: "Venid a mí, y yo os haré descansar." Cómo respondemos a este Rey es lo único que más importa. Algunos endurecen sus corazones contra Él; pero la buena tierra oye su palabra y lleva fruto, y los sabios con gusto venden todo lo que tienen por la única perla de su reino. Así que venga a este Rey, que tiene toda autoridad en sus manos y sin embargo es manso y humilde de corazón. Tráigale sus cargas pesadas, y halle su descanso en Él. Y deje que la palabra de su reino se hunda hondo en la buena tierra de su corazón, y lleve su fruto — porque el reino que Él trae vale más que todo el mundo además.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Hay alguna carga que lleva a solas, que el Rey le invita a traerle a Él por descanso? ¿A cuál suelo se parece más su corazón cuando se siembra la palabra del reino — y qué la está ahogando o endureciendo? Y ¿valora de veras el reino como la perla de gran precio, digna de más que todo lo demás que posee?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Mateo 8–13, anclado en las exposiciones clásicas de dominio público de Mateo (<em>Notes on the Parables</em> y <em>Notes on the Miracles of Our Lord</em> de Richard C. Trench, <em>The Gospel of the Kingdom</em> de C. H. Spurgeon, J. C. Ryle, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>Notes on the Parables of Our Lord</em> y <em>Notes on the Miracles of Our Lord</em> de Richard C. Trench, junto con C. H. Spurgeon y J. C. Ryle, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="3" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 4 -->
+<article class="entry" data-id="4" data-title-en="The King and His Church, Toward Jerusalem &mdash; CTS digest" data-title-es="El Rey y Su Iglesia, Rumbo a Jerusalén &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Matthew 14&ndash;25 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Mateo 14&ndash;25 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">4.</span><span class="lang-en">The King and His Church, Toward Jerusalem</span><span class="lang-es">El Rey y Su Iglesia, Rumbo a Jerusalén</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The great confession, “You are the Christ, the Son of the living God,” and the promise to build His unstoppable church; the transfiguration glimpse of the King’s glory; life in His community (humility, the lost sheep, limitless forgiveness); the triumphal entry and confronting the false shepherds; and the Olivet Discourse on the King’s certain return — “watch therefore.”</p>
+<p class="caption lang-es block">La gran confesión, “Tú eres el Cristo, el Hijo del Dios viviente,” y la promesa de edificar su iglesia imparable; el vistazo a la gloria del Rey en la transfiguración; la vida en su comunidad (humildad, la oveja perdida, el perdón sin límite); la entrada triunfal y la confrontación de los falsos pastores; y el Discurso del Monte de los Olivos sobre el regreso seguro del Rey — “velad.”</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The King and His Church, Toward Jerusalem</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Matthew 14–25: the great confession, the road to the cross, and the King's return</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Matthew (Ryle, Broadus, Warfield, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Matthew</li>
+<li>“You Are the Christ”</li>
+<li>The King's Return</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> This large section brings us to the great turning point of the King's ministry and His journey toward the cross. This reading walks through Matthew 14–25: Peter's confession and the promise of the church, the transfiguration, life in the King's community, the entry into Jerusalem, and the King's return in glory.
+    </div>
+<h2><span class="dg-n">1.</span>The Turning Point: Toward Jerusalem</h2>
+<p>This long stretch of Matthew's Gospel carries us through the great turning point of the King's ministry and sets His face toward the cross. In these chapters His disciples come at last to grasp who He truly is; He begins to tell them plainly that He must die and rise again; He teaches His followers how they are to live together as His community; and He makes His final approach to Jerusalem, where He will be welcomed as King, clash openly with the religious leaders, and foretell His return in glory. The road, from here on, bends steadily toward Calvary — and along the way the King is carefully preparing His people for all that is about to come.</p>
+<h2><span class="dg-n">2.</span>“You Are the Christ” — the Confession and the Church</h2>
+<p>Amid still more mighty works — the feeding of the five thousand, and the walking on the water, where a sinking Peter cries out, "Lord, save me!" — the great question of the whole Gospel finally comes to a head. Jesus asks His disciples plainly, "Who do you say that I am?" And Peter answers for them all: "You are the Christ, the Son of the living God." This is the confession the entire book has been building toward. Jesus pronounces Peter blessed, declares that this truth was revealed to him not by flesh and blood but by the Father in heaven, and then makes a great promise: "On this rock I will build My church, and the gates of Hades shall not prevail against it." Upon the solid rock of this confession — the confession of Jesus as the Christ, the Son of the living God — the King will build His people, and no power of death or hell will ever overcome them. Yet at once He begins to teach what kind of Messiah He actually is: He must go up to Jerusalem, suffer many things, be killed, and on the third day be raised. When Peter, horrified, tries to talk Him out of it, Jesus rebukes him with startling force. The way of the King is the way of the cross — and, He adds, His followers too must deny themselves, take up their own cross, and come after Him; for whoever would save his life will lose it, but whoever loses his life for the King's sake will find it.</p>
+<h2><span class="dg-n">3.</span>The Transfiguration — the King's Glory Glimpsed</h2>
+<p>Then, to strengthen them for the dark road ahead, Jesus takes His three closest disciples — Peter, James, and John — up a high mountain, and is transfigured there before their eyes. His face shines like the sun, His clothing becomes white as the light, and Moses and Elijah appear, speaking with Him. And once again the voice of the Father sounds from a bright cloud: "This is My beloved Son, in whom I am well pleased. Hear Him!" For one shining moment the veil is drawn back, and the disciples are allowed to see the hidden glory of their King. It is a lesson they will need: the One who is walking straight toward the cross is none other than the radiant, eternal Son of God. The cross, then, will not be a defeat that overtakes Him, but the very path that this King of glory has freely chosen to walk.</p>
+<h2><span class="dg-n">4.</span>Life in the King's Community</h2>
+<p>Much of this section is taken up with the King teaching His followers how to live together as His people. True greatness in the kingdom, He says, is not to climb above others but to become humble, like a little child. He warns sternly against causing one of His little ones to stumble, and tells the tender parable of the shepherd who leaves the ninety-nine sheep on the hills to go and search for the single one that is lost — for so it is the Father's heart that not one of them should perish. He teaches how to go and seek out reconciliation with a brother who has sinned, and He calls for a forgiveness without limit: when Peter asks whether seven times might be enough, Jesus answers, in effect, seventy times seven. And He drives it home with the parable of the unforgiving servant, who, having been let off a staggering, unpayable debt by his master, then seized a fellow servant by the throat over a trifling sum — a solemn warning that those who have been forgiven so vast a debt by God must, in turn, forgive others from the heart. He takes little children up in His arms and blesses them, and He teaches, again and again, that in His kingdom the last shall be first and the first last. The community of the King, in short, is to be marked through and through by humility, by forgiveness, and by grace.</p>
+<h2><span class="dg-n">5.</span>The King Enters Jerusalem</h2>
+<p>At last the King comes to Jerusalem itself. He rides into the city humbly, mounted on a donkey, exactly as the prophet Zechariah had foretold the coming King would do; and the crowds spread their cloaks before Him and cry out, "Hosanna to the Son of David!" The King has come to His own royal city. He goes straight to the temple and cleanses it, driving out those who had turned it into a marketplace, declaring, "My house shall be called a house of prayer." There follow several days of sharp and open conflict with the religious authorities, who come at Him one after another, trying to trap Him with clever questions — about paying taxes to Caesar, about the resurrection, about which commandment is the greatest. To that last He gives the answer that gathers up the whole Law: you shall love the Lord your God with all your heart, and you shall love your neighbor as yourself. One by one He silences His questioners; and then He turns and pronounces a series of solemn woes upon the scribes and Pharisees for their hypocrisy — an outward show of religion that masked inward corruption and hardness. The King has come to confront the false shepherds who had led His people astray.</p>
+<h2><span class="dg-n">6.</span>The King Will Return</h2>
+<p>As Jesus finally leaves the temple, He sits down on the Mount of Olives and gives His great discourse about the future — about the judgment that is coming, and, above all, about His own return in glory at the end of the age. He warns His followers of trials and deceptions ahead, and calls them again and again to be watchful and ready, for no one knows the day or the hour: "Watch therefore, for you do not know what hour your Lord is coming." He tells parables to press the point home — the wise and foolish virgins, who must keep their lamps burning and be ready when the bridegroom comes; and the servants entrusted with their master's talents, who must be found faithful with what they have been given. And He describes the last judgment itself, when the King will sit on His glorious throne and separate all the nations as a shepherd separates the sheep from the goats — welcoming those who, in caring for "the least of these," were caring all along for Him. The same King who is now going down to the cross will one day return as Judge and King over all; and so His people are to live ready, watchful, and faithful. And here is the great encouragement of these chapters. They bring us with the King right up to the threshold of the cross. Along the way we have heard the great confession — that He is the Christ, the Son of the living God — and His unbreakable promise to build His church, which the gates of hell shall never overcome. We have glimpsed His hidden glory on the mountain, learned the humble and forgiving life of His community, watched Him enter His city as King and confront the false shepherds, and heard His sure promise to return in glory as the Judge of all. So confess Him for who He truly is, and follow Him in the way of the cross. Live as a member of His community — humble as a child, forgiving as one who has himself been forgiven so much, faithful with all that He entrusts to you. And live every day ready, for the King is surely coming again. The One who went to the cross for us will return in glory — and blessed are the servants whom He finds watching.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Do you confess Jesus, with Peter, as "the Christ, the Son of the living God" — and follow Him in the costly way of the cross? Having been forgiven so vast a debt, are you forgiving others from the heart, or holding a grudge over some small thing? And if the King were to return today, would He find you watching and faithful?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Matthew 14–25, anchored in the classic public-domain expositions of Matthew (J. C. Ryle's <em>Expository Thoughts</em>, John A. Broadus's commentary, B. B. Warfield's <em>The Lord of Glory</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on J. C. Ryle and John A. Broadus on Matthew, and on B. B. Warfield's <em>The Lord of Glory</em> for the deity and glory of Christ, all in the public domain. On the King's return the seminary presents the certainty of His coming and the call to watchfulness, without taking a partisan position on the details.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>El Rey y Su Iglesia, Rumbo a Jerusalén</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Mateo 14–25: la gran confesión, el camino a la cruz, y el regreso del Rey</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Mateo (Ryle, Broadus, Warfield, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Mateo</li>
+<li>“Tú eres el Cristo”</li>
+<li>El regreso del Rey</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Esta gran sección nos trae al gran punto de giro del ministerio del Rey y su camino hacia la cruz. Esta lectura recorre Mateo 14–25: la confesión de Pedro y la promesa de la iglesia, la transfiguración, la vida en la comunidad del Rey, la entrada en Jerusalén, y el regreso del Rey en gloria.
+    </div>
+<h2><span class="dg-n">1.</span>El punto de giro: rumbo a Jerusalén</h2>
+<p>Este largo tramo del Evangelio de Mateo nos lleva por el gran punto de giro del ministerio del Rey y pone su rostro hacia la cruz. En estos capítulos sus discípulos llegan al fin a captar quién es Él en verdad; comienza a decirles claramente que debe morir y resucitar; enseña a sus seguidores cómo han de vivir juntos como su comunidad; y hace su acercamiento final a Jerusalén, donde será recibido como Rey, chocará abiertamente con los líderes religiosos, y predirá su regreso en gloria. El camino, de aquí en adelante, se dobla firmemente hacia el Calvario — y por el camino el Rey está preparando cuidadosamente a su pueblo para todo lo que está a punto de venir.</p>
+<h2><span class="dg-n">2.</span>“Tú eres el Cristo” — la confesión y la iglesia</h2>
+<p>En medio de aún más hechos poderosos — la alimentación de los cinco mil, y el caminar sobre las aguas, donde un Pedro que se hunde clama: "¡Señor, sálvame!" — la gran pregunta de todo el Evangelio finalmente llega a su punto crítico. Jesús pregunta a sus discípulos claramente: "¿Quién decís que soy yo?" Y Pedro responde por todos ellos: "Tú eres el Cristo, el Hijo del Dios viviente." Esta es la confesión hacia la cual todo el libro ha estado edificando. Jesús declara a Pedro bienaventurado, declara que esta verdad le fue revelada no por carne ni sangre sino por el Padre que está en los cielos, y luego hace una gran promesa: "sobre esta roca edificaré mi iglesia; y las puertas del Hades no prevalecerán contra ella." Sobre la sólida roca de esta confesión — la confesión de Jesús como el Cristo, el Hijo del Dios viviente — el Rey edificará a su pueblo, y ningún poder de la muerte ni del infierno los vencerá jamás. Sin embargo, en seguida comienza a enseñar qué clase de Mesías es en realidad: debe subir a Jerusalén, padecer muchas cosas, ser muerto, y al tercer día resucitar. Cuando Pedro, horrorizado, trata de disuadirle, Jesús le reprende con sorprendente fuerza. El camino del Rey es el camino de la cruz — y, añade, sus seguidores también deben negarse a sí mismos, tomar su propia cruz, y venir en pos de Él; porque el que quiera salvar su vida la perderá, pero el que pierda su vida por causa del Rey la hallará.</p>
+<h2><span class="dg-n">3.</span>La transfiguración — la gloria del Rey vislumbrada</h2>
+<p>Entonces, para fortalecerlos para el oscuro camino que tienen por delante, Jesús toma a sus tres discípulos más cercanos — Pedro, Jacobo, y Juan — a un alto monte, y es transfigurado allí ante sus ojos. Su rostro resplandece como el sol, sus vestiduras se vuelven blancas como la luz, y Moisés y Elías aparecen, hablando con Él. Y una vez más la voz del Padre suena desde una nube resplandeciente: "Este es mi Hijo amado, en quien tengo contentamiento; a él oíd." Por un resplandeciente momento el velo es descorrido, y a los discípulos se les permite ver la gloria escondida de su Rey. Es una lección que necesitarán: aquel que camina derecho hacia la cruz no es otro que el radiante y eterno Hijo de Dios. La cruz, entonces, no será una derrota que le sobreviene, sino el mismísimo camino que este Rey de gloria ha escogido libremente andar.</p>
+<h2><span class="dg-n">4.</span>La vida en la comunidad del Rey</h2>
+<p>Gran parte de esta sección la ocupa el Rey enseñando a sus seguidores cómo vivir juntos como su pueblo. La verdadera grandeza en el reino, dice, no es subir por encima de los demás sino hacerse humilde, como un niño pequeño. Advierte severamente contra hacer tropezar a uno de sus pequeños, y cuenta la tierna parábola del pastor que deja las noventa y nueve ovejas en los montes para ir a buscar la única que está perdida — porque así es el corazón del Padre, que ni uno de ellos perezca. Enseña cómo ir a buscar la reconciliación con un hermano que ha pecado, y llama a un perdón sin límite: cuando Pedro pregunta si siete veces bastarían, Jesús responde, en efecto, setenta veces siete. Y lo lleva a casa con la parábola del siervo que no perdonó, quien, habiendo sido liberado de una asombrosa e impagable deuda por su señor, luego agarró por el cuello a un consiervo por una suma insignificante — una solemne advertencia de que los que han sido perdonados de tan vasta deuda por Dios deben, a su vez, perdonar a otros de corazón. Toma a los niños pequeños en sus brazos y los bendice, y enseña, una y otra vez, que en su reino los últimos serán primeros y los primeros últimos. La comunidad del Rey, en resumen, ha de estar marcada de principio a fin por la humildad, por el perdón, y por la gracia.</p>
+<h2><span class="dg-n">5.</span>El Rey entra en Jerusalén</h2>
+<p>Al fin el Rey viene a la mismísima Jerusalén. Entra en la ciudad humildemente, montado sobre un asno, exactamente como el profeta Zacarías había predicho que el Rey venidero haría; y las multitudes tienden sus mantos delante de Él y claman: "¡Hosanna al Hijo de David!" El Rey ha venido a su propia ciudad real. Va directamente al templo y lo limpia, echando fuera a los que lo habían vuelto un mercado, declarando: "Mi casa, casa de oración será llamada." Siguen varios días de agudo y abierto conflicto con las autoridades religiosas, que vienen contra Él uno tras otro, tratando de atraparle con preguntas astutas — sobre pagar impuestos a César, sobre la resurrección, sobre cuál mandamiento es el mayor. A esta última da la respuesta que recoge toda la Ley: amarás al Señor tu Dios con todo tu corazón, y amarás a tu prójimo como a ti mismo. Uno por uno hace callar a sus interrogadores; y luego se vuelve y pronuncia una serie de solemnes ayes sobre los escribas y fariseos por su hipocresía — una muestra externa de religión que enmascaraba corrupción y dureza interiores. El Rey ha venido a confrontar a los falsos pastores que habían descarriado a su pueblo.</p>
+<h2><span class="dg-n">6.</span>El Rey regresará</h2>
+<p>Al salir Jesús finalmente del templo, se sienta en el Monte de los Olivos y da su gran discurso sobre el futuro — sobre el juicio que viene, y, sobre todo, sobre su propio regreso en gloria al fin de la edad. Advierte a sus seguidores de pruebas y engaños por venir, y los llama una y otra vez a estar vigilantes y listos, porque nadie sabe el día ni la hora: "Velad, pues, porque no sabéis a qué hora ha de venir vuestro Señor." Cuenta parábolas para grabar el punto — las vírgenes prudentes e insensatas, que deben mantener sus lámparas encendidas y estar listas cuando venga el esposo; y los siervos a quienes se confían los talentos de su señor, que deben ser hallados fieles con lo que se les ha dado. Y describe el juicio final mismo, cuando el Rey se sentará en su trono glorioso y separará a todas las naciones como un pastor separa las ovejas de los cabritos — dando la bienvenida a los que, al cuidar de "uno de estos más pequeños," estaban cuidando todo el tiempo de Él. El mismo Rey que ahora baja a la cruz un día regresará como Juez y Rey sobre todo; y así su pueblo ha de vivir listo, vigilante, y fiel. Y he aquí el gran ánimo de estos capítulos. Nos traen con el Rey justo hasta el umbral de la cruz. Por el camino hemos oído la gran confesión — que Él es el Cristo, el Hijo del Dios viviente — y su promesa inquebrantable de edificar su iglesia, a la cual las puertas del infierno nunca vencerán. Hemos vislumbrado su gloria escondida en el monte, aprendido la vida humilde y perdonadora de su comunidad, visto entrar en su ciudad como Rey y confrontar a los falsos pastores, y oído su segura promesa de regresar en gloria como el Juez de todos. Así que confiéselo por quién es en verdad, y sígale en el camino de la cruz. Viva como miembro de su comunidad — humilde como un niño, perdonando como quien él mismo ha sido perdonado de tanto, fiel con todo lo que Él le confía. Y viva cada día listo, porque el Rey de seguro viene otra vez. Aquel que fue a la cruz por nosotros regresará en gloria — y bienaventurados los siervos a quienes halle velando.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Confiesa a Jesús, con Pedro, como "el Cristo, el Hijo del Dios viviente" — y le sigue en el costoso camino de la cruz? Habiendo sido perdonado de tan vasta deuda, ¿está perdonando a otros de corazón, o guardando rencor por alguna cosa pequeña? Y si el Rey regresara hoy, ¿le hallaría velando y fiel?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Mateo 14–25, anclado en las exposiciones clásicas de dominio público de Mateo (<em>Expository Thoughts</em> de J. C. Ryle, el comentario de John A. Broadus, <em>The Lord of Glory</em> de B. B. Warfield, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en J. C. Ryle y John A. Broadus sobre Mateo, y en <em>The Lord of Glory</em> de B. B. Warfield para la deidad y gloria de Cristo, todos en el dominio público. Sobre el regreso del Rey el seminario presenta la certeza de su venida y el llamado a la vigilancia, sin tomar posición partidista sobre los detalles.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="4" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 5 -->
+<article class="entry" data-id="5" data-title-en="The Cross, the Empty Tomb, and the Great Commission &mdash; CTS digest" data-title-es="La Cruz, la Tumba Vacía, y la Gran Comisión &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Matthew 26&ndash;28 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Mateo 26&ndash;28 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">5.</span><span class="lang-en">The Cross, the Empty Tomb, and the Great Commission</span><span class="lang-es">La Cruz, la Tumba Vacía, y la Gran Comisión</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The capstone: the Last Supper (His blood “shed for many for the remission of sins”) and Gethsemane’s “not as I will, but as You will”; the betrayal, Peter’s denial, and Barabbas set free in His place; the crucifixion — the King bearing our judgment, forsaken so we need never be, the veil torn; the empty tomb and the risen King; and the Great Commission — “all authority... make disciples of all nations... I am with you always.”</p>
+<p class="caption lang-es block">La culminación: la Última Cena (su sangre “que por muchos es derramada para remisión de los pecados”) y el “no sea como yo quiero, sino como tú” de Getsemaní; la traición, la negación de Pedro, y Barrabás puesto en libertad en su lugar; la crucifixión — el Rey llevando nuestro juicio, desamparado para que nunca lo seamos, el velo rasgado; la tumba vacía y el Rey resucitado; y la Gran Comisión — “toda potestad... haced discípulos de todas las naciones... yo estoy con vosotros todos los días.”</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Cross, the Empty Tomb, and the Great Commission</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Matthew 26–28: the King dies for His people, rises in triumph, and sends His church to the world</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Matthew (Martin, Ryle, Broadus, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Matthew</li>
+<li>The Cross and Empty Tomb</li>
+<li>The Great Commission</li>
+<li>Capstone</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> The whole Gospel has been moving toward this. This closing reading walks through Matthew 26–28 — the Last Supper and Gethsemane, the betrayal and trials, the crucifixion of the King for His people, the glorious resurrection, and the Great Commission — and gathers up the message of the entire Gospel of the King.
+    </div>
+<h2><span class="dg-n">1.</span>The King Goes to the Cross</h2>
+<p>Everything in Matthew's Gospel has been quietly moving toward this hour. All that we have seen — the King's birth, His teaching, His mighty works, His long journey up to Jerusalem — now reaches its great climax in the King's death and resurrection. Chapters 26 through 28 tell of the Last Supper, the agony in Gethsemane, the betrayal and arrest, the trials, the crucifixion, the burial, and then, gloriously, the resurrection and the Great Commission. Here, at last, the King who came expressly "to save His people from their sins" does exactly that — not by force of arms, but by laying down His own life in their place. And then He rises again in triumph over the grave, and sends His church out into all the world.</p>
+<h2><span class="dg-n">2.</span>The Last Supper and Gethsemane</h2>
+<p>On the very night He was betrayed, Jesus keeps the Passover with His disciples, and there He institutes the meal we call the Lord's Supper. Taking bread, and then the cup, He gives them to His disciples as His own body and His own blood — His blood, He says, "shed for many for the remission of sins." In that simple act the King explains beforehand the meaning of the death He is about to die: it is a sacrifice for sin, the very foundation of a new covenant between God and His people. Then He goes out to the Garden of Gethsemane and there, in unimaginable anguish, He prays: "O My Father, if it is possible, let this cup pass from Me; nevertheless, not as I will, but as You will." The King feels the full and crushing horror of what lies before Him — and yet He bows His will entirely to His Father's. Here is perfect love and perfect obedience, walking with open eyes and a willing heart straight toward the cross.</p>
+<h2><span class="dg-n">3.</span>Betrayed, Arrested, and Tried</h2>
+<p>Then the darkness closes in. Judas comes and betrays Him with a kiss; the disciples all forsake Him and flee; and Peter, who had sworn he never would, denies three times that he even knows Him, and goes out and weeps bitterly. Jesus is seized and dragged before the high priest and the council, where He is condemned for the "blasphemy" of confessing the plain truth — that He is the Christ, the Son of God — and is spat upon, mocked, and struck. In the morning He is handed over to Pilate, the Roman governor, who can find no real fault in Him, yet, caving in to the shouting of the crowd, condemns Him to be crucified. And Pilate releases to them, in Jesus' place, a guilty prisoner named Barabbas — a vivid picture, set right there in the story, of the guilty one going free because the innocent One takes his punishment. Through all of it, the King who could have called down legions of angels stays silent, willingly enduring every injustice for our sake.</p>
+<h2><span class="dg-n">4.</span>The Crucifixion — the King Dies for His People</h2>
+<p>The soldiers mock Him as a would-be "King of the Jews," press a crown of thorns onto His head, and lead Him out to Golgotha, where they crucify Him between two thieves. Above His head they fasten the written charge against Him: "THIS IS JESUS THE KING OF THE JEWS" — the truest title in all the world, nailed up there in scorn. Those who pass by revile Him. And then, as an eerie darkness falls over the whole land, the King cries out in the words of the psalm, "My God, My God, why have You forsaken Me?" In that dreadful cry we hear the very heart of what is happening: the sinless Son is bearing, in our place, the full judgment that our sins deserved — forsaken in that hour so that we, who trust in Him, need never be forsaken at all. Then He yields up His spirit. And at that instant, the great veil of the temple, which had always shut sinners out of the holiest place, is torn in two from top to bottom — for the one perfect sacrifice is now complete, and the way into the presence of God stands open at last. The earth quakes, the rocks split, and the hardened Roman centurion standing guard, seeing all that happened, is moved to confess: "Truly this was the Son of God!" The King has died for His people.</p>
+<h2><span class="dg-n">5.</span>The Empty Tomb — the King Is Risen</h2>
+<p>But death, which has held every other man, could not hold this King. Very early on the first day of the week, the women come to the tomb, and suddenly there is a great earthquake; an angel of the Lord descends, rolls back the stone, and announces the news that changes everything: "He is not here; for He is risen, as He said." The tomb is empty. The risen Jesus Himself meets the women on the way, and soon afterward meets His disciples. Death has been defeated, and the King is alive forevermore. The resurrection is God's own mighty vindication of His beloved Son, and His public proof that the sacrifice of the cross has been fully accepted — and so it stands as the sure guarantee of resurrection life for everyone who belongs to Him.</p>
+<h2><span class="dg-n">6.</span>The Great Commission, and the King With Us</h2>
+<p>And so Matthew's Gospel comes to its close on a mountain in Galilee, where the risen King meets His eleven disciples and gives them their marching orders — the words we call the Great Commission. "All authority has been given to Me in heaven and on earth," He declares. "Go therefore and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all things that I have commanded you." The King who now holds all authority in heaven and on earth sends His people out to carry the good news to every nation, to make disciples, and to teach them His word. And He ends with the promise that crowns the entire Gospel: "and lo, I am with you always, even to the end of the age." It is a perfect ending. Matthew had opened his book by naming this child Immanuel, "God with us"; and now it closes with the risen King's own pledge to be with His people, every day, to the very end. The King is with us still. And so our long walk through Matthew, the Gospel of the King, comes to its close. We watched the King come — the Son of David, Immanuel, God with us, born to save His people from their sins. We heard Him teach the charter of His kingdom upon the mountain, and saw His authority over disease and demons, over nature and death, and His teaching of the kingdom in parables. We heard the great confession — that He is the Christ, the Son of the living God — and His promise to build an unconquerable church. We followed Him up to Jerusalem and on to the cross, where the King died for His people, bearing our sin and our judgment in Himself; and we stood in wonder at the empty tomb, where He rose in triumph over death. And we heard His final charge: to carry the gospel of the kingdom to all the nations, under His promise to be with us always. This is the good news of Matthew: that the King has come, has died for us, is risen from the dead, reigns now with all authority, and is with us still — and that He sends us out to make disciples of every nation until He comes again. So bow before this King; rest the whole weight of your soul on His finished work; and take your place in His great mission — go, and make disciples of all nations. And whatever it may cost you, take heart in His last and greatest promise of all: "I am with you always, even to the end of the age." The King who saved you is with you now, and will be with you still, all the way to the end.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Does it grip your heart that the King was "forsaken" on the cross so that you never need be — bearing your judgment in your place? Have you truly bowed before this crucified and risen King as your own? And will you take your part in His commission — to make disciples — resting in His promise, "I am with you always"?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Matthew 26–28, anchored in the classic public-domain expositions of Matthew and of the passion (Hugh Martin's <em>The Shadow of Calvary</em>, J. C. Ryle's <em>Expository Thoughts</em>, John A. Broadus's commentary, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on Hugh Martin's <em>The Shadow of Calvary</em> for the sufferings of Christ, together with J. C. Ryle and John A. Broadus on Matthew, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>La Cruz, la Tumba Vacía, y la Gran Comisión</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Mateo 26–28: el Rey muere por su pueblo, resucita en triunfo, y envía a su iglesia al mundo</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Mateo (Martin, Ryle, Broadus, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Mateo</li>
+<li>La cruz y la tumba vacía</li>
+<li>La Gran Comisión</li>
+<li>Culminación</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Todo el Evangelio ha estado moviéndose hacia esto. Esta lectura final recorre Mateo 26–28 — la Última Cena y Getsemaní, la traición y los juicios, la crucifixión del Rey por su pueblo, la gloriosa resurrección, y la Gran Comisión — y recoge el mensaje de todo el Evangelio del Rey.
+    </div>
+<h2><span class="dg-n">1.</span>El Rey va a la cruz</h2>
+<p>Todo en el Evangelio de Mateo ha estado moviéndose calladamente hacia esta hora. Todo lo que hemos visto — el nacimiento del Rey, su enseñanza, sus hechos poderosos, su largo viaje hasta Jerusalén — ahora alcanza su gran clímax en la muerte y resurrección del Rey. Los capítulos 26 al 28 cuentan de la Última Cena, la agonía en Getsemaní, la traición y el arresto, los juicios, la crucifixión, la sepultura, y luego, gloriosamente, la resurrección y la Gran Comisión. Aquí, al fin, el Rey que vino expresamente "para salvar a su pueblo de sus pecados" hace exactamente eso — no por fuerza de armas, sino entregando su propia vida en lugar de ellos. Y entonces resucita en triunfo sobre la tumba, y envía a su iglesia a todo el mundo.</p>
+<h2><span class="dg-n">2.</span>La Última Cena y Getsemaní</h2>
+<p>En la mismísima noche en que fue entregado, Jesús celebra la Pascua con sus discípulos, y allí instituye la comida que llamamos la Cena del Señor. Tomando pan, y luego la copa, se los da a sus discípulos como su propio cuerpo y su propia sangre — su sangre, dice, "que por muchos es derramada para remisión de los pecados." En ese sencillo acto el Rey explica de antemano el significado de la muerte que está a punto de morir: es un sacrificio por el pecado, el mismísimo fundamento de un nuevo pacto entre Dios y su pueblo. Luego sale al Huerto de Getsemaní y allí, en inimaginable angustia, ora: "Padre mío, si es posible, pase de mí esta copa; pero no sea como yo quiero, sino como tú." El Rey siente el pleno y aplastante horror de lo que le espera — y sin embargo dobla su voluntad enteramente a la de su Padre. He aquí perfecto amor y perfecta obediencia, caminando con ojos abiertos y corazón dispuesto derecho hacia la cruz.</p>
+<h2><span class="dg-n">3.</span>Traicionado, arrestado, y juzgado</h2>
+<p>Entonces se cierne la oscuridad. Judas viene y le traiciona con un beso; los discípulos todos le abandonan y huyen; y Pedro, que había jurado que nunca lo haría, niega tres veces que siquiera le conoce, y sale y llora amargamente. Jesús es prendido y arrastrado ante el sumo sacerdote y el concilio, donde es condenado por la "blasfemia" de confesar la clara verdad — que Él es el Cristo, el Hijo de Dios — y es escupido, escarnecido, y golpeado. Por la mañana es entregado a Pilato, el gobernador romano, que no puede hallar falta real en Él, y sin embargo, cediendo a los gritos de la multitud, le condena a ser crucificado. Y Pilato les suelta, en lugar de Jesús, a un prisionero culpable llamado Barrabás — un vívido cuadro, puesto allí mismo en la historia, del culpable quedando libre porque el Inocente toma su castigo. A través de todo ello, el Rey que pudo haber llamado a legiones de ángeles permanece en silencio, soportando de buena voluntad toda injusticia por causa de nosotros.</p>
+<h2><span class="dg-n">4.</span>La crucifixión — el Rey muere por su pueblo</h2>
+<p>Los soldados le escarnecen como un pretendido "Rey de los judíos," presionan una corona de espinas sobre su cabeza, y le llevan fuera al Gólgota, donde le crucifican entre dos ladrones. Sobre su cabeza fijan la acusación escrita contra Él: "ESTE ES JESÚS, EL REY DE LOS JUDÍOS" — el título más verdadero de todo el mundo, clavado allí en burla. Los que pasan le injurian. Y entonces, al caer una misteriosa oscuridad sobre toda la tierra, el Rey clama con las palabras del salmo: "Dios mío, Dios mío, ¿por qué me has desamparado?" En ese terrible clamor oímos el mismísimo corazón de lo que está sucediendo: el Hijo sin pecado está llevando, en nuestro lugar, el pleno juicio que nuestros pecados merecían — desamparado en aquella hora para que nosotros, que confiamos en Él, nunca necesitemos ser desamparados en absoluto. Luego entrega su espíritu. Y en ese instante, el gran velo del templo, que siempre había cerrado el paso a los pecadores al lugar santísimo, es rasgado en dos de arriba abajo — porque el único sacrificio perfecto está ahora completo, y el camino a la presencia de Dios queda abierto al fin. La tierra tiembla, las rocas se parten, y el endurecido centurión romano que hacía guardia, viendo todo lo que sucedió, es movido a confesar: "Verdaderamente éste era el Hijo de Dios." El Rey ha muerto por su pueblo.</p>
+<h2><span class="dg-n">5.</span>La tumba vacía — el Rey ha resucitado</h2>
+<p>Pero la muerte, que ha retenido a todo otro hombre, no pudo retener a este Rey. Muy de mañana el primer día de la semana, las mujeres vienen a la tumba, y de repente hay un gran terremoto; un ángel del Señor desciende, rueda la piedra, y anuncia la noticia que lo cambia todo: "No está aquí, porque ha resucitado, como dijo." La tumba está vacía. El Jesús resucitado mismo sale al encuentro de las mujeres en el camino, y poco después sale al encuentro de sus discípulos. La muerte ha sido vencida, y el Rey vive para siempre. La resurrección es la propia poderosa vindicación de Dios de su amado Hijo, y su prueba pública de que el sacrificio de la cruz ha sido plenamente aceptado — y así permanece como la segura garantía de vida de resurrección para todo el que le pertenece.</p>
+<h2><span class="dg-n">6.</span>La Gran Comisión, y el Rey con nosotros</h2>
+<p>Y así el Evangelio de Mateo llega a su cierre sobre un monte en Galilea, donde el Rey resucitado sale al encuentro de sus once discípulos y les da sus órdenes de marcha — las palabras que llamamos la Gran Comisión. "Toda potestad me es dada en el cielo y en la tierra," declara. "Por tanto, id, y enseñad a todas las naciones, bautizándolas en el nombre del Padre, y del Hijo, y del Espíritu Santo; enseñándoles que guarden todas las cosas que os he mandado." El Rey que ahora tiene toda potestad en el cielo y en la tierra envía a su pueblo a llevar la buena nueva a toda nación, a hacer discípulos, y a enseñarles su palabra. Y termina con la promesa que corona todo el Evangelio: "y he aquí, yo estoy con vosotros todos los días, hasta el fin del mundo." Es un final perfecto. Mateo había abierto su libro nombrando a este niño Emanuel, "Dios con nosotros"; y ahora cierra con la propia promesa del Rey resucitado de estar con su pueblo, cada día, hasta el mismísimo fin. El Rey está con nosotros aún. Y así nuestro largo recorrido por Mateo, el Evangelio del Rey, llega a su cierre. Vimos al Rey venir — el Hijo de David, Emanuel, Dios con nosotros, nacido para salvar a su pueblo de sus pecados. Le oímos enseñar la carta de su reino sobre el monte, y vimos su autoridad sobre la enfermedad y los demonios, sobre la naturaleza y la muerte, y su enseñanza del reino en parábolas. Oímos la gran confesión — que Él es el Cristo, el Hijo del Dios viviente — y su promesa de edificar una iglesia inconquistable. Le seguimos hasta Jerusalén y hasta la cruz, donde el Rey murió por su pueblo, llevando nuestro pecado y nuestro juicio en sí mismo; y nos quedamos maravillados ante la tumba vacía, donde resucitó en triunfo sobre la muerte. Y oímos su encargo final: llevar el evangelio del reino a todas las naciones, bajo su promesa de estar con nosotros siempre. Esta es la buena nueva de Mateo: que el Rey ha venido, ha muerto por nosotros, ha resucitado de los muertos, reina ahora con toda potestad, y está con nosotros aún — y que nos envía a hacer discípulos de toda nación hasta que venga otra vez. Así que póstrese ante este Rey; descanse todo el peso de su alma sobre su obra terminada; y tome su lugar en su gran misión — id, y haced discípulos de todas las naciones. Y cueste lo que le cueste, cobre ánimo en su última y más grande promesa de todas: "yo estoy con vosotros todos los días, hasta el fin del mundo." El Rey que le salvó está con usted ahora, y estará con usted aún, todo el camino hasta el fin.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Le conmueve el corazón que el Rey fuera "desamparado" en la cruz para que usted nunca necesite serlo — llevando su juicio en su lugar? ¿Se ha postrado de veras ante este Rey crucificado y resucitado como suyo propio? Y ¿tomará su parte en su comisión — hacer discípulos — descansando en su promesa: "yo estoy con vosotros todos los días"?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Mateo 26–28, anclado en las exposiciones clásicas de dominio público de Mateo y de la pasión (<em>The Shadow of Calvary</em> de Hugh Martin, <em>Expository Thoughts</em> de J. C. Ryle, el comentario de John A. Broadus, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>The Shadow of Calvary</em> de Hugh Martin para los sufrimientos de Cristo, junto con J. C. Ryle y John A. Broadus sobre Mateo, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="5" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+
+<!-- ============ ATTESTATION ============ -->
+<div class="card attest">
+<h2>
+<span class="lang-en">Record your reading</span>
+<span class="lang-es">Registre su lectura</span>
+</h2>
+<p class="lang-en block">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor.</p>
+<p class="lang-es block">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor.</p>
+<label class="field" for="stName"><span class="lang-en">Your name</span><span class="lang-es">Su nombre</span></label>
+<input autocomplete="name" id="stName" type="text"/>
+<div class="oath">
+<input id="oath" type="checkbox"/>
+<label for="oath"><span class="lang-en">On my honor, I have read in full the three excerpts or adaptations I selected above.</span><span class="lang-es">Bajo mi honor, he leído por completo los tres extractos o adaptaciones que seleccioné arriba.</span></label>
+</div>
+<button class="btn" onclick="recordReading()"><span class="lang-en">Record my reading</span><span class="lang-es">Registrar mi lectura</span></button>
+<p class="msg" id="attMsg"></p>
+<p class="msg no-print" id="honorsDone" style="display:none;color:#2f6b3a;"><span class="lang-en">✓ Recorded — this class counts toward your With Honors progress. <a href="cts-honors.html" style="color:#2f6b3a;">View progress ↗</a></span><span class="lang-es">✓ Registrado — esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html" style="color:#2f6b3a;">Ver progreso ↗</a></span></p>
+<!-- confirmation record -->
+<div class="record" id="record">
+<div class="seal-line"></div>
+<h3><span class="lang-en">Honors Reading — recorded</span><span class="lang-es">Lectura con Honores — registrada</span></h3>
+<div class="named" id="recName"></div>
+<p class="lang-en block">affirmed on <span id="recDateEn"></span> to have read, in full:</p>
+<p class="lang-es block">afirmó el <span id="recDateEs"></span> haber leído, por completo:</p>
+<ul id="recList"></ul>
+<p class="stamp"><span class="lang-en">Chapala Theological Seminary · Matthew Intensive · present or print this page as your honors reading record.</span><span class="lang-es">Seminario Teológico de Chapala · Mateo Intensivo · presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p style="margin-top:14px;">
+<button class="btn ghost no-print" onclick="window.print()"><span class="lang-en">Print this record</span><span class="lang-es">Imprimir este registro</span></button>
+<button class="btn ghost no-print" onclick="resetReading()"><span class="lang-en">Start over</span><span class="lang-es">Empezar de nuevo</span></button>
+</p>
+</div>
+</div>
+<p class="footnote">
+<span class="lang-en">Chapala Theological Seminary · Seminario Teológico de Chapala · free bilingual self-study</span>
+<span class="lang-es">Seminario Teológico de Chapala · Chapala Theological Seminary · estudio propio bilingüe gratuito</span>
+</p>
+</div>
+<script>
+  var MAX = 3;
+  var HONORS_CODE="Matt"; var HONORS_COURSE="Matthew Intensive";
+
+  function setLang(l){
+    document.body.className = 'lang-' + l;
+    document.querySelectorAll('.toggle-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+  }
+
+  function chosenBoxes(){
+    return Array.prototype.slice.call(document.querySelectorAll('input[data-pick]:checked'));
+  }
+
+  function refresh(){
+    var boxes = document.querySelectorAll('input[data-pick]');
+    var chosen = chosenBoxes();
+    var n = chosen.length;
+    document.getElementById('cnt-en').textContent = n;
+    document.getElementById('cnt-es').textContent = n;
+
+    var full = (n >= MAX);
+    boxes.forEach(function(b){
+      var lab = b.closest('.pick');
+      var art = b.closest('.entry');
+      if(!b.checked && full){
+        b.disabled = true; lab.classList.add('disabled');
+      } else {
+        b.disabled = false; lab.classList.remove('disabled');
+      }
+      if(art) art.classList.toggle('chosen', b.checked);
+    });
+
+    var note = document.getElementById('limitNote');
+    if(full){
+      note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+    } else {
+      note.textContent = "";
+    }
+  }
+
+  document.querySelectorAll('input[data-pick]').forEach(function(b){
+    b.addEventListener('change', refresh);
+  });
+
+  function recordReading(){
+    var chosen = chosenBoxes();
+    var name = document.getElementById('stName').value.trim();
+    var oath = document.getElementById('oath').checked;
+    var msg = document.getElementById('attMsg');
+
+    if(chosen.length !== MAX){
+      msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+      return;
+    }
+    if(!name){
+      msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+      return;
+    }
+    if(!oath){
+      msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+      return;
+    }
+    msg.textContent = "";
+
+    var now = new Date();
+    var en = now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+    var es = now.toLocaleDateString('es-MX', {year:'numeric', month:'long', day:'numeric'});
+    document.getElementById('recName').textContent = name;
+    document.getElementById('recDateEn').textContent = en;
+    document.getElementById('recDateEs').textContent = es;
+
+    var ul = document.getElementById('recList');
+    ul.innerHTML = "";
+    chosen.forEach(function(b){
+      var art = b.closest('.entry');
+      var li = document.createElement('li');
+      li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+      ul.appendChild(li);
+    });
+
+    try {
+      var _works=[];
+      chosen.forEach(function(b){ var a=b.closest('.entry'); if(a) _works.push(a.getAttribute('data-title-en')); });
+      localStorage.setItem('cts_honors_name_v1', name);
+      localStorage.setItem('cts_honors_v1:'+HONORS_CODE, JSON.stringify({name:name,date:en,course:HONORS_COURSE,works:_works}));
+      var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block';
+    } catch(e){}
+
+    document.getElementById('record').classList.add('show');
+    document.getElementById('record').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function resetReading(){
+    document.querySelectorAll('input[data-pick]').forEach(function(b){ b.checked = false; });
+    document.getElementById('stName').value = "";
+    document.getElementById('oath').checked = false;
+    document.getElementById('record').classList.remove('show');
+    document.getElementById('attMsg').textContent = "";
+    refresh();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  refresh();
+  try {
+    if(localStorage.getItem('cts_honors_v1:'+HONORS_CODE)){ var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block'; }
+    var _nm=localStorage.getItem('cts_honors_name_v1'); var _f=document.getElementById('stName'); if(_nm && _f && !_f.value){ _f.value=_nm; }
+  } catch(e){}
+</script>
+
+<!-- CTS-FURTHER-STUDY -->
+<style>
+.fs-wrap{max-width:900px;margin:38px auto 10px;padding:0 18px;font-family:Georgia,serif;color:#1f2a37;line-height:1.55;box-sizing:border-box}
+.fs-wrap *{box-sizing:border-box}
+.fs-head{border-top:6px solid #33608f;background:#eaf1f8;border:1px solid #dbe6f0;border-radius:12px;padding:18px 20px}
+.fs-eyebrow{font:700 .72rem/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#33608f}
+.fs-head h2{font-size:1.5rem;margin:.3rem 0 .1rem}
+.fs-es{color:#48586a;font-style:italic}
+.fs-tag{margin:.5rem 0 0;font-family:Arial,sans-serif;font-size:.9rem;color:#5b6b7b}
+.fs-online{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid #33608f;border-left:6px solid #33608f;border-radius:10px;padding:11px 14px;margin:13px 0 18px}
+.fs-online .fs-badge{flex:none;font:800 .66rem/1 Arial,sans-serif;letter-spacing:.1em;color:#fff;background:#33608f;padding:6px 9px;border-radius:6px;margin-top:2px}
+.fs-online p{margin:0;font-size:.9rem}
+.fs-grid{display:grid;gap:14px}
+.fs-card{background:#fff;border:1px solid #dbe6f0;border-radius:11px;padding:16px 17px;box-shadow:0 2px 8px #0b214a0a}
+.fs-kind{font:700 .7rem/1 Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#264a6e}
+.fs-card h3{margin:.3rem 0 .15rem;font-size:1.12rem}
+.fs-meta{font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b;margin:0 0 .5rem}
+.fs-langs span{font:700 .64rem/1 Arial,sans-serif;background:#eaf1f8;color:#264a6e;border:1px solid #cadcee;border-radius:999px;padding:3px 7px;margin-left:5px}
+.fs-card p{margin:.35rem 0 .5rem}
+.fs-note{background:#fbf3e6;border-left:4px solid #8a5a1c;border-radius:0 6px 6px 0;padding:9px 12px;margin:.5rem 0;font-size:.85rem}
+.fs-note b{color:#8a5a1c}
+.fs-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:9px}
+.fs-btn{display:inline-block;text-decoration:none;background:#33608f;color:#fff;font:700 .85rem Arial,sans-serif;padding:8px 12px;border-radius:7px}
+.fs-btn.fs-alt{background:#fff;color:#264a6e;border:1.5px solid #33608f}
+.fs-pick{border:2px dashed #b7c7d8;background:#fbfdff;color:#5b6b7b}
+.fs-pick h3{color:#5b6b7b}
+.fs-foot{margin-top:16px;font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b}
+@media(max-width:600px){.fs-head h2{font-size:1.3rem}}
+</style>
+<section class="fs-wrap" id="further-study">
+<div class="fs-head">
+  <div class="fs-eyebrow">Chapala Theological Seminary &middot; Further Study</div>
+  <h2>Further Study &mdash; Online</h2>
+  <div class="fs-es" style="font-size:1.05rem">Estudio Adicional &mdash; En Línea</div>
+  <p class="fs-tag">Optional resources for students with internet access &mdash; Matthew<br>
+  <span class="fs-es">Recursos opcionales para estudiantes con acceso a internet &mdash; Mateo</span></p>
+</div>
+<div class="fs-online"><span class="fs-badge">ONLINE</span>
+  <p><strong>Requires an internet connection.</strong> These resources are hosted on the web and do not open offline. They supplement the course; they do not replace its units or exams.<br>
+  <span class="fs-es"><strong>Requiere una conexión a internet.</strong> Estos recursos están alojados en la web y no se abren sin conexión. Complementan el curso; no sustituyen sus unidades ni exámenes.</span></p>
+</div>
+<div class="fs-grid">
+<article class="fs-card">
+  <div class="fs-kind">Free animated Bible videos / Videos bíblicos animados gratuitos</div>
+  <h3>BibleProject &mdash; Proyecto Biblia</h3>
+  <p class="fs-meta">Video <span class="fs-langs"><span>English</span><span>Español</span></span></p>
+  <p>Short, well-crafted animated videos that walk through the whole of Scripture. In the video library, open the overview of <strong>Matthew</strong> to see its structure and message. Non-partisan and freely available.<br>
+  <span class="fs-es">Videos animados breves y bien hechos que recorren toda la Escritura. En la biblioteca de videos, abra el resumen de <strong>Mateo</strong> para ver su estructura y mensaje. No partidista y de acceso gratuito.</span></p>
+  <div class="fs-links">
+    <a class="fs-btn" target="_blank" rel="noopener" href="https://bibleproject.com">Open (English) &#8599;</a>
+    <a class="fs-btn fs-alt" target="_blank" rel="noopener" href="https://proyectobiblia.com">Abrir (Español) &#8599;</a>
+  </div>
+</article>
+<article class="fs-card fs-pick">
+  <div class="fs-kind">Instructor's vetted pick / Selección aprobada por el instructor</div>
+  <h3>[ Your chosen video goes here ]</h3>
+  <p>A place for a specific video the instructor has watched and approved for this course.<br>
+  <span class="fs-es">Un espacio para un video específico que el instructor haya visto y aprobado para este curso.</span></p>
+</article>
+</div>
+<div class="fs-foot">These optional supplements link to third-party websites that Chapala Theological Seminary does not control; weigh their content against Scripture and this course.<br>
+<span class="fs-es">Estos complementos opcionales enlazan a sitios web de terceros que el Seminario Teológico de Chapala no controla; pese su contenido a la luz de la Escritura y de este curso.</span></div>
+</section>
+<!-- /CTS-FURTHER-STUDY -->
+
+</body>
+</html>

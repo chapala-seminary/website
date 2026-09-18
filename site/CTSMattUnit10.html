@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Matthew Intensive — Unit 10</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 11 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Matthew Intensive — Unit 10: The Road to Jerusalem</span><span class="lang-es">📖 Mateo Intensivo — Unidad 10: El Camino a Jerusalén</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Hosanna to the Son of David! Blessed is He who comes in the name of the LORD!" — Matthew 21:9</span><span class="lang-es">"¡Hosanna al Hijo de David! ¡Bendito el que viene en el nombre del Señor!" — Mateo 21:9</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Matthew Intensive. Please register before beginning Unit 10.</span><span class="lang-es">Bienvenido al Intensivo de Mateo. Por favor regístrese antes de comenzar la Unidad 10.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Matthew 21:9</strong></p>
+<div class="scripture">"Hosanna to the Son of David! 'Blessed is He who comes in the name of the LORD!' Hosanna in the highest!" — Matthew 21:9 (NKJV)</div>
+
+<h3>Hard Teachings on the Way</h3>
+<p>These chapters carry the King the last stretch of the road to Jerusalem, into the city, and through a week of mounting conflict that ends with Him weeping over Jerusalem. On the way He gives some hard teachings. To the Pharisees who test Him about divorce He recalls the beginning: "What God has joined together, let not man separate" (Matthew 19:6). When the disciples push the little children away, He welcomes them: "Of such is the kingdom of heaven" (Matthew 19:14). And when a rich young man asks what good thing he must do, Jesus tells him to sell what he has, give to the poor, and follow — and the man goes away sorrowful, for he had great possessions. "With men this is impossible," Jesus says, "but with God all things are possible" (Matthew 19:26). The kingdom cannot be bought or earned; it can only be received like a child and entered by the grace of God. These five chapters are best read as one journey with two halves. The first half, on the road, keeps teaching the disciples what the kingdom is really like; the second half, inside the city, shows the King taking possession of His Father's house and facing down those who run it. Everything moves toward one week and one hill outside the walls.</p>
+
+<h3>The Grace of the Vineyard</h3>
+<p>Jesus presses the same point with the parable of the laborers in the vineyard. A landowner hires workers at dawn, and again at the third, sixth, ninth, and eleventh hours, and at day's end he pays them all the same wage. Those hired first complain, but the owner answers that he has done no wrong; he agreed to pay them fairly, and he is free to be generous with the rest. "So the last will be first, and the first last" (Matthew 20:16). The kingdom does not run on the arithmetic of wages but on the generosity of God, who gives the latecomer the same grace as the one who labored all day. No one earns a place; all receive it from an open hand.</p>
+
+<h3>Greatness Is Servanthood</h3>
+<p>For the third time Jesus tells the disciples plainly that He will be condemned, killed, and raised. Yet right after, the mother of James and John asks that her sons sit at His right and left in the kingdom. The other ten are indignant, and Jesus gathers them all to overturn the world's idea of greatness: "Whoever desires to become great among you, let him be your servant... just as the Son of Man did not come to be served, but to serve, and to give His life a ransom for many" (Matthew 20:26-28). This is the heart of the road to Jerusalem. The King is going to the cross not to be served but to give His life as a ransom, and greatness in His kingdom is measured by service, not by thrones. He then heals two blind men at Jericho who cry, "Son of David, have mercy on us," the same royal title the crowds will shout at the gates of the city.</p>
+
+<h3>The King Enters His City</h3>
+<p>Jesus sends for a donkey and rides into Jerusalem, deliberately fulfilling the prophet Zechariah: behold, your King comes to you, lowly and riding on a donkey. The crowds spread their garments and branches and cry, "Hosanna to the Son of David! Blessed is He who comes in the name of the LORD!" (Matthew 21:9). The King enters His capital — but not on a war horse. He comes in peace and lowliness, the very opposite of the conquering deliverer many expected. Then He goes straight to the temple and drives out those buying and selling, overturning the tables of the money changers: "My house shall be called a house of prayer, but you have made it a den of thieves" (Matthew 21:13). The King has come to claim His Father's house, and He finds it corrupted.</p>
+
+<h3>Authority Questioned, Judgment Pictured</h3>
+<p>The next day the chief priests demand to know by what authority He does these things. Jesus answers with questions and parables. In the parable of the two sons, one says he will not work but then goes, and the other says he will but does not — and Jesus declares that tax collectors and harlots who repent enter the kingdom ahead of leaders who only say the right words. Then comes the parable of the wicked vinedressers, who beat the owner's servants and finally kill his son to seize the vineyard. Jesus quotes the Scripture, "The stone which the builders rejected has become the chief cornerstone" (Matthew 21:42), and warns, "The kingdom of God will be taken from you and given to a nation bearing the fruits of it" (Matthew 21:43). The leaders understand He is speaking of them, and they want to seize Him, but they fear the crowds.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_START U10 EN -->
+<h3>The Vineyard as a Mirror</h3>
+<p>The older sermon "The Vineyard and the Sharecroppers" presses this parable beyond identification of its characters and asks us to stand before its mirror. A sharecropper works land that belongs to someone else; the owner supplies what is needed and rightly expects fruit. That makes the parable a lesson in stewardship as well as judgment. God had protected and provided for His vineyard, sent His servants again and again, and at last sent His Son. The tenants' great sin was acting as though the vineyard belonged to them. Donald Grey Barnhouse used the great grapevine at Hampton Court as an illustration of fruitfulness: distant branches bear because they remain joined to the living vine. The issue is not possession of religious property or position, but fruit. The sermon therefore asks a question that reaches beyond the first-century leaders: what are we doing with what belongs to God? The kingdom cannot be treated as our private possession. The rejected Son becomes the cornerstone, and the people entrusted with God's work are expected to bear the fruit that honors the Owner.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END U10 EN -->
+
+
+<h3>The Controversies in the Temple</h3>
+<p>In chapter 22 the King's enemies come at Him one group after another, and He silences them all. He tells the parable of the wedding feast, where many are invited but one comes without a wedding garment and is cast out — "many are called, but few are chosen" (Matthew 22:14). The Pharisees try to trap Him on paying taxes, and He answers, "Render therefore to Caesar the things that are Caesar's, and to God the things that are God's" (Matthew 22:21). The Sadducees mock the resurrection, and He corrects them: God "is not the God of the dead, but of the living" (Matthew 22:32). Then a lawyer asks which is the great commandment, and Jesus gives the heart of the whole law: love the LORD your God with all your heart, soul, and mind, and love your neighbor as yourself. "On these two commandments hang all the Law and the Prophets" (Matthew 22:40). Finally He asks them whose Son the Christ is, and they cannot answer, for David himself calls Him Lord.</p>
+
+<h3>Woe to the Hypocrites</h3>
+<p>Then the King turns and pronounces judgment on the scribes and Pharisees in a series of woes. They say and do not do; they load heavy burdens on others; they love the best seats and the titles. "Blind guides," He calls them, who strain out a gnat and swallow a camel. They clean the outside of the cup while the inside is full of greed; they are like "whitewashed tombs which indeed appear beautiful outwardly, but inside are full of dead men's bones" (Matthew 23:27). The deepest sin Jesus names here is hypocrisy — a religion of appearances with a dead heart, the very opposite of the truth He taught from the first, that defilement and cleanness are matters of the heart. Their fathers killed the prophets, and this generation will fill up the measure.</p>
+
+<h3>The Lament Over Jerusalem</h3>
+<p>And then, after all the conflict, the King's voice breaks into grief. "O Jerusalem, Jerusalem, the one who kills the prophets and stones those who are sent to her! How often I wanted to gather your children together, as a hen gathers her chicks under her wings, but you were not willing! See! Your house is left to you desolate" (Matthew 23:37-38). This is not the anger of a tyrant but the sorrow of a Savior. The same King who entered to shouts of Hosanna now weeps over the city that will reject Him, longing to gather a people who will not come. The road to Jerusalem ends here, at the edge of the cross, with the King grieving over the very people He came to save.</p>
+
+<h3>The Road to Jerusalem</h3>
+<p>Put together, these chapters show the King coming into His own. He enters His city as its rightful King, but humbly, on a donkey, in peace. He cleanses His Father's house. He answers every challenge with perfect wisdom, redefining greatness as servanthood and the whole law as love for God and neighbor. He exposes the hollow religion of the leaders and warns that the kingdom will be given to those who bear its fruit. And through it all He is walking toward the cross, for the Son of Man came not to be served but to give His life a ransom for many. The road to Jerusalem is the road to that cross, and even as the King laments over the city that turns Him away, His heart is set on gathering a people to Himself. The next unit will hear His final teaching, on the mountain looking back at the city, about the end of the age and His coming again. For now it is enough to see that the King did not stumble into Jerusalem by accident. He went up on purpose, knowing what waited there, and He went up loving the very city that would crucify Him. That is the kind of King Matthew calls us to follow.</p>
+<div class="scripture">"How often I wanted to gather your children together, as a hen gathers her chicks under her wings, but you were not willing!" — Matthew 23:37 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Mateo 21:9 (RVG)</strong></p>
+<div class="scripture">"¡Hosanna al Hijo de David! ¡Bendito el que viene en el nombre del Señor! ¡Hosanna en las alturas!" — Mateo 21:9</div>
+
+<h3>Enseñanzas Difíciles en el Camino</h3>
+<p>Estos capítulos llevan al Rey el último tramo del camino a Jerusalén, dentro de la ciudad, y a través de una semana de creciente conflicto que termina con Él llorando sobre Jerusalén. En el camino da algunas enseñanzas difíciles. A los fariseos que le prueban sobre el divorcio les recuerda el principio: "Lo que Dios juntó, no lo separe el hombre" (Mateo 19:6). Cuando los discípulos apartan a los niños, Él los recibe: "De los tales es el reino de los cielos" (Mateo 19:14). Y cuando un joven rico pregunta qué bien debe hacer, Jesús le dice que venda lo que tiene, lo dé a los pobres, y le siga — y el hombre se va triste, porque tenía muchas posesiones. "Para los hombres esto es imposible," dice Jesús, "mas para Dios todo es posible" (Mateo 19:26). El reino no se puede comprar ni ganar; solo se puede recibir como un niño y entrar por la gracia de Dios. Estos cinco capítulos se leen mejor como un solo viaje con dos mitades. La primera mitad, en el camino, sigue enseñando a los discípulos cómo es de veras el reino; la segunda mitad, dentro de la ciudad, muestra al Rey tomando posesión de la casa de su Padre y enfrentando a los que la gobiernan. Todo avanza hacia una semana y una colina fuera de los muros.</p>
+
+<h3>La Gracia de la Viña</h3>
+<p>Jesús recalca el mismo punto con la parábola de los obreros de la viña. Un padre de familia contrata obreros al amanecer, y de nuevo a la hora tercera, sexta, novena y undécima, y al fin del día les paga a todos el mismo jornal. Los contratados primero se quejan, pero el dueño responde que no ha hecho ningún agravio; acordó pagarles con justicia, y es libre de ser generoso con los demás. "Así, los postreros serán primeros, y los primeros postreros" (Mateo 20:16). El reino no funciona por la aritmética de los jornales sino por la generosidad de Dios, que da al que llega tarde la misma gracia que al que trabajó todo el día. Nadie gana un lugar; todos lo reciben de una mano abierta.</p>
+
+<h3>La Grandeza Es Servir</h3>
+<p>Por tercera vez Jesús dice a los discípulos claramente que será condenado, muerto, y resucitado. Sin embargo, justo después, la madre de Jacobo y Juan pide que sus hijos se sienten a su derecha e izquierda en el reino. Los otros diez se indignan, y Jesús los reúne a todos para volcar la idea del mundo sobre la grandeza: "El que quiera hacerse grande entre vosotros será vuestro servidor... así como el Hijo del Hombre no vino para ser servido, sino para servir, y para dar su vida en rescate por muchos" (Mateo 20:26-28). Este es el corazón del camino a Jerusalén. El Rey va a la cruz no para ser servido sino para dar su vida en rescate, y la grandeza en su reino se mide por el servicio, no por los tronos. Luego sana a dos ciegos en Jericó que claman: "¡Hijo de David, ten misericordia de nosotros!", el mismo título real que las multitudes gritarán a las puertas de la ciudad.</p>
+
+<h3>El Rey Entra en Su Ciudad</h3>
+<p>Jesús manda traer un asno y entra en Jerusalén, cumpliendo deliberadamente al profeta Zacarías: he aquí, tu Rey viene a ti, manso y sentado sobre un asno. Las multitudes tienden sus mantos y ramas y claman: "¡Hosanna al Hijo de David! ¡Bendito el que viene en el nombre del Señor!" (Mateo 21:9). El Rey entra en su capital — pero no sobre un caballo de guerra. Viene en paz y mansedumbre, lo opuesto del libertador conquistador que muchos esperaban. Luego va directo al templo y echa fuera a los que compraban y vendían, volcando las mesas de los cambistas: "Mi casa, casa de oración será llamada; mas vosotros la habéis hecho cueva de ladrones" (Mateo 21:13). El Rey ha venido a reclamar la casa de su Padre, y la halla corrompida.</p>
+
+<h3>La Autoridad Cuestionada, el Juicio Pintado</h3>
+<p>Al día siguiente los principales sacerdotes exigen saber con qué autoridad hace estas cosas. Jesús responde con preguntas y parábolas. En la parábola de los dos hijos, uno dice que no trabajará pero luego va, y el otro dice que sí pero no va — y Jesús declara que los publicanos y las rameras que se arrepienten entran en el reino antes que los líderes que solo dicen las palabras correctas. Luego viene la parábola de los labradores malvados, que golpean a los siervos del dueño y finalmente matan a su hijo para apoderarse de la viña. Jesús cita la Escritura: "La piedra que desecharon los edificadores, ésta vino a ser cabeza del ángulo" (Mateo 21:42), y advierte: "El reino de Dios será quitado de vosotros, y será dado a gente que produzca los frutos de él" (Mateo 21:43). Los líderes entienden que habla de ellos, y quieren prenderle, pero temen a las multitudes.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_START U10 ES -->
+<h3>La Viña como Espejo</h3>
+<p>El sermón antiguo «La Viña y los Aparceros» lleva esta parábola más allá de identificar a sus personajes y nos pide colocarnos delante de su espejo. Un aparcero trabaja una tierra que pertenece a otro; el dueño provee lo necesario y con razón espera fruto. Así, la parábola es una lección de mayordomía además de juicio. Dios había protegido y provisto para Su viña, había enviado a Sus siervos una y otra vez y finalmente envió a Su Hijo. El gran pecado de los labradores fue actuar como si la viña les perteneciera. Donald Grey Barnhouse usó la gran vid de Hampton Court como ilustración de la fructificación: ramas lejanas llevan fruto porque permanecen unidas a la vid viva. El asunto no es poseer propiedad religiosa ni posición, sino producir fruto. Por eso el sermón hace una pregunta que va más allá de los dirigentes del primer siglo: ¿qué estamos haciendo con lo que pertenece a Dios? El reino no puede tratarse como posesión privada. El Hijo rechazado llega a ser la piedra angular, y se espera que el pueblo encargado de la obra de Dios lleve el fruto que honra al Dueño.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END U10 ES -->
+
+
+<h3>Las Controversias en el Templo</h3>
+<p>En el capítulo 22 los enemigos del Rey lo asaltan un grupo tras otro, y Él los silencia a todos. Cuenta la parábola del banquete de bodas, donde muchos son invitados pero uno viene sin vestido de boda y es echado fuera — "muchos son llamados, mas pocos escogidos" (Mateo 22:14). Los fariseos tratan de atraparle sobre pagar tributos, y Él responde: "Dad pues a César lo que es de César, y a Dios lo que es de Dios" (Mateo 22:21). Los saduceos se burlan de la resurrección, y Él los corrige: Dios "no es Dios de muertos, sino de vivos" (Mateo 22:32). Luego un intérprete de la ley pregunta cuál es el gran mandamiento, y Jesús da el corazón de toda la ley: amar al Señor tu Dios con todo tu corazón, alma y mente, y amar a tu prójimo como a ti mismo. "De estos dos mandamientos depende toda la ley y los profetas" (Mateo 22:40). Por fin les pregunta de quién es Hijo el Cristo, y no pueden responder, porque David mismo le llama Señor.</p>
+
+<h3>Ay de los Hipócritas</h3>
+<p>Entonces el Rey se vuelve y pronuncia juicio sobre los escribas y fariseos en una serie de ayes. Dicen y no hacen; cargan pesadas cargas sobre otros; aman los primeros asientos y los títulos. "Guías ciegos," los llama, que cuelan el mosquito y se tragan el camello. Limpian lo de afuera del vaso mientras lo de adentro está lleno de avaricia; son como "sepulcros blanqueados, que por fuera, a la verdad, se muestran hermosos, mas por dentro están llenos de huesos de muertos" (Mateo 23:27). El pecado más profundo que Jesús nombra aquí es la hipocresía — una religión de apariencias con un corazón muerto, lo opuesto mismo de la verdad que enseñó desde el principio, que la contaminación y la limpieza son cuestiones del corazón. Sus padres mataron a los profetas, y esta generación colmará la medida.</p>
+
+<h3>El Lamento Sobre Jerusalén</h3>
+<p>Y entonces, después de todo el conflicto, la voz del Rey se quiebra en dolor. "¡Jerusalén, Jerusalén, que matas a los profetas, y apedreas a los que te son enviados! ¡Cuántas veces quise juntar a tus hijos, como la gallina junta sus polluelos debajo de las alas, y no quisiste! He aquí vuestra casa os es dejada desierta" (Mateo 23:37-38). Esto no es la ira de un tirano sino la tristeza de un Salvador. El mismo Rey que entró entre gritos de Hosanna ahora llora sobre la ciudad que lo rechazará, anhelando juntar a un pueblo que no quiere venir. El camino a Jerusalén termina aquí, al borde de la cruz, con el Rey afligido sobre el mismo pueblo que vino a salvar.</p>
+
+<h3>El Camino a Jerusalén</h3>
+<p>Reunidos, estos capítulos muestran al Rey viniendo a lo suyo. Entra en su ciudad como su Rey legítimo, pero humildemente, sobre un asno, en paz. Limpia la casa de su Padre. Responde a cada desafío con perfecta sabiduría, redefiniendo la grandeza como servicio y toda la ley como amor a Dios y al prójimo. Expone la religión hueca de los líderes y advierte que el reino será dado a los que lleven su fruto. Y a través de todo va caminando hacia la cruz, porque el Hijo del Hombre no vino para ser servido sino para dar su vida en rescate por muchos. El camino a Jerusalén es el camino a esa cruz, y aun mientras el Rey se lamenta sobre la ciudad que lo aparta, su corazón está puesto en juntar a un pueblo para sí. La próxima unidad oirá su última enseñanza, en el monte mirando hacia la ciudad, sobre el fin del mundo y su venida otra vez. Por ahora basta ver que el Rey no entró en Jerusalén por accidente. Subió a propósito, sabiendo lo que le esperaba allí, y subió amando a la misma ciudad que lo crucificaría. Esa es la clase de Rey que Mateo nos llama a seguir.</p>
+<div class="scripture">"¡Cuántas veces quise juntar a tus hijos, como la gallina junta sus polluelos debajo de las alas, y no quisiste!" — Mateo 23:37 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Matthew Intensive — Unit 10 (The Road to Jerusalem, Matthew 19-23)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 10;
+const COURSE = 'matt';
+const NEXT_UNIT_URL = 'CTSMattUnit11.html';
+const totalUnits = 13;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The King's Origins (Matthew 1-2)", "Unit 2 - The King Presented (Matthew 3-4)", "Unit 3 - Sermon on the Mount I: The Character of the Kingdom (Matthew 5)", "Unit 4 - Sermon on the Mount II: The Practice of the Kingdom (Matthew 6-7)", "Unit 5 - The Lord's Prayer (Matthew 6:9-13)", "Unit 6 - The King's Authority: Miracles (Matthew 8-9)", "Unit 7 - The King's Mission and Rising Opposition (Matthew 10-12)", "Unit 8 - The Parables of the Kingdom (Matthew 13)", "Unit 9 - The King and His Church (Matthew 14-18)", "Unit 10 - The Road to Jerusalem (Matthew 19-23)", "Unit 11 - The Olivet Discourse: Last Things (Matthew 24-25)", "Unit 12 - The Passion (Matthew 26-27)", "Unit 13 - The Resurrection and the Great Commission (Matthew 28)"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSMattUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. When the Pharisees questioned Jesus about divorce, He pointed them back to the beginning, saying:", "textEs": "1. Cuando los fariseos cuestionaron a Jesús sobre el divorcio, Él los remitió al principio, diciendo:", "optionsEn": ["'Ask Moses'", "'What God has joined together, let not man separate'", "'Marriage is unimportant'", "'Divorce is always permitted'"], "optionsEs": ["'Pregunten a Moisés'", "'Lo que Dios juntó, no lo separe el hombre'", "'El matrimonio no importa'", "'El divorcio siempre es permitido'"], "explanationEn": "Jesus recalls God's design for marriage from the beginning.", "explanationEs": "Jesús recuerda el designio de Dios para el matrimonio desde el principio.", "correct": 1}, {"textEn": "2. When the rich young man went away sorrowful, Jesus said that with God:", "textEs": "2. Cuando el joven rico se fue triste, Jesús dijo que para Dios:", "optionsEn": ["All things are possible", "Nothing can be done", "Only the rich are saved", "Wealth is required"], "optionsEs": ["Todo es posible", "Nada puede hacerse", "Solo los ricos se salvan", "Se requiere riqueza"], "explanationEn": "The kingdom cannot be earned or bought; it is entered by the grace of God.", "explanationEs": "El reino no se gana ni se compra; se entra por la gracia de Dios.", "correct": 0}, {"textEn": "3. In the parable of the laborers in the vineyard, the landowner paid those hired last:", "textEs": "3. En la parábola de los obreros de la viña, el dueño pagó a los contratados al final:", "optionsEn": ["Half wages", "Nothing", "Double wages", "The same wage as the first"], "optionsEs": ["Medio jornal", "Nada", "Doble jornal", "El mismo jornal que a los primeros"], "explanationEn": "The kingdom runs on God's generosity, not the arithmetic of wages.", "explanationEs": "El reino funciona por la generosidad de Dios, no por la aritmética de los jornales.", "correct": 3}, {"textEn": "4. When the mother of James and John asked for thrones, Jesus taught that true greatness is:", "textEs": "4. Cuando la madre de Jacobo y Juan pidió tronos, Jesús enseñó que la verdadera grandeza es:", "optionsEn": ["Being a servant", "Wealth and rank", "Ruling many", "Being first in line"], "optionsEs": ["Ser un servidor", "Riqueza y rango", "Gobernar a muchos", "Ser primero en la fila"], "explanationEn": "Greatness in the kingdom is measured by service, not by thrones.", "explanationEs": "La grandeza en el reino se mide por el servicio, no por los tronos.", "correct": 0}, {"textEn": "5. Jesus said the Son of Man came not to be served but to serve and to give His life:", "textEs": "5. Jesús dijo que el Hijo del Hombre no vino para ser servido sino para servir y dar su vida:", "optionsEn": ["To build a kingdom", "As a ransom for many", "After a long reign", "As an example only"], "optionsEs": ["Para edificar un reino", "En rescate por muchos", "Después de un largo reinado", "Solo como ejemplo"], "explanationEn": "This ransom is the heart of the road to Jerusalem and the cross.", "explanationEs": "Este rescate es el corazón del camino a Jerusalén y la cruz.", "correct": 1}, {"textEn": "6. Jesus entered Jerusalem riding on a donkey in order to:", "textEs": "6. Jesús entró en Jerusalén montado en un asno para:", "optionsEn": ["Show His wealth", "Avoid the crowds", "Fulfill the prophet Zechariah, coming lowly and in peace", "Travel quickly"], "optionsEs": ["Mostrar su riqueza", "Evitar las multitudes", "Cumplir al profeta Zacarías, viniendo manso y en paz", "Viajar rápido"], "explanationEn": "The King comes humbly, not on a war horse, the opposite of what many expected.", "explanationEs": "El Rey viene humildemente, no sobre un caballo de guerra, lo opuesto de lo esperado.", "correct": 2}, {"textEn": "7. When Jesus cleansed the temple, He said they had made His Father's house:", "textEs": "7. Cuando Jesús limpió el templo, dijo que habían hecho de la casa de su Padre:", "optionsEn": ["A fortress", "A school", "A marketplace only", "A den of thieves"], "optionsEs": ["Una fortaleza", "Una escuela", "Solo un mercado", "Una cueva de ladrones"], "explanationEn": "It was meant to be a house of prayer; the King found it corrupted.", "explanationEs": "Debía ser casa de oración; el Rey la halló corrompida.", "correct": 3}, {"textEn": "8. In the parable of the wicked vinedressers, the tenants finally:", "textEs": "8. En la parábola de los labradores malvados, los labradores finalmente:", "optionsEn": ["Repented", "Killed the owner's son", "Paid the rent", "Sold the vineyard"], "optionsEs": ["Se arrepintieron", "Mataron al hijo del dueño", "Pagaron la renta", "Vendieron la viña"], "explanationEn": "Jesus says the kingdom will be given to a nation bearing its fruits.", "explanationEs": "Jesús dice que el reino será dado a gente que produzca sus frutos.", "correct": 1}, {"textEn": "9. Jesus quoted the Scripture that 'the stone which the builders rejected has become':", "textEs": "9. Jesús citó la Escritura de que 'la piedra que desecharon los edificadores vino a ser':", "optionsEn": ["The chief cornerstone", "A stumbling path", "A wall", "A monument"], "optionsEs": ["La cabeza del ángulo", "Un sendero de tropiezo", "Un muro", "Un monumento"], "explanationEn": "The rejected Son becomes the cornerstone of God's true house.", "explanationEs": "El Hijo rechazado viene a ser la piedra angular de la verdadera casa de Dios.", "correct": 0}, {"textEn": "10. On the question of taxes, Jesus answered:", "textEs": "10. Sobre la cuestión de los tributos, Jesús respondió:", "optionsEn": ["'Render to Caesar what is Caesar's, and to God what is God's'", "Refuse Rome", "Pay nothing", "Pay everything to the temple"], "optionsEs": ["'Dad a César lo que es de César, y a Dios lo que es de Dios'", "Rechacen a Roma", "No paguen nada", "Paguen todo al templo"], "explanationEn": "Jesus neither denies the state nor lets it claim what belongs to God.", "explanationEs": "Jesús ni niega al estado ni le deja reclamar lo que es de Dios.", "correct": 0}, {"textEn": "11. Correcting the Sadducees about the resurrection, Jesus said God is:", "textEs": "11. Corrigiendo a los saduceos sobre la resurrección, Jesús dijo que Dios es:", "optionsEn": ["Far away", "Unknowable", "Not the God of the dead but of the living", "God of one nation only"], "optionsEs": ["Lejano", "Incognoscible", "No Dios de muertos sino de vivos", "Dios de una sola nación"], "explanationEn": "The patriarchs live to God; the resurrection is sure.", "explanationEs": "Los patriarcas viven para Dios; la resurrección es segura.", "correct": 2}, {"textEn": "12. Jesus said that on the two commandments to love God and love neighbor:", "textEs": "12. Jesús dijo que de los dos mandamientos de amar a Dios y al prójimo:", "optionsEn": ["They are optional", "Only the first matters", "Hang all the Law and the Prophets", "The law is abolished"], "optionsEs": ["Son opcionales", "Solo importa el primero", "Depende toda la ley y los profetas", "La ley queda abolida"], "explanationEn": "Love for God and neighbor is the heart and summary of the whole law.", "explanationEs": "El amor a Dios y al prójimo es el corazón y resumen de toda la ley.", "correct": 2}, {"textEn": "13. In His woes, Jesus called the scribes and Pharisees 'whitewashed tombs' because they were:", "textEs": "13. En sus ayes, Jesús llamó a los escribas y fariseos 'sepulcros blanqueados' porque eran:", "optionsEn": ["Truly righteous", "Beautiful outside but dead within", "New believers", "Poor and humble"], "optionsEs": ["Verdaderamente justos", "Hermosos por fuera pero muertos por dentro", "Nuevos creyentes", "Pobres y humildes"], "explanationEn": "Hypocrisy is a religion of appearances with a dead heart.", "explanationEs": "La hipocresía es una religión de apariencias con un corazón muerto.", "correct": 1}, {"textEn": "14. The deepest sin Jesus names in the woes of chapter 23 is:", "textEs": "14. El pecado más profundo que Jesús nombra en los ayes del capítulo 23 es:", "optionsEn": ["Poverty", "Weakness", "Ignorance", "Hypocrisy"], "optionsEs": ["La pobreza", "La debilidad", "La ignorancia", "La hipocresía"], "explanationEn": "Hypocrisy is the opposite of His teaching that cleanness is a matter of the heart.", "explanationEs": "La hipocresía es lo opuesto de su enseñanza de que la limpieza es del corazón.", "correct": 3}, {"textEn": "15. Jesus' lament over Jerusalem expresses His desire to:", "textEs": "15. El lamento de Jesús sobre Jerusalén expresa su deseo de:", "optionsEn": ["Abandon Israel", "Build a new temple", "Gather her children as a hen gathers her chicks", "Destroy the city"], "optionsEs": ["Abandonar a Israel", "Edificar un nuevo templo", "Juntar a sus hijos como la gallina junta sus polluelos", "Destruir la ciudad"], "explanationEn": "This is not the anger of a tyrant but the sorrow of a Savior.", "explanationEs": "Esto no es la ira de un tirano sino la tristeza de un Salvador.", "correct": 2}, {"textEn": "16. In the parable of the two sons, the one who pleased the father was the son who:", "textEs": "16. En la parábola de los dos hijos, el que agradó al padre fue el hijo que:", "optionsEn": ["First said no but then went and worked", "Left home", "Argued with the father", "Said yes and did nothing"], "optionsEs": ["Primero dijo que no pero luego fue y trabajó", "Se fue de casa", "Discutió con el padre", "Dijo que sí y no hizo nada"], "explanationEn": "Tax collectors and harlots who repent enter ahead of those who only say the right words.", "explanationEs": "Publicanos y rameras que se arrepienten entran antes que los que solo dicen lo correcto.", "correct": 0}, {"textEn": "17. In the parable of the wedding feast, the man without a wedding garment shows that:", "textEs": "17. En la parábola del banquete de bodas, el hombre sin vestido de boda muestra que:", "optionsEn": ["Anyone may come as they please", "Clothes do not matter", "The feast was canceled", "Many are called, but few are chosen"], "optionsEs": ["Cualquiera puede venir como quiera", "La ropa no importa", "El banquete fue cancelado", "Muchos son llamados, mas pocos escogidos"], "explanationEn": "The invitation is wide, but one must come on the King's terms.", "explanationEs": "La invitación es amplia, pero hay que venir en los términos del Rey.", "correct": 3}, {"textEn": "18. Jesus healed two blind men at Jericho who appealed to Him as:", "textEs": "18. Jesús sanó a dos ciegos en Jericó que apelaron a Él como:", "optionsEn": ["A prophet of Galilee", "A great teacher", "Son of David", "The son of Joseph"], "optionsEs": ["Un profeta de Galilea", "Un gran maestro", "Hijo de David", "El hijo de José"], "explanationEn": "'Son of David' is the royal title the crowds will also shout at the city gates.", "explanationEs": "'Hijo de David' es el título real que las multitudes también gritarán a las puertas.", "correct": 2}, {"textEn": "19. Throughout these chapters, the King answers His challengers by:", "textEs": "19. A lo largo de estos capítulos, el Rey responde a sus retadores:", "optionsEn": ["Refusing to speak", "Fleeing the city", "Calling for an army", "Silencing them all with perfect wisdom"], "optionsEs": ["Negándose a hablar", "Huyendo de la ciudad", "Llamando a un ejército", "Silenciándolos a todos con perfecta sabiduría"], "explanationEn": "Group after group comes at Him in the temple, and He answers each one.", "explanationEs": "Grupo tras grupo lo asalta en el templo, y Él responde a cada uno.", "correct": 3}, {"textEn": "20. The road to Jerusalem, this unit teaches, is ultimately the road to:", "textEs": "20. El camino a Jerusalén, enseña esta unidad, es en última instancia el camino a:", "optionsEn": ["An earthly throne", "The cross, where the King gives His life a ransom for many", "A military victory", "A great festival"], "optionsEs": ["Un trono terrenal", "La cruz, donde el Rey da su vida en rescate por muchos", "Una victoria militar", "Una gran fiesta"], "explanationEn": "Even as He laments over the city, the King is going to the cross to save a people.", "explanationEs": "Aun mientras se lamenta sobre la ciudad, el Rey va a la cruz a salvar a un pueblo.", "correct": 1}];
+
+const kwQuestions = [{"textEn": "21. What hard teachings does Jesus give in Matthew 19, and what do they show about entering the kingdom?", "textEs": "21. ¿Qué enseñanzas difíciles da Jesús en Mateo 19, y qué muestran sobre entrar en el reino?", "kw_en": ["divorce", "marriag", "childre", "rich", "follow", "possess", "grace", "kingdom"], "kw_es": ["divorcio", "matrimon", "niños", "rico", "seguir", "posesi", "gracia", "reino"], "modelEn": "In Matthew 19 Jesus gives several hard teachings on the way to Jerusalem. To the Pharisees who test Him about divorce He recalls God's design for marriage from the beginning, that what God has joined together man must not separate. When the disciples push the little children away, He welcomes them and says the kingdom belongs to such as these. And when a rich young man asks what he must do, Jesus tells him to sell his possessions, give to the poor, and follow Him, but the man goes away sorrowful because he had great wealth. Jesus says that with men this is impossible but with God all things are possible. Together these show that the kingdom cannot be earned or bought; it must be received like a child and entered only by the grace of God.", "modelEs": "En Mateo 19 Jesús da varias enseñanzas difíciles en el camino a Jerusalén. A los fariseos que le prueban sobre el divorcio les recuerda el designio de Dios para el matrimonio desde el principio, que lo que Dios juntó no lo separe el hombre. Cuando los discípulos apartan a los niños, Él los recibe y dice que el reino es de los tales. Y cuando un joven rico pregunta qué debe hacer, Jesús le dice que venda sus posesiones, las dé a los pobres, y le siga, pero el hombre se va triste porque tenía gran riqueza. Jesús dice que para los hombres esto es imposible pero para Dios todo es posible. Juntas estas enseñanzas muestran que el reino no se gana ni se compra; debe recibirse como un niño y entrarse solo por la gracia de Dios."}, {"textEn": "22. Explain the parable of the laborers in the vineyard and what it teaches about grace.", "textEs": "22. Explique la parábola de los obreros de la viña y lo que enseña sobre la gracia.", "kw_en": ["laborer", "vineyar", "wage", "generos", "last", "first", "grace", "earned"], "kw_es": ["obrero", "viña", "jornal", "generos", "postrer", "primero", "gracia", "ganar"], "modelEn": "A landowner hired laborers for his vineyard at dawn and again at later hours, even at the eleventh hour, and at the end of the day he paid them all the same wage. Those hired first complained, but the owner said he had done no wrong, for he had agreed to pay them fairly and was free to be generous with the rest. Jesus concludes that the last will be first and the first last. The parable teaches that the kingdom does not run on the arithmetic of wages but on the generosity of God, who gives the latecomer the same grace as the one who labored all day. No one earns a place in the kingdom; everyone receives it from God's open and generous hand.", "modelEs": "Un padre de familia contrató obreros para su viña al amanecer y de nuevo a horas más tarde, aun a la hora undécima, y al fin del día les pagó a todos el mismo jornal. Los contratados primero se quejaron, pero el dueño dijo que no había hecho ningún agravio, pues había acordado pagarles con justicia y era libre de ser generoso con los demás. Jesús concluye que los postreros serán primeros y los primeros postreros. La parábola enseña que el reino no funciona por la aritmética de los jornales sino por la generosidad de Dios, que da al que llega tarde la misma gracia que al que trabajó todo el día. Nadie gana un lugar en el reino; todos lo reciben de la mano abierta y generosa de Dios."}, {"textEn": "23. How does Jesus redefine greatness, and what did He say the Son of Man came to do?", "textEs": "23. ¿Cómo redefine Jesús la grandeza, y qué dijo que vino a hacer el Hijo del Hombre?", "kw_en": ["greatne", "servant", "serve", "ransom", "thrones", "cross", "james", "john"], "kw_es": ["grandeza", "servid", "servir", "rescate", "tronos", "cruz", "jacobo", "muchos"], "modelEn": "When the mother of James and John asked that her sons sit at His right and left, and the other disciples were indignant, Jesus overturned the world's idea of greatness. He said that whoever desires to be great among them must be their servant, and whoever would be first must be a slave, just as the Son of Man did not come to be served but to serve and to give His life a ransom for many. So He redefined greatness as servanthood rather than thrones and rank. This is the heart of the road to Jerusalem, for the King is going to the cross to give His life as a ransom, and greatness in His kingdom is measured by self-giving service after the pattern of the King Himself.", "modelEs": "Cuando la madre de Jacobo y Juan pidió que sus hijos se sentaran a su derecha e izquierda, y los otros discípulos se indignaron, Jesús volcó la idea del mundo sobre la grandeza. Dijo que el que quiera ser grande entre ellos debe ser su servidor, y el que quiera ser primero debe ser siervo, así como el Hijo del Hombre no vino para ser servido sino para servir y dar su vida en rescate por muchos. Así redefinió la grandeza como servir en vez de tronos y rango. Este es el corazón del camino a Jerusalén, pues el Rey va a la cruz a dar su vida en rescate, y la grandeza en su reino se mide por el servicio que se entrega a sí mismo según el modelo del Rey mismo."}, {"textEn": "24. Describe the Triumphal Entry and what it reveals about the kind of King Jesus is.", "textEs": "24. Describa la Entrada Triunfal y lo que revela sobre la clase de Rey que es Jesús.", "kw_en": ["donkey", "jerusal", "zechari", "hosanna", "lowly", "peace", "prophe", "crowds"], "kw_es": ["asno", "jerusal", "zacarí", "hosanna", "manso", "paz", "profet", "multitu"], "modelEn": "Jesus sent for a donkey and rode into Jerusalem, deliberately fulfilling the prophet Zechariah, that the King would come lowly and riding on a donkey. The crowds spread their garments and branches and cried Hosanna to the Son of David, blessed is He who comes in the name of the Lord. This reveals the kind of King Jesus is, for He entered His capital not on a war horse but in peace and lowliness, the very opposite of the conquering deliverer that many had expected. He comes as the humble King promised by the prophets, and going straight to the temple He cleanses His Father's house, showing that He has come to claim what is His as the true and gentle King.", "modelEs": "Jesús mandó traer un asno y entró en Jerusalén, cumpliendo deliberadamente al profeta Zacarías, que el Rey vendría manso y montado sobre un asno. Las multitudes tendieron sus mantos y ramas y clamaron Hosanna al Hijo de David, bendito el que viene en el nombre del Señor. Esto revela la clase de Rey que es Jesús, pues entró en su capital no sobre un caballo de guerra sino en paz y mansedumbre, lo opuesto mismo del libertador conquistador que muchos habían esperado. Viene como el Rey humilde prometido por los profetas, y yendo directo al templo limpia la casa de su Padre, mostrando que ha venido a reclamar lo que es suyo como el Rey verdadero y manso."}, {"textEn": "25. Explain the parable of the wicked vinedressers and its warning.", "textEs": "25. Explique la parábola de los labradores malvados y su advertencia.", "kw_en": ["vinedre", "servant", "killed", "son", "cornerst", "kingdom", "fruit", "rejecte"], "kw_es": ["labrado", "siervo", "mataro", "hijo", "ángulo", "reino", "fruto", "desecha"], "modelEn": "In the parable the owner of a vineyard sent his servants to collect the fruit, but the tenants beat and killed them, and finally killed the owner's own son when he was sent, hoping to seize the inheritance. Jesus quoted the Scripture that the stone which the builders rejected has become the chief cornerstone, and warned that the kingdom of God would be taken from them and given to a nation bearing its fruits. The leaders understood that He was speaking of them. The warning is that those entrusted with God's vineyard who reject His servants and finally His Son will lose the kingdom, while the rejected Son becomes the cornerstone of God's true house, and the kingdom passes to those who actually bear fruit.", "modelEs": "En la parábola el dueño de una viña envió a sus siervos a recoger el fruto, pero los labradores los golpearon y mataron, y finalmente mataron al propio hijo del dueño cuando fue enviado, esperando apoderarse de la herencia. Jesús citó la Escritura de que la piedra que desecharon los edificadores vino a ser la cabeza del ángulo, y advirtió que el reino de Dios les sería quitado y dado a gente que produjera sus frutos. Los líderes entendieron que hablaba de ellos. La advertencia es que los encargados de la viña de Dios que rechazan a sus siervos y finalmente a su Hijo perderán el reino, mientras el Hijo rechazado viene a ser la piedra angular de la verdadera casa de Dios, y el reino pasa a los que de veras llevan fruto."}, {"textEn": "26. How did Jesus answer the question about taxes and the Sadducees about the resurrection?", "textEs": "26. ¿Cómo respondió Jesús a la pregunta sobre los tributos y a los saduceos sobre la resurrección?", "kw_en": ["caesar", "taxes", "render", "sadduce", "resurre", "living", "trap", "silence"], "kw_es": ["césar", "tributo", "dad", "saduceo", "resurre", "vivos", "trampa", "silenc"], "modelEn": "The Pharisees tried to trap Jesus over paying taxes, and He answered that they should render to Caesar the things that are Caesar's and to God the things that are God's, neither denying the state nor letting it claim what belongs to God. Then the Sadducees mocked the resurrection with a riddle about a woman married to seven brothers, and Jesus corrected them, saying that they erred because they knew neither the Scriptures nor the power of God, and that God is not the God of the dead but of the living, for the patriarchs live to Him. In both cases the King's enemies came at Him to trap Him, and He silenced them with perfect wisdom, turning each challenge back into a revelation of truth.", "modelEs": "Los fariseos trataron de atrapar a Jesús sobre pagar tributos, y Él respondió que dieran a César lo que es de César y a Dios lo que es de Dios, ni negando al estado ni dejándole reclamar lo que es de Dios. Luego los saduceos se burlaron de la resurrección con un acertijo sobre una mujer casada con siete hermanos, y Jesús los corrigió, diciendo que erraban porque no conocían las Escrituras ni el poder de Dios, y que Dios no es Dios de muertos sino de vivos, pues los patriarcas viven para Él. En ambos casos los enemigos del Rey lo asaltaron para atraparlo, y Él los silenció con perfecta sabiduría, volviendo cada trampa en una revelación de la verdad."}, {"textEn": "27. What did Jesus say is the great commandment, and how does the whole law relate to it?", "textEs": "27. ¿Qué dijo Jesús que es el gran mandamiento, y cómo se relaciona toda la ley con él?", "kw_en": ["command", "love", "heart", "neighbo", "prophet", "second", "summar", "hang"], "kw_es": ["mandami", "amar", "corazón", "prójimo", "profeta", "segundo", "resumen", "depende"], "modelEn": "When a lawyer asked which is the great commandment, Jesus answered with the heart of the whole law. The first and great commandment is to love the Lord your God with all your heart, soul, and mind, and the second is like it, to love your neighbor as yourself. He said that on these two commandments hang all the Law and the Prophets. So the whole law is summarized and fulfilled in love for God and love for neighbor, and every other command is an outworking of these two. Rather than a long list of rules, the law finds its center and summary in love, which is the very thing the hypocritical leaders lacked even as they tithed their herbs.", "modelEs": "Cuando un intérprete de la ley preguntó cuál es el gran mandamiento, Jesús respondió con el corazón de toda la ley. El primer y gran mandamiento es amar al Señor tu Dios con todo tu corazón, alma y mente, y el segundo es semejante, amar a tu prójimo como a ti mismo. Dijo que de estos dos mandamientos depende toda la ley y los profetas. Así que toda la ley se resume y se cumple en el amor a Dios y el amor al prójimo, y todo otro mandamiento es un desarrollo de estos dos. En vez de una larga lista de reglas, la ley halla su centro y resumen en el amor, que es justamente lo que les faltaba a los líderes hipócritas aun mientras diezmaban sus hierbas."}, {"textEn": "28. What did Jesus condemn in the scribes and Pharisees in the woes of chapter 23?", "textEs": "28. ¿Qué condenó Jesús en los escribas y fariseos en los ayes del capítulo 23?", "kw_en": ["woes", "hypocri", "pharise", "burdens", "outside", "tombs", "blind", "heart"], "kw_es": ["ayes", "hipocre", "fariseo", "cargas", "afuera", "sepulcr", "ciegos", "corazón"], "modelEn": "In a series of woes Jesus condemned the scribes and Pharisees for their hypocrisy. They say and do not do; they load heavy burdens on others while not lifting a finger; they love the best seats and the titles. He called them blind guides who strain out a gnat and swallow a camel, and said they clean the outside of the cup while the inside is full of greed. He called them whitewashed tombs, beautiful on the outside but full of dead bones within. The deepest sin He names is hypocrisy, a religion of appearances with a dead heart, which is the very opposite of His teaching that true cleanness and defilement are matters of the heart and not of the outward show.", "modelEs": "En una serie de ayes Jesús condenó a los escribas y fariseos por su hipocresía. Dicen y no hacen; cargan pesadas cargas sobre otros mientras no mueven un dedo; aman los primeros asientos y los títulos. Los llamó guías ciegos que cuelan el mosquito y se tragan el camello, y dijo que limpian lo de afuera del vaso mientras lo de adentro está lleno de avaricia. Los llamó sepulcros blanqueados, hermosos por fuera pero llenos de huesos de muertos por dentro. El pecado más profundo que nombra es la hipocresía, una religión de apariencias con un corazón muerto, que es lo opuesto mismo de su enseñanza de que la verdadera limpieza y contaminación son cuestiones del corazón y no de la apariencia externa."}, {"textEn": "29. Describe Jesus' lament over Jerusalem and what it reveals about His heart.", "textEs": "29. Describa el lamento de Jesús sobre Jerusalén y lo que revela sobre su corazón.", "kw_en": ["jerusal", "lament", "gather", "childre", "willing", "desolat", "sorrow", "savior"], "kw_es": ["jerusal", "lamento", "juntar", "hijos", "quisis", "desiert", "tristez", "salvad"], "modelEn": "After all the conflict the King's voice breaks into grief as He cries, O Jerusalem, Jerusalem, the city that kills the prophets and stones those sent to her. He says how often He wanted to gather her children together as a hen gathers her chicks under her wings, but they were not willing, and that their house is left to them desolate. This reveals that His judgment is not the anger of a tyrant but the sorrow of a Savior. The same King who entered to shouts of Hosanna now weeps over the city that will reject Him, longing to gather a people who would not come. Even as He pronounces judgment, His heart is full of grief and longing for the very people who turn Him away.", "modelEs": "Después de todo el conflicto la voz del Rey se quiebra en dolor mientras clama: Jerusalén, Jerusalén, la ciudad que mata a los profetas y apedrea a los que le son enviados. Dice cuántas veces quiso juntar a sus hijos como la gallina junta sus polluelos debajo de las alas, pero no quisieron, y que su casa les es dejada desierta. Esto revela que su juicio no es la ira de un tirano sino la tristeza de un Salvador. El mismo Rey que entró entre gritos de Hosanna ahora llora sobre la ciudad que lo rechazará, anhelando juntar a un pueblo que no quiso venir. Aun mientras pronuncia juicio, su corazón está lleno de dolor y anhelo por el mismo pueblo que lo aparta."}, {"textEn": "30. Pulling the unit together, what does the road to Jerusalem reveal about the King and His mission?", "textEs": "30. Reuniendo la unidad, ¿qué revela el camino a Jerusalén sobre el Rey y su misión?", "kw_en": ["jerusal", "servant", "ransom", "cross", "humble", "greatne", "temple", "gather"], "kw_es": ["jerusal", "servid", "rescate", "cruz", "humild", "grandeza", "templo", "juntar"], "modelEn": "The road to Jerusalem shows the King coming into His own. He enters His city as its rightful King, but humbly and in peace on a donkey, and He cleanses His Father's temple. He answers every challenge with perfect wisdom, redefining greatness as servanthood and the whole law as love for God and neighbor, and He exposes the hollow religion of the leaders, warning that the kingdom will be given to those who bear its fruit. Through it all He is walking toward the cross, for the Son of Man came not to be served but to give His life a ransom for many. So the road to Jerusalem is the road to that cross, and even as the King laments over the city that turns Him away, His heart is set on gathering a people to Himself through His own self-giving death.", "modelEs": "El camino a Jerusalén muestra al Rey viniendo a lo suyo. Entra en su ciudad como su Rey legítimo, pero humildemente y en paz sobre un asno, y limpia el templo de su Padre. Responde a cada desafío con perfecta sabiduría, redefiniendo la grandeza como servir y toda la ley como amor a Dios y al prójimo, y expone la religión hueca de los líderes, advirtiendo que el reino será dado a los que lleven su fruto. A través de todo va caminando hacia la cruz, porque el Hijo del Hombre no vino para ser servido sino para dar su vida en rescate por muchos. Así que el camino a Jerusalén es el camino a esa cruz, y aun mientras el Rey se lamenta sobre la ciudad que lo aparta, su corazón está puesto en juntar a un pueblo para sí por medio de su propia muerte que se entrega."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 11 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 11 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSMattReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

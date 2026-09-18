@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Unit 6 — The Rise of Pentecostalism, 1901–1910s / El surgimiento del pentecostalismo, 1901–1910</title>
+<style>
+  :root{
+    --ink:#22303b; --ink-soft:#465562; --paper:#f5f3ec; --surface:#ffffff;
+    --brass:#b08324; --brass-soft:#e8dcc0; --rule:#ddd6c6;
+    --good:#2f6f4f; --good-bg:#e8f1eb; --bad:#9b3d3d; --bad-bg:#f3e6e4;
+    --gold-box:#fbf3dd; --gold-border:#d9b45b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    font-size:18px; line-height:1.72;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 80px;}
+  .topbar{
+    position:sticky; top:0; z-index:20; background:var(--ink); color:#f5f3ec;
+    display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center; justify-content:space-between;
+    padding:10px 20px; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  .topbar .brand{font-weight:600; font-size:15px; letter-spacing:.02em;}
+  .topbar .brand small{opacity:.7; font-weight:400;}
+  .switches{display:flex; gap:16px; align-items:center; flex-wrap:wrap;}
+  .switch{display:flex; align-items:center; gap:4px;}
+  .switch span.lbl{font-size:11px; text-transform:uppercase; letter-spacing:.08em; opacity:.65;}
+  .switch button{
+    font:inherit; font-size:13px; cursor:pointer; border:1px solid #45596a; background:transparent;
+    color:#dfe6ec; padding:5px 11px; border-radius:999px; line-height:1;
+  }
+  .switch button[aria-pressed="true"]{background:var(--brass); border-color:var(--brass); color:#241a05; font-weight:600;}
+  .switch button:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+  header.unit{padding:38px 0 6px; border-bottom:1px solid var(--rule);}
+  .eyebrow{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  h1{font-family:Georgia,serif; font-size:2rem; line-height:1.18; margin:.35rem 0 .1rem; font-weight:700;}
+  .course-tag{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft);}
+  .banner{margin:26px 0 8px; padding:20px 22px; background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--brass); border-radius:4px;}
+  .banner .verse{font-size:1.12rem; font-style:italic; line-height:1.6;}
+  .banner .ref{display:block; margin-top:8px; font-family:system-ui,sans-serif; font-style:normal; font-size:13px; letter-spacing:.05em; color:var(--brass); font-weight:600;}
+  h2{font-family:Georgia,serif; font-size:1.42rem; margin:2.2em 0 .5em; line-height:1.25; padding-bottom:.18em; border-bottom:2px solid var(--brass-soft);}
+  h3{font-family:Georgia,serif; font-size:1.14rem; margin:1.6em 0 .3em; color:var(--ink);}
+  p{margin:0 0 1.05em;}
+  .lead{font-size:1.06rem;}
+  blockquote.scripture{margin:1.2em 0; padding:2px 0 2px 20px; border-left:3px solid var(--gold-border); font-style:italic; color:#3a4650;}
+  blockquote.scripture .ref{display:block; font-style:normal; font-family:system-ui,sans-serif; font-size:12.5px; letter-spacing:.04em; color:var(--brass); font-weight:600; margin-top:5px;}
+  .objectives{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 22px 6px; margin:24px 0;}
+  .objectives h2{margin:0 0 .4em; border:0; font-size:1.15rem;}
+  .objectives ol{margin:0 0 12px; padding-left:1.25em;}
+  .objectives li{margin:0 0 .55em;}
+  /* comparative VIEWS block (reusable multi-view template) */
+  .views{margin:24px 0; display:grid; gap:14px;}
+  .view{background:var(--surface); border:1px solid var(--rule); border-left:5px solid var(--accent,#888); border-radius:6px; padding:16px 20px;}
+  .view.v1{--accent:#3f6d7a;} .view.v2{--accent:#9a7b2e;} .view.v3{--accent:#5f7052;} .view.v4{--accent:#7a5566;}
+  .vhead{font-family:Georgia,serif; font-weight:700; font-size:1.1rem; margin-bottom:.55em; line-height:1.3;}
+  .vtag{display:inline-block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:#fff; background:var(--accent,#888); padding:3px 8px; border-radius:999px; vertical-align:middle; margin-right:8px; font-weight:700;}
+  .view p{font-size:.97rem; margin:0 0 .5em;} .view p:last-child{margin-bottom:0;}
+  .view p b{color:var(--ink);}
+  /* two-questions split (signature) */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:0; margin:26px 0; border:1px solid var(--rule); border-radius:6px; overflow:hidden;}
+  .split .col{padding:20px 22px; background:var(--surface);}
+  .split .col:first-child{border-right:3px solid var(--brass);}
+  .split .col h4{margin:0 0 .5em; font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .split .col .verdict{font-family:Georgia,serif; font-size:1.12rem; font-weight:700; margin:0 0 .4em; line-height:1.3;}
+  .split .col p{font-size:.96rem; margin:0;}
+  .split .col.affirm .verdict{color:var(--good);}
+  .split .col.decline .verdict{color:var(--ink);}
+  @media(max-width:560px){ .split{grid-template-columns:1fr;} .split .col:first-child{border-right:0; border-bottom:3px solid var(--brass);} }
+  .callout{background:#fdfcf8; border:1px solid var(--rule); border-left:4px solid var(--ink-soft); border-radius:4px; padding:14px 18px; margin:22px 0; font-size:.98rem;}
+  ul.q-list{padding-left:1.2em;} ul.q-list li{margin:0 0 .6em;}
+  section.assess{margin-top:16px;}
+  .qcard{background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:18px 20px; margin:16px 0;}
+  .qnum{font-family:system-ui,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); font-weight:700;}
+  .qstem{font-weight:600; margin:.3em 0 .8em;}
+  .opt{display:block; margin:0 0 .5em; padding:10px 12px; border:1px solid var(--rule); border-radius:5px; cursor:pointer; font-size:.98rem; transition:background .12s,border-color .12s;}
+  .opt:hover{background:#faf7ef;}
+  .opt input{margin-right:9px;}
+  .opt.correct{background:var(--good-bg); border-color:var(--good);}
+  .opt.wrong{background:var(--bad-bg); border-color:var(--bad);}
+  .btn{font-family:system-ui,sans-serif; font-size:14px; font-weight:600; cursor:pointer; border:0; background:var(--ink); color:#fff; padding:9px 18px; border-radius:5px;}
+  .btn:hover{background:#334452;} .btn:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--ink);}
+  .fb{margin-top:12px; font-size:.95rem; padding:10px 12px; border-radius:5px; display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:var(--good-bg); color:#1f5138; border:1px solid #bcd8c8;}
+  .fb.no{background:var(--bad-bg); color:#7a2f2f; border:1px solid #e0c4c0;}
+  .scorebar{font-family:system-ui,sans-serif; font-size:14px; background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:12px 16px; margin:14px 0; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;}
+  .scorebar strong{color:var(--brass); font-size:16px;}
+  textarea{width:100%; min-height:118px; font-family:inherit; font-size:1rem; padding:12px; border:1px solid var(--rule); border-radius:5px; resize:vertical; background:#fffef9;}
+  textarea:focus-visible{outline:2px solid var(--brass); outline-offset:1px;}
+  .hitline{font-family:system-ui,sans-serif; font-size:13px; margin:10px 0; display:none;}
+  .hitline.show{display:block;}
+  .hitline b{color:var(--brass);}
+  .model{display:none; margin-top:12px; background:var(--gold-box); border:1px solid var(--gold-border); border-radius:5px; padding:14px 16px; font-size:.97rem;}
+  .model.show{display:block;}
+  .model .mh{font-family:system-ui,sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8a6d1f; font-weight:700; margin-bottom:6px;}
+  .track-note{font-family:system-ui,sans-serif; font-size:13px; color:var(--ink-soft); background:#fdfcf8; border:1px dashed var(--rule); border-radius:5px; padding:10px 14px; margin:10px 0;}
+  #masters-block{display:none;}
+  html.track-masters #masters-block{display:block;}
+  html.track-cert #cert-only-note{display:block;}
+  #cert-only-note{display:none;}
+  footer{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-family:system-ui,sans-serif; font-size:12.5px; color:var(--ink-soft);}
+  .pane.es{display:none;} .seg.es{display:none;}
+  html.lang-es .pane.en{display:none;} html.lang-es .seg.en{display:none;}
+  html.lang-es .pane.es{display:block;} html.lang-es .seg.es{display:inline;}
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">Chapala Theological Seminary <small>&middot; Seminario Teológico de Chapala</small></div>
+  <div class="switches">
+    <div class="switch" role="group" aria-label="Language / Idioma">
+      <span class="lbl">Lang</span>
+      <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+      <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+    </div>
+    <div class="switch" role="group" aria-label="Track / Programa">
+      <span class="lbl seg en">Track</span><span class="lbl seg es">Programa</span>
+      <button id="btn-cert" aria-pressed="true" onclick="setTrack('cert')"><span class="seg en">Certificate</span><span class="seg es">Certificado</span></button>
+      <button id="btn-mast" aria-pressed="false" onclick="setTrack('masters')"><span class="seg en">Master's</span><span class="seg es">Maestría</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSPentecostalUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSPentecostalUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSPentecostalUnit3.html" title="Unit 3 · Unidad 3">3</a><a href="CTSPentecostalUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSPentecostalUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSPentecostalUnit6.html" title="Unit 6 · Unidad 6" class="active">6</a><a href="CTSPentecostalUnit7.html" title="Unit 7 · Unidad 7">7</a><a href="CTSPentecostalUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSPentecostalUnit9.html" title="Unit 9 · Unidad 9">9</a><a href="CTSPentecostalUnit10.html" title="Unit 10 · Unidad 10">10</a><a href="CTSPentecostalUnit11.html" title="Unit 11 · Unidad 11">11</a><a href="CTSPentecostalUnit12.html" title="Unit 12 · Unidad 12">12</a></nav><script>(function(){try{var p=JSON.parse(localStorage.getItem('cts_pentecostal_progress')||'{}');document.querySelectorAll('.cts-unitnav a').forEach(function(a,i){if(p['unit'+(i+1)])a.classList.add('completed');});}catch(e){}})();</script>
+
+  <header class="unit">
+    <div class="pane en">
+      <div class="eyebrow">Pentecostalism &amp; the Charismatic Movement · Unit 6</div>
+      <h1>The Rise of Pentecostalism, 1901–1910s</h1>
+      <div class="course-tag">A Biblical Study · New King James Version</div>
+    </div>
+    <div class="pane es">
+      <div class="eyebrow">El pentecostalismo y el movimiento carismático · Unidad 6</div>
+      <h1>El surgimiento del pentecostalismo, 1901–1910</h1>
+      <div class="course-tag">Un estudio bíblico · Reina-Valera Gómez</div>
+    </div>
+  </header>
+
+  <div class="banner">
+    <div class="pane en"><span class="verse">"But you shall receive power when the Holy Spirit has come upon you; and you shall be witnesses to Me… to the end of the earth."<span class="ref">Acts 1:8 (NKJV)</span></span></div>
+    <div class="pane es"><span class="verse">"Pero recibiréis poder, cuando haya venido sobre vosotros el Espíritu Santo, y me seréis testigos… hasta lo último de la tierra."<span class="ref">Hechos 1:8 (RVG)</span></span></div>
+  </div>
+
+  <div class="objectives">
+    <div class="pane en">
+      <h2>Learning Objectives</h2>
+      <ol>
+        <li>Explain why modern Pentecostalism, unlike most traditions, can be dated to a specific time and place, and name the nineteenth-century roots it grew from.</li>
+        <li>Recount the events at Topeka in 1901 and the rise of Parham's doctrine of tongues as initial evidence.</li>
+        <li>Trace the Azusa Street revival under William Seymour and its spread into a worldwide movement.</li>
+        <li>Describe the interracial character of Azusa Street and honestly assess the resistance and division that followed.</li>
+        <li>Tell the movement's origin fairly — honoring the fruit, naming human failure, and locating the doctrinal assessment in other units.</li>
+      </ol>
+    </div>
+    <div class="pane es">
+      <h2>Objetivos de aprendizaje</h2>
+      <ol>
+        <li>Explicar por qué el pentecostalismo moderno, a diferencia de la mayoría de las tradiciones, puede fecharse en un tiempo y lugar específicos, y nombrar las raíces del siglo diecinueve de las que creció.</li>
+        <li>Relatar los eventos en Topeka en 1901 y el surgimiento de la doctrina de Parham de las lenguas como evidencia inicial.</li>
+        <li>Trazar el avivamiento de la Calle Azusa bajo William Seymour y su expansión en un movimiento mundial.</li>
+        <li>Describir el carácter interracial de la Calle Azusa y evaluar con honestidad la resistencia y la división que siguieron.</li>
+        <li>Contar el origen del movimiento con justicia — honrando el fruto, nombrando el fracaso humano, y ubicando la evaluación doctrinal en otras unidades.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!--WC:EN:START-->
+  <div class="pane en">
+
+    <h2>A Movement with a Birthday</h2>
+    <p class="lead">Most Christian traditions trace their beginnings back across many centuries, their origins lost in the slow growth of the church. Modern Pentecostalism is different. It can be dated, with unusual precision, to the first years of the twentieth century — to a Bible school in Topeka, Kansas, in 1901, and above all to a humble mission on Azusa Street in Los Angeles beginning in 1906. Within a single generation, what started among a handful of praying students had become a worldwide movement. This unit tells that story: the soil it grew in, the people God used, and the teaching that came to mark it.</p>
+    <p>We tell it as history. Our task here is to describe what happened and what was taught fairly and accurately, giving thanks for the good and being honest about the failures, while reserving the weighing of doctrine for the units that take it up directly. In particular, the question of tongues as the evidence of the Spirit's baptism — the doctrine born in these very years — is examined elsewhere in this course; here we simply record its origin. Throughout, we keep the two questions of this course apart: whether a gift is real is one matter, and whether a particular experience is required of every believer is another.</p>
+
+    <h2>The Soil It Grew In</h2>
+    <p>Pentecostalism did not appear out of nothing. It grew from soil that had been prepared through the whole of the nineteenth century. The Holiness movement, drawing on John Wesley's teaching, had taught believers to seek a definite second work of grace — an experience of entire sanctification beyond conversion. The Keswick or higher-life movement pressed a similar hunger for a deeper, Spirit-filled Christian life. Movements of divine healing spread the expectation that God still worked wonders among His people, and that His power was not shut up in the past.</p>
+    <blockquote class="scripture">"And it shall come to pass afterward that I will pour out My Spirit on all flesh; your sons and your daughters shall prophesy…"<span class="ref">Joel 2:28 (NKJV)</span></blockquote>
+    <p>Above all, many earnest Christians had come to expect a great outpouring of the Spirit before the return of Christ — a latter rain, they called it, reading the promise of Joel and its fulfillment at Pentecost as a pattern God would renew in the last days. Prayer meetings across America and beyond were pleading for such a visitation. So when it seemed to come, it fell on ground already plowed and watered by decades of longing.</p>
+    <p>The expectancy only intensified as the new century opened: news of a mighty revival in Wales in 1904 and 1905, under the young preacher Evan Roberts, swept through the churches and convinced many that God was again visiting His people. To hearts already watching for a latter rain, such reports were kindling.</p>
+
+    <h2>Topeka and the First Outpouring, 1901</h2>
+    <p>Charles Fox Parham was a Holiness preacher and teacher who, at the close of 1900, opened Bethel Bible School in Topeka, Kansas. He set his students a question: what does the Bible give as the evidence that a person has received the baptism in the Holy Spirit? As they searched the book of Acts, they concluded that the sign, again and again, was speaking in tongues.</p>
+    <blockquote class="scripture">"And they were all filled with the Holy Spirit and began to speak with other tongues, as the Spirit gave them utterance."<span class="ref">Acts 2:4 (NKJV)</span></blockquote>
+    <p>On the first day of January 1901, a student named Agnes Ozman asked Parham to lay hands on her that she might receive the Spirit, and she began to speak in what those present took to be a foreign language. In the days that followed, others in the school had the same experience, and Parham himself among them. From this beginning he drew the teaching that would define the movement he was helping to birth.</p>
+
+    <h2>Parham's Doctrine of "Initial Evidence"</h2>
+    <p>Parham taught that speaking in tongues is the uniform initial evidence of the baptism in the Holy Spirit — that whenever a believer is so baptized, tongues will follow as the Bible sign. At first he and his followers believed these tongues were real, known foreign languages, given by God to equip missionaries to preach the gospel in lands whose speech they had never learned. This hope of "missionary tongues" faded when those who went abroad found they still had to learn the local languages in the ordinary way; but the core doctrine — tongues as the required evidence of Spirit-baptism — remained, and became the hallmark of early Pentecostalism.</p>
+    <p>Their reasoning ran from the pattern they saw in the book of Acts. There the Spirit's coming was accompanied by tongues at Pentecost, again at the house of Cornelius, and again at Ephesus; from these accounts they inferred that tongues was the God-appointed sign for every believer who received the baptism. Whether that inference holds — whether a repeated occurrence amounts to a universal rule — is exactly the question the course examines in its units on Acts and on Spirit-baptism, and it need not be settled here.</p>
+    <p>It is this teaching, more than any other, that has distinguished the movement from the wider church. The present course takes it up directly in the units on tongues in Acts, on the baptism in the Spirit, and in the closing assessment, where it is weighed by Scripture and, as a universal rule for every believer, respectfully declined. Here we neither argue nor settle it; we simply record that at Topeka, in the first days of a new century, the doctrine was born. And we keep the distinction the course has insisted upon throughout: to question whether tongues must accompany every Spirit-baptism is not to deny that the gift of tongues is real.</p>
+
+    <h2>Houston, and a Student Named Seymour</h2>
+    <p>Parham soon moved his work to Texas, and around 1905 opened a Bible school in Houston. Among those drawn to learn from him was William J. Seymour, a Black Holiness preacher, the son of former slaves, marked by a deep and humble piety. Under the segregation laws of that time and place, Seymour was not allowed to sit in the classroom with the white students; he listened to Parham's lectures from the hallway, through a door left ajar. Whatever indignity this involved, Seymour received the message that a baptism in the Spirit, evidenced by tongues, was offered to the church in his own day — and he would carry it further than his teacher ever did.</p>
+
+    <h2>Azusa Street, 1906</h2>
+    <p>Invited to preach at a small Holiness congregation in Los Angeles, Seymour proclaimed that the baptism in the Spirit with the sign of tongues was for the present hour. The reception was mixed; he was for a time locked out of the very church that had called him. He began instead to hold meetings in a private home on Bonnie Brae Street, and there, in April of 1906, the outpouring he had preached about came upon the little gathering. Days later, on the eighteenth of April, the great San Francisco earthquake shook California, and to many the timing seemed a sign that God was doing something momentous; the crowds only grew. The house could not hold them — its front porch is said to have collapsed under the press of people — and the work moved to a plain, abandoned building at 312 Azusa Street.</p>
+    <blockquote class="scripture">"There is neither Jew nor Greek, there is neither slave nor free, there is neither male nor female; for you are all one in Christ Jesus."<span class="ref">Galatians 3:28 (NKJV)</span></blockquote>
+    <p>There, for about three years, services ran morning, afternoon, and night, drawing the curious and the hungry from across the city and, before long, from around the world. What amazed observers as much as the tongues and the reported healings was something else entirely: Black and white, rich and poor, immigrant and native-born, men and women, worshiping and praying side by side as equals — and this in an age of rigid, legally enforced segregation. One who was there wrote that at Azusa the color line was washed away in the blood of Christ. From that mission a little newspaper, The Apostolic Faith, was sent out freely and was soon reaching tens of thousands of readers across the nation and over the seas.</p>
+
+    <h2>The Message Goes Worldwide</h2>
+    <p>The spread was astonishingly swift. Visitors to Azusa returned home aflame; men and women sailed as missionaries with the message; and within a few short years Pentecostal works had sprung up across North America, Europe, Latin America, Africa, and Asia. New fellowships were formed to give the growing movement teaching and order — among them the Church of God in Christ, under C. H. Mason, who visited Azusa in 1907, and, in 1914, the Assemblies of God. What had begun with a handful of students praying in a Kansas schoolhouse had become, within a single generation, one of the great missionary movements in the history of the church — the seed of the hundreds of millions who would name the name of Christ in this tradition a century later.</p>
+    <p>The reach was truly global. The message crossed to Europe, where a Norwegian pastor, T. B. Barratt, became an early channel to the continent; it took root in Chile and Brazil, in parts of Africa, and in India, where a parallel outpouring had already stirred the Mukti Mission under Pandita Ramabai. Within a decade Pentecostal congregations could be found on every inhabited continent, often among the poor and the overlooked, and often carried by unschooled believers who simply went and told what they had seen.</p>
+
+    <h2>Reading the History Fairly</h2>
+    <p>An honest account does not tidy away the difficulties, and there were real ones. Charles Parham, the man who first framed the doctrine, saw his own influence wane within a few years amid controversy, and his later life was clouded; it was the humble mission at Azusa Street, under Seymour, that proved to be the movement's more enduring fountainhead. The very interracial worship that so marked Azusa met resistance from some early leaders — Parham among them — who could not accept it.</p>
+    <p>More sorrowful still, many of the fellowships that formed in the following years divided along the very color line the revival had, for a season, erased, so that a movement born in a remarkable unity too often settled back into the divisions of its age. We record all this not to diminish what God did but to tell the truth: a genuine work of the Spirit still passes through weak, sinful, and shortsighted people. As always in this course, we judge the movement by Scripture and by its faithful, not by its failures or its worst moments — and we give thanks for the grace that worked through such ordinary vessels.</p>
+    <p>It is worth adding that historians often note how Pentecostal-like outpourings appeared in several places at nearly the same time — Topeka, Wales, the Mukti Mission in India, and then Azusa — which has led many to see the movement less as the invention of a single teacher than as a broad stirring across one era. However one weighs that question, it guards us against pinning either the credit or the blame on one man, and it points us, as Scripture does, to the God who pours out His Spirit where and as He wills.</p>
+
+    <h2>What the Story Teaches</h2>
+    <p>The birth of Pentecostalism carries lessons for every Christian, whatever he concludes about its distinctive doctrine. It reminds us that God still visits His church, that a longing for His presence and power is not to be despised, and that the gospel of Christ has strength to cross the very lines that most divide people. It reminds us, too, that fervor must be wedded to sound doctrine and humble accountability, lest zeal run ahead of the Word and stumble. The questions first pressed at Topeka and Azusa we weigh carefully elsewhere; here it is enough to give thanks that, as a new century opened, God poured out His Spirit afresh and sent the good news of His Son toward the ends of the earth.</p>
+
+    <h3>Looking Ahead</h3>
+    <p>In the next unit we follow the story forward to the middle and later twentieth century, when the Pentecostal experience spilled beyond its own new denominations and into the historic churches — the Charismatic Renewal and the movements that came to be called the Third Wave.</p>
+
+  </div>
+  <!--WC:EN:END-->
+
+  <!--WC:ES:START-->
+  <div class="pane es">
+
+    <h2>Un movimiento con fecha de nacimiento</h2>
+    <p class="lead">La mayoría de las tradiciones cristianas rastrean sus comienzos a través de muchos siglos, con sus orígenes perdidos en el lento crecimiento de la iglesia. El pentecostalismo moderno es diferente. Puede fecharse, con precisión inusual, en los primeros años del siglo veinte — en una escuela bíblica en Topeka, Kansas, en 1901, y sobre todo en una humilde misión en la Calle Azusa en Los Ángeles a partir de 1906. En una sola generación, lo que comenzó entre un puñado de estudiantes que oraban se había convertido en un movimiento mundial. Esta unidad cuenta esa historia: el terreno en que creció, las personas que Dios usó, y la enseñanza que llegó a marcarlo.</p>
+    <p>La contamos como historia. Nuestra tarea aquí es describir lo que sucedió y lo que se enseñó con justicia y exactitud, dando gracias por lo bueno y siendo honestos sobre los fracasos, mientras reservamos el sopesar la doctrina para las unidades que la tratan directamente. En particular, la cuestión de las lenguas como evidencia del bautismo del Espíritu — la doctrina nacida en estos mismos años — se examina en otras partes de este curso; aquí simplemente registramos su origen. A lo largo de todo, mantenemos separadas las dos preguntas de este curso: si un don es real es un asunto, y si una experiencia particular se requiere de todo creyente es otro.</p>
+
+    <h2>El terreno en que creció</h2>
+    <p>El pentecostalismo no apareció de la nada. Creció de un terreno que había sido preparado a lo largo de todo el siglo diecinueve. El movimiento de santidad, apoyándose en la enseñanza de Juan Wesley, había enseñado a los creyentes a buscar una segunda obra de gracia definida — una experiencia de entera santificación más allá de la conversión. El movimiento de Keswick o de la vida superior urgía un anhelo semejante de una vida cristiana más profunda y llena del Espíritu. Los movimientos de sanidad divina extendían la expectativa de que Dios todavía obraba maravillas entre su pueblo, y que su poder no estaba encerrado en el pasado.</p>
+    <blockquote class="scripture">"Y será que después de esto, derramaré mi Espíritu sobre toda carne, y profetizarán vuestros hijos y vuestras hijas…"<span class="ref">Joel 2:28 (RVG)</span></blockquote>
+    <p>Sobre todo, muchos cristianos sinceros habían llegado a esperar un gran derramamiento del Espíritu antes del regreso de Cristo — una lluvia tardía, la llamaban, leyendo la promesa de Joel y su cumplimiento en Pentecostés como un patrón que Dios renovaría en los postreros días. Reuniones de oración por toda América y más allá suplicaban tal visitación. Así que cuando pareció llegar, cayó sobre un terreno ya arado y regado por décadas de anhelo.</p>
+    <p>La expectación solo se intensificó al abrirse el nuevo siglo: las noticias de un poderoso avivamiento en Gales en 1904 y 1905, bajo el joven predicador Evan Roberts, recorrieron las iglesias y convencieron a muchos de que Dios visitaba de nuevo a su pueblo. Para corazones que ya velaban esperando una lluvia tardía, tales informes eran leña para el fuego.</p>
+
+    <h2>Topeka y el primer derramamiento, 1901</h2>
+    <p>Charles Fox Parham era un predicador y maestro de santidad que, al cierre de 1900, abrió la Escuela Bíblica Betel en Topeka, Kansas. Planteó a sus estudiantes una pregunta: ¿qué da la Biblia como la evidencia de que una persona ha recibido el bautismo en el Espíritu Santo? Al escudriñar el libro de los Hechos, concluyeron que la señal, una y otra vez, era el hablar en lenguas.</p>
+    <blockquote class="scripture">"Y fueron todos llenos del Espíritu Santo, y comenzaron a hablar en otras lenguas, según el Espíritu les daba que hablasen."<span class="ref">Hechos 2:4 (RVG)</span></blockquote>
+    <p>En el primer día de enero de 1901, una estudiante llamada Agnes Ozman pidió a Parham que le impusiera las manos para recibir el Espíritu, y comenzó a hablar en lo que los presentes tomaron por una lengua extranjera. En los días siguientes, otros en la escuela tuvieron la misma experiencia, y Parham mismo entre ellos. De este comienzo sacó la enseñanza que definiría el movimiento que estaba ayudando a dar a luz.</p>
+
+    <h2>La doctrina de Parham de la "evidencia inicial"</h2>
+    <p>Parham enseñó que el hablar en lenguas es la evidencia inicial uniforme del bautismo en el Espíritu Santo — que siempre que un creyente es así bautizado, las lenguas seguirán como la señal bíblica. Al principio él y sus seguidores creían que estas lenguas eran idiomas extranjeros reales y conocidos, dados por Dios para equipar a los misioneros a predicar el evangelio en tierras cuya habla nunca habían aprendido. Esta esperanza de "lenguas misioneras" se desvaneció cuando los que fueron al extranjero hallaron que aún tenían que aprender los idiomas locales de la manera ordinaria; pero la doctrina central — las lenguas como la evidencia requerida del bautismo del Espíritu — permaneció, y llegó a ser el sello del pentecostalismo temprano.</p>
+    <p>Su razonamiento corría desde el patrón que veían en el libro de los Hechos. Allí la venida del Espíritu fue acompañada de lenguas en Pentecostés, otra vez en la casa de Cornelio, y otra vez en Éfeso; de estos relatos infirieron que las lenguas eran la señal designada por Dios para todo creyente que recibía el bautismo. Si esa inferencia se sostiene — si una ocurrencia repetida equivale a una regla universal — es exactamente la pregunta que el curso examina en sus unidades sobre Hechos y sobre el bautismo del Espíritu, y no necesita resolverse aquí.</p>
+    <p>Es esta enseñanza, más que ninguna otra, la que ha distinguido al movimiento de la iglesia más amplia. El presente curso la trata directamente en las unidades sobre las lenguas en Hechos, sobre el bautismo en el Espíritu, y en la evaluación final, donde se sopesa por la Escritura y, como regla universal para todo creyente, se declina respetuosamente. Aquí ni la argumentamos ni la resolvemos; simplemente registramos que en Topeka, en los primeros días de un nuevo siglo, la doctrina nació. Y mantenemos la distinción que el curso ha insistido a lo largo de todo: cuestionar si las lenguas deben acompañar todo bautismo del Espíritu no es negar que el don de lenguas sea real.</p>
+
+    <h2>Houston, y un estudiante llamado Seymour</h2>
+    <p>Parham pronto trasladó su obra a Texas, y alrededor de 1905 abrió una escuela bíblica en Houston. Entre los atraídos a aprender de él estaba William J. Seymour, un predicador negro de santidad, hijo de antiguos esclavos, marcado por una piedad profunda y humilde. Bajo las leyes de segregación de aquel tiempo y lugar, a Seymour no se le permitía sentarse en el aula con los estudiantes blancos; escuchaba las lecciones de Parham desde el pasillo, por una puerta dejada entreabierta. Cualquiera que fuese la indignidad que esto implicaba, Seymour recibió el mensaje de que un bautismo en el Espíritu, evidenciado por lenguas, se ofrecía a la iglesia en su propio día — y lo llevaría más lejos de lo que su maestro jamás lo hizo.</p>
+
+    <h2>La Calle Azusa, 1906</h2>
+    <p>Invitado a predicar en una pequeña congregación de santidad en Los Ángeles, Seymour proclamó que el bautismo en el Espíritu con la señal de lenguas era para la hora presente. La recepción fue mixta; por un tiempo quedó excluido de la misma iglesia que lo había llamado. Comenzó en cambio a tener reuniones en una casa particular en la Calle Bonnie Brae, y allí, en abril de 1906, el derramamiento que había predicado vino sobre la pequeña reunión. Días después, el dieciocho de abril, el gran terremoto de San Francisco sacudió California, y a muchos el momento les pareció una señal de que Dios estaba haciendo algo trascendental; las multitudes solo crecieron. La casa no podía contenerlas — se dice que su porche delantero se derrumbó bajo la presión de la gente — y la obra se trasladó a un edificio sencillo y abandonado en el número 312 de la Calle Azusa.</p>
+    <blockquote class="scripture">"No hay judío ni griego; no hay siervo ni libre; no hay varón ni mujer; porque todos vosotros sois uno en Cristo Jesús."<span class="ref">Gálatas 3:28 (RVG)</span></blockquote>
+    <p>Allí, por unos tres años, los cultos corrían mañana, tarde y noche, atrayendo a los curiosos y a los hambrientos de toda la ciudad y, en poco tiempo, de todo el mundo. Lo que asombró a los observadores tanto como las lenguas y las sanidades reportadas fue algo enteramente distinto: negros y blancos, ricos y pobres, inmigrantes y nativos, hombres y mujeres, adorando y orando lado a lado como iguales — y esto en una época de segregación rígida y legalmente impuesta. Uno que estuvo allí escribió que en Azusa la línea del color fue lavada en la sangre de Cristo. De aquella misión un pequeño periódico, The Apostolic Faith, se enviaba gratuitamente y pronto llegaba a decenas de miles de lectores por toda la nación y allende los mares.</p>
+
+    <h2>El mensaje va por todo el mundo</h2>
+    <p>La expansión fue asombrosamente veloz. Los visitantes de Azusa volvían a casa encendidos; hombres y mujeres zarparon como misioneros con el mensaje; y en pocos años obras pentecostales habían surgido por toda Norteamérica, Europa, América Latina, África y Asia. Nuevas hermandades se formaron para dar enseñanza y orden al movimiento creciente — entre ellas la Iglesia de Dios en Cristo, bajo C. H. Mason, quien visitó Azusa en 1907, y, en 1914, las Asambleas de Dios. Lo que había comenzado con un puñado de estudiantes orando en una escuela de Kansas se había convertido, en una sola generación, en uno de los grandes movimientos misioneros en la historia de la iglesia — la semilla de los cientos de millones que invocarían el nombre de Cristo en esta tradición un siglo después.</p>
+    <p>El alcance fue verdaderamente global. El mensaje cruzó a Europa, donde un pastor noruego, T. B. Barratt, llegó a ser un canal temprano al continente; echó raíces en Chile y Brasil, en partes de África, y en la India, donde un derramamiento paralelo ya había conmovido la Misión Mukti bajo Pandita Ramabai. En una década podían hallarse congregaciones pentecostales en todos los continentes habitados, a menudo entre los pobres y los olvidados, y a menudo llevadas por creyentes sin instrucción que simplemente iban y contaban lo que habían visto.</p>
+
+    <h2>Leyendo la historia con justicia</h2>
+    <p>Un relato honesto no esconde las dificultades, y las hubo reales. Charles Parham, el hombre que primero formuló la doctrina, vio su propia influencia menguar en pocos años en medio de controversia, y su vida posterior quedó nublada; fue la humilde misión en la Calle Azusa, bajo Seymour, la que resultó ser la fuente más perdurable del movimiento. La misma adoración interracial que tanto marcó a Azusa encontró resistencia de algunos líderes tempranos — Parham entre ellos — que no podían aceptarla.</p>
+    <p>Más triste aún, muchas de las hermandades que se formaron en los años siguientes se dividieron por la misma línea del color que el avivamiento había, por una temporada, borrado, de modo que un movimiento nacido en una notable unidad demasiado a menudo volvió a asentarse en las divisiones de su época. Registramos todo esto no para disminuir lo que Dios hizo, sino para decir la verdad: una obra genuina del Espíritu todavía pasa por personas débiles, pecadoras y de corta vista. Como siempre en este curso, juzgamos el movimiento por la Escritura y por sus fieles, no por sus fracasos ni por sus peores momentos — y damos gracias por la gracia que obró a través de vasijas tan ordinarias.</p>
+    <p>Vale la pena añadir que los historiadores a menudo notan cómo derramamientos semejantes al pentecostal aparecieron en varios lugares casi al mismo tiempo — Topeka, Gales, la Misión Mukti en la India, y luego Azusa — lo cual ha llevado a muchos a ver el movimiento menos como la invención de un solo maestro que como un amplio mover a través de una misma época. Cualquiera que sea la manera en que se sopese esa pregunta, nos guarda de atribuir el crédito o la culpa a un solo hombre, y nos señala, como lo hace la Escritura, al Dios que derrama su Espíritu donde y como quiere.</p>
+
+    <h2>Lo que enseña la historia</h2>
+    <p>El nacimiento del pentecostalismo lleva lecciones para todo cristiano, cualquiera que sea su conclusión sobre su doctrina distintiva. Nos recuerda que Dios todavía visita a su iglesia, que un anhelo de su presencia y poder no ha de despreciarse, y que el evangelio de Cristo tiene fuerza para cruzar las mismas líneas que más dividen a las personas. Nos recuerda, también, que el fervor debe unirse a la sana doctrina y a la humilde rendición de cuentas, no sea que el celo corra delante de la Palabra y tropiece. Las preguntas planteadas primero en Topeka y Azusa las sopesamos con cuidado en otras partes; aquí basta con dar gracias de que, al abrirse un nuevo siglo, Dios derramó su Espíritu de nuevo y envió las buenas nuevas de su Hijo hacia los confines de la tierra.</p>
+
+    <h3>Mirando adelante</h3>
+    <p>En la próxima unidad seguimos la historia hacia adelante, al siglo veinte medio y tardío, cuando la experiencia pentecostal se desbordó más allá de sus propias nuevas denominaciones y entró en las iglesias históricas — la Renovación Carismática y los movimientos que llegaron a llamarse la Tercera Ola.</p>
+
+  </div>
+  <!--WC:ES:END-->
+
+  <!-- DISCUSSION -->
+  <div class="pane en">
+    <h2>Discussion Questions</h2>
+    <ul class="q-list">
+      <li>Why is it significant that a hunger for a fresh outpouring of the Spirit had been building for decades before 1901?</li>
+      <li>What was Parham's doctrine of initial evidence, and why does this course examine it elsewhere rather than settle it here?</li>
+      <li>What made the interracial worship at Azusa Street remarkable, and what does the later division teach us about revival passing through sinful people?</li>
+      <li>How can we hold together gratitude for a genuine work of God and honesty about the failures of those involved in it?</li>
+    </ul>
+    <h3>Ministry Application</h3>
+    <p>Write two or three sentences you might use to teach your congregation the story of Azusa Street in a way that gives thanks for God's work while learning from its human failures.</p>
+  </div>
+  <div class="pane es">
+    <h2>Preguntas para discusión</h2>
+    <ul class="q-list">
+      <li>¿Por qué es significativo que un hambre de un derramamiento fresco del Espíritu se había estado acumulando por décadas antes de 1901?</li>
+      <li>¿Cuál era la doctrina de Parham de la evidencia inicial, y por qué este curso la examina en otras partes en vez de resolverla aquí?</li>
+      <li>¿Qué hizo notable la adoración interracial en la Calle Azusa, y qué nos enseña la división posterior sobre el avivamiento que pasa por personas pecadoras?</li>
+      <li>¿Cómo podemos sostener juntas la gratitud por una obra genuina de Dios y la honestidad sobre los fracasos de quienes participaron en ella?</li>
+    </ul>
+    <h3>Aplicación ministerial</h3>
+    <p>Escriba dos o tres frases que podría usar para enseñar a su congregación la historia de la Calle Azusa de una manera que dé gracias por la obra de Dios mientras aprende de sus fracasos humanos.</p>
+  </div>
+
+  <!-- ASSESSMENT -->
+  <section class="assess">
+    <div class="pane en"><h2>Self-Check &mdash; Multiple Choice</h2><p style="font-size:.97rem;color:var(--ink-soft);">Choose the best answer, then press <em>Check</em>. Feedback and a short explanation appear for each question.</p></div>
+    <div class="pane es"><h2>Autoevaluación &mdash; Opción múltiple</h2><p style="font-size:.97rem;color:var(--ink-soft);">Elija la mejor respuesta y presione <em>Comprobar</em>. Para cada pregunta aparecen la respuesta y una breve explicación.</p></div>
+
+    <div id="mcq"></div>
+
+    <div class="scorebar">
+      <span><span class="seg en">Score:</span><span class="seg es">Puntuación:</span> <strong id="score">0 / 7</strong></span>
+      <button class="btn ghost" onclick="resetMcq()"><span class="seg en">Reset answers</span><span class="seg es">Reiniciar respuestas</span></button>
+    </div>
+  </section>
+
+  <div id="cert-only-note" class="track-note">
+    <span class="seg en">You are on the <strong>Certificate</strong> track. The written short-answer section is required only for the Master's track — switch tracks at the top if you are completing written work.</span>
+    <span class="seg es">Usted está en el programa de <strong>Certificado</strong>. La sección escrita de respuesta corta se requiere sólo para el programa de Maestría; cambie de programa arriba si va a realizar el trabajo escrito.</span>
+  </div>
+
+  <div id="masters-block">
+    <section class="assess">
+      <div class="pane en"><h2>Written Work &mdash; Master's Track</h2><p style="font-size:.97rem;color:var(--ink-soft);">Answer in a few sentences of your own. Your response is checked for key concepts (any three of eight is a pass), then the model answer is revealed for comparison.</p></div>
+      <div class="pane es"><h2>Trabajo escrito &mdash; Programa de Maestría</h2><p style="font-size:.97rem;color:var(--ink-soft);">Responda con sus propias palabras en unas frases. Su respuesta se evalúa por conceptos clave (tres de ocho es aprobado); luego se revela la respuesta modelo para comparar.</p></div>
+      <div id="sa"></div>
+    </section>
+  </div>
+
+  <nav style="margin:1.7rem 0 .3rem;padding-top:1rem;border-top:1px solid #d9d2c2;">
+  <div class="pane en"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><a href="CTSPentecostalUnit5.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">&lsaquo; Previous</a><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Course Home</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Reading Room</a><a href="CTSPentecostalUnit7.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Next &rsaquo;</a></div></div>
+  <div class="pane es"><div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;"><a href="CTSPentecostalUnit5.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">&lsaquo; Anterior</a><a href="index.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Inicio del curso</a><a href="CTSPentecostalReadings.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Sala de Lecturas</a><a href="CTSPentecostalUnit7.html" style="color:#b08324;font-weight:600;text-decoration:none;font-size:.92rem;padding:.3rem .1rem;">Siguiente &rsaquo;</a></div></div>
+</nav>
+
+<footer>
+    <div class="pane en">Chapala Theological Seminary &middot; Unit 6 of the course <em>Pentecostalism &amp; the Charismatic Movement</em>. Scripture in English from the New King James Version; Spanish from the Reina-Valera Gómez. This unit is designed for offline use — no internet connection is required.</div>
+    <div class="pane es">Seminario Teológico de Chapala &middot; Unidad 6 del curso <em>El pentecostalismo y el movimiento carismático</em>. Escrituras en inglés de la New King James Version; en español de la Reina-Valera Gómez. Esta unidad está diseñada para uso sin conexión: no se requiere internet.</div>
+  </footer>
+
+</div>
+
+<script>
+/* ---------- hardened storage (Android content:// fallback) ---------- */
+var _ctsMem = {};
+function lsGet(k){ try{ var v = window.localStorage.getItem(k); return v===null ? (k in _ctsMem ? _ctsMem[k] : null) : v; }catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try{ window.localStorage.setItem(k,v); }catch(e){ _ctsMem[k]=String(v); } _ctsMem[k]=String(v); }
+function lsDel(k){ try{ window.localStorage.removeItem(k); }catch(e){} delete _ctsMem[k]; }
+var SKEY = 'cts_u06_rise';
+var saPassed = {};
+
+/* ---------- language + track ---------- */
+function setLang(l){
+  document.documentElement.classList.toggle('lang-es', l==='es');
+  document.documentElement.classList.toggle('lang-en', l==='en');
+  document.documentElement.setAttribute('lang', l);
+  document.getElementById('btn-en').setAttribute('aria-pressed', l==='en');
+  document.getElementById('btn-es').setAttribute('aria-pressed', l==='es');
+  lsSet(SKEY+'_lang', l);
+  renderMcqText(); renderSaText(); refreshScore();
+}
+function setTrack(t){
+  document.documentElement.classList.toggle('track-masters', t==='masters');
+  document.documentElement.classList.toggle('track-cert', t==='cert');
+  document.getElementById('btn-cert').setAttribute('aria-pressed', t==='cert');
+  document.getElementById('btn-mast').setAttribute('aria-pressed', t==='masters');
+  lsSet(SKEY+'_track', t);
+}
+
+/* ---------- MCQ data (correct positions varied: A,B,D,A,C,B,D) ---------- */
+var MCQ = [
+ { correct:2,
+   q:{en:"Modern Pentecostalism is unusual among Christian traditions in that —",
+      es:"El pentecostalismo moderno es inusual entre las tradiciones cristianas en que —"},
+   opts:[
+     {en:"it has no connection to any earlier movement", es:"no tiene conexión con ningún movimiento anterior"},
+     {en:"it rejects the Bible", es:"rechaza la Biblia"},
+     {en:"it can be traced to a specific time and place in the early twentieth century", es:"puede rastrearse a un tiempo y lugar específicos a principios del siglo veinte"},
+     {en:"it began in the first century and never changed", es:"comenzó en el primer siglo y nunca cambió"} ],
+   exp:{en:"Its modern rise is datable to Topeka (1901) and Azusa Street (1906), though it grew from older Holiness and higher-life roots.",
+        es:"Su surgimiento moderno se fecha en Topeka (1901) y la Calle Azusa (1906), aunque creció de raíces más antiguas de santidad y de la vida superior."} },
+ { correct:1,
+   q:{en:"The nineteenth-century soil from which Pentecostalism grew included —",
+      es:"El terreno del siglo diecinueve del que creció el pentecostalismo incluía —"},
+   opts:[
+     {en:"the prosperity gospel", es:"el evangelio de la prosperidad"},
+     {en:"the Holiness movement, higher-life teaching, divine-healing movements, and expectation of a latter-rain outpouring", es:"el movimiento de santidad, la enseñanza de la vida superior, los movimientos de sanidad divina, y la expectativa de un derramamiento de lluvia tardía"},
+     {en:"modern television ministry", es:"el ministerio de televisión moderno"},
+     {en:"the rejection of the Holy Spirit", es:"el rechazo del Espíritu Santo"} ],
+   exp:{en:"Many believers were already praying for a fresh outpouring, shaped by Wesleyan sanctification and “latter rain” expectation.",
+        es:"Muchos creyentes ya oraban por un derramamiento fresco, formados por la santificación wesleyana y la expectativa de la “lluvia tardía.”"} },
+ { correct:3,
+   q:{en:"The event traditionally marked as the beginning was —",
+      es:"El evento tradicionalmente marcado como el comienzo fue —"},
+   opts:[
+     {en:"the Assemblies of God founding in 1914", es:"la fundación de las Asambleas de Dios en 1914"},
+     {en:"the San Francisco earthquake", es:"el terremoto de San Francisco"},
+     {en:"Parham's death", es:"la muerte de Parham"},
+     {en:"Agnes Ozman speaking in tongues at Topeka on January 1, 1901", es:"Agnes Ozman hablando en lenguas en Topeka el 1 de enero de 1901"} ],
+   exp:{en:"At Parham's Bethel Bible School, Ozman's experience gave rise to the doctrine that would define the movement.",
+        es:"En la Escuela Bíblica Betel de Parham, la experiencia de Ozman dio origen a la doctrina que definiría el movimiento."} },
+ { correct:0,
+   q:{en:"Parham's doctrine of “initial evidence” taught that —",
+      es:"La doctrina de Parham de la “evidencia inicial” enseñaba que —"},
+   opts:[
+     {en:"speaking in tongues is the uniform initial evidence of the baptism in the Holy Spirit", es:"el hablar en lenguas es la evidencia inicial uniforme del bautismo en el Espíritu Santo"},
+     {en:"tongues are unimportant", es:"las lenguas no son importantes"},
+     {en:"only apostles could receive the Spirit", es:"solo los apóstoles podían recibir el Espíritu"},
+     {en:"the Spirit is not a person", es:"el Espíritu no es una persona"} ],
+   exp:{en:"Tongues as the required sign of Spirit-baptism became the movement's hallmark; the course weighs and, as a universal rule, respectfully declines it elsewhere.",
+        es:"Las lenguas como la señal requerida del bautismo del Espíritu llegaron a ser el sello del movimiento; el curso lo sopesa y, como regla universal, lo declina respetuosamente en otras partes."} },
+ { correct:2,
+   q:{en:"William J. Seymour, who led the Azusa Street revival, first heard the message —",
+      es:"William J. Seymour, quien dirigió el avivamiento de la Calle Azusa, oyó primero el mensaje —"},
+   opts:[
+     {en:"in Los Angeles as a child", es:"en Los Ángeles cuando era niño"},
+     {en:"from a book he had written", es:"de un libro que él había escrito"},
+     {en:"in Houston, listening to Parham's lectures from the hallway under the segregation of the day", es:"en Houston, escuchando las lecciones de Parham desde el pasillo bajo la segregación de la época"},
+     {en:"in Africa", es:"en África"} ],
+   exp:{en:"Seymour, a Black Holiness preacher and son of former slaves, carried the message from Parham's Houston school to Los Angeles.",
+        es:"Seymour, un predicador negro de santidad e hijo de antiguos esclavos, llevó el mensaje de la escuela de Parham en Houston a Los Ángeles."} },
+ { correct:3,
+   q:{en:"What struck observers about the Azusa Street meetings, alongside tongues and healings, was —",
+      es:"Lo que impactó a los observadores de las reuniones de la Calle Azusa, junto con las lenguas y las sanidades, fue —"},
+   opts:[
+     {en:"their great wealth", es:"su gran riqueza"},
+     {en:"their use of television", es:"su uso de la televisión"},
+     {en:"their rejection of Scripture", es:"su rechazo de la Escritura"},
+     {en:"Black and white, rich and poor, worshiping together as equals in an age of rigid segregation", es:"negros y blancos, ricos y pobres, adorando juntos como iguales en una época de segregación rígida"} ],
+   exp:{en:"One participant wrote that the color line was “washed away in the blood” — a striking witness for its time, though resistance and later division followed.",
+        es:"Un participante escribió que la línea del color fue “lavada en la sangre” — un testimonio notable para su tiempo, aunque siguieron la resistencia y la división posterior."} },
+ { correct:1,
+   q:{en:"This unit tells the movement's origin story —",
+      es:"Esta unidad cuenta la historia del origen del movimiento —"},
+   opts:[
+     {en:"as a flawless triumph with no failures", es:"como un triunfo sin defectos y sin fracasos"},
+     {en:"as history — describing fairly, honoring the fruit, and honestly naming human failure, while reserving doctrinal assessment for other units", es:"como historia — describiendo con justicia, honrando el fruto, y nombrando con honestidad el fracaso humano, mientras reserva la evaluación doctrinal para otras unidades"},
+     {en:"in order to condemn the whole movement", es:"para condenar a todo el movimiento"},
+     {en:"without any reference to Scripture", es:"sin ninguna referencia a la Escritura"} ],
+   exp:{en:"A fair account gives thanks for what God did, is honest about controversy and division, and weighs doctrine elsewhere by Scripture and the movement's faithful.",
+        es:"Un relato justo da gracias por lo que Dios hizo, es honesto sobre la controversia y la división, y sopesa la doctrina en otras partes por la Escritura y los fieles del movimiento."} }
+];
+
+var answered = {};
+
+function buildMcq(){
+  var host = document.getElementById('mcq'); host.innerHTML='';
+  MCQ.forEach(function(item, qi){
+    var card = document.createElement('div'); card.className='qcard'; card.id='q'+qi;
+    var num = document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Question '+(qi+1)+'</span><span class="seg es">Pregunta '+(qi+1)+'</span>';
+    var stem = document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    card.appendChild(num); card.appendChild(stem);
+    item.opts.forEach(function(o, oi){
+      var lab = document.createElement('label'); lab.className='opt'; lab.setAttribute('data-oi',oi);
+      var inp = document.createElement('input'); inp.type='radio'; inp.name='q'+qi; inp.value=oi;
+      inp.onchange=function(){ answered[qi]=oi; };
+      var txt = document.createElement('span'); txt.setAttribute('data-role','opttext');
+      lab.appendChild(inp); lab.appendChild(txt); card.appendChild(lab);
+    });
+    var btn = document.createElement('button'); btn.className='btn'; btn.setAttribute('data-role','checkbtn');
+    btn.onclick=function(){ checkOne(qi); };
+    var fb = document.createElement('div'); fb.className='fb'; fb.id='fb'+qi;
+    card.appendChild(btn); card.appendChild(fb);
+    host.appendChild(card);
+  });
+  renderMcqText();
+}
+function renderMcqText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  MCQ.forEach(function(item, qi){
+    var card = document.getElementById('q'+qi);
+    card.querySelector('[data-role="stem"]').textContent = item.q[l];
+    card.querySelectorAll('.opt').forEach(function(lab){
+      var oi = +lab.getAttribute('data-oi');
+      lab.querySelector('[data-role="opttext"]').textContent = item.opts[oi][l];
+    });
+    card.querySelector('[data-role="checkbtn"]').textContent = (l==='es'?'Comprobar':'Check');
+    if(card.getAttribute('data-checked')==='1'){ paintFeedback(qi, l); }
+  });
+}
+function checkOne(qi){
+  if(!(qi in answered)){
+    var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+    var fb = document.getElementById('fb'+qi); fb.className='fb no show';
+    fb.textContent = (l==='es'?'Elija una respuesta primero.':'Please choose an answer first.');
+    return;
+  }
+  document.getElementById('q'+qi).setAttribute('data-checked','1');
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  paintFeedback(qi, l); refreshScore(); saveState();
+}
+function paintFeedback(qi, l){
+  var item = MCQ[qi]; var card = document.getElementById('q'+qi); var chosen = answered[qi];
+  card.querySelectorAll('.opt').forEach(function(lab){
+    var oi = +lab.getAttribute('data-oi'); lab.classList.remove('correct','wrong');
+    if(oi===item.correct) lab.classList.add('correct');
+    else if(oi===chosen) lab.classList.add('wrong');
+    var r = lab.querySelector('input'); if(r) r.checked = (oi===chosen);
+  });
+  var fb = document.getElementById('fb'+qi); var ok = (chosen===item.correct);
+  fb.className = 'fb show ' + (ok?'ok':'no');
+  var head = ok ? (l==='es'?'Correcto. ':'Correct. ') : (l==='es'?'No exactamente. ':'Not quite. ');
+  fb.textContent = head + item.exp[l];
+}
+function refreshScore(){
+  var n=0; MCQ.forEach(function(item,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct) n++; });
+  document.getElementById('score').textContent = n + ' / ' + MCQ.length;
+  updatePentProgress();
+}
+function updatePentProgress(){
+  var mcAll = MCQ.every(function(item,qi){ return document.getElementById('q'+qi).getAttribute('data-checked')==='1' && answered[qi]===item.correct; });
+  var track = lsGet(SKEY+'_track') || 'cert';
+  var saOk = true;
+  if(track === 'masters'){
+    saOk = SA.every(function(item, si){ return saPassed[si] === true; });
+  }
+  if(mcAll && saOk){
+    try{var _pp=JSON.parse(lsGet('cts_pentecostal_progress')||'{}');_pp['unit'+6]=true;lsSet('cts_pentecostal_progress',JSON.stringify(_pp));}catch(e){}
+  }
+}
+function resetMcq(){
+  answered = {};
+  MCQ.forEach(function(item,qi){
+    var card=document.getElementById('q'+qi); card.setAttribute('data-checked','0');
+    card.querySelectorAll('.opt').forEach(function(l){ l.classList.remove('correct','wrong'); var r=l.querySelector('input'); if(r) r.checked=false; });
+    var fb=document.getElementById('fb'+qi); fb.className='fb';
+  });
+  refreshScore(); lsDel(SKEY+'_mcq');
+}
+
+/* ---------- short answer (Q24 fairness: 8 single-concept keywords, 3 = pass, word-boundary matcher) ---------- */
+function normalize(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+}
+function kwHit(answer, kw){
+  var toks = normalize(answer).split(' ');
+  var k = normalize(kw);
+  for(var i=0;i<toks.length;i++){ if(toks[i]===k || toks[i].indexOf(k)===0) return true; }
+  return false;
+}
+function countHits(answer, kws){ var n=0; kws.forEach(function(k){ if(kwHit(answer,k)) n++; }); return n; }
+
+var SA = [
+ { kw:{ en:["holiness","sanctification","higher","healing","latter","outpouring","expectation","roots"],
+        es:["santidad","santificacion","superior","sanidad","tardia","derramamiento","expectativa","raices"] },
+   q:{en:"Describe the nineteenth-century roots from which Pentecostalism grew.",
+      es:"Describa las raíces del siglo diecinueve de las que creció el pentecostalismo."},
+   model:{en:"Pentecostalism did not appear from nowhere but grew from deep nineteenth-century roots. Chief among them was the Holiness movement, with its Wesleyan hunger for a second blessing of entire sanctification, and the related higher-life or Keswick teaching. Alongside these ran the divine-healing movements and a widespread expectation that God would send a latter-rain outpouring of the Spirit before Christ's return, reading Joel and Acts as promise. Many earnest believers were already praying for such a fresh outpouring, so the ground was well prepared when it came.",
+          es:"El pentecostalismo no apareció de la nada, sino que creció de profundas raíces del siglo diecinueve. La principal entre ellas fue el movimiento de santidad, con su anhelo wesleyano de una segunda bendición de entera santificación, y la enseñanza afín de la vida superior o de Keswick. Junto a estas corrían los movimientos de sanidad divina y una expectativa extendida de que Dios enviaría un derramamiento de lluvia tardía del Espíritu antes del regreso de Cristo, leyendo a Joel y a Hechos como promesa. Muchos creyentes sinceros ya oraban por tal derramamiento fresco, así que el terreno estaba bien preparado cuando llegó."} },
+ { kw:{ en:["ozman","tongues","parham","evidence","seymour","azusa","hallway","spread"],
+        es:["ozman","lenguas","parham","evidencia","seymour","azusa","pasillo","extendio"] },
+   q:{en:"Explain who Agnes Ozman, Charles Parham, and William Seymour were and their part in the movement's beginning.",
+      es:"Explique quiénes fueron Agnes Ozman, Charles Parham y William Seymour y su parte en el comienzo del movimiento."},
+   model:{en:"Charles Parham was the Holiness preacher whose Bible school in Topeka concluded that tongues was the evidence of Spirit-baptism, and who formulated the initial-evidence doctrine. Agnes Ozman was the student who, on the first day of 1901, spoke in tongues and became the traditional first instance under that teaching. William Seymour was a Black preacher who learned the message from Parham in Houston, listening from the hallway under segregation, and then carried it to Los Angeles, where he led the Azusa Street revival from which the movement spread across the world.",
+          es:"Charles Parham fue el predicador de santidad cuya escuela bíblica en Topeka concluyó que las lenguas eran la evidencia del bautismo del Espíritu, y quien formuló la doctrina de la evidencia inicial. Agnes Ozman fue la estudiante que, en el primer día de 1901, habló en lenguas y llegó a ser el primer caso tradicional bajo esa enseñanza. William Seymour fue un predicador negro que aprendió el mensaje de Parham en Houston, escuchando desde el pasillo bajo la segregación, y luego lo llevó a Los Ángeles, donde dirigió el avivamiento de la Calle Azusa desde el cual el movimiento se extendió por el mundo."} },
+ { kw:{ en:["history","fairly","fruit","failure","division","doctrine","elsewhere","scripture"],
+        es:["historia","justamente","fruto","fracaso","division","doctrina","otras","escritura"] },
+   q:{en:"How does this unit tell the history fairly, and where does it place the doctrinal assessment of what was taught?",
+      es:"¿Cómo cuenta esta unidad la historia con justicia, y dónde coloca la evaluación doctrinal de lo que se enseñó?"},
+   model:{en:"The unit tells the story as history, describing what happened and what was taught fairly rather than arguing the doctrine on the spot. It gives thanks for the fruit — a genuine visitation and a gospel that crossed the color line — while honestly naming human failure, including Parham's clouded later years and the sad division along racial lines that followed. It keeps two questions apart and places the doctrinal assessment of the initial-evidence teaching elsewhere in the course, where every claim is weighed by Scripture and the movement is judged by its faithful.",
+          es:"La unidad cuenta la historia como historia, describiendo justamente lo que sucedió y lo que se enseñó en vez de argumentar la doctrina en el acto. Da gracias por el fruto — una visitación genuina y un evangelio que cruzó la línea del color — mientras nombra con honestidad el fracaso humano, incluidos los años posteriores nublados de Parham y la triste división por líneas raciales que siguió. Mantiene dos preguntas separadas y coloca la evaluación doctrinal de la enseñanza de la evidencia inicial en otras partes del curso, donde toda afirmación se sopesa por la Escritura y el movimiento se juzga por sus fieles."} }
+];
+
+function buildSa(){
+  var host=document.getElementById('sa'); host.innerHTML='';
+  SA.forEach(function(item, si){
+    var card=document.createElement('div'); card.className='qcard'; card.id='sa'+si;
+    var num=document.createElement('div'); num.className='qnum';
+    num.innerHTML='<span class="seg en">Written '+(si+1)+'</span><span class="seg es">Escrita '+(si+1)+'</span>';
+    var stem=document.createElement('div'); stem.className='qstem'; stem.setAttribute('data-role','stem');
+    var ta=document.createElement('textarea'); ta.id='ta'+si; ta.setAttribute('aria-label','answer');
+    var btnrow=document.createElement('div'); btnrow.style.marginTop='10px'; btnrow.style.display='flex'; btnrow.style.gap='10px'; btnrow.style.flexWrap='wrap';
+    var chk=document.createElement('button'); chk.className='btn'; chk.setAttribute('data-role','chk'); chk.onclick=function(){ checkSa(si); };
+    var rev=document.createElement('button'); rev.className='btn ghost'; rev.setAttribute('data-role','rev'); rev.onclick=function(){ revealModel(si); };
+    btnrow.appendChild(chk); btnrow.appendChild(rev);
+    var hit=document.createElement('div'); hit.className='hitline'; hit.id='hit'+si;
+    var mod=document.createElement('div'); mod.className='model'; mod.id='mod'+si;
+    mod.innerHTML='<div class="mh" data-role="mh"></div><div data-role="mtext"></div>';
+    card.appendChild(num); card.appendChild(stem); card.appendChild(ta); card.appendChild(btnrow); card.appendChild(hit); card.appendChild(mod);
+    host.appendChild(card);
+  });
+  renderSaText();
+}
+function renderSaText(){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  SA.forEach(function(item, si){
+    var card=document.getElementById('sa'+si);
+    card.querySelector('[data-role="stem"]').textContent=item.q[l];
+    card.querySelector('[data-role="chk"]').textContent=(l==='es'?'Comprobar mi respuesta':'Check my answer');
+    card.querySelector('[data-role="rev"]').textContent=(l==='es'?'Ver respuesta modelo':'Reveal model answer');
+    card.querySelector('[data-role="mh"]').textContent=(l==='es'?'Respuesta modelo':'Model answer');
+    card.querySelector('[data-role="mtext"]').textContent=item.model[l];
+    if(card.getAttribute('data-checked')==='1') paintHits(si, l);
+  });
+}
+function checkSa(si){
+  var l = document.documentElement.classList.contains('lang-es') ? 'es' : 'en';
+  var ans = document.getElementById('ta'+si).value.trim();
+  if(ans.length < 100){
+    var hit=document.getElementById('hit'+si); hit.className='hitline show';
+    hit.innerHTML = (l==='es' ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.');
+    return;
+  }
+  document.getElementById('sa'+si).setAttribute('data-checked','1');
+  paintHits(si, l);
+  revealModel(si);
+  saPassed[si] = countHits(ans, SA[si].kw[l]) >= 3;
+  updatePentProgress();
+}
+function paintHits(si, l){
+  var item=SA[si]; var ans=document.getElementById('ta'+si).value;
+  var n=countHits(ans, item.kw[l]); var pass = n>=3;
+  var hit=document.getElementById('hit'+si); hit.className='hitline show';
+  if(l==='es'){
+    hit.innerHTML = 'Conceptos clave encontrados: <b>'+n+' de 8</b> &mdash; '+(pass?'aprobado (mínimo 3). Compare con la respuesta modelo abajo.':'aún no (se necesitan 3). Revise su respuesta y la modelo abajo.');
+  } else {
+    hit.innerHTML = 'Key concepts found: <b>'+n+' of 8</b> &mdash; '+(pass?'pass (minimum 3). Compare with the model answer below.':'not yet (3 needed). Review your answer and the model below.');
+  }
+}
+function revealModel(si){ document.getElementById('mod'+si).classList.add('show'); }
+
+/* ---------- persistence ---------- */
+function saveState(){
+  try{
+    var mcqState={}; MCQ.forEach(function(it,qi){ if(document.getElementById('q'+qi).getAttribute('data-checked')==='1'){ mcqState[qi]=answered[qi]; } });
+    lsSet(SKEY+'_mcq', JSON.stringify(mcqState));
+  }catch(e){}
+}
+function restoreState(){
+  var l = lsGet(SKEY+'_lang'); if(l) setLang(l);
+  var t = lsGet(SKEY+'_track');
+  if(!t){
+    // No local choice yet on this page -- default from the site-wide track
+    // (set at the seminary's main registration) so a Masters-track student
+    // is graded at the correct rigor here without re-selecting it locally.
+    try{
+      var shared = JSON.parse(lsGet('cts_student') || 'null');
+      var sharedTrack = String(lsGet('cts_track') || (shared && (shared.track||shared.program)) || '').toLowerCase();
+      if(sharedTrack === 'mdiv' || sharedTrack === 'thm' || sharedTrack === 'mth' ||
+         /master of divinity|m\.div|master of theology|m\.th|th\.m/.test(sharedTrack)) t = 'masters';
+    }catch(e){}
+  }
+  setTrack(t||'cert');
+  try{
+    var raw = lsGet(SKEY+'_mcq');
+    if(raw){ var st=JSON.parse(raw); var lg=document.documentElement.classList.contains('lang-es')?'es':'en';
+      Object.keys(st).forEach(function(qi){ answered[qi]=st[qi]; document.getElementById('q'+qi).setAttribute('data-checked','1'); paintFeedback(+qi, lg); });
+      refreshScore();
+    }
+  }catch(e){}
+}
+
+/* ---------- init ---------- */
+buildMcq(); buildSa();
+restoreState();
+</script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPentecostalReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+</body>
+</html>

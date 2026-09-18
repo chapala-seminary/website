@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CTS The Gospel of John — Supplemental Reading Room</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root{
+    --primary:#14636b;
+    --primary-deep:#0e4a50;
+    --gold:#c9a227;
+    --gold-deep:#98771d;
+    --paper:#e9f0f0;
+    --card:#fbfefe;
+    --border:#cfe0e0;
+    --ink:#0a2528;
+    --ink-soft:#3f6165;
+  }
+
+  body{
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 17px;
+    padding: 20px;
+  }
+  .container{ max-width: 900px; margin: 0 auto; }
+
+  /* ---------- language toggle mechanics (house pattern) ---------- */
+  body.lang-en .lang-es{ display:none; }
+  body.lang-en .lang-en{ display:inline; }
+  body.lang-es .lang-en{ display:none; }
+  body.lang-es .lang-es{ display:inline; }
+  .lang-en.block, .lang-es.block{ display:none; }
+  body.lang-en .lang-en.block{ display:block; }
+  body.lang-es .lang-es.block{ display:block; }
+  body.lang-both .lang-es.block{ display:block; }
+  body.lang-both .lang-en.block{ display:block; }
+  body.lang-both .lang-es:not(.block){ display:inline; }
+  body.lang-both .lang-en:not(.block){ display:inline; }
+  body.lang-both .lang-es.block{ opacity:.9; border-top:1px dashed var(--border); margin-top:8px; padding-top:8px; }
+
+  /* ---------- builder note (delete before publishing) ---------- */
+  .builder{
+    border:2px dashed #b23a3a; background:#fdf4f4; color:#5a2020;
+    border-radius:12px; padding:16px 18px; margin-bottom:26px; font-size:.92rem; line-height:1.5;
+  }
+  .builder strong{ display:block; margin-bottom:6px; color:#8f2a2a; letter-spacing:.02em; text-transform:uppercase; font-size:.78rem; }
+  .builder ol{ margin:6px 0 0 18px; } .builder li{ margin:4px 0; }
+
+  /* ---------- toggle bar ---------- */
+  .bar{
+    background:#d5e6e6; border-radius:40px; padding:10px 14px;
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-bottom:26px;
+  }
+  .bar span.bar-label{ color:var(--ink-soft); font-size:.85rem; margin-right:4px; }
+  .toggle-btn{
+    background:var(--card); color:var(--primary); border:1px solid var(--border);
+    border-radius:30px; padding:7px 18px; cursor:pointer; font-family:inherit; font-size:.92rem;
+  }
+  .toggle-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary); }
+
+  /* ---------- masthead ---------- */
+  .mast{ text-align:center; padding:14px 0 6px; }
+  .mast .eyebrow{
+    letter-spacing:.3em; text-transform:uppercase; font-size:.72rem; color:var(--gold-deep); margin-bottom:12px;
+  }
+  .mast h1{ color:var(--primary); font-size:2.05rem; line-height:1.2; font-weight:normal; }
+  .mast .rule{ width:88px; height:2px; background:var(--gold); margin:18px auto 14px; }
+  .mast .sub{ color:var(--ink-soft); font-style:italic; font-size:1.02rem; }
+
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .card h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:12px;
+  }
+  .card p{ margin:9px 0; }
+  .card p.lead{ margin-top:2px; }
+
+  .honors{ border-left:none; border-top:4px solid var(--gold); }
+  .honors h2{ border-left:none; padding-left:0; }
+  .pill-note{ display:inline-block; background:#dcebeb; border:1px solid var(--border); border-radius:20px; padding:3px 12px; font-size:.82rem; color:var(--primary); margin-top:4px; }
+
+  /* ---------- reading entries ---------- */
+  .shelf-head{ margin:34px 0 6px; text-align:center; }
+  .shelf-head h2{
+    color:var(--primary); font-weight:normal; font-size:1.4rem; border:none; padding:0; display:inline-block;
+  }
+  .shelf-head .rule{ width:60px; height:2px; background:var(--gold); margin:12px auto 0; }
+  .counter{
+    position:sticky; top:8px; z-index:5;
+    background:var(--primary); color:#fff; border-radius:30px;
+    padding:8px 18px; text-align:center; font-size:.95rem; margin:16px auto 6px; max-width:280px;
+    box-shadow:0 3px 10px rgba(0,0,0,.14);
+  }
+  .counter b{ color:var(--gold); }
+
+  .entry{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:20px 22px; margin:16px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+    transition:box-shadow .18s ease, border-color .18s ease;
+  }
+  .entry:hover{ box-shadow:0 7px 20px rgba(20,99,107,.15); }
+  .entry.chosen{ border-color:var(--primary); box-shadow:0 0 0 2px var(--primary) inset, 0 7px 20px rgba(20,99,107,.17); }
+  .entry .locus{
+    letter-spacing:.16em; text-transform:uppercase; font-size:.68rem; color:var(--gold-deep); margin-bottom:8px;
+  }
+  .entry .title{ font-size:1.14rem; color:var(--primary); margin-bottom:2px; }
+  .entry .title .num{
+    display:inline-block; min-width:1.7em; color:var(--gold-deep); font-style:italic;
+  }
+  .entry .byline{ color:var(--ink-soft); font-style:italic; font-size:.92rem; margin-bottom:10px; padding-left:1.7em; }
+  .entry .caption{ font-size:.98rem; }
+  .entry .foot{
+    display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center; justify-content:space-between;
+    margin-top:14px; padding-top:12px; border-top:1px solid var(--border);
+  }
+  .read-link{
+    color:var(--primary); text-decoration:none; font-size:.95rem; border-bottom:1.5px solid var(--gold); padding-bottom:1px;
+  }
+  .read-link:hover{ color:var(--gold-deep); }
+  .read-links{ display:flex; flex-wrap:wrap; gap:6px 16px; align-items:center; }
+  .read-link.mod{ border-bottom-color:var(--primary); }
+  .pick{ display:inline-flex; align-items:center; gap:9px; cursor:pointer; font-size:.92rem; color:var(--ink); user-select:none; }
+  .pick input{ width:19px; height:19px; accent-color:var(--primary); cursor:pointer; }
+  .pick.disabled{ opacity:.4; cursor:not-allowed; }
+
+  /* ---------- millennial views panel (unused in this course; retained for template parity) ---------- */
+  .millennial{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .millennial > h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:10px;
+  }
+  .millennial .intro{ margin:8px 0 6px; }
+  .mv-grid{ margin-top:14px; }
+  .entry.mv{ box-shadow:none; border:none; border-top:1px solid var(--border); border-radius:0; margin:0; padding:18px 0; }
+  .entry.mv:first-of-type{ border-top:none; padding-top:4px; }
+  .entry.mv:hover{ box-shadow:none; }
+  .entry.mv.chosen{ box-shadow:none; border-top:1px solid var(--border); background:#dcebeb; border-radius:8px; padding:14px 12px; }
+  .entry.mv:first-of-type.chosen{ border-top:none; }
+  .view-badge{
+    display:inline-block; background:var(--gold); color:var(--primary-deep);
+    font-size:.72rem; font-weight:bold; letter-spacing:.11em; text-transform:uppercase;
+    padding:5px 14px; border-radius:20px; margin-bottom:10px;
+  }
+
+  .limit-note{ text-align:center; color:var(--gold-deep); font-size:.9rem; min-height:1.2em; margin:4px 0 0; }
+
+  /* ---------- attestation ---------- */
+  .attest label.field{ display:block; margin:14px 0 6px; font-size:.9rem; color:var(--ink-soft); }
+  .attest input[type=text]{
+    width:100%; font-family:inherit; font-size:1rem; padding:11px 14px;
+    border:1px solid var(--border); border-radius:10px; background:#fffef9; color:var(--ink);
+  }
+  .attest .oath{
+    display:flex; gap:11px; align-items:flex-start; margin:16px 0; font-size:.96rem; background:#e9f0f0;
+    border:1px solid var(--border); border-radius:10px; padding:12px 14px;
+  }
+  .attest .oath input{ width:20px; height:20px; margin-top:2px; accent-color:var(--primary); flex-shrink:0; }
+  .btn{
+    background:var(--primary); color:#fff; border:none; border-radius:30px;
+    padding:11px 26px; cursor:pointer; font-family:inherit; font-size:1rem; margin-top:6px;
+  }
+  .btn:hover{ background:var(--primary-deep); }
+  .btn.ghost{ background:transparent; color:var(--primary); border:1px solid var(--primary); }
+  .msg{ color:var(--gold-deep); font-size:.92rem; margin-top:12px; min-height:1.2em; }
+
+  .record{ display:none; }
+  .record.show{ display:block; }
+  .record .seal-line{ width:70px; height:2px; background:var(--gold); margin:6px 0 16px; }
+  .record h3{ color:var(--primary); font-weight:normal; font-size:1.3rem; margin-bottom:4px; }
+  .record .named{ font-size:1.5rem; color:var(--primary); border-bottom:1px solid var(--gold-deep); display:inline-block; padding:0 10px 4px; margin:6px 0 12px; }
+  .record ul{ margin:12px 0 12px 20px; } .record li{ margin:5px 0; }
+  .record .stamp{ font-style:italic; color:var(--ink-soft); font-size:.92rem; }
+
+  .footnote{ text-align:center; color:var(--ink-soft); font-size:.82rem; margin:30px 0 6px; }
+
+  a:focus-visible, input:focus-visible, button:focus-visible, label:focus-within{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+
+  @media (max-width:520px){
+    body{ font-size:16px; padding:14px; }
+    .mast h1{ font-size:1.7rem; }
+    .entry .foot{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  /* ---------- print: show only the record ---------- */
+  @media print{
+    body{ background:#fff; }
+    .builder, .bar, .no-print, .entry, .counter, .attest .oath, .attest input, .attest label.field, .attest .btn, .msg, .limit-note{ display:none !important; }
+    .card.attest{ border:none; box-shadow:none; }
+    .record{ display:block !important; }
+  }
+
+.assignment-note{background:#f7f3e7;border-left:4px solid var(--gold);padding:9px 11px;margin:10px 0;font-size:.95rem}
+</style>
+<style>
+.digest-inline{margin:12px 0 6px;border:1px solid var(--border,#e2d6c9);border-radius:9px;background:#fff;overflow:hidden}
+.digest-inline>summary{cursor:pointer;list-style:none;padding:11px 13px;font-family:Arial,Helvetica,sans-serif;font-weight:700;color:var(--primary,#33608f);display:flex;align-items:center;gap:9px}
+.digest-inline>summary::-webkit-details-marker{display:none}
+.digest-inline>summary::after{content:"\25B8";margin-left:auto;color:var(--gold-deep,#8a5a3c)}
+.digest-inline[open]>summary::after{content:"\25BE"}
+.dg-badge{flex:none;background:var(--primary,#33608f);color:#fff;font:800 .6rem/1 Arial,sans-serif;letter-spacing:.11em;padding:5px 8px;border-radius:5px}
+.dg-note-line{font-family:Arial,sans-serif;font-size:.82rem;color:var(--ink-soft,#6b5b4d);padding:0 15px 8px}
+.dg-scroll{padding:2px 15px 16px;border-top:1px solid var(--border,#eee)}
+.dg-block{max-width:none;margin:0}
+.dg-block .dg-doc{border-bottom:1.5px solid var(--border,#e2d6c9);padding-bottom:10px;margin:10px 0 12px}
+.dg-block h1{font-size:1.25rem;line-height:1.25;margin:.1rem 0 .4rem;color:var(--primary,#33608f)}
+.dg-block .dg-sub{color:var(--ink-soft,#6b5b4d);font-style:italic;margin:0 0 .5rem;font-size:.95rem}
+.dg-block .dg-src{font-size:.8rem;color:var(--ink-soft,#6b5b4d);margin:.2rem 0}
+.dg-block .dg-chips{margin:.5rem 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.35rem}
+.dg-block .dg-chips li{font:700 .66rem/1 Arial,sans-serif;background:var(--card,#eef2f6);color:var(--primary,#33608f);border:1px solid var(--border,#d5d5d5);border-radius:999px;padding:3px 8px}
+.dg-block .dg-note{background:var(--card,#eef2f6);border-left:3px solid var(--gold-deep,#8a5a3c);padding:.7rem .9rem;margin:1rem 0;font-size:.92rem;line-height:1.5}
+.dg-block h2{font-size:1.05rem;margin:1.3rem 0 .4rem;padding-top:.35rem;border-top:1px solid var(--border,#ece2d6);color:var(--primary,#33608f)}
+.dg-block h2 .dg-n{color:var(--gold-deep,#8a5a3c);font-weight:400;margin-right:.35rem}
+.dg-block p{margin:0 0 .8rem;font-size:.97rem;line-height:1.6}
+.dg-block blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--border,#e2d6c9);font-style:italic;color:#444}
+.dg-block .dg-reflect{background:var(--card,#eef2f6);padding:.7rem .9rem;border-radius:6px;margin:1rem 0}
+.dg-block footer{margin-top:1.4rem;padding-top:.8rem;border-top:1.5px solid var(--border,#e2d6c9);font-size:.8rem;color:var(--ink-soft,#6b5b4d);line-height:1.5}
+</style></head>
+<body class="lang-en">
+<div class="container">
+<!-- ===== HONORS PROMPT ===== -->
+<div class="bar no-print" style="background:#f6f0e2;border:1px solid #cfe0e0;">
+<span class="lang-en">✦ Pursuing a degree <b>With Honors</b>? Complete this class's reading below, then track your progress:</span>
+<span class="lang-es">✦ ¿Cursando un título <b>Con Honores</b>? Complete la lectura de esta clase abajo, luego siga su progreso:</span>
+<a class="toggle-btn" href="cts-honors.html" style="text-decoration:none;"><span class="lang-en">Honors page ↗</span><span class="lang-es">Página de Honores ↗</span></a>
+</div>
+<!-- ============ LANGUAGE TOGGLE ============ -->
+<div class="bar no-print">
+<span class="bar-label lang-en">Language:</span>
+<span class="bar-label lang-es">Idioma:</span>
+<button class="toggle-btn active" data-lang="en" onclick="setLang('en')">English</button>
+<button class="toggle-btn" data-lang="es" onclick="setLang('es')">Español</button>
+<button class="toggle-btn" data-lang="both" onclick="setLang('both')">Both / Ambos</button>
+</div>
+<!-- ============ MASTHEAD ============ -->
+<div class="mast">
+<div class="eyebrow">Chapala Theological Seminary · The Gospel of John</div>
+<h1>
+<span class="lang-en">Supplemental Reading Room</span>
+<span class="lang-es">Sala de Lecturas Complementarias</span>
+</h1>
+<div class="rule"></div>
+<div class="sub">
+<span class="lang-en">That ye might believe and have life — choose any three</span>
+<span class="lang-es">Para que creáis y tengáis vida — elija tres cualesquiera</span>
+</div>
+</div>
+<!-- ============ FRAMING ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">How to read this shelf</span>
+<span class="lang-es">Cómo leer este estante</span>
+</h2>
+<p class="lead lang-en block">This intensive leads the student through the Gospel of John — the most beloved and most profound of the four Gospels, written, as John tells us, “that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name.” These five readings are bilingual Chapala Theological Seminary digests, walking in turn through the great movements of the book — the Word made flesh, the signs and “I am” sayings, the upper room, the high-priestly prayer, and the cross and resurrection — and drawing on its classic public-domain expositors, from Athanasius and Ryle to Godet, Murray, and Rainsford. Each is written to be read on its own, in English or Spanish, entirely offline. Choose any three, read them in full, and record your reading below.</p>
+<p class="lang-en block">These five readings draw on the great public-domain classics of John — warm, practical expository thoughts and rich scholarly commentary on the Gospel, the great early work on the Word made flesh, and the classic studies of the high-priestly prayer, the true vine, the passion, and the resurrection. John’s Gospel is at once the simplest and the deepest in the Bible — a book, it has been said, in which a child may wade and an elephant may swim. Read these digests to go deeper into it: to see the glory of the only-begotten, full of grace and truth, and to believe, and believing, to have life in His name.</p>
+<p class="lead lang-es block">Este curso intensivo lleva al estudiante a través del Evangelio de Juan — el más amado y el más profundo de los cuatro Evangelios, escrito, según Juan nos dice, “para que creáis que Jesús es el Cristo, el Hijo de Dios; y para que creyendo, tengáis vida en su nombre.” Estas cinco lecturas son resúmenes bilingües del Seminario Teológico de Chapala, que recorren por turno los grandes movimientos del libro — el Verbo hecho carne, las señales y las declaraciones “Yo soy,” el aposento alto, la oración sumo-sacerdotal, y la cruz y la resurrección — y se apoyan en sus expositores clásicos de dominio público, desde Atanasio y Ryle hasta Godet, Murray, y Rainsford. Cada una está escrita para leerse por sí sola, en inglés o español, enteramente sin conexión. Elija tres cualesquiera, léalas por completo, y registre su lectura abajo.</p>
+<p class="lang-es block">Estas cinco lecturas se apoyan en los grandes clásicos de dominio público de Juan — cálidos y prácticos pensamientos expositivos y rico comentario erudito sobre el Evangelio, la gran obra antigua sobre el Verbo hecho carne, y los estudios clásicos de la oración sumo-sacerdotal, la vid verdadera, la pasión, y la resurrección. El Evangelio de Juan es a la vez el más sencillo y el más profundo de la Biblia — un libro, se ha dicho, en el que un niño puede vadear y un elefante puede nadar. Lea estos resúmenes para adentrarse más en él: para ver la gloria del unigénito, lleno de gracia y de verdad, y para creer, y creyendo, tener vida en su nombre.</p>
+</div>
+<!-- ============ HONORS ============ -->
+<div class="card honors">
+<h2>
+<span class="lang-en">With Honors — an invitation, not a requirement</span>
+<span class="lang-es">Con Honores — una invitación, no un requisito</span>
+</h2>
+<p class="lang-en block">Your degree is complete without these readings. Every CTS degree — the Certificate, the Associate of Divinity, the Th.M., and the M.Div. — is earned in full through the course units themselves, and no student is ever penalized for being unable to reach this material.</p>
+<p class="lang-en block">These supplemental readings are the path to one added distinction — your degree awarded <em>with honors</em>. Each class whose reading you complete counts toward it: twelve classes for the Certificate or the Th.M., twenty-five for the Associate, and thirty for the M.Div. Choose any three of the readings below, read them in full, and record your reading on your honor — then track your progress on the Honors page.</p>
+<p class="lang-es block">Su título está completo sin estas lecturas. Todo título de CTS — el Certificado, el Asociado en Divinidad, la Maestría en Teología, y la Maestría en Divinidad — se obtiene por completo mediante las unidades del curso mismo, y ningún estudiante es penalizado por no poder acceder a este material.</p>
+<p class="lang-es block">Estas lecturas complementarias son el camino hacia una distinción adicional — su título otorgado <em>con honores</em>. Cada clase cuya lectura complete cuenta para ella: doce clases para el Certificado o la Maestría en Teología, veinticinco para el Asociado o la Maestría en Divinidad. Elija tres cualesquiera de las lecturas de abajo, léalas por completo, y registre su lectura bajo su honor — luego siga su progreso en la página de Honores.</p>
+<span class="pill-note lang-en">No constant internet required — see below</span>
+<span class="pill-note lang-es">No se requiere internet constante — vea abajo</span>
+</div>
+<!-- ============ ACCESS / OFFLINE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading offline</span>
+<span class="lang-es">Leer sin conexión</span>
+</h2>
+<p class="lang-en block">Every one of these five readings is a Chapala Theological Seminary bilingual digest, written by CTS and included in your course download — so all of them open directly on your device, in English or Spanish, with no internet connection at all. Each digest walks through a portion of John’s Gospel and rests on the classic public-domain expositions, but the digests themselves are CTS-authored teaching, not reproductions, and those classic works are freely available online for any who wish to read them in full.</p>
+<p class="lang-es block">Cada una de estas cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala, escrito por el STC e incluido en la descarga de su curso — de modo que todas se abren directamente en su dispositivo, en inglés o español, sin conexión alguna. Cada resumen recorre una porción del Evangelio de Juan y se apoya en las exposiciones clásicas de dominio público, pero los resúmenes mismos son enseñanza de autoría del STC, no reproducciones, y esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</p>
+</div>
+<!-- ============ TRANSLATE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading in another language</span>
+<span class="lang-es">Leer en otro idioma</span>
+</h2>
+<p class="lang-en block">Most of these works are in English. If you would rather read in Spanish or another language, the Chrome browser can translate a whole page for you. On a computer, right-click anywhere on the opened reading and choose “Translate to…”. On an Android phone or tablet, tap the three-dot menu and choose “Translate”. On an iPhone or iPad, tap the translate icon in the address bar — or open the page in the Chrome app if you don't see it. Machine translation is not perfect, but it is enough to follow the argument.</p>
+<p class="lang-es block">La mayoría de estas obras están en inglés. Si prefiere leer en español u otro idioma, el navegador Chrome puede traducir una página entera por usted. En una computadora, haga clic derecho en cualquier parte de la lectura abierta y elija “Traducir a…”. En un teléfono o tableta Android, toque el menú de tres puntos y elija “Traducir”. En un iPhone o iPad, toque el ícono de traducción en la barra de direcciones — o abra la página en la aplicación Chrome si no lo ve. La traducción automática no es perfecta, pero basta para seguir el argumento.</p>
+</div>
+<!-- ============ THE SHELF ============ -->
+<div class="shelf-head">
+<h2>
+<span class="lang-en">The Five Readings</span>
+<span class="lang-es">Las Cinco Lecturas</span>
+</h2>
+<div class="rule"></div>
+</div>
+<div class="counter no-print">
+<span class="lang-en">Chosen: <b id="cnt-en">0</b> of 3</span>
+<span class="lang-es">Elegidas: <b id="cnt-es">0</b> de 3</span>
+</div>
+<p class="limit-note no-print" id="limitNote"></p>
+<!-- 1 -->
+<article class="entry" data-id="1" data-title-en="The Word Made Flesh &mdash; CTS digest" data-title-es="El Verbo Hecho Carne &mdash; resumen STC">
+<div class="locus"><span class="lang-en">John 1 &middot; a CTS bilingual digest, ~1,950 words per language</span><span class="lang-es">Juan 1 &middot; un resumen biling&uuml;e del STC, ~1,950 palabras por idioma</span></div>
+<div class="title"><span class="num">1.</span><span class="lang-en">The Word Made Flesh</span><span class="lang-es">El Verbo Hecho Carne</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">John’s Gospel begins before creation: the eternal Word who is God and Creator, the life and light shining in the darkness, made flesh to dwell among us (with Athanasius on why God became man), full of grace and truth — and the invitation from page one to receive Him and be born a child of God.</p>
+<p class="caption lang-es block">El Evangelio de Juan comienza antes de la creación: el Verbo eterno que es Dios y Creador, la vida y la luz que resplandece en las tinieblas, hecho carne para habitar entre nosotros (con Atanasio sobre por qué Dios se hizo hombre), lleno de gracia y de verdad — y la invitación desde la primera página a recibirle y ser nacido hijo de Dios.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Word Made Flesh</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — John 1: the eternal Word, God, who became flesh to dwell among us</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain commentaries and expositions of John (Athanasius, Godet, Ryle, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: John</li>
+<li>The Deity of Christ</li>
+<li>The Incarnation</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> John opens his Gospel not with Jesus's birth, but before creation itself — with the eternal Word, who was God, and who became flesh to dwell among us. This first reading walks through John's magnificent prologue (chapter 1): who Jesus eternally is, and the wonder that God became one of us to save us.
+    </div>
+<h2><span class="dg-n">1.</span> A Different Kind of Gospel</h2>
+<p>John's Gospel opens in a way quite unlike any of the other three, and the difference is deliberate and important. Matthew, Mark, and Luke each begin with Jesus's birth, or with the start of His public ministry — that is, at a point in time and history. John reaches back much further than that, back behind history altogether, back before the world itself was even made: "In the beginning was the Word, and the Word was with God, and the Word was God." He wants us to understand who Jesus is before he tells us anything Jesus did.</p>
+<p>John tells us plainly, near the very end of his book, exactly why he wrote it at all: "that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name." That is his whole purpose, and everything in the Gospel serves it. And so he begins by lifting our eyes high, to see who this Jesus eternally and truly <em>is</em>. His opening lines, which we call the prologue of the Gospel, are among the most profound and majestic in all of Scripture; unhurried readers have pondered them for two thousand years and never reached the bottom. They set before us, right at the outset, the towering truth on which absolutely everything else in the Gospel — and indeed in the Christian faith — will rest. Get this foundation clear, and the rest of John opens up.</p>
+<h2><span class="dg-n">2.</span> The Eternal Word — Christ's Deity</h2>
+<p>"The Word" — in the original Greek, the <em>Logos</em> — is the name John chooses here for Jesus, a rich term suggesting God's own self-expression, His reason and speech made personal. And the claims John proceeds to make about this Word are frankly staggering, so great that we must slow down and weigh each one. The Word "was in the beginning," already existing before all created things came to be, and so is eternal, without any beginning of His own. The Word was "with God," in intimate personal relationship with the Father, face to face with Him, and yet genuinely distinct from Him. And then the third and highest claim: the Word "was God" — fully, truly, and completely divine, not a little like God but God Himself.</p>
+<p>John will allow us no lesser or reduced view of Jesus, and he closes off every escape from the conclusion. Jesus is not a created being, however lofty and exalted; He is not merely a great moral teacher, a prophet, or an inspired man; He is God Himself, who has simply always existed. And lest we somehow miss or soften the point, John immediately adds the sweeping words: "all things were made through Him, and without Him nothing was made that was made." The Word is not part of creation at all; He is the Creator of every single thing that exists, from the farthest star to the smallest sparrow. This is the massive foundation of the entire Gospel, and indeed of the whole of the Christian faith, and it must be laid first: Jesus is God. Everything else John will show us stands upon this.</p>
+<h2><span class="dg-n">3.</span> Life and Light</h2>
+<p>From the Word, John says, flow the two great and life-giving gifts of life and light. "In Him was life," he writes, "and the life was the light of men." Here is a profound truth: Jesus is not merely alive; He is the very source and fountain of all life, the one in whom life itself resides, and He is also the light that shines out into the world's thick darkness. And John adds a note of quiet triumph: "the darkness did not comprehend it" — could neither grasp it, master it, nor put it out, however hard it tried.</p>
+<p>This is exactly the world's situation, and ours. Into a world darkened and deadened by sin and death, the Word comes bringing both light and life, "the true Light which gives light to every man." The picture is meant to give hope. However deep and thick the surrounding darkness may seem — in the world, or in a single human life — it has never once been able to overcome or extinguish this Light; the darkness cannot win against Him. And here is the personal invitation hidden in the image: everyone who comes to Him finds in Him, for himself, both life for his dead soul and light for his darkened path. The One who is life and light gives life and light to all who will receive Him.</p>
+<h2><span class="dg-n">4.</span> The Word Became Flesh — the Incarnation</h2>
+<p>And now comes the single sentence that stands at the very astonishing center of the whole Christian faith, a sentence so great that all our words strain to carry it: "And the Word became flesh and dwelt among us, and we beheld His glory, the glory as of the only begotten of the Father, full of grace and truth." Let the wonder of it land: the eternal God, the uncreated Creator of all things, took to Himself real, actual human flesh, and lived among us as one of us — hungry, weary, weeping, and joyful, as we are.</p>
+<p>The very word John chooses for "dwelt" means, quite literally, to pitch a tent, to tabernacle — a deliberate echo of the Old Testament, where God had come down to dwell in the tabernacle in the midst of His people. Now God has come down to pitch His tent among us in the flesh, to live right in our midst. The great fourth-century teacher Athanasius devoted a whole treatise, <em>On the Incarnation</em>, to answering the question <em>why</em> the Word would do such a thing. His answer, drawn from Scripture, was this: the Word became man precisely in order to save us — to renew and restore in us the image of God that our sin had marred and defaced, and to enter into our very death from the inside, taking it upon Himself, in order to conquer it there and rob it of its power, so that we might be rescued from it and brought back home to God. In short: God became one of us in order to save us. In all the world, and in all of eternity, there is no greater wonder than this.</p>
+<h2><span class="dg-n">5.</span> Full of Grace and Truth</h2>
+<p>The incarnate Word, John tells us, is "full of grace and truth" — and, he adds with wonder, "of His fullness we have all received, and grace for grace," grace piled upon grace without end. Here are the two great things that Jesus brings down to us from the Father. He brings <em>grace</em> — the free, wholly unearned favor and kindness of God, and the full salvation that flows out of it to undeserving people; for, as John says plainly, "grace and truth came through Jesus Christ." What the law could only demand, Christ freely gives.</p>
+<p>And He brings <em>truth</em> — God Himself, truly and reliably made known to us. This matters enormously, for, as John reminds us, no human being has ever fully seen God; He is invisible, dwelling in unapproachable light. "But the only begotten Son, who is in the bosom of the Father, He has declared Him" — He has made Him known, explained Him, put Him on display. So in Jesus, the invisible and unknowable God is at last made visible, known, and near. To look with faith upon Christ is to see the very face of the Father; to hear Christ speak is to hear God Himself speaking to us. He is not one revelation of God among many; He is the perfect, complete, and final revelation of exactly who God is. If you would know what God is truly like, look long at Jesus.</p>
+<h2><span class="dg-n">6.</span> Received or Rejected, and the Lamb of God</h2>
+<p>How, then, did the world actually respond when the Word came down into it? John records the tragedy in a single heavy line: "He came to His own, and His own did not receive Him." The Creator came to His own creation, the Maker to the people He had made and chosen, and they turned Him away; many rejected the very One through whom they had been made and were being kept in existence. And yet — and here is the gospel of grace, held out to us from the Gospel's very first page — "as many as received Him, to them He gave the right to become children of God, to those who believe in His name," born anew not of human descent, or human will, or human effort, but of God Himself.</p>
+<p>So from the very start, John holds out to every reader the great invitation and promise: receive Christ, believe in His name, and be born again as a true child of God. It is offered freely to all. Woven through these opening verses, too, is the faithful witness of John the Baptist, sent by God "to bear witness of the Light." He points firmly away from himself and straight to Jesus, and he does so with words that already cast the long shadow of the cross across the bright dawn of the Gospel: "Behold! The Lamb of God who takes away the sin of the world!" This eternal Word, this incarnate God, this Creator, has come for a purpose — to be the sacrificial Lamb who will bear away the sin of the world — and the first disciples begin, wondering and hesitant, to follow after Him. So this is where John's Gospel begins, and it is exactly where we must begin too: with the sheer, overwhelming glory of who Jesus is — the eternal Word, God, the Creator, the life and the light of men, made flesh to dwell among us and to save us, full of grace and truth, the Lamb of God. Come first, then, simply to marvel and wonder at Him; and then, having truly seen Him, receive Him, believe in His name, and be born a child of God.</p>
+<p>So begin your own walk through this Gospel right here, at its towering foundation, and never once move off it. Everything that follows in the pages ahead — the signs, the sayings, the cross, the empty tomb, the risen Lord — rests entirely upon this one great, unshakable truth: that the eternal God, your very Maker, loved you enough to become flesh and to dwell among us in order to save you. Marvel at Him first, and long; and then, having seen Him, trust Him wholly with all that you are.</p><h2><span class="dg-n">7.</span> Taking It to Heart</h2>
+<div class="dg-reflect">
+<p><b>For reflection.</b> Do you hold as high a view of Jesus as John does — the eternal Word, God Himself, your Creator — or has He shrunk in your thinking to merely a great teacher? Does the wonder that God became flesh to save <em>you</em> still move you? And have you done the one thing John presses from his very first page: received Christ, and believed in His name?</p>
+</div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of John 1, anchored in the classic public-domain commentaries and expositions of John (Athanasius's <em>On the Incarnation</em>, Frédéric Godet, J. C. Ryle, Alexander Maclaren, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This book study draws on a rich company of public-domain expositors of John's Gospel — among them Athanasius's <em>On the Incarnation</em>, and the commentaries and expositions of Godet, Ryle, Pink, Maclaren, and others.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>El Verbo Hecho Carne</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Juan 1: el Verbo eterno, Dios, que fue hecho carne para habitar entre nosotros</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en los clásicos comentarios y exposiciones de dominio público sobre Juan (Atanasio, Godet, Ryle, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del libro: Juan</li>
+<li>La deidad de Cristo</li>
+<li>La encarnación</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Juan abre su Evangelio no con el nacimiento de Jesús, sino antes de la creación misma — con el Verbo eterno, que era Dios, y que fue hecho carne para habitar entre nosotros. Esta primera lectura recorre el magnífico prólogo de Juan (capítulo 1): quién es Jesús eternamente, y la maravilla de que Dios se hizo uno de nosotros para salvarnos.
+    </div>
+<h2><span class="dg-n">1.</span> Un Evangelio de otra clase</h2>
+<p>El Evangelio de Juan abre de una manera bastante diferente a la de los otros tres, y la diferencia es deliberada e importante. Mateo, Marcos, y Lucas cada uno comienza con el nacimiento de Jesús, o con el inicio de su ministerio público — es decir, en un punto en el tiempo y la historia. Juan se remonta mucho más lejos que eso, atrás detrás de la historia por completo, atrás antes de que el mundo mismo siquiera fuera hecho: «En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios». Quiere que entendamos quién es Jesús antes de contarnos nada que Jesús hizo.</p>
+<p>Juan nos dice llanamente, cerca del fin mismo de su libro, exactamente por qué lo escribió en absoluto: «para que creáis que Jesús es el Cristo, el Hijo de Dios; y para que creyendo, tengáis vida en su nombre». Ese es todo su propósito, y todo en el Evangelio lo sirve. Y así comienza levantando nuestros ojos alto, para ver quién es este Jesús eterna y verdaderamente. Sus líneas de apertura, que llamamos el prólogo del Evangelio, están entre las más profundas y majestuosas en toda la Escritura; lectores sin prisa las han ponderado por dos mil años y nunca han alcanzado el fondo. Ponen ante nosotros, justo desde el comienzo, la elevada verdad sobre la cual absolutamente todo lo demás en el Evangelio — y en verdad en la fe cristiana — descansará. Aclare este fundamento, y el resto de Juan se abre.</p>
+<h2><span class="dg-n">2.</span> El Verbo eterno — la deidad de Cristo</h2>
+<p>«El Verbo» — en el griego original, el <em>Logos</em> — es el nombre que Juan escoge aquí para Jesús, un rico término que sugiere la propia autoexpresión de Dios, su razón y su habla hechas personales. Y las afirmaciones que Juan procede a hacer acerca de este Verbo son francamente asombrosas, tan grandes que debemos aminorar y sopesar cada una. El Verbo «era en el principio», ya existiendo antes de que todas las cosas creadas llegaran a ser, y así es eterno, sin comienzo alguno propio. El Verbo era «con Dios», en íntima relación personal con el Padre, cara a cara con Él, y sin embargo genuinamente distinto de Él. Y luego la tercera y más alta afirmación: el Verbo «era Dios» — plena, verdadera, y completamente divino, no un poco como Dios, sino Dios mismo.</p>
+<p>Juan no nos permitirá vista alguna menor ni reducida de Jesús, y cierra toda escapatoria de la conclusión. Jesús no es un ser creado, por elevado y exaltado que sea; no es meramente un gran maestro moral, un profeta, o un hombre inspirado; es Dios mismo, que sencillamente siempre ha existido. Y no sea que de algún modo erremos o suavicemos el punto, Juan inmediatamente añade las arrolladoras palabras: «Todas las cosas por él fueron hechas; y sin él nada de lo que es hecho, fue hecho». El Verbo no es parte de la creación en absoluto; es el Creador de cada sola cosa que existe, desde la estrella más lejana hasta el gorrión más pequeño. Este es el masivo fundamento de todo el Evangelio, y en verdad del todo de la fe cristiana, y debe ponerse primero: Jesús es Dios. Todo lo demás que Juan nos mostrará se yergue sobre esto.</p>
+<h2><span class="dg-n">3.</span> Vida y luz</h2>
+<p>Del Verbo, dice Juan, fluyen los dos grandes y vivificantes dones de la vida y la luz. «En él estaba la vida», escribe, «y la vida era la luz de los hombres». He aquí una profunda verdad: Jesús no está meramente vivo; es la mismísima fuente y el manantial de toda vida, aquel en quien la vida misma reside, y es también la luz que brilla en la espesa oscuridad del mundo. Y Juan añade una nota de callado triunfo: «las tinieblas no la comprendieron» — no pudieron ni asirla, ni dominarla, ni apagarla, por más que lo intentaron.</p>
+<p>Esta es exactamente la situación del mundo, y la nuestra. A un mundo oscurecido y amortecido por el pecado y la muerte, el Verbo viene trayendo tanto luz como vida, «aquella luz verdadera, que alumbra a todo hombre». El cuadro tiene por objeto dar esperanza. Por honda y espesa que la oscuridad circundante parezca — en el mundo, o en una sola vida humana — nunca una sola vez ha podido vencer ni extinguir esta Luz; las tinieblas no pueden ganar contra Él. Y he aquí la invitación personal escondida en la imagen: todo aquel que viene a Él halla en Él, para sí mismo, tanto vida para su alma muerta como luz para su senda oscurecida. Aquel que es vida y luz da vida y luz a todos los que le reciben.</p>
+<h2><span class="dg-n">4.</span> El Verbo fue hecho carne — la encarnación</h2>
+<p>Y ahora viene la sola frase que está en el mismísimo asombroso centro de toda la fe cristiana, una frase tan grande que todas nuestras palabras se esfuerzan por llevarla: «Y el Verbo fue hecho carne, y habitó entre nosotros (y vimos su gloria, gloria como del unigénito del Padre), lleno de gracia y de verdad». Deje que la maravilla de ello aterrice: el Dios eterno, el Creador increado de todas las cosas, tomó para sí carne humana real y de veras, y vivió entre nosotros como uno de nosotros — hambriento, cansado, llorando, y gozoso, como nosotros lo somos.</p>
+<p>La mismísima palabra que Juan escoge para «habitó» significa, bastante literalmente, plantar una tienda, entabernacularse — un deliberado eco del Antiguo Testamento, donde Dios había descendido a morar en el tabernáculo en medio de su pueblo. Ahora Dios ha descendido a plantar su tienda entre nosotros en la carne, a vivir justo en medio de nosotros. El gran maestro del siglo cuarto Atanasio dedicó todo un tratado, <em>Sobre la Encarnación</em>, a responder la pregunta de <em>por qué</em> el Verbo haría tal cosa. Su respuesta, sacada de la Escritura, fue esta: el Verbo se hizo hombre precisamente para salvarnos — para renovar y restaurar en nosotros la imagen de Dios que nuestro pecado había estropeado y desfigurado, y para entrar en nuestra misma muerte desde adentro, tomándola sobre sí, para vencerla allí y despojarla de su poder, de modo que fuéramos rescatados de ella y traídos de vuelta a casa a Dios. En breve: Dios se hizo uno de nosotros para salvarnos. En todo el mundo, y en toda la eternidad, no hay maravilla mayor que esta.</p>
+<h2><span class="dg-n">5.</span> Lleno de gracia y de verdad</h2>
+<p>El Verbo encarnado, nos dice Juan, está «lleno de gracia y de verdad» — y, añade con maravilla, «de su plenitud tomamos todos, y gracia por gracia», gracia amontonada sobre gracia sin fin. He aquí las dos grandes cosas que Jesús nos trae del Padre. Trae <em>gracia</em> — el libre y enteramente inmerecido favor y bondad de Dios, y la plena salvación que fluye de él a personas indignas; porque, como Juan dice llanamente, «la gracia y la verdad vinieron por Jesucristo». Lo que la ley solo podía exigir, Cristo da gratuitamente.</p>
+<p>Y trae <em>verdad</em> — Dios mismo, verdadera y confiablemente dado a conocer a nosotros. Esto importa enormemente, porque, como Juan nos recuerda, ningún ser humano jamás ha visto plenamente a Dios; es invisible, morando en luz inaccesible. «El unigénito Hijo, que está en el seno del Padre, él le ha dado a conocer» — lo ha declarado, lo ha explicado, lo ha puesto en exhibición. Así que en Jesús, el Dios invisible e inconocible es al fin hecho visible, conocido, y cercano. Mirar con fe a Cristo es ver el mismísimo rostro del Padre; oír hablar a Cristo es oír a Dios mismo hablándonos. No es una revelación de Dios entre muchas; es la perfecta, completa, y final revelación de exactamente quién Dios es. Si quiere saber cómo es Dios verdaderamente, mire largamente a Jesús.</p>
+<h2><span class="dg-n">6.</span> Recibido o rechazado, y el Cordero de Dios</h2>
+<p>¿Cómo, entonces, respondió de hecho el mundo cuando el Verbo descendió a él? Juan registra la tragedia en una sola línea pesada: «A lo suyo vino, y los suyos no le recibieron». El Creador vino a su propia creación, el Hacedor al pueblo que había hecho y escogido, y lo rechazaron; muchos rechazaron al mismísimo Uno por quien habían sido hechos y estaban siendo sostenidos en existencia. Y sin embargo — y he aquí el evangelio de la gracia, extendido a nosotros desde la primerísima página del Evangelio — «a todos los que le recibieron, les dio potestad de ser hechos hijos de Dios, a los que creen en su nombre», nacidos de nuevo no de descendencia humana, ni de voluntad humana, ni de esfuerzo humano, sino de Dios mismo.</p>
+<p>Así que desde el comienzo mismo, Juan extiende a todo lector la gran invitación y promesa: reciba a Cristo, crea en su nombre, y sea nacido de nuevo como verdadero hijo de Dios. Se ofrece gratuitamente a todos. Entretejido en estos versículos de apertura, también, está el fiel testimonio de Juan el Bautista, enviado por Dios «para que diese testimonio de la luz». Señala firmemente lejos de sí mismo y directamente a Jesús, y lo hace con palabras que ya proyectan la larga sombra de la cruz sobre el brillante amanecer del Evangelio: «¡He aquí el Cordero de Dios, que quita el pecado del mundo!». Este Verbo eterno, este Dios encarnado, este Creador, ha venido con un propósito — ser el Cordero sacrificial que quitará el pecado del mundo — y los primeros discípulos comienzan, asombrados y vacilantes, a seguir en pos de Él. Así que aquí es donde el Evangelio de Juan comienza, y es exactamente donde nosotros también debemos comenzar: con la pura y abrumadora gloria de quién es Jesús — el Verbo eterno, Dios, el Creador, la vida y la luz de los hombres, hecho carne para habitar entre nosotros y para salvarnos, lleno de gracia y de verdad, el Cordero de Dios. Venga primero, entonces, sencillamente a maravillarse y asombrarse de Él; y luego, habiéndolo verdaderamente visto, recíbalo, crea en su nombre, y sea nacido hijo de Dios.</p>
+<p>Así que comience su propio caminar por este Evangelio justo aquí, en su elevado fundamento, y nunca una sola vez se mueva de él. Todo lo que sigue en las páginas por delante — las señales, las declaraciones, la cruz, la tumba vacía, el Señor resucitado — descansa enteramente sobre esta única gran e inquebrantable verdad: que el Dios eterno, su mismísimo Hacedor, le amó lo suficiente para hacerse carne y habitar entre nosotros a fin de salvarle. Maravíllese de Él primero, y largamente; y luego, habiéndolo visto, confíe en Él enteramente con todo lo que usted es.</p><h2><span class="dg-n">7.</span> Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<p><b>Para reflexionar.</b> ¿Sostiene una vista tan alta de Jesús como la de Juan — el Verbo eterno, Dios mismo, su Creador — o se ha encogido en su pensamiento a meramente un gran maestro? ¿Le mueve todavía la maravilla de que Dios se hizo carne para salvarle a <em>usted</em>? ¿Y ha hecho la única cosa que Juan apremia desde su primerísima página: recibir a Cristo, y creer en su nombre?</p>
+</div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Juan 1, anclado en los clásicos comentarios y exposiciones de dominio público sobre Juan (<em>Sobre la Encarnación</em> de Atanasio, Frédéric Godet, J. C. Ryle, Alexander Maclaren, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Este estudio del libro se apoya en una rica compañía de expositores de dominio público del Evangelio de Juan — entre ellos <em>Sobre la Encarnación</em> de Atanasio, y los comentarios y exposiciones de Godet, Ryle, Pink, Maclaren, y otros.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="1" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 2 -->
+<article class="entry" data-id="2" data-title-en="Signs and “I AM”: Who Jesus Is &mdash; CTS digest" data-title-es="Señales y “Yo Soy”: Quién Es Jesús &mdash; resumen STC">
+<div class="locus"><span class="lang-en">John 2&ndash;12 &middot; a CTS bilingual digest, ~1,950 words per language</span><span class="lang-es">Juan 2&ndash;12 &middot; un resumen biling&uuml;e del STC, ~1,950 palabras por idioma</span></div>
+<div class="title"><span class="num">2.</span><span class="lang-en">Signs and “I AM”: Who Jesus Is</span><span class="lang-es">Señales y “Yo Soy”: Quién Es Jesús</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The “Book of Signs”: the miracles that reveal His glory, the great “I AM” sayings culminating in “Before Abraham was, I AM,” the new birth with Nicodemus (John 3:16) and living water for the Samaritan woman, the free offer to all who come and the unbreakable security of John 10:28, and the dividing response of belief and unbelief.</p>
+<p class="caption lang-es block">El “Libro de las Señales”: los milagros que revelan su gloria, las grandes declaraciones “Yo soy” que culminan en “Antes que Abraham fuese, yo soy,” el nuevo nacimiento con Nicodemo (Juan 3:16) y el agua viva para la mujer samaritana, el ofrecimiento gratuito a todos los que vienen y la inquebrantable seguridad de Juan 10:28, y la respuesta divisoria de la fe y la incredulidad.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>Signs and “I AM”: Who Jesus Is</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — John 2–12: the signs that reveal His glory, the great "I AM" sayings, and belief and unbelief</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain commentaries and expositions of John (Ryle, Godet, Pink, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: John</li>
+<li>The Signs</li>
+<li>The “I AM” Sayings</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> After the prologue, John records Jesus's public ministry — the section often called the "Book of Signs." This reading walks through John 2–12: the signs that reveal Christ's glory, His great "I AM" declarations of who He is, and the dividing response of belief and unbelief.
+    </div>
+<h2><span class="dg-n">1.</span> The Book of Signs</h2>
+<p>After the soaring heights of the prologue, John settles down into his account of Jesus's public ministry, which runs from chapter 2 all the way through chapter 12 and is often called, for good reason, the "Book of Signs." One thing quickly stands out: John records noticeably fewer miracles than the other three Gospels do, and he clearly chooses the ones he does record with great care and purpose, rather than simply piling them up.</p>
+<p>There is a reason for his particular choice of word, too. John does not usually call these mighty works "miracles" or "wonders," as we might expect; he calls them <em>signs</em> — for to John a sign is always far more than a mere marvel to gape at. A sign is a pointer, a signpost; it is something that reveals who Jesus truly is and calls the people who witness it to put their faith in Him. John tells us this outright: these things "are written that you may believe that Jesus is the Christ, the Son of God." So all through these ten chapters, Jesus unveils and displays His true identity in two ways especially — through the signs that He performs before the people, and through a remarkable series of sayings in which He declares of Himself, "I am." And as He does both of these things, the people around Him steadily begin to divide into two camps: some come to believe in Him, and some turn away and harden against Him.</p>
+<h2><span class="dg-n">2.</span> The Signs That Reveal His Glory</h2>
+<p>Each one of the signs John selects opens a distinct window onto some aspect of Christ's glory and power. The very first, worked quietly at a village wedding in Cana of Galilee, was the turning of water into wine; "this beginning of signs Jesus did," John writes, "and manifested His glory; and His disciples believed in Him." Right from the start, the pattern is set: the sign reveals His glory, and faith is the response.</p>
+<p>There followed a whole series of others, each one greater in its own way. There was the healing of a nobleman's dying son from a distance; the healing of a man who had been paralyzed for thirty-eight long years at the pool of Bethesda; the feeding of five thousand hungry people from just a few loaves and fish; the walking upon the stormy sea; the giving of sight to a man who had been born completely blind; and, greatest of them all, the raising of Lazarus back to life after he had lain four days in the tomb — at which Jesus declared those unforgettable words, "I am the resurrection and the life." Taken all together, the signs show Him plainly to be Lord over nature, over sickness, over hunger, over darkness, and finally even over death itself — there is no realm where He is not master. But it is vital to see that these signs were never meant to be ends in themselves, mere displays of power. Every single sign points beyond the wonder itself to the Person who worked it, saying in effect to every onlooker: look closely, and see who this truly is.</p>
+<h2><span class="dg-n">3.</span> The “I AM” Sayings</h2>
+<p>Alongside the signs, and found only here in John's Gospel and nowhere else, is a series of profound and deliberate declarations in which Jesus tells us plainly and directly who He is. "I am the bread of life," He says — the one who alone satisfies the deepest hunger of the human soul, which no earthly food can touch. "I am the light of the world." "I am the door" — the one way in to safety, shelter, and life. "I am the good shepherd" — the shepherd who actually lays down His own life for the sheep. "I am the resurrection and the life." And later, in the upper room, He will add two more: "I am the way, the truth, and the life," and "I am the true vine."</p>
+<p>And then there is the most startling of them all. When His hearers challenged Him about how He could possibly claim any relationship to Abraham, who had lived and died so long before, Jesus answered with words that stopped them cold: "Before Abraham was, I AM." He did not merely claim to be older than Abraham; He deliberately took upon His own human lips the sacred, unspeakable name by which God Himself had revealed His own being to Moses at the burning bush — "I AM." His hearers understood His meaning exactly, and instantly: it was nothing less than a direct claim to be God, and so they immediately took up stones to throw at Him for blasphemy. Through these "I am" sayings, then, taken together, Jesus reveals Himself to be nothing less than God in the flesh, and at the very same time the all-sufficient Savior who is Himself, in His own person, everything that the human soul truly and deeply needs.</p>
+<h2><span class="dg-n">4.</span> Born Again, and Living Water</h2>
+<p>Woven in among the crowds and the controversies of these chapters are two unforgettable personal encounters that John lingers over, and both are full of gospel. The first is with Nicodemus, a respected and learned teacher of Israel who came to Jesus cautiously by night. To this religious and moral man, Jesus said the searching words, "unless one is born again, he cannot see the kingdom of God" — teaching plainly that no one whatever enters God's kingdom by good standing, religious effort, or moral achievement, but only through a completely new birth, worked in the heart by the Spirit of God. And it was in that very same night conversation that Jesus spoke what may well be the single best-loved sentence in all the Bible: "For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."</p>
+<p>The second encounter could hardly be more different, and that is the point. To a Samaritan woman drawing water alone at a well in the heat of the day — a woman who was an outsider on every possible count, wrong in her nationality, her religion, and her tangled personal life — Jesus freely offered "living water," which He said would become in the one who drank it "a fountain of water springing up into everlasting life." Notice the sweep of it: whether by respectable night or scandalous noon, whether to the learned teacher or the social outcast, Jesus meets real people personally and individually, gently exposes their true and deepest need beneath the surface, and then freely offers them new and everlasting life. No one is beyond the reach of His offer.</p>
+<h2><span class="dg-n">5.</span> God So Loved the World — the Free Offer</h2>
+<p>At the very heart of all these chapters lies the free, wide, and open offer of salvation to every kind of person without exception. Look carefully at the sheer breadth of the words John records. "God so loved <em>the world</em>," not merely a favored few; and it is "<em>whoever</em> believes" in Him who has everlasting life, the door flung wide to all. "The one who comes to Me," Jesus promises with beautiful directness, "I will by no means cast out" — no one who actually comes will ever be turned away at the door. "If anyone thirsts," He cries out, "let him come to Me and drink." Again and again, in these chapters, Jesus holds Himself out freely and genuinely to all who will simply come to Him and believe — none is too far off, too sinful, or too unworthy, and none who comes is ever turned away.</p>
+<p>And to all those who do actually come and believe, Jesus gives a security so complete that no power in heaven or earth can break it. Hear His own staggering promise: "I give them eternal life, and they shall never perish; neither shall anyone snatch them out of My hand." Weigh every word of it. The life He gives is not a fragile, uncertain, easily-lost thing that we must anxiously guard for ourselves; it is <em>everlasting</em> life, and it is held fast and safe in His own almighty and unbreakable hand. So here, side by side, John sets before us both the very widest of welcomes and the very surest of comforts: come to Him, and you will never once be cast out; believe in Him, and you will never, ever be lost. That is the gospel John is pressing upon us.</p>
+<h2><span class="dg-n">6.</span> Belief and Unbelief, the Great Division</h2>
+<p>Yet, soberingly, not all who saw the signs with their own eyes and heard the "I am" sayings with their own ears actually came to believe. All through these chapters John shows us Jesus steadily dividing the people who met Him into two. Many genuinely did believe — His first disciples, the Samaritans of Sychar who came out to Him, the man born blind who ended by falling down and worshiping Him, and Martha, who confessed Him openly as "the Christ, the Son of God." Faith sprang up everywhere He went.</p>
+<p>But many others, and especially the religious leaders of the nation, only hardened themselves further against Him, their hostility growing chapter by chapter until at last they began actively plotting to put Him to death. John sees in this hardening the deep tragic response of a fallen world that "loved darkness rather than light, because their deeds were evil." It is a striking and sobering thing: the very same signs that gently drew some people to living faith only drove others deeper into settled unbelief. And that same dividing line runs straight down through the whole Gospel, and straight down to every one of us who reads it: the one decisive question that every single reader must finally answer for himself is simply what he or she will do with Jesus. For this is precisely what these ten chapters set before us — the shining glory of Christ, revealed in His signs and spoken plainly in His own "I am": He is the bread, the light, the door, the shepherd, the resurrection; He is God Himself in the flesh, the all-sufficient Savior, freely offering everlasting life to everyone who will believe, and then holding them forever. And all of it was written for one purpose: to bring us to faith. So let these chapters do their intended work in you: behold His glory, hear His "I am," and believe — and receive for yourself the everlasting life He so freely gives.</p>
+<h2><span class="dg-n">7.</span> Taking It to Heart</h2>
+<div class="dg-reflect">
+<p><b>For reflection.</b> Which of Jesus's "I am" sayings speaks most to your need right now — the bread, the light, the shepherd, the resurrection? Have you come to Him personally, as Nicodemus and the woman at the well did, and received the everlasting life He offers? And does His promise — that no one can snatch you out of His hand — steady you against every fear?</p>
+</div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of John 2–12, anchored in the classic public-domain commentaries and expositions of John (J. C. Ryle, Frédéric Godet, Arthur W. Pink, Alexander Maclaren, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on J. C. Ryle's <em>Expository Thoughts</em> and the commentaries of Godet, Pink, and Maclaren on the Gospel of John, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Señales y «YO SOY»: Quién Es Jesús</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Juan 2–12: las señales que revelan su gloria, las grandes declaraciones «YO SOY», y la creencia y la incredulidad</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en los clásicos comentarios y exposiciones de dominio público sobre Juan (Ryle, Godet, Pink, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del libro: Juan</li>
+<li>Las señales</li>
+<li>Las declaraciones «YO SOY»</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Después del prólogo, Juan registra el ministerio público de Jesús — la sección a menudo llamada el «Libro de las Señales». Esta lectura recorre Juan 2–12: las señales que revelan la gloria de Cristo, sus grandes declaraciones «YO SOY» de quién es, y la respuesta que divide de creencia e incredulidad.
+    </div>
+<h2><span class="dg-n">1.</span> El Libro de las Señales</h2>
+<p>Después de las elevadas alturas del prólogo, Juan se asienta en su relato del ministerio público de Jesús, que corre desde el capítulo 2 todo el camino hasta el capítulo 12 y es a menudo llamado, con buena razón, el «Libro de las Señales». Una cosa rápidamente resalta: Juan registra notablemente menos milagros que los otros tres Evangelios, y claramente escoge los que sí registra con gran cuidado y propósito, en vez de sencillamente amontonarlos.</p>
+<p>Hay una razón para su particular escogencia de palabra, también. Juan no suele llamar a estas obras poderosas «milagros» ni «prodigios», como podríamos esperar; las llama <em>señales</em> — porque para Juan una señal es siempre mucho más que una mera maravilla que contemplar boquiabierto. Una señal es un indicador, un letrero; es algo que revela quién es Jesús verdaderamente y llama a la gente que la presencia a poner su fe en Él. Juan nos dice esto sin rodeos: estas cosas «son escritas para que creáis que Jesús es el Cristo, el Hijo de Dios». Así que por todos estos diez capítulos, Jesús descubre y exhibe su verdadera identidad de dos maneras especialmente — por medio de las señales que realiza ante la gente, y por medio de una notable serie de declaraciones en las cuales dice de sí mismo: «Yo soy». Y mientras hace ambas cosas, la gente alrededor de Él firmemente comienza a dividirse en dos bandos: unos vienen a creer en Él, y otros se apartan y se endurecen contra Él.</p>
+<h2><span class="dg-n">2.</span> Las señales que revelan su gloria</h2>
+<p>Cada una de las señales que Juan selecciona abre una distinta ventana a algún aspecto de la gloria y el poder de Cristo. La primerísima, obrada calladamente en una boda de aldea en Caná de Galilea, fue el convertir el agua en vino; «este principio de señales hizo Jesús en Caná de Galilea», escribe Juan, «y manifestó su gloria; y sus discípulos creyeron en él». Justo desde el comienzo, el patrón queda establecido: la señal revela su gloria, y la fe es la respuesta.</p>
+<p>Siguió toda una serie de otras, cada una mayor a su propia manera. Estuvo la sanidad del hijo moribundo de un noble a la distancia; la sanidad de un hombre que había estado paralítico por treinta y ocho largos años en el estanque de Betesda; la alimentación de cinco mil personas hambrientas de solo unos pocos panes y peces; el andar sobre el mar tempestuoso; el dar vista a un hombre que había nacido completamente ciego; y, la mayor de todas ellas, el resucitar a Lázaro de vuelta a la vida después de que había yacido cuatro días en el sepulcro — ante lo cual Jesús declaró aquellas inolvidables palabras: «Yo soy la resurrección y la vida». Tomadas todas juntas, las señales lo muestran llanamente ser Señor sobre la naturaleza, sobre la enfermedad, sobre el hambre, sobre la oscuridad, y finalmente aun sobre la muerte misma — no hay reino donde Él no sea amo. Pero es vital ver que estas señales nunca tuvieron por objeto ser fines en sí mismas, meras exhibiciones de poder. Cada sola señal señala más allá de la maravilla misma a la Persona que la obró, diciendo en efecto a cada espectador: mire de cerca, y vea quién es este verdaderamente.</p>
+<h2><span class="dg-n">3.</span> Las declaraciones «YO SOY»</h2>
+<p>Junto a las señales, y halladas solo aquí en el Evangelio de Juan y en ninguna otra parte, hay una serie de profundas y deliberadas declaraciones en las cuales Jesús nos dice llana y directamente quién es. «Yo soy el pan de vida», dice — aquel que solo satisface el hambre más honda del alma humana, la cual ningún alimento terrenal puede tocar. «Yo soy la luz del mundo». «Yo soy la puerta» — el único camino de entrada a la seguridad, el refugio, y la vida. «Yo soy el buen pastor» — el pastor que de hecho pone su propia vida por las ovejas. «Yo soy la resurrección y la vida». Y más tarde, en el aposento alto, añadirá dos más: «Yo soy el camino, la verdad y la vida», y «Yo soy la vid verdadera».</p>
+<p>Y luego está la más asombrosa de todas ellas. Cuando sus oyentes lo desafiaron acerca de cómo podía posiblemente reclamar relación alguna con Abraham, que había vivido y muerto tanto tiempo antes, Jesús respondió con palabras que los dejaron helados: «Antes que Abraham fuese, YO SOY». No meramente reclamó ser más viejo que Abraham; deliberadamente tomó sobre sus propios labios humanos el sagrado e impronunciable nombre por el cual Dios mismo había revelado su propio ser a Moisés en la zarza ardiente — «YO SOY». Sus oyentes entendieron su significado exactamente, y al instante: no era nada menos que una directa afirmación de ser Dios, y así inmediatamente tomaron piedras para arrojarle por blasfemia. Por medio de estas declaraciones «Yo soy», entonces, tomadas juntas, Jesús se revela ser nada menos que Dios en la carne, y al mismísimo tiempo el Salvador todo-suficiente que es Él mismo, en su propia persona, todo lo que el alma humana verdadera y hondamente necesita.</p>
+<h2><span class="dg-n">4.</span> Nacer de nuevo, y agua viva</h2>
+<p>Entretejidos entre las multitudes y las controversias de estos capítulos hay dos inolvidables encuentros personales en los cuales Juan se detiene, y ambos están llenos de evangelio. El primero es con Nicodemo, un respetado y erudito maestro de Israel que vino a Jesús cautelosamente de noche. A este hombre religioso y moral, Jesús dijo las escudriñadoras palabras: «el que no naciere de nuevo, no puede ver el reino de Dios» — enseñando llanamente que nadie en absoluto entra al reino de Dios por buena posición, esfuerzo religioso, o logro moral, sino solo por medio de un completamente nuevo nacimiento, obrado en el corazón por el Espíritu de Dios. Y fue en esa mismísima conversación nocturna que Jesús habló lo que bien puede ser la sola frase más amada en toda la Biblia: «Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna».</p>
+<p>El segundo encuentro difícilmente podría ser más diferente, y ese es el punto. A una mujer samaritana sacando agua sola en un pozo en el calor del día — una mujer que era una forastera en toda cuenta posible, equivocada en su nacionalidad, su religión, y su enredada vida personal — Jesús ofreció gratuitamente «agua viva», la cual dijo que llegaría a ser en la que la bebiera «una fuente de agua que salte para vida eterna». Note el alcance de ello: sea de respetable noche o de escandaloso mediodía, sea al erudito maestro o a la marginada social, Jesús encuentra a personas reales personal e individualmente, gentilmente expone su verdadera y más honda necesidad bajo la superficie, y luego gratuitamente les ofrece vida nueva y eterna. Nadie está más allá del alcance de su oferta.</p>
+<h2><span class="dg-n">5.</span> De tal manera amó Dios al mundo — la oferta gratuita</h2>
+<p>En el mismísimo corazón de todos estos capítulos yace la libre, amplia, y abierta oferta de salvación a toda clase de persona sin excepción. Mire cuidadosamente la pura amplitud de las palabras que Juan registra. «De tal manera amó Dios <em>al mundo</em>», no meramente a unos pocos favorecidos; y es «<em>todo aquel</em> que en él cree» quien tiene vida eterna, la puerta abierta de par en par a todos. «Al que a mí viene», promete Jesús con bella franqueza, «no le echo fuera» — nadie que de hecho viene será jamás rechazado en la puerta. «Si alguno tiene sed», clama, «venga a mí y beba». Una y otra vez, en estos capítulos, Jesús se extiende libre y genuinamente a todos los que sencillamente vengan a Él y crean — ninguno está demasiado lejos, demasiado pecador, o demasiado indigno, y ninguno que viene es jamás rechazado.</p>
+<p>Y a todos aquellos que de hecho vienen y creen, Jesús da una seguridad tan completa que ningún poder en el cielo ni en la tierra puede quebrarla. Oiga su propia asombrosa promesa: «yo les doy vida eterna, y no perecerán jamás, ni nadie las arrebatará de mi mano». Sopese cada palabra de ella. La vida que Él da no es una cosa frágil, incierta, y fácilmente perdida que debamos ansiosamente guardar por nosotros mismos; es vida <em>eterna</em>, y está sostenida firme y segura en su propia mano todopoderosa e inquebrantable. Así que aquí, lado a lado, Juan pone ante nosotros tanto el más ancho de los recibimientos como el más seguro de los consuelos: venga a Él, y nunca una sola vez será echado fuera; crea en Él, y nunca, jamás será perdido. Ese es el evangelio que Juan nos apremia.</p>
+<h2><span class="dg-n">6.</span> Creencia e incredulidad, la gran división</h2>
+<p>Sin embargo, sobriamente, no todos los que vieron las señales con sus propios ojos y oyeron las declaraciones «Yo soy» con sus propios oídos de hecho vinieron a creer. Por todos estos capítulos Juan nos muestra a Jesús firmemente dividiendo en dos a la gente que lo encontró. Muchos genuinamente sí creyeron — sus primeros discípulos, los samaritanos de Sicar que salieron a Él, el hombre nacido ciego que terminó postrándose y adorándolo, y Marta, que lo confesó abiertamente como «el Cristo, el Hijo de Dios». La fe brotaba dondequiera que iba.</p>
+<p>Pero muchos otros, y especialmente los líderes religiosos de la nación, solo se endurecieron más contra Él, su hostilidad creciendo capítulo a capítulo hasta que al fin comenzaron activamente a tramar darle muerte. Juan ve en este endurecimiento la honda y trágica respuesta de un mundo caído que «amó más las tinieblas que la luz, porque sus obras eran malas». Es cosa notable y sobria: las mismísimas señales que gentilmente atrajeron a algunas personas a una fe viva solo empujaron a otras más hondo a una asentada incredulidad. Y esa misma línea divisoria corre directamente hacia abajo por todo el Evangelio, y directamente hasta cada uno de nosotros que lo lee: la única pregunta decisiva que cada solo lector debe finalmente responder por sí mismo es sencillamente qué hará él o ella con Jesús. Porque esto es precisamente lo que estos diez capítulos ponen ante nosotros — la resplandeciente gloria de Cristo, revelada en sus señales y hablada llanamente en su propio «Yo soy»: Él es el pan, la luz, la puerta, el pastor, la resurrección; es Dios mismo en la carne, el Salvador todo-suficiente, ofreciendo gratuitamente vida eterna a todo el que crea, y luego sosteniéndolos para siempre. Y todo ello fue escrito con un propósito: traernos a la fe. Así que deje que estos capítulos hagan su obra intencionada en usted: contemple su gloria, oiga su «Yo soy», y crea — y reciba para sí mismo la vida eterna que Él tan gratuitamente da.</p>
+<h2><span class="dg-n">7.</span> Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<p><b>Para reflexionar.</b> ¿Cuál de las declaraciones «Yo soy» de Jesús habla más a su necesidad ahora mismo — el pan, la luz, el pastor, la resurrección? ¿Ha venido a Él personalmente, como Nicodemo y la mujer del pozo lo hicieron, y recibido la vida eterna que ofrece? ¿Y le estabiliza su promesa — de que nadie puede arrebatarle de su mano — contra todo temor?</p>
+</div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Juan 2–12, anclado en los clásicos comentarios y exposiciones de dominio público sobre Juan (J. C. Ryle, Frédéric Godet, Arthur W. Pink, Alexander Maclaren, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>Expository Thoughts</em> de J. C. Ryle y en los comentarios de Godet, Pink, y Maclaren sobre el Evangelio de Juan, todos de dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="2" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 3 -->
+<article class="entry" data-id="3" data-title-en="The Upper Room: Love, the Vine, and the Spirit &mdash; CTS digest" data-title-es="El Aposento Alto: Amor, la Vid, y el Espíritu &mdash; resumen STC">
+<div class="locus"><span class="lang-en">John 13&ndash;16 &middot; a CTS bilingual digest, ~1,950 words per language</span><span class="lang-es">Juan 13&ndash;16 &middot; un resumen biling&uuml;e del STC, ~1,950 palabras por idioma</span></div>
+<div class="title"><span class="num">3.</span><span class="lang-en">The Upper Room: Love, the Vine, and the Spirit</span><span class="lang-es">El Aposento Alto: Amor, la Vid, y el Espíritu</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The last night before the cross: Jesus washing feet and the new commandment to love, comfort for troubled hearts (“I am the way, the truth, and the life”; His peace), the true vine and abiding (fruit flows from union, not effort), and the promise of the Holy Spirit, the Helper who comes forever — closing, “I have overcome the world.”</p>
+<p class="caption lang-es block">La última noche antes de la cruz: Jesús lavando pies y el nuevo mandamiento de amar, consuelo para corazones turbados (“Yo soy el camino, y la verdad, y la vida”; su paz), la vid verdadera y el permanecer (el fruto fluye de la unión, no del esfuerzo), y la promesa del Espíritu Santo, el Consolador que viene para siempre — cerrando: “yo he vencido al mundo.”</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Upper Room: Love, the Vine, and the Spirit</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — John 13–16: Jesus's parting words to His own on the night before the cross</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain commentaries and expositions of John (Murray, Ryle, Godet, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: John</li>
+<li>The Farewell Discourse</li>
+<li>Abide in Me</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> After the public ministry, John slows almost to a stop: chapters 13–17 all unfold on one night, the last before the cross. This reading walks through John 13–16 — Jesus washing His disciples' feet, the new commandment to love, the true vine, and the promise of the Holy Spirit.
+    </div>
+<h2><span class="dg-n">1.</span> The Night Before the Cross</h2>
+<p>Having carried us swiftly through several years of busy public ministry, John now slows his account almost to a complete standstill. Chapters 13 through 17, a great block of the Gospel, all take place on a single evening — the very last that Jesus would spend with His disciples before He went out to the cross — gathered together with them in a borrowed upper room. It is worth pausing to notice the sheer weight John gives this: nearly a full quarter of his entire Gospel is devoted to these few final, unhurried hours.</p>
+<p>And that lingering is deeply fitting, for here, at last alone with His own and away from the pressing crowds, Jesus sets aside the public teaching and the endless controversies with His opponents and simply opens His heart, tenderly and without reserve, to the men He loves. He comforts them in their rising fear and confusion, and He gives them His deepest, richest, and most tender teaching of all — teaching about love, about abiding in Him, and about the Holy Spirit whom He was about to send to them. If the Gospel has a warm, intimate, beating heart, it is found right here, in these quiet chapters in the upper room.</p>
+<h2><span class="dg-n">2.</span> The Foot-Washing and the New Commandment</h2>
+<p>The evening opens with a single action that must have utterly stunned the disciples into silence. Jesus — knowing full well, John carefully notes, that He had come from God and was even now going back to God, that is, at the very height of His divine dignity — rose from the supper table, deliberately laid aside His outer garments, wrapped a servant's towel around His waist, and began, one by one, to wash the dirty feet of His disciples, taking up with His own hands the lowly task of the humblest household slave. Then He told them plainly why He had done it: "If I then, your Lord and Teacher, have washed your feet, you also ought to wash one another's feet." He had given them, unforgettably, a living picture of humble, self-forgetting, serving love; for, as John says, "having loved His own who were in the world, He loved them to the end." The Lord of glory down on His knees with a basin and a towel — this, and nothing prouder, is the pattern of love that is meant to mark out His people forever.</p>
+<p>And a little later that same evening, after Judas had quietly slipped out of the room into the darkness to betray Him, Jesus took that same love and pressed it upon them as a direct command: "A new commandment I give to you, that you love one another; as I have loved you, that you also love one another. By this all will know that you are My disciples, if you have love for one another." This is worth taking to heart. The true, unmistakable badge of a genuine disciple of Jesus is not, in the end, merely holding correct beliefs, nor being busy with much religious activity — real and good as those things are — but <em>love</em>: an active, practical love for one another, cut precisely to the pattern and measure of Christ's own love for us. By that, He says, the watching world will know whose we are.</p>
+<h2><span class="dg-n">3.</span> “I Am the Way”: Comfort for Troubled Hearts</h2>
+<p>The disciples were understandably frightened, bewildered, and grieved to hear their Master speak of leaving them, and so a great deal of what immediately follows is pure comfort, poured out for troubled hearts. "Let not your heart be troubled," He gently begins; "you believe in God, believe also in Me. In My Father's house are many mansions... I go to prepare a place for you." He is not being taken from them by accident; He is going ahead, on purpose, to make ready a home for them. When Thomas honestly protests that they do not even know the way to where He is going, Jesus answers with words that have since guided countless millions of souls safely home: "I am the way, the truth, and the life. No one comes to the Father except through Me." Notice: He does not merely point out the way, like a signpost by the road; He declares that He Himself is the road, the living way to God, and the only one there is.</p>
+<p>And to Philip, who aches simply to be shown the Father, Jesus says something breathtaking: "He who has seen Me has seen the Father" — to have looked upon Jesus is to have seen God Himself. He goes on to make a wonderful promise to all who love Him: the one who loves Him and keeps His word will actually be indwelt by God — "We will come to him and make Our home with him." And then He leaves them a parting gift altogether unlike anything the world is able to give or to take away: "Peace I leave with you, My peace I give to you; not as the world gives do I give to you. Let not your heart be troubled, neither let it be afraid." His own deep peace, left as a legacy to frightened friends — and to us.</p>
+<h2><span class="dg-n">4.</span> The True Vine: Abide in Me</h2>
+<p>Then Jesus gives them one of the loveliest, gentlest, and most searching pictures found anywhere in all of Scripture. "I am the true vine, and My Father is the vinedresser... Abide in Me, and I in you. As the branch cannot bear fruit of itself, unless it abides in the vine, neither can you, unless you abide in Me. I am the vine, you are the branches." And He drives the whole lesson home with unforgettable, humbling plainness: "Without Me you can do nothing." Here is disclosed the great open secret of the entire Christian life: it is not, first and foremost, a matter of striving harder and gritting our teeth, but of <em>abiding</em> — of staying vitally, continually joined to Christ and quietly drawing all our life and strength from Him, exactly as a branch draws its sap up from the vine without effort or strain.</p>
+<p>Andrew Murray, in his tender little devotional book <em>The True Vine</em>, lingers lovingly over this very truth, turning it this way and that: our real fruitfulness, he shows, never once springs from our own effort, resolve, or willpower, but simply and only from remaining in Christ and letting His own life flow freely through us into fruit. The branch does not strain to produce grapes; it simply stays joined to the vine, and the grapes come. And Jesus tells us plainly what the chief fruit is that He is looking for in the branches: it is love. "This is My commandment, that you love one another as I have loved you. Greater love has no one than this, than to lay down one's life for his friends." So abide in Him, He says — draw your life from Him — and above all, abide in His love, and let that love bear its fruit through you.</p>
+<h2><span class="dg-n">5.</span> The Promise of the Spirit</h2>
+<p>Threaded all the way through these chapters, and returned to again and again, is a promise that the disciples would come in time to treasure above almost any other: the promise of the Holy Spirit, whom Jesus tenderly calls "the Helper" — the Comforter, the Advocate, the one called alongside us to aid and support. "I will pray the Father," He promises, "and He will give you another Helper, that He may abide with you forever — the Spirit of truth." This same Spirit, He says, would teach them all things and bring everything Christ had said back to their remembrance; He would bear faithful witness to Christ; He would convict the watching world concerning sin; and He would guide the disciples into all truth, always and only glorifying Christ in everything He did.</p>
+<p>Astonishingly, Jesus even tells them that it is actually to their real advantage that He go away, for only after His going would the Spirit come to them in this new way. So although Jesus was indeed about to leave them in the body, they would emphatically not be left behind as helpless orphans; the Spirit would come to dwell with them and, more wonderful still, in them, and to remain with them forever. Jesus is also honest and realistic with them, as true love always is: He tells them plainly that genuinely hard days lay just ahead — a sorrow was coming that would feel as sharp as a woman's labor pains — but He promises that it would, in the end, turn into a deep joy that no one and nothing could ever take away from them. And He gathers the whole of it up into one steadying word meant for every troubled believer in every age since: "In the world you will have tribulation; but be of good cheer, I have overcome the world."</p>
+<h2><span class="dg-n">6.</span> Take Heart</h2>
+<p>These four chapters are, in the truest sense, Jesus's own parting gift to His own — and, reaching right across the long centuries, to us who read them now. In them He shows us a love so great that it stoops all the way down to wash dirty feet, and then commands us to go and love one another in exactly the same self-forgetting way that He has first loved us. He tenderly steadies our anxious, troubled hearts: He is Himself the way to the Father, He has personally gone ahead to prepare a place for us there, and He has left us His own peace to keep. He calls us, gently but earnestly, to abide in Him just as a living branch abides in the vine — for cut off from Him we can do precisely nothing, but held fast in Him we bear much lasting fruit. And He promises us, as He promised them, the Holy Spirit, the Helper, to be with us and in us forever, never to leave.</p>
+<p>So whatever troubles and sorrows may yet come to us in this world — and Jesus plainly and lovingly warned us that they surely would come — we can genuinely take heart, and lift up our heads. We are deeply and eternally loved by Him; we are never once left alone to face it; we have been given His own peace and His own indwelling Spirit; and He has already, once and for all, overcome the very world that troubles us. Abide in Him, then, day by day; love one another just as He has loved you; and, whatever comes, be of good cheer.</p>
+<h2><span class="dg-n">7.</span> Taking It to Heart</h2>
+<div class="dg-reflect">
+<p><b>For reflection.</b> Is the love Jesus commanded — a serving, foot-washing love for fellow believers — actually the mark others would see in you? Are you <em>abiding</em> in Christ day by day, drawing your life from Him, or trying to bear fruit by your own effort? And when your heart is troubled, do you rest in what He gives here: His peace, His Spirit, and His word that He has overcome the world?</p>
+</div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of John 13–16, anchored in the classic public-domain commentaries and expositions of John (Andrew Murray's <em>The True Vine</em>, J. C. Ryle, Frédéric Godet, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on Andrew Murray's <em>The True Vine</em>, a devotional meditation on John 15, together with the expositions of Ryle, Godet, and others on the Gospel of John.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>El Aposento Alto: El Amor, la Vid, y el Espíritu</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Juan 13–16: las palabras de despedida de Jesús a los suyos la noche antes de la cruz</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en los clásicos comentarios y exposiciones de dominio público sobre Juan (Murray, Ryle, Godet, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del libro: Juan</li>
+<li>El discurso de despedida</li>
+<li>Permaneced en mí</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Después del ministerio público, Juan aminora casi hasta detenerse: los capítulos 13–17 todos se desarrollan en una noche, la última antes de la cruz. Esta lectura recorre Juan 13–16 — Jesús lavando los pies de sus discípulos, el nuevo mandamiento de amar, la vid verdadera, y la promesa del Espíritu Santo.
+    </div>
+<h2><span class="dg-n">1.</span> La noche antes de la cruz</h2>
+<p>Habiéndonos llevado velozmente por varios años de ocupado ministerio público, Juan ahora aminora su relato casi hasta una completa detención. Los capítulos 13 al 17, un gran bloque del Evangelio, todos tienen lugar en una sola tarde — la mismísima última que Jesús pasaría con sus discípulos antes de salir a la cruz — reunido juntamente con ellos en un aposento alto prestado. Vale la pena detenerse a notar el puro peso que Juan da a esto: casi una cuarta parte entera de todo su Evangelio está dedicada a estas pocas finales y sin prisa horas.</p>
+<p>Y ese demorarse es hondamente apropiado, porque aquí, al fin solo con los suyos y lejos de las multitudes que presionan, Jesús aparta la enseñanza pública y las interminables controversias con sus oponentes y sencillamente abre su corazón, tierna y sin reserva, a los hombres que ama. Los consuela en su creciente temor y confusión, y les da su más honda, más rica, y más tierna enseñanza de todas — enseñanza acerca del amor, acerca de permanecer en Él, y acerca del Espíritu Santo a quien estaba a punto de enviarles. Si el Evangelio tiene un cálido, íntimo, y palpitante corazón, se halla aquí mismo, en estos callados capítulos en el aposento alto.</p>
+<h2><span class="dg-n">2.</span> El lavamiento de los pies y el nuevo mandamiento</h2>
+<p>La tarde abre con una sola acción que debe haber dejado a los discípulos completamente atónitos en silencio. Jesús — sabiendo plenamente, nota cuidadosamente Juan, que había venido de Dios y aun ahora volvía a Dios, es decir, en la mismísima cumbre de su dignidad divina — se levantó de la mesa de la cena, deliberadamente apartó sus vestiduras exteriores, ciñó a su cintura la toalla de un siervo, y comenzó, uno por uno, a lavar los pies sucios de sus discípulos, tomando con sus propias manos la humilde tarea del más bajo esclavo de la casa. Luego les dijo llanamente por qué lo había hecho: «si yo, el Señor y el Maestro, he lavado vuestros pies, vosotros también debéis lavaros los pies los unos a los otros». Les había dado, inolvidablemente, un cuadro viviente de humilde amor que sirve y se olvida de sí mismo; porque, como Juan dice, «como había amado a los suyos que estaban en el mundo, los amó hasta el fin». El Señor de gloria de rodillas con una vasija y una toalla — este, y nada más orgulloso, es el patrón de amor que tiene por objeto marcar a su pueblo para siempre.</p>
+<p>Y un poco más tarde esa misma tarde, después de que Judas se había escurrido calladamente del aposento a la oscuridad para traicionarlo, Jesús tomó ese mismo amor y lo apremió sobre ellos como un directo mandamiento: «Un mandamiento nuevo os doy: Que os améis unos a otros; como yo os he amado, que también os améis unos a otros. En esto conocerán todos que sois mis discípulos, si tuviereis amor los unos con los otros». Esto es digno de tomarse al corazón. La verdadera e inconfundible insignia de un genuino discípulo de Jesús no es, al fin, meramente sostener creencias correctas, ni estar ocupado con mucha actividad religiosa — reales y buenas como esas cosas son — sino el <em>amor</em>: un activo y práctico amor unos por otros, cortado precisamente al patrón y la medida del propio amor de Cristo por nosotros. Por eso, dice, el mundo que observa sabrá de quién somos.</p>
+<h2><span class="dg-n">3.</span> «Yo soy el camino»: consuelo para corazones turbados</h2>
+<p>Los discípulos estaban comprensiblemente asustados, desconcertados, y afligidos de oír a su Maestro hablar de dejarlos, y así muchísimo de lo que inmediatamente sigue es puro consuelo, derramado para corazones turbados. «No se turbe vuestro corazón», comienza gentilmente; «creéis en Dios, creed también en mí. En la casa de mi Padre muchas moradas hay... voy, pues, a preparar lugar para vosotros». No es tomado de ellos por accidente; va adelante, a propósito, a preparar un hogar para ellos. Cuando Tomás honestamente protesta que ni siquiera saben el camino a donde Él va, Jesús responde con palabras que desde entonces han guiado a incontables millones de almas seguramente a casa: «Yo soy el camino, la verdad y la vida; nadie viene al Padre, sino por mí». Note: no meramente señala el camino, como un letrero junto al camino; declara que Él mismo es el camino, la viviente vía a Dios, y la única que hay.</p>
+<p>Y a Felipe, que anhela sencillamente que se le muestre al Padre, Jesús dice algo asombroso: «El que me ha visto, ha visto al Padre» — haber mirado a Jesús es haber visto a Dios mismo. Continúa haciendo una maravillosa promesa a todos los que le aman: el que le ama y guarda su palabra será de hecho habitado por Dios — «vendremos a él, y haremos con él morada». Y luego les deja una dádiva de despedida enteramente diferente a cualquier cosa que el mundo pueda dar o quitar: «La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo». Su propia honda paz, dejada como legado a amigos asustados — y a nosotros.</p>
+<h2><span class="dg-n">4.</span> La vid verdadera: permaneced en mí</h2>
+<p>Luego Jesús les da uno de los más hermosos, más gentiles, y más escudriñadores cuadros hallados en cualquier parte de toda la Escritura. «Yo soy la vid verdadera, y mi Padre es el labrador... Permaneced en mí, y yo en vosotros. Como el pámpano no puede llevar fruto de sí mismo, si no permaneciere en la vid, así tampoco vosotros, si no permaneciereis en mí. Yo soy la vid, vosotros los pámpanos». Y lleva toda la lección a casa con inolvidable y humillante franqueza: «sin mí nada podéis hacer». Aquí se descubre el gran secreto abierto de toda la vida cristiana: no es, primero y ante todo, cosa de esforzarse más y apretar los dientes, sino de <em>permanecer</em> — de quedar vital y continuamente unido a Cristo y calladamente sacar toda nuestra vida y fuerza de Él, exactamente como un pámpano saca su savia de la vid sin esfuerzo ni tensión.</p>
+<p>Andrew Murray, en su tierno pequeño libro devocional <em>The True Vine</em>, se detiene amorosamente sobre esta mismísima verdad, volviéndola de un lado a otro: nuestra real fructificación, muestra, nunca una sola vez brota de nuestro propio esfuerzo, resolución, o fuerza de voluntad, sino sencilla y únicamente de permanecer en Cristo y dejar que su propia vida fluya libremente por nosotros hacia el fruto. El pámpano no se esfuerza por producir uvas; sencillamente permanece unido a la vid, y las uvas vienen. Y Jesús nos dice llanamente cuál es el principal fruto que busca en los pámpanos: es el amor. «Este es mi mandamiento: Que os améis unos a otros, como yo os he amado. Nadie tiene mayor amor que este, que uno ponga su vida por sus amigos». Así que permanezca en Él, dice — saque su vida de Él — y sobre todo, permanezca en su amor, y deje que ese amor lleve su fruto por medio de usted.</p>
+<h2><span class="dg-n">5.</span> La promesa del Espíritu</h2>
+<p>Enhebrada todo el camino por estos capítulos, y vuelta a ella una y otra vez, hay una promesa que los discípulos vendrían con el tiempo a atesorar por encima de casi cualquier otra: la promesa del Espíritu Santo, a quien Jesús tiernamente llama «el Consolador» — el Confortador, el Abogado, aquel llamado a nuestro lado para ayudar y sostener. «yo rogaré al Padre», promete, «y os dará otro Consolador, para que esté con vosotros para siempre; el Espíritu de verdad». Este mismo Espíritu, dice, les enseñaría todas las cosas y traería de vuelta a su memoria todo lo que Cristo había dicho; daría fiel testimonio de Cristo; convencería al mundo que observa acerca del pecado; y guiaría a los discípulos a toda verdad, siempre y solo glorificando a Cristo en todo lo que hiciera.</p>
+<p>Asombrosamente, Jesús aun les dice que es de hecho para su real ventaja que Él se vaya, porque solo después de su ida vendría el Espíritu a ellos de esta nueva manera. Así que aunque Jesús en verdad estaba a punto de dejarlos en el cuerpo, enfáticamente no serían dejados atrás como desvalidos huérfanos; el Espíritu vendría a morar con ellos y, más maravilloso aún, en ellos, y a permanecer con ellos para siempre. Jesús es también honesto y realista con ellos, como el verdadero amor siempre lo es: les dice llanamente que días genuinamente difíciles yacían justo por delante — una tristeza venía que se sentiría tan aguda como los dolores de parto de una mujer — pero promete que ello, al fin, se convertiría en un hondo gozo que nadie ni nada jamás podría quitarles. Y reúne el todo de ello en una palabra estabilizadora destinada a todo creyente turbado en toda edad desde entonces: «En el mundo tendréis aflicción; mas confiad, yo he vencido al mundo».</p>
+<h2><span class="dg-n">6.</span> Cobrad ánimo</h2>
+<p>Estos cuatro capítulos son, en el más verdadero sentido, la propia dádiva de despedida de Jesús a los suyos — y, alcanzando justo a través de los largos siglos, a nosotros que los leemos ahora. En ellos nos muestra un amor tan grande que se inclina todo el camino hacia abajo para lavar pies sucios, y luego nos manda ir y amarnos unos a otros exactamente de la misma manera olvidada de sí que Él primero nos ha amado. Tiernamente estabiliza nuestros ansiosos y turbados corazones: Él mismo es el camino al Padre, ha ido personalmente adelante a preparar allí un lugar para nosotros, y nos ha dejado su propia paz para guardar. Nos llama, gentil pero fervientemente, a permanecer en Él justo como un pámpano viviente permanece en la vid — porque cortados de Él nada podemos hacer, pero sostenidos firmes en Él llevamos mucho fruto duradero. Y nos promete, como se los prometió a ellos, el Espíritu Santo, el Consolador, para estar con nosotros y en nosotros para siempre, para nunca dejarnos.</p>
+<p>Así que sean cuales sean las aflicciones y tristezas que aún puedan venirnos en este mundo — y Jesús llana y amorosamente nos advirtió que seguramente vendrían — podemos genuinamente cobrar ánimo, y levantar nuestras cabezas. Somos honda y eternamente amados por Él; nunca una sola vez somos dejados solos para enfrentarlo; se nos ha dado su propia paz y su propio Espíritu que mora en nosotros; y Él ya ha, de una vez por todas, vencido al mismísimo mundo que nos turba. Permanezca en Él, entonces, día a día; ámense unos a otros justo como Él le ha amado; y, venga lo que venga, cobre ánimo.</p>
+<h2><span class="dg-n">7.</span> Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<p><b>Para reflexionar.</b> ¿Es el amor que Jesús mandó — un amor que sirve y lava pies para con los hermanos — de hecho la marca que otros verían en usted? ¿Está <em>permaneciendo</em> en Cristo día a día, sacando su vida de Él, o tratando de llevar fruto por su propio esfuerzo? ¿Y cuando su corazón está turbado, descansa en lo que Él da aquí: su paz, su Espíritu, y su palabra de que ha vencido al mundo?</p>
+</div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Juan 13–16, anclado en los clásicos comentarios y exposiciones de dominio público sobre Juan (<em>The True Vine</em> de Andrew Murray, J. C. Ryle, Frédéric Godet, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>The True Vine</em> de Andrew Murray, una meditación devocional sobre Juan 15, junto con las exposiciones de Ryle, Godet, y otros sobre el Evangelio de Juan.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="3" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 4 -->
+<article class="entry" data-id="4" data-title-en="That They May Be One: The High-Priestly Prayer &mdash; CTS digest" data-title-es="Para Que Sean Uno: La Oración Sumo-Sacerdotal &mdash; resumen STC">
+<div class="locus"><span class="lang-en">John 17 &middot; a CTS bilingual digest, ~1,950 words per language</span><span class="lang-es">Juan 17 &middot; un resumen biling&uuml;e del STC, ~1,950 palabras por idioma</span></div>
+<div class="title"><span class="num">4.</span><span class="lang-en">That They May Be One: The High-Priestly Prayer</span><span class="lang-es">Para Que Sean Uno: La Oración Sumo-Sacerdotal</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">Jesus’s great prayer, anchored in Rainsford: praying for Himself (glory, the finished work, and eternal life as knowing God), for His disciples (kept, sanctified, sent), and for all who would believe — that they may be one as a witness to the world, and finally be with Him to behold His glory, filled with the Father’s love.</p>
+<p class="caption lang-es block">La gran oración de Jesús, anclada en Rainsford: orando por sí mismo (gloria, la obra consumada, y la vida eterna como conocer a Dios), por sus discípulos (guardados, santificados, enviados), y por todos los que creerían — para que sean uno como testimonio al mundo, y al fin estén con Él para contemplar su gloria, llenos del amor del Padre.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>That They May Be One: The High-Priestly Prayer</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — John 17: Jesus prays for Himself, for His disciples, and for all who would believe</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of John (Rainsford, Ryle, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: John</li>
+<li>The High-Priestly Prayer</li>
+<li>Christ's Intercession</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> John 13–16 was Jesus's teaching to His disciples; John 17 is His prayer to the Father, overheard by them and written down for us. This reading walks through the "High-Priestly Prayer" — the Son pouring out His heart for His own, in three movements: for Himself, for His disciples, and for all who would ever believe.
+    </div>
+<h2><span class="dg-n">1.</span> The High-Priestly Prayer</h2>
+<p>In the previous three chapters Jesus had been speaking directly to His disciples, teaching and comforting them; now, without pause, He turns away from them and speaks instead to His Father in heaven — and they, and we along with them, are graciously allowed to stand near and listen in. John 17 is by far the longest of all our Lord's recorded prayers, and it was offered at the very close of that upper-room evening, standing on the threshold of Gethsemane and the cross that lay only hours away.</p>
+<p>For many centuries the church has called this chapter the "High-Priestly Prayer," and the name is a fitting one, because in it we are permitted to overhear our great High Priest interceding aloud for His own people — the very same intercession, remarkably, that He carries on for us still, for the Scripture tells us He "ever lives to make intercession" for all those who come to God through Him. Marcus Rainsford gave his rich, classic devotional study of this single chapter the perfect title: <em>Our Lord Prays for His Own</em>. That is exactly what we are overhearing here — the Son pouring out His whole heart to the Father on behalf of those He loves. And the prayer itself moves outward through three steadily widening circles: first Jesus prays for Himself, then He prays for His immediate disciples, and finally He prays for all who would ever, down all the ages, come to believe in Him.</p>
+<h2><span class="dg-n">2.</span> Jesus Prays for Himself: Glory and the Finished Work</h2>
+<p>Lifting up His eyes to heaven, Jesus prays first for Himself: "Father, the hour has come. Glorify Your Son, that Your Son also may glorify You." The long-awaited and often-mentioned "hour" of the cross has at last fully arrived, and He asks that through it — through His own suffering and death — both the Father and the Son may together be glorified. It is a prayer offered right in the shadow of the cross, and yet it speaks of glory. He goes on to speak of having now completed the whole work that the Father had given Him to do, and He asks to be restored to the glory that He had shared with the Father "before the world was."</p>
+<p>Pause over that last phrase, for it is a quiet but genuinely breathtaking glimpse straight into His eternal deity — here is a Son who consciously existed in shared glory with the Father before creation itself had even begun, and who is now asking to return to it. And then, set like a single precious jewel in the very middle of this opening section of the prayer, is Jesus's own definition of eternal life, one of the most precious and clarifying sentences He ever spoke on earth: "This is eternal life, that they may know You, the only true God, and Jesus Christ whom You have sent." It is worth stopping everything simply to take that in.</p>
+<h2><span class="dg-n">3.</span> Eternal Life Is to Know God</h2>
+<p>It is well worth pausing here to let that great definition slowly sink all the way in, for it corrects much shallow thinking. Eternal life, Jesus says plainly, is <em>to know God</em>. It is not, in the first place and most importantly, merely unending existence stretching on forever, nor is it even chiefly a beautiful place that we one day go to; at its very heart, eternal life is a relationship. It is to know God — and not merely to know many true things and correct doctrines about Him, as one might know a subject, but actually to know <em>Him</em>, personally, as one knows and loves another living person, in real and mutual communion.</p>
+<p>This, in fact, is the very thing that the whole of John's Gospel has been steadily driving toward from its first verse, and it is the very thing that is now freely offered to every single believer. To possess eternal life, then, is to be brought into a genuine, living, personal knowledge of the one true God, through Jesus Christ His Son — nothing less than that. And here is the wonder of it: this knowing of God is not something merely reserved and postponed for the life to come, to begin only after death; it actually begins the very moment we truly come to Christ in faith, here and now, and having begun, it simply deepens and continues on forever. The believer has already, today, begun to possess eternal life.</p>
+<h2><span class="dg-n">4.</span> Jesus Prays for His Disciples: Kept and Sanctified</h2>
+<p>The prayer now widens out from Himself to take in the little band of disciples whom the Father had given into His care. Jesus tells the Father that He has faithfully guarded and kept them, and has made the Father's name known to them; and now, as He is on the very point of leaving the world, He tenderly and deliberately commits them into the Father's own safekeeping: "Holy Father, keep through Your name those whom You have given Me, that they may be one as We are." It is worth noticing carefully both what He does ask and what He pointedly does not. He does <em>not</em> ask that they be taken safely out of the world altogether — they are, rather, to remain in it, as His witnesses and light — but He asks that they be kept safe within it "from the evil one."</p>
+<p>And He asks one thing more for them: that they be made holy. "Sanctify them by Your truth. Your word is truth." They are to be progressively set apart from sin and shaped into real holiness, and the appointed instrument of that shaping is the word of God working in them. Then, having prayed for their keeping and their holiness, He sends them out on mission: "As You sent Me into the world, I also have sent them into the world." So His whole threefold desire for His own is plainly this — that they be kept safe, that they be made holy, and that they be sent out to continue His work. And what deep and steadying comfort there is simply in this one fact: that on the very eve of His own death, with the cross before Him, the Lord was praying earnestly for the keeping of His own people; and we know that the Father always hears the Son. His people are prayed-for people, and therefore safe people.</p>
+<h2><span class="dg-n">5.</span> Jesus Prays for All Who Would Believe: That They May Be One</h2>
+<p>Then Jesus lifts up His eyes and looks far past that small upper room, past that first circle of eleven men, out across all the long centuries still to come, and He prays — astonishingly — for us: "I do not pray for these alone, but also for those who will believe in Me through their word." Let the weight of that settle on you: every single believer, from that night right down to this present day, has been deliberately gathered up and included in this prayer. Which means, quite simply and quite literally, that Jesus, on the last night before He died, was praying for <em>you</em> by name and need.</p>
+<p>And His one great request for all of us together is this: unity. "That they all may be one, as You, Father, are in Me, and I in You; that they also may be one in Us, that the world may believe that You sent Me." He deeply longs that His people should be genuinely one — bound together in real love, actually reflecting and echoing the very oneness that exists eternally between the Father and the Son themselves. And He tells us plainly why this oneness matters so enormously to Him: it is "so that the world may believe." The visible love and unity of Christ's people is intended by God to be a living, compelling witness to the truth of the gospel before a watching, skeptical world. Our practical oneness in Him, then, is very far from a small or optional or negotiable thing; it is the direct answer to our own Lord's dying prayer, and a standing testimony to the truth of who He is.</p>
+<h2><span class="dg-n">6.</span> That They May Be with Him — Love and Glory</h2>
+<p>Jesus brings His long prayer to its close with a final longing so tender that it ought to melt the very hardest of hearts: "Father, I desire that they also whom You gave Me may be with Me where I am, that they may behold My glory." Above and beyond everything else He has asked, this is His deepest desire for His own — that they should at the last be <em>with Him</em>, brought safely home into His immediate presence, gazing with unveiled eyes upon His glory. And He prays one final, almost unbelievable thing over them: that the very same love with which the Father has eternally loved the Son might itself come to dwell in them, and He Himself in them. His prayer, which had opened with the theme of glory, now ends on the deeper note of love — His people brought all the way home to be with Him forever, and filled to overflowing with the Father's own love.</p>
+<p>Here, then, is the Savior's very heart laid open and bare for His own to see. So let this one chapter warm and steady your soul. We have been graciously permitted to overhear our great High Priest praying aloud for His people — and, wonder of wonders, He is praying for them still, ever living to intercede for us at the Father's right hand. He asks that we may truly know God, which is life eternal; that we may be kept safe and made holy; that we may be one, for the watching world's sake; and that we may be with Him at the very last, to see His glory and be filled with His love. What comfort could possibly be greater than this? On the night before He suffered and died for us, Jesus was praying for you — that you would be kept, sanctified, made one with His people, and finally brought home to be with Him forever. And He is praying for you still, at this moment. Take heart, then; pursue holiness and unity with fresh purpose; and look forward with real joy to being with Him where He is.</p>
+<h2><span class="dg-n">7.</span> Taking It to Heart</h2>
+<div class="dg-reflect">
+<p><b>For reflection.</b> Does it change anything for you to know that, on the night before the cross, Jesus was praying for <em>you</em> — and prays for you still? Is your "eternal life" a living, personal knowing of God, or only correct belief about Him? And are you helping to answer His prayer for unity — or working against it — in how you treat your fellow believers?</p>
+</div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of John 17, anchored in the classic public-domain expositions of John (Marcus Rainsford's <em>Our Lord Prays for His Own</em>, J. C. Ryle, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guide.</b> Marcus Rainsford's <em>Our Lord Prays for His Own</em> (1873) is a rich, verse-by-verse devotional study of John 17, unfolding the prayer of Christ for His people.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Que Sean Uno: La Oración Sumo-Sacerdotal</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Juan 17: Jesús ora por sí mismo, por sus discípulos, y por todos los que habrían de creer</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las clásicas exposiciones de dominio público sobre Juan (Rainsford, Ryle, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del libro: Juan</li>
+<li>La oración sumo-sacerdotal</li>
+<li>La intercesión de Cristo</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Juan 13–16 fue la enseñanza de Jesús a sus discípulos; Juan 17 es su oración al Padre, escuchada por ellos y escrita para nosotros. Esta lectura recorre la «oración sumo-sacerdotal» — el Hijo derramando su corazón por los suyos, en tres movimientos: por sí mismo, por sus discípulos, y por todos los que habrían de creer.
+    </div>
+<h2><span class="dg-n">1.</span> La oración sumo-sacerdotal</h2>
+<p>En los tres capítulos anteriores Jesús había estado hablando directamente a sus discípulos, enseñándoles y consolándolos; ahora, sin pausa, se aparta de ellos y habla en cambio a su Padre en el cielo — y ellos, y nosotros junto con ellos, somos graciosamente permitidos estar cerca y escuchar. Juan 17 es con mucho la más larga de todas las oraciones registradas de nuestro Señor, y fue ofrecida al fin mismo de aquella tarde en el aposento alto, de pie en el umbral de Getsemaní y de la cruz que yacía solo horas más adelante.</p>
+<p>Por muchos siglos la iglesia ha llamado a este capítulo la «oración sumo-sacerdotal», y el nombre es apropiado, porque en ella se nos permite escuchar a nuestro gran Sumo Sacerdote interceder en voz alta por su propio pueblo — la mismísima intercesión, notablemente, que Él continúa por nosotros todavía, porque la Escritura nos dice que Él «vive siempre para interceder» por todos aquellos que vienen a Dios por medio de Él. Marcus Rainsford dio a su rico y clásico estudio devocional de este solo capítulo el título perfecto: <em>Our Lord Prays for His Own</em> (Nuestro Señor ora por los suyos). Eso es exactamente lo que estamos escuchando aquí — el Hijo derramando todo su corazón al Padre a favor de aquellos que ama. Y la oración misma se mueve hacia afuera por tres círculos firmemente crecientes: primero Jesús ora por sí mismo, luego ora por sus discípulos inmediatos, y finalmente ora por todos los que jamás, por todas las edades, vendrían a creer en Él.</p>
+<h2><span class="dg-n">2.</span> Jesús ora por sí mismo: gloria y la obra terminada</h2>
+<p>Levantando sus ojos al cielo, Jesús ora primero por sí mismo: «Padre, la hora ha llegado; glorifica a tu Hijo, para que también tu Hijo te glorifique». La largamente esperada y a menudo mencionada «hora» de la cruz al fin ha llegado plenamente, y pide que por medio de ella — por medio de su propio sufrimiento y muerte — tanto el Padre como el Hijo puedan juntos ser glorificados. Es una oración ofrecida justo a la sombra de la cruz, y sin embargo habla de gloria. Continúa hablando de haber ahora completado toda la obra que el Padre le había dado que hiciera, y pide ser restaurado a la gloria que había compartido con el Padre «antes que el mundo fuese».</p>
+<p>Deténgase en esa última frase, porque es un callado pero genuinamente asombroso vistazo directo a su eterna deidad — he aquí un Hijo que conscientemente existía en gloria compartida con el Padre antes de que la creación misma siquiera hubiera comenzado, y que ahora pide volver a ella. Y luego, puesta como una sola preciosa joya en el mismísimo medio de esta sección de apertura de la oración, está la propia definición de Jesús de la vida eterna, una de las más preciosas y esclarecedoras frases que jamás habló en la tierra: «Y esta es la vida eterna: que te conozcan a ti, el único Dios verdadero, y a Jesucristo, a quien has enviado». Vale la pena detener todo sencillamente para asimilar eso.</p>
+<h2><span class="dg-n">3.</span> La vida eterna es conocer a Dios</h2>
+<p>Vale mucho la pena detenerse aquí a dejar que esa gran definición se asiente lentamente hasta el fondo, porque corrige mucho pensamiento superficial. La vida eterna, dice Jesús llanamente, es <em>conocer a Dios</em>. No es, primero y más importante, meramente existencia sin fin extendiéndose por siempre, ni es siquiera principalmente un hermoso lugar al cual un día vamos; en su mismísimo corazón, la vida eterna es una relación. Es conocer a Dios — y no meramente conocer muchas cosas verdaderas y doctrinas correctas acerca de Él, como uno podría conocer una materia, sino de hecho conocerle a <em>Él</em>, personalmente, como uno conoce y ama a otra persona viviente, en real y mutua comunión.</p>
+<p>Esto, en verdad, es la mismísima cosa hacia la cual todo el Evangelio de Juan ha estado firmemente dirigiéndose desde su primer versículo, y es la mismísima cosa que ahora se ofrece gratuitamente a cada solo creyente. Poseer la vida eterna, entonces, es ser traído a un genuino, viviente, y personal conocimiento del único Dios verdadero, por medio de Jesucristo su Hijo — nada menos que eso. Y he aquí la maravilla de ello: este conocer a Dios no es algo meramente reservado y pospuesto para la vida por venir, para comenzar solo después de la muerte; de hecho comienza el mismísimo momento en que verdaderamente venimos a Cristo por fe, aquí y ahora, y habiendo comenzado, sencillamente se ahonda y continúa por siempre. El creyente ya ha, hoy, comenzado a poseer la vida eterna.</p>
+<h2><span class="dg-n">4.</span> Jesús ora por sus discípulos: guardados y santificados</h2>
+<p>La oración ahora se ensancha desde sí mismo para abarcar a la pequeña banda de discípulos a quienes el Padre había dado a su cuidado. Jesús dice al Padre que fielmente los ha guardado y conservado, y ha dado a conocer a ellos el nombre del Padre; y ahora, estando en el mismísimo punto de dejar el mundo, tierna y deliberadamente los encomienda a la propia protección del Padre: «Padre santo, a los que me has dado, guárdalos por tu nombre, para que sean una cosa, como también nosotros». Vale la pena notar cuidadosamente tanto lo que sí pide como lo que señaladamente no pide. <em>No</em> pide que sean sacados seguramente del mundo por completo — han, más bien, de permanecer en él, como sus testigos y su luz — pero pide que sean guardados seguros dentro de él «del mal».</p>
+<p>Y pide una cosa más por ellos: que sean hechos santos. «Santifícalos en tu verdad; tu palabra es verdad». Han de ser progresivamente apartados del pecado y moldeados hacia una real santidad, y el instrumento señalado de ese moldear es la palabra de Dios obrando en ellos. Luego, habiendo orado por su guarda y su santidad, los envía a la misión: «Como tú me enviaste al mundo, también yo los he enviado al mundo». Así que todo su triple deseo por los suyos es llanamente este — que sean guardados seguros, que sean hechos santos, y que sean enviados a continuar su obra. Y qué hondo y estabilizador consuelo hay sencillamente en este solo hecho: que en la mismísima víspera de su propia muerte, con la cruz delante de Él, el Señor estaba orando fervientemente por la guarda de su propio pueblo; y sabemos que el Padre siempre oye al Hijo. Su pueblo es un pueblo por el cual se ora, y por tanto un pueblo seguro.</p>
+<h2><span class="dg-n">5.</span> Jesús ora por todos los que habrían de creer: que sean uno</h2>
+<p>Luego Jesús levanta sus ojos y mira mucho más allá de aquel pequeño aposento alto, más allá de aquel primer círculo de once hombres, a través de todos los largos siglos aún por venir, y ora — asombrosamente — por nosotros: «Mas no ruego solamente por éstos, sino también por los que han de creer en mí por la palabra de ellos». Deje que el peso de eso se asiente sobre usted: cada solo creyente, desde aquella noche justo hasta este presente día, ha sido deliberadamente reunido e incluido en esta oración. Lo cual significa, bastante sencilla y bastante literalmente, que Jesús, en la última noche antes de morir, estaba orando por <em>usted</em>, por su nombre y su necesidad.</p>
+<p>Y su única gran petición por todos nosotros juntos es esta: unidad. «para que todos sean una cosa; como tú, oh Padre, en mí, y yo en ti, que también ellos sean una cosa en nosotros; para que el mundo crea que tú me enviaste». Anhela hondamente que su pueblo sea genuinamente uno — atados juntos en real amor, de hecho reflejando y haciendo eco de la mismísima unidad que existe eternamente entre el Padre y el Hijo mismos. Y nos dice llanamente por qué esta unidad le importa tan enormemente: es «para que el mundo crea». El visible amor y unidad del pueblo de Cristo es destinado por Dios a ser un viviente y convincente testimonio de la verdad del evangelio ante un mundo que observa y es escéptico. Nuestra unidad práctica en Él, entonces, está muy lejos de ser cosa pequeña, opcional, o negociable; es la directa respuesta a la moribunda oración de nuestro propio Señor, y un permanente testimonio de la verdad de quién es Él.</p>
+<h2><span class="dg-n">6.</span> Que estén con Él — amor y gloria</h2>
+<p>Jesús lleva su larga oración a su fin con un anhelo final tan tierno que debiera derretir al más duro de los corazones: «Padre, aquellos que me has dado, quiero que donde yo estoy, también ellos estén conmigo, para que vean mi gloria». Por encima y más allá de todo lo demás que ha pedido, este es su más hondo deseo por los suyos — que al fin estén <em>con Él</em>, traídos seguramente a casa a su inmediata presencia, contemplando con ojos sin velo su gloria. Y ora una cosa final, casi increíble, sobre ellos: que el mismísimo amor con el cual el Padre ha amado eternamente al Hijo pueda él mismo venir a morar en ellos, y Él mismo en ellos. Su oración, que había abierto con el tema de la gloria, ahora termina en la más honda nota del amor — su pueblo traído todo el camino a casa para estar con Él para siempre, y lleno hasta rebosar del propio amor del Padre.</p>
+<p>He aquí, entonces, el mismísimo corazón del Salvador abierto y desnudo para que los suyos lo vean. Así que deje que este solo capítulo caliente y estabilice su alma. Se nos ha graciosamente permitido escuchar a nuestro gran Sumo Sacerdote orando en voz alta por su pueblo — y, maravilla de maravillas, todavía está orando por ellos, viviendo siempre para interceder por nosotros a la diestra del Padre. Pide que verdaderamente conozcamos a Dios, lo cual es vida eterna; que seamos guardados seguros y hechos santos; que seamos uno, por causa del mundo que observa; y que estemos con Él al fin mismo, para ver su gloria y ser llenos de su amor. ¿Qué consuelo podría posiblemente ser mayor que este? En la noche antes de que sufriera y muriera por nosotros, Jesús estaba orando por usted — que fuera guardado, santificado, hecho uno con su pueblo, y finalmente traído a casa para estar con Él para siempre. Y todavía está orando por usted, en este momento. Cobre ánimo, entonces; persiga la santidad y la unidad con fresco propósito; y espere con real gozo estar con Él donde Él está.</p>
+<h2><span class="dg-n">7.</span> Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<p><b>Para reflexionar.</b> ¿Cambia algo para usted saber que, en la noche antes de la cruz, Jesús estaba orando por <em>usted</em> — y ora por usted todavía? ¿Es su «vida eterna» un viviente y personal conocer a Dios, o solo creencia correcta acerca de Él? ¿Y está ayudando a responder su oración por la unidad — o trabajando contra ella — en cómo trata a sus hermanos creyentes?</p>
+</div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Juan 17, anclado en las clásicas exposiciones de dominio público sobre Juan (<em>Our Lord Prays for His Own</em> de Marcus Rainsford, J. C. Ryle, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre el guía.</b> <em>Our Lord Prays for His Own</em> (1873) de Marcus Rainsford es un rico estudio devocional, versículo por versículo, de Juan 17, que despliega la oración de Cristo por su pueblo.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="4" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 5 -->
+<article class="entry" data-id="5" data-title-en="The Cross, the Empty Tomb, and Life in His Name &mdash; CTS digest" data-title-es="La Cruz, el Sepulcro Vacío, y Vida en Su Nombre &mdash; resumen STC">
+<div class="locus"><span class="lang-en">John 18&ndash;21 &middot; a CTS bilingual digest, ~1,950 words per language</span><span class="lang-es">Juan 18&ndash;21 &middot; un resumen biling&uuml;e del STC, ~1,950 palabras por idioma</span></div>
+<div class="title"><span class="num">5.</span><span class="lang-en">The Cross, the Empty Tomb, and Life in His Name</span><span class="lang-es">La Cruz, el Sepulcro Vacío, y Vida en Su Nombre</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The capstone: the trial where Jesus reigns as sovereign King, “It is finished” — the shout of a victor — the empty tomb and the risen Christ, Thomas’s “My Lord and my God!” and John’s stated purpose (written that you may believe and have life), and Peter’s restoration by grace with the closing call, “Follow Me.”</p>
+<p class="caption lang-es block">La culminación: el juicio donde Jesús reina como Rey soberano, “Consumado es” — el grito de un vencedor — el sepulcro vacío y el Cristo resucitado, el “¡Señor mío, y Dios mío!” de Tomás y el propósito declarado de Juan (escrito para que creáis y tengáis vida), y la restauración de Pedro por gracia con el llamado de cierre, “Sígueme.”</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Cross, the Empty Tomb, and Life in His Name</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — John 18–21: the passion, the resurrection, and why the Gospel was written</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of John (Stalker, Milligan, Flavel, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: John</li>
+<li>The Cross and Resurrection</li>
+<li>“It Is Finished”</li>
+<li>Capstone</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> John 17 ended with Jesus's prayer; now the hour He long spoke of arrives. This closing reading walks through John 18–21 — the trial and cross where He cried "It is finished," the empty tomb and the risen Christ, John's own statement of why he wrote, and Peter's restoration and call to follow.
+    </div>
+<h2><span class="dg-n">1.</span> From the Prayer to the Cross</h2>
+<p>The great high-priestly prayer of chapter 17 is now finished, and at last the "hour" of which Jesus had so often and so solemnly spoken arrives in full. In quick and sober succession, He crosses the brook Kidron into a garden, is betrayed there by Judas with a kiss and arrested by an armed band, is tried through the long night first before the high priest and then in the morning before the Roman governor Pilate, and is finally led out of the city to be crucified. John tells the whole story of the passion with his own distinct and unmistakable emphasis, and it is one we must not miss.</p>
+<p>Throughout the entire ordeal, from arrest to cross, Jesus is never once portrayed as a helpless, pitiable victim caught up and swept along by events that have spun beyond His control. He is, from first to last, the sovereign Lord, freely and deliberately laying down His own life of His own accord, remaining the true master of the situation even at the very moment He is being unjustly condemned by it. We have now arrived, in this final reading, at the very climax and summit of the whole Gospel — at the cross where He dies, at the empty tomb where He rises, and at the everlasting life that is then freely offered to all in His name. Everything in the book has been moving toward this.</p>
+<h2><span class="dg-n">2.</span> The Trial: Jesus the Sovereign King</h2>
+<p>John is especially at pains, all through the trial narrative, to show us plainly that Jesus remains fully in command of events even in the midst of His own arrest and trial. When the soldiers and temple officers come for Him in the dark of the garden and He answers them with the simple words, "I am He," they visibly draw back and fall to the ground before Him — a sudden flash of undimmed divine majesty breaking through, just before He willingly permits Himself to be taken by them. Then, standing bound as a prisoner before Pilate, He speaks with striking calm and dignity of a kingdom that is "not of this world," and of the truth to which He had come into the world to bear witness. Pilate, for his part, openly declares three separate times that he finds no fault at all in Him, and yet, weakly and against his own conscience, hands Him over to the shouting will of the crowd.</p>
+<p>James Stalker, in his careful classic study <em>The Trial and Death of Jesus Christ</em>, traces each of these unfolding scenes with real insight — laying bare on the one hand the tangled, shameful injustice of the whole legal proceedings, and holding up on the other the quiet, unbroken, majestic dignity of the silent, suffering King who stands at the very center of them, in perfect control while all around Him fails. And so, in the end, Jesus is formally condemned, cruelly mocked by the soldiers, crowned with a crown of thorns, and led out of the city to be crucified — the Lamb of God going forth to the slaughter, exactly and precisely as John the Baptist had announced Him at the very beginning of the Gospel, to bear away the sin of the world.</p>
+<h2><span class="dg-n">3.</span> “It Is Finished”: the Cross</h2>
+<p>At the place called Golgotha they crucify Him between two others. John records several tender and telling details of the scene that the other three Gospels pass over: how Jesus, even in the midst of His own physical agony, lovingly entrusted the care of His mother to the beloved disciple standing nearby; His genuinely human cry of suffering, "I thirst"; and then, above and beyond all the rest, His final word spoken from the cross — a single, ringing, triumphant shout: "It is finished!"</p>
+<p>We must hear this rightly, for everything depends on it. This is emphatically not the last exhausted whimper of a beaten, broken, and defeated man giving up at the end. It is, on the contrary, the victory cry of a conqueror who has fully and successfully completed the mission He came to accomplish: the great work of salvation is now done, the entire price for human sin has been paid in full and nothing is left owing, the sin of the whole world has been borne away. And then, John carefully notes, He "bowed His head and gave up His spirit" — He deliberately gave up His own life, in His own time and by His own choice, for no one on earth could have taken it from Him against His will. And when a soldier afterward pierced His side with a spear, blood and water flowed out together, a sober physical witness that He was now truly, fully, and certainly dead. The Lamb of God had finished, completely and forever, the saving work that He had come into the world to do.</p>
+<h2><span class="dg-n">4.</span> The Empty Tomb: He Is Risen</h2>
+<p>But, gloriously, the story does not end at a sealed grave. Very early on the first day of the week, while it is still dark, Mary Magdalene comes to the tomb and finds, to her alarm, the great sealing stone already rolled away and the tomb itself standing empty. Peter and John, hearing her report, run together to see for themselves, and find only the linen grave-cloths lying there, undisturbed. And then the risen Jesus Himself begins to appear to His own. He comes first, tenderly, to the weeping Mary, who at first supposes Him to be the gardener — until He speaks her name, simply, "Mary," and in that instant she knows Him. That same evening He comes to the frightened disciples huddled together behind locked doors, shows them the wounds still in His hands and side, breathes on them, and says, "Peace be with you."</p>
+<p>The very One whom they had all seen crucified and buried is now alive again, standing among them; death itself simply could not hold Him in its grip. As William Milligan carefully unfolds in his classic work <em>The Resurrection of Our Lord</em>, this rising of Christ from the dead is nothing less than the Father's own great and public "Amen" spoken over the finished work of the cross — it is heaven's own open declaration to all the world that the sacrifice offered on the cross was fully accepted, and that the decisive victory over sin and death has been truly and finally won. The empty tomb is God's receipt, marking the debt paid in full.</p>
+<h2><span class="dg-n">5.</span> “My Lord and My God!” — and Why John Wrote</h2>
+<p>One of the disciples, Thomas, had been absent on that first evening, and he stubbornly refuses to believe the astonishing news merely on the word of the others; he insists that he must see and touch the risen Lord for himself. A full week later, Jesus graciously comes again, and gently invites the doubting Thomas to reach out his hand and touch the very wounds in His hands and side. And Thomas, overwhelmed, answers with what is the single greatest confession of faith in the whole of John's Gospel: "My Lord and my God!" It is the fullest and most explicit declaration of Jesus's true deity found anywhere in the entire book, and it carries us, in a great arc, right back to exactly where John had first begun in his prologue — "the Word was God." The end meets the beginning.</p>
+<p>Then Jesus speaks a particular blessing that reaches down across all the intervening centuries and lands directly on every one of us who was not there in the room to see Him: "Blessed are those who have not seen and yet have believed." And at just this point, his purpose accomplished, John lays down his pen and tells us plainly and directly, in his own words, exactly why he wrote the whole Gospel: "Truly Jesus did many other signs... but these are written that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name." There it is, stated outright. Every single thing in the Gospel — every carefully chosen sign, every "I am" saying, the cross, the empty tomb, Thomas's confession — was set down by John for this one great end: that we, his readers, would come to believe in Jesus, and in believing would have real life in His name.</p>
+<h2><span class="dg-n">6.</span> “Follow Me”: Peter Restored, and the Close</h2>
+<p>The Gospel then closes with a tender and beautiful epilogue set on the shore of the Sea of Galilee. The risen Jesus meets the disciples again after a long and fruitless night of fishing, fills their empty net to overflowing with a great catch of fish, and has a breakfast already waiting for them, cooking on a charcoal fire on the shore. And it is there, gently and deliberately, that He restores Peter — the same Peter who had, only days before, denied even knowing Him three times over, warming himself beside another charcoal fire. Three times now Jesus asks him, "Simon, do you love Me?" — and three times, over Peter's rising grief at being asked again, He tenderly commissions him afresh for service: "Feed My sheep." Here is a picture to treasure: the grace of God does not simply discard and throw away those who have failed and fallen; it forgives them fully, restores them tenderly, and calls them back into useful service.</p>
+<p>And then Jesus speaks to Peter, and through him to every one of us, the very same two words with which the whole life of following Him had first begun back at the start: "Follow Me." The Gospel ends not with a closing period but with an open summons, a call still ringing. And so our own walk together through the Gospel of John now comes to its close. We began with the eternal Word who was God, made flesh to dwell among us; we watched His glory shine out brightly in His signs and heard it declared plainly in His own "I am"; we sat with Him in the quiet of the upper room and heard His love, His promise of the Spirit, and His prayer for His own; and now we have stood beneath the cross where He cried out "It is finished," and beside the empty tomb where He rose again in triumph over death, and we have heard doubting Thomas fall down before Him at last with "My Lord and my God!" And we have been told, plainly, why every single word of it was written down: that we may believe, and in believing have everlasting life in His name. So let John's Gospel now do in you the very thing it was written to do. Behold the crucified and risen Christ; believe in Him with your whole heart; receive freely from His own nail-scarred hand the everlasting life He so freely gives; and then answer, with the whole of your life, His unchanging call — "Follow Me."</p>
+<h2><span class="dg-n">7.</span> Taking It to Heart</h2>
+<div class="dg-reflect">
+<p><b>For reflection.</b> When you hear "It is finished," do you rest in a salvation already completed by Christ — or are you still trying to finish it yourself? Have you made Thomas's confession your own: "My Lord and my God"? And, like Peter, will you let grace restore you from your failures and hear again the call that never changes — "Follow Me"?</p>
+</div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of John 18–21, anchored in the classic public-domain expositions of John (James Stalker's <em>The Trial and Death of Jesus Christ</em>, William Milligan's <em>The Resurrection of Our Lord</em>, John Flavel's <em>The Fountain of Life</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on James Stalker on the trial and death of Christ, William Milligan on the resurrection, and John Flavel's <em>The Fountain of Life</em> on the saving work of the Redeemer — all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>La Cruz, la Tumba Vacía, y la Vida en Su Nombre</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Juan 18–21: la pasión, la resurrección, y por qué se escribió el Evangelio</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las clásicas exposiciones de dominio público sobre Juan (Stalker, Milligan, Flavel, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del libro: Juan</li>
+<li>La cruz y la resurrección</li>
+<li>«Consumado es»</li>
+<li>Culminación</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Juan 17 terminó con la oración de Jesús; ahora la «hora» de la cual largamente habló llega. Esta lectura final recorre Juan 18–21 — el juicio y la cruz donde clamó «Consumado es», la tumba vacía y el Cristo resucitado, la propia declaración de Juan de por qué escribió, y la restauración de Pedro y el llamado a seguir.
+    </div>
+<h2><span class="dg-n">1.</span> De la oración a la cruz</h2>
+<p>La gran oración sumo-sacerdotal del capítulo 17 ahora está terminada, y al fin la «hora» de la cual Jesús tan a menudo y tan solemnemente había hablado llega plenamente. En rápida y sobria sucesión, cruza el arroyo Cedrón a un huerto, es traicionado allí por Judas con un beso y arrestado por una banda armada, es juzgado a través de la larga noche primero ante el sumo sacerdote y luego por la mañana ante el gobernador romano Pilato, y finalmente es sacado de la ciudad para ser crucificado. Juan cuenta toda la historia de la pasión con su propio distinto e inconfundible énfasis, y es uno que no debemos errar.</p>
+<p>A través de toda la terrible prueba, desde el arresto hasta la cruz, Jesús nunca una sola vez es retratado como una desvalida y lastimosa víctima atrapada y arrastrada por eventos que han girado más allá de su control. Es, de principio a fin, el Señor soberano, libre y deliberadamente poniendo su propia vida de su propia voluntad, permaneciendo el verdadero amo de la situación aun en el mismísimo momento en que está siendo injustamente condenado por ella. Hemos ahora llegado, en esta lectura final, al mismísimo clímax y la cumbre de todo el Evangelio — a la cruz donde muere, a la tumba vacía donde resucita, y a la vida eterna que entonces se ofrece gratuitamente a todos en su nombre. Todo en el libro ha estado moviéndose hacia esto.</p>
+<h2><span class="dg-n">2.</span> El juicio: Jesús el Rey soberano</h2>
+<p>Juan se esmera especialmente, por toda la narrativa del juicio, en mostrarnos llanamente que Jesús permanece plenamente en control de los eventos aun en medio de su propio arresto y juicio. Cuando los soldados y los oficiales del templo vienen por Él en la oscuridad del huerto y Él les responde con las sencillas palabras «Yo soy», visiblemente retroceden y caen a tierra ante Él — un súbito destello de imperturbable majestad divina irrumpiendo, justo antes de que voluntariamente se permita ser tomado por ellos. Luego, de pie atado como prisionero ante Pilato, habla con notable calma y dignidad de un reino que «no es de este mundo», y de la verdad para dar testimonio de la cual había venido al mundo. Pilato, por su parte, abiertamente declara tres veces separadas que no halla falta alguna en Él, y sin embargo, débilmente y contra su propia conciencia, lo entrega a la clamorosa voluntad de la multitud.</p>
+<p>James Stalker, en su cuidadoso estudio clásico <em>The Trial and Death of Jesus Christ</em>, traza cada una de estas escenas que se despliegan con real perspicacia — poniendo al descubierto por un lado la enredada y vergonzosa injusticia de todo el proceso legal, y sosteniendo por el otro la callada, inquebrantable, y majestuosa dignidad del silencioso y sufriente Rey que está en el mismísimo centro de ellas, en perfecto control mientras todo a su alrededor falla. Y así, al fin, Jesús es formalmente condenado, cruelmente escarnecido por los soldados, coronado con una corona de espinas, y sacado de la ciudad para ser crucificado — el Cordero de Dios saliendo al matadero, exacta y precisamente como Juan el Bautista lo había anunciado al comienzo mismo del Evangelio, para quitar el pecado del mundo.</p>
+<h2><span class="dg-n">3.</span> «Consumado es»: la cruz</h2>
+<p>En el lugar llamado Gólgota lo crucifican entre otros dos. Juan registra varios tiernos y reveladores detalles de la escena que los otros tres Evangelios pasan por alto: cómo Jesús, aun en medio de su propia agonía física, amorosamente encomendó el cuidado de su madre al discípulo amado de pie cerca; su clamor genuinamente humano de sufrimiento, «Tengo sed»; y luego, por encima y más allá de todo el resto, su palabra final hablada desde la cruz — un solo, resonante, y triunfante clamor: «Consumado es».</p>
+<p>Debemos oír esto rectamente, porque todo depende de ello. Este enfáticamente no es el último y agotado gemido de un hombre golpeado, quebrantado, y derrotado rindiéndose al fin. Es, por el contrario, el clamor de victoria de un conquistador que ha plena y exitosamente completado la misión que vino a lograr: la gran obra de salvación ahora está hecha, todo el precio por el pecado humano ha sido pagado por completo y nada queda debiéndose, el pecado del mundo entero ha sido quitado. Y luego, nota cuidadosamente Juan, «habiendo inclinado la cabeza, entregó el espíritu» — deliberadamente entregó su propia vida, en su propio tiempo y por su propia elección, porque nadie en la tierra podría habérsela quitado contra su voluntad. Y cuando un soldado después traspasó su costado con una lanza, sangre y agua fluyeron juntas, un sobrio testimonio físico de que ahora estaba verdadera, plena, y ciertamente muerto. El Cordero de Dios había terminado, completa y para siempre, la obra salvadora que había venido al mundo a hacer.</p>
+<h2><span class="dg-n">4.</span> La tumba vacía: ha resucitado</h2>
+<p>Pero, gloriosamente, la historia no termina en un sepulcro sellado. Muy temprano el primer día de la semana, cuando aún está oscuro, María Magdalena viene a la tumba y halla, para su alarma, la gran piedra que sellaba ya removida y la tumba misma vacía. Pedro y Juan, oyendo su reporte, corren juntos a ver por sí mismos, y hallan solo los lienzos funerarios yaciendo allí, sin ser tocados. Y luego el Jesús resucitado mismo comienza a aparecer a los suyos. Viene primero, tiernamente, a la llorosa María, que al principio lo supone ser el hortelano — hasta que Él habla su nombre, sencillamente, «María», y en ese instante lo conoce. Esa misma tarde viene a los asustados discípulos apiñados juntos detrás de puertas cerradas, les muestra las heridas todavía en sus manos y su costado, sopla sobre ellos, y dice: «Paz a vosotros».</p>
+<p>El mismísimo Uno a quien todos habían visto crucificado y sepultado ahora está vivo de nuevo, de pie en medio de ellos; la muerte misma sencillamente no pudo sostenerlo en su presa. Como William Milligan cuidadosamente despliega en su obra clásica <em>The Resurrection of Our Lord</em>, esta resurrección de Cristo de entre los muertos es nada menos que el propio gran y público «Amén» del Padre hablado sobre la obra terminada de la cruz — es la propia abierta declaración del cielo a todo el mundo de que el sacrificio ofrecido en la cruz fue plenamente aceptado, y que la decisiva victoria sobre el pecado y la muerte ha sido verdadera y finalmente ganada. La tumba vacía es el recibo de Dios, marcando la deuda pagada por completo.</p>
+<h2><span class="dg-n">5.</span> «¡Señor mío, y Dios mío!» — y por qué Juan escribió</h2>
+<p>Uno de los discípulos, Tomás, había estado ausente aquella primera tarde, y tercamente se niega a creer las asombrosas nuevas meramente por la palabra de los otros; insiste en que debe ver y tocar al Señor resucitado por sí mismo. Una semana entera más tarde, Jesús graciosamente viene de nuevo, y gentilmente invita al dudoso Tomás a extender su mano y tocar las mismísimas heridas en sus manos y su costado. Y Tomás, abrumado, responde con lo que es la sola más grande confesión de fe en todo el Evangelio de Juan: «¡Señor mío, y Dios mío!». Es la más plena y explícita declaración de la verdadera deidad de Jesús hallada en cualquier parte de todo el libro, y nos lleva, en un gran arco, justo de vuelta a exactamente donde Juan había primero comenzado en su prólogo — «el Verbo era Dios». El fin se encuentra con el comienzo.</p>
+<p>Luego Jesús habla una particular bendición que alcanza hacia abajo a través de todos los siglos intermedios y aterriza directamente sobre cada uno de nosotros que no estuvimos allí en el aposento para verlo: «Bienaventurados los que no vieron, y creyeron». Y en este mismo punto, cumplido su propósito, Juan deja su pluma y nos dice llana y directamente, en sus propias palabras, exactamente por qué escribió todo el Evangelio: «Hizo además Jesús muchas otras señales... Pero éstas son escritas para que creáis que Jesús es el Cristo, el Hijo de Dios; y para que creyendo, tengáis vida en su nombre». Allí está, declarado sin rodeos. Cada sola cosa en el Evangelio — cada señal cuidadosamente escogida, cada declaración «Yo soy», la cruz, la tumba vacía, la confesión de Tomás — fue puesta por Juan con este único gran fin: que nosotros, sus lectores, viniéramos a creer en Jesús, y creyendo tuviéramos vida real en su nombre.</p>
+<h2><span class="dg-n">6.</span> «Sígueme»: Pedro restaurado, y el cierre</h2>
+<p>El Evangelio luego cierra con un tierno y hermoso epílogo ubicado en la orilla del mar de Galilea. El Jesús resucitado encuentra a los discípulos de nuevo después de una larga e infructuosa noche de pesca, llena su red vacía hasta rebosar con una gran captura de peces, y tiene un desayuno ya esperándolos, cocinándose sobre un fuego de brasas en la orilla. Y es allí, gentil y deliberadamente, que restaura a Pedro — el mismo Pedro que había, solo días antes, negado aun conocerlo tres veces seguidas, calentándose junto a otro fuego de brasas. Tres veces ahora Jesús le pregunta: «Simón, ¿me amas?» — y tres veces, sobre la creciente tristeza de Pedro de ser preguntado de nuevo, tiernamente lo comisiona de nuevo para el servicio: «Apacienta mis ovejas». He aquí un cuadro para atesorar: la gracia de Dios no sencillamente descarta y desecha a los que han fracasado y caído; los perdona plenamente, los restaura tiernamente, y los llama de vuelta al servicio útil.</p>
+<p>Y luego Jesús habla a Pedro, y por medio de él a cada uno de nosotros, las mismísimas dos palabras con las cuales toda la vida de seguirlo había primero comenzado allá al inicio: «Sígueme». El Evangelio termina no con un punto de cierre, sino con un abierto llamado, una llamada aún resonando. Y así nuestro propio caminar juntos por el Evangelio de Juan ahora llega a su fin. Comenzamos con el Verbo eterno que era Dios, hecho carne para habitar entre nosotros; vimos su gloria brillar resplandeciente en sus señales y la oímos declarada llanamente en su propio «Yo soy»; nos sentamos con Él en la quietud del aposento alto y oímos su amor, su promesa del Espíritu, y su oración por los suyos; y ahora nos hemos parado bajo la cruz donde clamó «Consumado es», y junto a la tumba vacía donde resucitó de nuevo en triunfo sobre la muerte, y hemos oído al dudoso Tomás postrarse ante Él al fin con «¡Señor mío, y Dios mío!». Y se nos ha dicho, llanamente, por qué cada sola palabra de ello fue escrita: para que creamos, y creyendo tengamos vida eterna en su nombre. Así que deje que el Evangelio de Juan ahora haga en usted la mismísima cosa que fue escrito para hacer. Contemple al Cristo crucificado y resucitado; crea en Él con todo su corazón; reciba gratuitamente de su propia mano marcada por los clavos la vida eterna que Él tan gratuitamente da; y luego responda, con el todo de su vida, a su inmutable llamado — «Sígueme».</p>
+<h2><span class="dg-n">7.</span> Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<p><b>Para reflexionar.</b> Cuando oye «Consumado es», ¿descansa en una salvación ya completada por Cristo — o todavía está tratando de terminarla usted mismo? ¿Ha hecho suya la confesión de Tomás: «Señor mío, y Dios mío»? Y, como Pedro, ¿dejará que la gracia le restaure de sus fracasos y oirá de nuevo el llamado que nunca cambia — «Sígueme»?</p>
+</div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Juan 18–21, anclado en las clásicas exposiciones de dominio público sobre Juan (<em>The Trial and Death of Jesus Christ</em> de James Stalker, <em>The Resurrection of Our Lord</em> de William Milligan, <em>The Fountain of Life</em> de John Flavel, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en James Stalker sobre el juicio y la muerte de Cristo, William Milligan sobre la resurrección, y <em>The Fountain of Life</em> de John Flavel sobre la obra salvadora del Redentor — todos de dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="5" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+
+<!-- ============ ATTESTATION ============ -->
+<div class="card attest">
+<h2>
+<span class="lang-en">Record your reading</span>
+<span class="lang-es">Registre su lectura</span>
+</h2>
+<p class="lang-en block">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor.</p>
+<p class="lang-es block">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor.</p>
+<label class="field" for="stName"><span class="lang-en">Your name</span><span class="lang-es">Su nombre</span></label>
+<input autocomplete="name" id="stName" type="text"/>
+<div class="oath">
+<input id="oath" type="checkbox"/>
+<label for="oath"><span class="lang-en">On my honor, I have read in full the three excerpts or adaptations I selected above.</span><span class="lang-es">Bajo mi honor, he leído por completo los tres extractos o adaptaciones que seleccioné arriba.</span></label>
+</div>
+<button class="btn" onclick="recordReading()"><span class="lang-en">Record my reading</span><span class="lang-es">Registrar mi lectura</span></button>
+<p class="msg" id="attMsg"></p>
+<p class="msg no-print" id="honorsDone" style="display:none;color:#2f6b3a;"><span class="lang-en">✓ Recorded — this class counts toward your With Honors progress. <a href="cts-honors.html" style="color:#2f6b3a;">View progress ↗</a></span><span class="lang-es">✓ Registrado — esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html" style="color:#2f6b3a;">Ver progreso ↗</a></span></p>
+<!-- confirmation record -->
+<div class="record" id="record">
+<div class="seal-line"></div>
+<h3><span class="lang-en">Honors Reading — recorded</span><span class="lang-es">Lectura con Honores — registrada</span></h3>
+<div class="named" id="recName"></div>
+<p class="lang-en block">affirmed on <span id="recDateEn"></span> to have read, in full:</p>
+<p class="lang-es block">afirmó el <span id="recDateEs"></span> haber leído, por completo:</p>
+<ul id="recList"></ul>
+<p class="stamp"><span class="lang-en">Chapala Theological Seminary · The Gospel of John · present or print this page as your honors reading record.</span><span class="lang-es">Seminario Teológico de Chapala · El Evangelio de Juan · presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p style="margin-top:14px;">
+<button class="btn ghost no-print" onclick="window.print()"><span class="lang-en">Print this record</span><span class="lang-es">Imprimir este registro</span></button>
+<button class="btn ghost no-print" onclick="resetReading()"><span class="lang-en">Start over</span><span class="lang-es">Empezar de nuevo</span></button>
+</p>
+</div>
+</div>
+<p class="footnote">
+<span class="lang-en">Chapala Theological Seminary · Seminario Teológico de Chapala · free bilingual self-study</span>
+<span class="lang-es">Seminario Teológico de Chapala · Chapala Theological Seminary · estudio propio bilingüe gratuito</span>
+</p>
+</div>
+<script>
+  var MAX = 3;
+  var HONORS_CODE="John"; var HONORS_COURSE="The Gospel of John";
+
+  function setLang(l){
+    document.body.className = 'lang-' + l;
+    document.querySelectorAll('.toggle-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+  }
+
+  function chosenBoxes(){
+    return Array.prototype.slice.call(document.querySelectorAll('input[data-pick]:checked'));
+  }
+
+  function refresh(){
+    var boxes = document.querySelectorAll('input[data-pick]');
+    var chosen = chosenBoxes();
+    var n = chosen.length;
+    document.getElementById('cnt-en').textContent = n;
+    document.getElementById('cnt-es').textContent = n;
+
+    var full = (n >= MAX);
+    boxes.forEach(function(b){
+      var lab = b.closest('.pick');
+      var art = b.closest('.entry');
+      if(!b.checked && full){
+        b.disabled = true; lab.classList.add('disabled');
+      } else {
+        b.disabled = false; lab.classList.remove('disabled');
+      }
+      if(art) art.classList.toggle('chosen', b.checked);
+    });
+
+    var note = document.getElementById('limitNote');
+    if(full){
+      note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+    } else {
+      note.textContent = "";
+    }
+  }
+
+  document.querySelectorAll('input[data-pick]').forEach(function(b){
+    b.addEventListener('change', refresh);
+  });
+
+  function recordReading(){
+    var chosen = chosenBoxes();
+    var name = document.getElementById('stName').value.trim();
+    var oath = document.getElementById('oath').checked;
+    var msg = document.getElementById('attMsg');
+
+    if(chosen.length !== MAX){
+      msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+      return;
+    }
+    if(!name){
+      msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+      return;
+    }
+    if(!oath){
+      msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+      return;
+    }
+    msg.textContent = "";
+
+    var now = new Date();
+    var en = now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+    var es = now.toLocaleDateString('es-MX', {year:'numeric', month:'long', day:'numeric'});
+    document.getElementById('recName').textContent = name;
+    document.getElementById('recDateEn').textContent = en;
+    document.getElementById('recDateEs').textContent = es;
+
+    var ul = document.getElementById('recList');
+    ul.innerHTML = "";
+    chosen.forEach(function(b){
+      var art = b.closest('.entry');
+      var li = document.createElement('li');
+      li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+      ul.appendChild(li);
+    });
+
+    try {
+      var _works=[];
+      chosen.forEach(function(b){ var a=b.closest('.entry'); if(a) _works.push(a.getAttribute('data-title-en')); });
+      localStorage.setItem('cts_honors_name_v1', name);
+      localStorage.setItem('cts_honors_v1:'+HONORS_CODE, JSON.stringify({name:name,date:en,course:HONORS_COURSE,works:_works}));
+      var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block';
+    } catch(e){}
+
+    document.getElementById('record').classList.add('show');
+    document.getElementById('record').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function resetReading(){
+    document.querySelectorAll('input[data-pick]').forEach(function(b){ b.checked = false; });
+    document.getElementById('stName').value = "";
+    document.getElementById('oath').checked = false;
+    document.getElementById('record').classList.remove('show');
+    document.getElementById('attMsg').textContent = "";
+    refresh();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  refresh();
+  try {
+    if(localStorage.getItem('cts_honors_v1:'+HONORS_CODE)){ var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block'; }
+    var _nm=localStorage.getItem('cts_honors_name_v1'); var _f=document.getElementById('stName'); if(_nm && _f && !_f.value){ _f.value=_nm; }
+  } catch(e){}
+</script>
+
+<!-- CTS-FURTHER-STUDY -->
+<style>
+.fs-wrap{max-width:900px;margin:38px auto 10px;padding:0 18px;font-family:Georgia,serif;color:#1f2a37;line-height:1.55;box-sizing:border-box}
+.fs-wrap *{box-sizing:border-box}
+.fs-head{border-top:6px solid #33608f;background:#eaf1f8;border:1px solid #dbe6f0;border-radius:12px;padding:18px 20px}
+.fs-eyebrow{font:700 .72rem/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#33608f}
+.fs-head h2{font-size:1.5rem;margin:.3rem 0 .1rem}
+.fs-es{color:#48586a;font-style:italic}
+.fs-tag{margin:.5rem 0 0;font-family:Arial,sans-serif;font-size:.9rem;color:#5b6b7b}
+.fs-online{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid #33608f;border-left:6px solid #33608f;border-radius:10px;padding:11px 14px;margin:13px 0 18px}
+.fs-online .fs-badge{flex:none;font:800 .66rem/1 Arial,sans-serif;letter-spacing:.1em;color:#fff;background:#33608f;padding:6px 9px;border-radius:6px;margin-top:2px}
+.fs-online p{margin:0;font-size:.9rem}
+.fs-grid{display:grid;gap:14px}
+.fs-card{background:#fff;border:1px solid #dbe6f0;border-radius:11px;padding:16px 17px;box-shadow:0 2px 8px #0b214a0a}
+.fs-kind{font:700 .7rem/1 Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#264a6e}
+.fs-card h3{margin:.3rem 0 .15rem;font-size:1.12rem}
+.fs-meta{font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b;margin:0 0 .5rem}
+.fs-langs span{font:700 .64rem/1 Arial,sans-serif;background:#eaf1f8;color:#264a6e;border:1px solid #cadcee;border-radius:999px;padding:3px 7px;margin-left:5px}
+.fs-card p{margin:.35rem 0 .5rem}
+.fs-note{background:#fbf3e6;border-left:4px solid #8a5a1c;border-radius:0 6px 6px 0;padding:9px 12px;margin:.5rem 0;font-size:.85rem}
+.fs-note b{color:#8a5a1c}
+.fs-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:9px}
+.fs-btn{display:inline-block;text-decoration:none;background:#33608f;color:#fff;font:700 .85rem Arial,sans-serif;padding:8px 12px;border-radius:7px}
+.fs-btn.fs-alt{background:#fff;color:#264a6e;border:1.5px solid #33608f}
+.fs-pick{border:2px dashed #b7c7d8;background:#fbfdff;color:#5b6b7b}
+.fs-pick h3{color:#5b6b7b}
+.fs-foot{margin-top:16px;font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b}
+@media(max-width:600px){.fs-head h2{font-size:1.3rem}}
+</style>
+<section class="fs-wrap" id="further-study">
+<div class="fs-head">
+  <div class="fs-eyebrow">Chapala Theological Seminary &middot; Further Study</div>
+  <h2>Further Study &mdash; Online</h2>
+  <div class="fs-es" style="font-size:1.05rem">Estudio Adicional &mdash; En Línea</div>
+  <p class="fs-tag">Optional resources for students with internet access &mdash; Gospel of John<br>
+  <span class="fs-es">Recursos opcionales para estudiantes con acceso a internet &mdash; Evangelio de Juan</span></p>
+</div>
+<div class="fs-online"><span class="fs-badge">ONLINE</span>
+  <p><strong>Requires an internet connection.</strong> These resources are hosted on the web and do not open offline. They supplement the course; they do not replace its units or exams.<br>
+  <span class="fs-es"><strong>Requiere una conexión a internet.</strong> Estos recursos están alojados en la web y no se abren sin conexión. Complementan el curso; no sustituyen sus unidades ni exámenes.</span></p>
+</div>
+<div class="fs-grid">
+<article class="fs-card">
+  <div class="fs-kind">Free animated Bible videos / Videos bíblicos animados gratuitos</div>
+  <h3>BibleProject &mdash; Proyecto Biblia</h3>
+  <p class="fs-meta">Video <span class="fs-langs"><span>English</span><span>Español</span></span></p>
+  <p>Short, well-crafted animated videos that walk through the whole of Scripture. In the video library, open the overview of <strong>the Gospel of John</strong> to see its structure and message. Non-partisan and freely available.<br>
+  <span class="fs-es">Videos animados breves y bien hechos que recorren toda la Escritura. En la biblioteca de videos, abra el resumen de <strong>el Evangelio de Juan</strong> para ver su estructura y mensaje. No partidista y de acceso gratuito.</span></p>
+  <div class="fs-links">
+    <a class="fs-btn" target="_blank" rel="noopener" href="https://bibleproject.com">Open (English) &#8599;</a>
+    <a class="fs-btn fs-alt" target="_blank" rel="noopener" href="https://proyectobiblia.com">Abrir (Español) &#8599;</a>
+  </div>
+</article>
+<article class="fs-card fs-pick">
+  <div class="fs-kind">Instructor's vetted pick / Selección aprobada por el instructor</div>
+  <h3>[ Your chosen video goes here ]</h3>
+  <p>A place for a specific video the instructor has watched and approved for this course.<br>
+  <span class="fs-es">Un espacio para un video específico que el instructor haya visto y aprobado para este curso.</span></p>
+</article>
+</div>
+<div class="fs-foot">These optional supplements link to third-party websites that Chapala Theological Seminary does not control; weigh their content against Scripture and this course.<br>
+<span class="fs-es">Estos complementos opcionales enlazan a sitios web de terceros que el Seminario Teológico de Chapala no controla; pese su contenido a la luz de la Escritura y de este curso.</span></div>
+</section>
+<!-- /CTS-FURTHER-STUDY -->
+
+</body>
+</html>

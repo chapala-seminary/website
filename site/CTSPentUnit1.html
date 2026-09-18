@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pentateuch | Unit 1: Beginnings — The Pentateuch and Creation</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', Times, serif; line-height: 1.6; background: #f9f7f3; color: #1a2a1f; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+.course-header { background: #2c3e36; color: white; padding: 1.5rem 2rem; text-align: center; }
+.course-header h1 { font-size: 2rem; letter-spacing: 2px; margin-bottom: 0.25rem; }
+.course-header h2 { font-size: 1.2rem; font-weight: normal; opacity: 0.9; }
+.unit-badge { display: inline-block; background: #f4c542; color: #2c3e36; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-top: 0.5rem; }
+.course-author { font-size: 0.8rem; opacity: 0.85; margin-top: 0.4rem; font-style: italic; }
+.controls-bar { background: #e8e4d8; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #cbc3ae; }
+.lang-buttons { display: flex; gap: 10px; }
+.lang-btn { background: white; border: 1px solid #2c3e36; padding: 0.4rem 1rem; cursor: pointer; font-weight: bold; transition: 0.2s; border-radius: 4px; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-indicator { background: #2c3e36; color: #f4c542; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+body.lang-en .lang-es { display: none; }
+body.lang-en .lang-both { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-both { display: none; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 900px) {
+    body.lang-both .lesson-grid { grid-template-columns: 1fr; }
+    body.lang-both .lang-es { border-top: 2px dashed #cbc3ae; padding-top: 1rem; margin-top: 1rem; }
+}
+.lesson-section { padding: 2rem; }
+.lesson-section h3 { color: #2c3e36; border-left: 4px solid #f4c542; padding-left: 1rem; margin: 1.5rem 0 1rem 0; }
+.lesson-section h3:first-of-type { margin-top: 0; }
+.scripture { background: #f0ede5; padding: 1rem 1.5rem; border-left: 4px solid #f4c542; font-style: italic; margin: 1rem 0; font-family: 'Courier New', monospace; }
+.illustration { background: #e8f0e5; padding: 1rem 1.5rem; border-radius: 8px; margin: 1rem 0; }
+.registration-card { background: #2c3e36; color: white; padding: 1.5rem; margin: 1rem 2rem; border-radius: 8px; text-align: center; }
+.registration-card input, .registration-card select { padding: 0.5rem; margin: 0.5rem; border: none; border-radius: 4px; }
+.registration-card input { width: 200px; }
+.registration-card button { background: #f4c542; border: none; padding: 0.5rem 1rem; cursor: pointer; font-weight: bold; border-radius: 4px; }
+.exam-section { background: #fefaf0; border-top: 3px solid #2c3e36; padding: 2rem; page-break-before: always; }
+.exam-header { text-align: center; margin-bottom: 2rem; }
+.question-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; page-break-inside: avoid; }
+.question-text { font-weight: bold; margin-bottom: 0.75rem; }
+.options { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+.options label { display: block; margin: 0.4rem 0; cursor: pointer; }
+.feedback { margin-top: 0.75rem; padding: 0.5rem; border-radius: 4px; font-size: 0.9rem; }
+.feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+.model-answer { background: #fff8e1; border-left: 4px solid #f4c542; color: #4a3c10; padding: 0.6rem 0.8rem; margin-top: 0.6rem; border-radius: 4px; font-style: normal; }
+.essay-question textarea { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+.action-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+.action-buttons button { background: #2c3e36; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+.action-buttons button:hover { background: #1e2d26; }
+.action-buttons button.reset-btn { background: #8b6b3d; }
+.lockout-timer { text-align: center; padding: 1rem; background: #f8d7da; color: #721c24; margin: 1rem; border-radius: 8px; font-weight: bold; }
+.nav-links { display: flex; justify-content: space-between; padding: 1rem 2rem; background: #e8e4d8; }
+.nav-links a { color: #2c3e36; text-decoration: none; font-weight: bold; }
+@media print {
+    .controls-bar, .action-buttons, .nav-links, .lockout-timer, .registration-card { display: none !important; }
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; margin: 0; }
+    .course-header { background: #2c3e36; color: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .question-card { border: 1px solid #ccc; page-break-inside: avoid; }
+    .exam-section { page-break-before: always; }
+    .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.lang-both .lesson-grid { display: block; }
+}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 2px;font-family:'Georgia',serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#2c3e36;margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid #cdbf9d;color:#2c3e36;text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:#2c3e36;}
+.unitnav a.active{background:#2c3e36;color:#fff;border-color:#2c3e36;}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+    <div class="course-header">
+        <h1>Πεντάτευχος</h1>
+        <h2><span class="lang-en">The Pentateuch</span><span class="lang-es">El Pentateuco</span></h2>
+        <div class="course-author"><span class="lang-en">Dr. Ted Rogers · Seminary Director</span><span class="lang-es">Dr. Ted Rogers · Director del Seminario</span></div>
+        <div class="unit-badge"><span class="lang-en">Unit 1 · Beginnings: The Pentateuch and Creation</span><span class="lang-es">Unidad 1 · Comienzos: El Pentateuco y la Creación</span></div>
+    </div>
+
+    <div class="controls-bar">
+        <div class="lang-buttons">
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="es">Español</button>
+            <button class="lang-btn" data-lang="both">Both</button>
+        </div>
+        <div class="track-indicator" id="trackIndicator">Loading...</div>
+    </div>
+
+    <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+      <span class="nl"><span class="lang-en">Units</span><span class="lang-es">Unidades</span></span>
+      <a href="CTSPentUnit1.html" class="active">1</a>
+      <a href="CTSPentUnit2.html">2</a>
+      <a href="CTSPentUnit3.html">3</a>
+      <a href="CTSPentUnit4.html">4</a>
+      <a href="CTSPentUnit5.html">5</a>
+      <a href="CTSPentUnit6.html">6</a>
+      <a href="CTSPentUnit7.html">7</a>
+      <a href="CTSPentUnit8.html">8</a>
+      <a href="CTSPentUnit9.html">9</a>
+      <a href="CTSPentUnit10.html">10</a>
+      <a href="CTSPentUnit11.html">11</a>
+      <a href="CTSPentUnit12.html">12</a>
+    </nav>
+
+    <div class="registration-card" id="registrationCard">
+        <p class="lang-en"><strong>Welcome to CTS Pentateuch.</strong> Please enter your name and select your track to begin.</p>
+        <p class="lang-es"><strong>Bienvenido al Pentateuco de CTS.</strong> Ingrese su nombre y seleccione su vía para comenzar.</p>
+        <input type="text" id="studentName" placeholder="Your name / Su nombre" aria-label="Your name / Su nombre">
+        <select id="trackSelect" aria-label="trackSelect">
+            <option value="cert">Certificate of Ministry</option>
+            <option value="thm">Master of Theology (Th.M.)</option>
+            <option value="mdiv">Master of Divinity (M.Div.)</option>
+        </select>
+        <button id="registerBtn">Register / Registrar</button>
+    </div>
+
+    <div class="lesson-section">
+        <div class="lesson-grid">
+            <div class="lang-en">
+                <h3>1. What Is the Pentateuch?</h3>
+                <p>The Pentateuch — Genesis, Exodus, Leviticus, Numbers, Deuteronomy — is the foundation of all Scripture. The Hebrews called it <em>Torah</em>, meaning "instruction" or "teaching." Though we see five books, the Hebrew people saw one. Scripture and tradition agree on its human author: Moses. Jesus Himself affirms this in Mark 7:10 and John 5:46-47.</p>
+                <p>In the late nineteenth century, Julius Wellhausen challenged Mosaic authorship, claiming the Pentateuch was assembled by four later sources he labeled J, E, P, and D. His arguments were essentially three: writing did not exist in Moses' day; supernatural events could not have happened; and the use of different names for God required different authors. Each claim has collapsed under scrutiny. Archaeologists have unearthed Semitic texts dating to 1800 BC, four centuries before Moses. The supernatural claim simply assumes its conclusion. And the use of multiple names for God is standard practice in Semitic literature — we ourselves shift freely between "God," "Lord," "Almighty," and "Father" without changing authorship. Most conservative scholarship dates the Pentateuch to around 1450 BC, with Moses as the human author guided by the Spirit of God.</p>
+
+                <h3>2. Life at the Time of Moses' Writing</h3>
+                <p>To read the Pentateuch well, picture the world Moses wrote into. Today there are roughly eight billion people on earth. In Moses' day, there were perhaps thirty-three million — about 1.4 people per square mile. Outside urban centers a person could walk fifty to a hundred miles and see no other human being. Though technically the bronze age, much of the populace lived in effectively neolithic conditions. The forests had never felt an axe blow. The wildlife was so large that — even three hundred years ago in what is now the American South — catfish were considered man-killers. Medical care was rudimentary. The world was vast, sparsely populated, and dangerous. Into that world, Moses writes about the God who is sovereign over all of it.</p>
+                <p>It is into this vast, sparsely populated, frightening world that Moses introduces Yahweh — the God who is sovereign over every square mile of it, every species, every storm, every star. Against the gods of Egypt who could not protect their followers from plagues, against the wilderness that swallowed entire caravans, against the bronze-age warlords who carved out brief empires — the God of the Pentateuch claims to have spoken everything into being. This is no domesticated deity. This is the God whose very name even Moses had to learn before he could speak it.</p>
+
+                <h3>3. A Theological History Rooted in God’s Acts</h3>
+                <p>Some interpret Genesis primarily as a symbolic account of origins. But the Hebrews understood God as acting in real history. They believed a personal, sovereign God acted in real history to create a nation. Their worship was not cosmic magic but the enacted memory of real redemption. Genesis is a <em>theological historical narrative</em>: it selects and shapes real events to reveal God's character. Its theme is beginnings — of the universe, of humanity, of sin, of redemption, of Israel. Its purpose is to show that the God who created the cosmos is the same God who calls a people for Himself.</p>
+
+                <div class="scripture">
+                    <strong>John 1:1-5 (NKJV):</strong> "In the beginning was the Word, and the Word was with God, and the Word was God. He was in the beginning with God. All things were made through Him, and without Him nothing was made that was made. In Him was life, and the life was the light of men. And the light shines in the darkness, and the darkness did not comprehend it."
+                </div>
+
+                <p>Notice carefully: the first creation narrative is not in Genesis 1:1. It is in John 1:1-5. Genesis 1:1 begins <em>after</em> the eternal Word has already done His creative work. The Hebrew verb in Genesis 1:1, <em>bara</em> (created), stresses something new and perfect. But verse two describes <em>tohu wabohu</em> — formless and void. Something happened between verses one and two. The Spirit of God then <em>hovered</em> like a mother swan protecting her nest. God's first recorded act in our biblical record is not creation — it is <strong>redemption</strong>: calling order out of chaos, life out of death. Many conservative scholars see this gap as the aftermath of the satanic rebellion. Whatever caused the chaos, God's first move is to redeem it.</p>
+
+                <p>This matters for how we read every chapter that follows. If Genesis is theological history, then Adam was a real person, the flood was a real event, and the patriarchs were real men whom God really called. Some scholarship has tried to evacuate the narratives of their historical claims while keeping their spiritual lessons. But the Hebrew mind would not let those two things separate. The lessons depend on the history. Take away the history and the lessons collapse into folklore. The God of the Bible acts in time, in space, and in the actual events of human lives — yours and mine included.</p>
+
+                <h3>4. The Six Days: Domains and Their Filling</h3>
+                <p>Day one: God said, "Let there be light" — and separated light from darkness. Day two: He made the expanse (sky) to separate the waters. Day three: He gathered the waters, revealing dry land. Then the pattern shifts. Having created three domains, God now fills them. Day three (continued): vegetation fills the land. Day four: lights — sun, moon, stars — fill the sky to govern day and night. Day five: sea creatures fill the waters; birds fill the sky. Day six: land animals fill the earth.</p>
+
+                <div class="illustration">
+                    <strong>Illustration:</strong> A fish out of water dies. A tree ripped from the soil dies. Every created thing thrives only within its intended domain. Hold that thought — it will matter in a moment.
+                </div>
+
+                <p>As the narrative progresses, notice how the complexity and beauty of God's creation increases. Day one brings light. Day two divides waters from waters — a simple separation. By day three, vegetation appears, with its intricate cellular life. Day four sets the lights in their courses. Day five fills the seas and skies with creatures of motion. Day six culminates in land animals and finally in humanity — bearing the image of God Himself. The arc moves from raw substance to vibrant life to bearer-of-the-image. Nothing in this progression is random. Every step builds toward the moment God can declare His work very good.</p>
+
+                <h3>5. The Image of God: Our Purpose Revealed</h3>
+                <p>Then God said, "Let Us make mankind <em>in</em> Our image" (Genesis 1:26). But the Hebrew preposition is better translated <strong><em>as</em></strong> Our image. In the ancient world, when an emperor ruled a distant city, he would place a statue of himself in the town square. That statue reminded everyone: there is a ruler; these are his attributes; you are under his authority. God made humanity <em>as</em> His image — to stand before all creation as a living reminder of the Creator. That is your purpose: to reflect God to everything around you.</p>
+
+                <div class="scripture">
+                    <strong>Genesis 1:27-28 (NKJV):</strong> "So God created man in His own image; in the image of God He created him; male and female He created them. Then God blessed them, and God said to them, 'Be fruitful and multiply; fill the earth and subdue it; have dominion over the fish of the sea, over the birds of the air, and over every living thing that moves on the earth.'"
+                </div>
+
+                <p>Notice the domain from which humanity was called. Not from water, not from sky, not from land — but from God Himself. What happens if you remove a fish from water? Death. Remove a tree from soil? Death. Remove a human from the domain of God? Death. This is why separation from God — sin — brings spiritual death. But equally, this is your dignity: you were made for intimacy with the Creator.</p>
+
+                <h3>6. No Death Before the Fall</h3>
+                <p>In Genesis 1:29-30, God gives every green plant as food — for humans and for animals. No animal was food for another animal. There was no death. The creation was very good, whole, and peaceful. Death entered only after humanity's rebellion (Genesis 3). The entire sacrificial system, and ultimately the cross of Christ, is God's answer to restore what was broken — to bring humanity back into the domain of God, where life flourishes.</p>
+
+                <h3>7. God Rested: The Seventh Day</h3>
+                <p>On the seventh day, God rested. Not from exhaustion — but from creating. He blessed the day and made it holy. Sabbath rest is not merely a command; it is an invitation to trust that God sustains what He has made. For the pastor, this is a weekly reminder that your ministry does not depend on your striving but on the One who rested after declaring all things good.</p>
+                <p>For the seminary student, this same invitation cuts deep. Your studies matter, but they are not what holds the world together. The God who declared "very good" before any human worker existed still declares it now. Step into that rest each week. Receive it as the foundational rhythm of your ministry and your soul. The Sabbath is not an interruption of God's work — it is the consummation of it, and it belongs to you by grace, not by performance.</p>
+            </div>
+
+            <div class="lang-es">
+                <h3>1. ¿Qué es el Pentateuco?</h3>
+                <p>El Pentateuco — Génesis, Éxodo, Levítico, Números, Deuteronomio — es el fundamento de toda la Escritura. Los hebreos lo llamaban <em>Torá</em>, que significa "instrucción" o "enseñanza". Aunque vemos cinco libros, el pueblo hebreo veía uno. La Escritura y la tradición concuerdan en su autor humano: Moisés. Jesús mismo lo afirma en Marcos 7:10 y Juan 5:46-47.</p>
+                <p>A finales del siglo XIX, Julius Wellhausen desafió la autoría mosaica, afirmando que el Pentateuco fue ensamblado por cuatro fuentes posteriores que él etiquetó como J, E, P y D. Sus argumentos fueron esencialmente tres: la escritura no existía en los días de Moisés; los eventos sobrenaturales no podrían haber sucedido; y el uso de diferentes nombres para Dios requería diferentes autores. Cada afirmación ha colapsado bajo escrutinio. Los arqueólogos han desenterrado textos semíticos que datan del 1800 a.C., cuatro siglos antes de Moisés. La afirmación sobrenatural simplemente asume su conclusión. Y el uso de múltiples nombres para Dios es práctica estándar en la literatura semítica — nosotros mismos alternamos libremente entre "Dios", "Señor", "Todopoderoso" y "Padre" sin cambiar de autor. La mayoría de la erudición conservadora data el Pentateuco alrededor del 1450 a.C., con Moisés como autor humano guiado por el Espíritu de Dios.</p>
+
+                <h3>2. La Vida en Tiempos de la Escritura de Moisés</h3>
+                <p>Para leer bien el Pentateuco, imagine el mundo en el que Moisés escribió. Hoy hay aproximadamente ocho mil millones de personas en la tierra. En los días de Moisés, había quizás treinta y tres millones — alrededor de 1.4 personas por milla cuadrada. Fuera de los centros urbanos, una persona podía caminar cincuenta a cien millas sin ver a otro ser humano. Aunque técnicamente era la edad de bronce, gran parte de la población vivía en condiciones efectivamente neolíticas. Los bosques nunca habían sentido un golpe de hacha. La vida silvestre era tan grande que — incluso hace trescientos años en lo que ahora es el sur estadounidense — los bagres eran considerados asesinos de hombres. La atención médica era rudimentaria. El mundo era vasto, escasamente poblado y peligroso. En ese mundo, Moisés escribe sobre el Dios que es soberano sobre todo.</p>
+                <p>Es en este mundo vasto, escasamente poblado y temible que Moisés introduce a Yahvé — el Dios que es soberano sobre cada milla cuadrada, cada especie, cada tormenta, cada estrella. Contra los dioses de Egipto que no podían proteger a sus seguidores de las plagas, contra el desierto que se tragaba caravanas enteras, contra los señores de la guerra de la edad de bronce que tallaron breves imperios — el Dios del Pentateuco afirma haber pronunciado todo en existencia. Este no es un dios domesticado. Este es el Dios cuyo mismo nombre incluso Moisés tuvo que aprender antes de pronunciarlo.</p>
+
+                <h3>3. Una Historia Teológica Arraigada en los Actos de Dios</h3>
+                <p>Algunos interpretan Génesis principalmente como un relato simbólico de los orígenes. Pero los hebreos no pensaban así. Creían que un Dios personal y soberano actuó en la historia real para crear una nación. Su adoración no era magia cósmica sino la memoria representada de redención real. Génesis es una <em>narrativa histórica teológica</em>: selecciona y moldea eventos reales para revelar el carácter de Dios. Su tema son los comienzos — del universo, de la humanidad, del pecado, de la redención, de Israel. Su propósito es mostrar que el Dios que creó el cosmos es el mismo Dios que llama a un pueblo para Sí mismo.</p>
+
+                <div class="scripture">
+                    <strong>Juan 1:1-5 (RVG):</strong> "En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios. Éste era en el principio con Dios. Todas las cosas por él fueron hechas, y sin él nada de lo que es hecho, fue hecho. En él estaba la vida, y la vida era la luz de los hombres. La luz en las tinieblas resplandece, y las tinieblas no prevalecieron contra ella."
+                </div>
+
+                <p>Observe cuidadosamente: la primera narrativa de la creación no está en Génesis 1:1. Está en Juan 1:1-5. Génesis 1:1 comienza <em>después</em> de que el Verbo eterno ya ha hecho Su obra creativa. El verbo hebreo en Génesis 1:1, <em>bara</em> (creó), enfatiza algo nuevo y perfecto. Pero el versículo dos describe <em>tohu wabohu</em> — sin forma y vacía. Algo sucedió entre los versículos uno y dos. El Espíritu de Dios luego <em>revoloteó</em> como una cisne madre protegiendo su nido. El primer acto registrado de Dios en nuestro registro bíblico no es la creación — es <strong>redención</strong>: llamando orden del caos, vida de la muerte. Muchos eruditos conservadores ven esta brecha como las consecuencias de la rebelión satánica. Cualquiera que haya sido la causa del caos, el primer movimiento de Dios es redimirlo.</p>
+
+                <p>Esto importa para cómo leemos cada capítulo que sigue. Si Génesis es historia teológica, entonces Adán fue una persona real, el diluvio fue un evento real, y los patriarcas fueron hombres reales a quienes Dios realmente llamó. Cierta erudición ha intentado vaciar las narrativas de sus afirmaciones históricas mientras conserva sus lecciones espirituales. Pero la mente hebrea no permitía separar esas dos cosas. Las lecciones dependen de la historia. Quite la historia y las lecciones colapsan en folclore. El Dios de la Biblia actúa en el tiempo, en el espacio, y en los eventos reales de las vidas humanas — la tuya y la mía incluidas.</p>
+
+                <h3>4. Los Seis Días: Dominios y su Llenura</h3>
+                <p>Día uno: Dios dijo: "Sea la luz" — y separó la luz de las tinieblas. Día dos: Hizo el firmamento (cielo) para separar las aguas. Día tres: Reunió las aguas, revelando la tierra seca. Luego el patrón cambia. Habiendo creado tres dominios, Dios ahora los llena. Día tres (continuación): la vegetación llena la tierra. Día cuatro: las lumbreras — sol, luna, estrellas — llenan el cielo para gobernar el día y la noche. Día cinco: las criaturas marinas llenan las aguas; las aves llenan el cielo. Día seis: los animales terrestres llenan la tierra.</p>
+
+                <div class="illustration">
+                    <strong>Ilustración:</strong> Un pez fuera del agua muere. Un árbol arrancado del suelo muere. Cada cosa creada prospera solo dentro de su dominio designado. Mantenga ese pensamiento — importará en un momento.
+                </div>
+
+                <p>A medida que la narrativa avanza, observe cómo aumenta la complejidad y la belleza de la creación de Dios. Día uno trae luz. Día dos divide aguas de aguas — una separación simple. Para el día tres, aparece la vegetación, con su intrincada vida celular. Día cuatro establece las lumbreras en sus cursos. Día cinco llena los mares y los cielos con criaturas en movimiento. Día seis culmina en animales terrestres y finalmente en la humanidad — llevando la imagen de Dios mismo. El arco se mueve de sustancia cruda a vida vibrante a portador-de-la-imagen. Nada en esta progresión es aleatorio. Cada paso construye hacia el momento en que Dios puede declarar Su obra muy buena.</p>
+
+                <h3>5. La Imagen de Dios: Nuestro Propósito Revelado</h3>
+                <p>Entonces Dios dijo: "Hagamos al hombre <em>a</em> nuestra imagen" (Génesis 1:26). Pero la preposición hebrea se traduce mejor <strong><em>como</em></strong> nuestra imagen. En el mundo antiguo, cuando un emperador gobernaba una ciudad distante, colocaba una estatua de sí mismo en la plaza del pueblo. Esa estatua recordaba a todos: hay un gobernante; estos son sus atributos; estás bajo su autoridad. Dios hizo a la humanidad <em>como</em> Su imagen — para estar delante de toda la creación como un recordatorio vivo del Creador. Ese es tu propósito: reflejar a Dios a todo lo que te rodea.</p>
+
+                <div class="scripture">
+                    <strong>Génesis 1:27-28 (RVG):</strong> "Y creó Dios al hombre a su imagen, a imagen de Dios lo creó; varón y hembra los creó. Y los bendijo Dios, y les dijo: Fructificad y multiplicaos; llenad la tierra, y sojuzgadla, y señoread en los peces del mar, en las aves de los cielos, y en todas las bestias que se mueven sobre la tierra."
+                </div>
+
+                <p>Observe el dominio del cual fue llamada la humanidad. No del agua, no del cielo, no de la tierra — sino de Dios mismo. ¿Qué sucede si sacas un pez del agua? Muerte. ¿Sacar un árbol del suelo? Muerte. ¿Sacar a un humano del dominio de Dios? Muerte. Por eso la separación de Dios — el pecado — trae muerte espiritual. Pero igualmente, esta es tu dignidad: fuiste hecho para la intimidad con el Creador.</p>
+
+                <h3>6. No Había Muerte Antes de la Caída</h3>
+                <p>En Génesis 1:29-30, Dios da toda planta verde como alimento — tanto para humanos como para animales. Ningún animal era alimento para otro animal. No había muerte. La creación era muy buena, íntegra y pacífica. La muerte entró solo después de la rebelión de la humanidad (Génesis 3). Todo el sistema sacrificial, y finalmente la cruz de Cristo, es la respuesta de Dios para restaurar lo que se rompió — para traer a la humanidad de vuelta al dominio de Dios, donde la vida florece.</p>
+
+                <h3>7. Dios Descansó: El Séptimo Día</h3>
+                <p>En el séptimo día, Dios descansó. No por agotamiento — sino de crear. Bendijo el día y lo santificó. El reposo del séptimo día no es meramente un mandamiento; es una invitación a confiar que Dios sostiene lo que ha hecho. Para el pastor, este es un recordatorio semanal de que tu ministerio no depende de tu esfuerzo, sino del Único que descansó después de declarar que todo era bueno.</p>
+                <p>Para el estudiante del seminario, esta misma invitación corta profundo. Tus estudios importan, pero no son lo que sostiene el mundo. El Dios que declaró "muy bueno" antes de que existiera cualquier trabajador humano todavía lo declara ahora. Entra en ese reposo cada semana. Recíbelo como el ritmo fundamental de tu ministerio y de tu alma. El sábado no es una interrupción de la obra de Dios — es su consumación, y te pertenece por gracia, no por rendimiento.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="exam-section" id="examSection">
+        <div class="exam-header">
+            <h2><span class="lang-en">Unit 1 Examination</span><span class="lang-es">Examen de la Unidad 1</span></h2>
+            <p><span class="lang-en">20 multiple choice questions + 10 short answer questions (essays required for Th.M. and M.Div. only)</span><span class="lang-es">20 preguntas de opción múltiple + 10 preguntas de desarrollo (requeridas solo para Th.M. y M.Div.)</span></p>
+        </div>
+        <div id="mcQuestions"></div>
+        <div id="saQuestions"></div>
+        <div class="action-buttons">
+            <button id="submitBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Entregar Examen</span></button>
+            <button id="resetBtn" class="reset-btn"><span class="lang-en">Reset Exam</span><span class="lang-es">Reiniciar Examen</span></button>
+        </div>
+        <div id="lockoutTimer" class="lockout-timer" style="display:none;"></div>
+    </div>
+
+    <div class="nav-links">
+        <span></span>
+        <a href="CTSPentUnit2.html" id="nextLink" style="display:none;"><span class="lang-en">Next Unit →</span><span class="lang-es">Siguiente Unidad →</span></a>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// PER-UNIT CONSTANTS (change per unit)
+// ============================================================
+const UNIT = 1;
+const COURSE_PREFIX = "pent";
+const NEXT_URL = "CTSPentUnit2.html";
+const PREV_URL = null;
+const IS_LAST_UNIT = false;
+const SHOW_REGISTRATION_CARD = true;
+const CERT_URL = "CTSPentCertificate.html";
+
+// ============================================================
+// MULTIPLE CHOICE QUESTIONS (20) — Distribution: A=5, B=5, C=5, D=5
+// ============================================================
+const mcQuestions = [
+    { textEn: "1. According to John 1:1-5, where does the true creation narrative actually begin?", textEs: "1. Según Juan 1:1-5, ¿dónde comienza en realidad el verdadero relato de la creación?", optionsEn: ["A. Genesis 1:1", "B. Genesis 1:26", "C. John 1:1-5", "D. Exodus 20"], optionsEs: ["A. Génesis 1:1", "B. Génesis 1:26", "C. Juan 1:1-5", "D. Éxodo 20"], correct: 2, correctFeedbackEn: "Correct. John reveals that the Word (Christ) was the agent of all creation, making John 1 the true theological starting point — before Genesis 1:1.", correctFeedbackEs: "Correcto. Juan revela que el Verbo (Cristo) fue el agente de toda la creación, lo que hace de Juan 1 el verdadero punto de partida teológico — antes de Génesis 1:1.", incorrectFeedbackEn: "Look again at John 1:1-5 — 'In the beginning was the Word.' The narrative begins there, not in Genesis 1:1 alone.", incorrectFeedbackEs: "Mire de nuevo Juan 1:1-5 — 'En el principio era el Verbo'. El relato comienza allí, no solo en Génesis 1:1." },
+    { textEn: "2. The Hebrew word 'bara' in Genesis 1:1 implies what about the original creation?", textEs: "2. ¿Qué implica la palabra hebrea 'bara' en Génesis 1:1 acerca de la creación original?", optionsEn: ["A. It was new and perfect", "B. It was incomplete", "C. It was an accident", "D. It was only spiritual"], optionsEs: ["A. Era nueva y perfecta", "B. Estaba incompleta", "C. Fue un accidente", "D. Era solo espiritual"], correct: 0, correctFeedbackEn: "Exactly. 'Bara' stresses that what was formed was new and perfect — a deliberate, sovereign divine act.", correctFeedbackEs: "Exactamente. 'Bara' recalca que lo que fue formado era nuevo y perfecto — un acto divino deliberado y soberano.", incorrectFeedbackEn: "'Bara' indicates something new and perfect, not incomplete or accidental. God's creative work was deliberate.", incorrectFeedbackEs: "'Bara' indica algo nuevo y perfecto, no incompleto ni accidental. La obra creadora de Dios fue deliberada." },
+    { textEn: "3. What does the Spirit of God hovering over the waters (Genesis 1:2) picture?", textEs: "3. ¿Qué representa el Espíritu de Dios moviéndose sobre las aguas (Génesis 1:2)?", optionsEn: ["A. An angry storm", "B. A farmer plowing", "C. A warrior preparing for battle", "D. A mother swan protecting her nest"], optionsEs: ["A. Una tormenta furiosa", "B. Un labrador arando", "C. Un guerrero preparándose para la batalla", "D. Una madre cisne protegiendo su nido"], correct: 3, correctFeedbackEn: "Yes. The Hebrew suggests a protective, nurturing presence — God's first act in the chaos is redemption, not destruction.", correctFeedbackEs: "Sí. El hebreo sugiere una presencia protectora y cuidadora — el primer acto de Dios en el caos es redención, no destrucción.", incorrectFeedbackEn: "The imagery is protective and nurturing — like a mother swan over her nest. God's first move is to redeem, not destroy.", incorrectFeedbackEs: "La imagen es protectora y cuidadora — como una madre cisne sobre su nido. El primer movimiento de Dios es redimir, no destruir." },
+    { textEn: "4. What pattern do we see in the six days of creation?", textEs: "4. ¿Qué patrón vemos en los seis días de la creación?", optionsEn: ["A. Creation of domains, then filling them", "B. Random acts of power", "C. Only spiritual creation", "D. Destruction followed by rebuilding"], optionsEs: ["A. Creación de dominios, y luego su llenado", "B. Actos de poder al azar", "C. Solo creación espiritual", "D. Destrucción seguida de reconstrucción"], correct: 0, correctFeedbackEn: "Exactly. Days 1-3 establish domains (light, sky/water, land). Days 4-6 fill each domain with its appropriate inhabitants.", correctFeedbackEs: "Exactamente. Los días 1-3 establecen dominios (luz, cielo/agua, tierra). Los días 4-6 llenan cada dominio con sus habitantes apropiados.", incorrectFeedbackEn: "The pattern is deliberate: first domains, then inhabitants. Days 1-3 establish; days 4-6 fill.", incorrectFeedbackEs: "El patrón es deliberado: primero los dominios, luego los habitantes. Los días 1-3 establecen; los días 4-6 llenan." },
+    { textEn: "5. On which day were the sun, moon, and stars created?", textEs: "5. ¿En qué día fueron creados el sol, la luna y las estrellas?", optionsEn: ["A. Day 1", "B. Day 2", "C. Day 3", "D. Day 4"], optionsEs: ["A. Día 1", "B. Día 2", "C. Día 3", "D. Día 4"], correct: 3, correctFeedbackEn: "Correct. Day 4 — the lights fill the domain of sky created on day 2.", correctFeedbackEs: "Correcto. El día 4 — las lumbreras llenan el dominio del cielo creado en el día 2.", incorrectFeedbackEn: "Day 4. The lights fill the domain of sky that was created on day 2.", incorrectFeedbackEs: "El día 4. Las lumbreras llenan el dominio del cielo que fue creado en el día 2." },
+    { textEn: "6. The Hebrew preposition in 'made man IN Our image' (Genesis 1:26) is better translated as what?", textEs: "6. La preposición hebrea en 'hizo al hombre A Nuestra imagen' (Génesis 1:26) se traduce mejor como qué?", optionsEn: ["A. Under", "B. Beside", "C. As", "D. Through"], optionsEs: ["A. Bajo", "B. Junto a", "C. Como", "D. A través de"], correct: 2, correctFeedbackEn: "Yes — 'as' Our image. Humanity functions as God's living statue, reminding creation of its Creator.", correctFeedbackEs: "Sí — 'como' Nuestra imagen. La humanidad funciona como la estatua viviente de Dios, recordando a la creación a su Creador.", incorrectFeedbackEn: "The preposition is better translated 'as' — humanity serves as God's image, not merely in it.", incorrectFeedbackEs: "La preposición se traduce mejor como 'como' — la humanidad sirve como imagen de Dios, no meramente dentro de ella." },
+    { textEn: "7. In the ancient world, what did an emperor's statue in a distant city communicate?", textEs: "7. En el mundo antiguo, ¿qué comunicaba la estatua de un emperador en una ciudad lejana?", optionsEn: ["A. The emperor was afraid", "B. The statue was a god itself", "C. The city was independent", "D. There is a ruler with authority"], optionsEs: ["A. El emperador tenía miedo", "B. La estatua era un dios en sí misma", "C. La ciudad era independiente", "D. Hay un gobernante con autoridad"], correct: 3, correctFeedbackEn: "Right. The statue reminded everyone that a ruler existed, had certain attributes, and was to be obeyed.", correctFeedbackEs: "Correcto. La estatua recordaba a todos que existía un gobernante, que tenía ciertos atributos y que debía ser obedecido.", incorrectFeedbackEn: "The statue signaled authority and presence of the ruler — not fear, independence, or deity.", incorrectFeedbackEs: "La estatua señalaba la autoridad y la presencia del gobernante — no miedo, independencia ni deidad." },
+    { textEn: "8. According to the lesson, what is humanity's divine purpose?", textEs: "8. Según la lección, ¿cuál es el propósito divino de la humanidad?", optionsEn: ["A. To serve as a reminder of God to all creation", "B. To rule with cruelty", "C. To hide from God", "D. To become gods ourselves"], optionsEs: ["A. Servir como recordatorio de Dios ante toda la creación", "B. Gobernar con crueldad", "C. Esconderse de Dios", "D. Convertirnos nosotros mismos en dioses"], correct: 0, correctFeedbackEn: "Exactly. You were called forth from the domain of God Himself to stand as His reminder to creation.", correctFeedbackEs: "Exactamente. Fuiste llamado desde el dominio de Dios mismo para ser Su recordatorio ante la creación.", incorrectFeedbackEn: "Your purpose is to reflect God — to be a living reminder of the Creator to everything around you.", incorrectFeedbackEs: "Tu propósito es reflejar a Dios — ser un recordatorio viviente del Creador ante todo lo que te rodea." },
+    { textEn: "9. What happens spiritually if a human is removed from the domain of God?", textEs: "9. ¿Qué sucede espiritualmente si un ser humano es apartado del dominio de Dios?", optionsEn: ["A. They die (spiritual death)", "B. They become invisible", "C. They become stronger", "D. Nothing changes"], optionsEs: ["A. Muere (muerte espiritual)", "B. Se vuelve invisible", "C. Se hace más fuerte", "D. No cambia nada"], correct: 0, correctFeedbackEn: "Correct. Just as a fish dies outside water, spiritual death is separation from God — the domain of life.", correctFeedbackEs: "Correcto. Así como un pez muere fuera del agua, la muerte espiritual es la separación de Dios — el dominio de la vida.", incorrectFeedbackEn: "Separation from God brings spiritual death. We were made for His presence — outside it we cannot thrive.", incorrectFeedbackEs: "La separación de Dios trae muerte espiritual. Fuimos hechos para Su presencia — fuera de ella no podemos prosperar." },
+    { textEn: "10. What was given as food to both humans and animals in Genesis 1:29-30?", textEs: "10. ¿Qué fue dado como alimento tanto a los humanos como a los animales en Génesis 1:29-30?", optionsEn: ["A. Only meat", "B. Nothing — they fasted", "C. Only grain", "D. Every green plant"], optionsEs: ["A. Solo carne", "B. Nada — ayunaban", "C. Solo grano", "D. Toda planta verde"], correct: 3, correctFeedbackEn: "Yes. Every green plant — no animal death, no predation. The original creation was peaceful.", correctFeedbackEs: "Sí. Toda planta verde — sin muerte de animales, sin depredación. La creación original era pacífica.", incorrectFeedbackEn: "Every green plant. No animal was food for another. Death had not yet entered.", incorrectFeedbackEs: "Toda planta verde. Ningún animal era alimento de otro. La muerte aún no había entrado." },
+    { textEn: "11. Approximately how many people lived on the earth at the time Moses wrote the Pentateuch?", textEs: "11. ¿Aproximadamente cuántas personas vivían en la tierra cuando Moisés escribió el Pentateuco?", optionsEn: ["A. 8 billion", "B. 1 million", "C. 33 million", "D. 500 million"], optionsEs: ["A. 8 mil millones", "B. 1 millón", "C. 33 millones", "D. 500 millones"], correct: 2, correctFeedbackEn: "Yes — about 33 million, roughly 1.4 per square mile. The world Moses wrote into was nearly empty by today's standards (8 billion). Outside urban centers, one could walk 50-100 miles without seeing another human.", correctFeedbackEs: "Sí — unos 33 millones, cerca de 1.4 por milla cuadrada. El mundo en que Moisés escribió estaba casi vacío según los estándares de hoy (8 mil millones). Fuera de los centros urbanos, uno podía caminar de 50 a 100 millas sin ver a otro ser humano.", incorrectFeedbackEn: "About 33 million — roughly 1.4 per square mile. In Moses' day, humans were not even the apex predator across much of the earth.", incorrectFeedbackEs: "Unos 33 millones — cerca de 1.4 por milla cuadrada. En los días de Moisés, los humanos ni siquiera eran el depredador dominante en gran parte de la tierra." },
+    { textEn: "12. What did God's rest on the seventh day signify?", textEs: "12. ¿Qué significó el reposo de Dios en el séptimo día?", optionsEn: ["A. God was tired", "B. Creation was complete and good", "C. God abandoned creation", "D. The Sabbath is only for Jews"], optionsEs: ["A. Dios estaba cansado", "B. La creación estaba completa y era buena", "C. Dios abandonó la creación", "D. El sábado es solo para los judíos"], correct: 1, correctFeedbackEn: "Correct. Rest was not exhaustion but completion — creation was finished and pronounced very good.", correctFeedbackEs: "Correcto. El reposo no fue agotamiento sino consumación — la creación estaba terminada y declarada buena en gran manera.", incorrectFeedbackEn: "God rested from creating, not from exhaustion. He blessed the seventh day as holy — a sign of completion.", incorrectFeedbackEs: "Dios reposó de crear, no por agotamiento. Bendijo el séptimo día como santo — señal de consumación." },
+    { textEn: "13. What does the Hebrew word 'Torah' mean?", textEs: "13. ¿Qué significa la palabra hebrea 'Torá'?", optionsEn: ["A. Law only", "B. Instruction or teaching", "C. History book", "D. Poetry"], optionsEs: ["A. Solo ley", "B. Instrucción o enseñanza", "C. Libro de historia", "D. Poesía"], correct: 1, correctFeedbackEn: "Yes. Torah means 'instruction' or 'teaching' — not merely legal code, but divine guidance for life.", correctFeedbackEs: "Sí. Torá significa 'instrucción' o 'enseñanza' — no meramente un código legal, sino guía divina para la vida.", incorrectFeedbackEn: "Torah means instruction or teaching — the foundation of all Scripture, not just law.", incorrectFeedbackEs: "Torá significa instrucción o enseñanza — el fundamento de toda la Escritura, no solo ley." },
+    { textEn: "14. Who did Jesus affirm as the author of the Pentateuch in Mark 7:10?", textEs: "14. ¿A quién afirmó Jesús como autor del Pentateuco en Marcos 7:10?", optionsEn: ["A. Joshua", "B. Ezra", "C. Moses", "D. David"], optionsEs: ["A. Josué", "B. Esdras", "C. Moisés", "D. David"], correct: 2, correctFeedbackEn: "Correct. Jesus quotes Moses as the author, confirming traditional Mosaic authorship.", correctFeedbackEs: "Correcto. Jesús cita a Moisés como el autor, confirmando la autoría mosaica tradicional.", incorrectFeedbackEn: "Jesus affirmed Moses. 'For Moses said, Honor your father and your mother.'", incorrectFeedbackEs: "Jesús afirmó a Moisés. 'Porque Moisés dijo: Honra a tu padre y a tu madre.'" },
+    { textEn: "15. According to conservative scholarship, when was the Pentateuch written?", textEs: "15. Según la erudición conservadora, ¿cuándo fue escrito el Pentateuco?", optionsEn: ["A. 500 BC", "B. 1450 BC", "C. 1000 BC", "D. 2000 BC"], optionsEs: ["A. 500 a.C.", "B. 1450 a.C.", "C. 1000 a.C.", "D. 2000 a.C."], correct: 1, correctFeedbackEn: "Right. Around 1450 BC, during Israel's wilderness wanderings, with Moses as the human author.", correctFeedbackEs: "Correcto. Alrededor del 1450 a.C., durante las peregrinaciones de Israel en el desierto, con Moisés como autor humano.", incorrectFeedbackEn: "Conservative dating places the Pentateuch around 1450 BC, during Moses' lifetime.", incorrectFeedbackEs: "La datación conservadora ubica el Pentateuco alrededor del 1450 a.C., durante la vida de Moisés." },
+    { textEn: "16. What literary genre best describes Genesis according to the lesson?", textEs: "16. ¿Qué género literario describe mejor a Génesis según la lección?", optionsEn: ["A. Theological historical narrative", "B. Simple chronology", "C. A symbolic account only", "D. Poetry"], optionsEs: ["A. Narrativa histórica teológica", "B. Cronología simple", "C. Solo un relato simbólico", "D. Poesía"], correct: 0, correctFeedbackEn: "Excellent. Genesis is theological historical narrative, not merely a symbolic account; it interprets real events to reveal God's character.", correctFeedbackEs: "Excelente. Génesis es narrativa histórica teológica, no solo un relato simbólico; interpreta eventos reales para revelar el carácter de Dios.", incorrectFeedbackEn: "Genesis is theological historical narrative — real events shaped to show who God is.", incorrectFeedbackEs: "Génesis es narrativa histórica teológica — eventos reales moldeados para mostrar quién es Dios." },
+    { textEn: "17. What was likely the cause of the 'formless and void' state in Genesis 1:2?", textEs: "17. ¿Cuál fue probablemente la causa del estado 'desordenada y vacía' en Génesis 1:2?", optionsEn: ["A. A random accident", "B. The satanic rebellion", "C. God's mistake", "D. A natural disaster"], optionsEs: ["A. Un accidente al azar", "B. La rebelión satánica", "C. Un error de Dios", "D. Un desastre natural"], correct: 1, correctFeedbackEn: "Yes. Most conservative scholars see the gap as the result of Lucifer's fall, making Genesis 1:2 a scene of judgment awaiting redemption.", correctFeedbackEs: "Sí. La mayoría de los eruditos conservadores ven la brecha como resultado de la caída de Lucifer, haciendo de Génesis 1:2 una escena de juicio que espera redención.", incorrectFeedbackEn: "The most common conservative view is that the satanic rebellion caused the chaos God then redeems.", incorrectFeedbackEs: "La visión conservadora más común es que la rebelión satánica causó el caos que Dios luego redime." },
+    { textEn: "18. Which New Testament passage reveals the true 'beginning' of the creation narrative?", textEs: "18. ¿Qué pasaje del Nuevo Testamento revela el verdadero 'principio' del relato de la creación?", optionsEn: ["A. Matthew 1", "B. Romans 1", "C. John 1:1-5", "D. Revelation 21"], optionsEs: ["A. Mateo 1", "B. Romanos 1", "C. Juan 1:1-5", "D. Apocalipsis 21"], correct: 2, correctFeedbackEn: "Correct. John takes us behind Genesis 1 to the eternal Word who was with God and was God.", correctFeedbackEs: "Correcto. Juan nos lleva detrás de Génesis 1, al Verbo eterno que estaba con Dios y era Dios.", incorrectFeedbackEn: "John 1:1-5. 'In the beginning was the Word' — before Genesis 1:1.", incorrectFeedbackEs: "Juan 1:1-5. 'En el principio era el Verbo' — antes de Génesis 1:1." },
+    { textEn: "19. What does the phrase 'Let Us make mankind' (Genesis 1:26) imply about God?", textEs: "19. ¿Qué implica acerca de Dios la frase 'Hagamos al hombre' (Génesis 1:26)?", optionsEn: ["A. God was lonely", "B. There is plurality within the Godhead", "C. Angels helped create", "D. God was uncertain"], optionsEs: ["A. Dios estaba solo", "B. Hay pluralidad dentro de la Deidad", "C. Los ángeles ayudaron a crear", "D. Dios estaba inseguro"], correct: 1, correctFeedbackEn: "Yes. This hints at the Trinity — Father, Son, and Spirit in collaborative creation.", correctFeedbackEs: "Sí. Esto insinúa la Trinidad — Padre, Hijo y Espíritu en creación colaborativa.", incorrectFeedbackEn: "The plural 'Us' hints at the triune nature of God — one God in three persons.", incorrectFeedbackEs: "El plural 'Hagamos' insinúa la naturaleza trina de Dios — un solo Dios en tres personas." },
+    { textEn: "20. On which day did God create land animals and humanity?", textEs: "20. ¿En qué día creó Dios los animales terrestres y a la humanidad?", optionsEn: ["A. Day 3", "B. Day 4", "C. Day 5", "D. Day 6"], optionsEs: ["A. Día 3", "B. Día 4", "C. Día 5", "D. Día 6"], correct: 3, correctFeedbackEn: "Correct. Day 6 — after filling the sea and sky, God filled the land with animals, then crowned creation with humanity.", correctFeedbackEs: "Correcto. El día 6 — después de llenar el mar y el cielo, Dios llenó la tierra de animales, y luego coronó la creación con la humanidad.", incorrectFeedbackEn: "Day 6. Land animals and then humanity — the crown of creation.", incorrectFeedbackEs: "El día 6. Los animales terrestres y luego la humanidad — la corona de la creación." }
+];
+
+// ============================================================
+// SHORT ANSWER QUESTIONS (10) — split kw_en / kw_es
+// ============================================================
+const saQuestions = [
+    { id: "sa_u1_1", textEn: "Explain why Genesis is considered 'theological historical narrative' rather than a purely symbolic account.", textEs: "Explique por qué Génesis se considera 'narrativa histórica teológica' en lugar de un relato puramente simbólico.", kw_en: ["theolog", "histor", "narrativ", "real", "event", "charact", "reveal", "symbol"], kw_es: ["teológ", "históric", "narrativ", "real", "event", "caráct", "revel", "símbol"], explanationEn: "Genesis selects and shapes real events to reveal God's character, unlike a purely symbolic account.", explanationEs: "Génesis selecciona y moldea eventos reales para revelar el carácter de Dios, a diferencia de un relato puramente simbólico." },
+    { id: "sa_u1_2", textEn: "What does the Hebrew word 'bara' tell us about the original creation in Genesis 1:1?", textEs: "¿Qué nos dice la palabra hebrea 'bara' sobre la creación original en Génesis 1:1?", kw_en: ["bara", "new", "perfect", "creat", "sovereign", "deliberat", "act", "form"], kw_es: ["bara", "nuev", "perfect", "soberan", "deliberad", "acto", "form", "divin"], explanationEn: "Bara stresses that what God formed was new and perfect — a deliberate, sovereign creative act.", explanationEs: "Bara enfatiza que lo que Dios formó era nuevo y perfecto — un acto creativo deliberado y soberano." },
+    { id: "sa_u1_3", textEn: "Describe the pattern of 'domains and filling' in the six days of creation.", textEs: "Describa el patrón de 'dominios y llenura' en los seis días de la creación.", kw_en: ["domain", "fill", "day", "light", "sky", "land", "inhabit", "separat"], kw_es: ["domini", "llena", "día", "luz", "ciel", "tierra", "habit", "separ"], explanationEn: "Days 1-3 create domains; Days 4-6 fill each domain with appropriate inhabitants.", explanationEs: "Días 1-3 crean dominios; Días 4-6 llenan cada dominio con habitantes apropiados." },
+    { id: "sa_u1_4", textEn: "What does it mean that humanity was made 'as' the image of God, not merely 'in' the image?", textEs: "¿Qué significa que la humanidad fue hecha 'como' la imagen de Dios, no meramente 'a' la imagen?", kw_en: ["image", "statue", "remind", "reflect", "represent", "ruler", "creat", "function"], kw_es: ["imagen", "estatua", "record", "reflej", "represent", "gobern", "creaci", "funcion"], explanationEn: "Like an emperor's statue in a distant city, humans function as God's living reminders to creation.", explanationEs: "Como la estatua de un emperador en una ciudad distante, los humanos funcionan como recordatorios vivos de Dios para la creación." },
+    { id: "sa_u1_5", textEn: "Explain the significance of the Spirit hovering over the waters in Genesis 1:2.", textEs: "Explique el significado del Espíritu revoloteando sobre las aguas en Génesis 1:2.", kw_en: ["spirit", "hover", "protect", "redempt", "chaos", "order", "water", "life"], kw_es: ["espíritu", "revolote", "proteg", "redenci", "caos", "orden", "agua", "vida"], explanationEn: "God's first recorded act is not creation but redemption — calling order from chaos.", explanationEs: "El primer acto registrado de Dios no es la creación sino la redención — llamando orden del caos." },
+    { id: "sa_u1_6", textEn: "What was the original diet given to humans and animals in Genesis 1:29-30, and what does that imply about death?", textEs: "¿Cuál fue la dieta original dada a humanos y animales en Génesis 1:29-30, y qué implica eso sobre la muerte?", kw_en: ["plant", "vegetar", "food", "death", "peace", "fall", "predat", "original"], kw_es: ["planta", "vegetar", "aliment", "muert", "paz", "caída", "depredac", "original"], explanationEn: "Every green plant was food; no animal death. Death entered after the Fall (Genesis 3).", explanationEs: "Toda planta verde era alimento; no había muerte animal. La muerte entró después de la Caída (Génesis 3)." },
+    { id: "sa_u1_7", textEn: "Why is John 1:1-5 considered the 'first creation narrative' rather than Genesis 1:1?", textEs: "¿Por qué se considera Juan 1:1-5 como la 'primera narrativa de la creación' en lugar de Génesis 1:1?", kw_en: ["john", "word", "begin", "christ", "agent", "eternal", "creat", "made"], kw_es: ["juan", "verbo", "principi", "cristo", "agente", "etern", "creaci", "hech"], explanationEn: "John takes us behind Genesis to the eternal Word (Christ) through whom all things were made.", explanationEs: "Juan nos lleva detrás de Génesis al Verbo eterno (Cristo) mediante quien todas las cosas fueron hechas." },
+    { id: "sa_u1_8", textEn: "What does the lesson mean by 'removing a human from the domain of God equals death'?", textEs: "¿Qué significa la lección cuando dice 'sacar a un humano del dominio de Dios equivale a muerte'?", kw_en: ["separat", "death", "sin", "fellowship", "relationship", "fish", "water", "thrive"], kw_es: ["separac", "muert", "pecado", "comunión", "relación", "pez", "agua", "prosper"], explanationEn: "Just as a fish dies outside water, humans were designed to thrive only in relationship with God.", explanationEs: "Así como un pez muere fuera del agua, los humanos fueron diseñados para prosperar solo en relación con Dios." },
+    { id: "sa_u1_9", textEn: "What was the likely cause of the 'formless and void' state in Genesis 1:2 according to conservative scholars?", textEs: "¿Cuál fue la causa probable del estado 'sin forma y vacía' en Génesis 1:2 según los eruditos conservadores?", kw_en: ["satan", "rebellion", "gap", "judgment", "lucifer", "fall", "chaos", "redeem"], kw_es: ["satán", "rebelión", "brecha", "juici", "lucifer", "caída", "caos", "redim"], explanationEn: "Most hold that the satanic rebellion caused the chaos that God then redeems in Genesis 1.", explanationEs: "La mayoría sostiene que la rebelión satánica causó el caos que Dios luego redime en Génesis 1." },
+    { id: "sa_u1_10", textEn: "What is the purpose of the Sabbath rest according to the lesson — for God and for us?", textEs: "¿Cuál es el propósito del reposo del séptimo día según la lección — para Dios y para nosotros?", kw_en: ["rest", "trust", "provid", "holy", "bless", "invit", "sabbath", "complet"], kw_es: ["descans", "repos", "confi", "provis", "santif", "bendij", "complet", "sábado"], explanationEn: "God rested to declare creation complete; we rest to trust His provision, not our striving.", explanationEs: "Dios descansó para declarar la creación completa; nosotros descansamos para confiar en Su provisión, no en nuestro esfuerzo." }
+];
+
+// ============================================================
+// GLOBAL STATE
+// ============================================================
+let studentTrack = "cert";
+let studentName = "";
+let lockoutEnd = null;
+let examPassed = false;
+const PASS_MC = 18;
+const PASS_SA = 9;
+
+function getStorageKey(key) { return `cts_${COURSE_PREFIX}_${key}`; }
+
+// ============================================================
+// STATE LOAD/SAVE
+// ============================================================
+function loadState() {
+    const student = localStorage.getItem("cts_student");
+    if (student) {
+        try {
+            const s = JSON.parse(student);
+            studentName = s.name || "";
+            studentTrack = s.track || "cert";
+        } catch(e) {}
+    }
+    const trackOverride = localStorage.getItem("cts_track");
+    if (trackOverride && ["cert","thm","mdiv"].includes(trackOverride)) studentTrack = trackOverride;
+
+    const lock = localStorage.getItem(getStorageKey(`unit${UNIT}_lockout`));
+    if (lock && parseInt(lock) > Date.now()) lockoutEnd = parseInt(lock);
+
+    const passedFlag = localStorage.getItem(getStorageKey(`unit${UNIT}_passed`));
+    if (passedFlag === "true") examPassed = true;
+
+    const lang = localStorage.getItem(getStorageKey(`unit${UNIT}_lang`)) || "en";
+    document.body.className = `lang-${lang}`;
+
+    updateTrackDisplay();
+    if (examPassed && !IS_LAST_UNIT) { var nl = document.getElementById("nextLink"); nl.href = NEXT_URL; nl.style.display = "block"; }
+    else if (examPassed && IS_LAST_UNIT) window.location.href = CERT_URL;
+}
+
+function updateTrackDisplay() {
+    const trackMap = { cert: "Certificate", thm: "Th.M.", mdiv: "M.Div." };
+    document.getElementById("trackIndicator").innerHTML = `<span class="lang-en">Track: ${trackMap[studentTrack]}</span><span class="lang-es">Vía: ${trackMap[studentTrack]}</span>`;
+}
+
+function saveLanguage(lang) {
+    localStorage.setItem(getStorageKey(`unit${UNIT}_lang`), lang);
+    document.body.className = `lang-${lang}`;
+}
+
+// ============================================================
+// RENDER QUESTIONS
+// ============================================================
+function renderQuestions() {
+    const mcContainer = document.getElementById("mcQuestions");
+    mcContainer.innerHTML = "";
+    mcQuestions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.textEn}</span><span class="lang-es">${q.textEs}</span></div>
+            <div class="options" id="mc-${idx}-opts">
+                ${q.optionsEn.map((opt, optIdx) => `<label><input type="radio" name="mc${idx}" value="${optIdx}"><span class="lang-en"> ${q.optionsEn[optIdx]}</span><span class="lang-es"> ${q.optionsEs[optIdx]}</span></label>`).join('')}
+            </div>
+            <div class="feedback" id="mc-${idx}-fb"></div>
+        `;
+        mcContainer.appendChild(card);
+    });
+
+    const saContainer = document.getElementById("saQuestions");
+    saContainer.innerHTML = "";
+    saQuestions.forEach((q, idx) => {
+        const isCert = studentTrack === "cert";
+        const card = document.createElement("div");
+        card.className = "question-card essay-question";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.textEn}</span><span class="lang-es">${q.textEs}</span></div>
+            <textarea rows="3" id="sa-${idx}" placeholder='${isCert ? "Optional for Certificate track / Opcional para Certificado" : "Type your answer here... / Escriba su respuesta aquí..."}' ></textarea>
+            <div class="feedback" id="sa-${idx}-fb"></div>
+        `;
+        saContainer.appendChild(card);
+    });
+
+    attachAutoScore();
+    attachSAAutoSave();
+    restoreAnswers();
+}
+
+// ============================================================
+// AUTO-SCORE ON MC CHANGE + SA AUTO-SAVE
+// ============================================================
+function attachAutoScore() {
+    mcQuestions.forEach((q, idx) => {
+        const radios = document.querySelectorAll(`input[name="mc${idx}"]`);
+        radios.forEach(r => {
+            r.addEventListener("change", () => {
+                const selected = document.querySelector(`input[name="mc${idx}"]:checked`);
+                const fbDiv = document.getElementById(`mc-${idx}-fb`);
+                if (selected) {
+                    localStorage.setItem(getStorageKey(`unit${UNIT}_mc${idx}`), selected.value);
+                    const isCorr = parseInt(selected.value) === q.correct;
+                    if (fbDiv) {
+                        fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+                        fbDiv.innerHTML = isCorr ? `<span class="lang-en">${q.correctFeedbackEn}</span><span class="lang-es">${q.correctFeedbackEs}</span>` : `<span class="lang-en">${q.incorrectFeedbackEn}</span><span class="lang-es">${q.incorrectFeedbackEs}</span>`;
+                    }
+                    document.querySelectorAll(`input[name="mc${idx}"]`).forEach(x => { x.disabled = true; });
+                }
+            });
+        });
+    });
+}
+
+function attachSAAutoSave() {
+    saQuestions.forEach((q, idx) => {
+        const ta = document.getElementById(`sa-${idx}`);
+        if (ta) {
+            ta.addEventListener("input", () => {
+                localStorage.setItem(getStorageKey(`unit${UNIT}_sa${idx}`), ta.value);
+            });
+        }
+    });
+}
+
+function restoreAnswers() {
+    mcQuestions.forEach((q, idx) => {
+        const saved = localStorage.getItem(getStorageKey(`unit${UNIT}_mc${idx}`));
+        if (saved !== null) {
+            const radio = document.querySelector(`input[name="mc${idx}"][value="${saved}"]`);
+            if (radio) {
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change'));
+            }
+        }
+    });
+    saQuestions.forEach((q, idx) => {
+        const saved = localStorage.getItem(getStorageKey(`unit${UNIT}_sa${idx}`));
+        if (saved !== null) {
+            const ta = document.getElementById(`sa-${idx}`);
+            if (ta) ta.value = saved;
+        }
+    });
+}
+
+// ============================================================
+// SMART KEYWORD MATCHER (word-boundary; Q24 fairness standard)
+//   keywords <=4 chars  -> whole-word match
+//   keywords  >4 chars  -> left-anchored prefix (catches inflections)
+//   Unicode-aware boundaries incl. Spanish accents
+// ============================================================
+function kwHit(answer, kw) {
+    const a = (answer || "").toLowerCase();
+    const k = (kw || "").toLowerCase().trim();
+    if (!k) return false;
+    const L = "a-záéíóúüñ";
+    const esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const pat = k.length <= 4
+        ? new RegExp(`(^|[^${L}])${esc}([^${L}]|$)`, "i")
+        : new RegExp(`(^|[^${L}])${esc}`, "i");
+    return pat.test(a);
+}
+
+// ============================================================
+// GRADE EXAM
+// ============================================================
+function gradeExam() {
+    if (lockoutEnd && lockoutEnd > Date.now()) {
+        const min = Math.ceil((lockoutEnd - Date.now()) / 60000);
+        alert(`Lockout active. Please wait ${min} minutes. / Bloqueo activo. Espere ${min} minutos.`);
+        return false;
+    }
+
+    let mcCorrect = 0;
+    for (let i = 0; i < mcQuestions.length; i++) {
+        const selected = document.querySelector(`input[name="mc${i}"]:checked`);
+        const fbDiv = document.getElementById(`mc-${i}-fb`);
+        if (selected) {
+            const isCorr = parseInt(selected.value) === mcQuestions[i].correct;
+            if (isCorr) mcCorrect++;
+            fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+            fbDiv.innerHTML = isCorr ? `<span class="lang-en">${mcQuestions[i].correctFeedbackEn}</span><span class="lang-es">${mcQuestions[i].correctFeedbackEs}</span>` : `<span class="lang-en">${mcQuestions[i].incorrectFeedbackEn}</span><span class="lang-es">${mcQuestions[i].incorrectFeedbackEs}</span>`;
+        } else {
+            fbDiv.className = "feedback incorrect";
+            fbDiv.innerHTML = "No answer selected. / No seleccionó respuesta.";
+        }
+    }
+
+    let saPass = true;
+    let saCorrectCount = 0;
+    if (studentTrack !== "cert") {
+        for (let i = 0; i < saQuestions.length; i++) {
+            const answer = document.getElementById(`sa-${i}`).value.trim();
+            const lang = document.body.className.replace("lang-", "");
+            let keywords = lang === "es" ? saQuestions[i].kw_es : saQuestions[i].kw_en;
+            if (lang === "both") keywords = [...saQuestions[i].kw_en, ...saQuestions[i].kw_es];
+            const hits = keywords.filter(kw => kwHit(answer, kw)).length;
+            const passed = hits >= 3 && answer.length >= 100;
+            if (passed) saCorrectCount++;
+            const fbDiv = document.getElementById(`sa-${i}-fb`);
+            const verdict = passed
+                ? `<span class="lang-en">✓ Passed — ${hits} key concepts recognized.</span><span class="lang-es">✓ Aprobado — ${hits} conceptos clave reconocidos.</span>`
+                : `<span class="lang-en">Not enough yet — ${hits} of 3 key concepts matched (answer must also be ≥100 characters). Compare your answer with the model below.</span><span class="lang-es">Aún insuficiente — ${hits} de 3 conceptos clave (la respuesta también debe tener ≥100 caracteres). Compare su respuesta con el modelo.</span>`;
+            const model = `<div class="model-answer"><strong><span class="lang-en">Model answer — study this:</span><span class="lang-es">Respuesta modelo — estúdiela:</span></strong> <span class="lang-en">${saQuestions[i].explanationEn}</span><span class="lang-es">${saQuestions[i].explanationEs}</span></div>`;
+            fbDiv.className = `feedback ${passed ? "correct" : "incorrect"}`;
+            fbDiv.innerHTML = (answer.length >= 100)
+                ? (verdict + model)
+                : `<span class="lang-en">Please write your own answer first \u2014 at least a few sentences (30+ characters) \u2014 then submit to compare it with the model answer.</span><span class="lang-es">Escriba primero su propia respuesta \u2014 al menos unas cuantas oraciones (30+ caracteres) \u2014 luego env\u00EDe para compararla con la respuesta modelo.</span>`;
+        }
+        saPass = saCorrectCount >= PASS_SA;
+    }
+
+    const mcPass = mcCorrect >= PASS_MC;
+    const overallPass = studentTrack === "cert" ? mcPass : (mcPass && saPass);
+
+    if (overallPass) {
+        localStorage.setItem(getStorageKey(`unit${UNIT}_passed`), "true");
+        examPassed = true;
+        const msg = document.body.className.includes("lang-es") ? `¡Aprobado! Sus respuestas están marcadas abajo. Repáselas, luego use el enlace para continuar.` : `Passed! Your answers are marked below. Review them, then use the link to continue.`;
+        alert(msg);
+        if (IS_LAST_UNIT) window.location.href = CERT_URL;
+        else { var nl = document.getElementById("nextLink"); nl.href = NEXT_URL; nl.style.display = "block"; }
+    } else {
+        const lockMinutes = (studentTrack === "cert") ? 2 : 15;
+        const lockoutTime = Date.now() + lockMinutes * 60 * 1000;
+        localStorage.setItem(getStorageKey(`unit${UNIT}_lockout`), lockoutTime);
+        lockoutEnd = lockoutTime;
+        showLockoutTimer();
+        const failMsg = document.body.className.includes("lang-es") ? `No aprobado. Bloqueo de ${lockMinutes} minutos iniciado. (MC: ${mcCorrect}/20${studentTrack !== "cert" ? `, SA: ${saCorrectCount}/10` : ""})` : `Failed. ${lockMinutes}-minute lockout started. (MC: ${mcCorrect}/20${studentTrack !== "cert" ? `, SA: ${saCorrectCount}/10` : ""})`;
+        alert(failMsg);
+    }
+    return overallPass;
+}
+
+function showLockoutTimer() {
+    const timerDiv = document.getElementById("lockoutTimer");
+    if (!lockoutEnd || lockoutEnd <= Date.now()) { timerDiv.style.display = "none"; return; }
+    timerDiv.style.display = "block";
+    const update = () => {
+        const remaining = Math.max(0, Math.ceil((lockoutEnd - Date.now()) / 1000));
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        timerDiv.innerHTML = `<span class="lang-en">Lockout: ${minutes}:${seconds.toString().padStart(2,'0')} remaining</span><span class="lang-es">Bloqueo: ${minutes}:${seconds.toString().padStart(2,'0')} restantes</span>`;
+        if (remaining <= 0) { timerDiv.style.display = "none"; lockoutEnd = null; }
+        else setTimeout(update, 1000);
+    };
+    update();
+}
+
+// ============================================================
+// RESET (bilingual confirm + clear saved answers)
+// ============================================================
+function resetExam() {
+    const isEs = document.body.className.includes("lang-es");
+    const msg = isEs ? "¿Reiniciar todas las respuestas? Esto no se puede deshacer." : "Reset all answers? This cannot be undone.";
+    if (confirm(msg)) {
+        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        document.querySelectorAll('textarea').forEach(t => t.value = "");
+        document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+        mcQuestions.forEach((q, idx) => localStorage.removeItem(getStorageKey(`unit${UNIT}_mc${idx}`)));
+        saQuestions.forEach((q, idx) => localStorage.removeItem(getStorageKey(`unit${UNIT}_sa${idx}`)));
+    }
+}
+
+// ============================================================
+// REGISTER STUDENT
+// ============================================================
+function registerStudent() {
+    const name = document.getElementById("studentName").value.trim();
+    const track = document.getElementById("trackSelect").value;
+    if (!name) { alert("Please enter your name. / Por favor ingrese su nombre."); return; }
+    studentName = name;
+    studentTrack = track;
+    localStorage.setItem("cts_student", JSON.stringify({ name, track }));
+    localStorage.setItem("cts_track", track);
+    document.getElementById("registrationCard").style.display = "none";
+    updateTrackDisplay();
+    renderQuestions();
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => saveLanguage(btn.dataset.lang));
+});
+document.getElementById("submitBtn").addEventListener("click", gradeExam);
+document.getElementById("resetBtn").addEventListener("click", resetExam);
+if (SHOW_REGISTRATION_CARD) {
+    document.getElementById("registerBtn").addEventListener("click", registerStudent);
+} else {
+    document.getElementById("registrationCard").style.display = "none";
+}
+
+loadState();
+      renderQuestions();
+if (!localStorage.getItem("cts_student") && SHOW_REGISTRATION_CARD) {
+    // wait for register
+} else {
+    document.getElementById("registrationCard").style.display = "none";
+    renderQuestions();
+}
+if (lockoutEnd) showLockoutTimer();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPentReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

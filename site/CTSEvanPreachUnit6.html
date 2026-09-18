@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Evangelistic Preaching · Unit 6 · Planning Evangelistic Sermons – The Interview Method</title>
+<style>
+  :root{
+    --bg:#fbf7ef; --ink:#1f1a14; --rule:#c9b98a; --accent:#6b4423; --soft:#f3ead4;
+    --good:#1f6b3a; --bad:#a31e1e; --warn:#a35a00;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.55;font-size:17px}
+  header{background:var(--accent);color:#fff;padding:1.25rem 1.5rem;border-bottom:4px double #c9b98a}
+  header h1{margin:0;font-size:1.35rem;letter-spacing:.5px}
+  header .sub{font-size:.95rem;opacity:.92;margin-top:.25rem}
+  main{max-width:880px;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+  h2{font-size:1.35rem;border-bottom:2px solid var(--rule);padding-bottom:.3rem;margin-top:2.25rem;color:var(--accent)}
+  h3{font-size:1.1rem;margin-top:1.5rem;color:var(--accent)}
+  blockquote{border-left:4px solid var(--rule);background:var(--soft);margin:1rem 0;padding:.75rem 1rem;font-style:italic}
+  .controls{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;background:var(--soft);padding:.85rem 1rem;border:1px solid var(--rule);border-radius:6px;margin:1rem 0 0}
+  .controls .group{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+  .controls label{font-size:.92rem;font-weight:bold}
+  .controls select,.controls button{font-family:inherit;font-size:.95rem;padding:.4rem .7rem;border:1px solid var(--accent);background:#fff;color:var(--ink);border-radius:4px;cursor:pointer}
+  .controls button{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .controls button.secondary{background:#fff;color:var(--accent)}
+  .pill{display:inline-block;font-size:.8rem;padding:.15rem .55rem;border:1px solid var(--accent);border-radius:999px;background:#fff;color:var(--accent);font-weight:bold}
+  .q{margin:1.25rem 0;padding:.85rem 1rem;border:1px solid var(--rule);border-radius:6px;background:#fff}
+  .q .stem{font-weight:bold;margin-bottom:.5rem}
+  .q label{display:block;padding:.3rem .25rem;cursor:pointer}
+  .q input[type=radio]{margin-right:.5rem}
+  .q .fb{margin-top:.5rem;padding:.5rem .75rem;border-radius:4px;font-size:.92rem;display:none}
+  .q .fb.good{background:#e3f3e6;color:var(--good);border:1px solid #b6dcbf;display:block}
+  .q .fb.bad{background:#f7e1e1;color:var(--bad);border:1px solid #e0b3b3;display:block}
+  .q textarea{width:100%;min-height:75px;font-family:inherit;font-size:.95rem;padding:.5rem;border:1px solid var(--rule);border-radius:4px;resize:vertical}
+  .q .sa-fb{margin-top:.4rem;font-size:.9rem}
+.q .modelbox{margin-top:.5rem;padding:.55rem .7rem;background:#fff8e1;color:#5d4a00;border-left:4px solid #d4af37;border-radius:4px;font-size:.9rem}
+  .q .sa-actions{margin-top:.55rem}
+  .q .sa-check{font-size:.9rem;padding:.4rem .9rem;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:4px;font-weight:bold}
+  .q .sa-empty{color:#8a7a5e;font-style:italic}
+
+  .lang-es{display:none}
+  body.lang-es .lang-en{display:none}
+  body.lang-es .lang-es{display:block}
+  body.lang-es .lang-es-inline{display:inline}
+  body.lang-es header h1::after{content:" · Español"}
+  .result-box{margin-top:1.5rem;padding:1rem 1.25rem;border:2px solid var(--accent);border-radius:6px;background:var(--soft);font-size:1.02rem}
+  .result-box.locked{background:#f7e1e1;border-color:var(--bad);color:var(--bad)}
+  .result-box.passed{background:#e3f3e6;border-color:var(--good);color:var(--good)}
+  .cert-link{display:inline-block;margin-top:.75rem;padding:.5rem .9rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:4px;font-weight:bold}
+  footer{font-size:.85rem;color:#6b5a3e;text-align:center;padding:1.5rem 1rem;border-top:1px solid var(--rule)}
+  ul.clean{margin:.5rem 0 .5rem 1.25rem;padding:0}
+  ul.clean li{margin:.25rem 0}
+  .example{background:var(--soft);padding:.75rem 1rem;border-left:4px solid var(--accent);margin:.75rem 0;border-radius:0 4px 4px 0}
+  .example .label{font-weight:bold;color:var(--accent);font-size:.9rem;letter-spacing:.5px;text-transform:uppercase}
+  @media print{
+    .controls,button,.cert-link{display:none !important}
+    body{background:#fff;color:#000;font-size:12pt}
+    header{background:#fff;color:#000;border-bottom:2px solid #000}
+    .q{break-inside:avoid;border:1px solid #000}
+    h2,h3{color:#000}
+  }
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 16px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:#fff;border:1px solid var(--rule);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:var(--accent);}
+.unitnav a.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header>
+  <h1>
+    <span class="lang-en">CTS Evangelistic Preaching · Unit 6</span>
+    <span class="lang-es">CTS Predicación Evangelística · Unidad 6</span>
+  </h1>
+  <div class="sub">
+    <span class="lang-en">Planning Evangelistic Sermons – The Interview Method</span>
+    <span class="lang-es">Planificación de Sermones Evangelísticos – El Método de la Entrevista</span>
+    &middot; <span class="pill">Dr. Wayne Cook</span>
+  </div>
+</header>
+
+<main>
+
+<div class="controls">
+  <div class="group">
+    <label><span class="lang-en">Language:</span><span class="lang-es">Idioma:</span></label>
+    <button id="btnLang" class="secondary" type="button">English / Español</button>
+  </div>
+  <div class="group">
+    <label><span class="lang-en">Track:</span><span class="lang-es">Vía:</span></label>
+    <select id="trackSel" aria-label="trackSel">
+      <option value="cert">Certificate / Certificado</option>
+      <option value="mdiv">M.Div</option>
+    </select>
+  </div>
+</div>
+
+<nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+  <span class="nl"><span class="lang-en">Units</span><span class="lang-es">Unidades</span></span>
+  <a href="CTSEvanPreachUnit1.html">1</a>
+  <a href="CTSEvanPreachUnit2.html">2</a>
+  <a href="CTSEvanPreachUnit3.html">3</a>
+  <a href="CTSEvanPreachUnit4.html">4</a>
+  <a href="CTSEvanPreachUnit5.html">5</a>
+  <a href="CTSEvanPreachUnit6.html" class="active">6</a>
+  <a href="CTSEvanPreachUnit7.html">7</a>
+  <a href="CTSEvanPreachUnit8.html">8</a>
+  <a href="CTSEvanPreachUnit9.html">9</a>
+  <a href="CTSEvanPreachUnit10.html">10</a>
+</nav>
+
+<!-- ============ TEACHING PROSE (EN) ============ -->
+<section class="lang-en">
+
+<h2>Learning Goal</h2>
+<p>After studying this unit you will be able to use the Interview Method taught in <em>WiseSpeak</em> to plan a complete evangelistic sermon. You will select a plural noun keyword from the text, form a clear subject, build three short parallel points (each five words or less), and write a one-sentence evangelistic objective that leads listeners to Christ.</p>
+
+<h3>The Interview Method in WiseSpeak</h3>
+<p><em>WiseSpeak</em> teaches that one of the most effective ways to plan an evangelistic sermon is the Interview Method. This method begins with real people and their stories. We imagine or recall an interview with someone who needs Christ. We listen to their questions, their struggles, and their needs. Then we let those real-life questions guide the sermon.</p>
+
+<h3>The Inductive Approach</h3>
+<p>The Interview Method follows the inductive approach from the first seven units of <em>WiseSpeak</em>. We start with the specific facts in the text and work backward to discover the keyword and subject. The Interview Method makes the sermon personal and relevant. It forces the preacher to speak directly to the listener's actual situation. When combined with the keyword approach, the result is a clear, unified evangelistic message that feels like it was written for the person sitting in front of you.</p>
+
+<h3>How the Interview Method Works</h3>
+<ol>
+  <li>Read the chosen text carefully.</li>
+  <li>Imagine interviewing an unsaved person who needs the truth in this passage. What question would they ask?</li>
+  <li>Turn the main idea or answer into a plural noun keyword.</li>
+  <li>Form the subject around the keyword.</li>
+  <li>List the specific answers or truths in the text. Turn each truth into a short point (five words or less) that is a singular of the keyword.</li>
+  <li>Write a one-sentence evangelistic objective.</li>
+  <li>Add a clear invitation at the end.</li>
+</ol>
+<p>The keyword is always a plural noun. Every point is a clean singular of that plural keyword. The points stay short and parallel so the listener can remember them easily. When a single verse does not contain every point needed, we add supporting texts from other passages while the keyword still holds the whole sermon together.</p>
+
+<h3>Example from John 4 &mdash; The Woman at the Well</h3>
+<p>Suppose we are preaching from the story of the woman at the well in John 4. We imagine interviewing a person who feels empty and thirsty for something more. Their question might be, "How can I find real satisfaction in life?" The keyword is "sources" (a plural noun). The subject is "Three Sources of Real Satisfaction."</p>
+<div class="example">
+  <div class="label">Question: How can I find real satisfaction in life? &middot; Keyword: sources</div>
+  <ol>
+    <li><strong>Source One:</strong> Living water.</li>
+    <li><strong>Source Two:</strong> True worship.</li>
+    <li><strong>Source Three:</strong> Personal testimony.</li>
+  </ol>
+</div>
+<p>Each point is a singular of the keyword "sources." Each point is five words or less. The points are parallel. The sermon begins with the specific facts in the text and works backward to form the keyword and subject.</p>
+
+<h3>Example from Luke 15 &mdash; The Prodigal Son</h3>
+<p>Text: Luke 15:11&ndash;32 (the prodigal son). We imagine interviewing a person who has wandered far from God and feels ashamed. Their question might be, "Can God still accept me after what I have done?" The keyword is "reasons" (a plural noun). The subject is "Three Reasons God Welcomes You Home."</p>
+<div class="example">
+  <div class="label">Question: Can God still accept me after what I have done? &middot; Keyword: reasons</div>
+  <ol>
+    <li><strong>Reason One:</strong> Father's love.</li>
+    <li><strong>Reason Two:</strong> Open arms.</li>
+    <li><strong>Reason Three:</strong> Full restoration.</li>
+  </ol>
+</div>
+<p>Each point is a singular of the keyword "reasons." Each point is short and parallel. The sermon feels like a personal conversation with the listener.</p>
+
+<h3>Example from Romans 5:8</h3>
+<p>We imagine interviewing a person who feels unworthy of God's love. Their question might be, "Why would God care about someone like me?" The keyword is "proofs" (a plural noun). The subject is "Three Proofs of God's Love."</p>
+<div class="example">
+  <div class="label">Question: Why would God care about someone like me? &middot; Keyword: proofs</div>
+  <ol>
+    <li><strong>Proof One:</strong> Christ died for us.</li>
+    <li><strong>Proof Two:</strong> While we were sinners.</li>
+    <li><strong>Proof Three:</strong> God demonstrates love.</li>
+  </ol>
+</div>
+<p>Again the points are clean singulars of the keyword "proofs." The sermon is inductive, biblical, and directly personal.</p>
+
+<h3>Why the Interview Method Is Powerful for Evangelistic Preaching</h3>
+<p>The Interview Method makes every sermon feel relevant. It answers the exact questions people are asking today. It keeps the message focused on one clear question and one clear answer. When the keyword is a plural noun and the points are short parallel singulars, the listener can remember the sermon and take it home. The one-sentence objective keeps the entire message aimed at conversion. This method works especially well when the text speaks to a universal human need. It also works when a single verse does not contain every point: we simply add supporting texts while the keyword controls the outline. The sermon remains unified and the points stay short.</p>
+
+<h3>Practical Steps to Use the Interview Method in Your Preaching</h3>
+<p>Choose a text that answers a real human struggle. Imagine interviewing an unsaved person who needs this truth. Write their question in one clear sentence. Select the plural noun keyword that best captures the answers in the text. Form the subject by placing the keyword at the end. Build exactly three short parallel points, each five words or less. Write the evangelistic objective in one sentence. Prepare a clear invitation that calls for immediate response. This method, taught throughout <em>WiseSpeak</em>, gives every sermon a strong evangelistic purpose. It turns the Bible into a personal conversation with the listener.</p>
+
+</section>
+
+<!-- ============ TEACHING PROSE (ES) ============ -->
+<section class="lang-es">
+
+<h2>Objetivo de Aprendizaje</h2>
+<p>Después de estudiar esta unidad podrá usar el Método de la Entrevista enseñado en <em>WiseSpeak</em> para planificar un sermón evangelístico completo. Seleccionará una palabra clave (sustantivo plural) del texto, formará un tema claro, construirá tres puntos cortos y paralelos (cada uno de cinco palabras o menos) y escribirá un objetivo evangelístico de una sola oración que lleve a los oyentes a Cristo.</p>
+
+<h3>El Método de la Entrevista en WiseSpeak</h3>
+<p><em>WiseSpeak</em> enseña que una de las formas más efectivas de planificar un sermón evangelístico es el Método de la Entrevista. Este método comienza con personas reales y sus historias. Imaginamos o recordamos una entrevista con alguien que necesita a Cristo. Escuchamos sus preguntas, sus luchas y sus necesidades. Luego dejamos que esas preguntas de la vida real guíen el sermón.</p>
+
+<h3>El Enfoque Inductivo</h3>
+<p>El Método de la Entrevista sigue el enfoque inductivo de las primeras siete unidades de <em>WiseSpeak</em>. Comenzamos con los hechos específicos del texto y trabajamos hacia atrás para descubrir la palabra clave y el tema. El Método de la Entrevista hace que el sermón sea personal y relevante. Obliga al predicador a hablar directamente a la situación real del oyente. Cuando se combina con el enfoque de la palabra clave, el resultado es un mensaje evangelístico claro y unificado que se siente como si estuviera escrito para la persona sentada frente a usted.</p>
+
+<h3>Cómo Funciona el Método de la Entrevista</h3>
+<ol>
+  <li>Leer el texto elegido con cuidado.</li>
+  <li>Imaginar entrevistando a una persona no salva que necesita la verdad en este pasaje. ¿Qué pregunta haría?</li>
+  <li>Convertir la idea principal o la respuesta en una palabra clave (sustantivo plural).</li>
+  <li>Formar el tema alrededor de la palabra clave.</li>
+  <li>Listar las respuestas o verdades específicas del texto. Convertir cada verdad en un punto corto (cinco palabras o menos) que sea un singular de la palabra clave.</li>
+  <li>Escribir un objetivo evangelístico de una sola oración.</li>
+  <li>Agregar una invitación clara al final.</li>
+</ol>
+<p>La palabra clave es siempre un sustantivo plural. Cada punto es un singular limpio de esa palabra clave plural. Los puntos se mantienen cortos y paralelos para que el oyente pueda recordarlos fácilmente. Cuando un solo versículo no contiene cada punto necesario, agregamos textos de apoyo de otros pasajes mientras la palabra clave mantiene unido todo el sermón.</p>
+
+<h3>Ejemplo de Juan 4 &mdash; La Mujer en el Pozo</h3>
+<p>Supongamos que estamos predicando de la historia de la mujer en el pozo en Juan 4. Imaginamos entrevistando a una persona que se siente vacía y sedienta de algo más. Su pregunta podría ser: "¿Cómo puedo encontrar verdadera satisfacción en la vida?" La palabra clave es "fuentes" (un sustantivo plural). El tema es "Tres Fuentes de Verdadera Satisfacción".</p>
+<div class="example">
+  <div class="label">Pregunta: ¿Cómo puedo encontrar verdadera satisfacción en la vida? &middot; Palabra clave: fuentes</div>
+  <ol>
+    <li><strong>Fuente Uno:</strong> Agua viva.</li>
+    <li><strong>Fuente Dos:</strong> Verdadera adoración.</li>
+    <li><strong>Fuente Tres:</strong> Testimonio personal.</li>
+  </ol>
+</div>
+<p>Cada punto es un singular de la palabra clave "fuentes". Cada punto tiene cinco palabras o menos. Los puntos son paralelos. El sermón comienza con los hechos específicos del texto y trabaja hacia atrás para formar la palabra clave y el tema.</p>
+
+<h3>Ejemplo de Lucas 15 &mdash; El Hijo Pródigo</h3>
+<p>Texto: Lucas 15:11&ndash;32 (el hijo pródigo). Imaginamos entrevistando a una persona que se ha alejado mucho de Dios y se siente avergonzada. Su pregunta podría ser: "¿Puede Dios todavía aceptarme después de lo que he hecho?" La palabra clave es "razones" (un sustantivo plural). El tema es "Tres Razones por las que Dios Te Recibe en Casa".</p>
+<div class="example">
+  <div class="label">Pregunta: ¿Puede Dios todavía aceptarme después de lo que he hecho? &middot; Palabra clave: razones</div>
+  <ol>
+    <li><strong>Razón Uno:</strong> Amor del Padre.</li>
+    <li><strong>Razón Dos:</strong> Brazos abiertos.</li>
+    <li><strong>Razón Tres:</strong> Restauración completa.</li>
+  </ol>
+</div>
+<p>Cada punto es un singular de la palabra clave "razones". Cada punto es corto y paralelo. El sermón se siente como una conversación personal con el oyente.</p>
+
+<h3>Ejemplo de Romanos 5:8</h3>
+<p>Imaginamos entrevistando a una persona que se siente indigna del amor de Dios. Su pregunta podría ser: "¿Por qué Dios se preocuparía por alguien como yo?" La palabra clave es "pruebas" (un sustantivo plural). El tema es "Tres Pruebas del Amor de Dios".</p>
+<div class="example">
+  <div class="label">Pregunta: ¿Por qué Dios se preocuparía por alguien como yo? &middot; Palabra clave: pruebas</div>
+  <ol>
+    <li><strong>Prueba Uno:</strong> Cristo murió por nosotros.</li>
+    <li><strong>Prueba Dos:</strong> Mientras éramos pecadores.</li>
+    <li><strong>Prueba Tres:</strong> Dios demuestra amor.</li>
+  </ol>
+</div>
+<p>Nuevamente los puntos son singulares limpios de la palabra clave "pruebas". El sermón es inductivo, bíblico y directamente personal.</p>
+
+<h3>Por Qué el Método de la Entrevista Es Poderoso para la Predicación Evangelística</h3>
+<p>El Método de la Entrevista hace que cada sermón se sienta relevante. Responde exactamente a las preguntas que la gente se hace hoy. Mantiene el mensaje enfocado en una pregunta clara y una respuesta clara. Cuando la palabra clave es un sustantivo plural y los puntos son singulares cortos y paralelos, el oyente puede recordar el sermón y llevarlo a casa. El objetivo de una sola oración mantiene todo el mensaje apuntado a la conversión. Este método funciona especialmente bien cuando el texto habla de una necesidad humana universal. También funciona cuando un solo versículo no contiene cada punto: simplemente agregamos textos de apoyo mientras la palabra clave controla el bosquejo. El sermón permanece unificado y los puntos se mantienen cortos.</p>
+
+<h3>Pasos Prácticos para Usar el Método de la Entrevista en Su Predicación</h3>
+<p>Elija un texto que responda a una lucha humana real. Imagine entrevistando a una persona no salva que necesita esta verdad. Escriba su pregunta en una oración clara. Seleccione la palabra clave (sustantivo plural) que mejor capture las respuestas en el texto. Forme el tema colocando la palabra clave al final. Construya exactamente tres puntos cortos y paralelos, cada uno de cinco palabras o menos. Escriba el objetivo evangelístico en una oración. Prepare una invitación clara que llame a una respuesta inmediata. Este método, enseñado a lo largo de <em>WiseSpeak</em>, da a cada sermón un fuerte propósito evangelístico. Convierte la Biblia en una conversación personal con el oyente.</p>
+
+</section>
+
+<!-- ============ SELF-CHECK ============ -->
+<h2>
+  <span class="lang-en">Self-Check &mdash; Unit 6</span>
+  <span class="lang-es">Autoevaluación &mdash; Unidad 6</span>
+</h2>
+<p>
+  <span class="lang-en"><strong>Certificate track:</strong> 18 of 20 multiple choice correct to pass.<br>
+  <strong>M.Div / Th.M. track:</strong> 18 of 20 multiple choice <em>and</em> 9 of 10 short answer correct, independently.</span>
+  <span class="lang-es"><strong>Vía Certificado:</strong> 18 de 20 de opción múltiple correctas para aprobar.<br>
+  <strong>Vía M.Div / Th.M.:</strong> 18 de 20 de opción múltiple <em>y</em> 9 de 10 de respuesta corta correctas, de forma independiente.</span>
+</p>
+
+<div id="mcBlock"></div>
+
+<h3>
+  <span class="lang-en">Short Answer (M.Div track only)</span>
+  <span class="lang-es">Respuesta Corta (solo vía M.Div)</span>
+</h3>
+<div id="saBlock"></div>
+
+<div class="controls" style="margin-top:1.25rem">
+  <button id="btnSubmit" type="button"><span class="lang-en">Submit / Grade</span><span class="lang-es">Enviar / Calificar</span></button>
+  <button id="btnReset" class="secondary" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+</div>
+
+<div id="resultBox"></div>
+
+</main>
+
+<footer>
+  <span class="lang-en">Chapala Theological Seminary &middot; CTS Evangelistic Preaching &middot; Unit 6 &middot; Course Author: Dr. Wayne Cook</span>
+  <span class="lang-es">Seminario Teológico de Chapala &middot; CTS Predicación Evangelística &middot; Unidad 6 &middot; Autor del Curso: Dr. Wayne Cook</span>
+</footer>
+
+<script>
+/* ===================== CTS ENGINE — Evangelism U6 ===================== */
+const UNIT_KEY        = "cts_evenpreach_unit6";
+const UNIT_PASSED_KEY = "cts_evenpreach_unit6_passed";
+const MC_PASSED_KEY   = "cts_evenpreach_u6_mc_passed";
+const PROGRESS_KEY    = "cts_evenpreach_progress";
+const LOCKOUT_KEY     = "cts_evenpreach_u6_lockout_until";
+const STUDENT_KEY     = "cts_student";
+const TRACK_KEY       = "cts_track";
+const PASS_MC = 18;
+const PASS_SA = 9;
+const TOTAL_MC = 20;
+const TOTAL_SA = 10;
+const LOCKOUT_MS = 15 * 60 * 1000;
+const REDIRECT_MS = 3000;
+const NEXT_UNIT = "CTSEvanPreachUnit7.html";
+
+const MC = [
+ {id:"q1", correct:"B",
+  en:{stem:"What sermon-planning method does this unit teach?",
+      a:"The Word Method",
+      b:"The Interview Method",
+      c:"The Question Method",
+      d:"The Textual Method",
+      fbCorrect:"Correct. This unit teaches the Interview Method.",
+      fbWrong:"The unit title and opening section name 'the Interview Method.'"},
+  es:{stem:"¿Qué método de planificación de sermones enseña esta unidad?",
+      a:"El Método de la Palabra",
+      b:"El Método de la Entrevista",
+      c:"El Método de la Pregunta",
+      d:"El Método Textual",
+      fbCorrect:"Correcto. Esta unidad enseña el Método de la Entrevista.",
+      fbWrong:"El título y la sección inicial nombran 'el Método de la Entrevista.'"}},
+ {id:"q2", correct:"D",
+  en:{stem:"The Interview Method begins with:",
+      a:"A topic chosen apart from the text",
+      b:"A creed of the church",
+      c:"A famous quotation from a theologian",
+      d:"Real people and their stories",
+      fbCorrect:"Correct. The Interview Method begins with real people and their stories.",
+      fbWrong:"See 'The Interview Method in WiseSpeak' — the method begins with real people and their stories."},
+  es:{stem:"El Método de la Entrevista comienza con:",
+      a:"Un tema elegido aparte del texto",
+      b:"Un credo de la iglesia",
+      c:"Una cita famosa de un teólogo",
+      d:"Personas reales y sus historias",
+      fbCorrect:"Correcto. El Método de la Entrevista comienza con personas reales y sus historias.",
+      fbWrong:"Vea 'El Método de la Entrevista en WiseSpeak' — el método comienza con personas reales y sus historias."}},
+ {id:"q3", correct:"A",
+  en:{stem:"The Interview Method follows which approach?",
+      a:"Inductive — begin with the text's specific facts and work backward",
+      b:"Deductive — start with a topic and find proof-texts",
+      c:"Allegorical — find symbolic meaning behind the words",
+      d:"Anecdotal — start with a personal story about the preacher",
+      fbCorrect:"Correct. The Interview Method is inductive.",
+      fbWrong:"See 'The Inductive Approach' — start with specific facts in the text and work backward."},
+  es:{stem:"¿Qué enfoque sigue el Método de la Entrevista?",
+      a:"Inductivo — comenzar con los hechos específicos del texto y trabajar hacia atrás",
+      b:"Deductivo — comenzar con un tema y buscar textos de prueba",
+      c:"Alegórico — encontrar significado simbólico detrás de las palabras",
+      d:"Anecdótico — comenzar con una historia personal sobre el predicador",
+      fbCorrect:"Correcto. El Método de la Entrevista es inductivo.",
+      fbWrong:"Vea 'El Enfoque Inductivo' — comenzar con los hechos específicos del texto y trabajar hacia atrás."}},
+ {id:"q4", correct:"C",
+  en:{stem:"What is the FIRST step in the Interview Method?",
+      a:"Form the subject around the keyword",
+      b:"Write the one-sentence evangelistic objective",
+      c:"Read the chosen text carefully",
+      d:"Add a clear invitation at the end",
+      fbCorrect:"Correct. Step one: read the chosen text carefully.",
+      fbWrong:"See 'How the Interview Method Works' — step one is to read the chosen text carefully."},
+  es:{stem:"¿Cuál es el PRIMER paso en el Método de la Entrevista?",
+      a:"Formar el tema alrededor de la palabra clave",
+      b:"Escribir el objetivo evangelístico de una sola oración",
+      c:"Leer el texto elegido con cuidado",
+      d:"Agregar una invitación clara al final",
+      fbCorrect:"Correcto. Paso uno: leer el texto elegido con cuidado.",
+      fbWrong:"Vea 'Cómo Funciona el Método de la Entrevista' — el paso uno es leer el texto elegido con cuidado."}},
+ {id:"q5", correct:"B",
+  en:{stem:"In the John 4 (woman at the well) example, the imagined interviewee's question is:",
+      a:"Why would God care about someone like me?",
+      b:"How can I find real satisfaction in life?",
+      c:"Can God still accept me after what I have done?",
+      d:"What must I do to be saved?",
+      fbCorrect:"Correct. 'How can I find real satisfaction in life?'",
+      fbWrong:"See 'Example from John 4' — the question is 'How can I find real satisfaction in life?'"},
+  es:{stem:"En el ejemplo de Juan 4 (la mujer en el pozo), la pregunta del entrevistado imaginado es:",
+      a:"¿Por qué Dios se preocuparía por alguien como yo?",
+      b:"¿Cómo puedo encontrar verdadera satisfacción en la vida?",
+      c:"¿Puede Dios todavía aceptarme después de lo que he hecho?",
+      d:"¿Qué debo hacer para ser salvo?",
+      fbCorrect:"Correcto. '¿Cómo puedo encontrar verdadera satisfacción en la vida?'",
+      fbWrong:"Vea 'Ejemplo de Juan 4' — la pregunta es '¿Cómo puedo encontrar verdadera satisfacción en la vida?'"}},
+ {id:"q6", correct:"D",
+  en:{stem:"In the John 4 example, the keyword chosen is:",
+      a:"proofs",
+      b:"reasons",
+      c:"steps",
+      d:"sources",
+      fbCorrect:"Correct. 'Three Sources of Real Satisfaction.'",
+      fbWrong:"See the John 4 worked example — the keyword is 'sources.'"},
+  es:{stem:"En el ejemplo de Juan 4, la palabra clave escogida es:",
+      a:"pruebas",
+      b:"razones",
+      c:"pasos",
+      d:"fuentes",
+      fbCorrect:"Correcto. 'Tres Fuentes de Verdadera Satisfacción.'",
+      fbWrong:"Vea el ejemplo trabajado de Juan 4 — la palabra clave es 'fuentes.'"}},
+ {id:"q7", correct:"A",
+  en:{stem:"In the John 4 example, the three points are:",
+      a:"Living water; True worship; Personal testimony",
+      b:"Father's love; Open arms; Full restoration",
+      c:"Christ died for us; While we were sinners; God demonstrates love",
+      d:"Hear the gospel; Believe in Jesus; Be baptized",
+      fbCorrect:"Correct. Living water; True worship; Personal testimony.",
+      fbWrong:"See the John 4 outline — Living water; True worship; Personal testimony."},
+  es:{stem:"En el ejemplo de Juan 4, los tres puntos son:",
+      a:"Agua viva; Verdadera adoración; Testimonio personal",
+      b:"Amor del Padre; Brazos abiertos; Restauración completa",
+      c:"Cristo murió por nosotros; Mientras éramos pecadores; Dios demuestra amor",
+      d:"Escuchar el evangelio; Creer en Jesús; Ser bautizado",
+      fbCorrect:"Correcto. Agua viva; Verdadera adoración; Testimonio personal.",
+      fbWrong:"Vea el bosquejo de Juan 4 — Agua viva; Verdadera adoración; Testimonio personal."}},
+ {id:"q8", correct:"C",
+  en:{stem:"In the Luke 15 (prodigal son) example, the imagined interviewee's question is:",
+      a:"Why would God care about someone like me?",
+      b:"How can I find real satisfaction in life?",
+      c:"Can God still accept me after what I have done?",
+      d:"How can I serve the Lord better?",
+      fbCorrect:"Correct. 'Can God still accept me after what I have done?'",
+      fbWrong:"See 'Example from Luke 15' — 'Can God still accept me after what I have done?'"},
+  es:{stem:"En el ejemplo de Lucas 15 (hijo pródigo), la pregunta del entrevistado imaginado es:",
+      a:"¿Por qué Dios se preocuparía por alguien como yo?",
+      b:"¿Cómo puedo encontrar verdadera satisfacción en la vida?",
+      c:"¿Puede Dios todavía aceptarme después de lo que he hecho?",
+      d:"¿Cómo puedo servir mejor al Señor?",
+      fbCorrect:"Correcto. '¿Puede Dios todavía aceptarme después de lo que he hecho?'",
+      fbWrong:"Vea 'Ejemplo de Lucas 15' — '¿Puede Dios todavía aceptarme después de lo que he hecho?'"}},
+ {id:"q9", correct:"B",
+  en:{stem:"In the Luke 15 example, the keyword chosen is:",
+      a:"sources",
+      b:"reasons",
+      c:"proofs",
+      d:"conditions",
+      fbCorrect:"Correct. 'Three Reasons God Welcomes You Home.'",
+      fbWrong:"See the Luke 15 worked example — the keyword is 'reasons.'"},
+  es:{stem:"En el ejemplo de Lucas 15, la palabra clave escogida es:",
+      a:"fuentes",
+      b:"razones",
+      c:"pruebas",
+      d:"condiciones",
+      fbCorrect:"Correcto. 'Tres Razones por las que Dios Te Recibe en Casa.'",
+      fbWrong:"Vea el ejemplo trabajado de Lucas 15 — la palabra clave es 'razones.'"}},
+ {id:"q10", correct:"D",
+  en:{stem:"In the Luke 15 example, the three points are:",
+      a:"Living water; True worship; Personal testimony",
+      b:"Hear the gospel; Believe in Jesus; Be baptized",
+      c:"Christ died; While sinners; God demonstrates love",
+      d:"Father's love; Open arms; Full restoration",
+      fbCorrect:"Correct. Father's love; Open arms; Full restoration.",
+      fbWrong:"See the Luke 15 outline — Father's love; Open arms; Full restoration."},
+  es:{stem:"En el ejemplo de Lucas 15, los tres puntos son:",
+      a:"Agua viva; Verdadera adoración; Testimonio personal",
+      b:"Escuchar el evangelio; Creer en Jesús; Ser bautizado",
+      c:"Cristo murió; Mientras pecadores; Dios demuestra amor",
+      d:"Amor del Padre; Brazos abiertos; Restauración completa",
+      fbCorrect:"Correcto. Amor del Padre; Brazos abiertos; Restauración completa.",
+      fbWrong:"Vea el bosquejo de Lucas 15 — Amor del Padre; Brazos abiertos; Restauración completa."}},
+ {id:"q11", correct:"A",
+  en:{stem:"In the Romans 5:8 example, the imagined interviewee's question is:",
+      a:"Why would God care about someone like me?",
+      b:"How can I find real satisfaction in life?",
+      c:"Can God still accept me after what I have done?",
+      d:"What must I do to be saved?",
+      fbCorrect:"Correct. 'Why would God care about someone like me?'",
+      fbWrong:"See 'Example from Romans 5:8' — 'Why would God care about someone like me?'"},
+  es:{stem:"En el ejemplo de Romanos 5:8, la pregunta del entrevistado imaginado es:",
+      a:"¿Por qué Dios se preocuparía por alguien como yo?",
+      b:"¿Cómo puedo encontrar verdadera satisfacción en la vida?",
+      c:"¿Puede Dios todavía aceptarme después de lo que he hecho?",
+      d:"¿Qué debo hacer para ser salvo?",
+      fbCorrect:"Correcto. '¿Por qué Dios se preocuparía por alguien como yo?'",
+      fbWrong:"Vea 'Ejemplo de Romanos 5:8' — '¿Por qué Dios se preocuparía por alguien como yo?'"}},
+ {id:"q12", correct:"C",
+  en:{stem:"In the Romans 5:8 example, the keyword chosen is:",
+      a:"reasons",
+      b:"sources",
+      c:"proofs",
+      d:"steps",
+      fbCorrect:"Correct. 'Three Proofs of God's Love.'",
+      fbWrong:"See the Romans 5:8 worked example — the keyword is 'proofs.'"},
+  es:{stem:"En el ejemplo de Romanos 5:8, la palabra clave escogida es:",
+      a:"razones",
+      b:"fuentes",
+      c:"pruebas",
+      d:"pasos",
+      fbCorrect:"Correcto. 'Tres Pruebas del Amor de Dios.'",
+      fbWrong:"Vea el ejemplo trabajado de Romanos 5:8 — la palabra clave es 'pruebas.'"}},
+ {id:"q13", correct:"D",
+  en:{stem:"In the Romans 5:8 example, the three points are:",
+      a:"Father's love; Open arms; Full restoration",
+      b:"Hear the gospel; Believe in Jesus; Be baptized",
+      c:"Living water; True worship; Personal testimony",
+      d:"Christ died for us; While we were sinners; God demonstrates love",
+      fbCorrect:"Correct. Christ died for us; While we were sinners; God demonstrates love.",
+      fbWrong:"See the Romans 5:8 outline — Christ died for us; While we were sinners; God demonstrates love."},
+  es:{stem:"En el ejemplo de Romanos 5:8, los tres puntos son:",
+      a:"Amor del Padre; Brazos abiertos; Restauración completa",
+      b:"Escuchar el evangelio; Creer en Jesús; Ser bautizado",
+      c:"Agua viva; Verdadera adoración; Testimonio personal",
+      d:"Cristo murió por nosotros; Mientras éramos pecadores; Dios demuestra amor",
+      fbCorrect:"Correcto. Cristo murió por nosotros; Mientras éramos pecadores; Dios demuestra amor.",
+      fbWrong:"Vea el bosquejo de Romanos 5:8 — Cristo murió por nosotros; Mientras éramos pecadores; Dios demuestra amor."}},
+ {id:"q14", correct:"B",
+  en:{stem:"The keyword in the Interview Method must always be:",
+      a:"A verb in the imperative mood",
+      b:"A plural noun drawn from the text",
+      c:"A proper name from the passage",
+      d:"An adjective that describes God",
+      fbCorrect:"Correct. The keyword is always a plural noun.",
+      fbWrong:"Standing rule: the keyword is always a plural noun."},
+  es:{stem:"La palabra clave en el Método de la Entrevista debe ser siempre:",
+      a:"Un verbo en modo imperativo",
+      b:"Un sustantivo plural tomado del texto",
+      c:"Un nombre propio del pasaje",
+      d:"Un adjetivo que describe a Dios",
+      fbCorrect:"Correcto. La palabra clave es siempre un sustantivo plural.",
+      fbWrong:"Regla permanente: la palabra clave es siempre un sustantivo plural."}},
+ {id:"q15", correct:"C",
+  en:{stem:"The maximum length of each outline point is:",
+      a:"Twelve words",
+      b:"A full sentence of any length",
+      c:"Five words or less",
+      d:"Ten words or less",
+      fbCorrect:"Correct. Each point is five words or less.",
+      fbWrong:"Each outline point must be five words or less."},
+  es:{stem:"La longitud máxima de cada punto del bosquejo es:",
+      a:"Doce palabras",
+      b:"Una oración completa de cualquier longitud",
+      c:"Cinco palabras o menos",
+      d:"Diez palabras o menos",
+      fbCorrect:"Correcto. Cada punto tiene cinco palabras o menos.",
+      fbWrong:"Cada punto del bosquejo debe tener cinco palabras o menos."}},
+ {id:"q16", correct:"A",
+  en:{stem:"The Interview Method makes the sermon especially:",
+      a:"Personal and relevant — feels written for the person sitting in front of you",
+      b:"Academic and historical — heavy on cultural background",
+      c:"Theatrical and dramatic — performance-oriented in delivery",
+      d:"Cautious — avoids any direct call for decision",
+      fbCorrect:"Correct. Personal and relevant.",
+      fbWrong:"See 'The Inductive Approach' and 'Why the Interview Method Is Powerful' — personal and relevant."},
+  es:{stem:"El Método de la Entrevista hace que el sermón sea especialmente:",
+      a:"Personal y relevante — se siente escrito para la persona sentada frente a usted",
+      b:"Académico e histórico — pesado en contexto cultural",
+      c:"Teatral y dramático — orientado a la actuación en la entrega",
+      d:"Cauteloso — evita cualquier llamado directo a la decisión",
+      fbCorrect:"Correcto. Personal y relevante.",
+      fbWrong:"Vea 'El Enfoque Inductivo' y 'Por Qué el Método de la Entrevista Es Poderoso' — personal y relevante."}},
+ {id:"q17", correct:"B",
+  en:{stem:"When a single verse does not contain every point, the Interview Method:",
+      a:"Reduces the sermon to a single point with no parallel structure",
+      b:"Adds supporting texts from other passages while the keyword still controls the outline",
+      c:"Switches to a deductive topical outline and drops the keyword",
+      d:"Abandons the keyword discipline entirely",
+      fbCorrect:"Correct. Add supporting texts; the keyword still controls the outline.",
+      fbWrong:"See 'Why the Interview Method Is Powerful' — add supporting texts, keyword still controls."},
+  es:{stem:"Cuando un solo versículo no contiene cada punto, el Método de la Entrevista:",
+      a:"Reduce el sermón a un solo punto sin estructura paralela",
+      b:"Agrega textos de apoyo de otros pasajes mientras la palabra clave sigue controlando el bosquejo",
+      c:"Cambia a un bosquejo topical deductivo y descarta la palabra clave",
+      d:"Abandona la disciplina de la palabra clave por completo",
+      fbCorrect:"Correcto. Agregar textos de apoyo; la palabra clave sigue controlando el bosquejo.",
+      fbWrong:"Vea 'Por Qué el Método de la Entrevista Es Poderoso' — agregar textos de apoyo, la palabra clave sigue controlando."}},
+ {id:"q18", correct:"D",
+  en:{stem:"What is the SECOND step in the Interview Method?",
+      a:"Add a clear invitation at the end",
+      b:"Form the subject around the keyword",
+      c:"Write the one-sentence evangelistic objective",
+      d:"Imagine interviewing an unsaved person who needs the truth in this passage",
+      fbCorrect:"Correct. Step two: imagine interviewing an unsaved person who needs this truth.",
+      fbWrong:"See 'How the Interview Method Works' — step two is to imagine interviewing an unsaved person."},
+  es:{stem:"¿Cuál es el SEGUNDO paso en el Método de la Entrevista?",
+      a:"Agregar una invitación clara al final",
+      b:"Formar el tema alrededor de la palabra clave",
+      c:"Escribir el objetivo evangelístico de una sola oración",
+      d:"Imaginar entrevistando a una persona no salva que necesita la verdad en este pasaje",
+      fbCorrect:"Correcto. Paso dos: imaginar entrevistando a una persona no salva.",
+      fbWrong:"Vea 'Cómo Funciona el Método de la Entrevista' — el paso dos es imaginar entrevistando a una persona no salva."}},
+ {id:"q19", correct:"A",
+  en:{stem:"The three biblical texts used as worked examples in this unit are:",
+      a:"John 4, Luke 15:11–32, and Romans 5:8",
+      b:"Acts 16, John 3:16, and Romans 10:9–10",
+      c:"Genesis 1, Exodus 20, and Psalm 23",
+      d:"Matthew 28, Mark 1, and Luke 24",
+      fbCorrect:"Correct. John 4 (sources), Luke 15:11–32 (reasons), Romans 5:8 (proofs).",
+      fbWrong:"This unit uses John 4, Luke 15:11–32, and Romans 5:8 as worked examples."},
+  es:{stem:"Los tres textos bíblicos usados como ejemplos trabajados en esta unidad son:",
+      a:"Juan 4, Lucas 15:11–32, y Romanos 5:8",
+      b:"Hechos 16, Juan 3:16, y Romanos 10:9–10",
+      c:"Génesis 1, Éxodo 20, y Salmo 23",
+      d:"Mateo 28, Marcos 1, y Lucas 24",
+      fbCorrect:"Correcto. Juan 4 (fuentes), Lucas 15:11–32 (razones), Romanos 5:8 (pruebas).",
+      fbWrong:"Esta unidad usa Juan 4, Lucas 15:11–32, y Romanos 5:8 como ejemplos trabajados."}},
+ {id:"q20", correct:"C",
+  en:{stem:"According to this unit, the Interview Method works especially well when:",
+      a:"The preacher has a famous personal story to share",
+      b:"The text is one of the Psalms or Proverbs",
+      c:"The text speaks to a universal human need",
+      d:"The audience is mostly mature theologians",
+      fbCorrect:"Correct. The Interview Method works especially well when the text speaks to a universal human need.",
+      fbWrong:"See 'Why the Interview Method Is Powerful' — works especially well when the text speaks to a universal human need."},
+  es:{stem:"Según esta unidad, el Método de la Entrevista funciona especialmente bien cuando:",
+      a:"El predicador tiene una historia personal famosa para compartir",
+      b:"El texto es uno de los Salmos o Proverbios",
+      c:"El texto habla de una necesidad humana universal",
+      d:"La audiencia es mayormente teólogos maduros",
+      fbCorrect:"Correcto. Funciona especialmente bien cuando el texto habla de una necesidad humana universal.",
+      fbWrong:"Vea 'Por Qué el Método de la Entrevista Es Poderoso' — funciona especialmente bien cuando el texto habla de una necesidad humana universal."}}
+];
+
+const SA = [
+ {id:"sa1",
+  en:{stem:"Define the Interview Method in your own words."},
+  es:{stem:"Defina el Método de la Entrevista en sus propias palabras."},
+  kw_en:["imagine","interview","unsaved","person","question","keyword","plural","induct"],
+  kw_es:["imagin","entrevist","perdid","person","pregunta","clave","plural","induct"],
+  min:3,model_en:"The Interview Method begins with real people and their stories: we imagine or recall an interview with someone who needs Christ, listen to their questions and needs, and let those real-life questions guide the sermon. We then choose a plural-noun keyword and build the points inductively.",model_es:"El Método de la Entrevista comienza con personas reales y sus historias: imaginamos o recordamos una entrevista con alguien que necesita a Cristo, escuchamos sus preguntas y necesidades, y dejamos que esas preguntas reales guíen el sermón. Luego elegimos una palabra clave plural y construimos los puntos inductivamente."},
+ {id:"sa2",
+  en:{stem:"List the seven steps for using the Interview Method."},
+  es:{stem:"Enumere los siete pasos para usar el Método de la Entrevista."},
+  kw_en:["read","interview","question","keyword","subject","objectiv","invit","point"],
+  kw_es:["leer","entrevist","pregunta","clave","sujeto","objetiv","invit","punto"],
+  min:3,model_en:"The seven steps are: read the text, imagine the interview, draw out the person's question, select the plural-noun keyword, form the subject, build the short parallel points and objective, and close with the invitation.",model_es:"Los siete pasos son: leer el texto, imaginar la entrevista, sacar la pregunta de la persona, seleccionar la palabra clave plural, formar el sujeto, construir los puntos cortos y paralelos y el objetivo, y cerrar con la invitación."},
+ {id:"sa3",
+  en:{stem:"In the John 4 example, what is the imagined interviewee's question, what is the keyword, and what are the three points?"},
+  es:{stem:"En el ejemplo de Juan 4, ¿cuál es la pregunta del entrevistado imaginado, cuál es la palabra clave, y cuáles son los tres puntos?"},
+  kw_en:["satisfact","source","living","water","worship","testimon","question","point"],
+  kw_es:["satisfac","fuente","agua","viva","adoraci","testimoni","pregunta","punto"],
+  min:3,model_en:"In the John 4 example the interviewee's question is 'How can I find real satisfaction in life?' The keyword is 'sources,' and the three points are: living water, true worship, personal testimony.",model_es:"En el ejemplo de Juan 4 la pregunta de la entrevistada es '¿Cómo puedo hallar verdadera satisfacción en la vida?' La palabra clave es 'fuentes,' y los tres puntos son: agua viva, adoración verdadera, testimonio personal."},
+ {id:"sa4",
+  en:{stem:"In the Luke 15 (prodigal son) example, what is the imagined interviewee's question, what is the keyword, and what are the three points?"},
+  es:{stem:"En el ejemplo de Lucas 15 (hijo pródigo), ¿cuál es la pregunta del entrevistado imaginado, cuál es la palabra clave, y cuáles son los tres puntos?"},
+  kw_en:["accept","reason","father","love","open","arm","restorat","question"],
+  kw_es:["acept","razon","padre","amor","brazo","abiert","restaur","pregunta"],
+  min:3,model_en:"In the Luke 15 prodigal son example the question is 'Can God still accept me after what I have done?' The keyword is 'reasons,' and the three points are: the Father's love, His open arms, full restoration.",model_es:"En el ejemplo del hijo pródigo de Lucas 15 la pregunta es '¿Puede Dios aún aceptarme después de lo que he hecho?' La palabra clave es 'razones,' y los tres puntos son: el amor del Padre, Sus brazos abiertos, la restauración completa."},
+ {id:"sa5",
+  en:{stem:"In the Romans 5:8 example, what is the imagined interviewee's question, what is the keyword, and what are the three points?"},
+  es:{stem:"En el ejemplo de Romanos 5:8, ¿cuál es la pregunta del entrevistado imaginado, cuál es la palabra clave, y cuáles son los tres puntos?"},
+  kw_en:["care","proof","christ","died","sinner","demonstrat","question","love"],
+  kw_es:["import","prueba","cristo","muri","pecador","demuestr","pregunta","amor"],
+  min:3,model_en:"In the Romans 5:8 example the question is 'Why would God care about someone like me?' The keyword is 'proofs,' and the three points are: Christ died for us, while we were still sinners, God demonstrates His love.",model_es:"En el ejemplo de Romanos 5:8 la pregunta es '¿Por qué le importaría a Dios alguien como yo?' La palabra clave es 'pruebas,' y los tres puntos son: Cristo murió por nosotros, siendo aún pecadores, Dios demuestra Su amor."},
+ {id:"sa6",
+  en:{stem:"Why is the Interview Method described as inductive rather than deductive?"},
+  es:{stem:"¿Por qué se describe el Método de la Entrevista como inductivo en lugar de deductivo?"},
+  kw_en:["begin","text","specific","backward","work","induct","speak","fact"],
+  kw_es:["comenz","text","específic","atrás","trabaj","induct","habl","hecho"],
+  min:3,model_en:"The Interview Method is inductive because it begins with the specific facts of the text and the person's real question and works backward to the keyword and subject, letting the text speak rather than imposing an outside topic.",model_es:"El Método de la Entrevista es inductivo porque comienza con los hechos específicos del texto y la pregunta real de la persona y trabaja hacia atrás hacia la palabra clave y el sujeto, dejando que el texto hable en lugar de imponer un tema externo."},
+ {id:"sa7",
+  en:{stem:"Why is the Interview Method described as especially powerful for evangelistic preaching?"},
+  es:{stem:"¿Por qué se describe el Método de la Entrevista como especialmente poderoso para la predicación evangelística?"},
+  kw_en:["personal","relevant","listen","need","question","remember","convers","direct"],
+  kw_es:["personal","relevant","oyent","necesid","pregunta","recordar","conversi","direct"],
+  min:3,model_en:"The Interview Method is especially powerful for evangelism because it makes the sermon personal and relevant - speaking directly to the listener's actual situation and need, which makes the message memorable and aimed at conversion.",model_es:"El Método de la Entrevista es especialmente poderoso para la evangelización porque hace el sermón personal y relevante - hablando directamente a la situación y necesidad reales del oyente, lo que hace el mensaje memorable y dirigido a la conversión."},
+ {id:"sa8",
+  en:{stem:"How are the three outline points required to relate to the keyword?"},
+  es:{stem:"¿Cómo deben relacionarse los tres puntos del bosquejo con la palabra clave?"},
+  kw_en:["singular","plural","short","parallel","five","keyword","point","form"],
+  kw_es:["singular","plural","cort","paralel","cinco","clave","punto","forma"],
+  min:3,model_en:"Each of the three points must be a short singular of the plural keyword, five words or less, and parallel in form - keeping the outline unified and memorable.",model_es:"Cada uno de los tres puntos debe ser un singular corto de la palabra clave plural, cinco palabras o menos, y paralelo en forma - manteniendo el esquema unificado y memorable."},
+ {id:"sa9",
+  en:{stem:"How does the Interview Method handle the case when a single verse does not contain every point needed?"},
+  es:{stem:"¿Cómo maneja el Método de la Entrevista el caso cuando un solo versículo no contiene cada punto necesario?"},
+  kw_en:["support","text","keyword","control","outline","add","unified","passage"],
+  kw_es:["apoy","text","clave","control","esquem","añad","unific","pasaje"],
+  min:3,model_en:"When one verse does not contain every point, the Interview Method adds supporting texts, but the keyword still controls the outline so the added passages stay unified under one plural-noun keyword.",model_es:"Cuando un versículo no contiene cada punto, el Método de la Entrevista añade textos de apoyo, pero la palabra clave sigue controlando el esquema para que los pasajes añadidos permanezcan unificados bajo una palabra clave plural."},
+ {id:"sa10",
+  en:{stem:"According to this unit, what does the Interview Method turn the Bible into for the listener, and why does that matter for evangelism?"},
+  es:{stem:"Según esta unidad, ¿en qué convierte el Método de la Entrevista la Biblia para el oyente, y por qué importa eso para la evangelización?"},
+  kw_en:["personal","conversat","listen","relevant","real","need","direct","engag"],
+  kw_es:["personal","conversaci","oyent","relevant","real","necesid","direct","involu"],
+  min:3,model_en:"The Interview Method turns the Bible into a personal conversation for the listener - the text answering his own real questions and needs. That matters for evangelism because it engages him directly and relevantly, moving him toward a personal decision rather than leaving truth abstract.",model_es:"El Método de la Entrevista convierte la Biblia en una conversación personal para el oyente - el texto respondiendo sus propias preguntas y necesidades reales. Eso importa para la evangelización porque lo involucra directa y relevantemente, moviéndolo hacia una decisión personal en lugar de dejar la verdad abstracta."}
+];
+
+function renderMC(){const host=document.getElementById("mcBlock");host.innerHTML="";MC.forEach((q,i)=>{const div=document.createElement("div");div.className="q";div.id=q.id;div.innerHTML=`<div class="stem"><span class="lang-en">${i+1}. ${q.en.stem}</span><span class="lang-es">${i+1}. ${q.es.stem}</span></div>${["A","B","C","D"].map(L=>`<label><input type="radio" name="${q.id}" value="${L}"><span class="lang-en"><strong>${L}.</strong> ${q.en[L.toLowerCase()]}</span><span class="lang-es"><strong>${L}.</strong> ${q.es[L.toLowerCase()]}</span></label>`).join("")}<div class="fb" id="fb_${q.id}"></div>`;host.appendChild(div);});host.querySelectorAll("input[type=radio]").forEach(r=>{r.addEventListener("change",()=>{ saveState(); renderMCFeedback(); Array.from(document.getElementsByName(r.name)).forEach(x=>{x.disabled=true;}); });});}
+function renderSA(){const host=document.getElementById("saBlock");host.innerHTML="";SA.forEach((q,i)=>{const div=document.createElement("div");div.className="q";div.id=q.id;div.innerHTML=`<div class="stem"><span class="lang-en">${MC.length+i+1}. ${q.en.stem}</span><span class="lang-es">${MC.length+i+1}. ${q.es.stem}</span></div><textarea id="ta_${q.id}" data-placeholder-en="Type your answer here…" data-placeholder-es="Escriba su respuesta aquí…" aria-label="ta ${q.id}"></textarea><div class="sa-actions"><button type="button" class="sa-check" data-id="${q.id}"><span class="lang-en">Check answer</span><span class="lang-es">Revisar respuesta</span></button></div><div class="sa-fb" id="safb_${q.id}"></div>`;host.appendChild(div);});document.querySelectorAll("[data-placeholder-en]").forEach(el=>applyPh(el));host.querySelectorAll("textarea").forEach(t=>t.addEventListener("input",saveState));host.querySelectorAll(".sa-check").forEach(b=>b.addEventListener("click",()=>{saveState();const q=SA.find(x=>x.id===b.dataset.id);if(q)renderSAFeedback(q);}));}
+function applyPh(el){const isEs=document.body.classList.contains("lang-es");el.placeholder=isEs?el.dataset.placeholderEs:el.dataset.placeholderEn;}
+function saveState(){const data={mc:{},sa:{}};MC.forEach(q=>{const v=document.querySelector(`input[name="${q.id}"]:checked`);if(v)data.mc[q.id]=v.value;});SA.forEach(q=>{const t=document.getElementById(`ta_${q.id}`);if(t)data.sa[q.id]=t.value;});lsSet(UNIT_KEY,JSON.stringify(data));}
+function loadState(){try{const d=JSON.parse(lsGet(UNIT_KEY)||"{}");Object.entries(d.mc||{}).forEach(([k,v])=>{const r=document.querySelector(`input[name="${k}"][value="${v}"]`);if(r)r.checked=true;});Object.entries(d.sa||{}).forEach(([k,v])=>{const t=document.getElementById(`ta_${k}`);if(t)t.value=v;});}catch(e){}}
+let mcRevealed=false;
+function renderMCFeedback(){const isEs=document.body.classList.contains("lang-es");MC.forEach(q=>{const sel=document.querySelector(`input[name="${q.id}"]:checked`);const fb=document.getElementById(`fb_${q.id}`);if(!sel){fb.className="fb";fb.textContent="";return;}const right=sel.value===q.correct;const lang=isEs?q.es:q.en;fb.className="fb "+(right?"good":"bad");fb.textContent=right?lang.fbCorrect:lang.fbWrong;});}
+function lockoutRemaining(){const until=parseInt(lsGet(LOCKOUT_KEY)||"0",10);const left=until-Date.now();return left>0?left:0;}
+function fmtMs(ms){const m=Math.floor(ms/60000),s=Math.floor((ms%60000)/1000);return `${m}:${String(s).padStart(2,"0")}`;}
+var _ctsMem={};function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+function gradeMC(){let n=0;MC.forEach(q=>{const sel=document.querySelector(`input[name="${q.id}"]:checked`);if(sel&&sel.value===q.correct)n++;});return n;}
+function kwHit(answer,kw){if(!kw)return false;var a=(answer||"").toLowerCase();var k=kw.toLowerCase().trim();if(!k)return false;var esc=k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");var L="0-9a-zA-Z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1";var re=k.length<=4?new RegExp("(?:^|[^"+L+"])"+esc+"(?![" +L+ "])"):new RegExp("(?:^|[^"+L+"])"+esc);return re.test(a);}
+function renderSAFeedback(q){
+  const isEs=document.body.classList.contains("lang-es");
+  const t=document.getElementById(`ta_${q.id}`);
+  const fb=document.getElementById(`safb_${q.id}`);
+  if(!t) return false;
+  const raw=(t.value||"").trim();
+  if(!raw){
+    if(fb) fb.innerHTML="<div class=\"sa-empty\">"+(isEs?"Escriba su respuesta primero, luego revise.":"Write your answer first, then check.")+"</div>";
+    return false;
+  }
+  const txt=raw.toLowerCase();
+  const kws=isEs?q.kw_es:q.kw_en;
+  const hits=kws.filter(k=>kwHit(txt,k)).length;
+  const pass=hits>=q.min;
+  if(fb){
+    fb.style.color="";var _m=isEs?(q.model_es||""):(q.model_en||"");var _h=isEs?"Respuesta modelo \u2014 est\u00fadiela":"Model answer \u2014 study this";var _v=pass?(isEs?("\u2713 Acreditada ("+hits+" t\u00e9rmino(s) clave)."):("\u2713 Credit ("+hits+" keyword(s) detected).")):(isEs?("\u2717 A\u00fan no acreditada. Detectados: "+hits+". Necesita "+q.min+"."):("\u2717 Not yet credited. Detected: "+hits+". Need "+q.min+"."));fb.innerHTML="<div>"+_v+"</div><div class=\"modelbox\"><strong>"+_h+":</strong><br>"+_m+"</div>";
+  }
+  return pass;
+}
+function gradeSA(){
+  let n=0;
+  SA.forEach(q=>{ if(renderSAFeedback(q)) n++; });
+  return n;
+}
+function submit(){saveState();const isEs=document.body.classList.contains("lang-es");const track=document.getElementById("trackSel").value;lsSet(TRACK_KEY,track);const lockMs=lockoutRemaining();if(lockMs>0){showResult("locked",isEs?`Bloqueado por reintento. Tiempo restante: ${fmtMs(lockMs)}.`:`Locked for retry. Time remaining: ${fmtMs(lockMs)}.`);return;}const mc=gradeMC();mcRevealed=true;renderMCFeedback();const mcPassedBefore=lsGet(MC_PASSED_KEY)==="1";const mcPass=mcPassedBefore||(mc>=PASS_MC);if(mcPass)lsSet(MC_PASSED_KEY,"1");let unitPass=false;let msg="";const sa=gradeSA();if(track==="cert"){unitPass=mcPass;msg=isEs?`Vía Certificado &mdash; Opción Múltiple: <strong>${mc}/${TOTAL_MC}</strong> (se necesita ${PASS_MC}/${TOTAL_MC}). ${unitPass?"<strong>APROBADO.</strong>":"<strong>NO APROBADO.</strong>"}<br><em>La Respuesta Corta es práctica en esta vía y no cuenta para aprobar &mdash; vea las respuestas modelo abajo para estudiar.</em>`:`Certificate track &mdash; Multiple Choice: <strong>${mc}/${TOTAL_MC}</strong> (need ${PASS_MC}/${TOTAL_MC}). ${unitPass?"<strong>PASSED.</strong>":"<strong>NOT YET PASSED.</strong>"}<br><em>Short Answer is practice on this track and does not count toward passing &mdash; see the model answers below to study.</em>`;}else{unitPass=mcPass&&sa>=PASS_SA;const tLbl=track==="thm"?"Th.M.":"M.Div";msg=isEs?`Vía ${tLbl} &mdash; Opción Múltiple: <strong>${mc}/${TOTAL_MC}</strong> (necesita ${PASS_MC}); Respuesta Corta: <strong>${sa}/${TOTAL_SA}</strong> (necesita ${PASS_SA}). ${unitPass?"<strong>APROBADO.</strong>":"<strong>NO APROBADO.</strong>"}`:`${tLbl} track &mdash; Multiple Choice: <strong>${mc}/${TOTAL_MC}</strong> (need ${PASS_MC}); Short Answer: <strong>${sa}/${TOTAL_SA}</strong> (need ${PASS_SA}). ${unitPass?"<strong>PASSED.</strong>":"<strong>NOT YET PASSED.</strong>"}`;}if(unitPass){lsSet(UNIT_PASSED_KEY,"1");const prog=JSON.parse(lsGet(PROGRESS_KEY)||"{}");prog.unit6={passed:true,track,mc,when:Date.now()};lsSet(PROGRESS_KEY,JSON.stringify(prog));const tail=isEs?`<br><br>Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.<br><a class="cert-link" href="${NEXT_UNIT}">Continuar a la Unidad 7 →</a>`:`<br><br>Your answers are marked below. Review them, then continue when ready.<br><a class="cert-link" href="${NEXT_UNIT}">Continue to Unit 7 →</a>`;showResult("passed",msg+tail);}else{lsSet(LOCKOUT_KEY,String(Date.now()+LOCKOUT_MS));const tail=isEs?`<br>Repase la unidad y vuelva a intentarlo después de 15 minutos.${lsGet(MC_PASSED_KEY)==="1"?" (Su Opción Múltiple ya está aprobada — solo necesita reintentar la Respuesta Corta.)":""}`:`<br>Review the unit and retry after a 15-minute lockout.${lsGet(MC_PASSED_KEY)==="1"?" (Your Multiple Choice is already passed — only the Short Answer needs retake.)":""}`;showResult("",msg+tail);}}
+function showResult(kind,html){const box=document.getElementById("resultBox");box.className="result-box "+(kind||"");box.innerHTML=html;box.scrollIntoView({behavior:"smooth",block:"start"});}
+function resetUnit(){const isEs=document.body.classList.contains("lang-es");const ok=confirm(isEs?"¿Reiniciar toda la unidad? Se borrarán sus respuestas guardadas, la marca de aprobado de Opción Múltiple y el cronómetro de bloqueo.":"Reset the entire unit? This will clear your saved answers, your MC-pass flag, and the lockout timer.");if(!ok)return;lsDel(UNIT_KEY);lsDel(UNIT_PASSED_KEY);lsDel(MC_PASSED_KEY);lsDel(LOCKOUT_KEY);const prog=JSON.parse(lsGet(PROGRESS_KEY)||"{}");delete prog.unit6;lsSet(PROGRESS_KEY,JSON.stringify(prog));location.reload();}
+function toggleLang(){document.body.classList.toggle("lang-es");document.body.classList.toggle("lang-en");document.querySelectorAll("[data-placeholder-en]").forEach(el=>applyPh(el));renderMCFeedback();}
+document.addEventListener("DOMContentLoaded",()=>{renderMC();renderSA();loadState();if(lsGet(MC_PASSED_KEY)==="1"||lsGet(UNIT_PASSED_KEY)==="1"){mcRevealed=true;}renderMCFeedback();const t=lsGet(TRACK_KEY);if(t)document.getElementById("trackSel").value=t;document.getElementById("trackSel").addEventListener("change",e=>{lsSet(TRACK_KEY,e.target.value);});document.getElementById("btnSubmit").addEventListener("click",submit);document.getElementById("btnReset").addEventListener("click",resetUnit);document.getElementById("btnLang").addEventListener("click",toggleLang);});
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEvanPreachReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

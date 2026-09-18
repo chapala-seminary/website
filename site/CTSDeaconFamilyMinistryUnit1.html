@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deacon Family Ministry Plan — Unit 1</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<!-- CTS Deacon Family Ministry Plan — Unit 1. Built on Cook's validated Q24 masters engine (ported from Bible Characters Unit 3). Bilingual EN (NKJV) / ES (RVG). Author: Dr. Wayne Cook. Spanish + SA keywords/models pending native RVG / author spot-check. -->
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 2 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Deacon Family Ministry Plan — Unit 1: Biblical Foundations of the Diaconate</span><span class="lang-es">📖 Plan de Ministerio Familiar del Diácono — Unidad 1: Fundamentos Bíblicos del Diaconado</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"For even the Son of Man did not come to be served, but to serve, and to give His life a ransom for many." — Mark 10:45 (NKJV)</span><span class="lang-es">«Porque el Hijo del Hombre no vino para ser servido, sino para servir, y para dar su vida en rescate por muchos.» — Marcos 10:45 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="cert">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>Before a church can run a plan for its deacons, it must know what a deacon is. The Deacon Family Ministry Plan, which this course will study unit by unit, is a way of organizing the care of a whole congregation through its deacons; it was developed and is widely used among Southern Baptist churches. But a plan for deacons is only as good as its grasp of the office it serves. So in this first unit we set the plan aside and go back to the Scriptures to ask a simpler question: what kind of man, doing what kind of work, does the New Testament call a deacon?</p>
+<p>The answer begins with the word itself. "Deacon" is simply the English form of the Greek word <em>diakonos</em>, a common, humble word that means a servant &mdash; one who waits on tables, attends to needs, and serves others. The New Testament uses this word and its relatives (the verb <em>diakone&#333;</em>, to serve, and the noun <em>diakonia</em>, service or ministry) more than ninety times, very often of plain, ordinary service. By his very name, then, the deacon is a servant. He is not first a manager, a board member, or an officer of business. He is a servant of the church.</p>
+<p>Far from lowering the man, the title honors him, for it is shared by the greatest. Paul calls himself a <em>diakonos</em> of the gospel and of the church (Ephesians 3:7; Colossians 1:25), and Scripture even calls Christ Himself a servant of the circumcision for the truth of God (Romans 15:8). The servant of the church follows the supreme Servant. Alongside Acts 6, two other passages anchor what the New Testament says about deacons: Philippians 1:1, where Paul greets the overseers and deacons as the two settled groups of leaders in a healthy church, and 1 Timothy 3:8&ndash;13, which lists the deacon's qualifications in detail. We will weigh those qualifications in Unit 2; here we lay the foundation beneath them all.</p>
+<p>This is exactly how the Lord Jesus defined greatness in His kingdom. Before any office called "deacon" existed, He had already overturned the world's order:</p>
+<div class="scripture">Yet it shall not be so among you; but whoever desires to become great among you shall be your servant. And whoever of you desires to be first shall be slave of all. For even the Son of Man did not come to be served, but to serve, and to give His life a ransom for many. (Mark 10:43&ndash;45, NKJV)</div>
+<p>The office of deacon is this teaching made permanent &mdash; a standing, visible reminder in every church that its leaders serve the people; they do not lord over them. The deacon wears the towel, not the crown.</p>
+<div class="illustration"><strong>Illustration.</strong> In <em>Mountains Beyond Mountains</em>, Tracy Kidder tells of Dr. Paul Farmer, a Harvard physician who could have built a comfortable career anywhere he pleased. Instead, appalled by the suffering of the poor in Haiti, he poured out his life founding clinics that now serve about a million people. Challenged once that no one could love the children of strangers as his own, he answered, &ldquo;All the great religions say, &lsquo;love thy neighbor as thyself.&rsquo; I&rsquo;m sorry. I can&rsquo;t. But I&rsquo;m going to keep on trying.&rdquo; That is the servant&rsquo;s heart the deacon is called to wear &mdash; a life spent for others rather than on itself.</div>
+<p>Although the word "deacon" does not actually appear in the passage, the church has always seen the seed and pattern of the diaconate in the seven men chosen in Acts chapter 6. The fit is unmistakable: a practical need arises, spiritually qualified men are set apart to meet it, and the apostles are freed for the Word and prayer. From this one account we will draw <strong>five lessons</strong> about the ministry of the deacon.</p>
+<p><strong>Subject:</strong> the biblical origin and nature of the deacon's ministry.</p>
+<p><strong>Proposition:</strong> God established the deacon's service so that practical care, entrusted to godly servants, would protect the ministry of the Word, guard the unity of the church, and advance the gospel.</p>
+<h2>I. The Need That Gave Rise to Servants</h2>
+<p>The diaconate was not born out of theory but out of a very real, very awkward problem. The church in Jerusalem was growing quickly, and growth brought strain:</p>
+<div class="scripture">Now in those days, when the number of the disciples was multiplying, there arose a complaint against the Hebrews by the Hellenists, because their widows were neglected in the daily distribution. (Acts 6:1, NKJV)</div>
+<p>The Greek-speaking (Hellenist) widows were being overlooked in the daily distribution of food, while the Hebrew widows were cared for. Notice what kind of problem this was. It was not a doctrinal heresy or an outside persecution; it was something as ordinary as hungry widows and the appearance of partiality at the food line. The first deacons were appointed to make sure that widows were fed and treated fairly. Here is the first lesson: deacon ministry begins where real human need meets the family of God. It is never beneath a deacon to attend to the practical, the physical, and the overlooked.</p>
+<p>Scripture never treats such care as a lesser thing. James makes it the very test of true religion: "Pure and undefiled religion before God and the Father is this: to visit orphans and widows in their trouble&hellip;" (James 1:27, NKJV). What the world counts small &mdash; a meal carried to a widow, a fair share at the table &mdash; heaven counts as worship. The deacon is the church's appointed hands for exactly this work.</p>
+<p>Notice, too, the danger. A neglected need was breeding a complaint &mdash; a murmuring &mdash; that threatened the unity of the young church along ethnic lines. Practical neglect always carries spiritual consequences. Left unattended, the matter of the widows could have split the body in two. The deacon stands at exactly this point, where a quiet, unmet need could grow into a public wound.</p>
+<h2>II. The Priority That Must Be Protected</h2>
+<p>The apostles' response reveals the deacon's deepest purpose:</p>
+<div class="scripture">Then the twelve summoned the multitude of the disciples and said, "It is not desirable that we should leave the word of God and serve tables." (Acts 6:2, NKJV)</div>
+<p>This is not contempt for serving tables. The apostles call the work good and worthy of seven Spirit-filled men; they simply recognize their own calling and its limits. If the Twelve tried to manage the food distribution personally, the ministry of the Word and prayer would suffer. So they resolved:</p>
+<div class="scripture">but we will give ourselves continually to prayer and to the ministry of the word. (Acts 6:4, NKJV)</div>
+<p>Here is the second lesson, and it is the heart of the office: the deacon exists to carry the load of practical care so that the spiritual leaders are freed for the Word and prayer. When the deacons serve well, the pastor can give himself to study, preaching, teaching, and prayer without being swallowed by tasks that others can do just as faithfully. The health of the pulpit is tied to the faithfulness of the deacons. A church served by devoted deacons is a church whose minister is free to feed it.</p>
+<p>This was the first division of labor in the Christian church, and it set a pattern for all time: good work must never be allowed to crowd out the best work. Every leader has limits of time and strength, and wisdom assigns each task to the right hands. The deacon, by taking up what would otherwise pull the minister away from the Word, guards the one ministry no one else can give the church.</p>
+<h2>III. The Character That Must Be Required</h2>
+<p>When the apostles described the men to be chosen, their requirements are striking:</p>
+<div class="scripture">Therefore, brethren, seek out from among you seven men of good reputation, full of the Holy Spirit and wisdom, whom we may appoint over this business. (Acts 6:3, NKJV)</div>
+<p>Three things are required, and not one of them is administrative skill. They must be of good reputation &mdash; men whose honesty is attested by the whole community. They must be full of the Holy Spirit &mdash; men whose lives are governed by God. And they must be full of wisdom &mdash; men of sound, practical judgment. The work was waiting on tables; the requirement was spiritual maturity. This is the third lesson: the church refused to separate practical service from spiritual character. A man who handles the church's people, money, and reputation must himself be a man of God. We will study these qualifications in detail in Unit 2, but already we see that a deacon is chosen for what he is before he is trusted with what he does.</p>
+<p>Notice the pairing of the two inward marks. To be full of the Holy Spirit is to be governed Godward &mdash; yielded, holy, and led by God; to be full of wisdom is to be capable manward &mdash; sound and discerning in the affairs of people. The church wanted both, for a man may be devout yet imprudent, or shrewd yet unspiritual, and neither alone is fit to serve. Together they describe a mature believer the congregation can trust with its weakest members and its most delicate needs.</p>
+<h2>IV. The Church That Sets Them Apart</h2>
+<p>The manner of their appointment is as instructive as the men themselves:</p>
+<div class="scripture">&hellip;whom they set before the apostles; and when they had prayed, they laid hands on them. (Acts 6:6, NKJV)</div>
+<p>The whole congregation chose the seven &mdash; and Stephen is named first among them. They then presented these men to the apostles, who confirmed and commissioned them with prayer and the laying on of hands. See the beautiful partnership: the body chooses, and the leaders confirm. Deacon ministry is neither self-appointed nor autocratically imposed; it rises from the church and is set apart before God. The laying on of hands was not a magic rite but a public recognition and blessing, marking these men out for holy service. This is the fourth lesson, and it tells us where a deacon's authority comes from: it is not seized but conferred by the church and consecrated in prayer.</p>
+<h2>V. The Fruit That Service Bears</h2>
+<p>The chapter ends not with full stomachs but with an explosion of the gospel:</p>
+<div class="scripture">Then the word of God spread, and the number of the disciples multiplied greatly in Jerusalem, and a great many of the priests were obedient to the faith. (Acts 6:7, NKJV)</div>
+<p>This is no accident of arrangement. With the widows cared for, the unity of the church restored, and the apostles freed to preach, the Word of God ran and the church grew &mdash; so much that even many of the priests came to faith. Here is the fifth lesson: servant ministry and gospel growth are tied together. When deacons take up the burden of care so that the Word can be preached and the body kept in peace, God blesses His church with increase. The deacon's quiet, practical service is the soil in which the preached Word bears fruit.</p>
+<h2>Conclusion</h2>
+<p>Gather the five lessons and you have the heart of the office. The deacon's very name means servant. His Lord defined greatness as service and washed feet to prove it. His pattern in Acts 6 shows a service that meets real need, protects the Word, requires godly character, rises from the church, and bears gospel fruit. The deacon is, in a word, service made holy.</p>
+<p>Every Christian is called to this servant spirit, but the deacon is called to embody it before the whole church, so that when the congregation looks at him it sees a living picture of the Lord who came not to be served but to serve. That is a high calling clothed in humble work. It is a calling that costs a man his comfort and his pride, yet it repays him with the quiet dignity of standing where his Master once stood &mdash; towel in hand, among the very people he loves. The church has never lacked for men willing to lead; its deepest need, in every generation, is for men willing to serve.</p>
+<div class="illustration"><strong>Illustration.</strong> Ralph Neighbour tells of a man named Jack, a corporation president who was ruthlessly cast aside when he was diagnosed with cancer, burning through his insurance and his savings with a wife and daughter to leave behind. A deacon and his pastor came to visit. At first the deacon offended him, asking whether he had prepared for life after death, and Jack ordered them out. But the deacon went back, humbly apologized, and then told him this: a realtor in the church would sell Jack&rsquo;s house and donate the commission; the men of the church would make the payments until it sold; an apartment owner had offered his widow a home, free utilities, and a salary; and the proceeds would send his daughter to college. &ldquo;Jack cried like a baby.&rdquo; He died still resisting Christ &mdash; yet he had felt the love of God through a deacon&rsquo;s hands, and his widow, moved by that care, later came to faith. That is the Deacon Family Ministry Plan at work before it ever had a name.</div>
+<p>The Deacon Family Ministry Plan, which we take up beginning in Unit 4, is simply one careful, proven way to put Acts 6 into practice in a local church: to make sure that in a growing congregation no "widow" is neglected, every family is known and cared for, and the pastor is freed for the Word. Before we ever learn the plan, we must have the heart, for if we forget the heart the plan becomes mere machinery, but if we keep the heart the plan becomes living service. The deacon is a servant &mdash; and his service is the ground in which the Word of God grows.</p></div>
+<div class="lang-es"><p>Antes de que una iglesia pueda llevar adelante un plan para sus di&aacute;conos, debe saber qu&eacute; es un di&aacute;cono. El Plan de Ministerio Familiar del Di&aacute;cono, que este curso estudiar&aacute; unidad por unidad, es una manera de organizar el cuidado de toda una congregaci&oacute;n por medio de sus di&aacute;conos; fue desarrollado y se usa ampliamente entre las iglesias bautistas del Sur. Pero un plan para di&aacute;conos vale solo lo que vale su comprensi&oacute;n del oficio al que sirve. As&iacute; que en esta primera unidad dejamos el plan a un lado y volvemos a las Escrituras para hacer una pregunta m&aacute;s sencilla: &iquest;qu&eacute; clase de hombre, haciendo qu&eacute; clase de obra, llama di&aacute;cono el Nuevo Testamento?</p>
+<p>La respuesta comienza con la palabra misma. &laquo;Di&aacute;cono&raquo; es sencillamente la forma castellana de la palabra griega <em>diakonos</em>, una palabra com&uacute;n y humilde que significa siervo: el que sirve a las mesas, atiende necesidades y sirve a otros. El Nuevo Testamento usa esta palabra y sus derivados (el verbo <em>diakone&#333;</em>, servir, y el sustantivo <em>diakonia</em>, servicio o ministerio) m&aacute;s de noventa veces, muy a menudo de un servicio sencillo y ordinario. Por su mismo nombre, pues, el di&aacute;cono es un siervo. No es primero un administrador, un miembro de junta ni un oficial de negocios. Es un siervo de la iglesia.</p>
+<p>Lejos de rebajar al hombre, el t&iacute;tulo lo honra, porque lo comparten los m&aacute;s grandes. Pablo se llama a s&iacute; mismo <em>diakonos</em> del evangelio y de la iglesia (Efesios 3:7; Colosenses 1:25), y la Escritura aun llama al mismo Cristo siervo de la circuncisi&oacute;n por la verdad de Dios (Romanos 15:8). El siervo de la iglesia sigue al Siervo supremo. Junto a Hechos 6, otros dos pasajes fundamentan lo que el Nuevo Testamento dice de los di&aacute;conos: Filipenses 1:1, donde Pablo saluda a los obispos y a los di&aacute;conos como los dos grupos establecidos de l&iacute;deres en una iglesia sana, y 1 Timoteo 3:8&ndash;13, que enumera en detalle los requisitos del di&aacute;cono. Sopesaremos esos requisitos en la Unidad 2; aqu&iacute; ponemos el fundamento que est&aacute; debajo de todos ellos.</p>
+<p>As&iacute; defini&oacute; exactamente el Se&ntilde;or Jes&uacute;s la grandeza en su reino. Antes de que existiera oficio alguno llamado &laquo;di&aacute;cono&raquo;, &Eacute;l ya hab&iacute;a trastornado el orden del mundo:</p>
+<div class="scripture">Mas no ser&aacute; as&iacute; entre vosotros; sino que el que quiera hacerse grande entre vosotros ser&aacute; vuestro servidor, y el que de vosotros quiera ser el primero, ser&aacute; siervo de todos. Porque el Hijo del Hombre no vino para ser servido, sino para servir, y para dar su vida en rescate por muchos. (Marcos 10:43&ndash;45, RVG)</div>
+<p>El oficio del di&aacute;cono es esta ense&ntilde;anza hecha permanente: un recordatorio constante y visible en cada iglesia de que sus l&iacute;deres sirven al pueblo; no se ense&ntilde;orean de &eacute;l. El di&aacute;cono lleva la toalla, no la corona.</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> En <em>Mountains Beyond Mountains</em>, Tracy Kidder cuenta la historia del Dr. Paul Farmer, un m&eacute;dico de Harvard que pudo haber tenido una carrera c&oacute;moda donde quisiera. En cambio, consternado por el sufrimiento de los pobres en Hait&iacute;, derram&oacute; su vida fundando cl&iacute;nicas que hoy atienden a cerca de un mill&oacute;n de personas. Cuando lo desafiaron diciendo que nadie pod&iacute;a amar a los hijos de extra&ntilde;os como a los propios, respondi&oacute;: &laquo;Todas las grandes religiones dicen: &ldquo;ama a tu pr&oacute;jimo como a ti mismo&rdquo;. Lo siento. No puedo. Pero voy a seguir intent&aacute;ndolo&raquo;. Ese es el coraz&oacute;n de siervo que el di&aacute;cono est&aacute; llamado a llevar &mdash; una vida gastada por los dem&aacute;s y no en s&iacute; misma.</div>
+<p>Aunque la palabra &laquo;di&aacute;cono&raquo; no aparece de hecho en el pasaje, la iglesia siempre ha visto la semilla y el patr&oacute;n del diaconado en los siete hombres escogidos en el cap&iacute;tulo 6 de Hechos. La correspondencia es inconfundible: surge una necesidad pr&aacute;ctica, se apartan hombres espiritualmente calificados para atenderla, y los ap&oacute;stoles quedan libres para la Palabra y la oraci&oacute;n. De este solo relato sacaremos <strong>cinco lecciones</strong> sobre el ministerio del di&aacute;cono.</p>
+<p><strong>Tema:</strong> el origen y la naturaleza b&iacute;blicos del ministerio del di&aacute;cono.</p>
+<p><strong>Proposici&oacute;n:</strong> Dios estableci&oacute; el servicio del di&aacute;cono para que el cuidado pr&aacute;ctico, confiado a siervos piadosos, protegiera el ministerio de la Palabra, guardara la unidad de la iglesia y adelantara el evangelio.</p>
+<h2>I. La Necesidad que Dio Origen a los Siervos</h2>
+<p>El diaconado no naci&oacute; de una teor&iacute;a, sino de un problema muy real y muy inc&oacute;modo. La iglesia en Jerusal&eacute;n crec&iacute;a r&aacute;pidamente, y el crecimiento trajo tensi&oacute;n:</p>
+<div class="scripture">En aquellos d&iacute;as, como creciera el n&uacute;mero de los disc&iacute;pulos, hubo murmuraci&oacute;n de los griegos contra los hebreos, de que las viudas de ellos eran desatendidas en el ministerio cotidiano. (Hechos 6:1, RVG)</div>
+<p>Las viudas de habla griega (helenistas) eran pasadas por alto en la distribuci&oacute;n diaria de los alimentos, mientras que las viudas hebreas s&iacute; recib&iacute;an cuidado. Note qu&eacute; clase de problema era este. No era una herej&iacute;a doctrinal ni una persecuci&oacute;n de afuera; era algo tan ordinario como viudas con hambre y la apariencia de favoritismo en el reparto. Los primeros di&aacute;conos fueron nombrados para asegurar que las viudas fueran alimentadas y tratadas con justicia. He aqu&iacute; la primera lecci&oacute;n: el ministerio del di&aacute;cono comienza donde la verdadera necesidad humana se encuentra con la familia de Dios. Nunca es indigno de un di&aacute;cono atender lo pr&aacute;ctico, lo f&iacute;sico y lo olvidado.</p>
+<p>La Escritura nunca trata tal cuidado como cosa menor. Santiago lo hace la prueba misma de la religi&oacute;n verdadera: &laquo;La religi&oacute;n pura y sin m&aacute;cula delante de Dios y Padre es esta: Visitar a los hu&eacute;rfanos y a las viudas en sus tribulaciones&hellip;&raquo; (Santiago 1:27, RVG). Lo que el mundo tiene por peque&ntilde;o &mdash; una comida llevada a una viuda, una porci&oacute;n justa en la mesa &mdash; el cielo lo tiene por adoraci&oacute;n. El di&aacute;cono es las manos que la iglesia designa precisamente para esta obra.</p>
+<p>Note tambi&eacute;n el peligro. Una necesidad desatendida estaba engendrando una murmuraci&oacute;n &mdash; una queja &mdash; que amenazaba la unidad de la joven iglesia por l&iacute;neas &eacute;tnicas. La negligencia pr&aacute;ctica siempre lleva consecuencias espirituales. Sin atender, el asunto de las viudas pudo haber partido el cuerpo en dos. El di&aacute;cono est&aacute; precisamente en este punto, donde una necesidad callada y no atendida podr&iacute;a crecer hasta volverse una herida p&uacute;blica.</p>
+<h2>II. La Prioridad que Debe Protegerse</h2>
+<p>La respuesta de los ap&oacute;stoles revela el prop&oacute;sito m&aacute;s profundo del di&aacute;cono:</p>
+<div class="scripture">Entonces los doce convocaron a la multitud de los disc&iacute;pulos, y dijeron: No es justo que nosotros dejemos la palabra de Dios, para servir a las mesas. (Hechos 6:2, RVG)</div>
+<p>Esto no es desprecio por servir a las mesas. Los ap&oacute;stoles llaman a la obra buena y digna de siete hombres llenos del Esp&iacute;ritu; sencillamente reconocen su propio llamado y sus l&iacute;mites. Si los doce trataran de administrar personalmente el reparto de los alimentos, el ministerio de la Palabra y la oraci&oacute;n sufrir&iacute;a. Por eso resolvieron:</p>
+<div class="scripture">Y nosotros persistiremos en la oraci&oacute;n, y en el ministerio de la palabra. (Hechos 6:4, RVG)</div>
+<p>He aqu&iacute; la segunda lecci&oacute;n, y es el coraz&oacute;n del oficio: el di&aacute;cono existe para llevar la carga del cuidado pr&aacute;ctico de modo que los l&iacute;deres espirituales queden libres para la Palabra y la oraci&oacute;n. Cuando los di&aacute;conos sirven bien, el pastor puede entregarse al estudio, a la predicaci&oacute;n, a la ense&ntilde;anza y a la oraci&oacute;n sin ser absorbido por tareas que otros pueden hacer con igual fidelidad. La salud del p&uacute;lpito est&aacute; ligada a la fidelidad de los di&aacute;conos. Una iglesia servida por di&aacute;conos consagrados es una iglesia cuyo ministro queda libre para alimentarla.</p>
+<p>Esta fue la primera divisi&oacute;n del trabajo en la iglesia cristiana, y estableci&oacute; un patr&oacute;n para siempre: nunca se debe permitir que la obra buena desplace a la mejor obra. Todo l&iacute;der tiene l&iacute;mites de tiempo y de fuerzas, y la sabidur&iacute;a asigna cada tarea a las manos correctas. El di&aacute;cono, al tomar lo que de otro modo apartar&iacute;a al ministro de la Palabra, guarda el &uacute;nico ministerio que nadie m&aacute;s puede dar a la iglesia.</p>
+<h2>III. El Car&aacute;cter que Debe Exigirse</h2>
+<p>Cuando los ap&oacute;stoles describieron a los hombres que deb&iacute;an escogerse, sus requisitos son sorprendentes:</p>
+<div class="scripture">Buscad pues, hermanos, de entre vosotros a siete varones de buen testimonio, llenos del Esp&iacute;ritu Santo y de sabidur&iacute;a, a quienes pongamos sobre este trabajo. (Hechos 6:3, RVG)</div>
+<p>Se requieren tres cosas, y ninguna de ellas es habilidad administrativa. Deben ser de buen testimonio: hombres cuya honradez sea reconocida por toda la comunidad. Deben estar llenos del Esp&iacute;ritu Santo: hombres cuya vida es gobernada por Dios. Y deben estar llenos de sabidur&iacute;a: hombres de juicio sano y pr&aacute;ctico. La obra era servir a las mesas; el requisito era madurez espiritual. Esta es la tercera lecci&oacute;n: la iglesia se neg&oacute; a separar el servicio pr&aacute;ctico del car&aacute;cter espiritual. Un hombre que maneja a la gente, el dinero y la reputaci&oacute;n de la iglesia debe ser &eacute;l mismo un hombre de Dios. Estudiaremos estos requisitos en detalle en la Unidad 2, pero ya vemos que un di&aacute;cono es escogido por lo que es antes de que se le conf&iacute;e lo que hace.</p>
+<p>Note el par de las dos marcas interiores. Estar lleno del Esp&iacute;ritu Santo es ser gobernado hacia Dios &mdash; rendido, santo y guiado por Dios; estar lleno de sabidur&iacute;a es ser capaz hacia los hombres &mdash; sensato y de buen discernimiento en los asuntos de la gente. La iglesia quer&iacute;a ambas, porque un hombre puede ser devoto pero imprudente, o astuto pero carnal, y ninguna de las dos basta por s&iacute; sola. Juntas describen a un creyente maduro a quien la congregaci&oacute;n puede confiar sus miembros m&aacute;s d&eacute;biles y sus necesidades m&aacute;s delicadas.</p>
+<h2>IV. La Iglesia que los Aparta</h2>
+<p>La manera de su nombramiento es tan instructiva como los hombres mismos:</p>
+<div class="scripture">&hellip;a los cuales presentaron ante los ap&oacute;stoles, quienes, orando, les impusieron las manos. (Hechos 6:6, RVG)</div>
+<p>Toda la congregaci&oacute;n escogi&oacute; a los siete &mdash; y Esteban es nombrado primero entre ellos &mdash;. Luego presentaron a estos hombres a los ap&oacute;stoles, quienes los confirmaron y comisionaron con oraci&oacute;n e imposici&oacute;n de manos. Vea la hermosa colaboraci&oacute;n: el cuerpo escoge, y los l&iacute;deres confirman. El ministerio del di&aacute;cono no es autonombrado ni impuesto de manera autocr&aacute;tica; surge de la iglesia y es apartado delante de Dios. La imposici&oacute;n de manos no era un rito m&aacute;gico, sino un reconocimiento y una bendici&oacute;n p&uacute;blicos, que se&ntilde;alaban a estos hombres para un servicio santo. Esta es la cuarta lecci&oacute;n, y nos dice de d&oacute;nde viene la autoridad de un di&aacute;cono: no se toma, sino que la confiere la iglesia y se consagra en oraci&oacute;n.</p>
+<h2>V. El Fruto que Produce el Servicio</h2>
+<p>El cap&iacute;tulo no termina con est&oacute;magos llenos, sino con una explosi&oacute;n del evangelio:</p>
+<div class="scripture">Y crec&iacute;a la palabra del Se&ntilde;or, y el n&uacute;mero de los disc&iacute;pulos se multiplicaba grandemente en Jerusal&eacute;n; tambi&eacute;n una gran multitud de los sacerdotes obedec&iacute;a a la fe. (Hechos 6:7, RVG)</div>
+<p>Esto no es una casualidad de arreglo. Con las viudas atendidas, la unidad de la iglesia restaurada y los ap&oacute;stoles libres para predicar, la Palabra de Dios corri&oacute; y la iglesia creci&oacute; &mdash; tanto que aun muchos de los sacerdotes vinieron a la fe &mdash;. He aqu&iacute; la quinta lecci&oacute;n: el ministerio de servicio y el crecimiento del evangelio est&aacute;n unidos. Cuando los di&aacute;conos toman la carga del cuidado para que la Palabra pueda predicarse y el cuerpo se mantenga en paz, Dios bendice a su iglesia con aumento. El servicio callado y pr&aacute;ctico del di&aacute;cono es la tierra en que la Palabra predicada da fruto.</p>
+<h2>Conclusi&oacute;n</h2>
+<p>Re&uacute;na las cinco lecciones y tendr&aacute; el coraz&oacute;n del oficio. El mismo nombre del di&aacute;cono significa siervo. Su Se&ntilde;or defini&oacute; la grandeza como servicio y lav&oacute; los pies para probarlo. Su patr&oacute;n en Hechos 6 muestra un servicio que atiende la necesidad real, protege la Palabra, exige car&aacute;cter piadoso, surge de la iglesia y produce fruto del evangelio. El di&aacute;cono es, en una palabra, el servicio hecho santo.</p>
+<p>Todo cristiano es llamado a este esp&iacute;ritu de siervo, pero el di&aacute;cono es llamado a encarnarlo delante de toda la iglesia, de modo que cuando la congregaci&oacute;n lo mira, ve un retrato vivo del Se&ntilde;or que vino no para ser servido, sino para servir. Ese es un llamado alto vestido de obra humilde. Es un llamado que le cuesta al hombre su comodidad y su orgullo, pero que le recompensa con la dignidad serena de estar donde su Se&ntilde;or estuvo &mdash; con la toalla en la mano, entre las mismas personas que ama. A la iglesia nunca le han faltado hombres dispuestos a dirigir; su necesidad m&aacute;s profunda, en cada generaci&oacute;n, es de hombres dispuestos a servir.</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> Ralph Neighbour cuenta la historia de un hombre llamado Jack, un presidente de empresa al que descartaron sin piedad cuando le diagnosticaron c&aacute;ncer, y que agot&oacute; su seguro y sus ahorros, dejando una esposa y una hija. Un di&aacute;cono y su pastor fueron a visitarlo. Al principio el di&aacute;cono lo ofendi&oacute; al preguntarle si se hab&iacute;a preparado para la vida despu&eacute;s de la muerte, y Jack los ech&oacute;. Pero el di&aacute;cono volvi&oacute;, se disculp&oacute; humildemente, y luego le dijo esto: un agente de bienes ra&iacute;ces de la iglesia vender&iacute;a su casa y donar&iacute;a su comisi&oacute;n; los hombres de la iglesia har&iacute;an los pagos hasta venderla; un due&ntilde;o de apartamentos hab&iacute;a ofrecido a su viuda un hogar, servicios gratuitos y un salario; y lo recaudado pagar&iacute;a los estudios de su hija. &laquo;Jack llor&oacute; como un ni&ntilde;o&raquo;. Muri&oacute; resistiendo todav&iacute;a a Cristo &mdash; pero hab&iacute;a sentido el amor de Dios por las manos de un di&aacute;cono, y su viuda, conmovida por ese cuidado, m&aacute;s tarde vino a la fe. Eso es el Plan de Ministerio Familiar del Di&aacute;cono obrando antes de tener nombre.</div>
+<p>El Plan de Ministerio Familiar del Di&aacute;cono, que tomaremos a partir de la Unidad 4, es sencillamente una manera cuidadosa y probada de poner Hechos 6 en pr&aacute;ctica en una iglesia local: asegurar que en una congregaci&oacute;n que crece ninguna &laquo;viuda&raquo; sea desatendida, que cada familia sea conocida y cuidada, y que el pastor quede libre para la Palabra. Antes de aprender el plan, debemos tener el coraz&oacute;n, porque si olvidamos el coraz&oacute;n el plan se vuelve pura maquinaria, pero si guardamos el coraz&oacute;n el plan se vuelve servicio vivo. El di&aacute;cono es un siervo, y su servicio es la tierra en que crece la Palabra de Dios.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 1 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 1;
+const COURSE = 'CTSDFM';
+const FILE_PREFIX = 'CTSDeaconFamilyMinistry';
+const NEXT_UNIT_URL = 'CTSDeaconFamilyMinistryUnit2.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 — Biblical Foundations of the Diaconate","Unit 2 — Qualifications and Character of Deacons","Unit 3 — Historical Development in Southern Baptist Life","Unit 4 — The Deacon Family Ministry Plan: Vision and Definition","Unit 5 — Organizing the Plan: Assigning Families","Unit 6 — Ongoing Care: Visitation and Prayer","Unit 7 — Discipleship and Evangelism within Assigned Families","Unit 8 — Crisis Ministry, Confidentiality, and Referral","Unit 9 — Deacon Meetings, Reporting, and Pastor Relations","Unit 10 — Sustaining the Plan: Challenges and Evaluation"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [
+{"textEn":"1. The word \"deacon\" comes from the Greek word diakonos, which simply means:","textEs":"1. La palabra «diácono» viene de la palabra griega diakonos, que sencillamente significa:","optionsEn":["a ruler","a priest","a servant","an elder"],"optionsEs":["un gobernante","un sacerdote","un siervo","un anciano"],"explanationEn":"Diakonos is a common, humble word meaning servant.","explanationEs":"Diakonos es una palabra común y humilde que significa siervo.","correct":2},
+{"textEn":"2. In Mark 10:43–45, Jesus taught that whoever desires to be great among you shall be:","textEs":"2. En Marcos 10:43–45, Jesús enseñó que el que quiera ser grande entre vosotros será:","optionsEn":["your teacher","your servant","your master","your judge"],"optionsEs":["vuestro maestro","vuestro servidor","vuestro señor","vuestro juez"],"explanationEn":"Jesus defined greatness as service: the great one must be the servant (Mark 10:43).","explanationEs":"Jesús definió la grandeza como servicio: el grande debe ser el servidor (Marcos 10:43).","correct":1},
+{"textEn":"3. Although the word \"deacon\" is not used there, the church has long seen the seed of the diaconate in:","textEs":"3. Aunque la palabra «diácono» no se usa allí, la iglesia ha visto por mucho tiempo la semilla del diaconado en:","optionsEn":["the seven men of Acts 6","the twelve apostles","the elders of Jerusalem","the seventy disciples"],"optionsEs":["los siete hombres de Hechos 6","los doce apóstoles","los ancianos de Jerusalén","los setenta discípulos"],"explanationEn":"The seven men chosen in Acts 6 are seen as the prototype of the diaconate.","explanationEs":"Los siete hombres escogidos en Hechos 6 se ven como el prototipo del diaconado.","correct":0},
+{"textEn":"4. What practical problem in Acts 6 gave rise to the choosing of the seven?","textEs":"4. ¿Qué problema práctico en Hechos 6 dio origen a la elección de los siete?","optionsEn":["False teaching was spreading","The apostles were imprisoned","There was no money in the treasury","The Greek-speaking widows were neglected in the daily distribution"],"optionsEs":["Se difundía una falsa enseñanza","Los apóstoles estaban presos","No había dinero en la tesorería","Las viudas de habla griega eran desatendidas en la distribución diaria"],"explanationEn":"The Hellenist widows were being neglected in the daily distribution of food (Acts 6:1).","explanationEs":"Las viudas helenistas eran desatendidas en la distribución diaria de los alimentos (Hechos 6:1).","correct":3},
+{"textEn":"5. The neglected widows were creating what danger in the young church?","textEs":"5. Las viudas desatendidas estaban creando qué peligro en la joven iglesia?","optionsEn":["a famine","a complaint that threatened the church's unity","a persecution","a heresy"],"optionsEs":["un hambre","una murmuración que amenazaba la unidad de la iglesia","una persecución","una herejía"],"explanationEn":"A complaint (murmuring) arose that threatened the unity of the church (Acts 6:1).","explanationEs":"Surgió una murmuración que amenazaba la unidad de la iglesia (Hechos 6:1).","correct":1},
+{"textEn":"6. The apostles said it was not desirable that they should leave _____ to serve tables.","textEs":"6. Los apóstoles dijeron que no era justo que ellos dejasen _____ para servir a las mesas.","optionsEn":["the temple","their families","the word of God","the city"],"optionsEs":["el templo","sus familias","la palabra de Dios","la ciudad"],"explanationEn":"\"It is not desirable that we should leave the word of God and serve tables\" (Acts 6:2).","explanationEs":"«No es justo que nosotros dejemos la palabra de Dios, para servir a las mesas» (Hechos 6:2).","correct":2},
+{"textEn":"7. Which best describes the apostles' attitude toward serving tables?","textEs":"7. ¿Qué describe mejor la actitud de los apóstoles hacia el servir a las mesas?","optionsEn":["They recognized it as good work, but not their primary calling","They despised it as beneath them","They refused to let anyone else do it","They considered it unspiritual"],"optionsEs":["La reconocieron como buena obra, pero no su llamado principal","La despreciaban como algo indigno de ellos","Se negaban a que otro la hiciera","La consideraban no espiritual"],"explanationEn":"They called it good work worthy of Spirit-filled men, but recognized their own calling to the Word and prayer.","explanationEs":"La llamaron buena obra digna de hombres llenos del Espíritu, pero reconocieron su llamado a la Palabra y la oración.","correct":0},
+{"textEn":"8. The deepest purpose of the deacon, drawn from Acts 6, is to:","textEs":"8. El propósito más profundo del diácono, sacado de Hechos 6, es:","optionsEn":["govern the church as a board","control the church's finances","replace the pastor in preaching","carry practical care so leaders are freed for the Word and prayer"],"optionsEs":["gobernar la iglesia como junta","controlar las finanzas de la iglesia","reemplazar al pastor en la predicación","llevar el cuidado práctico para que los líderes queden libres para la Palabra y la oración"],"explanationEn":"The deacon carries the practical load so the spiritual leaders can give themselves to the Word and prayer (Acts 6:2-4).","explanationEs":"El diácono lleva la carga práctica para que los líderes espirituales se entreguen a la Palabra y la oración (Hechos 6:2-4).","correct":3},
+{"textEn":"9. What three qualifications did the apostles require of the seven?","textEs":"9. ¿Qué tres requisitos exigieron los apóstoles de los siete?","optionsEn":["wealth, education, and age","strength, courage, and eloquence","good reputation, the Holy Spirit, and wisdom","experience, popularity, and skill"],"optionsEs":["riqueza, educación y edad","fuerza, valor y elocuencia","buen testimonio, el Espíritu Santo y sabiduría","experiencia, popularidad y habilidad"],"explanationEn":"Men of good reputation, full of the Holy Spirit and wisdom (Acts 6:3).","explanationEs":"Hombres de buen testimonio, llenos del Espíritu Santo y de sabiduría (Hechos 6:3).","correct":2},
+{"textEn":"10. Notably, the list of qualifications for the seven did NOT include:","textEs":"10. Notablemente, la lista de requisitos para los siete NO incluía:","optionsEn":["good reputation","administrative skill","wisdom","being full of the Holy Spirit"],"optionsEs":["buen testimonio","habilidad administrativa","sabiduría","estar lleno del Espíritu Santo"],"explanationEn":"Not one of the three requirements is administrative skill; all are spiritual.","explanationEs":"Ninguno de los tres requisitos es habilidad administrativa; todos son espirituales.","correct":1},
+{"textEn":"11. Who chose the seven men?","textEs":"11. ¿Quién escogió a los siete hombres?","optionsEn":["the whole congregation","the apostles alone","Peter alone","the Roman authorities"],"optionsEs":["toda la congregación","los apóstoles solos","Pedro solo","las autoridades romanas"],"explanationEn":"The whole multitude (congregation) chose the seven (Acts 6:5).","explanationEs":"Toda la multitud (congregación) escogió a los siete (Hechos 6:5).","correct":0},
+{"textEn":"12. After the seven were chosen, what did the apostles do?","textEs":"12. Después de que los siete fueron escogidos, ¿qué hicieron los apóstoles?","optionsEn":["sent them away","paid them wages","ordained them as priests","prayed and laid hands on them"],"optionsEs":["los despidieron","les pagaron un salario","los ordenaron sacerdotes","oraron y les impusieron las manos"],"explanationEn":"They set them before the apostles, who prayed and laid hands on them (Acts 6:6).","explanationEs":"Los presentaron ante los apóstoles, quienes oraron y les impusieron las manos (Hechos 6:6).","correct":3},
+{"textEn":"13. The first deacon named in the list of the seven was:","textEs":"13. El primer diácono nombrado en la lista de los siete fue:","optionsEn":["Philip","Nicolas","Stephen","Timothy"],"optionsEs":["Felipe","Nicolás","Esteban","Timoteo"],"explanationEn":"Stephen is named first among the seven (Acts 6:5).","explanationEs":"Esteban es nombrado primero entre los siete (Hechos 6:5).","correct":2},
+{"textEn":"14. The laying on of hands signified:","textEs":"14. La imposición de manos significaba:","optionsEn":["public recognition and the church's blessing","a magic ritual","the transfer of apostleship","a payment of wages"],"optionsEs":["reconocimiento público y la bendición de la iglesia","un rito mágico","la transferencia del apostolado","un pago de salario"],"explanationEn":"It was a public recognition and blessing, setting the men apart for service.","explanationEs":"Era un reconocimiento y una bendición públicos, que apartaban a los hombres para el servicio.","correct":0},
+{"textEn":"15. According to Acts 6:7, what happened after the matter of the widows was resolved?","textEs":"15. Según Hechos 6:7, ¿qué sucedió después de resolverse el asunto de las viudas?","optionsEn":["the church became wealthy","the word of God spread and the disciples multiplied greatly","the persecution ended","the apostles retired"],"optionsEs":["la iglesia se hizo rica","la palabra de Dios crecía y los discípulos se multiplicaban grandemente","terminó la persecución","los apóstoles se retiraron"],"explanationEn":"The word of God spread and the number of disciples multiplied greatly (Acts 6:7).","explanationEs":"La palabra de Dios crecía y el número de discípulos se multiplicaba grandemente (Hechos 6:7).","correct":1},
+{"textEn":"16. Acts 6:7 also notes that a great many of whom became obedient to the faith?","textEs":"16. Hechos 6:7 también señala que una gran multitud de quiénes obedeció a la fe?","optionsEn":["the Pharisees","the Romans","the Samaritans","the priests"],"optionsEs":["los fariseos","los romanos","los samaritanos","los sacerdotes"],"explanationEn":"A great many of the priests were obedient to the faith (Acts 6:7).","explanationEs":"Una gran multitud de los sacerdotes obedecía a la fe (Hechos 6:7).","correct":3},
+{"textEn":"17. The relationship Acts 6 shows between practical service and gospel growth is that they are:","textEs":"17. La relación que Hechos 6 muestra entre el servicio práctico y el crecimiento del evangelio es que están:","optionsEn":["tied together — servant ministry freed the Word to spread","opposed to each other","completely unrelated","in competition"],"optionsEs":["unidos — el ministerio de servicio liberó la Palabra para extenderse","opuestos entre sí","sin relación alguna","en competencia"],"explanationEn":"With the apostles freed to preach, the Word spread; service and gospel growth are tied together.","explanationEs":"Con los apóstoles libres para predicar, la Palabra se extendió; el servicio y el crecimiento del evangelio están unidos.","correct":0},
+{"textEn":"18. A deacon's authority, according to the Acts 6 pattern, is best described as:","textEs":"18. La autoridad de un diácono, según el patrón de Hechos 6, se describe mejor como:","optionsEn":["inherited from his family","purchased with money","conferred by the church and consecrated before God","taken by force"],"optionsEs":["heredada de su familia","comprada con dinero","conferida por la iglesia y consagrada delante de Dios","tomada por la fuerza"],"explanationEn":"It is not seized but conferred by the church and consecrated in prayer.","explanationEs":"No se toma, sino que la confiere la iglesia y se consagra en oración.","correct":2},
+{"textEn":"19. \"Deacon ministry begins where real human need meets the family of God.\" This means a deacon should:","textEs":"19. «El ministerio del diácono comienza donde la verdadera necesidad humana se encuentra con la familia de Dios.» Esto significa que un diácono debe:","optionsEn":["focus only on preaching","not consider practical or physical care beneath him","avoid all involvement with money","serve only the wealthy members"],"optionsEs":["enfocarse solo en predicar","no considerar indigno el cuidado práctico o físico","evitar toda relación con el dinero","servir solo a los miembros ricos"],"explanationEn":"It is never beneath a deacon to attend to the practical, physical, and overlooked.","explanationEs":"Nunca es indigno de un diácono atender lo práctico, lo físico y lo olvidado.","correct":1},
+{"textEn":"20. The Deacon Family Ministry Plan, studied in this course, is best understood as:","textEs":"20. El Plan de Ministerio Familiar del Diácono, estudiado en este curso, se entiende mejor como:","optionsEn":["one proven way to put the Acts 6 pattern of servant care into practice","a replacement for the pastor","a business model for rapid church growth","a denominational requirement for salvation"],"optionsEs":["una manera probada de poner en práctica el patrón de cuidado servicial de Hechos 6","un reemplazo del pastor","un modelo de negocios para el crecimiento rápido de la iglesia","un requisito denominacional para la salvación"],"explanationEn":"The plan is simply one careful way to put Acts 6 into practice in a local church.","explanationEs":"El plan es sencillamente una manera cuidadosa de poner Hechos 6 en práctica en una iglesia local.","correct":0}
+];
+const kwQuestions = [
+{"textEn":"21. What does the word \"deacon\" mean, and how did Jesus define greatness in Mark 10:43–45?","textEs":"21. ¿Qué significa la palabra «diácono», y cómo definió Jesús la grandeza en Marcos 10:43–45?","kw_en":["servant","serve","great","slave","ransom","deacon","first","son"],"kw_es":["siervo","servir","grande","primero","hijo","rescate","servicio","servido"],"modelEn":"The word \"deacon\" comes from the Greek diakonos, which simply means a servant or one who waits on others. In Mark 10:43-45 Jesus turned the world's idea of greatness upside down, teaching that whoever wants to be great must be a servant, and whoever wants to be first must be slave of all, for even the Son of Man came not to be served but to serve and to give His life a ransom for many. So the deacon's very name and his Lord's own example both define his work as humble service to others.","modelEs":"La palabra «diácono» viene del griego diakonos, que sencillamente significa siervo o el que sirve a otros. En Marcos 10:43-45 Jesús puso de cabeza la idea que el mundo tiene de la grandeza, enseñando que el que quiera ser grande debe ser siervo, y el que quiera ser el primero debe ser siervo de todos, porque aun el Hijo del Hombre no vino para ser servido, sino para servir y dar su vida en rescate por muchos. Así que el mismo nombre del diácono y el ejemplo de su Señor definen su obra como servicio humilde a los demás."},
+{"textEn":"22. Describe the practical problem in Acts 6 that led to the choosing of the seven.","textEs":"22. Describa el problema práctico en Hechos 6 que llevó a la elección de los siete.","kw_en":["widow","neglect","distribut","complaint","unity","food","daily","multipl"],"kw_es":["viuda","desatend","distribuc","queja","unidad","aliment","diaria","necesidad"],"modelEn":"As the church multiplied, the Greek-speaking (Hellenist) widows were being neglected in the daily distribution of food, while the Hebrew widows were cared for. This neglect produced a complaint that threatened the unity of the young church. The need was very ordinary, making sure widows were fed and treated without partiality, yet it carried real spiritual danger. It was to meet this practical need that the apostles called for seven qualified servants.","modelEs":"Al multiplicarse la iglesia, las viudas de habla griega (helenistas) eran desatendidas en la distribución diaria de los alimentos, mientras que las viudas hebreas sí recibían cuidado. Esta negligencia produjo una queja que amenazaba la unidad de la joven iglesia. La necesidad era muy común, asegurar que las viudas fueran alimentadas y tratadas sin acepción de personas, pero llevaba un verdadero peligro espiritual. Fue para atender esta necesidad práctica que los apóstoles pidieron siete siervos calificados."},
+{"textEn":"23. Why did the apostles refuse to leave the Word of God to serve tables, and what does this teach about the deacon's purpose?","textEs":"23. ¿Por qué se negaron los apóstoles a dejar la Palabra de Dios para servir a las mesas, y qué enseña esto sobre el propósito del diácono?","kw_en":["word","prayer","serve","table","calling","preach","load","pastor"],"kw_es":["palabra","oraci","ministerio","llamado","predicar","carga","pastor","cuidado"],"modelEn":"The apostles did not despise serving tables; they called it good work worthy of Spirit-filled men. Rather, they recognized their own calling and limits: they could not give themselves fully to the ministry of the word and to prayer if they were also managing the daily distribution. This teaches the deacon's deepest purpose, to carry the load of practical care so that the spiritual leaders are freed for the Word and prayer. When deacons serve well, the pastor can preach and pray, and the whole church is fed.","modelEs":"Los apóstoles no despreciaban el servir a las mesas; lo llamaron buena obra digna de hombres llenos del Espíritu. Más bien, reconocieron su propio llamado y sus límites: no podían entregarse por completo al ministerio de la palabra y a la oración si además administraban la distribución diaria. Esto enseña el propósito más profundo del diácono: llevar la carga del cuidado práctico para que los líderes espirituales queden libres para la Palabra y la oración. Cuando los diáconos sirven bien, el pastor puede predicar y orar, y toda la iglesia es alimentada."},
+{"textEn":"24. What three qualifications did the apostles require of the seven, and what is striking about the list?","textEs":"24. ¿Qué tres requisitos exigieron los apóstoles de los siete, y qué es sorprendente de la lista?","kw_en":["reputation","spirit","wisdom","character","skill","maturity","seven","table"],"kw_es":["testimonio","santo","sabidur","probado","habilidad","madurez","siete","requisito"],"modelEn":"The apostles told the church to choose seven men of good reputation, full of the Holy Spirit, and full of wisdom. What is striking is that not one of these three is administrative skill or business ability. The work was serving tables, but the requirement was spiritual maturity and proven character. The church refused to separate practical service from godliness, because a man who handles the church's people, money, and reputation must himself be a man of God.","modelEs":"Los apóstoles dijeron a la iglesia que escogiera siete hombres de buen testimonio, llenos del Espíritu Santo y de sabiduría. Lo sorprendente es que ninguna de estas tres cosas es habilidad administrativa o capacidad para los negocios. La obra era servir a las mesas, pero el requisito era madurez espiritual y carácter probado. La iglesia se negó a separar el servicio práctico de la piedad, porque un hombre que maneja a la gente, el dinero y la reputación de la iglesia debe ser él mismo un hombre de Dios."},
+{"textEn":"25. Who chose the seven, who set them apart, and what did the laying on of hands signify?","textEs":"25. ¿Quién escogió a los siete, quién los apartó, y qué significaba la imposición de manos?","kw_en":["congregation","stephen","apostle","prayed","hands","commission","recognition","authority"],"kw_es":["congregaci","esteban","oraron","manos","comision","reconoci","bendici","autoridad"],"modelEn":"The whole congregation chose the seven men, and Stephen is named first. They set these men before the apostles, who prayed and laid hands on them. This shows a beautiful partnership: the body chooses, and the leaders confirm and commission. The laying on of hands was not magic; it was public recognition and the church's blessing, setting the men apart for their service before God. A deacon's authority is therefore not seized but conferred by the church and consecrated in prayer.","modelEs":"Toda la congregación escogió a los siete hombres, y Esteban es nombrado primero. Los pusieron delante de los apóstoles, quienes oraron y les impusieron las manos. Esto muestra una hermosa colaboración: el cuerpo escoge, y los líderes confirman y comisionan. La imposición de manos no era magia; era reconocimiento público y la bendición de la iglesia, apartando a los hombres para su servicio delante de Dios. Por tanto, la autoridad del diácono no se toma, sino que la confiere la iglesia y se consagra en oración."},
+{"textEn":"26. According to Acts 6:7, what was the fruit of resolving the matter of the widows? What does this teach about service and gospel growth?","textEs":"26. Según Hechos 6:7, ¿cuál fue el fruto de resolver el asunto de las viudas? ¿Qué enseña esto sobre el servicio y el crecimiento del evangelio?","kw_en":["word","spread","disciple","multipl","priest","gospel","growth","preach"],"kw_es":["palabra","sacerdote","evangelio","unidad","predicar","cuidado","crecimiento","multiplica"],"modelEn":"Acts 6:7 says that after the matter was resolved, the word of God spread, the number of the disciples multiplied greatly, and a great many of the priests became obedient to the faith. The fruit of organizing practical care was not merely full stomachs but an explosion of the Word. With the apostles freed to preach and the church's unity restored, the gospel ran. This teaches that servant ministry and gospel growth are tied together: when deacons carry the burden of care, the Word is preached and the church grows.","modelEs":"Hechos 6:7 dice que después de resolverse el asunto, la palabra de Dios crecía, el número de los discípulos se multiplicaba grandemente, y muchos de los sacerdotes obedecían a la fe. El fruto de organizar el cuidado práctico no fue solo estómagos llenos, sino una explosión de la Palabra. Con los apóstoles libres para predicar y la unidad de la iglesia restaurada, el evangelio corrió. Esto enseña que el ministerio de servicio y el crecimiento del evangelio están unidos: cuando los diáconos llevan la carga del cuidado, la Palabra se predica y la iglesia crece."},
+{"textEn":"27. Explain why a deacon should never consider practical or physical care \"beneath him.\"","textEs":"27. Explique por qué un diácono nunca debe considerar indigno de él el cuidado práctico o físico.","kw_en":["servant","need","practical","humble","care","widow","physical","serve"],"kw_es":["necesidad","siervo","humilde","cuidado","viuda","alimentad","sirvi","comida"],"modelEn":"Deacon ministry begins where real human need meets the family of God. The first deacons were appointed to make sure widows were fed and treated fairly, a very ordinary, practical task. Because the deacon's very name means servant, and because his Lord washed feet and served, no act of humble care is beneath him. When a deacon attends to the physical and the overlooked, a meal, a visit, a need quietly met, he is doing the very work the office was created for, and he honors Christ in it.","modelEs":"El ministerio del diácono comienza donde la verdadera necesidad humana se encuentra con la familia de Dios. Los primeros diáconos fueron nombrados para asegurar que las viudas fueran alimentadas y tratadas con justicia, una tarea muy común y práctica. Porque el mismo nombre del diácono significa siervo, y porque su Señor lavó los pies y sirvió, ningún acto de cuidado humilde es indigno de él. Cuando un diácono atiende lo físico y lo olvidado, una comida, una visita, una necesidad atendida en silencio, hace la misma obra para la cual se creó el oficio, y honra a Cristo en ello."},
+{"textEn":"28. How does the deacon's office protect the ministry of the Word?","textEs":"28. ¿Cómo protege el oficio del diácono el ministerio de la Palabra?","kw_en":["word","pastor","prayer","burden","preach","study","distribut","pulpit"],"kw_es":["palabra","pastor","oraci","carga","predicar","estudiar","distribuc","fidelidad"],"modelEn":"The deacon's office protects the ministry of the Word by carrying the practical burdens that would otherwise consume the pastor's time and strength. In Acts 6 the apostles could not manage the daily distribution and still give themselves fully to the word and prayer, so the church set servants over the practical work. When deacons faithfully handle care, finances, and the needs of families, the pastor is freed to study, preach, teach, and pray. In this way the faithfulness of the deacons is tied to the health of the pulpit.","modelEs":"El oficio del diácono protege el ministerio de la Palabra al llevar las cargas prácticas que de otro modo consumirían el tiempo y las fuerzas del pastor. En Hechos 6 los apóstoles no podían administrar la distribución diaria y a la vez entregarse por completo a la palabra y a la oración, por eso la iglesia puso siervos sobre la obra práctica. Cuando los diáconos manejan fielmente el cuidado, las finanzas y las necesidades de las familias, el pastor queda libre para estudiar, predicar, enseñar y orar. Así la fidelidad de los diáconos está ligada a la salud del púlpito."},
+{"textEn":"29. Summarize the partnership between the congregation and the leaders in appointing deacons (Acts 6:5-6).","textEs":"29. Resuma la colaboración entre la congregación y los líderes al nombrar diáconos (Hechos 6:5-6).","kw_en":["congregation","select","stephen","apostle","prayer","hands","commission","order"],"kw_es":["congregaci","escoger","esteban","oraci","manos","comision","orden","confirm"],"modelEn":"Acts 6 shows a balanced partnership. The whole congregation was invited to select seven qualified men from among themselves, and they did so, choosing Stephen and the others. Then they presented these men to the apostles, who confirmed them by prayer and the laying on of hands. So deacon ministry is neither self-appointed nor autocratically imposed: it rises from the body and is set apart by the leaders. The people recognize the gifts; the leaders commission and bless. This guards both the congregation's voice and the church's order.","modelEs":"Hechos 6 muestra una colaboración equilibrada. Se invitó a toda la congregación a escoger de entre ellos siete hombres calificados, y así lo hicieron, eligiendo a Esteban y a los demás. Luego presentaron a estos hombres a los apóstoles, quienes los confirmaron con oración e imposición de manos. Así que el ministerio del diácono no es autonombrado ni impuesto de manera autocrática: surge del cuerpo y es apartado por los líderes. El pueblo reconoce los dones; los líderes comisionan y bendicen. Esto guarda tanto la voz de la congregación como el orden de la iglesia."},
+{"textEn":"30. In your own words, why is understanding the office of deacon necessary before learning the Deacon Family Ministry Plan?","textEs":"30. En sus propias palabras, ¿por qué es necesario entender el oficio del diácono antes de aprender el Plan de Ministerio Familiar del Diácono?","kw_en":["servant","plan","care","word","unity","biblical","family","serve"],"kw_es":["plan","siervo","cuidado","palabra","unidad","familia","servir","coraz"],"modelEn":"A plan for deacons is only as good as its grasp of what a deacon is. Before we can organize families and assignments, we must see that the deacon is at heart a servant, defined by his name, by his Lord who came to serve, and by the Acts 6 pattern of practical care that protects the Word and guards unity. The Deacon Family Ministry Plan is simply one proven way to put that biblical pattern into practice, making sure that in a growing church no family is neglected and the pastor is freed for the Word. If we forget the heart, the plan becomes mere machinery; if we keep the heart, the plan becomes living service.","modelEs":"Un plan para diáconos vale solo lo que vale su comprensión de lo que es un diácono. Antes de organizar familias y asignaciones, debemos ver que el diácono es en esencia un siervo, definido por su nombre, por su Señor que vino a servir, y por el patrón de Hechos 6 de cuidado práctico que protege la Palabra y guarda la unidad. El Plan de Ministerio Familiar del Diácono es sencillamente una manera probada de poner ese patrón bíblico en práctica, asegurando que en una iglesia que crece ninguna familia sea desatendida y que el pastor quede libre para la Palabra. Si olvidamos el corazón, el plan se vuelve pura maquinaria; si guardamos el corazón, el plan se vuelve servicio vivo."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'cert';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSDeaconFamilyMinistryReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

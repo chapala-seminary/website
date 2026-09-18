@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Church Growth — Unit 3: Terms and History</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 4 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📈 Church Growth — Unit 3: Terms and History</span><span class="lang-es">📈 Crecimiento de la Iglesia — Unidad 3: Términos e Historia</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"So mightily grew the word of God and prevailed." — Acts 19:20 (NKJV)</span><span class="lang-es">"Así crecía y prevalecía poderosamente la palabra de Dios." — Hechos 19:20 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Church Growth course. Please register before beginning Unit 3.</span><span class="lang-es">Bienvenido al curso Crecimiento de la Iglesia. Por favor registrese antes de comenzar la Unidad 3.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h2 id="part-one-the-terms">Part One: The Terms</h2>
+<p><em>Assignment: Complete the exercise “Pictures of a
+Church.”</em></p>
+<p><strong>1. Evangelism.</strong> Sharing the gospel with lost
+people.</p>
+<p><strong>2. Church Growth.</strong> “All that is involved in bringing
+men and women who do not have a personal relationship to Jesus Christ
+into fellowship with Him and into responsible church membership” (C.
+Peter Wagner, <em>Your Church Can Grow</em>, p. 12). Several types of
+growth have been identified:</p>
+<ul>
+<li><strong>Transfer growth</strong> — believers who come from other
+churches.
+<ul>
+<li><em>Swap.</em> They come from nearby churches in the same community
+over worship differences, relatives, friends, or problems. Some
+mega-churches actually sap the life out of smaller community churches,
+the way a shopping mall saps the life out of smaller businesses. The
+trouble is that the net increase for the Kingdom of God is zero.</li>
+<li><em>Distance.</em> People coming from more distant communities.</li>
+<li><em>The evangelical community.</em> When they come, there is always
+the question of what to do with them once they arrive.</li>
+</ul></li>
+<li><strong>Rededicational growth</strong> — people who return to the
+church after leaving it for some reason.</li>
+<li><strong>Generational growth</strong> — when our own children come to
+know Christ. We dare not take them for granted; some fall through the
+cracks.</li>
+<li><strong>Conversional growth</strong> — this obviously must be the
+target of church growth.</li>
+</ul>
+<p><strong>3. The denominational definition (Southern Baptist,
+1990).</strong> “Church growth is God at work through His redeemed
+people in adding to a church those who are saved by grace through faith
+in Jesus Christ, and helping inactive believers come to renewed
+commitment. It is new believers added to existing churches or gathered
+into new churches and equipped to become responsible church members who
+minister and witness as personal soul-winners to others. It is
+strengthening the churches in fellowship, organization, and in world
+missions commitment” (statement endorsed in 1990). Whatever our
+tradition, that opening clause is the one to write on the wall: church
+growth is <em>God at work through His redeemed people.</em> We settled
+that in the last unit, and every term that follows must serve it.</p>
+<p><strong>4. Church planting.</strong> The intentional process of
+beginning a new permanent church or witnessing point in order to reach a
+distinct geographical, social, racial, or ethnic group. It is one form
+of church growth (1 Corinthians 3:6–9).</p>
+<p><strong>5. The superchurch.</strong> These are the very large
+churches. In the era this course was first taught, nine of the ten
+largest churches in America were Baptist. They are superaggressive in
+evangelism and have strong, visible, long-tenured pastors. They often
+function as a kind of mini-denomination. Some have criticized the
+superchurches as being like a superstore that dries up the smaller
+stores around it.</p>
+<p><strong>6. The metachurch.</strong> Called in its day the most
+important innovation of the movement, the metachurch revolves around two
+events: the meeting in small groups, or cells, and the gathering for
+corporate worship, or celebration. In the metachurch the clergy are no
+longer the primary caregivers — that ministry is given to lay coaches
+and the small groups themselves. Virtually all ministry is decentralized
+to the cells. The key number is now ten — the size of a typical cell
+group — rather than the hundreds in the auditorium, and on that basis a
+church’s growth is virtually unlimited.</p>
+<p>Church growth might be pictured like a shopping mall. In a mall there
+are usually two large anchor entrances on either end — at one end a
+department store, at the other a discount giant — and between them a
+hundred specialty shops. People are drawn in through the big anchors and
+then find the shop that fits them. Among the churches of this study, the
+two great anchor entrances have long been <em>Worship</em> and
+<em>Sunday School.</em></p>
+<h3 id="where-we-are-now-2026-a-second-glossary">Where We Are Now
+(2026): A Second Glossary</h3>
+<p>The vocabulary of church growth has gone on growing, and a student
+today will meet a second glossary the first edition never knew. Several
+are simply the terms above, grown older.</p>
+<p><strong>Megachurch.</strong> What this course called the
+<em>superchurch</em> the whole world now calls the megachurch — by
+common reckoning a congregation of two thousand or more in weekly
+attendance. One thing has changed and it changes the whole picture: the
+largest congregations on earth are no longer American or Baptist. They
+are Pentecostal and charismatic and they are in the Global South.</p>
+<p><strong>Multisite church.</strong> One church meeting in many
+locations, often with the sermon carried by video. It can be fruitful —
+but note the hard-won caution: multisite is an expansion tool for a
+church already growing, not a growth strategy in itself.</p>
+<p><strong>Attractional and missional.</strong> The two words that now
+frame nearly every conversation. The <em>attractional</em> church draws
+people in — <em>come and see.</em> The <em>missional</em> church is sent
+out into the world — <em>go and be</em> — treating the neighborhood, not
+the auditorium, as the field.</p>
+<p><strong>The “nones.”</strong> The religiously unaffiliated. A
+generation ago a rounding error; today one of the largest groups in the
+country, many with no church memory at all.</p>
+<p><strong>Dechurched and rechurching.</strong> The <em>dechurched</em>
+are the great company — some forty million in America — who once
+attended and no longer do. <em>Rechurching</em> is the work of bringing
+them home, and because most did not leave over doctrine, it is more open
+to us than we feared.</p>
+<p><strong>Deconstruction.</strong> The now-common term for a believer’s
+hard reexamination of the faith of his upbringing — sometimes ending in
+deeper faith, sometimes in departure.</p>
+<p><strong>Microchurch, house church, dinner church.</strong> The
+metachurch grown all the way up: the small, simple, decentralized forms
+where the cell is no longer a department of the church but is itself the
+church.</p>
+<p><strong>Digital, online, and hybrid church.</strong> Congregations
+that gather partly, or wholly, through a screen — made permanent by the
+pandemic, and quietly the new front door.</p>
+<p><strong>Discipleship and spiritual formation.</strong> The word the
+movement has circled back to: the slow work of shaping a person into the
+likeness of Christ — the goal named at the very beginning.</p>
+<p><strong>Renewalist.</strong> The umbrella term for Pentecostals and
+charismatics together — the Spirit-emphasizing movement that is the
+engine of the church’s growth in the world today, running clean across
+the old denominational lines.</p>
+<h2 id="part-two-the-history">Part Two: The History</h2>
+<p>The movement’s father was born in India in 1897 to missionaries, and
+went back to the field himself as a mission administrator. There he
+realized that some churches were not growing, so he resigned his post
+and started churches. In 1955 he published <em>The Bridges of God</em>,
+coining the term “church growth,” and in 1970 <em>Understanding Church
+Growth</em>, the movement’s defining work. His focus was the foreign
+mission field, and he stressed four things: that evangelism is
+<em>making disciples</em> (the results, not merely the proclamation);
+that men come to Christ within their own culture; the homogeneous
+principle; and “perfecting,” or internal growth. He named three ways a
+church grows — by <em>conversion</em>, by <em>biological</em> growth,
+and by <em>transfer</em> — and noted that already more than 80% of
+growth in North America came from transfer, not conversion.</p>
+<p>He came to America in the 1960s, and in 1965 to Fuller Seminary,
+where missionaries from all over the world studied under him. Through
+the 1970s his disciples reinterpreted his principles for the North
+American scene; chief among them was a former missionary to Bolivia who,
+more than anyone, popularized church growth in this country and wrote
+<em>Your Church Can Grow: Seven Vital Signs of a Healthy Church.</em>
+Others carried the movement forward through conferences, statistics, and
+a steady stream of books, until by the early 1980s some sixty volumes
+had been published.</p>
+<p>Two churches came to embody the movement at its height.
+<em>Saddleback Community Church</em>, begun in a home in 1980, climbed
+past nine thousand in attendance to become the fastest-growing church in
+the history of the Southern Baptist Convention. And <em>Willow Creek
+Community Church</em>, outside Chicago, became the flagship and training
+center of the seeker-service model.</p>
+<h3 id="where-we-are-now-2026">Where We Are Now (2026)</h3>
+<p>This history, as first written, closes around 1990 — with Fuller at
+the center and Saddleback and Willow Creek rising as the models. The
+thirty years since have written several more chapters, and the
+surprising shape of the story is a <em>return.</em></p>
+<p>The seeker movement crested and then turned a corner with a
+remarkable act of honesty. In 2007 Willow Creek published the results of
+its own multi-year self-study and admitted the hard finding: more
+programs and higher attendance were not, by themselves, producing mature
+disciples. That candor marked a hinge — the dawning recognition that we
+had become very good at gathering crowds and not nearly as good at
+making disciples, which is the very thing the Great Commission
+commanded.</p>
+<p>Out of that recognition came the <em>missional</em> turn. Where the
+attractional church said <em>come and see,</em> the missional church
+said <em>go and be</em> — the neighborhood, not the auditorium, is the
+field. By our own day the verdict is widely shared: the attractional
+model, faithful and effective in its time, has largely run its course.
+Alongside it came the <em>church-planting</em> turn — and here the
+movement’s father would have smiled, for it is his own first instinct
+come home. Networks rose to make new-church planting the main engine of
+growth again, and a thoughtful, city-facing ministry took root in places
+the seeker suburb had never reached.</p>
+<p>And the largest movement of all was the one he began with: the
+church’s center of gravity returning to the mission field. He started
+overseas, and after a long North American detour the whole story has
+swung back south. The explosive growth is now Pentecostal and
+charismatic and in the Global South — so that, in a real sense, the Book
+of Acts is being written again in languages Luke never heard.</p>
+<p>So the history comes full circle. The movement began with three
+convictions — <em>make disciples,</em> not merely decisions; <em>plant
+new congregations</em>; and keep your eyes on the <em>whole world.</em>
+It wandered for a generation through the megachurch and the seeker
+service, and has now, chastened and instructed, found its way back to
+exactly those three. That is not a defeat. It is a homecoming.</p>
+
+</div>
+<div class="lang-es">
+
+<h2>Primera Parte: Los Términos</h2>
+
+<p><em>Tarea: Complete el ejercicio "Imágenes de una Iglesia."</em></p>
+
+<p><strong>1. Evangelismo.</strong> Compartir el evangelio con la gente perdida.</p>
+
+<p><strong>2. Crecimiento de la iglesia.</strong> "Todo lo que está involucrado en traer a hombres y mujeres que no tienen una relación personal con Jesucristo a la comunión con El y a la membresía responsable en la iglesia" (C. Peter Wagner, <em>Tu Iglesia Puede Crecer</em>, p. 12). Se han identificado varios tipos de crecimiento:</p>
+<ul>
+<li><strong>Crecimiento por traslado</strong> — creyentes que vienen de otras iglesias.
+<ul>
+<li><em>Intercambio.</em> Vienen de iglesias cercanas en la misma comunidad por diferencias de adoración, parientes, amigos o problemas. Algunas megaiglesias en realidad le sacan la vida a iglesias comunitarias más pequeñas, así como un centro comercial le saca la vida a los negocios pequeños. El problema es que el aumento neto para el Reino de Dios es cero.</li>
+<li><em>Distancia.</em> Personas que vienen de comunidades más lejanas.</li>
+<li><em>La comunidad evangélica.</em> Cuando vienen, siempre está la pregunta de qué hacer con ellos una vez que llegan.</li>
+</ul>
+</li>
+<li><strong>Crecimiento por rededicación</strong> — personas que regresan a la iglesia después de dejarla por alguna razón.</li>
+<li><strong>Crecimiento generacional</strong> — cuando nuestros propios hijos llegan a conocer a Cristo. No nos atrevamos a darlos por sentado; algunos se pierden por las grietas.</li>
+<li><strong>Crecimiento por conversión</strong> — este, evidentemente, debe ser el objetivo del crecimiento de la iglesia.</li>
+</ul>
+
+<p><strong>3. La definición denominacional (Bautista del Sur, 1990).</strong> "El crecimiento de la iglesia es Dios obrando a través de Su pueblo redimido para añadir a una iglesia a los que son salvos por gracia mediante la fe en Jesucristo, y ayudar a los creyentes inactivos a llegar a un compromiso renovado. Son nuevos creyentes añadidos a iglesias existentes o reunidos en nuevas iglesias y equipados para ser miembros responsables que ministran y testifican como ganadores de almas a otros. Es fortalecer a las iglesias en compañerismo, organización y compromiso con las misiones mundiales" (declaración respaldada en 1990). Sea cual sea nuestra tradición, esa cláusula inicial es la que hay que escribir en la pared: el crecimiento de la iglesia es <em>Dios obrando a través de Su pueblo redimido.</em> Eso lo resolvimos en la unidad anterior, y cada término que sigue debe servirle.</p>
+
+<p><strong>4. Plantación de iglesias.</strong> El proceso intencional de comenzar una nueva iglesia permanente o un punto de testimonio para alcanzar a un grupo geográfico, social, racial o étnico distinto. Es una forma de crecimiento de la iglesia (1 Corintios 3:6-9).</p>
+
+<p><strong>5. La superiglesia.</strong> Son las iglesias muy grandes. En la época en que se enseno por primera vez este curso, nueve de las diez iglesias más grandes de América eran bautistas. Son superagresivas en el evangelismo y tienen pastores fuertes, visibles y de larga estancia. A menudo funcionan como una especie de mini-denominación. Algunos han criticado a las superiglesias por ser como una supertienda que seca a las tiendas más pequeñas a su alrededor.</p>
+
+<p><strong>6. La metaiglesia.</strong> Llamada en su día la innovación más importante del movimiento, la metaiglesia gira en torno a dos eventos: la reunión en grupos pequeños, o células, y la reunión para la adoración corporativa, o celebración. En la metaiglesia el clero ya no es el cuidador principal — ese ministerio se da a líderes laicos y a los grupos pequeños mismos. Prácticamente todo el ministerio se descentraliza a las células. El número clave es ahora diez — el tamaño de un grupo celular típico — en vez de los cientos del auditorio, y sobre esa base el crecimiento de una iglesia es prácticamente ilimitado.</p>
+
+<p>El crecimiento de la iglesia podría pintarse como un centro comercial. En un centro comercial suele haber dos grandes entradas ancla en cada extremo — en un extremo una tienda por departamentos, en el otro un gigante de descuentos — y entre ellas un centenar de tiendas especializadas. La gente es atraída por las grandes anclas y luego encuentra la tienda que le queda. Entre las iglesias de este estudio, las dos grandes entradas ancla han sido por mucho tiempo la <em>Adoración</em> y la <em>Escuela Dominical.</em></p>
+
+<h2>Dónde Estamos Ahora (2026): Un Segundo Glosario</h2>
+
+<p>El vocabulario del crecimiento de la iglesia ha seguido creciendo, y el estudiante de hoy encontrará un segundo glosario que la primera edición nunca conoció. Varios son sencillamente los términos de arriba, ya más viejos.</p>
+
+<p><strong>Megaiglesia.</strong> Lo que este curso llamó <em>superiglesia</em> todo el mundo ahora lo llama megaiglesia — por cuenta común, una congregación de dos mil o más en asistencia semanal. Una cosa ha cambiado y cambia todo el cuadro: las congregaciones más grandes de la tierra ya no son americanas ni bautistas. Son pentecostales y carismáticas y están en el Sur Global.</p>
+
+<p><strong>Iglesia multisitio.</strong> Una sola iglesia que se reune en muchos lugares, a menudo con el sermón llevado por video. Puede ser fructífera — pero note la advertencia ganada con esfuerzo: el multisitio es una herramienta de expansión para una iglesia que ya crece, no una estrategia de crecimiento en sí misma.</p>
+
+<p><strong>Atraccional y misional.</strong> Las dos palabras que ahora enmarcan casi toda conversación. La iglesia <em>atraccional</em> atrae a la gente — <em>ven y ve.</em> La iglesia <em>misional</em> es enviada al mundo — <em>ve y se</em> — tratando el vecindario, no el auditorio, como el campo.</p>
+
+<p><strong>Los "ningunos" (nones).</strong> Los sin afiliación religiosa. Hace una generación eran un error de redondeo; hoy uno de los grupos más grandes del país, muchos sin ninguna memoria de iglesia.</p>
+
+<p><strong>Desiglesiados y re-iglesia.</strong> Los <em>desiglesiados</em> son la gran compañía — unos cuarenta millones en América — que antes asistían y ya no lo hacen. La <em>re-iglesia</em> es la obra de traerlos a casa, y como la mayoría no se fue por doctrina, está más abierta a nosotros de lo que temíamos.</p>
+
+<p><strong>Deconstrucción.</strong> El término hoy común para el duro reexamen que un creyente hace de la fe de su crianza — que a veces termina en una fe más profunda, y a veces en la partida.</p>
+
+<p><strong>Microiglesia, iglesia en casa, iglesia de cena.</strong> La metaiglesia crecida del todo: las formas pequeñas, simples y descentralizadas donde la célula ya no es un departamento de la iglesia sino que es ella misma la iglesia.</p>
+
+<p><strong>Iglesia digital, en línea e híbrida.</strong> Congregaciones que se reunen en parte, o del todo, por una pantalla — hechas permanentes por la pandemia, y calladamente la nueva puerta de entrada.</p>
+
+<p><strong>Discipulado y formación espiritual.</strong> La palabra a la que el movimiento ha regresado: la obra lenta de moldear a una persona a la semejanza de Cristo — la meta nombrada desde el mismo principio.</p>
+
+<p><strong>Renovacionista.</strong> El término que agrupa a pentecostales y carismáticos juntos — el movimiento que enfatiza al Espíritu y que es el motor del crecimiento de la iglesia en el mundo de hoy, cruzando limpiamente las viejas líneas denominacionales.</p>
+
+<h2>Segunda Parte: La Historia</h2>
+
+<p>El padre del movimiento nació en India en 1897, hijo de misioneros, y volvió al campo el mismo como administrador de misiones. Allí se dio cuenta de que algunas iglesias no crecían, así que renunció a su puesto y comenzó iglesias. En 1955 publicó <em>Los Puentes de Dios</em>, acuñando el término "crecimiento de la iglesia," y en 1970 <em>Entendiendo el Crecimiento de la Iglesia</em>, la obra que definió el movimiento. Su enfoque era el campo misionero extranjero, y enfatizó cuatro cosas: que el evangelismo es <em>hacer discípulos</em> (los resultados, no solo la proclamación); que los hombres vienen a Cristo dentro de su propia cultura; el principio homogéneo; y el "perfeccionamiento," o crecimiento interno. Nombró tres maneras en que una iglesia crece — por <em>conversión</em>, por crecimiento <em>biológico</em> y por <em>traslado</em> — y notó que ya más del 80% del crecimiento en Norteamérica venía del traslado, no de la conversión.</p>
+
+<p>Vino a América en los años 1960, y en 1965 al Seminario Fuller, donde misioneros de todo el mundo estudiaron bajo él. Por los años 1970 sus discípulos reinterpretaron sus principios para el escenario norteamericano; el principal de ellos fue un ex misionero a Bolivia que, más que nadie, popularizó el crecimiento de la iglesia en este país y escribió <em>Tu Iglesia Puede Crecer: Siete Señales Vitales de una Iglesia Sana.</em> Otros llevaron el movimiento adelante por medio de conferencias, estadísticas y un flujo constante de libros, hasta que para principios de los años 1980 se habían publicado unos sesenta volúmenes.</p>
+
+<p>Dos iglesias llegaron a encarnar el movimiento en su apogeo. <em>Saddleback Community Church</em>, comenzada en una casa en 1980, subió más allá de nueve mil en asistencia para volverse la iglesia de más rápido crecimiento en la historia de la Convención Bautista del Sur. Y <em>Willow Creek Community Church</em>, en las afueras de Chicago, se volvió la insignia y el centro de entrenamiento del modelo de servicio al buscador.</p>
+
+<h2>Dónde Estamos Ahora (2026)</h2>
+
+<p>Esta historia, como se escribió primero, cierra alrededor de 1990 — con Fuller en el centro y Saddleback y Willow Creek surgiendo como los modelos. Los treinta años desde entonces han escrito varios capítulos más, y la forma sorprendente de la historia es un <em>regreso.</em></p>
+
+<p>El movimiento del buscador alcanzó su cima y luego dio una vuelta con un acto notable de honestidad. En 2007 Willow Creek publicó los resultados de su propio autoestudio de varios años y admitió el hallazgo duro: más programas y mayor asistencia no estaban, por sí mismos, produciendo discípulos maduros. Esa franqueza marcó un gozne — el reconocimiento naciente de que nos habíamos vuelto muy buenos para reunir multitudes y no tan buenos para hacer discípulos, que es justo lo que la Gran Comisión mando.</p>
+
+<p>De ese reconocimiento vino el giro <em>misional.</em> Donde la iglesia atraccional decía <em>ven y ve,</em> la iglesia misional decía <em>ve y se</em> — el vecindario, no el auditorio, es el campo. Para nuestros propios días el veredicto es ampliamente compartido: el modelo atraccional, fiel y eficaz en su tiempo, en gran parte ha cumplido su curso. Junto a él vino el giro de la <em>plantación de iglesias</em> — y aquí el padre del movimiento habría sonreído, pues es su propio primer instinto vuelto a casa. Surgieron redes para volver a hacer de la plantación de nuevas iglesias el motor principal del crecimiento, y un ministerio reflexivo, de cara a la ciudad, echó raíces en lugares que el suburbio del buscador nunca había alcanzado.</p>
+
+<p>Y el movimiento más grande de todos fue aquel con que él comenzó: el centro de gravedad de la iglesia regresando al campo misionero. Él comenzó en el extranjero, y tras un largo desvio norteamericano toda la historia ha girado de vuelta hacia el sur. El crecimiento explosivo es ahora pentecostal y carismático y está en el Sur Global — de modo que, en un sentido real, el Libro de Hechos se escribe de nuevo en lenguas que Lucas nunca oyó.</p>
+
+<p>Así que la historia da la vuelta completa. El movimiento comenzó con tres convicciones — <em>hacer discípulos,</em> no meras decisiones; <em>plantar nuevas congregaciones</em>; y mantener los ojos en el <em>mundo entero.</em> Vago por una generación por la megaiglesia y el servicio al buscador, y ahora, corregido e instruido, ha encontrado el camino de vuelta a exactamente esas tres. Eso no es una derrota. Es un regreso a casa.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 3 Final Exam — 30 Questions</span><span class="lang-es">Examen Final — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>Fail the multiple-choice (1–20) and it locks for 2 minutes; fail the master's-level short answer (21–30) and it locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba la opción múltiple (1–20), se bloquea por 2 minutos; si reprueba la respuesta corta de nivel de maestría (21–30), se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Joshua — Unit 1 (retrofit to CTS pattern, 2026-05-16)
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 3;
+const COURSE = 'cg';
+const NEXT_UNIT_URL = 'CTSCGUnit4.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 — Introduction",
+    "Unit 2 — Biblical Background",
+    "Unit 3 — Terms and History",
+    "Unit 4 — Principles",
+    "Unit 5 — Change and the Generations",
+    "Unit 6 — Diagnosing Your Church",
+    "Unit 7 — Pastoral Leadership",
+    "Unit 8 — Worship",
+    "Unit 9 — Digital and Online Ministry",
+    "Unit 10 — Sunday School and Small Groups",
+    "Unit 11 — Discipleship",
+    "Unit 12 — Retention"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCGUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// L3 semantic audit: all 20 verified against options and Joshua 1
+const mcQuestions = [
+    { textEn: "1. Transfer growth that simply trades members between nearby churches is called:", textEs: "1. El crecimiento por traslado que solo intercambia miembros entre iglesias cercanas se llama:",
+      optionsEn: ["swap", "conversion", "biological", "perfecting"],
+      optionsEs: ["intercambio", "conversión", "biológico", "perfeccionamiento"], correct: 0 },
+    { textEn: "2. The type of growth that must be the true target of church growth is:", textEs: "2. El tipo de crecimiento que debe ser el verdadero objetivo es:",
+      optionsEn: ["transfer growth", "biological growth", "rededicational growth", "conversional growth"],
+      optionsEs: ["crecimiento por traslado", "crecimiento biológico", "crecimiento por rededicación", "crecimiento por conversión"], correct: 3 },
+    { textEn: "3. C. Peter Wagner defined church growth as bringing people into fellowship with Christ and into:", textEs: "3. C. Peter Wagner definió el crecimiento como traer personas a la comunión con Cristo y a:",
+      optionsEn: ["a larger budget", "a denominational label", "responsible church membership", "a building program"],
+      optionsEs: ["un presupuesto mayor", "una etiqueta denominacional", "la membresía responsable en la iglesia", "un programa de construcción"], correct: 2 },
+    { textEn: "4. The metachurch revolves around two events: small cells and:", textEs: "4. La metaiglesia gira en torno a dos eventos: células pequeñas y:",
+      optionsEn: ["fundraising", "corporate celebration", "committee meetings", "advertising"],
+      optionsEs: ["recaudación", "la celebración corporativa", "reuniones de comite", "publicidad"], correct: 1 },
+    { textEn: "5. The father of the church growth movement was:", textEs: "5. El padre del movimiento de crecimiento de la iglesia fue:",
+      optionsEn: ["Rick Warren", "Billy Graham", "Charles Finney", "Donald McGavran"],
+      optionsEs: ["Rick Warren", "Billy Graham", "Charles Finney", "Donald McGavran"], correct: 3 },
+    { textEn: "6. McGavran's 1955 book that coined the term 'church growth' was:", textEs: "6. El libro de McGavran de 1955 que acuñó el término 'crecimiento de la iglesia' fue:",
+      optionsEn: ["Your Church Can Grow", "The Bridges of God", "Understanding Church Growth", "The Purpose Driven Church"],
+      optionsEs: ["Tu Iglesia Puede Crecer", "Los Puentes de Dios", "Entendiendo el Crecimiento de la Iglesia", "Una Iglesia con Propósito"], correct: 1 },
+    { textEn: "7. McGavran named three ways a church grows: conversion, transfer, and:", textEs: "7. McGavran nombró tres maneras de crecer: conversión, traslado, y:",
+      optionsEn: ["marketing", "persuasion", "biological growth", "relocation"],
+      optionsEs: ["mercadeo", "persuasión", "crecimiento biológico", "reubicación"], correct: 2 },
+    { textEn: "8. By the time of the early movement, more than 80% of North American growth came from:", textEs: "8. Para la época del movimiento temprano, más del 80% del crecimiento norteamericano venía de:",
+      optionsEn: ["transfer, not conversion", "revivals", "immigration", "conversion"],
+      optionsEs: ["el traslado, no la conversión", "los avivamientos", "la inmigración", "la conversión"], correct: 0 },
+    { textEn: "9. The very large churches, often functioning like a mini-denomination, were called:", textEs: "9. Las iglesias muy grandes, que a menudo funcionan como mini-denominación, se llamaban:",
+      optionsEn: ["mission points", "house churches", "dinner churches", "superchurches"],
+      optionsEs: ["puntos de misión", "iglesias en casas", "iglesias de cena", "superiglesias"], correct: 3 },
+    { textEn: "10. In 1965 McGavran brought the movement to which seminary?", textEs: "10. En 1965 McGavran llevó el movimiento a qué seminario?",
+      optionsEn: ["Princeton", "Dallas", "Fuller Seminary", "Southern"],
+      optionsEs: ["Princeton", "Dallas", "Seminario Fuller", "Southern"], correct: 2 },
+    { textEn: "11. The church that became the flagship and training center of the seeker-service model was:", textEs: "11. La iglesia que se volvió insignia y centro de entrenamiento del modelo sensible al buscador fue:",
+      optionsEn: ["Willow Creek", "Bethel", "Saddleback", "Hillsong"],
+      optionsEs: ["Willow Creek", "Bethel", "Saddleback", "Hillsong"], correct: 0 },
+    { textEn: "12. The modern umbrella term for Pentecostals and charismatics together is:", textEs: "12. El término moderno que agrupa a pentecostales y carismáticos juntos es:",
+      optionsEn: ["evangelicals", "renewalists", "mainliners", "fundamentalists"],
+      optionsEs: ["evangélicos", "renovacionistas", "historicos", "fundamentalistas"], correct: 1 },
+    { textEn: "13. What this course called the 'superchurch' the world now calls the:", textEs: "13. Lo que este curso llamó 'superiglesia' el mundo ahora llama:",
+      optionsEn: ["megachurch", "cathedral", "parish", "mission"],
+      optionsEs: ["megaiglesia", "catedral", "parroquia", "misión"], correct: 0 },
+    { textEn: "14. A church draws people in with 'come and see'; this posture is called:", textEs: "14. Una iglesia atrae con 'ven y ve'; esta postura se llama:",
+      optionsEn: ["missional", "liturgical", "attractional", "monastic"],
+      optionsEs: ["misional", "liturgica", "atraccional", "monastica"], correct: 2 },
+    { textEn: "15. The great company who once attended church and no longer do are the:", textEs: "15. La gran compañía que antes asistía a la iglesia y ya no, son los:",
+      optionsEn: ["nones", "dechurched", "seekers", "renewalists"],
+      optionsEs: ["ningunos", "desiglesiados", "buscadores", "renovacionistas"], correct: 1 },
+    { textEn: "16. The metachurch's key number for unlimited growth was:", textEs: "16. El número clave de la metaiglesia para el crecimiento ilimitado era:",
+      optionsEn: ["the hundreds in the auditorium", "the budget total", "the staff count", "ten, the size of a cell"],
+      optionsEs: ["los cientos en el auditorio", "el total del presupuesto", "el número de personal", "diez, el tamaño de una célula"], correct: 3 },
+    { textEn: "17. In 2007 Willow Creek's own self-study (REVEAL) admitted that more programs and attendance were not, by themselves:", textEs: "17. En 2007 el autoestudio de Willow Creek (REVEAL) admitió que más programas y asistencia no, por sí mismos:",
+      optionsEn: ["filling seats", "raising money", "producing mature disciples", "drawing crowds"],
+      optionsEs: ["llenaban asientos", "recaudaban dinero", "producían discípulos maduros", "atraian multitudes"], correct: 2 },
+    { textEn: "18. The mall illustration named the church's two great anchor entrances as:", textEs: "18. La ilustración del centro comercial nombró las dos grandes entradas ancla de la iglesia como:",
+      optionsEn: ["preaching and giving", "worship and Sunday School", "music and missions", "prayer and fasting"],
+      optionsEs: ["predicación y ofrenda", "adoración y Escuela Dominical", "música y misiones", "oración y ayuno"], correct: 1 },
+    { textEn: "19. The reexamination of one's inherited faith, sometimes ending in deeper faith and sometimes in departure, is called:", textEs: "19. El reexamen de la fe heredada, que a veces termina en fe más profunda y a veces en partida, se llama:",
+      optionsEn: ["transfer", "perfecting", "rededication", "deconstruction"],
+      optionsEs: ["traslado", "perfeccionamiento", "rededicación", "deconstrucción"], correct: 3 },
+    { textEn: "20. The history of the movement comes full circle, returning to McGavran's three convictions: make disciples, plant churches, and:", textEs: "20. La historia del movimiento da la vuelta completa, volviendo a las tres convicciones de McGavran: hacer discípulos, plantar iglesias, y:",
+      optionsEn: ["keep eyes on the whole world", "build campuses", "grow staff", "raise budgets"],
+      optionsEs: ["mantener los ojos en todo el mundo", "construir campus", "aumentar personal", "levantar presupuestos"], correct: 0 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "Distinguish the main types of church growth (transfer, rededicational, biological, conversional). Which must be the target, and why?",
+      textEs: "Distinga los tipos principales de crecimiento (traslado, rededicación, biológico, conversión). Cuál debe ser el objetivo, y por qué?",
+      kw_en: ["transfer", "convers", "biolog", "rededic", "target", "kingdom", "member", "swap"],
+      kw_es: ["traslad", "convers", "biolog", "rededic", "objetiv", "reino", "miembr", "intercamb"],
+      modelEn: "Transfer growth moves believers between churches and adds nothing to the Kingdom; rededicational growth returns the lapsed; biological growth wins our own children; conversional growth reaches the lost. Conversional growth must be the target, because the others only rearrange existing believers while conversion adds new members to the body of Christ.",
+      modelEs: "El crecimiento por traslado mueve creyentes entre iglesias y no añade nada al Reino; el de rededicación regresa a los apartados; el biológico gana a nuestros propios hijos; el de conversión alcanza a los perdidos. La conversión debe ser el objetivo, porque los demás solo reacomodan creyentes existentes mientras la conversión añade nuevos miembros al cuerpo de Cristo." },
+    { textEn: "Define church growth using the denominational definition, and explain the key opening clause.",
+      textEs: "Defina el crecimiento de la iglesia usando la definición denominacional, y explique la cláusula clave inicial.",
+      kw_en: ["redeem", "people", "grace", "faith", "member", "minister", "witness", "saved"],
+      kw_es: ["redimi", "pueblo", "gracia", "fe", "miembr", "ministr", "testific", "salv"],
+      modelEn: "Church growth is God at work through His redeemed people, adding those saved by grace through faith, renewing inactive believers, gathering new believers into churches, and equipping them as responsible members who minister and witness. The key clause is the first one: it is God at work through His redeemed people, not human achievement.",
+      modelEs: "El crecimiento de la iglesia es Dios obrando a través de Su pueblo redimido, añadiendo a los salvos por gracia mediante la fe, renovando a creyentes inactivos, reuniendo nuevos creyentes en iglesias, y equipándolos como miembros responsables que ministran y testifican. La cláusula clave es la primera: es Dios obrando a través de Su pueblo redimido, no un logro humano." },
+    { textEn: "Explain the metachurch concept. What two events does it revolve around, and why does its key number make growth 'unlimited'?",
+      textEs: "Explique el concepto de la metaiglesia. En torno a qué dos eventos gira, y por qué su número clave hace el crecimiento 'ilimitado'?",
+      kw_en: ["cell", "celebrat", "group", "decentral", "laity", "unlimit", "worship", "care"],
+      kw_es: ["celula", "celebrac", "grupo", "descentral", "laic", "ilimit", "adorac", "cuidad"],
+      modelEn: "The metachurch revolves around the cell (small group) and the celebration (corporate worship). Pastoral care is decentralized to lay coaches and the cells, so the key number is ten, the size of a group, not the hundreds in the auditorium. Because you can always start one more cell, growth is in principle unlimited.",
+      modelEs: "La metaiglesia gira en torno a la célula (grupo pequeño) y la celebración (adoración corporativa). El cuidado pastoral se descentraliza a líderes laicos y a las células, así que el número clave es diez, el tamaño de un grupo, no los cientos del auditorio. Como siempre se puede iniciar una célula más, el crecimiento es en principio ilimitado." },
+    { textEn: "Summarize the life and contribution of Donald McGavran. Name his two major books and his central emphases.",
+      textEs: "Resuma la vida y aporte de Donald McGavran. Nombre sus dos libros mayores y sus énfasis centrales.",
+      kw_en: ["mcgavran", "india", "bridges", "understand", "disciple", "homogen", "mission", "convers"],
+      kw_es: ["mcgavran", "india", "puentes", "entend", "discipul", "homogen", "mision", "convers"],
+      modelEn: "Born to missionaries in India, McGavran resigned his administrative post to plant churches. In The Bridges of God (1955) he coined church growth, and Understanding Church Growth (1970) defined the movement. He stressed that evangelism is making disciples, that people come to Christ within their own culture, the homogeneous principle, and internal perfecting, naming conversion, biological, and transfer growth.",
+      modelEs: "Nacido de misioneros en India, McGavran renunció a su puesto administrativo para plantar iglesias. En Los Puentes de Dios (1955) acuñó el crecimiento de la iglesia, y Entendiendo el Crecimiento de la Iglesia (1970) definió el movimiento. Enfatizó que el evangelismo es hacer discípulos, que la gente viene a Cristo dentro de su propia cultura, el principio homogéneo, y el perfeccionamiento interno, nombrando el crecimiento por conversión, biológico y por traslado." },
+    { textEn: "Trace the movement from Fuller Seminary through Saddleback and Willow Creek. What did each church come to represent?",
+      textEs: "Trace el movimiento desde el Seminario Fuller hasta Saddleback y Willow Creek. Qué llegó a representar cada iglesia?",
+      kw_en: ["fuller", "wagner", "saddleback", "willow", "seeker", "megachurch", "flagship", "grow"],
+      kw_es: ["fuller", "wagner", "saddleback", "willow", "buscador", "megaiglesia", "insignia", "crec"],
+      modelEn: "At Fuller, McGavran trained missionaries, and Wagner, a former missionary to Bolivia, popularized church growth in America. Saddleback, begun in a home in 1980, became the fastest-growing church in Southern Baptist history. Willow Creek became the flagship and training center of the seeker-service model. Together they embodied the movement at its height.",
+      modelEs: "En Fuller, McGavran entrenó misioneros, y Wagner, ex misionero a Bolivia, popularizó el crecimiento de la iglesia en América. Saddleback, comenzada en una casa en 1980, se volvió la iglesia de más rápido crecimiento en la historia bautista del sur. Willow Creek se volvió la insignia y centro de entrenamiento del modelo sensible al buscador. Juntas encarnaron el movimiento en su apogeo." },
+    { textEn: "Describe the new vocabulary the field has added: attractional vs missional, the nones, the dechurched, and renewalist. Define each briefly.",
+      textEs: "Describa el nuevo vocabulario que el campo ha añadido: atraccional vs misional, los ningunos, los desiglesiados, y renovacionista. Defina cada uno brevemente.",
+      kw_en: ["attraction", "mission", "none", "dechurch", "renewal", "unaffili", "neighbor", "define"],
+      kw_es: ["atraccion", "mision", "ningun", "desiglesi", "renovac", "afiliac", "vecind", "defin"],
+      modelEn: "The attractional church draws people in with come and see; the missional church is sent out with go and be, treating the neighborhood as the field. The nones are the religiously unaffiliated, now one of the largest groups. The dechurched are the great company who once attended and left. Renewalist is the umbrella for Pentecostals and charismatics together.",
+      modelEs: "La iglesia atraccional atrae con ven y ve; la iglesia misional es enviada con ve y se, tratando el vecindario como el campo. Los ningunos son los sin afiliación religiosa, hoy uno de los grupos más grandes. Los desiglesiados son la gran compañía que antes asistía y se fue. Renovacionista es el término que agrupa a pentecostales y carismáticos." },
+    { textEn: "Explain the 2007 Willow Creek REVEAL self-study and the 'missional turn' that followed. Why was it a hinge in the movement?",
+      textEs: "Explique el autoestudio REVEAL de Willow Creek de 2007 y el 'giro misional' que siguió. Por qué fue un punto de quiebre en el movimiento?",
+      kw_en: ["reveal", "program", "disciple", "mission", "attraction", "crowd", "mature", "turn"],
+      kw_es: ["reveal", "programa", "discipul", "mision", "atraccion", "multitud", "madur", "giro"],
+      modelEn: "Willow Creek's own multi-year study admitted that more programs and attendance were not, by themselves, producing mature disciples. That candor was a hinge: the church had become good at gathering crowds and not at making disciples. Out of it came the missional turn, where come-and-see gave way to go-and-be, the neighborhood becoming the field.",
+      modelEs: "El estudio de varios años de Willow Creek admitió que más programas y asistencia no producían, por sí mismos, discípulos maduros. Esa franqueza fue un punto de quiebre: la iglesia se había vuelto buena para reunir multitudes y no para hacer discípulos. De ahí vino el giro misional, donde el ven-y-ve cedió al ve-y-se, volviéndose el vecindario el campo." },
+    { textEn: "How does the history of the movement 'come full circle'? Name the three convictions it began with and returned to.",
+      textEs: "Cómo da la historia del movimiento 'la vuelta completa'? Nombre las tres convicciones con que comenzó y a las que volvió.",
+      kw_en: ["disciple", "plant", "world", "mission", "circle", "homecoming", "return", "convict"],
+      kw_es: ["discipul", "plant", "mundo", "mision", "circulo", "regres", "volv", "conviccion"],
+      modelEn: "The movement began with three convictions: make disciples rather than mere decisions, plant new congregations, and keep your eyes on the whole world. It wandered through the megachurch and seeker service, then returned, chastened, to exactly those three. That is not a defeat but a homecoming, a return to McGavran's first instincts.",
+      modelEs: "El movimiento comenzó con tres convicciones: hacer discípulos en vez de meras decisiones, plantar nuevas congregaciones, y mantener los ojos en todo el mundo. Vago por la megaiglesia y el servicio al buscador, y luego volvió, corregido, a esas mismas tres. Eso no es derrota sino un regreso a casa, una vuelta a los primeros instintos de McGavran." },
+    { textEn: "Why must we handle older statistics like 'over 80% of growth is transfer' carefully, and what does the swap problem reveal about megachurches?",
+      textEs: "Por que debemos manejar con cuidado estadísticas antiguas como 'más del 80% del crecimiento es por traslado', y qué revela el problema del intercambio sobre las megaiglesias?",
+      kw_en: ["transfer", "swap", "kingdom", "convers", "mall", "smaller", "member", "net"],
+      kw_es: ["traslad", "intercamb", "reino", "convers", "centro", "pequen", "miembr", "neto"],
+      modelEn: "Most reported growth was transfer, not conversion, so the net increase for the Kingdom can be zero even when a church swells. The swap problem is that some megachurches drain life from smaller community churches the way a mall drains smaller shops; members move but no one is converted. The honest measure is conversional growth, not transfer.",
+      modelEs: "La mayor parte del crecimiento reportado era por traslado, no por conversión, así que el aumento neto para el Reino puede ser cero aun cuando una iglesia se hincha. El problema del intercambio es que algunas megaiglesias drenan la vida de iglesias comunitarias más pequeñas como un centro comercial drena las tiendas pequeñas; los miembros se mueven pero nadie se convierte. La medida honesta es la conversión, no el traslado." },
+    { textEn: "Synthesis: How do the older terms (superchurch, metachurch) and the newer terms (megachurch, microchurch, digital church) together tell the story of the movement?",
+      textEs: "Síntesis: Cómo cuentan juntos los términos antiguos (superiglesia, metaiglesia) y los nuevos (megaiglesia, microiglesia, iglesia digital) la historia del movimiento?",
+      kw_en: ["superchurch", "metachurch", "megachurch", "microchurch", "digital", "cell", "grow", "term"],
+      kw_es: ["superiglesi", "metaiglesi", "megaiglesi", "microiglesi", "digital", "celula", "crec", "termin"],
+      modelEn: "The superchurch became the megachurch, larger and now Pentecostal in the Global South. The metachurch, built on cells, grew up into the microchurch, house church, and dinner church, where the cell is the church. And the digital church made the screen the new front door. The vocabulary itself traces the movement from big-and-centralized toward small, multiplied, and sent.",
+      modelEs: "La superiglesia se volvió megaiglesia, más grande y ahora pentecostal en el Sur Global. La metaiglesia, edificada sobre células, creció hasta la microiglesia, la iglesia en casa y la iglesia de cena, donde la célula es la iglesia. Y la iglesia digital hizo de la pantalla la nueva puerta de entrada. El vocabulario mismo traza el movimiento de lo grande-y-centralizado hacia lo pequeño, multiplicado y enviado." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 4 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 4 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ Bloqueado. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ Locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏰ MC ✓ aprobado. Sección SA bloqueada. Espera ${m} min.</span>`
+            : `<span style='color:#8a1f1f'>⏰ MC ✓ passed. SA section locked. Wait ${m} min.</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const mb = document.createElement('div');
+        mb.className = 'js-model-box';
+        mb.style.cssText = 'display:none;margin-top:10px;padding:10px 12px;background:#fbf3d5;border:1px solid #d4af37;border-radius:8px;';
+        mb.innerHTML = (currentLang === 'en'
+            ? '<strong>Model answer — study this</strong><br>' + q.modelEn
+            : '<strong>Respuesta modelo — estúdiela</strong><br>' + q.modelEs);
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a few sentences (about 100 characters)).' : 'Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).';
+                return;
+            }
+            // Smart matcher (kwHit) — matches the official grade, not raw indexOf.
+            const hitList = kws.filter(kw => kwHit(ans, kw));
+            const hits = hitList.length;
+            if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? `✓ Solid answer (${hits}/${kws.length} key concepts referenced).` : `✓ Respuesta sólida (${hits}/${kws.length} conceptos clave referenciados).`;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en'
+                    ? `✗ Need at least 3 key concepts; got ${hits}/${kws.length}. Compare your answer with the model below.`
+                    : `✗ Necesita al menos 3 conceptos clave; obtuvo ${hits}/${kws.length}. Compare su respuesta con el modelo abajo.`;
+            }
+            mb.style.display = 'block'; // reveal model answer after every check, pass or fail
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(mb);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    // Reveal every model answer after submit — the teaching is the comparison.
+    document.querySelectorAll('.js-model-box').forEach(function(e){ e.style.display = 'block'; });
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ Reprobado: ${mcScore}/20 (se requiere 18). Bloqueado 2 minutos.</span>`
+                : `<span style='color:#8a1f1f'>✗ Failed: ${mcScore}/20 (need 18). Locked 2 minutes.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>✗ MC ✓ permanece aprobado. SA reprobada: ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min.</span>`
+                : `<span style='color:#8a1f1f'>✗ MC ✓ stays passed. SA failed: ${saScore}/10 (need 9). SA section locked 15 min.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + 15 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + 2 * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 2 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 2 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    location.reload();
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCGReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

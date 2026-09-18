@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS The Gospel of John &mdash; Unit 9: The Hour of Glory</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form label { font-weight:bold; font-size:0.9rem; display:block; margin-top:8px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 10 &rarr;</span><span class="lang-es">Unidad 10 &rarr;</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">&#128214; The Gospel of John &mdash; Unit 9: The Hour of Glory</span><span class="lang-es">&#128214; El Evangelio de Juan &mdash; Unidad 9: La Hora de la Gloria</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"The hour has come that the Son of Man should be glorified." &mdash; John 12:23 (NKJV)</span><span class="lang-es">&#9889; "La hora ha llegado para que el Hijo del Hombre sea glorificado." &mdash; Juan 12:23 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard" style="display:none;">
+    <h3><span class="lang-en">Register to Begin</span><span class="lang-es">Reg&iacute;strese para comenzar</span></h3>
+    <p style="font-size:0.9rem;"><span class="lang-en">Your name and track are saved on this device and carry across every unit and every CTS course.</span><span class="lang-es">Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS.</span></p>
+    <label class="lang-en">Full name</label><label class="lang-es">Nombre completo</label>
+    <input type="text" id="regName" placeholder="..." aria-label="...">
+    <label class="lang-en">Email</label><label class="lang-es">Correo electr&oacute;nico</label>
+    <input type="email" id="regEmail" placeholder="..." aria-label="...">
+    <label class="lang-en">Track</label><label class="lang-es">Trayecto</label>
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate / Certificado</option>
+        <option value="mdiv">M.Div.</option>
+        <option value="thm">Th.M.</option>
+    </select>
+    <button id="regBtn" class="nav-btn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top:8px;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h3>Introduction &mdash; The Hour Has Come</h3>
+<p>All through this Gospel a clock has been ticking quietly in the background. Again and again John tells us that men could not lay hands on Jesus, "because His hour had not yet come." Now, in John 12, the hour strikes. And it is announced in a striking way: not by an army, not by a throne, but by a small group of foreigners with a simple request. Some Greeks who had come up to worship at the feast found Philip and said, "Sir, we would see Jesus." When the word reached Him, Jesus answered, <em>"The hour has come that the Son of Man should be glorified"</em> (John 12:23). The strange thing is what that glory turns out to look like. In this hour the glory of God is revealed through a grain of wheat that dies, a voice from heaven, and a towel and a basin. Let us follow it through.</p>
+
+<h3>I. "Sir, We Would See Jesus"</h3>
+<p>The request of the Greeks is one of the great longings of the human heart. They had crossed cultures and traveled far, and what they wanted was not a doctrine or a debate but a Person: "We would see Jesus." People still come that way. In a world torn by stress, puzzled by hard questions, anxious about the future, men and women still come to a place of worship hoping, beneath all their other reasons, to see Jesus &mdash; to be reminded that their lives matter, that God cares, that there is hope. I once read of a nine-year-old girl, dying of leukemia, whose faith gave her such peace that just before the end she told her family, "I am going to be the first to see Jesus &mdash; what would you like me to tell Him for you?" When a soul truly sees Him, everything changes. As one believer put it, "When you really see Jesus, I defy you to doubt Him." The hour of glory opens with the world beginning to seek the Lord.</p>
+
+<h3>II. The Grain of Wheat</h3>
+<p>But how would these seekers, and all the world after them, come to see Him? Jesus answered with a picture from the farmer's field: <em>"Unless a grain of wheat falls into the ground and dies, it remains alone; but if it dies, it produces much grain"</em> (John 12:24). A seed kept safe on a shelf stays exactly what it is &mdash; one lonely seed. Only by being buried, broken open, and seemingly lost does it rise into a harvest. So it would be with the Son of Man: the path to His glory, and to a world full of redeemed people, ran straight through His death. The cross was not the failure of the hour but the very means of its glory. And He pressed the same law upon every would-be follower: <em>"He who loves his life will lose it, and he who hates his life in this world will keep it for eternal life"</em> (John 12:25). The clenched fist keeps nothing; the open, surrendered hand is the one that bears fruit.</p>
+<div class="pull-quote">A seed that refuses to be buried stays one lonely seed forever. The harvest belongs only to the grain that is willing to fall and die.</div>
+<p>We resist this with everything in us, for it runs against the grain of our self-protecting hearts. We want glory without a cross, fruit without a grave, a crown without surrender. But the Lord of glory Himself would take no shortcut around the buried seed, and He offers His followers none either. The way up, in the kingdom of God, has always run down through the soil.</p>
+<div class="illustration"><strong>"The least I can do."</strong> During the Second World War a Jewish woman fleeing the secret police came to the door of a Christian widow in France. When the pursuers drew near, the widow said, "Go to safety with these people; give me your papers, and I will wait here." She knew exactly what it meant: the police would come, find her, and take her in the other woman's place. When the astonished woman asked why she would do such a thing, the widow answered, "It is the least I can do; Christ has already done that, and more, for me." Within six months she was dead in a camp, and the woman she saved became a follower of Christ who spent her life serving others. That is the grain of wheat: a life laid down that bears fruit in the lives of others.</div>
+
+<h3>III. The Voice from Heaven</h3>
+<p>The hour was real, and so was its cost. "Now My soul is troubled," Jesus said, "and what shall I say? Father, save Me from this hour? But for this purpose I came to this hour. <em>Father, glorify Your name."</em> And then something happened that happened only a few times in all His earthly life: <em>"Then a voice came from heaven, saying, 'I have both glorified it and will glorify it again'"</em> (John 12:28). The crowd standing there heard the sound but not the same way: some said it had thundered, and others said an angel had spoken to Him. Even an audible voice from heaven is heard differently by different hearts, according to their openness to God. But the meaning was plain: the Father would be glorified in the Son, both in the signs already given and in the cross now near. What, then, is this glory? Glory is the holiness of God made visible. No one could look on it directly &mdash; even Moses was shown only its afterglow. But "the Word became flesh and dwelt among us, and we beheld His glory, the glory as of the only begotten of the Father" (John 1:14). In Jesus, and supremely in His self-giving death, the hidden glory of God steps into the open where human eyes can see it.</p>
+
+<h3>IV. The Towel and the Basin</h3>
+<p>If you still want to know what the glory of God looks like, go with Him into the upper room. On the very night He was betrayed, with the cross only hours away, His disciples were arguing about which of them was the greatest. The roads of that land were thick with dust and mud, and sandalled feet came in filthy; in any proper household a servant waited at the door with water to wash the guests' feet. But this little band had no servant, and not one of these proud men would stoop to the task. So <em>Jesus</em>, "knowing that He had come from God and was going to God," rose from supper, laid aside His outer garments, tied a towel around His waist, took a basin, and washed His disciples' feet (John 13:3&ndash;5). Here is the Son of God, hours from Calvary, kneeling at the dirty feet of fishermen. This is the glory the Greeks asked to see.</p>
+<p>It overturns the world's whole scale of greatness. The world measures greatness by how many people work for you; the Lord measures it by how many people you work for. "The greatest among you," He had taught, must "be your servant." A missionary in China once asked a group of believers what had won them to Christ over the religions they had known. It was not the miracles, they said; their old religions had wonders too. It was not even the teaching. At last an old man said simply, "It was Jesus washing His disciples' feet. We had nothing like that &mdash; God, stooping down with a towel and basin." When we are tempted to stand on our dignity, our rights, our place, we must see that picture again: the Lord of glory on His knees with a towel. And He turned it into a command: <em>"If I then, your Lord and Teacher, have washed your feet, you also ought to wash one another's feet. For I have given you an example, that you should do as I have done to you"</em> (John 13:14&ndash;15). We wash feet still &mdash; when we care for the sick, feed the poor, honor aging parents, drive a neighbor to the doctor, open our homes. Greatness in the kingdom wears an apron.</p>
+
+<h3>V. The New Commandment</h3>
+<p>Before that night was over, Jesus gathered all of it &mdash; the grain that dies, the glory revealed, the towel taken up &mdash; into one new commandment: <em>"A new commandment I give to you, that you love one another; as I have loved you, that you also love one another. By this all will know that you are My disciples, if you have love for one another"</em> (John 13:34&ndash;35). The world that says, "Sir, we would see Jesus," will see Him most clearly not in our arguments or our buildings but in a people who lay down their lives for one another as He laid down His. That is the hour of glory still breaking in. So the chapter turns and asks us plainly: do you want to see Jesus? Then look first at the grain of wheat that fell into the ground and died for you &mdash; and then, having seen Him, take up the towel.</p>
+
+</div>
+<div class="lang-es">
+
+<h3>Introducci&oacute;n &mdash; La hora ha llegado</h3>
+<p>Por todo este Evangelio un reloj ha estado marcando silenciosamente al fondo. Una y otra vez Juan nos dice que los hombres no pod&iacute;an poner manos sobre Jes&uacute;s, "porque a&uacute;n no hab&iacute;a llegado su hora." Ahora, en Juan 12, la hora suena. Y se anuncia de un modo sorprendente: no por un ej&eacute;rcito, no por un trono, sino por un peque&ntilde;o grupo de extranjeros con una petici&oacute;n sencilla. Unos griegos que hab&iacute;an subido a adorar en la fiesta hallaron a Felipe y dijeron: "Se&ntilde;or, querr&iacute;amos ver a Jes&uacute;s." Cuando la palabra le lleg&oacute;, Jes&uacute;s respondi&oacute;: &#9889; <em>"La hora ha llegado para que el Hijo del Hombre sea glorificado"</em> (Juan 12:23). Lo extra&ntilde;o es c&oacute;mo resulta ser esa gloria. En esta hora la gloria de Dios se revela por medio de un grano de trigo que muere, una voz del cielo, y una toalla y una palangana. Sig&aacute;mosla.</p>
+
+<h3>I. "Se&ntilde;or, querr&iacute;amos ver a Jes&uacute;s"</h3>
+<p>La petici&oacute;n de los griegos es uno de los grandes anhelos del coraz&oacute;n humano. Hab&iacute;an cruzado culturas y viajado lejos, y lo que quer&iacute;an no era una doctrina ni un debate sino una Persona: "Querr&iacute;amos ver a Jes&uacute;s." La gente a&uacute;n viene as&iacute;. En un mundo desgarrado por el estr&eacute;s, confundido por preguntas dif&iacute;ciles, ansioso por el futuro, hombres y mujeres a&uacute;n vienen a un lugar de adoraci&oacute;n esperando, debajo de todas sus otras razones, ver a Jes&uacute;s &mdash; ser recordados de que sus vidas importan, de que Dios cuida, de que hay esperanza. Le&iacute; una vez de una ni&ntilde;a de nueve a&ntilde;os, muriendo de leucemia, cuya fe le dio tal paz que poco antes del fin dijo a su familia: "Voy a ser la primera en ver a Jes&uacute;s &mdash; &iquest;qu&eacute; quisieran que le diga de su parte?" Cuando un alma de veras le ve, todo cambia. Como dijo un creyente: "Cuando de veras ves a Jes&uacute;s, te desaf&iacute;o a dudar de &eacute;l." La hora de la gloria se abre con el mundo comenzando a buscar al Se&ntilde;or.</p>
+
+<h3>II. El grano de trigo</h3>
+<p>Pero, &iquest;c&oacute;mo llegar&iacute;an estos buscadores, y todo el mundo tras ellos, a verle? Jes&uacute;s respondi&oacute; con una imagen del campo del labrador: &#9889; <em>"De cierto, de cierto os digo, que si el grano de trigo no cae en la tierra y muere, queda solo; mas si muere, lleva mucho fruto"</em> (Juan 12:24). Una semilla guardada a salvo en un estante sigue siendo exactamente lo que es &mdash; una semilla solitaria. Solo al ser enterrada, partida, y al parecer perdida, se levanta en cosecha. As&iacute; ser&iacute;a con el Hijo del Hombre: el camino a su gloria, y a un mundo lleno de redimidos, pasaba directo por su muerte. La cruz no fue el fracaso de la hora sino el medio mismo de su gloria. Y apremi&oacute; la misma ley sobre todo aspirante a seguidor: &#9889; <em>"El que ama su vida, la perder&aacute;; y el que aborrece su vida en este mundo, para vida eterna la guardar&aacute;"</em> (Juan 12:25). El pu&ntilde;o cerrado no guarda nada; la mano abierta y entregada es la que lleva fruto.</p>
+<div class="pull-quote">Una semilla que se niega a ser enterrada queda una sola semilla solitaria para siempre. La cosecha pertenece solo al grano dispuesto a caer y morir.</div>
+<p>Nos resistimos a esto con todo lo que hay en nosotros, pues va contra la fibra de nuestro coraz&oacute;n que se protege a s&iacute; mismo. Queremos gloria sin cruz, fruto sin sepultura, corona sin entrega. Pero el Se&ntilde;or de la gloria mismo no tom&oacute; ning&uacute;n atajo alrededor de la semilla enterrada, y a sus seguidores tampoco les ofrece ninguno. El camino hacia arriba, en el reino de Dios, siempre ha pasado hacia abajo por la tierra.</p>
+<div class="illustration"><strong>"Lo menos que puedo hacer."</strong> Durante la Segunda Guerra Mundial una mujer jud&iacute;a que hu&iacute;a de la polic&iacute;a secreta lleg&oacute; a la puerta de una viuda cristiana en Francia. Cuando los perseguidores se acercaron, la viuda dijo: "Vaya a un lugar seguro con esta gente; deme sus papeles, y yo esperar&eacute; aqu&iacute;." Sab&iacute;a exactamente lo que significaba: la polic&iacute;a vendr&iacute;a, la hallar&iacute;a, y la llevar&iacute;a en lugar de la otra mujer. Cuando la asombrada mujer pregunt&oacute; por qu&eacute; har&iacute;a tal cosa, la viuda respondi&oacute;: "Es lo menos que puedo hacer; Cristo ya hizo eso, y m&aacute;s, por m&iacute;." En seis meses estaba muerta en un campo, y la mujer que salv&oacute; lleg&oacute; a ser una seguidora de Cristo que pas&oacute; su vida sirviendo a otros. Ese es el grano de trigo: una vida entregada que lleva fruto en las vidas de otros.</div>
+
+<h3>III. La voz del cielo</h3>
+<p>La hora era real, y tambi&eacute;n su precio. "Ahora est&aacute; turbada mi alma," dijo Jes&uacute;s, "&iquest;y qu&eacute; dir&eacute;? &iquest;Padre, s&aacute;lvame de esta hora? Mas para esto he llegado a esta hora. <em>Padre, glorifica tu nombre."</em> Y entonces sucedi&oacute; algo que sucedi&oacute; solo unas pocas veces en toda su vida terrenal: &#9889; <em>"Entonces vino una voz del cielo: Lo he glorificado, y lo glorificar&eacute; otra vez"</em> (Juan 12:28). La multitud all&iacute; presente oy&oacute; el sonido pero no del mismo modo: unos dec&iacute;an que hab&iacute;a tronado, y otros dec&iacute;an que un &aacute;ngel le hab&iacute;a hablado. Aun una voz audible del cielo se oye de modos distintos en corazones distintos, seg&uacute;n su apertura a Dios. Pero el sentido era claro: el Padre ser&iacute;a glorificado en el Hijo, tanto en las se&ntilde;ales ya dadas como en la cruz ahora cercana. &iquest;Qu&eacute; es, pues, esta gloria? La gloria es la santidad de Dios hecha visible. Nadie pod&iacute;a mirarla directamente &mdash; aun a Mois&eacute;s se le mostr&oacute; solo su resplandor posterior. Pero "aquel Verbo fue hecho carne, y habit&oacute; entre nosotros, y vimos su gloria, gloria como del unig&eacute;nito del Padre" (Juan 1:14). En Jes&uacute;s, y supremamente en su muerte entregada, la gloria escondida de Dios sale a lo abierto donde los ojos humanos pueden verla.</p>
+
+<h3>IV. La toalla y la palangana</h3>
+<p>Si a&uacute;n quiere saber c&oacute;mo es la gloria de Dios, vaya con &eacute;l al aposento alto. En la misma noche en que fue entregado, con la cruz a solo horas, sus disc&iacute;pulos discut&iacute;an cu&aacute;l de ellos era el mayor. Los caminos de aquella tierra estaban llenos de polvo y barro, y los pies en sandalias entraban sucios; en toda casa decente un siervo esperaba a la puerta con agua para lavar los pies de los invitados. Pero esta peque&ntilde;a compa&ntilde;&iacute;a no ten&iacute;a siervo, y ninguno de estos hombres orgullosos se rebajar&iacute;a a la tarea. As&iacute; que <em>Jes&uacute;s</em>, "sabiendo que hab&iacute;a salido de Dios, y a Dios iba," se levant&oacute; de la cena, se quit&oacute; su manto, se ci&ntilde;&oacute; una toalla, tom&oacute; una palangana, y lav&oacute; los pies de sus disc&iacute;pulos (Juan 13:3&ndash;5). He aqu&iacute; al Hijo de Dios, a horas del Calvario, arrodillado ante los pies sucios de unos pescadores. Esta es la gloria que los griegos pidieron ver.</p>
+<p>Trastorna toda la escala de grandeza del mundo. El mundo mide la grandeza por cu&aacute;ntas personas trabajan para ti; el Se&ntilde;or la mide por cu&aacute;ntas personas sirves t&uacute;. "El mayor entre vosotros," hab&iacute;a ense&ntilde;ado, sea "vuestro siervo." Un misionero en China pregunt&oacute; una vez a un grupo de creyentes qu&eacute; los hab&iacute;a ganado a Cristo por encima de las religiones que hab&iacute;an conocido. No fueron los milagros, dijeron; sus viejas religiones tambi&eacute;n ten&iacute;an maravillas. No fue siquiera la ense&ntilde;anza. Al fin un anciano dijo sencillamente: "Fue Jes&uacute;s lavando los pies de sus disc&iacute;pulos. No ten&iacute;amos nada como eso &mdash; Dios, agach&aacute;ndose con una toalla y una palangana." Cuando seamos tentados a apoyarnos en nuestra dignidad, nuestros derechos, nuestro lugar, debemos ver de nuevo esa imagen: el Se&ntilde;or de la gloria de rodillas con una toalla. Y la convirti&oacute; en un mandato: &#9889; <em>"Pues si yo, el Se&ntilde;or y el Maestro, he lavado vuestros pies, vosotros tambi&eacute;n deb&eacute;is lavaros los pies los unos a los otros. Porque ejemplo os he dado, para que como yo os he hecho, vosotros tambi&eacute;n hag&aacute;is"</em> (Juan 13:14&ndash;15). A&uacute;n lavamos pies &mdash; cuando cuidamos al enfermo, alimentamos al pobre, honramos a los padres ancianos, llevamos a un vecino al m&eacute;dico, abrimos nuestra casa. La grandeza en el reino lleva delantal.</p>
+
+<h3>V. El mandamiento nuevo</h3>
+<p>Antes de que aquella noche terminara, Jes&uacute;s recogi&oacute; todo &mdash; el grano que muere, la gloria revelada, la toalla tomada &mdash; en un mandamiento nuevo: &#9889; <em>"Un mandamiento nuevo os doy: Que os am&eacute;is unos a otros; como yo os he amado, que tambi&eacute;n os am&eacute;is unos a otros. En esto conocer&aacute;n todos que sois mis disc&iacute;pulos, si tuviereis amor los unos con los otros"</em> (Juan 13:34&ndash;35). El mundo que dice: "Se&ntilde;or, querr&iacute;amos ver a Jes&uacute;s," le ver&aacute; con m&aacute;s claridad no en nuestros argumentos ni en nuestros edificios sino en un pueblo que entrega su vida unos por otros como &eacute;l entreg&oacute; la suya. Esa es la hora de la gloria que a&uacute;n irrumpe. As&iacute; que el cap&iacute;tulo se vuelve y nos pregunta sin rodeos: &iquest;quiere ver a Jes&uacute;s? Entonces mire primero el grano de trigo que cay&oacute; en la tierra y muri&oacute; por usted &mdash; y luego, habi&eacute;ndole visto, tome la toalla.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 9 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 9 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La secci&oacute;n de respuesta corta es pr&aacute;ctica para el Certificado y no cuenta en su contra.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 9;
+const COURSE = 'john';
+const NEXT_UNIT_URL = 'CTSJohnUnit10.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Word Made Flesh", "Unit 2 - You Must Be Born Again", "Unit 3 - Living Water", "Unit 4 - The Bread of Life", "Unit 5 - The Light of the World", "Unit 6 - The Witnesses to Christ", "Unit 7 - The Door and the Good Shepherd", "Unit 8 - The Resurrection and the Life", "Unit 9 - The Hour of Glory", "Unit 10 - The Way, the Truth, and the Life", "Unit 11 - The Spirit and the High-Priestly Prayer", "Unit 12 - It Is Finished"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSJohnUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    } else {
+        document.getElementById('studentGreeting').innerHTML = '<a href="CTSJohnUnit1.html" style="color:#8a1f1f;">Please register on Unit 1 / Reg&iacute;strese en la Unidad 1</a>';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields. / Por favor complete todos los campos.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered! / \u00a1Registrado!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "Throughout John a clock ticks; in John 12 \"the hour\" arrives when:", "textEs": "Por todo Juan suena un reloj; en Juan 12 \"la hora\" llega cuando:", "optionsEn": ["the temple was closed", "the Passover ended", "certain Greeks came saying \"we would see Jesus\"", "the disciples fell asleep"], "optionsEs": ["el templo fue cerrado", "la Pascua terminó", "unos griegos vinieron diciendo \"querríamos ver a Jesús\"", "los discípulos se durmieron"], "explanationEn": "The world beginning to seek Him signals that the hour of glory has come.", "explanationEs": "El mundo comenzando a buscarle señala que la hora de la gloria ha llegado.", "correct": 2}, {"textEn": "The Greeks' request to Philip was:", "textEs": "La petición de los griegos a Felipe fue:", "optionsEn": ["\"show us a sign\"", "\"heal our sick\"", "\"feed us\"", "\"Sir, we would see Jesus\""], "optionsEs": ["\"muéstranos una señal\"", "\"sana a nuestros enfermos\"", "\"aliméntanos\"", "\"Señor, querríamos ver a Jesús\""], "explanationEn": "They wanted not a doctrine or a debate but a Person — to see Jesus.", "explanationEs": "No querían una doctrina ni un debate sino una Persona — ver a Jesús.", "correct": 3}, {"textEn": "Jesus answered the Greeks' request by announcing:", "textEs": "Jesús respondió a la petición de los griegos anunciando:", "optionsEn": ["a new law", "\"The hour has come for the Son of Man to be glorified\"", "His return to Galilee", "a coming famine"], "optionsEs": ["una nueva ley", "\"La hora ha llegado para que el Hijo del Hombre sea glorificado\"", "su regreso a Galilea", "una hambruna venidera"], "explanationEn": "John 12:23 — the hour of glory had finally come.", "explanationEs": "Juan 12:23 — la hora de la gloria por fin había llegado.", "correct": 1}, {"textEn": "Cook observes that people still come to worship in effect saying:", "textEs": "Cook observa que la gente aún viene a adorar diciendo en efecto:", "optionsEn": ["\"Sir, we would see Jesus\"", "\"make us rich\"", "\"entertain us\"", "\"prove Yourself\""], "optionsEs": ["\"Señor, querríamos ver a Jesús\"", "\"enriquécenos\"", "\"entreténnos\"", "\"demuéstrate\""], "explanationEn": "Beneath all other reasons, hearts come hoping to see Jesus and find hope.", "explanationEs": "Debajo de todas las otras razones, los corazones vienen esperando ver a Jesús y hallar esperanza.", "correct": 0}, {"textEn": "Jesus pictured the path to glory as a grain of wheat that, unless it falls into the ground and dies:", "textEs": "Jesús describió el camino a la gloria como un grano de trigo que, si no cae en la tierra y muere:", "optionsEn": ["grows at once", "is wasted forever", "feeds no one", "remains alone, but if it dies bears much fruit"], "optionsEs": ["crece de inmediato", "se desperdicia para siempre", "no alimenta a nadie", "queda solo, mas si muere lleva mucho fruto"], "explanationEn": "John 12:24 — only by being buried and seemingly lost does the seed rise into a harvest.", "explanationEs": "Juan 12:24 — solo al ser enterrada y al parecer perdida se levanta la semilla en cosecha.", "correct": 3}, {"textEn": "The grain of wheat teaches that, for Jesus, glory and fruitfulness come through:", "textEs": "El grano de trigo enseña que, para Jesús, la gloria y el fruto vienen por medio de:", "optionsEn": ["avoiding suffering", "political power", "His death", "a long life"], "optionsEs": ["evitar el sufrimiento", "el poder político", "su muerte", "una larga vida"], "explanationEn": "The cross was not the failure of the hour but the very means of its glory.", "explanationEs": "La cruz no fue el fracaso de la hora sino el medio mismo de su gloria.", "correct": 2}, {"textEn": "Jesus applied the same principle to the disciple: he who loves his life will:", "textEs": "Jesús aplicó el mismo principio al discípulo: el que ama su vida:", "optionsEn": ["keep it safely", "lose it, but he who hates his life in this world keeps it to life eternal", "be praised by all", "never die"], "optionsEs": ["la guardará a salvo", "la perderá, mas quien aborrece su vida en este mundo la guarda para vida eterna", "será alabado por todos", "nunca morirá"], "explanationEn": "John 12:25 — the clenched fist keeps nothing; the surrendered hand bears fruit.", "explanationEs": "Juan 12:25 — el puño cerrado no guarda nada; la mano entregada lleva fruto.", "correct": 1}, {"textEn": "The Christian widow who took the fleeing woman's place said she did it because:", "textEs": "La viuda cristiana que tomó el lugar de la mujer que huía dijo que lo hizo porque:", "optionsEn": ["\"Christ has already done that, and more, for me\"", "she feared the police", "she was paid well", "she was forced to"], "optionsEs": ["\"Cristo ya hizo eso, y más, por mí\"", "temía a la policía", "le pagaron bien", "fue obligada"], "explanationEn": "Her self-sacrifice embodied the grain of wheat: a life laid down that bears fruit in others.", "explanationEs": "Su sacrificio encarnó el grano de trigo: una vida entregada que lleva fruto en otros.", "correct": 0}, {"textEn": "In His troubled soul, Jesus prayed:", "textEs": "En su alma turbada, Jesús oró:", "optionsEn": ["\"Father, glorify Your name\"", "\"Father, spare Me the hour\"", "\"send Me home\"", "\"let the Greeks wait\""], "optionsEs": ["\"Padre, glorifica tu nombre\"", "\"Padre, líbrame de la hora\"", "\"envíame a casa\"", "\"que esperen los griegos\""], "explanationEn": "He embraced the very purpose for which He had come to this hour.", "explanationEs": "Abrazó el propósito mismo por el cual había llegado a esta hora.", "correct": 0}, {"textEn": "The voice from heaven answered:", "textEs": "La voz del cielo respondió:", "optionsEn": ["nothing at all", "\"depart from Me\"", "\"I have glorified it, and will glorify it again\"", "\"the hour is delayed\""], "optionsEs": ["nada en absoluto", "\"apártate de mí\"", "\"Lo he glorificado, y lo glorificaré otra vez\"", "\"la hora se retrasa\""], "explanationEn": "John 12:28 — the Father would be glorified in the Son, in the signs and in the cross.", "explanationEs": "Juan 12:28 — el Padre sería glorificado en el Hijo, en las señales y en la cruz.", "correct": 2}, {"textEn": "The crowd's reaction to the voice showed that spiritual perception varies: some said it:", "textEs": "La reacción de la multitud a la voz mostró que la percepción varía: unos dijeron que:", "optionsEn": ["was only silence", "was Jesus' own voice", "had thundered, while others said an angel had spoken", "was the voice of Moses"], "optionsEs": ["era solo silencio", "era la voz de Jesús", "había tronado, mientras otros decían que un ángel había hablado", "era la voz de Moisés"], "explanationEn": "Even an audible voice from heaven is heard differently according to the heart's openness to God.", "explanationEs": "Aun una voz audible del cielo se oye distinto según la apertura del corazón a Dios.", "correct": 2}, {"textEn": "Cook defines glory as:", "textEs": "Cook define la gloria como:", "optionsEn": ["worldly fame", "the holiness of God made visible", "victory in battle", "wealth"], "optionsEs": ["fama mundana", "la santidad de Dios hecha visible", "victoria en batalla", "riqueza"], "explanationEn": "No one could look on it directly; Moses saw only its afterglow.", "explanationEs": "Nadie podía mirarla directamente; Moisés vio solo su resplandor posterior.", "correct": 1}, {"textEn": "John 1:14 says the Word became flesh and dwelt among us, \"and we beheld His ___\":", "textEs": "Juan 1:14 dice que el Verbo fue hecho carne y habitó entre nosotros, \"y vimos su ___\":", "optionsEn": ["wealth", "power", "army", "glory"], "optionsEs": ["riqueza", "poder", "ejército", "gloria"], "explanationEn": "In Jesus the hidden glory of God steps into the open where human eyes can see it.", "explanationEs": "En Jesús la gloria escondida de Dios sale a lo abierto donde los ojos humanos pueden verla.", "correct": 3}, {"textEn": "In the upper room, just before the foot-washing, the disciples had been arguing about:", "textEs": "En el aposento alto, justo antes del lavamiento de pies, los discípulos discutían sobre:", "optionsEn": ["the road to Galilee", "the price of bread", "which of them was the greatest", "the weather"], "optionsEs": ["el camino a Galilea", "el precio del pan", "cuál de ellos era el mayor", "el clima"], "explanationEn": "On the very night of His betrayal, His friends were quarreling over rank.", "explanationEs": "En la misma noche de su entrega, sus amigos discutían por el rango.", "correct": 2}, {"textEn": "The task of washing the guests' dusty feet normally belonged to:", "textEs": "La tarea de lavar los pies polvorientos de los invitados normalmente correspondía a:", "optionsEn": ["a priest", "the eldest guest", "the host", "the lowest servant"], "optionsEs": ["un sacerdote", "el invitado mayor", "el anfitrión", "el siervo más bajo"], "explanationEn": "It was the lowliest job; no proud disciple would stoop to it, so Jesus did.", "explanationEs": "Era la tarea más humilde; ningún discípulo orgulloso se rebajaría a ella, así que Jesús lo hizo.", "correct": 3}, {"textEn": "Knowing He had come from God and was going to God, Jesus rose and:", "textEs": "Sabiendo que había salido de Dios y a Dios iba, Jesús se levantó y:", "optionsEn": ["took a towel and basin and washed the disciples' feet", "rebuked the disciples", "called a servant", "left the room"], "optionsEs": ["tomó una toalla y una palangana y lavó los pies de los discípulos", "reprendió a los discípulos", "llamó a un siervo", "salió del aposento"], "explanationEn": "John 13:3-5 — the Son of God, hours from Calvary, knelt at the feet of fishermen.", "explanationEs": "Juan 13:3-5 — el Hijo de Dios, a horas del Calvario, se arrodilló ante los pies de unos pescadores.", "correct": 0}, {"textEn": "Cook says God's measure of greatness is the opposite of the world's: the greatest is:", "textEs": "Cook dice que la medida de grandeza de Dios es lo opuesto a la del mundo: el mayor es:", "optionsEn": ["the most powerful", "the servant of all", "the most famous", "the richest"], "optionsEs": ["el más poderoso", "el siervo de todos", "el más famoso", "el más rico"], "explanationEn": "The world asks how many work for you; the Lord asks for how many you work.", "explanationEs": "El mundo pregunta cuántos trabajan para ti; el Señor pregunta para cuántos trabajas tú.", "correct": 1}, {"textEn": "Asked what had won them to Christ over other faiths, Chinese believers answered it was:", "textEs": "Preguntados qué los había ganado a Cristo sobre otras religiones, unos creyentes chinos respondieron que fue:", "optionsEn": ["the miracles", "Jesus washing His disciples' feet", "the church buildings", "the teaching"], "optionsEs": ["los milagros", "Jesús lavando los pies de sus discípulos", "los edificios de la iglesia", "la enseñanza"], "explanationEn": "\"We had nothing like that — God, stooping down with a towel and basin.\"", "explanationEs": "\"No teníamos nada como eso — Dios, agachándose con una toalla y una palangana.\"", "correct": 1}, {"textEn": "After washing their feet Jesus said, \"I have given you an ___; that you should do as I have done\":", "textEs": "Tras lavarles los pies Jesús dijo: \"Ejemplo os he ___; para que como yo hice, vosotros hagáis\":", "optionsEn": ["an ending", "a payment", "an order", "an example"], "optionsEs": ["un final", "un pago", "una orden", "dado un ejemplo"], "explanationEn": "John 13:14-15 — we still wash feet by serving the sick, the poor, parents, and neighbors.", "explanationEs": "Juan 13:14-15 — aún lavamos pies sirviendo al enfermo, al pobre, a los padres y a los vecinos.", "correct": 3}, {"textEn": "Jesus gave a \"new commandment,\" that the world would know His disciples by:", "textEs": "Jesús dio un \"mandamiento nuevo,\" que el mundo conocería a sus discípulos por:", "optionsEn": ["their love for one another", "their buildings", "their knowledge", "their numbers"], "optionsEs": ["su amor los unos por los otros", "sus edificios", "su conocimiento", "su número"], "explanationEn": "John 13:34-35 — the world sees Jesus most clearly in a people who love as He loved.", "explanationEs": "Juan 13:34-35 — el mundo ve a Jesús con más claridad en un pueblo que ama como él amó.", "correct": 0}];
+const kwQuestions = [
+{"textEn":"Explain the request \"Sir, we would see Jesus\" and how it marks the hour of glory (John 12:20-23).","textEs":"Explique la petici\u00f3n \"Se\u00f1or, querr\u00edamos ver a Jes\u00fas\" y c\u00f3mo marca la hora de la gloria (Juan 12:20-23).","kw_en":["greek","see","jesus","hour","glory","come","worship","seek"],"kw_es":["griego","ver","jesus","hora","gloria","llega","adora","busca"],"modelEn":"Some Greeks who had come to worship at the feast found Philip and said, Sir, we would see Jesus. They wanted not a doctrine or a debate but a Person. When the request reached Him, Jesus answered that the hour had come for the Son of Man to be glorified. The world beginning to seek Him marks the arrival of the hour of glory. People still come to worship, beneath all their reasons, longing to see Jesus, to know that their lives matter and that there is hope. When a soul truly sees Him, everything changes.","modelEs":"Unos griegos que hab\u00edan venido a adorar en la fiesta hallaron a Felipe y dijeron: Se\u00f1or, querr\u00edamos ver a Jes\u00fas. No quer\u00edan una doctrina ni un debate sino una Persona. Cuando la petici\u00f3n le lleg\u00f3, Jes\u00fas respondi\u00f3 que la hora hab\u00eda llegado para que el Hijo del Hombre fuese glorificado. El mundo que comienza a buscarle marca la llegada de la hora de la gloria. La gente a\u00fan viene a adorar, debajo de todas sus razones, anhelando ver a Jes\u00fas, saber que su vida importa y que hay esperanza. Cuando un alma de veras le ve, todo cambia."},
+{"textEn":"Explain the grain of wheat and how Jesus' glory comes through death (John 12:24).","textEs":"Explique el grano de trigo y c\u00f3mo la gloria de Jes\u00fas viene por la muerte (Juan 12:24).","kw_en":["grain","wheat","die","fall","ground","fruit","death","glory"],"kw_es":["grano","trigo","muere","cae","tierra","fruto","muerte","gloria"],"modelEn":"Jesus said that unless a grain of wheat falls into the ground and dies it remains alone, but if it dies it bears much fruit. A seed kept safe on a shelf stays a single lonely seed; only by being buried and seemingly lost does it rise into a harvest. So the path to His glory ran straight through His death on the cross. The cross was not the failure of the hour but the very means of its glory, for through His death a whole world of redeemed people would be brought to life, much fruit from one grain.","modelEs":"Jes\u00fas dijo que si el grano de trigo no cae en la tierra y muere, queda solo, pero si muere lleva mucho fruto. Una semilla guardada a salvo en un estante sigue siendo una sola semilla solitaria; solo al ser enterrada y al parecer perdida se levanta en cosecha. As\u00ed el camino a su gloria pas\u00f3 directo por su muerte en la cruz. La cruz no fue el fracaso de la hora sino el medio mismo de su gloria, pues por su muerte un mundo entero de redimidos ser\u00eda llevado a la vida, mucho fruto de un solo grano."},
+{"textEn":"Explain how the grain-of-wheat principle applies to the disciple (John 12:25-26).","textEs":"Explique c\u00f3mo el principio del grano de trigo se aplica al disc\u00edpulo (Juan 12:25-26).","kw_en":["life","lose","love","keep","eternal","follow","serve","die"],"kw_es":["vida","pierde","ama","guarda","eterna","sigue","sirve","muere"],"modelEn":"Jesus pressed the same law on every follower: he who loves his life will lose it, and he who hates his life in this world will keep it to life eternal. The clenched fist that tries to keep its own life ends with nothing, but the open, surrendered hand that dies to itself bears fruit. To follow Jesus is to take up the same pattern of the grain that falls and dies, serving others and laying down our lives, and in that surrender we find the eternal life Christ gives rather than lose it.","modelEs":"Jes\u00fas apremi\u00f3 la misma ley sobre todo seguidor: el que ama su vida la perder\u00e1, y el que aborrece su vida en este mundo la guardar\u00e1 para vida eterna. El pu\u00f1o cerrado que trata de guardar su propia vida termina sin nada, pero la mano abierta y entregada que muere a s\u00ed misma lleva fruto. Seguir a Jes\u00fas es tomar el mismo patr\u00f3n del grano que cae y muere, sirviendo a otros y entregando nuestra vida, y en esa entrega hallamos la vida eterna que Cristo da en vez de perderla."},
+{"textEn":"Explain the voice from heaven and what it revealed (John 12:27-30).","textEs":"Explique la voz del cielo y qu\u00e9 revel\u00f3 (Juan 12:27-30).","kw_en":["voice","heaven","father","glorify","name","thunder","glory","again"],"kw_es":["voz","cielo","padre","glorifica","nombre","trueno","gloria","otra"],"modelEn":"Though His soul was troubled, Jesus prayed, Father, glorify Your name, embracing the purpose for which He had come. Then a voice came from heaven saying, I have glorified it and will glorify it again. The crowd heard the sound differently: some said it had thundered, others that an angel had spoken, showing that even an audible voice from heaven is perceived according to the heart's openness to God. The meaning was plain: the Father would be glorified in the Son, both in the signs already given and in the cross now near.","modelEs":"Aunque su alma estaba turbada, Jes\u00fas or\u00f3: Padre, glorifica tu nombre, abrazando el prop\u00f3sito por el cual hab\u00eda venido. Entonces vino una voz del cielo diciendo: Lo he glorificado y lo glorificar\u00e9 otra vez. La multitud oy\u00f3 el sonido de modos distintos: unos dec\u00edan que hab\u00eda tronado, otros que un \u00e1ngel hab\u00eda hablado, mostrando que aun una voz audible del cielo se percibe seg\u00fan la apertura del coraz\u00f3n a Dios. El sentido era claro: el Padre ser\u00eda glorificado en el Hijo, tanto en las se\u00f1ales ya dadas como en la cruz ahora cercana."},
+{"textEn":"Explain what \"glory\" means and how Jesus reveals it (John 1:14).","textEs":"Explique qu\u00e9 significa \"gloria\" y c\u00f3mo Jes\u00fas la revela (Juan 1:14).","kw_en":["glory","god","holiness","reveal","jesus","see","father","flesh"],"kw_es":["gloria","dios","santidad","revela","jesus","ve","padre","carne"],"modelEn":"Glory is the holiness of God made visible. No sinful person could look on it directly; even Moses was shown only its afterglow. But John says the Word became flesh and dwelt among us, and we beheld His glory, the glory as of the only begotten of the Father. In Jesus, God in human flesh, the hidden glory of God steps into the open where human eyes can see it, and supremely in His self-giving death on the cross. To see Jesus is to see the glory of God revealed.","modelEs":"La gloria es la santidad de Dios hecha visible. Ninguna persona pecadora pod\u00eda mirarla directamente; aun a Mois\u00e9s se le mostr\u00f3 solo su resplandor posterior. Pero Juan dice que el Verbo fue hecho carne y habit\u00f3 entre nosotros, y vimos su gloria, gloria como del unig\u00e9nito del Padre. En Jes\u00fas, Dios en carne humana, la gloria escondida de Dios sale a lo abierto donde los ojos humanos pueden verla, y supremamente en su muerte entregada en la cruz. Ver a Jes\u00fas es ver la gloria de Dios revelada."},
+{"textEn":"Describe the foot-washing and what it shows about greatness (John 13:4-5).","textEs":"Describa el lavamiento de pies y qu\u00e9 muestra sobre la grandeza (Juan 13:4-5).","kw_en":["feet","wash","towel","basin","servant","humble","great","jesus"],"kw_es":["pies","lava","toalla","palangana","siervo","humilde","grande","jesus"],"modelEn":"On the night of His betrayal, with no servant present and no proud disciple willing to do the lowly task, Jesus rose from supper, tied a towel around His waist, poured water into a basin, and washed the disciples' feet. Here was the Son of God, hours from the cross, kneeling at the dirty feet of fishermen. This shows that true greatness is not power or position but humble service. The Lord of glory took the place of the lowest servant, and in doing so He revealed what the glory of God truly looks like.","modelEs":"En la noche de su entrega, sin siervo presente y sin disc\u00edpulo orgulloso dispuesto a la tarea humilde, Jes\u00fas se levant\u00f3 de la cena, se ci\u00f1\u00f3 una toalla, ech\u00f3 agua en una palangana, y lav\u00f3 los pies de los disc\u00edpulos. He aqu\u00ed al Hijo de Dios, a horas de la cruz, arrodillado ante los pies sucios de unos pescadores. Esto muestra que la verdadera grandeza no es poder ni posici\u00f3n sino servicio humilde. El Se\u00f1or de la gloria tom\u00f3 el lugar del siervo m\u00e1s bajo, y al hacerlo revel\u00f3 c\u00f3mo es de veras la gloria de Dios."},
+{"textEn":"Explain God's measure of greatness versus the world's.","textEs":"Explique la medida de grandeza de Dios frente a la del mundo.","kw_en":["great","servant","serve","world","god","humble","first","last"],"kw_es":["grande","siervo","sirve","mundo","dios","humilde","primero","ultimo"],"modelEn":"The world measures greatness by how many people work for you, but the Lord measures it by how many people you work for. Jesus taught that the greatest among you must be your servant, and the first must be servant of all. God's ruler of greatness is completely different from the world's: the great person in the kingdom is the great servant. When Chinese believers were asked what won them to Christ, they said it was Jesus washing His disciples' feet, God stooping with a towel. Greatness in the kingdom is humble service, not power or fame.","modelEs":"El mundo mide la grandeza por cu\u00e1ntas personas trabajan para ti, pero el Se\u00f1or la mide por cu\u00e1ntas personas sirves t\u00fa. Jes\u00fas ense\u00f1\u00f3 que el mayor entre vosotros sea vuestro siervo, y el primero sea siervo de todos. La regla de grandeza de Dios es completamente distinta de la del mundo: la persona grande en el reino es el gran siervo. Cuando a unos creyentes chinos se les pregunt\u00f3 qu\u00e9 los gan\u00f3 a Cristo, dijeron que fue Jes\u00fas lavando los pies de sus disc\u00edpulos, Dios agach\u00e1ndose con una toalla, lo humilde y no el poder ni la fama, el primero hecho \u00faltimo."},
+{"textEn":"Explain \"you also ought to wash one another's feet\" and how we do it today (John 13:14-15).","textEs":"Explique \"deb\u00e9is lavaros los pies los unos a los otros\" y c\u00f3mo lo hacemos hoy (Juan 13:14-15).","kw_en":["wash","feet","example","serve","others","follow","today","love"],"kw_es":["lava","pies","ejemplo","sirve","otros","sigue","hoy","amor"],"modelEn":"After washing their feet Jesus said that since He, their Lord and Teacher, had washed their feet, they also ought to wash one another's feet, for He had given them an example to follow. He was not founding a mere ritual but commanding a life of humble service to one another. We do not wear sandals today, but we wash feet whenever we serve others in love: caring for the sick, feeding the poor, honoring aging parents, driving a neighbor to the doctor, opening our homes. To follow Jesus is to take up the towel and serve as He served.","modelEs":"Tras lavarles los pies Jes\u00fas dijo que pues \u00e9l, su Se\u00f1or y Maestro, les hab\u00eda lavado los pies, ellos tambi\u00e9n deb\u00edan lavarse los pies los unos a los otros, porque les hab\u00eda dado un ejemplo a seguir. No fundaba un mero rito sino que mandaba una vida de servicio humilde unos a otros. Hoy no usamos sandalias, pero lavamos pies cuando servimos a otros en amor: cuidando al enfermo, alimentando al pobre, honrando a los padres ancianos, llevando a un vecino al m\u00e9dico, abriendo nuestra casa. Seguir a Jes\u00fas es tomar la toalla y servir como \u00e9l sirvi\u00f3."},
+{"textEn":"Explain the new commandment and the sign it gives to the world (John 13:34-35).","textEs":"Explique el mandamiento nuevo y la se\u00f1al que da al mundo (Juan 13:34-35).","kw_en":["new","command","love","one","another","disciple","know","world"],"kw_es":["nuevo","mandamiento","amor","unos","otros","discipulo","conoce","mundo"],"modelEn":"Before the night was over, Jesus gave a new commandment: that we love one another as He has loved us. He added that by this all people will know that we are His disciples, if we have love for one another. The love is measured by His own self-giving, the love that lays down its life. The world that says it would see Jesus will see Him most clearly not in our arguments or buildings but in a people who love and serve one another as He did. Love for one another is the sign that marks the true disciple before the watching world.","modelEs":"Antes de que la noche terminara, Jes\u00fas dio un mandamiento nuevo: que nos amemos unos a otros como \u00e9l nos ha amado. A\u00f1adi\u00f3 que en esto conocer\u00e1n todos que somos sus disc\u00edpulos, si tenemos amor los unos por los otros. El amor se mide por su propia entrega, el amor que da su vida. El mundo que dice que quiere ver a Jes\u00fas le ver\u00e1 con m\u00e1s claridad no en nuestros argumentos ni edificios sino en un pueblo que se ama y se sirve unos a otros como \u00e9l. El amor de unos por otros es la se\u00f1al que marca al verdadero disc\u00edpulo ante el mundo que observa."},
+{"textEn":"How does the hour of glory reveal glory through death and servanthood, and what does it call us to?","textEs":"\u00bfC\u00f3mo revela la hora de la gloria la gloria por la muerte y el servicio, y a qu\u00e9 nos llama?","kw_en":["glory","death","serve","cross","grain","towel","love","follow"],"kw_es":["gloria","muerte","sirve","cruz","grano","toalla","amor","sigue"],"modelEn":"The hour of glory reveals God's glory in a surprising way: through a grain of wheat that dies, a voice from heaven, a towel and basin, and finally a new commandment to love. Glory comes not through power but through the cross and through humble service. Jesus laid down His life like the grain that falls and dies, and He knelt to wash feet. This calls us to want to see Jesus first in the grain of wheat that died for us, and then, having seen Him, to take up the towel, serve others, and love one another as He loved us, following His pattern of self-giving.","modelEs":"La hora de la gloria revela la gloria de Dios de un modo sorprendente: por un grano de trigo que muere, una voz del cielo, una toalla y una palangana, y al fin un mandamiento nuevo de amar. La gloria viene no por el poder sino por la cruz y por el servicio humilde. Jes\u00fas entreg\u00f3 su vida como el grano que cae y muere, y se arrodill\u00f3 a lavar pies. Esto nos llama a querer ver a Jes\u00fas primero en el grano de trigo que muri\u00f3 por nosotros, y luego, habi\u00e9ndole visto, a tomar la toalla, servir a otros, y amarnos unos a otros como \u00e9l nos am\u00f3, siguiendo su patr\u00f3n de entrega."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 10 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 10 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s).</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (mcQuestions.length + idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register on Unit 1 first.' : 'Por favor reg\u00edstrese en la Unidad 1 primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y reintente la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSJohnReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

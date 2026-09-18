@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Radical Christianity | Radical Trust</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', Times, serif; line-height: 1.7; background: #faf6f0; color: #1a1018; padding: 0; }
+.container { max-width: 920px; margin: 0 auto; padding: 20px; }
+
+.course-header { background: linear-gradient(135deg, #4a1e3a 0%, #2a1322 100%); color: #faf6f0; padding: 2rem 2rem 1.5rem 2rem; border-radius: 8px 8px 0 0; }
+.course-title { font-size: 1.4rem; letter-spacing: 2px; font-variant: small-caps; color: #d4af37; margin-bottom: 0.5rem; }
+.course-subtitle { font-size: 1rem; font-style: italic; opacity: 0.9; }
+.unit-badge { font-size: 1.15rem; margin-top: 0.75rem; padding: 0.4rem 1rem; background: rgba(212,175,55,0.15); border-left: 3px solid #d4af37; display: inline-block; }
+.author-line { font-size: 0.85rem; color: #d4af37; font-style: italic; margin-top: 0.75rem; opacity: 0.85; }
+
+.controls-bar { background: #ede4d8; padding: 0.75rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-left: 2px solid #cbc3ae; border-right: 2px solid #cbc3ae; }
+.lang-buttons { display: flex; gap: 8px; }
+.lang-btn { background: white; border: 1px solid #4a1e3a; padding: 0.35rem 0.9rem; cursor: pointer; font-weight: bold; transition: 0.2s; border-radius: 4px; font-family: inherit; font-size: 0.9rem; color: #4a1e3a; }
+.lang-btn.active { background: #4a1e3a; color: #d4af37; }
+.lang-btn:hover { background: #6a2e4a; color: white; }
+
+body.lang-en .lang-es { display: none !important; }
+body.lang-es .lang-en { display: none !important; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-left: 3px solid #d4af37; padding-left: 1rem; margin-bottom: 1rem; }
+body.lang-both .lang-es { border-left: 3px solid #8b6b3d; padding-left: 1rem; opacity: 0.95; }
+
+.content-section { background: white; padding: 2rem 2rem; border-left: 2px solid #cbc3ae; border-right: 2px solid #cbc3ae; }
+.content-section h3 { color: #4a1e3a; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.3rem; border-bottom: 2px solid #d4af37; padding-bottom: 0.4rem; }
+.content-section h3:first-child { margin-top: 0; }
+.content-section p { margin-bottom: 1rem; text-align: justify; }
+.content-section em { color: #4a1e3a; font-weight: 600; font-style: italic; }
+.scripture { background: #f7ecdb; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 1rem 1.5rem; margin: 1.25rem 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #4a1e3a; font-weight: bold; }
+.illustration { background: #fdf6ec; border: 1px dashed #c9a063; padding: 1rem 1.5rem; margin: 1.25rem 0; border-radius: 4px; }
+.illustration strong { color: #4a1e3a; }
+
+.registration-card { background: #fff; border: 2px solid #d4af37; padding: 1.5rem; margin: 2rem 0; border-radius: 6px; }
+.registration-card h3 { color: #4a1e3a; margin-bottom: 1rem; }
+.registration-card p { margin-bottom: 1rem; font-size: 0.95rem; }
+.registration-card label { display: block; margin-bottom: 0.4rem; font-weight: bold; color: #4a1e3a; }
+.registration-card input[type="text"], .registration-card select { width: 100%; padding: 0.5rem; border: 1px solid #4a1e3a; border-radius: 4px; font-family: inherit; font-size: 1rem; margin-bottom: 1rem; }
+.registration-card button { background: #4a1e3a; color: #d4af37; border: none; padding: 0.6rem 1.5rem; cursor: pointer; font-weight: bold; border-radius: 4px; font-family: inherit; }
+.registration-card button:hover { background: #2a1322; color: white; }
+.reg-saved { background: #d4edda; color: #155724; padding: 0.5rem 1rem; border-radius: 4px; margin-top: 1rem; display: none; }
+
+.exam-section { background: #faf6f0; padding: 2rem; border: 2px solid #cbc3ae; border-top: none; margin-top: 0; border-radius: 0 0 8px 8px; }
+.exam-section h2 { color: #4a1e3a; border-bottom: 3px solid #d4af37; padding-bottom: 0.5rem; margin-bottom: 1rem; }
+.exam-intro { background: #fdf6ec; padding: 1rem 1.5rem; border-left: 4px solid #d4af37; margin-bottom: 1.5rem; font-size: 0.95rem; }
+.exam-intro p { margin-bottom: 0.5rem; }
+
+.lockout-notice { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 1.5rem; display: none; text-align: center; }
+.lockout-notice.active { display: block; }
+.lockout-countdown { font-weight: bold; font-size: 1.2rem; }
+
+.question { background: white; padding: 1.25rem 1.5rem; margin-bottom: 1rem; border-radius: 6px; border-left: 3px solid #4a1e3a; }
+.question-text { font-weight: bold; margin-bottom: 0.75rem; color: #1a1018; }
+.options { list-style: none; padding: 0; }
+.options li { margin-bottom: 0.4rem; }
+.options label { display: block; padding: 0.4rem 0.6rem; cursor: pointer; border-radius: 4px; transition: 0.15s; }
+.options label:hover { background: #f7ecdb; }
+.options input[type="radio"] { margin-right: 0.5rem; }
+.sa-input { width: 100%; min-height: 80px; padding: 0.6rem; border: 1px solid #cbc3ae; border-radius: 4px; font-family: inherit; font-size: 0.95rem; resize: vertical; }
+
+.feedback { margin-top: 0.75rem; padding: 0.75rem 1rem; border-radius: 4px; font-size: 0.9rem; display: none; }
+.feedback.show { display: block !important; }
+.feedback.correct { background: #d4edda; color: #155724; border-left: 3px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 3px solid #dc3545; }
+.feedback.partial { background: #fff3cd; color: #856404; border-left: 3px solid #ffc107; }
+.feedback strong { display: block; margin-bottom: 0.25rem; }
+
+/* Correct-option visual highlight after grading (Section 7 fix) */
+.options li.correct-answer label { background: #d4edda !important; border-left: 3px solid #28a745; padding-left: 0.5rem; }
+.options li.wrong-pick label { background: #f8d7da !important; border-left: 3px solid #dc3545; padding-left: 0.5rem; }
+.options li.selected-neutral label { background: #efe7d2 !important; border-left: 3px solid #d4af37; padding-left: 0.5rem; }
+
+.button-row { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.button-row button { padding: 0.7rem 1.8rem; font-size: 1rem; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; font-family: inherit; }
+.btn-submit { background: #4a1e3a; color: #d4af37; }
+.btn-submit:hover { background: #2a1322; color: white; }
+.btn-submit:disabled { background: #999; color: #ddd; cursor: not-allowed; }
+.btn-reset { background: #8b6b3d; color: white; }
+.btn-reset:hover { background: #6a4f2d; }
+
+.results-section { background: white; padding: 1.5rem 2rem; margin-top: 1.5rem; border-radius: 6px; border: 2px solid #4a1e3a; display: none; }
+.results-section.show { display: block; }
+.results-section h3 { color: #4a1e3a; margin-bottom: 1rem; }
+.score-row { display: flex; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.score-box { flex: 1; min-width: 180px; background: #f7ecdb; padding: 1rem; border-radius: 6px; text-align: center; }
+.score-box .label { font-size: 0.85rem; color: #8b6b3d; text-transform: uppercase; letter-spacing: 1px; }
+.score-box .value { font-size: 2rem; font-weight: bold; color: #4a1e3a; margin: 0.25rem 0; }
+.score-box .threshold { font-size: 0.8rem; color: #6a5a4a; }
+
+.verdict { padding: 1.25rem; border-radius: 6px; margin-bottom: 1rem; text-align: center; font-size: 1.1rem; font-weight: bold; }
+.verdict.pass { background: #d4edda; color: #155724; border: 2px solid #28a745; }
+.verdict.fail { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; }
+.redirect-notice { font-size: 0.9rem; font-style: italic; color: #4a1e3a; margin-top: 0.75rem; }
+
+.nav-links { display: flex; justify-content: space-between; margin: 2rem 0 1rem 0; flex-wrap: wrap; gap: 1rem; }
+.nav-links a { background: #4a1e3a; color: #d4af37; padding: 0.6rem 1.2rem; text-decoration: none; border-radius: 6px; font-weight: bold; }
+.nav-links a:hover { background: #2a1322; color: white; }
+.nav-links a.disabled { background: #ccc; color: #888; cursor: not-allowed; pointer-events: none; }
+
+@media (max-width: 700px) {
+    .container { padding: 10px; }
+    .course-header { padding: 1.5rem 1rem; }
+    .content-section { padding: 1.5rem 1rem; }
+    .exam-section { padding: 1rem; }
+    .score-row { flex-direction: column; gap: 0.5rem; }
+}
+
+@media print {
+    body { background: white; }
+    .controls-bar, .button-row, .nav-links, .registration-card, .lockout-notice { display: none !important; }
+    .question { page-break-inside: avoid; }
+    .scripture, .illustration { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .course-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; color: black !important; background: white !important; border-bottom: 2px solid #4a1e3a; }
+    .course-title, .course-subtitle, .unit-badge, .author-line { color: #4a1e3a !important; }
+    .unit-badge { background: white !important; }
+}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:0 0 18px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#4a1e3a;margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:#fdf6ec;border:1px solid #d8c4b0;color:#4a1e3a;text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:#4a1e3a;}
+.unitnav a.active{background:#4a1e3a;color:#f7ecdb;border-color:#4a1e3a;}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+
+    <div class="course-header">
+        <div class="course-title">
+            <span class="lang-en">CTS · Radical Christianity</span>
+            <span class="lang-es">CTS · Cristianismo Radical</span>
+        </div>
+        <div class="course-subtitle">
+            <span class="lang-en">The Ten Commandments of Jesus</span>
+            <span class="lang-es">Los Diez Mandamientos de Jesús</span>
+        </div>
+        <div class="unit-badge">
+            <span class="lang-en">Radical Trust · "Even the Wind and the Waves Obey Him" (Mark 4:41)</span>
+            <span class="lang-es">Confianza Radical · "Aun el Viento y las Olas le Obedecen" (Mr 4:41)</span>
+        </div>
+        <div class="author-line">
+            <span class="lang-en">Course Author: Dr. Wayne Cook · Chapala Theological Seminary</span>
+            <span class="lang-es">Autor del Curso: Dr. Wayne Cook · Seminario Teológico de Chapala</span>
+        </div>
+    </div>
+
+    <div class="controls-bar">
+        <div class="lang-buttons">
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="es">Español</button>
+            <button class="lang-btn" data-lang="both">Both</button>
+        </div>
+        <div style="font-size: 0.85rem; color: #4a1e3a; font-weight: bold;">
+            <span class="lang-en">New Wineskins Series · Unit 2 of 12</span>
+            <span class="lang-es">Serie Odres Nuevos · Unidad 2 de 12</span>
+        </div>
+    </div>
+
+        <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+      <span class="nl"><span class="lang-en">Units</span><span class="lang-es">Unidades</span></span>
+      <a href="CTSRadicalUnit1.html">1</a>
+      <a href="CTSRadicalUnit2.html" class="active">2</a>
+      <a href="CTSRadicalUnit3.html">3</a>
+      <a href="CTSRadicalUnit4.html">4</a>
+      <a href="CTSRadicalUnit5.html">5</a>
+      <a href="CTSRadicalUnit6.html">6</a>
+      <a href="CTSRadicalUnit7.html">7</a>
+      <a href="CTSRadicalUnit8.html">8</a>
+      <a href="CTSRadicalUnit9.html">9</a>
+      <a href="CTSRadicalUnit10.html">10</a>
+      <a href="CTSRadicalUnit11.html">11</a>
+      <a href="CTSRadicalUnit12.html">12</a>
+      <a href="CTSRadicalUnit13.html">13</a>
+    </nav>
+
+    <div class="content-section">
+        <div class="lang-en">
+
+            <p>When Jesus said, "No one pours new wine into old wineskins" (Luke 5:37-38), He was describing the radical life He brings. New wine ferments and expands; old, brittle wineskins burst under the pressure. New wineskins, though, stretch to hold the new wine. In the same way, Jesus calls His disciples into a faith that stretches us beyond what feels safe or comfortable — the kind of trust that does not collapse under storms, worries, or uncertainty. There are three places this trust gets stretched: over storms, over worry, and over what the eye cannot yet see.</p>
+
+            <h3>1. The Lord Over Storms</h3>
+
+            <div class="scripture">
+                <strong>Mark 4:37-41 (NKJV) — abridged:</strong> "And a great windstorm arose, and the waves beat into the boat, so that it was already filling. But He was in the stern, asleep on a pillow. And they awoke Him and said to Him, 'Teacher, do You not care that we are perishing?' Then He arose and rebuked the wind, and said to the sea, 'Peace, be still!' And the wind ceased and there was a great calm… And they feared exceedingly, and said to one another, 'Who can this be, that even the wind and the sea obey Him!'"
+            </div>
+
+            <p>Jesus asked the disciples to cross the Sea of Galilee, and a storm broke out so fierce that the boat began filling with water. These were not weekend sailors; several of them were professional fishermen. They had handled bad weather before. This storm scared them. And where was Jesus while they were terrified? Asleep in the stern, with His head on a cushion. They shook Him awake with what is half-accusation, half-prayer: <em>Teacher, do You not care that we are perishing?</em> Jesus stood up, rebuked the wind, and said three words to the sea: <em>Peace, be still.</em> The wind ceased. The water flattened. And the men who had been afraid of the storm now had something larger to be afraid of, because the One in the boat with them commanded weather.</p>
+
+            <p>The lesson is not that storms will never come; the lesson is that the Lord of the storm is in the boat with you. Radical trust does not deny the weather; it knows who is sleeping on the cushion. Faith does not always stop the storm, but it anchors the disciple to the Savior who rules over it. The disciples' question — <em>do You not care?</em> — is the question every storm draws out of every Christian eventually, and the answer is the same answer Jesus gave them: He cares enough to be in the boat, and He has authority enough to make the wind listen.</p>
+
+            <div class="illustration">
+                <strong>Elisabeth Elliot:</strong> In 1956, five young missionaries in Ecuador set out to reach the Huaorani tribe. The Huaorani attacked, and all five were speared to death. Jim Elliot's wife, Elisabeth, was twenty-nine, with a baby daughter. Two years later, she went to live among the very tribe that had killed her husband. She showed them Christ's love. In time, many Huaorani came to faith, including some of the men who had wielded the spears. The same Jesus who stilled the Sea of Galilee still rules over life's fiercest storms.
+            </div>
+
+            <p>Application is direct. When the storm comes — and it will come — the disciple's first response is not panic but prayer. The disciple says, <em>Jesus is in my boat.</em> He may not calm this storm tonight. He may calm it tomorrow. He may not calm it at all and instead carry the disciple through the middle of it. None of these outcomes is a sign that He does not care. All three are a sign that He is sovereign and present. The radical disciple's posture toward storms is therefore not desperation but rest — the rest of someone who knows the One who is sleeping with His head on the cushion is the same One who made the wind.</p>
+
+            <h3>2. The Lord Over Worry</h3>
+
+            <div class="scripture">
+                <strong>Matthew 6:25-27, 33 (NKJV) — abridged:</strong> "Therefore I say to you, do not worry about your life, what you will eat or what you will drink; nor about your body, what you will put on… Look at the birds of the air, for they neither sow nor reap nor gather into barns; yet your heavenly Father feeds them. Are you not of more value than they? Which of you by worrying can add one cubit to his stature?… But seek first the kingdom of God and His righteousness, and all these things shall be added to you."
+            </div>
+
+            <p>If the storm chapter is about the great fears, the worry chapter is about the small ones — food, drink, clothing, the bills that did not stop coming when the paycheck did. Jesus addresses these directly. He points the disciples to two ordinary things in front of them. Birds do not run agribusiness; they have no granaries; the Father feeds them anyway. Lilies do not weave fabric; they have no looms; Solomon in his full royal wardrobe was not as well dressed as the wildflower that comes up in three weeks and is gone in six. The argument is not that food and clothing do not matter. The argument is that they matter to the Father.</p>
+
+            <p>Then Jesus asks a question that should embarrass every Christian who has lain awake at three in the morning: <em>Which of you by worrying can add one cubit to his stature?</em> The honest answer is none. Worry has never lengthened a life, paid a bill, healed a child, or restored a marriage. What worry actually does is impersonate prayer while accomplishing none of prayer's work. It feels like spiritual labor and produces only fatigue. The disciple's alternative is named in verse 33: <em>seek first the kingdom of God and His righteousness, and all these things shall be added to you.</em> The order matters. The kingdom is first; the needs come after. Reverse the order and even the needs do not get met properly.</p>
+
+            <div class="illustration">
+                <strong>Linda's Empty Fridge:</strong> During the 2009 financial crisis, a single mother in Ohio named Linda lost her job. Her refrigerator was nearly empty. After tucking her three children into bed she broke down in the kitchen and prayed, <em>Lord, I don't know how we'll eat tomorrow. But You promised to care for us. I trust You.</em> The next morning a friend from church knocked at the door with bags of groceries. The friend said, <em>I couldn't sleep last night — I felt God telling me you needed this.</em> Linda's testimony afterward was not about the food; it was that God already knew what she needed before she asked.
+            </div>
+
+            <p>This is what Matthew 6 looks like on a Wednesday night with no money. Worry tells the disciple to lie awake calculating disasters that have not happened. Trust tells the disciple to surrender the calculation to a Father who has counted hairs on heads and watches sparrows fall. The practical exchange the radical disciple learns to make is a small one and a hard one: replace <em>what if</em> with <em>even if.</em> What if the paycheck does not come becomes <em>even if the paycheck does not come, the Father knows.</em> What if the diagnosis is bad becomes <em>even if the diagnosis is bad, the Father is in the room.</em> The grammar changes; the heart follows.</p>
+
+            <h3>3. The Lord of Sight</h3>
+
+            <div class="scripture">
+                <strong>Hebrews 11:8-10 (NKJV) — abridged:</strong> "By faith Abraham obeyed when he was called to go out to the place which he would receive as an inheritance. And he went out, not knowing where he was going. By faith he dwelt in the land of promise as in a foreign country, dwelling in tents with Isaac and Jacob, the heirs with him of the same promise; for he waited for the city which has foundations, whose builder and maker is God."
+            </div>
+
+            <p>Hebrews 11 is the Bible's hall of witnesses for trust that has no immediate evidence. Abraham is the first name on the wall. The summary of his obedience is six words: <em>he went out, not knowing.</em> God had told him where he was going in only the vaguest terms — <em>a land that I will show you</em> — and Abraham packed up the household and started walking. He spent the rest of his life in tents, in a country that was not his, with promises that mostly outlived him. The son finally arrived in Abraham's old age; the nation took another four hundred years; the land took longer than that; the city <em>whose builder and maker is God</em> has not yet come down. Abraham believed it would. He died believing it without seeing it.</p>
+
+            <p>Paul puts the same principle into one verse for the Corinthian church: <em>we walk by faith, not by sight</em> (2 Cor 5:7). This is the third place radical trust gets stretched — not in the dramatic storm and not in the daily worry, but in the long slow obedience in a direction whose endpoint the disciple may never see. Most Christian lives are mostly this. The pastor who plants a church that does not flourish in his lifetime, the parent who prays for a child's salvation for thirty years, the missionary who buries a wife in foreign soil before the first convert is baptized — these are the Abrahams. The future is not visible. It is only promised. The disciple decides which of those is more reliable.</p>
+
+            <div class="illustration">
+                <strong>Adoniram Judson:</strong> In 1812 Adoniram and Ann Judson sailed for Burma, among the first American missionaries sent abroad. The work was painful and slow. Seven years passed before the first convert was baptized. Adoniram was shackled in a filthy prison for nearly two years during a war. They buried children. Ann's health gave out and she died young. From the outside, the mission looked like failure. Judson wrote in one of his darkest hours: <em>the future is as bright as the promises of God.</em> Today more than four million Christians in Myanmar trace their spiritual heritage to the Judsons.
+            </div>
+
+            <p>The disciple who walks by sight will not make it through that kind of work. The disciple who walks by faith will. The promises of God do not depend on what is currently visible; they depend on the character of the One who made them. This is why Hebrews defines faith as <em>the substance of things hoped for, the evidence of things not seen</em> (Heb 11:1). It is substance even before it is sight. It is evidence even before it is delivery. The radical disciple's sight reaches farther than his eyes do, because his eyes are looking at what God has said and not at what the circumstance is showing.</p>
+
+            <p>Storms, worries, and unseen futures are the three places trust gets stretched. The old wineskin of self-reliance cracks at every one of them. The new wineskin of faith holds. The Lord of the storm is in your boat. The Lord over worry is your Father. The Lord of sight has spoken the future already, and His Word does not return void. Where do you need radical trust today? In your storm, your worry, or your unseen tomorrow? Stretch.</p>
+
+        </div>
+        <div class="lang-es">
+
+            <p>Cuando Jesús dijo, "Nadie echa vino nuevo en odres viejos" (Lucas 5:37-38), estaba describiendo la vida radical que Él trae. El vino nuevo fermenta y se expande; los odres viejos y frágiles revientan bajo la presión. Los odres nuevos, sin embargo, se estiran para contener el vino nuevo. De la misma manera, Jesús llama a Sus discípulos a una fe que los estire más allá de lo que se siente seguro o cómodo — la clase de confianza que no se colapsa bajo tormentas, preocupaciones, o incertidumbre. Hay tres lugares donde esta confianza se estira: sobre las tormentas, sobre la preocupación, y sobre lo que el ojo aún no puede ver.</p>
+
+            <h3>1. El Señor Sobre las Tormentas</h3>
+
+            <div class="scripture">
+                <strong>Marcos 4:37-41 (RVG) — abreviado:</strong> "Y se levantó una gran tempestad de viento, y las olas batían contra la barca, de modo que ya se llenaba. Y Él estaba en la popa, durmiendo sobre un cabezal; y le despertaron, y le dijeron: Maestro, ¿no tienes cuidado que perecemos? Y levantándose, reprendió al viento, y dijo al mar: ¡Calla, enmudece! Y cesó el viento, y se hizo grande bonanza… Y temieron con gran temor, y se decían el uno al otro: ¿Quién es Éste, que aun el viento y el mar le obedecen?"
+            </div>
+
+            <p>Jesús pidió a los discípulos cruzar el Mar de Galilea, y se desató una tormenta tan feroz que la barca comenzó a llenarse de agua. Estos no eran marineros de fin de semana; varios de ellos eran pescadores profesionales. Habían manejado mal clima antes. Esta tormenta los asustó. ¿Y dónde estaba Jesús mientras ellos estaban aterrorizados? Dormido en la popa, con la cabeza sobre un cabezal. Lo despertaron sacudiéndolo con lo que es mitad acusación, mitad oración: <em>Maestro, ¿no tienes cuidado que perecemos?</em> Jesús se levantó, reprendió al viento, y dijo tres palabras al mar: <em>Calla, enmudece.</em> El viento cesó. El agua se aplanó. Y los hombres que habían tenido miedo de la tormenta ahora tenían algo más grande de qué tener miedo, porque Aquel que estaba en la barca con ellos mandaba el clima.</p>
+
+            <p>La lección no es que las tormentas nunca vendrán; la lección es que el Señor de la tormenta está en la barca contigo. La confianza radical no niega el clima; sabe quién está durmiendo sobre el cabezal. La fe no siempre detiene la tormenta, pero ancla al discípulo al Salvador que la gobierna. La pregunta de los discípulos — <em>¿no tienes cuidado?</em> — es la pregunta que cada tormenta saca de cada cristiano eventualmente, y la respuesta es la misma respuesta que Jesús les dio: Él tiene suficiente cuidado para estar en la barca, y tiene suficiente autoridad para hacer que el viento escuche.</p>
+
+            <div class="illustration">
+                <strong>Elisabeth Elliot:</strong> En 1956, cinco jóvenes misioneros en Ecuador salieron a alcanzar a la tribu Huaorani. Los Huaorani los atacaron, y los cinco fueron muertos con lanzas. La esposa de Jim Elliot, Elisabeth, tenía veintinueve años, con una bebé. Dos años después, fue a vivir entre la misma tribu que había matado a su esposo. Les mostró el amor de Cristo. Con el tiempo, muchos Huaorani vinieron a la fe, incluyendo algunos de los hombres que habían blandido las lanzas. El mismo Jesús que calmó el Mar de Galilea aún gobierna sobre las tormentas más feroces de la vida.
+            </div>
+
+            <p>La aplicación es directa. Cuando venga la tormenta — y vendrá — la primera respuesta del discípulo no es el pánico sino la oración. El discípulo dice, <em>Jesús está en mi barca.</em> Puede que no calme esta tormenta esta noche. Puede que la calme mañana. Puede que no la calme en absoluto y en cambio lleve al discípulo a través del medio de ella. Ninguno de estos resultados es señal de que Él no tiene cuidado. Los tres son señal de que Él es soberano y presente. La postura del discípulo radical hacia las tormentas no es por tanto desesperación sino descanso — el descanso de alguien que sabe que Aquel que está durmiendo con la cabeza sobre el cabezal es el mismo que hizo el viento.</p>
+
+            <h3>2. El Señor Sobre la Preocupación</h3>
+
+            <div class="scripture">
+                <strong>Mateo 6:25-27, 33 (RVG) — abreviado:</strong> "Por tanto os digo: No os afanéis por vuestra vida, qué habéis de comer, o qué habéis de beber; ni por vuestro cuerpo, qué habéis de vestir… Mirad las aves del cielo, que no siembran, ni siegan, ni recogen en graneros; y vuestro Padre celestial las alimenta. ¿No sois vosotros mucho mejores que ellas? ¿Quién de vosotros podrá, por mucho que se afane, añadir a su estatura un codo?… Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas."
+            </div>
+
+            <p>Si el capítulo de la tormenta es sobre los grandes temores, el capítulo de la preocupación es sobre los pequeños — comida, bebida, ropa, las cuentas que no dejaron de venir cuando el sueldo se acabó. Jesús los aborda directamente. Apunta a los discípulos a dos cosas ordinarias frente a ellos. Las aves no manejan agronegocios; no tienen graneros; el Padre las alimenta de todos modos. Los lirios no tejen telas; no tienen telares; Salomón en su completo vestuario real no estaba tan bien vestido como la flor silvestre que sale en tres semanas y se va en seis. El argumento no es que la comida y la ropa no importan. El argumento es que le importan al Padre.</p>
+
+            <p>Luego Jesús hace una pregunta que debería avergonzar a cada cristiano que ha estado despierto a las tres de la mañana: <em>¿quién de vosotros podrá, por mucho que se afane, añadir a su estatura un codo?</em> La respuesta honesta es ninguno. La preocupación nunca ha alargado una vida, pagado una cuenta, sanado a un niño, o restaurado un matrimonio. Lo que la preocupación realmente hace es imitar la oración mientras no logra nada del trabajo de la oración. Se siente como labor espiritual y produce solo fatiga. La alternativa del discípulo se nombra en el versículo 33: <em>buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas.</em> El orden importa. El reino es primero; las necesidades vienen después. Invierte el orden y aun las necesidades no son satisfechas apropiadamente.</p>
+
+            <div class="illustration">
+                <strong>El Refrigerador Vacío de Linda:</strong> Durante la crisis financiera del 2009, una madre soltera en Ohio llamada Linda perdió su trabajo. Su refrigerador estaba casi vacío. Después de acostar a sus tres hijos se quebrantó en la cocina y oró, <em>Señor, no sé cómo comeremos mañana. Pero Tú prometiste cuidarnos. Confío en Ti.</em> A la mañana siguiente una amiga de la iglesia tocó la puerta con bolsas de víveres. La amiga dijo, <em>No pude dormir anoche — sentí que Dios me decía que necesitabas esto.</em> El testimonio de Linda después no fue sobre la comida; fue que Dios ya sabía lo que ella necesitaba antes de pedírselo.
+            </div>
+
+            <p>Esto es cómo se ve Mateo 6 un miércoles por la noche sin dinero. La preocupación le dice al discípulo que se quede despierto calculando desastres que no han ocurrido. La confianza le dice al discípulo que entregue el cálculo a un Padre que ha contado cabellos en cabezas y mira caer pajarillos. El intercambio práctico que el discípulo radical aprende a hacer es uno pequeño y uno duro: reemplazar <em>¿y si?</em> por <em>aun si.</em> ¿Y si no viene el sueldo se vuelve <em>aun si no viene el sueldo, el Padre lo sabe.</em> ¿Y si el diagnóstico es malo se vuelve <em>aun si el diagnóstico es malo, el Padre está en el cuarto.</em> La gramática cambia; el corazón sigue.</p>
+
+            <h3>3. El Señor de la Vista</h3>
+
+            <div class="scripture">
+                <strong>Hebreos 11:8-10 (RVG) — abreviado:</strong> "Por fe Abraham, siendo llamado, obedeció para salir al lugar que había de recibir por herencia; y salió sin saber a dónde iba. Por fe habitó en la tierra prometida como en tierra ajena, morando en tabernáculos con Isaac y Jacob, herederos juntamente de la misma promesa; porque esperaba la ciudad que tiene fundamentos, cuyo arquitecto y hacedor es Dios."
+            </div>
+
+            <p>Hebreos 11 es el salón de testigos de la Biblia para la confianza que no tiene evidencia inmediata. Abraham es el primer nombre en la pared. El resumen de su obediencia es seis palabras: <em>salió sin saber a dónde iba.</em> Dios le había dicho a dónde iba solo en los términos más vagos — <em>una tierra que te mostraré</em> — y Abraham empacó la casa y comenzó a caminar. Pasó el resto de su vida en tiendas, en un país que no era el suyo, con promesas que mayormente lo sobrevivieron. El hijo finalmente llegó en la vejez de Abraham; la nación tomó otros cuatrocientos años; la tierra tomó más tiempo que eso; la ciudad <em>cuyo arquitecto y hacedor es Dios</em> aún no ha descendido. Abraham creyó que lo haría. Murió creyéndolo sin verlo.</p>
+
+            <p>Pablo pone el mismo principio en un versículo para la iglesia de Corinto: <em>por fe andamos, no por vista</em> (2 Cor 5:7). Este es el tercer lugar donde la confianza radical se estira — no en la tormenta dramática y no en la preocupación diaria, sino en la larga y lenta obediencia en una dirección cuyo punto final el discípulo puede que nunca vea. La mayoría de las vidas cristianas son mayormente esto. El pastor que planta una iglesia que no florece en su vida, el padre que ora por la salvación de un hijo por treinta años, el misionero que entierra a una esposa en suelo extranjero antes de que el primer converso sea bautizado — estos son los Abrahams. El futuro no es visible. Solo es prometido. El discípulo decide cuál de esos es más confiable.</p>
+
+            <div class="illustration">
+                <strong>Adoniram Judson:</strong> En 1812 Adoniram y Ann Judson zarparon hacia Birmania, entre los primeros misioneros estadounidenses enviados al extranjero. La obra fue dolorosa y lenta. Pasaron siete años antes de que el primer converso fuera bautizado. Adoniram fue encadenado en una prisión sucia por casi dos años durante una guerra. Enterraron hijos. La salud de Ann se quebró y murió joven. Desde afuera, la misión parecía un fracaso. Judson escribió en una de sus horas más oscuras: <em>el futuro es tan brillante como las promesas de Dios.</em> Hoy más de cuatro millones de cristianos en Myanmar trazan su herencia espiritual a los Judsons.
+            </div>
+
+            <p>El discípulo que camina por vista no lo logrará en esa clase de obra. El discípulo que camina por fe sí. Las promesas de Dios no dependen de lo que es actualmente visible; dependen del carácter de Aquel que las hizo. Por esto Hebreos define la fe como <em>la sustancia de las cosas que se esperan, la evidencia de las cosas que no se ven</em> (Heb 11:1). Es sustancia aun antes de ser vista. Es evidencia aun antes de la entrega. La vista del discípulo radical alcanza más lejos que sus ojos, porque sus ojos están mirando lo que Dios ha dicho y no lo que la circunstancia está mostrando.</p>
+
+            <p>Las tormentas, las preocupaciones, y los futuros no vistos son los tres lugares donde la confianza se estira. El odre viejo de la autosuficiencia se agrieta en cada uno de ellos. El odre nuevo de la fe sostiene. El Señor de la tormenta está en tu barca. El Señor sobre la preocupación es tu Padre. El Señor de la vista ya ha hablado el futuro, y Su Palabra no vuelve vacía. ¿Dónde necesitas confianza radical hoy? ¿En tu tormenta, tu preocupación, o tu mañana no visto? Estírate.</p>
+
+        </div>
+    </div>
+
+    <div class="registration-card" id="registrationCard">
+        <h3><span class="lang-en">Course Registration</span><span class="lang-es">Inscripción al Curso</span></h3>
+        <p><span class="lang-en">Welcome to <em>Radical Christianity: The Ten Commandments of Jesus</em>. Please register once at the start of the course. Your name and chosen track will be remembered across all 13 units.</span><span class="lang-es">Bienvenido a <em>Cristianismo Radical: Los Diez Mandamientos de Jesús</em>. Por favor regístrese una vez al comenzar el curso. Su nombre y la pista elegida serán recordados en las 13 unidades.</span></p>
+        <label for="studentName"><span class="lang-en">Full Name</span><span class="lang-es">Nombre Completo</span></label>
+        <input type="text" id="studentName" placeholder="">
+        <label for="studentTrack"><span class="lang-en">Track</span><span class="lang-es">Pista</span></label>
+        <select id="studentTrack">
+            <option value="cert">Certificate / Certificado</option>
+            <option value="thm">Th.M. — Master of Theology / Maestría en Teología</option>
+            <option value="mdiv">M.Div. — Master of Divinity / Maestría en Divinidad</option>
+        </select>
+        <button id="registerBtn"><span class="lang-en">Register &amp; Begin</span><span class="lang-es">Registrarse y Comenzar</span></button>
+        <div class="reg-saved" id="regSaved"><span class="lang-en">✓ Registration saved.</span><span class="lang-es">✓ Inscripción guardada.</span></div>
+    </div>
+
+    <div class="exam-section">
+        <h2><span class="lang-en">Examination — Radical Trust</span><span class="lang-es">Examen — Confianza Radical</span></h2>
+        <div class="exam-intro">
+            <p><span class="lang-en"><strong>Examination structure:</strong> 20 multiple-choice questions + 10 short-answer questions.</span><span class="lang-es"><strong>Estructura del examen:</strong> 20 preguntas de opción múltiple + 10 preguntas de respuesta corta.</span></p>
+            <p><span class="lang-en"><strong>Certificate track:</strong> 18 / 20 multiple-choice correct.</span><span class="lang-es"><strong>Pista de Certificado:</strong> 18 / 20 de opción múltiple correctas.</span></p>
+            <p><span class="lang-en"><strong>Th.M. / M.Div. tracks:</strong> 18 / 20 MC <em>and</em> 9 / 10 short-answer, scored independently.</span><span class="lang-es"><strong>Pistas Th.M. / M.Div.:</strong> 18 / 20 MC <em>y</em> 9 / 10 respuesta corta, calificadas independientemente.</span></p>
+            <p><span class="lang-en">If you do not pass, you may retake after a 15-minute lockout period.</span><span class="lang-es">Si no aprueba, podrá repetir el examen tras un período de bloqueo de 15 minutos.</span></p>
+        </div>
+
+        <div class="lockout-notice" id="lockoutNotice">
+            <div><span class="lang-en">Examination locked. You may retry in:</span><span class="lang-es">Examen bloqueado. Podrá reintentar en:</span></div>
+            <div class="lockout-countdown" id="lockoutCountdown">—</div>
+        </div>
+
+        <div id="mcContainer"></div>
+        <div id="saContainer"></div>
+
+        <div class="button-row">
+            <button class="btn-submit" id="submitBtn"><span class="lang-en">Submit Examination</span><span class="lang-es">Enviar Examen</span></button>
+            <button class="btn-reset" id="resetBtn"><span class="lang-en">Reset Answers</span><span class="lang-es">Reiniciar Respuestas</span></button>
+        </div>
+
+        <div class="results-section" id="resultsSection">
+            <h3><span class="lang-en">Results</span><span class="lang-es">Resultados</span></h3>
+            <div id="verdictBox"></div>
+            <div class="score-row" id="scoreRow"></div>
+            <div id="redirectNotice" class="redirect-notice"></div>
+        </div>
+    </div>
+
+    <div class="nav-links">
+        <a href="CTSRadicalUnit1.html"><span class="lang-en">← Previous Unit</span><span class="lang-es">← Unidad Anterior</span></a>
+        <a href="CTSRadicalUnit3.html"><span class="lang-en">Next Unit →</span><span class="lang-es">Unidad Siguiente →</span></a>
+    </div>
+</div>
+
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+const UNIT = 2;
+const COURSE_PREFIX = "radical_v2";
+const NEXT_URL = "CTSRadicalUnit3.html";
+const PREV_URL = "CTSRadicalUnit1.html";
+const IS_LAST_UNIT = false;
+const SHOW_REGISTRATION_CARD = false;
+const CERT_URL = "CTSRadicalCertificate.html";
+const STORAGE_PREFIX = "cts_radical_v2_progress";
+const PASS_MC = 18;
+const PASS_SA = 9;
+const LOCKOUT_MINUTES = 15;
+const REDIRECT_SECONDS = 3;
+
+function getStorageKey(suffix) { return `${STORAGE_PREFIX}:${suffix}`; }
+
+const mcQuestions = [
+    {
+        text: `<span class="lang-en">1. The phrase "No one pours new wine into old wineskins" (Luke 5:37-38) is used in this unit to describe:</span><span class="lang-es">1. La frase "Nadie echa vino nuevo en odres viejos" (Lucas 5:37-38) se usa en esta unidad para describir:</span>`,
+        options: [
+            `<span class="lang-en">A. A first-century recipe for fermented drink</span><span class="lang-es">A. Una receta del primer siglo para bebida fermentada</span>`,
+            `<span class="lang-en">B. The radical life Jesus brings — new wine that requires stretchable new wineskins of faith</span><span class="lang-es">B. La vida radical que Jesús trae — vino nuevo que requiere odres nuevos elásticos de fe</span>`,
+            `<span class="lang-en">C. The need to abandon all Old Testament teaching</span><span class="lang-es">C. La necesidad de abandonar toda enseñanza del Antiguo Testamento</span>`,
+            `<span class="lang-en">D. The difference between Jews and Gentiles</span><span class="lang-es">D. La diferencia entre judíos y gentiles</span>`
+        ],
+        correct: 1,
+        correctFeedback: `<span class="lang-en">Correct. Jesus calls His disciples into a faith that stretches beyond what feels safe — the kind of trust that does not collapse under storms, worries, or uncertainty. Old, brittle wineskins of self-reliance burst under the pressure of new life; new, flexible wineskins of faith hold.</span><span class="lang-es">Correcto. Jesús llama a Sus discípulos a una fe que se estire más allá de lo que se siente seguro — la clase de confianza que no se colapsa bajo tormentas, preocupaciones, o incertidumbre. Los odres viejos y frágiles de la autosuficiencia revientan bajo la presión de la nueva vida; los odres nuevos y flexibles de la fe sostienen.</span>`,
+        incorrectFeedback: `<span class="lang-en">The wineskins image is about radical life that stretches faith. Old self-reliance bursts under the pressure of new wine; new wineskins of trust hold what self-reliance cannot. The image is shorthand for the entire New Wineskins series.</span><span class="lang-es">La imagen de los odres es sobre la vida radical que estira la fe. La autosuficiencia vieja revienta bajo la presión del vino nuevo; los odres nuevos de la confianza sostienen lo que la autosuficiencia no puede. La imagen es taquigrafía para toda la serie de Odres Nuevos.</span>`
+    },
+    {
+        text: `<span class="lang-en">2. The three places radical trust gets stretched, according to this unit, are:</span><span class="lang-es">2. Los tres lugares donde la confianza radical se estira, según esta unidad, son:</span>`,
+        options: [
+            `<span class="lang-en">A. Money, marriage, ministry</span><span class="lang-es">A. Dinero, matrimonio, ministerio</span>`,
+            `<span class="lang-en">B. Past, present, future</span><span class="lang-es">B. Pasado, presente, futuro</span>`,
+            `<span class="lang-en">C. Body, soul, spirit</span><span class="lang-es">C. Cuerpo, alma, espíritu</span>`,
+            `<span class="lang-en">D. Over storms, over worry, over what the eye cannot yet see</span><span class="lang-es">D. Sobre las tormentas, sobre la preocupación, sobre lo que el ojo aún no puede ver</span>`
+        ],
+        correct: 3,
+        correctFeedback: `<span class="lang-en">Correct. Storms (great fears), worry (daily small fears), and unseen futures (the long obedience toward what is only promised). These three are where the old wineskin cracks and where the new wineskin must stretch. Each has a different scripture anchor: Mark 4, Matthew 6, and Hebrews 11.</span><span class="lang-es">Correcto. Las tormentas (grandes temores), la preocupación (pequeños temores diarios), y los futuros no vistos (la larga obediencia hacia lo que solo es prometido). Estos tres son donde el odre viejo se agrieta y donde el odre nuevo debe estirarse. Cada uno tiene un ancla diferente de la Escritura: Marcos 4, Mateo 6, y Hebreos 11.</span>`,
+        incorrectFeedback: `<span class="lang-en">Storms, worry, and unseen futures. These are the three stress-tests of faith in Wayne's framework — drawn from Mark 4 (Galilee storm), Matthew 6 (Sermon on the Mount), and Hebrews 11 (Abraham going out not knowing).</span><span class="lang-es">Tormentas, preocupación, y futuros no vistos. Estos son los tres exámenes de tensión de la fe en el marco de Wayne — extraídos de Marcos 4 (tormenta de Galilea), Mateo 6 (Sermón del Monte), y Hebreos 11 (Abraham saliendo sin saber).</span>`
+    },
+    {
+        text: `<span class="lang-en">3. In Mark 4:37-41, where was Jesus during the storm on the Sea of Galilee?</span><span class="lang-es">3. En Marcos 4:37-41, ¿dónde estaba Jesús durante la tormenta en el Mar de Galilea?</span>`,
+        options: [
+            `<span class="lang-en">A. On the shore, watching from a distance</span><span class="lang-es">A. En la orilla, mirando desde lejos</span>`,
+            `<span class="lang-en">B. Praying on a mountain</span><span class="lang-es">B. Orando en un monte</span>`,
+            `<span class="lang-en">C. Asleep in the stern of the boat with His head on a pillow</span><span class="lang-es">C. Dormido en la popa de la barca con la cabeza sobre un cabezal</span>`,
+            `<span class="lang-en">D. Walking on the water toward them</span><span class="lang-es">D. Caminando sobre las aguas hacia ellos</span>`
+        ],
+        correct: 2,
+        correctFeedback: `<span class="lang-en">Correct. Asleep in the stern, head on a cushion. The disciples were not crossing alone; the Lord of the storm was in the boat with them. The detail of His sleeping is not incidental — it shows complete confidence in His own authority over what was scaring His professional-fisherman friends.</span><span class="lang-es">Correcto. Dormido en la popa, cabeza sobre un cabezal. Los discípulos no cruzaban solos; el Señor de la tormenta estaba en la barca con ellos. El detalle de Su dormir no es incidental — muestra completa confianza en Su propia autoridad sobre lo que estaba asustando a Sus amigos pescadores profesionales.</span>`,
+        incorrectFeedback: `<span class="lang-en">Asleep in the stern, on a pillow. The Lord of the storm was in the boat with them. His sleep was not abandonment; it was authority. He had nothing to fear from weather He had made.</span><span class="lang-es">Dormido en la popa, sobre un cabezal. El Señor de la tormenta estaba en la barca con ellos. Su sueño no era abandono; era autoridad. No tenía nada que temer del clima que Él había hecho.</span>`
+    },
+    {
+        text: `<span class="lang-en">4. The disciples' question to Jesus during the storm — "Do You not care that we are perishing?" — is described in this unit as:</span><span class="lang-es">4. La pregunta de los discípulos a Jesús durante la tormenta — "¿No tienes cuidado que perecemos?" — se describe en esta unidad como:</span>`,
+        options: [
+            `<span class="lang-en">A. Half-accusation, half-prayer</span><span class="lang-es">A. Mitad acusación, mitad oración</span>`,
+            `<span class="lang-en">B. A confession of sin</span><span class="lang-es">B. Una confesión de pecado</span>`,
+            `<span class="lang-en">C. A theological statement about omniscience</span><span class="lang-es">C. Una declaración teológica sobre la omnisciencia</span>`,
+            `<span class="lang-en">D. A request for additional disciples</span><span class="lang-es">D. Una petición de discípulos adicionales</span>`
+        ],
+        correct: 0,
+        correctFeedback: `<span class="lang-en">Correct. Half-accusation, half-prayer — the question every storm eventually draws out of every Christian. The disciples were not wrong to wake Him; they were wrong about whether He cared. The answer is the same Jesus gave them: He cares enough to be in the boat, and has authority enough to make the wind listen.</span><span class="lang-es">Correcto. Mitad acusación, mitad oración — la pregunta que cada tormenta eventualmente saca de cada cristiano. Los discípulos no estaban equivocados en despertarlo; estaban equivocados sobre si Él tenía cuidado. La respuesta es la misma que Jesús les dio: Él tiene suficiente cuidado para estar en la barca, y tiene suficiente autoridad para hacer que el viento escuche.</span>`,
+        incorrectFeedback: `<span class="lang-en">Half-accusation, half-prayer. The disciples were not wrong to wake Jesus; they were wrong to doubt He cared. Storms eventually pull this question from every disciple, and the answer is unchanged across centuries.</span><span class="lang-es">Mitad acusación, mitad oración. Los discípulos no estaban equivocados en despertar a Jesús; estaban equivocados en dudar que Él tenía cuidado. Las tormentas eventualmente sacan esta pregunta de cada discípulo, y la respuesta no ha cambiado a través de los siglos.</span>`
+    },
+    {
+        text: `<span class="lang-en">5. According to this unit, the lesson of Mark 4 is NOT that storms will never come. The actual lesson is:</span><span class="lang-es">5. Según esta unidad, la lección de Marcos 4 NO es que las tormentas nunca vendrán. La lección real es:</span>`,
+        options: [
+            `<span class="lang-en">A. The Lord of the storm is in the boat with you</span><span class="lang-es">A. El Señor de la tormenta está en la barca contigo</span>`,
+            `<span class="lang-en">B. The disciple should avoid sailing</span><span class="lang-es">B. El discípulo debe evitar navegar</span>`,
+            `<span class="lang-en">C. The disciple should learn to swim well</span><span class="lang-es">C. El discípulo debe aprender a nadar bien</span>`,
+            `<span class="lang-en">D. Storms reveal hidden sin</span><span class="lang-es">D. Las tormentas revelan el pecado oculto</span>`
+        ],
+        correct: 0,
+        correctFeedback: `<span class="lang-en">Correct. Radical trust does not deny the weather; it knows who is sleeping on the cushion. Faith does not always stop the storm, but it anchors the disciple to the Savior who rules over it. Storms are guaranteed; abandonment is not.</span><span class="lang-es">Correcto. La confianza radical no niega el clima; sabe quién está durmiendo sobre el cabezal. La fe no siempre detiene la tormenta, pero ancla al discípulo al Salvador que la gobierna. Las tormentas están garantizadas; el abandono no.</span>`,
+        incorrectFeedback: `<span class="lang-en">The Lord of the storm is in the boat with you. The presence of Christ is not removed by the presence of a storm; in fact, the storm is the occasion that demonstrates He has authority even over what frightens experienced fishermen.</span><span class="lang-es">El Señor de la tormenta está en la barca contigo. La presencia de Cristo no se quita por la presencia de una tormenta; de hecho, la tormenta es la ocasión que demuestra que Él tiene autoridad aun sobre lo que asusta a pescadores experimentados.</span>`
+    },
+    {
+        text: `<span class="lang-en">6. After Jesus stilled the storm, this unit says the disciples now had something larger to fear because:</span><span class="lang-es">6. Después de que Jesús calmó la tormenta, esta unidad dice que los discípulos ahora tenían algo más grande que temer porque:</span>`,
+        options: [
+            `<span class="lang-en">A. Another storm was coming</span><span class="lang-es">A. Otra tormenta venía</span>`,
+            `<span class="lang-en">B. The boat was still leaking</span><span class="lang-es">B. La barca aún goteaba</span>`,
+            `<span class="lang-en">C. The One in the boat with them commanded weather</span><span class="lang-es">C. Aquel que estaba en la barca con ellos mandaba el clima</span>`,
+            `<span class="lang-en">D. They had failed a test of faith</span><span class="lang-es">D. Habían fallado una prueba de fe</span>`
+        ],
+        correct: 2,
+        correctFeedback: `<span class="lang-en">Correct. The men who had been afraid of the storm now had something larger to be afraid of, because the One in the boat with them commanded weather. They "feared exceedingly" — not the wind, which had just stopped, but Jesus, who had just stopped it. Recognition of authority always reframes the fear.</span><span class="lang-es">Correcto. Los hombres que habían tenido miedo de la tormenta ahora tenían algo más grande de qué tener miedo, porque Aquel que estaba en la barca con ellos mandaba el clima. "Temieron con gran temor" — no al viento, que acababa de detenerse, sino a Jesús, quien acababa de detenerlo. El reconocimiento de la autoridad siempre reencuadra el temor.</span>`,
+        incorrectFeedback: `<span class="lang-en">Because the One in the boat commanded weather. Their final fear was reverent fear of Jesus, not residual fear of the storm. The text says "they feared exceedingly" — the storm was over, but the awe of Christ's authority had just begun.</span><span class="lang-es">Porque Aquel que estaba en la barca mandaba el clima. Su temor final fue temor reverente a Jesús, no temor residual a la tormenta. El texto dice "temieron con gran temor" — la tormenta había terminado, pero el asombro de la autoridad de Cristo apenas había comenzado.</span>`
+    },
+    {
+        text: `<span class="lang-en">7. The Elisabeth Elliot illustration describes her response to the 1956 killing of her husband and four other missionaries by the Huaorani as:</span><span class="lang-es">7. La ilustración de Elisabeth Elliot describe su respuesta a la matanza en 1956 de su esposo y otros cuatro misioneros por los Huaorani como:</span>`,
+        options: [
+            `<span class="lang-en">A. Returning home to America permanently</span><span class="lang-es">A. Regresar a casa a Estados Unidos permanentemente</span>`,
+            `<span class="lang-en">B. Going to live among the very tribe that had killed her husband</span><span class="lang-es">B. Ir a vivir entre la misma tribu que había matado a su esposo</span>`,
+            `<span class="lang-en">C. Petitioning the Ecuadorian government for justice</span><span class="lang-es">C. Solicitar al gobierno ecuatoriano por justicia</span>`,
+            `<span class="lang-en">D. Founding a translation institute</span><span class="lang-es">D. Fundar un instituto de traducción</span>`
+        ],
+        correct: 1,
+        correctFeedback: `<span class="lang-en">Correct. Two years after her husband Jim was killed, Elisabeth — twenty-nine, with a baby daughter — went to live among the Huaorani. Many came to faith, including some of the men who had wielded the spears. The same Jesus who stilled the Sea of Galilee still rules over life's fiercest storms.</span><span class="lang-es">Correcto. Dos años después de que su esposo Jim fue muerto, Elisabeth — veintinueve años, con una bebé — fue a vivir entre los Huaorani. Muchos vinieron a la fe, incluyendo algunos de los hombres que habían blandido las lanzas. El mismo Jesús que calmó el Mar de Galilea aún gobierna sobre las tormentas más feroces de la vida.</span>`,
+        incorrectFeedback: `<span class="lang-en">She went to live among the Huaorani. Trust in storms is not a posture for the safe; it is the only posture that survives the unsafe. Elisabeth's life demonstrated that the Lord of the storm holds the disciple even when the storm has already done its worst.</span><span class="lang-es">Fue a vivir entre los Huaorani. La confianza en las tormentas no es una postura para los seguros; es la única postura que sobrevive lo inseguro. La vida de Elisabeth demostró que el Señor de la tormenta sostiene al discípulo aun cuando la tormenta ya ha hecho lo peor.</span>`
+    },
+    {
+        text: `<span class="lang-en">8. In Matthew 6:25-27, Jesus uses two ordinary things to argue against worry. They are:</span><span class="lang-es">8. En Mateo 6:25-27, Jesús usa dos cosas ordinarias para argumentar contra la preocupación. Ellas son:</span>`,
+        options: [
+            `<span class="lang-en">A. Birds of the air and lilies of the field</span><span class="lang-es">A. Las aves del cielo y los lirios del campo</span>`,
+            `<span class="lang-en">B. Sheep and shepherds</span><span class="lang-es">B. Las ovejas y los pastores</span>`,
+            `<span class="lang-en">C. Foxes and their dens</span><span class="lang-es">C. Las zorras y sus madrigueras</span>`,
+            `<span class="lang-en">D. Vines and branches</span><span class="lang-es">D. Las vides y las ramas</span>`
+        ],
+        correct: 0,
+        correctFeedback: `<span class="lang-en">Correct. Birds and lilies. Birds do not run agribusiness, have no granaries, and the Father feeds them. Lilies do not weave fabric, have no looms, and Solomon was not as well dressed as one of them. The argument is not that food and clothing do not matter; the argument is that they matter to the Father.</span><span class="lang-es">Correcto. Aves y lirios. Las aves no manejan agronegocios, no tienen graneros, y el Padre las alimenta. Los lirios no tejen telas, no tienen telares, y Salomón no estaba tan bien vestido como uno de ellos. El argumento no es que la comida y la ropa no importan; el argumento es que le importan al Padre.</span>`,
+        incorrectFeedback: `<span class="lang-en">Birds and lilies. Two ordinary things Jesus pointed to right in front of His listeners. Neither has the storage systems humans use; both are fed and clothed anyway. The Father's attention does not require human effort to attract it.</span><span class="lang-es">Aves y lirios. Dos cosas ordinarias a las que Jesús apuntó justo frente a Sus oyentes. Ninguno tiene los sistemas de almacenamiento que usan los humanos; ambos son alimentados y vestidos de todos modos. La atención del Padre no requiere esfuerzo humano para atraerla.</span>`
+    },
+    {
+        text: `<span class="lang-en">9. According to this unit, what does worry actually do?</span><span class="lang-es">9. Según esta unidad, ¿qué hace realmente la preocupación?</span>`,
+        options: [
+            `<span class="lang-en">A. Lengthens life</span><span class="lang-es">A. Alarga la vida</span>`,
+            `<span class="lang-en">B. Demonstrates faith</span><span class="lang-es">B. Demuestra fe</span>`,
+            `<span class="lang-en">C. Pleases God when it concerns serious matters</span><span class="lang-es">C. Agrada a Dios cuando concierne a asuntos serios</span>`,
+            `<span class="lang-en">D. Impersonates prayer while accomplishing none of prayer's work</span><span class="lang-es">D. Imita la oración mientras no logra nada del trabajo de la oración</span>`
+        ],
+        correct: 3,
+        correctFeedback: `<span class="lang-en">Correct. Worry feels like spiritual labor but produces only fatigue. It has never lengthened a life, paid a bill, healed a child, or restored a marriage. Jesus' rhetorical question in v. 27 — "which of you by worrying can add one cubit to his stature?" — has only one honest answer: none.</span><span class="lang-es">Correcto. La preocupación se siente como labor espiritual pero produce solo fatiga. Nunca ha alargado una vida, pagado una cuenta, sanado a un niño, o restaurado un matrimonio. La pregunta retórica de Jesús en el v. 27 — "¿quién de vosotros podrá, por mucho que se afane, añadir a su estatura un codo?" — tiene solo una respuesta honesta: ninguno.</span>`,
+        incorrectFeedback: `<span class="lang-en">Worry impersonates prayer while accomplishing none of prayer's work. It feels spiritual; it accomplishes nothing. The disciple who replaces worry with prayer trades fatigue for fruit.</span><span class="lang-es">La preocupación imita la oración mientras no logra nada del trabajo de la oración. Se siente espiritual; no logra nada. El discípulo que reemplaza la preocupación con la oración intercambia la fatiga por el fruto.</span>`
+    },
+    {
+        text: `<span class="lang-en">10. Matthew 6:33 names the alternative to worry. It is:</span><span class="lang-es">10. Mateo 6:33 nombra la alternativa a la preocupación. Es:</span>`,
+        options: [
+            `<span class="lang-en">A. Seeking first the kingdom of God and His righteousness</span><span class="lang-es">A. Buscar primeramente el reino de Dios y su justicia</span>`,
+            `<span class="lang-en">B. Sleeping more</span><span class="lang-es">B. Dormir más</span>`,
+            `<span class="lang-en">C. Working harder</span><span class="lang-es">C. Trabajar más duro</span>`,
+            `<span class="lang-en">D. Avoiding the topic of money entirely</span><span class="lang-es">D. Evitar el tema del dinero por completo</span>`
+        ],
+        correct: 0,
+        correctFeedback: `<span class="lang-en">Correct. Seek first the kingdom of God and His righteousness, and all these things shall be added to you. The order matters. The kingdom is first; the needs come after. Reverse the order and even the needs do not get met properly. The promise is not "all these things" first and "the kingdom" later; it is exactly the reverse.</span><span class="lang-es">Correcto. Buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas. El orden importa. El reino es primero; las necesidades vienen después. Invierte el orden y aun las necesidades no son satisfechas apropiadamente. La promesa no es "todas estas cosas" primero y "el reino" después; es exactamente lo contrario.</span>`,
+        incorrectFeedback: `<span class="lang-en">Seek first the kingdom of God and His righteousness. The order is the point. Kingdom first; everything else added. Reverse the order and even the basic needs are pursued in the wrong way.</span><span class="lang-es">Buscad primeramente el reino de Dios y su justicia. El orden es el punto. El reino primero; todo lo demás añadido. Invierte el orden y aun las necesidades básicas se persiguen de manera equivocada.</span>`
+    },
+    {
+        text: `<span class="lang-en">11. The Linda illustration describes a single mother in Ohio in 2009 who:</span><span class="lang-es">11. La ilustración de Linda describe a una madre soltera en Ohio en el 2009 que:</span>`,
+        options: [
+            `<span class="lang-en">A. Won the lottery and tithed it to her church</span><span class="lang-es">A. Ganó la lotería y diezmó a su iglesia</span>`,
+            `<span class="lang-en">B. Lost her job, had a nearly empty refrigerator, prayed in surrender, and received groceries the next morning from a friend who said she could not sleep</span><span class="lang-es">B. Perdió su trabajo, tenía un refrigerador casi vacío, oró en rendición, y recibió víveres a la mañana siguiente de una amiga que dijo no haber podido dormir</span>`,
+            `<span class="lang-en">C. Started a soup kitchen for the homeless</span><span class="lang-es">C. Comenzó un comedor para personas sin hogar</span>`,
+            `<span class="lang-en">D. Moved her family overseas to be missionaries</span><span class="lang-es">D. Mudó a su familia al extranjero para ser misioneros</span>`
+        ],
+        correct: 1,
+        correctFeedback: `<span class="lang-en">Correct. Linda had three children, a nearly empty fridge, and no idea how they would eat. After tucking the children into bed she prayed in surrender: "Lord, I don't know how we'll eat tomorrow. But You promised to care for us. I trust You." The next morning a friend arrived with groceries, saying she could not sleep — God had told her Linda needed this. Linda's testimony was not the food; it was that God already knew before she asked.</span><span class="lang-es">Correcto. Linda tenía tres hijos, un refrigerador casi vacío, y ninguna idea de cómo comerían. Después de acostar a los niños oró en rendición: "Señor, no sé cómo comeremos mañana. Pero Tú prometiste cuidarnos. Confío en Ti." A la mañana siguiente una amiga llegó con víveres, diciendo que no había podido dormir — Dios le había dicho que Linda necesitaba esto. El testimonio de Linda no fue la comida; fue que Dios ya sabía antes de pedírselo.</span>`,
+        incorrectFeedback: `<span class="lang-en">Lost her job, had a nearly empty fridge, prayed in surrender, and received groceries the next morning from a friend who said she could not sleep. The unseen provision Jesus described in Matthew 6 became seen on Linda's doorstep.</span><span class="lang-es">Perdió su trabajo, tenía un refrigerador casi vacío, oró en rendición, y recibió víveres a la mañana siguiente de una amiga que dijo no haber podido dormir. La provisión no vista que Jesús describió en Mateo 6 se hizo vista en la puerta de Linda.</span>`
+    },
+    {
+        text: `<span class="lang-en">12. The "small and hard" grammatical exchange this unit teaches the disciple to make is:</span><span class="lang-es">12. El intercambio gramatical "pequeño y duro" que esta unidad enseña al discípulo a hacer es:</span>`,
+        options: [
+            `<span class="lang-en">A. Replace "I" with "we"</span><span class="lang-es">A. Reemplazar "yo" con "nosotros"</span>`,
+            `<span class="lang-en">B. Replace "what if" with "even if"</span><span class="lang-es">B. Reemplazar "¿y si?" con "aun si"</span>`,
+            `<span class="lang-en">C. Replace "no" with "yes"</span><span class="lang-es">C. Reemplazar "no" con "sí"</span>`,
+            `<span class="lang-en">D. Replace "later" with "now"</span><span class="lang-es">D. Reemplazar "después" con "ahora"</span>`
+        ],
+        correct: 1,
+        correctFeedback: `<span class="lang-en">Correct. "What if the paycheck does not come" becomes "even if the paycheck does not come, the Father knows." "What if the diagnosis is bad" becomes "even if the diagnosis is bad, the Father is in the room." The grammar changes; the heart follows. Worry lives in "what if"; trust lives in "even if."</span><span class="lang-es">Correcto. "¿Y si no viene el sueldo?" se vuelve "aun si no viene el sueldo, el Padre lo sabe." "¿Y si el diagnóstico es malo?" se vuelve "aun si el diagnóstico es malo, el Padre está en el cuarto." La gramática cambia; el corazón sigue. La preocupación vive en "¿y si?"; la confianza vive en "aun si."</span>`,
+        incorrectFeedback: `<span class="lang-en">Replace "what if" with "even if." "What if" calculates disasters that have not happened; "even if" surrenders the disaster to a Father who has already counted hairs and watches sparrows fall. Same syllables, different theology.</span><span class="lang-es">Reemplazar "¿y si?" con "aun si." "¿Y si?" calcula desastres que no han ocurrido; "aun si" entrega el desastre a un Padre que ya ha contado cabellos y mira caer pajarillos. Las mismas sílabas, distinta teología.</span>`
+    },
+    {
+        text: `<span class="lang-en">13. Hebrews 11:8 summarizes Abraham's obedience in six words. They are:</span><span class="lang-es">13. Hebreos 11:8 resume la obediencia de Abraham en seis palabras. Ellas son:</span>`,
+        options: [
+            `<span class="lang-en">A. He kept his eyes on Jesus</span><span class="lang-es">A. Mantuvo sus ojos en Jesús</span>`,
+            `<span class="lang-en">B. He prayed and waited for guidance</span><span class="lang-es">B. Oró y esperó dirección</span>`,
+            `<span class="lang-en">C. He went out, not knowing where</span><span class="lang-es">C. Salió, sin saber a dónde</span>`,
+            `<span class="lang-en">D. He sacrificed his only beloved son</span><span class="lang-es">D. Sacrificó a su único hijo amado</span>`
+        ],
+        correct: 2,
+        correctFeedback: `<span class="lang-en">Correct. "He went out, not knowing where he was going." God had told him only "a land that I will show you," and Abraham packed up the household and started walking. He spent the rest of his life in tents, in a country that was not his, with promises that mostly outlived him. This is the third stretch of trust: the long obedience without immediate evidence.</span><span class="lang-es">Correcto. "Salió sin saber a dónde iba." Dios le había dicho solo "una tierra que te mostraré," y Abraham empacó la casa y comenzó a caminar. Pasó el resto de su vida en tiendas, en un país que no era el suyo, con promesas que mayormente lo sobrevivieron. Este es el tercer estiramiento de la confianza: la larga obediencia sin evidencia inmediata.</span>`,
+        incorrectFeedback: `<span class="lang-en">"He went out, not knowing where he was going." This is the first name in Hebrews 11's hall of witnesses, and the model for trusting the Lord of sight. The most reliable thing about Abraham's destination was God's word, not the visible map.</span><span class="lang-es">"Salió sin saber a dónde iba." Este es el primer nombre en el salón de testigos de Hebreos 11, y el modelo para confiar en el Señor de la vista. Lo más confiable sobre el destino de Abraham era la palabra de Dios, no el mapa visible.</span>`
+    },
+    {
+        text: `<span class="lang-en">14. Paul's one-verse summary of the same principle, given to the Corinthian church, is:</span><span class="lang-es">14. El resumen de un versículo de Pablo del mismo principio, dado a la iglesia de Corinto, es:</span>`,
+        options: [
+            `<span class="lang-en">A. "We walk by faith, not by sight" (2 Cor 5:7)</span><span class="lang-es">A. "Por fe andamos, no por vista" (2 Cor 5:7)</span>`,
+            `<span class="lang-en">B. "All things work together for good" (Rom 8:28)</span><span class="lang-es">B. "Todas las cosas obran para bien" (Rom 8:28)</span>`,
+            `<span class="lang-en">C. "I can do all things through Christ" (Phil 4:13)</span><span class="lang-es">C. "Todo lo puedo en Cristo" (Fil 4:13)</span>`,
+            `<span class="lang-en">D. "Be anxious for nothing" (Phil 4:6)</span><span class="lang-es">D. "Por nada estéis afanosos" (Fil 4:6)</span>`
+        ],
+        correct: 0,
+        correctFeedback: `<span class="lang-en">Correct. 2 Corinthians 5:7 — "we walk by faith, not by sight." Paul condenses the Abraham principle into a single verse: the disciple's sight reaches farther than his eyes do, because his eyes look at what God has said and not at what the circumstance is showing. The destination is reliable because the One who described it does not lie.</span><span class="lang-es">Correcto. 2 Corintios 5:7 — "por fe andamos, no por vista." Pablo condensa el principio de Abraham en un solo versículo: la vista del discípulo alcanza más lejos que sus ojos, porque sus ojos miran lo que Dios ha dicho y no lo que la circunstancia está mostrando. El destino es confiable porque Aquel que lo describió no miente.</span>`,
+        incorrectFeedback: `<span class="lang-en">"We walk by faith, not by sight." A six-word summary of Abraham's career and the model for the disciple's. Eyes are useful but not decisive; what God has said is decisive.</span><span class="lang-es">"Por fe andamos, no por vista." Un resumen de seis palabras de la carrera de Abraham y el modelo para el discípulo. Los ojos son útiles pero no decisivos; lo que Dios ha dicho es decisivo.</span>`
+    },
+    {
+        text: `<span class="lang-en">15. Adoniram Judson's famous statement, written in one of his darkest hours, was:</span><span class="lang-es">15. La famosa declaración de Adoniram Judson, escrita en una de sus horas más oscuras, fue:</span>`,
+        options: [
+            `<span class="lang-en">A. "God will turn this around in my lifetime"</span><span class="lang-es">A. "Dios cambiará esto en mi vida"</span>`,
+            `<span class="lang-en">B. "I have made my peace with failure"</span><span class="lang-es">B. "He hecho mi paz con el fracaso"</span>`,
+            `<span class="lang-en">C. "The future is as bright as the promises of God"</span><span class="lang-es">C. "El futuro es tan brillante como las promesas de Dios"</span>`,
+            `<span class="lang-en">D. "I will not return to Boston defeated"</span><span class="lang-es">D. "No regresaré a Boston derrotado"</span>`
+        ],
+        correct: 2,
+        correctFeedback: `<span class="lang-en">Correct. Judson's seven years before the first convert, his nearly two years in a filthy prison, his buried children, and Ann's young death by collapse of health — none of it shook the underlying conviction: the future is as bright as the promises of God. Today more than four million Christians in Myanmar trace their spiritual heritage to him.</span><span class="lang-es">Correcto. Los siete años de Judson antes del primer converso, sus casi dos años en una prisión sucia, sus hijos enterrados, y la muerte temprana de Ann por el colapso de la salud — nada de ello sacudió la convicción subyacente: el futuro es tan brillante como las promesas de Dios. Hoy más de cuatro millones de cristianos en Myanmar trazan su herencia espiritual a él.</span>`,
+        incorrectFeedback: `<span class="lang-en">"The future is as bright as the promises of God." Judson did not see the four million Burmese Christians in his lifetime; he died trusting the promises that made them possible. His statement is the radical disciple's anchor when the visible evidence runs out.</span><span class="lang-es">"El futuro es tan brillante como las promesas de Dios." Judson no vio los cuatro millones de cristianos birmanos en su vida; murió confiando en las promesas que los hicieron posibles. Su declaración es el ancla del discípulo radical cuando la evidencia visible se agota.</span>`
+    },
+    {
+        text: `<span class="lang-en">16. Hebrews 11:1 defines faith as:</span><span class="lang-es">16. Hebreos 11:1 define la fe como:</span>`,
+        options: [
+            `<span class="lang-en">A. The absence of doubt</span><span class="lang-es">A. La ausencia de la duda</span>`,
+            `<span class="lang-en">B. The feeling of certainty</span><span class="lang-es">B. El sentimiento de certeza</span>`,
+            `<span class="lang-en">C. The reward of obedience</span><span class="lang-es">C. La recompensa de la obediencia</span>`,
+            `<span class="lang-en">D. The substance of things hoped for, the evidence of things not seen</span><span class="lang-es">D. La sustancia de las cosas que se esperan, la evidencia de las cosas que no se ven</span>`
+        ],
+        correct: 3,
+        correctFeedback: `<span class="lang-en">Correct. Hebrews 11:1 — faith is the substance of things hoped for, the evidence of things not seen. It is substance even before it is sight. It is evidence even before it is delivery. The radical disciple has substantial possessions and convincing evidence that the rest of the world cannot see because faith treats what God said as real.</span><span class="lang-es">Correcto. Hebreos 11:1 — la fe es la sustancia de las cosas que se esperan, la evidencia de las cosas que no se ven. Es sustancia aun antes de ser vista. Es evidencia aun antes de la entrega. El discípulo radical tiene posesiones sustanciales y evidencia convincente que el resto del mundo no puede ver porque la fe trata como real lo que Dios dijo.</span>`,
+        incorrectFeedback: `<span class="lang-en">Substance and evidence — both terms imply that faith holds something real, not something imagined. The hoped-for and the unseen become substantive and evidential in the believer's life before they become physically present.</span><span class="lang-es">Sustancia y evidencia — ambos términos implican que la fe sostiene algo real, no algo imaginado. Lo esperado y lo no visto se vuelven sustanciales y evidenciales en la vida del creyente antes de volverse físicamente presentes.</span>`
+    },
+    {
+        text: `<span class="lang-en">17. The unit names three categories of disciple who exemplify the "long, slow obedience without seeing the endpoint":</span><span class="lang-es">17. La unidad nombra tres categorías de discípulos que ejemplifican la "larga y lenta obediencia sin ver el punto final":</span>`,
+        options: [
+            `<span class="lang-en">A. Theologians, professors, and seminary deans</span><span class="lang-es">A. Teólogos, profesores, y decanos de seminario</span>`,
+            `<span class="lang-en">B. Apostles, prophets, and evangelists</span><span class="lang-es">B. Apóstoles, profetas, y evangelistas</span>`,
+            `<span class="lang-en">C. Bishops, deacons, and elders</span><span class="lang-es">C. Obispos, diáconos, y ancianos</span>`,
+            `<span class="lang-en">D. The pastor whose church does not flourish in his lifetime, the parent who prays for a child for thirty years, the missionary who buries a wife before the first convert is baptized</span><span class="lang-es">D. El pastor cuya iglesia no florece en su vida, el padre que ora por un hijo por treinta años, el misionero que entierra a una esposa antes del primer converso bautizado</span>`
+        ],
+        correct: 3,
+        correctFeedback: `<span class="lang-en">Correct. These are "the Abrahams" — ordinary disciples in long obedience whose endpoint they will not personally see. Most Christian lives are mostly this. The future is not visible to them; it is only promised. Their faithfulness rests on the character of the One making the promises, not on visible returns within their lifespan.</span><span class="lang-es">Correcto. Estos son "los Abrahams" — discípulos ordinarios en larga obediencia cuyo punto final ellos no verán personalmente. La mayoría de las vidas cristianas son mayormente esto. El futuro no es visible para ellos; solo es prometido. Su fidelidad descansa en el carácter de Aquel que hace las promesas, no en retornos visibles dentro de su lapso de vida.</span>`,
+        incorrectFeedback: `<span class="lang-en">The unfortunate pastor, the long-praying parent, the bereaved missionary — these are the Abrahams. Most disciples are in the third category of trust most of the time, walking by faith toward what they will not personally see.</span><span class="lang-es">El pastor desafortunado, el padre que ora por largo tiempo, el misionero enlutado — estos son los Abrahams. La mayoría de los discípulos están en la tercera categoría de confianza la mayor parte del tiempo, caminando por fe hacia lo que no verán personalmente.</span>`
+    },
+    {
+        text: `<span class="lang-en">18. According to the unit, the promises of God do not depend on what is currently visible. They depend on:</span><span class="lang-es">18. Según la unidad, las promesas de Dios no dependen de lo que es actualmente visible. Dependen de:</span>`,
+        options: [
+            `<span class="lang-en">A. The strength of the disciple's faith</span><span class="lang-es">A. La fuerza de la fe del discípulo</span>`,
+            `<span class="lang-en">B. The character of the One who made them</span><span class="lang-es">B. El carácter de Aquel que las hizo</span>`,
+            `<span class="lang-en">C. The political climate of the age</span><span class="lang-es">C. El clima político de la época</span>`,
+            `<span class="lang-en">D. The unity of the church</span><span class="lang-es">D. La unidad de la iglesia</span>`
+        ],
+        correct: 1,
+        correctFeedback: `<span class="lang-en">Correct. The character of the One who made them. God's faithfulness is the substance behind every promise — the disciple's faith does not generate the promise's reliability, it receives it. Even the weakest faith holds onto the strongest God; even the strongest faith without a faithful God would hold nothing. The reliability is on His side, not ours.</span><span class="lang-es">Correcto. El carácter de Aquel que las hizo. La fidelidad de Dios es la sustancia detrás de cada promesa — la fe del discípulo no genera la confiabilidad de la promesa, la recibe. Aun la fe más débil se aferra al Dios más fuerte; aun la fe más fuerte sin un Dios fiel no sostendría nada. La confiabilidad está de Su lado, no del nuestro.</span>`,
+        incorrectFeedback: `<span class="lang-en">The character of the One who made them. Promises are only as good as the promiser. God's character — His unchanging faithfulness — is what makes every promise of His functionally as good as already-delivered. The disciple's faith leans on Him, not on the strength of the leaning.</span><span class="lang-es">El carácter de Aquel que las hizo. Las promesas son tan buenas como Quien las hace. El carácter de Dios — Su fidelidad inmutable — es lo que hace cada promesa Suya funcionalmente tan buena como ya entregada. La fe del discípulo se apoya en Él, no en la fuerza del apoyo.</span>`
+    },
+    {
+        text: `<span class="lang-en">19. The unit's final image is that the old wineskin of self-reliance cracks at all three stress-tests, while:</span><span class="lang-es">19. La imagen final de la unidad es que el odre viejo de la autosuficiencia se agrieta en los tres exámenes de tensión, mientras que:</span>`,
+        options: [
+            `<span class="lang-en">A. The new wineskin of religious observance contains the wine</span><span class="lang-es">A. El odre nuevo de la observancia religiosa contiene el vino</span>`,
+            `<span class="lang-en">B. The new wineskin of human effort holds</span><span class="lang-es">B. El odre nuevo del esfuerzo humano sostiene</span>`,
+            `<span class="lang-en">C. The new wineskin of faith holds</span><span class="lang-es">C. El odre nuevo de la fe sostiene</span>`,
+            `<span class="lang-en">D. The new wineskin of clear circumstances holds</span><span class="lang-es">D. El odre nuevo de las circunstancias claras sostiene</span>`
+        ],
+        correct: 2,
+        correctFeedback: `<span class="lang-en">Correct. The new wineskin of faith holds. Storms cannot break it because the Lord of the storm is in the boat. Worry cannot puncture it because the Father already knows what is needed. Unseen futures cannot collapse it because the promises of God are as reliable as His character. Only faith stretches to hold all three at once.</span><span class="lang-es">Correcto. El odre nuevo de la fe sostiene. Las tormentas no pueden romperlo porque el Señor de la tormenta está en la barca. La preocupación no puede pincharlo porque el Padre ya sabe lo que se necesita. Los futuros no vistos no pueden colapsarlo porque las promesas de Dios son tan confiables como Su carácter. Solo la fe se estira para sostener los tres a la vez.</span>`,
+        incorrectFeedback: `<span class="lang-en">The new wineskin of faith holds. Self-reliance bursts; religious observance bursts; effort bursts. Faith — anchored to the character of God and the presence of Christ — stretches to contain new life through every stress-test.</span><span class="lang-es">El odre nuevo de la fe sostiene. La autosuficiencia revienta; la observancia religiosa revienta; el esfuerzo revienta. La fe — anclada al carácter de Dios y la presencia de Cristo — se estira para contener la nueva vida a través de cada examen de tensión.</span>`
+    },
+    {
+        text: `<span class="lang-en">20. The closing application question of the unit is:</span><span class="lang-es">20. La pregunta de aplicación de cierre de la unidad es:</span>`,
+        options: [
+            `<span class="lang-en">A. Have you memorized enough Scripture?</span><span class="lang-es">A. ¿Has memorizado suficiente Escritura?</span>`,
+            `<span class="lang-en">B. Have you attended enough church services?</span><span class="lang-es">B. ¿Has asistido a suficientes cultos?</span>`,
+            `<span class="lang-en">C. Have you given enough offerings?</span><span class="lang-es">C. ¿Has dado suficientes ofrendas?</span>`,
+            `<span class="lang-en">D. Where do you need radical trust today — in your storm, your worry, or your unseen tomorrow?</span><span class="lang-es">D. ¿Dónde necesitas confianza radical hoy — en tu tormenta, tu preocupación, o tu mañana no visto?</span>`
+        ],
+        correct: 3,
+        correctFeedback: `<span class="lang-en">Correct. Where do you need radical trust today — in your storm, your worry, or your unseen tomorrow? Stretch. The closing word is one syllable: stretch. The new wineskin is built for stretching. Refusing to stretch is what kills old wineskins; choosing to stretch is what proves the new one is alive.</span><span class="lang-es">Correcto. ¿Dónde necesitas confianza radical hoy — en tu tormenta, tu preocupación, o tu mañana no visto? Estírate. La palabra de cierre es una sílaba: estírate. El odre nuevo está hecho para estirarse. Rehusar estirarse es lo que mata a los odres viejos; escoger estirarse es lo que prueba que el nuevo está vivo.</span>`,
+        incorrectFeedback: `<span class="lang-en">"Where do you need radical trust today — in your storm, your worry, or your unseen tomorrow? Stretch." The disciple's response is not theoretical agreement but personal application: identify which of the three stress-tests is most active right now, and choose to trust there.</span><span class="lang-es">"¿Dónde necesitas confianza radical hoy — en tu tormenta, tu preocupación, o tu mañana no visto? Estírate." La respuesta del discípulo no es acuerdo teórico sino aplicación personal: identifica cuál de los tres exámenes de tensión está más activo ahora, y escoge confiar allí.</span>`
+    }
+];
+
+const saQuestions = [
+    {
+        id: "sa_u2_1",
+        promptEn: "21. Explain the wineskins image (Luke 5:37-38) as the unit uses it. Why is self-reliance an 'old, brittle' wineskin, and what does the 'new wineskin of faith' actually have to do?",
+        promptEs: "21. Explica la imagen de los odres (Lucas 5:37-38) como la usa la unidad. ¿Por qué es la autosuficiencia un odre 'viejo y frágil,' y qué tiene que hacer realmente el 'odre nuevo de la fe'?",
+        kw_en: ["wineskins", "stretch", "burst", "self-reliance", "brittle", "faith", "pressure", "ferments", "new wine", "hold"],
+        kw_es: ["odres", "estirar", "reventar", "autosuficiencia", "frágil", "fe", "presión", "fermenta", "vino nuevo", "sostener"],
+        explanationEn: "New wine ferments and expands; old, brittle wineskins burst under the pressure of new life. Self-reliance is the old wineskin: it has no give, no flexibility, no room for what God is now doing. When storms, worry, or unseen futures put pressure on a self-reliant disciple, the disciple cracks because there is no room to stretch. The new wineskin of faith does the opposite — it stretches to hold what God is pouring in. Faith's job is not to generate the new wine; faith's job is to be elastic enough not to burst when the new wine arrives.",
+        explanationEs: "El vino nuevo fermenta y se expande; los odres viejos y frágiles revientan bajo la presión de la nueva vida. La autosuficiencia es el odre viejo: no tiene flexibilidad, no tiene espacio para lo que Dios está haciendo ahora. Cuando las tormentas, la preocupación, o los futuros no vistos ponen presión sobre un discípulo autosuficiente, el discípulo se agrieta porque no hay espacio para estirarse. El odre nuevo de la fe hace lo opuesto — se estira para sostener lo que Dios está vertiendo. El trabajo de la fe no es generar el vino nuevo; el trabajo de la fe es ser lo bastante elástica para no reventar cuando llegue el vino nuevo."
+    },
+    {
+        id: "sa_u2_2",
+        promptEn: "22. Walk through Mark 4:37-41. Where was Jesus during the storm, what did the disciples ask Him, what did He do, and what fear replaced their fear of the storm?",
+        promptEs: "22. Recorre Marcos 4:37-41. ¿Dónde estaba Jesús durante la tormenta, qué le preguntaron los discípulos, qué hizo Él, y qué temor reemplazó su temor de la tormenta?",
+        kw_en: ["stern", "pillow", "asleep", "do you not care", "rebuked", "peace be still", "great calm", "feared exceedingly", "obey", "authority"],
+        kw_es: ["popa", "cabezal", "dormido", "no tienes cuidado", "reprendió", "calla enmudece", "gran bonanza", "temieron con gran temor", "obedecen", "autoridad"],
+        explanationEn: "Jesus was asleep in the stern of the boat, head on a pillow. The disciples — several of them professional fishermen — were terrified by the storm and woke Him with a question that was half-accusation and half-prayer: 'Teacher, do You not care that we are perishing?' Jesus arose, rebuked the wind, and said three words to the sea: 'Peace, be still!' The wind ceased; a great calm followed. The disciples 'feared exceedingly' — not the storm, which had just stopped, but the One who had stopped it. Their fear was transferred from the weather to the authority that commanded the weather: 'Who can this be, that even the wind and the sea obey Him?'",
+        explanationEs: "Jesús estaba dormido en la popa de la barca, cabeza sobre un cabezal. Los discípulos — varios de ellos pescadores profesionales — estaban aterrorizados por la tormenta y lo despertaron con una pregunta que era mitad acusación y mitad oración: 'Maestro, ¿no tienes cuidado que perecemos?' Jesús se levantó, reprendió al viento, y dijo tres palabras al mar: '¡Calla, enmudece!' El viento cesó; siguió una gran bonanza. Los discípulos 'temieron con gran temor' — no la tormenta, que acababa de detenerse, sino a Aquel que la había detenido. Su temor se transfirió del clima a la autoridad que mandaba el clima: '¿Quién es Éste, que aun el viento y el mar le obedecen?'"
+    },
+    {
+        id: "sa_u2_3",
+        promptEn: "23. Why does this unit insist that 'the Lord of the storm is in the boat with you' rather than promising that storms will not come? How does that change the disciple's posture when storms arrive?",
+        promptEs: "23. ¿Por qué insiste esta unidad en que 'el Señor de la tormenta está en la barca contigo' en vez de prometer que las tormentas no vendrán? ¿Cómo cambia eso la postura del discípulo cuando llegan las tormentas?",
+        kw_en: ["storms come", "presence", "in the boat", "sovereign", "rest", "not panic", "anchored", "sleeping cushion", "authority", "carry through"],
+        kw_es: ["tormentas vienen", "presencia", "en la barca", "soberano", "descanso", "no pánico", "anclado", "cabezal durmiendo", "autoridad", "llevar a través"],
+        explanationEn: "Storms are guaranteed; abandonment is not. The unit refuses the soft promise that faith exempts the disciple from weather, because that promise is not biblical and would collapse the first time it failed. The harder and more truthful promise is presence — the Lord of the storm is in the boat. This changes posture in three ways. (1) The disciple's first response is prayer, not panic — 'Jesus is in my boat' replaces 'I am alone in this.' (2) The disciple can rest, because the One sleeping on the cushion is the One who made the wind. (3) The disciple accepts that Jesus may calm the storm, may calm it later, or may carry the disciple through the middle of it — none of which is a sign that He does not care.",
+        explanationEs: "Las tormentas están garantizadas; el abandono no. La unidad rechaza la promesa suave de que la fe exime al discípulo del clima, porque esa promesa no es bíblica y se colapsaría la primera vez que fallara. La promesa más dura y verdadera es la presencia — el Señor de la tormenta está en la barca. Esto cambia la postura de tres maneras. (1) La primera respuesta del discípulo es la oración, no el pánico — 'Jesús está en mi barca' reemplaza 'estoy solo en esto.' (2) El discípulo puede descansar, porque Aquel que está durmiendo sobre el cabezal es Aquel que hizo el viento. (3) El discípulo acepta que Jesús puede calmar la tormenta, puede calmarla después, o puede llevar al discípulo a través del medio de ella — ninguna de las cuales es señal de que Él no tiene cuidado."
+    },
+    {
+        id: "sa_u2_4",
+        promptEn: "24. Summarize Jesus' argument from the birds and lilies (Matthew 6:25-27). What does He prove with these two ordinary examples, and what is His rhetorical question in v. 27?",
+        promptEs: "24. Resume el argumento de Jesús de las aves y los lirios (Mateo 6:25-27). ¿Qué prueba Él con estos dos ejemplos ordinarios, y cuál es Su pregunta retórica en el v. 27?",
+        kw_en: ["birds", "lilies", "agribusiness", "granaries", "Father feeds", "Solomon", "wildflower", "add one cubit", "stature", "matter to the Father"],
+        kw_es: ["aves", "lirios", "agronegocios", "graneros", "Padre alimenta", "Salomón", "flor silvestre", "añadir un codo", "estatura", "importan al Padre"],
+        explanationEn: "Jesus points to two ordinary things right in front of His listeners. Birds do not run agribusiness, have no granaries, do not sow or reap; the Father feeds them anyway. Lilies do not weave fabric, have no looms, do not labor or spin; Solomon in his full royal wardrobe was not as well dressed as the wildflower that comes up in three weeks and is gone in six. The argument is not that food and clothing do not matter; the argument is that they matter to the Father, who is already providing for creatures less valuable than His disciples. His rhetorical question in v. 27 — 'Which of you by worrying can add one cubit to his stature?' — has only one honest answer: none. Worry produces no measurable result; it only produces fatigue.",
+        explanationEs: "Jesús apunta a dos cosas ordinarias justo frente a Sus oyentes. Las aves no manejan agronegocios, no tienen graneros, no siembran ni siegan; el Padre las alimenta de todos modos. Los lirios no tejen telas, no tienen telares, no laboran ni hilan; Salomón en su completo vestuario real no estaba tan bien vestido como la flor silvestre que sale en tres semanas y se va en seis. El argumento no es que la comida y la ropa no importan; el argumento es que le importan al Padre, quien ya está proveyendo para criaturas menos valiosas que Sus discípulos. Su pregunta retórica en el v. 27 — '¿quién de vosotros podrá, por mucho que se afane, añadir a su estatura un codo?' — tiene solo una respuesta honesta: ninguno. La preocupación no produce resultado medible; solo produce fatiga."
+    },
+    {
+        id: "sa_u2_5",
+        promptEn: "25. Explain the 'what if' to 'even if' grammatical exchange that the unit teaches. Give two concrete examples of how the same situation reads differently in each grammar.",
+        promptEs: "25. Explica el intercambio gramatical de '¿y si?' a 'aun si' que la unidad enseña. Da dos ejemplos concretos de cómo la misma situación se lee diferente en cada gramática.",
+        kw_en: ["what if", "even if", "grammar", "paycheck", "diagnosis", "Father knows", "in the room", "surrender", "heart follows", "calculation"],
+        kw_es: ["y si", "aun si", "gramática", "sueldo", "diagnóstico", "Padre sabe", "en el cuarto", "rendición", "corazón sigue", "cálculo"],
+        explanationEn: "Worry lives in 'what if'; trust lives in 'even if.' The unit's two concrete examples: (1) 'What if the paycheck does not come' becomes 'even if the paycheck does not come, the Father knows.' (2) 'What if the diagnosis is bad' becomes 'even if the diagnosis is bad, the Father is in the room.' The grammar changes; the heart follows. 'What if' calculates disasters that have not happened and may never happen, generating fatigue without any actual progress. 'Even if' surrenders the disaster — present or future, real or imagined — to a Father who has already counted hairs on heads and watches sparrows fall. Same syllables, different theology. The exchange is small enough to make on any given Wednesday, and hard enough to be a real act of faith every time.",
+        explanationEs: "La preocupación vive en '¿y si?'; la confianza vive en 'aun si.' Los dos ejemplos concretos de la unidad: (1) '¿Y si no viene el sueldo?' se vuelve 'aun si no viene el sueldo, el Padre lo sabe.' (2) '¿Y si el diagnóstico es malo?' se vuelve 'aun si el diagnóstico es malo, el Padre está en el cuarto.' La gramática cambia; el corazón sigue. '¿Y si?' calcula desastres que no han ocurrido y pueden nunca ocurrir, generando fatiga sin progreso real. 'Aun si' entrega el desastre — presente o futuro, real o imaginado — a un Padre que ya ha contado cabellos en cabezas y mira caer pajarillos. Las mismas sílabas, distinta teología. El intercambio es lo bastante pequeño para hacerlo cualquier miércoles, y lo bastante duro para ser un acto real de fe cada vez."
+    },
+    {
+        id: "sa_u2_6",
+        promptEn: "26. Tell the story of Linda's empty fridge. Why does the unit say her testimony afterward was not really about the food?",
+        promptEs: "26. Cuenta la historia del refrigerador vacío de Linda. ¿Por qué dice la unidad que su testimonio después no fue realmente sobre la comida?",
+        kw_en: ["Linda", "Ohio", "2009", "single mother", "three children", "empty fridge", "prayed", "trust You", "groceries", "knew before asked"],
+        kw_es: ["Linda", "Ohio", "2009", "madre soltera", "tres hijos", "refrigerador vacío", "oró", "confío en Ti", "víveres", "sabía antes de pedir"],
+        explanationEn: "During the 2009 financial crisis, Linda — a single mother in Ohio with three children — lost her job. Her refrigerator was nearly empty and she had no idea how they would eat the next day. After tucking the children into bed she broke down in the kitchen and prayed in surrender: 'Lord, I don't know how we'll eat tomorrow. But You promised to care for us. I trust You.' The next morning a friend from church arrived at the door with bags of groceries, saying she could not sleep the previous night — she felt God telling her Linda needed this. Linda's testimony afterward was not the food (which was real and welcome). Her testimony was that God already knew what she needed before she asked, and was already moving on her friend's heart while Linda was still calculating disasters in her kitchen. The story illustrates Matthew 6 in real time: the Father feeds His own.",
+        explanationEs: "Durante la crisis financiera del 2009, Linda — una madre soltera en Ohio con tres hijos — perdió su trabajo. Su refrigerador estaba casi vacío y no tenía idea de cómo comerían al día siguiente. Después de acostar a los niños se quebrantó en la cocina y oró en rendición: 'Señor, no sé cómo comeremos mañana. Pero Tú prometiste cuidarnos. Confío en Ti.' A la mañana siguiente una amiga de la iglesia llegó a la puerta con bolsas de víveres, diciendo que no había podido dormir la noche anterior — sintió que Dios le decía que Linda necesitaba esto. El testimonio de Linda después no fue la comida (que fue real y bienvenida). Su testimonio fue que Dios ya sabía lo que ella necesitaba antes de pedírselo, y ya estaba moviendo el corazón de su amiga mientras Linda aún calculaba desastres en su cocina. La historia ilustra Mateo 6 en tiempo real: el Padre alimenta a los Suyos."
+    },
+    {
+        id: "sa_u2_7",
+        promptEn: "27. Hebrews 11:8 says Abraham 'went out, not knowing where he was going.' Describe what Abraham's life looked like after that obedience, and why he is the model for the disciple who trusts what cannot yet be seen.",
+        promptEs: "27. Hebreos 11:8 dice que Abraham 'salió sin saber a dónde iba.' Describe cómo era la vida de Abraham después de esa obediencia, y por qué es el modelo para el discípulo que confía en lo que aún no puede ser visto.",
+        kw_en: ["went out", "not knowing", "tents", "foreign", "promises", "outlived", "Isaac", "old age", "nation", "city", "builder and maker"],
+        kw_es: ["salió", "sin saber", "tiendas", "extranjera", "promesas", "sobrevivieron", "Isaac", "vejez", "nación", "ciudad", "arquitecto y hacedor"],
+        explanationEn: "God told Abraham in only the vaguest terms — 'a land that I will show you' — and Abraham packed up the household and started walking. He spent the rest of his life in tents, in a country that was not his, with promises that mostly outlived him. The son finally arrived in Abraham's old age; the nation took another four hundred years; the land took longer than that; the city 'whose builder and maker is God' has not yet come down. Abraham believed it would. He died believing it without seeing it. He is the model for the disciple who trusts the unseen because his obedience showed that the most reliable thing about a future is not the visible map but the character of the One who described the destination. Hebrews 11 puts his name first on the wall of witnesses for that reason.",
+        explanationEs: "Dios le dijo a Abraham solo en los términos más vagos — 'una tierra que te mostraré' — y Abraham empacó la casa y comenzó a caminar. Pasó el resto de su vida en tiendas, en un país que no era el suyo, con promesas que mayormente lo sobrevivieron. El hijo finalmente llegó en la vejez de Abraham; la nación tomó otros cuatrocientos años; la tierra tomó más tiempo que eso; la ciudad 'cuyo arquitecto y hacedor es Dios' aún no ha descendido. Abraham creyó que lo haría. Murió creyéndolo sin verlo. Es el modelo para el discípulo que confía en lo no visto porque su obediencia mostró que lo más confiable sobre un futuro no es el mapa visible sino el carácter de Aquel que describió el destino. Hebreos 11 pone su nombre primero en la pared de testigos por esa razón."
+    },
+    {
+        id: "sa_u2_8",
+        promptEn: "28. The unit names three ordinary categories of disciple as 'the Abrahams' — disciples in long obedience whose endpoint they will not personally see. List the three and explain why their faithfulness rests on the character of God rather than on visible results.",
+        promptEs: "28. La unidad nombra tres categorías ordinarias de discípulos como 'los Abrahams' — discípulos en larga obediencia cuyo punto final no verán personalmente. Lista las tres y explica por qué su fidelidad descansa en el carácter de Dios en vez de en resultados visibles.",
+        kw_en: ["pastor", "church does not flourish", "parent", "thirty years", "missionary", "buries wife", "first convert", "character of God", "promises", "lifespan"],
+        kw_es: ["pastor", "iglesia no florece", "padre", "treinta años", "misionero", "entierra esposa", "primer converso", "carácter de Dios", "promesas", "lapso de vida"],
+        explanationEn: "The three: (1) The pastor who plants a church that does not flourish in his lifetime. (2) The parent who prays for a child's salvation for thirty years. (3) The missionary who buries a wife in foreign soil before the first convert is baptized. These are the Abrahams. The future is not visible to them; it is only promised. Their faithfulness cannot rest on visible returns within their lifespan because there are no visible returns within their lifespan — and yet they keep going. The only available foundation is the character of the One making the promises. God's faithfulness does not depend on the disciple seeing results; the disciple's faithfulness depends on God's character being what He says it is. Most Christian lives are mostly this third category, and most spiritual fruit ripens after the planter is buried.",
+        explanationEs: "Los tres: (1) El pastor que planta una iglesia que no florece en su vida. (2) El padre que ora por la salvación de un hijo por treinta años. (3) El misionero que entierra a una esposa en suelo extranjero antes de que el primer converso sea bautizado. Estos son los Abrahams. El futuro no es visible para ellos; solo es prometido. Su fidelidad no puede descansar en retornos visibles dentro de su lapso de vida porque no hay retornos visibles dentro de su lapso de vida — y sin embargo siguen. La única base disponible es el carácter de Aquel que hace las promesas. La fidelidad de Dios no depende de que el discípulo vea resultados; la fidelidad del discípulo depende de que el carácter de Dios sea lo que Él dice que es. La mayoría de las vidas cristianas son mayormente esta tercera categoría, y la mayoría del fruto espiritual madura después de que el sembrador está enterrado."
+    },
+    {
+        id: "sa_u2_9",
+        promptEn: "29. Tell the story of Adoniram Judson and explain his statement 'the future is as bright as the promises of God.' What did he not see in his lifetime, and what came from his faithfulness?",
+        promptEs: "29. Cuenta la historia de Adoniram Judson y explica su declaración 'el futuro es tan brillante como las promesas de Dios.' ¿Qué no vio en su vida, y qué vino de su fidelidad?",
+        kw_en: ["Judson", "1812", "Burma", "seven years", "first convert", "prison", "two years", "Ann", "buried children", "four million", "Myanmar"],
+        kw_es: ["Judson", "1812", "Birmania", "siete años", "primer converso", "prisión", "dos años", "Ann", "hijos enterrados", "cuatro millones", "Myanmar"],
+        explanationEn: "Adoniram and Ann Judson sailed for Burma in 1812 as among the first American missionaries sent abroad. The work was painful and slow: seven years passed before the first convert was baptized; Adoniram was shackled in a filthy prison for nearly two years during a war; they buried children; Ann's health gave out and she died young. From the outside the mission looked like failure. From the inside, Judson wrote during one of his darkest hours: 'the future is as bright as the promises of God.' That sentence does not depend on visible evidence; it depends on Whose character stands behind the promise. Judson did not see the result in his lifetime. Today more than four million Christians in Myanmar trace their spiritual heritage to the Judsons. The brightness was real all along; it just was not yet visible to the one trusting it.",
+        explanationEs: "Adoniram y Ann Judson zarparon hacia Birmania en 1812 entre los primeros misioneros estadounidenses enviados al extranjero. La obra fue dolorosa y lenta: siete años pasaron antes de que el primer converso fuera bautizado; Adoniram fue encadenado en una prisión sucia por casi dos años durante una guerra; enterraron hijos; la salud de Ann se quebró y murió joven. Desde afuera la misión parecía un fracaso. Desde adentro, Judson escribió durante una de sus horas más oscuras: 'el futuro es tan brillante como las promesas de Dios.' Esa oración no depende de evidencia visible; depende del carácter de Quien está detrás de la promesa. Judson no vio el resultado en su vida. Hoy más de cuatro millones de cristianos en Myanmar trazan su herencia espiritual a los Judsons. El brillo era real todo el tiempo; solo aún no era visible para quien lo estaba confiando."
+    },
+    {
+        id: "sa_u2_10",
+        promptEn: "30. Synthesize the unit's central argument: storms, worry, and unseen futures are the three places trust stretches. What is the old wineskin that cracks at each one, what is the new wineskin that holds, and what is the closing personal application the unit asks of the disciple?",
+        promptEs: "30. Sintetiza el argumento central de la unidad: las tormentas, la preocupación, y los futuros no vistos son los tres lugares donde la confianza se estira. ¿Cuál es el odre viejo que se agrieta en cada uno, cuál es el odre nuevo que sostiene, y cuál es la aplicación personal de cierre que la unidad pide del discípulo?",
+        kw_en: ["three stress-tests", "self-reliance", "cracks", "faith holds", "Lord in boat", "Father knows", "promises", "where do you need", "stretch", "today"],
+        kw_es: ["tres exámenes", "autosuficiencia", "agrieta", "fe sostiene", "Señor en la barca", "Padre sabe", "promesas", "dónde necesitas", "estírate", "hoy"],
+        explanationEn: "Storms, worries, and unseen futures are the three stress-tests of faith. At each one the old wineskin of self-reliance cracks: it cannot calm a sea, it cannot calculate a future into existence, it cannot manufacture certainty about what God has not yet shown. The new wineskin of faith stretches and holds at each one for a different reason. In storms, faith holds because the Lord of the storm is in the boat. In worry, faith holds because the Father already knows what is needed before the disciple asks. In unseen futures, faith holds because the promises of God are as reliable as His character. The closing application is direct and personal: 'Where do you need radical trust today — in your storm, your worry, or your unseen tomorrow?' The unit ends with one word: stretch. Refusing to stretch is what kills old wineskins; choosing to stretch is what proves the new one is alive.",
+        explanationEs: "Las tormentas, las preocupaciones, y los futuros no vistos son los tres exámenes de tensión de la fe. En cada uno el odre viejo de la autosuficiencia se agrieta: no puede calmar un mar, no puede calcular un futuro a la existencia, no puede fabricar certeza sobre lo que Dios aún no ha mostrado. El odre nuevo de la fe se estira y sostiene en cada uno por una razón diferente. En las tormentas, la fe sostiene porque el Señor de la tormenta está en la barca. En la preocupación, la fe sostiene porque el Padre ya sabe lo que se necesita antes de que el discípulo pida. En los futuros no vistos, la fe sostiene porque las promesas de Dios son tan confiables como Su carácter. La aplicación de cierre es directa y personal: '¿Dónde necesitas confianza radical hoy — en tu tormenta, tu preocupación, o tu mañana no visto?' La unidad termina con una palabra: estírate. Rehusar estirarse es lo que mata a los odres viejos; escoger estirarse es lo que prueba que el nuevo está vivo."
+    }
+];
+
+// ============================================
+// LANGUAGE TOGGLE
+// ============================================
+function setLanguage(lang) {
+    document.body.className = `lang-${lang}`;
+    // Section 7 defensive fix: also set inline display directly on every lang-en/lang-es element
+    document.querySelectorAll(".lang-en").forEach(el => {
+        el.style.display = (lang === "es") ? "none" : "";
+    });
+    document.querySelectorAll(".lang-es").forEach(el => {
+        el.style.display = (lang === "en") ? "none" : "";
+    });
+    document.querySelectorAll(".lang-btn").forEach(b => b.classList.toggle("active", b.dataset.lang === lang));
+    lsSet(getStorageKey(`unit${UNIT}_lang`), lang);
+}
+document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
+});
+(function loadLanguage() {
+    const saved = lsGet(getStorageKey(`unit${UNIT}_lang`)) || "en";
+    setLanguage(saved);
+})();
+
+// ============================================
+// REGISTRATION (U1 only)
+// ============================================
+const regCard = document.getElementById("registrationCard");
+if (!SHOW_REGISTRATION_CARD || lsGet("cts_student")) {
+    if (regCard) regCard.style.display = "none";
+}
+document.getElementById("registerBtn").addEventListener("click", () => {
+    const name = document.getElementById("studentName").value.trim();
+    const track = document.getElementById("studentTrack").value;
+    if (!name) {
+        const msg = document.body.classList.contains("lang-es")
+            ? "Por favor ingrese su nombre."
+            : "Please enter your name.";
+        alert(msg);
+        return;
+    }
+    lsSet("cts_student", JSON.stringify({ name, track }));
+    lsSet("cts_track", track);
+    document.getElementById("regSaved").style.display = "block";
+    setTimeout(() => { if (regCard) regCard.style.display = "none"; }, 1500);
+});
+
+// ============================================
+// LOCKOUT CHECK
+// ============================================
+function checkLockout() {
+    const lockExpiry = parseInt(lsGet(getStorageKey(`unit${UNIT}_lockout`)) || "0", 10);
+    if (!lockExpiry || Date.now() >= lockExpiry) return false;
+    const notice = document.getElementById("lockoutNotice");
+    const countdown = document.getElementById("lockoutCountdown");
+    notice.classList.add("active");
+    document.getElementById("submitBtn").disabled = true;
+    const tick = () => {
+        const remaining = lockExpiry - Date.now();
+        if (remaining <= 0) {
+            notice.classList.remove("active");
+            document.getElementById("submitBtn").disabled = false;
+            lsDel(getStorageKey(`unit${UNIT}_lockout`));
+            return;
+        }
+        const mins = Math.floor(remaining / 60000);
+        const secs = Math.floor((remaining % 60000) / 1000);
+        countdown.textContent = `${mins}:${secs.toString().padStart(2, "0")}`;
+        setTimeout(tick, 1000);
+    };
+    tick();
+    return true;
+}
+
+// ============================================
+// RENDER QUESTIONS
+// ============================================
+function renderMC() {
+    const container = document.getElementById("mcContainer");
+    container.innerHTML = "";
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement("div");
+        div.className = "question";
+        div.innerHTML = `
+            <div class="question-text">${q.text}</div>
+            <ul class="options">
+                ${q.options.map((opt, i) => `
+                    <li><label><input type="radio" name="mc_${idx}" value="${i}"> ${opt}</label></li>
+                `).join("")}
+            </ul>
+            <div class="feedback" id="mcFeedback_${idx}"></div>
+        `;
+        container.appendChild(div);
+        const revealMCQ = (chosen) => {
+            const isRight = chosen === q.correct;
+            document.querySelectorAll(`input[name="mc_${idx}"]`).forEach((inp2, i2) => {
+                const li = inp2.closest('li');
+                if (!li) return;
+                li.classList.remove('correct-answer', 'wrong-pick');
+                if (i2 === q.correct) li.classList.add('correct-answer');
+                else if (i2 === chosen) li.classList.add('wrong-pick');
+                inp2.disabled = true;
+            });
+            const feedbackBox = document.getElementById(`mcFeedback_${idx}`);
+            if (feedbackBox) {
+                feedbackBox.className = `feedback ${isRight ? "correct" : "incorrect"} show`;
+                const label = isRight
+                    ? (document.body.classList.contains("lang-es") ? "Correcto." : "Correct.")
+                    : (document.body.classList.contains("lang-es") ? "Incorrecto." : "Incorrect.");
+                feedbackBox.innerHTML = `<strong>${label}</strong>${isRight ? q.correctFeedback : q.incorrectFeedback}`;
+            }
+        };
+        div.querySelectorAll(`input[name="mc_${idx}"]`).forEach(input => {
+            input.addEventListener('change', function() {
+                if (!this.checked) return;
+                lsSet(getStorageKey(`unit${UNIT}_mc${idx}`), this.value);
+                revealMCQ(parseInt(this.value));
+            });
+        });
+        const saved = lsGet(getStorageKey(`unit${UNIT}_mc${idx}`));
+        if (saved !== null) {
+            const radio = div.querySelector(`input[name="mc_${idx}"][value="${saved}"]`);
+            if (radio) {
+                radio.checked = true;
+                const li = radio.closest('li');
+                if (li) li.classList.add('selected-neutral');
+            }
+        }
+    });
+}
+
+function renderSA() {
+    const container = document.getElementById("saContainer");
+    container.innerHTML = `<h3 style="color:#4a1e3a;margin-top:2rem;margin-bottom:1rem;border-bottom:2px solid #d4af37;padding-bottom:0.4rem;"><span class="lang-en">Short-Answer Questions</span><span class="lang-es">Preguntas de Respuesta Corta</span></h3>`;
+    saQuestions.forEach((q, idx) => {
+        const div = document.createElement("div");
+        div.className = "question";
+        div.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.promptEn}</span><span class="lang-es">${q.promptEs}</span></div>
+            <textarea class="sa-input" id="${q.id}" data-idx="${idx}" placeholder="" aria-label="${q.id}"></textarea>
+            <button class="sa-check-btn" data-idx="${idx}" type="button" style="margin-top:0.5rem;background:#4a1e3a;color:#d4af37;border:none;padding:0.4rem 1rem;cursor:pointer;font-weight:bold;border-radius:4px;font-family:inherit;font-size:0.9rem;"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>
+            <div class="feedback" id="saFeedback_${idx}"></div>
+        `;
+        container.appendChild(div);
+        const saved = lsGet(getStorageKey(`unit${UNIT}_sa${idx}`));
+        if (saved !== null) div.querySelector("textarea").value = saved;
+        // Per-question immediate feedback via Check Answer button (Joshua-style)
+        div.querySelector('.sa-check-btn').addEventListener('click', function() {
+            const ta = document.getElementById(q.id);
+            const ans = (ta.value || '').toLowerCase().trim();
+            const fb = document.getElementById(`saFeedback_${idx}`);
+            const isEs = document.body.classList.contains('lang-es');
+            lsSet(getStorageKey(`unit${UNIT}_sa${idx}`), ta.value);
+            if (ans.length < 100) {
+                fb.className = 'feedback incorrect show';
+                const msg = isEs ? '✗ Escriba una respuesta más completa (al menos unas cuantas oraciones (unos 100 caracteres)).' : '✗ Please write a more complete answer (at least a few sentences (about 100 characters)).';
+                fb.innerHTML = `<strong>${msg}</strong>`;
+                return;
+            }
+            const keywords = isEs ? q.kw_es : q.kw_en;
+            let matches = 0;
+            for (const kw of keywords) {
+                const kwLower = kw.toLowerCase();
+                const kwWords = kwLower.split(/\s+/).filter(w => w.length > 2);
+                const hits = kwWords.filter(w => ans.includes(w)).length;
+                if (hits >= Math.max(1, Math.ceil(kwWords.length * 0.4))) matches++;
+            }
+            const threshold = Math.ceil(keywords.length * 0.4);
+            const isRight = matches >= threshold;
+            const expLabel = isEs ? 'Explicación modelo:' : 'Model explanation:';
+            const verdict = isRight
+                ? (isEs ? `✓ Correcto — respuesta sólida (${matches}/${keywords.length} conceptos clave).` : `✓ Correct — solid answer (${matches}/${keywords.length} key concepts).`)
+                : (isEs ? `✗ Incorrecto — necesita al menos ${threshold} conceptos clave; obtuvo ${matches}.` : `✗ Incorrect — need at least ${threshold} key concepts; got ${matches}.`);
+            fb.className = `feedback ${isRight ? 'correct' : 'incorrect'} show`;
+            fb.innerHTML = `<strong>${verdict}</strong><div style="margin-top:0.4rem;"><em>${expLabel}</em><br>${isEs ? q.explanationEs : q.explanationEn}</div>`;
+        });
+    });
+}
+
+renderMC();
+renderSA();
+checkLockout();
+
+// ============================================
+// GRADING
+// ============================================
+function gradeMC() {
+    let correct = 0;
+    mcQuestions.forEach((q, idx) => {
+        const selected = document.querySelector(`input[name="mc_${idx}"]:checked`);
+        const feedbackBox = document.getElementById(`mcFeedback_${idx}`);
+        // Section 7 fix: highlight correct option's li green; wrong pick's li red
+        const allInputs = document.querySelectorAll(`input[name="mc_${idx}"]`);
+        allInputs.forEach((input, i) => {
+            const li = input.closest('li');
+            if (!li) return;
+            li.classList.remove('correct-answer', 'wrong-pick');
+            if (i === q.correct) li.classList.add('correct-answer');
+        });
+        if (!selected) {
+            feedbackBox.className = "feedback incorrect show";
+            const noAns = document.body.classList.contains("lang-es") ? "Sin respuesta." : "No answer.";
+            feedbackBox.innerHTML = `<strong>${noAns}</strong>${q.incorrectFeedback}`;
+            return;
+        }
+        lsSet(getStorageKey(`unit${UNIT}_mc${idx}`), selected.value);
+        const isRight = parseInt(selected.value, 10) === q.correct;
+        if (!isRight) {
+            const wrongLi = selected.closest('li');
+            if (wrongLi) wrongLi.classList.add('wrong-pick');
+        }
+        feedbackBox.className = `feedback ${isRight ? "correct" : "incorrect"} show`;
+        const label = isRight
+            ? (document.body.classList.contains("lang-es") ? "Correcto." : "Correct.")
+            : (document.body.classList.contains("lang-es") ? "Incorrecto." : "Incorrect.");
+        feedbackBox.innerHTML = `<strong>${label}</strong>${isRight ? q.correctFeedback : q.incorrectFeedback}`;
+        if (isRight) correct++;
+    });
+    return correct;
+}
+
+function gradeSA() {
+    let correct = 0;
+    const isEs = document.body.classList.contains("lang-es");
+    saQuestions.forEach((q, idx) => {
+        const ta = document.getElementById(q.id);
+        const ans = (ta.value || "").toLowerCase().trim();
+        lsSet(getStorageKey(`unit${UNIT}_sa${idx}`), ta.value);
+        const feedbackBox = document.getElementById(`saFeedback_${idx}`);
+        if (!ans) {
+            feedbackBox.className = "feedback incorrect show";
+            const noAns = isEs ? "Sin respuesta." : "No answer.";
+            feedbackBox.innerHTML = `<strong>${noAns}</strong>${isEs ? q.explanationEs : q.explanationEn}`;
+            return;
+        }
+        if (ans.length < 100) {
+            feedbackBox.className = "feedback incorrect show";
+            const tooShort = isEs ? "Respuesta demasiado breve (se requieren al menos 100 caracteres)." : "Answer too short (at least 100 characters required).";
+            feedbackBox.innerHTML = `<strong>${tooShort}</strong>${isEs ? q.explanationEs : q.explanationEn}`;
+            return;
+        }
+        const keywords = isEs ? q.kw_es : q.kw_en;
+        let matches = 0;
+        for (const kw of keywords) {
+            const kwLower = kw.toLowerCase();
+            const kwWords = kwLower.split(/\s+/).filter(w => w.length > 2);
+            const hits = kwWords.filter(w => ans.includes(w)).length;
+            if (hits >= Math.max(1, Math.ceil(kwWords.length * 0.4))) matches++;
+        }
+        const threshold = Math.ceil(keywords.length * 0.4);
+        const isRight = matches >= threshold;
+        feedbackBox.className = `feedback ${isRight ? "correct" : "partial"} show`;
+        const label = isRight
+            ? (isEs ? "Respuesta aceptable." : "Acceptable answer.")
+            : (isEs ? "Respuesta parcial — vea la explicación modelo:" : "Partial answer — see the model explanation:");
+        feedbackBox.innerHTML = `<strong>${label}</strong>${isEs ? q.explanationEs : q.explanationEn}`;
+        if (isRight) correct++;
+    });
+    return correct;
+}
+
+// ============================================
+// SUBMIT
+// ============================================
+document.getElementById("submitBtn").addEventListener("click", () => {
+    const mcScore = gradeMC();
+    const saScore = gradeSA();
+    const track = lsGet("cts_track") || "cert";
+    const isEs = document.body.classList.contains("lang-es");
+
+    const mcBankKey = getStorageKey(`unit${UNIT}_mc_passed`);
+    const mcBanked = lsGet(mcBankKey) === "true";
+    let mcPass = mcBanked || (mcScore >= PASS_MC);
+    if (mcPass) lsSet(mcBankKey, "true");
+    let saPass = saScore >= PASS_SA;
+    let overallPass = (track === "cert") ? mcPass : (mcPass && saPass);
+
+    const results = document.getElementById("resultsSection");
+    const verdictBox = document.getElementById("verdictBox");
+    const scoreRow = document.getElementById("scoreRow");
+    const redirectNotice = document.getElementById("redirectNotice");
+
+    verdictBox.innerHTML = "";
+    scoreRow.innerHTML = "";
+
+    const verdict = document.createElement("div");
+    verdict.className = `verdict ${overallPass ? "pass" : "fail"}`;
+    if (overallPass) {
+        verdict.textContent = isEs
+            ? `¡Aprobado! Ha completado la Unidad ${UNIT} — pista ${track === "cert" ? "Certificado" : track === "thm" ? "Th.M." : "M.Div."}.`
+            : `Passed! You have completed Unit ${UNIT} on the ${track === "cert" ? "Certificate" : track === "thm" ? "Th.M." : "M.Div."} track.`;
+    } else {
+        verdict.textContent = isEs
+            ? "No aprobado. Revise las explicaciones, espere el bloqueo de 15 minutos y reintente." + (mcPass ? " (Su Opción Múltiple ya está aprobada — solo necesita reintentar la Respuesta Corta.)" : "")
+            : "Not yet passed. Review the explanations, wait the 15-minute lockout, and retry." + (mcPass ? " (Your Multiple Choice is already passed — only the Short Answer needs retake.)" : "");
+    }
+    verdictBox.appendChild(verdict);
+
+    const mcBox = document.createElement("div");
+    mcBox.className = "score-box";
+    mcBox.innerHTML = `<div class="label">${isEs ? "Opción Múltiple" : "Multiple Choice"}</div><div class="value">${mcScore} / 20</div><div class="threshold">${isEs ? "Necesario" : "Required"}: ${PASS_MC} / 20</div>`;
+    scoreRow.appendChild(mcBox);
+
+    if (track !== "cert") {
+        const saBox = document.createElement("div");
+        saBox.className = "score-box";
+        saBox.innerHTML = `<div class="label">${isEs ? "Respuesta Corta" : "Short Answer"}</div><div class="value">${saScore} / 10</div><div class="threshold">${isEs ? "Necesario" : "Required"}: ${PASS_SA} / 10</div>`;
+        scoreRow.appendChild(saBox);
+    }
+
+    results.classList.add("show");
+    results.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    if (overallPass) {
+        lsSet(getStorageKey(`unit${UNIT}_passed`), "true");
+        const targetUrl = IS_LAST_UNIT ? CERT_URL : NEXT_URL;
+        redirectNotice.innerHTML = isEs
+            ? `Sus respuestas están marcadas arriba. Repáselas, luego <a href="${targetUrl}" style="color:#7a1f1f;font-weight:bold;">continúe →</a>`
+            : `Your answers are marked above. Review them, then <a href="${targetUrl}" style="color:#7a1f1f;font-weight:bold;">continue →</a>`;
+    } else {
+        const lockUntil = Date.now() + LOCKOUT_MINUTES * 60 * 1000;
+        lsSet(getStorageKey(`unit${UNIT}_lockout`), lockUntil.toString());
+        setTimeout(checkLockout, 100);
+    }
+});
+
+// ============================================
+// RESET
+// ============================================
+document.getElementById("resetBtn").addEventListener("click", () => {
+    const isEs = document.body.classList.contains("lang-es");
+    const confirmMsg = isEs
+        ? "¿Está seguro de que desea reiniciar todas las respuestas de esta unidad?"
+        : "Are you sure you want to reset all answers for this unit?";
+    if (!confirm(confirmMsg)) return;
+    for (let i = 0; i < mcQuestions.length; i++) lsDel(getStorageKey(`unit${UNIT}_mc${i}`));
+    for (let i = 0; i < saQuestions.length; i++) lsDel(getStorageKey(`unit${UNIT}_sa${i}`));
+    lsDel(getStorageKey(`unit${UNIT}_passed`));
+    lsDel(getStorageKey(`unit${UNIT}_mc_passed`));
+    document.querySelectorAll(`input[type="radio"]`).forEach(r => r.checked = false);
+    document.querySelectorAll(`textarea.sa-input`).forEach(t => t.value = "");
+    document.querySelectorAll(".feedback").forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+    document.querySelectorAll(".options li").forEach(li => li.classList.remove("correct-answer", "wrong-pick"));
+    document.getElementById("resultsSection").classList.remove("show");
+});
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSRadicalReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

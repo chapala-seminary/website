@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS New Testament Survey — Unit 5: John: The Identity of the Logos</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+.track-bar { background: #f6f1e8; border: 1px solid #d7cec1; border-radius: 12px; padding: 12px 16px; margin: 15px 0; }
+.track-bar label { margin-right: 18px; cursor: pointer; font-size: 0.95rem; }
+.track-bar input[type=radio] { margin-right: 6px; vertical-align: middle; }
+.reset-btn { background: #8a5a3a; color: white; border: none; border-radius: 30px; padding: 8px 18px; cursor: pointer; font-family: inherit; margin-left: 10px; font-size: 0.9rem; }
+.reset-btn:hover { background: #6e4528; }
+.redirect-notice { background: #e8f5ea; border: 1px solid #b9dfc2; color: #1f6b3b; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-weight: bold; }
+@media print {
+  @page { margin: 0.5in; }
+  body { background: white; color: black; font-size: 12pt; padding: 0; }
+  .nav-bar, .toggle-btn, #submitExamBtn, .reset-btn, #examResult, .track-bar, button.small { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; padding: 12px; margin-bottom: 12px; }
+  .question { page-break-inside: avoid; }
+  h1, h2, h3 { color: black; page-break-after: avoid; }
+  .option { background: white; border-color: #999; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" >← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 New Testament Survey — Unit 5: John: The Identity of the Logos</span><span class="lang-es">📖 Estudio del Nuevo Testamento — Unidad 5: Juan: La Identidad del Logos</span></h1>
+    <p><span class="lang-en"><strong>Course Author:</strong> Dr. Wayne Cook | <strong>Seminary Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Autor del Curso:</strong> Dr. Wayne Cook | <strong>Director del Seminario:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic;"></p>
+</div>
+
+<div class="card" id="teachingContent">
+<div class="lang-en">
+        <h2>I. The Disciple Whom Jesus Loved</h2>
+        <p>Of all the writers in the New Testament, John was the one who had been closest to the Lord's heartbeat. He was the disciple <em>"whom Jesus loved"</em> (John 13:23). He was the one who leaned on His breast at the Last Supper. He was the one to whom, from the cross, the Lord entrusted His own mother (John 19:26–27). And of all the writers in the New Testament, John was the one who lived the longest — into the closing years of the first century, into Ephesus, into the dawn of the second generation of believers who had never seen the Lord with their eyes. Imagine being the last man alive who had walked the dusty roads with Jesus of Nazareth. Imagine being the last living witness of the empty tomb. That is the old man who picked up a pen around AD 85 to 95 and wrote the Gospel we are about to study.</p>
+
+        <p>Matthew, Mark, and Luke had been in circulation for thirty years by then. John did not write to repeat them. He wrote because there was still one question hanging in the air over every reader of the other three, and only the man who had leaned on Jesus' breast at the Last Supper had the right to answer it. The question was the simplest in the world, and the deepest: <em>Who is this Man?</em> Matthew shows you the King, Mark shows you the Servant, Luke shows you the Man — but John shows you what your heart most longs to know. John shows you <em>God.</em></p>
+
+        <h2>II. The Logos Prologue</h2>
+        <p>John's first eighteen verses are not a story. They are a hymn. They are perhaps the highest paragraph of prose ever written in any language. They open with words deliberately chosen to overlap, syllable for syllable, with the opening words of the Hebrew Bible: <em>"In the beginning was the Word, and the Word was with God, and the Word was God. He was in the beginning with God. All things were made through Him, and without Him nothing was made that was made. In Him was life, and the life was the light of men"</em> (John 1:1–4). The Greek word translated <em>Word</em> is <em>Logos</em>. To a Jew, <em>Logos</em> meant the speaking-self of God, the breath that called the worlds into existence in Genesis 1: <em>"And God said, 'Let there be light'; and there was light"</em> (Genesis 1:3). To a Greek philosopher, <em>Logos</em> meant the rational mind behind the universe, the principle that holds all things in coherent order. John takes a word that already meant the deepest possible thing in both Jewish and Greek thought and announces that this <em>Logos</em> is not an idea. The <em>Logos</em> is a Person. And then in verse 14 John drops the hammer: <em>"And the Word became flesh and dwelt among us, and we beheld His glory, the glory as of the only begotten of the Father, full of grace and truth"</em> (John 1:14). The eternal principle of the universe took on a body and pitched His tent in a village in Galilee. That is the identity John is here to defend.</p>
+
+        <h2>III. The Question Behind the Gospel</h2>
+        <p>I have often pictured the disciples lying out under the stars with the Lord on a summer night by the Sea of Galilee. I can imagine Peter or John waking in the night, rising up on an elbow, looking at the sleeping figure beside him, and whispering to himself, <em>Is it true? Can this Man be the eternal God? Who is this?</em> No wonder they puzzled. They had been with Him every day for three and a half years; they had seen the dust of His feet and the bread of His table and the tears of His grief and the sweat of His exhaustion. He was a man. There is no doubt that He was a man. And yet — He had calmed the wind with one sentence, raised a dead twelve-year-old by the hand, fed five thousand from a boy's lunch, looked at a paralytic and said, <em>"Son, your sins are forgiven."</em> The question grew larger every month. <em>Who is this Man?</em></p>
+
+        <p>By the time John sits down to write his Gospel, the question has only one answer that fits the data. And John writes the whole book to demonstrate it. Hear how he himself stated his thesis near the end: <em>"And truly Jesus did many other signs in the presence of His disciples, which are not written in this book; but these are written that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name"</em> (John 20:30–31). That is the purpose statement. That is the key verse. Two propositions: <em>Jesus is the Christ</em>, and <em>Jesus is the Son of God</em>. John's argument for the first is the seven signs. John's argument for the second is the seven I AMs. The whole Gospel is built around those two columns of seven.</p>
+
+        <h2>IV. The Seven Signs — The Credentials of Messiah</h2>
+        <p>John never uses the synoptic word <em>miracle</em>. He uses the word <em>sign</em>. A miracle is something amazing; a sign is something amazing that <em>points</em>. John selects seven of them out of the many he had personally watched the Lord perform, and arranges them so each one points at a particular mark of the promised Messiah. <strong>(1)</strong> Water into wine at the wedding in Cana (John 2): the inanimate is made alive — the symbol of the joy of the new covenant. As one Sunday-school child put it, having heard the story: <em>"It is always a good idea to have Jesus around."</em> <strong>(2)</strong> The healing of the nobleman's son at a distance (John 4:46–54): the brokenhearted father is healed along with the boy. <strong>(3)</strong> The healing of the paralytic at the pool of Bethesda after thirty-eight years of captivity (John 5): the oppressed are set free. <strong>(4)</strong> The feeding of the five thousand (John 6): the hungry of soul are fed. <strong>(5)</strong> The walking on the water (John 6): the fearful are quieted with <em>"It is I; do not be afraid."</em> <strong>(6)</strong> The healing of the man born blind (John 9): the blind see. <strong>(7)</strong> The raising of Lazarus from the tomb (John 11): the dead are raised. Lay those seven signs alongside Isaiah 35 and Isaiah 61 — the Messianic credentials read out in Nazareth — and they line up exactly. John has not chosen at random. He has chosen the seven signs that prove the resume.</p>
+
+        <h2>V. The Seven "I AM" Statements — The Name of God</h2>
+        <p>The seven signs prove that Jesus is the Christ. But John is going higher than that. He is going to prove that the Christ is God Himself. And to prove it he reaches not for a miracle but for a sentence. At the burning bush in Exodus 3, Moses asked the voice for a name to take back to Israel. The voice answered: <em>"I AM WHO I AM... Thus you shall say to the children of Israel: 'I AM has sent me to you'"</em> (Exodus 3:14). That sacred Name — the eternal I AM — is the name no Jew dared to speak. John records seven moments when the Lord Jesus reached out and took that Name on His own lips and applied it to Himself.</p>
+
+        <p><em>"I AM the bread of life"</em> (6:35) — the sustainer of the hungry soul. <em>"I AM the light of the world"</em> (8:12) — the illuminator of the dark heart. <em>"I AM the door"</em> (10:9) — the only authorized entrance to the fold. <em>"I AM the good shepherd"</em> (10:11) — who lays down His life for the sheep. <em>"I AM the resurrection and the life"</em> (11:25) — power that needs no help from outside. <em>"I AM the way, the truth, and the life"</em> (14:6) — the only path home. <em>"I AM the true vine"</em> (15:5) — the source of every fruit any branch will ever bear. Seven I AMs. Each one a Person attached to the Name of God.</p>
+
+        <p>And there is one more I AM that John saves for the climax. In the Garden of Gethsemane, the cohort of soldiers comes for the arrest. Jesus steps forward. <em>"Whom are you seeking?"</em> <em>"Jesus of Nazareth,"</em> they answer. He says two words in Greek: <em>egō eimi</em> — <em>I AM.</em> John notes that when He said it, <em>"they drew back and fell to the ground"</em> (John 18:6). A whole arresting cohort knocked off its feet by two words. The Name of God in the mouth of the carpenter from Galilee.</p>
+
+        <h2>VI. The Upper Room Discourse</h2>
+        <p>Five of the seven I AMs sit in the first half of the book. The last two — <em>"I am the way, the truth, and the life"</em> and <em>"I am the true vine"</em> — sit inside the most intimate section of any Gospel, the Upper Room Discourse. John gives us five chapters (13–17) in the night before the cross. Matthew, Mark, and Luke devote one paragraph each to the Last Supper; John gives us the conversation that followed it. He records the foot-washing (13). He records the promise of the Father's house with many mansions (14). He records the true vine and the call to abide (15). He records the promise of the Comforter, the Holy Spirit (16). And in John 17 he gives us the High Priestly Prayer — the longest recorded prayer of the Lord Jesus in all four Gospels, the prayer in which He prays for His disciples and then for every believer who would ever come to faith through their word — which means He prayed for you. By name. Even before you had one. The interior life of the Trinity is opened to us for one chapter, and we are allowed to overhear the Son speaking to the Father about us.</p>
+
+        <h2>VII. "It Is Finished"</h2>
+        <p>Mark and Matthew let us hear the cry of dereliction from the cross. Luke lets us hear the prayer of pardon. John lets us hear one word in Greek that becomes the whole gospel: <em>tetelestai</em> — <em>"It is finished"</em> (John 19:30). It is in the perfect tense, which in Greek means a completed act with permanent results. <em>Finished and standing finished forever.</em> Archaeologists have found Greek receipts from the first century with that very word stamped across the top: <em>tetelestai</em> — <em>paid in full.</em> In John, the cross is not the tragic defeat of a rabbi; it is the triumphant completion of a mission that began before time. The Logos who in chapter 1 spoke creation into being, on a Friday afternoon in chapter 19 announced its redemption from a cross.</p>
+
+        <p>And John alone records something else. When the soldier thrust the spear into the side of Jesus, <em>"immediately blood and water came out"</em> (John 19:34). Medical writers have argued that the watery serum separated from the blood is a sign of a ruptured heart — that the Lord Jesus did not merely die of crucifixion. He died of a broken heart. The Word made flesh laid down the flesh willingly, of His own accord. <em>"No one takes it from Me, but I lay it down of Myself"</em> (John 10:18). The Logos who had spoken the universe into being chose the precise moment to give up His Spirit. <em>Tetelestai.</em></p>
+
+        <h2>VIII. The Empty Tomb and Doubting Thomas</h2>
+        <p>John's resurrection chapter (20) has four scenes. Mary at the tomb, weeping, who turns and hears one Greek word: <em>"Mary."</em> Peter and John running to the empty tomb, John seeing the grave clothes lying as if a body had passed through them undisturbed and believing on the spot. The disciples in the locked upper room that Sunday evening, the risen Lord standing among them with the wounds in His hands. And one disciple was missing. His name was Thomas, and he refused to believe on hearsay. <em>"Unless I see in His hands the print of the nails, and put my finger into the print of the nails, and put my hand into His side, I will not believe"</em> (John 20:25). Eight days later the Lord appeared again, and Thomas was in the room. The Lord looked straight at Thomas and said, <em>"Reach your finger here, and look at My hands; and reach your hand here, and put it into My side. Do not be unbelieving, but believing."</em> And Thomas, in the only one-sentence confession of full deity in the New Testament, said, <em>"My Lord and my God!"</em> (John 20:28). That is the climax of the whole Gospel of John. From the Logos in chapter 1 to <em>my Lord and my God</em> in chapter 20. The journey is complete. The identity is confessed. The eagle has landed.</p>
+
+        <h2>IX. The Key Verse — Why John Was Written</h2>
+        <p>Two verses later John tells us why he wrote the book. <em>"And truly Jesus did many other signs in the presence of His disciples, which are not written in this book; but these are written that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name"</em> (John 20:30–31). It is the most candid statement of purpose by any author in the New Testament. John is not writing biography for its own sake. He is not writing devotional reflection. He is writing evidence — selected, ordered, designed to bring a reader to a verdict. <em>That you may believe.</em> And the result of believing is not a religion; it is <em>life in His name.</em></p>
+
+        <p>Here is a question that still finds the heart of every reader of John: What does this Gospel mean to <em>you?</em> Not to a scholar. Not to a theologian. To <em>you.</em> And the honest answer is that you cannot read John honestly and walk away with neutral feelings. You can read Matthew and become a better citizen. You can read Mark and become a better servant. You can read Luke and become a better friend. But you cannot read John without becoming a worshipper. John does not leave you on the fence. John leaves you on your knees with Thomas, calling Jesus what Thomas called Him: <em>my Lord and my God.</em> John is the Gospel to put first into the hands of any seeker — because it was written precisely for the seeker. <em>"These are written that you may believe."</em> The whole book is an arrow aimed at the human heart.</p>
+
+        <p>Press on, my friend, into the rest of the New Testament with the same Logos who spoke the worlds into being, who walked through dusty villages with His disciples, who finished the work on the cross, who rose on the third day with the keys of death and Hades in His hand, and who is the same yesterday, today, and forever. He is your Lord. He is your God. Amen.</p>
+    </div>
+<div class="lang-es">
+        <h2>I. El discípulo a quien Jesús amaba</h2>
+        <p>De todos los escritores del Nuevo Testamento, Juan fue el que estuvo más cerca del corazón del Señor. Era el discípulo <em>"al cual Jesús amaba"</em> (Juan 13:23). Era el que se recostó sobre Su pecho en la Última Cena. Era aquel a quien, desde la cruz, el Señor encomendó a Su propia madre (Juan 19:26–27). Y de todos los escritores del Nuevo Testamento, Juan fue el que vivió más tiempo — hasta los años de cierre del primer siglo, hasta Éfeso, hasta el amanecer de la segunda generación de creyentes que nunca habían visto al Señor con sus ojos. Imagine ser el último hombre vivo que había caminado por los caminos polvorientos con Jesús de Nazaret. Imagine ser el último testigo viviente del sepulcro vacío. Ese es el anciano que tomó una pluma alrededor del año 85 al 95 d.C. y escribió el Evangelio que estamos por estudiar.</p>
+
+        <p>Mateo, Marcos y Lucas habían estado circulando por treinta años. Juan no escribió para repetirlos. Escribió porque aún había una pregunta colgada en el aire sobre cada lector de los otros tres, y solo el hombre que se había recostado sobre el pecho de Jesús en la Última Cena tenía el derecho de contestarla. La pregunta era la más sencilla del mundo, y la más profunda: <em>¿Quién es este Hombre?</em> Mateo le muestra al Rey, Marcos le muestra al Siervo, Lucas le muestra al Hombre — pero Juan le muestra lo que su corazón más anhela saber. Juan le muestra a <em>Dios.</em></p>
+
+        <h2>II. El prólogo del Logos</h2>
+        <p>Los primeros dieciocho versículos de Juan no son una historia. Son un himno. Son quizás el párrafo de prosa más alto jamás escrito en algún idioma. Abren con palabras escogidas deliberadamente para superponerse, sílaba por sílaba, con las palabras de apertura de la Biblia hebrea: <em>"En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios. Este era en el principio con Dios. Todas las cosas por él fueron hechas; y sin él nada de lo que es hecho, fue hecho. En él estaba la vida, y la vida era la luz de los hombres"</em> (Juan 1:1–4). La palabra griega traducida <em>Verbo</em> es <em>Logos</em>. Para un judío, <em>Logos</em> significaba el yo-hablante de Dios, el aliento que llamó a los mundos a existir en Génesis 1: <em>"Dijo Dios: Sea la luz: y fué la luz"</em> (Génesis 1:3). Para un filósofo griego, <em>Logos</em> significaba la mente racional detrás del universo, el principio que sostiene todas las cosas en orden coherente. Juan toma una palabra que ya significaba la cosa más profunda posible tanto en el pensamiento judío como en el griego, y anuncia que este <em>Logos</em> no es una idea. El <em>Logos</em> es una Persona. Y luego en el versículo 14 Juan deja caer el martillo: <em>"Y aquel Verbo fué hecho carne, y habitó entre nosotros (y vimos su gloria, gloria como del unigénito del Padre), lleno de gracia y de verdad"</em> (Juan 1:14). El principio eterno del universo tomó un cuerpo y plantó Su tienda en una aldea de Galilea. Esa es la identidad que Juan ha venido a defender.</p>
+
+        <h2>III. La pregunta detrás del Evangelio</h2>
+        <p>A menudo he imaginado a los discípulos acostados bajo las estrellas con el Señor en una noche de verano junto al mar de Galilea. Puedo imaginar a Pedro o a Juan despertando en la noche, apoyándose en un codo, mirando a la figura dormida a su lado y susurrando para sí: <em>¿Es verdad? ¿Puede este Hombre ser el Dios eterno? ¿Quién es éste?</em> No es extraño que se preguntaran. Habían estado con Él cada día por tres años y medio; habían visto el polvo de Sus pies y el pan de Su mesa y las lágrimas de Su dolor y el sudor de Su cansancio. Era un hombre. No hay duda de que era un hombre. Y sin embargo — había calmado el viento con una sola frase, levantado de la mano a una niña muerta de doce años, alimentado a cinco mil con el almuerzo de un muchacho, mirado a un paralítico y dicho: <em>"Hijo, tus pecados te son perdonados."</em> La pregunta se hacía más grande cada mes. <em>¿Quién es este Hombre?</em></p>
+
+        <p>Para cuando Juan se sienta a escribir su Evangelio, la pregunta tiene una sola respuesta que encaja con los datos. Y Juan escribe el libro entero para demostrarlo. Oiga cómo él mismo formuló su tesis cerca del final: <em>"Y también hizo Jesús muchas otras señales en presencia de sus discípulos, que no están escritas en este libro: estas empero son escritas, para que creáis que Jesús es el Cristo, el Hijo de Dios; y para que creyendo, tengáis vida en su nombre"</em> (Juan 20:30–31). Esa es la declaración de propósito. Ese es el versículo clave. Dos proposiciones: <em>Jesús es el Cristo</em>, y <em>Jesús es el Hijo de Dios</em>. El argumento de Juan para la primera son las siete señales. El argumento de Juan para la segunda son los siete YO SOY. El Evangelio entero está construido alrededor de esas dos columnas de siete.</p>
+
+        <h2>IV. Las siete señales — Las credenciales del Mesías</h2>
+        <p>Juan nunca usa la palabra sinóptica <em>milagro</em>. Usa la palabra <em>señal</em>. Un milagro es algo asombroso; una señal es algo asombroso que <em>apunta</em>. Juan selecciona siete de las muchas que personalmente vio al Señor hacer, y las arregla de manera que cada una apunta a una marca particular del Mesías prometido. <strong>(1)</strong> Agua en vino en la boda en Caná (Juan 2): lo inanimado es hecho vivo — el símbolo del gozo del nuevo pacto. Como dijo una niña de escuela dominical, habiendo oído la historia: <em>"Siempre es buena idea tener a Jesús cerca."</em> <strong>(2)</strong> La sanidad del hijo del noble a distancia (Juan 4:46–54): el padre quebrantado es sanado junto con el muchacho. <strong>(3)</strong> La sanidad del paralítico en el estanque de Betesda tras treinta y ocho años de cautiverio (Juan 5): los oprimidos son libertados. <strong>(4)</strong> La alimentación de los cinco mil (Juan 6): los hambrientos del alma son saciados. <strong>(5)</strong> El caminar sobre las aguas (Juan 6): los temerosos son calmados con <em>"Yo soy; no temáis."</em> <strong>(6)</strong> La sanidad del ciego de nacimiento (Juan 9): los ciegos ven. <strong>(7)</strong> La resurrección de Lázaro del sepulcro (Juan 11): los muertos son levantados. Ponga esas siete señales junto a Isaías 35 e Isaías 61 — las credenciales mesiánicas leídas en voz alta en Nazaret — y coinciden exactamente. Juan no eligió al azar. Eligió las siete señales que comprueban el currículum.</p>
+
+        <h2>V. Los siete "YO SOY" — El Nombre de Dios</h2>
+        <p>Las siete señales prueban que Jesús es el Cristo. Pero Juan va más alto que eso. Va a probar que el Cristo es Dios mismo. Y para probarlo no echa mano de un milagro sino de una oración. En la zarza ardiente en Éxodo 3, Moisés pidió a la voz un nombre que llevar a Israel. La voz respondió: <em>"YO SOY EL QUE SOY... así dirás á los hijos de Israel: YO SOY me ha enviado á vosotros"</em> (Éxodo 3:14). Ese Nombre sagrado — el eterno YO SOY — es el nombre que ningún judío se atrevía a pronunciar. Juan registra siete momentos en que el Señor Jesús extendió la mano, tomó ese Nombre sobre Sus propios labios, y lo aplicó a Sí mismo.</p>
+
+        <p><em>"YO SOY el pan de vida"</em> (6:35) — el sustentador del alma hambrienta. <em>"YO SOY la luz del mundo"</em> (8:12) — el iluminador del corazón oscuro. <em>"YO SOY la puerta"</em> (10:9) — la única entrada autorizada al redil. <em>"YO SOY el buen pastor"</em> (10:11) — que pone Su vida por las ovejas. <em>"YO SOY la resurrección y la vida"</em> (11:25) — poder que no necesita ayuda de afuera. <em>"YO SOY el camino, y la verdad, y la vida"</em> (14:6) — el único sendero a casa. <em>"YO SOY la vid verdadera"</em> (15:5) — la fuente de todo fruto que cualquier rama llevará jamás. Siete YO SOY. Cada uno una Persona pegada al Nombre de Dios.</p>
+
+        <p>Y hay un YO SOY más que Juan guarda para el clímax. En el Huerto de Getsemaní, la cohorte de soldados viene por el arresto. Jesús da un paso al frente. <em>"¿A quién buscáis?"</em> <em>"A Jesús Nazareno,"</em> contestan. Él dice dos palabras en griego: <em>egō eimi</em> — <em>YO SOY.</em> Juan anota que cuando lo dijo, <em>"volvieron atrás, y cayeron en tierra"</em> (Juan 18:6). Una cohorte entera de arresto echada al suelo por dos palabras. El Nombre de Dios en la boca del carpintero de Galilea.</p>
+
+        <h2>VI. El Discurso del Aposento Alto</h2>
+        <p>Cinco de los siete YO SOY se ubican en la primera mitad del libro. Los últimos dos — <em>"Yo soy el camino, y la verdad, y la vida"</em> y <em>"Yo soy la vid verdadera"</em> — se ubican dentro de la sección más íntima de cualquier Evangelio, el Discurso del Aposento Alto. Juan nos da cinco capítulos (13–17) la noche antes de la cruz. Mateo, Marcos y Lucas dedican un párrafo cada uno a la Última Cena; Juan nos da la conversación que la siguió. Registra el lavamiento de los pies (13). Registra la promesa de la casa del Padre con muchas moradas (14). Registra la vid verdadera y el llamado a permanecer (15). Registra la promesa del Consolador, el Espíritu Santo (16). Y en Juan 17 nos da la Oración Sacerdotal — la más larga oración registrada del Señor Jesús en los cuatro Evangelios, la oración en que Él ora por Sus discípulos y luego por cada creyente que vendría a la fe por la palabra de ellos — lo cual significa que oró por usted. Por nombre. Antes de que usted tuviera uno. La vida interior de la Trinidad se nos abre por un capítulo, y se nos permite escuchar al Hijo hablando con el Padre acerca de nosotros.</p>
+
+        <h2>VII. "Consumado es"</h2>
+        <p>Marcos y Mateo nos dejan oír el clamor del abandono desde la cruz. Lucas nos deja oír la oración del perdón. Juan nos deja oír una sola palabra en griego que se vuelve el evangelio entero: <em>tetelestai</em> — <em>"Consumado es"</em> (Juan 19:30). Está en el tiempo perfecto, que en griego significa un acto completado con resultados permanentes. <em>Acabado y permaneciendo acabado para siempre.</em> Los arqueólogos han encontrado recibos griegos del primer siglo con esa misma palabra estampada en la parte superior: <em>tetelestai</em> — <em>pagado completamente.</em> En Juan, la cruz no es la derrota trágica de un rabino; es la consumación triunfal de una misión que comenzó antes del tiempo. El Logos que en el capítulo 1 habló trayendo la creación a la existencia, en una tarde de viernes en el capítulo 19 anunció su redención desde una cruz.</p>
+
+        <p>Y solo Juan registra otra cosa. Cuando el soldado clavó la lanza en el costado de Jesús, <em>"luego salió sangre y agua"</em> (Juan 19:34). Escritores médicos han argumentado que el suero acuoso separado de la sangre es una señal de un corazón roto — que el Señor Jesús no murió simplemente de crucifixión. Murió de un corazón quebrado. El Verbo hecho carne entregó la carne voluntariamente, por Su propia voluntad. <em>"Nadie me la quita, mas yo la pongo de mí mismo"</em> (Juan 10:18). El Logos que había hablado el universo a la existencia escogió el momento preciso para entregar Su Espíritu. <em>Tetelestai.</em></p>
+
+        <h2>VIII. La tumba vacía y Tomás el incrédulo</h2>
+        <p>El capítulo 20 de Juan tiene cuatro escenas. María en el sepulcro, llorando, que se vuelve y oye una sola palabra griega: <em>"María."</em> Pedro y Juan corriendo al sepulcro vacío, viendo Juan los lienzos puestos como si un cuerpo hubiera pasado por ellos sin perturbarlos, y creyendo en el acto. Los discípulos en el aposento alto cerrado aquella noche del domingo, el Señor resucitado parado entre ellos con las heridas en las manos. Y un discípulo faltaba. Su nombre era Tomás, y se negó a creer por dicho de otros. <em>"Si no viere en sus manos la señal de los clavos, y metiere mi dedo en el lugar de los clavos, y metiere mi mano en su costado, no creeré"</em> (Juan 20:25). Ocho días después el Señor apareció de nuevo, y Tomás estaba en el cuarto. El Señor miró derecho a Tomás y dijo: <em>"Mete tu dedo aquí, y ve mis manos: y alarga acá tu mano, y métela en mi costado: y no seas incrédulo, sino fiel."</em> Y Tomás, en la única confesión de una sola frase de plena deidad en el Nuevo Testamento, dijo: <em>"¡Señor mío, y Dios mío!"</em> (Juan 20:28). Ese es el clímax de todo el Evangelio de Juan. Del Logos en el capítulo 1 al <em>Señor mío y Dios mío</em> en el capítulo 20. El viaje está completo. La identidad está confesada. El águila ha aterrizado.</p>
+
+        <h2>IX. El versículo clave — Por qué fue escrito Juan</h2>
+        <p>Dos versículos más adelante Juan nos dice por qué escribió el libro. <em>"Y también hizo Jesús muchas otras señales en presencia de sus discípulos, que no están escritas en este libro: estas empero son escritas, para que creáis que Jesús es el Cristo, el Hijo de Dios; y para que creyendo, tengáis vida en su nombre"</em> (Juan 20:30–31). Es la declaración de propósito más franca de cualquier autor en el Nuevo Testamento. Juan no está escribiendo biografía por sí misma. No está escribiendo reflexión devocional. Está escribiendo evidencia — seleccionada, ordenada, diseñada para llevar al lector a un veredicto. <em>Para que creáis.</em> Y el resultado de creer no es una religión; es <em>vida en su nombre.</em></p>
+
+        <p>He aquí una pregunta que todavía encuentra el corazón de cada lector de Juan: ¿Qué significa este Evangelio para <em>usted</em>? No para un erudito. No para un teólogo. Para <em>usted.</em> Y la respuesta honesta es que uno no puede leer Juan con honestidad y alejarse con sentimientos neutros. Se puede leer Mateo y volverse mejor ciudadano. Se puede leer Marcos y volverse mejor siervo. Se puede leer Lucas y volverse mejor amigo. Pero no se puede leer Juan sin volverse adorador. Juan no lo deja a usted en la cerca. Juan lo deja de rodillas con Tomás, llamando a Jesús lo que Tomás lo llamó: <em>Señor mío, y Dios mío.</em> Juan es el Evangelio para poner primero en las manos de cualquier buscador — porque fue escrito precisamente para el buscador. <em>"Estas son escritas para que creáis."</em> El libro entero es una flecha apuntada al corazón humano.</p>
+
+        <p>Avance, amigo mío, por el resto del Nuevo Testamento con el mismo Logos que habló los mundos a la existencia, que caminó por aldeas polvorientas con Sus discípulos, que terminó la obra en la cruz, que se levantó al tercer día con las llaves de la muerte y del Hades en Su mano, y que es el mismo ayer, hoy y por los siglos. Él es su Señor. Él es su Dios. Amén.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer questions 1–20 (multiple choice). You must achieve 90% (18/20) on the multiple-choice section to pass. <strong>M.Div. / Th.M. students:</strong> Answer all 30 questions. You must achieve 90% on both sections independently — 18/20 multiple choice AND 9/10 short answer. Click an answer for immediate feedback. <strong>Once all 12 units are passed, you will be redirected to your certificate.</strong></span><span class="lang-es"><strong>Estudiantes de certificado:</strong> Respondan las preguntas 1–20 (opción múltiple). Debe alcanzar el 90% (18/20) en la sección de opción múltiple para aprobar. <strong>Estudiantes de M.Div. / Th.M.:</strong> Respondan las 30 preguntas. Debe alcanzar el 90% en ambas secciones de manera independiente — 18/20 opción múltiple Y 9/10 respuesta corta. Haga clic en una respuesta para retroalimentación inmediata. <strong>Una vez aprobadas las 12 unidades, será redirigido a su certificado.</strong></span></p>
+    <div class="track-bar">
+        <strong><span class="lang-en">Your Track:</span><span class="lang-es">Su Modalidad:</span></strong>
+        <span style="margin-left:14px;">
+            <label><input type="radio" name="ctsTrack" value="cert"><span class="lang-en">Certificate (MC only)</span><span class="lang-es">Certificado (solo opción múltiple)</span></label>
+            <label><input type="radio" name="ctsTrack" value="mdiv"><span class="lang-en">Master of Divinity (MC + SA)</span><span class="lang-es">Maestría en Divinidad (MC + RC)</span></label>
+            <label><input type="radio" name="ctsTrack" value="thm"><span class="lang-en">Master of Theology (Th.M.) Track</span><span class="lang-es">Maestría en Teología (Th.M.)</span></label>
+        </span>
+    </div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar Aprobación</span></button>
+        <button id="resetExamBtn" class="reset-btn"><span class="lang-en">↺ Reset Exam</span><span class="lang-es">↺ Restablecer Examen</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ===== PER-UNIT CONFIG =====
+const UNIT = 5;
+const TOTAL_UNITS = 12;
+const NEXT_URL = 'CTSNTUnit6.html';
+const PREV_URL = 'CTSNTUnit4.html';
+const PASS_THRESHOLD = 0.90;
+
+let progress = JSON.parse(localStorage.getItem('cts_nt_progress')) || {};
+let currentTrack = localStorage.getItem('cts_track') || 'cert';
+
+function isMastersLevel() { return currentTrack === 'mdiv' || currentTrack === 'thm'; }
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === UNIT) cls += ' active';
+        grid.innerHTML += `<a href="CTSNTUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+if (PREV_URL) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_URL; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="#" onclick="promptName(); return false;" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+    }
+}
+function promptName() {
+    const name = prompt("Welcome to CTS New Testament Survey! Please enter your full name as you'd like it to appear on your certificate:");
+    if (name && name.trim().length > 1) {
+        localStorage.setItem('cts_student', JSON.stringify({name: name.trim()}));
+        displayStudentGreeting();
+    }
+}
+displayStudentGreeting();
+
+const mcQuestions = [
+    { textEn: "1. Who is the traditional author of the Gospel of John?", textEs: "1. ¿Quién es el autor tradicional del Evangelio de Juan?",
+      optionsEn: ["John of Patmos", "John Mark", "John the Baptist", "John the apostle, son of Zebedee"],
+      optionsEs: ["Juan de Patmos", "Juan Marcos", "Juan el Bautista", "Juan el apóstol, hijo de Zebedeo"],
+      explanationEn: "John, the disciple whom Jesus loved, wrote the fourth Gospel as the last living eyewitness, around AD 85–95 from Ephesus.", explanationEs: "Juan, el discípulo a quien Jesús amaba, escribió el cuarto Evangelio como el último testigo vivo, alrededor del 85–95 d.C. desde Éfeso.", correct: 3 },
+    { textEn: "2. The key verse stating the purpose of John's Gospel is:", textEs: "2. El versículo clave que declara el propósito del Evangelio de Juan es:",
+      optionsEn: ["John 1:1", "John 20:30-31", "John 3:16", "John 14:6"],
+      optionsEs: ["Juan 1:1", "Juan 20:30-31", "Juan 3:16", "Juan 14:6"],
+      explanationEn: "John wrote so that readers may believe Jesus is the Christ, the Son of God, and have life in His name (20:30–31).", explanationEs: "Juan escribió para que los lectores crean que Jesús es el Cristo, el Hijo de Dios, y tengan vida en Su nombre (20:30–31).", correct: 1 },
+    { textEn: "3. The opening words of John's Gospel are:", textEs: "3. Las palabras de apertura del Evangelio de Juan son:",
+      optionsEn: ["Blessed are the meek", "Repent for the kingdom is near", "In the beginning was the Word", "The Son of Man has come"],
+      optionsEs: ["Bienaventurados los mansos", "Arrepentíos, el reino se ha acercado", "En el principio era el Verbo", "El Hijo del Hombre ha venido"],
+      explanationEn: "The prologue calls Jesus the Logos, the Word who was God and became flesh and dwelt among us (John 1).", explanationEs: "El prólogo llama a Jesús el Logos, el Verbo que era Dios y se hizo carne y habitó entre nosotros (Juan 1).", correct: 2 },
+    { textEn: "4. The seven signs in John are intended to prove that Jesus is:", textEs: "4. Las siete señales en Juan están destinadas a probar que Jesús es:",
+      optionsEn: ["The Christ (Messiah)", "A miracle worker", "A prophet like Moses", "A great teacher"],
+      optionsEs: ["El Cristo (Mesías)", "Un hacedor de milagros", "Un profeta como Moisés", "Un gran maestro"],
+      explanationEn: "'Logos' meant the speaking-self of God to a Jew and the rational mind behind the universe to a Greek; John says it is a Person.", explanationEs: "'Logos' significaba el yo que habla de Dios para un judío y la mente racional tras el universo para un griego; Juan dice que es una Persona.", correct: 0 },
+    { textEn: "5. The first sign Jesus performed in John was:", textEs: "5. La primera señal que Jesús realizó en Juan fue:",
+      optionsEn: ["Healing a paralytic", "Turning water into wine at Cana", "Feeding the 5000", "Walking on water"],
+      optionsEs: ["Sanar a un paralítico", "Convertir agua en vino en Caná", "Alimentar a los 5000", "Caminar sobre el agua"],
+      explanationEn: "John calls the miracles 'signs' because each one points to a mark of the promised Messiah.", explanationEs: "Juan llama 'señales' a los milagros porque cada una apunta a una marca del Mesías prometido.", correct: 1 },
+    { textEn: "6. The last and climactic sign before the passion was:", textEs: "6. La última señal climática antes de la pasión fue:",
+      optionsEn: ["Healing the man born blind", "The feeding of the 5000", "The raising of Lazarus", "Walking on water"],
+      optionsEs: ["Sanar al ciego de nacimiento", "La alimentación de los 5000", "La resurrección de Lázaro", "Caminar sobre el agua"],
+      explanationEn: "The first sign was water into wine at the wedding in Cana, the symbol of the joy of the new covenant (John 2).", explanationEs: "La primera señal fue agua en vino en la boda de Caná, el símbolo del gozo del nuevo pacto (Juan 2).", correct: 2 },
+    { textEn: "7. How many 'I AM' statements does Jesus make in John's Gospel?", textEs: "7. ¿Cuántas declaraciones 'YO SOY' hace Jesús en el Evangelio de Juan?",
+      optionsEn: ["Seven", "Five", "Three", "Twelve"],
+      optionsEs: ["Siete", "Cinco", "Tres", "Doce"],
+      explanationEn: "The seventh and greatest sign was the raising of Lazarus from the tomb, showing the dead are raised (John 11).", explanationEs: "La séptima y mayor señal fue la resurrección de Lázaro del sepulcro, mostrando que los muertos son levantados (Juan 11).", correct: 0 },
+    { textEn: "8. The 'I AM' statements connect Jesus to the divine Name revealed to Moses at:", textEs: "8. Las declaraciones 'YO SOY' conectan a Jesús con el Nombre divino revelado a Moisés en:",
+      optionsEn: ["Mount Sinai", "The wilderness of Zin", "The Jordan River", "The burning bush (Exodus 3)"],
+      optionsEs: ["El Monte Sinaí", "El desierto de Zin", "El río Jordán", "La zarza ardiente (Éxodo 3)"],
+      explanationEn: "John selects seven signs, arranging them so each points at a particular credential of the Messiah.", explanationEs: "Juan selecciona siete señales, arreglándolas para que cada una apunte a una credencial particular del Mesías.", correct: 3 },
+    { textEn: "9. 'I am the bread of life' is found in which chapter?", textEs: "9. 'Yo soy el pan de vida' se encuentra en cuál capítulo?",
+      optionsEn: ["John 10", "John 8", "John 6", "John 15"],
+      optionsEs: ["Juan 10", "Juan 8", "Juan 6", "Juan 15"],
+      explanationEn: "The seven 'I AM' statements take up the divine name revealed to Moses at the burning bush in Exodus 3.", explanationEs: "Los siete 'YO SOY' toman el nombre divino revelado a Moisés en la zarza ardiente en Éxodo 3.", correct: 2 },
+    { textEn: "10. 'I am the light of the world' is found in which chapter?", textEs: "10. 'Yo soy la luz del mundo' se encuentra en cuál capítulo?",
+      optionsEn: ["John 8", "John 6", "John 10", "John 14"],
+      optionsEs: ["Juan 8", "Juan 6", "Juan 10", "Juan 14"],
+      explanationEn: "'I AM the bread of life' presents Jesus as the sustainer of the hungry soul (John 6:35).", explanationEs: "'YO SOY el pan de vida' presenta a Jesús como el sustentador del alma hambrienta (Juan 6:35).", correct: 0 },
+    { textEn: "11. 'I am the way, the truth, and the life' is found in:", textEs: "11. 'Yo soy el camino, y la verdad, y la vida' se encuentra en:",
+      optionsEn: ["John 10:11", "John 14:6", "John 11:25", "John 15:5"],
+      optionsEs: ["Juan 10:11", "Juan 14:6", "Juan 11:25", "Juan 15:5"],
+      explanationEn: "'I AM the good shepherd' presents Jesus as the one who lays down His life for the sheep (John 10:11).", explanationEs: "'YO SOY el buen pastor' presenta a Jesús como el que pone Su vida por las ovejas (Juan 10:11).", correct: 1 },
+    { textEn: "12. 'I am the true vine' is found in:", textEs: "12. 'Yo soy la vid verdadera' se encuentra en:",
+      optionsEn: ["John 10:11", "John 11:25", "John 14:6", "John 15:1-5"],
+      optionsEs: ["Juan 10:11", "Juan 11:25", "Juan 14:6", "Juan 15:1-5"],
+      explanationEn: "'I AM the way, the truth, and the life' (John 14:6) names Jesus the only path home to the Father.", explanationEs: "'YO SOY el camino, la verdad y la vida' (Juan 14:6) nombra a Jesús el único sendero a casa al Padre.", correct: 3 },
+    { textEn: "13. Nicodemus came to Jesus by night in which chapter?", textEs: "13. Nicodemo vino a Jesús de noche en cuál capítulo?",
+      optionsEn: ["John 5", "John 4", "John 3", "John 6"],
+      optionsEs: ["Juan 5", "Juan 4", "Juan 3", "Juan 6"],
+      explanationEn: "At the arrest in Gethsemane Jesus said 'egō eimi' ('I AM'), and the cohort drew back and fell to the ground (John 18:6).", explanationEs: "En el arresto en Getsemaní Jesús dijo 'egō eimi' ('YO SOY'), y la cohorte retrocedió y cayó a tierra (Juan 18:6).", correct: 2 },
+    { textEn: "14. Jesus' encounter with the Samaritan woman at the well is in:", textEs: "14. El encuentro de Jesús con la samaritana en el pozo está en:",
+      optionsEn: ["John 4", "John 3", "John 5", "John 6"],
+      optionsEs: ["Juan 4", "Juan 3", "Juan 5", "Juan 6"],
+      explanationEn: "The Upper Room Discourse fills John 13–17, five chapters of the night before the cross found in no other Gospel.", explanationEs: "El Discurso del Aposento Alto llena Juan 13–17, cinco capítulos de la noche antes de la cruz que no se hallan en otro Evangelio.", correct: 0 },
+    { textEn: "15. The Greek word 'tetelestai' translated 'It is finished' is found in:", textEs: "15. La palabra griega 'tetelestai' traducida 'Consumado es' se encuentra en:",
+      optionsEn: ["John 17:1", "John 19:30", "John 18:36", "John 20:28"],
+      optionsEs: ["Juan 17:1", "Juan 19:30", "Juan 18:36", "Juan 20:28"],
+      explanationEn: "John alone records Jesus washing the disciples' feet in the Upper Room (John 13).", explanationEs: "Solo Juan registra a Jesús lavando los pies de los discípulos en el Aposento Alto (Juan 13).", correct: 1 },
+    { textEn: "16. Thomas's full confession of Jesus' deity was:", textEs: "16. La confesión completa de Tomás de la deidad de Jesús fue:",
+      optionsEn: ["He is the Christ", "He is risen indeed", "Behold the Lamb of God", "My Lord and my God"],
+      optionsEs: ["Él es el Cristo", "Verdaderamente ha resucitado", "He aquí el Cordero de Dios", "Señor mío, y Dios mío"],
+      explanationEn: "John 17 records the High Priestly Prayer, the longest recorded prayer of Jesus, in which He prays for every future believer.", explanationEs: "Juan 17 registra la Oración Sacerdotal, la oración más larga registrada de Jesús, en que ora por cada creyente futuro.", correct: 3 },
+    { textEn: "17. John's Gospel was most likely written:", textEs: "17. El Evangelio de Juan fue escrito muy probablemente:",
+      optionsEn: ["Around AD 50", "Late in the first century (ca. AD 85-95)", "Between AD 60-65", "After AD 110"],
+      optionsEs: ["Alrededor del 50 d.C.", "A finales del primer siglo (ca. 85-95 d.C.)", "Entre 60-65 d.C.", "Después del 110 d.C."],
+      explanationEn: "'It is finished' translates tetelestai, in the perfect tense — finished and standing finished forever, like a receipt marked 'paid in full.'", explanationEs: "'Consumado es' traduce tetelestai, en tiempo perfecto — acabado y permaneciendo acabado para siempre, como un recibo marcado 'pagado completamente'.", correct: 1 },
+    { textEn: "18. Tradition places John's later ministry in the city of:", textEs: "18. La tradición ubica el ministerio posterior de Juan en la ciudad de:",
+      optionsEn: ["Rome", "Alexandria", "Antioch", "Ephesus"],
+      optionsEs: ["Roma", "Alejandría", "Antioquía", "Éfeso"],
+      explanationEn: "John alone records blood and water flowing from Jesus' pierced side, taken as a sign He died of a broken heart (John 19:34).", explanationEs: "Solo Juan registra sangre y agua saliendo del costado traspasado de Jesús, tenido como señal de que murió de un corazón roto (Juan 19:34).", correct: 3 },
+    { textEn: "19. Among the four living creatures of Ezekiel and Revelation, John is traditionally symbolized by:", textEs: "19. Entre los cuatro seres vivientes de Ezequiel y Apocalipsis, Juan es simbolizado tradicionalmente por:",
+      optionsEn: ["The eagle", "The ox", "The lion", "The man"],
+      optionsEs: ["El águila", "El buey", "El león", "El hombre"],
+      explanationEn: "Thomas, who refused to believe on hearsay, made the New Testament's clearest one-sentence confession of deity: 'My Lord and my God!'", explanationEs: "Tomás, que se negó a creer de oídas, hizo la confesión de deidad más clara del Nuevo Testamento en una oración: '¡Señor mío, y Dios mío!'", correct: 0 },
+    { textEn: "20. A feature distinctive to John (vs. the Synoptics) is:", textEs: "20. Un rasgo distintivo de Juan (frente a los Sinópticos) es:",
+      optionsEn: ["Detailed Sermon on the Mount", "Many parables", "Long discourses and the 'I AM' sayings", "Birth narrative"],
+      optionsEs: ["Detallado Sermón del Monte", "Muchas parábolas", "Largos discursos y los dichos 'YO SOY'", "Relato del nacimiento"],
+      explanationEn: "John 20:30–31 is the key verse and purpose statement: these signs are written that you may believe and have life.", explanationEs: "Juan 20:30–31 es el versículo clave y la declaración de propósito: estas señales se escriben para que creáis y tengáis vida.", correct: 2 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Explain John's prologue (1:1-18). What does the term 'Logos' mean to both Jewish and Greek readers, and why does John use it?", textEs: "21. Explique el prólogo de Juan (1:1-18). ¿Qué significa el término 'Logos' tanto para lectores judíos como griegos, y por qué lo usa Juan?",
+      kw_en: ["logos", "word", "beginning", "jewish", "greek", "incarnation"], kw_es: ["logos", "palabra", "principio", "judio", "griego", "encarnacion"],
+      modelEn: "John's prologue opens like Genesis: in the beginning was the Word, the Logos, who was with God and was God. To a Jewish reader Logos meant the speaking-self of God who called the worlds into being; to a Greek it meant the rational mind ordering the universe. John takes that word and announces the Logos is a Person who became flesh — the incarnation, the eternal Word dwelling among us.", modelEs: "El prólogo de Juan abre como Génesis: en el principio era el Verbo, el Logos, que estaba con Dios y era Dios. Para un lector judío Logos significaba el yo que habla de Dios que llamó los mundos a existir; para un griego significaba la mente racional que ordena el universo. Juan toma esa palabra y anuncia que el Logos es una Persona que se hizo carne — la encarnación, el Verbo eterno habitando entre nosotros." },
+    { textEn: "22. Compare and contrast the purposes of the seven signs and the seven 'I AM' statements in John's Gospel.", textEs: "22. Compare y contraste los propósitos de las siete señales y las siete declaraciones 'YO SOY' en el Evangelio de Juan.",
+      kw_en: ["signs", "i am", "messiah", "deity", "christ", "son of god"], kw_es: ["señales", "yo soy", "mesias", "deidad", "cristo", "hijo de dios"],
+      modelEn: "The seven signs and the seven 'I AM' statements are John's two columns of evidence. The signs prove that Jesus is the Christ, the promised Messiah, each pointing to a credential. The 'I AM' statements go higher and prove His deity, that the Christ is the Son of God. Together they support John's twofold thesis that Jesus is the Christ and the Son of God.", modelEs: "Las siete señales y los siete 'YO SOY' son las dos columnas de evidencia de Juan. Las señales prueban que Jesús es el Cristo, el Mesías prometido, apuntando cada una a una credencial. Los 'YO SOY' van más alto y prueban Su deidad, que el Cristo es el Hijo de Dios. Juntos sostienen la tesis doble de Juan de que Jesús es el Cristo y el Hijo de Dios." },
+    { textEn: "23. Discuss how the 'I AM' statements connect to the divine name revealed to Moses at the burning bush.", textEs: "23. Discuta cómo las declaraciones 'YO SOY' se conectan con el nombre divino revelado a Moisés en la zarza ardiente.",
+      kw_en: ["i am", "exodus", "burning bush", "yhwh", "name", "deity"], kw_es: ["yo soy", "exodo", "zarza ardiente", "yhwh", "nombre", "deidad"],
+      modelEn: "The 'I AM' statements connect to the divine name revealed at the burning bush in Exodus 3, where God told Moses 'I AM WHO I AM.' That name, YHWH, was the name no Jew dared speak. When Jesus took 'I AM' on His own lips, He was claiming the very name of God for Himself, an unmistakable assertion of deity.", modelEs: "Los 'YO SOY' se conectan con el nombre divino revelado en la zarza ardiente en Éxodo 3, donde Dios dijo a Moisés 'YO SOY EL QUE SOY'. Ese nombre, YHWH, era el nombre que ningún judío se atrevía a pronunciar. Cuando Jesús tomó 'YO SOY' en Sus propios labios, reclamaba el nombre mismo de Dios para Sí, una afirmación inconfundible de deidad." },
+    { textEn: "24. Analyze the Upper Room Discourse (John 13-17). What unique material does John include that the synoptics omit?", textEs: "24. Analice el Discurso del Aposento Alto (Juan 13-17). ¿Qué material único incluye Juan que los sinópticos omiten?",
+      kw_en: ["upper room", "foot washing", "comforter", "vine", "high priestly", "prayer"], kw_es: ["aposento alto", "lavamiento de pies", "consolador", "vid", "sumo sacerdotal", "oracion"],
+      modelEn: "The Upper Room Discourse gives unique material the synoptics lack: the foot washing, the promise of the Comforter, the true vine and the call to abide, and in John 17 the High Priestly Prayer. Where the others give one paragraph to the Last Supper, John gives five chapters of the conversation that followed, opening the interior life of Father and Son to us.", modelEs: "El Discurso del Aposento Alto da material único que falta en los sinópticos: el lavamiento de los pies, la promesa del Consolador, la vid verdadera y el llamado a permanecer, y en Juan 17 la Oración Sacerdotal. Donde los otros dan un párrafo a la Última Cena, Juan da cinco capítulos de la conversación que siguió, abriéndonos la vida interior del Padre y el Hijo." },
+    { textEn: "25. Explain the significance of the Greek word 'tetelestai' from John 19:30. How does it shape John's portrayal of the cross?", textEs: "25. Explique la importancia de la palabra griega 'tetelestai' de Juan 19:30. ¿Cómo da forma al retrato de la cruz que hace Juan?",
+      kw_en: ["tetelestai", "finished", "perfect tense", "paid", "completion", "victory"], kw_es: ["tetelestai", "consumado", "tiempo perfecto", "pagado", "consumacion", "victoria"],
+      modelEn: "'It is finished' translates the Greek tetelestai, in the perfect tense, meaning a completed act with permanent results — finished and standing finished. First-century receipts bear the same word stamped 'paid in full.' So the cross is not defeat but completion and victory: the mission begun before time is paid in full from the cross.", modelEs: "'Consumado es' traduce el griego tetelestai, en tiempo perfecto, que significa un acto completado con resultados permanentes — acabado y permaneciendo acabado. Recibos del primer siglo llevan la misma palabra estampada 'pagado completamente'. Así que la cruz no es derrota sino consumación y victoria: la misión comenzada antes del tiempo es pagada por completo desde la cruz." },
+    { textEn: "26. Trace the progression of Thomas's doubt and confession (John 20). What is the theological significance of his 'My Lord and my God'?", textEs: "26. Trace la progresión de la duda y confesión de Tomás (Juan 20). ¿Cuál es la importancia teológica de su 'Señor mío, y Dios mío'?",
+      kw_en: ["thomas", "doubt", "lord", "god", "confession", "deity"], kw_es: ["tomas", "duda", "señor", "dios", "confesion", "deidad"],
+      modelEn: "Thomas moved from doubt to confession. He refused to believe on hearsay, demanding to touch the nail prints; but when the risen Lord appeared and offered His wounds, Thomas answered 'My Lord and my God.' It is the clearest one-sentence confession of full deity in the New Testament, and John places it as the climax of the whole Gospel.", modelEs: "Tomás pasó de la duda a la confesión. Se negó a creer de oídas, exigiendo tocar las marcas de los clavos; pero cuando el Señor resucitado apareció y ofreció Sus heridas, Tomás respondió 'Señor mío, y Dios mío'. Es la confesión de plena deidad más clara del Nuevo Testamento en una oración, y Juan la coloca como el clímax de todo el Evangelio." },
+    { textEn: "27. Discuss why John 20:30-31 functions as the purpose statement and key verse of the entire Gospel.", textEs: "27. Discuta por qué Juan 20:30-31 funciona como declaración de propósito y versículo clave de todo el Evangelio.",
+      kw_en: ["20:30", "purpose", "believe", "christ", "son of god", "life"], kw_es: ["20:30", "proposito", "creer", "cristo", "hijo de dios", "vida"],
+      modelEn: "John 20:30–31 is the purpose statement and key verse, the most candid statement of purpose by any New Testament author. John writes that his selected signs are recorded so the reader may believe that Jesus is the Christ, the Son of God, and that believing may have life in His name. The whole book is evidence aimed at a verdict.", modelEs: "Juan 20:30–31 es la declaración de propósito y el versículo clave, la declaración de propósito más franca de cualquier autor del Nuevo Testamento. Juan escribe que sus señales seleccionadas se registran para que el lector crea que Jesús es el Cristo, el Hijo de Dios, y que creyendo tenga vida en Su nombre. Todo el libro es evidencia dirigida a un veredicto." },
+    { textEn: "28. Compare John's portrait of Christ as Logos with the synoptic Gospels' portraits of Christ as King (Matthew), Servant (Mark), and Son of Man (Luke).", textEs: "28. Compare el retrato de Cristo como Logos en Juan con los retratos sinópticos de Cristo como Rey (Mateo), Siervo (Marcos) e Hijo del Hombre (Lucas).",
+      kw_en: ["logos", "king", "servant", "son of man", "matthew", "mark", "luke"], kw_es: ["logos", "rey", "siervo", "hijo del hombre", "mateo", "marcos", "lucas"],
+      modelEn: "Where the synoptics each give an angle, John gives the deity behind them all. Matthew shows the King, Mark shows the Servant, and Luke shows the Man or Son of Man; John shows God, the eternal Logos made flesh. John does not repeat the others but answers the question they raise — who is this Man? — with the highest answer: He is God.", modelEs: "Donde los sinópticos dan cada uno un ángulo, Juan da la deidad detrás de todos ellos. Mateo muestra al Rey, Marcos muestra al Siervo, y Lucas muestra al Hombre o Hijo del Hombre; Juan muestra a Dios, el Logos eterno hecho carne. Juan no repite a los otros sino que responde a la pregunta que ellos plantean — ¿quién es este Hombre? — con la respuesta más alta: Él es Dios." },
+    { textEn: "29. Discuss the significance of 'egō eimi' ('I AM') in John 18:6 at the arrest. What does the reaction of the soldiers reveal?", textEs: "29. Discuta la importancia de 'egō eimi' ('YO SOY') en Juan 18:6 en el arresto. ¿Qué revela la reacción de los soldados?",
+      kw_en: ["ego eimi", "arrest", "gethsemane", "fell", "name", "deity"], kw_es: ["ego eimi", "arresto", "getsemani", "cayeron", "nombre", "deidad"],
+      modelEn: "At the arrest in Gethsemane, when the soldiers said they sought Jesus of Nazareth, He answered 'egō eimi' — I AM. John records that they drew back and fell to the ground. A whole arresting cohort was knocked off its feet by two words, because Jesus had spoken the very name of God; the moment quietly declares His deity even as He is handed over.", modelEs: "En el arresto en Getsemaní, cuando los soldados dijeron que buscaban a Jesús Nazareno, Él respondió 'egō eimi' — YO SOY. Juan registra que retrocedieron y cayeron a tierra. Una cohorte entera de arresto fue derribada por dos palabras, porque Jesús había pronunciado el nombre mismo de Dios; el momento declara calladamente Su deidad aun mientras es entregado." },
+    { textEn: "30. Synthesize: Why is John's Gospel considered the most Christological of the four, and what is its enduring contribution to the Church?", textEs: "30. Sintetice: ¿Por qué se considera al Evangelio de Juan el más cristológico de los cuatro, y cuál es su contribución duradera a la Iglesia?",
+      kw_en: ["christology", "deity", "worship", "logos", "i am", "incarnation"], kw_es: ["cristologia", "deidad", "adoracion", "logos", "yo soy", "encarnacion"],
+      modelEn: "John is the most Christological Gospel because its whole aim is the identity of Christ. From the Logos and the incarnation in chapter 1, through the 'I AM' claims of deity, to Thomas crying 'My Lord and my God,' the book drives the reader past mere admiration to worship. You cannot read John honestly and stay neutral; it leaves you on your knees confessing His deity.", modelEs: "Juan es el Evangelio más cristológico porque todo su fin es la identidad de Cristo. Desde el Logos y la encarnación en el capítulo 1, pasando por las afirmaciones de deidad de 'YO SOY', hasta Tomás clamando 'Señor mío, y Dios mío', el libro lleva al lector más allá de la mera admiración a la adoración. No se puede leer a Juan honestamente y quedar neutral; lo deja a uno de rodillas confesando Su deidad." }
+];
+
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = `cts_nt_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY = `cts_nt_u${UNIT}_sa_lockout`;
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0')
+        : parseInt(localStorage.getItem(`cts_nt_u${UNIT}_lockout`) || '0');
+}
+let lockUntil = activeLockUntil();
+let unitPassed = progress[`unit${UNIT}`] || false;
+
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function isEs() { return document.body.classList.contains('lang-es'); }
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer as left-boundary prefix.
+// Pass standard is >=3 hits (NOT all keywords).
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function kwHitCount(normAns, keys) { return keys.filter(function(k){ return kwHit(normAns, k); }).length; }
+
+function checkAllUnitsPassed() {
+    for (let i = 1; i <= TOTAL_UNITS; i++) { if (!progress[`unit${i}`]) return false; }
+    return true;
+}
+
+function syncTrackUI() {
+    document.querySelectorAll('input[name="ctsTrack"]').forEach(r => { r.checked = (r.value === currentTrack); });
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = isEs() ? 'Opción Múltiple (Preguntas 1–20)' : 'Multiple Choice (Questions 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (!isEs()) ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (!isEs()) ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (!isEs()) ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((!isEs()) ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = isEs() ? 'Respuesta Corta (Preguntas 21–30) — Pista Maestría en Divinidad' : 'Short Answer (Questions 21–30) — Master of Divinity Track';
+    container.appendChild(kwTitle);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = isEs() ? q.textEs : q.textEn;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = isEs() ? 'Escriba su respuesta aquí...' : 'Type your answer here...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = isEs() ? 'Verificar Respuesta' : 'Check Answer';
+        const fb = document.createElement('div');
+        fb.className = 'feedback-text';
+        fb.style.marginTop = '8px';
+        const model = document.createElement('div');
+        model.className = 'model-answer';
+        model.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ansRaw = ta.value.trim();
+            const ans = normalize(ansRaw);
+            const keys = isEs() ? q.kw_es : q.kw_en;
+            const hits = kwHitCount(ans, keys);
+            if (ansRaw.length < 100) {
+                fb.innerHTML = isEs() ? 'Escriba una respuesta más completa (al menos una oración).' : 'Please write a more complete answer (at least a sentence).';
+                fb.className = 'feedback-text incorrect';
+            } else if (hits >= 3) {
+                fb.innerHTML = isEs() ? `✓ ¡Bien! Su respuesta toca ${hits} conceptos clave.` : `✓ Good! Your answer touches ${hits} key concepts.`;
+                fb.className = 'feedback-text correct';
+                kwAnswers[idx] = ansRaw;
+            } else {
+                fb.innerHTML = isEs() ? `Va bien — toca ${hits}. Apunte a al menos 3 conceptos clave; revise la lección y vuelva a intentarlo.` : `Good start — you touched ${hits}. Aim for at least 3 key concepts; review the lesson and try again.`;
+                fb.className = 'feedback-text incorrect';
+            }
+            const mk = isEs() ? q.modelEs : q.modelEn;
+            if (mk) {
+                model.innerHTML = (isEs() ? '<strong>Respuesta modelo — estúdiela:</strong> ' : '<strong>Model answer — study this:</strong> ') + mk;
+                model.style.display = 'block';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(model);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+}
+
+function triggerRedirect() {
+    const target = checkAllUnitsPassed() ? 'CTSNTCertificate.html' : NEXT_URL;
+    const result = document.getElementById('examResult');
+    let seconds = 3;
+    function tick() {
+        const msg = isEs()
+            ? `Redirigiendo a la siguiente unidad en ${seconds}...`
+            : `Redirecting to the next unit in ${seconds}...`;
+        result.innerHTML = `<div class='redirect-notice'>✅ ${isEs() ? '¡APROBADO!' : 'PASSED!'} ${msg}</div>`;
+        if (seconds <= 0) { location.href = target; return; }
+        seconds--;
+        setTimeout(tick, 1000);
+    }
+    tick();
+}
+
+function submitExam() {
+    const result = document.getElementById('examResult');
+    if (unitPassed) {
+        result.innerHTML = `<span style='color:green'>${isEs() ? '✅ Unidad ya aprobada.' : '✅ Unit already passed!'}</span>`;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        result.innerHTML = `<span style='color:red'>${isEs() ? `⏰ Bloqueado por ${wait} minutos más.` : `⏰ Locked for ${wait} more minutes.`}</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) { promptName(); return; }
+
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    let advCorrect = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = normalize(kwAnswers[i] || '');
+        const keys = isEs() ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        if (kwHitCount(ans, keys) >= 3 && ans.length >= 100) advCorrect++;
+    }
+
+    const mcPct = correctMC / 20;
+    const saPct = advCorrect / 10;
+    const mcPass = mcPct >= PASS_THRESHOLD;
+    const saPass = saPct >= PASS_THRESHOLD;
+
+    function passUnit() {
+        unitPassed = true;
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem('cts_nt_progress', JSON.stringify(progress));
+        localStorage.setItem(`nt_unit${UNIT}_passed`, 'true');
+        localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+        localStorage.removeItem(SA_LOCK_KEY);
+        updateProgressGrid();
+        triggerRedirect();
+    }
+
+    if (!isMastersLevel()) {
+        if (mcPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Necesita 18/20 para Certificado.`
+                : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Need 18/20 for Certificate.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        if (saPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ✓ ya guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+                : `MC: ✓ already banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Su opción múltiple está a salvo. Puede reintentar la sección de respuesta corta en ${mins} min.` : `Your multiple-choice pass is safe. You can retry the short-answer section in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPass && saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit();
+    } else if (mcPass && !saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ aprobado y guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ passed and banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Al reintentar en ${mins} min, solo necesitará la sección de respuesta corta — el OM permanece aprobado.` : `When you retry in ${mins} min, you'll only need the short-answer section — MC stays passed.`}</span>`;
+    } else {
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 18/20 Y 9/10 para M.Div.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 18/20 AND 9/10 for M.Div.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+    }
+}
+
+function resetExam() {
+    const msg = isEs()
+        ? '¿Restablecer el examen? Esto borrará sus respuestas en pantalla y eliminará el bloqueo de 15 minutos. Las unidades ya aprobadas no se afectan.'
+        : 'Reset the exam? This will clear your on-screen answers and remove the 15-minute lockout. Already-passed units are not affected.';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill('');
+    lockUntil = 0;
+    mcPreviouslyPassed = false;
+    localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+document.querySelectorAll('input[name="ctsTrack"]').forEach(r => {
+    r.addEventListener('change', e => {
+        currentTrack = e.target.value;
+        localStorage.setItem('cts_track', currentTrack);
+    });
+});
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.className = 'lang-es';
+        this.textContent = 'English';
+    } else {
+        document.body.className = 'lang-en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+syncTrackUI();
+renderQuestions();
+if (unitPassed) document.getElementById('examResult').innerHTML = `<span style='color:green'>${isEs() ? `✅ Unidad ${UNIT} ya aprobada.` : `✅ Unit ${UNIT} already passed.`}</span>`;
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSNTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

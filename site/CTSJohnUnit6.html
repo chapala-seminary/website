@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS The Gospel of John &mdash; Unit 6: The Witnesses to Christ</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form label { font-weight:bold; font-size:0.9rem; display:block; margin-top:8px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 7 &rarr;</span><span class="lang-es">Unidad 7 &rarr;</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">&#128214; The Gospel of John &mdash; Unit 6: The Witnesses to Christ</span><span class="lang-es">&#128214; El Evangelio de Juan &mdash; Unidad 6: Los Testigos de Cristo</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"You search the Scriptures, for in them you think you have eternal life; and these are they which testify of Me." &mdash; John 5:39 (NKJV)</span><span class="lang-es">&#9889; "Escudri&ntilde;ad las Escrituras, porque a vosotros os parece que en ellas ten&eacute;is la vida eterna; y ellas son las que dan testimonio de m&iacute;." &mdash; Juan 5:39 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard" style="display:none;">
+    <h3><span class="lang-en">Register to Begin</span><span class="lang-es">Reg&iacute;strese para comenzar</span></h3>
+    <p style="font-size:0.9rem;"><span class="lang-en">Your name and track are saved on this device and carry across every unit and every CTS course.</span><span class="lang-es">Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS.</span></p>
+    <label class="lang-en">Full name</label><label class="lang-es">Nombre completo</label>
+    <input type="text" id="regName" placeholder="..." aria-label="...">
+    <label class="lang-en">Email</label><label class="lang-es">Correo electr&oacute;nico</label>
+    <input type="email" id="regEmail" placeholder="..." aria-label="...">
+    <label class="lang-en">Track</label><label class="lang-es">Trayecto</label>
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate / Certificado</option>
+        <option value="mdiv">M.Div.</option>
+        <option value="thm">Th.M.</option>
+    </select>
+    <button id="regBtn" class="nav-btn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top:8px;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h3>Introduction &mdash; The Court Is in Session</h3>
+<p>John tells us exactly why he wrote his Gospel: <em>"these are written that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name"</em> (John 20:31). The whole book is built like a trial. A great claim is on the table &mdash; that this Man is God in the flesh &mdash; and John summons witness after witness to the stand so that the reader, like a juror, may weigh the evidence and render a verdict. In a Jewish court no charge could stand on one voice alone; "by the mouth of two or three witnesses the matter shall be established" (Deuteronomy 19:15). That law is wiser than we sometimes think. Modern studies have found that human eyewitness memory is mistaken far more often than we would ever expect, which is precisely why a single witness was never enough. But Jesus does not offer the bare minimum of two. He calls a whole chorus of witnesses, and they do not contradict one another; they agree. A juror who hears a single mistaken witness may rightly hesitate. But a juror who hears the Baptist, the works, the Father, the Scriptures, Moses, the Spirit, and a long line of changed lives all saying the same thing is left without excuse. That is exactly where John means to leave us.</p>
+
+<h3>I. The Charge: Equal with God</h3>
+<p>The trial comes to a head at the pool of Bethesda. There a man had been an invalid for thirty-eight years, and Jesus healed him with a word &mdash; on the Sabbath. Instead of rejoicing, the leaders were enraged, and John tells us why their anger turned murderous: <em>"the Jews sought all the more to kill Him, because He not only broke the Sabbath, but also said that God was His Father, making Himself equal with God"</em> (John 5:18). There is the charge. Jesus never denied it; He answered it &mdash; not by softening the claim, but by calling His witnesses.</p>
+
+<h3>II. The Witnesses Jesus Named</h3>
+<p>Standing before His accusers in John 5, Jesus called the roll of those who testify to who He is.</p>
+<p><strong>The witness of John the Baptist.</strong> He was, Jesus said, "a burning and shining lamp" (5:35), and that lamp had pointed away from itself: "Behold! The Lamb of God who takes away the sin of the world" (1:29). The Baptist's whole life was a finger pointing to Christ.</p>
+<p><strong>The witness of His works.</strong> "I have a greater witness than John's," Jesus said, "for the works which the Father has given Me to finish &mdash; the very works that I do &mdash; bear witness of Me, that the Father has sent Me" (5:36). The signs were not mere wonders; they were testimony, sworn evidence of His identity.</p>
+<p><strong>The witness of the Father.</strong> "The Father Himself, who sent Me, has testified of Me" (5:37). This is the second witness the Law demanded, and it is the highest of all. As Jesus said elsewhere, "I am One who bears witness of Myself, and the Father who sent Me bears witness of Me" (8:18).</p>
+<p><strong>The witness of the Scriptures.</strong> "You search the Scriptures, for in them you think you have eternal life; and these are they which testify of Me" (5:39). They had the witness in their hands and would not hear it.</p>
+<p><strong>The witness of Moses.</strong> "Do not think that I shall accuse you to the Father; there is one who accuses you &mdash; Moses... for he wrote about Me" (5:45&ndash;46). The very lawgiver they trusted was a witness against their unbelief.</p>
+<div class="illustration"><strong>A third witness for our day.</strong> The Law required two witnesses; Jesus pointed to Himself and the Father. We may speak of a third, for the Lord promised, "When the Helper comes... the Spirit of truth who proceeds from the Father, He will testify of Me" (15:26). The Holy Spirit has never once stopped testifying of Christ &mdash; in the Scriptures He inspired, and in the heart of every believer He has made alive. The same Spirit who convinced you that Jesus is Lord is a living witness on the stand today.</div>
+
+<h3>III. Why His Own Testimony Stands</h3>
+<p>When the Pharisees objected, "You bear witness of Yourself; Your witness is not true," Jesus did not flinch. "Even if I bear witness of Myself, My witness is true, for I know where I came from and where I am going; but you do not know" (8:14). A liar can be tripped up because he is inventing; the Son speaks from firsthand knowledge of heaven, of the Father, of His own eternal origin. And He added that He did not stand alone: He and the Father together were the two witnesses the Law required. The verdict, then, does not rest on one disputed voice but on a Son who cannot be mistaken about Himself and a Father who seconds every word.</p>
+
+<h3>IV. The Witnesses John Parades Before Us</h3>
+<p>Beyond the witnesses Jesus named in court, John fills his Gospel with living witnesses &mdash; ordinary people whose changed lives testify louder than argument.</p>
+<p><strong>John the Baptist</strong> stands first, the herald who cried, "Behold the Lamb of God," and sent his own followers after Jesus. <strong>The Samaritan woman</strong> ran into her town crying, "Come, see a Man who told me all that I ever did. Could this be the Christ?" &mdash; and many believed because of her word. <strong>The nobleman</strong> whose dying son Jesus healed at a distance did not keep the mercy to himself: "he himself believed, and his whole household" (4:53). <strong>The man born blind</strong>, hauled before the council and pressed to deny his Healer, gave one of the bravest testimonies in all Scripture: "Whether He is a sinner or not I do not know. One thing I know: that though I was blind, now I see" (9:25). And <strong>Mary Magdalene</strong>, weeping at an empty tomb, became the first witness of the resurrection, running to the disciples with the cry that has echoed ever since: "I have seen the Lord!" (20:18).</p>
+<p>Notice how unlikely a jury these make: a desert preacher, an immoral foreigner, a grieving father, a begging blind man, a woman out of whom seven demons had gone. Not one of them was a trained theologian. Yet each had met Jesus, and each could say what they had seen and heard.</p>
+<div class="pull-quote">That is the heart of a witness &mdash; not cleverness, but firsthand sight of Christ.</div>
+<p>And mark the cost some of them paid. The man born blind did not give his testimony in safety; he gave it under interrogation, knowing the price. His own parents, afraid of the authorities, dodged the question and threw it back on him: "He is of age; ask him." The council warned him, then threatened him, and at last "cast him out" &mdash; put him out of the synagogue, cut off from the only religious community he had ever known. He bore witness anyway. A true witness does not wait until it is safe; he tells what he has seen because it is true and leaves the cost to God. So it has been ever since. The witnesses who built the church were not, for the most part, the powerful or the protected, but ordinary believers who had seen enough of Christ that no threat could make them unsay it. When the Spirit has opened a man's eyes, his quiet "now I see" will outlast every clever objection raised against it.</p>
+
+<h3>V. The Tragedy and the Verdict</h3>
+<p>With witnesses this many and this sure, you would think the case was closed. But Jesus laid bare the secret of unbelief in one piercing sentence: <em>"You are not willing to come to Me that you may have life"</em> (John 5:40). The problem was never a shortage of evidence; it was an unwillingness of the will. They would not come. And here John hands the case to us. He has set the witnesses before our eyes &mdash; the Baptist, the works, the Father, the Scriptures, Moses, the Spirit, and the long line of changed lives &mdash; and now he asks for our verdict. Will we, like the leaders, refuse to come? Or will we render the only honest verdict the evidence allows: that Jesus is the Christ, the Son of God, and in believing find life in His name?</p>
+<p>The earliest believers, who had weighed the witnesses and come down on the side of faith, did not at first call themselves Christians. They called themselves followers of "the Way," because they had single-mindedly given their lives to the One the witnesses pointed to. And every believer since has been called to take the stand in turn. "You shall be witnesses to Me," Jesus said (Acts 1:8). The Samaritan woman could not preach a sermon, but she could say, "Come and see." The blind man could not win a debate, but he could say, "Once I was blind, now I see." Neither can the world silence such testimony, for it rests not on argument but on Christ Himself, seen and known. Take your place, then, among the witnesses.</p>
+
+</div>
+<div class="lang-es">
+
+<h3>Introducci&oacute;n &mdash; El tribunal est&aacute; en sesi&oacute;n</h3>
+<p>Juan nos dice exactamente por qu&eacute; escribi&oacute; su Evangelio: &#9889; <em>"Pero &eacute;stas se han escrito para que cre&aacute;is que Jes&uacute;s es el Cristo, el Hijo de Dios; y para que creyendo, teng&aacute;is vida en su nombre"</em> (Juan 20:31). Todo el libro est&aacute; construido como un juicio. Hay una gran afirmaci&oacute;n sobre la mesa &mdash; que este Hombre es Dios en carne &mdash; y Juan llama testigo tras testigo al estrado para que el lector, como un jurado, pese la evidencia y dicte un veredicto. En un tribunal jud&iacute;o ninguna acusaci&oacute;n pod&iacute;a sostenerse sobre una sola voz; "por boca de dos o de tres testigos se mantendr&aacute; la causa" (Deuteronomio 19:15). Esa ley es m&aacute;s sabia de lo que a veces pensamos. Estudios modernos han hallado que la memoria de los testigos oculares se equivoca mucho m&aacute;s a menudo de lo que esperar&iacute;amos, y por eso un solo testigo nunca bastaba. Pero Jes&uacute;s no ofrece el m&iacute;nimo de dos. Llama a todo un coro de testigos, y no se contradicen; concuerdan. Un jurado que oye a un solo testigo equivocado puede con raz&oacute;n vacilar. Pero un jurado que oye al Bautista, las obras, el Padre, las Escrituras, Mois&eacute;s, el Esp&iacute;ritu, y una larga fila de vidas cambiadas diciendo todos lo mismo queda sin excusa. Ah&iacute; es exactamente donde Juan quiere dejarnos.</p>
+
+<h3>I. La acusaci&oacute;n: igual a Dios</h3>
+<p>El juicio llega a su punto cr&iacute;tico en el estanque de Betesda. All&iacute; un hombre hab&iacute;a estado enfermo treinta y ocho a&ntilde;os, y Jes&uacute;s lo san&oacute; con una palabra &mdash; en s&aacute;bado. En vez de alegrarse, los l&iacute;deres se enfurecieron, y Juan nos dice por qu&eacute; su ira se volvi&oacute; asesina: &#9889; <em>"por esto los jud&iacute;os a&uacute;n m&aacute;s procuraban matarle, porque no s&oacute;lo quebrantaba el s&aacute;bado, sino que tambi&eacute;n dec&iacute;a que Dios era su Padre, haci&eacute;ndose igual a Dios"</em> (Juan 5:18). Ah&iacute; est&aacute; la acusaci&oacute;n. Jes&uacute;s nunca la neg&oacute;; la respondi&oacute; &mdash; no suavizando la afirmaci&oacute;n, sino llamando a sus testigos.</p>
+
+<h3>II. Los testigos que Jes&uacute;s nombr&oacute;</h3>
+<p>De pie ante sus acusadores en Juan 5, Jes&uacute;s pas&oacute; lista de los que dan testimonio de qui&eacute;n es.</p>
+<p><strong>El testimonio de Juan el Bautista.</strong> Era, dijo Jes&uacute;s, "antorcha que ard&iacute;a y alumbraba" (5:35), y esa l&aacute;mpara hab&iacute;a se&ntilde;alado lejos de s&iacute; misma: &#9889; "He aqu&iacute; el Cordero de Dios, que quita el pecado del mundo" (1:29). Toda la vida del Bautista fue un dedo que apuntaba a Cristo.</p>
+<p><strong>El testimonio de sus obras.</strong> "Mas yo tengo mayor testimonio que el de Juan", dijo Jes&uacute;s, "porque las obras que el Padre me dio que cumpliese, las mismas obras que yo hago, dan testimonio de m&iacute;, que el Padre me ha enviado" (5:36). Las se&ntilde;ales no eran meras maravillas; eran testimonio, evidencia jurada de su identidad.</p>
+<p><strong>El testimonio del Padre.</strong> "Y el Padre que me envi&oacute;, &eacute;l ha dado testimonio de m&iacute;" (5:37). Este es el segundo testigo que la Ley exig&iacute;a, y es el m&aacute;s alto de todos. Como dijo Jes&uacute;s en otro lugar, "Yo soy el que doy testimonio de m&iacute; mismo; y el Padre que me envi&oacute; da testimonio de m&iacute;" (8:18).</p>
+<p><strong>El testimonio de las Escrituras.</strong> "Escudri&ntilde;ad las Escrituras... y ellas son las que dan testimonio de m&iacute;" (5:39). Ten&iacute;an el testimonio en sus manos y no quisieron o&iacute;rlo.</p>
+<p><strong>El testimonio de Mois&eacute;s.</strong> "No pens&eacute;is que yo voy a acusaros delante del Padre; hay quien os acusa, Mois&eacute;s... porque de m&iacute; escribi&oacute; &eacute;l" (5:45&ndash;46). El mismo legislador en quien confiaban era un testigo contra su incredulidad.</p>
+<div class="illustration"><strong>Un tercer testigo para nuestros d&iacute;as.</strong> La Ley exig&iacute;a dos testigos; Jes&uacute;s se&ntilde;al&oacute; a s&iacute; mismo y al Padre. Podemos hablar de un tercero, pues el Se&ntilde;or prometi&oacute;: "cuando venga el Consolador... el Esp&iacute;ritu de verdad, el cual procede del Padre, &eacute;l dar&aacute; testimonio de m&iacute;" (15:26). El Esp&iacute;ritu Santo nunca ha dejado de dar testimonio de Cristo &mdash; en las Escrituras que inspir&oacute;, y en el coraz&oacute;n de cada creyente que ha vivificado. El mismo Esp&iacute;ritu que le convenci&oacute; a usted de que Jes&uacute;s es el Se&ntilde;or es hoy un testigo vivo en el estrado.</div>
+
+<h3>III. Por qu&eacute; su propio testimonio se sostiene</h3>
+<p>Cuando los fariseos objetaron: "T&uacute; das testimonio de ti mismo; tu testimonio no es verdadero", Jes&uacute;s no vacil&oacute;. "Aunque yo doy testimonio de m&iacute; mismo, mi testimonio es verdadero, porque s&eacute; de d&oacute;nde he venido y a d&oacute;nde voy; mas vosotros no sab&eacute;is" (8:14). A un mentiroso se le puede atrapar porque inventa; el Hijo habla desde el conocimiento de primera mano del cielo, del Padre, de su propio origen eterno. Y a&ntilde;adi&oacute; que no estaba solo: &eacute;l y el Padre juntos eran los dos testigos que la Ley exig&iacute;a. El veredicto, pues, no descansa en una sola voz disputada sino en un Hijo que no puede equivocarse acerca de s&iacute; mismo y un Padre que secunda cada palabra.</p>
+
+<h3>IV. Los testigos que Juan desfila ante nosotros</h3>
+<p>M&aacute;s all&aacute; de los testigos que Jes&uacute;s nombr&oacute; en el tribunal, Juan llena su Evangelio de testigos vivos &mdash; gente com&uacute;n cuyas vidas cambiadas testifican m&aacute;s fuerte que un argumento.</p>
+<p><strong>Juan el Bautista</strong> est&aacute; primero, el heraldo que clam&oacute;: "He aqu&iacute; el Cordero de Dios", y envi&oacute; a sus propios seguidores tras Jes&uacute;s. <strong>La mujer samaritana</strong> corri&oacute; a su pueblo gritando: "Venid, ved un hombre que me ha dicho todo cuanto he hecho. &iquest;No es &eacute;ste el Cristo?" &mdash; y muchos creyeron por su palabra. <strong>El noble</strong> cuyo hijo moribundo Jes&uacute;s san&oacute; a distancia no se guard&oacute; la misericordia: "crey&oacute; &eacute;l con toda su casa" (4:53). <strong>El hombre que naci&oacute; ciego</strong>, llevado ante el concilio y presionado a negar a su Sanador, dio uno de los testimonios m&aacute;s valientes de toda la Escritura: "Si es pecador, no lo s&eacute;; una cosa s&eacute;: que habiendo yo sido ciego, ahora veo" (9:25). Y <strong>Mar&iacute;a Magdalena</strong>, llorando ante una tumba vac&iacute;a, lleg&oacute; a ser la primera testigo de la resurrecci&oacute;n, corriendo a los disc&iacute;pulos con el grito que ha resonado desde entonces: "He visto al Se&ntilde;or" (20:18).</p>
+<p>Note qu&eacute; jurado tan improbable forman: un predicador del desierto, una extranjera inmoral, un padre afligido, un ciego mendigo, una mujer de quien hab&iacute;an salido siete demonios. Ninguno de ellos era un te&oacute;logo entrenado. Sin embargo, cada uno se hab&iacute;a encontrado con Jes&uacute;s, y cada uno pod&iacute;a decir lo que hab&iacute;a visto y o&iacute;do.</p>
+<div class="pull-quote">Ese es el coraz&oacute;n de un testigo &mdash; no la astucia, sino haber visto a Cristo de primera mano.</div>
+<p>Y note el precio que algunos pagaron. El hombre que naci&oacute; ciego no dio su testimonio en seguridad; lo dio bajo interrogatorio, conociendo el costo. Sus propios padres, temerosos de las autoridades, esquivaron la pregunta y se la devolvieron a &eacute;l: "Edad tiene, preguntadle a &eacute;l." El concilio lo amonest&oacute;, luego lo amenaz&oacute;, y al fin "le expulsaron" &mdash; lo echaron de la sinagoga, cortado de la &uacute;nica comunidad religiosa que hab&iacute;a conocido. Aun as&iacute; dio testimonio. Un verdadero testigo no espera hasta que sea seguro; dice lo que ha visto porque es verdad y deja el costo a Dios. As&iacute; ha sido desde entonces. Los testigos que edificaron la iglesia no fueron, en su mayor&iacute;a, los poderosos ni los protegidos, sino creyentes comunes que hab&iacute;an visto lo suficiente de Cristo como para que ninguna amenaza les hiciera retractarse. Cuando el Esp&iacute;ritu ha abierto los ojos de un hombre, su callado "ahora veo" sobrevivir&aacute; a toda objeci&oacute;n ingeniosa que se levante contra &eacute;l.</p>
+
+<h3>V. La tragedia y el veredicto</h3>
+<p>Con testigos tan numerosos y tan seguros, uno pensar&iacute;a que el caso estaba cerrado. Pero Jes&uacute;s desnud&oacute; el secreto de la incredulidad en una frase penetrante: &#9889; <em>"Y no quer&eacute;is venir a m&iacute;, para que teng&aacute;is vida"</em> (Juan 5:40). El problema nunca fue falta de evidencia; fue una falta de voluntad. No quisieron venir. Y aqu&iacute; Juan nos entrega el caso a nosotros. Ha puesto los testigos ante nuestros ojos &mdash; el Bautista, las obras, el Padre, las Escrituras, Mois&eacute;s, el Esp&iacute;ritu, y la larga fila de vidas cambiadas &mdash; y ahora pide nuestro veredicto. &iquest;Rehusaremos, como los l&iacute;deres, venir? &iquest;O dictaremos el &uacute;nico veredicto honesto que la evidencia permite: que Jes&uacute;s es el Cristo, el Hijo de Dios, y al creer hallaremos vida en su nombre?</p>
+<p>Los primeros creyentes, que hab&iacute;an pesado a los testigos y se hab&iacute;an puesto del lado de la fe, no se llamaron al principio cristianos. Se llamaban seguidores del "Camino", porque hab&iacute;an entregado de todo coraz&oacute;n su vida a Aquel a quien los testigos se&ntilde;alaban. Y todo creyente desde entonces ha sido llamado a subir al estrado a su vez. "Me ser&eacute;is testigos", dijo Jes&uacute;s (Hechos 1:8). La mujer samaritana no pod&iacute;a predicar un serm&oacute;n, pero pod&iacute;a decir: "Ven y ve." El ciego no pod&iacute;a ganar un debate, pero pod&iacute;a decir: "Antes era ciego, ahora veo." Ni el mundo puede acallar tal testimonio, porque no descansa en argumentos sino en Cristo mismo, visto y conocido. Tome, pues, su lugar entre los testigos.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 6 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La secci&oacute;n de respuesta corta es pr&aacute;ctica para el Certificado y no cuenta en su contra.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 6;
+const COURSE = 'john';
+const NEXT_UNIT_URL = 'CTSJohnUnit7.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Word Made Flesh", "Unit 2 - You Must Be Born Again", "Unit 3 - Living Water", "Unit 4 - The Bread of Life", "Unit 5 - The Light of the World", "Unit 6 - The Witnesses to Christ", "Unit 7 - The Door and the Good Shepherd", "Unit 8 - The Resurrection and the Life", "Unit 9 - The Hour of Glory", "Unit 10 - The Way, the Truth, and the Life", "Unit 11 - The Spirit and the High-Priestly Prayer", "Unit 12 - It Is Finished"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSJohnUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    } else {
+        document.getElementById('studentGreeting').innerHTML = '<a href="CTSJohnUnit1.html" style="color:#8a1f1f;">Please register on Unit 1 / Reg&iacute;strese en la Unidad 1</a>';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields. / Por favor complete todos los campos.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered! / \u00a1Registrado!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "John states the purpose of his Gospel (John 20:31) as:", "textEs": "Juan declara el propósito de su Evangelio (Juan 20:31) como:", "optionsEn": ["to entertain readers", "to record a royal genealogy", "to replace the other three Gospels", "that you may believe that Jesus is the Christ, the Son of God, and have life in His name"], "optionsEs": ["para entretener a los lectores", "para registrar una genealogía real", "para reemplazar a los otros tres Evangelios", "para que creáis que Jesús es el Cristo, el Hijo de Dios, y tengáis vida en su nombre"], "explanationEn": "John builds his Gospel like a trial so the reader will weigh the witnesses and believe.", "explanationEs": "Juan construye su Evangelio como un juicio para que el lector pese a los testigos y crea.", "correct": 3}, {"textEn": "In a Jewish court, a matter had to be established by:", "textEs": "En un tribunal judío, una causa debía establecerse por:", "optionsEn": ["a written oath alone", "the testimony of two or three witnesses", "the king's decree", "one trusted witness"], "optionsEs": ["un juramento escrito solamente", "el testimonio de dos o tres testigos", "el decreto del rey", "un testigo de confianza"], "explanationEn": "Deuteronomy 19:15 — by two or three witnesses a matter is established; one voice was never enough.", "explanationEs": "Deuteronomio 19:15 — por dos o tres testigos se establece una causa; una sola voz nunca bastaba.", "correct": 1}, {"textEn": "Cook's point from the unreliability of eyewitnesses is that:", "textEs": "El punto de Cook sobre la falibilidad de los testigos oculares es que:", "optionsEn": ["witnesses are never needed", "human eyewitness memory errs more than expected, so two or three were required", "only priests may testify", "courts should trust one person"], "optionsEs": ["nunca se necesitan testigos", "la memoria ocular humana yerra más de lo esperado, por eso se exigían dos o tres", "solo los sacerdotes pueden testificar", "los tribunales deben confiar en una persona"], "explanationEn": "Because a single memory is often mistaken, the Law wisely required several witnesses — and Jesus called many.", "explanationEs": "Porque una sola memoria a menudo se equivoca, la Ley sabiamente exigió varios testigos — y Jesús llamó a muchos.", "correct": 1}, {"textEn": "At the pool of Bethesda, Jesus healed a man who had been an invalid for:", "textEs": "En el estanque de Betesda, Jesús sanó a un hombre que había estado enfermo por:", "optionsEn": ["twelve years", "one year", "ten years", "thirty-eight years"], "optionsEs": ["doce años", "un año", "diez años", "treinta y ocho años"], "explanationEn": "John 5 — a man disabled thirty-eight years, healed with a word, on the Sabbath.", "explanationEs": "Juan 5 — un hombre enfermo treinta y ocho años, sanado con una palabra, en sábado.", "correct": 3}, {"textEn": "The leaders sought to kill Jesus after Bethesda because He:", "textEs": "Los líderes procuraban matar a Jesús tras Betesda porque él:", "optionsEn": ["broke the Sabbath and called God His own Father, making Himself equal with God", "taught only in Greek", "charged money for healing", "refused to heal anyone"], "optionsEs": ["quebrantaba el sábado y llamaba a Dios su propio Padre, haciéndose igual a Dios", "enseñaba solo en griego", "cobraba dinero por sanar", "se negaba a sanar a nadie"], "explanationEn": "John 5:18 — the claim of equality with God is the charge Jesus then answers with His witnesses.", "explanationEs": "Juan 5:18 — la afirmación de igualdad con Dios es la acusación que Jesús responde con sus testigos.", "correct": 0}, {"textEn": "The charge Jesus answered by calling His witnesses was essentially:", "textEs": "La acusación que Jesús respondió llamando a sus testigos era esencialmente:", "optionsEn": ["sedition against Rome", "tax evasion", "that He made Himself equal with God", "breaking a fast"], "optionsEs": ["sedición contra Roma", "evasión de impuestos", "que se hacía igual a Dios", "quebrantar un ayuno"], "explanationEn": "He never denied the claim of deity; He answered it by summoning witness after witness.", "explanationEs": "Nunca negó la afirmación de deidad; la respondió convocando testigo tras testigo.", "correct": 2}, {"textEn": "The first witness Jesus named, \"a burning and shining lamp,\" was:", "textEs": "El primer testigo que Jesús nombró, \"antorcha que ardía y alumbraba,\" fue:", "optionsEn": ["Moses", "Abraham", "Elijah", "John the Baptist"], "optionsEs": ["Moisés", "Abraham", "Elías", "Juan el Bautista"], "explanationEn": "The Baptist's whole life pointed away from himself: \"Behold the Lamb of God.\"", "explanationEs": "Toda la vida del Bautista señaló lejos de sí mismo: \"He aquí el Cordero de Dios.\"", "correct": 3}, {"textEn": "Jesus said He had a witness greater than John's — namely:", "textEs": "Jesús dijo que tenía un testigo mayor que el de Juan — a saber:", "optionsEn": ["the angels", "the endorsement of the priests", "the applause of the crowds", "the works the Father gave Him to finish"], "optionsEs": ["los ángeles", "el respaldo de los sacerdotes", "el aplauso de las multitudes", "las obras que el Padre le dio que cumpliese"], "explanationEn": "John 5:36 — the signs were sworn evidence: \"the works that I do bear witness of Me.\"", "explanationEs": "Juan 5:36 — las señales eran evidencia jurada: \"las obras que yo hago dan testimonio de mí.\"", "correct": 3}, {"textEn": "Another witness Jesus named was the Father Himself, who:", "textEs": "Otro testigo que Jesús nombró fue el Padre mismo, quien:", "optionsEn": ["opposed Him", "remained silent", "bears witness of Him", "sent no sign at all"], "optionsEs": ["se le opuso", "permaneció en silencio", "da testimonio de él", "no envió ninguna señal"], "explanationEn": "John 5:37; 8:18 — the Father is the highest of the witnesses, the second the Law required.", "explanationEs": "Juan 5:37; 8:18 — el Padre es el más alto de los testigos, el segundo que la Ley exigía.", "correct": 2}, {"textEn": "Jesus said the Scriptures themselves:", "textEs": "Jesús dijo que las Escrituras mismas:", "optionsEn": ["testify of Him", "condemn Him", "are unnecessary now", "speak only of Moses"], "optionsEs": ["dan testimonio de él", "lo condenan", "ya no son necesarias", "hablan solo de Moisés"], "explanationEn": "John 5:39 — \"these are they which testify of Me.\" They had the witness in their hands.", "explanationEs": "Juan 5:39 — \"ellas son las que dan testimonio de mí.\" Tenían el testimonio en sus manos.", "correct": 0}, {"textEn": "Jesus said that if they had truly believed Moses they would believe Him, \"for he ___ of Me.\"", "textEs": "Jesús dijo que si en verdad creyeran a Moisés, le creerían a él, \"porque de mí ___ él.\"", "optionsEn": ["knew nothing", "warned", "spoke nothing", "wrote"], "optionsEs": ["nada supo", "advirtió", "nada habló", "escribió"], "explanationEn": "John 5:46 — the lawgiver they trusted was himself a witness against their unbelief.", "explanationEs": "Juan 5:46 — el legislador en quien confiaban era él mismo un testigo contra su incredulidad.", "correct": 3}, {"textEn": "Cook points to a witness for our own day, beyond Jesus and the Father — namely:", "textEs": "Cook señala un testigo para nuestros días, más allá de Jesús y el Padre — a saber:", "optionsEn": ["the Holy Spirit, who never stops testifying of Christ", "the church alone", "unaided reason", "human tradition"], "optionsEs": ["el Espíritu Santo, que nunca deja de testificar de Cristo", "la iglesia sola", "la razón sin ayuda", "la tradición humana"], "explanationEn": "John 15:26 — \"the Spirit of truth... He will testify of Me.\"", "explanationEs": "Juan 15:26 — \"el Espíritu de verdad... él dará testimonio de mí.\"", "correct": 0}, {"textEn": "Jesus said His own testimony was valid even by Himself because:", "textEs": "Jesús dijo que su propio testimonio era válido aun por sí mismo porque:", "optionsEn": ["He had written documents", "the crowd agreed with Him", "He knows where He came from and where He is going", "He swore a public oath"], "optionsEs": ["tenía documentos escritos", "la multitud estaba de acuerdo", "sabe de dónde vino y a dónde va", "juró un juramento público"], "explanationEn": "John 8:14 — the Son speaks from firsthand knowledge of heaven and the Father; He cannot be mistaken about Himself.", "explanationEs": "Juan 8:14 — el Hijo habla desde conocimiento de primera mano del cielo y del Padre; no puede equivocarse sobre sí mismo.", "correct": 2}, {"textEn": "Among the human witnesses John records, the one who said \"Come, see a Man who told me all I ever did\" was:", "textEs": "Entre los testigos humanos que Juan registra, la que dijo \"Venid, ved un hombre que me dijo todo cuanto he hecho\" fue:", "optionsEn": ["the nobleman", "the Samaritan woman", "Mary Magdalene", "the man born blind"], "optionsEs": ["el noble", "la mujer samaritana", "María Magdalena", "el hombre que nació ciego"], "explanationEn": "John 4:29 — many believed because of her word; her changed life was her testimony.", "explanationEs": "Juan 4:29 — muchos creyeron por su palabra; su vida cambiada fue su testimonio.", "correct": 1}, {"textEn": "The nobleman (official) whose son Jesus healed became a witness when:", "textEs": "El noble (oficial) cuyo hijo Jesús sanó llegó a ser testigo cuando:", "optionsEn": ["he wrote a book", "he joined the priesthood", "he and his whole household believed", "he paid Jesus a reward"], "optionsEs": ["escribió un libro", "se unió al sacerdocio", "creyó él con toda su casa", "pagó a Jesús una recompensa"], "explanationEn": "John 4:53 — the mercy he received he did not keep to himself; his household believed too.", "explanationEs": "Juan 4:53 — la misericordia que recibió no la guardó para sí; su casa también creyó.", "correct": 2}, {"textEn": "The man born blind gave perhaps the boldest plain witness:", "textEs": "El hombre que nació ciego dio quizá el testimonio sencillo más valiente:", "optionsEn": ["\"I am a Pharisee\"", "\"I do not know Him\"", "\"One thing I know: I was blind, now I see\"", "\"I have never sinned\""], "optionsEs": ["\"Soy fariseo\"", "\"No le conozco\"", "\"Una cosa sé: era ciego, ahora veo\"", "\"Nunca he pecado\""], "explanationEn": "John 9:25 — pressed to deny his Healer, he simply testified to what he had experienced.", "explanationEs": "Juan 9:25 — presionado a negar a su Sanador, simplemente testificó lo que había experimentado.", "correct": 2}, {"textEn": "Mary Magdalene became the first witness of the resurrection when she announced:", "textEs": "María Magdalena llegó a ser la primera testigo de la resurrección cuando anunció:", "optionsEn": ["\"I have seen the Lord!\"", "nothing at all", "\"He is still in the tomb\"", "\"Caesar is risen\""], "optionsEs": ["\"¡He visto al Señor!\"", "nada en absoluto", "\"Sigue en la tumba\"", "\"César ha resucitado\""], "explanationEn": "John 20:18 — weeping at the empty tomb, she ran to the disciples with the first resurrection witness.", "explanationEs": "Juan 20:18 — llorando ante la tumba vacía, corrió a los discípulos con el primer testimonio de la resurrección.", "correct": 0}, {"textEn": "The tragedy Jesus exposed (John 5:40) was that, with so many witnesses, the leaders:", "textEs": "La tragedia que Jesús expuso (Juan 5:40) fue que, con tantos testigos, los líderes:", "optionsEn": ["believed at once", "were not willing to come to Him that they might have life", "left Jerusalem", "freed the paralytic"], "optionsEs": ["creyeron de inmediato", "no quisieron venir a él para tener vida", "salieron de Jerusalén", "liberaron al paralítico"], "explanationEn": "The problem was never a lack of evidence but an unwillingness of the will.", "explanationEs": "El problema nunca fue falta de evidencia sino una falta de voluntad.", "correct": 1}, {"textEn": "The verdict John presses every reader to render is:", "textEs": "El veredicto que Juan urge a cada lector a dictar es:", "optionsEn": ["faith — that Jesus is the Christ, the Son of God", "mere admiration", "silence", "indifference"], "optionsEs": ["fe — que Jesús es el Cristo, el Hijo de Dios", "mera admiración", "silencio", "indiferencia"], "explanationEn": "With witnesses this many and sure, faith is the only honest verdict the evidence allows.", "explanationEs": "Con testigos tan numerosos y seguros, la fe es el único veredicto honesto que la evidencia permite.", "correct": 0}, {"textEn": "Cook notes the earliest believers, single-mindedly following Jesus, first called themselves:", "textEs": "Cook señala que los primeros creyentes, siguiendo a Jesús de todo corazón, se llamaron primero:", "optionsEn": ["Christians", "followers of \"the Way\"", "the Council", "Nazarenes"], "optionsEs": ["cristianos", "seguidores del \"Camino\"", "el Concilio", "nazarenos"], "explanationEn": "They had weighed the witnesses and given their whole lives to the One they pointed to.", "explanationEs": "Habían pesado a los testigos y entregado toda su vida a Aquel a quien señalaban.", "correct": 1}];
+const kwQuestions = [
+{"textEn":"Explain how John's Gospel functions as a courtroom and why the witnesses matter (John 20:31).","textEs":"Explique c\u00f3mo el Evangelio de Juan funciona como un tribunal y por qu\u00e9 importan los testigos (Juan 20:31).","kw_en":["witness","court","believe","two","three","testimony","john","life"],"kw_es":["testigo","tribunal","cree","dos","tres","testimonio","juan","vida"],"modelEn":"John says he wrote his Gospel that we may believe Jesus is the Christ and have life in His name, and he builds the whole book like a courtroom or trial. A great claim is on the table, that Jesus is God in the flesh, and John summons witness after witness so the reader, like a juror, can weigh the evidence and render a verdict. The witnesses matter because in a Jewish court a matter had to be established by the testimony of two or three witnesses, never one. Jesus offers far more than two, and they agree, so the honest verdict is faith.","modelEs":"Juan dice que escribi\u00f3 su Evangelio para que creamos que Jes\u00fas es el Cristo y tengamos vida en su nombre, y construye todo el libro como un tribunal o juicio. Hay una gran afirmaci\u00f3n sobre la mesa, que Jes\u00fas es Dios en carne, y Juan convoca testigo tras testigo para que el lector, como un jurado, pese la evidencia y dicte un veredicto. Los testigos importan porque en un tribunal jud\u00edo una causa deb\u00eda establecerse por el testimonio de dos o tres testigos, nunca uno. Jes\u00fas ofrece mucho m\u00e1s que dos, y concuerdan, as\u00ed que el veredicto honesto es la fe."},
+{"textEn":"Describe the Bethesda healing and why it provoked the charge against Jesus.","textEs":"Describa la sanidad de Betesda y por qu\u00e9 provoc\u00f3 la acusaci\u00f3n contra Jes\u00fas.","kw_en":["bethesda","heal","sabbath","father","equal","god","kill","man"],"kw_es":["betesda","sana","sabado","padre","igual","dios","matar","hombre"],"modelEn":"At the pool of Bethesda a man had been an invalid for thirty-eight years, and Jesus healed him with a word on the Sabbath. Instead of rejoicing, the leaders were enraged and sought to kill Him, because He not only broke the Sabbath but also called God His own Father, making Himself equal with God. That claim of equality with God is the real charge. Jesus never denied it; He answered it by calling the witnesses who testify that He is the Son sent by the Father.","modelEs":"En el estanque de Betesda un hombre hab\u00eda estado enfermo treinta y ocho a\u00f1os, y Jes\u00fas lo san\u00f3 con una palabra en s\u00e1bado. En vez de alegrarse, los l\u00edderes se enfurecieron y procuraban matarle, porque no solo quebrantaba el s\u00e1bado sino que tambi\u00e9n llamaba a Dios su propio Padre, haci\u00e9ndose igual a Dios. Esa afirmaci\u00f3n de igualdad con Dios es la verdadera acusaci\u00f3n. Jes\u00fas nunca la neg\u00f3; la respondi\u00f3 llamando a los testigos que dan testimonio de que \u00e9l es el Hijo enviado por el Padre."},
+{"textEn":"Explain the witness of the Father and of Jesus' works (John 5:36-37).","textEs":"Explique el testimonio del Padre y de las obras de Jes\u00fas (Juan 5:36-37).","kw_en":["father","work","witness","sent","testify","miracle","greater","god"],"kw_es":["padre","obra","testigo","envio","testimonio","milagro","mayor","dios"],"modelEn":"Jesus said He had a witness greater than John the Baptist, namely the works the Father gave Him to finish; the very miracles He did bear witness that the Father sent Him. The signs were not mere wonders but sworn evidence of His identity. He also named the Father Himself, saying the Father who sent Me has testified of Me. This is the highest witness and the second the Law required, so the works and the Father together testify that Jesus is the Son of God.","modelEs":"Jes\u00fas dijo que ten\u00eda un testigo mayor que el de Juan el Bautista, a saber, las obras que el Padre le dio que cumpliese; los mismos milagros que hizo dan testimonio de que el Padre lo envi\u00f3. Las se\u00f1ales no eran meras maravillas sino evidencia jurada de su identidad. Tambi\u00e9n nombr\u00f3 al Padre mismo, diciendo el Padre que me envi\u00f3 ha dado testimonio de m\u00ed. Este es el testigo m\u00e1s alto y el segundo que la Ley exig\u00eda, as\u00ed que las obras y el Padre juntos testifican que Jes\u00fas es el Hijo de Dios."},
+{"textEn":"Explain the witness of the Scriptures and of Moses (John 5:39, 46).","textEs":"Explique el testimonio de las Escrituras y de Mois\u00e9s (Juan 5:39, 46).","kw_en":["scripture","moses","wrote","testify","christ","search","point","law"],"kw_es":["escritura","moises","escribio","testimonio","cristo","escudri","apunt","ley"],"modelEn":"Jesus told the leaders to search the Scriptures, for these are they which testify of Me. They had the written witness in their hands yet would not hear it. He added that Moses himself was a witness, for he wrote about Me; if they had truly believed Moses they would have believed Christ. So the law and the prophets they trusted all point to Jesus, and their unbelief left them condemned by the very Scriptures they claimed to honor.","modelEs":"Jes\u00fas dijo a los l\u00edderes que escudri\u00f1aran las Escrituras, porque ellas son las que dan testimonio de m\u00ed. Ten\u00edan el testimonio escrito en sus manos y no quisieron o\u00edrlo. A\u00f1adi\u00f3 que Mois\u00e9s mismo era un testigo, porque de m\u00ed escribi\u00f3 \u00e9l; si en verdad creyeran a Mois\u00e9s, habr\u00edan cre\u00eddo a Cristo. As\u00ed que la ley y los profetas en que confiaban todos apuntan a Jes\u00fas, y su incredulidad los dej\u00f3 condenados por las mismas Escrituras que dec\u00edan honrar."},
+{"textEn":"Explain the witness of the Holy Spirit (Cook's added witness for today).","textEs":"Explique el testimonio del Esp\u00edritu Santo (el testigo a\u00f1adido por Cook para hoy).","kw_en":["spirit","witness","christ","testify","holy","never","truth","today"],"kw_es":["espiritu","testigo","cristo","testimonio","santo","nunca","verdad","hoy"],"modelEn":"The Law required two witnesses, and Jesus pointed to Himself and the Father; Cook adds that for our day we may speak of a third, the Holy Spirit. Jesus promised that the Spirit of truth who proceeds from the Father would testify of Him. The Holy Spirit has never stopped testifying of Christ, both in the Scriptures He inspired and in the heart of every believer He has made alive. The same Spirit who convinces a person today that Jesus is Lord is a living witness on the stand.","modelEs":"La Ley exig\u00eda dos testigos, y Jes\u00fas se\u00f1al\u00f3 a s\u00ed mismo y al Padre; Cook a\u00f1ade que para nuestros d\u00edas podemos hablar de un tercero, el Esp\u00edritu Santo. Jes\u00fas prometi\u00f3 que el Esp\u00edritu de verdad que procede del Padre dar\u00eda testimonio de \u00e9l. El Esp\u00edritu Santo nunca ha dejado de testificar de Cristo, tanto en las Escrituras que inspir\u00f3 como en el coraz\u00f3n de cada creyente que ha vivificado. El mismo Esp\u00edritu que convence hoy a una persona de que Jes\u00fas es el Se\u00f1or es un testigo vivo en el estrado."},
+{"textEn":"Why is Jesus' own testimony true even when He testifies of Himself (John 8:14-18)?","textEs":"\u00bfPor qu\u00e9 es verdadero el propio testimonio de Jes\u00fas aun cuando testifica de s\u00ed mismo (Juan 8:14-18)?","kw_en":["testimony","true","jesus","know","came","father","alone","two"],"kw_es":["testimonio","verdad","jesus","sabe","vino","padre","solo","dos"],"modelEn":"When the Pharisees said His testimony was not true because He testified of Himself, Jesus answered that His witness is true because He knows where He came from and where He is going, while they do not. A liar can be tripped up because he is inventing, but the Son speaks from firsthand knowledge of heaven and of His own eternal origin. He also said He did not stand alone; He and the Father together are the two witnesses the Law required, so the verdict rests on a Son who cannot be mistaken about Himself and a Father who confirms every word.","modelEs":"Cuando los fariseos dijeron que su testimonio no era verdadero porque testificaba de s\u00ed mismo, Jes\u00fas respondi\u00f3 que su testimonio es verdadero porque sabe de d\u00f3nde vino y a d\u00f3nde va, mientras ellos no. A un mentiroso se le puede atrapar porque inventa, pero el Hijo habla desde el conocimiento de primera mano del cielo y de su propio origen eterno. Tambi\u00e9n dijo que no estaba solo; \u00e9l y el Padre juntos son los dos testigos que la Ley exig\u00eda, as\u00ed que el veredicto descansa en un Hijo que no puede equivocarse sobre s\u00ed mismo y un Padre que confirma cada palabra."},
+{"textEn":"Describe how the Samaritan woman and the man born blind each became a witness to Christ.","textEs":"Describa c\u00f3mo la mujer samaritana y el hombre que naci\u00f3 ciego llegaron a ser testigos de Cristo.","kw_en":["woman","blind","witness","see","come","told","believe","eye"],"kw_es":["mujer","ciego","testigo","ve","ven","dijo","cree","ojo"],"modelEn":"The Samaritan woman ran into her town and said, Come, see a Man who told me all that I ever did; could this be the Christ? She could not preach a sermon, but her changed life and simple invitation brought many to believe. The man born blind, hauled before the council and pressed to deny his Healer, gave one of the bravest testimonies in Scripture: one thing I know, that though I was blind, now I see. Neither was a trained theologian, yet each had met Jesus and could testify with their own eyes to what they had seen and experienced.","modelEs":"La mujer samaritana corri\u00f3 a su pueblo y dijo: Venid, ved un hombre que me dijo todo cuanto he hecho; \u00bfno es \u00e9ste el Cristo? No pod\u00eda predicar un serm\u00f3n, pero su vida cambiada y su invitaci\u00f3n sencilla llevaron a muchos a creer. El hombre que naci\u00f3 ciego, llevado ante el concilio y presionado a negar a su Sanador, dio uno de los testimonios m\u00e1s valientes de la Escritura: una cosa s\u00e9, que habiendo sido ciego, ahora veo. Ninguno era te\u00f3logo entrenado, pero cada uno se hab\u00eda encontrado con Jes\u00fas y pod\u00eda testificar con sus propios ojos lo que hab\u00eda visto y experimentado."},
+{"textEn":"Describe how the nobleman and Mary Magdalene each became a witness to Christ.","textEs":"Describa c\u00f3mo el noble y Mar\u00eda Magdalena llegaron a ser testigos de Cristo.","kw_en":["nobleman","household","believe","mary","lord","risen","seen","tomb"],"kw_es":["noble","casa","cree","maria","senor","resucit","visto","tumba"],"modelEn":"The nobleman whose dying son Jesus healed at a distance did not keep the mercy to himself; he himself believed, and his whole household believed with him. Mary Magdalene, weeping at the empty tomb on the first morning, became the first witness of the risen Lord, running to the disciples with the cry, I have seen the Lord. One was a grieving father and the other a woman out of whom seven demons had gone, yet each had met Jesus and testified to what they had seen, so that the resurrection itself first reached the church through a faithful witness.","modelEs":"El noble cuyo hijo moribundo Jes\u00fas san\u00f3 a distancia no se guard\u00f3 la misericordia para s\u00ed; crey\u00f3 \u00e9l, y toda su casa crey\u00f3 con \u00e9l. Mar\u00eda Magdalena, llorando ante la tumba vac\u00eda en la primera ma\u00f1ana, lleg\u00f3 a ser la primera testigo del Se\u00f1or resucitado, corriendo a los disc\u00edpulos con el grito: He visto al Se\u00f1or. Uno era un padre afligido y la otra una mujer de quien hab\u00edan salido siete demonios, pero cada uno se hab\u00eda encontrado con Jes\u00fas y testific\u00f3 lo que hab\u00eda visto, de modo que la resurrecci\u00f3n misma lleg\u00f3 primero a la iglesia por medio de un testigo fiel."},
+{"textEn":"Explain the tragedy of John 5:40 and what it reveals about unbelief.","textEs":"Explique la tragedia de Juan 5:40 y qu\u00e9 revela sobre la incredulidad.","kw_en":["come","life","willing","refuse","unbelief","witness","heart","will"],"kw_es":["venir","vida","quier","rehus","incredul","testigo","corazon","volunt"],"modelEn":"After parading so many sure witnesses, Jesus laid bare the secret of unbelief in one sentence: you are not willing to come to Me that you may have life. The tragedy is that the problem was never a shortage of evidence but an unwillingness of the will; they refused to come. This reveals that unbelief is not finally a matter of the mind lacking proof but of the heart refusing the Christ the witnesses point to. The leaders had the testimony and still would not come, and so they missed the life that was offered.","modelEs":"Tras desfilar tantos testigos seguros, Jes\u00fas desnud\u00f3 el secreto de la incredulidad en una frase: no quer\u00e9is venir a m\u00ed para que teng\u00e1is vida. La tragedia es que el problema nunca fue falta de evidencia sino una falta de voluntad; rehusaron venir. Esto revela que la incredulidad no es al fin cuesti\u00f3n de que la mente carezca de pruebas sino del coraz\u00f3n que rechaza al Cristo a quien los testigos se\u00f1alan. Los l\u00edderes ten\u00edan el testimonio y a\u00fan no quisieron venir, y as\u00ed perdieron la vida que se les ofrec\u00eda."},
+{"textEn":"Explain the verdict of John 20:31 and the believer's own call to be a witness.","textEs":"Explique el veredicto de Juan 20:31 y el llamado del creyente mismo a ser testigo.","kw_en":["verdict","believe","christ","life","witness","call","spirit","name"],"kw_es":["veredicto","cree","cristo","vida","testigo","llama","espiritu","nombre"],"modelEn":"With witnesses this many and this sure, John presses every reader to render the only honest verdict: to believe that Jesus is the Christ, the Son of God, and so to have life in His name. But the verdict is not the end. Every believer is then called to take the stand in turn, for Jesus said you shall be witnesses to Me. The Samaritan woman could only say come and see, and the blind man could only say once I was blind, now I see, yet the Spirit testifies through such witness and the world cannot silence it, because it rests on Christ Himself, seen and known.","modelEs":"Con testigos tan numerosos y seguros, Juan urge a cada lector a dictar el \u00fanico veredicto honesto: creer que Jes\u00fas es el Cristo, el Hijo de Dios, y as\u00ed tener vida en su nombre. Pero el veredicto no es el final. Cada creyente es entonces llamado a subir al estrado a su vez, pues Jes\u00fas dijo me ser\u00e9is testigos. La mujer samaritana solo pod\u00eda decir ven y ve, y el ciego solo pod\u00eda decir antes era ciego, ahora veo, pero el Esp\u00edritu testifica por medio de tal testigo y el mundo no puede acallarlo, porque descansa en Cristo mismo, visto y conocido."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 7 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 7 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s).</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (mcQuestions.length + idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register on Unit 1 first.' : 'Por favor reg\u00edstrese en la Unidad 1 primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y reintente la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSJohnReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

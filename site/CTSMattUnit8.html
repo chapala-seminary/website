@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Matthew Intensive — Unit 8</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 9 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Matthew Intensive — Unit 8: The Parables of the Kingdom</span><span class="lang-es">📖 Mateo Intensivo — Unidad 8: Las Parábolas del Reino</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"It has been given to you to know the mysteries of the kingdom of heaven." — Matthew 13:11</span><span class="lang-es">"A vosotros os es dado saber los misterios del reino de los cielos." — Mateo 13:11</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to the Matthew Intensive. Please register before beginning Unit 8.</span><span class="lang-es">Bienvenido al Intensivo de Mateo. Por favor regístrese antes de comenzar la Unidad 8.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Text: Matthew 13:11</strong></p>
+<div class="scripture">"It has been given to you to know the mysteries of the kingdom of heaven, but to them it has not been given." — Matthew 13:11 (NKJV)</div>
+
+<h3>Why Parables?</h3>
+<p>Matthew 13 is the third of the great teaching blocks in this Gospel, after the Sermon on the Mount and the sending of the Twelve. Here the King sits in a boat and teaches the crowds on the shore entirely in parables — earthly stories that carry a heavenly meaning. When the disciples ask why, He gives a striking answer: "It has been given to you to know the mysteries of the kingdom of heaven, but to them it has not been given" (Matthew 13:11). A parable both reveals and conceals. To the hungry heart that wants to understand, the story opens the truth; to the hardened heart that has already turned away, the same story remains a riddle. Jesus quotes Isaiah: "Seeing they do not see, and hearing they do not hear" (Matthew 13:13; Isaiah 6:9-10). The whole chapter is about a hidden kingdom — a kingdom that does not yet come in overwhelming glory, but is sown like seed, growing quietly, mixed in among evil, small but spreading, hidden but worth everything. Jesus tells seven of these kingdom parables here, four to the crowds from the boat and three more to the disciples in the house, and at the end He asks whether they have understood. To read them rightly is to learn how the King's reign actually advances in the time between His first coming and His last.</p>
+
+<h3>The Sower and the Soils</h3>
+<p>The first parable sets the pattern. A sower goes out to sow, and the seed falls on four kinds of ground (Matthew 13:3-9). Jesus Himself explains it (13:18-23): the seed is the word of the kingdom. Some falls on the wayside path and is snatched away by the evil one before it can take root. Some falls on rocky ground and springs up quickly but withers when trouble and persecution come, because it has no root. Some falls among thorns, and the cares of this world and the deceitfulness of riches choke it, so that it bears nothing. But some falls on good ground and bears fruit — a hundredfold, sixty, thirty. The same seed meets four different hearts. The word does not fail; the question is the soil. This first parable explains all the others, and indeed the whole chapter: why the kingdom's word, freely scattered, takes root in some and not in others.</p>
+
+<h3>The Wheat and the Tares</h3>
+<p>Next the King tells of a man who sowed good seed in his field, but while everyone slept, an enemy came and sowed tares among the wheat (Matthew 13:24-30). The tare is a weed, the bearded darnel, which looks so much like wheat that the two cannot be safely told apart until the harvest. When the servants want to pull up the weeds, the master says no: "Lest while you gather up the tares you also uproot the wheat with them. Let both grow together until the harvest" (Matthew 13:29-30). Jesus explains it plainly (13:36-43): the field is the world, the good seed are the sons of the kingdom, the tares are the sons of the wicked one, the enemy is the devil, the harvest is the end of the age, and the reapers are the angels. This is one of the most important lessons of the chapter. The kingdom grows in a mixed field. Good and evil grow side by side, and they will not be finally separated by us, now, but by God, at the end. We are not given the task of tearing out the weeds; only the angels at the harvest can tell wheat from tare with certainty, and the sorting belongs to God alone.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_START U8 EN -->
+<h3>Sowing, Growing, and Knowing</h3>
+<p>The preaching material on this parable develops a useful progression: the sowing, the growing, their growing together, and finally the knowing at harvest. The enemy really does sow, and the resemblance between wheat and darnel warns us against thinking that outward appearance gives us God's knowledge of a heart. I remember hoeing corn as a boy and finding weeds growing close to a stalk. In trying to cut the weed, I sometimes cut the corn as well. That is a good picture of Jesus' warning against appointing ourselves the final judges of other souls. The servants want the same end the master wants — a clean field — but they do not have the master's wisdom about the method or timing. The church therefore must exercise biblical discernment without pretending to possess God's infallible knowledge. The harvest will come, the distinction will finally be known, and no counterfeit will deceive the Reaper. Until then our primary assignment is not to spend our lives pulling tares but to sow good seed, bear the fruit of the Spirit, and make certain that our own profession of Christ is genuine.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END U8 EN -->
+
+
+<h3>The Mustard Seed and the Leaven</h3>
+<p>Two short parables show how such a hidden kingdom grows. It is like a mustard seed, the smallest of seeds, which becomes a tree large enough for birds to nest in (Matthew 13:31-32). And it is like leaven that a woman hides in three measures of meal, "till it was all leavened" (Matthew 13:33). The kingdom begins almost invisibly — a handful of fishermen, a teacher in a borrowed boat — and yet it grows until it spreads through the whole. We must not despise small and hidden beginnings. The King is not building His kingdom by force or spectacle but by the quiet, certain working of the seed and the leaven, until in the end it fills far more than anyone watching the small start could have guessed.</p>
+
+<h3>The Treasure and the Pearl</h3>
+<p>Then come two parables about what the kingdom is worth. A man finds treasure hidden in a field, and "for joy over it he goes and sells all that he has and buys that field" (Matthew 13:44). A merchant looking for fine pearls finds one pearl of great price and sells everything he has to buy it (Matthew 13:45-46). The two stories make one point from two directions: the kingdom of heaven is worth everything. The man stumbles on the treasure by surprise; the merchant searches and finds. But both, once they see its worth, gladly let go of all they have to gain it. This is not a grim sacrifice but a glad exchange, done "for joy." To give up everything for the kingdom is the best bargain anyone ever made.</p>
+
+<h3>The Dragnet</h3>
+<p>The seventh parable returns to the theme of the wheat and tares. The kingdom is like a dragnet let down into the sea, which gathers fish of every kind; when it is full, the fishermen sit down and sort the good from the bad. "So it will be at the end of the age. The angels will come forth, separate the wicked from among the just" (Matthew 13:49). Like the field that holds wheat and tares together, the net holds good and bad together until the end. The lesson is the same: there is a mixture now, but there will be a separation then. The visible church and the world both contain more than meets the eye, and the final sorting is certain, and it is God's.</p>
+
+<h3>Treasures New and Old</h3>
+<p>Jesus asks the disciples whether they have understood, and they say yes. Then He adds one more brief picture: "Every scribe instructed concerning the kingdom of heaven is like a householder who brings out of his treasure things new and old" (Matthew 13:52). The disciple who has truly understood the kingdom is like a steward with a full storehouse, able to bring out both the old treasure of the Scriptures and the new treasure of their fulfillment in Christ. The new does not throw away the old; it opens it up. This is the very thing Matthew himself is doing throughout his Gospel, showing how the new work of the King fulfills the old promises.</p>
+
+<h3>A Prophet Without Honor</h3>
+<p>The chapter ends with a scene that is the parable of the soils come to life. Jesus returns to Nazareth, His own hometown, and teaches in the synagogue. The people are astonished at His wisdom, but instead of believing they take offense: is this not the carpenter's son, whose family we know? Jesus answers, "A prophet is not without honor except in his own country and in his own house" (Matthew 13:57). And Matthew adds a sobering line: "He did not do many mighty works there because of their unbelief" (Matthew 13:58). The same word that bears a hundredfold in good soil is snatched away from the hard heart. Familiarity had made them think they already knew Him, and so the seed found no root in the very town where He grew up.</p>
+
+<h3>The Kingdom Hidden and Revealed</h3>
+<p>Put together, the seven parables give us a true picture of the kingdom as it really comes in this age. It comes not yet in overwhelming glory, but sown like seed that takes root in some hearts and not others. It grows in a mixed field, wheat and tares together, and will not be purged by our hands but separated by God at the end of the age. It starts small and hidden, like a mustard seed and a little leaven, yet it spreads through the whole. It is hidden like treasure, yet worth everything a person has. And it moves steadily toward a final harvest, a final sorting, when the righteous will shine forth as the sun in the kingdom of their Father. Through it all, only one soil bears fruit. The response the King is looking for is the same one Matthew has pressed from the beginning: a heart that hears the word, understands it, and brings forth fruit. The question each of us must answer is simply which soil we are. These stories were not given to satisfy our curiosity about the future but to search our hearts in the present. A kingdom that grows like seed asks for patience; a kingdom mixed like wheat and tares asks for humility, since we cannot finally judge another's heart; and a kingdom worth more than all we own asks for everything we have. To know the mysteries of the kingdom is, in the end, to give ourselves to the King who reigns within it.</p>
+<div class="scripture">"But he who received seed on the good ground is he who hears the word and understands it, who indeed bears fruit." — Matthew 13:23 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto: Mateo 13:11 (RVG)</strong></p>
+<div class="scripture">"Porque a vosotros os es dado saber los misterios del reino de los cielos; mas a ellos no les es dado." — Mateo 13:11</div>
+
+<h3>¿Por Qué Parábolas?</h3>
+<p>Mateo 13 es el tercero de los grandes bloques de enseñanza de este Evangelio, después del Sermón del Monte y el envío de los Doce. Aquí el Rey se sienta en una barca y enseña a las multitudes en la orilla enteramente en parábolas — historias terrenales que llevan un significado celestial. Cuando los discípulos preguntan por qué, da una respuesta sorprendente: "Porque a vosotros os es dado saber los misterios del reino de los cielos; mas a ellos no les es dado" (Mateo 13:11). Una parábola a la vez revela y oculta. Al corazón hambriento que quiere entender, la historia le abre la verdad; al corazón endurecido que ya se ha apartado, la misma historia sigue siendo un enigma. Jesús cita a Isaías: "Viendo no ven, y oyendo no oyen" (Mateo 13:13; Isaías 6:9-10). Todo el capítulo trata de un reino escondido — un reino que aún no viene en gloria arrolladora, sino que es sembrado como semilla, creciendo en silencio, mezclado entre el mal, pequeño pero extendiéndose, escondido pero que vale todo. Jesús cuenta aquí siete de estas parábolas del reino, cuatro a las multitudes desde la barca y tres más a los discípulos en la casa, y al final les pregunta si han entendido. Leerlas bien es aprender cómo avanza de veras el reinado del Rey en el tiempo entre su primera venida y la última.</p>
+
+<h3>El Sembrador y los Terrenos</h3>
+<p>La primera parábola establece el patrón. Un sembrador sale a sembrar, y la semilla cae en cuatro clases de terreno (Mateo 13:3-9). Jesús mismo lo explica (13:18-23): la semilla es la palabra del reino. Parte cae junto al camino y el malo la arrebata antes de que eche raíz. Parte cae en pedregales y brota pronto, pero se seca cuando vienen la tribulación y la persecución, porque no tiene raíz. Parte cae entre espinos, y el afán de este mundo y el engaño de las riquezas la ahogan, de modo que no da nada. Pero parte cae en buena tierra y da fruto — a ciento, a sesenta, a treinta por uno. La misma semilla encuentra cuatro corazones distintos. La palabra no falla; la cuestión es el terreno. Esta primera parábola explica todas las demás, y de hecho todo el capítulo: por qué la palabra del reino, esparcida libremente, echa raíz en unos y no en otros.</p>
+
+<h3>El Trigo y la Cizaña</h3>
+<p>Luego el Rey habla de un hombre que sembró buena semilla en su campo, pero mientras todos dormían, vino su enemigo y sembró cizaña entre el trigo (Mateo 13:24-30). La cizaña es una mala hierba que se parece tanto al trigo que los dos no pueden distinguirse con seguridad hasta la siega. Cuando los siervos quieren arrancar la mala hierba, el señor dice que no: "No sea que al arrancar la cizaña, arranquéis también con ella el trigo. Dejad crecer juntamente lo uno y lo otro hasta la siega" (Mateo 13:29-30). Jesús lo explica claramente (13:36-43): el campo es el mundo, la buena semilla son los hijos del reino, la cizaña son los hijos del malo, el enemigo es el diablo, la siega es el fin del mundo, y los segadores son los ángeles. Esta es una de las lecciones más importantes del capítulo. El reino crece en un campo mezclado. El bien y el mal crecen lado a lado, y no serán separados finalmente por nosotros, ahora, sino por Dios, al fin. No se nos da la tarea de arrancar la mala hierba; solo los ángeles en la siega pueden distinguir el trigo de la cizaña con certeza, y la separación pertenece solo a Dios.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_START U8 ES -->
+<h3>Sembrar, Crecer y Conocer</h3>
+<p>El material de predicación sobre esta parábola desarrolla una progresión útil: la siembra, el crecimiento, el crecimiento de ambos juntos y, finalmente, el conocimiento en la cosecha. El enemigo realmente siembra, y el parecido entre el trigo y la cizaña nos advierte que la apariencia exterior no nos da el conocimiento que Dios tiene del corazón. Recuerdo haber escardado maíz cuando era muchacho y encontrar hierbas creciendo muy cerca de una mata. Al intentar cortar la hierba, algunas veces cortaba también el maíz. Es una buena imagen de la advertencia de Jesús contra convertirnos en jueces finales de otras almas. Los siervos quieren el mismo fin que quiere el dueño — un campo limpio — pero no poseen la sabiduría del dueño acerca del método ni del momento. Por eso la iglesia debe ejercer discernimiento bíblico sin fingir que posee el conocimiento infalible de Dios. Llegará la cosecha, la diferencia será finalmente conocida y ningún falso creyente engañará al Segador. Mientras tanto, nuestra tarea principal no es pasar la vida arrancando cizaña, sino sembrar buena semilla, llevar el fruto del Espíritu y asegurarnos de que nuestra propia profesión de Cristo sea genuina.</p>
+<!-- SERMON_ARCHIVE_ENRICHMENT_END U8 ES -->
+
+
+<h3>El Grano de Mostaza y la Levadura</h3>
+<p>Dos parábolas cortas muestran cómo crece semejante reino escondido. Es como un grano de mostaza, la más pequeña de las semillas, que se hace un árbol grande, donde las aves anidan (Mateo 13:31-32). Y es como la levadura que una mujer esconde en tres medidas de harina, "hasta que todo quedó leudado" (Mateo 13:33). El reino comienza casi invisiblemente — un puñado de pescadores, un maestro en una barca prestada — y sin embargo crece hasta extenderse por el todo. No debemos despreciar los comienzos pequeños y escondidos. El Rey no edifica su reino por la fuerza ni el espectáculo, sino por la obra callada y segura de la semilla y la levadura, hasta que al fin llena mucho más de lo que cualquiera que mirara el pequeño comienzo habría imaginado.</p>
+
+<h3>El Tesoro y la Perla</h3>
+<p>Luego vienen dos parábolas sobre lo que el reino vale. Un hombre halla un tesoro escondido en un campo, y "gozoso por ello va y vende todo lo que tiene, y compra aquel campo" (Mateo 13:44). Un mercader que busca buenas perlas halla una perla preciosa y vende todo lo que tiene para comprarla (Mateo 13:45-46). Las dos historias hacen un solo punto desde dos direcciones: el reino de los cielos vale todo. El hombre tropieza con el tesoro por sorpresa; el mercader busca y halla. Pero ambos, una vez que ven su valor, con gozo sueltan todo lo que tienen para ganarlo. Esto no es un sacrificio sombrío sino un intercambio gozoso, hecho "por gozo". Entregar todo por el reino es el mejor negocio que alguien haya hecho jamás.</p>
+
+<h3>La Red</h3>
+<p>La séptima parábola vuelve al tema del trigo y la cizaña. El reino es como una red barredera echada en el mar, que recoge peces de toda clase; cuando está llena, los pescadores se sientan y separan lo bueno de lo malo. "Así será al fin del mundo; saldrán los ángeles, y apartarán a los malos de entre los justos" (Mateo 13:49). Como el campo que tiene juntos el trigo y la cizaña, la red tiene juntos lo bueno y lo malo hasta el fin. La lección es la misma: hay una mezcla ahora, pero habrá una separación entonces. La iglesia visible y el mundo contienen ambos más de lo que se ve, y la separación final es segura, y es de Dios.</p>
+
+<h3>Tesoros Nuevos y Viejos</h3>
+<p>Jesús pregunta a los discípulos si han entendido, y dicen que sí. Entonces añade un cuadro breve más: "Todo escriba docto en el reino de los cielos es semejante a un padre de familia, que saca de su tesoro cosas nuevas y cosas viejas" (Mateo 13:52). El discípulo que de veras ha entendido el reino es como un mayordomo con un depósito lleno, capaz de sacar tanto el viejo tesoro de las Escrituras como el nuevo tesoro de su cumplimiento en Cristo. Lo nuevo no desecha lo viejo; lo abre. Esto es justamente lo que Mateo mismo hace a lo largo de su Evangelio, mostrando cómo la nueva obra del Rey cumple las antiguas promesas.</p>
+
+<h3>Un Profeta Sin Honra</h3>
+<p>El capítulo termina con una escena que es la parábola de los terrenos hecha vida. Jesús vuelve a Nazaret, su propio pueblo, y enseña en la sinagoga. La gente se admira de su sabiduría, pero en vez de creer se ofenden: ¿no es éste el hijo del carpintero, cuya familia conocemos? Jesús responde: "No hay profeta sin honra sino en su propia tierra y en su casa" (Mateo 13:57). Y Mateo añade una línea solemne: "Y no hizo allí muchos milagros, a causa de la incredulidad de ellos" (Mateo 13:58). La misma palabra que da ciento por uno en buena tierra es arrebatada del corazón duro. La familiaridad les había hecho pensar que ya lo conocían, y así la semilla no halló raíz en el mismo pueblo donde Él creció.</p>
+
+<h3>El Reino Escondido y Revelado</h3>
+<p>Reunidas, las siete parábolas nos dan un cuadro verdadero del reino tal como de veras viene en esta era. Viene aún no en gloria arrolladora, sino sembrado como semilla que echa raíz en unos corazones y no en otros. Crece en un campo mezclado, trigo y cizaña juntos, y no será purgado por nuestras manos sino separado por Dios al fin del mundo. Comienza pequeño y escondido, como un grano de mostaza y un poco de levadura, y sin embargo se extiende por el todo. Está escondido como un tesoro, y sin embargo vale todo lo que una persona tiene. Y avanza firmemente hacia una siega final, una separación final, cuando los justos resplandecerán como el sol en el reino de su Padre. A través de todo, solo un terreno da fruto. La respuesta que el Rey busca es la misma que Mateo ha recalcado desde el principio: un corazón que oye la palabra, la entiende y lleva fruto. La pregunta que cada uno de nosotros debe responder es sencillamente qué terreno somos. Estas historias no fueron dadas para satisfacer nuestra curiosidad sobre el futuro sino para escudriñar nuestro corazón en el presente. Un reino que crece como semilla pide paciencia; un reino mezclado como trigo y cizaña pide humildad, pues no podemos juzgar finalmente el corazón de otro; y un reino que vale más que todo lo que poseemos pide todo lo que tenemos. Conocer los misterios del reino es, al fin, entregarnos al Rey que reina en él.</p>
+<div class="scripture">"Mas el que fue sembrado en buena tierra, éste es el que oye y entiende la palabra, y lleva fruto." — Mateo 13:23 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 8 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 8 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Matthew Intensive — Unit 8 (The Parables of the Kingdom, Matthew 13)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 8;
+const COURSE = 'matt';
+const NEXT_UNIT_URL = 'CTSMattUnit9.html';
+const totalUnits = 13;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The King's Origins (Matthew 1-2)", "Unit 2 - The King Presented (Matthew 3-4)", "Unit 3 - Sermon on the Mount I: The Character of the Kingdom (Matthew 5)", "Unit 4 - Sermon on the Mount II: The Practice of the Kingdom (Matthew 6-7)", "Unit 5 - The Lord's Prayer (Matthew 6:9-13)", "Unit 6 - The King's Authority: Miracles (Matthew 8-9)", "Unit 7 - The King's Mission and Rising Opposition (Matthew 10-12)", "Unit 8 - The Parables of the Kingdom (Matthew 13)", "Unit 9 - The King and His Church (Matthew 14-18)", "Unit 10 - The Road to Jerusalem (Matthew 19-23)", "Unit 11 - The Olivet Discourse: Last Things (Matthew 24-25)", "Unit 12 - The Passion (Matthew 26-27)", "Unit 13 - The Resurrection and the Great Commission (Matthew 28)"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSMattUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. Matthew 13 is the third great teaching block of the Gospel, and Jesus teaches the crowds entirely in:", "textEs": "1. Mateo 13 es el tercer gran bloque de enseñanza del Evangelio, y Jesús enseña a las multitudes enteramente en:", "optionsEn": ["Written letters", "Legal rulings", "Songs", "Parables — earthly stories with a heavenly meaning"], "optionsEs": ["Cartas escritas", "Sentencias legales", "Cánticos", "Parábolas — historias terrenales con un significado celestial"], "explanationEn": "The chapter gathers a series of parables about the hidden nature of the kingdom.", "explanationEs": "El capítulo reúne una serie de parábolas sobre la naturaleza escondida del reino.", "correct": 3}, {"textEn": "2. When asked why He taught in parables, Jesus said the mysteries of the kingdom:", "textEs": "2. Cuando le preguntaron por qué enseñaba en parábolas, Jesús dijo que los misterios del reino:", "optionsEn": ["Could never be understood", "Had been given to the disciples to know, but not to those who had turned away", "Were written in the law", "Were for everyone equally"], "optionsEs": ["Nunca podían entenderse", "Eran dados a los discípulos para conocer, pero no a los que se habían apartado", "Estaban escritos en la ley", "Eran para todos por igual"], "explanationEn": "A parable both reveals to the hungry heart and conceals from the hardened heart.", "explanationEs": "Una parábola revela al corazón hambriento y oculta al corazón endurecido.", "correct": 1}, {"textEn": "3. In the parable of the sower, the seed represents:", "textEs": "3. En la parábola del sembrador, la semilla representa:", "optionsEn": ["The word of the kingdom", "Israel", "Money", "The temple"], "optionsEs": ["La palabra del reino", "Israel", "El dinero", "El templo"], "explanationEn": "The same seed, the word, meets four different kinds of heart.", "explanationEs": "La misma semilla, la palabra, encuentra cuatro clases distintas de corazón.", "correct": 0}, {"textEn": "4. The seed among thorns represents the heart in which the word is choked by:", "textEs": "4. La semilla entre espinos representa el corazón en que la palabra es ahogada por:", "optionsEn": ["Old age", "Lack of teaching", "The cares of the world and the deceitfulness of riches", "Persecution"], "optionsEs": ["La vejez", "La falta de enseñanza", "El afán del mundo y el engaño de las riquezas", "La persecución"], "explanationEn": "The thorny soil hears, but worldly cares and riches choke the word so it bears nothing.", "explanationEs": "El terreno espinoso oye, pero los afanes y las riquezas ahogan la palabra y no da fruto.", "correct": 2}, {"textEn": "5. In the parable of the wheat and tares, when the servants offered to pull up the weeds, the master said:", "textEs": "5. En la parábola del trigo y la cizaña, cuando los siervos se ofrecieron a arrancar la mala hierba, el señor dijo:", "optionsEn": ["'Plant them elsewhere'", "'Pull them up at once'", "'Burn the whole field'", "'Let both grow together until the harvest'"], "optionsEs": ["'Plantadla en otro lugar'", "'Arrancadla enseguida'", "'Quemad todo el campo'", "'Dejad crecer juntamente lo uno y lo otro hasta la siega'"], "explanationEn": "Pulling the tares would uproot the wheat; the separation waits for the harvest.", "explanationEs": "Arrancar la cizaña arrancaría el trigo; la separación espera hasta la siega.", "correct": 3}, {"textEn": "6. Jesus explained that in the parable of the wheat and tares, the field is:", "textEs": "6. Jesús explicó que en la parábola del trigo y la cizaña, el campo es:", "optionsEn": ["The synagogue", "The temple", "The human heart", "The world"], "optionsEs": ["La sinagoga", "El templo", "El corazón humano", "El mundo"], "explanationEn": "The field is the world, the harvest is the end of the age, the reapers are the angels.", "explanationEs": "El campo es el mundo, la siega es el fin del mundo, los segadores son los ángeles.", "correct": 3}, {"textEn": "7. The main lesson of the wheat and the tares is that:", "textEs": "7. La lección principal del trigo y la cizaña es que:", "optionsEn": ["Tares should be killed now", "Wheat will become tares", "Good and evil grow together until God separates them at the end of the age", "The church has no problems"], "optionsEs": ["La cizaña debe ser destruida ahora", "El trigo se volverá cizaña", "El bien y el mal crecen juntos hasta que Dios los separa al fin del mundo", "La iglesia no tiene problemas"], "explanationEn": "We do not purge the field by force; the final separation belongs to God and His angels.", "explanationEs": "No purgamos el campo por la fuerza; la separación final pertenece a Dios y sus ángeles.", "correct": 2}, {"textEn": "8. The parables of the mustard seed and the leaven teach that the kingdom:", "textEs": "8. Las parábolas del grano de mostaza y la levadura enseñan que el reino:", "optionsEn": ["Comes by force", "Will always stay small", "Comes only at the end", "Begins small and hidden, yet grows until it spreads through the whole"], "optionsEs": ["Viene por la fuerza", "Siempre quedará pequeño", "Viene solo al final", "Comienza pequeño y escondido, pero crece hasta extenderse por el todo"], "explanationEn": "From tiny, hidden beginnings the kingdom grows by the quiet working of seed and leaven.", "explanationEs": "Desde comienzos pequeños y escondidos el reino crece por la obra callada de la semilla y la levadura.", "correct": 3}, {"textEn": "9. In the parables of the treasure and the pearl, both men:", "textEs": "9. En las parábolas del tesoro y la perla, ambos hombres:", "optionsEn": ["Sold all they had, with joy, to gain it", "Lost what they found", "Borrowed the money", "Refused to pay the price"], "optionsEs": ["Vendieron todo lo que tenían, con gozo, para ganarlo", "Perdieron lo que hallaron", "Pidieron prestado el dinero", "Se negaron a pagar el precio"], "explanationEn": "The kingdom is worth everything; giving up all to gain it is a glad exchange.", "explanationEs": "El reino vale todo; entregar todo por ganarlo es un intercambio gozoso.", "correct": 0}, {"textEn": "10. The parable of the dragnet, like the wheat and tares, teaches that:", "textEs": "10. La parábola de la red, como el trigo y la cizaña, enseña que:", "optionsEn": ["All fish are good", "There is a mixture now, but a separation at the end of the age", "Fishing is holy work", "The net will break"], "optionsEs": ["Todos los peces son buenos", "Hay una mezcla ahora, pero una separación al fin del mundo", "La pesca es obra santa", "La red se romperá"], "explanationEn": "The net holds good and bad together until the angels separate them at the end.", "explanationEs": "La red tiene juntos lo bueno y lo malo hasta que los ángeles los separan al fin.", "correct": 1}, {"textEn": "11. The 'scribe instructed concerning the kingdom' brings out of his treasure:", "textEs": "11. El 'escriba docto en el reino' saca de su tesoro:", "optionsEn": ["Things new and old together", "Only new things", "Only old things", "Nothing at all"], "optionsEs": ["Cosas nuevas y viejas juntas", "Solo cosas nuevas", "Solo cosas viejas", "Nada en absoluto"], "explanationEn": "The new fulfillment in Christ opens up, rather than discards, the old treasure of Scripture.", "explanationEs": "El nuevo cumplimiento en Cristo abre, en vez de desechar, el viejo tesoro de la Escritura.", "correct": 0}, {"textEn": "12. When Jesus taught in His hometown of Nazareth, the people:", "textEs": "12. Cuando Jesús enseñó en su pueblo de Nazaret, la gente:", "optionsEn": ["Followed Him to Jerusalem", "Took offense, asking, 'Is this not the carpenter's son?'", "Crowned Him", "Believed at once"], "optionsEs": ["Lo siguió a Jerusalén", "Se ofendió, preguntando: '¿No es éste el hijo del carpintero?'", "Lo coronó", "Creyó enseguida"], "explanationEn": "Familiarity made them think they knew Him, and the seed found no root.", "explanationEs": "La familiaridad les hizo pensar que lo conocían, y la semilla no halló raíz.", "correct": 1}, {"textEn": "13. Matthew notes that in Nazareth Jesus did not do many mighty works because of:", "textEs": "13. Mateo señala que en Nazaret Jesús no hizo muchos milagros a causa de:", "optionsEn": ["The crowds", "The distance", "Their unbelief", "The Sabbath"], "optionsEs": ["Las multitudes", "La distancia", "La incredulidad de ellos", "El día de reposo"], "explanationEn": "Their unbelief is the hard, wayside soil of the very first parable, come to life.", "explanationEs": "Su incredulidad es el terreno duro del camino de la primera parábola, hecho vida.", "correct": 2}, {"textEn": "14. The first parable, the sower, functions in the chapter as:", "textEs": "14. La primera parábola, el sembrador, funciona en el capítulo como:", "optionsEn": ["A minor aside", "A parable about farming methods", "A prophecy of Israel's return", "The key that explains why the kingdom's word takes root in some and not others"], "optionsEs": ["Un comentario menor", "Una parábola sobre métodos de cultivo", "Una profecía del regreso de Israel", "La clave que explica por qué la palabra del reino echa raíz en unos y no en otros"], "explanationEn": "The four soils explain the differing responses seen throughout the whole chapter.", "explanationEs": "Los cuatro terrenos explican las respuestas distintas que se ven en todo el capítulo.", "correct": 3}, {"textEn": "15. The tare (darnel) is significant because it:", "textEs": "15. La cizaña es significativa porque:", "optionsEn": ["Looks so much like wheat that the two cannot be safely told apart until the harvest", "Is poisonous to animals", "Has no roots", "Grows faster than wheat"], "optionsEs": ["Se parece tanto al trigo que los dos no pueden distinguirse con seguridad hasta la siega", "Es venenosa para los animales", "No tiene raíces", "Crece más rápido que el trigo"], "explanationEn": "Because tare and wheat look alike, only God can sort them with certainty at the end.", "explanationEs": "Porque la cizaña y el trigo se parecen, solo Dios puede separarlos con certeza al fin.", "correct": 0}, {"textEn": "16. The good soil is described as the heart that:", "textEs": "16. La buena tierra se describe como el corazón que:", "optionsEn": ["Hears only", "Is naturally better", "Hears the word, understands it, and bears fruit", "Has no troubles"], "optionsEs": ["Solo oye", "Es naturalmente mejor", "Oye la palabra, la entiende y lleva fruto", "No tiene problemas"], "explanationEn": "Hearing, understanding, and bearing fruit is the response the King is looking for.", "explanationEs": "Oír, entender y llevar fruto es la respuesta que el Rey busca.", "correct": 2}, {"textEn": "17. That the kingdom comes 'sown like seed' rather than in overwhelming glory teaches us:", "textEs": "17. Que el reino venga 'sembrado como semilla' en vez de en gloria arrolladora nos enseña:", "optionsEn": ["That it will never grow", "Not to despise its small and hidden beginnings", "To force its growth", "That it has failed"], "optionsEs": ["Que nunca crecerá", "A no despreciar sus comienzos pequeños y escondidos", "A forzar su crecimiento", "Que ha fracasado"], "explanationEn": "The mustard seed and leaven show the certain growth of a small, hidden beginning.", "explanationEs": "El grano de mostaza y la levadura muestran el crecimiento seguro de un comienzo pequeño.", "correct": 1}, {"textEn": "18. Selling all to gain the treasure and the pearl is presented as:", "textEs": "18. Vender todo para ganar el tesoro y la perla se presenta como:", "optionsEn": ["A glad exchange done for joy", "An impossible demand", "A grim and joyless duty", "A foolish loss"], "optionsEs": ["Un intercambio gozoso hecho por gozo", "Una exigencia imposible", "Un deber sombrío y sin gozo", "Una pérdida necia"], "explanationEn": "Both men, seeing the kingdom's worth, gladly give all to gain it.", "explanationEs": "Ambos hombres, viendo el valor del reino, con gozo dan todo por ganarlo.", "correct": 0}, {"textEn": "19. Taken together, the seven parables picture a kingdom that is:", "textEs": "19. Tomadas en conjunto, las siete parábolas describen un reino que es:", "optionsEn": ["Already in full glory", "Hidden, growing, mixed with evil, precious, and heading toward a final separation", "Defeated and shrinking", "Limited to one nation"], "optionsEs": ["Ya en plena gloria", "Escondido, creciente, mezclado con el mal, precioso, y que va hacia una separación final", "Derrotado y menguante", "Limitado a una nación"], "explanationEn": "This is the kingdom as it truly comes in this present age.", "explanationEs": "Este es el reino tal como de veras viene en esta era presente.", "correct": 1}, {"textEn": "20. The one response the whole chapter calls for is:", "textEs": "20. La única respuesta que todo el capítulo pide es:", "optionsEn": ["Building a great temple", "Searching for signs", "To be the good soil that hears, understands, and bears fruit", "Pulling up the tares"], "optionsEs": ["Edificar un gran templo", "Buscar señales", "Ser la buena tierra que oye, entiende y lleva fruto", "Arrancar la cizaña"], "explanationEn": "Each hearer must ask which soil he is — and become the good ground that bears fruit.", "explanationEs": "Cada oyente debe preguntar qué terreno es — y volverse la buena tierra que lleva fruto.", "correct": 2}];
+
+const kwQuestions = [{"textEn": "21. Why did Jesus teach the crowds in parables, and what does a parable do?", "textEs": "21. ¿Por qué enseñó Jesús a las multitudes en parábolas, y qué hace una parábola?", "kw_en": ["parable", "myster", "kingdom", "isaiah", "reveal", "conceal", "disciple", "harden"], "kw_es": ["parábol", "misteri", "reino", "isaías", "revela", "oculta", "discíp", "endurec"], "modelEn": "When the disciples asked why Jesus taught the crowds in parables, He said it had been given to them to know the mysteries of the kingdom of heaven, but not to those who had turned away. A parable both reveals and conceals at once. To the hungry heart that wants to understand, the earthly story opens the heavenly truth; but to the hardened heart that has already turned away, the same story stays a riddle. Jesus quoted Isaiah, that seeing they do not see and hearing they do not hear. So the parables of this chapter reward the disciple who seeks to understand the kingdom, while they veil the truth from those whose hearts are closed.", "modelEs": "Cuando los discípulos preguntaron por qué Jesús enseñaba a las multitudes en parábolas, dijo que a ellos les era dado saber los misterios del reino de los cielos, pero no a los que se habían apartado. Una parábola a la vez revela y oculta. Al corazón hambriento que quiere entender, la historia terrenal le abre la verdad celestial; pero al corazón endurecido que ya se ha apartado, la misma historia sigue siendo un enigma. Jesús citó a Isaías, que viendo no ven y oyendo no oyen. Así las parábolas de este capítulo recompensan al discípulo que busca entender el reino, mientras velan la verdad a aquellos cuyo corazón está cerrado."}, {"textEn": "22. Describe the parable of the sower and the four soils.", "textEs": "22. Describa la parábola del sembrador y los cuatro terrenos.", "kw_en": ["sower", "ground", "thorns", "rocky", "word", "fruit", "hundred", "root"], "kw_es": ["sembra", "terreno", "espinos", "pedreg", "palabra", "fruto", "ciento", "camino"], "modelEn": "A sower went out to sow, and the seed, which Jesus said is the word of the kingdom, fell on four kinds of ground. The seed on the wayside path was snatched away by the evil one before it could take root. The seed on rocky ground sprang up quickly but withered when trouble and persecution came, because it had no root. The seed among thorns was choked by the cares of the world and the deceitfulness of riches, so it bore nothing. But the seed on good ground heard the word and understood it and bore fruit, a hundredfold, sixty, and thirty. The same seed met four different hearts, so the word did not fail; the question was the soil that received it.", "modelEs": "Un sembrador salió a sembrar, y la semilla, que Jesús dijo es la palabra del reino, cayó en cuatro clases de terreno. La semilla junto al camino fue arrebatada por el malo antes de echar raíz. La semilla en pedregales brotó pronto pero se secó cuando vinieron la tribulación y la persecución, porque no tenía raíz. La semilla entre espinos fue ahogada por el afán del mundo y el engaño de las riquezas, y no dio nada. Pero la semilla en buena tierra oyó la palabra y la entendió y dio fruto, a ciento, a sesenta y a treinta por uno. La misma semilla encontró cuatro corazones distintos, así que la palabra no falló; la cuestión era el terreno que la recibió."}, {"textEn": "23. Explain the parable of the wheat and the tares and its main lesson.", "textEs": "23. Explique la parábola del trigo y la cizaña y su lección principal.", "kw_en": ["tares", "wheat", "enemy", "harvest", "together", "world", "angels", "separa"], "kw_es": ["cizaña", "trigo", "enemig", "siega", "juntos", "mundo", "ángeles", "separa"], "modelEn": "A man sowed good seed in his field, but while everyone slept an enemy sowed tares, a weed that looks so much like wheat that the two cannot be told apart until the harvest. When the servants wanted to pull up the tares, the master said no, lest they uproot the wheat as well, and told them to let both grow together until the harvest. Jesus explained that the field is the world, the good seed are the sons of the kingdom, the tares are the sons of the wicked one, the enemy is the devil, the harvest is the end of the age, and the reapers are the angels. The main lesson is that the kingdom grows in a mixed field where good and evil grow side by side, and we do not purge it by force; the final separation belongs to God and His angels at the end.", "modelEs": "Un hombre sembró buena semilla en su campo, pero mientras todos dormían un enemigo sembró cizaña, una mala hierba que se parece tanto al trigo que los dos no pueden distinguirse hasta la siega. Cuando los siervos quisieron arrancar la cizaña, el señor dijo que no, no sea que arrancaran también el trigo, y les dijo que dejaran crecer juntos lo uno y lo otro hasta la siega. Jesús explicó que el campo es el mundo, la buena semilla son los hijos del reino, la cizaña son los hijos del malo, el enemigo es el diablo, la siega es el fin del mundo, y los segadores son los ángeles. La lección principal es que el reino crece en un campo mezclado donde el bien y el mal crecen lado a lado, y no lo purgamos por la fuerza; la separación final pertenece a Dios y sus ángeles al fin."}, {"textEn": "24. What do the parables of the mustard seed and the leaven teach about the kingdom?", "textEs": "24. ¿Qué enseñan las parábolas del grano de mostaza y la levadura sobre el reino?", "kw_en": ["mustard", "smalle", "tree", "leaven", "hidden", "growth", "spread", "kingdom"], "kw_es": ["mostaza", "peque", "árbol", "levadu", "escond", "crece", "extiend", "reino"], "modelEn": "The kingdom is like a mustard seed, the smallest of seeds, which grows into a tree large enough for birds to nest in, and like leaven that a woman hides in meal until the whole is leavened. Together these two short parables teach that the kingdom begins small and hidden and yet grows until it spreads through the whole. It started almost invisibly, with a handful of fishermen and a teacher in a borrowed boat, and we must not despise such small and hidden beginnings. The King is not building His kingdom by force or spectacle but by the quiet and certain working of the seed and the leaven, until in the end its growth fills far more than anyone watching the small start could have guessed.", "modelEs": "El reino es como un grano de mostaza, la más pequeña de las semillas, que crece hasta hacerse un árbol grande donde las aves anidan, y como la levadura que una mujer esconde en harina hasta que todo queda leudado. Juntas estas dos parábolas cortas enseñan que el reino comienza pequeño y escondido y sin embargo crece hasta extenderse por el todo. Comenzó casi invisiblemente, con un puñado de pescadores y un maestro en una barca prestada, y no debemos despreciar tales comienzos pequeños y escondidos. El Rey no edifica su reino por la fuerza ni el espectáculo sino por la obra callada y segura de la semilla y la levadura, hasta que al fin su crecimiento llena mucho más de lo que cualquiera que mirara el pequeño comienzo habría imaginado."}, {"textEn": "25. What do the parables of the hidden treasure and the pearl teach about the kingdom's worth?", "textEs": "25. ¿Qué enseñan las parábolas del tesoro escondido y la perla sobre el valor del reino?", "kw_en": ["treasure", "pearl", "field", "merchan", "sells", "worth", "joy", "kingdom"], "kw_es": ["tesoro", "perla", "campo", "mercade", "vende", "valor", "gozo", "reino"], "modelEn": "A man found treasure hidden in a field and for joy went and sold all that he had to buy that field, and a merchant searching for fine pearls found one pearl of great price and sold everything he had to buy it. The two stories make one point from two directions: the kingdom of heaven is worth everything a person has. The man stumbled on the treasure by surprise while the merchant searched and found, but both, once they saw its worth, gladly let go of all they had to gain it. This is not a grim sacrifice but a glad exchange done for joy, so that to give up everything for the kingdom is the best bargain anyone ever made.", "modelEs": "Un hombre halló un tesoro escondido en un campo y gozoso fue y vendió todo lo que tenía para comprar aquel campo, y un mercader que buscaba buenas perlas halló una perla preciosa y vendió todo lo que tenía para comprarla. Las dos historias hacen un solo punto desde dos direcciones: el reino de los cielos vale todo lo que una persona tiene. El hombre tropezó con el tesoro por sorpresa mientras el mercader buscó y halló, pero ambos, una vez que vieron su valor, con gozo soltaron todo lo que tenían para ganarlo. Esto no es un sacrificio sombrío sino un intercambio gozoso hecho por gozo, de modo que entregar todo por el reino es el mejor negocio que alguien haya hecho jamás."}, {"textEn": "26. What does the parable of the dragnet teach, and how is it like the wheat and tares?", "textEs": "26. ¿Qué enseña la parábola de la red, y en qué se parece al trigo y la cizaña?", "kw_en": ["dragnet", "gather", "separa", "wicked", "just", "harvest", "angels", "mixtur"], "kw_es": ["barreder", "recoge", "separa", "malos", "justos", "siega", "ángeles", "mezcla"], "modelEn": "The kingdom is like a dragnet let down into the sea that gathers fish of every kind, and when it is full the fishermen sit down and separate the good from the bad. Jesus said that so it will be at the end of the age, when the angels will come and separate the wicked from among the just. This is like the wheat and the tares, for just as the field holds wheat and tares together, the net holds good and bad together until the end. The lesson is the same: there is a mixture now but there will be a separation then. Both the visible church and the world contain more than meets the eye, and the final sorting is certain, and it belongs to God.", "modelEs": "El reino es como una red barredera echada en el mar que recoge peces de toda clase, y cuando está llena los pescadores se sientan y separan lo bueno de lo malo. Jesús dijo que así será al fin del mundo, cuando los ángeles vendrán y apartarán a los malos de entre los justos. Esto es como el trigo y la cizaña, pues así como el campo tiene juntos el trigo y la cizaña, la red tiene juntos lo bueno y lo malo hasta el fin. La lección es la misma: hay una mezcla ahora pero habrá una separación entonces. Tanto la iglesia visible como el mundo contienen más de lo que se ve, y la separación final es segura, y pertenece a Dios."}, {"textEn": "27. What does Jesus mean by the scribe who brings out of his treasure things new and old?", "textEs": "27. ¿Qué quiere decir Jesús con el escriba que saca de su tesoro cosas nuevas y viejas?", "kw_en": ["scribe", "treasur", "kingdom", "things", "fulfil", "scriptu", "steward", "christ"], "kw_es": ["escriba", "tesoro", "reino", "cosas", "cumpl", "escritu", "mayordom", "cristo"], "modelEn": "After the parables Jesus said that every scribe instructed concerning the kingdom of heaven is like a householder who brings out of his treasure things new and old. He means that the disciple who has truly understood the kingdom is like a steward with a full storehouse, able to bring out both the old treasure of the Scriptures and the new treasure of their fulfillment in Christ. The new does not throw away the old but opens it up and shows its meaning. This is the very thing Matthew himself does throughout his Gospel, holding together the old promises and their fulfillment, so that the trained disciple treasures both the Scriptures given long ago and the new work of the King who fulfills them.", "modelEs": "Después de las parábolas Jesús dijo que todo escriba docto en el reino de los cielos es semejante a un padre de familia que saca de su tesoro cosas nuevas y viejas. Quiere decir que el discípulo que de veras ha entendido el reino es como un mayordomo con un depósito lleno, capaz de sacar tanto el viejo tesoro de las Escrituras como el nuevo tesoro de su cumplimiento en Cristo. Lo nuevo no desecha lo viejo sino que lo abre y muestra su significado. Esto es justamente lo que Mateo mismo hace a lo largo de su Evangelio, sosteniendo juntas las antiguas promesas y su cumplimiento, de modo que el discípulo instruido atesora tanto las Escrituras dadas hace mucho como la nueva obra del Rey que las cumple."}, {"textEn": "28. Describe the rejection at Nazareth and how it connects to the parable of the soils.", "textEs": "28. Describa el rechazo en Nazaret y cómo se conecta con la parábola de los terrenos.", "kw_en": ["prophet", "honor", "nazaret", "unbeli", "offend", "miracl", "carpent", "familia"], "kw_es": ["profeta", "honra", "nazaret", "incred", "ofend", "milagr", "carpint", "familia"], "modelEn": "When Jesus returned to His hometown of Nazareth and taught in the synagogue, the people were astonished at His wisdom, but instead of believing they took offense, asking whether this was not the carpenter's son whose family they knew. Jesus answered that a prophet is not without honor except in his own country and in his own house, and Matthew adds that He did not do many mighty works there because of their unbelief. This connects directly to the parable of the soils, for their unbelief is the hard wayside ground where the seed is snatched away and finds no root. Familiarity had made them think they already knew Him, so the very town where He grew up became the picture of the heart that hears the word and rejects it.", "modelEs": "Cuando Jesús volvió a su pueblo de Nazaret y enseñó en la sinagoga, la gente se admiró de su sabiduría, pero en vez de creer se ofendieron, preguntando si no era éste el hijo del carpintero cuya familia conocían. Jesús respondió que no hay profeta sin honra sino en su propia tierra y en su casa, y Mateo añade que no hizo allí muchos milagros a causa de la incredulidad de ellos. Esto se conecta directamente con la parábola de los terrenos, pues su incredulidad es la tierra dura del camino donde la semilla es arrebatada y no halla raíz. La familiaridad les había hecho pensar que ya lo conocían, así que el mismo pueblo donde creció se volvió el cuadro del corazón que oye la palabra y la rechaza."}, {"textEn": "29. Taken together, how do the seven parables describe the kingdom in this present age?", "textEs": "29. Tomadas en conjunto, ¿cómo describen las siete parábolas el reino en esta era presente?", "kw_en": ["hidden", "growin", "mixed", "preciou", "separa", "harvest", "parable", "kingdom"], "kw_es": ["escond", "crece", "mezcla", "precios", "separa", "siega", "parábol", "reino"], "modelEn": "Taken together the seven parables give a true picture of the kingdom as it really comes in this present age. It comes not yet in overwhelming glory but sown like seed that takes root in some hearts and not others. It grows in a mixed field, wheat and tares together, and will not be purged by our hands but separated by God at the end of the age. It begins small and hidden, like a mustard seed and a little leaven, yet it spreads through the whole. It is hidden like a treasure yet precious enough to be worth everything a person has. And it moves steadily toward a final harvest and separation, when the righteous will shine forth as the sun in the kingdom of their Father. This is the kingdom growing quietly and certainly between the comings of the King.", "modelEs": "Tomadas en conjunto las siete parábolas dan un cuadro verdadero del reino tal como de veras viene en esta era presente. Viene aún no en gloria arrolladora sino sembrado como semilla que echa raíz en unos corazones y no en otros. Crece en un campo mezclado, trigo y cizaña juntos, y no será purgado por nuestras manos sino separado por Dios al fin del mundo. Comienza pequeño y escondido, como un grano de mostaza y un poco de levadura, y sin embargo se extiende por el todo. Está escondido como un tesoro y sin embargo es tan precioso que vale todo lo que una persona tiene. Y avanza firmemente hacia una siega y separación final, cuando los justos resplandecerán como el sol en el reino de su Padre. Este es el reino creciendo callada y seguramente entre las venidas del Rey."}, {"textEn": "30. What is the one response the whole chapter calls for, and how should a hearer examine himself?", "textEs": "30. ¿Cuál es la única respuesta que pide todo el capítulo, y cómo debe examinarse el oyente?", "kw_en": ["good", "ground", "hears", "underst", "fruit", "examin", "harvest", "kingdom"], "kw_es": ["buena", "tierra", "oye", "entend", "fruto", "examin", "siega", "reino"], "modelEn": "Through all seven parables only one soil bears fruit, and the response the King is looking for is the same one Matthew has pressed from the beginning. It is the good ground, the heart that hears the word, understands it, and brings forth fruit. The chapter calls every hearer to be that good soil rather than the hard path, the rootless rock, or the choking thorns. So a hearer should examine himself and ask which soil he is, whether the word has taken root and is bearing fruit in his life or is being snatched away, withered, or choked. Since the wheat and tares grow together until the harvest, each must make sure that he himself is wheat, hearing and understanding and obeying the word of the kingdom.", "modelEs": "A través de las siete parábolas solo un terreno da fruto, y la respuesta que el Rey busca es la misma que Mateo ha recalcado desde el principio. Es la buena tierra, el corazón que oye la palabra, la entiende y lleva fruto. El capítulo llama a cada oyente a ser esa buena tierra en vez del camino duro, la roca sin raíz, o los espinos que ahogan. Así que un oyente debe examinarse y preguntar qué terreno es, si la palabra ha echado raíz y lleva fruto en su vida o está siendo arrebatada, secada o ahogada. Puesto que el trigo y la cizaña crecen juntos hasta la siega, cada uno debe asegurarse de que él mismo es trigo, oyendo y entendiendo y obedeciendo la palabra del reino."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 9 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 9 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSMattReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

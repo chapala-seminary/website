@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Old Testament Survey — Unit 8: Wisdom Literature – Part 2 (Proverbs, Ecclesiastes & Song of Solomon)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .action-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.action-btn.reset { background: #8a5a2f; }
+.action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+p { margin-bottom: 12px; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 0; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.track-banner { background: #fffaf0; border-left: 4px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin-bottom: 15px; font-size: 0.95rem; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.locked { cursor: default; }
+.option.locked:hover { background: #fcfbf8; }
+.option.locked.correct:hover { background: #e8f5ea; }
+.option.locked.wrong:hover { background: #fae8e8; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.exam-result { margin-top: 15px; padding: 12px 18px; border-radius: 12px; font-size: 1.05rem; }
+.exam-result.pass { background: #e8f5ea; color: #1f6b3b; border: 1px solid #b9dfc2; }
+.exam-result.fail { background: #fae8e8; color: #8a1f1f; border: 1px solid #efc2c2; }
+.exam-result.locked { background: #fff4d6; color: #6b4f1f; border: 1px solid #e8d28a; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en .block-en { display: block; }
+body.lang-en .block-es { display: none; }
+body.lang-es .block-en { display: none; }
+body.lang-es .block-es { display: block; }
+@media print {
+    body { background: white; font-size: 12pt; padding: 0; }
+    .nav-bar, .toggle-btn, .action-btn, button.small, .registration-panel { display: none !important; }
+    .card { box-shadow: none; border: none; padding: 10pt 0; margin-bottom: 8pt; page-break-inside: avoid; }
+    .question { page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .option.correct { background: white; border: 1px solid #888; }
+    .option.wrong { background: white; border: 1px solid #888; }
+}
+.reg-readout { font-size: 0.95rem; }
+.reg-readout-grid { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.reg-readout-grid > div { min-width: 180px; }
+.reg-readout-note { margin-top: 8px; font-size: 0.82rem; color: #6b6256; }
+.reg-readout.missing { color: #8a1f1f; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Old Testament Survey — Unit 8: Wisdom Literature – Part 2 (Proverbs, Ecclesiastes & Song of Solomon)</span><span class="lang-es">📖 Estudio del Antiguo Testamento — Unidad 8: Literatura Sapiencial – Parte 2 (Proverbios, Eclesiastés y Cantar de los Cantares)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="registration-panel" id="regPanel">
+    <h3><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h3>
+    <div id="regReadout" class="reg-readout"></div>
+    <!-- Hidden fields preserve the IDs used by grading/loadReg; registration is edited on Unit 1. -->
+    <input type="hidden" id="studentName">
+    <input type="hidden" id="studentEmail">
+    <input type="hidden" id="studentCountry">
+    <input type="hidden" id="studentProgram">
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="block-en">
+        <h2>Three Voices, One Library</h2>
+        <p>Walk into the wisdom section of any seminary library and you will find three books that look like they don't belong together. Proverbs is brisk, confident, two-line punches: <em>do this, don't do that</em>. Ecclesiastes is moody, restless, asking the same question on every page: <em>what's the point?</em> The Song of Solomon is a love poem so unblushing that some translators put little stars over the steamier verses. Three voices. One library. They sound different because they are coming at the same question from three different angles. <strong>How do I live a life worth living before God?</strong></p>
+
+        <p>And here is the irony none of us should ever forget: all three books carry the fingerprints of Solomon. <em>"He spoke three thousand proverbs"</em> (1 Kings 4:32). He composed a thousand and five songs. He sat on the throne of the wisest kingdom on earth. And he died with a thousand wives and concubines and a kingdom about to split in half. Solomon wrote it. Solomon didn't always live it. That tells you something important: the wisdom of God is not generated by the wisdom-writer. It is given to him, sometimes in spite of him, for the benefit of you. Don't refuse the gift because the messenger had clay feet. Every messenger has clay feet. The treasure is still treasure.</p>
+
+        <h2>I. Proverbs: Wisdom Mined, Not Wished</h2>
+        <p>Proverbs is the everyday wisdom book — the one your grandmother quotes without knowing she's quoting it. <em>"A soft answer turns away wrath"</em> (Proverbs 15:1). <em>"Pride goes before destruction"</em> (Proverbs 16:18). <em>"Train up a child in the way he should go"</em> (Proverbs 22:6). About 800 of Solomon's 3,000 proverbs made the cut into the canonical book, plus contributions from Agur and King Lemuel. The book is structured in two big halves. Chapters 1–9 are extended speeches from a father to a son. Chapters 10–31 are the rapid-fire two-liners most people picture when they hear the word "proverb."</p>
+
+        <p>Pay attention to chapters 1–9. There are <strong>two voices</strong> calling to the young man, and the whole book is the question of which voice he is going to follow home. One is <em>Lady Wisdom</em> — she stands at the gates of the city and cries out (Proverbs 1:20–21; 8:1–3). The other is <em>the foolish woman</em>, sometimes called the strange woman or the adulteress (Proverbs 7; 9:13–18). Both are loud. Both are at the door. Both are inviting the young man home for dinner. The difference is not volume. The difference is destination. Lady Wisdom's house leads to life. The foolish woman's house, Solomon says with brutal honesty, <em>"is the way to hell, descending to the chambers of death"</em> (Proverbs 7:27). Listen carefully today, friend, because both voices are still calling. Both are still loud. Only one is going your way.</p>
+
+        <p>Now hear the verse that organizes the whole book. Proverbs 2:4: <em>"If you seek her as silver, and search for her as for hidden treasures, then you will understand the fear of the Lord, and find the knowledge of God"</em> (Proverbs 2:4–5). Spurgeon told a story about a poor fisherman in a coastal village who hauled in his net and sold his fish to a buyer. The buyer took the fish home, slit it open to clean it, and inside the belly of the fish was a gold ring. Spurgeon's point: the gold ring was already in the fish. The fisherman didn't know it. He had been carrying treasure all along and almost let it go for the price of a meal. Wisdom, said Spurgeon, is like that ring. It is in the Scriptures already. It is waiting. But you will not find it by wishing. You will find it by <em>mining</em>. Wisdom is mined, not wished. You don't wake up wise; you dig wise. Open your Bible like a man with a lantern going down into a mine. You will come up with gold.</p>
+
+        <p>Three running themes will reward your mining. <strong>The fear of the Lord.</strong> <em>"The fear of the Lord is the beginning of knowledge"</em> (Proverbs 1:7). It is mentioned more than fifteen times. Reverence, awe, obedience — not terror, not superstition. The starting line of every wise life. <strong>The tongue.</strong> <em>"Death and life are in the power of the tongue"</em> (Proverbs 18:21). More than a hundred verses in Proverbs deal with what comes out of your mouth. If you cannot govern your speech, you cannot live wisely; period. <strong>And the woman of Proverbs 31.</strong> The book closes with a portrait of wisdom embodied in a real woman — strong, hard-working, generous, business-minded, kind to the poor, fearing the Lord. The book that began with two warning voices ends with one beautiful one. Lady Wisdom finally has a face.</p>
+
+        <p>And then Proverbs 8. Listen to her: <em>"The Lord possessed me at the beginning of His way… I was set up from everlasting, from the beginning, before there was ever an earth… Then I was beside Him as a master craftsman, and I was daily His delight, rejoicing always before Him"</em> (Proverbs 8:22–30). That is no longer abstract wisdom. That is a Person. That is Someone who was with the Father before the foundation of the world. The New Testament, when it comes to identify her, names her: <em>"Christ Jesus, who became for us wisdom from God"</em> (1 Corinthians 1:30). <em>"In whom are hidden all the treasures of wisdom and knowledge"</em> (Colossians 2:3). The voice that has been calling at the gate of the city throughout the whole book of Proverbs has a name. Her name is Jesus.</p>
+
+        <h2>II. Ecclesiastes: The Honest Book</h2>
+        <p>Most preachers don't know what to do with Ecclesiastes. So they preach the last two verses and skip the first twelve chapters. That is a tragedy, because the first twelve chapters are where the gospel does its most patient surgery on the modern soul.</p>
+
+        <p>The Hebrew word that runs through this book like a river is <em>hevel</em>. Older Bibles translate it "vanity." That's not quite right. <em>Hevel</em> literally means "vapor" — the breath you can see on a cold morning. Not <em>worthless</em>. Just <em>ungraspable</em>. You can see it. You cannot hold it. <em>"Vanity of vanities, says the Preacher; vanity of vanities, all is vanity"</em> (Ecclesiastes 1:2). Read it: <em>Vapor of vapors. All is vapor.</em> A breath. A mist. There one moment, gone the next. Try to clutch it and your hand closes on nothing.</p>
+
+        <p>The other phrase to mark in your Bible is <em>under the sun</em>. Solomon uses it twenty-nine times. He is writing horizontally on purpose. He is saying: if all you have is what's under the sun — your career, your portfolio, your pleasures, your knowledge, even the beautiful sunrise out your kitchen window — then everything you can grasp is vapor.</p>
+
+        <h3>Five Failed Experiments</h3>
+        <p>Solomon doesn't just preach this. He proves it. He runs the experiments so you don't have to. The book of Ecclesiastes is essentially the lab notebook of the wisest man on earth trying to find happiness without God. Read closely and you can count five experiments — and every one of them comes back stamped <em>hevel</em>.</p>
+
+        <p><strong>One — Wisdom and knowledge.</strong> <em>"I applied my mind to study and to explore by wisdom all that is done under the heavens… all of them are meaningless, a chasing after the wind"</em> (Ecclesiastes 1:13–14). The wisest man on earth concluded that the pursuit of wisdom apart from God is chasing wind. <em>"For in much wisdom is much grief, and he that increaseth knowledge increaseth sorrow"</em> (Ecclesiastes 1:18). <strong>Two — Pleasure.</strong> <em>"I said in my heart, Go to now, I will prove thee with mirth, therefore enjoy pleasure. Behold, this also is vanity"</em> (Ecclesiastes 2:1). Solomon was an expert. A thousand wives and concubines. Wine, music, entertainment — what we would now call a Las Vegas weekend stretched over a lifetime. Verdict: vapor. <strong>Three — Wealth.</strong> <em>"I amassed silver and gold for myself, and the treasure of kings"</em> (2:8). Every century has its men who answered, when asked how much is enough, <em>"One dollar more."</em> Solomon eventually said, <em>"He that loveth silver shall not be satisfied with silver"</em> (5:10). Vapor. <strong>Four — Power and fame.</strong> <em>"I became greater by far than anyone in Jerusalem before me"</em> (2:9). Result? Three verses later: <em>"I hated life."</em> The wisest man in the wealthiest kingdom on earth at the peak of his fame and power said in print that he hated life. Vapor. <strong>Five — Work.</strong> <em>"I undertook great projects: I built houses for myself and planted vineyards"</em> (2:4). The Temple, palaces, pools, aqueducts. And then: <em>"Therefore I went about to cause my heart to despair of all the labour which I took under the sun"</em> (2:20). Vapor.</p>
+
+        <p>Five experiments. Five failures. And then — at the end of the lab notebook — Solomon looks up for the first time. <em>"Remember now thy Creator in the days of thy youth"</em> (12:1). <em>"Fear God, and keep His commandments: for this is the whole of man"</em> (12:13). After every horizontal experiment failed, Solomon ends where Proverbs began — at the fear of the Lord. The vapor lifts only when you look up.</p>
+
+        <h3>A Restless Heart Without God</h3>
+        <p>Why is this book in the Bible? Because the Bible is honest. Ecclesiastes is the gospel's permission slip to admit that horizontal life leaves you hungry. Augustine wrote in his <em>Confessions</em>, <em>"Thou hast made us for Thyself, and our hearts are restless until they find their rest in Thee."</em> That is Ecclesiastes in one sentence. The human heart is so constructed that you could put the whole world in it and it would still not be full. Solomon had the whole world in his and proved Augustine right by experiment. <em>"It would be better,"</em> Solomon writes in 9:4, <em>"to be a living dog than a dead lion"</em> — meaning that even the smallest fragment of meaningful life is more than the largest pile of dead achievements.</p>
+
+        <p>If Proverbs gives you the rule (<em>do this, get that</em>), Ecclesiastes gives you the exceptions (<em>sometimes you do this and don't get that — and what then?</em>). Both are true. You need both. A diet of pure Proverbs makes a man brittle and self-righteous; a diet of pure Ecclesiastes makes him cynical and depressed. The wise believer needs both books open on his desk.</p>
+
+        <p>And here is the gospel answer Ecclesiastes was crying out for. Paul writes: <em>"Therefore, my beloved brethren, be steadfast, immovable, always abounding in the work of the Lord, knowing that your labor is not in vain in the Lord"</em> (1 Corinthians 15:58). Did you catch that? Solomon said your labor <em>is</em> in vain — under the sun. Paul says your labor is <em>not</em> in vain — <em>in the Lord</em>. The Lord Jesus Christ revokes <em>hevel</em> for everything done in Him. Your forty years of teaching Sunday school are not vapor. Your obscure faithfulness in a job nobody noticed is not vapor. Your prayers nobody heard you pray are not vapor. Above the sun, in the Lord, every cup of cold water is gold. Ecclesiastes asks the question. Christ is the answer.</p>
+
+        <h2>III. The Song of Solomon: The Wedding Inside the Library</h2>
+        <p>Now the love poem. The book some pastors are afraid to preach and some rabbis used to forbid until a man turned thirty. The Song is a sustained celebration of the love between a husband and his bride, frankly physical, deeply tender, and woven through with theological resonance.</p>
+
+        <p>Three interpretive approaches have competed across church history. The <em>allegorical</em> approach said the book isn't really about marriage at all — it's about God and Israel, or Christ and the Church, with every detail carrying a coded meaning. This was the dominant view from the early church through the Middle Ages. The <em>typological</em> approach says the book is genuinely about marriage <em>and</em> it points to Christ and the Church as a type. The <em>literal</em> approach says it is a love song; full stop; celebrating the gift God gave us in Genesis 2 of one man and one woman united in covenant. Most conservative evangelical scholars today hold a <strong>literal-primary reading with typological overtones</strong>. Real marriage. Really pointing.</p>
+
+        <p>The Song is unblushing about marital intimacy and uncompromising about marital exclusivity, and the two are inseparable. The bride keeps repeating a phrase that ought to give us covenant chills: <em>"I am my beloved's, and my beloved is mine"</em> (Song of Solomon 6:3). That is not poetic exaggeration. That is the language of belonging. Sex in this book is never recreational. It is covenantal. It is the sealing ceremony of a one-flesh union, and it is meant to look — to anyone watching — like Christ and the Church.</p>
+
+        <p>Because that is exactly what Paul will say later: <em>"This is a great mystery, but I speak concerning Christ and the church"</em> (Ephesians 5:32). The marriage altar is a rehearsal stage. Every godly husband is rehearsing the love of Christ for His Bride. Every godly wife is rehearsing the response of the Church to her Lord. And the book of the Bible we are sometimes embarrassed to read out loud is the libretto for the wedding feast of the Lamb (Revelation 19:7–9).</p>
+
+        <h2>IV. Christ Walks Out of the Library</h2>
+        <p>Stand back from all three books and one Person walks out of the pages. Proverbs personified Wisdom and called her by name; the New Testament gives that Wisdom her face — <em>Christ Jesus, who became for us wisdom from God</em>. Ecclesiastes diagnosed the disease of <em>hevel</em>, vapor, ungraspable life under the sun; Christ is the cure: <em>your labor is not in vain in the Lord</em>. The Song sang of a Bridegroom who delights in His Bride; Christ is the Bridegroom (Matthew 9:15) who is even now preparing the wedding feast (Revelation 19).</p>
+
+        <p>Three voices. One Person at the center of the library. Listen well, friend. He is calling at the gate.</p>
+    </div>
+
+    <div class="block-es">
+        <h2>Tres voces, una biblioteca</h2>
+        <p>Entre en la sección de sabiduría de cualquier biblioteca de seminario y encontrará tres libros que parecen no pertenecer juntos. Proverbios es ágil, confiado, golpes de dos líneas: <em>haz esto, no hagas aquello</em>. Eclesiastés es melancólico, inquieto, haciendo la misma pregunta en cada página: <em>¿de qué sirve?</em> El Cantar de los Cantares es un poema de amor tan sin rubores que algunos traductores ponen estrellitas sobre los versos más cálidos. Tres voces. Una biblioteca. Suenan diferente porque están abordando la misma pregunta desde tres ángulos distintos. <strong>¿Cómo vivo una vida que valga la pena delante de Dios?</strong></p>
+
+        <p>Y aquí está la ironía que nunca debemos olvidar: los tres libros llevan las huellas digitales de Salomón. <em>"Compuso tres mil proverbios"</em> (1 Reyes 4:32). Compuso mil cinco cánticos. Se sentó en el trono del reino más sabio sobre la tierra. Y murió con mil esposas y concubinas y un reino a punto de partirse en dos. Salomón lo escribió. Salomón no siempre lo vivió. Eso le dice algo importante: la sabiduría de Dios no es generada por el sabio. Le es <em>dada</em>, a veces a pesar de él, para beneficio de usted. No rechace el regalo porque el mensajero tenía pies de barro. Todo mensajero tiene pies de barro. El tesoro sigue siendo tesoro.</p>
+
+        <h2>I. Proverbios: la sabiduría se mina, no se desea</h2>
+        <p>Proverbios es el libro de sabiduría de cada día — el que su abuela cita sin saber que lo cita. <em>"La blanda respuesta quita la ira"</em> (Proverbios 15:1). <em>"Antes del quebrantamiento es la soberbia"</em> (Proverbios 16:18). <em>"Instruye al niño en su camino"</em> (Proverbios 22:6). Cerca de 800 de los 3,000 proverbios de Salomón entraron al libro canónico, junto con aportes de Agur y del rey Lemuel. El libro tiene dos grandes mitades. Los capítulos 1–9 son discursos extendidos de un padre a su hijo. Los capítulos 10–31 son los disparos rápidos de dos líneas que la mayoría imagina cuando oye la palabra "proverbio."</p>
+
+        <p>Preste atención a los capítulos 1–9. Hay <strong>dos voces</strong> que claman al joven, y todo el libro es la pregunta de cuál voz seguirá hasta su casa. Una es la <em>Señora Sabiduría</em> — se para a las puertas de la ciudad y clama (Proverbios 1:20–21; 8:1–3). La otra es <em>la mujer extraña</em>, a veces llamada la mujer adúltera o la mujer necia (Proverbios 7; 9:13–18). Las dos son ruidosas. Las dos están en la puerta. Las dos invitan al joven a cenar a casa. La diferencia no es el volumen. La diferencia es el destino. La casa de la Señora Sabiduría conduce a la vida. La casa de la mujer necia, dice Salomón con brutal honestidad, <em>"es camino al Seol, que desciende a las cámaras de la muerte"</em> (Proverbios 7:27). Escuche bien hoy, amigo, porque las dos voces siguen llamando. Las dos siguen siendo ruidosas. Solo una va por el camino al cielo.</p>
+
+        <p>Ahora oiga el versículo que organiza el libro entero. Proverbios 2:4: <em>"Si como a la plata la buscares, y la escudriñares como a tesoros, entonces entenderás el temor de Jehová, y hallarás el conocimiento de Dios"</em> (Proverbios 2:4–5). Spurgeon contó una historia sobre un pescador pobre de un pueblo costero que recogió su red y vendió su pez a un comprador. El comprador llevó el pez a casa, lo abrió para limpiarlo, y dentro del vientre del pez había un anillo de oro. La enseñanza de Spurgeon: el anillo de oro ya estaba en el pez. El pescador no lo sabía. Había llevado un tesoro todo el tiempo y casi lo soltó por el precio de una comida. La sabiduría, dijo Spurgeon, es como aquel anillo. Ya está en las Escrituras. Está esperando. Pero no la encontrará deseándola. La encontrará <em>minándola</em>. La sabiduría se mina, no se desea. Uno no despierta sabio; uno cava hasta ser sabio. Abra su Biblia como un hombre que baja a la mina con una linterna. Saldrá con oro.</p>
+
+        <p>Tres temas recurrentes recompensan al que mina. <strong>El temor de Jehová.</strong> <em>"El principio de la sabiduría es el temor de Jehová"</em> (Proverbios 1:7). Aparece más de quince veces. Reverencia, asombro, obediencia — no terror, no superstición. La línea de salida de toda vida sabia. <strong>La lengua.</strong> <em>"La muerte y la vida están en poder de la lengua"</em> (Proverbios 18:21). Más de cien versículos de Proverbios tratan de lo que sale de su boca. Si no puede gobernar su lengua, no puede vivir sabiamente; punto. <strong>Y la mujer de Proverbios 31.</strong> El libro cierra con un retrato de la sabiduría encarnada en una mujer real — fuerte, trabajadora, generosa, con visión para los negocios, bondadosa con el pobre, temerosa de Jehová. El libro que comenzó con dos voces de advertencia termina con una hermosa. La Señora Sabiduría finalmente tiene rostro.</p>
+
+        <p>Y entonces Proverbios 8. Escúchela: <em>"Jehová me poseía en el principio de su camino… Eternamente tuve el principado, desde el principio, antes de la tierra… Con él estaba yo ordenándolo todo, y era su delicia de día en día, teniendo solaz delante de él en todo tiempo"</em> (Proverbios 8:22–30). Eso ya no es sabiduría abstracta. Eso es una Persona. Es Alguien que estaba con el Padre antes de la fundación del mundo. El Nuevo Testamento, cuando viene a identificarla, le pone nombre: <em>"Cristo Jesús, el cual nos ha sido hecho por Dios sabiduría"</em> (1 Corintios 1:30). <em>"En quien están escondidos todos los tesoros de la sabiduría y del conocimiento"</em> (Colosenses 2:3). La voz que ha estado clamando en la puerta de la ciudad a lo largo de todo Proverbios tiene un nombre. Su nombre es Jesús.</p>
+
+        <h2>II. Eclesiastés: el libro honesto</h2>
+        <p>La mayoría de predicadores no sabe qué hacer con Eclesiastés. Así que predican los últimos dos versículos y saltan los doce capítulos anteriores. Es una tragedia, porque los doce primeros capítulos son donde el evangelio hace su cirugía más paciente sobre el alma moderna.</p>
+
+        <p>La palabra hebrea que corre por este libro como un río es <em>hevel</em>. Las Biblias antiguas la traducen "vanidad." No es del todo correcto. <em>Hevel</em> significa literalmente "vapor" — el aliento que se ve en una mañana fría. No <em>sin valor</em>. Solo <em>inasible</em>. Se puede ver. No se puede sostener. <em>"Vanidad de vanidades, dijo el Predicador; vanidad de vanidades, todo es vanidad"</em> (Eclesiastés 1:2). Léalo así: <em>Vapor de vapores. Todo es vapor.</em> Un aliento. Una neblina. Está aquí un instante, ya no está. Trate de aferrarlo y su mano se cierra sobre nada.</p>
+
+        <p>La otra frase que debe marcar en su Biblia es <em>debajo del sol</em>. Salomón la usa veintinueve veces. Está escribiendo horizontalmente a propósito. Está diciendo: si todo lo que tiene es lo que está debajo del sol — su carrera, su cartera, sus placeres, su conocimiento, incluso el hermoso amanecer por la ventana de la cocina — entonces todo lo que pueda asir es vapor.</p>
+
+        <h3>Cinco experimentos fracasados</h3>
+        <p>Salomón no solo predica esto. Lo prueba. Corre los experimentos para que usted no tenga que correrlos. El libro de Eclesiastés es esencialmente el cuaderno de laboratorio del hombre más sabio sobre la tierra tratando de hallar felicidad sin Dios. Lea de cerca y podrá contar cinco experimentos — y cada uno regresa marcado <em>hevel</em>.</p>
+
+        <p><strong>Uno — Sabiduría y conocimiento.</strong> <em>"Y di mi corazón a inquirir y buscar con sabiduría sobre todo lo que se hace debajo del cielo… he aquí, todo ello es vanidad y aflicción de espíritu"</em> (Eclesiastés 1:13–14). El hombre más sabio sobre la tierra concluyó que la búsqueda de la sabiduría apartada de Dios es perseguir el viento. <em>"Porque en la mucha sabiduría hay mucha molestia; y quien añade ciencia, añade dolor"</em> (Eclesiastés 1:18). <strong>Dos — Placer.</strong> <em>"Dije yo en mi corazón: Ven ahora, te probaré con alegría, y gozarás de bienes. Mas he aquí, esto también era vanidad"</em> (Eclesiastés 2:1). Salomón era experto. Mil esposas y concubinas. Vino, música, entretenimiento — lo que hoy llamaríamos un fin de semana en Las Vegas estirado sobre toda una vida. Veredicto: vapor. <strong>Tres — Riqueza.</strong> <em>"Allegué también plata y oro, y tesoros preciados de reyes"</em> (2:8). Cada siglo tiene sus hombres que, al preguntarles cuánto es suficiente, contestaron: <em>"Un dólar más."</em> Salomón finalmente dijo: <em>"El que ama el dinero, no se saciará de dinero"</em> (5:10). Vapor. <strong>Cuatro — Poder y fama.</strong> <em>"Y me engrandecí, y aumenté más que todos los que fueron antes de mí en Jerusalén"</em> (2:9). ¿Resultado? Tres versículos después: <em>"Aborrecí la vida."</em> El hombre más sabio en el reino más rico de la tierra, en la cima de su fama y poder, dijo por escrito que aborrecía la vida. Vapor. <strong>Cinco — Trabajo.</strong> <em>"Engrandecí mis obras, edifiqué para mí casas, planté para mí viñas"</em> (2:4). El Templo, los palacios, los estanques, los acueductos. Y luego: <em>"Volvió, por tanto, a desesperanzarse mi corazón acerca de todo el trabajo en que me había afanado, y en que había ocupado debajo del sol mi sabiduría"</em> (2:20). Vapor.</p>
+
+        <p>Cinco experimentos. Cinco fracasos. Y entonces — al final del cuaderno de laboratorio — Salomón mira hacia arriba por primera vez. <em>"Acuérdate de tu Creador en los días de tu juventud"</em> (12:1). <em>"Teme a Dios, y guarda sus mandamientos; porque esto es el todo del hombre"</em> (12:13). Después de que cada experimento horizontal fracasó, Salomón termina donde Proverbios comenzó — en el temor de Jehová. El vapor se levanta solo cuando uno mira hacia arriba.</p>
+
+        <h3>Un corazón inquieto sin Dios</h3>
+        <p>¿Por qué está este libro en la Biblia? Porque la Biblia es honesta. Eclesiastés es el permiso del evangelio para admitir que la vida horizontal le deja hambriento. Agustín escribió en sus <em>Confesiones</em>: <em>"Nos hiciste para Ti, y nuestro corazón está inquieto hasta que descanse en Ti."</em> Esa es Eclesiastés en una sola frase. El corazón humano está construido de tal forma que usted podría meter el mundo entero en él y aun así no se llenaría. Salomón metió el mundo entero en el suyo y probó a Agustín por experimento. <em>"Mejor es,"</em> escribe Salomón en 9:4, <em>"perro vivo que león muerto"</em> — queriendo decir que aun el fragmento más pequeño de vida con sentido vale más que la pila más grande de logros muertos.</p>
+
+        <p>Si Proverbios le da la regla (<em>haz esto, recibirás aquello</em>), Eclesiastés le da las excepciones (<em>a veces haces esto y no recibes aquello — ¿y entonces?</em>). Las dos son verdad. Necesita las dos. Una dieta de puro Proverbios produce un creyente quebradizo y autosatisfecho; una dieta de puro Eclesiastés produce un cínico deprimido. El creyente sabio tiene los dos libros abiertos sobre el escritorio.</p>
+
+        <p>Y aquí está la respuesta del evangelio que Eclesiastés clamaba pidiendo. Pablo escribe: <em>"Así que, hermanos míos amados, estad firmes y constantes, creciendo en la obra del Señor siempre, sabiendo que vuestro trabajo en el Señor no es en vano"</em> (1 Corintios 15:58). ¿Lo captó? Salomón dijo que su trabajo <em>es</em> vano — debajo del sol. Pablo dice que su trabajo <em>no</em> es vano — <em>en el Señor</em>. El Señor Jesucristo revoca el <em>hevel</em> para todo lo que se hace en Él. Sus cuarenta años enseñando escuela dominical no son vapor. Su fidelidad oscura en un trabajo que nadie notó no es vapor. Sus oraciones que nadie le oyó orar no son vapor. Encima del sol, en el Señor, cada vaso de agua fría es oro. Eclesiastés hace la pregunta. Cristo es la respuesta.</p>
+
+        <h2>III. El Cantar de los Cantares: la boda dentro de la biblioteca</h2>
+        <p>Ahora el poema de amor. El libro que algunos pastores temen predicar y que algunos rabinos prohibían leer hasta los treinta años. El Cantar es una celebración sostenida del amor entre un esposo y su esposa, francamente físico, profundamente tierno, y entretejido de resonancias teológicas.</p>
+
+        <p>Tres acercamientos interpretativos han competido a lo largo de la historia de la iglesia. El acercamiento <em>alegórico</em> dijo que el libro no trata realmente de matrimonio — trata de Dios e Israel, o de Cristo y la Iglesia, con cada detalle cargando un significado codificado. Esta fue la perspectiva dominante desde la iglesia primitiva hasta la Edad Media. El acercamiento <em>tipológico</em> dice que el libro genuinamente trata del matrimonio <em>y</em> apunta a Cristo y la Iglesia como tipo. El acercamiento <em>literal</em> dice que es un canto de amor; punto; celebrando el regalo que Dios nos dio en Génesis 2 de un hombre y una mujer unidos en pacto. La mayoría de los eruditos evangélicos conservadores hoy sostienen una <strong>lectura literal-primaria con resonancias tipológicas</strong>. Matrimonio real. Que realmente apunta.</p>
+
+        <p>El Cantar es sin rubores acerca de la intimidad matrimonial y sin concesiones acerca de la exclusividad matrimonial, y las dos cosas son inseparables. La esposa repite una frase que debería darnos escalofríos de pacto: <em>"Yo soy de mi amado, y mi amado es mío"</em> (Cantar de los Cantares 6:3). Eso no es exageración poética. Es el lenguaje de la pertenencia. La sexualidad en este libro nunca es recreativa. Es de pacto. Es la ceremonia de sello de una unión de una sola carne, y está diseñada para parecerse — a quien lo observe — a Cristo y la Iglesia.</p>
+
+        <p>Porque eso es exactamente lo que Pablo dirá después: <em>"Grande es este misterio; mas yo hablo en cuanto a Cristo y a la iglesia"</em> (Efesios 5:32). El altar matrimonial es un escenario de ensayo. Cada esposo piadoso ensaya el amor de Cristo por Su Esposa. Cada esposa piadosa ensaya la respuesta de la Iglesia a su Señor. Y el libro de la Biblia que a veces nos avergüenza leer en voz alta es el libreto de la fiesta de bodas del Cordero (Apocalipsis 19:7–9).</p>
+
+        <h2>IV. Cristo sale de la biblioteca</h2>
+        <p>Aléjese de los tres libros y una sola Persona camina fuera de las páginas. Proverbios personificó la Sabiduría y la llamó por nombre; el Nuevo Testamento le da rostro a esa Sabiduría — <em>Cristo Jesús, el cual nos ha sido hecho por Dios sabiduría</em>. Eclesiastés diagnosticó la enfermedad de <em>hevel</em>, vapor, vida inasible debajo del sol; Cristo es la cura: <em>vuestro trabajo en el Señor no es en vano</em>. El Cantar cantó de un Esposo que se deleita en su Esposa; Cristo es el Esposo (Mateo 9:15) que aun ahora prepara la fiesta de bodas (Apocalipsis 19).</p>
+
+        <p>Tres voces. Una sola Persona en el centro de la biblioteca. Escuche bien, amigo. Está clamando a la puerta.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 8 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 8 — 30 Preguntas</span></h2>
+    <div class="track-banner" id="trackBanner"></div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button class="action-btn" id="submitExamBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="action-btn reset" id="resetExamBtn"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+    </div>
+    <div id="examResult" class="exam-result" style="display:none;"></div>
+</div>
+
+</div>
+
+<script>
+const COURSE_KEY = 'cts_ots_progress';
+const STUDENT_KEY = 'cts_student';
+const UNIT_NUM = 8;
+const TOTAL_UNITS = 13;
+const NEXT_UNIT_HREF = 'CTSUnit9.html';
+const PREV_UNIT_HREF = 'CTSUnit7.html';
+const UNIT_PASSED_KEY = 'cts_ots_unit8_passed';
+const UNIT_STATE_KEY = 'cts_ots_unit8_state';
+const LOCKOUT_KEY = 'cts_ots_unit8_lockout';
+const PASS_THRESHOLD_MC = 18;
+const PASS_THRESHOLD_SA = 9;
+const LOCKOUT_MS = 15 * 60 * 1000; // legacy ceiling (Masters); see lockMinutes()
+// Track-aware review wait: gentle 2-min pause for lay/Certificate, full 15 min for Masters.
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+function lockoutMs() { return lockMinutes() * 60 * 1000; }
+const REDIRECT_MS = 3000;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_ots_unit8_mc_passed';
+const SA_LOCK_KEY = 'cts_ots_unit8_sa_lockout';
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = new Array(20).fill(false);
+let unitPassed = localStorage.getItem(UNIT_PASSED_KEY) === 'true';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10)
+        : parseInt(localStorage.getItem(LOCKOUT_KEY) || '0', 10);
+}
+let lockUntil = activeLockUntil();
+let progress = JSON.parse(localStorage.getItem(COURSE_KEY) || '{}');
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+
+function getTrack() { if (student.program === 'Master of Divinity') return 'mdiv';
+    if (student.program === 'Master of Theology') return 'thm';
+    return 'cert'; }
+function isMDiv() { return getTrack() === 'mdiv'; }
+function isMastersLevel() { const t = getTrack(); return t === 'mdiv' || t === 'thm'; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(`cts_ots_unit${i}_passed`) === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (unitPassed) location.href = NEXT_UNIT_HREF;
+    else alert(currentLang === 'en' ? 'Please pass Unit 8 first.' : 'Por favor apruebe la Unidad 8 primero.');
+};
+document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_UNIT_HREF; };
+
+function loadReg() {
+    let saved = localStorage.getItem(STUDENT_KEY);
+    if (saved) {
+        student = JSON.parse(saved);
+        document.getElementById('studentName').value = student.name || '';
+        document.getElementById('studentEmail').value = student.email || '';
+        document.getElementById('studentCountry').value = student.country || '';
+        document.getElementById('studentProgram').value = student.program || 'Certificate of Ministry';
+    }
+}
+function saveReg() {
+    student.name = document.getElementById('studentName').value.trim();
+    student.email = document.getElementById('studentEmail').value.trim();
+    student.country = document.getElementById('studentCountry').value.trim();
+    student.program = document.getElementById('studentProgram').value;
+    if (student.name && student.email) localStorage.setItem(STUDENT_KEY, JSON.stringify(student));
+}
+['studentName','studentEmail','studentCountry'].forEach(id => {
+    document.getElementById(id).addEventListener('change', saveReg);
+});
+document.getElementById('studentProgram').addEventListener('change', () => {
+    saveReg(); renderTrackBanner(); renderQuestions();
+});
+
+function renderTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    if (!banner) return;
+    if (isMastersLevel()) {
+        banner.innerHTML = currentLang === 'en'
+            ? ('<strong>' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ' Track:</strong> Answer all 30 questions. To pass you need <strong>18/20</strong> multiple choice <em>and</em> <strong>9/10</strong> short answer, judged independently. Short answers may be written in English or Spanish.')
+            : ('<strong>Pista ' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ':</strong> Responda las 30 preguntas. Para aprobar necesita <strong>18/20</strong> en opción múltiple <em>y</em> <strong>9/10</strong> en respuesta corta, evaluadas independientemente. Las respuestas cortas pueden escribirse en inglés o español.');
+    } else {
+        banner.innerHTML = currentLang === 'en'
+            ? '<strong>Certificate Track:</strong> Answer questions 1–20 (multiple choice). To pass you need <strong>18/20</strong> (90%). Short-answer questions are optional practice and not graded.'
+            : '<strong>Pista Certificado:</strong> Responda las preguntas 1–20 (opción múltiple). Para aprobar necesita <strong>18/20</strong> (90%). Las preguntas de respuesta corta son práctica opcional y no se califican.';
+    }
+}
+
+function saveState() {
+    localStorage.setItem(UNIT_STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers, mcRevealed }));
+}
+function loadState() {
+    const raw = localStorage.getItem(UNIT_STATE_KEY);
+    if (!raw) return;
+    try {
+        const s = JSON.parse(raw);
+        if (Array.isArray(s.mcAnswers)) mcAnswers = s.mcAnswers;
+        if (Array.isArray(s.kwAnswers)) kwAnswers = s.kwAnswers;
+        if (Array.isArray(s.mcRevealed)) mcRevealed = s.mcRevealed;
+    } catch (e) {}
+}
+
+const mcQuestions = [
+    { id:1, en:"1. According to 1 Kings 4:32, how many proverbs did Solomon speak?", es:"1. Según 1 Reyes 4:32, ¿cuántos proverbios compuso Salomón?",
+      optionsEn:["1,000","3,000","5,000","10,000"], optionsEs:["1,000","3,000","5,000","10,000"], correct:"B",
+      fcEn:"Correct. Solomon spoke 3,000 proverbs. About 800 made it into the canonical book of Proverbs, plus contributions from Agur and Lemuel.",
+      fcEs:"Correcto. Salomón compuso 3,000 proverbios. Cerca de 800 entraron al libro canónico, junto con aportes de Agur y Lemuel.",
+      fiEn:"1 Kings 4:32 — Solomon spoke 3,000 proverbs and 1,005 songs.",
+      fiEs:"1 Reyes 4:32 — Salomón compuso 3,000 proverbios y 1,005 cánticos." },
+    { id:2, en:"2. The Hebrew word translated 'vanity' in Ecclesiastes (<em>hevel</em>) literally means:", es:"2. La palabra hebrea traducida 'vanidad' en Eclesiastés (<em>hevel</em>) significa literalmente:",
+      optionsEn:["Vapor or breath","Foolish","Worthless","Wicked"], optionsEs:["Vapor o aliento","Necio","Sin valor","Malvado"], correct:"A",
+      fcEn:"Correct. <em>Hevel</em> means vapor — the breath you see on a cold morning. Not <em>worthless</em>. Just <em>ungraspable</em>.",
+      fcEs:"Correcto. <em>Hevel</em> significa vapor — el aliento que se ve en una mañana fría. No <em>sin valor</em>. Solo <em>inasible</em>.",
+      fiEn:"<em>Hevel</em> literally means vapor or breath — there one moment, gone the next, impossible to grasp.",
+      fiEs:"<em>Hevel</em> significa literalmente vapor o aliento — está un instante, ya no está, imposible de asir." },
+    { id:3, en:"3. Solomon's master phrase in Ecclesiastes for life apart from God is:", es:"3. La frase clave de Salomón en Eclesiastés para la vida apartada de Dios es:",
+      optionsEn:["Under the sun","The way of folly","The valley of tears","The pit of despair"], optionsEs:["Debajo del sol","El camino de la insensatez","El valle de lágrimas","El pozo de la desesperación"], correct:"A",
+      fcEn:"Correct. 'Under the sun' appears 29 times — Solomon's deliberate horizontal frame. Everything horizontal is vapor; only looking up changes the math.",
+      fcEs:"Correcto. 'Debajo del sol' aparece 29 veces — el marco horizontal deliberado de Salomón. Todo lo horizontal es vapor; solo mirar hacia arriba cambia la matemática.",
+      fiEn:"'Under the sun' (29 occurrences) frames Solomon's horizontal experiment — life with God left out of the equation.",
+      fiEs:"'Debajo del sol' (29 veces) enmarca el experimento horizontal de Salomón — la vida con Dios excluido de la ecuación." },
+    { id:4, en:"4. In Proverbs 1–9, two voices call out to the young man. They are:", es:"4. En Proverbios 1–9, dos voces claman al joven. Son:",
+      optionsEn:["The wise king and the foolish farmer","The prophet and the priest","The father and the mother","Lady Wisdom and the foolish (strange) woman"],
+      optionsEs:["El rey sabio y el granjero necio","El profeta y el sacerdote","El padre y la madre","La Señora Sabiduría y la mujer necia (extraña)"], correct:"D",
+      fcEn:"Correct. Both voices are loud. Both stand at the door. The difference is not volume — the difference is destination.",
+      fcEs:"Correcto. Las dos voces son ruidosas. Las dos están en la puerta. La diferencia no es el volumen — la diferencia es el destino.",
+      fiEn:"Lady Wisdom (Proverbs 1:20–21; 8) and the foolish/strange woman (Proverbs 7; 9:13–18) — the whole book is the question of which one the son will follow home.",
+      fiEs:"La Señora Sabiduría (Proverbios 1:20–21; 8) y la mujer necia/extraña (Proverbios 7; 9:13–18) — todo el libro es la pregunta de cuál seguirá el hijo a casa." },
+    { id:5, en:"5. Personified Wisdom in Proverbs 8 ('I was set up from everlasting') is identified in the New Testament with:", es:"5. La Sabiduría personificada en Proverbios 8 ('Eternamente tuve el principado') se identifica en el Nuevo Testamento con:",
+      optionsEn:["The Holy Spirit","Christ","The written Word","Solomon"], optionsEs:["El Espíritu Santo","Cristo","La Palabra escrita","Salomón"], correct:"B",
+      fcEn:"Correct. The voice calling at the gate throughout Proverbs has a name. 'Christ Jesus, who became for us wisdom from God' (1 Corinthians 1:30).",
+      fcEs:"Correcto. La voz que clama a la puerta a lo largo de Proverbios tiene un nombre. 'Cristo Jesús, el cual nos ha sido hecho por Dios sabiduría' (1 Corintios 1:30).",
+      fiEn:"Proverbs 8's personified Wisdom is fulfilled in Christ (1 Corinthians 1:30; Colossians 2:3) — the Wisdom of God incarnate.",
+      fiEs:"La Sabiduría personificada de Proverbios 8 se cumple en Cristo (1 Corintios 1:30; Colosenses 2:3) — la Sabiduría de Dios encarnada." },
+    { id:6, en:"6. Proverbs 31 closes the book with:", es:"6. Proverbios 31 cierra el libro con:",
+      optionsEn:["A warning against false teachers","A summary of the Ten Commandments","A portrait of a virtuous woman","A prophecy of the Messiah"],
+      optionsEs:["Una advertencia contra falsos maestros","Un resumen de los Diez Mandamientos","Un retrato de una mujer virtuosa","Una profecía del Mesías"], correct:"C",
+      fcEn:"Correct. The book that began with two warning voices ends with one beautiful one. Lady Wisdom finally has a face.",
+      fcEs:"Correcto. El libro que comenzó con dos voces de advertencia termina con una hermosa. La Señora Sabiduría finalmente tiene rostro.",
+      fiEn:"Proverbs 31:10–31 portrays wisdom embodied in a real woman — strong, hard-working, generous, fearing the Lord.",
+      fiEs:"Proverbios 31:10–31 retrata la sabiduría encarnada en una mujer real — fuerte, trabajadora, generosa, temerosa de Jehová." },
+    { id:7, en:"7. The conclusion of Ecclesiastes (12:13–14) is:", es:"7. La conclusión de Eclesiastés (12:13–14) es:",
+      optionsEn:["Eat, drink, and be merry","Wisdom is unattainable","Fear God and keep His commandments","All is vanity, so despair"],
+      optionsEs:["Comer, beber y alegrarse","La sabiduría es inalcanzable","Temer a Dios y guardar Sus mandamientos","Todo es vanidad, así que desesperar"], correct:"C",
+      fcEn:"Correct. After every horizontal experiment failed, Solomon ends where Proverbs began — at the fear of the Lord. The vapor lifts only when you look up.",
+      fcEs:"Correcto. Después de que cada experimento horizontal fracasó, Salomón termina donde Proverbios comenzó — en el temor de Jehová. El vapor se levanta solo cuando uno mira hacia arriba.",
+      fiEn:"Ecclesiastes 12:13 — 'Fear God and keep His commandments, for this is the whole of man.'",
+      fiEs:"Eclesiastés 12:13 — 'Teme a Dios y guarda Sus mandamientos, porque esto es el todo del hombre.'" },
+    { id:8, en:"8. The repeated theme verse of Proverbs (1:7; 9:10) is:", es:"8. El versículo temático repetido en Proverbios (1:7; 9:10) es:",
+      optionsEn:["The Lord is my shepherd","Trust in the Lord with all your heart","Vanity of vanities","The fear of the Lord is the beginning of wisdom"],
+      optionsEs:["Jehová es mi pastor","Fíate de Jehová de todo tu corazón","Vanidad de vanidades","El principio de la sabiduría es el temor de Jehová"], correct:"D",
+      fcEn:"Correct. The starting line — not the finish line — of every wise life. Reverence, awe, obedience.",
+      fcEs:"Correcto. La línea de salida — no la meta — de toda vida sabia. Reverencia, asombro, obediencia.",
+      fiEn:"Proverbs 1:7 and 9:10 — 'The fear of the LORD is the beginning of wisdom.' Mentioned more than 15 times in the book.",
+      fiEs:"Proverbios 1:7 y 9:10 — 'El principio de la sabiduría es el temor de Jehová.' Mencionado más de 15 veces en el libro." },
+    { id:9, en:"9. Most conservative evangelical scholars today read the Song of Solomon as:", es:"9. La mayoría de eruditos evangélicos conservadores hoy leen el Cantar de los Cantares como:",
+      optionsEn:["Pure allegory of Christ and the Church","A literal love song with typological overtones","A drama of three characters","A historical biography"],
+      optionsEs:["Pura alegoría de Cristo y la Iglesia","Un canto de amor literal con resonancias tipológicas","Un drama de tres personajes","Una biografía histórica"], correct:"B",
+      fcEn:"Correct. Real marriage. Really pointing. Genesis 2 covenant celebrated, Ephesians 5 mystery foreshadowed.",
+      fcEs:"Correcto. Matrimonio real. Que realmente apunta. Pacto de Génesis 2 celebrado, misterio de Efesios 5 prefigurado.",
+      fiEn:"The literal-primary reading celebrates marital covenant (Genesis 2) while echoing Christ-and-Church typology (Ephesians 5:32).",
+      fiEs:"La lectura literal-primaria celebra el pacto matrimonial (Génesis 2) mientras refleja la tipología Cristo-Iglesia (Efesios 5:32)." },
+    { id:10, en:"10. 'Death and life are in the power of the ___' (Proverbs 18:21):", es:"10. 'La muerte y la vida están en poder de la ___' (Proverbios 18:21):",
+      optionsEn:["King","Sword","Tongue","Heart"], optionsEs:["Rey","Espada","Lengua","Corazón"], correct:"C",
+      fcEn:"Correct. Over 100 verses in Proverbs deal with the tongue. If you cannot govern your speech, you cannot live wisely.",
+      fcEs:"Correcto. Más de 100 versículos de Proverbios tratan de la lengua. Si no puede gobernar su lengua, no puede vivir sabiamente.",
+      fiEn:"Proverbs 18:21 — the tongue carries the power of death and life. Speech is a wisdom issue, not a manners issue.",
+      fiEs:"Proverbios 18:21 — la lengua lleva el poder de muerte y vida. El habla es un asunto de sabiduría, no de modales." },
+    { id:11, en:"11. The 'foolish' or 'strange' woman in Proverbs represents:", es:"11. La mujer 'necia' o 'extraña' en Proverbios representa:",
+      optionsEn:["The path of folly that leads to destruction","Foreign religion","Greedy merchants","Lazy workers"],
+      optionsEs:["El camino de la insensatez que lleva a la destrucción","La religión extranjera","Los comerciantes codiciosos","Los trabajadores perezosos"], correct:"A",
+      fcEn:"Correct. Her house, Solomon says, 'is the way to hell, descending to the chambers of death' (Proverbs 7:27).",
+      fcEs:"Correcto. Su casa, dice Salomón, 'es camino al Seol, que desciende a las cámaras de la muerte' (Proverbios 7:27).",
+      fiEn:"The strange woman of Proverbs 7 and 9 is the personified path of folly, contrasted throughout the book with Lady Wisdom.",
+      fiEs:"La mujer extraña de Proverbios 7 y 9 es el camino personificado de la insensatez, contrastado a lo largo del libro con la Señora Sabiduría." },
+    { id:12, en:"12. Ecclesiastes' 'time for everything' passage (3:1–8) teaches that:", es:"12. El pasaje de Eclesiastés sobre 'tiempo para todo' (3:1–8) enseña que:",
+      optionsEn:["We are in control of our seasons","All times are equally meaningless","Suffering is always temporary","God has appointed times we don't control"],
+      optionsEs:["Nosotros controlamos nuestras estaciones","Todos los tiempos son igualmente sin sentido","El sufrimiento siempre es temporal","Dios ha señalado tiempos que no controlamos"], correct:"D",
+      fcEn:"Correct. Ecclesiastes 3:11 — 'He has made everything beautiful in its time.' God appoints the times; we live in them.",
+      fcEs:"Correcto. Eclesiastés 3:11 — 'Todo lo hizo hermoso en su tiempo.' Dios señala los tiempos; nosotros vivimos en ellos.",
+      fiEn:"Ecclesiastes 3 teaches that God has set the seasons of life under His sovereignty — we do not control them.",
+      fiEs:"Eclesiastés 3 enseña que Dios ha establecido las estaciones de la vida bajo Su soberanía — nosotros no las controlamos." },
+    { id:13, en:"13. The relationship between Proverbs and Ecclesiastes is best described as:", es:"13. La relación entre Proverbios y Eclesiastés se describe mejor como:",
+      optionsEn:["Proverbs is true; Ecclesiastes is false","They contradict each other","Proverbs gives the rule; Ecclesiastes gives the exceptions","They cover the same ground twice"],
+      optionsEs:["Proverbios es verdad; Eclesiastés es falso","Se contradicen entre sí","Proverbios da la regla; Eclesiastés da las excepciones","Cubren el mismo terreno dos veces"], correct:"C",
+      fcEn:"Correct. Pure Proverbs makes a man brittle and self-righteous; pure Ecclesiastes makes him cynical. The wise believer has both books open.",
+      fcEs:"Correcto. Proverbios puro produce un hombre quebradizo y autosatisfecho; Eclesiastés puro lo produce cínico. El creyente sabio tiene los dos libros abiertos.",
+      fiEn:"Proverbs (the rule) and Ecclesiastes (the exceptions) together produce a balanced wisdom — neither naive nor cynical.",
+      fiEs:"Proverbios (la regla) y Eclesiastés (las excepciones) juntos producen una sabiduría equilibrada — ni ingenua ni cínica." },
+    { id:14, en:"14. The irony of Solomon as a wisdom writer is that:", es:"14. La ironía de Salomón como escritor de sabiduría es que:",
+      optionsEn:["He wrote about wisdom he did not always live","He never actually wrote any of these books","He was the first king of Israel","He died young"],
+      optionsEs:["Escribió de una sabiduría que no siempre vivió","Nunca escribió ninguno de estos libros","Fue el primer rey de Israel","Murió joven"], correct:"A",
+      fcEn:"Correct. The wisdom of God is given, sometimes in spite of the messenger. Every messenger has clay feet. The treasure is still treasure.",
+      fcEs:"Correcto. La sabiduría de Dios es dada, a veces a pesar del mensajero. Todo mensajero tiene pies de barro. El tesoro sigue siendo tesoro.",
+      fiEn:"Solomon wrote three wisdom books but ended his life with a thousand wives and a fractured kingdom. The gift was real even when he ignored it.",
+      fiEs:"Salomón escribió tres libros sapienciales pero terminó su vida con mil esposas y un reino fracturado. El regalo era real aun cuando lo ignoró." },
+    { id:15, en:"15. The bride's repeated phrase in Song of Solomon, 'I am my beloved's, and my beloved is mine,' is best understood as:", es:"15. La frase repetida de la esposa en el Cantar de los Cantares, 'Yo soy de mi amado, y mi amado es mío,' se entiende mejor como:",
+      optionsEn:["A poetic exaggeration","A prayer to God","A folk saying","Covenant language describing exclusive belonging"],
+      optionsEs:["Una exageración poética","Una oración a Dios","Un dicho popular","Lenguaje de pacto que describe pertenencia exclusiva"], correct:"D",
+      fcEn:"Correct. Sex in this book is never recreational — it is covenantal. The sealing ceremony of a one-flesh union.",
+      fcEs:"Correcto. La sexualidad en este libro nunca es recreativa — es de pacto. La ceremonia de sello de una unión de una sola carne.",
+      fiEn:"Song of Solomon 6:3 — the bride's refrain expresses exclusive covenant belonging, not poetic license.",
+      fiEs:"Cantar de los Cantares 6:3 — el estribillo de la esposa expresa pertenencia pactal exclusiva, no licencia poética." },
+    { id:16, en:"16. Christ's answer to Ecclesiastes' 'vanity' is found in Paul's words:", es:"16. La respuesta de Cristo a la 'vanidad' de Eclesiastés se halla en las palabras de Pablo:",
+      optionsEn:["'All things work together for good'","'We walk by faith, not by sight'","'Your labor is not in vain in the Lord' (1 Cor 15:58)","'I press on toward the goal'"],
+      optionsEs:["'Todas las cosas ayudan a bien'","'Por fe andamos, no por vista'","'Vuestro trabajo en el Señor no es en vano' (1 Cor 15:58)","'Prosigo a la meta'"], correct:"C",
+      fcEn:"Correct. Solomon said your labor IS in vain — under the sun. Paul says it is NOT in vain — in the Lord. Christ revokes <em>hevel</em>.",
+      fcEs:"Correcto. Salomón dijo que su trabajo ES vano — debajo del sol. Pablo dice que NO es vano — en el Señor. Cristo revoca el <em>hevel</em>.",
+      fiEn:"1 Corinthians 15:58 directly answers Ecclesiastes: in the Lord, no labor is vapor. Above the sun, every cup of cold water is gold.",
+      fiEs:"1 Corintios 15:58 responde directamente a Eclesiastés: en el Señor, ningún trabajo es vapor. Encima del sol, cada vaso de agua fría es oro." },
+    { id:17, en:"17. In the New Testament, Christ is identified as the Bridegroom and the Church as:", es:"17. En el Nuevo Testamento, Cristo se identifica como el Esposo y la Iglesia como:",
+      optionsEn:["The wedding party","The witnesses","The minister","The Bride"], optionsEs:["La fiesta nupcial","Los testigos","El ministro","La Esposa"], correct:"D",
+      fcEn:"Correct. Every godly marriage is a rehearsal stage for Christ's love for His Bride and the Church's response to her Lord.",
+      fcEs:"Correcto. Todo matrimonio piadoso es un escenario de ensayo para el amor de Cristo por Su Esposa y la respuesta de la Iglesia a su Señor.",
+      fiEn:"Christ is the Bridegroom (Matthew 9:15; John 3:29); the Church is the Bride (Ephesians 5:25–32; Revelation 19:7–9).",
+      fiEs:"Cristo es el Esposo (Mateo 9:15; Juan 3:29); la Iglesia es la Esposa (Efesios 5:25–32; Apocalipsis 19:7–9)." },
+    { id:18, en:"18. The phrase 'fear of the Lord' in Proverbs refers to:", es:"18. La frase 'temor de Jehová' en Proverbios se refiere a:",
+      optionsEn:["Terror of being struck dead","Reverent worship and obedience","Mere superstition","A gloomy outlook"],
+      optionsEs:["Terror de morir de un golpe","Adoración y obediencia reverentes","Mera superstición","Una perspectiva sombría"], correct:"B",
+      fcEn:"Correct. Reverence, awe, obedience — the starting line of wisdom, not the punishment of foolishness.",
+      fcEs:"Correcto. Reverencia, asombro, obediencia — la línea de salida de la sabiduría, no el castigo de la insensatez.",
+      fiEn:"The fear of the LORD is reverent love and obedient awe — the orientation toward God from which all wisdom flows.",
+      fiEs:"El temor de Jehová es amor reverente y asombro obediente — la orientación hacia Dios de la cual fluye toda sabiduría." },
+    { id:19, en:"19. Biblical wisdom is best defined as:", es:"19. La sabiduría bíblica se define mejor como:",
+      optionsEn:["Skill in living according to God's design","Mystical insight reserved for elites","Memorization of Scripture verses","Avoidance of difficult decisions"],
+      optionsEs:["Destreza para vivir según el diseño de Dios","Iluminación mística reservada para élites","Memorización de versículos bíblicos","Evitar decisiones difíciles"], correct:"A",
+      fcEn:"Correct. <em>Chokmah</em> is craftsman's skill — shaping the raw material of an ordinary day so it honors God.",
+      fcEs:"Correcto. <em>Chokmah</em> es destreza de artesano — dar forma a la materia prima de un día ordinario para que honre a Dios.",
+      fiEn:"Wisdom is skill in living — the craft of taking ordinary materials (job, marriage, money, mouth) and shaping something that honors God.",
+      fiEs:"La sabiduría es destreza para vivir — el arte de tomar materia ordinaria (trabajo, matrimonio, dinero, boca) y dar forma a algo que honre a Dios." },
+    { id:20, en:"20. The three wisdom books in this unit, taken together, are best described as:", es:"20. Los tres libros sapienciales de esta unidad, tomados en conjunto, se describen mejor como:",
+      optionsEn:["Three contradicting voices","Three voices, one library — different angles on living before God","Three failed experiments","Three secular philosophies"],
+      optionsEs:["Tres voces contradictorias","Tres voces, una biblioteca — distintos ángulos para vivir delante de Dios","Tres experimentos fallidos","Tres filosofías seculares"], correct:"B",
+      fcEn:"Correct. Three voices. One Person at the center of the library. Listen well, friend. He is calling at the gate.",
+      fcEs:"Correcto. Tres voces. Una sola Persona en el centro de la biblioteca. Escuche bien, amigo. Está clamando a la puerta.",
+      fiEn:"Proverbs, Ecclesiastes, and Song of Solomon are three angles on one question — how to live a life worth living before God.",
+      fiEs:"Proverbios, Eclesiastés y Cantar de los Cantares son tres ángulos sobre una misma pregunta — cómo vivir una vida que valga la pena delante de Dios." }
+];
+
+const kwQuestions = [
+    { id:21, en:"21. What does the Hebrew word <em>hevel</em> mean, and how does Solomon use 'under the sun' to describe life apart from God?",
+      es:"21. ¿Qué significa la palabra hebrea <em>hevel</em>, y cómo usa Salomón 'debajo del sol' para describir la vida apartada de Dios?",
+      kw_en:[["hevel", "hebel"], ["vapor", "breath", "mist", "smoke"], ["under the sun", "horizontal", "apart from god", "earthly"], ["vanity", "meaningless", "fleeting", "ungraspable"], ["solomon", "the preacher", "qoheleth"]],
+      kw_es:[["hevel", "hebel"], ["vapor", "aliento", "neblina", "humo"], ["debajo del sol", "horizontal", "aparte de dios", "terrenal"], ["vanidad", "sin sentido", "fugaz", "inasible"], ["salomón", "salomon", "el predicador", "qohélet"]],
+      modelEn:"The Hebrew word hevel, often translated 'vanity,' literally means 'vapor' — the breath you can see on a cold morning. It does not mean worthless but ungraspable: you can see it but cannot hold it, there one moment and gone the next. Solomon also repeats the phrase 'under the sun' twenty-nine times, writing horizontally on purpose. His point is that if all you have is what is under the sun — your career, wealth, pleasures, even knowledge — then everything you can grasp is vapor. Apart from God, every earthly pursuit slips through your fingers like mist.",
+      modelEs:"La palabra hebrea hevel, a menudo traducida 'vanidad,' literalmente significa 'vapor' — el aliento que se ve en una mañana fría. No significa sin valor sino inasible: puedes verlo pero no sostenerlo, ahí un momento y desaparecido al siguiente. Salomón también repite la frase 'debajo del sol' veintinueve veces, escribiendo horizontalmente a propósito. Su punto es que si todo lo que tienes es lo que está debajo del sol — tu carrera, riqueza, placeres, hasta el conocimiento — entonces todo lo que puedes asir es vapor. Aparte de Dios, toda búsqueda terrenal se escurre entre los dedos como neblina." },
+    { id:22, en:"22. How does Proverbs personify wisdom in chapter 8, and how does the New Testament identify this wisdom?",
+      es:"22. ¿Cómo personifica Proverbios la sabiduría en el capítulo 8, y cómo identifica el Nuevo Testamento esta sabiduría?",
+      kw_en:[["proverbs 8", "chapter 8", "wisdom personified"], ["wisdom", "lady wisdom", "personified wisdom"], ["christ", "jesus", "wisdom from god"], ["person", "not abstract", "a person"], ["before", "before creation", "from everlasting", "before the world", "beginning"]],
+      kw_es:[["proverbios 8", "capítulo 8", "sabiduría personificada"], ["sabiduría", "señora sabiduría", "sabiduría personificada"], ["cristo", "jesús", "sabiduría de dios"], ["persona", "no abstracta", "una persona"], ["antes", "antes de la creación", "desde la eternidad", "antes del mundo", "principio"]],
+      modelEn:"Proverbs personifies wisdom as a woman, Lady Wisdom, who cries out at the gates of the city. In Proverbs 8 she speaks of being possessed by the Lord at the beginning of His way, set up from everlasting before there was an earth, beside Him as a master craftsman and daily His delight. This is no longer abstract wisdom but a Person who was with the Father before the foundation of the world. The New Testament identifies her by name: Christ Jesus, who became for us wisdom from God, in whom are hidden all the treasures of wisdom and knowledge. The voice calling at the city gate is Jesus.",
+      modelEs:"Proverbios personifica la sabiduría como una mujer, la Señora Sabiduría, que clama a las puertas de la ciudad. En Proverbios 8 ella habla de haber sido poseída por el Señor al principio de Su camino, establecida desde la eternidad antes de que hubiera tierra, junto a Él como artífice maestro y siendo cada día Su delicia. Esto ya no es sabiduría abstracta sino una Persona que estaba con el Padre antes de la fundación del mundo. El Nuevo Testamento la identifica por nombre: Cristo Jesús, que fue hecho por nosotros sabiduría de Dios, en quien están escondidos todos los tesoros de la sabiduría y del conocimiento. La voz que clama a la puerta de la ciudad es Jesús." },
+    { id:23, en:"23. Describe the five failed experiments Solomon runs in Ecclesiastes.",
+      es:"23. Describa los cinco experimentos fracasados que Salomón corre en Eclesiastés.",
+      kw_en:[["wisdom", "knowledge", "study", "chasing wind"], ["pleasure", "mirth", "wine", "indulgence"], ["wealth", "silver and gold", "riches", "money"], ["power", "fame", "greatness", "greater than all"], ["work", "labor", "building", "projects", "houses"], ["vapor", "hevel", "vanity", "meaningless", "all failed"]],
+      kw_es:[["sabiduría", "conocimiento", "estudio", "correr tras el viento"], ["placer", "alegría", "vino", "indulgencia"], ["riqueza", "plata y oro", "riquezas", "dinero"], ["poder", "fama", "grandeza", "mayor que todos"], ["trabajo", "labor", "edificar", "proyectos", "casas"], ["vapor", "hevel", "vanidad", "sin sentido", "todo fracasó"]],
+      modelEn:"Ecclesiastes is essentially the lab notebook of the wisest man on earth trying to find happiness without God, and Solomon runs five failed experiments. First, wisdom and knowledge — pursuing wisdom apart from God proved a chasing after the wind. Second, pleasure — wine, music, and indulgence came back stamped vapor. Third, wealth — he amassed silver and gold yet found that the lover of silver is never satisfied. Fourth, power and fame — he became greater than anyone before him, then said he hated life. Fifth, work — he built houses and vineyards, then despaired of all his labor. Every experiment came back hevel, vapor.",
+      modelEs:"Eclesiastés es esencialmente el cuaderno de laboratorio del hombre más sabio de la tierra tratando de hallar felicidad sin Dios, y Salomón realiza cinco experimentos fallidos. Primero, sabiduría y conocimiento — buscar la sabiduría aparte de Dios resultó ser correr tras el viento. Segundo, placer — vino, música e indulgencia volvieron marcados como vapor. Tercero, riqueza — amasó plata y oro pero halló que el que ama el dinero nunca se sacia. Cuarto, poder y fama — llegó a ser mayor que todos antes de él, y luego dijo que aborrecía la vida. Quinto, trabajo — edificó casas y viñas, y luego se desesperó de toda su labor. Cada experimento volvió hevel, vapor." },
+    { id:24, en:"24. How does the conclusion of Ecclesiastes (12:13–14) tie the whole book together?",
+      es:"24. ¿Cómo une la conclusión de Eclesiastés (12:13–14) todo el libro?",
+      kw_en:[["fear god", "fear of the lord", "reverence god"], ["keep", "keep his commandments", "obey", "commandments"], ["conclusion", "the end", "ties together", "sums up"], ["judgment", "every work into judgment", "god will judge"], ["whole", "whole duty", "whole of man", "looks up", "the point"]],
+      kw_es:[["teme a dios", "temor del señor", "reverenciar a dios"], ["guardar", "guarda sus mandamientos", "obedecer", "mandamientos"], ["conclusión", "el final", "une todo", "resume"], ["juicio", "toda obra a juicio", "dios juzgará"], ["todo", "el todo del hombre", "deber del hombre", "mira hacia arriba", "el punto"]],
+      modelEn:"The conclusion of Ecclesiastes ties the whole book together: 'Fear God, and keep His commandments: for this is the whole duty of man,' adding that God will bring every work into judgment. After every horizontal experiment under the sun failed and came back vapor, Solomon finally looks up. He ends exactly where Proverbs began — at the fear of the Lord. The conclusion shows that the vapor lifts only when a person looks up to God; meaning is not found in anything grasped under the sun but in reverent obedience to the Creator who will judge all. The honest search ends in the fear of God.",
+      modelEs:"La conclusión de Eclesiastés une todo el libro: 'Teme a Dios, y guarda sus mandamientos; porque esto es el todo del hombre,' añadiendo que Dios traerá toda obra a juicio. Después de que cada experimento horizontal debajo del sol fracasó y volvió como vapor, Salomón finalmente mira hacia arriba. Termina exactamente donde Proverbios comenzó — en el temor del Señor. La conclusión muestra que el vapor se disipa solo cuando una persona mira hacia arriba a Dios; el sentido no se halla en nada asido debajo del sol sino en la obediencia reverente al Creador que juzgará todo. La búsqueda sincera termina en el temor de Dios." },
+    { id:25, en:"25. Describe the two voices that call out to the young man in Proverbs 1–9 and what each represents.",
+      es:"25. Describa las dos voces que claman al joven en Proverbios 1–9 y lo que cada una representa.",
+      kw_en:[["wisdom", "lady wisdom", "wise voice"], ["foolish", "foolish woman", "strange woman", "adulteress", "folly"], ["two voices", "both call", "both at the door", "two women"], ["choice", "which voice", "follow home", "decision"], ["destruction", "death", "way to hell", "chambers of death", "life vs death"]],
+      kw_es:[["sabiduría", "señora sabiduría", "voz sabia"], ["insensata", "mujer insensata", "mujer extraña", "adúltera", "necedad"], ["dos voces", "ambas llaman", "ambas a la puerta", "dos mujeres"], ["elección", "cuál voz", "seguir a casa", "decisión"], ["destrucción", "muerte", "camino al seol", "cámaras de la muerte", "vida o muerte"]],
+      modelEn:"In Proverbs 1-9 two voices call out to the young man, both loud and both at the door inviting him home. One is Lady Wisdom, who stands at the gates of the city and cries out; her house leads to life. The other is the foolish woman, sometimes called the strange woman or adulteress; Solomon says her house is the way to hell, descending to the chambers of death. The difference between them is not volume — both are loud — but destination. The whole book is the question of which voice the young man will follow home, for both voices are still calling and only one is going your way.",
+      modelEs:"En Proverbios 1-9 dos voces claman al joven, ambas fuertes y ambas a la puerta invitándolo a casa. Una es la Señora Sabiduría, que se para a las puertas de la ciudad y clama; su casa conduce a la vida. La otra es la mujer insensata, llamada a veces la mujer extraña o adúltera; Salomón dice que su casa es camino al Seol, descendiendo a las cámaras de la muerte. La diferencia entre ellas no es el volumen — ambas son fuertes — sino el destino. Todo el libro es la pregunta de cuál voz seguirá el joven hasta casa, pues ambas voces siguen llamando y solo una va por tu camino." },
+    { id:26, en:"26. What does 'the fear of the Lord is the beginning of wisdom' mean for everyday life?",
+      es:"26. ¿Qué significa 'el temor de Jehová es el principio de la sabiduría' para la vida diaria?",
+      kw_en:[["fear", "fear of the lord", "reverence"], ["lord", "god", "the lord"], ["wisdom", "knowledge", "wise", "skill in living"], ["beginning", "starting point", "start", "first step", "mined not wished"], ["obedience", "reverent obedience", "awe", "submission", "everyday life"]],
+      kw_es:[["temor", "temor del señor", "reverencia"], ["señor", "dios", "el señor"], ["sabiduría", "conocimiento", "sabio", "destreza para vivir"], ["principio", "punto de partida", "comienzo", "primer paso", "se extrae no se desea"], ["obediencia", "obediencia reverente", "asombro", "sumisión", "vida diaria"]],
+      modelEn:"'The fear of the LORD is the beginning of knowledge' means that reverence and awe before God — not terror or superstition — is the starting line of every wise life. The key word is beginning: it is where wisdom starts, not where it ends. For everyday life this means wisdom must be mined, not wished: you do not wake up wise, you dig wise by searching the Scriptures for hidden treasure. Reverent obedience to God is the foundation on which all practical, daily wisdom is built, governing how we use our words, money, and relationships.",
+      modelEs:"'El temor del SEÑOR es el principio del conocimiento' significa que la reverencia y el asombro ante Dios — no el terror ni la superstición — es la línea de salida de toda vida sabia. La palabra clave es principio: es donde comienza la sabiduría, no donde termina. Para la vida diaria esto significa que la sabiduría se extrae, no se desea: uno no despierta sabio, sino que cava sabio buscando en las Escrituras el tesoro escondido. La obediencia reverente a Dios es el fundamento sobre el cual se edifica toda sabiduría práctica y diaria, gobernando cómo usamos nuestras palabras, nuestro dinero y nuestras relaciones." },
+    { id:27, en:"27. Explain the three main interpretive approaches to the Song of Solomon. Which is most commonly held by conservative scholars today?",
+      es:"27. Explique los tres acercamientos interpretativos principales al Cantar de los Cantares. ¿Cuál sostienen hoy la mayoría de los eruditos conservadores?",
+      kw_en:[["literal", "love song", "literal reading", "plain"], ["allegorical", "allegory", "coded", "god and israel"], ["typological", "type", "points to christ as type"], ["marriage", "husband and wife", "covenant love", "one flesh"], ["christ", "christ and the church", "bridegroom", "bride"]],
+      kw_es:[["literal", "cántico de amor", "lectura literal", "sencillo"], ["alegórico", "alegoría", "codificado", "dios e israel"], ["tipológico", "tipo", "apunta a cristo como tipo"], ["matrimonio", "esposo y esposa", "amor de pacto", "una sola carne"], ["cristo", "cristo y la iglesia", "esposo", "esposa"]],
+      modelEn:"Three main interpretive approaches to the Song of Solomon have competed in church history. The allegorical approach says the book is not really about marriage at all but a coded picture of God and Israel or Christ and the Church; this dominated from the early church through the Middle Ages. The typological approach says the book is genuinely about marriage and points to Christ and the Church as a type. The literal approach says it is simply a love song celebrating the gift of one man and one woman united in covenant. Most conservative evangelical scholars today hold a literal-primary reading with typological overtones: real marriage that really points to Christ and His Bride.",
+      modelEs:"Tres enfoques interpretativos principales del Cantar de los Cantares han competido en la historia de la iglesia. El enfoque alegórico dice que el libro no trata realmente del matrimonio sino que es una imagen codificada de Dios e Israel o de Cristo y la Iglesia; esto dominó desde la iglesia primitiva hasta la Edad Media. El enfoque tipológico dice que el libro trata genuinamente del matrimonio y apunta a Cristo y la Iglesia como tipo. El enfoque literal dice que es sencillamente un cántico de amor que celebra el don de un hombre y una mujer unidos en pacto. La mayoría de los eruditos evangélicos conservadores hoy sostienen una lectura literal-primaria con matices tipológicos: matrimonio real que realmente apunta a Cristo y Su Esposa." },
+    { id:28, en:"28. How does Proverbs 31 close the book of Proverbs, and what is its main point?",
+      es:"28. ¿Cómo cierra Proverbios 31 el libro de Proverbios, y cuál es su punto principal?",
+      kw_en:[["proverbs 31", "chapter 31", "closing chapter"], ["virtuous", "virtuous woman", "excellent", "worthy"], ["woman", "wife", "real woman"], ["wisdom", "wisdom embodied", "wisdom with a face", "lived out"], ["fear", "fears the lord", "fear of the lord", "reverence"]],
+      kw_es:[["proverbios 31", "capítulo 31", "capítulo final"], ["virtuosa", "mujer virtuosa", "excelente", "digna"], ["mujer", "esposa", "mujer real"], ["sabiduría", "sabiduría encarnada", "sabiduría con rostro", "vivida"], ["temor", "teme al señor", "temor del señor", "reverencia"]],
+      modelEn:"Proverbs closes in chapter 31 with a portrait of wisdom embodied in a real woman — the virtuous woman who is strong, hard-working, generous, business-minded, kind to the poor, and fearing the Lord. The book that began with two warning voices calling to the young man ends with one beautiful voice: Lady Wisdom finally has a face. Its main point is that true wisdom is not merely abstract principle but a life actually lived out in daily faithfulness, and the crown of it all is that she fears the LORD — for charm is deceptive and beauty fleeting, but a woman who fears the Lord is to be praised.",
+      modelEs:"Proverbios cierra en el capítulo 31 con un retrato de la sabiduría encarnada en una mujer real — la mujer virtuosa que es fuerte, trabajadora, generosa, hábil en los negocios, bondadosa con los pobres, y temerosa del Señor. El libro que comenzó con dos voces de advertencia clamando al joven termina con una sola voz hermosa: la Señora Sabiduría por fin tiene rostro. Su punto principal es que la verdadera sabiduría no es mero principio abstracto sino una vida realmente vivida en fidelidad diaria, y la corona de todo es que ella teme al SEÑOR — pues engañosa es la gracia y vana la hermosura, pero la mujer que teme al Señor es digna de alabanza." },
+    { id:29, en:"29. How does 1 Corinthians 15:58 ('your labor is not in vain in the Lord') answer the message of Ecclesiastes?",
+      es:"29. ¿Cómo responde 1 Corintios 15:58 ('vuestro trabajo en el Señor no es en vano') al mensaje de Eclesiastés?",
+      kw_en:[["labor", "work", "toil"], ["vain", "not in vain", "in vain", "meaningless"], ["lord", "in the lord", "above the sun"], ["ecclesiastes", "hevel", "vapor", "solomon's question"], ["christ", "jesus", "revokes hevel", "eternal worth"]],
+      kw_es:[["labor", "trabajo", "fatiga"], ["vano", "no en vano", "en vano", "sin sentido"], ["señor", "en el señor", "sobre el sol"], ["eclesiastés", "eclesiastes", "hevel", "vapor", "la pregunta de salomón"], ["cristo", "jesús", "revoca el hevel", "valor eterno"]],
+      modelEn:"1 Corinthians 15:58 answers the message of Ecclesiastes directly. Solomon concluded that all labor is in vain — under the sun. But Paul writes, 'be steadfast, immovable, always abounding in the work of the Lord, knowing that your labor is not in vain in the Lord.' The Lord Jesus Christ revokes hevel for everything done in Him. What looked like vapor when measured horizontally is gold when done above the sun, in the Lord. Years of teaching, obscure faithfulness, unheard prayers — none of it is vapor in Christ. Ecclesiastes asks the question; Christ is the answer, turning meaningless labor into eternal worth.",
+      modelEs:"1 Corintios 15:58 responde directamente al mensaje de Eclesiastés. Salomón concluyó que toda labor es vana — debajo del sol. Pero Pablo escribe: 'estad firmes y constantes, creciendo en la obra del Señor siempre, sabiendo que vuestro trabajo en el Señor no es en vano.' El Señor Jesucristo revoca el hevel para todo lo hecho en Él. Lo que parecía vapor medido horizontalmente es oro cuando se hace sobre el sol, en el Señor. Años de enseñar, fidelidad oscura, oraciones no oídas — nada de ello es vapor en Cristo. Eclesiastés hace la pregunta; Cristo es la respuesta, convirtiendo la labor sin sentido en valor eterno." },
+    { id:30, en:"30. How do Proverbs, Ecclesiastes, and Song of Solomon together help believers grow in wisdom and live before God?",
+      es:"30. ¿Cómo ayudan juntos Proverbios, Eclesiastés y Cantar de los Cantares a los creyentes a crecer en sabiduría y vivir delante de Dios?",
+      kw_en:[["proverbs"], ["ecclesiastes"], ["song", "song of solomon", "song of songs"], ["wisdom", "skill in living", "grow in wisdom"], ["life", "whole of life", "christian life", "christ at the center"]],
+      kw_es:[["proverbios"], ["eclesiastés", "eclesiastes"], ["cantar", "cantar de los cantares", "cantares"], ["sabiduría", "destreza para vivir", "crecer en sabiduría"], ["vida", "toda la vida", "vida cristiana", "cristo en el centro"]],
+      modelEn:"Proverbs, Ecclesiastes, and Song of Solomon together help believers grow in wisdom for the whole of life. Proverbs gives the rule — do this, get that — the everyday skill of living well before God. Ecclesiastes gives the exceptions and the honesty that horizontal life under the sun leaves the heart restless and hungry, driving us to look up. The Song of Solomon celebrates covenant love between husband and wife, which itself points to Christ and His Bride. A diet of pure Proverbs makes a person brittle, pure Ecclesiastes makes him cynical; the wise believer needs all three open. Together they point to Christ, who is our wisdom, our answer to vapor, and our Bridegroom.",
+      modelEs:"Proverbios, Eclesiastés y Cantares juntos ayudan a los creyentes a crecer en sabiduría para toda la vida. Proverbios da la regla — haz esto, obtén aquello — la destreza diaria de vivir bien delante de Dios. Eclesiastés da las excepciones y la honestidad de que la vida horizontal debajo del sol deja el corazón inquieto y hambriento, impulsándonos a mirar hacia arriba. El Cantar de los Cantares celebra el amor de pacto entre esposo y esposa, que a su vez apunta a Cristo y Su Esposa. Una dieta de puro Proverbios hace a la persona frágil, puro Eclesiastés la vuelve cínica; el creyente sabio necesita los tres abiertos. Juntos apuntan a Cristo, que es nuestra sabiduría, nuestra respuesta al vapor, y nuestro Esposo." }
+];
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed[idx]) {
+                btn.classList.add('locked');
+                if (letter === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2'; btn.style.borderColor = '#d4af37'; btn.style.fontWeight = '600';
+            }
+            btn.onclick = function() {
+                if (mcRevealed[idx] || unitPassed) return;
+                mcAnswers[idx] = letter;
+                mcRevealed[idx] = true;
+                saveState();
+                renderQuestions();
+            };
+            div.appendChild(btn);
+        });
+
+        if (mcRevealed[idx]) renderMCFeedback(div, q, idx, true);
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMastersLevel() ? ('Short Answer (Questions 21–30) — ' + (getTrack()==='thm' ? 'Master of Theology' : 'Master of Divinity') + ' (graded, 9/10 to pass)') : 'Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMastersLevel() ? ('Respuesta Corta (Preguntas 21–30) — ' + (getTrack()==='thm' ? 'Maestría en Teología' : 'Maestría en Divinidad') + ' (calificado, 9/10 para aprobar)') : 'Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here...' : 'Escriba su respuesta aquí...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.addEventListener('input', (e) => { kwAnswers[idx] = e.target.value; saveState(); });
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+
+        checkBtn.onclick = function() {
+            const result = gradeSA(q, textarea.value);
+            if (result.tooShort) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a sentence).' : 'Escriba una respuesta más completa (al menos una oración).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else if (result.pass) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? '✓ Your answer includes the key concepts.' : '✓ Su respuesta incluye los conceptos clave.';
+                feedbackDiv.className = 'feedback-text correct';
+            } else {
+                feedbackDiv.innerHTML = currentLang === 'en' ? `✗ Try to include more of: ${result.missing.join(', ')}.` : `✗ Intente incluir más de: ${result.missing.join(', ')}.`;
+                feedbackDiv.className = 'feedback-text incorrect';
+            }
+        };
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.cssText = 'display:none;margin-top:10px;padding:12px 14px;border-left:4px solid #c9a961;background:#fdf9ed;border-radius:3px;font-size:.92rem;line-height:1.5;';
+        const modelBtn = document.createElement('button');
+        modelBtn.className = 'small';
+        modelBtn.style.marginLeft = '6px';
+        modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+        modelBtn.onclick = function() {
+            if ((textarea.value || '').trim().length < 100) {
+                feedbackDiv.className = 'feedback-text incorrect';
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a sentence) — then you can compare it with the model.' : 'Escriba primero su propia respuesta (al menos una oración) — luego podrá compararla con el modelo.';
+                return;
+            }
+            if (modelBox.style.display === 'none') {
+                modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estúdiela:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+                modelBox.style.display = 'block';
+                modelBtn.textContent = currentLang === 'en' ? 'Hide model answer' : 'Ocultar respuesta modelo';
+            } else {
+                modelBox.style.display = 'none';
+                modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(modelBtn);
+        div.appendChild(feedbackDiv);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+    });
+}
+
+function renderMCFeedback(div, q, idx, skipRedraw) {
+    if (!skipRedraw) {
+        const buttons = div.querySelectorAll('.option');
+        buttons.forEach(btn => {
+            const letter = btn.textContent.charAt(0);
+            btn.classList.add('locked');
+            btn.classList.remove('correct', 'wrong');
+            if (letter === q.correct) btn.classList.add('correct');
+            else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+        });
+    }
+    let existing = div.querySelector('.feedback-text');
+    if (existing) existing.remove();
+    const fb = document.createElement('div');
+    const correct = (mcAnswers[idx] === q.correct);
+    fb.className = 'feedback-text ' + (correct ? 'correct' : 'incorrect');
+    if (correct) {
+        fb.innerHTML = '✓ ' + (currentLang === 'en' ? q.fcEn : q.fcEs);
+    } else {
+        const correctLetter = q.correct;
+        fb.innerHTML = (currentLang === 'en' ? `✗ Correct answer: ${correctLetter}. ` : `✗ Respuesta correcta: ${correctLetter}. `) + (currentLang === 'en' ? q.fiEn : q.fiEs);
+    }
+    div.appendChild(fb);
+}
+
+function gradeSA(q, answer) {
+    const text = (answer || '').toLowerCase().trim();
+    if (text.length < 100) return { tooShort: true, pass: false, missing: [] };
+    const isEs = document.body.classList.contains('lang-es');
+    const groups = isEs ? q.kw_es : q.kw_en;
+    const missing = [];
+    let matched = 0;
+    groups.forEach(group => {
+        const hit = group.some(term => text.includes(term.toLowerCase()));
+        if (hit) matched++;
+        else missing.push(group[0]);
+    });
+    const need = Math.max(2, Math.ceil(groups.length * 0.4));
+    return { tooShort: false, pass: matched >= need, missing };
+}
+
+function submitExam() {
+    saveReg();
+    if (!student.name || !student.email) {
+        alert(currentLang === 'en' ? 'Please fill in your registration first.' : 'Por favor complete su registro primero.');
+        return;
+    }
+    if (unitPassed) {
+        showResult('pass', currentLang === 'en' ? '✅ Unit 8 already passed. You may proceed.' : '✅ Unidad 8 ya aprobada. Puede continuar.');
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        showResult('locked', currentLang === 'en' ? `⏰ Locked for ${wait} more minute(s).` : `⏰ Bloqueado por ${wait} minuto(s) más.`);
+        return;
+    }
+
+    for (let i = 0; i < mcRevealed.length; i++) mcRevealed[i] = true;
+    renderQuestions();
+    let mcCorrect = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === mcQuestions[i].correct) mcCorrect++;
+    }
+
+    let saCorrect = 0;
+    if (isMastersLevel()) {
+        for (let i = 0; i < 10; i++) {
+            const r = gradeSA(kwQuestions[i], kwAnswers[i]);
+            if (!r.tooShort && r.pass) saCorrect++;
+        }
+    }
+    const mcOk = mcCorrect >= PASS_THRESHOLD_MC;
+    const saOk = saCorrect >= PASS_THRESHOLD_SA;
+
+    function passUnit(detail) {
+        unitPassed = true;
+        localStorage.setItem(UNIT_PASSED_KEY, 'true');
+        progress[`unit${UNIT_NUM}`] = true;
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(SA_LOCK_KEY);
+        const msg = currentLang === 'en'
+            ? `✅ PASSED. ${detail}. Unit 8 complete! Your answers are marked below. Review them, then continue when ready.`
+            : `✅ APROBADO. ${detail}. ¡Unidad 8 completa! Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.`;
+        showResult('pass', msg);
+        updateProgressGrid();
+    }
+
+    if (!isMastersLevel()) {
+        const detail = currentLang === 'en' ? `MC: ${mcCorrect}/20 (need 18)` : `OM: ${mcCorrect}/20 (necesita 18)`;
+        if (mcOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+                : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        const detail = currentLang === 'en'
+            ? `MC: ✓ banked · SA: ${saCorrect}/10 (need 9)`
+            : `OM: ✓ en banco · RC: ${saCorrect}/10 (necesita 9)`;
+        if (saOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Your multiple-choice pass is safe. ${detail}. Review the lesson and try the short-answer section again in ${lockMinutes()} minute(s).`
+                : `Su aprobación de opción múltiple está a salvo. ${detail}. Repase la lección y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    const detail = currentLang === 'en'
+        ? `MC: ${mcCorrect}/20 (need 18) · SA: ${saCorrect}/10 (need 9)`
+        : `OM: ${mcCorrect}/20 (necesita 18) · RC: ${saCorrect}/10 (necesita 9)`;
+    if (mcOk && saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit(detail);
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `MC ${mcCorrect}/20 ✓ passed and banked. SA ${saCorrect}/10 (need 9). When you try again in ${lockMinutes()} minute(s), you'll only need to resubmit the short answers — MC stays passed.`
+            : `OM ${mcCorrect}/20 ✓ aprobado y guardado. RC ${saCorrect}/10 (necesita 9). Al reintentar en ${lockMinutes()} minuto(s), solo necesitará reenviar las respuestas cortas — el OM permanece aprobado.`;
+        showResult('fail', msg);
+        startLockTimer();
+    } else {
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+            : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+        showResult('fail', msg);
+        startLockTimer();
+    }
+}
+
+function showResult(cls, html) {
+    const r = document.getElementById('examResult');
+    r.style.display = 'block';
+    r.className = 'exam-result ' + cls;
+    r.innerHTML = html;
+}
+
+function startLockTimer() {
+    const r = document.getElementById('examResult');
+    const interval = setInterval(() => {
+        const remaining = lockUntil - Date.now();
+        if (remaining <= 0) { clearInterval(interval); r.innerHTML += currentLang === 'en' ? '<br><em>Lockout ended. You may retry.</em>' : '<br><em>Bloqueo terminado. Puede reintentar.</em>'; return; }
+        const m = Math.floor(remaining / 60000);
+        const s = Math.floor((remaining % 60000) / 1000);
+        const note = currentLang === 'en' ? `<br>⏱️ Locked: ${m}:${String(s).padStart(2,'0')}` : `<br>⏱️ Bloqueado: ${m}:${String(s).padStart(2,'0')}`;
+        const base = r.innerHTML.split('<br>⏱️')[0];
+        r.innerHTML = base + note;
+    }, 1000);
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? 'Reset this unit? All your answers and pass status for Unit 8 will be cleared. (Your name, email, and other units are not affected.)'
+        : '¿Reiniciar esta unidad? Todas sus respuestas y el estado de aprobación para la Unidad 8 se borrarán. (Su nombre, correo y otras unidades no se afectan.)';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcRevealed = new Array(20).fill(false);
+    unitPassed = false;
+    mcPreviouslyPassed = false;
+    lockUntil = 0;
+    localStorage.removeItem(UNIT_STATE_KEY);
+    localStorage.removeItem(UNIT_PASSED_KEY);
+    localStorage.removeItem(LOCKOUT_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    if (progress[`unit${UNIT_NUM}`]) {
+        delete progress[`unit${UNIT_NUM}`];
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+    }
+    document.getElementById('examResult').style.display = 'none';
+    renderQuestions();
+    updateProgressGrid();
+}
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') { currentLang = 'es'; document.body.className = 'lang-es'; this.textContent = 'English'; }
+    else { currentLang = 'en'; document.body.className = 'lang-en'; this.textContent = 'Español'; }
+    renderTrackBanner(); renderReadout(); renderQuestions();
+};
+
+// ========== REGISTRATION READOUT (read-only on Units 2-13) ==========
+function renderReadout() {
+    const el = document.getElementById('regReadout');
+    if (!el) return;
+    const saved = localStorage.getItem(STUDENT_KEY);
+    const en = (currentLang !== 'es');
+    if (!saved) {
+        el.innerHTML = en
+            ? 'No registration found. Please <a href="CTSUnit1.html">register on Unit 1</a> before taking this exam.'
+            : 'No se encontr\u00f3 registro. Por favor <a href="CTSUnit1.html">reg\u00edstrese en la Unidad 1</a> antes de tomar este examen.';
+        el.className = 'reg-readout missing';
+        return;
+    }
+    const st = JSON.parse(saved);
+    const progLabel = st.program || 'Certificate of Ministry';
+    const lblName = en ? 'Name' : 'Nombre';
+    const lblEmail = en ? 'Email' : 'Correo';
+    const lblCountry = en ? 'Country' : 'Pa\u00eds';
+    const lblProg = en ? 'Program' : 'Programa';
+    const note = en
+        ? 'Registered on Unit 1. To change your details, return to Unit 1.'
+        : 'Registrado en la Unidad 1. Para cambiar sus datos, vuelva a la Unidad 1.';
+    el.innerHTML =
+        '<div class="reg-readout-grid">' +
+        '<div><strong>' + lblName + ':</strong> ' + (st.name||'') + '</div>' +
+        '<div><strong>' + lblEmail + ':</strong> ' + (st.email||'') + '</div>' +
+        '<div><strong>' + lblCountry + ':</strong> ' + (st.country||'') + '</div>' +
+        '<div><strong>' + lblProg + ':</strong> ' + progLabel + '</div>' +
+        '</div><div class="reg-readout-note">' + note + '</div>';
+    el.className = 'reg-readout';
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+loadReg();
+renderReadout();
+loadState();
+updateProgressGrid();
+renderTrackBanner();
+renderQuestions();
+if (unitPassed) showResult('pass', currentLang === 'en' ? '✅ Unit 8 already passed.' : '✅ Unidad 8 ya aprobada.');
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSOTSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

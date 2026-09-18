@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deacon Family Ministry Plan — Unit 5</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<!-- CTS Deacon Family Ministry Plan — Unit 5. Built on Cook's validated Q24 masters engine (ported from Bible Characters Unit 3). Bilingual EN (NKJV) / ES (RVG). Author: Dr. Wayne Cook. Spanish + SA keywords/models pending native RVG / author spot-check. -->
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 6 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Deacon Family Ministry Plan — Unit 5: Organizing the Plan — Assigning Families</span><span class="lang-es">📖 Plan de Ministerio Familiar del Diácono — Unidad 5: Organizando el Plan — Asignando Familias</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"Let all things be done decently and in order." — 1 Corinthians 14:40 (NKJV)</span><span class="lang-es">«Hágase todo decentemente y con orden.» — 1 Corintios 14:40 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="cert">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>In Unit 4 we saw the vision of the Plan and its definition: every family assigned to a deacon for personal, caring ministry under the pastor. A vision, however, is only a dream until someone does the practical work of putting it into place. A church may love the idea of total, personal care and still never achieve it, simply because it never sat down and organized the thing. So in this unit we leave the vision and take up the building. How does a church actually divide its families among its deacons?</p>
+<p>Some may feel that to organize the care of souls is to make it cold and mechanical. The opposite is true. Order is not the enemy of love; it is the servant of love. Without it, good intentions scatter and people are missed; with it, the love of the church reaches every door. This is why Paul, writing to a church about its life together, laid down the simple rule that governs all such work.</p>
+<p><strong>Subject:</strong> organizing the Plan by assigning families to deacons.</p>
+<p><strong>Proposition:</strong> To put the Plan into practice, a church must answer five practical questions about whom it will serve, how the families will be divided, and how the assignments will be made, kept, and begun.</p>
+<p>We take up, then, <strong>five questions</strong> every church must answer to organize the Plan.</p>
+<h2>I. Who Is to Be Served?</h2>
+<p>Before a single family can be assigned, the church must decide who is on the list. The starting point is the church's own membership roll, but it must be thought through with care, for the goal set in Unit 4 was total coverage &mdash; not most of the people, but all of them.</p>
+<p>The unit to be assigned is the <em>family</em>, the household, not merely the individual. This is why it is called Family Ministry. A married couple and their children are one unit, given whole to one deacon, so that the family is cared for together and never split among several deacons who each know only a piece of it. And the household is defined broadly enough that no one is left off: the person living alone, the widow, the college student away from home, the elderly shut-in &mdash; each is counted, each belongs to someone's list.</p>
+<p>Keeping the family whole under one deacon matters more than it may seem. When a husband, a wife, and their children all answer to the same caring man, he comes to know the household as a whole &mdash; its joys, its strains, its needs &mdash; and can minister to it as a family and not as scattered individuals. The home, after all, is where most of life's burdens and blessings are actually carried.</p>
+<div class="illustration"><strong>Illustration.</strong> Think of a mail carrier on his route. Every house on that street belongs to a carrier, and so no house is ever skipped; the mail comes even to the home that never asks for it, because the route is defined and someone is responsible for it. A church operating this Plan draws its &ldquo;routes&rdquo; in just the same way. When every family belongs to some deacon's list, no family is ever quietly skipped, because there is always someone whose route it is.</div>
+<p>A church will also decide how to treat its non-resident members &mdash; those who have moved far away and cannot be visited. Many keep them on a separate list for contact by letter or phone, so the relationship is not wholly lost, while focusing the deacons' personal ministry on the resident families they can actually reach. The principle is simple: make a complete and current roll of the family units to be served, so that the coverage is truly total.</p>
+<h2>II. How Many to Each Deacon?</h2>
+<p>Once the families are counted, the church must decide how many each deacon will carry. Here the conviction of Unit 4 governs the math: because the ministry is to be personal, the numbers must be small. A man cannot know two hundred families, but he can know a few; so the load is kept small on purpose. Many churches give each deacon somewhere around ten to fifteen families &mdash; few enough that he can truly know them, contact them, and reach them in a crisis.</p>
+<p>The arithmetic is plain. Divide the number of family units by the number of active deacons, and you have the load for each. If that number comes out too high for real ministry, the church has learned something important: it needs to enlist and train more deacons &mdash; men proven in character, as Unit 2 required &mdash; so that no deacon is given more families than he can actually love. The biblical pattern for this is very old.</p>
+<div class="scripture">Moreover you shall select from all the people able men, such as fear God, men of truth, hating covetousness; and place such over them to be rulers of thousands, rulers of hundreds, rulers of fifties, and rulers of tens... every great matter they shall bring to you, but every small matter they themselves shall judge. So it will be easier for you, for they will bear the burden with you. (Exodus 18:21&ndash;22, NKJV)</div>
+<p>When the load on Moses was too great, Jethro's counsel was not to make Moses work harder but to divide the people into manageable groups under appointed men &mdash; men who could handle the ordinary matters themselves and bring only the great ones to Moses, so that the burden was shared. That is exactly the shape of this Plan. Keep the groups small enough to be real, for it is far better that a deacon tend ten families well than that he carry fifty he can only count.</p>
+<p>There is a temptation, when faithful deacons are few, to simply pile more families onto the willing. Resist it. A deacon stretched across forty families will end by truly caring for none of them, and the Plan will quietly fail while everyone admires how hard he works. The honest answer to too few deacons is not heavier loads but more laborers &mdash; which is itself a matter for prayer, for the Lord of the harvest is the one who sends them (Matthew 9:38).</p>
+<h2>III. By What Method?</h2>
+<p>Now comes the practical question of how to draw the lines. There is no single God-given method; there are several good ones, and a church should choose the one that best fits its own situation.</p>
+<p>Some churches assign <strong>alphabetically</strong>, dividing the roll by family name. This is simple, even, and easy to keep up, though it pays no attention to where people live. Others assign <strong>geographically</strong>, grouping families by neighborhood or area so that each deacon's families live near one another and near him. This is often the most practical of all for the work of visitation, since a deacon can reach his whole group without crossing the city. Still others assign <strong>by existing groups</strong>, such as Sunday school classes, so that the deacon ministers alongside the teacher to the same people and builds on relationships already formed. And some assign <strong>by acquaintance</strong>, giving families to a deacon who already knows and fits them.</p>
+<p>Many churches wisely blend these &mdash; drawing the lines mostly by geography, for instance, but adjusting them where a deacon already has a bond with a family. The best method is not the one that looks neatest on paper but the one that actually lets <em>this</em> deacon reach <em>these</em> families, week in and week out. Whatever the method, the aim is the same: a clear, complete division in which every family knows its deacon and every deacon knows his families.</p>
+<p>A church should not be paralyzed seeking the perfect system. It is better to begin with a simple, sensible division and adjust it over time than to wait forever for a flawless plan. The lines can always be redrawn as the church learns; what matters is that they be drawn at all, so that the ministry can begin.</p>
+<h2>IV. How Recorded and Kept Current?</h2>
+<p>An assignment that lives only in someone's memory will soon be forgotten, and the family will be lost. So the assignments must be written down and faithfully maintained. The church office keeps a master list showing every family and the deacon assigned to it, and each deacon keeps his own list or set of cards with the names, addresses, telephone numbers, family details, and special needs of the families in his care.</p>
+<div class="scripture">He who is faithful in what is least is faithful also in much; and he who is unjust in what is least is unjust also in much. (Luke 16:10, NKJV)</div>
+<p>Keeping careful records is not cold bureaucracy; it is love made orderly, faithfulness in a small thing for the sake of a great one. And the records must be kept <em>current</em>, for a church is always changing. New members arrive and must be assigned promptly, before they drift; families move, marry, and pass away; people fall ill and recover. If the list is not updated, the very thing the Plan exists to prevent will happen again &mdash; a family will slip through the cracks. So someone must be charged with keeping the list current: a head deacon, the pastor, or the church office, watching that no name is ever left without a deacon beside it.</p>
+<p>This quiet work of keeping the list is more important than it looks. The one who maintains it is, in effect, the guardian of the Plan's great promise &mdash; that no one will be forgotten. Every new name added in time, every change made promptly, is a soul kept from slipping away unseen. It is humble work, but it holds the whole Plan together.</p>
+<h2>V. How Are the Families Introduced to Their Deacon?</h2>
+<p>Finally, an assignment on paper means nothing until the family knows its deacon and the deacon makes the first contact. The Plan must be launched, not merely filed away.</p>
+<p>It begins from the front: the pastor explains the Plan to the whole church, so the people understand and welcome it. Then each deacon is told which families are his, and &mdash; just as important &mdash; each family is told which deacon is theirs, by a letter, a card, or a personal word, so that every member can say, &ldquo;That man is mine to call.&rdquo; And then the deacon makes the first move. He reaches out to each of his families with a get-acquainted visit or call, not to solve a problem but simply to introduce himself, to learn about them, and to begin the relationship before any trouble comes. The detail of that ongoing ministry of visitation belongs to Unit 6; here the point is only to begin, and to begin warmly, so that the relationship is alive and ready on the day a crisis finally comes.</p>
+<h2>Conclusion</h2>
+<p>Gather these five questions and their answers, and the Plan stands ready to work: a complete roll of the families to be served, a manageable number assigned to each deacon, a sensible method for drawing the lines, accurate records faithfully kept current, and a warm introduction of every family to its deacon. This is what it means to organize the Plan &mdash; not to make the care of souls cold, but to make sure it actually reaches every soul.</p>
+<p>None of this work is glamorous. Drawing up lists and dividing rolls will never stir a congregation the way a great sermon can. But it is the unseen scaffolding on which a thousand acts of love will hang, and a church that does it well has built something that will quietly bless its people for years.</p>
+<p>&ldquo;Let all things be done decently and in order,&rdquo; Paul wrote, and here we see why. Order is the servant of love; it is the channel through which the love of the church flows to every home, leaving none dry. The families are now assigned and introduced. In Unit 6 we turn to the work itself &mdash; the ongoing ministry of visitation and prayer by which the deacon actually cares for the families entrusted to him.</p></div>
+<div class="lang-es"><p>En la Unidad 4 vimos la visi&oacute;n del Plan y su definici&oacute;n: cada familia asignada a un di&aacute;cono para un ministerio personal y solícito bajo el pastor. Una visi&oacute;n, sin embargo, es solo un sue&ntilde;o hasta que alguien hace la obra pr&aacute;ctica de ponerla en su lugar. Una iglesia puede amar la idea del cuidado total y personal y aun as&iacute; nunca lograrlo, sencillamente porque nunca se sent&oacute; a organizar la cosa. As&iacute; que en esta unidad dejamos la visi&oacute;n y tomamos la construcci&oacute;n. &iquest;C&oacute;mo divide una iglesia realmente sus familias entre sus di&aacute;conos?</p>
+<p>Algunos pueden sentir que organizar el cuidado de las almas es hacerlo fr&iacute;o y mec&aacute;nico. Lo contrario es cierto. El orden no es el enemigo del amor; es el siervo del amor. Sin &eacute;l, las buenas intenciones se dispersan y las personas son pasadas por alto; con &eacute;l, el amor de la iglesia llega a cada puerta. Por esto Pablo, escribiendo a una iglesia sobre su vida en com&uacute;n, estableci&oacute; la sencilla regla que gobierna toda esta obra.</p>
+<p><strong>Tema:</strong> organizar el Plan asignando familias a los di&aacute;conos.</p>
+<p><strong>Proposici&oacute;n:</strong> Para poner el Plan en pr&aacute;ctica, una iglesia debe responder cinco preguntas pr&aacute;cticas sobre a qui&eacute;n servir&aacute;, c&oacute;mo se dividir&aacute;n las familias, y c&oacute;mo se har&aacute;n, se mantendr&aacute;n y se comenzar&aacute;n las asignaciones.</p>
+<p>Tomamos, pues, <strong>cinco preguntas</strong> que toda iglesia debe responder para organizar el Plan.</p>
+<h2>I. &iquest;A Qui&eacute;n se ha de Servir?</h2>
+<p>Antes de que una sola familia pueda ser asignada, la iglesia debe decidir qui&eacute;n est&aacute; en la lista. El punto de partida es el propio registro de miembros de la iglesia, pero debe pensarse con cuidado, porque la meta puesta en la Unidad 4 era la cobertura total &mdash; no la mayor&iacute;a de las personas, sino todas ellas.</p>
+<p>La unidad que se ha de asignar es la <em>familia</em>, el hogar, no meramente el individuo. Por esto se llama Ministerio Familiar. Un matrimonio y sus hijos son una unidad, entregada entera a un di&aacute;cono, de modo que la familia sea cuidada junta y nunca dividida entre varios di&aacute;conos que cada uno conoce solo una parte de ella. Y el hogar se define con suficiente amplitud para que nadie quede fuera: la persona que vive sola, la viuda, el estudiante universitario lejos de casa, el anciano recluido &mdash; cada uno es contado, cada uno pertenece a la lista de alguien.</p>
+<p>Mantener a la familia entera bajo un di&aacute;cono importa m&aacute;s de lo que pudiera parecer. Cuando un esposo, una esposa y sus hijos responden todos al mismo hombre solícito, &eacute;l llega a conocer el hogar como un todo &mdash; sus gozos, sus tensiones, sus necesidades &mdash; y puede ministrarle como familia y no como individuos dispersos. El hogar, despu&eacute;s de todo, es donde la mayor&iacute;a de las cargas y bendiciones de la vida se llevan realmente.</p>
+<div class="illustration"><strong>Ilustraci&oacute;n.</strong> Piense en un cartero en su ruta. Cada casa en esa calle pertenece a un cartero, y por eso ninguna casa es jam&aacute;s saltada; el correo llega aun a la casa que nunca lo pide, porque la ruta est&aacute; definida y alguien es responsable de ella. Una iglesia que opera este Plan traza sus &laquo;rutas&raquo; exactamente de la misma manera. Cuando cada familia pertenece a la lista de alg&uacute;n di&aacute;cono, ninguna familia es jam&aacute;s saltada calladamente, porque siempre hay alguien cuya ruta es.</div>
+<p>Una iglesia tambi&eacute;n decidir&aacute; c&oacute;mo tratar a sus miembros no residentes &mdash; los que se han mudado lejos y no pueden ser visitados. Muchas los mantienen en una lista aparte para contacto por carta o tel&eacute;fono, de modo que la relaci&oacute;n no se pierda del todo, mientras enfocan el ministerio personal de los di&aacute;conos en las familias residentes que de veras pueden alcanzar. El principio es sencillo: haga un registro completo y al d&iacute;a de las unidades familiares que se han de servir, para que la cobertura sea verdaderamente total.</p>
+<h2>II. &iquest;Cu&aacute;ntas a Cada Di&aacute;cono?</h2>
+<p>Una vez contadas las familias, la iglesia debe decidir cu&aacute;ntas cargar&aacute; cada di&aacute;cono. Aqu&iacute; la convicci&oacute;n de la Unidad 4 gobierna las cuentas: porque el ministerio ha de ser personal, los n&uacute;meros deben ser peque&ntilde;os. Un hombre no puede conocer doscientas familias, pero puede conocer unas pocas; as&iacute; que la carga se mantiene peque&ntilde;a a prop&oacute;sito. Muchas iglesias dan a cada di&aacute;cono alrededor de diez a quince familias &mdash; suficientemente pocas para que pueda de veras conocerlas, contactarlas, y alcanzarlas en una crisis.</p>
+<p>La aritm&eacute;tica es clara. Divida el n&uacute;mero de unidades familiares por el n&uacute;mero de di&aacute;conos activos, y tiene la carga para cada uno. Si ese n&uacute;mero resulta demasiado alto para un ministerio real, la iglesia ha aprendido algo importante: necesita reclutar y entrenar a m&aacute;s di&aacute;conos &mdash; hombres probados en car&aacute;cter, como la Unidad 2 requiri&oacute; &mdash; para que a ning&uacute;n di&aacute;cono se le den m&aacute;s familias de las que puede de veras amar. El patr&oacute;n b&iacute;blico para esto es muy antiguo.</p>
+<div class="scripture">Adem&aacute;s, escoge t&uacute; de entre todo el pueblo, varones de virtud, temerosos de Dios, varones de verdad, que aborrezcan la avaricia; y ponlos sobre el pueblo por jefes de mil, de cien, de cincuenta, y de diez... todo asunto grave lo traer&aacute;n a ti, y ellos juzgar&aacute;n todo asunto peque&ntilde;o; as&iacute; aliviar&aacute;s la carga de sobre ti, y la llevar&aacute;n ellos contigo. (&Eacute;xodo 18:21&ndash;22, RVG)</div>
+<p>Cuando la carga sobre Mois&eacute;s era demasiado grande, el consejo de Jetro no fue hacer trabajar m&aacute;s a Mois&eacute;s, sino dividir al pueblo en grupos manejables bajo varones nombrados &mdash; varones que pod&iacute;an manejar ellos mismos los asuntos ordinarios y traer solo los grandes a Mois&eacute;s, de modo que la carga fuera compartida. Esa es exactamente la forma de este Plan. Mantenga los grupos suficientemente peque&ntilde;os para que sean reales, porque es mucho mejor que un di&aacute;cono atienda bien a diez familias que cargue cincuenta que solo puede contar.</p>
+<p>Hay una tentaci&oacute;n, cuando los di&aacute;conos fieles son pocos, de simplemente amontonar m&aacute;s familias sobre los dispuestos. Res&iacute;stala. Un di&aacute;cono estirado entre cuarenta familias terminar&aacute; por no cuidar de veras a ninguna de ellas, y el Plan fallar&aacute; calladamente mientras todos admiran lo duro que trabaja. La respuesta honesta a tener pocos di&aacute;conos no son cargas m&aacute;s pesadas, sino m&aacute;s obreros &mdash; lo cual es en s&iacute; mismo un asunto de oraci&oacute;n, porque el Se&ntilde;or de la mies es quien los env&iacute;a (Mateo 9:38).</p>
+<h2>III. &iquest;Por Cu&aacute;l M&eacute;todo?</h2>
+<p>Ahora viene la pregunta pr&aacute;ctica de c&oacute;mo trazar las l&iacute;neas. No hay un solo m&eacute;todo dado por Dios; hay varios buenos, y una iglesia deber&iacute;a escoger el que mejor se ajuste a su propia situaci&oacute;n.</p>
+<p>Algunas iglesias asignan <strong>alfab&eacute;ticamente</strong>, dividiendo el registro por apellido. Esto es sencillo, parejo y f&aacute;cil de mantener, aunque no presta atenci&oacute;n a d&oacute;nde vive la gente. Otras asignan <strong>geogr&aacute;ficamente</strong>, agrupando a las familias por vecindario o &aacute;rea de modo que las familias de cada di&aacute;cono vivan cerca unas de otras y cerca de &eacute;l. Este es a menudo el m&aacute;s pr&aacute;ctico de todos para la obra de visitaci&oacute;n, ya que un di&aacute;cono puede alcanzar a todo su grupo sin cruzar la ciudad. Otras asignan <strong>por grupos existentes</strong>, como las clases de escuela dominical, de modo que el di&aacute;cono ministre junto al maestro a las mismas personas y edifique sobre relaciones ya formadas. Y algunas asignan <strong>por conocimiento</strong>, dando familias a un di&aacute;cono que ya las conoce y les conviene.</p>
+<p>Muchas iglesias sabiamente combinan estos &mdash; trazando las l&iacute;neas mayormente por geograf&iacute;a, por ejemplo, pero ajust&aacute;ndolas donde un di&aacute;cono ya tiene un v&iacute;nculo con una familia. El mejor m&eacute;todo no es el que se ve m&aacute;s pulcro en el papel, sino el que de veras permite a <em>este</em> di&aacute;cono alcanzar a <em>estas</em> familias, semana tras semana. Cualquiera que sea el m&eacute;todo, el objetivo es el mismo: una divisi&oacute;n clara y completa en la que cada familia conozca a su di&aacute;cono y cada di&aacute;cono conozca a sus familias.</p>
+<p>Una iglesia no deber&iacute;a quedar paralizada buscando el sistema perfecto. Es mejor comenzar con una divisi&oacute;n sencilla y sensata y ajustarla con el tiempo que esperar para siempre un plan sin defectos. Las l&iacute;neas siempre pueden volver a trazarse conforme la iglesia aprende; lo que importa es que se tracen, para que el ministerio pueda comenzar.</p>
+<h2>IV. &iquest;C&oacute;mo se Registra y se Mantiene al D&iacute;a?</h2>
+<p>Una asignaci&oacute;n que vive solo en la memoria de alguien pronto ser&aacute; olvidada, y la familia se perder&aacute;. As&iacute; que las asignaciones deben escribirse y mantenerse fielmente. La oficina de la iglesia guarda una lista maestra que muestra cada familia y el di&aacute;cono asignado a ella, y cada di&aacute;cono guarda su propia lista o juego de tarjetas con los nombres, direcciones, n&uacute;meros de tel&eacute;fono, detalles familiares y necesidades especiales de las familias a su cuidado.</p>
+<div class="scripture">El que es fiel en lo muy poco, tambi&eacute;n en lo m&aacute;s es fiel; y el que en lo muy poco es injusto, tambi&eacute;n en lo m&aacute;s es injusto. (Lucas 16:10, RVG)</div>
+<p>Llevar registros cuidadosos no es fr&iacute;a burocracia; es amor hecho ordenado, fidelidad en una cosa peque&ntilde;a por causa de una grande. Y los registros deben mantenerse <em>al d&iacute;a</em>, porque una iglesia siempre est&aacute; cambiando. Llegan miembros nuevos y deben ser asignados pronto, antes de que se alejen; las familias se mudan, se casan y fallecen; las personas enferman y se recuperan. Si la lista no se actualiza, suceder&aacute; de nuevo precisamente lo que el Plan existe para evitar &mdash; una familia se perder&aacute; por las grietas. As&iacute; que alguien debe ser encargado de mantener la lista al d&iacute;a: un di&aacute;cono principal, el pastor, o la oficina de la iglesia, vigilando que ning&uacute;n nombre quede jam&aacute;s sin un di&aacute;cono a su lado.</p>
+<p>Esta callada obra de mantener la lista es m&aacute;s importante de lo que parece. El que la mantiene es, en efecto, el guardi&aacute;n de la gran promesa del Plan &mdash; que nadie ser&aacute; olvidado. Cada nombre nuevo a&ntilde;adido a tiempo, cada cambio hecho prontamente, es un alma guardada de perderse sin ser vista. Es obra humilde, pero sostiene todo el Plan.</p>
+<h2>V. &iquest;C&oacute;mo se Presentan las Familias a su Di&aacute;cono?</h2>
+<p>Finalmente, una asignaci&oacute;n en el papel no significa nada hasta que la familia conoce a su di&aacute;cono y el di&aacute;cono hace el primer contacto. El Plan debe ser lanzado, no meramente archivado.</p>
+<p>Comienza desde el frente: el pastor explica el Plan a toda la iglesia, para que el pueblo lo entienda y lo reciba. Luego a cada di&aacute;cono se le dice cu&aacute;les familias son suyas, y &mdash; igual de importante &mdash; a cada familia se le dice cu&aacute;l di&aacute;cono es el suyo, por una carta, una tarjeta o una palabra personal, de modo que cada miembro pueda decir: &laquo;Ese hombre es m&iacute;o para llamar.&raquo; Y entonces el di&aacute;cono da el primer paso. Se acerca a cada una de sus familias con una visita o llamada para conocerse, no para resolver un problema, sino sencillamente para presentarse, para aprender acerca de ellas, y para comenzar la relaci&oacute;n antes de que venga cualquier dificultad. El detalle de ese ministerio continuo de visitaci&oacute;n pertenece a la Unidad 6; aqu&iacute; el punto es solo comenzar, y comenzar c&aacute;lidamente, para que la relaci&oacute;n est&eacute; viva y lista el d&iacute;a en que por fin venga una crisis.</p>
+<h2>Conclusi&oacute;n</h2>
+<p>Re&uacute;na estas cinco preguntas y sus respuestas, y el Plan queda listo para obrar: un registro completo de las familias que se han de servir, un n&uacute;mero manejable asignado a cada di&aacute;cono, un m&eacute;todo sensato para trazar las l&iacute;neas, registros exactos mantenidos fielmente al d&iacute;a, y una c&aacute;lida presentaci&oacute;n de cada familia a su di&aacute;cono. Esto es lo que significa organizar el Plan &mdash; no hacer fr&iacute;o el cuidado de las almas, sino asegurar que de veras llegue a cada alma.</p>
+<p>Nada de esta obra es vistoso. Hacer listas y dividir registros nunca conmover&aacute; a una congregaci&oacute;n como puede hacerlo un gran serm&oacute;n. Pero es el andamiaje invisible sobre el cual colgar&aacute;n mil actos de amor, y una iglesia que lo hace bien ha construido algo que bendecir&aacute; calladamente a su pueblo por a&ntilde;os.</p>
+<p>&laquo;H&aacute;gase todo decentemente y con orden,&raquo; escribi&oacute; Pablo, y aqu&iacute; vemos por qu&eacute;. El orden es el siervo del amor; es el canal por el cual el amor de la iglesia fluye a cada hogar, sin dejar ninguno seco. Las familias est&aacute;n ahora asignadas y presentadas. En la Unidad 6 nos volvemos a la obra misma &mdash; el ministerio continuo de visitaci&oacute;n y oraci&oacute;n por el cual el di&aacute;cono de veras cuida de las familias que se le confían.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 5;
+const COURSE = 'CTSDFM';
+const FILE_PREFIX = 'CTSDeaconFamilyMinistry';
+const NEXT_UNIT_URL = 'CTSDeaconFamilyMinistryUnit6.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 — Biblical Foundations of the Diaconate","Unit 2 — Qualifications and Character of Deacons","Unit 3 — Historical Development in Southern Baptist Life","Unit 4 — The Deacon Family Ministry Plan: Vision and Definition","Unit 5 — Organizing the Plan: Assigning Families","Unit 6 — Ongoing Care: Visitation and Prayer","Unit 7 — Discipleship and Evangelism within Assigned Families","Unit 8 — Crisis Ministry, Confidentiality, and Referral","Unit 9 — Deacon Meetings, Reporting, and Pastor Relations","Unit 10 — Sustaining the Plan: Challenges and Evaluation"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [
+{"textEn":"1. Organizing the care of souls is best described as:","textEs":"1. Organizar el cuidado de las almas se describe mejor como:","optionsEn":["a waste of effort", "cold bureaucracy", "order in the service of love", "the deacons' authority"],"optionsEs":["una pérdida de esfuerzo", "fría burocracia", "orden al servicio del amor", "la autoridad de los diáconos"],"explanationEn":"Order is the servant of love, not its enemy.","explanationEs":"El orden es el siervo del amor, no su enemigo.","correct":2},
+{"textEn":"2. Paul's rule 'Let all things be done decently and in order' comes from:","textEs":"2. La regla de Pablo 'Hágase todo decentemente y con orden' viene de:","optionsEn":["Acts 6:3", "Luke 16:10", "Exodus 18:21", "1 Corinthians 14:40"],"optionsEs":["Hechos 6:3", "Lucas 16:10", "Éxodo 18:21", "1 Corintios 14:40"],"explanationEn":"1 Corinthians 14:40 is the rule for orderly church life.","explanationEs":"1 Corintios 14:40 es la regla para la vida ordenada de la iglesia.","correct":3},
+{"textEn":"3. The basic unit assigned in the Plan is:","textEs":"3. La unidad básica asignada en el Plan es:","optionsEn":["the family or household", "the individual member", "the Sunday school class", "the neighborhood"],"optionsEs":["la familia o el hogar", "el miembro individual", "la clase de escuela dominical", "el vecindario"],"explanationEn":"The family (household) is the unit — hence 'Family Ministry.'","explanationEs":"La familia (el hogar) es la unidad — de ahí 'Ministerio Familiar.'","correct":0},
+{"textEn":"4. The starting point for deciding who will be served is:","textEs":"4. El punto de partida para decidir a quién se servirá es:","optionsEn":["the deacons' preferences", "the church's membership roll", "the offering records", "the city directory"],"optionsEs":["las preferencias de los diáconos", "el registro de miembros de la iglesia", "los registros de ofrendas", "el directorio de la ciudad"],"explanationEn":"The starting point is the church's own membership roll.","explanationEs":"El punto de partida es el propio registro de miembros de la iglesia.","correct":1},
+{"textEn":"5. Keeping a whole family under one deacon allows him to:","textEs":"5. Mantener a una familia entera bajo un diácono le permite:","optionsEn":["share the family with others", "visit them less often", "avoid the children", "know and minister to the household as a whole"],"optionsEs":["compartir la familia con otros", "visitarlos con menos frecuencia", "evitar a los niños", "conocer y ministrar al hogar como un todo"],"explanationEn":"He comes to know the household as a whole and minister to it as a family.","explanationEs":"Llega a conocer el hogar como un todo y ministrarle como familia.","correct":3},
+{"textEn":"6. Non-resident members who have moved far away are often:","textEs":"6. Los miembros no residentes que se han mudado lejos a menudo son:","optionsEn":["dropped entirely", "assigned two deacons", "kept on a separate list for contact by letter or phone", "ignored"],"optionsEs":["eliminados por completo", "asignados a dos diáconos", "mantenidos en una lista aparte para contacto por carta o teléfono", "ignorados"],"explanationEn":"They are often kept on a separate list for contact by letter or phone.","explanationEs":"A menudo se mantienen en una lista aparte para contacto por carta o teléfono.","correct":2},
+{"textEn":"7. Because the ministry must be personal, each deacon's number of families must be:","textEs":"7. Porque el ministerio debe ser personal, el número de familias de cada diácono debe ser:","optionsEn":["small and manageable", "decided by lottery", "as large as possible", "the same for every church"],"optionsEs":["pequeño y manejable", "decidido por sorteo", "lo más grande posible", "igual para cada iglesia"],"explanationEn":"Personal ministry requires small, manageable numbers.","explanationEs":"El ministerio personal requiere números pequeños y manejables.","correct":0},
+{"textEn":"8. Many churches assign each deacon about:","textEs":"8. Muchas iglesias asignan a cada diácono alrededor de:","optionsEn":["one or two families", "ten to fifteen families", "a hundred families", "fifty families"],"optionsEs":["una o dos familias", "diez a quince familias", "cien familias", "cincuenta familias"],"explanationEn":"Commonly about ten to fifteen families per deacon.","explanationEs":"Comúnmente alrededor de diez a quince familias por diácono.","correct":1},
+{"textEn":"9. To find each deacon's load, a church should:","textEs":"9. Para hallar la carga de cada diácono, una iglesia debe:","optionsEn":["divide the family units by the number of active deacons", "count only the large families", "ask each deacon to volunteer", "use the building capacity"],"optionsEs":["dividir las unidades familiares por el número de diáconos activos", "contar solo las familias grandes", "pedir a cada diácono que se ofrezca", "usar la capacidad del edificio"],"explanationEn":"Divide the number of family units by the number of active deacons.","explanationEs":"Divida el número de unidades familiares por el número de diáconos activos.","correct":0},
+{"textEn":"10. If the load per deacon comes out too high, the church should:","textEs":"10. Si la carga por diácono resulta demasiado alta, la iglesia debe:","optionsEn":["lower its standards", "stop the Plan", "drop some families", "enlist and train more deacons"],"optionsEs":["bajar sus normas", "detener el Plan", "eliminar algunas familias", "reclutar y entrenar a más diáconos"],"explanationEn":"Enlist and train more proven deacons rather than overload the few.","explanationEs":"Reclutar y entrenar a más diáconos probados en lugar de sobrecargar a los pocos.","correct":3},
+{"textEn":"11. The biblical model of dividing people into manageable groups under appointed men is found in:","textEs":"11. El modelo bíblico de dividir al pueblo en grupos manejables bajo varones nombrados se halla en:","optionsEn":["the book of Ruth", "the Sermon on the Mount", "Exodus 18, Jethro's counsel to Moses", "the parable of the sower"],"optionsEs":["el libro de Rut", "el Sermón del Monte", "Éxodo 18, el consejo de Jetro a Moisés", "la parábola del sembrador"],"explanationEn":"Exodus 18 — Jethro counsels Moses to appoint men over groups.","explanationEs":"Éxodo 18 — Jetro aconseja a Moisés nombrar varones sobre grupos.","correct":2},
+{"textEn":"12. In Exodus 18, the appointed men judged small matters themselves and brought to Moses:","textEs":"12. En Éxodo 18, los varones nombrados juzgaban los asuntos pequeños ellos mismos y traían a Moisés:","optionsEn":["the offerings", "the great matters", "the census", "new laws"],"optionsEs":["las ofrendas", "los asuntos grandes", "el censo", "nuevas leyes"],"explanationEn":"They brought the great matters to Moses, handling the small ones themselves.","explanationEs":"Traían los asuntos grandes a Moisés, manejando ellos mismos los pequeños.","correct":1},
+{"textEn":"13. Assigning families by last name is the:","textEs":"13. Asignar familias por apellido es el método:","optionsEn":["group method", "geographical method", "alphabetical method", "acquaintance method"],"optionsEs":["por grupos", "geográfico", "alfabético", "por conocimiento"],"explanationEn":"Dividing the roll by family name is the alphabetical method.","explanationEs":"Dividir el registro por apellido es el método alfabético.","correct":2},
+{"textEn":"14. The method often most practical for the work of visitation is:","textEs":"14. El método a menudo más práctico para la obra de visitación es:","optionsEn":["the alphabetical method", "random assignment", "assigning by age", "the geographical method (by area)"],"optionsEs":["el método alfabético", "la asignación al azar", "asignar por edad", "el método geográfico (por área)"],"explanationEn":"Geographical grouping keeps each deacon's families near one another.","explanationEs":"La agrupación geográfica mantiene cercanas las familias de cada diácono.","correct":3},
+{"textEn":"15. Assigning families by Sunday school class is an example of assigning:","textEs":"15. Asignar familias por clase de escuela dominical es un ejemplo de asignar:","optionsEn":["by existing groups", "geographically", "alphabetically", "by wealth"],"optionsEs":["por grupos existentes", "geográficamente", "alfabéticamente", "por riqueza"],"explanationEn":"It builds on relationships in existing groups.","explanationEs":"Edifica sobre relaciones en grupos existentes.","correct":0},
+{"textEn":"16. The best method of assignment is the one that:","textEs":"16. El mejor método de asignación es el que:","optionsEn":["looks neatest on paper", "actually lets this deacon reach these families", "never changes", "is easiest for the office"],"optionsEs":["se ve más pulcro en el papel", "de veras permite a este diácono alcanzar a estas familias", "nunca cambia", "es más fácil para la oficina"],"explanationEn":"The aim is real reach, not neatness on paper.","explanationEs":"El objetivo es el alcance real, no la pulcritud en el papel.","correct":1},
+{"textEn":"17. Assignments must be written down because:","textEs":"17. Las asignaciones deben escribirse porque:","optionsEn":["an assignment kept only in memory will soon be forgotten", "the law requires it", "it impresses visitors", "deacons cannot read"],"optionsEs":["una asignación guardada solo en la memoria pronto será olvidada", "la ley lo exige", "impresiona a los visitantes", "los diáconos no saben leer"],"explanationEn":"An assignment that lives only in memory will be forgotten.","explanationEs":"Una asignación que vive solo en la memoria será olvidada.","correct":0},
+{"textEn":"18. Luke 16:10, 'faithful in what is least,' is applied in this unit to:","textEs":"18. Lucas 16:10, 'fiel en lo muy poco', se aplica en esta unidad a:","optionsEn":["preaching", "leading worship", "collecting the offering", "keeping careful, accurate records"],"optionsEs":["la predicación", "dirigir la adoración", "recoger la ofrenda", "llevar registros cuidadosos y exactos"],"explanationEn":"Keeping accurate records is faithfulness in a small thing.","explanationEs":"Llevar registros exactos es fidelidad en una cosa pequeña.","correct":3},
+{"textEn":"19. Records must be kept current because:","textEs":"19. Los registros deben mantenerse al día porque:","optionsEn":["the deacons enjoy paperwork", "the church is always changing — members arrive, move, and die", "the pastor demands it", "the list is printed yearly"],"optionsEs":["a los diáconos les gusta el papeleo", "la iglesia siempre está cambiando — los miembros llegan, se mudan y mueren", "el pastor lo exige", "la lista se imprime cada año"],"explanationEn":"A changing church needs an updated list, or families slip away.","explanationEs":"Una iglesia que cambia necesita una lista actualizada, o las familias se pierden.","correct":1},
+{"textEn":"20. The deacon's first contact with a family should be:","textEs":"20. El primer contacto del diácono con una familia debe ser:","optionsEn":["a request for money", "a correction", "a get-acquainted visit, to begin the relationship before any crisis", "a formal interview"],"optionsEs":["una petición de dinero", "una corrección", "una visita para conocerse, para comenzar la relación antes de cualquier crisis", "una entrevista formal"],"explanationEn":"The first contact is to get acquainted and begin the relationship.","explanationEs":"El primer contacto es para conocerse y comenzar la relación.","correct":2}
+];
+const kwQuestions = [
+{"textEn":"21. Why is organizing the Plan not cold or mechanical, but a servant of love?","textEs":"21. ¿Por qué organizar el Plan no es frío ni mecánico, sino un siervo del amor?","kw_en":["organizing","mechanical","servant","order","intentions","overlooked","confusion","complete"],"kw_es":["organizar","siervo","orden","intenciones","organizac","familia","confusi","completo"],"modelEn":"Organizing the Plan is not cold or mechanical but a servant of love, because order is the channel through which the love of the church actually reaches every home. Without organization, good intentions scatter and many people are quietly missed; with it, no family is overlooked. Paul taught that all things should be done decently and in order, for God is not the author of confusion. Order does not freeze love; it carries love to every door, leaving none dry. The organizing is simply love made orderly and complete.","modelEs":"Organizar el Plan no es frío ni mecánico sino un siervo del amor, porque el orden es el canal por el cual el amor de la iglesia de veras llega a cada hogar. Sin organización, las buenas intenciones se dispersan y muchas personas son pasadas por alto calladamente; con ella, ninguna familia es olvidada. Pablo enseñó que todo debe hacerse decentemente y con orden, porque Dios no es autor de confusión. El orden no congela el amor; lo lleva a cada puerta, sin dejar ninguna seca. El organizar es sencillamente amor hecho ordenado y completo."},
+{"textEn":"22. What is the basic unit assigned in the Plan, and why assign the whole family together?","textEs":"22. ¿Cuál es la unidad básica asignada en el Plan, y por qué asignar la familia entera junta?","kw_en":["family","household","individual","deacon","married","whole","needs","burdens"],"kw_es":["familia","hogar","individuo","matrimonio","entregados","necesidades","cargas","dispersos"],"modelEn":"The basic unit assigned in the Plan is the family, the household, not merely the individual; this is why it is called Family Ministry. A married couple and their children are given whole to one deacon, rather than being split among several. Assigning the whole family together lets the deacon know the household as a whole, with its joys, strains, and needs, and minister to it as a family rather than as scattered individuals. The home is where most of life's burdens are carried, so it is the home that the deacon is given to care for.","modelEs":"La unidad básica asignada en el Plan es la familia, el hogar, no meramente el individuo; por esto se llama Ministerio Familiar. Un matrimonio y sus hijos son entregados enteros a un diácono, en lugar de ser divididos entre varios. Asignar la familia entera junta permite al diácono conocer el hogar como un todo, con sus gozos, tensiones y necesidades, y ministrarle como familia en lugar de como individuos dispersos. El hogar es donde se llevan la mayoría de las cargas de la vida, así que es el hogar lo que se le da al diácono para cuidar."},
+{"textEn":"23. How does a church decide how many families to give each deacon?","textEs":"23. ¿Cómo decide una iglesia cuántas familias dar a cada diácono?","kw_en":["families","personal","numbers","divides","active","deacons","overload","enlist"],"kw_es":["familias","personal","carga","convicc","divide","activos","reclutar","sobrecargar"],"modelEn":"A church decides how many families to give each deacon by holding to the conviction that the ministry must be personal, which means the numbers must be small. A man cannot truly know two hundred families, but he can know a few, so the load is kept small on purpose, commonly around ten to fifteen families. The church divides the number of family units by the number of active deacons to find each man's load. If that number is too high for real ministry, the church should enlist and train more deacons rather than overload the few.","modelEs":"Una iglesia decide cuántas familias dar a cada diácono sosteniendo la convicción de que el ministerio debe ser personal, lo que significa que los números deben ser pequeños. Un hombre no puede verdaderamente conocer doscientas familias, pero puede conocer unas pocas, así que la carga se mantiene pequeña a propósito, comúnmente alrededor de diez a quince familias. La iglesia divide el número de unidades familiares por el número de diáconos activos para hallar la carga de cada hombre. Si ese número es demasiado alto para un ministerio real, la iglesia debe reclutar y entrenar a más diáconos en lugar de sobrecargar a los pocos."},
+{"textEn":"24. How does Exodus 18 (Jethro's counsel) model the assigning of families?","textEs":"24. ¿Cómo modela Éxodo 18 (el consejo de Jetro) el asignar de familias?","kw_en":["exodus","jethro","moses","burden","rulers","matters","manageable","appointed"],"kw_es":["jetro","carga","varones","jefes","asuntos","manejables","nombrados","pueblo"],"modelEn":"Exodus 18 models the assigning of families through Jethro's counsel to Moses. When the burden on Moses was too great, Jethro did not tell him to work harder, but to choose able men who feared God and place them over the people as rulers of thousands, hundreds, fifties, and tens. These men judged the small matters themselves and brought only the great matters to Moses, so the burden was shared. This is exactly the shape of the Plan: the people are divided into manageable groups under appointed men, who handle ordinary care and bring deeper needs to the pastor.","modelEs":"Éxodo 18 modela el asignar de familias por medio del consejo de Jetro a Moisés. Cuando la carga sobre Moisés era demasiado grande, Jetro no le dijo que trabajara más, sino que escogiera varones de virtud que temieran a Dios y los pusiera sobre el pueblo como jefes de mil, de cien, de cincuenta y de diez. Estos varones juzgaban los asuntos pequeños ellos mismos y traían solo los asuntos grandes a Moisés, de modo que la carga fuera compartida. Esta es exactamente la forma del Plan: el pueblo se divide en grupos manejables bajo varones nombrados, que manejan el cuidado ordinario y traen las necesidades más profundas al pastor."},
+{"textEn":"25. Describe the main methods a church may use to assign families.","textEs":"25. Describa los principales métodos que una iglesia puede usar para asignar familias.","kw_en":["methods","alphabetical","geographical","families","visitation","existing","acquaintance","blend"],"kw_es":["asignar","alfab","geogr","familias","visitaci","existentes","conocimiento","combinan"],"modelEn":"A church may use several good methods to assign families. The alphabetical method divides the roll by family name; it is simple and even but ignores where people live. The geographical method groups families by area so that each deacon's families live near him; this is often the most practical for visitation. The group method assigns by existing classes, such as Sunday school, building on relationships already formed. The acquaintance method gives families to a deacon who already knows them. Many churches blend these, and the best method is the one that actually lets this deacon reach these families.","modelEs":"Una iglesia puede usar varios buenos métodos para asignar familias. El método alfabético divide el registro por apellido; es sencillo y parejo pero ignora dónde vive la gente. El método geográfico agrupa a las familias por área de modo que las familias de cada diácono vivan cerca de él; este es a menudo el más práctico para la visitación. El método por grupos asigna por clases existentes, como la escuela dominical, edificando sobre relaciones ya formadas. El método por conocimiento da familias a un diácono que ya las conoce. Muchas iglesias combinan estos, y el mejor método es el que de veras permite a este diácono alcanzar a estas familias."},
+{"textEn":"26. Why must the assignments be written down and kept current?","textEs":"26. ¿Por qué deben las asignaciones escribirse y mantenerse al día?","kw_en":["assignments","memory","forgotten","records","current","members","updated","prevent"],"kw_es":["asignaciones","memoria","olvidada","registros","actualiza","miembros","cambiando","evitar"],"modelEn":"The assignments must be written down because an assignment that lives only in someone's memory will soon be forgotten, and the family will be lost. The church office keeps a master list of every family and its deacon, and each deacon keeps his own records with names, addresses, and needs. The records must also be kept current, for the church is always changing: new members arrive and must be assigned, families move, marry, and die. If the list is not updated, a family will slip through the cracks, the very thing the Plan exists to prevent. So someone must be charged with keeping it current.","modelEs":"Las asignaciones deben escribirse porque una asignación que vive solo en la memoria de alguien pronto será olvidada, y la familia se perderá. La oficina de la iglesia guarda una lista maestra de cada familia y su diácono, y cada diácono guarda sus propios registros con nombres, direcciones y necesidades. Los registros también deben mantenerse al día, porque la iglesia siempre está cambiando: llegan miembros nuevos y deben ser asignados, las familias se mudan, se casan y mueren. Si la lista no se actualiza, una familia se perderá por las grietas, precisamente lo que el Plan existe para evitar. Así que alguien debe ser encargado de mantenerla al día."},
+{"textEn":"27. How does Luke 16:10 apply to keeping records?","textEs":"27. ¿Cómo se aplica Lucas 16:10 a llevar los registros?","kw_en":["faithful","least","records","accurate","paperwork","bureaucracy","orderly","forgotten"],"kw_es":["fiel","registros","exacta","papeleo","burocracia","ordenado","fidelidad","olvidado"],"modelEn":"Luke 16:10 says that he who is faithful in what is least is faithful also in much. This applies directly to the keeping of records. Maintaining an accurate list of families and their needs is a small thing, easily despised as mere paperwork, yet it is faithfulness in the least for the sake of a great thing, the care of souls. Keeping careful records is not cold bureaucracy; it is love made orderly. The one who keeps the list faithfully guards the Plan's great promise that no one will be forgotten.","modelEs":"Lucas 16:10 dice que el que es fiel en lo muy poco, también en lo más es fiel. Esto se aplica directamente a llevar los registros. Mantener una lista exacta de las familias y sus necesidades es una cosa pequeña, fácilmente despreciada como mero papeleo, pero es fidelidad en lo muy poco por causa de una cosa grande, el cuidado de las almas. Llevar registros cuidadosos no es fría burocracia; es amor hecho ordenado. El que guarda la lista fielmente guarda la gran promesa del Plan de que nadie será olvidado."},
+{"textEn":"28. How is the Plan launched and the families introduced to their deacon?","textEs":"28. ¿Cómo se lanza el Plan y se presentan las familias a su diácono?","kw_en":["launched","pastor","explains","deacon","families","letter","acquainted","relationship"],"kw_es":["lanza","pastor","explica","familias","carta","presentarse","relaci","conocerse"],"modelEn":"The Plan is launched from the front. The pastor first explains the Plan to the whole church, so the people understand and welcome it. Then each deacon is told which families are his, and each family is told which deacon is theirs, by a letter, a card, or a personal word, so every member can say, that man is mine to call. Then the deacon makes the first move with a get-acquainted visit or call, not to solve a problem but to introduce himself, learn about the family, and begin the relationship warmly, before any crisis comes.","modelEs":"El Plan se lanza desde el frente. El pastor primero explica el Plan a toda la iglesia, para que el pueblo lo entienda y lo reciba. Luego a cada diácono se le dice cuáles familias son suyas, y a cada familia se le dice cuál diácono es el suyo, por una carta, una tarjeta o una palabra personal, para que cada miembro pueda decir, ese hombre es mío para llamar. Luego el diácono da el primer paso con una visita o llamada para conocerse, no para resolver un problema sino para presentarse, aprender acerca de la familia, y comenzar la relación cálidamente, antes de que venga cualquier crisis."},
+{"textEn":"29. Why should a church not be paralyzed seeking the perfect system?","textEs":"29. ¿Por qué no debería una iglesia quedar paralizada buscando el sistema perfecto?","kw_en":["paralyzed","perfect","flawless","simple","division","adjust","redrawn","begin"],"kw_es":["paralizada","perfecto","defectos","divisi","sencilla","ajustarla","trazarse","comenzar"],"modelEn":"A church should not be paralyzed seeking the perfect system, because waiting forever for a flawless plan only keeps the ministry from ever beginning. It is far better to start with a simple, sensible division of the families and adjust it over time as the church learns. The lines can always be redrawn later; what matters is that they be drawn at all, so that the deacons can begin to care for their families now. A good plan begun today will do more good than a perfect plan that never starts.","modelEs":"Una iglesia no debería quedar paralizada buscando el sistema perfecto, porque esperar para siempre un plan sin defectos solo impide que el ministerio comience. Es mucho mejor empezar con una división sencilla y sensata de las familias y ajustarla con el tiempo conforme la iglesia aprende. Las líneas siempre pueden volver a trazarse después; lo que importa es que se tracen, para que los diáconos puedan comenzar a cuidar de sus familias ahora. Un buen plan comenzado hoy hará más bien que un plan perfecto que nunca empieza."},
+{"textEn":"30. Summarize the five questions a church must answer to organize the Plan.","textEs":"30. Resuma las cinco preguntas que una iglesia debe responder para organizar el Plan.","kw_en":["questions","served","deacon","method","records","introduced","manageable","family"],"kw_es":["preguntas","servir","registro","manejable","familiares","actualizados","presentan","cuidado"],"modelEn":"To organize the Plan a church must answer five questions. First, who is to be served: a complete roll of the family units, kept whole. Second, how many to each deacon: a small, manageable number. Third, by what method: alphabetical, geographical, by group, or by acquaintance, whichever fits. Fourth, how recorded and kept current: accurate records faithfully updated. Fifth, how introduced: a warm launch in which every family meets its deacon. Together these answers make the Plan ready to work, so that order becomes the servant of love and the care reaches every soul.","modelEs":"Para organizar el Plan una iglesia debe responder cinco preguntas. Primera, a quién se ha de servir: un registro completo de las unidades familiares, mantenidas enteras. Segunda, cuántas a cada diácono: un número pequeño y manejable. Tercera, por cuál método: alfabético, geográfico, por grupo, o por conocimiento, el que se ajuste. Cuarta, cómo se registra y se mantiene al día: registros exactos fielmente actualizados. Quinta, cómo se presentan: un lanzamiento cálido en el que cada familia conoce a su diácono. Juntas estas respuestas hacen el Plan listo para obrar, de modo que el orden llega a ser el siervo del amor y el cuidado alcanza cada alma."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'cert';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSDeaconFamilyMinistryReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

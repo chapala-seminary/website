@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS The Gospel of John &mdash; Unit 1: The Word Made Flesh</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form label { font-weight:bold; font-size:0.9rem; display:block; margin-top:8px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 2 &rarr;</span><span class="lang-es">Unidad 2 &rarr;</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">&#128214; The Gospel of John &mdash; Unit 1: The Word Made Flesh</span><span class="lang-es">&#128214; El Evangelio de Juan &mdash; Unidad 1: El Verbo hecho carne</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"These are written that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name." &mdash; John 20:31 (NKJV)</span><span class="lang-es">&#9889; "Estas se han escrito para que cre&aacute;is que Jes&uacute;s es el Cristo, el Hijo de Dios, y para que creyendo, teng&aacute;is vida en su nombre." &mdash; Juan 20:31 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h3><span class="lang-en">Register to Begin</span><span class="lang-es">Reg&iacute;strese para comenzar</span></h3>
+    <p style="font-size:0.9rem;"><span class="lang-en">Your name and track are saved on this device and carry across every unit and every CTS course. Register once, here.</span><span class="lang-es">Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y en cada curso de CTS. Reg&iacute;strese una vez, aqu&iacute;.</span></p>
+    <label class="lang-en">Full name</label><label class="lang-es">Nombre completo</label>
+    <input type="text" id="regName" placeholder="..." aria-label="...">
+    <label class="lang-en">Email</label><label class="lang-es">Correo electr&oacute;nico</label>
+    <input type="email" id="regEmail" placeholder="..." aria-label="...">
+    <label class="lang-en">Track</label><label class="lang-es">Trayecto</label>
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate / Certificado</option>
+        <option value="mdiv">M.Div.</option>
+        <option value="thm">Th.M.</option>
+    </select>
+    <button id="regBtn" class="nav-btn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top:8px;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h3>Introduction &mdash; In the Beginning Was the Word</h3>
+<p>Every other Gospel begins with a manger or a genealogy. John begins before the world began. While Matthew traces Jesus back to Abraham and Luke back to Adam, John reaches past creation itself and opens his Gospel in eternity: <em>"In the beginning was the Word"</em> (John 1:1). He is deliberately echoing the first words of Genesis &mdash; "In the beginning God" &mdash; and he is telling you, before he tells you anything else, who this Jesus really is. This course will walk through John's seven signs, his seven great "I AM" sayings, and the parade of witnesses he calls to the stand to prove one thing: that Jesus is the Christ, the Son of God, and that believing, you may have life. But it all rests on this first claim. Get the Prologue wrong and you will get the whole Gospel wrong. Get it right, and everything else opens.</p>
+
+<h3>I. The Word Was God</h3>
+<p>Read the verse slowly, because John packs three eternities into one sentence. <em>"In the beginning was the Word, and the Word was with God, and the Word was God"</em> (John 1:1). The Word already <em>was</em> when the beginning began &mdash; He did not come into being; He simply was. The Word was <em>with</em> God &mdash; face to face, a distinct Person, not merely an idea in God's mind. And the Word <em>was</em> God &mdash; not a god, not a junior deity, not the first and finest of God's creatures, but God Himself. Some have tried to soften that last clause into "the Word was a god." But John will not allow it. The same Word who was <em>with</em> God <em>was</em> God; full deity and distinct Person, both held in a single breath. This is the seed of the doctrine of the Trinity, planted in the first verse of the book.</p>
+<p>Why does John, who knew Jesus, who leaned on His chest at supper, who watched Him weep and bleed, begin so high? Because he had come to know that the carpenter from Nazareth was the eternal God. He is not building up to that conclusion at the end of his Gospel; he announces it in the first line and spends twenty-one chapters showing it to be true.</p>
+<div class="scripture">"In the beginning was the Word, and the Word was with God, and the Word was God." &mdash; John 1:1 (NKJV)</div>
+
+<h3>II. All Things Were Made Through Him</h3>
+<p>If the Word is God, then look what follows: <em>"All things were made through Him, and without Him nothing was made that was made"</em> (John 1:3). The One who would later be too tired to stay awake in a boat is the One who made the sea He slept upon. The hands that would be pierced with nails are the hands that flung the stars into the dark. There is not a single created thing &mdash; not an atom, not an angel, not a galaxy the telescopes are only now beginning to find &mdash; that He did not make. We will meet this divine-and-human pattern again and again in this Gospel, for it runs through the whole of who Christ is. As a man He grew weary, but as God He upholds all things by the word of His power. As a man He asked for a drink at a well, but as God He is the spring from which every river was poured. As a man He died, but as God He could not be held by death. The Maker entered His own making.</p>
+
+<h3>III. And the Word Became Flesh</h3>
+<p>Now comes the verse that should stop your heart. <em>"And the Word became flesh and dwelt among us"</em> (John 1:14). The eternal God, who made all things, did not merely visit His world or send a message into it. He <em>became flesh</em>. The word John uses for "dwelt" means He pitched His tent, He tabernacled among us &mdash; the same God whose glory once filled a tent in the wilderness now wrapped that glory in skin and bone and lived on the same dust He had made. Think of what that means. The infinite became an infant. The One who holds the oceans in His hand was once too small to lift His own head. The Word who spoke creation into being learned, as a boy, to speak His first words at His mother's knee.</p>
+<p>Let me put it to you the way it has always struck me, brother. As a man He hungered in the wilderness, but as God He is the bread of life. As a man He slept in the storm, but as God He walked out upon the waves. As a man He wept at a grave, but as God He is the resurrection and the life. As a man He bled and died, but as God He came forth on the third day with the keys of death in His hand. Fully God and fully man &mdash; not half of each, not God in a costume of flesh nor a man promoted to God, but the whole of God and the whole of a man, joined forever in one Person. This is the mystery the whole Gospel of John circles around, and we will never get to the bottom of it. We are not meant to. We are meant to worship.</p>
+<div class="pull-quote">The infinite became an infant. The One who holds the oceans in His hand was once too small to lift His own head.</div>
+
+<h3>IV. There Was a Man Sent From God: The First Witness</h3>
+<p>Into the middle of this soaring hymn about the eternal Word, John drops a single human name. <em>"There was a man sent from God, whose name was John. This man came for a witness, to bear witness of the Light... He was not that Light, but was sent to bear witness of that Light"</em> (John 1:6&ndash;8). Here is the first witness in a Gospel full of witnesses, and notice how carefully the writer guards him. John the Baptist was great &mdash; the greatest born of women, Jesus said &mdash; and crowds streamed into the wilderness to hear him. It would have been the easiest thing in the world for him to keep them. Instead he kept pointing past himself: <em>"He who comes after me is preferred before me, for He was before me"</em> (John 1:15). Think of that &mdash; <em>before</em> me, though He came <em>after</em> me, because He was from the beginning.</p>
+<p>That is what a true witness does. He does not draw the eye to himself; he draws it to the Light. A finger that points at the moon is a poor finger if people study the finger and never look up. John the Baptist understood this so deeply that when his own followers fretted that the crowds were leaving him for Jesus, he answered with the freest words a leader ever spoke: "He must increase, but I must decrease." Every witness this Gospel calls &mdash; and there are many &mdash; serves that one purpose: to point you away from themselves and up to the Light.</p>
+
+<h3>V. He Came to His Own &mdash; But As Many as Received Him</h3>
+<p>Then comes the heartbreak of the Prologue, in one short line: <em>"He came to His own, and His own did not receive Him"</em> (John 1:11). The Light came into the world He had made, and the world He had made did not know Him. The Maker walked among His creatures and they turned away. There is no sadder sentence in the New Testament. But it does not end there, and the next verse is the hinge on which your whole life turns: <em>"But as many as received Him, to them He gave the right to become children of God, to those who believe in His name"</em> (John 1:12). Did you hear the door swing open? As many as received Him. Not as many as deserved Him, not as many as earned it, not the worthy or the religious or the clean &mdash; as many as <em>received</em> Him. And these, John says, were born "not of blood, nor of the will of the flesh, nor of the will of man, but of God" (John 1:13). A second birth, a birth from above &mdash; which is exactly where Jesus will take Nicodemus in the very next chapter, and where we will go in Unit 2.</p>
+
+<h3>VI. And We Beheld His Glory: Full of Grace and Truth</h3>
+<p>John ends the Prologue as a man who saw it with his own eyes: <em>"And we beheld His glory, the glory as of the only begotten of the Father, full of grace and truth"</em> (John 1:14). We beheld it. This is not theory to John; he was there. He watched the glory of God walk through Galilee in a man's body, full of grace and full of truth at once &mdash; never grace at the expense of truth, never truth without grace. And then the final word: <em>"No one has seen God at any time. The only begotten Son, who is in the bosom of the Father, He has declared Him"</em> (John 1:18). The word "declared" is the word from which we get "exegesis" &mdash; Jesus is the explanation of God. If you want to know what God is like, do not guess, and do not only look at the sky. Look at Jesus. He has explained the Father to us.</p>
+<p>So we begin where John begins, brother &mdash; not at a manger but in eternity, with the Word who was God, who made all things, who became flesh and tabernacled among us, full of grace and truth. Hold that, and every sign and every "I AM" and every witness still to come will land with its full weight. He is the Christ, the Son of God. Believe, and have life in His name.</p>
+
+</div>
+<div class="lang-es">
+
+<h3>Introducci&oacute;n &mdash; En el principio era el Verbo</h3>
+<p>Todos los dem&aacute;s Evangelios comienzan con un pesebre o una genealog&iacute;a. Juan comienza antes de que el mundo comenzara. Mientras Mateo rastrea a Jes&uacute;s hasta Abraham y Lucas hasta Ad&aacute;n, Juan se remonta m&aacute;s all&aacute; de la creaci&oacute;n misma y abre su Evangelio en la eternidad: &#9889; <em>"En el principio era el Verbo"</em> (Juan 1:1). Hace eco deliberado de las primeras palabras de G&eacute;nesis &mdash; "En el principio cre&oacute; Dios" &mdash; y le dice, antes de decirle cualquier otra cosa, qui&eacute;n es realmente este Jes&uacute;s. Este curso recorrer&aacute; las siete se&ntilde;ales de Juan, sus siete grandes declaraciones "YO SOY," y el desfile de testigos que llama al estrado para probar una sola cosa: que Jes&uacute;s es el Cristo, el Hijo de Dios, y que creyendo, usted tenga vida. Pero todo descansa sobre esta primera afirmaci&oacute;n. Si se equivoca en el Pr&oacute;logo, se equivocar&aacute; en todo el Evangelio. Ac&iacute;ertelo, y todo lo dem&aacute;s se abre.</p>
+
+<h3>I. El Verbo era Dios</h3>
+<p>Lea el vers&iacute;culo despacio, porque Juan encierra tres eternidades en una sola frase. &#9889; <em>"En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios"</em> (Juan 1:1). El Verbo ya <em>era</em> cuando el principio comenz&oacute; &mdash; no lleg&oacute; a existir; simplemente era. El Verbo era <em>con</em> Dios &mdash; cara a cara, una Persona distinta, no meramente una idea en la mente de Dios. Y el Verbo <em>era</em> Dios &mdash; no un dios, no una deidad menor, no la primera y mejor de las criaturas de Dios, sino Dios mismo. Algunos han intentado suavizar esa &uacute;ltima frase a "el Verbo era un dios." Pero Juan no lo permite. El mismo Verbo que era <em>con</em> Dios <em>era</em> Dios; plena deidad y Persona distinta, ambas sostenidas en un solo aliento. Esta es la semilla de la doctrina de la Trinidad, plantada en el primer vers&iacute;culo del libro.</p>
+<p>&iquest;Por qu&eacute; Juan, que conoci&oacute; a Jes&uacute;s, que se recost&oacute; sobre su pecho en la cena, que lo vio llorar y sangrar, comienza tan alto? Porque hab&iacute;a llegado a saber que el carpintero de Nazaret era el Dios eterno. No est&aacute; construyendo hacia esa conclusi&oacute;n al final de su Evangelio; la anuncia en la primera l&iacute;nea y pasa veinti&uacute;n cap&iacute;tulos mostrando que es verdad.</p>
+<div class="scripture">&#9889; "En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios." &mdash; Juan 1:1 (RVG)</div>
+
+<h3>II. Todas las cosas fueron hechas por &Eacute;l</h3>
+<p>Si el Verbo es Dios, entonces vea lo que sigue: &#9889; <em>"Todas las cosas por &eacute;l fueron hechas, y sin &eacute;l nada de lo que ha sido hecho, fue hecho"</em> (Juan 1:3). Aquel que m&aacute;s tarde estar&iacute;a demasiado cansado para permanecer despierto en una barca es Aquel que hizo el mar sobre el que durmi&oacute;. Las manos que ser&iacute;an traspasadas con clavos son las manos que lanzaron las estrellas a la oscuridad. No hay una sola cosa creada &mdash; ni un &aacute;tomo, ni un &aacute;ngel, ni una galaxia que los telescopios apenas ahora empiezan a hallar &mdash; que &Eacute;l no haya hecho. Encontraremos este patr&oacute;n divino-y-humano una y otra vez en este Evangelio, pues recorre todo lo que Cristo es. Como hombre se cans&oacute;, pero como Dios sostiene todas las cosas con la palabra de su poder. Como hombre pidi&oacute; de beber junto a un pozo, pero como Dios es el manantial del que se vert&iacute;a cada r&iacute;o. Como hombre muri&oacute;, pero como Dios la muerte no pudo retenerlo. El Hacedor entr&oacute; en lo que hab&iacute;a hecho.</p>
+
+<h3>III. Y el Verbo fue hecho carne</h3>
+<p>Ahora viene el vers&iacute;culo que deber&iacute;a detenerle el coraz&oacute;n. &#9889; <em>"Y el Verbo fue hecho carne, y habit&oacute; entre nosotros"</em> (Juan 1:14). El Dios eterno, que hizo todas las cosas, no meramente visit&oacute; su mundo ni envi&oacute; un mensaje a &eacute;l. &Eacute;l <em>fue hecho carne</em>. La palabra que Juan usa para "habit&oacute;" significa que plant&oacute; su tienda, que tabernacul&oacute; entre nosotros &mdash; el mismo Dios cuya gloria una vez llen&oacute; una tienda en el desierto ahora envolvi&oacute; esa gloria en piel y hueso y vivi&oacute; sobre el mismo polvo que hab&iacute;a hecho. Piense en lo que eso significa. El infinito se hizo infante. Aquel que sostiene los oc&eacute;anos en su mano fue una vez demasiado peque&ntilde;o para levantar su propia cabeza. El Verbo que habl&oacute; la creaci&oacute;n a la existencia aprendi&oacute;, de ni&ntilde;o, a decir sus primeras palabras en el regazo de su madre.</p>
+<p>Perm&iacute;tame plante&aacute;rselo como siempre me ha impactado, hermano. Como hombre tuvo hambre en el desierto, pero como Dios es el pan de vida. Como hombre durmi&oacute; en la tormenta, pero como Dios camin&oacute; sobre las olas. Como hombre llor&oacute; ante una tumba, pero como Dios es la resurrecci&oacute;n y la vida. Como hombre sangr&oacute; y muri&oacute;, pero como Dios sali&oacute; al tercer d&iacute;a con las llaves de la muerte en su mano. Plenamente Dios y plenamente hombre &mdash; no mitad de cada uno, no Dios en un disfraz de carne ni un hombre ascendido a Dios, sino todo Dios y todo un hombre, unidos para siempre en una sola Persona. Este es el misterio en torno al cual gira todo el Evangelio de Juan, y nunca llegaremos a su fondo. No estamos hechos para ello. Estamos hechos para adorar.</p>
+<div class="pull-quote">El infinito se hizo infante. Aquel que sostiene los oc&eacute;anos en su mano fue una vez demasiado peque&ntilde;o para levantar su propia cabeza.</div>
+
+<h3>IV. Hubo un hombre enviado de Dios: el primer testigo</h3>
+<p>En medio de este himno sublime sobre el Verbo eterno, Juan deja caer un solo nombre humano. &#9889; <em>"Hubo un hombre enviado de Dios, el cual se llamaba Juan. &Eacute;ste vino por testimonio, para que diese testimonio de la Luz... No era &eacute;l la Luz, sino para que diese testimonio de la Luz"</em> (Juan 1:6&ndash;8). Aqu&iacute; est&aacute; el primer testigo en un Evangelio lleno de testigos, y observe con cu&aacute;nto cuidado el escritor lo guarda. Juan el Bautista era grande &mdash; el mayor nacido de mujer, dijo Jes&uacute;s &mdash; y las multitudes fluyeron al desierto para o&iacute;rlo. Le habr&iacute;a sido lo m&aacute;s f&aacute;cil del mundo conservarlas. En cambio, sigui&oacute; se&ntilde;alando m&aacute;s all&aacute; de s&iacute; mismo: &#9889; <em>"El que viene despu&eacute;s de m&iacute;, es antes de m&iacute;; porque era primero que yo"</em> (Juan 1:15). Piense en eso &mdash; <em>antes</em> de m&iacute;, aunque vino <em>despu&eacute;s</em> de m&iacute;, porque era desde el principio.</p>
+<p>Eso es lo que hace un verdadero testigo. No atrae la mirada hacia s&iacute; mismo; la atrae hacia la Luz. Un dedo que se&ntilde;ala la luna es un pobre dedo si la gente estudia el dedo y nunca mira hacia arriba. Juan el Bautista entendi&oacute; esto tan profundamente que cuando sus propios seguidores se inquietaron de que las multitudes lo dejaban por Jes&uacute;s, respondi&oacute; con las palabras m&aacute;s libres que un l&iacute;der haya pronunciado jam&aacute;s: "A &eacute;l conviene crecer, mas a m&iacute; menguar." Cada testigo que este Evangelio llama &mdash; y son muchos &mdash; sirve a ese &uacute;nico prop&oacute;sito: se&ntilde;alarle lejos de ellos mismos y arriba a la Luz.</p>
+
+<h3>V. A lo suyo vino &mdash; mas a todos los que le recibieron</h3>
+<p>Luego viene el quebranto del Pr&oacute;logo, en una sola l&iacute;nea corta: &#9889; <em>"A lo suyo vino, y los suyos no le recibieron"</em> (Juan 1:11). La Luz vino al mundo que hab&iacute;a hecho, y el mundo que hab&iacute;a hecho no la conoci&oacute;. El Hacedor camin&oacute; entre sus criaturas y ellas le volvieron la espalda. No hay frase m&aacute;s triste en el Nuevo Testamento. Pero no termina ah&iacute;, y el siguiente vers&iacute;culo es el gozne sobre el que gira toda su vida: &#9889; <em>"Mas a todos los que le recibieron, a los que creen en su nombre, les dio potestad de ser hechos hijos de Dios"</em> (Juan 1:12). &iquest;Oy&oacute; abrirse la puerta? A todos los que le recibieron. No a los que lo merec&iacute;an, no a los que lo ganaron, no a los dignos ni a los religiosos ni a los limpios &mdash; a todos los que le <em>recibieron</em>. Y &eacute;stos, dice Juan, fueron engendrados "no de sangre, ni de voluntad de carne, ni de voluntad de var&oacute;n, sino de Dios" (Juan 1:13). Un segundo nacimiento, un nacimiento de lo alto &mdash; que es exactamente adonde Jes&uacute;s llevar&aacute; a Nicodemo en el cap&iacute;tulo siguiente, y adonde iremos en la Unidad 2.</p>
+
+<h3>VI. Y vimos su gloria: lleno de gracia y de verdad</h3>
+<p>Juan termina el Pr&oacute;logo como un hombre que lo vio con sus propios ojos: &#9889; <em>"Y vimos su gloria, gloria como del unig&eacute;nito del Padre, lleno de gracia y de verdad"</em> (Juan 1:14). Vimos su gloria. Esto no es teor&iacute;a para Juan; &eacute;l estuvo all&iacute;. Vio la gloria de Dios caminar por Galilea en el cuerpo de un hombre, lleno de gracia y lleno de verdad a la vez &mdash; nunca gracia a costa de la verdad, nunca verdad sin gracia. Y luego la palabra final: &#9889; <em>"A Dios nadie le vio jam&aacute;s; el unig&eacute;nito Hijo, que est&aacute; en el seno del Padre, &eacute;l le ha dado a conocer"</em> (Juan 1:18). La palabra "dar a conocer" es la palabra de la que obtenemos "exegesis" &mdash; Jes&uacute;s es la explicaci&oacute;n de Dios. Si quiere saber c&oacute;mo es Dios, no adivine, y no mire solamente al cielo. Mire a Jes&uacute;s. &Eacute;l nos ha explicado al Padre.</p>
+<p>As&iacute; que comenzamos donde Juan comienza, hermano &mdash; no en un pesebre sino en la eternidad, con el Verbo que era Dios, que hizo todas las cosas, que fue hecho carne y tabernacul&oacute; entre nosotros, lleno de gracia y de verdad. Sostenga eso, y cada se&ntilde;al y cada "YO SOY" y cada testigo a&uacute;n por venir caer&aacute; con todo su peso. &Eacute;l es el Cristo, el Hijo de Dios. Crea, y tenga vida en su nombre.</p>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 1 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La secci&oacute;n de respuesta corta es pr&aacute;ctica para el Certificado y no cuenta en su contra.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 1;
+const COURSE = 'john';
+const NEXT_UNIT_URL = 'CTSJohnUnit2.html';
+const totalUnits = 12;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Word Made Flesh", "Unit 2 - You Must Be Born Again", "Unit 3 - Living Water", "Unit 4 - The Bread of Life", "Unit 5 - The Light of the World", "Unit 6 - The Witnesses to Christ", "Unit 7 - The Door and the Good Shepherd", "Unit 8 - The Resurrection and the Life", "Unit 9 - The Hour of Glory", "Unit 10 - The Way, the Truth, and the Life", "Unit 11 - The Spirit and the High-Priestly Prayer", "Unit 12 - It Is Finished"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSJohnUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields. / Por favor complete todos los campos.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully! / \u00a1Registrado con \u00e9xito!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "John opens his Gospel not with a manger or genealogy but:", "textEs": "Juan abre su Evangelio no con un pesebre ni una genealogía sino:", "optionsEn": ["With Jesus' baptism", "With the empty tomb", "Before the beginning of the world, in eternity", "With the Sermon on the Mount"], "optionsEs": ["Con el bautismo de Jesús", "Con la tumba vacía", "Antes del principio del mundo, en la eternidad", "Con el Sermón del Monte"], "explanationEn": "\"In the beginning was the Word\" reaches past creation; John echoes Genesis to tell us who Jesus is before telling us anything else.", "explanationEs": "\"En el principio era el Verbo\" se remonta más allá de la creación; Juan hace eco de Génesis para decirnos quién es Jesús antes de cualquier otra cosa.", "correct": 2}, {"textEn": "\"In the beginning was the Word, and the Word was with God, and the Word ___\"", "textEs": "\"En el principio era el Verbo, y el Verbo era con Dios, y el Verbo ___\"", "optionsEn": ["became God later", "was an angel", "was God", "was a god"], "optionsEs": ["llegó a ser Dios después", "era un ángel", "era Dios", "era un dios"], "explanationEn": "John holds full deity and distinct Person in one breath: the Word was WITH God and WAS God — not 'a god,' not a creature.", "explanationEs": "Juan sostiene plena deidad y Persona distinta en un aliento: el Verbo era CON Dios y ERA Dios — no 'un dios,' no una criatura.", "correct": 2}, {"textEn": "\"All things were made through Him, and without Him ___\"", "textEs": "\"Todas las cosas por él fueron hechas, y sin él ___\"", "optionsEn": ["nothing was made that was made", "the world is eternal", "matter made itself", "some things were made"], "optionsEs": ["nada de lo que ha sido hecho, fue hecho", "el mundo es eterno", "la materia se hizo a sí misma", "algunas cosas fueron hechas"], "explanationEn": "The Maker entered His own making: not one created thing — atom, angel, or galaxy — exists apart from the Word (John 1:3).", "explanationEs": "El Hacedor entró en lo que hizo: ni una cosa creada — átomo, ángel o galaxia — existe aparte del Verbo (Juan 1:3).", "correct": 0}, {"textEn": "The divine-and-human pattern in John means Jesus is:", "textEs": "El patrón divino-y-humano en Juan significa que Jesús es:", "optionsEn": ["Fully God and fully man in one Person", "Half God and half man", "God only, appearing as a man", "A man promoted to deity"], "optionsEs": ["Plenamente Dios y plenamente hombre en una Persona", "Mitad Dios y mitad hombre", "Solo Dios, apareciendo como hombre", "Un hombre ascendido a deidad"], "explanationEn": "As a man He grew weary; as God He upholds all things. Not half of each — the whole of God and the whole of a man, joined in one Person.", "explanationEs": "Como hombre se cansó; como Dios sostiene todo. No mitad de cada uno — todo Dios y todo un hombre, unidos en una Persona.", "correct": 0}, {"textEn": "\"And the Word became flesh and ___ among us.\" The word means He:", "textEs": "\"Y el Verbo fue hecho carne, y ___ entre nosotros.\" La palabra significa que él:", "optionsEn": ["sent a message", "pitched His tent / tabernacled", "visited briefly", "merely appeared"], "optionsEs": ["envió un mensaje", "plantó su tienda / tabernaculó", "visitó brevemente", "meramente apareció"], "explanationEn": "The God whose glory once filled the tabernacle wrapped that glory in flesh and lived on the dust He had made (John 1:14).", "explanationEs": "El Dios cuya gloria llenó el tabernáculo envolvió esa gloria en carne y vivió sobre el polvo que había hecho (Juan 1:14).", "correct": 1}, {"textEn": "Who was \"a man sent from God\" to bear witness of the Light?", "textEs": "¿Quién fue \"un hombre enviado de Dios\" para dar testimonio de la Luz?", "optionsEn": ["Nicodemus", "Moses", "Andrew", "John (the Baptist)"], "optionsEs": ["Nicodemo", "Moisés", "Andrés", "Juan (el Bautista)"], "explanationEn": "John 1:6–8: he came to bear witness of the Light; \"he was not that Light\" but pointed past himself to it.", "explanationEs": "Juan 1:6–8: vino para dar testimonio de la Luz; \"no era él la Luz\" sino que señaló más allá de sí mismo a ella.", "correct": 3}, {"textEn": "John the Baptist said of Jesus, \"He who comes after me is preferred before me, for ___\"", "textEs": "Juan el Bautista dijo de Jesús: \"El que viene después de mí, es antes de mí, porque ___\"", "optionsEn": ["He has more followers", "He is younger", "He was before me", "He is stronger"], "optionsEs": ["tiene más seguidores", "es más joven", "era primero que yo", "es más fuerte"], "explanationEn": "Before me though He came after me — because the Word was from the beginning (John 1:15).", "explanationEs": "Antes de mí aunque vino después — porque el Verbo era desde el principio (Juan 1:15).", "correct": 2}, {"textEn": "The mark of a true witness, as John the Baptist shows, is that he:", "textEs": "La marca de un verdadero testigo, como muestra Juan el Bautista, es que:", "optionsEn": ["Performs signs", "Gathers the largest crowd", "Keeps his followers", "Points away from himself to the Light"], "optionsEs": ["Hace señales", "Reúne la multitud más grande", "Conserva a sus seguidores", "Señala lejos de sí mismo a la Luz"], "explanationEn": "A finger pointing at the moon is poor if people study the finger; the witness draws the eye to Christ, not himself.", "explanationEs": "Un dedo que señala la luna es pobre si estudian el dedo; el testigo atrae la mirada a Cristo, no a sí mismo.", "correct": 3}, {"textEn": "\"He came to His own, and His own ___\"", "textEs": "\"A lo suyo vino, y los suyos ___\"", "optionsEn": ["crowned Him king", "wrote His words", "did not receive Him", "understood Him fully"], "optionsEs": ["le coronaron rey", "escribieron sus palabras", "no le recibieron", "le entendieron plenamente"], "explanationEn": "The saddest sentence in the New Testament: the Maker walked among His creatures and they turned away (John 1:11).", "explanationEs": "La frase más triste del Nuevo Testamento: el Hacedor caminó entre sus criaturas y le volvieron la espalda (Juan 1:11).", "correct": 2}, {"textEn": "\"But as many as ___ Him, to them He gave the right to become children of God.\"", "textEs": "\"Mas a todos los que le ___, les dio potestad de ser hechos hijos de Dios.\"", "optionsEn": ["earned", "received", "deserved", "impressed"], "optionsEs": ["ganaron", "recibieron", "merecieron", "impresionaron"], "explanationEn": "Not the worthy or the clean, but as many as RECEIVED Him — the door swings open to all who believe in His name (John 1:12).", "explanationEs": "No los dignos ni los limpios, sino todos los que le RECIBIERON — la puerta se abre a todos los que creen en su nombre (Juan 1:12).", "correct": 1}, {"textEn": "Those who received Him were born \"not of blood... but ___\"", "textEs": "Los que le recibieron fueron engendrados \"no de sangre... sino ___\"", "optionsEn": ["of the will of man", "of the law", "of God", "of the flesh"], "optionsEs": ["de voluntad de varón", "de la ley", "de Dios", "de la carne"], "explanationEn": "A birth from above (John 1:13) — exactly where Jesus takes Nicodemus in the next chapter (Unit 2).", "explanationEs": "Un nacimiento de lo alto (Juan 1:13) — exactamente adonde Jesús lleva a Nicodemo en el capítulo siguiente (Unidad 2).", "correct": 2}, {"textEn": "\"And we beheld His glory... full of ___\"", "textEs": "\"Y vimos su gloria... lleno de ___\"", "optionsEn": ["signs and wonders", "power and fear", "law and judgment", "grace and truth"], "optionsEs": ["señales y prodigios", "poder y temor", "ley y juicio", "gracia y de verdad"], "explanationEn": "Never grace at the expense of truth, never truth without grace — John saw it with his own eyes (John 1:14).", "explanationEs": "Nunca gracia a costa de la verdad, nunca verdad sin gracia — Juan lo vio con sus propios ojos (Juan 1:14).", "correct": 3}, {"textEn": "\"No one has seen God at any time. The only begotten Son... He has ___ Him.\"", "textEs": "\"A Dios nadie le vio jamás; el unigénito Hijo... él le ha ___.\"", "optionsEn": ["declared / made known", "hidden", "judged", "replaced"], "optionsEs": ["dado a conocer / declarado", "escondido", "juzgado", "reemplazado"], "explanationEn": "The word behind 'declared' gives us 'exegesis' — Jesus is the explanation of God; to know God, look at Jesus (John 1:18).", "explanationEs": "La palabra tras 'dar a conocer' nos da 'exegesis' — Jesús es la explicación de Dios; para conocer a Dios, mire a Jesús (Juan 1:18).", "correct": 0}, {"textEn": "That the Word was WITH God and WAS God plants the seed of which doctrine?", "textEs": "Que el Verbo era CON Dios y ERA Dios planta la semilla de cuál doctrina?", "optionsEn": ["The Sabbath", "The Trinity", "Justification", "Predestination"], "optionsEs": ["El sábado", "La Trinidad", "La justificación", "La predestinación"], "explanationEn": "Full deity and distinct Person held together in John 1:1 — the seed of the Trinity in the first verse.", "explanationEs": "Plena deidad y Persona distinta sostenidas juntas en Juan 1:1 — la semilla de la Trinidad en el primer versículo.", "correct": 1}, {"textEn": "This course is built around John's seven signs, seven \"I AM\" sayings, and:", "textEs": "Este curso se construye en torno a las siete señales de Juan, siete declaraciones \"YO SOY,\" y:", "optionsEn": ["seven parables", "seven miracles of Paul", "seven letters", "the witnesses he calls to prove who Jesus is"], "optionsEs": ["siete parábolas", "siete milagros de Pablo", "siete cartas", "los testigos que llama para probar quién es Jesús"], "explanationEn": "John's courtroom motif: witness after witness called to prove Jesus is the Christ, that believing you may have life (20:31).", "explanationEs": "El motivo de tribunal de Juan: testigo tras testigo para probar que Jesús es el Cristo, para que creyendo tengáis vida (20:31).", "correct": 3}, {"textEn": "John's stated purpose (John 20:31) is that you may believe Jesus is the Christ and:", "textEs": "El propósito declarado de Juan (Juan 20:31) es que creáis que Jesús es el Cristo y:", "optionsEn": ["that you may have life in His name", "that you may keep the law", "that you may gain wealth", "that you may join a nation"], "optionsEs": ["que tengáis vida en su nombre", "que guardéis la ley", "que ganéis riqueza", "que se unáis a una nación"], "explanationEn": "The whole Gospel aims at faith that gives life — the goal every sign, 'I AM,' and witness serves.", "explanationEs": "Todo el Evangelio apunta a la fe que da vida — la meta a la que sirve cada señal, 'YO SOY' y testigo.", "correct": 0}, {"textEn": "Compared with Matthew and Luke, John traces Jesus back:", "textEs": "Comparado con Mateo y Lucas, Juan rastrea a Jesús hasta:", "optionsEn": ["past creation, to eternity", "to Abraham", "to Adam", "to King David"], "optionsEs": ["más allá de la creación, a la eternidad", "a Abraham", "a Adán", "al rey David"], "explanationEn": "Matthew to Abraham, Luke to Adam, John past creation itself — the Word who already WAS when the beginning began.", "explanationEs": "Mateo a Abraham, Lucas a Adán, Juan más allá de la creación — el Verbo que ya ERA cuando el principio comenzó.", "correct": 0}, {"textEn": "\"The Word was WITH God\" tells us the Word is:", "textEs": "\"El Verbo era CON Dios\" nos dice que el Verbo es:", "optionsEn": ["the same Person as the Father", "a created idea", "an impersonal force", "a distinct Person, face to face with God"], "optionsEs": ["la misma Persona que el Padre", "una idea creada", "una fuerza impersonal", "una Persona distinta, cara a cara con Dios"], "explanationEn": "'With' marks distinction of Persons; 'was God' marks shared deity — both true at once.", "explanationEs": "'Con' marca la distinción de Personas; 'era Dios' marca la deidad compartida — ambas verdaderas a la vez.", "correct": 3}, {"textEn": "When his followers fretted that crowds were leaving him for Jesus, John the Baptist said:", "textEs": "Cuando sus seguidores se inquietaron de que las multitudes lo dejaban por Jesús, Juan el Bautista dijo:", "optionsEn": ["\"I am the Christ\"", "\"He must increase, but I must decrease\"", "\"Stay with me\"", "\"Bring them back\""], "optionsEs": ["\"Yo soy el Cristo\"", "\"A él conviene crecer, mas a mí menguar\"", "\"Quédense conmigo\"", "\"Tráiganlos de vuelta\""], "explanationEn": "The freest words a leader ever spoke — a witness rejoices to fade so the Light may be seen.", "explanationEs": "Las palabras más libres que un líder dijo jamás — un testigo se goza de menguar para que la Luz sea vista.", "correct": 1}, {"textEn": "The right response the Prologue calls for at its close is to:", "textEs": "La respuesta correcta que el Prólogo pide al cerrar es:", "optionsEn": ["keep the schemes of timing", "worship the Word made flesh", "explain the mystery fully", "measure the glory"], "optionsEs": ["guardar los esquemas de tiempos", "adorar al Verbo hecho carne", "explicar el misterio plenamente", "medir la gloria"], "explanationEn": "We will never reach the bottom of the God-Man mystery — we are not meant to; we are meant to worship.", "explanationEs": "Nunca llegaremos al fondo del misterio del Dios-Hombre — no estamos hechos para ello; estamos hechos para adorar.", "correct": 1}];
+const kwQuestions = [
+{"textEn":"Explain what John 1:1 teaches about who the Word is.","textEs":"Explique lo que Juan 1:1 ense\u00f1a sobre qui\u00e9n es el Verbo.","kw_en":["begin","word","with","god","deity","person","eterna","trinit"],"kw_es":["principi","verbo","con","dios","deidad","persona","etern","trinid"],"modelEn":"John 1:1 teaches that the Word already was in the beginning, before creation, so He is eternal and was not made. The Word was with God, which marks Him as a distinct Person face to face with the Father, and the Word was God, which marks Him as fully deity, not a lesser god or a creature. Full deity and distinct Person are held together in one verse, and this is the seed of the doctrine of the Trinity.","modelEs":"Juan 1:1 ense\u00f1a que el Verbo ya era en el principio, antes de la creaci\u00f3n, as\u00ed que es eterno y no fue hecho. El Verbo era con Dios, lo cual lo marca como una Persona distinta cara a cara con el Padre, y el Verbo era Dios, lo cual lo marca como plena deidad, no un dios menor ni una criatura. Plena deidad y Persona distinta se sostienen juntas en un vers\u00edculo, y esta es la semilla de la doctrina de la Trinidad."},
+{"textEn":"What does John 1:3 teach about the Word and creation, and why does it matter?","textEs":"\u00bfQu\u00e9 ense\u00f1a Juan 1:3 sobre el Verbo y la creaci\u00f3n, y por qu\u00e9 importa?","kw_en":["made","creat","through","nothing","maker","all","power","without"],"kw_es":["hech","cre","por","nada","hacedor","todas","poder","sin"],"modelEn":"John 1:3 teaches that all things were made through the Word, and without Him nothing was made that was made. Not one created thing exists apart from Him, from an atom to an angel to a galaxy. This matters because it proves His full deity: only God is the Maker of all. The same hands that would be pierced are the hands that made the world, so the Maker entered His own making.","modelEs":"Juan 1:3 ense\u00f1a que todas las cosas por \u00e9l fueron hechas, y sin \u00e9l nada de lo que ha sido hecho fue hecho. Ni una cosa creada existe aparte de \u00e9l, desde un \u00e1tomo hasta un \u00e1ngel y una galaxia. Esto importa porque prueba su plena deidad: solo Dios es el Hacedor de todo. Las mismas manos que ser\u00edan traspasadas son las manos que hicieron el mundo, as\u00ed que el Hacedor entr\u00f3 en lo que hizo."},
+{"textEn":"Explain John 1:14, \"the Word became flesh,\" and the meaning of \"dwelt among us.\"","textEs":"Explique Juan 1:14, \"el Verbo fue hecho carne,\" y el significado de \"habit\u00f3 entre nosotros.\"","kw_en":["god","word","flesh","glory","among","grace","human","man"],"kw_es":["verbo","carne","encarn","habit","tabern","gloria","entre","hech"],"modelEn":"John 1:14 says the eternal Word became flesh; God did not merely visit or send a message but truly became a man. The word for 'dwelt' means He pitched His tent or tabernacled among us, like the glory of God that once filled the tabernacle, now wrapped in flesh and living on the dust He had made. John adds that we beheld His glory, full of grace and truth. The infinite became an infant, fully God and fully man in one Person.","modelEs":"Juan 1:14 dice que el Verbo eterno fue hecho carne; Dios no meramente visit\u00f3 ni envi\u00f3 un mensaje sino que verdaderamente fue hecho hombre. La palabra para 'habit\u00f3' significa que plant\u00f3 su tienda o tabernacul\u00f3 entre nosotros, como la gloria de Dios que llen\u00f3 el tabern\u00e1culo, ahora envuelta en carne y viviendo sobre el polvo que hizo. Juan a\u00f1ade que vimos su gloria, llena de gracia y de verdad. El infinito se hizo infante, plenamente Dios y plenamente hombre en una Persona."},
+{"textEn":"Describe John the Baptist as a witness, and what makes a true witness.","textEs":"Describa a Juan el Bautista como testigo, y qu\u00e9 hace a un verdadero testigo.","kw_en":["witness","light","sent","point","increas","decreas","himself","testi"],"kw_es":["testig","luz","enviad","se\u00f1al","crec","mengu","mismo","testimoni"],"modelEn":"John the Baptist was a man sent from God to bear witness of the Light; he himself was not that Light. A true witness does not draw the eye to himself but points past himself to Christ, like a finger pointing at the moon that is wasted if people study the finger. John showed this when crowds left him for Jesus and he said, 'He must increase, but I must decrease.' Every witness in the Gospel serves that one purpose: to point away from self and up to the Light.","modelEs":"Juan el Bautista fue un hombre enviado de Dios para dar testimonio de la Luz; \u00e9l mismo no era esa Luz. Un verdadero testigo no atrae la mirada hacia s\u00ed mismo sino que se\u00f1ala m\u00e1s all\u00e1 de s\u00ed a Cristo, como un dedo que se\u00f1ala la luna que se desperdicia si estudian el dedo. Juan lo mostr\u00f3 cuando las multitudes lo dejaron por Jes\u00fas y dijo: 'A \u00e9l conviene crecer, mas a m\u00ed menguar.' Cada testigo del Evangelio sirve a ese \u00fanico prop\u00f3sito: se\u00f1alar lejos de s\u00ed y arriba a la Luz."},
+{"textEn":"Explain the contrast in John 1:11\u201312 between His own rejecting Him and those who received Him.","textEs":"Explique el contraste en Juan 1:11\u201312 entre los suyos que no le recibieron y los que le recibieron.","kw_en":["own","receiv","welcom","believ","trust","child","right","god"],"kw_es":["suyos","recib","rechaz","hijos","cre","potestad","nombre","dio"],"modelEn":"John 1:11 says He came to His own and His own did not receive Him; the Maker walked among His creatures and they turned away, the saddest sentence in the New Testament. But verse 12 swings the door open: as many as received Him, to them He gave the right to become children of God, to those who believe in His name. It is not the worthy or the clean who are received but whoever receives and believes, so the offer is open to all.","modelEs":"Juan 1:11 dice que a lo suyo vino y los suyos no le recibieron; el Hacedor camin\u00f3 entre sus criaturas y le volvieron la espalda, la frase m\u00e1s triste del Nuevo Testamento. Pero el vers\u00edculo 12 abre la puerta: a todos los que le recibieron, les dio potestad de ser hechos hijos de Dios, a los que creen en su nombre. No son los dignos ni los limpios los recibidos sino quienquiera que recibe y cree, as\u00ed que la oferta est\u00e1 abierta a todos."},
+{"textEn":"What does it mean that those who received Him were \"born... of God\" (John 1:13)?","textEs":"\u00bfQu\u00e9 significa que los que le recibieron fueron engendrados \"de Dios\" (Juan 1:13)?","kw_en":["born","god","blood","flesh","abov","birth","spirit","new"],"kw_es":["engendr","dios","sangre","carne","alto","nacimiento","espiritu","nuevo"],"modelEn":"John 1:13 says those who received Him were born not of blood, nor of the will of the flesh, nor of the will of man, but of God. Becoming a child of God is not by human descent, human effort, or human decision alone but by a birth that comes from God Himself. It is a second birth, a birth from above, the same new birth Jesus presses on Nicodemus in the next chapter when He says you must be born again.","modelEs":"Juan 1:13 dice que los que le recibieron fueron engendrados no de sangre, ni de voluntad de carne, ni de voluntad de var\u00f3n, sino de Dios. Llegar a ser hijo de Dios no es por descendencia humana, esfuerzo humano ni decisi\u00f3n humana sola, sino por un nacimiento que viene de Dios mismo. Es un segundo nacimiento, un nacimiento de lo alto, el mismo nuevo nacimiento que Jes\u00fas urge a Nicodemo en el cap\u00edtulo siguiente cuando dice que es necesario nacer de nuevo."},
+{"textEn":"Explain John 1:18, that the Son has \"declared\" the Father.","textEs":"Explique Juan 1:18, que el Hijo ha \"dado a conocer\" al Padre.","kw_en":["seen","god","son","declar","known","father","explain","reveal"],"kw_es":["visto","dios","hijo","dado","conocer","padre","explic","revel"],"modelEn":"John 1:18 says no one has seen God at any time, but the only begotten Son, who is in the bosom of the Father, has declared Him. The word for 'declared' is the root of 'exegesis,' meaning Jesus is the explanation or unfolding of God. If we want to know what God is like, we do not guess or look only at the sky; we look at Jesus, because He has made the unseen Father known.","modelEs":"Juan 1:18 dice que a Dios nadie le vio jam\u00e1s, pero el unig\u00e9nito Hijo, que est\u00e1 en el seno del Padre, le ha dado a conocer. La palabra para 'dar a conocer' es la ra\u00edz de 'exegesis,' es decir que Jes\u00fas es la explicaci\u00f3n o el despliegue de Dios. Si queremos saber c\u00f3mo es Dios, no adivinamos ni miramos solo al cielo; miramos a Jes\u00fas, porque \u00e9l ha dado a conocer al Padre invisible."},
+{"textEn":"Why does John begin his Gospel in eternity rather than at Bethlehem?","textEs":"\u00bfPor qu\u00e9 comienza Juan su Evangelio en la eternidad y no en Bel\u00e9n?","kw_en":["begin","eterna","word","deity","genesis","befor","creat","who"],"kw_es":["principi","etern","verbo","deidad","genesis","antes","cre","quien"],"modelEn":"John begins in eternity, echoing Genesis, because he wants us to know who Jesus is before he tells us anything else: the eternal Word who already was before creation. He had come to know that the carpenter from Nazareth was the eternal God, so he does not build to that conclusion at the end but announces His full deity in the first line. Get the Prologue right and the whole Gospel opens; get it wrong and the whole Gospel is misread.","modelEs":"Juan comienza en la eternidad, haciendo eco de G\u00e9nesis, porque quiere que sepamos qui\u00e9n es Jes\u00fas antes de decirnos cualquier otra cosa: el Verbo eterno que ya era antes de la creaci\u00f3n. Hab\u00eda llegado a saber que el carpintero de Nazaret era el Dios eterno, as\u00ed que no construye hacia esa conclusi\u00f3n al final sino que anuncia su plena deidad en la primera l\u00ednea. Ac\u00ederte el Pr\u00f3logo y todo el Evangelio se abre; equiv\u00f3quelo y todo el Evangelio se lee mal."},
+{"textEn":"Describe the divine-and-human pattern (\"as a man... but as God...\") in the person of Christ.","textEs":"Describa el patr\u00f3n divino-y-humano (\"como hombre... pero como Dios...\") en la persona de Cristo.","kw_en":["man","god","fully","both","weary","uphold","person","joined"],"kw_es":["hombre","dios","plenamente","ambas","cans","sostiene","persona","unidos"],"modelEn":"The pattern is that Jesus is fully God and fully man at once, both held together in one Person. As a man He grew weary, hungered, wept, and died; but as God He upholds all things, is the bread of life, is the resurrection, and rose with the keys of death. He is not half of each, not God in a costume of flesh nor a man promoted to deity, but the whole of God and the whole of a man joined forever, a mystery we cannot exhaust but are meant to worship.","modelEs":"El patr\u00f3n es que Jes\u00fas es plenamente Dios y plenamente hombre a la vez, ambas sostenidas juntas en una Persona. Como hombre se cans\u00f3, tuvo hambre, llor\u00f3 y muri\u00f3; pero como Dios sostiene todas las cosas, es el pan de vida, es la resurrecci\u00f3n, y resucit\u00f3 con las llaves de la muerte. No es mitad de cada uno, no Dios en un disfraz de carne ni un hombre ascendido a deidad, sino todo Dios y todo un hombre unidos para siempre, un misterio que no podemos agotar pero que estamos hechos para adorar."},
+{"textEn":"What is the purpose of the whole Gospel of John, and how does the Prologue serve it?","textEs":"\u00bfCu\u00e1l es el prop\u00f3sito de todo el Evangelio de Juan, y c\u00f3mo lo sirve el Pr\u00f3logo?","kw_en":["believ","christ","son","life","name","witness","sign","purpose"],"kw_es":["cre","cristo","hijo","vida","nombre","testig","se\u00f1al","proposit"],"modelEn":"The purpose, stated in John 20:31, is that we may believe Jesus is the Christ, the Son of God, and that believing we may have life in His name. The whole Gospel works toward that faith through the seven signs, the seven I AM sayings, and the witnesses John calls to prove who Jesus is. The Prologue serves it by establishing first who Jesus is, the eternal Word made flesh, full of grace and truth, so that every sign and witness afterward lands with full weight.","modelEs":"El prop\u00f3sito, declarado en Juan 20:31, es que creamos que Jes\u00fas es el Cristo, el Hijo de Dios, y que creyendo tengamos vida en su nombre. Todo el Evangelio obra hacia esa fe mediante las siete se\u00f1ales, las siete declaraciones YO SOY, y los testigos que Juan llama para probar qui\u00e9n es Jes\u00fas. El Pr\u00f3logo lo sirve estableciendo primero qui\u00e9n es Jes\u00fas, el Verbo eterno hecho carne, lleno de gracia y de verdad, para que cada se\u00f1al y testigo despu\u00e9s caiga con todo su peso."}
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 2 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 2 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s).</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (mcQuestions.length + idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y reintente la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSJohnReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

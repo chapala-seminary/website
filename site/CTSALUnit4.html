@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Administration &amp; Leadership &mdash; Unit 4: Organization, Structure &amp; Delegation</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 5 &rarr;</span><span class="lang-es">Unidad 5 &rarr;</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Administration &amp; Leadership &mdash; Unit 4: Organization, Structure &amp; Delegation</span><span class="lang-es">📖 Administraci&oacute;n y Liderazgo &mdash; Unidad 4: Organizaci&oacute;n, estructura y delegaci&oacute;n</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"And He Himself gave some to be... pastors and teachers, for the equipping of the saints for the work of ministry, for the edifying of the body of Christ." &mdash; Ephesians 4:11-12 (NKJV)</span><span class="lang-es">&#9873; "Y &eacute;l mismo dio a unos... pastores y maestros, a fin de perfeccionar a los santos para la obra del ministerio, para la edificaci&oacute;n del cuerpo de Cristo." &mdash; Efesios 4:11-12 (RVG)</span></p>
+</div>
+
+<div id="regCard" style="display:none;">
+    <input type="text" id="regName" aria-label="regName"><input type="email" id="regEmail" aria-label="regEmail">
+    <select id="regTrack" aria-label="regTrack"><option value="certificate"></option></select>
+    <button id="regBtn"></button><div id="regStatus"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h3>Introduction &mdash; From Vision to Structure</h3>
+<p>In Unit 3 we watched a vision come down from God, pass through prayer and planning, and become the people's own resolve to build. But a vision without structure is only a wish. The walls of Jerusalem were not rebuilt by enthusiasm alone; Nehemiah assigned families to specific sections, each with its task, and the work held together because it was organized. This unit takes up that practical labor: how a leader turns a God-given vision into a structure that can actually carry it, and how he learns the hardest discipline of leadership &mdash; not doing the work himself, but equipping and releasing others to do it. Structure and delegation are not the cold machinery of the business world imported into the church. Rightly understood, they are how the body of Christ was designed by God to function: many members, each with a gift, each doing its part, knit together and built up in love.</p>
+
+<h3>Structure Serves the Mission, Not Itself</h3>
+<p>Begin with a warning, because structure is a good servant and a terrible master. A church needs enough structure to carry its mission &mdash; clear roles, lines of responsibility, a way that decisions get made and work gets done &mdash; and a church with too little of it collapses into confusion, where everyone assumes someone else will do the thing and no one does. But structure exists for the mission, never the reverse. The moment the organization becomes an end in itself &mdash; meetings that produce only more meetings, committees that exist to protect their own importance, procedures that smother the very ministry they were meant to serve &mdash; the scaffolding has begun to crush the building. Healthy structure is like the skeleton in a body: strong enough to give the body shape and let it move, but never visible for its own sake, always in the service of the life it carries. So the leader asks of every structure not "Is this impressive?" but "Does this help God's people do the work God has given them?"</p>
+
+<h3>The Goal of Structure: Equipping the Saints</h3>
+<p>Now we reach the heart of the matter, and it is one verse that overturns how most people imagine ministry. Paul says that Christ gave leaders to the church &mdash; <em>"for the equipping of the saints for the work of ministry, for the edifying of the body of Christ"</em> (Ephesians 4:11-12). Read that slowly, because the punctuation of how we live it makes all the difference. The leaders are <em>not</em> given to do all the ministry while the saints watch. The leaders are given to <strong>equip the saints</strong>, so that the <strong>saints</strong> do the work of ministry, and the whole body is built up. The pastor is a trainer of ministers, not the sole minister. When a church believes that ministry is the paid leader's job and the people's job is to attend, it has read this verse exactly backwards, and it will stay weak no matter how gifted the leader is, because the body was never meant to be carried by one organ. But where leaders equip and release the saints, every member becomes a minister, and the church can do a hundred times what one man could ever do alone.</p>
+<div class="scripture">"...for the equipping of the saints for the work of ministry, for the edifying of the body of Christ." &mdash; Ephesians 4:11-12 (NKJV)</div>
+
+<h3>Delegation Is Not Dumping</h3>
+<p>If equipping is the goal, delegation is the method &mdash; and here many leaders fail, because they confuse delegation with dumping. Dumping is handing someone an unwanted task with no training, no authority, and no support, and then blaming them when it goes wrong. Delegation is something far higher. To delegate well is to entrust a real responsibility to a capable person, give them the authority to actually carry it, provide what they need to succeed, and then hold them lovingly accountable for the result. Recall Jethro's counsel to Moses from Unit 1: choose <em>"able men, such as fear God, men of truth, hating covetousness"</em> and set them over the people (Exodus 18:21). Moses kept the weightiest matters but truly handed the rest over &mdash; not the appearance of authority, but the real thing. The leader who delegates only tasks while clutching all authority has not delegated at all; he has merely made others into his hands while keeping all the deciding to himself, and he will exhaust both them and himself. Real delegation gives away genuine responsibility to people equipped to bear it.</p>
+<p>The apostles themselves show the pattern under pressure. When the daily distribution to the widows was being neglected and the complaints grew, they did not simply work longer hours and try to do it all; nor did they declare the task beneath them. They said, in effect, it is not right that we should leave the ministry of the Word to serve tables, and so they had the people choose seven men of good reputation, full of the Spirit and wisdom, and they handed the work over to them (Acts 6:2-4). Notice that they delegated real responsibility to capable, godly men, and that they did so precisely in order to guard their own God-given priority of prayer and the Word. Delegation is not only how the work gets covered; it is how a leader stays faithful to the few things only he can do, by entrusting to others the many things he need not do himself.</p>
+
+<div class="illustration"><strong>Let me tell you a story. It did not happen to one man exactly &mdash; but I have seen its two endings many times.</strong> A pastor planted a church and, because he was gifted and willing, did everything himself: he preached, he counseled, he led every meeting, he locked the doors at night. For a few years it worked, and people praised how hard he worked. But the church never grew past the size of one man's reach, and the people stayed spiritual infants, because they were never given anything to carry. Then he fell ill for three months &mdash; and the church nearly died, because everything had lived in him alone. A second pastor in the same situation did the opposite. From the start he gave ministry away: he trained teachers, raised up deacons, entrusted real work to faithful members and let them make real decisions. He looked, at first, less impressive &mdash; others were doing what people expected him to do. But his church grew strong and deep, and when he was gone for three months, it did not falter, because the ministry lived in the whole body and not in him. One man built a ministry around himself. The other built a body that could stand without him. Only one of them was obeying Ephesians 4.</div>
+
+<h3>Entrust to Faithful People</h3>
+<p>To whom should a leader delegate? Not simply to whoever is available or eager, but to those proven trustworthy, for the wrong steward can do more harm than an unfilled role. Paul gives Timothy the standard in a single, dense sentence: <em>"And the things that you have heard from me among many witnesses, commit these to faithful men who will be able to teach others also"</em> (2 Timothy 2:2). Notice the two qualities Paul names. First, <strong>faithful</strong> &mdash; reliable, trustworthy, the kind of person who finishes what they begin and can be counted on when no one is watching. Second, <strong>able to teach others also</strong> &mdash; capable, and able to pass it on. And notice the reach of that one verse: Paul taught Timothy, Timothy is to commit it to faithful men, and those men will teach others also &mdash; four generations of ministry in a single breath. This is the seed of multiplication we will follow much further in a later unit. For now, the principle for structure and delegation is plain: build your church not around your own two hands, but by entrusting the work to faithful, capable people who will themselves equip still others.</p>
+<div class="scripture">"...commit these to faithful men who will be able to teach others also." &mdash; 2 Timothy 2:2 (NKJV)</div>
+
+<h3>The Courage to Release</h3>
+<p>One thing remains, and it is more a matter of the heart than of organizational charts: the courage to actually let go. Many a leader designs a fine structure and recruits faithful people and then cannot bring himself to release control &mdash; he hovers, he overrides, he redoes the work others have done, and slowly teaches everyone that their efforts do not really matter. Such a leader has the form of delegation without its substance, and his people will eventually stop trying. To release others is an act of humility and faith: humility, because it means the work will be done differently than you would do it, and sometimes less well at first; faith, because it trusts that God gifts and uses His people, not only the leader. Remember that the same Spirit who called and gifted you has called and gifted them. A church can only ever grow as large as its leader is willing to release, for a church built around one man is forever limited to the size of one man. But a church where the leader equips the saints, delegates real responsibility to faithful people, and has the courage to release them &mdash; that church becomes what Ephesians describes: a whole body, joined and knit together, every part doing its share, growing and building itself up in love.</p>
+<div class="scripture">"...from whom the whole body, joined and knit together by what every joint supplies... causes growth of the body for the edifying of itself in love." &mdash; Ephesians 4:16 (NKJV)</div>
+
+</div>
+<div class="lang-es">
+
+<h3>Introducci&oacute;n &mdash; De la visi&oacute;n a la estructura</h3>
+<p>En la Unidad 3 vimos una visi&oacute;n descender de Dios, pasar por la oraci&oacute;n y la planificaci&oacute;n, y volverse la resoluci&oacute;n propia del pueblo para edificar. Pero una visi&oacute;n sin estructura es solo un deseo. Los muros de Jerusal&eacute;n no se reconstruyeron por el entusiasmo solo; Nehem&iacute;as asign&oacute; familias a secciones espec&iacute;ficas, cada una con su tarea, y la obra se mantuvo unida porque estaba organizada. Esta unidad toma esa labor pr&aacute;ctica: c&oacute;mo un l&iacute;der convierte una visi&oacute;n dada por Dios en una estructura que de veras pueda llevarla, y c&oacute;mo aprende la disciplina m&aacute;s dif&iacute;cil del liderazgo &mdash; no hacer &eacute;l mismo la obra, sino capacitar y soltar a otros para que la hagan. La estructura y la delegaci&oacute;n no son la fr&iacute;a maquinaria del mundo de los negocios importada a la iglesia. Bien entendidas, son el modo en que Dios dise&ntilde;&oacute; que funcionara el cuerpo de Cristo: muchos miembros, cada uno con un don, cada uno haciendo su parte, unidos y edificados en amor.</p>
+
+<h3>La estructura sirve a la misi&oacute;n, no a s&iacute; misma</h3>
+<p>Comience con una advertencia, porque la estructura es un buen siervo y un amo terrible. Una iglesia necesita suficiente estructura para llevar su misi&oacute;n &mdash; roles claros, l&iacute;neas de responsabilidad, una manera de tomar decisiones y hacer la obra &mdash; y una iglesia con muy poca se desploma en confusi&oacute;n, donde cada uno supone que otro har&aacute; la cosa y nadie la hace. Pero la estructura existe para la misi&oacute;n, nunca al rev&eacute;s. En el momento en que la organizaci&oacute;n se vuelve un fin en s&iacute; misma &mdash; reuniones que solo producen m&aacute;s reuniones, comit&eacute;s que existen para proteger su propia importancia, procedimientos que ahogan el mismo ministerio que deb&iacute;an servir &mdash; el andamio ha comenzado a aplastar el edificio. La estructura sana es como el esqueleto en un cuerpo: bastante fuerte para darle forma y dejarlo moverse, pero nunca visible por s&iacute; mismo, siempre al servicio de la vida que sostiene. As&iacute; que el l&iacute;der pregunta de cada estructura no "&iquest;Es impresionante?" sino "&iquest;Ayuda esto al pueblo de Dios a hacer la obra que Dios le ha dado?"</p>
+
+<h3>La meta de la estructura: perfeccionar a los santos</h3>
+<p>Ahora llegamos al coraz&oacute;n del asunto, y es un solo vers&iacute;culo que trastorna el modo en que casi todos imaginan el ministerio. Pablo dice que Cristo dio l&iacute;deres a la iglesia &mdash; <em>"a fin de perfeccionar a los santos para la obra del ministerio, para la edificaci&oacute;n del cuerpo de Cristo"</em> (&#9873; Efesios 4:11-12). L&eacute;alo despacio, porque c&oacute;mo lo vivimos cambia todo. Los l&iacute;deres <em>no</em> fueron dados para hacer todo el ministerio mientras los santos miran. Los l&iacute;deres fueron dados para <strong>perfeccionar a los santos</strong>, de modo que los <strong>santos</strong> hagan la obra del ministerio, y todo el cuerpo sea edificado. El pastor es un capacitador de ministros, no el &uacute;nico ministro. Cuando una iglesia cree que el ministerio es la tarea del l&iacute;der pagado y que la tarea del pueblo es asistir, ha le&iacute;do este vers&iacute;culo exactamente al rev&eacute;s, y quedar&aacute; d&eacute;bil por dotado que sea el l&iacute;der, porque el cuerpo nunca fue hecho para ser llevado por un solo &oacute;rgano. Pero donde los l&iacute;deres capacitan y sueltan a los santos, cada miembro se vuelve ministro, y la iglesia puede hacer cien veces lo que un solo hombre podr&iacute;a hacer solo.</p>
+<div class="scripture">&#9873; "...a fin de perfeccionar a los santos para la obra del ministerio, para la edificaci&oacute;n del cuerpo de Cristo." &mdash; Efesios 4:11-12 (RVG)</div>
+
+<h3>Delegar no es deshacerse</h3>
+<p>Si perfeccionar es la meta, delegar es el m&eacute;todo &mdash; y aqu&iacute; muchos l&iacute;deres fallan, porque confunden delegar con deshacerse de algo. Deshacerse es entregar a alguien una tarea no deseada sin capacitaci&oacute;n, sin autoridad y sin apoyo, y luego culparlo cuando sale mal. Delegar es algo mucho m&aacute;s alto. Delegar bien es confiar una responsabilidad verdadera a una persona capaz, darle la autoridad para de veras llevarla, proveerle lo que necesita para tener &eacute;xito, y luego pedirle cuentas con amor por el resultado. Recuerde el consejo de Jetro a Mois&eacute;s de la Unidad 1: escoger <em>"varones de virtud, temerosos de Dios, varones de verdad, que aborrezcan la avaricia"</em> y ponerlos sobre el pueblo (&#9873; &Eacute;xodo 18:21). Mois&eacute;s retuvo los asuntos m&aacute;s graves pero de veras entreg&oacute; el resto &mdash; no la apariencia de autoridad, sino la cosa real. El l&iacute;der que delega solo tareas mientras se aferra a toda la autoridad no ha delegado en absoluto; solo ha hecho de otros sus manos mientras se queda con todas las decisiones, y agotar&aacute; a ellos y a s&iacute; mismo. La verdadera delegaci&oacute;n entrega responsabilidad genuina a personas capacitadas para llevarla.</p>
+<p>Los ap&oacute;stoles mismos muestran el patr&oacute;n bajo presi&oacute;n. Cuando la distribuci&oacute;n diaria a las viudas estaba siendo descuidada y crec&iacute;an las quejas, no se limitaron a trabajar m&aacute;s horas tratando de hacerlo todo; ni declararon la tarea indigna de ellos. Dijeron, en efecto, que no era justo que dejaran el ministerio de la Palabra para servir a las mesas, y as&iacute; hicieron que el pueblo escogiera siete varones de buen testimonio, llenos del Esp&iacute;ritu y de sabidur&iacute;a, y les entregaron la obra (&#9873; Hechos 6:2-4). Note que delegaron responsabilidad real a hombres capaces y piadosos, y que lo hicieron precisamente para guardar su propia prioridad dada por Dios de la oraci&oacute;n y la Palabra. La delegaci&oacute;n no es solo c&oacute;mo se cubre la obra; es c&oacute;mo un l&iacute;der permanece fiel a las pocas cosas que solo &eacute;l puede hacer, confiando a otros las muchas que no necesita hacer &eacute;l mismo.</p>
+
+<div class="illustration"><strong>D&eacute;jeme contarle una historia. No le sucedi&oacute; a un solo hombre exactamente &mdash; pero he visto sus dos finales muchas veces.</strong> Un pastor plant&oacute; una iglesia y, porque era dotado y dispuesto, lo hac&iacute;a todo &eacute;l mismo: predicaba, aconsejaba, dirig&iacute;a cada reuni&oacute;n, cerraba las puertas de noche. Por unos a&ntilde;os funcion&oacute;, y la gente alababa lo duro que trabajaba. Pero la iglesia nunca creci&oacute; m&aacute;s all&aacute; del alcance de un solo hombre, y la gente sigui&oacute; siendo ni&ntilde;os espirituales, porque nunca se le dio nada que llevar. Luego &eacute;l enferm&oacute; por tres meses &mdash; y la iglesia casi muri&oacute;, porque todo hab&iacute;a vivido en &eacute;l solo. Un segundo pastor en la misma situaci&oacute;n hizo lo contrario. Desde el principio regal&oacute; el ministerio: capacit&oacute; maestros, levant&oacute; di&aacute;conos, confi&oacute; obra verdadera a miembros fieles y los dej&oacute; tomar decisiones verdaderas. Al principio parec&iacute;a menos impresionante &mdash; otros hac&iacute;an lo que la gente esperaba de &eacute;l. Pero su iglesia se hizo fuerte y profunda, y cuando estuvo ausente tres meses, no se tambale&oacute;, porque el ministerio viv&iacute;a en todo el cuerpo y no en &eacute;l. Un hombre edific&oacute; un ministerio alrededor de s&iacute; mismo. El otro edific&oacute; un cuerpo que pod&iacute;a sostenerse sin &eacute;l. Solo uno de ellos obedec&iacute;a Efesios 4.</div>
+
+<h3>Confiar a personas fieles</h3>
+<p>&iquest;A qui&eacute;n debe delegar un l&iacute;der? No simplemente a quien est&eacute; disponible o entusiasmado, sino a los probadamente dignos de confianza, porque el mayordomo equivocado puede hacer m&aacute;s da&ntilde;o que un puesto vac&iacute;o. Pablo le da a Timoteo la norma en una sola frase densa: <em>"Y lo que has o&iacute;do de m&iacute; ante muchos testigos, esto encarga a hombres fieles que ser&aacute;n id&oacute;neos para ense&ntilde;ar tambi&eacute;n a otros"</em> (&#9873; 2 Timoteo 2:2). Note las dos cualidades que Pablo nombra. Primera, <strong>fieles</strong> &mdash; confiables, dignos de confianza, la clase de persona que termina lo que empieza y con quien se puede contar cuando nadie observa. Segunda, <strong>id&oacute;neos para ense&ntilde;ar tambi&eacute;n a otros</strong> &mdash; capaces, y capaces de transmitirlo. Y note el alcance de ese solo vers&iacute;culo: Pablo ense&ntilde;&oacute; a Timoteo, Timoteo ha de encargarlo a hombres fieles, y esos hombres ense&ntilde;ar&aacute;n tambi&eacute;n a otros &mdash; cuatro generaciones de ministerio en un solo aliento. Esta es la semilla de la multiplicaci&oacute;n que seguiremos mucho m&aacute;s en una unidad posterior. Por ahora, el principio para la estructura y la delegaci&oacute;n es claro: edifique su iglesia no alrededor de sus propias dos manos, sino confiando la obra a personas fieles y capaces que ellas mismas capacitar&aacute;n a&uacute;n a otros.</p>
+<div class="scripture">&#9873; "...esto encarga a hombres fieles que ser&aacute;n id&oacute;neos para ense&ntilde;ar tambi&eacute;n a otros." &mdash; 2 Timoteo 2:2 (RVG)</div>
+
+<h3>El valor de soltar</h3>
+<p>Queda una cosa, y es m&aacute;s asunto del coraz&oacute;n que de organigramas: el valor de de veras soltar. Muchos l&iacute;deres dise&ntilde;an una buena estructura y reclutan personas fieles y luego no logran soltar el control &mdash; rondan, anulan, rehacen la obra que otros han hecho, y poco a poco ense&ntilde;an a todos que sus esfuerzos en realidad no importan. Tal l&iacute;der tiene la forma de la delegaci&oacute;n sin su sustancia, y su gente con el tiempo dejar&aacute; de intentar. Soltar a otros es un acto de humildad y de fe: humildad, porque significa que la obra se har&aacute; de modo distinto a como usted la har&iacute;a, y a veces menos bien al principio; fe, porque conf&iacute;a en que Dios dota y usa a su pueblo, y no solo al l&iacute;der. Recuerde que el mismo Esp&iacute;ritu que lo llam&oacute; y lo dot&oacute; a usted los ha llamado y dotado a ellos. Una iglesia solo puede crecer tanto como su l&iacute;der est&eacute; dispuesto a soltar, porque una iglesia edificada alrededor de un solo hombre queda para siempre limitada al tama&ntilde;o de un solo hombre. Pero una iglesia donde el l&iacute;der perfecciona a los santos, delega responsabilidad verdadera a personas fieles, y tiene el valor de soltarlas &mdash; esa iglesia llega a ser lo que describe Efesios: un cuerpo entero, bien concertado y unido, cada parte haciendo su parte, creciendo y edific&aacute;ndose a s&iacute; mismo en amor.</p>
+<div class="scripture">&#9873; "...de quien todo el cuerpo, bien concertado y unido entre s&iacute; por todas las coyunturas... recibe su crecimiento para ir edific&aacute;ndose en amor." &mdash; Efesios 4:16 (RVG)</div>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 4 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 4 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lecci&oacute;n y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 4;
+const COURSE = 'al';
+const NEXT_UNIT_URL = 'CTSALUnit5.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Biblical Call to Lead God's House", "Unit 2 - The Pastor as Undershepherd & Steward", "Unit 3 - Vision, Calling & Strategic Planning", "Unit 4 - Organization, Structure & Delegation", "Unit 5 - Financial Stewardship and Budgeting", "Unit 6 - Personnel and Volunteer Management", "Unit 7 - Conflict Resolution and Church Discipline", "Unit 8 - Facilities, Legal Matters, and Risk Management", "Unit 9 - Multiplication, Church Planting, and Succession", "Unit 10 - The Leader's Heart: Integrity, Rest, and Finishing Well"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSALUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "A vision without structure, according to this unit, is:", "textEs": "Una visión sin estructura, según esta unidad, es:", "optionsEn": ["Only a wish", "More spiritual", "The ideal", "Always best"], "optionsEs": ["Solo un deseo", "Más espiritual", "Lo ideal", "Siempre lo mejor"], "explanationEn": "Vision must be carried by structure; without it, even a God-given vision remains a mere wish.", "explanationEs": "La visión debe ser llevada por una estructura; sin ella, aun una visión dada por Dios queda en mero deseo.", "correct": 0}, {"textEn": "Structure in the church should exist:", "textEs": "La estructura en la iglesia debe existir:", "optionsEn": ["For the mission, never the reverse", "To create more meetings", "To impress visitors", "For its own importance"], "optionsEs": ["Para la misión, nunca al revés", "Para crear más reuniones", "Para impresionar a las visitas", "Por su propia importancia"], "explanationEn": "Structure serves the mission; when it becomes an end in itself, the scaffolding crushes the building.", "explanationEs": "La estructura sirve a la misión; cuando se vuelve un fin en sí misma, el andamio aplasta el edificio.", "correct": 0}, {"textEn": "The unit compares healthy structure to:", "textEs": "La unidad compara la estructura sana con:", "optionsEn": ["A wall", "A crown", "A cage", "A skeleton that gives the body shape yet serves the life it carries"], "optionsEs": ["Un muro", "Una corona", "Una jaula", "Un esqueleto que da forma al cuerpo y sirve a la vida que sostiene"], "explanationEn": "Like a skeleton, structure gives shape and lets the body move, always serving the life it carries.", "explanationEs": "Como un esqueleto, la estructura da forma y deja moverse al cuerpo, siempre sirviendo a la vida que sostiene.", "correct": 3}, {"textEn": "According to Ephesians 4:11-12, leaders are given to the church mainly to:", "textEs": "Según Efesios 4:11-12, los líderes son dados a la iglesia principalmente para:", "optionsEn": ["Equip the saints for the work of ministry", "Replace the congregation", "Be served by the saints", "Do all the ministry themselves"], "optionsEs": ["Perfeccionar a los santos para la obra del ministerio", "Reemplazar a la congregación", "Ser servidos por los santos", "Hacer todo el ministerio ellos mismos"], "explanationEn": "Leaders equip the saints so the saints do the ministry and the whole body is built up.", "explanationEs": "Los líderes perfeccionan a los santos para que los santos hagan el ministerio y todo el cuerpo sea edificado.", "correct": 0}, {"textEn": "A church that believes ministry is only the paid leader's job has:", "textEs": "Una iglesia que cree que el ministerio es solo la tarea del líder pagado ha:", "optionsEn": ["Understood Ephesians 4 well", "Read Ephesians 4 exactly backwards", "Found the ideal model", "Honored the saints"], "optionsEs": ["Entendido bien Efesios 4", "Leído Efesios 4 exactamente al revés", "Hallado el modelo ideal", "Honrado a los santos"], "explanationEn": "This reads the verse backwards; the body was never meant to be carried by one organ.", "explanationEs": "Esto lee el versículo al revés; el cuerpo nunca fue hecho para ser llevado por un solo órgano.", "correct": 1}, {"textEn": "The difference between delegation and 'dumping' is that delegation:", "textEs": "La diferencia entre delegar y 'deshacerse' es que delegar:", "optionsEn": ["Hands off a task with no authority or support", "Keeps all decisions with the leader", "Entrusts real responsibility with authority, support, and accountability", "Blames others when things fail"], "optionsEs": ["Entrega una tarea sin autoridad ni apoyo", "Deja todas las decisiones al líder", "Confía responsabilidad real con autoridad, apoyo y rendición de cuentas", "Culpa a otros cuando algo falla"], "explanationEn": "Dumping offloads a task with no support; delegation entrusts real responsibility and authority.", "explanationEs": "Deshacerse descarga una tarea sin apoyo; delegar confía responsabilidad y autoridad reales.", "correct": 2}, {"textEn": "Jethro told Moses to choose men who were:", "textEs": "Jetro dijo a Moisés que escogiera varones que fueran:", "optionsEn": ["Related to Moses", "Able, God-fearing, truthful, hating covetousness", "Young and eager only", "Wealthy and well-known"], "optionsEs": ["Parientes de Moisés", "De virtud, temerosos de Dios, de verdad, que aborrezcan la avaricia", "Solo jóvenes y entusiastas", "Ricos y conocidos"], "explanationEn": "Exodus 18:21 — able men who fear God, men of truth who hate covetousness, were set over the people.", "explanationEs": "Éxodo 18:21 — varones de virtud, temerosos de Dios, de verdad, que aborrecen la avaricia, sobre el pueblo.", "correct": 1}, {"textEn": "A leader who delegates tasks but clutches all authority has:", "textEs": "Un líder que delega tareas pero se aferra a toda la autoridad ha:", "optionsEn": ["Delegated well", "Not really delegated at all", "Equipped the saints", "Built a body"], "optionsEs": ["Delegado bien", "No delegado en realidad", "Perfeccionado a los santos", "Edificado un cuerpo"], "explanationEn": "Keeping all authority makes others mere hands; it exhausts everyone and is not true delegation.", "explanationEs": "Quedarse con toda la autoridad hace de otros meras manos; agota a todos y no es verdadera delegación.", "correct": 1}, {"textEn": "In 2 Timothy 2:2, Paul says to commit the truth to people who are:", "textEs": "En 2 Timoteo 2:2, Pablo dice encargar la verdad a personas que sean:", "optionsEn": ["The most popular", "Wealthy donors", "Faithful and able to teach others also", "Merely available"], "optionsEs": ["Las más populares", "Donantes ricos", "Fieles e idóneas para enseñar también a otros", "Solo disponibles"], "explanationEn": "Paul names two qualities: faithful (trustworthy) and able to teach others also (capable to pass it on).", "explanationEs": "Pablo nombra dos cualidades: fieles (de confianza) e idóneas para enseñar a otros (capaces de transmitirlo).", "correct": 2}, {"textEn": "How many 'generations' of ministry are pictured in 2 Timothy 2:2?", "textEs": "¿Cuántas 'generaciones' de ministerio se ven en 2 Timoteo 2:2?", "optionsEn": ["Ten", "Four (Paul, Timothy, faithful men, others)", "One", "Two"], "optionsEs": ["Diez", "Cuatro (Pablo, Timoteo, hombres fieles, otros)", "Una", "Dos"], "explanationEn": "Paul → Timothy → faithful men → others also: four generations in one verse, the seed of multiplication.", "explanationEs": "Pablo → Timoteo → hombres fieles → también otros: cuatro generaciones en un versículo, semilla de multiplicación.", "correct": 1}, {"textEn": "In the illustration, why did the first pastor's church nearly die when he fell ill?", "textEs": "En la ilustración, ¿por qué casi murió la iglesia del primer pastor cuando enfermó?", "optionsEn": ["Bad doctrine", "Too much structure", "Lack of money", "Everything had lived in him alone; nothing was delegated"], "optionsEs": ["Mala doctrina", "Demasiada estructura", "Falta de dinero", "Todo había vivido en él solo; nada estaba delegado"], "explanationEn": "He did everything himself, so when he was gone the ministry, which lived only in him, collapsed.", "explanationEs": "Lo hacía todo él mismo, así que al faltar él, el ministerio, que vivía solo en él, se desplomó.", "correct": 3}, {"textEn": "Why did the second pastor's church stand firm during his three-month absence?", "textEs": "¿Por qué se mantuvo firme la iglesia del segundo pastor durante su ausencia de tres meses?", "optionsEn": ["The ministry lived in the whole body, not in him", "He never really left", "It was a larger church", "He had more money"], "optionsEs": ["El ministerio vivía en todo el cuerpo, no en él", "Nunca se fue de veras", "Era una iglesia más grande", "Tenía más dinero"], "explanationEn": "He gave ministry away and equipped others, so the work lived in the whole body and did not falter.", "explanationEs": "Regaló el ministerio y capacitó a otros, así que la obra vivía en todo el cuerpo y no se tambaleó.", "correct": 0}, {"textEn": "To release others to minister is described as an act of:", "textEs": "Soltar a otros para ministrar se describe como un acto de:", "optionsEn": ["Pride", "Laziness", "Weakness", "Humility and faith"], "optionsEs": ["Orgullo", "Pereza", "Debilidad", "Humildad y fe"], "explanationEn": "Humility (the work will be done differently) and faith (God gifts and uses His people, not only the leader).", "explanationEs": "Humildad (la obra se hará distinto) y fe (Dios dota y usa a su pueblo, no solo al líder).", "correct": 3}, {"textEn": "A church built around one man is forever limited to:", "textEs": "Una iglesia edificada alrededor de un solo hombre queda para siempre limitada a:", "optionsEn": ["The largest budget", "The size of one man", "The size of the building", "Unlimited growth"], "optionsEs": ["El mayor presupuesto", "El tamaño de un solo hombre", "El tamaño del edificio", "Un crecimiento ilimitado"], "explanationEn": "A church can only grow as large as the leader is willing to release; one man caps it at his own reach.", "explanationEs": "Una iglesia solo crece tanto como el líder esté dispuesto a soltar; un solo hombre la limita a su alcance.", "correct": 1}, {"textEn": "A leader who recruits good people but hovers, overrides, and redoes their work:", "textEs": "Un líder que recluta buena gente pero ronda, anula y rehace su obra:", "optionsEn": ["Has the form of delegation without its substance", "Shows great faith", "Equips the saints fully", "Delegates in substance"], "optionsEs": ["Tiene la forma de la delegación sin su sustancia", "Muestra gran fe", "Perfecciona del todo a los santos", "Delega en sustancia"], "explanationEn": "Such a leader keeps the form of delegation but not its substance, and his people stop trying.", "explanationEs": "Tal líder conserva la forma de la delegación pero no su sustancia, y su gente deja de intentar.", "correct": 0}, {"textEn": "Too little structure in a church leads to:", "textEs": "Muy poca estructura en una iglesia conduce a:", "optionsEn": ["Strong growth", "Perfect order", "Healthy freedom", "Confusion, where everyone assumes someone else will act"], "optionsEs": ["Fuerte crecimiento", "Orden perfecto", "Una libertad sana", "Confusión, donde cada uno supone que otro actuará"], "explanationEn": "With too little structure the church collapses into confusion and tasks fall through the cracks.", "explanationEs": "Con muy poca estructura la iglesia se desploma en confusión y las tareas quedan sin hacerse.", "correct": 3}, {"textEn": "When organization becomes 'an end in itself,' the unit warns that:", "textEs": "Cuando la organización se vuelve 'un fin en sí misma', la unidad advierte que:", "optionsEn": ["Ministry multiplies", "Costs go down", "The scaffolding begins to crush the building", "The church thrives"], "optionsEs": ["El ministerio se multiplica", "Bajan los costos", "El andamio comienza a aplastar el edificio", "La iglesia prospera"], "explanationEn": "Meetings, committees, and procedures that serve only themselves smother the ministry they should serve.", "explanationEs": "Reuniones, comités y procedimientos que solo se sirven a sí mismos ahogan el ministerio que debían servir.", "correct": 2}, {"textEn": "The proper test to apply to any church structure is:", "textEs": "La prueba apropiada para cualquier estructura de la iglesia es:", "optionsEn": ["Is this impressive?", "Does this protect the committee?", "Is this modern?", "Does this help God's people do the work God has given them?"], "optionsEs": ["¿Es impresionante?", "¿Protege al comité?", "¿Es moderno?", "¿Ayuda esto al pueblo de Dios a hacer la obra que Dios le ha dado?"], "explanationEn": "The right question is whether the structure helps God's people do the work He has given them.", "explanationEs": "La pregunta correcta es si la estructura ayuda al pueblo de Dios a hacer la obra que Él le ha dado.", "correct": 3}, {"textEn": "Ephesians 4:16 pictures the church as a body in which:", "textEs": "Efesios 4:16 presenta a la iglesia como un cuerpo en el cual:", "optionsEn": ["Most parts are idle", "The structure matters most", "Every joint and part supplies its share, growing in love", "Only the head works"], "optionsEs": ["La mayoría de las partes está ociosa", "La estructura importa más", "Cada coyuntura y parte aporta su parte, creciendo en amor", "Solo la cabeza trabaja"], "explanationEn": "The whole body grows as every joint supplies its part, building itself up in love.", "explanationEs": "Todo el cuerpo crece al aportar cada coyuntura su parte, edificándose a sí mismo en amor.", "correct": 2}, {"textEn": "The central lesson of Unit 4 about delegation is to build the church:", "textEs": "La lección central de la Unidad 4 sobre la delegación es edificar la iglesia:", "optionsEn": ["Around the leader's own two hands", "Without any structure at all", "By equipping and entrusting faithful, capable people and releasing them", "With as many committees as possible"], "optionsEs": ["Alrededor de las propias dos manos del líder", "Sin estructura alguna", "Capacitando y confiando a personas fieles y capaces, y soltándolas", "Con tantos comités como sea posible"], "explanationEn": "Build not around your own hands but by equipping faithful, capable people and having courage to release them.", "explanationEs": "Edifique no alrededor de sus manos, sino capacitando a personas fieles y capaces y teniendo valor de soltarlas.", "correct": 2}];
+const kwQuestions = [{"textEn": "Explain the proper relationship between structure and mission in the church.", "textEs": "Explique la relación apropiada entre la estructura y la misión en la iglesia.", "kw_en": ["structure", "mission", "serve", "master", "skeleton", "end", "help", "work"], "kw_es": ["estructura", "misión", "sirv", "amo", "esqueleto", "fin", "ayud", "obra"], "modelEn": "Structure should serve the mission and never become the mission. A church needs enough structure to carry its work — clear roles and lines of responsibility — and too little of it collapses into confusion. But structure is a good servant and a terrible master: when the organization becomes an end in itself, with meetings that breed meetings and committees protecting their own importance, the scaffolding crushes the building. Healthy structure is like a skeleton, strong enough to give the body shape and let it move yet always serving the life it carries. So the leader tests every structure by asking not whether it is impressive but whether it helps God's people do the work God has given them.", "modelEs": "La estructura debe servir a la misión y nunca volverse la misión. Una iglesia necesita suficiente estructura para llevar su obra — roles claros y líneas de responsabilidad — y con muy poca se desploma en confusión. Pero la estructura es un buen siervo y un amo terrible: cuando la organización se vuelve un fin en sí misma, con reuniones que engendran reuniones y comités que protegen su propia importancia, el andamio aplasta el edificio. La estructura sana es como un esqueleto, bastante fuerte para dar forma al cuerpo y dejarlo moverse, pero siempre al servicio de la vida que sostiene. Así que el líder prueba cada estructura preguntando no si es impresionante sino si ayuda al pueblo de Dios a hacer la obra que Dios le ha dado."}, {"textEn": "What does Ephesians 4:11-12 teach about the leader's true role, and what error does it correct?", "textEs": "¿Qué enseña Efesios 4:11-12 sobre el verdadero papel del líder, y qué error corrige?", "kw_en": ["equip", "saint", "ministry", "leader", "body", "train", "all", "build"], "kw_es": ["perfeccion", "santo", "ministerio", "líder", "cuerpo", "capacit", "todo", "edific"], "modelEn": "Ephesians 4:11-12 teaches that Christ gave leaders to equip the saints for the work of ministry, so that the saints do the ministry and the whole body is built up. The leader's true role is to be a trainer of ministers, not the sole minister. This corrects the common error of believing that ministry is the paid leader's job while the people's job is merely to attend; that reads the verse exactly backwards. The body was never meant to be carried by one organ, so a church organized that way stays weak no matter how gifted the leader. Where leaders equip and release the saints, every member becomes a minister and the church does far more than one man ever could.", "modelEs": "Efesios 4:11-12 enseña que Cristo dio líderes para perfeccionar a los santos para la obra del ministerio, de modo que los santos hagan el ministerio y todo el cuerpo sea edificado. El verdadero papel del líder es ser capacitador de ministros, no el único ministro. Esto corrige el error común de creer que el ministerio es la tarea del líder pagado mientras la tarea del pueblo es solo asistir; eso lee el versículo exactamente al revés. El cuerpo nunca fue hecho para ser llevado por un solo órgano, así que una iglesia organizada así queda débil por dotado que sea el líder. Donde los líderes capacitan y sueltan a los santos, cada miembro se vuelve ministro y la iglesia hace mucho más de lo que un solo hombre podría."}, {"textEn": "Distinguish true delegation from 'dumping,' and describe what good delegation includes.", "textEs": "Distinga la verdadera delegación del 'deshacerse', y describa qué incluye delegar bien.", "kw_en": ["delegat", "dump", "responsibility", "authority", "support", "account", "task", "capable"], "kw_es": ["deleg", "deshac", "responsabilidad", "autoridad", "apoyo", "cuenta", "tarea", "capaz"], "modelEn": "Dumping is handing someone an unwanted task with no training, no authority, and no support, then blaming them when it fails. True delegation is far higher: it entrusts a real responsibility to a capable person, gives them the authority to actually carry it, provides what they need to succeed, and then holds them lovingly accountable for the result. Moses did this on Jethro's counsel, keeping the weightiest matters but truly handing the rest over with real authority. A leader who delegates tasks while clutching all authority has not delegated at all; he has only made others his hands while keeping every decision, exhausting both them and himself. Good delegation gives away genuine responsibility to people equipped to bear it.", "modelEs": "Deshacerse es entregar a alguien una tarea no deseada sin capacitación, sin autoridad y sin apoyo, y luego culparlo cuando falla. La verdadera delegación es mucho más alta: confía una responsabilidad real a una persona capaz, le da la autoridad para de veras llevarla, le provee lo que necesita para tener éxito, y luego le pide cuentas con amor por el resultado. Moisés lo hizo por consejo de Jetro, reteniendo los asuntos más graves pero entregando de veras el resto con autoridad real. Un líder que delega tareas mientras se aferra a toda la autoridad no ha delegado en absoluto; solo ha hecho de otros sus manos quedándose con cada decisión, agotándolos a ellos y a sí mismo. Delegar bien entrega responsabilidad genuina a personas capacitadas para llevarla."}, {"textEn": "According to 2 Timothy 2:2, to whom should ministry be entrusted, and why those qualities?", "textEs": "Según 2 Timoteo 2:2, ¿a quién debe encargarse el ministerio, y por qué esas cualidades?", "kw_en": ["faithful", "teach", "others", "entrust", "capable", "reliable", "multiply", "trust"], "kw_es": ["fiel", "enseñ", "otros", "encarg", "capaz", "confiable", "multiplic", "confianza"], "modelEn": "Paul tells Timothy to commit what he has heard to faithful men who will be able to teach others also. Ministry should be entrusted to people who are faithful — reliable and trustworthy, finishing what they begin and dependable when no one watches — and able to teach others also — capable, and able to pass the work on. These qualities matter because the wrong steward can do more harm than an unfilled role, and because the goal is not merely to fill a slot but to multiply: Paul to Timothy, Timothy to faithful men, those men to others also — four generations in one verse. Entrusting the work to faithful, capable people who will equip still others is how the church grows beyond the leader's own reach.", "modelEs": "Pablo dice a Timoteo que encargue lo que ha oído a hombres fieles que serán idóneos para enseñar también a otros. El ministerio debe encargarse a personas que sean fieles — confiables y dignas de confianza, que terminan lo que empiezan y en quienes se puede confiar cuando nadie observa — e idóneas para enseñar también a otros — capaces, y capaces de transmitir la obra. Estas cualidades importan porque el mayordomo equivocado puede hacer más daño que un puesto vacío, y porque la meta no es solo llenar un lugar sino multiplicar: Pablo a Timoteo, Timoteo a hombres fieles, esos hombres a otros también — cuatro generaciones en un versículo. Confiar la obra a personas fieles y capaces que capacitarán aún a otros es como la iglesia crece más allá del alcance del líder."}, {"textEn": "Why is the courage to release others an act of humility and faith?", "textEs": "¿Por qué el valor de soltar a otros es un acto de humildad y de fe?", "kw_en": ["release", "humility", "faith", "control", "gift", "spirit", "trust", "differ"], "kw_es": ["solt", "humildad", "fe", "control", "don", "espíritu", "confí", "distint"], "modelEn": "Releasing others is an act of humility because it means the work will be done differently than the leader would do it, and sometimes less well at first; the leader must surrender control and accept that his way is not the only good way. It is an act of faith because it trusts that God gifts and uses His people, not only the leader — the same Spirit who called and gifted the leader has called and gifted them. A leader who cannot release hovers, overrides, and redoes others' work, teaching everyone that their efforts do not matter, so they stop trying. But the leader who releases faithful people trusts God to work through the whole body, and only such release lets a church grow beyond the size of one man.", "modelEs": "Soltar a otros es un acto de humildad porque significa que la obra se hará de modo distinto a como el líder la haría, y a veces menos bien al principio; el líder debe entregar el control y aceptar que su manera no es la única buena. Es un acto de fe porque confía en que Dios dota y usa a su pueblo, y no solo al líder — el mismo Espíritu que llamó y dotó al líder los ha llamado y dotado a ellos. Un líder que no puede soltar ronda, anula y rehace la obra de otros, enseñando a todos que sus esfuerzos no importan, así que dejan de intentar. Pero el líder que suelta a personas fieles confía en que Dios obre por todo el cuerpo, y solo tal soltar deja que una iglesia crezca más allá del tamaño de un solo hombre."}, {"textEn": "Use the illustration of the two pastors to show the cost of failing to delegate.", "textEs": "Use la ilustración de los dos pastores para mostrar el costo de no delegar.", "kw_en": ["everything", "ill", "collaps", "body", "equip", "release", "grow", "reach"], "kw_es": ["todo", "enferm", "desplom", "cuerpo", "capacit", "solt", "crec", "alcance"], "modelEn": "The first pastor did everything himself — preaching, counseling, leading every meeting — and for a time people praised his hard work. But his church never grew past the reach of one man, the people stayed spiritual infants because they were given nothing to carry, and when he fell ill for three months the church nearly died, because everything had lived in him alone. The second pastor gave ministry away from the start, training teachers, raising deacons, and entrusting real work and real decisions to faithful members. He looked less impressive at first, but his church grew strong and deep, and when he was gone three months it did not falter, because the ministry lived in the whole body. The cost of failing to delegate is a church that cannot outlive or outgrow its leader; only one of the two was obeying Ephesians 4.", "modelEs": "El primer pastor lo hacía todo él mismo — predicar, aconsejar, dirigir cada reunión — y por un tiempo la gente alabó su duro trabajo. Pero su iglesia nunca creció más allá del alcance de un solo hombre, la gente siguió siendo niños espirituales porque no se le dio nada que llevar, y cuando él enfermó tres meses la iglesia casi murió, porque todo había vivido en él solo. El segundo pastor regaló el ministerio desde el principio, capacitando maestros, levantando diáconos y confiando obra y decisiones reales a miembros fieles. Al principio parecía menos impresionante, pero su iglesia se hizo fuerte y profunda, y cuando estuvo ausente tres meses no se tambaleó, porque el ministerio vivía en todo el cuerpo. El costo de no delegar es una iglesia que no puede sobrevivir ni crecer más que su líder; solo uno de los dos obedecía Efesios 4."}, {"textEn": "What are the dangers of BOTH too little and too much structure?", "textEs": "¿Cuáles son los peligros TANTO de muy poca como de demasiada estructura?", "kw_en": ["little", "confusion", "much", "bureaucracy", "smother", "mission", "balance", "serve"], "kw_es": ["poca", "confusión", "demasiada", "burocracia", "ahog", "misión", "equilibr", "sirv"], "modelEn": "Too little structure leaves a church in confusion, where everyone assumes someone else will do the task and no one does, so the work falls through the cracks. Too much structure, or structure that becomes an end in itself, smothers the very ministry it was meant to serve: meetings produce only more meetings, committees protect their own importance, and procedures choke the work — the scaffolding crushing the building. The healthy balance is enough structure to carry the mission but no more, always tested by whether it helps God's people do the work He has given them. Structure is a good servant and a terrible master, so it must stay in the service of the church's life and never rule over it.", "modelEs": "Muy poca estructura deja a la iglesia en confusión, donde cada uno supone que otro hará la tarea y nadie la hace, así que la obra queda sin hacerse. Demasiada estructura, o una estructura que se vuelve un fin en sí misma, ahoga el mismo ministerio que debía servir: las reuniones solo producen más reuniones, los comités protegen su propia importancia, y los procedimientos asfixian la obra — el andamio aplastando el edificio. El equilibrio sano es suficiente estructura para llevar la misión pero no más, siempre probada por si ayuda al pueblo de Dios a hacer la obra que Él le ha dado. La estructura es un buen siervo y un amo terrible, así que debe quedar al servicio de la vida de la iglesia y nunca gobernarla."}, {"textEn": "How does the body imagery of Ephesians 4:16 shape how a church should be organized?", "textEs": "¿Cómo moldea la imagen del cuerpo de Efesios 4:16 el modo en que debe organizarse una iglesia?", "kw_en": ["body", "member", "joint", "part", "gift", "build", "love", "share"], "kw_es": ["cuerpo", "miembro", "coyuntura", "parte", "don", "edific", "amor", "aport"], "modelEn": "Ephesians 4:16 pictures the church as a body in which the whole grows as every joint supplies its part, building itself up in love. This shapes how a church should be organized: not as one organ doing everything while the rest are idle, but as many members, each with a gift, each doing its share. Organization and delegation exist to give every part its proper work, so that the body functions as God designed. A church organized around the body image equips and releases its members rather than centralizing all ministry in the leader, and the result is a church that grows and builds itself up in love because every part is supplying what it was gifted to supply.", "modelEs": "Efesios 4:16 presenta a la iglesia como un cuerpo en el cual el todo crece al aportar cada coyuntura su parte, edificándose a sí mismo en amor. Esto moldea cómo debe organizarse una iglesia: no como un solo órgano que hace todo mientras el resto está ocioso, sino como muchos miembros, cada uno con un don, cada uno haciendo su parte. La organización y la delegación existen para dar a cada parte su obra propia, de modo que el cuerpo funcione como Dios lo diseñó. Una iglesia organizada según la imagen del cuerpo capacita y suelta a sus miembros en vez de centralizar todo el ministerio en el líder, y el resultado es una iglesia que crece y se edifica a sí misma en amor porque cada parte aporta lo que fue dotada para aportar."}, {"textEn": "How does the divine/human pattern appear in equipping and delegation?", "textEs": "¿Cómo aparece el patrón divino/humano en la capacitación y la delegación?", "kw_en": ["divine", "human", "spirit", "gift", "equip", "work", "god", "member"], "kw_es": ["divin", "human", "espíritu", "don", "capacit", "obra", "dios", "miembro"], "modelEn": "The divine/human pattern appears in that God works His ministry through gifted human members rather than through the leader alone. It is divine because the same Spirit gifts and calls the saints, distributing abilities throughout the body as He wills; the gifts are God's doing, not the leader's invention. It is human because those gifts must be equipped, trained, and released through the leader's diligent work of teaching and entrusting. The leader does not manufacture the gifting, but he must develop and deploy it. So equipping the saints joins God's gifting with the leader's labor, exactly as Scripture's pattern runs: God accomplishes His purpose through prepared human means, and the leader's task is to ready and release the people God has gifted.", "modelEs": "El patrón divino/humano aparece en que Dios obra su ministerio a través de miembros humanos dotados y no solo a través del líder. Es divino porque el mismo Espíritu dota y llama a los santos, repartiendo capacidades por todo el cuerpo como Él quiere; los dones son obra de Dios, no invención del líder. Es humano porque esos dones deben ser capacitados, entrenados y soltados mediante la obra diligente del líder de enseñar y confiar. El líder no fabrica el don, pero debe desarrollarlo y desplegarlo. Así que perfeccionar a los santos une el don de Dios con la labor del líder, tal como corre el patrón de la Escritura: Dios cumple su propósito por medios humanos preparados, y la tarea del líder es preparar y soltar al pueblo que Dios ha dotado."}, {"textEn": "Summarize Unit 4: how should a leader turn vision into a structure that lasts?", "textEs": "Resuma la Unidad 4: ¿cómo debe un líder convertir la visión en una estructura que perdure?", "kw_en": ["structure", "equip", "saint", "delegat", "faithful", "release", "body", "mission"], "kw_es": ["estructura", "perfeccion", "santo", "deleg", "fiel", "solt", "cuerpo", "misión"], "modelEn": "Unit 4 teaches that a leader turns vision into a lasting structure by building not around his own two hands but around an equipped, released body. First, he provides enough structure to carry the mission, keeping it a servant and never a master. Second, he embraces the goal of Ephesians 4: to equip the saints for the work of ministry rather than to do it all himself. Third, he delegates truly — entrusting real responsibility and authority to faithful, capable people, as Paul charged Timothy to commit the work to faithful men able to teach others also. Finally, he finds the humility and faith to release them, trusting the Spirit who gifted them. The result is a body, joined and knit together, every part doing its share and building itself up in love — a church that can outgrow and outlast its leader.", "modelEs": "La Unidad 4 enseña que un líder convierte la visión en una estructura duradera edificando no alrededor de sus propias dos manos sino alrededor de un cuerpo capacitado y soltado. Primero, provee suficiente estructura para llevar la misión, manteniéndola siempre como sierva y nunca como ama. Segundo, abraza la meta de Efesios 4: perfeccionar a los santos para la obra del ministerio en vez de hacerlo todo él mismo. Tercero, delega de veras — confiando responsabilidad y autoridad reales a personas fieles y capaces, como Pablo encargó a Timoteo encomendar la obra a hombres fieles idóneos para enseñar también a otros. Por último, halla la humildad y la fe para soltarlas, confiando en el Espíritu que las dotó. El resultado es un cuerpo, bien concertado y unido, cada parte haciendo su parte y edificándose a sí mismo en amor — una iglesia que puede crecer más y durar más que su líder."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 5 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 5 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s).</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (answered || mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (answered || mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (mcQuestions.length + idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 100 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 100 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y reintente la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSALReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

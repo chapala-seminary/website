@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS New Testament Survey — Unit 10: The Pastoral Epistles: Guarding the Deposit</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+.track-bar { background: #f6f1e8; border: 1px solid #d7cec1; border-radius: 12px; padding: 12px 16px; margin: 15px 0; }
+.track-bar label { margin-right: 18px; cursor: pointer; font-size: 0.95rem; }
+.track-bar input[type=radio] { margin-right: 6px; vertical-align: middle; }
+.reset-btn { background: #8a5a3a; color: white; border: none; border-radius: 30px; padding: 8px 18px; cursor: pointer; font-family: inherit; margin-left: 10px; font-size: 0.9rem; }
+.reset-btn:hover { background: #6e4528; }
+.redirect-notice { background: #e8f5ea; border: 1px solid #b9dfc2; color: #1f6b3b; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-weight: bold; }
+@media print {
+  @page { margin: 0.5in; }
+  body { background: white; color: black; font-size: 12pt; padding: 0; }
+  .nav-bar, .toggle-btn, #submitExamBtn, .reset-btn, #examResult, .track-bar, button.small { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; padding: 12px; margin-bottom: 12px; }
+  .question { page-break-inside: avoid; }
+  h1, h2, h3 { color: black; page-break-after: avoid; }
+  .option { background: white; border-color: #999; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" >← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 New Testament Survey — Unit 10: The Pastoral Epistles: Guarding the Deposit</span><span class="lang-es">📖 Estudio del Nuevo Testamento — Unidad 10: Las Epístolas Pastorales: Guardando el Depósito</span></h1>
+    <p><span class="lang-en"><strong>Course Author:</strong> Dr. Wayne Cook | <strong>Seminary Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Autor del Curso:</strong> Dr. Wayne Cook | <strong>Director del Seminario:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic;"></p>
+</div>
+
+<div class="card" id="teachingContent">
+<div class="lang-en">
+        <h2>I. The Last Letters of an Old Apostle</h2>
+        <p>Of all the books in the Bible, the three Pastoral Epistles — 1 Timothy, Titus, and 2 Timothy — are the ones to press into the hands of a new pastor with the most urgency. Why? Because these are the only three letters in the New Testament addressed by Paul to younger pastors rather than to whole congregations. They are the apostle's playbook for ministry. They are the old apostle's last words to the next generation. They are the field manual for guarding the deposit of the gospel after the founder has gone home.</p>
+
+        <p>The dating of the Pastoral Epistles is one of the most fascinating sequences in the New Testament. After Paul's first Roman imprisonment of Acts 28 ended around AD 62, he was released. He resumed traveling. He revisited churches in Asia Minor and Macedonia. In or about AD 63 to 65, he wrote 1 Timothy and Titus from somewhere in the field. Then, in or about AD 66 to 67, he was arrested a second time and taken back to Rome — but this time not to a rented house. This time to the Mamertine dungeon, a stone hole below the Roman forum, where the only way in and out was a single trapdoor in the ceiling. From that dungeon, with the death sentence already pronounced, the old apostle wrote his last letter — 2 Timothy. It is the closest thing in the New Testament to Paul's final will and testament. He would be beheaded outside Rome within the year.</p>
+
+        <h2>II. Three Letters, Three Settings, One Mission</h2>
+        <p>The three Pastoral Epistles take place in three different church settings, and each one targets a particular pastoral need. <strong>1 Timothy</strong> is addressed to Timothy at Ephesus — a large, established, doctrinally troubled congregation that was being undermined by false teachers from within (1 Timothy 1:3). Timothy's job at Ephesus was to <em>guard the church</em> by appointing the right elders, silencing the wrong teachers, and conducting himself with integrity in the household of God. <strong>Titus</strong> is addressed to Titus on the island of Crete — a young Greek pastor sent to a rough, newly-evangelized field of small house churches scattered across the island, surrounded by what Paul calls a culture of <em>"liars, evil beasts, lazy gluttons"</em> (Titus 1:12). Titus's job was to <em>organize the churches</em> by appointing elders, teaching sound doctrine, and training the believers to <em>"adorn the doctrine of God our Savior"</em> (Titus 2:10) with the way they lived. <strong>2 Timothy</strong> is addressed back to Timothy at Ephesus — but now from the apostle's death cell. Paul knows he will not get out alive. The young pastor he had once led to faith is to <em>finish what Paul has begun.</em> Pass the torch. Guard the deposit. Endure hardship as a good soldier. Suffer for the gospel. And in the day of accounting, hear from the Lord, <em>"Well done."</em></p>
+
+        <p>Three letters. Three settings. One mission. The mission that is the burden of every Pastoral Epistle is to <em>guard the deposit</em> of the gospel and to pass it intact to the next generation. The phrase Paul uses three times across these three letters is exactly that — <em>"Guard the deposit"</em> (1 Timothy 6:20, 2 Timothy 1:14). The Greek is <em>paratheke</em>, the noun for treasure entrusted to a faithful banker. The gospel is the deposit. Timothy and Titus are the bankers. The whole next generation of pastors who would read these letters and never personally meet Paul are the bankers. So are we. The deposit was put into our hands two thousand years ago. We owe it to the Owner intact.</p>
+
+        <h2>III. 1 Timothy — Guarding the Church</h2>
+        <p>1 Timothy follows the structure of a pastoral handbook. Chapter 1 deals with the false teachers and the law. Chapter 2 deals with public worship and prayer. Chapter 3 deals with the qualifications of elders and deacons — the most important administrative chapter in the New Testament for any congregation choosing its leaders. Chapter 4 deals with personal godliness in the life of the pastor himself. Chapters 5 and 6 deal with widows, elders, masters, slaves, the rich, and the poor — the social fabric of the local church.</p>
+
+        <p>The key verse of 1 Timothy is the most majestic single sentence Paul wrote about the church and what holds her up. <em>"That you may know how you ought to conduct yourself in the house of God, which is the church of the living God, the pillar and ground of the truth"</em> (1 Timothy 3:15). Every local church is two things at once. She is a <em>house</em> — a family, a fellowship, a home. And she is a <em>pillar</em> — a structural support holding up the truth in the middle of a falling-down world. The job of the pastor and the congregation together is to keep the house warm and to keep the pillar straight. The 1 Timothy church is a house and a pillar. Both. Neither without the other.</p>
+
+        <p>The closing charge of 1 Timothy 6:20–21 is the first time the deposit language appears: <em>"O Timothy! Guard what was committed to your trust, avoiding the profane and idle babblings and contradictions of what is falsely called knowledge — by professing it some have strayed concerning the faith."</em> Notice the warning at the end. Some have <em>strayed.</em> Some have wandered off. Some have been seduced by something called <em>knowledge</em> that was not knowledge at all. The first time Paul tells Timothy to guard the deposit, he names the threat. The deposit will not guard itself.</p>
+
+        <h2>IV. Titus — Adorning the Doctrine on Crete</h2>
+        <p>Titus opens with a description of the island where Titus was working that may be the bluntest Paul ever wrote. He quotes a Cretan poet of the sixth century BC named Epimenides, who had said about his own people, <em>"Cretans are always liars, evil beasts, lazy gluttons"</em> (Titus 1:12). Paul adds: <em>"This testimony is true."</em> That is the mission field where the young pastor Titus had been left. A culture so morally bankrupt that even its own poets confessed it. And Paul's strategy was not to escape from Crete. The strategy was to plant churches on Crete that lived so visibly differently that the gospel preached itself.</p>
+
+        <p>The book of Titus organizes the apostle's strategy into three pastoral targets that match the natural three-point spine of the letter. <strong>Sound doctrine</strong> (chapter 1) — Titus is to appoint elders who hold firmly to the trustworthy message <em>"so that he can encourage others by sound doctrine and refute those who oppose it"</em> (Titus 1:9). The standard for ministry is not personal charisma. The standard is doctrinal fidelity. <strong>Good works</strong> (chapter 2) — every group in the church, the older men, the older women, the younger women, the younger men, the slaves, all of them are to be taught how to live in a way that makes the gospel attractive. <em>"That they may adorn the doctrine of God our Savior in all things"</em> (Titus 2:10). The word translated <em>adorn</em> is the Greek <em>kosmeō</em> — the root of our word <em>cosmetic.</em> The behavior of the believer puts the makeup on the gospel. <strong>The blessed hope</strong> (chapters 2:11–3:7) — the present-tense reason for the godly life is the future-tense expectation of the return of Christ.</p>
+
+        <p>The key verse of Titus is the great Christmas-and-Easter sentence of 2:11–14. <em>"For the grace of God that brings salvation has appeared to all men, teaching us that, denying ungodliness and worldly lusts, we should live soberly, righteously, and godly in the present age, looking for the blessed hope and glorious appearing of our great God and Savior Jesus Christ, who gave Himself for us, that He might redeem us from every lawless deed and purify for Himself His own special people, zealous for good works."</em> The grace of God has appeared (Bethlehem). It teaches us to live godly lives (Calvary applied). We look for the blessed hope (His second coming). Past, present, future — all in one paragraph. This single passage is the most complete summary of the Christian life in any of Paul's letters.</p>
+
+        <p>And the connecting note Paul strikes between the doctrine and the duty is the great Greek-Spanish wordplay that any pastor in Latin America can press right into a sermon. The Spanish word for the believer's expectation of Christ is <em>esperanza</em> — and it carries three meanings that English breaks into three separate words. <em>Esperar</em> means to <em>wait.</em> <em>Esperanza</em> means <em>hope.</em> And to <em>esperar</em> something also means to <em>expect</em> it. In Spanish, the believer who is waiting for the Lord is hoping for the Lord and is expecting the Lord, all in one verb. That is exactly what Titus 2:13 is teaching. We do not wait without hope. We do not hope without expectation. We do not expect without waiting. The <em>blessed esperanza</em> is the one verb that carries all three.</p>
+
+        <h2>V. 2 Timothy — The Final Charge from the Dungeon</h2>
+        <p>2 Timothy is the most personal book Paul ever wrote. He is in the Mamertine dungeon. He is cold. He is alone except for Luke. He has been deserted by men he had once trusted. He knows the verdict has been handed down and that he will be executed soon. He has one major task left in this life — to write one more letter to one young pastor who needs to be told what to do next.</p>
+
+        <p>The structure of 2 Timothy follows the rhythm of four pastoral charges that Paul lays one on top of the other, the way an old man stacks firewood for a son who will need to keep the house warm after he is gone. Chapter 1 — <em>Be unashamed of the gospel.</em> Chapter 2 — <em>Be strong in the grace that is in Christ Jesus.</em> Chapter 3 — <em>Continue in the things you have learned.</em> Chapter 4 — <em>Preach the word, in season, out of season.</em></p>
+
+        <p>The deposit verse appears for the second time in 2 Timothy 1:14. <em>"That good thing which was committed to you, keep by the Holy Spirit who dwells in us."</em> The same verb. The same noun. The deposit. The deposit is now formally entrusted to Timothy in writing. And the means of guarding it is named: <em>the Holy Spirit who dwells in us.</em> No pastor guards the deposit by personal effort alone. The deposit is guarded by the indwelling Spirit, applied to a faithful man, day by day. Then, in the very next verse, 2 Timothy 2:2, Paul gives Timothy the great discipleship formula of the New Testament: <em>"And the things that you have heard from me among many witnesses, commit these to faithful men who will be able to teach others also."</em> Four generations are stacked in one sentence. <strong>Paul</strong> taught <strong>Timothy</strong>. Timothy is to commit it to <strong>faithful men</strong>. Faithful men are to teach <strong>others also.</strong> The deposit was never meant to stop at one banker. It was always meant to be passed.</p>
+
+        <h2>VI. The Tragedy of Demas</h2>
+        <p>Toward the very end of 2 Timothy, the old apostle drops one personal note that has haunted preachers for two thousand years. Three little words. <em>"Demas has forsaken me, having loved this present world, and has departed for Thessalonica"</em> (2 Timothy 4:10). The line is heartbreaking precisely because of how casual it is. Demas had been Paul's coworker for years. He is mentioned by name in the prison-epistle period as a faithful companion (Colossians 4:14; Philemon 1:24). And now, in the final letter, he is gone.</p>
+
+        <p>The tragedy of Demas can be charted in four alliterative steps that take a believer from the inner circle of Paul's ministry to the cold disappearance of his name from the church. Demas was <strong>Dutiful</strong> at first — a fellow worker named with Mark and Luke. Then Demas became <strong>Distracted</strong>. Something began to compete with the Lord in his affections. Paul names it: <em>"having loved this present world."</em> The Greek is <em>agapesas ton nun aiona</em> — having developed a settled, ongoing love for the present age. Demas had begun to look sideways. Then Demas <strong>Defected</strong>. The looking sideways became leaving. He packed his bag and walked out of the dungeon and out of Paul's last days. And finally Demas <strong>Died</strong> — not necessarily physically, though that may have come too, but he died to the ministry, to the inner circle, to every chronicle of the early church. After 2 Timothy 4:10, Demas is never mentioned again. <em>Dutiful, Distracted, Defected, Died.</em></p>
+
+        <p>The story is told of a young man learning to drive. His instructor sat next to him in the front seat and watched him grip the wheel and look intently down the road. Then a row of mailboxes came up on the right. The young driver's eyes drifted toward the mailboxes — just for a second. And the car drifted toward the mailboxes too. The instructor reached over, corrected the wheel, and said to him a sentence he never forgot: <em>"The car goes where the eyes are looking. You do not have to turn the wheel to crash. You just have to look at what you should not be looking at."</em> That is the tragedy of Demas. He did not announce a defection. He did not write a letter of resignation. He just <em>looked</em> at the present world, and the wheel followed his eyes. Paul's charge to Timothy in the same chapter is the opposite. <em>"Watch in all things"</em> (2 Timothy 4:5). <em>Where you look is where you will go.</em></p>
+
+        <p>And immediately after the note about Demas, Paul writes a sentence that lifts the chapter back up. <em>"Get Mark and bring him with you, for he is useful to me for ministry"</em> (2 Timothy 4:11). The same John Mark who had defected from Paul at Perga on the first missionary journey (Acts 13:13), who had caused the painful split between Paul and Barnabas, who had once seemed disqualified — is by the end of Paul's life on the apostle's short list of the most useful men in the church. Demas walks out. Mark walks back in. Both stories appear in the same chapter. The Pastoral Epistles refuse to let either one be the whole picture. Some defect. Some are restored. The deposit is guarded by faithful men, and faithful men include the restored.</p>
+
+        <h2>VII. The Last Days and the Inspiration of Scripture</h2>
+        <p>Sandwiched in 2 Timothy 3 is the most important sentence in the Bible about the Bible. But before he gets to it, Paul gives a warning about the times in which Timothy will have to minister. <em>"But know this, that in the last days perilous times will come"</em> (2 Timothy 3:1). The catalog that follows in 2 Timothy 3:2–5 is exhausting to read. People will be lovers of themselves, lovers of money, boasters, proud, blasphemers, disobedient to parents, unthankful, unholy, unloving, unforgiving, slanderers, without self-control, brutal, despisers of good, traitors, headstrong, haughty, lovers of pleasure rather than lovers of God — <em>"having a form of godliness but denying its power"</em> (2 Timothy 3:5).</p>
+
+        <p>The story is told of a man in Kentucky who lived across the street from one of the most beautiful trees on the block. Its limbs spiraled up toward the sky. Birds nested in it. He used to stand at his window and admire it. One morning he saw a crew from the city in the neighbor's yard cutting it down. He walked over and asked the workman why on earth they would cut down such a beautiful tree. The workman waved him in and showed him the trunk. The bark was still intact. The limbs were still majestic. But inside the heart of the tree, the wood was hollow. Termites had eaten right through the core. The fence around the property had not stopped them. The locked gate had not stopped them. The dog had not stopped them. The outside still looked fine. The inside was gone. The crew had been called in to drop the tree before it fell on the children walking under it on the sidewalk. <em>"Having a form of godliness but denying its power."</em> That is 2 Timothy 3:5 in one tree. The bark looks fine. The core is hollow. The deposit is the only thing that protects from the termites. Without the deposit, the bark will not hold.</p>
+
+        <p>And so Paul turns to Timothy with the only piece of equipment the pastor can use to keep the deposit alive in a hollow world: <em>"All Scripture is given by inspiration of God, and is profitable for doctrine, for reproof, for correction, for instruction in righteousness, that the man of God may be complete, thoroughly equipped for every good work"</em> (2 Timothy 3:16–17). The Greek word translated <em>inspiration of God</em> is <em>theopneustos</em> — literally <em>God-breathed.</em> The Bible is not just inspired the way a poem is inspired. The Bible is breathed out of the mouth of God Himself the way the universe was breathed out of the mouth of God in Genesis. The same breath that filled Adam's nostrils and made him a living soul fills the Scripture and makes it a living book. The Bible is not a record of men talking about God. The Bible is the record of God talking, breathed onto pages held by men whose hands were guided by His Spirit.</p>
+
+        <h2>VIII. The Plumb Line</h2>
+        <p>The test of any teaching is not how new it sounds, how charismatic the teacher is, or how big the crowd has gotten. The test is whether the teaching lines up with the deposit already given. The prophet Amos was given a vision of God standing by a wall, and in His hand was a plumb line (Amos 7:7–8). A plumb line is a simple carpenter's tool — a weight on the end of a string. When the weight is allowed to hang free, the string falls in a perfectly straight vertical line, because gravity is exactly the same in every direction. The carpenter holds the string against the wall he is building, and the line tells him whether the wall is straight. The plumb line does not bend to flatter the carpenter. The plumb line does not change with the carpenter's preferences. The plumb line tells the carpenter the truth, and the carpenter either listens or builds a wall that will fall down.</p>
+
+        <p>The Pastoral Epistles are the New Testament's plumb line. They tell every pastor — and every believer who supports a pastor — what the deposit looks like, how to recognize it, and how to keep it from being bent. They name false doctrines and false teachers by category. They warn that the bent will look attractive and that the straight will not always feel comfortable. They charge the next generation of leaders to be plumb-line men and plumb-line women. The deposit either stays vertical, or it falls down on the people inside the house.</p>
+
+        <h2>IX. The Final Words of Paul</h2>
+        <p>Three chapters before the end of 2 Timothy, the apostle Paul writes the sentence that is engraved in stained glass in seminary chapels all over the world. <em>"For I am already being poured out as a drink offering, and the time of my departure is at hand. I have fought the good fight, I have finished the race, I have kept the faith. Finally, there is laid up for me the crown of righteousness, which the Lord, the righteous Judge, will give to me on that Day, and not to me only but also to all who have loved His appearing"</em> (2 Timothy 4:6–8). Three verbs in the perfect tense. <em>Fought.</em> <em>Finished.</em> <em>Kept.</em> The man who had once been Saul of Tarsus dragging Christians out of their homes to prison was now in a Roman dungeon waiting for the executioner, and the last words he wrote about his own life were these three perfect-tense verbs in a row.</p>
+
+        <p>This paragraph belongs to every believer, not only to Paul. The <em>crown of righteousness</em> is laid up for the apostle <em>"and not to me only but also to all who have loved His appearing."</em> Have you loved His appearing? Then the crown is laid up for you, too. The dungeon is the address of every faithful believer somewhere in life. The crown is the address of every faithful believer at the end of it.</p>
+
+        <p>There was a man named Jim Ruddy whom I knew personally and whom I visited in the hospital in the final days of his life. He had lived for the Lord. He had served the church. He had loved his family. And as his body grew weaker, I went and sat at his bedside, expecting to be the one who would comfort him. He looked at me with that frail clarity that comes only to a believer who has loved Christ's appearing for a lifetime, and he said: <em>"Pastor, it's not going to be long now. I will soon be with Jesus."</em> That was Paul's spirit in 2 Timothy 4. That was the spirit of a man who knew the deposit had been guarded, the race finished, the faith kept. There was no fear in his eyes. There was only expectation. <em>Esperanza.</em> Waiting, hoping, expecting — all in one word, all in one breath, all in one bedside.</p>
+
+        <p>Press on, my friend, into the rest of the New Testament with the same Lord who lit a dungeon with the joy of the homecoming, who put the crown of righteousness on the head of the old apostle who had been beheaded outside Rome, who sat with Jim Ruddy in a hospital room, and who is the same yesterday, today, and forever. The deposit has been put into your hands. Guard it well. Pass it on. Look at the Lord. The car goes where the eyes are looking. Look at Him, and you will go home with Him. Amen.</p>
+    </div>
+<div class="lang-es">
+        <h2>I. Las últimas cartas de un viejo apóstol</h2>
+        <p>De todos los libros de la Biblia, las tres Epístolas Pastorales — 1 Timoteo, Tito y 2 Timoteo — son las que se deben poner en las manos de un pastor nuevo con la mayor urgencia. ¿Por qué? Porque estas son las únicas tres cartas del Nuevo Testamento dirigidas por Pablo a pastores jóvenes en vez de a congregaciones enteras. Son el manual del apóstol para el ministerio. Son las últimas palabras del viejo apóstol a la siguiente generación. Son el manual de campo para guardar el depósito del evangelio después de que el fundador se ha ido a casa.</p>
+
+        <p>La fecha de las Epístolas Pastorales es una de las secuencias más fascinantes del Nuevo Testamento. Después de que el primer encarcelamiento romano de Pablo en Hechos 28 terminó alrededor del año 62, fue liberado. Reanudó sus viajes. Volvió a visitar iglesias en Asia Menor y Macedonia. En o cerca del año 63 al 65, escribió 1 Timoteo y Tito desde algún lugar en el campo misionero. Luego, en o cerca del año 66 al 67, fue arrestado por segunda vez y llevado de regreso a Roma — pero esta vez no a una casa alquilada. Esta vez al calabozo Mamertino, un agujero de piedra debajo del foro romano, donde la única manera de entrar y salir era una sola trampilla en el techo. Desde ese calabozo, con la sentencia de muerte ya pronunciada, el viejo apóstol escribió su última carta — 2 Timoteo. Es lo más cercano en el Nuevo Testamento al testamento final de Pablo. Sería decapitado fuera de Roma dentro del año.</p>
+
+        <h2>II. Tres cartas, tres escenarios, una misión</h2>
+        <p>Las tres Epístolas Pastorales se ubican en tres escenarios eclesiásticos diferentes, y cada una apunta a una necesidad pastoral particular. <strong>1 Timoteo</strong> está dirigida a Timoteo en Éfeso — una congregación grande, establecida y doctrinalmente perturbada que estaba siendo minada por falsos maestros desde adentro (1 Timoteo 1:3). El trabajo de Timoteo en Éfeso era <em>guardar la iglesia</em> nombrando a los ancianos correctos, silenciando a los maestros equivocados y conduciéndose con integridad en la casa de Dios. <strong>Tito</strong> está dirigida a Tito en la isla de Creta — un joven pastor griego enviado a un campo rudo, recién evangelizado, de pequeñas iglesias en casa esparcidas por la isla, rodeadas de lo que Pablo llama una cultura de <em>"mentirosos, malas bestias, vientres perezosos"</em> (Tito 1:12). El trabajo de Tito era <em>organizar las iglesias</em> nombrando ancianos, enseñando la sana doctrina, y entrenando a los creyentes a <em>"adornar en todo la doctrina de nuestro Salvador Dios"</em> (Tito 2:10) con la manera en que vivían. <strong>2 Timoteo</strong> está dirigida de vuelta a Timoteo en Éfeso — pero ahora desde la celda mortal del apóstol. Pablo sabe que no saldrá vivo. El joven pastor que él había llevado una vez a la fe ha de <em>terminar lo que Pablo ha comenzado.</em> Pase la antorcha. Guarde el depósito. Soporte el sufrimiento como un buen soldado. Sufra por el evangelio. Y en el día de las cuentas, oiga del Señor: <em>"Bien hecho."</em></p>
+
+        <p>Tres cartas. Tres escenarios. Una misión. La misión que es la carga de cada Epístola Pastoral es <em>guardar el depósito</em> del evangelio y pasarlo intacto a la siguiente generación. La frase que Pablo usa tres veces a lo largo de estas tres cartas es exactamente esa — <em>"Guarda el depósito"</em> (1 Timoteo 6:20, 2 Timoteo 1:14). El griego es <em>parathēkē</em>, el sustantivo para un tesoro confiado a un banquero fiel. El evangelio es el depósito. Timoteo y Tito son los banqueros. Toda la próxima generación de pastores que leerían estas cartas y nunca conocerían personalmente a Pablo son los banqueros. Nosotros también. El depósito fue puesto en nuestras manos hace dos mil años. Se lo debemos al Dueño intacto.</p>
+
+        <h2>III. 1 Timoteo — Guardando la iglesia</h2>
+        <p>1 Timoteo sigue la estructura de un manual pastoral. El capítulo 1 trata de los falsos maestros y la ley. El capítulo 2 trata de la adoración pública y la oración. El capítulo 3 trata de los requisitos de los ancianos y diáconos — el capítulo administrativo más importante del Nuevo Testamento para cualquier congregación que escoge a sus líderes. El capítulo 4 trata de la piedad personal en la vida del pastor mismo. Los capítulos 5 y 6 tratan de las viudas, ancianos, amos, siervos, los ricos y los pobres — el tejido social de la iglesia local.</p>
+
+        <p>El versículo clave de 1 Timoteo es la oración más majestuosa que Pablo escribió sobre la iglesia y lo que la sostiene. <em>"Para que si no fuere tan presto, sepas cómo te conviene conversar en la casa de Dios, que es la iglesia del Dios vivo, columna y apoyo de la verdad"</em> (1 Timoteo 3:15). Cada iglesia local es dos cosas a la vez. Es una <em>casa</em> — una familia, una comunión, un hogar. Y es una <em>columna</em> — un sostén estructural sosteniendo la verdad en medio de un mundo que se cae a pedazos. El trabajo del pastor y la congregación juntos es mantener la casa cálida y mantener la columna derecha. La iglesia de 1 Timoteo es una casa y una columna. Ambas. Ninguna sin la otra.</p>
+
+        <p>El cargo final de 1 Timoteo 6:20–21 es la primera vez que aparece el lenguaje del depósito: <em>"Oh Timoteo, guarda lo que se te ha encomendado, evitando las profanas pláticas de vanas cosas, y los argumentos de la falsamente llamada ciencia: La cual profesando algunos, fueron descaminados acerca de la fe."</em> Note la advertencia al final. Algunos se han <em>descaminado.</em> Algunos se han desviado. Algunos han sido seducidos por algo llamado <em>ciencia</em> que no era ciencia en absoluto. La primera vez que Pablo le dice a Timoteo que guarde el depósito, nombra la amenaza. El depósito no se guarda solo.</p>
+
+        <h2>IV. Tito — Adornando la doctrina en Creta</h2>
+        <p>Tito abre con una descripción de la isla donde Tito estaba trabajando que tal vez sea la más franca que Pablo jamás escribió. Cita a un poeta cretense del siglo VI antes de Cristo llamado Epiménides, quien había dicho sobre su propio pueblo: <em>"Los Cretenses, siempre mentirosos, malas bestias, vientres perezosos"</em> (Tito 1:12). Pablo añade: <em>"Este testimonio es verdadero."</em> Ese es el campo misionero donde el joven pastor Tito había sido dejado. Una cultura tan moralmente quebrada que aun sus propios poetas lo confesaban. Y la estrategia de Pablo no era escapar de Creta. La estrategia era plantar iglesias en Creta que vivieran tan visiblemente diferente que el evangelio se predicara a sí mismo.</p>
+
+        <p>El libro de Tito organiza la estrategia del apóstol en tres blancos pastorales que coinciden con la columna vertebral natural de tres puntos de la carta. <strong>Sana doctrina</strong> (capítulo 1) — Tito ha de nombrar ancianos que retengan firmemente el mensaje confiable <em>"para que pueda exhortar con sana doctrina, y también convencer á los que contradijeren"</em> (Tito 1:9). El estándar para el ministerio no es el carisma personal. El estándar es la fidelidad doctrinal. <strong>Buenas obras</strong> (capítulo 2) — cada grupo en la iglesia, los hombres mayores, las mujeres mayores, las mujeres jóvenes, los hombres jóvenes, los siervos, todos ellos han de ser enseñados a vivir de manera que haga al evangelio atractivo. <em>"Para que adornen en todo la doctrina de nuestro Salvador Dios"</em> (Tito 2:10). La palabra traducida <em>adornar</em> es el griego <em>kosmeō</em> — la raíz de nuestra palabra <em>cosmético.</em> La conducta del creyente pone el maquillaje al evangelio. <strong>La bendita esperanza</strong> (capítulos 2:11–3:7) — la razón en tiempo presente para la vida piadosa es la expectativa en tiempo futuro del regreso de Cristo.</p>
+
+        <p>El versículo clave de Tito es la gran oración de Navidad-y-Pascua de 2:11–14. <em>"Porque la gracia de Dios que trae salvación á todos los hombres, se manifestó, enseñándonos que, renunciando á la impiedad y á los deseos mundanos, vivamos en este siglo templada, y justa, y píamente, esperando aquella esperanza bienaventurada, y la manifestación gloriosa del gran Dios y Salvador nuestro Jesucristo, que se dió á sí mismo por nosotros para redimirnos de toda iniquidad, y limpiar para sí un pueblo propio, celoso de buenas obras."</em> La gracia de Dios se ha manifestado (Belén). Nos enseña a vivir piadosamente (el Calvario aplicado). Esperamos la esperanza bienaventurada (Su segunda venida). Pasado, presente, futuro — todo en un párrafo. Este solo pasaje es el resumen más completo de la vida cristiana en cualquiera de las cartas de Pablo.</p>
+
+        <p>Y la nota conectiva que Pablo toca entre la doctrina y el deber es el gran juego de palabras griego-español que cualquier pastor en América Latina puede meter directamente en un sermón. La palabra española para la expectativa del creyente de Cristo es <em>esperanza</em> — y lleva tres significados que el inglés divide en tres palabras separadas. <em>Esperar</em> significa <em>aguardar.</em> <em>Esperanza</em> significa <em>la confianza de lo que ha de venir.</em> Y <em>esperar</em> algo significa también <em>contar con que sucederá.</em> En español, el creyente que está esperando al Señor está confiando en el Señor y está contando con el Señor, todo en un solo verbo. Eso es exactamente lo que Tito 2:13 está enseñando. No esperamos sin confianza. No confiamos sin certeza. No contamos con ello sin esperar. La <em>esperanza bienaventurada</em> es el verbo que carga las tres cosas.</p>
+
+        <h2>V. 2 Timoteo — El cargo final desde el calabozo</h2>
+        <p>2 Timoteo es el libro más personal que Pablo jamás escribió. Está en el calabozo Mamertino. Tiene frío. Está solo, excepto por Lucas. Ha sido abandonado por hombres en quienes una vez confió. Sabe que el veredicto ya se ha pronunciado y que será ejecutado pronto. Le queda una tarea principal en esta vida — escribir una carta más a un joven pastor que necesita ser dicho qué hacer luego.</p>
+
+        <p>La estructura de 2 Timoteo sigue el ritmo de cuatro cargos pastorales que Pablo coloca uno encima del otro, como un anciano apila leña para un hijo que necesitará mantener la casa cálida después de que él se haya ido. Capítulo 1 — <em>No te avergüences del evangelio.</em> Capítulo 2 — <em>Sé fuerte en la gracia que es en Cristo Jesús.</em> Capítulo 3 — <em>Persiste en lo que has aprendido.</em> Capítulo 4 — <em>Predica la palabra, a tiempo, fuera de tiempo.</em></p>
+
+        <p>El versículo del depósito aparece por segunda vez en 2 Timoteo 1:14. <em>"Guarda el buen depósito por el Espíritu Santo que habita en nosotros."</em> El mismo verbo. El mismo sustantivo. El depósito. El depósito es ahora formalmente confiado a Timoteo por escrito. Y se nombra el medio de guardarlo: <em>el Espíritu Santo que habita en nosotros.</em> Ningún pastor guarda el depósito solo por esfuerzo personal. El depósito es guardado por el Espíritu que mora dentro, aplicado a un hombre fiel, día tras día. Luego, en el siguiente versículo, 2 Timoteo 2:2, Pablo le da a Timoteo la gran fórmula de discipulado del Nuevo Testamento: <em>"Y lo que has oído de mí entre muchos testigos, esto encarga á los hombres fieles que serán idóneos para enseñar también á otros."</em> Cuatro generaciones están apiladas en una sola oración. <strong>Pablo</strong> enseñó a <strong>Timoteo</strong>. Timoteo lo ha de encargar a <strong>hombres fieles</strong>. Los hombres fieles han de enseñar a <strong>otros también.</strong> El depósito nunca fue diseñado para detenerse en un banquero. Siempre fue diseñado para ser pasado.</p>
+
+        <h2>VI. La tragedia de Demas</h2>
+        <p>Hacia el final mismo de 2 Timoteo, el viejo apóstol deja caer una nota personal que ha perseguido a los predicadores por dos mil años. Tres palabritas. <em>"Demas me ha desamparado, amando este siglo, y se ha ido á Tesalónica"</em> (2 Timoteo 4:10). La línea es desgarradora precisamente por lo casual que es. Demas había sido colaborador de Pablo por años. Es mencionado por nombre en el período de las epístolas de la prisión como un compañero fiel (Colosenses 4:14; Filemón 1:24). Y ahora, en la carta final, se ha ido.</p>
+
+        <p>La tragedia de Demas se puede trazar en cuatro pasos aliterados (en inglés) que llevan a un creyente desde el círculo íntimo del ministerio de Pablo hasta la fría desaparición de su nombre de la iglesia. Demas fue al principio <strong>Diligente</strong> — un colaborador nombrado con Marcos y Lucas. Luego Demas se volvió <strong>Distraído</strong>. Algo comenzó a competir con el Señor en sus afectos. Pablo lo nombra: <em>"amando este siglo."</em> El griego es <em>agapesas ton nun aiona</em> — habiendo desarrollado un amor establecido y continuo hacia la era presente. Demas había empezado a mirar de reojo. Luego Demas <strong>Desertó</strong>. La mirada de reojo se convirtió en irse. Empacó su maleta y salió del calabozo y de los últimos días de Pablo. Y finalmente Demas <strong>Desapareció</strong> — no necesariamente físicamente, aunque eso también pudo haber sucedido, pero murió al ministerio, al círculo íntimo, a cada crónica de la iglesia primitiva. Después de 2 Timoteo 4:10, Demas nunca es mencionado de nuevo. <em>Diligente, Distraído, Desertó, Desapareció.</em></p>
+
+        <p>Se cuenta la historia de un joven aprendiendo a manejar. Su instructor estaba sentado a su lado en el asiento delantero y lo veía agarrar el volante y mirar atentamente al camino. Luego apareció una fila de buzones a la derecha. Los ojos del joven conductor se desviaron hacia los buzones — solo por un segundo. Y el carro también se desvió hacia los buzones. El instructor se inclinó, corrigió el volante y le dijo una frase que él nunca olvidó: <em>"El carro va a donde miran los ojos. No tienes que girar el volante para chocar. Solo tienes que mirar lo que no debes mirar."</em> Esa es la tragedia de Demas. No anunció una deserción. No escribió una carta de renuncia. Simplemente <em>miró</em> al siglo presente, y el volante siguió a sus ojos. El cargo de Pablo a Timoteo en el mismo capítulo es el opuesto. <em>"Vela en todo"</em> (2 Timoteo 4:5). <em>Donde miras es donde irás.</em></p>
+
+        <p>E inmediatamente después de la nota sobre Demas, Pablo escribe una oración que vuelve a levantar el capítulo. <em>"Toma á Marcos, y traélo contigo; porque me es útil para el ministerio"</em> (2 Timoteo 4:11). El mismo Juan Marcos que había desertado de Pablo en Perge en el primer viaje misionero (Hechos 13:13), que había causado la dolorosa división entre Pablo y Bernabé, que había parecido descalificado una vez — está, al final de la vida de Pablo, en la lista corta del apóstol de los hombres más útiles de la iglesia. Demas se va. Marcos vuelve. Las dos historias aparecen en el mismo capítulo. Las Epístolas Pastorales se niegan a dejar que cualquiera de las dos sea el cuadro completo. Algunos desertan. Algunos son restaurados. El depósito es guardado por hombres fieles, y los hombres fieles incluyen a los restaurados.</p>
+
+        <h2>VII. Los últimos días y la inspiración de la Escritura</h2>
+        <p>Encajado en 2 Timoteo 3 está la oración más importante de la Biblia acerca de la Biblia. Pero antes de llegar a ella, Pablo da una advertencia sobre los tiempos en los que Timoteo tendrá que ministrar. <em>"Esto también sepas, que en los postreros días vendrán tiempos peligrosos"</em> (2 Timoteo 3:1). El catálogo que sigue en 2 Timoteo 3:2–5 es agotador de leer. Los hombres serán amadores de sí mismos, codiciosos, vanagloriosos, soberbios, detractores, desobedientes á los padres, ingratos, sin santidad, sin afecto, desleales, calumniadores, destemplados, crueles, aborrecedores de lo bueno, traidores, arrebatados, hinchados, amadores de los deleites más que de Dios — <em>"teniendo apariencia de piedad, mas habiendo negado la eficacia de ella"</em> (2 Timoteo 3:5).</p>
+
+        <p>Se cuenta la historia de un hombre en Kentucky que vivía al otro lado de la calle de uno de los árboles más hermosos del barrio. Sus ramas se elevaban en espiral hacia el cielo. Los pájaros anidaban en él. Solía pararse en su ventana y admirarlo. Una mañana vio a una cuadrilla de la ciudad en el patio del vecino cortándolo. Cruzó y le preguntó al obrero por qué razón estarían cortando un árbol tan hermoso. El obrero le hizo señas y le mostró el tronco. La corteza todavía estaba intacta. Las ramas todavía eran majestuosas. Pero por dentro del corazón del árbol, la madera estaba hueca. Las termitas se habían comido el centro entero. La cerca alrededor de la propiedad no las había detenido. La puerta cerrada con llave no las había detenido. El perro no las había detenido. El exterior todavía se veía bien. El interior estaba ido. Habían llamado a la cuadrilla para tumbar el árbol antes de que cayera sobre los niños que caminaban debajo de él por la acera. <em>"Teniendo apariencia de piedad, mas habiendo negado la eficacia de ella."</em> Eso es 2 Timoteo 3:5 en un solo árbol. La corteza se ve bien. El centro está hueco. El depósito es lo único que protege de las termitas. Sin el depósito, la corteza no aguantará.</p>
+
+        <p>Y así Pablo se vuelve a Timoteo con el único equipo que el pastor puede usar para mantener vivo el depósito en un mundo hueco: <em>"Toda Escritura es inspirada divinamente y útil para enseñar, para redargüir, para corregir, para instituir en justicia, para que el hombre de Dios sea perfecto, enteramente instruído para toda buena obra"</em> (2 Timoteo 3:16–17). La palabra griega traducida <em>inspirada divinamente</em> es <em>theopneustos</em> — literalmente <em>respirada por Dios.</em> La Biblia no está inspirada solo de la manera en que un poema está inspirado. La Biblia es respirada de la boca de Dios mismo de la misma manera que el universo fue respirado de la boca de Dios en Génesis. El mismo aliento que llenó las narices de Adán y lo hizo alma viviente llena la Escritura y la hace un libro vivo. La Biblia no es un registro de hombres hablando de Dios. La Biblia es el registro de Dios hablando, respirado sobre páginas sostenidas por hombres cuyas manos fueron guiadas por Su Espíritu.</p>
+
+        <h2>VIII. La plomada</h2>
+        <p>La prueba de cualquier enseñanza no es lo nuevo que suena, lo carismático que sea el maestro, ni qué tan grande se haya vuelto la multitud. La prueba es si la enseñanza se alinea con el depósito ya entregado. Al profeta Amós se le dio una visión de Dios parado junto a un muro, y en Su mano había una plomada (Amós 7:7–8). Una plomada es una sencilla herramienta de carpintero — un peso al final de una cuerda. Cuando se deja colgar libre el peso, la cuerda cae en una línea vertical perfectamente recta, porque la gravedad es exactamente la misma en cada dirección. El carpintero sostiene la cuerda contra el muro que está construyendo, y la línea le dice si el muro está derecho. La plomada no se inclina para halagar al carpintero. La plomada no cambia con las preferencias del carpintero. La plomada le dice al carpintero la verdad, y el carpintero o escucha o construye un muro que se caerá.</p>
+
+        <p>Las Epístolas Pastorales son la plomada del Nuevo Testamento. Le dicen a cada pastor — y a cada creyente que apoya a un pastor — cómo se ve el depósito, cómo reconocerlo, y cómo mantenerlo de ser doblado. Nombran las falsas doctrinas y los falsos maestros por categoría. Advierten que lo doblado se verá atractivo y que lo derecho no siempre se sentirá cómodo. Encargan a la próxima generación de líderes ser hombres-plomada y mujeres-plomada. El depósito o se mantiene vertical, o se cae sobre la gente dentro de la casa.</p>
+
+        <h2>IX. Las palabras finales de Pablo</h2>
+        <p>Tres capítulos antes del final de 2 Timoteo, el apóstol Pablo escribe la oración que está grabada en los vitrales de las capillas de los seminarios por todo el mundo. <em>"Porque yo ya estoy para ser ofrecido, y el tiempo de mi partida está cercano. He peleado la buena batalla, he acabado la carrera, he guardado la fe. Por lo demás, me está guardada la corona de justicia, la cual me dará el Señor, juez justo, en aquel día; y no sólo á mí, sino también á todos los que aman su venida"</em> (2 Timoteo 4:6–8). Tres verbos en tiempo perfecto. <em>Peleado.</em> <em>Acabado.</em> <em>Guardado.</em> El hombre que una vez había sido Saulo de Tarso arrastrando cristianos de sus casas a la cárcel estaba ahora en un calabozo romano esperando al verdugo, y las últimas palabras que escribió sobre su propia vida fueron estos tres verbos en tiempo perfecto en fila.</p>
+
+        <p>Este párrafo pertenece a cada creyente, no solamente a Pablo. La <em>corona de justicia</em> está guardada para el apóstol <em>"y no sólo á mí, sino también á todos los que aman su venida."</em> ¿Ha amado usted Su venida? Entonces la corona está guardada para usted también. El calabozo es la dirección de cada creyente fiel en algún lugar de la vida. La corona es la dirección de cada creyente fiel al final de ella.</p>
+
+        <p>Hubo un hombre llamado Jim Ruddy a quien conocí personalmente y a quien visité en el hospital en los días finales de su vida. Había vivido para el Señor. Había servido a la iglesia. Había amado a su familia. Y mientras su cuerpo se debilitaba, fui y me senté junto a su cama, esperando ser yo quien lo consolaría. Me miró con esa claridad frágil que viene solo a un creyente que ha amado la venida de Cristo por toda una vida, y me dijo: <em>"Pastor, no falta mucho. Pronto estaré con Jesús."</em> Ese era el espíritu de Pablo en 2 Timoteo 4. Ese era el espíritu de un hombre que sabía que el depósito había sido guardado, la carrera terminada, la fe guardada. No había miedo en sus ojos. Solo había expectativa. <em>Esperanza.</em> Esperar, confiar, contar con — todo en una sola palabra, todo en un solo aliento, todo junto a una sola cama.</p>
+
+        <p>Avance, amigo mío, por el resto del Nuevo Testamento con el mismo Señor que iluminó un calabozo con el gozo de la llegada a casa, que puso la corona de justicia en la cabeza del viejo apóstol que fue decapitado fuera de Roma, que se sentó con Jim Ruddy en un cuarto de hospital, y que es el mismo ayer, hoy y por los siglos. El depósito ha sido puesto en sus manos. Guárdelo bien. Páselo. Mire al Señor. El carro va a donde miran los ojos. Mírelo a Él, y se irá a casa con Él. Amén.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer questions 1–20 (multiple choice). You must achieve 90% (18/20) on the multiple-choice section to pass. <strong>M.Div. / Th.M. students:</strong> Answer all 30 questions. You must achieve 90% on both sections independently — 18/20 multiple choice AND 9/10 short answer. Click an answer for immediate feedback. <strong>Once all 12 units are passed, you will be redirected to your certificate.</strong></span><span class="lang-es"><strong>Estudiantes de certificado:</strong> Respondan las preguntas 1–20 (opción múltiple). Debe alcanzar el 90% (18/20) en la sección de opción múltiple para aprobar. <strong>Estudiantes de M.Div. / Th.M.:</strong> Respondan las 30 preguntas. Debe alcanzar el 90% en ambas secciones de manera independiente — 18/20 opción múltiple Y 9/10 respuesta corta. Haga clic en una respuesta para retroalimentación inmediata. <strong>Una vez aprobadas las 12 unidades, será redirigido a su certificado.</strong></span></p>
+    <div class="track-bar">
+        <strong><span class="lang-en">Your Track:</span><span class="lang-es">Su Modalidad:</span></strong>
+        <span style="margin-left:14px;">
+            <label><input type="radio" name="ctsTrack" value="cert"><span class="lang-en">Certificate (MC only)</span><span class="lang-es">Certificado (solo opción múltiple)</span></label>
+            <label><input type="radio" name="ctsTrack" value="mdiv"><span class="lang-en">Master of Divinity (MC + SA)</span><span class="lang-es">Maestría en Divinidad (MC + RC)</span></label>
+            <label><input type="radio" name="ctsTrack" value="thm"><span class="lang-en">Master of Theology (Th.M.) Track</span><span class="lang-es">Maestría en Teología (Th.M.)</span></label>
+        </span>
+    </div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar Aprobación</span></button>
+        <button id="resetExamBtn" class="reset-btn"><span class="lang-en">↺ Reset Exam</span><span class="lang-es">↺ Restablecer Examen</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ===== PER-UNIT CONFIG =====
+const UNIT = 10;
+const TOTAL_UNITS = 12;
+const NEXT_URL = 'CTSNTUnit11.html';
+const PREV_URL = 'CTSNTUnit9.html';
+const PASS_THRESHOLD = 0.90;
+
+let progress = JSON.parse(localStorage.getItem('cts_nt_progress')) || {};
+let currentTrack = localStorage.getItem('cts_track') || 'cert';
+
+function isMastersLevel() { return currentTrack === 'mdiv' || currentTrack === 'thm'; }
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === UNIT) cls += ' active';
+        grid.innerHTML += `<a href="CTSNTUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+if (PREV_URL) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_URL; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="#" onclick="promptName(); return false;" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+    }
+}
+function promptName() {
+    const name = prompt("Welcome to CTS New Testament Survey! Please enter your full name as you'd like it to appear on your certificate:");
+    if (name && name.trim().length > 1) {
+        localStorage.setItem('cts_student', JSON.stringify({name: name.trim()}));
+        displayStudentGreeting();
+    }
+}
+displayStudentGreeting();
+
+const mcQuestions = [
+    { textEn: "1. The 'Pastoral Epistles' refer to which three New Testament letters?", textEs: "1. Las 'Epístolas Pastorales' se refieren a cuáles tres cartas del Nuevo Testamento?",
+      optionsEn: ["Hebrews, James, 1 Peter", "Romans, Galatians, Ephesians", "Philippians, Colossians, Philemon", "1 Timothy, Titus, 2 Timothy"],
+      optionsEs: ["Hebreos, Santiago, 1 Pedro", "Romanos, Gálatas, Efesios", "Filipenses, Colosenses, Filemón", "1 Timoteo, Tito, 2 Timoteo"],
+      explanationEn: "The Pastoral Epistles are 1 Timothy, Titus, and 2 Timothy, Paul's letters to younger pastors rather than congregations.", explanationEs: "Las epístolas pastorales son 1 Timoteo, Tito y 2 Timoteo, las cartas de Pablo a pastores más jóvenes en vez de a congregaciones.", correct: 3 },
+    { textEn: "2. The chronological order of the Pastoral Epistles' writing is generally:", textEs: "2. El orden cronológico de la escritura de las Epístolas Pastorales generalmente es:",
+      optionsEn: ["2 Timothy first; then 1 Timothy and Titus", "1 Timothy and Titus first (~AD 63-65); 2 Timothy last (~AD 66-67)", "All three written simultaneously from Rome", "Titus first; then 1 and 2 Timothy together"],
+      optionsEs: ["2 Timoteo primero; luego 1 Timoteo y Tito", "1 Timoteo y Tito primero (~63-65 d.C.); 2 Timoteo último (~66-67 d.C.)", "Las tres escritas simultáneamente desde Roma", "Tito primero; luego 1 y 2 Timoteo juntos"],
+      explanationEn: "The order of writing is 1 Timothy and Titus from the field (AD 63–65), then 2 Timothy from the dungeon (AD 66–67).", explanationEs: "El orden de escritura es 1 Timoteo y Tito desde el campo (63–65 d.C.), luego 2 Timoteo desde el calabozo (66–67 d.C.).", correct: 1 },
+    { textEn: "3. 2 Timothy was written from which location?", textEs: "3. 2 Timoteo fue escrita desde cuál ubicación?",
+      optionsEn: ["The Mamertine dungeon in Rome", "Antioch", "The rented house in Rome", "Corinth"],
+      optionsEs: ["El calabozo Mamertino en Roma", "Antioquía", "La casa alquilada en Roma", "Corinto"],
+      explanationEn: "The one mission of all three letters is to guard the deposit of the gospel and pass it intact to the next generation.", explanationEs: "La única misión de las tres cartas es guardar el depósito del evangelio y pasarlo intacto a la próxima generación.", correct: 0 },
+    { textEn: "4. The Greek word 'paratheke' used in the Pastoral Epistles means:", textEs: "4. La palabra griega 'paratheke' usada en las Epístolas Pastorales significa:",
+      optionsEn: ["Sermon", "Wisdom", "Treasure / deposit entrusted to a faithful banker", "Tradition"],
+      optionsEs: ["Sermón", "Sabiduría", "Tesoro / depósito confiado a un banquero fiel", "Tradición"],
+      explanationEn: "The Greek word for the deposit is paratheke, a treasure entrusted to a faithful banker; the gospel is that deposit.", explanationEs: "La palabra griega para el depósito es paratheke, un tesoro confiado a un banquero fiel; el evangelio es ese depósito.", correct: 2 },
+    { textEn: "5. The key verse of 1 Timothy calls the church the 'house of God' and:", textEs: "5. El versículo clave de 1 Timoteo llama a la iglesia 'casa de Dios' y:",
+      optionsEn: ["The lampstand of the world", "The pillar and ground of the truth", "The bride of Christ", "The flock of God"],
+      optionsEs: ["El candelero del mundo", "Columna y apoyo de la verdad", "La esposa de Cristo", "La grey de Dios"],
+      explanationEn: "First Timothy was written to Timothy at Ephesus, a large established church undermined by false teachers from within.", explanationEs: "Primera de Timoteo fue escrita a Timoteo en Éfeso, una iglesia grande y establecida socavada por falsos maestros desde dentro.", correct: 1 },
+    { textEn: "6. The most important chapter for selecting elders and deacons is:", textEs: "6. El capítulo más importante para escoger ancianos y diáconos es:",
+      optionsEn: ["1 Timothy 3", "1 Timothy 5", "Titus 1", "2 Timothy 2"],
+      optionsEs: ["1 Timoteo 3", "1 Timoteo 5", "Tito 1", "2 Timoteo 2"],
+      explanationEn: "First Timothy 3 gives the qualifications of elders and deacons, the key administrative chapter for choosing church leaders.", explanationEs: "Primera de Timoteo 3 da las cualidades de obispos y diáconos, el capítulo administrativo clave para escoger líderes de la iglesia.", correct: 0 },
+    { textEn: "7. Titus was left to organize churches on which island?", textEs: "7. Tito fue dejado para organizar iglesias en cuál isla?",
+      optionsEn: ["Cyprus", "Patmos", "Malta", "Crete"],
+      optionsEs: ["Chipre", "Patmos", "Malta", "Creta"],
+      explanationEn: "First Timothy 3:15 calls the church the house of God and the pillar and ground of the truth — both a family and a support.", explanationEs: "Primera de Timoteo 3:15 llama a la iglesia la casa de Dios y columna y apoyo de la verdad — a la vez familia y sostén.", correct: 3 },
+    { textEn: "8. The Greek word for 'adorn' in Titus 2:10 ('that they may adorn the doctrine') is:", textEs: "8. La palabra griega para 'adornar' en Tito 2:10 ('para que adornen la doctrina') es:",
+      optionsEn: ["Doxazo", "Lampo", "Kosmeo (root of 'cosmetic')", "Phaino"],
+      optionsEs: ["Doxazo", "Lampo", "Kosmeo (raíz de 'cosmético')", "Phaino"],
+      explanationEn: "Titus was sent to Crete, whose own poet Epimenides called Cretans liars, evil beasts, lazy gluttons, a rough mission field.", explanationEs: "Tito fue enviado a Creta, cuyo propio poeta Epimenides llamó a los cretenses mentirosos, malas bestias, glotones ociosos, un campo difícil.", correct: 2 },
+    { textEn: "9. The 'blessed hope' passage uniting past, present, and future of salvation is found in:", textEs: "9. El pasaje de la 'bendita esperanza' que une el pasado, presente y futuro de la salvación se encuentra en:",
+      optionsEn: ["1 Timothy 3:16", "2 Timothy 4:6-8", "Titus 3:5-7", "Titus 2:11-14"],
+      optionsEs: ["1 Timoteo 3:16", "2 Timoteo 4:6-8", "Tito 3:5-7", "Tito 2:11-14"],
+      explanationEn: "Titus 2:10 says believers adorn the doctrine of God; the Greek kosmeo, root of 'cosmetic,' means their lives beautify the gospel.", explanationEs: "Tito 2:10 dice que los creyentes adornan la doctrina de Dios; el griego kosmeo, raíz de 'cosmético', significa que sus vidas embellecen el evangelio.", correct: 3 },
+    { textEn: "10. The Greek word translated 'inspiration of God' in 2 Timothy 3:16 is:", textEs: "10. La palabra griega traducida 'inspirada divinamente' en 2 Timoteo 3:16 es:",
+      optionsEn: ["Logos", "Theopneustos (God-breathed)", "Doxa", "Hagios"],
+      optionsEs: ["Logos", "Theopneustos (respirada por Dios)", "Doxa", "Hagios"],
+      explanationEn: "Titus targets sound doctrine, good works, and the blessed hope — appointing elders, teaching godly living, awaiting Christ.", explanationEs: "Tito apunta a la sana doctrina, las buenas obras y la esperanza bienaventurada — nombrar ancianos, enseñar vida piadosa, esperar a Cristo.", correct: 1 },
+    { textEn: "11. Paul's great discipleship formula 'commit these to faithful men who will be able to teach others also' is found in:", textEs: "11. La gran fórmula de discipulado de Pablo 'encarga á los hombres fieles que serán idóneos para enseñar también á otros' se encuentra en:",
+      optionsEn: ["2 Timothy 2:2", "Titus 2:2", "2 Timothy 1:6", "1 Timothy 4:12"],
+      optionsEs: ["2 Timoteo 2:2", "Tito 2:2", "2 Timoteo 1:6", "1 Timoteo 4:12"],
+      explanationEn: "Titus 2:11–14 spans the grace that appeared (Bethlehem), godly living (Calvary applied), and the blessed hope (His return).", explanationEs: "Tito 2:11–14 abarca la gracia que apareció (Belén), la vida piadosa (Calvario aplicado) y la esperanza bienaventurada (Su regreso).", correct: 0 },
+    { textEn: "12. The companion who deserted Paul 'having loved this present world' was:", textEs: "12. El compañero que desamparó a Pablo 'amando este siglo' fue:",
+      optionsEn: ["Hymenaeus", "Philetus", "Demas", "Crescens"],
+      optionsEs: ["Himeneo", "Fileto", "Demas", "Crescente"],
+      explanationEn: "Second Timothy was written from the Mamertine dungeon in Rome, with Paul's death sentence already pronounced.", explanationEs: "Segunda de Timoteo fue escrita desde el calabozo Mamertino en Roma, con la sentencia de muerte de Pablo ya pronunciada.", correct: 2 },
+    { textEn: "13. The four-fold alliterative tragedy of Demas can be traced as:", textEs: "13. La tragedia cuádruple aliterada de Demas se puede trazar como:",
+      optionsEn: ["Dutiful, Distracted, Defected, Died", "Born, baptized, blessed, buried", "Saved, struggled, sinned, suffered", "Called, chosen, corrupted, condemned"],
+      optionsEs: ["Diligente, Distraído, Desertó, Desapareció", "Nació, bautizado, bendecido, sepultado", "Salvo, luchó, pecó, sufrió", "Llamado, escogido, corrompido, condenado"],
+      explanationEn: "Second Timothy stacks four charges: be unashamed, be strong in grace, continue in what you learned, and preach the word.", explanationEs: "Segunda de Timoteo apila cuatro encargos: no avergonzarse, ser fuerte en la gracia, continuar en lo aprendido, y predicar la Palabra.", correct: 0 },
+    { textEn: "14. In contrast to Demas, who was restored to Paul's inner circle by the end of 2 Timothy?", textEs: "14. En contraste con Demas, ¿quién fue restaurado al círculo íntimo de Pablo al final de 2 Timoteo?",
+      optionsEn: ["Silas", "Apollos", "John Mark", "Aquila"],
+      optionsEs: ["Silas", "Apolos", "Juan Marcos", "Aquila"],
+      explanationEn: "Second Timothy 2:2 gives the discipleship formula: what Paul taught Timothy, commit to faithful men who will teach others.", explanationEs: "Segunda de Timoteo 2:2 da la fórmula del discipulado: lo que Pablo enseñó a Timoteo, encárgalo a hombres fieles que enseñen a otros.", correct: 2 },
+    { textEn: "15. The famous 'last days' warning that men will have 'a form of godliness but denying its power' is found in:", textEs: "15. La famosa advertencia de los 'últimos días' de que los hombres tendrán 'apariencia de piedad mas habiendo negado la eficacia de ella' se encuentra en:",
+      optionsEn: ["1 Timothy 4:1", "Titus 3:1", "2 Thessalonians 2:3", "2 Timothy 3:5"],
+      optionsEs: ["1 Timoteo 4:1", "Tito 3:1", "2 Tesalonicenses 2:3", "2 Timoteo 3:5"],
+      explanationEn: "Demas forsook Paul, having loved this present world, and departed for Thessalonica (2 Timothy 4:10).", explanationEs: "Demas desamparó a Pablo, amando este mundo presente, y se fue a Tesalónica (2 Timoteo 4:10).", correct: 3 },
+    { textEn: "16. Paul's final triumphant declaration 'I have fought the good fight, I have finished the race, I have kept the faith' is in:", textEs: "16. La declaración triunfante final de Pablo 'He peleado la buena batalla, he acabado la carrera, he guardado la fe' está en:",
+      optionsEn: ["2 Timothy 4:7", "1 Timothy 6:12", "Titus 3:5", "Philippians 4:13"],
+      optionsEs: ["2 Timoteo 4:7", "1 Timoteo 6:12", "Tito 3:5", "Filipenses 4:13"],
+      explanationEn: "In the same chapter Demas walks out, Paul asks for Mark, once a deserter, now useful for ministry — some defect, some are restored.", explanationEs: "En el mismo capítulo en que Demas se va, Pablo pide a Marcos, antes desertor, ahora útil para el ministerio — algunos desertan, algunos son restaurados.", correct: 1 },
+    { textEn: "17. Paul says the crown of righteousness will be given not only to him but also to:", textEs: "17. Pablo dice que la corona de justicia será dada no solo a él sino también a:",
+      optionsEn: ["All who have suffered for Christ", "All who have been baptized", "All who are martyred", "All who have loved His appearing"],
+      optionsEs: ["Todos los que han sufrido por Cristo", "Todos los que han sido bautizados", "Todos los que son martirizados", "Todos los que han amado su venida"],
+      explanationEn: "Second Timothy 3 warns that perilous times will come in the last days, with people having a form of godliness but denying its power.", explanationEs: "Segunda de Timoteo 3 advierte que vendrán tiempos peligrosos en los últimos días, con gente que tiene apariencia de piedad pero niega su poder.", correct: 3 },
+    { textEn: "18. The unifying mission of all three Pastoral Epistles is:", textEs: "18. La misión unificadora de las tres Epístolas Pastorales es:",
+      optionsEn: ["Building larger congregations", "Guarding the deposit and passing it intact to the next generation", "Practicing church discipline", "Preparing for martyrdom"],
+      optionsEs: ["Construir congregaciones más grandes", "Guardar el depósito y pasarlo intacto a la siguiente generación", "Practicar la disciplina de la iglesia", "Prepararse para el martirio"],
+      explanationEn: "Second Timothy 3:16 says all Scripture is theopneustos, God-breathed — breathed from the mouth of God, not merely inspired like a poem.", explanationEs: "Segunda de Timoteo 3:16 dice que toda la Escritura es theopneustos, inspirada por Dios — exhalada de la boca de Dios, no solo inspirada como un poema.", correct: 1 },
+    { textEn: "19. The Old Testament prophet whose plumb line vision illustrates the testing of doctrine is:", textEs: "19. El profeta del Antiguo Testamento cuya visión de la plomada ilustra la prueba de la doctrina es:",
+      optionsEn: ["Amos", "Jeremiah", "Ezekiel", "Isaiah"],
+      optionsEs: ["Amós", "Jeremías", "Ezequiel", "Isaías"],
+      explanationEn: "God-breathed Scripture is profitable for doctrine, reproof, correction, and instruction, equipping the man of God for every good work.", explanationEs: "La Escritura inspirada por Dios es útil para enseñar, redargüir, corregir e instruir, equipando al hombre de Dios para toda buena obra.", correct: 0 },
+    { textEn: "20. The Spanish word 'esperanza' uniquely combines which three English meanings?", textEs: "20. La palabra española 'esperanza' combina únicamente cuáles tres significados ingleses?",
+      optionsEn: ["Faith, love, joy", "Pray, fast, give", "Wait, hope, expect", "Watch, serve, witness"],
+      optionsEs: ["Fe, amor, gozo", "Orar, ayunar, dar", "Esperar, confiar, contar con", "Velar, servir, testificar"],
+      explanationEn: "Paul's final words in 2 Timothy 4:7 — I have fought the good fight, finished the race, kept the faith — await the crown of righteousness.", explanationEs: "Las palabras finales de Pablo en 2 Timoteo 4:7 — he peleado la buena batalla, acabado la carrera, guardado la fe — esperan la corona de justicia.", correct: 2 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Explain the historical setting of each Pastoral Epistle. Why is the dating sequence (1 Timothy, Titus, then 2 Timothy) significant?", textEs: "21. Explique el contexto histórico de cada Epístola Pastoral. ¿Por qué es importante la secuencia de fechas (1 Timoteo, Tito, luego 2 Timoteo)?",
+      kw_en: ["timothy", "titus", "mamertine", "ephesus", "crete", "dungeon"], kw_es: ["timoteo", "tito", "mamertina", "efeso", "creta", "calabozo"],
+      modelEn: "Each Pastoral Epistle has its own setting. First Timothy went to Timothy at Ephesus, an established church troubled by false teachers; Titus went to Titus on the rough mission field of Crete; and Second Timothy was written to Timothy from the Mamertine dungeon in Rome, where Paul awaited execution. The dating matters because it shows Paul released after Acts 28, writing the first two from the field and the last from the death cell.", modelEs: "Cada epístola pastoral tiene su propio entorno. Primera de Timoteo fue a Timoteo en Éfeso, una iglesia establecida turbada por falsos maestros; Tito fue a Tito en el difícil campo misionero de Creta; y Segunda de Timoteo fue escrita a Timoteo desde el calabozo Mamertino en Roma, donde Pablo esperaba la ejecución. La datación importa porque muestra a Pablo liberado tras Hechos 28, escribiendo las primeras dos desde el campo y la última desde la celda de la muerte." },
+    { textEn: "22. Trace the meaning of the Greek word 'paratheke' (deposit) and discuss how it functions as the central image of the Pastoral Epistles.", textEs: "22. Trace el significado de la palabra griega 'paratheke' (depósito) y discuta cómo funciona como la imagen central de las Epístolas Pastorales.",
+      kw_en: ["paratheke", "deposit", "banker", "gospel", "guard", "treasure"], kw_es: ["paratheke", "deposito", "banquero", "evangelio", "guardar", "tesoro"],
+      modelEn: "The Greek word paratheke means a treasure entrusted to a faithful banker. The gospel is that deposit, and Timothy, Titus, and every pastor after them are the bankers charged to guard it. Paul commands them to guard the deposit, keeping the treasure intact and unaltered. The image teaches that the gospel is not ours to change but ours to keep and hand on whole.", modelEs: "La palabra griega paratheke significa un tesoro confiado a un banquero fiel. El evangelio es ese depósito, y Timoteo, Tito y todo pastor después de ellos son los banqueros encargados de guardarlo. Pablo les manda guardar el depósito, manteniendo el tesoro intacto e inalterado. La imagen enseña que el evangelio no es nuestro para cambiarlo sino nuestro para guardarlo y entregarlo entero." },
+    { textEn: "23. Discuss the importance of 1 Timothy 3:15 ('the church... the pillar and ground of the truth'). What does it teach about the church?", textEs: "23. Discuta la importancia de 1 Timoteo 3:15 ('la iglesia... columna y apoyo de la verdad'). ¿Qué enseña sobre la iglesia?",
+      kw_en: ["3:15", "house", "pillar", "truth", "church", "living god"], kw_es: ["3:15", "casa", "columna", "verdad", "iglesia", "dios vivo"],
+      modelEn: "First Timothy 3:15 calls the church both the house of God and the pillar and ground of the truth. As a house she is a family and a home; as a pillar she is a structural support holding up the truth in a falling world. The church of the living God is both at once, and the task is to keep the house warm and the pillar straight.", modelEs: "Primera de Timoteo 3:15 llama a la iglesia a la vez la casa de Dios y columna y apoyo de la verdad. Como casa es una familia y un hogar; como columna es un sostén estructural que sostiene la verdad en un mundo que se derrumba. La iglesia del Dios vivo es ambas cosas a la vez, y la tarea es mantener la casa cálida y la columna derecha." },
+    { textEn: "24. Explain the three-fold structure of Titus (sound doctrine, good works, blessed hope) and its connection to Titus 2:11-14.", textEs: "24. Explique la estructura triple de Tito (sana doctrina, buenas obras, bendita esperanza) y su conexión con Tito 2:11-14.",
+      kw_en: ["doctrine", "works", "hope", "grace", "appeared", "blessed"], kw_es: ["doctrina", "obras", "esperanza", "gracia", "aparecio", "bienaventurada"],
+      modelEn: "Titus has a three-fold structure: sound doctrine, good works, and the blessed hope. Titus is to appoint elders who hold sound doctrine, to teach every group to live good works that adorn the gospel, and to anchor it all in the grace of God that has appeared and the blessed hope of Christ's return. Past grace, present godliness, and future hope hold together in one strategy.", modelEs: "Tito tiene una estructura triple: sana doctrina, buenas obras y la esperanza bienaventurada. Tito ha de nombrar ancianos que sostengan la sana doctrina, enseñar a cada grupo a vivir buenas obras que adornen el evangelio, y anclarlo todo en la gracia de Dios que ha aparecido y la esperanza bienaventurada del regreso de Cristo. La gracia pasada, la piedad presente y la esperanza futura se sostienen en una sola estrategia." },
+    { textEn: "25. Apply the Spanish wordplay of 'esperanza' (wait/hope/expect) to Titus 2:13. How does it deepen the Christian's expectation of Christ's return?", textEs: "25. Aplique el juego de palabras español de 'esperanza' (esperar/confiar/contar con) a Tito 2:13. ¿Cómo profundiza la expectativa cristiana del regreso de Cristo?",
+      kw_en: ["esperanza", "wait", "hope", "expect", "blessed", "appearing"], kw_es: ["esperanza", "esperar", "espera", "aguardar", "bienaventurada", "aparicion"],
+      modelEn: "The Spanish word esperanza captures Titus 2:13 in one verb. Esperar means to wait, esperanza means hope, and to esperar something also means to expect it, so the believer waiting for the Lord is hoping for Him and expecting Him at once. The blessed hope is not waiting without hope, nor hope without expectation; it is all three together as we look for His glorious appearing.", modelEs: "La palabra esperanza capta Tito 2:13 en un solo verbo. Esperar significa aguardar, esperanza significa la confianza, y esperar algo también significa contar con ello, así que el creyente que espera al Señor lo aguarda y cuenta con Él a la vez. La esperanza bienaventurada no es aguardar sin confianza, ni confianza sin expectativa; es las tres juntas al buscar Su gloriosa aparición." },
+    { textEn: "26. Discuss the doctrine of inspiration in 2 Timothy 3:16-17. What does 'theopneustos' (God-breathed) teach about the Bible?", textEs: "26. Discuta la doctrina de la inspiración en 2 Timoteo 3:16-17. ¿Qué enseña 'theopneustos' (respirada por Dios) sobre la Biblia?",
+      kw_en: ["theopneustos", "god-breathed", "inspiration", "scripture", "profitable", "complete"], kw_es: ["theopneustos", "inspirada por dios", "inspiracion", "escritura", "util", "completo"],
+      modelEn: "Second Timothy 3:16–17 teaches the doctrine of inspiration. All Scripture is theopneustos, God-breathed, breathed out of the mouth of God Himself rather than merely inspired the way a poem is. Because it is God-breathed, Scripture is profitable for doctrine, reproof, correction, and instruction, so that the man of God may be complete and equipped for every good work.", modelEs: "Segunda de Timoteo 3:16–17 enseña la doctrina de la inspiración. Toda la Escritura es theopneustos, inspirada por Dios, exhalada de la boca de Dios mismo en vez de meramente inspirada como un poema. Porque es inspirada por Dios, la Escritura es útil para enseñar, redargüir, corregir e instruir, para que el hombre de Dios sea perfecto y equipado para toda buena obra." },
+    { textEn: "27. Trace the four-stage tragedy of Demas (Dutiful, Distracted, Defected, Died). What pastoral warning does it give to the believer?", textEs: "27. Trace la tragedia de cuatro etapas de Demas (Diligente, Distraído, Desertó, Desapareció). ¿Qué advertencia pastoral le da al creyente?",
+      kw_en: ["demas", "dutiful", "distracted", "defected", "world", "warning"], kw_es: ["demas", "cumplidor", "distraido", "desertor", "mundo", "advertencia"],
+      modelEn: "The tragedy of Demas runs in four stages. He was dutiful at first, a fellow worker named with Mark and Luke; then distracted, having loved this present world; then he defected, leaving Paul in the dungeon; and finally he died to the ministry, never mentioned again. His story is a warning that a believer need not announce a defection but can simply drift after the world until he is gone.", modelEs: "La tragedia de Demas corre en cuatro etapas. Al principio fue diligente, un colaborador nombrado con Marcos y Lucas; luego distraído, amando este mundo presente; luego desertó, dejando a Pablo en el calabozo; y al fin murió para el ministerio, sin volver a ser mencionado. Su historia es una advertencia de que un creyente no necesita anunciar una deserción sino que puede simplemente derivar tras el mundo hasta desaparecer." },
+    { textEn: "28. Apply the driver's instructor illustration ('the car goes where the eyes are looking') to spiritual discipleship.", textEs: "28. Aplique la ilustración del instructor de manejo ('el carro va a donde miran los ojos') al discipulado espiritual.",
+      kw_en: ["eyes", "looking", "drift", "demas", "watch", "heart"], kw_es: ["ojos", "mirando", "desviarse", "demas", "velar", "corazon"],
+      modelEn: "The principle is that the car goes where the eyes are looking. A driver who merely glances at what he should not drifts toward it without turning the wheel. So Demas did not resign; he looked at the present world and his life drifted after his gaze. Paul's opposite charge is to watch in all things, for where the heart looks is where the life will go, and the believer must keep his eyes on the Lord.", modelEs: "El principio es que el auto va donde miran los ojos. Un conductor que solo echa un vistazo a lo que no debe deriva hacia ello sin girar el volante. Así Demas no renunció; miró el mundo presente y su vida derivó tras su mirada. El encargo opuesto de Pablo es velar en todo, pues donde mira el corazón es donde irá la vida, y el creyente debe mantener los ojos en el Señor." },
+    { textEn: "29. Explain the contrast between Demas (who departed) and John Mark (who was restored). What does this teach about Christian failure and recovery?", textEs: "29. Explique el contraste entre Demas (que partió) y Juan Marcos (que fue restaurado). ¿Qué enseña esto sobre el fracaso y la recuperación cristianas?",
+      kw_en: ["demas", "mark", "restoration", "useful", "ministry", "failure"], kw_es: ["demas", "marcos", "restauracion", "util", "ministerio", "fracaso"],
+      modelEn: "In the same chapter Demas departs, Paul asks for John Mark, who had once deserted at Perga and seemed disqualified, but is now useful for ministry. The contrast refuses to let either story be the whole picture: some defect like Demas, and some are restored like Mark. Past failure does not have to be final, for the deposit is guarded by faithful men, and faithful men include the restored.", modelEs: "En el mismo capítulo en que Demas se va, Pablo pide a Juan Marcos, que una vez había desertado en Perge y parecía descalificado, pero ahora es útil para el ministerio. El contraste se niega a dejar que cualquiera de las dos historias sea el cuadro completo: algunos desertan como Demas, y algunos son restaurados como Marcos. El fracaso pasado no tiene que ser final, pues el depósito lo guardan hombres fieles, y los hombres fieles incluyen a los restaurados." },
+    { textEn: "30. Synthesize: What is the legacy of Paul's final words in 2 Timothy 4:6-8? How does the closing chapter shape the Christian's view of life and death?", textEs: "30. Sintetice: ¿Cuál es el legado de las palabras finales de Pablo en 2 Timoteo 4:6-8? ¿Cómo da forma el capítulo final a la visión cristiana de la vida y la muerte?",
+      kw_en: ["fought", "finished", "kept", "crown", "appearing", "departure"], kw_es: ["peleado", "acabado", "guardado", "corona", "aparicion", "partida"],
+      modelEn: "Paul's final words in 2 Timothy 4:6–8 are his legacy. Knowing his departure was at hand, he wrote three perfect-tense verbs over his life: I have fought the good fight, I have finished the race, I have kept the faith. The crown of righteousness is laid up for him, and not for him only but for all who have loved Christ's appearing — so the legacy belongs to every faithful believer.", modelEs: "Las palabras finales de Pablo en 2 Timoteo 4:6–8 son su legado. Sabiendo que su partida estaba cercana, escribió tres verbos en tiempo perfecto sobre su vida: he peleado la buena batalla, he acabado la carrera, he guardado la fe. La corona de justicia le está guardada, y no solo a él sino a todos los que han amado la aparición de Cristo — así que el legado pertenece a todo creyente fiel." }
+];
+
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = `cts_nt_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY = `cts_nt_u${UNIT}_sa_lockout`;
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0')
+        : parseInt(localStorage.getItem(`cts_nt_u${UNIT}_lockout`) || '0');
+}
+let lockUntil = activeLockUntil();
+let unitPassed = progress[`unit${UNIT}`] || false;
+
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function isEs() { return document.body.classList.contains('lang-es'); }
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer as left-boundary prefix.
+// Pass standard is >=3 hits (NOT all keywords).
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function kwHitCount(normAns, keys) { return keys.filter(function(k){ return kwHit(normAns, k); }).length; }
+
+function checkAllUnitsPassed() {
+    for (let i = 1; i <= TOTAL_UNITS; i++) { if (!progress[`unit${i}`]) return false; }
+    return true;
+}
+
+function syncTrackUI() {
+    document.querySelectorAll('input[name="ctsTrack"]').forEach(r => { r.checked = (r.value === currentTrack); });
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = isEs() ? 'Opción Múltiple (Preguntas 1–20)' : 'Multiple Choice (Questions 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (!isEs()) ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (!isEs()) ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (!isEs()) ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((!isEs()) ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = isEs() ? 'Respuesta Corta (Preguntas 21–30) — Pista Maestría en Divinidad' : 'Short Answer (Questions 21–30) — Master of Divinity Track';
+    container.appendChild(kwTitle);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = isEs() ? q.textEs : q.textEn;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = isEs() ? 'Escriba su respuesta aquí...' : 'Type your answer here...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = isEs() ? 'Verificar Respuesta' : 'Check Answer';
+        const fb = document.createElement('div');
+        fb.className = 'feedback-text';
+        fb.style.marginTop = '8px';
+        const model = document.createElement('div');
+        model.className = 'model-answer';
+        model.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ansRaw = ta.value.trim();
+            const ans = normalize(ansRaw);
+            const keys = isEs() ? q.kw_es : q.kw_en;
+            const hits = kwHitCount(ans, keys);
+            if (ansRaw.length < 100) {
+                fb.innerHTML = isEs() ? 'Escriba una respuesta más completa (al menos una oración).' : 'Please write a more complete answer (at least a sentence).';
+                fb.className = 'feedback-text incorrect';
+            } else if (hits >= 3) {
+                fb.innerHTML = isEs() ? `✓ ¡Bien! Su respuesta toca ${hits} conceptos clave.` : `✓ Good! Your answer touches ${hits} key concepts.`;
+                fb.className = 'feedback-text correct';
+                kwAnswers[idx] = ansRaw;
+            } else {
+                fb.innerHTML = isEs() ? `Va bien — toca ${hits}. Apunte a al menos 3 conceptos clave; revise la lección y vuelva a intentarlo.` : `Good start — you touched ${hits}. Aim for at least 3 key concepts; review the lesson and try again.`;
+                fb.className = 'feedback-text incorrect';
+            }
+            const mk = isEs() ? q.modelEs : q.modelEn;
+            if (mk) {
+                model.innerHTML = (isEs() ? '<strong>Respuesta modelo — estúdiela:</strong> ' : '<strong>Model answer — study this:</strong> ') + mk;
+                model.style.display = 'block';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(model);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+}
+
+function triggerRedirect() {
+    const target = checkAllUnitsPassed() ? 'CTSNTCertificate.html' : NEXT_URL;
+    const result = document.getElementById('examResult');
+    let seconds = 3;
+    function tick() {
+        const msg = isEs()
+            ? `Redirigiendo a la siguiente unidad en ${seconds}...`
+            : `Redirecting to the next unit in ${seconds}...`;
+        result.innerHTML = `<div class='redirect-notice'>✅ ${isEs() ? '¡APROBADO!' : 'PASSED!'} ${msg}</div>`;
+        if (seconds <= 0) { location.href = target; return; }
+        seconds--;
+        setTimeout(tick, 1000);
+    }
+    tick();
+}
+
+function submitExam() {
+    const result = document.getElementById('examResult');
+    if (unitPassed) {
+        result.innerHTML = `<span style='color:green'>${isEs() ? '✅ Unidad ya aprobada.' : '✅ Unit already passed!'}</span>`;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        result.innerHTML = `<span style='color:red'>${isEs() ? `⏰ Bloqueado por ${wait} minutos más.` : `⏰ Locked for ${wait} more minutes.`}</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) { promptName(); return; }
+
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    let advCorrect = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = normalize(kwAnswers[i] || '');
+        const keys = isEs() ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        if (kwHitCount(ans, keys) >= 3 && ans.length >= 100) advCorrect++;
+    }
+
+    const mcPct = correctMC / 20;
+    const saPct = advCorrect / 10;
+    const mcPass = mcPct >= PASS_THRESHOLD;
+    const saPass = saPct >= PASS_THRESHOLD;
+
+    function passUnit() {
+        unitPassed = true;
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem('cts_nt_progress', JSON.stringify(progress));
+        localStorage.setItem(`nt_unit${UNIT}_passed`, 'true');
+        localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+        localStorage.removeItem(SA_LOCK_KEY);
+        updateProgressGrid();
+        triggerRedirect();
+    }
+
+    if (!isMastersLevel()) {
+        if (mcPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Necesita 18/20 para Certificado.`
+                : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Need 18/20 for Certificate.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        if (saPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ✓ ya guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+                : `MC: ✓ already banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Su opción múltiple está a salvo. Puede reintentar la sección de respuesta corta en ${mins} min.` : `Your multiple-choice pass is safe. You can retry the short-answer section in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPass && saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit();
+    } else if (mcPass && !saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ aprobado y guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ passed and banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Al reintentar en ${mins} min, solo necesitará la sección de respuesta corta — el OM permanece aprobado.` : `When you retry in ${mins} min, you'll only need the short-answer section — MC stays passed.`}</span>`;
+    } else {
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 18/20 Y 9/10 para M.Div.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 18/20 AND 9/10 for M.Div.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+    }
+}
+
+function resetExam() {
+    const msg = isEs()
+        ? '¿Restablecer el examen? Esto borrará sus respuestas en pantalla y eliminará el bloqueo de 15 minutos. Las unidades ya aprobadas no se afectan.'
+        : 'Reset the exam? This will clear your on-screen answers and remove the 15-minute lockout. Already-passed units are not affected.';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill('');
+    lockUntil = 0;
+    mcPreviouslyPassed = false;
+    localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+document.querySelectorAll('input[name="ctsTrack"]').forEach(r => {
+    r.addEventListener('change', e => {
+        currentTrack = e.target.value;
+        localStorage.setItem('cts_track', currentTrack);
+    });
+});
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.className = 'lang-es';
+        this.textContent = 'English';
+    } else {
+        document.body.className = 'lang-en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+syncTrackUI();
+renderQuestions();
+if (unitPassed) document.getElementById('examResult').innerHTML = `<span style='color:green'>${isEs() ? `✅ Unidad ${UNIT} ya aprobada.` : `✅ Unit ${UNIT} already passed.`}</span>`;
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSNTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

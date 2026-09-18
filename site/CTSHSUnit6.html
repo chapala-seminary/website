@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Doctrine of the Holy Spirit &mdash; Unit 6</title>
+<style>
+:root{
+  --ink:#241c12; --paper:#f7f1e4; --card:#fffdf8; --line:#d8ccb2;
+  --accent:#7a3b1e; --accent2:#9c6b2f; --gold:#fbf3d6; --goldln:#caa94e;
+  --good:#2f6b3a; --bad:#9b2c2c; --muted:#6c6150;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;line-height:1.6;}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+header.site{background:var(--accent);color:#f6ecd8;padding:18px 0;border-bottom:4px solid var(--goldln);}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:0;}
+header.site h1{font-size:1.15rem;margin:0;font-weight:600;letter-spacing:.2px;}
+header.site .sub{font-size:.78rem;opacity:.85;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+.langbtn{font-family:system-ui,sans-serif;font-size:.8rem;background:#f6ecd8;color:var(--accent);
+  border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600;}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 4px;
+  font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);}
+.badge{background:var(--gold);border:1px solid var(--goldln);border-radius:14px;padding:3px 10px;color:#6a531c;}
+.epigraph{font-style:italic;color:var(--accent2);border-left:3px solid var(--goldln);
+  padding:6px 0 6px 14px;margin:16px 0;font-size:.98rem;}
+h2.sec{font-size:1.25rem;color:var(--accent);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin:34px 0 14px;}
+article p{margin:0 0 14px;}
+article b{color:var(--accent);}
+.v{color:#3a4a2c;}
+.illo{background:#fbf6ea;border-left:3px solid var(--goldln);padding:10px 14px;border-radius:4px;}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:14px 0;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);}
+.qn{font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;color:var(--accent2);
+  text-transform:uppercase;letter-spacing:.6px;}
+.qp{margin:6px 0 10px;font-weight:600;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:9px 12px;margin:6px 0;cursor:pointer;font:inherit;color:inherit;}
+.opt:hover{border-color:var(--accent2);}
+.opt .lt{font-weight:700;color:var(--accent2);margin-right:8px;}
+.opt.correct{background:#e9f3e8;border-color:var(--good);}
+.opt.wrong{background:#f6e6e4;border-color:var(--bad);}
+.opt:disabled{cursor:default;opacity:1;}
+.expl{font-size:.9rem;color:var(--muted);margin:8px 2px 0;display:none;}
+.expl.show{display:block;}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:6px;padding:10px;
+  font:inherit;background:#fff;resize:vertical;}
+.btn{font-family:system-ui,sans-serif;font-weight:600;border:none;border-radius:6px;padding:9px 16px;
+  cursor:pointer;font-size:.9rem;}
+.btn.primary{background:var(--accent);color:#f6ecd8;}
+.btn.ghost{background:#efe6d2;color:var(--accent);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.sa-res{margin-top:10px;font-family:system-ui,sans-serif;font-size:.88rem;display:none;}
+.sa-res.show{display:block;}
+.sa-verdict{font-weight:700;}
+.sa-verdict.pass{color:var(--good);} .sa-verdict.soft{color:var(--accent2);}
+.model{background:var(--gold);border:1px solid var(--goldln);border-radius:6px;padding:10px 12px;margin-top:8px;}
+.model .ml{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:#6a531c;}
+.foot{margin-top:30px;border-top:2px solid var(--line);padding-top:18px;}
+.status{font-family:system-ui,sans-serif;font-size:.9rem;margin:10px 0;}
+.status.ok{color:var(--good);} .status.warn{color:var(--accent2);} .status.lock{color:var(--bad);}
+.modal{position:fixed;inset:0;background:rgba(36,28,18,.62);display:flex;align-items:center;
+  justify-content:center;padding:18px;z-index:50;}
+.modal .box{background:var(--card);border-radius:10px;max-width:420px;width:100%;padding:22px;
+  border-top:5px solid var(--goldln);}
+.modal h3{margin:0 0 6px;color:var(--accent);}
+.modal label{display:block;font-family:system-ui,sans-serif;font-size:.82rem;margin:12px 0 4px;color:var(--muted);}
+.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit;}
+.hide{display:none !important;}
+.next{display:inline-block;margin-top:12px;background:var(--good);color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:6px;font-family:system-ui,sans-serif;font-weight:600;}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:2px 0 18px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);margin-right:3px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:var(--card);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600;line-height:1;}
+.unitnav a:hover{border-color:var(--accent2);color:var(--accent2);}
+.unitnav a.active{background:var(--accent);color:#f6ecd8;border-color:var(--accent);}
+html[lang="es"] .en-lbl{display:none}html[lang="en"] .es-lbl{display:none}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site">
+  <div class="wrap">
+    <div><h1 id="t-title">The Doctrine of the Holy Spirit</h1><div class="sub" id="t-unit">Unit 6 &middot; The Spirit's Work in Salvation</div></div>
+    <button class="langbtn" id="langBtn" type="button">Espa&ntilde;ol</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <span id="t-greet"></span>
+    <span class="badge" id="t-track"></span>
+  </div>
+
+    <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+     <span class="nl"><span class="en-lbl">Units</span><span class="es-lbl">Unidades</span></span>
+     <a href="CTSHSUnit1.html">1</a>
+     <a href="CTSHSUnit2.html">2</a>
+     <a href="CTSHSUnit3.html">3</a>
+     <a href="CTSHSUnit4.html">4</a>
+     <a href="CTSHSUnit5.html">5</a>
+     <a href="CTSHSUnit6.html" class="active">6</a>
+     <a href="CTSHSUnit7.html">7</a>
+     <a href="CTSHSUnit8.html">8</a>
+     <a href="CTSHSUnit9.html">9</a>
+     <a href="CTSHSUnit10.html">10</a>
+  </nav>
+
+  <div class="epigraph" id="epigraph"></div>
+
+  <article>
+    <div id="teach-en"><h3 style="color:var(--accent);margin:0 0 4px">The Spirit's Work in Salvation</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">How the Spirit applies salvation to the believer: new birth, indwelling, sealing, adoption, the baptism into one body, and the filling of the Spirit</p>
+<p><b>1. What the Spirit Does in the One Who Receives Him</b></p>
+<p>In the last unit we saw the Spirit poured out on all flesh at Pentecost, given freely to everyone who turns to Christ. Now we ask a closer question: what does the Spirit do in the one who receives Him? The answer is breathtaking. The Spirit does not merely visit the believer or assist him from the outside; He gives new life, takes up residence within, marks the believer as God's own, assures him that he is a child of God, joins him to the body of Christ, and fills him for holy living. We will take these one at a time, for every one of them is the Spirit's work and not our own, the free gift of God to all who believe. What the Old Testament longed for and Pentecost began, the Spirit now does in every heart that trusts the Lord Jesus, and He does it not partly but fully, not for a season but forever.</p>
+<p><b>2. He Gives New Birth</b></p>
+<p>The first and deepest work of the Spirit in salvation is the new birth. When Nicodemus came to Jesus by night, the Lord told him, <span class="v">"Unless one is born of water and the Spirit, he cannot enter the kingdom of God. That which is born of the flesh is flesh, and that which is born of the Spirit is spirit"</span> (John 3:5-6). We do not give ourselves this birth any more than a baby gives itself its first birth; it is the Spirit who makes a dead soul alive. Paul says God <span class="v">"saved us, through the washing of regeneration and renewing of the Holy Spirit"</span> (Titus 3:5). This birth is not the work of water baptism, as though a ceremony could make a sinner new; it is the cleansing, renewing work of the Spirit Himself, granting a new heart to one who could never produce it. This is why Jesus said to Nicodemus, <span class="v">"You must be born again"</span> (John 3:7), and likened the new birth to the wind that blows where it wishes (John 3:8); we feel its effect though we cannot command its working. Apart from this work no one can see the kingdom of God.</p>
+<p><b>3. He Comes to Dwell Within</b></p>
+<p>The same Spirit who gives the new birth then comes to live within the one He has made alive. This is the very thing Ezekiel had promised, that God would put His Spirit within His people. Now it is fulfilled in every believer. Paul writes plainly, <span class="v">"if anyone does not have the Spirit of Christ, he is not His"</span> (Romans 8:9). The indwelling Spirit is not the privilege of a few advanced Christians; He is the mark of belonging to Christ at all. Your body, says Paul, <span class="v">"is the temple of the Holy Spirit who is in you, whom you have from God"</span> (1 Corinthians 6:19). The God of heaven has come to live inside ordinary believers. This is why the Christian life is not a matter of trying harder in our own strength, but of yielding to the One who already dwells within. Every believer, the weakest and the strongest alike, is a dwelling place of God by His Spirit.</p>
+<p><b>4. He Seals Us as God's Own</b></p>
+<p>The Spirit also seals the believer. Paul says that in Christ, <span class="v">"having believed, you were sealed with the Holy Spirit of promise, who is the guarantee of our inheritance"</span> (Ephesians 1:13-14). In the ancient world a king pressed his signet ring into soft wax upon an important document, and that seal marked the paper as his own, under his authority and protection. So the Spirit Himself is God's mark upon the believer, declaring that we belong to Him. This is why Paul could call Him the One <span class="v">"by whom you were sealed for the day of redemption"</span> (Ephesians 4:30). The seal is also a down payment, a guarantee that the full inheritance is surely coming. The Spirit we now possess is God's pledge that He will finish what He has begun and bring us safely home. A seal in those days meant two things at once, ownership and security: the document so marked belonged to the king and was safe under his authority. So the Spirit declares both that we are God's and that we are kept by God, until the day He claims His own.</p>
+<p><b>5. He Assures Us We Are God's Children</b></p>
+<p>The indwelling Spirit also brings the believer assurance. We do not have to wonder whether God has received us, for the Spirit Himself testifies that He has. Paul writes, <span class="v">"you received the Spirit of adoption by whom we cry out, 'Abba, Father.' The Spirit Himself bears witness with our spirit that we are children of God"</span> (Romans 8:15-16). It is the Spirit who teaches a frightened sinner to call the holy God his Father. The word <i>Abba</i> is the tender, familiar name a child uses for his own father, and it is the Spirit who puts that word in our mouths, assuring the doubting heart that it truly belongs to God. This witness is one of the sweetest of His works, for it turns slaves into sons and fear into the confidence of a child who knows he is loved.</p>
+<p><b>6. Baptized with the Spirit into One Body</b></p>
+<p>Jesus had promised that His disciples would be baptized with the Holy Spirit, and on the day of Pentecost it came to pass. But this baptism is not the privilege of a special class of believers; it is true of every Christian. Paul says, <span class="v">"by one Spirit we were all baptized into one body... and have all been made to drink into one Spirit"</span> (1 Corinthians 12:13). To be baptized with the Spirit is to be placed, at conversion, into the body of Christ, joined to the Lord and to all His people. Notice the word <i>all:</i> not some, but all who belong to Christ have been baptized by the one Spirit into the one body. This is a settled fact accomplished when we are saved, not a later experience reserved for a favored few. We need not seek some second blessing to make us fully Christ's, for if we are His at all, the one Spirit has already baptized us into His one body.</p>
+<p><b>7. Be Filled with the Spirit</b></p>
+<p>If the baptism with the Spirit happens once, the filling of the Spirit is meant to happen again and again. Paul commands, <span class="v">"do not be drunk with wine, in which is dissipation; but be filled with the Spirit"</span> (Ephesians 5:18). It is a striking comparison. A man controlled by strong drink is ruled by it; his words and steps are no longer his own. The believer is to be that fully under the Spirit's control, not by wine but by surrender to God. The likeness runs all through Scripture: when Hannah prayed in deep earnestness, Eli thought she was drunk (1 Samuel 1:13-14), and when the Spirit fell at Pentecost the crowd said the believers were full of new wine (Acts 2:13-15). The Spirit-filled life can look like that to the watching world, overflowing and unashamed, glad in God beyond what mere wine could ever give. And we may be filled again and again, as the early disciples were, for those who had been filled at Pentecost were filled afresh when they prayed (Acts 4:31). Paul describes what the filled life looks like: it speaks and sings to the Lord, it gives thanks always, and it serves others in humility (Ephesians 5:19-21). To be filled is to be repeatedly yielded to the Spirit, letting Him fill what we daily empty before Him, so that He may govern our speech, our worship, and our walk.</p>
+<p><b>8. The Question of Tongues and the Gifts Today</b></p>
+<p>Wherever the Spirit's work is discussed, the question of tongues and the miraculous gifts arises, and we ought to speak of it plainly and with charity. At Pentecost the believers spoke in real languages, so that the gathered nations heard the gospel each in his own tongue. Paul wrote much about such gifts in his letters to Corinth, and there he laid down truths that should guide us. The gifts are distributed by the Spirit as He wills, and they are not the same for everyone; when Paul asks, <span class="v">"Do all speak with tongues?"</span> (1 Corinthians 12:30), he plainly expects the answer to be no. He sets love above every gift, and he insists that whatever is done be done for the building up of the church and in good order. Sincere Christians differ on whether the sign-gifts continue today as they did at the first, or whether they served the founding age of the church and the completing of Scripture. Some hold that these gifts served to found the church and to confirm the apostles' message while the Scriptures were still being written, and so passed away when that work was complete; others believe they continue to this day. On this our churches must extend charity to one another and not divide over what Scripture does not make a test of fellowship. But all may agree on the tests the Spirit Himself gives: whatever is truly of the Spirit will exalt Christ as Lord, will accord with the Scriptures, and will be governed by love. We will look more closely at the gifts of the Spirit, and at love as the greatest of them all, near the end of this course.</p></div>
+    <div id="teach-es" class="hide"><h3 style="color:var(--accent);margin:0 0 4px">La obra del Esp&iacute;ritu en la salvaci&oacute;n</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">Lo que el Esp&iacute;ritu hace en quien lo recibe: el nuevo nacimiento, la morada interior, el sello, el testimonio de adopci&oacute;n, el bautismo en un cuerpo, y la plenitud</p>
+
+<p><b>1. Lo que el Esp&iacute;ritu hace en quien lo recibe</b></p>
+<p>En la unidad anterior vimos al Esp&iacute;ritu derramado sobre toda carne en Pentecost&eacute;s, dado libremente a todo aquel que se vuelve a Cristo. Ahora preguntamos algo m&aacute;s de cerca: &iquest;qu&eacute; hace el Esp&iacute;ritu en quien lo recibe? La respuesta es asombrosa. El Esp&iacute;ritu no solo visita al creyente ni lo asiste desde afuera; da nueva vida, toma residencia adentro, marca al creyente como propiedad de Dios, le asegura que es hijo de Dios, lo une al cuerpo de Cristo, y lo llena para una vida santa. Tomaremos estas una por una, pues cada una de ellas es obra del Esp&iacute;ritu y no nuestra, el don gratuito de Dios a todos los que creen. Lo que el Antiguo Testamento anhel&oacute; y Pentecost&eacute;s comenz&oacute;, el Esp&iacute;ritu lo hace ahora en todo coraz&oacute;n que conf&iacute;a en el Se&ntilde;or Jes&uacute;s, y lo hace no en parte sino plenamente, no por una temporada sino para siempre.</p>
+<p><b>2. Da el nuevo nacimiento</b></p>
+<p>La primera y m&aacute;s honda obra del Esp&iacute;ritu en la salvaci&oacute;n es el nuevo nacimiento. Cuando Nicodemo vino a Jes&uacute;s de noche, el Se&ntilde;or le dijo: <span class="v">&ldquo;el que no naciere de agua y del Esp&iacute;ritu, no puede entrar en el reino de Dios. Lo que es nacido de la carne, carne es; y lo que es nacido del Esp&iacute;ritu, esp&iacute;ritu es&rdquo;</span> (Juan 3:5-6). No nos damos este nacimiento m&aacute;s de lo que un beb&eacute; se da a s&iacute; mismo su primer nacimiento; es el Esp&iacute;ritu quien hace viva un alma muerta. Pablo dice que Dios <span class="v">&ldquo;nos salv&oacute;, por el lavamiento de la regeneraci&oacute;n y la renovaci&oacute;n del Esp&iacute;ritu Santo&rdquo;</span> (Tito 3:5). Este nacimiento no es la obra del bautismo en agua, como si una ceremonia pudiera hacer nuevo a un pecador; es la obra limpiadora y renovadora del Esp&iacute;ritu mismo, dando un nuevo coraz&oacute;n a quien jam&aacute;s podr&iacute;a producirlo. Por eso Jes&uacute;s dijo a Nicodemo: <span class="v">&ldquo;Os es necesario nacer de nuevo&rdquo;</span> (Juan 3:7), y compar&oacute; el nuevo nacimiento con el viento que sopla de donde quiere (Juan 3:8); sentimos su efecto aunque no podamos mandar su obrar. Aparte de esta obra nadie puede ver el reino de Dios.</p>
+<p><b>3. Viene a morar adentro</b></p>
+<p>El mismo Esp&iacute;ritu que da el nuevo nacimiento viene luego a vivir dentro de aquel a quien ha hecho vivo. Esto es lo mismo que Ezequiel hab&iacute;a prometido, que Dios pondr&iacute;a su Esp&iacute;ritu dentro de su pueblo. Ahora se cumple en todo creyente. Pablo escribe claramente: <span class="v">&ldquo;si alguno no tiene el Esp&iacute;ritu de Cristo, el tal no es de &eacute;l&rdquo;</span> (Romanos 8:9). La morada del Esp&iacute;ritu no es el privilegio de unos pocos cristianos avanzados; es la marca misma de pertenecer a Cristo. Vuestro cuerpo, dice Pablo, <span class="v">&ldquo;es templo del Esp&iacute;ritu Santo, el cual est&aacute; en vosotros, el cual ten&eacute;is de Dios&rdquo;</span> (1 Corintios 6:19). El Dios del cielo ha venido a vivir dentro de creyentes comunes. Por eso la vida cristiana no es cuesti&oacute;n de esforzarnos m&aacute;s en nuestra propia fuerza, sino de entregarnos a Aquel que ya mora adentro. Todo creyente, el m&aacute;s d&eacute;bil y el m&aacute;s fuerte por igual, es morada de Dios por su Esp&iacute;ritu.</p>
+<p><b>4. Nos sella como propiedad de Dios</b></p>
+<p>El Esp&iacute;ritu tambi&eacute;n sella al creyente. Pablo dice que en Cristo, <span class="v">&ldquo;habiendo cre&iacute;do, fuisteis sellados con el Esp&iacute;ritu Santo de la promesa, que es las arras de nuestra herencia&rdquo;</span> (Efesios 1:13-14). En el mundo antiguo un rey imprim&iacute;a su anillo de sello en la cera blanda sobre un documento importante, y aquel sello marcaba el papel como suyo, bajo su autoridad y protecci&oacute;n. As&iacute; el Esp&iacute;ritu mismo es la marca de Dios sobre el creyente, declarando que le pertenecemos. Por eso Pablo pudo llamarlo Aquel <span class="v">&ldquo;con el cual est&aacute;is sellados para el d&iacute;a de la redenci&oacute;n&rdquo;</span> (Efesios 4:30). El sello es tambi&eacute;n un pago inicial, una garant&iacute;a de que la herencia plena ciertamente viene. El Esp&iacute;ritu que ahora poseemos es la prenda de Dios de que terminar&aacute; lo que ha comenzado y nos llevar&aacute; a salvo a casa. Un sello en aquellos d&iacute;as significaba dos cosas a la vez, propiedad y seguridad: el documento as&iacute; marcado pertenec&iacute;a al rey y estaba seguro bajo su autoridad. As&iacute; el Esp&iacute;ritu declara a la vez que somos de Dios y que somos guardados por Dios, hasta el d&iacute;a en que reclame lo suyo.</p>
+<p><b>5. Nos asegura que somos hijos de Dios</b></p>
+<p>El Esp&iacute;ritu que mora adentro trae tambi&eacute;n seguridad al creyente. No tenemos que preguntarnos si Dios nos ha recibido, pues el Esp&iacute;ritu mismo testifica que s&iacute;. Pablo escribe: <span class="v">&ldquo;recibisteis el esp&iacute;ritu de adopci&oacute;n, por el cual clamamos: Abba, Padre. El Esp&iacute;ritu mismo da testimonio a nuestro esp&iacute;ritu, de que somos hijos de Dios&rdquo;</span> (Romanos 8:15-16). Es el Esp&iacute;ritu quien ense&ntilde;a a un pecador atemorizado a llamar Padre al Dios santo. La palabra Abba es el nombre tierno y familiar que un ni&ntilde;o usa para su propio padre, y es el Esp&iacute;ritu quien pone esa palabra en nuestra boca, asegurando al coraz&oacute;n dudoso que de veras pertenece a Dios. Este testimonio es una de las m&aacute;s dulces de sus obras, pues vuelve a los esclavos en hijos y al temor en la confianza de un ni&ntilde;o que sabe que es amado.</p>
+<p><b>6. Bautizados en el Esp&iacute;ritu en un cuerpo</b></p>
+<p>Jes&uacute;s hab&iacute;a prometido que sus disc&iacute;pulos ser&iacute;an bautizados con el Esp&iacute;ritu Santo, y en el d&iacute;a de Pentecost&eacute;s se cumpli&oacute;. Pero este bautismo no es el privilegio de una clase especial de creyentes; es verdad de todo cristiano. Pablo dice: <span class="v">&ldquo;por un solo Esp&iacute;ritu somos todos bautizados en un cuerpo... y a todos se nos dio a beber de un mismo Esp&iacute;ritu&rdquo;</span> (1 Corintios 12:13). Ser bautizado con el Esp&iacute;ritu es ser puesto, en la conversi&oacute;n, en el cuerpo de Cristo, unido al Se&ntilde;or y a todo su pueblo. Note la palabra todos: no algunos, sino todos los que pertenecen a Cristo han sido bautizados por el un Esp&iacute;ritu en el un cuerpo. Esto es un hecho establecido, cumplido cuando somos salvos, no una experiencia posterior reservada a unos pocos favorecidos. No necesitamos buscar alguna segunda bendici&oacute;n para ser plenamente de Cristo, pues si somos suyos en absoluto, el un Esp&iacute;ritu ya nos ha bautizado en su un cuerpo.</p>
+<p><b>7. Sed llenos del Esp&iacute;ritu</b></p>
+<p>Si el bautismo con el Esp&iacute;ritu sucede una vez, la plenitud del Esp&iacute;ritu ha de suceder una y otra vez. Pablo manda: <span class="v">&ldquo;no os embriagu&eacute;is con vino, en lo cual hay disoluci&oacute;n; antes bien sed llenos del Esp&iacute;ritu&rdquo;</span> (Efesios 5:18). Es una comparaci&oacute;n llamativa. Un hombre dominado por la bebida fuerte es gobernado por ella; sus palabras y sus pasos ya no son suyos. El creyente ha de estar as&iacute; de plenamente bajo el control del Esp&iacute;ritu, no por el vino sino por la entrega a Dios. La semejanza corre por toda la Escritura: cuando Ana oraba con hondo fervor, El&iacute; la tuvo por borracha (1 Samuel 1:13-14), y cuando el Esp&iacute;ritu cay&oacute; en Pentecost&eacute;s la multitud dijo que los creyentes estaban llenos de mosto (Hechos 2:13-15). La vida llena del Esp&iacute;ritu puede parecerle eso al mundo que observa, rebosante y sin verg&uuml;enza, alegre en Dios m&aacute;s de lo que el vino podr&iacute;a jam&aacute;s dar. Y podemos ser llenos una y otra vez, como lo fueron los primeros disc&iacute;pulos, pues los que hab&iacute;an sido llenos en Pentecost&eacute;s fueron llenos de nuevo cuando oraron (Hechos 4:31). Pablo describe c&oacute;mo es la vida llena: habla y canta al Se&ntilde;or, da gracias siempre, y sirve a los dem&aacute;s con humildad (Efesios 5:19-21). Ser llenos es estar repetidamente entregados al Esp&iacute;ritu, dej&aacute;ndole llenar lo que diariamente vaciamos ante &Eacute;l, para que gobierne nuestra habla, nuestra adoraci&oacute;n, y nuestro andar.</p>
+<p><b>8. La cuesti&oacute;n de las lenguas y los dones hoy</b></p>
+<p>Dondequiera que se trata la obra del Esp&iacute;ritu surge la cuesti&oacute;n de las lenguas y los dones milagrosos, y debemos hablar de ella con claridad y con caridad. En Pentecost&eacute;s los creyentes hablaron en lenguas reales, de modo que las naciones reunidas oyeron el evangelio cada una en su propio idioma. Pablo escribi&oacute; mucho sobre tales dones en sus cartas a Corinto, y all&iacute; estableci&oacute; verdades que deben guiarnos. Los dones son repartidos por el Esp&iacute;ritu como &Eacute;l quiere, y no son los mismos para todos; cuando Pablo pregunta: <span class="v">&ldquo;&iquest;Hablan todos lenguas?&rdquo;</span> (1 Corintios 12:30), claramente espera que la respuesta sea no. Pone el amor por encima de todo don, e insiste en que cuanto se haga, se haga para edificaci&oacute;n de la iglesia y con buen orden. Cristianos sinceros difieren en si los dones de se&ntilde;ales contin&uacute;an hoy como al principio, o si sirvieron a la edad fundadora de la iglesia y a completar la Escritura. Algunos sostienen que estos dones sirvieron para fundar la iglesia y confirmar el mensaje de los ap&oacute;stoles mientras las Escrituras a&uacute;n se escrib&iacute;an, y as&iacute; pasaron cuando esa obra se complet&oacute;; otros creen que contin&uacute;an hasta hoy. En esto nuestras iglesias deben extender caridad unas a otras y no dividirse sobre lo que la Escritura no hace prueba de comuni&oacute;n. Pero todos pueden concordar en las pruebas que el Esp&iacute;ritu mismo da: cuanto es de veras del Esp&iacute;ritu exaltar&aacute; a Cristo como Se&ntilde;or, concordar&aacute; con las Escrituras, y ser&aacute; gobernado por el amor. Veremos m&aacute;s de cerca los dones del Esp&iacute;ritu, y el amor como el mayor de todos, cerca del fin de este curso.</p>
+</div>
+  </article>
+
+  <h2 class="sec" id="t-mc">Multiple Choice</h2>
+  <div id="mcWrap"></div>
+
+  <h2 class="sec" id="t-sa">Short Answer</h2>
+  <p class="status" id="t-saNote"></p>
+  <div id="saWrap"></div>
+
+  <div class="foot">
+    <button class="btn primary" id="completeBtn" type="button"></button>
+    <div class="status" id="statusMsg"></div>
+    <a class="next hide" id="nextLink" href="CTSHSUnit7.html"></a>
+  </div>
+</div>
+
+<div class="modal hide" id="reg">
+  <div class="box">
+    <h3 id="m-h">Welcome</h3>
+    <p id="m-p" style="font-size:.9rem;color:var(--muted);margin:0"></p>
+    <label id="m-nl">Your name</label>
+    <input id="m-name" type="text" autocomplete="name" aria-label="m name">
+    <label id="m-tl">Track</label>
+    <select id="m-track" aria-label="m track">
+      <option value="cert">Certificate</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div style="margin-top:16px"><button class="btn primary" id="m-go" type="button">Begin</button></div>
+  </div>
+</div>
+
+<script>
+var CFG={course:'hs',unit:6,totalUnits:10,progressKey:'cts_hs_progress',
+  next:'CTSHSUnit7.html',cert:'CTSHSCertificate.html',lockKey:'cts_hs_u6_lock',showReg:false};
+var DATA={"mc": [{"en": "The new birth, being born again, is the work of:", "es": "El nuevo nacimiento, el nacer de nuevo, es obra de:", "oen": ["the church", "our own decision alone", "the Holy Spirit (John 3:5-6)", "good works"], "oes": ["la iglesia", "nuestra propia decisión sola", "el Espíritu Santo (Juan 3:5-6)", "las buenas obras"], "c": 23, "xen": "John 3 — we are born of the Spirit.", "xes": "Juan 3 — nacemos del Espíritu."}, {"en": "“He saved us… by the washing of regeneration and renewing of the Holy Spirit” is from:", "es": "“Nos salvó… por el lavamiento de la regeneración y por la renovación del Espíritu Santo” es de:", "oen": ["Titus 3:5", "John 3:16", "Romans 8:9", "Acts 2:4"], "oes": ["Tito 3:5", "Juan 3:16", "Romanos 8:9", "Hechos 2:4"], "c": 28, "xen": "Titus 3:5 — regeneration by the Spirit.", "xes": "Tito 3:5 — regeneración por el Espíritu."}, {"en": "“If anyone does not have the Spirit of Christ, he is not His” is from:", "es": "“Si alguno no tiene el Espíritu de Cristo, no es de Él” es de:", "oen": ["Ephesians 1:13", "1 Corinthians 12:13", "Titus 3:5", "Romans 8:9"], "oes": ["Efesios 1:13", "1 Corintios 12:13", "Tito 3:5", "Romanos 8:9"], "c": 38, "xen": "Romans 8:9 — every believer has the indwelling Spirit.", "xes": "Romanos 8:9 — todo creyente tiene al Espíritu que mora."}, {"en": "Believers are sealed with the Holy Spirit, who is the guarantee of:", "es": "Los creyentes son sellados con el Espíritu Santo, que es las arras de:", "oen": ["our good works", "our inheritance (Ephesians 1:13-14)", "our wisdom", "the law"], "oes": ["nuestras buenas obras", "nuestra herencia (Efesios 1:13-14)", "nuestra sabiduría", "la ley"], "c": 43, "xen": "Ephesians 1:13-14 — the Spirit, the guarantee of our inheritance.", "xes": "Efesios 1:13-14 — el Espíritu, las arras de nuestra herencia."}, {"en": "The sealing of the Spirit, like a king's signet ring, shows the believer's:", "es": "El sello del Espíritu, como el anillo de un rey, muestra la del creyente:", "oen": ["higher rank than others", "freedom to sin", "security and belonging to God", "need to earn salvation"], "oes": ["rango más alto que otros", "libertad para pecar", "seguridad y pertenencia a Dios", "necesidad de ganar la salvación"], "c": 51, "xen": "The seal marks us as God's own and secure.", "xes": "El sello nos marca como de Dios y seguros."}, {"en": "“The Spirit Himself bears witness with our spirit that we are children of God” is from:", "es": "“El Espíritu mismo da testimonio a nuestro espíritu, de que somos hijos de Dios” es de:", "oen": ["Romans 8:16", "Galatians 5:22", "Ephesians 5:18", "John 3:5"], "oes": ["Romanos 8:16", "Gálatas 5:22", "Efesios 5:18", "Juan 3:5"], "c": 56, "xen": "Romans 8:16 — the Spirit assures us we are God's children.", "xes": "Romanos 8:16 — el Espíritu nos asegura que somos hijos de Dios."}, {"en": "The Spirit of adoption causes the believer to cry out:", "es": "El Espíritu de adopción hace que el creyente clame:", "oen": ["“Lord, Lord”", "“Holy, holy”", "“Peace, peace”", "“Abba, Father”"], "oes": ["“Señor, Señor”", "“Santo, santo”", "“Paz, paz”", "“Abba, Padre”"], "c": 66, "xen": "Romans 8:15 and Galatians 4:6 — “Abba, Father.”", "xes": "Romanos 8:15 y Gálatas 4:6 — “Abba, Padre.”"}, {"en": "“By one Spirit we were all baptized into one body” is from:", "es": "“Por un solo Espíritu fuimos todos bautizados en un cuerpo” es de:", "oen": ["Ephesians 5:18", "1 Corinthians 12:13", "John 3:5", "Romans 8:16"], "oes": ["Efesios 5:18", "1 Corintios 12:13", "Juan 3:5", "Romanos 8:16"], "c": 71, "xen": "1 Corinthians 12:13 — baptized into one body.", "xes": "1 Corintios 12:13 — bautizados en un cuerpo."}, {"en": "The baptism with the Spirit happens:", "es": "El bautismo con el Espíritu sucede:", "oen": ["only after death", "many times each day", "only to a chosen few", "once, joining every believer to the one body"], "oes": ["solo después de la muerte", "muchas veces al día", "solo a unos pocos escogidos", "una vez, uniendo a cada creyente al un cuerpo"], "c": 80, "xen": "All believers are baptized into the body at salvation.", "xes": "Todos los creyentes son bautizados en el cuerpo en la salvación."}, {"en": "“Do not be drunk with wine… but be filled with the Spirit” is from:", "es": "“No os emborrachéis con vino… sino sed llenos del Espíritu” es de:", "oen": ["Ephesians 5:18", "1 Corinthians 12:13", "Titus 3:5", "Romans 8:9"], "oes": ["Efesios 5:18", "1 Corintios 12:13", "Tito 3:5", "Romanos 8:9"], "c": 84, "xen": "Ephesians 5:18 — the command to be filled.", "xes": "Efesios 5:18 — el mandato de ser llenos."}, {"en": "Unlike the one-time baptism, the filling of the Spirit is meant to happen:", "es": "A diferencia del bautismo de una sola vez, la llenura del Espíritu ha de suceder:", "oen": ["only at baptism in water", "again and again", "never after conversion", "only for apostles"], "oes": ["solo en el bautismo en agua", "una y otra vez", "nunca después de la conversión", "solo para apóstoles"], "c": 92, "xen": "We may be filled repeatedly, as the disciples were.", "xes": "Podemos ser llenos repetidamente, como los discípulos."}, {"en": "When Hannah prayed in deep earnestness, Eli wrongly thought she was:", "es": "Cuando Ana oraba con profundo fervor, Elí erróneamente pensó que estaba:", "oen": ["asleep", "angry", "drunk (1 Samuel 1:13-14)", "silent"], "oes": ["dormida", "enojada", "borracha (1 Samuel 1:13-14)", "callada"], "c": 100, "xen": "1 Samuel 1:13-14 — Eli mistook her fervor for drunkenness.", "xes": "1 Samuel 1:13-14 — Elí confundió su fervor con borrachera."}, {"en": "At Pentecost, the mocking crowd said the Spirit-filled believers were:", "es": "En Pentecostés, la multitud burlona dijo que los creyentes llenos del Espíritu estaban:", "oen": ["full of new wine", "asleep", "afraid", "foolish"], "oes": ["llenos de mosto", "dormidos", "temerosos", "necios"], "c": 105, "xen": "Acts 2:13 — the filled life looked like overflowing joy.", "xes": "Hechos 2:13 — la vida llena parecía gozo desbordante."}, {"en": "To be filled with the Spirit means to be:", "es": "Ser lleno del Espíritu significa estar:", "oen": ["free from all duty", "under the Spirit's control, yielded to Him", "lost in confusion", "superior to other Christians"], "oes": ["libre de todo deber", "bajo el control del Espíritu, entregado a Él", "perdido en confusión", "superior a otros cristianos"], "c": 113, "xen": "As wine controls the drunkard, the Spirit governs the filled.", "xes": "Como el vino controla al ebrio, el Espíritu gobierna al lleno."}, {"en": "The indwelling of the Spirit in the new covenant is:", "es": "La morada del Espíritu en el nuevo pacto es:", "oen": ["temporary and uncertain", "only for leaders", "withdrawn at every sin", "permanent — He abides forever"], "oes": ["temporal e incierta", "solo para líderes", "retirada con cada pecado", "permanente — permanece para siempre"], "c": 122, "xen": "Unlike the OT, His indwelling now abides forever.", "xes": "A diferencia del AT, su morada ahora permanece para siempre."}, {"en": "At Pentecost the believers spoke in tongues that were:", "es": "En Pentecostés los creyentes hablaron en lenguas que eran:", "oen": ["meaningless sounds", "only Hebrew", "real languages, so each nation heard the gospel", "a secret code"], "oes": ["sonidos sin sentido", "solo hebreo", "idiomas reales, para que cada nación oyera el evangelio", "un código secreto"], "c": 128, "xen": "Acts 2 — real languages understood by the nations.", "xes": "Hechos 2 — idiomas reales entendidos por las naciones."}, {"en": "Paul's question “Do all speak with tongues?” (1 Cor 12:30) expects the answer:", "es": "La pregunta de Pablo “¿Hablan todos lenguas?” (1 Cor 12:30) espera la respuesta:", "oen": ["yes — every believer must", "no — not all have the same gift", "only the apostles do", "no one does anymore"], "oes": ["sí — todo creyente debe", "no — no todos tienen el mismo don", "solo los apóstoles", "ya nadie lo hace"], "c": 134, "xen": "Gifts are distributed as the Spirit wills, not the same for all.", "xes": "Los dones se reparten como el Espíritu quiere, no iguales para todos."}, {"en": "On whether the sign-gifts continue today, the unit counsels Christians to:", "es": "Sobre si los dones de señales continúan hoy, la unidad aconseja a los cristianos:", "oen": ["extend charity and not divide over it", "condemn all who disagree", "require tongues of everyone", "ignore the Scriptures"], "oes": ["extender caridad y no dividirse por ello", "condenar a todos los que difieren", "exigir lenguas a todos", "ignorar las Escrituras"], "c": 140, "xen": "Sincere Christians differ; charity should rule.", "xes": "Cristianos sinceros difieren; la caridad debe regir."}, {"en": "The tests the Spirit Himself gives for His genuine work are that it will:", "es": "Las pruebas que el Espíritu mismo da de su obra genuina son que ella:", "oen": ["produce the loudest signs", "exalt the gifted person", "exalt Christ, accord with Scripture, and be governed by love", "promise wealth"], "oes": ["produzca las señales más ruidosas", "exalte a la persona dotada", "exalte a Cristo, concuerde con la Escritura, y sea gobernada por amor", "prometa riqueza"], "c": 149, "xen": "Christ-exalting, Scriptural, and loving — the Spirit's marks.", "xes": "Que exalta a Cristo, bíblica, y amorosa — las marcas del Espíritu."}, {"en": "The whole work of the Spirit in salvation — new birth, indwelling, sealing, adoption — is:", "es": "Toda la obra del Espíritu en la salvación — nuevo nacimiento, morada, sello, adopción — es:", "oen": ["a reward for our works", "only a future hope", "the same as in the Old Testament", "God's gift to us, not something we earn"], "oes": ["una recompensa por nuestras obras", "solo una esperanza futura", "igual que en el Antiguo Testamento", "don de Dios para nosotros, no algo que ganamos"], "c": 157, "xen": "Salvation's whole work is the Spirit's gift, not earned.", "xes": "Toda la obra de la salvación es don del Espíritu, no ganada."}], "sa": [{"en": "What does the Holy Spirit do in giving the new birth?", "es": "¿Qué hace el Espíritu Santo al dar el nuevo nacimiento?", "men": "The Spirit gives new life, so that a person is born again, born of the Spirit, as Jesus told Nicodemus. Paul calls it the washing of regeneration and renewing of the Holy Spirit. The new birth is the Spirit's work, not something we produce by our own decision or good works.", "mes": "El Espíritu da vida nueva, de modo que la persona nace de nuevo, nacida del Espíritu, como Jesús dijo a Nicodemo. Pablo lo llama el lavamiento de la regeneración y la renovación del Espíritu Santo. El nuevo nacimiento es obra del Espíritu, no algo que producimos por nuestra propia decisión u obras.", "ken": ["spirit", "birth", "born", "regenerat", "life", "renew", "work", "new"], "kes": ["espiritu", "nacimiento", "nace", "regenera", "vida", "renova", "obra", "nuevo"]}, {"en": "What does Romans 8:9 teach about the indwelling of the Spirit?", "es": "¿Qué enseña Romanos 8:9 acerca de la morada del Espíritu?", "men": "It teaches that the Spirit of God dwells in the believer, and that if anyone does not have the Spirit of Christ, he is not His. So the indwelling Spirit marks everyone who truly belongs to Christ, and in the new covenant this indwelling is permanent, abiding forever.", "mes": "Enseña que el Espíritu de Dios mora en el creyente, y que si alguno no tiene el Espíritu de Cristo, no es de Él. Así que el Espíritu que mora marca a todo el que de veras pertenece a Cristo, y en el nuevo pacto esta morada es permanente, permaneciendo para siempre.", "ken": ["spirit", "dwell", "christ", "believ", "within", "permanent", "belong", "romans"], "kes": ["espiritu", "mora", "cristo", "creyent", "dentro", "permanen", "perten", "romanos"]}, {"en": "What does it mean that believers are sealed with the Spirit?", "es": "¿Qué significa que los creyentes son sellados con el Espíritu?", "men": "It means God has marked us as His own with the Holy Spirit, as a king marked his papers with a signet ring. The Spirit is the guarantee of our inheritance, sealing us for the day of redemption, which shows the believer's security and certain belonging to God.", "mes": "Significa que Dios nos ha marcado como suyos con el Espíritu Santo, como un rey marcaba sus papeles con un anillo de sello. El Espíritu es las arras de nuestra herencia, sellándonos para el día de la redención, lo cual muestra la seguridad del creyente y su cierta pertenencia a Dios.", "ken": ["seal", "spirit", "guarante", "inherit", "secur", "signet", "belong", "redempt"], "kes": ["sell", "espiritu", "arras", "herenc", "segur", "anillo", "perten", "redenc"]}, {"en": "How does the Spirit assure us that we are God's children?", "es": "¿Cómo nos asegura el Espíritu que somos hijos de Dios?", "men": "The Spirit of adoption causes us to cry out, Abba, Father, and the Spirit Himself bears witness with our spirit that we are children of God. So our assurance of being God's children is the Spirit's own inward witness, not merely our feelings.", "mes": "El Espíritu de adopción nos hace clamar, Abba, Padre, y el Espíritu mismo da testimonio a nuestro espíritu de que somos hijos de Dios. Así que nuestra seguridad de ser hijos de Dios es el testimonio interior del Espíritu mismo, no meramente nuestros sentimientos.", "ken": ["spirit", "adopt", "abba", "father", "witness", "children", "assur", "god"], "kes": ["espiritu", "adopcion", "abba", "padre", "testi", "hijo", "asegur", "dios"]}, {"en": "Explain the baptism with the Spirit into one body.", "es": "Explique el bautismo con el Espíritu en un cuerpo.", "men": "Paul says that by one Spirit we were all baptized into one body. This baptism happens once, joining every believer to the body of Christ at salvation. It is not a repeated experience for a chosen few but the common possession of all who belong to Christ.", "mes": "Pablo dice que por un solo Espíritu fuimos todos bautizados en un cuerpo. Este bautismo sucede una vez, uniendo a cada creyente al cuerpo de Cristo en la salvación. No es una experiencia repetida para unos pocos escogidos, sino la posesión común de todos los que pertenecen a Cristo.", "ken": ["baptiz", "spirit", "body", "once", "believ", "christ", "salvation", "all"], "kes": ["bautiz", "espiritu", "cuerpo", "perten", "creyent", "cristo", "salvacion", "todos"]}, {"en": "What does “be filled with the Spirit” mean, and how does it differ from the baptism with the Spirit?", "es": "¿Qué significa “ser lleno del Espíritu,” y cómo difiere del bautismo con el Espíritu?", "men": "To be filled with the Spirit, commanded in Ephesians 5:18, is to be repeatedly yielded to His control, and it is meant to happen again and again. The baptism with the Spirit happens once and joins us to the body; the filling is the ongoing surrender by which the Spirit governs our life.", "mes": "Ser lleno del Espíritu, mandado en Efesios 5:18, es estar repetidamente entregado a su control, y ha de suceder una y otra vez. El bautismo con el Espíritu sucede una vez y nos une al cuerpo; la llenura es la entrega continua por la cual el Espíritu gobierna nuestra vida.", "ken": ["fill", "spirit", "yield", "control", "baptiz", "once", "repeat", "command"], "kes": ["llen", "espiritu", "entreg", "control", "bautiz", "continu", "repet", "mandad"]}, {"en": "Explain the comparison between drunkenness and being filled with the Spirit.", "es": "Explique la comparación entre la borrachera y ser lleno del Espíritu.", "men": "As a man controlled by strong drink is ruled by it, so the believer is to be fully under the Spirit's control, not by wine but by surrender to God. The likeness runs through Scripture: Eli thought Hannah was drunk, and the Pentecost crowd thought the believers were drunk; the filled life overflows with gladness in God.", "mes": "Como un hombre controlado por la bebida es regido por ella, así el creyente ha de estar plenamente bajo el control del Espíritu, no por vino sino por entrega a Dios. La semejanza recorre la Escritura: Elí pensó que Ana estaba borracha, y la multitud de Pentecostés pensó que los creyentes estaban borrachos; la vida llena desborda de gozo en Dios.", "ken": ["drunk", "control", "spirit", "wine", "fill", "hannah", "pentecost", "yield"], "kes": ["borrach", "control", "espiritu", "vino", "llen", "ana", "pentecost", "entreg"]}, {"en": "How does this unit handle the question of whether the sign-gifts continue today?", "es": "¿Cómo trata esta unidad la cuestión de si los dones de señales continúan hoy?", "men": "It speaks plainly and with charity, noting that sincere Christians differ. Some hold the sign-gifts served to found the church and confirm the message while Scripture was being written, and so passed away; others believe they continue. The unit urges charity and not dividing over what Scripture does not make a test of fellowship.", "mes": "Habla con claridad y caridad, notando que cristianos sinceros difieren. Algunos sostienen que los dones de señales sirvieron para fundar la iglesia y confirmar el mensaje mientras se escribía la Escritura, y así cesaron; otros creen que continúan. La unidad insta a la caridad y a no dividirse por lo que la Escritura no hace prueba de comunión.", "ken": ["sign", "continu", "ceas", "charit", "differ", "divid", "church", "scriptur"], "kes": ["senal", "continu", "ces", "caridad", "difier", "divid", "iglesia", "escritura"]}, {"en": "What tests does the Spirit Himself give for discerning His genuine work?", "es": "¿Qué pruebas da el Espíritu mismo para discernir su obra genuina?", "men": "Whatever is truly of the Spirit will exalt Christ as Lord, will accord with the Scriptures, and will be governed by love. These tests hold whatever one concludes about the gifts, for the Spirit's work always points to Christ and never contradicts the Word.", "mes": "Cuanto es de veras del Espíritu exaltará a Cristo como Señor, concordará con las Escrituras, y será gobernado por amor. Estas pruebas se sostienen sea cual sea la conclusión sobre los dones, pues la obra del Espíritu siempre señala a Cristo y nunca contradice la Palabra.", "ken": ["test", "exalt", "christ", "scriptur", "love", "spirit", "govern", "lord"], "kes": ["prueba", "exalt", "cristo", "escritura", "amor", "espiritu", "gobern", "senor"]}, {"en": "Summarize the Spirit's work in the believer's salvation.", "es": "Resuma la obra del Espíritu en la salvación del creyente.", "men": "The Spirit gives the new birth, comes to dwell within permanently, seals us as God's own, and assures us we are His children, crying Abba, Father. He baptizes every believer into one body and fills those who yield to Him. The whole work is God's gift, not something we earn.", "mes": "El Espíritu da el nuevo nacimiento, viene a morar dentro permanentemente, nos sella como de Dios, y nos asegura que somos sus hijos, clamando Abba, Padre. Bautiza a cada creyente en un cuerpo y llena a los que se le entregan. Toda la obra es don de Dios, no algo que ganamos.", "ken": ["spirit", "birth", "dwell", "seal", "adopt", "baptiz", "fill", "gift"], "kes": ["espiritu", "nacimiento", "mora", "sell", "adopcion", "bautiz", "llen", "don"]}]};
+
+/* ---- storage hardening (Android content:// safe) ---- */
+var _ctsMem={};
+function lsGet(k){try{var v=localStorage.getItem(k);return v===null?(k in _ctsMem?_ctsMem[k]:null):v;}catch(e){return k in _ctsMem?_ctsMem[k]:null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}_ctsMem[k]=v;}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}delete _ctsMem[k];}
+
+/* ---- helpers ---- */
+function fold(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function kwHit(ans,kw){var a=fold(ans),k=fold(kw);if(!k)return false;
+  if(k.length<=3){return new RegExp('(^|[^a-z0-9])'+reEsc(k)+'([^a-z0-9]|$)').test(a);}
+  return new RegExp('(^|[^a-z0-9])'+reEsc(k)).test(a);}
+function saScore(ans,kws){var n=0;for(var i=0;i<kws.length;i++){if(kwHit(ans,kws[i]))n++;}return n;}
+function mcCorrectIdx(code,qpos){return(((code-7*(qpos+3))%251)+251)%251;}
+
+var LET=['A','B','C','D'];
+var STATE={lang:'en',track:'cert',name:'',mc:[],sa:[],revealed:false};
+for(var i=0;i<DATA.mc.length;i++)STATE.mc.push({answered:false,chosen:-1});
+for(var j=0;j<DATA.sa.length;j++)STATE.sa.push({checked:false,text:'',hits:0});
+
+var I18N={
+ en:{title:'The Doctrine of the Holy Spirit',unit:'Unit 6 &middot; The Spirit\'s Work in Salvation',lang:'Espa\u00f1ol',
+   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
+   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
+   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
+   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
+   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
+   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
+   complete:'Mark Unit 6 complete',
+   epigraph:'“The Spirit Himself bears witness with our spirit that we are children of God.” — Romans 8:16',
+   mGood:'Unit 6 complete. Well done — continue to Unit 7.',
+   mShort:'Keep going \u2014 review the material and try again.',
+   nextTxt:'Continue to Unit 7 →',
+   mh:'Welcome to The Doctrine of the Holy Spirit',mp:'Please register once. Your name and track carry across every CTS course on this site.',
+   mnl:'Your name',mtl:'Track',mgo:'Begin',
+   hitFmt:function(h){return h+' of 8 keywords';},
+   passV:'Pass',softV:'Practice noted'},
+ es:{title:'La Doctrina del Esp\u00edritu Santo',unit:'Unidad 6 &middot; La Obra del Espíritu en la Salvación',lang:'English',
+   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
+   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
+   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
+   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
+   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
+   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
+   complete:'Marcar la Unidad 6 como completa',
+   epigraph:'“El Espíritu mismo da testimonio a nuestro espíritu, de que somos hijos de Dios.” — Romanos 8:16',
+   mGood:'Unidad 6 completa. Bien hecho — continúe a la Unidad 7.',
+   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
+   nextTxt:'Continuar a la Unidad 7 →',
+   mh:'Bienvenido a La Doctrina del Esp\u00edritu Santo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
+   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
+   hitFmt:function(h){return h+' de 8 palabras clave';},
+   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+};
+function T(){return I18N[STATE.lang];}
+function isMasters(){return STATE.track==='mdiv'||STATE.track==='thm';}
+function lockMin(){return isMasters()?15:2;}
+
+function $(id){return document.getElementById(id);}
+
+/* ---------- rendering ---------- */
+function renderTeaching(){
+  $('teach-en').className=STATE.lang==='en'?'':'hide';
+  $('teach-es').className=STATE.lang==='es'?'':'hide';
+}
+function renderChrome(){
+  var t=T();
+  document.documentElement.lang=STATE.lang;
+  $('t-title').textContent=t.title;$('t-unit').innerHTML=t.unit;
+  $('langBtn').textContent=t.lang;
+  $('t-greet').textContent=t.greet(STATE.name);
+  $('t-track').textContent=t.track(STATE.track);
+  $('epigraph').textContent=t.epigraph;
+  $('t-mc').textContent=t.mc;$('t-sa').textContent=t.sa;
+  $('t-saNote').textContent=isMasters()?t.saNoteMast:t.saNoteCert;
+  $('completeBtn').textContent=t.complete;
+  $('m-h').textContent=t.mh;$('m-p').textContent=t.mp;$('m-nl').textContent=t.mnl;
+  $('m-tl').textContent=t.mtl;$('m-go').textContent=t.mgo;
+}
+function renderMC(){
+  var wrap=$('mcWrap');wrap.innerHTML='';
+  for(var i=0;i<DATA.mc.length;i++){
+    (function(i){
+      var q=DATA.mc[i],st=STATE.mc[i];
+      var opts=STATE.lang==='en'?q.oen:q.oes;
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var expl=STATE.lang==='en'?q.xen:q.xes;
+      var correct=mcCorrectIdx(q.c,i);
+      var div=document.createElement('div');div.className='q';
+      var h='<div class="qn">'+(i+1)+'</div><div class="qp">'+prompt+'</div>';
+      div.innerHTML=h;
+      for(var o=0;o<4;o++){
+        (function(o){
+          var b=document.createElement('button');b.type='button';b.className='opt';
+          b.innerHTML='<span class="lt">'+LET[o]+'</span>'+opts[o];
+          if(st.answered){b.disabled=true;
+            if(o===correct)b.className='opt correct';
+            else if(o===st.chosen)b.className='opt wrong';}
+          else if(st.answered&&o===st.chosen){b.style.background='#efe7d2';b.style.borderColor='#d4af37';b.style.fontWeight='600';}
+          b.onclick=function(){if(st.answered)return;
+            STATE.mc[i].answered=true;STATE.mc[i].chosen=o;renderMC();};
+          div.appendChild(b);
+        })(o);
+      }
+      var e=document.createElement('div');e.className='expl'+(st.answered?' show':'');
+      e.textContent=expl;div.appendChild(e);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderSA(){
+  var wrap=$('saWrap');wrap.innerHTML='';var t=T();
+  for(var i=0;i<DATA.sa.length;i++){
+    (function(i){
+      var q=DATA.sa[i],st=STATE.sa[i];
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var model=STATE.lang==='en'?q.men:q.mes;
+      var div=document.createElement('div');div.className='q';
+      div.innerHTML='<div class="qn">'+(21+i)+'</div><div class="qp">'+prompt+'</div>';
+      var ta=document.createElement('textarea');ta.value=st.text;
+      ta.oninput=function(){STATE.sa[i].text=ta.value;};
+      div.appendChild(ta);
+      var btn=document.createElement('button');btn.type='button';btn.className='btn ghost';
+      btn.style.marginTop='8px';btn.textContent=t.check;
+      var res=document.createElement('div');res.className='sa-res'+(st.checked?' show':'');
+      function paint(){
+        var kws=STATE.lang==='en'?q.ken:q.kes;
+        var hits=saScore(STATE.sa[i].text,kws);STATE.sa[i].hits=hits;
+        var pass=hits>=3;
+        var verdict=pass?('<span class="sa-verdict pass">'+t.passV+'</span>'):('<span class="sa-verdict soft">'+t.softV+'</span>');
+        res.innerHTML=verdict+' &middot; '+t.hitFmt(hits)+
+          '<div class="model"><div class="ml">'+t.model+'</div>'+model+'</div>';
+        res.className='sa-res show';STATE.sa[i].checked=true;
+      }
+      btn.onclick=function(){
+        if(!STATE.sa[i].text.trim()){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.blank+'</span>';return;}
+        if(STATE.sa[i].text.trim().length<100){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.minLen+'</span>';return;}
+        paint();
+      };
+      if(st.checked&&st.text.trim())paint();
+      div.appendChild(btn);div.appendChild(res);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderAll(){renderChrome();renderTeaching();renderMC();renderSA();refreshLock();}
+
+/* ---------- completion + lockout ---------- */
+function lockedUntil(){var v=lsGet(CFG.lockKey);return v?parseInt(v,10):0;}
+function refreshLock(){
+  var until=lockedUntil(),now=Date.now();
+  var btn=$('completeBtn');
+  if(until>now){
+    btn.disabled=true;
+    var mins=Math.ceil((until-now)/60000);
+    $('statusMsg').className='status lock';
+    $('statusMsg').textContent=(STATE.lang==='en'?'Locked. Try again in ':'Bloqueado. Reintente en ')+mins+(STATE.lang==='en'?' min.':' min.');
+  }else{btn.disabled=false;}
+}
+function markComplete(){
+  var p={};try{p=JSON.parse(lsGet(CFG.progressKey)||'{}');}catch(e){p={};}
+  p[CFG.unit]=true;lsSet(CFG.progressKey,JSON.stringify(p));
+  var t=T();
+  $('statusMsg').className='status ok';$('statusMsg').textContent=t.mGood;
+  var nl=$('nextLink');nl.href=CFG.next;nl.textContent=t.nextTxt;nl.className='next';
+  $('completeBtn').disabled=true;
+}
+function onComplete(){
+  var t=T();
+  if(!isMasters()){STATE.revealed=true;renderMC();markComplete();return;}
+  var mcCorrect=0,mcAnswered=0;
+  for(var i=0;i<DATA.mc.length;i++){if(STATE.mc[i].answered){mcAnswered++;
+    if(STATE.mc[i].chosen===mcCorrectIdx(DATA.mc[i].c,i))mcCorrect++;}}
+  var saPass=0;for(var j=0;j<DATA.sa.length;j++){if(STATE.sa[j].hits>=3)saPass++;}
+  var needMC=18,needSA=7;
+  if(mcAnswered<DATA.mc.length){
+    $('statusMsg').className='status warn';
+    $('statusMsg').textContent=(STATE.lang==='en'
+      ?'Answer all multiple-choice questions first ('+mcAnswered+'/20).'
+      :'Responda primero todas las preguntas de opci\u00f3n m\u00faltiple ('+mcAnswered+'/20).');
+    return;
+  }
+  STATE.revealed=true;renderMC();
+  if(mcCorrect>=needMC&&saPass>=needSA){markComplete();return;}
+  // genuine fail -> lockout
+  lsSet(CFG.lockKey,String(Date.now()+lockMin()*60000));
+  $('statusMsg').className='status lock';
+  $('statusMsg').textContent=(STATE.lang==='en'
+    ?('Not yet: MC '+mcCorrect+'/20 (need 18), SA '+saPass+'/10 (need 7). '+t.mShort)
+    :('A\u00fan no: OM '+mcCorrect+'/20 (necesita 18), RB '+saPass+'/10 (necesita 7). '+t.mShort));
+  refreshLock();
+}
+
+/* ---------- init ---------- */
+function startApp(){
+  STATE.lang=(lsGet('cts_lang')==='es')?'es':'en';
+  STATE.name=lsGet('cts_student')||'';
+  STATE.track=lsGet('cts_track')||'cert';
+  $('langBtn').onclick=function(){STATE.lang=STATE.lang==='en'?'es':'en';
+    lsSet('cts_lang',STATE.lang);renderAll();};
+  $('completeBtn').onclick=onComplete;
+  $('m-go').onclick=function(){
+    var nm=$('m-name').value.trim();var tk=$('m-track').value;
+    if(!nm){$('m-name').focus();return;}
+    STATE.name=nm;STATE.track=tk;
+    lsSet('cts_student',nm);lsSet('cts_track',tk);
+    $('reg').className='modal hide';renderAll();
+  };
+  if(CFG.showReg&&(!STATE.name||!lsGet('cts_track'))){
+    $('reg').className='modal';$('m-track').value=STATE.track;renderChrome();
+  }else{$('reg').className='modal hide';}
+  renderAll();
+  setInterval(refreshLock,30000);
+}
+if(typeof document!=='undefined'){
+  if(document.readyState!=='loading')startApp();
+  else document.addEventListener('DOMContentLoaded',startApp);
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSHSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

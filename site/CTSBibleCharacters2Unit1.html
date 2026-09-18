@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Characters II — Unit 1</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 2 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Bible Characters II — Unit 1: Jonah — The Prophet Who Ran from God</span><span class="lang-es">📖 Personajes de la Biblia II — Unidad 1: Jonás — El Profeta que Huyó de Dios</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But Jonah arose to flee to Tarshish from the presence of the LORD." — Jonah 1:3 (NKJV)</span><span class="lang-es">«Y Jonás se levantó para huir de la presencia de Jehová a Tarsis...» — Jonás 1:3 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>Everyone knows the story of Jonah and the great fish. It has been told to children for centuries, and laughed out of many a grown-up conversation as a mere fish tale. But the Book of Jonah is one of the most piercing books in all the Bible, because it is not really about a fish at all. It is about a prophet who ran from God, a God whose mercy would not let him go, and a heart too narrow to love the people God loved. Jonah is the runaway prophet, and his story holds up a mirror to every one of us who has ever fled from God's call or resented God's grace toward someone we thought unworthy of it.</p>
+<p><strong>Subject:</strong> Jonah — the prophet who ran from God.</p>
+<p><strong>Proposition:</strong> God's mercy pursues the runaway and reaches even the worst of sinners; He will not let His own escape His call, and He works to enlarge our narrow hearts to love what He loves — pointing us forward to the greater Jonah, Christ, who died and rose to bring mercy to the world.</p>
+<p>We will trace five movements in the story of Jonah.</p>
+<h2>I. Running from God</h2>
+<p>God's command to Jonah was clear and direct: "Arise, go to Nineveh." Nineveh was the capital of Assyria, a cruel and violent empire that terrorized the ancient world — and Jonah's own people most of all. So Jonah arose, and went the opposite direction.</p>
+<div class="scripture">But Jonah arose to flee to Tarshish from the presence of the LORD. (Jonah 1:3, NKJV)</div>
+<p>He boarded a ship for Tarshish, about as far west as the known world reached. Why did he run? Not because he was afraid to preach, but for a far more troubling reason we will not fully discover until the end of the book: he was afraid that Nineveh would repent and God would spare them. He wanted his enemies destroyed, not forgiven. So he ran. But here is the great folly hidden in all running from God: there is nowhere to run. I will confess that I myself once looked at four different jobs in less than two years before I finally surrendered to God's call to ministry, and nothing outside His will ever satisfied me. In my own quiet way I was running, just as Jonah ran. And like Jonah, I learned that you cannot run far enough or fast enough to escape the God who calls you. He loves us too much to let us go.</p>
+<p>There is a sobering truth in Jonah's flight that we would do well to take to heart. When a believer runs from God, he does not simply stay where he was; he goes down. The Scripture traces it almost like a stairway: Jonah went down to Joppa, down into the ship, down into the lowest part of the vessel to sleep, and at last down into the sea. Disobedience always has a downward pull. We imagine that running from God will make us freer, but it makes us smaller; it does not lift us up but drags us down. The further Jonah fled from the call of God, the lower he sank — until the only direction left to look was up.</p>
+<h2>II. The Storm and the Fish</h2>
+<p>God hurled a great wind upon the sea, and the ship was about to break apart. In a biting irony, the pagan sailors cried out each to his god, while the prophet of the one true God lay fast asleep below deck. When the lot fell on Jonah, he confessed that the storm was his fault, and at last he told the terrified crew to throw him into the sea. Down he went into the deep — and God had a rescue waiting.</p>
+<div class="scripture">Now the LORD had prepared a great fish to swallow Jonah. And Jonah was in the belly of the fish three days and three nights. (Jonah 1:17, NKJV)</div>
+<p>We tend to think of the great fish as Jonah's punishment, but it was actually his rescue; without it he would have drowned in the sea. In the belly of the fish, in the dark and the seaweed, Jonah finally prayed, and his prayer rose to the great confession, "Salvation is of the LORD." Here we learn something we must never forget: God's discipline is not the opposite of His mercy; it is one of the forms His mercy takes. He pursued His runaway prophet all the way to the bottom of the sea, sent a fish to carry him, and would not let him go. The God we run from is the God who runs after us.</p>
+<p>It is worth noticing who prays in the first chapter, and who does not. The pagan sailors, frightened by the storm, cry out to whatever gods they know; but the prophet, who knows the living God, is asleep. There is a warning in that picture for every believer who has drifted from God. It is possible to know more truth than the people around us and yet be more spiritually asleep than they are. Sometimes the outsider, the newcomer, the one we least expect, is more alive to God than the seasoned believer who has stopped walking with Him. Jonah had to be awakened by a heathen captain before he would face his God. May we never need a storm to wake us.</p>
+<h2>III. The God of Second Chances</h2>
+<p>The fish vomited Jonah onto dry land, and then came one of the most beautiful phrases in the whole book.</p>
+<div class="scripture">Now the word of the LORD came to Jonah the second time, saying, "Arise, go to Nineveh, that great city, and preach to it the message that I tell you." (Jonah 3:1-2, NKJV)</div>
+<p>The God against whom Jonah had openly rebelled gave him his commission back. Grace is full of second chances. This time Jonah obeyed, walking through the great city and crying out, "Yet forty days, and Nineveh shall be overthrown!" And something astonishing happened: the whole city believed God. From the greatest to the least, from the king who rose from his throne and put off his robes down to the common people in the street, they repented in sackcloth and turned from their evil ways. And God, seeing their repentance, relented from the disaster He had threatened. The mercy of God reaches even the worst of sinners the very moment they truly turn to Him.</p>
+<p>The repentance of Nineveh ought to astonish us. This was no small village but a vast and violent city, the capital of an empire soaked in cruelty — and at the preaching of one reluctant foreigner, the whole place turned to God, from the throne to the gutter. It is a standing rebuke to all who think any person or place is too far gone for grace. We are quick to write people off: this neighbor, that relative, this enemy, that nation. But the God of Jonah looks at the very people we have given up on and sees a city worth saving. No one is beyond the reach of His mercy who is willing to turn — and our task is not to decide who is too wicked to be saved, but simply to carry the message.</p>
+<h2>IV. The Narrow Heart</h2>
+<p>Now the real story finally comes out. You might expect Jonah to rejoice that an entire city had been saved. Instead, he was furious — and his angry prayer reveals at last why he had run in the first place.</p>
+<div class="scripture">...for I know that You are a gracious and merciful God, slow to anger and abundant in lovingkindness, One who relents from doing harm. (Jonah 4:2, NKJV)</div>
+<p>There it is. Jonah knew all along that God was gracious and merciful, slow to anger, abounding in love — and he simply could not bear for that grace to be spent on his enemies. He would rather die than watch Nineveh forgiven. So God gave Jonah a gentle lesson. He caused a leafy plant to grow up and shade the sulking prophet, and Jonah was glad of the plant; then God sent a worm to wither it and a scorching east wind, and Jonah, miserable, again begged to die. And God said, in effect: you had pity on a plant you did not make and did not grow — should I not have pity on a great city of more than a hundred and twenty thousand people who do not know their right hand from their left? The book ends on that question, hanging in the air, unanswered — because it is really a question for us. The very mercy that had saved Jonah, he begrudged to others. And God is still at work today, patiently enlarging the narrow heart, teaching His people to love what He loves: the lost, the outsider, even the enemy.</p>
+<p>We must be careful here, because it is easy to despise Jonah and miss ourselves entirely. His sin was not some exotic wickedness; it was the very ordinary sin of wanting mercy for myself and judgment for my enemies. We are glad to receive grace, and slow to extend it. We rejoice when God forgives us, and grumble when He forgives someone we dislike. The plant Jonah cared about more than a city full of souls is a picture of all the small comforts we guard more jealously than the eternal welfare of the people around us. The book ends with its question unanswered on purpose, so that each of us must answer it — will we share God's heart for the lost, or only our own?</p>
+<h2>V. A Greater Than Jonah</h2>
+<p>Centuries later, when the religious leaders demanded that Jesus prove Himself with a sign, He gave them a startling answer. He told them that no sign would be given to that generation except one — the sign of the prophet Jonah.</p>
+<div class="scripture">An evil and adulterous generation seeks after a sign, and no sign will be given to it except the sign of the prophet Jonah. For as Jonah was three days and three nights in the belly of the great fish, so will the Son of Man be three days and three nights in the heart of the earth. (Matthew 12:39-40, NKJV)</div>
+<p>This was the only sign Jesus promised His nation: His own death, burial, and resurrection, pictured beforehand in Jonah's three days in the deep. Jonah's ordeal in the belly of the fish was a living prophecy of the gospel. But Jesus said something more: "a greater than Jonah is here." And how much greater He is. Jonah was a mere man; Christ is the Son of God. Jonah disobeyed and had to be driven to his task; Christ obeyed His Father willingly, all the way to the cross. Jonah's "grave" was the belly of a fish, from which he came out still breathing; Christ truly died and rose again by His own power. Jonah did not love Nineveh — he wanted it destroyed; Christ so loved the world that He laid down His life for it. Jonah carried a message of coming wrath to one wicked city; Christ brings a message of grace and salvation to the whole earth. Jonah was the unwilling, resentful savior of a single city; Jesus is the willing, loving Savior of the world.</p>
+<p>There is one more striking comparison hidden in the story. To save the ship, one man had to be cast into the raging sea so that the storm would be stilled and the others spared — and as Jonah went down into the deep, the waters grew calm. It is only a shadow, but it points unmistakably forward. To save us from the storm of God's judgment, One greater than Jonah willingly went down into death, that the tempest might be stilled and we might go free. Jonah was thrown overboard for his own sin; Christ was given up for ours. The difference is the whole gospel: Jonah deserved the sea, but Jesus did not — and He went down into it anyway, for love of us.</p>
+<p>So the Book of Jonah leaves us at the foot of the cross. The God who chased a runaway prophet across the sea is the same God who pursued us when we were running, and who reaches in mercy even to the worst of sinners — even to our enemies, even to us. And the gospel does two things at once: it rescues the runaway, and it melts the narrow heart, until we begin at last to love the very people God loves. A greater than Jonah is here — and His mercy is wide enough for the whole world, offered freely to all who, like Nineveh, will turn from their sin and believe.</p></div>
+<div class="lang-es"><p>Todos conocen la historia de Jonás y el gran pez. Se les ha contado a los niños por siglos, y se ha desechado de muchas conversaciones de adultos como un simple cuento de peces. Pero el libro de Jonás es uno de los libros más penetrantes de toda la Biblia, porque en realidad no se trata de un pez en absoluto. Se trata de un profeta que huyó de Dios, de un Dios cuya misericordia no lo soltó, y de un corazón demasiado estrecho para amar al pueblo que Dios amaba. Jonás es el profeta fugitivo, y su historia sostiene un espejo ante cada uno de nosotros que alguna vez ha huido del llamado de Dios o ha resentido la gracia de Dios hacia alguien que creíamos indigno de ella.</p>
+<p><strong>Tema:</strong> Jonás — el profeta que huyó de Dios.</p>
+<p><strong>Proposición:</strong> La misericordia de Dios persigue al fugitivo y alcanza aun al peor de los pecadores; no dejará que los suyos escapen de su llamado, y obra para ensanchar nuestro corazón estrecho a fin de amar lo que Él ama —señalándonos hacia el Jonás mayor, Cristo, que murió y resucitó para traer misericordia al mundo—.</p>
+<p>Trazaremos cinco movimientos en la historia de Jonás.</p>
+<h2>I. Huyendo de Dios</h2>
+<p>El mandato de Dios a Jonás fue claro y directo: «Levántate, ve a Nínive». Nínive era la capital de Asiria, un imperio cruel y violento que aterrorizaba al mundo antiguo —y al pueblo de Jonás más que a nadie—. Así que Jonás se levantó, y fue en la dirección contraria.</p>
+<div class="scripture">Y Jonás se levantó para huir de la presencia de Jehová a Tarsis. (Jonás 1:3, RVG)</div>
+<p>Se embarcó en un barco hacia Tarsis, casi tan lejos al occidente como llegaba el mundo conocido. ¿Por qué huyó? No porque tuviera miedo de predicar, sino por una razón mucho más perturbadora que no descubriremos del todo hasta el final del libro: tenía miedo de que Nínive se arrepintiera y Dios la perdonara. Quería a sus enemigos destruidos, no perdonados. Así que huyó. Pero aquí está la gran insensatez escondida en todo huir de Dios: no hay a dónde huir. Confieso que yo mismo una vez consideré cuatro empleos distintos en menos de dos años antes de finalmente rendirme al llamado de Dios al ministerio, y nada fuera de su voluntad me satisfizo jamás. A mi manera callada, yo estaba huyendo, tal como huyó Jonás. Y como Jonás, aprendí que no puedes huir lo bastante lejos ni lo bastante rápido para escapar del Dios que te llama. Nos ama demasiado para soltarnos.</p>
+<p>Hay una verdad solemne en la huida de Jonás que haríamos bien en tomar a pecho. Cuando un creyente huye de Dios, no simplemente se queda donde estaba; desciende. La Escritura lo traza casi como una escalera: Jonás bajó a Jope, bajó al barco, bajó a lo más hondo de la nave a dormir, y al fin bajó al mar. La desobediencia siempre tiene una atracción hacia abajo. Imaginamos que huir de Dios nos hará más libres, pero nos hace más pequeños; no nos levanta sino que nos arrastra hacia abajo. Cuanto más huía Jonás del llamado de Dios, más hondo se hundía —hasta que la única dirección que quedaba para mirar era hacia arriba—.</p>
+<h2>II. La Tormenta y el Pez</h2>
+<p>Dios lanzó un gran viento sobre el mar, y el barco estaba a punto de romperse. En una mordaz ironía, los marineros paganos clamaban cada uno a su dios, mientras el profeta del único Dios verdadero yacía profundamente dormido bajo cubierta. Cuando la suerte cayó sobre Jonás, confesó que la tormenta era culpa suya, y al fin dijo a la aterrada tripulación que lo lanzaran al mar. Descendió al abismo —y Dios tenía un rescate esperando—.</p>
+<div class="scripture">Pero Jehová tenía preparado un gran pez que tragase a Jonás; y estuvo Jonás en el vientre del pez tres días y tres noches. (Jonás 1:17, RVG)</div>
+<p>Solemos pensar en el gran pez como el castigo de Jonás, pero en realidad fue su rescate; sin él se habría ahogado en el mar. En el vientre del pez, en la oscuridad y las algas, Jonás por fin oró, y su oración se elevó hasta la gran confesión: «La salvación es de Jehová». Aquí aprendemos algo que nunca debemos olvidar: la disciplina de Dios no es lo opuesto de su misericordia; es una de las formas que toma su misericordia. Persiguió a su profeta fugitivo hasta el fondo mismo del mar, envió un pez para llevarlo, y no lo soltó. El Dios del que huimos es el Dios que corre tras nosotros.</p>
+<p>Vale la pena notar quién ora en el primer capítulo, y quién no. Los marineros paganos, asustados por la tormenta, claman a cualesquiera dioses que conocen; pero el profeta, que conoce al Dios vivo, está dormido. Hay una advertencia en ese cuadro para todo creyente que se ha alejado de Dios. Es posible conocer más verdad que la gente a nuestro alrededor y sin embargo estar más dormidos espiritualmente que ellos. A veces el de afuera, el recién llegado, el que menos esperamos, está más vivo para Dios que el creyente experimentado que ha dejado de caminar con Él. Jonás tuvo que ser despertado por un capitán pagano antes de enfrentar a su Dios. Ojalá nunca necesitemos una tormenta para despertar.</p>
+<h2>III. El Dios de las Segundas Oportunidades</h2>
+<p>El pez vomitó a Jonás en tierra seca, y entonces vino una de las frases más hermosas de todo el libro.</p>
+<div class="scripture">Y vino palabra de Jehová por segunda vez a Jonás, diciendo: Levántate y ve a Nínive, aquella gran ciudad, y proclama en ella el mensaje que yo te diré. (Jonás 3:1-2, RVG)</div>
+<p>El Dios contra quien Jonás se había rebelado abiertamente le devolvió su comisión. La gracia está llena de segundas oportunidades. Esta vez Jonás obedeció, recorriendo la gran ciudad y clamando: «¡De aquí a cuarenta días Nínive será destruida!». Y algo asombroso sucedió: toda la ciudad creyó a Dios. Desde el mayor hasta el menor, desde el rey que se levantó de su trono y se quitó sus ropas hasta la gente común en la calle, se arrepintieron en cilicio y se volvieron de sus malos caminos. Y Dios, al ver su arrepentimiento, se arrepintió del desastre que había amenazado. La misericordia de Dios alcanza aun al peor de los pecadores en el momento mismo en que verdaderamente se vuelven a Él.</p>
+<p>El arrepentimiento de Nínive debería asombrarnos. No era una pequeña aldea sino una ciudad vasta y violenta, la capital de un imperio empapado en crueldad —y ante la predicación de un solo extranjero renuente, todo el lugar se volvió a Dios, desde el trono hasta la cuneta—. Es una reprensión permanente para todos los que piensan que alguna persona o lugar está demasiado perdido para la gracia. Somos rápidos para descartar a la gente: este vecino, aquel pariente, este enemigo, aquella nación. Pero el Dios de Jonás mira a las personas mismas que hemos dado por perdidas y ve una ciudad digna de ser salvada. Nadie está fuera del alcance de su misericordia si está dispuesto a volverse —y nuestra tarea no es decidir quién es demasiado malvado para ser salvado, sino simplemente llevar el mensaje—.</p>
+<h2>IV. El Corazón Estrecho</h2>
+<p>Ahora por fin sale a la luz la verdadera historia. Uno esperaría que Jonás se regocijara de que una ciudad entera hubiera sido salvada. En cambio, estaba furioso —y su oración airada revela al fin por qué había huido en primer lugar—.</p>
+<div class="scripture">...porque sabía yo que tú eres Dios clemente y piadoso, tardo en enojarte, y de grande misericordia, y que te arrepientes del mal. (Jonás 4:2, RVG)</div>
+<p>Ahí está. Jonás sabía todo el tiempo que Dios era clemente y piadoso, tardo para la ira, abundante en amor —y sencillamente no podía soportar que esa gracia se gastara en sus enemigos—. Prefería morir antes que ver a Nínive perdonada. Así que Dios le dio a Jonás una lección suave. Hizo crecer una planta frondosa que diera sombra al profeta enfurruñado, y Jonás se alegró de la planta; luego Dios envió un gusano para marchitarla y un abrasador viento del oriente, y Jonás, miserable, otra vez rogó morir. Y Dios dijo, en efecto: tuviste lástima de una planta que no hiciste ni cultivaste —¿no había yo de tener lástima de una gran ciudad de más de ciento veinte mil personas que no saben distinguir su mano derecha de su izquierda?—. El libro termina en esa pregunta, suspendida en el aire, sin respuesta —porque en realidad es una pregunta para nosotros—. La misericordia misma que había salvado a Jonás, él se la negaba a otros. Y Dios sigue obrando hoy, ensanchando pacientemente el corazón estrecho, enseñando a su pueblo a amar lo que Él ama: al perdido, al de afuera, aun al enemigo.</p>
+<p>Debemos tener cuidado aquí, porque es fácil despreciar a Jonás y pasarnos por alto a nosotros mismos por completo. Su pecado no era una maldad exótica; era el pecado muy común de querer misericordia para mí mismo y juicio para mis enemigos. Con gusto recibimos gracia, y somos lentos para extenderla. Nos regocijamos cuando Dios nos perdona, y refunfuñamos cuando perdona a alguien que nos desagrada. La planta que a Jonás le importaba más que una ciudad llena de almas es una imagen de todos los pequeños consuelos que guardamos más celosamente que el bienestar eterno de las personas a nuestro alrededor. El libro termina con su pregunta sin responder a propósito, para que cada uno de nosotros deba responderla: ¿compartiremos el corazón de Dios por el perdido, o solo el nuestro?</p>
+<h2>V. Uno Mayor que Jonás</h2>
+<p>Siglos después, cuando los líderes religiosos exigieron que Jesús se probara con una señal, Él les dio una respuesta sorprendente. Les dijo que ninguna señal sería dada a aquella generación, sino una sola: la señal del profeta Jonás.</p>
+<div class="scripture">La generación mala y adúltera demanda señal; mas señal no le será dada, sino la señal del profeta Jonás. Porque como estuvo Jonás en el vientre del gran pez tres días y tres noches, así estará el Hijo del Hombre en el corazón de la tierra tres días y tres noches. (Mateo 12:39-40, RVG)</div>
+<p>Esta era la única señal que Jesús prometió a su nación: su propia muerte, sepultura y resurrección, retratada de antemano en los tres días de Jonás en el abismo. El sufrimiento de Jonás en el vientre del pez fue una profecía viva del evangelio. Pero Jesús dijo algo más: «más que Jonás en este lugar». Y cuánto mayor es Él. Jonás era un mero hombre; Cristo es el Hijo de Dios. Jonás desobedeció y tuvo que ser empujado a su tarea; Cristo obedeció a su Padre voluntariamente, hasta la cruz misma. La «tumba» de Jonás fue el vientre de un pez, del cual salió todavía respirando; Cristo verdaderamente murió y resucitó por su propio poder. Jonás no amaba a Nínive —la quería destruida—; Cristo de tal manera amó al mundo que dio su vida por él. Jonás llevó un mensaje de ira venidera a una sola ciudad malvada; Cristo trae un mensaje de gracia y salvación a toda la tierra. Jonás fue el salvador renuente y resentido de una sola ciudad; Jesús es el Salvador dispuesto y amoroso del mundo.</p>
+<p>Hay una comparación más, llamativa, escondida en la historia. Para salvar el barco, un hombre tuvo que ser lanzado al mar embravecido para que la tormenta se calmara y los demás se salvaran —y al descender Jonás al abismo, las aguas se aquietaron—. Es solo una sombra, pero señala inconfundiblemente hacia adelante. Para salvarnos de la tormenta del juicio de Dios, Uno mayor que Jonás descendió voluntariamente a la muerte, para que la tempestad se calmara y nosotros quedáramos libres. Jonás fue lanzado por su propio pecado; Cristo fue entregado por el nuestro. La diferencia es todo el evangelio: Jonás merecía el mar, pero Jesús no —y descendió a él de todos modos, por amor a nosotros—.</p>
+<p>Así que el libro de Jonás nos deja al pie de la cruz. El Dios que persiguió a un profeta fugitivo por el mar es el mismo Dios que nos persiguió cuando huíamos, y que alcanza con misericordia aun al peor de los pecadores —aun a nuestros enemigos, aun a nosotros—. Y el evangelio hace dos cosas a la vez: rescata al fugitivo, y derrite el corazón estrecho, hasta que comenzamos al fin a amar a las personas mismas que Dios ama. Uno mayor que Jonás está aquí —y su misericordia es lo bastante amplia para el mundo entero, ofrecida gratuitamente a todos los que, como Nínive, se vuelvan de su pecado y crean—.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 1 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 1;
+const COURSE = 'CTSBC2';
+const FILE_PREFIX = 'CTSBibleCharacters2';
+const NEXT_UNIT_URL = 'CTSBibleCharacters2Unit2.html';
+const totalUnits = 11;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - Jonah — The Prophet Who Ran from God", "Unit 2 - Hosea — The Prophet Who Loved an Unfaithful Wife", "Unit 3 - Jeremiah — The Weeping Prophet Who Stayed Faithful", "Unit 4 - Esther — For Such a Time as This: The Hidden Providence of God", "Unit 5 - Ezra — A Fresh New Start, the Scribe Who Restored God’s Word", "Unit 6 - John the Baptist — The Forerunner Who Doubted in the Dark", "Unit 7 - Peter — From Fisherman to the Rock Who Feeds the Sheep", "Unit 8 - Thomas — The Doubter Who Made the Great Confession", "Unit 9 - Lazarus — The Dead Man Jesus Called Back to Life", "Unit 10 - Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ", "Unit 11 - Paul — From Persecutor to Apostle of Grace"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [{"textEn":"1. God called Jonah to go and preach to the city of:","textEs":"1. Dios llamó a Jonás a ir y predicar a la ciudad de:","optionsEn":["Jericho", "Babylon", "Tarshish", "Nineveh"],"optionsEs":["Jericó", "Babilonia", "Tarsis", "Nínive"],"explanationEn":"\"Arise, go to Nineveh, that great city\" (Jonah 1:2).","explanationEs":"«Levántate y ve a Nínive, aquella gran ciudad» (Jonás 1:2).","correct":3},{"textEn":"2. Nineveh was the capital of which cruel empire?","textEs":"2. ¿Nínive era la capital de qué imperio cruel?","optionsEn":["Egypt", "Persia", "Assyria", "Greece"],"optionsEs":["Egipto", "Persia", "Asiria", "Grecia"],"explanationEn":"Nineveh was the capital of Assyria, a violent empire feared in the ancient world.","explanationEs":"Nínive era la capital de Asiria, un imperio violento temido en el mundo antiguo.","correct":2},{"textEn":"3. Instead of obeying, Jonah fled by ship toward:","textEs":"3. En vez de obedecer, Jonás huyó en barco hacia:","optionsEn":["Tarshish", "Jerusalem", "Egypt", "Nineveh"],"optionsEs":["Tarsis", "Jerusalén", "Egipto", "Nínive"],"explanationEn":"\"Jonah arose to flee to Tarshish from the presence of the LORD\" (Jonah 1:3).","explanationEs":"«Jonás se levantó para huir... a Tarsis» (Jonás 1:3).","correct":0},{"textEn":"4. Jonah ran because he was afraid Nineveh would:","textEs":"4. Jonás huyó porque temía que Nínive:","optionsEn":["attack Israel", "repent and be spared", "ignore him", "kill him"],"optionsEs":["atacara a Israel", "se arrepintiera y fuera perdonada", "lo ignorara", "lo matara"],"explanationEn":"Jonah feared they would repent and God would spare his enemies (Jonah 4:2).","explanationEs":"Jonás temía que se arrepintieran y Dios perdonara a sus enemigos (Jonás 4:2).","correct":1},{"textEn":"5. The great folly of running from God is that:","textEs":"5. La gran insensatez de huir de Dios es que:","optionsEn":["it costs money", "it takes too long", "others will notice", "there is nowhere to escape Him"],"optionsEs":["cuesta dinero", "toma demasiado tiempo", "otros lo notarán", "no hay a dónde escapar de Él"],"explanationEn":"You cannot run far enough to escape the God who calls you (Ps 139:7-10).","explanationEs":"No puedes huir lo bastante lejos para escapar del Dios que te llama (Sal 139:7-10).","correct":3},{"textEn":"6. As the storm raged, the pagan sailors prayed while Jonah:","textEs":"6. Mientras la tormenta arreciaba, los marineros paganos oraban mientras Jonás:","optionsEn":["slept below deck", "steered the ship", "jumped overboard", "bailed water"],"optionsEs":["dormía bajo cubierta", "dirigía el barco", "saltaba al mar", "achicaba el agua"],"explanationEn":"Ironically, the prophet slept while the pagan sailors cried to their gods (Jonah 1:5).","explanationEs":"Irónicamente, el profeta dormía mientras los marineros paganos clamaban a sus dioses (Jonás 1:5).","correct":0},{"textEn":"7. The sailors discovered Jonah was the cause by:","textEs":"7. Los marineros descubrieron que Jonás era la causa al:","optionsEn":["questioning him", "searching the ship", "casting lots", "watching the sky"],"optionsEs":["interrogarlo", "registrar el barco", "echar suertes", "observar el cielo"],"explanationEn":"They cast lots, and the lot fell on Jonah (Jonah 1:7).","explanationEs":"Echaron suertes, y la suerte cayó sobre Jonás (Jonás 1:7).","correct":2},{"textEn":"8. When Jonah was thrown into the sea, God prepared:","textEs":"8. Cuando Jonás fue lanzado al mar, Dios preparó:","optionsEn":["a calm", "a great fish to swallow him", "an island", "a boat"],"optionsEs":["una calma", "un gran pez que lo tragara", "una isla", "un bote"],"explanationEn":"\"The LORD had prepared a great fish to swallow Jonah\" (Jonah 1:17).","explanationEs":"«Jehová tenía preparado un gran pez que tragase a Jonás» (Jonás 1:17).","correct":1},{"textEn":"9. The great fish was best understood not as punishment but as:","textEs":"9. El gran pez se entiende mejor no como castigo sino como:","optionsEn":["a coincidence", "a legend", "Jonah's rescue", "a delay"],"optionsEs":["una coincidencia", "una leyenda", "el rescate de Jonás", "una demora"],"explanationEn":"Without the fish Jonah would have drowned — it was his rescue (Jonah 1:17; 2:9).","explanationEs":"Sin el pez Jonás se habría ahogado — fue su rescate (Jonás 1:17; 2:9).","correct":2},{"textEn":"10. Jonah's prayer in the fish ended with the confession:","textEs":"10. La oración de Jonás en el pez terminó con la confesión:","optionsEn":["\"Salvation is of the LORD\"", "\"I have sinned\"", "\"Spare the city\"", "\"Let me die\""],"optionsEs":["«La salvación es de Jehová»", "«He pecado»", "«Perdona la ciudad»", "«Déjame morir»"],"explanationEn":"\"...Salvation is of the LORD\" (Jonah 2:9).","explanationEs":"«...La salvación es de Jehová» (Jonás 2:9).","correct":0},{"textEn":"11. After the fish, the word of the LORD came to Jonah:","textEs":"11. Después del pez, la palabra de Jehová vino a Jonás:","optionsEn":["in a dream", "through an angel", "never again", "a second time"],"optionsEs":["en un sueño", "por un ángel", "nunca más", "por segunda vez"],"explanationEn":"\"The word of the LORD came to Jonah the second time\" (Jonah 3:1).","explanationEs":"«Vino palabra de Jehová por segunda vez a Jonás» (Jonás 3:1).","correct":3},{"textEn":"12. That God recommissioned Jonah shows He is the God of:","textEs":"12. Que Dios recomisionara a Jonás muestra que Él es el Dios de:","optionsEn":["wrath only", "second chances", "silence", "distance"],"optionsEs":["solo ira", "segundas oportunidades", "silencio", "distancia"],"explanationEn":"God gave the rebel his commission back — grace is full of second chances (Jonah 3:1).","explanationEs":"Dios devolvió al rebelde su comisión — la gracia está llena de segundas oportunidades (Jonás 3:1).","correct":1},{"textEn":"13. Jonah preached that in forty days Nineveh would be:","textEs":"13. Jonás predicó que en cuarenta días Nínive sería:","optionsEn":["rebuilt", "blessed", "overthrown", "forgotten"],"optionsEs":["reconstruida", "bendecida", "destruida", "olvidada"],"explanationEn":"\"Yet forty days, and Nineveh shall be overthrown!\" (Jonah 3:4).","explanationEs":"«¡De aquí a cuarenta días Nínive será destruida!» (Jonás 3:4).","correct":2},{"textEn":"14. The people of Nineveh responded by:","textEs":"14. La gente de Nínive respondió:","optionsEn":["repenting in sackcloth", "mocking Jonah", "arresting him", "ignoring the message"],"optionsEs":["arrepintiéndose en cilicio", "burlándose de Jonás", "arrestándolo", "ignorando el mensaje"],"explanationEn":"From king to commoner, Nineveh repented in sackcloth (Jonah 3:5-9).","explanationEs":"Desde el rey hasta el plebeyo, Nínive se arrepintió en cilicio (Jonás 3:5-9).","correct":0},{"textEn":"15. Seeing their repentance, God:","textEs":"15. Al ver su arrepentimiento, Dios:","optionsEn":["destroyed them anyway", "delayed one year", "sent another prophet", "relented from the threatened disaster"],"optionsEs":["los destruyó de todos modos", "esperó un año", "envió otro profeta", "se arrepintió del desastre amenazado"],"explanationEn":"God relented from the disaster He had threatened (Jonah 3:10).","explanationEs":"Dios se arrepintió del desastre que había amenazado (Jonás 3:10).","correct":3},{"textEn":"16. When Nineveh was spared, Jonah felt:","textEs":"16. Cuando Nínive fue perdonada, Jonás se sintió:","optionsEn":["joyful", "angry", "grateful", "relieved"],"optionsEs":["gozoso", "enojado", "agradecido", "aliviado"],"explanationEn":"Jonah was furious that God spared the city (Jonah 4:1).","explanationEs":"Jonás estaba furioso de que Dios perdonara la ciudad (Jonás 4:1).","correct":1},{"textEn":"17. Jonah's anger revealed he had run because he knew God was:","textEs":"17. La ira de Jonás reveló que había huido porque sabía que Dios era:","optionsEn":["forgetful", "far away", "gracious and merciful", "weak"],"optionsEs":["olvidadizo", "lejano", "clemente y misericordioso", "débil"],"explanationEn":"\"I know that You are a gracious and merciful God...\" (Jonah 4:2).","explanationEs":"«Sabía yo que tú eres Dios clemente y piadoso...» (Jonás 4:2).","correct":2},{"textEn":"18. God taught Jonah a lesson using a plant, a worm, and:","textEs":"18. Dios enseñó a Jonás una lección usando una planta, un gusano y:","optionsEn":["a flood", "a scorching wind", "an earthquake", "a fire"],"optionsEs":["un diluvio", "un viento abrasador", "un terremoto", "un fuego"],"explanationEn":"God appointed a plant, a worm, and a scorching east wind (Jonah 4:6-8).","explanationEs":"Dios dispuso una planta, un gusano y un viento solano abrasador (Jonás 4:6-8).","correct":1},{"textEn":"19. The book ends with God's question about His pity for:","textEs":"19. El libro termina con la pregunta de Dios sobre su lástima por:","optionsEn":["the plant", "the sailors", "the worm", "the great city of Nineveh"],"optionsEs":["la planta", "los marineros", "el gusano", "la gran ciudad de Nínive"],"explanationEn":"\"Should I not pity Nineveh, that great city?\" (Jonah 4:11).","explanationEs":"«¿No tendré yo piedad de Nínive, aquella gran ciudad?» (Jonás 4:11).","correct":3},{"textEn":"20. Jesus said the sign of Jonah pointed to His:","textEs":"20. Jesús dijo que la señal de Jonás señalaba su:","optionsEn":["death, burial, and resurrection", "teaching", "kingdom", "miracles"],"optionsEs":["muerte, sepultura y resurrección", "enseñanza", "reino", "milagros"],"explanationEn":"As Jonah was three days in the fish, so the Son of Man in the earth — death, burial, resurrection (Matt 12:39-40).","explanationEs":"Como Jonás tres días en el pez, así el Hijo del Hombre en la tierra — muerte, sepultura, resurrección (Mt 12:39-40).","correct":0}];
+const kwQuestions = [{"textEn":"21. Trace the five movements of the Book of Jonah.","textEs":"21. Trace los cinco movimientos del libro de Jonás.","kw_en":["run","tarshish","fish","second","nineveh","arrepent","angry","greater"],"kw_es":["huir","tarsis","pez","segund","ciudad","arrepent","enojo","mayor"],"modelEn":"The Book of Jonah moves through five movements. First Jonah tries to run from God, fleeing toward Tarshish. Second comes the storm and the great fish, where God rescues His runaway. Third, the word comes a second time and Jonah preaches, and all Nineveh repents. Fourth, the narrow heart is exposed, as Jonah is angry that God showed mercy. And fifth, Jesus is revealed as a greater than Jonah, whose death and resurrection the sign of Jonah foretold.","modelEs":"El libro de Jonás pasa por cinco movimientos. Primero Jonás trata de huir de Dios hacia Tarsis. Segundo viene la tormenta y el gran pez, donde Dios rescata a su fugitivo. Tercero, la palabra viene por segunda vez y Jonás predica, y toda la ciudad de Nínive se arrepiente. Cuarto, el corazón estrecho queda expuesto, pues Jonás se enoja de que Dios mostrara misericordia. Y quinto, Jesús es revelado como uno mayor que Jonás, cuya muerte y resurrección la señal de Jonás predijo."},{"textEn":"22. Why did Jonah run from God, and what does his flight teach us?","textEs":"22. ¿Por qué huyó Jonás de Dios, y qué nos enseña su huida?","kw_en":["run","tarshish","enemies","spared","escape","nowhere","call","mercy"],"kw_es":["huir","tarsis","enemigos","perdonad","escapar","ninguna","llamado","misericordia"],"modelEn":"Jonah ran from God by fleeing toward Tarshish, the opposite direction from Nineveh. He ran not because he feared preaching, but because he feared Nineveh would repent and be spared; he wanted his enemies destroyed, not forgiven. His flight teaches that there is nowhere to escape the God who calls us. We cannot run far enough or fast enough; God loves us too much to let us go, and He pursues the runaway to call him back and to show mercy.","modelEs":"Jonás huyó de Dios hacia Tarsis, en dirección contraria a Nínive. Huyó no porque temiera predicar, sino porque temía que Nínive se arrepintiera y fuera perdonada; quería a sus enemigos destruidos, no perdonados. Su huida enseña que no hay a dónde escapar del Dios que nos llama. No podemos huir lo bastante lejos ni rápido; Dios nos ama demasiado para soltarnos, y persigue al fugitivo para llamarlo de vuelta y mostrar misericordia."},{"textEn":"23. What happened in the storm, and how was the great fish actually mercy?","textEs":"23. ¿Qué pasó en la tormenta, y cómo fue el gran pez en realidad misericordia?","kw_en":["storm","sailors","overboard","fish","rescue","drown","discipline","salvaci"],"kw_es":["tormenta","marineros","mar","pez","rescate","ahogar","disciplina","salvaci"],"modelEn":"God sent a great storm, and while the pagan sailors prayed, Jonah slept; when the lot fell on him, he was thrown overboard, and God prepared a great fish to swallow him. The fish was not punishment but rescue, for without it Jonah would have drowned. In its belly he prayed and confessed that salvation is of the LORD. This shows that God's discipline is one of the forms His mercy takes; He pursued His runaway to the bottom of the sea and would not let him go.","modelEs":"Dios envió una gran tormenta, y mientras los marineros paganos oraban, Jonás dormía; cuando la suerte cayó sobre él, fue lanzado al mar, y Dios preparó un gran pez que lo tragara. El pez no fue castigo sino rescate, pues sin él Jonás se habría ahogado. En su vientre oró y confesó que la salvación es de Jehová. Esto muestra que la disciplina de Dios es una de las formas que toma su misericordia; persiguió a su fugitivo hasta el fondo del mar y no lo soltó."},{"textEn":"24. What does \"the word of the LORD came to Jonah a second time\" show about God?","textEs":"24. ¿Qué muestra sobre Dios «vino palabra de Jehová por segunda vez a Jonás»?","kw_en":["second","commission","rebel","grace","chances","restore","again","call"],"kw_es":["segund","comision","rebelde","gracia","oportunidades","restaur","otra","llamado"],"modelEn":"After Jonah's open rebellion and the fish, the word of the LORD came to him a second time, giving him his commission back. This shows that God is the God of second chances; grace restores the rebel and calls him again to the work he had abandoned. God did not cast Jonah off for his disobedience but graciously gave him another opportunity to obey. The God against whom Jonah had run was the same God who would not give up on him.","modelEs":"Después de la abierta rebelión de Jonás y el pez, la palabra de Jehová vino a él por segunda vez, devolviéndole su comisión. Esto muestra que Dios es el Dios de segundas oportunidades; la gracia restaura al rebelde y lo llama otra vez a la obra que había abandonado. Dios no desechó a Jonás por su desobediencia sino que graciosamente le dio otra oportunidad de obedecer. El Dios del que Jonás había huido era el mismo Dios que no se daría por vencido con él."},{"textEn":"25. How did Nineveh respond to Jonah's preaching, and how did God respond?","textEs":"25. ¿Cómo respondió Nínive a la predicación de Jonás, y cómo respondió Dios?","kw_en":["preached","believed","king","arrepent","sackcloth","turned","relented","mercy"],"kw_es":["predico","creyo","rey","arrepent","cilicio","volvieron","arrepintio","misericordia"],"modelEn":"Jonah preached that in forty days Nineveh would be overthrown, and the whole city believed God. From the king, who rose from his throne, down to the common people, they repented in sackcloth and turned from their evil ways. Seeing their repentance, God relented from the disaster He had threatened. This shows that the mercy of God reaches even the worst of sinners the moment they truly turn to Him; no one is beyond His grace when they repent.","modelEs":"Jonás predicó que en cuarenta días Nínive sería destruida, y toda la ciudad creyó a Dios. Desde el rey, que se levantó de su trono, hasta la gente común, se arrepintieron en cilicio y se volvieron de sus malos caminos. Al ver su arrepentimiento, Dios se arrepintió del desastre que había amenazado. Esto muestra que la misericordia de Dios alcanza aun al peor de los pecadores en el momento en que verdaderamente se vuelven a Él; nadie está fuera de su gracia cuando se arrepiente."},{"textEn":"26. Why was Jonah angry, and what did his anger reveal?","textEs":"26. ¿Por qué estaba enojado Jonás, y qué reveló su ira?","kw_en":["angry","spared","gracious","merciful","enemies","narrow","heart","grace"],"kw_es":["enojo","perdonad","clemente","piadoso","enemigos","estrecho","corazon","gracia"],"modelEn":"Jonah was angry, even furious, that God had spared Nineveh. His angry prayer revealed why he had run in the first place: he knew that God was gracious and merciful, slow to anger and abounding in love, and he could not bear for that grace to be spent on his enemies. He would rather die than see Nineveh forgiven. His anger exposed a narrow heart that resented God's mercy toward others — the very mercy that had saved Jonah himself.","modelEs":"Jonás estaba enojado, aun furioso, de que Dios hubiera perdonado a Nínive. Su oración airada reveló por qué había huido en primer lugar: sabía que Dios era clemente y piadoso, tardo para la ira y abundante en amor, y no podía soportar que esa gracia se gastara en sus enemigos. Prefería morir antes que ver a Nínive perdonada. Su ira expuso un corazón estrecho que resentía la misericordia de Dios hacia otros — la misericordia misma que había salvado al propio Jonás."},{"textEn":"27. What lesson did God teach Jonah with the plant, worm, and wind?","textEs":"27. ¿Qué lección enseñó Dios a Jonás con la planta, el gusano y el viento?","kw_en":["plant","worm","wind","pity","city","souls","love","heart"],"kw_es":["planta","gusano","viento","lastima","ciudad","almas","amar","corazon"],"modelEn":"God caused a plant to shade Jonah, and he was glad; then God sent a worm to wither it and a scorching wind, and Jonah wished to die. God's lesson was this: Jonah had pity on a plant he did not make or grow, so should not God have pity on a great city of more than a hundred and twenty thousand souls? The book ends on that question, unanswered, because it is for us. God is teaching the narrow heart to love what He loves: the lost, the outsider, even the enemy.","modelEs":"Dios hizo que una planta diera sombra a Jonás, y se alegró; luego Dios envió un gusano para marchitarla y un viento abrasador, y Jonás quiso morir. La lección de Dios fue esta: Jonás tuvo lástima de una planta que no hizo ni cultivó, ¿no había de tener Dios lástima de una gran ciudad de más de ciento veinte mil almas? El libro termina en esa pregunta, sin respuesta, porque es para nosotros. Dios enseña al corazón estrecho a amar lo que Él ama: al perdido, al de afuera, aun al enemigo."},{"textEn":"28. How is Jesus \"a greater than Jonah\"?","textEs":"28. ¿Cómo es Jesús «uno mayor que Jonás»?","kw_en":["greater","obeyed","died","love","world","grace","willing","savior"],"kw_es":["mayor","obedecio","murio","amor","mundo","gracia","dispuesto","salvador"],"modelEn":"Jesus is greater than Jonah in every way. Jonah was a mere man, but Christ is the Son of God. Jonah disobeyed and had to be driven to his task, but Christ obeyed His Father willingly, even to the cross. Jonah's grave was a fish from which he came out alive, but Christ truly died and rose by His own power. Jonah did not love Nineveh, but Christ loved the world and gave His life for it. Jonah was the unwilling savior of one city; Jesus is the willing, loving Savior of the world.","modelEs":"Jesús es mayor que Jonás en todo sentido. Jonás era un mero hombre, pero Cristo es el Hijo de Dios. Jonás desobedeció y tuvo que ser empujado a su tarea, pero Cristo obedeció a su Padre voluntariamente, hasta la cruz. La tumba de Jonás fue un pez del cual salió vivo, pero Cristo verdaderamente murió y resucitó por su propio poder. Jonás no amaba a Nínive, pero Cristo amó al mundo y dio su vida por él. Jonás fue el salvador renuente de una ciudad; Jesús es el Salvador dispuesto y amoroso del mundo."},{"textEn":"29. How does the sign of Jonah point to the gospel?","textEs":"29. ¿Cómo señala al evangelio la señal de Jonás?","kw_en":["sign","only","three","fish","death","resurrection","gospel","christ"],"kw_es":["senal","unica","tres","pez","muerte","resurrecci","evangelio","cristo"],"modelEn":"When the leaders demanded a sign, Jesus said no sign would be given except the sign of Jonah; this was the only sign He promised. As Jonah was three days and three nights in the belly of the fish, so the Son of Man would be three days in the heart of the earth. Jonah's ordeal pictured the gospel beforehand: the death, burial, and resurrection of Christ. So the sign of Jonah points directly to the saving work of Jesus, by which we are rescued when we turn and believe.","modelEs":"Cuando los líderes exigieron una señal, Jesús dijo que ninguna señal sería dada sino la señal de Jonás; esta fue la única señal que prometió. Como Jonás estuvo tres días y tres noches en el vientre del pez, así el Hijo del Hombre estaría tres días en el corazón de la tierra. El sufrimiento de Jonás retrató el evangelio de antemano: la muerte, sepultura y resurrección de Cristo. Así la señal de Jonás señala directamente la obra salvadora de Jesús, por la cual somos rescatados cuando nos volvemos y creemos."},{"textEn":"30. What does the Book of Jonah teach believers about God's mercy and our hearts?","textEs":"30. ¿Qué enseña el libro de Jonás a los creyentes sobre la misericordia de Dios y nuestro corazón?","kw_en":["mercy","runaway","worst","enemies","narrow","heart","love","rescue"],"kw_es":["misericordia","fugitivo","peor","enemigos","estrecho","corazon","amar","rescate"],"modelEn":"The Book of Jonah teaches that God's mercy pursues the runaway and reaches even the worst of sinners, even our enemies, even us when we have run. It also exposes the narrow heart that resents God's grace toward others. The gospel does two things at once: it rescues the runaway, and it melts the narrow heart, until we begin to love the very people God loves. A greater than Jonah is here, and His mercy is wide enough for the whole world that will turn and believe.","modelEs":"El libro de Jonás enseña que la misericordia de Dios persigue al fugitivo y alcanza aun al peor de los pecadores, aun a nuestros enemigos, aun a nosotros cuando hemos huido. También expone el corazón estrecho que resiente la gracia de Dios hacia otros. El evangelio hace dos cosas a la vez: rescata al fugitivo, y derrite el corazón estrecho, hasta que comenzamos a amar a las personas mismas que Dios ama. Uno mayor que Jonás está aquí, y su misericordia es lo bastante amplia para el mundo entero que se vuelva y crea."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleCharacters2Readings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

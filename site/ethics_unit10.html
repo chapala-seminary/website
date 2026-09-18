@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pastoral &amp; Christian Ethics — Unit 10: Judgment, Restoration &amp; Capstone</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.pending-es { background: #fff4f4; border: 1px dashed #c98a8a; padding: 12px 18px; margin: 14px 0; border-radius: 6px; color: #8a1f1f; font-style: italic; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; } body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; } body.lang-es .lang-es { display: inline; }
+@media print { .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small, #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+ body { background: #fff; padding: 10px; font-size: 12pt; } .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; } h1, h2, h3 { color: #000; } .pull-quote { background: #fff; border-left: 2px solid #888; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Certificate &#8594;</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">&#128214; Pastoral &amp; Christian Ethics &mdash; Unit 10: Judgment, Restoration &amp; Capstone</span><span class="lang-es">&#128214; &Eacute;tica Pastoral y Cristiana &mdash; Unidad 10: Juicio, Restauraci&oacute;n y S&iacute;ntesis Final</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"I have fought the good fight, I have finished the race, I have kept the faith." &mdash; 2 Timothy 4:7 (NKJV)</span><span class="lang-es">&laquo;He peleado la buena batalla, he acabado la carrera, he guardado la fe.&raquo; &mdash; 2 Timoteo 4:7 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">&#128221; Course Registration</span><span class="lang-es">&#128221; Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Pastoral &amp; Christian Ethics. Please register before beginning Unit 10.</span><span class="lang-es">Bienvenido a &Eacute;tica Pastoral y Cristiana. Por favor reg&iacute;strese antes de comenzar la Unidad 10.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+
+<div class="card">
+<div class="lang-en">
+<h3>Section 10.1 &mdash; The Christian in the World: Citizenship, Culture, and Discernment</h3>
+    <p>The believer lives in two kingdoms at once, and learning to do so faithfully is no small part of Christian ethics. Our Lord settled the basic principle when He held up a coin and said, <em class="ref">"Render to Caesar the things that are Caesar's, and to God the things that are God's"</em> (Matthew 22:21). The Christian owes the governing authorities real obedience &mdash; Paul tells us they are ordained of God and we are to be subject to them (Romans 13:1) &mdash; and yet that obedience is never absolute, for Caesar himself belongs to God, and when the state commands what God forbids or forbids what God commands, we must obey God rather than men. The pastor must teach his people to be the best of citizens and never the state's lapdogs, honoring the magistrate without ever handing him the conscience that belongs to God alone.</p>
+    <p>The same wisdom governs the believer's stance toward the wider culture, and here two opposite errors beckon. One is the fortress &mdash; withdrawal into a Christian bunker, refusing all engagement, hiding the light under a basket. The other is the chameleon &mdash; blending so completely into the surrounding culture that the church becomes indistinguishable from the world it was meant to transform. Scripture rejects both: <em class="ref">"do not be conformed to this world, but be transformed by the renewing of your mind"</em> (Romans 12:2). We are neither to flee the world nor to be squeezed into its mold, but to engage it with discernment &mdash; and that discernment extends to the screens, the media, and the technologies that now disciple our people more hours of the week than we do. Teach your flock to weigh what they watch and consume, neither swallowing the culture whole nor fearing it, but testing all things and holding fast what is good.</p>
+    <p>One further sphere belongs here: the care of God's creation. The dominion granted to humanity in the beginning was never a license to plunder but a charge to steward; Adam was placed in the garden <em class="ref">"to tend and keep it"</em> (Genesis 2:15). The Christian neither worships the creation as the pagan does nor despises it as the careless do, but cares for it as a faithful steward of what belongs to God &mdash; one more arena in which our ethics confess whose world this is.</p>
+<h3>Section 10.2 &mdash; Judged for Judging: Discernment Without Hypocrisy</h3>
+    <p>No verse is more often hurled at the faithful pastor than our Lord's <em class="ref">"Judge not, that you be not judged"</em> (Matthew 7:1), wielded by a culture that means by it that no one may ever call anything wrong. So we must understand the passage rightly, because a misreading disarms the church and a right reading arms her. Jesus is not forbidding all moral discernment &mdash; that would contradict His own commands and the rest of Scripture. He is forbidding <em>hypocritical</em> judgment, the judgment of a man with a plank in his own eye fussing over the speck in his brother's. And notice what He commands after the rebuke: <em class="ref">"First remove the plank from your own eye, and then you will see clearly to remove the speck from your brother's eye"</em> (Matthew 7:5). The goal is not to stop helping the brother; it is to deal with yourself first so that you can help him without hypocrisy. Self-examination comes first &mdash; always first &mdash; and that order must be at least as sharp in the pastor's heart as his readiness to correct others, or he becomes the very hypocrite the Lord condemns.</p>
+    <p>Once the plank is out, however, the church is not only permitted but commanded to judge. Our Lord said elsewhere, <em class="ref">"Do not judge according to appearance, but judge with righteous judgment"</em> (John 7:24) &mdash; not <em>do not judge</em>, but judge <em>rightly</em>. Paul rebuked the Corinthians for failing to judge a sinning member, saying plainly that while we do not judge outsiders, <em class="ref">"do you not judge those who are inside?"</em> (1 Corinthians 5:12). The discernment that distinguishes good from evil, names sin as sin, and lovingly corrects the erring brother is not the forbidden thing; it is Christian maturity, the very thing Hebrews said the mature possess. What is forbidden is the censorious, hypocritical, self-righteous spirit that condemns others to feel superior.</p>
+    <p>So the faithful pastor needs courage &mdash; courage to teach the truth and call sin by its name in an age that will brand him "judgmental" for doing so. But that courage must be wedded, every step, to the humility of a man who has first judged himself. Discernment without self-examination curdles into Pharisaism; self-examination without discernment collapses into cowardice. The shepherd is called to both at once.</p>
+<h3>Section 10.3 &mdash; Restoring the Fallen: The Goal of All Discipline</h3>
+    <p>We said in Unit 6 that the first purpose of all church discipline is the restoration of the sinner, never his destruction. Now we must learn how that restoration is actually accomplished, for it is one of the most delicate and most neglected works of the ministry. The pattern is given in 2 Corinthians 2, where Paul writes about a repentant offender under discipline &mdash; traditionally identified with the man of 1 Corinthians 5, though scholars debate whether this is the same case or a separate offense from Paul's painful visit; the pastoral principle holds either way. The man has now repented &mdash; and Paul's instruction is urgent and tender. The punishment has done its work; therefore, he says, the church must do three things: <em class="ref">"you ought rather to forgive and comfort him, lest perhaps such a one be swallowed up with too much sorrow"</em> (2 Corinthians 2:7), and then, <em class="ref">"reaffirm your love to him"</em> (2:8). Forgive, comfort, reaffirm love. Discipline that does not aim relentlessly at this glad ending has missed its purpose entirely.</p>
+    <p>Two warnings frame the process. Paul says to restore the penitent <em class="ref">"lest Satan should take advantage of us"</em> (2 Corinthians 2:11) &mdash; for the enemy is as pleased by a church that will not forgive the repentant as by the sin that began it all. The danger runs in both directions. But genuine restoration also requires the discernment we have just studied: the pastor must distinguish true repentance from its counterfeit, <em class="ref">"godly sorrow"</em> that <em class="ref">"produces repentance leading to salvation"</em> from the merely <em class="ref">"sorrow of the world"</em> that is only regret at being caught (2 Corinthians 7:10). Real repentance bears fruit; it is not mere tears but a turning.</p>
+    <p>From this flow the practical wisdom of restoration: a process that is neither rushed nor refused. To restore a fallen man too quickly &mdash; especially a fallen leader &mdash; before repentance has been tested and trust rebuilt, is to wound the church and often the man himself; but to refuse ever to restore a truly penitent brother is the unforgiving cruelty Paul expressly forbids. Wise restoration often takes the form of a clear, written path: defined steps, a season of proven faithfulness, gradual reintegration into fellowship and, where appropriate and only in time, into service, with ongoing care long after the formal process has ended. The aim throughout is a brother fully healed and a body made whole, to the glory of the God who restores.</p>
+    <div class="illustration"><strong>Cross-Reference &middot; Unit 6</strong>This section completes the treatment of church discipline begun in Section 6.3, where restoration was named as discipline&rsquo;s first and unbending goal.</div>
+<h3>Section 10.4 &mdash; Capstone: Living and Finishing Faithfully</h3>
+    <p>We come to the end of our course, and it is fitting to gather what we have learned into a life rather than leave it as a list. Across ten units we have seen one truth hold everything together: Christian ethics is never a ladder we climb to earn God's favor, but the fruit of a favor already given. We began there in Unit 1, and we have refused all the way through to reverse it. Grace first, always first &mdash; and then the holy life that grace produces. Every duty we have studied, from the guarding of the marriage bed to the handling of the church's money to the restoration of the fallen, is simply what gratitude looks like when it is worked out in the thousand decisions of a ministry.</p>
+    <p>To help you carry it, I urge you to do what faithful ministers have long done: write your own <em>Pastoral Ethics Statement</em> &mdash; a settled, personal declaration of the convictions and commitments by which you will conduct your ministry, drawn from all we have covered. Decide in the calm, as we said of the ministerial code in Unit 5, what you will do in the storm. Commit it to paper, submit it to accountability, and review it on your knees. And resolve upon a lifetime of vigilance, for as we learned in Unit 3, no man falls all at once; he drifts, and only watchfulness and honest brothers keep a man from the slow slide.</p>
+    <p>Let me leave you with the sobering picture our Lord Himself used, the rich man and Lazarus (Luke 16). A wealthy man feasted in comfort every day while a beggar named Lazarus lay at his gate, longing for the crumbs. The rich man did Lazarus no violence; his sin was simply that he stepped over him, day after day, and did nothing. Then both men died, and the comfortable man <em class="ref">"in torments... lifted up his eyes"</em> and saw, too late, across an unbridgeable gulf, the beggar he had ignored now comforted in glory. There is the great reversal that ought to govern how a pastor lives, gives, judges, and shepherds now &mdash; for we will all lift up our eyes one day and give account. Do not be the man who steps over the Lazarus at his gate, whether that Lazarus is the poor, the fallen brother awaiting restoration, the wounded soul in the pew, or the family in his own home. See the person God has set before you. Spend yourself for him.</p>
+    <p>And so we end where a faithful ministry ends, with the testimony first sounded in Unit 3: <em class="ref">"I have fought the good fight, I have finished the race, I have kept the faith"</em> (2 Timothy 4:7). The goal was never merely to begin well, nor to be admired, nor to avoid scandal. The goal is to finish &mdash; to stand at the last having been, by the grace of God, a faithful and holy shepherd of the flock He bought with His own blood. May God grant it to every man who has studied these things, and may the grace that called you keep you to the end.</p>
+    <div class="illustration"><strong>Cross-Reference &middot; The Whole Course</strong>This capstone gathers the threads of all ten units: the grace-before-works order (Units 1&ndash;2), the slow-drift vigilance (Unit 3), the ministerial code (Unit 5), the restoration goal (Unit 6), the image of God in every person (Unit 7), and the call to see and serve the poor (Unit 9).</div>
+</div>
+<div class="lang-es">
+<div class="lang-es">
+<h3>Secci&oacute;n 10.1 &mdash; El cristiano en el mundo: ciudadan&iacute;a, cultura y discernimiento</h3>
+    <p>El creyente vive en dos reinos a la vez, y aprender a hacerlo fielmente no es parte peque&ntilde;a de la &eacute;tica cristiana. Nuestro Se&ntilde;or zanj&oacute; el principio b&aacute;sico cuando levant&oacute; una moneda y dijo: <em class="ref">&laquo;Dad a C&eacute;sar lo que es de C&eacute;sar, y a Dios lo que es de Dios&raquo;</em> (Mateo 22:21). El cristiano debe a las autoridades que gobiernan una obediencia real &mdash; Pablo nos dice que son ordenadas por Dios y que hemos de estarles sujetos (Romanos 13:1) &mdash; y sin embargo esa obediencia nunca es absoluta, porque el mismo C&eacute;sar pertenece a Dios, y cuando el estado manda lo que Dios proh&iacute;be o proh&iacute;be lo que Dios manda, debemos obedecer a Dios antes que a los hombres. El pastor debe ense&ntilde;ar a su gente a ser los mejores de los ciudadanos y nunca los falderos del estado, honrando al magistrado sin entregarle jam&aacute;s la conciencia que pertenece solo a Dios.</p>
+    <p>La misma sabidur&iacute;a gobierna la postura del creyente ante la cultura m&aacute;s amplia, y aqu&iacute; acechan dos errores opuestos. Uno es la fortaleza &mdash; el repliegue a un b&uacute;nker cristiano, rehusando todo contacto, escondiendo la luz debajo del almud. El otro es el camale&oacute;n &mdash; mezclarse tan completamente con la cultura circundante que la iglesia se vuelve indistinguible del mundo que deb&iacute;a transformar. La Escritura rechaza ambos: <em class="ref">&laquo;No os conform&eacute;is a este mundo; mas transformaos por la renovaci&oacute;n de vuestro entendimiento&raquo;</em> (Romanos 12:2). No hemos de huir del mundo ni de ser exprimidos en su molde, sino de enfrentarlo con discernimiento &mdash; y ese discernimiento se extiende a las pantallas, los medios y las tecnolog&iacute;as que ahora discipulan a nuestra gente m&aacute;s horas a la semana que nosotros. Ense&ntilde;e a su rebano a sopesar lo que mira y consume, ni tragando la cultura entera ni temi&eacute;ndola, sino examin&aacute;ndolo todo y reteniendo lo bueno.</p>
+    <p>Una esfera m&aacute;s pertenece aqu&iacute;: el cuidado de la creaci&oacute;n de Dios. El dominio concedido a la humanidad en el principio nunca fue licencia para saquear, sino encargo para administrar; Ad&aacute;n fue puesto en el huerto <em class="ref">&laquo;para que lo labrara y lo guardase&raquo;</em> (G&eacute;nesis 2:15). El cristiano ni adora la creaci&oacute;n como el pagano ni la desprecia como el descuidado, sino que la cuida como fiel administrador de lo que pertenece a Dios &mdash; una arena m&aacute;s en la que nuestra &eacute;tica confiesa de qui&eacute;n es este mundo.</p>
+<h3>Secci&oacute;n 10.2 &mdash; Juzgado por juzgar: discernimiento sin hipocres&iacute;a</h3>
+    <p>Ning&uacute;n vers&iacute;culo se le arroja m&aacute;s al pastor fiel que el <em class="ref">&laquo;No juzgu&eacute;is, para que no se&aacute;is juzgados&raquo;</em> (Mateo 7:1) de nuestro Se&ntilde;or, esgrimido por una cultura que con &eacute;l quiere decir que nadie puede jam&aacute;s llamar malo a nada. As&iacute; que debemos entender bien el pasaje, porque una mala lectura desarma a la iglesia y una buena lectura la arma. Jes&uacute;s no proh&iacute;be todo discernimiento moral &mdash; eso contradir&iacute;a sus propios mandatos y el resto de la Escritura. Proh&iacute;be el juicio <em>hip&oacute;crita</em>, el juicio de un hombre con una viga en su propio ojo afan&aacute;ndose por la mota en el de su hermano. Y note lo que manda tras la reprensi&oacute;n: <em class="ref">&laquo;Saca primero la viga de tu propio ojo, y entonces ver&aacute;s claramente para sacar la mota del ojo de tu hermano&raquo;</em> (Mateo 7:5). La meta no es dejar de ayudar al hermano; es tratar contigo mismo primero para poder ayudarlo sin hipocres&iacute;a. La auto-examinaci&oacute;n viene primero &mdash; siempre primero &mdash; y ese orden debe ser al menos tan agudo en el coraz&oacute;n del pastor como su prontitud para corregir a otros, o se vuelve el mismo hip&oacute;crita que el Se&ntilde;or condena.</p>
+    <p>Una vez fuera la viga, sin embargo, a la iglesia no solo se le permite sino se le manda juzgar. Nuestro Se&ntilde;or dijo en otro lugar: <em class="ref">&laquo;No juzgu&eacute;is seg&uacute;n la apariencia, mas juzgad justo juicio&raquo;</em> (Juan 7:24) &mdash; no <em>no juzgu&eacute;is</em>, sino juzgad <em>rectamente</em>. Pablo reprendi&oacute; a los corintios por no juzgar a un miembro que pecaba, diciendo con claridad que, aunque no juzgamos a los de afuera, <em class="ref">&laquo;&iquest;no juzg&aacute;is vosotros a los que est&aacute;n dentro?&raquo;</em> (1 Corintios 5:12). El discernimiento que distingue el bien del mal, llama al pecado pecado y corrige con amor al hermano que yerra no es la cosa prohibida; es madurez cristiana, lo mismo que Hebreos dijo que poseen los maduros. Lo prohibido es el esp&iacute;ritu censurador, hip&oacute;crita y farisaico que condena a otros para sentirse superior.</p>
+    <p>As&iacute; que el pastor fiel necesita valor &mdash; valor para ense&ntilde;ar la verdad y llamar al pecado por su nombre en una &eacute;poca que lo tildar&aacute; de &laquo;enjuiciador&raquo; por hacerlo. Pero ese valor debe ir unido, en cada paso, a la humildad de un hombre que primero se ha juzgado a s&iacute; mismo. El discernimiento sin auto-examinaci&oacute;n se cuaja en farise&iacute;smo; la auto-examinaci&oacute;n sin discernimiento se desploma en cobard&iacute;a. El pastor es llamado a ambos a la vez.</p>
+<h3>Secci&oacute;n 10.3 &mdash; Restaurar al ca&iacute;do: la meta de toda disciplina</h3>
+    <p>Dijimos en la Unidad 6 que el primer prop&oacute;sito de toda disciplina de la iglesia es la restauraci&oacute;n del pecador, nunca su destrucci&oacute;n. Ahora debemos aprender c&oacute;mo se logra de hecho esa restauraci&oacute;n, pues es una de las obras m&aacute;s delicadas y m&aacute;s descuidadas del ministerio. El modelo se da en 2 Corintios 2, donde Pablo escribe acerca del mismo hombre cuya disciplina hab&iacute;a exigido en su carta anterior. El hombre se ha arrepentido ahora &mdash; y la instrucci&oacute;n de Pablo es urgente y tierna. El castigo ha hecho su obra; por tanto, dice, la iglesia debe hacer tres cosas: <em class="ref">&laquo;deb&eacute;is m&aacute;s bien perdonarle y consolarle, para que no sea el tal consumido de demasiada tristeza&raquo;</em> (2 Corintios 2:7), y luego, <em class="ref">&laquo;que confirm&eacute;is el amor para con &eacute;l&raquo;</em> (2:8). Perdonar, consolar, confirmar el amor. La disciplina que no apunta sin tregua a este final gozoso ha errado por completo su prop&oacute;sito.</p>
+    <p>Dos advertencias enmarcan el proceso. Pablo dice que se restaure al penitente <em class="ref">&laquo;para que Satan&aacute;s no gane ventaja alguna sobre nosotros&raquo;</em> (2 Corintios 2:11) &mdash; pues al enemigo le agrada tanto una iglesia que no perdona al arrepentido como el pecado que lo empez&oacute; todo. El peligro corre en ambas direcciones. Pero la restauraci&oacute;n genuina requiere tambi&eacute;n el discernimiento que acabamos de estudiar: el pastor debe distinguir el verdadero arrepentimiento de su falsificaci&oacute;n, <em class="ref">&laquo;la tristeza que es seg&uacute;n Dios&raquo;</em> que <em class="ref">&laquo;obra arrepentimiento para salvaci&oacute;n&raquo;</em> de la mera <em class="ref">&laquo;tristeza del mundo&raquo;</em> que es solo pesar por haber sido descubierto (2 Corintios 7:10). El arrepentimiento real lleva fruto; no son meras l&aacute;grimas sino un volverse.</p>
+    <p>De esto fluye la sabidur&iacute;a pr&aacute;ctica de la restauraci&oacute;n: un proceso que ni se apresura ni se rehusa. Restaurar a un hombre ca&iacute;do demasiado pronto &mdash; sobre todo a un l&iacute;der ca&iacute;do &mdash; antes de probar el arrepentimiento y reconstruir la confianza, es herir a la iglesia y a menudo al hombre mismo; pero rehusar para siempre restaurar a un hermano verdaderamente penitente es la crueldad implacable que Pablo expresamente proh&iacute;be. La restauraci&oacute;n sabia toma a menudo la forma de un camino claro y escrito: pasos definidos, una temporada de fidelidad probada, reintegraci&oacute;n gradual a la comuni&oacute;n y, donde sea apropiado y solo con el tiempo, al servicio, con cuidado continuo mucho despu&eacute;s de terminado el proceso formal. El objetivo en todo es un hermano plenamente sanado y un cuerpo restaurado, para la gloria del Dios que restaura.</p>
+    <div class="illustration"><strong>Referencia cruzada &middot; Unidad 6</strong>Esta secci&oacute;n completa el tratamiento de la disciplina de la iglesia iniciado en la Secci&oacute;n 6.3, donde la restauraci&oacute;n fue nombrada como la primera e inflexible meta de la disciplina.</div>
+<h3>Secci&oacute;n 10.4 &mdash; Culminaci&oacute;n: vivir y terminar fielmente</h3>
+    <p>Llegamos al final de nuestro curso, y es propio reunir lo que hemos aprendido en una vida y no dejarlo como una lista. A lo largo de diez unidades hemos visto una verdad sostenerlo todo: la &eacute;tica cristiana nunca es una escalera que subimos para ganar el favor de Dios, sino el fruto de un favor ya dado. All&iacute; comenzamos en la Unidad 1, y nos hemos negado todo el camino a invertirlo. La gracia primero, siempre primero &mdash; y luego la vida santa que la gracia produce. Cada deber que hemos estudiado, desde la guarda del lecho matrimonial hasta el manejo del dinero de la iglesia y la restauraci&oacute;n del ca&iacute;do, es sencillamente lo que la gratitud parece cuando se desarrolla en las mil decisiones de un ministerio.</p>
+    <p>Para ayudarte a llevarlo, te insto a hacer lo que los ministros fieles han hecho desde hace mucho: escribe tu propia <em>Declaraci&oacute;n de &Eacute;tica Pastoral</em> &mdash; una declaraci&oacute;n personal y firme de las convicciones y compromisos por los que conducir&aacute;s tu ministerio, extra&iacute;da de todo lo que hemos cubierto. Decide en la calma, como dijimos del c&oacute;digo ministerial en la Unidad 5, lo que har&aacute;s en la tormenta. Ponlo por escrito, som&eacute;telo a rendici&oacute;n de cuentas y rev&iacute;salo de rodillas. Y resu&eacute;lvete a una vida de vigilancia, porque, como aprendimos en la Unidad 3, ning&uacute;n hombre cae de una vez; se desv&iacute;a, y solo la vigilancia y los hermanos honestos guardan a un hombre del lento deslizamiento.</p>
+    <p>Perm&iacute;teme dejarte con el cuadro solemne que nuestro Se&ntilde;or mismo us&oacute;, el rico y L&aacute;zaro (Lucas 16). Un hombre adinerado festejaba en comodidad cada d&iacute;a mientras un mendigo llamado L&aacute;zaro yac&iacute;a a su puerta, anhelando las migajas. El rico no hizo a L&aacute;zaro ninguna violencia; su pecado fue sencillamente que pas&oacute; por encima de &eacute;l, d&iacute;a tras d&iacute;a, y no hizo nada. Luego ambos hombres murieron, y el hombre acomodado, <em class="ref">&laquo;en tormentos... alz&oacute; sus ojos&raquo;</em> y vio, demasiado tarde, a trav&eacute;s de un abismo infranqueable, al mendigo que hab&iacute;a ignorado ahora consolado en gloria. Ah&iacute; est&aacute; la gran inversi&oacute;n que deber&iacute;a gobernar c&oacute;mo un pastor vive, da, juzga y pastorea ahora &mdash; porque todos alzaremos nuestros ojos un d&iacute;a y daremos cuenta. No seas el hombre que pasa por encima del L&aacute;zaro a su puerta, sea ese L&aacute;zaro el pobre, el hermano ca&iacute;do que aguarda restauraci&oacute;n, el alma herida en la banca o la familia en su propia casa. Ve a la persona que Dios ha puesto delante de ti. Gas&iacute;tate por ella.</p>
+    <p>Y as&iacute; terminamos donde termina un ministerio fiel, con el testimonio que son&oacute; por primera vez en la Unidad 3: <em class="ref">&laquo;He peleado la buena batalla, he acabado la carrera, he guardado la fe&raquo;</em> (2 Timoteo 4:7). La meta nunca fue meramente comenzar bien, ni ser admirado, ni evitar el esc&aacute;ndalo. La meta es terminar &mdash; estar al fin habiendo sido, por la gracia de Dios, un pastor fiel y santo del rebano que &Eacute;l compr&oacute; con su propia sangre. Que Dios lo conceda a todo hombre que ha estudiado estas cosas, y que la gracia que te llam&oacute; te guarde hasta el fin.</p>
+    <div class="illustration"><strong>Referencia cruzada &middot; Todo el curso</strong>Esta culminaci&oacute;n re&uacute;ne los hilos de las diez unidades: el orden gracia-antes-que-obras (Unidades 1&ndash;2), la vigilancia ante el lento desv&iacute;o (Unidad 3), el c&oacute;digo ministerial (Unidad 5), la meta de la restauraci&oacute;n (Unidad 6), la imagen de Dios en cada persona (Unidad 7) y el llamado a ver y servir al pobre (Unidad 9).</div>
+</div>
+</div>
+</div>
+
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lecci&oacute;n y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ============================================================
+// CTS Pastoral & Christian Ethics — Unit 10 — ST/DP house engine
+// English complete; Spanish draft filled (lang-es / textEs / kw_es / modelEs).
+// Spanish + RVG citations are a Gate-1 draft pending native review.
+// Navigation uses the deployed Ethics filename scheme: ethics_unit0N.html
+// (two-digit, zero-padded), matching the other nine units.
+// ============================================================
+
+const UNIT = 10;
+const COURSE = 'ethics';
+const NEXT_UNIT_URL = 'ethics_certificate.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - Introduction to Christian Ethics",
+    "Unit 2 - Biblical and Theological Foundations",
+    "Unit 3 - Pastoral Vocation: Calling and Character",
+    "Unit 4 - Family Responsibilities and Personal Integrity",
+    "Unit 5 - Professional Ethics and Boundaries",
+    "Unit 6 - Ethics in Preaching, Leadership, and Speech",
+    "Unit 7 - Sanctity of Life and Bioethics",
+    "Unit 8 - Sexual Ethics, Purity, and Gender",
+    "Unit 9 - Money, Stewardship, and the Poor",
+    "Unit 10 - Judgment, Restoration, and Capstone"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="ethics_unit${String(i).padStart(2,'0')}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+// MC answer key audited. Spanish: Gate-1 draft.
+const mcQuestions = [
+    { textEn: "1. Jesus settled the basic principle of the two kingdoms by saying, regarding the coin:", textEs: "1. Jes\u00fas zanj\u00f3 el principio b\u00e1sico de los dos reinos al decir, respecto a la moneda:",
+      optionsEn: ["render to Caesar the things that are Caesar\u2019s, and to God the things that are God\u2019s", "give everything to the temple", "pay no taxes to Rome", "obey Caesar in all things"], optionsEs: ["dad a C\u00e9sar lo que es de C\u00e9sar, y a Dios lo que es de Dios", "entregad todo al templo", "no pagu\u00e9is impuestos a Roma", "obedeced a C\u00e9sar en todo"],
+      explanationEn: "Jesus settled the two-kingdoms principle: render to Caesar what is Caesar's, and to God what is God's.", explanationEs: "Jes\u00fas zanj\u00f3 el principio de los dos reinos: dad a C\u00e9sar lo que es de C\u00e9sar, y a Dios lo que es de Dios.", correct: 0 },
+    { textEn: "2. According to the unit, the Christian\u2019s obedience to governing authorities is:", textEs: "2. Seg\u00fan la unidad, la obediencia del cristiano a las autoridades que gobiernan es:",
+      optionsEn: ["absolute and unconditional", "real, yet never absolute", "optional", "owed only to godly rulers"], optionsEs: ["absoluta e incondicional", "real, pero nunca absoluta", "opcional", "debida solo a gobernantes piadosos"],
+      explanationEn: "The Christian's obedience to governing authorities is real, yet never absolute.", explanationEs: "La obediencia del cristiano a las autoridades que gobiernan es real, pero nunca absoluta.", correct: 1 },
+    { textEn: "3. When the state commands what God forbids, the believer must:", textEs: "3. Cuando el estado manda lo que Dios proh\u00edbe, el creyente debe:",
+      optionsEn: ["comply to keep the peace", "seek a compromise", "obey God rather than men", "withdraw from society"], optionsEs: ["acatar para mantener la paz", "buscar un acuerdo", "obedecer a Dios antes que a los hombres", "apartarse de la sociedad"],
+      explanationEn: "When the state commands what God forbids, the believer must obey God rather than men.", explanationEs: "Cuando el estado manda lo que Dios proh\u00edbe, el creyente debe obedecer a Dios antes que a los hombres.", correct: 2 },
+    { textEn: "4. The two opposite errors in engaging culture are named as the fortress and the:", textEs: "4. Los dos errores opuestos al relacionarse con la cultura se nombran como la fortaleza y el:",
+      optionsEn: ["sword", "crown", "tower", "chameleon"], optionsEs: ["la espada", "la corona", "la torre", "el camale\u00f3n"],
+      explanationEn: "The two opposite errors in engaging culture are the fortress and the chameleon.", explanationEs: "Los dos errores opuestos al relacionarse con la cultura son la fortaleza y el camale\u00f3n.", correct: 3 },
+    { textEn: "5. Romans 12:2 calls believers not to be conformed to this world but to be:", textEs: "5. Romanos 12:2 llama a los creyentes a no conformarse a este mundo, sino a ser:",
+      optionsEn: ["transformed by the renewing of the mind", "separated entirely from it", "indifferent to it", "fearful of it"], optionsEs: ["transformados por la renovaci\u00f3n de la mente", "separados por completo de \u00e9l", "indiferentes a \u00e9l", "temerosos de \u00e9l"],
+      explanationEn: "Romans 12:2 calls believers not to be conformed to this world but transformed by the renewing of the mind.", explanationEs: "Romanos 12:2 llama a no conformarse a este mundo, sino a ser transformados por la renovaci\u00f3n de la mente.", correct: 0 },
+    { textEn: "6. \u201cJudge not, that you be not judged\u201d (Matthew 7:1) is, the unit argues, a prohibition of:", textEs: "6. \u00abNo juzgu\u00e9is, para que no se\u00e1is juzgados\u00bb (Mateo 7:1) es, sostiene la unidad, una prohibici\u00f3n de:",
+      optionsEn: ["hypocritical judgment, not all moral discernment", "all moral discernment whatsoever", "church discipline", "teaching the truth"], optionsEs: ["el juicio hip\u00f3crita, no de todo discernimiento moral", "todo discernimiento moral sin excepci\u00f3n", "la disciplina de la iglesia", "ense\u00f1ar la verdad"],
+      explanationEn: "'Judge not' (Matthew 7:1) forbids hypocritical judgment, not all moral discernment.", explanationEs: "\u00abNo juzgu\u00e9is\u00bb (Mateo 7:1) proh\u00edbe el juicio hip\u00f3crita, no todo discernimiento moral.", correct: 0 },
+    { textEn: "7. After the rebuke about the plank and the speck, Jesus commands the hearer to first:", textEs: "7. Tras la reprensi\u00f3n sobre la viga y la mota, Jes\u00fas manda al oyente primero:",
+      optionsEn: ["forgive the brother", "remove the plank from his own eye", "report the brother", "ignore the speck"], optionsEs: ["perdonar al hermano", "sacar la viga de su propio ojo", "denunciar al hermano", "ignorar la mota"],
+      explanationEn: "Jesus commands the hearer first to remove the plank from his own eye.", explanationEs: "Jes\u00fas manda al oyente sacar primero la viga de su propio ojo.", correct: 1 },
+    { textEn: "8. John 7:24 instructs believers not to judge by appearance but to judge:", textEs: "8. Juan 7:24 instruye a los creyentes a no juzgar por la apariencia, sino a juzgar:",
+      optionsEn: ["sparingly", "privately", "with righteous judgment", "not at all"], optionsEs: ["con moderaci\u00f3n", "en privado", "con justo juicio", "de ning\u00fan modo"],
+      explanationEn: "John 7:24 tells believers not to judge by appearance but to judge with righteous judgment.", explanationEs: "Juan 7:24 dice a los creyentes que no juzguen por la apariencia, sino con justo juicio.", correct: 2 },
+    { textEn: "9. In 1 Corinthians 5:12, Paul indicates that while the church does not judge outsiders, it is to judge:", textEs: "9. En 1 Corintios 5:12, Pablo indica que, aunque la iglesia no juzga a los de afuera, ha de juzgar:",
+      optionsEn: ["no one", "only leaders", "the surrounding culture", "those who are inside"], optionsEs: ["a nadie", "solo a los l\u00edderes", "a la cultura que la rodea", "a los que est\u00e1n dentro"],
+      explanationEn: "In 1 Corinthians 5:12 Paul says the church is to judge those who are inside, not outsiders.", explanationEs: "En 1 Corintios 5:12 Pablo dice que la iglesia ha de juzgar a los que est\u00e1n dentro, no a los de afuera.", correct: 3 },
+    { textEn: "10. The unit warns that discernment without self-examination curdles into:", textEs: "10. La unidad advierte que el discernimiento sin examen propio se cuaja en:",
+      optionsEn: ["humility", "Pharisaism", "cowardice", "silence"], optionsEs: ["humildad", "farise\u00edsmo", "cobard\u00eda", "silencio"],
+      explanationEn: "Discernment without self-examination curdles into Pharisaism.", explanationEs: "El discernimiento sin examen propio se cuaja en farise\u00edsmo.", correct: 1 },
+    { textEn: "11. The pastor needs courage to call sin by its name in an age that will brand him:", textEs: "11. El pastor necesita valor para llamar al pecado por su nombre en una \u00e9poca que lo tildar\u00e1 de:",
+      optionsEn: ["faithful", "loving", "wise", "\u2018judgmental\u2019"], optionsEs: ["fiel", "amoroso", "sabio", "\u00abenjuiciador\u00bb"],
+      explanationEn: "The pastor needs courage to name sin in an age that will brand him 'judgmental.'", explanationEs: "El pastor necesita valor para nombrar el pecado en una \u00e9poca que lo tildar\u00e1 de \u00abenjuiciador\u00bb.", correct: 3 },
+    { textEn: "12. The unit restates from Unit 6 that the first purpose of all church discipline is:", textEs: "12. La unidad reitera de la Unidad 6 que el primer prop\u00f3sito de toda disciplina de la iglesia es:",
+      optionsEn: ["the restoration of the sinner", "the punishment of sin", "the protection of the leadership", "the example to outsiders"], optionsEs: ["la restauraci\u00f3n del pecador", "el castigo del pecado", "la protecci\u00f3n del liderazgo", "el ejemplo a los de afuera"],
+      explanationEn: "The first purpose of all church discipline is the restoration of the sinner.", explanationEs: "El primer prop\u00f3sito de toda disciplina de la iglesia es la restauraci\u00f3n del pecador.", correct: 0 },
+    { textEn: "13. In 2 Corinthians 2, regarding the now-repentant man, Paul tells the church to forgive and comfort him, and then to:", textEs: "13. En 2 Corintios 2, respecto al hombre ya arrepentido, Pablo dice a la iglesia que lo perdone y consuele, y luego:",
+      optionsEn: ["test him for a year", "reaffirm their love to him", "keep him at a distance", "announce his sin"], optionsEs: ["lo pruebe por un a\u00f1o", "confirme su amor para con \u00e9l", "lo mantenga a distancia", "anuncie su pecado"],
+      explanationEn: "In 2 Corinthians 2 Paul tells the church to forgive, comfort, and reaffirm their love to the repentant man.", explanationEs: "En 2 Corintios 2 Pablo dice a la iglesia que perdone, consuele y confirme su amor para con el arrepentido.", correct: 1 },
+    { textEn: "14. Paul urges forgiving the penitent \u201clest perhaps such a one be:", textEs: "14. Pablo insta a perdonar al penitente para que no sea el tal:",
+      optionsEn: ["restored too quickly", "emboldened to sin", "swallowed up with too much sorrow", "welcomed back lightly"], optionsEs: ["restaurado demasiado pronto", "envalentonado a pecar", "consumido de demasiada tristeza", "recibido a la ligera"],
+      explanationEn: "Paul urges forgiving the penitent lest he be swallowed up with too much sorrow.", explanationEs: "Pablo insta a perdonar al penitente para que no sea consumido de demasiada tristeza.", correct: 2 },
+    { textEn: "15. 2 Corinthians 7:10 distinguishes godly sorrow, which leads to repentance, from:", textEs: "15. 2 Corintios 7:10 distingue la tristeza seg\u00fan Dios, que lleva al arrepentimiento, de:",
+      optionsEn: ["the sorrow of the world, which is mere regret at being caught", "excessive grief", "public confession", "true contrition"], optionsEs: ["la tristeza del mundo, que es mero pesar por haber sido descubierto", "el dolor excesivo", "la confesi\u00f3n p\u00fablica", "la contrici\u00f3n verdadera"],
+      explanationEn: "2 Corinthians 7:10 distinguishes godly sorrow from the world's sorrow, which is mere regret at being caught.", explanationEs: "2 Corintios 7:10 distingue la tristeza seg\u00fan Dios de la del mundo, que es mero pesar por haber sido descubierto.", correct: 0 },
+    { textEn: "16. Wise restoration, the unit says, is a process that is:", textEs: "16. La restauraci\u00f3n sabia, dice la unidad, es un proceso que:",
+      optionsEn: ["always immediate", "neither rushed nor refused", "reserved for non-leaders", "handled in secret"], optionsEs: ["es siempre inmediato", "ni se apresura ni se rehusa", "se reserva para los no l\u00edderes", "se maneja en secreto"],
+      explanationEn: "Wise restoration is a process that is neither rushed nor refused.", explanationEs: "La restauraci\u00f3n sabia es un proceso que ni se apresura ni se rehusa.", correct: 1 },
+    { textEn: "17. To restore a fallen leader too quickly, before repentance is tested, is described as:", textEs: "17. Restaurar a un l\u00edder ca\u00eddo demasiado pronto, antes de probar el arrepentimiento, se describe como:",
+      optionsEn: ["an act of grace", "wise mercy", "a wound to the church and often the man himself", "the biblical norm"], optionsEs: ["un acto de gracia", "misericordia sabia", "una herida para la iglesia y a menudo para el hombre mismo", "la norma b\u00edblica"],
+      explanationEn: "To restore a fallen leader too quickly, before repentance is tested, wounds the church and often the man himself.", explanationEs: "Restaurar a un l\u00edder ca\u00eddo demasiado pronto, antes de probar el arrepentimiento, hiere a la iglesia y a menudo al hombre mismo.", correct: 2 },
+    { textEn: "18. The unit\u2019s central integrating truth is that Christian ethics is never a ladder we climb but:", textEs: "18. La verdad integradora central de la unidad es que la \u00e9tica cristiana nunca es una escalera que subimos, sino:",
+      optionsEn: ["the fruit of a favor already given", "a set of rules to master", "a burden to bear", "a means of earning favor"], optionsEs: ["el fruto de un favor ya dado", "un conjunto de reglas que dominar", "una carga que llevar", "un medio para ganar el favor"],
+      explanationEn: "The integrating truth is that Christian ethics is never a ladder we climb but the fruit of a favor already given.", explanationEs: "La verdad integradora es que la \u00e9tica cristiana nunca es una escalera que subimos, sino el fruto de un favor ya dado.", correct: 0 },
+    { textEn: "19. Echoing Unit 3, the unit reminds that no man falls all at once; he:", textEs: "19. Haci\u00e9ndose eco de la Unidad 3, la unidad recuerda que ning\u00fan hombre cae de una vez; \u00e9l:",
+      optionsEn: ["is pushed", "drifts", "is tempted suddenly", "chooses openly"], optionsEs: ["es empujado", "se desv\u00eda", "es tentado de repente", "decide abiertamente"],
+      explanationEn: "Echoing Unit 3, no man falls all at once; he drifts.", explanationEs: "Haci\u00e9ndose eco de la Unidad 3, ning\u00fan hombre cae de una vez; se desv\u00eda.", correct: 1 },
+    { textEn: "20. The course ends, as a faithful ministry ends, with Paul\u2019s testimony that he had:", textEs: "20. El curso termina, como termina un ministerio fiel, con el testimonio de Pablo de que \u00e9l hab\u00eda:",
+      optionsEn: ["fought the good fight, finished the race, and kept the faith", "built a great church", "gained many followers", "avoided all scandal"], optionsEs: ["peleado la buena batalla, acabado la carrera y guardado la fe", "edificado una gran iglesia", "ganado muchos seguidores", "evitado todo esc\u00e1ndalo"],
+      explanationEn: "The course ends as a faithful ministry ends\u2014'I have fought the good fight, I have finished the race, I have kept the faith.'", explanationEs: "El curso termina como termina un ministerio fiel: \u00abHe peleado la buena batalla, he acabado la carrera, he guardado la fe\u00bb.", correct: 0 },
+];
+
+// Short-answer (21-30). English complete; Spanish: Gate-1 draft (kw_es + modelEs filled).
+const kwQuestions = [
+    { textEn: "21. Explain the two-kingdoms principle and the limit on obedience to the state.", textEs: "21. Explique el principio de los dos reinos y el l\u00edmite de la obediencia al estado.",
+      kw_en: ["caesar", "render", "obey", "absolute", "forbids", "men", "authority", "conscience"], kw_es: ["c\u00e9sar", "obediencia", "absoluta", "proh\u00edbe", "reinos", "conflicto", "estado", "supremo"],
+      modelEn: "Jesus settled the basic principle by saying, render to Caesar the things that are Caesar's, and to God the things that are God's. The Christian's obedience to governing authorities is real, yet never absolute. When the state commands what God forbids, the believer must obey God rather than men. The two kingdoms each have their claim, but God's is supreme where they conflict.", modelEs: "Jes\u00fas sent\u00f3 el principio b\u00e1sico al decir: dad a C\u00e9sar lo que es de C\u00e9sar, y a Dios lo que es de Dios. La obediencia del cristiano a las autoridades que gobiernan es real, pero nunca absoluta. Cuando el estado manda lo que Dios proh\u00edbe, el creyente debe obedecer a Dios antes que a los hombres. Los dos reinos tienen cada uno su reclamo, pero el de Dios es supremo donde entran en conflicto." },
+    { textEn: "22. Describe the fortress and the chameleon as opposite errors in engaging culture.", textEs: "22. Describa la fortaleza y el camale\u00f3n como errores opuestos al relacionarse con la cultura.",
+      kw_en: ["fortress", "chameleon", "conformed", "transformed", "mind", "romans", "withdraw", "absorb"], kw_es: ["fortaleza", "camale\u00f3n", "cultura", "opuestos", "renovaci\u00f3n", "entendimiento", "mundo", "disuelve"],
+      modelEn: "In engaging culture the believer can fall into two opposite errors. The fortress withdraws entirely, sealing itself off from the world; the chameleon absorbs the world's color until it is indistinguishable from it. Romans 12:2 charts the path between: be not conformed to this world, but transformed by the renewing of the mind. The Christian neither flees the culture nor dissolves into it, but engages it with a renewed mind.", modelEs: "Al relacionarse con la cultura el creyente puede caer en dos errores opuestos. La fortaleza se retira por completo, aisl\u00e1ndose del mundo; el camale\u00f3n absorbe el color del mundo hasta volverse indistinguible de \u00e9l. Romanos 12:2 traza el camino intermedio: no os conform\u00e9is a este mundo, mas transformaos por la renovaci\u00f3n de vuestro entendimiento. El cristiano ni huye de la cultura ni se disuelve en ella, sino que la enfrenta con una mente renovada." },
+    { textEn: "23. Explain 'Judge not' rightly, distinguishing forbidden judgment from required discernment.", textEs: "23. Explique correctamente \u00abNo juzgu\u00e9is\u00bb, distinguiendo el juicio prohibido del discernimiento requerido.",
+      kw_en: ["judge", "hypocritical", "plank", "speck", "righteous", "inside", "Pharisaism", "cowardice"], kw_es: ["hip\u00f3crita", "viga", "discernimiento", "juicio", "dentro", "farise\u00edsmo", "cobard\u00eda", "hermano"],
+      modelEn: "'Judge not, that you be not judged' (Matthew 7:1) forbids hypocritical, self-righteous judgment, not all moral discernment. Jesus tells the hearer first to remove the plank from his own eye\u2014and then he can see clearly to help his brother; John 7:24 commands judging with righteous judgment, and 1 Corinthians 5:12 says the church judges those inside. Discernment without self-examination curdles into Pharisaism, while self-examination without discernment collapses into cowardice. The pastor needs courage to name sin in an age that will brand him judgmental.", modelEs: "\u00abNo juzgu\u00e9is, para que no se\u00e1is juzgados\u00bb (Mateo 7:1) proh\u00edbe el juicio hip\u00f3crita y farisaico, no todo discernimiento moral. Jes\u00fas manda al oyente sacar primero la viga de su propio ojo \u2014 y entonces ver\u00e1 claramente para ayudar a su hermano; Juan 7:24 ordena juzgar con justo juicio, y 1 Corintios 5:12 dice que la iglesia juzga a los que est\u00e1n dentro. El discernimiento sin examen propio se cuaja en farise\u00edsmo, mientras que el examen propio sin discernimiento se desploma en cobard\u00eda. El pastor necesita valor para llamar al pecado por su nombre en una \u00e9poca que lo tildar\u00e1 de enjuiciador." },
+    { textEn: "24. State the first purpose of discipline and how 2 Corinthians 2 completes the picture.", textEs: "24. Enuncie el primer prop\u00f3sito de la disciplina y c\u00f3mo 2 Corintios 2 completa el cuadro.",
+      kw_en: ["restoration", "forgive", "comfort", "reaffirm", "sorrow", "swallowed", "Satan", "love"], kw_es: ["prop\u00f3sito", "restauraci\u00f3n", "perdonar", "consolar", "arrepentido", "tristeza", "satan\u00e1s", "amor"],
+      modelEn: "The first purpose of all church discipline is the restoration of the sinner, not the punishment of sin. In 2 Corinthians 2 Paul shows restoration completed: the church is to forgive and comfort the now-repentant man and reaffirm their love to him, lest he be swallowed up with too much sorrow and lest Satan take advantage. Discipline that begins in love must end, where there is repentance, in glad reaffirmation. The goal throughout is to gain the brother.", modelEs: "El primer prop\u00f3sito de toda disciplina de la iglesia es la restauraci\u00f3n del pecador, no el castigo del pecado. En 2 Corintios 2 Pablo muestra la restauraci\u00f3n consumada: la iglesia ha de perdonar y consolar al hombre ya arrepentido y confirmar su amor para con \u00e9l, para que no sea consumido de demasiada tristeza y para que Satan\u00e1s no gane ventaja. La disciplina que comienza en amor debe terminar, donde hay arrepentimiento, en gozosa confirmaci\u00f3n. La meta en todo es ganar al hermano." },
+    { textEn: "25. Distinguish godly sorrow from worldly sorrow and explain wise restoration.", textEs: "25. Distinga la tristeza seg\u00fan Dios de la tristeza del mundo y explique la restauraci\u00f3n sabia.",
+      kw_en: ["godly", "sorrow", "repentance", "world", "caught", "rushed", "refused", "tested"], kw_es: ["tristeza", "arrepentimiento", "mundo", "descubierto", "restauraci\u00f3n", "apresura", "rehusa", "probada"],
+      modelEn: "2 Corinthians 7:10 distinguishes godly sorrow, which leads to repentance, from the sorrow of the world, which is mere regret at being caught. Wise restoration is therefore a process that is neither rushed nor refused. To restore a fallen leader too quickly, before repentance is tested, is a wound to the church and often to the man himself. Restoration often takes the form of a clear, written path with defined steps and a season of proven faithfulness.", modelEs: "2 Corintios 7:10 distingue la tristeza seg\u00fan Dios, que lleva al arrepentimiento, de la tristeza del mundo, que es mero pesar por haber sido descubierto. Por eso la restauraci\u00f3n sabia es un proceso que ni se apresura ni se rehusa. Restaurar a un l\u00edder ca\u00eddo demasiado pronto, antes de probar el arrepentimiento, es una herida para la iglesia y a menudo para el hombre mismo. La restauraci\u00f3n suele tomar la forma de un camino claro y escrito, con pasos definidos y una temporada de fidelidad probada." },
+    { textEn: "26. Why does the unit insist Christian ethics is the fruit of a favor already given, not a ladder?", textEs: "26. \u00bfPor qu\u00e9 insiste la unidad en que la \u00e9tica cristiana es el fruto de un favor ya dado, no una escalera?",
+      kw_en: ["ladder", "fruit", "favor", "grace", "earn", "statement", "drift", "capstone"], kw_es: ["escalera", "fruto", "favor", "gracia", "ganar", "declaraci\u00f3n", "desv\u00eda", "vigilancia"],
+      modelEn: "The integrating truth of the whole course is that Christian ethics is never a ladder we climb to earn God's favor but the fruit of a favor already given. Everything taught has rested on grace first, then the holy life grace produces. The unit urges each minister to write his own Pastoral Ethics Statement, deciding in the calm what he will do in the storm. And echoing Unit 3 it reminds that no man falls all at once; he drifts, so vigilance must be deliberate.", modelEs: "La verdad integradora de todo el curso es que la \u00e9tica cristiana nunca es una escalera que subimos para ganar el favor de Dios, sino el fruto de un favor ya dado. Todo lo ense\u00f1ado ha descansado en la gracia primero, y luego en la vida santa que la gracia produce. La unidad insta a cada ministro a escribir su propia Declaraci\u00f3n de \u00c9tica Pastoral, decidiendo en la calma lo que har\u00e1 en la tormenta. Y haci\u00e9ndose eco de la Unidad 3 recuerda que ning\u00fan hombre cae de una vez; se desv\u00eda poco a poco, as\u00ed que la vigilancia debe ser deliberada." },
+    { textEn: "27. How does the great reversal of Luke 16 govern the way a pastor lives?", textEs: "27. \u00bfC\u00f3mo gobierna la gran inversi\u00f3n de Lucas 16 la manera en que vive un pastor?",
+      kw_en: ["Lazarus", "stepped", "reversal", "eyes", "account", "comforted", "wealth", "live"], kw_es: ["l\u00e1zaro", "rico", "inversi\u00f3n", "ojos", "cuenta", "consolado", "puerta", "eterno"],
+      modelEn: "In Luke 16 the rich man's sin toward Lazarus was that he stepped over him and did nothing; after death he lifted up his eyes and saw, too late, the beggar he had ignored now comforted. The great reversal ought to govern how a pastor lives because we will all one day lift up our eyes and give account. It presses the leader toward generosity and notice of the overlooked now, while there is time. How we treat the Lazarus at the gate is not a small matter but an eternal one.", modelEs: "En Lucas 16 el pecado del rico hacia L\u00e1zaro fue que pas\u00f3 por encima de \u00e9l y no hizo nada; tras la muerte alz\u00f3 sus ojos y vio, demasiado tarde, al mendigo que hab\u00eda ignorado ahora consolado. La gran inversi\u00f3n debe gobernar c\u00f3mo vive un pastor, porque todos un d\u00eda alzaremos nuestros ojos y daremos cuenta. Empuja al l\u00edder hacia la generosidad y a fijarse en el olvidado ahora, mientras hay tiempo. C\u00f3mo tratamos al L\u00e1zaro a la puerta no es asunto peque\u00f1o sino eterno." },
+    { textEn: "28. How does the course mean to end, and what testimony frames a faithful finish?", textEs: "28. \u00bfC\u00f3mo pretende terminar el curso, y qu\u00e9 testimonio enmarca un final fiel?",
+      kw_en: ["fought", "race", "kept", "faith", "finish", "capstone", "faithfully", "crown"], kw_es: ["peleado", "batalla", "carrera", "guardado", "terminar", "fielmente", "testimonio", "veredicto"],
+      modelEn: "The course ends, as a faithful ministry ends, with Paul's testimony from a Roman prison: 'I have fought the good fight, I have finished the race, I have kept the faith.' The capstone is not a crowd's applause or a name on a building but to stand at last before the Chief Shepherd and hear 'well done.' The aim of all this teaching is not merely to begin well but to finish faithfully. That finish, not worldly success, is the only verdict that finally matters.", modelEs: "El curso termina, como termina un ministerio fiel, con el testimonio de Pablo desde una prisi\u00f3n romana: \u00abHe peleado la buena batalla, he acabado la carrera, he guardado la fe\u00bb. La culminaci\u00f3n no es el aplauso de la multitud ni un nombre en un edificio, sino estar al fin ante el Pr\u00edncipe de los pastores y o\u00edr \u00abbien hecho\u00bb. El fin de toda esta ense\u00f1anza no es solo comenzar bien, sino terminar fielmente. Ese final, y no el \u00e9xito mundano, es el \u00fanico veredicto que al fin importa." },
+    { textEn: "29. Why must obedience to the state sometimes yield, and how does the believer decide?", textEs: "29. \u00bfPor qu\u00e9 debe la obediencia al estado a veces ceder, y c\u00f3mo decide el creyente?",
+      kw_en: ["state", "forbids", "commands", "obey God", "men", "conscience", "limit", "kingdom"], kw_es: ["obediencia", "autoridad", "absoluta", "proh\u00edbe", "estado", "reinos", "conflicto", "ciudadano"],
+      modelEn: "Obedience to governing authority is real but never absolute, because authority itself is under God. When the state commands what God forbids, or forbids what God commands, the believer must obey God rather than men. The decision is not driven by personal preference or political mood but by the clear command of God where the two kingdoms genuinely conflict. Outside such conflict the Christian is to be a peaceable, law-honoring citizen.", modelEs: "La obediencia a la autoridad que gobierna es real pero nunca absoluta, porque la autoridad misma est\u00e1 bajo Dios. Cuando el estado manda lo que Dios proh\u00edbe, o proh\u00edbe lo que Dios manda, el creyente debe obedecer a Dios antes que a los hombres. La decisi\u00f3n no la mueve la preferencia personal ni el humor pol\u00edtico, sino el claro mandato de Dios donde los dos reinos verdaderamente entran en conflicto. Fuera de tal conflicto el cristiano ha de ser un ciudadano pac\u00edfico y respetuoso de la ley." },
+    { textEn: "30. Tie together discernment, restoration, and the capstone as the unit's final word to the pastor.", textEs: "30. Una el discernimiento, la restauraci\u00f3n y la culminaci\u00f3n como la palabra final de la unidad al pastor.",
+      kw_en: ["discernment", "restoration", "fruit", "drift", "statement", "finish", "account", "grace"], kw_es: ["discernimiento", "restauraci\u00f3n", "fruto", "desv\u00edo", "declaraci\u00f3n", "terminar", "cuenta", "gracia"],
+      modelEn: "The unit gathers the course: judge with righteous, self-examined discernment rather than Pharisaism or cowardice; pursue the restoration of the fallen as discipline's first goal, neither rushing nor refusing it; and remember that ethics is the fruit of grace, not a ladder. Each minister should write his own Pastoral Ethics Statement and guard against the slow drift that ruins a ministry. We will all lift up our eyes and give account one day. So the final word is to finish faithfully\u2014to keep the faith to the end.", modelEs: "La unidad re\u00fane el curso: juzgar con discernimiento recto y examinado, no con farise\u00edsmo ni cobard\u00eda; buscar la restauraci\u00f3n del ca\u00eddo como primera meta de la disciplina, sin apresurarla ni rehusarla; y recordar que la \u00e9tica es el fruto de la gracia, no una escalera. Cada ministro debe escribir su propia Declaraci\u00f3n de \u00c9tica Pastoral y guardarse del lento desv\u00edo que arruina un ministerio. Todos alzaremos nuestros ojos y daremos cuenta un d\u00eda. As\u00ed la \u00faltima palabra es terminar fielmente, guardar la fe hasta el fin." },
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Certificado arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Certificate above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y vuelva a intentar la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEthicsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruth and Esther — Unit 3</title>
+<style>
+  :root { --maroon:#7B2E2E; --gold:#C8A24B; --ink:#1d1d1d; --soft:#f5f2ec; --line:#ddd6c8; }
+  * { box-sizing:border-box; }
+  body { font-family:Georgia,'Times New Roman',serif; color:var(--ink); margin:0; background:#fbf9f4; line-height:1.6; }
+  body[data-lang="en"] .es { display:none; }
+  body[data-lang="es"] .en { display:none; }
+  header { background:var(--maroon); color:#fff; padding:24px 22px; }
+  header h1 { margin:0 0 6px; font-size:1.45rem; }
+  header .sub { font-style:italic; opacity:.92; }
+  header .credit { margin-top:10px; font-size:.78rem; opacity:.85; font-family:Arial,sans-serif; }
+  .langbar { background:#5e2222; padding:8px 22px; }
+  .langbar button { background:transparent; border:1px solid #fff; color:#fff; padding:5px 14px; margin-right:6px; border-radius:5px; cursor:pointer; font-family:Arial,sans-serif; font-size:.85rem; }
+  .langbar button.active { background:#fff; color:var(--maroon); font-weight:bold; }
+  .wrap { max-width:860px; margin:0 auto; padding:22px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:22px; margin:18px 0; }
+  h2 { color:var(--maroon); border-bottom:2px solid var(--gold); padding-bottom:6px; }
+  .track-bar { background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:14px 18px; margin:18px 0; font-family:Arial,sans-serif; }
+  .track-bar label { font-weight:bold; margin-right:10px; }
+  select, button { font-size:1rem; padding:8px 12px; border-radius:6px; border:1px solid #bbb; }
+  button { cursor:pointer; background:var(--maroon); color:#fff; border:none; font-family:Arial,sans-serif; }
+  button:disabled { background:#bbb; cursor:not-allowed; }
+  button.secondary { background:#fff; color:var(--maroon); border:1px solid var(--maroon); }
+  .teaching p { margin:0 0 14px; }
+  .q { border-top:1px solid var(--line); padding:18px 0; }
+  .q:first-child { border-top:none; }
+  .q .stem { font-weight:bold; margin-bottom:10px; }
+  .opt { display:block; margin:7px 0; padding:9px 12px; border:1px solid var(--line); border-radius:6px; cursor:pointer; background:#fff; font-family:Arial,sans-serif; }
+  .opt:hover { background:var(--soft); }
+  .opt.sel { border-color:var(--maroon); background:#f3e7e7; }
+  .opt.correct { border-color:#2e7d32; background:#e6f3e7; }
+  .opt.wrong { border-color:#b00020; background:#f7e6e9; }
+  .fb { font-family:Arial,sans-serif; font-size:.9rem; margin-top:8px; padding:8px 10px; border-radius:6px; display:none; }
+  .fb.ok { background:#e6f3e7; color:#1b5e20; display:block; }
+  .fb.no { background:#f7e6e9; color:#8e0018; display:block; }
+  textarea { width:100%; min-height:84px; font-family:Arial,sans-serif; font-size:.95rem; padding:10px; border:1px solid #bbb; border-radius:6px; resize:vertical; }
+  .model { display:none; margin-top:10px; border-left:4px solid var(--gold); background:#fdf8ec; padding:10px 14px; font-family:Arial,sans-serif; font-size:.92rem; }
+  .model.show { display:block; }
+  .model b { color:var(--maroon); }
+  .flag { color:#b00020; font-family:Arial,sans-serif; font-size:.8rem; }
+  .practice-tag { font-family:Arial,sans-serif; font-size:.78rem; color:#555; font-style:italic; }
+  .result { font-family:Arial,sans-serif; font-size:1.02rem; padding:14px; border-radius:8px; margin-top:14px; }
+  .result.pass { background:#e6f3e7; color:#1b5e20; }
+  .result.fail { background:#f7e6e9; color:#8e0018; }
+  .navrow { display:flex; justify-content:space-between; align-items:center; margin:24px 0; font-family:Arial,sans-serif; }
+  .note { font-family:Arial,sans-serif; font-size:.82rem; color:#666; }
+</style>
+</head>
+<body data-lang="en">
+
+<script src="cts-lang.js"></script>
+<header>
+  <h1>Ruth and Esther &mdash; <span class="en">Unit 3</span><span class="es">Unidad 3</span></h1>
+  <div class="sub"><span class="en">Class 3 — Ruth&#x27;s Plan &amp; Provision (Ruth 2–3)</span><span class="es">Clase 3 — El Plan y la Provisión de Rut (Rut 2–3)</span></div>
+  <div class="credit">Glenda Rogers &middot; Chapala Theological Seminary &middot; Dr. Ted Rogers, Director</div>
+</header>
+<div class="langbar">
+  <button id="btnEn" class="active" onclick="setLang('en')">English</button>
+  <button id="btnEs" onclick="setLang('es')">Espa&ntilde;ol</button>
+</div>
+<div class="wrap"><style>
+.cts-unitnav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;padding:11px 14px;background:rgba(120,90,50,.06);border:1px solid rgba(120,90,50,.14);border-radius:12px;font-family:inherit}
+.cts-unitnav .cun-label{font-size:.72rem;font-weight:700;letter-spacing:.04em;opacity:.7;margin-right:4px;text-transform:uppercase}
+.cts-unitnav a{background:#d7cec1;color:#22201d;padding:6px 13px;border-radius:30px;text-decoration:none;font-size:.85rem;line-height:1;font-weight:600;transition:transform .06s ease}
+.cts-unitnav a:hover{transform:translateY(-1px)}
+.cts-unitnav a.completed{background:#5b3a1f;color:#fff}
+.cts-unitnav a.active{background:#f4c542;color:#222;font-weight:800;box-shadow:0 0 0 2px rgba(244,197,66,.4)}
+</style><nav class="cts-unitnav" aria-label="Course units / Unidades del curso"><span class="cun-label">Units · Unidades</span><a href="CTSREUnit1.html" title="Unit 1 · Unidad 1">1</a><a href="CTSREUnit2.html" title="Unit 2 · Unidad 2">2</a><a href="CTSREUnit3.html" title="Unit 3 · Unidad 3" class="active">3</a><a href="CTSREUnit4.html" title="Unit 4 · Unidad 4">4</a><a href="CTSREUnit5.html" title="Unit 5 · Unidad 5">5</a><a href="CTSREUnit6.html" title="Unit 6 · Unidad 6">6</a><a href="CTSREUnit7.html" title="Unit 7 · Unidad 7">7</a><a href="CTSREUnit8.html" title="Unit 8 · Unidad 8">8</a><a href="CTSREUnit9.html" title="Unit 9 · Unidad 9">9</a></nav><script>(function(){try{var p=JSON.parse(localStorage.getItem('cts_re_progress')||'{}');document.querySelectorAll('.cts-unitnav a').forEach(function(a,i){if(p['unit'+(i+1)])a.classList.add('completed');});}catch(e){}})();</script>
+
+  <div id="greet" class="note" style="margin:8px 0 0;"></div>
+
+
+  <div class="track-bar">
+    <label for="track"><span class="en">Track:</span><span class="es">Programa:</span></label>
+    <select id="track" onchange="setTrack()">
+      <option value="cert">Certificate / Certificado</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div class="note" id="trackNote" style="margin-top:8px;"></div>
+  </div>
+
+  <div class="card teaching">
+    <h2><span class="en">The Class</span><span class="es">La Clase</span></h2>
+    <p class="note">
+      <span class="en">Passage: Ruth 2–3 &middot; Taught by Glenda Rogers. This preserves her teaching and class discussion.</span>
+      <span class="es">Pasaje: Rut 2–3 &middot; Ense&ntilde;ado por Glenda Rogers. Conserva su ense&ntilde;anza y la discusi&oacute;n de clase.</span>
+    </p>
+    <div class="en"><p style="font-style:italic;color:#7B2E2E">Please open with a word of prayer.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Class 3 Notes – Ruth Chapters 1 and 2</strong></p>
+    <p>Answers to questions from last week.</p>
+    <p>1.Questions regarding the Levirate Law: The brothers were forbidden from marrying a sister-in-law in all circumstances except in this circumstance. The law was strictly to provide an heir for the deceased brother, so presumably if the SIL already had male heirs then the Levirate Law would not take place. If the deceased brother had multiple wives it would only be done for one of the wives to produce an heir. In the event there were multiple living brothers the duty fell to the oldest first and then went to the next eldest if he refused. And the living brother could be married already and still perform the duty. If all brrothers refused a ceremony was performed that then released her to marry someone else.</p>
+    <p>2. Cling: to hold fast, cleave, to stick with.</p>
+    <p>3. Beauty for Ashes: Isaiah 61:3. As we’ve stressed in classes here we don’t like to rip things out of the context of their history. However here in Isaiah 61, we have a description of the Messiah. It is regarded as the 5th Servant Song found in Isaiah that describe the Messiah or Anointed One. 42:1-4, 49:1-6, 50:4-9, 52:13-53:12, and then this passage Do you remember from Tuesday’s class what the Ethiopian Eunuch was reading when Philip told him that the passage was about Jesus.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Observations:</strong></p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Chapter 2</strong></p>
+    <p>“A man of great standing” This isn’t just a financially rich man. This is a man who possesses excellence, valor, a good reputation.</p>
+    <p>In fact Boaz means Strength and Swiftness.</p>
+    <p>Ruth knows enough of Jewish law to ask to go glean in the fields behind the reapers. This is a right given in Jewish law to protect and provide for widows, orphans, and the poor.</p>
+    <p>She also is proving herself a woman of excellence who sticks by her promise to care for Naomi. She isn’t galavanting around looking for a husband.</p>
+    <p>“As it turned out,” or “She happened to come upon,” in verse 3: if you go back to the original Hebrew, this shows it was completely by chance — Divine providence — that she came upon Boaz’s field. She doesn’t know who Boaz is nor where his plot of land is. And she’s taking a big risk going out alone in such a time of lawlessness.</p>
+    <p>Just then Boaz shows up from Bethlehem. Coincidence?</p>
+    <p>Boaz reveals his dedication to God by his simple kind greeting to his workers. “The Lord be with you.”</p>
+    <p>Their kind response shows they respect their master, “The Lord bless you.”</p>
+    <p>Boaz happens out into his fields on the day that Ruth is there, and he notices her.</p>
+    <p>The overseer of the reapers knows she is a Moabite, knows she is with Naomi, and allows her to glean as she requests. What does this say of the overseer’s character? What do you think that this reveals regarding Boaz’s character and how he treats his servants?</p>
+    <p>Once he hears who she is, he knows her from reputation. Her excellence is known throughout the town.</p>
+    <p>Boaz treats her as his daughter, offering his protection. He also clearly trusts his servants not to harm her.</p>
+    <p>Boaz knows of the sacrifices she made to leave her home and gods and follow Naomi and follow the one true God in a land where she knows no one and is not respected.</p>
+    <p>Boaz knows his scripture, as demonstrated in his conversation with Ruth and in allowing her to glean and caring for her as God would. Deuteronomy 10:17-19. He knows God will bless her for all her sacrifices to be with Naomi and care for her. He also knows that God cares for his loved ones as an eagle cares for its young Deuteronomy 32: 11-12.</p>
+    <p>Boaz prays that God will bless her for her loyal love and kindness to Naomi (verse 12). Boaz uses a feminine descriptor of God, the same one used of God’s protection of the Israelites. His protective wings under which she seeks refuge. Basically, welcoming her into the Israelite fold. Stark contrast to Elimelech. Boaz recognizes God’s protection. Elimelech fled at the first sign of trouble.</p>
+    <p>When he feeds her at supper, she holds some back for Naomi.</p>
+    <p>Boaz allows to glean from the sheaves and even instructs his men to let some fall for her. He does this in secret without her knowing to not embarrass her.</p>
+    <p>She works until evening, beating out what she has gleaned.</p>
+    <p>When she goes home it is so much that Naomi takes notice. An ephah is 12 bushels or roughly 30 pounds, enough to feed them for 5 days.</p>
+    <p>Naomi learns that Ruth has gleaned from her relative’s field. She also blesses Boaz for his kindness and in calling him a close relative she is calling upon the name of kinsman redeemer.</p>
+    <p>“He has not stopped showing his kindness to the living and the dead” Miss Mara’s countenance has become pleasant and joyful again. She recognizes God’s hand, his covenant love” working in their lives.</p>
+    <p>“Lest others fall upon you” is a reminder that these are scary times.</p>
+    <p>Ruth gleans through the barley and wheat harvests. A period of 4 months from Mar-June.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Interpretations</strong></p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Chapter 2</strong></p>
+    <p>1. Ruth upholds her vow and God’s command to care for the widow when she herself is one. She goes out to work in the field for Naomi and herself.</p>
+    <p>2. Though we may not readily notice, God is working. Ruth happens upon and gleans in Boaz’s field and Boaz happens to be there when she is.</p>
+    <p>3. Boaz’s faith in God shows in his care for his workers and his care for Ruth. He goes above and beyond what is required as the owner of the field and crops.</p>
+    <p>4. Rather than treating her as a foreigner, both the workers and Boaz treat her with utmost kindness.</p>
+    <p>5. By Boaz’s allowing Ruth to continue to glean, but also helping her to glean more than normal, he allows her to keep her dignity. God is as gentle with us, allowing us to join Him in His work, though God’s gracious providence over us ultimately rules and wins out. I like how Tom Constable puts it in his notes: “By allowing her to work, Boaz preserved Ruth&#x27;s dignity and reputation; by providing generously for her, he lightened her duties.” Isn’t that so like God and how he treats and cares for us. Matt. 11:28-30 says, “Come to me, all who labor and are heavy laden, and I will give you rest. Take my yoke upon you, and learn from me; for I am gentle and lowly in heart, and you will find rest for your souls. For my yoke is easy, and my burden is light. &quot;</p>
+    <p>5. Boaz recognizes God’s hand upon her and joins Him in his work in this woman’s life. Indeed, Boaz’s abundant grace reminds us of God’s grace towards us.</p>
+    <p>6. Ruth brings home a portion of her food to share with the widow Naomi. I love what this says about her character. She is honoring her promise to Naomi. It reminds me so much of the families I see here who bring the elderly into their home and tend to them with such loving care. Family is everything to them.</p>
+    <p>7. Boaz says or does nothing in front of Ruth that would cause her to feel shame. His instructions are in secret. God loves when good deeds are done in secret. Matt 6:1-4.</p>
+    <p>8. I Tim 5:18 says, “A Workman is worthy of his wages.” What does this say about Ruth Chapter 2:12. Ruth works sunup to sundown, only taking breaks to rest, drink, and eat.</p>
+    <p>9. It is good to equip ourselves with the knowledge of Scripture as Ruth did when she knew it was her right to glean in the fields according to Jewish Law.</p>
+    <p>10. Our behavior should always be respectable and kind if we are living our faith and trusting in God’s love for us.</p>
+    <p>11. Unlike Elimelech, Boaz trusts God for provisions. In a time of coming out of famine, he could have hoarded his grain. Instead he gives even more than is required.</p>
+    <p>12. Naomi is quick to give God the credit for turning her sadness into gladness, for providing for them in many ways.</p>
+    <p>13. Every prayer and prayerful wish in the book is for God’s blessings upon individuals and God answered every one of them.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Chapter 2 Applications:</strong></p>
+    <p>1. Do I treat others in such a way that gives glory to God and reminds others of His love?Am I respectful and kind? Do I do good deeds in secret so as to not draw attention to myself.</p>
+    <p>2. Do I give more than required.</p>
+    <p>3. Get to know my Scripture better.</p>
+    <p>4.Trust God rather than hoard my belongings and wealth. Do not worry but trust in God. God gives us the strength we need for each day. Tomorrow belongs to Him. Phil 4:6 “do not be anxious about anything but in every situation, by prayer and petition with thanksgiving let your requests be known to God. And the peace of God which surpasses all comprehension will guard your hearts and mind in Christ Jesus.” Faith in the Lord should be active and evident in my life.</p>
+    <p>5. Never ever quench the Holy Spirit’s work in another human being. Treat foreigners and enemies with kindness or covenant love as God would. Pray God’s blessing upon them.</p>
+    <p>7. Work hard in doing God’s works and trust Him for the wages.</p>
+    <p>8. Where is God working near me and how can I join Him in that work.</p>
+    <p>9. How I treat others trickles down to those I come into contact with. If I want people to treat others with kindness, I must be an example of that kindness. In this world right now where hatred spews across the internet, I need to be the voice of kindness, grace, forgiveness, love, and generosity.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Chapter 3 Observations</strong></p>
+    <p>Passage begins with Naomi seeking security for Ruth and ends with waiting on that security.</p>
+    <p>To be settled and secure in a husband’s home. She wants to make sure that Ruth is provided for. She still wants that rest for Ruth that she asked God for her at the beginning in chapter 1.</p>
+    <p>Customary for Hebrew parents to arrange marriages for their children.</p>
+    <p>She gives specific instructions for Ruth to follow. All are symbolic of expressing Ruth’s desire for a kinsman redeemer.</p>
+    <p>Put on your best clothes mean an outer cloak or mantle. This helps to protect her identity.</p>
+    <p>Uncover his feet is a literal and accurate translation and symbolic as we will see later.</p>
+    <p>Threshing and winnowing of the harvest is a great time of celebration especially after so long a famine. The threshing floor would have been one shared by the entire town.</p>
+    <p>Ruth obeys Naomi.</p>
+    <p>If Naomi was trying to secure the benefits of kinsman redeemer over her and Ruth, she would not have encouraged her to prostitute herself thereby bringing more shame upon her and her family. Plus, Ruth is an honorable woman and Boaz is likewise honorable.</p>
+    <p>Passage says that Boaz was in good spirits. Many commentators and people not considering the culture assume this meant Boaz was drunk. But consider this, would someone who needed to protect their grain from thieves throughout the night, want to be passed out drunk. Additionally, the words good spirits simply mean joyful, happy, glad all sentiments that would have made sense after a period of famine.</p>
+    <p>She uncovers his feet. This is a symbolic gesture. Please read Joshua 1:3 and 3:13. Stepping on something means to take possession of it. Look also at Ruth 4:7 for more immediate context. Her uncovering of his feet was requesting him to be her kinsman redeemer, to take back the lands to possess the lands, belonging to her family and to take her as his wife.</p>
+    <p>Maid literally means servant. Subjugation.</p>
+    <p>Ezekial 16:8 “Spread the corner of your garment over me, since you are a guardian-redeemer[b] of our family.” Specific to kinsman redeemer. Remember it was Boaz who commended her for seeking refuge under God’s wings. By asking him to spread a corner of mantle over her she is asking him to cover her with his wings. Corner means wings. She is asking him for his protection in the role of kinsman redeemer. Boaz had commended her seeking refuge under God’s wings, and now Ruth is asking Boaz to be the answer to that commendation I can’t help but think she was smiling at that moment.</p>
+    <p>Vs 10 kindness is once again loyal or covenant love. Her last kindness is better than her first. This last kindness shows that she is turning to him who is much older to be a kinsman redeemer for her and for Naomi rather than going after younger men.</p>
+    <p>Daughter emphasizes the difference in their ages.</p>
+    <p>All the people in the city know that you are a woman of excellence. Same description used of Boaz. They are made very much alike in their excellence and perfect for one another.</p>
+    <p>He protects her identity probably to keep the gossips at bay but also to protect her reputation so that the other possible relative will have no excuse not to redeemer her.</p>
+    <p>The fact that Boaz knew of another relative shows he had done his research already on her behalf.</p>
+    <p>His payment to her is not for her prostituting herself but a sign of an oath to Naomi that he will resolve the KR issue.</p>
+    <p>Naomi understood that sign completely for she says and believes wholly that Boaz will not stop until he has done this duty before the close of day.</p>
+    <p>Requirements for being a kinsman redeemer:</p>
+    <ul><li>Near kinsman</li><li>Willing to be</li><li>Able to be</li><li>Free himself</li><li>Able to pay the price</li></ul>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Chapter 3 Interpretations:</strong></p>
+    <p>In seeking a redeemer for Ruth, Naomi is seeking to repay Ruth with the like kindness that Ruth has shown her.</p>
+    <p>She is staying attentive to God’s leading and the law of kinsman redeemer would be perfectly within God’s will.</p>
+    <p>Ruth completely trusts Naomi and does as she instructs.</p>
+    <p>Naomi, Ruth and Boaz all behave honorably when at so many different points in this passage they could have chosen the less honorable path. Boaz could have taken advantage of Ruth under cover of darkness. Ruth could have prostituted herself much as Tamar did. All did what was according to the law as respects a kinsman redeemer. All acted above reproach.</p>
+    <p>Boaz could have become drunk on wine at a time of great celebration yet he remained sober.</p>
+    <p>Kindness, covenant love, God extends it to us and He means for us to extend it to others, through self sacrifice, through seeking someone else’s good above our own. “They will know we are Christians by our love for one another.”</p>
+    <p>In a time of the Judges when everyone is seeking their own gain, when anarchy, murder, selfishness, and rape are common place, those who remain kind, who stay attentive to God, and trusting in Him will find refuge under His wings. There is no need to take matters into our own hands, but act according to Scripture.</p>
+    <p>Requirements for Kinsman Redeemer sound familiar? Only Jesus could meet these requirements for redeeming us.</p>
+    <p style="margin-top:18px"><strong style="color:#7B2E2E">Chapter 3 Application</strong></p>
+    <p>1. Am I guilty of often seeking my own gain and taking control of things instead of trusting God for His provisions?</p>
+    <p>2. Help us to treat others with kindness and self-sacrifice.</p>
+    <p>3. We live in anxious times, are we actively waiting on God and claiming His incomprehensible peace that is ours for the taking. Phil 4: 6-7 “Be anxious for nothing but in everything by prayer and supplication let your requests be made known to God And the peace of God which surpasses all comprehension will guard your heats and minds in Christ Jesus.”</p>
+    <p>4. Trust that God has us under His wings and that is the safest place to be.</p>
+    <p>5. At all times am I living a life that is above reproach?</p>
+    <p>6. Boaz had already done his research regarding a closer relative. Am I prayed up and studied up when I am preparing for a task that God has called me to?</p></div>
+    <div class="es"><p style="font-style:italic;color:#7B2E2E">Por favor, comiencen con una palabra de oración.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Notas de la Clase 3 – Rut, Capítulos 1 y 2</strong></p>
+<p>Respuestas a las preguntas de la semana pasada.</p>
+<p>1. Preguntas acerca de la ley del levirato: a los hermanos se les prohibía casarse con una cuñada en toda circunstancia, excepto en esta. La ley tenía como único fin proveer un heredero para el hermano fallecido, así que, presumiblemente, si la cuñada ya tenía herederos varones, la ley del levirato no se aplicaría. Si el hermano fallecido había tenido varias esposas, solo se haría con una de ellas para producir un heredero. En caso de que hubiera varios hermanos vivos, el deber recaía primero sobre el mayor, y pasaba al siguiente en edad si este se negaba. Y el hermano vivo podía estar ya casado y aun así cumplir el deber. Si todos los hermanos se negaban, se realizaba una ceremonia que entonces la liberaba para casarse con otro.</p>
+<p>2. Aferrarse: asirse con fuerza, unirse, permanecer junto a.</p>
+<p>3. Belleza en lugar de cenizas: Isaías 61:3. Como hemos insistido en estas clases, no nos gusta arrancar las cosas del contexto de su historia. Sin embargo, aquí, en Isaías 61, tenemos una descripción del Mesías. Se le considera el 5.º Canto del Siervo que se halla en Isaías y que describe al Mesías o Ungido: 42:1-4; 49:1-6; 50:4-9; 52:13–53:12; y luego este pasaje. ¿Recuerdan, de la clase del martes, qué estaba leyendo el eunuco etíope cuando Felipe le dijo que el pasaje hablaba de Jesús?</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Observaciones:</strong></p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Capítulo 2</strong></p>
+<p>“Un hombre de gran reputación”. Este no es simplemente un hombre rico en lo económico. Es un hombre que posee excelencia, valor y una buena reputación.</p>
+<p>De hecho, Booz significa fuerza y rapidez.</p>
+<p>Rut conoce lo suficiente de la ley judía como para pedir ir a espigar en los campos detrás de los segadores. Este es un derecho otorgado en la ley judía para proteger y proveer a las viudas, los huérfanos y los pobres.</p>
+<p>También se muestra como una mujer de excelencia, que cumple su promesa de cuidar de Noemí. No anda deambulando por ahí en busca de un esposo.</p>
+<p>“Y aconteció”, o “dio la casualidad de que llegó”, en el versículo 3: si volvemos al hebreo original, esto muestra que fue completamente por casualidad —providencia divina— que llegó al campo de Booz. Ella no sabe quién es Booz ni dónde está su parcela de tierra. Y corre un gran riesgo al salir sola en un tiempo tan lleno de anarquía.</p>
+<p>Justo entonces, Booz aparece desde Belén. ¿Casualidad?</p>
+<p>Booz revela su dedicación a Dios con el sencillo y amable saludo a sus trabajadores: “Jehová sea con vosotros”.</p>
+<p>La amable respuesta de ellos muestra que respetan a su amo: “Jehová te bendiga”.</p>
+<p>Booz sale a sus campos el mismo día en que Rut está allí, y se fija en ella.</p>
+<p>El capataz de los segadores sabe que ella es moabita, sabe que está con Noemí y le permite espigar como ella lo pide. ¿Qué dice esto del carácter del capataz? ¿Qué cree usted que revela esto acerca del carácter de Booz y de cómo trata a sus siervos?</p>
+<p>Una vez que oye quién es ella, la conoce por su reputación. Su excelencia es conocida en todo el pueblo.</p>
+<p>Booz la trata como a su hija, ofreciéndole su protección. También confía claramente en que sus siervos no le harán daño.</p>
+<p>Booz conoce los sacrificios que ella hizo al dejar su hogar y sus dioses para seguir a Noemí y al único Dios verdadero, en una tierra donde no conoce a nadie y no es respetada.</p>
+<p>Booz conoce su Escritura, como lo demuestra su conversación con Rut, al permitirle espigar y al cuidarla como Dios lo haría: Deuteronomio 10:17-19. Él sabe que Dios la bendecirá por todos sus sacrificios para estar con Noemí y cuidarla. También sabe que Dios cuida de sus amados como un águila cuida de sus polluelos: Deuteronomio 32:11-12.</p>
+<p>Booz ora para que Dios la bendiga por su amor leal y su bondad hacia Noemí (versículo 12). Booz usa un descriptor femenino de Dios, el mismo que se usa de la protección de Dios sobre los israelitas: sus alas protectoras, bajo las cuales ella busca refugio. En esencia, la está acogiendo dentro del pueblo de Israel. Un marcado contraste con Elimelec. Booz reconoce la protección de Dios; Elimelec huyó a la primera señal de problemas.</p>
+<p>Cuando la alimenta en la cena, ella guarda una parte para Noemí.</p>
+<p>Booz le permite espigar entre las gavillas e incluso instruye a sus hombres a que dejen caer algo para ella. Lo hace en secreto, sin que ella lo sepa, para no avergonzarla.</p>
+<p>Ella trabaja hasta el anochecer, desgranando lo que ha espigado.</p>
+<p>Cuando vuelve a casa, es tanto que Noemí lo nota. Un efa equivale a 12 fanegas, o aproximadamente 30 libras (unos 13 kg), suficiente para alimentarlas durante 5 días.</p>
+<p>Noemí se entera de que Rut ha espigado en el campo de un pariente suyo. También bendice a Booz por su bondad y, al llamarlo pariente cercano, está invocando el nombre de pariente redentor.</p>
+<p>“No ha rehusado mostrar su bondad a los vivos y a los muertos.” El semblante de la señora Mara se ha vuelto de nuevo agradable y gozoso. Ella reconoce la mano de Dios, su amor del pacto, obrando en sus vidas.</p>
+<p>“No sea que otros caigan sobre ti” es un recordatorio de que estos son tiempos peligrosos.</p>
+<p>Rut espiga durante las cosechas de la cebada y del trigo: un período de 4 meses, de marzo a junio.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Interpretaciones</strong></p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Capítulo 2</strong></p>
+<p>1. Rut cumple su voto y el mandato de Dios de cuidar de la viuda cuando ella misma lo es. Sale a trabajar en el campo por Noemí y por sí misma.</p>
+<p>2. Aunque tal vez no lo notemos de inmediato, Dios está obrando. Rut llega y espiga en el campo de Booz, y resulta que Booz está allí cuando ella está.</p>
+<p>3. La fe de Booz en Dios se manifiesta en su cuidado por sus trabajadores y por Rut. Va mucho más allá de lo requerido como dueño del campo y de las cosechas.</p>
+<p>4. En lugar de tratarla como a una extranjera, tanto los trabajadores como Booz la tratan con suma bondad.</p>
+<p>5. Al permitir que Rut siga espigando, pero también al ayudarla a espigar más de lo normal, Booz le permite conservar su dignidad. Dios es igual de tierno con nosotros, permitiéndonos unirnos a Él en su obra, aunque la graciosa providencia de Dios sobre nosotros, en última instancia, gobierna y prevalece. Me gusta cómo lo expresa Tom Constable en sus notas: “Al permitirle trabajar, Booz preservó la dignidad y la reputación de Rut; al proveer generosamente para ella, aligeró sus tareas.” ¿No es eso tan propio de Dios y de cómo nos trata y nos cuida? Mateo 11:28-30 dice: “Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar. Llevad mi yugo sobre vosotros, y aprended de mí, que soy manso y humilde de corazón; y hallaréis descanso para vuestras almas. Porque mi yugo es fácil, y ligera mi carga.”</p>
+<p>5. Booz reconoce la mano de Dios sobre ella y se une a Él en su obra en la vida de esta mujer. En efecto, la abundante gracia de Booz nos recuerda la gracia de Dios hacia nosotros.</p>
+<p>6. Rut lleva a casa una porción de su alimento para compartirla con la viuda Noemí. Me encanta lo que esto dice de su carácter. Está honrando su promesa a Noemí. Me recuerda mucho a las familias que veo aquí, que llevan a los ancianos a su hogar y los atienden con tan amoroso cuidado. La familia lo es todo para ellos.</p>
+<p>7. Booz no dice ni hace nada delante de Rut que pudiera hacerla sentir vergüenza. Sus instrucciones son en secreto. A Dios le agrada cuando las buenas obras se hacen en secreto: Mateo 6:1-4.</p>
+<p>8. 1 Timoteo 5:18 dice: “Digno es el obrero de su salario.” ¿Qué dice esto acerca de Rut, capítulo 2:12? Rut trabaja de sol a sol, tomando descansos solo para reposar, beber y comer.</p>
+<p>9. Es bueno equiparnos con el conocimiento de la Escritura, como hizo Rut cuando supo que era su derecho espigar en los campos según la ley judía.</p>
+<p>10. Nuestra conducta siempre debe ser respetable y amable si estamos viviendo nuestra fe y confiando en el amor de Dios por nosotros.</p>
+<p>11. A diferencia de Elimelec, Booz confía en Dios para la provisión. En un tiempo en que apenas salían de la hambruna, pudo haber acaparado su grano. En cambio, da incluso más de lo requerido.</p>
+<p>12. Noemí se apresura a dar a Dios el crédito por convertir su tristeza en alegría, por proveer para ellas de muchas maneras.</p>
+<p>13. Cada oración y cada deseo expresado en oración en el libro es por las bendiciones de Dios sobre las personas, y Dios respondió cada uno de ellos.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Aplicaciones del Capítulo 2:</strong></p>
+<p>1. ¿Trato a los demás de tal manera que dé gloria a Dios y recuerde a otros su amor? ¿Soy respetuosa y amable? ¿Hago buenas obras en secreto para no llamar la atención sobre mí misma?</p>
+<p>2. ¿Doy más de lo requerido?</p>
+<p>3. Conocer mejor mi Escritura.</p>
+<p>4. Confiar en Dios en lugar de acaparar mis bienes y mi riqueza. No afanarme, sino confiar en Dios. Dios nos da las fuerzas que necesitamos para cada día. El mañana le pertenece a Él. Filipenses 4:6: “Por nada estéis afanosos; antes bien, sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias. Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.” La fe en el Señor debe ser activa y evidente en mi vida.</p>
+<p>5. Nunca jamás apagar la obra del Espíritu Santo en otro ser humano. Tratar a los extranjeros y a los enemigos con bondad, o amor del pacto, como Dios lo haría. Pedir la bendición de Dios sobre ellos.</p>
+<p>7. Trabajar duro en hacer las obras de Dios y confiar en Él para el salario.</p>
+<p>8. ¿Dónde está Dios obrando cerca de mí, y cómo puedo unirme a Él en esa obra?</p>
+<p>9. La manera en que trato a los demás se transmite a aquellos con quienes tengo contacto. Si quiero que la gente trate a otros con bondad, debo ser un ejemplo de esa bondad. En este mundo actual, donde el odio se desborda por todo el internet, necesito ser la voz de la bondad, la gracia, el perdón, el amor y la generosidad.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Observaciones del Capítulo 3</strong></p>
+<p>El pasaje comienza con Noemí buscando seguridad para Rut y termina esperando esa seguridad.</p>
+<p>Estar establecida y segura en el hogar de un esposo. Ella quiere asegurarse de que Rut quede provista. Todavía desea para Rut ese reposo que pidió a Dios para ella al principio, en el capítulo 1.</p>
+<p>Era costumbre que los padres hebreos arreglaran los matrimonios de sus hijos.</p>
+<p>Da instrucciones específicas para que Rut las siga. Todas son simbólicas de la expresión del deseo de Rut de un pariente redentor.</p>
+<p>“Ponte tu mejor ropa” se refiere a un manto o capa exterior. Esto ayuda a proteger su identidad.</p>
+<p>“Descubre sus pies” es una traducción literal y exacta, y simbólica, como veremos más adelante.</p>
+<p>La trilla y el aventado de la cosecha eran un gran tiempo de celebración, especialmente después de una hambruna tan larga. La era de trillar habría sido una compartida por todo el pueblo.</p>
+<p>Rut obedece a Noemí.</p>
+<p>Si Noemí estuviera tratando de asegurar para sí y para Rut los beneficios del pariente redentor, no la habría animado a prostituirse, trayendo así más vergüenza sobre ella y su familia. Además, Rut es una mujer honorable, y Booz es igualmente honorable.</p>
+<p>El pasaje dice que Booz estaba de buen ánimo. Muchos comentaristas, y personas que no consideran la cultura, suponen que esto significa que Booz estaba ebrio. Pero considere esto: ¿querría alguien que necesitaba proteger su grano de los ladrones durante toda la noche estar desmayado por la borrachera? Además, las palabras “buen ánimo” simplemente significan gozoso, feliz, contento, todos sentimientos que tendrían sentido después de un período de hambruna.</p>
+<p>Ella descubre sus pies. Este es un gesto simbólico. Por favor, lea Josué 1:3 y 3:13. Pisar sobre algo significa tomar posesión de ello. Vea también Rut 4:7 para un contexto más inmediato. Su descubrir de los pies de él era pedirle que fuera su pariente redentor, que recuperara las tierras pertenecientes a su familia para poseerlas, y que la tomara por esposa.</p>
+<p>“Criada” significa literalmente sierva. Sujeción.</p>
+<p>Ezequiel 16:8: “Extiende el borde de tu manto sobre mí, pues eres pariente redentor de nuestra familia.” Específico del pariente redentor. Recuerde que fue Booz quien la elogió por buscar refugio bajo las alas de Dios. Al pedirle que extienda el borde de su manto sobre ella, le está pidiendo que la cubra con sus alas. “Borde” significa alas. Le está pidiendo su protección en el papel de pariente redentor. Booz la había elogiado por buscar refugio bajo las alas de Dios, y ahora Rut le está pidiendo a Booz que sea la respuesta a ese elogio. No puedo evitar pensar que ella sonreía en ese momento.</p>
+<p>Versículo 10: “bondad” es, una vez más, amor leal o amor del pacto. Su última bondad es mejor que la primera. Esta última bondad muestra que se está volviendo hacia él, que es mucho mayor, para que sea pariente redentor para ella y para Noemí, en lugar de ir tras hombres más jóvenes.</p>
+<p>“Hija” enfatiza la diferencia de edad entre ellos.</p>
+<p>“Toda la gente de la ciudad sabe que eres una mujer virtuosa.” La misma descripción que se usa de Booz. Se les presenta muy semejantes en su excelencia y perfectos el uno para el otro.</p>
+<p>Él protege la identidad de ella, probablemente para mantener a raya a los chismosos, pero también para proteger su reputación, de modo que el otro posible pariente no tenga excusa para no redimirla.</p>
+<p>El hecho de que Booz supiera de otro pariente muestra que ya había investigado a favor de ella.</p>
+<p>Su pago a ella no es por prostituirse, sino una señal de un juramento a Noemí de que él resolverá el asunto del pariente redentor.</p>
+<p>Noemí entendió esa señal por completo, pues dice y cree de todo corazón que Booz no se detendrá hasta haber cumplido este deber antes del fin del día.</p>
+<p>Requisitos para ser un pariente redentor:</p>
+<ul><li>Near kinsman</li><li>Willing to be</li><li>Able to be</li><li>Free himself</li><li>Able to pay the price</li></ul>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Interpretaciones del Capítulo 3:</strong></p>
+<p>Al buscar un redentor para Rut, Noemí busca pagarle a Rut con la misma bondad que Rut le ha mostrado.</p>
+<p>Ella permanece atenta a la guía de Dios, y la ley del pariente redentor estaría perfectamente dentro de la voluntad de Dios.</p>
+<p>Rut confía completamente en Noemí y hace lo que ella le indica.</p>
+<p>Noemí, Rut y Booz se comportan todos con honor, cuando en tantos puntos distintos de este pasaje podrían haber elegido el camino menos honorable. Booz pudo haberse aprovechado de Rut al amparo de la oscuridad. Rut pudo haberse prostituido, tal como hizo Tamar. Todos hicieron lo que era conforme a la ley respecto al pariente redentor. Todos actuaron de manera irreprochable.</p>
+<p>Booz pudo haberse embriagado con vino en un tiempo de gran celebración, y sin embargo permaneció sobrio.</p>
+<p>Bondad, amor del pacto: Dios nos lo extiende, y quiere que lo extendamos a otros, mediante el sacrificio propio, mediante la búsqueda del bien del prójimo por encima del nuestro. “Nos conocerán como cristianos por nuestro amor los unos por los otros.”</p>
+<p>En un tiempo de los Jueces, cuando todos buscan su propio provecho, cuando la anarquía, el asesinato, el egoísmo y la violación son cosa común, aquellos que permanecen bondadosos, que se mantienen atentos a Dios y confían en Él, hallarán refugio bajo sus alas. No hay necesidad de tomar las cosas en nuestras propias manos, sino de actuar conforme a la Escritura.</p>
+<p>¿Los requisitos del pariente redentor suenan familiares? Solo Jesús podía cumplir estos requisitos para redimirnos.</p>
+<p style="margin-top:18px"><strong style="color:#7B2E2E">Aplicación del Capítulo 3</strong></p>
+<p>1. ¿Soy culpable de buscar a menudo mi propio provecho y de tomar el control de las cosas, en lugar de confiar en Dios para su provisión?</p>
+<p>2. Ayúdanos a tratar a los demás con bondad y sacrificio propio.</p>
+<p>3. Vivimos en tiempos de ansiedad; ¿estamos esperando activamente en Dios y reclamando su paz incomprensible, que es nuestra para tomarla? Filipenses 4:6-7: “Por nada estéis afanosos; antes bien, sean conocidas vuestras peticiones delante de Dios en toda oración y ruego. Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.”</p>
+<p>4. Confiar en que Dios nos tiene bajo sus alas, y que ese es el lugar más seguro donde estar.</p>
+<p>5. ¿Vivo en todo momento una vida que es irreprochable?</p>
+<p>6. Booz ya había investigado respecto a un pariente más cercano. ¿Estoy en oración y bien estudiada cuando me preparo para una tarea a la que Dios me ha llamado?</p></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="en">Part I &middot; Multiple Choice</span><span class="es">Parte I &middot; Opci&oacute;n M&uacute;ltiple</span> <span class="note">(20 &middot; 90%)</span></h2>
+    <div id="mc"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="en">Part II &middot; Short Answer</span><span class="es">Parte II &middot; Respuesta Breve</span> <span class="note">(10 &middot; 3/8)</span></h2>
+    <p class="practice-tag" id="saMode"></p>
+    <div id="sa"></div>
+  </div>
+
+  <div class="card">
+    <button onclick="grade()"><span class="en">Submit Unit 3</span><span class="es">Enviar Unidad 3</span></button>
+    <div id="result"></div>
+  </div>
+
+  <div class="navrow">
+    <span class="note">CTSRE &middot; <span class="en">Unit 3</span><span class="es">Unidad 3</span></span>
+    <button id="nextBtn" class="secondary" disabled onclick="goNext()"><span class="en">Continue &rarr;</span><span class="es">Continuar &rarr;</span></button>
+  </div>
+</div>
+<script>
+var _ctsMem={};
+function lsGet(k){ try{var v=localStorage.getItem(k);return v===null?(_ctsMem[k]!==undefined?_ctsMem[k]:null):v;}catch(e){return _ctsMem[k]!==undefined?_ctsMem[k]:null;} }
+function lsSet(k,v){ try{localStorage.setItem(k,v);}catch(e){} _ctsMem[k]=v; }
+function lsDel(k){ try{localStorage.removeItem(k);}catch(e){} delete _ctsMem[k]; }
+
+var UNIT=3, NEXT_URL="CTSREUnit4.html", MC=[{"stemEn": "'A man of great standing' (Boaz) describes a man of:", "stemEs": "'Un hombre de gran posición' (Booz) describe a un hombre de:", "optionsEn": ["mere wealth", "excellence, valor, and good reputation", "royal blood", "old age"], "optionsEs": ["mera riqueza", "excelencia, valor y buena reputación", "sangre real", "vejez"], "answer": "B", "whyEn": "It means worth and valor, not only money.", "whyEs": "Significa valor y excelencia, no solo dinero."}, {"stemEn": "The name 'Boaz' means:", "stemEs": "El nombre 'Booz' significa:", "optionsEn": ["strength and swiftness", "house of bread", "my God is King", "worshiper"], "optionsEs": ["fuerza y rapidez", "casa de pan", "mi Dios es Rey", "adorador"], "answer": "A", "whyEn": "Boaz = strength and swiftness.", "whyEs": "Booz = fuerza y rapidez."}, {"stemEn": "Ruth asks to glean because Jewish law:", "stemEs": "Rut pide espigar porque la ley judía:", "optionsEn": ["requires foreigners to work", "forbids begging", "grants gleaning rights to widows, orphans, and the poor", "taxes the harvest"], "optionsEs": ["obliga a extranjeros a trabajar", "prohíbe mendigar", "da derecho de espigar a viudas, huérfanos y pobres", "grava la cosecha"], "answer": "C", "whyEn": "Gleaning law protected and provided for the poor.", "whyEs": "La ley de espigar proveía para los pobres."}, {"stemEn": "'As it turned out, she came to Boaz's field' in Hebrew suggests:", "stemEs": "'Aconteció que llegó al campo de Booz' en hebreo sugiere:", "optionsEn": ["careful planning", "Naomi's command", "Boaz's invitation", "happening by chance — highlighting God's providence"], "optionsEs": ["un plan cuidadoso", "orden de Noemí", "invitación de Booz", "suceder por casualidad — resaltando la providencia de Dios"], "answer": "D", "whyEn": "The 'chance' wording underlines God's hidden providence.", "whyEs": "El 'azar' resalta la providencia oculta de Dios."}, {"stemEn": "Boaz's greeting to his workers ('The LORD be with you') reveals his:", "stemEs": "El saludo de Booz a sus obreros ('El SEÑOR sea con vosotros') revela su:", "optionsEn": ["fear of Ruth", "wealth", "dedication to God", "political power"], "optionsEs": ["temor de Rut", "riqueza", "dedicación a Dios", "poder político"], "answer": "C", "whyEn": "His greeting shows genuine devotion to God.", "whyEs": "Su saludo muestra devoción genuina a Dios."}, {"stemEn": "Boaz prays God will reward Ruth, picturing God's protection as:", "stemEs": "Booz ora que Dios recompense a Rut, describiendo la protección de Dios como:", "optionsEn": ["wings under which she takes refuge", "a fortress wall", "a royal throne", "a flaming sword"], "optionsEs": ["alas bajo las cuales ella se refugia", "un muro de fortaleza", "un trono real", "una espada de fuego"], "answer": "A", "whyEn": "He uses the image of refuge under God's wings.", "whyEs": "Usa la imagen del refugio bajo las alas de Dios."}, {"stemEn": "How does Boaz let Ruth glean more without shaming her?", "stemEs": "¿Cómo deja Booz que Rut espigue más sin avergonzarla?", "optionsEn": ["he pays her wages", "he secretly tells his men to let grain fall for her", "he announces it publicly", "he sends Naomi"], "optionsEs": ["le paga un salario", "en secreto manda a sus hombres dejar caer grano para ella", "lo anuncia públicamente", "envía a Noemí"], "answer": "B", "whyEn": "He provides in secret, preserving her dignity.", "whyEs": "Provee en secreto, preservando su dignidad."}, {"stemEn": "An ephah of barley (~30 lbs) was enough to:", "stemEs": "Un efa de cebada (~13 kg) bastaba para:", "optionsEn": ["last a month", "plant a field", "sell for land", "feed them about five days"], "optionsEs": ["durar un mes", "sembrar un campo", "vender por tierra", "alimentarlas unos cinco días"], "answer": "D", "whyEn": "About 30 lbs fed them roughly five days.", "whyEs": "Unos 13 kg las alimentaban unos cinco días."}, {"stemEn": "Naomi blesses Boaz and calls him a 'close relative,' invoking:", "stemEs": "Noemí bendice a Booz y lo llama 'pariente cercano,' invocando:", "optionsEn": ["a marriage broker", "the Levite priesthood", "the role of kinsman-redeemer", "a judge"], "optionsEs": ["un casamentero", "el sacerdocio levita", "el papel de pariente redentor", "un juez"], "answer": "C", "whyEn": "Calling him close relative invokes the redeemer role.", "whyEs": "Llamarlo pariente cercano invoca al redentor."}, {"stemEn": "Tom Constable's note that Boaz 'preserved Ruth's dignity' illustrates:", "stemEs": "La nota de Tom Constable de que Booz 'preservó la dignidad de Rut' ilustra:", "optionsEn": ["how God lets us work yet provides generously", "strict legalism", "Boaz's pride", "Ruth's wealth"], "optionsEs": ["cómo Dios nos deja trabajar y a la vez provee con generosidad", "legalismo estricto", "el orgullo de Booz", "la riqueza de Rut"], "answer": "A", "whyEn": "Like God: lets us labor while graciously providing.", "whyEs": "Como Dios: nos deja laborar mientras provee con gracia."}, {"stemEn": "In chapter 3, Naomi seeks for Ruth:", "stemEs": "En el capítulo 3, Noemí busca para Rut:", "optionsEn": ["wealth in Moab", "a place to glean", "a journey abroad", "security and rest in a husband's home"], "optionsEs": ["riqueza en Moab", "un lugar para espigar", "un viaje al extranjero", "seguridad y reposo en el hogar de un esposo"], "answer": "D", "whyEn": "Naomi seeks Ruth's secure rest in marriage.", "whyEs": "Noemí busca el reposo seguro de Rut en matrimonio."}, {"stemEn": "Uncovering Boaz's feet at the threshing floor was:", "stemEs": "Descubrir los pies de Booz en la era era:", "optionsEn": ["a sexual advance", "a symbolic request for him to be kinsman-redeemer", "a farming task", "an accusation"], "optionsEs": ["un avance sexual", "una petición simbólica de que sea pariente redentor", "una tarea agrícola", "una acusación"], "answer": "B", "whyEn": "It symbolically asked him to redeem and cover her.", "whyEs": "Pedía simbólicamente que la redimiera y cubriera."}, {"stemEn": "'Boaz was in good spirits' most accurately means he was:", "stemEs": "'Booz estaba de buen ánimo' significa con más exactitud que estaba:", "optionsEn": ["asleep", "intoxicated", "joyful and glad, not drunk", "angry"], "optionsEs": ["dormido", "ebrio", "gozoso y alegre, no ebrio", "enojado"], "answer": "C", "whyEn": "Joyful after harvest — he stayed sober to guard grain.", "whyEs": "Gozoso tras la cosecha — sobrio para cuidar el grano."}, {"stemEn": "Ruth asking Boaz to 'spread his garment/wings over' her (cf. Ezek. 16:8) means:", "stemEs": "Que Rut pida a Booz 'extender su manto/alas sobre' ella (cf. Ez. 16:8) significa:", "optionsEn": ["asking for money", "asking for his protection as kinsman-redeemer", "asking to flee", "asking to glean"], "optionsEs": ["pedir dinero", "pedir su protección como pariente redentor", "pedir huir", "pedir espigar"], "answer": "B", "whyEn": "It is a request for redeeming protection — his 'wings.'", "whyEs": "Es petición de protección redentora — sus 'alas'."}, {"stemEn": "Boaz calls Ruth's latter kindness greater than the first because she:", "stemEs": "Booz llama la última bondad de Rut mayor que la primera porque ella:", "optionsEn": ["worked harder", "brought more grain", "left Naomi", "turned to an older redeemer rather than chasing younger men"], "optionsEs": ["trabajó más", "trajo más grano", "dejó a Noemí", "acudió a un redentor mayor en vez de perseguir a hombres jóvenes"], "answer": "D", "whyEn": "She sought the redeemer's path over young suitors.", "whyEs": "Buscó al redentor en vez de a jóvenes pretendientes."}, {"stemEn": "That Boaz knew of a nearer kinsman shows he:", "stemEs": "Que Booz supiera de un pariente más cercano muestra que:", "optionsEn": ["had already done his research on her behalf", "wished to delay", "distrusted Ruth", "was uncertain"], "optionsEs": ["ya había investigado a favor de ella", "quería demorar", "desconfiaba de Rut", "estaba inseguro"], "answer": "A", "whyEn": "He had prepared and researched beforehand.", "whyEs": "Había investigado y preparado de antemano."}, {"stemEn": "Boaz protects Ruth's identity at the threshing floor in order to:", "stemEs": "Booz protege la identidad de Rut en la era para:", "optionsEn": ["avoid marriage", "hide his wealth", "deceive the elders", "guard her reputation and keep the redemption process clean"], "optionsEs": ["evitar el matrimonio", "ocultar su riqueza", "engañar a los ancianos", "cuidar su reputación y mantener limpio el proceso de redención"], "answer": "D", "whyEn": "He guards her reputation and the legal process.", "whyEs": "Cuida su reputación y el proceso legal."}, {"stemEn": "Naomi, Ruth, and Boaz all act honorably when they could have:", "stemEs": "Noemí, Rut y Booz actúan con honor cuando pudieron:", "optionsEn": ["broken the law", "fled to Moab", "chosen less honorable paths (e.g., taking advantage in the dark)", "robbed the field"], "optionsEs": ["quebrantar la ley", "huir a Moab", "elegir caminos menos honrosos (p. ej., aprovecharse en la oscuridad)", "robar el campo"], "answer": "C", "whyEn": "Each chose integrity over an easier, dishonorable path.", "whyEs": "Cada uno eligió integridad sobre lo deshonroso."}, {"stemEn": "'Beauty for ashes' (Isaiah 61:3) is part of a passage about:", "stemEs": "'Belleza en vez de cenizas' (Isaías 61:3) es parte de un pasaje sobre:", "optionsEn": ["the Messiah (a Servant Song)", "the fall of Moab", "the kings of Israel", "temple rebuilding"], "optionsEs": ["el Mesías (un Canto del Siervo)", "la caída de Moab", "los reyes de Israel", "reconstrucción del templo"], "answer": "A", "whyEn": "It belongs to the Servant/Messiah passage.", "whyEs": "Pertenece al pasaje del Siervo/Mesías."}, {"stemEn": "The requirements for a kinsman-redeemer in chapter 3 include being:", "stemEs": "Los requisitos del pariente redentor en el capítulo 3 incluyen ser:", "optionsEn": ["royal, rich, old, single", "near kin, willing, able, and able to pay the price", "tall, strong, armed", "priestly, foreign, young"], "optionsEs": ["real, rico, viejo, soltero", "pariente cercano, dispuesto, capaz y capaz de pagar el precio", "alto, fuerte, armado", "sacerdotal, extranjero, joven"], "answer": "B", "whyEn": "Near kin, willing, able, free to act, able to pay.", "whyEs": "Pariente cercano, dispuesto, capaz, libre, capaz de pagar."}], SA=[{"promptEn": "How does the chapter present Ruth's 'chance' arrival in Boaz's field?", "promptEs": "¿Cómo presenta el capítulo la llegada 'casual' de Rut al campo de Booz?", "modelEn": "The Hebrew reads as happening by chance — Ruth did not know whose field it was — yet Boaz arrives just as she is there. Glenda reads this apparent coincidence as God's quiet providence at work.", "modelEs": "El hebreo se lee como suceder por casualidad — Rut no sabía de quién era el campo — pero Booz llega justo cuando ella está allí. Glenda lee esa aparente coincidencia como la providencia silenciosa de Dios.", "keywords": {"en": ["chance", "field", "boaz", "know", "providence", "coincidence", "arrive", "god"], "es": ["casualidad", "campo", "booz", "sab", "providencia", "coincidencia", "llega", "dios"]}}, {"promptEn": "What does Boaz's treatment of Ruth and his workers reveal about his character and faith?", "promptEs": "¿Qué revela el trato de Booz a Rut y a sus obreros sobre su carácter y fe?", "modelEn": "His greeting 'The LORD be with you' shows devotion to God; he protects Ruth, treats her as a daughter, trusts his servants not to harm her, and provides above what the law required — going far beyond a mere landowner's duty.", "modelEs": "Su saludo 'El SEÑOR sea con vosotros' muestra devoción a Dios; protege a Rut, la trata como hija, confía en que sus siervos no la dañen y provee más de lo que la ley exigía — mucho más que el deber de un dueño.", "keywords": {"en": ["lord", "devotion", "protect", "daughter", "provide", "beyond", "servant", "kind"], "es": ["señor", "devoción", "proteg", "hija", "provee", "más", "siervo", "bondad"]}}, {"promptEn": "Explain how Boaz preserved Ruth's dignity, and how it pictures God's grace.", "promptEs": "Explique cómo Booz preservó la dignidad de Rut, y cómo refleja la gracia de Dios.", "modelEn": "By letting Ruth work while secretly having grain dropped for her, Boaz let her keep her dignity yet lightened her labor. As Constable notes, this pictures how God lets us join His work while His gracious providence provides and ultimately wins out.", "modelEs": "Al dejar trabajar a Rut mientras en secreto dejaba caer grano para ella, Booz preservó su dignidad y a la vez alivió su labor. Como nota Constable, esto refleja cómo Dios nos deja unirnos a su obra mientras su providencia provee y al fin prevalece.", "keywords": {"en": ["dignity", "work", "secret", "grain", "grace", "providence", "provide", "join"], "es": ["dignidad", "trabaj", "secreto", "grano", "gracia", "providencia", "provee", "unir"]}}, {"promptEn": "What is the meaning of Ruth uncovering Boaz's feet, and why is the common 'sexual' reading wrong?", "promptEs": "¿Qué significa que Rut descubra los pies de Booz, y por qué es errónea la lectura 'sexual' común?", "modelEn": "It is a symbolic, legal gesture asking Boaz to be kinsman-redeemer — to take possession and cover her with his protection (cf. Ezekiel 16:8, the garment/wings). Both are honorable; reading it as a sexual encounter imposes our culture on the text.", "modelEs": "Es un gesto simbólico y legal que pide a Booz ser pariente redentor — tomar posesión y cubrirla con su protección (cf. Ezequiel 16:8, el manto/alas). Ambos son honorables; leerlo como encuentro sexual impone nuestra cultura al texto.", "keywords": {"en": ["symbol", "redeemer", "protect", "garment", "wings", "honorable", "culture", "possess"], "es": ["símbolo", "redentor", "proteg", "manto", "alas", "honorable", "cultura", "posesión"]}}, {"promptEn": "Why is 'good spirits' a poor basis for claiming Boaz was drunk?", "promptEs": "¿Por qué es débil basar en 'buen ánimo' que Booz estaba ebrio?", "modelEn": "The phrase simply means joyful and glad, fitting after a long famine ended. A man guarding his grain from thieves through the night would not be passed-out drunk; Boaz remained sober and honorable.", "modelEs": "La frase solo significa gozoso y alegre, propio tras acabar un largo hambre. Un hombre que cuida su grano de ladrones toda la noche no estaría ebrio inconsciente; Booz permaneció sobrio y honorable.", "keywords": {"en": ["joyful", "glad", "famine", "guard", "grain", "sober", "drunk", "honorable"], "es": ["gozoso", "alegre", "hambre", "cuida", "grano", "sobrio", "ebrio", "honorable"]}}, {"promptEn": "How is the kinsman-redeemer a picture of Christ?", "promptEs": "¿Cómo es el pariente redentor una figura de Cristo?", "modelEn": "The requirements — near kin, willing, able, free, and able to pay the price — are met fully only by Jesus, who became kin, was willing and able, and paid the price to redeem us. Boaz foreshadows Christ our Redeemer.", "modelEs": "Los requisitos — pariente cercano, dispuesto, capaz, libre y capaz de pagar el precio — solo los cumple plenamente Jesús, que se hizo pariente, estuvo dispuesto y capaz, y pagó el precio para redimirnos. Booz prefigura a Cristo, nuestro Redentor.", "keywords": {"en": ["kin", "willing", "able", "price", "christ", "redeem", "boaz", "jesus"], "es": ["pariente", "dispuesto", "capaz", "precio", "cristo", "redim", "booz", "jesús"]}}, {"promptEn": "What does Boaz having 'done his research' on the nearer kinsman teach about serving God?", "promptEs": "¿Qué enseña sobre servir a Dios que Booz 'hubiera investigado' al pariente más cercano?", "modelEn": "Boaz had already looked into the nearer relative before acting, showing diligence and preparation. Glenda applies it: be prayed-up and studied-up, doing our homework when God calls us to a task rather than presuming.", "modelEs": "Booz ya había indagado sobre el pariente más cercano antes de actuar, mostrando diligencia y preparación. Glenda lo aplica: estar en oración y estudio, haciendo la tarea cuando Dios nos llama en vez de presumir.", "keywords": {"en": ["research", "nearer", "prepar", "diligen", "pray", "study", "homework", "call"], "es": ["investig", "cercano", "prepar", "diligen", "orar", "estudi", "tarea", "llama"]}}, {"promptEn": "How does the honorable conduct of Naomi, Ruth, and Boaz contrast with the era of the judges?", "promptEs": "¿Cómo contrasta la conducta honorable de Noemí, Rut y Booz con la era de los jueces?", "modelEn": "In a time of anarchy, selfishness, murder, and rape, all three repeatedly chose the honorable path — Boaz not taking advantage in the dark, Ruth not prostituting herself, all acting within God's law and above reproach.", "modelEs": "En un tiempo de anarquía, egoísmo, asesinato y violación, los tres eligieron una y otra vez el camino honorable — Booz sin aprovecharse en la oscuridad, Rut sin prostituirse, todos actuando dentro de la ley de Dios e irreprensibles.", "keywords": {"en": ["anarchy", "honorable", "law", "reproach", "advantage", "selfish", "integrity", "judges"], "es": ["anarquía", "honorable", "ley", "reproche", "aprovech", "egoísta", "integridad", "jueces"]}}, {"promptEn": "Apply 'active waiting' and Philippians 4:6-7 to Naomi's and Ruth's situation.", "promptEs": "Aplique la 'espera activa' y Filipenses 4:6-7 a la situación de Noemí y Rut.", "modelEn": "Rather than seizing control, they stay attentive to God and act within His law, trusting Him. In anxious times we can actively wait, pray, and claim the peace of God that surpasses comprehension, which guards our hearts in Christ.", "modelEs": "En vez de tomar el control, permanecen atentas a Dios y actúan dentro de su ley, confiando en Él. En tiempos de ansiedad podemos esperar activamente, orar y reclamar la paz de Dios que sobrepasa el entendimiento, que guarda el corazón en Cristo.", "keywords": {"en": ["wait", "trust", "pray", "peace", "anxious", "control", "guard", "heart"], "es": ["esperar", "confiar", "orar", "paz", "ansiedad", "control", "guarda", "corazón"]}}, {"promptEn": "What application does Glenda draw about treating foreigners and enemies?", "promptEs": "¿Qué aplicación saca Glenda sobre tratar a extranjeros y enemigos?", "modelEn": "As Boaz treated the Moabite Ruth with covenant kindness, we should treat foreigners and even enemies with kindness and loyal love as God would, praying His blessing on them and never quenching the Spirit's work in another person.", "modelEs": "Como Booz trató a la moabita Rut con bondad de pacto, debemos tratar a extranjeros y aun a enemigos con bondad y amor leal como Dios lo haría, orando su bendición sobre ellos y sin apagar nunca la obra del Espíritu en otra persona.", "keywords": {"en": ["foreign", "enemy", "kind", "love", "bless", "pray", "spirit", "covenant"], "es": ["extranjero", "enemigo", "bondad", "amor", "bendición", "orar", "espíritu", "pacto"]}}];
+
+function getTrack(){ return lsGet('cts_track')||'cert'; }
+function isMastersLevel(){ var t=getTrack(); return t==='mdiv'||t==='thm'||t==='mth'; }
+function lockMinutes(){ return isMastersLevel()?15:2; }
+
+function setLang(l){
+  document.body.setAttribute('data-lang',l); lsSet('cts_lang',l);
+  document.getElementById('btnEn').classList.toggle('active',l==='en');
+  document.getElementById('btnEs').classList.toggle('active',l==='es');
+}
+function saveReg(){
+  var nm=document.getElementById('regName').value.trim();
+  if(!nm) return;
+  lsSet('cts_student',nm);
+  document.getElementById('regOk').textContent=(document.body.getAttribute('data-lang')==='es'?'  Guardado: ':'  Saved: ')+nm;
+  renderGreet();
+}
+function renderGreet(){
+  var nm=lsGet('cts_student'); var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('greet').textContent = nm ? (es?('Estudiante: '+nm):('Student: '+nm)) : '';
+}
+function setTrack(){ lsSet('cts_track',document.getElementById('track').value); renderTrackNote(); renderSAmode(); }
+function renderTrackNote(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('trackNote').textContent = isMastersLevel()
+    ? (es?'Programa de maestría: la sección de respuesta breve CUENTA para aprobar.':'Masters track: the short-answer section COUNTS toward passing.')
+    : (es?'Certificado: la respuesta breve es práctica y no decide su aprobación.':'Certificate: short answer is practice and does not gate your pass.');
+}
+function renderSAmode(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  document.getElementById('saMode').textContent = isMastersLevel()
+    ? (es?'Cuenta para su calificación (maestría).':'Counts toward your grade (masters).')
+    : (es?'Práctica: estudíela, pero no afecta su aprobación (certificado).':'Practice: study it, but it does not affect your pass (certificate).');
+}
+function kwHit(kw,text){
+  kw=kw.toLowerCase().trim(); text=(text||'').toLowerCase();
+  var e=kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var re=(kw.length<=3)?new RegExp('\\b'+e+'\\b'):new RegExp('\\b'+e);
+  return re.test(text);
+}
+function saHits(kws,ans){ var h=0; for(var i=0;i<kws.length;i++){ if(kwHit(kws[i],ans))h++; } return h; }
+
+function renderMC(){
+  var c=document.getElementById('mc'); c.innerHTML='';
+  MC.forEach(function(q,qi){
+    var d=document.createElement('div'); d.className='q';
+    var stem=document.createElement('div'); stem.className='stem';
+    stem.innerHTML='<span class="en">'+(qi+1)+'. '+q.stemEn+'</span><span class="es">'+(qi+1)+'. '+q.stemEs+'</span>';
+    d.appendChild(stem);
+    ['A','B','C','D'].forEach(function(L,oi){
+      var o=document.createElement('div'); o.className='opt'; o.id='mc'+qi+L;
+      o.innerHTML='<span class="en">'+L+'. '+q.optionsEn[oi]+'</span><span class="es">'+L+'. '+q.optionsEs[oi]+'</span>';
+      o.addEventListener('click',function(){ pickMC(qi,L); });
+      d.appendChild(o);
+    });
+    var bw=document.createElement('div'); bw.style.marginTop='8px';
+    var b=document.createElement('button'); b.className='secondary';
+    b.innerHTML='<span class="en">Check</span><span class="es">Revisar</span>';
+    b.addEventListener('click',function(){ checkMC(qi); });
+    bw.appendChild(b); d.appendChild(bw);
+    var fb=document.createElement('div'); fb.className='fb'; fb.id='mcfb'+qi; d.appendChild(fb);
+    c.appendChild(d);
+  });
+}
+var mcPick={};
+function pickMC(qi,L){ mcPick[qi]=L; ['A','B','C','D'].forEach(function(X){document.getElementById('mc'+qi+X).classList.remove('sel');}); document.getElementById('mc'+qi+L).classList.add('sel'); }
+function markMC(qi){
+  var q=MC[qi], pick=mcPick[qi];
+  ['A','B','C','D'].forEach(function(X){document.getElementById('mc'+qi+X).classList.remove('correct','wrong');});
+  if(pick===q.answer){ document.getElementById('mc'+qi+pick).classList.add('correct'); }
+  else { if(pick) document.getElementById('mc'+qi+pick).classList.add('wrong'); document.getElementById('mc'+qi+q.answer).classList.add('correct'); }
+  var fb=document.getElementById('mcfb'+qi); fb.className='fb '+(pick===q.answer?'ok':'no');
+  fb.innerHTML='<span class="en">'+(pick===q.answer?'Correct. ':'Answer: '+q.answer+'. ')+q.whyEn+'</span><span class="es">'+(pick===q.answer?'Correcto. ':'Respuesta: '+q.answer+'. ')+q.whyEs+'</span>';
+}
+function checkMC(qi){
+  var es=document.body.getAttribute('data-lang')==='es';
+  if(!mcPick[qi]){ var fb=document.getElementById('mcfb'+qi); fb.className='fb no'; fb.textContent=es?'Elija una opción primero.':'Pick an option first.'; return; }
+  markMC(qi);
+}
+
+function renderSA(){
+  var c=document.getElementById('sa'); c.innerHTML='';
+  SA.forEach(function(q,qi){
+    var d=document.createElement('div'); d.className='q';
+    var stem=document.createElement('div'); stem.className='stem';
+    stem.innerHTML='<span class="en">'+(MC.length+qi+1)+'. '+q.promptEn+'</span><span class="es">'+(MC.length+qi+1)+'. '+q.promptEs+'</span>';
+    d.appendChild(stem);
+    var ta=document.createElement('textarea'); ta.id='sa'+qi; ta.placeholder='...'; d.appendChild(ta);
+    var bw=document.createElement('div'); bw.style.marginTop='8px';
+    var b=document.createElement('button'); b.className='secondary';
+    b.innerHTML='<span class="en">Check Answer</span><span class="es">Revisar</span>';
+    b.addEventListener('click',function(){ checkSA(qi); });
+    bw.appendChild(b); d.appendChild(bw);
+    var fb=document.createElement('div'); fb.className='fb'; fb.id='safb'+qi; d.appendChild(fb);
+    var mo=document.createElement('div'); mo.className='model'; mo.id='samodel'+qi;
+    mo.innerHTML='<b><span class="en">Model answer — study this:</span><span class="es">Respuesta modelo &#9873; &mdash; est&uacute;diela:</span></b><br><span class="en">'+q.modelEn+'</span><span class="es">'+q.modelEs+'</span>';
+    d.appendChild(mo);
+    c.appendChild(d);
+  });
+}
+function checkSA(qi){
+  var ans=document.getElementById('sa'+qi).value.trim();
+  var fb=document.getElementById('safb'+qi); var es=document.body.getAttribute('data-lang')==='es';
+  if(!ans){ fb.className='fb no'; fb.textContent=es?'Escriba una respuesta antes de revisar.':'Please write an answer before checking.'; return; }
+  if(ans.length<100){ fb.className='fb no'; fb.textContent=es?'Escriba una respuesta más completa (mínimo 100 caracteres).':'Write a fuller answer (100 characters minimum).'; return; }
+  var q=SA[qi]; var hits=Math.max(saHits(q.keywords.en,ans),saHits(q.keywords.es,ans));
+  if(hits>=3){ fb.className='fb ok'; fb.textContent=(es?'Aprobado — ':'Pass — ')+hits+(es?' de 8 conceptos.':' of 8 key concepts.'); }
+  else { fb.className='fb no'; fb.textContent=(es?'Aún no — ':'Not yet — ')+hits+(es?' de 8 (necesita 3).':' of 8 (need 3).'); }
+  if(hits>=3) document.getElementById('samodel'+qi).classList.add('show');
+}
+
+function isLocked(){
+  var until=parseInt(lsGet('cts_re_u'+UNIT+'_lockout')||'0',10);
+  return until>Date.now()? until : 0;
+}
+function grade(){
+  var es=document.body.getAttribute('data-lang')==='es';
+  var until=isLocked();
+  if(until){ var mins=Math.ceil((until-Date.now())/60000);
+    var r0=document.getElementById('result'); r0.className='result fail';
+    r0.textContent=(es?'Bloqueado. Intente de nuevo en ':'Locked out. Try again in ')+mins+(es?' min.':' min.'); return; }
+  var mcCorrect=0;
+  MC.forEach(function(q,qi){ markMC(qi); if(mcPick[qi]===q.answer) mcCorrect++; });
+  var saPass=0;
+  SA.forEach(function(q,qi){
+    var ans=document.getElementById('sa'+qi).value.trim(); var fb=document.getElementById('safb'+qi);
+    if(!ans){ fb.className='fb no'; fb.textContent=es?'Sin respuesta.':'No answer given.'; }
+    else if(ans.length<100){ fb.className='fb no'; fb.textContent=es?'Respuesta demasiado breve (mínimo 100 caracteres).':'Answer too short (100 characters minimum).'; }
+    else { var hits=Math.max(saHits(q.keywords.en,ans),saHits(q.keywords.es,ans));
+      if(hits>=3){ saPass++; fb.className='fb ok'; fb.textContent=(es?'Aprobado — ':'Pass — ')+hits+'/8.'; }
+      else { fb.className='fb no'; fb.textContent=(es?'Debajo — ':'Below — ')+hits+'/8.'; } }
+    document.getElementById('samodel'+qi).classList.add('show');
+  });
+  var mcPct=Math.round(mcCorrect/MC.length*100), mcOk=mcPct>=90;
+  var masters=isMastersLevel(), saOk=saPass>=9;
+  var pass = masters ? (mcOk&&saOk) : mcOk;
+  var r=document.getElementById('result');
+  if(pass){
+    r.className='result pass';
+    var saLine = masters ? ((es?' Respuesta breve: ':' Short answer: ')+saPass+'/'+SA.length+'.') : (es?' (Respuesta breve: práctica.)':' (Short answer: practice.)');
+    r.innerHTML='<b>'+(es?('Unidad '+UNIT+' aprobada.'):('Unit '+UNIT+' passed.'))+'</b> '+(es?'Opción múltiple: ':'Multiple choice: ')+mcCorrect+'/'+MC.length+' ('+mcPct+'%).'+saLine;
+    lsSet('re_unit'+UNIT+'_passed','1');
+    lsSet('cts_re_progress',String(Math.max(UNIT,parseInt(lsGet('cts_re_progress')||'0',10))));
+    lsDel('cts_re_u'+UNIT+'_lockout');
+    document.getElementById('nextBtn').disabled=false;
+  } else {
+    r.className='result fail';
+    var why=[]; if(!mcOk) why.push((es?'opción múltiple ':'multiple choice ')+mcPct+'% ('+(es?'necesita 90%':'need 90%')+')');
+    if(masters&&!saOk) why.push((es?'respuesta breve ':'short answer ')+saPass+'/'+SA.length);
+    var lk=lockMinutes(); lsSet('cts_re_u'+UNIT+'_lockout',String(Date.now()+lk*60000));
+    r.innerHTML='<b>'+(es?'Aún no aprobada.':'Not yet passed.')+'</b> '+why.join('; ')+'. '+(es?('Espere '+lk+' min y reintente.'):('Wait '+lk+' min and retry.'));
+    document.getElementById('nextBtn').disabled=true;
+  }
+  r.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function goNext(){ if(NEXT_URL) window.location.href=NEXT_URL; }
+
+(function(){
+  setLang(lsGet('cts_lang')||'en');
+  var t=getTrack(); document.getElementById('track').value=t;
+  renderGreet(); renderTrackNote(); renderSAmode(); renderMC(); renderSA();
+  var rn=document.getElementById('regName'); if(rn&&lsGet('cts_student')) rn.value=lsGet('cts_student');
+  if(lsGet('re_unit'+UNIT+'_passed')==='1') document.getElementById('nextBtn').disabled=false;
+})();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSREReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

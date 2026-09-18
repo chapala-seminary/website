@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Doctrine of the Holy Spirit &mdash; Unit 3</title>
+<style>
+:root{
+  --ink:#241c12; --paper:#f7f1e4; --card:#fffdf8; --line:#d8ccb2;
+  --accent:#7a3b1e; --accent2:#9c6b2f; --gold:#fbf3d6; --goldln:#caa94e;
+  --good:#2f6b3a; --bad:#9b2c2c; --muted:#6c6150;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;line-height:1.6;}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+header.site{background:var(--accent);color:#f6ecd8;padding:18px 0;border-bottom:4px solid var(--goldln);}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:0;}
+header.site h1{font-size:1.15rem;margin:0;font-weight:600;letter-spacing:.2px;}
+header.site .sub{font-size:.78rem;opacity:.85;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+.langbtn{font-family:system-ui,sans-serif;font-size:.8rem;background:#f6ecd8;color:var(--accent);
+  border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600;}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 4px;
+  font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);}
+.badge{background:var(--gold);border:1px solid var(--goldln);border-radius:14px;padding:3px 10px;color:#6a531c;}
+.epigraph{font-style:italic;color:var(--accent2);border-left:3px solid var(--goldln);
+  padding:6px 0 6px 14px;margin:16px 0;font-size:.98rem;}
+h2.sec{font-size:1.25rem;color:var(--accent);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin:34px 0 14px;}
+article p{margin:0 0 14px;}
+article b{color:var(--accent);}
+.v{color:#3a4a2c;}
+.illo{background:#fbf6ea;border-left:3px solid var(--goldln);padding:10px 14px;border-radius:4px;}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:14px 0;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);}
+.qn{font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;color:var(--accent2);
+  text-transform:uppercase;letter-spacing:.6px;}
+.qp{margin:6px 0 10px;font-weight:600;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:9px 12px;margin:6px 0;cursor:pointer;font:inherit;color:inherit;}
+.opt:hover{border-color:var(--accent2);}
+.opt .lt{font-weight:700;color:var(--accent2);margin-right:8px;}
+.opt.correct{background:#e9f3e8;border-color:var(--good);}
+.opt.wrong{background:#f6e6e4;border-color:var(--bad);}
+.opt:disabled{cursor:default;opacity:1;}
+.expl{font-size:.9rem;color:var(--muted);margin:8px 2px 0;display:none;}
+.expl.show{display:block;}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:6px;padding:10px;
+  font:inherit;background:#fff;resize:vertical;}
+.btn{font-family:system-ui,sans-serif;font-weight:600;border:none;border-radius:6px;padding:9px 16px;
+  cursor:pointer;font-size:.9rem;}
+.btn.primary{background:var(--accent);color:#f6ecd8;}
+.btn.ghost{background:#efe6d2;color:var(--accent);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.sa-res{margin-top:10px;font-family:system-ui,sans-serif;font-size:.88rem;display:none;}
+.sa-res.show{display:block;}
+.sa-verdict{font-weight:700;}
+.sa-verdict.pass{color:var(--good);} .sa-verdict.soft{color:var(--accent2);}
+.model{background:var(--gold);border:1px solid var(--goldln);border-radius:6px;padding:10px 12px;margin-top:8px;}
+.model .ml{font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:#6a531c;}
+.foot{margin-top:30px;border-top:2px solid var(--line);padding-top:18px;}
+.status{font-family:system-ui,sans-serif;font-size:.9rem;margin:10px 0;}
+.status.ok{color:var(--good);} .status.warn{color:var(--accent2);} .status.lock{color:var(--bad);}
+.modal{position:fixed;inset:0;background:rgba(36,28,18,.62);display:flex;align-items:center;
+  justify-content:center;padding:18px;z-index:50;}
+.modal .box{background:var(--card);border-radius:10px;max-width:420px;width:100%;padding:22px;
+  border-top:5px solid var(--goldln);}
+.modal h3{margin:0 0 6px;color:var(--accent);}
+.modal label{display:block;font-family:system-ui,sans-serif;font-size:.82rem;margin:12px 0 4px;color:var(--muted);}
+.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit;}
+.hide{display:none !important;}
+.next{display:inline-block;margin-top:12px;background:var(--good);color:#fff;text-decoration:none;
+  padding:10px 18px;border-radius:6px;font-family:system-ui,sans-serif;font-weight:600;}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:2px 0 18px;font-family:system-ui,sans-serif;}
+.unitnav .nl{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);margin-right:3px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 7px;border-radius:16px;background:var(--card);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600;line-height:1;}
+.unitnav a:hover{border-color:var(--accent2);color:var(--accent2);}
+.unitnav a.active{background:var(--accent);color:#f6ecd8;border-color:var(--accent);}
+html[lang="es"] .en-lbl{display:none}html[lang="en"] .es-lbl{display:none}
+</style>
+</head>
+<body>
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<header class="site">
+  <div class="wrap">
+    <div><h1 id="t-title">The Doctrine of the Holy Spirit</h1><div class="sub" id="t-unit">Unit 3 &middot; The Deity of the Spirit</div></div>
+    <button class="langbtn" id="langBtn" type="button">Espa&ntilde;ol</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <span id="t-greet"></span>
+    <span class="badge" id="t-track"></span>
+  </div>
+
+    <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+     <span class="nl"><span class="en-lbl">Units</span><span class="es-lbl">Unidades</span></span>
+     <a href="CTSHSUnit1.html">1</a>
+     <a href="CTSHSUnit2.html">2</a>
+     <a href="CTSHSUnit3.html" class="active">3</a>
+     <a href="CTSHSUnit4.html">4</a>
+     <a href="CTSHSUnit5.html">5</a>
+     <a href="CTSHSUnit6.html">6</a>
+     <a href="CTSHSUnit7.html">7</a>
+     <a href="CTSHSUnit8.html">8</a>
+     <a href="CTSHSUnit9.html">9</a>
+     <a href="CTSHSUnit10.html">10</a>
+  </nav>
+
+  <div class="epigraph" id="epigraph"></div>
+
+  <article>
+    <div id="teach-en"><h3 style="color:var(--accent);margin:0 0 4px">The Deity of the Spirit: He Is God</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">The third misunderstanding corrected: the Spirit is not a creature but God — called God, indwelling as God, bearing the attributes and doing the works of God</p>
+<p><b>1. Which Person Is the Spirit?</b></p>
+<p>In the last unit we proved that the Holy Spirit is a Person and not a force. But that settles only half the matter and raises a sharper question: which Person is He? Is He some lesser, created being, an exalted angel perhaps, who stands below God and runs His errands? Or is He Himself God? The Bible leaves no room for doubt. The Spirit is not a creature, however high and holy; He is God, the third Person of the one Godhead, equal with the Father and the Son. He is not a force that flows out from God, and He is not a servant whom God made. He is God. This is the truth that completes the one before it: the Person we met in the last unit is none other than God Himself, come to dwell among His people and within them. The early church had to defend this very point, for some rose up to say that the Spirit was only a creature, the first and highest of God's works but a work all the same. The church searched the Scriptures and confessed otherwise, and rightly so. Let us see how the Scriptures press this home.</p>
+<p><b>2. He Is Called God</b></p>
+<p>The plainest proof is that the Bible simply calls Him God. The book of Acts records the sin of Ananias and Sapphira, who sold a piece of property and pretended to lay the whole price at the apostles' feet while secretly holding part of it back. Peter saw through the lie and asked, <span class="v">"Ananias, why has Satan filled your heart to lie to the Holy Spirit?"</span> (Acts 5:3). Then in the very next breath he said, <span class="v">"You have not lied to men but to God"</span> (Acts 5:4). Read those two sentences together. To lie to the Holy Spirit, Peter says, is to lie to God, for the Holy Spirit is God. The apostle moves from one name to the other without a pause, because in his mind they name the same divine Person. Nor does Paul hesitate to call Him by the other great name, for he writes, <span class="v">"Now the Lord is the Spirit; and where the Spirit of the Lord is, there is liberty"</span> (2 Corinthians 3:17). God and Lord are the highest names there are, and the Spirit wears them both. Here is the deity of the Spirit stated as plainly as words can state it.</p>
+<p><b>3. He Is God Dwelling in You</b></p>
+<p>The same truth meets us from another direction when Paul speaks of the believer as a temple. <span class="v">"Do you not know that you are the temple of God and that the Spirit of God dwells in you?"</span> (1 Corinthians 3:16). A temple is the house of a god, the place where deity is pleased to dwell. And whose temple are we? God's temple, says Paul, and then in the same sentence he tells us who lives there: the Spirit of God. Later he says it again of the body of each believer: <span class="v">"your body is the temple of the Holy Spirit who is in you"</span> (1 Corinthians 6:19). Put the two together and the logic is unanswerable. The temple belongs to God, and the One who dwells in that temple is the Holy Spirit; therefore the Holy Spirit is God. Think of what this means. The God of heaven has not merely sent us a gift or a power. He has come to live in us by His Spirit, making the believer His own dwelling place.</p>
+<p><b>4. He Has the Attributes of God</b></p>
+<p>There are certain things that are true of God and of no one else. No creature is all-knowing, all-powerful, present everywhere at once, or without beginning and end; these belong to God alone. Yet the Bible hands every one of them to the Holy Spirit. He is all-knowing, for Paul writes that <span class="v">"the Spirit searches all things, yes, the deep things of God,"</span> and that no one knows the things of God except the Spirit of God (1 Corinthians 2:10\u201311). He is all-powerful, for the angel told Mary, <span class="v">"The Holy Spirit will come upon you, and the power of the Highest will overshadow you"</span> (Luke 1:35); the mightiest work of all, the conception of the Son of God, was the Spirit's doing. He is everywhere present, as David confessed when he cried, <span class="v">"Where can I go from Your Spirit? Or where can I flee from Your presence?"</span> (Psalm 139:7); whether he climbed to heaven or made his bed in the depths, he found the Spirit already there (Psalm 139:8). And He is eternal, for the Scripture speaks of <span class="v">"the eternal Spirit"</span> through whom Christ offered Himself to God (Hebrews 9:14). What belongs to God alone belongs also to the Spirit; therefore the Spirit is God. No creature could be handed even one of these, much less all four at once.</p>
+<p><b>5. He Does the Works of God</b></p>
+<p>We may reason the same way from His works, for the Spirit does what only God can do. He shares in the work of creation. <span class="v">"The Spirit of God has made me, and the breath of the Almighty gives me life,"</span> said Job (Job 33:4), and the psalmist sang to the Lord, <span class="v">"You send forth Your Spirit, they are created"</span> (Psalm 104:30). He is also the Author of Scripture. Peter tells us that the prophets did not speak on their own, but <span class="v">"holy men of God spoke as they were moved by the Holy Spirit"</span> (2 Peter 1:21), and Paul calls all Scripture God-breathed (2 Timothy 3:16). The breath that breathed out the Word of God is the breath of the Spirit. He even gives resurrection life, for Paul promises that <span class="v">"He who raised Christ from the dead will also give life to your mortal bodies through His Spirit who dwells in you"</span> (Romans 8:11). To raise the dead is the work of God if anything is. To create life, to give the very Word of God, and to raise the dead are not the labors of a creature; they are the works of God, and the Spirit does them.</p>
+<p><b>6. He Is Like the Wind</b></p>
+<p>How shall we picture One so far above us? Jesus Himself reached for a picture from nature. Speaking to Nicodemus by night, He said, <span class="v">"The wind blows where it wishes, and you hear the sound of it, but cannot tell where it comes from and where it goes. So is everyone who is born of the Spirit"</span> (John 3:8). The wind is invisible, yet no one denies that it is real; you feel its force and hear its voice though you never see it. It goes where it pleases and answers to no man. And yet, while no sailor commands the wind, every good sailor has learned to use it. He sets his sails and trims them, he runs before the wind or tacks against it, bowing to a power he cannot control but gladly putting it to work. So it is with the Spirit of God. We do not command Him, and we cannot fully trace His ways, but we bow to His sovereign freedom and we spread our sails to His power.</p>
+<p><b>7. He Is Like Electricity</b></p>
+<p>A more modern picture says nearly the same thing. To this day no one can give a complete account of electricity. We cannot say exactly what it is that runs along the wire, or even whether "runs" is the right word at all. And yet no one stands hesitating in a dark room, refusing to flip the switch until the mystery is solved. We use the power freely though our understanding falls far short of it. In just this way we may lean upon the power of the Holy Spirit without first comprehending Him. We will never reach the bottom of who He is, for He is God, and God is past finding out. But we are not asked to explain Him before we trust Him. We are asked to yield to Him and to walk in His power day by day.</p>
+<p><b>8. One God, and This Person Is God</b></p>
+<p>Let us gather it up. We worship one God, and we will never fully fathom the mystery that this one God is three Persons, the Father, the Son, and the Holy Spirit. But the mystery does not cancel the truth; it crowns it. The Spirit is not a second-rate member of the Godhead, not a power on loan, not an angel of high rank. He is called God, He is worshiped as God dwelling in His temple, He bears the attributes of God, and He does the works of God. And this is the wonder of the gospel for us: the God who is all-knowing, all-powerful, everywhere present, and eternal has come by His Spirit to live inside ordinary people who trust His Son. To have the Spirit is to have God Himself. Let that drive us to worship, for the Guest within us is worthy of all the adoration we give the Father and the Son. Let it steady us, for the God who upholds the universe has pledged His own presence to us and will not fail. And let it teach us never to grieve so great a Guest, but to lean with all our weight upon His power, the very power of God at work within us.</p></div>
+    <div id="teach-es" class="hide"><h3 style="color:var(--accent);margin:0 0 4px">La Deidad del Esp&iacute;ritu: &Eacute;l es Dios</h3>
+<p style="font-style:italic;color:var(--muted);margin:0 0 18px">La tercera mala comprensi&oacute;n corregida: el Esp&iacute;ritu no es una criatura sino Dios, llamado Dios, morando como Dios, con los atributos y las obras de Dios</p>
+
+<p><b>1. &iquest;Cu&aacute;l Persona es el Esp&iacute;ritu?</b></p>
+<p>En la unidad anterior probamos que el Esp&iacute;ritu Santo es una Persona y no una fuerza. Pero eso resuelve solo la mitad del asunto y plantea una pregunta m&aacute;s aguda: &iquest;cu&aacute;l Persona es &Eacute;l? &iquest;Es alg&uacute;n ser menor y creado, un &aacute;ngel exaltado quiz&aacute;, que est&aacute; por debajo de Dios y hace sus mandados? &iquest;O es &Eacute;l mismo Dios? La Biblia no deja lugar a duda. El Esp&iacute;ritu no es una criatura, por m&aacute;s alta y santa que sea; es Dios, la tercera Persona de la &uacute;nica Deidad, igual al Padre y al Hijo. No es una fuerza que mana de Dios, ni es un siervo que Dios hizo. Es Dios. Esta es la verdad que completa la anterior: la Persona que conocimos en la &uacute;ltima unidad no es otro que Dios mismo, venido a morar entre su pueblo y dentro de ellos. La iglesia primitiva tuvo que defender este mismo punto, pues algunos se levantaron a decir que el Esp&iacute;ritu era solo una criatura, la primera y m&aacute;s alta de las obras de Dios, pero una obra al fin. La iglesia escudri&ntilde;&oacute; las Escrituras y confes&oacute; lo contrario, y con raz&oacute;n. Veamos c&oacute;mo las Escrituras lo recalcan.</p>
+<p><b>2. Es llamado Dios</b></p>
+<p>La prueba m&aacute;s sencilla es que la Biblia simplemente lo llama Dios. El libro de los Hechos registra el pecado de Anan&iacute;as y Safira, que vendieron una propiedad y fingieron poner todo el precio a los pies de los ap&oacute;stoles, mientras reten&iacute;an secretamente una parte. Pedro vio la mentira y pregunt&oacute;: <span class="v">&ldquo;Anan&iacute;as, &iquest;por qu&eacute; llen&oacute; Satan&aacute;s tu coraz&oacute;n para que mintieses al Esp&iacute;ritu Santo?&rdquo;</span> (Hechos 5:3). Luego, en el aliento siguiente, dijo: <span class="v">&ldquo;No has mentido a los hombres, sino a Dios&rdquo;</span> (Hechos 5:4). Lea esas dos frases juntas. Mentir al Esp&iacute;ritu Santo, dice Pedro, es mentir a Dios, porque el Esp&iacute;ritu Santo es Dios. El ap&oacute;stol pasa de un nombre al otro sin pausa, porque en su mente nombran a la misma Persona divina. Tampoco vacila Pablo en llamarlo por el otro gran nombre, pues escribe: <span class="v">&ldquo;Y el Se&ntilde;or es el Esp&iacute;ritu; y donde est&aacute; el Esp&iacute;ritu del Se&ntilde;or, all&iacute; hay libertad&rdquo;</span> (2 Corintios 3:17). Dios y Se&ntilde;or son los nombres m&aacute;s altos que hay, y el Esp&iacute;ritu lleva ambos. He aqu&iacute; la deidad del Esp&iacute;ritu declarada tan claramente como las palabras pueden declararlo.</p>
+<p><b>3. Es Dios morando en usted</b></p>
+<p>La misma verdad nos sale al encuentro desde otra direcci&oacute;n cuando Pablo habla del creyente como templo. <span class="v">&ldquo;&iquest;No sab&eacute;is que sois templo de Dios, y que el Esp&iacute;ritu de Dios mora en vosotros?&rdquo;</span> (1 Corintios 3:16). Un templo es la casa de un dios, el lugar donde la deidad se agrada en morar. &iquest;Y de qui&eacute;n somos templo? Templo de Dios, dice Pablo, y luego en la misma frase nos dice qui&eacute;n habita all&iacute;: el Esp&iacute;ritu de Dios. M&aacute;s adelante lo repite del cuerpo de cada creyente: <span class="v">&ldquo;vuestro cuerpo es templo del Esp&iacute;ritu Santo que est&aacute; en vosotros&rdquo;</span> (1 Corintios 6:19). Junte los dos y la l&oacute;gica es irrefutable. El templo pertenece a Dios, y Aquel que mora en ese templo es el Esp&iacute;ritu Santo; por tanto, el Esp&iacute;ritu Santo es Dios. Piense en lo que esto significa. El Dios del cielo no nos ha enviado meramente un don o un poder. Ha venido a vivir en nosotros por su Esp&iacute;ritu, haciendo del creyente su propia morada.</p>
+<p><b>4. Tiene los atributos de Dios</b></p>
+<p>Hay ciertas cosas que son verdad de Dios y de nadie m&aacute;s. Ninguna criatura es omnisciente, omnipotente, presente en todas partes a la vez, ni sin principio ni fin; estas pertenecen a Dios solo. Sin embargo, la Biblia entrega cada una de ellas al Esp&iacute;ritu Santo. Es omnisciente, pues Pablo escribe que <span class="v">&ldquo;el Esp&iacute;ritu todo lo escudri&ntilde;a, aun lo profundo de Dios,&rdquo;</span> y que nadie conoce las cosas de Dios sino el Esp&iacute;ritu de Dios (1 Corintios 2:10-11). Es omnipotente, pues el &aacute;ngel dijo a Mar&iacute;a: <span class="v">&ldquo;El Esp&iacute;ritu Santo vendr&aacute; sobre ti, y el poder del Alt&iacute;simo te cubrir&aacute; con su sombra&rdquo;</span> (Lucas 1:35); la obra m&aacute;s poderosa de todas, la concepci&oacute;n del Hijo de Dios, fue obra del Esp&iacute;ritu. Es omnipresente, como confes&oacute; David cuando clam&oacute;: <span class="v">&ldquo;&iquest;A d&oacute;nde me ir&eacute; de tu Esp&iacute;ritu? &iquest;Y a d&oacute;nde huir&eacute; de tu presencia?&rdquo;</span> (Salmo 139:7); ya subiera al cielo o hiciera su lecho en lo profundo, hallaba al Esp&iacute;ritu ya all&iacute; (Salmo 139:8). Y es eterno, pues la Escritura habla del <span class="v">&ldquo;Esp&iacute;ritu eterno&rdquo;</span> por el cual Cristo se ofreci&oacute; a Dios (Hebreos 9:14). Lo que pertenece a Dios solo pertenece tambi&eacute;n al Esp&iacute;ritu; por tanto, el Esp&iacute;ritu es Dios. A ninguna criatura se le podr&iacute;a entregar siquiera uno de estos, mucho menos los cuatro a la vez.</p>
+<p><b>5. Hace las obras de Dios</b></p>
+<p>Podemos razonar del mismo modo desde sus obras, pues el Esp&iacute;ritu hace lo que solo Dios puede hacer. Participa en la obra de la creaci&oacute;n. <span class="v">&ldquo;El Esp&iacute;ritu de Dios me hizo, y el soplo del Omnipotente me dio vida,&rdquo;</span> dijo Job (Job 33:4), y el salmista cant&oacute; al Se&ntilde;or: <span class="v">&ldquo;Env&iacute;as tu Esp&iacute;ritu, son creados&rdquo;</span> (Salmo 104:30). Es tambi&eacute;n el Autor de la Escritura. Pedro nos dice que los profetas no hablaron por s&iacute; mismos, sino que <span class="v">&ldquo;los santos hombres de Dios hablaron siendo inspirados por el Esp&iacute;ritu Santo&rdquo;</span> (2 Pedro 1:21), y Pablo llama a toda la Escritura inspirada por Dios (2 Timoteo 3:16). El aliento que exhal&oacute; la Palabra de Dios es el aliento del Esp&iacute;ritu. Aun da vida de resurrecci&oacute;n, pues Pablo promete que <span class="v">&ldquo;el que levant&oacute; de los muertos a Cristo, vivificar&aacute; tambi&eacute;n vuestros cuerpos mortales por su Esp&iacute;ritu que mora en vosotros&rdquo;</span> (Romanos 8:11). Levantar a los muertos es obra de Dios si algo lo es. Crear vida, dar la mism&iacute;sima Palabra de Dios, y levantar a los muertos no son labores de una criatura; son las obras de Dios, y el Esp&iacute;ritu las hace.</p>
+<p><b>6. Es como el viento</b></p>
+<p>&iquest;C&oacute;mo retrataremos a Uno tan por encima de nosotros? El mismo Jes&uacute;s ech&oacute; mano de una imagen de la naturaleza. Hablando a Nicodemo de noche, dijo: <span class="v">&ldquo;El viento sopla de donde quiere, y oyes su sonido, mas ni sabes de d&oacute;nde viene, ni a d&oacute;nde va; as&iacute; es todo aquel que es nacido del Esp&iacute;ritu&rdquo;</span> (Juan 3:8). El viento es invisible, y sin embargo nadie niega que sea real; sientes su fuerza y oyes su voz aunque nunca lo ves. Va a donde le place y no responde a hombre alguno. Y no obstante, aunque ning&uacute;n marinero manda al viento, todo buen marinero ha aprendido a usarlo. Iza sus velas y las ajusta, corre delante del viento o navega contra &eacute;l, inclin&aacute;ndose ante un poder que no puede controlar pero poni&eacute;ndolo de buena gana a trabajar. As&iacute; es con el Esp&iacute;ritu de Dios. No lo mandamos, y no podemos trazar del todo sus caminos, pero nos inclinamos ante su libertad soberana y desplegamos nuestras velas a su poder.</p>
+<p><b>7. Es como la electricidad</b></p>
+<p>Una imagen m&aacute;s moderna dice casi lo mismo. Hasta el d&iacute;a de hoy nadie puede dar cuenta completa de la electricidad. No podemos decir exactamente qu&eacute; es lo que corre por el alambre, ni siquiera si "corre" es la palabra correcta. Y sin embargo nadie se queda titubeando en un cuarto oscuro, neg&aacute;ndose a accionar el interruptor hasta que se resuelva el misterio. Usamos el poder libremente aunque nuestro entendimiento se queda muy corto. Justo de este modo podemos apoyarnos en el poder del Esp&iacute;ritu Santo sin antes comprenderlo. Nunca llegaremos al fondo de qui&eacute;n es, pues es Dios, y Dios es inescrutable. Pero no se nos pide explicarlo antes de confiar en &Eacute;l. Se nos pide entregarnos a &Eacute;l y andar en su poder d&iacute;a tras d&iacute;a.</p>
+<p><b>8. Un solo Dios, y esta Persona es Dios</b></p>
+<p>Recoj&aacute;moslo todo. Adoramos a un solo Dios, y nunca sondearemos del todo el misterio de que este &uacute;nico Dios es tres Personas, el Padre, el Hijo, y el Esp&iacute;ritu Santo. Pero el misterio no anula la verdad; la corona. El Esp&iacute;ritu no es un miembro de segunda clase de la Deidad, ni un poder prestado, ni un &aacute;ngel de alto rango. Es llamado Dios, es adorado como Dios morando en su templo, lleva los atributos de Dios, y hace las obras de Dios. Y esta es la maravilla del evangelio para nosotros: el Dios que es omnisciente, omnipotente, presente en todas partes, y eterno ha venido por su Esp&iacute;ritu a vivir dentro de personas comunes que conf&iacute;an en su Hijo. Tener al Esp&iacute;ritu es tener a Dios mismo. Que eso nos lleve a la adoraci&oacute;n, pues el Hu&eacute;sped dentro de nosotros es digno de toda la adoraci&oacute;n que damos al Padre y al Hijo. Que nos afirme, pues el Dios que sostiene el universo nos ha prometido su propia presencia y no fallar&aacute;. Y que nos ense&ntilde;e a nunca contristar a tan gran Hu&eacute;sped, sino a apoyarnos con todo nuestro peso en su poder, el mism&iacute;simo poder de Dios obrando en nosotros.</p>
+</div>
+  </article>
+
+  <h2 class="sec" id="t-mc">Multiple Choice</h2>
+  <div id="mcWrap"></div>
+
+  <h2 class="sec" id="t-sa">Short Answer</h2>
+  <p class="status" id="t-saNote"></p>
+  <div id="saWrap"></div>
+
+  <div class="foot">
+    <button class="btn primary" id="completeBtn" type="button"></button>
+    <div class="status" id="statusMsg"></div>
+    <a class="next hide" id="nextLink" href="CTSHSUnit4.html"></a>
+  </div>
+</div>
+
+<div class="modal hide" id="reg">
+  <div class="box">
+    <h3 id="m-h">Welcome</h3>
+    <p id="m-p" style="font-size:.9rem;color:var(--muted);margin:0"></p>
+    <label id="m-nl">Your name</label>
+    <input id="m-name" type="text" autocomplete="name" aria-label="m name">
+    <label id="m-tl">Track</label>
+    <select id="m-track" aria-label="m track">
+      <option value="cert">Certificate</option>
+      <option value="mdiv">M.Div.</option>
+      <option value="thm">Th.M.</option>
+    </select>
+    <div style="margin-top:16px"><button class="btn primary" id="m-go" type="button">Begin</button></div>
+  </div>
+</div>
+
+<script>
+var CFG={course:'hs',unit:3,totalUnits:10,progressKey:'cts_hs_progress',
+  next:'CTSHSUnit4.html',cert:'CTSHSCertificate.html',lockKey:'cts_hs_u3_lock',showReg:false};
+var DATA={"mc": [{"en": "Having shown that the Spirit is a Person, this unit asks whether He is a creature or God, and answers that He is:", "es": "Habiendo mostrado que el Espíritu es una Persona, esta unidad pregunta si es una criatura o Dios, y responde que es:", "oen": ["the highest of the angels", "God, the third Person of the one Godhead", "a power on loan from God", "a creature above all others"], "oes": ["el más alto de los ángeles", "Dios, la tercera Persona de la única Deidad", "un poder prestado de Dios", "una criatura por encima de todas"], "c": 22, "xen": "He is God, not a creature.", "xes": "Es Dios, no una criatura."}, {"en": "The plainest proof of the Spirit's deity is that the Bible:", "es": "La prueba más sencilla de la deidad del Espíritu es que la Biblia:", "oen": ["never mentions Him", "compares Him to angels", "simply calls Him God", "calls Him a servant"], "oes": ["nunca lo menciona", "lo compara con los ángeles", "sencillamente lo llama Dios", "lo llama siervo"], "c": 30, "xen": "Scripture calls the Spirit God outright.", "xes": "La Escritura llama Dios al Espíritu sin rodeos."}, {"en": "When Ananias lied to the Holy Spirit, Peter said he had not lied to men but to:", "es": "Cuando Ananías mintió al Espíritu Santo, Pedro dijo que no había mentido a los hombres sino a:", "oen": ["God (Acts 5:4)", "the apostles", "the church", "an angel"], "oes": ["Dios (Hechos 5:4)", "los apóstoles", "la iglesia", "un ángel"], "c": 35, "xen": "Acts 5:4 — to lie to the Spirit is to lie to God.", "xes": "Hechos 5:4 — mentir al Espíritu es mentir a Dios."}, {"en": "“Now the Lord is the Spirit; and where the Spirit of the Lord is, there is liberty” is from:", "es": "“Y el Señor es el Espíritu; y donde está el Espíritu del Señor, allí hay libertad” es de:", "oen": ["Acts 5:4", "John 3:8", "Psalm 139:7", "2 Corinthians 3:17"], "oes": ["Hechos 5:4", "Juan 3:8", "Salmo 139:7", "2 Corintios 3:17"], "c": 45, "xen": "2 Corinthians 3:17 — He is called Lord as well as God.", "xes": "2 Corintios 3:17 — es llamado Señor además de Dios."}, {"en": "Paul calls the believer “the temple of God,” in whom there dwells:", "es": "Pablo llama al creyente “templo de Dios,” en quien mora:", "oen": ["the Spirit of God (1 Corinthians 3:16)", "a guardian angel", "the law of Moses", "a holy memory"], "oes": ["el Espíritu de Dios (1 Corintios 3:16)", "un ángel guardián", "la ley de Moisés", "un recuerdo santo"], "c": 49, "xen": "1 Corinthians 3:16 — God's temple, where His Spirit dwells.", "xes": "1 Corintios 3:16 — templo de Dios, donde mora su Espíritu."}, {"en": "“Your body is the temple of the Holy Spirit who is in you” is from:", "es": "“Vuestro cuerpo es templo del Espíritu Santo que está en vosotros” es de:", "oen": ["Hebrews 9:14", "Luke 1:35", "1 Corinthians 6:19", "Job 33:4"], "oes": ["Hebreos 9:14", "Lucas 1:35", "1 Corintios 6:19", "Job 33:4"], "c": 58, "xen": "1 Corinthians 6:19 — the body a temple of the Spirit.", "xes": "1 Corintios 6:19 — el cuerpo, templo del Espíritu."}, {"en": "The four attributes that belong to God alone, and to the Spirit, are:", "es": "Los cuatro atributos que pertenecen a Dios solo, y al Espíritu, son:", "oen": ["mercy, justice, patience, and wrath", "omniscience, omnipotence, omnipresence, and eternality", "wind, fire, oil, and water", "faith, hope, love, and joy"], "oes": ["misericordia, justicia, paciencia, e ira", "omnisciencia, omnipotencia, omnipresencia, y eternidad", "viento, fuego, aceite, y agua", "fe, esperanza, amor, y gozo"], "c": 64, "xen": "All-knowing, all-powerful, everywhere present, eternal.", "xes": "Omnisciente, omnipotente, omnipresente, eterno."}, {"en": "“The Spirit searches all things, yes, the deep things of God” displays His:", "es": "“El Espíritu todo lo escudriña, aun lo profundo de Dios” muestra su:", "oen": ["omnipotence", "omnipresence", "eternality", "omniscience — He is all-knowing"], "oes": ["omnipotencia", "omnipresencia", "eternidad", "omnisciencia — es omnisciente"], "c": 73, "xen": "1 Corinthians 2:10–11 — He knows the deep things of God.", "xes": "1 Corintios 2:10-11 — conoce lo profundo de Dios."}, {"en": "“The Holy Spirit will come upon you, and the power of the Highest will overshadow you” (to Mary) shows His:", "es": "“El Espíritu Santo vendrá sobre ti, y el poder del Altísimo te cubrirá con su sombra” (a María) muestra su:", "oen": ["omnipresence", "omniscience", "omnipotence — He is all-powerful", "eternality"], "oes": ["omnipresencia", "omnisciencia", "omnipotencia — es omnipotente", "eternidad"], "c": 79, "xen": "Luke 1:35 — the power of the Highest is the Spirit.", "xes": "Lucas 1:35 — el poder del Altísimo es el Espíritu."}, {"en": "“Where can I go from Your Spirit? Or where can I flee from Your presence?” (Psalm 139:7) shows His:", "es": "“¿A dónde me iré de tu Espíritu? ¿Y a dónde huiré de tu presencia?” (Salmo 139:7) muestra su:", "oen": ["omnipresence — He is everywhere present", "omniscience", "omnipotence", "eternality"], "oes": ["omnipresencia — está presente en todas partes", "omnisciencia", "omnipotencia", "eternidad"], "c": 84, "xen": "Psalm 139:7 — there is no fleeing His presence.", "xes": "Salmo 139:7 — no hay huir de su presencia."}, {"en": "The phrase “the eternal Spirit”, used of Christ's offering, is found in:", "es": "La frase “Espíritu eterno,” usada de la ofrenda de Cristo, se halla en:", "oen": ["Psalm 104:30", "2 Peter 1:21", "Romans 8:11", "Hebrews 9:14"], "oes": ["Salmo 104:30", "2 Pedro 1:21", "Romanos 8:11", "Hebreos 9:14"], "c": 94, "xen": "Hebrews 9:14 — the Spirit is called eternal.", "xes": "Hebreos 9:14 — el Espíritu es llamado eterno."}, {"en": "“The Spirit of God has made me, and the breath of the Almighty gives me life” is from:", "es": "“El Espíritu de Dios me hizo, y el soplo del Omnipotente me dio vida” es de:", "oen": ["Psalm 139:7", "Job 33:4", "Acts 5:4", "1 Corinthians 6:19"], "oes": ["Salmo 139:7", "Job 33:4", "Hechos 5:4", "1 Corintios 6:19"], "c": 99, "xen": "Job 33:4 — the Spirit shares in creation.", "xes": "Job 33:4 — el Espíritu participa en la creación."}, {"en": "“You send forth Your Spirit, they are created” is from:", "es": "“Envías tu Espíritu, son creados” es de:", "oen": ["Psalm 104:30", "John 3:8", "Hebrews 9:14", "Luke 1:35"], "oes": ["Salmo 104:30", "Juan 3:8", "Hebreos 9:14", "Lucas 1:35"], "c": 105, "xen": "Psalm 104:30 — the Spirit creates.", "xes": "Salmo 104:30 — el Espíritu crea."}, {"en": "“Holy men of God spoke as they were moved by the Holy Spirit” is from:", "es": "“Los santos hombres de Dios hablaron siendo inspirados por el Espíritu Santo” es de:", "oen": ["Job 33:4", "2 Peter 1:21", "Psalm 104:30", "Acts 5:3"], "oes": ["Job 33:4", "2 Pedro 1:21", "Salmo 104:30", "Hechos 5:3"], "c": 113, "xen": "2 Peter 1:21 — the Spirit is the Author of Scripture.", "xes": "2 Pedro 1:21 — el Espíritu es el Autor de la Escritura."}, {"en": "That the Spirit will give life to our mortal bodies, raising the dead, is taught in:", "es": "Que el Espíritu dará vida a nuestros cuerpos mortales, levantando a los muertos, se enseña en:", "oen": ["John 3:8", "2 Corinthians 3:17", "Romans 8:11", "1 Corinthians 2:10"], "oes": ["Juan 3:8", "2 Corintios 3:17", "Romanos 8:11", "1 Corintios 2:10"], "c": 121, "xen": "Romans 8:11 — He gives resurrection life.", "xes": "Romanos 8:11 — da vida de resurrección."}, {"en": "Jesus compared the Spirit to the wind (John 3:8), which is:", "es": "Jesús comparó al Espíritu con el viento (Juan 3:8), que es:", "oen": ["weak and fading", "seen by all", "under our command", "invisible yet real, sovereign, and powerful"], "oes": ["débil y pasajero", "visto por todos", "bajo nuestro mando", "invisible pero real, soberano, y poderoso"], "c": 129, "xen": "The wind is unseen, free, and strong — so is the Spirit.", "xes": "El viento es invisible, libre, y fuerte — así el Espíritu."}, {"en": "The lesson of the wind for us is that we:", "es": "La lección del viento para nosotros es que:", "oen": ["bow to His sovereignty and use His power, though we cannot master Him", "can command the Spirit at will", "should fear and avoid Him", "cannot benefit from Him"], "oes": ["nos inclinamos ante su soberanía y usamos su poder, aunque no podemos dominarlo", "podemos mandar al Espíritu a voluntad", "debemos temerle y evitarlo", "no podemos beneficiarnos de Él"], "c": 133, "xen": "Like sailors with the wind, we use what we cannot control.", "xes": "Como marineros con el viento, usamos lo que no controlamos."}, {"en": "The analogy of electricity teaches that we may:", "es": "La analogía de la electricidad enseña que podemos:", "oen": ["ignore Him until we understand Him", "explain Him completely", "rely on the Spirit's power without fully understanding Him", "control Him by knowledge"], "oes": ["ignorarlo hasta comprenderlo", "explicarlo por completo", "apoyarnos en el poder del Espíritu sin comprenderlo del todo", "controlarlo por el conocimiento"], "c": 142, "xen": "We use power we cannot define; so with the Spirit.", "xes": "Usamos un poder que no definimos; así con el Espíritu."}, {"en": "When some in the early church said the Spirit was merely a creature, the church:", "es": "Cuando algunos en la iglesia primitiva dijeron que el Espíritu era solo una criatura, la iglesia:", "oen": ["agreed He was created", "removed Him from the Trinity", "stopped speaking of Him", "searched the Scriptures and confessed that He is God"], "oes": ["convino en que fue creado", "lo quitó de la Trinidad", "dejó de hablar de Él", "escudriñó las Escrituras y confesó que es Dios"], "c": 150, "xen": "The church rightly confessed His full deity.", "xes": "La iglesia confesó con razón su plena deidad."}, {"en": "Because the Holy Spirit is God, to have the Spirit is to have:", "es": "Porque el Espíritu Santo es Dios, tener al Espíritu es tener:", "oen": ["only a sign of God's favor", "God Himself dwelling in us", "a created helper", "a temporary blessing"], "oes": ["solo una señal del favor de Dios", "a Dios mismo morando en nosotros", "un ayudante creado", "una bendición temporal"], "c": 155, "xen": "To have the Spirit is to have God Himself.", "xes": "Tener al Espíritu es tener a Dios mismo."}], "sa": [{"en": "Having shown that the Spirit is a Person, what does this unit establish about which Person He is?", "es": "Habiendo mostrado que el Espíritu es una Persona, ¿qué establece esta unidad acerca de cuál Persona es?", "men": "It establishes that the Spirit is not a creature, not an angel or a power on loan, but God Himself, the third Person of the one Godhead, equal with the Father and the Son. The Person we met before is none other than God come to dwell in us.", "mes": "Establece que el Espíritu no es una criatura, ni un ángel ni un poder prestado, sino Dios mismo, la tercera Persona de la única Deidad, igual al Padre y al Hijo. La Persona que conocimos antes no es otro que Dios venido a morar en nosotros.", "ken": ["god", "creature", "person", "godhead", "equal", "spirit", "dwell", "third"], "kes": ["dios", "criatura", "person", "deidad", "igual", "espiritu", "mora", "tercera"]}, {"en": "How does the account of Ananias in Acts 5 prove the deity of the Spirit?", "es": "¿Cómo prueba el relato de Ananías en Hechos 5 la deidad del Espíritu?", "men": "Peter told Ananias he had lied to the Holy Spirit, and then in the next breath said he had not lied to men but to God. To lie to the Spirit is to lie to God; Peter moves from one name to the other without a pause, because the Spirit is God.", "mes": "Pedro dijo a Ananías que había mentido al Espíritu Santo, y luego en el aliento siguiente dijo que no había mentido a los hombres sino a Dios. Mentir al Espíritu es mentir a Dios; Pedro pasa de un nombre al otro sin pausa, porque el Espíritu es Dios.", "ken": ["peter", "ananias", "lie", "spirit", "god", "name", "prove", "deity"], "kes": ["pedro", "anan", "ment", "espiritu", "dios", "nombre", "prueba", "deidad"]}, {"en": "How does Paul's teaching that the believer is a temple prove that the Spirit is God?", "es": "¿Cómo prueba la enseñanza de Pablo de que el creyente es templo que el Espíritu es Dios?", "men": "Paul calls us the temple of God, and a temple is the house where deity dwells. Then he says the One who dwells in that temple is the Spirit of God, and that our body is the temple of the Holy Spirit. If the temple is God's and the Spirit dwells there, the Spirit is God.", "mes": "Pablo nos llama templo de Dios, y un templo es la casa donde mora la deidad. Luego dice que Aquel que mora en ese templo es el Espíritu de Dios, y que nuestro cuerpo es templo del Espíritu Santo. Si el templo es de Dios y el Espíritu mora allí, el Espíritu es Dios.", "ken": ["temple", "god", "dwell", "spirit", "body", "deity", "house", "prove"], "kes": ["templo", "dios", "mora", "espiritu", "cuerpo", "deidad", "casa", "prueba"]}, {"en": "Name the four divine attributes the Spirit possesses, and give a text for at least one.", "es": "Nombre los cuatro atributos divinos que el Espíritu posee, y dé un texto para al menos uno.", "men": "He is omniscient, for He searches the deep things of God; omnipotent, for the power of the Highest overshadowed Mary; omnipresent, for there is nowhere to flee from His presence in Psalm 139; and eternal, for Scripture calls Him the eternal Spirit. These belong to God alone.", "mes": "Es omnisciente, pues escudriña lo profundo de Dios; omnipotente, pues el poder del Altísimo cubrió a María; omnipresente, pues no hay a dónde huir de su presencia en el Salmo 139; y eterno, pues la Escritura lo llama Espíritu eterno. Estos pertenecen a Dios solo.", "ken": ["omniscien", "omnipoten", "omnipresen", "eternal", "search", "power", "presence", "god"], "kes": ["omniscien", "omnipoten", "omnipresen", "etern", "escudri", "poder", "presen", "dios"]}, {"en": "How do the works of the Spirit prove that He is God?", "es": "¿Cómo prueban las obras del Espíritu que Él es Dios?", "men": "He does what only God can do. He shares in creation, for the Spirit made us and gives life; He is the Author of Scripture, for holy men spoke as they were moved by Him; and He raises the dead, giving life to our mortal bodies. Creating, inspiring, and raising the dead are the works of God.", "mes": "Hace lo que solo Dios puede hacer. Participa en la creación, pues el Espíritu nos hizo y da vida; es el Autor de la Escritura, pues los santos hombres hablaron movidos por Él; y levanta a los muertos, dando vida a nuestros cuerpos mortales. Crear, inspirar, y levantar a los muertos son obras de Dios.", "ken": ["work", "creat", "inspir", "rais", "life", "god", "scripture", "spirit"], "kes": ["obra", "crea", "inspir", "levant", "vida", "dios", "escritura", "espiritu"]}, {"en": "Explain the analogy of the wind and what it teaches about the Spirit.", "es": "Explique la analogía del viento y lo que enseña sobre el Espíritu.", "men": "Jesus said the wind blows where it wishes, unseen yet real, and so is everyone born of the Spirit. The wind is invisible, sovereign, and powerful; no sailor commands it, yet a good sailor uses it by setting his sails. So we cannot control the Spirit, but we bow to His sovereignty and use His power.", "mes": "Jesús dijo que el viento sopla de donde quiere, invisible pero real, y así es todo el que nace del Espíritu. El viento es invisible, soberano, y poderoso; ningún marinero lo manda, pero el buen marinero lo usa izando sus velas. Así no controlamos al Espíritu, pero nos inclinamos ante su soberanía y usamos su poder.", "ken": ["wind", "invisib", "sovereign", "power", "sail", "control", "spirit", "born"], "kes": ["viento", "invisib", "sober", "poder", "vela", "control", "espiritu", "nace"]}, {"en": "Explain the analogy of electricity and its lesson for trusting the Spirit.", "es": "Explique la analogía de la electricidad y su lección para confiar en el Espíritu.", "men": "No one can fully define electricity, yet no one refuses to flip the switch until the mystery is solved; we use the power though our understanding falls short. In the same way we may rely on the Spirit's power without fully comprehending Him, for He is God and past finding out, yet we trust Him.", "mes": "Nadie puede definir del todo la electricidad, y sin embargo nadie se niega a accionar el interruptor hasta resolver el misterio; usamos el poder aunque el entendimiento se queda corto. Del mismo modo podemos apoyarnos en el poder del Espíritu sin comprenderlo del todo, pues es Dios e inescrutable, y aun así confía en Él.", "ken": ["electric", "switch", "power", "understand", "rely", "mystery", "spirit", "trust"], "kes": ["electri", "interrupt", "poder", "entend", "apoy", "misteri", "espiritu", "confia"]}, {"en": "State the doctrine of one God and explain how the Spirit fits, guarding against treating Him as a lesser being.", "es": "Enuncie la doctrina de un solo Dios y explique cómo encaja el Espíritu, guardándose de tratarlo como un ser menor.", "men": "We worship one God in three Persons, the Father, the Son, and the Holy Spirit. The Spirit is not a second-rate member, not a power on loan, not a high angel, but fully and equally God within the one Godhead. He is called God, indwells as God, and bears the attributes of God.", "mes": "Adoramos a un solo Dios en tres Personas, el Padre, el Hijo, y el Espíritu Santo. El Espíritu no es un miembro de segunda clase, ni un poder prestado, ni un ángel elevado, sino plena e igualmente Dios dentro de la única Deidad. Es llamado Dios, mora como Dios, y lleva los atributos de Dios.", "ken": ["one", "god", "three", "person", "spirit", "equal", "godhead", "lesser"], "kes": ["dios", "tres", "person", "espiritu", "igual", "deidad", "menor", "plena"]}, {"en": "Why does the deity of the Spirit matter for the believer?", "es": "¿Por qué importa la deidad del Espíritu para el creyente?", "men": "Because if the Spirit is God, then to have the Spirit is to have God Himself dwelling in us, not a mere gift or power. The God who is all-knowing, all-powerful, and eternal lives within ordinary believers, which calls us to worship Him and to lean on His power.", "mes": "Porque si el Espíritu es Dios, entonces tener al Espíritu es tener a Dios mismo morando en nosotros, no un mero don o poder. El Dios que es omnisciente, omnipotente, y eterno vive dentro de creyentes comunes, lo cual nos llama a adorarlo y a apoyarnos en su poder.", "ken": ["god", "spirit", "dwell", "power", "worship", "believ", "matter", "within"], "kes": ["dios", "espiritu", "mora", "poder", "ador", "creyent", "import", "dentro"]}, {"en": "Give two evidences from this unit that the Holy Spirit is God.", "es": "Dé dos evidencias de esta unidad de que el Espíritu Santo es Dios.", "men": "First, He is called God: when Ananias lied to the Spirit, Peter said he had lied to God. Second, He bears the attributes of God, being omniscient, omnipotent, omnipresent, and eternal. A creature could have none of these, so the Spirit is God.", "mes": "Primera, es llamado Dios: cuando Ananías mintió al Espíritu, Pedro dijo que había mentido a Dios. Segunda, lleva los atributos de Dios, siendo omnisciente, omnipotente, omnipresente, y eterno. Una criatura no podría tener ninguno, así que el Espíritu es Dios.", "ken": ["god", "called", "lie", "attribut", "omniscien", "eternal", "creature", "spirit"], "kes": ["dios", "llam", "ment", "atribu", "omniscien", "etern", "criatura", "espiritu"]}]};
+
+/* ---- storage hardening (Android content:// safe) ---- */
+var _ctsMem={};
+function lsGet(k){try{var v=localStorage.getItem(k);return v===null?(k in _ctsMem?_ctsMem[k]:null):v;}catch(e){return k in _ctsMem?_ctsMem[k]:null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}_ctsMem[k]=v;}
+function lsDel(k){try{localStorage.removeItem(k);}catch(e){}delete _ctsMem[k];}
+
+/* ---- helpers ---- */
+function fold(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function kwHit(ans,kw){var a=fold(ans),k=fold(kw);if(!k)return false;
+  if(k.length<=3){return new RegExp('(^|[^a-z0-9])'+reEsc(k)+'([^a-z0-9]|$)').test(a);}
+  return new RegExp('(^|[^a-z0-9])'+reEsc(k)).test(a);}
+function saScore(ans,kws){var n=0;for(var i=0;i<kws.length;i++){if(kwHit(ans,kws[i]))n++;}return n;}
+function mcCorrectIdx(code,qpos){return(((code-7*(qpos+3))%251)+251)%251;}
+
+var LET=['A','B','C','D'];
+var STATE={lang:'en',track:'cert',name:'',mc:[],sa:[],revealed:false};
+for(var i=0;i<DATA.mc.length;i++)STATE.mc.push({answered:false,chosen:-1});
+for(var j=0;j<DATA.sa.length;j++)STATE.sa.push({checked:false,text:'',hits:0});
+
+var I18N={
+ en:{title:'The Doctrine of the Holy Spirit',unit:'Unit 3 &middot; The Deity of the Spirit',lang:'Espa\u00f1ol',
+   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
+   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
+   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
+   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
+   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
+   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
+   complete:'Mark Unit 3 complete',
+   epigraph:'“You have not lied to men but to God.” — Acts 5:4',
+   mGood:'Unit 3 complete. Well done — continue to Unit 4.',
+   mShort:'Keep going \u2014 review the material and try again.',
+   nextTxt:'Continue to Unit 4 →',
+   mh:'Welcome to The Doctrine of the Holy Spirit',mp:'Please register once. Your name and track carry across every CTS course on this site.',
+   mnl:'Your name',mtl:'Track',mgo:'Begin',
+   hitFmt:function(h){return h+' of 8 keywords';},
+   passV:'Pass',softV:'Practice noted'},
+ es:{title:'La Doctrina del Esp\u00edritu Santo',unit:'Unidad 3 &middot; La Deidad del Espíritu',lang:'English',
+   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
+   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
+   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
+   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
+   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
+   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
+   complete:'Marcar la Unidad 3 como completa',
+   epigraph:'“No has mentido a los hombres, sino a Dios.” — Hechos 5:4',
+   mGood:'Unidad 3 completa. Bien hecho — continúe a la Unidad 4.',
+   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
+   nextTxt:'Continuar a la Unidad 4 →',
+   mh:'Bienvenido a La Doctrina del Esp\u00edritu Santo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
+   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
+   hitFmt:function(h){return h+' de 8 palabras clave';},
+   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+};
+function T(){return I18N[STATE.lang];}
+function isMasters(){return STATE.track==='mdiv'||STATE.track==='thm';}
+function lockMin(){return isMasters()?15:2;}
+
+function $(id){return document.getElementById(id);}
+
+/* ---------- rendering ---------- */
+function renderTeaching(){
+  $('teach-en').className=STATE.lang==='en'?'':'hide';
+  $('teach-es').className=STATE.lang==='es'?'':'hide';
+}
+function renderChrome(){
+  var t=T();
+  document.documentElement.lang=STATE.lang;
+  $('t-title').textContent=t.title;$('t-unit').innerHTML=t.unit;
+  $('langBtn').textContent=t.lang;
+  $('t-greet').textContent=t.greet(STATE.name);
+  $('t-track').textContent=t.track(STATE.track);
+  $('epigraph').textContent=t.epigraph;
+  $('t-mc').textContent=t.mc;$('t-sa').textContent=t.sa;
+  $('t-saNote').textContent=isMasters()?t.saNoteMast:t.saNoteCert;
+  $('completeBtn').textContent=t.complete;
+  $('m-h').textContent=t.mh;$('m-p').textContent=t.mp;$('m-nl').textContent=t.mnl;
+  $('m-tl').textContent=t.mtl;$('m-go').textContent=t.mgo;
+}
+function renderMC(){
+  var wrap=$('mcWrap');wrap.innerHTML='';
+  for(var i=0;i<DATA.mc.length;i++){
+    (function(i){
+      var q=DATA.mc[i],st=STATE.mc[i];
+      var opts=STATE.lang==='en'?q.oen:q.oes;
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var expl=STATE.lang==='en'?q.xen:q.xes;
+      var correct=mcCorrectIdx(q.c,i);
+      var div=document.createElement('div');div.className='q';
+      var h='<div class="qn">'+(i+1)+'</div><div class="qp">'+prompt+'</div>';
+      div.innerHTML=h;
+      for(var o=0;o<4;o++){
+        (function(o){
+          var b=document.createElement('button');b.type='button';b.className='opt';
+          b.innerHTML='<span class="lt">'+LET[o]+'</span>'+opts[o];
+          if(st.answered){b.disabled=true;
+            if(o===correct)b.className='opt correct';
+            else if(o===st.chosen)b.className='opt wrong';}
+          else if(st.answered&&o===st.chosen){b.style.background='#efe7d2';b.style.borderColor='#d4af37';b.style.fontWeight='600';}
+          b.onclick=function(){if(st.answered)return;
+            STATE.mc[i].answered=true;STATE.mc[i].chosen=o;renderMC();};
+          div.appendChild(b);
+        })(o);
+      }
+      var e=document.createElement('div');e.className='expl'+(st.answered?' show':'');
+      e.textContent=expl;div.appendChild(e);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderSA(){
+  var wrap=$('saWrap');wrap.innerHTML='';var t=T();
+  for(var i=0;i<DATA.sa.length;i++){
+    (function(i){
+      var q=DATA.sa[i],st=STATE.sa[i];
+      var prompt=STATE.lang==='en'?q.en:q.es;
+      var model=STATE.lang==='en'?q.men:q.mes;
+      var div=document.createElement('div');div.className='q';
+      div.innerHTML='<div class="qn">'+(21+i)+'</div><div class="qp">'+prompt+'</div>';
+      var ta=document.createElement('textarea');ta.value=st.text;
+      ta.oninput=function(){STATE.sa[i].text=ta.value;};
+      div.appendChild(ta);
+      var btn=document.createElement('button');btn.type='button';btn.className='btn ghost';
+      btn.style.marginTop='8px';btn.textContent=t.check;
+      var res=document.createElement('div');res.className='sa-res'+(st.checked?' show':'');
+      function paint(){
+        var kws=STATE.lang==='en'?q.ken:q.kes;
+        var hits=saScore(STATE.sa[i].text,kws);STATE.sa[i].hits=hits;
+        var pass=hits>=3;
+        var verdict=pass?('<span class="sa-verdict pass">'+t.passV+'</span>'):('<span class="sa-verdict soft">'+t.softV+'</span>');
+        res.innerHTML=verdict+' &middot; '+t.hitFmt(hits)+
+          '<div class="model"><div class="ml">'+t.model+'</div>'+model+'</div>';
+        res.className='sa-res show';STATE.sa[i].checked=true;
+      }
+      btn.onclick=function(){
+        if(!STATE.sa[i].text.trim()){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.blank+'</span>';return;}
+        if(STATE.sa[i].text.trim().length<100){res.className='sa-res show';
+          res.innerHTML='<span class="sa-verdict soft">'+t.minLen+'</span>';return;}
+        paint();
+      };
+      if(st.checked&&st.text.trim())paint();
+      div.appendChild(btn);div.appendChild(res);
+      wrap.appendChild(div);
+    })(i);
+  }
+}
+function renderAll(){renderChrome();renderTeaching();renderMC();renderSA();refreshLock();}
+
+/* ---------- completion + lockout ---------- */
+function lockedUntil(){var v=lsGet(CFG.lockKey);return v?parseInt(v,10):0;}
+function refreshLock(){
+  var until=lockedUntil(),now=Date.now();
+  var btn=$('completeBtn');
+  if(until>now){
+    btn.disabled=true;
+    var mins=Math.ceil((until-now)/60000);
+    $('statusMsg').className='status lock';
+    $('statusMsg').textContent=(STATE.lang==='en'?'Locked. Try again in ':'Bloqueado. Reintente en ')+mins+(STATE.lang==='en'?' min.':' min.');
+  }else{btn.disabled=false;}
+}
+function markComplete(){
+  var p={};try{p=JSON.parse(lsGet(CFG.progressKey)||'{}');}catch(e){p={};}
+  p[CFG.unit]=true;lsSet(CFG.progressKey,JSON.stringify(p));
+  var t=T();
+  $('statusMsg').className='status ok';$('statusMsg').textContent=t.mGood;
+  var nl=$('nextLink');nl.href=CFG.next;nl.textContent=t.nextTxt;nl.className='next';
+  $('completeBtn').disabled=true;
+}
+function onComplete(){
+  var t=T();
+  if(!isMasters()){STATE.revealed=true;renderMC();markComplete();return;}
+  var mcCorrect=0,mcAnswered=0;
+  for(var i=0;i<DATA.mc.length;i++){if(STATE.mc[i].answered){mcAnswered++;
+    if(STATE.mc[i].chosen===mcCorrectIdx(DATA.mc[i].c,i))mcCorrect++;}}
+  var saPass=0;for(var j=0;j<DATA.sa.length;j++){if(STATE.sa[j].hits>=3)saPass++;}
+  var needMC=18,needSA=7;
+  if(mcAnswered<DATA.mc.length){
+    $('statusMsg').className='status warn';
+    $('statusMsg').textContent=(STATE.lang==='en'
+      ?'Answer all multiple-choice questions first ('+mcAnswered+'/20).'
+      :'Responda primero todas las preguntas de opci\u00f3n m\u00faltiple ('+mcAnswered+'/20).');
+    return;
+  }
+  STATE.revealed=true;renderMC();
+  if(mcCorrect>=needMC&&saPass>=needSA){markComplete();return;}
+  // genuine fail -> lockout
+  lsSet(CFG.lockKey,String(Date.now()+lockMin()*60000));
+  $('statusMsg').className='status lock';
+  $('statusMsg').textContent=(STATE.lang==='en'
+    ?('Not yet: MC '+mcCorrect+'/20 (need 18), SA '+saPass+'/10 (need 7). '+t.mShort)
+    :('A\u00fan no: OM '+mcCorrect+'/20 (necesita 18), RB '+saPass+'/10 (necesita 7). '+t.mShort));
+  refreshLock();
+}
+
+/* ---------- init ---------- */
+function startApp(){
+  STATE.lang=(lsGet('cts_lang')==='es')?'es':'en';
+  STATE.name=lsGet('cts_student')||'';
+  STATE.track=lsGet('cts_track')||'cert';
+  $('langBtn').onclick=function(){STATE.lang=STATE.lang==='en'?'es':'en';
+    lsSet('cts_lang',STATE.lang);renderAll();};
+  $('completeBtn').onclick=onComplete;
+  $('m-go').onclick=function(){
+    var nm=$('m-name').value.trim();var tk=$('m-track').value;
+    if(!nm){$('m-name').focus();return;}
+    STATE.name=nm;STATE.track=tk;
+    lsSet('cts_student',nm);lsSet('cts_track',tk);
+    $('reg').className='modal hide';renderAll();
+  };
+  if(CFG.showReg&&(!STATE.name||!lsGet('cts_track'))){
+    $('reg').className='modal';$('m-track').value=STATE.track;renderChrome();
+  }else{$('reg').className='modal hide';}
+  renderAll();
+  setInterval(refreshLock,30000);
+}
+if(typeof document!=='undefined'){
+  if(document.readyState!=='loading')startApp();
+  else document.addEventListener('DOMContentLoaded',startApp);
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSHSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

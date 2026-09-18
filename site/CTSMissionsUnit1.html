@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS World Missions — Unit 1: The God Who Sends</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.sa-model { margin-top: 8px; padding: 10px 14px; background:#fff8e1; color:#5d4a00; border-left:4px solid #d4af37; border-radius:6px; font-size:0.92rem; line-height:1.45; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+/* === Retrofit additions === */
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-bottom: 2px dashed #d7cec1; padding-bottom: 18px; margin-bottom: 18px; }
+.lang-toggle-group { display: inline-flex; gap: 4px; margin-bottom: 15px; }
+.lang-toggle-group button { background: #f4c542; color: #5b3a1f; border: 1px solid #c9a032; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+.lang-toggle-group button.active { background: #5b3a1f; color: white; border-color: #5b3a1f; }
+.track-badge { display: inline-block; background: #f4c542; color: #5b3a1f; padding: 4px 12px; border-radius: 30px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 12px; vertical-align: middle; }
+.exam-status { padding: 12px 16px; margin: 14px 0; border-radius: 8px; font-size: 0.95rem; font-weight: 600; }
+.exam-status.mc-passed { background: #d6e2f0; color: #2c3e6b; border-left: 5px solid #3f5a8a; }
+.exam-status.locked { background: #fae5e3; color: #8a1f1f; border-left: 5px solid #b03a2e; }
+.exam-status.hidden { display: none; }
+.mc-section, .sa-section { margin-top: 20px; }
+.sa-section h3, .mc-section h3 { color: #5b3a1f; border-bottom: 2px solid #f4c542; padding-bottom: 4px; margin-bottom: 12px; font-size: 1.1rem; }
+.sa-badge { display: inline-block; background: #f4c542; color: #5b3a1f; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; margin-left: 8px; vertical-align: middle; }
+.sa-note { margin: 0 0 14px; padding: 10px 14px; background: #f6f1e8; border-left: 3px solid #c9a032; color: #22201d; font-size: 0.9rem; font-style: italic; border-radius: 6px; }
+.question.review-locked { opacity: 0.7; background: #fbfaf6; border-left: 3px solid #f4c542; }
+.question.review-locked .option { pointer-events: none; }
+.question.review-locked .kw-answer, .question.review-locked .check-kw-btn { pointer-events: none; }
+.btn-reset { background: #8a6a4a; color: white; border: none; border-radius: 30px; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 0.88rem; margin-left: 8px; }
+.btn-reset:hover { background: #6b5236; }
+.reg-modal { position: fixed; inset: 0; background: rgba(40, 30, 20, 0.65); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.reg-modal.hidden { display: none; }
+.reg-modal-inner { background: #fffdfa; max-width: 520px; width: 100%; border-radius: 16px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 1px solid #d7cec1; }
+.reg-modal-inner h2 { color: #5b3a1f; margin: 0 0 10px; font-size: 1.4rem; }
+.reg-modal-inner p { margin: 10px 0; font-size: 0.95rem; }
+.reg-modal-inner label { display: block; margin: 12px 0 4px; font-weight: 700; font-size: 0.92rem; }
+.reg-modal-inner input[type="text"], .reg-modal-inner input[type="email"] { width: 100%; padding: 9px 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; background: #fcfbf8; }
+.reg-modal-inner .track-options { display: flex; gap: 10px; margin-top: 6px; }
+.reg-modal-inner .track-options label { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 12px; border: 1px solid #d7cec1; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.92rem; background: #fcfbf8; }
+.reg-modal-inner .track-options input[type="radio"] { margin: 0; }
+.reg-modal-inner .track-options label:has(input:checked) { background: #f4c542; border-color: #c9a032; }
+.reg-modal-inner button { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 9px 22px; cursor: pointer; font-family: inherit; font-size: 1rem; margin-top: 18px; }
+.reg-warn { background: #faecd0; border: 1px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; color: #5b3a1f; }
+.reg-warn.hidden { display: none; }
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .nav-bar, .toggle-btn, .lang-toggle-group, .btn-reset, button.small, .check-kw-btn, .reg-modal, .reg-warn, #submitExamBtn, .exam-status, .sa-badge, .track-badge { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+  body.lang-en .lang-es, body.lang-es .lang-en { display: none; }
+  body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+}
+
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" disabled>← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" role="group" aria-label="Language">
+  <button data-lang="en" class="active">English</button>
+  <button data-lang="es">Español</button>
+  <button data-lang="both">Both / Ambos</button>
+</div>
+<span id="trackBadgeSlot"></span>
+
+<div id="regWarn" class="reg-warn hidden">
+  <span class="lang-en">⚠ Please register your name to receive credit for this unit. <button class="small" id="openRegBtn" type="button">Register</button></span>
+  <span class="lang-es">⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class="small" id="openRegBtn2" type="button">Registrar</button></span>
+</div>
+<div id="regModal" class="reg-modal hidden" role="dialog" aria-labelledby="regModalTitle">
+  <div class="reg-modal-inner">
+    <h2 id="regModalTitle"><span class="lang-en">Welcome to World Missions</span><span class="lang-es">Bienvenido a Misiones Mundiales</span></h2>
+    <p><span class="lang-en">Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.</span><span class="lang-es">Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full name</span><span class="lang-es">Nombre completo</span></label>
+    <input type="text" id="regName" placeholder="" autocomplete="name" aria-label="regName">
+    <label><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span></label>
+    <input type="email" id="regEmail" placeholder="" autocomplete="email" aria-label="regEmail">
+    <label><span class="lang-en">Track</span><span class="lang-es">Vía</span></label>
+    <div class="track-options">
+      <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></label>
+      <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en">M.Div</span><span class="lang-es">M.Div</span></label>
+      <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en">Th.M.</span><span class="lang-es">Th.M.</span></label>
+    </div>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;">
+      <span class="lang-en"><strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.</span>
+      <span class="lang-es"><strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%.</span>
+    </p>
+    <button id="regSaveBtn" type="button"><span class="lang-en">Save and Continue</span><span class="lang-es">Guardar y Continuar</span></button>
+  </div>
+</div>
+<div class="card">
+    <h1><span class="lang-en">🌍 World Missions — Unit 1: The God Who Sends</span><span class="lang-es">🌍 Misiones Mundiales — Unidad 1: El Dios que Envía</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>I. Missions Begins in the Heart of God</h2>
+        <p>We are tempted to think that missions began with a great man &mdash; with William Carey and his little book, or with Hudson Taylor sailing for China. It did not. Missions did not even begin with the Great Commission on the mountain in Galilee. Missions began in eternity, in the heart of God Himself. Before there was ever a missionary, there was a missionary God.</p>
+
+        <p>Look at how God reveals Himself across the Scriptures, and you will find that He is by His very nature a sending God. The Father sent the Son: <em>"For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life"</em> (John 3:16, NKJV). The Father and the Son sent the Spirit (John 14:26). And now the risen Son sends His church: <em>"As the Father has sent Me, I also send you"</em> (John 20:21, NKJV). Theologians have a name for this. They call it the <em>missio Dei</em> &mdash; Latin for "the mission of God." Missions is not first a program of the church; it is the mission of God, and the church is swept up into it. When we go, we are not starting something; we are joining Someone.</p>
+
+        <p>This matters more than it may seem. If missions were merely our idea, we could set it aside whenever it grew costly or inconvenient. But missions flows from the character of the God who is love, the God who gives, the God who sends. To refuse the nations is not merely to neglect a duty; it is to misrepresent our God.</p>
+
+        <h2>II. The Goal of Missions: The Glory of God Among the Nations</h2>
+        <p>Why does God pursue the nations? The deepest answer is not first about us. It is about Him. The ultimate goal of missions is the glory of God among all peoples. God is jealous for His own name, and He will not share His glory with idols. <em>"Declare His glory among the nations, His wonders among all peoples"</em> (Psalm 96:3, NKJV). The prophets saw a day coming when <em>"the earth will be filled with the knowledge of the glory of the LORD, as the waters cover the sea"</em> (Habakkuk 2:14, NKJV).</p>
+
+        <p>The rescue of the lost is precious &mdash; gloriously precious &mdash; but it is not the highest end. The highest end is worship. The goal of missions is a great multitude that no one can number, from every nation, falling down before the Lamb. John was given a glimpse of that day; the redeemed sing to the Lamb, <em>"For You were slain, and have redeemed us to God by Your blood out of every tribe and tongue and people and nation"</em> (Revelation 5:9, NKJV). Missions exists so that worship may rise to God from peoples who do not yet know His name. When the last of them is gathered in, missions will be over forever, and only worship will remain.</p>
+
+        <h2>III. The Need for Missions: A World Without Christ</h2>
+        <p>If God is to be glorified among the nations, and if men are to worship Him, then something must be done about the lostness of the human race. Here is the hard truth that gives missions its urgency. Apart from Christ, people are not merely unfortunate; they are lost. <em>"For all have sinned and fall short of the glory of God"</em> (Romans 3:23, NKJV). Paul describes those outside of Christ as <em>"having no hope and without God in the world"</em> (Ephesians 2:12, NKJV).</p>
+
+        <p>Paul lays out the logic of missions with relentless clarity in Romans 10. <em>"Whoever calls on the name of the LORD shall be saved. How then shall they call on Him in whom they have not believed? And how shall they believe in Him of whom they have not heard? And how shall they hear without a preacher? And how shall they preach unless they are sent?"</em> (Romans 10:13&ndash;15, NKJV). Read that chain backward and you have the whole argument for missions. Salvation comes by calling on the Lord. But no one calls on a Lord he does not believe in. No one believes in a Christ he has never heard of. No one hears without a preacher. And no preacher goes unless he is sent. The unreached cannot believe what they have never heard. That is why we must go, and why we must send.</p>
+
+        <h2>IV. The Heart of Missions: Christ the Only Way</h2>
+        <p>Missions rests on one immovable conviction: that Jesus Christ is the only Savior of the world. Peter declared it before the rulers of Israel: <em>"Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved"</em> (Acts 4:12, NKJV). Jesus said it of Himself: <em>"I am the way, the truth, and the life. No one comes to the Father except through Me"</em> (John 14:6, NKJV). And Paul wrote, <em>"For there is one God and one Mediator between God and men, the Man Christ Jesus"</em> (1 Timothy 2:5, NKJV).</p>
+
+        <p>Here is something we must see clearly. If there were many roads to God, missions would be a cruel waste &mdash; even an insult &mdash; sending people across oceans to peddle one option among many. But precisely because there is one Way and one Mediator, missions becomes the most loving thing the church can ever do. We do not cross the world to impose our preference; we carry the only bread to people who are starving, the only cure to people who are dying. To withhold it would not be tolerance. It would be the worst kind of cruelty.</p>
+
+        <h2>V. The Scope of Missions: God's Heart for All</h2>
+        <p>How far does God's saving purpose reach? The Scriptures answer without hesitation: to all. God <em>"desires all men to be saved and to come to the knowledge of the truth"</em> (1 Timothy 2:4, NKJV). He is patient, <em>"not willing that any should perish but that all should come to repentance"</em> (2 Peter 3:9, NKJV). Through Ezekiel He swore that He takes no pleasure in the death of the wicked (Ezekiel 33:11). And the cross was wide enough for the world: <em>"He Himself is the propitiation for our sins, and not for ours only but also for the whole world"</em> (1 John 2:2, NKJV).</p>
+
+        <p>This is the warm heart of the gospel we carry. Christ died for sinners, and the offer of that salvation is to be pressed upon every person without exception. Faith is the appointed door &mdash; <em>"without faith it is impossible to please Him"</em> (Hebrews 11:6, NKJV) &mdash; and so the call to believe must reach every ear, because the Savior died for all and God desires all to come. We do not go out wondering whether God might possibly want this nation or that one. He has told us His heart: He desires that all should come to repentance. The only question that remains is whether we will carry the word He desires them to hear.</p>
+
+        <h2>VI. The God Who Sends Is Sending Still</h2>
+        <p>So we return to where we began. Missions is the overflow of the heart of God &mdash; the Father who sent the Son, the Son who sent the Spirit, and the Lord who now sends His church. <em>"As the Father has sent Me, I also send you"</em> (John 20:21, NKJV). That word was not spoken to professionals only. It was spoken to the church, and you are the church.</p>
+
+        <p>The God who sends is sending still. He has not changed His mind about the nations; the multitude before the throne is not yet complete. The question of this course &mdash; and of your life &mdash; is simple. The Father is still sending. Will you go? Will you send? Will you pray? The mission is His; the privilege of joining it is ours.</p>
+    </div>
+    <div class="lang-es">
+        <h2>I. La Misión Comienza en el Corazón de Dios</h2>
+        <p>Nos sentimos tentados a pensar que las misiones comenzaron con un gran hombre &mdash; con William Carey y su pequeño libro, o con Hudson Taylor zarpando hacia China. No fue así. Las misiones ni siquiera comenzaron con la Gran Comisión en el monte de Galilea. Las misiones comenzaron en la eternidad, en el corazón de Dios mismo. Antes de que hubiera un misionero, hubo un Dios misionero.</p>
+
+        <p>Observe cómo Dios se revela a través de las Escrituras, y hallará que Él es por su misma naturaleza un Dios que envía. El Padre envió al Hijo: <em>"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna"</em> (Juan 3:16, RVG). El Padre y el Hijo enviaron al Espíritu (Juan 14:26). Y ahora el Hijo resucitado envía a su iglesia: <em>"Como me envió el Padre, así también yo os envío"</em> (Juan 20:21, RVG). Los teólogos tienen un nombre para esto. Lo llaman la <em>missio Dei</em> &mdash; en latín, "la misión de Dios." Las misiones no son primeramente un programa de la iglesia; son la misión de Dios, y la iglesia es arrastrada dentro de ella. Cuando vamos, no estamos comenzando algo; nos estamos uniendo a Alguien.</p>
+
+        <p>Esto importa más de lo que parece. Si las misiones fueran solamente nuestra idea, podríamos dejarlas a un lado cuando se volvieran costosas o inconvenientes. Pero las misiones brotan del carácter del Dios que es amor, el Dios que da, el Dios que envía. Rehusar a las naciones no es meramente descuidar un deber; es tergiversar a nuestro Dios.</p>
+
+        <h2>II. La Meta de las Misiones: La Gloria de Dios entre las Naciones</h2>
+        <p>¿Por qué busca Dios a las naciones? La respuesta más profunda no es primero acerca de nosotros. Es acerca de Él. La meta suprema de las misiones es la gloria de Dios entre todos los pueblos. Dios es celoso de su propio nombre, y no compartirá su gloria con los ídolos. <em>"Proclamad entre las naciones su gloria, en todos los pueblos sus maravillas"</em> (Salmo 96:3, RVG). Los profetas vieron venir un día en que <em>"la tierra será llena del conocimiento de la gloria de Jehová, como las aguas cubren el mar"</em> (Habacuc 2:14, RVG).</p>
+
+        <p>El rescate de los perdidos es precioso &mdash; gloriosamente precioso &mdash; pero no es el fin más alto. El fin más alto es la adoración. La meta de las misiones es una gran multitud que nadie puede contar, de toda nación, postrándose ante el Cordero. A Juan se le dio una vislumbre de aquel día; los redimidos cantan al Cordero: <em>"porque tú fuiste inmolado, y nos has redimido para Dios con tu sangre, de todo linaje y lengua y pueblo y nación"</em> (Apocalipsis 5:9, RVG). Las misiones existen para que la adoración se eleve a Dios desde pueblos que aún no conocen su nombre. Cuando el último de ellos sea recogido, las misiones habrán terminado para siempre, y solo quedará la adoración.</p>
+
+        <h2>III. La Necesidad de las Misiones: Un Mundo sin Cristo</h2>
+        <p>Si Dios ha de ser glorificado entre las naciones, y si los hombres han de adorarle, entonces algo debe hacerse acerca de la perdición de la raza humana. Aquí está la dura verdad que da a las misiones su urgencia. Aparte de Cristo, la gente no es meramente desdichada; está perdida. <em>"Por cuanto todos pecaron, y están destituidos de la gloria de Dios"</em> (Romanos 3:23, RVG). Pablo describe a los que están fuera de Cristo como <em>"sin esperanza y sin Dios en el mundo"</em> (Efesios 2:12, RVG).</p>
+
+        <p>Pablo expone la lógica de las misiones con implacable claridad en Romanos 10. <em>"Porque todo aquel que invocare el nombre del Señor, será salvo. ¿Cómo, pues, invocarán a aquel en el cual no han creído? ¿Y cómo creerán en aquel de quien no han oído? ¿Y cómo oirán sin haber quien les predique? ¿Y cómo predicarán si no fueren enviados?"</em> (Romanos 10:13&ndash;15, RVG). Lea esa cadena al revés y tendrá todo el argumento de las misiones. La salvación viene por invocar al Señor. Pero nadie invoca a un Señor en quien no cree. Nadie cree en un Cristo del cual nunca ha oído. Nadie oye sin un predicador. Y ningún predicador va a menos que sea enviado. Los no alcanzados no pueden creer lo que nunca han oído. Por eso debemos ir, y por eso debemos enviar.</p>
+
+        <h2>IV. El Corazón de las Misiones: Cristo, el Único Camino</h2>
+        <p>Las misiones descansan sobre una convicción inamovible: que Jesucristo es el único Salvador del mundo. Pedro lo declaró ante los gobernantes de Israel: <em>"Y en ningún otro hay salvación; porque no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos"</em> (Hechos 4:12, RVG). Jesús lo dijo de sí mismo: <em>"Yo soy el camino, la verdad y la vida; nadie viene al Padre, sino por mí"</em> (Juan 14:6, RVG). Y Pablo escribió: <em>"Porque hay un solo Dios, y un solo mediador entre Dios y los hombres, Jesucristo hombre"</em> (1 Timoteo 2:5, RVG).</p>
+
+        <p>Aquí hay algo que debemos ver con claridad. Si hubiera muchos caminos a Dios, las misiones serían un desperdicio cruel &mdash; incluso un insulto &mdash; enviando a la gente a cruzar océanos para ofrecer una opción entre muchas. Pero precisamente porque hay un solo Camino y un solo Mediador, las misiones llegan a ser lo más amoroso que la iglesia jamás puede hacer. No cruzamos el mundo para imponer nuestra preferencia; llevamos el único pan a quienes mueren de hambre, la única cura a quienes mueren de enfermedad. Retenerla no sería tolerancia. Sería la peor clase de crueldad.</p>
+
+        <h2>V. El Alcance de las Misiones: El Corazón de Dios para Todos</h2>
+        <p>¿Hasta dónde llega el propósito salvador de Dios? Las Escrituras responden sin vacilar: a todos. Dios <em>"quiere que todos los hombres sean salvos y vengan al conocimiento de la verdad"</em> (1 Timoteo 2:4, RVG). Él es paciente, <em>"no queriendo que ninguno perezca, sino que todos vengan al arrepentimiento"</em> (2 Pedro 3:9, RVG). Por medio de Ezequiel juró que no se complace en la muerte del impío (Ezequiel 33:11). Y la cruz fue lo bastante ancha para el mundo: <em>"Y él es la propiciación por nuestros pecados; y no solamente por los nuestros, sino también por los de todo el mundo"</em> (1 Juan 2:2, RVG).</p>
+
+        <p>Este es el cálido corazón del evangelio que llevamos. Cristo murió por los pecadores, y la oferta de esa salvación ha de presentarse a toda persona sin excepción. La fe es la puerta señalada &mdash; <em>"sin fe es imposible agradar a Dios"</em> (Hebreos 11:6, RVG) &mdash; y por eso el llamado a creer debe alcanzar cada oído, porque el Salvador murió por todos y Dios desea que todos vengan. No salimos preguntándonos si Dios acaso querría a esta nación o a aquella. Él nos ha dicho su corazón: desea que todos vengan al arrepentimiento. La única pregunta que queda es si llevaremos la palabra que Él desea que ellos oigan.</p>
+
+        <h2>VI. El Dios que Envía Sigue Enviando</h2>
+        <p>Así que volvemos a donde comenzamos. Las misiones son el desbordamiento del corazón de Dios &mdash; el Padre que envió al Hijo, el Hijo que envió al Espíritu, y el Señor que ahora envía a su iglesia. <em>"Como me envió el Padre, así también yo os envío"</em> (Juan 20:21, RVG). Esa palabra no fue dicha solo a profesionales. Fue dicha a la iglesia, y usted es la iglesia.</p>
+
+        <p>El Dios que envía sigue enviando. No ha cambiado de parecer acerca de las naciones; la multitud delante del trono aún no está completa. La pregunta de este curso &mdash; y de su vida &mdash; es sencilla. El Padre sigue enviando. ¿Irá usted? ¿Enviará? ¿Orará? La misión es suya; el privilegio de unirnos a ella es nuestro.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 1 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 1 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></span><span class="lang-es"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></span></p>
+    <div class="exam-status hidden" id="examStatus"></div>
+<div class="mc-section" id="mcSection">
+  <h3><span class="lang-en">Multiple Choice &mdash; 20 Questions</span><span class="lang-es">Opción Múltiple &mdash; 20 Preguntas</span></h3>
+  <div id="mcContainer"></div>
+</div>
+<div class="sa-section" id="saSection">
+  <h3><span class="lang-en">Short Answer &mdash; 10 Questions <span class="sa-badge" id="saBadgeEn"></span></span><span class="lang-es">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="saBadgeEs"></span></span></h3>
+  <p class="sa-note"><span class="lang-en" id="saNoteEn"></span><span class="lang-es" id="saNoteEs"></span></p>
+  <div id="kwContainer"></div>
+</div>
+<div style="margin-top: 20px;">
+  <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+  <button id="resetExamBtn" class="btn-reset" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+  <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+</div>
+</div>
+
+<script>
+
+const TOTAL_UNITS = 10;
+const CURRENT_UNIT = 1;
+const NEXT_URL = 'CTSMissionsUnit2.html';
+
+// === MC + SA data ===
+const mcQuestions = [
+    { textEn: "1. Missions ultimately began:", textEs: "1. Las misiones, en última instancia, comenzaron:", optionsEn: ["with William Carey's missionary society", "in the heart of God in eternity", "with the Great Commission in Galilee", "at the day of Pentecost"], optionsEs: ["con la sociedad misionera de William Carey", "en el corazón de Dios en la eternidad", "con la Gran Comisión en Galilea", "en el día de Pentecostés"], correct: 1 },
+    { textEn: "2. The Latin phrase missio Dei means:", textEs: "2. La frase latina missio Dei significa:", optionsEn: ["the great commission", "the program of the local church", "the sending of financial support", "the mission of God"], optionsEs: ["la gran comisión", "el programa de la iglesia local", "el envío de apoyo financiero", "la misión de Dios"], correct: 3 },
+    { textEn: "3. According to John 20:21, the risen Christ sends His church just as:", textEs: "3. Según Juan 20:21, el Cristo resucitado envía a su iglesia así como:", optionsEn: ["the Father sent Him", "the prophets were sent to Israel", "Moses was sent to Egypt", "the angels are sent to serve"], optionsEs: ["el Padre lo envió a Él", "los profetas fueron enviados a Israel", "Moisés fue enviado a Egipto", "los ángeles son enviados a servir"], correct: 0 },
+    { textEn: "4. The lesson teaches that the ultimate goal of missions is:", textEs: "4. La lección enseña que la meta suprema de las misiones es:", optionsEn: ["the numerical growth of the church", "the relief of poverty and suffering", "the glory of God among all the nations", "the rescue of the lost and nothing more"], optionsEs: ["el crecimiento numérico de la iglesia", "el alivio de la pobreza y el sufrimiento", "la gloria de Dios entre todas las naciones", "el rescate de los perdidos y nada más"], correct: 2 },
+    { textEn: "5. Habakkuk 2:14 promises that the earth will be filled with the knowledge of:", textEs: "5. Habacuc 2:14 promete que la tierra será llena del conocimiento de:", optionsEn: ["lasting political peace", "the law of Moses", "human progress", "the glory of the LORD"], optionsEs: ["la paz política duradera", "la ley de Moisés", "el progreso humano", "la gloria de Jehová"], correct: 3 },
+    { textEn: "6. In Revelation 5:9 the redeemed before the Lamb are gathered from:", textEs: "6. En Apocalipsis 5:9 los redimidos delante del Cordero son reunidos de:", optionsEn: ["the nation of Israel only", "every tribe, tongue, people, and nation", "the wealthiest nations", "the apostolic generation only"], optionsEs: ["solo la nación de Israel", "todo linaje, lengua, pueblo y nación", "las naciones más ricas", "solo la generación apostólica"], correct: 1 },
+    { textEn: "7. The lesson says that when the last of the redeemed is gathered in, missions will:", textEs: "7. La lección dice que cuando el último de los redimidos sea recogido, las misiones:", optionsEn: ["simply continue in heaven", "begin all over again", "be over forever, and only worship will remain", "be handed to the angels"], optionsEs: ["simplemente continuarán en el cielo", "comenzarán de nuevo", "habrán terminado para siempre, y solo quedará la adoración", "serán entregadas a los ángeles"], correct: 2 },
+    { textEn: "8. Ephesians 2:12 describes those who are without Christ as:", textEs: "8. Efesios 2:12 describe a los que están sin Cristo como:", optionsEn: ["having no hope and without God in the world", "saved by their sincerity", "waiting for a second chance after death", "basically good at heart"], optionsEs: ["sin esperanza y sin Dios en el mundo", "salvos por su sinceridad", "esperando una segunda oportunidad después de la muerte", "buenos de corazón en lo esencial"], correct: 0 },
+    { textEn: "9. Romans 3:23 declares that:", textEs: "9. Romanos 3:23 declara que:", optionsEn: ["only a few have sinned", "all have sinned and fall short of the glory of God", "only the Gentiles have sinned", "sin is merely an illusion"], optionsEs: ["solo unos pocos han pecado", "todos pecaron y están destituidos de la gloria de Dios", "solo los gentiles han pecado", "el pecado es solo una ilusión"], correct: 1 },
+    { textEn: "10. In Romans 10:13–15, salvation comes by calling on the Lord — but calling requires believing, believing requires hearing, and hearing requires:", textEs: "10. En Romanos 10:13–15, la salvación viene por invocar al Señor — pero invocar requiere creer, creer requiere oír, y oír requiere:", optionsEn: ["a vision from God", "a generous gift", "a preacher who is sent", "a strong feeling"], optionsEs: ["una visión de Dios", "una ofrenda generosa", "un predicador que es enviado", "un sentimiento fuerte"], correct: 2 },
+    { textEn: "11. The main point of the Romans 10 chain is that the unreached:", textEs: "11. El punto principal de la cadena de Romanos 10 es que los no alcanzados:", optionsEn: ["will be saved even without the gospel", "have no need of a preacher", "are not truly lost", "cannot believe in One they have never heard of"], optionsEs: ["serán salvos aun sin el evangelio", "no necesitan un predicador", "no están verdaderamente perdidos", "no pueden creer en Aquel de quien nunca han oído"], correct: 3 },
+    { textEn: "12. Peter declared in Acts 4:12 that salvation is found in:", textEs: "12. Pedro declaró en Hechos 4:12 que la salvación se halla en:", optionsEn: ["no other name under heaven but Jesus", "sincere religion of any kind", "good works and charity", "many different names"], optionsEs: ["ningún otro nombre bajo el cielo sino Jesús", "la religión sincera de cualquier tipo", "las buenas obras y la caridad", "muchos nombres diferentes"], correct: 0 },
+    { textEn: "13. In John 14:6, Jesus describes Himself as:", textEs: "13. En Juan 14:6, Jesús se describe a sí mismo como:", optionsEn: ["a great moral teacher", "one good way among many", "the way, the truth, and the life", "a prophet pointing to God"], optionsEs: ["un gran maestro moral", "un buen camino entre muchos", "el camino, la verdad y la vida", "un profeta que señala a Dios"], correct: 2 },
+    { textEn: "14. According to 1 Timothy 2:5, there is one God and one Mediator, who is:", textEs: "14. Según 1 Timoteo 2:5, hay un solo Dios y un solo Mediador, que es:", optionsEn: ["the church speaking for God", "the apostle Peter", "the Holy Spirit", "the Man Christ Jesus"], optionsEs: ["la iglesia hablando por Dios", "el apóstol Pedro", "el Espíritu Santo", "Jesucristo hombre"], correct: 3 },
+    { textEn: "15. Because there is only one Way to God, the lesson concludes that missions is:", textEs: "15. Porque hay un solo Camino a Dios, la lección concluye que las misiones son:", optionsEn: ["the most loving thing the church can do", "an optional activity for some", "a cruel and needless errand", "merely a matter of culture"], optionsEs: ["lo más amoroso que la iglesia puede hacer", "una actividad opcional para algunos", "un encargo cruel e innecesario", "meramente un asunto de cultura"], correct: 0 },
+    { textEn: "16. 1 Timothy 2:4 teaches that God:", textEs: "16. 1 Timoteo 2:4 enseña que Dios:", optionsEn: ["desires only the elect to be saved", "desires all men to be saved and to come to the knowledge of the truth", "is indifferent to the nations", "wishes Israel alone to be saved"], optionsEs: ["desea que solo los elegidos sean salvos", "desea que todos los hombres sean salvos y vengan al conocimiento de la verdad", "es indiferente a las naciones", "desea que solo Israel sea salvo"], correct: 1 },
+    { textEn: "17. 2 Peter 3:9 says the Lord is not willing that:", textEs: "17. 2 Pedro 3:9 dice que el Señor no quiere que:", optionsEn: ["the wicked should ever hear", "any should prosper", "any should perish, but that all should come to repentance", "the gospel should spread too quickly"], optionsEs: ["el impío jamás oiga", "ninguno prospere", "ninguno perezca, sino que todos vengan al arrepentimiento", "el evangelio se extienda demasiado rápido"], correct: 2 },
+    { textEn: "18. According to 1 John 2:2, Christ is the propitiation:", textEs: "18. Según 1 Juan 2:2, Cristo es la propiciación:", optionsEn: ["for the elect only", "for the apostles only", "for Israel only", "for our sins, and also for the whole world"], optionsEs: ["solo por los elegidos", "solo por los apóstoles", "solo por Israel", "por nuestros pecados, y también por los de todo el mundo"], correct: 3 },
+    { textEn: "19. The lesson teaches that the appointed door through which salvation is received is:", textEs: "19. La lección enseña que la puerta señalada por la cual se recibe la salvación es:", optionsEn: ["faith, for without faith it is impossible to please God", "baptism by itself", "good works", "membership in a church"], optionsEs: ["la fe, porque sin fe es imposible agradar a Dios", "el bautismo por sí solo", "las buenas obras", "la membresía en una iglesia"], correct: 0 },
+    { textEn: "20. The closing challenge of the unit is that the God who sends:", textEs: "20. El desafío final de la unidad es que el Dios que envía:", optionsEn: ["has finished with the nations", "is sending still, and calls the church to go, send, and pray", "will gather the nations without using His church", "sends only trained professionals"], optionsEs: ["ha terminado con las naciones", "sigue enviando, y llama a la iglesia a ir, enviar y orar", "reunirá a las naciones sin usar a su iglesia", "envía solo a profesionales capacitados"], correct: 1 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Explain what is meant by the missio Dei, and why it matters that missions begins in the heart of God rather than with the church.", textEs: "21. Explique qué se entiende por la missio Dei, y por qué importa que las misiones comiencen en el corazón de Dios y no con la iglesia.", kwEn: ["god", "send", "father", "son", "spirit", "heart", "church", "mission"], kwEs: ["dios", "envi", "padre", "hijo", "espíritu", "corazón", "iglesia", "misión"],
+      modelEn: 'The missio Dei is the theological term for \'the mission of God\' — the truth that missions began not with a great missionary or even the Great Commission, but in eternity in the heart of God Himself: the Father sent the Son, the Father and Son sent the Spirit, and the risen Son now sends His church. It matters that missions begins with God rather than the church because if missions were merely our idea we could set it aside when costly; but since it flows from the character of the sending God, when we go, we are not starting something new, we are joining what God Himself is already doing.',
+      modelEs: 'La missio Dei es el término teológico para \'la misión de Dios\' — la verdad de que las misiones no comenzaron con un gran misionero ni siquiera con la Gran Comisión, sino en la eternidad en el corazón de Dios mismo: el Padre envió al Hijo, el Padre y el Hijo enviaron al Espíritu, y el Hijo resucitado ahora envía a su iglesia. Importa que las misiones comiencen con Dios y no con la iglesia porque si las misiones fueran meramente nuestra idea podríamos dejarlas de lado cuando resultan costosas; pero como fluyen del carácter del Dios que envía, cuando vamos, no estamos comenzando algo nuevo, nos estamos uniendo a lo que Dios mismo ya está haciendo.' },
+    { textEn: "22. According to the lesson, what is the ultimate goal of missions, and how is it greater than the rescue of the lost? Support your answer from Scripture.", textEs: "22. Según la lección, ¿cuál es la meta suprema de las misiones, y cómo es mayor que el rescate de los perdidos? Apoye su respuesta con la Escritura.", kwEn: ["glory", "nation", "worship", "lamb", "name", "rescue", "praise", "throne"], kwEs: ["gloria", "nacion", "adora", "cordero", "nombre", "rescat", "alab", "trono"],
+      modelEn: 'The ultimate goal of missions is not first the rescue of the lost but the glory of God among all peoples — worship rising to Him from every nation. Revelation 5:9 pictures the redeemed from every tribe, tongue, people, and nation falling before the Lamb in worship; the rescue of the lost is gloriously precious, but it serves the higher end of worship, and when the last of the redeemed is gathered in, missions will end and only worship will remain.',
+      modelEs: 'La meta suprema de las misiones no es primeramente el rescate de los perdidos sino la gloria de Dios entre todos los pueblos — la adoración que se eleva a Él desde toda nación. Apocalipsis 5:9 presenta a los redimidos de toda tribu, lengua, pueblo y nación postrándose delante del Cordero en adoración; el rescate de los perdidos es gloriosamente precioso, pero sirve al fin superior de la adoración, y cuando se reúna al último de los redimidos, las misiones terminarán y solo quedará la adoración.' },
+    { textEn: "23. Trace Paul's chain of missions in Romans 10:13–15. What does each link teach, and what is the conclusion for the unreached?", textEs: "23. Trace la cadena de las misiones de Pablo en Romanos 10:13–15. ¿Qué enseña cada eslabón, y cuál es la conclusión para los no alcanzados?", kwEn: ["call", "believ", "hear", "preach", "sent", "saved", "unreach", "gospel"], kwEs: ["invoc", "creer", "oír", "predic", "envia", "salv", "alcanz", "evangelio"],
+      modelEn: 'Paul\'s chain in Romans 10:13-15 works backward from salvation: whoever calls on the Lord shall be saved; but no one calls on One he has not believed in; no one believes in Christ he has never heard of; no one hears without a preacher; and no preacher goes unless he is sent. Each link is necessary for the one before it, and the conclusion for the unreached is that they cannot believe what they have never heard — which is why the church must go and must send.',
+      modelEs: 'La cadena de Pablo en Romanos 10:13-15 funciona hacia atrás desde la salvación: todo aquel que invocare el nombre del Señor será salvo; pero nadie invoca a aquel en quien no ha creído; nadie cree en Cristo de quien no ha oído; nadie oye sin haber un predicador; y no hay predicador si no es enviado. Cada eslabón es necesario para el anterior, y la conclusión para los no alcanzados es que no pueden creer lo que nunca han oído — por eso la iglesia debe ir y debe enviar.' },
+    { textEn: "24. Why is Jesus Christ the only Savior, and what passages establish this? (Acts 4:12; John 14:6; 1 Timothy 2:5)", textEs: "24. ¿Por qué es Jesucristo el único Salvador, y qué pasajes lo establecen? (Hechos 4:12; Juan 14:6; 1 Timoteo 2:5)", kwEn: ["christ", "only", "way", "name", "mediator", "salvation", "jesus", "truth"], kwEs: ["cristo", "único", "camino", "nombre", "mediador", "salva", "jesús", "verdad"],
+      modelEn: 'Jesus Christ is the only Savior because Scripture establishes it without exception: Peter declared there is salvation in no other name under heaven given among men (Acts 4:12); Jesus said He is the way, the truth, and the life, and no one comes to the Father except through Him (John 14:6); and Paul wrote there is one God and one Mediator between God and men, the Man Christ Jesus (1 Timothy 2:5). These three passages together establish that salvation is found exclusively in Christ, not as one option among many.',
+      modelEs: 'Jesucristo es el único Salvador porque la Escritura lo establece sin excepción: Pedro declaró que no hay salvación en ningún otro nombre dado entre los hombres bajo el cielo (Hechos 4:12); Jesús dijo que Él es el camino, la verdad y la vida, y que nadie viene al Padre sino por Él (Juan 14:6); y Pablo escribió que hay un Dios y un Mediador entre Dios y los hombres, el hombre Cristo Jesús (1 Timoteo 2:5). Estos tres pasajes juntos establecen que la salvación se halla exclusivamente en Cristo, no como una opción entre muchas.' },
+    { textEn: "25. Explain why the truth that there is only one Way to God makes missions loving rather than cruel.", textEs: "25. Explique por qué la verdad de que hay un solo Camino a Dios hace que las misiones sean amorosas en lugar de crueles.", kwEn: ["one", "way", "loving", "cruel", "savior", "lost", "carry", "gospel"], kwEs: ["solo", "camino", "amor", "cruel", "salvador", "perdid", "llevar", "evangelio"],
+      modelEn: 'If there were many roads to God, missions would be a cruel waste, sending people across oceans to peddle one option among many equally valid paths. But precisely because there is only one Way and one Mediator, missions becomes the most loving thing the church can do — we carry the only bread to people who are starving and the only cure to people who are dying, so withholding it would not be tolerance but the worst kind of cruelty.',
+      modelEs: 'Si hubiera muchos caminos a Dios, las misiones serían un desperdicio cruel, enviando gente al otro lado del océano para ofrecer una opción entre muchas igualmente válidas. Pero precisamente porque hay un solo Camino y un solo Mediador, las misiones se convierten en lo más amoroso que la iglesia puede hacer — llevamos el único pan a personas que se mueren de hambre y la única cura a personas que se están muriendo, así que negarlo no sería tolerancia sino la peor clase de crueldad.' },
+    { textEn: "26. From Scripture, describe God's saving desire for the world. How wide is His heart and the work of the cross? (1 Timothy 2:4; 2 Peter 3:9; 1 John 2:2)", textEs: "26. Desde la Escritura, describa el deseo salvador de Dios para el mundo. ¿Cuán ancho es su corazón y la obra de la cruz? (1 Timoteo 2:4; 2 Pedro 3:9; 1 Juan 2:2)", kwEn: ["all", "saved", "desire", "perish", "repent", "world", "died", "whole"], kwEs: ["todos", "salv", "desea", "perez", "arrepent", "mundo", "murió", "entero"],
+      modelEn: 'Scripture describes God\'s saving desire as reaching to all without exception: He desires all men to be saved and to come to the knowledge of the truth (1 Timothy 2:4); He is not willing that any should perish but that all should come to repentance (2 Peter 3:9); and Christ is the propitiation for our sins, and not for ours only but also for the whole world (1 John 2:2). God\'s heart and the reach of the cross are as wide as the whole human race, with no nation or people excluded.',
+      modelEs: 'La Escritura describe el deseo salvador de Dios como algo que alcanza a todos sin excepción: Él desea que todos los hombres sean salvos y vengan al conocimiento de la verdad (1 Timoteo 2:4); no quiere que ninguno perezca, sino que todos procedan al arrepentimiento (2 Pedro 3:9); y Cristo es la propiciación por nuestros pecados, y no solamente por los nuestros, sino también por los de todo el mundo (1 Juan 2:2). El corazón de Dios y el alcance de la cruz son tan anchos como toda la raza humana, sin ninguna nación o pueblo excluido.' },
+    { textEn: "27. What is the lostness of humanity apart from Christ, and why does it make missions urgent? (Romans 3:23; Ephesians 2:12)", textEs: "27. ¿Cuál es la perdición de la humanidad aparte de Cristo, y por qué hace urgentes las misiones? (Romanos 3:23; Efesios 2:12)", kwEn: ["sin", "lost", "hope", "christ", "death", "short", "glory", "world"], kwEs: ["pecad", "perdid", "esperanza", "cristo", "muerte", "destitu", "gloria", "mundo"],
+      modelEn: 'Apart from Christ, humanity is not merely unfortunate but lost — all have sinned and fall short of the glory of God (Romans 3:23), and those outside of Christ are described as having no hope and without God in the world (Ephesians 2:12). This lostness makes missions urgent because it is not a matter of helping people improve their circumstances but of rescuing people from an eternal, desperate condition they cannot escape without the gospel.',
+      modelEs: 'Aparte de Cristo, la humanidad no está meramente desafortunada sino perdida — todos pecaron, y están destituidos de la gloria de Dios (Romanos 3:23), y los que están fuera de Cristo se describen como sin esperanza y sin Dios en el mundo (Efesios 2:12). Esta perdición hace urgentes las misiones porque no se trata de ayudar a la gente a mejorar sus circunstancias sino de rescatar a personas de una condición eterna y desesperada de la cual no pueden escapar sin el evangelio.' },
+    { textEn: "28. Explain why faith is the appointed door of salvation, using Hebrews 11:6. Why must the call to believe reach every person?", textEs: "28. Explique por qué la fe es la puerta señalada de la salvación, usando Hebreos 11:6. ¿Por qué debe el llamado a creer alcanzar a toda persona?", kwEn: ["faith", "believ", "door", "please", "hebrews", "offer", "receiv", "every"], kwEs: ["fe", "creer", "puerta", "agrad", "hebreos", "ofrec", "recib", "toda"],
+      modelEn: 'Hebrews 11:6 says without faith it is impossible to please God, establishing faith as the appointed door through which salvation must be received. Because faith is the necessary response, and faith comes by hearing, the call to believe must reach every person without exception — no one can walk through a door they have never been shown, so the gospel offer must be pressed on every ear.',
+      modelEs: 'Hebreos 11:6 dice que sin fe es imposible agradar a Dios, estableciendo la fe como la puerta señalada por la cual debe recibirse la salvación. Porque la fe es la respuesta necesaria, y la fe viene por el oír, el llamado a creer debe alcanzar a toda persona sin excepción — nadie puede atravesar una puerta que nunca le han mostrado, así que la oferta del evangelio debe presionarse sobre todo oído.' },
+    { textEn: "29. What does John 20:21 teach about who is sent on mission? In what sense is every believer sent?", textEs: "29. ¿Qué enseña Juan 20:21 acerca de quién es enviado a la misión? ¿En qué sentido es enviado todo creyente?", kwEn: ["sent", "father", "church", "send", "believer", "go", "commission", "mission"], kwEs: ["envi", "padre", "iglesia", "enviar", "creyente", "ir", "comisión", "misión"],
+      modelEn: 'John 20:21 records Jesus saying, \'As the Father has sent Me, I also send you.\' This teaches that the sent-ness of the church flows directly from the sent-ness of Christ Himself — and that word was spoken not to professional missionaries only but to the church as a whole, meaning every believer shares in being sent, whether by going, sending, or praying.',
+      modelEs: 'Juan 20:21 registra a Jesús diciendo: \'Como me envió el Padre, así también yo os envió a vosotros.\' Esto enseña que el ser enviados de la iglesia fluye directamente del ser enviado de Cristo mismo — y esa palabra no fue dicha solo a misioneros profesionales sino a la iglesia entera, lo cual significa que todo creyente comparte el ser enviado, ya sea yendo, enviando, u orando.' },
+    { textEn: "30. The God who sends is sending still. What is your own response — will you go, send, or pray? Be specific.", textEs: "30. El Dios que envía sigue enviando. ¿Cuál es su propia respuesta — irá, enviará u orará? Sea específico.", kwEn: ["go", "send", "pray", "nation", "part", "sending", "still", "mission"], kwEs: ["ir", "enviar", "orar", "nacion", "parte", "envia", "sigue", "misión"],
+      modelEn: 'This is a personal response question inviting the student to name a specific, concrete way they will participate in God\'s ongoing mission — whether by going themselves, financially or practically sending others, or committing to consistent prayer for the unreached. A thoughtful answer names a specific nation, person, or step rather than a vague general intention.',
+      modelEs: 'Esta es una pregunta de respuesta personal que invita al estudiante a nombrar una manera específica y concreta en que participará en la misión continua de Dios — ya sea yendo él mismo, enviando a otros financiera o prácticamente, o comprometiéndose a orar con constancia por los no alcanzados. Una respuesta reflexiva nombra una nación, persona o paso específico en lugar de una intención general vaga.' }
+
+];
+
+// === Language toggle (3-button group) ===
+const langButtons = document.querySelectorAll('.lang-toggle-group button');
+function setLang(lang) {
+  document.body.classList.remove('lang-en','lang-es','lang-both');
+  document.body.classList.add('lang-' + lang);
+  langButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-lang') === lang));
+}
+langButtons.forEach(btn => btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang'))));
+
+// === Student + Track ===
+function readStudent() {
+  try { return JSON.parse(localStorage.getItem('cts_student') || 'null'); } catch(e) { return null; }
+}
+function readTrack() {
+  const t = localStorage.getItem('cts_track');
+  if (t === 'cert' || t === 'mdiv' || t === 'thm') return t;
+  const st = readStudent();
+  if (st && st.track) return st.track;
+  return 'cert';
+}
+function isMdiv() { const t = readTrack(); return t === 'mdiv' || t === 'thm'; }
+
+// === Greeting + track badge ===
+function applyStudentUI() {
+  const student = readStudent();
+  const isEs = document.body.classList.contains('lang-es');
+  const greetEl = document.getElementById('studentGreeting');
+  const warn = document.getElementById('regWarn');
+  const slot = document.getElementById('trackBadgeSlot');
+  if (student && student.name) {
+    greetEl.innerHTML = '👋 ' + student.name;
+    if (warn) warn.classList.add('hidden');
+    const track = readTrack();
+    const label = track === 'thm' ? 'Th.M.' : (track === 'mdiv' ? 'M.Div' : (isEs ? 'Certificado' : 'Certificate'));
+    if (slot) slot.innerHTML = '<span class="track-badge">' + label + '</span>';
+  } else {
+    greetEl.innerHTML = '<span style="color:#5b3a1f;">' + (isEs ? 'Bienvenido a Misiones Mundiales' : 'Welcome to World Missions') + '</span>';
+    if (warn) warn.classList.remove('hidden');
+    if (slot) slot.innerHTML = '';
+  }
+}
+
+// === Registration modal (U1 only) ===
+
+function showRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.remove('hidden');
+}
+function hideRegModal() {
+  const modal = document.getElementById('regModal');
+  if (modal) modal.classList.add('hidden');
+}
+const regModal = document.getElementById('regModal');
+const openBtn = document.getElementById('openRegBtn');
+const openBtn2 = document.getElementById('openRegBtn2');
+const saveBtn = document.getElementById('regSaveBtn');
+if (openBtn) openBtn.addEventListener('click', showRegModal);
+if (openBtn2) openBtn2.addEventListener('click', showRegModal);
+if (saveBtn) saveBtn.addEventListener('click', () => {
+  const name = (document.getElementById('regName').value || '').trim();
+  const email = (document.getElementById('regEmail').value || '').trim();
+  const track = (document.querySelector('input[name="regTrack"]:checked') || {}).value || 'cert';
+  const isEs = document.body.classList.contains('lang-es');
+  if (!name) {
+    alert(isEs ? 'Por favor ingrese su nombre completo.' : 'Please enter your full name.');
+    return;
+  }
+  const rec = { name: name, email: email, track: track };
+  try {
+    localStorage.setItem('cts_student', JSON.stringify(rec));
+    localStorage.setItem('cts_track', track);
+  } catch(e) {}
+  hideRegModal();
+  applyStudentUI();
+  applyExamState();
+});
+// Auto-open modal on U1 if no cts_student present
+if (CURRENT_UNIT === 1 && !readStudent()) {
+  showRegModal();
+}
+
+
+// === Progress grid ===
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem('cts_missions_progress')) || {}; } catch(e) { progress = {}; }
+function updateProgressGrid() {
+  const grid = document.getElementById('progressGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 1; i <= TOTAL_UNITS; i++) {
+    let cls = '';
+    if (progress['unit' + i]) cls = 'completed';
+    if (i === CURRENT_UNIT) cls += ' active';
+    grid.innerHTML += '<a href="CTSMissionsUnit' + i + '.html" class="' + cls + '">' + i + '</a>';
+  }
+}
+updateProgressGrid();
+document.getElementById('prevUnitBtn').onclick = () => {};
+document.getElementById('nextUnitBtn').onclick = () => { window.location.href = NEXT_URL; };
+
+// === Per-unit state keys ===
+const MC_PASSED_KEY = 'cts_missions_u' + CURRENT_UNIT + '_mc_passed';
+const SA_PASSED_KEY = 'cts_missions_u' + CURRENT_UNIT + '_sa_passed';
+const MC_SCORE_KEY = 'cts_missions_u' + CURRENT_UNIT + '_mc_score';
+const LOCK_MC_KEY = 'cts_missions_u' + CURRENT_UNIT + '_lockout';
+const LOCK_SA_KEY = 'cts_missions_u' + CURRENT_UNIT + '_sa_lockout';
+
+function mcPassed() { return localStorage.getItem(MC_PASSED_KEY) === '1'; }
+function saPassed() { return localStorage.getItem(SA_PASSED_KEY) === '1'; }
+function activeLock() {
+  const now = Date.now();
+  const mc = parseInt(localStorage.getItem(LOCK_MC_KEY) || '0', 10);
+  const sa = parseInt(localStorage.getItem(LOCK_SA_KEY) || '0', 10);
+  if (mcPassed()) { if (now < sa) return { until: sa, scope: 'sa' }; }
+  else { if (now < mc) return { until: mc, scope: 'mc' }; }
+  return null;
+}
+
+// === Render MC ===
+const mcContainer = document.getElementById('mcContainer');
+mcQuestions.forEach((q, idx) => {
+    /* CTS answer-shuffle (anti-gaming): randomize option order on each render */
+    (function(){var _o=q.optionsEn,_s=q.optionsEs,_n=_o.length,_p=[],_k,_i,_j,_t;for(_k=0;_k<_n;_k++){_p.push(_k);}for(_i=_n-1;_i>0;_i--){_j=Math.floor(Math.random()*(_i+1));_t=_p[_i];_p[_i]=_p[_j];_p[_j]=_t;}q.optionsEn=_p.map(function(x){return _o[x];});q.optionsEs=_p.map(function(x){return _s[x];});q.correct=_p.indexOf(q.correct);})();
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'mcq' + (idx + 1);
+  let h = '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>';
+  for (let i = 0; i < 4; i++) {
+    const letter = 'ABCD'[i];
+    h += '<button class="option" data-mc="' + idx + '" data-opt="' + i + '" type="button">' +
+         '<strong>' + letter + '.</strong> ' +
+         '<span class="lang-en">' + q.optionsEn[i] + '</span><span class="lang-es">' + q.optionsEs[i] + '</span>' +
+         '</button>';
+  }
+  mcContainer.appendChild(qDiv);
+  qDiv.innerHTML = h;
+  // Click handler on each option
+  qDiv.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (mcPassed()) return;
+      if (qDiv.dataset.answered !== undefined && qDiv.dataset.answered !== '') return;
+      const isEs = document.body.classList.contains('lang-es');
+      const chosen = parseInt(btn.getAttribute('data-opt'), 10);
+      const correct = q.correct;
+      qDiv.dataset.answered = String(chosen);
+      qDiv.querySelectorAll('.option').forEach(b => {
+        const oi = parseInt(b.getAttribute('data-opt'), 10);
+        b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+        if (oi === correct) b.classList.add('correct');
+        else if (oi === chosen) b.classList.add('wrong');
+      });
+      const oldfb = qDiv.querySelector('.feedback-text'); if (oldfb) oldfb.remove();
+      const fb = document.createElement('div');
+      if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+      else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+      qDiv.appendChild(fb);
+    });
+  });
+});
+
+// === Smart keyword matcher (word-boundary, like the other CTS courses) ===
+function kwHit(answer, kw){
+  if(!kw) return false;
+  var a=(answer||'').toLowerCase();
+  var k=String(kw).toLowerCase().trim();
+  if(!k) return false;
+  var esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var L='0-9a-zA-Z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1';
+  var re = k.length<=3 ? new RegExp('(?:^|[^'+L+'])'+esc+'(?!['+L+'])') : new RegExp('(?:^|[^'+L+'])'+esc);
+  return re.test(a);
+}
+function revealSAModel(idx){
+  var q=kwQuestions[idx];
+  var isEs=document.body.classList.contains('lang-es');
+  var box=document.getElementById('saModel'+idx);
+  if(!box) return;
+  var head=isEs?'Respuesta modelo \u2014 est\u00fadiela':'Model answer \u2014 study this';
+  box.innerHTML='<strong>'+head+':</strong><br>'+(isEs?(q.modelEs||''):(q.modelEn||''));
+  box.style.display='block';
+}
+
+// === Render SA ===
+const kwContainer = document.getElementById('kwContainer');
+kwQuestions.forEach((q, idx) => {
+  const qDiv = document.createElement('div');
+  qDiv.className = 'question';
+  qDiv.id = 'saq' + (idx + 1);
+  qDiv.innerHTML =
+    '<p class="q"><span class="lang-en">' + q.textEn + '</span><span class="lang-es">' + q.textEs + '</span></p>' +
+    '<textarea class="kw-answer" data-sa="' + idx + '" placeholder=""></textarea>' +
+    '<button class="small check-kw-btn" type="button"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>' +
+    '<div class="feedback-text" id="saFb' + idx + '" style="display:none"></div>' +
+    '<div class="sa-model" id="saModel' + idx + '" style="display:none"></div>';
+  kwContainer.appendChild(qDiv);
+  const btn = qDiv.querySelector('.check-kw-btn');
+  const ta = qDiv.querySelector('.kw-answer');
+  btn.addEventListener('click', () => {
+    const isEs = document.body.classList.contains('lang-es');
+    const fb = document.getElementById('saFb' + idx);
+    const ans = (ta.value || '').trim();
+    if(!ans){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba su respuesta primero, luego verifique.' : 'Write your answer first, then check.';
+      var mb=document.getElementById('saModel'+idx); if(mb) mb.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    if(ans.length < 100){
+      fb.className = 'feedback-text';
+      fb.style.display = 'block';
+      fb.textContent = isEs ? 'Escriba una respuesta m\u00e1s completa (al menos 100 caracteres) antes de verificar.' : 'Write a fuller answer (at least 100 characters) before checking.';
+      var mb2=document.getElementById('saModel'+idx); if(mb2) mb2.style.display='none';
+      qDiv.dataset.answered = '0';
+      return;
+    }
+    const kws = isEs ? (q.kwEs || []) : (q.kwEn || []);
+    let hits = 0;
+    kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+    const ok = hits >= 3;
+    qDiv.dataset.answered = ok ? '1' : '0';
+    fb.className = 'feedback-text ' + (ok ? 'correct' : 'incorrect');
+    fb.style.display = 'block';
+    fb.textContent = ok
+      ? (isEs ? ('\u2713 Suficientes palabras clave (' + hits + ').') : ('\u2713 Sufficient keywords (' + hits + ').'))
+      : (isEs ? ('\u2717 A\u00fan no acreditada. Encontr\u00f3 ' + hits + ' de 3.') : ('\u2717 Not yet credited. Found ' + hits + ' of 3.'));
+    revealSAModel(idx);
+  });
+});
+
+// === UI state machine ===
+const mcSection = document.getElementById('mcSection');
+const saSection = document.getElementById('saSection');
+const statusEl = document.getElementById('examStatus');
+const submitBtn = document.getElementById('submitExamBtn');
+const resetBtn = document.getElementById('resetExamBtn');
+const resultEl = document.getElementById('examResult');
+
+function setStatus(cls, en, es) {
+  statusEl.className = 'exam-status ' + cls;
+  statusEl.innerHTML = '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+}
+function clearStatus() { statusEl.className = 'exam-status hidden'; statusEl.innerHTML = ''; }
+function lockMcAsReview() {
+  document.querySelectorAll('#mcContainer .question').forEach(q => {
+    q.classList.add('review-locked');
+    q.querySelectorAll('.option').forEach(b => { b.disabled = true; });
+  });
+}
+
+function revealMC() {
+  const isEs = document.body.classList.contains('lang-es');
+  for (let i = 0; i < mcQuestions.length; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (!qd) continue;
+    const correct = mcQuestions[i].correct;
+    const chosen = (qd.dataset.answered !== undefined && qd.dataset.answered !== '') ? parseInt(qd.dataset.answered, 10) : -1;
+    qd.querySelectorAll('.option').forEach(b => {
+      const oi = parseInt(b.getAttribute('data-opt'), 10);
+      b.classList.remove('correct','wrong'); b.style.background=''; b.style.borderColor=''; b.style.fontWeight='';
+      if (oi === correct) b.classList.add('correct');
+      else if (oi === chosen) b.classList.add('wrong');
+    });
+    let fb = qd.querySelector('.feedback-text');
+    if (!fb) { fb = document.createElement('div'); qd.appendChild(fb); }
+    if (chosen === correct) { fb.className = 'feedback-text correct'; fb.textContent = isEs ? '✓ ¡Correcto!' : '✓ Correct!'; }
+    else { const cL = 'ABCD'[correct]; fb.className = 'feedback-text incorrect'; fb.textContent = (isEs ? '✗ Incorrecto. Respuesta correcta: ' : '✗ Incorrect. Correct answer: ') + cL; }
+  }
+}
+
+
+function applyExamState() {
+  const isEs = document.body.classList.contains('lang-es');
+  // SA section is ALWAYS visible
+  saSection.style.display = '';
+  const badgeEn = document.getElementById('saBadgeEn');
+  const badgeEs = document.getElementById('saBadgeEs');
+  const noteEn = document.getElementById('saNoteEn');
+  const noteEs = document.getElementById('saNoteEs');
+  if (isMdiv()) {
+    badgeEn.textContent = 'Required for M.Div';
+    badgeEs.textContent = 'Requerido para M.Div';
+    noteEn.textContent = 'These 10 short-answer questions are required to complete Unit ' + CURRENT_UNIT + ' on the M.Div track. You must pass at 9 of 10.';
+    noteEs.textContent = 'Estas 10 preguntas de respuesta corta son requeridas para completar la Unidad ' + CURRENT_UNIT + ' en la vía M.Div. Debe aprobar con 9 de 10.';
+  } else {
+    badgeEn.textContent = 'Self-study — not graded for Certificate';
+    badgeEs.textContent = 'Auto-estudio — no cuenta para Certificado';
+    noteEn.textContent = 'These are the M.Div-level questions. Certificate students are welcome to attempt them for self-check; your answers will not affect your Unit ' + CURRENT_UNIT + ' pass status.';
+    noteEs.textContent = 'Estas son las preguntas de nivel M.Div. Los estudiantes de Certificado pueden intentarlas para auto-evaluarse; sus respuestas no afectarán el estado de aprobación de la Unidad ' + CURRENT_UNIT + '.';
+  }
+  const lock = activeLock();
+  if (lock) {
+    const minsLeft = Math.ceil((lock.until - Date.now()) / 60000);
+    submitBtn.disabled = true;
+    if (lock.scope === 'mc') {
+      setStatus('locked',
+        'Exam locked. Try again in ' + minsLeft + ' minute(s). The full exam will reset.',
+        'Examen bloqueado. Intente de nuevo en ' + minsLeft + ' minuto(s). El examen completo se reiniciará.');
+    } else {
+      setStatus('locked',
+        'Short-answer section locked. Try again in ' + minsLeft + ' minute(s). Multiple-choice pass is preserved.',
+        'Sección de respuesta corta bloqueada. Intente de nuevo en ' + minsLeft + ' minuto(s). Su aprobación de opción múltiple se conserva.');
+      lockMcAsReview();
+    }
+    setTimeout(applyExamState, 30000);
+    return;
+  }
+  submitBtn.disabled = false;
+  if (mcPassed()) {
+    lockMcAsReview();
+    if (isMdiv() && !saPassed()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed (saved). Complete the 10 short-answer questions to finish Unit ' + CURRENT_UNIT + '.',
+        'Opción múltiple aprobada (guardada). Complete las 10 preguntas de respuesta corta para terminar la Unidad ' + CURRENT_UNIT + '.');
+    } else if (!isMdiv()) {
+      setStatus('mc-passed',
+        'Multiple-choice passed. Unit ' + CURRENT_UNIT + ' complete for Certificate track.',
+        'Opción múltiple aprobada. Unidad ' + CURRENT_UNIT + ' completa para la vía Certificado.');
+    } else {
+      clearStatus();
+    }
+  } else {
+    clearStatus();
+  }
+}
+
+submitBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const lock = activeLock();
+  if (lock) { applyExamState(); return; }
+
+  // Score MC
+  let mc = 0;
+  for (let i = 0; i < 20; i++) {
+    const qd = document.getElementById('mcq' + (i + 1));
+    if (qd && qd.dataset.answered !== undefined && parseInt(qd.dataset.answered, 10) === mcQuestions[i].correct) mc++;
+  }
+  if (mcPassed()) {
+    mc = parseInt(localStorage.getItem(MC_SCORE_KEY) || '18', 10);
+  }
+  const mcPass = mc >= 18;
+  revealMC();
+
+  // Score SA
+  let sa = 0;
+  for (let i = 0; i < 10; i++) {
+    const qd = document.getElementById('saq' + (i + 1));
+    if (qd && qd.dataset.answered === '1') sa++;
+  }
+  const saPass = sa >= 9;
+
+  if (!isMdiv()) {
+    // Certificate track — only MC matters
+    if (mcPass) {
+      localStorage.setItem(MC_PASSED_KEY, '1');
+      localStorage.setItem(MC_SCORE_KEY, String(mc));
+      progress['unit' + CURRENT_UNIT] = true;
+      localStorage.setItem('cts_missions_progress', JSON.stringify(progress));
+      resultEl.style.color = '#1f6b3b';
+      resultEl.textContent = (isEs
+        ? '¡Aprobado! OM ' + mc + '/20. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+        : 'Passed! MC ' + mc + '/20. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+    } else {
+      localStorage.setItem(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+    }
+    return;
+  }
+
+  // M.Div track
+  if (!mcPassed()) {
+    if (!mcPass) {
+      localStorage.setItem(LOCK_MC_KEY, String(Date.now() + 15 * 60 * 1000));
+      resultEl.style.color = '#8a1f1f';
+      resultEl.textContent = (isEs
+        ? 'Reprobado: OM ' + mc + '/20. Necesita 18. Bloqueado 15 min. Examen completo se reiniciará.'
+        : 'Failed: MC ' + mc + '/20. Need 18. Locked 15 min. Full exam will reset.');
+      submitBtn.disabled = true;
+      setTimeout(applyExamState, 30000);
+      return;
+    }
+    localStorage.setItem(MC_PASSED_KEY, '1');
+    localStorage.setItem(MC_SCORE_KEY, String(mc));
+  }
+  if (saPass) {
+    localStorage.setItem(SA_PASSED_KEY, '1');
+    progress['unit' + CURRENT_UNIT] = true;
+    localStorage.setItem('cts_missions_progress', JSON.stringify(progress));
+    const finalMc = parseInt(localStorage.getItem(MC_SCORE_KEY) || '18', 10);
+    resultEl.style.color = '#1f6b3b';
+    resultEl.textContent = (isEs
+      ? '¡Aprobado! OM ' + finalMc + '/20, RC ' + sa + '/10. Unidad ' + CURRENT_UNIT + ' completa. Redirigiendo...'
+      : 'Passed! MC ' + finalMc + '/20, SA ' + sa + '/10. Unit ' + CURRENT_UNIT + ' complete. Redirecting...');
+  } else {
+    localStorage.setItem(LOCK_SA_KEY, String(Date.now() + 15 * 60 * 1000));
+    resultEl.style.color = '#8a1f1f';
+    resultEl.textContent = (isEs
+      ? 'RC ' + sa + '/10. Necesita 9. Sección RC bloqueada 15 min. OM permanece aprobada.'
+      : 'SA ' + sa + '/10. Need 9. SA section locked 15 min. MC pass preserved.');
+    submitBtn.disabled = true;
+    setTimeout(applyExamState, 30000);
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  const isEs = document.body.classList.contains('lang-es');
+  const msg = isEs
+    ? '¿Reiniciar la Unidad ' + CURRENT_UNIT + '? Esto borrará sus respuestas y el estado de aprobación de OM/RC para esta unidad. (Esto no borra su registro.)'
+    : 'Reset Unit ' + CURRENT_UNIT + '? This will clear your answers and MC/SA pass state for this unit. (Does not clear your registration.)';
+  if (!window.confirm(msg)) return;
+  [MC_PASSED_KEY, SA_PASSED_KEY, LOCK_MC_KEY, LOCK_SA_KEY, MC_SCORE_KEY].forEach(k => localStorage.removeItem(k));
+  if (progress['unit' + CURRENT_UNIT]) {
+    delete progress['unit' + CURRENT_UNIT];
+    localStorage.setItem('cts_missions_progress', JSON.stringify(progress));
+  }
+  window.location.reload();
+});
+
+// Initial render
+applyStudentUI();
+langButtons.forEach(b => b.addEventListener('click', applyStudentUI));
+applyExamState();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSMissionsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

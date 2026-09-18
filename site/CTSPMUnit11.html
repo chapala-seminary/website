@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Pastoral Ministries — Unit 11: The Pastor's Family and Self-Care</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-warning { background: #fae8e8; border: 1px solid #efc2c2; border-radius: 12px; padding: 15px; margin-bottom: 20px; color: #8a1f1f; }
+.pull-quote { background: #faf3e3; border-left: 4px solid #f4c542; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #5b3a1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-warning { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Unit 10</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 12 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Pastoral Ministries — Unit 11: The Pastor's Family and Self-Care</span><span class="lang-es">📖 Ministerios Pastorales — Unidad 11: La Familia del Pastor y el Cuidado Personal</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"Take heed to yourself and to the doctrine. Continue in them, for in doing this you will save both yourself and those who hear you." — 1 Timothy 4:16 (NKJV)</span><span class="lang-es">"Ten cuidado de ti mismo y de la doctrina; persiste en ello; pues haciendo esto, te salvarás a ti mismo y a los que te oyeren." — 1 Timoteo 4:16 (RVG)</span></p>
+</div>
+
+<div id="regWarning" class="reg-warning" style="display:none;">
+    <span class="lang-en">⚠️ You have not yet registered. Please <a href="CTSPMUnit1.html" style="color:#5b3a1f;">return to Unit 1</a> to register before continuing.</span>
+    <span class="lang-es">⚠️ Aún no se ha registrado. Por favor <a href="CTSPMUnit1.html" style="color:#5b3a1f;">regrese a la Unidad 1</a> para registrarse antes de continuar.</span>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>Pastors burn out. Pastors quit. Pastors fall morally. Pastors lose their marriages. Pastors become strangers to their own children. Pastors die early from preventable diseases caused by stress, poor sleep, and bad eating. Pastors wake up in their fifties and discover they have a thriving ministry and an empty home.</p>
+
+        <p>These outcomes are common enough that every honest pastoral training program must address them. The pastor cannot care for the flock if he is destroying himself. He cannot lead a healthy church out of an unhealthy life. He cannot give from an empty soul. This unit examines the practical disciplines by which a pastor protects his marriage, his children, his body, his soul, and his long-term endurance in ministry.</p>
+
+        <p>The unit may feel less theological than the others. That is by design. Most pastors know the doctrine. Few practice the disciplines. The disciplines are what keep a man in ministry for forty years instead of seven.</p>
+
+        <h2>I. The Pastor's Marriage</h2>
+        <p>The first ministry of every married pastor is to his wife. She came before the church did, and she will be there after the church is gone. Among the qualifications Paul lists for pastoral leadership, one of the earliest is this: <em>"A bishop then must be blameless, the husband of one wife"</em> (1 Timothy 3:2). Whatever significance its place in the list carries, the substance of the qualification stands on its own: the man who cannot keep his marriage cannot lead a church.</p>
+
+        <p>The pastor's wife is not a staff member. She did not sign up to be the unpaid director of women's ministry, the church secretary, the pianist, and the hostess for every visiting missionary. She signed up to be a wife. The faithful pastor refuses to let the church load expectations onto his wife that are not hers to carry. She may have her own gifts and ministries, freely chosen. She may have none. Either is fine. The pastor protects her right to figure out, in the Lord, what God is calling her to — not what the deacons' wives think she should be doing.</p>
+
+        <p>The marriage itself requires deliberate cultivation. A regular date night that the pastor refuses to cancel for church business. Honest communication about the pressures of ministry, the difficult members, the financial worries, the temptations. Physical affection that is not subordinated to exhaustion. Spiritual partnership — praying together, reading Scripture together, attending church together not as pastor-and-wife but as husband-and-wife who happen to be in their own pew. The marriage that thrives in ministry is the marriage that gets fed. The marriage that withers in ministry is the marriage that is taken for granted.</p>
+
+        <p>Let me share something I rarely teach in the abstract, but I believe future pastors need to hear it from a man who has walked it. I was married to my first wife, Andi, for forty-five years. She was my partner through pastoral ministry, prison chaplaincy, seminary teaching, and decades of walking alongside the Lord. About ten years ago she went home to be with the Lord after a battle with cancer. There is no preparation in seminary for that loss. The man whose wife of forty-five years dies discovers what grief actually is, and he discovers what it means to keep walking with Christ through the valley of the shadow of death. The Lord did not abandon me in those years. The brothers around me carried me through. The Word that I had preached for decades held me when I needed holding.</p>
+
+        <p>In time the Lord brought a beautiful Mexican woman into my life, and we married. Her children are my children, and my children are hers. The blended family is itself a picture of God's grace — that a man who thought a chapter of his life had ended could be given a second season of love and family and ministry. Not every pastor will walk this particular road. But every pastor will face seasons that change everything, seasons in which the only thing left is the gospel he has been preaching to others. I write this to encourage any pastor reading it: when those seasons come, the Christ who has been your subject for years becomes your only refuge. He is sufficient. He carried me. He will carry you.</p>
+
+        <p>What I have learned through all of it is that the marriage covenant is far deeper than the comfortable picture of two people growing old together in an unbroken line. It is a covenant of two people walking with God, side by side, in whatever shape that walk takes. While Andi was with me, I tried to give her the best of myself. After she was gone, I grieved her well. When God brought my second wife, I gave her my whole heart again. The pastor who lives this way through whatever the Lord assigns him is the pastor who finishes well.</p>
+
+        <h2>II. The Pastor's Children</h2>
+        <p>The pastor's children did not choose ministry. They were born into it. Their father's vocation will shape every year of their childhood — for blessing or for harm. A great deal depends on whether the pastor handles the role wisely.</p>
+
+        <p>The phrase "preacher's kid syndrome" exists for a reason. It refers to children of pastors who grow up resenting the church because the church always took their father away from them, who develop performance-based identities because everyone expected them to be perfect examples of godliness, who walk away from the faith in their twenties because the version of Christianity they saw at home was hollow.</p>
+
+        <p>These outcomes are not inevitable. They are the result of specific failures the pastor can avoid.</p>
+
+        <p><em>Be present.</em> The pastor's children need his time more than they need his sermons. A pastor who is at the church seven nights a week, even doing good things, will lose his children. The discipline of being home at dinner most nights, attending the school events, coaching the team, reading bedtime stories — that discipline pays dividends for the rest of those children's lives.</p>
+
+        <p><em>Do not weaponize them in the pulpit.</em> The temptation to use a clever story about your child as a sermon illustration is real and dangerous. The child becomes uneasy walking into church, never knowing if today will be the day his private moment becomes Sunday morning entertainment. The pastor's children deserve privacy.</p>
+
+        <p><em>Do not demand performance.</em> Your children are not extensions of your ministry. They will sin. They will fail. They will go through phases. They will, in adolescence, embarrass you. The pastor who insists his children represent his ministry well will produce children who learn to fake faith for an audience and lose it as soon as they leave home.</p>
+
+        <p><em>Let them see real Christianity at home.</em> The Christianity that survives is the Christianity the children watched their father live when no one else was watching. They saw him pray for his wife. They saw him forgive when wronged. They saw him grieve a hard week with honesty rather than performance. They saw him love Jesus because he loved Jesus, not because it was his job. That is the faith that lasts.</p>
+
+        <h2>III. The Pastor and Sabbath</h2>
+        <p>Jesus, in the middle of the busiest season of His earthly ministry, looked at His exhausted disciples and said, <em>"Come aside by yourselves to a deserted place and rest a while"</em> (Mark 6:31). He had just heard about John the Baptist's death. The crowds were pressing in. The needs were endless. Jesus said: rest.</p>
+
+        <p>If Jesus prioritized rest in His ministry, the pastor should too. Whether the fourth commandment binds New Testament believers as a specific Sabbath law is a matter of real disagreement among faithful evangelicals — some hold that Christ fulfilled and transformed the Sabbath rather than continuing it as a binding command (Colossians 2:16-17), others see a Christian Sabbath principle carrying forward in some form. Whatever one concludes on that question, the wisdom of the underlying principle is not in doubt: the pastor who never rests is not proving his devotion. He is setting himself up to break.</p>
+
+        <p>The Sabbath for a pastor is not Sunday. Sunday is the busiest workday of his week. A wise weekly rest day is some other day — Monday for many pastors, Friday for others, whatever day works in the rhythm of his church. On that day, he does not study for sermons. He does not return non-emergency calls. He does not check email. He does not visit hospitals unless someone is dying. He rests. He spends the day with his wife and family. He sleeps. He worships informally. He laughs. He plays. He recovers.</p>
+
+        <p>The pastor who guards a weekly rhythm of rest gives himself the best chance of pastoring at sixty with something like the energy he had at thirty. The pastor who never rests at all is far more likely to be empty before forty.</p>
+
+        <h2>IV. The Pastor's Friendships</h2>
+        <p>Pastoral ministry can be uniquely lonely. Friendship with his deacons is possible and often good, but the pastor still carries a role his deacons do not, and few congregants should be made his sole confessor in ways that burden them or compromise his ministry. He cannot dump his struggles on his congregation as a whole; they need him strong. His wife is his closest friend, but a wife alone cannot bear all of a husband's burdens. The pastor needs friends.</p>
+
+        <p>The friends usually have to come from outside the church. Other pastors are often the best fit — men in similar roles in other congregations or other denominations, with whom genuine peer friendship can develop. A monthly lunch with two or three brothers in ministry, where everything can be said honestly, where prayer and laughter and tears can flow without performance, can keep a pastor sane through the hardest seasons.</p>
+
+        <p>The pastor who has no such friends is one bad week away from despair. The pastor who has them rides through hard weeks because the brothers are praying him through.</p>
+
+        <p>My experience over many decades is that genuine ministry friendships are among God's greatest gifts to His servants. Some of the men I have known in pastoral, prison, and seminary settings have walked beside me for thirty years and more. We have buried each other's loved ones, prayed each other through diagnoses and dark seasons, and laughed at the absurdities of ministry together. Without those brothers, I would not be standing today. Every pastor reading this needs to find his three or four men and never let them go.</p>
+
+        <h2>V. The Pastor's Body</h2>
+        <p>Paul reminded the Corinthians that their bodies are temples of the Holy Spirit (1 Corinthians 6:19). The pastor often forgets this when applied to himself. He gets four hours of sleep before Sunday. He eats fast food because the day is full. He skips exercise because he has too much to do. He drinks too much coffee, sits at his desk for ten hours straight, and wonders why he is exhausted at fifty.</p>
+
+        <p>The body is part of the man. A pastor whose body is breaking will preach with less power, counsel with less patience, and lead with less wisdom than he could have. The faithful pastor takes care of his body not out of vanity but out of stewardship.</p>
+
+        <p>That means sleep. Most adults need seven to eight hours. A pastor who runs on five for twenty years is borrowing against his future health. It means exercise. A walk most days, a sport, time on a bike, work in a garden — something that moves the body and clears the head. It means eating reasonably. The pastor does not need to be on a diet, but he should not be drinking soda and eating fried food at every meal. It means medical checkups. The annual physical, the dental cleanings, the recommended screenings. Most pastors who die early die from causes that were detectable years before.</p>
+
+        <h2>VI. The Pastor's Devotional Life</h2>
+        <p>The pastor must read the Bible for his own soul, separately from reading it for sermons. This is one of the most easily lost disciplines in ministry. The man whose only Scripture engagement is sermon preparation will, within a few years, find his soul running on fumes. He has handled the Word of God all week as a tool. He needs to come to the Word as a hungry man comes to bread.</p>
+
+        <p>The same is true of prayer. The pastor leads in public prayer constantly — pastoral prayer in the service, prayer at the bedside, prayer at the wedding. He must also pray in private, for his own soul, with no audience. Daniel prayed three times a day, with the windows open toward Jerusalem, knowing the king's spies were watching, and he prayed because he needed to pray. The pastor needs to pray because he needs to pray.</p>
+
+        <p>Worship is also for the pastor. On a vacation Sunday when he is not preaching, the pastor should be in someone's pew, singing the hymns, hearing the Word preached by another, taking the Lord's Supper as a worshiper rather than a server. If he never does this, his own worship withers and his congregation eventually senses that the pastor is going through motions rather than meeting God.</p>
+
+        <h2>VII. The Pastor's Mental Health</h2>
+        <p>Pastors get depressed. Pastors get anxious. Pastors burn out. Pastors have suicidal thoughts in dark seasons. The pastoral guild is full of men who needed help and did not get it because they thought asking for help was weakness or that pastors are not allowed such struggles.</p>
+
+        <p>The faithful pastor must reject this lie. Depression is not unspirituality. Anxiety is not unbelief. The man wrestling with these realities is not a worse Christian than the man who is not. He is a man who needs help. The faithful pastor recognizes the symptoms in himself, confesses them honestly to his wife and his close pastor friends, sees a Christian counselor or psychiatrist when needed, takes medication if a doctor prescribes it, and does not pretend everything is fine when it is not.</p>
+
+        <p>If a pastor reads this and recognizes himself in the description, the next step is not to feel guilty. The next step is to make a phone call this week — to his wife if he has not been honest with her, to a brother in ministry, to a Christian counselor, to a doctor. Help exists, and it helps far more often than despair tells a struggling man it will. The kingdom of God needs faithful pastors for the long run, and that begins with taking care of himself now.</p>
+
+        <p>If what he recognizes in himself right now includes thoughts of ending his life, that is not a someday problem to raise at the next lunch with a ministry friend — it needs help today. Call the emergency number in his own country, go to an emergency room, or call a crisis line right now; in the United States, that is 988, the Suicide and Crisis Lifeline, available by call or text. Tell a trusted person immediately rather than carrying it alone even for one more night. This is not weakness or unbelief. It is the same wisdom that sends a man with chest pain to the hospital rather than telling him to pray it away.</p>
+
+        <h2>VIII. The Long View</h2>
+        <p>Add up the disciplines of this unit and what emerges is a portrait of a sustainable life. A protected marriage. Children who actually know their father. A weekly Sabbath. A handful of trusted friends. A body that is cared for. A soul that is fed. A mind that is honest about its own state.</p>
+
+        <p>A pastor who builds his life this way can serve for forty years. A pastor who does not is a candidate for one of the casualty categories at the start of this unit — the burnout, the moral fall, the empty home, the early grave. The choice is the pastor's, made not in a single dramatic moment but in a thousand small decisions every week.</p>
+
+        <p>It is striking that Paul's pastoral letters return again and again to the pastor's character and personal life rather than to ministry strategy. <em>"Take heed to yourself and to the doctrine"</em> (1 Timothy 4:16). Paul commands attention to both together, and the sheer frequency with which his pastoral letters return to personal character is itself worth noticing: the man who keeps himself well will keep the doctrine well too. The man who lets himself crumble will eventually betray the doctrine he is supposed to be guarding.</p>
+
+        <h2>Closing</h2>
+        <p>The pastor is a man, not a machine. He has a wife who needs him, children who need him, a body that needs sleep and exercise, a soul that needs feeding, a mind that needs honest care, friendships that need cultivation, and a Sabbath that needs guarding. The pastor who treats himself as a machine breaks. The pastor who treats himself as a man — God's beloved son, called to a ministry that requires the long obedience of a healthy life — endures.</p>
+
+        <p>The Lord Jesus, in the middle of His three years of public ministry, regularly <em>"withdrew into the wilderness and prayed"</em> (Luke 5:16). If the Son of God needed that rhythm, the pastor reading this needs it more.</p>
+
+        <p>May every pastor reading this commit afresh to the disciplines that protect the man, so that the ministry can endure to the end.</p>
+
+        <p><em>"He gives power to the weak, and to those who have no might He increases strength. Even the youths shall faint and be weary, and the young men shall utterly fall, but those who wait on the Lord shall renew their strength; they shall mount up with wings like eagles, they shall run and not be weary, they shall walk and not faint"</em> (Isaiah 40:29–31).</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>Los pastores se queman. Los pastores renuncian. Los pastores caen moralmente. Los pastores pierden sus matrimonios. Los pastores se vuelven extraños para sus propios hijos. Los pastores mueren temprano de enfermedades prevenibles causadas por estrés, mal sueño, y mala alimentación. Los pastores se despiertan en sus cincuentas y descubren que tienen un ministerio próspero y un hogar vacío.</p>
+
+        <p>Estos resultados son lo suficientemente comunes para que todo programa honesto de entrenamiento pastoral deba abordarlos. El pastor no puede cuidar al rebaño si se está destruyendo a sí mismo. No puede dirigir una iglesia saludable desde una vida no saludable. No puede dar de un alma vacía. Esta unidad examina las disciplinas prácticas por las cuales un pastor protege su matrimonio, sus hijos, su cuerpo, su alma, y su perseverancia a largo plazo en el ministerio.</p>
+
+        <p>La unidad puede sentirse menos teológica que las otras. Eso es por diseño. La mayoría de los pastores conocen la doctrina. Pocos practican las disciplinas. Las disciplinas son las que mantienen a un hombre en el ministerio por cuarenta años en lugar de siete.</p>
+
+        <h2>I. El matrimonio del pastor</h2>
+        <p>El primer ministerio de cada pastor casado es a su esposa. Ella vino antes que la iglesia, y ella estará allí después de que la iglesia se haya ido. Entre las calificaciones que Pablo enumera para el liderazgo pastoral, una de las primeras es esta: <em>"Es necesario que el obispo sea irreprensible, marido de una sola mujer"</em> (1 Timoteo 3:2). Sea cual sea el significado de su lugar en la lista, la sustancia de la calificación permanece por sí sola: el hombre que no puede mantener su matrimonio no puede dirigir una iglesia.</p>
+
+        <p>La esposa del pastor no es un miembro del personal. Ella no se inscribió para ser la directora no remunerada del ministerio de mujeres, la secretaria de la iglesia, la pianista, y la anfitriona para cada misionero visitante. Se inscribió para ser una esposa. El pastor fiel rehúsa permitir que la iglesia cargue expectativas sobre su esposa que no son las de ella para llevar. Ella puede tener sus propios dones y ministerios, libremente escogidos. Puede no tener ninguno. Cualquiera está bien. El pastor protege su derecho a descubrir, en el Señor, lo que Dios la está llamando a ser — no lo que las esposas de los diáconos piensan que debería estar haciendo.</p>
+
+        <p>El matrimonio mismo requiere cultivo deliberado. Una noche regular de cita que el pastor rehúsa cancelar por asuntos de la iglesia. Comunicación honesta sobre las presiones del ministerio, los miembros difíciles, las preocupaciones financieras, las tentaciones. Afecto físico que no es subordinado al cansancio. Compañerismo espiritual — orar juntos, leer las Escrituras juntos, asistir a la iglesia juntos no como pastor-y-esposa sino como esposo-y-esposa que casualmente están en su propia banca. El matrimonio que prospera en el ministerio es el matrimonio que es alimentado. El matrimonio que se marchita en el ministerio es el matrimonio que se da por sentado.</p>
+
+        <p>Permítanme compartir algo que rara vez enseño en lo abstracto, pero creo que los futuros pastores necesitan oírlo de un hombre que lo ha caminado. Estuve casado con mi primera esposa, Andi, por cuarenta y cinco años. Ella fue mi compañera a través del ministerio pastoral, la capellanía de prisión, la enseñanza de seminario, y décadas de caminar al lado del Señor. Hace aproximadamente diez años ella se fue a casa para estar con el Señor después de una batalla con el cáncer. No hay preparación en el seminario para esa pérdida. El hombre cuya esposa de cuarenta y cinco años muere descubre lo que el dolor realmente es, y descubre lo que significa seguir caminando con Cristo a través del valle de sombra de muerte. El Señor no me abandonó en esos años. Los hermanos a mi alrededor me cargaron a través. La Palabra que había predicado por décadas me sostuvo cuando necesité ser sostenido.</p>
+
+        <p>Con el tiempo el Señor trajo a una bella mujer mexicana a mi vida, y nos casamos. Sus hijos son mis hijos, y mis hijos son los suyos. La familia mezclada es en sí misma un cuadro de la gracia de Dios — que a un hombre que pensó que un capítulo de su vida había terminado se le pudiera dar una segunda temporada de amor y familia y ministerio. No todo pastor caminará este camino particular. Pero cada pastor enfrentará temporadas que cambian todo, temporadas en las cuales la única cosa que queda es el evangelio que ha estado predicando a otros. Escribo esto para alentar a cualquier pastor que lo lea: cuando esas temporadas vengan, el Cristo que ha sido su tema por años se convierte en su único refugio. Él es suficiente. Me cargó. Lo cargará a usted.</p>
+
+        <p>Lo que he aprendido a través de todo esto es que el pacto matrimonial es mucho más profundo que la cómoda imagen de dos personas envejeciendo juntas en una línea ininterrumpida. Es un pacto de dos personas caminando con Dios, lado a lado, en cualquier forma que ese caminar tome. Mientras Andi estaba conmigo, traté de darle lo mejor de mí mismo. Después de que ella se fue, la lloré bien. Cuando Dios trajo a mi segunda esposa, le di mi corazón entero de nuevo. El pastor que vive de esta manera a través de cualquier cosa que el Señor le asigne es el pastor que termina bien.</p>
+
+        <h2>II. Los hijos del pastor</h2>
+        <p>Los hijos del pastor no escogieron el ministerio. Nacieron en él. La vocación de su padre formará cada año de su niñez — para bendición o para daño. Mucho depende de si el pastor maneja el papel sabiamente.</p>
+
+        <p>La frase "síndrome del hijo de predicador" existe por una razón. Se refiere a hijos de pastores que crecen resentidos con la iglesia porque la iglesia siempre les quitó a su padre, que desarrollan identidades basadas en el desempeño porque todos esperaban que fueran ejemplos perfectos de piedad, que se alejan de la fe en sus veintes porque la versión de cristianismo que vieron en casa era hueca.</p>
+
+        <p>Estos resultados no son inevitables. Son el resultado de fallas específicas que el pastor puede evitar.</p>
+
+        <p><em>Esté presente.</em> Los hijos del pastor necesitan su tiempo más de lo que necesitan sus sermones. Un pastor que está en la iglesia siete noches a la semana, aun haciendo cosas buenas, perderá a sus hijos. La disciplina de estar en casa para la cena la mayoría de las noches, asistir a los eventos escolares, entrenar al equipo, leer cuentos antes de dormir — esa disciplina paga dividendos por el resto de las vidas de esos hijos.</p>
+
+        <p><em>No los use como armas en el púlpito.</em> La tentación de usar una historia ingeniosa sobre su hijo como ilustración de sermón es real y peligrosa. El niño se vuelve incómodo entrando a la iglesia, nunca sabiendo si hoy será el día en que su momento privado se convierta en entretenimiento del domingo en la mañana. Los hijos del pastor merecen privacidad.</p>
+
+        <p><em>No exija desempeño.</em> Sus hijos no son extensiones de su ministerio. Pecarán. Fallarán. Pasarán por etapas. En la adolescencia, lo avergonzarán. El pastor que insiste en que sus hijos representen bien su ministerio producirá hijos que aprenden a fingir la fe ante una audiencia y la pierden tan pronto como salen de casa.</p>
+
+        <p><em>Que vean cristianismo real en casa.</em> El cristianismo que sobrevive es el cristianismo que los hijos vieron a su padre vivir cuando nadie más estaba mirando. Lo vieron orar por su esposa. Lo vieron perdonar cuando fue agraviado. Lo vieron afligirse de una semana dura con honestidad en lugar de con desempeño. Lo vieron amar a Jesús porque amaba a Jesús, no porque fuera su trabajo. Esa es la fe que dura.</p>
+
+        <h2>III. El pastor y el sábado de descanso</h2>
+        <p>Jesús, en medio de la temporada más ocupada de Su ministerio terrenal, miró a Sus discípulos exhaustos y dijo, <em>"Venid vosotros aparte a un lugar desierto, y descansad un poco"</em> (Marcos 6:31). Acababa de oír sobre la muerte de Juan el Bautista. Las multitudes estaban presionando. Las necesidades eran interminables. Jesús dijo: descansen.</p>
+
+        <p>Si Jesús priorizó el descanso en Su ministerio, el pastor también debería hacerlo. Si el cuarto mandamiento obliga a los creyentes del Nuevo Testamento como una ley sabática específica es un asunto de desacuerdo real entre evangélicos fieles — algunos sostienen que Cristo cumplió y transformó el sábado en lugar de continuarlo como un mandamiento vinculante (Colosenses 2:16-17), otros ven un principio sabático cristiano que continúa de alguna forma. Sea cual sea la conclusión sobre esa pregunta, la sabiduría del principio subyacente no está en duda: el pastor que nunca descansa no está probando su devoción. Se está preparando para quebrarse.</p>
+
+        <p>El sábado de descanso para un pastor no es el domingo. El domingo es el día más ocupado de su semana laboral. Un sabio día de descanso semanal es algún otro día — el lunes para muchos pastores, el viernes para otros, cualquier día que funcione en el ritmo de su iglesia. En ese día, no estudia para sermones. No devuelve llamadas no urgentes. No revisa correos electrónicos. No visita hospitales a menos que alguien esté muriendo. Descansa. Pasa el día con su esposa y familia. Duerme. Adora informalmente. Ríe. Juega. Se recupera.</p>
+
+        <p>El pastor que guarda un ritmo semanal de descanso se da la mejor oportunidad de pastorear a los sesenta con algo parecido a la energía que tenía a los treinta. El pastor que nunca descansa en absoluto tiene mucha más probabilidad de estar vacío antes de los cuarenta.</p>
+
+        <h2>IV. Las amistades del pastor</h2>
+        <p>El ministerio pastoral puede ser únicamente solitario. La amistad con sus diáconos es posible y a menudo buena, pero el pastor todavía carga con un rol que sus diáconos no tienen, y pocos congregantes deberían convertirse en su único confesor de maneras que los carguen o comprometan su ministerio. No puede descargar sus luchas en su congregación como un todo; ellos lo necesitan fuerte. Su esposa es su amiga más cercana, pero una esposa sola no puede llevar todas las cargas de un esposo. El pastor necesita amigos.</p>
+
+        <p>Los amigos usualmente tienen que venir de afuera de la iglesia. Otros pastores son a menudo el mejor encaje — hombres en roles similares en otras congregaciones u otras denominaciones, con quienes una amistad genuina entre pares puede desarrollarse. Un almuerzo mensual con dos o tres hermanos en el ministerio, donde todo puede ser dicho honestamente, donde la oración y la risa y las lágrimas pueden fluir sin desempeño, puede mantener a un pastor cuerdo a través de las temporadas más duras.</p>
+
+        <p>El pastor que no tiene tales amigos está a una mala semana de la desesperación. El pastor que los tiene cabalga a través de semanas duras porque los hermanos lo están orando a través.</p>
+
+        <p>Mi experiencia a lo largo de muchas décadas es que las amistades genuinas del ministerio están entre los más grandes regalos de Dios a Sus siervos. Algunos de los hombres que he conocido en escenarios pastorales, de prisión, y de seminario han caminado a mi lado por treinta años o más. Hemos enterrado a los seres queridos unos de otros, hemos orado unos por otros a través de diagnósticos y temporadas oscuras, y hemos reído de los absurdos del ministerio juntos. Sin esos hermanos, no estaría parado hoy. Cada pastor que lea esto necesita encontrar a sus tres o cuatro hombres y nunca dejarlos ir.</p>
+
+        <h2>V. El cuerpo del pastor</h2>
+        <p>Pablo le recordó a los corintios que sus cuerpos son templos del Espíritu Santo (1 Corintios 6:19). El pastor a menudo olvida esto cuando se aplica a sí mismo. Duerme cuatro horas antes del domingo. Come comida rápida porque el día está lleno. Salta el ejercicio porque tiene demasiado que hacer. Bebe demasiado café, se sienta en su escritorio por diez horas seguidas, y se pregunta por qué está exhausto a los cincuenta.</p>
+
+        <p>El cuerpo es parte del hombre. Un pastor cuyo cuerpo se está rompiendo predicará con menos poder, aconsejará con menos paciencia, y dirigirá con menos sabiduría de la que podría haber tenido. El pastor fiel cuida de su cuerpo no por vanidad sino por mayordomía.</p>
+
+        <p>Eso significa dormir. La mayoría de los adultos necesitan siete a ocho horas. Un pastor que vive con cinco por veinte años está pidiendo prestado contra su salud futura. Significa ejercicio. Una caminata la mayoría de los días, un deporte, tiempo en una bicicleta, trabajo en un jardín — algo que mueva el cuerpo y aclare la cabeza. Significa comer razonablemente. El pastor no necesita estar en una dieta, pero no debe estar bebiendo refrescos y comiendo comida frita en cada comida. Significa chequeos médicos. El examen físico anual, las limpiezas dentales, los exámenes recomendados. La mayoría de los pastores que mueren temprano mueren de causas que eran detectables años antes.</p>
+
+        <h2>VI. La vida devocional del pastor</h2>
+        <p>El pastor debe leer la Biblia para su propia alma, separadamente de leerla para sermones. Esta es una de las disciplinas más fácilmente perdidas en el ministerio. El hombre cuyo único compromiso con la Escritura es la preparación de sermones, dentro de unos pocos años, encontrará su alma corriendo en humo. Ha manejado la Palabra de Dios toda la semana como una herramienta. Necesita venir a la Palabra como un hombre hambriento viene al pan.</p>
+
+        <p>Lo mismo es cierto de la oración. El pastor dirige en oración pública constantemente — oración pastoral en el servicio, oración al lado de la cama, oración en la boda. También debe orar en privado, por su propia alma, sin audiencia. Daniel oraba tres veces al día, con las ventanas abiertas hacia Jerusalén, sabiendo que los espías del rey estaban observando, y oraba porque necesitaba orar. El pastor necesita orar porque necesita orar.</p>
+
+        <p>La adoración es también para el pastor. En un domingo de vacaciones cuando no está predicando, el pastor debe estar en la banca de alguien, cantando los himnos, oyendo la Palabra predicada por otro, tomando la Cena del Señor como un adorador en lugar de como un servidor. Si nunca hace esto, su propia adoración se marchita y su congregación eventualmente percibe que el pastor está pasando por movimientos en lugar de encontrarse con Dios.</p>
+
+        <h2>VII. La salud mental del pastor</h2>
+        <p>Los pastores se deprimen. Los pastores se vuelven ansiosos. Los pastores se queman. Los pastores tienen pensamientos suicidas en temporadas oscuras. El gremio pastoral está lleno de hombres que necesitaban ayuda y no la recibieron porque pensaron que pedir ayuda era debilidad o que a los pastores no se les permite tales luchas.</p>
+
+        <p>El pastor fiel debe rechazar esta mentira. La depresión no es no-espiritualidad. La ansiedad no es incredulidad. El hombre luchando con estas realidades no es un peor cristiano que el hombre que no lo hace. Es un hombre que necesita ayuda. El pastor fiel reconoce los síntomas en sí mismo, los confiesa honestamente a su esposa y a sus amigos pastores cercanos, ve a un consejero o psiquiatra cristiano cuando sea necesario, toma medicación si un doctor la prescribe, y no pretende que todo esté bien cuando no lo está.</p>
+
+        <p>Si un pastor lee esto y se reconoce en la descripción, el siguiente paso no es sentirse culpable. El siguiente paso es hacer una llamada telefónica esta semana — a su esposa si no ha sido honesto con ella, a un hermano en el ministerio, a un consejero cristiano, a un doctor. La ayuda existe, y ayuda mucho más a menudo de lo que la desesperación le dice a un hombre que está luchando. El reino de Dios necesita pastores fieles a largo plazo, y eso comienza con cuidarse a sí mismo ahora.</p>
+
+        <p>Si lo que reconoce en sí mismo ahora mismo incluye pensamientos de terminar con su vida, eso no es un problema para "algún día" que se plantea en el próximo almuerzo con un amigo del ministerio — necesita ayuda hoy. Llame al número de emergencia de su propio país, vaya a una sala de emergencias, o llame a una línea de crisis ahora mismo. Dígale a una persona de confianza de inmediato en lugar de cargarlo solo una noche más. Esto no es debilidad ni incredulidad. Es la misma sabiduría que envía a un hombre con dolor en el pecho al hospital en lugar de decirle que ore para que se le quite.</p>
+
+        <h2>VIII. La visión a largo plazo</h2>
+        <p>Sume las disciplinas de esta unidad y lo que emerge es un retrato de una vida sostenible. Un matrimonio protegido. Hijos que realmente conocen a su padre. Un sábado semanal de descanso. Un puñado de amigos confiables. Un cuerpo que es cuidado. Un alma que es alimentada. Una mente que es honesta sobre su propio estado.</p>
+
+        <p>Un pastor que edifica su vida de esta manera puede servir por cuarenta años. Un pastor que no lo hace es candidato para una de las categorías de bajas al inicio de esta unidad — el agotamiento, la caída moral, el hogar vacío, la tumba temprana. La elección es del pastor, hecha no en un solo momento dramático sino en mil decisiones pequeñas cada semana.</p>
+
+        <p>Es notable que las cartas pastorales de Pablo regresen una y otra vez al carácter y vida personal del pastor en lugar de a la estrategia ministerial. <em>"Ten cuidado de ti mismo y de la doctrina"</em> (1 Timoteo 4:16). Pablo manda atención a ambas cosas juntas, y la sola frecuencia con que sus cartas pastorales regresan al carácter personal es notable en sí misma: el hombre que se mantiene bien a sí mismo mantendrá la doctrina bien también. El hombre que se permite desmoronarse eventualmente traicionará la doctrina que se supone que está guardando.</p>
+
+        <h2>Cierre</h2>
+        <p>El pastor es un hombre, no una máquina. Tiene una esposa que lo necesita, hijos que lo necesitan, un cuerpo que necesita sueño y ejercicio, un alma que necesita ser alimentada, una mente que necesita cuidado honesto, amistades que necesitan cultivo, y un sábado de descanso que necesita ser guardado. El pastor que se trata a sí mismo como una máquina se rompe. El pastor que se trata a sí mismo como un hombre — el hijo amado de Dios, llamado a un ministerio que requiere la larga obediencia de una vida saludable — perdura.</p>
+
+        <p>El Señor Jesús, en medio de Sus tres años de ministerio público, regularmente <em>"se apartaba a lugares desiertos, y oraba"</em> (Lucas 5:16). Si el Hijo de Dios necesitó ese ritmo, el pastor que lee esto lo necesita más.</p>
+
+        <p>Que cada pastor que lea esto se comprometa de nuevo a las disciplinas que protegen al hombre, para que el ministerio pueda perdurar hasta el final.</p>
+
+        <p><em>"Él da esfuerzo al cansado, y multiplica las fuerzas al que no tiene ningunas. Los muchachos se fatigan y se cansan, y los jóvenes flaquean y caen; pero los que esperan en Jehová tendrán nuevas fuerzas; levantarán las alas como las águilas; correrán, y no se cansarán; caminarán, y no se fatigarán"</em> (Isaías 40:29-31).</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 11 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 11 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 11;
+let progress = JSON.parse(localStorage.getItem('cts_pm_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSPMUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit11) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSPMUnit10.html"; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSPMUnit12.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="CTSPMUnit1.html" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+        document.getElementById('regWarning').style.display = 'block';
+    }
+}
+displayStudentGreeting();
+
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        currentLang = (lang === 'es') ? 'es' : 'en';
+        renderQuestions();
+    };
+});
+
+// Andi-specific questions (originally Q4-Q7) replaced with non-bio content per Wayne's directive.
+const mcQuestions = [
+  {
+    "textEn": "1. The first ministry of every married pastor is to:",
+    "textEs": "1. El primer ministerio de cada pastor casado es a:",
+    "optionsEn": [
+      "His congregation",
+      "His wife",
+      "His denomination",
+      "His staff"
+    ],
+    "optionsEs": [
+      "Su congregación",
+      "Su esposa",
+      "Su denominación",
+      "Su personal"
+    ],
+    "c": 22,
+    "explEn": "The first ministry of every married pastor is to his wife.",
+    "explEs": "El primer ministerio de todo pastor casado es a su esposa."
+  },
+  {
+    "textEn": "2. According to 1 Timothy 3:2, a bishop must be:",
+    "textEs": "2. Según 1 Timoteo 3:2, un obispo debe ser:",
+    "optionsEn": [
+      "Blameless, the husband of one wife",
+      "A great preacher",
+      "A skilled administrator",
+      "A trained theologian"
+    ],
+    "optionsEs": [
+      "Irreprensible, marido de una sola mujer",
+      "Un gran predicador",
+      "Un administrador hábil",
+      "Un teólogo entrenado"
+    ],
+    "c": 28,
+    "explEn": "1 Timothy 3:2 requires a bishop to be blameless, the husband of one wife.",
+    "explEs": "1 Timoteo 3:2 requiere que un obispo sea irreprensible, marido de una sola mujer."
+  },
+  {
+    "textEn": "3. The pastor's wife is best understood as:",
+    "textEs": "3. La esposa del pastor se entiende mejor como:",
+    "optionsEn": [
+      "The director of women's ministry",
+      "The unpaid church secretary",
+      "Not a staff member — she signed up to be a wife",
+      "Required to lead all church functions"
+    ],
+    "optionsEs": [
+      "La directora del ministerio de mujeres",
+      "La secretaria no pagada de la iglesia",
+      "No un miembro del personal — se inscribió para ser una esposa",
+      "Requerida para dirigir todas las funciones de la iglesia"
+    ],
+    "c": 37,
+    "explEn": "The pastor's wife is not a staff member — she signed up to be a wife.",
+    "explEs": "La esposa del pastor no es un miembro del personal — ella firmó para ser esposa."
+  },
+  {
+    "textEn": "4. A regular date night between the pastor and his wife should be:",
+    "textEs": "4. Una noche regular de cita entre el pastor y su esposa debe ser:",
+    "optionsEn": [
+      "Cancelled freely whenever church business calls",
+      "Optional and rare",
+      "Held only when the church calendar happens to allow it",
+      "Something the pastor refuses to cancel for church business"
+    ],
+    "optionsEs": [
+      "Cancelada libremente cuando los asuntos de la iglesia llaman",
+      "Opcional y rara",
+      "Realizada solo cuando el calendario de la iglesia lo permita",
+      "Algo que el pastor rehúsa cancelar por asuntos de la iglesia"
+    ],
+    "c": 45,
+    "explEn": "A regular date night is something the pastor refuses to cancel for church business.",
+    "explEs": "Una cita regular es algo que el pastor rehúsa cancelar por asuntos de la iglesia."
+  },
+  {
+    "textEn": "5. The marriage that thrives in pastoral ministry is:",
+    "textEs": "5. El matrimonio que prospera en el ministerio pastoral es:",
+    "optionsEn": [
+      "The marriage taken for granted",
+      "The marriage that gets fed deliberately",
+      "The marriage on autopilot",
+      "The marriage attended to only in crisis"
+    ],
+    "optionsEs": [
+      "El matrimonio que se da por sentado",
+      "El matrimonio que es alimentado deliberadamente",
+      "El matrimonio en piloto automático",
+      "El matrimonio atendido solo en crisis"
+    ],
+    "c": 50,
+    "explEn": "The marriage that thrives in ministry is the one that gets fed deliberately.",
+    "explEs": "El matrimonio que prospera en el ministerio es el que se alimenta deliberadamente."
+  },
+  {
+    "textEn": "6. The faithful pastor's posture toward congregational expectations placed on his wife is to:",
+    "textEs": "6. La postura del pastor fiel hacia las expectativas congregacionales puestas sobre su esposa es:",
+    "optionsEn": [
+      "Refuse to let the church load expectations onto her that are not hers to carry",
+      "Pass them all on to her so she can serve fully",
+      "Encourage her to take every role offered",
+      "Let the deacons' wives decide what she should do"
+    ],
+    "optionsEs": [
+      "Rehusar permitir que la iglesia cargue sobre ella expectativas que no son suyas para llevar",
+      "Pasárselas todas para que sirva plenamente",
+      "Alentarla a tomar cada rol ofrecido",
+      "Dejar que las esposas de los diáconos decidan lo que debe hacer"
+    ],
+    "c": 56,
+    "explEn": "The faithful pastor refuses to let the church load expectations onto his wife.",
+    "explEs": "El pastor fiel rehúsa dejar que la iglesia cargue expectativas sobre su esposa."
+  },
+  {
+    "textEn": "7. The unit recommends that the pastor and his wife attend church together as:",
+    "textEs": "7. La unidad recomienda que el pastor y su esposa asistan a la iglesia juntos como:",
+    "optionsEn": [
+      "Pastor-and-wife performing formal roles",
+      "In separate seats to maximize ministry reach",
+      "Husband-and-wife who happen to be in their own pew",
+      "Only when the schedule permits"
+    ],
+    "optionsEs": [
+      "Pastor-y-esposa desempeñando roles formales",
+      "En asientos separados para maximizar el alcance ministerial",
+      "Esposo-y-esposa que casualmente están en su propia banca",
+      "Solo cuando el horario lo permite"
+    ],
+    "c": 65,
+    "explEn": "The pastor and his wife attend church as husband-and-wife in their own pew.",
+    "explEs": "El pastor y su esposa asisten a la iglesia como esposos en su propio banco."
+  },
+  {
+    "textEn": "8. 'Preacher's kid syndrome' is described in this unit as:",
+    "textEs": "8. El 'síndrome del hijo de predicador' se describe en esta unidad como:",
+    "optionsEn": [
+      "Inevitable for all pastors' children",
+      "A myth with no basis",
+      "Caused by the denomination, not the home",
+      "The result of specific failures the pastor can avoid"
+    ],
+    "optionsEs": [
+      "Inevitable para todos los hijos de pastores",
+      "Un mito sin base",
+      "Causado por la denominación, no el hogar",
+      "El resultado de fallas específicas que el pastor puede evitar"
+    ],
+    "c": 73,
+    "explEn": "'Preacher's kid syndrome' is the result of specific failures the pastor can avoid.",
+    "explEs": "El 'síndrome del hijo del predicador' es resultado de fallas específicas que el pastor puede evitar."
+  },
+  {
+    "textEn": "9. The pastor's children deserve, among other things:",
+    "textEs": "9. Los hijos del pastor merecen, entre otras cosas:",
+    "optionsEn": [
+      "Constant performance from their father",
+      "Privacy — not to be weaponized in the pulpit",
+      "Pressure to be ministry examples",
+      "Public recognition every Sunday"
+    ],
+    "optionsEs": [
+      "Desempeño constante de su padre",
+      "Privacidad — no ser usados como armas en el púlpito",
+      "Presión para ser ejemplos ministeriales",
+      "Reconocimiento público cada domingo"
+    ],
+    "c": 78,
+    "explEn": "The pastor's children deserve privacy — not to be weaponized in the pulpit.",
+    "explEs": "Los hijos del pastor merecen privacidad — no ser usados como arma en el púlpito."
+  },
+  {
+    "textEn": "10. Jesus' instruction to His exhausted disciples in Mark 6:31 was:",
+    "textEs": "10. La instrucción de Jesús a Sus discípulos exhaustos en Marcos 6:31 fue:",
+    "optionsEn": [
+      "Come aside by yourselves to a deserted place and rest a while",
+      "Push through the fatigue",
+      "Increase the work",
+      "Find another set of disciples"
+    ],
+    "optionsEs": [
+      "Venid vosotros aparte a un lugar desierto, y descansad un poco",
+      "Sobrellevar el cansancio",
+      "Aumentar el trabajo",
+      "Encontrar otro grupo de discípulos"
+    ],
+    "c": 84,
+    "explEn": "Mark 6:31: Jesus told His disciples to come aside to a deserted place and rest a while.",
+    "explEs": "Marcos 6:31: Jesús dijo a Sus discípulos venir aparte a un lugar desierto y descansar un poco."
+  },
+  {
+    "textEn": "11. The pastor's Sabbath day is NOT:",
+    "textEs": "11. El sábado de descanso del pastor NO es:",
+    "optionsEn": [
+      "Monday",
+      "Friday",
+      "Whatever day fits his church's rhythm",
+      "Sunday — that is his busiest workday"
+    ],
+    "optionsEs": [
+      "El lunes",
+      "El viernes",
+      "Cualquier día que encaje en el ritmo de su iglesia",
+      "El domingo — ese es su día laboral más ocupado"
+    ],
+    "c": 94,
+    "explEn": "The pastor's Sabbath day is NOT Sunday — that is his busiest workday.",
+    "explEs": "El día sabático del pastor NO es el domingo — ese es su día de trabajo más ocupado."
+  },
+  {
+    "textEn": "12. The pastor's friendships usually have to come from:",
+    "textEs": "12. Las amistades del pastor usualmente tienen que venir de:",
+    "optionsEn": [
+      "Within his deacon board",
+      "His staff members",
+      "Outside the church — often other pastors",
+      "His family alone"
+    ],
+    "optionsEs": [
+      "Dentro de su junta de diáconos",
+      "Sus miembros del personal",
+      "Afuera de la iglesia — a menudo otros pastores",
+      "Su familia sola"
+    ],
+    "c": 100,
+    "explEn": "The pastor's friendships usually come from outside the church — often other pastors.",
+    "explEs": "Las amistades del pastor usualmente vienen de fuera de la iglesia — a menudo otros pastores."
+  },
+  {
+    "textEn": "13. 1 Corinthians 6:19 reminds believers that their bodies are:",
+    "textEs": "13. 1 Corintios 6:19 recuerda a los creyentes que sus cuerpos son:",
+    "optionsEn": [
+      "Temples of the Holy Spirit",
+      "Dispensable in service",
+      "Less important than the soul",
+      "Only secondary to ministry"
+    ],
+    "optionsEs": [
+      "Templos del Espíritu Santo",
+      "Desechables en el servicio",
+      "Menos importantes que el alma",
+      "Solo secundarios al ministerio"
+    ],
+    "c": 105,
+    "explEn": "1 Corinthians 6:19 reminds believers their bodies are temples of the Holy Spirit.",
+    "explEs": "1 Corintios 6:19 recuerda a los creyentes que sus cuerpos son templos del Espíritu Santo."
+  },
+  {
+    "textEn": "14. The recommended sleep for most adults is:",
+    "textEs": "14. El sueño recomendado para la mayoría de los adultos es:",
+    "optionsEn": [
+      "Three to four hours",
+      "Seven to eight hours",
+      "Five to six hours",
+      "Ten to twelve hours"
+    ],
+    "optionsEs": [
+      "Tres a cuatro horas",
+      "Siete a ocho horas",
+      "Cinco a seis horas",
+      "Diez a doce horas"
+    ],
+    "c": 113,
+    "explEn": "The recommended sleep for most adults is seven to eight hours.",
+    "explEs": "El sueño recomendado para la mayoría de los adultos es de siete a ocho horas."
+  },
+  {
+    "textEn": "15. The pastor must read Scripture:",
+    "textEs": "15. El pastor debe leer la Escritura:",
+    "optionsEn": [
+      "Only for sermon preparation",
+      "Only for counseling preparation",
+      "For his own soul, separately from sermon preparation",
+      "Only on Sunday mornings"
+    ],
+    "optionsEs": [
+      "Solo para preparación de sermones",
+      "Solo para preparación de consejería",
+      "Para su propia alma, separadamente de la preparación de sermones",
+      "Solo los domingos en la mañana"
+    ],
+    "c": 121,
+    "explEn": "The pastor must read Scripture for his own soul, separately from sermon preparation.",
+    "explEs": "El pastor debe leer la Escritura para su propia alma, aparte de la preparación del sermón."
+  },
+  {
+    "textEn": "16. Daniel's prayer pattern was:",
+    "textEs": "16. El patrón de oración de Daniel era:",
+    "optionsEn": [
+      "Three times a day with windows open toward Jerusalem",
+      "Once a week in private",
+      "Only when the king required it",
+      "Silent and never observable"
+    ],
+    "optionsEs": [
+      "Tres veces al día con las ventanas abiertas hacia Jerusalén",
+      "Una vez por semana en privado",
+      "Solo cuando el rey lo requería",
+      "Silenciosa y nunca observable"
+    ],
+    "c": 126,
+    "explEn": "Daniel's prayer pattern was three times a day with windows open toward Jerusalem.",
+    "explEs": "El patrón de oración de Daniel era tres veces al día con las ventanas abiertas hacia Jerusalén."
+  },
+  {
+    "textEn": "17. According to this unit, depression in a pastor is:",
+    "textEs": "17. Según esta unidad, la depresión en un pastor es:",
+    "optionsEn": [
+      "Always a sign of unspirituality",
+      "Always disqualifying",
+      "Best ignored",
+      "Not unspirituality — the man wrestling with it needs help, not guilt"
+    ],
+    "optionsEs": [
+      "Siempre una señal de no-espiritualidad",
+      "Siempre descalificante",
+      "Mejor ignorada",
+      "No es no-espiritualidad — el hombre luchando con ella necesita ayuda, no culpa"
+    ],
+    "c": 136,
+    "explEn": "Depression in a pastor is not unspirituality — he needs help, not guilt.",
+    "explEs": "La depresión en un pastor no es falta de espiritualidad — necesita ayuda, no culpa."
+  },
+  {
+    "textEn": "18. Paul's order in 1 Timothy 4:16 is:",
+    "textEs": "18. El orden de Pablo en 1 Timoteo 4:16 es:",
+    "optionsEn": [
+      "Doctrine first, then yourself",
+      "Family first, then ministry",
+      "Take heed to yourself first, then to the doctrine",
+      "Church members first, then doctrine"
+    ],
+    "optionsEs": [
+      "La doctrina primero, luego usted mismo",
+      "La familia primero, luego el ministerio",
+      "Tenga cuidado de usted mismo primero, luego de la doctrina",
+      "Los miembros de la iglesia primero, luego la doctrina"
+    ],
+    "c": 142,
+    "explEn": "Paul's order in 1 Timothy 4:16 is take heed to yourself first, then to the doctrine.",
+    "explEs": "El orden de Pablo en 1 Timoteo 4:16 es cuidar de ti mismo primero, luego de la doctrina."
+  },
+  {
+    "textEn": "19. Luke 5:16 tells us that Jesus regularly:",
+    "textEs": "19. Lucas 5:16 nos dice que Jesús regularmente:",
+    "optionsEn": [
+      "Confronted his enemies",
+      "Withdrew into the wilderness and prayed",
+      "Preached in synagogues",
+      "Healed the sick"
+    ],
+    "optionsEs": [
+      "Confrontaba a sus enemigos",
+      "Se apartaba a lugares desiertos y oraba",
+      "Predicaba en sinagogas",
+      "Sanaba a los enfermos"
+    ],
+    "c": 148,
+    "explEn": "Luke 5:16 tells us Jesus regularly withdrew into the wilderness and prayed.",
+    "explEs": "Lucas 5:16 nos dice que Jesús regularmente se apartaba al desierto y oraba."
+  },
+  {
+    "textEn": "20. The unit's closing Scripture, Isaiah 40:29-31, promises that those who wait on the Lord:",
+    "textEs": "20. La Escritura de cierre de la unidad, Isaías 40:29-31, promete que los que esperan en el Señor:",
+    "optionsEn": [
+      "Will avoid all suffering",
+      "Will become wealthy",
+      "Will never be tested",
+      "Shall renew their strength, mount up with wings like eagles, run and not be weary"
+    ],
+    "optionsEs": [
+      "Evitarán todo sufrimiento",
+      "Se volverán ricos",
+      "Nunca serán probados",
+      "Tendrán nuevas fuerzas, levantarán alas como las águilas, correrán y no se cansarán"
+    ],
+    "c": 157,
+    "explEn": "Isaiah 40:29-31 promises those who wait on the Lord renew their strength like eagles.",
+    "explEs": "Isaías 40:29-31 promete que los que esperan en el Señor renuevan sus fuerzas como águilas."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Defend the claim that the first ministry of every married pastor is to his wife. Apply 1 Timothy 3:2 and discuss why protecting the marriage from inappropriate church expectations matters.",
+    "textEs": "21. Defienda la afirmación de que el primer ministerio de cada pastor casado es a su esposa. Aplique 1 Timoteo 3:2 y discuta por qué proteger el matrimonio de expectativas inapropiadas de la iglesia importa.",
+    "kw_en": [
+      "wife",
+      "first",
+      "ministry",
+      "marriage",
+      "protect",
+      "timothy",
+      "family",
+      "expectation"
+    ],
+    "kw_es": [
+      "esposa",
+      "primero",
+      "ministerio",
+      "matrimonio",
+      "proteger",
+      "timoteo",
+      "familia",
+      "expectativa"
+    ],
+    "modelEn": "The first ministry of every married pastor is to his wife, before the congregation, the board, or the community. 1 Timothy 3:2 requires that a bishop be blameless, the husband of one wife — a man whose marriage is in order before he leads the church, one of the earliest qualifications in Paul's list. The pastor's wife is not a staff member; she signed up to be a wife, not an unpaid associate pastor, and protecting her from inappropriate church expectations matters because the congregation will, if allowed, load onto her a role she never accepted. A man who neglects his wife to serve the church has inverted God's order, sacrificing the ministry God gave him first for the one He gave him second. If the pastor wins the whole church but loses his marriage, he has failed at his primary calling. The faithful pastor guards his marriage as the first and most important field of his ministry.",
+    "modelEs": "El primer ministerio de todo pastor casado es a su esposa, antes que la congregación, la junta o la comunidad. 1 Timoteo 3:2 requiere que un obispo sea irreprensible, marido de una sola mujer — un hombre cuyo matrimonio está en orden antes de dirigir la iglesia, una de las primeras calificaciones en la lista de Pablo. La esposa del pastor no es un miembro del personal; ella firmó para ser esposa, no una pastora asociada no remunerada, y protegerla de las expectativas inapropiadas de la iglesia importa porque la congregación, si se le permite, le cargará un papel que ella nunca aceptó. Un hombre que descuida a su esposa para servir a la iglesia ha invertido el orden de Dios, sacrificando el ministerio que Dios le dio primero por el que le dio segundo. Si el pastor gana a toda la iglesia pero pierde su matrimonio, ha fracasado en su llamado principal. El pastor fiel guarda su matrimonio como el primer y más importante campo de su ministerio."
+  },
+  {
+    "textEn": "22. Defend the principle that the pastor's marriage requires deliberate cultivation. Discuss the practical disciplines — date night protected from church business, honest communication about ministry pressures, physical affection not subordinated to exhaustion, and spiritual partnership. Why does the marriage that gets fed thrive while the marriage taken for granted withers?",
+    "textEs": "22. Defienda el principio de que el matrimonio del pastor requiere cultivo deliberado. Discuta las disciplinas prácticas — noche de cita protegida de los asuntos de la iglesia, comunicación honesta sobre las presiones del ministerio, afecto físico no subordinado al cansancio, y compañerismo espiritual. ¿Por qué el matrimonio que es alimentado prospera mientras el matrimonio dado por sentado se marchita?",
+    "kw_en": [
+      "marriage",
+      "feed",
+      "date",
+      "communicate",
+      "cultivate",
+      "deliberate",
+      "thrive",
+      "wither"
+    ],
+    "kw_es": [
+      "matrimonio",
+      "alimentar",
+      "cita",
+      "comunicar",
+      "cultivar",
+      "deliberado",
+      "prosperar",
+      "marchitar"
+    ],
+    "modelEn": "The pastor's marriage requires deliberate cultivation, because the marriage that gets fed deliberately thrives, while the marriage taken for granted withers. This means practical disciplines kept on purpose. A regular date night is something the pastor refuses to cancel for church business, because the moment the church always wins, the wife always loses. Honest communication about ministry pressures keeps her a partner rather than an outsider to his burdens. Physical affection must not be subordinated to exhaustion, neglected until there is nothing left after the church takes everything. Spiritual partnership — praying together, growing together — binds the couple at the deepest level. A marriage is a garden: fed and tended, it flourishes; ignored on the assumption that it will take care of itself, it dies slowly and quietly while the pastor is busy. Many a ministry has been wrecked not by scandal but by a starved marriage no one fed.",
+    "modelEs": "El matrimonio del pastor requiere cultivo deliberado, porque el matrimonio que se alimenta deliberadamente prospera, mientras que el matrimonio que se da por sentado se marchita. Esto significa disciplinas prácticas guardadas a propósito. Una cita regular es algo que el pastor rehúsa cancelar por asuntos de la iglesia, porque en el momento en que la iglesia siempre gana, la esposa siempre pierde. La comunicación honesta sobre las presiones del ministerio la mantiene como socia en vez de extraña a sus cargas. El afecto físico no debe subordinarse al agotamiento, descuidado hasta que no queda nada después de que la iglesia se lo lleva todo. La sociedad espiritual — orar juntos, crecer juntos — une a la pareja al nivel más profundo. Un matrimonio es un jardín: alimentado y cuidado, florece; ignorado bajo la suposición de que se cuidará solo, muere lenta y silenciosamente mientras el pastor está ocupado. Muchos ministerios han sido arruinados no por escándalo sino por un matrimonio hambriento que nadie alimentó."
+  },
+  {
+    "textEn": "23. Discuss the four disciplines for raising the pastor's children well (be present, do not weaponize them, do not demand performance, let them see real Christianity at home). Why is each one easy to neglect?",
+    "textEs": "23. Discuta las cuatro disciplinas para criar bien a los hijos del pastor (estar presente, no usarlos como armas, no exigir desempeño, permitir que vean cristianismo real en casa). ¿Por qué cada una es fácil de descuidar?",
+    "kw_en": [
+      "children",
+      "present",
+      "weaponize",
+      "performance",
+      "real",
+      "home",
+      "discipline",
+      "neglect"
+    ],
+    "kw_es": [
+      "hijos",
+      "presente",
+      "arma",
+      "desempeño",
+      "real",
+      "hogar",
+      "disciplina",
+      "descuid"
+    ],
+    "modelEn": "Four disciplines help the pastor raise his children well, and each is easy to neglect. First, be present — the pastor's children should not lose their father to the church, fed leftovers of time and attention while strangers get his best hours. Second, do not weaponize them — never use them as sermon illustrations or hold them up as examples, exposing their lives and failures from the pulpit. Third, do not demand performance — the pastor's children are not the church's mascots, required to be perfect to protect his image. Fourth, let them see real Christianity at home — not a performance of faith for the congregation paired with a different man behind closed doors, which is the surest way to produce a cynical child. So-called 'preacher's kid syndrome' is not inevitable; it is usually the result of these specific failures the pastor can avoid. Each discipline is easy to neglect because the church's demands are loud and the children's needs are quiet, but the faithful pastor protects his children's hearts.",
+    "modelEs": "Cuatro disciplinas ayudan al pastor a criar bien a sus hijos, y cada una es fácil de descuidar. Primero, estar presente — los hijos del pastor no deben perder a su padre por la iglesia, alimentados con las sobras del tiempo y la atención mientras los extraños reciben sus mejores horas. Segundo, no usarlos como arma — nunca usarlos como ilustraciones de sermón ni exhibirlos como ejemplos, exponiendo sus vidas y fracasos desde el púlpito. Tercero, no exigir desempeño — los hijos del pastor no son las mascotas de la iglesia, requeridos a ser perfectos para proteger su imagen. Cuarto, dejarlos ver el cristianismo real en casa — no una representación de fe para la congregación junto a un hombre diferente tras puertas cerradas, que es la manera más segura de producir un hijo cínico. El llamado 'síndrome del hijo del predicador' no es inevitable; suele ser el resultado de estas fallas específicas que el pastor puede evitar. Cada disciplina es fácil de descuidar porque las demandas de la iglesia son ruidosas y las necesidades de los hijos son silenciosas, pero el pastor fiel protege el corazón de sus hijos."
+  },
+  {
+    "textEn": "24. Defend the necessity of a weekly day of rest for the pastor. Why does the wisdom of following Jesus' pattern of rest not depend on settling the disputed question of the Sabbath's application to Christians, and how should he choose his day?",
+    "textEs": "24. Defienda la necesidad de un día de descanso semanal para el pastor. ¿Por qué la sabiduría de seguir el patrón de descanso de Jesús no depende de resolver la pregunta disputada sobre la aplicación del sábado a los cristianos, y cómo debe escoger su día?",
+    "kw_en": [
+      "sabbath",
+      "rest",
+      "obedient",
+      "jesus",
+      "day",
+      "sunday",
+      "necessity",
+      "weekly"
+    ],
+    "kw_es": [
+      "sabático",
+      "descanso",
+      "obediente",
+      "jesús",
+      "día",
+      "domingo",
+      "necesidad",
+      "semanal"
+    ],
+    "modelEn": "A weekly rest day is a necessity, not a luxury, for the pastor. God built rest into creation and into the law, and Jesus told His exhausted disciples in Mark 6:31, 'Come aside by yourselves to a deserted place and rest a while.' Whether the fourth commandment binds Christians as a specific Sabbath law is genuinely disputed among evangelicals, but that dispute does not weaken the underlying wisdom: the pastor who refuses rest, who works seven days every week claiming the church cannot spare him, is not proving his devotion but setting himself up for burnout. Pride disguised as dedication keeps many pastors from resting, but a man who will not rest is effectively declaring that the church depends on him rather than on God. The pastor should choose his rest day deliberately, and it cannot be Sunday — that is his busiest workday, the opposite of rest. He picks another day, guards it from intrusion, and treats it as valuable, because a rested shepherd serves for forty years while an exhausted one burns out or breaks down.",
+    "modelEs": "Un día de descanso semanal es una necesidad, no un lujo, para el pastor. Dios incorporó el descanso en la creación y en la ley, y Jesús dijo a Sus discípulos agotados en Marcos 6:31: 'Venid vosotros aparte a un lugar desierto, y descansad un poco.' Si el cuarto mandamiento obliga a los cristianos como una ley sabática específica es genuinamente disputado entre evangélicos, pero esa disputa no debilita la sabiduría subyacente: el pastor que rehúsa el descanso, que trabaja siete días cada semana alegando que la iglesia no puede prescindir de él, no está probando su devoción sino preparándose para el agotamiento. El orgullo disfrazado de dedicación impide a muchos pastores descansar, pero un hombre que no descansa está en efecto declarando que la iglesia depende de él en vez de Dios. El pastor debe escoger su día de descanso deliberadamente, y no puede ser el domingo — ese es su día de trabajo más ocupado, lo opuesto al descanso. Escoge otro día, lo guarda de intrusiones, y lo trata como valioso, porque un pastor descansado sirve por cuarenta años mientras que uno agotado se quema o se quiebra."
+  },
+  {
+    "textEn": "25. Discuss the unique loneliness of pastoral ministry and why friendships with other pastors are essential. Apply the principle of the 'three or four men' the pastor never lets go.",
+    "textEs": "25. Discuta la soledad única del ministerio pastoral y por qué las amistades con otros pastores son esenciales. Aplique el principio de los 'tres o cuatro hombres' que el pastor nunca deja ir.",
+    "kw_en": [
+      "lonely",
+      "friend",
+      "pastor",
+      "outside",
+      "isolation",
+      "three",
+      "share",
+      "burden"
+    ],
+    "kw_es": [
+      "soledad",
+      "amigo",
+      "pastor",
+      "fuera",
+      "aislamiento",
+      "tres",
+      "compartir",
+      "carga"
+    ],
+    "modelEn": "Pastoral ministry carries a unique loneliness, which is why friendships with other pastors are essential. The pastor cannot fully unburden himself to his own members — he is their shepherd, and there are confidences and struggles he cannot share with the people he leads. So his friendships usually have to come from outside the church, often other pastors who understand the particular weight of the office. He needs the 'three or four men' he never lets go — friends who knew him before he was a pastor, or peers who carry the same load, men with whom he can be simply himself, confess his struggles, and be known apart from his role. Isolation is the soil in which pride, lust, and discouragement all grow, so the pastor who has no true friends is in danger. The faithful pastor deliberately cultivates and protects these few deep friendships across the years, because the man with no one to talk to will eventually fall.",
+    "modelEs": "El ministerio pastoral lleva una soledad única, por lo cual las amistades con otros pastores son esenciales. El pastor no puede descargarse plenamente con sus propios miembros — es su pastor, y hay confidencias y luchas que no puede compartir con la gente que dirige. Así que sus amistades usualmente tienen que venir de fuera de la iglesia, a menudo otros pastores que entienden el peso particular del oficio. Necesita los 'tres o cuatro hombres' que nunca suelta — amigos que lo conocieron antes de ser pastor, o pares que llevan la misma carga, hombres con quienes puede ser simplemente él mismo, confesar sus luchas, y ser conocido aparte de su papel. El aislamiento es el suelo en el que crecen el orgullo, la lujuria y el desánimo, así que el pastor que no tiene verdaderos amigos está en peligro. El pastor fiel deliberadamente cultiva y protege estas pocas amistades profundas a través de los años, porque el hombre que no tiene con quién hablar eventualmente caerá."
+  },
+  {
+    "textEn": "26. Apply 1 Corinthians 6:19 (body as temple) to the pastor's stewardship of sleep, exercise, eating, and medical checkups. Why do most early pastoral deaths come from preventable causes?",
+    "textEs": "26. Aplique 1 Corintios 6:19 (cuerpo como templo) a la mayordomía del pastor del sueño, ejercicio, alimentación, y chequeos médicos. ¿Por qué la mayoría de las muertes pastorales tempranas vienen de causas prevenibles?",
+    "kw_en": [
+      "body",
+      "temple",
+      "sleep",
+      "exercise",
+      "eat",
+      "health",
+      "steward",
+      "preventable"
+    ],
+    "kw_es": [
+      "cuerpo",
+      "templo",
+      "dormir",
+      "ejercicio",
+      "comer",
+      "salud",
+      "mayordom",
+      "prevenible"
+    ],
+    "modelEn": "1 Corinthians 6:19 says the believer's body is a temple of the Holy Spirit, and this applies directly to the pastor's stewardship of sleep, exercise, eating, and medical checkups. Many pastors treat the body as if caring for it were unspiritual, neglecting sleep, exercising never, eating poorly, and skipping the doctor, all while pouring out their souls for the church. But the body is the instrument through which the whole ministry is carried out, and a broken instrument cannot serve. Most early pastoral deaths come from preventable causes — heart disease, neglected conditions, the cumulative toll of stress and neglect — not from martyrdom but from a failure to steward the temple God gave. The recommended seven to eight hours of sleep, regular exercise, sensible eating, and routine checkups are not vanity; they are stewardship. A pastor who burns out his body at fifty robs the church of the wisdom he would have offered at seventy.",
+    "modelEs": "1 Corintios 6:19 dice que el cuerpo del creyente es templo del Espíritu Santo, y esto aplica directamente a la mayordomía del pastor sobre el dormir, el ejercicio, la alimentación y los chequeos médicos. Muchos pastores tratan el cuerpo como si cuidarlo fuera poco espiritual, descuidando el sueño, sin ejercitarse nunca, comiendo mal y saltándose al médico, todo mientras derraman sus almas por la iglesia. Pero el cuerpo es el instrumento por el cual se lleva a cabo todo el ministerio, y un instrumento roto no puede servir. La mayoría de las muertes pastorales tempranas vienen de causas prevenibles — enfermedad cardíaca, condiciones descuidadas, el costo acumulado del estrés y el descuido — no del martirio sino de una falla en administrar el templo que Dios dio. Las recomendadas siete a ocho horas de sueño, el ejercicio regular, el comer sensato y los chequeos rutinarios no son vanidad; son mayordomía. Un pastor que consume su cuerpo a los cincuenta roba a la iglesia la sabiduría que habría ofrecido a los setenta."
+  },
+  {
+    "textEn": "27. Discuss the pastor's devotional life — Scripture for his own soul, private prayer, and worship as a participant. What happens to the pastor whose only spiritual engagement is preparation for others?",
+    "textEs": "27. Discuta la vida devocional del pastor — la Escritura para su propia alma, la oración privada, y la adoración como participante. ¿Qué le sucede al pastor cuyo único compromiso espiritual es la preparación para otros?",
+    "kw_en": [
+      "devotion",
+      "scripture",
+      "soul",
+      "prayer",
+      "private",
+      "participant",
+      "feed",
+      "preparation"
+    ],
+    "kw_es": [
+      "devoción",
+      "escritura",
+      "alma",
+      "oración",
+      "privado",
+      "participante",
+      "alimentar",
+      "preparación"
+    ],
+    "modelEn": "The pastor's devotional life must feed his own soul, separate from his work of feeding others. He must read Scripture for his own soul, not only mining it for sermons, because the man who only studies the Bible to preach it slowly starves while serving food to everyone else. He needs private prayer that is not preparation for public ministry — Daniel prayed three times a day with his windows open toward Jerusalem, and Jesus regularly withdrew into the wilderness to pray. He needs to worship as a participant, not only as the leader running the service, letting his own heart be fed and not merely performing. What happens to the pastor whose only spiritual engagement is preparation for others is a slow spiritual famine: he becomes a professional handler of holy things with a withering soul, eloquent about a God he no longer meets in private. The well must be filled before it can pour out, and the pastor's secret life with God is the source of everything public.",
+    "modelEs": "La vida devocional del pastor debe alimentar su propia alma, separada de su obra de alimentar a otros. Debe leer la Escritura para su propia alma, no solo extrayéndola para sermones, porque el hombre que solo estudia la Biblia para predicarla lentamente muere de hambre mientras sirve comida a todos los demás. Necesita oración privada que no sea preparación para el ministerio público — Daniel oraba tres veces al día con sus ventanas abiertas hacia Jerusalén, y Jesús regularmente se retiraba al desierto a orar. Necesita adorar como participante, no solo como el líder que dirige el servicio, dejando que su propio corazón sea alimentado y no meramente actuando. Lo que le sucede al pastor cuya única participación espiritual es la preparación para otros es una lenta hambruna espiritual: se vuelve un manejador profesional de cosas santas con un alma que se marchita, elocuente acerca de un Dios que ya no encuentra en privado. El pozo debe llenarse antes de poder derramarse, y la vida secreta del pastor con Dios es la fuente de todo lo público."
+  },
+  {
+    "textEn": "28. Defend the principle that depression and anxiety in a pastor are not signs of unspirituality. What should the pastor do when he recognizes these symptoms in himself?",
+    "textEs": "28. Defienda el principio de que la depresión y la ansiedad en un pastor no son señales de no-espiritualidad. ¿Qué debe hacer el pastor cuando reconoce estos síntomas en sí mismo?",
+    "kw_en": [
+      "depression",
+      "anxiety",
+      "spiritual",
+      "help",
+      "guilt",
+      "symptom",
+      "honest",
+      "shame"
+    ],
+    "kw_es": [
+      "depresión",
+      "ansiedad",
+      "espiritual",
+      "ayuda",
+      "culpa",
+      "síntoma",
+      "honesto",
+      "vergüenza"
+    ],
+    "modelEn": "Depression and anxiety in a pastor are not signs of unspirituality, and treating them as such adds cruel guilt to genuine suffering. Some of the greatest servants of God — Elijah under the broom tree begging to die, the psalmists crying out from the depths, even Spurgeon who battled deep depression — knew these darknesses, yet were not unspiritual men. The man wrestling with depression needs help, not guilt; he needs the freedom to admit he is struggling without fearing it disqualifies him or proves his faith is weak. When the pastor recognizes these symptoms in himself, he should do what he would tell any member to do: talk to a trusted friend, see a doctor, consider that there may be a physical or chemical dimension, and refuse the lie that a real Christian never struggles this way. Hiding it only deepens it. The faithful pastor is honest about his mental health, seeks help without shame, and thereby models for his people that grace covers even this.",
+    "modelEs": "La depresión y la ansiedad en un pastor no son señales de falta de espiritualidad, y tratarlas así añade culpa cruel al sufrimiento genuino. Algunos de los más grandes siervos de Dios — Elías bajo el enebro rogando morir, los salmistas clamando desde lo profundo, aun Spurgeon que batalló con depresión profunda — conocieron estas oscuridades, sin embargo no eran hombres carentes de espiritualidad. El hombre que lucha con la depresión necesita ayuda, no culpa; necesita la libertad de admitir que está luchando sin temer que lo descalifique o que pruebe que su fe es débil. Cuando el pastor reconoce estos síntomas en sí mismo, debe hacer lo que le diría a cualquier miembro que hiciera: hablar con un amigo de confianza, ver a un médico, considerar que puede haber una dimensión física o química, y rehusar la mentira de que un cristiano real nunca lucha de esta manera. Esconderlo solo lo profundiza. El pastor fiel es honesto sobre su salud mental, busca ayuda sin vergüenza, y así modela para su pueblo que la gracia cubre aun esto."
+  },
+  {
+    "textEn": "29. Explain the order of 1 Timothy 4:16 — 'take heed to yourself and to the doctrine.' Why does Paul put 'yourself' before 'the doctrine,' and what happens when the order is reversed?",
+    "textEs": "29. Explique el orden de 1 Timoteo 4:16 — 'ten cuidado de ti mismo y de la doctrina.' ¿Por qué pone Pablo 'a ti mismo' antes que 'a la doctrina,' y qué sucede cuando el orden se invierte?",
+    "kw_en": [
+      "timothy",
+      "yourself",
+      "doctrine",
+      "order",
+      "first",
+      "self",
+      "neglect",
+      "reverse"
+    ],
+    "kw_es": [
+      "timoteo",
+      "mismo",
+      "doctrina",
+      "orden",
+      "primero",
+      "alma",
+      "descuid",
+      "invertir"
+    ],
+    "modelEn": "1 Timothy 4:16 says, 'Take heed to yourself and to the doctrine,' commanding attention to both together as a single, unified charge. But the sheer frequency with which Paul's pastoral letters return to the pastor's own character, not merely his teaching, is telling: a pastor's life must be tended alongside his teaching, since the man who guards his doctrine but neglects his soul will eventually contradict his message with his life. Sound theology preached by a man whose own heart is unguarded becomes hypocrisy, and the doctrine itself is discredited by the teacher's collapse. When a pastor pours everything into getting the teaching right while letting his own soul, marriage, body, and walk with God go untended, he sets himself up for the fall that has destroyed countless ministries. The most orthodox preacher in the world is useless, even dangerous, if his private life is rotting. Paul's charge is a lifelong guard: tend yourself as much as the doctrine, and the doctrine you teach will be carried by a life that backs it up.",
+    "modelEs": "1 Timoteo 4:16 dice: 'Ten cuidado de ti mismo y de la doctrina,' mandando atención a ambas cosas juntas como un solo cargo unificado. Pero la sola frecuencia con que las cartas pastorales de Pablo regresan al carácter propio del pastor, no solo a su enseñanza, es reveladora: la vida del pastor debe cuidarse junto con su enseñanza, ya que el hombre que guarda su doctrina pero descuida su alma eventualmente contradecirá su mensaje con su vida. La teología sólida predicada por un hombre cuyo propio corazón está desguarnecido se vuelve hipocresía, y la doctrina misma queda desacreditada por el colapso del maestro. Cuando un pastor vierte todo en acertar la enseñanza mientras deja su propia alma, matrimonio, cuerpo y andar con Dios sin cuidar, se prepara para la caída que ha destruido incontables ministerios. El predicador más ortodoxo del mundo es inútil, incluso peligroso, si su vida privada se está pudriendo. El cargo de Pablo es un guarda de por vida: cuídate a ti mismo tanto como la doctrina, y la doctrina que enseñas será llevada por una vida que la respalda."
+  },
+  {
+    "textEn": "30. Synthesize the entire unit: How does a pastor who guards his marriage, raises his children well, takes a Sabbath, cultivates friendships, cares for his body, feeds his soul, and is honest about his mental health build a ministry that endures for forty years?",
+    "textEs": "30. Sintetice toda la unidad: ¿Cómo un pastor que protege su matrimonio, cría bien a sus hijos, toma un sábado de descanso, cultiva amistades, cuida su cuerpo, alimenta su alma, y es honesto acerca de su salud mental edifica un ministerio que perdura por cuarenta años?",
+    "kw_en": [
+      "marriage",
+      "children",
+      "sabbath",
+      "friend",
+      "body",
+      "soul",
+      "endure",
+      "forty"
+    ],
+    "kw_es": [
+      "matrimonio",
+      "hijos",
+      "sabático",
+      "amigo",
+      "cuerpo",
+      "alma",
+      "perdura",
+      "cuarenta"
+    ],
+    "modelEn": "A pastor builds a ministry that endures for forty years by tending the whole man, not just the public office. He guards his marriage as his first ministry, feeding it deliberately so it thrives. He raises his children well — present, never weaponizing them, never demanding performance, letting them see real faith at home. He takes a weekly rest day, following Jesus' own pattern of rest. He cultivates the three or four deep friendships that keep him from the isolation that destroys. He stewards his body as a temple, since most early pastoral deaths are preventable. He feeds his own soul in private devotion apart from sermon prep, and he is honest about his mental health, seeking help without shame. Above all he heeds Paul's order — himself first, then the doctrine. The pastor who neglects these will likely flame out early; the one who tends them, sustained like the eagle that mounts up on renewed strength, finishes the long race God set before him.",
+    "modelEs": "Un pastor construye un ministerio que perdura por cuarenta años cuidando al hombre entero, no solo el oficio público. Guarda su matrimonio como su primer ministerio, alimentándolo deliberadamente para que prospere. Cría bien a sus hijos — presente, sin usarlos como arma, sin exigir desempeño, dejándolos ver la fe real en casa. Toma un día de descanso semanal, siguiendo el propio patrón de descanso de Jesús. Cultiva las tres o cuatro amistades profundas que lo guardan del aislamiento que destruye. Administra su cuerpo como templo, ya que la mayoría de las muertes pastorales tempranas son prevenibles. Alimenta su propia alma en devoción privada aparte de la preparación del sermón, y es honesto sobre su salud mental, buscando ayuda sin vergüenza. Sobre todo atiende el orden de Pablo — él mismo primero, luego la doctrina. El pastor que descuida estos probablemente se apagará temprano; el que los cuida, sostenido como el águila que se remonta con fuerzas renovadas, termina la larga carrera que Dios puso delante de él."
+  }
+];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit11 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_pm_u11_mc_passed';
+const SA_LOCK_KEY = 'cts_pm_u11_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_pm_u11_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(normalize(ans), kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 12 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first on Unit 1." : "Por favor regístrese en la Unidad 1.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'cert';
+    let total, score, required, mcGatePass, saGatePass;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let correctKW = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+        required = null;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit11 = true;
+                localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_pm_u11_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit11 = true;
+        localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_pm_u11_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_pm_u11_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 11 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSPMReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

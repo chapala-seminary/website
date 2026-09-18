@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS New Testament Survey — Unit 6: Acts: The Expansion of the Kingdom</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+.track-bar { background: #f6f1e8; border: 1px solid #d7cec1; border-radius: 12px; padding: 12px 16px; margin: 15px 0; }
+.track-bar label { margin-right: 18px; cursor: pointer; font-size: 0.95rem; }
+.track-bar input[type=radio] { margin-right: 6px; vertical-align: middle; }
+.reset-btn { background: #8a5a3a; color: white; border: none; border-radius: 30px; padding: 8px 18px; cursor: pointer; font-family: inherit; margin-left: 10px; font-size: 0.9rem; }
+.reset-btn:hover { background: #6e4528; }
+.redirect-notice { background: #e8f5ea; border: 1px solid #b9dfc2; color: #1f6b3b; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-weight: bold; }
+@media print {
+  @page { margin: 0.5in; }
+  body { background: white; color: black; font-size: 12pt; padding: 0; }
+  .nav-bar, .toggle-btn, #submitExamBtn, .reset-btn, #examResult, .track-bar, button.small { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; padding: 12px; margin-bottom: 12px; }
+  .question { page-break-inside: avoid; }
+  h1, h2, h3 { color: black; page-break-after: avoid; }
+  .option { background: white; border-color: #999; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" >← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 New Testament Survey — Unit 6: Acts: The Expansion of the Kingdom</span><span class="lang-es">📖 Estudio del Nuevo Testamento — Unidad 6: Hechos: La Expansión del Reino</span></h1>
+    <p><span class="lang-en"><strong>Course Author:</strong> Dr. Wayne Cook | <strong>Seminary Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Autor del Curso:</strong> Dr. Wayne Cook | <strong>Director del Seminario:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic;"></p>
+</div>
+
+<div class="card" id="teachingContent">
+<div class="lang-en">
+        <h2>I. The Book Without an Ending</h2>
+        <p>The most unusual feature of the book of Acts is the way it ends. Every other book in the New Testament ends with a clear conclusion — a benediction, a prayer, a doxology, an "Amen." Acts ends in the middle of a sentence. The last verse leaves the apostle Paul in a rented house in Rome, <em>"preaching the kingdom of God and teaching the things which concern the Lord Jesus Christ with all confidence, no one forbidding him"</em> (Acts 28:31). And then the manuscript simply stops. No farewell. No final word. The ink dries on the page with the work still going on.</p>
+
+        <p>That is no accident. Luke deliberately ended his second volume without an ending because the story he was telling was not over. It is still not over. The Acts of the Apostles is the only book in the Bible whose pen Luke laid down so that you could pick it up. Chapter 28 is the last chapter Luke wrote. Chapter 29 is the chapter you are writing. Your life — the choices you make today, the people you tell, the prayers you pray, the love you spend — is a continuation of the same book. The Holy Spirit is still expanding the kingdom. And He is doing it through you.</p>
+
+        <h2>II. From the Gospels to the Acts</h2>
+        <p>Luke opens his second volume by tying it to his first. <em>"The former account I made, O Theophilus, of all that Jesus began both to do and teach, until the day in which He was taken up"</em> (Acts 1:1–2). Look carefully at that opening phrase: <em>all that Jesus <strong>began</strong> to do and teach.</em> The Gospel of Luke is what Jesus <em>began</em>. The book of Acts is what Jesus <em>continued</em>. It can be put this way: the four Gospels give us the foundation; the Acts gives us the framing on that foundation. The four Gospels close with the resurrection; Acts opens with the ascension. The four Gospels show us Christ in the flesh; Acts shows us Christ in the Church.</p>
+
+        <p>The same Author, the physician Luke, wrote both books, and they were almost certainly delivered together as a single two-part work to Theophilus. If you read Luke 24 straight into Acts 1, the seam is invisible. The Lord Jesus is teaching the disciples about the kingdom on the day of His ascension, and then a cloud receives Him out of their sight, and two men in white announce that this same Jesus will come back the same way. The Gospel-to-Acts transition is, in literary terms, a relay race. The baton has been passed. The Church is now the runner.</p>
+
+        <h2>III. The Key Verse</h2>
+        <p>If Luke 19:10 is the key verse of Luke's Gospel, Acts 1:8 is the key verse of Acts. Pencil it in the margin of your Bible: <em>"But you shall receive power when the Holy Spirit has come upon you; and you shall be witnesses to Me in Jerusalem, and in all Judea and Samaria, and to the end of the earth"</em> (Acts 1:8). One sentence. The whole book is the outworking of that one sentence.</p>
+
+        <p>Read it twice and notice three things. First, the <em>power</em> — <em>dunamis</em> in Greek, the root of our word <em>dynamite.</em> The disciples were not commanded to drum up courage. They were commanded to wait for power that would come from outside themselves. Second, the <em>witness</em> — the Greek word is <em>martus</em>. In Luke's day it meant simply one who testifies to what he has seen. But it is also the root of our word <em>martyr</em>, and that is no accident: so many of these witnesses were killed for their testimony — Stephen first, only six chapters from here — that the word came to carry the weight of dying for what one has seen. A witness tells what he saw; a martyr is a witness who would not stop telling it. Third, the <em>geography</em> — Jerusalem, then Judea and Samaria, then to the end of the earth. Read those three locations against the table of contents of Acts: Jerusalem fills chapters 1 through 7. Judea and Samaria fill chapters 8 through 12. The end of the earth fills chapters 13 through 28. Luke wrote his book around the very verse that opens it. Acts 1:8 is not a verse in Acts; it is the outline of Acts.</p>
+
+        <h2>IV. Jerusalem (Acts 1–7) — The Spark</h2>
+        <p>The book opens with one hundred and twenty believers in an upper room, praying. They are an unlikely army. They have no money, no buildings, no political power, no recognition from any institution. They have an empty tomb, a risen Lord, a promise of power, and one another. That is all they have. And in the very next chapter the Holy Spirit falls at Pentecost, three thousand are converted in a single sermon, and the Jerusalem church is born.</p>
+
+        <p>From there the spark catches. Lame men leap. Tongues are loosed. Prison doors open in the middle of the night. Ananias and Sapphira drop dead in the same room for lying to the Holy Spirit. Seven deacons are appointed so the apostles can give themselves to prayer and the ministry of the Word. And then — at the end of chapter 7 — a young deacon named Stephen is stoned to death just outside the city walls. <em>"And Saul was consenting to his death"</em> (Acts 8:1). The first martyr falls in chapter 7, and from that moment the kingdom is no longer contained inside the city of Jerusalem. Persecution scatters the believers like sparks blown across a dry hillside, and every spark catches.</p>
+
+        <h2>V. Judea and Samaria (Acts 8–12) — The Spread</h2>
+        <p>There is a paradox of church history that runs straight through every century from Acts to today: <em>The blood of the martyrs is the seed of the Church.</em> The second-century writer Tertullian said it plainly: <em>Plures efficimur quotiens metimur a vobis</em> — "The more you mow us down, the more we grow." Acts 8 makes the case. The very chapter that begins with the church being scattered by persecution ends with a Samaritan revival, an Ethiopian treasurer converted on a desert road, and the gospel moving into Africa. The very chapter that began with Saul of Tarsus dragging believers out of their houses to prison ends one chapter later with Saul of Tarsus on the road to Damascus, flat on the ground, blinded by the glory of the very Christ he had been persecuting.</p>
+
+        <p>Acts 9 gives us the conversion of Saul. Acts 10 gives us the conversion of Cornelius and the opening of the door to the Gentiles. Acts 11 gives us the founding of the church at Antioch — the first multiethnic congregation in history, and the first place where the disciples were called <em>Christians</em> (Acts 11:26). Acts 12 gives us James the brother of John executed by Herod, Peter rescued from prison by an angel, and Herod himself struck down by an angel for accepting worship that belonged only to God. By the end of chapter 12 the Church has cleared the threshold of Jerusalem and is spreading across the eastern Mediterranean. And the Antioch church — not Jerusalem — is about to send out the first missionary team.</p>
+
+        <h2>VI. The Uttermost (Acts 13–28) — The Surge</h2>
+        <p>The center of gravity shifts at Acts 13. Up until that point the lead character had been Peter. From that point the lead character is Paul. Up until that point the home base had been Jerusalem. From that point the home base is Antioch. And from Antioch Paul makes three missionary journeys that plant churches across Asia Minor, jump the Aegean into Europe, and march across Greece to Athens and Corinth. Then he goes back to Jerusalem one last time, is arrested in the temple, is held two years in Caesarea, is shipwrecked on Malta on the way to Rome, and arrives at last in the capital of the empire — a prisoner in chains, but a prisoner preaching.</p>
+
+        <p>Look at the geography of Acts 13 through 28 against the geography of Acts 1:8. Jerusalem — done by chapter 7. Judea and Samaria — done by chapter 12. The end of the earth — by chapter 28 Paul stands in Rome, the political capital of the world Luke knew. The kingdom has reached the heart of the empire. And from Rome it would reach into Spain (according to early tradition), into North Africa, into Britain, and within three centuries into the throne room of Constantine. From an upper room of 120 to the throne of the Caesars in 300 years, without armies, without money, without organization at the start, without any human explanation. <em>"You shall receive power."</em></p>
+
+        <h2>VII. The Three Mighty Acts of the Spirit</h2>
+        <p>Across the book, the Holy Spirit performs three foundational acts of expansion — the three "pillar moments" of Acts. Each one is a Pentecost — a moment when the door of the gospel opens wider than it has ever opened before. <strong>(1)</strong> The Jewish Pentecost in Acts 2, when three thousand devout Jews from every nation under heaven are saved at the Feast of Pentecost in Jerusalem. <strong>(2)</strong> The Samaritan Pentecost in Acts 8, when Philip preaches in Samaria and the Holy Spirit falls on a people the Jews had despised for nine hundred years. <strong>(3)</strong> The Gentile Pentecost in Acts 10, when Peter preaches in the house of Cornelius the Roman centurion, and <em>"the Holy Spirit fell upon all those who heard the word"</em> (Acts 10:44). Three Pentecosts. Three concentric circles. The same Spirit, the same power, the same gospel, knocking down one wall at a time until there is no wall left.</p>
+
+        <p>There is a story told of a small village high in the Andes, in a valley so remote that for centuries no road reached it. The people inside the valley believed they were the only people on earth. When at last a missionary arrived over the mountain pass, the elder of the village asked him: <em>"How many of you are there, on the other side of the mountains?"</em> The missionary told him about cities and nations and continents. The elder was silent a long time. At last he said: <em>"Then we must build a road."</em> That is Acts. Each chapter is the building of another stretch of road. Each Pentecost is the breaking of another mountain pass. Jerusalem, Samaria, Caesarea, Antioch, Philippi, Athens, Corinth, Ephesus, Rome — every dot a fresh stretch of road. <em>To the end of the earth.</em></p>
+
+        <h2>VIII. The Three Great Sermons</h2>
+        <p>Luke includes the texts of more than two dozen sermons and speeches in Acts. Three in particular form the structural sermons of the book. <strong>Peter's Pentecost sermon</strong> in Acts 2 is preached to <em>Jews</em>, and Peter argues from the Hebrew Scriptures — from Joel, from David, from the Psalms — that this Jesus is the promised Messiah. Three thousand are saved. <strong>Stephen's defense</strong> in Acts 7 is also preached to Jews — to the Sanhedrin itself — and Stephen sweeps from Abraham to Moses to Solomon, demonstrating that God has never been confined to one temple or one city. Stephen is martyred. <strong>Paul's Areopagus sermon</strong> in Acts 17 is preached to <em>Greek philosophers</em> on Mars Hill in Athens, and Paul argues from a Greek altar and a Greek poet that the Unknown God of the Athenians has now made Himself known in the resurrection of Jesus. A few mock; a few delay; a man named Dionysius and a woman named Damaris and certain others believe.</p>
+
+        <p>Three sermons, three audiences, three approaches, one Christ. Peter quotes Scripture for the Jew. Stephen retells redemptive history for the religious establishment. Paul stands among the Greeks and quotes one of their own poets. The gospel does not change. The method changes to meet the hearer where the hearer is.</p>
+
+        <h2>IX. Where Acts Leaves You</h2>
+        <p>One good question to close a study of Acts is this: "Acts ends without an Amen. What does <em>your</em> chapter say?" The book of Acts is not a museum of completed history. It is an open manuscript with a fountain pen lying on the page, and the pen is in your hand. The same Spirit who fell at Pentecost still falls. The same gospel that crossed three continents in thirty years still crosses kitchen tables and prison cells and hospital rooms and university classrooms today. The same power that took 120 frightened disciples in an upper room and turned them into the engine of world history is the power that turns ordinary believers into witnesses still.</p>
+
+        <p>The kingdom is expanding. It expanded in Jerusalem under fire. It expanded in Samaria over old hatreds. It expanded in Caesarea across racial walls. It expanded in Antioch through the first multiethnic worship service in history. It expanded in Rome from a rented house under house arrest. And it is expanding today, in places Luke could not have named on the map, in languages Luke never heard spoken, through people who have never set foot in Jerusalem but who carry Jerusalem in their hearts. <em>You shall be My witnesses</em> — to your Jerusalem, to your Judea and Samaria, to the end of your earth. The story is not over. The pen is in your hand. Press on, my friend, into the rest of the New Testament with the same Lord and the same Spirit who walked with the first apostles, who walks with the last, and who is the same yesterday, today, and forever. Amen.</p>
+    </div>
+<div class="lang-es">
+        <h2>I. El libro sin final</h2>
+        <p>El rasgo más inusual del libro de los Hechos es la manera en que termina. Cada otro libro del Nuevo Testamento termina con una conclusión clara — una bendición, una oración, una doxología, un "Amén." Hechos termina en medio de una oración. El último versículo deja al apóstol Pablo en una casa alquilada en Roma, <em>"predicando el reino de Dios y enseñando las cosas que son del Señor Jesucristo, con toda libertad y sin impedimento"</em> (Hechos 28:31). Y luego el manuscrito sencillamente se detiene. Sin despedida. Sin palabra final. La tinta se seca en la página con la obra todavía en marcha.</p>
+
+        <p>Eso no es accidente. Lucas terminó deliberadamente su segundo volumen sin un final porque la historia que estaba contando no había terminado. Todavía no ha terminado. Los Hechos de los Apóstoles es el único libro de la Biblia cuya pluma Lucas dejó para que usted la pudiera levantar. El capítulo 28 es el último capítulo que escribió Lucas. El capítulo 29 es el capítulo que está escribiendo usted. Su vida — las decisiones que toma hoy, las personas a quienes habla, las oraciones que ora, el amor que gasta — es una continuación del mismo libro. El Espíritu Santo todavía está expandiendo el reino. Y lo está haciendo a través de usted.</p>
+
+        <h2>II. De los Evangelios a los Hechos</h2>
+        <p>Lucas abre su segundo volumen atándolo al primero. <em>"En el primer tratado, oh Teófilo, he hablado de todas las cosas que Jesús comenzó á hacer y á enseñar, hasta el día en que, habiendo dado mandamientos por el Espíritu Santo á los apóstoles que escogió, fué recibido arriba"</em> (Hechos 1:1–2). Mire con atención esa frase de apertura: <em>todas las cosas que Jesús <strong>comenzó</strong> á hacer y á enseñar.</em> El Evangelio de Lucas es lo que Jesús <em>comenzó.</em> El libro de los Hechos es lo que Jesús <em>continuó.</em> Puede decirse así: los cuatro Evangelios nos dan el cimiento; los Hechos nos dan el armazón sobre ese cimiento. Los cuatro Evangelios cierran con la resurrección; Hechos abre con la ascensión. Los cuatro Evangelios nos muestran a Cristo en la carne; Hechos nos muestra a Cristo en la Iglesia.</p>
+
+        <p>El mismo autor, el médico Lucas, escribió ambos libros, y casi con seguridad fueron entregados juntos como una sola obra en dos partes a Teófilo. Si lee Lucas 24 directamente a Hechos 1, la costura es invisible. El Señor Jesús está enseñando a los discípulos sobre el reino el día de Su ascensión, y luego una nube lo recibe quitándolo de su vista, y dos hombres de blanco anuncian que este mismo Jesús volverá de la misma manera. La transición de Evangelios a Hechos es, en términos literarios, una carrera de relevos. El testigo ha sido pasado. La Iglesia es ahora el corredor.</p>
+
+        <h2>III. El versículo clave</h2>
+        <p>Si Lucas 19:10 es el versículo clave del Evangelio de Lucas, Hechos 1:8 es el versículo clave de Hechos. Escríbalo en el margen de su Biblia: <em>"Mas recibiréis la virtud del Espíritu Santo que vendrá sobre vosotros; y me sereis testigos en Jerusalem, en toda Judea, y Samaria, y hasta lo último de la tierra"</em> (Hechos 1:8). Una sola oración. El libro entero es el desarrollo de esa única oración.</p>
+
+        <p>Léala dos veces y note tres cosas. Primero, el <em>poder</em> — <em>dunamis</em> en griego, la raíz de nuestra palabra <em>dinamita.</em> A los discípulos no se les mandó armarse de valor. Se les mandó esperar el poder que vendría de fuera de ellos mismos. Segundo, el <em>testigo</em> — la palabra griega es <em>martus</em>. En los días de Lucas significaba simplemente alguien que da testimonio de lo que ha visto. Pero también es la raíz de nuestra palabra <em>mártir</em>, y eso no es casualidad: tantos de estos testigos fueron muertos por su testimonio — Esteban primero, a solo seis capítulos de aquí — que la palabra llegó a cargar el peso de morir por lo que uno ha visto. Un testigo cuenta lo que vio; un mártir es un testigo que no dejó de contarlo. Tercero, la <em>geografía</em> — Jerusalén, luego Judea y Samaria, luego hasta lo último de la tierra. Lea esas tres ubicaciones contra la tabla de contenidos de Hechos: Jerusalén llena los capítulos 1 al 7. Judea y Samaria llenan los capítulos 8 al 12. Lo último de la tierra llena los capítulos 13 al 28. Lucas escribió su libro alrededor del mismo versículo que lo abre. Hechos 1:8 no es un versículo en Hechos; es el bosquejo de Hechos.</p>
+
+        <h2>IV. Jerusalén (Hechos 1–7) — La chispa</h2>
+        <p>El libro abre con ciento veinte creyentes en un aposento alto, orando. Son un ejército improbable. No tienen dinero, ni edificios, ni poder político, ni reconocimiento de ninguna institución. Tienen una tumba vacía, un Señor resucitado, una promesa de poder, y los unos a los otros. Eso es todo lo que tienen. Y en el capítulo siguiente el Espíritu Santo desciende en Pentecostés, tres mil se convierten en un solo sermón, y nace la iglesia de Jerusalén.</p>
+
+        <p>De ahí la chispa prende. Los cojos saltan. Las lenguas son sueltas. Las puertas de la cárcel se abren a medianoche. Ananías y Safira caen muertos en la misma habitación por mentir al Espíritu Santo. Siete diáconos son nombrados para que los apóstoles puedan darse a la oración y al ministerio de la Palabra. Y entonces — al final del capítulo 7 — un joven diácono llamado Esteban es apedreado hasta morir justo afuera de los muros de la ciudad. <em>"Y Saulo consentía en su muerte"</em> (Hechos 8:1). El primer mártir cae en el capítulo 7, y desde ese momento el reino ya no está contenido dentro de la ciudad de Jerusalén. La persecución dispersa a los creyentes como chispas soplada sobre una ladera seca, y cada chispa prende.</p>
+
+        <h2>V. Judea y Samaria (Hechos 8–12) — La extensión</h2>
+        <p>Hay una paradoja de la historia de la iglesia que corre directamente por cada siglo desde Hechos hasta hoy: <em>La sangre de los mártires es la semilla de la Iglesia.</em> El escritor del segundo siglo Tertuliano lo dijo con claridad: <em>Plures efficimur quotiens metimur a vobis</em> — "Mientras más nos cortan, más crecemos." Hechos 8 lo demuestra. El capítulo mismo que comienza con la iglesia dispersada por la persecución termina con un avivamiento samaritano, un tesorero etíope convertido en un camino desértico, y el evangelio entrando a África. El capítulo mismo que comenzó con Saulo de Tarso arrastrando a los creyentes fuera de sus casas a la cárcel termina un capítulo después con Saulo de Tarso en el camino a Damasco, tendido en el suelo, cegado por la gloria del mismo Cristo que había estado persiguiendo.</p>
+
+        <p>Hechos 9 nos da la conversión de Saulo. Hechos 10 nos da la conversión de Cornelio y la apertura de la puerta a los gentiles. Hechos 11 nos da la fundación de la iglesia en Antioquía — la primera congregación multiétnica en la historia, y el primer lugar donde los discípulos fueron llamados <em>cristianos</em> (Hechos 11:26). Hechos 12 nos da a Jacobo el hermano de Juan ejecutado por Herodes, a Pedro rescatado de la cárcel por un ángel, y al mismo Herodes herido por un ángel por aceptar la adoración que solo pertenecía a Dios. Al final del capítulo 12 la Iglesia ha cruzado el umbral de Jerusalén y se está extendiendo por el Mediterráneo oriental. Y la iglesia de Antioquía — no Jerusalén — está por enviar el primer equipo misionero.</p>
+
+        <h2>VI. Lo último de la tierra (Hechos 13–28) — La oleada</h2>
+        <p>El centro de gravedad cambia en Hechos 13. Hasta ese momento el personaje principal había sido Pedro. Desde ese momento el personaje principal es Pablo. Hasta ese momento la base de operaciones había sido Jerusalén. Desde ese momento la base es Antioquía. Y desde Antioquía Pablo hace tres viajes misioneros que plantan iglesias por toda Asia Menor, saltan el Egeo a Europa y marchan por Grecia hasta Atenas y Corinto. Luego regresa a Jerusalén una última vez, es arrestado en el templo, es retenido dos años en Cesarea, naufraga en Malta camino a Roma, y llega al fin a la capital del imperio — un prisionero en cadenas, pero un prisionero predicando.</p>
+
+        <p>Mire la geografía de Hechos 13 al 28 contra la geografía de Hechos 1:8. Jerusalén — terminado para el capítulo 7. Judea y Samaria — terminados para el capítulo 12. Lo último de la tierra — para el capítulo 28 Pablo está parado en Roma, la capital política del mundo que Lucas conocía. El reino ha alcanzado el corazón del imperio. Y desde Roma llegaría a España (según la tradición temprana), al norte de África, a Bretaña, y dentro de tres siglos a la sala del trono de Constantino. Desde un aposento alto de 120 al trono de los Césares en 300 años, sin ejércitos, sin dinero, sin organización al inicio, sin ninguna explicación humana. <em>"Mas recibiréis la virtud."</em></p>
+
+        <h2>VII. Los tres grandes actos del Espíritu</h2>
+        <p>A lo largo del libro, el Espíritu Santo realiza tres actos fundacionales de expansión — los tres "momentos pilares" de Hechos. Cada uno es un Pentecostés — un momento en que la puerta del evangelio se abre más ampliamente de lo que jamás se ha abierto. <strong>(1)</strong> El Pentecostés judío en Hechos 2, cuando tres mil judíos devotos de toda nación bajo el cielo son salvos en la fiesta de Pentecostés en Jerusalén. <strong>(2)</strong> El Pentecostés samaritano en Hechos 8, cuando Felipe predica en Samaria y el Espíritu Santo cae sobre un pueblo que los judíos habían despreciado por novecientos años. <strong>(3)</strong> El Pentecostés gentil en Hechos 10, cuando Pedro predica en la casa de Cornelio el centurión romano, y <em>"el Espíritu Santo cayó sobre todos los que oían el sermón"</em> (Hechos 10:44). Tres Pentecostés. Tres círculos concéntricos. El mismo Espíritu, el mismo poder, el mismo evangelio, derribando una muralla a la vez hasta que no queda ninguna muralla.</p>
+
+        <p>Se cuenta la historia de una aldea pequeña en lo alto de los Andes, en un valle tan remoto que por siglos ningún camino llegó allí. La gente dentro del valle creía que eran el único pueblo sobre la tierra. Cuando al fin un misionero llegó por el paso de la montaña, el anciano de la aldea le preguntó: <em>"¿Cuántos son ustedes, al otro lado de las montañas?"</em> El misionero le habló de ciudades, naciones y continentes. El anciano estuvo callado mucho tiempo. Al fin dijo: <em>"Entonces tenemos que construir un camino."</em> Eso es Hechos. Cada capítulo es la construcción de otro tramo de camino. Cada Pentecostés es el cruce de otro paso de montaña. Jerusalén, Samaria, Cesarea, Antioquía, Filipos, Atenas, Corinto, Éfeso, Roma — cada punto un nuevo tramo de camino. <em>Hasta lo último de la tierra.</em></p>
+
+        <h2>VIII. Los tres grandes sermones</h2>
+        <p>Lucas incluye los textos de más de dos docenas de sermones y discursos en Hechos. Tres en particular forman los sermones estructurales del libro. <strong>El sermón de Pedro en Pentecostés</strong> en Hechos 2 es predicado a <em>judíos</em>, y Pedro argumenta desde las Escrituras hebreas — desde Joel, desde David, desde los Salmos — que este Jesús es el Mesías prometido. Tres mil son salvos. <strong>La defensa de Esteban</strong> en Hechos 7 también es predicada a judíos — al Sanedrín mismo — y Esteban barre desde Abraham a Moisés a Salomón, demostrando que Dios nunca ha estado confinado a un solo templo o una sola ciudad. Esteban es martirizado. <strong>El sermón de Pablo en el Areópago</strong> en Hechos 17 es predicado a <em>filósofos griegos</em> en la colina de Marte en Atenas, y Pablo argumenta desde un altar griego y un poeta griego que el Dios Desconocido de los atenienses ahora se ha dado a conocer en la resurrección de Jesús. Algunos se burlan; algunos demoran; un hombre llamado Dionisio y una mujer llamada Damaris y algunos otros creen.</p>
+
+        <p>Tres sermones, tres audiencias, tres enfoques, un solo Cristo. Pedro cita la Escritura para el judío. Esteban relata de nuevo la historia redentora para el establecimiento religioso. Pablo se para entre los griegos y cita a uno de sus propios poetas. El evangelio no cambia. El método cambia para encontrar al oyente donde el oyente está.</p>
+
+        <h2>IX. Dónde lo deja Hechos</h2>
+        <p>Una buena pregunta para cerrar un estudio de Hechos es esta: "Hechos termina sin un Amén. ¿Qué dice <em>su</em> capítulo?" El libro de los Hechos no es un museo de historia terminada. Es un manuscrito abierto con una pluma fuente puesta sobre la página, y la pluma está en su mano. El mismo Espíritu que descendió en Pentecostés todavía desciende. El mismo evangelio que cruzó tres continentes en treinta años todavía cruza mesas de cocina y celdas de cárcel y cuartos de hospital y aulas universitarias hoy. El mismo poder que tomó a 120 discípulos asustados en un aposento alto y los convirtió en el motor de la historia mundial es el poder que convierte a creyentes ordinarios en testigos todavía.</p>
+
+        <p>El reino se está expandiendo. Se expandió en Jerusalén bajo fuego. Se expandió en Samaria sobre viejos odios. Se expandió en Cesarea cruzando paredes raciales. Se expandió en Antioquía a través del primer culto de adoración multiétnico en la historia. Se expandió en Roma desde una casa alquilada bajo arresto domiciliario. Y se está expandiendo hoy, en lugares que Lucas no podría haber nombrado en el mapa, en idiomas que Lucas nunca oyó hablar, a través de personas que jamás han pisado Jerusalén pero que llevan a Jerusalén en sus corazones. <em>Me seréis testigos</em> — a su Jerusalén, a su Judea y Samaria, hasta lo último de su tierra. La historia no ha terminado. La pluma está en su mano. Avance, amigo mío, por el resto del Nuevo Testamento con el mismo Señor y el mismo Espíritu que caminó con los primeros apóstoles, que camina con los últimos, y que es el mismo ayer, hoy y por los siglos. Amén.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 6 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 6 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer questions 1–20 (multiple choice). You must achieve 90% (18/20) on the multiple-choice section to pass. <strong>M.Div. / Th.M. students:</strong> Answer all 30 questions. You must achieve 90% on both sections independently — 18/20 multiple choice AND 9/10 short answer. Click an answer for immediate feedback. <strong>Once all 12 units are passed, you will be redirected to your certificate.</strong></span><span class="lang-es"><strong>Estudiantes de certificado:</strong> Respondan las preguntas 1–20 (opción múltiple). Debe alcanzar el 90% (18/20) en la sección de opción múltiple para aprobar. <strong>Estudiantes de M.Div. / Th.M.:</strong> Respondan las 30 preguntas. Debe alcanzar el 90% en ambas secciones de manera independiente — 18/20 opción múltiple Y 9/10 respuesta corta. Haga clic en una respuesta para retroalimentación inmediata. <strong>Una vez aprobadas las 12 unidades, será redirigido a su certificado.</strong></span></p>
+    <div class="track-bar">
+        <strong><span class="lang-en">Your Track:</span><span class="lang-es">Su Modalidad:</span></strong>
+        <span style="margin-left:14px;">
+            <label><input type="radio" name="ctsTrack" value="cert"><span class="lang-en">Certificate (MC only)</span><span class="lang-es">Certificado (solo opción múltiple)</span></label>
+            <label><input type="radio" name="ctsTrack" value="mdiv"><span class="lang-en">Master of Divinity (MC + SA)</span><span class="lang-es">Maestría en Divinidad (MC + RC)</span></label>
+            <label><input type="radio" name="ctsTrack" value="thm"><span class="lang-en">Master of Theology (Th.M.) Track</span><span class="lang-es">Maestría en Teología (Th.M.)</span></label>
+        </span>
+    </div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar Aprobación</span></button>
+        <button id="resetExamBtn" class="reset-btn"><span class="lang-en">↺ Reset Exam</span><span class="lang-es">↺ Restablecer Examen</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ===== PER-UNIT CONFIG =====
+const UNIT = 6;
+const TOTAL_UNITS = 12;
+const NEXT_URL = 'CTSNTUnit7.html';
+const PREV_URL = 'CTSNTUnit5.html';
+const PASS_THRESHOLD = 0.90;
+
+let progress = JSON.parse(localStorage.getItem('cts_nt_progress')) || {};
+let currentTrack = localStorage.getItem('cts_track') || 'cert';
+
+function isMastersLevel() { return currentTrack === 'mdiv' || currentTrack === 'thm'; }
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === UNIT) cls += ' active';
+        grid.innerHTML += `<a href="CTSNTUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+if (PREV_URL) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_URL; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="#" onclick="promptName(); return false;" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+    }
+}
+function promptName() {
+    const name = prompt("Welcome to CTS New Testament Survey! Please enter your full name as you'd like it to appear on your certificate:");
+    if (name && name.trim().length > 1) {
+        localStorage.setItem('cts_student', JSON.stringify({name: name.trim()}));
+        displayStudentGreeting();
+    }
+}
+displayStudentGreeting();
+
+const mcQuestions = [
+    { textEn: "1. Who is the author of the book of Acts?", textEs: "1. ¿Quién es el autor del libro de los Hechos?",
+      optionsEn: ["Luke the physician", "Peter the apostle", "Paul the apostle", "John Mark"],
+      optionsEs: ["Lucas el médico", "Pedro el apóstol", "Pablo el apóstol", "Juan Marcos"],
+      explanationEn: "Luke wrote Acts as the second volume to his Gospel, addressed to Theophilus and continuing what Jesus began to do and teach.", explanationEs: "Lucas escribió Hechos como el segundo volumen de su Evangelio, dirigido a Teófilo y continuando lo que Jesús comenzó a hacer y enseñar.", correct: 0 },
+    { textEn: "2. To whom is the book of Acts addressed?", textEs: "2. ¿A quién está dirigido el libro de los Hechos?",
+      optionsEn: ["The church at Jerusalem", "Theophilus", "The Roman emperor", "All the apostles"],
+      optionsEs: ["La iglesia de Jerusalén", "Teófilo", "El emperador romano", "Todos los apóstoles"],
+      explanationEn: "Acts 1:1 says the Gospel told what Jesus 'began' to do; Acts tells what He continued to do through the Church.", explanationEs: "Hechos 1:1 dice que el Evangelio contó lo que Jesús 'comenzó' a hacer; Hechos cuenta lo que continuó haciendo por medio de la Iglesia.", correct: 1 },
+    { textEn: "3. The key verse outlining the geographical structure of Acts is:", textEs: "3. El versículo clave que delinea la estructura geográfica de Hechos es:",
+      optionsEn: ["Acts 1:1", "Acts 2:38", "Acts 28:31", "Acts 1:8"],
+      optionsEs: ["Hechos 1:1", "Hechos 2:38", "Hechos 28:31", "Hechos 1:8"],
+      explanationEn: "The key verse is Acts 1:8 — you shall receive power and be witnesses in Jerusalem, Judea, Samaria, and to the end of the earth.", explanationEs: "El versículo clave es Hechos 1:8 — recibiréis poder y seréis testigos en Jerusalén, Judea, Samaria, y hasta lo último de la tierra.", correct: 3 },
+    { textEn: "4. Acts 1:8 lists the geographical witness in this order:", textEs: "4. Hechos 1:8 enumera el testimonio geográfico en este orden:",
+      optionsEn: ["End of earth, Samaria, Judea, Jerusalem", "Samaria, Judea, Jerusalem, end of earth", "Jerusalem, Judea and Samaria, end of earth", "Judea, Samaria, Jerusalem, end of earth"],
+      optionsEs: ["Fin de la tierra, Samaria, Judea, Jerusalén", "Samaria, Judea, Jerusalén, fin de la tierra", "Jerusalén, Judea y Samaria, fin de la tierra", "Judea, Samaria, Jerusalén, fin de la tierra"],
+      explanationEn: "The 'power' of Acts 1:8 is dunamis, the root of 'dynamite' — power from outside themselves, not mustered courage.", explanationEs: "El 'poder' de Hechos 1:8 es dunamis, la raíz de 'dinamita' — poder de fuera de ellos mismos, no valor reunido.", correct: 2 },
+    { textEn: "5. Approximately how many believers were in the upper room at the beginning of Acts?", textEs: "5. ¿Aproximadamente cuántos creyentes había en el aposento alto al inicio de Hechos?",
+      optionsEn: ["120", "70", "40", "12"],
+      optionsEs: ["120", "70", "40", "12"],
+      explanationEn: "The word 'witness' is martus — one who testifies to what he has seen. Because so many witnesses were killed for their testimony, the word became our 'martyr.'", explanationEs: "La palabra 'testigo' es martus — uno que da testimonio de lo que ha visto. Porque tantos testigos fueron muertos por su testimonio, la palabra se volvió nuestro 'mártir.'", correct: 0 },
+    { textEn: "6. The Greek word translated 'power' in Acts 1:8 is:", textEs: "6. La palabra griega traducida 'poder' en Hechos 1:8 es:",
+      optionsEn: ["Exousia", "Kratos", "Dunamis", "Ischus"],
+      optionsEs: ["Exousía", "Kratos", "Dunamis", "Ischus"],
+      explanationEn: "Acts 1:8's geography is the book's outline: Jerusalem (1–7), Judea and Samaria (8–12), the end of the earth (13–28).", explanationEs: "La geografía de Hechos 1:8 es el bosquejo del libro: Jerusalén (1–7), Judea y Samaria (8–12), lo último de la tierra (13–28).", correct: 2 },
+    { textEn: "7. The first Christian martyr in Acts was:", textEs: "7. El primer mártir cristiano en Hechos fue:",
+      optionsEn: ["Peter", "Stephen", "James the brother of John", "Philip"],
+      optionsEs: ["Pedro", "Esteban", "Jacobo hermano de Juan", "Felipe"],
+      explanationEn: "At Pentecost the Holy Spirit fell and three thousand were converted in a single sermon, and the Jerusalem church was born.", explanationEs: "En Pentecostés el Espíritu Santo descendió y tres mil se convirtieron en un solo sermón, y nació la iglesia de Jerusalén.", correct: 1 },
+    { textEn: "8. The book of Acts ends with:", textEs: "8. El libro de los Hechos termina con:",
+      optionsEn: ["The death of Paul", "Peter's martyrdom", "The destruction of Jerusalem", "Paul preaching in Rome under house arrest"],
+      optionsEs: ["La muerte de Pablo", "El martirio de Pedro", "La destrucción de Jerusalén", "Pablo predicando en Roma bajo arresto domiciliario"],
+      explanationEn: "Stephen, stoned outside the city walls in Acts 7, was the first martyr, and his death scattered the believers.", explanationEs: "Esteban, apedreado fuera de los muros en Hechos 7, fue el primer mártir, y su muerte dispersó a los creyentes.", correct: 3 },
+    { textEn: "9. The book of Acts is the sequel to which Gospel?", textEs: "9. El libro de los Hechos es la continuación de cuál Evangelio?",
+      optionsEn: ["The Gospel of Luke", "The Gospel of John", "The Gospel of Matthew", "The Gospel of Mark"],
+      optionsEs: ["El Evangelio de Lucas", "El Evangelio de Juan", "El Evangelio de Mateo", "El Evangelio de Marcos"],
+      explanationEn: "Acts 9 records Saul's conversion on the road to Damascus, blinded by the glory of the Christ he had been persecuting.", explanationEs: "Hechos 9 registra la conversión de Saulo en el camino a Damasco, cegado por la gloria del Cristo que había perseguido.", correct: 0 },
+    { textEn: "10. At Pentecost in Acts 2, approximately how many were saved in Peter's first sermon?", textEs: "10. En Pentecostés en Hechos 2, ¿aproximadamente cuántos fueron salvos en el primer sermón de Pedro?",
+      optionsEn: ["500", "5,000", "3,000", "10,000"],
+      optionsEs: ["500", "5,000", "3,000", "10,000"],
+      explanationEn: "Acts 10 records the conversion of Cornelius, opening the door of the gospel to the Gentiles.", explanationEs: "Hechos 10 registra la conversión de Cornelio, abriendo la puerta del evangelio a los gentiles.", correct: 2 },
+    { textEn: "11. The first place where disciples were called 'Christians' was:", textEs: "11. El primer lugar donde los discípulos fueron llamados 'cristianos' fue:",
+      optionsEn: ["Jerusalem", "Antioch", "Caesarea", "Rome"],
+      optionsEs: ["Jerusalén", "Antioquía", "Cesarea", "Roma"],
+      explanationEn: "Antioch was the first multiethnic congregation, and there the disciples were first called Christians (Acts 11:26).", explanationEs: "Antioquía fue la primera congregación multiétnica, y allí los discípulos fueron llamados cristianos por primera vez (Hechos 11:26).", correct: 1 },
+    { textEn: "12. The structural divisions of Acts based on Acts 1:8 are:", textEs: "12. Las divisiones estructurales de Hechos basadas en Hechos 1:8 son:",
+      optionsEn: ["Past, present, future", "Peter, Paul, John", "Jews, Gentiles, Greeks", "Jerusalem (1-7), Judea/Samaria (8-12), End of earth (13-28)"],
+      optionsEs: ["Pasado, presente, futuro", "Pedro, Pablo, Juan", "Judíos, gentiles, griegos", "Jerusalén (1-7), Judea/Samaria (8-12), Fin de la tierra (13-28)"],
+      explanationEn: "Antioch, not Jerusalem, sent out the first missionary team, making it the base for Paul's journeys.", explanationEs: "Antioquía, no Jerusalén, envió al primer equipo misionero, haciéndola la base de los viajes de Pablo.", correct: 3 },
+    { textEn: "13. The conversion of Saul of Tarsus is recorded in:", textEs: "13. La conversión de Saulo de Tarso se registra en:",
+      optionsEn: ["Acts 11", "Acts 10", "Acts 9", "Acts 13"],
+      optionsEs: ["Hechos 11", "Hechos 10", "Hechos 9", "Hechos 13"],
+      explanationEn: "At Acts 13 the lead character shifts from Peter to Paul and the home base from Jerusalem to Antioch.", explanationEs: "En Hechos 13 el personaje principal cambia de Pedro a Pablo y la base de Jerusalén a Antioquía.", correct: 2 },
+    { textEn: "14. Cornelius the Roman centurion was converted in:", textEs: "14. Cornelio el centurión romano fue convertido en:",
+      optionsEn: ["Acts 9", "Acts 10", "Acts 11", "Acts 13"],
+      optionsEs: ["Hechos 9", "Hechos 10", "Hechos 11", "Hechos 13"],
+      explanationEn: "The three 'Pentecost moments' are the Jewish (Acts 2), Samaritan (Acts 8), and Gentile (Acts 10) outpourings of the Spirit.", explanationEs: "Los tres 'momentos de Pentecostés' son los derramamientos del Espíritu judío (Hechos 2), samaritano (Hechos 8) y gentil (Hechos 10).", correct: 1 },
+    { textEn: "15. Paul's first missionary journey was launched from which city?", textEs: "15. El primer viaje misionero de Pablo fue lanzado desde cuál ciudad?",
+      optionsEn: ["Jerusalem", "Damascus", "Caesarea", "Antioch"],
+      optionsEs: ["Jerusalén", "Damasco", "Cesarea", "Antioquía"],
+      explanationEn: "In the Samaritan Pentecost the Spirit fell on a people the Jews had despised for nine hundred years.", explanationEs: "En el Pentecostés samaritano el Espíritu descendió sobre un pueblo que los judíos habían despreciado por novecientos años.", correct: 3 },
+    { textEn: "16. Paul's sermon to the Greek philosophers was preached on:", textEs: "16. El sermón de Pablo a los filósofos griegos fue predicado en:",
+      optionsEn: ["Mars Hill (Areopagus)", "Temple Mount", "Mount of Olives", "Mount Zion"],
+      optionsEs: ["Colina de Marte (Areópago)", "Monte del Templo", "Monte de los Olivos", "Monte Sion"],
+      explanationEn: "Peter's Pentecost sermon in Acts 2 argued from the Hebrew Scriptures to Jews that Jesus is the promised Messiah.", explanationEs: "El sermón de Pedro en Pentecostés en Hechos 2 argumentó desde las Escrituras hebreas a los judíos que Jesús es el Mesías prometido.", correct: 0 },
+    { textEn: "17. The Greek word translated 'witness' in Acts 1:8 is the root of which English word?", textEs: "17. La palabra griega traducida 'testigo' en Hechos 1:8 es la raíz de cuál palabra en español?",
+      optionsEn: ["Evangelist", "Disciple", "Apostle", "Martyr"],
+      optionsEs: ["Evangelista", "Discípulo", "Apóstol", "Mártir"],
+      explanationEn: "Stephen's defense in Acts 7 swept from Abraham to Solomon, showing God was never confined to one temple or city.", explanationEs: "La defensa de Esteban en Hechos 7 recorrió de Abraham a Salomón, mostrando que Dios nunca estuvo confinado a un templo o ciudad.", correct: 3 },
+    { textEn: "18. The center of gravity in Acts shifts from Peter to Paul beginning in:", textEs: "18. El centro de gravedad en Hechos cambia de Pedro a Pablo a partir de:",
+      optionsEn: ["Acts 9", "Acts 13", "Acts 15", "Acts 21"],
+      optionsEs: ["Hechos 9", "Hechos 13", "Hechos 15", "Hechos 21"],
+      explanationEn: "Paul's Areopagus sermon in Acts 17 reached Greek philosophers on Mars Hill, quoting their own poet and the Unknown God.", explanationEs: "El sermón de Pablo en el Areópago en Hechos 17 alcanzó a los filósofos griegos en el monte de Marte, citando a su propio poeta y al Dios no conocido.", correct: 1 },
+    { textEn: "19. Stephen's defense before the Sanhedrin is found in:", textEs: "19. La defensa de Esteban ante el Sanedrín se encuentra en:",
+      optionsEn: ["Acts 5", "Acts 6", "Acts 7", "Acts 8"],
+      optionsEs: ["Hechos 5", "Hechos 6", "Hechos 7", "Hechos 8"],
+      explanationEn: "Acts ends without a conclusion, leaving Paul preaching in Rome, because the story the Spirit is writing is not over.", explanationEs: "Hechos termina sin conclusión, dejando a Pablo predicando en Roma, porque la historia que el Espíritu escribe no ha terminado.", correct: 2 },
+    { textEn: "20. The three 'Pentecost moments' in Acts (Jewish, Samaritan, Gentile) are found in:", textEs: "20. Los tres 'momentos de Pentecostés' en Hechos (judío, samaritano, gentil) se encuentran en:",
+      optionsEn: ["Acts 2, 8, 10", "Acts 2, 7, 10", "Acts 3, 8, 15", "Acts 1, 2, 3"],
+      optionsEs: ["Hechos 2, 8, 10", "Hechos 2, 7, 10", "Hechos 3, 8, 15", "Hechos 1, 2, 3"],
+      explanationEn: "By Acts 28 the gospel has reached Rome, the capital of the empire — the end of the earth in Luke's world.", explanationEs: "Para Hechos 28 el evangelio ha llegado a Roma, la capital del imperio — lo último de la tierra en el mundo de Lucas.", correct: 0 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Explain how Acts 1:8 functions as both the key verse and the structural outline of the whole book.", textEs: "21. Explique cómo Hechos 1:8 funciona tanto como versículo clave como bosquejo estructural de todo el libro.",
+      kw_en: ["1:8", "jerusalem", "judea", "samaria", "end", "outline"], kw_es: ["1:8", "jerusalen", "judea", "samaria", "fin", "bosquejo"],
+      modelEn: "Acts 1:8 is both the key verse and the structural outline of the book. The Lord promised power to be witnesses in Jerusalem, in Judea and Samaria, and to the end of the earth, and the book unfolds in exactly those stages: Jerusalem in chapters 1–7, Judea and Samaria in 8–12, and the end of the earth in 13–28. The verse is not merely in Acts; it is the outline of Acts.", modelEs: "Hechos 1:8 es a la vez el versículo clave y el bosquejo estructural del libro. El Señor prometió poder para ser testigos en Jerusalén, en Judea y Samaria, y hasta lo último de la tierra, y el libro se desarrolla en esas etapas exactas: Jerusalén en los capítulos 1–7, Judea y Samaria en 8–12, y lo último de la tierra en 13–28. El versículo no está meramente en Hechos; es el bosquejo de Hechos." },
+    { textEn: "22. Discuss the literary relationship between Luke's Gospel and the Acts of the Apostles. Why are they treated as a two-volume work?", textEs: "22. Discuta la relación literaria entre el Evangelio de Lucas y los Hechos de los Apóstoles. ¿Por qué se tratan como una obra de dos volúmenes?",
+      kw_en: ["luke", "theophilus", "began", "physician", "two volume"], kw_es: ["lucas", "teofilo", "comenzo", "medico", "dos volumenes"],
+      modelEn: "Acts is the second half of a single two-volume work that the physician Luke wrote to Theophilus. The Gospel told what Jesus began to do and teach; Acts tells what He continued to do through His Church. Read Luke 24 straight into Acts 1 and the seam is invisible, for the same author wrote both as one continuous history.", modelEs: "Hechos es la segunda mitad de una sola obra en dos volúmenes que el médico Lucas escribió a Teófilo. El Evangelio contó lo que Jesús comenzó a hacer y enseñar; Hechos cuenta lo que continuó haciendo por medio de Su Iglesia. Lea Lucas 24 directamente a Hechos 1 y la costura es invisible, pues el mismo autor escribió ambos como una sola historia continua." },
+    { textEn: "23. Trace the three 'Pentecost moments' (Jewish, Samaritan, Gentile) and explain why each one is theologically significant.", textEs: "23. Trace los tres 'momentos de Pentecostés' (judío, samaritano, gentil) y explique por qué cada uno es teológicamente importante.",
+      kw_en: ["pentecost", "samaritan", "gentile", "cornelius", "spirit", "wall"], kw_es: ["pentecostes", "samaritano", "gentil", "cornelio", "espiritu", "muro"],
+      modelEn: "The three Pentecost moments each open the door wider. The Jewish Pentecost in Acts 2 saves three thousand; the Samaritan Pentecost in Acts 8 pours the Spirit on a despised people; and the Gentile Pentecost in Acts 10 falls in the house of Cornelius. Each is the same Spirit knocking down one more wall, until the gospel reaches every people.", modelEs: "Los tres momentos de Pentecostés abren la puerta cada vez más. El Pentecostés judío en Hechos 2 salva a tres mil; el Pentecostés samaritano en Hechos 8 derrama el Espíritu sobre un pueblo despreciado; y el Pentecostés gentil en Hechos 10 desciende en la casa de Cornelio. Cada uno es el mismo Espíritu derribando un muro más, hasta que el evangelio alcanza a todo pueblo." },
+    { textEn: "24. Explain the importance of Antioch as the first multiethnic congregation and the first sending church.", textEs: "24. Explique la importancia de Antioquía como la primera congregación multiétnica y la primera iglesia que envía misioneros.",
+      kw_en: ["antioch", "christian", "multiethnic", "sending", "paul", "barnabas"], kw_es: ["antioquia", "cristiano", "multietnico", "envio", "pablo", "bernabe"],
+      modelEn: "Antioch was the first multiethnic congregation and the place where the disciples were first called Christians. Unlike Jerusalem, Antioch became the sending church, commissioning Paul and Barnabas as the first missionary team. It marks the shift of the gospel's center of gravity outward to the Gentile world.", modelEs: "Antioquía fue la primera congregación multiétnica y el lugar donde los discípulos fueron llamados cristianos por primera vez. A diferencia de Jerusalén, Antioquía llegó a ser la iglesia que enviaba, comisionando a Pablo y Bernabé como el primer equipo misionero. Marca el desplazamiento del centro de gravedad del evangelio hacia afuera, al mundo gentil." },
+    { textEn: "25. Compare and contrast the three structural sermons of Acts: Peter at Pentecost, Stephen before the Sanhedrin, Paul on Mars Hill.", textEs: "25. Compare y contraste los tres sermones estructurales de Hechos: Pedro en Pentecostés, Esteban ante el Sanedrín, Pablo en la colina de Marte.",
+      kw_en: ["peter", "stephen", "paul", "pentecost", "sanhedrin", "areopagus"], kw_es: ["pedro", "esteban", "pablo", "pentecostes", "sanedrin", "areopago"],
+      modelEn: "The three structural sermons show one Christ preached to three audiences. Peter at Pentecost argues from Scripture to Jews; Stephen before the Sanhedrin retells redemptive history to the religious establishment; and Paul at the Areopagus reaches Greek philosophers by quoting their own poet. The gospel does not change, but the method meets each hearer where he is.", modelEs: "Los tres sermones estructurales muestran un solo Cristo predicado a tres audiencias. Pedro en Pentecostés argumenta desde la Escritura a los judíos; Esteban ante el Sanedrín recuenta la historia redentora al establecimiento religioso; y Pablo en el Areópago alcanza a los filósofos griegos citando a su propio poeta. El evangelio no cambia, pero el método encuentra a cada oyente donde está." },
+    { textEn: "26. How does the martyrdom of Stephen function as a turning point in the expansion of the Church?", textEs: "26. ¿Cómo funciona el martirio de Esteban como punto de giro en la expansión de la Iglesia?",
+      kw_en: ["stephen", "martyr", "scattered", "persecution", "samaria", "seed"], kw_es: ["esteban", "martir", "dispersados", "persecucion", "samaria", "semilla"],
+      modelEn: "Stephen's martyrdom is the turning point of the expansion. With the first martyr's death the persecution scattered the believers out of Jerusalem, and the very scattering carried the gospel into Samaria and beyond. His blood became seed: the chapter that opens with persecution ends with revival, proving the kingdom could no longer be contained in one city.", modelEs: "El martirio de Esteban es el punto de giro de la expansión. Con la muerte del primer mártir la persecución dispersó a los creyentes fuera de Jerusalén, y la dispersión misma llevó el evangelio a Samaria y más allá. Su sangre se volvió semilla: el capítulo que abre con persecución termina con avivamiento, probando que el reino ya no podía contenerse en una sola ciudad." },
+    { textEn: "27. Discuss the significance of the open-ended conclusion of Acts in chapter 28. What does Luke want the reader to infer?", textEs: "27. Discuta la importancia de la conclusión sin cierre de Hechos en el capítulo 28. ¿Qué quiere Lucas que el lector infiera?",
+      kw_en: ["28:31", "ending", "rome", "open", "continuing", "chapter 29"], kw_es: ["28:31", "final", "roma", "abierto", "continuando", "capitulo 29"],
+      modelEn: "Acts 28:31 ends in the middle of the work, with Paul preaching freely in Rome and no farewell or Amen. The open ending is deliberate: the story is still continuing, and chapter 29 is the chapter the reader writes. Luke laid down the pen so that the Church in every age would take it up and keep expanding the kingdom.", modelEs: "Hechos 28:31 termina en medio de la obra, con Pablo predicando libremente en Roma y sin despedida ni Amén. El final abierto es deliberado: la historia sigue continuando, y el capítulo 29 es el capítulo que escribe el lector. Lucas dejó la pluma para que la Iglesia de cada época la levantara y siguiera expandiendo el reino." },
+    { textEn: "28. Trace the shift in the book of Acts from Peter to Paul as the central character. What does this suggest about Luke's purpose?", textEs: "28. Trace el cambio en el libro de Hechos de Pedro a Pablo como personaje central. ¿Qué sugiere esto sobre el propósito de Lucas?",
+      kw_en: ["peter", "paul", "shift", "antioch", "gentile", "expansion"], kw_es: ["pedro", "pablo", "cambio", "antioquia", "gentil", "expansion"],
+      modelEn: "The book shifts at Acts 13 from Peter to Paul as the central character, and from Jerusalem to Antioch as the home base. The shift tracks the expansion itself: as the gospel moves out to the Gentile world, the apostle to the Gentiles takes the lead, and the missionary journeys carry the message across Asia Minor and into Europe.", modelEs: "El libro cambia en Hechos 13 de Pedro a Pablo como personaje central, y de Jerusalén a Antioquía como base. El cambio sigue la expansión misma: a medida que el evangelio sale al mundo gentil, el apóstol a los gentiles toma el liderazgo, y los viajes misioneros llevan el mensaje por Asia Menor y hasta Europa." },
+    { textEn: "29. Apply the principle 'the blood of the martyrs is the seed of the Church' to specific events in Acts and to church history.", textEs: "29. Aplique el principio 'la sangre de los mártires es la semilla de la Iglesia' a eventos específicos en Hechos y en la historia de la iglesia.",
+      kw_en: ["martyr", "blood", "seed", "tertullian", "persecution", "growth"], kw_es: ["martir", "sangre", "semilla", "tertuliano", "persecucion", "crecimiento"],
+      modelEn: "The principle that the blood of the martyrs is the seed of the Church, quoted from Tertullian, runs through Acts and every century since. Persecution meant to crush the faith instead scattered and multiplied it: the more believers were mowed down, the more the Church grew. Suffering became the soil of growth rather than its end.", modelEs: "El principio de que la sangre de los mártires es la semilla de la Iglesia, citado de Tertuliano, corre por Hechos y por cada siglo desde entonces. La persecución que pretendía aplastar la fe en cambio la dispersó y multiplicó: mientras más creyentes eran cortados, más crecía la Iglesia. El sufrimiento se volvió el suelo del crecimiento en vez de su fin." },
+    { textEn: "30. Synthesize: If Acts is the book the Holy Spirit is still writing, what does that mean for your life and ministry today?", textEs: "30. Sintetice: Si Hechos es el libro que el Espíritu Santo todavía está escribiendo, ¿qué significa eso para su vida y ministerio hoy?",
+      kw_en: ["witness", "spirit", "today", "ministry", "chapter 29", "continue"], kw_es: ["testigo", "espiritu", "hoy", "ministerio", "capitulo 29", "continuar"],
+      modelEn: "If Acts is the book the Spirit is still writing, then the reader's own life is chapter 29. The same Spirit who fell at Pentecost still empowers ordinary believers to be witnesses today, in their own ministry and their own corner of the earth. The call of Acts 1:8 continues: be My witnesses, to the end of your earth, until the story is done.", modelEs: "Si Hechos es el libro que el Espíritu sigue escribiendo, entonces la vida misma del lector es el capítulo 29. El mismo Espíritu que descendió en Pentecostés todavía capacita a creyentes comunes para ser testigos hoy, en su propio ministerio y su propio rincón de la tierra. El llamado de Hechos 1:8 continúa: sed mis testigos, hasta lo último de vuestra tierra, hasta que la historia esté terminada." }
+];
+
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = `cts_nt_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY = `cts_nt_u${UNIT}_sa_lockout`;
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0')
+        : parseInt(localStorage.getItem(`cts_nt_u${UNIT}_lockout`) || '0');
+}
+let lockUntil = activeLockUntil();
+let unitPassed = progress[`unit${UNIT}`] || false;
+
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function isEs() { return document.body.classList.contains('lang-es'); }
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer as left-boundary prefix.
+// Pass standard is >=3 hits (NOT all keywords).
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function kwHitCount(normAns, keys) { return keys.filter(function(k){ return kwHit(normAns, k); }).length; }
+
+function checkAllUnitsPassed() {
+    for (let i = 1; i <= TOTAL_UNITS; i++) { if (!progress[`unit${i}`]) return false; }
+    return true;
+}
+
+function syncTrackUI() {
+    document.querySelectorAll('input[name="ctsTrack"]').forEach(r => { r.checked = (r.value === currentTrack); });
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = isEs() ? 'Opción Múltiple (Preguntas 1–20)' : 'Multiple Choice (Questions 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (!isEs()) ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (!isEs()) ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (!isEs()) ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((!isEs()) ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = isEs() ? 'Respuesta Corta (Preguntas 21–30) — Pista Maestría en Divinidad' : 'Short Answer (Questions 21–30) — Master of Divinity Track';
+    container.appendChild(kwTitle);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = isEs() ? q.textEs : q.textEn;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = isEs() ? 'Escriba su respuesta aquí...' : 'Type your answer here...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = isEs() ? 'Verificar Respuesta' : 'Check Answer';
+        const fb = document.createElement('div');
+        fb.className = 'feedback-text';
+        fb.style.marginTop = '8px';
+        const model = document.createElement('div');
+        model.className = 'model-answer';
+        model.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ansRaw = ta.value.trim();
+            const ans = normalize(ansRaw);
+            const keys = isEs() ? q.kw_es : q.kw_en;
+            const hits = kwHitCount(ans, keys);
+            if (ansRaw.length < 100) {
+                fb.innerHTML = isEs() ? 'Escriba una respuesta más completa (al menos una oración).' : 'Please write a more complete answer (at least a sentence).';
+                fb.className = 'feedback-text incorrect';
+            } else if (hits >= 3) {
+                fb.innerHTML = isEs() ? `✓ ¡Bien! Su respuesta toca ${hits} conceptos clave.` : `✓ Good! Your answer touches ${hits} key concepts.`;
+                fb.className = 'feedback-text correct';
+                kwAnswers[idx] = ansRaw;
+            } else {
+                fb.innerHTML = isEs() ? `Va bien — toca ${hits}. Apunte a al menos 3 conceptos clave; revise la lección y vuelva a intentarlo.` : `Good start — you touched ${hits}. Aim for at least 3 key concepts; review the lesson and try again.`;
+                fb.className = 'feedback-text incorrect';
+            }
+            const mk = isEs() ? q.modelEs : q.modelEn;
+            if (mk) {
+                model.innerHTML = (isEs() ? '<strong>Respuesta modelo — estúdiela:</strong> ' : '<strong>Model answer — study this:</strong> ') + mk;
+                model.style.display = 'block';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(model);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+}
+
+function triggerRedirect() {
+    const target = checkAllUnitsPassed() ? 'CTSNTCertificate.html' : NEXT_URL;
+    const result = document.getElementById('examResult');
+    let seconds = 3;
+    function tick() {
+        const msg = isEs()
+            ? `Redirigiendo a la siguiente unidad en ${seconds}...`
+            : `Redirecting to the next unit in ${seconds}...`;
+        result.innerHTML = `<div class='redirect-notice'>✅ ${isEs() ? '¡APROBADO!' : 'PASSED!'} ${msg}</div>`;
+        if (seconds <= 0) { location.href = target; return; }
+        seconds--;
+        setTimeout(tick, 1000);
+    }
+    tick();
+}
+
+function submitExam() {
+    const result = document.getElementById('examResult');
+    if (unitPassed) {
+        result.innerHTML = `<span style='color:green'>${isEs() ? '✅ Unidad ya aprobada.' : '✅ Unit already passed!'}</span>`;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        result.innerHTML = `<span style='color:red'>${isEs() ? `⏰ Bloqueado por ${wait} minutos más.` : `⏰ Locked for ${wait} more minutes.`}</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) { promptName(); return; }
+
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    let advCorrect = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = normalize(kwAnswers[i] || '');
+        const keys = isEs() ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        if (kwHitCount(ans, keys) >= 3 && ans.length >= 100) advCorrect++;
+    }
+
+    const mcPct = correctMC / 20;
+    const saPct = advCorrect / 10;
+    const mcPass = mcPct >= PASS_THRESHOLD;
+    const saPass = saPct >= PASS_THRESHOLD;
+
+    function passUnit() {
+        unitPassed = true;
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem('cts_nt_progress', JSON.stringify(progress));
+        localStorage.setItem(`nt_unit${UNIT}_passed`, 'true');
+        localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+        localStorage.removeItem(SA_LOCK_KEY);
+        updateProgressGrid();
+        triggerRedirect();
+    }
+
+    if (!isMastersLevel()) {
+        if (mcPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Necesita 18/20 para Certificado.`
+                : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Need 18/20 for Certificate.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        if (saPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ✓ ya guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+                : `MC: ✓ already banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Su opción múltiple está a salvo. Puede reintentar la sección de respuesta corta en ${mins} min.` : `Your multiple-choice pass is safe. You can retry the short-answer section in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPass && saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit();
+    } else if (mcPass && !saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ aprobado y guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ passed and banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Al reintentar en ${mins} min, solo necesitará la sección de respuesta corta — el OM permanece aprobado.` : `When you retry in ${mins} min, you'll only need the short-answer section — MC stays passed.`}</span>`;
+    } else {
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 18/20 Y 9/10 para M.Div.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 18/20 AND 9/10 for M.Div.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+    }
+}
+
+function resetExam() {
+    const msg = isEs()
+        ? '¿Restablecer el examen? Esto borrará sus respuestas en pantalla y eliminará el bloqueo de 15 minutos. Las unidades ya aprobadas no se afectan.'
+        : 'Reset the exam? This will clear your on-screen answers and remove the 15-minute lockout. Already-passed units are not affected.';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill('');
+    lockUntil = 0;
+    mcPreviouslyPassed = false;
+    localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+document.querySelectorAll('input[name="ctsTrack"]').forEach(r => {
+    r.addEventListener('change', e => {
+        currentTrack = e.target.value;
+        localStorage.setItem('cts_track', currentTrack);
+    });
+});
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.className = 'lang-es';
+        this.textContent = 'English';
+    } else {
+        document.body.className = 'lang-en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+syncTrackUI();
+renderQuestions();
+if (unitPassed) document.getElementById('examResult').innerHTML = `<span style='color:green'>${isEs() ? `✅ Unidad ${UNIT} ya aprobada.` : `✅ Unit ${UNIT} already passed.`}</span>`;
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSNTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

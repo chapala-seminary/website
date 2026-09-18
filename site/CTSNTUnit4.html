@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS New Testament Survey — Unit 4: Luke: The Compassion of the Son of Man</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+.track-bar { background: #f6f1e8; border: 1px solid #d7cec1; border-radius: 12px; padding: 12px 16px; margin: 15px 0; }
+.track-bar label { margin-right: 18px; cursor: pointer; font-size: 0.95rem; }
+.track-bar input[type=radio] { margin-right: 6px; vertical-align: middle; }
+.reset-btn { background: #8a5a3a; color: white; border: none; border-radius: 30px; padding: 8px 18px; cursor: pointer; font-family: inherit; margin-left: 10px; font-size: 0.9rem; }
+.reset-btn:hover { background: #6e4528; }
+.redirect-notice { background: #e8f5ea; border: 1px solid #b9dfc2; color: #1f6b3b; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-weight: bold; }
+@media print {
+  @page { margin: 0.5in; }
+  body { background: white; color: black; font-size: 12pt; padding: 0; }
+  .nav-bar, .toggle-btn, #submitExamBtn, .reset-btn, #examResult, .track-bar, button.small { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; padding: 12px; margin-bottom: 12px; }
+  .question { page-break-inside: avoid; }
+  h1, h2, h3 { color: black; page-break-after: avoid; }
+  .option { background: white; border-color: #999; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" >← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 New Testament Survey — Unit 4: Luke: The Compassion of the Son of Man</span><span class="lang-es">📖 Estudio del Nuevo Testamento — Unidad 4: Lucas: La Compasión del Hijo del Hombre</span></h1>
+    <p><span class="lang-en"><strong>Course Author:</strong> Dr. Wayne Cook | <strong>Seminary Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Autor del Curso:</strong> Dr. Wayne Cook | <strong>Director del Seminario:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic;"></p>
+</div>
+
+<div class="card" id="teachingContent">
+<div class="lang-en">
+        <h2>I. The Doctor at His Desk</h2>
+        <p>Somewhere in the eastern Mediterranean, in or about the year 60, a Greek-speaking physician named Luke sat down at a writing table with a stack of interview notes and began the most carefully researched book in the New Testament. He addressed it to a man named Theophilus — probably a Roman official, almost certainly a Gentile, possibly a recent convert who had heard the bones of the Christian story and wanted the full picture. Luke's opening is unique among the Gospel writers. He does not begin like John, with the eternity of the Word. He does not begin like Matthew, with the genealogy of the King. He does not begin like Mark, who starts with the Servant already on the run. Luke begins like a doctor opening a chart: <em>"Inasmuch as many have taken in hand to set in order a narrative of those things which have been fulfilled among us, just as those who from the beginning were eyewitnesses and ministers of the word delivered them to us, it seemed good to me also, having had perfect understanding of all things from the very first, to write to you an orderly account, most excellent Theophilus, that you may know the certainty of those things in which you were instructed"</em> (Luke 1:1–4).</p>
+
+        <p>Luke is the only Gentile author of any book in the New Testament. He is the doctor Paul called <em>"Luke the beloved physician"</em> (Colossians 4:14), the faithful traveling companion who refused to abandon Paul to the very end (2 Timothy 4:11). He had walked Roman roads, interviewed eyewitnesses, copied genealogies, and ordered every story by date and place. The result is a Gospel of meticulous beauty written by a trained scientific mind — the most polished Greek in the New Testament, the longest book in the New Testament, and the most tender. Compassion runs through every chapter like a quiet stream.</p>
+
+        <p>Nor did Luke lay down his pen when the Gospel was finished. He wrote a second volume, the Acts of the Apostles, addressed to the same Theophilus: <em>"The former account I made, O Theophilus, of all that Jesus began both to do and teach"</em> (Acts 1:1). Together, Luke and Acts form a single two-part history — the first volume telling what Jesus began to do in His earthly ministry, the second telling what He continued to do through His Church by the Spirit. The same careful doctor who interviewed the eyewitnesses of the Gospel went on to chronicle the spread of the gospel from Jerusalem to Rome. When you read Luke, remember that its sequel is already in the writer's mind.</p>
+
+        <h2>II. The Genealogy that Goes Home to Adam</h2>
+        <p>Before the genealogy, Luke gives us the songs of the nativity that no other Gospel preserves — and the first and greatest of them belongs to a teenage girl. When Mary visited her relative Elizabeth, she broke into a hymn of praise that the Church has sung ever since under its Latin name, the Magnificat: <em>"My soul magnifies the Lord, and my spirit has rejoiced in God my Savior"</em> (Luke 1:46–47). It is the song of a poor young woman from a despised town, exalting a God who scatters the proud and lifts up the lowly and fills the hungry with good things. The Magnificat is Luke's manifesto in miniature, sung before the Gospel has even properly begun: the compassion of the Son of Man, announced first by His mother.</p>
+        <p>Matthew traces the genealogy of Jesus back to Abraham, the father of the Jewish nation, because Matthew is writing for Jews and wants them to see the King in their own line (Matthew 1:1–17). Luke does not stop at Abraham. He keeps going. Past Abraham, past Noah, past Methuselah and Enoch, past Seth and Cain, all the way back, until he reaches the first name in the human story: <em>"the son of Enos, the son of Seth, the son of Adam, the son of God"</em> (Luke 3:38). Look carefully at that final phrase. Luke is writing for Gentiles, for Greeks, for the whole human race. He wants every reader from every nation to lift his eyes from the page and see his own ancestor in the same genealogy as the Son of Man. The compassion of Luke's Jesus is not for one tribe; it is for the lost <em>family</em>. Matthew gives us Christ the King for the Jew, Mark gives us Christ the Servant for the Roman, John gives us Christ the God for the believer, and Luke gives us Christ the Man for everybody.</p>
+
+        <h2>III. The Manifesto at Nazareth</h2>
+        <p>The first recorded sermon of the Lord Jesus, in Luke's account, was preached in His own hometown synagogue. They handed Him the scroll of Isaiah. He found chapter 61 and read aloud, <em>"The Spirit of the LORD is upon Me, because He has anointed Me to preach the gospel to the poor; He has sent Me to heal the brokenhearted, to proclaim liberty to the captives and recovery of sight to the blind, to set at liberty those who are oppressed; to proclaim the acceptable year of the LORD"</em> (Luke 4:18–19). He closed the scroll. He sat down. And in the silence He said one sentence that no rabbi in Nazareth had ever dared to say: <em>"Today this Scripture is fulfilled in your hearing"</em> (Luke 4:21).</p>
+
+        <p>That sermon is the manifesto of Luke's whole Gospel. Five categories of broken humanity: <em>the poor, the brokenhearted, the captives, the blind, the oppressed.</em> Luke is going to walk us through every one of them. A poor widow drops two mites into the temple treasury (Luke 21:1–4). A brokenhearted woman washes the Lord's feet with her tears (Luke 7:38). A demon-bound man, naked among the tombs, is set free and clothed and seated in his right mind (Luke 8:35). Blind Bartimaeus shouts above the crowd until Jesus stops (Luke 18:35–43). An oppressed Samaritan leper, one of ten, returns to give thanks (Luke 17:11–19). The manifesto preached in Nazareth becomes the Gospel-shaped life lived in every village.</p>
+
+        <h2>IV. The Key Verse</h2>
+        <p>Pencil this one into the margin of your Bible: <em>"For the Son of Man has come to seek and to save that which was lost"</em> (Luke 19:10). It is the verse Luke wraps around the whole book. Read every paragraph of Luke against that verse and the picture clears. The Son of Man came to <em>seek</em> — He goes after; He does not wait. The Son of Man came to <em>save</em> — He does not merely sympathize; He reaches. And what He came to save is <em>that which was lost</em> — the lost coin, the lost sheep, the lost son, the lost tax collector named Zacchaeus up the sycamore tree in whose house the verse is first spoken (Luke 19:1–10). Luke's compassion is not a feeling. It is a search party.</p>
+
+        <h2>V. The Heart of Luke — Chapter 15</h2>
+        <p>About eight months ago I lost a pocket knife. It was no ordinary one, but the one my father had carried in his pocket for years. I searched everywhere. I asked at church. No one had seen it. Then one of my sons gave me a fine new pocket knife for my birthday, and about a week later I noticed <em>that</em> one was gone too. I was ashamed to tell him. I searched the car, the chairs, every pocket, in the homes of every family I had visited. At last in the home of an older couple, the wife pulled the cushions off the couch where I had sat the week before; and her husband, who suffers from Alzheimer's, reached into his own pocket and held something out, saying, <em>"I found this on the floor."</em> It was not the new knife. It was my father's knife — the one I had lost eight months before. In looking for the one, I had found the other. Some days later I felt something heavy in my pants pocket and reached in: there was the new knife. I had searched that pocket three times in frantic looking, but I had not seen it.</p>
+
+        <p>Every time I tell that story I find myself in Luke 15. The Lord Jesus told three parables in a row about lost things — a lost sheep, a lost coin, a lost son — and the point of all three is the same: heaven does not yawn over lost things; heaven mobilizes. The shepherd leaves the ninety-nine in the open country and goes after the one. The woman lights the lamp and sweeps the house and searches carefully until she finds it. The father, when the boy is still a great way off, sees him, has compassion, runs, falls on his neck, and kisses him. <em>"Likewise, I say to you, there is joy in the presence of the angels of God over one sinner who repents"</em> (Luke 15:10). Notice the word <em>compassion</em>. In Greek it is <em>splanchnizomai</em> — a deep-gut word, the same word that is used of the Good Samaritan when he sees the wounded man, the same word that is used of the Lord Jesus when He sees the crowds. The compassion of the Son of Man is not a tear running down a cheek; it is the running of the father, with his robe flapping behind him, toward a boy who is still smelling of pigs.</p>
+
+        <h2>VI. The Compassion that Crosses Lines</h2>
+        <p>Luke records more parables of crossing lines than any other Gospel. A Samaritan stops on the Jericho road where a priest and a Levite had passed by, and binds up the wounds of a man whom every prejudice would have made his enemy (Luke 10:25–37). A Roman centurion sends word that he does not deserve to have Jesus enter under his roof, and Jesus marvels at the faith and says, <em>"I have not found such great faith, not even in Israel"</em> (Luke 7:9). A sinful woman crashes a Pharisee's dinner party and weeps over Jesus' feet, and the Lord defends her: <em>"Her sins, which are many, are forgiven, for she loved much"</em> (Luke 7:47). A widow of Nain is given back her only son (Luke 7:11–15). Mary Magdalene, out of whom seven demons had gone, sits at the empty tomb (Luke 24:10). Luke records more about women than any other Gospel. He records more about the poor. He records more about the despised. The compassion of the Son of Man is line-crossing compassion — over every fence the religious establishment had ever built.</p>
+
+        <h2>VII. The Cross of Compassion</h2>
+        <p>Luke records three sayings from the cross that no other Gospel preserves. The first is a prayer for the soldiers driving the nails: <em>"Father, forgive them, for they do not know what they do"</em> (Luke 23:34). The second is a promise to a dying thief: <em>"Assuredly, I say to you, today you will be with Me in Paradise"</em> (Luke 23:43). The third is a final committing of His Spirit: <em>"Father, into Your hands I commit My spirit"</em> (Luke 23:46). Mark and Matthew let us hear the cry of dereliction. Luke lets us hear the prayer of pardon.</p>
+
+        <p>Alexander H. Stephens, the wartime Vice President of the Confederacy, became Governor of Georgia near the end of his life. He was a cripple. When his physicians said he was dying, the great men of state crowded his bedroom and begged him to sign their important documents. Stephens waved them away and called for his secretary. He told him to fetch an old, faded paper out of his desk. The secretary brought it. It was the petition of a humble mother from up in the hills of Georgia, asking pardon for her son in the state penitentiary. The cabinet officials pressed Stephens to lay it aside and take up matters of state. He answered: <em>"No. I am going to sign this. The great matters of state will take care of themselves."</em> Propped up on his pillow, he took the yellowed paper, dipped the pen in the ink, and wrote across the petition one word: <em>P-A-R-D-O-N-E-D.</em> Underneath he signed his name. Then he dropped back on the pillow and died. Two thousand years before that, on a hill called Calvary, the Son of God was also dying. At His side a thief — a man unfit to live with men — cried out, <em>"Lord, remember me when You come into Your kingdom."</em> From the bruised lips of Jesus came the answer that has echoed down the corridors of the ages: <em>"Today you will be with Me in Paradise."</em> The man unfit to live with men was made fit to live forever with the Son of Man. That is the cross of Luke's Gospel. That is the Compassion of the Son of Man.</p>
+
+        <h2>VIII. The Burning Hearts on the Emmaus Road</h2>
+        <p>On the afternoon of resurrection Sunday, two of the Lord's disciples were walking the seven miles from Jerusalem out to a village called Emmaus, talking sadly about all that had happened. A stranger drew alongside and asked what they were discussing. They did not recognize Him. They were too sad. <em>"Are You the only stranger in Jerusalem,"</em> they said, <em>"and have You not known the things which happened there in these days?"</em> <em>"What things?"</em> the Lord asked them. And so they unfolded the story — of Jesus of Nazareth, the prophet they had hoped would redeem Israel, who was crucified three days ago. Then, walking beside them, the risen Lord began at Moses and all the Prophets and expounded to them in all the Scriptures the things concerning Himself. By the time they reached Emmaus, evening had come. They begged Him to stay. He went in with them, sat down at supper, took the bread, blessed it, broke it, gave it to them — and they recognized Him, and He vanished. They looked at each other in the empty room and said the line that ends Luke's Gospel for me: <em>"Did not our heart burn within us while He talked with us on the road, and while He opened the Scriptures to us?"</em> (Luke 24:32). That is the climax of Luke. The compassion of the Son of Man does not only forgive sinners on crosses; it warms the cold hearts of disciples on roads. It comes alongside us when we cannot see Him, walks with us when we are sad, opens the Scriptures, and breaks the bread.</p>
+
+        <h2>IX. A Word on Luke and Hebrews</h2>
+        <p>Students sometimes ask whether Luke had a hand in the Epistle to the Hebrews. The honest answer begins with a confession: <em>no one knows who wrote Hebrews.</em> The letter is anonymous; it names no author, and the early church itself was divided over its origin. Because Hebrews is written in the most polished, literary Greek in the New Testament — the same high quality that marks Luke's own writing — a few have proposed that Luke may have composed it, or at least translated or polished it from another's thought. It is one minor proposal among several, never the settled view; others have suggested Paul, Barnabas, Apollos, or Priscilla, and the most candid scholars simply leave the question open.</p>
+
+        <p>For our purposes the value is not in settling an unanswerable question but in noticing what the comparison teaches. Luke wrote the finest Greek of the Gospel writers, the careful prose of a trained, educated mind; Hebrews shares that literary polish and that same deep concern with the tabernacle, the priesthood, and the fulfillment of the old covenant in Christ. Whoever held the pen, both books reward the reader who loves careful argument. We hold the authorship of Hebrews loosely, as the church always has, and we hold its message firmly: Christ is better — a better priest, a better sacrifice, a better covenant.</p>
+
+        <h2>X. The Gospel for Our Tomorrow</h2>
+        <p>Kefa Sempangi was a national pastor in Uganda during the brutal years of Idi Amin. He and his family barely escaped the country with their lives, made it eventually to Philadelphia, and were taken in by a group of American Christians. One day, in the safety of that new home, his wife said over coffee, <em>"Tomorrow I am going to go and buy some clothes for the children."</em> And they both burst into tears. For so many years they had lived under the constant threat of being murdered that they had not once dared, in front of each other, to use the word <em>tomorrow.</em> Tomorrow was a luxury for the safe. Tomorrow was an act of compassion God had given back to them.</p>
+
+        <p>Luke wrote his Gospel for every weeping woman in Philadelphia who needs to be told that <em>tomorrow</em> is once again hers in Christ. Luke wrote his Gospel for the prodigal still smelling of pigs, for the centurion at the end of his rope, for the Samaritan despised in his village, for the dying thief who had nothing left to bargain with, for the disciple who has lost his joy on the road home. <em>"The Son of Man has come to seek and to save that which was lost."</em> Press on, my friend, into the rest of the Gospels with the same Lord who left Nazareth's synagogue and never stopped searching, who walked the Emmaus road with strangers in their sadness, and who still walks with you today. He is your Lord, and He is the same yesterday, today, and forever. Amen.</p>
+    </div>
+<div class="lang-es">
+        <h2>I. El médico en su escritorio</h2>
+        <p>En algún lugar del Mediterráneo oriental, en o cerca del año 60, un médico de habla griega llamado Lucas se sentó a una mesa de escribir con un montón de notas de entrevistas y comenzó el libro más cuidadosamente investigado del Nuevo Testamento. Lo dirigió a un hombre llamado Teófilo — probablemente un oficial romano, casi con seguridad gentil, posiblemente un converso reciente que había escuchado los huesos de la historia cristiana y quería el cuadro completo. La apertura de Lucas es única entre los evangelistas. No comienza como Juan, con la eternidad del Verbo. No comienza como Mateo, con la genealogía del Rey. No comienza como Marcos, que arranca con el Siervo ya en plena carrera. Lucas comienza como un médico abriendo una historia clínica: <em>"Habiendo muchos tentado a poner en orden la historia de las cosas que entre nosotros han sido ciertísimas, como nos lo enseñaron los que desde el principio lo vieron por sus ojos, y fueron ministros de la palabra; me ha parecido también á mí, después de haber entendido todas las cosas desde el principio con diligencia, escribírtelas por orden, oh muy buen Teófilo, para que conozcas la verdad de las cosas en las cuales has sido enseñado"</em> (Lucas 1:1–4).</p>
+
+        <p>Lucas es el único autor gentil de algún libro del Nuevo Testamento. Es el médico al que Pablo llamó <em>"Lucas el médico amado"</em> (Colosenses 4:14), el fiel compañero de viaje que se negó a abandonar a Pablo hasta el final mismo (2 Timoteo 4:11). Había caminado por los caminos romanos, entrevistado a testigos oculares, copiado genealogías y ordenado cada historia por fecha y lugar. El resultado es un Evangelio de meticulosa belleza escrito por una mente científica entrenada — el griego más pulido del Nuevo Testamento, el libro más largo del Nuevo Testamento, y el más tierno. La compasión corre por cada capítulo como un arroyo callado.</p>
+
+        <p>Lucas tampoco dejó la pluma cuando terminó el Evangelio. Escribió un segundo volumen, los Hechos de los Apóstoles, dirigido al mismo Teófilo: <em>"En el primer tratado, oh Teófilo, he hablado de todas las cosas que Jesús comenzó á hacer y á enseñar"</em> (Hechos 1:1). Juntos, Lucas y Hechos forman una sola historia en dos partes — el primer volumen contando lo que Jesús comenzó a hacer en Su ministerio terrenal, el segundo contando lo que continuó haciendo por medio de Su Iglesia por el Espíritu. El mismo médico cuidadoso que entrevistó a los testigos oculares del Evangelio pasó a relatar la difusión del evangelio desde Jerusalén hasta Roma. Cuando lea a Lucas, recuerde que su continuación ya está en la mente del escritor.</p>
+
+        <h2>II. La genealogía que llega de regreso a Adán</h2>
+        <p>Antes de la genealogía, Lucas nos da los cánticos de la natividad que ningún otro Evangelio preserva — y el primero y más grande de ellos pertenece a una jovencita. Cuando María visitó a su parienta Isabel, prorrumpió en un himno de alabanza que la Iglesia ha cantado desde entonces bajo su nombre latino, el Magníficat: <em>"Engrandece mi alma al Señor; y mi espíritu se alegró en Dios mi Salvador"</em> (Lucas 1:46–47). Es el cántico de una joven pobre de un pueblo despreciado, que exalta a un Dios que esparce a los soberbios y levanta a los humildes y colma de bienes a los hambrientos. El Magníficat es el manifiesto de Lucas en miniatura, cantado antes de que el Evangelio haya comenzado propiamente: la compasión del Hijo del Hombre, anunciada primero por Su madre.</p>
+        <p>Mateo rastrea la genealogía de Jesús hasta Abraham, padre de la nación judía, porque Mateo escribe para los judíos y quiere que vean al Rey en su propia línea (Mateo 1:1–17). Lucas no se detiene en Abraham. Sigue. Más allá de Abraham, más allá de Noé, más allá de Matusalén y Enoc, más allá de Set y Caín, hasta llegar al primer nombre en la historia humana: <em>"hijo de Enós, hijo de Set, hijo de Adam, hijo de Dios"</em> (Lucas 3:38). Mire con atención esa frase final. Lucas escribe para los gentiles, para los griegos, para toda la raza humana. Quiere que cada lector de cada nación levante los ojos de la página y vea a su propio antepasado en la misma genealogía que el Hijo del Hombre. La compasión del Jesús de Lucas no es para una sola tribu; es para la <em>familia</em> perdida. Mateo nos da a Cristo el Rey para el judío, Marcos nos da a Cristo el Siervo para el romano, Juan nos da a Cristo el Dios para el creyente, y Lucas nos da a Cristo el Hombre para todos.</p>
+
+        <h2>III. El manifiesto en Nazaret</h2>
+        <p>El primer sermón registrado del Señor Jesús, en el relato de Lucas, fue predicado en la sinagoga de su propio pueblo natal. Le entregaron el rollo de Isaías. Encontró el capítulo 61 y leyó en voz alta: <em>"El Espíritu del Señor es sobre mí, por cuanto me ha ungido para dar buenas nuevas á los pobres; me ha enviado para sanar á los quebrantados de corazón; para pregonar á los cautivos libertad, y á los ciegos vista; para poner en libertad á los quebrantados; para predicar el año agradable del Señor"</em> (Lucas 4:18–19). Cerró el rollo. Se sentó. Y en el silencio dijo una sola frase que ningún rabino en Nazaret se había atrevido jamás a decir: <em>"Hoy se ha cumplido esta Escritura en vuestros oídos"</em> (Lucas 4:21).</p>
+
+        <p>Ese sermón es el manifiesto de todo el Evangelio de Lucas. Cinco categorías de humanidad quebrantada: <em>los pobres, los quebrantados de corazón, los cautivos, los ciegos, los oprimidos.</em> Lucas nos va a llevar por cada una. Una viuda pobre echa dos blancas en el arca del templo (Lucas 21:1–4). Una mujer quebrantada lava los pies del Señor con sus lágrimas (Lucas 7:38). Un endemoniado, desnudo entre los sepulcros, es libertado y vestido y sentado en su juicio cabal (Lucas 8:35). El ciego Bartimeo clama por sobre la multitud hasta que Jesús se detiene (Lucas 18:35–43). Un oprimido leproso samaritano, uno de diez, regresa a dar gracias (Lucas 17:11–19). El manifiesto predicado en Nazaret se vuelve la vida con forma de Evangelio vivida en cada aldea.</p>
+
+        <h2>IV. El versículo clave</h2>
+        <p>Escriba este en el margen de su Biblia: <em>"Porque el Hijo del Hombre vino á buscar y á salvar lo que se había perdido"</em> (Lucas 19:10). Es el versículo que Lucas envuelve alrededor de todo el libro. Lea cada párrafo de Lucas contra ese versículo y el cuadro se aclara. El Hijo del Hombre vino a <em>buscar</em> — va tras; no espera. El Hijo del Hombre vino a <em>salvar</em> — no se compadece simplemente; alcanza. Y lo que vino a salvar es <em>lo que se había perdido</em> — la moneda perdida, la oveja perdida, el hijo perdido, el publicano perdido llamado Zaqueo sobre el sicómoro en cuya casa el versículo se pronuncia por primera vez (Lucas 19:1–10). La compasión de Lucas no es un sentimiento. Es una partida de búsqueda.</p>
+
+        <h2>V. El corazón de Lucas — Capítulo 15</h2>
+        <p>Hace unos ocho meses perdí una navaja de bolsillo. No era cualquiera, sino la que mi padre había llevado en su bolsillo durante años. La busqué por todas partes. Pregunté en la iglesia. Nadie la había visto. Luego uno de mis hijos me regaló una fina navaja nueva para mi cumpleaños, y como una semana después noté que <em>esa</em> también se había ido. Me daba vergüenza decirle. Busqué en el carro, en las sillas, en cada bolsillo, en las casas de cada familia que había visitado. Al fin, en la casa de una pareja mayor, la esposa quitó los cojines del sofá donde yo me había sentado la semana antes; y su esposo, que sufre de Alzheimer, metió la mano en su propio bolsillo y me extendió algo, diciendo: <em>"Encontré esto en el piso."</em> No era la navaja nueva. Era la navaja de mi padre — la que había perdido ocho meses antes. Al buscar la una, había encontrado la otra. Días después sentí algo pesado en el bolsillo del pantalón y metí la mano: ahí estaba la navaja nueva. Había revisado ese bolsillo tres veces en mi búsqueda frenética, pero no la había visto.</p>
+
+        <p>Cada vez que cuento esa historia me encuentro en Lucas 15. El Señor Jesús contó tres parábolas seguidas sobre cosas perdidas — una oveja perdida, una moneda perdida, un hijo perdido — y el punto de las tres es el mismo: el cielo no bosteza ante las cosas perdidas; el cielo se moviliza. El pastor deja las noventa y nueve en el campo y va tras la una. La mujer enciende la lámpara, barre la casa y busca con cuidado hasta hallarla. El padre, cuando el hijo aún está muy lejos, lo ve, es movido a misericordia, corre, se echa sobre su cuello y lo besa. <em>"Así os digo que hay gozo delante de los ángeles de Dios por un pecador que se arrepiente"</em> (Lucas 15:10). Note la palabra <em>compasión</em>. En griego es <em>splanchnizomai</em> — una palabra de las entrañas, la misma palabra que se usa del buen samaritano cuando ve al herido, la misma palabra que se usa del Señor Jesús cuando ve las multitudes. La compasión del Hijo del Hombre no es una lágrima rodando por una mejilla; es la carrera del padre, con la túnica ondeando detrás, hacia un muchacho que aún huele a cerdos.</p>
+
+        <h2>VI. La compasión que cruza líneas</h2>
+        <p>Lucas registra más parábolas de cruzar líneas que cualquier otro Evangelio. Un samaritano se detiene en el camino de Jericó donde un sacerdote y un levita habían pasado de largo, y venda las heridas de un hombre a quien todo prejuicio habría hecho su enemigo (Lucas 10:25–37). Un centurión romano envía recado de que no es digno de que Jesús entre bajo su techo, y Jesús se maravilla de la fe y dice: <em>"Ni aun en Israel he hallado tanta fe"</em> (Lucas 7:9). Una mujer pecadora se cuela en la cena de un fariseo y llora sobre los pies de Jesús, y el Señor la defiende: <em>"Sus muchos pecados son perdonados, porque amó mucho"</em> (Lucas 7:47). A la viuda de Naín le es devuelto su único hijo (Lucas 7:11–15). María Magdalena, de quien habían salido siete demonios, está sentada junto al sepulcro vacío (Lucas 24:10). Lucas registra más sobre las mujeres que cualquier otro Evangelio. Registra más sobre los pobres. Registra más sobre los despreciados. La compasión del Hijo del Hombre es compasión que cruza líneas — por encima de cada cerca que el establecimiento religioso había construido.</p>
+
+        <h2>VII. La cruz de la compasión</h2>
+        <p>Lucas registra tres dichos desde la cruz que ningún otro Evangelio preserva. El primero es una oración por los soldados que clavaban los clavos: <em>"Padre, perdónalos, porque no saben lo que hacen"</em> (Lucas 23:34). El segundo es una promesa a un ladrón moribundo: <em>"De cierto te digo, que hoy estarás conmigo en el paraíso"</em> (Lucas 23:43). El tercero es una entrega final de Su Espíritu: <em>"Padre, en tus manos encomiendo mi espíritu"</em> (Lucas 23:46). Marcos y Mateo nos dejan oír el clamor del abandono. Lucas nos deja oír la oración del perdón.</p>
+
+        <p>Alexander H. Stephens, Vicepresidente confederado durante la guerra, llegó a ser Gobernador de Georgia cerca del fin de su vida. Era inválido. Cuando los médicos dijeron que estaba muriendo, los grandes hombres del estado llenaron su dormitorio rogándole que firmara sus importantes documentos. Stephens los despidió con un ademán y llamó a su secretario. Le dijo que sacara de su escritorio un papel viejo y amarillento. El secretario lo trajo. Era la petición de una humilde madre de los cerros de Georgia, pidiendo perdón para su hijo en la penitenciaría del estado. Los oficiales del gabinete presionaban a Stephens para que la dejara a un lado y tomara asuntos de estado. Él respondió: <em>"No. Voy a firmar esto. Los grandes asuntos del estado se cuidarán solos."</em> Apoyado en la almohada, tomó el papel amarillento, mojó la pluma en la tinta, y escribió sobre la petición una sola palabra: <em>P-E-R-D-O-N-A-D-O.</em> Debajo firmó su nombre. Luego cayó hacia atrás sobre la almohada y murió. Dos mil años antes, sobre una colina llamada Calvario, el Hijo de Dios también estaba muriendo. A Su lado un ladrón — un hombre no apto para vivir con los hombres — clamó: <em>"Señor, acuérdate de mí cuando vinieres en tu reino."</em> De los labios magullados de Jesús salió la respuesta que ha resonado por los corredores de los siglos: <em>"Hoy estarás conmigo en el paraíso."</em> El hombre no apto para vivir con los hombres fue hecho apto para vivir para siempre con el Hijo del Hombre. Esa es la cruz del Evangelio de Lucas. Esa es la Compasión del Hijo del Hombre.</p>
+
+        <h2>VIII. Los corazones ardientes en el camino de Emaús</h2>
+        <p>La tarde del domingo de resurrección, dos de los discípulos del Señor caminaban las once kilómetros de Jerusalén a una aldea llamada Emaús, conversando tristemente sobre todo lo que había sucedido. Un extraño se acercó y les preguntó de qué hablaban. No lo reconocieron. Estaban demasiado tristes. <em>"¿Tú solo peregrino eres en Jerusalén,"</em> dijeron, <em>"y no has sabido las cosas que en ella han acontecido estos días?"</em> <em>"¿Qué cosas?"</em> les preguntó el Señor. Y así desplegaron la historia — de Jesús de Nazaret, el profeta que habían esperado redimiría a Israel, que había sido crucificado tres días atrás. Entonces, caminando junto a ellos, el Señor resucitado comenzando desde Moisés y siguiendo por todos los profetas, les declaró en todas las Escrituras las cosas concernientes a Él. Al llegar a Emaús ya había caído la tarde. Le rogaron que se quedara. Entró con ellos, se sentó a la mesa, tomó el pan, lo bendijo, lo partió, se los dio — y lo reconocieron, y Él desapareció. Se miraron el uno al otro en el cuarto vacío y dijeron la frase que cierra para mí el Evangelio de Lucas: <em>"¿No ardía nuestro corazón en nosotros, mientras nos hablaba en el camino, y cuando nos abría las Escrituras?"</em> (Lucas 24:32). Ese es el clímax de Lucas. La compasión del Hijo del Hombre no solo perdona a pecadores en cruces; calienta los corazones fríos de los discípulos en los caminos. Viene a nuestro lado cuando no podemos verle, camina con nosotros cuando estamos tristes, abre las Escrituras y parte el pan.</p>
+
+        <h2>IX. Una palabra sobre Lucas y Hebreos</h2>
+        <p>A veces los estudiantes preguntan si Lucas tuvo que ver con la Epístola a los Hebreos. La respuesta honesta comienza con una confesión: <em>nadie sabe quién escribió Hebreos.</em> La carta es anónima; no nombra a ningún autor, y la iglesia primitiva misma estaba dividida sobre su origen. Porque Hebreos está escrita en el griego más pulido y literario del Nuevo Testamento — la misma alta calidad que marca la propia escritura de Lucas — unos pocos han propuesto que Lucas pudo haberla compuesto, o al menos traducido o pulido del pensamiento de otro. Es una propuesta menor entre varias, nunca la opinión establecida; otros han sugerido a Pablo, Bernabé, Apolos o Priscila, y los eruditos más sinceros sencillamente dejan la cuestión abierta.</p>
+
+        <p>Para nuestros fines el valor no está en zanjar una pregunta sin respuesta sino en notar lo que enseña la comparación. Lucas escribió el griego más fino de los evangelistas, la prosa cuidadosa de una mente entrenada y educada; Hebreos comparte ese pulido literario y esa misma honda preocupación por el tabernáculo, el sacerdocio y el cumplimiento del antiguo pacto en Cristo. Quienquiera que sostuviera la pluma, ambos libros recompensan al lector que ama el argumento cuidadoso. Sostenemos la autoría de Hebreos con holgura, como siempre lo ha hecho la iglesia, y sostenemos su mensaje con firmeza: Cristo es mejor — un mejor sacerdote, un mejor sacrificio, un mejor pacto.</p>
+
+        <h2>X. El Evangelio para nuestro mañana</h2>
+        <p>Kefa Sempangi era pastor nacional en Uganda durante los años brutales de Idi Amin. Él y su familia escaparon del país con vida apenas, llegaron por fin a Filadelfia y fueron acogidos por un grupo de cristianos estadounidenses. Un día, en la seguridad de aquella nueva casa, su esposa dijo tomando café: <em>"Mañana voy a salir a comprar ropa para los niños."</em> Y ambos rompieron a llorar. Por tantos años habían vivido bajo la amenaza constante de ser asesinados que ni una sola vez se habían atrevido, frente al otro, a usar la palabra <em>mañana.</em> Mañana era un lujo para los seguros. Mañana era un acto de compasión que Dios les había devuelto.</p>
+
+        <p>Lucas escribió su Evangelio para cada mujer que llora en Filadelfia y necesita oír que <em>mañana</em> es de nuevo suyo en Cristo. Lucas escribió su Evangelio para el pródigo todavía oliendo a cerdos, para el centurión al final de la cuerda, para el samaritano despreciado en su aldea, para el ladrón moribundo que no tenía nada con qué negociar, para el discípulo que ha perdido su gozo camino a casa. <em>"El Hijo del Hombre vino á buscar y á salvar lo que se había perdido."</em> Avance, amigo mío, por el resto de los Evangelios con el mismo Señor que salió de la sinagoga de Nazaret y nunca dejó de buscar, que caminó el camino de Emaús con los desconocidos en su tristeza, y que todavía camina con usted hoy. Él es su Señor, y Él es el mismo ayer, hoy y por los siglos. Amén.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 4 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 4 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer questions 1–20 (multiple choice). You must achieve 90% (18/20) on the multiple-choice section to pass. <strong>M.Div. / Th.M. students:</strong> Answer all 30 questions. You must achieve 90% on both sections independently — 18/20 multiple choice AND 9/10 short answer. Click an answer for immediate feedback. <strong>Once all 12 units are passed, you will be redirected to your certificate.</strong></span><span class="lang-es"><strong>Estudiantes de certificado:</strong> Respondan las preguntas 1–20 (opción múltiple). Debe alcanzar el 90% (18/20) en la sección de opción múltiple para aprobar. <strong>Estudiantes de M.Div. / Th.M.:</strong> Respondan las 30 preguntas. Debe alcanzar el 90% en ambas secciones de manera independiente — 18/20 opción múltiple Y 9/10 respuesta corta. Haga clic en una respuesta para retroalimentación inmediata. <strong>Una vez aprobadas las 12 unidades, será redirigido a su certificado.</strong></span></p>
+    <div class="track-bar">
+        <strong><span class="lang-en">Your Track:</span><span class="lang-es">Su Modalidad:</span></strong>
+        <span style="margin-left:14px;">
+            <label><input type="radio" name="ctsTrack" value="cert"><span class="lang-en">Certificate (MC only)</span><span class="lang-es">Certificado (solo opción múltiple)</span></label>
+            <label><input type="radio" name="ctsTrack" value="mdiv"><span class="lang-en">Master of Divinity (MC + SA)</span><span class="lang-es">Maestría en Divinidad (MC + RC)</span></label>
+            <label><input type="radio" name="ctsTrack" value="thm"><span class="lang-en">Master of Theology (Th.M.) Track</span><span class="lang-es">Maestría en Teología (Th.M.)</span></label>
+        </span>
+    </div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar Aprobación</span></button>
+        <button id="resetExamBtn" class="reset-btn"><span class="lang-en">↺ Reset Exam</span><span class="lang-es">↺ Restablecer Examen</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// ===== PER-UNIT CONFIG =====
+const UNIT = 4;
+const TOTAL_UNITS = 12;
+const NEXT_URL = 'CTSNTUnit5.html';
+const PREV_URL = 'CTSNTUnit3.html';
+const PASS_THRESHOLD = 0.90;
+
+let progress = JSON.parse(localStorage.getItem('cts_nt_progress')) || {};
+let currentTrack = localStorage.getItem('cts_track') || 'cert';
+
+function isMastersLevel() { return currentTrack === 'mdiv' || currentTrack === 'thm'; }
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === UNIT) cls += ' active';
+        grid.innerHTML += `<a href="CTSNTUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+if (PREV_URL) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_URL; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<a href="#" onclick="promptName(); return false;" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+    }
+}
+function promptName() {
+    const name = prompt("Welcome to CTS New Testament Survey! Please enter your full name as you'd like it to appear on your certificate:");
+    if (name && name.trim().length > 1) {
+        localStorage.setItem('cts_student', JSON.stringify({name: name.trim()}));
+        displayStudentGreeting();
+    }
+}
+displayStudentGreeting();
+
+const mcQuestions = [
+    { textEn: "1. Who is the author of the Gospel of Luke?", textEs: "1. ¿Quién es el autor del Evangelio de Lucas?",
+      optionsEn: ["John the apostle", "Luke the physician", "Mark the evangelist", "Matthew the tax collector"],
+      optionsEs: ["Juan el apóstol", "Lucas el médico", "Marcos el evangelista", "Mateo el publicano"],
+      explanationEn: "Luke was the Gentile physician Paul called 'the beloved physician,' the only Gentile author in the New Testament.", explanationEs: "Lucas era el médico gentil a quien Pablo llamó 'el médico amado', el único autor gentil del Nuevo Testamento.", correct: 1 },
+    { textEn: "2. To whom is the Gospel of Luke addressed?", textEs: "2. ¿A quién está dirigido el Evangelio de Lucas?",
+      optionsEn: ["The church at Antioch", "The apostle Paul", "The Roman governor", "Theophilus"],
+      optionsEs: ["La iglesia en Antioquía", "El apóstol Pablo", "El gobernador romano", "Teófilo"],
+      explanationEn: "Luke addressed his orderly account to Theophilus, likely a Gentile and possibly a recent convert wanting the full picture.", explanationEs: "Lucas dirigió su relato ordenado a Teófilo, probablemente un gentil y posiblemente un converso reciente que quería el cuadro completo.", correct: 3 },
+    { textEn: "3. The key verse of Luke's Gospel is found in:", textEs: "3. El versículo clave del Evangelio de Lucas se encuentra en:",
+      optionsEn: ["Luke 1:1", "Luke 4:18", "Luke 19:10", "Luke 24:32"],
+      optionsEs: ["Lucas 1:1", "Lucas 4:18", "Lucas 19:10", "Lucas 24:32"],
+      explanationEn: "Luke's key verse is 19:10 — the Son of Man came to seek and to save that which was lost.", explanationEs: "El versículo clave de Lucas es 19:10 — el Hijo del Hombre vino a buscar y salvar lo que se había perdido.", correct: 2 },
+    { textEn: "4. Luke's genealogy of Jesus traces back to:", textEs: "4. La genealogía de Jesús en Lucas se remonta hasta:",
+      optionsEn: ["Adam", "David", "Noah", "Abraham"],
+      optionsEs: ["Adán", "David", "Noé", "Abraham"],
+      explanationEn: "Luke traces the genealogy back past Abraham all the way to Adam, the son of God, because he writes for the whole human race.", explanationEs: "Lucas traza la genealogía más allá de Abraham hasta Adán, el hijo de Dios, porque escribe para toda la raza humana.", correct: 0 },
+    { textEn: "5. In His inaugural sermon at Nazareth, Jesus read from:", textEs: "5. En Su sermón inaugural en Nazaret, Jesús leyó de:",
+      optionsEn: ["Malachi 3", "Psalm 22", "Daniel 7", "Isaiah 61"],
+      optionsEs: ["Malaquías 3", "Salmo 22", "Daniel 7", "Isaías 61"],
+      explanationEn: "In His inaugural sermon at Nazareth, Jesus read from Isaiah 61 and said the Scripture was fulfilled that day.", explanationEs: "En Su sermón inaugural en Nazaret, Jesús leyó de Isaías 61 y dijo que la Escritura se cumplía ese día.", correct: 3 },
+    { textEn: "6. How many parables of lost things does Jesus tell in Luke 15?", textEs: "6. ¿Cuántas parábolas de cosas perdidas cuenta Jesús en Lucas 15?",
+      optionsEn: ["Two", "Four", "Three", "Five"],
+      optionsEs: ["Dos", "Cuatro", "Tres", "Cinco"],
+      explanationEn: "Luke 15 holds three parables of lost things — the lost sheep, the lost coin, and the lost son.", explanationEs: "Lucas 15 contiene tres parábolas de cosas perdidas — la oveja perdida, la moneda perdida y el hijo perdido.", correct: 2 },
+    { textEn: "7. The parable of the Good Samaritan is found in which chapter?", textEs: "7. La parábola del buen samaritano se encuentra en cuál capítulo?",
+      optionsEn: ["Luke 7", "Luke 10", "Luke 8", "Luke 12"],
+      optionsEs: ["Lucas 7", "Lucas 10", "Lucas 8", "Lucas 12"],
+      explanationEn: "The parable of the Good Samaritan, who crosses every line of prejudice on the Jericho road, is in Luke 10.", explanationEs: "La parábola del buen samaritano, que cruza toda línea de prejuicio en el camino de Jericó, está en Lucas 10.", correct: 1 },
+    { textEn: "8. Zacchaeus the tax collector lived in which city?", textEs: "8. Zaqueo el publicano vivía en cuál ciudad?",
+      optionsEn: ["Jericho", "Capernaum", "Bethany", "Jerusalem"],
+      optionsEs: ["Jericó", "Capernaúm", "Betania", "Jerusalén"],
+      explanationEn: "Zacchaeus the lost tax collector lived in Jericho, where Jesus first spoke the key verse about seeking the lost.", explanationEs: "Zaqueo el publicano perdido vivía en Jericó, donde Jesús pronunció por primera vez el versículo clave sobre buscar lo perdido.", correct: 0 },
+    { textEn: "9. To whom did Jesus say 'Today you will be with Me in Paradise'?", textEs: "9. ¿A quién dijo Jesús 'Hoy estarás conmigo en el paraíso'?",
+      optionsEn: ["Peter", "Mary Magdalene", "The thief on the cross", "John"],
+      optionsEs: ["Pedro", "María Magdalena", "El ladrón en la cruz", "Juan"],
+      explanationEn: "Jesus promised the dying thief 'Today you will be with Me in Paradise,' one of three sayings unique to Luke's cross.", explanationEs: "Jesús prometió al ladrón moribundo 'Hoy estarás conmigo en el paraíso', uno de tres dichos únicos de la cruz de Lucas.", correct: 2 },
+    { textEn: "10. The Emmaus road appearance is recorded in:", textEs: "10. La aparición en el camino a Emaús se registra en:",
+      optionsEn: ["Luke 24", "Luke 22", "John 20", "Mark 16"],
+      optionsEs: ["Lucas 24", "Lucas 22", "Juan 20", "Marcos 16"],
+      explanationEn: "The Emmaus road appearance, where the risen Lord opened the Scriptures and broke bread, is in Luke 24.", explanationEs: "La aparición en el camino a Emaús, donde el Señor resucitado abrió las Escrituras y partió el pan, está en Lucas 24.", correct: 0 },
+    { textEn: "11. Luke wrote a sequel to his Gospel called:", textEs: "11. Lucas escribió una continuación de su Evangelio llamada:",
+      optionsEn: ["Hebrews", "Acts", "Galatians", "Revelation"],
+      optionsEs: ["Hebreos", "Hechos", "Gálatas", "Apocalipsis"],
+      explanationEn: "Luke wrote a sequel to his Gospel, the Acts of the Apostles, also addressed to Theophilus (Acts 1:1).", explanationEs: "Lucas escribió una continuación de su Evangelio, los Hechos de los Apóstoles, también dirigida a Teófilo (Hechos 1:1).", correct: 1 },
+    { textEn: "12. The apostle Paul called Luke:", textEs: "12. El apóstol Pablo llamó a Lucas:",
+      optionsEn: ["His son in the faith", "His fellow apostle", "The faithful servant", "The beloved physician"],
+      optionsEs: ["Su hijo en la fe", "Su compañero apóstol", "El siervo fiel", "El médico amado"],
+      explanationEn: "Paul called Luke 'the beloved physician' (Colossians 4:14), the faithful companion who stayed to the end.", explanationEs: "Pablo llamó a Lucas 'el médico amado' (Colosenses 4:14), el fiel compañero que se quedó hasta el final.", correct: 3 },
+    { textEn: "13. Luke 2:7 records that there was no room for Mary and Joseph in:", textEs: "13. Lucas 2:7 registra que no había lugar para María y José en:",
+      optionsEn: ["The inn", "The temple", "The synagogue", "Jerusalem"],
+      optionsEs: ["El mesón", "El templo", "La sinagoga", "Jerusalén"],
+      explanationEn: "Luke 2:7 records there was no room for Mary and Joseph in the inn, so the Savior was laid in a manger.", explanationEs: "Lucas 2:7 registra que no había lugar para María y José en el mesón, así que el Salvador fue puesto en un pesebre.", correct: 0 },
+    { textEn: "14. Mary's song of praise at the visitation of Elizabeth is called:", textEs: "14. El cántico de alabanza de María en la visitación de Isabel se llama:",
+      optionsEn: ["The Benedictus", "The Magnificat", "The Nunc Dimittis", "The Sanctus"],
+      optionsEs: ["El Benedictus", "El Magníficat", "El Nunc Dimittis", "El Sanctus"],
+      explanationEn: "Mary's song of praise at the visitation of Elizabeth is the Magnificat, 'My soul magnifies the Lord' (Luke 1:46–55).", explanationEs: "El cántico de alabanza de María en la visitación de Isabel es el Magníficat, 'Engrandece mi alma al Señor' (Lucas 1:46–55).", correct: 1 },
+    { textEn: "15. Among the four Gospels, Luke is traditionally called the Gospel of:", textEs: "15. Entre los cuatro Evangelios, Lucas se llama tradicionalmente el Evangelio de:",
+      optionsEn: ["The King", "The Servant", "The Perfect Man", "God"],
+      optionsEs: ["El Rey", "El Siervo", "El Hombre Perfecto", "Dios"],
+      explanationEn: "Among the four Gospels, Luke is traditionally called the Gospel of the Perfect Man — Christ the Man for everybody.", explanationEs: "Entre los cuatro Evangelios, Lucas se llama tradicionalmente el Evangelio del Hombre Perfecto — Cristo el Hombre para todos.", correct: 2 },
+    { textEn: "16. Luke gives special attention to:", textEs: "16. Lucas presta atención especial a:",
+      optionsEn: ["Roman politics", "Temple rituals", "Greek philosophy", "Women, the poor, and outcasts"],
+      optionsEs: ["Política romana", "Rituales del templo", "Filosofía griega", "Mujeres, pobres y marginados"],
+      explanationEn: "Luke gives special attention to women, the poor, and the outcasts, recording more about them than any other Gospel.", explanationEs: "Lucas presta atención especial a las mujeres, los pobres y los marginados, registrando más sobre ellos que cualquier otro Evangelio.", correct: 3 },
+    { textEn: "17. Jesus' inaugural sermon was preached in the synagogue of:", textEs: "17. El sermón inaugural de Jesús fue predicado en la sinagoga de:",
+      optionsEn: ["Jerusalem", "Capernaum", "Nazareth", "Bethlehem"],
+      optionsEs: ["Jerusalén", "Capernaúm", "Nazaret", "Belén"],
+      explanationEn: "Jesus preached His inaugural sermon in the synagogue of Nazareth, His own hometown.", explanationEs: "Jesús predicó Su sermón inaugural en la sinagoga de Nazaret, Su propio pueblo natal.", correct: 2 },
+    { textEn: "18. The phrase 'He set His face to go to Jerusalem' marks the turning point at:", textEs: "18. La frase 'afirmó su rostro para ir a Jerusalén' marca el punto de giro en:",
+      optionsEn: ["Luke 9:51", "Luke 4:21", "Luke 15:1", "Luke 22:42"],
+      optionsEs: ["Lucas 9:51", "Lucas 4:21", "Lucas 15:1", "Lucas 22:42"],
+      explanationEn: "'He set His face to go to Jerusalem' (Luke 9:51) marks the turning point where Jesus heads toward the cross.", explanationEs: "'Afirmó su rostro para ir a Jerusalén' (Lucas 9:51) marca el punto de giro donde Jesús se dirige a la cruz.", correct: 0 },
+    { textEn: "19. Luke wrote his Gospel originally in:", textEs: "19. Lucas escribió su Evangelio originalmente en:",
+      optionsEn: ["Hebrew", "Aramaic", "Latin", "Greek"],
+      optionsEs: ["Hebreo", "Arameo", "Latín", "Griego"],
+      explanationEn: "Luke wrote in the most polished Greek of the New Testament, the careful prose of a trained mind.", explanationEs: "Lucas escribió en el griego más pulido del Nuevo Testamento, la prosa cuidadosa de una mente entrenada.", correct: 3 },
+    { textEn: "20. The Greek word for compassion used in Luke is:", textEs: "20. La palabra griega para compasión usada en Lucas es:",
+      optionsEn: ["Agape", "Splanchnizomai", "Eros", "Phileo"],
+      optionsEs: ["Ágape", "Splanchnizomai", "Eros", "Fileo"],
+      explanationEn: "The Greek word for compassion in Luke is splanchnizomai, a deep-gut word used of the Samaritan and of the running father.", explanationEs: "La palabra griega para compasión en Lucas es splanchnizomai, una palabra de las entrañas usada del samaritano y del padre que corre.", correct: 1 }
+];
+
+const kwQuestions = [
+    { textEn: "21. Explain why Luke is called the Gospel of compassion. Give three specific examples from the text.", textEs: "21. Explique por qué Lucas se llama el Evangelio de la compasión. Dé tres ejemplos específicos del texto.",
+      kw_en: ["compassion", "samaritan", "prodigal", "thief", "lost"], kw_es: ["compasion", "samaritano", "prodigo", "ladron", "perdido"],
+      modelEn: "Luke is called the Gospel of compassion because mercy runs through every chapter. The Good Samaritan binds the wounds of a man prejudice made his enemy; the father runs to the prodigal still smelling of pigs; and the dying thief hears 'Today you will be with Me in Paradise.' In each, the Son of Man seeks and saves the lost, and His compassion is not a feeling but a search party.", modelEs: "Lucas se llama el Evangelio de la compasión porque la misericordia corre por cada capítulo. El buen samaritano venda las heridas de un hombre a quien el prejuicio hizo su enemigo; el padre corre hacia el pródigo que aún huele a cerdos; y el ladrón moribundo oye 'Hoy estarás conmigo en el paraíso'. En cada uno, el Hijo del Hombre busca y salva lo perdido, y su compasión no es un sentimiento sino una partida de búsqueda." },
+    { textEn: "22. Discuss the significance of Luke tracing the genealogy of Jesus back to Adam rather than Abraham.", textEs: "22. Discuta la importancia de que Lucas rastree la genealogía de Jesús hasta Adán en lugar de Abraham.",
+      kw_en: ["adam", "gentile", "universal", "humanity", "genealogy"], kw_es: ["adan", "gentil", "universal", "humanidad", "genealogia"],
+      modelEn: "Luke traces the genealogy of Jesus past Abraham all the way to Adam, the son of God. Where Matthew stops at Abraham to reach the Jew, Luke goes back to the first man so that every reader of every nation sees his own ancestor in the same line. The point is universal: this is Christ the Man for all humanity, not for one tribe, and the genealogy itself preaches that Gentile reach.", modelEs: "Lucas traza la genealogía de Jesús más allá de Abraham hasta Adán, el hijo de Dios. Donde Mateo se detiene en Abraham para alcanzar al judío, Lucas se remonta al primer hombre para que todo lector de toda nación vea a su propio ancestro en la misma línea. El punto es universal: este es Cristo el Hombre para toda la humanidad, no para una tribu, y la genealogía misma predica ese alcance gentil." },
+    { textEn: "23. How does the inaugural sermon at Nazareth (Luke 4:18-19) function as a manifesto for the whole Gospel?", textEs: "23. ¿Cómo funciona el sermón inaugural en Nazaret (Lucas 4:18-19) como manifiesto para todo el Evangelio?",
+      kw_en: ["nazareth", "isaiah", "poor", "captives", "manifesto", "ministry"], kw_es: ["nazaret", "isaias", "pobres", "cautivos", "manifiesto", "ministerio"],
+      modelEn: "At Nazareth Jesus read Isaiah's words about preaching to the poor and proclaiming liberty to the captives, then declared the Scripture fulfilled that day. This inaugural sermon is the manifesto of His whole ministry: five categories of broken humanity — the poor, the brokenhearted, the captives, the blind, the oppressed — that Luke then walks through village by village.", modelEs: "En Nazaret Jesús leyó las palabras de Isaías sobre dar buenas nuevas a los pobres y pregonar libertad a los cautivos, y luego declaró la Escritura cumplida ese día. Este sermón inaugural es el manifiesto de todo Su ministerio: cinco categorías de humanidad quebrantada — los pobres, los quebrantados, los cautivos, los ciegos, los oprimidos — que Lucas recorre luego aldea por aldea." },
+    { textEn: "24. Trace the three parables of Luke 15 and explain why they are sometimes called 'the heart of the Gospel'.", textEs: "24. Trace las tres parábolas de Lucas 15 y explique por qué a veces se llaman 'el corazón del Evangelio'.",
+      kw_en: ["sheep", "coin", "son", "prodigal", "lost", "joy"], kw_es: ["oveja", "moneda", "hijo", "prodigo", "perdido", "gozo"],
+      modelEn: "Luke 15 tells three parables in a row — the lost sheep, the lost coin, and the lost son or prodigal. All three make one point: heaven does not yawn over what is lost but mobilizes to find it, and there is joy in heaven over one sinner who repents. The shepherd searches, the woman sweeps, and the father runs, so the chapter is rightly the heart of Luke.", modelEs: "Lucas 15 cuenta tres parábolas seguidas — la oveja perdida, la moneda perdida y el hijo perdido o pródigo. Las tres hacen un punto: el cielo no bosteza ante lo perdido sino que se moviliza para hallarlo, y hay gozo en el cielo por un pecador que se arrepiente. El pastor busca, la mujer barre y el padre corre, así que el capítulo es con razón el corazón de Lucas." },
+    { textEn: "25. Compare the three sayings from the cross unique to Luke with the cry of dereliction in Matthew and Mark. What do they reveal about Luke's portrait of Jesus?", textEs: "25. Compare los tres dichos desde la cruz únicos de Lucas con el clamor del abandono en Mateo y Marcos. ¿Qué revelan sobre el retrato que hace Lucas de Jesús?",
+      kw_en: ["forgive", "paradise", "spirit", "cross", "compassion"], kw_es: ["perdonar", "paraiso", "espiritu", "cruz", "compasion"],
+      modelEn: "Luke preserves three sayings from the cross that no other Gospel records: 'Father, forgive them,' the promise of Paradise to the thief, and 'Father, into Your hands I commit My spirit.' Where Mark and Matthew let us hear the cry of dereliction, Luke lets us hear the prayer of pardon — the compassion of the Son of Man poured out even from the cross.", modelEs: "Lucas preserva tres dichos desde la cruz que ningún otro Evangelio registra: 'Padre, perdónalos', la promesa del paraíso al ladrón, y 'Padre, en tus manos encomiendo mi espíritu'. Donde Marcos y Mateo nos dejan oír el clamor del abandono, Lucas nos deja oír la oración del perdón — la compasión del Hijo del Hombre derramada aun desde la cruz." },
+    { textEn: "26. Explain why Luke 19:10 is identified as the key verse of the Gospel and how it shapes the whole book.", textEs: "26. Explique por qué Lucas 19:10 se identifica como el versículo clave del Evangelio y cómo da forma a todo el libro.",
+      kw_en: ["19:10", "seek", "save", "lost", "son of man"], kw_es: ["19:10", "buscar", "salvar", "perdido", "hijo del hombre"],
+      modelEn: "Luke 19:10 is the key verse: the Son of Man has come to seek and to save that which was lost. He seeks, going after rather than waiting; He saves, reaching rather than merely sympathizing; and what He saves is the lost — the coin, the sheep, the son, and Zacchaeus in whose house the verse is first spoken. Read backward from 19:10, every chapter of Luke clears.", modelEs: "Lucas 19:10 es el versículo clave: el Hijo del Hombre vino a buscar y salvar lo que se había perdido. Busca, yendo tras en vez de esperar; salva, alcanzando en vez de solo compadecerse; y lo que salva es lo perdido — la moneda, la oveja, el hijo, y Zaqueo en cuya casa se pronuncia el versículo. Leído hacia atrás desde 19:10, cada capítulo de Lucas se aclara." },
+    { textEn: "27. Discuss Luke's special interest in women, the poor, and the outcast. What does this say about his audience and purpose?", textEs: "27. Discuta el interés especial de Lucas por las mujeres, los pobres y los marginados. ¿Qué dice esto sobre su audiencia y propósito?",
+      kw_en: ["women", "poor", "outcast", "gentile", "theophilus"], kw_es: ["mujeres", "pobres", "marginados", "gentil", "teofilo"],
+      modelEn: "Luke shows special interest in women, the poor, and the outcast, recording more about them than any other Gospel — the widow of Nain, the sinful woman, Mary Magdalene, the poor widow's two mites. Writing as a Gentile to Theophilus, Luke lifts up exactly the people the religious establishment overlooked, because the compassion of the Son of Man crosses every line.", modelEs: "Lucas muestra especial interés en las mujeres, los pobres y el marginado, registrando más sobre ellos que cualquier otro Evangelio — la viuda de Naín, la mujer pecadora, María Magdalena, las dos blancas de la viuda pobre. Escribiendo como gentil a Teófilo, Lucas exalta precisamente a las personas que el establecimiento religioso pasaba por alto, porque la compasión del Hijo del Hombre cruza toda línea." },
+    { textEn: "28. Analyze the Emmaus road encounter (Luke 24). What does it reveal about how Christ meets disciples in their sadness today?", textEs: "28. Analice el encuentro en el camino a Emaús (Lucas 24). ¿Qué revela sobre cómo Cristo se encuentra con los discípulos en su tristeza hoy?",
+      kw_en: ["emmaus", "burning", "scriptures", "bread", "sadness", "risen"], kw_es: ["emaus", "ardiendo", "escrituras", "pan", "tristeza", "resucitado"],
+      modelEn: "On the Emmaus road the risen Lord came alongside two disciples in their sadness, opened the Scriptures to them beginning with Moses, and was known to them in the breaking of the bread. Afterward they said their hearts had been burning within them. It reveals that the compassion of the Son of Man not only forgives sinners but warms cold, grieving disciples and walks with them when they cannot see Him.", modelEs: "En el camino a Emaús el Señor resucitado se acercó a dos discípulos en su tristeza, les abrió las Escrituras comenzando por Moisés, y fue conocido por ellos al partir el pan. Después dijeron que sus corazones habían ardido dentro de ellos. Revela que la compasión del Hijo del Hombre no solo perdona a los pecadores sino que calienta a los discípulos fríos y afligidos y camina con ellos cuando no pueden verlo." },
+    { textEn: "29. What is the relationship between Luke and the Epistle to the Hebrews? Why might Luke be involved in its composition?", textEs: "29. ¿Cuál es la relación entre Lucas y la Epístola a los Hebreos? ¿Por qué podría Lucas estar involucrado en su composición?",
+      kw_en: ["hebrews", "greek", "tabernacle", "luke", "paul"], kw_es: ["hebreos", "griego", "tabernaculo", "lucas", "pablo"],
+      modelEn: "Hebrews is anonymous, and no one knows who wrote it; Lukan authorship is only one minor proposal, suggested because Hebrews shares the polished literary Greek that marks Luke's own writing. Others have proposed Paul, Barnabas, Apollos, or Priscilla, and the question is best left open. What the comparison teaches is that both books reward careful reading, Hebrews dwelling on the tabernacle and priesthood fulfilled in Christ.", modelEs: "Hebreos es anónima, y nadie sabe quién la escribió; la autoría lucana es solo una propuesta menor, sugerida porque Hebreos comparte el griego literario pulido que marca la escritura del propio Lucas. Otros han propuesto a Pablo, Bernabé, Apolos o Priscila, y la cuestión se deja mejor abierta. Lo que enseña la comparación es que ambos libros recompensan la lectura cuidadosa, morando Hebreos en el tabernáculo y el sacerdocio cumplidos en Cristo." },
+    { textEn: "30. Synthesize: Why does Luke remain the favorite Gospel of so many readers across cultures and centuries?", textEs: "30. Sintetice: ¿Por qué sigue Lucas siendo el Evangelio favorito de tantos lectores a través de culturas y siglos?",
+      kw_en: ["compassion", "human", "lost", "universal", "physician", "tender"], kw_es: ["compasion", "humano", "perdido", "universal", "medico", "tierno"],
+      modelEn: "Luke remains a favorite because it is the most human and tender of the Gospels, written by a physician whose compassion runs through every page. Its reach is universal — back to Adam, out to the Gentile, down to the lost and the outcast — so that every reader finds himself in its search for the lost. It gives us Christ the Man for everybody, seeking and saving still.", modelEs: "Lucas sigue siendo un favorito porque es el más humano y tierno de los Evangelios, escrito por un médico cuya compasión corre por cada página. Su alcance es universal — de regreso a Adán, hacia el gentil, hasta lo perdido y el marginado — de modo que todo lector se encuentra a sí mismo en su búsqueda de lo perdido. Nos da a Cristo el Hombre para todos, buscando y salvando todavía." }
+];
+
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = `cts_nt_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY = `cts_nt_u${UNIT}_sa_lockout`;
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0')
+        : parseInt(localStorage.getItem(`cts_nt_u${UNIT}_lockout`) || '0');
+}
+let lockUntil = activeLockUntil();
+let unitPassed = progress[`unit${UNIT}`] || false;
+
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function isEs() { return document.body.classList.contains('lang-es'); }
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer as left-boundary prefix.
+// Pass standard is >=3 hits (NOT all keywords).
+function kwHit(normAns, kw) {
+    kw = normalize(kw);
+    if (!kw) return false;
+    var WC = '0-9a-z\\u00e0-\\u00ff';
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (kw.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(normAns); }
+    catch (e) { return normAns.indexOf(kw) !== -1; }
+}
+function kwHitCount(normAns, keys) { return keys.filter(function(k){ return kwHit(normAns, k); }).length; }
+
+function checkAllUnitsPassed() {
+    for (let i = 1; i <= TOTAL_UNITS; i++) { if (!progress[`unit${i}`]) return false; }
+    return true;
+}
+
+function syncTrackUI() {
+    document.querySelectorAll('input[name="ctsTrack"]').forEach(r => { r.checked = (r.value === currentTrack); });
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = isEs() ? 'Opción Múltiple (Preguntas 1–20)' : 'Multiple Choice (Questions 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (!isEs()) ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (!isEs()) ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (!isEs()) ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((!isEs()) ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((!isEs()) ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = isEs() ? 'Respuesta Corta (Preguntas 21–30) — Pista Maestría en Divinidad' : 'Short Answer (Questions 21–30) — Master of Divinity Track';
+    container.appendChild(kwTitle);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = isEs() ? q.textEs : q.textEn;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = isEs() ? 'Escriba su respuesta aquí...' : 'Type your answer here...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = isEs() ? 'Verificar Respuesta' : 'Check Answer';
+        const fb = document.createElement('div');
+        fb.className = 'feedback-text';
+        fb.style.marginTop = '8px';
+        const model = document.createElement('div');
+        model.className = 'model-answer';
+        model.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ansRaw = ta.value.trim();
+            const ans = normalize(ansRaw);
+            const keys = isEs() ? q.kw_es : q.kw_en;
+            const hits = kwHitCount(ans, keys);
+            if (ansRaw.length < 100) {
+                fb.innerHTML = isEs() ? 'Escriba una respuesta más completa (al menos una oración).' : 'Please write a more complete answer (at least a sentence).';
+                fb.className = 'feedback-text incorrect';
+            } else if (hits >= 3) {
+                fb.innerHTML = isEs() ? `✓ ¡Bien! Su respuesta toca ${hits} conceptos clave.` : `✓ Good! Your answer touches ${hits} key concepts.`;
+                fb.className = 'feedback-text correct';
+                kwAnswers[idx] = ansRaw;
+            } else {
+                fb.innerHTML = isEs() ? `Va bien — toca ${hits}. Apunte a al menos 3 conceptos clave; revise la lección y vuelva a intentarlo.` : `Good start — you touched ${hits}. Aim for at least 3 key concepts; review the lesson and try again.`;
+                fb.className = 'feedback-text incorrect';
+            }
+            const mk = isEs() ? q.modelEs : q.modelEn;
+            if (mk) {
+                model.innerHTML = (isEs() ? '<strong>Respuesta modelo — estúdiela:</strong> ' : '<strong>Model answer — study this:</strong> ') + mk;
+                model.style.display = 'block';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(model);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+}
+
+function triggerRedirect() {
+    const target = checkAllUnitsPassed() ? 'CTSNTCertificate.html' : NEXT_URL;
+    const result = document.getElementById('examResult');
+    let seconds = 3;
+    function tick() {
+        const msg = isEs()
+            ? `Redirigiendo a la siguiente unidad en ${seconds}...`
+            : `Redirecting to the next unit in ${seconds}...`;
+        result.innerHTML = `<div class='redirect-notice'>✅ ${isEs() ? '¡APROBADO!' : 'PASSED!'} ${msg}</div>`;
+        if (seconds <= 0) { location.href = target; return; }
+        seconds--;
+        setTimeout(tick, 1000);
+    }
+    tick();
+}
+
+function submitExam() {
+    const result = document.getElementById('examResult');
+    if (unitPassed) {
+        result.innerHTML = `<span style='color:green'>${isEs() ? '✅ Unidad ya aprobada.' : '✅ Unit already passed!'}</span>`;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        result.innerHTML = `<span style='color:red'>${isEs() ? `⏰ Bloqueado por ${wait} minutos más.` : `⏰ Locked for ${wait} more minutes.`}</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) { promptName(); return; }
+
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) correctMC++;
+    let advCorrect = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = normalize(kwAnswers[i] || '');
+        const keys = isEs() ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        if (kwHitCount(ans, keys) >= 3 && ans.length >= 100) advCorrect++;
+    }
+
+    const mcPct = correctMC / 20;
+    const saPct = advCorrect / 10;
+    const mcPass = mcPct >= PASS_THRESHOLD;
+    const saPass = saPct >= PASS_THRESHOLD;
+
+    function passUnit() {
+        unitPassed = true;
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem('cts_nt_progress', JSON.stringify(progress));
+        localStorage.setItem(`nt_unit${UNIT}_passed`, 'true');
+        localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+        localStorage.removeItem(SA_LOCK_KEY);
+        updateProgressGrid();
+        triggerRedirect();
+    }
+
+    if (!isMastersLevel()) {
+        if (mcPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Necesita 18/20 para Certificado.`
+                : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%). Need 18/20 for Certificate.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        if (saPass) {
+            passUnit();
+        } else {
+            const mins = lockMinutes();
+            lockUntil = Date.now() + mins*60*1000;
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const breakdown = isEs()
+                ? `MC: ✓ ya guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+                : `MC: ✓ already banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+            result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Su opción múltiple está a salvo. Puede reintentar la sección de respuesta corta en ${mins} min.` : `Your multiple-choice pass is safe. You can retry the short-answer section in ${mins} min.`}</span>`;
+        }
+        return;
+    }
+
+    if (mcPass && saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit();
+    } else if (mcPass && !saPass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ aprobado y guardado — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 9/10.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) ✓ passed and banked — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 9/10.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Al reintentar en ${mins} min, solo necesitará la sección de respuesta corta — el OM permanece aprobado.` : `When you retry in ${mins} min, you'll only need the short-answer section — MC stays passed.`}</span>`;
+    } else {
+        const mins = lockMinutes();
+        lockUntil = Date.now() + mins*60*1000;
+        localStorage.setItem(`cts_nt_u${UNIT}_lockout`, String(lockUntil));
+        const breakdown = isEs()
+            ? `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — RC: ${advCorrect}/10 (${Math.round(saPct*100)}%). Necesita 18/20 Y 9/10 para M.Div.`
+            : `MC: ${correctMC}/20 (${Math.round(mcPct*100)}%) — SA: ${advCorrect}/10 (${Math.round(saPct*100)}%). Need 18/20 AND 9/10 for M.Div.`;
+        result.innerHTML = `<span style='color:red'>${isEs() ? '❌ NO APROBADO.' : '❌ FAILED.'} ${breakdown} ${isEs() ? `Puede reintentar en ${mins} min.` : `You can retry in ${mins} min.`}</span>`;
+    }
+}
+
+function resetExam() {
+    const msg = isEs()
+        ? '¿Restablecer el examen? Esto borrará sus respuestas en pantalla y eliminará el bloqueo de 15 minutos. Las unidades ya aprobadas no se afectan.'
+        : 'Reset the exam? This will clear your on-screen answers and remove the 15-minute lockout. Already-passed units are not affected.';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill('');
+    lockUntil = 0;
+    mcPreviouslyPassed = false;
+    localStorage.removeItem(`cts_nt_u${UNIT}_lockout`);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+document.querySelectorAll('input[name="ctsTrack"]').forEach(r => {
+    r.addEventListener('change', e => {
+        currentTrack = e.target.value;
+        localStorage.setItem('cts_track', currentTrack);
+    });
+});
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.className = 'lang-es';
+        this.textContent = 'English';
+    } else {
+        document.body.className = 'lang-en';
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+};
+
+syncTrackUI();
+renderQuestions();
+if (unitPassed) document.getElementById('examResult').innerHTML = `<span style='color:green'>${isEs() ? `✅ Unidad ${UNIT} ya aprobada.` : `✅ Unit ${UNIT} already passed.`}</span>`;
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSNTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

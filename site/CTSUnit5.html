@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Old Testament Survey — Unit 5: The United and Divided Kingdoms</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .action-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.action-btn.reset { background: #8a5a2f; }
+.action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+p { margin-bottom: 12px; }
+ul { margin: 8px 0 14px 22px; }
+li { margin-bottom: 6px; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 0; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.track-banner { background: #fffaf0; border-left: 4px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin-bottom: 15px; font-size: 0.95rem; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.locked { cursor: default; }
+.option.locked:hover { background: #fcfbf8; }
+.option.locked.correct:hover { background: #e8f5ea; }
+.option.locked.wrong:hover { background: #fae8e8; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.exam-result { margin-top: 15px; padding: 12px 18px; border-radius: 12px; font-size: 1.05rem; }
+.exam-result.pass { background: #e8f5ea; color: #1f6b3b; border: 1px solid #b9dfc2; }
+.exam-result.fail { background: #fae8e8; color: #8a1f1f; border: 1px solid #efc2c2; }
+.exam-result.locked { background: #fff4d6; color: #6b4f1f; border: 1px solid #e8d28a; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en .block-en { display: block; }
+body.lang-en .block-es { display: none; }
+body.lang-es .block-en { display: none; }
+body.lang-es .block-es { display: block; }
+@media print {
+    body { background: white; font-size: 12pt; padding: 0; }
+    .nav-bar, .toggle-btn, .action-btn, button.small, .registration-panel { display: none !important; }
+    .card { box-shadow: none; border: none; padding: 10pt 0; margin-bottom: 8pt; page-break-inside: avoid; }
+    .question { page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .option.correct { background: white; border: 1px solid #888; }
+    .option.wrong { background: white; border: 1px solid #888; }
+}
+.reg-readout { font-size: 0.95rem; }
+.reg-readout-grid { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.reg-readout-grid > div { min-width: 180px; }
+.reg-readout-note { margin-top: 8px; font-size: 0.82rem; color: #6b6256; }
+.reg-readout.missing { color: #8a1f1f; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Old Testament Survey — Unit 5: The United and Divided Kingdoms</span><span class="lang-es">📖 Estudio del Antiguo Testamento — Unidad 5: Los Reinos Unido y Dividido</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+</div>
+
+<div class="registration-panel" id="regPanel">
+    <h3><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h3>
+    <div id="regReadout" class="reg-readout"></div>
+    <!-- Hidden fields preserve the IDs used by grading/loadReg; registration is edited on Unit 1. -->
+    <input type="hidden" id="studentName">
+    <input type="hidden" id="studentEmail">
+    <input type="hidden" id="studentCountry">
+    <input type="hidden" id="studentProgram">
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="block-en">
+        <p style="font-style: italic; color: #5b3a1f; border-left: 4px solid #f4c542; padding-left: 15px; margin-bottom: 20px;">Israel asked for a king. God answered with six books and a thousand years — and the answer wasn't a name on a throne in Jerusalem. It was a name on a cross outside it.</p>
+
+        <p>That's the whole arc of Unit 5 in one sentence. Six books — Samuel, Kings, and Chronicles, each originally one scroll then split in two. Roughly 1050 BC to 538 BC. Samuel and Kings tell the story from a prophetic angle; Chronicles retells it from a priestly angle for the exiles coming home. Saul, David, Solomon, nineteen kings of the north, twenty kings of the south, prophets shouting from the margins, an exile that looked like the end of everything — and then a Persian king named Cyrus throwing the door open and telling God's people to go home. <em>Vamos por partes.</em></p>
+
+        <h2>I. The Throne Begins — Hannah, Samuel, and the King Israel Demanded</h2>
+        <p style="font-style: italic; color: #5b3a1f;">1 Samuel 1–15</p>
+
+        <p>You cannot understand the kingdom unless you start with a barren woman crying in the tabernacle. God doesn't begin the monarchy with a war room. He begins it with a hurting woman who promises that if He gives her a son, she'll give him back. Centuries later Mary will sing a song that is essentially Hannah's song with an upgrade — read 1 Samuel 2:1–10 and Luke 1:46–55 side by side. God rarely begins a movement of redemption anywhere except in the prayer of a hurting woman.</p>
+
+        <p>Samuel grows up in the tabernacle and becomes the bridge: last judge, first kingmaker, prophet AND priest AND judge. The most ecumenical figure in the Old Testament. But by the time he is old, his sons are corrupt — same problem Eli had, and apparently Samuel didn't read his own backstory carefully enough. The elders come to him in 1 Samuel 8 with the request that breaks God's heart: <em>"Make us a king to judge us like all the nations"</em> (1 Samuel 8:5). God's response: <em>"they have not rejected you, but they have rejected Me, that I should not reign over them"</em> (1 Samuel 8:7).</p>
+
+        <p>There is a kind of prayer where the danger isn't that God won't answer — the danger is that He will. Israel wanted a king more than they wanted Him, so He gave them what they wanted. The most dangerous answered prayer is the one that comes from a heart already in rebellion. If you have ever told God <em>I want this thing more than I want You,</em> count the years before you started wishing He hadn't said yes.</p>
+
+        <h3>Saul: Tall on the Outside, Hollow on the Inside</h3>
+        <p>Enter Saul. Tall. Handsome. Looked the part. The <em>outside</em> of him was everything Israel had asked for; the <em>inside</em> of him was hollow. Two scenes break him. In 1 Samuel 13, Samuel is delayed, the army gets nervous, and Saul offers the sacrifice himself — not his job, but the timing felt urgent and he took a shortcut around obedience. In 1 Samuel 15, God tells him to wipe out Amalek completely. Saul keeps King Agag alive and the best livestock — and tries to spin it as worship. Samuel's response should be tattooed on every pastor's forearm: <em>"to obey is better than sacrifice"</em> (1 Samuel 15:22). You cannot worship your way out of disobedience.</p>
+
+        <p>Roy Riegels. Rose Bowl, January 1, 1929. Cal versus Georgia Tech. Riegels picks up a fumble, gets turned around, and runs sixty-five yards in the wrong direction. His own teammate has to chase him down and tackle him at the one-yard line — his own one-yard line. Cal punts from there, Tech blocks the punt, scores the safety, and wins the game by two points. The whole stadium stood and stared. That's Saul on Mount Gilboa. Running hard. Wrong way. The tragedy of Saul is not that he was weak; it's that all his strength was aimed away from the one Person it should have been aimed toward. There are people in pulpits today running sixty-five yards toward their own goal line. Strength is not enough. Direction matters more.</p>
+
+        <h2>II. The Throne Promised — David and the Covenant That Wouldn't Quit</h2>
+        <p style="font-style: italic; color: #5b3a1f;">1 Samuel 16 — 2 Samuel 24</p>
+
+        <p>While Saul is unraveling, God is already moving. 1 Samuel 16: Samuel goes to Bethlehem to anoint a new king from Jesse's sons, and the verse that pivots the entire Old Testament shows up: <em>"the LORD does not see as man sees; for man looks at the outward appearance, but the LORD looks at the heart"</em> (1 Samuel 16:7). That sentence is the seed Christ will harvest in the Sermon on the Mount.</p>
+
+        <p>The kid is David. Seven older brothers paraded by Samuel; not one of them is the man. The shepherd boy — the <em>na'ar</em>, the youngest, the one nobody bothered to invite to the feast — is. One chapter later he walks down into a valley with five smooth stones and meets a nine-and-a-half-foot Philistine. The story everybody knows. The point everybody misses: David didn't win because his slingshot was better. David won because <em>"the battle is the LORD's"</em> (1 Samuel 17:47).</p>
+
+        <p>Engineers used to claim the bumblebee shouldn't fly. The body is too heavy, the wings too short, the math doesn't work. The bumblebee, not having read the math, flies anyway. A teenage shepherd doesn't beat a giant. The same arithmetic that says a slingstone shouldn't drop a giant says a Galilean carpenter shouldn't unmake a grave. God specializes in the math the world has already given up on. If you are a Christian today, you are a bumblebee — every law of merit and probability says you shouldn't be forgiven, shouldn't be welcomed, shouldn't be flying — and the grace of God lifts you anyway.</p>
+
+        <p>Then come the wilderness years. Saul tries to spear David to a wall. David flees. Twice he has Saul cornered — once at Engedi, once at Hachilah — and twice he refuses to lift a hand against "the Lord's anointed." He has been promised the throne; he is being hunted by the man on it; the kingdom is one knife-stroke away — and he will not take it. The throne God gives is never the throne we steal. If you find yourself maneuvering for what God already promised, you have stopped trusting the Promiser.</p>
+
+        <h3>The Davidic Covenant: The Thread That Ties Everything to Bethlehem</h3>
+        <p>Saul dies at Gilboa. David is crowned over Judah, then over all Israel. He takes Jerusalem, brings the ark up, dances before it like a man with no dignity left to lose. And in 2 Samuel 7, when David proposes to build God a house, God turns the proposal upside down: <strong>I will build YOU a house.</strong> The Davidic Covenant: <em>house, kingdom, throne, forever, son.</em> Five anchor words. Read 2 Samuel 7:12–16 slowly. Every promise in that paragraph passes through Solomon, gets cracked by the divided kingdom, collapses at the exile, and lands at Bethlehem. When Gabriel tells Mary that God will give her son "the throne of his father David, and he will reign over the house of Jacob forever, and of his kingdom there will be no end" — Gabriel is reading 2 Samuel 7 out loud.</p>
+
+        <p>But David is not sinless. 2 Samuel 11. The roof. Bathsheba. Uriah. The covered-up murder. And the line every preacher has had to preach because every preacher has needed to hear it: <em>"You are the man!"</em> — Nathan's verdict (2 Samuel 12:7). David collapses. Psalm 51 is what genuine repentance sounds like out loud. There are consequences he never escapes — the sword does not depart from his house. But God does not throw him away. The man after God's own heart is also a man with blood on his hands, and the gospel of David is that grace runs deeper than the worst thing he ever did. If you have ever sinned in a way you didn't think God could forgive, you are reading the wrong chapter. The way back to grace is not a maze; it is a door, and Nathan has just opened it.</p>
+
+        <h2>III. The Throne Compromised and Divided — Solomon, the Split, and the Long Slide</h2>
+        <p style="font-style: italic; color: #5b3a1f;">1 Kings 1 — 2 Kings 25</p>
+
+        <p>Solomon walked into the throne with a blank check from God and asked for wisdom. God gave him wisdom — and threw in everything else for good measure. Solomon's wisdom ranged from the cedar of Lebanon to the hyssop on the wall, from beasts and birds to reptiles and fish (1 Kings 4:33). He composed three thousand proverbs. The Queen of Sheba traveled across the Sahara to see him and found that the half had not been told. And he built the temple his father had only dreamed of.</p>
+
+        <p>And here is the next great station on the Scarlet Thread. At the dedication of that temple (1 Kings 8), Solomon offered twenty-two thousand oxen and one hundred twenty thousand sheep — so many that the brazen altar could not hold them and the courtyard itself had to be consecrated for the slaughter. The thread that began with one animal in Eden, then Abel's firstborn, then Noah's altar, then the ram on Moriah, then the lambs on every Egyptian doorpost, then the goats of Yom Kippur, then the bronze serpent in the wilderness, then a scarlet cord in a Jericho window — that thread now runs in rivers through the courts of Solomon's temple, and will run there every day for almost four hundred years. Every animal that ever died in those courts was a promissory note God Himself would one day cash on a hill outside the same city.</p>
+
+        <p>But the seeds of Solomon's defeat were planted long before the harem of 1 Kings 11. They were planted in 1 Kings 3, in two quiet sentences hardly anyone notices. He made an alliance with the daughter of Pharaoh. And he sacrificed at the high places. Two little things. A foreign marriage that looked political; a worship habit that looked devotional. Both small. Both wrong. Both growing. By 1 Kings 11 the small things had multiplied into seven hundred wives and three hundred concubines, and <em>"his wives turned away his heart"</em> (1 Kings 11:3). The wisest man who ever lived out-loved God by his harem. Catch this: you don't slip into idolatry. You marry into it. Solomon didn't wake up one morning hating Yahweh. He woke up next to a woman who didn't, and built her a shrine to keep the peace. Wisdom does not keep a man. Only a heart that worships does.</p>
+
+        <p>The kingdom cracks at his death. Rehoboam in the south, Jeroboam in the north (1 Kings 12). Jeroboam can't have his people walking south to Jerusalem to worship — they would remember whose family God promised the throne to — so he sets up two golden calves at Dan and Bethel and tells Israel, <em>"behold your gods, O Israel, who brought you up out of the land of Egypt."</em> That sentence is plagiarized straight from Aaron at Sinai (Exodus 32:4). Six hundred years later and the people are still trying to worship Yahweh by getting around Him.</p>
+
+        <p>The North runs through nineteen kings, every single one evil. Ahab brings Jezebel and Baal worship — and brings the prophet Elijah, sword of God in human form. 1 Kings 18: Mount Carmel. The great either/or this whole unit has been building toward: <em>"How long will you falter between two opinions?"</em> (1 Kings 18:21). If Yahweh is God, follow Him; if Baal, follow him. Fire falls on Elijah's altar. Israel falls on its face. And then Israel goes back to the calves the next week, because revival without repentance has the half-life of a sigh.</p>
+
+        <h3>Payday Someday</h3>
+        <p>Ahab and Jezebel had been getting away with it for years. They wanted a vineyard that belonged to a man named Naboth, and Naboth would not sell — it was his ancestral land. Jezebel arranged false witnesses, a kangaroo court, and a stoning. Ahab walked down to take possession of his new vineyard and found Elijah standing in it. The prophet pronounced sentence in the exact place where Naboth's blood had soaked the ground: <em>in the place where dogs licked the blood of Naboth, dogs will lick your blood</em>. A woman on death row once said, before they walked her to the chair: <em>"I knew all along that God ran the whole show. I just tried to steal one little act."</em> She had Ahab's theology exactly. The years rolled on. Ahab got rich. Jezebel painted her face. And then one ordinary battle day a Syrian archer drew his bow at random — and the arrow found the one unprotected seam in Ahab's armor. The servants propped him up in his chariot, but he bled out by sundown, and the dogs came (1 Kings 22). Twelve more years passed before Jezebel's day came, but it came. Jehu rode into Jezreel. Her own servants threw her down. By the time burial detail arrived, the dogs had eaten everything but the skull, the hands, and the feet — the head that had plotted, the hands that had written the murder order, the feet that had walked Naboth's vineyard (2 Kings 9). <em>It is a fearful thing to fall into the hands of the living God</em> (Hebrews 10:31). The bill always comes.</p>
+
+        <p>The South gets nineteen kings and one queen — a mixed bag. Two bright spots stand up. Hezekiah, with Sennacherib's army at the gate and Rabshakeh shouting blasphemy from the wall, takes the threat letter into the temple and <em>spreads it before the Lord</em> (2 Kings 19:14). Pray the way Hezekiah prayed when the worst is at the wall. The angel of the Lord goes through the Assyrian camp that night. 185,000 dead by morning. God doesn't always save us <em>from</em> the wall; sometimes He saves us <em>at</em> the wall. But He saves.</p>
+
+        <p>Josiah, eight years old when he takes the throne, finds the lost Book of the Law during a temple cleanup (2 Kings 22). Reads it. Tears his clothes. Renews the covenant. Holds the biggest Passover since Samuel. And still — Manasseh's fifty-five accumulated years of wickedness tip the scale and the judgment falls anyway. 586 BC. Jerusalem burns. The temple is rubble. The Davidic king is blinded and dragged in chains to Babylon. It looks like the covenant collapsed.</p>
+
+        <h2>IV. The Throne Lost — and the Throne Promised Again</h2>
+        <p style="font-style: italic; color: #5b3a1f;">Chronicles, the Fall, and Cyrus's Decree</p>
+
+        <p>It hasn't.</p>
+
+        <p>Chronicles is a priestly retelling, written for the exiles who came home and walked into a city of rubble and wondered if God still meant it. The book opens with nine chapters of genealogy — names, names, names — and the names <em>are</em> the message: <strong>You are still HIS people. The line still stands.</strong> Chronicles barely mentions the northern kingdom. It focuses on David, Solomon, the temple, the southern kings — because the priestly perspective is asking, <em>can we still worship?</em> And the answer is yes.</p>
+
+        <p>Then the Old Testament closes with one of the most extraordinary mid-sentences in literature. 2 Chronicles 36:22–23. Cyrus, king of Persia, makes a proclamation: <em>"All the kingdoms of the earth the LORD God of heaven has given me. And He has commanded me to build Him a house at Jerusalem… Who is among you of all His people? May the LORD his God be with him, and let him go up!"</em> That is the last sentence of the Hebrew Bible. <em>Suba.</em> Go up.</p>
+
+        <p>Go up to <em>what?</em> To rebuild. To wait. To watch the genealogy in Matthew 1 thread through every name we just read in 1 Chronicles. To stand under a star in Bethlehem. To follow a Galilean carpenter to a hill outside Jerusalem and watch Him take a throne by way of a cross. To stand at an empty tomb. To live, right now, under the Cyrus decree of the New Testament: <em>whoever is among you of His people — let him go up.</em></p>
+
+        <p>The old preacher's mule story preaches here. A mule fell into a dry well. The owner couldn't get him out, so he started shoveling dirt down to bury him. The mule kept shaking the dirt off and stepping up. What was meant to bury him became the steps that raised him. Babylon shoveled dirt on Israel for seventy years. God used every shovelful as a step. The exile was not the end of the covenant; it was the school of the covenant. And every dirt-throw your enemy has aimed at you may yet be the floor God raises you on.</p>
+
+        <h2>Christ in 1 Samuel — 2 Chronicles</h2>
+        <p>Three convictions to take with you and never put down.</p>
+
+        <p><strong>First — Christ is David's greater Son, the King who never falls.</strong> Every flaw in every king in this unit is a finger pointing at Bethlehem. Saul's hollow heart, Solomon's compromised one, Manasseh's wicked one — every empty throne is a sign at the door of an empty manger. The child in Mary's arms is the King the prophets ached for and the kings of Israel could never be.</p>
+
+        <p><strong>Second — Christ is the True Temple, and the Lamb the temple was always pointing to.</strong> Solomon built the picture; Christ built the substance. <em>"Destroy this temple, and in three days I will raise it up"</em> (John 2:19). The rivers of blood that flowed through Solomon's courts for four hundred years were all promissory notes. The Lamb of God cashed every one of them on Calvary. The stones Solomon laid were beautiful; the body Christ raised is eternal. You and I are not waiting for a temple to be rebuilt in Jerusalem — we are walking, breathing stones in the temple already standing.</p>
+
+        <p><strong>Third — Christ's call is the Cyrus decree we live under.</strong> The exile is over. The way home is open. <em>Whoever is among you of His people — let him go up.</em></p>
+
+        <p>Israel asked for a king. God answered with six books and a thousand years and a Cross outside Jerusalem and an empty tomb. The king they wanted, they got — and lost. The King they needed, He gave — and He still reigns.</p>
+    </div>
+
+    <div class="block-es">
+        <p style="font-style: italic; color: #5b3a1f; border-left: 4px solid #f4c542; padding-left: 15px; margin-bottom: 20px;">Israel pidió un rey. Dios respondió con seis libros y mil años — y la respuesta no fue un nombre en un trono en Jerusalén. Fue un nombre en una cruz fuera de ella.</p>
+
+        <p>Ese es todo el arco de la Unidad 5 en una sola frase. Seis libros — Samuel, Reyes y Crónicas, cada uno originalmente un solo rollo y luego dividido en dos. Aproximadamente del 1050 a.C. al 538 a.C. Samuel y Reyes cuentan la historia desde un ángulo profético; Crónicas la vuelve a contar desde un ángulo sacerdotal para los exiliados que regresan. Saúl, David, Salomón, diecinueve reyes del norte, veinte reyes del sur, profetas gritando desde los márgenes, un exilio que parecía el fin de todo — y luego un rey persa llamado Ciro abriendo la puerta de par en par y diciéndole al pueblo de Dios que regresara a casa. Vamos por partes.</p>
+
+        <h2>I. El trono comienza — Ana, Samuel, y el rey que Israel exigió</h2>
+        <p style="font-style: italic; color: #5b3a1f;">1 Samuel 1–15</p>
+
+        <p>No puede entender el reino a menos que comience con una mujer estéril llorando en el tabernáculo. Dios no comienza la monarquía con una sala de guerra. La comienza con una mujer adolorida que promete que si Él le da un hijo, se lo devolverá. Siglos después María cantará un cántico que es esencialmente el cántico de Ana con una mejora — lea 1 Samuel 2:1–10 y Lucas 1:46–55 lado a lado. Dios rara vez comienza un movimiento de redención en otro lugar que no sea la oración de una mujer adolorida.</p>
+
+        <p>Samuel crece en el tabernáculo y se vuelve el puente: último juez, primer hacedor de reyes, profeta Y sacerdote Y juez. La figura más ecuménica del Antiguo Testamento. Pero cuando es anciano, sus hijos son corruptos — el mismo problema que Elí tuvo, y aparentemente Samuel no leyó su propia historia cuidadosamente. Los ancianos vienen a él en 1 Samuel 8 con la petición que rompe el corazón de Dios: <em>"Constitúyenos ahora un rey que nos juzgue, como tienen todas las naciones"</em> (1 Samuel 8:5). La respuesta de Dios: <em>"no te han desechado a ti, sino a mí me han desechado, para que no reine sobre ellos"</em> (1 Samuel 8:7).</p>
+
+        <p>Hay un tipo de oración donde el peligro no es que Dios no responda — el peligro es que sí lo hará. Israel quería un rey más que a Él, así que les dio lo que querían. La oración respondida más peligrosa es la que viene de un corazón ya en rebelión. Si alguna vez le ha dicho a Dios <em>quiero esto más de lo que Te quiero a Ti,</em> cuente los años antes de comenzar a desear que Él no hubiera dicho que sí.</p>
+
+        <h3>Saúl: alto por fuera, hueco por dentro</h3>
+        <p>Entra Saúl. Alto. Apuesto. Lucía la parte. El <em>exterior</em> de él era todo lo que Israel había pedido; el <em>interior</em> de él era hueco. Dos escenas lo quiebran. En 1 Samuel 13, Samuel se demora, el ejército se pone nervioso, y Saúl ofrece el sacrificio él mismo — no era su trabajo, pero el tiempo se sentía urgente y tomó un atajo alrededor de la obediencia. En 1 Samuel 15, Dios le dice que destruya completamente a Amalec. Saúl mantiene vivo al rey Agag y al mejor ganado — y trata de presentarlo como adoración. La respuesta de Samuel debería ser tatuada en el antebrazo de cada pastor: <em>"el obedecer es mejor que los sacrificios"</em> (1 Samuel 15:22). No se puede adorar para salir de la desobediencia.</p>
+
+        <p>Roy Riegels. Rose Bowl, 1 de enero de 1929. Cal contra Georgia Tech. Riegels recoge un balón suelto, se desorienta, y corre sesenta y cinco yardas en la dirección equivocada. Su propio compañero de equipo tiene que perseguirlo y derribarlo en la yarda uno — su propia yarda uno. Cal patea desde ahí, Tech bloquea el despeje, anota el safety, y gana el juego por dos puntos. El estadio entero se puso de pie y miró. Ese es Saúl en el Monte Gilboa. Corriendo duro. Dirección equivocada. La tragedia de Saúl no es que fuera débil; es que toda su fuerza estaba dirigida lejos de la única Persona hacia la que debió haber sido dirigida. Hay gente en púlpitos hoy corriendo sesenta y cinco yardas hacia su propia línea de gol. La fuerza no es suficiente. La dirección importa más.</p>
+
+        <h2>II. El trono prometido — David y el pacto que no claudicó</h2>
+        <p style="font-style: italic; color: #5b3a1f;">1 Samuel 16 — 2 Samuel 24</p>
+
+        <p>Mientras Saúl se desmorona, Dios ya está moviéndose. 1 Samuel 16: Samuel va a Belén a ungir a un nuevo rey de entre los hijos de Isaí, y aparece el versículo que pivota todo el Antiguo Testamento: <em>"Jehová no mira lo que mira el hombre; pues el hombre mira lo que está delante de sus ojos, pero Jehová mira el corazón"</em> (1 Samuel 16:7). Esa frase es la semilla que Cristo cosechará en el Sermón del Monte.</p>
+
+        <p>El niño es David. Siete hermanos mayores desfilan ante Samuel; ninguno es el hombre. El pastor — el <em>na'ar</em>, el más joven, al que nadie se molestó en invitar al banquete — sí lo es. Un capítulo después baja a un valle con cinco piedras lisas y se encuentra con un filisteo de dos metros y medio. La historia que todos conocen. El punto que casi todos pierden: David no ganó porque su honda fuera mejor. David ganó porque <em>"la batalla es de Jehová"</em> (1 Samuel 17:47).</p>
+
+        <p>Los ingenieros solían decir que el abejorro no debería volar. El cuerpo es demasiado pesado, las alas demasiado cortas, la matemática no funciona. El abejorro, no habiendo leído la matemática, vuela de todos modos. Un pastor adolescente no derrota a un gigante. La misma aritmética que dice que una piedra de honda no debería tumbar a un gigante dice que un carpintero galileo no debería deshacer una tumba. Dios se especializa en la matemática que el mundo ya ha rendido. Si usted es cristiano hoy, es un abejorro — toda ley de mérito y probabilidad dice que no debería ser perdonado, no debería ser bienvenido, no debería estar volando — y la gracia de Dios lo levanta de todos modos.</p>
+
+        <p>Luego vienen los años del desierto. Saúl intenta atravesar a David con una lanza contra la pared. David huye. Dos veces tiene a Saúl acorralado — una vez en En-gadi, una vez en Haquila — y dos veces se rehúsa a levantar la mano contra "el ungido de Jehová." Le ha sido prometido el trono; está siendo cazado por el hombre que está en él; el reino está a un cuchillazo de distancia — y no lo tomará. El trono que Dios da nunca es el trono que robamos. Si usted se encuentra maniobrando por lo que Dios ya prometió, ha dejado de confiar en el Prometedor.</p>
+
+        <h3>El Pacto Davídico: el hilo que ata todo a Belén</h3>
+        <p>Saúl muere en Gilboa. David es coronado sobre Judá, luego sobre todo Israel. Toma Jerusalén, sube el arca, baila delante de ella como un hombre sin dignidad que perder. Y en 2 Samuel 7, cuando David propone construirle a Dios una casa, Dios da vuelta a la propuesta: <strong>Yo te edificaré a ti una casa.</strong> El Pacto Davídico: <em>casa, reino, trono, para siempre, hijo.</em> Cinco palabras ancla. Lea 2 Samuel 7:12–16 despacio. Cada promesa en ese párrafo pasa por Salomón, se agrieta en el reino dividido, colapsa en el exilio, y aterriza en Belén. Cuando Gabriel le dice a María que Dios le dará a su hijo "el trono de David su padre; y reinará sobre la casa de Jacob para siempre, y su reino no tendrá fin" — Gabriel está leyendo 2 Samuel 7 en voz alta.</p>
+
+        <p>Pero David no es sin pecado. 2 Samuel 11. El terrado. Betsabé. Urías. El asesinato encubierto. Y la línea que cada predicador ha tenido que predicar porque cada predicador ha necesitado escucharla: <em>"¡Tú eres aquel hombre!"</em> — el veredicto de Natán (2 Samuel 12:7). David colapsa. El Salmo 51 es cómo suena el arrepentimiento genuino en voz alta. Hay consecuencias de las que nunca escapa — la espada no se aparta de su casa. Pero Dios no lo desecha. El hombre conforme al corazón de Dios es también un hombre con sangre en sus manos, y el evangelio de David es que la gracia corre más profundo que lo peor que jamás hizo. Si alguna vez ha pecado de una manera que no creía que Dios pudiera perdonar, está leyendo el capítulo equivocado. El camino de regreso a la gracia no es un laberinto; es una puerta, y Natán acaba de abrirla.</p>
+
+        <h2>III. El trono comprometido y dividido — Salomón, la división, y el largo descenso</h2>
+        <p style="font-style: italic; color: #5b3a1f;">1 Reyes 1 — 2 Reyes 25</p>
+
+        <p>Salomón entró al trono con un cheque en blanco de Dios y pidió sabiduría. Dios le dio sabiduría — y lanzó todo lo demás de regalo. La sabiduría de Salomón abarcaba desde el cedro del Líbano hasta el hisopo en el muro, desde las bestias y las aves hasta los reptiles y los peces (1 Reyes 4:33). Compuso tres mil proverbios. La reina de Sabá viajó cruzando el Sahara para verlo y descubrió que ni la mitad le había sido dicha. Y construyó el templo que su padre solo había soñado.</p>
+
+        <p>Y aquí está la próxima gran estación del Hilo Escarlata. En la dedicación de ese templo (1 Reyes 8), Salomón ofreció veintidós mil bueyes y ciento veinte mil ovejas — tantos que el altar de bronce no podía contenerlos y el patio mismo tuvo que ser consagrado para la matanza. El hilo que comenzó con un animal en el Edén, luego el primogénito de Abel, luego el altar de Noé, luego el carnero en Moriah, luego los corderos en cada dintel egipcio, luego los chivos del Yom Kippur, luego la serpiente de bronce en el desierto, luego un cordón de grana en la ventana de Jericó — ese hilo ahora corre en ríos por los atrios del templo de Salomón, y correrá allí cada día por casi cuatrocientos años. Cada animal que murió en esos atrios era un pagaré que Dios mismo cobraría un día en una colina fuera de la misma ciudad.</p>
+
+        <p>Pero las semillas de la derrota de Salomón fueron plantadas mucho antes del harén de 1 Reyes 11. Fueron plantadas en 1 Reyes 3, en dos frases tranquilas que casi nadie nota. Hizo una alianza con la hija de Faraón. Y sacrificó en los lugares altos. Dos cositas. Un matrimonio extranjero que parecía político; un hábito de adoración que parecía devocional. Ambos pequeños. Ambos errados. Ambos creciendo. Para 1 Reyes 11 las cositas habían multiplicado en setecientas esposas y trescientas concubinas, y <em>"sus mujeres hicieron desviar su corazón"</em> (1 Reyes 11:3). El hombre más sabio que jamás vivió fue vencido en amor por su propio harén. Capte esto: uno no resbala hacia la idolatría. Uno se casa con ella. Salomón no se levantó una mañana odiando a Jehová. Se levantó al lado de una mujer que sí, y le construyó un altar para mantener la paz. La sabiduría no guarda al hombre. Solo un corazón que adora lo hace.</p>
+
+        <p>El reino se quiebra a su muerte. Roboam en el sur, Jeroboam en el norte (1 Reyes 12). Jeroboam no puede tener a su pueblo viajando al sur a Jerusalén a adorar — recordarían a qué familia Dios le prometió el trono — así que pone dos becerros de oro en Dan y Bet-el y le dice a Israel: <em>"He aquí tus dioses, oh Israel, los cuales te sacaron de la tierra de Egipto."</em> Esa frase es plagiada directamente de Aarón en el Sinaí (Éxodo 32:4). Seiscientos años después y el pueblo todavía trata de adorar a Jehová esquivándolo.</p>
+
+        <p>El Norte recorre diecinueve reyes, todos malvados. Acab trae a Jezabel y la adoración a Baal — y trae al profeta Elías, espada de Dios en forma humana. 1 Reyes 18: el monte Carmelo. El gran o-esto-o-aquello hacia el cual toda esta unidad ha estado avanzando: <em>"¿Hasta cuándo claudicaréis vosotros entre dos pensamientos?"</em> (1 Reyes 18:21). Si Jehová es Dios, seguidlo; si Baal, seguidlo. Cae fuego sobre el altar de Elías. Israel cae sobre su rostro. Y la siguiente semana Israel vuelve a los becerros, porque el avivamiento sin arrepentimiento tiene la vida media de un suspiro.</p>
+
+        <h3>Día de paga, algún día</h3>
+        <p>Acab y Jezabel habían estado saliéndose con la suya por años. Querían una viña que pertenecía a un hombre llamado Nabot, y Nabot no quería vender — era su tierra ancestral. Jezabel arregló falsos testigos, un tribunal montado, y un apedreamiento. Acab bajó a tomar posesión de su nueva viña y encontró a Elías parado en ella. El profeta pronunció sentencia en el lugar exacto donde la sangre de Nabot había empapado la tierra: <em>en el lugar donde los perros lamieron la sangre de Nabot, los perros lamerán también tu sangre</em>. Una mujer en el corredor de la muerte dijo una vez, antes de que la llevaran a la silla: <em>"Yo sabía todo el tiempo que Dios manejaba todo el espectáculo. Solo traté de robar un acto."</em> Tenía la teología de Acab exactamente. Los años pasaron. Acab se hizo rico. Jezabel se pintaba la cara. Y luego un día ordinario de batalla un arquero sirio lanzó una flecha al azar — y encontró la única costura desprotegida en la armadura de Acab. Los siervos lo apuntalaron en su carro, pero se desangró antes del atardecer, y los perros vinieron (1 Reyes 22). Doce años más pasaron antes de que llegara el día de Jezabel, pero llegó. Jehú cabalgó hasta Jezreel. Sus propios siervos la arrojaron desde la ventana. Para cuando el equipo de entierro llegó, los perros habían comido todo excepto el cráneo, las manos, y los pies — la cabeza que había planeado, las manos que habían escrito la orden de asesinato, los pies que habían caminado en la viña de Nabot (2 Reyes 9). <em>Horrenda cosa es caer en manos del Dios vivo</em> (Hebreos 10:31). La cuenta siempre llega.</p>
+
+        <p>El Sur recibe diecinueve reyes y una reina — una mezcla. Dos puntos brillantes destacan. Ezequías, con el ejército de Senaquerib en la puerta y Rabsaces gritando blasfemias desde el muro, lleva la carta de amenaza al templo y <em>la extiende delante de Jehová</em> (2 Reyes 19:14). Ore como Ezequías oró cuando lo peor estaba al muro. El ángel de Jehová pasa por el campamento asirio esa noche. 185.000 muertos al amanecer. Dios no siempre nos rescata <em>del</em> muro; a veces nos rescata <em>en</em> el muro. Pero rescata.</p>
+
+        <p>Josías, ocho años cuando toma el trono, encuentra el Libro de la Ley perdido durante una limpieza del templo (2 Reyes 22). Lo lee. Rasga sus vestiduras. Renueva el pacto. Celebra la Pascua más grande desde Samuel. Y aun así — los cincuenta y cinco años acumulados de maldad de Manasés inclinan la balanza y el juicio cae igual. 586 a.C. Jerusalén arde. El templo es escombros. El rey davídico es cegado y arrastrado en cadenas a Babilonia. Parece que el pacto colapsó.</p>
+
+        <h2>IV. El trono perdido — y el trono prometido de nuevo</h2>
+        <p style="font-style: italic; color: #5b3a1f;">Crónicas, la caída, y el decreto de Ciro</p>
+
+        <p>No colapsó.</p>
+
+        <p>Crónicas es una nueva narración sacerdotal, escrita para los exiliados que regresaron a casa y caminaron hacia una ciudad de escombros y se preguntaron si Dios todavía hablaba en serio. El libro abre con nueve capítulos de genealogía — nombres, nombres, nombres — y los nombres <em>son</em> el mensaje: <strong>Ustedes siguen siendo SU pueblo. La línea sigue en pie.</strong> Crónicas apenas menciona el reino del norte. Se enfoca en David, Salomón, el templo, los reyes del sur — porque la perspectiva sacerdotal pregunta, <em>¿podemos todavía adorar?</em> Y la respuesta es sí.</p>
+
+        <p>Luego el Antiguo Testamento cierra con una de las medias frases más extraordinarias de la literatura. 2 Crónicas 36:22–23. Ciro, rey de Persia, hace una proclamación: <em>"Jehová el Dios de los cielos me ha dado todos los reinos de la tierra; y él me ha mandado que le edifique casa en Jerusalén… Quien haya entre vosotros de todo su pueblo, sea Jehová su Dios con él, y suba."</em> Esa es la última frase de la Biblia hebrea. <em>Suba.</em></p>
+
+        <p>¿Suba a <em>qué?</em> A reconstruir. A esperar. A ver la genealogía en Mateo 1 entrelazar cada nombre que acabamos de leer en 1 Crónicas. A pararse bajo una estrella en Belén. A seguir a un carpintero galileo a una colina afuera de Jerusalén y ver cómo toma un trono por la vía de una cruz. A pararse ante una tumba vacía. A vivir, ahora mismo, bajo el decreto de Ciro del Nuevo Testamento: <em>quien haya entre vosotros de Su pueblo — suba.</em></p>
+
+        <p>La vieja parábola del predicador sobre la mula predica aquí. Una mula cayó en un pozo seco. El dueño no podía sacarla, así que comenzó a echar tierra para enterrarla. La mula seguía sacudiéndose la tierra y subiendo. Lo que era para enterrarla se convirtió en los escalones que la levantaron. Babilonia echó tierra sobre Israel durante setenta años. Dios usó cada palada como un escalón. El exilio no fue el fin del pacto; fue la escuela del pacto. Y cada palada de tierra que su enemigo le ha lanzado puede ser todavía el piso sobre el cual Dios lo levante.</p>
+
+        <h2>Cristo en 1 Samuel — 2 Crónicas</h2>
+        <p>Tres convicciones para llevar y nunca soltar.</p>
+
+        <p><strong>Primera — Cristo es el Hijo mayor de David, el Rey que nunca cae.</strong> Cada defecto en cada rey de esta unidad es un dedo apuntando a Belén. El corazón hueco de Saúl, el comprometido de Salomón, el malvado de Manasés — cada trono vacío es un letrero a la puerta de un pesebre vacío. El niño en los brazos de María es el Rey que los profetas anhelaron y que los reyes de Israel nunca pudieron ser.</p>
+
+        <p><strong>Segunda — Cristo es el Templo verdadero, y el Cordero al que el templo siempre apuntaba.</strong> Salomón construyó el cuadro; Cristo construyó la sustancia. <em>"Destruid este templo, y en tres días lo levantaré"</em> (Juan 2:19). Los ríos de sangre que fluyeron por los atrios de Salomón por cuatrocientos años eran todos pagarés. El Cordero de Dios cobró cada uno de ellos en el Calvario. Las piedras que Salomón puso eran hermosas; el cuerpo que Cristo levantó es eterno. Usted y yo no esperamos un templo reconstruido en Jerusalén — somos piedras vivas y respirantes en el templo que ya está en pie.</p>
+
+        <p><strong>Tercera — El llamado de Cristo es el decreto de Ciro bajo el cual vivimos.</strong> El exilio terminó. El camino a casa está abierto. <em>Quien haya entre vosotros de Su pueblo — suba.</em></p>
+
+        <p>Israel pidió un rey. Dios respondió con seis libros y mil años y una Cruz fuera de Jerusalén y una tumba vacía. El rey que querían, lo recibieron — y lo perdieron. El Rey que necesitaban, Él lo dio — y todavía reina.</p>
+    </div>
+</div>
+
+<!-- TRACK BANNER + EXAM -->
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <div class="track-banner" id="trackBanner"></div>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button class="action-btn" id="submitExamBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Enviar Examen</span></button>
+        <button class="action-btn reset" id="resetExamBtn"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+    </div>
+    <div id="examResult" class="exam-result" style="display:none;"></div>
+</div>
+
+</div>
+
+<script>
+const COURSE_KEY = 'cts_ots_progress';
+const STUDENT_KEY = 'cts_student';
+const UNIT_NUM = 5;
+const TOTAL_UNITS = 13;
+const NEXT_UNIT_HREF = 'CTSUnit6.html';
+const PREV_UNIT_HREF = 'CTSUnit4.html';
+const UNIT_PASSED_KEY = 'cts_ots_unit5_passed';
+const UNIT_STATE_KEY = 'cts_ots_unit5_state';
+const LOCKOUT_KEY = 'cts_ots_unit5_lockout';
+const PASS_THRESHOLD_MC = 18;
+const PASS_THRESHOLD_SA = 9;
+const LOCKOUT_MS = 15 * 60 * 1000; // legacy ceiling (Masters); see lockMinutes()
+// Track-aware review wait: gentle 2-min pause for lay/Certificate, full 15 min for Masters.
+function lockMinutes() { return isMastersLevel() ? 15 : 2; }
+function lockoutMs() { return lockMinutes() * 60 * 1000; }
+const REDIRECT_MS = 3000;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_ots_unit5_mc_passed';
+const SA_LOCK_KEY = 'cts_ots_unit5_sa_lockout';
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = new Array(20).fill(false);
+let unitPassed = localStorage.getItem(UNIT_PASSED_KEY) === 'true';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10)
+        : parseInt(localStorage.getItem(LOCKOUT_KEY) || '0', 10);
+}
+let lockUntil = activeLockUntil();
+let progress = JSON.parse(localStorage.getItem(COURSE_KEY) || '{}');
+let student = { name: '', email: '', country: '', program: 'Certificate of Ministry' };
+
+function getTrack() { if (student.program === 'Master of Divinity') return 'mdiv';
+    if (student.program === 'Master of Theology') return 'thm';
+    return 'cert'; }
+function isMDiv() { return getTrack() === 'mdiv'; }
+function isMastersLevel() { const t = getTrack(); return t === 'mdiv' || t === 'thm'; }
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    grid.innerHTML = '';
+    for (let i = 1; i <= TOTAL_UNITS; i++) {
+        let cls = '';
+        if (localStorage.getItem(`cts_ots_unit${i}_passed`) === 'true') cls = 'completed';
+        if (i === UNIT_NUM) cls += ' active';
+        grid.innerHTML += `<a href="CTSUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+}
+document.getElementById('nextUnitBtn').onclick = () => {
+    if (unitPassed) location.href = NEXT_UNIT_HREF;
+    else alert(currentLang === 'en' ? 'Please pass Unit 5 first.' : 'Por favor apruebe la Unidad 5 primero.');
+};
+document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_UNIT_HREF; };
+
+function loadReg() {
+    let saved = localStorage.getItem(STUDENT_KEY);
+    if (saved) {
+        student = JSON.parse(saved);
+        document.getElementById('studentName').value = student.name || '';
+        document.getElementById('studentEmail').value = student.email || '';
+        document.getElementById('studentCountry').value = student.country || '';
+        document.getElementById('studentProgram').value = student.program || 'Certificate of Ministry';
+    }
+}
+function saveReg() {
+    student.name = document.getElementById('studentName').value.trim();
+    student.email = document.getElementById('studentEmail').value.trim();
+    student.country = document.getElementById('studentCountry').value.trim();
+    student.program = document.getElementById('studentProgram').value;
+    if (student.name && student.email) localStorage.setItem(STUDENT_KEY, JSON.stringify(student));
+}
+['studentName','studentEmail','studentCountry'].forEach(id => {
+    document.getElementById(id).addEventListener('change', saveReg);
+});
+document.getElementById('studentProgram').addEventListener('change', () => {
+    saveReg(); renderTrackBanner(); renderQuestions();
+});
+
+function renderTrackBanner() {
+    const banner = document.getElementById('trackBanner');
+    if (!banner) return;
+    if (isMastersLevel()) {
+        banner.innerHTML = currentLang === 'en'
+            ? ('<strong>' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ' Track:</strong> Answer all 30 questions. To pass you need <strong>18/20</strong> multiple choice <em>and</em> <strong>9/10</strong> short answer, judged independently. Short answers may be written in English or Spanish.')
+            : ('<strong>Pista ' + (getTrack()==='thm' ? 'Th.M.' : 'M.Div.') + ':</strong> Responda las 30 preguntas. Para aprobar necesita <strong>18/20</strong> en opción múltiple <em>y</em> <strong>9/10</strong> en respuesta corta, evaluadas independientemente. Las respuestas cortas pueden escribirse en inglés o español.');
+    } else {
+        banner.innerHTML = currentLang === 'en'
+            ? '<strong>Certificate Track:</strong> Answer questions 1–20 (multiple choice). To pass you need <strong>18/20</strong> (90%). Short-answer questions are optional practice and not graded.'
+            : '<strong>Pista Certificado:</strong> Responda las preguntas 1–20 (opción múltiple). Para aprobar necesita <strong>18/20</strong> (90%). Las preguntas de respuesta corta son práctica opcional y no se califican.';
+    }
+}
+
+function saveState() {
+    localStorage.setItem(UNIT_STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers, mcRevealed }));
+}
+function loadState() {
+    const raw = localStorage.getItem(UNIT_STATE_KEY);
+    if (!raw) return;
+    try {
+        const s = JSON.parse(raw);
+        if (Array.isArray(s.mcAnswers)) mcAnswers = s.mcAnswers;
+        if (Array.isArray(s.kwAnswers)) kwAnswers = s.kwAnswers;
+        if (Array.isArray(s.mcRevealed)) mcRevealed = s.mcRevealed;
+    } catch (e) {}
+}
+
+const mcQuestions = [
+    { id:1, en:"1. The last judge of Israel who anointed both Saul and David was:", es:"1. El último juez de Israel que ungió tanto a Saúl como a David fue:",
+      optionsEn:["Eli", "Gideon", "Samuel", "Deborah"],
+      optionsEs:["Elí", "Gedeón", "Samuel", "Débora"], correct:"C",
+      fcEn:"Correct. Samuel was the bridge — last judge, first kingmaker, prophet AND priest AND judge.",
+      fcEs:"Correcto. Samuel fue el puente — último juez, primer hacedor de reyes, profeta Y sacerdote Y juez.",
+      fiEn:"Samuel — the bridge figure between the era of the judges and the monarchy.",
+      fiEs:"Samuel — la figura puente entre la era de los jueces y la monarquía." },
+    { id:2, en:"2. The people demanded a king because they wanted to be:", es:"2. El pueblo exigió un rey porque quería ser:",
+      optionsEn:["Independent of the temple", "Righteous before God", "Free from all laws", "Like the other nations"],
+      optionsEs:["Independientes del templo", "Justos ante Dios", "Libres de todas las leyes", "Como las otras naciones"], correct:"D",
+      fcEn:"Correct. 1 Samuel 8:5 — 'like all the nations.' God said to Samuel: 'They have not rejected you; they have rejected ME.'",
+      fcEs:"Correcto. 1 Samuel 8:5 — 'como tienen todas las naciones.' Dios le dijo a Samuel: 'No te han desechado a ti; me han desechado a MÍ.'",
+      fiEn:"They wanted to be 'like the other nations' (1 Samuel 8:5) — a rejection of God's direct kingship over them.",
+      fiEs:"Querían ser 'como las otras naciones' (1 Samuel 8:5) — un rechazo del reinado directo de Dios sobre ellos." },
+    { id:3, en:"3. David's defeat of Goliath demonstrated:", es:"3. La derrota de Goliat por parte de David demostró:",
+      optionsEn:["His superior strength", "Trust in God rather than human weapons", "His skill with a sling", "His army's power"],
+      optionsEs:["Su fuerza superior", "Confianza en Dios más que en armas humanas", "Su habilidad con la honda", "El poder de su ejército"], correct:"B",
+      fcEn:"Correct. 'The battle is the LORD's' (1 Samuel 17:47). The bumblebee flies because nobody told it the math.",
+      fcEs:"Correcto. 'La batalla es de Jehová' (1 Samuel 17:47). El abejorro vuela porque nadie le contó la matemática.",
+      fiEn:"David's victory was a demonstration that 'the battle is the LORD's' (1 Samuel 17:47).",
+      fiEs:"La victoria de David fue una demostración de que 'la batalla es de Jehová' (1 Samuel 17:47)." },
+    { id:4, en:"4. The five anchor words of the Davidic Covenant (2 Samuel 7) are:", es:"4. Las cinco palabras ancla del Pacto Davídico (2 Samuel 7) son:",
+      optionsEn:["House, kingdom, throne, forever, son", "Wealth, power, peace, wisdom, length", "Land, people, blessing, law, temple", "Sacrifice, priest, altar, ark, glory"],
+      optionsEs:["Casa, reino, trono, para siempre, hijo", "Riqueza, poder, paz, sabiduría, duración", "Tierra, pueblo, bendición, ley, templo", "Sacrificio, sacerdote, altar, arca, gloria"], correct:"A",
+      fcEn:"Correct. Every word lands at Bethlehem. Gabriel reads 2 Samuel 7 out loud to Mary in Luke 1:32–33.",
+      fcEs:"Correcto. Cada palabra aterriza en Belén. Gabriel le lee 2 Samuel 7 en voz alta a María en Lucas 1:32–33.",
+      fiEn:"The five anchor words of 2 Samuel 7:12–16: house, kingdom, throne, forever, son.",
+      fiEs:"Las cinco palabras ancla de 2 Samuel 7:12–16: casa, reino, trono, para siempre, hijo." },
+    { id:5, en:"5. Solomon's downfall was caused by:", es:"5. La caída de Salomón fue causada por:",
+      optionsEn:["His building projects", "His many foreign wives who turned his heart to idols", "His heavy taxation", "His war with Egypt"],
+      optionsEs:["Sus proyectos de construcción", "Sus muchas esposas extranjeras que desviaron su corazón a los ídolos", "Sus fuertes impuestos", "Su guerra con Egipto"], correct:"B",
+      fcEn:"Correct. You don't slip into idolatry. You marry into it. Wisdom does not keep a man — only a heart that worships does.",
+      fcEs:"Correcto. Uno no resbala hacia la idolatría. Uno se casa con ella. La sabiduría no guarda al hombre — solo un corazón que adora lo hace.",
+      fiEn:"His 700 wives and 300 concubines turned his heart to idols (1 Kings 11:3-4).",
+      fiEs:"Sus 700 esposas y 300 concubinas desviaron su corazón a los ídolos (1 Reyes 11:3-4)." },
+    { id:6, en:"6. The seeds of Solomon's defeat were first planted in 1 Kings 3 in two quiet sentences:", es:"6. Las semillas de la derrota de Salomón fueron plantadas primero en 1 Reyes 3 en dos frases tranquilas:",
+      optionsEn:["A marriage alliance with Pharaoh's daughter and worship at the high places", "A standing army and a foreign treaty", "Heavy taxation and forced labor", "A weak military and an empty treasury"],
+      optionsEs:["Una alianza matrimonial con la hija de Faraón y la adoración en los lugares altos", "Un ejército permanente y un tratado extranjero", "Fuertes impuestos y trabajo forzado", "Un ejército débil y un tesoro vacío"], correct:"A",
+      fcEn:"Correct. Two little things. Both small. Both wrong. Both growing. The harem of chapter 11 was already on its way in chapter 3.",
+      fcEs:"Correcto. Dos cositas. Ambas pequeñas. Ambas erradas. Ambas creciendo. El harén del capítulo 11 ya venía en camino en el capítulo 3.",
+      fiEn:"1 Kings 3:1–3 records two early compromises: the marriage alliance with Egypt and worship at unauthorized high places.",
+      fiEs:"1 Reyes 3:1–3 registra dos compromisos tempranos: la alianza matrimonial con Egipto y la adoración en lugares altos no autorizados." },
+    { id:7, en:"7. After Solomon's death, the kingdom split into:", es:"7. Después de la muerte de Salomón, el reino se dividió en:",
+      optionsEn:["Judah and Benjamin", "Samaria and Jerusalem", "Israel and Judah", "Ephraim and Manasseh"],
+      optionsEs:["Judá y Benjamín", "Samaria y Jerusalén", "Israel y Judá", "Efraín y Manasés"], correct:"C",
+      fcEn:"Correct. Rehoboam in the south (Judah), Jeroboam in the north (Israel). The split lasted until both fell into exile.",
+      fcEs:"Correcto. Roboam en el sur (Judá), Jeroboam en el norte (Israel). La división duró hasta que ambos cayeron en el exilio.",
+      fiEn:"The kingdom split into Israel (north, 10 tribes) and Judah (south, 2 tribes) after 1 Kings 12.",
+      fiEs:"El reino se dividió en Israel (norte, 10 tribus) y Judá (sur, 2 tribus) después de 1 Reyes 12." },
+    { id:8, en:"8. Jeroboam I placed golden calves at Dan and Bethel to:", es:"8. Jeroboam I puso becerros de oro en Dan y Betel para:",
+      optionsEn:["Honor God", "Mimic Egyptian religion", "Celebrate the exodus", "Prevent his people from going to Jerusalem to worship"],
+      optionsEs:["Honrar a Dios", "Imitar la religión egipcia", "Celebrar el éxodo", "Evitar que su pueblo fuera a Jerusalén a adorar"], correct:"D",
+      fcEn:"Correct. His sentence — 'behold your gods who brought you up from Egypt' — was plagiarized from Aaron at Sinai (Exodus 32:4). Same sin doubled.",
+      fcEs:"Correcto. Su frase — 'he aquí tus dioses que te sacaron de Egipto' — fue plagiada de Aarón en el Sinaí (Éxodo 32:4). El mismo pecado doblado.",
+      fiEn:"He didn't want his people walking south to Jerusalem to worship — they would remember whose family God promised the throne to (1 Kings 12).",
+      fiEs:"No quería que su pueblo viajara al sur a Jerusalén a adorar — recordarían a qué familia Dios le prometió el trono (1 Reyes 12)." },
+    { id:9, en:"9. The prophet who confronted Ahab and the prophets of Baal on Mount Carmel was:", es:"9. El profeta que confrontó a Acab y a los profetas de Baal en el Monte Carmelo fue:",
+      optionsEn:["Elijah", "Isaiah", "Jonah", "Elisha"],
+      optionsEs:["Elías", "Isaías", "Jonás", "Eliseo"], correct:"A",
+      fcEn:"Correct. Elijah — sword of God in human form. 'How long will you falter between two opinions?' (1 Kings 18:21).",
+      fcEs:"Correcto. Elías — espada de Dios en forma humana. '¿Hasta cuándo claudicaréis vosotros entre dos pensamientos?' (1 Reyes 18:21).",
+      fiEn:"Elijah confronted Ahab and the 450 prophets of Baal on Mount Carmel (1 Kings 18). Fire fell. Israel fell. Then went back to the calves.",
+      fiEs:"Elías confrontó a Acab y a los 450 profetas de Baal en el Monte Carmelo (1 Reyes 18). Cayó fuego. Israel cayó. Luego volvió a los becerros." },
+    { id:10, en:"10. The northern kingdom (Israel) fell to which empire in 722 BC?", es:"10. ¿El reino del norte (Israel) cayó ante qué imperio en 722 a.C.?",
+      optionsEn:["Babylon", "Egypt", "Assyria", "Persia"],
+      optionsEs:["Babilonia", "Egipto", "Asiria", "Persia"], correct:"C",
+      fcEn:"Correct. Assyria swallowed the north in 722 BC — exactly as Moses had warned in Deuteronomy 28.",
+      fcEs:"Correcto. Asiria tragó al norte en 722 a.C. — exactamente como Moisés había advertido en Deuteronomio 28.",
+      fiEn:"Assyria conquered the northern kingdom in 722 BC. Babylon would later conquer the southern kingdom in 586 BC.",
+      fiEs:"Asiria conquistó el reino del norte en 722 a.C. Babilonia conquistaría después al reino del sur en 586 a.C." },
+    { id:11, en:"11. The southern kingdom (Judah) fell to Babylon under King:", es:"11. El reino del sur (Judá) cayó ante Babilonia bajo el rey:",
+      optionsEn:["Cyrus", "Nebuchadnezzar", "Sennacherib", "Tiglath-Pileser"],
+      optionsEs:["Ciro", "Nabucodonosor", "Senaquerib", "Tiglat-Pileser"], correct:"B",
+      fcEn:"Correct. Nebuchadnezzar of Babylon took Jerusalem in 586 BC, burned the temple, and dragged the Davidic king in chains to Babylon.",
+      fcEs:"Correcto. Nabucodonosor de Babilonia tomó Jerusalén en 586 a.C., quemó el templo, y arrastró al rey davídico en cadenas a Babilonia.",
+      fiEn:"Nebuchadnezzar of Babylon destroyed Jerusalem and the temple in 586 BC.",
+      fiEs:"Nabucodonosor de Babilonia destruyó Jerusalén y el templo en 586 a.C." },
+    { id:12, en:"12. When Sennacherib's army besieged Jerusalem, Hezekiah's response was to:", es:"12. Cuando el ejército de Senaquerib sitió Jerusalén, la respuesta de Ezequías fue:",
+      optionsEn:["Worship Baal", "Surrender immediately", "Flee to Egypt", "Take the threat letter into the temple and spread it before the LORD"],
+      optionsEs:["Adorar a Baal", "Rendirse inmediatamente", "Huir a Egipto", "Llevar la carta de amenaza al templo y extenderla delante del SEÑOR"], correct:"D",
+      fcEn:"Correct. Pray the way Hezekiah prayed when the worst is at the wall. The angel of the Lord went through the Assyrian camp that night — 185,000 dead by morning.",
+      fcEs:"Correcto. Ore como Ezequías oró cuando lo peor está al muro. El ángel de Jehová pasó por el campamento asirio esa noche — 185.000 muertos al amanecer.",
+      fiEn:"2 Kings 19:14 — Hezekiah spread the letter before the LORD and prayed. God answered with deliverance.",
+      fiEs:"2 Reyes 19:14 — Ezequías extendió la carta delante de Jehová y oró. Dios respondió con liberación." },
+    { id:13, en:"13. Josiah found the Book of the Law and:", es:"13. Josías halló el Libro de la Ley y:",
+      optionsEn:["Ignored it", "Destroyed the temple", "Renewed the covenant and removed idolatry", "Fled to Egypt"],
+      optionsEs:["Lo ignoró", "Destruyó el templo", "Renovó el pacto y eliminó la idolatría", "Huyó a Egipto"], correct:"C",
+      fcEn:"Correct. Eight years old when he took the throne. Found the lost Law. Tore his clothes. Renewed the covenant. Held the biggest Passover since Samuel.",
+      fcEs:"Correcto. Ocho años cuando tomó el trono. Halló la Ley perdida. Rasgó sus vestiduras. Renovó el pacto. Celebró la Pascua más grande desde Samuel.",
+      fiEn:"Josiah's reforms (2 Kings 22–23): he tore his clothes when the Law was read, removed idols, and renewed the covenant with the people.",
+      fiEs:"Las reformas de Josías (2 Reyes 22–23): rasgó sus vestiduras cuando se leyó la Ley, removió ídolos, y renovó el pacto con el pueblo." },
+    { id:14, en:"14. Solomon's prayer at the dedication of the temple emphasized:", es:"14. La oración de Salomón en la dedicación del templo enfatizaba:",
+      optionsEn:["Military power", "Foreign alliances", "Architectural beauty", "God's faithfulness to forgive repentant sinners"],
+      optionsEs:["Poder militar", "Alianzas extranjeras", "Belleza arquitectónica", "La fidelidad de Dios para perdonar a los pecadores arrepentidos"], correct:"D",
+      fcEn:"Correct. Solomon prayed for God to hear and forgive when His people sinned and turned back to Him (1 Kings 8). Twenty-two thousand oxen and 120,000 sheep were sacrificed.",
+      fcEs:"Correcto. Salomón oró para que Dios oyera y perdonara cuando Su pueblo pecara y se volviera a Él (1 Reyes 8). Se sacrificaron veintidós mil bueyes y 120.000 ovejas.",
+      fiEn:"1 Kings 8 — Solomon's temple dedication prayer centered on God's mercy to forgive His repentant people.",
+      fiEs:"1 Reyes 8 — la oración de dedicación del templo de Salomón se centró en la misericordia de Dios para perdonar a Su pueblo arrepentido." },
+    { id:15, en:"15. The book of Chronicles was written after the exile to:", es:"15. El libro de Crónicas fue escrito después del exilio para:",
+      optionsEn:["Record the history of the northern kingdom", "Encourage the returned exiles that God's promises endure", "Criticize the monarchy", "Promote foreign gods"],
+      optionsEs:["Registrar la historia del reino del norte", "Animar a los exiliados que regresaron de que las promesas de Dios permanecen", "Criticar la monarquía", "Promover dioses extranjeros"], correct:"B",
+      fcEn:"Correct. The priestly retelling for the returned exiles: 'You are still HIS people. The line still stands.'",
+      fcEs:"Correcto. La nueva narración sacerdotal para los exiliados que regresaron: 'Ustedes siguen siendo SU pueblo. La línea sigue en pie.'",
+      fiEn:"Chronicles is a priestly retelling written for the post-exilic community — focused on David, Solomon, the temple, and the southern kings.",
+      fiEs:"Crónicas es una nueva narración sacerdotal escrita para la comunidad post-exílica — enfocada en David, Salomón, el templo, y los reyes del sur." },
+    { id:16, en:"16. David's sin with Bathsheba resulted in:", es:"16. El pecado de David con Betsabé resultó en:",
+      optionsEn:["The death of his son and family turmoil", "Loss of the kingdom", "No consequences", "Instant forgiveness without discipline"],
+      optionsEs:["La muerte de su hijo y conflictos familiares", "Pérdida del reino", "Sin consecuencias", "Perdón instantáneo sin disciplina"], correct:"A",
+      fcEn:"Correct. Nathan said: 'You are the man!' David collapsed in Psalm 51 — but the sword never departed from his house. Grace forgave; discipline remained.",
+      fcEs:"Correcto. Natán dijo: '¡Tú eres aquel hombre!' David colapsó en el Salmo 51 — pero la espada nunca se apartó de su casa. La gracia perdonó; la disciplina permaneció.",
+      fiEn:"David's sin had real consequences — the death of the child, Amnon's rape of Tamar, Absalom's rebellion — even though God forgave him.",
+      fiEs:"El pecado de David tuvo consecuencias reales — la muerte del niño, la violación de Tamar por Amnón, la rebelión de Absalón — aunque Dios lo perdonó." },
+    { id:17, en:"17. Saul's major sin that led to his rejection was:", es:"17. El pecado principal de Saúl que llevó a su rechazo fue:",
+      optionsEn:["Adultery", "Taking an oath", "Offering a sacrifice without Samuel and sparing the Amalekite king", "Building a palace"],
+      optionsEs:["Adulterio", "Tomar un juramento", "Ofrecer un sacrificio sin Samuel y perdonar al rey amalecita", "Construir un palacio"], correct:"C",
+      fcEn:"Correct. 'To obey is better than sacrifice' (1 Samuel 15:22). You cannot worship your way out of disobedience.",
+      fcEs:"Correcto. 'El obedecer es mejor que los sacrificios' (1 Samuel 15:22). No se puede adorar para salir de la desobediencia.",
+      fiEn:"Saul's two breaking points: offering Samuel's sacrifice himself (1 Samuel 13) and sparing King Agag and the best livestock (1 Samuel 15).",
+      fiEs:"Los dos puntos de quiebre de Saúl: ofrecer el sacrificio de Samuel él mismo (1 Samuel 13) y perdonar al rey Agag y al mejor ganado (1 Samuel 15)." },
+    { id:18, en:"18. The Davidic Covenant finds its ultimate fulfillment in:", es:"18. El Pacto Davídico encuentra su cumplimiento final en:",
+      optionsEn:["Jesus Christ", "Solomon", "Zerubbabel", "John the Baptist"],
+      optionsEs:["Jesucristo", "Salomón", "Zorobabel", "Juan el Bautista"], correct:"A",
+      fcEn:"Correct. The child in Mary's arms is the King the prophets ached for and the kings of Israel could never be.",
+      fcEs:"Correcto. El niño en los brazos de María es el Rey que los profetas anhelaron y que los reyes de Israel nunca pudieron ser.",
+      fiEn:"Gabriel quotes 2 Samuel 7 to Mary in Luke 1:32-33. Jesus is David's greater Son, the eternal King.",
+      fiEs:"Gabriel cita 2 Samuel 7 a María en Lucas 1:32-33. Jesús es el Hijo mayor de David, el Rey eterno." },
+    { id:19, en:"19. The primary theological message of Kings is:", es:"19. El mensaje teológico principal de Reyes es:",
+      optionsEn:["God is absent", "Kings are always righteous", "The temple is irrelevant", "Obedience brings blessing; disobedience brings judgment and exile"],
+      optionsEs:["Dios está ausente", "Los reyes son siempre justos", "El templo es irrelevante", "La obediencia trae bendición; la desobediencia trae juicio y exilio"], correct:"D",
+      fcEn:"Correct. As the king goes, so goes the nation. Every flaw points at Bethlehem.",
+      fcEs:"Correcto. Como va el rey, así va la nación. Cada defecto apunta a Belén.",
+      fiEn:"Kings is structured by the obedience-blessing / disobedience-judgment pattern from Deuteronomy 28.",
+      fiEs:"Reyes está estructurado por el patrón obediencia-bendición / desobediencia-juicio de Deuteronomio 28." },
+    { id:20, en:"20. The book of Chronicles ends with:", es:"20. El libro de Crónicas termina con:",
+      optionsEn:["The death of Josiah", "Cyrus's decree allowing the exiles to return", "The rebuilding of the temple", "The destruction of Jerusalem"],
+      optionsEs:["La muerte de Josías", "El decreto de Ciro que permite a los exiliados regresar", "La reconstrucción del templo", "La destrucción de Jerusalén"], correct:"B",
+      fcEn:"Correct. The last sentence of the Hebrew Bible: 'Whoever is among you of His people — let him go up.' Suba. Go up.",
+      fcEs:"Correcto. La última frase de la Biblia hebrea: 'Quien haya entre vosotros de Su pueblo — suba.' Suba.",
+      fiEn:"2 Chronicles 36:22-23 ends with Cyrus's proclamation in 538 BC: 'Whoever is among you of His people — let him go up.'",
+      fiEs:"2 Crónicas 36:22-23 termina con la proclamación de Ciro en 538 a.C.: 'Quien haya entre vosotros de Su pueblo — suba.'" }
+];
+
+const kwQuestions = [
+    { id:21, en:"21. Explain the significance of Israel's demand for a king in 1 Samuel 8.",
+      es:"21. Explique el significado de la demanda de un rey por parte de Israel en 1 Samuel 8.",
+      kw_en:[["king", "monarch", "a king"], ["like other nations", "like all the nations", "like the nations", "other nations"], ["reject god", "rejected me", "rejected god", "rejected the lord", "rejection of god"], ["samuel"], ["theocracy", "god's kingship", "god as king", "god reign"]],
+      kw_es:[["rey", "monarca", "un rey"], ["como las naciones", "como todas las naciones", "como las demás naciones"], ["rechazar a dios", "me han desechado", "rechazaron a dios", "rechazo de dios"], ["samuel"], ["teocracia", "reinado de dios", "dios como rey", "que dios reine"]],
+      modelEn:"In 1 Samuel 8 the elders came to Samuel demanding, 'Make us a king to judge us like all the nations.' The significance is that this request was a rejection of God's own kingship. God told Samuel, 'they have not rejected you, but they have rejected Me, that I should not reign over them.' Israel wanted a king like the surrounding nations more than they wanted the LORD Himself as their true King in the theocracy. It was a dangerous answered prayer: God gave them what their rebellious hearts demanded, and the request set the monarchy on a troubled course from the start.",
+      modelEs:"En 1 Samuel 8 los ancianos vinieron a Samuel exigiendo: 'Danos un rey que nos juzgue, como tienen todas las naciones.' Lo significativo es que esta petición fue un rechazo del propio reinado de Dios. Dios le dijo a Samuel: 'no te han desechado a ti, sino a mí me han desechado, para que no reine sobre ellos.' Israel deseaba un rey como las naciones vecinas más de lo que deseaba al SEÑOR mismo como su verdadero Rey en la teocracia. Fue una oración respondida peligrosa: Dios les dio lo que sus corazones rebeldes exigían, y la petición puso a la monarquía en un rumbo turbulento desde el principio." },
+    { id:22, en:"22. Why was Saul rejected as king? What were his specific sins?",
+      es:"22. ¿Por qué fue rechazado Saúl como rey? ¿Cuáles fueron sus pecados específicos?",
+      kw_en:[["saul"], ["sacrifice", "offered the sacrifice", "unlawful sacrifice"], ["agag", "amalek", "spared agag", "spared the best"], ["disobedience", "disobeyed", "shortcut", "took matters"], ["rejection", "rejected", "removed as king", "obey is better"]],
+      kw_es:[["saúl", "saul"], ["sacrificio", "ofreció el sacrificio", "sacrificio ilícito"], ["agag", "amalec", "perdonó a agag", "perdonó lo mejor"], ["desobediencia", "desobedeció", "atajo", "tomó el asunto"], ["rechazo", "rechazado", "quitado como rey", "obedecer es mejor"]],
+      modelEn:"Saul looked the part of a king — tall and handsome — but was hollow on the inside, and two acts of disobedience broke him. In 1 Samuel 13, when Samuel was delayed and the army grew nervous, Saul took a shortcut around obedience and offered the sacrifice himself, which was not his to offer. In 1 Samuel 15, God commanded him to destroy Amalek completely, but Saul spared King Agag and the best livestock, then tried to spin it as worship. Samuel rebuked him: 'to obey is better than sacrifice.' Saul's rejection came because he repeatedly chose his own way over obeying God; you cannot worship your way out of disobedience.",
+      modelEs:"Saúl parecía un rey — alto y apuesto — pero estaba hueco por dentro, y dos actos de desobediencia lo quebraron. En 1 Samuel 13, cuando Samuel se demoró y el ejército se puso nervioso, Saúl tomó un atajo evitando la obediencia y ofreció el sacrificio él mismo, lo cual no le correspondía. En 1 Samuel 15, Dios le mandó destruir por completo a Amalec, pero Saúl perdonó al rey Agag y lo mejor del ganado, y luego trató de presentarlo como adoración. Samuel lo reprendió: 'el obedecer es mejor que los sacrificios.' El rechazo de Saúl vino porque repetidamente escogió su propio camino en vez de obedecer a Dios; no se puede adorar para salir de la desobediencia." },
+    { id:23, en:"23. Describe the Davidic Covenant (2 Samuel 7) and identify its five anchor words.",
+      es:"23. Describa el Pacto Davídico (2 Samuel 7) e identifique sus cinco palabras ancla.",
+      kw_en:[["davidic covenant", "covenant with david", "2 samuel 7"], ["house", "build you a house", "dynasty"], ["kingdom", "reign", "rule"], ["throne", "throne of david"], ["forever", "everlasting", "no end", "eternal"], ["son", "seed", "offspring", "descendant"]],
+      kw_es:[["pacto davídico", "pacto con david", "2 samuel 7"], ["casa", "edificar una casa", "dinastía"], ["reino", "reinar", "gobierno"], ["trono", "trono de david"], ["para siempre", "eterno", "sin fin", "perpetuo"], ["hijo", "simiente", "descendencia", "descendiente"]],
+      modelEn:"The Davidic Covenant is given in 2 Samuel 7, when David proposed to build God a house and God turned the proposal around, promising instead to build David a house. Its five anchor words are house, kingdom, throne, forever, and son. Every promise in that passage passes through Solomon, is cracked by the divided kingdom, collapses at the exile, and finally lands at Bethlehem. When Gabriel told Mary that God would give her son the throne of his father David and that of His kingdom there would be no end, Gabriel was essentially reading 2 Samuel 7 aloud — the covenant points directly to Christ, David's greater Son.",
+      modelEs:"El Pacto Davídico se da en 2 Samuel 7, cuando David propuso edificarle a Dios una casa y Dios invirtió la propuesta, prometiendo en cambio edificarle a David una casa. Sus cinco palabras ancla son casa, reino, trono, para siempre e hijo. Cada promesa de ese pasaje pasa por Salomón, se quiebra en el reino dividido, se derrumba en el exilio, y finalmente llega a Belén. Cuando Gabriel le dijo a María que Dios le daría a su hijo el trono de su padre David y que de Su reino no habría fin, Gabriel esencialmente leía 2 Samuel 7 en voz alta — el pacto apunta directamente a Cristo, el Hijo mayor de David." },
+    { id:24, en:"24. What led to the division of the kingdom after Solomon's death, and what were the 'two little things' that started Solomon's decline?",
+      es:"24. ¿Qué llevó a la división del reino después de la muerte de Salomón, y cuáles fueron las 'dos cositas' que iniciaron el declive de Salomón?",
+      kw_en:[["solomon"], ["foreign wives", "seven hundred wives", "harem", "wives", "concubines"], ["pharaoh", "daughter of pharaoh", "marriage alliance", "alliance"], ["high places", "sacrificed at high places", "altars"], ["idolatry", "turned his heart", "other gods", "worshiped idols"], ["division", "split", "kingdom split", "rehoboam", "jeroboam", "divided"]],
+      kw_es:[["salomón", "salomon"], ["esposas extranjeras", "setecientas esposas", "harén", "mujeres", "concubinas"], ["faraón", "hija de faraón", "alianza matrimonial", "alianza"], ["lugares altos", "sacrificó en lugares altos", "altares"], ["idolatría", "desvió su corazón", "otros dioses", "adoró ídolos"], ["división", "dividió", "reino dividido", "roboam", "jeroboam", "dividido"]],
+      modelEn:"The seeds of the kingdom's division were planted long before Solomon's harem, in two quiet sins: he made a marriage alliance with the daughter of Pharaoh, and he sacrificed at the high places. Both looked small, but both were wrong and both grew. By 1 Kings 11 those small compromises had multiplied into seven hundred wives and three hundred concubines, and his foreign wives turned his heart away into idolatry. After Solomon's death the kingdom split into two: Rehoboam ruled the southern kingdom of Judah, and Jeroboam the northern kingdom of Israel, who set up two golden calves at Dan and Bethel so his people would not go to Jerusalem to worship.",
+      modelEs:"Las semillas de la división del reino se plantaron mucho antes del harén de Salomón, en dos pecados callados: hizo una alianza matrimonial con la hija de Faraón, y sacrificó en los lugares altos. Ambos parecían pequeños, pero ambos eran malos y ambos crecieron. Para 1 Reyes 11 esos pequeños compromisos se habían multiplicado en setecientas esposas y trescientas concubinas, y sus mujeres extranjeras desviaron su corazón a la idolatría. Tras la muerte de Salomón el reino se dividió en dos: Roboam gobernó el reino del sur, Judá, y Jeroboam el reino del norte, Israel, quien levantó dos becerros de oro en Dan y Betel para que su pueblo no fuera a Jerusalén a adorar." },
+    { id:25, en:"25. Compare the northern kingdom (Israel) and the southern kingdom (Judah) in terms of their kings and their fate.",
+      es:"25. Compare el reino del norte (Israel) y el reino del sur (Judá) en términos de sus reyes y su destino.",
+      kw_en:[["israel", "northern kingdom", "the north"], ["judah", "southern kingdom", "the south"], ["evil kings", "all evil", "wicked kings", "every king evil"], ["good kings", "hezekiah", "josiah", "some good"], ["assyria", "722", "fell to assyria"], ["babylon", "586", "fell to babylon"]],
+      kw_es:[["israel", "reino del norte", "el norte"], ["judá", "juda", "reino del sur", "el sur"], ["reyes malos", "todos malos", "reyes malvados", "todo rey malo"], ["reyes buenos", "ezequías", "josías", "algunos buenos"], ["asiria", "722", "cayó ante asiria"], ["babilonia", "586", "cayó ante babilonia"]],
+      modelEn:"The northern kingdom of Israel ran through nineteen kings, and every single one was evil; it was marked by the golden-calf worship Jeroboam introduced and later by Ahab and Jezebel's Baal worship. The southern kingdom of Judah had nineteen kings and one queen, a mixed bag with some genuinely good kings like Hezekiah and Josiah among the wicked. Because of its persistent idolatry, the north fell first, to Assyria in 722 B.C. The south lasted longer because of its better kings and the Davidic line, but eventually fell to Babylon in 586 B.C. Both kingdoms were judged for unfaithfulness, just as Deuteronomy 28 had warned.",
+      modelEs:"El reino del norte, Israel, pasó por diecinueve reyes, y todos y cada uno fueron malos; estuvo marcado por la adoración del becerro de oro que introdujo Jeroboam y luego por la adoración de Baal de Acab y Jezabel. El reino del sur, Judá, tuvo diecinueve reyes y una reina, una mezcla con algunos reyes genuinamente buenos como Ezequías y Josías entre los malvados. Por su persistente idolatría, el norte cayó primero, ante Asiria en el 722 a.C. El sur duró más por sus mejores reyes y el linaje davídico, pero finalmente cayó ante Babilonia en el 586 a.C. Ambos reinos fueron juzgados por la infidelidad, tal como Deuteronomio 28 había advertido." },
+    { id:26, en:"26. How does the Scarlet Thread of redemption run through Solomon's temple dedication (1 Kings 8) and point to Christ?",
+      es:"26. ¿Cómo corre el Hilo Escarlata de la redención a través de la dedicación del templo de Salomón (1 Reyes 8) y apunta a Cristo?",
+      kw_en:[["scarlet thread", "crimson thread", "thread of blood"], ["temple", "temple dedication", "solomon's temple", "dedication"], ["blood", "rivers of blood", "sacrificial blood"], ["sacrifice", "oxen", "sheep", "offerings", "slaughter"], ["lamb", "lamb of god", "christ the lamb"], ["christ", "calvary", "cashed on calvary", "jesus"]],
+      kw_es:[["hilo escarlata", "hilo carmesí", "hilo de sangre"], ["templo", "dedicación del templo", "templo de salomón", "dedicación"], ["sangre", "ríos de sangre", "sangre sacrificial"], ["sacrificio", "bueyes", "ovejas", "ofrendas", "matanza"], ["cordero", "cordero de dios", "cristo el cordero"], ["cristo", "calvario", "cobró en el calvario", "jesús"]],
+      modelEn:"The Scarlet Thread runs powerfully through Solomon's temple dedication in 1 Kings 8. At the dedication Solomon offered so many sacrifices — twenty-two thousand oxen and a hundred twenty thousand sheep — that the bronze altar could not hold them and the courtyard had to be consecrated for the slaughter. The thread that began with one animal in Eden, then Abel's offering, Noah's altar, the ram on Moriah, the Passover lambs, and the Day of Atonement now ran in rivers of blood through the temple courts, and would for almost four hundred years. Every animal that died there was a promissory note that God Himself would one day cash in the Lamb, Christ, on a hill outside that same city.",
+      modelEs:"El Hilo Escarlata corre poderosamente por la dedicación del templo de Salomón en 1 Reyes 8. En la dedicación Salomón ofreció tantos sacrificios — veintidós mil bueyes y ciento veinte mil ovejas — que el altar de bronce no podía contenerlos y el atrio tuvo que ser consagrado para el sacrificio. El hilo que comenzó con un animal en el Edén, luego la ofrenda de Abel, el altar de Noé, el carnero en Moriah, los corderos de la Pascua, y el Día de la Expiación ahora corría en ríos de sangre por los atrios del templo, y lo haría por casi cuatrocientos años. Cada animal que murió allí era un pagaré que Dios mismo cobraría un día en el Cordero, Cristo, en una colina fuera de esa misma ciudad." },
+    { id:27, en:"27. What was the purpose of King Josiah's reforms (2 Kings 22-23)?",
+      es:"27. ¿Cuál fue el propósito de las reformas del rey Josías (2 Reyes 22-23)?",
+      kw_en:[["josiah"], ["book of the law", "lost book", "scroll", "word of god found"], ["covenant", "renewed the covenant", "covenant renewal"], ["remove idols", "removed idols", "destroyed idols", "purged", "reform"], ["passover", "great passover", "kept passover"]],
+      kw_es:[["josías", "josias"], ["libro de la ley", "libro perdido", "rollo", "palabra de dios hallada"], ["pacto", "renovó el pacto", "renovación del pacto"], ["quitar ídolos", "quitó los ídolos", "destruyó ídolos", "purgó", "reforma"], ["pascua", "gran pascua", "celebró la pascua"]],
+      modelEn:"King Josiah came to the throne at eight years old, and during a temple cleanup the lost Book of the Law was found. When it was read to him, Josiah tore his clothes in grief over how far the nation had drifted. He then renewed the covenant before the LORD, removed the idols and pagan worship from the land, and held the greatest Passover since the days of Samuel. The purpose of his reforms was to bring the nation back to the worship of the LORD according to His written Word. Yet despite Josiah's faithfulness, Manasseh's accumulated wickedness had tipped the scale, and the judgment of exile still came.",
+      modelEs:"El rey Josías llegó al trono a los ocho años, y durante una limpieza del templo se halló el perdido Libro de la Ley. Cuando se lo leyeron, Josías rasgó sus vestiduras de dolor por cuánto se había desviado la nación. Entonces renovó el pacto delante del SEÑOR, quitó los ídolos y la adoración pagana de la tierra, y celebró la mayor Pascua desde los días de Samuel. El propósito de sus reformas era hacer volver a la nación a la adoración del SEÑOR conforme a Su Palabra escrita. Sin embargo, a pesar de la fidelidad de Josías, la maldad acumulada de Manasés había inclinado la balanza, y el juicio del exilio vino de todos modos." },
+    { id:28, en:"28. How does 1-2 Chronicles differ from 1-2 Kings in perspective and purpose?",
+      es:"28. ¿En qué se diferencian 1-2 Crónicas de 1-2 Reyes en perspectiva y propósito?",
+      kw_en:[["chronicles", "1-2 chronicles", "book of chronicles"], ["priestly", "priest's perspective", "worship focus"], ["temple", "worship", "can we still worship"], ["davidic line", "david", "southern kings", "genealogy"], ["post-exilic", "for the exiles", "exiles returned", "after the exile", "encouragement"]],
+      kw_es:[["crónicas", "cronicas", "1-2 crónicas", "libro de crónicas"], ["sacerdotal", "perspectiva sacerdotal", "enfoque en la adoración"], ["templo", "adoración", "todavía podemos adorar"], ["linaje davídico", "david", "reyes del sur", "genealogía"], ["post-exílico", "para los exiliados", "exiliados que volvieron", "tras el exilio", "aliento"]],
+      modelEn:"Chronicles differs from Kings in perspective and purpose. Samuel and Kings tell Israel's story from a prophetic angle, recording the failures of both kingdoms. Chronicles retells the story from a priestly angle, written for the exiles who came home to a ruined city and wondered whether God still meant His promises. Chronicles barely mentions the northern kingdom and focuses instead on David, Solomon, the temple, and the southern Davidic line — because the priestly question is whether the people can still worship. It opens with chapters of genealogy whose message is, 'You are still His people; the line still stands.' It is post-exilic encouragement that the covenant endures.",
+      modelEs:"Crónicas difiere de Reyes en perspectiva y propósito. Samuel y Reyes cuentan la historia de Israel desde un ángulo profético, registrando los fracasos de ambos reinos. Crónicas vuelve a contar la historia desde un ángulo sacerdotal, escrito para los exiliados que regresaron a una ciudad en ruinas y se preguntaban si Dios aún sostenía Sus promesas. Crónicas apenas menciona el reino del norte y se centra en David, Salomón, el templo y el linaje davídico del sur — porque la pregunta sacerdotal es si el pueblo todavía puede adorar. Comienza con capítulos de genealogía cuyo mensaje es: 'Ustedes siguen siendo Su pueblo; el linaje sigue en pie.' Es aliento post-exílico de que el pacto perdura." },
+    { id:29, en:"29. Why did God allow the fall of Jerusalem in 586 BC despite having good kings like Hezekiah and Josiah?",
+      es:"29. ¿Por qué permitió Dios la caída de Jerusalén en 586 a.C. a pesar de tener reyes buenos como Ezequías y Josías?",
+      kw_en:[["manasseh", "fifty-five years", "wickedness accumulated"], ["unrepentant", "no repentance", "persisted in sin", "did not repent"], ["judgment", "fall", "exile", "destruction", "fell"], ["covenant", "broke the covenant", "covenant-breaking"], ["deuteronomy 28", "warned", "curses fulfilled", "covenant curse"]],
+      kw_es:[["manasés", "manases", "cincuenta y cinco años", "maldad acumulada"], ["sin arrepentimiento", "no se arrepintió", "persistió en el pecado", "impenitente"], ["juicio", "caída", "exilio", "destrucción", "cayó"], ["pacto", "quebrantó el pacto", "quebrantamiento del pacto"], ["deuteronomio 28", "advirtió", "maldiciones cumplidas", "maldición del pacto"]],
+      modelEn:"God allowed Jerusalem to fall in 586 B.C. despite good kings like Hezekiah and Josiah because the nation's persistent covenant-breaking finally brought the judgment Deuteronomy 28 had long warned of. The reforms of the good kings were real but did not produce lasting repentance in the people. Above all, the fifty-five years of Manasseh's wickedness, unrepented of by the nation as a whole, had accumulated and tipped the scale. The fall was the covenant curse coming due: a holy God who keeps His word judged sustained, unrepentant idolatry, even though He had patiently delayed it through every faithful king.",
+      modelEs:"Dios permitió que Jerusalén cayera en el 586 a.C. a pesar de reyes buenos como Ezequías y Josías porque el persistente quebrantamiento del pacto de la nación finalmente trajo el juicio que Deuteronomio 28 había advertido por largo tiempo. Las reformas de los reyes buenos fueron reales pero no produjeron arrepentimiento duradero en el pueblo. Sobre todo, los cincuenta y cinco años de maldad de Manasés, no arrepentidos por la nación en conjunto, se habían acumulado e inclinado la balanza. La caída fue la maldición del pacto venciéndose: un Dios santo que cumple Su palabra juzgó la idolatría sostenida y sin arrepentimiento, aunque pacientemente la había demorado a través de cada rey fiel." },
+    { id:30, en:"30. Synthesize how the failures of the human kings point forward to the ultimate King, Jesus Christ.",
+      es:"30. Sintetice cómo los fracasos de los reyes humanos apuntan hacia el Rey supremo, Jesucristo.",
+      kw_en:[["human kings", "earthly kings", "the kings"], ["failure", "failed", "flaw", "empty throne", "fell short"], ["davidic", "david's son", "son of david", "line of david"], ["jesus", "christ"], ["eternal king", "king who never falls", "reigns forever", "king forever"], ["messiah", "promised king", "true king"]],
+      kw_es:[["reyes humanos", "reyes terrenales", "los reyes"], ["fracaso", "fracasaron", "defecto", "trono vacío", "quedaron cortos"], ["davídico", "hijo de david", "linaje de david"], ["jesús", "cristo"], ["rey eterno", "rey que nunca cae", "reina para siempre", "rey para siempre"], ["mesías", "rey prometido", "verdadero rey"]],
+      modelEn:"The failures of the human kings all point forward to the ultimate King, Jesus the Messiah. Saul's hollow heart, Solomon's compromised heart, and Manasseh's wicked heart show that every earthly throne in this era was empty in some way — each one a finger pointing toward Bethlehem. Israel asked for a king and got one, then lost him; but God promised through the Davidic Covenant a Son who would reign forever. Christ is David's greater Son, the King who never falls and whose kingdom has no end. Every flawed king reveals the need for the eternal King the prophets ached for and that the kings of Israel could never be.",
+      modelEs:"Los fracasos de los reyes humanos todos apuntan al Rey supremo, Jesús el Mesías. El corazón hueco de Saúl, el corazón comprometido de Salomón, y el corazón malvado de Manasés muestran que todo trono terrenal en esta era estaba vacío de algún modo — cada uno un dedo que señalaba a Belén. Israel pidió un rey y lo obtuvo, y luego lo perdió; pero Dios prometió por el Pacto Davídico un Hijo que reinaría para siempre. Cristo es el Hijo mayor de David, el Rey que nunca cae y cuyo reino no tiene fin. Cada rey defectuoso revela la necesidad del Rey eterno que los profetas anhelaban y que los reyes de Israel nunca pudieron ser." }
+];
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed[idx]) {
+                btn.classList.add('locked');
+                if (letter === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2'; btn.style.borderColor = '#d4af37'; btn.style.fontWeight = '600';
+            }
+            btn.onclick = function() {
+                if (mcRevealed[idx] || unitPassed) return;
+                mcAnswers[idx] = letter;
+                mcRevealed[idx] = true;
+                saveState();
+                renderQuestions();
+            };
+            div.appendChild(btn);
+        });
+
+        if (mcRevealed[idx]) renderMCFeedback(div, q, idx, true);
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en'
+        ? (isMastersLevel() ? ('Short Answer (Questions 21–30) — ' + (getTrack()==='thm' ? 'Master of Theology' : 'Master of Divinity') + ' (graded, 9/10 to pass)') : 'Short Answer (Questions 21–30) — Optional Practice (not graded for Certificate track)')
+        : (isMastersLevel() ? ('Respuesta Corta (Preguntas 21–30) — ' + (getTrack()==='thm' ? 'Maestría en Teología' : 'Maestría en Divinidad') + ' (calificado, 9/10 para aprobar)') : 'Respuesta Corta (Preguntas 21–30) — Práctica Opcional (no se califica para Certificado)');
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.en : q.es;
+        div.appendChild(qText);
+
+        const textarea = document.createElement('textarea');
+        textarea.className = 'kw-answer';
+        textarea.rows = 3;
+        textarea.placeholder = currentLang === 'en' ? 'Type your answer here...' : 'Escriba su respuesta aquí...';
+        textarea.value = kwAnswers[idx] || '';
+        textarea.addEventListener('input', (e) => { kwAnswers[idx] = e.target.value; saveState(); });
+        div.appendChild(textarea);
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'feedback-text';
+        feedbackDiv.style.marginTop = '8px';
+
+        checkBtn.onclick = function() {
+            const result = gradeSA(q, textarea.value);
+            if (result.tooShort) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a sentence).' : 'Escriba una respuesta más completa (al menos una oración).';
+                feedbackDiv.className = 'feedback-text incorrect';
+            } else if (result.pass) {
+                feedbackDiv.innerHTML = currentLang === 'en' ? '✓ Your answer includes the key concepts.' : '✓ Su respuesta incluye los conceptos clave.';
+                feedbackDiv.className = 'feedback-text correct';
+            } else {
+                feedbackDiv.innerHTML = currentLang === 'en' ? `✗ Try to include more of: ${result.missing.join(', ')}.` : `✗ Intente incluir más de: ${result.missing.join(', ')}.`;
+                feedbackDiv.className = 'feedback-text incorrect';
+            }
+        };
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.cssText = 'display:none;margin-top:10px;padding:12px 14px;border-left:4px solid #c9a961;background:#fdf9ed;border-radius:3px;font-size:.92rem;line-height:1.5;';
+        const modelBtn = document.createElement('button');
+        modelBtn.className = 'small';
+        modelBtn.style.marginLeft = '6px';
+        modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+        modelBtn.onclick = function() {
+            if ((textarea.value || '').trim().length < 100) {
+                feedbackDiv.className = 'feedback-text incorrect';
+                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a sentence) — then you can compare it with the model.' : 'Escriba primero su propia respuesta (al menos una oración) — luego podrá compararla con el modelo.';
+                return;
+            }
+            if (modelBox.style.display === 'none') {
+                modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estúdiela:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+                modelBox.style.display = 'block';
+                modelBtn.textContent = currentLang === 'en' ? 'Hide model answer' : 'Ocultar respuesta modelo';
+            } else {
+                modelBox.style.display = 'none';
+                modelBtn.textContent = currentLang === 'en' ? 'Show model answer' : 'Mostrar respuesta modelo';
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(modelBtn);
+        div.appendChild(feedbackDiv);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+    });
+}
+
+function renderMCFeedback(div, q, idx, skipRedraw) {
+    if (!skipRedraw) {
+        const buttons = div.querySelectorAll('.option');
+        buttons.forEach(btn => {
+            const letter = btn.textContent.charAt(0);
+            btn.classList.add('locked');
+            btn.classList.remove('correct', 'wrong');
+            if (letter === q.correct) btn.classList.add('correct');
+            else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+        });
+    }
+    let existing = div.querySelector('.feedback-text');
+    if (existing) existing.remove();
+    const fb = document.createElement('div');
+    const correct = (mcAnswers[idx] === q.correct);
+    fb.className = 'feedback-text ' + (correct ? 'correct' : 'incorrect');
+    if (correct) {
+        fb.innerHTML = '✓ ' + (currentLang === 'en' ? q.fcEn : q.fcEs);
+    } else {
+        const correctLetter = q.correct;
+        fb.innerHTML = (currentLang === 'en' ? `✗ Correct answer: ${correctLetter}. ` : `✗ Respuesta correcta: ${correctLetter}. `) + (currentLang === 'en' ? q.fiEn : q.fiEs);
+    }
+    div.appendChild(fb);
+}
+
+function gradeSA(q, answer) {
+    const text = (answer || '').toLowerCase().trim();
+    if (text.length < 100) return { tooShort: true, pass: false, missing: [] };
+    const isEs = document.body.classList.contains('lang-es');
+    const groups = isEs ? q.kw_es : q.kw_en;
+    const missing = [];
+    let matched = 0;
+    groups.forEach(group => {
+        const hit = group.some(term => text.includes(term.toLowerCase()));
+        if (hit) matched++;
+        else missing.push(group[0]);
+    });
+    const need = Math.max(2, Math.ceil(groups.length * 0.4));
+    return { tooShort: false, pass: matched >= need, missing };
+}
+
+function submitExam() {
+    saveReg();
+    if (!student.name || !student.email) {
+        alert(currentLang === 'en' ? 'Please fill in your registration first.' : 'Por favor complete su registro primero.');
+        return;
+    }
+    if (unitPassed) {
+        showResult('pass', currentLang === 'en' ? '✅ Unit 5 already passed. You may proceed.' : '✅ Unidad 5 ya aprobada. Puede continuar.');
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now()) / 60000);
+        showResult('locked', currentLang === 'en' ? `⏰ Locked for ${wait} more minute(s).` : `⏰ Bloqueado por ${wait} minuto(s) más.`);
+        return;
+    }
+
+    for (let i = 0; i < mcRevealed.length; i++) mcRevealed[i] = true;
+    renderQuestions();
+    let mcCorrect = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === mcQuestions[i].correct) mcCorrect++;
+    }
+
+    let saCorrect = 0;
+    if (isMastersLevel()) {
+        for (let i = 0; i < 10; i++) {
+            const r = gradeSA(kwQuestions[i], kwAnswers[i]);
+            if (!r.tooShort && r.pass) saCorrect++;
+        }
+    }
+    const mcOk = mcCorrect >= PASS_THRESHOLD_MC;
+    const saOk = saCorrect >= PASS_THRESHOLD_SA;
+
+    function passUnit(detail) {
+        unitPassed = true;
+        localStorage.setItem(UNIT_PASSED_KEY, 'true');
+        progress[`unit${UNIT_NUM}`] = true;
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+        localStorage.removeItem(LOCKOUT_KEY);
+        localStorage.removeItem(SA_LOCK_KEY);
+        const msg = currentLang === 'en'
+            ? `✅ PASSED. ${detail}. Unit 5 complete! Your answers are marked below. Review them, then continue when ready.`
+            : `✅ APROBADO. ${detail}. ¡Unidad 5 completa! Sus respuestas están marcadas abajo. Repáselas, luego continúe cuando esté listo.`;
+        showResult('pass', msg);
+        updateProgressGrid();
+    }
+
+    if (!isMastersLevel()) {
+        const detail = currentLang === 'en' ? `MC: ${mcCorrect}/20 (need 18)` : `OM: ${mcCorrect}/20 (necesita 18)`;
+        if (mcOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+                : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    if (mcPreviouslyPassed) {
+        const detail = currentLang === 'en'
+            ? `MC: ✓ banked · SA: ${saCorrect}/10 (need 9)`
+            : `OM: ✓ en banco · RC: ${saCorrect}/10 (necesita 9)`;
+        if (saOk) {
+            passUnit(detail);
+        } else {
+            lockUntil = Date.now() + lockoutMs();
+            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+            const msg = currentLang === 'en'
+                ? `Your multiple-choice pass is safe. ${detail}. Review the lesson and try the short-answer section again in ${lockMinutes()} minute(s).`
+                : `Su aprobación de opción múltiple está a salvo. ${detail}. Repase la lección y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).`;
+            showResult('fail', msg);
+            startLockTimer();
+        }
+        return;
+    }
+
+    const detail = currentLang === 'en'
+        ? `MC: ${mcCorrect}/20 (need 18) · SA: ${saCorrect}/10 (need 9)`
+        : `OM: ${mcCorrect}/20 (necesita 18) · RC: ${saCorrect}/10 (necesita 9)`;
+    if (mcOk && saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        passUnit(detail);
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `MC ${mcCorrect}/20 ✓ passed and banked. SA ${saCorrect}/10 (need 9). When you try again in ${lockMinutes()} minute(s), you'll only need to resubmit the short answers — MC stays passed.`
+            : `OM ${mcCorrect}/20 ✓ aprobado y guardado. RC ${saCorrect}/10 (necesita 9). Al reintentar en ${lockMinutes()} minuto(s), solo necesitará reenviar las respuestas cortas — el OM permanece aprobado.`;
+        showResult('fail', msg);
+        startLockTimer();
+    } else {
+        lockUntil = Date.now() + lockoutMs();
+        localStorage.setItem(LOCKOUT_KEY, String(lockUntil));
+        const msg = currentLang === 'en'
+            ? `Not yet — but you're close. ${detail}. Take ${lockMinutes()} minute(s) to review the lesson, then try again. You've got this.`
+            : `Aún no, pero ya casi. ${detail}. Tómese ${lockMinutes()} minuto(s) para repasar la lección y luego intente de nuevo. Usted puede.`;
+        showResult('fail', msg);
+        startLockTimer();
+    }
+}
+
+function showResult(cls, html) {
+    const r = document.getElementById('examResult');
+    r.style.display = 'block';
+    r.className = 'exam-result ' + cls;
+    r.innerHTML = html;
+}
+
+function startLockTimer() {
+    const r = document.getElementById('examResult');
+    const interval = setInterval(() => {
+        const remaining = lockUntil - Date.now();
+        if (remaining <= 0) { clearInterval(interval); r.innerHTML += currentLang === 'en' ? '<br><em>Lockout ended. You may retry.</em>' : '<br><em>Bloqueo terminado. Puede reintentar.</em>'; return; }
+        const m = Math.floor(remaining / 60000);
+        const s = Math.floor((remaining % 60000) / 1000);
+        const note = currentLang === 'en' ? `<br>⏱️ Locked: ${m}:${String(s).padStart(2,'0')}` : `<br>⏱️ Bloqueado: ${m}:${String(s).padStart(2,'0')}`;
+        const base = r.innerHTML.split('<br>⏱️')[0];
+        r.innerHTML = base + note;
+    }, 1000);
+}
+
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? 'Reset this unit? All your answers and pass status for Unit 5 will be cleared. (Your name, email, and other units are not affected.)'
+        : '¿Reiniciar esta unidad? Todas sus respuestas y el estado de aprobación para la Unidad 5 se borrarán. (Su nombre, correo y otras unidades no se afectan.)';
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcRevealed = new Array(20).fill(false);
+    unitPassed = false;
+    mcPreviouslyPassed = false;
+    lockUntil = 0;
+    localStorage.removeItem(UNIT_STATE_KEY);
+    localStorage.removeItem(UNIT_PASSED_KEY);
+    localStorage.removeItem(LOCKOUT_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    if (progress[`unit${UNIT_NUM}`]) {
+        delete progress[`unit${UNIT_NUM}`];
+        localStorage.setItem(COURSE_KEY, JSON.stringify(progress));
+    }
+    document.getElementById('examResult').style.display = 'none';
+    renderQuestions();
+    updateProgressGrid();
+}
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (currentLang === 'en') { currentLang = 'es'; document.body.className = 'lang-es'; this.textContent = 'English'; }
+    else { currentLang = 'en'; document.body.className = 'lang-en'; this.textContent = 'Español'; }
+    renderTrackBanner(); renderReadout(); renderQuestions();
+};
+
+// ========== REGISTRATION READOUT (read-only on Units 2-13) ==========
+function renderReadout() {
+    const el = document.getElementById('regReadout');
+    if (!el) return;
+    const saved = localStorage.getItem(STUDENT_KEY);
+    const en = (currentLang !== 'es');
+    if (!saved) {
+        el.innerHTML = en
+            ? 'No registration found. Please <a href="CTSUnit1.html">register on Unit 1</a> before taking this exam.'
+            : 'No se encontr\u00f3 registro. Por favor <a href="CTSUnit1.html">reg\u00edstrese en la Unidad 1</a> antes de tomar este examen.';
+        el.className = 'reg-readout missing';
+        return;
+    }
+    const st = JSON.parse(saved);
+    const progLabel = st.program || 'Certificate of Ministry';
+    const lblName = en ? 'Name' : 'Nombre';
+    const lblEmail = en ? 'Email' : 'Correo';
+    const lblCountry = en ? 'Country' : 'Pa\u00eds';
+    const lblProg = en ? 'Program' : 'Programa';
+    const note = en
+        ? 'Registered on Unit 1. To change your details, return to Unit 1.'
+        : 'Registrado en la Unidad 1. Para cambiar sus datos, vuelva a la Unidad 1.';
+    el.innerHTML =
+        '<div class="reg-readout-grid">' +
+        '<div><strong>' + lblName + ':</strong> ' + (st.name||'') + '</div>' +
+        '<div><strong>' + lblEmail + ':</strong> ' + (st.email||'') + '</div>' +
+        '<div><strong>' + lblCountry + ':</strong> ' + (st.country||'') + '</div>' +
+        '<div><strong>' + lblProg + ':</strong> ' + progLabel + '</div>' +
+        '</div><div class="reg-readout-note">' + note + '</div>';
+    el.className = 'reg-readout';
+}
+
+document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+loadReg();
+renderReadout();
+loadState();
+updateProgressGrid();
+renderTrackBanner();
+renderQuestions();
+if (unitPassed) showResult('pass', currentLang === 'en' ? '✅ Unit 5 already passed.' : '✅ Unidad 5 ya aprobada.');
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSOTSReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

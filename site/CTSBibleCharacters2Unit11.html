@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Characters II — Unit 11</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.option.selected { background:#eef3fb; border-color:#9db8e0; box-shadow: inset 0 0 0 2px #9db8e0; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Certificate →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Bible Characters II — Unit 11: Paul — From Persecutor to Apostle of Grace</span><span class="lang-es">📖 Personajes de la Biblia II — Unidad 11: Pablo — De Perseguidor a Apóstol de la Gracia</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But by the grace of God I am what I am, and His grace toward me was not in vain." — 1 Corinthians 15:10 (NKJV)</span><span class="lang-es">«Pero por la gracia de Dios soy lo que soy; y su gracia no ha sido en vano para conmigo.» — 1 Corintios 15:10 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en"><p>There is no more dramatic turnabout in all of history than the conversion of Saul of Tarsus. One day he was the fiercest enemy the young church had, hunting down believers and dragging them to prison; not long after, he was the church's greatest missionary, willing to be beaten, stoned, and finally killed for the very name he had tried to destroy. What could account for such a reversal? Only one thing: on a road to Damascus, Saul the persecutor met the risen Christ — and the grace that mastered him there is the same grace that can master and send any life.</p><p><strong>Subject:</strong> Paul — from persecutor to apostle.</p><p><strong>Proposition:</strong> The grace of the risen Christ, who appeared on the Damascus road, can master and send any life.</p><p>We will trace three movements in the life of Paul.</p><h2>I. A Deadly Mistake</h2><p>Before he was Paul the apostle, he was Saul the Pharisee, and he was deadly in earnest. He was, as Luke puts it, "breathing threats and murder against the disciples of the Lord." He led the way in arresting Christians, and when Stephen was stoned to death, the witnesses laid their coats at the feet of a young man named Saul, who stood there consenting to his death. Paul never softened what he had done:</p><div class="scripture">For you have heard of my former conduct in Judaism, how I persecuted the church of God beyond measure and tried to destroy it. (Galatians 1:13, NKJV)</div><p>And yet, in his own eyes, Saul was not a wicked man at all — he was a religious one. His confidence rested entirely in the flesh, in his pedigree and his performance. He was "circumcised the eighth day, of the stock of Israel, of the tribe of Benjamin, a Hebrew of the Hebrews; concerning the law, a Pharisee... concerning the righteousness which is in the law, blameless" (Philippians 3:5-6). Here was a man who had everything religion could give and was still dead wrong about the most important thing in the universe. His zeal was real, but it was zeal without knowledge, and it had made him an enemy of God while he thought he was serving Him. That is the most dangerous mistake a person can make — to be sincerely, religiously, and completely wrong. Saul reminds us that a person can be moral, devout, and busy in religion and still be utterly lost, needing not merely to try harder but to be met and changed by Christ.</p><h2>II. A Dramatic Meeting</h2><p>Then came the day that split Saul's life in two. He was on the road to Damascus, carrying letters that authorized him to arrest still more believers, when suddenly a light from heaven, brighter than the noonday sun, flashed around him and he fell to the ground. Out of the light came a voice:</p><div class="scripture">Saul, Saul, why are you persecuting Me? (Acts 9:4, NKJV)</div><p>Trembling, Saul asked, "Who are You, Lord?" And the answer changed everything: "I am Jesus, whom you are persecuting." Notice what the Lord said — not "why are you persecuting My people," but "why are you persecuting <em>Me</em>." To touch the church is to touch Christ Himself. In that moment Saul learned that the Jesus he thought was dead was alive, and that the believers he was hunting belonged to a living Lord. Blinded by the glory, he was led by the hand into the city, and three days later, through a disciple named Ananias, his sight was restored and he was filled with the Spirit. When the Lord first sent Ananias to him, Ananias was afraid, for Saul's reputation had gone before him; but the Lord said, "Go, for he is a chosen vessel of Mine to bear My name before Gentiles, kings, and the children of Israel." The hunter of the church had been chosen to carry its message to the world. The persecutor had become a believer, and his only question now was the right one: "Lord, what do You want me to do?"</p><p>Everything Saul had once counted as gain he now saw in a new light:</p><div class="scripture">But what things were gain to me, these I have counted loss for Christ. Yet indeed I also count all things loss for the excellence of the knowledge of Christ Jesus my Lord... that I may be found in Him, not having my own righteousness, which is from the law, but that which is through faith in Christ. (Philippians 3:7-9, NKJV)</div><p>His pedigree, his law-keeping, his blameless record — all of it he now counted as loss, even as rubbish, compared with knowing Christ. For he had discovered the heart of the gospel: that a man is not saved by a righteousness of his own, earned by keeping the law, but by a righteousness received through faith in Christ. The proudest law-keeper of his generation became the great preacher of grace.</p><h2>III. A Determined Mission</h2><p>The change was not in word only; it remade his whole life. The very energy that had driven Saul across Judea to persecute Christians now drove Paul across the known world to preach Christ. City after city, he carried the gospel — to Jews and Gentiles, to common people and kings — planting churches everywhere he went. From Antioch he sailed across Asia Minor and into Greece, reaching at last the very heart of the empire in Rome. He reasoned in synagogues, stood before governors and King Agrippa, and finally appealed to Caesar himself; and even his imprisonments became pulpits, for from his prison cells he wrote letters that still feed the church today. And it cost him everything. He was beaten with rods, whipped with thirty-nine lashes again and again, stoned and left for dead, shipwrecked, hungry, cold, and imprisoned. Yet through it all he never flinched, for he was a man under orders:</p><div class="scripture">For if I preach the gospel, I have nothing to boast of, for necessity is laid upon me; yes, woe is me if I do not preach the gospel! (1 Corinthians 9:16, NKJV)</div><p>He could no more stop preaching than he could stop breathing; the love of Christ compelled him. And when at last he came to the end, awaiting execution in a Roman prison, he did not look back with regret but forward with triumph:</p><div class="scripture">I have fought the good fight, I have finished the race, I have kept the faith. (2 Timothy 4:7, NKJV)</div><p>What a way to finish — the man who began by trying to destroy the faith ended by keeping it to the death.</p><h2>The Resurrection Took Away His Ignorance</h2><p>How do we explain a transformation so complete? Saul gained nothing in this world by it — no wealth, no comfort, no safety, only hardship and finally a martyr's death. No clever argument and no earthly reward turned him. The only thing that accounts for it is that he truly met the risen Lord:</p><div class="scripture">Then last of all He was seen by me also, as by one born out of due time. For I am the least of the apostles, who am not worthy to be called an apostle, because I persecuted the church of God. But by the grace of God I am what I am... (1 Corinthians 15:8-10, NKJV)</div><p>There it is — "by the grace of God I am what I am." Paul never got over it. The man who had once trusted in his own blamelessness now called himself the chief of sinners and pointed only to grace:</p><div class="scripture">This is a faithful saying and worthy of all acceptance, that Christ Jesus came into the world to save sinners, of whom I am chief. (1 Timothy 1:15, NKJV)</div><p>Next to the Lord Jesus Himself, Paul may be the most influential person in all of Christian history — the writer of much of the New Testament, the apostle to the nations. And the whole of it traces back to a few moments on the Damascus road when a living Christ stopped a raging persecutor in his tracks. He met the risen Lord, and nothing was ever the same.</p><h2>Grace Alone</h2><p>This is the lesson of Paul's life: grace alone. What Saul could never earn by all his law-keeping and all his zeal, the risen Christ gave him freely. The chief of sinners became the apostle of grace, not because he reformed himself, but because grace laid hold of him. And the same grace is offered to us. If the risen Christ could stop Saul of Tarsus on the road, master his hatred, and send him to the ends of the earth, then no one is beyond His reach and no life is too far gone for Him to use. He is still meeting people on their own Damascus roads, and to all who answer, "Lord, what do You want me to do?" He gives the same grace that made a persecutor into an apostle. No résumé recommends us to Him, and no record disqualifies us from Him; grace alone makes the difference, from first to last.</p></div>
+<div class="lang-es"><p>No hay en toda la historia un cambio más dramático que la conversión de Saulo de Tarso. Un día era el enemigo más feroz que tenía la joven iglesia, persiguiendo a los creyentes y arrastrándolos a la cárcel; no mucho después, era el mayor misionero de la iglesia, dispuesto a ser golpeado, apedreado y al fin muerto por el mismo nombre que había tratado de destruir. ¿Qué podría explicar semejante cambio? Solo una cosa: en un camino a Damasco, Saulo el perseguidor se encontró con el Cristo resucitado —y la gracia que lo dominó allí es la misma gracia que puede dominar y enviar cualquier vida—.</p><p><strong>Tema:</strong> Pablo — de perseguidor a apóstol.</p><p><strong>Proposición:</strong> La gracia del Cristo resucitado, que apareció en el camino de Damasco, puede dominar y enviar cualquier vida.</p><p>Trazaremos tres movimientos en la vida de Pablo.</p><h2>I. Un Error Mortal</h2><p>Antes de ser Pablo el apóstol, fue Saulo el fariseo, y lo era con mortal seriedad. Estaba, como dice Lucas, «respirando aún amenazas y muerte contra los discípulos del Señor». Iba al frente en el arresto de los cristianos, y cuando Esteban fue apedreado, los testigos pusieron sus ropas a los pies de un joven llamado Saulo, que estaba allí consintiendo en su muerte. Pablo nunca suavizó lo que había hecho:</p><div class="scripture">Porque ya habéis oído acerca de mi conducta en otro tiempo en el judaísmo, que perseguía sobremanera a la iglesia de Dios, y la asolaba. (Gálatas 1:13, RVG)</div><p>Y sin embargo, a sus propios ojos, Saulo no era un hombre malvado en absoluto —era un hombre religioso—. Su confianza descansaba enteramente en la carne, en su linaje y su desempeño. Había sido «circuncidado al octavo día, del linaje de Israel, de la tribu de Benjamín, hebreo de hebreos; en cuanto a la ley, fariseo... en cuanto a la justicia que es en la ley, irreprensible» (Filipenses 3:5-6). Aquí había un hombre que tenía todo lo que la religión podía dar y aun así estaba completamente equivocado en lo más importante del universo. Su celo era real, pero era celo sin conocimiento, y lo había hecho enemigo de Dios mientras creía que le servía. Ese es el error más peligroso que una persona puede cometer —estar sincera, religiosa y completamente equivocado—. Saulo nos recuerda que una persona puede ser moral, devota y ocupada en la religión y aun así estar completamente perdida, necesitando no simplemente esforzarse más, sino ser encontrada y cambiada por Cristo.</p><h2>II. Un Encuentro Dramático</h2><p>Entonces vino el día que partió en dos la vida de Saulo. Iba por el camino de Damasco, llevando cartas que lo autorizaban a arrestar a más creyentes, cuando de repente una luz del cielo, más brillante que el sol del mediodía, resplandeció a su alrededor y cayó a tierra. De la luz salió una voz:</p><div class="scripture">Saulo, Saulo, ¿por qué me persigues? (Hechos 9:4, RVG)</div><p>Temblando, Saulo preguntó: «¿Quién eres, Señor?». Y la respuesta lo cambió todo: «Yo soy Jesús a quien tú persigues». Note lo que dijo el Señor —no «¿por qué persigues a mi pueblo?», sino «¿por qué me persigues <em>a mí</em>?»—. Tocar a la iglesia es tocar a Cristo mismo. En aquel momento Saulo aprendió que el Jesús que creía muerto estaba vivo, y que los creyentes que perseguía pertenecían a un Señor viviente. Cegado por la gloria, fue llevado de la mano a la ciudad, y tres días después, por medio de un discípulo llamado Ananías, su vista fue restaurada y fue lleno del Espíritu. Cuando el Señor envió primero a Ananías hacia él, Ananías tuvo miedo, porque la fama de Saulo lo precedía; pero el Señor dijo: «Ve, porque instrumento escogido me es éste, para llevar mi nombre en presencia de los gentiles, y de reyes, y de los hijos de Israel». El perseguidor de la iglesia había sido escogido para llevar su mensaje al mundo. El perseguidor se había vuelto creyente, y su única pregunta ahora era la correcta: «Señor, ¿qué quieres que yo haga?».</p><p>Todo lo que Saulo había contado como ganancia ahora lo veía bajo una nueva luz:</p><div class="scripture">Pero las cosas que para mí eran ganancia, las he estimado como pérdida por amor de Cristo. Y ciertamente, aun estimo todas las cosas como pérdida por la excelencia del conocimiento de Cristo Jesús, mi Señor... y ser hallado en él, no teniendo mi propia justicia, que es por la ley, sino la que es por la fe de Cristo. (Filipenses 3:7-9, RVG)</div><p>Su linaje, su cumplimiento de la ley, su récord irreprensible —todo ello lo contaba ahora como pérdida, aun como estiércol, comparado con conocer a Cristo—. Porque había descubierto el corazón del evangelio: que un hombre no es salvo por una justicia propia, ganada por guardar la ley, sino por una justicia recibida por la fe en Cristo. El más orgulloso cumplidor de la ley de su generación llegó a ser el gran predicador de la gracia.</p><h2>III. Una Misión Decidida</h2><p>El cambio no fue solo de palabra; rehízo toda su vida. La misma energía que había llevado a Saulo por toda Judea a perseguir cristianos ahora llevaba a Pablo por todo el mundo conocido a predicar a Cristo. Ciudad tras ciudad, llevó el evangelio —a judíos y gentiles, a gente común y a reyes— plantando iglesias por dondequiera que iba. Desde Antioquía navegó por toda Asia Menor y entró en Grecia, llegando al fin al corazón mismo del imperio en Roma. Razonó en las sinagogas, se presentó ante gobernadores y ante el rey Agripa, y finalmente apeló a César mismo; y aun sus encarcelamientos se volvieron púlpitos, porque desde sus celdas escribió cartas que todavía alimentan a la iglesia hoy. Y le costó todo. Fue golpeado con varas, azotado con treinta y nueve latigazos una y otra vez, apedreado y dejado por muerto, naufragó, pasó hambre y frío, y fue encarcelado. Pero a través de todo ello nunca vaciló, porque era un hombre bajo órdenes:</p><div class="scripture">Pues si predico el evangelio, no tengo por qué gloriarme; porque me es impuesta necesidad; y ¡ay de mí si no anunciare el evangelio! (1 Corintios 9:16, RVG)</div><p>No podía dejar de predicar más de lo que podía dejar de respirar; el amor de Cristo lo constreñía. Y cuando al fin llegó al final, esperando la ejecución en una cárcel romana, no miró atrás con remordimiento sino adelante con triunfo:</p><div class="scripture">He peleado la buena batalla, he acabado la carrera, he guardado la fe. (2 Timoteo 4:7, RVG)</div><p>Qué manera de terminar —el hombre que comenzó tratando de destruir la fe terminó guardándola hasta la muerte—.</p><h2>La Resurrección Le Quitó la Ignorancia</h2><p>¿Cómo explicamos una transformación tan completa? Saulo no ganó nada en este mundo con ella —ni riqueza, ni comodidad, ni seguridad, solo dificultad y al fin una muerte de mártir—. Ningún argumento ingenioso ni recompensa terrenal lo cambió. Lo único que lo explica es que verdaderamente se encontró con el Señor resucitado:</p><div class="scripture">Y al último de todos, como a un abortivo, me apareció a mí también. Porque yo soy el más pequeño de los apóstoles, que no soy digno de ser llamado apóstol, porque perseguí a la iglesia de Dios. Pero por la gracia de Dios soy lo que soy... (1 Corintios 15:8-10, RVG)</div><p>Ahí está —«por la gracia de Dios soy lo que soy»—. Pablo nunca lo superó. El hombre que una vez había confiado en su propia irreprensibilidad ahora se llamaba el primero de los pecadores y señalaba solo a la gracia:</p><div class="scripture">Palabra fiel y digna de ser recibida de todos: que Cristo Jesús vino al mundo para salvar a los pecadores, de los cuales yo soy el primero. (1 Timoteo 1:15, RVG)</div><p>Junto al Señor Jesús mismo, Pablo bien puede ser la persona más influyente de toda la historia cristiana —el escritor de gran parte del Nuevo Testamento, el apóstol a las naciones—. Y todo ello se remonta a unos pocos momentos en el camino de Damasco cuando un Cristo viviente detuvo en seco a un perseguidor furioso. Se encontró con el Señor resucitado, y nada volvió a ser igual.</p><h2>Solo la Gracia</h2><p>Esta es la lección de la vida de Pablo: solo la gracia. Lo que Saulo nunca pudo ganar con todo su cumplimiento de la ley y todo su celo, el Cristo resucitado se lo dio gratuitamente. El primero de los pecadores llegó a ser el apóstol de la gracia, no porque se reformara a sí mismo, sino porque la gracia lo asió. Y la misma gracia se nos ofrece a nosotros. Si el Cristo resucitado pudo detener a Saulo de Tarso en el camino, dominar su odio, y enviarlo hasta los confines de la tierra, entonces nadie está fuera de su alcance y ninguna vida está demasiado perdida para que Él la use. Todavía está encontrando a las personas en sus propios caminos de Damasco, y a todos los que responden: «Señor, ¿qué quieres que yo haga?», les da la misma gracia que hizo de un perseguidor un apóstol. Ningún currículum nos recomienda ante Él, y ningún historial nos descalifica de Él; solo la gracia hace la diferencia, del principio al fin.</p></div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 11 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 11 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+// CTS unit engine (Cook's validated masters engine). Storage-hardened lsGet/lsSet/lsDel,
+// cts_track gating, MC-pass banking, SA-only lockout, split kw_en/kw_es, mid-exam
+// save/restore, Reset, 3s auto-redirect on pass. MC: one attempt per question, locked.
+const UNIT = 11;
+const COURSE = 'CTSBC2';
+const FILE_PREFIX = 'CTSBibleCharacters2';
+const NEXT_UNIT_URL = 'CTSBibleCharacters2Certificate.html';
+const totalUnits = 11;
+let currentUnit = UNIT;
+
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - Jonah — The Prophet Who Ran from God", "Unit 2 - Hosea — The Prophet Who Loved an Unfaithful Wife", "Unit 3 - Jeremiah — The Weeping Prophet Who Stayed Faithful", "Unit 4 - Esther — For Such a Time as This: The Hidden Providence of God", "Unit 5 - Ezra — A Fresh New Start, the Scribe Who Restored God’s Word", "Unit 6 - John the Baptist — The Forerunner Who Doubted in the Dark", "Unit 7 - Peter — From Fisherman to the Rock Who Feeds the Sheep", "Unit 8 - Thomas — The Doubter Who Made the Great Confession", "Unit 9 - Lazarus — The Dead Man Jesus Called Back to Life", "Unit 10 - Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ", "Unit 11 - Paul — From Persecutor to Apostle of Grace"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        const t = unitTitlesEn[i-1] || ('Unit ' + i);
+        grid.innerHTML += `<a href="${FILE_PREFIX}Unit${i}.html" class="${cls}" title="${t}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+const mcQuestions = [{"textEn":"1. Who was Saul before his conversion?","textEs":"1. ¿Quién era Saulo antes de su conversión?","optionsEn":["A zealous Pharisee who persecuted the church", "A fisherman", "A Roman soldier", "A tax collector"],"optionsEs":["Un fariseo celoso que perseguía a la iglesia", "Un pescador", "Un soldado romano", "Un cobrador de impuestos"],"explanationEn":"Saul was a zealous Pharisee, the fiercest enemy of the young church.","explanationEs":"Saulo era un fariseo celoso, el enemigo más feroz de la joven iglesia.","correct":0},{"textEn":"2. What does \"breathing threats and murder\" describe about Saul?","textEs":"2. ¿Qué describe «respirando amenazas y muerte» acerca de Saulo?","optionsEn":["He preached the gospel boldly", "He arrested Christians and consented to Stephen's death", "He healed the sick", "He kept quietly to himself"],"optionsEs":["Predicaba el evangelio con valentía", "Arrestaba cristianos y consintió en la muerte de Esteban", "Sanaba a los enfermos", "Se mantenía callado y aparte"],"explanationEn":"Saul led the way in arresting believers and stood consenting to Stephen's stoning.","explanationEs":"Saulo iba al frente en arrestar creyentes y estuvo consintiendo en la lapidación de Esteban.","correct":1},{"textEn":"3. Where was Saul's confidence placed?","textEs":"3. ¿En qué estaba puesta la confianza de Saulo?","optionsEn":["In money", "In the Roman government", "In his ignorance", "In the flesh — circumcised the eighth day, a Hebrew of the Hebrews, blameless as to the law"],"optionsEs":["En el dinero", "En el gobierno romano", "En su ignorancia", "En la carne — circuncidado al octavo día, hebreo de hebreos, irreprensible en cuanto a la ley"],"explanationEn":"Saul had everything religion could give, yet was completely wrong about Christ.","explanationEs":"Saulo tenía todo lo que la religión podía dar, y aun así estaba completamente equivocado acerca de Cristo.","correct":3},{"textEn":"4. What happened on the road to Damascus?","textEs":"4. ¿Qué pasó en el camino de Damasco?","optionsEn":["Saul was arrested by soldiers", "Saul fell ill with fever", "A light from heaven shone and Saul fell to the ground", "A storm wrecked his caravan"],"optionsEs":["Saulo fue arrestado por soldados", "Saulo enfermó de fiebre", "Una luz del cielo resplandeció y Saulo cayó a tierra", "Una tormenta destruyó su caravana"],"explanationEn":"A light brighter than the noonday sun flashed around Saul, and he fell.","explanationEs":"Una luz más brillante que el sol del mediodía resplandeció alrededor de Saulo, y cayó.","correct":2},{"textEn":"5. What did the voice from heaven say?","textEs":"5. ¿Qué dijo la voz del cielo?","optionsEn":["\"Saul, Saul, why are you persecuting Me?\"", "\"Why do you sleep?\"", "\"Repent and be baptized\"", "\"Come and see\""],"optionsEs":["«Saulo, Saulo, ¿por qué me persigues?»", "«¿Por qué duermes?»", "«Arrepiéntete y bautízate»", "«Ven y ve»"],"explanationEn":"Not \"why persecute My people,\" but \"Me\" — to touch the church is to touch Christ.","explanationEs":"No «¿por qué persigues a mi pueblo?», sino «a mí» — tocar a la iglesia es tocar a Cristo.","correct":0},{"textEn":"6. Who did the voice say He was?","textEs":"6. ¿Quién dijo la voz que Él era?","optionsEn":["The God of Abraham only", "An angel of the Lord", "The prophet Elijah", "\"I am Jesus, whom you are persecuting\""],"optionsEs":["Solo el Dios de Abraham", "Un ángel del Señor", "El profeta Elías", "«Yo soy Jesús a quien tú persigues»"],"explanationEn":"Saul learned that the Jesus he thought was dead was alive.","explanationEs":"Saulo aprendió que el Jesús que creía muerto estaba vivo.","correct":3},{"textEn":"7. What happened to Saul physically after the encounter?","textEs":"7. ¿Qué le pasó a Saulo físicamente después del encuentro?","optionsEn":["He was paralyzed", "He lost his voice", "He was blinded, and later given his sight again", "He was unharmed"],"optionsEs":["Quedó paralizado", "Perdió la voz", "Quedó ciego, y luego le fue devuelta la vista", "Quedó ileso"],"explanationEn":"Blinded by the glory, he was healed three days later through Ananias.","explanationEs":"Cegado por la gloria, fue sanado tres días después por medio de Ananías.","correct":2},{"textEn":"8. How did Saul respond to the risen Christ?","textEs":"8. ¿Cómo respondió Saulo al Cristo resucitado?","optionsEn":["He fled to Jerusalem", "He asked, \"Lord, what do You want me to do?\"", "He denied what he had seen", "He demanded proof"],"optionsEs":["Huyó a Jerusalén", "Preguntó: «Señor, ¿qué quieres que yo haga?»", "Negó lo que había visto", "Exigió pruebas"],"explanationEn":"He surrendered at once to the One he had been fighting.","explanationEs":"Se rindió de inmediato a Aquel a quien había estado combatiendo.","correct":1},{"textEn":"9. After meeting Christ, how did Paul regard his former gains?","textEs":"9. Después de encontrarse con Cristo, ¿cómo consideró Pablo sus ganancias anteriores?","optionsEn":["He counted them loss — even rubbish — for Christ", "He kept them secret", "He prized them more than ever", "He sold them for money"],"optionsEs":["Las contó como pérdida — aun estiércol — por Cristo", "Las guardó en secreto", "Las apreció más que nunca", "Las vendió por dinero"],"explanationEn":"His pedigree and law-keeping were nothing next to knowing Christ.","explanationEs":"Su linaje y cumplimiento de la ley no eran nada al lado de conocer a Cristo.","correct":0},{"textEn":"10. What righteousness did Paul now seek?","textEs":"10. ¿Qué justicia buscaba ahora Pablo?","optionsEn":["The righteousness of the Pharisees", "A righteousness earned by good works", "Not his own from the law, but the righteousness that is through faith in Christ", "No righteousness at all"],"optionsEs":["La justicia de los fariseos", "Una justicia ganada por buenas obras", "No la suya por la ley, sino la justicia que es por la fe en Cristo", "Ninguna justicia en absoluto"],"explanationEn":"This is the heart of the gospel: righteousness received by faith, not earned.","explanationEs":"Este es el corazón del evangelio: justicia recibida por la fe, no ganada.","correct":2},{"textEn":"11. How was Paul's mission a reversal of his past?","textEs":"11. ¿Cómo fue la misión de Pablo un cambio de su pasado?","optionsEn":["He stopped traveling", "The man who had gone everywhere persecuting Christians now went everywhere preaching Christ", "He kept the gospel to himself", "He returned to persecuting Christians"],"optionsEs":["Dejó de viajar", "El hombre que había ido por todas partes persiguiendo cristianos ahora iba por todas partes predicando a Cristo", "Guardó el evangelio para sí", "Volvió a perseguir cristianos"],"explanationEn":"The same energy that had persecuted the church now spread the gospel.","explanationEs":"La misma energía que había perseguido a la iglesia ahora esparcía el evangelio.","correct":1},{"textEn":"12. What did Paul endure for the gospel?","textEs":"12. ¿Qué soportó Pablo por el evangelio?","optionsEn":["Wealth and ease", "A quiet, undisturbed life", "Universal applause", "Beatings, whippings, stoning, and imprisonment, yet he never flinched"],"optionsEs":["Riqueza y comodidad", "Una vida tranquila y sin perturbaciones", "Aplauso universal", "Golpes, azotes, lapidación y cárcel, y sin embargo nunca vaciló"],"explanationEn":"He was stoned and left for dead, shipwrecked, and imprisoned, yet pressed on.","explanationEs":"Fue apedreado y dejado por muerto, naufragó y fue encarcelado, y aun así siguió adelante.","correct":3},{"textEn":"13. Why did Paul keep preaching despite suffering?","textEs":"13. ¿Por qué siguió Pablo predicando a pesar del sufrimiento?","optionsEn":["For money", "For fame", "\"Woe is me if I do not preach the gospel\" — he was under compulsion", "Because it was easy"],"optionsEs":["Por dinero", "Por fama", "«¡Ay de mí si no anunciare el evangelio!» — estaba bajo necesidad", "Porque era fácil"],"explanationEn":"He could no more stop preaching than stop breathing; Christ's love compelled him.","explanationEs":"No podía dejar de predicar más de lo que podía dejar de respirar; el amor de Cristo lo constreñía.","correct":2},{"textEn":"14. What did Paul write near the end of his life?","textEs":"14. ¿Qué escribió Pablo cerca del final de su vida?","optionsEn":["\"I have failed and lost all\"", "\"I have fought the good fight, I have finished the race, I have kept the faith\"", "\"I never knew Christ\"", "\"Let me rest now\""],"optionsEs":["«He fracasado y lo he perdido todo»", "«He peleado la buena batalla, he acabado la carrera, he guardado la fe»", "«Nunca conocí a Cristo»", "«Déjenme descansar ahora»"],"explanationEn":"He looked back not with regret but forward with triumph.","explanationEs":"Miró atrás no con remordimiento sino adelante con triunfo.","correct":1},{"textEn":"15. What explains so total a turnabout in Saul?","textEs":"15. ¿Qué explica un cambio tan total en Saulo?","optionsEn":["A change of politics", "A clever argument", "A reward offered to him", "He really saw the risen Lord"],"optionsEs":["Un cambio de política", "Un argumento ingenioso", "Una recompensa que se le ofreció", "Verdaderamente vio al Señor resucitado"],"explanationEn":"He gained nothing in this world; only the risen Christ explains the change.","explanationEs":"No ganó nada en este mundo; solo el Cristo resucitado explica el cambio.","correct":3},{"textEn":"16. How did Paul describe himself in 1 Corinthians 15?","textEs":"16. ¿Cómo se describió Pablo en 1 Corintios 15?","optionsEn":["\"The least of the apostles... but by the grace of God I am what I am\"", "The greatest of the apostles", "A self-made man", "Equal to Christ"],"optionsEs":["«El más pequeño de los apóstoles... pero por la gracia de Dios soy lo que soy»", "El más grande de los apóstoles", "Un hombre hecho a sí mismo", "Igual a Cristo"],"explanationEn":"Paul never got over grace and pointed only to it.","explanationEs":"Pablo nunca superó la gracia y señalaba solo a ella.","correct":0},{"textEn":"17. What did Paul call himself in 1 Timothy 1:15?","textEs":"17. ¿Cómo se llamó Pablo a sí mismo en 1 Timoteo 1:15?","optionsEn":["A righteous man", "A great teacher", "The chief of sinners, whom Christ came to save", "An innocent bystander"],"optionsEs":["Un hombre justo", "Un gran maestro", "El primero de los pecadores, a quien Cristo vino a salvar", "Un espectador inocente"],"explanationEn":"The man who once trusted his own blamelessness now pointed only to grace.","explanationEs":"El hombre que una vez confió en su propia irreprensibilidad ahora señalaba solo a la gracia.","correct":2},{"textEn":"18. What is the theme of grace in Paul's life?","textEs":"18. ¿Cuál es el tema de la gracia en la vida de Pablo?","optionsEn":["Paul earned his salvation by zeal", "What Saul could never earn by law-keeping, the risen Christ gave freely", "Grace is a reward for the worthy", "The law saves those who keep it"],"optionsEs":["Pablo ganó su salvación por su celo", "Lo que Saulo nunca pudo ganar por cumplir la ley, el Cristo resucitado se lo dio gratuitamente", "La gracia es una recompensa para los dignos", "La ley salva a los que la guardan"],"explanationEn":"The chief of sinners became the apostle of grace because grace laid hold of him.","explanationEs":"El primero de los pecadores llegó a ser el apóstol de la gracia porque la gracia lo asió.","correct":1},{"textEn":"19. How influential was Paul, and why?","textEs":"19. ¿Cuán influyente fue Pablo, y por qué?","optionsEn":["Next to Jesus, perhaps the most influential person in Christian history — because he met the living Christ", "Influential only in his hometown", "Forgotten after his death", "Of little influence"],"optionsEs":["Junto a Jesús, quizá la persona más influyente de la historia cristiana — porque se encontró con el Cristo viviente", "Influyente solo en su pueblo natal", "Olvidado después de su muerte", "De poca influencia"],"explanationEn":"He wrote much of the New Testament and was the apostle to the nations.","explanationEs":"Escribió gran parte del Nuevo Testamento y fue el apóstol a las naciones.","correct":0},{"textEn":"20. What is the central lesson of Paul's life?","textEs":"20. ¿Cuál es la lección central de la vida de Pablo?","optionsEn":["Only the morally upright can serve God", "Law-keeping is the path to God", "Persecutors can never be saved", "The grace of the risen Christ can master and send any life — the chief of sinners became the apostle of grace"],"optionsEs":["Solo los moralmente rectos pueden servir a Dios", "Cumplir la ley es el camino a Dios", "Los perseguidores nunca pueden ser salvos", "La gracia del Cristo resucitado puede dominar y enviar cualquier vida — el primero de los pecadores llegó a ser el apóstol de la gracia"],"explanationEn":"No one is beyond His reach; no life is too far gone for Him to use.","explanationEs":"Nadie está fuera de su alcance; ninguna vida está demasiado perdida para que Él la use.","correct":3}];
+const kwQuestions = [{"textEn":"21. Who was Saul before his conversion, and what was the \"deadly mistake\"?","textEs":"21. ¿Quién era Saulo antes de su conversión, y cuál fue el «error mortal»?","kw_en":["persecutor","pharisee","threats","stephen","church","zeal","flesh","law"],"kw_es":["perseguidor","fariseo","amenazas","esteban","iglesia","celo","carne","ley"],"modelEn":"Before his conversion Saul was a zealous Pharisee who persecuted the church, breathing threats and murder, arresting Christians and consenting to Stephen's death. His confidence rested entirely in the flesh — circumcised the eighth day, a Hebrew of the Hebrews, blameless as to the law. The deadly mistake was that his religious zeal was zeal without knowledge; he was sincerely, religiously, and completely wrong, an enemy of God while he thought he served Him. It is the most dangerous error a person can make.","modelEs":"Antes de su conversión Saulo era un fariseo celoso que perseguía a la iglesia, respirando amenazas y muerte, arrestando cristianos y consintiendo en la muerte de Esteban. Su confianza descansaba enteramente en la carne — circuncidado al octavo día, hebreo de hebreos, irreprensible en cuanto a la ley. El error mortal fue que su celo religioso era celo sin conocimiento; estaba sincera, religiosa y completamente equivocado, enemigo de Dios mientras creía servirle. Es el error más peligroso que una persona puede cometer."},{"textEn":"22. Describe what happened on the road to Damascus.","textEs":"22. Describe lo que pasó en el camino de Damasco.","kw_en":["light","fell","voice","jesus","persecut","blind","sight","damascus"],"kw_es":["luz","cay","voz","jesus","persigu","ciego","vista","damasco"],"modelEn":"On the road to Damascus a light from heaven, brighter than the noonday sun, flashed around Saul and he fell to the ground. A voice said, \"Saul, Saul, why are you persecuting Me?\" and when Saul asked who it was, the answer came, \"I am Jesus, whom you are persecuting.\" He was blinded by the glory, led into the city, and three days later, through Ananias, his sight was restored and he was filled with the Spirit. The persecutor had become a believer.","modelEs":"En el camino de Damasco una luz del cielo, más brillante que el sol del mediodía, resplandeció alrededor de Saulo y cayó a tierra. Una voz dijo: \"Saulo, Saulo, ¿por qué me persigues?\", y cuando Saulo preguntó quién era, vino la respuesta: \"Yo soy Jesús a quien tú persigues\". Quedó cegado por la gloria, fue llevado a la ciudad, y tres días después, por medio de Ananías, su vista fue restaurada y fue lleno del Espíritu. El perseguidor se había vuelto creyente."},{"textEn":"23. What did the risen Christ say, and how did Saul respond?","textEs":"23. ¿Qué dijo el Cristo resucitado, y cómo respondió Saulo?","kw_en":["saul","persecut","jesus","lord","want","me","church","obey"],"kw_es":["saulo","persigu","jesus","senor","quier","hacer","iglesia","obedec"],"modelEn":"The risen Christ said, \"Saul, Saul, why are you persecuting Me?\" — not \"why are you persecuting My people,\" but \"Me,\" for to touch the church is to touch Christ Himself. Saul learned that the Jesus he thought was dead was alive, and that the believers he hunted belonged to a living Lord. His only question now was the right one: \"Lord, what do You want me to do?\" He surrendered at once to the One he had been fighting.","modelEs":"El Cristo resucitado dijo: \"Saulo, Saulo, ¿por qué me persigues?\" — no \"¿por qué persigues a mi pueblo?\", sino \"a mí\", porque tocar a la iglesia es tocar a Cristo mismo. Saulo aprendió que el Jesús que creía muerto estaba vivo, y que los creyentes que perseguía pertenecían a un Señor viviente. Su única pregunta ahora era la correcta: \"Señor, ¿qué quieres que yo haga?\". Se rindió de inmediato a Aquel a quien había estado combatiendo."},{"textEn":"24. After meeting Christ, how did Paul regard his former gains, and what righteousness did he seek?","textEs":"24. Después de encontrarse con Cristo, ¿cómo consideró Pablo sus ganancias anteriores, y qué justicia buscó?","kw_en":["loss","gain","rubbish","christ","righteous","own","faith","law"],"kw_es":["perdida","ganancia","estiercol","cristo","justicia","propia","fe","ley"],"modelEn":"After meeting Christ, Paul counted all his former gains as loss — even as rubbish — compared with the surpassing worth of knowing Christ. His pedigree, his law-keeping, and his blameless record no longer counted for anything. He had discovered the heart of the gospel: that a man is not saved by a righteousness of his own from the law, but by the righteousness received through faith in Christ. The proudest law-keeper became the great preacher of grace.","modelEs":"Después de encontrarse con Cristo, Pablo contó todas sus ganancias anteriores como pérdida — aun como estiércol — comparadas con el valor supremo de conocer a Cristo. Su linaje, su cumplimiento de la ley y su récord irreprensible ya no contaban para nada. Había descubierto el corazón del evangelio: que un hombre no es salvo por una justicia propia que es por la ley, sino por la justicia recibida por la fe en Cristo. El más orgulloso cumplidor de la ley llegó a ser el gran predicador de la gracia."},{"textEn":"25. How was Paul's mission a reversal of his past?","textEs":"25. ¿Cómo fue la misión de Pablo un cambio de su pasado?","kw_en":["persecut","preach","world","christ","reverse","everywhere","gospel","churches"],"kw_es":["persigu","predic","mundo","cristo","revers","dondequiera","evangelio","iglesias"],"modelEn":"Paul's mission was a complete reversal of his past. The same energy that had driven Saul across Judea to persecute Christians now drove Paul across the known world to preach Christ. City after city he carried the gospel to Jews and Gentiles, to common people and kings, planting churches everywhere he went. The man who had tried to destroy the faith now spent his life spreading it.","modelEs":"La misión de Pablo fue un cambio completo de su pasado. La misma energía que había llevado a Saulo por toda Judea a perseguir cristianos ahora llevaba a Pablo por todo el mundo conocido a predicar a Cristo. Ciudad tras ciudad llevó el evangelio a judíos y gentiles, a gente común y a reyes, plantando iglesias por dondequiera que iba. El hombre que había tratado de destruir la fe ahora pasó su vida esparciéndola."},{"textEn":"26. What did Paul suffer, and why did he keep preaching?","textEs":"26. ¿Qué sufrió Pablo, y por qué siguió predicando?","kw_en":["beaten","stoned","prison","compulsion","woe","preach","gospel","flinch"],"kw_es":["golpe","apedre","carcel","necesidad","ay","predic","evangelio","vacil"],"modelEn":"Paul was beaten with rods, whipped again and again, stoned and left for dead, shipwrecked, and imprisoned, yet he never flinched. He kept preaching because he was a man under orders: \"Woe is me if I do not preach the gospel!\" He could no more stop preaching than stop breathing; the love of Christ compelled him. He counted his own comfort and safety as nothing next to the gospel.","modelEs":"Pablo fue golpeado con varas, azotado una y otra vez, apedreado y dejado por muerto, naufragó y fue encarcelado, y sin embargo nunca vaciló. Siguió predicando porque era un hombre bajo órdenes: \"¡Ay de mí si no anunciare el evangelio!\". No podía dejar de predicar más de lo que podía dejar de respirar; el amor de Cristo lo constreñía. Contaba su propia comodidad y seguridad como nada al lado del evangelio."},{"textEn":"27. What did Paul write near the end of his life (2 Timothy 4:7)?","textEs":"27. ¿Qué escribió Pablo cerca del final de su vida (2 Timoteo 4:7)?","kw_en":["fought","fight","finished","race","kept","faith","end","triumph"],"kw_es":["pele","batalla","acab","carrera","guard","fe","final","triunfo"],"modelEn":"Near the end of his life, awaiting execution in a Roman prison, Paul wrote, \"I have fought the good fight, I have finished the race, I have kept the faith.\" He did not look back with regret but forward with triumph. The man who began by trying to destroy the faith ended by keeping it to the death. It is one of the most triumphant farewells in all of Scripture.","modelEs":"Cerca del final de su vida, esperando la ejecución en una cárcel romana, Pablo escribió: \"He peleado la buena batalla, he acabado la carrera, he guardado la fe\". No miró atrás con remordimiento sino adelante con triunfo. El hombre que comenzó tratando de destruir la fe terminó guardándola hasta la muerte. Es una de las despedidas más triunfantes de toda la Escritura."},{"textEn":"28. What explains Paul's total turnabout?","textEs":"28. ¿Qué explica el cambio total de Pablo?","kw_en":["risen","seen","lord","grace","turnabout","resurrection","met","christ"],"kw_es":["resucitado","vio","senor","gracia","cambio","resurreccion","encontr","cristo"],"modelEn":"Paul gained nothing in this world by his conversion — no wealth, comfort, or safety, only hardship and a martyr's death. No clever argument or earthly reward could explain so total a turnabout. The only thing that accounts for it is that he truly saw the risen Lord: \"Last of all He was seen by me also... but by the grace of God I am what I am.\" He met the living Christ, and nothing was ever the same.","modelEs":"Pablo no ganó nada en este mundo con su conversión — ni riqueza, ni comodidad, ni seguridad, solo dificultad y una muerte de mártir. Ningún argumento ingenioso ni recompensa terrenal podía explicar un cambio tan total. Lo único que lo explica es que verdaderamente vio al Señor resucitado: \"Y al último de todos, me apareció a mí también... pero por la gracia de Dios soy lo que soy\". Se encontró con el Cristo viviente, y nada volvió a ser igual."},{"textEn":"29. How did Paul describe himself, and to what did he give the credit?","textEs":"29. ¿Cómo se describió Pablo, y a qué dio el mérito?","kw_en":["least","apostle","chief","sinner","grace","god","unworthy","saved"],"kw_es":["pequeno","apostol","primero","pecador","gracia","dios","indigno","salv"],"modelEn":"The man who had once trusted in his own blamelessness now called himself \"the least of the apostles,\" not worthy to be called an apostle because he had persecuted the church, adding, \"but by the grace of God I am what I am.\" He even called himself the chief of sinners, whom Christ Jesus came into the world to save. Paul never got over grace and pointed only to it. All the credit belonged to God, not to himself.","modelEs":"El hombre que una vez había confiado en su propia irreprensibilidad ahora se llamaba \"el más pequeño de los apóstoles\", no digno de ser llamado apóstol porque había perseguido a la iglesia, añadiendo: \"pero por la gracia de Dios soy lo que soy\". Hasta se llamó el primero de los pecadores, a quienes Cristo Jesús vino al mundo a salvar. Pablo nunca superó la gracia y señalaba solo a ella. Todo el mérito pertenecía a Dios, no a sí mismo."},{"textEn":"30. What is the theme of grace in Paul's life, and how does it encourage us?","textEs":"30. ¿Cuál es el tema de la gracia en la vida de Pablo, y cómo nos anima?","kw_en":["grace","earn","law","free","risen","christ","sinner","reach"],"kw_es":["gracia","ganar","ley","gratuit","resucitado","cristo","pecador","alcance"],"modelEn":"The lesson of Paul's life is grace alone. What Saul could never earn by all his law-keeping and zeal, the risen Christ gave him freely. The chief of sinners became the apostle of grace because grace laid hold of him, not because he reformed himself. The same grace is offered to us: if Christ could stop and send Saul of Tarsus, then no one is beyond His reach and no life is too far gone for Him to use.","modelEs":"La lección de la vida de Pablo es solo la gracia. Lo que Saulo nunca pudo ganar con todo su cumplimiento de la ley y su celo, el Cristo resucitado se lo dio gratuitamente. El primero de los pecadores llegó a ser el apóstol de la gracia porque la gracia lo asió, no porque se reformara a sí mismo. La misma gracia se nos ofrece: si Cristo pudo detener y enviar a Saulo de Tarso, entonces nadie está fuera de su alcance y ninguna vida está demasiado perdida para que Él la use."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let mcRevealed = false;
+let kwAnswers = new Array(10).fill("");
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+function saveState() { lsSet(STATE_KEY, JSON.stringify({ mcAnswers: mcAnswers, kwAnswers: kwAnswers })); }
+
+function checkLockouts() {
+    const isEs = document.body.classList.contains('lang-es');
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>⏳ Unidad bloqueada. Repase la lección y vuelva a intentarlo en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>⏳ Unit locked. Review the lesson and try again in ${m} minute(s).</span>`;
+        if (notice) notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function updateMcScore() {
+    const el = document.getElementById('mcScore');
+    if (!el) return;
+    let correct = 0, answered = 0;
+    mcQuestions.forEach((q, i) => {
+        if (mcAnswers[i]) { answered++; if (mcAnswers[i] === String.fromCharCode(65 + q.correct)) correct++; }
+    });
+    const isEn = document.body.classList.contains('lang-en');
+    el.innerHTML = isEn
+        ? 'Score: <strong>' + correct + '</strong> / ' + answered + ' answered (' + mcQuestions.length + ' total)'
+        : 'Puntaje: <strong>' + correct + '</strong> / ' + answered + ' contestadas (' + mcQuestions.length + ' total)';
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    const scoreBox = document.createElement('div');
+    scoreBox.id = 'mcScore';
+    scoreBox.style.cssText = 'margin:4px 0 14px;font-weight:bold;color:#2f4f2f;';
+    container.appendChild(scoreBox);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcRevealed || mcAnswers[idx]) {
+                if (letter === correctLetter) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+                btn.disabled = true; btn.style.cursor = 'default';
+            }
+            btn.onclick = function() {
+                if (mcRevealed || mcAnswers[idx]) return;   // each question locks once answered
+                mcAnswers[idx] = letter;
+                saveState();
+                div.querySelectorAll('.option').forEach((b, bIdx) => {
+                    const bLetter = String.fromCharCode(65 + bIdx);
+                    b.classList.remove('selected');
+                    if (bLetter === correctLetter) b.classList.add('correct');
+                    else if (bLetter === letter) b.classList.add('wrong');
+                    b.disabled = true; b.style.cursor = 'default';
+                });
+                const fb = document.createElement('div');
+                if (letter === correctLetter) { fb.className = 'feedback-text correct'; fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp; }
+                else { fb.className = 'feedback-text incorrect'; fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp; }
+                div.appendChild(fb);
+                if (typeof updateMcScore === 'function') updateMcScore();
+            };
+            div.appendChild(btn);
+        });
+        if (mcRevealed || mcAnswers[idx]) {
+            const fb = document.createElement('div');
+            if (mcAnswers[idx] && mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? '✗ Correct answer: ' : '✗ Respuesta correcta: ') + correctLetter + '. ' + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    if (typeof updateMcScore === 'function') updateMcScore();
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 20 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 20 caracteres), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    mcRevealed = true;
+    renderQuestions();
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Avanzando a la siguiente unidad en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Advancing to the next unit in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+            setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Avanzando en 3 segundos…</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Advancing in 3 seconds…</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+        setTimeout(() => { location.href = NEXT_UNIT_URL; }, 3000);
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY); lsDel(MC_PASS_KEY); lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    mcRevealed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+<script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSBibleCharacters2Readings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

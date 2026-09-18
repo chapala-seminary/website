@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Cults & World Religions — Unit 5</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.passage-label { margin: 0 0 6px 0; color: #2f4f2f; font-size: 0.95em; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 6 →</span><span class="lang-es">Unidad 6 →</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Cults &amp; World Religions — Unit 5: The Prosperity Gospel</span><span class="lang-es">📖 Las Sectas y las Religiones del Mundo — Unidad 5: El Evangelio de la Prosperidad</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed." — Galatians 1:8 (NKJV)</span><span class="lang-es">"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema." — Gálatas 1:8 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Cults &amp; World Religions. Please register before beginning Unit 5.</span><span class="lang-es">Bienvenido a Las Sectas y las Religiones del Mundo. Por favor regístrese antes de comenzar la Unidad 5.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<p class="passage-label"><strong>Anchor: Galatians 1:6-9 — with Galatians 6:14; 1 Timothy 6:5-10 (NKJV)</strong></p>
+<div class="scripture">"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed." &mdash; Galatians 1:8 (NKJV)</div>
+
+<h3>A Word Before We Begin</h3>
+<p>The prosperity gospel promises exactly what the human heart wants to hear: that God means for you to be healthy, wealthy, and successful, and that enough faith &mdash; and enough giving &mdash; will unlock it. It is among the most popular messages on earth, and it is a lie about God. Unlike the Jehovah's Witnesses and the Latter-day Saints, this is not a separate organization but a teaching that has spread inside the churches, tangled up with things that are true &mdash; and that tangle is exactly what makes it dangerous. God is generous and delights to give good gifts; but the prosperity gospel twists His blessing into a transaction and turns faith into a lever for getting. We name the error plainly, even while many sincere believers sit under it, and we test it by the Word of God (Ephesians 4:15). And the sharpest rebuke to it is the Lord Jesus Himself, who had nowhere to lay His head.</p>
+
+<h3>What Is the Prosperity Gospel?</h3>
+<p>The prosperity gospel, also called the health-and-wealth gospel or the Word of Faith movement, teaches that God wills every believer to be materially rich and physically well, and that this prosperity is guaranteed to those who have enough faith. Its roots run from the metaphysical "New Thought" of the nineteenth century through teachers such as E. W. Kenyon and Kenneth Hagin, and it spread widely through mid-twentieth-century healing revivals and television.</p>
+<p>Its main claims are these. Health and wealth, they say, are secured for us in the atonement of Christ, so that sickness and poverty are signs of sin, of demonic attack, or of a lack of faith. Faith itself is treated as a spiritual law or force: by "positive confession" &mdash; "naming and claiming" a blessing &mdash; the believer's words are thought to call the blessing into being, almost as if God were bound to obey the formula. And giving is taught as "seed faith": money sown into a ministry is promised to return to the giver multiplied. In its more extreme Word-of-Faith form, some have even taught that Christ's blood did not by itself atone and that He had to die spiritually and be "born again" in hell &mdash; a grave error that strikes at the atonement itself, though not every prosperity preacher holds it. We have stated these claims as fairly as we can. Now we must test them by Scripture.</p>
+
+<h3>Testing the Root (1): A Different Treasure</h3>
+<p>The good news of the true gospel is Christ Himself: the forgiveness of sins, adoption as God's children, the gift of the Holy Spirit, union with Christ, and an inheritance that can never fade. "Blessed be the God and Father of our Lord Jesus Christ, who has blessed us with every spiritual blessing in the heavenly places in Christ" (Ephesians 1:3), an inheritance "incorruptible and undefiled... reserved in heaven for you" (1 Peter 1:4). The prosperity gospel quietly exchanges this treasure for another. It makes the good news to be health, money, and success now, so that the center of the gospel shifts from Christ and the forgiveness of sins to the believer and his comfort. It trades the gold of the gospel for the brass of this world. Even where it keeps the true God and the true Christ, it has changed what the gospel is, and that is the first mark against it.</p>
+
+<h3>Testing the Root (2): Grace Turned into a Transaction</h3>
+<p>The second mark is the one Galatians was written to expose. The prosperity gospel adds to grace a hidden work: your faith, your positive confession, and your "seed" giving become the levers that move God to deliver. Grace is thus turned into a transaction, and the blessing is something the believer activates rather than receives. But Paul says, "having begun in the Spirit, are you now being made perfect by the flesh?" (Galatians 3:3), and warns, "Do not be deceived, God is not mocked" (Galatians 6:7). God is not a vending machine, and He will not be managed by a formula: "Our God is in heaven; He does whatever He pleases" (Psalm 115:3). True biblical faith is not a force we wield but trust resting on the promises of God, and its object is Christ, not faith itself. "Name it and claim it" makes man the master and God the servant of his words; real faith says, "not My will, but Yours, be done" (Luke 22:42), and, "Though He slay me, yet will I trust Him" (Job 13:15). By faith the saints of Hebrews 11 "did not receive the promises" in this life, yet they trusted God still (Hebrews 11:13, 39).</p>
+
+<h3>Was Jesus Prosperous?</h3>
+<p>If material prosperity were the badge of God's favor, then surely God's own beloved Son, the most blessed Man who ever lived, would have been the richest of all. He was not. Jesus was born to a poor family and laid in a manger, because there was no room for them (Luke 2:7); at His dedication His parents brought the offering of the poor, two small birds (Luke 2:24). In His ministry He said, "Foxes have holes and birds of the air have nests, but the Son of Man has nowhere to lay His head" (Matthew 8:20) &mdash; He owned no house. When He entered Jerusalem for the last time, He had to send His disciples to fetch a borrowed colt, for He had no animal of His own (Mark 11:2-7). The one garment of any value He owned &mdash; a seamless tunic, perhaps a gift &mdash; the soldiers gambled for at the foot of the cross while He died (John 19:23-24). And far from promising His followers riches, He warned, "It is easier for a camel to go through the eye of a needle than for a rich man to enter the kingdom of God" (Matthew 19:24). If prosperity is the sign of God's blessing, then Jesus plainly did not have it &mdash; which is unthinkable. So wealth is not the measure of God's favor, and poverty is no proof of His displeasure.</p>
+
+<h3>The Cross, Suffering, and the True Riches</h3>
+<p>The whole New Testament makes the cross and suffering central to the Christian life, where the prosperity gospel leaves no room for them. Paul writes, "God forbid that I should glory except in the cross of our Lord Jesus Christ" (Galatians 6:14). "We must through many tribulations enter the kingdom of God" (Acts 14:22); "all who desire to live godly in Christ Jesus will suffer persecution" (2 Timothy 3:12); we are "heirs of God and joint heirs with Christ, if indeed we suffer with Him, that we may also be glorified together" (Romans 8:17). Nor is bodily health guaranteed now. Paul's own thorn in the flesh was not removed, though he pleaded three times; the Lord answered, "My grace is sufficient for you, for My strength is made perfect in weakness" (2 Corinthians 12:9). Paul left Trophimus sick at Miletus (2 Timothy 4:20), and counseled Timothy about his frequent ailments (1 Timothy 5:23). He had "learned in whatever state I am, to be content" (Philippians 4:11). The body's full healing waits for the resurrection (Romans 8:23). And here is the gospel's true wealth: "though He was rich, yet for your sakes He became poor, that you through His poverty might become rich" (2 Corinthians 8:9) &mdash; rich not in money but in Christ and in an inheritance that does not fade.</p>
+
+<h3>The Love of Money and Those Who Teach for Gain</h3>
+<p>Scripture speaks with unusual severity about money and about those who use religion to get it. Paul writes of "men of corrupt minds and destitute of the truth, who suppose that godliness is a means of gain. From such withdraw yourself" (1 Timothy 6:5). "Now godliness with contentment is great gain"; "having food and clothing, with these we shall be content"; "those who desire to be rich fall into temptation and a snare"; and "the love of money is a root of all kinds of evil" (1 Timothy 6:6-10). Jesus said plainly, "You cannot serve God and mammon" (Matthew 6:24). Peter warned that false teachers, "by covetousness... will exploit you with deceptive words" and "make merchandise of you" (2 Peter 2:3); Paul warned of those who teach "for the sake of dishonest gain" (Titus 1:11). It is a sober thing that the prosperity gospel so often enriches its teachers from the gifts of the poor and the desperate, the very ones Jesus came to bless.</p>
+
+<h3>Why This Is "Another Gospel"</h3>
+<p>Gather the marks together: a different treasure, with health and wealth put in the place of Christ; grace turned into a transaction activated by faith, confession, and giving; a Christian life emptied of the cross and of suffering; and the love of money clothed in the language of faith. Even where it keeps the true God and, largely, the true Christ, it has changed what the gospel is and has added a work to grace. That is enough to bring it under Paul's warning: "even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed" (Galatians 1:8). The Galatians were being turned "to a different gospel, which is not another" (Galatians 1:6-7) &mdash; a perversion of the gospel of Christ. So it is here. The prosperity gospel is another gospel: not because it denies who God is, as the cults do, but because it changes what the gospel is and turns grace into gain.</p>
+
+<h3>Marking the Error, Reclaiming the People</h3>
+<p>Because the prosperity gospel is a corruption that works inside the churches, our response has two sides. On the one hand, we must mark the false teaching and refuse to share in it: "note those who cause divisions and offenses, contrary to the doctrine which you learned, and avoid them. For those who are such do not serve our Lord Jesus Christ, but their own belly, and by smooth words and flattering speech deceive the hearts of the simple" (Romans 16:17-18); "from such withdraw yourself" (1 Timothy 6:5). We do not partner in this message or lend it our pulpits, and teachers who knowingly exploit the flock for gain fall under the solemn warnings of Scripture. On the other hand, we must remember the many sincere people caught in it, some of whom truly love Christ. We do not write them off; we seek to win them back to the true gospel. Our aim is redemptive: to call people from the brass to the gold &mdash; from a gospel of getting to the Christ who is Himself our exceeding great reward, and to a hope that remains good news in poverty, in sickness, and even in death, because its treasure is Christ and an inheritance that can never be taken away.</p>
+<div class="scripture">"For you know the grace of our Lord Jesus Christ, that though He was rich, yet for your sakes He became poor, that you through His poverty might become rich." &mdash; 2 Corinthians 8:9 (NKJV)</div>
+</div>
+
+<div class="lang-es">
+<p class="passage-label"><strong>Texto base: Gálatas 1:6-9 — con Gálatas 6:14; 1 Timoteo 6:5-10 (RVG)</strong></p>
+<div class="scripture">"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema." &mdash; Gálatas 1:8 (RVG)</div>
+
+<h3>Una Palabra Antes de Comenzar</h3>
+<p>El evangelio de la prosperidad promete exactamente lo que el corazón humano quiere oír: que Dios quiere que seas sano, rico, y exitoso, y que suficiente fe &mdash; y suficiente dar &mdash; lo desatará. Está entre los mensajes más populares de la tierra, y es una mentira acerca de Dios. A diferencia de los Testigos de Jehová y los Santos de los Últimos Días, esto no es una organización aparte sino una enseñanza que se ha extendido dentro de las iglesias, enredada con cosas que son verdaderas &mdash; y ese enredo es precisamente lo que la hace peligrosa. Dios es generoso y se deleita en dar buenas dádivas; pero el evangelio de la prosperidad tuerce su bendición en una transacción y convierte la fe en una palanca para obtener. Nombramos el error con claridad, aun cuando muchos creyentes sinceros se sientan bajo él, y lo probamos por la Palabra de Dios (Efesios 4:15). Y la reprensión más aguda a él es el Señor Jesús mismo, que no tenía dónde recostar la cabeza.</p>
+
+<h3>¿Qué Es el Evangelio de la Prosperidad?</h3>
+<p>El evangelio de la prosperidad, llamado también el evangelio de la salud y la riqueza o el movimiento de la Palabra de Fe, enseña que Dios quiere que todo creyente sea materialmente rico y físicamente sano, y que esta prosperidad está garantizada a los que tienen suficiente fe. Sus raíces vienen del "Nuevo Pensamiento" metafísico del siglo diecinueve por medio de maestros como E. W. Kenyon y Kenneth Hagin, y se extendió ampliamente por los avivamientos de sanidad de mediados del siglo veinte y por la televisión.</p>
+<p>Sus afirmaciones principales son estas. La salud y la riqueza, dicen, están aseguradas para nosotros en la expiación de Cristo, de modo que la enfermedad y la pobreza son señales de pecado, de ataque demoníaco, o de falta de fe. La fe misma es tratada como una ley o fuerza espiritual: por la "confesión positiva" &mdash; "nombrar y reclamar" una bendición &mdash; se piensa que las palabras del creyente llaman la bendición a la existencia, casi como si Dios estuviera obligado a obedecer la fórmula. Y el dar se enseña como "fe de la semilla": el dinero sembrado en un ministerio se promete que volverá al dador multiplicado. En su forma más extrema de la Palabra de Fe, algunos han enseñado incluso que la sangre de Cristo no expió por sí misma y que Él tuvo que morir espiritualmente y "nacer de nuevo" en el infierno &mdash; un error grave que hiere la expiación misma, aunque no todo predicador de la prosperidad lo sostiene. Hemos expuesto estas afirmaciones tan justamente como podemos. Ahora debemos probarlas por la Escritura.</p>
+
+<h3>Probando la Raíz (1): Un Tesoro Diferente</h3>
+<p>La buena nueva del verdadero evangelio es Cristo mismo: el perdón de los pecados, la adopción como hijos de Dios, el don del Espíritu Santo, la unión con Cristo, y una herencia que nunca se desvanece. "Bendito sea el Dios y Padre de nuestro Señor Jesucristo, que nos bendijo con toda bendición espiritual en los lugares celestiales en Cristo" (Efesios 1:3), una herencia "incorruptible, incontaminada e inmarcesible, reservada en el cielo para vosotros" (1 Pedro 1:4). El evangelio de la prosperidad cambia calladamente este tesoro por otro. Hace que la buena nueva sea la salud, el dinero y el éxito ahora, de modo que el centro del evangelio se traslada de Cristo y el perdón de los pecados al creyente y su comodidad. Cambia el oro del evangelio por el bronce de este mundo. Aun donde conserva al Dios verdadero y al Cristo verdadero, ha cambiado lo que el evangelio es, y esa es la primera marca en su contra.</p>
+
+<h3>Probando la Raíz (2): La Gracia Convertida en una Transacción</h3>
+<p>La segunda marca es la que Gálatas fue escrita para exponer. El evangelio de la prosperidad añade a la gracia una obra escondida: tu fe, tu confesión positiva, y tu dar de "semilla" llegan a ser las palancas que mueven a Dios a entregar. La gracia queda así convertida en una transacción, y la bendición es algo que el creyente activa en lugar de recibir. Pero Pablo dice: "¿habiendo comenzado por el Espíritu, ahora os perfeccionáis por la carne?" (Gálatas 3:3), y advierte: "No os engañéis; Dios no puede ser burlado" (Gálatas 6:7). Dios no es una máquina expendedora, y no será manejado por una fórmula: "Nuestro Dios está en los cielos; todo lo que quiso ha hecho" (Salmo 115:3). La verdadera fe bíblica no es una fuerza que manejamos sino confianza que descansa en las promesas de Dios, y su objeto es Cristo, no la fe misma. "Nombrar y reclamar" hace al hombre el amo y a Dios el siervo de sus palabras; la fe real dice: "no se haga mi voluntad, sino la tuya" (Lucas 22:42), y "aunque él me matare, en él esperaré" (Job 13:15). Por la fe los santos de Hebreos 11 "no recibieron las promesas" en esta vida, y sin embargo confiaron en Dios (Hebreos 11:13, 39).</p>
+
+<h3>¿Fue Jesús Próspero?</h3>
+<p>Si la prosperidad material fuera la insignia del favor de Dios, entonces seguramente el propio Hijo amado de Dios, el Hombre más bendecido que jamás vivió, habría sido el más rico de todos. No lo fue. Jesús nació en una familia pobre y fue acostado en un pesebre, porque no había lugar para ellos (Lucas 2:7); en su presentación sus padres trajeron la ofrenda de los pobres, dos avecillas (Lucas 2:24). En su ministerio dijo: "Las zorras tienen guaridas, y las aves del cielo nidos; mas el Hijo del Hombre no tiene donde recostar su cabeza" (Mateo 8:20) &mdash; no poseía casa. Cuando entró en Jerusalén por última vez, tuvo que enviar a sus discípulos a traer un pollino prestado, porque no tenía animal propio (Marcos 11:2-7). La única prenda de algún valor que poseía &mdash; una túnica sin costura, quizás un regalo &mdash; los soldados la jugaron a los dados al pie de la cruz mientras Él moría (Juan 19:23-24). Y lejos de prometer riquezas a sus seguidores, advirtió: "Más fácil es pasar un camello por el ojo de una aguja, que entrar un rico en el reino de Dios" (Mateo 19:24). Si la prosperidad es la señal de la bendición de Dios, entonces Jesús claramente no la tuvo &mdash; lo cual es impensable. Así que la riqueza no es la medida del favor de Dios, y la pobreza no es prueba de su desagrado.</p>
+
+<h3>La Cruz, el Sufrimiento, y las Verdaderas Riquezas</h3>
+<p>Todo el Nuevo Testamento hace centrales la cruz y el sufrimiento en la vida cristiana, donde el evangelio de la prosperidad no les deja lugar. Pablo escribe: "lejos esté de mí gloriarme, sino en la cruz de nuestro Señor Jesucristo" (Gálatas 6:14). "Es necesario que a través de muchas tribulaciones entremos en el reino de Dios" (Hechos 14:22); "todos los que quieren vivir piadosamente en Cristo Jesús, padecerán persecución" (2 Timoteo 3:12); somos "herederos de Dios, y coherederos con Cristo; si es que padecemos juntamente con él, para que juntamente con él seamos glorificados" (Romanos 8:17). Ni está garantizada la salud del cuerpo ahora. El propio aguijón en la carne de Pablo no fue quitado, aunque rogó tres veces; el Señor respondió: "Bástate mi gracia; porque mi poder se perfecciona en la debilidad" (2 Corintios 12:9). Pablo dejó a Trófimo enfermo en Mileto (2 Timoteo 4:20), y aconsejó a Timoteo acerca de sus frecuentes dolencias (1 Timoteo 5:23). Había "aprendido a contentarse" en cualquier estado en que se hallara (Filipenses 4:11). La plena sanidad del cuerpo espera la resurrección (Romanos 8:23). Y aquí está la verdadera riqueza del evangelio: "que por amor a vosotros se hizo pobre, siendo rico; para que vosotros con su pobreza fueseis enriquecidos" (2 Corintios 8:9) &mdash; ricos no en dinero sino en Cristo y en una herencia que no se desvanece.</p>
+
+<h3>El Amor al Dinero y los que Enseñan por Ganancia</h3>
+<p>La Escritura habla con severidad inusual acerca del dinero y de los que usan la religión para conseguirlo. Pablo escribe de "hombres corruptos de entendimiento y privados de la verdad, que tienen la piedad por fuente de ganancia; apártate de los tales" (1 Timoteo 6:5). "Pero gran ganancia es la piedad con contentamiento"; "teniendo sustento y abrigo, estemos contentos con esto"; "los que quieren enriquecerse caen en tentación y lazo"; y "el amor al dinero es la raíz de todos los males" (1 Timoteo 6:6-10). Jesús dijo claramente: "No podéis servir a Dios y a Mamón" (Mateo 6:24). Pedro advirtió que los falsos maestros, "por avaricia harán mercadería de vosotros con palabras fingidas" (2 Pedro 2:3); Pablo advirtió de los que enseñan "por amor de ganancias deshonestas" (Tito 1:11). Es cosa seria que el evangelio de la prosperidad tantas veces enriquezca a sus maestros con las ofrendas de los pobres y los desesperados, los mismos a quienes Jesús vino a bendecir.</p>
+
+<h3>Por Qué Esto Es "Otro Evangelio"</h3>
+<p>Juntemos las marcas: un tesoro diferente, con la salud y la riqueza puestas en el lugar de Cristo; la gracia convertida en una transacción activada por la fe, la confesión y el dar; una vida cristiana vaciada de la cruz y del sufrimiento; y el amor al dinero vestido con el lenguaje de la fe. Aun donde conserva al Dios verdadero y, en gran parte, al Cristo verdadero, ha cambiado lo que el evangelio es y ha añadido una obra a la gracia. Eso basta para ponerlo bajo la advertencia de Pablo: "si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema" (Gálatas 1:8). Los gálatas estaban siendo vueltos "a otro evangelio; no que haya otro" (Gálatas 1:6-7) &mdash; una perversión del evangelio de Cristo. Así es aquí. El evangelio de la prosperidad es otro evangelio: no porque niegue quién es Dios, como los cultos, sino porque cambia lo que el evangelio es y convierte la gracia en ganancia.</p>
+
+<h3>Señalando el Error, Recuperando a las Personas</h3>
+<p>Porque el evangelio de la prosperidad es una corrupción que obra dentro de las iglesias, nuestra respuesta tiene dos lados. Por un lado, debemos señalar la enseñanza falsa y rehusar participar en ella: "os fijéis en los que causan divisiones y tropiezos en contra de la doctrina que vosotros habéis aprendido; y que os apartéis de ellos. Porque los tales no sirven a nuestro Señor Jesucristo, sino a sus propios vientres; y con suaves palabras y lisonjas engañan los corazones de los ingenuos" (Romanos 16:17-18); "apártate de los tales" (1 Timoteo 6:5). No nos asociamos con este mensaje ni le prestamos nuestros púlpitos, y los maestros que a sabiendas explotan al rebaño por ganancia caen bajo las advertencias solemnes de la Escritura. Por otro lado, debemos recordar a las muchas personas sinceras atrapadas en ella, algunas de las cuales aman de veras a Cristo. No las desechamos; procuramos recuperarlas para el verdadero evangelio. Nuestro fin es redentor: llamar a las personas del bronce al oro &mdash; de un evangelio de obtener al Cristo que es Él mismo nuestro grandísimo galardón, y a una esperanza que sigue siendo buena nueva en la pobreza, en la enfermedad, y aun en la muerte, porque su tesoro es Cristo y una herencia que nunca puede ser quitada.</p>
+<div class="scripture">"Porque ya sabéis la gracia de nuestro Señor Jesucristo, que por amor a vosotros se hizo pobre, siendo rico; para que vosotros con su pobreza fueseis enriquecidos." &mdash; 2 Corintios 8:9 (RVG)</div>
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Cults & World Religions — Unit 5 (The Prosperity Gospel)
+// Built on Cook's validated masters engine (from ST11) with two upgrades:
+//   (1) per-question Check Answer now uses smart kwHit (was raw indexOf)
+//   (2) storage hardening: lsGet/lsSet/lsDel with in-memory _ctsMem fallback
+//       (so the engine survives Android content:// browsers that block
+//        localStorage).
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, mid-exam save/restore, Reset,
+// 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 5;
+const COURSE = 'cults';
+const NEXT_UNIT_URL = 'CTSCultsUnit6.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+// ---------- Storage hardening (Android content:// fallback) ----------
+var _ctsMem = {};
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){ delete _ctsMem[k]; } }
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lock`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_full_lock`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const t = (JSON.parse(lsGet('cts_student') || 'null') || {}).track;
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(lsGet(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = lsGet(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - What Is a Cult? The Biblical Test", "Unit 2 - The Trinity and the Deity of Christ", "Unit 3 - Jehovah's Witnesses", "Unit 4 - The Latter-day Saints", "Unit 5 - The Prosperity Gospel", "Unit 6 - Progressive Revelation: Islam and Baha'i", "Unit 7 - Eastern Religions: Hinduism and Buddhism", "Unit 8 - Roman Catholicism", "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism", "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSCultsUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    lsSet('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (verified by build script)
+const mcQuestions = [{"textEn": "1. The prosperity gospel (health-and-wealth / Word of Faith) teaches that:", "textEs": "1. El evangelio de la prosperidad (salud y riqueza / Palabra de Fe) enseña que:", "optionsEn": ["poverty is required of all Christians", "health and wealth are guaranteed to believers who have enough faith", "money is always evil", "God never gives material gifts"], "optionsEs": ["la pobreza es exigida a todos los cristianos", "la salud y la riqueza están garantizadas a los creyentes con suficiente fe", "el dinero siempre es malo", "Dios nunca da dádivas materiales"], "explanationEn": "It guarantees material prosperity and health to the faithful.", "explanationEs": "Garantiza la prosperidad material y la salud a los fieles.", "correct": 1}, {"textEn": "2. 'Positive confession' (name it and claim it) means:", "textEs": "2. La 'confesión positiva' (nómbralo y reclámalo) significa:", "optionsEn": ["confessing one's sins aloud", "reciting a creed", "speaking or claiming a blessing so that it will be granted", "praying silently"], "optionsEs": ["confesar los pecados en voz alta", "recitar un credo", "hablar o reclamar una bendición para que sea concedida", "orar en silencio"], "explanationEn": "Words are thought to call the blessing into being.", "explanationEs": "Se piensa que las palabras llaman la bendición a la existencia.", "correct": 2}, {"textEn": "3. Prosperity teachers claim that physical healing and financial prosperity are:", "textEs": "3. Los maestros de la prosperidad afirman que la sanidad física y la prosperidad financiera son:", "optionsEn": ["only for the apostles", "earned by penance", "promised only after death", "included in Christ's atonement, available now"], "optionsEs": ["solo para los apóstoles", "ganadas por penitencia", "prometidas solo después de la muerte", "incluidas en la expiación de Cristo, disponibles ahora"], "explanationEn": "They locate guaranteed health and wealth in the atonement.", "explanationEs": "Ubican la salud y la riqueza garantizadas en la expiación.", "correct": 3}, {"textEn": "4. In prosperity teaching, sickness or poverty is usually explained as:", "textEs": "4. En la enseñanza de la prosperidad, la enfermedad o la pobreza se explica usualmente como:", "optionsEn": ["a sign of sin, demonic attack, or a lack of faith", "a normal part of life", "irrelevant to faith", "God's discipline for everyone"], "optionsEs": ["una señal de pecado, ataque demoníaco, o falta de fe", "una parte normal de la vida", "irrelevante para la fe", "la disciplina de Dios para todos"], "explanationEn": "It treats sickness and poverty as evidence of unbelief or sin.", "explanationEs": "Trata la enfermedad y la pobreza como evidencia de incredulidad o pecado.", "correct": 0}, {"textEn": "5. 'Seed faith' teaches that:", "textEs": "5. La 'fe de la semilla' enseña que:", "optionsEn": ["seeds should be planted in a garden", "one should never give money", "money given (especially to a ministry) will be multiplied back to the giver", "giving earns church membership"], "optionsEs": ["se deben plantar semillas en un jardín", "nunca se debe dar dinero", "el dinero dado (especialmente a un ministerio) será multiplicado de vuelta al dador", "el dar gana la membresía de la iglesia"], "explanationEn": "Giving is presented as an investment that obligates a return.", "explanationEs": "El dar se presenta como una inversión que obliga un retorno.", "correct": 2}, {"textEn": "6. In Word of Faith teaching, faith is treated as:", "textEs": "6. En la enseñanza de la Palabra de Fe, la fe es tratada como:", "optionsEn": ["a spiritual law or force that obligates God", "a quiet trust in God", "a feeling that comes and goes", "obedience to the church"], "optionsEs": ["una ley o fuerza espiritual que obliga a Dios", "una confianza tranquila en Dios", "un sentimiento que va y viene", "obediencia a la iglesia"], "explanationEn": "Faith is made a force the believer uses, not trust in God.", "explanationEs": "La fe se hace una fuerza que el creyente usa, no confianza en Dios.", "correct": 0}, {"textEn": "7. The root-test from Unit 1 asks whether a gospel keeps Christ at the root and:", "textEs": "7. La prueba de la raíz de la Unidad 1 pregunta si un evangelio conserva a Cristo en la raíz y:", "optionsEn": ["the same music", "grace as a free gift, not a transaction", "a large building", "a famous preacher"], "optionsEs": ["la misma música", "la gracia como don gratuito, no una transacción", "un edificio grande", "un predicador famoso"], "explanationEn": "The test: Christ at the root, grace as a free gift.", "explanationEs": "La prueba: Cristo en la raíz, la gracia como don gratuito.", "correct": 1}, {"textEn": "8. In 1 Timothy 6:5, of those who suppose godliness is a means of gain, Paul says:", "textEs": "8. En 1 Timoteo 6:5, de los que tienen la piedad por fuente de ganancia, Pablo dice:", "optionsEn": ["honor them", "support them", "learn from them", "from such withdraw yourself"], "optionsEs": ["hónralos", "apóyalos", "aprende de ellos", "apártate de los tales"], "explanationEn": "Paul commands separation from those who profit off godliness.", "explanationEs": "Pablo manda apartarse de los que lucran con la piedad.", "correct": 3}, {"textEn": "9. According to 1 Timothy 6:6-8, great gain is:", "textEs": "9. Según 1 Timoteo 6:6-8, gran ganancia es:", "optionsEn": ["godliness with contentment (food and clothing enough)", "wealth gathered young", "many possessions", "a large salary"], "optionsEs": ["la piedad con contentamiento (sustento y abrigo basta)", "riqueza acumulada joven", "muchas posesiones", "un gran salario"], "explanationEn": "Contentment with basic provision, not riches, is gain.", "explanationEs": "El contentamiento con lo básico, no las riquezas, es ganancia.", "correct": 0}, {"textEn": "10. According to 1 Timothy 6:10, the love of money is:", "textEs": "10. Según 1 Timoteo 6:10, el amor al dinero es:", "optionsEn": ["a small matter", "a root of all kinds of evil", "a sign of faith", "required for ministry"], "optionsEs": ["un asunto pequeño", "la raíz de todos los males", "una señal de fe", "necesario para el ministerio"], "explanationEn": "The love of money is a root of all kinds of evil.", "explanationEs": "El amor al dinero es la raíz de todos los males.", "correct": 1}, {"textEn": "11. Jesus said in Matthew 6:24:", "textEs": "11. Jesús dijo en Mateo 6:24:", "optionsEn": ["'Seek riches first'", "'Money is the reward of faith'", "'You cannot serve God and mammon'", "'Be rich toward men'"], "optionsEs": ["'Buscad primero las riquezas'", "'El dinero es la recompensa de la fe'", "'No podéis servir a Dios y a Mamón'", "'Sed ricos para con los hombres'"], "explanationEn": "One cannot serve both God and money.", "explanationEs": "No se puede servir a la vez a Dios y al dinero.", "correct": 2}, {"textEn": "12. In Matthew 19:24 Jesus warned that it is easier for a camel to go through the eye of a needle than for:", "textEs": "12. En Mateo 19:24 Jesús advirtió que es más fácil pasar un camello por el ojo de una aguja que:", "optionsEn": ["a poor man to be saved", "a child to believe", "a scribe to repent", "a rich man to enter the kingdom of God"], "optionsEs": ["que un pobre sea salvo", "que un niño crea", "que un escriba se arrepienta", "que un rico entre en el reino de Dios"], "explanationEn": "Riches are an obstacle, not a badge of God's favor.", "explanationEs": "Las riquezas son un obstáculo, no una insignia del favor de Dios.", "correct": 3}, {"textEn": "13. Which of these shows that Jesus Himself was not wealthy?", "textEs": "13. ¿Cuál de estos muestra que Jesús mismo no era rico?", "optionsEn": ["He had nowhere to lay His head and borrowed a colt to enter Jerusalem", "He owned many houses", "He carried much gold", "He charged for healing"], "optionsEs": ["No tenía donde recostar la cabeza y pidió prestado un pollino para entrar en Jerusalén", "Poseía muchas casas", "Llevaba mucho oro", "Cobraba por sanar"], "explanationEn": "The Son of God owned no house and even borrowed the colt.", "explanationEs": "El Hijo de Dios no poseía casa y aun pidió prestado el pollino.", "correct": 0}, {"textEn": "14. When Paul pleaded three times for his thorn to be removed, the Lord answered (2 Cor 12:9):", "textEs": "14. Cuando Pablo rogó tres veces que su aguijón fuera quitado, el Señor respondió (2 Co 12:9):", "optionsEn": ["'Your faith was too small'", "'Confess your healing'", "'My grace is sufficient for you'", "'Sow a seed of money'"], "optionsEs": ["'Tu fe era muy pequeña'", "'Confiesa tu sanidad'", "'Bástate mi gracia'", "'Siembra una semilla de dinero'"], "explanationEn": "God did not remove the thorn; His grace was sufficient.", "explanationEs": "Dios no quitó el aguijón; su gracia fue suficiente.", "correct": 2}, {"textEn": "15. In Philippians 4:11, Paul says he has learned:", "textEs": "15. En Filipenses 4:11, Pablo dice que ha aprendido:", "optionsEn": ["to gather wealth", "to be content in whatever state he is", "to demand healing", "to avoid the poor"], "optionsEs": ["a acumular riqueza", "a contentarse en cualquier estado en que se halle", "a exigir sanidad", "a evitar a los pobres"], "explanationEn": "Paul learned contentment in plenty and in want.", "explanationEs": "Pablo aprendió el contentamiento en la abundancia y en la escasez.", "correct": 1}, {"textEn": "16. Hebrews 11 teaches that many who lived by faith:", "textEs": "16. Hebreos 11 enseña que muchos que vivieron por fe:", "optionsEn": ["grew very rich", "were always healthy", "never suffered", "did not receive the promises in this life"], "optionsEs": ["se hicieron muy ricos", "siempre estuvieron sanos", "nunca sufrieron", "no recibieron las promesas en esta vida"], "explanationEn": "Faith does not guarantee earthly gain; many died still waiting.", "explanationEs": "La fe no garantiza ganancia terrenal; muchos murieron aún esperando.", "correct": 3}, {"textEn": "17. In Galatians 6:14, Paul says he will glory only in:", "textEs": "17. En Gálatas 6:14, Pablo dice que se gloriará solo en:", "optionsEn": ["the cross of our Lord Jesus Christ", "his own success", "his wealth", "his reputation"], "optionsEs": ["la cruz de nuestro Señor Jesucristo", "su propio éxito", "su riqueza", "su reputación"], "explanationEn": "The cross, not prosperity, is the believer's boast.", "explanationEs": "La cruz, no la prosperidad, es la gloria del creyente.", "correct": 0}, {"textEn": "18. According to 2 Corinthians 8:9, Christ became poor so that we might:", "textEs": "18. Según 2 Corintios 8:9, Cristo se hizo pobre para que nosotros:", "optionsEn": ["gain earthly fortune", "become rich (in Christ and an eternal inheritance)", "escape all hardship", "receive houses now"], "optionsEs": ["ganáramos fortuna terrenal", "fuésemos enriquecidos (en Cristo y una herencia eterna)", "escapáramos de toda dificultad", "recibiéramos casas ahora"], "explanationEn": "The riches Christ gives are spiritual and eternal, not material.", "explanationEs": "Las riquezas que Cristo da son espirituales y eternas, no materiales.", "correct": 1}, {"textEn": "19. Because it swaps the gospel's treasure and adds a works-transaction to grace, the unit concludes the prosperity gospel is:", "textEs": "19. Porque cambia el tesoro del evangelio y añade una transacción de obras a la gracia, la unidad concluye que el evangelio de la prosperidad es:", "optionsEn": ["a minor emphasis", "a healthy revival", "the same as the true gospel", "another gospel, to be marked and avoided"], "optionsEs": ["un énfasis menor", "un avivamiento sano", "lo mismo que el verdadero evangelio", "otro evangelio, que debe ser señalado y evitado"], "explanationEn": "It changes what the gospel is and turns grace into gain.", "explanationEs": "Cambia lo que el evangelio es y convierte la gracia en ganancia.", "correct": 3}, {"textEn": "20. Toward sincere believers caught in the prosperity gospel, the unit's aim is:", "textEs": "20. Hacia los creyentes sinceros atrapados en el evangelio de la prosperidad, el fin de la unidad es:", "optionsEn": ["contempt", "mockery", "redemptive: to call them to the true and lasting riches in Christ", "indifference"], "optionsEs": ["desprecio", "burla", "redentor: llamarlos a las verdaderas y perdurables riquezas en Cristo", "indiferencia"], "explanationEn": "We mark the error but seek to win the people to the true riches.", "explanationEs": "Señalamos el error pero buscamos ganar a las personas para las verdaderas riquezas.", "correct": 2}];
+
+const kwQuestions = [{"textEn": "21. Fairly summarize what the prosperity gospel teaches.", "textEs": "21. Resuma justamente lo que enseña el evangelio de la prosperidad.", "kw_en": ["health", "wealth", "faith", "atonement", "confession", "prosperity", "seed", "guarant"], "kw_es": ["salud", "riqueza", "fe", "expiación", "confesión", "prosperidad", "semilla", "garant"], "modelEn": "The prosperity gospel, also called the health-and-wealth gospel or the Word of Faith movement, teaches that God wills every believer to be materially rich and physically well, and that this prosperity is guaranteed to those who have enough faith. It teaches that health and wealth are secured in the atonement of Christ, so that sickness or poverty signals sin or a lack of faith. Faith is treated as a force activated by positive confession, naming and claiming a blessing, and giving is taught as seed faith, money sown into a ministry that returns multiplied. So in this teaching faith, confession, and giving guarantee material blessing now.", "modelEs": "El evangelio de la prosperidad, llamado también el evangelio de la salud y la riqueza o el movimiento de la Palabra de Fe, enseña que Dios quiere que todo creyente sea materialmente rico y físicamente sano, y que esta prosperidad está garantizada a los que tienen suficiente fe. Enseña que la salud y la riqueza están aseguradas en la expiación de Cristo, de modo que la enfermedad o la pobreza señala pecado o falta de fe. La fe es tratada como una fuerza activada por la confesión positiva, nombrar y reclamar una bendición, y el dar se enseña como fe de la semilla, dinero sembrado en un ministerio que vuelve multiplicado. Así que en esta enseñanza la fe, la confesión y el dar garantizan la bendición material ahora."}, {"textEn": "22. State the root-test and explain how the prosperity gospel changes the gospel's treasure.", "textEs": "22. Exponga la prueba de la raíz y explique cómo el evangelio de la prosperidad cambia el tesoro del evangelio.", "kw_en": ["root", "christ", "gospel", "treasure", "eternal", "money", "health", "different"], "kw_es": ["raíz", "cristo", "evangelio", "tesoro", "etern", "dinero", "salud", "diferente"], "modelEn": "The root-test asks whether a gospel keeps Christ at the root and grace as a free gift. The true gospel's treasure is Christ himself: forgiveness of sins, adoption, the Spirit, union with Christ, and an eternal inheritance. The prosperity gospel quietly exchanges this treasure for a different one, making the good news to be health, money, and success now. The center of the gospel is shifted from Christ and forgiveness to the believer and his comfort, trading the gold of the gospel for the brass of this world. Even where it keeps the true God and Christ, it has changed what the gospel is, and a different treasure at the root is the first mark that this is a different gospel.", "modelEs": "La prueba de la raíz pregunta si un evangelio conserva a Cristo en la raíz y la gracia como don gratuito. El tesoro del verdadero evangelio es Cristo mismo: el perdón de los pecados, la adopción, el Espíritu, la unión con Cristo, y una herencia eterna. El evangelio de la prosperidad cambia calladamente este tesoro por otro diferente, haciendo que la buena nueva sea la salud, el dinero y el éxito ahora. El centro del evangelio se traslada de Cristo y el perdón al creyente y su comodidad, cambiando el oro del evangelio por el bronce de este mundo. Aun donde conserva al Dios y al Cristo verdaderos, ha cambiado lo que el evangelio es, y un tesoro diferente en la raíz es la primera marca de que este es un evangelio diferente."}, {"textEn": "23. Explain how the prosperity gospel turns grace into a works-transaction, and what biblical faith really is.", "textEs": "23. Explique cómo el evangelio de la prosperidad convierte la gracia en una transacción de obras, y qué es realmente la fe bíblica.", "kw_en": ["grace", "works", "faith", "confession", "seed", "transaction", "mocked", "obligate"], "kw_es": ["gracia", "obras", "fe", "confesión", "semilla", "transacción", "burlado", "obliga"], "modelEn": "The prosperity gospel turns grace into a transaction by adding a hidden work: your faith, your positive confession, and your seed giving become the levers that obligate God to deliver, so the blessing is something you activate rather than receive. But Paul warns that God is not mocked, and God does whatever he pleases and cannot be managed by a formula. This is the same error as adding works to grace. True biblical faith is not a force we wield to command God but trust resting on the promises of God, whose object is Christ, not faith itself. Real faith says not my will but yours be done, while name it and claim it makes man the master and God the servant of his words.", "modelEs": "El evangelio de la prosperidad convierte la gracia en una transacción al añadir una obra escondida: tu fe, tu confesión positiva, y tu dar de semilla llegan a ser las palancas que obligan a Dios a entregar, de modo que la bendición es algo que activas en lugar de recibir. Pero Pablo advierte que Dios no puede ser burlado, y Dios hace todo lo que quiere y no puede ser manejado por una fórmula. Este es el mismo error de añadir obras a la gracia. La verdadera fe bíblica no es una fuerza que manejamos para mandar a Dios sino confianza que descansa en las promesas de Dios, cuyo objeto es Cristo, no la fe misma. La fe real dice no se haga mi voluntad sino la tuya, mientras que nombrar y reclamar hace al hombre el amo y a Dios el siervo de sus palabras."}, {"textEn": "24. Contrast biblical faith with 'name it and claim it,' using Hebrews 11.", "textEs": "24. Contraste la fe bíblica con 'nombrar y reclamar', usando Hebreos 11.", "kw_en": ["faith", "trust", "christ", "force", "promise", "manipulate", "receive", "god"], "kw_es": ["fe", "confianza", "cristo", "fuerza", "promesa", "manipula", "recib", "dios"], "modelEn": "Biblical faith is trust in God that rests on his promises, and its object is Christ, not faith itself; it is not a force we use to manipulate God or to call things into being by our words. Name it and claim it reverses this, making man the master and God the servant who must obey the formula, but God cannot be manipulated and does what he pleases. Hebrews 11 settles the matter: by faith many of God's people did not receive the promises in this life, and were destitute and afflicted, yet they trusted God still. So faith does not guarantee that we receive wealth or health now; it clings to God and to Christ even when the earthly blessing does not come.", "modelEs": "La fe bíblica es confianza en Dios que descansa en sus promesas, y su objeto es Cristo, no la fe misma; no es una fuerza que usamos para manipular a Dios o para llamar cosas a la existencia por nuestras palabras. Nombrar y reclamar invierte esto, haciendo al hombre el amo y a Dios el siervo que debe obedecer la fórmula, pero Dios no puede ser manipulado y hace lo que le place. Hebreos 11 resuelve el asunto: por la fe muchos del pueblo de Dios no recibieron las promesas en esta vida, y estuvieron necesitados y afligidos, y sin embargo confiaron en Dios. Así que la fe no garantiza que recibamos riqueza o salud ahora; se aferra a Dios y a Cristo aun cuando la bendición terrenal no llega."}, {"textEn": "25. Show from the life of Jesus (and of Paul) that prosperity is not the measure of God's blessing.", "textEs": "25. Muestre desde la vida de Jesús (y de Pablo) que la prosperidad no es la medida de la bendición de Dios.", "kw_en": ["jesus", "poor", "colt", "needle", "thorn", "faith", "suffering", "afflict"], "kw_es": ["jesús", "pobre", "pollino", "aguja", "aguijón", "fe", "sufrimiento", "aflig"], "modelEn": "The life of Jesus overturns the idea that prosperity is the measure of God's blessing. Though he was the most blessed and beloved Son of God, Jesus was poor: he was laid in a manger, he said the Son of Man had nowhere to lay his head, he borrowed a colt to enter Jerusalem, and the soldiers gambled for the one good garment he owned as he died. He even warned that it is easier for a camel to go through the eye of a needle than for a rich man to enter the kingdom. The apostle Paul also had a thorn in the flesh that God did not remove, and by faith many in Hebrews 11 suffered and were afflicted and destitute. So wealth and health are not proof of God's favor, and poverty and suffering are not proof of his displeasure.", "modelEs": "La vida de Jesús derriba la idea de que la prosperidad es la medida de la bendición de Dios. Aunque era el Hijo de Dios más bendecido y amado, Jesús fue pobre: fue acostado en un pesebre, dijo que el Hijo del Hombre no tenía donde recostar la cabeza, pidió prestado un pollino para entrar en Jerusalén, y los soldados jugaron a los dados la única prenda buena que poseía mientras moría. Aun advirtió que es más fácil pasar un camello por el ojo de una aguja que entrar un rico en el reino. El apóstol Pablo también tuvo un aguijón en la carne que Dios no quitó, y por la fe muchos en Hebreos 11 sufrieron y fueron afligidos y necesitados. Así que la riqueza y la salud no son prueba del favor de Dios, y la pobreza y el sufrimiento no son prueba de su desagrado."}, {"textEn": "26. From 1 Timothy 6 and related texts, explain the danger of the love of money and of teaching for gain.", "textEs": "26. Desde 1 Timoteo 6 y textos relacionados, explique el peligro del amor al dinero y de enseñar por ganancia.", "kw_en": ["money", "love", "contentment", "gain", "godliness", "withdraw", "rich", "teacher"], "kw_es": ["dinero", "amor", "contentamiento", "ganancia", "piedad", "apártate", "ricos", "maestro"], "modelEn": "Paul warns sharply about money and about teachers who use religion to get it. He speaks of men who suppose that godliness is a means of gain, and commands, from such withdraw yourself. He says that godliness with contentment is great gain, that having food and clothing we should be content, that those who desire to be rich fall into temptation and a snare, and that the love of money is a root of all kinds of evil. Jesus said no one can serve God and money. Peter and Paul warn of teachers who through covetousness make merchandise of the flock and teach for dishonest gain. So the love of money is a deadly snare, and teachers who enrich themselves from the poor stand under God's warning, while contentment in Christ is the true gain.", "modelEs": "Pablo advierte con dureza acerca del dinero y de los maestros que usan la religión para conseguirlo. Habla de hombres que tienen la piedad por fuente de ganancia, y manda: apártate de los tales. Dice que la piedad con contentamiento es gran ganancia, que teniendo sustento y abrigo debemos estar contentos, que los que quieren ser ricos caen en tentación y lazo, y que el amor al dinero es la raíz de todos los males. Jesús dijo que nadie puede servir a Dios y al dinero. Pedro y Pablo advierten de maestros que por avaricia hacen mercadería del rebaño y enseñan por ganancias deshonestas. Así que el amor al dinero es un lazo mortal, y los maestros que se enriquecen de los pobres están bajo la advertencia de Dios, mientras que el contentamiento en Cristo es la verdadera ganancia."}, {"textEn": "27. What are the true riches of the gospel, and how does 2 Corinthians 8:9 reframe what it means to be rich?", "textEs": "27. ¿Cuáles son las verdaderas riquezas del evangelio, y cómo redefine 2 Corintios 8:9 lo que significa ser rico?", "kw_en": ["riches", "christ", "gospel", "eternal", "spiritual", "inheritance", "poor", "grace"], "kw_es": ["riquezas", "cristo", "evangelio", "etern", "espiritual", "herencia", "pobre", "gracia"], "modelEn": "The true riches of the gospel are not money or health but Christ himself and all that comes with him: the forgiveness of sins, adoption as God's children, the gift of the Spirit, union with Christ, and an eternal inheritance reserved in heaven that can never fade. These are spiritual riches, the every spiritual blessing with which God has blessed us in Christ. Second Corinthians 8:9 reframes what it means to be rich by grace: though Christ was rich, for our sakes he became poor, that we through his poverty might become rich. He became materially poor so that we might be made rich in him, not with brass that rusts but with the gold of an eternal inheritance. So the gospel offers the truest wealth, even to those who are poor in this world.", "modelEs": "Las verdaderas riquezas del evangelio no son el dinero ni la salud sino Cristo mismo y todo lo que viene con él: el perdón de los pecados, la adopción como hijos de Dios, el don del Espíritu, la unión con Cristo, y una herencia eterna reservada en el cielo que nunca se desvanece. Estas son riquezas espirituales, la toda bendición espiritual con que Dios nos ha bendecido en Cristo. Segunda Corintios 8:9 redefine lo que significa ser rico por gracia: aunque Cristo era rico, por amor a nosotros se hizo pobre, para que nosotros con su pobreza fuésemos enriquecidos. Se hizo materialmente pobre para que fuésemos hechos ricos en él, no con bronce que se oxida sino con el oro de una herencia eterna. Así que el evangelio ofrece la riqueza más verdadera, aun a los que son pobres en este mundo."}, {"textEn": "28. Why is the prosperity gospel 'another gospel,' even though it may keep the true God and largely the true Christ?", "textEs": "28. ¿Por qué es el evangelio de la prosperidad 'otro evangelio', aunque conserve al Dios verdadero y en gran parte al Cristo verdadero?", "kw_en": ["gospel", "another", "grace", "works", "treasure", "accursed", "christ", "root"], "kw_es": ["evangelio", "otro", "gracia", "obras", "tesoro", "anatema", "cristo", "raíz"], "modelEn": "The prosperity gospel is another gospel not because it denies who God is, as the cults do, but because it changes what the gospel is and turns grace into gain. It puts a different treasure at the root, health and wealth in the place of Christ, and it adds a hidden work to grace, making faith, confession, and giving the levers that obligate God. It also empties the Christian life of the cross. Even where it keeps the true God and largely the true Christ, this changed gospel falls under Paul's warning that if anyone, even an angel from heaven, preaches another gospel, let him be accursed. A gospel that alters the treasure and adds works to grace at the root is a different gospel, however much truth surrounds it.", "modelEs": "El evangelio de la prosperidad es otro evangelio no porque niegue quién es Dios, como los cultos, sino porque cambia lo que el evangelio es y convierte la gracia en ganancia. Pone un tesoro diferente en la raíz, la salud y la riqueza en lugar de Cristo, y añade una obra escondida a la gracia, haciendo de la fe, la confesión y el dar las palancas que obligan a Dios. También vacía la vida cristiana de la cruz. Aun donde conserva al Dios verdadero y en gran parte al Cristo verdadero, este evangelio cambiado cae bajo la advertencia de Pablo de que si alguno, aun un ángel del cielo, predica otro evangelio, sea anatema. Un evangelio que altera el tesoro y añade obras a la gracia en la raíz es un evangelio diferente, por mucha verdad que lo rodee."}, {"textEn": "29. Explain the right response to the prosperity gospel: marking the false teaching while reclaiming the people.", "textEs": "29. Explique la respuesta correcta al evangelio de la prosperidad: señalar la enseñanza falsa mientras se recupera a las personas.", "kw_en": ["teaching", "avoid", "mark", "people", "reclaim", "love", "gospel", "withdraw"], "kw_es": ["enseñanza", "evita", "señal", "persona", "recuperar", "amor", "evangelio", "apart"], "modelEn": "Because the prosperity gospel is a corruption that works inside the churches, the right response has two sides. First, we mark the false teaching and avoid it: Paul says to note those who cause divisions contrary to sound doctrine and to avoid them, for they serve their own appetites and deceive the simple, and that from such we should withdraw. We do not partner in this message or lend it our pulpits, and teachers who knowingly exploit the flock for gain stand under Scripture's warnings. Second, we remember the people, the many sincere believers caught in it, some of whom truly love Christ. We do not write them off but seek to reclaim them in love for the true gospel, calling them from a gospel of getting to the true riches in Christ.", "modelEs": "Porque el evangelio de la prosperidad es una corrupción que obra dentro de las iglesias, la respuesta correcta tiene dos lados. Primero, señalamos la enseñanza falsa y la evitamos: Pablo dice que nos fijemos en los que causan divisiones contra la sana doctrina y que nos apartemos de ellos, porque sirven a sus propios apetitos y engañan a los ingenuos, y que de los tales debemos apartarnos. No nos asociamos con este mensaje ni le prestamos nuestros púlpitos, y los maestros que a sabiendas explotan al rebaño por ganancia están bajo las advertencias de la Escritura. Segundo, recordamos a las personas, los muchos creyentes sinceros atrapados en ella, algunos de los cuales aman de veras a Cristo. No los desechamos sino que procuramos recuperarlos en amor para el verdadero evangelio, llamándolos de un evangelio de obtener a las verdaderas riquezas en Cristo."}, {"textEn": "30. Summarize Unit 5: the prosperity gospel tested by the root, the verdict, and the redemptive aim.", "textEs": "30. Resuma la Unidad 5: el evangelio de la prosperidad probado por la raíz, el veredicto, y el fin redentor.", "kw_en": ["gospel", "christ", "grace", "riches", "root", "redemptive", "treasure", "faith"], "kw_es": ["evangelio", "cristo", "gracia", "riquezas", "raíz", "redentor", "tesoro", "fe"], "modelEn": "Unit 5 tests the prosperity gospel by the root and reaches a clear verdict. It changes the gospel's treasure, putting health and wealth in the place of Christ; it turns grace into a transaction activated by faith, confession, and giving; it empties the Christian life of the cross and suffering; and it dresses the love of money in the language of faith. So even though it may keep the true God and largely the true Christ, it is another gospel, to be marked and avoided. Yet the aim is redemptive. We love the many sincere people caught in it and seek to win them back, calling them from the brass of getting to the gold of the true riches in Christ, a hope that remains good news in poverty, sickness, and death because its treasure is Christ and an inheritance that cannot fade.", "modelEs": "La Unidad 5 prueba el evangelio de la prosperidad por la raíz y llega a un veredicto claro. Cambia el tesoro del evangelio, poniendo la salud y la riqueza en lugar de Cristo; convierte la gracia en una transacción activada por la fe, la confesión y el dar; vacía la vida cristiana de la cruz y el sufrimiento; y viste el amor al dinero con el lenguaje de la fe. Así que aunque conserve al Dios verdadero y en gran parte al Cristo verdadero, es otro evangelio, que debe ser señalado y evitado. Sin embargo, el fin es redentor. Amamos a las muchas personas sinceras atrapadas en él y procuramos ganarlas de vuelta, llamándolas del bronce de obtener al oro de las verdaderas riquezas en Cristo, una esperanza que sigue siendo buena nueva en la pobreza, la enfermedad y la muerte porque su tesoro es Cristo y una herencia que no se desvanece."}];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(lsGet(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    lsSet(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers }));
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(lsGet(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(lsGet(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en el botón de arriba para continuar.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click the button above to continue.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple choice passed and banked. Review the lesson and the model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = isEs
+                ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+                : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+        }
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '\u2713 Correct! ' : '\u2713 \u00a1Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `\u2717 Incorrect. Correct answer: ${correctLetter}. ` : `\u2717 Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least a few sentences (about 100 characters)), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos unas cuantas oraciones (unos 100 caracteres)), luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            // Smart kwHit matcher (upgrade over ST11's raw indexOf in the live check)
+            const hits = kws.filter(kw => kwHit(ans, kw)).length;
+            fb.className = 'feedback-text correct';
+            if (hits >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'prepar','resurrect' still
+// catch inflections, while short keys no longer match inside longer words).
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(lsGet('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate track: MC only; SA is ungraded practice -----
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 (se necesitan 18). Repase la lección y vuelva a intentarlo en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>MC ${mcScore}/20 (18 needed). Review the lesson and try again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both required -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            lsSet(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            kwAnswers = new Array(10).fill(""); saveState();
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            renderQuestions();
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        lsSet(PROGRESS_KEY, JSON.stringify(progress));
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        lsSet(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lsSet(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada ${lockMinutes()} min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        renderQuestions();
+        checkLockouts();
+    } else {
+        lsSet(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        mcAnswers = new Array(20).fill(null); kwAnswers = new Array(10).fill(""); saveState();
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    lsDel(STATE_KEY);
+    lsDel(MC_PASS_KEY);
+    lsDel(SA_LOCK_KEY);
+    lsDel(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    lsSet(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    unitPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSCultsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

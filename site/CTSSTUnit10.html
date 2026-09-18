@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Last Things — Unit 10</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #ecf2ec; color: #1f2920; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdf9; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #c5d0c5; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #d8e3d8; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #c5d0c5; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #1f2920; font-size: 0.85rem; }
+.progress-grid a.completed { background: #2f4f2f; color: white; }
+.progress-grid a.active { background: #d4af37; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #2f4f2f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #d4af37; padding-left: 15px; }
+h3 { margin: 22px 0 8px; color: #2f4f2f; }
+.scripture { background: #eef4ee; border-left: 4px solid #d4af37; border-right: 4px solid #d4af37; padding: 12px 18px; margin: 18px 0; font-style: italic; }
+.scripture strong { font-style: normal; color: #2f4f2f; }
+.illustration { background: #fbf7ec; border: 1px dashed #c9a063; padding: 12px 18px; margin: 18px 0; border-radius: 6px; }
+.illustration strong { color: #2f4f2f; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #c5d0c5; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #c5d0c5; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf7; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f1f5f0; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #c5d0c5; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #2f4f2f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+        .model-answer { margin-top: 10px; padding: 12px 16px; background: #f4f0e0; border-left: 4px solid #d4af37; border-radius: 6px; font-size: 0.95rem; line-height: 1.5; color: #1f2433; }
+.reg-form { background: #faf6e3; border: 1px solid #d4af37; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 8px; border: 1px solid #c5d0c5; border-radius: 6px; margin: 6px 0; font-family: inherit; }
+.pull-quote { background: #f4f7eb; border-left: 4px solid #d4af37; padding: 15px 20px; margin: 20px 0; font-style: italic; color: #2f4f2f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+@media print {
+    .toggle-btn, .nav-btn, .nav-bar, .reg-form, button.small,
+    #submitExamBtn, #resetExamBtn, .feedback-text, .option { display: none !important; }
+    body { background: white; padding: 10px; font-size: 12pt; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .pull-quote { background: white; border-left: 2px solid #888; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 11 →</button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Español</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Systematic Theology — Unit 10: Last Things (Eschatology)</span><span class="lang-es">📖 Teología Sistemática — Unidad 10: Las Últimas Cosas (Escatología)</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #2f4f2f;"><span class="lang-en">"But of that day and hour no one knows... but only the Father." — Matthew 24:36 (NKJV)</span><span class="lang-es">"Pero del día y la hora nadie sabe... sino sólo mi Padre." — Mateo 24:36 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="regCard">
+    <h2><span class="lang-en">📝 Course Registration</span><span class="lang-es">📝 Registro del Curso</span></h2>
+    <p><span class="lang-en">Welcome to Systematic Theology. Please register before beginning Unit 10.</span><span class="lang-es">Bienvenido a Teología Sistemática. Por favor regístrese antes de comenzar la Unidad 10.</span></p>
+    <input type="text" id="regName" placeholder="Full name / Nombre completo" aria-label="Full name / Nombre completo">
+    <input type="email" id="regEmail" placeholder="Email" aria-label="Email">
+    <select id="regTrack" aria-label="regTrack">
+        <option value="certificate">Certificate Track</option>
+        <option value="mdiv">Master of Divinity (M.Div.) Track</option>
+        <option value="thm">Master of Theology (Th.M.) Track</option>
+    </select>
+    <button class="nav-btn" id="regBtn"><span class="lang-en">Register</span><span class="lang-es">Registrarse</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+<h3>Introduction: The End as Purpose, Not Panic</h3><p>The doctrine of last things—eschatology—addresses the culmination of God's redemptive plan. It speaks of the return of Christ, the final judgment, the resurrection of the dead, and the eternal state of both the righteous and the unrighteous. But from the beginning, we must understand something clearly. Eschatology is often treated as a subject of speculation. People want charts, timelines, and predictions. They want to know <em>when</em>.</p><p>Scripture consistently redirects that desire. The focus is not prediction. The focus is <strong>preparation</strong>. Jesus did not teach His followers how to calculate the end. He taught them how to be ready when it comes. History is not random. It is moving toward a conclusion established by God. Christ has come. Christ will come again. The question is not: Can you explain the end? The question is: Are you prepared for it?</p><div class="scripture">"It is appointed for men to die once, but after this the judgment." — Hebrews 9:27</div>
+            <h3>Jesus' Teaching on the End: Readiness Above Revelation</h3><p>The disciples asked three questions recorded in Matthew 24: (1) When will the Temple be destroyed? (2) When will You return? (3) What will be the sign of the end of the age? Jesus answered them together, weaving near and far prophecies into a single discourse. The Temple was destroyed in AD 70, a catastrophic event that fulfilled His words. The return of Christ and the end of the age remain future. Because the questions are answered together, it is not always immediately clear which event is being described in any given verse. This is not confusion. It is intentional. Jesus is not giving a timeline. He is shaping a life.</p><p>His emphasis is clear: watch, be ready, stay faithful. The parables reinforce this message: ten virgins—five prepared, five foolish; servants entrusted with talents—faithful or unfaithful; people going about daily life—suddenly separated. The issue is not <em>when</em>. The issue is <em>readiness</em>.</p><div class="scripture">"But of that day and hour no one knows, not even the angels of heaven, nor the Son, but only the Father." — Matthew 24:36</div>
+            <h3>Paul's Teaching: Comfort, Clarity, and the Day of the Lord</h3><p>The Apostle Paul gives both comfort and clarity regarding the end. In 1 Thessalonians 4:13‑18, he addresses the grief of believers who had lost loved ones before Christ's return. He assures them: "The Lord Himself will descend from heaven with a shout, with the voice of an archangel, and with the trumpet of God. And the dead in Christ will rise first. Then we who are alive and remain shall be caught up together with them in the clouds to meet the Lord in the air. And thus we shall always be with the Lord."</p><p>This is not a theological curiosity; it is a word of comfort. The resurrection of the dead and the gathering of believers are certain. The Day of the Lord, however, comes like a thief in the night—unexpected, sudden, and decisive. For the unbeliever, it brings destruction; for the believer, it brings deliverance. Therefore, Paul urges, "Let us not sleep, as others do, but let us watch and be sober" (1 Thessalonians 5:6).</p><div class="scripture">"For the Lord Himself will descend from heaven with a shout... and the dead in Christ will rise first." — 1 Thessalonians 4:16</div>
+            <h3>The Millennial Views: A Responsible Diversity (Expanded)</h3><p>Faithful believers have differed on the nature of the millennium—the thousand‑year reign mentioned in Revelation 20. Three main views have emerged within evangelical theology. Each attempts to interpret the same biblical texts, but they arrive at different conclusions about the timing and nature of Christ's reign.</p><p><strong>Premillennialism (especially Dispensational Premillennialism)</strong> – This view holds that Christ will return <em>before</em> a literal thousand‑year reign on earth. It became the dominant position in many evangelical circles in the 20th century, largely through the influence of the Scofield Reference Bible (1909) and later through popular authors like Hal Lindsey (<em>The Late Great Planet Earth</em>) and Tim LaHaye (<em>Left Behind</em>). Dispensational premillennialism teaches a sharp distinction between Israel and the church, a pre‑tribulation rapture of believers, and a future literal kingdom centered in Jerusalem. It is often associated with a very literal interpretation of Old Testament prophecies about Israel's restoration. While highly popular in many Bible churches and independent evangelical congregations, critics within premillennialism itself (such as historic premillennialists) reject the pre‑tribulation rapture and the rigid separation of Israel and the church.</p><p><strong>Postmillennialism</strong> – This view teaches that Christ will return <em>after</em> a period of gospel‑inspired moral and spiritual progress, culminating in a millennial age of Christian influence. Postmillennialism flourished in the 19th century, an age of great optimism. Many believed that through education, missionary effort, and social reform, the world was steadily improving. The abolition of slavery, the expansion of democratic governments, and the spread of the Bible seemed to signal that the kingdom of God was advancing toward a golden age. At the end of that age, Christ would return. Two world wars and the horrors of the 20th century shattered that optimism for most, but postmillennialism still has advocates (often in Reformed and Presbyterian circles) who see the Great Commission slowly but surely bringing the nations to Christ.</p><p><strong>Amillennialism</strong> – This view interprets the millennium symbolically as the present reign of Christ from heaven through His church. It sees the binding of Satan (Revelation 20:1‑3) as having already occurred in Christ's earthly ministry and resurrection. The thousand years represent the entire church age between Christ's first and second coming. This view has been held by Augustine, Calvin, and most of the Reformers, and remains common in Lutheran, Reformed, Anglican, and many Baptist traditions. William Barclay, whose commentary on Revelation is widely respected, held to an amillennial perspective. The strength of amillennialism is that it keeps the focus on Christ's present reign and the believer's spiritual victory, without requiring detailed speculation about a future earthly kingdom. It does not deny a future return of Christ or a final judgment, but it sees the millennium as a present reality.</p><h3>What the Millennial Views Hold in Common</h3><p>All three views agree on the essentials: Christ will return bodily, visibly, and gloriously; the dead will rise; and God will consummate His kingdom in a new heaven and new earth. The unity of the church does not depend on solving this disagreement, but on agreeing that Christ is Lord and that we must be ready for His return.</p><div class="scripture">"Behold, He is coming with clouds, and every eye will see Him." — Revelation 1:7</div>
+            <h3>The Historical Context of Revelation: Suffering and Sovereignty</h3><p>William Barclay explains that Roman citizens were required to declare "Caesar is Lord" once a year to prove loyalty. This was not merely political; it was religious. Christians refused. They declared instead, "Jesus Christ is Lord." Because of this, they were excluded from the economy, from legal protection, and often from life itself. They were burned, crucified, torn apart by wild animals. John wrote Revelation from the island of Patmos—a place of forced exile and hard labor. He was suffering. He wrote to people who were suffering.</p><p>Revelation was not written to satisfy curiosity about the distant future. It was written to sustain faithfulness in the present. Its visions of beasts, plagues, and cosmic upheaval are not a secret code for the clever; they are a pastoral message for the persecuted. They say: God is on His throne. The Lamb will conquer. Do not give up.</p><div class="scripture">"I, John, your brother and companion in the suffering and kingdom and patient endurance that are ours in Jesus, was on the island of Patmos because of the word of God and the testimony of Jesus." — Revelation 1:9</div>
+            <h3>Key Themes: Already / Not Yet, Signs, and God's Faithfulness</h3><p>The New Testament consistently presents the Kingdom as <strong>already and not yet</strong>. It is already present in the ministry of Jesus and the indwelling of the Spirit. It is not yet fully consummated; we await the visible reign of Christ. This tension prevents two errors: over‑realized eschatology (acting as if everything is perfect now) and under‑realized eschatology (doing nothing because the future is all that matters).</p><p>Signs—wars, earthquakes, famines, persecution—are not countdown markers. Jesus said, "These things must happen, but the end is not yet" (Matthew 24:6). They characterize the entire age between Christ's first and second coming. They remind us that the world is not as it should be, and they push us toward prayer and mission.</p><p>God's faithfulness is the bedrock of eschatological hope. What He has promised, He will perform. The resurrection of Jesus is the guarantee that the dead will rise. The outpouring of the Spirit is the firstfruits of the coming harvest. Because God is faithful, we can trust His promises about the future.</p>
+            <div class="illustration"><strong>💡 The Wedding Invitation:</strong> A young woman receives an invitation to a wedding. She does not know the exact hour the groom will arrive, but she knows the day. She does not spend her time drawing charts of his route. She prepares. She cleans her dress, packs her bag, and waits with eager expectation. She is ready for when he comes. Eschatology is not about solving puzzles; it is about being dressed and waiting.</div>
+            <h3>Application: Hope, Watchfulness, Unity</h3><p><strong>Hope:</strong> Christ will return. This is not wishful thinking; it is a certainty anchored in the resurrection. Hope pulls the believer through suffering, knowing that the present groaning will be swallowed up by glory.</p><p><strong>Watchfulness:</strong> Because we do not know the day, we must live each day as if it could be today. Watchfulness is not anxious staring at the sky; it is faithful stewardship of time, treasure, and talent.</p><p><strong>Unity:</strong> Differences about the millennium or the timing of the rapture must not divide the body of Christ. We agree on the essentials: Christ will return bodily, the dead will rise, and God will make all things new. On non‑essentials, we extend grace.</p><div class="scripture">"Therefore comfort one another with these words." — 1 Thessalonians 4:18</div><p>The doctrine of last things does not end with a chart. It ends with a question: <strong>Are you ready?</strong> Not ready because you have solved a prophetic puzzle, but ready because you are in Christ. The wise virgins could not lend oil; each must have their own relationship with the Bridegroom. That is the final message of eschatology: Be ready, for the Son of Man is coming at an hour you do not expect.</p></div>
+        </div>
+
+<div class="lang-es">
+<h3>Introducción: El Fin como Propósito, No Pánico</h3><p>La doctrina de las últimas cosas—la escatología—aborda la culminación del plan redentor de Dios. Habla del regreso de Cristo, el juicio final, la resurrección de los muertos y el estado eterno tanto de los justos como de los injustos. Pero desde el principio, debemos entender algo claramente. La escatología a menudo se trata como un tema de especulación. La gente quiere gráficos, cronologías y predicciones. Quieren saber <em>cuándo</em>.</p><p>La Escritura redirige consistentemente ese deseo. El enfoque no es la predicción. El enfoque es la <strong>preparación</strong>. Jesús no enseñó a Sus seguidores cómo calcular el fin. Les enseñó cómo estar listos cuando llegue. La historia no es aleatoria. Se mueve hacia una conclusión establecida por Dios. Cristo ha venido. Cristo vendrá otra vez. La pregunta no es: ¿Puedes explicar el fin? La pregunta es: ¿Estás preparado para él?</p><div class="scripture">"Está establecido para los hombres que mueran una sola vez, y después de esto el juicio." — Hebreos 9:27</div>
+            <h3>La Enseñanza de Jesús sobre el Fin: Preparación Sobre Revelación</h3><p>Los discípulos hicieron tres preguntas registradas en Mateo 24: (1) ¿Cuándo será destruido el Templo? (2) ¿Cuándo regresarás? (3) ¿Cuál será la señal del fin del siglo? Jesús les respondió juntas, entretejiendo profecías cercanas y lejanas en un solo discurso. El Templo fue destruido en el año 70 d.C., un evento catastrófico que cumplió Sus palabras. El regreso de Cristo y el fin del siglo siguen siendo futuros. Debido a que las preguntas son respondidas juntas, no siempre es inmediatamente claro qué evento se describe en cualquier versículo dado. Esto no es confusión. Es intencional. Jesús no está dando una cronología. Está moldeando una vida.</p><p>Su énfasis es claro: velar, estar listos, permanecer fieles. Las parábolas refuerzan este mensaje: diez vírgenes—cinco preparadas, cinco insensatas; siervos a los que se les confían talentos—fieles o infieles; personas haciendo su vida diaria—repentinamente separadas. El problema no es <em>cuándo</em>. El problema es <em>la preparación</em>.</p><div class="scripture">"Pero del día y la hora nadie sabe, ni aun los ángeles de los cielos, sino sólo mi Padre." — Mateo 24:36</div>
+            <h3>La Enseñanza de Pablo: Consuelo, Claridad y el Día del Señor</h3><p>El apóstol Pablo da tanto consuelo como claridad con respecto al fin. En 1 Tesalonicenses 4:13-18, aborda el dolor de los creyentes que habían perdido seres queridos antes del regreso de Cristo. Les asegura: "Porque el Señor mismo con voz de mando, con voz de arcángel, y con trompeta de Dios, descenderá del cielo; y los muertos en Cristo resucitarán primero. Luego nosotros los que vivimos, los que hayamos quedado, seremos arrebatados juntamente con ellos en las nubes para recibir al Señor en el aire, y así estaremos siempre con el Señor".</p><p>Esta no es una curiosidad teológica; es una palabra de consuelo. La resurrección de los muertos y la reunión de los creyentes son ciertas. El Día del Señor, sin embargo, viene como ladrón en la noche—inesperado, repentino y decisivo. Para el incrédulo, trae destrucción; para el creyente, trae liberación. Por lo tanto, Pablo exhorta: "No durmamos como los demás, sino velemos y seamos sobrios" (1 Tesalonicenses 5:6).</p><div class="scripture">"Porque el Señor mismo con voz de mando... descenderá del cielo; y los muertos en Cristo resucitarán primero." — 1 Tesalonicenses 4:16</div>
+            <h3>Las Visiones del Milenio: Una Diversidad Responsable</h3><p>Creyentes fieles han diferido sobre la naturaleza del milenio—el reinado de mil años mencionado en Apocalipsis 20. Tres visiones principales han surgido dentro de la teología evangélica. Cada una intenta interpretar los mismos textos bíblicos, pero llegan a conclusiones diferentes sobre el tiempo y la naturaleza del reinado de Cristo.</p><p><strong>Premilenialismo (especialmente Premilenialismo Dispensacional)</strong> – Esta visión sostiene que Cristo regresará <em>antes</em> de un reinado literal de mil años en la tierra. Se convirtió en la posición dominante en muchos círculos evangélicos en el siglo XX, en gran parte a través de la influencia de la Biblia de Referencia Scofield (1909) y luego a través de autores populares como Hal Lindsey (<em>La Agonía del Gran Planeta Tierra</em>) y Tim LaHaye (<em>Dejados Atrás</em>). El premilenialismo dispensacional enseña una distinción aguda entre Israel y la iglesia, un arrebatamiento pretribulacional de los creyentes y un reino literal futuro centrado en Jerusalén. A menudo se asocia con una interpretación muy literal de las profecías del Antiguo Testamento sobre la restauración de Israel. Aunque muy popular en muchas iglesias bíblicas y congregaciones evangélicas independientes, los críticos dentro del premilenialismo mismo (como los premilenialistas históricos) rechazan el arrebatamiento pretribulacional y la rígida separación entre Israel y la iglesia.</p><p><strong>Postmilenialismo</strong> – Esta visión enseña que Cristo regresará <em>después</em> de un período de progreso moral y espiritual inspirado por el evangelio, culminando en una era milenial de influencia cristiana. El postmilenialismo floreció en el siglo XIX, una era de gran optimismo. Muchos creían que a través de la educación, el esfuerzo misionero y la reforma social, el mundo mejoraba constantemente. La abolición de la esclavitud, la expansión de los gobiernos democráticos y la difusión de la Biblia parecían señalar que el reino de Dios avanzaba hacia una era dorada. Al final de esa era, Cristo regresaría. Dos guerras mundiales y los horrores del siglo XX destrozaron ese optimismo para la mayoría, pero el postmilenialismo todavía tiene defensores (a menudo en círculos Reformados y Presbiterianos) que ven la Gran Comisión lenta pero seguramente trayendo las naciones a Cristo.</p><p><strong>Amilenialismo</strong> – Esta visión interpreta el milenio simbólicamente como el reinado presente de Cristo desde el cielo a través de Su iglesia. Ve la atadura de Satanás (Apocalipsis 20:1-3) como ya ocurrida en el ministerio terrenal y la resurrección de Cristo. Los mil años representan toda la era de la iglesia entre la primera y segunda venida de Cristo. Esta visión ha sido sostenida por Agustín, Calvino y la mayoría de los Reformadores, y permanece común en las tradiciones Luterana, Reformada, Anglicana y muchas Bautistas. William Barclay, cuyo comentario sobre Apocalipsis es ampliamente respetado, sostuvo una perspectiva amilenial. La fortaleza del amilenialismo es que mantiene el enfoque en el reinado presente de Cristo y la victoria espiritual del creyente, sin requerir especulación detallada sobre un futuro reino terrenal. No niega un regreso futuro de Cristo ni un juicio final, pero ve el milenio como una realidad presente.</p><h3>Lo que las Visiones Milenarias Tienen en Común</h3><p>Las tres visiones concuerdan en lo esencial: Cristo regresará corporal, visible y gloriosamente; los muertos resucitarán; y Dios consumará Su reino en un nuevo cielo y una nueva tierra. La unidad de la iglesia no depende de resolver este desacuerdo, sino de concordar en que Cristo es Señor y que debemos estar listos para Su regreso.</p><div class="scripture">"He aquí que viene con las nubes, y todo ojo le verá." — Apocalipsis 1:7</div>
+            <h3>El Contexto Histórico del Apocalipsis: Sufrimiento y Soberanía</h3><p>William Barclay explica que los ciudadanos romanos estaban obligados a declarar "César es Señor" una vez al año para probar su lealtad. Esto no era meramente político; era religioso. Los cristianos se negaban. Declaraban en cambio: "Jesucristo es Señor". Por esto, fueron excluidos de la economía, de la protección legal y a menudo de la vida misma. Fueron quemados, crucificados, despedazados por animales salvajes. Juan escribió Apocalipsis desde la isla de Patmos—un lugar de exilio forzado y trabajos pesados. Estaba sufriendo. Escribió a personas que estaban sufriendo.</p><p>Apocalipsis no fue escrito para satisfacer la curiosidad sobre el futuro distante. Fue escrito para sostener la fidelidad en el presente. Sus visiones de bestias, plagas y trastornos cósmicos no son un código secreto para los astutos; son un mensaje pastoral para los perseguidos. Dicen: Dios está en Su trono. El Cordero vencerá. No se rindan.</p><div class="scripture">"Yo Juan, vuestro hermano, y copartícipe vuestro en la tribulación, en el reino y en la paciencia de Jesucristo, estaba en la isla llamada Patmos, por causa de la palabra de Dios y el testimonio de Jesucristo." — Apocalipsis 1:9</div>
+            <h3>Temas Clave: Ya / Todavía No, Señales y la Fidelidad de Dios</h3><p>El Nuevo Testamento presenta consistentemente el Reino como <strong>ya y todavía no</strong>. Ya está presente en el ministerio de Jesús y la morada del Espíritu. Todavía no está plenamente consumado; esperamos el reinado visible de Cristo. Esta tensión previene dos errores: escatología sobre-realizada (actuar como si todo fuera perfecto ahora) y escatología sub-realizada (no hacer nada porque el futuro es lo único que importa).</p><p>Las señales—guerras, terremotos, hambres, persecución—no son marcadores de cuenta regresiva. Jesús dijo: "Es necesario que todo esto acontezca; pero aún no es el fin" (Mateo 24:6). Caracterizan toda la era entre la primera y segunda venida de Cristo. Nos recuerdan que el mundo no es como debería ser, y nos empujan hacia la oración y la misión.</p><p>La fidelidad de Dios es el fundamento de la esperanza escatológica. Lo que Él ha prometido, lo cumplirá. La resurrección de Jesús es la garantía de que los muertos resucitarán. El derramamiento del Espíritu son las primicias de la cosecha venidera. Porque Dios es fiel, podemos confiar en Sus promesas sobre el futuro.</p>
+            <div class="illustration"><strong>💡 La Invitación de Boda:</strong> Una joven recibe una invitación a una boda. No sabe la hora exacta en que llegará el novio, pero sabe el día. No pasa su tiempo dibujando gráficos de su ruta. Se prepara. Limpia su vestido, empaca su bolso y espera con anhelante expectación. Está lista para cuando él venga. La escatología no se trata de resolver acertijos; se trata de estar vestido y esperando.</div>
+            <h3>Aplicación: Esperanza, Vigilancia, Unidad</h3><p><strong>Esperanza:</strong> Cristo regresará. Esto no es un pensamiento deseoso; es una certeza anclada en la resurrección. La esperanza lleva al creyente a través del sufrimiento, sabiendo que el gemido presente será absorbido por la gloria.</p><p><strong>Vigilancia:</strong> Porque no sabemos el día, debemos vivir cada día como si pudiera ser hoy. La vigilancia no es mirar ansiosamente al cielo; es mayordomía fiel del tiempo, los tesoros y los talentos.</p><p><strong>Unidad:</strong> Las diferencias sobre el milenio o el momento del arrebatamiento no deben dividir el cuerpo de Cristo. Concordamos en lo esencial: Cristo regresará corporalmente, los muertos resucitarán y Dios hará todas las cosas nuevas. En lo no esencial, extendemos gracia.</p><div class="scripture">"Por tanto, alentaos los unos a los otros con estas palabras." — 1 Tesalonicenses 4:18</div><p>La doctrina de las últimas cosas no termina con un gráfico. Termina con una pregunta: <strong>¿Estás listo?</strong> No listo porque hayas resuelto un acertijo profético, sino listo porque estás en Cristo. Las vírgenes prudentes no podían prestar aceite; cada una debe tener su propia relación con el Esposo. Ese es el mensaje final de la escatología: Estén listos, porque el Hijo del Hombre viene a la hora que no piensan.</p>
+        </div>
+</div>
+
+
+<figure class="cts-figure" style="margin:30px auto;max-width:1050px;text-align:center;">
+<svg style="width:100%;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 820" role="img" aria-label="Three views of the millennium">
+<defs><radialGradient id="vig" cx="50%" cy="42%" r="78%"><stop offset="0%" stop-color="#f3ead0"/><stop offset="100%" stop-color="#efe4c4"/></radialGradient></defs>
+<rect width="1320" height="820" fill="#f3ead0"/><rect width="1320" height="820" fill="url(#vig)"/><rect x="14" y="14" width="1292" height="792" fill="none" stroke="#b08a2e" stroke-width="6"/><rect x="26" y="26" width="1268" height="768" fill="none" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="660.0" y="80" font-size="32" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.3">Three Views of the Millennium  /  Tres Posturas sobre el Milenio</text>
+<text x="660.0" y="110" font-size="14.5" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">How Christians read the 1,000 years of Revelation 20  ·  Cómo los cristianos leen los 1,000 años de Apocalipsis 20</text>
+<rect x="52" y="176" width="393" height="528" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.8"/>
+<path d="M52,188 a12,12 0 0 1 12,-12 h369 a12,12 0 0 1 12,12 v34 h-393 Z" fill="#7c2a2f"/>
+<text x="248.5" y="198" font-size="18" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Premillennialism</text>
+<text x="248.5" y="216" font-size="13" fill="#f3ead0" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Premilenialismo</text>
+<rect x="76" y="258" width="345" height="16" rx="4" fill="#fbf6e9" stroke="#8a661c" stroke-width="1.2"/>
+<rect x="262.3" y="258" width="124.19999999999999" height="16" fill="#ecd9a0" stroke="#8a661c" stroke-width="1"/>
+<text x="324.4" y="270" font-size="9" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">1000</text>
+<line x1="76" y1="249" x2="76" y2="257" stroke="#7c2a2f" stroke-width="2.4"/>
+<line x1="72" y1="252" x2="80" y2="252" stroke="#7c2a2f" stroke-width="2.4"/>
+<path d="M242.5,246 L254.5,246 L248.5,257 Z" fill="#7c2a2f" stroke="#561c20" stroke-width="0.8"/>
+<text x="78" y="287" font-size="8.5" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.8">1st Coming</text>
+<text x="324.4" y="287" font-size="8.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Millennium</text>
+<text x="248.5" y="299" font-size="8.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Return</text>
+<text x="70" y="314" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">THE MILLENNIUM —</text>
+<text x="70" y="330" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">A literal future 1,000-year reign of Christ on</text>
+<text x="70" y="345" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">earth.</text>
+<text x="70" y="360" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Un reinado futuro y literal de Cristo de 1,000 años en</text>
+<text x="70" y="374" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">la tierra.</text>
+<text x="70" y="397" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">CHRIST RETURNS —</text>
+<text x="70" y="413" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Before the millennium (pre-).</text>
+<text x="70" y="428" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Antes del milenio (pre-).</text>
+<circle cx="74" cy="447" r="3.5" fill="#7c2a2f"/>
+<text x="84" y="451" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Christ returns, then establishes His earthly</text>
+<text x="84" y="466" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">kingdom.</text>
+<text x="84" y="481" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Cristo regresa, luego establece su reino terrenal.</text>
+<circle cx="74" cy="498" r="3.5" fill="#7c2a2f"/>
+<text x="84" y="502" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Held in two forms — Historic and Dispensational.</text>
+<text x="84" y="517" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Sostenido en dos formas — Histórico y Dispensacional.</text>
+<line x1="70" y1="535" x2="427" y2="535" stroke="#b08a2e" stroke-width="0.8" opacity="0.6"/>
+<text x="70" y="551" font-size="11" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Key texts:  Rev 20:1–6 · Isa 11 · Zech 14</text>
+<text x="70" y="569" font-size="10.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Historically:</text>
+<text x="70" y="584" font-size="10.3" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Justin Martyr, Irenaeus; much of modern</text>
+<text x="70" y="597" font-size="10.3" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">evangelicalism.</text>
+<text x="70" y="610" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Justino Mártir, Ireneo; gran parte del evangelicalismo</text>
+<text x="70" y="623" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">moderno.</text>
+<rect x="463" y="176" width="393" height="528" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.8"/>
+<path d="M463,188 a12,12 0 0 1 12,-12 h369 a12,12 0 0 1 12,12 v34 h-393 Z" fill="#8a661c"/>
+<text x="659.5" y="198" font-size="18" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Postmillennialism</text>
+<text x="659.5" y="216" font-size="13" fill="#f3ead0" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Posmilenialismo</text>
+<rect x="487" y="258" width="345" height="16" rx="4" fill="#fbf6e9" stroke="#8a661c" stroke-width="1.2"/>
+<rect x="625.0" y="258" width="117.29999999999998" height="16" fill="#ecd9a0" stroke="#8a661c" stroke-width="1"/>
+<text x="683.6500000000001" y="270" font-size="9" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">1000</text>
+<line x1="487" y1="249" x2="487" y2="257" stroke="#7c2a2f" stroke-width="2.4"/>
+<line x1="483" y1="252" x2="491" y2="252" stroke="#7c2a2f" stroke-width="2.4"/>
+<path d="M750.1,246 L762.1,246 L756.1,257 Z" fill="#7c2a2f" stroke="#561c20" stroke-width="0.8"/>
+<text x="489" y="287" font-size="8.5" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.8">1st Coming</text>
+<text x="683.6500000000001" y="287" font-size="8.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Millennium</text>
+<text x="756.1" y="299" font-size="8.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Return</text>
+<text x="481" y="314" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">THE MILLENNIUM —</text>
+<text x="481" y="330" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">A coming golden age as the gospel triumphs in the</text>
+<text x="481" y="345" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">world.</text>
+<text x="481" y="360" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Una era dorada venidera al triunfar el evangelio en el</text>
+<text x="481" y="374" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">mundo.</text>
+<text x="481" y="397" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">CHRIST RETURNS —</text>
+<text x="481" y="413" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">After the millennium (post-).</text>
+<text x="481" y="428" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Después del milenio (post-).</text>
+<circle cx="485" cy="447" r="3.5" fill="#8a661c"/>
+<text x="495" y="451" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">The gospel gradually wins the nations, then</text>
+<text x="495" y="466" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Christ returns.</text>
+<text x="495" y="481" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El evangelio gana gradualmente a las naciones, luego</text>
+<text x="495" y="495" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Cristo regresa.</text>
+<circle cx="485" cy="512" r="3.5" fill="#8a661c"/>
+<text x="495" y="516" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">The “millennium” may be a long age, not exactly</text>
+<text x="495" y="531" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">1,000 years.</text>
+<text x="495" y="546" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El “milenio” puede ser una era larga, no exactamente</text>
+<text x="495" y="560" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">1,000 años.</text>
+<line x1="481" y1="578" x2="838" y2="578" stroke="#b08a2e" stroke-width="0.8" opacity="0.6"/>
+<text x="481" y="594" font-size="11" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Key texts:  Matt 13 · Ps 2 · Ps 110 · Rev 20</text>
+<text x="481" y="612" font-size="10.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Historically:</text>
+<text x="481" y="627" font-size="10.3" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Jonathan Edwards and the Puritans.</text>
+<text x="481" y="640" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Jonathan Edwards y los puritanos.</text>
+<rect x="874" y="176" width="393" height="528" rx="12" ry="12" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.8"/>
+<path d="M874,188 a12,12 0 0 1 12,-12 h369 a12,12 0 0 1 12,12 v34 h-393 Z" fill="#4f6470"/>
+<text x="1070.5" y="198" font-size="18" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Amillennialism</text>
+<text x="1070.5" y="216" font-size="13" fill="#f3ead0" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Amilenialismo</text>
+<rect x="898" y="258" width="345" height="16" rx="4" fill="#fbf6e9" stroke="#8a661c" stroke-width="1.2"/>
+<rect x="908.35" y="258" width="279.45" height="16" fill="#ecd9a0" stroke="#8a661c" stroke-width="1"/>
+<text x="1048.075" y="270" font-size="9" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">1000</text>
+<line x1="898" y1="249" x2="898" y2="257" stroke="#7c2a2f" stroke-width="2.4"/>
+<line x1="894" y1="252" x2="902" y2="252" stroke="#7c2a2f" stroke-width="2.4"/>
+<path d="M1188.7,246 L1200.7,246 L1194.7,257 Z" fill="#7c2a2f" stroke="#561c20" stroke-width="0.8"/>
+<text x="900" y="287" font-size="8.5" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" opacity="0.8">1st Coming</text>
+<text x="1048.075" y="287" font-size="8.5" fill="#8a661c" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Millennium</text>
+<text x="1194.7" y="299" font-size="8.5" fill="#7c2a2f" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Return</text>
+<text x="892" y="314" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">THE MILLENNIUM —</text>
+<text x="892" y="330" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Symbolic of the present age — Christ reigns now</text>
+<text x="892" y="345" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">from heaven.</text>
+<text x="892" y="360" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Símbolo de la era presente — Cristo reina ahora desde</text>
+<text x="892" y="374" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">el cielo.</text>
+<text x="892" y="397" font-size="11" fill="#7c2a2f" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">CHRIST RETURNS —</text>
+<text x="892" y="413" font-size="12" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">At the end of the present age.</text>
+<text x="892" y="428" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Al final de la era presente.</text>
+<circle cx="896" cy="447" r="3.5" fill="#4f6470"/>
+<text x="906" y="451" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">The “thousand years” is all the time between</text>
+<text x="906" y="466" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Christ's two comings.</text>
+<text x="906" y="481" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Los “mil años” son todo el tiempo entre las dos</text>
+<text x="906" y="495" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">venidas de Cristo.</text>
+<circle cx="896" cy="512" r="3.5" fill="#4f6470"/>
+<text x="906" y="516" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Return, resurrection, and judgment come together</text>
+<text x="906" y="531" font-size="11.6" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">at the end.</text>
+<text x="906" y="546" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">El regreso, la resurrección y el juicio vienen juntos</text>
+<text x="906" y="560" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">al final.</text>
+<line x1="892" y1="578" x2="1249" y2="578" stroke="#b08a2e" stroke-width="0.8" opacity="0.6"/>
+<text x="892" y="594" font-size="11" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Key texts:  Rev 20 · John 5 · Col 1:13</text>
+<text x="892" y="612" font-size="10.5" fill="#3b2f23" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Historically:</text>
+<text x="892" y="627" font-size="10.3" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Augustine; Luther and Calvin; much of the Reformed</text>
+<text x="892" y="640" font-size="10.3" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">tradition.</text>
+<text x="892" y="653" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Agustín; Lutero y Calvino; gran parte de la tradición</text>
+<text x="892" y="666" font-size="10" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic" opacity="0.9">Reformada.</text>
+<rect x="52" y="726" width="1216" height="68" rx="10" ry="10" fill="#efe4c4" stroke="#8a661c" stroke-width="1.2"/>
+<text x="660.0" y="750" font-size="12.5" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">All three are held by orthodox Christians who affirm Christ's bodily return, the resurrection, and the final judgment.</text>
+<text x="660.0" y="768" font-size="12" fill="#3b2f23" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">The differences turn on how to interpret Revelation 20 and the prophetic Scriptures.</text>
+<text x="660.0" y="786" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Las tres son sostenidas por cristianos ortodoxos; difieren en cómo interpretar Apocalipsis 20.  ·  Chapala Theological Seminary</text>
+</svg>
+<figcaption style="font-family:Georgia,serif;font-size:0.9em;line-height:1.5;margin-top:10px;color:#561c20;"><span style="font-weight:bold;">Three views of the millennium — held by orthodox Christians who read Revelation 20 differently.</span><br><span style="font-style:italic;color:#8a661c;">Tres posturas sobre el milenio — sostenidas por cristianos ortodoxos que leen Apocalipsis 20 de modo distinto.</span></figcaption>
+</figure>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 10 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 10 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+        <div id="mcBankedNotice" style="margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// =====================================================================
+// CTS Systematic Theology — Unit 10 (Last Things) — built on validated engine
+// Implements: cts_track gating, MC-pass persists, SA-only lockout on
+// partial failure, split kw_en/kw_es, UNIT_KEY mid-exam save/restore,
+// Reset, 3s auto-redirect on pass.
+// =====================================================================
+
+const UNIT = 10;
+const COURSE = 'st';
+const NEXT_UNIT_URL = 'CTSSTUnit11.html';
+const totalUnits = 13;
+let currentUnit = UNIT;
+
+// localStorage keys
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+
+// Review interval after a failed exam. Purpose is to send the student back to
+// the lesson to review before retrying — short for self-paced lay students,
+// longer for the credential-bearing Masters tracks.
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = [
+    "Unit 1 - The Doctrine of Revelation",
+    "Unit 2 - The Doctrine of God",
+    "Unit 3 - The Doctrine of Christ",
+    "Unit 4 - The Holy Spirit",
+    "Unit 5 - The Doctrine of Man",
+    "Unit 6 - Sin",
+    "Unit 7 - Salvation",
+    "Unit 8 - The Church",
+    "Unit 9 - Denominations and the Gospel",
+    "Unit 10 - Last Things",
+    "Unit 11 - Apologetics",
+    "Unit 12 - The Kingdom of God",
+    "Unit 13 - Church, State, and Nationalism"
+];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSSTUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>✓ Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en');
+        document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es');
+        document.body.classList.add('lang-en');
+        this.textContent = 'Español';
+    }
+    renderQuestions();
+    checkLockouts();
+};
+
+// MC answer key distribution audited: A=B=C=D=5 (perfect cycle 0,1,2,3 x5)
+// MC answer key: A=B=C=D=5; all 20 verified against Psalm 1
+const mcQuestions = [
+    { textEn: "1. The emphasis of eschatology is:", textEs: "1. El énfasis de la escatología es:",
+      optionsEn: ["Timing", "Prediction", "Preparedness", "Charts"],
+      optionsEs: ["Cronología", "Predicción", "Preparación", "Gráficos"], explanationEn: "Jesus emphasized readiness, not prediction.", explanationEs: "Jesús enfatizó la preparación, no la predicción.", correct: 2 },
+    { textEn: "2. The Temple in Jerusalem was destroyed in:", textEs: "2. El Templo de Jerusalén fue destruido en:",
+      optionsEn: ["AD 200", "AD 33", "AD 70", "AD 100"],
+      optionsEs: ["200 d.C.", "33 d.C.", "70 d.C.", "100 d.C."], explanationEn: "The Temple was destroyed in AD 70.", explanationEs: "El Templo fue destruido en el año 70 d.C.", correct: 2 },
+    { textEn: "3. Jesus emphasized which of the following regarding the end?", textEs: "3. Jesús enfatizó lo siguiente con respecto al fin:",
+      optionsEn: ["Signs only", "Predictions", "Timing", "Readiness"],
+      optionsEs: ["Solo señales", "Predicciones", "Cronología", "Preparación"], explanationEn: "His parables all stress readiness.", explanationEs: "Sus parábolas enfatizan la preparación.", correct: 3 },
+    { textEn: "4. Paul teaches that the Day of the Lord comes:", textEs: "4. Pablo enseña que el Día del Señor viene:",
+      optionsEn: ["Slowly", "Predictably", "Like a thief", "Gradually"],
+      optionsEs: ["Lentamente", "Predeciblemente", "Como un ladrón", "Gradualmente"], explanationEn: "1 Thessalonians 5:2 says it comes like a thief in the night.", explanationEs: "1 Tesalonicenses 5:2 dice que viene como ladrón en la noche.", correct: 2 },
+    { textEn: "5. Premillennialism teaches that Christ returns:", textEs: "5. El premilenialismo enseña que Cristo regresa:",
+      optionsEn: ["Only symbolically", "After the millennium", "Before the millennium", "Never"],
+      optionsEs: ["Solo simbólicamente", "Después del milenio", "Antes del milenio", "Nunca"], explanationEn: "Premillennialism holds that Christ's return precedes a literal thousand-year reign.", explanationEs: "El premilenialismo sostiene que el regreso de Cristo precede a un reinado literal de mil años.", correct: 2 },
+    { textEn: "6. Postmillennialism teaches that Christ returns:", textEs: "6. El postmilenialismo enseña que Cristo regresa:",
+      optionsEn: ["After the millennium", "During the millennium", "Not at all", "Before the millennium"],
+      optionsEs: ["Después del milenio", "Durante el milenio", "Para nada", "Antes del milenio"], explanationEn: "Postmillennialism expects Christ's return after a millennial age of gospel influence.", explanationEs: "El postmilenialismo espera el regreso de Cristo después de una era milenial de influencia del evangelio.", correct: 0 },
+    { textEn: "7. Amillennialism teaches that the millennium is:", textEs: "7. El amilenialismo enseña que el milenio es:",
+      optionsEn: ["A 1,000 year gap", "A Jewish restoration", "A future literal reign", "A present spiritual reign"],
+      optionsEs: ["Una brecha de 1,000 años", "Una restauración judía", "Un reinado literal futuro", "Un reinado espiritual presente"], explanationEn: "Amillennialism sees the millennium as Christ's present spiritual reign through the church.", explanationEs: "El amilenialismo ve el milenio como el reinado espiritual presente de Cristo a través de la iglesia.", correct: 3 },
+    { textEn: "8. The Kingdom of God is described as:", textEs: "8. El Reino de Dios se describe como:",
+      optionsEn: ["Already and not yet", "Unknown", "Future only", "Present only"],
+      optionsEs: ["Ya y no todavía", "Desconocido", "Solo futuro", "Solo presente"], explanationEn: "The Kingdom is inaugurated but not yet consummated.", explanationEs: "El Reino está inaugurado pero aún no consumado.", correct: 0 },
+    { textEn: "9. Signs such as wars and turmoil should be understood as:", textEs: "9. Señales como guerras y disturbios deben entenderse como:",
+      optionsEn: ["Dates for Christ's return", "Irrelevant", "Exact predictions", "Patterns that characterize the age"],
+      optionsEs: ["Fechas para el regreso de Cristo", "Irrelevantes", "Predicciones exactas", "Patrones que caracterizan la era"], explanationEn: "These things must happen, but the end is not yet (Matthew 24:6).", explanationEs: "Estas cosas deben suceder, pero el fin no es todavía (Mateo 24:6).", correct: 3 },
+    { textEn: "10. Revelation was written primarily to:", textEs: "10. Apocalipsis fue escrito principalmente para:",
+      optionsEn: ["Provide a timeline", "Predict the date", "Satisfy curiosity", "Sustain faithfulness under suffering"],
+      optionsEs: ["Proporcionar una cronología", "Predecir la fecha", "Satisfacer curiosidad", "Sostener la fidelidad bajo el sufrimiento"], explanationEn: "John wrote to suffering believers to encourage endurance.", explanationEs: "Juan escribió a creyentes que sufrían para animar la resistencia.", correct: 3 },
+    { textEn: "11. The final question of eschatology is:", textEs: "11. La pregunta final de la escatología es:",
+      optionsEn: ["Are you ready?", "What is the millennium?", "Who is the Antichrist?", "When will Christ return?"],
+      optionsEs: ["¿Estás listo?", "¿Qué es el milenio?", "¿Quién es el Anticristo?", "¿Cuándo regresará Cristo?"], explanationEn: "The focus is preparation, not prediction.", explanationEs: "El enfoque es la preparación, no la predicción.", correct: 0 },
+    { textEn: "12. The disciples asked Jesus about the destruction of the Temple and the end of the age. Jesus answered by emphasizing:", textEs: "12. Los discípulos le preguntaron a Jesús sobre la destrucción del Templo y el fin de la era. Jesús respondió enfatizando:",
+      optionsEn: ["Readiness and watchfulness", "Geopolitical events", "The identity of the Antichrist", "A detailed timeline"],
+      optionsEs: ["Preparación y vigilancia", "Eventos geopolíticos", "La identidad del Anticristo", "Una cronología detallada"], explanationEn: "He gave signs but always returned to the command to watch and be ready.", explanationEs: "Dio señales pero siempre volvió al mandato de velar y estar listos.", correct: 0 },
+    { textEn: "13. Paul's teaching on the resurrection includes:", textEs: "13. La enseñanza de Pablo sobre la resurrección incluye:",
+      optionsEn: ["No physical resurrection", "The dead will rise and believers will be gathered to the Lord", "The dead remain in the grave forever", "Only the living will be saved"],
+      optionsEs: ["No hay resurrección física", "Los muertos resucitarán y los creyentes serán reunidos con el Señor", "Los muertos permanecen en la tumba para siempre", "Solo los vivos serán salvos"], explanationEn: "1 Thessalonians 4:16-17 teaches the resurrection and gathering.", explanationEs: "1 Tesalonicenses 4:16-17 enseña la resurrección y la reunión.", correct: 1 },
+    { textEn: "14. The 'already/not yet' tension means:", textEs: "14. La tensión 'ya/no todavía' significa:",
+      optionsEn: ["Irrelevant", "The Kingdom is purely future", "The Kingdom is only present", "The Kingdom has begun but is not yet fully realized"],
+      optionsEs: ["Irrelevante", "El Reino es puramente futuro", "El Reino es solo presente", "El Reino ha comenzado pero aún no se ha realizado plenamente"], explanationEn: "Christ inaugurated the Kingdom; its fullness awaits His return.", explanationEs: "Cristo inauguró el Reino; su plenitud espera Su regreso.", correct: 3 },
+    { textEn: "15. Why did Roman citizens have to declare 'Caesar is Lord'?", textEs: "15. ¿Por qué los ciudadanos romanos tenían que declarar 'César es Señor'?",
+      optionsEn: ["Religious requirement only", "To function in society and prove loyalty", "To avoid taxes", "To become priests"],
+      optionsEs: ["Solo requisito religioso", "Para funcionar en la sociedad y probar lealtad", "Para evitar impuestos", "Para convertirse en sacerdotes"], explanationEn: "The declaration was required for economic and social participation.", explanationEs: "La declaración era necesaria para la participación económica y social.", correct: 1 },
+    { textEn: "16. John wrote Revelation from:", textEs: "16. Juan escribió Apocalipsis desde:",
+      optionsEn: ["Rome", "Ephesus", "Patmos", "Jerusalem"],
+      optionsEs: ["Roma", "Éfeso", "Patmos", "Jerusalén"], explanationEn: "John was exiled on Patmos (Revelation 1:9).", explanationEs: "Juan fue exiliado en Patmos (Apocalipsis 1:9).", correct: 2 },
+    { textEn: "17. The purpose of prophecy in Revelation is to:", textEs: "17. El propósito de la profecía en Apocalipsis es:",
+      optionsEn: ["Satisfy curiosity", "Produce hope and faithful endurance", "Create fear", "Provide secret codes"],
+      optionsEs: ["Satisfacer curiosidad", "Producir esperanza y resistencia fiel", "Crear miedo", "Proporcionar códigos secretos"], explanationEn: "Revelation is a pastoral letter to suffering believers.", explanationEs: "Apocalipsis es una carta pastoral para creyentes que sufren.", correct: 1 },
+    { textEn: "18. Which is NOT one of the three main millennial views?", textEs: "18. ¿Cuál NO es uno de los tres puntos de vista milenialistas principales?",
+      optionsEn: ["Dispensationalism", "Premillennialism", "Postmillennialism", "Amillennialism"],
+      optionsEs: ["Dispensacionalismo", "Premilenialismo", "Postmilenialismo", "Amilenialismo"], explanationEn: "Dispensationalism is a broader system, not a millennial position.", explanationEs: "El dispensacionalismo es un sistema más amplio, no una posición milenialista.", correct: 0 },
+    { textEn: "19. Eschatology should produce:", textEs: "19. La escatología debe producir:",
+      optionsEn: ["Speculation", "Hope and watchfulness", "Division only", "Fear"],
+      optionsEs: ["Especulación", "Esperanza y vigilancia", "Solo división", "Miedo"], explanationEn: "Paul says 'comfort one another with these words.'", explanationEs: "Pablo dice 'consolaos unos a otros con estas palabras'.", correct: 1 },
+    { textEn: "20. Christians are called to live as:", textEs: "20. Los cristianos son llamados a vivir como:",
+      optionsEn: ["Children of darkness", "Children of light", "Followers of Caesar", "Citizens of Rome only"],
+      optionsEs: ["Hijos de tinieblas", "Hijos de luz", "Seguidores de César", "Ciudadanos de solo Roma"], explanationEn: "1 Thessalonians 5:5 says we are children of light.", explanationEs: "1 Tesalonicenses 5:5 dice que somos hijos de luz.", correct: 1 }
+];
+
+// SA questions — split kw_en / kw_es per 2026-05-16 rule.
+// Grader reads document.body.classList for lang-en or lang-es and uses only matching language array.
+// Threshold: 3 keyword hits per question.
+const kwQuestions = [
+    { textEn: "21. Explain why Jesus emphasized readiness rather than providing a timeline for the end. How does this shape Christian living?",
+      textEs: "21. Explique por qué Jesús enfatizó la preparación en lugar de dar un cronograma para el fin. ¿Cómo moldea esto la vida cristiana?",
+      kw_en: ["readiness", "timeline", "no one knows", "watch", "live", "faithful", "date", "prepared"],
+      kw_es: ["preparación", "cronograma", "nadie sabe", "velar", "vivir", "fiel", "fecha", "preparado"],
+      modelEn: "The unit shows that Jesus deliberately withheld a timeline for the end, saying that of that day and hour no one knows, not even the angels or the Son, but only the Father. Instead of dates, He emphasized readiness. The point is not to calculate when the end will come but to be prepared whenever it comes. This shapes Christian living by turning attention away from speculation and toward faithfulness: because the timing is hidden and the coming sudden, believers are to watch and live each day ready to meet their Lord. Readiness means ongoing obedience and watchfulness rather than last-minute scrambling tied to a predicted date. So eschatology becomes a call to steady, faithful living now, not an invitation to chart the future.",
+      modelEs: "La unidad muestra que Jesús deliberadamente ocultó un cronograma para el fin, diciendo que de aquel día y hora nadie sabe, ni los ángeles ni el Hijo, sino solo el Padre. En lugar de fechas, enfatizó la preparación. El punto no es calcular cuándo vendrá el fin sino estar preparados para cuando venga. Esto moldea la vida cristiana apartando la atención de la especulación y dirigiéndola a la fidelidad: como el tiempo está oculto y la venida es repentina, los creyentes deben velar y vivir cada día listos para encontrarse con su Señor. La preparación significa obediencia y vigilancia continuas en lugar de un apuro de último momento atado a una fecha predicha. Así que la escatología se vuelve un llamado a vivir de manera constante y fiel ahora, no una invitación a trazar el futuro." },
+
+    { textEn: "22. Compare and contrast the three main millennial views. On what essentials do they agree?",
+      textEs: "22. Compare y contraste las tres principales visiones milenarias. ¿En qué esenciales concuerdan?",
+      kw_en: ["premillennialism", "postmillennialism", "amillennialism", "thousand", "return", "agree", "bodily", "kingdom"],
+      kw_es: ["premilenialismo", "postmilenialismo", "amilenialismo", "mil", "regreso", "concuerdan", "corporal", "reino"],
+      modelEn: "The unit lays out three views of the millennium. Premillennialism, especially the dispensational form, holds that Christ returns before a literal thousand-year reign on earth. Postmillennialism teaches that Christ returns after a period of gospel-inspired moral and spiritual progress that culminates in a golden age. Amillennialism interprets the thousand years symbolically as the present reign of Christ from heaven through His church, with the millennium being the entire church age. They differ over the nature and timing of the thousand years and over how literally to read the relevant texts. Yet the unit stresses that they agree on the essentials: Christ will return bodily, visibly, and gloriously; the dead will rise; and God will consummate His kingdom in a new heaven and new earth. The disagreement is real but secondary, set within a shared core hope.",
+      modelEs: "La unidad expone tres visiones del milenio. El premilenialismo, especialmente la forma dispensacional, sostiene que Cristo regresa antes de un reinado literal de mil años en la tierra. El postmilenialismo enseña que Cristo regresa después de un período de progreso moral y espiritual inspirado por el evangelio que culmina en una era dorada. El amilenialismo interpreta los mil años simbólicamente como el reinado presente de Cristo desde el cielo por medio de Su iglesia, siendo el milenio toda la era de la iglesia. Difieren sobre la naturaleza y el tiempo de los mil años y sobre cuán literalmente leer los textos pertinentes. Sin embargo, la unidad subraya que concuerdan en lo esencial: Cristo regresará corporal, visible y gloriosamente; los muertos resucitarán; y Dios consumará Su reino en un cielo nuevo y una tierra nueva. El desacuerdo es real pero secundario, situado dentro de una esperanza central compartida." },
+
+    { textEn: "23. Explain the historical context of Revelation. Why was it written, and how does that context affect our interpretation?",
+      textEs: "23. Explique el contexto histórico de Apocalipsis. ¿Por qué fue escrito, y cómo afecta ese contexto nuestra interpretación?",
+      kw_en: ["Revelation", "persecution", "suffering", "comfort", "sovereignty", "context", "encourage", "interpret"],
+      kw_es: ["Apocalipsis", "persecución", "sufrimiento", "consuelo", "soberanía", "contexto", "animar", "interpretar"],
+      modelEn: "The unit teaches that Revelation was written to a church facing suffering and persecution, and that its purpose was to assure believers of God's sovereignty in the midst of that trial. It was not given primarily as a coded calendar of future events but as comfort and encouragement to Christians under pressure, declaring that God reigns and will triumph. Reading it in this context affects interpretation directly: rather than mining it mainly for predictions and charts, we should hear it first as a message of hope and endurance to a suffering people. The imagery served to strengthen their faith and confidence that, however fierce the opposition, God is on the throne. Keeping the original setting of suffering and sovereignty in view guards us from turning the book into mere speculation and keeps its pastoral aim central.",
+      modelEs: "La unidad enseña que Apocalipsis fue escrito a una iglesia que enfrentaba sufrimiento y persecución, y que su propósito era asegurar a los creyentes de la soberanía de Dios en medio de esa prueba. No fue dado principalmente como un calendario cifrado de eventos futuros sino como consuelo y aliento a los cristianos bajo presión, declarando que Dios reina y triunfará. Leerlo en este contexto afecta directamente la interpretación: en lugar de explotarlo sobre todo en busca de predicciones y diagramas, debemos oírlo primero como un mensaje de esperanza y perseverancia para un pueblo que sufre. Las imágenes servían para fortalecer su fe y su confianza de que, por feroz que fuera la oposición, Dios está en el trono. Mantener a la vista el escenario original de sufrimiento y soberanía nos guarda de convertir el libro en mera especulación y mantiene central su propósito pastoral." },
+
+    { textEn: "24. What did Jesus mean by the \"already / not yet\" nature of the Kingdom? Give an example.",
+      textEs: "24. ¿Qué quiso decir Jesús con la naturaleza de \"ya / todavía no\" del Reino? Dé un ejemplo.",
+      kw_en: ["already", "not yet", "present", "future", "Jesus", "Spirit", "consummated", "kingdom"],
+      kw_es: ["ya", "todavía no", "presente", "futuro", "Jesús", "Espíritu", "consumado", "reino"],
+      modelEn: "The unit describes the Kingdom of God as both already present and not yet fully consummated. It is already here in the ministry of Jesus and in the indwelling of the Spirit: God's reign broke into the world with Christ's coming, so the kingdom is a present reality in the lives of those who belong to Him. Yet it is not yet complete; we still await the visible, glorious reign of Christ when the kingdom will be fully realized. An example is the indwelling Spirit: believers genuinely experience the life and power of the kingdom now, a real foretaste, while still awaiting the future fulfillment. This tension means Christians live between the times, enjoying the down payment of the kingdom already given while longing for and expecting its final consummation.",
+      modelEs: "La unidad describe el Reino de Dios como a la vez ya presente y todavía no plenamente consumado. Ya está aquí en el ministerio de Jesús y en la morada del Espíritu: el reinado de Dios irrumpió en el mundo con la venida de Cristo, así que el reino es una realidad presente en la vida de quienes le pertenecen. Sin embargo, todavía no está completo; aún esperamos el reinado visible y glorioso de Cristo cuando el reino se realizará plenamente. Un ejemplo es el Espíritu que mora en nosotros: los creyentes experimentan genuinamente la vida y el poder del reino ahora, un anticipo real, mientras todavía esperan el cumplimiento futuro. Esta tensión significa que los cristianos viven entre los tiempos, gozando de las arras del reino ya dadas mientras anhelan y esperan su consumación final." },
+
+    { textEn: "25. Why does Paul compare the Day of the Lord to a thief? What attitude should believers have because of this?",
+      textEs: "25. ¿Por qué compara Pablo el Día del Señor con un ladrón? ¿Qué actitud deben tener los creyentes por causa de esto?",
+      kw_en: ["thief", "unexpected", "sudden", "watchful", "deliverance", "destruction", "alert", "ready"],
+      kw_es: ["ladrón", "inesperado", "repentino", "vigilantes", "liberación", "destrucción", "alerta", "listos"],
+      modelEn: "The unit explains that Paul compares the Day of the Lord to a thief in the night because it will be unexpected, sudden, and decisive. A thief gives no warning, so the comparison stresses that the day will arrive without notice. For the unbeliever it brings destruction, but for the believer it brings deliverance. Because of this, Paul urges believers not to sleep as others do but to stay awake and alert. The fitting attitude is therefore watchfulness rather than fear: believers are to live soberly and ready, not caught off guard, since they belong to the day and not to the night. The thief image is meant not to terrify the faithful but to keep them spiritually awake, expectant, and prepared, confident that for them the day means rescue.",
+      modelEs: "La unidad explica que Pablo compara el Día del Señor con un ladrón en la noche porque será inesperado, repentino y decisivo. Un ladrón no da aviso, así que la comparación subraya que el día llegará sin previo aviso. Para el incrédulo trae destrucción, pero para el creyente trae liberación. Por causa de esto, Pablo exhorta a los creyentes a no dormir como los demás sino a permanecer despiertos y alertas. La actitud apropiada es por tanto la vigilancia más que el temor: los creyentes deben vivir sobriamente y listos, sin ser tomados por sorpresa, pues pertenecen al día y no a la noche. La imagen del ladrón no pretende aterrar a los fieles sino mantenerlos espiritualmente despiertos, expectantes y preparados, confiados en que para ellos el día significa rescate." },
+
+    { textEn: "26. How does eschatology produce hope rather than fear? Support your answer from Paul's teaching.",
+      textEs: "26. ¿Cómo produce la escatología esperanza en lugar de temor? Apoye su respuesta desde la enseñanza de Pablo.",
+      kw_en: ["hope", "fear", "comfort", "Paul", "victory", "deliverance", "resurrection", "encourage"],
+      kw_es: ["esperanza", "temor", "consuelo", "Pablo", "victoria", "liberación", "resurrección", "animar"],
+      modelEn: "The unit argues that, rightly understood, eschatology produces hope rather than fear. Paul's teaching about the end is framed as comfort and encouragement: the Day of the Lord brings deliverance to believers, the dead in Christ will rise, and God will bring His purposes to a glorious consummation. Because the outcome is certain victory and the believer's destiny is deliverance, the future is something to anticipate with confidence rather than dread. Paul directs his readers to encourage one another with these truths, using the hope of Christ's return to strengthen the suffering. Fear belongs to those facing destruction without Christ; for those who are His, the end is rescue and reunion with the Lord. So eschatology functions pastorally, comforting and steadying believers rather than frightening them.",
+      modelEs: "La unidad sostiene que, bien entendida, la escatología produce esperanza en lugar de temor. La enseñanza de Pablo sobre el fin se presenta como consuelo y aliento: el Día del Señor trae liberación a los creyentes, los muertos en Cristo resucitarán, y Dios llevará Sus propósitos a una consumación gloriosa. Como el resultado es la victoria segura y el destino del creyente es la liberación, el futuro es algo que se anticipa con confianza y no con pavor. Pablo dirige a sus lectores a animarse unos a otros con estas verdades, usando la esperanza del regreso de Cristo para fortalecer a los que sufren. El temor pertenece a quienes enfrentan la destrucción sin Cristo; para los que son suyos, el fin es rescate y reunión con el Señor. Así que la escatología funciona pastoralmente, consolando y afirmando a los creyentes en lugar de asustarlos." },
+
+    { textEn: "27. What were the three questions the disciples asked in Matthew 24, and how did Jesus respond to them?",
+      textEs: "27. ¿Cuáles fueron las tres preguntas que hicieron los discípulos en Mateo 24, y cómo respondió Jesús a ellas?",
+      kw_en: ["three questions", "Temple", "return", "sign", "age", "Matthew 24", "readiness", "answered"],
+      kw_es: ["tres preguntas", "Templo", "regreso", "señal", "edad", "Mateo 24", "preparación", "respondió"],
+      modelEn: "The unit identifies three questions the disciples asked in Matthew 24: when the Temple would be destroyed, when Jesus would return, and what would be the sign of the end of the age. Jesus answered them by weaving the near and far horizons together rather than giving a simple date-by-date schedule. He spoke of coming events and warnings, but His emphasis fell on watchfulness and readiness rather than precise timing, returning again to the truth that no one knows the day or hour. So His response was less a calendar than a call: He addressed their curiosity about events but redirected them toward faithful, alert living. The three questions show the disciples wanted information; Jesus' answer shows He wanted them prepared, which is the consistent thrust of the unit's treatment of the end.",
+      modelEs: "La unidad identifica tres preguntas que hicieron los discípulos en Mateo 24: cuándo sería destruido el Templo, cuándo regresaría Jesús, y cuál sería la señal del fin de la edad. Jesús las respondió entretejiendo los horizontes cercano y lejano en lugar de dar un calendario simple fecha por fecha. Habló de eventos venideros y advertencias, pero Su énfasis recayó en la vigilancia y la preparación más que en el tiempo preciso, volviendo de nuevo a la verdad de que nadie sabe el día ni la hora. Así que Su respuesta fue menos un calendario que un llamado: atendió su curiosidad sobre los eventos pero los redirigió hacia una vida fiel y alerta. Las tres preguntas muestran que los discípulos querían información; la respuesta de Jesús muestra que Él los quería preparados, que es el énfasis constante del tratamiento que la unidad hace del fin." },
+
+    { textEn: "28. Evaluate the statement: \"Eschatology is not about charts, it's about character.\" What does this mean?",
+      textEs: "28. Evalúe la afirmación: \"La escatología no se trata de diagramas, se trata del carácter.\" ¿Qué significa esto?",
+      kw_en: ["charts", "character", "speculation", "holiness", "living", "readiness", "transform", "purpose"],
+      kw_es: ["diagramas", "carácter", "especulación", "santidad", "vivir", "preparación", "transformar", "propósito"],
+      modelEn: "The statement captures the unit's central conviction about the end. To make eschatology about charts is to reduce it to diagrams, timelines, and speculation over the sequence of future events. To make it about character is to recognize that its real purpose is to shape how believers live now. The Bible's teaching on the end aims at readiness, hope, watchfulness, and holiness, not at satisfying curiosity about dates. So the statement is largely right: while there is genuine content to learn, the danger is treating eschatology as a puzzle to solve rather than a summons to be transformed. Knowing that Christ will return and that God will consummate His kingdom should produce faithful, expectant, holy lives. The proper test of one's eschatology is therefore not the cleverness of one's chart but the character it produces.",
+      modelEs: "La afirmación capta la convicción central de la unidad sobre el fin. Hacer de la escatología un asunto de diagramas es reducirla a esquemas, cronogramas y especulación sobre la secuencia de eventos futuros. Hacerla un asunto de carácter es reconocer que su verdadero propósito es moldear cómo viven los creyentes ahora. La enseñanza bíblica sobre el fin apunta a la preparación, la esperanza, la vigilancia y la santidad, no a satisfacer la curiosidad sobre fechas. Así que la afirmación es en gran medida correcta: aunque hay contenido genuino que aprender, el peligro es tratar la escatología como un rompecabezas por resolver en lugar de un llamado a ser transformado. Saber que Cristo regresará y que Dios consumará Su reino debe producir vidas fieles, expectantes y santas. La verdadera prueba de la escatología de uno no es, por tanto, lo ingenioso de su diagrama sino el carácter que produce." },
+
+    { textEn: "29. Why did early Christians refuse to say \"Caesar is Lord,\" and what does this teach about Christian allegiance?",
+      textEs: "29. ¿Por qué se negaron los primeros cristianos a decir \"César es Señor,\" y qué enseña esto sobre la lealtad cristiana?",
+      kw_en: ["Caesar", "Lord", "Jesus", "allegiance", "refused", "religious", "worship", "ultimate"],
+      kw_es: ["César", "Señor", "Jesús", "lealtad", "negaron", "religioso", "adoración", "última"],
+      modelEn: "The unit explains that early Christians were required to say \"Caesar is Lord\" once a year to prove their loyalty, but this was not merely a political gesture; it was religious, a claim of ultimate allegiance. Christians refused, declaring instead that Jesus Christ is Lord. They could honor the state in its proper place, but they would not give to Caesar the supreme allegiance that belongs to Christ alone. This teaches that the believer's ultimate loyalty is to Jesus, not to any earthly ruler or nation, and that there is a line beyond which obedience to human authority cannot go. When a government demands the worship and total allegiance owed only to God, the Christian must refuse, even at great cost. Their stand shows that confessing Jesus as Lord reorders every other loyalty beneath Him.",
+      modelEs: "La unidad explica que a los primeros cristianos se les exigía decir \"César es Señor\" una vez al año para probar su lealtad, pero esto no era un mero gesto político; era religioso, una pretensión de lealtad última. Los cristianos se negaron, declarando en cambio que Jesucristo es Señor. Podían honrar al Estado en su lugar propio, pero no daban al César la lealtad suprema que pertenece solo a Cristo. Esto enseña que la lealtad última del creyente es a Jesús, no a ningún gobernante o nación terrenal, y que hay una línea más allá de la cual la obediencia a la autoridad humana no puede ir. Cuando un gobierno exige la adoración y la lealtad total que se deben solo a Dios, el cristiano debe negarse, aun a gran costo. Su postura muestra que confesar a Jesús como Señor reordena toda otra lealtad debajo de Él." },
+
+    { textEn: "30. Summarize the main point of Unit 10. How should eschatology affect daily life?",
+      textEs: "30. Resuma el punto principal de la Unidad 10. ¿Cómo debe afectar la escatología la vida diaria?",
+      kw_en: ["readiness", "hope", "watchfulness", "character", "return", "daily", "faithful", "unity"],
+      kw_es: ["preparación", "esperanza", "vigilancia", "carácter", "regreso", "diaria", "fiel", "unidad"],
+      modelEn: "The main point of the unit is that the doctrine of last things is meant to produce readiness, hope, and faithful character rather than speculation. Jesus withheld a timeline and emphasized watchfulness; Paul presented the end as comfort and deliverance; and the millennial views, though they differ, agree that Christ will return bodily and God will consummate His kingdom. Eschatology should therefore affect daily life by keeping believers alert and prepared, filling them with hope rather than fear, and shaping holy character now. It also reorders allegiance, as the early Christians showed by refusing to call Caesar Lord, putting loyalty to Christ above every earthly power. So the certainty of Christ's return is not a riddle to decode but a motivation to live each day faithfully, expectantly, and in unity, ready to meet the Lord whenever He comes.",
+      modelEs: "El punto principal de la unidad es que la doctrina de las últimas cosas está destinada a producir preparación, esperanza y carácter fiel en lugar de especulación. Jesús ocultó un cronograma y enfatizó la vigilancia; Pablo presentó el fin como consuelo y liberación; y las visiones milenarias, aunque difieren, concuerdan en que Cristo regresará corporalmente y Dios consumará Su reino. La escatología debe, por tanto, afectar la vida diaria manteniendo a los creyentes alerta y preparados, llenándolos de esperanza en lugar de temor, y moldeando un carácter santo ahora. También reordena la lealtad, como mostraron los primeros cristianos al negarse a llamar Señor al César, poniendo la lealtad a Cristo por encima de todo poder terrenal. Así que la certeza del regreso de Cristo no es un acertijo por descifrar sino una motivación para vivir cada día fielmente, con expectación y en unidad, listos para encontrarnos con el Señor cuando venga." }
+];
+
+// ---------- Mid-exam state save/restore ----------
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+// ---------- Lockout check & UI ----------
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    // Already passed entire unit
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad 11 arriba.</span>"
+            : "<span style='color:green'>✓ Unit already passed! Click Unit 11 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    // Full unit lockout
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Tome unos minutos para repasar la lección de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). ¡Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>📖 Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) — you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, SA-only lockout
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>📖 Opción múltiple aprobada y guardada. Repase la lección y las respuestas modelo, y reintente la sección de respuesta corta en ${m} minuto(s). ¡Siga adelante!</span>`
+            : `<span style='color:#8a1f1f'>📖 Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    // MC banked, no lockout active — show notice
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "✓ MC ya aprobado y guardado. Solo necesita reenviar la sección de respuesta corta (9/10)."
+            : "✓ MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+// ---------- Render ----------
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    // MC section
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '✓ Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '✓ Sección de opción múltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la sección de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    // SA section
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30) — M.Div. / Th.M. Track' : 'Respuesta Corta (21–30) — M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        // Container that will hold the model ("teaching") answer once revealed
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first — at least a few sentences (about 100 characters) — then check it against the model answer below.' : 'Escriba primero su propia respuesta — al menos unas cuantas oraciones (unos 100 caracteres) — luego compárela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(kw => ans.indexOf(kw.toLowerCase()) !== -1);
+            // Encouraging, non-punitive feedback — this is a teaching exercise, not a gate
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `✓ Well done — your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `✓ Muy bien — su respuesta toca ${hits.length} de las ideas clave de la lección. Ahora compárela con la respuesta modelo abajo para profundizar su comprensión.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort — you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo — ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podría añadir. Así aprendemos; no hay penalización.`;
+            }
+            // Reveal the model (teaching) answer
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en'
+                    ? '<strong>Model answer — study this:</strong> '
+                    : '<strong>Respuesta modelo — estúdiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+// ---------- Submit ----------
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+// kwHit: short keywords (<=4 chars) match as whole words; longer keywords match
+// as a left-boundary prefix (so intentional stems like 'medita','sacrific' still
+// catch inflections, while 'no'/'ed'/'og' no longer match inside longer words).
+// Word chars include accented Spanish letters.
+function kwHit(ans, k){
+  k = (k||'').toLowerCase();
+  if(!k) return false;
+  var WC = '0-9a-z\\u00e1\\u00e9\\u00ed\\u00f3\\u00fa\\u00f1\\u00fc';
+  var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (k.length <= 4)
+    ? '(?:^|[^'+WC+'])'+esc+'(?![' + WC + '])'
+    : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); }
+  catch(e){ return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+// Masters-level = M.Div. OR Th.M. Both are graded on MC AND SA.
+// Grading must route through this, never through a bare M.Div. check.
+function isMastersLevel(track) {
+    return track === 'mdiv' || track === 'thm';
+}
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor regístrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    // ----- Certificate / non-Masters track: MC only, 18/20 -----
+    // Masters-level (M.Div. OR Th.M.) routes through isMastersLevel() below.
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). ¡Está cerca, no se desanime! Repase la lección de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de las respuestas abajo muestran qué estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close — don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // ----- Masters track (M.Div. or Th.M.): MC + SA, both 90% independent -----
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    // Case A: MC was already banked from a prior attempt → only SA matters now
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ✓ banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>✓ PASSED! MC ✓ banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobación de opción múltiple está a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo — repase la lección y las respuestas modelo abajo, y vuelva a intentar la sección de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort — review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    // Case B: First-time M.Div submission
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>✓ ¡APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>✓ PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        // MC banked; SA-only lockout (the central retrofit feature)
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ aprobado y guardado. SA ${saScore}/10 (se requiere 9). Sección SA bloqueada 15 min. Al desbloquear, reenvíe solo la SA — el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 ✓ passed and banked. SA ${saScore}/10 (need 9). SA section locked 15 min. When unlocked, resubmit SA only — MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        // MC failed → full unit lockout regardless of SA
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>✗ Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada 15 minutos.</span>`
+            : `<span style='color:#8a1f1f'>✗ Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked 15 minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+// ---------- Reset ----------
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '¿Reiniciar esta unidad?\n\nEsto borrará: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobación de esta unidad.\n\nEl contenido docente permanece. Esta acción no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    // Clear in-memory state directly so the screen resets even if reload is
+    // blocked (e.g. in a sandboxed preview). Re-render from the cleared state.
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) { /* preview may block reload; screen already reset */ }
+}
+
+// ---------- Wire & init ----------
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSSTReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

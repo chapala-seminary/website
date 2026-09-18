@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS World Religions — Unit 3: Islam</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a1f1f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-form { background: #f8f4e8; border: 1px solid #e8d9b8; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.reg-form input, .reg-form select { width: 100%; padding: 10px; margin: 6px 0 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; }
+.reg-form label { font-weight: bold; display: block; margin-top: 10px; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; padding: 0; font-size: 12pt; }
+    .nav-bar, .toggle-btn, .nav-btn, button, .reg-form { display: none !important; }
+    .card { box-shadow: none; border: none; page-break-inside: avoid; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn">← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn" disabled>Unit 4 →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" style="display:inline-block;margin-bottom:15px;">
+<button class="toggle-btn" data-lang="en" id="langBtnEn">English</button>
+<button class="toggle-btn" data-lang="es" id="langBtnEs">Español</button>
+<button class="toggle-btn" data-lang="both" id="langBtnBoth">Both / Ambos</button>
+</div>
+
+<div class="card">
+    <h1><span class="lang-en">🌍 World Religions — Unit 3: Islam</span><span class="lang-es">🌍 Religiones del Mundo — Unidad 3: El Islam</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top: 10px; font-style: italic; color: #5b3a1f;"><span class="lang-en">"For there is one God and one Mediator between God and men, the Man Christ Jesus, who gave Himself a ransom for all." — 1 Timothy 2:5–6 (NKJV)</span><span class="lang-es">"Porque hay un solo Dios, y un solo Mediador entre Dios y los hombres, Jesucristo hombre, el cual se dio a sí mismo en rescate por todos." — 1 Timoteo 2:5–6 (RVG)</span></p>
+</div>
+
+<div class="card reg-form" id="registrationCard">
+    <h2><span class="lang-en">Student Registration</span><span class="lang-es">Registro del Estudiante</span></h2>
+    <p><span class="lang-en">Please register before beginning this unit. Your registration is saved on this device and used across all CTS courses.</span><span class="lang-es">Por favor regístrese antes de comenzar esta unidad. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full Name</span><span class="lang-es">Nombre Completo</span></label>
+    <input type="text" id="regName" placeholder="" />
+    <label><span class="lang-en">Email</span><span class="lang-es">Correo Electrónico</span></label>
+    <input type="email" id="regEmail" placeholder="" />
+    <label><span class="lang-en">Country</span><span class="lang-es">País</span></label>
+    <input type="text" id="regCountry" placeholder="" />
+    <label><span class="lang-en">Program Track</span><span class="lang-es">Programa</span></label>
+    <input type="hidden" id="regTrack" value="certificate" />
+    <div id="trackButtons" style="display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;">
+        <button type="button" class="track-opt" data-track="certificate"><span class="lang-en">Certificate of Ministry</span><span class="lang-es">Certificado de Ministerio</span></button>
+        <button type="button" class="track-opt" data-track="mdiv"><span class="lang-en">Master of Divinity (M.Div.)</span><span class="lang-es">Maestría en Divinidad (M.Div.)</span></button>
+        <button type="button" class="track-opt" data-track="thm"><span class="lang-en">Master of Theology (Th.M.)</span><span class="lang-es">Maestría en Teología (Th.M.)</span></button>
+    </div>
+    <button class="small" id="saveRegBtn" style="margin-top: 10px;"><span class="lang-en">Save Registration</span><span class="lang-es">Guardar Registro</span></button>
+    <div id="regStatus" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>Orientation</h2>
+        <p>Islam is, by most counts, the second-largest religion in the world, with approximately two billion adherents across every continent, and it is a faith your students will encounter with growing frequency, whether through immigration, media, interfaith dialogue, or simple curiosity from a neighbor or coworker. Unlike Judaism, Islam did not grow directly out of the soil of the Old Testament covenant community, but it did emerge in close contact with both Judaism and Christianity, in a seventh-century Arabian peninsula where Jewish and Christian communities were already present, and it consciously positions itself as the final and complete revelation superseding both. Understanding Islam accurately, rather than through rumor or caricature in either direction, is essential for any pastor who wants to engage Muslim neighbors the way Paul engaged the Athenians — with careful observation before confrontation, and love that does not flinch from the truth.</p>
+
+        <p>This unit will trace the origin of Islam in the life of Muhammad, examine its central text and central practices, explain the great historical division between Sunni and Shia Muslims, compare what Islam teaches about Jesus with what Christians actually believe, and close with practical guidance for gospel conversations with Muslim friends. As with every unit in this course, our aim is neither contempt nor a soft-pedaled tolerance that refuses to name real differences, but the same disciplined combination Paul modeled at the Areopagus in Unit 1: patient understanding joined to clear, urgent proclamation of the risen Christ.</p>
+
+        <h2>I. Muhammad and the Origins of Islam</h2>
+        <p>Muhammad ibn Abdullah was born around A.D. 570 in Mecca, a trading city in the Arabian peninsula that was also home to a major pagan pilgrimage site, the Kaaba, housing hundreds of tribal idols. Orphaned young, Muhammad grew up under the care of relatives and eventually became a respected merchant, marrying a wealthy widow named Khadijah. According to Islamic tradition, in A.D. 610, while meditating in a cave outside Mecca, Muhammad received the first of what Muslims believe were a series of revelations delivered to him by the angel Jibril (Gabriel) over the next twenty-three years — revelations Muslims hold to be the literal, verbatim words of Allah, later collected into the Qur'an.</p>
+
+        <p>Muhammad's early preaching in Mecca, calling the polytheistic Arab tribes to abandon their idols and worship the one God, met fierce resistance from Meccan leaders whose economic and religious interests were tied to the pilgrimage trade around the Kaaba. In A.D. 622, facing increasing persecution, Muhammad and his small community of followers migrated to the city of Yathrib, later renamed Medina — an event called the Hijra, so significant to Islamic identity that the Islamic calendar dates all years from this migration rather than from Muhammad's birth or first revelation. In Medina, Muhammad's role expanded dramatically: he became not only a religious leader but a political and military one, eventually leading his followers back to conquer Mecca in A.D. 630 and unifying most of the Arabian peninsula under Islamic rule before his death in A.D. 632. This trajectory — prophet, then statesman, then military commander — stands in sharp contrast to the pattern of Jesus' own earthly ministry, and it shapes, to this day, important differences in how Islam and Christianity have each historically understood the relationship between religious authority and political power.</p>
+
+        <p>It is worth a pastor's attention that Muhammad regarded himself as standing in continuity with, not opposition to, the biblical prophets. Islamic tradition holds that Allah sent many prophets before Muhammad, including Adam, Noah, Abraham, Moses, and Jesus, each bringing essentially the same message of submission to the one God, and that Muhammad was simply the last and greatest in this line — the "seal of the prophets." This claim of continuity is precisely why a Muslim neighbor will often already hold Abraham, Moses, and Jesus in genuine esteem, and why gospel conversation with a Muslim friend can often begin from figures and stories both faiths already recognize as significant, even while the two traditions understand those figures very differently in the end.</p>
+
+        <h2>II. The Qur'an and the Five Pillars</h2>
+        <p>The Qur'an, meaning "the recitation," is Islam's central sacred text, organized into 114 chapters called surahs, arranged roughly from longest to shortest rather than chronologically. Muslims believe the Qur'an to be the final, perfect, and unchangeable word of Allah, superseding all previous revelation, including the Torah given to Moses and the Injil (Gospel) given to Jesus, both of which Islam affirms were originally true revelations from God but holds were later corrupted or altered by Jewish and Christian communities — a doctrine that has significant implications for how Muslims regard the Bible Christians actually possess today. Alongside the Qur'an, Islamic tradition also draws heavily on the Hadith, extensive collections of reports about what Muhammad said and did, compiled by later scholars and used to guide Islamic law and practice on matters the Qur'an does not address directly.</p>
+
+        <p>Islamic practice centers on what are called the Five Pillars, the core religious obligations incumbent on every believing Muslim. The <em>Shahada</em> is the declaration of faith: "There is no god but Allah, and Muhammad is his messenger" — the recitation of this single sentence, sincerely believed, is what formally makes a person a Muslim. <em>Salat</em> is the obligation of ritual prayer, performed five times daily at prescribed times, facing the direction of Mecca. <em>Zakat</em> is obligatory almsgiving, typically calculated as roughly two and a half percent of a Muslim's accumulated wealth, given annually for the relief of the poor. <em>Sawm</em> is fasting during the month of Ramadan, abstaining from food, drink, and other physical needs from dawn until sunset for the entire lunar month, commemorating the month in which Muslims believe the Qur'an was first revealed. <em>Hajj</em> is the pilgrimage to Mecca, required at least once in a lifetime for every Muslim who is physically and financially able, centered on rituals performed at and around the Kaaba. Together these five pillars structure the daily, weekly, and lifelong rhythm of Muslim religious life in a way analogous to, though substantially different from, the way Sabbath observance and the feasts once structured Jewish religious life before the Temple's destruction, which we studied in Unit 2.</p>
+
+        <h2>III. Sunni and Shia: The Great Division</h2>
+        <p>Islam's largest historical division arose almost immediately after Muhammad's death in A.D. 632, over a question of leadership rather than, initially, a question of doctrine: who should succeed Muhammad as leader of the Muslim community? The majority, who became known as Sunni Muslims (from a word meaning "tradition," referring to the practice of Muhammad), held that the new leader, called the caliph, should be chosen by the consensus of the community's leading figures, and accepted the first four caliphs — Abu Bakr, Umar, Uthman, and Ali — as legitimate. A minority insisted that leadership should have passed by divine right through Muhammad's own bloodline, specifically through his cousin and son-in-law Ali and Ali's descendants; this group became known as Shia Muslims, from "Shiat Ali," meaning "the party of Ali." The martyrdom of Ali's son Husayn at the Battle of Karbala in A.D. 680, killed by Sunni caliphal forces, became and remains a defining event of Shia religious identity, commemorated annually with intense mourning observances during the month of Muharram.</p>
+
+        <p>Today, Sunni Muslims make up roughly eighty-five to ninety percent of the world's Muslim population, with Shia Muslims concentrated especially in Iran, Iraq, Bahrain, and significant communities in Lebanon, Yemen, and elsewhere. While the original dispute concerned political succession, centuries of separate development have produced real theological and legal differences as well, particularly around religious authority — Shia Islam places great emphasis on a line of divinely appointed spiritual leaders called Imams, descended from Ali, while Sunni Islam does not recognize any comparable ongoing office of infallible religious authority after Muhammad. A pastor should be aware that a Muslim neighbor's particular practices, emphases, and even calendar of religious observance may differ significantly depending on whether he comes from a Sunni or Shia background, much as a pastor learned in Unit 2 to expect real differences between an Orthodox and a Reform Jewish neighbor.</p>
+
+        <p>Beyond the Sunni-Shia division itself, both branches contain further internal variety worth a pastor's attention. Sunni Islam recognizes four major historical schools of religious law, differing in method and emphasis but generally regarded as equally legitimate within Sunni practice. Sufism, a mystical current found within both Sunni and Shia communities, emphasizes direct, experiential closeness to God cultivated through disciplined spiritual practice, chanted remembrance of God's names, and often the guidance of a spiritual master — a stream of Islamic devotion considerably more given to poetry, music, and inward longing than the legal and doctrinal emphasis more typical of mainstream Sunni scholarship. A pastor who assumes all Muslims practice identically will miss this real internal diversity, just as he would if he assumed all Christians worshiped identically.</p>
+
+        <h2>IV. What Muslims Believe About Jesus, and Where Islam and Christianity Diverge</h2>
+        <p>Perhaps surprisingly to many Christians meeting a Muslim neighbor for the first time, Islam holds Jesus — called Isa in Arabic — in very high regard. The Qur'an affirms Jesus' virgin birth, calls him the Messiah, attributes numerous miracles to him including healing the blind and raising the dead, and even anticipates his return at the end of the age. This shared reverence for Jesus can provide genuine common ground for gospel conversation, but a pastor must understand clearly where the Islamic and Christian pictures of Jesus diverge, because the divergence is not minor — it goes to the very heart of the gospel.</p>
+
+        <p>Islam firmly denies the deity of Christ; the Qur'an explicitly rejects the idea that God has a son, and rejects the Trinity as a form of polytheism incompatible with Islam's uncompromising monotheism, called <em>tawhid</em> — though the historic Christian doctrine is not belief in three gods but one God eternally existing in three Persons, Father, Son, and Holy Spirit, a distinction worth making clearly when the conversation with a Muslim friend turns here. Islam denies that Jesus died on the cross at all — most Muslim interpreters hold that Jesus was taken up to heaven before the crucifixion and that someone else, in some accounts made to resemble him, died in his place, meaning Islam has no doctrine of atonement through Christ's death because it denies the death occurred. Where Christianity teaches that sin is a corruption of human nature inherited from Adam, requiring a substitutionary atonement that only God Himself could provide, Islam generally teaches that human beings are born in a state of natural submission to God (called <em>fitrah</em>) and that sin is a matter of individual acts of disobedience and forgetfulness rather than an inherited corrupted nature — a problem addressed through repentance, good works, and Allah's mercy rather than through a substitutionary sacrifice. On the Day of Judgment, Islamic teaching holds that a person's good and bad deeds will be weighed, and their eternal destiny determined largely on that basis, tempered by Allah's mercy, which is not guaranteed to any individual in advance — a picture of salvation resting substantially on human performance rather than on the finished, guaranteed work of a Savior, in sharp contrast to grace received by faith, which Ephesians 2:8-9 describes as "not of works, lest anyone should boast."</p>
+
+        <h2>V. Engaging Muslim Neighbors and Friends with the Gospel</h2>
+        <p>Following the pattern this course established with Paul at the Areopagus in Unit 1, a pastor engaging a Muslim neighbor should begin from real common ground rather than immediate confrontation. Muslims and Christians share belief in one Creator God, a high view of Scripture as divine revelation, a serious concern for personal morality and righteous living, deep respect for prayer and fasting as spiritual disciplines, and — as this unit has shown — genuine reverence for Jesus, however differently understood. A pastor who begins a conversation by honoring these shared convictions, much as Paul honored the Athenians' evident religiosity before correcting it, will find Muslim neighbors, who are often themselves serious and thoughtful about matters of faith, far more willing to continue the conversation than a pastor who opens with confrontation.</p>
+
+        <p>From that foundation of genuine respect, this unit encourages pastors to move the conversation, patiently and over time, toward the specific points where the gospel offers something Islam cannot: an atonement that has actually been accomplished rather than a judgment still pending on uncertain mercy, a Savior who is himself God come near rather than merely one prophet among many, and a righteousness received freely by faith rather than assembled anxiously through a lifetime of works whose sufficiency no one can be certain of in advance. First Timothy 2:5-6 states the Christian claim with precision suited to exactly this conversation: "there is one God and one Mediator between God and men, the Man Christ Jesus, who gave Himself a ransom for all." This verse affirms the very monotheism Islam insists on — one God — while proclaiming the very things Islam denies: a mediating Savior who gave Himself, meaning He actually died, as a ransom, meaning His death accomplished something real for others.</p>
+
+        <p>Practically, pastors should be prepared to discuss honestly and respectfully the historical evidence for Jesus' crucifixion, which is affirmed by hostile Roman and Jewish sources as well as Christian ones and stands on far firmer historical ground than the later Islamic tradition claiming otherwise; the reliability of the New Testament text as it has actually come down to us, addressing directly the Islamic claim of corruption; and the actual content of what the Qur'an itself says about Jesus, since many Muslim neighbors have not studied these passages in depth themselves and are often surprised by how much the Qur'an affirms about Him. Above all, as with every religion this course studies, genuine friendship, patient listening, and the kind of hospitality Jesus Himself modeled with those outside the household of Israel remain the context in which these deeper conversations become possible at all.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Chapala Theological Seminary</p>
+
+    </div>
+
+    <div class="lang-es">
+        <h2>Orientación</h2>
+        <p>El islam es, según la mayoría de los conteos, la segunda religión más grande del mundo, con aproximadamente dos mil millones de adherentes en todos los continentes, y es una fe que sus estudiantes encontrarán con frecuencia creciente, ya sea por inmigración, medios de comunicación, diálogo interreligioso, o la simple curiosidad de un vecino o compañero de trabajo. A diferencia del judaísmo, el islam no creció directamente de la tierra de la comunidad del pacto del Antiguo Testamento, pero sí surgió en contacto cercano tanto con el judaísmo como con el cristianismo, en una península arábiga del siglo séptimo donde ya existían comunidades judías y cristianas, y se posiciona conscientemente como la revelación final y completa que sustituye a ambas. Entender el islam con precisión, en lugar de por rumor o caricatura en cualquier dirección, es esencial para todo pastor que quiera relacionarse con vecinos musulmanes de la manera en que Pablo se relacionó con los atenienses — con observación cuidadosa antes de la confrontación, y amor que no rehúye la verdad.</p>
+
+        <p>Esta unidad trazará el origen del islam en la vida de Mahoma, examinará su texto central y sus prácticas centrales, explicará la gran división histórica entre musulmanes sunitas y chiitas, comparará lo que el islam enseña acerca de Jesús con lo que los cristianos realmente creen, y cerrará con orientación práctica para conversaciones evangelísticas con amigos musulmanes. Como en cada unidad de este curso, nuestro objetivo no es ni el desprecio ni una tolerancia blanda que se niega a nombrar diferencias reales, sino la misma combinación disciplinada que Pablo modeló en el Areópago en la Unidad 1: comprensión paciente unida a una proclamación clara y urgente de Cristo resucitado.</p>
+
+        <h2>I. Mahoma y los orígenes del islam</h2>
+        <p>Mahoma ibn Abdullah nació alrededor del año 570 d.C. en La Meca, una ciudad comercial en la península arábiga que también albergaba un importante sitio de peregrinación pagana, la Kaaba, que albergaba cientos de ídolos tribales. Huérfano desde joven, Mahoma creció bajo el cuidado de parientes y eventualmente se convirtió en un respetado comerciante, casándose con una rica viuda llamada Jadiya. Según la tradición islámica, en el año 610 d.C., mientras meditaba en una cueva a las afueras de La Meca, Mahoma recibió la primera de lo que los musulmanes creen fue una serie de revelaciones entregadas por el ángel Yibril (Gabriel) durante los siguientes veintitrés años — revelaciones que los musulmanes sostienen que son las palabras literales y textuales de Alá, luego recopiladas en el Corán.</p>
+
+        <p>La predicación temprana de Mahoma en La Meca, llamando a las tribus árabes politeístas a abandonar sus ídolos y adorar al único Dios, encontró feroz resistencia de los líderes mequíes cuyos intereses económicos y religiosos estaban ligados al comercio de peregrinación en torno a la Kaaba. En el año 622 d.C., enfrentando persecución creciente, Mahoma y su pequeña comunidad de seguidores emigraron a la ciudad de Yatrib, luego renombrada Medina — un evento llamado la Hégira, tan significativo para la identidad islámica que el calendario islámico fecha todos los años desde esta migración en lugar de desde el nacimiento de Mahoma o su primera revelación. En Medina, el papel de Mahoma se expandió dramáticamente: se convirtió no solo en un líder religioso sino también político y militar, eventualmente liderando a sus seguidores de regreso para conquistar La Meca en el año 630 d.C. y unificando la mayor parte de la península arábiga bajo el gobierno islámico antes de su muerte en el año 632 d.C. Esta trayectoria — profeta, luego estadista, luego comandante militar — contrasta marcadamente con el patrón del propio ministerio terrenal de Jesús, y da forma, hasta hoy, a diferencias importantes en cómo el islam y el cristianismo han entendido históricamente la relación entre la autoridad religiosa y el poder político.</p>
+
+        <p>Vale la pena la atención de un pastor que Mahoma se consideraba a sí mismo en continuidad, no en oposición, con los profetas bíblicos. La tradición islámica sostiene que Alá envió a muchos profetas antes de Mahoma, incluyendo a Adán, Noé, Abraham, Moisés y Jesús, cada uno trayendo esencialmente el mismo mensaje de sumisión al único Dios, y que Mahoma fue simplemente el último y más grande de esta línea — el "sello de los profetas." Esta afirmación de continuidad es precisamente por qué un vecino musulmán a menudo ya tiene en genuina estima a Abraham, Moisés y Jesús, y por qué la conversación evangelística con un amigo musulmán a menudo puede comenzar desde figuras e historias que ambas fes ya reconocen como significativas, aunque las dos tradiciones entiendan esas figuras de manera muy diferente al final.</p>
+
+        <h2>II. El Corán y los Cinco Pilares</h2>
+        <p>El Corán, que significa "la recitación," es el texto sagrado central del islam, organizado en 114 capítulos llamados suras, ordenados aproximadamente de más largo a más corto en lugar de cronológicamente. Los musulmanes creen que el Corán es la palabra final, perfecta e inmutable de Alá, que sustituye a toda revelación anterior, incluyendo la Torá dada a Moisés y el Inyil (Evangelio) dado a Jesús, ambos que el islam afirma que originalmente fueron revelaciones verdaderas de Dios pero sostiene que luego fueron corrompidas o alteradas por las comunidades judías y cristianas — una doctrina que tiene implicaciones significativas para cómo los musulmanes consideran la Biblia que los cristianos realmente poseen hoy. Junto al Corán, la tradición islámica también se basa considerablemente en el Hadiz, extensas colecciones de informes acerca de lo que Mahoma dijo e hizo, compiladas por eruditos posteriores y usadas para guiar la ley y la práctica islámicas en asuntos que el Corán no aborda directamente.</p>
+
+        <p>La práctica islámica se centra en lo que se llaman los Cinco Pilares, las obligaciones religiosas centrales que recaen sobre todo musulmán creyente. La <em>Shahada</em> es la declaración de fe: "No hay más dios que Alá, y Mahoma es su mensajero" — la recitación de esta única frase, creída sinceramente, es lo que formalmente hace a una persona musulmana. El <em>Salat</em> es la obligación de la oración ritual, realizada cinco veces al día en horarios prescritos, orientado hacia La Meca. El <em>Zakat</em> es la limosna obligatoria, típicamente calculada como aproximadamente el dos y medio por ciento de la riqueza acumulada de un musulmán, dada anualmente para el alivio de los pobres. El <em>Sawm</em> es el ayuno durante el mes de Ramadán, absteniéndose de comida, bebida y otras necesidades físicas desde el amanecer hasta la puesta del sol durante todo el mes lunar, conmemorando el mes en que los musulmanes creen que el Corán fue revelado por primera vez. El <em>Hach</em> es la peregrinación a La Meca, requerida al menos una vez en la vida para todo musulmán que sea física y económicamente capaz, centrada en rituales realizados en y alrededor de la Kaaba. Juntos estos cinco pilares estructuran el ritmo diario, semanal y de toda la vida de la práctica religiosa musulmana de una manera análoga, aunque sustancialmente diferente, a como la observancia del sábado y las fiestas alguna vez estructuraron la vida religiosa judía antes de la destrucción del Templo, que estudiamos en la Unidad 2.</p>
+
+        <h2>III. Sunitas y chiitas: La gran división</h2>
+        <p>La mayor división histórica del islam surgió casi inmediatamente después de la muerte de Mahoma en el año 632 d.C., por una cuestión de liderazgo más que, inicialmente, una cuestión de doctrina: ¿quién debería suceder a Mahoma como líder de la comunidad musulmana? La mayoría, que llegó a conocerse como musulmanes sunitas (de una palabra que significa "tradición," refiriéndose a la práctica de Mahoma), sostuvo que el nuevo líder, llamado el califa, debería ser elegido por el consenso de las figuras principales de la comunidad, y aceptó a los primeros cuatro califas — Abu Bakr, Umar, Uzmán y Ali — como legítimos. Una minoría insistió en que el liderazgo debería haber pasado por derecho divino a través de la propia línea de sangre de Mahoma, específicamente a través de su primo y yerno Ali y los descendientes de Ali; este grupo llegó a conocerse como musulmanes chiitas, de "Shiat Ali," que significa "el partido de Ali." El martirio del hijo de Ali, Huseín, en la Batalla de Karbala en el año 680 d.C., asesinado por fuerzas del califato sunita, se convirtió y sigue siendo un evento definitorio de la identidad religiosa chiita, conmemorado anualmente con intensas observancias de duelo durante el mes de Muharram.</p>
+
+        <p>Hoy, los musulmanes sunitas constituyen aproximadamente entre el ochenta y cinco y el noventa por ciento de la población musulmana mundial, con musulmanes chiitas concentrados especialmente en Irán, Irak, Baréin, y comunidades significativas en Líbano, Yemen y otros lugares. Aunque la disputa original concernía a la sucesión política, siglos de desarrollo separado han producido también diferencias teológicas y legales reales, particularmente en torno a la autoridad religiosa — el islam chiita otorga gran énfasis a una línea de líderes espirituales divinamente designados llamados Imanes, descendientes de Ali, mientras que el islam sunita no reconoce ningún cargo continuo comparable de autoridad religiosa infalible después de Mahoma. Un pastor debe estar consciente de que las prácticas particulares, los énfasis, e incluso el calendario de observancia religiosa de un vecino musulmán pueden diferir significativamente dependiendo de si proviene de un trasfondo sunita o chiita, tal como un pastor aprendió en la Unidad 2 a esperar diferencias reales entre un vecino judío ortodoxo y uno reformista.</p>
+
+        <p>Más allá de la división sunita-chiita misma, ambas ramas contienen mayor variedad interna que merece la atención de un pastor. El islam sunita reconoce cuatro escuelas históricas principales de ley religiosa, que difieren en método y énfasis pero generalmente se consideran igualmente legítimas dentro de la práctica sunita. El sufismo, una corriente mística que se encuentra tanto dentro de comunidades sunitas como chiitas, enfatiza la cercanía directa y experiencial a Dios cultivada a través de la práctica espiritual disciplinada, el recuerdo cantado de los nombres de Dios, y a menudo la guía de un maestro espiritual — una corriente de devoción islámica considerablemente más dada a la poesía, la música y el anhelo interior que el énfasis legal y doctrinal más típico de la erudición sunita convencional. Un pastor que asume que todos los musulmanes practican de manera idéntica pasará por alto esta verdadera diversidad interna, tal como lo haría si asumiera que todos los cristianos adoran de manera idéntica.</p>
+
+        <h2>IV. Lo que los musulmanes creen acerca de Jesús, y dónde divergen el islam y el cristianismo</h2>
+        <p>Quizás sorprendentemente para muchos cristianos que conocen a un vecino musulmán por primera vez, el islam tiene a Jesús — llamado Isa en árabe — en muy alta estima. El Corán afirma el nacimiento virginal de Jesús, lo llama el Mesías, le atribuye numerosos milagros incluyendo sanar a los ciegos y resucitar a los muertos, e incluso anticipa su regreso al final de los tiempos. Esta reverencia compartida por Jesús puede proporcionar un terreno común genuino para la conversación evangelística, pero un pastor debe entender claramente dónde divergen los cuadros islámico y cristiano de Jesús, porque la divergencia no es menor — llega al corazón mismo del evangelio.</p>
+
+        <p>El islam niega firmemente la deidad de Cristo; el Corán rechaza explícitamente la idea de que Dios tenga un hijo, y rechaza la Trinidad como una forma de politeísmo incompatible con el monoteísmo intransigente del islam, llamado <em>tawhid</em> — aunque la doctrina cristiana histórica no es la creencia en tres dioses sino un solo Dios que existe eternamente en tres Personas, Padre, Hijo, y Espíritu Santo, una distinción que vale la pena hacer con claridad cuando la conversación con un amigo musulmán llega a este punto. El islam niega que Jesús muriera en la cruz en absoluto — la mayoría de los intérpretes musulmanes sostienen que Jesús fue llevado al cielo antes de la crucifixión y que alguien más, en algunos relatos hecho para parecerse a él, murió en su lugar, lo que significa que el islam no tiene doctrina de expiación a través de la muerte de Cristo porque niega que la muerte ocurriera. Donde el cristianismo enseña que el pecado es una corrupción de la naturaleza humana heredada de Adán, que requiere una expiación sustitutoria que solo Dios mismo podía proveer, el islam generalmente enseña que los seres humanos nacen en un estado de sumisión natural a Dios (llamado <em>fitrah</em>) y que el pecado es cuestión de actos individuales de desobediencia y olvido en lugar de una naturaleza corrompida heredada — un problema abordado a través del arrepentimiento, las buenas obras y la misericordia de Alá en lugar de un sacrificio sustitutorio. En el Día del Juicio, la enseñanza islámica sostiene que las buenas y malas obras de una persona serán pesadas, y su destino eterno determinado en gran parte sobre esa base, atenuado por la misericordia de Alá, que no está garantizada de antemano para ningún individuo — un cuadro de salvación que descansa sustancialmente en el desempeño humano en lugar de en la obra terminada y garantizada de un Salvador, en marcado contraste con la gracia recibida por fe, que Efesios 2:8-9 describe como "no por obras, para que nadie se gloríe."</p>
+
+        <h2>V. Acercándose a vecinos y amigos musulmanes con el evangelio</h2>
+        <p>Siguiendo el patrón que este curso estableció con Pablo en el Areópago en la Unidad 1, un pastor que se relaciona con un vecino musulmán debe comenzar desde un terreno común real en lugar de la confrontación inmediata. Musulmanes y cristianos comparten la creencia en un Dios Creador, una alta consideración de la Escritura como revelación divina, una preocupación seria por la moralidad personal y la vida recta, profundo respeto por la oración y el ayuno como disciplinas espirituales, y — como esta unidad ha mostrado — reverencia genuina por Jesús, aunque entendida de manera diferente. Un pastor que comienza una conversación honrando estas convicciones compartidas, tal como Pablo honró la evidente religiosidad de los atenienses antes de corregirla, encontrará que los vecinos musulmanes, que a menudo son ellos mismos serios y reflexivos acerca de asuntos de fe, están mucho más dispuestos a continuar la conversación que con un pastor que abre con confrontación.</p>
+
+        <p>Desde ese fundamento de respeto genuino, esta unidad anima a los pastores a mover la conversación, con paciencia y con el tiempo, hacia los puntos específicos donde el evangelio ofrece algo que el islam no puede: una expiación que realmente se ha logrado en lugar de un juicio todavía pendiente sobre una misericordia incierta, un Salvador que es Él mismo Dios que se acerca en lugar de meramente un profeta entre muchos, y una justicia recibida libremente por fe en lugar de ensamblada ansiosamente a través de toda una vida de obras cuya suficiencia nadie puede tener certeza de antemano. Primera de Timoteo 2:5-6 declara la afirmación cristiana con precisión adecuada exactamente para esta conversación: "porque hay un solo Dios, y un solo Mediador entre Dios y los hombres, Jesucristo hombre, el cual se dio a sí mismo en rescate por todos." Este versículo afirma el mismo monoteísmo en el que el islam insiste — un solo Dios — mientras proclama las mismas cosas que el islam niega: un Salvador mediador que se dio a sí mismo, lo que significa que realmente murió, como rescate, lo que significa que Su muerte logró algo real para otros.</p>
+
+        <p>En la práctica, los pastores deben estar preparados para discutir honesta y respetuosamente la evidencia histórica de la crucifixión de Jesús, la cual es afirmada tanto por fuentes romanas y judías hostiles como por fuentes cristianas y descansa sobre un terreno histórico mucho más firme que la posterior tradición islámica que afirma lo contrario; la fiabilidad del texto del Nuevo Testamento tal como realmente ha llegado hasta nosotros, abordando directamente la afirmación islámica de corrupción; y el contenido real de lo que el Corán mismo dice acerca de Jesús, ya que muchos vecinos musulmanes no han estudiado ellos mismos estos pasajes en profundidad y a menudo se sorprenden de cuánto afirma el Corán acerca de Él. Sobre todo, como con cada religión que estudia este curso, la amistad genuina, la escucha paciente, y el tipo de hospitalidad que Jesús mismo modeló con aquellos fuera de la casa de Israel siguen siendo el contexto en el cual estas conversaciones más profundas llegan a ser posibles.</p>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">— Dr. Wayne Cook<br>Seminario Teológico de Chapala</p>
+
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 3 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 3 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong></span>
+       <span class="lang-es"><strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong></span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top: 20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar &amp; Verificar</span></button>
+        <button id="resetExamBtn" class="small reset"><span class="lang-en">Reset</span><span class="lang-es">Reiniciar</span></button>
+        <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+</div>
+</div>
+
+<script>
+const totalUnits = 12;
+let currentUnit = 3;
+let progress = JSON.parse(localStorage.getItem('cts_wr_progress')) || {};
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSWRUnit${i}.html" class="${cls}">${i}</a>`;
+    }
+    if (progress.unit3) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('prevUnitBtn').onclick = () => { location.href = "CTSWRUnit2.html"; };
+document.getElementById('nextUnitBtn').onclick = () => { location.href = "CTSWRUnit4.html"; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (student && student.name) {
+        const trackLabel = student.track === 'mdiv' ? 'M.Div.' : (student.track === 'thm' ? 'Th.M.' : 'Certificate');
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name} <span style="font-weight:normal;font-size:0.85rem;">(${trackLabel})</span> &nbsp;<a href="#" id="changeTrackLink" style="font-size:0.8rem;color:#5b3a1f;">Change track</a>`;
+        document.getElementById('registrationCard').style.display = 'none';
+        const link = document.getElementById('changeTrackLink');
+        if (link) link.onclick = function(e) {
+            e.preventDefault();
+            const card = document.getElementById('registrationCard');
+            card.style.display = 'block';
+            if (student.name) document.getElementById('regName').value = student.name;
+            if (student.email) document.getElementById('regEmail').value = student.email;
+            if (student.country) document.getElementById('regCountry').value = student.country;
+            if (student.track && typeof setTrack === 'function') setTrack(student.track);
+            card.scrollIntoView({ behavior: 'smooth' });
+        };
+    } else {
+        document.getElementById('studentGreeting').innerHTML = `<span style="color:#5b3a1f;">⚠️ Please register</span>`;
+    }
+}
+displayStudentGreeting();
+
+
+function setTrack(t) {
+    document.getElementById('regTrack').value = t;
+    document.querySelectorAll('.track-opt').forEach(b => { b.classList.toggle('selected', b.getAttribute('data-track') === t); });
+}
+document.querySelectorAll('.track-opt').forEach(b => { b.onclick = function() { setTrack(this.getAttribute('data-track')); }; });
+setTrack('certificate');
+document.getElementById('saveRegBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const country = document.getElementById('regCountry').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = `<span style="color:red;">⚠️ Name and email are required.</span>`;
+        return;
+    }
+    localStorage.setItem('cts_student', JSON.stringify({ name, email, country, track }));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = `<span style="color:green;">✓ Saved! Welcome, ${name}.</span>`;
+    setTimeout(() => { displayStudentGreeting(); }, 1000);
+    renderQuestions();
+};
+
+// Q3 reshuffled (Psalm 23 author) to move David from C to B for 5/5/5/5 balance.
+const mcQuestions = [
+  {
+    "textEn": "1. Muhammad was born around A.D. 570 in:",
+    "textEs": "1. Mahoma nació alrededor del año 570 d.C. en:",
+    "optionsEn": [
+      "Mecca",
+      "Medina",
+      "Jerusalem",
+      "Damascus"
+    ],
+    "optionsEs": [
+      "La Meca",
+      "Medina",
+      "Jerusalén",
+      "Damasco"
+    ],
+    "c": 21,
+    "explEn": "Muhammad ibn Abdullah was born around A.D. 570 in Mecca, a trading city that also housed the pagan pilgrimage site called the Kaaba.",
+    "explEs": "Mahoma ibn Abdullah nació alrededor del año 570 d.C. en La Meca, una ciudad comercial que también albergaba el sitio de peregrinación pagana llamado la Kaaba."
+  },
+  {
+    "textEn": "2. According to Islamic tradition, Muhammad's revelations were delivered to him by:",
+    "textEs": "2. Según la tradición islámica, las revelaciones de Mahoma le fueron entregadas por:",
+    "optionsEn": [
+      "Moses directly",
+      "The angel Jibril (Gabriel)",
+      "A voice from the Kaaba",
+      "His wife Khadijah"
+    ],
+    "optionsEs": [
+      "Moisés directamente",
+      "El ángel Yibril (Gabriel)",
+      "Una voz desde la Kaaba",
+      "Su esposa Jadiya"
+    ],
+    "c": 29,
+    "explEn": "Muslims believe Muhammad received his revelations from the angel Jibril (Gabriel) over a period of twenty-three years.",
+    "explEs": "Los musulmanes creen que Mahoma recibió sus revelaciones del ángel Yibril (Gabriel) durante un período de veintitrés años."
+  },
+  {
+    "textEn": "3. The Hijra refers to:",
+    "textEs": "3. La Hégira se refiere a:",
+    "optionsEn": [
+      "Muhammad's first revelation",
+      "The conquest of Mecca",
+      "The migration from Mecca to Medina in A.D. 622",
+      "Muhammad's death"
+    ],
+    "optionsEs": [
+      "La primera revelación de Mahoma",
+      "La conquista de La Meca",
+      "La migración de La Meca a Medina en el año 622 d.C.",
+      "La muerte de Mahoma"
+    ],
+    "c": 37,
+    "explEn": "The Hijra was Muhammad's migration with his followers from Mecca to Medina in A.D. 622, an event so significant that the Islamic calendar dates from it.",
+    "explEs": "La Hégira fue la migración de Mahoma con sus seguidores de La Meca a Medina en el año 622 d.C., un evento tan significativo que el calendario islámico se fecha desde él."
+  },
+  {
+    "textEn": "4. Islamic tradition holds that Muhammad regarded himself as:",
+    "textEs": "4. La tradición islámica sostiene que Mahoma se consideraba a sí mismo como:",
+    "optionsEn": [
+      "The first prophet in history",
+      "Opposed to all previous prophets",
+      "Unrelated to the biblical tradition",
+      "The last in a line of prophets including Abraham, Moses, and Jesus"
+    ],
+    "optionsEs": [
+      "El primer profeta de la historia",
+      "Opuesto a todos los profetas anteriores",
+      "Sin relación con la tradición bíblica",
+      "El último de una línea de profetas que incluye a Abraham, Moisés y Jesús"
+    ],
+    "c": 45,
+    "explEn": "Muhammad regarded himself as the 'seal of the prophets,' the last and greatest in a line including Adam, Noah, Abraham, Moses, and Jesus.",
+    "explEs": "Mahoma se consideraba a sí mismo el 'sello de los profetas,' el último y más grande de una línea que incluye a Adán, Noé, Abraham, Moisés y Jesús."
+  },
+  {
+    "textEn": "5. The Qur'an is organized into 114 chapters called:",
+    "textEs": "5. El Corán está organizado en 114 capítulos llamados:",
+    "optionsEn": [
+      "Surahs",
+      "Psalms",
+      "Hadiths",
+      "Epistles"
+    ],
+    "optionsEs": [
+      "Suras",
+      "Salmos",
+      "Hadices",
+      "Epístolas"
+    ],
+    "c": 49,
+    "explEn": "The Qur'an is organized into 114 chapters called surahs, arranged roughly from longest to shortest rather than chronologically.",
+    "explEs": "El Corán está organizado en 114 capítulos llamados suras, ordenados aproximadamente de más largo a más corto en lugar de cronológicamente."
+  },
+  {
+    "textEn": "6. According to this unit, Islam holds that the Torah and the Injil (Gospel) were:",
+    "textEs": "6. Según esta unidad, el islam sostiene que la Torá y el Inyil (Evangelio) fueron:",
+    "optionsEn": [
+      "Never given by God at all",
+      "Originally true revelations later corrupted or altered",
+      "Equal in authority to the Qur'an today",
+      "Written entirely by Muhammad"
+    ],
+    "optionsEs": [
+      "Nunca dados por Dios en absoluto",
+      "Revelaciones originalmente verdaderas, luego corrompidas o alteradas",
+      "Iguales en autoridad al Corán hoy",
+      "Escritos enteramente por Mahoma"
+    ],
+    "c": 57,
+    "explEn": "Islam affirms the Torah and Injil were originally true revelations from God but holds they were later corrupted or altered by Jewish and Christian communities.",
+    "explEs": "El islam afirma que la Torá y el Inyil fueron originalmente revelaciones verdaderas de Dios pero sostiene que luego fueron corrompidas o alteradas por las comunidades judías y cristianas."
+  },
+  {
+    "textEn": "7. The Shahada is:",
+    "textEs": "7. La Shahada es:",
+    "optionsEn": [
+      "The pilgrimage to Mecca",
+      "The month-long fast",
+      "The declaration of faith making a person a Muslim",
+      "The obligatory almsgiving"
+    ],
+    "optionsEs": [
+      "La peregrinación a La Meca",
+      "El ayuno de un mes",
+      "La declaración de fe que hace musulmana a una persona",
+      "La limosna obligatoria"
+    ],
+    "c": 65,
+    "explEn": "The Shahada, 'There is no god but Allah, and Muhammad is his messenger,' sincerely recited, is what formally makes a person a Muslim.",
+    "explEs": "La Shahada, 'No hay más dios que Alá, y Mahoma es su mensajero,' recitada sinceramente, es lo que formalmente hace musulmana a una persona."
+  },
+  {
+    "textEn": "8. Sawm refers to:",
+    "textEs": "8. El Sawm se refiere a:",
+    "optionsEn": [
+      "Daily ritual prayer",
+      "Almsgiving",
+      "Pilgrimage to Mecca",
+      "Fasting during Ramadan"
+    ],
+    "optionsEs": [
+      "La oración ritual diaria",
+      "La limosna",
+      "La peregrinación a La Meca",
+      "El ayuno durante el Ramadán"
+    ],
+    "c": 73,
+    "explEn": "Sawm is fasting during the month of Ramadan, abstaining from food, drink, and other physical needs from dawn until sunset.",
+    "explEs": "El Sawm es el ayuno durante el mes de Ramadán, absteniéndose de comida, bebida y otras necesidades físicas desde el amanecer hasta la puesta del sol."
+  },
+  {
+    "textEn": "9. Zakat is best described as:",
+    "textEs": "9. El Zakat se describe mejor como:",
+    "optionsEn": [
+      "Obligatory almsgiving for the relief of the poor",
+      "Ritual prayer five times daily",
+      "The declaration of faith",
+      "The pilgrimage to Mecca"
+    ],
+    "optionsEs": [
+      "Limosna obligatoria para el alivio de los pobres",
+      "La oración ritual cinco veces al día",
+      "La declaración de fe",
+      "La peregrinación a La Meca"
+    ],
+    "c": 77,
+    "explEn": "Zakat is obligatory almsgiving, typically about two and a half percent of accumulated wealth, given annually for the relief of the poor.",
+    "explEs": "El Zakat es la limosna obligatoria, típicamente alrededor del dos y medio por ciento de la riqueza acumulada, dada anualmente para el alivio de los pobres."
+  },
+  {
+    "textEn": "10. The dispute that produced the Sunni-Shia division was originally about:",
+    "textEs": "10. La disputa que produjo la división sunita-chiita fue originalmente acerca de:",
+    "optionsEn": [
+      "Which direction to pray",
+      "Who should succeed Muhammad as leader",
+      "The number of daily prayers",
+      "The content of the Qur'an itself"
+    ],
+    "optionsEs": [
+      "Hacia qué dirección orar",
+      "Quién debía suceder a Mahoma como líder",
+      "El número de oraciones diarias",
+      "El contenido mismo del Corán"
+    ],
+    "c": 85,
+    "explEn": "The Sunni-Shia division arose over a question of leadership succession after Muhammad's death, not initially a question of doctrine.",
+    "explEs": "La división sunita-chiita surgió por una cuestión de sucesión de liderazgo tras la muerte de Mahoma, no inicialmente una cuestión de doctrina."
+  },
+  {
+    "textEn": "11. Shia Muslims are known by that name because they were originally 'the party of':",
+    "textEs": "11. Los musulmanes chiitas son conocidos por ese nombre porque originalmente eran 'el partido de':",
+    "optionsEn": [
+      "Abu Bakr",
+      "Umar",
+      "Ali",
+      "Uthman"
+    ],
+    "optionsEs": [
+      "Abu Bakr",
+      "Umar",
+      "Ali",
+      "Uzmán"
+    ],
+    "c": 93,
+    "explEn": "Shia comes from 'Shiat Ali,' meaning 'the party of Ali,' Muhammad's cousin and son-in-law, whose bloodline this group held should have inherited leadership.",
+    "explEs": "Chiita viene de 'Shiat Ali,' que significa 'el partido de Ali,' primo y yerno de Mahoma, cuya línea de sangre este grupo sostenía que debía haber heredado el liderazgo."
+  },
+  {
+    "textEn": "12. The Battle of Karbala in A.D. 680, resulting in the death of Ali's son Husayn, is especially significant to:",
+    "textEs": "12. La Batalla de Karbala en el año 680 d.C., que resultó en la muerte del hijo de Ali, Huseín, es especialmente significativa para:",
+    "optionsEn": [
+      "Sunni identity",
+      "Sufi identity",
+      "Secular Muslim identity",
+      "Shia identity"
+    ],
+    "optionsEs": [
+      "La identidad sunita",
+      "La identidad sufí",
+      "La identidad musulmana secular",
+      "La identidad chiita"
+    ],
+    "c": 101,
+    "explEn": "Husayn's martyrdom at Karbala became a defining event of Shia religious identity, commemorated annually during the month of Muharram.",
+    "explEs": "El martirio de Huseín en Karbala se convirtió en un evento definitorio de la identidad religiosa chiita, conmemorado anualmente durante el mes de Muharram."
+  },
+  {
+    "textEn": "13. Approximately what percentage of the world's Muslims are Sunni?",
+    "textEs": "13. ¿Aproximadamente qué porcentaje de los musulmanes del mundo son sunitas?",
+    "optionsEn": [
+      "About 85-90%",
+      "About 10-15%",
+      "About 50%",
+      "Nearly 100%"
+    ],
+    "optionsEs": [
+      "Cerca del 85-90%",
+      "Cerca del 10-15%",
+      "Cerca del 50%",
+      "Casi el 100%"
+    ],
+    "c": 105,
+    "explEn": "Sunni Muslims make up roughly eighty-five to ninety percent of the world's Muslim population, with Shia Muslims concentrated especially in Iran and Iraq.",
+    "explEs": "Los musulmanes sunitas constituyen aproximadamente entre el ochenta y cinco y el noventa por ciento de la población musulmana mundial, con musulmanes chiitas concentrados especialmente en Irán e Irak."
+  },
+  {
+    "textEn": "14. Sufism, as described in this unit, is best characterized as:",
+    "textEs": "14. El sufismo, según se describe en esta unidad, se caracteriza mejor como:",
+    "optionsEn": [
+      "A separate religion unrelated to Islam",
+      "A mystical current emphasizing experiential closeness to God",
+      "The largest Shia political party",
+      "A rejection of the Five Pillars"
+    ],
+    "optionsEs": [
+      "Una religión separada sin relación con el islam",
+      "Una corriente mística que enfatiza la cercanía experiencial a Dios",
+      "El partido político chiita más grande",
+      "Un rechazo de los Cinco Pilares"
+    ],
+    "c": 113,
+    "explEn": "Sufism is a mystical current within both Sunni and Shia Islam emphasizing direct, experiential closeness to God through disciplined spiritual practice.",
+    "explEs": "El sufismo es una corriente mística dentro tanto del islam sunita como del chiita que enfatiza la cercanía directa y experiencial a Dios a través de la práctica espiritual disciplinada."
+  },
+  {
+    "textEn": "15. According to this unit, the Qur'an affirms which of the following about Jesus (Isa)?",
+    "textEs": "15. Según esta unidad, ¿cuál de las siguientes afirma el Corán acerca de Jesús (Isa)?",
+    "optionsEn": [
+      "He never performed any miracles",
+      "He was merely a Roman citizen",
+      "He was born of a virgin and performed miracles",
+      "He never existed historically"
+    ],
+    "optionsEs": [
+      "Nunca realizó ningún milagro",
+      "Era simplemente un ciudadano romano",
+      "Nació de una virgen y realizó milagros",
+      "Nunca existió históricamente"
+    ],
+    "c": 121,
+    "explEn": "The Qur'an affirms Jesus' virgin birth, calls him the Messiah, and attributes numerous miracles to him, including healing the blind and raising the dead.",
+    "explEs": "El Corán afirma el nacimiento virginal de Jesús, lo llama el Mesías, y le atribuye numerosos milagros, incluyendo sanar a los ciegos y resucitar a los muertos."
+  },
+  {
+    "textEn": "16. Regarding the crucifixion, this unit explains that most Muslim interpreters hold that:",
+    "textEs": "16. Respecto a la crucifixión, esta unidad explica que la mayoría de los intérpretes musulmanes sostienen que:",
+    "optionsEn": [
+      "Jesus died on the cross exactly as the Gospels describe",
+      "The crucifixion is not mentioned at all in Islamic tradition",
+      "Jesus crucified himself voluntarily",
+      "Jesus was taken up to heaven and someone else died in his place"
+    ],
+    "optionsEs": [
+      "Jesús murió en la cruz exactamente como describen los Evangelios",
+      "La crucifixión no se menciona en absoluto en la tradición islámica",
+      "Jesús se crucificó a sí mismo voluntariamente",
+      "Jesús fue llevado al cielo y otra persona murió en su lugar"
+    ],
+    "c": 129,
+    "explEn": "Most Muslim interpreters hold that Jesus was taken up to heaven before the crucifixion and that someone else died in his place, meaning Islam denies the crucifixion occurred.",
+    "explEs": "La mayoría de los intérpretes musulmanes sostienen que Jesús fue llevado al cielo antes de la crucifixión y que otra persona murió en su lugar, lo que significa que el islam niega que la crucifixión haya ocurrido."
+  },
+  {
+    "textEn": "17. The Arabic term tawhid refers to:",
+    "textEs": "17. El término árabe tawhid se refiere a:",
+    "optionsEn": [
+      "Islam's uncompromising monotheism",
+      "The pilgrimage to Mecca",
+      "The Islamic legal schools",
+      "The Shia doctrine of the Imams"
+    ],
+    "optionsEs": [
+      "El monoteísmo intransigente del islam",
+      "La peregrinación a La Meca",
+      "Las escuelas legales islámicas",
+      "La doctrina chiita de los Imanes"
+    ],
+    "c": 133,
+    "explEn": "Tawhid is Islam's uncompromising monotheism, the doctrine that leads Islam to reject the Trinity as a form of polytheism.",
+    "explEs": "El tawhid es el monoteísmo intransigente del islam, la doctrina que lleva al islam a rechazar la Trinidad como una forma de politeísmo."
+  },
+  {
+    "textEn": "18. According to this unit, Islam generally teaches that human beings are born:",
+    "textEs": "18. Según esta unidad, el islam generalmente enseña que los seres humanos nacen:",
+    "optionsEn": [
+      "With a corrupted nature inherited from Adam",
+      "In a state of natural submission to God called fitrah",
+      "Already condemned regardless of belief",
+      "Divine themselves"
+    ],
+    "optionsEs": [
+      "Con una naturaleza corrompida heredada de Adán",
+      "En un estado de sumisión natural a Dios llamado fitrah",
+      "Ya condenados sin importar la creencia",
+      "Divinos ellos mismos"
+    ],
+    "c": 141,
+    "explEn": "Islam generally teaches human beings are born in a state of natural submission to God called fitrah, with sin understood as individual acts rather than inherited corruption.",
+    "explEs": "El islam generalmente enseña que los seres humanos nacen en un estado de sumisión natural a Dios llamado fitrah, entendiendo el pecado como actos individuales en lugar de corrupción heredada."
+  },
+  {
+    "textEn": "19. On the Day of Judgment, Islamic teaching holds that a person's eternal destiny is determined largely by:",
+    "textEs": "19. En el Día del Juicio, la enseñanza islámica sostiene que el destino eterno de una persona se determina en gran parte por:",
+    "optionsEn": [
+      "Faith alone, apart from works",
+      "Membership in a particular tribe",
+      "The weighing of good and bad deeds, tempered by Allah's mercy",
+      "A substitutionary sacrifice already accomplished"
+    ],
+    "optionsEs": [
+      "La fe sola, aparte de las obras",
+      "La membresía en una tribu particular",
+      "El pesaje de las buenas y malas obras, atenuado por la misericordia de Alá",
+      "Un sacrificio sustitutorio ya realizado"
+    ],
+    "c": 149,
+    "explEn": "Islamic teaching holds that a person's good and bad deeds will be weighed, with eternal destiny determined largely on that basis, tempered by Allah's mercy but not guaranteed in advance.",
+    "explEs": "La enseñanza islámica sostiene que las buenas y malas obras de una persona serán pesadas, determinando el destino eterno en gran parte sobre esa base, atenuado por la misericordia de Alá pero no garantizado de antemano."
+  },
+  {
+    "textEn": "20. According to 1 Timothy 2:5-6, cited in this unit, what does Christianity proclaim that directly answers Islam's view of salvation?",
+    "textEs": "20. Según 1 Timoteo 2:5-6, citado en esta unidad, ¿qué proclama el cristianismo que responde directamente a la visión islámica de la salvación?",
+    "optionsEn": [
+      "Salvation is earned entirely by good deeds",
+      "There is no need for any mediator",
+      "Allah's mercy is never available",
+      "A Mediator who gave Himself as a ransom for all"
+    ],
+    "optionsEs": [
+      "La salvación se gana enteramente por buenas obras",
+      "No hay necesidad de ningún mediador",
+      "La misericordia de Alá nunca está disponible",
+      "Un Mediador que se dio a sí mismo en rescate por todos"
+    ],
+    "c": 157,
+    "explEn": "1 Timothy 2:5-6 proclaims one Mediator, the Man Christ Jesus, who gave Himself as a ransom for all — an atonement actually accomplished, unlike Islam's uncertain weighing of deeds.",
+    "explEs": "1 Timoteo 2:5-6 proclama un solo Mediador, Jesucristo hombre, que se dio a sí mismo en rescate por todos — una expiación realmente lograda, a diferencia del incierto pesaje de obras del islam."
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Describe Muhammad's trajectory from prophet in Mecca to statesman and military commander in Medina, and explain why this unit says it contrasts with Jesus' earthly ministry.",
+    "textEs": "21. Describa la trayectoria de Mahoma de profeta en La Meca a estadista y comandante militar en Medina, y explique por qué esta unidad dice que contrasta con el ministerio terrenal de Jesús.",
+    "kw_en": ["mecca", "hijra", "medina", "conquest", "political", "military", "contrast", "authority"],
+    "kw_es": ["meca", "hégira", "medina", "conquista", "político", "militar", "contrast", "autoridad"],
+    "modelEn": "Muhammad began preaching in Mecca, calling Arab tribes to abandon idols, but faced persecution and migrated to Medina in the Hijra of A.D. 622. There his role expanded to political and military leadership, eventually conquering Mecca and unifying Arabia before his death. This trajectory of prophet to statesman to military commander contrasts with Jesus, whose earthly ministry never involved political rule or military conquest, shaping lasting differences in how each religion has understood the relationship between religious authority and political power.",
+    "modelEs": "Mahoma comenzó predicando en La Meca, llamando a las tribus árabes a abandonar los ídolos, pero enfrentó persecución y emigró a Medina en la Hégira del año 622 d.C. Allí su papel se expandió a liderazgo político y militar, eventualmente conquistando La Meca y unificando Arabia antes de su muerte. Esta trayectoria de profeta a estadista a comandante militar contrasta con Jesús, cuyo ministerio terrenal nunca involucró gobierno político ni conquista militar, dando forma a diferencias duraderas en cómo cada religión ha entendido la relación entre autoridad religiosa y poder político."
+  },
+  {
+    "textEn": "22. What does Islam teach about the Torah and the Injil (Gospel), and what implication does this unit say that teaching has for how Muslims regard the Bible today?",
+    "textEs": "22. ¿Qué enseña el islam acerca de la Torá y el Inyil (Evangelio), y qué implicación dice esta unidad que tiene esa enseñanza para cómo los musulmanes consideran la Biblia hoy?",
+    "kw_en": ["torah", "injil", "corrupt", "alter", "qurान", "revelation", "supersede", "bible"],
+    "kw_es": ["torá", "inyil", "corromp", "alter", "corán", "revelación", "sustitu", "biblia"],
+    "modelEn": "Islam affirms that the Torah given to Moses and the Injil given to Jesus were originally true revelations from God, but holds they were later corrupted or altered by Jewish and Christian communities, and that the Qur'an supersedes them as the final, unchangeable revelation. This means many Muslims regard the Bible Christians actually possess today with suspicion, believing it does not accurately preserve the original revelation, which is an important point for a pastor to understand before discussing Scripture with a Muslim friend.",
+    "modelEs": "El islam afirma que la Torá dada a Moisés y el Inyil dado a Jesús fueron originalmente revelaciones verdaderas de Dios, pero sostiene que luego fueron corrompidas o alteradas por las comunidades judías y cristianas, y que el Corán las sustituye como la revelación final e inmutable. Esto significa que muchos musulmanes consideran la Biblia que los cristianos realmente poseen hoy con sospecha, creyendo que no preserva con precisión la revelación original, lo cual es un punto importante para que un pastor entienda antes de discutir la Escritura con un amigo musulmán."
+  },
+  {
+    "textEn": "23. Name and briefly describe the Five Pillars of Islam.",
+    "textEs": "23. Nombre y describa brevemente los Cinco Pilares del Islam.",
+    "kw_en": ["shahada", "salat", "zakat", "sawm", "hajj", "prayer", "fasting", "pilgrimage"],
+    "kw_es": ["shahada", "salat", "zakat", "sawm", "hach", "oración", "ayuno", "peregrina"],
+    "modelEn": "The Five Pillars are: the Shahada, the declaration that there is no god but Allah and Muhammad is his messenger; Salat, ritual prayer performed five times daily facing Mecca; Zakat, obligatory almsgiving of roughly two and a half percent of wealth for the poor; Sawm, fasting during the month of Ramadan from dawn to sunset; and Hajj, the pilgrimage to Mecca required once in a lifetime for those who are able.",
+    "modelEs": "Los Cinco Pilares son: la Shahada, la declaración de que no hay más dios que Alá y Mahoma es su mensajero; el Salat, la oración ritual realizada cinco veces al día orientada hacia La Meca; el Zakat, la limosna obligatoria de aproximadamente el dos y medio por ciento de la riqueza para los pobres; el Sawm, el ayuno durante el mes de Ramadán desde el amanecer hasta la puesta del sol; y el Hach, la peregrinación a La Meca requerida una vez en la vida para quienes puedan realizarla."
+  },
+  {
+    "textEn": "24. Explain the origin of the Sunni-Shia division. Was the original dispute about doctrine or something else?",
+    "textEs": "24. Explique el origen de la división sunita-chiita. ¿Era la disputa original acerca de doctrina o de otra cosa?",
+    "kw_en": ["succession", "caliph", "ali", "muhammad", "leadership", "bloodline", "consensus", "death"],
+    "kw_es": ["sucesión", "califa", "ali", "mahoma", "liderazgo", "sangre", "consenso", "muerte"],
+    "modelEn": "The Sunni-Shia division arose almost immediately after Muhammad's death in A.D. 632 over a question of leadership succession, not initially doctrine. Sunni Muslims held the caliph should be chosen by community consensus and accepted the first four caliphs as legitimate, while Shia Muslims insisted leadership should have passed by divine right through Muhammad's bloodline through Ali. Centuries of separate development later produced real theological differences as well.",
+    "modelEs": "La división sunita-chiita surgió casi inmediatamente después de la muerte de Mahoma en el año 632 d.C. por una cuestión de sucesión de liderazgo, no inicialmente de doctrina. Los musulmanes sunitas sostenían que el califa debía elegirse por consenso comunitario y aceptaron a los primeros cuatro califas como legítimos, mientras que los musulmanes chiitas insistían en que el liderazgo debía haber pasado por derecho divino a través de la línea de sangre de Mahoma mediante Ali. Siglos de desarrollo separado luego produjeron también diferencias teológicas reales."
+  },
+  {
+    "textEn": "25. What role do Imams play in Shia Islam, and how does this differ from Sunni understanding of religious authority after Muhammad?",
+    "textEs": "25. ¿Qué papel juegan los Imanes en el islam chiita, y en qué difiere esto del entendimiento sunita de la autoridad religiosa después de Mahoma?",
+    "kw_en": ["imam", "shia", "divinely", "appointed", "descended", "sunni", "infallible", "authority"],
+    "kw_es": ["imán", "chiita", "divina", "designado", "descend", "sunita", "infalible", "autoridad"],
+    "modelEn": "Shia Islam places great emphasis on a line of divinely appointed spiritual leaders called Imams, descended from Ali, understood to hold special religious authority. Sunni Islam does not recognize any comparable ongoing office of infallible religious authority after Muhammad, relying instead on scholarly consensus and the four major schools of Islamic law. This difference reflects the deeper theological development that grew out of the original succession dispute.",
+    "modelEs": "El islam chiita otorga gran énfasis a una línea de líderes espirituales divinamente designados llamados Imanes, descendientes de Ali, entendidos como poseedores de autoridad religiosa especial. El islam sunita no reconoce ningún cargo continuo comparable de autoridad religiosa infalible después de Mahoma, dependiendo en cambio del consenso erudito y las cuatro escuelas principales de ley islámica. Esta diferencia refleja el desarrollo teológico más profundo que surgió de la disputa original de sucesión."
+  },
+  {
+    "textEn": "26. What does the Qur'an affirm about Jesus (Isa), and why does this unit call this affirmation genuine common ground for gospel conversation?",
+    "textEs": "26. ¿Qué afirma el Corán acerca de Jesús (Isa), y por qué llama esta unidad a esta afirmación terreno común genuino para la conversación evangelística?",
+    "kw_en": ["isa", "virgin", "birth", "messiah", "miracle", "heal", "raise", "return"],
+    "kw_es": ["isa", "virgen", "nacimiento", "mesías", "milagro", "san", "resucit", "regres"],
+    "modelEn": "The Qur'an affirms Jesus' virgin birth, calls him the Messiah, attributes numerous miracles to him including healing the blind and raising the dead, and anticipates his return at the end of the age. This unit calls this genuine common ground because a pastor can begin gospel conversation from convictions a Muslim neighbor already holds about Jesus, rather than starting from nothing, even though the traditions diverge sharply on his deity and death.",
+    "modelEs": "El Corán afirma el nacimiento virginal de Jesús, lo llama el Mesías, le atribuye numerosos milagros incluyendo sanar a los ciegos y resucitar a los muertos, y anticipa su regreso al final de los tiempos. Esta unidad llama a esto terreno común genuino porque un pastor puede comenzar la conversación evangelística desde convicciones que un vecino musulmán ya sostiene acerca de Jesús, en lugar de partir de la nada, aunque las tradiciones divergen agudamente en cuanto a su deidad y su muerte."
+  },
+  {
+    "textEn": "27. Explain what Islam teaches about the crucifixion of Jesus, and why this unit says the difference is not a minor one.",
+    "textEs": "27. Explique lo que el islam enseña acerca de la crucifixión de Jesús, y por qué dice esta unidad que la diferencia no es menor.",
+    "kw_en": ["deny", "cross", "taken up", "resemble", "atonement", "denies", "death", "substitute"],
+    "kw_es": ["nieg", "cruz", "llevado", "parecer", "expiación", "niega", "muerte", "sustitu"],
+    "modelEn": "Islam denies that Jesus died on the cross at all; most Muslim interpreters hold he was taken up to heaven before the crucifixion and that someone else, made to resemble him, died in his place. This unit says the difference is not minor because it means Islam has no doctrine of atonement through Christ's death, since it denies the death occurred, striking at the very heart of the gospel rather than being a peripheral disagreement.",
+    "modelEs": "El islam niega que Jesús muriera en la cruz en absoluto; la mayoría de los intérpretes musulmanes sostienen que fue llevado al cielo antes de la crucifixión y que alguien más, hecho para parecerse a él, murió en su lugar. Esta unidad dice que la diferencia no es menor porque significa que el islam no tiene doctrina de expiación a través de la muerte de Cristo, ya que niega que la muerte haya ocurrido, llegando al corazón mismo del evangelio en lugar de ser un desacuerdo periférico."
+  },
+  {
+    "textEn": "28. Contrast the Christian and Islamic understanding of sin and its remedy, referencing fitrah and Ephesians 2:8-9.",
+    "textEs": "28. Contraste el entendimiento cristiano e islámico del pecado y su remedio, haciendo referencia al fitrah y a Efesios 2:8-9.",
+    "kw_en": ["fitrah", "submission", "corrupt", "nature", "grace", "faith", "works", "boast"],
+    "kw_es": ["fitrah", "sumisión", "corromp", "naturaleza", "gracia", "fe", "obras", "gloríe"],
+    "modelEn": "Christianity teaches sin is a corruption of human nature inherited from Adam, requiring a substitutionary atonement only God could provide. Islam generally teaches humans are born in a state of natural submission called fitrah, and sin is individual acts of disobedience addressed through repentance, good works, and Allah's mercy rather than a substitutionary sacrifice. Ephesians 2:8-9 states salvation is by grace through faith, not of works, lest anyone should boast, directly contrasting with Islam's weighing of deeds.",
+    "modelEs": "El cristianismo enseña que el pecado es una corrupción de la naturaleza humana heredada de Adán, que requiere una expiación sustitutoria que solo Dios podía proveer. El islam generalmente enseña que los humanos nacen en un estado de sumisión natural llamado fitrah, y el pecado son actos individuales de desobediencia abordados a través del arrepentimiento, las buenas obras y la misericordia de Alá en lugar de un sacrificio sustitutorio. Efesios 2:8-9 declara que la salvación es por gracia mediante la fe, no por obras, para que nadie se gloríe, contrastando directamente con el pesaje de obras del islam."
+  },
+  {
+    "textEn": "29. How does this unit say a pastor should begin a gospel conversation with a Muslim neighbor, following the pattern established with Paul at the Areopagus?",
+    "textEs": "29. ¿Cómo dice esta unidad que un pastor debe comenzar una conversación evangelística con un vecino musulmán, siguiendo el patrón establecido con Pablo en el Areópago?",
+    "kw_en": ["common ground", "creator", "scripture", "morality", "respect", "honor", "confrontation", "areopagus"],
+    "kw_es": ["terreno común", "creador", "escritura", "moralidad", "respet", "honr", "confrontación", "areópago"],
+    "modelEn": "Following Paul's pattern at the Areopagus, a pastor should begin from real common ground rather than immediate confrontation: shared belief in one Creator God, a high view of Scripture, serious concern for personal morality, respect for prayer and fasting, and genuine reverence for Jesus. Honoring these shared convictions first, as Paul honored Athenian religiosity before correcting it, makes Muslim neighbors far more willing to continue the conversation than an opening confrontation would.",
+    "modelEs": "Siguiendo el patrón de Pablo en el Areópago, un pastor debe comenzar desde un terreno común real en lugar de la confrontación inmediata: la creencia compartida en un Dios Creador, una alta consideración de la Escritura, preocupación seria por la moralidad personal, respeto por la oración y el ayuno, y reverencia genuina por Jesús. Honrar primero estas convicciones compartidas, como Pablo honró la religiosidad ateniense antes de corregirla, hace que los vecinos musulmanes estén mucho más dispuestos a continuar la conversación que una confrontación de apertura."
+  },
+  {
+    "textEn": "30. Synthesize this unit: using 1 Timothy 2:5-6, explain what the gospel offers that Islam cannot, and how a pastor should present this truth practically.",
+    "textEs": "30. Sintetice esta unidad: usando 1 Timoteo 2:5-6, explique qué ofrece el evangelio que el islam no puede, y cómo debe un pastor presentar esta verdad en la práctica.",
+    "kw_en": ["mediator", "ransom", "accomplished", "one god", "historical", "evidence", "crucifixion", "friendship"],
+    "kw_es": ["mediador", "rescate", "logrado", "un dios", "histórica", "evidencia", "crucifixión", "amistad"],
+    "modelEn": "1 Timothy 2:5-6 proclaims one Mediator, the Man Christ Jesus, who gave Himself a ransom for all, affirming the one God Islam insists on while proclaiming what Islam denies: an atonement actually accomplished rather than a judgment pending on uncertain mercy. Practically, a pastor should discuss honestly the historical evidence for the crucifixion, the reliability of the New Testament text, and what the Qur'an itself says about Jesus, all within a context of genuine friendship, patient listening, and hospitality rather than confrontation alone.",
+    "modelEs": "1 Timoteo 2:5-6 proclama un solo Mediador, Jesucristo hombre, que se dio a sí mismo en rescate por todos, afirmando el único Dios en el que insiste el islam mientras proclama lo que el islam niega: una expiación realmente lograda en lugar de un juicio pendiente sobre una misericordia incierta. En la práctica, un pastor debe discutir honestamente la evidencia histórica de la crucifixión, la fiabilidad del texto del Nuevo Testamento, y lo que el Corán mismo dice acerca de Jesús, todo dentro de un contexto de amistad genuina, escucha paciente y hospitalidad en lugar de confrontación sola."
+  }
+];
+
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+let lockUntil = 0;
+let unitPassed = progress.unit3 || false;
+// A passing MC score is banked independently of SA, so a Masters student who
+// passes MC but not SA never has to redo MC — only SA is locked/retried.
+const MC_PASS_KEY = 'cts_wr_u3_mc_passed';
+const SA_LOCK_KEY = 'cts_wr_u3_sa_lockout';
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+function activeLockUntil() {
+    return mcPreviouslyPassed
+        ? (parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) || 0)
+        : (parseInt(localStorage.getItem('cts_wr_u3_lockout') || '0', 10) || 0);
+}
+lockUntil = activeLockUntil();
+
+// Recovers the correct option index for an MC question. Answers are stored
+// encoded (field 'c') so the key is not plainly readable in the page source;
+// it is decoded only when a student selects a choice or submits the exam.
+function answerIndex(qpos) { return ((mcQuestions[qpos].c - 7*(qpos+3)) % 251 + 251) % 251; }
+function kwHit(ans, kw) {
+  kw = (kw||'').toLowerCase(); if (!kw) return false;
+  var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+  var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var pat = (kw.length <= 4) ? '(?:^|[^'+WC+'])'+esc+'(?!['+WC+'])' : '(?:^|[^'+WC+'])'+esc;
+  try { return new RegExp(pat, 'i').test(ans); } catch(e) { return ans.indexOf(kw) !== -1; }
+}
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+function lockMinutes(track) { return isMastersLevel(track) ? 15 : 2; }
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
+    container.appendChild(mcTitle);
+    const mcReveal = mcRevealed || unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    const mcFrozen = unitPassed || (typeof mcPassed !== 'undefined' && mcPassed) || (typeof mcPreviouslyPassed !== 'undefined' && mcPreviouslyPassed);
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (currentLang === 'en') ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const options = (currentLang === 'en') ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + answerIndex(idx));
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (mcReveal || answered) {
+                if (optIdx === answerIndex(idx)) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcFrozen && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (mcReveal || answered) {
+            const fb = document.createElement('div');
+            const exp = (currentLang === 'en') ? (q.explEn || '') : (q.explEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = ((currentLang === 'en') ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = ((currentLang === 'en') ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+    const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+    const masters = student && isMastersLevel(student.track);
+    {
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21–30)' : 'Respuesta Corta (21–30)';
+    container.appendChild(kwTitle);
+    const kwNote = document.createElement('p');
+    kwNote.style.marginBottom = '12px';
+    kwNote.style.fontStyle = 'italic';
+    if (masters) {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'M.Div./Th.M. track: these are graded as part of your exam (9 of 10 required).'
+            : 'Vía M.Div./Th.M.: estas se califican como parte de su examen (se requieren 9 de 10).';
+    } else {
+        kwNote.innerHTML = currentLang === 'en'
+            ? 'Optional practice for Certificate students — answer freely and study the model answers. These do not affect your pass or fail.'
+            : 'Práctica opcional para estudiantes de Certificado — responda libremente y estudie las respuestas modelo. Estas no afectan si aprueba o no.';
+    }
+    container.appendChild(kwNote);
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        checkBtn.onclick = function() {
+            const ans = ta.value.trim().toLowerCase();
+            // Read the student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            const bodyCls = document.body.classList;
+            const isEs = bodyCls.contains('lang-es');
+            const isBoth = bodyCls.contains('lang-both');
+            const enHits = q.kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
+            const missing = activeKws.filter(kw => !kwHit(ans, kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
+            } else if (hits >= 3) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
+            }
+        };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
+        div.appendChild(checkBtn);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
+    });
+    }
+}
+
+function submitExam() {
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit already passed! Click Unit 4 above.</span>";
+        document.getElementById('nextUnitBtn').disabled = false;
+        return;
+    }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first." : "Por favor regístrese primero.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'certificate';
+    let total, score, required, mcGatePass, saGatePass, correctKW = 0;
+    const mcPct2 = correctMC;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW; required = null;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress.unit3 = true;
+                localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+                localStorage.removeItem('cts_wr_u3_lockout');
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(ans, kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(ans, kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
+    if (mcGatePass && saGatePass) {
+        progress.unit3 = true;
+        localStorage.setItem('cts_wr_progress', JSON.stringify(progress));
+        localStorage.removeItem('cts_wr_u3_lockout');
+        localStorage.removeItem(SA_LOCK_KEY);
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
+    } else {
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
+        localStorage.setItem('cts_wr_u3_lockout', String(lockUntil));
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
+    }
+}
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
+document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+        const lang = this.getAttribute('data-lang');
+        document.body.classList.remove('lang-en','lang-es','lang-both');
+        document.body.classList.add('lang-' + lang);
+        renderQuestions();
+    };
+});
+renderQuestions();
+if (unitPassed) {
+    document.getElementById('examResult').innerHTML = "<span style='color:green'>✓ Unit 3 already passed.</span>";
+    document.getElementById('nextUnitBtn').disabled = false;
+}
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSWRReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

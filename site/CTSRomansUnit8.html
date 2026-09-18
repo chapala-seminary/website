@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Romans | Unit 8: Israel, Election, and the Mystery of God's Mercy</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', Times, serif; line-height: 1.6; background: #f9f7f3; color: #1a2a1f; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+.course-header { background: #5a1e1e; color: white; padding: 1.5rem 2rem; text-align: center; }
+.course-header h1 { font-size: 2rem; letter-spacing: 2px; margin-bottom: 0.25rem; }
+.course-header h2 { font-size: 1.2rem; font-weight: normal; opacity: 0.9; }
+.author-line { font-size: 0.95rem; color: #d4a64a; font-style: italic; margin-top: 0.35rem; letter-spacing: 0.5px; }
+.unit-badge { display: inline-block; background: #d4a64a; color: #5a1e1e; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-top: 0.5rem; }
+.controls-bar { background: #ede4d8; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #cbc3ae; }
+.lang-buttons { display: flex; gap: 10px; }
+.lang-btn { background: white; border: 1px solid #5a1e1e; padding: 0.4rem 1rem; cursor: pointer; font-weight: bold; transition: 0.2s; border-radius: 4px; }
+.lang-btn.active { background: #5a1e1e; color: white; }
+.track-indicator { background: #5a1e1e; color: #d4a64a; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+body.lang-en .lang-es { display: none; }
+body.lang-en .lang-both { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-both { display: none; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 900px) {
+    body.lang-both .lesson-grid { grid-template-columns: 1fr; }
+    body.lang-both .lang-es { border-top: 2px dashed #cbc3ae; padding-top: 1rem; margin-top: 1rem; }
+}
+.registration-section { background: #fef7e0; border-bottom: 3px solid #d4a64a; padding: 2rem; }
+.registration-section h3 { color: #5a1e1e; margin-bottom: 1rem; text-align: center; }
+.registration-form { max-width: 500px; margin: 0 auto; }
+.registration-form label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+.registration-form input[type="text"] { width: 100%; padding: 0.6rem; margin-bottom: 1rem; border: 1px solid #cbc3ae; border-radius: 4px; font-size: 1rem; font-family: inherit; }
+.registration-form .track-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+.registration-form .track-options label { font-weight: normal; cursor: pointer; padding: 0.5rem; border: 1px solid #cbc3ae; border-radius: 4px; background: white; }
+.registration-form .track-options input { margin-right: 0.5rem; }
+.registration-form button { background: #5a1e1e; color: white; border: none; padding: 0.75rem 2rem; font-size: 1rem; cursor: pointer; border-radius: 4px; width: 100%; }
+.registration-form button:hover { background: #401414; }
+.lesson-section { padding: 2rem; }
+.lesson-section h3 { color: #5a1e1e; border-left: 4px solid #d4a64a; padding-left: 1rem; margin: 1.5rem 0 1rem 0; }
+.lesson-section h3:first-of-type { margin-top: 0; }
+.lesson-section p { margin-bottom: 1rem; }
+.scripture { background: #f0ede5; padding: 1rem 1.5rem; border-left: 4px solid #d4a64a; font-style: italic; margin: 1rem 0; font-family: 'Courier New', monospace; }
+.illustration { background: #e8f0e5; padding: 1rem 1.5rem; border-radius: 8px; margin: 1rem 0; }
+.exam-section { background: #fefaf0; border-top: 3px solid #5a1e1e; padding: 2rem; page-break-before: always; }
+.exam-header { text-align: center; margin-bottom: 2rem; }
+.question-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; page-break-inside: avoid; }
+.question-text { font-weight: bold; margin-bottom: 0.75rem; }
+.options { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+.options label { display: block; margin: 0.4rem 0; cursor: pointer; }
+.feedback { margin-top: 0.75rem; padding: 0.5rem; border-radius: 4px; font-size: 0.9rem; }
+.feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+.modelbox { margin-top: 0.6rem; padding: 0.6rem 0.75rem; background: #fff8e1; color: #5d4a00; border-left: 4px solid #d4af37; border-radius: 4px; }
+
+.essay-question textarea { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+.action-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+.action-buttons button { background: #5a1e1e; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+.action-buttons button:hover { background: #401414; }
+.action-buttons button.reset-btn { background: #8b6b3d; }
+.lockout-timer { text-align: center; padding: 1rem; background: #f8d7da; color: #721c24; margin: 1rem; border-radius: 8px; font-weight: bold; }
+.nav-links { display: flex; justify-content: space-between; padding: 1rem 2rem; background: #ede4d8; }
+.nav-links a { color: #5a1e1e; text-decoration: none; font-weight: bold; }
+.exam-locked { background: #fff3cd; color: #856404; padding: 2rem; text-align: center; border-radius: 8px; font-weight: bold; }
+@media print {
+    .controls-bar, .action-buttons, .nav-links, .lockout-timer, .registration-section { display: none !important; }
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; margin: 0; }
+    .course-header { background: #5a1e1e; color: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .question-card { border: 1px solid #ccc; page-break-inside: avoid; }
+    .exam-section { page-break-before: always; }
+    .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.lang-both .lesson-grid { display: block; }
+}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 2px;font-family:'Georgia',serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#5a1e1e;margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid #cdbf9d;color:#5a1e1e;text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:#5a1e1e;}
+.unitnav a.active{background:#5a1e1e;color:#fff;border-color:#5a1e1e;}
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+    <div class="course-header">
+        <h1>ΡΩΜΑΙΟΥΣ</h1>
+        <h2><span class="lang-en">The Book of Romans</span><span class="lang-es">El Libro de Romanos</span></h2>
+        <div class="author-line"><span class="lang-en">by Dr. Wayne Cook &amp; Dr. Ted Rogers</span><span class="lang-es">por el Dr. Wayne Cook y el Dr. Ted Rogers</span></div>
+        <div class="unit-badge"><span class="lang-en">Unit 8 · Israel, Election, and the Mystery of God's Mercy</span><span class="lang-es">Unidad 8 · Israel, Elección y el Misterio de la Misericordia de Dios</span></div>
+    </div>
+
+    <div class="controls-bar">
+        <div class="lang-buttons">
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="es">Español</button>
+            <button class="lang-btn" data-lang="both">Both</button>
+        </div>
+        <div class="track-indicator" id="trackIndicator">Loading...</div>
+    </div>
+
+    <nav class="unitnav" id="unitnav" aria-label="Course units / Unidades del curso">
+      <span class="nl"><span class="lang-en">Units</span><span class="lang-es">Unidades</span></span>
+      <a href="CTSRomansUnit1.html">1</a>
+      <a href="CTSRomansUnit2.html">2</a>
+      <a href="CTSRomansUnit3.html">3</a>
+      <a href="CTSRomansUnit4.html">4</a>
+      <a href="CTSRomansUnit5.html">5</a>
+      <a href="CTSRomansUnit6.html">6</a>
+      <a href="CTSRomansUnit7.html">7</a>
+      <a href="CTSRomansUnit8.html" class="active">8</a>
+      <a href="CTSRomansUnit9.html">9</a>
+      <a href="CTSRomansUnit10.html">10</a>
+    </nav>
+
+    <div class="registration-section" id="registrationSection" style="display:none;">
+        <h3><span class="lang-en">Register for CTS Romans</span><span class="lang-es">Regístrate en CTS Romanos</span></h3>
+        <div class="registration-form">
+            <p style="margin-bottom: 1rem;"><span class="lang-en">Welcome. Before beginning Unit 1, please enter your name (as you would like it to appear on your certificate) and select your study track.</span><span class="lang-es">Bienvenido. Antes de comenzar la Unidad 1, ingrese su nombre (como desea que aparezca en su certificado) y seleccione su vía de estudio.</span></p>
+            <label for="regName"><span class="lang-en">Full Name:</span><span class="lang-es">Nombre Completo:</span></label>
+            <input type="text" id="regName" placeholder="Jane Doe / María García">
+            <label><span class="lang-en">Study Track:</span><span class="lang-es">Vía de Estudio:</span></label>
+            <div class="track-options">
+                <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en"><strong>Certificate</strong> — 20 multiple choice per unit, 18/20 to pass</span><span class="lang-es"><strong>Certificado</strong> — 20 opción múltiple por unidad, 18/20 para aprobar</span></label>
+                <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en"><strong>Th.M.</strong> — 20 MC + 10 short answer, both 90%</span><span class="lang-es"><strong>Th.M.</strong> — 20 OM + 10 respuesta corta, ambos 90%</span></label>
+                <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en"><strong>M.Div.</strong> — 20 MC + 10 short answer, both 90% (advanced)</span><span class="lang-es"><strong>M.Div.</strong> — 20 OM + 10 respuesta corta, ambos 90% (avanzado)</span></label>
+            </div>
+            <button id="regSubmit"><span class="lang-en">Begin Course</span><span class="lang-es">Comenzar Curso</span></button>
+        </div>
+    </div>
+
+    <div class="lesson-section">
+        <div class="lesson-grid">
+            <div class="lang-en">
+                <h3>1. Paul's Heart for Israel (9:1-5)</h3>
+                <p>After the soaring climax of chapter 8 — <em>nothing can separate us from the love of God in Christ Jesus our Lord</em> — the reader expects Paul to break into a doxology. Instead chapter 9 opens in tears. Paul has finished singing about the unbreakable love of God and immediately turns to write about the deepest wound in his ministry. His own people, his kinsmen according to the flesh, have largely rejected the Messiah for whom every Old Testament page had prepared them.</p>
+
+                <div class="scripture">
+                    <strong>Romans 9:1-3 (NKJV):</strong> "I tell the truth in Christ, I am not lying, my conscience also bearing me witness in the Holy Spirit, that I have great sorrow and continual grief in my heart. For I could wish that I myself were accursed from Christ for my brethren, my countrymen according to the flesh..."
+                </div>
+
+                <p>Paul says he would willingly be cut off from Christ if it would mean the salvation of his fellow Jews. The depth of that wish is staggering — and Paul knows it cannot be granted. But it tells us how he carries his people. He lists the privileges God gave to Israel: <em>the adoption, the glory, the covenants, the giving of the law, the service of God, the promises, the patriarchs, and from them, according to the flesh, Christ came.</em> No nation in history was so favored. And yet the bulk of the nation missed the very Messiah they had been preparing to receive.</p>
+
+                <p>Chapters 9 through 11 are Paul's answer to the most pressing question that climbed straight out of chapter 8. If nothing can separate the elect from the love of God, has God's word to Israel failed? Has God been faithful to His covenant promises? Paul devotes three full chapters to the answer. The short version is: God has not failed. The promises stand. But you must understand them rightly.</p>
+
+                <h3>2. Not All Israel Is Israel (9:6-13)</h3>
+                <p>Paul opens the answer with one of the most important sentences in the New Testament for understanding the whole sweep of redemption history.</p>
+
+                <div class="scripture">
+                    <strong>Romans 9:6 (NKJV):</strong> "But it is not that the word of God has taken no effect. For they are not all Israel who are of Israel..."
+                </div>
+
+                <p>That sentence introduces the foundational distinction that runs through these three chapters. There has always been an <em>ethnic</em> Israel — Abraham's physical descendants — and there has always been a <em>true</em> Israel within that ethnic group: those who share Abraham's faith in addition to his bloodline. The promises were never made indiscriminately to everyone with the right ancestry. They were made to those God chose to be heirs of the promise.</p>
+
+                <p>Paul proves this from the patriarchs themselves. Abraham had two sons — Ishmael and Isaac — and the promise went through Isaac, not Ishmael, even though both were Abraham's biological children. Isaac had two sons — Esau and Jacob — and before they were born, before either had done anything good or bad, God said <em>the older shall serve the younger.</em> God chose Jacob. Even within the elect family, the promise advanced by sovereign election, not by birth order or merit.</p>
+
+                <p>The point is liberating. God's word has not failed in the rejection of the Messiah by ethnic Israel. Because the promises were never owed to ethnicity alone. They were owed to those God had sovereignly chosen — to the <em>true</em> Israel within Israel. And those true Israelites are, throughout the New Testament, identified as those who share Abraham's faith in Christ.</p>
+
+                <h3>3. The Sovereignty and Mercy of God (9:14-29)</h3>
+                <p>The reader's next objection is predictable. Is God unjust in choosing some and not others? Paul answers with another <em>mē genoito.</em> Certainly not. God has the right to bestow mercy on whom He wills. He told Moses, <em>I will have mercy on whomever I will have mercy.</em> He told Pharaoh, <em>for this purpose I have raised you up, that I might show My power in you.</em> Mercy is God's prerogative; hardening is His prerogative; salvation is not owed.</p>
+
+                <div class="scripture">
+                    <strong>Romans 9:20-21 (NKJV):</strong> "But indeed, O man, who are you to reply against God? Will the thing formed say to him who formed it, 'Why have you made me like this?' Does not the potter have power over the clay, from the same lump to make one vessel for honor and another for dishonor?"
+                </div>
+
+                <p>The potter image is Paul's settled response to the objection of unfairness. God's purposes are higher than ours, and His mercy is not negotiated with the clay. What He has done is to call out a people from both Jews and Gentiles — vessels of mercy prepared beforehand for glory. The closing verses of chapter 9 cite Hosea and Isaiah: God has called a people who were not His people; the saved are a remnant from a much larger nation.</p>
+
+                <h3>4. Israel's Stumbling — Righteousness by Faith, Not Works (9:30-10:21)</h3>
+                <p>Paul now turns to the human side of the question. If God has been sovereign, Israel has also been responsible. Israel pursued righteousness — but pursued it as though it could be obtained by works of the law. They stumbled over the stumbling stone, which is Christ. Gentiles who were not seeking righteousness at all attained it — by faith.</p>
+
+                <div class="scripture">
+                    <strong>Romans 10:4 (NKJV):</strong> "For Christ is the end of the law for righteousness to everyone who believes."
+                </div>
+
+                <p>The word translated "end" can mean either <em>terminus</em> (the law has been completed) or <em>goal</em> (the law was pointing toward Him all along). Both senses are true. Christ is what the law was for. He is the righteousness the law demanded, brought near to anyone who believes.</p>
+
+                <p>Paul presses this access with one of his most beautiful sentences. He quotes Deuteronomy 30 and applies it to the gospel: the word is near you, in your mouth and in your heart. <em>That if you confess with your mouth the Lord Jesus and believe in your heart that God has raised Him from the dead, you will be saved.</em> The righteousness Israel sought by works of the law is the very righteousness now offered to anyone who will simply believe. Whoever calls on the name of the Lord — Jew or Gentile — will be saved.</p>
+
+                <p>But how shall they call on Him in whom they have not believed? How shall they believe in Him of whom they have not heard? How shall they hear without a preacher? How shall they preach unless they are sent? <em>How beautiful are the feet of those who preach the gospel of peace.</em> This is the Great Commission tucked inside the doctrinal letter — the missionary mandate that flows out of the sovereign mercy of God. Paul ends chapter 10 acknowledging the tragedy: Israel heard, Israel knew, and yet Israel as a nation refused, and God's hand has remained stretched out to a disobedient and contrary people.</p>
+
+                <h3>5. The Remnant and the One Olive Tree (11:1-24)</h3>
+                <p>Then Paul asks the question that has been hanging in the air since chapter 9. <em>Has God cast away His people?</em> And he answers with the strongest negation: <em>Certainly not!</em> Paul himself is an Israelite, of the seed of Abraham, of the tribe of Benjamin. The fact that any Jew at all believes — Paul among them — proves God has not cast off His people.</p>
+
+                <p>He goes back to Elijah for the principle. Elijah thought he was the only one left. God told him <em>I have reserved for Myself seven thousand who have not bowed the knee to Baal.</em> There has always been a believing remnant within unbelieving Israel. So it is now. There is a remnant according to the election of grace — Jewish believers in Christ — and they are evidence that God has not abandoned the natural branches.</p>
+
+                <p>Then Paul gives the great image of these chapters. He pictures God's people as one <em>olive tree</em>. This is not two olive trees — one for Israel and one for the church — but one tree, one cultivated people of God rooted in the Abrahamic promise. Some of the natural branches were broken off because of unbelief. Wild branches from among the Gentiles were grafted in. And the natural branches that come to faith can be grafted back in. There is only one tree. Believing Jews and believing Gentiles together share the same root, the same sap, the same nourishment, the same fruitfulness.</p>
+
+                <div class="scripture">
+                    <strong>Romans 11:17-18 (NKJV):</strong> "And if some of the branches were broken off, and you, being a wild olive tree, were grafted in among them, and with them became a partaker of the root and fatness of the olive tree, do not boast against the branches. But if you do boast, remember that you do not support the root, but the root supports you."
+                </div>
+
+                <p>The Gentile believer is warned against any arrogance toward the natural branches that have been broken off. The same grace that grafted the Gentile in could remove him if he turned from faith. And the same grace that broke off the natural branches in unbelief stands ready to graft them back when they come to faith. The whole picture is of one tree under one Husbandman, with branches removed and added according to faith — not according to ethnicity. The root supports the branches; the branches do not support the root. Whatever the Gentile believer has, he has by grafting; he is a guest in a tree planted long before he arrived.</p>
+
+                <h3>6. The Mystery: All Israel Will Be Saved (11:25-36)</h3>
+                <p>Paul calls what he says next a <em>mystery</em> — a truth previously hidden but now revealed. <em>Blindness in part has happened to Israel until the fullness of the Gentiles has come in. And so all Israel will be saved.</em></p>
+
+                <div class="scripture">
+                    <strong>Romans 11:25-26 (NKJV):</strong> "For I do not desire, brethren, that you should be ignorant of this mystery, lest you should be wise in your own opinion, that blindness in part has happened to Israel until the fullness of the Gentiles has come in. And so all Israel will be saved..."
+                </div>
+
+                <p>The verse has been read in different ways across church history. The most natural reading within the olive-tree image Paul has just built is that <em>all Israel</em> refers to the full company of the people of God — Jewish believers and Gentile believers together, the one olive tree — gathered in across the whole sweep of redemptive history. Many faithful interpreters have also held that there will be a substantial future ingathering of ethnic Jewish believers — not as a separate program, but as natural branches grafted back into the one tree where Gentile believers have already been planted. On either reading, <em>all Israel</em> is saved in Christ, by faith, joined to the one people of God. There is no second covenant alongside the new covenant in Christ's blood. There is no separate destiny for ethnic Israel apart from the church. The deliverer who comes from Zion is the Lord Jesus, and He is gathering His one redeemed people from every tribe.</p>
+
+                <p>Paul anchors the certainty of God's faithfulness in a sentence worth memorizing. <em>The gifts and the calling of God are irrevocable.</em> God does not abandon what He has begun. He bound everyone — both Jew and Gentile — to disobedience that He might have mercy on all. The hardening of Israel was never permanent rejection; it was an opening for the Gentiles, designed to provoke Israel to envy and faith. The salvation of the Gentiles, in turn, is meant to draw Jewish hearts back to the Messiah they once refused. Both peoples are bound together in a single plan whose end is mercy.</p>
+
+                <p>The chapters close not with theological tidiness but with worship. Paul cannot hold the wisdom of God in any neat system. He breaks into doxology.</p>
+
+                <div class="scripture">
+                    <strong>Romans 11:33-36 (NKJV):</strong> "Oh, the depth of the riches both of the wisdom and knowledge of God! How unsearchable are His judgments and His ways past finding out! For who has known the mind of the Lord? Or who has become His counselor? Or who has first given to Him and it shall be repaid to him? For of Him and through Him and to Him are all things, to whom be glory forever. Amen."
+                </div>
+
+                <p>That is the only honest response to the mystery of God's mercy. We cannot fully chart the wisdom that takes Israel's unbelief and turns it into the salvation of the Gentiles — and then takes the salvation of the Gentiles and uses it to provoke Israel to faith. We cannot explain the sovereign love that mercies whom it mercies and yet holds every soul responsible. But we can worship. We can stand before the depths and say with Paul: <em>of Him and through Him and to Him are all things, to whom be glory forever.</em></p>
+
+                <p>The story God is writing is bigger than any one nation's story within it. He has not abandoned Israel. He has not lost His Gentile bride. He has built one people of God out of the broken branches and the grafted ones, all joined to the same root, all nourished by the same Christ. The same God who said <em>nothing can separate us from My love</em> in chapter 8 says in chapter 11 that He has bound everyone to disobedience precisely so that He might have mercy on all. Mercy is His final word over the whole human race.</p>
+            </div>
+
+            <div class="lang-es">
+                <h3>1. El Corazón de Pablo por Israel (9:1-5)</h3>
+                <p>Después del clímax sublime del capítulo 8 — <em>nada puede separarnos del amor de Dios que es en Cristo Jesús nuestro Señor</em> — el lector espera que Pablo prorrumpa en una doxología. En cambio, el capítulo 9 abre en lágrimas. Pablo ha terminado de cantar sobre el amor irrompible de Dios e inmediatamente se vuelve para escribir sobre la herida más profunda de su ministerio. Su propio pueblo, sus parientes según la carne, han rechazado en gran parte al Mesías para Quien cada página del Antiguo Testamento los había preparado.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 9:1-3 (RVG):</strong> "Verdad digo en Cristo, no miento, dándome testimonio mi conciencia en el Espíritu Santo: Que tengo gran tristeza y continuo dolor en mi corazón. Porque deseara yo mismo ser anatema, separado de Cristo, por mis hermanos, los que son mis parientes según la carne..."
+                </div>
+
+                <p>Pablo dice que voluntariamente sería cortado de Cristo si eso significara la salvación de sus compatriotas judíos. La profundidad de ese deseo es asombrosa — y Pablo sabe que no se le puede conceder. Pero nos dice cómo lleva a su pueblo. Enumera los privilegios que Dios le dio a Israel: <em>la adopción, la gloria, los pactos, la promulgación de la ley, el servicio de Dios, las promesas, los patriarcas, y de los cuales, según la carne, vino Cristo.</em> Ninguna nación en la historia fue tan favorecida. Y sin embargo, la mayor parte de la nación pasó por alto al mismo Mesías que se había estado preparando para recibir.</p>
+
+                <p>Los capítulos 9 a 11 son la respuesta de Pablo a la pregunta más apremiante que surgió directamente del capítulo 8. Si nada puede separar a los elegidos del amor de Dios, ¿ha fallado la palabra de Dios para Israel? ¿Ha sido Dios fiel a Sus promesas del pacto? Pablo dedica tres capítulos completos a la respuesta. La versión corta es: Dios no ha fallado. Las promesas se mantienen. Pero debes entenderlas correctamente.</p>
+
+                <h3>2. No Todo Israel Es Israel (9:6-13)</h3>
+                <p>Pablo abre la respuesta con una de las oraciones más importantes del Nuevo Testamento para entender todo el arco de la historia de la redención.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 9:6 (RVG):</strong> "No empero que la palabra de Dios haya faltado; porque no todos los que son de Israel son israelitas..."
+                </div>
+
+                <p>Esa oración introduce la distinción fundamental que recorre estos tres capítulos. Siempre ha habido un Israel <em>étnico</em> — los descendientes físicos de Abraham — y siempre ha habido un Israel <em>verdadero</em> dentro de ese grupo étnico: los que comparten la fe de Abraham además de su linaje. Las promesas nunca se hicieron indiscriminadamente a todos los que tenían la ascendencia correcta. Se hicieron a aquellos que Dios escogió para ser herederos de la promesa.</p>
+
+                <p>Pablo lo prueba desde los patriarcas mismos. Abraham tuvo dos hijos — Ismael e Isaac — y la promesa pasó por Isaac, no por Ismael, aunque ambos eran hijos biológicos de Abraham. Isaac tuvo dos hijos — Esaú y Jacob — y antes de que nacieran, antes de que ninguno hubiera hecho algo bueno o malo, Dios dijo <em>el mayor servirá al menor.</em> Dios escogió a Jacob. Aun dentro de la familia elegida, la promesa avanzó por elección soberana, no por orden de nacimiento o mérito.</p>
+
+                <p>El punto es liberador. La palabra de Dios no ha fallado en el rechazo del Mesías por el Israel étnico. Porque las promesas nunca se debieron solo a la etnicidad. Se debían a aquellos que Dios había escogido soberanamente — al <em>verdadero</em> Israel dentro de Israel. Y esos verdaderos israelitas son, a través del Nuevo Testamento, identificados como los que comparten la fe de Abraham en Cristo.</p>
+
+                <h3>3. La Soberanía y la Misericordia de Dios (9:14-29)</h3>
+                <p>La siguiente objeción del lector es predecible. ¿Es Dios injusto en escoger a unos y no a otros? Pablo responde con otro <em>mē genoito.</em> En ninguna manera. Dios tiene el derecho de otorgar misericordia a quien Él quiera. Le dijo a Moisés: <em>Tendré misericordia del que tendré misericordia.</em> Le dijo a Faraón: <em>Para esto mismo te he levantado, para mostrar en ti mi poder.</em> La misericordia es la prerrogativa de Dios; el endurecimiento es Su prerrogativa; la salvación no se debe.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 9:20-21 (RVG):</strong> "Mas antes, oh hombre, ¿quién eres tú, para que alterques con Dios? ¿Dirá el vaso de barro al que lo formó: Por qué me has hecho así? ¿O no tiene potestad el alfarero para hacer de la misma masa un vaso para honra, y otro para deshonra?"
+                </div>
+
+                <p>La imagen del alfarero es la respuesta establecida de Pablo a la objeción de injusticia. Los propósitos de Dios son más altos que los nuestros, y Su misericordia no se negocia con el barro. Lo que Él ha hecho es llamar a un pueblo tanto de los judíos como de los gentiles — vasos de misericordia preparados de antemano para gloria. Los versículos finales del capítulo 9 citan a Oseas e Isaías: Dios ha llamado a un pueblo que no era Su pueblo; los salvos son un remanente de una nación mucho mayor.</p>
+
+                <h3>4. El Tropiezo de Israel — Justicia por Fe, No por Obras (9:30-10:21)</h3>
+                <p>Pablo ahora se vuelve al lado humano de la cuestión. Si Dios ha sido soberano, Israel también ha sido responsable. Israel siguió la justicia — pero la siguió como si pudiera obtenerse por obras de la ley. Tropezaron con la piedra de tropiezo, que es Cristo. Los gentiles que no buscaban la justicia en absoluto la alcanzaron — por la fe.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 10:4 (RVG):</strong> "Porque el fin de la ley es Cristo, para justicia a todo aquel que cree."
+                </div>
+
+                <p>La palabra traducida "fin" puede significar <em>término</em> (la ley ha sido completada) o <em>meta</em> (la ley señalaba hacia Él todo el tiempo). Ambos sentidos son verdad. Cristo es el propósito de la ley. Él es la justicia que la ley demandaba, traída cerca de cualquiera que cree.</p>
+
+                <p>Pablo presiona este acceso con una de sus oraciones más hermosas. Cita Deuteronomio 30 y lo aplica al evangelio: la palabra está cerca de ti, en tu boca y en tu corazón. <em>Que si confesares con tu boca al Señor Jesús, y creyeres en tu corazón que Dios le levantó de los muertos, serás salvo.</em> La justicia que Israel buscaba por obras de la ley es la misma justicia ahora ofrecida a cualquiera que simplemente crea. Cualquiera que invoque el nombre del Señor — judío o gentil — será salvo.</p>
+
+                <p>Pero, ¿cómo invocarán a Aquel en el cual no han creído? ¿Y cómo creerán en Aquel de quien no han oído? ¿Y cómo oirán sin haber quien les predique? ¿Y cómo predicarán si no fueren enviados? <em>¡Cuán hermosos son los pies de los que anuncian el evangelio de paz!</em> Esta es la Gran Comisión enmarcada dentro de la carta doctrinal — el mandato misionero que fluye de la misericordia soberana de Dios. Pablo termina el capítulo 10 reconociendo la tragedia: Israel oyó, Israel conoció, y sin embargo Israel como nación se negó, y la mano de Dios ha permanecido extendida hacia un pueblo desobediente y contradictor.</p>
+
+                <h3>5. El Remanente y el Único Olivo (11:1-24)</h3>
+                <p>Entonces Pablo hace la pregunta que ha estado en el aire desde el capítulo 9. <em>¿Ha desechado Dios a su pueblo?</em> Y responde con la negación más fuerte: <em>¡En ninguna manera!</em> Pablo mismo es israelita, de la simiente de Abraham, de la tribu de Benjamín. El hecho de que cualquier judío crea — Pablo entre ellos — prueba que Dios no ha desechado a Su pueblo.</p>
+
+                <p>Vuelve a Elías por el principio. Elías pensó que era el único que quedaba. Dios le dijo: <em>He reservado para mí siete mil que no han doblado la rodilla a Baal.</em> Siempre ha habido un remanente creyente dentro del Israel incrédulo. Así es ahora. Hay un remanente conforme a la elección de la gracia — creyentes judíos en Cristo — y son evidencia de que Dios no ha abandonado las ramas naturales.</p>
+
+                <p>Luego Pablo da la gran imagen de estos capítulos. Pinta al pueblo de Dios como un único <em>olivo</em>. Esto no son dos olivos — uno para Israel y uno para la iglesia — sino un árbol, un pueblo cultivado de Dios enraizado en la promesa abrahámica. Algunas de las ramas naturales fueron cortadas por incredulidad. Ramas silvestres de entre los gentiles fueron injertadas. Y las ramas naturales que llegan a la fe pueden ser injertadas de nuevo. Solo hay un árbol. Creyentes judíos y creyentes gentiles juntos comparten la misma raíz, la misma savia, la misma nutrición, la misma fructificación.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 11:17-18 (RVG):</strong> "Y si algunas de las ramas fueron quebradas, y tú, siendo olivo silvestre, has sido injertado en lugar de ellas, y has sido hecho participante de la raíz y de la grosura del olivo; no te jactes contra las ramas. Y si te jactas, sabe que no sustentas tú a la raíz, sino la raíz a ti."
+                </div>
+
+                <p>Se advierte al creyente gentil contra toda arrogancia hacia las ramas naturales que han sido cortadas. La misma gracia que injertó al gentil podría removerlo si se apartara de la fe. Y la misma gracia que cortó las ramas naturales en incredulidad está lista para injertarlas de nuevo cuando vengan a la fe. El cuadro completo es de un árbol bajo un Labrador, con ramas removidas y añadidas según la fe — no según la etnicidad. La raíz sostiene a las ramas; las ramas no sostienen a la raíz. Cualquier cosa que tenga el creyente gentil, la tiene por injerto; es un huésped en un árbol plantado mucho antes de que él llegara.</p>
+
+                <h3>6. El Misterio: Todo Israel Será Salvo (11:25-36)</h3>
+                <p>Pablo llama a lo que dice a continuación un <em>misterio</em> — una verdad previamente escondida pero ahora revelada. <em>Endurecimiento en parte ha acontecido a Israel, hasta que haya entrado la plenitud de los gentiles. Y así todo Israel será salvo.</em></p>
+
+                <div class="scripture">
+                    <strong>Romanos 11:25-26 (RVG):</strong> "Porque no quiero, hermanos, que ignoréis este misterio, para que no seáis sabios en vuestra propia opinión: que el endurecimiento en parte ha acontecido a Israel, hasta que haya entrado la plenitud de los gentiles. Y así todo Israel será salvo..."
+                </div>
+
+                <p>El versículo se ha leído de diferentes maneras a través de la historia de la iglesia. La lectura más natural dentro de la imagen del olivo que Pablo acaba de construir es que <em>todo Israel</em> se refiere a la compañía completa del pueblo de Dios — creyentes judíos y creyentes gentiles juntos, el único olivo — reunidos a través de todo el arco de la historia redentora. Muchos intérpretes fieles también han sostenido que habrá una reunión sustancial futura de creyentes judíos étnicos — no como un programa separado, sino como ramas naturales injertadas de nuevo en el único árbol donde los creyentes gentiles ya han sido plantados. En cualquier lectura, <em>todo Israel</em> es salvo en Cristo, por la fe, unido al único pueblo de Dios. No hay un segundo pacto al lado del nuevo pacto en la sangre de Cristo. No hay destino separado para Israel étnico aparte de la iglesia. El libertador que viene de Sion es el Señor Jesús, y Él está reuniendo a Su único pueblo redimido de toda tribu.</p>
+
+                <p>Pablo ancla la certeza de la fidelidad de Dios en una oración digna de memorizar. <em>Los dones y el llamamiento de Dios son irrevocables.</em> Dios no abandona lo que ha comenzado. Sujetó a todos — tanto judíos como gentiles — a la desobediencia para tener misericordia de todos. El endurecimiento de Israel nunca fue rechazo permanente; fue una apertura para los gentiles, diseñada para provocar a Israel a celos y fe. La salvación de los gentiles, a su vez, está destinada a atraer los corazones judíos de vuelta al Mesías que una vez rechazaron. Ambos pueblos están unidos en un solo plan cuyo fin es la misericordia.</p>
+
+                <p>Los capítulos cierran no con prolijidad teológica sino con adoración. Pablo no puede contener la sabiduría de Dios en ningún sistema ordenado. Prorrumpe en doxología.</p>
+
+                <div class="scripture">
+                    <strong>Romanos 11:33-36 (RVG):</strong> "¡Oh profundidad de las riquezas de la sabiduría y de la ciencia de Dios! ¡Cuán incomprensibles son sus juicios, e inescrutables sus caminos! Porque ¿quién entendió la mente del Señor? ¿O quién fue su consejero? ¿O quién le dio a Él primero, para que le sea recompensado? Porque de Él, y por Él, y para Él, son todas las cosas. A Él sea gloria por siempre. Amén."
+                </div>
+
+                <p>Esa es la única respuesta honesta al misterio de la misericordia de Dios. No podemos cartografiar completamente la sabiduría que toma la incredulidad de Israel y la convierte en la salvación de los gentiles — y luego toma la salvación de los gentiles y la usa para provocar a Israel a la fe. No podemos explicar el amor soberano que tiene misericordia de quien tiene misericordia y sin embargo responsabiliza a cada alma. Pero podemos adorar. Podemos estar ante las profundidades y decir con Pablo: <em>de Él, y por Él, y para Él, son todas las cosas. A Él sea gloria por siempre.</em></p>
+
+                <p>La historia que Dios está escribiendo es más grande que la historia de cualquier nación dentro de ella. No ha abandonado a Israel. No ha perdido a Su esposa gentil. Ha construido un solo pueblo de Dios a partir de las ramas cortadas y las injertadas, todas unidas a la misma raíz, todas nutridas por el mismo Cristo. El mismo Dios que dijo <em>nada puede separarnos de Mi amor</em> en el capítulo 8 dice en el capítulo 11 que ha sujetado a todos a la desobediencia precisamente para tener misericordia de todos. La misericordia es Su palabra final sobre toda la raza humana.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="exam-section" id="examSection">
+        <div class="exam-header">
+            <h2><span class="lang-en">Unit 8 Examination — Romans 9-11</span><span class="lang-es">Examen de la Unidad 8 — Romanos 9-11</span></h2>
+            <p><span class="lang-en">20 multiple choice questions + 10 short answer questions (essays required for Th.M. and M.Div. only)</span><span class="lang-es">20 preguntas de opción múltiple + 10 preguntas de respuesta corta (requeridas solo para Th.M. y M.Div.)</span></p>
+        </div>
+        <div id="mcQuestions"></div>
+        <div id="saQuestions"></div>
+        <div class="action-buttons">
+            <button id="submitBtn"><span class="lang-en">Submit Exam</span><span class="lang-es">Entregar Examen</span></button>
+            <button id="resetBtn" class="reset-btn"><span class="lang-en">Reset Exam</span><span class="lang-es">Reiniciar Examen</span></button>
+        </div>
+        <div id="lockoutTimer" class="lockout-timer" style="display:none;"></div>
+    </div>
+
+    <div class="nav-links">
+        <a href="CTSRomansUnit7.html"><span class="lang-en">← Previous Unit</span><span class="lang-es">← Unidad Anterior</span></a>
+        <a href="CTSRomansUnit9.html"><span class="lang-en">Next Unit →</span><span class="lang-es">Unidad Siguiente →</span></a>
+    </div>
+</div>
+
+<script>
+  var _ctsMem={};
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _ctsMem)?_ctsMem[k]:null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_ctsMem[k]=String(v);}}
+  function lsDel(k){try{localStorage.removeItem(k);}catch(e){delete _ctsMem[k];}}
+
+// ============================================================
+// PER-UNIT CONSTANTS
+// ============================================================
+const UNIT = 8;
+const COURSE_PREFIX = "romans";
+const NEXT_URL = "CTSRomansUnit9.html";
+const PREV_URL = "CTSRomansUnit7.html";
+const IS_LAST_UNIT = false;
+const SHOW_REGISTRATION_CARD = false;
+const CERT_URL = "CTSRomansCertificate.html";
+
+// ============================================================
+// MULTIPLE CHOICE QUESTIONS (20) — Distribution A=5, B=5, C=5, D=5
+// ============================================================
+const mcQuestions = [{"text": "1. In Romans 9:1-3, what does Paul say he could wish for the sake of his fellow Jews?", "options": ["D. That the temple be restored", "C. That he could write more letters to them", "A. That he himself were accursed from Christ for their salvation", "B. That he could trade places with the Messiah"], "correct": 2, "correctFeedback": "Correct. Paul's anguish is so deep he would willingly be cut off from Christ if it would save his kinsmen.", "incorrectFeedback": "Romans 9:3 — 'I could wish that I myself were accursed from Christ for my brethren.' The depth of Paul's love for his ethnic people is staggering — though he knows the wish cannot be granted.", "textEs": "1. En Romanos 9:1-3, ¿qué dice Pablo que podría desear por amor a sus hermanos judíos?", "optionsEs": ["D. Que el templo fuera restaurado", "C. Que pudiera escribirles más cartas", "A. Que él mismo fuera anatema, separado de Cristo, por la salvación de ellos", "B. Que pudiera cambiar de lugar con el Mesías"], "correctFeedbackEs": "Correcto. La angustia de Pablo es tan profunda que de buena gana sería separado de Cristo si eso salvara a sus parientes.", "incorrectFeedbackEs": "Romanos 9:3 — 'deseara yo mismo ser anatema, separado de Cristo, por amor a mis hermanos.' La profundidad del amor de Pablo por su pueblo es asombrosa — aunque sabe que el deseo no puede concederse."}, {"text": "2. In Romans 9:4-5, Paul lists the privileges given to Israel, which include:", "options": ["D. Exemption from suffering", "C. Political dominance and territorial expansion", "A. Wealth, power, military victory", "B. The adoption, glory, covenants, giving of the law, service of God, promises, patriarchs, and the Messiah according to the flesh"], "correct": 3, "correctFeedback": "Correct. No nation in history was so privileged. And yet most missed the Messiah they had been prepared to receive.", "incorrectFeedback": "Romans 9:4-5 names eight privileges: adoption, glory, covenants, giving of the law, service of God, promises, patriarchs, and the Messiah according to the flesh. No nation was so favored.", "textEs": "2. En Romanos 9:4-5, Pablo enumera los privilegios dados a Israel, que incluyen:", "optionsEs": ["D. Exención del sufrimiento", "C. Dominio político y expansión territorial", "A. Riqueza, poder, victoria militar", "B. La adopción, la gloria, los pactos, el dar de la ley, el culto, las promesas, los patriarcas, y el Mesías según la carne"], "correctFeedbackEs": "Correcto. Ninguna nación en la historia fue tan privilegiada. Y sin embargo, la mayoría no reconoció al Mesías que habían sido preparados para recibir.", "incorrectFeedbackEs": "Romanos 9:4-5 nombra ocho privilegios: la adopción, la gloria, los pactos, el dar de la ley, el culto, las promesas, los patriarcas, y el Mesías según la carne. Ninguna nación fue tan favorecida."}, {"text": "3. Romans 9:6 — 'they are not all Israel who are of Israel' — teaches that:", "options": ["C. There is an ethnic Israel and a true Israel within it — those who share Abraham's faith, not just his bloodline", "D. The church has replaced Israel entirely", "A. The promises were never given", "B. Ethnic Israel does not exist"], "correct": 0, "correctFeedback": "Correct. The promises were always for the true Israel within ethnic Israel — those of faith, not merely of bloodline.", "incorrectFeedback": "Romans 9:6 — 'they are not all Israel who are of Israel.' Paul distinguishes the ethnic descendants of Abraham from the true Israel within that ethnic group, who share Abraham's faith.", "textEs": "3. Romanos 9:6 — 'no todos los que descienden de Israel son israelitas' — enseña que:", "optionsEs": ["C. Hay un Israel étnico y un verdadero Israel dentro de él — los que comparten la fe de Abraham, no solo su linaje", "D. La iglesia ha reemplazado a Israel por completo", "A. Las promesas nunca fueron dadas", "B. El Israel étnico no existe"], "correctFeedbackEs": "Correcto. Las promesas siempre fueron para el verdadero Israel dentro del Israel étnico — los de fe, no meramente los de linaje.", "incorrectFeedbackEs": "Romanos 9:6 — 'no todos los que descienden de Israel son israelitas.' Pablo distingue a los descendientes étnicos de Abraham del verdadero Israel dentro de ese grupo étnico, los que comparten la fe de Abraham."}, {"text": "4. The Isaac/Ishmael and Jacob/Esau examples (Rom 9:7-13) show that:", "options": ["B. Birth order determines blessing", "A. God's choice depends on human merit", "C. Both children should have been heirs", "D. The promise advanced by sovereign election, not by birth order or merit"], "correct": 3, "correctFeedback": "Correct. Even within the elect family, the promise advanced by God's sovereign choice — not bloodline or works.", "incorrectFeedback": "The patriarchal examples prove the promise advanced by sovereign election: Isaac chosen over Ishmael, Jacob chosen over Esau before either had done anything. Not bloodline. Not merit. God's choice.", "textEs": "4. Los ejemplos de Isaac/Ismael y Jacob/Esaú (Ro 9:7-13) muestran que:", "optionsEs": ["B. El orden de nacimiento determina la bendición", "A. La elección de Dios depende del mérito humano", "C. Ambos hijos debían haber sido herederos", "D. La promesa avanzó por elección soberana, no por orden de nacimiento ni mérito"], "correctFeedbackEs": "Correcto. Aun dentro de la familia escogida, la promesa avanzó por la elección soberana de Dios — no por linaje ni obras.", "incorrectFeedbackEs": "Los ejemplos patriarcales prueban que la promesa avanzó por elección soberana: Isaac escogido sobre Ismael, Jacob escogido sobre Esaú antes de que ninguno hubiera hecho nada. No por linaje. No por mérito. La elección de Dios."}, {"text": "5. The potter and clay image in Romans 9:20-21 teaches that:", "options": ["A. God has the right to be merciful as He wills, and humans cannot demand otherwise", "B. Humans are independent of God", "C. God owes salvation to everyone", "D. Pottery is symbolic of works-righteousness"], "correct": 0, "correctFeedback": "Correct. Mercy is God's prerogative; the clay does not negotiate with the Potter.", "incorrectFeedback": "Romans 9:20-21 — the potter has authority over the clay. God's mercy is His prerogative; salvation is not owed; the creature has no standing to demand fairness from the Creator.", "textEs": "5. La imagen del alfarero y el barro en Romanos 9:20-21 enseña que:", "optionsEs": ["A. Dios tiene el derecho de ser misericordioso como quiere, y los humanos no pueden exigir lo contrario", "B. Los humanos son independientes de Dios", "C. Dios le debe la salvación a todos", "D. La alfarería simboliza la justicia por obras"], "correctFeedbackEs": "Correcto. La misericordia es prerrogativa de Dios; el barro no negocia con el Alfarero.", "incorrectFeedbackEs": "Romanos 9:20-21 — el alfarero tiene autoridad sobre el barro. La misericordia de Dios es su prerrogativa; la salvación no se debe; la criatura no tiene derecho a exigir equidad al Creador."}, {"text": "6. According to Romans 9:15-16, salvation depends on:", "options": ["D. Religious performance", "B. God's mercy — He has mercy on whom He has mercy", "C. Ethnic descent", "A. Human effort and willing"], "correct": 1, "correctFeedback": "Correct. 'It is not of him who wills, nor of him who runs, but of God who shows mercy.'", "incorrectFeedback": "Romans 9:15-16 — salvation depends on God's mercy, not on human willing or running. The decisive factor is divine mercy.", "textEs": "6. Según Romanos 9:15-16, la salvación depende de:", "optionsEs": ["D. El desempeño religioso", "B. La misericordia de Dios — Él tiene misericordia del que quiere", "C. La descendencia étnica", "A. El esfuerzo y la voluntad humanos"], "correctFeedbackEs": "Correcto. 'No es del que quiere, ni del que corre, sino de Dios que tiene misericordia.'", "incorrectFeedbackEs": "Romanos 9:15-16 — la salvación depende de la misericordia de Dios, no del querer ni del correr humanos. El factor decisivo es la misericordia divina."}, {"text": "7. According to Romans 9:31-32, why did Israel not attain righteousness?", "options": ["D. Because they did not try hard enough", "C. Because they pursued it by works of the law rather than by faith — and stumbled over Christ the stumbling stone", "A. Because they were uneducated", "B. Because they had no scriptures"], "correct": 1, "correctFeedback": "Correct. They pursued righteousness by works rather than by faith and stumbled over Christ.", "incorrectFeedback": "Romans 9:31-32 — Israel pursued righteousness as if by works of the law. They stumbled over Christ the stumbling stone, while Gentiles attained righteousness by faith.", "textEs": "7. Según Romanos 9:31-32, ¿por qué Israel no alcanzó la justicia?", "optionsEs": ["D. Porque no se esforzaron lo suficiente", "C. Porque la buscaban por obras de la ley en vez de por fe — y tropezaron en Cristo, la piedra de tropiezo", "A. Porque eran ignorantes", "B. Porque no tenían Escrituras"], "correctFeedbackEs": "Correcto. La buscaban por obras en vez de por fe y tropezaron en Cristo.", "incorrectFeedbackEs": "Romanos 9:31-32 — Israel buscaba la justicia como por obras de la ley. Tropezaron en Cristo, la piedra de tropiezo, mientras los gentiles alcanzaron la justicia por la fe."}, {"text": "8. Romans 10:4 — 'Christ is the end of the law for righteousness' — means:", "options": ["A. The law was a mistake", "C. Christians can ignore Scripture", "D. Christ is both the terminus and the goal of the law — what the law was for", "B. The law is irrelevant to ethics"], "correct": 2, "correctFeedback": "Correct. 'End' (telos) means both terminus and goal. Christ is what the law was pointing toward all along.", "incorrectFeedback": "Romans 10:4 — Christ is the end of the law. The Greek telos means both terminus (the law is completed) and goal (the law pointed toward Him). Both senses are true.", "textEs": "8. Romanos 10:4 — 'el fin de la ley es Cristo' — significa:", "optionsEs": ["A. La ley fue un error", "C. Los cristianos pueden ignorar la Escritura", "D. Cristo es a la vez el término y la meta de la ley — aquello para lo cual la ley existía", "B. La ley es irrelevante para la ética"], "correctFeedbackEs": "Correcto. 'Fin' (telos) significa a la vez término y meta. Cristo es aquello a lo que la ley apuntaba todo el tiempo.", "incorrectFeedbackEs": "Romanos 10:4 — Cristo es el fin de la ley. El griego telos significa a la vez término (la ley se completa) y meta (la ley apuntaba hacia Él). Ambos sentidos son verdaderos."}, {"text": "9. Romans 10:9 says we must do what to be saved?", "options": ["D. Perform good works", "B. Keep all ceremonial law", "C. Be born of Jewish ancestry", "A. Confess Jesus as Lord with the mouth and believe in the resurrection in the heart"], "correct": 3, "correctFeedback": "Correct. The simplest and clearest statement of saving faith in the New Testament.", "incorrectFeedback": "Romans 10:9 — confess the Lord Jesus with your mouth and believe in your heart that God raised Him from the dead. Confession and faith — the simplest gospel summary in Paul.", "textEs": "9. Romanos 10:9 dice que debemos hacer ¿qué para ser salvos?", "optionsEs": ["D. Hacer buenas obras", "B. Guardar toda la ley ceremonial", "C. Nacer de ascendencia judía", "A. Confesar con la boca a Jesús como Señor y creer en el corazón en la resurrección"], "correctFeedbackEs": "Correcto. La declaración más simple y clara de la fe salvadora en el Nuevo Testamento.", "incorrectFeedbackEs": "Romanos 10:9 — confiesa con tu boca al Señor Jesús y cree en tu corazón que Dios le levantó de los muertos. Confesión y fe — el resumen del evangelio más simple en Pablo."}, {"text": "10. 'How beautiful are the feet of those who preach the gospel' (Rom 10:15) functions in Romans as:", "options": ["A. A poetic flourish only", "D. Liturgical decoration", "C. An anti-Jewish polemic", "B. The missionary mandate flowing out of the sovereign mercy of God"], "correct": 3, "correctFeedback": "Correct. The Great Commission tucked inside the doctrinal letter — sovereign mercy producing missionary urgency.", "incorrectFeedback": "Romans 10:14-15 — how shall they hear without a preacher? The missionary mandate is woven into the doctrinal letter; sovereign mercy never undermines evangelistic urgency.", "textEs": "10. '¡Cuán hermosos son los pies de los que anuncian el evangelio!' (Ro 10:15) funciona en Romanos como:", "optionsEs": ["A. Solo un adorno poético", "D. Decoración litúrgica", "C. Una polémica antijudía", "B. El mandato misionero que brota de la soberana misericordia de Dios"], "correctFeedbackEs": "Correcto. La Gran Comisión metida dentro de la carta doctrinal — la misericordia soberana produciendo urgencia misionera.", "incorrectFeedbackEs": "Romanos 10:14-15 — ¿cómo oirán sin haber quien les predique? El mandato misionero está entretejido en la carta doctrinal; la misericordia soberana nunca socava la urgencia evangelística."}, {"text": "11. In Romans 11:1, Paul asks 'Has God cast away His people?' His answer is:", "options": ["C. Certainly not — Paul himself is an Israelite, and a remnant remains by grace", "A. Yes, completely", "D. The question cannot be answered", "B. Only temporarily"], "correct": 0, "correctFeedback": "Correct. Paul's own faith and the believing Jewish remnant prove God has not abandoned His people.", "incorrectFeedback": "Romans 11:1-5 — 'Certainly not.' Paul himself is an Israelite of the tribe of Benjamin. As in Elijah's day, there is a remnant according to the election of grace.", "textEs": "11. En Romanos 11:1, Pablo pregunta '¿Ha desechado Dios a su pueblo?' Su respuesta es:", "optionsEs": ["C. En ninguna manera — Pablo mismo es israelita, y un remanente permanece por gracia", "A. Sí, por completo", "D. La pregunta no puede responderse", "B. Solo temporalmente"], "correctFeedbackEs": "Correcto. La fe del propio Pablo y el remanente judío creyente prueban que Dios no ha abandonado a su pueblo.", "incorrectFeedbackEs": "Romanos 11:1-5 — 'En ninguna manera.' Pablo mismo es israelita, de la tribu de Benjamín. Como en los días de Elías, hay un remanente conforme a la elección de gracia."}, {"text": "12. The Elijah and 7,000 reference (Rom 11:2-5) illustrates:", "options": ["A. The end of prophecy", "C. Elijah's superior faith", "D. There has always been a believing remnant within unbelieving Israel", "B. The need for kings"], "correct": 2, "correctFeedback": "Correct. God reserved 7,000 in Elijah's day; He reserves a remnant in Paul's day; the principle remains.", "incorrectFeedback": "Romans 11:2-5 — God told Elijah He had reserved 7,000 who had not bowed to Baal. The principle holds: there has always been a believing remnant within unbelieving Israel.", "textEs": "12. La referencia a Elías y los 7,000 (Ro 11:2-5) ilustra:", "optionsEs": ["A. El fin de la profecía", "C. La fe superior de Elías", "D. Siempre ha habido un remanente creyente dentro del Israel incrédulo", "B. La necesidad de reyes"], "correctFeedbackEs": "Correcto. Dios se reservó 7,000 en los días de Elías; se reserva un remanente en los días de Pablo; el principio permanece.", "incorrectFeedbackEs": "Romanos 11:2-5 — Dios le dijo a Elías que se había reservado 7,000 que no habían doblado la rodilla a Baal. El principio se mantiene: siempre ha habido un remanente creyente dentro del Israel incrédulo."}, {"text": "13. The 'remnant according to the election of grace' (Rom 11:5) refers to:", "options": ["D. The Pharisees", "C. Old Testament saints only", "A. Jewish believers in Christ — evidence God has not abandoned the natural branches", "B. The leftover Gentiles"], "correct": 2, "correctFeedback": "Correct. The believing Jewish remnant in Paul's day proves God's faithfulness to ethnic Israel.", "incorrectFeedback": "Romans 11:5 — the remnant chosen by grace = Jewish believers in Christ. Their existence proves God has not cast off the natural branches; the covenant promise continues.", "textEs": "13. El 'remanente escogido por gracia' (Ro 11:5) se refiere a:", "optionsEs": ["D. Los fariseos", "C. Solo los santos del Antiguo Testamento", "A. Los judíos creyentes en Cristo — evidencia de que Dios no ha abandonado las ramas naturales", "B. Los gentiles sobrantes"], "correctFeedbackEs": "Correcto. El remanente judío creyente en los días de Pablo prueba la fidelidad de Dios al Israel étnico.", "incorrectFeedbackEs": "Romanos 11:5 — el remanente escogido por gracia = judíos creyentes en Cristo. Su existencia prueba que Dios no ha desechado las ramas naturales; la promesa del pacto continúa."}, {"text": "14. The olive tree image in Romans 11:17-24 teaches:", "options": ["D. The branches are independent of the root", "B. There is one olive tree — one cultivated people of God rooted in the Abrahamic promise, with branches removed and added according to faith", "A. There are two olive trees, one for Israel and one for the church", "C. The tree has been replaced"], "correct": 1, "correctFeedback": "Correct. ONE olive tree. Believing Jews and believing Gentiles share the same root, same sap, same Christ.", "incorrectFeedback": "Romans 11:17-24 — one olive tree, one people of God. Some natural branches were broken off in unbelief; wild branches were grafted in; both share one root. Not two trees.", "textEs": "14. La imagen del olivo en Romanos 11:17-24 enseña:", "optionsEs": ["D. Las ramas son independientes de la raíz", "B. Hay un solo olivo — un pueblo cultivado de Dios arraigado en la promesa abrahámica, con ramas quitadas y añadidas conforme a la fe", "A. Hay dos olivos, uno para Israel y otro para la iglesia", "C. El árbol ha sido reemplazado"], "correctFeedbackEs": "Correcto. UN solo olivo. Los judíos creyentes y los gentiles creyentes comparten la misma raíz, la misma savia, el mismo Cristo.", "incorrectFeedbackEs": "Romanos 11:17-24 — un solo olivo, un solo pueblo de Dios. Algunas ramas naturales fueron desgajadas por incredulidad; ramas silvestres fueron injertadas; ambas comparten una raíz. No dos árboles."}, {"text": "15. Gentile believers are warned against:", "options": ["C. Boasting against the natural branches — for the root supports them, not the other way around", "B. Reading the Old Testament", "A. Eating with Jews", "D. Praying in Hebrew"], "correct": 0, "correctFeedback": "Correct. The Gentile is grafted in by grace; the same grace could remove him. No arrogance toward the natural branches.", "incorrectFeedback": "Romans 11:18-20 — 'Do not boast against the branches.' The Gentile believer is a guest in a tree planted long before he arrived. The root supports the branches; the branches do not support the root.", "textEs": "15. Se advierte a los creyentes gentiles contra:", "optionsEs": ["C. Jactarse contra las ramas naturales — pues la raíz los sostiene a ellos, no al revés", "B. Leer el Antiguo Testamento", "A. Comer con judíos", "D. Orar en hebreo"], "correctFeedbackEs": "Correcto. El gentil es injertado por gracia; la misma gracia podría quitarlo. Ninguna arrogancia hacia las ramas naturales.", "incorrectFeedbackEs": "Romanos 11:18-20 — 'No te jactes contra las ramas.' El creyente gentil es un invitado en un árbol plantado mucho antes de que él llegara. La raíz sostiene a las ramas; las ramas no sostienen a la raíz."}, {"text": "16. The phrase 'the root supports you' (Rom 11:18) emphasizes:", "options": ["D. The Gentile believer depends on the Abrahamic root, not the other way around", "C. Personal achievement", "A. Self-sufficiency of believers", "B. The independence of each Christian"], "correct": 0, "correctFeedback": "Correct. The Abrahamic promise is the root from which Gentile believers draw life; we are guests in a tree planted long before us.", "incorrectFeedback": "Romans 11:18 — 'the root supports you, not you the root.' Gentile believers draw life from the Abrahamic promise; we are guests in a tree planted long before we arrived.", "textEs": "16. La frase 'la raíz te sostiene a ti' (Ro 11:18) recalca:", "optionsEs": ["D. Que el creyente gentil depende de la raíz abrahámica, no al revés", "C. El logro personal", "A. La autosuficiencia de los creyentes", "B. La independencia de cada cristiano"], "correctFeedbackEs": "Correcto. La promesa abrahámica es la raíz de la que los creyentes gentiles sacan vida; somos invitados en un árbol plantado mucho antes que nosotros.", "incorrectFeedbackEs": "Romanos 11:18 — 'no sustentas tú a la raíz, sino la raíz a ti.' Los creyentes gentiles sacan vida de la promesa abrahámica; somos invitados en un árbol plantado mucho antes de que llegáramos."}, {"text": "17. The 'mystery' Paul reveals in Romans 11:25 is that:", "options": ["C. Believers will reign on earth a thousand years", "A. Blindness in part has happened to Israel until the fullness of the Gentiles comes in", "D. The temple will be rebuilt", "B. The end will come tomorrow"], "correct": 1, "correctFeedback": "Correct. Israel's hardening is partial and temporary, designed to open the door for Gentile inclusion.", "incorrectFeedback": "Romans 11:25 — 'blindness in part has happened to Israel until the fullness of the Gentiles has come in.' Partial, temporary hardening — designed to open the door for Gentile inclusion.", "textEs": "17. El 'misterio' que Pablo revela en Romanos 11:25 es que:", "optionsEs": ["C. Los creyentes reinarán en la tierra mil años", "A. Ha acontecido a Israel ceguedad en parte, hasta que haya entrado la plenitud de los gentiles", "D. El templo será reconstruido", "B. El fin vendrá mañana"], "correctFeedbackEs": "Correcto. El endurecimiento de Israel es parcial y temporal, dispuesto para abrir la puerta a la inclusión de los gentiles.", "incorrectFeedbackEs": "Romanos 11:25 — 'ha acontecido a Israel ceguedad en parte, hasta que haya entrado la plenitud de los gentiles.' Endurecimiento parcial y temporal — dispuesto para abrir la puerta a la inclusión de los gentiles."}, {"text": "18. The phrase 'all Israel will be saved' (Rom 11:26) is best understood within Paul's olive tree image as:", "options": ["C. Universal salvation regardless of faith", "D. The destruction of ethnic Israel", "A. A separate millennial program for ethnic Israel apart from the church", "B. The full company of the people of God — Jews and Gentiles together in the one olive tree — saved in Christ by faith"], "correct": 3, "correctFeedback": "Correct. There is no separate destiny for ethnic Israel apart from the church. All Israel is saved in Christ, joined to the one people of God.", "incorrectFeedback": "Within the olive-tree image, 'all Israel' refers to the full company of God's people — Jews and Gentiles together — saved in Christ by faith and joined to the one olive tree. No separate program; one people of God.", "textEs": "18. La frase 'todo Israel será salvo' (Ro 11:26) se entiende mejor, dentro de la imagen del olivo de Pablo, como:", "optionsEs": ["C. Salvación universal sin importar la fe", "D. La destrucción del Israel étnico", "A. Un programa milenial separado para el Israel étnico aparte de la iglesia", "B. La compañía completa del pueblo de Dios — judíos y gentiles juntos en el único olivo — salvos en Cristo por la fe"], "correctFeedbackEs": "Correcto. No hay un destino separado para el Israel étnico aparte de la iglesia. Todo Israel es salvo en Cristo, unido al único pueblo de Dios.", "incorrectFeedbackEs": "Dentro de la imagen del olivo, 'todo Israel' se refiere a la compañía completa del pueblo de Dios — judíos y gentiles juntos — salvos en Cristo por la fe y unidos al único olivo. Ningún programa separado; un solo pueblo de Dios."}, {"text": "19. Romans 11:29 says the gifts and calling of God are:", "options": ["B. Conditional on performance", "A. Temporary", "C. Irrevocable", "D. Renewable only by sacrifice"], "correct": 2, "correctFeedback": "Correct. 'The gifts and the calling of God are irrevocable.' God does not abandon what He has begun.", "incorrectFeedback": "Romans 11:29 — 'the gifts and calling of God are irrevocable.' God does not abandon what He has begun; His covenant faithfulness endures even when His people fail.", "textEs": "19. Romanos 11:29 dice que los dones y el llamamiento de Dios son:", "optionsEs": ["B. Condicionados al desempeño", "A. Temporales", "C. Irrevocables", "D. Renovables solo por sacrificio"], "correctFeedbackEs": "Correcto. 'Irrevocables son los dones y el llamamiento de Dios.' Dios no abandona lo que ha comenzado.", "incorrectFeedbackEs": "Romanos 11:29 — 'irrevocables son los dones y el llamamiento de Dios.' Dios no abandona lo que ha comenzado; su fidelidad al pacto perdura aun cuando su pueblo falla."}, {"text": "20. The doxology of Romans 11:33-36 affirms that:", "options": ["C. The depths of God can be charted by reason", "D. The wisdom and judgments of God are unsearchable — of Him, through Him, and to Him are all things", "B. Theology can fully explain divine mercy", "A. God's plans are obvious and predictable"], "correct": 1, "correctFeedback": "Correct. Paul's only honest response to the mystery is worship: 'of Him and through Him and to Him are all things.'", "incorrectFeedback": "Romans 11:33-36 — the only honest response to God's mercy is worship. Paul cannot chart the wisdom that turns Israel's unbelief into Gentile salvation; he can only stand before the depths and praise.", "textEs": "20. La doxología de Romanos 11:33-36 afirma que:", "optionsEs": ["C. Las profundidades de Dios pueden trazarse con la razón", "D. La sabiduría y los juicios de Dios son inescrutables — de Él, por Él y para Él son todas las cosas", "B. La teología puede explicar plenamente la misericordia divina", "A. Los planes de Dios son obvios y predecibles"], "correctFeedbackEs": "Correcto. La única respuesta honesta de Pablo al misterio es la adoración: 'de Él, y por Él, y para Él, son todas las cosas.'", "incorrectFeedbackEs": "Romanos 11:33-36 — la única respuesta honesta a la misericordia de Dios es la adoración. Pablo no puede trazar la sabiduría que convierte la incredulidad de Israel en salvación de los gentiles; solo puede estar ante las profundidades y alabar."}];
+
+// ============================================================
+// SHORT ANSWER QUESTIONS (10) — split kw_en / kw_es
+// ============================================================
+const saQuestions = [
+    { id: "sa_u8_1", textEn: "Describe Paul's heart for ethnic Israel in Romans 9:1-5.", textEs: "Describa el corazón de Pablo por el Israel étnico en Romanos 9:1-5.", kw_en: ["sorrow", "grief", "accurs", "brethr", "flesh", "cut", "privileg", "anguish"], kw_es: ["tristez", "dolor", "anatema", "herman", "carne", "cort", "privileg", "angust"], explanationEn: "Paul opens with great sorrow and continual grief, saying he could wish himself accursed from Christ for the sake of his brethren according to the flesh. The wish cannot be granted, but it reveals the depth of his love. He lists the privileges Israel was given — the adoption, glory, covenants, the law, service of God, promises, patriarchs, and the Messiah Himself according to the flesh. No nation in history was so favored, and yet most of the nation missed the Messiah they had been prepared to receive.", explanationEs: "Pablo abre con gran tristeza y continuo dolor, diciendo que desearía ser anatema separado de Cristo por sus hermanos según la carne. El deseo no puede concederse, pero revela la profundidad de su amor. Enumera los privilegios dados a Israel — la adopción, gloria, pactos, ley, servicio de Dios, promesas, patriarcas, y el Mesías mismo según la carne. Ninguna nación en la historia fue tan favorecida, y sin embargo la mayoría de la nación pasó por alto al Mesías que se había preparado para recibir." },
+    { id: "sa_u8_2", textEn: "Explain Romans 9:6 — 'they are not all Israel who are of Israel' — and why this distinction matters.", textEs: "Explique Romanos 9:6 — 'no todos los que son de Israel son israelitas' — y por qué importa esta distinción.", kw_en: ["ethnic", "true", "descent", "faith", "bloodlin", "within", "word", "fail"], kw_es: ["étnic", "verdader", "descend", "fe", "linaje", "dentro", "palabra", "fall"], explanationEn: "Romans 9:6 distinguishes ethnic Israel (Abraham's physical descendants) from true Israel (those who share Abraham's faith). The promises were never owed to ethnicity alone — they were owed to those God sovereignly chose, identified throughout the New Testament as those of Abraham's faith. This distinction is foundational because it shows God's word has not failed in ethnic Israel's rejection of the Messiah — the promises were always for the true Israel within Israel.", explanationEs: "Romanos 9:6 distingue el Israel étnico (descendientes físicos de Abraham) del Israel verdadero (los que comparten la fe de Abraham). Las promesas nunca se debieron solo a la etnicidad — se debían a aquellos que Dios escogió soberanamente, identificados a través del Nuevo Testamento como los de la fe de Abraham. Esta distinción es fundamental porque muestra que la palabra de Dios no ha fallado en el rechazo del Mesías por el Israel étnico — las promesas siempre fueron para el verdadero Israel dentro de Israel." },
+    { id: "sa_u8_3", textEn: "What do the Isaac/Ishmael and Jacob/Esau examples (Rom 9:7-13) demonstrate about election?", textEs: "¿Qué demuestran los ejemplos de Isaac/Ismael y Jacob/Esaú (Rom 9:7-13) sobre la elección?", kw_en: ["Isaac", "Ishmael", "Jacob", "born", "good", "sovereign", "merit", "elect"], kw_es: ["Isaac", "Ismael", "Jacob", "nacer", "bien", "soberan", "mérito", "elecci"], explanationEn: "Abraham had two sons but the promise went through Isaac, not Ishmael. Isaac had two sons and the promise went through Jacob, not Esau — and the choice was announced before either was born, before either had done anything good or bad. The pattern proves that the promise has always advanced by God's sovereign election, never by birth order or human merit. Even within the elect family, God's choice determines who inherits.", explanationEs: "Abraham tuvo dos hijos pero la promesa pasó por Isaac, no por Ismael. Isaac tuvo dos hijos y la promesa pasó por Jacob, no por Esaú — y la elección fue anunciada antes de que ninguno naciera, antes de que ninguno hubiera hecho algo bueno o malo. El patrón prueba que la promesa siempre ha avanzado por la elección soberana de Dios, nunca por orden de nacimiento o mérito humano. Aun dentro de la familia elegida, la elección de Dios determina quién hereda." },
+    { id: "sa_u8_4", textEn: "Explain the potter and clay image in Romans 9:20-21 and what it teaches about God's mercy.", textEs: "Explique la imagen del alfarero y el barro en Romanos 9:20-21 y lo que enseña sobre la misericordia de Dios.", kw_en: ["potter", "clay", "author", "maker", "mercy", "prerogat", "harden", "vessel"], kw_es: ["alfarer", "barro", "autorid", "hacedor", "misericord", "prerrogat", "endurec", "vaso"], explanationEn: "The potter has the right to make from the same lump one vessel for honor and another for dishonor. The creature has no standing to question the Creator. Mercy is God's prerogative; hardening is His prerogative; salvation is never owed. What God has done is to call out a people from both Jews and Gentiles — vessels of mercy prepared beforehand for glory. The clay does not negotiate with the Potter.", explanationEs: "El alfarero tiene el derecho de hacer del mismo barro un vaso para honra y otro para deshonra. La criatura no tiene base para cuestionar al Creador. La misericordia es la prerrogativa de Dios; el endurecimiento es Su prerrogativa; la salvación nunca se debe. Lo que Dios ha hecho es llamar a un pueblo tanto de los judíos como de los gentiles — vasos de misericordia preparados de antemano para gloria. El barro no negocia con el Alfarero." },
+    { id: "sa_u8_5", textEn: "Why did Israel stumble over Christ according to Romans 9:30-10:4?", textEs: "¿Por qué tropezó Israel con Cristo según Romanos 9:30-10:4?", kw_en: ["works", "law", "faith", "stumbl", "Gentil", "end", "telos", "believ"], kw_es: ["obras", "ley", "fe", "tropiez", "gentil", "fin", "telos", "cree"], explanationEn: "Israel pursued righteousness as if it could be obtained by works of the law and stumbled over Christ. Gentiles who were not seeking righteousness at all attained it — by faith. Romans 10:4 names Christ as the 'end' of the law — both terminus (the law is completed in Him) and goal (the law was pointing toward Him). He is the righteousness the law demanded, brought near to anyone who believes.", explanationEs: "Israel siguió la justicia como si pudiera obtenerse por obras de la ley y tropezó con Cristo. Los gentiles que no buscaban la justicia en absoluto la alcanzaron — por fe. Romanos 10:4 nombra a Cristo como el 'fin' de la ley — tanto término (la ley se completa en Él) como meta (la ley señalaba hacia Él). Él es la justicia que la ley demandaba, traída cerca de cualquiera que cree." },
+    { id: "sa_u8_6", textEn: "Summarize the gospel of Romans 10:9-13 and how it relates to the Great Commission in Romans 10:14-15.", textEs: "Resuma el evangelio de Romanos 10:9-13 y cómo se relaciona con la Gran Comisión en Romanos 10:14-15.", kw_en: ["confess", "believ", "call", "saved", "Gentil", "hear", "preach", "mission"], kw_es: ["confes", "cree", "invoc", "salvo", "gentil", "oir", "predic", "mision"], explanationEn: "Romans 10:9-13 — confess Jesus as Lord with the mouth and believe in the heart that God raised Him from the dead, and you will be saved. Whoever calls on the name of the Lord — Jew or Gentile — will be saved. Then 10:14-15 — how can they call without believing? How can they believe without hearing? How can they hear without a preacher? The Great Commission is woven into the doctrinal letter; sovereign mercy never undermines evangelistic urgency. The same gospel that elects also commissions.", explanationEs: "Romanos 10:9-13 — confiesa al Señor Jesús con la boca y cree en el corazón que Dios le levantó de los muertos, y serás salvo. Todo el que invoque el nombre del Señor — judío o gentil — será salvo. Luego 10:14-15 — ¿cómo invocarán sin creer? ¿Cómo creerán sin oír? ¿Cómo oirán sin predicador? La Gran Comisión está entretejida en la carta doctrinal; la misericordia soberana nunca socava la urgencia evangelística. El mismo evangelio que elige también comisiona." },
+    { id: "sa_u8_7", textEn: "Explain the olive tree image in Romans 11:17-24 and what it teaches about the relationship between Israel and the church.", textEs: "Explique la imagen del olivo en Romanos 11:17-24 y lo que enseña sobre la relación entre Israel y la iglesia.", kw_en: ["olive", "one", "root", "branch", "broken", "graft", "faith", "arrogan"], kw_es: ["olivo", "uno", "raíz", "rama", "cort", "injert", "fe", "arrogan"], explanationEn: "Paul pictures one olive tree — one cultivated people of God rooted in the Abrahamic promise — not two trees. Natural branches (unbelieving Jews) were broken off because of unbelief. Wild branches (Gentile believers) were grafted in. Natural branches that come to faith can be grafted back. Believing Jews and Gentiles share the same root, same sap, same Christ. The Gentile believer is a guest in a tree planted long before he arrived and is warned against arrogance toward the natural branches.", explanationEs: "Pablo pinta un solo olivo — un pueblo cultivado de Dios enraizado en la promesa abrahámica — no dos árboles. Ramas naturales (judíos incrédulos) fueron cortadas por incredulidad. Ramas silvestres (creyentes gentiles) fueron injertadas. Ramas naturales que llegan a la fe pueden ser injertadas de nuevo. Creyentes judíos y gentiles comparten la misma raíz, misma savia, mismo Cristo. El creyente gentil es un huésped en un árbol plantado mucho antes de que él llegara y es advertido contra la arrogancia hacia las ramas naturales." },
+    { id: "sa_u8_8", textEn: "Within the olive-tree framework, how should 'all Israel will be saved' in Romans 11:26 be understood?", textEs: "Dentro del marco del olivo, ¿cómo debe entenderse 'todo Israel será salvo' en Romanos 11:26?", kw_en: ["company", "Jew", "Gentil", "Christ", "faith", "separat", "covenant", "deliver"], kw_es: ["compañí", "judí", "gentil", "Cristo", "fe", "separad", "pacto", "liber"], explanationEn: "Within Paul's olive-tree image, 'all Israel' refers to the full company of the people of God — Jews and Gentiles together, the one olive tree — gathered across redemptive history. Many faithful interpreters also hold that there will be a substantial future ingathering of ethnic Jewish believers — not as a separate program, but as natural branches grafted back into the one tree where Gentile believers have already been planted. On either reading, all Israel is saved in Christ, by faith, joined to the one people of God. There is no second covenant alongside the new covenant in Christ's blood. The deliverer from Zion is the Lord Jesus.", explanationEs: "Dentro de la imagen del olivo de Pablo, 'todo Israel' se refiere a la compañía completa del pueblo de Dios — judíos y gentiles juntos, el único olivo — reunidos a través de la historia redentora. Muchos intérpretes fieles también sostienen que habrá una reunión sustancial futura de creyentes judíos étnicos — no como un programa separado, sino como ramas naturales injertadas de nuevo en el único árbol donde los creyentes gentiles ya han sido plantados. En cualquier lectura, todo Israel es salvo en Cristo, por fe, unido al único pueblo de Dios. No hay un segundo pacto al lado del nuevo pacto en la sangre de Cristo. El libertador de Sion es el Señor Jesús." },
+    { id: "sa_u8_9", textEn: "What does Romans 11:29 mean by 'the gifts and the calling of God are irrevocable'?", textEs: "¿Qué quiere decir Romanos 11:29 con 'los dones y el llamamiento de Dios son irrevocables'?", kw_en: ["abandon", "covenant", "faithful", "fail", "stand", "anchor", "Abraham", "calling"], kw_es: ["abandon", "pacto", "fidel", "fall", "permanec", "ancla", "Abraham", "llamam"], explanationEn: "Romans 11:29 — 'the gifts and the calling of God are irrevocable.' God does not abandon what He has begun; His covenant faithfulness endures even when His people fail. The statement anchors confidence that God's calling — to Abraham and his descendants in the original covenant, to all who are in Christ by faith now — stands firm. God does not retract what He has freely given. This is the deep theological foundation under all of chapters 9-11.", explanationEs: "Romanos 11:29 — 'los dones y el llamamiento de Dios son irrevocables.' Dios no abandona lo que ha comenzado; Su fidelidad del pacto perdura aun cuando Su pueblo falla. La declaración ancla la confianza en que el llamamiento de Dios — a Abraham y sus descendientes en el pacto original, a todos los que están en Cristo por fe ahora — permanece firme. Dios no retira lo que ha dado libremente. Este es el fundamento teológico profundo bajo todos los capítulos 9-11." },
+    { id: "sa_u8_10", textEn: "Why does Paul respond to the mystery of God's mercy with doxology in Romans 11:33-36?", textEs: "¿Por qué responde Pablo al misterio de la misericordia de Dios con doxología en Romanos 11:33-36?", kw_en: ["wisdom", "unsearch", "mystery", "reason", "worship", "through", "mercy", "doxolog"], kw_es: ["sabiduría", "inescrut", "misteri", "razón", "adoraci", "través", "misericord", "doxolog"], explanationEn: "Paul cannot fully chart the wisdom that takes Israel's unbelief and turns it into Gentile salvation — and then takes Gentile salvation and uses it to provoke Israel to faith. He cannot explain the sovereign love that mercies whom it mercies and yet holds every soul responsible. The mystery is bigger than any theological system. The only honest response is worship: 'of Him and through Him and to Him are all things.' Doxology is the appropriate posture before depths reason cannot fully chart.", explanationEs: "Pablo no puede cartografiar completamente la sabiduría que toma la incredulidad de Israel y la convierte en salvación gentil — y luego toma la salvación gentil y la usa para provocar a Israel a la fe. No puede explicar el amor soberano que tiene misericordia de quien tiene misericordia y sin embargo responsabiliza a cada alma. El misterio es más grande que cualquier sistema teológico. La única respuesta honesta es la adoración: 'de Él y por Él y para Él son todas las cosas.' La doxología es la postura apropiada ante profundidades que la razón no puede cartografiar plenamente." }
+];
+
+// ============================================================
+// GLOBAL STATE
+// ============================================================
+let studentTrack = "cert";
+let studentName = "";
+let lockoutEnd = null;
+let examPassed = false;
+const PASS_MC = 18;
+const PASS_SA = 9;
+
+function getStorageKey(key) { return `cts_${COURSE_PREFIX}_${key}`; }
+
+function loadState() {
+    const student = lsGet("cts_student");
+    if (student) {
+        try {
+            const s = JSON.parse(student);
+            studentName = s.name || "";
+            studentTrack = s.track || "cert";
+        } catch(e) {}
+    }
+    const trackOverride = lsGet("cts_track");
+    if (trackOverride && ["cert","thm","mdiv"].includes(trackOverride)) studentTrack = trackOverride;
+
+    const lock = lsGet(getStorageKey(`unit${UNIT}_lockout`));
+    if (lock && parseInt(lock) > Date.now()) lockoutEnd = parseInt(lock);
+
+    const passedFlag = lsGet(getStorageKey(`unit${UNIT}_passed`));
+    if (passedFlag === "true") examPassed = true;
+
+    const lang = lsGet(getStorageKey(`unit${UNIT}_lang`)) || "en";
+    document.body.className = `lang-${lang}`;
+
+    updateTrackDisplay();
+    handleRegistrationCard();
+}
+
+function handleRegistrationCard() {
+    const regSection = document.getElementById("registrationSection");
+    if (SHOW_REGISTRATION_CARD && !lsGet("cts_student")) {
+        regSection.style.display = "block";
+    } else {
+        regSection.style.display = "none";
+    }
+}
+
+function updateTrackDisplay() {
+    const trackMap = { cert: "Certificate", thm: "Th.M.", mdiv: "M.Div." };
+    document.getElementById("trackIndicator").innerHTML = `<span class="lang-en">Track: ${trackMap[studentTrack]}</span><span class="lang-es">Vía: ${trackMap[studentTrack]}</span>`;
+}
+
+function saveLanguage(lang) {
+    lsSet(getStorageKey(`unit${UNIT}_lang`), lang);
+    document.body.className = `lang-${lang}`;
+}
+
+function submitRegistration() {
+    const name = document.getElementById("regName").value.trim();
+    const trackEl = document.querySelector('input[name="regTrack"]:checked');
+    if (!name) {
+        const isEs = document.body.className.includes("lang-es");
+        alert(isEs ? "Por favor ingrese su nombre." : "Please enter your name.");
+        return;
+    }
+    const track = trackEl ? trackEl.value : "cert";
+    lsSet("cts_student", JSON.stringify({ name, track }));
+    lsSet("cts_track", track);
+    studentName = name;
+    studentTrack = track;
+    updateTrackDisplay();
+    document.getElementById("registrationSection").style.display = "none";
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const mcContainer = document.getElementById("mcQuestions");
+    mcContainer.innerHTML = "";
+    mcQuestions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${q.text}</span><span class="lang-es">${q.textEs}</span></div>
+            <div class="options" id="mc-${idx}-opts">
+                ${q.options.map((opt, optIdx) => `<label><input type="radio" name="mc${idx}" value="${optIdx}"> <span class="lang-en">${opt}</span><span class="lang-es">${q.optionsEs[optIdx]}</span></label>`).join('')}
+            </div>
+            <div class="feedback" id="mc-${idx}-fb"></div>
+        `;
+        mcContainer.appendChild(card);
+    });
+
+    const saContainer = document.getElementById("saQuestions");
+    saContainer.innerHTML = "";
+    saQuestions.forEach((q, idx) => {
+        const isCert = studentTrack === "cert";
+        const card = document.createElement("div");
+        card.className = "question-card essay-question";
+        card.innerHTML = `
+            <div class="question-text"><span class="lang-en">${mcQuestions.length + idx + 1}. ${q.textEn}</span><span class="lang-es">${mcQuestions.length + idx + 1}. ${q.textEs}</span></div>
+            <textarea rows="3" id="sa-${idx}" placeholder='${isCert ? "Optional for Certificate track / Opcional para Certificado" : "Type your answer here... / Escriba su respuesta aquí..."}' ></textarea>
+            <button type="button" class="check-kw-btn" data-sa="${idx}"><span class="lang-en">Check Answer</span><span class="lang-es">Verificar</span></button>
+            <div class="feedback" id="sa-${idx}-fb"></div>
+        `;
+        saContainer.appendChild(card);
+    });
+
+    attachAutoScore();
+    attachSAAutoSave();
+    restoreAnswers();
+}
+
+function attachAutoScore() {
+    mcQuestions.forEach((q, idx) => {
+        const radios = document.querySelectorAll(`input[name="mc${idx}"]`);
+        radios.forEach(r => {
+            r.addEventListener("change", () => {
+                const selected = document.querySelector(`input[name="mc${idx}"]:checked`);
+                const fbDiv = document.getElementById(`mc-${idx}-fb`);
+                if (selected) {
+                    lsSet(getStorageKey(`unit${UNIT}_mc${idx}`), selected.value);
+                    const isCorr = parseInt(selected.value) === q.correct;
+                    if (fbDiv) {
+                        fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+                        fbDiv.innerHTML = isCorr ? q.correctFeedback : q.incorrectFeedback;
+                    }
+                    document.querySelectorAll(`input[name="mc${idx}"]`).forEach(x => { x.disabled = true; });
+                }
+            });
+        });
+    });
+}
+
+function attachSAAutoSave() {
+    saQuestions.forEach((q, idx) => {
+        const ta = document.getElementById(`sa-${idx}`);
+        if (ta) {
+            ta.addEventListener("input", () => {
+                lsSet(getStorageKey(`unit${UNIT}_sa${idx}`), ta.value);
+            });
+        }
+    });
+    document.querySelectorAll(".check-kw-btn").forEach(function(btn){
+        btn.addEventListener("click", function(){ checkSA(parseInt(btn.getAttribute("data-sa"), 10)); });
+    });
+}
+
+function restoreAnswers() {
+    mcQuestions.forEach((q, idx) => {
+        const saved = lsGet(getStorageKey(`unit${UNIT}_mc${idx}`));
+        if (saved !== null) {
+            const radio = document.querySelector(`input[name="mc${idx}"][value="${saved}"]`);
+            if (radio) {
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change'));
+            }
+        }
+    });
+    saQuestions.forEach((q, idx) => {
+        const saved = lsGet(getStorageKey(`unit${UNIT}_sa${idx}`));
+        if (saved !== null) {
+            const ta = document.getElementById(`sa-${idx}`);
+            if (ta) ta.value = saved;
+        }
+    });
+}
+
+
+// --- Q24 smart keyword matcher (word-boundary regex). Added by fairness pass. ---
+function kwHit(answer, kw) {
+    if (!kw) return false;
+    var a = (answer || "").toLowerCase();
+    var k = kw.toLowerCase().trim();
+    if (!k) return false;
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    // unicode-aware-ish boundary: not preceded/followed by a letter or digit
+    var L = "0-9a-zA-Záéíóúüñ";
+    var re;
+    if (k.length <= 4) {
+        re = new RegExp("(?:^|[^" + L + "])" + esc + "(?![" + L + "])");
+    } else {
+        re = new RegExp("(?:^|[^" + L + "])" + esc);
+    }
+    return re.test(a);
+}
+
+
+function checkSA(idx) {
+    var ta = document.getElementById("sa-" + idx);
+    var fbDiv = document.getElementById("sa-" + idx + "-fb");
+    if (!ta || !fbDiv) return;
+    var lang = document.body.className.replace("lang-", "");
+    var isEs = lang === "es";
+    var answer = (ta.value || "").trim();
+    if (!answer) {
+        fbDiv.className = "feedback";
+        fbDiv.innerHTML = isEs ? "Escriba su respuesta primero, luego verifique." : "Write your answer first, then check.";
+        return;
+    }
+    var keywords = isEs ? saQuestions[idx].kw_es : saQuestions[idx].kw_en;
+    if (lang === "both") keywords = [].concat(saQuestions[idx].kw_en, saQuestions[idx].kw_es);
+    var hits = keywords.filter(function(kw){ return kwHit(answer, kw); }).length;
+    var passed = hits >= 3 && answer.length >= 100;
+    fbDiv.className = "feedback " + (passed ? "correct" : "incorrect");
+    var _model = isEs ? saQuestions[idx].explanationEs : saQuestions[idx].explanationEn;
+    var _hdr = isEs ? "Respuesta modelo — estúdiela" : "Model answer — study this";
+    var _verdict = passed
+        ? (isEs ? "Suficiente." : "Sufficient.")
+        : (isEs ? ("Insuficiente — necesita ≥3 palabras clave y ≥100 caracteres. (" + hits + "/3)") : ("Insufficient — need ≥3 keywords and ≥100 chars. (" + hits + "/3)"));
+    fbDiv.innerHTML = "<div>" + _verdict + "</div><div class=\"modelbox\"><strong>" + _hdr + ":</strong><br>" + _model + "</div>";
+}
+
+function gradeExam() {
+    if (lockoutEnd && lockoutEnd > Date.now()) {
+        const min = Math.ceil((lockoutEnd - Date.now()) / 60000);
+        alert(`Lockout active. Please wait ${min} minutes. / Bloqueo activo. Espere ${min} minutos.`);
+        return false;
+    }
+
+    let mcCorrect = 0;
+    for (let i = 0; i < mcQuestions.length; i++) {
+        const selected = document.querySelector(`input[name="mc${i}"]:checked`);
+        const fbDiv = document.getElementById(`mc-${i}-fb`);
+        if (selected) {
+            const isCorr = parseInt(selected.value) === mcQuestions[i].correct;
+            if (isCorr) mcCorrect++;
+            fbDiv.className = `feedback ${isCorr ? "correct" : "incorrect"}`;
+            fbDiv.innerHTML = isCorr ? ('<span class="lang-en">'+mcQuestions[i].correctFeedback+'</span><span class="lang-es">'+mcQuestions[i].correctFeedbackEs+'</span>') : ('<span class="lang-en">'+mcQuestions[i].incorrectFeedback+'</span><span class="lang-es">'+mcQuestions[i].incorrectFeedbackEs+'</span>');
+        } else {
+            fbDiv.className = "feedback incorrect";
+            fbDiv.innerHTML = "No answer selected. / No seleccionó respuesta.";
+        }
+    }
+
+    let saPass = true;
+    let saCorrectCount = 0;
+    if (studentTrack !== "cert") {
+        for (let i = 0; i < saQuestions.length; i++) {
+            const answer = document.getElementById(`sa-${i}`).value.trim();
+            const lang = document.body.className.replace("lang-", "");
+            let keywords = lang === "es" ? saQuestions[i].kw_es : saQuestions[i].kw_en;
+            if (lang === "both") keywords = [...saQuestions[i].kw_en, ...saQuestions[i].kw_es];
+            const hits = keywords.filter(kw => kwHit(answer, kw)).length;
+            const passed = hits >= 3 && answer.length >= 100;
+            if (passed) saCorrectCount++;
+            const fbDiv = document.getElementById(`sa-${i}-fb`);
+            fbDiv.className = `feedback ${passed ? "correct" : "incorrect"}`;
+            const _model = (lang === "es" ? saQuestions[i].explanationEs : saQuestions[i].explanationEn);
+            const _hdr = (lang === "es" ? "Respuesta modelo — estúdiela" : "Model answer — study this");
+            const _verdict = passed ? (lang === "es" ? "Suficiente." : "Sufficient.") : (lang === "es" ? "Insuficiente — necesita ≥3 palabras clave y ≥100 caracteres." : "Insufficient — need ≥3 keywords and ≥100 chars.");
+            fbDiv.innerHTML = `<div>${_verdict}</div><div class="modelbox"><strong>${_hdr}:</strong><br>${_model}</div>`;
+        }
+        saPass = saCorrectCount >= PASS_SA;
+    }
+
+    const mcPass = mcCorrect >= PASS_MC;
+    const overallPass = studentTrack === "cert" ? mcPass : (mcPass && saPass);
+
+    if (overallPass) {
+        lsSet(getStorageKey(`unit${UNIT}_passed`), "true");
+        examPassed = true;
+        const msg = document.body.className.includes("lang-es") ? `¡Aprobado! Redirigiendo a la siguiente unidad...` : `Passed! Redirecting to the next unit...`;
+        alert(msg);
+    } else {
+        const lockoutTime = Date.now() + 15 * 60 * 1000;
+        lsSet(getStorageKey(`unit${UNIT}_lockout`), lockoutTime);
+        lockoutEnd = lockoutTime;
+        showLockoutTimer();
+        const failMsg = document.body.className.includes("lang-es") ? `No aprobado. Bloqueo de 15 minutos iniciado. (OM: ${mcCorrect}/20${studentTrack !== "cert" ? `, RC: ${saCorrectCount}/10` : ""})` : `Failed. 15-minute lockout started. (MC: ${mcCorrect}/20${studentTrack !== "cert" ? `, SA: ${saCorrectCount}/10` : ""})`;
+        alert(failMsg);
+    }
+    return overallPass;
+}
+
+function showLockoutTimer() {
+    const timerDiv = document.getElementById("lockoutTimer");
+    if (!lockoutEnd || lockoutEnd <= Date.now()) { timerDiv.style.display = "none"; return; }
+    timerDiv.style.display = "block";
+    const update = () => {
+        const remaining = Math.max(0, Math.ceil((lockoutEnd - Date.now()) / 1000));
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        timerDiv.innerHTML = `<span class="lang-en">Lockout: ${minutes}:${seconds.toString().padStart(2,'0')} remaining</span><span class="lang-es">Bloqueo: ${minutes}:${seconds.toString().padStart(2,'0')} restantes</span>`;
+        if (remaining <= 0) { timerDiv.style.display = "none"; lockoutEnd = null; }
+        else setTimeout(update, 1000);
+    };
+    update();
+}
+
+function resetExam() {
+    const isEs = document.body.className.includes("lang-es");
+    const msg = isEs ? "¿Reiniciar todas las respuestas? Esto no se puede deshacer." : "Reset all answers? This cannot be undone.";
+    if (confirm(msg)) {
+        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        document.querySelectorAll('textarea').forEach(t => t.value = "");
+        document.querySelectorAll('.feedback').forEach(f => { f.className = "feedback"; f.innerHTML = ""; });
+        mcQuestions.forEach((q, idx) => lsDel(getStorageKey(`unit${UNIT}_mc${idx}`)));
+        saQuestions.forEach((q, idx) => lsDel(getStorageKey(`unit${UNIT}_sa${idx}`)));
+    }
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => saveLanguage(btn.dataset.lang));
+});
+document.getElementById("submitBtn").addEventListener("click", gradeExam);
+document.getElementById("resetBtn").addEventListener("click", resetExam);
+document.getElementById("regSubmit").addEventListener("click", submitRegistration);
+
+loadState();
+renderQuestions();
+if (lockoutEnd) showLockoutTimer();
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSRomansReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>

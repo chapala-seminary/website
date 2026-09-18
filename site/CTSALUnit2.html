@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Administration &amp; Leadership &mdash; Unit 2: The Pastor as Undershepherd &amp; Steward</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia,'Times New Roman',serif; background:#ecf2ec; color:#1f2920; line-height:1.55; font-size:17px; padding:20px; }
+.container { max-width:1100px; margin:0 auto; }
+.card { background:#fffdf9; border-radius:20px; padding:30px; margin-bottom:25px; border:1px solid #c5d0c5; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn,.nav-btn { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:8px 20px; cursor:pointer; font-family:inherit; margin-bottom:15px; margin-right:10px; }
+.nav-btn:disabled { background:#aaa; cursor:not-allowed; }
+.nav-bar { background:#d8e3d8; padding:12px 20px; border-radius:40px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:25px; }
+.progress-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.progress-grid a { background:#c5d0c5; padding:5px 12px; border-radius:30px; text-decoration:none; color:#1f2920; font-size:0.85rem; }
+.progress-grid a.completed { background:#2f4f2f; color:#fff; }
+.progress-grid a.active { background:#d4af37; color:#222; font-weight:bold; }
+h1,h2,h3 { color:#2f4f2f; }
+h2 { margin:25px 0 10px; border-left:4px solid #d4af37; padding-left:15px; }
+h3 { margin:22px 0 8px; color:#2f4f2f; }
+.scripture { background:#eef4ee; border-left:4px solid #d4af37; border-right:4px solid #d4af37; padding:12px 18px; margin:18px 0; font-style:italic; }
+.scripture strong { font-style:normal; color:#2f4f2f; }
+.illustration { background:#fbf7ec; border:1px dashed #c9a063; padding:12px 18px; margin:18px 0; border-radius:6px; }
+.illustration strong { color:#2f4f2f; }
+.question { border:1px solid #c5d0c5; border-radius:12px; padding:16px; margin-bottom:20px; background:#fff; }
+.option { display:block; width:100%; text-align:left; border:1px solid #c5d0c5; border-radius:8px; padding:10px; margin:8px 0; cursor:pointer; background:#fcfbf7; font-family:inherit; font-size:0.95rem; }
+.option:hover { background:#f1f5f0; }
+.option.correct { background:#e8f5ea; border-color:#b9dfc2; }
+.option.wrong { background:#fae8e8; border-color:#efc2c2; }
+.kw-answer { width:100%; min-height:90px; padding:10px; border:1px solid #c5d0c5; border-radius:8px; font-family:inherit; font-size:1rem; margin:8px 0; }
+button.small { background:#2f4f2f; color:#fff; border:none; border-radius:30px; padding:5px 15px; cursor:pointer; font-family:inherit; margin-right:10px; }
+.feedback-text { margin-top:8px; font-size:0.9rem; padding:6px 10px; border-radius:8px; }
+.feedback-text.correct { background:#e8f5ea; color:#1f6b3b; }
+.feedback-text.incorrect { background:#fae8e8; color:#8a1f1f; }
+.model-answer { margin-top:10px; padding:12px 16px; background:#f4f0e0; border-left:4px solid #d4af37; border-radius:6px; font-size:0.95rem; line-height:1.5; color:#1f2433; }
+.reg-form { background:#faf6e3; border:1px solid #d4af37; border-radius:12px; padding:20px; margin-bottom:20px; }
+.reg-form input,.reg-form select { width:100%; padding:8px; border:1px solid #c5d0c5; border-radius:6px; margin:6px 0; font-family:inherit; }
+.pull-quote { background:#f4f7eb; border-left:4px solid #d4af37; padding:15px 20px; margin:20px 0; font-style:italic; color:#2f4f2f; }
+body.lang-en .lang-en { display:inline; } body.lang-en .lang-es { display:none; }
+body.lang-es .lang-en { display:none; } body.lang-es .lang-es { display:inline; }
+@media print { .toggle-btn,.nav-btn,.nav-bar,.reg-form,button.small,#submitExamBtn,#resetExamBtn,.feedback-text,.option { display:none !important; }
+ body { background:#fff; padding:10px; font-size:12pt; } .card { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; } h1,h2,h3 { color:#000; } }
+</style>
+</head>
+<body class="lang-en">
+
+<script src="cts-lang.js"></script>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right:15px; font-weight:bold;"></span>
+        <button class="nav-btn" id="nextUnitBtn" disabled><span class="lang-en">Unit 3 &rarr;</span><span class="lang-es">Unidad 3 &rarr;</span></button>
+    </div>
+</div>
+<button class="toggle-btn" id="langToggleBtn">Espa&ntilde;ol</button>
+<a class="toggle-btn" id="catalogLink" href="index.html" style="text-decoration:none;display:inline-block;"><span class="lang-en">📚 Catalog</span><span class="lang-es">📚 Catálogo</span></a>
+
+<div class="card">
+    <h1><span class="lang-en">📖 Administration &amp; Leadership &mdash; Unit 2: The Pastor as Undershepherd &amp; Steward</span><span class="lang-es">📖 Administraci&oacute;n y Liderazgo &mdash; Unidad 2: El pastor como pastor subordinado y mayordomo</span></h1>
+    <p><span class="lang-en"><strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="margin-top:10px; font-style:italic; color:#2f4f2f;"><span class="lang-en">"Shepherd the flock of God which is among you... not as being lords over those entrusted to you, but being examples to the flock." &mdash; 1 Peter 5:2-3 (NKJV)</span><span class="lang-es">&#9873; "Apacentad la grey de Dios que est&aacute; entre vosotros... no como teniendo se&ntilde;or&iacute;o sobre los que est&aacute;n a vuestro cuidado, sino siendo ejemplos de la grey." &mdash; 1 Pedro 5:2-3 (RVG)</span></p>
+</div>
+
+<div id="regCard" style="display:none;">
+    <input type="text" id="regName" aria-label="regName"><input type="email" id="regEmail" aria-label="regEmail">
+    <select id="regTrack" aria-label="regTrack"><option value="certificate"></option></select>
+    <button id="regBtn"></button><div id="regStatus"></div>
+</div>
+
+<div class="card">
+<div class="lang-en">
+
+<h3>Introduction &mdash; The Shepherd on the Hillside</h3>
+<p>Picture a shepherd on a rocky hillside at dusk. The sheep are scattered &mdash; some drifting toward a cliff, some tangled in thorns, a few too weak to keep up. He does not stand at a distance and shout instructions. He walks in among them. He knows their voices and they know his. He carries the weak ones. And he himself is not the owner of the flock; he works for the One who owns it, and one day that Owner will return and ask, "How have you cared for what is Mine?" That picture is not poetry. It is the plain job description of every pastor and every leader in the church of God. In Unit 1 we saw that leadership is a calling carried out in humility. Now we go deeper into what the leader actually <em>is</em>: an <strong>undershepherd</strong> and a <strong>steward</strong>, two words that, once you understand them, will govern the rest of your ministry.</p>
+
+<h3>Not the Owner &mdash; The Word "Under"</h3>
+<p>Everything turns on one small syllable: <em>under</em>. Peter, an apostle who could have pulled rank, instead writes to the elders <em>as a fellow elder</em>, and tells them: <em>"Shepherd the flock of God which is among you, serving as overseers"</em> (1 Peter 5:1-2). Note the phrase &mdash; the flock <em>of God</em>. Not the flock of the pastor, not the flock of the elders, not the flock of the denomination. The sheep were bought with the blood of Christ, and they belong to Christ, who is the Chief Shepherd. The pastor is an undershepherd: a real shepherd with real authority and real responsibility, but always a second shepherd serving under the first. The moment a leader forgets that small word and begins to think of the church as <em>his</em> &mdash; his people, his pulpit, his ministry, his kingdom &mdash; he has stopped being a shepherd and started being a thief, however slowly and respectably the theft proceeds.</p>
+<div class="scripture">"Shepherd the flock of God which is among you, serving as overseers, not by compulsion but willingly, not for dishonest gain but eagerly." &mdash; 1 Peter 5:2 (NKJV)</div>
+
+<h3>The Shepherd's Three Tasks</h3>
+<p>What does a shepherd actually do? Strip the work down and three tasks remain, and a leader who neglects any one of them is only playing at the office. <strong>First, he feeds.</strong> The sheep cannot feed themselves; they must be led to green pasture, and for the church that pasture is the Word of God, taught plainly enough that ordinary believers can eat and grow. <strong>Second, he leads.</strong> Sheep left to themselves scatter and wander into danger, so the shepherd goes ahead of them and they follow his voice; he does not drive them from behind like cattle. <strong>Third, he protects.</strong> Wolves come &mdash; false teaching, division, the slow predators of discouragement and sin &mdash; and the shepherd stands between the flock and the danger, even at cost to himself. Feed, lead, protect. The leader who only feeds becomes a lecturer; the one who only leads becomes a driver; the one who only protects becomes a guard at an empty gate. The shepherd does all three because the sheep need all three.</p>
+
+<h3>The Heart of the Shepherd: How, Not Just What</h3>
+<p>Peter is not finished with <em>what</em> the shepherd does; he presses into <em>how</em> he does it, and here the passage searches the heart. The shepherd is to serve <em>"not by compulsion but willingly, not for dishonest gain but eagerly; nor as being lords over those entrusted to you, but being examples to the flock"</em> (1 Peter 5:2-3). Read those three contrasts slowly, for they expose the three diseases of the shepherd's heart. <strong>Not by compulsion, but willingly</strong> &mdash; the man who shepherds only because he is trapped, who would quit tomorrow if he could, has the wrong heart; God loves a willing shepherd. <strong>Not for dishonest gain, but eagerly</strong> &mdash; the man who shepherds for what he can get out of it, money or comfort or status, has made the flock a means to his own ends. <strong>Not lording it over them, but being an example</strong> &mdash; the man who drives the sheep with the heavy hand of a tyrant has forgotten that Christ leads by going first. The true shepherd does not say "Do as I command from a distance"; he says "Follow me as I follow Christ," and he leads from the front, where the danger is.</p>
+
+<div class="illustration"><strong>The finest pastor I ever knew, I met in a prison.</strong> Arthur was converted while serving time in a maximum-security penitentiary, and there, behind the walls, he earned a bachelor's degree from a seminary. When he finished, he came to the prison where I served, as an inmate chaplain. We had started a master's program, and Arthur was among the first to enroll; when he earned his master's in theology, he himself carried most of the teaching of theology for our junior-college classes. But it was not his degrees that set him apart. Of all the dormitories, he asked to live in the one that housed the youngest men just entering prison, so that he could reach them. He walked the cell blocks, and more than once he preached a full sermon to a single inmate locked behind one door. He served in the program that cared for the dying, and would sit up the whole night cleaning a man, tending him, talking softly to him as he passed &mdash; and then come to work the next morning. Inmates could buy a few snacks for their lockers; Arthur left his standing open on purpose, so that any man who had nothing could take what he needed. When I stood up at his parole hearing, I told them the simple truth: he was the greatest pastor I had ever met. No one appointed Arthur a leader. He became one the way the Lord said shepherds are made &mdash; not by lording over the flock, but by becoming an example to it. People will obey a man who drives them only as far as they must; they will follow a man who serves them to the ends of the earth.</div>
+
+<h3>The Steward Who Must Give Account</h3>
+<p>Now set beside the shepherd a second picture: the <strong>steward</strong>. A steward in the ancient world managed a great house that was not his own; he held the keys, ran the affairs, and commanded the servants, but everything he touched belonged to his master, and the day was coming when the master would call him in to settle accounts. This is why the writer of Hebrews lays so heavy a charge on the leaders of the church: <em>"Obey those who rule over you, and be submissive, for they watch for your souls, as those who must give account"</em> (Hebrews 13:17). Read what the leaders are watching: not the budget first, not the building first, but <em>souls</em>. And read why they watch so carefully: because they must give account for those souls to God Himself. This is the truth that turns administration from a worldly chore into a sacred trust. Every roster, every meeting, every hard conversation is the managing of a house that belongs to Another, and the Master is coming home. The steward who remembers the account he must give handles the smallest matter with care, because he knows that nothing in the Lord's house is too small to answer for.</p>
+<p>The Lord Jesus drew this very picture and pressed it home. He asked, <em>"Who then is that faithful and wise steward, whom his master will make ruler over his household, to give them their portion of food in due season?"</em> (Luke 12:42), and He pronounced a blessing on the servant whom the master, when he comes, will find faithfully doing his work. Two things stand out for the church leader. The steward's duty is to give the household <em>their food in due season</em> &mdash; the very work of feeding the flock we saw above, now framed as the account a manager must render. And the steward is called <em>faithful and wise</em>: faithful, because the trust is not his own and he must be trustworthy with what belongs to Another; wise, because he must manage with skill and not merely good intentions. The leader who holds both &mdash; faithfulness to the Owner and wisdom in the work &mdash; is the steward the Master is looking for, and the one He will be glad to find at his post when He returns.</p>
+<div class="scripture">"Who then is that faithful and wise steward, whom his master will make ruler over his household, to give them their portion of food in due season?" &mdash; Luke 12:42 (NKJV)</div>
+<div class="scripture">"Obey those who rule over you, and be submissive, for they watch for your souls, as those who must give account." &mdash; Hebrews 13:17 (NKJV)</div>
+
+<h3>The Promise That Sustains</h3>
+<p>If the account were the whole story, the work would crush a man. But Peter does not end with the weight; he ends with the reward. <em>"And when the Chief Shepherd appears, you will receive the crown of glory that does not fade away"</em> (1 Peter 5:4). Here is the strength of the undershepherd: he serves a Chief Shepherd who is not a hard, absent master but the One who laid down His own life for the sheep, and who is coming back not only to settle accounts but to reward His faithful servants with a crown that will never wither. The earthly crowns men chase &mdash; the larger church, the bigger name, the applause of the crowd &mdash; all of them fade, and most of them fade within the man's own lifetime. The crown the Chief Shepherd gives never fades at all. So the undershepherd can pour himself out without bitterness and lead without grasping, because his reward is not in the flock's praise but in the Master's "Well done." Shepherd the flock of God, brother. It is His, not yours. Watch for souls as one who must give account. And serve in the joy of the coming Chief Shepherd, who repays His shepherds with a crown that lasts forever.</p>
+<div class="scripture">"And when the Chief Shepherd appears, you will receive the crown of glory that does not fade away." &mdash; 1 Peter 5:4 (NKJV)</div>
+
+</div>
+<div class="lang-es">
+
+<h3>Introducci&oacute;n &mdash; El pastor en la ladera</h3>
+<p>Imagine a un pastor en una ladera rocosa al atardecer. Las ovejas est&aacute;n dispersas &mdash; algunas se acercan a un despe&ntilde;adero, otras enredadas en espinos, unas pocas demasiado d&eacute;biles para seguir el paso. &Eacute;l no se queda a lo lejos gritando instrucciones. Camina entre ellas. Conoce sus voces y ellas conocen la suya. Carga a las d&eacute;biles. Y &eacute;l mismo no es el due&ntilde;o del reba&ntilde;o; trabaja para Aquel que lo posee, y un d&iacute;a ese Due&ntilde;o volver&aacute; y preguntar&aacute;: "&iquest;C&oacute;mo has cuidado lo que es M&iacute;o?" Esa imagen no es poes&iacute;a. Es la sencilla descripci&oacute;n del oficio de todo pastor y de todo l&iacute;der en la iglesia de Dios. En la Unidad 1 vimos que el liderazgo es un llamado llevado a cabo con humildad. Ahora profundizamos en lo que el l&iacute;der realmente <em>es</em>: un <strong>pastor subordinado</strong> y un <strong>mayordomo</strong>, dos palabras que, una vez entendidas, gobernar&aacute;n el resto de su ministerio.</p>
+
+<h3>No el due&ntilde;o &mdash; la palabra "subordinado"</h3>
+<p>Todo gira en torno a una idea peque&ntilde;a: estar <em>bajo</em> otro. Pedro, un ap&oacute;stol que pudo haber impuesto su rango, escribe en cambio a los ancianos <em>como anciano igual que ellos</em>, y les dice: <em>"Apacentad la grey de Dios que est&aacute; entre vosotros, cuidando de ella"</em> (&#9873; 1 Pedro 5:1-2). Note la frase &mdash; la grey <em>de Dios</em>. No la grey del pastor, ni de los ancianos, ni de la denominaci&oacute;n. Las ovejas fueron compradas con la sangre de Cristo, y pertenecen a Cristo, que es el Pr&iacute;ncipe de los pastores. El pastor es un pastor subordinado: un pastor verdadero con autoridad y responsabilidad reales, pero siempre un segundo pastor que sirve bajo el primero. En el momento en que un l&iacute;der olvida esa relaci&oacute;n y comienza a pensar en la iglesia como <em>suya</em> &mdash; su gente, su p&uacute;lpito, su ministerio, su reino &mdash; ha dejado de ser pastor y ha comenzado a ser ladr&oacute;n, por lento y respetable que sea el robo.</p>
+<div class="scripture">&#9873; "Apacentad la grey de Dios que est&aacute; entre vosotros, cuidando de ella, no por fuerza, sino voluntariamente; no por ganancia deshonesta, sino con &aacute;nimo pronto." &mdash; 1 Pedro 5:2 (RVG)</div>
+
+<h3>Las tres tareas del pastor</h3>
+<p>&iquest;Qu&eacute; hace en realidad un pastor? Reduzca la obra a lo esencial y quedan tres tareas, y el l&iacute;der que descuida cualquiera de ellas solo juega al oficio. <strong>Primero, alimenta.</strong> Las ovejas no pueden alimentarse solas; hay que llevarlas a pastos verdes, y para la iglesia ese pasto es la Palabra de Dios, ense&ntilde;ada con suficiente claridad para que los creyentes comunes coman y crezcan. <strong>Segundo, gu&iacute;a.</strong> Las ovejas dejadas a s&iacute; mismas se dispersan y se meten en peligro, as&iacute; que el pastor va delante de ellas y ellas siguen su voz; no las arrea por detr&aacute;s como al ganado. <strong>Tercero, protege.</strong> Vienen lobos &mdash; la falsa ense&ntilde;anza, la divisi&oacute;n, los depredadores lentos del desaliento y el pecado &mdash; y el pastor se interpone entre el reba&ntilde;o y el peligro, aun a costa de s&iacute; mismo. Alimentar, guiar, proteger. El l&iacute;der que solo alimenta se vuelve conferencista; el que solo gu&iacute;a se vuelve arriero; el que solo protege se vuelve guardia de una puerta vac&iacute;a. El pastor hace las tres cosas porque las ovejas necesitan las tres.</p>
+
+<h3>El coraz&oacute;n del pastor: el c&oacute;mo, no solo el qu&eacute;</h3>
+<p>Pedro no termina con <em>lo que</em> hace el pastor; insiste en el <em>c&oacute;mo</em>, y aqu&iacute; el pasaje escudri&ntilde;a el coraz&oacute;n. El pastor ha de servir <em>"no por fuerza, sino voluntariamente; no por ganancia deshonesta, sino con &aacute;nimo pronto; no como teniendo se&ntilde;or&iacute;o sobre los que est&aacute;n a vuestro cuidado, sino siendo ejemplos de la grey"</em> (&#9873; 1 Pedro 5:2-3). Lea esos tres contrastes despacio, porque exponen las tres enfermedades del coraz&oacute;n del pastor. <strong>No por fuerza, sino voluntariamente</strong> &mdash; el hombre que pastorea solo porque est&aacute; atrapado, que renunciar&iacute;a ma&ntilde;ana si pudiera, tiene el coraz&oacute;n equivocado; Dios ama al pastor dispuesto. <strong>No por ganancia deshonesta, sino con &aacute;nimo pronto</strong> &mdash; el hombre que pastorea por lo que puede sacar, dinero o comodidad o posici&oacute;n, ha hecho del reba&ntilde;o un medio para sus propios fines. <strong>No con se&ntilde;or&iacute;o, sino siendo ejemplo</strong> &mdash; el hombre que arrea a las ovejas con la mano dura de un tirano ha olvidado que Cristo gu&iacute;a yendo primero. El verdadero pastor no dice "Haced lo que mando desde lejos"; dice "Seguidme como yo sigo a Cristo", y gu&iacute;a desde el frente, donde est&aacute; el peligro.</p>
+
+<div class="illustration"><strong>Al mejor pastor que jam&aacute;s he conocido lo conoc&iacute; en una prisi&oacute;n.</strong> Arthur se convirti&oacute; mientras cumpl&iacute;a condena en una penitenciar&iacute;a de m&aacute;xima seguridad, y all&iacute;, tras los muros, obtuvo una licenciatura de un seminario. Cuando termin&oacute;, lleg&oacute; como capell&aacute;n interno a la prisi&oacute;n donde yo serv&iacute;a. Hab&iacute;amos iniciado un programa de maestr&iacute;a, y Arthur fue de los primeros en inscribirse; cuando obtuvo su maestr&iacute;a en teolog&iacute;a, &eacute;l mismo se encarg&oacute; de gran parte de la ense&ntilde;anza de teolog&iacute;a en nuestras clases de colegio universitario. Pero no fueron sus t&iacute;tulos lo que lo distingui&oacute;. De todos los dormitorios, pidi&oacute; vivir en el que alojaba a los m&aacute;s j&oacute;venes que reci&eacute;n entraban a la prisi&oacute;n, para poder alcanzarlos. Recorr&iacute;a los bloques de celdas, y m&aacute;s de una vez predic&oacute; un serm&oacute;n completo a un solo recluso encerrado tras una puerta. Sirvi&oacute; en el programa que cuidaba a los moribundos, y pasaba la noche entera limpiando a un hombre, cuid&aacute;ndolo, habl&aacute;ndole en voz baja mientras part&iacute;a; y a la ma&ntilde;ana siguiente se presentaba a trabajar. Los reclusos pod&iacute;an comprar algunos v&iacute;veres para sus casilleros; Arthur dejaba el suyo abierto a prop&oacute;sito, para que cualquier hombre que no tuviera nada pudiera tomar lo que necesitara. Cuando me puse de pie en su audiencia de libertad condicional, les dije la sencilla verdad: era el mejor pastor que jam&aacute;s hab&iacute;a conocido. Nadie nombr&oacute; l&iacute;der a Arthur. Lleg&oacute; a serlo de la manera en que el Se&ntilde;or dijo que se forman los pastores: no ense&ntilde;ore&aacute;ndose del reba&ntilde;o, sino haci&eacute;ndose ejemplo de &eacute;l. La gente obedecer&aacute; solo hasta donde deba a un hombre que la arrea; seguir&aacute; hasta el fin del mundo a un hombre que la sirve.</div>
+
+<h3>El mayordomo que debe dar cuenta</h3>
+<p>Ahora ponga junto al pastor una segunda imagen: el <strong>mayordomo</strong>. Un mayordomo en el mundo antiguo administraba una gran casa que no era suya; ten&iacute;a las llaves, manejaba los asuntos y mandaba a los siervos, pero todo lo que tocaba pertenec&iacute;a a su se&ntilde;or, y llegaba el d&iacute;a en que el se&ntilde;or lo llamar&iacute;a a rendir cuentas. Por eso el escritor de Hebreos pone una carga tan pesada sobre los l&iacute;deres de la iglesia: <em>"Obedeced a vuestros pastores, y sujetaos a ellos; porque ellos velan por vuestras almas, como quienes han de dar cuenta"</em> (&#9873; Hebreos 13:17). Lea lo que los l&iacute;deres vigilan: no el presupuesto primero, no el edificio primero, sino las <em>almas</em>. Y lea por qu&eacute; vigilan con tanto cuidado: porque han de dar cuenta de esas almas a Dios mismo. Esta es la verdad que convierte la administraci&oacute;n de una tarea mundana en una confianza sagrada. Cada lista, cada reuni&oacute;n, cada conversaci&oacute;n dif&iacute;cil es la administraci&oacute;n de una casa que pertenece a Otro, y el Se&ntilde;or vuelve a casa. El mayordomo que recuerda la cuenta que debe dar maneja el asunto m&aacute;s peque&ntilde;o con cuidado, porque sabe que nada en la casa del Se&ntilde;or es demasiado peque&ntilde;o como para no responder por ello.</p>
+<p>El Se&ntilde;or Jes&uacute;s pint&oacute; esta misma imagen y la grab&oacute; en el coraz&oacute;n. Pregunt&oacute;: <em>"&iquest;Qui&eacute;n es el mayordomo fiel y prudente, al cual su se&ntilde;or pondr&aacute; sobre su casa, para que a tiempo les d&eacute; su raci&oacute;n?"</em> (&#9873; Lucas 12:42), y pronunci&oacute; una bendici&oacute;n sobre el siervo a quien el se&ntilde;or, cuando venga, halle haciendo fielmente su obra. Dos cosas resaltan para el l&iacute;der de la iglesia. El deber del mayordomo es dar a la casa <em>su raci&oacute;n a tiempo</em> &mdash; la misma obra de alimentar a la grey que vimos arriba, ahora enmarcada como la cuenta que un administrador debe rendir. Y al mayordomo se le llama <em>fiel y prudente</em>: fiel, porque la confianza no es suya y debe ser digno de ella con lo que pertenece a Otro; prudente, porque debe administrar con destreza y no solo con buenas intenciones. El l&iacute;der que tiene ambas &mdash; fidelidad al Due&ntilde;o y prudencia en la obra &mdash; es el mayordomo que el Se&ntilde;or busca, y al que se alegrar&aacute; de hallar en su puesto cuando vuelva.</p>
+<div class="scripture">&#9873; "&iquest;Qui&eacute;n es el mayordomo fiel y prudente, al cual su se&ntilde;or pondr&aacute; sobre su casa, para que a tiempo les d&eacute; su raci&oacute;n?" &mdash; Lucas 12:42 (RVG)</div>
+<div class="scripture">&#9873; "Obedeced a vuestros pastores, y sujetaos a ellos; porque ellos velan por vuestras almas, como quienes han de dar cuenta." &mdash; Hebreos 13:17 (RVG)</div>
+
+<h3>La promesa que sostiene</h3>
+<p>Si la cuenta fuera toda la historia, la obra aplastar&iacute;a a un hombre. Pero Pedro no termina con el peso; termina con la recompensa. <em>"Y cuando aparezca el Pr&iacute;ncipe de los pastores, vosotros recibir&eacute;is la corona incorruptible de gloria"</em> (&#9873; 1 Pedro 5:4). Aqu&iacute; est&aacute; la fuerza del pastor subordinado: sirve a un Pr&iacute;ncipe de los pastores que no es un amo duro y ausente, sino Aquel que dio su propia vida por las ovejas, y que vuelve no solo a pedir cuentas sino a recompensar a sus siervos fieles con una corona que nunca se marchitar&aacute;. Las coronas terrenales que los hombres persiguen &mdash; la iglesia m&aacute;s grande, el nombre mayor, el aplauso de la multitud &mdash; todas se marchitan, y la mayor&iacute;a se marchitan dentro de la propia vida del hombre. La corona que da el Pr&iacute;ncipe de los pastores no se marchita jam&aacute;s. As&iacute; que el pastor subordinado puede entregarse sin amargura y guiar sin aferrarse, porque su recompensa no est&aacute; en la alabanza del reba&ntilde;o sino en el "Bien hecho" del Se&ntilde;or. Apaciente la grey de Dios, hermano. Es de &Eacute;l, no suya. Vele por las almas como quien ha de dar cuenta. Y sirva en el gozo del Pr&iacute;ncipe de los pastores que viene, que recompensa a sus pastores con una corona que dura para siempre.</p>
+<div class="scripture">&#9873; "Y cuando aparezca el Pr&iacute;ncipe de los pastores, vosotros recibir&eacute;is la corona incorruptible de gloria." &mdash; 1 Pedro 5:4 (RVG)</div>
+
+</div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 2 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 2 &mdash; 30 Preguntas</span></h2>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lecci&oacute;n y vuelva a intentarlo tras una breve pausa.</span></p>
+    <div id="questionsContainer"></div>
+    <div style="margin-top:20px;">
+        <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+        <button id="resetExamBtn" class="small" style="background:#8a1f1f;"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+        <div id="examResult" style="margin-top:15px; font-weight:bold;"></div>
+        <div id="mcBankedNotice" style="margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;"></div>
+    </div>
+</div>
+</div>
+<script>
+
+const UNIT = 2;
+const COURSE = 'al';
+const NEXT_UNIT_URL = 'CTSALUnit3.html';
+const totalUnits = 10;
+let currentUnit = UNIT;
+
+const STATE_KEY     = `cts_${COURSE}_u${UNIT}_state`;
+const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
+const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
+const FULL_LOCK_KEY = `cts_${COURSE}_u${UNIT}_lockout`;
+const PROGRESS_KEY  = `cts_${COURSE}_progress`;
+
+function lockMinutes() {
+    try {
+        const st = JSON.parse(localStorage.getItem('cts_student') || 'null');
+        const t = st && st.track ? st.track : 'certificate';
+        return (t === 'mdiv' || t === 'thm') ? 15 : 2;
+    } catch (e) { return 2; }
+}
+
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch(e) { progress = {}; }
+let unitPassed = !!progress[`unit${UNIT}`];
+let mcPreviouslyPassed = localStorage.getItem(MC_PASS_KEY) === 'true';
+
+const unitTitlesEn = ["Unit 1 - The Biblical Call to Lead God's House", "Unit 2 - The Pastor as Undershepherd & Steward", "Unit 3 - Vision, Calling & Strategic Planning", "Unit 4 - Organization, Structure & Delegation", "Unit 5 - Financial Stewardship and Budgeting", "Unit 6 - Personnel and Volunteer Management", "Unit 7 - Conflict Resolution and Church Discipline", "Unit 8 - Facilities, Legal Matters, and Risk Management", "Unit 9 - Multiplication, Church Planting, and Succession", "Unit 10 - The Leader's Heart: Integrity, Rest, and Finishing Well"];
+
+function updateProgressGrid() {
+    const grid = document.getElementById('progressGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (let i = 1; i <= totalUnits; i++) {
+        let cls = '';
+        if (progress[`unit${i}`]) cls = 'completed';
+        if (i === currentUnit) cls += ' active';
+        grid.innerHTML += `<a href="CTSALUnit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
+    }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
+}
+document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
+updateProgressGrid();
+
+function displayStudentGreeting() {
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (student && student.name) {
+        document.getElementById('studentGreeting').innerHTML = `\u{1F44B} ${student.name}`;
+        document.getElementById('regCard').style.display = 'none';
+    }
+}
+displayStudentGreeting();
+
+document.getElementById('regBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+        return;
+    }
+    const student = { name, email, track, registered: new Date().toISOString() };
+    localStorage.setItem('cts_student', JSON.stringify(student));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = "<span style='color:green'>\u2713 Registered successfully!</span>";
+    setTimeout(() => { document.getElementById('regCard').style.display = 'none'; displayStudentGreeting(); }, 800);
+};
+
+document.getElementById('langToggleBtn').onclick = function() {
+    if (document.body.classList.contains('lang-en')) {
+        document.body.classList.remove('lang-en'); document.body.classList.add('lang-es');
+        this.textContent = 'English';
+    } else {
+        document.body.classList.remove('lang-es'); document.body.classList.add('lang-en');
+        this.textContent = 'Espa\u00f1ol';
+    }
+    renderQuestions(); checkLockouts();
+};
+
+const mcQuestions = [{"textEn": "In 1 Peter 5, whose flock is the pastor told to shepherd?", "textEs": "En 1 Pedro 5, ¿de quién es la grey que el pastor debe apacentar?", "optionsEn": ["The elders' flock", "The flock of God", "The denomination's flock", "His own flock"], "optionsEs": ["La grey de los ancianos", "La grey de Dios", "La grey de la denominación", "Su propia grey"], "explanationEn": "Peter calls it 'the flock of God' — the sheep belong to Christ, the Chief Shepherd, not to the pastor.", "explanationEs": "Pedro la llama 'la grey de Dios' — las ovejas pertenecen a Cristo, el Príncipe de los pastores, no al pastor.", "correct": 1}, {"textEn": "The word 'undershepherd' chiefly emphasizes that the pastor is:", "textEs": "La palabra 'pastor subordinado' subraya principalmente que el pastor:", "optionsEn": ["Superior to the congregation", "The owner of the church", "Free from all authority", "A second shepherd serving under the Chief Shepherd"], "optionsEs": ["Es superior a la congregación", "Es el dueño de la iglesia", "Está libre de toda autoridad", "Es un segundo pastor que sirve bajo el Príncipe de los pastores"], "explanationEn": "'Under' means he is a real shepherd but always serves beneath Christ, the first and Chief Shepherd.", "explanationEs": "'Subordinado' significa que es un pastor verdadero pero siempre sirve bajo Cristo, el primer y Príncipe de los pastores.", "correct": 3}, {"textEn": "Which three tasks summarize the shepherd's work in this unit?", "textEs": "¿Qué tres tareas resumen la obra del pastor en esta unidad?", "optionsEn": ["Preach, sing, pray", "Feed, lead, protect", "Build, fund, advertise", "Plan, vote, report"], "optionsEs": ["Predicar, cantar, orar", "Alimentar, guiar, proteger", "Construir, financiar, anunciar", "Planear, votar, informar"], "explanationEn": "The shepherd feeds the flock on the Word, leads from the front, and protects them from wolves.", "explanationEs": "El pastor alimenta a la grey con la Palabra, guía desde el frente y la protege de los lobos.", "correct": 1}, {"textEn": "A leader who only teaches but never leads or protects becomes:", "textEs": "Un líder que solo enseña pero nunca guía ni protege se vuelve:", "optionsEn": ["A faithful shepherd", "A mere lecturer", "A wolf", "A perfect pastor"], "optionsEs": ["Un pastor fiel", "Un mero conferencista", "Un lobo", "Un pastor perfecto"], "explanationEn": "Feeding alone, without leading and protecting, reduces the shepherd to a lecturer.", "explanationEs": "Alimentar sin guiar ni proteger reduce al pastor a un conferencista.", "correct": 1}, {"textEn": "'Not by compulsion but willingly' addresses the shepherd's:", "textEs": "'No por fuerza, sino voluntariamente' se refiere al/a la del pastor:", "optionsEn": ["Heart and motive", "Schedule", "Education", "Salary"], "optionsEs": ["Corazón y motivo", "Horario", "Educación", "Salario"], "explanationEn": "Peter searches the motive: God wants a willing shepherd, not one who serves only because he feels trapped.", "explanationEs": "Pedro escudriña el motivo: Dios quiere un pastor dispuesto, no uno que sirve solo porque se siente atrapado.", "correct": 0}, {"textEn": "'Not for dishonest gain' warns the shepherd against:", "textEs": "'No por ganancia deshonesta' advierte al pastor contra:", "optionsEn": ["Teaching difficult doctrine", "Delegating tasks", "Accepting any salary at all", "Using the flock as a means to his own profit or comfort"], "optionsEs": ["Enseñar doctrina difícil", "Delegar tareas", "Aceptar cualquier salario", "Usar la grey como medio para su propio provecho o comodidad"], "explanationEn": "The danger is making the flock a means to personal gain — money, comfort, or status.", "explanationEs": "El peligro es hacer de la grey un medio para el provecho personal — dinero, comodidad o estatus.", "correct": 3}, {"textEn": "'Nor as being lords over those entrusted to you, but being examples' teaches that the leader should:", "textEs": "'No como teniendo señorío... sino siendo ejemplos' enseña que el líder debe:", "optionsEn": ["Demand obedience without explanation", "Rule from a distance", "Drive the sheep with a heavy hand", "Lead from the front as an example"], "optionsEs": ["Exigir obediencia sin explicación", "Mandar desde lejos", "Arrear a las ovejas con mano dura", "Guiar desde el frente como ejemplo"], "explanationEn": "Christ leads by going first; the shepherd says 'Follow me as I follow Christ,' not 'Obey from afar.'", "explanationEs": "Cristo guía yendo primero; el pastor dice 'Seguidme como yo sigo a Cristo', no 'Obedeced desde lejos'.", "correct": 3}, {"textEn": "In the ancient world, a steward was someone who:", "textEs": "En el mundo antiguo, un mayordomo era alguien que:", "optionsEn": ["Managed a house that belonged to his master", "Owned the great house", "Was a slave with no duties", "Inherited the estate"], "optionsEs": ["Administraba una casa que pertenecía a su señor", "Era dueño de la gran casa", "Era un esclavo sin deberes", "Heredaba la hacienda"], "explanationEn": "A steward ran the master's house, holding the keys but owning nothing, and would give account.", "explanationEs": "Un mayordomo manejaba la casa del señor, con las llaves pero sin poseer nada, y debía dar cuenta.", "correct": 0}, {"textEn": "According to Hebrews 13:17, leaders watch primarily over the people's:", "textEs": "Según Hebreos 13:17, los líderes velan principalmente por las/los del pueblo:", "optionsEn": ["Budgets", "Schedules", "Souls", "Buildings"], "optionsEs": ["Presupuestos", "Horarios", "Almas", "Edificios"], "explanationEn": "Hebrews says they 'watch for your souls, as those who must give account' — souls come first.", "explanationEs": "Hebreos dice que 'velan por vuestras almas, como quienes han de dar cuenta' — las almas primero.", "correct": 2}, {"textEn": "Why must leaders watch so carefully, according to Hebrews 13:17?", "textEs": "¿Por qué deben los líderes velar con tanto cuidado, según Hebreos 13:17?", "optionsEn": ["To increase the offering", "To impress the congregation", "Because they must give account to God", "To avoid extra work"], "optionsEs": ["Para aumentar la ofrenda", "Para impresionar a la congregación", "Porque han de dar cuenta a Dios", "Para evitar trabajo extra"], "explanationEn": "They watch as those who must give account to God for the souls entrusted to them.", "explanationEs": "Velan como quienes han de dar cuenta a Dios por las almas que les fueron confiadas.", "correct": 2}, {"textEn": "The steward image turns church administration into:", "textEs": "La imagen del mayordomo convierte la administración de la iglesia en:", "optionsEn": ["A sacred trust managed for the Master", "An optional task", "A worldly chore", "A purely legal duty"], "optionsEs": ["Una confianza sagrada administrada para el Señor", "Una tarea opcional", "Una tarea mundana", "Un deber puramente legal"], "explanationEn": "Every roster and meeting is the managing of a house that belongs to Another, a sacred trust.", "explanationEs": "Cada lista y reunión es la administración de una casa que pertenece a Otro, una confianza sagrada.", "correct": 0}, {"textEn": "What reward does 1 Peter 5:4 promise the faithful undershepherd?", "textEs": "¿Qué recompensa promete 1 Pedro 5:4 al pastor subordinado fiel?", "optionsEn": ["Early retirement", "Public applause", "A crown of glory that does not fade away", "A larger church"], "optionsEs": ["Una jubilación temprana", "El aplauso público", "Una corona incorruptible de gloria", "Una iglesia más grande"], "explanationEn": "When the Chief Shepherd appears, the faithful shepherd receives an unfading crown of glory.", "explanationEs": "Cuando aparezca el Príncipe de los pastores, el pastor fiel recibirá una corona incorruptible de gloria.", "correct": 2}, {"textEn": "The Chief Shepherd whom the undershepherd serves is best described as:", "textEs": "El Príncipe de los pastores a quien sirve el pastor subordinado se describe mejor como:", "optionsEn": ["An indifferent owner", "The One who laid down His life for the sheep", "A hard, absent master", "A distant judge only"], "optionsEs": ["Un dueño indiferente", "Aquel que dio su vida por las ovejas", "Un amo duro y ausente", "Solo un juez lejano"], "explanationEn": "He is not a hard master but the One who gave His life for the sheep and rewards His shepherds.", "explanationEs": "No es un amo duro sino Aquel que dio su vida por las ovejas y recompensa a sus pastores.", "correct": 1}, {"textEn": "When a leader begins to think of the church as 'his own,' the unit warns he becomes:", "textEs": "Cuando un líder empieza a pensar en la iglesia como 'suya', la unidad advierte que se vuelve:", "optionsEn": ["A thief, however slowly", "More effective", "More humble", "A stronger leader"], "optionsEs": ["Un ladrón, por lento que sea", "Más eficaz", "Más humilde", "Un líder más fuerte"], "explanationEn": "Forgetting the flock is God's and treating it as his own is a slow, respectable form of theft.", "explanationEs": "Olvidar que la grey es de Dios y tratarla como suya es una forma lenta y respetable de robo.", "correct": 0}, {"textEn": "The shepherd leads the sheep by:", "textEs": "El pastor guía a las ovejas:", "optionsEn": ["Going ahead so they follow his voice", "Fencing them in one place", "Leaving them to find their own way", "Driving them from behind like cattle"], "optionsEs": ["Yendo delante para que sigan su voz", "Encerrándolas en un lugar", "Dejándolas hallar su propio camino", "Arreándolas por detrás como ganado"], "explanationEn": "A shepherd goes before the sheep and they follow his voice; he does not drive them like cattle.", "explanationEs": "El pastor va delante de las ovejas y ellas siguen su voz; no las arrea como al ganado.", "correct": 0}, {"textEn": "In the illustration, why did people stay with the second pastor?", "textEs": "En la ilustración, ¿por qué se quedó la gente con el segundo pastor?", "optionsEn": ["He paid them to stay", "He preached a different doctrine", "He led from among them and set the example", "He never asked anything of them"], "optionsEs": ["Les pagaba por quedarse", "Predicaba otra doctrina", "Guiaba desde en medio de ellos y ponía el ejemplo", "Nunca les pedía nada"], "explanationEn": "Both preached the same doctrine; the second led by example rather than lording over the flock.", "explanationEs": "Ambos predicaban la misma doctrina; el segundo guiaba con el ejemplo en vez de ejercer señorío.", "correct": 2}, {"textEn": "The wolves a shepherd protects the flock from include:", "textEs": "Los lobos de los que el pastor protege a la grey incluyen:", "optionsEn": ["Other faithful churches", "Only literal predators", "Visitors and newcomers", "False teaching, division, discouragement, and sin"], "optionsEs": ["Otras iglesias fieles", "Solo depredadores literales", "Visitantes y recién llegados", "La falsa enseñanza, la división, el desaliento y el pecado"], "explanationEn": "The dangers are false teaching, division, and the slow predators of discouragement and sin.", "explanationEs": "Los peligros son la falsa enseñanza, la división y los depredadores lentos del desaliento y el pecado.", "correct": 3}, {"textEn": "Earthly crowns leaders chase (bigger church, name, applause) are described as:", "textEs": "Las coronas terrenales que los líderes persiguen (iglesia mayor, nombre, aplauso) se describen como:", "optionsEn": ["Gifts from the Chief Shepherd", "The true reward", "Things that fade", "Eternal"], "optionsEs": ["Dones del Príncipe de los pastores", "La verdadera recompensa", "Cosas que se marchitan", "Eternas"], "explanationEn": "Earthly crowns fade, often within a man's own lifetime; only the Chief Shepherd's crown never fades.", "explanationEs": "Las coronas terrenales se marchitan, a menudo dentro de la vida del hombre; solo la del Príncipe no se marchita.", "correct": 2}, {"textEn": "Because his reward is the Master's approval, the undershepherd can:", "textEs": "Porque su recompensa es la aprobación del Señor, el pastor subordinado puede:", "optionsEn": ["Serve only when applauded", "Pour himself out without bitterness and lead without grasping", "Demand praise from the flock", "Neglect the weak sheep"], "optionsEs": ["Servir solo cuando es aplaudido", "Entregarse sin amargura y guiar sin aferrarse", "Exigir alabanza de la grey", "Descuidar a las ovejas débiles"], "explanationEn": "Seeking the Master's 'Well done,' not the flock's praise, frees him to serve without bitterness or grasping.", "explanationEs": "Buscar el 'Bien hecho' del Señor, no la alabanza de la grey, lo libera para servir sin amargura ni codicia.", "correct": 1}, {"textEn": "The central claim of Unit 2 is that the pastor is fundamentally:", "textEs": "La afirmación central de la Unidad 2 es que el pastor es fundamentalmente:", "optionsEn": ["The owner and master of the church", "A hired manager", "An independent authority", "An undershepherd and steward accountable to the Chief Shepherd"], "optionsEs": ["El dueño y señor de la iglesia", "Un gerente contratado", "Una autoridad independiente", "Un pastor subordinado y mayordomo responsable ante el Príncipe de los pastores"], "explanationEn": "Unit 2 defines the leader as undershepherd and steward, accountable to the Chief Shepherd.", "explanationEs": "La Unidad 2 define al líder como pastor subordinado y mayordomo, responsable ante el Príncipe de los pastores.", "correct": 3}];
+const kwQuestions = [{"textEn": "Explain what it means that the pastor is an 'undershepherd,' and why the word 'under' matters.", "textEs": "Explique qué significa que el pastor sea un 'pastor subordinado', y por qué importa estar 'bajo' otro.", "kw_en": ["under", "shepherd", "chief", "flock", "own", "christ", "serv", "account"], "kw_es": ["subordinad", "pastor", "príncipe", "grey", "dueño", "cristo", "sirv", "cuenta"], "modelEn": "To be an undershepherd means the pastor is a real shepherd with real authority, but he serves under the Chief Shepherd, Jesus Christ. The word 'under' matters because the flock is the flock of God, bought by Christ and belonging to Him, not to the pastor. He does not own the sheep; he serves them on behalf of their true owner and will give account to Him. The moment a leader forgets that small word and treats the church as his own, he stops shepherding and begins, slowly, to steal what belongs to Christ.", "modelEs": "Ser pastor subordinado significa que el pastor es un pastor verdadero con autoridad real, pero sirve bajo el Príncipe de los pastores, Jesucristo. La palabra 'bajo' importa porque la grey es la grey de Dios, comprada por Cristo y que le pertenece a Él, no al pastor. No es dueño de las ovejas; las sirve en nombre de su verdadero dueño y le dará cuenta a Él. En el momento en que un líder olvida esa relación y trata a la iglesia como suya, deja de pastorear y comienza, lentamente, a robar lo que pertenece a Cristo."}, {"textEn": "Name and briefly explain the shepherd's three basic tasks.", "textEs": "Nombre y explique brevemente las tres tareas básicas del pastor.", "kw_en": ["feed", "lead", "protect", "word", "voice", "wolf", "pasture", "danger"], "kw_es": ["aliment", "guí", "proteg", "palabra", "voz", "lobo", "pasto", "peligro"], "modelEn": "The shepherd's three tasks are to feed, to lead, and to protect. He feeds the flock by bringing them to the pasture of God's Word, taught plainly enough that ordinary believers can eat and grow. He leads them by going ahead so they follow his voice, rather than driving them from behind like cattle. And he protects them by standing between the flock and danger — false teaching, division, discouragement, and sin, the wolves that would scatter or devour them. A leader who only feeds becomes a lecturer; one who only leads becomes a driver; the true shepherd does all three because the sheep need all three.", "modelEs": "Las tres tareas del pastor son alimentar, guiar y proteger. Alimenta a la grey llevándola al pasto de la Palabra de Dios, enseñada con suficiente claridad para que los creyentes comunes coman y crezcan. La guía yendo delante para que sigan su voz, en vez de arrearla por detrás como al ganado. Y la protege interponiéndose entre la grey y el peligro — la falsa enseñanza, la división, el desaliento y el pecado, los lobos que la dispersarían o devorarían. El líder que solo alimenta se vuelve conferencista; el que solo guía se vuelve arriero; el verdadero pastor hace las tres porque las ovejas necesitan las tres."}, {"textEn": "1 Peter 5:2-3 gives three contrasts about HOW to shepherd. Explain them.", "textEs": "1 Pedro 5:2-3 da tres contrastes sobre el CÓMO pastorear. Explíquelos.", "kw_en": ["willing", "compulsion", "gain", "eager", "lord", "example", "heart", "motive"], "kw_es": ["voluntari", "fuerza", "ganancia", "ánimo", "señorío", "ejemplo", "corazón", "motivo"], "modelEn": "Peter gives three contrasts that search the shepherd's heart and motive. First, not by compulsion but willingly: the man who serves only because he feels trapped has the wrong heart, for God loves a willing shepherd. Second, not for dishonest gain but eagerly: the man who shepherds for money, comfort, or status has made the flock a means to his own ends. Third, not lording it over the flock but being an example: the man who drives the sheep with a tyrant's heavy hand has forgotten that Christ leads by going first. The true shepherd leads from the front and says, 'Follow me as I follow Christ.'", "modelEs": "Pedro da tres contrastes que escudriñan el corazón y el motivo del pastor. Primero, no por fuerza sino voluntariamente: el hombre que sirve solo porque se siente atrapado tiene el corazón equivocado, pues Dios ama al pastor dispuesto. Segundo, no por ganancia deshonesta sino con ánimo pronto: el hombre que pastorea por dinero, comodidad o estatus ha hecho del rebaño un medio para sus fines. Tercero, no con señorío sino siendo ejemplo: el hombre que arrea a las ovejas con la mano dura de un tirano ha olvidado que Cristo guía yendo primero. El verdadero pastor guía desde el frente y dice: 'Seguidme como yo sigo a Cristo'."}, {"textEn": "What is a steward, and how does the steward image apply to a church leader?", "textEs": "¿Qué es un mayordomo, y cómo se aplica esa imagen al líder de la iglesia?", "kw_en": ["steward", "master", "house", "account", "manage", "trust", "own", "key"], "kw_es": ["mayord", "señor", "casa", "cuenta", "administ", "confianza", "dueño", "llave"], "modelEn": "A steward is one who manages a great house that is not his own. He holds the keys, runs the affairs, and commands the servants, but everything he touches belongs to his master, and one day the master will call him to settle accounts. Applied to a church leader, this means he manages the Lord's house as a trust, owning nothing of it himself. Every roster, meeting, and decision is the handling of what belongs to Another, and he will give account to God. This turns administration from a worldly chore into a sacred trust, so the faithful steward handles even the smallest matter with care.", "modelEs": "Un mayordomo es quien administra una gran casa que no es suya. Tiene las llaves, maneja los asuntos y manda a los siervos, pero todo lo que toca pertenece a su señor, y un día el señor lo llamará a rendir cuentas. Aplicado al líder de la iglesia, significa que administra la casa del Señor como una confianza, sin poseer nada de ella. Cada lista, reunión y decisión es el manejo de lo que pertenece a Otro, y dará cuenta a Dios. Esto convierte la administración de una tarea mundana en una confianza sagrada, de modo que el mayordomo fiel maneja con cuidado aun el asunto más pequeño."}, {"textEn": "According to Hebrews 13:17, what do leaders watch over, and why so carefully?", "textEs": "Según Hebreos 13:17, ¿qué vigilan los líderes, y por qué con tanto cuidado?", "kw_en": ["soul", "account", "watch", "god", "care", "leader", "give", "trust"], "kw_es": ["alma", "cuenta", "velan", "dios", "cuidado", "líder", "dar", "confianza"], "modelEn": "Hebrews 13:17 says leaders watch for the people's souls, as those who must give account. What they watch is not first the budget or the building but souls — the eternal wellbeing of the people. And they watch so carefully because they must give account for those souls to God Himself. This accountability is what makes the work a sacred trust rather than a job: the leader handles the Lord's people knowing that the Master will one day ask how he cared for what was His, and nothing entrusted to him is too small to answer for.", "modelEs": "Hebreos 13:17 dice que los líderes velan por las almas del pueblo, como quienes han de dar cuenta. Lo que vigilan no es primero el presupuesto ni el edificio, sino las almas — el bienestar eterno del pueblo. Y velan con tanto cuidado porque han de dar cuenta de esas almas a Dios mismo. Esta responsabilidad es lo que hace de la obra una confianza sagrada y no un empleo: el líder maneja al pueblo del Señor sabiendo que el Señor un día preguntará cómo cuidó lo que era suyo, y nada de lo que se le confió es demasiado pequeño para responder por ello."}, {"textEn": "Contrast lording over the flock with leading by example, using the illustration of the two pastors.", "textEs": "Contraste el ejercer señorío sobre la grey con guiar por el ejemplo, usando la ilustración de los dos pastores.", "kw_en": ["lord", "example", "drive", "follow", "front", "heart", "cold", "draw"], "kw_es": ["señorío", "ejemplo", "arre", "segui", "frente", "corazón", "frí", "atra"], "modelEn": "The first pastor lorded over his people, ruling like a foreman: every decision and every credit his, every dissenter pushed out. His church was orderly but cold and slowly emptied. The second pastor led by example from among his people, first to arrive and last to leave, first to apologize, doing himself what he asked of others. Both preached the same doctrine, but one drove the sheep and the other drew them. People follow a leader who drives them only as far as they must, but they follow a leader who draws them by example to the ends of the earth. This is Peter's point: lead from the front, not with a heavy hand.", "modelEs": "El primer pastor ejercía señorío sobre su gente, mandando como capataz: cada decisión y cada crédito suyos, cada disidente expulsado. Su iglesia era ordenada pero fría y se vació poco a poco. El segundo guiaba con el ejemplo desde en medio de su gente, primero en llegar y último en irse, primero en disculparse, haciendo él mismo lo que pedía a otros. Ambos predicaban la misma doctrina, pero uno arreaba a las ovejas y el otro las atraía. La gente sigue a un líder que la arrea solo hasta donde debe, pero sigue a un líder que la atrae con el ejemplo hasta el fin del mundo. Ese es el punto de Pedro: guiar desde el frente, no con mano dura."}, {"textEn": "What reward does the Chief Shepherd promise, and how does it change the way a leader serves?", "textEs": "¿Qué recompensa promete el Príncipe de los pastores, y cómo cambia el modo en que sirve un líder?", "kw_en": ["crown", "glory", "fade", "chief", "reward", "bitter", "grasp", "master"], "kw_es": ["corona", "gloria", "marchit", "príncipe", "recompens", "amarg", "aferr", "señor"], "modelEn": "First Peter 5:4 promises that when the Chief Shepherd appears, the faithful shepherd will receive a crown of glory that does not fade away. This changes everything about how a leader serves. The earthly crowns men chase — a bigger church, a greater name, applause — all fade, often within a lifetime, but the Chief Shepherd's crown never fades. Because his true reward is the Master's 'Well done,' not the flock's praise, the undershepherd can pour himself out without bitterness and lead without grasping. He serves a Master who gave His own life for the sheep and who is coming back to reward His faithful shepherds.", "modelEs": "Primera de Pedro 5:4 promete que, cuando aparezca el Príncipe de los pastores, el pastor fiel recibirá una corona incorruptible de gloria. Esto cambia todo en el modo de servir. Las coronas terrenales que los hombres persiguen — una iglesia mayor, un nombre más grande, el aplauso — todas se marchitan, a menudo dentro de una vida, pero la corona del Príncipe de los pastores no se marchita jamás. Porque su verdadera recompensa es el 'Bien hecho' del Señor y no la alabanza de la grey, el pastor subordinado puede entregarse sin amargura y guiar sin aferrarse. Sirve a un Señor que dio su propia vida por las ovejas y que vuelve a recompensar a sus pastores fieles."}, {"textEn": "Why is feeding the flock essential, and what is the 'pasture' for the church?", "textEs": "¿Por qué es esencial alimentar a la grey, y cuál es el 'pasto' para la iglesia?", "kw_en": ["feed", "word", "pasture", "grow", "teach", "plain", "sheep", "eat"], "kw_es": ["aliment", "palabra", "pasto", "crec", "enseñ", "clar", "oveja", "com"], "modelEn": "Feeding the flock is essential because sheep cannot feed themselves; they must be led to good pasture or they starve and weaken. For the church, that pasture is the Word of God. The shepherd's task is to bring the people to Scripture and teach it plainly enough that ordinary believers, not only scholars, can eat and grow. A flock that is never fed will not mature no matter how well it is organized, because growth comes from the Word. So the leader who would shepherd well makes the faithful teaching of Scripture central, ensuring the sheep are nourished and built up in the faith.", "modelEs": "Alimentar a la grey es esencial porque las ovejas no pueden alimentarse solas; hay que llevarlas a buen pasto o se debilitan y mueren de hambre. Para la iglesia, ese pasto es la Palabra de Dios. La tarea del pastor es llevar al pueblo a la Escritura y enseñarla con suficiente claridad para que los creyentes comunes, y no solo los eruditos, coman y crezcan. Una grey que nunca es alimentada no madurará por bien organizada que esté, porque el crecimiento viene de la Palabra. Así que el líder que quiera pastorear bien hace central la enseñanza fiel de la Escritura, para que las ovejas sean nutridas y edificadas en la fe."}, {"textEn": "How does remembering 'I must give account' shape the way a leader handles small, practical matters?", "textEs": "¿Cómo moldea el recordar 'debo dar cuenta' el modo en que un líder maneja los asuntos pequeños y prácticos?", "kw_en": ["account", "small", "care", "steward", "master", "trust", "soul", "faith"], "kw_es": ["cuenta", "pequeñ", "cuidado", "mayord", "señor", "confianza", "alma", "fiel"], "modelEn": "Remembering that he must give account makes a leader handle even small, practical matters with care, because he knows nothing in the Lord's house is too small to answer for. The steward manages a house that belongs to his Master, and the Master is coming home to settle accounts; so the roster, the meeting, the repair, and the hard conversation are all part of a sacred trust, not beneath him. A leader who forgets the account grows careless with 'minor' things; the one who remembers it is faithful in little as well as much, treating each detail as the managing of what belongs to God.", "modelEs": "Recordar que debe dar cuenta hace que el líder maneje con cuidado aun los asuntos pequeños y prácticos, porque sabe que nada en la casa del Señor es demasiado pequeño para responder por ello. El mayordomo administra una casa que pertenece a su Señor, y el Señor vuelve a rendir cuentas; así que la lista, la reunión, la reparación y la conversación difícil son parte de una confianza sagrada, y no algo indigno de él. Un líder que olvida la cuenta se vuelve descuidado con lo 'menor'; el que la recuerda es fiel en lo poco y en lo mucho, tratando cada detalle como el manejo de lo que pertenece a Dios."}, {"textEn": "Summarize Unit 2: what two pictures define the church leader, and what do they together teach?", "textEs": "Resuma la Unidad 2: ¿qué dos imágenes definen al líder de la iglesia, y qué enseñan juntas?", "kw_en": ["undershepherd", "steward", "account", "chief", "flock", "example", "serv", "own"], "kw_es": ["subordinad", "mayord", "cuenta", "príncipe", "grey", "ejemplo", "sirv", "dueño"], "modelEn": "Unit 2 defines the church leader by two pictures: the undershepherd and the steward. As undershepherd, he feeds, leads, and protects a flock that is not his own but God's, serving willingly and eagerly, leading by example rather than lording it over the people, under the Chief Shepherd. As steward, he manages the Lord's house and watches for souls as one who must give account to God. Together they teach that the leader owns nothing and answers for everything: the church belongs to Christ, the leader serves and accounts for it, and his reward is the unfading crown the Chief Shepherd gives to those who shepherd His flock faithfully.", "modelEs": "La Unidad 2 define al líder de la iglesia por dos imágenes: el pastor subordinado y el mayordomo. Como pastor subordinado, alimenta, guía y protege una grey que no es suya sino de Dios, sirviendo voluntariamente y con ánimo pronto, guiando con el ejemplo en vez de ejercer señorío sobre el pueblo, bajo el Príncipe de los pastores. Como mayordomo, administra la casa del Señor y vela por las almas como quien ha de dar cuenta a Dios. Juntas enseñan que el líder no posee nada y responde por todo: la iglesia pertenece a Cristo, el líder la sirve y da cuenta de ella, y su recompensa es la corona incorruptible que el Príncipe de los pastores da a quienes apacientan su grey fielmente."}];
+
+let currentLang = 'en';
+let mcAnswers = new Array(20).fill(null);
+let kwAnswers = new Array(10).fill("");
+let mcRevealed = false;
+try {
+    const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
+    if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+} catch(e) {}
+
+function saveState() {
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+}
+
+function checkLockouts() {
+    const submitBtn = document.getElementById('submitExamBtn');
+    const result = document.getElementById('examResult');
+    const notice = document.getElementById('mcBankedNotice');
+    const isEs = document.body.classList.contains('lang-es');
+    const now = Date.now();
+    const fullLock = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const saLock = parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10);
+
+    if (unitPassed) {
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? "<span style='color:#1f6b3b'>\u2713 Unidad ya aprobada. Haga clic en Unidad 3 arriba.</span>"
+            : "<span style='color:green'>\u2713 Unit already passed! Click Unit 3 above.</span>";
+        notice.style.display = 'none';
+        return true;
+    }
+    if (now < fullLock) {
+        const m = Math.ceil((fullLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Tome unos minutos para repasar la lecci\u00f3n de arriba, y luego intente de nuevo. Puede reintentar en ${m} minuto(s). \u00a1Usted puede lograrlo!</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \u2014 you've got this!</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    if (mcPreviouslyPassed && now < saLock) {
+        const m = Math.ceil((saLock - now) / 60000);
+        submitBtn.disabled = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s).</span>`;
+        notice.style.display = 'none';
+        setTimeout(checkLockouts, 30000);
+        return false;
+    }
+    submitBtn.disabled = false;
+    if (mcPreviouslyPassed) {
+        notice.style.display = 'block';
+        notice.innerHTML = isEs
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
+            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+    } else {
+        notice.style.display = 'none';
+    }
+    return true;
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+
+    const mcTitle = document.createElement('h3');
+    mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1\u201320)' : 'Opci\u00f3n M\u00faltiple (Preguntas 1\u201320)';
+    container.appendChild(mcTitle);
+
+    if (mcPreviouslyPassed) {
+        const banked = document.createElement('div');
+        banked.className = 'feedback-text correct';
+        banked.style.marginBottom = '15px';
+        banked.innerHTML = currentLang === 'en'
+            ? '\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'
+            : '\u2713 Secci\u00f3n de opci\u00f3n m\u00faltiple ya aprobada. Sus respuestas se conservan abajo para referencia; puede pasar directamente a la secci\u00f3n de respuesta corta.';
+        container.appendChild(banked);
+    }
+
+    const mcReveal = mcRevealed || mcPreviouslyPassed;
+    mcQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const options = currentLang === 'en' ? q.optionsEn : q.optionsEs;
+        const correctLetter = String.fromCharCode(65 + q.correct);
+        const answered = !!mcAnswers[idx];
+        options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.textContent = `${letter}. ${opt}`;
+            if (answered || mcReveal) {
+                if (optIdx === q.correct) btn.classList.add('correct');
+                else if (mcAnswers[idx] === letter) btn.classList.add('wrong');
+            } else if (mcAnswers[idx] === letter) {
+                btn.style.background = '#efe7d2';
+                btn.style.borderColor = '#d4af37';
+                btn.style.fontWeight = '600';
+            }
+            if (!mcPreviouslyPassed && !unitPassed && !answered) {
+                btn.onclick = function() {
+                    
+                    mcAnswers[idx] = letter;
+                    saveState();
+                    renderQuestions();
+                };
+            }
+            div.appendChild(btn);
+        });
+        if (answered || mcReveal) {
+            const fb = document.createElement('div');
+            const exp = currentLang === 'en' ? (q.explanationEn || '') : (q.explanationEs || '');
+            if (mcAnswers[idx] === correctLetter) {
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = (currentLang === 'en' ? '✓ Correct! ' : '✓ ¡Correcto! ') + exp;
+            } else if (mcAnswers[idx]) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `✗ Incorrect. Correct answer: ${correctLetter}. ` : `✗ Incorrecto. Respuesta correcta: ${correctLetter}. `) + exp;
+            } else {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = (currentLang === 'en' ? `Not answered. Correct answer: ${correctLetter}. ` : `Sin responder. Respuesta correcta: ${correctLetter}. `) + exp;
+            }
+            div.appendChild(fb);
+        }
+        container.appendChild(div);
+    });
+
+    const kwTitle = document.createElement('h3');
+    kwTitle.style.marginTop = '30px';
+    kwTitle.innerHTML = currentLang === 'en' ? 'Short Answer (21\u201330) \u2014 M.Div. / Th.M. Track' : 'Respuesta Corta (21\u201330) \u2014 M.Div. / Th.M.';
+    container.appendChild(kwTitle);
+
+    kwQuestions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const qText = document.createElement('p');
+        qText.style.fontWeight = 'bold';
+        qText.innerHTML = (mcQuestions.length + idx + 1) + '. ' + (currentLang === 'en' ? q.textEn : q.textEs);
+        div.appendChild(qText);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx] || '';
+        div.appendChild(ta);
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'small';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
+        const modelBox = document.createElement('div');
+        modelBox.className = 'model-answer';
+        modelBox.style.display = 'none';
+        checkBtn.onclick = function() {
+            const ans = (ta.value || '').trim().toLowerCase();
+            const kws = currentLang === 'es' ? q.kw_es : q.kw_en;
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write your own answer first (at least 100 characters), then check it against the model answer below.' : 'Escriba primero su propia respuesta (al menos 100 caracteres), luego comp\u00e1rela con la respuesta modelo abajo.';
+                return;
+            }
+            const hits = kws.filter(k => kwHit(ans, k));
+            fb.className = 'feedback-text correct';
+            if (hits.length >= 3) {
+                fb.innerHTML = currentLang === 'en'
+                    ? `\u2713 Well done \u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`
+                    : `\u2713 Muy bien \u2014 su respuesta toca ${hits.length} de las ideas clave de la lecci\u00f3n. Ahora comp\u00e1rela con la respuesta modelo abajo para profundizar su comprensi\u00f3n.`;
+            } else {
+                fb.innerHTML = currentLang === 'en'
+                    ? `Good effort \u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`
+                    : `Buen esfuerzo \u2014 ha comenzado la respuesta. Lea la respuesta modelo abajo y note las ideas clave que podr\u00eda a\u00f1adir. As\u00ed aprendemos; no hay penalizaci\u00f3n.`;
+            }
+            const model = currentLang === 'en' ? (q.modelEn || '') : (q.modelEs || '');
+            if (model) {
+                modelBox.style.display = 'block';
+                modelBox.innerHTML = (currentLang === 'en' ? '<strong>Model answer \u2014 study this:</strong> ' : '<strong>Respuesta modelo \u2014 est\u00fadiela:</strong> ') + model;
+            }
+        };
+        div.appendChild(checkBtn);
+        div.appendChild(fb);
+        div.appendChild(modelBox);
+        container.appendChild(div);
+        ta.addEventListener('input', e => { kwAnswers[idx] = e.target.value; saveState(); });
+    });
+}
+
+function gradeMC() {
+    let c = 0;
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + mcQuestions[i].correct)) c++;
+    }
+    return c;
+}
+
+function kwHit(ans, k) {
+    k = (k || '').toLowerCase();
+    if (!k) return false;
+    var WC = '0-9a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00f1\u00fc';
+    var esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var pat = (k.length <= 4)
+        ? '(?:^|[^' + WC + '])' + esc + '(?![' + WC + '])'
+        : '(?:^|[^' + WC + '])' + esc;
+    try { return new RegExp(pat, 'i').test(ans); }
+    catch(e) { return ans.indexOf(k) !== -1; }
+}
+
+function gradeSA() {
+    const isEs = document.body.classList.contains('lang-es');
+    let c = 0;
+    for (let i = 0; i < 10; i++) {
+        const ans = (kwAnswers[i] || '').toLowerCase();
+        if (ans.length < 100) continue;
+        const kws = isEs ? kwQuestions[i].kw_es : kwQuestions[i].kw_en;
+        let hits = 0;
+        kws.forEach(k => { if (kwHit(ans, k)) hits++; });
+        if (hits >= 3) c++;
+    }
+    return c;
+}
+
+function isMastersLevel(track) { return track === 'mdiv' || track === 'thm'; }
+
+function submitExam() {
+    if (!checkLockouts()) return;
+    if (unitPassed) return;
+    const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? 'Please register first.' : 'Por favor reg\u00edstrese primero.');
+        return;
+    }
+    const isEs = document.body.classList.contains('lang-es');
+    const track = student.track || 'certificate';
+    const result = document.getElementById('examResult');
+    const mcScore = mcPreviouslyPassed ? 20 : gradeMC();
+    const mcOk = mcScore >= 18;
+    if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
+
+    if (!isMastersLevel(track)) {
+        if (mcOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true; unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    const saScore = gradeSA();
+    const saOk = saScore >= 9;
+
+    if (mcPreviouslyPassed) {
+        if (saOk) {
+            progress[`unit${UNIT}`] = true;
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            unitPassed = true;
+            result.innerHTML = isEs
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            document.getElementById('nextUnitBtn').disabled = false;
+            updateProgressGrid();
+        } else {
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y reintente la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+        }
+        return;
+    }
+
+    if (mcOk && saOk) {
+        progress[`unit${UNIT}`] = true;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true; unitPassed = true;
+        result.innerHTML = isEs
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
+        updateProgressGrid();
+    } else if (mcOk && !saOk) {
+        localStorage.setItem(MC_PASS_KEY, 'true');
+        mcPreviouslyPassed = true;
+        localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+        checkLockouts();
+    } else {
+        localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+        result.innerHTML = isEs
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+        checkLockouts();
+    }
+}
+
+function resetUnit() {
+    const isEs = document.body.classList.contains('lang-es');
+    const msg = isEs
+        ? '\u00bfReiniciar esta unidad?\n\nEsto borrar\u00e1: respuestas en progreso, estado MC aprobado, todos los bloqueos, y el indicador de aprobaci\u00f3n de esta unidad.\n\nEl contenido docente permanece. Esta acci\u00f3n no se puede deshacer.'
+        : 'Reset this unit?\n\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\'s pass flag.\n\nTeaching content stays. This cannot be undone.';
+    if (!confirm(msg)) return;
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(MC_PASS_KEY);
+    localStorage.removeItem(SA_LOCK_KEY);
+    localStorage.removeItem(FULL_LOCK_KEY);
+    delete progress[`unit${UNIT}`];
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    mcPreviouslyPassed = false;
+    renderQuestions();
+    try { location.reload(); } catch (e) {}
+}
+
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetUnit;
+renderQuestions();
+checkLockouts();
+
+</script>
+  <script src="cts-track.js" defer></script>
+  <script src="cts-curriculum.js?v=20260915a" defer></script>
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSALReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+</body>
+</html>
